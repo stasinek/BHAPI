@@ -30,8 +30,8 @@
 #ifndef __ETK_PRIVATE_MESSAGE_BODY_H__
 #define __ETK_PRIVATE_MESSAGE_BODY_H__
 
-#include "./../support/List.h>
-#include "./../support/StreamIO.h>
+#include "./../support/List.h"
+#include "./../support/StreamIO.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

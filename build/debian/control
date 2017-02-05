@@ -1,0 +1,37 @@
+Source: etkxx
+Section: libs
+Priority: optional
+Maintainer: Anthony Lee <don.anthony.lee@gmail.com>
+Build-Depends: debhelper (>= 4.0.0), automake (>= 1.7), autoconf (>= 2.54), libtool (>= 1.5.24), libc6-dev
+Standards-Version: 3.6.0
+
+Package: libetkxx
+Architecture: any
+Section: libs
+Depends: ${shlibs:Depends}
+Description: The Easy Toolkit for C++ programing
+ ETK++ is a toolkit most like the API of BeOS.
+
+Package: libetkxx-graphics-x11
+Architecture: any
+Section: libs
+Depends: libetkxx (= ${Source-Version}) ${shlibs:Depends}
+Description: The graphics addon for ETK++ implemented by X Window
+ ETK++ is a toolkit most like the API of BeOS.
+ Note: Run "export ETK_USE_XIM=1" when you really want XIM within X Window.
+
+Package: libetkxx-graphics-directfb
+Architecture: any
+Section: libs
+Depends: libetkxx (= ${Source-Version}) ${shlibs:Depends}
+Description: The graphics addon for ETK++ implemented by DirectFB
+ ETK++ is a toolkit most like the API of BeOS.
+ Note: Run "export ETK_USE_DIRECTFB=1" when you really want DirectFB.
+
+Package: libetkxx-dev
+Architecture: any
+Section: libdevel
+Depends: libetkxx (= ${Source-Version})
+Description: The Easy Toolkit for C++ programing
+ ETK++ is a toolkit most like the API of BeOS.
+

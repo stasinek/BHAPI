@@ -30,8 +30,8 @@
 #ifndef __ETK_CONTROL_H__
 #define __ETK_CONTROL_H__
 
-#include "./../interface/View.h>
-#include "./../app/Invoker.h>
+#include "./../interface/View.h"
+#include "./../app/Invoker.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

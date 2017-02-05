@@ -30,7 +30,7 @@
 #ifndef __ETK_SCROLL_VIEW_H__
 #define __ETK_SCROLL_VIEW_H__
 
-#include "./../interface/ScrollBar.h>
+#include "./../interface/ScrollBar.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

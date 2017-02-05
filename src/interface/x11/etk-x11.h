@@ -30,7 +30,9 @@
 #ifndef __ETK_X11_H__
 #define __ETK_X11_H__
 
-#include "./../config.h>
+#ifdef LINUX
+
+#include "./../support/SupportDefs.h"
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -44,10 +46,12 @@
 #include <X11/Xft/Xft.h>
 #endif
 
-#include "./../support/Locker.h>
-#include "./../support/StringArray.h>
-#include "./../add-ons/graphics/GraphicsEngine.h>
-#include "./../app/MessageFilter.h>
+#endif
+
+#include "./../../support/Locker.h"
+#include "./../../support/StringArray.h"
+#include "./../../add-ons/graphics/GraphicsEngine.h"
+#include "./../../app/MessageFilter.h"
 
 #ifdef __cplusplus
 
@@ -335,6 +339,8 @@ private:
 };
 
 #endif /* __cplusplus */
+
+#endif /* LINUX */
 
 #endif /* __ETK_X11_H__ */
 

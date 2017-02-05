@@ -27,16 +27,16 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../app/AppDefs.h>
-#include "./../app/Message.h>
-#include "./../app/MessageQueue.h>
-#include "./../app/Handler.h>
-#include "./../app/Looper.h>
-#include "./../app/Messenger.h>
-#include "./../app/MessageRunner.h>
-#include "./../app/MessageFilter.h>
-#include "./../app/Invoker.h>
-#include "./../app/Clipboard.h>
-#include "./../app/Cursor.h>
-#include "./../app/Application.h>
+#include "./app/AppDefs.h"
+#include "./app/Message.h"
+#include "./app/MessageQueue.h"
+#include "./app/Handler.h"
+#include "./app/Looper.h"
+#include "./app/Messenger.h"
+#include "./app/MessageRunner.h"
+#include "./app/MessageFilter.h"
+#include "./app/Invoker.h"
+#include "./app/Clipboard.h"
+#include "./app/Cursor.h"
+#include "./app/Application.h"
 

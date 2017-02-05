@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <be/kernel/OS.h>
+#include <be/kernel/OS.h"
 
-#include "./../kernel/Kernel.h>
+#include "./../kernel/Kernel.h"
 
 typedef struct etk_beos_locker_t {
 	etk_beos_locker_t()

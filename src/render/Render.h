@@ -30,9 +30,9 @@
 #ifndef __ETK_RENDER_H__
 #define __ETK_RENDER_H__
 
-#include "./../interface/GraphicsDefs.h>
-#include "./../interface/Rect.h>
-#include "./../interface/Polygon.h>
+#include "./../interface/GraphicsDefs.h"
+#include "./../interface/Rect.h"
+#include "./../interface/Polygon.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

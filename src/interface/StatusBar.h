@@ -31,7 +31,7 @@
 #ifndef __ETK_STATUS_BAR_H__
 #define __ETK_STATUS_BAR_H__
 
-#include "./../interface/View.h>
+#include "./../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

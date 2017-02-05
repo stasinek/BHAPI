@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../interface/Window.h>
+#include "./../interface/Window.h"
 
 #include "CheckBox.h"
 

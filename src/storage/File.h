@@ -30,8 +30,8 @@
 #ifndef __ETK_FILE_H__
 #define __ETK_FILE_H__ 
 
-#include "./../storage/StorageDefs.h>
-#include "./../storage/Directory.h>
+#include "./StorageDefs.h"
+#include "./Directory.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

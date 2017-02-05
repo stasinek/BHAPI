@@ -28,7 +28,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../kernel/Kernel.h>
+#include "./../kernel/Kernel.h"
 
 #include "SimpleLocker.h"
 

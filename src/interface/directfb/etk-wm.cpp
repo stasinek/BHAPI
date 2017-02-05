@@ -27,6 +27,9 @@
  * 
  * --------------------------------------------------------------------------*/
 
+#ifdef LINUX
+#ifdef DIRECTFB
+
 #include "etk-dfb.h"
 
 #define DFB_WINDOW_SMALL_TITLEBAR_HEIGHT	16
@@ -380,4 +383,6 @@ EDFBGraphicsWindow::HandleMouseEvent(DFBWindowEvent *event)
 
 	return(fEngine->dfbCurPointerGrabbed == dfbWindowID ? false : !winBounds.Contains(where));
 }
+#endif /* DIRECTFB */
+#endif /* LINUX */
 

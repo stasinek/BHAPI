@@ -30,7 +30,7 @@
 #ifndef __ETK_SIMPLE_XML_PARSER_H__
 #define __ETK_SIMPLE_XML_PARSER_H__
 
-#include "./../support/List.h>
+#include "./../support/List.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

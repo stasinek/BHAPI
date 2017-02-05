@@ -31,7 +31,8 @@
 #ifndef __ETK_LINE_GENERATOR_H__
 #define __ETK_LINE_GENERATOR_H__
 
-#include "./../interface/Rect.h>
+#include "./../interface/Rect.h"
+#include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

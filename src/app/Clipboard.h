@@ -32,8 +32,8 @@
 #ifndef __ETK_CLIPBOARD_H__
 #define __ETK_CLIPBOARD_H__
 
-#include "./../app/Messenger.h>
-#include "./../support/Locker.h>
+#include "./../app/Messenger.h"
+#include "./../support/Locker.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

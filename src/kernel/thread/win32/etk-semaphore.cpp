@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <stdio.h>
+#include <stdio.h"
 
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0500
@@ -35,8 +35,8 @@
 
 #include <windows.h>
 
-#include "./../kernel/Kernel.h>
-#include "./../support/String.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/String.h"
 
 #define SECS_BETWEEN_EPOCHS	E_INT64_CONSTANT(11644473600)
 #define SECS_TO_100NS		E_INT64_CONSTANT(10000000)

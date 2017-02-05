@@ -35,7 +35,7 @@
 #include <windows.h>
 #endif // _WIN32
 
-#include "./../config.h>
+#include "./../support/SupportDefs.h"
 
 #define ETK_DEBUG
 #define ETK_WARNING
@@ -45,7 +45,7 @@
 
 #include "Kernel.h"
 
-#include "./../support/String.h>
+#include "./../support/String.h"
 
 #ifndef HAVE_VA_COPY
 	#ifdef HAVE___VA_COPY

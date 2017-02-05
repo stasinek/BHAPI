@@ -31,7 +31,7 @@
 #ifndef __ETK_MESSAGE_QUEUE_H__
 #define __ETK_MESSAGE_QUEUE_H__
 
-#include "./../app/Message.h>
+#include "./../app/Message.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

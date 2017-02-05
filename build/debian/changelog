@@ -1,0 +1,123 @@
+etkxx (0.3.1) unstable; urgency=low
+  * sth...
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Sun, 29 Apr 2007 15:46:51 +0800
+
+etkxx (0.1.17) unstable; urgency=low
+  * add EOutlineListView for Interface Kit
+  * add ETab,ETabView for Interface Kit
+  * add EMessageFilter,EClipboard for Application Kit
+  * add EColorControl for Interface Kit
+  * add EMessage::SendReply()
+  * add EMessage::WasDelivered()
+  * fix port functions for timeout
+  * move DirectFB to graphics-addon
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Wed, 08 Nov 2006 19:57:45 +0800
+
+etkxx (0.1.16-1) unstable; urgency=low
+  * add warning when unsupport for NPTL
+  * fix for 2.4.x kernel except IPC
+  * X11 graphics-engine allow XIM for patched X runtime
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Tue, 17 Oct 2006 10:55:03 +0800
+
+etkxx (0.1.16) unstable; urgency=low
+  * fix EListView/ECheckBox/ERadioButton action when it is focus
+  * rename EString::GetDouble to EString::GetDecimal
+  * add EView::TargetedByScrollView()
+  * fix EMenu/EMenuItem/EMenuBar/EPopUpMenu for RadioMode
+  * add EMenuField for InterfaceKit
+  * fix memory leak for EAlert
+  * fix semaphore/thread functions for BeOS/Win32/POSIX
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Sun, 15 Oct 2006 13:53:34 +0800
+
+etkxx (0.1.15-1) unstable; urgency=low
+  * add EAlert,ERadioButton,ETextControl for Interface Kit
+  * add more member functions for EListView
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Tue, 26 Sep 2006 15:18:21 +0800
+
+etkxx (0.1.14-2) unstable; urgency=low
+  * add ECheckBox,EStatusBar for Interface Kit
+  * add ERender::StrokeArc
+  * add EView::QueryCurrentMouse
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Thu, 07 Sep 2006 16:54:49 +0800
+
+etkxx (0.1.14-1) unstable; urgency=low
+  * add ETK.h AppKit.h InterfaceKit.h KernelKit.h etc...
+  * add EListItem, EListView for Interface Kit
+  * add EArcGenerator, ERender for Render Kit
+  * fix memory leak for ESimpleXmlNode
+  * fix EScrollView
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Thu, 31 Aug 2006 14:12:31 +0800
+
+etkxx (0.1.13-5) unstable; urgency=low
+  * fix DrawingMode and add E_OP_XOR
+  * rename EIBitmap to EPixmap, and move it to Render Kit
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Thu, 09 Aug 2006 10:21:06 +0800
+
+etkxx (0.1.13-4) unstable; urgency=low
+  * make EScrollBar worked
+  * fix EWindow::EnableUpdate()
+  * add ESimpleXmlParser for Xml Kit
+  * fix EString::ReplaceAll
+  * fix EMessage::HasMessage/FindMessage()
+  * make EMessage::*Messenger() and EMessenger::Flatten/Unflatten() worked
+  * fix access_mode for EFile
+  * fix stupid block when EView::DrawString
+  * fix X11 core font render
+  * fix EPopUpMenu::Go
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Sun, 06 Aug 2006 08:13:44 +0800
+
+etkxx (0.1.13-1) unstable; urgency=low
+  * graphics turn to addons
+  * XIM removed at this stage because of dead-lock when threaded
+  * fix EFile
+  * fix EStringView::SetText() to update content
+  * fix drawing of ETextEditable
+  * add e_find_directory
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Fri, 14 Jul 2006 01:05:43 +0800
+
+etkxx (0.1.11-1) unstable; urgency=low
+
+  * XIM, scrollbar, and others
+  * backwards compatibility broken
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Sat, 20 May 2006 01:28:32 +0800
+
+etkxx (0.1.10-1) unstable; urgency=low
+
+  * locker block fixed, more storage kit
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Wed, 10 May 2006 05:03:38 +0800
+
+etkxx (0.1.9-2) unstable; urgency=low
+
+  * memory-leak fixed version
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Thu, 04 May 2006 07:08:59 +0800
+
+etkxx (0.1.9-1) unstable; urgency=low
+
+  * move $(SRCDIR)/debian to $(SRCDIR)/build/debian
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Thu, 27 Apr 2006 04:10:13 +0800
+
+etkxx (0.1.8-1) unstable; urgency=low
+
+  * Change package name to "etkxx"
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Sat, 15 Apr 2006 02:52:31 +0800
+
+etkxx (0.1.7-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Anthony Lee <don.anthony.lee@gmail.com>  Tue, 11 Apr 2006 08:04:07 +0800

@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../add-ons/theme/ThemeEngine.h>
-#include "./../kernel/OS.h>
-#include "./../interface/Window.h>
+#include "./../add-ons/theme/ThemeEngine.h"
+#include "./../kernel/OS.h"
+#include "./../interface/Window.h"
 
 #include "ScrollBar.h"
 

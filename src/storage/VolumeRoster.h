@@ -30,7 +30,7 @@
 #ifndef __ETK_VOLUME_ROSTER_H__
 #define __ETK_VOLUME_ROSTER_H__
 
-#include "./../storage/Volume.h>
+#include "Volume.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

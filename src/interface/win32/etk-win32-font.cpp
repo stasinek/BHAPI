@@ -26,15 +26,16 @@
  * File: etk-win32-font.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef WIN32
 
 #include "etk-win32gdi.h"
 
-#include "./../add-ons/font/FontEngine.h>
-#include "./../support/ClassInfo.h>
-#include "./../support/Autolock.h>
-#include "./../support/StringArray.h>
-#include "./../interface/Window.h>
-#include "./../interface/View.h>
+#include "./../../add-ons/font/FontEngine.h"
+#include "./../../support/ClassInfo.h"
+#include "./../../support/Autolock.h"
+#include "./../../support/StringArray.h"
+#include "./../../interface/Window.h"
+#include "./../../interface/View.h"
 
 
 BOOL CALLBACK _etkEnumHeightCallBack_(ENUMLOGFONTEX *lplfe, NEWTEXTMETRICEX *lpntme, DWORD FontType, LPARAM lParam)
@@ -879,3 +880,4 @@ EWin32GraphicsEngine::UpdateFonts(bool check_only)
 	return retVal;
 }
 
+#endif /* WIN32 */

@@ -43,9 +43,8 @@
 #	include <winsock2.h>
 #endif
 
-#include "./../config.h>
-#include "./../ETKBuild.h>
-#include "./../support/ByteOrder.h>
+#include "./../bhapi.h"
+#include "./../support/ByteOrder.h"
 
 #include "NetAddress.h"
 

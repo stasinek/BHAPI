@@ -26,19 +26,20 @@
  * File: etk-application.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef LINUX
 
 #include <stdlib.h>
 #include <locale.h>
 
 #include "etk-x11.h"
 
-#include "./../kernel/Kernel.h>
-#include "./../support/String.h>
-#include "./../support/Locker.h>
-#include "./../support/Autolock.h>
-#include "./../app/Application.h>
-#include "./../app/Clipboard.h>
-#include "./../interface/InterfaceDefs.h>
+#include "./../../kernel/Kernel.h"
+#include "./../../support/String.h"
+#include "./../../support/Locker.h"
+#include "./../../support/Autolock.h"
+#include "./../../app/Application.h"
+#include "./../../app/Clipboard.h"
+#include "./../../interface/InterfaceDefs.h"
 
 #define CLICK_TIMEOUT 200
 
@@ -1669,4 +1670,6 @@ EXGraphicsEngine::ConvertRegion(const ERegion *region, XRectangle **xRects, int 
 
 	return true;
 }
+
+#endif /* LINUX */
 

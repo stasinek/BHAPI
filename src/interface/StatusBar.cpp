@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/String.h>
-#include "./../app/AppDefs.h>
+#include "./../support/String.h"
+#include "./../app/AppDefs.h"
 
 #include "StatusBar.h"
 

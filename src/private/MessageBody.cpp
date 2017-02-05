@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/String.h>
+#include "./../support/String.h"
 
 #include "Memory.h"
 #include "MessageBody.h"

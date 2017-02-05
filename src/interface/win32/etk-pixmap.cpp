@@ -26,11 +26,12 @@
  * File: etk-pixmap.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef WIN32
 
 #include "etk-win32gdi.h"
 
-#include "./../support/Autolock.h>
-#include "./../support/ClassInfo.h>
+#include "./../../support/Autolock.h"
+#include "./../../support/ClassInfo.h"
 
 
 EWin32GraphicsDrawable::EWin32GraphicsDrawable(EWin32GraphicsEngine *win32Engine, euint32 w, euint32 h)
@@ -412,3 +413,4 @@ EWin32GraphicsDrawable::DrawPixmap(EGraphicsContext *dc, const EPixmap *pix,
 	return(successed ? E_OK : E_ERROR);
 }
 
+#endif /* WIN32 */

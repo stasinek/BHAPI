@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/ClassInfo.h>
+#include "./../../support/ClassInfo.h"
 
 #include "Layout.h"
 

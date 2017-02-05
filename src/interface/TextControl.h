@@ -31,7 +31,7 @@
 #ifndef __ETK_TEXT_CONTROL_H__
 #define __ETK_TEXT_CONTROL_H__
 
-#include "./../interface/TextEditable.h>
+#include "./../interface/TextEditable.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

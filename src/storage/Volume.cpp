@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../config.h>
+#include "./../config.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -35,15 +35,15 @@
 #endif // _WIN32
 
 #ifdef HAVE_MNTENT_H
-#include <stdio.h>
-#include <mntent.h>
+#include <stdio.h"
+#include <mntent.h"
 #endif
 
 #ifdef __BEOS__
-#include <be/storage/Entry.h>
-#include <be/storage/Directory.h>
-#include <be/storage/Path.h>
-#include <be/storage/VolumeRoster.h>
+#include <be/storage/Entry.h"
+#include <be/storage/Directory.h"
+#include <be/storage/Path.h"
+#include <be/storage/VolumeRoster.h"
 #endif
 
 #include "Volume.h"

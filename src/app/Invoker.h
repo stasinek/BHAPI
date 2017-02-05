@@ -31,8 +31,8 @@
 #ifndef __ETK_INVOKER_H__
 #define __ETK_INVOKER_H__
 
-#include "./../app/Messenger.h>
-#include "./../support/List.h>
+#include "./../app/Messenger.h"
+#include "./../support/List.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

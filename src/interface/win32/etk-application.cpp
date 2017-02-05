@@ -26,16 +26,17 @@
  * File: etk-application.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef WIN32
 
 #include "etk-win32gdi.h"
 
-#include "./../kernel/Kernel.h>
-#include "./../support/Locker.h>
-#include "./../support/Autolock.h>
-#include "./../support/String.h>
-#include "./../interface/InterfaceDefs.h>
-#include "./../app/Application.h>
-#include "./../app/Clipboard.h>
+#include "./../../kernel/Kernel.h"
+#include "./../../support/Locker.h"
+#include "./../../support/Autolock.h"
+#include "./../../support/String.h"
+#include "./../../interface/InterfaceDefs.h"
+#include "./../../app/Application.h"
+#include "./../../app/Clipboard.h"
 
 
 static void etk_win32_clipboard_changed()
@@ -2142,4 +2143,4 @@ EWin32GraphicsEngine::GetDefaultCursor(ECursor *cursor)
 {
 	return E_ERROR;
 }
-
+#endif /* WIN32 */

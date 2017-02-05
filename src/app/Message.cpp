@@ -31,8 +31,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "./../private/Token.h>
-#include "./../support/StreamIO.h>
+#include "./../private/Token.h"
+#include "./../support/StreamIO.h"
 
 #include "Message.h"
 #include "Messenger.h"

@@ -59,7 +59,7 @@
 </document>
 -----------------------------------------------------------------------------*/
 
-#include "./../add-ons/theme/ThemeEngine.h>
+#include "./../add-ons/theme/ThemeEngine.h"
 
 #include "Window.h"
 #include "Button.h"

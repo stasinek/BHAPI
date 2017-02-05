@@ -1,0 +1,69 @@
+%define name     etkxx-mingw
+%define ver      @ETK_VERSION@
+%define RELEASE 0
+%define rel     %{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
+%define prefix   /MinGW
+%define RPM_BUILD_ROOT  /tmp/libetkxx-%{PACKAGE_VERSION}-root
+
+Summary: The Easy Toolkit for C++ programing
+Name: %name
+Version: %ver
+Release: %rel
+Copyright: The MIT License
+Group: Development/Libraries
+Source0: %name-%{PACKAGE_VERSION}.tar.bz2
+BuildRoot: /tmp/%name-%{PACKAGE_VERSION}-root
+Packager: Anthony Lee <don.anthony.lee@gmail.com>
+Docdir: %{prefix}/share/doc
+
+%description
+ETK++ is a toolkit for C++ programing most like the API of BeOS.
+
+%package devel
+Summary: The Easy Toolkit for C++ programing
+Group: Development/Libraries
+Requires: etkxx-mingw = @ETK_VERSION@
+
+%description devel
+ETK++ is a toolkit for C++ programing most like the API of BeOS.
+
+
+%changelog
+* Sun Sep 17 2006 Anthony Lee <anthonylee@users.gro.clinux.org>
+- Version 0.1.15 for MinGW32/CygWin
+
+%prep
+%setup
+
+%build
+./configure --prefix=%{prefix} --host=i686-pc-mingw32 --build=`./config.guess` \
+	--enable-debug=minimum --with-built-in-graphics=win32 --with-x=no \
+	--with-etkxx-cflags="-mno-cygwin" --with-etkxx-libs="-mno-cygwin" \
+	CC="gcc -mno-cygwin" CXX="g++ -mno-cygwin"
+make
+make addons
+
+%install
+make install DESTDIR=$RPM_BUILD_ROOT
+rm -f $RPM_BUILD_ROOT/%{prefix}/lib/*.la
+rm -rf $RPM_BUILD_ROOT/%{prefix}/share/doc/etkxx/example
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-, root, root)
+
+%{prefix}/bin/*.dll
+
+
+%files devel
+%defattr(-, root, root)
+
+%{prefix}/bin/etkxx-config
+%{prefix}/include
+%{prefix}/share
+%{prefix}/lib/*.dll.a
+%{prefix}/lib/*.lib
+%{prefix}/lib/pkgconfig/etkxx.pc
+

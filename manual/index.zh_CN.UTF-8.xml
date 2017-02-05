@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+	"http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd"
+[
+	<!ENTITY % entities.definition SYSTEM "Definition.ent"> 
+	%entities.definition;
+]>
+
+<book lang="zh_CN.UTF-8">
+<bookinfo>
+	<title>ETK++ 参考手册</title>
+	<abstract>
+		<para>ETK++ --- The Easy Tookit for C++ Programing</para>
+		<para>ETK++为作者方便跨平台开发并参照BeOS的系统开发库而写的一套C++开发库。从加强编写的系统性和简便出发，特意编写本手册。</para>
+	</abstract>
+	<publisher>
+		<publishername>Savager Workroom</publishername>
+	</publisher>
+</bookinfo>
+<part>
+	<title>ETK++ 的部件</title>
+	<chapter>
+		<title>图形界面</title>
+		&manual.InterfaceKit;
+	</chapter>
+	<chapter>
+		<title>渲染接口</title>
+		&manual.RenderKit;
+	</chapter>
+</part>
+</book>
+

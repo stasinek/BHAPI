@@ -31,9 +31,9 @@
 #ifndef __ETK_LIST_VIEW_H__
 #define __ETK_LIST_VIEW_H__
 
-#include "./../support/List.h>
-#include "./../app/Invoker.h>
-#include "./../interface/ListItem.h>
+#include "./../support/List.h"
+#include "./../app/Invoker.h"
+#include "./../interface/ListItem.h"
 
 typedef enum e_list_view_type {
 	E_SINGLE_SELECTION_LIST,

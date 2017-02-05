@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/String.h>
-#include "./../private/StandardIO.h>
+#include "./../support/String.h"
+#include "./../private/StandardIO.h"
 
 #include "StreamIO.h"
 

@@ -30,9 +30,9 @@
 #ifndef __ETK_POP_UP_MENU_H__
 #define __ETK_POP_UP_MENU_H__
 
-#include "./../support/Locker.h>
-#include "./../interface/Menu.h>
-#include "./../interface/Window.h>
+#include "./../support/Locker.h"
+#include "./../interface/Menu.h"
+#include "./../interface/Window.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

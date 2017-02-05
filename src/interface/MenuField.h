@@ -31,7 +31,7 @@
 #ifndef __ETK_MENU_FIELD_H__
 #define __ETK_MENU_FIELD_H__
 
-#include "./../interface/MenuBar.h>
+#include "./../interface/MenuBar.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

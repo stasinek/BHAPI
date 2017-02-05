@@ -28,18 +28,18 @@
  * --------------------------------------------------------------------------*/
 
 #include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
+#include <string.h"
+#include <unistd.h"
+#include <fcntl.h"
+#include <errno.h"
 #include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
+#include <sys/stat.h"
+#include <sys/mman.h"
 
-#include "./../config.h>
-#include "./../kernel/Kernel.h>
-#include "./../support/StringArray.h>
-#include "./../support/SimpleLocker.h>
+#include "./../config.h"
+#include "./../kernel/Kernel.h"
+#include "./../support/StringArray.h"
+#include "./../support/SimpleLocker.h"
 
 
 #ifdef HAVE_SHM_OPEN

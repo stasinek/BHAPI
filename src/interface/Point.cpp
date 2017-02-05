@@ -29,7 +29,7 @@
 
 #include <math.h>
 
-#include "./../config.h>
+#include "./../support/SupportDefs.h"
 
 #include "GraphicsDefs.h"
 #include "Point.h"

@@ -30,6 +30,8 @@
 #ifndef __ETK_WIN32GDI_H__
 #define __ETK_WIN32GDI_H__
 
+#ifdef WIN32
+
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0500
 #endif
@@ -40,9 +42,9 @@
 
 #include <windows.h>
 
-#include "./../support/Locker.h>
-#include "./../add-ons/graphics/GraphicsEngine.h>
-#include "./../app/MessageFilter.h>
+#include "./../../support/Locker.h"
+#include "./../../add-ons/graphics/GraphicsEngine.h"
+#include "./../../app/MessageFilter.h"
 
 #define WM_ETK_MESSAGE_APP			0xa0
 #define WM_ETK_MESSAGE_WINDOW			0xa1
@@ -402,5 +404,6 @@ typedef struct etk_win32_gdi_callback_t {
 #define GET_WHEEL_DELTA_WPARAM(wparam)	((short)HIWORD(wparam))
 #endif
 
+#endif /* WIN32 */
 #endif /* __ETK_WIN32GDI_H__ */
 

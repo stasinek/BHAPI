@@ -27,10 +27,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <be/kernel/image.h>
+#include <be/kernel/image.h"
 
-#include "./../kernel/Kernel.h>
-#include "./../storage/Path.h>
+#include "./../kernel/Kernel.h"
+#include "./../storage/Path.h"
 
 
 _IMPEXP_ETK void*

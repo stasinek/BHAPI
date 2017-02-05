@@ -42,7 +42,7 @@
 #include <windows.h>
 #endif // _WIN32
 
-#include "./../support/String.h>
+#include "./../support/String.h"
 
 #ifdef _WIN32
 extern "C" char* etk_win32_convert_utf8_to_active(const char *str, eint32 length);
@@ -200,7 +200,7 @@ EFile::SetTo(const char *path, euint32 open_mode, euint32 access_mode)
 		strPath = active_str;
 		free(active_str);
 	}
-	HANDLE newFD = CreateFile(strPath.String(),
+    HANDLE newFD = CreateFileA(strPath.String(),
 				  (open_mode & E_READ_WRITE) ? (GENERIC_WRITE | GENERIC_READ) :
 				  	(open_mode & E_WRITE_ONLY ? GENERIC_WRITE : GENERIC_READ),
 				  FILE_SHARE_READ | FILE_SHARE_WRITE,

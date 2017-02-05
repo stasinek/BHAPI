@@ -30,10 +30,10 @@
 #ifndef __ETK_TOOL_TIP_H__
 #define __ETK_TOOL_TIP_H__
 
-#include "./../app/Messenger.h>
-#include "./../interface/GraphicsDefs.h>
+#include "./../app/Messenger.h"
+#include "./../interface/GraphicsDefs.h"
 #include "./../interface/Point.h"
-#include "./../interface/Font.h>
+#include "./../interface/Font.h"
 
 
 #if 0

@@ -31,7 +31,7 @@
 #ifndef __ETK_ARC_GENERATOR_H__
 #define __ETK_ARC_GENERATOR_H__
 
-#include "./../interface/Rect.h>
+#include "./../interface/Rect.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

@@ -28,8 +28,8 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../support/ClassInfo.h>
-#include "./../interface/Window.h>
+#include "./../support/ClassInfo.h"
+#include "./../interface/Window.h"
 
 #include "RadioButton.h"
 

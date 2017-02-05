@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../add-ons/theme/ThemeEngine.h>
+#include "./ThemeEngine.h"
 
 #define MIX_SHADOW_DARKER	80
 #define MIX_SHADOW_SHINER	20
@@ -578,7 +578,6 @@ static void get_button_preferred_size(struct e_theme_engine *engine,
 
 	if(height != NULL)
 	{
-		e_font_height fontHeight;
 		font.GetHeight(&fontHeight);
 		*height = (button_label != NULL ? (fontHeight.ascent + fontHeight.descent) : 0);
 		*height += 10;

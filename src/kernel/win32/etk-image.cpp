@@ -30,12 +30,12 @@
 #include <windows.h>
 
 #ifdef __CYGWIN__
-#include <sys/cygwin.h>
+#include <sys/cygwin.h"
 #endif
 
-#include "./../kernel/Kernel.h>
-#include "./../storage/Path.h>
-#include "./../support/String.h>
+#include "./../kernel/Kernel.h"
+#include "./../storage/Path.h"
+#include "./../support/String.h"
 
 
 _IMPEXP_ETK void*

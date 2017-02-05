@@ -31,8 +31,8 @@
 #ifndef __ETK_REGION_H__
 #define __ETK_REGION_H__
 
-#include "./../support/List.h>
-#include "./../interface/Rect.h>
+#include "./../support/List.h"
+#include "./../interface/Rect.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

@@ -1,0 +1,14 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+etkxx_host=@host@
+
+
+Name: ETK++
+Description: The Easy Toolkit for C++ programing
+Version: @VERSION@
+Libs: -L${libdir} -letkxx @ETK_LIBS@ @ETK_THREAD_LIBS@
+Cflags: -I${includedir}/etkxx @ETK_CFLAGS@ @ETK_THREAD_CFLAGS@
+

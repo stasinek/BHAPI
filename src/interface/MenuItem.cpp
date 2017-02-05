@@ -30,8 +30,8 @@
 #include <ctype.h>
 #include <string.h>
 
-#include "./../support/String.h>
-#include "./../support/ClassInfo.h>
+#include "./../support/String.h"
+#include "./../support/ClassInfo.h"
 
 #include "Window.h"
 #include "Menu.h"
@@ -303,7 +303,7 @@ EMenuItem::IsSelected() const
 void
 EMenuItem::GetContentSize(float *width, float *height) const
 {
-	if(!width && !height || !fMenu) return;
+    if((!width && !height) || !fMenu) return;
 
 	EFont font(etk_plain_font);
 

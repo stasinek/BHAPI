@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/String.h>
-#include "./../kernel/OS.h>
-#include "./../app/Looper.h>
+#include "./../support/String.h"
+#include "./../kernel/OS.h"
+#include "./../app/Looper.h"
 
 #include "Window.h"
 #include "Control.h"

@@ -31,6 +31,8 @@
 #ifndef __ETK_MESSAGE_H__
 #define __ETK_MESSAGE_H__
 
+#include "./../support/SupportDefs.h"
+
 #include "./../kernel/OS.h"
 #include "./../support/String.h"
 #include "./../support/List.h"

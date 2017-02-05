@@ -30,14 +30,16 @@
 #ifndef __ETK_BEOS_GRAPHICS_H__
 #define __ETK_BEOS_GRAPHICS_H__
 
+#ifdef BEOS
+
 #include <be/app/Messenger.h>
 #include <be/interface/View.h>
 #include <be/interface/Window.h>
 #include <be/interface/Bitmap.h>
 
-#include "./../support/Locker.h>
-#include "./../add-ons/graphics/GraphicsEngine.h>
-#include "./../app/MessageFilter.h>
+#include "./../../support/Locker.h"
+#include "./../../add-ons/graphics/GraphicsEngine.h"
+#include "./../../app/MessageFilter.h"
 
 #ifdef __cplusplus /* just for C++ */
 
@@ -258,6 +260,7 @@ enum {
 
 
 #endif /* __cplusplus */
+#endif /* BEOS */
 
 #endif // __ETK_BEOS_GRAPHICS_H__
 

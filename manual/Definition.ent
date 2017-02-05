@@ -1,0 +1,8 @@
+<!ENTITY manual.InterfaceKit SYSTEM "InterfaceKit.xml">
+<!ENTITY manual.InterfaceKit.Button SYSTEM "Button.cpp.xml">
+<!ENTITY manual.InterfaceKit.Region SYSTEM "Region.cpp.xml">
+
+
+<!ENTITY manual.RenderKit SYSTEM "RenderKit.xml">
+<!ENTITY manual.RenderKit.LineGenerator SYSTEM "LineGenerator.cpp.xml">
+

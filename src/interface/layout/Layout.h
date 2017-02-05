@@ -30,9 +30,9 @@
 #ifndef __ETK_LAYOUT_H__
 #define __ETK_LAYOUT_H__
 
-#include "./../support/List.h>
-#include "./../interface/InterfaceDefs.h>
-#include "./../interface/Region.h>
+#include "./../../support/List.h"
+#include "./../../interface/InterfaceDefs.h"
+#include "./../../interface/Region.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

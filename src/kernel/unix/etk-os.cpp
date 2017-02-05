@@ -27,18 +27,18 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../config.h>
+#include "./../config.h"
 
-#include <stdio.h>
+#include <stdio.h"
 #include <stdlib.h>
 
-#include <unistd.h>
-#include <signal.h>
+#include <unistd.h"
+#include <signal.h"
 
-#include "./../kernel/Kernel.h>
-#include "./../support/StringArray.h>
-#include "./../support/Locker.h>
-#include "./../app/Application.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/StringArray.h"
+#include "./../support/Locker.h"
+#include "./../app/Application.h"
 
 
 #if 0

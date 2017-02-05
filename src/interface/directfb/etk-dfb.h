@@ -30,6 +30,9 @@
 #ifndef __ETK_DIRECTFB_H__
 #define __ETK_DIRECTFB_H__
 
+#ifdef LINUX
+#ifdef DIRECTFB
+
 #include <directfb.h>
 #include <directfb_version.h>
 
@@ -42,11 +45,11 @@
 	#define DFB_HAVE_FILLRECTANGLES
 #endif
 
-#include "./../add-ons/graphics/GraphicsEngine.h>
-#include "./../support/Locker.h>
-#include "./../support/List.h>
-#include "./../interface/Window.h>
-#include "./../app/MessageFilter.h>
+#include "./../../add-ons/graphics/GraphicsEngine.h"
+#include "./../../support/Locker.h"
+#include "./../../support/List.h"
+#include "./../../interface/Window.h"
+#include "./../../app/MessageFilter.h"
 
 #ifdef __cplusplus /* just for C++ */
 
@@ -332,6 +335,9 @@ extern e_status_t etk_dfb_fill_round_rect(IDirectFBSurface *dfbSurface, EGraphic
 
 
 #endif /* __cplusplus */
+
+#endif /* DIRECTFB */
+#endif /* LINUX */
 
 #endif /* __ETK_DIRECTFB_H__ */
 

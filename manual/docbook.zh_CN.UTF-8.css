@@ -1,0 +1,165 @@
+DIV.example-output {
+  padding-left: 15px;
+  border-style: solid;
+  border-width: 0px;
+  border-left-width: 2px;
+  border-color: black;
+}
+
+pre.screen {
+  background: #E8E8E8;
+}
+
+pre.programlisting {
+  background: #FFFFE0;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E0E0A0;
+  font-size: 12pt;
+}
+
+span.emphasis {
+  font-style: italic;
+  color: #BB0000;
+}
+
+span.bold {
+  font-style: normal;
+  font-weight: bold;
+}
+
+div.example-source {
+  background: #E8E8E8;
+}
+
+p.publisher {
+  text-align: center;
+}
+
+body.book {
+/*  background-image: url(figures/htmltitlepage.gif); */
+/*  background-repeat: no-repeat; */
+/*  background-position: top center; */
+}
+
+div.component-title {
+  text-align: right;
+}
+
+h1.label {
+  font-size: 150pt;
+  font-weight: normal;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+div.component-title h1.title {
+  margin-top: 0px;
+  padding-top: 0px;
+  margin-right: 20px;
+  font-size: 36pt;
+}
+
+p.alpha-version {
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+hr.component-separator {
+  height: 1px;
+}
+
+div.refentry div.titlepage {
+  margin-left: 20px;
+}
+
+div.refentry div.titlepage h1.title {
+  margin-left: -20px;
+  margin-bottom: 0px;
+  font-size: 36pt;
+}
+
+h1.title {
+}
+
+h2.title {
+}
+
+body {
+  margin-top: 2px;
+  padding-top: 2px;
+  margin-left: 2px;
+  padding-left: 2px;
+  margin-right: 2px;
+  padding-right: 2px;
+}
+
+div.navheader {
+}
+
+div.navfooter {
+}
+
+div.copyrightfooter {
+  background-color: #c6bec6;
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 2px;
+}
+
+div.copyrightfooter p {
+  margin-top: 0px;
+  padding-top: 10px;
+}
+
+div.refentry,
+div.preface,
+div.chapter,
+div.appendix,
+div.reference,
+div.part,
+div.bibliography,
+div.glossary,
+div.index,
+div.colophon,
+div.legalnotice,
+div.sect1 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+div.book {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+thead {
+  background-color: black;
+  color: white;
+}
+
+table,
+tbody,thead,tfoot,
+tr,td {
+  border-color: #8F8F8F;
+}
+
+div.docbookng-synopsis { border-left: 0.5pt solid black;
+                         margin-left: 0.25in;
+                         padding-left: 0.25in;
+			 border-top: 0.5pt solid black;
+                         margin-top: 0.25in;
+			 border-bottom: 0.5pt solid black;
+                         margin-bottom: 0.25in;
+                       }
+
+div.docbookng-synopsis
+div.define-next        { border-top: 0.5pt solid black;
+                         margin-top: 0.25in;
+			 padding-top: 0.25in;
+                       }

@@ -31,12 +31,12 @@
 #ifndef __ETK_VIEW_H__
 #define __ETK_VIEW_H__
 
-#include "./../support/List.h>
-#include "./../interface/InterfaceDefs.h>
-#include "./../interface/Region.h>
-#include "./../interface/Polygon.h>
-#include "./../interface/Font.h>
-#include "./../app/Handler.h>
+#include "./../support/List.h"
+#include "./../interface/InterfaceDefs.h"
+#include "./../interface/Region.h"
+#include "./../interface/Polygon.h"
+#include "./../interface/Font.h"
+#include "./../app/Handler.h"
 
 enum {
 	E_ENTERED_VIEW = 0,

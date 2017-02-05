@@ -27,10 +27,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <be/kernel/OS.h>
+#include <be/kernel/OS.h"
 
-#include "./../kernel/Kernel.h>
-#include "./../support/String.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/String.h"
 
 
 inline team_id __etk_get_current_beos_team_id()

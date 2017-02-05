@@ -29,13 +29,13 @@
  * --------------------------------------------------------------------------*/
 
 #include <math.h>
-#include "./../config.h>
+#include "./../support/SupportDefs.h"
 
-#include "./../support/ClassInfo.h>
-#include "./../add-ons/font/FontEngine.h>
-#include "./../support/List.h>
-#include "./../add-ons/graphics/GraphicsEngine.h>
-#include "./../app/Application.h>
+#include "./../support/ClassInfo.h"
+#include "./../add-ons/font/FontEngine.h"
+#include "./../support/List.h"
+#include "./../add-ons/graphics/GraphicsEngine.h"
+#include "./../app/Application.h"
 
 #include "GraphicsDefs.h"
 #include "Window.h"

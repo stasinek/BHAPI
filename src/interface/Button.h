@@ -31,8 +31,8 @@
 #ifndef __ETK_BUTTON_H__
 #define __ETK_BUTTON_H__
 
-#include "./../app/MessageRunner.h>
-#include "./../interface/Control.h>
+#include "./../app/MessageRunner.h"
+#include "./../interface/Control.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

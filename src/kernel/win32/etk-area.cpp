@@ -28,11 +28,11 @@
  * --------------------------------------------------------------------------*/
 
 #include <windows.h>
-//#include <sddl.h>
+//#include <sddl.h"
 
-#include "./../config.h>
-#include "./../kernel/Kernel.h>
-#include "./../support/String.h>
+#include "./../config.h"
+#include "./../kernel/Kernel.h"
+#include "./../support/String.h"
 
 #define WIN32_AREA_INFO_MAGIC		0xABFC
 

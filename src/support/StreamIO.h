@@ -56,7 +56,6 @@ public:
 	EStreamIO 		&operator<<(double value);
 	EStreamIO 		&operator<<(const void *value);
 	EStreamIO 		&operator<<(bool value);
-	EStreamIO 		&operator<<(char c);
 	EStreamIO 		&operator<<(const char *str);
 	EStreamIO 		&operator<<(const EString &str);
 	EStreamIO 		&operator<<(EStreamIO &stream);

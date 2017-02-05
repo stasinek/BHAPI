@@ -27,11 +27,11 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <pthread.h>
-#include <errno.h>
+#include <pthread.h"
+#include <errno.h"
 
-#include "./../kernel/Kernel.h>
-#include "./../support/String.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/String.h"
 
 typedef struct etk_posix_locker_t {
 	etk_posix_locker_t()

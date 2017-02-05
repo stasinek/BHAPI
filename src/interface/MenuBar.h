@@ -30,7 +30,7 @@
 #ifndef __ETK_MENU_BAR_H__
 #define __ETK_MENU_BAR_H__
 
-#include "./../interface/Menu.h>
+#include "./../interface/Menu.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

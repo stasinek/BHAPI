@@ -31,7 +31,7 @@
 #ifndef __ETK_OUTLINE_LIST_VIEW_H__
 #define __ETK_OUTLINE_LIST_VIEW_H__
 
-#include "./../interface/ListView.h>
+#include "./../interface/ListView.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

@@ -28,14 +28,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <string.h>
+#include <string.h"
 #include <stdlib.h>
-#include <stdio.h>
-#include <ctype.h>
+#include <stdio.h"
+#include <ctype.h"
 #include <math.h>
 #include <stdarg.h>
 
-#include "./../config.h>
+#include "./../config.h"
 
 #include "String.h"
 #include "StringArray.h"

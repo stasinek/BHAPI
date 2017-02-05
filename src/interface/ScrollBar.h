@@ -30,8 +30,8 @@
 #ifndef __ETK_SCROLL_BAR_H__
 #define __ETK_SCROLL_BAR_H__
 
-#include "./../app/MessageRunner.h>
-#include "./../interface/View.h>
+#include "./../app/MessageRunner.h"
+#include "./../interface/View.h"
 
 #define E_V_SCROLL_BAR_WIDTH	e_ui_get_scrollbar_vertical_width()
 #define E_H_SCROLL_BAR_HEIGHT	e_ui_get_scrollbar_horizontal_height()

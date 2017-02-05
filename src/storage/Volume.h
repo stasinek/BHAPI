@@ -30,9 +30,9 @@
 #ifndef __ETK_VOLUME_H__
 #define __ETK_VOLUME_H__
 
-#include "./../storage/StorageDefs.h>
-#include "./../storage/Directory.h>
-#include "./../support/String.h>
+#include "./StorageDefs.h"
+#include "./Directory.h"
+#include "./String.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

@@ -31,8 +31,8 @@
 #ifndef __ETK_STRING_VIEW_H__
 #define __ETK_STRING_VIEW_H__
 
-#include "./../support/StringArray.h>
-#include "./../interface/View.h>
+#include "./../support/StringArray.h"
+#include "./../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

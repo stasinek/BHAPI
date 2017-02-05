@@ -30,7 +30,7 @@
 #ifndef __ETK_PRIVATE_STANDARD_IO_H__
 #define __ETK_PRIVATE_STANDARD_IO_H__
 
-#include "./../support/StreamIO.h>
+#include "./../support/StreamIO.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

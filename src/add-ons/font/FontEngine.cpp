@@ -30,17 +30,17 @@
 #include <string.h>
 
 #ifdef __BEOS__
-#include <be/app/AppDefs.h>
-#include <be/interface/Font.h>
+#include "./../../app/AppDefs.h"
+#include "./../../interface/Font.h"
 #endif
 
 #include "FontEngine.h"
 
-#include "./../config.h>
-#include "./../support/Locker.h>
-#include "./../support/Autolock.h>
-#include "./../app/Application.h>
-#include "./../add-ons/graphics/GraphicsEngine.h>
+#include "./../../support/SupportDefs.h"
+#include "./../../support/Locker.h"
+#include "./../../support/Autolock.h"
+#include "./../../app/Application.h"
+#include "./../../add-ons/graphics/GraphicsEngine.h"
 
 static EFont* _etk_plain_font = NULL;
 static EFont* _etk_bold_font = NULL;

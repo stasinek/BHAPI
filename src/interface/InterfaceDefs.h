@@ -30,7 +30,7 @@
 #ifndef __ETK_INTERFACE_DEFS_H__
 #define __ETK_INTERFACE_DEFS_H__
 
-#include "./../interface/GraphicsDefs.h>
+#include "./../interface/GraphicsDefs.h"
 
 enum {
 	E_FOLLOW_NONE			= 0,

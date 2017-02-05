@@ -26,9 +26,11 @@
  * File: etk-drawing.cpp
  * 
  * --------------------------------------------------------------------------*/
+#ifdef LINUX
+#ifdef DIRECTFB
 
-#include "./../render/Render.h>
-#include "./../render/Pixmap.h>
+#include "./../../render/Render.h"
+#include "./../../render/Pixmap.h"
 
 #include "etk-dfb.h"
 
@@ -697,3 +699,5 @@ e_status_t etk_dfb_draw_epixmap(IDirectFBSurface *dfbSurface, EGraphicsContext *
 	return E_OK;
 }
 
+#endif /* DIRECTFB */
+#endif /* LINUX */

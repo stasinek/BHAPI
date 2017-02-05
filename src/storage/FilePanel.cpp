@@ -29,19 +29,19 @@
 
 #include <time.h>
 
-#include "./../config.h>
-#include "./../kernel/Kernel.h>
-#include "./../support/Autolock.h>
-#include "./../support/ClassInfo.h>
-#include "./../app/Application.h>
-#include "./../interface/Button.h>
-#include "./../interface/MenuField.h>
-#include "./../interface/ListView.h>
-#include "./../interface/ScrollView.h>
-#include "./../interface/TextControl.h>
-#include "./../interface/StringView.h>
-#include "./../interface/Bitmap.h>
-#include "./../render/Pixmap.h>
+#include "./../support/supportDefs.h"
+#include "./../kernel/Kernel.h"
+#include "./../support/Autolock.h"
+#include "./../support/ClassInfo.h"
+#include "./../app/Application.h"
+#include "./../interface/Button.h"
+#include "./../interface/MenuField.h"
+#include "./../interface/ListView.h"
+#include "./../interface/ScrollView.h"
+#include "./../interface/TextControl.h"
+#include "./../interface/StringView.h"
+#include "./../interface/Bitmap.h"
+#include "./../render/Pixmap.h"
 
 #include "VolumeRoster.h"
 #include "FindDirectory.h"

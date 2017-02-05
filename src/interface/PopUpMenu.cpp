@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../app/Application.h>
-#include "./../support/ClassInfo.h>
-#include "./../kernel/Kernel.h>
+#include "./../app/Application.h"
+#include "./../support/ClassInfo.h"
+#include "./../kernel/Kernel.h"
 
 #include "Window.h"
 #include "PopUpMenu.h"

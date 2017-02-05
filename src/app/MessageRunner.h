@@ -31,7 +31,7 @@
 #ifndef __ETK_MESSAGE_RUNNER_H__
 #define __ETK_MESSAGE_RUNNER_H__
 
-#include "./../app/Messenger.h>
+#include "./../app/Messenger.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

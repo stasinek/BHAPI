@@ -38,7 +38,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include "./../support/String.h>
+#include "./../support/String.h"
 
 #include "Path.h"
 

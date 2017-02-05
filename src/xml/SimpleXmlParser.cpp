@@ -29,8 +29,8 @@
 
 #include <stdlib.h>
 
-#include "./../support/String.h>
-#include "./../support/StringArray.h>
+#include "./../support/String.h"
+#include "./../support/StringArray.h"
 
 #include "SimpleXmlParser.h"
 

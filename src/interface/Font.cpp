@@ -29,9 +29,9 @@
 
 #include <string.h>
 
-#include "./../config.h>
-#include "./../add-ons/font/FontEngine.h>
-#include "./../support/Autolock.h>
+#include "./../support/SupportDefs.h"
+#include "./../add-ons/font/FontEngine.h"
+#include "./../support/Autolock.h"
 
 #include "Font.h"
 

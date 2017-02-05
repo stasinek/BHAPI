@@ -31,7 +31,7 @@
 #ifndef __ETK_CHECK_BOX_H__
 #define __ETK_CHECK_BOX_H__
 
-#include "./../interface/Control.h>
+#include "./../interface/Control.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

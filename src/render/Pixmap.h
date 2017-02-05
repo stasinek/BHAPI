@@ -30,8 +30,8 @@
 #ifndef __ETK_PIXMAP_H__
 #define __ETK_PIXMAP_H__
 
-#include "./../interface/Region.h>
-#include "./../render/Render.h>
+#include "./../interface/Region.h"
+#include "./../render/Render.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

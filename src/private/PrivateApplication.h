@@ -30,8 +30,8 @@
 #ifndef __ETK_PRIVATE_APPLICATION_H__
 #define __ETK_PRIVATE_APPLICATION_H__
 
-#include "./../support/SimpleLocker.h>
-#include "./../private/Token.h>
+#include "./../support/SimpleLocker.h"
+#include "./../private/Token.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

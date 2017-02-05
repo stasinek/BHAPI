@@ -30,9 +30,9 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#include "./../support/Autolock.h>
-#include "./../support/SimpleLocker.h>
-#include "./../support/String.h>
+#include "./../support/Autolock.h"
+#include "./../support/SimpleLocker.h"
+#include "./../support/String.h"
 
 #include "NetDebug.h"
 

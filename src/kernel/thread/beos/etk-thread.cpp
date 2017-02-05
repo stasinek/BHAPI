@@ -27,12 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <be/kernel/OS.h>
+#include <be/kernel/OS.h"
 
-#include "./../kernel/Kernel.h>
-#include "./../support/SimpleLocker.h>
-#include "./../support/List.h>
-#include "./../support/String.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/SimpleLocker.h"
+#include "./../support/List.h"
+#include "./../support/String.h"
 
 
 typedef struct _threadCallback_ {

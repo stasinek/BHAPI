@@ -27,9 +27,11 @@
  *
  * --------------------------------------------------------------------------*/
 
+#ifdef LINUX
+
 #include "etk-x11.h"
-#include "./../support/Autolock.h>
-#include "./../support/ClassInfo.h>
+#include "./../support/Autolock.h"
+#include "./../support/ClassInfo.h"
 
 
 EXGraphicsDrawable::EXGraphicsDrawable(EXGraphicsEngine *x11Engine, euint32 w, euint32 h)
@@ -217,3 +219,4 @@ EXGraphicsDrawable::CopyTo(EGraphicsContext *_dc_,
 	return retVal;
 }
 
+#endif /* LINUX */

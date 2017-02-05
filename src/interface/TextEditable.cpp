@@ -28,8 +28,8 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../support/String.h>
-#include "./../app/Application.h>
+#include "./../support/String.h"
+#include "./../app/Application.h"
 
 #include "Window.h"
 #include "TextEditable.h"

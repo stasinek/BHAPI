@@ -26,6 +26,7 @@
  * File: etk-window.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BEOS
 
 #include <be/BeBuild.h>
 #include <be/app/AppDefs.h>
@@ -34,8 +35,8 @@
 
 #include "etk-beos-graphics.h"
 
-#include "./../support/ClassInfo.h>
-#include "./../app/Application.h>
+#include "./../../support/ClassInfo.h"
+#include "./../../app/Application.h"
 
 #define CLICK_TIMEOUT 200000
 
@@ -1273,3 +1274,4 @@ EBeGraphicsWindow::FillArc(EGraphicsContext *dc,
 	return E_ERROR;
 }
 
+#endif /* BEOS */

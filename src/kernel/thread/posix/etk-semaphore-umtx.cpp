@@ -28,30 +28,30 @@
  * --------------------------------------------------------------------------*/
 
 #include <stdlib.h>
-#include <fcntl.h>
+#include <fcntl.h"
 
-#include <pthread.h>
-#include <semaphore.h>
+#include <pthread.h"
+#include <semaphore.h"
 
 #include <sys/types.h>
-#include <unistd.h>
-#include <string.h>
-#include <time.h>
-#include <errno.h>
+#include <unistd.h"
+#include <string.h"
+#include <time.h"
+#include <errno.h"
 
 extern "C" {
 /* use umtx instead of pshared-semaphore */
-#include <machine/atomic.h>
-#include <ucontext.h>
-#include <sys/thr.h>
-#include <sys/umtx.h>
+#include <machine/atomic.h"
+#include <ucontext.h"
+#include <sys/thr.h"
+#include <sys/umtx.h"
 } // extern "C"
 
-#include <sys/stat.h>
-#include <sys/mman.h>
+#include <sys/stat.h"
+#include <sys/mman.h"
 
-#include "./../kernel/Kernel.h>
-#include "./../support/String.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/String.h"
 
 typedef struct etk_posix_sem_info {
 	etk_posix_sem_info()

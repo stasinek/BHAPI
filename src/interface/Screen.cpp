@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../add-ons/graphics/GraphicsEngine.h>
-#include "./../app/Application.h>
+#include "./../add-ons/graphics/GraphicsEngine.h"
+#include "./../app/Application.h"
 
 #include "Screen.h"
 #include "Window.h"

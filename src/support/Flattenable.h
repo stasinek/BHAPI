@@ -30,7 +30,7 @@
 #ifndef __ETK_FLATTENABLE_H__
 #define __ETK_FLATTENABLE_H__
 
-#include "./../support/SupportDefs.h"
+#include "./SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

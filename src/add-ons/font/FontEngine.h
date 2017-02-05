@@ -31,11 +31,11 @@
 #ifndef __ETK_FONT_ENGINE_H__
 #define __ETK_FONT_ENGINE_H__
 
-#include "./../support/StringArray.h>
-#include "./../interface/Point.h"
-#include "./../interface/Font.h>
-#include "./../support/Locker.h>
-#include "./../app/Handler.h>
+#include "./../../support/StringArray.h"
+#include "./../../interface/Point.h"
+#include "./../../interface/Font.h"
+#include "./../../support/Locker.h"
+#include "./../../app/Handler.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

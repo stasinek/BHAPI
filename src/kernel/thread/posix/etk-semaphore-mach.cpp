@@ -27,16 +27,16 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <pthread.h>
-#include <semaphore.h>
-#include <time.h>
-#include <errno.h>
+#include <pthread.h"
+#include <semaphore.h"
+#include <time.h"
+#include <errno.h"
 
-#include <mach/mach.h>
-#include <mach/semaphore.h>
+#include <mach/mach.h"
+#include <mach/semaphore.h"
 
-#include "./../kernel/Kernel.h>
-#include "./../support/String.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/String.h"
 
 typedef struct etk_mach_sem_info {
 	etk_mach_sem_info()

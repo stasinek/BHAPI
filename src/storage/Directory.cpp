@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../config.h>
+#include "./../support/SupportDefs.h"
 
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
@@ -46,7 +46,7 @@
 
 typedef struct etk_win32_dir_t {
 	bool first;
-	WIN32_FIND_DATA findData;
+    WIN32_FIND_DATAA findData;
 	HANDLE findHandle;
 } etk_win32_dir_t;
 
@@ -60,7 +60,7 @@ typedef struct etk_win32_dir_t {
 #include <dirent.h>
 #endif // HAVE_DIRENT_H
 
-#include "./../support/String.h>
+#include "./../support/String.h"
 
 #include "Directory.h"
 #include "Path.h"
@@ -120,7 +120,7 @@ EDirectory::SetTo(const char *path)
 		retVal = E_OK;
 #else
 #ifdef _WIN32
-		DWORD attr = GetFileAttributes(dirname);
+        DWORD attr = GetFileAttributesA(dirname);
 		if(attr == (DWORD)-1/*INVALID_FILE_ATTRIBUTES*/) break;
 		if(!(attr & FILE_ATTRIBUTE_DIRECTORY)) {retVal = E_ENTRY_NOT_FOUND; break;}
 
@@ -137,7 +137,7 @@ EDirectory::SetTo(const char *path)
 		str.Append("\\*");
 		const char *searchName = str.String();
 		((etk_win32_dir_t*)fDir)->first = true;
-		((etk_win32_dir_t*)fDir)->findHandle = FindFirstFile(searchName, &(((etk_win32_dir_t*)fDir)->findData));
+        ((etk_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((etk_win32_dir_t*)fDir)->findData));
 
 		retVal = E_OK;
 #else
@@ -278,7 +278,7 @@ EDirectory::GetNextEntry(EEntry *entry, bool traverse)
 		}
 		else
 		{
-			if(FindNextFile(((etk_win32_dir_t*)fDir)->findHandle,
+            if(FindNextFileA(((etk_win32_dir_t*)fDir)->findHandle,
 					&(((etk_win32_dir_t*)fDir)->findData)) == 0) {retVal = E_ENTRY_NOT_FOUND; break;}
 		}
 
@@ -325,7 +325,7 @@ EDirectory::Rewind()
 
 	if(((etk_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((etk_win32_dir_t*)fDir)->findHandle);
 	((etk_win32_dir_t*)fDir)->first = true;
-	((etk_win32_dir_t*)fDir)->findHandle = FindFirstFile(searchName, &(((etk_win32_dir_t*)fDir)->findData));
+    ((etk_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((etk_win32_dir_t*)fDir)->findData));
 	return E_OK;
 #else
 	#warning "fixme: EDirectory::Rewind"
@@ -365,7 +365,7 @@ EDirectory::CountEntries()
 
 	if(((etk_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((etk_win32_dir_t*)fDir)->findHandle);
 	((etk_win32_dir_t*)fDir)->first = true;
-	((etk_win32_dir_t*)fDir)->findHandle = FindFirstFile(searchName, &(((etk_win32_dir_t*)fDir)->findData));
+    ((etk_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((etk_win32_dir_t*)fDir)->findData));
 	if(((etk_win32_dir_t*)fDir)->findHandle == INVALID_HANDLE_VALUE) return 0;
 
 	eint32 count = 0;
@@ -374,11 +374,11 @@ EDirectory::CountEntries()
 		if(strlen(filename) == 1 && filename[0] == '.') continue;
 		if(strlen(filename) == 2 && strcmp(filename, "..") == 0) continue;
 		count++;
-	}while(FindNextFile(((etk_win32_dir_t*)fDir)->findHandle, &(((etk_win32_dir_t*)fDir)->findData)) != 0);
+    }while(FindNextFileA(((etk_win32_dir_t*)fDir)->findHandle, &(((etk_win32_dir_t*)fDir)->findData)) != 0);
 
 	FindClose(((etk_win32_dir_t*)fDir)->findHandle);
 	((etk_win32_dir_t*)fDir)->first = true;
-	((etk_win32_dir_t*)fDir)->findHandle = FindFirstFile(searchName, &(((etk_win32_dir_t*)fDir)->findData));
+    ((etk_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((etk_win32_dir_t*)fDir)->findData));
 
 	return count;
 #else

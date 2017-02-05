@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../net/NetAddress.h>
-#include "./../net/NetBuffer.h>
-#include "./../net/NetDebug.h>
-#include "./../net/NetEndpoint.h>
+#include "./net/NetAddress.h"
+#include "./net/NetBuffer.h"
+#include "./net/NetDebug.h"
+#include "./net/NetEndpoint.h"
 

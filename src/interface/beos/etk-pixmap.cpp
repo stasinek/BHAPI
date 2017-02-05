@@ -26,6 +26,7 @@
  * File: etk-pixmap.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BEOS
 
 #include <be/interface/View.h>
 #include <be/interface/Region.h>
@@ -33,9 +34,9 @@
 
 #include "etk-beos-graphics.h"
 
-#include "./../support/ClassInfo.h>
-#include "./../support/Autolock.h>
-#include "./../render/Pixmap.h>
+#include "./../../support/ClassInfo.h"
+#include "./../../support/Autolock.h"
+#include "./../../render/Pixmap.h"
 
 
 EBeBitmapPriv::EBeBitmapPriv(euint32 w, euint32 h)
@@ -899,3 +900,4 @@ EBeGraphicsDrawable::FillArc(EGraphicsContext *dc,
 
 	return E_OK;
 }
+#endif /* BEOS */

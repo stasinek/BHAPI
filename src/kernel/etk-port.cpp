@@ -29,9 +29,9 @@
 
 #include <stdlib.h>
 
-#include "./../kernel/Kernel.h>
-#include "./../support/String.h>
-#include "./../support/SimpleLocker.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/String.h"
+#include "./../support/SimpleLocker.h"
 
 typedef struct etk_port_info {
 	etk_port_info()

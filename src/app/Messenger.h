@@ -31,7 +31,7 @@
 #ifndef __ETK_MESSENGER_H__
 #define __ETK_MESSENGER_H__
 
-#include "./../app/Looper.h>
+#include "./../app/Looper.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

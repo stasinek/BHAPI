@@ -28,8 +28,8 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../support/String.h>
-#include "./../render/Pixmap.h>
+#include "./../support/String.h"
+#include "./../render/Pixmap.h"
 
 #include "Bitmap.h"
 #include "ColorControl.h"

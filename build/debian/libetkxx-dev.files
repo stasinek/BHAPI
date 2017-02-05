@@ -1,0 +1,6 @@
+usr/bin/etkxx-config
+usr/include/*
+usr/share/*
+usr/lib/lib*.a
+usr/lib/lib*.so
+usr/lib/pkgconfig/etkxx.pc

@@ -31,8 +31,8 @@
 #ifndef __ETK_TEXT_VIEW_H__
 #define __ETK_TEXT_VIEW_H__
 
-#include "./../support/String.h>
-#include "./../interface/View.h>
+#include "./../support/String.h"
+#include "./../interface/View.h"
 
 
 typedef struct e_text_run {

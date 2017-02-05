@@ -30,9 +30,9 @@
  * --------------------------------------------------------------------------*/
 
 
-#include "./../add-ons/graphics/GraphicsEngine.h>
-#include "./../app/Application.h>
-#include "./../render/Pixmap.h>
+#include "./../add-ons/graphics/GraphicsEngine.h"
+#include "./../app/Application.h"
+#include "./../render/Pixmap.h"
 
 #include "Bitmap.h"
 

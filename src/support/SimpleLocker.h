@@ -31,7 +31,7 @@
 #ifndef __ETK_SIMPLE_LOCKER_H__
 #define __ETK_SIMPLE_LOCKER_H__
 
-#include "./../support/SupportDefs.h"
+#include "./SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

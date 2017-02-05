@@ -1,0 +1,99 @@
+#!/bin/sh
+
+print_usage () {
+	echo "Usage: $0 [--check filename] [--check-dir directory]"
+}
+
+add_copying () {
+	filename=`basename $1`
+	sed -e "1i\
+\/* --------------------------------------------------------------------------\\n\
+ *\\n\
+ * ETK++ --- The Easy Toolkit for C++ programing\\n\
+ * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved\\n\
+ *\\n\
+ * ETK++ library is a freeware; it may be used and distributed according to\\n\
+ * the terms of The MIT License.\\n\
+ *\\n\
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of\\n\
+ * this software and associated documentation files (the \"Software\"), to deal in\\n\
+ * the Software without restriction, including without limitation the rights to use,\\n\
+ * copy, modify, merge, publish, distribute, sublicense, and\/or sell copies of\\n\
+ * the Software, and to permit persons to whom the Software is furnished to do so,\\n\
+ * subject to the following conditions:\\n\
+ *\\n\
+ * The above copyright notice and this permission notice shall be included in all\\n\
+ * copies or substantial portions of the Software.\\n\
+ *\\n\
+ * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\n\
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\n\
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\n\
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\\n\
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\\n\
+ * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\\n\
+ *\\n\
+ * File: $filename\\n\
+ *\\n\
+ * --------------------------------------------------------------------------*\/\\n" $1 > /tmp/etkxx-checking.tmp
+	cp -f /tmp/etkxx-checking.tmp $1
+	rm -f /tmp/etkxx-checking.tmp
+}
+
+replace_copying () {
+	sed -e 's/ \* \$COPYING/ * ETK++ library is a freeware; it may be used and distributed according to\
+ * the terms of The MIT License.\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of\
+ * this software and associated documentation files (the \"Software\"), to deal in\
+ * the Software without restriction, including without limitation the rights to use,\
+ * copy, modify, merge, publish, distribute, sublicense, and\/or sell copies of\
+ * the Software, and to permit persons to whom the Software is furnished to do so,\
+ * subject to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included in all\
+ * copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\
+ * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE./' $1 > /tmp/etkxx-checking.tmp
+	cp -f /tmp/etkxx-checking.tmp $1
+	rm -f /tmp/etkxx-checking.tmp
+}
+
+if test "x$1" == "x" || test "x$2" == "x"; then
+	print_usage
+	exit 1
+fi
+
+if test "x$1" == "x--check-dir"; then
+
+	FILES="`find $2 -name \"*.c\"` `find $2 -name \"*.cpp\"` `find $2 -name \"*.h\"`"
+	for f in $FILES; do \
+		$0 --check $f; \
+	done
+
+elif test "x$1" == "x--check"; then
+
+	if test ! -f $2; then
+		echo "File(\"$2\") not found."
+		exit 1
+	fi
+
+	if ( grep -q " \* \$COPYING" $2 ); then
+		replace_copying $2
+	else
+		( grep -q " \* Copyright (C)" $2 ) || add_copying $2
+	fi
+
+else
+
+	print_usage
+	exit 1
+
+fi
+
+exit 0
+

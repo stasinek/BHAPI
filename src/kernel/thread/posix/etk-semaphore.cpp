@@ -28,18 +28,18 @@
  * --------------------------------------------------------------------------*/
 
 #include <stdlib.h>
-#include <fcntl.h>
+#include <fcntl.h"
 
-#include <pthread.h>
-#include <semaphore.h>
+#include <pthread.h"
+#include <semaphore.h"
 #include <sys/types.h>
-#include <unistd.h>
-#include <string.h>
-#include <time.h>
-#include <errno.h>
+#include <unistd.h"
+#include <string.h"
+#include <time.h"
+#include <errno.h"
 
-#include "./../config.h>
-#include "./../ETKBuild.h>
+#include "./../config.h"
+#include "./../ETKBuild.h"
 
 #ifdef ETK_OS_CYGWIN 
 	#warning "Posix IPC semaphore won't to be support at all."
@@ -55,8 +55,8 @@
 	#define ETK_PTHREAD_SHARED
 #endif
 
-#include "./../kernel/Kernel.h>
-#include "./../support/String.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/String.h"
 
 typedef struct etk_posix_sem_info {
 	etk_posix_sem_info()

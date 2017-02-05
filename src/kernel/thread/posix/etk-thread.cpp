@@ -28,17 +28,17 @@
  * --------------------------------------------------------------------------*/
 
 #include <stdlib.h>
-#include <stdio.h>
+#include <stdio.h"
 #include <sys/types.h>
-#include <unistd.h>
-#include <pthread.h>
-#include <errno.h>
-#include <signal.h>
+#include <unistd.h"
+#include <pthread.h"
+#include <errno.h"
+#include <signal.h"
 
-#include "./../config.h>
-#include "./../kernel/Kernel.h>
-#include "./../support/List.h>
-#include "./../support/String.h>
+#include "./../config.h"
+#include "./../kernel/Kernel.h"
+#include "./../support/List.h"
+#include "./../support/String.h"
 
 typedef struct _threadCallback_ {
 	e_thread_func	func;

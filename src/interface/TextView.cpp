@@ -32,10 +32,10 @@
 
 #include <stdlib.h>
 
-#include "./../support/ClassInfo.h>
-#include "./../storage/File.h>
-#include "./../app/Application.h>
-#include "./../app/Clipboard.h>
+#include "./../support/ClassInfo.h"
+#include "./../storage/File.h"
+#include "./../app/Application.h"
+#include "./../app/Clipboard.h"
 
 #include "Window.h"
 #include "ScrollView.h"
@@ -576,15 +576,15 @@ ETextView::OffsetAt(EPoint pt, bool visible, bool utf8) const
 
 
 eint32
-ETextView::OffsetAt(eint32 line, bool utf8) const
+ETextView::OffsetAt(eint32 a_line, bool utf8) const
 {
-	if(line < 0 || line >= fLines.CountItems()) return -1;
+    if(a_line < 0 || a_line >= fLines.CountItems()) return -1;
 
 	eint32 lineOffset = 0;
-	for(eint32 i = 0; i < line; i++)
+    for(eint32 i = 0; i < a_line; i++)
 	{
-		e_text_line *line = (e_text_line*)fLines.ItemAt(i);
-		lineOffset += line->length + 1;
+        e_text_line *lline = (e_text_line*)fLines.ItemAt(i);
+        lineOffset += lline->length + 1;
 	}
 
 	return(utf8 ? e_utf8_strlen_etc(fText.String(), lineOffset) : lineOffset);
@@ -1538,7 +1538,7 @@ ETextView::Draw(ERect updateRect)
 				EFont curFont(curRun->font);
 
 				e_rgb_color fgColor = curRun->color;
-				e_rgb_color bkColor = curRun->background;
+                bkColor = curRun->background;
 				eint32 len = (nextRun == NULL ? line->length : min_c(line->length, nextRun->offset)) - curRun->offset;
 				float strWidth = _StringWidth(curFont, str + curRun->offset, len);
 

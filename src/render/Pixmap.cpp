@@ -30,7 +30,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "./../support/StringArray.h>
+#include "./../support/StringArray.h"
 
 #include "Pixmap.h"
 

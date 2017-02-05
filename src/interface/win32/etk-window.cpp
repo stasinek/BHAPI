@@ -26,14 +26,15 @@
  * File: etk-window.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef WIN32
 
 #include "etk-win32gdi.h"
 
-#include "./../kernel/Kernel.h>
-#include "./../support/Autolock.h>
-#include "./../app/Application.h>
-#include "./../support/String.h>
-#include "./../support/ClassInfo.h>
+#include "./../../kernel/Kernel.h"
+#include "./../../support/Autolock.h"
+#include "./../../app/Application.h"
+#include "./../../support/String.h"
+#include "./../../support/ClassInfo.h"
 
 
 bool etk_win32_window_convert_to_screen(HWND hWnd, int *x, int *y)
@@ -1175,3 +1176,4 @@ EWin32GraphicsWindow::FillArc(EGraphicsContext *dc,
 	return E_ERROR;
 }
 
+#endif /* WIN32 */

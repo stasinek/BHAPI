@@ -30,8 +30,8 @@
 #ifndef __ETK_FILE_PANEL_H__
 #define __ETK_FILE_PANEL_H__
 
-#include "./../interface/Window.h>
-#include "./../storage/Directory.h>
+#include "./../interface/Window.h"
+#include "./../storage/Directory.h"
 
 typedef enum e_file_panel_mode {
 	E_OPEN_PANEL,

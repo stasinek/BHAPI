@@ -28,8 +28,8 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../support/String.h>
-#include "./../support/ClassInfo.h>
+#include "./../support/String.h"
+#include "./../support/ClassInfo.h"
 
 #include "Window.h"
 #include "MenuField.h"

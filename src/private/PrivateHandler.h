@@ -31,8 +31,8 @@
 #define __ETK_PRIVATE_HANDLER_H__
 
 #include "./../support/SupportDefs.h"
-#include "./../support/Locker.h>
-#include "./../app/Looper.h>
+#include "./../support/Locker.h"
+#include "./../app/Looper.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

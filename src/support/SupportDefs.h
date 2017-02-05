@@ -31,17 +31,47 @@
 #ifndef __ETK_SUPPORT_DEFS_H__
 #define __ETK_SUPPORT_DEFS_H__
 
+#ifdef _WIN32
+#define ETK_OS_WIN32
+#endif
+#define ETK_COMPILATION
+
 #include <string.h> /* for bzero */
 #include "Errors.h"
 
+#define E_INT64_CONSTANT(x) (const __int64)(x)
+
+#include <limits.h>
+#define E_MININT32 INT_MIN
+#define E_MAXUINT32 UINT_MAX
+#define E_MAXINT32 INT_MAX
+#define E_MAXUINT64 ULLONG_MAX
+#define E_MAXINT64 LLONG_MAX
+#include <float.h>
+#define E_MAXFLOAT FLT_MAX
+#define E_MINFLOAT FLT_MIN
+
+typedef char32_t eunichar32;
+typedef char16_t eunichar;
+
+typedef	__int8 eint8;
+typedef	unsigned __int8 euint8;
+typedef	__int16 eint16;
+typedef	unsigned __int16 euint16;
+typedef	__int32 eint32;
+typedef	unsigned __int32 euint32;
+typedef	__int64 eint64;
+typedef	unsigned __int64 euint64;
+
 typedef eint32	e_status_t;
-typedef eint64	e_bigtime_t;
-typedef eint64	e_thread_id;
 typedef euint32	e_type_code;
 typedef euint32	e_perform_code;
+typedef eint64	e_bigtime_t;
+typedef eint64	e_thread_id;
+typedef size_t	e_address_t;
 
 enum {
-	E_ANY_TYPE 				= 'ANYT',
+    E_ANY_TYPE                  = 'ANYT',
 	E_BOOL_TYPE 				= 'BOOL',
 	E_CHAR_TYPE 				= 'CHAR',
 	E_DOUBLE_TYPE 				= 'DBLE',
@@ -61,11 +91,10 @@ enum {
 	E_UINT16_TYPE 				= 'USHT',
 	E_UINT8_TYPE 				= 'UBYT',
 	E_POINT_TYPE				= 'SPNT',
-	E_RECT_TYPE				= 'RECT',
-	E_MIME_TYPE				= 'MIME',
+    E_RECT_TYPE                 = 'RECT',
+    E_MIME_TYPE                 = 'MIME',
 	E_UNKNOWN_TYPE				= 'UNKN'
 };
-
 
 #ifndef HAVE_BZERO
 	#ifndef bzero
@@ -121,7 +150,7 @@ typedef	eint8	bool;
 #  endif /* !__cplusplus */
 #endif
 
-#ifdef ETK_OS_WIN32
+#ifdef WIN32
 #	ifdef __GNUC__
 #		ifndef _stdcall
 #		define _stdcall  __attribute__((stdcall))
@@ -139,6 +168,7 @@ typedef	eint8	bool;
 #    define _EXPORT
 #  endif
 #endif /* _EXPORT */
+
 
 
 #ifndef _IMPORT
@@ -182,7 +212,7 @@ extern _IMPEXP_ETK const euint16 etk_binary_age;
 
 #ifdef ETK_OS_WIN32
 	#ifdef _WIN32
-		#include <windows.h>
+        #include <windows.h>
 	#endif
 	#ifdef PostMessage
 		#undef PostMessage

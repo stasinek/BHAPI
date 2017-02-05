@@ -28,7 +28,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/ClassInfo.h>
+#include "./../support/ClassInfo.h"
 
 #include "ListView.h"
 #include "ScrollView.h"
@@ -995,7 +995,7 @@ EListView::ItemFrame(eint32 index) const
 
 			for(eint32 i = 0; i <= index; i++)
 			{
-				EListItem *item = (EListItem*)fItems.ItemAt(i);
+                item = (EListItem*)fItems.ItemAt(i);
 				if(item->Height() < 0) continue;
 
 				r.top = r.bottom;

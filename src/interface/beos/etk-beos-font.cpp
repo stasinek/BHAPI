@@ -26,17 +26,18 @@
  * File: etk-beos-font.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BEOS
 
 #include <be/app/AppDefs.h>
 #include <be/interface/Font.h>
 
 #include "etk-beos-graphics.h"
 
-#include "./../add-ons/font/FontEngine.h>
-#include "./../support/ClassInfo.h>
-#include "./../support/Autolock.h>
-#include "./../interface/Window.h>
-#include "./../interface/View.h>
+#include "./../../add-ons/font/FontEngine.h"
+#include "./../../support/ClassInfo.h"
+#include "./../../support/Autolock.h"
+#include "./../../interface/Window.h"
+#include "./../../interface/View.h"
 
 
 class EFontBe : public EFontEngine {
@@ -365,4 +366,5 @@ EBeGraphicsEngine::UpdateFonts(bool check_only)
 
 	return retVal;
 }
+#endif /* BEOS */
 

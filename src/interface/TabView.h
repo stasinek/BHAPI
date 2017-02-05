@@ -30,8 +30,8 @@
 #ifndef __ETK_TAB_VIEW_H__
 #define __ETK_TAB_VIEW_H__
 
-#include "./../support/List.h>
-#include "./../interface/View.h>
+#include "./../support/List.h"
+#include "./../interface/View.h"
 
 typedef enum {
 	E_TAB_FIRST = 0,

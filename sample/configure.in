@@ -1,0 +1,56 @@
+AC_INIT(etkxx-sample, [0.0.4], [])
+AC_CONFIG_AUX_DIR([.])
+AC_CONFIG_SRCDIR([kernel/create_sem.c])
+
+AC_CANONICAL_HOST
+AC_CANONICAL_TARGET
+
+AM_INIT_AUTOMAKE([no-define])
+AM_CONFIG_HEADER([config.h])
+
+AC_PROG_CC
+AC_PROG_CXX
+
+
+native_win32=no
+AC_MSG_CHECKING(whether native win32)
+case $host in
+  *-*-mingw*)
+    native_win32=yes
+    ;;
+esac
+AC_MSG_RESULT($native_win32)
+AM_CONDITIONAL(NATIVE_WIN32, test "$native_win32" = "yes")
+AM_CONDITIONAL(WITH_GCC, test "x$GCC" = "xyes")
+
+have_etkxx=no
+save_CFLAGS="$CFLAGS"
+save_LIBS="$LIBS"
+AM_PATH_ETKXX(0.3.0, [have_etkxx=yes], [:])
+CFLAGS="$save_CFLAGS"
+LIBS="$save_LIBS"
+if test "$have_etkxx" != "yes"; then
+  AC_MSG_ERROR([
+*** No ETK++ found!
+])
+fi
+
+
+have_sdl=no
+save_CFLAGS="$CFLAGS"
+save_LIBS="$LIBS"
+AM_PATH_SDL(1.2.2, [have_sdl=yes], [:])
+CFLAGS="$save_CFLAGS"
+LIBS="$save_LIBS"
+AM_CONDITIONAL(HAVE_SDL, test "$have_sdl" = "yes")
+
+
+AC_CONFIG_FILES([
+Makefile
+kernel/Makefile
+render/Makefile
+interface/Makefile
+])
+
+AC_OUTPUT
+

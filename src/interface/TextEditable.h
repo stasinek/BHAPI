@@ -31,8 +31,8 @@
 #ifndef __ETK_TEXT_EDITABLE_H__
 #define __ETK_TEXT_EDITABLE_H__
 
-#include "./../interface/InterfaceDefs.h>
-#include "./../interface/Control.h>
+#include "./../interface/InterfaceDefs.h"
+#include "./../interface/Control.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

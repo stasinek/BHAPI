@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../kernel/Kernel.h>
-#include "./../support/String.h>
-#include "./../support/List.h>
-#include "./../support/Locker.h>
-#include "./../support/Autolock.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/String.h"
+#include "./../support/List.h"
+#include "./../support/Locker.h"
+#include "./../support/Autolock.h"
 
-#include "./../private/PrivateApplication.h>
-#include "./../private/PrivateHandler.h>
+#include "./../private/PrivateApplication.h"
+#include "./../private/PrivateHandler.h"
 
 #include "Handler.h"
 #include "Looper.h"

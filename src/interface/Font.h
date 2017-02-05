@@ -31,7 +31,7 @@
 #define __ETK_FONT_H__
 
 #include "./../support/SupportDefs.h"
-#include "./../support/String.h>
+#include "./../support/String.h"
 
 #define E_FONT_FAMILY_LENGTH	127
 #define E_FONT_STYLE_LENGTH	63

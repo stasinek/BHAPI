@@ -26,12 +26,13 @@
  * File: Errors.h
  *
  * --------------------------------------------------------------------------*/
-
 #ifndef __ETK_ERRORS_H__
 #define __ETK_ERRORS_H__
 
+#include <limits.h>
+
 /* Error baselines */
-#define E_GENERAL_ERROR_BASE	E_MININT32
+#define E_GENERAL_ERROR_BASE	INT_MIN
 #define E_OS_ERROR_BASE		E_GENERAL_ERROR_BASE + 0x1000
 #define E_APP_ERROR_BASE	E_GENERAL_ERROR_BASE + 0x2000
 #define E_STORAGE_ERROR_BASE	E_GENERAL_ERROR_BASE + 0x3000

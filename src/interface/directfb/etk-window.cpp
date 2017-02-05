@@ -26,9 +26,11 @@
  * File: etk-window.cpp
  * 
  * --------------------------------------------------------------------------*/
+#ifdef LINUX
+#ifdef DIRECTFB
 
-#include "./../support/Autolock.h>
-#include "./../support/ClassInfo.h>
+#include "./../../support/Autolock.h"
+#include "./../../support/ClassInfo.h"
 
 #include "etk-dfb.h"
 
@@ -916,3 +918,5 @@ EDFBGraphicsWindow::FillArc(EGraphicsContext *dc,
 	return etk_dfb_fill_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle, &fMargins);
 }
 
+#endif /* DIRECTFB */
+#endif /* LINUX */

@@ -29,13 +29,13 @@
 
 #include <math.h>
 
-#include "./../config.h>
-#include "./../support/ClassInfo.h>
-#include "./../support/String.h>
-#include "./../kernel/Kernel.h>
-#include "./../app/Application.h>
-#include "./../support/Autolock.h>
-#include "./../add-ons/graphics/GraphicsEngine.h>
+#include "./../support/SupportDefs.h"
+#include "./../support/ClassInfo.h"
+#include "./../support/String.h"
+#include "./../kernel/Kernel.h"
+#include "./../app/Application.h"
+#include "./../support/Autolock.h"
+#include "./../add-ons/graphics/GraphicsEngine.h"
 
 #include "InterfaceDefs.h"
 #include "View.h"

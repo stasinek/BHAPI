@@ -30,7 +30,7 @@
 #ifndef __ETK_SIMPLE_WM_H__
 #define __ETK_SIMPLE_WM_H__
 
-#include "./../render/Render.h>
+#include "./../../render/Render.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

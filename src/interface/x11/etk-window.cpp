@@ -27,14 +27,16 @@
  *
  * --------------------------------------------------------------------------*/
 
+#ifdef LINUX
+
 #include <stdlib.h>
 
 #include "etk-x11.h"
 
-#include "./../support/Autolock.h>
-#include "./../support/String.h>
-#include "./../support/ClassInfo.h>
-#include "./../app/Application.h>
+#include "./../support/Autolock.h"
+#include "./../support/String.h"
+#include "./../support/ClassInfo.h"
+#include "./../app/Application.h"
 
 
 EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine, eint32 x, eint32 y, euint32 w, euint32 h)
@@ -1082,3 +1084,4 @@ EXGraphicsWindow::CopyTo(EGraphicsContext *_dc_,
 	return retVal;
 }
 
+#endif /* LINUX */

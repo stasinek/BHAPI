@@ -31,8 +31,8 @@
 #ifndef __ETK_GRAPHICS_ENGINE_H__
 #define __ETK_GRAPHICS_ENGINE_H__
 
-#include "./../interface/Window.h>
-#include "./../interface/View.h>
+#include "./../../interface/Window.h"
+#include "./../../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

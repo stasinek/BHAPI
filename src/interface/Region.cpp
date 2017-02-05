@@ -469,9 +469,9 @@ ERegion::Include(ERect rect)
 
 			if(fRects.CountItems() > oldLength)
 			{
-				for(eint32 i = oldLength; i < fRects.CountItems(); i++)
+                for(eint32 j = oldLength; j < fRects.CountItems(); j++)
 				{
-					r = (ERect*)fRects.ItemAt(i);
+                    r = (ERect*)fRects.ItemAt(j);
 					if(r) delete r;
 				}
 				fRects.RemoveItems(oldLength, -1);
@@ -503,7 +503,7 @@ ERegion::Include(const ERegion *region)
 		{
 			if(fRects.CountItems() > oldLength)
 			{
-				for(eint32 i = oldLength; i < fRects.CountItems(); i++)
+                for(eint32 j = oldLength; j < fRects.CountItems(); j++)
 				{
 					ERect *ar = (ERect*)fRects.ItemAt(i);
 					if(ar) delete ar;
@@ -569,8 +569,8 @@ ERegion::Exclude(ERect r)
 		if(fRects.AddList(&(aRegion.fRects))) aRegion.fRects.MakeEmpty();
 		for(eint32 i = 0; i < fRects.CountItems(); i++)
 		{
-			ERect *r = (ERect*)fRects.ItemAt(i);
-			fFrame = (fFrame.IsValid() ? (fFrame | *r) : *r);
+            ERect *sr = (ERect*)fRects.ItemAt(i);
+            fFrame = (fFrame.IsValid() ? (fFrame | *sr) : *sr);
 		}
 	}
 

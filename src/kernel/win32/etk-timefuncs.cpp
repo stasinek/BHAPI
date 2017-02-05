@@ -29,7 +29,7 @@
 
 #include <windows.h>
 
-#include "./../kernel/Kernel.h>
+#include "./../kernel/Kernel.h"
 
 #define SECS_BETWEEN_EPOCHS	E_INT64_CONSTANT(11644473600)
 #define SECS_TO_100NS		10000000

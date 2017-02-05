@@ -31,9 +31,9 @@
 #ifndef __ETK_APPLICATION_H__
 #define __ETK_APPLICATION_H__
 
-#include "./../app/Looper.h>
-#include "./../app/MessageRunner.h>
-#include "./../app/Cursor.h>
+#include "./../app/Looper.h"
+#include "./../app/MessageRunner.h"
+#include "./../app/Cursor.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
@@ -125,6 +125,16 @@ extern _IMPEXP_ETK EMessenger etk_app_messenger;
 extern _IMPEXP_ETK EClipboard etk_clipboard;
 
 #endif /* __cplusplus */
+
+/*#ifdef WIN32
+#ifdef COPYOF_SendMessage
+#define SendMessage COPYOF_SendMessage
+#endif
+#ifdef COPYOF_DispatchMessage
+#define DispatchMessage COPYOF_DispatchMessage
+#endif
+#endif
+*/
 
 #endif /* __ETK_APPLICATION_H__ */
 

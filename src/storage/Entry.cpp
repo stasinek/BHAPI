@@ -39,8 +39,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include "./../config.h>
-#include "./../support/String.h>
+#include "./../support/SupportDefs.h"
+#include "./../support/String.h"
 
 #include "Entry.h"
 #include "Directory.h"
@@ -196,7 +196,7 @@ EEntry::IsHidden() const
 	EString str(fName);
 	str.ReplaceAll("/", "\\");
 
-	if(GetFileAttributes(str.String()) & FILE_ATTRIBUTE_HIDDEN) retVal = true;
+    if(GetFileAttributesA(str.String()) & FILE_ATTRIBUTE_HIDDEN) retVal = true;
 #endif
 
 	return retVal;

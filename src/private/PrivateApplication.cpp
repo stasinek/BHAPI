@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../kernel/OS.h>
-#include "./../support/String.h>
+#include "./../kernel/OS.h"
+#include "./../support/String.h"
 
 #include "PrivateApplication.h"
 

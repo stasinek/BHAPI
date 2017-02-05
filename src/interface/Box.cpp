@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/ClassInfo.h>
-#include "./../interface/StringView.h>
-#include "./../add-ons/theme/ThemeEngine.h>
+#include "./../support/ClassInfo.h"
+#include "./../interface/StringView.h"
+#include "./../add-ons/theme/ThemeEngine.h"
 
 #include "Box.h"
 

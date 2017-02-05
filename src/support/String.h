@@ -32,7 +32,7 @@
 #define __ETK_STRING_H__
 
 #include <stdarg.h>
-#include "./../support/SupportDefs.h"
+#include "SupportDefs.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -279,7 +279,6 @@ public:
 
 	EString 	&operator<<(const char *str);
 	EString 	&operator<<(const EString &str);
-	EString 	&operator<<(char c);
 	EString 	&operator<<(eint8 value);
 	EString 	&operator<<(euint8 value);
 	EString 	&operator<<(eint16 value);

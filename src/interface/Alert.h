@@ -31,8 +31,8 @@
 #ifndef __ETK_ALERT_H__
 #define __ETK_ALERT_H__
 
-#include "./../interface/InterfaceDefs.h>
-#include "./../interface/Window.h>
+#include "./../interface/InterfaceDefs.h"
+#include "./../interface/Window.h"
 
 enum e_alert_type {
 	E_EMPTY_ALERT = 0,

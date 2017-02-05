@@ -30,11 +30,11 @@
 #ifndef __ETK_WINDOW_H__
 #define __ETK_WINDOW_H__
 
-#include "./../support/List.h>
-#include "./../interface/GraphicsDefs.h>
-#include "./../interface/Region.h>
-#include "./../app/Looper.h>
-#include "./../app/MessageRunner.h>
+#include "./../support/List.h"
+#include "./GraphicsDefs.h"
+#include "./Region.h"
+#include "./../app/Looper.h"
+#include "./../app/MessageRunner.h"
 
 typedef enum e_window_type {
 	E_UNTYPED_WINDOW = 0,

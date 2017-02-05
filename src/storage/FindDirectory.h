@@ -30,7 +30,7 @@
 #ifndef __ETK_FIND_DIRECTORY_H__
 #define __ETK_FIND_DIRECTORY_H__ 
 
-#include "./../storage/Path.h>
+#include "./Path.h"
 
 typedef enum {
 	E_BOOT_DIRECTORY = 0,

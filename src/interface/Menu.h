@@ -30,9 +30,9 @@
 #ifndef __ETK_MENU_H__
 #define __ETK_MENU_H__
 
-#include "./../support/List.h>
-#include "./../interface/View.h>
-#include "./../interface/MenuItem.h>
+#include "./../support/List.h"
+#include "./../interface/View.h"
+#include "./../interface/MenuItem.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

@@ -32,6 +32,14 @@
 
 #include "./../support/SupportDefs.h"
 
+#ifdef WIN32
+#include <winsock2.h>
+#include <windows.h>
+#define E_MAXPATH MAX_PATH
+#else
+#define E_MAXPATH 255
+#endif
+
 #ifdef __cplusplus /* Just for C++ */
 
 class _IMPEXP_ETK EPath {

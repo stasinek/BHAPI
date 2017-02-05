@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <be/kernel/OS.h>
+#include <be/kernel/OS.h"
 
-#include "./../kernel/Kernel.h>
+#include "./../kernel/Kernel.h"
 
 // return the number of microseconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
 _IMPEXP_ETK e_bigtime_t etk_real_time_clock_usecs(void)

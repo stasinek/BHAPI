@@ -26,6 +26,7 @@
  * File: etk-application.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BEOS
 
 #include <stdlib.h>
 
@@ -37,11 +38,11 @@
 
 #include "etk-beos-graphics.h"
 
-#include "./../support/Autolock.h>
-#include "./../support/String.h>
-#include "./../kernel/Kernel.h>
-#include "./../app/Application.h>
-#include "./../app/Clipboard.h>
+#include "./../../support/Autolock.h"
+#include "./../../support/String.h"
+#include "./../../kernel/Kernel.h"
+#include "./../../app/Application.h"
+#include "./../../app/Clipboard.h"
 
 
 static void etk_beos_clipboard_changed()
@@ -578,3 +579,4 @@ EBeGraphicsEngine::GetDefaultCursor(ECursor *cursor)
 	return E_OK;
 }
 
+#endif /* BEOS */

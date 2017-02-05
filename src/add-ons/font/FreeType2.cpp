@@ -31,16 +31,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <ft2build.h>
+#include "./../../../../../freetype/include/ft2build.h"
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
 
-#include "./../config.h>
-#include "./../add-ons/font/FontEngine.h>
-#include "./../support/StringArray.h>
-#include "./../support/Locker.h>
-#include "./../support/Autolock.h>
-#include "./../storage/Directory.h>
+#include "./../../support/SupportDefs.h"
+#include "./../../add-ons/font/FontEngine.h"
+#include "./../../support/StringArray.h"
+#include "./../../support/Locker.h"
+#include "./../../support/Autolock.h"
+#include "./../../storage/Directory.h"
 
 #ifdef ETK_OS_BEOS
 #define FT_ENCODING_UNICODE		ft_encoding_unicode

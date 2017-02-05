@@ -29,10 +29,10 @@
 
 #include <windows.h>
 
-#include "./../kernel/Kernel.h>
-#include "./../support/String.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/String.h"
 
-#include "./../private/PrivateApplication.h>
+#include "./../private/PrivateApplication.h"
 
 
 HINSTANCE etk_dll_hinstance = NULL;

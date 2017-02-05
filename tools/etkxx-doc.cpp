@@ -27,13 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <stdio.h>
-#include <string.h>
+#include <stdio.h"
+#include <string.h"
 
-#include "./../support/StringArray.h>
-#include "./../storage/Path.h>
-#include "./../storage/File.h>
-#include "./../xml/SimpleXmlParser.h>
+#include "./../support/StringArray.h"
+#include "./../storage/Path.h"
+#include "./../storage/File.h"
+#include "./../xml/SimpleXmlParser.h"
 
 #define BUFFER_SIZE	1024
 

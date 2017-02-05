@@ -44,7 +44,8 @@ extern HINSTANCE etk_dll_hinstance;
 #endif // __BEOS__
 
 
-#include "./../support/String.h>
+#include "./../support/SupportDefs.h"
+#include "./../support/String.h"
 
 #include "FindDirectory.h"
 
@@ -59,7 +60,7 @@ e_status_t e_find_directory(e_directory_which which, EPath *path)
 
 	// here we find directory contains libetk.dll
 	bzero(buffer, sizeof(buffer));
-	if(GetModuleFileName((HMODULE)etk_dll_hinstance, buffer, E_MAXPATH) == 0) return E_ERROR;
+    if(GetModuleFileNameA((HMODULE)etk_dll_hinstance, buffer, E_MAXPATH) == 0) return E_ERROR;
 	EPath prefixPath;
 	prefixPath.SetTo(buffer);
 	prefixPath.GetParent(&prefixPath);
@@ -73,7 +74,7 @@ e_status_t e_find_directory(e_directory_which which, EPath *path)
 	{
 		DWORD len = E_MAXPATH;
 		bzero(buffer, sizeof(buffer));
-		if(GetUserProfileDirectory(hToken, buffer, &len) != 0) homeDir = buffer;
+        if(GetUserProfileDirectoryA(hToken, buffer, &len) != 0) homeDir = buffer;
 		CloseHandle(hToken);
 	}
 #endif
@@ -82,14 +83,14 @@ e_status_t e_find_directory(e_directory_which which, EPath *path)
 		char userName[1025];
 		DWORD userNameLen = (DWORD)sizeof(userName);
 		bzero(userName, sizeof(userName));
-		homeDir << prefixPath.Path() << "/." << (GetUserName(userName, &userNameLen) == 0 ? "user" : userName);
+        homeDir << prefixPath.Path() << "/." << (GetUserNameA(userName, &userNameLen) == 0 ? "user" : userName);
 	}
 
 	bzero(buffer, sizeof(buffer));
 	switch(which)
 	{
 		case E_BOOT_DIRECTORY:
-			if(GetWindowsDirectory(buffer, E_MAXPATH) != 0)
+            if(GetWindowsDirectoryA(buffer, E_MAXPATH) != 0)
 			{
 				buffer[3] = '\0';
 				if(path->SetTo(buffer) == E_OK) retVal = E_OK;
@@ -97,7 +98,7 @@ e_status_t e_find_directory(e_directory_which which, EPath *path)
 			break;
 
 		case E_APPS_DIRECTORY:
-			if(GetWindowsDirectory(buffer, E_MAXPATH) != 0)
+            if(GetWindowsDirectoryA(buffer, E_MAXPATH) != 0)
 			{
 				buffer[3] = '\0';
 				if(path->SetTo(buffer, "Program Files") == E_OK) retVal = E_OK;
@@ -118,7 +119,7 @@ e_status_t e_find_directory(e_directory_which which, EPath *path)
 			     path->GetParent(path) != E_OK ||
 			     path->Append("lib", true) != E_OK))
 				retVal = E_OK;
-			else if(!(GetSystemDirectory(buffer, E_MAXPATH) == 0 || path->SetTo(buffer) != E_OK))
+            else if(!(GetSystemDirectoryA(buffer, E_MAXPATH) == 0 || path->SetTo(buffer) != E_OK))
 				retVal = E_OK;
 			break;
 
@@ -135,7 +136,7 @@ e_status_t e_find_directory(e_directory_which which, EPath *path)
 			break;
 
 		case E_TEMP_DIRECTORY:
-			if(!(GetTempPath(E_MAXPATH, buffer) == 0 || path->SetTo(buffer) != E_OK)) retVal = E_OK;
+            if(!(GetTempPathA(E_MAXPATH, buffer) == 0 || path->SetTo(buffer) != E_OK)) retVal = E_OK;
 			break;
 
 		case E_USER_DIRECTORY:

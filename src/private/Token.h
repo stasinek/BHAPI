@@ -30,7 +30,7 @@
 #ifndef __ETK_PRIVATE_TOKEN_H__
 #define __ETK_PRIVATE_TOKEN_H__
 
-#include "./../support/Locker.h>
+#include "./../support/Locker.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

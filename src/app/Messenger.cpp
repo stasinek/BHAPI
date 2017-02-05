@@ -29,12 +29,12 @@
 
 #include <stdlib.h>
 
-#include "./../kernel/Kernel.h>
-#include "./../support/ClassInfo.h>
-#include "./../support/Locker.h>
-#include "./../support/Autolock.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/ClassInfo.h"
+#include "./../support/Locker.h"
+#include "./../support/Autolock.h"
 
-#include "./../private/PrivateHandler.h>
+#include "./../private/PrivateHandler.h"
 
 #include "Messenger.h"
 

@@ -32,7 +32,7 @@
 #ifndef __ETK_MESSAGE_FILTER_H__
 #define __ETK_MESSAGE_FILTER_H__
 
-#include "./../app/Handler.h>
+#include "./../app/Handler.h"
 
 typedef enum e_filter_result {
 	E_SKIP_MESSAGE,

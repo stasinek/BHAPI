@@ -27,12 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <sys/time.h>
-#include <time.h>
+#include <sys/time.h"
+#include <time.h"
 
-#include "./../config.h>
-#include "./../kernel/Kernel.h>
-#include "./../support/SimpleLocker.h>
+#include "./../config.h"
+#include "./../kernel/Kernel.h"
+#include "./../support/SimpleLocker.h"
 
 #define SECS_TO_US		E_INT64_CONSTANT(1000000)
 

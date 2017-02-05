@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/Locker.h>
-#include "./../support/Autolock.h>
-#include "./../kernel/Kernel.h>
-#include "./../interface/Font.h>
-#include "./../add-ons/graphics/GraphicsEngine.h>
-#include "./../storage/FindDirectory.h>
-#include "./../storage/Directory.h>
+#include "./../support/Locker.h"
+#include "./../support/Autolock.h"
+#include "./../kernel/Kernel.h"
+#include "./../interface/Font.h"
+#include "./../add-ons/graphics/GraphicsEngine.h"
+#include "./../storage/FindDirectory.h"
+#include "./../storage/Directory.h"
 
-#include "./../private/PrivateHandler.h>
+#include "./../private/PrivateHandler.h"
 
 #include "Application.h"
 #include "Clipboard.h"
@@ -241,7 +241,7 @@ EApplication::etk_dispatch_message_runners()
 		{
 			// TODO: replyTo
 			runner->fPrevSendTime = curTime;
-			bool send = (runner->fTarget->SendMessage(runner->fMessage, (EHandler*)NULL, E_INT64_CONSTANT(50000)) == E_OK);
+            bool send = (runner->fTarget->SendMessage(runner->fMessage, (EHandler*)NULL, E_INT64_CONSTANT(50000)) == E_OK);
 
 			if(sRunnerList.ItemAt(i) != (void*)runner || sRunnerMinimumInterval < E_INT64_CONSTANT(0)) {i = 0; continue;}
 			if(send && runner->fCount > 0) runner->fCount -= 1;
@@ -413,7 +413,7 @@ EApplication::MessageReceived(EMessage *msg)
 
 					msg->RemoveMessenger("etk:msg_for_target");
 					if(tMsgr != NULL) msg->RemovePoint("where");
-					msgr.SendMessage(msg);
+                    msgr.SendMessage(msg);
 				}
 				else
 				{
@@ -697,8 +697,8 @@ EApplication::SetCursor(const ECursor *cursor, bool sync)
 	{
 		EMessage msg(E_APP_CURSOR_REQUESTED);
 		msg.AddData("etk:cursor_data", E_ANY_TYPE, cursor->Data(), (size_t)cursor->DataLength(), true);
-		if(sync == false) etk_app_messenger.SendMessage(&msg);
-		else etk_app_messenger.SendMessage(&msg, &msg);
+        if(sync == false) etk_app_messenger.SendMessage(&msg);
+        else etk_app_messenger.SendMessage(&msg, &msg);
 	}
 	else if(fCursor != *cursor)
 	{
@@ -733,7 +733,7 @@ EApplication::ShowCursor()
 	{
 		EMessage msg(E_APP_CURSOR_REQUESTED);
 		msg.AddBool("etk:show_cursor", true);
-		etk_app_messenger.SendMessage(&msg);
+        etk_app_messenger.SendMessage(&msg);
 	}
 	else if(fCursorHidden || fCursorObscure)
 	{
@@ -751,7 +751,7 @@ EApplication::ObscureCursor()
 	{
 		EMessage msg(E_APP_CURSOR_REQUESTED);
 		msg.AddBool("etk:obscure_cursor", true);
-		etk_app_messenger.SendMessage(&msg);
+        etk_app_messenger.SendMessage(&msg);
 	}
 	else if(!fCursorHidden && !fCursorObscure)
 	{

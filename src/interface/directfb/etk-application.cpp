@@ -26,17 +26,19 @@
  * File: etk-application.cpp
  * 
  * --------------------------------------------------------------------------*/
+#ifdef LINUX
+#ifdef DIRECTFB
 
 #include <string.h>
 
 #include "etk-dfb.h"
 
-#include "./../kernel/Kernel.h>
-#include "./../support/Autolock.h>
-#include "./../support/ClassInfo.h>
-#include "./../support/StringArray.h>
-#include "./../app/Clipboard.h>
-#include "./../app/Application.h>
+#include "./../../kernel/Kernel.h"
+#include "./../../support/Autolock.h"
+#include "./../../support/ClassInfo.h"
+#include "./../../support/StringArray.h"
+#include "./../../app/Clipboard.h"
+#include "./../../app/Application.h"
 
 #ifdef ETK_OS_LINUX
 extern bool etk_get_prog_argc_argv_linux(EString &progName, EStringArray &progArgv);
@@ -1080,3 +1082,5 @@ EDFBGraphicsEngine::ConvertRegion(const ERegion *region, DFBRegion **dfbRegions,
 	return(*nRegions != 0);
 }
 
+#endif /* DIRECTFB */
+#endif /* LINUX */

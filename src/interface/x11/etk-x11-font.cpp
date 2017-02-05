@@ -26,6 +26,7 @@
  * File: etk-x11-font.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef LINUX
 
 #include "etk-x11.h"
 
@@ -36,12 +37,12 @@
 
 #include "etk-x11.h"
 
-#include "./../add-ons/font/FontEngine.h>
-#include "./../support/ClassInfo.h>
-#include "./../support/List.h>
-#include "./../support/Autolock.h>
-#include "./../interface/Window.h>
-#include "./../interface/View.h>
+#include "./../add-ons/font/FontEngine.h"
+#include "./../support/ClassInfo.h"
+#include "./../support/List.h"
+#include "./../support/Autolock.h"
+#include "./../interface/Window.h"
+#include "./../interface/View.h"
 
 
 class EFontX11 : public EFontEngine {
@@ -1262,3 +1263,4 @@ EXGraphicsEngine::UpdateFonts(bool check_only)
 	return retVal;
 }
 
+#endif /* LINUX */

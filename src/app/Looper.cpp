@@ -29,13 +29,13 @@
 
 #include <stdlib.h>
 
-#include "./../kernel/Kernel.h>
-#include "./../support/Locker.h>
-#include "./../support/Autolock.h>
-#include "./../support/ClassInfo.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/Locker.h"
+#include "./../support/Autolock.h"
+#include "./../support/ClassInfo.h"
 
-#include "./../private/Token.h>
-#include "./../private/PrivateHandler.h>
+#include "./../private/Token.h"
+#include "./../private/PrivateHandler.h"
 
 #include "AppDefs.h"
 #include "Application.h"

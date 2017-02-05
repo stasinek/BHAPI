@@ -30,8 +30,8 @@
 #ifndef __ETK_NET_ENDPOINT_H__
 #define __ETK_NET_ENDPOINT_H__
 
-#include "./../net/NetAddress.h>
-#include "./../net/NetBuffer.h>
+#include "./../net/NetAddress.h"
+#include "./../net/NetBuffer.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

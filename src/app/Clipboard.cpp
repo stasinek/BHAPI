@@ -28,10 +28,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../kernel/Kernel.h>
-#include "./../support/String.h>
-#include "./../support/List.h>
-#include "./../support/SimpleLocker.h>
+#include "./../kernel/Kernel.h"
+#include "./../support/String.h"
+#include "./../support/List.h"
+#include "./../support/SimpleLocker.h"
 
 #include "Clipboard.h"
 #include "Application.h"

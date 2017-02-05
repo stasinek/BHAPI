@@ -26,16 +26,18 @@
  * File: etk-dfb-font.cpp
  * 
  * --------------------------------------------------------------------------*/
+#ifdef LINUX
+#ifdef DIRECTFB
 
 #include "etk-dfb.h"
 
-#include "./../add-ons/font/FontEngine.h>
-#include "./../support/ClassInfo.h>
-#include "./../support/Autolock.h>
-#include "./../interface/Window.h>
-#include "./../interface/View.h>
-#include "./../storage/Directory.h>
-#include "./../storage/Path.h>
+#include "./../../add-ons/font/FontEngine.h"
+#include "./../../support/ClassInfo.h"
+#include "./../../support/Autolock.h"
+#include "./../../interface/Window.h"
+#include "./../../interface/View.h"
+#include "./../../storage/Directory.h"
+#include "./../../storage/Path.h"
 
 #define ETK_DIRECTFONT_DEFAULT_SIZE	12
 
@@ -428,3 +430,5 @@ EDFBGraphicsEngine::UpdateFonts(bool check_only)
 	return E_OK;
 }
 
+#endif /* DIRECTFB */
+#endif /* LINUX */

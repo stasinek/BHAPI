@@ -30,8 +30,8 @@
 #ifndef __ETK_MENU_ITEM_H__
 #define __ETK_MENU_ITEM_H__
 
-#include "./../support/Archivable.h>
-#include "./../app/Invoker.h>
+#include "./../support/Archivable.h"
+#include "./../app/Invoker.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

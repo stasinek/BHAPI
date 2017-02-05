@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/ClassInfo.h>
-#include "./../kernel/Kernel.h>
+#include "./../support/ClassInfo.h"
+#include "./../kernel/Kernel.h"
 
 #include "Window.h"
 #include "PopUpMenu.h"

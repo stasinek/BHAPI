@@ -26,18 +26,19 @@
  * File: etk-drawing.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef LINUX
 
-#include "./../config.h>
+#include "./../config.h"
 
 #ifdef HAVE_XRENDER
-#include <X11/extensions/Xrender.h>
+#include <X11/extensions/Xrender.h"
 #endif
 
 #include "etk-x11.h"
 
-#include "./../support/Autolock.h>
-#include "./../support/ClassInfo.h>
-#include "./../render/Pixmap.h>
+#include "./../support/Autolock.h"
+#include "./../support/ClassInfo.h"
+#include "./../render/Pixmap.h"
 
 
 EXGraphicsContext::EXGraphicsContext(EXGraphicsEngine *x11Engine)
@@ -1740,3 +1741,4 @@ EXGraphicsWindow::DrawPixmap(EGraphicsContext *_dc_, const EPixmap *pix,
 	return etk_draw_epixmap(xWindow, fEngine, dc, pix, x, y, w, h, dstX, dstY, dstW, dstH);
 }
 
+#endif /* LINUX */

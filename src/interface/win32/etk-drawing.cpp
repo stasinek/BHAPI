@@ -26,6 +26,7 @@
  * File: etk-drawing.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef WIN32
 
 #include <math.h>
 #ifndef M_PI
@@ -34,9 +35,9 @@
 
 #include "etk-win32gdi.h"
 
-#include "./../support/ClassInfo.h>
-#include "./../support/Autolock.h>
-#include "./../render/Pixmap.h>
+#include "./../../support/ClassInfo.h"
+#include "./../../support/Autolock.h"
+#include "./../../render/Pixmap.h"
 
 
 e_status_t
@@ -1412,3 +1413,4 @@ LRESULT _etk_draw_epixmap(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callb
 	return retVal;
 }
 
+#endif

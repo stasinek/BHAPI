@@ -30,7 +30,7 @@
 #ifndef __ETK_BOX_H__
 #define __ETK_BOX_H__
 
-#include "./../interface/View.h>
+#include "./../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

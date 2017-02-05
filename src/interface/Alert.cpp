@@ -28,12 +28,12 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../support/ClassInfo.h>
-#include "./../kernel/Kernel.h>
-#include "./../app/Invoker.h>
-#include "./../app/Application.h>
-#include "./../add-ons/graphics/GraphicsEngine.h>
-#include "./../render/Pixmap.h>
+#include "./../support/ClassInfo.h"
+#include "./../kernel/Kernel.h"
+#include "./../app/Invoker.h"
+#include "./../app/Application.h"
+#include "./../add-ons/graphics/GraphicsEngine.h"
+#include "./../render/Pixmap.h"
 
 #include "Button.h"
 #include "TextView.h"

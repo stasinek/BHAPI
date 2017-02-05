@@ -31,7 +31,7 @@
 #ifndef __ETK_COLOR_CONTROL_H__
 #define __ETK_COLOR_CONTROL_H__
 
-#include "./../interface/Control.h>
+#include "./../interface/Control.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

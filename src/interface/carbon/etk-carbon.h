@@ -30,8 +30,9 @@
 #ifndef __ETK_CARBON_H__
 #define __ETK_CARBON_H__
 
+#ifdef MACOS
 #include <Carbon/Carbon.h>
-
+#endif /* MACOS */
 
 #endif /* __ETK_CARBON_H__ */
 

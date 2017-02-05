@@ -31,12 +31,12 @@
 #ifndef __ETK_LOOPER_H__
 #define __ETK_LOOPER_H__
 
-#include "./../support/List.h>
-#include "./../kernel/OS.h>
-#include "./../app/AppDefs.h>
-#include "./../app/Handler.h>
-#include "./../app/MessageQueue.h>
-#include "./../app/MessageFilter.h>
+#include "./../support/List.h"
+#include "./../kernel/OS.h"
+#include "./../app/AppDefs.h"
+#include "./../app/Handler.h"
+#include "./../app/MessageQueue.h"
+#include "./../app/MessageFilter.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

@@ -28,8 +28,8 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../app/Application.h>
-#include "./../app/Clipboard.h>
+#include "./../app/Application.h"
+#include "./../app/Clipboard.h"
 
 #include "Window.h"
 #include "TextControl.h"

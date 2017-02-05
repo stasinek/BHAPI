@@ -27,11 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifdef _MSC_VER
-#include "config.h.msvc.win32"
-#endif
-
 #include "./support/SupportDefs.h"
+#define ETK_MAJOR_VERSION 0
+#define ETK_MINOR_VERSION 0
+#define ETK_MICRO_VERSION 1
+#define ETK_INTERFACE_AGE 1
+#define ETK_BINARY_AGE 1
 
 extern "C" {
 
