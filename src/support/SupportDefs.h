@@ -31,10 +31,59 @@
 #ifndef __ETK_SUPPORT_DEFS_H__
 #define __ETK_SUPPORT_DEFS_H__
 
+/* The size of a `float', as computed by sizeof. */
+#define SIZEOF_FLOAT 4
+
+/* The size of a `int', as computed by sizeof. */
+#define SIZEOF_INT 4
+
+/* The size of a `long', as computed by sizeof. */
+#define SIZEOF_LONG 4
+
+/* The size of a `long long', as computed by sizeof. */
+#if _MSC_VER > 0x4b0
+	#define SIZEOF_LONG_LONG 8
+#endif
+
+/* The size of a `short', as computed by sizeof. */
+#define SIZEOF_SHORT 2
+
+/* The size of a `void *', as computed by sizeof. */
+#define SIZEOF_VOID_P 4
+
+/* The size of a `__int64', as computed by sizeof. */
+#define SIZEOF___INT64 8
+
+/* If using the C implementation of alloca, define if you know the
+   direction of stack growth for your system; otherwise it will be
+   automatically deduced at run-time.
+	STACK_DIRECTION > 0 => grows toward higher addresses
+	STACK_DIRECTION < 0 => grows toward lower addresses
+	STACK_DIRECTION = 0 => direction of growth unknown */
+/* #undef STACK_DIRECTION */
+
+/* Define to 1 if you have the ANSI C header files. */
+#define STDC_HEADERS 1
+
+/* Define to 1 if the X Window System is missing or not being used. */
+#define X_DISPLAY_MISSING 1
+
+/* Define to empty if `const' does not conform to ANSI C. */
+/* #undef const */
+
+/* Define to `__inline__' or `__inline' if that's what the C compiler
+   calls it, or to nothing if 'inline' is not supported under any name.  */
+#ifndef __cplusplus
+#define inline __inline
+#endif
+
+/* Define to `unsigned' if <sys/types.h> does not define. */
+/* #undef size_t */
+
+#define ETK_COMPILATION
 #ifdef _WIN32
 #define ETK_OS_WIN32
 #endif
-#define ETK_COMPILATION
 
 #include <string.h> /* for bzero */
 #include "Errors.h"
@@ -51,8 +100,16 @@
 #define E_MAXFLOAT FLT_MAX
 #define E_MINFLOAT FLT_MIN
 
-typedef char32_t eunichar32;
-typedef char16_t eunichar;
+#ifndef SIZEOF_FLOAT
+#define SIZEOF_FLOAT 4
+#endif
+
+#ifndef SIZEOF_DOUBLE
+#define SIZEOF_DOUBLE 8
+#endif
+
+typedef __int32 eunichar32;
+typedef __int16 eunichar;
 
 typedef	__int8 eint8;
 typedef	unsigned __int8 euint8;
@@ -150,7 +207,7 @@ typedef	eint8	bool;
 #  endif /* !__cplusplus */
 #endif
 
-#ifdef WIN32
+#ifdef ETK_OS_WIN32
 #	ifdef __GNUC__
 #		ifndef _stdcall
 #		define _stdcall  __attribute__((stdcall))
@@ -169,8 +226,6 @@ typedef	eint8	bool;
 #  endif
 #endif /* _EXPORT */
 
-
-
 #ifndef _IMPORT
 #  if defined(ETK_OS_WIN32) || defined(ETK_OS_CYGWIN) || (defined(ETK_OS_BEOS) && defined(ETK_BIG_ENDIAN))
 #    define _IMPORT __declspec(dllimport)
@@ -178,7 +233,6 @@ typedef	eint8	bool;
 #    define _IMPORT
 #  endif
 #endif /* _IMPORT */
-
 
 #ifndef _LOCAL
 #  if (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 3 && __GNUC_PATCHLEVEL__ > 3) && !defined(__MINGW32__)
@@ -189,9 +243,9 @@ typedef	eint8	bool;
 #endif /* _LOCAL */
 
 #ifdef ETK_COMPILATION
-	#define _IMPEXP_ETK _EXPORT
+    #define _IMPEXP_ETK _EXPORT
 #else /* !ETK_COMPILATION */
-	#define _IMPEXP_ETK _IMPORT
+    #define _IMPEXP_ETK _IMPORT
 #endif /* ETK_COMPILATION */
 
 #ifdef __cplusplus
@@ -212,6 +266,7 @@ extern _IMPEXP_ETK const euint16 etk_binary_age;
 
 #ifdef ETK_OS_WIN32
 	#ifdef _WIN32
+#include <winsock2.h>
         #include <windows.h>
 	#endif
 	#ifdef PostMessage

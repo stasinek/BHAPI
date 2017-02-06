@@ -189,14 +189,6 @@ EStreamIO::operator<<(bool value)
 
 
 EStreamIO&
-EStreamIO::operator<<(char c)
-{
-	Write(&c, 1);
-	return *this;
-}
-
-
-EStreamIO&
 EStreamIO::operator<<(const char *str)
 {
 	if(!(str == NULL || *str == 0)) Write(str, strlen(str));

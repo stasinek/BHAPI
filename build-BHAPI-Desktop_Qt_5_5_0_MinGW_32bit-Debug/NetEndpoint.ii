@@ -502,17 +502,9 @@ extern "C" {
 # 56 "../src/net/NetEndpoint.cpp"
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 1 3
 # 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 1 3
-# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
-
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_unicode.h" 1 3
-# 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
-
-
-
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock.h" 1 3
-# 16 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
-# 25 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 22 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/windows.h" 1 3
 # 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/windows.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 1 3
@@ -16922,7 +16914,8 @@ typedef DWORD (__attribute__((__stdcall__)) PM_QUERY_PROC)(LPDWORD,LPVOID *,LPDW
 # 193 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winperf.h" 2 3
 # 91 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/windows.h" 2 3
 
-
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock.h" 1 3
+# 93 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/windows.h" 2 3
 
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/wincrypt.h" 1 3
@@ -43636,10 +43629,10 @@ extern "C" {
 # 509 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/imm.h" 3
 }
 # 131 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/windows.h" 2 3
-# 26 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
-# 46 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 23 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 43 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/psdk_inc/_ws1_undef.h" 1 3
-# 47 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 44 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
 
 
 
@@ -43654,7 +43647,7 @@ struct timeval
  long tv_sec;
  long tv_usec;
 };
-# 55 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 52 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_bsd_types.h" 1 3
 # 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_bsd_types.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 1 3
@@ -43673,7 +43666,7 @@ typedef unsigned long u_long;
 __extension__
 
 typedef unsigned long long u_int64;
-# 56 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 53 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/inaddr.h" 1 3
 # 15 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/inaddr.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_bsd_types.h" 1 3
@@ -43686,11 +43679,11 @@ typedef struct in_addr {
     u_long S_addr;
   } S_un;
 } IN_ADDR, *PIN_ADDR, *LPIN_ADDR;
-# 57 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 54 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/psdk_inc/_socket_types.h" 1 3
 # 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/psdk_inc/_socket_types.h" 3
 typedef UINT_PTR SOCKET;
-# 58 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 55 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/psdk_inc/_fd_types.h" 1 3
 # 21 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/psdk_inc/_fd_types.h" 3
 typedef struct fd_set
@@ -43711,7 +43704,7 @@ int __attribute__((__stdcall__)) __WSAFDIsSet(SOCKET,fd_set *);
 typedef struct fd_set FD_SET;
 typedef struct fd_set *PFD_SET;
 typedef struct fd_set *LPFD_SET;
-# 59 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 56 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/psdk_inc/_ip_types.h" 1 3
 # 16 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/psdk_inc/_ip_types.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_bsd_types.h" 1 3
@@ -43801,7 +43794,7 @@ typedef struct linger *LPLINGER;
 typedef struct timeval TIMEVAL;
 typedef struct timeval *PTIMEVAL;
 typedef struct timeval *LPTIMEVAL;
-# 60 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 57 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/psdk_inc/_wsadata.h" 1 3
 # 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/psdk_inc/_wsadata.h" 3
 typedef struct WSAData {
@@ -43821,7 +43814,7 @@ typedef struct WSAData {
  char *lpVendorInfo;
 
 } WSADATA, *LPWSADATA;
-# 61 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 58 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ws2def.h" 1 3
 # 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ws2def.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 1 3
@@ -43847,11 +43840,11 @@ typedef struct _SCOPE_ID {
     ULONG Value;
   };
 } SCOPE_ID, *PSCOPE_ID;
-# 62 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 59 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
 
 
 extern "C" {
-# 262 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 259 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
   struct sockaddr_storage {
     short ss_family;
     char __ss_pad1[((8) - sizeof (short))];
@@ -43859,16 +43852,16 @@ extern "C" {
     __extension__ long long __ss_align;
     char __ss_pad2[(128 - (sizeof (short) + ((8) - sizeof (short)) + (8)))];
   };
-# 349 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 346 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/psdk_inc/_wsa_errnos.h" 1 3
-# 350 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 347 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
 
 
 
 
 
   typedef struct _OVERLAPPED *LPWSAOVERLAPPED;
-# 372 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 369 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
   typedef struct _WSABUF {
     u_long len;
     char *buf;
@@ -43917,14 +43910,14 @@ typedef ULONG SERVICETYPE;
     QOS_OBJECT_HDR ObjectHdr;
     ULONG ShapingRate;
   } QOS_SHAPING_RATE, *LPQOS_SHAPING_RATE;
-# 378 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 375 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
 
   typedef struct _QualityOfService {
     FLOWSPEC SendingFlowspec;
     FLOWSPEC ReceivingFlowspec;
     WSABUF ProviderSpecific;
   } QOS,*LPQOS;
-# 393 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 390 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 typedef unsigned int GROUP;
 
 
@@ -43934,7 +43927,7 @@ typedef unsigned int GROUP;
     long lNetworkEvents;
     int iErrorCode[10];
   } WSANETWORKEVENTS,*LPWSANETWORKEVENTS;
-# 412 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 409 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
   typedef struct _WSAPROTOCOLCHAIN {
     int ChainLen;
 
@@ -43991,7 +43984,7 @@ typedef unsigned int GROUP;
 
   typedef WSAPROTOCOL_INFOW WSAPROTOCOL_INFO;
   typedef LPWSAPROTOCOL_INFOW LPWSAPROTOCOL_INFO;
-# 543 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 540 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
   typedef int (__attribute__((__stdcall__)) *LPCONDITIONPROC)(LPWSABUF lpCallerId,LPWSABUF lpCallerData,LPQOS lpSQOS,LPQOS lpGQOS,LPWSABUF lpCalleeId,LPWSABUF lpCalleeData,GROUP *g,DWORD_PTR dwCallbackData);
   typedef void (__attribute__((__stdcall__)) *LPWSAOVERLAPPED_COMPLETION_ROUTINE)(DWORD dwError,DWORD cbTransferred,LPWSAOVERLAPPED lpOverlapped,DWORD dwFlags);
 
@@ -44035,7 +44028,7 @@ typedef unsigned int GROUP;
   typedef struct sockaddr_storage *PSOCKADDR_STORAGE;
   typedef struct sockaddr_storage *LPSOCKADDR_STORAGE;
   typedef u_short ADDRESS_FAMILY;
-# 665 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 662 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
   typedef struct _SOCKET_ADDRESS {
     LPSOCKADDR lpSockaddr;
     INT iSockaddrLength;
@@ -44108,7 +44101,7 @@ typedef unsigned int GROUP;
   typedef WSAQUERYSETW WSAQUERYSET;
   typedef PWSAQUERYSETW PWSAQUERYSET;
   typedef LPWSAQUERYSETW LPWSAQUERYSET;
-# 771 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 768 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
   typedef enum _WSAESETSERVICEOP {
     RNRSERVICE_REGISTER = 0,
     RNRSERVICE_DEREGISTER,
@@ -44184,7 +44177,7 @@ typedef unsigned int GROUP;
     WSABUF Control;
     DWORD dwFlags;
   } WSAMSG,*PWSAMSG,*LPWSAMSG;
-# 975 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 972 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
   __attribute__((dllimport)) SOCKET __attribute__((__stdcall__)) accept(SOCKET s,struct sockaddr *addr,int *addrlen);
   __attribute__((dllimport)) int __attribute__((__stdcall__)) bind(SOCKET s,const struct sockaddr *name,int namelen);
   __attribute__((dllimport)) int __attribute__((__stdcall__)) closesocket(SOCKET s);
@@ -44289,7 +44282,7 @@ typedef unsigned int GROUP;
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSASetServiceA(LPWSAQUERYSETA lpqsRegInfo,WSAESETSERVICEOP essoperation,DWORD dwControlFlags);
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSASetServiceW(LPWSAQUERYSETW lpqsRegInfo,WSAESETSERVICEOP essoperation,DWORD dwControlFlags);
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAProviderConfigChange(LPHANDLE lpNotificationHandle,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
-# 1227 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
 # 57 "../src/net/NetEndpoint.cpp" 2
 
@@ -44306,7 +44299,7 @@ typedef unsigned int GROUP;
 # 1 "../src/net/./../net/./../support/Archivable.h" 1
 # 33 "../src/net/./../net/./../support/Archivable.h"
 # 1 "../src/net/./../net/./../support/SupportDefs.h" 1
-# 40 "../src/net/./../net/./../support/SupportDefs.h"
+# 89 "../src/net/./../net/./../support/SupportDefs.h"
 # 1 "../src/net/./../net/./../support/Errors.h" 1
 # 32 "../src/net/./../net/./../support/Errors.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
@@ -44374,12 +44367,12 @@ enum {
  E_LINK_LIMIT,
  E_NAME_TOO_LONG,
 };
-# 41 "../src/net/./../net/./../support/SupportDefs.h" 2
+# 90 "../src/net/./../net/./../support/SupportDefs.h" 2
 
 
 
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 45 "../src/net/./../net/./../support/SupportDefs.h" 2
+# 94 "../src/net/./../net/./../support/SupportDefs.h" 2
 
 
 
@@ -44426,12 +44419,10 @@ extern long double __attribute__((__cdecl__)) _chgsignl (long double);
 
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 51 "../src/net/./../net/./../support/SupportDefs.h" 2
-
-
-
-typedef char32_t eunichar32;
-typedef char16_t eunichar;
+# 100 "../src/net/./../net/./../support/SupportDefs.h" 2
+# 111 "../src/net/./../net/./../support/SupportDefs.h"
+typedef int eunichar32;
+typedef short eunichar;
 
 typedef char eint8;
 typedef unsigned char euint8;
@@ -44474,7 +44465,7 @@ enum {
     E_MIME_TYPE = 'MIME',
  E_UNKNOWN_TYPE = 'UNKN'
 };
-# 198 "../src/net/./../net/./../support/SupportDefs.h"
+# 252 "../src/net/./../net/./../support/SupportDefs.h"
 extern "C" {
 
 
@@ -44486,7 +44477,7 @@ extern __attribute__((dllexport)) const euint16 etk_binary_age;
 
 
 }
-# 238 "../src/net/./../net/./../support/SupportDefs.h"
+# 293 "../src/net/./../net/./../support/SupportDefs.h"
 enum {
  E_SEEK_SET = 0,
  E_SEEK_CUR,
@@ -45056,11 +45047,11 @@ __attribute__((dllexport)) void ETK_WARNING(const char *format, ...);
 __attribute__((dllexport)) void ETK_ERROR(const char *format, ...);
 # 121 "../src/net/./../net/./../support/./../kernel/Debug.h"
 }
-# 246 "../src/net/./../net/./../support/SupportDefs.h" 2
+# 301 "../src/net/./../net/./../support/SupportDefs.h" 2
 # 34 "../src/net/./../net/./../support/Archivable.h" 2
 # 1 "../src/net/./../net/./../support/./../app/Message.h" 1
 # 34 "../src/net/./../net/./../support/./../app/Message.h"
-# 1 "../src/net/./../net/./../support/./../app/./../support/SupportDefs.h" 1
+# 1 "../src/net/./../net/./../support/./../app/../support/SupportDefs.h" 1
 # 35 "../src/net/./../net/./../support/./../app/Message.h" 2
 
 # 1 "../src/net/./../net/./../support/./../app/./../kernel/OS.h" 1
@@ -45286,6 +45277,7 @@ __attribute__((dllexport)) e_status_t etk_get_image_symbol(void *image, const ch
 
 
 extern "C" {
+
 
 
 

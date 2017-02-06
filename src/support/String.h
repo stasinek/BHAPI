@@ -38,6 +38,7 @@
 extern "C" {
 #endif /* __cplusplus */
 
+#define e_strncasecmp(a,b,c) strncasecmp(a,b,c)
 /* the result must be free by "free" */
 _IMPEXP_ETK char*		e_strdup(const char *src);
 _IMPEXP_ETK char*		e_strndup(const char *src, eint32 length);

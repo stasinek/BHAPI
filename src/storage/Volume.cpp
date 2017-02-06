@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../config.h"
+#include "./../support/supportDefs.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -35,15 +35,15 @@
 #endif // _WIN32
 
 #ifdef HAVE_MNTENT_H
-#include <stdio.h"
-#include <mntent.h"
+#include <stdio.h>
+#include <mntent.h>
 #endif
 
 #ifdef __BEOS__
-#include <be/storage/Entry.h"
-#include <be/storage/Directory.h"
-#include <be/storage/Path.h"
-#include <be/storage/VolumeRoster.h"
+#include <be/storage/Entry.h>
+#include <be/storage/Directory.h>
+#include <be/storage/Path.h>
+#include <be/storage/VolumeRoster.h>
 #endif
 
 #include "Volume.h"
@@ -215,7 +215,7 @@ EVolume::SetTo(e_dev_t dev)
 		EString nameStr;
 		char nameBuf[301];
 		bzero(nameBuf, 301);
-		if(!(GetVolumeInformation(dirname, nameBuf, 300, NULL, NULL, NULL, NULL, 0) == 0 || nameBuf[0] == 0))
+        if(!(GetVolumeInformationA(dirname, nameBuf, 300, NULL, NULL, NULL, NULL, 0) == 0 || nameBuf[0] == 0))
 		{
 			WCHAR wStr[301];
 			bzero(wStr, sizeof(WCHAR) * 301);

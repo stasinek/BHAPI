@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../config.h"
+#include "./../support/SupportDefs.h"
 
 #include "ByteOrder.h"
 

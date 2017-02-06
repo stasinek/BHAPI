@@ -45000,7 +45000,7 @@ extern "C" {
 
 
 # 1 "../src/kernel/./../support/SupportDefs.h" 1
-# 40 "../src/kernel/./../support/SupportDefs.h"
+# 89 "../src/kernel/./../support/SupportDefs.h"
 # 1 "../src/kernel/./../support/Errors.h" 1
 # 32 "../src/kernel/./../support/Errors.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
@@ -45068,12 +45068,12 @@ enum {
  E_LINK_LIMIT,
  E_NAME_TOO_LONG,
 };
-# 41 "../src/kernel/./../support/SupportDefs.h" 2
+# 90 "../src/kernel/./../support/SupportDefs.h" 2
 
 
 
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 45 "../src/kernel/./../support/SupportDefs.h" 2
+# 94 "../src/kernel/./../support/SupportDefs.h" 2
 
 
 
@@ -45120,12 +45120,10 @@ extern long double __attribute__((__cdecl__)) _chgsignl (long double);
 
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 51 "../src/kernel/./../support/SupportDefs.h" 2
-
-
-
-typedef char32_t eunichar32;
-typedef char16_t eunichar;
+# 100 "../src/kernel/./../support/SupportDefs.h" 2
+# 111 "../src/kernel/./../support/SupportDefs.h"
+typedef int eunichar32;
+typedef short eunichar;
 
 typedef char eint8;
 typedef unsigned char euint8;
@@ -45168,7 +45166,7 @@ enum {
     E_MIME_TYPE = 'MIME',
  E_UNKNOWN_TYPE = 'UNKN'
 };
-# 198 "../src/kernel/./../support/SupportDefs.h"
+# 252 "../src/kernel/./../support/SupportDefs.h"
 extern "C" {
 
 
@@ -45180,7 +45178,442 @@ extern __attribute__((dllexport)) const euint16 etk_binary_age;
 
 
 }
-# 238 "../src/kernel/./../support/SupportDefs.h"
+
+
+
+
+
+
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 1 3
+# 43 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/psdk_inc/_ws1_undef.h" 1 3
+# 44 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+# 52 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_bsd_types.h" 1 3
+# 53 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+
+
+
+
+
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ws2def.h" 1 3
+# 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ws2def.h" 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 1 3
+# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ws2def.h" 2 3
+# 19 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ws2def.h" 3
+typedef enum _SCOPE_LEVEL {
+  ScopeLevelInterface = 1,
+  ScopeLevelLink = 2,
+  ScopeLevelSubnet = 3,
+  ScopeLevelAdmin = 4,
+  ScopeLevelSite = 5,
+  ScopeLevelOrganization = 8,
+  ScopeLevelGlobal = 14,
+  ScopeLevelCount = 16
+} SCOPE_LEVEL;
+
+typedef struct _SCOPE_ID {
+  __extension__ union {
+    __extension__ struct {
+ ULONG Zone : 28;
+ ULONG Level : 4;
+    };
+    ULONG Value;
+  };
+} SCOPE_ID, *PSCOPE_ID;
+# 59 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+
+
+extern "C" {
+# 259 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+  struct sockaddr_storage {
+    short ss_family;
+    char __ss_pad1[((8) - sizeof (short))];
+
+    __extension__ long long __ss_align;
+    char __ss_pad2[(128 - (sizeof (short) + ((8) - sizeof (short)) + (8)))];
+  };
+# 346 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/psdk_inc/_wsa_errnos.h" 1 3
+# 347 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+
+
+
+
+
+  typedef struct _OVERLAPPED *LPWSAOVERLAPPED;
+# 369 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+  typedef struct _WSABUF {
+    u_long len;
+    char *buf;
+  } WSABUF,*LPWSABUF;
+
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/qos.h" 1 3
+# 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/qos.h" 3
+typedef ULONG SERVICETYPE;
+# 32 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/qos.h" 3
+  typedef struct _flowspec {
+    ULONG TokenRate;
+    ULONG TokenBucketSize;
+    ULONG PeakBandwidth;
+    ULONG Latency;
+    ULONG DelayVariation;
+    SERVICETYPE ServiceType;
+    ULONG MaxSduSize;
+    ULONG MinimumPolicedSize;
+  } FLOWSPEC,*PFLOWSPEC,*LPFLOWSPEC;
+
+
+
+
+  typedef struct _QOS_OBJECT_HDR {
+    ULONG ObjectType;
+    ULONG ObjectLength;
+  } QOS_OBJECT_HDR, *LPQOS_OBJECT_HDR;
+
+
+
+
+
+
+
+  typedef struct _QOS_SD_MODE {
+    QOS_OBJECT_HDR ObjectHdr;
+    ULONG ShapeDiscardMode;
+  } QOS_SD_MODE, *LPQOS_SD_MODE;
+
+
+
+
+
+
+  typedef struct _QOS_SHAPING_RATE {
+    QOS_OBJECT_HDR ObjectHdr;
+    ULONG ShapingRate;
+  } QOS_SHAPING_RATE, *LPQOS_SHAPING_RATE;
+# 375 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 2 3
+
+  typedef struct _QualityOfService {
+    FLOWSPEC SendingFlowspec;
+    FLOWSPEC ReceivingFlowspec;
+    WSABUF ProviderSpecific;
+  } QOS,*LPQOS;
+# 390 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+typedef unsigned int GROUP;
+
+
+
+
+  typedef struct _WSANETWORKEVENTS {
+    long lNetworkEvents;
+    int iErrorCode[10];
+  } WSANETWORKEVENTS,*LPWSANETWORKEVENTS;
+# 409 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+  typedef struct _WSAPROTOCOLCHAIN {
+    int ChainLen;
+
+    DWORD ChainEntries[7];
+  } WSAPROTOCOLCHAIN,*LPWSAPROTOCOLCHAIN;
+
+
+
+  typedef struct _WSAPROTOCOL_INFOA {
+    DWORD dwServiceFlags1;
+    DWORD dwServiceFlags2;
+    DWORD dwServiceFlags3;
+    DWORD dwServiceFlags4;
+    DWORD dwProviderFlags;
+    GUID ProviderId;
+    DWORD dwCatalogEntryId;
+    WSAPROTOCOLCHAIN ProtocolChain;
+    int iVersion;
+    int iAddressFamily;
+    int iMaxSockAddr;
+    int iMinSockAddr;
+    int iSocketType;
+    int iProtocol;
+    int iProtocolMaxOffset;
+    int iNetworkByteOrder;
+    int iSecurityScheme;
+    DWORD dwMessageSize;
+    DWORD dwProviderReserved;
+    CHAR szProtocol[255 +1];
+  } WSAPROTOCOL_INFOA,*LPWSAPROTOCOL_INFOA;
+
+  typedef struct _WSAPROTOCOL_INFOW {
+    DWORD dwServiceFlags1;
+    DWORD dwServiceFlags2;
+    DWORD dwServiceFlags3;
+    DWORD dwServiceFlags4;
+    DWORD dwProviderFlags;
+    GUID ProviderId;
+    DWORD dwCatalogEntryId;
+    WSAPROTOCOLCHAIN ProtocolChain;
+    int iVersion;
+    int iAddressFamily;
+    int iMaxSockAddr;
+    int iMinSockAddr;
+    int iSocketType;
+    int iProtocol;
+    int iProtocolMaxOffset;
+    int iNetworkByteOrder;
+    int iSecurityScheme;
+    DWORD dwMessageSize;
+    DWORD dwProviderReserved;
+    WCHAR szProtocol[255 +1];
+  } WSAPROTOCOL_INFOW,*LPWSAPROTOCOL_INFOW;
+
+  typedef WSAPROTOCOL_INFOW WSAPROTOCOL_INFO;
+  typedef LPWSAPROTOCOL_INFOW LPWSAPROTOCOL_INFO;
+# 540 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+  typedef int (__attribute__((__stdcall__)) *LPCONDITIONPROC)(LPWSABUF lpCallerId,LPWSABUF lpCallerData,LPQOS lpSQOS,LPQOS lpGQOS,LPWSABUF lpCalleeId,LPWSABUF lpCalleeData,GROUP *g,DWORD_PTR dwCallbackData);
+  typedef void (__attribute__((__stdcall__)) *LPWSAOVERLAPPED_COMPLETION_ROUTINE)(DWORD dwError,DWORD cbTransferred,LPWSAOVERLAPPED lpOverlapped,DWORD dwFlags);
+
+
+
+  typedef enum _WSACOMPLETIONTYPE {
+    NSP_NOTIFY_IMMEDIATELY = 0,
+    NSP_NOTIFY_HWND,
+    NSP_NOTIFY_EVENT,
+    NSP_NOTIFY_PORT,
+    NSP_NOTIFY_APC
+  } WSACOMPLETIONTYPE,*PWSACOMPLETIONTYPE,*LPWSACOMPLETIONTYPE;
+
+  typedef struct _WSACOMPLETION {
+    WSACOMPLETIONTYPE Type;
+    union {
+      struct {
+ HWND hWnd;
+ UINT uMsg;
+ WPARAM context;
+      } WindowMessage;
+      struct {
+ LPWSAOVERLAPPED lpOverlapped;
+      } Event;
+      struct {
+ LPWSAOVERLAPPED lpOverlapped;
+ LPWSAOVERLAPPED_COMPLETION_ROUTINE lpfnCompletionProc;
+      } Apc;
+      struct {
+ LPWSAOVERLAPPED lpOverlapped;
+ HANDLE hPort;
+ ULONG_PTR Key;
+      } Port;
+    } Parameters;
+  } WSACOMPLETION,*PWSACOMPLETION,*LPWSACOMPLETION;
+
+
+
+
+  typedef struct sockaddr_storage SOCKADDR_STORAGE;
+  typedef struct sockaddr_storage *PSOCKADDR_STORAGE;
+  typedef struct sockaddr_storage *LPSOCKADDR_STORAGE;
+  typedef u_short ADDRESS_FAMILY;
+# 662 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+  typedef struct _SOCKET_ADDRESS {
+    LPSOCKADDR lpSockaddr;
+    INT iSockaddrLength;
+  } SOCKET_ADDRESS,*PSOCKET_ADDRESS,*LPSOCKET_ADDRESS;
+
+  typedef struct _CSADDR_INFO {
+    SOCKET_ADDRESS LocalAddr;
+    SOCKET_ADDRESS RemoteAddr;
+    INT iSocketType;
+    INT iProtocol;
+  } CSADDR_INFO,*PCSADDR_INFO,*LPCSADDR_INFO;
+
+
+  typedef struct _SOCKET_ADDRESS_LIST {
+    INT iAddressCount;
+    SOCKET_ADDRESS Address[1];
+  } SOCKET_ADDRESS_LIST,*PSOCKET_ADDRESS_LIST,*LPSOCKET_ADDRESS_LIST;
+
+  typedef struct _AFPROTOCOLS {
+    INT iAddressFamily;
+    INT iProtocol;
+  } AFPROTOCOLS,*PAFPROTOCOLS,*LPAFPROTOCOLS;
+
+  typedef enum _WSAEcomparator {
+    COMP_EQUAL = 0,
+    COMP_NOTLESS
+  } WSAECOMPARATOR,*PWSAECOMPARATOR,*LPWSAECOMPARATOR;
+
+  typedef struct _WSAVersion {
+    DWORD dwVersion;
+    WSAECOMPARATOR ecHow;
+  } WSAVERSION,*PWSAVERSION,*LPWSAVERSION;
+
+  typedef struct _WSAQuerySetA {
+    DWORD dwSize;
+    LPSTR lpszServiceInstanceName;
+    LPGUID lpServiceClassId;
+    LPWSAVERSION lpVersion;
+    LPSTR lpszComment;
+    DWORD dwNameSpace;
+    LPGUID lpNSProviderId;
+    LPSTR lpszContext;
+    DWORD dwNumberOfProtocols;
+    LPAFPROTOCOLS lpafpProtocols;
+    LPSTR lpszQueryString;
+    DWORD dwNumberOfCsAddrs;
+    LPCSADDR_INFO lpcsaBuffer;
+    DWORD dwOutputFlags;
+    LPBLOB lpBlob;
+  } WSAQUERYSETA,*PWSAQUERYSETA,*LPWSAQUERYSETA;
+
+  typedef struct _WSAQuerySetW {
+    DWORD dwSize;
+    LPWSTR lpszServiceInstanceName;
+    LPGUID lpServiceClassId;
+    LPWSAVERSION lpVersion;
+    LPWSTR lpszComment;
+    DWORD dwNameSpace;
+    LPGUID lpNSProviderId;
+    LPWSTR lpszContext;
+    DWORD dwNumberOfProtocols;
+    LPAFPROTOCOLS lpafpProtocols;
+    LPWSTR lpszQueryString;
+    DWORD dwNumberOfCsAddrs;
+    LPCSADDR_INFO lpcsaBuffer;
+    DWORD dwOutputFlags;
+    LPBLOB lpBlob;
+  } WSAQUERYSETW,*PWSAQUERYSETW,*LPWSAQUERYSETW;
+
+  typedef WSAQUERYSETW WSAQUERYSET;
+  typedef PWSAQUERYSETW PWSAQUERYSET;
+  typedef LPWSAQUERYSETW LPWSAQUERYSET;
+# 768 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+  typedef enum _WSAESETSERVICEOP {
+    RNRSERVICE_REGISTER = 0,
+    RNRSERVICE_DEREGISTER,
+    RNRSERVICE_DELETE
+  } WSAESETSERVICEOP,*PWSAESETSERVICEOP,*LPWSAESETSERVICEOP;
+
+  typedef struct _WSANSClassInfoA {
+    LPSTR lpszName;
+    DWORD dwNameSpace;
+    DWORD dwValueType;
+    DWORD dwValueSize;
+    LPVOID lpValue;
+  } WSANSCLASSINFOA,*PWSANSCLASSINFOA,*LPWSANSCLASSINFOA;
+
+  typedef struct _WSANSClassInfoW {
+    LPWSTR lpszName;
+    DWORD dwNameSpace;
+    DWORD dwValueType;
+    DWORD dwValueSize;
+    LPVOID lpValue;
+  } WSANSCLASSINFOW,*PWSANSCLASSINFOW,*LPWSANSCLASSINFOW;
+
+  typedef WSANSCLASSINFOW WSANSCLASSINFO;
+  typedef PWSANSCLASSINFOW PWSANSCLASSINFO;
+  typedef LPWSANSCLASSINFOW LPWSANSCLASSINFO;
+
+  typedef struct _WSAServiceClassInfoA {
+    LPGUID lpServiceClassId;
+    LPSTR lpszServiceClassName;
+    DWORD dwCount;
+    LPWSANSCLASSINFOA lpClassInfos;
+  } WSASERVICECLASSINFOA,*PWSASERVICECLASSINFOA,*LPWSASERVICECLASSINFOA;
+
+  typedef struct _WSAServiceClassInfoW {
+    LPGUID lpServiceClassId;
+    LPWSTR lpszServiceClassName;
+    DWORD dwCount;
+    LPWSANSCLASSINFOW lpClassInfos;
+  } WSASERVICECLASSINFOW,*PWSASERVICECLASSINFOW,*LPWSASERVICECLASSINFOW;
+
+  typedef WSASERVICECLASSINFOW WSASERVICECLASSINFO;
+  typedef PWSASERVICECLASSINFOW PWSASERVICECLASSINFO;
+  typedef LPWSASERVICECLASSINFOW LPWSASERVICECLASSINFO;
+
+  typedef struct _WSANAMESPACE_INFOA {
+    GUID NSProviderId;
+    DWORD dwNameSpace;
+    WINBOOL fActive;
+    DWORD dwVersion;
+    LPSTR lpszIdentifier;
+  } WSANAMESPACE_INFOA,*PWSANAMESPACE_INFOA,*LPWSANAMESPACE_INFOA;
+
+  typedef struct _WSANAMESPACE_INFOW {
+    GUID NSProviderId;
+    DWORD dwNameSpace;
+    WINBOOL fActive;
+    DWORD dwVersion;
+    LPWSTR lpszIdentifier;
+  } WSANAMESPACE_INFOW,*PWSANAMESPACE_INFOW,*LPWSANAMESPACE_INFOW;
+
+  typedef WSANAMESPACE_INFOW WSANAMESPACE_INFO;
+  typedef PWSANAMESPACE_INFOW PWSANAMESPACE_INFO;
+  typedef LPWSANAMESPACE_INFOW LPWSANAMESPACE_INFO;
+
+
+
+
+  typedef struct _WSAMSG {
+    LPSOCKADDR name;
+    INT namelen;
+    LPWSABUF lpBuffers;
+    DWORD dwBufferCount;
+    WSABUF Control;
+    DWORD dwFlags;
+  } WSAMSG,*PWSAMSG,*LPWSAMSG;
+# 1025 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+  __attribute__((dllimport)) SOCKET __attribute__((__stdcall__)) WSAAccept(SOCKET s,struct sockaddr *addr,LPINT addrlen,LPCONDITIONPROC lpfnCondition,DWORD_PTR dwCallbackData);
+  __attribute__((dllimport)) WINBOOL __attribute__((__stdcall__)) WSACloseEvent(HANDLE hEvent);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSAConnect(SOCKET s,const struct sockaddr *name,int namelen,LPWSABUF lpCallerData,LPWSABUF lpCalleeData,LPQOS lpSQOS,LPQOS lpGQOS);
+  __attribute__((dllimport)) HANDLE __attribute__((__stdcall__)) WSACreateEvent(void);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSADuplicateSocketA(SOCKET s,DWORD dwProcessId,LPWSAPROTOCOL_INFOA lpProtocolInfo);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSADuplicateSocketW(SOCKET s,DWORD dwProcessId,LPWSAPROTOCOL_INFOW lpProtocolInfo);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSAEnumNetworkEvents(SOCKET s,HANDLE hEventObject,LPWSANETWORKEVENTS lpNetworkEvents);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSAEnumProtocolsA(LPINT lpiProtocols,LPWSAPROTOCOL_INFOA lpProtocolBuffer,LPDWORD lpdwBufferLength);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSAEnumProtocolsW(LPINT lpiProtocols,LPWSAPROTOCOL_INFOW lpProtocolBuffer,LPDWORD lpdwBufferLength);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSAEventSelect(SOCKET s,HANDLE hEventObject,long lNetworkEvents);
+  __attribute__((dllimport)) WINBOOL __attribute__((__stdcall__)) WSAGetOverlappedResult(SOCKET s,LPWSAOVERLAPPED lpOverlapped,LPDWORD lpcbTransfer,WINBOOL fWait,LPDWORD lpdwFlags);
+  __attribute__((dllimport)) WINBOOL __attribute__((__stdcall__)) WSAGetQOSByName(SOCKET s,LPWSABUF lpQOSName,LPQOS lpQOS);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSAHtonl(SOCKET s,u_long hostlong,u_long *lpnetlong);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSAHtons(SOCKET s,u_short hostshort,u_short *lpnetshort);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSAIoctl(SOCKET s,DWORD dwIoControlCode,LPVOID lpvInBuffer,DWORD cbInBuffer,LPVOID lpvOutBuffer,DWORD cbOutBuffer,LPDWORD lpcbBytesReturned,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
+  __attribute__((dllimport)) SOCKET __attribute__((__stdcall__)) WSAJoinLeaf(SOCKET s,const struct sockaddr *name,int namelen,LPWSABUF lpCallerData,LPWSABUF lpCalleeData,LPQOS lpSQOS,LPQOS lpGQOS,DWORD dwFlags);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSANtohl(SOCKET s,u_long netlong,u_long *lphostlong);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSANtohs(SOCKET s,u_short netshort,u_short *lphostshort);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSARecv(SOCKET s,LPWSABUF lpBuffers,DWORD dwBufferCount,LPDWORD lpNumberOfBytesRecvd,LPDWORD lpFlags,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSARecvDisconnect(SOCKET s,LPWSABUF lpInboundDisconnectData);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSARecvFrom(SOCKET s,LPWSABUF lpBuffers,DWORD dwBufferCount,LPDWORD lpNumberOfBytesRecvd,LPDWORD lpFlags,struct sockaddr *lpFrom,LPINT lpFromlen,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
+  __attribute__((dllimport)) WINBOOL __attribute__((__stdcall__)) WSAResetEvent(HANDLE hEvent);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSASend(SOCKET s,LPWSABUF lpBuffers,DWORD dwBufferCount,LPDWORD lpNumberOfBytesSent,DWORD dwFlags,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSASendDisconnect(SOCKET s,LPWSABUF lpOutboundDisconnectData);
+  __attribute__((dllimport)) int __attribute__((__stdcall__)) WSASendTo(SOCKET s,LPWSABUF lpBuffers,DWORD dwBufferCount,LPDWORD lpNumberOfBytesSent,DWORD dwFlags,const struct sockaddr *lpTo,int iTolen,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
+  __attribute__((dllimport)) WINBOOL __attribute__((__stdcall__)) WSASetEvent(HANDLE hEvent);
+  __attribute__((dllimport)) SOCKET __attribute__((__stdcall__)) WSASocketA(int af,int type,int protocol,LPWSAPROTOCOL_INFOA lpProtocolInfo,GROUP g,DWORD dwFlags);
+  __attribute__((dllimport)) SOCKET __attribute__((__stdcall__)) WSASocketW(int af,int type,int protocol,LPWSAPROTOCOL_INFOW lpProtocolInfo,GROUP g,DWORD dwFlags);
+  __attribute__((dllimport)) DWORD __attribute__((__stdcall__)) WSAWaitForMultipleEvents(DWORD cEvents,const HANDLE *lphEvents,WINBOOL fWaitAll,DWORD dwTimeout,WINBOOL fAlertable);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAAddressToStringA(LPSOCKADDR lpsaAddress,DWORD dwAddressLength,LPWSAPROTOCOL_INFOA lpProtocolInfo,LPSTR lpszAddressString,LPDWORD lpdwAddressStringLength);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAAddressToStringW(LPSOCKADDR lpsaAddress,DWORD dwAddressLength,LPWSAPROTOCOL_INFOW lpProtocolInfo,LPWSTR lpszAddressString,LPDWORD lpdwAddressStringLength);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAStringToAddressA(LPSTR AddressString,INT AddressFamily,LPWSAPROTOCOL_INFOA lpProtocolInfo,LPSOCKADDR lpAddress,LPINT lpAddressLength);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAStringToAddressW(LPWSTR AddressString,INT AddressFamily,LPWSAPROTOCOL_INFOW lpProtocolInfo,LPSOCKADDR lpAddress,LPINT lpAddressLength);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSALookupServiceBeginA(LPWSAQUERYSETA lpqsRestrictions,DWORD dwControlFlags,LPHANDLE lphLookup);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSALookupServiceBeginW(LPWSAQUERYSETW lpqsRestrictions,DWORD dwControlFlags,LPHANDLE lphLookup);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSALookupServiceNextA(HANDLE hLookup,DWORD dwControlFlags,LPDWORD lpdwBufferLength,LPWSAQUERYSETA lpqsResults);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSALookupServiceNextW(HANDLE hLookup,DWORD dwControlFlags,LPDWORD lpdwBufferLength,LPWSAQUERYSETW lpqsResults);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSANSPIoctl(HANDLE hLookup,DWORD dwControlCode,LPVOID lpvInBuffer,DWORD cbInBuffer,LPVOID lpvOutBuffer,DWORD cbOutBuffer,LPDWORD lpcbBytesReturned,LPWSACOMPLETION lpCompletion);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSALookupServiceEnd(HANDLE hLookup);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAInstallServiceClassA(LPWSASERVICECLASSINFOA lpServiceClassInfo);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAInstallServiceClassW(LPWSASERVICECLASSINFOW lpServiceClassInfo);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSARemoveServiceClass(LPGUID lpServiceClassId);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAGetServiceClassInfoA(LPGUID lpProviderId,LPGUID lpServiceClassId,LPDWORD lpdwBufSize,LPWSASERVICECLASSINFOA lpServiceClassInfo);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAGetServiceClassInfoW(LPGUID lpProviderId,LPGUID lpServiceClassId,LPDWORD lpdwBufSize,LPWSASERVICECLASSINFOW lpServiceClassInfo);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAEnumNameSpaceProvidersA(LPDWORD lpdwBufferLength,LPWSANAMESPACE_INFOA lpnspBuffer);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAEnumNameSpaceProvidersW(LPDWORD lpdwBufferLength,LPWSANAMESPACE_INFOW lpnspBuffer);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAGetServiceClassNameByClassIdA(LPGUID lpServiceClassId,LPSTR lpszServiceClassName,LPDWORD lpdwBufferLength);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAGetServiceClassNameByClassIdW(LPGUID lpServiceClassId,LPWSTR lpszServiceClassName,LPDWORD lpdwBufferLength);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSASetServiceA(LPWSAQUERYSETA lpqsRegInfo,WSAESETSERVICEOP essoperation,DWORD dwControlFlags);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSASetServiceW(LPWSAQUERYSETW lpqsRegInfo,WSAESETSERVICEOP essoperation,DWORD dwControlFlags);
+  __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAProviderConfigChange(LPHANDLE lpNotificationHandle,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
+# 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
+}
+# 270 "../src/kernel/./../support/SupportDefs.h" 2
+# 293 "../src/kernel/./../support/SupportDefs.h"
 enum {
  E_SEEK_SET = 0,
  E_SEEK_CUR,
@@ -45246,7 +45679,7 @@ __attribute__((dllexport)) void ETK_WARNING(const char *format, ...);
 __attribute__((dllexport)) void ETK_ERROR(const char *format, ...);
 # 121 "../src/kernel/./../support/./../kernel/Debug.h"
 }
-# 246 "../src/kernel/./../support/SupportDefs.h" 2
+# 301 "../src/kernel/./../support/SupportDefs.h" 2
 # 39 "../src/kernel/Debug.cpp" 2
 
 
@@ -45473,6 +45906,7 @@ __attribute__((dllexport)) e_status_t etk_get_image_symbol(void *image, const ch
 
 
 extern "C" {
+
 
 
 

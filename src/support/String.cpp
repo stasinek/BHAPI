@@ -28,14 +28,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <string.h"
+#include <string.h>
 #include <stdlib.h>
-#include <stdio.h"
-#include <ctype.h"
+#include <stdio.h>
+#include <ctype.h>
 #include <math.h>
 #include <stdarg.h>
 
-#include "./../config.h"
+#include "./../support/SupportDefs.h"
 
 #include "String.h"
 #include "StringArray.h"
@@ -1204,7 +1204,7 @@ EString::ICompare(const EString &str) const
 	if(String()) a = String();
 	if(str.String()) b = str.String();
 
-	return e_strcasecmp(a, b);
+    return strcasecmp(a, b);
 }
 
 
@@ -1217,7 +1217,7 @@ EString::ICompare(const char *str) const
 	if(String()) a = String();
 	if(str) b = str;
 
-	return e_strcasecmp(a, b);
+    return strcasecmp(a, b);
 }
 
 
@@ -1230,7 +1230,7 @@ EString::ICompare(const EString &str, eint32 n) const
 	if(String()) a = String();
 	if(str.String()) b = str.String();
 
-	return e_strncasecmp(a, b, (size_t)n);
+    return strncasecmp(a, b, (size_t)n);
 }
 
 
@@ -1243,7 +1243,7 @@ EString::ICompare(const char *str, eint32 n) const
 	if(String()) a = String();
 	if(str) b = str;
 
-	return e_strncasecmp(a, b, (size_t)n);
+    return strncasecmp(a, b, (size_t)n);
 }
 
 
@@ -2474,13 +2474,6 @@ EString&
 EString::operator<<(const EString &str)
 {
 	return Append(str);
-}
-
-
-EString&
-EString::operator<<(char c)
-{
-	return Append(c, 1);
 }
 
 

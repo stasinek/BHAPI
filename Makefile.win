@@ -4,17 +4,17 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = dllmain.o
-LINKOBJ  = dllmain.o
+OBJ      = "../../../../My\ Projects/prc++/x86_libraries/be/BHAPI/bhapi.o" "../../../../My\ Projects/prc++/x86_libraries/be/BHAPI/src/xml/SimpleXmlParser.o"
+LINKOBJ  = "../../../../My Projects/prc++/x86_libraries/be/BHAPI/bhapi.o" "../../../../My Projects/prc++/x86_libraries/be/BHAPI/src/xml/SimpleXmlParser.o"
 LIBS     = -L"C:/Program Files/Dev-Cpp/MinGW64/lib32" -L"C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
 INCS     = -I"C:/Program Files/Dev-Cpp/MinGW64/include" -I"C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files/Dev-Cpp/MinGW64/include" -I"C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
-BIN      = BETK.dll
+BIN      = BHAPI_DEV.dll
 CXXFLAGS = $(CXXINCS) -m32 -DBUILDING_DLL=1
 CFLAGS   = $(INCS) -m32 -DBUILDING_DLL=1
 RM       = rm.exe -f
-DEF      = libBETK.def
-STATIC   = libBETK.a
+DEF      = libBHAPI_DEV.def
+STATIC   = libBHAPI_DEV.a
 
 .PHONY: all all-before all-after clean clean-custom
 
@@ -26,5 +26,8 @@ clean: clean-custom
 $(BIN): $(LINKOBJ)
 	$(CPP) -shared $(LINKOBJ) -o $(BIN) $(LIBS) -Wl,--output-def,$(DEF),--out-implib,$(STATIC),--add-stdcall-alias
 
-dllmain.o: dllmain.cpp
-	$(CPP) -c dllmain.cpp -o dllmain.o $(CXXFLAGS)
+"../../../../My\ Projects/prc++/x86_libraries/be/BHAPI/bhapi.o": ../../../../My\ Projects/prc++/x86_libraries/be/BHAPI/bhapi.cpp
+	$(CPP) -c "../../../../My Projects/prc++/x86_libraries/be/BHAPI/bhapi.cpp" -o "../../../../My Projects/prc++/x86_libraries/be/BHAPI/bhapi.o" $(CXXFLAGS)
+
+"../../../../My\ Projects/prc++/x86_libraries/be/BHAPI/src/xml/SimpleXmlParser.o": ../../../../My\ Projects/prc++/x86_libraries/be/BHAPI/src/xml/SimpleXmlParser.cpp
+	$(CPP) -c "../../../../My Projects/prc++/x86_libraries/be/BHAPI/src/xml/SimpleXmlParser.cpp" -o "../../../../My Projects/prc++/x86_libraries/be/BHAPI/src/xml/SimpleXmlParser.o" $(CXXFLAGS)

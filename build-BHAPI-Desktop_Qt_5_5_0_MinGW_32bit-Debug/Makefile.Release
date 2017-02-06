@@ -1327,12 +1327,12 @@ release/Control.o: ../src/interface/Control.cpp ../src/support/String.h \
 		../src/app/Invoker.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Control.o ../src/interface/Control.cpp
 
-release/Font.o: ../src/interface/Font.cpp ../src/add-ons/font/FontEngine.h \
-		../src/support/StringArray.h \
-		../src/support/List.h \
-		../src/support/SupportDefs.h \
+release/Font.o: ../src/interface/Font.cpp ../src/support/SupportDefs.h \
 		../src/support/Errors.h \
 		../src/kernel/Debug.h \
+		../src/add-ons/font/FontEngine.h \
+		../src/support/StringArray.h \
+		../src/support/List.h \
 		../src/support/String.h \
 		../src/interface/Point.h \
 		../src/interface/Font.h \
@@ -1577,10 +1577,10 @@ release/OutlineListView.o: ../src/interface/OutlineListView.cpp ../src/interface
 		../src/interface/Font.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/OutlineListView.o ../src/interface/OutlineListView.cpp
 
-release/Point.o: ../src/interface/Point.cpp ../src/interface/GraphicsDefs.h \
-		../src/support/SupportDefs.h \
+release/Point.o: ../src/interface/Point.cpp ../src/support/SupportDefs.h \
 		../src/support/Errors.h \
 		../src/kernel/Debug.h \
+		../src/interface/GraphicsDefs.h \
 		../src/interface/Point.h \
 		../src/interface/Rect.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Point.o ../src/interface/Point.cpp
@@ -1659,11 +1659,11 @@ release/RadioButton.o: ../src/interface/RadioButton.cpp ../src/support/ClassInfo
 		../src/app/Invoker.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/RadioButton.o ../src/interface/RadioButton.cpp
 
-release/Rect.o: ../src/interface/Rect.cpp ../src/interface/Rect.h \
-		../src/interface/Point.h \
-		../src/support/SupportDefs.h \
+release/Rect.o: ../src/interface/Rect.cpp ../src/support/SupportDefs.h \
 		../src/support/Errors.h \
-		../src/kernel/Debug.h
+		../src/kernel/Debug.h \
+		../src/interface/Rect.h \
+		../src/interface/Point.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Rect.o ../src/interface/Rect.cpp
 
 release/Region.o: ../src/interface/Region.cpp ../src/interface/Region.h \
@@ -1964,13 +1964,13 @@ release/ToolTip.o: ../src/interface/ToolTip.cpp ../src/interface/ToolTip.h \
 		../src/interface/Font.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/ToolTip.o ../src/interface/ToolTip.cpp
 
-release/View.o: ../src/interface/View.cpp ../src/support/ClassInfo.h \
+release/View.o: ../src/interface/View.cpp ../src/support/SupportDefs.h \
+		../src/support/Errors.h \
+		../src/kernel/Debug.h \
+		../src/support/ClassInfo.h \
 		../src/add-ons/font/FontEngine.h \
 		../src/support/StringArray.h \
 		../src/support/List.h \
-		../src/support/SupportDefs.h \
-		../src/support/Errors.h \
-		../src/kernel/Debug.h \
 		../src/support/String.h \
 		../src/interface/Point.h \
 		../src/interface/Font.h \
@@ -2004,11 +2004,11 @@ release/View.o: ../src/interface/View.cpp ../src/support/ClassInfo.h \
 		../src/interface/layout/Layout.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/View.o ../src/interface/View.cpp
 
-release/Window.o: ../src/interface/Window.cpp ../src/support/ClassInfo.h \
-		../src/support/String.h \
-		../src/support/SupportDefs.h \
+release/Window.o: ../src/interface/Window.cpp ../src/support/SupportDefs.h \
 		../src/support/Errors.h \
 		../src/kernel/Debug.h \
+		../src/support/ClassInfo.h \
+		../src/support/String.h \
 		../src/kernel/Kernel.h \
 		../src/kernel/OS.h \
 		../src/app/Application.h \
@@ -2039,9 +2039,9 @@ release/Window.o: ../src/interface/Window.cpp ../src/support/ClassInfo.h \
 		../src/interface/layout/Layout.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Window.o ../src/interface/Window.cpp
 
-release/Debug.o: ../src/kernel/Debug.cpp ../src/kernel/Debug.h \
-		../src/support/SupportDefs.h \
+release/Debug.o: ../src/kernel/Debug.cpp ../src/support/SupportDefs.h \
 		../src/support/Errors.h \
+		../src/kernel/Debug.h \
 		../src/kernel/Kernel.h \
 		../src/kernel/OS.h \
 		../src/support/String.h
@@ -2315,19 +2315,19 @@ release/Render.o: ../src/render/Render.cpp ../src/support/List.h \
 		../src/interface/Polygon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Render.o ../src/render/Render.cpp
 
-release/Directory.o: ../src/storage/Directory.cpp ../src/support/String.h \
-		../src/support/SupportDefs.h \
+release/Directory.o: ../src/storage/Directory.cpp ../src/support/SupportDefs.h \
 		../src/support/Errors.h \
 		../src/kernel/Debug.h \
+		../src/support/String.h \
 		../src/storage/Directory.h \
 		../src/storage/Entry.h \
 		../src/storage/Path.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Directory.o ../src/storage/Directory.cpp
 
-release/Entry.o: ../src/storage/Entry.cpp ../src/support/String.h \
-		../src/support/SupportDefs.h \
+release/Entry.o: ../src/storage/Entry.cpp ../src/support/SupportDefs.h \
 		../src/support/Errors.h \
 		../src/kernel/Debug.h \
+		../src/support/String.h \
 		../src/storage/Entry.h \
 		../src/storage/Path.h \
 		../src/storage/Directory.h
@@ -2344,11 +2344,12 @@ release/File.o: ../src/storage/File.cpp ../src/support/String.h \
 		../src/storage/Entry.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/File.o ../src/storage/File.cpp
 
-release/FilePanel.o: ../src/storage/FilePanel.cpp ../src/kernel/Kernel.h \
-		../src/kernel/OS.h \
-		../src/support/SupportDefs.h \
+release/FilePanel.o: ../src/storage/FilePanel.cpp ../src/support/supportDefs.h \
 		../src/support/Errors.h \
 		../src/kernel/Debug.h \
+		../src/support/SupportDefs.h \
+		../src/kernel/Kernel.h \
+		../src/kernel/OS.h \
 		../src/support/Autolock.h \
 		../src/support/ClassInfo.h \
 		../src/app/Application.h \
@@ -2404,10 +2405,10 @@ release/FilePanel.o: ../src/storage/FilePanel.cpp ../src/kernel/Kernel.h \
 		../src/storage/icons/file.xpm
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/FilePanel.o ../src/storage/FilePanel.cpp
 
-release/FindDirectory.o: ../src/storage/FindDirectory.cpp ../src/support/String.h \
-		../src/support/SupportDefs.h \
+release/FindDirectory.o: ../src/storage/FindDirectory.cpp ../src/support/SupportDefs.h \
 		../src/support/Errors.h \
 		../src/kernel/Debug.h \
+		../src/support/String.h \
 		../src/storage/FindDirectory.h \
 		../src/storage/Path.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/FindDirectory.o ../src/storage/FindDirectory.cpp
@@ -2422,14 +2423,16 @@ release/Path.o: ../src/storage/Path.cpp ../src/support/String.h \
 		../src/storage/Path.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Path.o ../src/storage/Path.cpp
 
-release/Volume.o: ../src/storage/Volume.cpp ../src/storage/Volume.h \
-		../src/storage/StorageDefs.h \
-		../src/support/SupportDefs.h \
+release/Volume.o: ../src/storage/Volume.cpp ../src/support/supportDefs.h \
 		../src/support/Errors.h \
 		../src/kernel/Debug.h \
+		../src/support/SupportDefs.h \
+		../src/storage/Volume.h \
+		../src/storage/StorageDefs.h \
 		../src/storage/Directory.h \
 		../src/storage/Entry.h \
-		../src/storage/Path.h
+		../src/storage/Path.h \
+		../src/support/String.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Volume.o ../src/storage/Volume.cpp
 
 release/VolumeRoster.o: ../src/storage/VolumeRoster.cpp ../src/storage/VolumeRoster.h \
@@ -2440,7 +2443,8 @@ release/VolumeRoster.o: ../src/storage/VolumeRoster.cpp ../src/storage/VolumeRos
 		../src/kernel/Debug.h \
 		../src/storage/Directory.h \
 		../src/storage/Entry.h \
-		../src/storage/Path.h
+		../src/storage/Path.h \
+		../src/support/String.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/VolumeRoster.o ../src/storage/VolumeRoster.cpp
 
 release/Archivable.o: ../src/support/Archivable.cpp ../src/support/Archivable.h \
@@ -2499,10 +2503,10 @@ release/StreamIO.o: ../src/support/StreamIO.cpp ../src/support/String.h \
 		../src/support/DataIO.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/StreamIO.o ../src/support/StreamIO.cpp
 
-release/String.o: ../src/support/String.cpp ../src/support/String.h \
-		../src/support/SupportDefs.h \
+release/String.o: ../src/support/String.cpp ../src/support/SupportDefs.h \
 		../src/support/Errors.h \
 		../src/kernel/Debug.h \
+		../src/support/String.h \
 		../src/support/StringArray.h \
 		../src/support/List.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/String.o ../src/support/String.cpp
@@ -2524,13 +2528,24 @@ release/SimpleXmlParser.o: ../src/xml/SimpleXmlParser.cpp ../src/support/String.
 		../src/xml/SimpleXmlParser.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/SimpleXmlParser.o ../src/xml/SimpleXmlParser.cpp
 
-release/etkxx-doc.o: ../tools/etkxx-doc.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/etkxx-doc.o ../tools/etkxx-doc.cpp
-
-release/ByteOrder.o: ../src/support/ByteOrder.c ../src/support/ByteOrder.h \
+release/etkxx-doc.o: ../tools/etkxx-doc.cpp ../src/support/StringArray.h \
+		../src/support/List.h \
 		../src/support/SupportDefs.h \
 		../src/support/Errors.h \
-		../src/kernel/Debug.h
+		../src/kernel/Debug.h \
+		../src/support/String.h \
+		../src/storage/Path.h \
+		../src/storage/File.h \
+		../src/storage/StorageDefs.h \
+		../src/storage/Directory.h \
+		../src/storage/Entry.h \
+		../src/xml/SimpleXmlParser.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/etkxx-doc.o ../tools/etkxx-doc.cpp
+
+release/ByteOrder.o: ../src/support/ByteOrder.c ../src/support/SupportDefs.h \
+		../src/support/Errors.h \
+		../src/kernel/Debug.h \
+		../src/support/ByteOrder.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o release/ByteOrder.o ../src/support/ByteOrder.c
 
 release/LayoutContainer.o: ../src/interface/layout/LayoutContainer.cpp ../src/support/ClassInfo.h \

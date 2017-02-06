@@ -49,12 +49,12 @@ EMessage::EMessage()
 }
 
 
-EMessage::EMessage(euint32 what)
+EMessage::EMessage(euint32 a_what)
 	: fTargetToken(E_MAXUINT64), fTargetTokenTimestamp(E_INT64_CONSTANT(0)),
 	  fReplyToken(E_MAXUINT64), fReplyTokenTimestamp(E_INT64_CONSTANT(0)),
 	  fNoticeSource(false), fSource(NULL), fIsReply(false)
 {
-	EMessage::what = what;
+    EMessage::what = a_what;
 	fTeam = etk_get_current_team_id();
 }
 
