@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * DirectFB Graphics Add-on for ETK++
+ * DirectFB Graphics Add-on for BHAPI++
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -35,23 +35,23 @@
 #include "etk-dfb.h"
 
 
-EDFBGraphicsDrawable::EDFBGraphicsDrawable(EDFBGraphicsEngine *dfbEngine, euint32 w, euint32 h)
-	: EGraphicsDrawable(), fEngine(NULL)
+EDFBGraphicsDrawable::EDFBGraphicsDrawable(EDFBGraphicsEngine *dfbEngine, b_uint32 w, b_uint32 h)
+	: BGraphicsDrawable(), fEngine(NULL)
 {
-	if(w >= E_MAXINT32 || h >= E_MAXINT32)
+	if(w >= B_MAXINT32 || h >= B_MAXINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
 		return;
 	}
 
 	fEngine = dfbEngine;
 	if(fEngine == NULL) return;
 
-	e_rgb_color whiteColor = e_make_rgb_color(255, 255, 255, 255);
-	EGraphicsDrawable::SetBackgroundColor(whiteColor);
+	b_rgb_color whiteColor = b_makb_rgb_color(255, 255, 255, 255);
+	BGraphicsDrawable::SetBackgroundColor(whiteColor);
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) {fEngine = NULL; return;}
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) {fEngine = NULL; return;}
 
 	DFBSurfaceDescription desc;
 	desc.flags = (DFBSurfaceDescriptionFlags)(DSDESC_CAPS | DSDESC_WIDTH | DSDESC_HEIGHT | DSDESC_PIXELFORMAT);
@@ -69,7 +69,7 @@ EDFBGraphicsDrawable::EDFBGraphicsDrawable(EDFBGraphicsEngine *dfbEngine, euint3
 #if 0
 	DFBSurfacePixelFormat pixel_format;
 	dfbSurface->GetPixelFormat(dfbSurface, &pixel_format);
-	ETK_DEBUG("[GRAPHICS]: DFBSurface created (PixelFormat: 0x%x).", pixel_format);
+	BHAPI_DEBUG("[GRAPHICS]: DFBSurface created (PixelFormat: 0x%x).", pixel_format);
 #endif
 
 	fWidth = w;
@@ -83,47 +83,47 @@ EDFBGraphicsDrawable::~EDFBGraphicsDrawable()
 {
 	if(fEngine != NULL)
 	{
-		EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-		if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK)
-			ETK_ERROR("[GRAPHICS]: %s --- Invalid graphics engine.", __PRETTY_FUNCTION__);
+		BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+		if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK)
+			BHAPI_ERROR("[GRAPHICS]: %s --- Invalid graphics engine.", __PRETTY_FUNCTION__);
 
 		dfbSurface->Release(dfbSurface);
 	}
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::SetBackgroundColor(e_rgb_color bkColor)
+b_status_t
+EDFBGraphicsDrawable::SetBackgroundColor(b_rgb_color bkColor)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	e_rgb_color c = BackgroundColor();
+	b_rgb_color c = BackgroundColor();
 	if(c != bkColor)
 	{
-		EGraphicsDrawable::SetBackgroundColor(c);
+		BGraphicsDrawable::SetBackgroundColor(c);
 		dfbSurface->Clear(dfbSurface, c.red, c.green, c.blue, 255);
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::ResizeTo(euint32 w, euint32 h)
+b_status_t
+EDFBGraphicsDrawable::ResizeTo(b_uint32 w, b_uint32 h)
 {
-	if(w >= E_MAXINT32 || h >= E_MAXINT32)
+	if(w >= B_MAXINT32 || h >= B_MAXINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	DFBSurfaceDescription desc;
 	desc.flags = (DFBSurfaceDescriptionFlags)(DSDESC_CAPS | DSDESC_WIDTH | DSDESC_HEIGHT);
@@ -132,55 +132,55 @@ EDFBGraphicsDrawable::ResizeTo(euint32 w, euint32 h)
 	desc.height = h + 1;
 
 	IDirectFBSurface *newSurface;
-	if(fEngine->dfbDisplay->CreateSurface(fEngine->dfbDisplay, &desc, &newSurface) != DFB_OK) return E_ERROR;
+	if(fEngine->dfbDisplay->CreateSurface(fEngine->dfbDisplay, &desc, &newSurface) != DFB_OK) return B_ERROR;
 
 	dfbSurface->Release(dfbSurface);
 	dfbSurface = newSurface;
 
-	e_rgb_color c = BackgroundColor();
+	b_rgb_color c = BackgroundColor();
 	dfbSurface->Clear(dfbSurface, c.red, c.green, c.blue, 255);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::CopyTo(EGraphicsContext *dc,
-			     EGraphicsDrawable *dstDrawable,
-			     eint32 x, eint32 y, euint32 w, euint32 h,
-			     eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EDFBGraphicsDrawable::CopyTo(BGraphicsContext *dc,
+			     BGraphicsDrawable *dstDrawable,
+			     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+			     b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
-	if(w >= E_MAXINT32 || h >= E_MAXINT32 || dstW >= E_MAXINT32 || dstH >= E_MAXINT32)
+	if(w >= B_MAXINT32 || h >= B_MAXINT32 || dstW >= B_MAXINT32 || dstH >= B_MAXINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(fEngine == NULL || dc == NULL || dstDrawable == NULL) return E_ERROR;
+	if(fEngine == NULL || dc == NULL || dstDrawable == NULL) return B_ERROR;
 
-	if(dc->DrawingMode() != E_OP_COPY)
+	if(dc->DrawingMode() != B_OP_COPY)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- FIXME: unsupported drawing mode.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- FIXME: unsupported drawing mode.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	EDFBGraphicsWindow *win = NULL;
 	EDFBGraphicsDrawable *pix = NULL;
 	IDirectFBSurface *destSurface = NULL;
-	ERect margins(0, 0, 0, 0);
+	BRect margins(0, 0, 0, 0);
 
-	if((win = e_cast_as(dstDrawable, EDFBGraphicsWindow)) != NULL) {destSurface = win->dfbSurface; margins = win->fMargins;}
-	else if((pix = e_cast_as(dstDrawable, EDFBGraphicsDrawable)) != NULL) destSurface = pix->dfbSurface;
+	if((win = b_cast_as(dstDrawable, EDFBGraphicsWindow)) != NULL) {destSurface = win->dfbSurface; margins = win->fMargins;}
+	else if((pix = b_cast_as(dstDrawable, EDFBGraphicsDrawable)) != NULL) destSurface = pix->dfbSurface;
 
-	if(destSurface == NULL) return E_ERROR;
+	if(destSurface == NULL) return B_ERROR;
 
 	DFBRegion *dfbRegions = NULL;
 	int nRegions = 0;
 
-	if(fEngine->ConvertRegion(dc->Clipping(), &dfbRegions, &nRegions) == false) return E_ERROR;
+	if(fEngine->ConvertRegion(dc->Clipping(), &dfbRegions, &nRegions) == false) return B_ERROR;
 
 	destSurface->SetBlittingFlags(destSurface, DSBLIT_NOFX);
 
@@ -208,230 +208,230 @@ EDFBGraphicsDrawable::CopyTo(EGraphicsContext *dc,
 
 	free(dfbRegions);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::DrawPixmap(EGraphicsContext *dc, const EPixmap *pix,
-				 eint32 x, eint32 y, euint32 w, euint32 h,
-				 eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EDFBGraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
+				 b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+				 b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_draw_epixmap(dfbSurface, dc, pix, x, y, w, h, dstX, dstY, dstW, dstH);
+	return bhapi_dfb_draw_epixmap(dfbSurface, dc, pix, x, y, w, h, dstX, dstY, dstW, dstH);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::StrokePoint(EGraphicsContext *dc,
-				  eint32 x, eint32 y)
+b_status_t
+EDFBGraphicsDrawable::StrokePoint(BGraphicsContext *dc,
+				  b_int32 x, b_int32 y)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_point(dfbSurface, dc, x, y);
+	return bhapi_dfb_stroke_point(dfbSurface, dc, x, y);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::StrokePoints(EGraphicsContext *dc,
-				   const eint32 *pts, eint32 count)
+b_status_t
+EDFBGraphicsDrawable::StrokePoints(BGraphicsContext *dc,
+				   const b_int32 *pts, b_int32 count)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_points(dfbSurface, dc, pts, count);
+	return bhapi_dfb_stroke_points(dfbSurface, dc, pts, count);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::StrokePoints_Colors(EGraphicsContext *dc,
-					  const EList *ptsArrayLists, eint32 arrayCount,
-					  const e_rgb_color *highColors)
+b_status_t
+EDFBGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
+					  const BList *ptsArrayLists, b_int32 arrayCount,
+					  const b_rgb_color *highColors)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_points_color(dfbSurface, dc, ptsArrayLists, arrayCount, highColors);
+	return bhapi_dfb_stroke_points_color(dfbSurface, dc, ptsArrayLists, arrayCount, highColors);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::StrokePoints_Alphas(EGraphicsContext *dc,
-					  const eint32 *pts, const euint8 *alpha, eint32 count)
+b_status_t
+EDFBGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
+					  const b_int32 *pts, const b_uint8 *alpha, b_int32 count)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_points_alphas(dfbSurface, dc, pts, alpha, count);
+	return bhapi_dfb_stroke_points_alphas(dfbSurface, dc, pts, alpha, count);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::StrokeLine(EGraphicsContext *dc,
-				 eint32 x0, eint32 y0, eint32 x1, eint32 y1)
+b_status_t
+EDFBGraphicsDrawable::StrokeLine(BGraphicsContext *dc,
+				 b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_line(dfbSurface, dc, x0, y0, x1, y1);
+	return bhapi_dfb_stroke_line(dfbSurface, dc, x0, y0, x1, y1);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::StrokePolygon(EGraphicsContext *dc,
-				    const eint32 *pts, eint32 count, bool closed)
+b_status_t
+EDFBGraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
+				    const b_int32 *pts, b_int32 count, bool closed)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_polygon(dfbSurface, dc, pts, count, closed);
+	return bhapi_dfb_stroke_polygon(dfbSurface, dc, pts, count, closed);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::FillPolygon(EGraphicsContext *dc,
-				  const eint32 *pts, eint32 count)
+b_status_t
+EDFBGraphicsDrawable::FillPolygon(BGraphicsContext *dc,
+				  const b_int32 *pts, b_int32 count)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_fill_polygon(dfbSurface, dc, pts, count);
+	return bhapi_dfb_fill_polygon(dfbSurface, dc, pts, count);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::StrokeRect(EGraphicsContext *dc,
-				 eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EDFBGraphicsDrawable::StrokeRect(BGraphicsContext *dc,
+				 b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_rect(dfbSurface, dc, x, y, w, h);
+	return bhapi_dfb_stroke_rect(dfbSurface, dc, x, y, w, h);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::FillRect(EGraphicsContext *dc,
-			       eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EDFBGraphicsDrawable::FillRect(BGraphicsContext *dc,
+			       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_fill_rect(dfbSurface, dc, x, y, w, h);
+	return bhapi_dfb_fill_rect(dfbSurface, dc, x, y, w, h);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::StrokeRects(EGraphicsContext *dc,
-				  const eint32 *rects, eint32 count)
+b_status_t
+EDFBGraphicsDrawable::StrokeRects(BGraphicsContext *dc,
+				  const b_int32 *rects, b_int32 count)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_rects(dfbSurface, dc, rects, count);
+	return bhapi_dfb_stroke_rects(dfbSurface, dc, rects, count);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::FillRects(EGraphicsContext *dc,
-			        const eint32 *rects, eint32 count)
+b_status_t
+EDFBGraphicsDrawable::FillRects(BGraphicsContext *dc,
+			        const b_int32 *rects, b_int32 count)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_fill_rects(dfbSurface, dc, rects, count);
+	return bhapi_dfb_fill_rects(dfbSurface, dc, rects, count);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::FillRegion(EGraphicsContext *dc,
-				 const ERegion &region)
+b_status_t
+EDFBGraphicsDrawable::FillRegion(BGraphicsContext *dc,
+				 const BRegion &region)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_fill_region(dfbSurface, dc, region);
+	return bhapi_dfb_fill_region(dfbSurface, dc, region);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::StrokeRoundRect(EGraphicsContext *dc,
-				      eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EDFBGraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
+				      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius);
+	return bhapi_dfb_stroke_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::FillRoundRect(EGraphicsContext *dc,
-				    eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EDFBGraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
+				    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_fill_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius);
+	return bhapi_dfb_fill_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::StrokeArc(EGraphicsContext *dc,
-				eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EDFBGraphicsDrawable::StrokeArc(BGraphicsContext *dc,
+				b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle);
+	return bhapi_dfb_stroke_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle);
 }
 
 
-e_status_t
-EDFBGraphicsDrawable::FillArc(EGraphicsContext *dc,
-			      eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EDFBGraphicsDrawable::FillArc(BGraphicsContext *dc,
+			      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_fill_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle);
+	return bhapi_dfb_fill_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle);
 }
 
 #endif /* DIRECTFB */

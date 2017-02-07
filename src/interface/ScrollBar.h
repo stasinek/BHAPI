@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,23 +27,23 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_SCROLL_BAR_H__
-#define __ETK_SCROLL_BAR_H__
+#ifndef __BHAPI_SCROLL_BAR_H__
+#define __BHAPI_SCROLL_BAR_H__
 
 #include "./../app/MessageRunner.h"
 #include "./../interface/View.h"
 
-#define E_V_SCROLL_BAR_WIDTH	e_ui_get_scrollbar_vertical_width()
-#define E_H_SCROLL_BAR_HEIGHT	e_ui_get_scrollbar_horizontal_height()
+#define B_V_SCROLL_BAR_WIDTH	b_ui_get_scrollbar_vertical_width()
+#define B_H_SCROLL_BAR_HEIGHT	b_ui_get_scrollbar_horizontal_height()
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EScrollBar : public EView {
+class _IMPEXP_BHAPI BScrollBar : public BView {
 public:
-	EScrollBar(ERect frame, const char *name,
+    BScrollBar(BRect frame, const char *name,
 		   float value, float min, float max,
-		   e_orientation direction);
-	virtual ~EScrollBar();
+		   b_orientation direction);
+    virtual ~BScrollBar();
 
 	void		SetValue(float value);
 	float		Value() const;
@@ -61,41 +61,41 @@ public:
 
 	// SetTarget: If target isn't NULL, target->Ancestor() must equal to this->Ancestor().
 	//            AKA. The function just be successful doing when it added to any parent.
-	e_status_t	SetTarget(EView *target);
-	EView		*Target() const;
+	b_status_t	SetTarget(BView *target);
+	BView		*Target() const;
 
-	e_orientation	Orientation() const;
+	b_orientation	Orientation() const;
 
-	virtual void	Draw(ERect updateRect);
-	virtual void	MouseDown(EPoint where);
-	virtual void	MouseUp(EPoint where);
-	virtual void	MouseMoved(EPoint where, euint32 code, const EMessage *a_message);
+	virtual void	Draw(BRect updateRect);
+	virtual void	MouseDown(BPoint where);
+	virtual void	MouseUp(BPoint where);
+    virtual void	MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
 	virtual void	DetachedFromWindow();
 
 private:
-	friend class EWindow;
-	friend class EView;
+    friend class BWindow;
+	friend class BView;
 
-	e_orientation fOrientation;
+	b_orientation fOrientation;
 	float fValue;
 	float fRangeMin;
 	float fRangeMax;
 	float fStepSmall;
 	float fStepLarge;
-	EView *fTarget;
+	BView *fTarget;
 
 	bool fTracking;
-	eint8 fTrackingState;
-	EPoint fMousePosition;
-	ERegion fTrackingRegion;
-	void doScroll(eint8 state);
+    b_int8 fTrackingState;
+	BPoint fMousePosition;
+	BRegion fTrackingRegion;
+    void doScroll(b_int8 state);
 	void _SetValue(float value, bool response);
 
-	EMessageRunner *fRunner;
+	BMessageRunner *fRunner;
 };
 
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_SCROLL_BAR_H__ */
+#endif /* __BHAPI_SCROLL_BAR_H__ */
 

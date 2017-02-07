@@ -9,17 +9,24 @@
 # 1 "../src/interface/./../interface/GraphicsDefs.h" 1
 # 33 "../src/interface/./../interface/GraphicsDefs.h"
 # 1 "../src/interface/./../interface/./../support/SupportDefs.h" 1
-# 88 "../src/interface/./../interface/./../support/SupportDefs.h"
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
-# 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/crtdefs.h" 1 3
-# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/crtdefs.h" 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 1 3
-# 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_mac.h" 1 3
-# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 2 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_secapi.h" 1 3
-# 47 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_secapi.h" 3
+# 34 "../src/interface/./../interface/./../support/SupportDefs.h"
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
+# 45 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 3 4
+typedef __builtin_va_list __gnuc_va_list;
+# 107 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 3 4
+typedef __gnuc_va_list va_list;
+# 140 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_stdarg.h" 1 3 4
+# 14 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_stdarg.h" 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/vadefs.h" 1 3 4
+# 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/vadefs.h" 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 1 3 4
+# 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_mac.h" 1 3 4
+# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 2 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_secapi.h" 1 3 4
+# 47 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_secapi.h" 3 4
 extern "C++" {
 template <bool __test, typename __dsttype>
   struct __if_array;
@@ -28,61 +35,27 @@ template <typename __dsttype>
     typedef __dsttype __type;
 };
 }
-# 14 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 2 3
-# 282 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/vadefs.h" 1 3
-# 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/vadefs.h" 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 1 3
-# 686 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sdks/_mingw_directx.h" 1 3
-# 687 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 2 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sdks/_mingw_ddk.h" 1 3
-# 688 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 2 3
-# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/vadefs.h" 2 3
+# 14 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 2 3 4
+# 282 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/vadefs.h" 1 3 4
+# 283 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 2 3 4
 
 
 #pragma pack(push,_CRT_PACKING)
-
-
-
-extern "C" {
-
-
-
-
-
-  typedef __builtin_va_list __gnuc_va_list;
-
-
-
-
-
-
-  typedef __gnuc_va_list va_list;
-# 97 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/vadefs.h" 3
-}
-
-
-
-#pragma pack(pop)
-# 283 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 2 3
-
-
-#pragma pack(push,_CRT_PACKING)
-# 379 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3
+# 379 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3 4
 typedef unsigned int size_t;
-# 389 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3
+# 389 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3 4
 typedef int ssize_t;
-# 401 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3
+# 401 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3 4
 typedef int intptr_t;
-# 414 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3
+# 414 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3 4
 typedef unsigned int uintptr_t;
-# 427 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3
+# 427 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3 4
 typedef int ptrdiff_t;
-# 443 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3
+# 443 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3 4
 typedef unsigned short wint_t;
 typedef unsigned short wctype_t;
-# 463 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3
+# 463 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3 4
 typedef int errno_t;
 
 
@@ -100,7 +73,7 @@ __extension__ typedef long long __time64_t;
 
 
 typedef __time32_t time_t;
-# 651 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3
+# 651 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3 4
 extern "C" {
 
 
@@ -123,10 +96,44 @@ const char *__mingw_get_crt_info (void);
 
 
 #pragma pack(pop)
-# 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/crtdefs.h" 2 3
-# 26 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/crtdefs.h" 3
+# 686 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sdks/_mingw_directx.h" 1 3 4
+# 687 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 2 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sdks/_mingw_ddk.h" 1 3 4
+# 688 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 2 3 4
+# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/vadefs.h" 2 3 4
+
+
+#pragma pack(push,_CRT_PACKING)
+
+
+
+extern "C" {
+# 97 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/vadefs.h" 3 4
+}
+
+
+
+#pragma pack(pop)
+# 15 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_stdarg.h" 2 3 4
+# 141 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 2 3 4
+# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
+# 35 "../src/interface/./../interface/./../support/SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
+
+
+
+
+
+
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/crtdefs.h" 1 3 4
+# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/crtdefs.h" 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 1 3 4
+# 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/crtdefs.h" 2 3 4
+# 26 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/crtdefs.h" 3 4
 typedef size_t rsize_t;
-# 153 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/crtdefs.h" 3
+# 153 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/crtdefs.h" 3 4
 struct threadlocaleinfostruct;
 struct threadmbcinfostruct;
 typedef struct threadlocaleinfostruct *pthreadlocinfo;
@@ -174,9 +181,681 @@ typedef struct threadlocaleinfostruct {
   const unsigned char *pcumap;
   struct __lc_time_data *lc_time_curr;
 } threadlocinfo;
-# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 2 3
+# 8 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 2 3 4
 
 
+
+
+
+extern "C" {
+
+
+
+
+  __attribute__ ((__dllimport__)) extern int *__attribute__((__cdecl__)) _errno(void);
+
+  errno_t __attribute__((__cdecl__)) _set_errno(int _Value);
+  errno_t __attribute__((__cdecl__)) _get_errno(int *_Value);
+
+
+  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
+
+  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
+
+
+}
+# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+typedef struct {
+  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
+  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
+} max_align_t;
+# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
+# 36 "../src/interface/./../interface/./../support/SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 1 3
+# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
+# 34 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 3 4
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h" 1 3 4
+
+
+
+
+
+
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
+# 168 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/limits.h" 1 3 4
+# 169 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 2 3 4
+# 8 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h" 2 3 4
+# 35 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 2 3 4
+# 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 2 3
+
+
+
+
+
+#pragma pack(push,_CRT_PACKING)
+
+
+extern "C" {
+# 40 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  typedef int (__attribute__((__cdecl__)) *_onexit_t)(void);
+# 50 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  typedef struct _div_t {
+    int quot;
+    int rem;
+  } div_t;
+
+  typedef struct _ldiv_t {
+    long quot;
+    long rem;
+  } ldiv_t;
+
+
+
+
+
+#pragma pack(4)
+  typedef struct {
+    unsigned char ld[10];
+  } _LDOUBLE;
+#pragma pack()
+
+
+
+  typedef struct {
+    double x;
+  } _CRT_DOUBLE;
+
+  typedef struct {
+    float f;
+  } _CRT_FLOAT;
+
+       
+
+
+  typedef struct {
+    long double x;
+  } _LONGDOUBLE;
+
+       
+
+#pragma pack(4)
+  typedef struct {
+    unsigned char ld12[12];
+  } _LDBL12;
+#pragma pack()
+# 105 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  extern int * _imp____mb_cur_max;
+# 131 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  typedef void (__attribute__((__cdecl__)) *_purecall_handler)(void);
+
+  __attribute__ ((__dllimport__)) _purecall_handler __attribute__((__cdecl__)) _set_purecall_handler(_purecall_handler _Handler);
+  __attribute__ ((__dllimport__)) _purecall_handler __attribute__((__cdecl__)) _get_purecall_handler(void);
+
+  typedef void (__attribute__((__cdecl__)) *_invalid_parameter_handler)(const wchar_t *,const wchar_t *,const wchar_t *,unsigned int,uintptr_t);
+  __attribute__ ((__dllimport__)) _invalid_parameter_handler __attribute__((__cdecl__)) _set_invalid_parameter_handler(_invalid_parameter_handler _Handler);
+  __attribute__ ((__dllimport__)) _invalid_parameter_handler __attribute__((__cdecl__)) _get_invalid_parameter_handler(void);
+# 147 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  __attribute__ ((__dllimport__)) unsigned long *__attribute__((__cdecl__)) __doserrno(void);
+
+  errno_t __attribute__((__cdecl__)) _set_doserrno(unsigned long _Value);
+  errno_t __attribute__((__cdecl__)) _get_doserrno(unsigned long *_Value);
+
+
+
+
+  extern __attribute__ ((__dllimport__)) char *_sys_errlist[1];
+  extern __attribute__ ((__dllimport__)) int _sys_nerr;
+
+
+  __attribute__ ((__dllimport__)) int *__attribute__((__cdecl__)) __p___argc(void);
+  __attribute__ ((__dllimport__)) char ***__attribute__((__cdecl__)) __p___argv(void);
+  __attribute__ ((__dllimport__)) wchar_t ***__attribute__((__cdecl__)) __p___wargv(void);
+  __attribute__ ((__dllimport__)) char ***__attribute__((__cdecl__)) __p__environ(void);
+  __attribute__ ((__dllimport__)) wchar_t ***__attribute__((__cdecl__)) __p__wenviron(void);
+  __attribute__ ((__dllimport__)) char **__attribute__((__cdecl__)) __p__pgmptr(void);
+  __attribute__ ((__dllimport__)) wchar_t **__attribute__((__cdecl__)) __p__wpgmptr(void);
+
+
+
+
+
+  extern int * _imp____argc;
+
+
+
+
+
+
+
+  extern char *** _imp____argv;
+
+
+
+
+
+
+
+  extern wchar_t *** _imp____wargv;
+# 199 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  extern char *** _imp___environ;
+# 208 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  extern wchar_t *** _imp___wenviron;
+# 217 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  extern char ** _imp___pgmptr;
+# 226 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  extern wchar_t ** _imp___wpgmptr;
+
+
+
+  errno_t __attribute__((__cdecl__)) _get_pgmptr(char **_Value);
+  errno_t __attribute__((__cdecl__)) _get_wpgmptr(wchar_t **_Value);
+
+
+
+
+  extern int * _imp___fmode;
+
+
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _set_fmode(int _Mode);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_fmode(int *_PMode);
+
+
+
+
+
+  extern unsigned int * _imp___osplatform;
+# 256 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  extern unsigned int * _imp___osver;
+# 265 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  extern unsigned int * _imp___winver;
+# 274 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  extern unsigned int * _imp___winmajor;
+# 283 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  extern unsigned int * _imp___winminor;
+
+
+
+
+  errno_t __attribute__((__cdecl__)) _get_osplatform(unsigned int *_Value);
+  errno_t __attribute__((__cdecl__)) _get_osver(unsigned int *_Value);
+  errno_t __attribute__((__cdecl__)) _get_winver(unsigned int *_Value);
+  errno_t __attribute__((__cdecl__)) _get_winmajor(unsigned int *_Value);
+  errno_t __attribute__((__cdecl__)) _get_winminor(unsigned int *_Value);
+
+
+
+
+  extern "C++" {
+    template <typename _CountofType,size_t _SizeOfArray> char (*__countof_helper( _CountofType (&_Array)[_SizeOfArray]))[_SizeOfArray];
+
+  }
+
+
+
+
+
+  void __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) exit(int _Code) __attribute__ ((__noreturn__));
+  void __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _exit(int _Code) __attribute__ ((__noreturn__));
+
+
+
+  void __attribute__((__cdecl__)) _Exit(int) __attribute__ ((__noreturn__));
+
+  inline __attribute__ ((__noreturn__)) void __attribute__((__cdecl__)) _Exit(int status)
+  { _exit(status); }
+
+
+
+       
+
+  void __attribute__((__cdecl__)) __attribute__((noreturn)) abort(void);
+       
+
+
+
+  __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) _set_abort_behavior(unsigned int _Flags,unsigned int _Mask);
+
+
+
+  int __attribute__((__cdecl__)) abs(int _X);
+  long __attribute__((__cdecl__)) labs(long _X);
+
+
+  __extension__ long long __attribute__((__cdecl__)) _abs64(long long);
+
+  extern __inline__ __attribute__((__always_inline__,__gnu_inline__)) long long __attribute__((__cdecl__)) _abs64(long long x) {
+    return __builtin_llabs(x);
+  }
+
+
+  int __attribute__((__cdecl__)) atexit(void (__attribute__((__cdecl__)) *)(void));
+
+
+  double __attribute__((__cdecl__)) atof(const char *_String);
+  double __attribute__((__cdecl__)) _atof_l(const char *_String,_locale_t _Locale);
+
+  int __attribute__((__cdecl__)) atoi(const char *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoi_l(const char *_Str,_locale_t _Locale);
+  long __attribute__((__cdecl__)) atol(const char *_Str);
+  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _atol_l(const char *_Str,_locale_t _Locale);
+
+
+  void *__attribute__((__cdecl__)) bsearch(const void *_Key,const void *_Base,size_t _NumOfElements,size_t _SizeOfElements,int (__attribute__((__cdecl__)) *_PtFuncCompare)(const void *,const void *));
+  void __attribute__((__cdecl__)) qsort(void *_Base,size_t _NumOfElements,size_t _SizeOfElements,int (__attribute__((__cdecl__)) *_PtFuncCompare)(const void *,const void *));
+
+  unsigned short __attribute__((__cdecl__)) _byteswap_ushort(unsigned short _Short);
+  unsigned long __attribute__((__cdecl__)) _byteswap_ulong (unsigned long _Long);
+  __extension__ unsigned long long __attribute__((__cdecl__)) _byteswap_uint64(unsigned long long _Int64);
+  div_t __attribute__((__cdecl__)) div(int _Numerator,int _Denominator);
+  char *__attribute__((__cdecl__)) getenv(const char *_VarName) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _itoa(int _Value,char *_Dest,int _Radix);
+  __extension__ __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _i64toa(long long _Val,char *_DstBuf,int _Radix) ;
+  __extension__ __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ui64toa(unsigned long long _Val,char *_DstBuf,int _Radix) ;
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _atoi64(const char *_String);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _atoi64_l(const char *_String,_locale_t _Locale);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _strtoi64(const char *_String,char **_EndPtr,int _Radix);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _strtoi64_l(const char *_String,char **_EndPtr,int _Radix,_locale_t _Locale);
+  __extension__ __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _strtoui64(const char *_String,char **_EndPtr,int _Radix);
+  __extension__ __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _strtoui64_l(const char *_String,char **_EndPtr,int _Radix,_locale_t _Locale);
+  ldiv_t __attribute__((__cdecl__)) ldiv(long _Numerator,long _Denominator);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ltoa(long _Value,char *_Dest,int _Radix) ;
+  int __attribute__((__cdecl__)) mblen(const char *_Ch,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _mblen_l(const char *_Ch,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrlen(const char *_Str);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrlen_l(const char *_Str,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrnlen(const char *_Str,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrnlen_l(const char *_Str,size_t _MaxCount,_locale_t _Locale);
+  int __attribute__((__cdecl__)) mbtowc(wchar_t * __restrict__ _DstCh,const char * __restrict__ _SrcCh,size_t _SrcSizeInBytes);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _mbtowc_l(wchar_t * __restrict__ _DstCh,const char * __restrict__ _SrcCh,size_t _SrcSizeInBytes,_locale_t _Locale);
+  size_t __attribute__((__cdecl__)) mbstowcs(wchar_t * __restrict__ _Dest,const char * __restrict__ _Source,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstowcs_l(wchar_t * __restrict__ _Dest,const char * __restrict__ _Source,size_t _MaxCount,_locale_t _Locale);
+  int __attribute__((__cdecl__)) rand(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _set_error_mode(int _Mode);
+  void __attribute__((__cdecl__)) srand(unsigned int _Seed);
+# 404 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  double __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) strtod(const char * __restrict__ _Str,char ** __restrict__ _EndPtr);
+  float __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) strtof(const char * __restrict__ nptr, char ** __restrict__ endptr);
+
+  long double __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) strtold(const char * __restrict__ , char ** __restrict__ );
+
+
+  extern double __attribute__((__cdecl__)) __attribute__ ((__nothrow__))
+  __strtod (const char * __restrict__ , char ** __restrict__);
+
+
+
+
+  float __attribute__((__cdecl__)) __mingw_strtof (const char * __restrict__, char ** __restrict__);
+  double __attribute__((__cdecl__)) __mingw_strtod (const char * __restrict__, char ** __restrict__);
+  long double __attribute__((__cdecl__)) __mingw_strtold(const char * __restrict__, char ** __restrict__);
+
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _strtod_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,_locale_t _Locale);
+  long __attribute__((__cdecl__)) strtol(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix);
+  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _strtol_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
+  unsigned long __attribute__((__cdecl__)) strtoul(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix);
+  __attribute__ ((__dllimport__)) unsigned long __attribute__((__cdecl__)) _strtoul_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
+
+
+  int __attribute__((__cdecl__)) system(const char *_Command);
+
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ultoa(unsigned long _Value,char *_Dest,int _Radix) ;
+  int __attribute__((__cdecl__)) wctomb(char *_MbCh,wchar_t _WCh) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wctomb_l(char *_MbCh,wchar_t _WCh,_locale_t _Locale) ;
+  size_t __attribute__((__cdecl__)) wcstombs(char * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _MaxCount) ;
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _wcstombs_l(char * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _MaxCount,_locale_t _Locale) ;
+
+
+
+  void *__attribute__((__cdecl__)) calloc(size_t _NumOfElements,size_t _SizeOfElements);
+  void __attribute__((__cdecl__)) free(void *_Memory);
+  void *__attribute__((__cdecl__)) malloc(size_t _Size);
+  void *__attribute__((__cdecl__)) realloc(void *_Memory,size_t _NewSize);
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _recalloc(void *_Memory,size_t _Count,size_t _Size);
+
+
+       
+       
+
+
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _aligned_free(void *_Memory);
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_malloc(size_t _Size,size_t _Alignment);
+       
+       
+
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_offset_malloc(size_t _Size,size_t _Alignment,size_t _Offset);
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_realloc(void *_Memory,size_t _Size,size_t _Alignment);
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_recalloc(void *_Memory,size_t _Count,size_t _Size,size_t _Alignment);
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_offset_realloc(void *_Memory,size_t _Size,size_t _Alignment,size_t _Offset);
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_offset_recalloc(void *_Memory,size_t _Count,size_t _Size,size_t _Alignment,size_t _Offset);
+
+
+
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _itow(int _Value,wchar_t *_Dest,int _Radix) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _ltow(long _Value,wchar_t *_Dest,int _Radix) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _ultow(unsigned long _Value,wchar_t *_Dest,int _Radix) ;
+
+  double __attribute__((__cdecl__)) __mingw_wcstod(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr);
+  float __attribute__((__cdecl__)) __mingw_wcstof(const wchar_t * __restrict__ nptr, wchar_t ** __restrict__ endptr);
+  long double __attribute__((__cdecl__)) __mingw_wcstold(const wchar_t * __restrict__, wchar_t ** __restrict__);
+# 482 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  double __attribute__((__cdecl__)) wcstod(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr);
+  float __attribute__((__cdecl__)) wcstof(const wchar_t * __restrict__ nptr, wchar_t ** __restrict__ endptr);
+
+
+  long double __attribute__((__cdecl__)) wcstold(const wchar_t * __restrict__, wchar_t ** __restrict__);
+
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _wcstod_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,_locale_t _Locale);
+  long __attribute__((__cdecl__)) wcstol(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix);
+  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _wcstol_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
+  unsigned long __attribute__((__cdecl__)) wcstoul(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix);
+  __attribute__ ((__dllimport__)) unsigned long __attribute__((__cdecl__)) _wcstoul_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wgetenv(const wchar_t *_VarName) ;
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wsystem(const wchar_t *_Command);
+
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _wtof(const wchar_t *_Str);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _wtof_l(const wchar_t *_Str,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wtoi(const wchar_t *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wtoi_l(const wchar_t *_Str,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _wtol(const wchar_t *_Str);
+  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _wtol_l(const wchar_t *_Str,_locale_t _Locale);
+
+  __extension__ __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _i64tow(long long _Val,wchar_t *_DstBuf,int _Radix) ;
+  __extension__ __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _ui64tow(unsigned long long _Val,wchar_t *_DstBuf,int _Radix) ;
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wtoi64(const wchar_t *_Str);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wtoi64_l(const wchar_t *_Str,_locale_t _Locale);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wcstoi64(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wcstoi64_l(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix,_locale_t _Locale);
+  __extension__ __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _wcstoui64(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix);
+  __extension__ __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _wcstoui64_l(const wchar_t *_Str ,wchar_t **_EndPtr,int _Radix,_locale_t _Locale);
+
+
+
+
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _fullpath(char *_FullPath,const char *_Path,size_t _SizeInBytes);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ecvt(double _Val,int _NumOfDigits,int *_PtDec,int *_PtSign) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _fcvt(double _Val,int _NumOfDec,int *_PtDec,int *_PtSign) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _gcvt(double _Val,int _NumOfDigits,char *_DstBuf) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atodbl(_CRT_DOUBLE *_Result,char *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoldbl(_LDOUBLE *_Result,char *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoflt(_CRT_FLOAT *_Result,char *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atodbl_l(_CRT_DOUBLE *_Result,char *_Str,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoldbl_l(_LDOUBLE *_Result,char *_Str,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoflt_l(_CRT_FLOAT *_Result,char *_Str,_locale_t _Locale);
+       
+       
+
+
+
+
+
+
+  unsigned long __attribute__((__cdecl__)) _lrotl(unsigned long _Val,int _Shift);
+  unsigned long __attribute__((__cdecl__)) _lrotr(unsigned long _Val,int _Shift);
+
+       
+       
+
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _makepath(char *_Path,const char *_Drive,const char *_Dir,const char *_Filename,const char *_Ext);
+  _onexit_t __attribute__((__cdecl__)) _onexit(_onexit_t _Func);
+
+
+
+  void __attribute__((__cdecl__)) perror(const char *_ErrMsg);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _putenv(const char *_EnvString);
+       
+       
+
+
+  __extension__ unsigned long long __attribute__((__cdecl__)) _rotl64(unsigned long long _Val,int _Shift);
+  __extension__ unsigned long long __attribute__((__cdecl__)) _rotr64(unsigned long long Value,int Shift);
+       
+       
+       
+       
+
+
+  unsigned int __attribute__((__cdecl__)) _rotr(unsigned int _Val,int _Shift);
+  unsigned int __attribute__((__cdecl__)) _rotl(unsigned int _Val,int _Shift);
+       
+       
+  __extension__ unsigned long long __attribute__((__cdecl__)) _rotr64(unsigned long long _Val,int _Shift);
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _searchenv(const char *_Filename,const char *_EnvVar,char *_ResultPath) ;
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _splitpath(const char *_FullPath,char *_Drive,char *_Dir,char *_Filename,char *_Ext) ;
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _swab(char *_Buf1,char *_Buf2,int _SizeInBytes);
+
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wfullpath(wchar_t *_FullPath,const wchar_t *_Path,size_t _SizeInWords);
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wmakepath(wchar_t *_ResultPath,const wchar_t *_Drive,const wchar_t *_Dir,const wchar_t *_Filename,const wchar_t *_Ext);
+
+
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wperror(const wchar_t *_ErrMsg);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wputenv(const wchar_t *_EnvString);
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wsearchenv(const wchar_t *_Filename,const wchar_t *_EnvVar,wchar_t *_ResultPath) ;
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wsplitpath(const wchar_t *_FullPath,wchar_t *_Drive,wchar_t *_Dir,wchar_t *_Filename,wchar_t *_Ext) ;
+
+
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _beep(unsigned _Frequency,unsigned _Duration) __attribute__ ((__deprecated__));
+
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _seterrormode(int _Mode) __attribute__ ((__deprecated__));
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _sleep(unsigned long _Duration) __attribute__ ((__deprecated__));
+# 607 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
+  char *__attribute__((__cdecl__)) ecvt(double _Val,int _NumOfDigits,int *_PtDec,int *_PtSign) ;
+  char *__attribute__((__cdecl__)) fcvt(double _Val,int _NumOfDec,int *_PtDec,int *_PtSign) ;
+  char *__attribute__((__cdecl__)) gcvt(double _Val,int _NumOfDigits,char *_DstBuf) ;
+  char *__attribute__((__cdecl__)) itoa(int _Val,char *_DstBuf,int _Radix) ;
+  char *__attribute__((__cdecl__)) ltoa(long _Val,char *_DstBuf,int _Radix) ;
+  int __attribute__((__cdecl__)) putenv(const char *_EnvString) ;
+
+
+
+  void __attribute__((__cdecl__)) swab(char *_Buf1,char *_Buf2,int _SizeInBytes) ;
+
+
+  char *__attribute__((__cdecl__)) ultoa(unsigned long _Val,char *_Dstbuf,int _Radix) ;
+  _onexit_t __attribute__((__cdecl__)) onexit(_onexit_t _Func);
+
+
+
+
+
+  typedef struct { __extension__ long long quot, rem; } lldiv_t;
+
+  __extension__ lldiv_t __attribute__((__cdecl__)) lldiv(long long, long long);
+
+  __extension__ long long __attribute__((__cdecl__)) llabs(long long);
+
+  __extension__ inline long long __attribute__((__cdecl__)) llabs(long long _j) { return (_j >= 0 ? _j : -_j); }
+
+
+  __extension__ long long __attribute__((__cdecl__)) strtoll(const char * __restrict__, char ** __restrict, int);
+  __extension__ unsigned long long __attribute__((__cdecl__)) strtoull(const char * __restrict__, char ** __restrict__, int);
+
+
+  __extension__ long long __attribute__((__cdecl__)) atoll (const char *);
+
+
+  __extension__ long long __attribute__((__cdecl__)) wtoll (const wchar_t *);
+  __extension__ char *__attribute__((__cdecl__)) lltoa (long long, char *, int);
+  __extension__ char *__attribute__((__cdecl__)) ulltoa (unsigned long long , char *, int);
+  __extension__ wchar_t *__attribute__((__cdecl__)) lltow (long long, wchar_t *, int);
+  __extension__ wchar_t *__attribute__((__cdecl__)) ulltow (unsigned long long, wchar_t *, int);
+
+
+
+  __extension__ inline long long __attribute__((__cdecl__)) atoll (const char * _c) { return _atoi64 (_c); }
+  __extension__ inline char *__attribute__((__cdecl__)) lltoa (long long _n, char * _c, int _i) { return _i64toa (_n, _c, _i); }
+  __extension__ inline char *__attribute__((__cdecl__)) ulltoa (unsigned long long _n, char * _c, int _i) { return _ui64toa (_n, _c, _i); }
+  __extension__ inline long long __attribute__((__cdecl__)) wtoll (const wchar_t * _w) { return _wtoi64 (_w); }
+  __extension__ inline wchar_t *__attribute__((__cdecl__)) lltow (long long _n, wchar_t * _w, int _i) { return _i64tow (_n, _w, _i); }
+  __extension__ inline wchar_t *__attribute__((__cdecl__)) ulltow (unsigned long long _n, wchar_t * _w, int _i) { return _ui64tow (_n, _w, _i); }
+
+
+
+
+
+
+}
+
+
+#pragma pack(pop)
+
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/stdlib_s.h" 1 3
+# 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/stdlib_s.h" 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 1 3
+# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/stdlib_s.h" 2 3
+
+
+
+
+extern "C" {
+
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _dupenv_s(char **_PBuffer,size_t *_PBufferSizeInBytes,const char *_VarName);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _itoa_s(int _Value,char *_DstBuf,size_t _Size,int _Radix);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _i64toa_s(long long _Val,char *_DstBuf,size_t _Size,int _Radix);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ui64toa_s(unsigned long long _Val,char *_DstBuf,size_t _Size,int _Radix);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ltoa_s(long _Val,char *_DstBuf,size_t _Size,int _Radix);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) mbstowcs_s(size_t *_PtNumOfCharConverted,wchar_t *_DstBuf,size_t _SizeInWords,const char *_SrcBuf,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _mbstowcs_s_l(size_t *_PtNumOfCharConverted,wchar_t *_DstBuf,size_t _SizeInWords,const char *_SrcBuf,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ultoa_s(unsigned long _Val,char *_DstBuf,size_t _Size,int _Radix);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wctomb_s_l(int *_SizeConverted,char *_MbCh,size_t _SizeInBytes,wchar_t _WCh,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcstombs_s(size_t *_PtNumOfCharConverted,char *_Dst,size_t _DstSizeInBytes,const wchar_t *_Src,size_t _MaxCountInBytes);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcstombs_s_l(size_t *_PtNumOfCharConverted,char *_Dst,size_t _DstSizeInBytes,const wchar_t *_Src,size_t _MaxCountInBytes,_locale_t _Locale);
+
+
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _itow_s (int _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ltow_s (long _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ultow_s (unsigned long _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wgetenv_s(size_t *_ReturnSize,wchar_t *_DstBuf,size_t _DstSizeInWords,const wchar_t *_VarName);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wdupenv_s(wchar_t **_Buffer,size_t *_BufferSizeInWords,const wchar_t *_VarName);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _i64tow_s(long long _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ui64tow_s(unsigned long long _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
+
+
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ecvt_s(char *_DstBuf,size_t _Size,double _Val,int _NumOfDights,int *_PtDec,int *_PtSign);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _fcvt_s(char *_DstBuf,size_t _Size,double _Val,int _NumOfDec,int *_PtDec,int *_PtSign);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _gcvt_s(char *_DstBuf,size_t _Size,double _Val,int _NumOfDigits);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _makepath_s(char *_PathResult,size_t _Size,const char *_Drive,const char *_Dir,const char *_Filename,const char *_Ext);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _putenv_s(const char *_Name,const char *_Value);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _searchenv_s(const char *_Filename,const char *_EnvVar,char *_ResultPath,size_t _SizeInBytes);
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _splitpath_s(const char *_FullPath,char *_Drive,size_t _DriveSize,char *_Dir,size_t _DirSize,char *_Filename,size_t _FilenameSize,char *_Ext,size_t _ExtSize);
+  extern "C++" { template <size_t __drive_size, size_t __dir_size, size_t __name_size, size_t __ext_size> inline errno_t __attribute__((__cdecl__)) _splitpath_s(const char *_Dest, char (&__drive)[__drive_size], char (&__dir)[__dir_size], char (&__name)[__name_size], char (&__ext)[__ext_size]) { return _splitpath_s(_Dest, __drive, __drive_size, __dir, __dir_size, __name, __name_size, __ext, __ext_size); } }
+
+
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wmakepath_s(wchar_t *_PathResult,size_t _SizeInWords,const wchar_t *_Drive,const wchar_t *_Dir,const wchar_t *_Filename,const wchar_t *_Ext);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wputenv_s(const wchar_t *_Name,const wchar_t *_Value);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wsearchenv_s(const wchar_t *_Filename,const wchar_t *_EnvVar,wchar_t *_ResultPath,size_t _SizeInWords);
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wsplitpath_s(const wchar_t *_FullPath,wchar_t *_Drive,size_t _DriveSizeInWords,wchar_t *_Dir,size_t _DirSizeInWords,wchar_t *_Filename,size_t _FilenameSizeInWords,wchar_t *_Ext,size_t _ExtSizeInWords);
+  extern "C++" { template <size_t __drive_size, size_t __dir_size, size_t __name_size, size_t __ext_size> inline errno_t __attribute__((__cdecl__)) _wsplitpath_s(const wchar_t *_Dest, wchar_t (&__drive)[__drive_size], wchar_t (&__dir)[__dir_size], wchar_t (&__name)[__name_size], wchar_t (&__ext)[__ext_size]) { return _wsplitpath_s(_Dest, __drive, __drive_size, __dir, __dir_size, __name, __name_size, __ext, __ext_size); } }
+
+
+
+
+
+}
+# 668 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 2 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 1 3
+# 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
+#pragma pack(push,_CRT_PACKING)
+
+
+extern "C" {
+# 46 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
+  typedef struct _heapinfo {
+    int *_pentry;
+    size_t _size;
+    int _useflag;
+  } _HEAPINFO;
+
+
+  extern unsigned int _amblksiz;
+# 65 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
+       
+       
+# 97 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
+       
+       
+
+
+
+
+void * __mingw_aligned_malloc (size_t _Size, size_t _Alignment);
+void __mingw_aligned_free (void *_Memory);
+void * __mingw_aligned_offset_realloc (void *_Memory, size_t _Size, size_t _Alignment, size_t _Offset);
+void * __mingw_aligned_realloc (void *_Memory, size_t _Size, size_t _Offset);
+
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _resetstkoflw (void);
+  __attribute__ ((__dllimport__)) unsigned long __attribute__((__cdecl__)) _set_malloc_crt_max_wait(unsigned long _NewValue);
+
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _expand(void *_Memory,size_t _NewSize);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _msize(void *_Memory);
+
+
+
+
+
+
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _get_sbh_threshold(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _set_sbh_threshold(size_t _NewValue);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _set_amblksiz(size_t _Value);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_amblksiz(size_t *_Value);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapadd(void *_Memory,size_t _Size);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapchk(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapmin(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapset(unsigned int _Fill);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapwalk(_HEAPINFO *_EntryInfo);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _heapused(size_t *_Used,size_t *_Commit);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _get_heap_handle(void);
+# 144 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
+  static __inline void *_MarkAllocaS(void *_Ptr,unsigned int _Marker) {
+    if(_Ptr) {
+      *((unsigned int*)_Ptr) = _Marker;
+      _Ptr = (char*)_Ptr + 8;
+    }
+    return _Ptr;
+  }
+# 163 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
+  static __inline void __attribute__((__cdecl__)) _freea(void *_Memory) {
+    unsigned int _Marker;
+    if(_Memory) {
+      _Memory = (char*)_Memory - 8;
+      _Marker = *(unsigned int *)_Memory;
+      if(_Marker==0xDDDD) {
+ free(_Memory);
+      }
+
+
+
+
+
+    }
+  }
+# 206 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
+}
+
+
+#pragma pack(pop)
+# 669 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 2 3
+# 37 "../src/interface/./../interface/./../support/SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
+# 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
 extern "C" {
 # 36 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
   __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _memccpy(void *_Dst,const void *_Src,int _Val,size_t _MaxCount);
@@ -386,94 +1065,10 @@ extern "C" {
 
 }
 # 181 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 2 3
-# 89 "../src/interface/./../interface/./../support/SupportDefs.h" 2
-# 1 "../src/interface/./../interface/./../support/Errors.h" 1
-# 32 "../src/interface/./../interface/./../support/Errors.h"
+# 38 "../src/interface/./../interface/./../support/SupportDefs.h" 2
+# 96 "../src/interface/./../interface/./../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 34 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 3 4
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h" 1 3 4
-
-
-
-
-
-
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 168 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/limits.h" 1 3 4
-# 169 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 2 3 4
-# 8 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h" 2 3 4
-# 35 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 2 3 4
-# 33 "../src/interface/./../interface/./../support/Errors.h" 2
-# 41 "../src/interface/./../interface/./../support/Errors.h"
-enum {
- E_NO_MEMORY = (-2147483647 - 1),
- E_IO_ERROR,
- E_PERMISSION_DENIED,
- E_BAD_INDEX,
- E_BAD_TYPE,
- E_BAD_VALUE,
- E_MISMATCHED_VALUES,
- E_NAME_NOT_FOUND,
- E_NAME_IN_USE,
- E_TIMED_OUT,
- E_INTERRUPTED,
- E_WOULD_BLOCK,
- E_CANCELED,
- E_NO_INIT,
- E_BUSY,
- E_NOT_ALLOWED,
-
- E_ERROR = -1,
- E_OK = 1,
- E_NO_ERROR = 1
-};
-
-
-enum {
- E_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
- E_NO_MORE_SEMS,
-
- E_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
- E_NO_MORE_THREADS,
- E_BAD_THREAD_STATE,
- E_BAD_TEAM_ID,
- E_NO_MORE_TEAMS,
-
- E_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
- E_NO_MORE_PORTS,
-
- E_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
- E_BAD_ADDRESS,
- E_NOT_AN_EXECUTABLE,
- E_MISSING_LIBRARY,
- E_MISSING_SYMBOL,
-
- E_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
-};
-
-
-enum {
- E_BAD_REPLY = (-2147483647 - 1) + 0x2000,
- E_DUPLICATE_REPLY,
- E_MESSAGE_TO_SELF,
- E_BAD_HANDLER,
- E_ALREADY_RUNNING,
-};
-
-
-enum {
- E_FILE_ERROR = (-2147483647 - 1) + 0x3000,
- E_ENTRY_NOT_FOUND,
- E_LINK_LIMIT,
- E_NAME_TOO_LONG,
-};
-# 90 "../src/interface/./../interface/./../support/SupportDefs.h" 2
-
-
-
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 94 "../src/interface/./../interface/./../support/SupportDefs.h" 2
+# 97 "../src/interface/./../interface/./../support/SupportDefs.h" 2
 
 
 
@@ -520,61 +1115,61 @@ extern long double __attribute__((__cdecl__)) _chgsignl (long double);
 
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 100 "../src/interface/./../interface/./../support/SupportDefs.h" 2
-# 111 "../src/interface/./../interface/./../support/SupportDefs.h"
-typedef int eunichar32;
-typedef short eunichar;
+# 103 "../src/interface/./../interface/./../support/SupportDefs.h" 2
+# 114 "../src/interface/./../interface/./../support/SupportDefs.h"
+typedef int b_unichar32;
+typedef short b_unichar;
 
-typedef char eint8;
-typedef unsigned char euint8;
-typedef short eint16;
-typedef unsigned short euint16;
-typedef int eint32;
-typedef unsigned int euint32;
-typedef long long eint64;
-typedef unsigned long long euint64;
+typedef char b_int8;
+typedef unsigned char b_uint8;
+typedef short b_int16;
+typedef unsigned short b_uint16;
+typedef int b_int32;
+typedef unsigned int b_uint32;
+typedef long long b_int64;
+typedef unsigned long long b_uint64;
 
-typedef eint32 e_status_t;
-typedef euint32 e_type_code;
-typedef euint32 e_perform_code;
-typedef eint64 e_bigtime_t;
-typedef eint64 e_thread_id;
-typedef size_t e_address_t;
+typedef b_int32 b_status_t;
+typedef b_uint32 b_type_code;
+typedef b_uint32 b_perform_code;
+typedef b_int64 b_bigtime_t;
+typedef b_int64 b_thread_id;
+typedef size_t b_address_t;
 
 enum {
-    E_ANY_TYPE = 'ANYT',
- E_BOOL_TYPE = 'BOOL',
- E_CHAR_TYPE = 'CHAR',
- E_DOUBLE_TYPE = 'DBLE',
- E_FLOAT_TYPE = 'FLOT',
- E_INT64_TYPE = 'LLNG',
- E_INT32_TYPE = 'LONG',
- E_INT16_TYPE = 'SHRT',
- E_INT8_TYPE = 'BYTE',
- E_MESSAGE_TYPE = 'MSGG',
- E_MESSENGER_TYPE = 'MSNG',
- E_POINTER_TYPE = 'PNTR',
- E_SIZE_T_TYPE = 'SIZT',
- E_SSIZE_T_TYPE = 'SSZT',
- E_STRING_TYPE = 'CSTR',
- E_UINT64_TYPE = 'ULLG',
- E_UINT32_TYPE = 'ULNG',
- E_UINT16_TYPE = 'USHT',
- E_UINT8_TYPE = 'UBYT',
- E_POINT_TYPE = 'SPNT',
-    E_RECT_TYPE = 'RECT',
-    E_MIME_TYPE = 'MIME',
- E_UNKNOWN_TYPE = 'UNKN'
+    B_ANY_TYPE = 'ANYT',
+    B_BOOL_TYPE = 'BOOL',
+    B_CHAR_TYPE = 'CHAR',
+    B_DOUBLE_TYPE = 'DBLE',
+    B_FLOAT_TYPE = 'FLOT',
+    B_INT64_TYPE = 'LLNG',
+    B_INT32_TYPE = 'LONG',
+    B_INT16_TYPE = 'SHRT',
+    B_INT8_TYPE = 'BYTE',
+    B_MESSAGE_TYPE = 'MSGG',
+    B_MESSENGER_TYPE = 'MSNG',
+    B_POINTER_TYPE = 'PNTR',
+    B_SIZE_T_TYPE = 'SIZT',
+    B_SSIZE_T_TYPE = 'SSZT',
+    B_STRING_TYPE = 'CSTR',
+    B_UINT64_TYPE = 'ULLG',
+    B_UINT32_TYPE = 'ULNG',
+    B_UINT16_TYPE = 'USHT',
+    B_UINT8_TYPE = 'UBYT',
+    B_POINT_TYPE = 'SPNT',
+    B_RECT_TYPE = 'RECT',
+    B_MIME_TYPE = 'MIME',
+    B_UNKNOWN_TYPE = 'UNKN'
 };
-# 252 "../src/interface/./../interface/./../support/SupportDefs.h"
+# 255 "../src/interface/./../interface/./../support/SupportDefs.h"
 extern "C" {
 
 
-extern __attribute__((dllexport)) const euint8 etk_major_version;
-extern __attribute__((dllexport)) const euint8 etk_minor_version;
-extern __attribute__((dllexport)) const euint8 etk_micro_version;
-extern __attribute__((dllexport)) const euint8 etk_interface_age;
-extern __attribute__((dllexport)) const euint16 etk_binary_age;
+extern __attribute__((dllexport)) const b_uint8 bhapi_major_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_minor_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_micro_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_interface_age;
+extern __attribute__((dllexport)) const b_uint16 bhapi_binary_age;
 
 
 }
@@ -650,9 +1245,6 @@ extern "C" {
 # 66 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/windows.h" 2 3
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 140 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_stdarg.h" 1 3 4
-# 141 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 2 3 4
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
 # 67 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/windows.h" 2 3
 
@@ -852,8 +1444,6 @@ int __attribute__((__cdecl__)) isblank(int _C);
 
 
 int __attribute__((__cdecl__)) iswblank(wint_t _C);
-# 194 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
-  extern int * _imp____mb_cur_max;
 # 276 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
 }
 # 17 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winnt.h" 2 3
@@ -3708,7 +4298,7 @@ __inline bool operator!= (const GUID & guidOne, const GUID & guidOther) { return
       DWORD DefaultAlert2;
     } SYSTEM_BATTERY_STATE,*PSYSTEM_BATTERY_STATE;
 
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/pshpack4.h" 1 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/pshpack4.h" 1 3 4
 
 
 
@@ -3724,7 +4314,7 @@ __inline bool operator!= (const GUID & guidOne, const GUID & guidOther) { return
 
 
 
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/pshpack2.h" 1 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/pshpack2.h" 1 3 4
 
 
 
@@ -3843,7 +4433,7 @@ __inline bool operator!= (const GUID & guidOne, const GUID & guidOther) { return
       WORD e32_ddkver;
     } IMAGE_VXD_HEADER,*PIMAGE_VXD_HEADER;
 
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/poppack.h" 1 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/poppack.h" 1 3 4
 
 
 
@@ -4041,7 +4631,7 @@ __inline bool operator!= (const GUID & guidOne, const GUID & guidOther) { return
       DWORD Characteristics;
     } IMAGE_SECTION_HEADER,*PIMAGE_SECTION_HEADER;
 # 5795 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winnt.h" 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/pshpack2.h" 1 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/pshpack2.h" 1 3 4
 
 
 
@@ -4206,7 +4796,7 @@ __inline bool operator!= (const GUID & guidOne, const GUID & guidOther) { return
 
 
 
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/poppack.h" 1 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/poppack.h" 1 3 4
 
 
 
@@ -4253,7 +4843,7 @@ __inline bool operator!= (const GUID & guidOne, const GUID & guidOther) { return
       BYTE Name[1];
     } IMAGE_IMPORT_BY_NAME,*PIMAGE_IMPORT_BY_NAME;
 
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/pshpack8.h" 1 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/pshpack8.h" 1 3 4
 
 
 
@@ -4273,7 +4863,7 @@ __inline bool operator!= (const GUID & guidOne, const GUID & guidOther) { return
     } IMAGE_THUNK_DATA64;
     typedef IMAGE_THUNK_DATA64 *PIMAGE_THUNK_DATA64;
 
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/poppack.h" 1 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/poppack.h" 1 3 4
 
 
 
@@ -4636,7 +5226,7 @@ __inline bool operator!= (const GUID & guidOne, const GUID & guidOther) { return
       DWORD FixupInstRVA;
       DWORD NewInst;
     } IMAGE_ARCHITECTURE_ENTRY,*PIMAGE_ARCHITECTURE_ENTRY;
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/poppack.h" 1 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/poppack.h" 1 3 4
 
 
 
@@ -5285,12 +5875,12 @@ typedef DWORD (__attribute__((__stdcall__)) *PRTL_RUN_ONCE_INIT_FN)(PRTL_RUN_ONC
 
 
     inline __attribute__((__always_inline__)) void TpInitializeCallbackEnviron (PTP_CALLBACK_ENVIRON cbe) {
-      cbe->Pool = 0;
-      cbe->CleanupGroup = 0;
-      cbe->CleanupGroupCancelCallback = 0;
-      cbe->RaceDll = 0;
-      cbe->ActivationContext = 0;
-      cbe->FinalizationCallback = 0;
+      cbe->Pool = __null;
+      cbe->CleanupGroup = __null;
+      cbe->CleanupGroupCancelCallback = __null;
+      cbe->RaceDll = __null;
+      cbe->ActivationContext = __null;
+      cbe->FinalizationCallback = __null;
       cbe->u.Flags = 0;
 
       cbe->Version = 1;
@@ -5558,7 +6148,7 @@ typedef struct _WOW64_FLOATING_SAVE_AREA {
   DWORD Cr0NpxState;
 } WOW64_FLOATING_SAVE_AREA, *PWOW64_FLOATING_SAVE_AREA;
 
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/pshpack4.h" 1 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/pshpack4.h" 1 3 4
 
 
 
@@ -5594,7 +6184,7 @@ typedef struct _WOW64_CONTEXT {
   DWORD SegSs;
   BYTE ExtendedRegisters[512];
 } WOW64_CONTEXT, *PWOW64_CONTEXT;
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/poppack.h" 1 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/poppack.h" 1 3 4
 
 
 
@@ -20400,641 +20990,6 @@ extern "C++" {
     return reinterpret_cast<void **> (pp);
   }
 }
-# 129 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/combaseapi.h" 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 1 3
-# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 2 3
-
-
-
-
-
-#pragma pack(push,_CRT_PACKING)
-
-
-extern "C" {
-# 40 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  typedef int (__attribute__((__cdecl__)) *_onexit_t)(void);
-# 50 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  typedef struct _div_t {
-    int quot;
-    int rem;
-  } div_t;
-
-  typedef struct _ldiv_t {
-    long quot;
-    long rem;
-  } ldiv_t;
-
-
-
-
-
-#pragma pack(4)
-  typedef struct {
-    unsigned char ld[10];
-  } _LDOUBLE;
-#pragma pack()
-
-
-
-  typedef struct {
-    double x;
-  } _CRT_DOUBLE;
-
-  typedef struct {
-    float f;
-  } _CRT_FLOAT;
-
-       
-
-
-  typedef struct {
-    long double x;
-  } _LONGDOUBLE;
-
-       
-
-#pragma pack(4)
-  typedef struct {
-    unsigned char ld12[12];
-  } _LDBL12;
-#pragma pack()
-# 131 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  typedef void (__attribute__((__cdecl__)) *_purecall_handler)(void);
-
-  __attribute__ ((__dllimport__)) _purecall_handler __attribute__((__cdecl__)) _set_purecall_handler(_purecall_handler _Handler);
-  __attribute__ ((__dllimport__)) _purecall_handler __attribute__((__cdecl__)) _get_purecall_handler(void);
-
-  typedef void (__attribute__((__cdecl__)) *_invalid_parameter_handler)(const wchar_t *,const wchar_t *,const wchar_t *,unsigned int,uintptr_t);
-  __attribute__ ((__dllimport__)) _invalid_parameter_handler __attribute__((__cdecl__)) _set_invalid_parameter_handler(_invalid_parameter_handler _Handler);
-  __attribute__ ((__dllimport__)) _invalid_parameter_handler __attribute__((__cdecl__)) _get_invalid_parameter_handler(void);
-
-
-
-  __attribute__ ((__dllimport__)) extern int *__attribute__((__cdecl__)) _errno(void);
-
-  errno_t __attribute__((__cdecl__)) _set_errno(int _Value);
-  errno_t __attribute__((__cdecl__)) _get_errno(int *_Value);
-
-  __attribute__ ((__dllimport__)) unsigned long *__attribute__((__cdecl__)) __doserrno(void);
-
-  errno_t __attribute__((__cdecl__)) _set_doserrno(unsigned long _Value);
-  errno_t __attribute__((__cdecl__)) _get_doserrno(unsigned long *_Value);
-
-
-
-
-  extern __attribute__ ((__dllimport__)) char *_sys_errlist[1];
-  extern __attribute__ ((__dllimport__)) int _sys_nerr;
-
-
-  __attribute__ ((__dllimport__)) int *__attribute__((__cdecl__)) __p___argc(void);
-  __attribute__ ((__dllimport__)) char ***__attribute__((__cdecl__)) __p___argv(void);
-  __attribute__ ((__dllimport__)) wchar_t ***__attribute__((__cdecl__)) __p___wargv(void);
-  __attribute__ ((__dllimport__)) char ***__attribute__((__cdecl__)) __p__environ(void);
-  __attribute__ ((__dllimport__)) wchar_t ***__attribute__((__cdecl__)) __p__wenviron(void);
-  __attribute__ ((__dllimport__)) char **__attribute__((__cdecl__)) __p__pgmptr(void);
-  __attribute__ ((__dllimport__)) wchar_t **__attribute__((__cdecl__)) __p__wpgmptr(void);
-
-
-
-
-
-  extern int * _imp____argc;
-
-
-
-
-
-
-
-  extern char *** _imp____argv;
-
-
-
-
-
-
-
-  extern wchar_t *** _imp____wargv;
-# 199 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  extern char *** _imp___environ;
-# 208 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  extern wchar_t *** _imp___wenviron;
-# 217 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  extern char ** _imp___pgmptr;
-# 226 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  extern wchar_t ** _imp___wpgmptr;
-
-
-
-  errno_t __attribute__((__cdecl__)) _get_pgmptr(char **_Value);
-  errno_t __attribute__((__cdecl__)) _get_wpgmptr(wchar_t **_Value);
-
-
-
-
-  extern int * _imp___fmode;
-
-
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _set_fmode(int _Mode);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_fmode(int *_PMode);
-
-
-
-
-
-  extern unsigned int * _imp___osplatform;
-# 256 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  extern unsigned int * _imp___osver;
-# 265 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  extern unsigned int * _imp___winver;
-# 274 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  extern unsigned int * _imp___winmajor;
-# 283 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  extern unsigned int * _imp___winminor;
-
-
-
-
-  errno_t __attribute__((__cdecl__)) _get_osplatform(unsigned int *_Value);
-  errno_t __attribute__((__cdecl__)) _get_osver(unsigned int *_Value);
-  errno_t __attribute__((__cdecl__)) _get_winver(unsigned int *_Value);
-  errno_t __attribute__((__cdecl__)) _get_winmajor(unsigned int *_Value);
-  errno_t __attribute__((__cdecl__)) _get_winminor(unsigned int *_Value);
-
-
-
-
-  extern "C++" {
-    template <typename _CountofType,size_t _SizeOfArray> char (*__countof_helper( _CountofType (&_Array)[_SizeOfArray]))[_SizeOfArray];
-
-  }
-
-
-
-
-
-  void __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) exit(int _Code) __attribute__ ((__noreturn__));
-  void __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _exit(int _Code) __attribute__ ((__noreturn__));
-
-
-
-  void __attribute__((__cdecl__)) _Exit(int) __attribute__ ((__noreturn__));
-
-  inline __attribute__ ((__noreturn__)) void __attribute__((__cdecl__)) _Exit(int status)
-  { _exit(status); }
-
-
-
-       
-
-  void __attribute__((__cdecl__)) __attribute__((noreturn)) abort(void);
-       
-
-
-
-  __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) _set_abort_behavior(unsigned int _Flags,unsigned int _Mask);
-
-
-
-  int __attribute__((__cdecl__)) abs(int _X);
-  long __attribute__((__cdecl__)) labs(long _X);
-
-
-  __extension__ long long __attribute__((__cdecl__)) _abs64(long long);
-
-  extern __inline__ __attribute__((__always_inline__,__gnu_inline__)) long long __attribute__((__cdecl__)) _abs64(long long x) {
-    return __builtin_llabs(x);
-  }
-
-
-  int __attribute__((__cdecl__)) atexit(void (__attribute__((__cdecl__)) *)(void));
-
-
-  double __attribute__((__cdecl__)) atof(const char *_String);
-  double __attribute__((__cdecl__)) _atof_l(const char *_String,_locale_t _Locale);
-
-  int __attribute__((__cdecl__)) atoi(const char *_Str);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoi_l(const char *_Str,_locale_t _Locale);
-  long __attribute__((__cdecl__)) atol(const char *_Str);
-  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _atol_l(const char *_Str,_locale_t _Locale);
-
-
-  void *__attribute__((__cdecl__)) bsearch(const void *_Key,const void *_Base,size_t _NumOfElements,size_t _SizeOfElements,int (__attribute__((__cdecl__)) *_PtFuncCompare)(const void *,const void *));
-  void __attribute__((__cdecl__)) qsort(void *_Base,size_t _NumOfElements,size_t _SizeOfElements,int (__attribute__((__cdecl__)) *_PtFuncCompare)(const void *,const void *));
-
-  unsigned short __attribute__((__cdecl__)) _byteswap_ushort(unsigned short _Short);
-  unsigned long __attribute__((__cdecl__)) _byteswap_ulong (unsigned long _Long);
-  __extension__ unsigned long long __attribute__((__cdecl__)) _byteswap_uint64(unsigned long long _Int64);
-  div_t __attribute__((__cdecl__)) div(int _Numerator,int _Denominator);
-  char *__attribute__((__cdecl__)) getenv(const char *_VarName) ;
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _itoa(int _Value,char *_Dest,int _Radix);
-  __extension__ __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _i64toa(long long _Val,char *_DstBuf,int _Radix) ;
-  __extension__ __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ui64toa(unsigned long long _Val,char *_DstBuf,int _Radix) ;
-  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _atoi64(const char *_String);
-  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _atoi64_l(const char *_String,_locale_t _Locale);
-  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _strtoi64(const char *_String,char **_EndPtr,int _Radix);
-  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _strtoi64_l(const char *_String,char **_EndPtr,int _Radix,_locale_t _Locale);
-  __extension__ __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _strtoui64(const char *_String,char **_EndPtr,int _Radix);
-  __extension__ __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _strtoui64_l(const char *_String,char **_EndPtr,int _Radix,_locale_t _Locale);
-  ldiv_t __attribute__((__cdecl__)) ldiv(long _Numerator,long _Denominator);
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ltoa(long _Value,char *_Dest,int _Radix) ;
-  int __attribute__((__cdecl__)) mblen(const char *_Ch,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _mblen_l(const char *_Ch,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrlen(const char *_Str);
-  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrlen_l(const char *_Str,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrnlen(const char *_Str,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrnlen_l(const char *_Str,size_t _MaxCount,_locale_t _Locale);
-  int __attribute__((__cdecl__)) mbtowc(wchar_t * __restrict__ _DstCh,const char * __restrict__ _SrcCh,size_t _SrcSizeInBytes);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _mbtowc_l(wchar_t * __restrict__ _DstCh,const char * __restrict__ _SrcCh,size_t _SrcSizeInBytes,_locale_t _Locale);
-  size_t __attribute__((__cdecl__)) mbstowcs(wchar_t * __restrict__ _Dest,const char * __restrict__ _Source,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstowcs_l(wchar_t * __restrict__ _Dest,const char * __restrict__ _Source,size_t _MaxCount,_locale_t _Locale);
-  int __attribute__((__cdecl__)) rand(void);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _set_error_mode(int _Mode);
-  void __attribute__((__cdecl__)) srand(unsigned int _Seed);
-# 404 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  double __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) strtod(const char * __restrict__ _Str,char ** __restrict__ _EndPtr);
-  float __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) strtof(const char * __restrict__ nptr, char ** __restrict__ endptr);
-
-  long double __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) strtold(const char * __restrict__ , char ** __restrict__ );
-
-
-  extern double __attribute__((__cdecl__)) __attribute__ ((__nothrow__))
-  __strtod (const char * __restrict__ , char ** __restrict__);
-
-
-
-
-  float __attribute__((__cdecl__)) __mingw_strtof (const char * __restrict__, char ** __restrict__);
-  double __attribute__((__cdecl__)) __mingw_strtod (const char * __restrict__, char ** __restrict__);
-  long double __attribute__((__cdecl__)) __mingw_strtold(const char * __restrict__, char ** __restrict__);
-
-  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _strtod_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,_locale_t _Locale);
-  long __attribute__((__cdecl__)) strtol(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix);
-  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _strtol_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
-  unsigned long __attribute__((__cdecl__)) strtoul(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix);
-  __attribute__ ((__dllimport__)) unsigned long __attribute__((__cdecl__)) _strtoul_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
-
-
-  int __attribute__((__cdecl__)) system(const char *_Command);
-
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ultoa(unsigned long _Value,char *_Dest,int _Radix) ;
-  int __attribute__((__cdecl__)) wctomb(char *_MbCh,wchar_t _WCh) ;
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wctomb_l(char *_MbCh,wchar_t _WCh,_locale_t _Locale) ;
-  size_t __attribute__((__cdecl__)) wcstombs(char * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _MaxCount) ;
-  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _wcstombs_l(char * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _MaxCount,_locale_t _Locale) ;
-
-
-
-  void *__attribute__((__cdecl__)) calloc(size_t _NumOfElements,size_t _SizeOfElements);
-  void __attribute__((__cdecl__)) free(void *_Memory);
-  void *__attribute__((__cdecl__)) malloc(size_t _Size);
-  void *__attribute__((__cdecl__)) realloc(void *_Memory,size_t _NewSize);
-  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _recalloc(void *_Memory,size_t _Count,size_t _Size);
-
-
-       
-       
-
-
-  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _aligned_free(void *_Memory);
-  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_malloc(size_t _Size,size_t _Alignment);
-       
-       
-
-  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_offset_malloc(size_t _Size,size_t _Alignment,size_t _Offset);
-  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_realloc(void *_Memory,size_t _Size,size_t _Alignment);
-  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_recalloc(void *_Memory,size_t _Count,size_t _Size,size_t _Alignment);
-  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_offset_realloc(void *_Memory,size_t _Size,size_t _Alignment,size_t _Offset);
-  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_offset_recalloc(void *_Memory,size_t _Count,size_t _Size,size_t _Alignment,size_t _Offset);
-
-
-
-
-
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _itow(int _Value,wchar_t *_Dest,int _Radix) ;
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _ltow(long _Value,wchar_t *_Dest,int _Radix) ;
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _ultow(unsigned long _Value,wchar_t *_Dest,int _Radix) ;
-
-  double __attribute__((__cdecl__)) __mingw_wcstod(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr);
-  float __attribute__((__cdecl__)) __mingw_wcstof(const wchar_t * __restrict__ nptr, wchar_t ** __restrict__ endptr);
-  long double __attribute__((__cdecl__)) __mingw_wcstold(const wchar_t * __restrict__, wchar_t ** __restrict__);
-# 482 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  double __attribute__((__cdecl__)) wcstod(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr);
-  float __attribute__((__cdecl__)) wcstof(const wchar_t * __restrict__ nptr, wchar_t ** __restrict__ endptr);
-
-
-  long double __attribute__((__cdecl__)) wcstold(const wchar_t * __restrict__, wchar_t ** __restrict__);
-
-  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _wcstod_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,_locale_t _Locale);
-  long __attribute__((__cdecl__)) wcstol(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix);
-  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _wcstol_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
-  unsigned long __attribute__((__cdecl__)) wcstoul(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix);
-  __attribute__ ((__dllimport__)) unsigned long __attribute__((__cdecl__)) _wcstoul_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wgetenv(const wchar_t *_VarName) ;
-
-
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wsystem(const wchar_t *_Command);
-
-  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _wtof(const wchar_t *_Str);
-  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _wtof_l(const wchar_t *_Str,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wtoi(const wchar_t *_Str);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wtoi_l(const wchar_t *_Str,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _wtol(const wchar_t *_Str);
-  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _wtol_l(const wchar_t *_Str,_locale_t _Locale);
-
-  __extension__ __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _i64tow(long long _Val,wchar_t *_DstBuf,int _Radix) ;
-  __extension__ __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _ui64tow(unsigned long long _Val,wchar_t *_DstBuf,int _Radix) ;
-  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wtoi64(const wchar_t *_Str);
-  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wtoi64_l(const wchar_t *_Str,_locale_t _Locale);
-  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wcstoi64(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix);
-  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wcstoi64_l(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix,_locale_t _Locale);
-  __extension__ __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _wcstoui64(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix);
-  __extension__ __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _wcstoui64_l(const wchar_t *_Str ,wchar_t **_EndPtr,int _Radix,_locale_t _Locale);
-
-
-
-
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _fullpath(char *_FullPath,const char *_Path,size_t _SizeInBytes);
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ecvt(double _Val,int _NumOfDigits,int *_PtDec,int *_PtSign) ;
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _fcvt(double _Val,int _NumOfDec,int *_PtDec,int *_PtSign) ;
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _gcvt(double _Val,int _NumOfDigits,char *_DstBuf) ;
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atodbl(_CRT_DOUBLE *_Result,char *_Str);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoldbl(_LDOUBLE *_Result,char *_Str);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoflt(_CRT_FLOAT *_Result,char *_Str);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atodbl_l(_CRT_DOUBLE *_Result,char *_Str,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoldbl_l(_LDOUBLE *_Result,char *_Str,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoflt_l(_CRT_FLOAT *_Result,char *_Str,_locale_t _Locale);
-       
-       
-
-
-
-
-
-
-  unsigned long __attribute__((__cdecl__)) _lrotl(unsigned long _Val,int _Shift);
-  unsigned long __attribute__((__cdecl__)) _lrotr(unsigned long _Val,int _Shift);
-
-       
-       
-
-  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _makepath(char *_Path,const char *_Drive,const char *_Dir,const char *_Filename,const char *_Ext);
-  _onexit_t __attribute__((__cdecl__)) _onexit(_onexit_t _Func);
-
-
-
-  void __attribute__((__cdecl__)) perror(const char *_ErrMsg);
-
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _putenv(const char *_EnvString);
-       
-       
-
-
-  __extension__ unsigned long long __attribute__((__cdecl__)) _rotl64(unsigned long long _Val,int _Shift);
-  __extension__ unsigned long long __attribute__((__cdecl__)) _rotr64(unsigned long long Value,int Shift);
-       
-       
-       
-       
-
-
-  unsigned int __attribute__((__cdecl__)) _rotr(unsigned int _Val,int _Shift);
-  unsigned int __attribute__((__cdecl__)) _rotl(unsigned int _Val,int _Shift);
-       
-       
-  __extension__ unsigned long long __attribute__((__cdecl__)) _rotr64(unsigned long long _Val,int _Shift);
-  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _searchenv(const char *_Filename,const char *_EnvVar,char *_ResultPath) ;
-  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _splitpath(const char *_FullPath,char *_Drive,char *_Dir,char *_Filename,char *_Ext) ;
-  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _swab(char *_Buf1,char *_Buf2,int _SizeInBytes);
-
-
-
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wfullpath(wchar_t *_FullPath,const wchar_t *_Path,size_t _SizeInWords);
-  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wmakepath(wchar_t *_ResultPath,const wchar_t *_Drive,const wchar_t *_Dir,const wchar_t *_Filename,const wchar_t *_Ext);
-
-
-  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wperror(const wchar_t *_ErrMsg);
-
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wputenv(const wchar_t *_EnvString);
-  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wsearchenv(const wchar_t *_Filename,const wchar_t *_EnvVar,wchar_t *_ResultPath) ;
-  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wsplitpath(const wchar_t *_FullPath,wchar_t *_Drive,wchar_t *_Dir,wchar_t *_Filename,wchar_t *_Ext) ;
-
-
-  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _beep(unsigned _Frequency,unsigned _Duration) __attribute__ ((__deprecated__));
-
-  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _seterrormode(int _Mode) __attribute__ ((__deprecated__));
-  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _sleep(unsigned long _Duration) __attribute__ ((__deprecated__));
-# 607 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
-  char *__attribute__((__cdecl__)) ecvt(double _Val,int _NumOfDigits,int *_PtDec,int *_PtSign) ;
-  char *__attribute__((__cdecl__)) fcvt(double _Val,int _NumOfDec,int *_PtDec,int *_PtSign) ;
-  char *__attribute__((__cdecl__)) gcvt(double _Val,int _NumOfDigits,char *_DstBuf) ;
-  char *__attribute__((__cdecl__)) itoa(int _Val,char *_DstBuf,int _Radix) ;
-  char *__attribute__((__cdecl__)) ltoa(long _Val,char *_DstBuf,int _Radix) ;
-  int __attribute__((__cdecl__)) putenv(const char *_EnvString) ;
-
-
-
-  void __attribute__((__cdecl__)) swab(char *_Buf1,char *_Buf2,int _SizeInBytes) ;
-
-
-  char *__attribute__((__cdecl__)) ultoa(unsigned long _Val,char *_Dstbuf,int _Radix) ;
-  _onexit_t __attribute__((__cdecl__)) onexit(_onexit_t _Func);
-
-
-
-
-
-  typedef struct { __extension__ long long quot, rem; } lldiv_t;
-
-  __extension__ lldiv_t __attribute__((__cdecl__)) lldiv(long long, long long);
-
-  __extension__ long long __attribute__((__cdecl__)) llabs(long long);
-
-  __extension__ inline long long __attribute__((__cdecl__)) llabs(long long _j) { return (_j >= 0 ? _j : -_j); }
-
-
-  __extension__ long long __attribute__((__cdecl__)) strtoll(const char * __restrict__, char ** __restrict, int);
-  __extension__ unsigned long long __attribute__((__cdecl__)) strtoull(const char * __restrict__, char ** __restrict__, int);
-
-
-  __extension__ long long __attribute__((__cdecl__)) atoll (const char *);
-
-
-  __extension__ long long __attribute__((__cdecl__)) wtoll (const wchar_t *);
-  __extension__ char *__attribute__((__cdecl__)) lltoa (long long, char *, int);
-  __extension__ char *__attribute__((__cdecl__)) ulltoa (unsigned long long , char *, int);
-  __extension__ wchar_t *__attribute__((__cdecl__)) lltow (long long, wchar_t *, int);
-  __extension__ wchar_t *__attribute__((__cdecl__)) ulltow (unsigned long long, wchar_t *, int);
-
-
-
-  __extension__ inline long long __attribute__((__cdecl__)) atoll (const char * _c) { return _atoi64 (_c); }
-  __extension__ inline char *__attribute__((__cdecl__)) lltoa (long long _n, char * _c, int _i) { return _i64toa (_n, _c, _i); }
-  __extension__ inline char *__attribute__((__cdecl__)) ulltoa (unsigned long long _n, char * _c, int _i) { return _ui64toa (_n, _c, _i); }
-  __extension__ inline long long __attribute__((__cdecl__)) wtoll (const wchar_t * _w) { return _wtoi64 (_w); }
-  __extension__ inline wchar_t *__attribute__((__cdecl__)) lltow (long long _n, wchar_t * _w, int _i) { return _i64tow (_n, _w, _i); }
-  __extension__ inline wchar_t *__attribute__((__cdecl__)) ulltow (unsigned long long _n, wchar_t * _w, int _i) { return _ui64tow (_n, _w, _i); }
-
-
-
-
-
-
-}
-
-
-#pragma pack(pop)
-
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/stdlib_s.h" 1 3
-# 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/stdlib_s.h" 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 1 3
-# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/stdlib_s.h" 2 3
-
-
-
-
-extern "C" {
-
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _dupenv_s(char **_PBuffer,size_t *_PBufferSizeInBytes,const char *_VarName);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _itoa_s(int _Value,char *_DstBuf,size_t _Size,int _Radix);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _i64toa_s(long long _Val,char *_DstBuf,size_t _Size,int _Radix);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ui64toa_s(unsigned long long _Val,char *_DstBuf,size_t _Size,int _Radix);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ltoa_s(long _Val,char *_DstBuf,size_t _Size,int _Radix);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) mbstowcs_s(size_t *_PtNumOfCharConverted,wchar_t *_DstBuf,size_t _SizeInWords,const char *_SrcBuf,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _mbstowcs_s_l(size_t *_PtNumOfCharConverted,wchar_t *_DstBuf,size_t _SizeInWords,const char *_SrcBuf,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ultoa_s(unsigned long _Val,char *_DstBuf,size_t _Size,int _Radix);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wctomb_s_l(int *_SizeConverted,char *_MbCh,size_t _SizeInBytes,wchar_t _WCh,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcstombs_s(size_t *_PtNumOfCharConverted,char *_Dst,size_t _DstSizeInBytes,const wchar_t *_Src,size_t _MaxCountInBytes);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcstombs_s_l(size_t *_PtNumOfCharConverted,char *_Dst,size_t _DstSizeInBytes,const wchar_t *_Src,size_t _MaxCountInBytes,_locale_t _Locale);
-
-
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _itow_s (int _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ltow_s (long _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ultow_s (unsigned long _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wgetenv_s(size_t *_ReturnSize,wchar_t *_DstBuf,size_t _DstSizeInWords,const wchar_t *_VarName);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wdupenv_s(wchar_t **_Buffer,size_t *_BufferSizeInWords,const wchar_t *_VarName);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _i64tow_s(long long _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ui64tow_s(unsigned long long _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
-
-
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ecvt_s(char *_DstBuf,size_t _Size,double _Val,int _NumOfDights,int *_PtDec,int *_PtSign);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _fcvt_s(char *_DstBuf,size_t _Size,double _Val,int _NumOfDec,int *_PtDec,int *_PtSign);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _gcvt_s(char *_DstBuf,size_t _Size,double _Val,int _NumOfDigits);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _makepath_s(char *_PathResult,size_t _Size,const char *_Drive,const char *_Dir,const char *_Filename,const char *_Ext);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _putenv_s(const char *_Name,const char *_Value);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _searchenv_s(const char *_Filename,const char *_EnvVar,char *_ResultPath,size_t _SizeInBytes);
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _splitpath_s(const char *_FullPath,char *_Drive,size_t _DriveSize,char *_Dir,size_t _DirSize,char *_Filename,size_t _FilenameSize,char *_Ext,size_t _ExtSize);
-  extern "C++" { template <size_t __drive_size, size_t __dir_size, size_t __name_size, size_t __ext_size> inline errno_t __attribute__((__cdecl__)) _splitpath_s(const char *_Dest, char (&__drive)[__drive_size], char (&__dir)[__dir_size], char (&__name)[__name_size], char (&__ext)[__ext_size]) { return _splitpath_s(_Dest, __drive, __drive_size, __dir, __dir_size, __name, __name_size, __ext, __ext_size); } }
-
-
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wmakepath_s(wchar_t *_PathResult,size_t _SizeInWords,const wchar_t *_Drive,const wchar_t *_Dir,const wchar_t *_Filename,const wchar_t *_Ext);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wputenv_s(const wchar_t *_Name,const wchar_t *_Value);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wsearchenv_s(const wchar_t *_Filename,const wchar_t *_EnvVar,wchar_t *_ResultPath,size_t _SizeInWords);
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wsplitpath_s(const wchar_t *_FullPath,wchar_t *_Drive,size_t _DriveSizeInWords,wchar_t *_Dir,size_t _DirSizeInWords,wchar_t *_Filename,size_t _FilenameSizeInWords,wchar_t *_Ext,size_t _ExtSizeInWords);
-  extern "C++" { template <size_t __drive_size, size_t __dir_size, size_t __name_size, size_t __ext_size> inline errno_t __attribute__((__cdecl__)) _wsplitpath_s(const wchar_t *_Dest, wchar_t (&__drive)[__drive_size], wchar_t (&__dir)[__dir_size], wchar_t (&__name)[__name_size], wchar_t (&__ext)[__ext_size]) { return _wsplitpath_s(_Dest, __drive, __drive_size, __dir, __dir_size, __name, __name_size, __ext, __ext_size); } }
-
-
-
-
-
-}
-# 668 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 2 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 1 3
-# 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
-#pragma pack(push,_CRT_PACKING)
-
-
-extern "C" {
-# 46 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
-  typedef struct _heapinfo {
-    int *_pentry;
-    size_t _size;
-    int _useflag;
-  } _HEAPINFO;
-
-
-  extern unsigned int _amblksiz;
-# 65 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
-       
-       
-# 97 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
-       
-       
-
-
-
-
-void * __mingw_aligned_malloc (size_t _Size, size_t _Alignment);
-void __mingw_aligned_free (void *_Memory);
-void * __mingw_aligned_offset_realloc (void *_Memory, size_t _Size, size_t _Alignment, size_t _Offset);
-void * __mingw_aligned_realloc (void *_Memory, size_t _Size, size_t _Offset);
-
-
-
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _resetstkoflw (void);
-  __attribute__ ((__dllimport__)) unsigned long __attribute__((__cdecl__)) _set_malloc_crt_max_wait(unsigned long _NewValue);
-
-  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _expand(void *_Memory,size_t _NewSize);
-  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _msize(void *_Memory);
-
-
-
-
-
-
-  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _get_sbh_threshold(void);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _set_sbh_threshold(size_t _NewValue);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _set_amblksiz(size_t _Value);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_amblksiz(size_t *_Value);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapadd(void *_Memory,size_t _Size);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapchk(void);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapmin(void);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapset(unsigned int _Fill);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapwalk(_HEAPINFO *_EntryInfo);
-  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _heapused(size_t *_Used,size_t *_Commit);
-  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _get_heap_handle(void);
-# 144 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
-  static __inline void *_MarkAllocaS(void *_Ptr,unsigned int _Marker) {
-    if(_Ptr) {
-      *((unsigned int*)_Ptr) = _Marker;
-      _Ptr = (char*)_Ptr + 8;
-    }
-    return _Ptr;
-  }
-# 163 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
-  static __inline void __attribute__((__cdecl__)) _freea(void *_Memory) {
-    unsigned int _Marker;
-    if(_Memory) {
-      _Memory = (char*)_Memory - 8;
-      _Marker = *(unsigned int *)_Memory;
-      if(_Marker==0xDDDD) {
- free(_Memory);
-      }
-
-
-
-
-
-    }
-  }
-# 206 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/malloc.h" 3
-}
-
-
-#pragma pack(pop)
-# 669 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 2 3
-# 130 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/combaseapi.h" 2 3
 # 138 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/combaseapi.h" 3
 typedef enum tagREGCLS {
   REGCLS_SINGLEUSE = 0,
@@ -41231,12 +41186,12 @@ typedef struct _VOLUME_DISK_EXTENTS {
   DISK_EXTENT Extents[1];
 } VOLUME_DISK_EXTENTS,*PVOLUME_DISK_EXTENTS;
 # 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winscard.h" 2 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsmcrd.h" 1 3
-# 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsmcrd.h" 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsmcrd.h" 1 3 4
+# 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsmcrd.h" 3 4
 extern "C" {
-# 27 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsmcrd.h" 3
+# 27 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsmcrd.h" 3 4
   typedef WORD UWORD;
-# 161 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsmcrd.h" 3
+# 161 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsmcrd.h" 3 4
   typedef struct _SCARD_IO_REQUEST {
     DWORD dwProtocol;
     DWORD cbPciLength;
@@ -41263,7 +41218,7 @@ extern "C" {
     SCARD_IO_REQUEST ioRequest;
   } SCARD_T1_REQUEST;
   typedef SCARD_T1_REQUEST *PSCARD_T1_REQUEST,*LPSCARD_T1_REQUEST;
-# 202 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsmcrd.h" 3
+# 202 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsmcrd.h" 3 4
 }
 # 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winscard.h" 2 3
 
@@ -44361,40 +44316,19 @@ typedef unsigned int GROUP;
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAProviderConfigChange(LPHANDLE lpNotificationHandle,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 # 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
-# 270 "../src/interface/./../interface/./../support/SupportDefs.h" 2
-# 293 "../src/interface/./../interface/./../support/SupportDefs.h"
+# 273 "../src/interface/./../interface/./../support/SupportDefs.h" 2
+# 296 "../src/interface/./../interface/./../support/SupportDefs.h"
 enum {
- E_SEEK_SET = 0,
- E_SEEK_CUR,
- E_SEEK_END,
+    B_SEEK_SET = 0,
+    B_SEEK_CUR,
+    B_SEEK_END,
 };
 
 
 # 1 "../src/interface/./../interface/./../support/./../kernel/Debug.h" 1
 # 33 "../src/interface/./../interface/./../support/./../kernel/Debug.h"
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
+# 1 "../src/interface/./../interface/./../support/./../kernel/./../support/SupportDefs.h" 1
 # 34 "../src/interface/./../interface/./../support/./../kernel/Debug.h" 2
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
-# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-extern "C" {
-# 24 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
-
-  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
-
-
-}
-# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-typedef struct {
-  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
-  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
-} max_align_t;
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
-# 35 "../src/interface/./../interface/./../support/./../kernel/Debug.h" 2
-
 
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/new" 1 3
@@ -44901,61 +44835,126 @@ inline void operator delete[](void*, void*) noexcept { }
 }
 
 #pragma GCC visibility pop
-# 39 "../src/interface/./../interface/./../support/./../kernel/Debug.h" 2
-
-
-# 1 "../src/interface/./../interface/./../support/./../kernel/./../support/SupportDefs.h" 1
-# 42 "../src/interface/./../interface/./../support/./../kernel/Debug.h" 2
-# 57 "../src/interface/./../interface/./../support/./../kernel/Debug.h"
+# 37 "../src/interface/./../interface/./../support/./../kernel/Debug.h" 2
+# 54 "../src/interface/./../interface/./../support/./../kernel/Debug.h"
 extern "C" {
 
 
-typedef enum etk_debug_level {
+typedef enum bhapi_debug_level {
  DEBUG_NORMAL,
  DEBUG_OUTPUT,
  DEBUG_WARNING,
  DEBUG_ERROR
-} etk_debug_level;
+} bhapi_debug_level;
 
-__attribute__((dllexport)) void etk_debug_log(etk_debug_level level, const char *format, va_list ap);
-# 83 "../src/interface/./../interface/./../support/./../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_DEBUG(const char *format, ...);
-
-
-
-__attribute__((dllexport)) void ETK_OUTPUT(const char *format, ...);
-# 103 "../src/interface/./../interface/./../support/./../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_WARNING(const char *format, ...);
+__attribute__((dllexport)) void bhapi_debug_log(bhapi_debug_level level, const char *format, va_list ap);
+# 80 "../src/interface/./../interface/./../support/./../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...);
 
 
 
-__attribute__((dllexport)) void ETK_ERROR(const char *format, ...);
-# 121 "../src/interface/./../interface/./../support/./../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...);
+# 100 "../src/interface/./../interface/./../support/./../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...);
+
+
+
+__attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...);
+# 118 "../src/interface/./../interface/./../support/./../kernel/Debug.h"
 }
-# 301 "../src/interface/./../interface/./../support/SupportDefs.h" 2
+# 304 "../src/interface/./../interface/./../support/SupportDefs.h" 2
+
+# 1 "../src/interface/./../interface/./../support/Errors.h" 1
+# 32 "../src/interface/./../interface/./../support/Errors.h"
+# 1 "../src/interface/./../interface/./../support/SupportDefs.h" 1
+# 33 "../src/interface/./../interface/./../support/Errors.h" 2
+# 41 "../src/interface/./../interface/./../support/Errors.h"
+enum {
+    B_NO_MEMORY = (-2147483647 - 1),
+    B_IO_ERROR,
+    B_PERMISSION_DENIED,
+    B_BAD_INDEX,
+    B_BAD_TYPE,
+    B_BAD_VALUE,
+    B_MISMATCHED_VALUES,
+    B_NAME_NOT_FOUND,
+    B_NAME_IN_USE,
+    B_TIMED_OUT,
+    B_INTERRUPTED,
+    B_WOULD_BLOCK,
+    B_CANCELED,
+    B_NO_INIT,
+    B_BUSY,
+    B_NOT_ALLOWED,
+
+    B_ERROR = -1,
+    B_OK = 1,
+    B_NO_ERROR = 1
+};
+
+
+enum {
+    B_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
+    B_NO_MORE_SEMS,
+
+    B_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
+    B_NO_MORE_THREADS,
+    B_BAD_THREAD_STATE,
+    B_BAD_TEAM_ID,
+    B_NO_MORE_TEAMS,
+
+    B_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
+    B_NO_MORE_PORTS,
+
+    B_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
+    B_BAD_ADDRESS,
+    B_NOT_AN_EXECUTABLE,
+    B_MISSING_LIBRARY,
+    B_MISSING_SYMBOL,
+
+    B_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
+};
+
+
+enum {
+    B_BAD_REPLY = (-2147483647 - 1) + 0x2000,
+    B_DUPLICATE_REPLY,
+    B_MESSAGE_TO_SELF,
+    B_BAD_HANDLER,
+    B_ALREADY_RUNNING,
+};
+
+
+enum {
+    B_FILE_ERROR = (-2147483647 - 1) + 0x3000,
+    B_ENTRY_NOT_FOUND,
+    B_LINK_LIMIT,
+    B_NAME_TOO_LONG,
+};
+# 306 "../src/interface/./../interface/./../support/SupportDefs.h" 2
 # 34 "../src/interface/./../interface/GraphicsDefs.h" 2
 
 
-typedef struct e_pattern {
- euint8 data[8];
+typedef struct b_pattern {
+    b_uint8 data[8];
 
- inline bool operator==(const e_pattern& o) const
+ inline bool operator==(const b_pattern& o) const
  {
-  return (*((const euint64*)this)) == (*((const euint64*)&o));
+        return (*((const b_uint64*)this)) == (*((const b_uint64*)&o));
  }
 
- inline bool operator!=(const e_pattern& o) const
+ inline bool operator!=(const b_pattern& o) const
  {
-  return (*((const euint64*)this)) != (*((const euint64*)&o));
+        return (*((const b_uint64*)this)) != (*((const b_uint64*)&o));
  }
 
-} e_pattern;
+} b_pattern;
 
 
 
-inline e_pattern e_make_pattern(euint8 d1, euint8 d2, euint8 d3, euint8 d4, euint8 d5, euint8 d6, euint8 d7, euint8 d8)
+inline b_pattern b_makb_pattern(b_uint8 d1, b_uint8 d2, b_uint8 d3, b_uint8 d4, b_uint8 d5, b_uint8 d6, b_uint8 d7, b_uint8 d8)
 {
- e_pattern p;
+ b_pattern p;
  p.data[0] = d1;
  p.data[1] = d2;
  p.data[2] = d3;
@@ -44973,115 +44972,115 @@ inline e_pattern e_make_pattern(euint8 d1, euint8 d2, euint8 d3, euint8 d4, euin
 extern "C" {
 
 
-extern __attribute__((dllexport)) const e_pattern E_SOLID_HIGH;
-extern __attribute__((dllexport)) const e_pattern E_MIXED_COLORS;
-extern __attribute__((dllexport)) const e_pattern E_SOLID_LOW;
+extern __attribute__((dllexport)) const b_pattern B_SOLID_HIGH;
+extern __attribute__((dllexport)) const b_pattern B_MIXED_COLORS;
+extern __attribute__((dllexport)) const b_pattern B_SOLID_LOW;
 
 
 }
 
 
 
-typedef struct e_rgb_color {
- euint8 red;
- euint8 green;
- euint8 blue;
- euint8 alpha;
+typedef struct b_rgb_color {
+    b_uint8 red;
+    b_uint8 green;
+    b_uint8 blue;
+    b_uint8 alpha;
 
 
- inline e_rgb_color& set_to(euint8 r, euint8 g, euint8 b, euint8 a = 0xff)
+    inline b_rgb_color& set_to(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 0xff)
  {
   red = r; green = g; blue = b; alpha = a;
   return *this;
  }
 
- inline e_rgb_color& set_to(const e_rgb_color& o)
+ inline b_rgb_color& set_to(const b_rgb_color& o)
  {
   return set_to(o.red, o.green, o.blue, o.alpha);
  }
 
- inline bool operator==(const e_rgb_color& o) const
+ inline bool operator==(const b_rgb_color& o) const
  {
-  return(*((const euint32*)this)) == (*((const euint32*)&o));
+        return(*((const b_uint32*)this)) == (*((const b_uint32*)&o));
  }
 
- inline bool operator!=(const e_rgb_color& o) const
+ inline bool operator!=(const b_rgb_color& o) const
  {
-  return(*((const euint32*)this)) != (*((const euint32*)&o));
+        return(*((const b_uint32*)this)) != (*((const b_uint32*)&o));
  }
 
- e_rgb_color& mix(euint8 r, euint8 g, euint8 b, euint8 a);
- e_rgb_color& mix(const e_rgb_color &o);
- e_rgb_color& mix_copy(euint8 r, euint8 g, euint8 b, euint8 a) const;
- e_rgb_color& mix_copy(const e_rgb_color &o) const;
+    b_rgb_color& mix(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
+ b_rgb_color& mix(const b_rgb_color &o);
+    b_rgb_color& mix_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const;
+ b_rgb_color& mix_copy(const b_rgb_color &o) const;
 
- e_rgb_color& disable(euint8 r, euint8 g, euint8 b, euint8 a);
- e_rgb_color& disable(const e_rgb_color &background);
- e_rgb_color& disable_copy(euint8 r, euint8 g, euint8 b, euint8 a) const;
- e_rgb_color& disable_copy(const e_rgb_color &background) const;
+    b_rgb_color& disable(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
+ b_rgb_color& disable(const b_rgb_color &background);
+    b_rgb_color& disable_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const;
+ b_rgb_color& disable_copy(const b_rgb_color &background) const;
 
-} e_rgb_color;
+} b_rgb_color;
 
 
 
-inline e_rgb_color e_make_rgb_color(euint8 r, euint8 g, euint8 b, euint8 a = 0xff)
+inline b_rgb_color b_makb_rgb_color(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 0xff)
 {
- e_rgb_color c;
+ b_rgb_color c;
  c.set_to(r, g, b, a);
  return c;
 }
 
 
 
-typedef enum e_drawing_mode {
- E_OP_COPY,
- E_OP_XOR,
+typedef enum b_drawing_mode {
+    B_OP_COPY,
+    B_OP_XOR,
 
- E_OP_OVER,
- E_OP_ERASE,
- E_OP_INVERT,
- E_OP_ADD,
- E_OP_SUBTRACT,
- E_OP_BLEND,
- E_OP_MIN,
- E_OP_MAX,
- E_OP_SELECT,
- E_OP_ALPHA,
-} e_drawing_mode;
+    B_OP_OVER,
+    B_OP_ERASE,
+    B_OP_INVERT,
+    B_OP_ADD,
+    B_OP_SUBTRACT,
+    B_OP_BLEND,
+    B_OP_MIN,
+    B_OP_MAX,
+    B_OP_SELECT,
+    B_OP_ALPHA,
+} b_drawing_mode;
 
 
-typedef enum e_color_space {
- E_CMAP8 = 0,
- E_RGB32 = 1,
- E_RGBA32 = 2,
- E_RGB24 = 3,
- E_RGB24_BIG = 4,
-} e_color_space;
+typedef enum b_color_space {
+    B_CMAP8 = 0,
+    B_RGB32 = 1,
+    B_RGBA32 = 2,
+    B_RGB24 = 3,
+    B_RGB24_BIG = 4,
+} b_color_space;
 
 
 
 extern "C" {
 
 
-extern __attribute__((dllexport)) const e_rgb_color E_TRANSPARENT_COLOR;
-extern __attribute__((dllexport)) const euint32 E_TRANSPARENT_MAGIC_RGBA32;
+extern __attribute__((dllexport)) const b_rgb_color B_TRANSPARENT_COLOR;
+extern __attribute__((dllexport)) const b_uint32 B_TRANSPARENT_MAGIC_RGBA32;
 
-__attribute__((dllexport)) euint8 etk_find_index_for_color(euint8 r, euint8 g, euint8 b);
-__attribute__((dllexport)) e_rgb_color etk_find_color_for_index(euint8 index);
+__attribute__((dllexport)) b_uint8 bhapi_find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b);
+__attribute__((dllexport)) b_rgb_color bhapi_find_color_for_index(b_uint8 index);
 
 
 }
 # 34 "../src/interface/InterfaceDefs.h" 2
 
 enum {
- E_FOLLOW_NONE = 0,
- E_FOLLOW_LEFT = 1,
- E_FOLLOW_RIGHT = 1 << 1,
- E_FOLLOW_TOP = 1 << 2,
- E_FOLLOW_BOTTOM = 1 << 3,
- E_FOLLOW_H_CENTER = 1 << 4,
- E_FOLLOW_V_CENTER = 1 << 5,
- E_FOLLOW_ALL = 0xffff
+    B_FOLLOW_NONE = 0,
+    B_FOLLOW_LEFT = 1,
+    B_FOLLOW_RIGHT = 1 << 1,
+    B_FOLLOW_TOP = 1 << 2,
+    B_FOLLOW_BOTTOM = 1 << 3,
+    B_FOLLOW_H_CENTER = 1 << 4,
+    B_FOLLOW_V_CENTER = 1 << 5,
+    B_FOLLOW_ALL = 0xffff
 };
 
 
@@ -45089,148 +45088,148 @@ enum {
 
 
 enum {
- E_BACKSPACE = 0x08,
- E_RETURN = 0x0a,
- E_ENTER = 0x0a,
- E_SPACE = 0x20,
- E_TAB = 0x09,
- E_ESCAPE = 0x1b,
+    B_BACKSPACE = 0x08,
+    B_RETURN = 0x0a,
+    B_ENTER = 0x0a,
+    B_SPACE = 0x20,
+    B_TAB = 0x09,
+    B_ESCAPE = 0x1b,
 
- E_LEFT_ARROW = 0x1c,
- E_RIGHT_ARROW = 0x1d,
- E_UP_ARROW = 0x1e,
- E_DOWN_ARROW = 0x1f,
+    B_LEFT_ARROW = 0x1c,
+    B_RIGHT_ARROW = 0x1d,
+    B_UP_ARROW = 0x1e,
+    B_DOWN_ARROW = 0x1f,
 
- E_INSERT = 0x05,
- E_DELETE = 0x7f,
- E_HOME = 0x01,
- E_END = 0x04,
- E_PAGE_UP = 0x0b,
- E_PAGE_DOWN = 0x0c,
+    B_INSERT = 0x05,
+    B_DELETE = 0x7f,
+    B_HOME = 0x01,
+    B_END = 0x04,
+    B_PAGE_UP = 0x0b,
+    B_PAGE_DOWN = 0x0c,
 
- E_FUNCTION_KEY = 0x10
+    B_FUNCTION_KEY = 0x10
 };
 
 enum {
- E_F1_KEY = 0x02,
- E_F2_KEY = 0x03,
- E_F3_KEY = 0x04,
- E_F4_KEY = 0x05,
- E_F5_KEY = 0x06,
- E_F6_KEY = 0x07,
- E_F7_KEY = 0x08,
- E_F8_KEY = 0x09,
- E_F9_KEY = 0x0a,
- E_F10_KEY = 0x0b,
- E_F11_KEY = 0x0c,
- E_F12_KEY = 0x0d,
- E_PRINT_KEY = 0x0e,
- E_SCROLL_KEY = 0x0f,
- E_PAUSE_KEY = 0x10
+    B_F1_KEY = 0x02,
+    B_F2_KEY = 0x03,
+    B_F3_KEY = 0x04,
+    B_F4_KEY = 0x05,
+    B_F5_KEY = 0x06,
+    B_F6_KEY = 0x07,
+    B_F7_KEY = 0x08,
+    B_F8_KEY = 0x09,
+    B_F9_KEY = 0x0a,
+    B_F10_KEY = 0x0b,
+    B_F11_KEY = 0x0c,
+    B_F12_KEY = 0x0d,
+    B_PRINT_KEY = 0x0e,
+    B_SCROLL_KEY = 0x0f,
+    B_PAUSE_KEY = 0x10
 };
 
-enum e_border_style {
- E_PLAIN_BORDER,
- E_FANCY_BORDER,
- E_NO_BORDER
+enum b_border_style {
+    B_PLAIN_BORDER,
+    B_FANCY_BORDER,
+    B_NO_BORDER
 };
 
-enum e_orientation {
- E_HORIZONTAL,
- E_VERTICAL
+enum b_orientation {
+    B_HORIZONTAL,
+    B_VERTICAL
 };
 
-enum e_join_mode {
- E_ROUND_JOIN = 0,
- E_MITER_JOIN,
- E_BEVEL_JOIN,
- E_BUTT_JOIN,
- E_SQUARE_JOIN
+enum b_join_mode {
+    B_ROUND_JOIN = 0,
+    B_MITER_JOIN,
+    B_BEVEL_JOIN,
+    B_BUTT_JOIN,
+    B_SQUARE_JOIN
 };
 
-enum e_cap_mode {
- E_ROUND_CAP = E_ROUND_JOIN,
- E_BUTT_CAP = E_BUTT_JOIN,
- E_SQUARE_CAP = E_SQUARE_JOIN
+enum b_cap_mode {
+    B_ROUND_CAP = B_ROUND_JOIN,
+    B_BUTT_CAP = B_BUTT_JOIN,
+    B_SQUARE_CAP = B_SQUARE_JOIN
 };
 
-enum e_alignment {
- E_ALIGN_LEFT,
- E_ALIGN_RIGHT,
- E_ALIGN_CENTER
+enum b_alignment {
+    B_ALIGN_LEFT,
+    B_ALIGN_RIGHT,
+    B_ALIGN_CENTER
 };
 
-enum e_vertical_alignment {
- E_ALIGN_TOP,
- E_ALIGN_BOTTOM,
- E_ALIGN_MIDDLE
-};
-
-enum {
- E_SHIFT_KEY = 1 << 1,
- E_COMMAND_KEY = 1 << 2,
- E_CONTROL_KEY = 1 << 3,
- E_CAPS_LOCK = 1 << 4,
- E_SCROLL_LOCK = 1 << 5,
- E_NUM_LOCK = 1 << 6,
- E_OPTION_KEY = 1 << 7,
- E_MENU_KEY = 1 << 8,
- E_LEFT_SHIFT_KEY = 1 << 9,
- E_RIGHT_SHIFT_KEY = 1 << 10,
- E_LEFT_COMMAND_KEY = 1 << 11,
- E_RIGHT_COMMAND_KEY = 1 << 12,
- E_LEFT_CONTROL_KEY = 1 << 13,
- E_RIGHT_CONTROL_KEY = 1 << 14,
- E_LEFT_OPTION_KEY = 1 << 15,
- E_RIGHT_OPTION_KEY = 1 << 16,
- E_FUNCTIONS_KEY = 1 << 17
+enum b_vertical_alignment {
+    B_ALIGN_TOP,
+    B_ALIGN_BOTTOM,
+    B_ALIGN_MIDDLE
 };
 
 enum {
- E_PRIMARY_MOUSE_BUTTON = 1,
- E_SECONDARY_MOUSE_BUTTON = 2,
- E_TERTIARY_MOUSE_BUTTON = 3
+    B_SHIFT_KEY = 1 << 1,
+    B_COMMAND_KEY = 1 << 2,
+    B_CONTROL_KEY = 1 << 3,
+    B_CAPS_LOCK = 1 << 4,
+    B_SCROLL_LOCK = 1 << 5,
+    B_NUM_LOCK = 1 << 6,
+    B_OPTION_KEY = 1 << 7,
+    B_MENU_KEY = 1 << 8,
+    B_LEFT_SHIFT_KEY = 1 << 9,
+    B_RIGHT_SHIFT_KEY = 1 << 10,
+    B_LEFT_COMMAND_KEY = 1 << 11,
+    B_RIGHT_COMMAND_KEY = 1 << 12,
+    B_LEFT_CONTROL_KEY = 1 << 13,
+    B_RIGHT_CONTROL_KEY = 1 << 14,
+    B_LEFT_OPTION_KEY = 1 << 15,
+    B_RIGHT_OPTION_KEY = 1 << 16,
+    B_FUNCTIONS_KEY = 1 << 17
 };
 
-typedef enum e_color_which {
- E_DESKTOP_COLOR = 0,
+enum {
+    B_PRIMARY_MOUSE_BUTTON = 1,
+    B_SECONDARY_MOUSE_BUTTON = 2,
+    B_TERTIARY_MOUSE_BUTTON = 3
+};
 
- E_PANEL_BACKGROUND_COLOR = 1,
- E_PANEL_TEXT_COLOR = 2,
+typedef enum b_color_which {
+    B_DESKTOP_COLOR = 0,
 
- E_DOCUMENT_BACKGROUND_COLOR = 3,
- E_DOCUMENT_TEXT_COLOR = 4,
- E_DOCUMENT_HIGHLIGHT_COLOR = 5,
- E_DOCUMENT_CURSOR_COLOR = 6,
+    B_PANEL_BACKGROUND_COLOR = 1,
+    B_PANEL_TEXT_COLOR = 2,
 
- E_BUTTON_BACKGROUND_COLOR = 7,
- E_BUTTON_TEXT_COLOR = 8,
- E_BUTTON_BORDER_COLOR = 9,
+    B_DOCUMENT_BACKGROUND_COLOR = 3,
+    B_DOCUMENT_TEXT_COLOR = 4,
+    B_DOCUMENT_HIGHLIGHT_COLOR = 5,
+    B_DOCUMENT_CURSOR_COLOR = 6,
 
- E_NAVIGATION_BASE_COLOR = 10,
- E_NAVIGATION_PULSE_COLOR = 11,
+    B_BUTTON_BACKGROUND_COLOR = 7,
+    B_BUTTON_TEXT_COLOR = 8,
+    B_BUTTON_BORDER_COLOR = 9,
 
- E_MENU_BACKGROUND_COLOR = 12,
- E_MENU_BORDER_COLOR = 13,
- E_MENU_SELECTED_BACKGROUND_COLOR = 14,
- E_MENU_ITEM_TEXT_COLOR = 15,
- E_MENU_SELECTED_ITEM_TEXT_COLOR = 16,
- E_MENU_SELECTED_BORDER_COLOR = 17,
+    B_NAVIGATION_BASE_COLOR = 10,
+    B_NAVIGATION_PULSE_COLOR = 11,
 
- E_TOOLTIP_BACKGROUND_COLOR = 18,
- E_TOOLTIP_TEXT_COLOR = 19,
+    B_MENU_BACKGROUND_COLOR = 12,
+    B_MENU_BORDER_COLOR = 13,
+    B_MENU_SELECTED_BACKGROUND_COLOR = 14,
+    B_MENU_ITEM_TEXT_COLOR = 15,
+    B_MENU_SELECTED_ITEM_TEXT_COLOR = 16,
+    B_MENU_SELECTED_BORDER_COLOR = 17,
 
- E_SHINE_COLOR = 20,
- E_SHADOW_COLOR = 21,
+    B_TOOLTIP_BACKGROUND_COLOR = 18,
+    B_TOOLTIP_TEXT_COLOR = 19,
 
- E_STATUSBAR_COLOR = 22,
+    B_SHINE_COLOR = 20,
+    B_SHADOW_COLOR = 21,
 
-} e_color_which;
+    B_STATUSBAR_COLOR = 22,
+
+} b_color_which;
 
 
-enum e_button_width {
- E_WIDTH_AS_USUAL,
- E_WIDTH_FROM_LABEL
+enum b_button_width {
+    B_WIDTH_AS_USUAL,
+    B_WIDTH_FROM_LABEL
 };
 
 
@@ -45238,107 +45237,107 @@ enum e_button_width {
 extern "C" {
 
 
-__attribute__((dllexport)) e_rgb_color e_ui_color(e_color_which which);
-__attribute__((dllexport)) float e_ui_get_scrollbar_horizontal_height();
-__attribute__((dllexport)) float e_ui_get_scrollbar_vertical_width();
+__attribute__((dllexport)) b_rgb_color b_ui_color(b_color_which which);
+__attribute__((dllexport)) float b_ui_get_scrollbar_horizontal_height();
+__attribute__((dllexport)) float b_ui_get_scrollbar_vertical_width();
 
 
 }
 # 31 "../src/interface/Theme.cpp" 2
 
 
-__attribute__((dllexport)) e_rgb_color e_ui_color(e_color_which which)
+__attribute__((dllexport)) b_rgb_color b_ui_color(b_color_which which)
 {
- e_rgb_color color;
+ b_rgb_color color;
 
  switch(which)
  {
-  case E_DESKTOP_COLOR:
+  case B_DESKTOP_COLOR:
    color.set_to(118, 132, 143);
    break;
 
-  case E_PANEL_BACKGROUND_COLOR:
+  case B_PANEL_BACKGROUND_COLOR:
    color.set_to(240, 240, 235);
    break;
 
-  case E_TOOLTIP_TEXT_COLOR:
-  case E_BUTTON_TEXT_COLOR:
-  case E_DOCUMENT_TEXT_COLOR:
-  case E_PANEL_TEXT_COLOR:
+  case B_TOOLTIP_TEXT_COLOR:
+  case B_BUTTON_TEXT_COLOR:
+  case B_DOCUMENT_TEXT_COLOR:
+  case B_PANEL_TEXT_COLOR:
    color.set_to(0, 0, 0);
    break;
 
-  case E_DOCUMENT_BACKGROUND_COLOR:
+  case B_DOCUMENT_BACKGROUND_COLOR:
    color.set_to(250, 250, 250);
    break;
 
-  case E_DOCUMENT_HIGHLIGHT_COLOR:
+  case B_DOCUMENT_HIGHLIGHT_COLOR:
    color.set_to(170, 210, 240);
    break;
 
-  case E_DOCUMENT_CURSOR_COLOR:
+  case B_DOCUMENT_CURSOR_COLOR:
    color.set_to(0, 0, 0);
    break;
 
-  case E_BUTTON_BACKGROUND_COLOR:
+  case B_BUTTON_BACKGROUND_COLOR:
    color.set_to(245, 245, 245);
    break;
 
-  case E_BUTTON_BORDER_COLOR:
+  case B_BUTTON_BORDER_COLOR:
 
    color.set_to(50, 50, 50);
    break;
 
-  case E_NAVIGATION_BASE_COLOR:
+  case B_NAVIGATION_BASE_COLOR:
 
    color.set_to(170, 210, 240);
    break;
 
-  case E_NAVIGATION_PULSE_COLOR:
+  case B_NAVIGATION_PULSE_COLOR:
 
    color.set_to(90, 100, 120);
    break;
 
-  case E_MENU_BACKGROUND_COLOR:
+  case B_MENU_BACKGROUND_COLOR:
    color.set_to(245, 245, 245);
    break;
 
-  case E_MENU_BORDER_COLOR:
+  case B_MENU_BORDER_COLOR:
 
    color.set_to(50, 50, 50);
    break;
 
-  case E_MENU_SELECTED_BACKGROUND_COLOR:
+  case B_MENU_SELECTED_BACKGROUND_COLOR:
 
    color.set_to(170, 210, 240);
    break;
 
-  case E_MENU_ITEM_TEXT_COLOR:
+  case B_MENU_ITEM_TEXT_COLOR:
    color.set_to(80, 80, 80);
    break;
 
-  case E_MENU_SELECTED_ITEM_TEXT_COLOR:
+  case B_MENU_SELECTED_ITEM_TEXT_COLOR:
    color.set_to(0, 0, 0);
    break;
 
-  case E_MENU_SELECTED_BORDER_COLOR:
+  case B_MENU_SELECTED_BORDER_COLOR:
 
    color.set_to(100, 100, 100);
    break;
 
-  case E_TOOLTIP_BACKGROUND_COLOR:
+  case B_TOOLTIP_BACKGROUND_COLOR:
    color.set_to(235, 220, 30);
    break;
 
-  case E_SHINE_COLOR:
+  case B_SHINE_COLOR:
    color.set_to(250, 250, 250);
    break;
 
-  case E_SHADOW_COLOR:
+  case B_SHADOW_COLOR:
    color.set_to(50, 50, 50);
    break;
 
-  case E_STATUSBAR_COLOR:
+  case B_STATUSBAR_COLOR:
    color.set_to(235, 220, 30);
    break;
 
@@ -45350,13 +45349,13 @@ __attribute__((dllexport)) e_rgb_color e_ui_color(e_color_which which)
 }
 
 
-__attribute__((dllexport)) float e_ui_get_scrollbar_vertical_width()
+__attribute__((dllexport)) float b_ui_get_scrollbar_vertical_width()
 {
  return 16;
 }
 
 
-__attribute__((dllexport)) float e_ui_get_scrollbar_horizontal_height()
+__attribute__((dllexport)) float b_ui_get_scrollbar_horizontal_height()
 {
  return 16;
 }

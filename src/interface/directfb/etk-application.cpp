@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * DirectFB Graphics Add-on for ETK++
+ * DirectFB Graphics Add-on for BHAPI++
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -40,14 +40,14 @@
 #include "./../../app/Clipboard.h"
 #include "./../../app/Application.h"
 
-#ifdef ETK_OS_LINUX
-extern bool etk_get_prog_argc_argv_linux(EString &progName, EStringArray &progArgv);
-#endif // ETK_OS_LINUX
+#ifdef BHAPI_OS_LINUX
+extern bool bhapi_get_prog_argc_argv_linux(BString &progName, BStringArray &progArgv);
+#endif // BHAPI_OS_LINUX
 
 
-static void etk_dfb_clipboard_changed(EDFBGraphicsEngine *dfbEngine)
+static void bhapi_dfb_clipboard_changed(EDFBGraphicsEngine *dfbEngine)
 {
-	EString aStr;
+	BString aStr;
 
 	char *mimetype = NULL;
 	void *data = NULL;
@@ -65,60 +65,60 @@ static void etk_dfb_clipboard_changed(EDFBGraphicsEngine *dfbEngine)
 		return;
 	}
 
-	aStr.Append((char*)data, (eint32)dataLen);
+	aStr.Append((char*)data, (b_int32)dataLen);
 	free(mimetype);
 	free(data);
 
-	EMessage *clipMsg = NULL;
-	if(etk_clipboard.Lock())
+	BMessage *clipMsg = NULL;
+	if(bhapi_clipboard.Lock())
 	{
-		if((clipMsg = etk_clipboard.Data()) != NULL)
+		if((clipMsg = bhapi_clipboard.Data()) != NULL)
 		{
 			const char *text = NULL;
 			ssize_t textLen = 0;
-			if(clipMsg->FindData("text/plain", E_MIME_TYPE, (const void**)&text, &textLen) == false ||
-			   text == NULL || textLen != (ssize_t)aStr.Length() || aStr.Compare(text, (eint32)textLen) != 0)
+			if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
+			   text == NULL || textLen != (ssize_t)aStr.Length() || aStr.Compare(text, (b_int32)textLen) != 0)
 			{
-				etk_clipboard.Clear();
+				bhapi_clipboard.Clear();
 				clipMsg->AddBool("etk:msg_from_gui", true);
-				clipMsg->AddData("text/plain", E_MIME_TYPE, aStr.String(), aStr.Length());
-				etk_clipboard.Commit();
+				clipMsg->AddData("text/plain", B_MIME_TYPE, aStr.String(), aStr.Length());
+				bhapi_clipboard.Commit();
 			}
 		}
-		etk_clipboard.Unlock();
+		bhapi_clipboard.Unlock();
 	}
 }
 
 
-class _LOCAL EDFBClipboardMessageFilter : public EMessageFilter {
+class _LOCAL EDFBClipboardMessageFilter : public BMessageFilter {
 public:
 	EDFBGraphicsEngine *fEngine;
 
 	EDFBClipboardMessageFilter(EDFBGraphicsEngine *dfbEngine)
-		: EMessageFilter(E_CLIPBOARD_CHANGED, NULL)
+		: BMessageFilter(B_CLIPBOARD_CHANGED, NULL)
 	{
 		fEngine = dfbEngine;
 	}
 
-	virtual e_filter_result Filter(EMessage *message, EHandler **target)
+	virtual b_filter_result Filter(BMessage *message, BHandler **target)
 	{
-		if(fEngine == NULL || message->what != E_CLIPBOARD_CHANGED) return E_DISPATCH_MESSAGE;
+		if(fEngine == NULL || message->what != B_CLIPBOARD_CHANGED) return B_DISPATCH_MESSAGE;
 
 		do
 		{
 			const char *text = NULL;
 			ssize_t textLen = 0;
-			EString aStr;
+			BString aStr;
 
-			EMessage *msg;
+			BMessage *msg;
 
-			etk_clipboard.Lock();
-			if(!((msg = etk_clipboard.Data()) == NULL || msg->HasBool("etk:msg_from_gui")))
+			bhapi_clipboard.Lock();
+			if(!((msg = bhapi_clipboard.Data()) == NULL || msg->HasBool("etk:msg_from_gui")))
 			{
-				msg->FindData("text/plain", E_MIME_TYPE, (const void**)&text, &textLen);
+				msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 				if(textLen > 0) aStr.Append(text, textLen);
 			}
-			etk_clipboard.Unlock();
+			bhapi_clipboard.Unlock();
 
 			if(aStr.Length() <= 0) break;
 
@@ -129,31 +129,31 @@ public:
 			fEngine->Unlock();
 		} while(false);
 
-		return E_DISPATCH_MESSAGE;
+		return B_DISPATCH_MESSAGE;
 	}
 };
 
 
-#ifndef ETK_GRAPHICS_DIRECTFB_BUILT_IN
+#ifndef BHAPI_GRAPHICS_DIRECTFB_BUILT_IN
 extern "C" {
-_EXPORT EGraphicsEngine* instantiate_graphics_engine()
+_EXPORT BGraphicsEngine* instantiate_graphics_engine()
 #else
-_IMPEXP_ETK EGraphicsEngine* etk_get_build_in_graphics_engine()
+_IMPEXP_BHAPI BGraphicsEngine* bhapi_get_build_in_graphics_engine()
 #endif
 {
-#ifndef ETK_GRAPHICS_DIRECTFB_BUILT_IN
-	EString useDFB = getenv("ETK_USE_DIRECTFB");
+#ifndef BHAPI_GRAPHICS_DIRECTFB_BUILT_IN
+	BString useDFB = getenv("BHAPI_USE_DIRECTFB");
 	if(!(useDFB.ICompare("true") == 0 || useDFB == "1")) return NULL;
 #endif
 	return(new EDFBGraphicsEngine());
 }
-#ifndef ETK_GRAPHICS_DIRECTFB_BUILT_IN
+#ifndef BHAPI_GRAPHICS_DIRECTFB_BUILT_IN
 } // extern "C"
 #endif
 
 
 EDFBGraphicsEngine::EDFBGraphicsEngine()
-	: EGraphicsEngine(),
+	: BGraphicsEngine(),
 	  dfbDisplay(NULL), dfbDisplayLayer(NULL), dfbEventBuffer(NULL),
 	  dfbDisplayWidth(0), dfbDisplayHeight(0), dfbCursor(NULL),
 	  dfbDoQuit(false), fDFBThread(NULL), fClipboardFilter(NULL)
@@ -180,24 +180,24 @@ EDFBGraphicsEngine::Unlock()
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsEngine::InitCheck()
 {
-	EAutolock <EDFBGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || dfbDisplay == NULL || dfbDoQuit) return E_NO_INIT;
-	return E_OK;
+	BAutolock <EDFBGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || dfbDisplay == NULL || dfbDoQuit) return B_NO_INIT;
+	return B_OK;
 }
 
 
-static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
+static void bhapi_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 {
 	if(dfbEngine == NULL || evt == NULL) return;
 
-	e_bigtime_t currentTime = e_real_time_clock_usecs();
-//	ETK_DEBUG("[GRAPHICS]: %s --- Something DFB Event received.", __PRETTY_FUNCTION__);
+	b_bigtime_t currentTime = b_real_time_clock_usecs();
+//	BHAPI_DEBUG("[GRAPHICS]: %s --- Something DFB Event received.", __PRETTY_FUNCTION__);
 
-	EMessenger etkWinMsgr;
-	EMessage message;
+	BMessenger etkWinMsgr;
+	BMessage message;
 
 	message.AddBool("etk:msg_from_gui", true);
 	message.AddInt64("when", currentTime);
@@ -208,9 +208,9 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 		DFBWindowEvent *event = &(evt->window);
 		EDFBGraphicsWindow *win = (EDFBGraphicsWindow*)dfbEngine->GetDFBWindowData(event->window_id);
 
-		if(win == NULL || win->GetContactor(&etkWinMsgr) != E_OK || etkWinMsgr.IsValid() == false)
+		if(win == NULL || win->GetContactor(&etkWinMsgr) != B_OK || etkWinMsgr.IsValid() == false)
 		{
-//			ETK_DEBUG("[GRAPHICS]: %s --- Can't find window for the event (win:%p).", __PRETTY_FUNCTION__, win);
+//			BHAPI_DEBUG("[GRAPHICS]: %s --- Can't find window for the event (win:%p).", __PRETTY_FUNCTION__, win);
 			dfbEngine->Unlock();
 			return;
 		}
@@ -222,16 +222,16 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 			case DWET_SIZE:
 				{
 					int originX, originY;
-					ERect margins = win->fMargins;
+					BRect margins = win->fMargins;
 					dfbWindow->GetPosition(dfbWindow, &originX, &originY);
-					if(win->fWidth != (euint32)event->w || win->fHeight != (euint32)event->h)
+					if(win->fWidth != (b_uint32)event->w || win->fHeight != (b_uint32)event->h)
 					{
 						win->fWidth = event->w;
 						win->fHeight = event->h;
 						dfbWindow->SetOpaqueRegion(dfbWindow, (int)margins.left, (int)margins.top,
 									   (int)event->w - 1 - (int)margins.right,
 									   (int)event->h - 1 - (int)margins.bottom);
-						e_rgb_color c = win->BackgroundColor();
+						b_rgb_color c = win->BackgroundColor();
 						win->dfbSurface->Clear(win->dfbSurface, c.red, c.green, c.blue, 255);
 						win->RenderDecoration();
 					}
@@ -242,13 +242,13 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					}
 					dfbEngine->Unlock();
 
-					message.AddPoint("where", EPoint((float)originX + margins.left, (float)originY + margins.top));
+					message.AddPoint("where", BPoint((float)originX + margins.left, (float)originY + margins.top));
 					message.AddFloat("width", (float)(event->w - 1) - margins.left - margins.right);
 					message.AddFloat("height", (float)(event->h - 1) - margins.top - margins.bottom);
 
-					message.what = E_WINDOW_RESIZED;
+					message.what = B_WINDOW_RESIZED;
 					etkWinMsgr.SendMessage(&message);
-					message.what = E_WINDOW_MOVED;
+					message.what = B_WINDOW_MOVED;
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -257,7 +257,7 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 
 			case DWET_POSITION:
 				{
-					ERect margins = win->fMargins;
+					BRect margins = win->fMargins;
 					if(win->fHidden == false && (win->fOriginX != event->x || win->fOriginY != event->y))
 					{
 						win->fOriginX = event->x;
@@ -265,9 +265,9 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					}
 					dfbEngine->Unlock();
 
-					message.AddPoint("where", EPoint((float)event->x + margins.left, (float)event->y + margins.top));
+					message.AddPoint("where", BPoint((float)event->x + margins.left, (float)event->y + margins.top));
 
-					message.what = E_WINDOW_MOVED;
+					message.what = B_WINDOW_MOVED;
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -276,15 +276,15 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 
 			case DWET_POSITION_SIZE:
 				{
-					ERect margins = win->fMargins;
-					if(win->fWidth != (euint32)event->w || win->fHeight != (euint32)event->h)
+					BRect margins = win->fMargins;
+					if(win->fWidth != (b_uint32)event->w || win->fHeight != (b_uint32)event->h)
 					{
 						win->fWidth = event->w;
 						win->fHeight = event->h;
 						dfbWindow->SetOpaqueRegion(dfbWindow, (int)margins.left, (int)margins.top,
 									   (int)event->w - 1 - (int)margins.right,
 									   (int)event->h - 1 - (int)margins.bottom);
-						e_rgb_color c = win->BackgroundColor();
+						b_rgb_color c = win->BackgroundColor();
 						win->dfbSurface->Clear(win->dfbSurface, c.red, c.green, c.blue, 255);
 						win->RenderDecoration();
 					}
@@ -295,13 +295,13 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					}
 					dfbEngine->Unlock();
 
-					message.AddPoint("where", EPoint((float)event->x + margins.left, (float)event->y + margins.top));
+					message.AddPoint("where", BPoint((float)event->x + margins.left, (float)event->y + margins.top));
 					message.AddFloat("width", (float)(event->w - 1) - margins.left - margins.right);
 					message.AddFloat("height", (float)(event->h - 1) - margins.top - margins.bottom);
 
-					message.what = E_WINDOW_RESIZED;
+					message.what = B_WINDOW_RESIZED;
 					etkWinMsgr.SendMessage(&message);
-					message.what = E_WINDOW_MOVED;
+					message.what = B_WINDOW_MOVED;
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -311,14 +311,14 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 			case DWET_CLOSE:
 				{
 					if(dfbEngine->dfbCurFocusWin == event->window_id)
-						dfbEngine->dfbCurFocusWin = E_MAXUINT;
+						dfbEngine->dfbCurFocusWin = B_MAXUINT;
 
 					if(dfbEngine->dfbCurPointerGrabbed == event->window_id)
-						dfbEngine->dfbCurPointerGrabbed = E_MAXUINT;
+						dfbEngine->dfbCurPointerGrabbed = B_MAXUINT;
 
 					dfbEngine->Unlock();
 
-					message.what = E_QUIT_REQUESTED;
+					message.what = B_QUIT_REQUESTED;
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -327,13 +327,13 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 
 			case DWET_GOTFOCUS:
 				{
-					if(win->fFlags & E_AVOID_FOCUS) break;
+					if(win->fFlags & B_AVOID_FOCUS) break;
 
 					dfbEngine->dfbCurFocusWin = event->window_id;
 					dfbWindow->SetOpacity(dfbWindow, 0xff);
 					dfbEngine->Unlock();
 
-					message.what = E_WINDOW_ACTIVATED;
+					message.what = B_WINDOW_ACTIVATED;
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -344,11 +344,11 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 #if 0
 				if(dfbEngine->dfbCurFocusWin == event->window_id)
 				{
-					dfbEngine->dfbCurFocusWin = E_MAXUINT;
+					dfbEngine->dfbCurFocusWin = B_MAXUINT;
 					dfbWindow->SetOpacity(dfbWindow, 0xaf);
 					dfbEngine->Unlock();
 
-					message.what = E_WINDOW_ACTIVATED;
+					message.what = B_WINDOW_ACTIVATED;
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -363,7 +363,7 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					dfbEngine->Unlock();
 
 					// TODO: delta_x
-					message.what = E_MOUSE_WHEEL_CHANGED;
+					message.what = B_MOUSE_WHEEL_CHANGED;
 					float delta_x = 0;
 					float delta_y = 0;
 					delta_y = (event->step < 0 ? -1.0f : 1.0f);
@@ -372,7 +372,7 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					message.AddFloat("etk:wheel_delta_y", delta_y);
 
 					message.AddMessenger("etk:msg_for_target", etkWinMsgr);
-					etkWinMsgr = EMessenger(etk_app);
+					etkWinMsgr = BMessenger(bhapi_app);
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -385,18 +385,18 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					if(win->HandleMouseEvent(event)) break;
 
 					int originX, originY;
-					ERect margins = win->fMargins;
+					BRect margins = win->fMargins;
 					dfbWindow->GetPosition(dfbWindow, &originX, &originY);
 					dfbEngine->Unlock();
 
-					message.what = (event->type == DWET_BUTTONDOWN ? E_MOUSE_DOWN : E_MOUSE_UP);
+					message.what = (event->type == DWET_BUTTONDOWN ? B_MOUSE_DOWN : B_MOUSE_UP);
 
-					eint32 button = 0;
+					b_int32 button = 0;
 					if(event->button == DIBI_LEFT) button = 1;
 					else if(event->button == DIBI_MIDDLE) button = 2;
 					else if(event->button == DIBI_RIGHT) button = 3;
 
-					eint32 buttons = button;
+					b_int32 buttons = button;
 					DFBInputDeviceButtonMask state = event->buttons;
 					if((state & DIBM_LEFT) && button != 1) buttons += 1;
 					if((state & DIBM_MIDDLE) && button != 2) buttons += 2;
@@ -404,13 +404,13 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					message.AddInt32("button", button);
 					message.AddInt32("buttons", buttons);
 
-					message.AddPoint("where", EPoint((float)(event->cx - originX) - margins.left,
+					message.AddPoint("where", BPoint((float)(event->cx - originX) - margins.left,
 									 (float)(event->cy - originY) - margins.top));
-					message.AddPoint("screen_where", EPoint((float)event->cx, (float)event->cy));
+					message.AddPoint("screen_where", BPoint((float)event->cx, (float)event->cy));
 
 					// TODO: modifiers, clicks
 					message.AddMessenger("etk:msg_for_target", etkWinMsgr);
-					etkWinMsgr = EMessenger(etk_app);
+					etkWinMsgr = BMessenger(bhapi_app);
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -422,25 +422,25 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					if(win->HandleMouseEvent(event)) break;
 
 					int originX, originY;
-					ERect margins = win->fMargins;
+					BRect margins = win->fMargins;
 					dfbWindow->GetPosition(dfbWindow, &originX, &originY);
 					dfbEngine->Unlock();
 
-					message.what = E_MOUSE_MOVED;
+					message.what = B_MOUSE_MOVED;
 
-					eint32 buttons = 0;
+					b_int32 buttons = 0;
 					DFBInputDeviceButtonMask state = event->buttons;
 					if(state & DIBM_LEFT) buttons += 1;
 					if(state & DIBM_MIDDLE) buttons += 2;
 					if(state & DIBM_RIGHT) buttons += 3;
 					message.AddInt32("buttons", buttons);
 
-					message.AddPoint("where", EPoint((float)(event->cx - originX) - margins.left,
+					message.AddPoint("where", BPoint((float)(event->cx - originX) - margins.left,
 									 (float)(event->cy - originY) - margins.top));
-					message.AddPoint("screen_where", EPoint((float)event->cx, (float)event->cy));
+					message.AddPoint("screen_where", BPoint((float)event->cx, (float)event->cy));
 
 					message.AddMessenger("etk:msg_for_target", etkWinMsgr);
-					etkWinMsgr = EMessenger(etk_app);
+					etkWinMsgr = BMessenger(bhapi_app);
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -452,19 +452,19 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 				{
 					dfbEngine->Unlock();
 
-					message.AddInt32("key", (eint32)(event->key_code));
+					message.AddInt32("key", (b_int32)(event->key_code));
 
 					// TODO: etk:key_repeat, modifiers, states, raw_char
 					if(DFB_KEY_TYPE(event->key_symbol) == DIKT_UNICODE)
 					{
-						euint16 symbol = (euint16)event->key_symbol;
-						if(symbol == DIKS_ENTER) symbol = E_ENTER;
-						char *keybuffer = e_unicode_convert_to_utf8((const eunichar*)&symbol, 1);
-						eint32 keynum = (keybuffer ? (eint32)strlen(keybuffer) : 0);
+						b_uint16 symbol = (b_uint16)event->key_symbol;
+						if(symbol == DIKS_ENTER) symbol = B_ENTER;
+						char *keybuffer = b_unicode_convert_to_utf8((const b_unichar*)&symbol, 1);
+						b_int32 keynum = (keybuffer ? (b_int32)strlen(keybuffer) : 0);
 
 						if(keybuffer)
 						{
-							for(eint32 i = 0; i < keynum; i++) message.AddInt8("byte", (eint8)keybuffer[i]);
+							for(b_int32 i = 0; i < keynum; i++) message.AddInt8("byte", (b_int8)keybuffer[i]);
 							message.AddString("bytes", keybuffer);
 							free(keybuffer);
 						}
@@ -474,15 +474,15 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 						char byte[2];
 						bzero(byte, 2);
 
-						if(event->key_symbol == DIKS_CURSOR_LEFT) byte[0] = E_LEFT_ARROW;
-						else if(event->key_symbol == DIKS_CURSOR_RIGHT) byte[0] = E_RIGHT_ARROW;
-						else if(event->key_symbol == DIKS_CURSOR_UP) byte[0] = E_UP_ARROW;
-						else if(event->key_symbol == DIKS_CURSOR_DOWN) byte[0] = E_DOWN_ARROW;
-						else if(event->key_symbol == DIKS_INSERT) byte[0] = E_INSERT;
-						else if(event->key_symbol == DIKS_HOME) byte[0] = E_HOME;
-						else if(event->key_symbol == DIKS_END) byte[0] = E_END;
-						else if(event->key_symbol == DIKS_PAGE_UP) byte[0] = E_PAGE_UP;
-						else if(event->key_symbol == DIKS_PAGE_DOWN) byte[0] = E_PAGE_DOWN;
+						if(event->key_symbol == DIKS_CURSOR_LEFT) byte[0] = B_LEFT_ARROW;
+						else if(event->key_symbol == DIKS_CURSOR_RIGHT) byte[0] = B_RIGHT_ARROW;
+						else if(event->key_symbol == DIKS_CURSOR_UP) byte[0] = B_UP_ARROW;
+						else if(event->key_symbol == DIKS_CURSOR_DOWN) byte[0] = B_DOWN_ARROW;
+						else if(event->key_symbol == DIKS_INSERT) byte[0] = B_INSERT;
+						else if(event->key_symbol == DIKS_HOME) byte[0] = B_HOME;
+						else if(event->key_symbol == DIKS_END) byte[0] = B_END;
+						else if(event->key_symbol == DIKS_PAGE_UP) byte[0] = B_PAGE_UP;
+						else if(event->key_symbol == DIKS_PAGE_DOWN) byte[0] = B_PAGE_DOWN;
 
 						if(byte[0] != 0)
 						{
@@ -492,26 +492,26 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					}
 
 					if(message.HasString("bytes"))
-						message.what = (event->type == DWET_KEYDOWN ? E_KEY_DOWN : E_KEY_UP);
+						message.what = (event->type == DWET_KEYDOWN ? B_KEY_DOWN : B_KEY_UP);
 					else
-						message.what = (event->type == DWET_KEYDOWN ? E_UNMAPPED_KEY_DOWN : E_UNMAPPED_KEY_UP);
+						message.what = (event->type == DWET_KEYDOWN ? B_UNMAPPED_KEY_DOWN : B_UNMAPPED_KEY_UP);
 
-					eint32 modifiers = 0;
+					b_int32 modifiers = 0;
 
-					if(event->modifiers & DIMM_SHIFT) modifiers |= E_SHIFT_KEY;
-					if(event->modifiers & DIMM_CONTROL) modifiers |= E_CONTROL_KEY;
-					if(event->modifiers & DIMM_ALT) modifiers |= E_COMMAND_KEY;
-					if(event->modifiers & DIMM_SUPER) modifiers |= E_MENU_KEY;
-					if(event->modifiers & DIMM_HYPER) modifiers |= E_OPTION_KEY;
+					if(event->modifiers & DIMM_SHIFT) modifiers |= B_SHIFT_KEY;
+					if(event->modifiers & DIMM_CONTROL) modifiers |= B_CONTROL_KEY;
+					if(event->modifiers & DIMM_ALT) modifiers |= B_COMMAND_KEY;
+					if(event->modifiers & DIMM_SUPER) modifiers |= B_MENU_KEY;
+					if(event->modifiers & DIMM_HYPER) modifiers |= B_OPTION_KEY;
 
-					if(event->locks & DILS_SCROLL) modifiers |= E_SCROLL_LOCK;
-					if(event->locks & DILS_NUM) modifiers |= E_NUM_LOCK;
-					if(event->locks & DILS_CAPS) modifiers |= E_CAPS_LOCK;
+					if(event->locks & DILS_SCROLL) modifiers |= B_SCROLL_LOCK;
+					if(event->locks & DILS_NUM) modifiers |= B_NUM_LOCK;
+					if(event->locks & DILS_CAPS) modifiers |= B_CAPS_LOCK;
 
 					message.AddInt32("modifiers", modifiers);
 
 					message.AddMessenger("etk:msg_for_target", etkWinMsgr);
-					etkWinMsgr = EMessenger(etk_app);
+					etkWinMsgr = BMessenger(bhapi_app);
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -530,7 +530,7 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 		DFBUserEvent *event = &(evt->user);
 		EDFBGraphicsWindow *win = (EDFBGraphicsWindow*)dfbEngine->GetDFBWindowData((DFBWindowID)event->data);
 
-		if(win == NULL || win->GetContactor(&etkWinMsgr) != E_OK || etkWinMsgr.IsValid() == false)
+		if(win == NULL || win->GetContactor(&etkWinMsgr) != B_OK || etkWinMsgr.IsValid() == false)
 		{
 			dfbEngine->Unlock();
 			return;
@@ -544,7 +544,7 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 
 		message.what = _UPDATE_;
 
-		message.AddRect("etk:frame", ERect(0, 0, (float)width - 1.f, (float)height - 1.f));
+		message.AddRect("etk:frame", BRect(0, 0, (float)width - 1.f, (float)height - 1.f));
 		message.AddBool("etk:expose", true);
 
 		etkWinMsgr.SendMessage(&message);
@@ -552,11 +552,11 @@ static void etk_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 }
 
 
-static e_status_t etk_dfb_task(void *arg)
+static b_status_t bhapi_dfb_task(void *arg)
 {
 	EDFBGraphicsEngine *dfbEngine = (EDFBGraphicsEngine*)arg;
 
-	ETK_DEBUG("[GRAPHICS]: Enter DirectFB task...");
+	BHAPI_DEBUG("[GRAPHICS]: Enter DirectFB task...");
 
 	dfbEngine->Lock();
 
@@ -566,7 +566,7 @@ static e_status_t etk_dfb_task(void *arg)
 
 		if(dfbEngine->dfbEventBuffer->WaitForEvent(dfbEngine->dfbEventBuffer) != DFB_OK)
 		{
-			ETK_WARNING("[GRAPHICS]: %s --- DirectFB operate error!", __PRETTY_FUNCTION__);
+			BHAPI_WARNING("[GRAPHICS]: %s --- DirectFB operate error!", __PRETTY_FUNCTION__);
 			break;
 		}
 
@@ -579,7 +579,7 @@ static e_status_t etk_dfb_task(void *arg)
 			if(dfbEngine->dfbEventBuffer->GetEvent(dfbEngine->dfbEventBuffer, &evt) != DFB_OK) break;
 
 			dfbEngine->Unlock();
-			etk_process_dfb_event(dfbEngine, &evt); // Process DFB Event
+			bhapi_process_dfb_event(dfbEngine, &evt); // Process DFB Event
 			dfbEngine->Lock();
 			if(dfbEngine->dfbDoQuit) break;
 		}
@@ -590,7 +590,7 @@ static e_status_t etk_dfb_task(void *arg)
 		if(memcmp((void*)&dfbEngine->dfbClipboardTimeStamp, (void*)&timestamp, sizeof(struct timeval)) != 0)
 		{
 			dfbEngine->Unlock();
-			etk_dfb_clipboard_changed(dfbEngine);
+			bhapi_dfb_clipboard_changed(dfbEngine);
 			dfbEngine->Lock();
 		}
 	}
@@ -611,19 +611,19 @@ static e_status_t etk_dfb_task(void *arg)
 
 	dfbEngine->Unlock();
 
-	ETK_DEBUG("[GRAPHICS]: DirectFB task quited.");
+	BHAPI_DEBUG("[GRAPHICS]: DirectFB task quited.");
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsEngine::Initalize()
 {
-	EMessageFilter *clipboardFilter = new EDFBClipboardMessageFilter(this);
-	etk_app->Lock();
-	etk_app->AddFilter(clipboardFilter);
-	etk_app->Unlock();
+	BMessageFilter *clipboardFilter = new EDFBClipboardMessageFilter(this);
+	bhapi_app->Lock();
+	bhapi_app->AddFilter(clipboardFilter);
+	bhapi_app->Unlock();
 
 	Lock();
 
@@ -631,11 +631,11 @@ EDFBGraphicsEngine::Initalize()
 	{
 		Unlock();
 
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
-		return E_ERROR;
+		return B_ERROR;
 	}
 
 	/* Do DFB Initalize */
@@ -643,14 +643,14 @@ EDFBGraphicsEngine::Initalize()
 	char **eArgv = NULL;
 	bool argvGotFromSystem = false;
 
-	EString progName;
-	EStringArray progArgv;
+	BString progName;
+	BStringArray progArgv;
 
 	DFBDisplayLayerConfig layer_config;
 
-#ifdef ETK_OS_LINUX
-	argvGotFromSystem = (etk_get_prog_argc_argv_linux(progName, progArgv) ? progArgv.CountItems() > 0 : false);
-#endif // ETK_OS_LINUX
+#ifdef BHAPI_OS_LINUX
+	argvGotFromSystem = (bhapi_get_prog_argc_argv_linux(progName, progArgv) ? progArgv.CountItems() > 0 : false);
+#endif // BHAPI_OS_LINUX
 
 	if(!argvGotFromSystem || progArgv.CountItems() <= 1)
 	{
@@ -672,20 +672,20 @@ EDFBGraphicsEngine::Initalize()
 	{
 		if(progArgv.FindString("--dfb-help") >= 0)
 		{
-			ETK_OUTPUT("%s\n", DirectFBUsageString());
+			BHAPI_OUTPUT("%s\n", DirectFBUsagString());
 
 			Unlock();
 
-			etk_app->Lock();
-			etk_app->RemoveFilter(clipboardFilter);
-			etk_app->Unlock();
+			bhapi_app->Lock();
+			bhapi_app->RemoveFilter(clipboardFilter);
+			bhapi_app->Unlock();
 			delete clipboardFilter;
-			return E_ERROR;
+			return B_ERROR;
 		}
 
 		eArgc = (int)progArgv.CountItems();
 		eArgv = new char*[progArgv.CountItems() + 1];
-		for(eint32 i = 0; i < progArgv.CountItems(); i++)
+		for(b_int32 i = 0; i < progArgv.CountItems(); i++)
 			eArgv[i] = (char*)progArgv.ItemAt(i)->String();
 		eArgv[progArgv.CountItems()] = NULL;
 	}
@@ -693,15 +693,15 @@ EDFBGraphicsEngine::Initalize()
 	if(DirectFBInit(&eArgc, (char***)&eArgv) != DFB_OK || DirectFBCreate(&dfbDisplay) != DFB_OK)
 	{
 		if(eArgv) delete[] eArgv;
-		ETK_WARNING("[GRAPHICS]: %s --- Initalize DirectFB (DirectFBCreate) failed!", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[GRAPHICS]: %s --- Initalize DirectFB (DirectFBCreate) failed!", __PRETTY_FUNCTION__);
 
 		Unlock();
 
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
-		return E_ERROR;
+		return B_ERROR;
 	}
 	if(eArgv) delete[] eArgv;
 
@@ -710,15 +710,15 @@ EDFBGraphicsEngine::Initalize()
 		dfbDisplay->Release(dfbDisplay);
 		dfbDisplay = NULL;
 
-		ETK_WARNING("[GRAPHICS]: %s --- Initalize DirectFB (GetDisplayLayer) failed!", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[GRAPHICS]: %s --- Initalize DirectFB (GetDisplayLayer) failed!", __PRETTY_FUNCTION__);
 
 		Unlock();
 
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
-		return E_ERROR;
+		return B_ERROR;
 	}
 
 	dfbDisplayLayer->GetConfiguration(dfbDisplayLayer, &layer_config);
@@ -735,29 +735,29 @@ EDFBGraphicsEngine::Initalize()
 		dfbDisplay->Release(dfbDisplay);
 		dfbDisplay = NULL;
 
-		ETK_WARNING("[GRAPHICS]: %s --- Initalize DirectFB (CreateEventBuffer) failed!", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[GRAPHICS]: %s --- Initalize DirectFB (CreateEventBuffer) failed!", __PRETTY_FUNCTION__);
 
 		Unlock();
 
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
-		return E_ERROR;
+		return B_ERROR;
 	}
 
 	dfbDoQuit = false;
-	dfbCurFocusWin = E_MAXUINT;
-	dfbCurPointerGrabbed = E_MAXUINT;
+	dfbCurFocusWin = B_MAXUINT;
+	dfbCurPointerGrabbed = B_MAXUINT;
 	bzero(&dfbClipboardTimeStamp, sizeof(struct timeval));
 	dfbDisplay->GetClipboardTimeStamp(dfbDisplay, &dfbClipboardTimeStamp);
 
-	if((fDFBThread = etk_create_thread(etk_dfb_task, E_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL ||
-	   etk_resume_thread(fDFBThread) != E_OK)
+	if((fDFBThread = bhapi_create_thread(bhapi_dfb_task, B_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL ||
+	   bhapi_resume_thread(fDFBThread) != B_OK)
 	{
 		if(fDFBThread)
 		{
-			etk_delete_thread(fDFBThread);
+			bhapi_delete_thread(fDFBThread);
 			fDFBThread = NULL;
 		}
 
@@ -771,33 +771,33 @@ EDFBGraphicsEngine::Initalize()
 
 		Unlock();
 
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
-		return E_ERROR;
+		return B_ERROR;
 	}
 
 	fClipboardFilter = clipboardFilter;
 
 	Unlock();
 
-	etk_dfb_clipboard_changed(this);
+	bhapi_dfb_clipboard_changed(this);
 
-	return E_OK;
+	return B_OK;
 }
 
 
 void
 EDFBGraphicsEngine::Cancel()
 {
-	EMessageFilter *clipboardFilter = NULL;
+	BMessageFilter *clipboardFilter = NULL;
 
 	Lock();
 
 	if(fDFBThread != NULL)
 	{
-		void *dfbThread = etk_open_thread(etk_get_thread_id(fDFBThread));
+		void *dfbThread = bhapi_open_thread(bhapi_get_thread_id(fDFBThread));
 		if(dfbThread == NULL)
 		{
 			Unlock();
@@ -816,21 +816,21 @@ EDFBGraphicsEngine::Cancel()
 
 		Unlock();
 
-		e_status_t status;
-		etk_wait_for_thread(dfbThread, &status);
+		b_status_t status;
+		bhapi_wait_for_thread(dfbThread, &status);
 
 		Lock();
 
-		if(fDFBThread != NULL && etk_get_thread_id(fDFBThread) == etk_get_thread_id(dfbThread))
+		if(fDFBThread != NULL && bhapi_get_thread_id(fDFBThread) == bhapi_get_thread_id(dfbThread))
 		{
-			etk_delete_thread(fDFBThread);
+			bhapi_delete_thread(fDFBThread);
 			fDFBThread = NULL;
 
-			struct etk_dfb_data *item;
-			while((item = (struct etk_dfb_data*)fDFBDataList.RemoveItem((eint32)0)) != NULL) free(item);
+			struct bhapi_dfb_data *item;
+			while((item = (struct bhapi_dfb_data*)fDFBDataList.RemoveItem((b_int32)0)) != NULL) free(item);
 		}
 
-		etk_delete_thread(dfbThread);
+		bhapi_delete_thread(dfbThread);
 
 		clipboardFilter = fClipboardFilter;
 		fClipboardFilter = NULL;
@@ -840,67 +840,67 @@ EDFBGraphicsEngine::Cancel()
 
 	if(clipboardFilter != NULL)
 	{
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
 	}
 }
 
 
-EGraphicsContext*
+BGraphicsContext*
 EDFBGraphicsEngine::CreateContext()
 {
-	return(new EGraphicsContext());
+	return(new BGraphicsContext());
 }
 
 
-EGraphicsDrawable*
-EDFBGraphicsEngine::CreatePixmap(euint32 w, euint32 h)
+BGraphicsDrawable*
+EDFBGraphicsEngine::CreatePixmap(b_uint32 w, b_uint32 h)
 {
 	return(new EDFBGraphicsDrawable(this, w, h));
 }
 
 
-EGraphicsWindow*
-EDFBGraphicsEngine::CreateWindow(eint32 x, eint32 y, euint32 w, euint32 h)
+BGraphicsWindow*
+EDFBGraphicsEngine::CreateWindow(b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
 	return(new EDFBGraphicsWindow(this, x, y, w, h));
 }
 
 
-e_status_t
-EDFBGraphicsEngine::GetDesktopBounds(euint32 *w, euint32 *h)
+b_status_t
+EDFBGraphicsEngine::GetDesktopBounds(b_uint32 *w, b_uint32 *h)
 {
-	EAutolock <EDFBGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || InitCheck() != B_OK) return B_ERROR;
 
 	if(w) *w = dfbDisplayWidth;
 	if(h) *h = dfbDisplayHeight;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsEngine::GetCurrentWorkspace(euint32 *workspace)
+b_status_t
+EDFBGraphicsEngine::GetCurrentWorkspace(b_uint32 *workspace)
 {
 	// don't support workspace
 	if(workspace != NULL) *workspace = 0;
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsEngine::SetCursor(const void *cursor_data)
 {
-	EAutolock <EDFBGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || InitCheck() != B_OK) return B_ERROR;
 
 	if(cursor_data)
 	{
-		ECursor cursor(cursor_data);
-		if(cursor.ColorDepth() != 1) return E_ERROR;
+		BCursor cursor(cursor_data);
+		if(cursor.ColorDepth() != 1) return B_ERROR;
 
 		DFBSurfaceDescription desc;
 		desc.flags = (DFBSurfaceDescriptionFlags)(DSDESC_CAPS | DSDESC_WIDTH | DSDESC_HEIGHT | DSDESC_PIXELFORMAT);
@@ -910,18 +910,18 @@ EDFBGraphicsEngine::SetCursor(const void *cursor_data)
 		desc.height = (int)cursor.Height();
 
 		IDirectFBSurface *newCursor;
-		if(dfbDisplay->CreateSurface(dfbDisplay, &desc, &newCursor) != DFB_OK) return E_ERROR;
+		if(dfbDisplay->CreateSurface(dfbDisplay, &desc, &newCursor) != DFB_OK) return B_ERROR;
 
-		const euint8 *bits = (const euint8*)cursor.Bits();
-		const euint8 *mask = (const euint8*)cursor.Mask();
+		const b_uint8 *bits = (const b_uint8*)cursor.Bits();
+		const b_uint8 *mask = (const b_uint8*)cursor.Mask();
 
 		newCursor->SetDrawingFlags(newCursor, DSDRAW_NOFX);
 		newCursor->SetColor(newCursor, 0, 0, 0, 0);
 		newCursor->FillRectangle(newCursor, 0, 0, desc.width, desc.height);
 
-		for(euint8 j = 0; j < cursor.Height(); j++)
-			for(euint8 i = 0; i < cursor.Width(); i += 8, bits++, mask++)
-				for(euint8 k = 0; k < 8 && k + i < cursor.Width(); k++)
+		for(b_uint8 j = 0; j < cursor.Height(); j++)
+			for(b_uint8 i = 0; i < cursor.Width(); i += 8, bits++, mask++)
+				for(b_uint8 k = 0; k < 8 && k + i < cursor.Width(); k++)
 				{
 					if(!(*mask & (1 << (7 - k)))) continue;
 					if(*bits & (1 << (7 - k))) newCursor->SetColor(newCursor, 0, 0, 0, 255);
@@ -941,14 +941,14 @@ EDFBGraphicsEngine::SetCursor(const void *cursor_data)
 		dfbDisplayLayer->SetCursorOpacity(dfbDisplayLayer, 0);
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsEngine::GetDefaultCursor(ECursor *cursor)
+b_status_t
+EDFBGraphicsEngine::GetDefaultCursor(BCursor *cursor)
 {
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
@@ -957,13 +957,13 @@ EDFBGraphicsEngine::SetDFBWindowData(IDirectFBWindow *dfbWin, void *data, void *
 {
 	if(dfbWin == NULL) return false;
 
-	EAutolock <EDFBGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || InitCheck() != E_OK) return false;
+	BAutolock <EDFBGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || InitCheck() != B_OK) return false;
 
 	bool found = false;
-	for(eint32 i = 0; i < fDFBDataList.CountItems(); i++)
+	for(b_int32 i = 0; i < fDFBDataList.CountItems(); i++)
 	{
-		struct etk_dfb_data *item = (struct etk_dfb_data*)fDFBDataList.ItemAt(i);
+		struct bhapi_dfb_data *item = (struct bhapi_dfb_data*)fDFBDataList.ItemAt(i);
 		if(item->win == dfbWin)
 		{
 			if(old_data) *old_data = item->data;
@@ -985,7 +985,7 @@ EDFBGraphicsEngine::SetDFBWindowData(IDirectFBWindow *dfbWin, void *data, void *
 
 	if(!found && data)
 	{
-		struct etk_dfb_data *item = (struct etk_dfb_data*)malloc(sizeof(struct etk_dfb_data));
+		struct bhapi_dfb_data *item = (struct bhapi_dfb_data*)malloc(sizeof(struct bhapi_dfb_data));
 		if(!(item == NULL || fDFBDataList.AddItem(item) == false))
 		{
 			item->win = dfbWin;
@@ -1005,12 +1005,12 @@ EDFBGraphicsEngine::GetDFBWindowData(IDirectFBWindow *dfbWin)
 {
 	if(dfbWin == NULL) return NULL;
 
-	EAutolock <EDFBGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || InitCheck() != E_OK) return NULL;
+	BAutolock <EDFBGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || InitCheck() != B_OK) return NULL;
 
-	for(eint32 i = 0; i < fDFBDataList.CountItems(); i++)
+	for(b_int32 i = 0; i < fDFBDataList.CountItems(); i++)
 	{
-		struct etk_dfb_data *item = (struct etk_dfb_data*)fDFBDataList.ItemAt(i);
+		struct bhapi_dfb_data *item = (struct bhapi_dfb_data*)fDFBDataList.ItemAt(i);
 		if(item->win == dfbWin) return item->data;
 	}
 
@@ -1021,14 +1021,14 @@ EDFBGraphicsEngine::GetDFBWindowData(IDirectFBWindow *dfbWin)
 void*
 EDFBGraphicsEngine::GetDFBWindowData(DFBWindowID dfbWinID)
 {
-	if(dfbWinID == E_MAXUINT) return NULL;
+	if(dfbWinID == B_MAXUINT) return NULL;
 
-	EAutolock <EDFBGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || InitCheck() != E_OK) return NULL;
+	BAutolock <EDFBGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || InitCheck() != B_OK) return NULL;
 
-	for(eint32 i = 0; i < fDFBDataList.CountItems(); i++)
+	for(b_int32 i = 0; i < fDFBDataList.CountItems(); i++)
 	{
-		struct etk_dfb_data *item = (struct etk_dfb_data*)fDFBDataList.ItemAt(i);
+		struct bhapi_dfb_data *item = (struct bhapi_dfb_data*)fDFBDataList.ItemAt(i);
 		DFBWindowID id;
 		if(item->win->GetID(item->win, &id) != DFB_OK) continue;
 		if(id == dfbWinID) return item->data;
@@ -1039,19 +1039,19 @@ EDFBGraphicsEngine::GetDFBWindowData(DFBWindowID dfbWinID)
 
 
 bool
-EDFBGraphicsEngine::ConvertRegion(const ERegion *region, DFBRegion **dfbRegions, int *nRegions)
+EDFBGraphicsEngine::ConvertRegion(const BRegion *region, DFBRegion **dfbRegions, int *nRegions)
 {
 	if(dfbRegions == NULL || nRegions == NULL) return false;
 
-	eint32 nrectsNeeded = max_c((region ? region->CountRects() : 0), 1);
+	b_int32 nrectsNeeded = max_c((region ? region->CountRects() : 0), 1);
 	if((*dfbRegions = (DFBRegion*)malloc(sizeof(DFBRegion) * (size_t)nrectsNeeded)) == NULL) return false;
 	*nRegions = 0;
 
 	if(region != NULL)
 	{
-		for(eint32 i = 0; i < region->CountRects(); i++)
+		for(b_int32 i = 0; i < region->CountRects(); i++)
 		{
-			ERect r = region->RectAt(i).FloorCopy();
+			BRect r = region->RectAt(i).FloorCopy();
 
 			(*dfbRegions)[*nRegions].x1 = (int)r.left;
 			(*dfbRegions)[*nRegions].y1 = (int)r.top;
@@ -1068,8 +1068,8 @@ EDFBGraphicsEngine::ConvertRegion(const ERegion *region, DFBRegion **dfbRegions,
 		{
 			(*dfbRegions)->x1 = 0;
 			(*dfbRegions)->y1 = 0;
-			(*dfbRegions)->x2 = E_MAXINT;
-			(*dfbRegions)->y2 = E_MAXINT;
+			(*dfbRegions)->x2 = B_MAXINT;
+			(*dfbRegions)->y2 = B_MAXINT;
 			*nRegions = 1;
 		}
 		else

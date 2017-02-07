@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,137 +28,137 @@
  * --------------------------------------------------------------------------*/
 
 #include "./../kernel/OS.h"
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 
 #include "PrivateApplication.h"
 
 
-EApplicationConnector *etk_app_connector = NULL;
+BApplicationConnector *bhapi_app_connector = NULL;
 
 
-EApplicationConnector::EApplicationConnector()
+BApplicationConnector::BApplicationConnector()
 	: fLocker(true), fPort(NULL), fThread(NULL)
 {
 #if 0
-	if(etk_get_current_team_id() == 0)
-		ETK_ERROR("[PRIVATE]: %s --- Unsupported system.", __PRETTY_FUNCTION__);
+	if(bhapi_get_current_team_id() == 0)
+		BHAPI_ERROR("[PRIVATE]: %s --- Unsupported system.", __PRETTY_FUNCTION__);
 
-	EString port_name;
-	port_name << "e_app_" << etk_get_current_team_id();
+	BString port_name;
+	port_name << "e_app_" << bhapi_get_current_team_id();
 
-	if((fPort = etk_create_port(10, port_name.String())) == NULL)
-		ETK_ERROR("[PRIVATE]: %s --- Unable to create port.", __PRETTY_FUNCTION__);
+	if((fPort = bhapi_create_port(10, port_name.String())) == NULL)
+		BHAPI_ERROR("[PRIVATE]: %s --- Unable to create port.", __PRETTY_FUNCTION__);
 
-	if((fThread = etk_create_thread(this->task, E_NORMAL_PRIORITY, reinterpret_cast<void*>(this), NULL)) == NULL)
-		ETK_ERROR("[PRIVATE]: %s --- Unable to create thread.", __PRETTY_FUNCTION__);
+	if((fThread = bhapi_create_thread(this->task, B_NORMAL_PRIORITY, reinterpret_cast<void*>(this), NULL)) == NULL)
+		BHAPI_ERROR("[PRIVATE]: %s --- Unable to create thread.", __PRETTY_FUNCTION__);
 #endif
 
-	fHandlersDepot = new ETokensDepot(new ELocker(), true);
+	fHandlersDepot = new BTokensDepot(new BLocker(), true);
 
 #if 0
-	if(etk_resume_thread(fThread) != E_OK)
-		ETK_ERROR("[PRIVATE]: %s --- Unable to resume thread.", __PRETTY_FUNCTION__);
+	if(bhapi_resume_thread(fThread) != B_OK)
+		BHAPI_ERROR("[PRIVATE]: %s --- Unable to resume thread.", __PRETTY_FUNCTION__);
 #endif
 }
 
 
-EApplicationConnector::~EApplicationConnector()
+BApplicationConnector::~BApplicationConnector()
 {
-	etk_close_port(fPort);
+	bhapi_close_port(fPort);
 
 #if 0
 	// FIXME: objects deleted when thread quiting, then it blocks !!!
-	e_status_t err;
-	etk_wait_for_thread(fThread, &err);
-	etk_delete_thread(fThread);
+	b_status_t err;
+	bhapi_wait_for_thread(fThread, &err);
+	bhapi_delete_thread(fThread);
 #endif
 
-	etk_delete_port(fPort);
+	bhapi_delete_port(fPort);
 
 	delete fHandlersDepot;
 }
 
 
 bool
-EApplicationConnector::Lock()
+BApplicationConnector::Lock()
 {
 	return fLocker.Lock();
 }
 
 
 void
-EApplicationConnector::Unlock()
+BApplicationConnector::Unlock()
 {
 	fLocker.Unlock();
 }
 
 
-e_status_t
-EApplicationConnector::task(void *data)
+b_status_t
+BApplicationConnector::task(void *data)
 {
-	EApplicationConnector *self = reinterpret_cast<EApplicationConnector*>(data);
+	BApplicationConnector *self = reinterpret_cast<BApplicationConnector*>(data);
 
-	euint8 *buffer = (euint8*)malloc(ETK_MAX_PORT_BUFFER_SIZE + 1);
+	b_uint8 *buffer = (b_uint8*)malloc(BHAPI_MAX_PORT_BUFFER_SIZE + 1);
 	if(buffer == NULL)
-		ETK_ERROR("[PRIVATE]: %s --- Unable to allocate memory.", __PRETTY_FUNCTION__);
+		BHAPI_ERROR("[PRIVATE]: %s --- Unable to allocate memory.", __PRETTY_FUNCTION__);
 
-	eint32 code;
-	e_status_t err;
+	b_int32 code;
+	b_status_t err;
 
 	for(code = 0;
-	    (err = etk_read_port_etc(self->fPort, &code, buffer, ETK_MAX_PORT_BUFFER_SIZE, E_TIMEOUT, 1000000)) != E_ERROR;
+	    (err = bhapi_read_port_etc(self->fPort, &code, buffer, BHAPI_MAX_PORT_BUFFER_SIZE, B_TIMEOUT, 1000000)) != B_ERROR;
 	    code = 0)
 	{
-		ETK_DEBUG("[PRIVATE]: %s --- Hey(%I64i:%I64i), running(%I32i) ...",
-			  __PRETTY_FUNCTION__, etk_get_current_team_id(), etk_get_current_thread_id(), err - E_GENERAL_ERROR_BASE);
+		BHAPI_DEBUG("[PRIVATE]: %s --- Hey(%I64i:%I64i), running(%I32i) ...",
+			  __PRETTY_FUNCTION__, bhapi_get_current_team_id(), bhapi_get_current_thread_id(), err - B_GENERAL_ERROR_BASE);
 
 		/* do something */
 	}
 
 	free(buffer);
 
-	ETK_DEBUG("[PRIVATE]: %s --- Hey(%I64i:%I64i), quited.",
-		  __PRETTY_FUNCTION__, etk_get_current_team_id(), etk_get_current_thread_id());
+	BHAPI_DEBUG("[PRIVATE]: %s --- Hey(%I64i:%I64i), quited.",
+		  __PRETTY_FUNCTION__, bhapi_get_current_team_id(), bhapi_get_current_thread_id());
 
-	return E_OK;
+	return B_OK;
 }
 
 
-ETokensDepot*
-EApplicationConnector::HandlersDepot() const
+BTokensDepot*
+BApplicationConnector::HandlersDepot() const
 {
 	return fHandlersDepot;
 }
 
 
 void
-EApplicationConnector::Init()
+BApplicationConnector::Init()
 {
-	etk_app_connector = new EApplicationConnector();
+	bhapi_app_connector = new BApplicationConnector();
 }
 
 
 void
-EApplicationConnector::Quit()
+BApplicationConnector::Quit()
 {
-	delete etk_app_connector;
+	delete bhapi_app_connector;
 }
 
 
 #ifndef _WIN32
-class _LOCAL EApplicationInitializer {
+class _LOCAL BApplicationInitializer {
 public:
-	EApplicationInitializer()
+	BApplicationInitializer()
 	{
-		EApplicationConnector::Init();
+		BApplicationConnector::Init();
 	}
 
-	~EApplicationInitializer()
+	~BApplicationInitializer()
 	{
-		EApplicationConnector::Quit();
+		BApplicationConnector::Quit();
 	}
 };
 
-static EApplicationInitializer _etk_app_initializer;
+static BApplicationInitializer _bhapi_app_initializer;
 #endif
 

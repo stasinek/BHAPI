@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -34,43 +34,43 @@
 #include "MenuField.h"
 
 
-EMenuBar::EMenuBar(ERect frame, const char *title, euint32 resizeMode, e_menu_layout layout, bool resizeToFit)
-	: EMenu(frame, title, resizeMode, E_WILL_DRAW, layout, resizeToFit), fBorder(E_BORDER_FRAME)
+BMenuBar::BMenuBar(BRect frame, const char *title, b_uint32 resizeMode, b_menu_layout layout, bool resizeToFit)
+	: BMenu(frame, title, resizeMode, B_WILL_DRAW, layout, resizeToFit), fBorder(B_BORDER_FRAME)
 {
-	SetEventMask(E_POINTER_EVENTS);
+	SetEventMask(B_POINTER_EVENTS);
 }
 
 
-EMenuBar::~EMenuBar()
+BMenuBar::~BMenuBar()
 {
 }
 
 
 void
-EMenuBar::MakeFocus(bool state)
+BMenuBar::MakeFocus(bool state)
 {
-	EMenuField *parent = e_cast_as(Parent(), EMenuField);
+	BMenuField *parent = b_cast_as(Parent(), BMenuField);
 	if(!(state == false || parent == NULL || parent->MenuBar() != this)) return;
 
-	EMenu::MakeFocus(state);
+	BMenu::MakeFocus(state);
 	if(!IsFocus() && CurrentSelection() != NULL) SelectItem(NULL);
 }
 
 
 void
-EMenuBar::MouseDown(EPoint where)
+BMenuBar::MouseDown(BPoint where)
 {
-	EMenu::MouseDown(where);
+	BMenu::MouseDown(where);
 
 	if(Window() == NULL) return;
 
-	EMenuItem *item = CurrentSelection();
+	BMenuItem *item = CurrentSelection();
 	if(item != NULL)
 	{
 		if(VisibleBounds().Contains(where) == false)
 		{
 			ConvertToScreen(&where);
-			EMenu *submenu;
+			BMenu *submenu;
 			while(true)
 			{
 				submenu = (item ? item->Submenu() : NULL);
@@ -90,7 +90,7 @@ EMenuBar::MouseDown(EPoint where)
 		else
 		{
 			bool found = false;
-			for(eint32 i = 0; i < CountItems(); i++)
+			for(b_int32 i = 0; i < CountItems(); i++)
 				if(ItemFrame(i).Contains(where)) found = true;
 			if(found == false)
 			{
@@ -105,19 +105,19 @@ EMenuBar::MouseDown(EPoint where)
 
 
 void
-EMenuBar::MouseUp(EPoint where)
+BMenuBar::MouseUp(BPoint where)
 {
-	EMenu::MouseUp(where);
+	BMenu::MouseUp(where);
 
 	if(Window() == NULL) return;
 
-	EMenuItem *item = CurrentSelection();
+	BMenuItem *item = CurrentSelection();
 	if(item != NULL)
 	{
 		if(VisibleBounds().Contains(where) == false)
 		{
 			ConvertToScreen(&where);
-			EMenu *submenu;
+			BMenu *submenu;
 			while(true)
 			{
 				submenu = (item ? item->Submenu() : NULL);
@@ -137,7 +137,7 @@ EMenuBar::MouseUp(EPoint where)
 		else
 		{
 			bool found = false;
-			for(eint32 i = 0; i < CountItems(); i++)
+			for(b_int32 i = 0; i < CountItems(); i++)
 				if(ItemFrame(i).Contains(where)) found = true;
 			if(found == false)
 			{
@@ -152,52 +152,52 @@ EMenuBar::MouseUp(EPoint where)
 
 
 void
-EMenuBar::ItemInvoked(EMenuItem *item)
+BMenuBar::ItemInvoked(BMenuItem *item)
 {
-	EMenu::ItemInvoked(item);
+	BMenu::ItemInvoked(item);
 	SelectItem(NULL);
 	MakeFocus(false);
 }
 
 
 void
-EMenuBar::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
+BMenuBar::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 {
 	if(CurrentSelection() == NULL) return;
-	EMenu::MouseMoved(where, code, a_message);
+	BMenu::MouseMoved(where, code, a_message);
 }
 
 
 void
-EMenuBar::KeyDown(const char *bytes, eint32 numBytes)
+BMenuBar::KeyDown(const char *bytes, b_int32 numBytes)
 {
 	if(CurrentSelection() == NULL) return;
-	EMenu::KeyDown(bytes, numBytes);
+	BMenu::KeyDown(bytes, numBytes);
 }
 
 
 void
-EMenuBar::KeyUp(const char *bytes, eint32 numBytes)
+BMenuBar::KeyUp(const char *bytes, b_int32 numBytes)
 {
 	if(CurrentSelection() == NULL) return;
-	EMenu::KeyUp(bytes, numBytes);
+	BMenu::KeyUp(bytes, numBytes);
 }
 
 
 void
-EMenuBar::MessageReceived(EMessage *msg)
+BMenuBar::MessageReceived(BMessage *msg)
 {
-	EMenu::MessageReceived(msg);
+	BMenu::MessageReceived(msg);
 
 	if(Window() == NULL) return;
 
 	switch(msg->what)
 	{
-		case E_OBSERVER_NOTICE_CHANGE:
+		case B_OBSERVER_NOTICE_CHANGE:
 			{
-				euint32 what;
-				if(msg->FindInt32(E_OBSERVE_ORIGINAL_WHAT, (eint32*)&what) == false ||
-				   !(what == E_MINIMIZED || what == E_WINDOW_ACTIVATED)) break;
+				b_uint32 what;
+				if(msg->FindInt32(B_OBSERVE_ORIGINAL_WHAT, (b_int32*)&what) == false ||
+				   !(what == B_MINIMIZED || what == B_WINDOW_ACTIVATED)) break;
 
 				if(Window()->IsActivate() == false || Window()->IsHidden() || Window()->IsMinimized())
 				{
@@ -209,7 +209,7 @@ EMenuBar::MessageReceived(EMessage *msg)
 
 		case _MENU_EVENT_:
 			{
-				EMenuItem *item = NULL;
+				BMenuItem *item = NULL;
 				if(msg->FindPointer("source", (void**)&item) == false || item == NULL) break;
 				SelectItem(NULL);
 				MakeFocus(false);
@@ -223,15 +223,15 @@ EMenuBar::MessageReceived(EMessage *msg)
 
 
 void
-EMenuBar::Draw(ERect updateRect)
+BMenuBar::Draw(BRect updateRect)
 {
 	if(!IsVisible()) return;
 
-	EMenu::Draw(updateRect);
-	if(fBorder == E_BORDER_NONE) return;
+	BMenu::Draw(updateRect);
+	if(fBorder == B_BORDER_NONE) return;
 
-	e_rgb_color shineColor = e_ui_color(E_SHINE_COLOR);
-	e_rgb_color shadowColor = e_ui_color(E_SHADOW_COLOR);
+	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
+	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
 
 	if(!IsEnabled())
 	{
@@ -241,9 +241,9 @@ EMenuBar::Draw(ERect updateRect)
 
 	switch(fBorder)
 	{
-		case E_BORDER_FRAME:
+		case B_BORDER_FRAME:
 			{
-				ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+				BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 
 				PushState();
 				SetHighColor(shadowColor);
@@ -263,7 +263,7 @@ EMenuBar::Draw(ERect updateRect)
 
 
 void
-EMenuBar::SetBorder(e_menu_bar_border border)
+BMenuBar::SetBorder(b_menu_bar_border border)
 {
 	if(fBorder != border)
 	{
@@ -273,8 +273,8 @@ EMenuBar::SetBorder(e_menu_bar_border border)
 }
 
 
-e_menu_bar_border
-EMenuBar::Border() const
+b_menu_bar_border
+BMenuBar::Border() const
 {
 	return fBorder;
 }

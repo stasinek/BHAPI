@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,7 +24,7 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: List.cpp
- * Description: EList --- ordered list of data pointers
+ * Description: BList --- ordered list of data pointers
  *
  * --------------------------------------------------------------------------*/
 
@@ -33,11 +33,11 @@
 
 #include "List.h"
 
-#define MAX_LIST_COUNT	(E_MAXINT32 - 1)
+#define MAX_LIST_COUNT	(B_MAXINT32 - 1)
 
 
 bool
-EList::_Resize(eint32 count)
+BList::_Resize(b_int32 count)
 {
 	if(count <= 0)
 	{
@@ -101,7 +101,7 @@ EList::_Resize(eint32 count)
 }
 
 
-EList::EList(eint32 initialAllocSize)
+BList::BList(b_int32 initialAllocSize)
 	: fObjects(NULL), fItemCount(0), fItemReal(0), fMinimumCount(0)
 {
 	if(initialAllocSize > 0 && initialAllocSize <= MAX_LIST_COUNT)
@@ -115,7 +115,7 @@ EList::EList(eint32 initialAllocSize)
 }
 
 
-EList::EList(eint32 initialAllocSize, eint32 nullItems)
+BList::BList(b_int32 initialAllocSize, b_int32 nullItems)
 	: fObjects(NULL), fItemCount(0), fItemReal(0), fMinimumCount(0)
 {
 	if(initialAllocSize > 0 && initialAllocSize <= MAX_LIST_COUNT)
@@ -131,21 +131,21 @@ EList::EList(eint32 initialAllocSize, eint32 nullItems)
 }
 
 
-EList::EList(const EList& list)
+BList::BList(const BList& list)
 	: fObjects(NULL), fItemCount(0), fItemReal(0), fMinimumCount(0)
 {
-	EList::operator=(list);
+	BList::operator=(list);
 }
 
 
-EList::~EList()
+BList::~BList()
 {
 	if(fObjects) free(fObjects);
 }
 
 
-EList&
-EList::operator=(const EList &from)
+BList&
+BList::operator=(const BList &from)
 {
 	if(fObjects) free(fObjects);
 	fObjects = NULL;
@@ -162,14 +162,14 @@ EList::operator=(const EList &from)
 		}
 	}
 
-	EList::AddList(&from);
+	BList::AddList(&from);
 
 	return *this;
 }
 
 
 bool
-EList::AddItem(void *item)
+BList::AddItem(void *item)
 {
 	if(fItemCount >= MAX_LIST_COUNT) return false;
 
@@ -183,7 +183,7 @@ EList::AddItem(void *item)
 
 
 bool
-EList::AddItem(void *item, eint32 atIndex)
+BList::AddItem(void *item, b_int32 atIndex)
 {
 	if(atIndex < 0 || atIndex > fItemCount) return false;
 	if(atIndex == fItemCount) return AddItem(item);
@@ -204,7 +204,7 @@ EList::AddItem(void *item, eint32 atIndex)
 
 
 bool
-EList::AddList(const EList *newItems)
+BList::AddList(const BList *newItems)
 {
 	if(!newItems) return false;
 	if(newItems->IsEmpty()) return false;
@@ -226,7 +226,7 @@ EList::AddList(const EList *newItems)
 
 
 bool
-EList::AddList(const EList *newItems, eint32 atIndex)
+BList::AddList(const BList *newItems, b_int32 atIndex)
 {
 	if(fItemCount == 0 && atIndex == 0) return AddList(newItems);
 
@@ -274,7 +274,7 @@ EList::AddList(const EList *newItems, eint32 atIndex)
 
 
 bool
-EList::RemoveItem(void *item)
+BList::RemoveItem(void *item)
 {
 	if(item == NULL) return false;
 	return(RemoveItem(IndexOf(item)) != NULL);
@@ -282,7 +282,7 @@ EList::RemoveItem(void *item)
 
 
 void*
-EList::RemoveItem(eint32 index)
+BList::RemoveItem(b_int32 index)
 {
 	if(index < 0 || index >= fItemCount) return NULL;
 
@@ -304,7 +304,7 @@ EList::RemoveItem(eint32 index)
 
 
 bool
-EList::RemoveItems(eint32 index, eint32 count)
+BList::RemoveItems(b_int32 index, b_int32 count)
 {
 	if(index < 0 || index >= fItemCount) return false;
 
@@ -329,7 +329,7 @@ EList::RemoveItems(eint32 index, eint32 count)
 
 
 bool
-EList::ReplaceItem(eint32 index, void *newItem, void **oldItem)
+BList::ReplaceItem(b_int32 index, void *newItem, void **oldItem)
 {
 	if(index < 0 || index >= fItemCount) return false;
 
@@ -341,14 +341,14 @@ EList::ReplaceItem(eint32 index, void *newItem, void **oldItem)
 
 
 void
-EList::MakeEmpty()
+BList::MakeEmpty()
 {
 	_Resize(0);
 }
 
 
 bool
-EList::SwapItems(eint32 indexA, eint32 indexB)
+BList::SwapItems(b_int32 indexA, b_int32 indexB)
 {
 	if(indexA < 0 || indexA >= fItemCount || indexB < 0 || indexB >= fItemCount) return false;
 
@@ -362,7 +362,7 @@ EList::SwapItems(eint32 indexA, eint32 indexB)
 
 
 bool
-EList::MoveItem(eint32 fromIndex, eint32 toIndex)
+BList::MoveItem(b_int32 fromIndex, b_int32 toIndex)
 {
 	if(fromIndex < 0 || fromIndex >= fItemCount || toIndex < 0 || toIndex >= fItemCount) return false;
 	if(fromIndex == toIndex) return true;
@@ -385,14 +385,14 @@ EList::MoveItem(eint32 fromIndex, eint32 toIndex)
 
 
 void
-EList::SortItems(int (*cmp)(const void *, const void *))
+BList::SortItems(int (*cmp)(const void *, const void *))
 {
 	if(cmp && fItemCount > 1) qsort((void*)fObjects, fItemCount, sizeof(void*), cmp);
 }
 
 
 void*
-EList::ItemAt(eint32 index) const
+BList::ItemAt(b_int32 index) const
 {
 	if(index < 0 || index >= fItemCount) return NULL;
 
@@ -401,7 +401,7 @@ EList::ItemAt(eint32 index) const
 
 
 void*
-EList::FirstItem() const
+BList::FirstItem() const
 {
 	if(fItemCount > 0) return fObjects[0];
 	return NULL;
@@ -409,7 +409,7 @@ EList::FirstItem() const
 
 
 void*
-EList::LastItem() const
+BList::LastItem() const
 {
 	if(fItemCount > 0) return fObjects[fItemCount - 1];
 	return NULL;
@@ -417,17 +417,17 @@ EList::LastItem() const
 
 
 bool
-EList::HasItem(void *item) const
+BList::HasItem(void *item) const
 {
 	if(item == NULL) return false;
 	return(IndexOf(item) >= 0);
 }
 
 
-eint32
-EList::IndexOf(void *item) const
+b_int32
+BList::IndexOf(void *item) const
 {
-	for(eint32 i = 0; i < fItemCount; i++)
+	for(b_int32 i = 0; i < fItemCount; i++)
 	{
 		if(fObjects[i] == item) return i;
 	}
@@ -436,26 +436,26 @@ EList::IndexOf(void *item) const
 }
 
 
-eint32
-EList::CountItems() const
+b_int32
+BList::CountItems() const
 {
 	return fItemCount;
 }
 
 
 bool
-EList::IsEmpty() const
+BList::IsEmpty() const
 {
 	return(fItemCount == 0);
 }
 
 
 void
-EList::DoForEach(bool (*func)(void *))
+BList::DoForEach(bool (*func)(void *))
 {
 	if(!func) return;
 
-	for(eint32 i = 0; i < fItemCount; i++)
+	for(b_int32 i = 0; i < fItemCount; i++)
 	{
 		if((*func)(fObjects[i])) break;
 	}
@@ -463,11 +463,11 @@ EList::DoForEach(bool (*func)(void *))
 
 
 void
-EList::DoForEach(bool (*func)(void *, void *), void *user_data)
+BList::DoForEach(bool (*func)(void *, void *), void *user_data)
 {
 	if(!func) return;
 
-	for(eint32 i = 0; i < fItemCount; i++)
+	for(b_int32 i = 0; i < fItemCount; i++)
 	{
 		if((*func)(fObjects[i], user_data)) break;
 	}
@@ -475,7 +475,7 @@ EList::DoForEach(bool (*func)(void *, void *), void *user_data)
 
 
 void**
-EList::Items() const
+BList::Items() const
 {
 	return(fObjects);
 }

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  * 
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,7 +24,7 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: Region.cpp
- * Description: ERegion --- Combination of rectangles to describe region
+ * Description: BRegion --- Combination of rectangles to describe region
  * 
  * --------------------------------------------------------------------------*/
 
@@ -41,15 +41,15 @@
 /* --------------------------------------------------------------------------
 <document lang="zh_CN.UTF-8">
 <section id="EREGION_DESCRIPTION">
-	<title>ERegion类描述</title>
+	<title>BRegion类描述</title>
 	<para>声明所在：<emphasis>&lt;etk/interface/Region.h&gt;</emphasis></para>
 	<para>链 接 库：<emphasis>libetkxx</emphasis></para>
-	<para>派生关系：<emphasis>ERegion</emphasis></para>
-	<para>ERegion是一个由多个矩形组合的区域范围描述类，主要用于描述不规则区域。</para>
+	<para>派生关系：<emphasis>BRegion</emphasis></para>
+	<para>BRegion是一个由多个矩形组合的区域范围描述类，主要用于描述不规则区域。</para>
 </section>
 
 <section id="EREGION_FUNCTIONS">
-	<title>ERegion类成员函数</title>
+	<title>BRegion类成员函数</title>
 	<xref linkend="EREGION_FUNCTION_CONSTRUCT" /><para></para>
 	<xref linkend="EREGION_FUNCTION_OPERATOR" /><para></para>
 	<xref linkend="EREGION_FUNCTION_FRAME" /><para></para>
@@ -68,10 +68,10 @@
 <section id="EREGION_FUNCTION_CONSTRUCT">
 	<title>构造函数</title>
 	<programlisting>
-ERegion::ERegion()
-ERegion::ERegion(const ERegion &<emphasis>region</emphasis>)
-ERegion::ERegion(const ERect &<emphasis>rect</emphasis>)
-virtual ERegion::~ERegion()
+BRegion::BRegion()
+BRegion::BRegion(const BRegion &<emphasis>region</emphasis>)
+BRegion::BRegion(const BRect &<emphasis>rect</emphasis>)
+virtual BRegion::~BRegion()
 	</programlisting>
 	<itemizedlist>
 		<listitem><para><emphasis>region</emphasis>是已创建的区域范围描述。
@@ -82,24 +82,24 @@ virtual ERegion::~ERegion()
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-ERegion::ERegion()
+BRegion::BRegion()
 {
 }
 
 
-ERegion::ERegion(const ERegion &region)
+BRegion::BRegion(const BRegion &region)
 {
 	if(region.fRects.CountItems() > 0) *this = region;
 }
 
 
-ERegion::ERegion(const ERect &rect)
+BRegion::BRegion(const BRect &rect)
 {
 	Set(rect);
 }
 
 
-ERegion::~ERegion()
+BRegion::~BRegion()
 {
 	MakeEmpty();
 }
@@ -110,19 +110,19 @@ ERegion::~ERegion()
 <section id="EREGION_FUNCTION_OPERATOR">
 	<title>区域范围操作符</title>
 	<programlisting>
-ERegion& ERegion::operator=(const ERegion &<emphasis>region</emphasis>)
+BRegion& BRegion::operator=(const BRegion &<emphasis>region</emphasis>)
 
-ERegion ERegion::operator&(ERect <emphasis>rect</emphasis>) const
-ERegion ERegion::operator|(ERect <emphasis>rect</emphasis>) const
+BRegion BRegion::operator&(BRect <emphasis>rect</emphasis>) const
+BRegion BRegion::operator|(BRect <emphasis>rect</emphasis>) const
 
-ERegion& ERegion::operator&=(ERect <emphasis>rect</emphasis>)
-ERegion& ERegion::operator|=(ERect <emphasis>rect</emphasis>)
+BRegion& BRegion::operator&=(BRect <emphasis>rect</emphasis>)
+BRegion& BRegion::operator|=(BRect <emphasis>rect</emphasis>)
 
-ERegion ERegion::operator&(const ERegion &<emphasis>region</emphasis>) const
-ERegion ERegion::operator|(const ERegion &<emphasis>region</emphasis>) const
+BRegion BRegion::operator&(const BRegion &<emphasis>region</emphasis>) const
+BRegion BRegion::operator|(const BRegion &<emphasis>region</emphasis>) const
 
-ERegion& ERegion::operator&=(const ERegion &<emphasis>region</emphasis>)
-ERegion& ERegion::operator|=(const ERegion &<emphasis>region</emphasis>)
+BRegion& BRegion::operator&=(const BRegion &<emphasis>region</emphasis>)
+BRegion& BRegion::operator|=(const BRegion &<emphasis>region</emphasis>)
 	</programlisting>
 	<itemizedlist>
 		<listitem><para><emphasis>region</emphasis>与其操作的区域范围描述。
@@ -134,25 +134,25 @@ ERegion& ERegion::operator|=(const ERegion &<emphasis>region</emphasis>)
 					或位与(operator&=)操作时会导致当前区域范围描述无效。</para></footnote>
 		</para></listitem>
 	</itemizedlist>
-	<para>ERegion::operator=()用于赋值给当前区域，返回值为赋值后的当前区域本身引用。</para>
-	<para>ERegion::operator&()用于求当前区域与指定参数的交集，返回值为相交的区域。</para>
-	<para>ERegion::operator&=()用于将当前区域与指定参数进行交集操作，返回值为操作后的当前区域本身引用。</para>
-	<para>ERegion::operator|()用于求当前区域与指定参数的并集，返回值为联合的区域。</para>
-	<para>ERegion::operator|=()用于将当前区域与指定参数进行并集操作，返回值为操作后的当前区域本身引用。</para>
+	<para>BRegion::operator=()用于赋值给当前区域，返回值为赋值后的当前区域本身引用。</para>
+	<para>BRegion::operator&()用于求当前区域与指定参数的交集，返回值为相交的区域。</para>
+	<para>BRegion::operator&=()用于将当前区域与指定参数进行交集操作，返回值为操作后的当前区域本身引用。</para>
+	<para>BRegion::operator|()用于求当前区域与指定参数的并集，返回值为联合的区域。</para>
+	<para>BRegion::operator|=()用于将当前区域与指定参数进行并集操作，返回值为操作后的当前区域本身引用。</para>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-ERegion&
-ERegion::operator=(const ERegion &from)
+BRegion&
+BRegion::operator=(const BRegion &from)
 {
 	MakeEmpty();
 
 	if(from.fRects.CountItems() > 0)
 	{
-		for(eint32 i = 0; i < from.fRects.CountItems(); i++)
+		for(b_int32 i = 0; i < from.fRects.CountItems(); i++)
 		{
-			ERect *r = (ERect*)from.fRects.ItemAt(i);
-			ERect *nr = ((!r || r->IsValid() == false) ? NULL : new ERect(*r));
+			BRect *r = (BRect*)from.fRects.ItemAt(i);
+			BRect *nr = ((!r || r->IsValid() == false) ? NULL : new BRect(*r));
 			if(!nr || fRects.AddItem(nr) == false)
 			{
 				if(nr) delete nr;
@@ -175,14 +175,14 @@ ERegion::operator=(const ERegion &from)
 <section id="EREGION_FUNCTION_FRAME">
 	<title>区域描述的最大矩形范围</title>
 	<programlisting>
-ERect ERegion::Frame() const
+BRect BRegion::Frame() const
 	</programlisting>
 	<para>返回值为该区域描述的最大矩形范围，当区域无效时返回值亦无效。</para>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-ERect
-ERegion::Frame() const
+BRect
+BRegion::Frame() const
 {
 	return fFrame;
 }
@@ -193,22 +193,22 @@ ERegion::Frame() const
 <section id="EREGION_FUNCTION_RECT_AT">
 	<title>区域描述的组成矩形</title>
 	<programlisting>
-ERect ERegion::RectAt(eint32 <emphasis>index</emphasis>) const
+BRect BRegion::RectAt(b_int32 <emphasis>index</emphasis>) const
 	</programlisting>
 	<itemizedlist>
 		<listitem><para><emphasis>index</emphasis>是组成矩形的位置索引。
-		<footnote><para>其值应界于0和ERegion::CountRects() - 1之间。</para></footnote>
+		<footnote><para>其值应界于0和BRegion::CountRects() - 1之间。</para></footnote>
 		</para></listitem>
 	</itemizedlist>
 	<para>返回值为该区域第index+1个组合矩形，当index处于无效范围时返回值亦无效。</para>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-ERect
-ERegion::RectAt(eint32 index) const
+BRect
+BRegion::RectAt(b_int32 index) const
 {
-	ERect *r = (ERect*)fRects.ItemAt(index);
-	return(r ? *r : ERect());
+	BRect *r = (BRect*)fRects.ItemAt(index);
+	return(r ? *r : BRect());
 }
 
 
@@ -217,18 +217,18 @@ ERegion::RectAt(eint32 index) const
 <section id="EREGION_FUNCTION_COUNT_RECTS">
 	<title>区域描述的组成矩形数量</title>
 	<programlisting>
-eint32 ERegion::CountRects() const
+b_int32 BRegion::CountRects() const
 	</programlisting>
 	<para>返回值为该区域描述的组合矩形数量。
 		<footnote><para>一个区域范围描述由多个矩形成员组成，
-				ERegion::CountRects()主要用于统计
-				组成矩形的数量以便调用ERegion::RectAt()。</para></footnote>
+				BRegion::CountRects()主要用于统计
+				组成矩形的数量以便调用BRegion::RectAt()。</para></footnote>
 	</para>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-eint32
-ERegion::CountRects() const
+b_int32
+BRegion::CountRects() const
 {
 	return fRects.CountItems();
 }
@@ -239,25 +239,25 @@ ERegion::CountRects() const
 <section id="EREGION_FUNCTION_MODIFICATION">
 	<title>区域描述的修改与设定</title>
 	<programlisting>
-void ERegion::Set(ERect <emphasis>singleBound</emphasis>)
-void ERegion::MakeEmpty()
+void BRegion::Set(BRect <emphasis>singleBound</emphasis>)
+void BRegion::MakeEmpty()
 
-bool ERegion::Include(ERect <emphasis>rect</emphasis>)
-bool ERegion::Include(const ERegion *<emphasis>region</emphasis>)
+bool BRegion::Include(BRect <emphasis>rect</emphasis>)
+bool BRegion::Include(const BRegion *<emphasis>region</emphasis>)
 
-bool ERegion::Exclude(ERect <emphasis>rect</emphasis>)
-bool ERegion::Exclude(const ERegion *<emphasis>region</emphasis>)
+bool BRegion::Exclude(BRect <emphasis>rect</emphasis>)
+bool BRegion::Exclude(const BRegion *<emphasis>region</emphasis>)
 
-void ERegion::OffsetBy(float <emphasis>dx</emphasis>, float <emphasis>dy</emphasis>)
-void ERegion::OffsetBy(EPoint <emphasis>pt</emphasis>)
-ERegion& ERegion::OffsetBySelf(float <emphasis>dx</emphasis>, float <emphasis>dy</emphasis>)
-ERegion& ERegion::OffsetBySelf(EPoint <emphasis>pt</emphasis>)
-ERegion ERegion::OffsetByCopy(float <emphasis>dx</emphasis>, float <emphasis>dy</emphasis>)
-ERegion ERegion::OffsetByCopy(EPoint <emphasis>pt</emphasis>)
+void BRegion::OffsetBy(float <emphasis>dx</emphasis>, float <emphasis>dy</emphasis>)
+void BRegion::OffsetBy(BPoint <emphasis>pt</emphasis>)
+BRegion& BRegion::OffsetBySelf(float <emphasis>dx</emphasis>, float <emphasis>dy</emphasis>)
+BRegion& BRegion::OffsetBySelf(BPoint <emphasis>pt</emphasis>)
+BRegion BRegion::OffsetByCopy(float <emphasis>dx</emphasis>, float <emphasis>dy</emphasis>)
+BRegion BRegion::OffsetByCopy(BPoint <emphasis>pt</emphasis>)
 
-void ERegion::Scale(float <emphasis>scaling</emphasis>)
-ERegion& ERegion::ScaleSelf(float <emphasis>scaling</emphasis>)
-ERegion ERegion::ScaleCopy(float <emphasis>scaling</emphasis>)
+void BRegion::Scale(float <emphasis>scaling</emphasis>)
+BRegion& BRegion::ScaleSelf(float <emphasis>scaling</emphasis>)
+BRegion BRegion::ScaleCopy(float <emphasis>scaling</emphasis>)
 	</programlisting>
 	<itemizedlist>
 		<listitem><para><emphasis>singleBound</emphasis>是一个矩形的区域范围描述。
@@ -278,29 +278,29 @@ ERegion ERegion::ScaleCopy(float <emphasis>scaling</emphasis>)
 			<footnote><para>scaling不能小于0。</para></footnote>
 		</para></listitem>
 	</itemizedlist>
-	<para>ERegion::Set()用于将当前区域描述赋值成一个单独的矩形区域。
+	<para>BRegion::Set()用于将当前区域描述赋值成一个单独的矩形区域。
 		<footnote><para>如果该矩形为无效矩形时会导致当前区域范围描述无效。</para></footnote>
 	</para>
-	<para>ERegion::MakeEmpty()用于清除当前区域描述的所有组成矩形。</para>
-	<para>ERegion::Include()用于将参数指定的区域试图加入到当前区域描述中，成功时返回值为true，否则为false。</para>
-	<para>ERegion::Exclude()用于将参数指定的区域试图从当前区域描述中排除，成功时返回值为true，否则为false。</para>
-	<para>ERegion::OffsetBy()用于将当前区域描述的所有组成矩形都按指定相对位移进行偏移。</para>
-	<para>ERegion::OffsetBySelf()用于将当前区域描述的所有组成矩形都按指定相对位移进行偏移，返回值为偏移后的当前区域本身引用。</para>
-	<para>ERegion::OffsetByCopy()用于求当前区域描述的所有组成矩形都按指定相对位移进行偏移的结果，返回值为偏移后的区域描述。</para>
-	<para>ERegion::Scale()用于将当前区域描述的所有组成矩形都按指定比例进行放缩。</para>
-	<para>ERegion::ScaleSelf()用于将当前区域描述的所有组成矩形都按指定比例进行放缩，返回值为放缩后的当前区域本身引用。</para>
-	<para>ERegion::ScaleCopy()用于求当前区域描述的所有组成矩形都按指定比例进行放缩的结果，返回值为放缩后的区域描述。</para>
+	<para>BRegion::MakeEmpty()用于清除当前区域描述的所有组成矩形。</para>
+	<para>BRegion::Include()用于将参数指定的区域试图加入到当前区域描述中，成功时返回值为true，否则为false。</para>
+	<para>BRegion::Exclude()用于将参数指定的区域试图从当前区域描述中排除，成功时返回值为true，否则为false。</para>
+	<para>BRegion::OffsetBy()用于将当前区域描述的所有组成矩形都按指定相对位移进行偏移。</para>
+	<para>BRegion::OffsetBySelf()用于将当前区域描述的所有组成矩形都按指定相对位移进行偏移，返回值为偏移后的当前区域本身引用。</para>
+	<para>BRegion::OffsetByCopy()用于求当前区域描述的所有组成矩形都按指定相对位移进行偏移的结果，返回值为偏移后的区域描述。</para>
+	<para>BRegion::Scale()用于将当前区域描述的所有组成矩形都按指定比例进行放缩。</para>
+	<para>BRegion::ScaleSelf()用于将当前区域描述的所有组成矩形都按指定比例进行放缩，返回值为放缩后的当前区域本身引用。</para>
+	<para>BRegion::ScaleCopy()用于求当前区域描述的所有组成矩形都按指定比例进行放缩的结果，返回值为放缩后的区域描述。</para>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
 void
-ERegion::Set(ERect rect)
+BRegion::Set(BRect rect)
 {
 	MakeEmpty();
 
 	if(rect.IsValid())
 	{
-		ERect *r = new ERect(rect);
+		BRect *r = new BRect(rect);
 
 		if(r)
 		{
@@ -314,32 +314,32 @@ ERegion::Set(ERect rect)
 
 
 void
-ERegion::MakeEmpty()
+BRegion::MakeEmpty()
 {
-	for(eint32 i = 0; i < fRects.CountItems(); i++)
+	for(b_int32 i = 0; i < fRects.CountItems(); i++)
 	{
-		ERect *r = (ERect*)fRects.ItemAt(i);
+		BRect *r = (BRect*)fRects.ItemAt(i);
 		if(r) delete r;
 	}
 
 	fRects.MakeEmpty();
-	fFrame = ERect();
+	fFrame = BRect();
 }
 
 
 // return value must free by "delete[]"
-inline ERect* rect_exclude(ERect s, ERect r, eint8 *nRects)
+inline BRect* rect_exclude(BRect s, BRect r, b_int8 *nRects)
 {
 	if(!r.IsValid() || !s.IsValid() || !nRects) return NULL;
 
-	ERect iR = (s & r);
+	BRect iR = (s & r);
 	if(!iR.IsValid() || iR == s)
 	{
 		*nRects = 0;
 		return NULL;
 	}
 
-	ERect *rects = new ERect[4];
+	BRect *rects = new BRect[4];
 	if(!rects)
 	{
 		*nRects = -1;
@@ -351,12 +351,12 @@ inline ERect* rect_exclude(ERect s, ERect r, eint8 *nRects)
 	rects[2].Set(min_c(s.left, iR.left), max_c(s.top, iR.top), max_c(s.left, iR.left), min_c(s.bottom, iR.bottom)); // left
 	rects[3].Set(min_c(s.right, iR.right), max_c(s.top, iR.top), max_c(s.right, iR.right), min_c(s.bottom, iR.bottom)); // right
 
-	eint8 count = 4;
-	for(eint8 i = 0; i < count; i++)
+	b_int8 count = 4;
+	for(b_int8 i = 0; i < count; i++)
 	{
 		if((rects[i].Width() == 0 && s.Width() > 0) || (rects[i].Height() == 0 && s.Height() > 0) || !rects[i].IsValid())
 		{
-			for(eint8 j = i; j < count - 1; j++) rects[j] = rects[j + 1];
+			for(b_int8 j = i; j < count - 1; j++) rects[j] = rects[j + 1];
 			count--; i--;
 		}
 	}
@@ -371,30 +371,30 @@ inline ERect* rect_exclude(ERect s, ERect r, eint8 *nRects)
 
 
 bool
-ERegion::Include(ERect rect)
+BRegion::Include(BRect rect)
 {
 	if(rect.IsValid() == false) return false;
 
-	ERect *rects = &rect;
-	eint32 nRects = 1;
+	BRect *rects = &rect;
+	b_int32 nRects = 1;
 
-	for(eint32 i = 0; i < fRects.CountItems(); i++)
+	for(b_int32 i = 0; i < fRects.CountItems(); i++)
 	{
-		ERect *r = (ERect*)fRects.ItemAt(i);
+		BRect *r = (BRect*)fRects.ItemAt(i);
 
-		ERect **rs = ((!r || r->IsValid() == false) ? NULL : new ERect*[nRects]);
-		eint8 *nrs = ((!r || r->IsValid() == false) ? NULL : new eint8[nRects]);
-		eint32 nNeeded = 0;
+		BRect **rs = ((!r || r->IsValid() == false) ? NULL : new BRect*[nRects]);
+		b_int8 *nrs = ((!r || r->IsValid() == false) ? NULL : new b_int8[nRects]);
+		b_int32 nNeeded = 0;
 		bool haveNew = false;
 
 		if(rs && nrs)
 		{
-			for(eint32 j = 0; j < nRects; j++)
+			for(b_int32 j = 0; j < nRects; j++)
 			{
 				if(r->Intersects(rects[j]))
 				{
 					rs[j] = rect_exclude(rects[j], *r, &(nrs[j]));
-					if(nrs[j] < 0 || (rs[j] == NULL && nrs[j] > 0) || nNeeded >= E_MAXINT32 - nrs[j])
+					if(nrs[j] < 0 || (rs[j] == NULL && nrs[j] > 0) || nNeeded >= B_MAXINT32 - nrs[j])
 					{
 						nNeeded = -(j + 1);
 						break;
@@ -416,7 +416,7 @@ ERegion::Include(ERect rect)
 
 		if(!rs || !nrs || nNeeded < 0)
 		{
-			if(rs && nrs) for(eint32 j = 0; j <= -(nNeeded + 1); j++) if(rs[j] != NULL && rs[j] != &(rects[j])) delete[] rs[j];
+			if(rs && nrs) for(b_int32 j = 0; j <= -(nNeeded + 1); j++) if(rs[j] != NULL && rs[j] != &(rects[j])) delete[] rs[j];
 			if(rs) delete[] rs;
 			if(nrs) delete[] nrs;
 
@@ -425,7 +425,7 @@ ERegion::Include(ERect rect)
 		}
 		else if(nNeeded == 0 && haveNew)
 		{
-			for(eint32 j = 0; j < nRects; j++) if(rs[j] != NULL && rs[j] != &(rects[j])) delete[] rs[j];
+			for(b_int32 j = 0; j < nRects; j++) if(rs[j] != NULL && rs[j] != &(rects[j])) delete[] rs[j];
 			delete[] rs;
 			delete[] nrs;
 
@@ -433,13 +433,13 @@ ERegion::Include(ERect rect)
 			return true;
 		}
 
-		ERect *newRects = ((nNeeded > 0 && haveNew) ? new ERect[nNeeded] : NULL);
-		ERect *tmp = newRects;
-		for(eint32 j = 0; j < nRects; j++)
+		BRect *newRects = ((nNeeded > 0 && haveNew) ? new BRect[nNeeded] : NULL);
+		BRect *tmp = newRects;
+		for(b_int32 j = 0; j < nRects; j++)
 		{
 			if(tmp && nrs[j] > 0)
 			{
-				memcpy(tmp, rs[j], sizeof(ERect) * (size_t)nrs[j]);
+				memcpy(tmp, rs[j], sizeof(BRect) * (size_t)nrs[j]);
 				tmp += nrs[j];
 			}
 			if(rs[j] != NULL && rs[j] != &(rects[j])) delete[] rs[j];
@@ -456,12 +456,12 @@ ERegion::Include(ERect rect)
 		}
 	}
 
-	eint32 oldLength = fRects.CountItems();
-	ERect oldFrame = fFrame;
+	b_int32 oldLength = fRects.CountItems();
+	BRect oldFrame = fFrame;
 
-	for(eint32 i = 0; i < nRects; i++)
+	for(b_int32 i = 0; i < nRects; i++)
 	{
-		ERect *r = new ERect(rects[i]);
+		BRect *r = new BRect(rects[i]);
 		if(!r || r->IsValid() == false || fRects.AddItem(r) == false)
 		{
 			if(r) delete r;
@@ -469,9 +469,9 @@ ERegion::Include(ERect rect)
 
 			if(fRects.CountItems() > oldLength)
 			{
-                for(eint32 j = oldLength; j < fRects.CountItems(); j++)
+                for(b_int32 j = oldLength; j < fRects.CountItems(); j++)
 				{
-                    r = (ERect*)fRects.ItemAt(j);
+                    r = (BRect*)fRects.ItemAt(j);
 					if(r) delete r;
 				}
 				fRects.RemoveItems(oldLength, -1);
@@ -489,23 +489,23 @@ ERegion::Include(ERect rect)
 
 
 bool
-ERegion::Include(const ERegion *region)
+BRegion::Include(const BRegion *region)
 {
 	if(region == NULL || region->CountRects() <= 0) return false;
 
-	eint32 oldLength = fRects.CountItems();
-	ERect oldFrame = fFrame;
+	b_int32 oldLength = fRects.CountItems();
+	BRect oldFrame = fFrame;
 
-	for(eint32 i = 0; i < region->CountRects(); i++)
+	for(b_int32 i = 0; i < region->CountRects(); i++)
 	{
-		ERect r = region->RectAt(i);
+		BRect r = region->RectAt(i);
 		if(r.IsValid() == false || Include(r) == false)
 		{
 			if(fRects.CountItems() > oldLength)
 			{
-                for(eint32 j = oldLength; j < fRects.CountItems(); j++)
+                for(b_int32 j = oldLength; j < fRects.CountItems(); j++)
 				{
-					ERect *ar = (ERect*)fRects.ItemAt(i);
+					BRect *ar = (BRect*)fRects.ItemAt(i);
 					if(ar) delete ar;
 				}
 				fRects.RemoveItems(oldLength, -1);
@@ -520,15 +520,15 @@ ERegion::Include(const ERegion *region)
 
 
 bool
-ERegion::Exclude(ERect r)
+BRegion::Exclude(BRect r)
 {
 	if(Intersects(r) == false) return true;
 
-	eint32 offset = 0;
-	ERect rect;
+	b_int32 offset = 0;
+	BRect rect;
 	bool retVal = true;
 
-	ERegion aRegion(*this);
+	BRegion aRegion(*this);
 	if(aRegion.CountRects() != CountRects() || aRegion.Frame() != Frame()) return false;
 
 	while(offset < aRegion.fRects.CountItems())
@@ -537,13 +537,13 @@ ERegion::Exclude(ERect r)
 		if(rect.IsValid() == false) {retVal = false; break;}
 		if(rect.Intersects(r) == false) {offset++; continue;}
 
-		eint8 nrs = 0;
-		ERect *rs = rect_exclude(rect, r, &nrs);
+		b_int8 nrs = 0;
+		BRect *rs = rect_exclude(rect, r, &nrs);
 		if(nrs < 0 || (rs == NULL && nrs > 0)) {if(rs) delete[] rs; retVal = false; break;}
 
-		for(eint8 i = 0; i < nrs; i++)
+		for(b_int8 i = 0; i < nrs; i++)
 		{
-			ERect *tr = new ERect(rs[i]);
+			BRect *tr = new BRect(rs[i]);
 			if(!tr || tr->IsValid() == false || aRegion.fRects.AddItem(tr, offset) == false)
 			{
 				if(tr) delete tr;
@@ -556,7 +556,7 @@ ERegion::Exclude(ERect r)
 		if(rs) delete[] rs;
 		if(!retVal) break;
 
-		ERect *ar = (ERect*)aRegion.fRects.RemoveItem(offset);
+		BRect *ar = (BRect*)aRegion.fRects.RemoveItem(offset);
 		if(!ar) {retVal = false; break;}
 		delete ar;
 
@@ -567,9 +567,9 @@ ERegion::Exclude(ERect r)
 	{
 		MakeEmpty();
 		if(fRects.AddList(&(aRegion.fRects))) aRegion.fRects.MakeEmpty();
-		for(eint32 i = 0; i < fRects.CountItems(); i++)
+		for(b_int32 i = 0; i < fRects.CountItems(); i++)
 		{
-            ERect *sr = (ERect*)fRects.ItemAt(i);
+            BRect *sr = (BRect*)fRects.ItemAt(i);
             fFrame = (fFrame.IsValid() ? (fFrame | *sr) : *sr);
 		}
 	}
@@ -579,18 +579,18 @@ ERegion::Exclude(ERect r)
 
 
 bool
-ERegion::Exclude(const ERegion *region)
+BRegion::Exclude(const BRegion *region)
 {
 	if(Intersects(region) == false) return true;
 
-	ERegion aRegion(*this);
+	BRegion aRegion(*this);
 	if(aRegion.CountRects() != CountRects() || aRegion.Frame() != Frame()) return false;
 
 	bool retVal = true;
 
-	for(eint32 i = 0; i < region->CountRects(); i++)
+	for(b_int32 i = 0; i < region->CountRects(); i++)
 	{
-		ERect r = region->RectAt(i);
+		BRect r = region->RectAt(i);
 		if(aRegion.Exclude(r) == false) {retVal = false; break;}
 	}
 
@@ -598,9 +598,9 @@ ERegion::Exclude(const ERegion *region)
 	{
 		MakeEmpty();
 		if(fRects.AddList(&(aRegion.fRects))) aRegion.fRects.MakeEmpty();
-		for(eint32 i = 0; i < fRects.CountItems(); i++)
+		for(b_int32 i = 0; i < fRects.CountItems(); i++)
 		{
-			ERect *r = (ERect*)fRects.ItemAt(i);
+			BRect *r = (BRect*)fRects.ItemAt(i);
 			fFrame = (fFrame.IsValid() ? (fFrame | *r) : *r);
 		}
 	}
@@ -610,13 +610,13 @@ ERegion::Exclude(const ERegion *region)
 
 
 void
-ERegion::OffsetBy(float dx, float dy)
+BRegion::OffsetBy(float dx, float dy)
 {
 	if(fRects.CountItems() <= 0) return;
 
-	for(eint32 i = 0; i < fRects.CountItems(); i++)
+	for(b_int32 i = 0; i < fRects.CountItems(); i++)
 	{
-		ERect *r = (ERect*)fRects.ItemAt(i);
+		BRect *r = (BRect*)fRects.ItemAt(i);
 		r->OffsetBy(dx, dy);
 	}
 	fFrame.OffsetBy(dx, dy);
@@ -624,41 +624,41 @@ ERegion::OffsetBy(float dx, float dy)
 
 
 void
-ERegion::OffsetBy(EPoint pt)
+BRegion::OffsetBy(BPoint pt)
 {
 	OffsetBy(pt.x, pt.y);
 }
 
 
-ERegion&
-ERegion::OffsetBySelf(float dx, float dy)
+BRegion&
+BRegion::OffsetBySelf(float dx, float dy)
 {
 	OffsetBy(dx, dy);
 	return *this;
 }
 
 
-ERegion&
-ERegion::OffsetBySelf(EPoint pt)
+BRegion&
+BRegion::OffsetBySelf(BPoint pt)
 {
 	OffsetBy(pt.x, pt.y);
 	return *this;
 }
 
 
-ERegion
-ERegion::OffsetByCopy(float dx, float dy)
+BRegion
+BRegion::OffsetByCopy(float dx, float dy)
 {
-	ERegion aRegion(*this);
+	BRegion aRegion(*this);
 	aRegion.OffsetBy(dx, dy);
 	return aRegion;
 }
 
 
-ERegion
-ERegion::OffsetByCopy(EPoint pt)
+BRegion
+BRegion::OffsetByCopy(BPoint pt)
 {
-	ERegion aRegion(*this);
+	BRegion aRegion(*this);
 	aRegion.OffsetBy(pt.x, pt.y);
 	return aRegion;
 }
@@ -669,17 +669,17 @@ ERegion::OffsetByCopy(EPoint pt)
 <section id="EREGION_FUNCTION_QUERY">
 	<title>区域描述的查询</title>
 	<programlisting>
-bool ERegion::Intersects(ERect <emphasis>rect</emphasis>) const;
-bool ERegion::Intersects(float <emphasis>left</emphasis>, float <emphasis>top</emphasis>, float <emphasis>right</emphasis>, float <emphasis>bottom</emphasis>) const;
-bool ERegion::Intersects(const ERegion *<emphasis>region</emphasis>) const;
+bool BRegion::Intersects(BRect <emphasis>rect</emphasis>) const;
+bool BRegion::Intersects(float <emphasis>left</emphasis>, float <emphasis>top</emphasis>, float <emphasis>right</emphasis>, float <emphasis>bottom</emphasis>) const;
+bool BRegion::Intersects(const BRegion *<emphasis>region</emphasis>) const;
 
-bool ERegion::Contains(EPoint <emphasis>pt</emphasis>) const;
-bool ERegion::Contains(float <emphasis>x</emphasis>, float <emphasis>y</emphasis>) const;
-bool ERegion::Contains(ERect <emphasis>rect</emphasis>) const;
-bool ERegion::Contains(float <emphasis>left</emphasis>, float <emphasis>top</emphasis>, float <emphasis>right</emphasis>, float <emphasis>bottom</emphasis>) const;
-bool ERegion::Contains(const ERegion *<emphasis>region</emphasis>) const;
+bool BRegion::Contains(BPoint <emphasis>pt</emphasis>) const;
+bool BRegion::Contains(float <emphasis>x</emphasis>, float <emphasis>y</emphasis>) const;
+bool BRegion::Contains(BRect <emphasis>rect</emphasis>) const;
+bool BRegion::Contains(float <emphasis>left</emphasis>, float <emphasis>top</emphasis>, float <emphasis>right</emphasis>, float <emphasis>bottom</emphasis>) const;
+bool BRegion::Contains(const BRegion *<emphasis>region</emphasis>) const;
 
-void ERegion::PrintToStream() const;
+void BRegion::PrintToStream() const;
 	</programlisting>
 	<itemizedlist>
 		<listitem><para><emphasis>region</emphasis>是已有的区域范围描述。
@@ -693,29 +693,29 @@ void ERegion::PrintToStream() const;
 		<listitem><para><emphasis>x y</emphasis>分别是一个点的X、Y方向坐标值。
 		</para></listitem>
 	</itemizedlist>
-	<para>ERegion::Intersects()用于查询参数指定的矩形、区域描述与当前区域描述是否相交，有相交时返回true，否则返回false。</para>
-	<para>ERegion::Contains()用于查询参数指定的点、矩形或区域描述是否在当前区域描述之内，被其完全包含时返回true，否则返回false。</para>
-	<para>ERegion::PrintToStream()用于将当前区域描述的所有组成矩形内容打印到标准输出流中。
-		<footnote><para>ERegion::PrintToStream()主要用于调试，无其它特殊效用。</para></footnote>
+	<para>BRegion::Intersects()用于查询参数指定的矩形、区域描述与当前区域描述是否相交，有相交时返回true，否则返回false。</para>
+	<para>BRegion::Contains()用于查询参数指定的点、矩形或区域描述是否在当前区域描述之内，被其完全包含时返回true，否则返回false。</para>
+	<para>BRegion::PrintToStream()用于将当前区域描述的所有组成矩形内容打印到标准输出流中。
+		<footnote><para>BRegion::PrintToStream()主要用于调试，无其它特殊效用。</para></footnote>
 	</para>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
 bool
-ERegion::Intersects(ERect rect) const
+BRegion::Intersects(BRect rect) const
 {
 	return Intersects(rect.left, rect.top, rect.right, rect.bottom);
 }
 
 
 bool
-ERegion::Intersects(float l, float t, float r, float b) const
+BRegion::Intersects(float l, float t, float r, float b) const
 {
 	if(fFrame.Intersects(l, t, r, b) == false) return false;
 
-	for(eint32 i = 0; i < fRects.CountItems(); i++)
+	for(b_int32 i = 0; i < fRects.CountItems(); i++)
 	{
-		ERect *rect = (ERect*)fRects.ItemAt(i);
+		BRect *rect = (BRect*)fRects.ItemAt(i);
 		if(!rect || rect->IsValid() == false) return false;
 		if(rect->Intersects(l, t, r, b)) return true;
 	}
@@ -725,18 +725,18 @@ ERegion::Intersects(float l, float t, float r, float b) const
 
 
 bool
-ERegion::Intersects(const ERegion *region) const
+BRegion::Intersects(const BRegion *region) const
 {
 	if(!region || fFrame.Intersects(region->fFrame) == false) return false;
 
-	for(eint32 i = 0; i < fRects.CountItems(); i++)
+	for(b_int32 i = 0; i < fRects.CountItems(); i++)
 	{
-		ERect *rect = (ERect*)fRects.ItemAt(i);
+		BRect *rect = (BRect*)fRects.ItemAt(i);
 		if(!rect || rect->IsValid() == false) return false;
 
-		for(eint32 j = 0; j < region->fRects.CountItems(); j++)
+		for(b_int32 j = 0; j < region->fRects.CountItems(); j++)
 		{
-			ERect *ar = (ERect*)region->fRects.ItemAt(j);
+			BRect *ar = (BRect*)region->fRects.ItemAt(j);
 			if(!ar || ar->IsValid() == false) return false;
 			if(ar->Intersects(*rect)) return true;
 		}
@@ -747,20 +747,20 @@ ERegion::Intersects(const ERegion *region) const
 
 
 bool
-ERegion::Contains(EPoint pt) const
+BRegion::Contains(BPoint pt) const
 {
 	return Contains(pt.x, pt.y);
 }
 
 
 bool
-ERegion::Contains(float x, float y) const
+BRegion::Contains(float x, float y) const
 {
 	if(fFrame.Contains(x, y) == false) return false;
 
-	for(eint32 i = 0; i < fRects.CountItems(); i++)
+	for(b_int32 i = 0; i < fRects.CountItems(); i++)
 	{
-		ERect *r = (ERect*)fRects.ItemAt(i);
+		BRect *r = (BRect*)fRects.ItemAt(i);
 		if(!r || r->IsValid() == false) return false;
 		if(r->Contains(x, y)) return true;
 	}
@@ -770,26 +770,26 @@ ERegion::Contains(float x, float y) const
 
 
 bool
-ERegion::Contains(ERect rect) const
+BRegion::Contains(BRect rect) const
 {
-	ERegion aRegion(rect);
+	BRegion aRegion(rect);
 	return Contains(&aRegion);
 }
 
 
 bool
-ERegion::Contains(float l, float t, float r, float b) const
+BRegion::Contains(float l, float t, float r, float b) const
 {
-	return Contains(ERect(l, t, r, b));
+	return Contains(BRect(l, t, r, b));
 }
 
 
 bool
-ERegion::Contains(const ERegion *region) const
+BRegion::Contains(const BRegion *region) const
 {
 	if(!region || fFrame.Contains(region->fFrame) == false) return false;
 
-	ERegion aRegion(*region);
+	BRegion aRegion(*region);
 	if(aRegion.CountRects() != region->CountRects() || aRegion.Frame() != region->Frame()) return false;
 
 	if(aRegion.Exclude(this) == false || aRegion.fRects.CountItems() > 0) return false;
@@ -799,23 +799,23 @@ ERegion::Contains(const ERegion *region) const
 
 
 void
-ERegion::PrintToStream() const
+BRegion::PrintToStream() const
 {
 	fFrame.PrintToStream();
-	ETK_OUTPUT("\n");
-	for(eint32 i = 0; i < fRects.CountItems(); i++)
+	BHAPI_OUTPUT("\n");
+	for(b_int32 i = 0; i < fRects.CountItems(); i++)
 	{
-		ERect *r = (ERect*)fRects.ItemAt(i);
+		BRect *r = (BRect*)fRects.ItemAt(i);
 		if(r) r->PrintToStream();
-		if(i < fRects.CountItems() - 1) ETK_OUTPUT(", ");
+		if(i < fRects.CountItems() - 1) BHAPI_OUTPUT(", ");
 	}
 }
 
 
-ERegion
-ERegion::operator&(ERect r) const
+BRegion
+BRegion::operator&(BRect r) const
 {
-	ERegion aRegion(*this);
+	BRegion aRegion(*this);
 	if(aRegion.CountRects() != CountRects() || aRegion.Frame() != Frame()) aRegion.MakeEmpty();
 
 	aRegion &= r;
@@ -824,10 +824,10 @@ ERegion::operator&(ERect r) const
 }
 
 
-ERegion
-ERegion::operator|(ERect r) const
+BRegion
+BRegion::operator|(BRect r) const
 {
-	ERegion aRegion(*this);
+	BRegion aRegion(*this);
 	if(aRegion.CountRects() != CountRects() || aRegion.Frame() != Frame()) aRegion.MakeEmpty();
 
 	aRegion |= r;
@@ -836,22 +836,22 @@ ERegion::operator|(ERect r) const
 }
 
 
-ERegion&
-ERegion::operator&=(ERect r)
+BRegion&
+BRegion::operator&=(BRect r)
 {
 	if(fFrame.Intersects(r) == false) MakeEmpty();
 	else
 	{
-		eint32 offset = 0;
+		b_int32 offset = 0;
 		while(offset < fRects.CountItems())
 		{
-			ERect *rect = (ERect*)fRects.ItemAt(offset);
+			BRect *rect = (BRect*)fRects.ItemAt(offset);
 			if(!rect || rect->IsValid() == false) {MakeEmpty(); break;}
 
 			*rect &= r;
 			if(rect->IsValid() == false)
 			{
-				rect = (ERect*)fRects.RemoveItem(offset);
+				rect = (BRect*)fRects.RemoveItem(offset);
 				if(!rect) {MakeEmpty(); break;}
 				delete rect;
 				continue;
@@ -861,10 +861,10 @@ ERegion::operator&=(ERect r)
 		}
 	}
 
-	fFrame = ERect();
-	for(eint32 i = 0; i < fRects.CountItems(); i++)
+	fFrame = BRect();
+	for(b_int32 i = 0; i < fRects.CountItems(); i++)
 	{
-		ERect *rect = (ERect*)fRects.ItemAt(i);
+		BRect *rect = (BRect*)fRects.ItemAt(i);
 		fFrame = (fFrame.IsValid() ? (fFrame | *rect) : *rect);
 	}
 
@@ -872,18 +872,18 @@ ERegion::operator&=(ERect r)
 }
 
 
-ERegion&
-ERegion::operator|=(ERect r)
+BRegion&
+BRegion::operator|=(BRect r)
 {
 	Include(r);
 	return *this;
 }
 
 
-ERegion
-ERegion::operator&(const ERegion &region) const
+BRegion
+BRegion::operator&(const BRegion &region) const
 {
-	ERegion aRegion(*this);
+	BRegion aRegion(*this);
 	if(aRegion.CountRects() != CountRects() || aRegion.Frame() != Frame()) aRegion.MakeEmpty();
 
 	aRegion &= region;
@@ -892,10 +892,10 @@ ERegion::operator&(const ERegion &region) const
 }
 
 
-ERegion
-ERegion::operator|(const ERegion &region) const
+BRegion
+BRegion::operator|(const BRegion &region) const
 {
-	ERegion aRegion(*this);
+	BRegion aRegion(*this);
 	if(aRegion.CountRects() != CountRects() || aRegion.Frame() != Frame()) aRegion.MakeEmpty();
 
 	aRegion |= region;
@@ -904,8 +904,8 @@ ERegion::operator|(const ERegion &region) const
 }
 
 
-ERegion&
-ERegion::operator&=(const ERegion &region)
+BRegion&
+BRegion::operator&=(const BRegion &region)
 {
 	if(fFrame.Intersects(region.fFrame) == false) MakeEmpty();
 	else
@@ -913,7 +913,7 @@ ERegion::operator&=(const ERegion &region)
 		operator&=(region.fFrame);
 		if(region.CountRects() > 1)
 		{
-			ERegion aRegion(region.fFrame);
+			BRegion aRegion(region.fFrame);
 			aRegion.Exclude(&region);
 			Exclude(&aRegion);
 		}
@@ -923,8 +923,8 @@ ERegion::operator&=(const ERegion &region)
 }
 
 
-ERegion&
-ERegion::operator|=(const ERegion &region)
+BRegion&
+BRegion::operator|=(const BRegion &region)
 {
 	Include(&region);
 	return *this;
@@ -932,15 +932,15 @@ ERegion::operator|=(const ERegion &region)
 
 
 void
-ERegion::Scale(float scaling)
+BRegion::Scale(float scaling)
 {
 	if(fRects.CountItems() <= 0 || scaling < 0 || scaling == 1) return;
 
 	if(scaling > 0)
 	{
-		for(eint32 i = 0; i < fRects.CountItems(); i++)
+		for(b_int32 i = 0; i < fRects.CountItems(); i++)
 		{
-			ERect *r = (ERect*)fRects.ItemAt(i);
+			BRect *r = (BRect*)fRects.ItemAt(i);
 			r->left *= scaling;
 			r->top *= scaling;
 			r->right *= scaling;
@@ -954,23 +954,23 @@ ERegion::Scale(float scaling)
 	}
 	else
 	{
-		Set(ERect(0, 0, 0, 0));
+		Set(BRect(0, 0, 0, 0));
 	}
 }
 
 
-ERegion&
-ERegion::ScaleSelf(float scaling)
+BRegion&
+BRegion::ScaleSelf(float scaling)
 {
 	Scale(scaling);
 	return *this;
 }
 
 
-ERegion
-ERegion::ScaleCopy(float scaling)
+BRegion
+BRegion::ScaleCopy(float scaling)
 {
-	ERegion aRegion(*this);
+	BRegion aRegion(*this);
 	aRegion.Scale(scaling);
 	return aRegion;
 }

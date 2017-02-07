@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,78 +24,78 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: MessageFilter.h
- * Description: Filter message before ELooper::DispatchMessage
+ * Description: Filter message before BLooper::DispatchMessage
  * Warning: ignore _QUIT_
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_MESSAGE_FILTER_H__
-#define __ETK_MESSAGE_FILTER_H__
+#ifndef __BHAPI_MESSAGE_FILTER_H__
+#define __BHAPI_MESSAGE_FILTER_H__
 
 #include "./../app/Handler.h"
 
-typedef enum e_filter_result {
-	E_SKIP_MESSAGE,
-	E_DISPATCH_MESSAGE
-} e_filter_result;
+typedef enum b_filter_result {
+    B_SKIP_MESSAGE,
+    B_DISPATCH_MESSAGE
+} b_filter_result;
 
-typedef enum e_message_delivery {
-	E_DROPPED_DELIVERY	=	0x1,
-	E_PROGRAMMED_DELIVERY	=	0x2,
-	E_ANY_DELIVERY		=	0xff
-} e_message_delivery;
+typedef enum b_message_delivery {
+    B_DROPPED_DELIVERY	=	0x1,
+    B_PROGRAMMED_DELIVERY	=	0x2,
+    B_ANY_DELIVERY		=	0xff
+} b_message_delivery;
 
-typedef enum e_message_source {
-	E_LOCAL_SOURCE		=	0x1,
-	E_REMOTE_SOURCE		=	0x2,
-	E_ANY_SOURCE		=	0xff
-} e_message_source;
+typedef enum b_message_source {
+    B_LOCAL_SOURCE		=	0x1,
+    B_REMOTE_SOURCE		=	0x2,
+    B_ANY_SOURCE		=	0xff
+} b_message_source;
 
 #ifdef __cplusplus /* Just for C++ */
 
-class EMessage;
-class EMessageFilter;
+class BMessage;
+class BMessageFilter;
 
-typedef e_filter_result (*e_filter_hook)(EMessage *message, EHandler **target, EMessageFilter *filter);
+typedef b_filter_result (*b_filter_hook)(BMessage *message, BHandler **target, BMessageFilter *filter);
 
 
-class _IMPEXP_ETK EMessageFilter {
+class _IMPEXP_BHAPI BMessageFilter {
 public:
-	EMessageFilter(e_message_delivery delivery, e_message_source source,
-		       euint32 command, e_filter_hook filter = NULL);
-	EMessageFilter(e_message_delivery delivery, e_message_source source,
-		       e_filter_hook filter = NULL);
-	EMessageFilter(euint32 command, e_filter_hook filter = NULL);
-	EMessageFilter(const EMessageFilter &filter);
-	EMessageFilter(const EMessageFilter *filter);
-	virtual ~EMessageFilter();
+    BMessageFilter(b_message_delivery delivery, b_message_source source,
+               b_uint32 command, b_filter_hook filter = NULL);
+    BMessageFilter(b_message_delivery delivery, b_message_source source,
+		       b_filter_hook filter = NULL);
+    BMessageFilter(b_uint32 command, b_filter_hook filter = NULL);
+	BMessageFilter(const BMessageFilter &filter);
+	BMessageFilter(const BMessageFilter *filter);
+	virtual ~BMessageFilter();
 
-	EMessageFilter &operator=(const EMessageFilter &from);
+	BMessageFilter &operator=(const BMessageFilter &from);
 
-	virtual e_filter_result		Filter(EMessage *message, EHandler **target);
+	virtual b_filter_result		Filter(BMessage *message, BHandler **target);
 
-	e_message_delivery		MessageDelivery() const;
-	e_message_source		MessageSource() const;
-	euint32				Command() const;
+	b_message_delivery		MessageDelivery() const;
+	b_message_source		MessageSource() const;
+    b_uint32				Command() const;
 	bool				FiltersAnyCommand() const;
-	ELooper				*Looper() const;
+	BLooper				*Looper() const;
 
 private:
-	friend class ELooper;
-	friend class EHandler;
+	friend class BLooper;
+	friend class BHandler;
 
-	euint32 fCommand;
+    b_uint32 fCommand;
 	bool fFiltersAny;
-	e_message_delivery fDelivery;
-	e_message_source fSource;
-	e_filter_hook fFilterHook;
+	b_message_delivery fDelivery;
+	b_message_source fSource;
+	b_filter_hook fFilterHook;
 
-	EHandler *fHandler;
+	BHandler *fHandler;
 
-	e_filter_result doFilter(EMessage *message, EHandler **target);
+	b_filter_result doFilter(BMessage *message, BHandler **target);
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_MESSAGE_FILTER_H__ */
+#endif /* __BHAPI_MESSAGE_FILTER_H__ */
 

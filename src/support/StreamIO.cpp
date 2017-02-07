@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,190 +27,190 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 #include "./../private/StandardIO.h"
 
 #include "StreamIO.h"
 
 
-static EStreamIO _endl;
-static EStreamIO _ends;
-static EStandardIO _EIn(0);
-static EStandardIO _EOut(1);
-static EStandardIO _EErr(2);
+static BStreamIO _endl;
+static BStreamIO _ends;
+static BStandardIO _EIn(0);
+static BStandardIO _EOut(1);
+static BStandardIO _EErr(2);
 
-_IMPEXP_ETK EStreamIO &endl = _endl;
-_IMPEXP_ETK EStreamIO &ends = _ends;
-_IMPEXP_ETK EStreamIO &EIn = _EIn;
-_IMPEXP_ETK EStreamIO &EOut = _EOut;
-_IMPEXP_ETK EStreamIO &EErr = _EErr;
+_IMPEXP_BHAPI BStreamIO &endl = _endl;
+_IMPEXP_BHAPI BStreamIO &ends = _ends;
+_IMPEXP_BHAPI BStreamIO &EIn = _EIn;
+_IMPEXP_BHAPI BStreamIO &EOut = _EOut;
+_IMPEXP_BHAPI BStreamIO &EErr = _EErr;
 
 
-EStreamIO::EStreamIO()
+BStreamIO::BStreamIO()
 	: EDataIO()
 {
 }
 
 
-EStreamIO::~EStreamIO()
+BStreamIO::~BStreamIO()
 {
 }
 
 
 ssize_t
-EStreamIO::Read(void *buffer, size_t size)
+BStreamIO::Read(void *buffer, size_t size)
 {
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
 ssize_t
-EStreamIO::Write(const void *buffer, size_t size)
+BStreamIO::Write(const void *buffer, size_t size)
 {
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(eint8 value)
+BStreamIO&
+BStreamIO::operator<<(b_int8 value)
 {
-	EString str;
+	BString str;
 	str << value;
 	Write(str.String(), str.Length());
 	return *this;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(euint8 value)
+BStreamIO&
+BStreamIO::operator<<(b_uint8 value)
 {
-	EString str;
+	BString str;
 	str << value;
 	Write(str.String(), str.Length());
 	return *this;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(eint16 value)
+BStreamIO&
+BStreamIO::operator<<(b_int16 value)
 {
-	EString str;
+	BString str;
 	str << value;
 	Write(str.String(), str.Length());
 	return *this;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(euint16 value)
+BStreamIO&
+BStreamIO::operator<<(b_uint16 value)
 {
-	EString str;
+	BString str;
 	str << value;
 	Write(str.String(), str.Length());
 	return *this;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(eint32 value)
+BStreamIO&
+BStreamIO::operator<<(b_int32 value)
 {
-	EString str;
+	BString str;
 	str << value;
 	Write(str.String(), str.Length());
 	return *this;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(euint32 value)
+BStreamIO&
+BStreamIO::operator<<(b_uint32 value)
 {
-	EString str;
+	BString str;
 	str << value;
 	Write(str.String(), str.Length());
 	return *this;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(eint64 value)
+BStreamIO&
+BStreamIO::operator<<(b_int64 value)
 {
-	EString str;
+	BString str;
 	str << value;
 	Write(str.String(), str.Length());
 	return *this;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(euint64 value)
+BStreamIO&
+BStreamIO::operator<<(b_uint64 value)
 {
-	EString str;
+	BString str;
 	str << value;
 	Write(str.String(), str.Length());
 	return *this;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(float value)
+BStreamIO&
+BStreamIO::operator<<(float value)
 {
-	EString str;
+	BString str;
 	str << value;
 	Write(str.String(), str.Length());
 	return *this;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(double value)
+BStreamIO&
+BStreamIO::operator<<(double value)
 {
-	EString str;
+	BString str;
 	str << value;
 	Write(str.String(), str.Length());
 	return *this;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(const void *value)
+BStreamIO&
+BStreamIO::operator<<(const void *value)
 {
-	EString str;
+	BString str;
 	str.AppendFormat("%p", value);
 	Write(str.String(), str.Length());
 	return *this;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(bool value)
+BStreamIO&
+BStreamIO::operator<<(bool value)
 {
 	return operator<<(value ? "ture" : "false");
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(const char *str)
+BStreamIO&
+BStreamIO::operator<<(const char *str)
 {
 	if(!(str == NULL || *str == 0)) Write(str, strlen(str));
 	return *this;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(const EString &str)
+BStreamIO&
+BStreamIO::operator<<(const BString &str)
 {
 	if(str.Length() > 0) Write(str.String(), str.Length());
 	return *this;
 }
 
 
-EStreamIO&
-EStreamIO::operator<<(EStreamIO &stream)
+BStreamIO&
+BStreamIO::operator<<(BStreamIO &stream)
 {
 	if(&stream == &endl || &stream == &ends)
 		return operator<<(&stream == &endl ? '\n' : ' ');
 
-	eint8 buf[512];
+	b_int8 buf[512];
 	ssize_t len;
 
 	bzero(buf, sizeof(buf));

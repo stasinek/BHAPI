@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,50 +27,50 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_MENU_BAR_H__
-#define __ETK_MENU_BAR_H__
+#ifndef __BHAPI_MENU_BAR_H__
+#define __BHAPI_MENU_BAR_H__
 
 #include "./../interface/Menu.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-typedef enum e_menu_bar_border {
-	E_BORDER_NONE = 0,
-	E_BORDER_FRAME,
-	E_BORDER_CONTENTS,
-	E_BORDER_EACH_ITEM
-} e_menu_bar_border;
+typedef enum b_menu_bar_border {
+    B_BORDER_NONE = 0,
+    B_BORDER_FRAME,
+    B_BORDER_CONTENTS,
+    B_BORDER_EACH_ITEM
+} b_menu_bar_border;
 
-class _IMPEXP_ETK EMenuBar : public EMenu {
+class _IMPEXP_BHAPI BMenuBar : public BMenu {
 public:
-	EMenuBar(ERect frame, const char *title,
-		 euint32 resizeMode = E_FOLLOW_LEFT_RIGHT | E_FOLLOW_TOP,
-		 e_menu_layout layout = E_ITEMS_IN_ROW,
+	BMenuBar(BRect frame, const char *title,
+		 b_uint32 resizeMode = B_FOLLOW_LEFT_RIGHT | B_FOLLOW_TOP,
+		 b_menu_layout layout = B_ITEMS_IN_ROW,
 		 bool resizeToFit = true);
-	virtual ~EMenuBar();
+	virtual ~BMenuBar();
 
-	virtual void		SetBorder(e_menu_bar_border border);
-	e_menu_bar_border	Border() const;
+	virtual void		SetBorder(b_menu_bar_border border);
+	b_menu_bar_border	Border() const;
 
-	virtual void		Draw(ERect updateRect);
+	virtual void		Draw(BRect updateRect);
 
-	virtual void		MessageReceived(EMessage *msg);
-	virtual void		MouseDown(EPoint where);
-	virtual void		MouseUp(EPoint where);
-	virtual void		MouseMoved(EPoint where, euint32 code, const EMessage *a_message);
-	virtual void		KeyDown(const char *bytes, eint32 numBytes);
-	virtual void		KeyUp(const char *bytes, eint32 numBytes);
+	virtual void		MessageReceived(BMessage *msg);
+	virtual void		MouseDown(BPoint where);
+	virtual void		MouseUp(BPoint where);
+	virtual void		MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
+	virtual void		KeyDown(const char *bytes, b_int32 numBytes);
+	virtual void		KeyUp(const char *bytes, b_int32 numBytes);
 
 	virtual void		MakeFocus(bool focusState = true);
 
 protected:
-	virtual void		ItemInvoked(EMenuItem *item);
+	virtual void		ItemInvoked(BMenuItem *item);
 
 private:
-	e_menu_bar_border fBorder;
+	b_menu_bar_border fBorder;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_MENU_BAR_H__ */
+#endif /* __BHAPI_MENU_BAR_H__ */
 

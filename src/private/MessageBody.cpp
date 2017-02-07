@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,121 +27,121 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 
 #include "Memory.h"
 #include "MessageBody.h"
 
 
-class _LOCAL EMessageNode
+class _LOCAL BMessageNode
 {
 public:
-	EMessageNode(const char *name);
-	EMessageNode(e_type_code type);
-	~EMessageNode();
+	BMessageNode(const char *name);
+	BMessageNode(b_type_code type);
+	~BMessageNode();
 
 	const char	*Name() const;
-	e_type_code	TypeCode() const;
+	b_type_code	TypeCode() const;
 
-	bool		AddItem(EMessageItem *item);
-	void		RemoveItem(EMessageItem *item);
+	bool		AddItem(BMessageItem *item);
+	void		RemoveItem(BMessageItem *item);
 
-	eint32		CountItems() const;
-	eint32		IndexOf(EMessageItem *item) const;
-	EMessageItem	*ItemAt(eint32 index) const;
+	b_int32		CountItems() const;
+	b_int32		IndexOf(BMessageItem *item) const;
+	BMessageItem	*ItemAt(b_int32 index) const;
 
 private:
 	char *fName;
-	e_type_code fType;
-	EList fItems;
+	b_type_code fType;
+	BList fItems;
 };
 
 
-EMessageNode::EMessageNode(const char *name)
-	: fName(EStrdup(name)), fType((e_type_code)0)
+BMessageNode::BMessageNode(const char *name)
+	: fName(b_strdup(name)), fType((b_type_code)0)
 {
 }
 
 
-EMessageNode::EMessageNode(e_type_code type)
+BMessageNode::BMessageNode(b_type_code type)
 	: fName(NULL), fType(type)
 {
 }
 
 
-EMessageNode::~EMessageNode()
+BMessageNode::~BMessageNode()
 {
 	if(fName != NULL) delete[] fName;
 }
 
 
 const char*
-EMessageNode::Name() const
+BMessageNode::Name() const
 {
 	return fName;
 }
 
 
-e_type_code
-EMessageNode::TypeCode() const
+b_type_code
+BMessageNode::TypeCode() const
 {
 	return fType;
 }
 
 
 bool
-EMessageNode::AddItem(EMessageItem *item)
+BMessageNode::AddItem(BMessageItem *item)
 {
 	return fItems.AddItem(item);
 }
 
 
 void
-EMessageNode::RemoveItem(EMessageItem *item)
+BMessageNode::RemoveItem(BMessageItem *item)
 {
 	if(fItems.RemoveItem(fItems.IndexOf(item)) != item)
-		ETK_ERROR("[PRIVATE]: %s --- Invalid operation.", __PRETTY_FUNCTION__);
+		BHAPI_ERROR("[PRIVATE]: %s --- Invalid operation.", __PRETTY_FUNCTION__);
 }
 
 
-eint32
-EMessageNode::CountItems() const
+b_int32
+BMessageNode::CountItems() const
 {
 	return fItems.CountItems();
 }
 
 
-eint32
-EMessageNode::IndexOf(EMessageItem *item) const
+b_int32
+BMessageNode::IndexOf(BMessageItem *item) const
 {
 	return fItems.IndexOf(item);
 }
 
 
-EMessageItem*
-EMessageNode::ItemAt(eint32 index) const
+BMessageItem*
+BMessageNode::ItemAt(b_int32 index) const
 {
-	return (EMessageItem*)fItems.ItemAt(index);
+	return (BMessageItem*)fItems.ItemAt(index);
 }
 
 
-EMessageItem::EMessageItem(void *data, size_t nBytes, bool fixedSize)
+BMessageItem::BMessageItem(void *data, size_t nBytes, bool fixedSize)
 	: fFixedSize(false), fBytes(0), fData(NULL)
 {
 	SetData(data, nBytes, fixedSize);
 }
 
 
-EMessageItem::~EMessageItem()
+BMessageItem::~BMessageItem()
 {
-	if(fFixedSize && fData != NULL) EMemory::Free(fData);
+	if(fFixedSize && fData != NULL) BMemory::Free(fData);
 }
 
 
 void
-EMessageItem::SetData(void *data, size_t nBytes, bool fixedSize)
+BMessageItem::SetData(void *data, size_t nBytes, bool fixedSize)
 {
-	if(fFixedSize && fData != NULL) EMemory::Free(fData);
+	if(fFixedSize && fData != NULL) BMemory::Free(fData);
 
 	fFixedSize = fixedSize;
 	fBytes = nBytes;
@@ -150,118 +150,118 @@ EMessageItem::SetData(void *data, size_t nBytes, bool fixedSize)
 
 
 void*
-EMessageItem::Data() const
+BMessageItem::Data() const
 {
 	return fData;
 }
 
 
 size_t
-EMessageItem::Bytes() const
+BMessageItem::Bytes() const
 {
 	return fBytes;
 }
 
 
 bool
-EMessageItem::IsFixedSize() const
+BMessageItem::IsFixedSize() const
 {
 	return fFixedSize;
 }
 
 
-EMessageBody::EMessageBody()
+BMessageBody::BMessageBody()
 	: fNames(NULL), fTypes(NULL)
 {
 }
 
 
-EMessageBody::~EMessageBody()
+BMessageBody::~BMessageBody()
 {
 	// TODO
 }
 
 
 bool
-EMessageBody::AddItem(const char *name, e_type_code type, EMessageItem *item)
+BMessageBody::AddItem(const char *name, b_type_code type, BMessageItem *item)
 {
 	// TODO
-	ETK_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
+	BHAPI_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
 	return false;
 }
 
 
 void
-EMessageBody::RemoveItem(EMessageItem *item)
+BMessageBody::RemoveItem(BMessageItem *item)
 {
 	// TODO
-	ETK_ERROR("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
+	BHAPI_ERROR("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
 }
 
 
-eint32
-EMessageBody::CountNames() const
+b_int32
+BMessageBody::CountNames() const
 {
 	return(fNames == NULL ? 0 : fNames->CountItems());
 }
 
 
-eint32
-EMessageBody::CountTypes() const
+b_int32
+BMessageBody::CountTypes() const
 {
 	return(fTypes == NULL ? 0 : fTypes->CountItems());
 }
 
 
 size_t
-EMessageBody::FlattenedSize() const
+BMessageBody::FlattenedSize() const
 {
 	// TODO
-	ETK_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
+	BHAPI_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
 	return 0;
 }
 
 
 bool
-EMessageBody::Flatten(char *buffer, size_t size) const
+BMessageBody::Flatten(char *buffer, size_t size) const
 {
 	// TODO
-	ETK_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
+	BHAPI_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
 	return false;
 }
 
 
 bool
-EMessageBody::Flatten(EDataIO *stream, ssize_t *size) const
+BMessageBody::Flatten(EDataIO *stream, ssize_t *size) const
 {
 	// TODO
-	ETK_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
+	BHAPI_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
 	return false;
 }
 
 
 bool
-EMessageBody::Unflatten(const char *buffer, size_t size)
+BMessageBody::Unflatten(const char *buffer, size_t size)
 {
 	// TODO
-	ETK_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
+	BHAPI_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
 	return false;
 }
 
 
 bool
-EMessageBody::Unflatten(EDataIO *stream, size_t size)
+BMessageBody::Unflatten(EDataIO *stream, size_t size)
 {
 	// TODO
-	ETK_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
+	BHAPI_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
 	return false;
 }
 
 
 void
-EMessageBody::PrintToStream(EStreamIO &stream) const
+BMessageBody::PrintToStream(BStreamIO &stream) const
 {
 	// TODO
-	ETK_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
+	BHAPI_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
 }
 

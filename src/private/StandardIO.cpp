@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -40,26 +40,26 @@
 #include "StandardIO.h"
 
 
-EStandardIO::EStandardIO(int fd)
-	: EStreamIO(), fFD(fd)
+BStandardIO::BStandardIO(int fd)
+	: BStreamIO(), fFD(fd)
 {
 }
 
 
-EStandardIO::~EStandardIO()
+BStandardIO::~BStandardIO()
 {
 }
 
 
 ssize_t
-EStandardIO::Read(void *buffer, size_t size)
+BStandardIO::Read(void *buffer, size_t size)
 {
 	return read(fFD, buffer, size);
 }
 
 
 ssize_t
-EStandardIO::Write(const void *buffer, size_t size)
+BStandardIO::Write(const void *buffer, size_t size)
 {
 	return write(fFD, buffer, size);
 }

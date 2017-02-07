@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  * 
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,32 +24,32 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: LineGenerator.h
- * Description: ELineGenerator --- Pixel generator for zero-width-line-drawing
+ * Description: BLineGenerator --- Pixel generator for zero-width-line-drawing
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_LINE_GENERATOR_H__
-#define __ETK_LINE_GENERATOR_H__
+#ifndef __BHAPI_LINE_GENERATOR_H__
+#define __BHAPI_LINE_GENERATOR_H__
 
 #include "./../interface/Rect.h"
 #include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK ELineGenerator {
+class _IMPEXP_BHAPI BLineGenerator {
 public:
-	ELineGenerator(EPoint start, EPoint end);
+    BLineGenerator(BPoint start, BPoint end);
 
-	bool Start(eint32 &x, eint32 &y, eint32 &step, eint32 &pixels, bool isLoopX = true, float pixel_size = 1);
-	bool Next(eint32 &next, eint32 &pixels);
+    bool Start(b_int32 &x, b_int32 &y, b_int32 &step, b_int32 &pixels, bool isLoopX = true, float pixel_size = 1);
+    bool Next(b_int32 &next, b_int32 &pixels);
 
 private:
-	EPoint fStart;
-	EPoint fEnd;
+    BPoint fStart;
+    BPoint fEnd;
 
-	euint8 fDirection;
-	eint32 fStep;
-	eint32 fStepOther;
+    b_uint8 fDirection;
+    b_int32 fStep;
+    b_int32 fStepOther;
 	bool fIsLoopX;
 
 	float fEltaNext;
@@ -61,5 +61,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_LINE_GENERATOR_H__ */
+#endif /* __BHAPI_LINE_GENERATOR_H__ */
 

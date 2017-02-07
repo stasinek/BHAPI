@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_CLASS_INFO_H__
-#define __ETK_CLASS_INFO_H__
+#ifndef __BHAPI_CLASS_INFO_H__
+#define __BHAPI_CLASS_INFO_H__
 
 #ifdef __cplusplus /* Just for C++ */
 
@@ -38,12 +38,12 @@
 
 #include <typeinfo>
 
-#define e_class_name(ptr)		(ptr ? (typeid(*(ptr))).name() : (const char*)NULL)
-#define e_cast_as(ptr, class)		(ptr ? dynamic_cast<class*>(ptr) : (class*)NULL)
-#define e_is_kind_of(ptr, class)	(ptr ? e_cast_as(ptr, class) != NULL : false)
-#define e_is_instance_of(ptr, class)	(ptr ? typeid(*(ptr)) == typeid(class) : false)
+#define b_class_name(ptr)		(ptr ? (typeid(*(ptr))).name() : (const char*)NULL)
+#define b_cast_as(ptr, class)		(ptr ? dynamic_cast<class*>(ptr) : (class*)NULL)
+#define b_is_kind_of(ptr, class)	(ptr ? b_cast_as(ptr, class) != NULL : false)
+#define b_is_instance_of(ptr, class)	(ptr ? typeid(*(ptr)) == typeid(class) : false)
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_CLASS_INFO_H__ */
+#endif /* __BHAPI_CLASS_INFO_H__ */
 

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,24 +24,24 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  * File: StatusBar.h
- * Description: EStatusBar --- A view that graphically indicates the progress
+ * Description: BStatusBar --- A view that graphically indicates the progress
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_STATUS_BAR_H__
-#define __ETK_STATUS_BAR_H__
+#ifndef __BHAPI_STATUS_BAR_H__
+#define __BHAPI_STATUS_BAR_H__
 
 #include "./../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EStatusBar : public EView {
+class _IMPEXP_BHAPI BStatusBar : public BView {
 public:
-	EStatusBar(ERect frame,
+    BStatusBar(BRect frame,
 		   const char *name,
 		   const char *label = NULL,
 		   const char *trailing_label = NULL);
-	virtual ~EStatusBar();
+    virtual ~BStatusBar();
 
 	virtual void	SetBarHeight(float height);
 	virtual void	SetText(const char *str);
@@ -60,8 +60,8 @@ public:
 	const char	*Label() const;
 	const char	*TrailingLabel() const;
 
-	virtual void	MessageReceived(EMessage *msg);
-	virtual void	Draw(ERect updateRect);
+	virtual void	MessageReceived(BMessage *msg);
+	virtual void	Draw(BRect updateRect);
 	virtual void	GetPreferredSize(float *width, float *height);
 
 private:
@@ -76,5 +76,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_STATUS_BAR_H__ */
+#endif /* __BHAPI_STATUS_BAR_H__ */
 

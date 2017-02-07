@@ -1757,80 +1757,35 @@ __extension__ long long __attribute__((__cdecl__)) llrintl (long double);
 # 1 "../src/render/./../support/List.h" 1
 # 34 "../src/render/./../support/List.h"
 # 1 "../src/render/./../support/./SupportDefs.h" 1
-# 89 "../src/render/./../support/./SupportDefs.h"
-# 1 "../src/render/./../support/./Errors.h" 1
-# 32 "../src/render/./../support/./Errors.h"
+# 34 "../src/render/./../support/./SupportDefs.h"
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
+# 140 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_stdarg.h" 1 3 4
+# 141 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 2 3 4
+# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
+# 35 "../src/render/./../support/./SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
+# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+extern "C" {
+# 24 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
+
+  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
+
+
+}
+# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+typedef struct {
+  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
+  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
+} max_align_t;
+# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
+# 36 "../src/render/./../support/./SupportDefs.h" 2
+# 96 "../src/render/./../support/./SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 33 "../src/render/./../support/./Errors.h" 2
-# 41 "../src/render/./../support/./Errors.h"
-enum {
- E_NO_MEMORY = (-2147483647 - 1),
- E_IO_ERROR,
- E_PERMISSION_DENIED,
- E_BAD_INDEX,
- E_BAD_TYPE,
- E_BAD_VALUE,
- E_MISMATCHED_VALUES,
- E_NAME_NOT_FOUND,
- E_NAME_IN_USE,
- E_TIMED_OUT,
- E_INTERRUPTED,
- E_WOULD_BLOCK,
- E_CANCELED,
- E_NO_INIT,
- E_BUSY,
- E_NOT_ALLOWED,
-
- E_ERROR = -1,
- E_OK = 1,
- E_NO_ERROR = 1
-};
-
-
-enum {
- E_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
- E_NO_MORE_SEMS,
-
- E_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
- E_NO_MORE_THREADS,
- E_BAD_THREAD_STATE,
- E_BAD_TEAM_ID,
- E_NO_MORE_TEAMS,
-
- E_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
- E_NO_MORE_PORTS,
-
- E_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
- E_BAD_ADDRESS,
- E_NOT_AN_EXECUTABLE,
- E_MISSING_LIBRARY,
- E_MISSING_SYMBOL,
-
- E_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
-};
-
-
-enum {
- E_BAD_REPLY = (-2147483647 - 1) + 0x2000,
- E_DUPLICATE_REPLY,
- E_MESSAGE_TO_SELF,
- E_BAD_HANDLER,
- E_ALREADY_RUNNING,
-};
-
-
-enum {
- E_FILE_ERROR = (-2147483647 - 1) + 0x3000,
- E_ENTRY_NOT_FOUND,
- E_LINK_LIMIT,
- E_NAME_TOO_LONG,
-};
-# 90 "../src/render/./../support/./SupportDefs.h" 2
-
-
-
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 94 "../src/render/./../support/./SupportDefs.h" 2
+# 97 "../src/render/./../support/./SupportDefs.h" 2
 
 
 
@@ -1862,61 +1817,61 @@ __attribute__ ((__dllimport__)) int * __attribute__((__cdecl__)) __attribute__ (
 # 293 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/float.h" 3 4
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 100 "../src/render/./../support/./SupportDefs.h" 2
-# 111 "../src/render/./../support/./SupportDefs.h"
-typedef int eunichar32;
-typedef short eunichar;
+# 103 "../src/render/./../support/./SupportDefs.h" 2
+# 114 "../src/render/./../support/./SupportDefs.h"
+typedef int b_unichar32;
+typedef short b_unichar;
 
-typedef char eint8;
-typedef unsigned char euint8;
-typedef short eint16;
-typedef unsigned short euint16;
-typedef int eint32;
-typedef unsigned int euint32;
-typedef long long eint64;
-typedef unsigned long long euint64;
+typedef char b_int8;
+typedef unsigned char b_uint8;
+typedef short b_int16;
+typedef unsigned short b_uint16;
+typedef int b_int32;
+typedef unsigned int b_uint32;
+typedef long long b_int64;
+typedef unsigned long long b_uint64;
 
-typedef eint32 e_status_t;
-typedef euint32 e_type_code;
-typedef euint32 e_perform_code;
-typedef eint64 e_bigtime_t;
-typedef eint64 e_thread_id;
-typedef size_t e_address_t;
+typedef b_int32 b_status_t;
+typedef b_uint32 b_type_code;
+typedef b_uint32 b_perform_code;
+typedef b_int64 b_bigtime_t;
+typedef b_int64 b_thread_id;
+typedef size_t b_address_t;
 
 enum {
-    E_ANY_TYPE = 'ANYT',
- E_BOOL_TYPE = 'BOOL',
- E_CHAR_TYPE = 'CHAR',
- E_DOUBLE_TYPE = 'DBLE',
- E_FLOAT_TYPE = 'FLOT',
- E_INT64_TYPE = 'LLNG',
- E_INT32_TYPE = 'LONG',
- E_INT16_TYPE = 'SHRT',
- E_INT8_TYPE = 'BYTE',
- E_MESSAGE_TYPE = 'MSGG',
- E_MESSENGER_TYPE = 'MSNG',
- E_POINTER_TYPE = 'PNTR',
- E_SIZE_T_TYPE = 'SIZT',
- E_SSIZE_T_TYPE = 'SSZT',
- E_STRING_TYPE = 'CSTR',
- E_UINT64_TYPE = 'ULLG',
- E_UINT32_TYPE = 'ULNG',
- E_UINT16_TYPE = 'USHT',
- E_UINT8_TYPE = 'UBYT',
- E_POINT_TYPE = 'SPNT',
-    E_RECT_TYPE = 'RECT',
-    E_MIME_TYPE = 'MIME',
- E_UNKNOWN_TYPE = 'UNKN'
+    B_ANY_TYPE = 'ANYT',
+    B_BOOL_TYPE = 'BOOL',
+    B_CHAR_TYPE = 'CHAR',
+    B_DOUBLE_TYPE = 'DBLE',
+    B_FLOAT_TYPE = 'FLOT',
+    B_INT64_TYPE = 'LLNG',
+    B_INT32_TYPE = 'LONG',
+    B_INT16_TYPE = 'SHRT',
+    B_INT8_TYPE = 'BYTE',
+    B_MESSAGE_TYPE = 'MSGG',
+    B_MESSENGER_TYPE = 'MSNG',
+    B_POINTER_TYPE = 'PNTR',
+    B_SIZE_T_TYPE = 'SIZT',
+    B_SSIZE_T_TYPE = 'SSZT',
+    B_STRING_TYPE = 'CSTR',
+    B_UINT64_TYPE = 'ULLG',
+    B_UINT32_TYPE = 'ULNG',
+    B_UINT16_TYPE = 'USHT',
+    B_UINT8_TYPE = 'UBYT',
+    B_POINT_TYPE = 'SPNT',
+    B_RECT_TYPE = 'RECT',
+    B_MIME_TYPE = 'MIME',
+    B_UNKNOWN_TYPE = 'UNKN'
 };
-# 252 "../src/render/./../support/./SupportDefs.h"
+# 255 "../src/render/./../support/./SupportDefs.h"
 extern "C" {
 
 
-extern __attribute__((dllexport)) const euint8 etk_major_version;
-extern __attribute__((dllexport)) const euint8 etk_minor_version;
-extern __attribute__((dllexport)) const euint8 etk_micro_version;
-extern __attribute__((dllexport)) const euint8 etk_interface_age;
-extern __attribute__((dllexport)) const euint16 etk_binary_age;
+extern __attribute__((dllexport)) const b_uint8 bhapi_major_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_minor_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_micro_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_interface_age;
+extern __attribute__((dllexport)) const b_uint16 bhapi_binary_age;
 
 
 }
@@ -1992,9 +1947,6 @@ extern "C" {
 # 66 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/windows.h" 2 3
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 140 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_stdarg.h" 1 3 4
-# 141 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 2 3 4
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
 # 67 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/windows.h" 2 3
 
@@ -6625,12 +6577,12 @@ typedef DWORD (__attribute__((__stdcall__)) *PRTL_RUN_ONCE_INIT_FN)(PRTL_RUN_ONC
 
 
     inline __attribute__((__always_inline__)) void TpInitializeCallbackEnviron (PTP_CALLBACK_ENVIRON cbe) {
-      cbe->Pool = 0;
-      cbe->CleanupGroup = 0;
-      cbe->CleanupGroupCancelCallback = 0;
-      cbe->RaceDll = 0;
-      cbe->ActivationContext = 0;
-      cbe->FinalizationCallback = 0;
+      cbe->Pool = __null;
+      cbe->CleanupGroup = __null;
+      cbe->CleanupGroupCancelCallback = __null;
+      cbe->RaceDll = __null;
+      cbe->ActivationContext = __null;
+      cbe->FinalizationCallback = __null;
       cbe->u.Flags = 0;
 
       cbe->Version = 1;
@@ -45066,40 +45018,19 @@ typedef unsigned int GROUP;
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAProviderConfigChange(LPHANDLE lpNotificationHandle,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 # 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
-# 270 "../src/render/./../support/./SupportDefs.h" 2
-# 293 "../src/render/./../support/./SupportDefs.h"
+# 273 "../src/render/./../support/./SupportDefs.h" 2
+# 296 "../src/render/./../support/./SupportDefs.h"
 enum {
- E_SEEK_SET = 0,
- E_SEEK_CUR,
- E_SEEK_END,
+    B_SEEK_SET = 0,
+    B_SEEK_CUR,
+    B_SEEK_END,
 };
 
 
 # 1 "../src/render/./../support/././../kernel/Debug.h" 1
 # 33 "../src/render/./../support/././../kernel/Debug.h"
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
+# 1 "../src/render/./../support/././../kernel/./../support/SupportDefs.h" 1
 # 34 "../src/render/./../support/././../kernel/Debug.h" 2
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
-# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-extern "C" {
-# 24 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
-
-  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
-
-
-}
-# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-typedef struct {
-  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
-  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
-} max_align_t;
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
-# 35 "../src/render/./../support/././../kernel/Debug.h" 2
-
 
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/new" 1 3
@@ -45606,86 +45537,151 @@ inline void operator delete[](void*, void*) noexcept { }
 }
 
 #pragma GCC visibility pop
-# 39 "../src/render/./../support/././../kernel/Debug.h" 2
-
-
-# 1 "../src/render/./../support/././../kernel/./../support/SupportDefs.h" 1
-# 42 "../src/render/./../support/././../kernel/Debug.h" 2
-# 57 "../src/render/./../support/././../kernel/Debug.h"
+# 37 "../src/render/./../support/././../kernel/Debug.h" 2
+# 54 "../src/render/./../support/././../kernel/Debug.h"
 extern "C" {
 
 
-typedef enum etk_debug_level {
+typedef enum bhapi_debug_level {
  DEBUG_NORMAL,
  DEBUG_OUTPUT,
  DEBUG_WARNING,
  DEBUG_ERROR
-} etk_debug_level;
+} bhapi_debug_level;
 
-__attribute__((dllexport)) void etk_debug_log(etk_debug_level level, const char *format, va_list ap);
-# 83 "../src/render/./../support/././../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_DEBUG(const char *format, ...);
-
-
-
-__attribute__((dllexport)) void ETK_OUTPUT(const char *format, ...);
-# 103 "../src/render/./../support/././../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_WARNING(const char *format, ...);
+__attribute__((dllexport)) void bhapi_debug_log(bhapi_debug_level level, const char *format, va_list ap);
+# 80 "../src/render/./../support/././../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...);
 
 
 
-__attribute__((dllexport)) void ETK_ERROR(const char *format, ...);
-# 121 "../src/render/./../support/././../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...);
+# 100 "../src/render/./../support/././../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...);
+
+
+
+__attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...);
+# 118 "../src/render/./../support/././../kernel/Debug.h"
 }
-# 301 "../src/render/./../support/./SupportDefs.h" 2
+# 304 "../src/render/./../support/./SupportDefs.h" 2
+
+# 1 "../src/render/./../support/./Errors.h" 1
+# 32 "../src/render/./../support/./Errors.h"
+# 1 "../src/render/./../support/./SupportDefs.h" 1
+# 33 "../src/render/./../support/./Errors.h" 2
+# 41 "../src/render/./../support/./Errors.h"
+enum {
+    B_NO_MEMORY = (-2147483647 - 1),
+    B_IO_ERROR,
+    B_PERMISSION_DENIED,
+    B_BAD_INDEX,
+    B_BAD_TYPE,
+    B_BAD_VALUE,
+    B_MISMATCHED_VALUES,
+    B_NAME_NOT_FOUND,
+    B_NAME_IN_USE,
+    B_TIMED_OUT,
+    B_INTERRUPTED,
+    B_WOULD_BLOCK,
+    B_CANCELED,
+    B_NO_INIT,
+    B_BUSY,
+    B_NOT_ALLOWED,
+
+    B_ERROR = -1,
+    B_OK = 1,
+    B_NO_ERROR = 1
+};
+
+
+enum {
+    B_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
+    B_NO_MORE_SEMS,
+
+    B_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
+    B_NO_MORE_THREADS,
+    B_BAD_THREAD_STATE,
+    B_BAD_TEAM_ID,
+    B_NO_MORE_TEAMS,
+
+    B_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
+    B_NO_MORE_PORTS,
+
+    B_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
+    B_BAD_ADDRESS,
+    B_NOT_AN_EXECUTABLE,
+    B_MISSING_LIBRARY,
+    B_MISSING_SYMBOL,
+
+    B_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
+};
+
+
+enum {
+    B_BAD_REPLY = (-2147483647 - 1) + 0x2000,
+    B_DUPLICATE_REPLY,
+    B_MESSAGE_TO_SELF,
+    B_BAD_HANDLER,
+    B_ALREADY_RUNNING,
+};
+
+
+enum {
+    B_FILE_ERROR = (-2147483647 - 1) + 0x3000,
+    B_ENTRY_NOT_FOUND,
+    B_LINK_LIMIT,
+    B_NAME_TOO_LONG,
+};
+# 306 "../src/render/./../support/./SupportDefs.h" 2
 # 35 "../src/render/./../support/List.h" 2
 
 
 
-class __attribute__((dllexport)) EList {
+class __attribute__((dllexport)) BList {
 public:
 
 
 
 
 
- EList(eint32 initialAllocSize = 0);
- EList(eint32 initialAllocSize, eint32 nullItems);
+    BList(b_int32 initialAllocSize = 0);
+    BList(b_int32 initialAllocSize, b_int32 nullItems);
 
 
 
- EList(const EList &list);
- EList &operator=(const EList &from);
+    BList(const BList &list);
+    BList &operator=(const BList &from);
 
- virtual ~EList();
+    virtual ~BList();
 
  bool AddItem(void *item);
- bool AddItem(void *item, eint32 atIndex);
- bool AddList(const EList *newItems);
- bool AddList(const EList *newItems, eint32 atIndex);
+    bool AddItem(void *item, b_int32 atIndex);
+    bool AddList(const BList *newItems);
+    bool AddList(const BList *newItems, b_int32 atIndex);
 
 
  bool RemoveItem(void *item);
- void *RemoveItem(eint32 index);
- bool RemoveItems(eint32 index, eint32 count);
+    void *RemoveItem(b_int32 index);
+    bool RemoveItems(b_int32 index, b_int32 count);
 
 
- bool ReplaceItem(eint32 index, void *newItem, void **oldItem = __null);
+    bool ReplaceItem(b_int32 index, void *newItem, void **oldItem = __null);
 
  void MakeEmpty();
 
- bool SwapItems(eint32 indexA, eint32 indexB);
- bool MoveItem(eint32 fromIndex, eint32 toIndex);
+    bool SwapItems(b_int32 indexA, b_int32 indexB);
+    bool MoveItem(b_int32 fromIndex, b_int32 toIndex);
 
  void SortItems(int (*cmp)(const void *a, const void *b));
 
- void *ItemAt(eint32 index) const;
+    void *ItemAt(b_int32 index) const;
  void *FirstItem() const;
  void *LastItem() const;
 
  bool HasItem(void *item) const;
- eint32 IndexOf(void *item) const;
- eint32 CountItems() const;
+    b_int32 IndexOf(void *item) const;
+    b_int32 CountItems() const;
  bool IsEmpty() const;
 
  void DoForEach(bool (*func)(void *data));
@@ -45697,11 +45693,11 @@ public:
 private:
  void **fObjects;
 
- eint32 fItemCount;
- eint32 fItemReal;
- eint32 fMinimumCount;
+    b_int32 fItemCount;
+    b_int32 fItemReal;
+    b_int32 fMinimumCount;
 
- bool _Resize(eint32 count);
+    bool _Resize(b_int32 count);
 };
 # 39 "../src/render/Render.cpp" 2
 
@@ -45716,176 +45712,176 @@ private:
 
 
 
-class ERect;
+class BRect;
 
-class __attribute__((dllexport)) EPoint {
+class __attribute__((dllexport)) BPoint {
 public:
  float x;
  float y;
 
- EPoint();
- EPoint(float X, float Y);
- EPoint(const EPoint &pt);
+ BPoint();
+ BPoint(float X, float Y);
+ BPoint(const BPoint &pt);
 
- EPoint &operator=(const EPoint &from);
+ BPoint &operator=(const BPoint &from);
  void Set(float X, float Y);
 
- void ConstrainTo(ERect rect);
+ void ConstrainTo(BRect rect);
 
  void Ceil();
  void Floor();
  void Round();
 
- EPoint& FloorSelf();
- EPoint FloorCopy() const;
- EPoint& CeilSelf();
- EPoint CeilCopy() const;
- EPoint& RoundSelf();
- EPoint RoundCopy() const;
+ BPoint& FloorSelf();
+ BPoint FloorCopy() const;
+ BPoint& CeilSelf();
+ BPoint CeilCopy() const;
+ BPoint& RoundSelf();
+ BPoint RoundCopy() const;
 
- EPoint operator+(const EPoint &plus) const;
- EPoint operator-(const EPoint &minus) const;
- EPoint& operator+=(const EPoint &plus);
- EPoint& operator-=(const EPoint &minus);
+ BPoint operator+(const BPoint &plus) const;
+ BPoint operator-(const BPoint &minus) const;
+ BPoint& operator+=(const BPoint &plus);
+ BPoint& operator-=(const BPoint &minus);
 
- bool operator!=(const EPoint &pt) const;
- bool operator==(const EPoint &pt) const;
+ bool operator!=(const BPoint &pt) const;
+ bool operator==(const BPoint &pt) const;
 
  void PrintToStream() const;
 };
 
-extern __attribute__((dllexport)) const EPoint E_ORIGIN;
+extern __attribute__((dllexport)) const BPoint B_ORIGIN;
 # 35 "../src/render/./../interface/Rect.h" 2
 
 
 
-class __attribute__((dllexport)) ERect {
+class __attribute__((dllexport)) BRect {
 public:
  float left;
  float top;
  float right;
  float bottom;
 
- ERect();
- ERect(const ERect &r);
- ERect(float l, float t, float r, float b);
- ERect(EPoint leftTop, EPoint rightBottom);
+ BRect();
+ BRect(const BRect &r);
+ BRect(float l, float t, float r, float b);
+ BRect(BPoint leftTop, BPoint rightBottom);
 
- ERect &operator=(const ERect &from);
+ BRect &operator=(const BRect &from);
  void Set(float l, float t, float r, float b);
 
- EPoint LeftTop() const;
- EPoint RightBottom() const;
- EPoint LeftBottom() const;
- EPoint RightTop() const;
- EPoint Center() const;
+ BPoint LeftTop() const;
+ BPoint RightBottom() const;
+ BPoint LeftBottom() const;
+ BPoint RightTop() const;
+ BPoint Center() const;
 
- void SetLeftTop(const EPoint pt);
- void SetRightBottom(const EPoint pt);
- void SetLeftBottom(const EPoint pt);
- void SetRightTop(const EPoint pt);
+ void SetLeftTop(const BPoint pt);
+ void SetRightBottom(const BPoint pt);
+ void SetLeftBottom(const BPoint pt);
+ void SetRightTop(const BPoint pt);
 
  void SetLeftTop(float x, float y);
  void SetRightBottom(float x, float y);
  void SetLeftBottom(float x, float y);
  void SetRightTop(float x, float y);
 
- void InsetBy(EPoint pt);
+ void InsetBy(BPoint pt);
  void InsetBy(float dx, float dy);
- void OffsetBy(EPoint pt);
+ void OffsetBy(BPoint pt);
  void OffsetBy(float dx, float dy);
- void OffsetTo(EPoint pt);
+ void OffsetTo(BPoint pt);
  void OffsetTo(float x, float y);
 
  void Floor();
  void Ceil();
  void Round();
 
- ERect& InsetBySelf(EPoint pt);
- ERect& InsetBySelf(float dx, float dy);
- ERect InsetByCopy(EPoint pt) const;
- ERect InsetByCopy(float dx, float dy) const;
- ERect& OffsetBySelf(EPoint pt);
- ERect& OffsetBySelf(float dx, float dy);
- ERect OffsetByCopy(EPoint pt) const;
- ERect OffsetByCopy(float dx, float dy) const;
- ERect& OffsetToSelf(EPoint pt);
- ERect& OffsetToSelf(float x, float y);
- ERect OffsetToCopy(EPoint pt) const;
- ERect OffsetToCopy(float x, float y) const;
+ BRect& InsetBySelf(BPoint pt);
+ BRect& InsetBySelf(float dx, float dy);
+ BRect InsetByCopy(BPoint pt) const;
+ BRect InsetByCopy(float dx, float dy) const;
+ BRect& OffsetBySelf(BPoint pt);
+ BRect& OffsetBySelf(float dx, float dy);
+ BRect OffsetByCopy(BPoint pt) const;
+ BRect OffsetByCopy(float dx, float dy) const;
+ BRect& OffsetToSelf(BPoint pt);
+ BRect& OffsetToSelf(float x, float y);
+ BRect OffsetToCopy(BPoint pt) const;
+ BRect OffsetToCopy(float x, float y) const;
 
- ERect& FloorSelf();
- ERect FloorCopy() const;
- ERect& CeilSelf();
- ERect CeilCopy() const;
- ERect& RoundSelf();
- ERect RoundCopy() const;
+ BRect& FloorSelf();
+ BRect FloorCopy() const;
+ BRect& CeilSelf();
+ BRect CeilCopy() const;
+ BRect& RoundSelf();
+ BRect RoundCopy() const;
 
- bool operator==(ERect r) const;
- bool operator!=(ERect r) const;
+ bool operator==(BRect r) const;
+ bool operator!=(BRect r) const;
 
- ERect operator&(ERect r) const;
- ERect operator|(ERect r) const;
+ BRect operator&(BRect r) const;
+ BRect operator|(BRect r) const;
 
- ERect& operator&=(ERect r);
- ERect& operator|=(ERect r);
+ BRect& operator&=(BRect r);
+ BRect& operator|=(BRect r);
 
  bool IsValid() const;
  float Width() const;
- eint32 IntegerWidth() const;
+    b_int32 IntegerWidth() const;
  float Height() const;
- eint32 IntegerHeight() const;
+    b_int32 IntegerHeight() const;
 
- bool Intersects(ERect r) const;
+ bool Intersects(BRect r) const;
  bool Intersects(float l, float t, float r, float b) const;
 
- bool Contains(EPoint pt) const;
+ bool Contains(BPoint pt) const;
  bool Contains(float x, float y) const;
- bool Contains(ERect r) const;
+ bool Contains(BRect r) const;
  bool Contains(float l, float t, float r, float b) const;
 
  void PrintToStream() const;
 };
 
 
-inline EPoint ERect::LeftTop() const
+inline BPoint BRect::LeftTop() const
 {
- return(EPoint(left, top));
+ return(BPoint(left, top));
 }
 
 
-inline EPoint ERect::RightBottom() const
+inline BPoint BRect::RightBottom() const
 {
- return(EPoint(right, bottom));
+ return(BPoint(right, bottom));
 }
 
 
-inline EPoint ERect::LeftBottom() const
+inline BPoint BRect::LeftBottom() const
 {
- return(EPoint(left, bottom));
+ return(BPoint(left, bottom));
 }
 
 
-inline EPoint ERect::RightTop() const
+inline BPoint BRect::RightTop() const
 {
- return(EPoint(right, top));
+ return(BPoint(right, top));
 }
 
 
-inline EPoint ERect::Center() const
+inline BPoint BRect::Center() const
 {
- return(EPoint(left + (right - left) / 2, top + (bottom - top) / 2));
+ return(BPoint(left + (right - left) / 2, top + (bottom - top) / 2));
 }
 
 
-inline ERect::ERect()
+inline BRect::BRect()
 {
  top = left = 0;
  bottom = right = -1;
 }
 
 
-inline ERect::ERect(float l, float t, float r, float b)
+inline BRect::BRect(float l, float t, float r, float b)
 {
  left = l;
  top = t;
@@ -45894,7 +45890,7 @@ inline ERect::ERect(float l, float t, float r, float b)
 }
 
 
-inline ERect::ERect(const ERect &r)
+inline BRect::BRect(const BRect &r)
 {
  left = r.left;
  top = r.top;
@@ -45903,7 +45899,7 @@ inline ERect::ERect(const ERect &r)
 }
 
 
-inline ERect::ERect(EPoint leftTop, EPoint rightBottom)
+inline BRect::BRect(BPoint leftTop, BPoint rightBottom)
 {
  left = leftTop.x;
  top = leftTop.y;
@@ -45912,7 +45908,7 @@ inline ERect::ERect(EPoint leftTop, EPoint rightBottom)
 }
 
 
-inline ERect& ERect::operator=(const ERect& from)
+inline BRect& BRect::operator=(const BRect& from)
 {
  left = from.left;
  top = from.top;
@@ -45922,7 +45918,7 @@ inline ERect& ERect::operator=(const ERect& from)
 }
 
 
-inline void ERect::Set(float l, float t, float r, float b)
+inline void BRect::Set(float l, float t, float r, float b)
 {
  left = l;
  top = t;
@@ -45931,31 +45927,31 @@ inline void ERect::Set(float l, float t, float r, float b)
 }
 
 
-inline bool ERect::IsValid() const
+inline bool BRect::IsValid() const
 {
  return(left <= right && top <= bottom);
 }
 
 
-inline eint32 ERect::IntegerWidth() const
+inline b_int32 BRect::IntegerWidth() const
 {
- return((eint32)ceil((double)(right - left)));
+    return((b_int32)ceil((double)(right - left)));
 }
 
 
-inline float ERect::Width() const
+inline float BRect::Width() const
 {
  return(right - left);
 }
 
 
-inline eint32 ERect::IntegerHeight() const
+inline b_int32 BRect::IntegerHeight() const
 {
- return((eint32)ceil((double)(bottom - top)));
+    return((b_int32)ceil((double)(bottom - top)));
 }
 
 
-inline float ERect::Height() const
+inline float BRect::Height() const
 {
  return(bottom - top);
 }
@@ -45965,20 +45961,20 @@ inline float ERect::Height() const
 
 
 
-class __attribute__((dllexport)) ELineGenerator {
+class __attribute__((dllexport)) BLineGenerator {
 public:
- ELineGenerator(EPoint start, EPoint end);
+    BLineGenerator(BPoint start, BPoint end);
 
- bool Start(eint32 &x, eint32 &y, eint32 &step, eint32 &pixels, bool isLoopX = true, float pixel_size = 1);
- bool Next(eint32 &next, eint32 &pixels);
+    bool Start(b_int32 &x, b_int32 &y, b_int32 &step, b_int32 &pixels, bool isLoopX = true, float pixel_size = 1);
+    bool Next(b_int32 &next, b_int32 &pixels);
 
 private:
- EPoint fStart;
- EPoint fEnd;
+    BPoint fStart;
+    BPoint fEnd;
 
- euint8 fDirection;
- eint32 fStep;
- eint32 fStepOther;
+    b_uint8 fDirection;
+    b_int32 fStep;
+    b_int32 fStepOther;
  bool fIsLoopX;
 
  float fEltaNext;
@@ -45990,37 +45986,37 @@ private:
 # 41 "../src/render/Render.cpp" 2
 # 1 "../src/render/ArcGenerator.h" 1
 # 38 "../src/render/ArcGenerator.h"
-class __attribute__((dllexport)) EArcGenerator {
+class __attribute__((dllexport)) BArcGenerator {
 public:
- EArcGenerator(EPoint center, float xRadius, float yRadius, EPoint start, EPoint end);
+    BArcGenerator(BPoint center, float xRadius, float yRadius, BPoint start, BPoint end);
 
- bool Start(eint32 &x, eint32 &y, eint32 &step, eint32 &pixels, bool &both, bool isLoopX = true, float pixel_size = 1);
- bool Next(eint32 &next, eint32 &pixels, bool &both);
+    bool Start(b_int32 &x, b_int32 &y, b_int32 &step, b_int32 &pixels, bool &both, bool isLoopX = true, float pixel_size = 1);
+    bool Next(b_int32 &next, b_int32 &pixels, bool &both);
 
 private:
- EPoint fCenter;
- EPoint fRadius;
- EPoint fStart;
- EPoint fEnd;
+    BPoint fCenter;
+    BPoint fRadius;
+    BPoint fStart;
+    BPoint fEnd;
 
- eint32 fStep;
+    b_int32 fStep;
  bool fIsLoopX;
 
- EPoint fRadius2;
- EPoint _fRadius;
- EPoint _fStart;
- EPoint _fEnd;
+    BPoint fRadius2;
+    BPoint _fRadius;
+    BPoint _fStart;
+    BPoint _fEnd;
  float fDeltaNext;
 
- eint32 _fCenterX;
- eint32 _fCenterY;
- eint32 _fRadiusX;
- eint32 _fStartX;
- eint32 _fStartY;
- eint32 _fEndX;
- eint32 _fEndY;
- eint32 _X;
- eint32 _Y;
+    b_int32 _fCenterX;
+    b_int32 _fCenterY;
+    b_int32 _fRadiusX;
+    b_int32 _fStartX;
+    b_int32 _fStartY;
+    b_int32 _fEndX;
+    b_int32 _fEndY;
+    b_int32 _X;
+    b_int32 _Y;
 };
 # 42 "../src/render/Render.cpp" 2
 # 1 "../src/render/Render.h" 1
@@ -46031,26 +46027,26 @@ private:
 # 34 "../src/render/./../interface/GraphicsDefs.h" 2
 
 
-typedef struct e_pattern {
- euint8 data[8];
+typedef struct b_pattern {
+    b_uint8 data[8];
 
- inline bool operator==(const e_pattern& o) const
+ inline bool operator==(const b_pattern& o) const
  {
-  return (*((const euint64*)this)) == (*((const euint64*)&o));
+        return (*((const b_uint64*)this)) == (*((const b_uint64*)&o));
  }
 
- inline bool operator!=(const e_pattern& o) const
+ inline bool operator!=(const b_pattern& o) const
  {
-  return (*((const euint64*)this)) != (*((const euint64*)&o));
+        return (*((const b_uint64*)this)) != (*((const b_uint64*)&o));
  }
 
-} e_pattern;
+} b_pattern;
 
 
 
-inline e_pattern e_make_pattern(euint8 d1, euint8 d2, euint8 d3, euint8 d4, euint8 d5, euint8 d6, euint8 d7, euint8 d8)
+inline b_pattern b_makb_pattern(b_uint8 d1, b_uint8 d2, b_uint8 d3, b_uint8 d4, b_uint8 d5, b_uint8 d6, b_uint8 d7, b_uint8 d8)
 {
- e_pattern p;
+ b_pattern p;
  p.data[0] = d1;
  p.data[1] = d2;
  p.data[2] = d3;
@@ -46068,101 +46064,101 @@ inline e_pattern e_make_pattern(euint8 d1, euint8 d2, euint8 d3, euint8 d4, euin
 extern "C" {
 
 
-extern __attribute__((dllexport)) const e_pattern E_SOLID_HIGH;
-extern __attribute__((dllexport)) const e_pattern E_MIXED_COLORS;
-extern __attribute__((dllexport)) const e_pattern E_SOLID_LOW;
+extern __attribute__((dllexport)) const b_pattern B_SOLID_HIGH;
+extern __attribute__((dllexport)) const b_pattern B_MIXED_COLORS;
+extern __attribute__((dllexport)) const b_pattern B_SOLID_LOW;
 
 
 }
 
 
 
-typedef struct e_rgb_color {
- euint8 red;
- euint8 green;
- euint8 blue;
- euint8 alpha;
+typedef struct b_rgb_color {
+    b_uint8 red;
+    b_uint8 green;
+    b_uint8 blue;
+    b_uint8 alpha;
 
 
- inline e_rgb_color& set_to(euint8 r, euint8 g, euint8 b, euint8 a = 0xff)
+    inline b_rgb_color& set_to(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 0xff)
  {
   red = r; green = g; blue = b; alpha = a;
   return *this;
  }
 
- inline e_rgb_color& set_to(const e_rgb_color& o)
+ inline b_rgb_color& set_to(const b_rgb_color& o)
  {
   return set_to(o.red, o.green, o.blue, o.alpha);
  }
 
- inline bool operator==(const e_rgb_color& o) const
+ inline bool operator==(const b_rgb_color& o) const
  {
-  return(*((const euint32*)this)) == (*((const euint32*)&o));
+        return(*((const b_uint32*)this)) == (*((const b_uint32*)&o));
  }
 
- inline bool operator!=(const e_rgb_color& o) const
+ inline bool operator!=(const b_rgb_color& o) const
  {
-  return(*((const euint32*)this)) != (*((const euint32*)&o));
+        return(*((const b_uint32*)this)) != (*((const b_uint32*)&o));
  }
 
- e_rgb_color& mix(euint8 r, euint8 g, euint8 b, euint8 a);
- e_rgb_color& mix(const e_rgb_color &o);
- e_rgb_color& mix_copy(euint8 r, euint8 g, euint8 b, euint8 a) const;
- e_rgb_color& mix_copy(const e_rgb_color &o) const;
+    b_rgb_color& mix(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
+ b_rgb_color& mix(const b_rgb_color &o);
+    b_rgb_color& mix_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const;
+ b_rgb_color& mix_copy(const b_rgb_color &o) const;
 
- e_rgb_color& disable(euint8 r, euint8 g, euint8 b, euint8 a);
- e_rgb_color& disable(const e_rgb_color &background);
- e_rgb_color& disable_copy(euint8 r, euint8 g, euint8 b, euint8 a) const;
- e_rgb_color& disable_copy(const e_rgb_color &background) const;
+    b_rgb_color& disable(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
+ b_rgb_color& disable(const b_rgb_color &background);
+    b_rgb_color& disable_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const;
+ b_rgb_color& disable_copy(const b_rgb_color &background) const;
 
-} e_rgb_color;
+} b_rgb_color;
 
 
 
-inline e_rgb_color e_make_rgb_color(euint8 r, euint8 g, euint8 b, euint8 a = 0xff)
+inline b_rgb_color b_makb_rgb_color(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 0xff)
 {
- e_rgb_color c;
+ b_rgb_color c;
  c.set_to(r, g, b, a);
  return c;
 }
 
 
 
-typedef enum e_drawing_mode {
- E_OP_COPY,
- E_OP_XOR,
+typedef enum b_drawing_mode {
+    B_OP_COPY,
+    B_OP_XOR,
 
- E_OP_OVER,
- E_OP_ERASE,
- E_OP_INVERT,
- E_OP_ADD,
- E_OP_SUBTRACT,
- E_OP_BLEND,
- E_OP_MIN,
- E_OP_MAX,
- E_OP_SELECT,
- E_OP_ALPHA,
-} e_drawing_mode;
+    B_OP_OVER,
+    B_OP_ERASE,
+    B_OP_INVERT,
+    B_OP_ADD,
+    B_OP_SUBTRACT,
+    B_OP_BLEND,
+    B_OP_MIN,
+    B_OP_MAX,
+    B_OP_SELECT,
+    B_OP_ALPHA,
+} b_drawing_mode;
 
 
-typedef enum e_color_space {
- E_CMAP8 = 0,
- E_RGB32 = 1,
- E_RGBA32 = 2,
- E_RGB24 = 3,
- E_RGB24_BIG = 4,
-} e_color_space;
+typedef enum b_color_space {
+    B_CMAP8 = 0,
+    B_RGB32 = 1,
+    B_RGBA32 = 2,
+    B_RGB24 = 3,
+    B_RGB24_BIG = 4,
+} b_color_space;
 
 
 
 extern "C" {
 
 
-extern __attribute__((dllexport)) const e_rgb_color E_TRANSPARENT_COLOR;
-extern __attribute__((dllexport)) const euint32 E_TRANSPARENT_MAGIC_RGBA32;
+extern __attribute__((dllexport)) const b_rgb_color B_TRANSPARENT_COLOR;
+extern __attribute__((dllexport)) const b_uint32 B_TRANSPARENT_MAGIC_RGBA32;
 
-__attribute__((dllexport)) euint8 etk_find_index_for_color(euint8 r, euint8 g, euint8 b);
-__attribute__((dllexport)) e_rgb_color etk_find_color_for_index(euint8 index);
+__attribute__((dllexport)) b_uint8 bhapi_find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b);
+__attribute__((dllexport)) b_rgb_color bhapi_find_color_for_index(b_uint8 index);
 
 
 }
@@ -46175,46 +46171,46 @@ __attribute__((dllexport)) e_rgb_color etk_find_color_for_index(euint8 index);
 
 
 
-class __attribute__((dllexport)) EPolygon {
+class __attribute__((dllexport)) BPolygon {
 public:
- EPolygon(const EPoint *pts, eint32 nPts);
- EPolygon();
- EPolygon(const EPolygon *poly);
- virtual ~EPolygon();
+    BPolygon(const BPoint *pts, b_int32 nPts);
+    BPolygon();
+    BPolygon(const BPolygon *poly);
+    virtual ~BPolygon();
 
- EPolygon &operator=(const EPolygon &poly);
- ERect Frame() const;
+    BPolygon &operator=(const BPolygon &poly);
+ BRect Frame() const;
 
- bool AddPoints(const EPoint *pts, eint32 nPts, bool updateFrame = true);
- void RemovePoints(eint32 fromIndex, eint32 toIndex, bool updateFrame = true);
+    bool AddPoints(const BPoint *pts, b_int32 nPts, bool updateFrame = true);
+    void RemovePoints(b_int32 fromIndex, b_int32 toIndex, bool updateFrame = true);
 
- bool AddPoint(const EPoint &aPt, bool updateFrame = true);
- void RemovePoint(eint32 index, bool updateFrame = true);
+ bool AddPoint(const BPoint &aPt, bool updateFrame = true);
+    void RemovePoint(b_int32 index, bool updateFrame = true);
  void UpdateFrame();
 
- const EPoint &operator[](eint32 index) const;
- eint32 CountPoints() const;
+    const BPoint &operator[](b_int32 index) const;
+    b_int32 CountPoints() const;
 
- bool MapTo(ERect srcRect, ERect dstRect);
+ bool MapTo(BRect srcRect, BRect dstRect);
 
- const EPoint *Points() const;
+ const BPoint *Points() const;
  void PrintToStream() const;
 
 private:
- ERect fFrame;
- eint32 fCount;
- EPoint *fPts;
+ BRect fFrame;
+    b_int32 fCount;
+ BPoint *fPts;
  bool fNeededToUpdateFrame;
 };
 
 
-inline bool EPolygon::AddPoint(const EPoint &aPt, bool updateFrame)
+inline bool BPolygon::AddPoint(const BPoint &aPt, bool updateFrame)
 {
  return AddPoints(&aPt, 1, updateFrame);
 }
 
 
-inline void EPolygon::RemovePoint(eint32 index, bool updateFrame)
+inline void BPolygon::RemovePoint(b_int32 index, bool updateFrame)
 {
  RemovePoints(index, index, updateFrame);
 }
@@ -46222,23 +46218,23 @@ inline void EPolygon::RemovePoint(eint32 index, bool updateFrame)
 
 
 
-class __attribute__((dllexport)) ERender {
+class __attribute__((dllexport)) BRender {
 public:
- ERender();
- virtual ~ERender();
+    BRender();
+    virtual ~BRender();
 
  bool IsValid() const;
 
- void SetDrawingMode(e_drawing_mode drawing_mode);
- e_drawing_mode DrawingMode() const;
+    void SetDrawingMode(b_drawing_mode drawing_mode);
+ b_drawing_mode DrawingMode() const;
 
- void SetHighColor(e_rgb_color highColor);
- void SetHighColor(euint8 r, euint8 g, euint8 b, euint8 a = 255);
- e_rgb_color HighColor() const;
+    void SetHighColor(b_rgb_color highColor);
+    void SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
+ b_rgb_color HighColor() const;
 
- void SetLowColor(e_rgb_color lowColor);
- void SetLowColor(euint8 r, euint8 g, euint8 b, euint8 a = 255);
- e_rgb_color LowColor() const;
+    void SetLowColor(b_rgb_color lowColor);
+    void SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
+ b_rgb_color LowColor() const;
 
  void SetPenSize(float pen_size);
  float PenSize() const;
@@ -46246,65 +46242,65 @@ public:
  void SetSquarePointStyle(bool state);
  bool IsSquarePointStyle() const;
 
- void FillRect(eint32 x, eint32 y, euint32 width, euint32 height,
-     e_pattern pattern = E_SOLID_HIGH);
- void FillRect(ERect rect, e_pattern pattern = E_SOLID_HIGH);
+    void FillRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height,
+     b_pattern pattern = B_SOLID_HIGH);
+    void FillRect(BRect rect, b_pattern pattern = B_SOLID_HIGH);
 
- void StrokePoint(eint32 x, eint32 y, e_pattern pattern = E_SOLID_HIGH);
- void StrokePoint(EPoint pt, e_pattern pattern = E_SOLID_HIGH);
+    void StrokePoint(b_int32 x, b_int32 y, b_pattern pattern = B_SOLID_HIGH);
+    void StrokePoint(BPoint pt, b_pattern pattern = B_SOLID_HIGH);
 
- void StrokeLine(eint32 x0, eint32 y0, eint32 x1, eint32 y1,
-       e_pattern pattern = E_SOLID_HIGH);
- void StrokeLine(EPoint pt0, EPoint pt1, e_pattern pattern = E_SOLID_HIGH);
+    void StrokeLine(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1,
+       b_pattern pattern = B_SOLID_HIGH);
+    void StrokeLine(BPoint pt0, BPoint pt1, b_pattern pattern = B_SOLID_HIGH);
 
- void StrokeTriangle(eint32 x0, eint32 y0, eint32 x1, eint32 y1, eint32 x2, eint32 y2, e_pattern pattern = E_SOLID_HIGH);
- void StrokeTriangle(EPoint pt1, EPoint pt2, EPoint pt3, e_pattern pattern = E_SOLID_HIGH);
- void FillTriangle(eint32 x0, eint32 y0, eint32 x1, eint32 y1, eint32 x2, eint32 y2,
-         bool stroke_edge = true, e_pattern pattern = E_SOLID_HIGH);
- void FillTriangle(EPoint pt0, EPoint pt1, EPoint pt2, bool stroke_edge = true, e_pattern pattern = E_SOLID_HIGH);
+    void StrokeTriangle(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, b_int32 x2, b_int32 y2, b_pattern pattern = B_SOLID_HIGH);
+    void StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, b_pattern pattern = B_SOLID_HIGH);
+    void FillTriangle(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, b_int32 x2, b_int32 y2,
+         bool stroke_edge = true, b_pattern pattern = B_SOLID_HIGH);
+    void FillTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge = true, b_pattern pattern = B_SOLID_HIGH);
 
- void StrokePolygon(const EPolygon *aPolygon, bool closed = true, e_pattern pattern = E_SOLID_HIGH);
- void StrokePolygon(const EPoint *ptArray, eint32 numPts, bool closed = true, e_pattern pattern = E_SOLID_HIGH);
- void FillPolygon(const EPolygon *aPolygon, bool stroke_edge = true, e_pattern pattern = E_SOLID_HIGH);
- void FillPolygon(const EPoint *ptArray, eint32 numPts, bool stroke_edge = true, e_pattern pattern = E_SOLID_HIGH);
+    void StrokePolygon(const BPolygon *aPolygon, bool closed = true, b_pattern pattern = B_SOLID_HIGH);
+    void StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed = true, b_pattern pattern = B_SOLID_HIGH);
+    void FillPolygon(const BPolygon *aPolygon, bool stroke_edge = true, b_pattern pattern = B_SOLID_HIGH);
+    void FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge = true, b_pattern pattern = B_SOLID_HIGH);
 
- void StrokeEllipse(eint32 x, eint32 y, euint32 width, euint32 height,
-          e_pattern pattern = E_SOLID_HIGH);
- void StrokeEllipse(eint32 xCenter, eint32 yCenter, eint32 xRadius, eint32 yRadius,
-          e_pattern pattern = E_SOLID_HIGH);
- void StrokeEllipse(ERect rect, e_pattern pattern = E_SOLID_HIGH);
- void FillEllipse(eint32 x, eint32 y, euint32 width, euint32 height,
-        bool stroke_edge = true, e_pattern pattern = E_SOLID_HIGH);
- void FillEllipse(eint32 xCenter, eint32 yCenter, eint32 xRadius, eint32 yRadius,
-        bool stroke_edge = true, e_pattern pattern = E_SOLID_HIGH);
- void FillEllipse(ERect rect, bool stroke_edge = true, e_pattern pattern = E_SOLID_HIGH);
+    void StrokeEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height,
+          b_pattern pattern = B_SOLID_HIGH);
+    void StrokeEllipse(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius,
+          b_pattern pattern = B_SOLID_HIGH);
+    void StrokeEllipse(BRect rect, b_pattern pattern = B_SOLID_HIGH);
+    void FillEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height,
+        bool stroke_edge = true, b_pattern pattern = B_SOLID_HIGH);
+    void FillEllipse(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius,
+        bool stroke_edge = true, b_pattern pattern = B_SOLID_HIGH);
+    void FillEllipse(BRect rect, bool stroke_edge = true, b_pattern pattern = B_SOLID_HIGH);
 
- void StrokeArc(eint32 x, eint32 y, euint32 width, euint32 height,
-      eint32 startAngle, eint32 endAngle,
-      e_pattern pattern = E_SOLID_HIGH);
- void StrokeArc(eint32 xCenter, eint32 yCenter, eint32 xRadius, eint32 yRadius,
-      eint32 startAngle, eint32 endAngle,
-      e_pattern pattern = E_SOLID_HIGH);
- void StrokeArc(EPoint ctPt, float xRadius, float yRadius,
+    void StrokeArc(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height,
+                  b_int32 startAngle, b_int32 endAngle,
+      b_pattern pattern = B_SOLID_HIGH);
+    void StrokeArc(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius,
+                  b_int32 startAngle, b_int32 endAngle,
+      b_pattern pattern = B_SOLID_HIGH);
+    void StrokeArc(BPoint ctPt, float xRadius, float yRadius,
       float startAngle, float arcAngle,
-      e_pattern pattern = E_SOLID_HIGH);
- void StrokeArc(ERect rect, float startAngle, float arcAngle, e_pattern pattern = E_SOLID_HIGH);
- void StrokeArc(ERect rect, EPoint start, EPoint end, e_pattern pattern = E_SOLID_HIGH);
+      b_pattern pattern = B_SOLID_HIGH);
+    void StrokeArc(BRect rect, float startAngle, float arcAngle, b_pattern pattern = B_SOLID_HIGH);
+    void StrokeArc(BRect rect, BPoint start, BPoint end, b_pattern pattern = B_SOLID_HIGH);
 
 private:
- e_drawing_mode fDrawingMode;
- e_rgb_color fHighColor;
- e_rgb_color fLowColor;
+ b_drawing_mode fDrawingMode;
+ b_rgb_color fHighColor;
+ b_rgb_color fLowColor;
  float fPenSize;
  bool fSquarePointStyle;
 
- virtual e_status_t InitCheck() const = 0;
- virtual void GetFrame(eint32 *originX, eint32 *originY, euint32 *width, euint32 *height) const = 0;
- virtual void GetPixel(eint32 x, eint32 y, e_rgb_color &color) const = 0;
- virtual void PutPixel(eint32 x, eint32 y, e_rgb_color color) = 0;
- virtual void PutRect(eint32 x, eint32 y, euint32 width, euint32 height, e_rgb_color color);
+ virtual b_status_t InitCheck() const = 0;
+    virtual void GetFrame(b_int32 *originX, b_int32 *originY, b_uint32 *width, b_uint32 *height) const = 0;
+    virtual void GetPixel(b_int32 x, b_int32 y, b_rgb_color &color) const = 0;
+    virtual void PutPixel(b_int32 x, b_int32 y, b_rgb_color color) = 0;
+    virtual void PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, b_rgb_color color);
 
- void drawPixel(eint32 x, eint32 y, e_pattern pattern);
+    void drawPixel(b_int32 x, b_int32 y, b_pattern pattern);
 };
 # 43 "../src/render/Render.cpp" 2
 
@@ -46313,42 +46309,42 @@ private:
 
 
 
-extern bool etk_get_arc_12(EPoint &radius, EPoint &start, EPoint &end, eint32 &x, eint32 &y, EPoint &radius2, float &deltaNext);
+extern bool bhapi_get_arc_12(BPoint &radius, BPoint &start, BPoint &end, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext);
 # 60 "../src/render/Render.cpp"
-class ERenderObject {
+class BRenderObject {
 public:
- ERenderObject();
- virtual ~ERenderObject();
+ BRenderObject();
+ virtual ~BRenderObject();
 
  virtual bool IsValid() const = 0;
- virtual bool Get(eint32 *y, eint32 *minX, eint32 *maxX) const = 0;
+ virtual bool Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const = 0;
  virtual bool Next() = 0;
 
  static int cmp(const void *objectA, const void *objectB);
 };
 
 
-ERenderObject::ERenderObject()
+BRenderObject::BRenderObject()
 {
 }
 
 
-ERenderObject::~ERenderObject()
+BRenderObject::~BRenderObject()
 {
 }
 
 
 int
-ERenderObject::cmp(const void *objectA, const void *objectB)
+BRenderObject::cmp(const void *objectA, const void *objectB)
 {
- const ERenderObject *A = *((const ERenderObject**)objectA);
- const ERenderObject *B = *((const ERenderObject**)objectB);
+ const BRenderObject *A = *((const BRenderObject**)objectA);
+ const BRenderObject *B = *((const BRenderObject**)objectB);
 
  if(A->IsValid() == B->IsValid())
  {
   if(A->IsValid() == false) return 0;
 
-  eint32 yA, yB;
+  b_int32 yA, yB;
   A->Get(&yA, __null, __null);
   B->Get(&yB, __null, __null);
 
@@ -46360,30 +46356,30 @@ ERenderObject::cmp(const void *objectA, const void *objectB)
 }
 
 
-class ERenderLine : public ERenderObject {
+class BRenderLine : public BRenderObject {
 public:
- ERenderLine(EPoint start, EPoint end);
+ BRenderLine(BPoint start, BPoint end);
 
  virtual bool IsValid() const;
- virtual bool Get(eint32 *y, eint32 *minX, eint32 *maxX) const;
+ virtual bool Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const;
  virtual bool Next();
 
 private:
- ELineGenerator fLine;
- eint32 fMinX;
- eint32 fMaxX;
- eint32 fX;
- eint32 fY;
+ BLineGenerator fLine;
+ b_int32 fMinX;
+ b_int32 fMaxX;
+ b_int32 fX;
+ b_int32 fY;
  bool fValid;
 };
 
 
-ERenderLine::ERenderLine(EPoint start, EPoint end)
- : ERenderObject(), fLine(start, end), fValid(false)
+BRenderLine::BRenderLine(BPoint start, BPoint end)
+ : BRenderObject(), fLine(start, end), fValid(false)
 {
  if(start.y > end.y) return;
 
- eint32 step, pixels;
+ b_int32 step, pixels;
 
  if(fLine.Start(fX, fY, step, pixels, false, 1))
  {
@@ -46395,14 +46391,14 @@ ERenderLine::ERenderLine(EPoint start, EPoint end)
 
 
 bool
-ERenderLine::IsValid() const
+BRenderLine::IsValid() const
 {
  return fValid;
 }
 
 
 bool
-ERenderLine::Get(eint32 *y, eint32 *minX, eint32 *maxX) const
+BRenderLine::Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const
 {
  if(fValid == false) return false;
 
@@ -46415,11 +46411,11 @@ ERenderLine::Get(eint32 *y, eint32 *minX, eint32 *maxX) const
 
 
 bool
-ERenderLine::Next()
+BRenderLine::Next()
 {
  if(fValid == false) return false;
 
- eint32 pixels;
+ b_int32 pixels;
 
  fY++;
  if(fLine.Next(fX, pixels) == false) {fValid = false; return false;}
@@ -46431,36 +46427,36 @@ ERenderLine::Next()
 }
 
 
-class ERenderLine2 : public ERenderObject {
+class BRenderLine2 : public BRenderObject {
 public:
- ERenderLine2(EPoint pt0, EPoint pt1, EPoint pt2);
+ BRenderLine2(BPoint pt0, BPoint pt1, BPoint pt2);
 
  virtual bool IsValid() const;
- virtual bool Get(eint32 *y, eint32 *minX, eint32 *maxX) const;
+ virtual bool Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const;
  virtual bool Next();
 
 private:
- ELineGenerator fLine1;
- ELineGenerator fLine2;
+ BLineGenerator fLine1;
+ BLineGenerator fLine2;
 
- eint32 fMinX;
- eint32 fMaxX;
+ b_int32 fMinX;
+ b_int32 fMaxX;
 
- eint32 fX1;
- eint32 fX2;
- eint32 fY1;
- eint32 fY2;
+ b_int32 fX1;
+ b_int32 fX2;
+ b_int32 fY1;
+ b_int32 fY2;
 
  bool fValid;
 };
 
 
-ERenderLine2::ERenderLine2(EPoint pt0, EPoint pt1, EPoint pt2)
- : ERenderObject(), fLine1(pt0, pt1), fLine2(pt1, pt2), fValid(false)
+BRenderLine2::BRenderLine2(BPoint pt0, BPoint pt1, BPoint pt2)
+ : BRenderObject(), fLine1(pt0, pt1), fLine2(pt1, pt2), fValid(false)
 {
  if(pt0.y > pt1.y || pt1.y > pt2.y) return;
 
- eint32 tmp, pixels1, pixels2;
+ b_int32 tmp, pixels1, pixels2;
 
  if(fLine1.Start(fX1, fY1, tmp, pixels1, false, 1) && fLine2.Start(fX2, fY2, tmp, pixels2, false, 1))
  {
@@ -46479,14 +46475,14 @@ ERenderLine2::ERenderLine2(EPoint pt0, EPoint pt1, EPoint pt2)
 
 
 bool
-ERenderLine2::IsValid() const
+BRenderLine2::IsValid() const
 {
  return fValid;
 }
 
 
 bool
-ERenderLine2::Get(eint32 *y, eint32 *minX, eint32 *maxX) const
+BRenderLine2::Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const
 {
  if(fValid == false) return false;
 
@@ -46499,11 +46495,11 @@ ERenderLine2::Get(eint32 *y, eint32 *minX, eint32 *maxX) const
 
 
 bool
-ERenderLine2::Next()
+BRenderLine2::Next()
 {
  if(fValid == false) return false;
 
- eint32 pixels1, pixels2;
+ b_int32 pixels1, pixels2;
  bool line1_has_next = false;
 
  fY1++;
@@ -46532,35 +46528,35 @@ ERenderLine2::Next()
 }
 
 
-class ERenderTriangle : public ERenderLine2 {
+class BRenderTriangle : public BRenderLine2 {
 public:
- ERenderTriangle(EPoint pt0, EPoint pt1, EPoint pt2, bool stroke_edge);
+ BRenderTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge);
 
  virtual bool IsValid() const;
- virtual bool Get(eint32 *y, eint32 *minX, eint32 *maxX) const;
+ virtual bool Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const;
  virtual bool Next();
 
 private:
- ELineGenerator fLine1;
- euint8 fFlags;
+ BLineGenerator fLine1;
+ b_uint8 fFlags;
 
  bool fStrokeEdge;
 
- eint32 fY;
- eint32 fY0;
- eint32 fY1;
+ b_int32 fY;
+ b_int32 fY0;
+ b_int32 fY1;
 
- eint32 fX1;
- eint32 fPixels1;
+ b_int32 fX1;
+ b_int32 fPixels1;
 };
 
 
-ERenderTriangle::ERenderTriangle(EPoint pt0, EPoint pt1, EPoint pt2, bool stroke_edge)
- : ERenderLine2(pt0, pt1, pt2), fLine1(pt0, pt2), fFlags(0x00), fStrokeEdge(stroke_edge)
+BRenderTriangle::BRenderTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge)
+ : BRenderLine2(pt0, pt1, pt2), fLine1(pt0, pt2), fFlags(0x00), fStrokeEdge(stroke_edge)
 {
- eint32 tmp;
+ b_int32 tmp;
 
- if(ERenderLine2::Get(&fY0, __null, __null) == false || fLine1.Start(fX1, fY1, tmp, fPixels1, false, 1) == false) return;
+ if(BRenderLine2::Get(&fY0, __null, __null) == false || fLine1.Start(fX1, fY1, tmp, fPixels1, false, 1) == false) return;
  fY = ((fY0) > (fY1) ? (fY1) : (fY0));
 
  fFlags = 0x03;
@@ -46568,14 +46564,14 @@ ERenderTriangle::ERenderTriangle(EPoint pt0, EPoint pt1, EPoint pt2, bool stroke
 
 
 bool
-ERenderTriangle::IsValid() const
+BRenderTriangle::IsValid() const
 {
  return(fFlags != 0x00);
 }
 
 
 bool
-ERenderTriangle::Get(eint32 *y, eint32 *_minX, eint32 *_maxX) const
+BRenderTriangle::Get(b_int32 *y, b_int32 *_minX, b_int32 *_maxX) const
 {
  if(fFlags == 0x00) return false;
 
@@ -46583,7 +46579,7 @@ ERenderTriangle::Get(eint32 *y, eint32 *_minX, eint32 *_maxX) const
 
  if(_minX || _maxX)
  {
-  eint32 minX = 0, maxX = -1;
+  b_int32 minX = 0, maxX = -1;
 
   if(fFlags != 0x03)
   {
@@ -46591,7 +46587,7 @@ ERenderTriangle::Get(eint32 *y, eint32 *_minX, eint32 *_maxX) const
    {
     if(fFlags == 0x01)
     {
-     ERenderLine2::Get(__null, &minX, &maxX);
+     BRenderLine2::Get(__null, &minX, &maxX);
     }
     else
     {
@@ -46602,8 +46598,8 @@ ERenderTriangle::Get(eint32 *y, eint32 *_minX, eint32 *_maxX) const
   }
   else
   {
-   eint32 minX0, maxX0;
-   ERenderLine2::Get(__null, &minX0, &maxX0);
+   b_int32 minX0, maxX0;
+   BRenderLine2::Get(__null, &minX0, &maxX0);
 
    if(fY < ((fY0) > (fY1) ? (fY0) : (fY1)))
    {
@@ -46642,13 +46638,13 @@ ERenderTriangle::Get(eint32 *y, eint32 *_minX, eint32 *_maxX) const
 
 
 bool
-ERenderTriangle::Next()
+BRenderTriangle::Next()
 {
  if(fFlags == 0x00) return false;
 
  if(fY >= fY0)
  {
-  if(ERenderLine2::Next() == false) fFlags &= ~0x01;
+  if(BRenderLine2::Next() == false) fFlags &= ~0x01;
  }
 
  if(fY >= fY1)
@@ -46662,145 +46658,145 @@ ERenderTriangle::Next()
 }
 
 
-ERender::ERender()
- : fDrawingMode(E_OP_COPY), fPenSize(0), fSquarePointStyle(false)
+BRender::BRender()
+ : fDrawingMode(B_OP_COPY), fPenSize(0), fSquarePointStyle(false)
 {
  fHighColor.set_to(0, 0, 0);
  fLowColor.set_to(255, 255, 255);
 }
 
 
-ERender::~ERender()
+BRender::~BRender()
 {
 }
 
 
 bool
-ERender::IsValid() const
+BRender::IsValid() const
 {
- return(InitCheck() == E_OK);
+ return(InitCheck() == B_OK);
 }
 
 
 void
-ERender::SetDrawingMode(e_drawing_mode drawing_mode)
+BRender::SetDrawingMode(b_drawing_mode drawing_mode)
 {
  fDrawingMode = drawing_mode;
 }
 
 
-e_drawing_mode
-ERender::DrawingMode() const
+b_drawing_mode
+BRender::DrawingMode() const
 {
  return fDrawingMode;
 }
 
 
 void
-ERender::SetHighColor(e_rgb_color highColor)
+BRender::SetHighColor(b_rgb_color highColor)
 {
  fHighColor.set_to(highColor);
 }
 
 
 void
-ERender::SetHighColor(euint8 r, euint8 g, euint8 b, euint8 a)
+BRender::SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
 {
- e_rgb_color color;
+ b_rgb_color color;
  color.set_to(r, g, b, a);
  SetHighColor(color);
 }
 
 
-e_rgb_color
-ERender::HighColor() const
+b_rgb_color
+BRender::HighColor() const
 {
  return fHighColor;
 }
 
 
 void
-ERender::SetLowColor(e_rgb_color lowColor)
+BRender::SetLowColor(b_rgb_color lowColor)
 {
  fLowColor.set_to(lowColor);
 }
 
 
 void
-ERender::SetLowColor(euint8 r, euint8 g, euint8 b, euint8 a)
+BRender::SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
 {
- e_rgb_color color;
+ b_rgb_color color;
  color.set_to(r, g, b, a);
  SetLowColor(color);
 }
 
 
-e_rgb_color
-ERender::LowColor() const
+b_rgb_color
+BRender::LowColor() const
 {
  return fLowColor;
 }
 
 
 void
-ERender::SetPenSize(float pen_size)
+BRender::SetPenSize(float pen_size)
 {
  fPenSize = pen_size;
 }
 
 
 float
-ERender::PenSize() const
+BRender::PenSize() const
 {
  return fPenSize;
 }
 
 
 void
-ERender::SetSquarePointStyle(bool state)
+BRender::SetSquarePointStyle(bool state)
 {
  fSquarePointStyle = state;
 }
 
 
 bool
-ERender::IsSquarePointStyle() const
+BRender::IsSquarePointStyle() const
 {
  return fSquarePointStyle;
 }
 
 
 void
-ERender::PutRect(eint32 x, eint32 y, euint32 width, euint32 height, e_rgb_color color)
+BRender::PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, b_rgb_color color)
 {
  if(width == 0 || height == 0) return;
 
- for(euint32 i = 0; i < height; i++, y++)
+ for(b_uint32 i = 0; i < height; i++, y++)
  {
-  for(euint32 j = 0; j < width; j++) PutPixel(x + j, y, color);
+  for(b_uint32 j = 0; j < width; j++) PutPixel(x + j, y, color);
  }
 }
 
 
-inline bool _is_pixel_high_color(const e_pattern &pattern, eint32 x, eint32 y)
+inline bool _is_pixel_high_color(const b_pattern &pattern, b_int32 x, b_int32 y)
 {
- if(pattern == E_SOLID_HIGH) return true;
- else if(pattern == E_SOLID_LOW) return false;
+ if(pattern == B_SOLID_HIGH) return true;
+ else if(pattern == B_SOLID_LOW) return false;
 
  x %= 8;
  y %= 8;
 
- euint8 pat = pattern.data[y];
+ b_uint8 pat = pattern.data[y];
  if(pat & (1 << (7 - x))) return true;
 
  return false;
 }
 
 
-inline bool _is_line_mixed_color(const e_pattern &pattern, eint32 y, bool &isHighColor)
+inline bool _is_line_mixed_color(const b_pattern &pattern, b_int32 y, bool &isHighColor)
 {
- if(pattern == E_SOLID_HIGH) {isHighColor = true; return false;}
- else if(pattern == E_SOLID_LOW) {isHighColor = false; return false;}
+ if(pattern == B_SOLID_HIGH) {isHighColor = true; return false;}
+ else if(pattern == B_SOLID_LOW) {isHighColor = false; return false;}
 
  y %= 8;
 
@@ -46815,44 +46811,44 @@ inline bool _is_line_mixed_color(const e_pattern &pattern, eint32 y, bool &isHig
 
 
 void
-ERender::drawPixel(eint32 x, eint32 y, e_pattern pattern)
+BRender::drawPixel(b_int32 x, b_int32 y, b_pattern pattern)
 {
  if(!IsValid()) return;
 
- eint32 originX = 0, originY = 0;
- euint32 w = 0, h = 0;
+ b_int32 originX = 0, originY = 0;
+ b_uint32 w = 0, h = 0;
  GetFrame(&originX, &originY, &w, &h);
 
- if(x < originX || y < originY || x > originX + (eint32)w - 1 || y > originY + (eint32)h - 1) return;
+ if(x < originX || y < originY || x > originX + (b_int32)w - 1 || y > originY + (b_int32)h - 1) return;
 
- e_rgb_color src = {0, 0, 0, 255};
- if(fDrawingMode != E_OP_COPY) GetPixel(x, y, src);
- euint32 srcAlpha = src.alpha;
+ b_rgb_color src = {0, 0, 0, 255};
+ if(fDrawingMode != B_OP_COPY) GetPixel(x, y, src);
+ b_uint32 srcAlpha = src.alpha;
 
- e_rgb_color color;
+ b_rgb_color color;
  color.set_to(_is_pixel_high_color(pattern, x, y) ? fHighColor : fLowColor);
 
  switch(fDrawingMode)
  {
-  case E_OP_OVER:
-  case E_OP_ERASE:
-   if(color == E_TRANSPARENT_COLOR || color == fLowColor) return;
-   src.set_to((fDrawingMode == E_OP_ERASE) ? fLowColor : color);
+  case B_OP_OVER:
+  case B_OP_ERASE:
+   if(color == B_TRANSPARENT_COLOR || color == fLowColor) return;
+   src.set_to((fDrawingMode == B_OP_ERASE) ? fLowColor : color);
    src.alpha = srcAlpha;
    break;
 
-  case E_OP_XOR:
+  case B_OP_XOR:
    src.set_to(color.red ^ src.red, color.green ^ src.green, color.blue ^ src.blue, srcAlpha);
    break;
 
-  case E_OP_INVERT:
-   if(color == E_TRANSPARENT_COLOR || color == fLowColor) return;
+  case B_OP_INVERT:
+   if(color == B_TRANSPARENT_COLOR || color == fLowColor) return;
    src.set_to(255 - src.red, 255 - src.green, 255 - src.blue, srcAlpha);
    break;
 
-  case E_OP_SELECT:
+  case B_OP_SELECT:
    {
-    if(color == E_TRANSPARENT_COLOR || color == fLowColor) return;
+    if(color == B_TRANSPARENT_COLOR || color == fLowColor) return;
     if(src.blue == fHighColor.blue && src.green == fHighColor.green && src.red == fHighColor.red)
     {
      src.set_to(fLowColor);
@@ -46866,42 +46862,42 @@ ERender::drawPixel(eint32 x, eint32 y, e_pattern pattern)
    }
    break;
 
-  case E_OP_ADD:
-   if(color == E_TRANSPARENT_COLOR || color == fLowColor) return;
+  case B_OP_ADD:
+   if(color == B_TRANSPARENT_COLOR || color == fLowColor) return;
    src.red += color.red;
    src.green += color.green;
    src.blue += color.blue;
    break;
 
-  case E_OP_SUBTRACT:
-   if(color == E_TRANSPARENT_COLOR || color == fLowColor) return;
+  case B_OP_SUBTRACT:
+   if(color == B_TRANSPARENT_COLOR || color == fLowColor) return;
    src.red -= color.red;
    src.green -= color.green;
    src.blue -= color.blue;
    break;
 
-  case E_OP_BLEND:
-   if(color == E_TRANSPARENT_COLOR || color == fLowColor) return;
-   src.red = (euint8)(((euint16)color.red + (euint16)src.red) / 2U);
-   src.green = (euint8)(((euint16)color.green + (euint16)src.green) / 2U);
-   src.blue = (euint8)(((euint16)color.blue + (euint16)src.blue) / 2U);
+  case B_OP_BLEND:
+   if(color == B_TRANSPARENT_COLOR || color == fLowColor) return;
+   src.red = (b_uint8)(((b_uint16)color.red + (b_uint16)src.red) / 2U);
+   src.green = (b_uint8)(((b_uint16)color.green + (b_uint16)src.green) / 2U);
+   src.blue = (b_uint8)(((b_uint16)color.blue + (b_uint16)src.blue) / 2U);
    break;
 
-  case E_OP_MIN:
-   if(color == E_TRANSPARENT_COLOR || color == fLowColor) return;
+  case B_OP_MIN:
+   if(color == B_TRANSPARENT_COLOR || color == fLowColor) return;
    if(color.red < src.red) src.red = color.red;
    if(color.green < src.green) src.green = color.green;
    if(color.blue < src.blue) src.blue = color.blue;
    break;
 
-  case E_OP_MAX:
-   if(color == E_TRANSPARENT_COLOR || color == fLowColor) return;
+  case B_OP_MAX:
+   if(color == B_TRANSPARENT_COLOR || color == fLowColor) return;
    if(color.red > src.red) src.red = color.red;
    if(color.green > src.green) src.green = color.green;
    if(color.blue > src.blue) src.blue = color.blue;
    break;
 
-  case E_OP_ALPHA:
+  case B_OP_ALPHA:
    {
     if(color.alpha == 0) return;
     src.mix(color);
@@ -46919,38 +46915,38 @@ ERender::drawPixel(eint32 x, eint32 y, e_pattern pattern)
 
 
 void
-ERender::FillRect(eint32 x, eint32 y, euint32 width, euint32 height, e_pattern pattern)
+BRender::FillRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, b_pattern pattern)
 {
  if(width == height && width == 1) {drawPixel(x, y, pattern); return;}
  if(!IsValid() || width == 0 || height == 0) return;
 
- eint32 originX = 0, originY = 0;
- euint32 w = 0, h = 0;
+ b_int32 originX = 0, originY = 0;
+ b_uint32 w = 0, h = 0;
  GetFrame(&originX, &originY, &w, &h);
 
- ERect r((float)x, (float)y, (float)x + (float)width - 1, (float)y + (float)height - 1);
- r &= ERect((float)originX, (float)originY, (float)(originX + (eint32)w - 1), (float)(originY + (eint32)h - 1));
+ BRect r((float)x, (float)y, (float)x + (float)width - 1, (float)y + (float)height - 1);
+ r &= BRect((float)originX, (float)originY, (float)(originX + (b_int32)w - 1), (float)(originY + (b_int32)h - 1));
  if(r.IsValid() == false) return;
 
- x = (eint32)r.left;
- y = (eint32)r.top;
- width = (euint32)r.Width() + 1;
- height = (euint32)r.Height() + 1;
+ x = (b_int32)r.left;
+ y = (b_int32)r.top;
+ width = (b_uint32)r.Width() + 1;
+ height = (b_uint32)r.Height() + 1;
 
- if((pattern == E_SOLID_HIGH || pattern == E_SOLID_LOW) && fDrawingMode == E_OP_COPY)
+ if((pattern == B_SOLID_HIGH || pattern == B_SOLID_LOW) && fDrawingMode == B_OP_COPY)
  {
-  e_rgb_color color;
-  color.set_to(pattern == E_SOLID_HIGH ? fHighColor : fLowColor);
+  b_rgb_color color;
+  color.set_to(pattern == B_SOLID_HIGH ? fHighColor : fLowColor);
   PutRect(x, y, width, height, color);
  }
- else for(euint32 i = 0; i < height; i++, y++)
+ else for(b_uint32 i = 0; i < height; i++, y++)
  {
-  if(fDrawingMode == E_OP_COPY)
+  if(fDrawingMode == B_OP_COPY)
   {
    bool isHighColor;
    if(!_is_line_mixed_color(pattern, y, isHighColor))
    {
-    e_rgb_color color;
+    b_rgb_color color;
     color.set_to(isHighColor ? fHighColor : fLowColor);
 
     PutRect(x, y, width, 1, color);
@@ -46958,41 +46954,41 @@ ERender::FillRect(eint32 x, eint32 y, euint32 width, euint32 height, e_pattern p
    }
   }
 
-  for(euint32 j = 0; j < width; j++) drawPixel(x + j, y, pattern);
+  for(b_uint32 j = 0; j < width; j++) drawPixel(x + j, y, pattern);
  }
 }
 
 
 void
-ERender::FillRect(ERect rect, e_pattern pattern)
+BRender::FillRect(BRect rect, b_pattern pattern)
 {
  if(!IsValid()) return;
 
  rect.Floor();
  if(!rect.IsValid()) return;
 
- FillRect((eint32)rect.left, (eint32)rect.top, (euint32)rect.Width() + 1, (euint32)rect.Height() + 1, pattern);
+ FillRect((b_int32)rect.left, (b_int32)rect.top, (b_uint32)rect.Width() + 1, (b_uint32)rect.Height() + 1, pattern);
 }
 
 
 void
-ERender::StrokePoint(eint32 x, eint32 y, e_pattern pattern)
+BRender::StrokePoint(b_int32 x, b_int32 y, b_pattern pattern)
 {
  if(!IsValid()) return;
 
  if(fPenSize <= 1)
  {
-  eint32 originX = 0, originY = 0;
-  euint32 w = 0, h = 0;
+  b_int32 originX = 0, originY = 0;
+  b_uint32 w = 0, h = 0;
   GetFrame(&originX, &originY, &w, &h);
 
-  if(x < originX || y < originY || x > originX + (eint32)w - 1 || y > originY + (eint32)h - 1) return;
+  if(x < originX || y < originY || x > originX + (b_int32)w - 1 || y > originY + (b_int32)h - 1) return;
 
   drawPixel(x, y, pattern);
  }
  else
  {
-  ERect rect;
+  BRect rect;
   rect.left = (float)x + 0.5f - fPenSize / 2.f;
   rect.top = (float)y + 0.5f - fPenSize / 2.f;
   rect.right = rect.left + fPenSize;
@@ -47005,28 +47001,28 @@ ERender::StrokePoint(eint32 x, eint32 y, e_pattern pattern)
 
 
 void
-ERender::StrokePoint(EPoint pt, e_pattern pattern)
+BRender::StrokePoint(BPoint pt, b_pattern pattern)
 {
  if(!IsValid()) return;
 
  if(fPenSize <= 1)
  {
-  eint32 x, y, originX = 0, originY = 0;
-  euint32 w = 0, h = 0;
+  b_int32 x, y, originX = 0, originY = 0;
+  b_uint32 w = 0, h = 0;
 
   GetFrame(&originX, &originY, &w, &h);
 
   pt.Floor();
-  x = (eint32)pt.x;
-  y = (eint32)pt.y;
+  x = (b_int32)pt.x;
+  y = (b_int32)pt.y;
 
-  if(x < originX || y < originY || x > originX + (eint32)w - 1 || y > originY + (eint32)h - 1) return;
+  if(x < originX || y < originY || x > originX + (b_int32)w - 1 || y > originY + (b_int32)h - 1) return;
 
   drawPixel(x, y, pattern);
  }
  else
  {
-  ERect rect;
+  BRect rect;
   rect.left = pt.x - fPenSize / 2.f;
   rect.top = pt.y - fPenSize / 2.f;
   rect.right = rect.left + fPenSize;
@@ -47039,14 +47035,14 @@ ERender::StrokePoint(EPoint pt, e_pattern pattern)
 
 
 void
-ERender::StrokeLine(eint32 x0, eint32 y0, eint32 x1, eint32 y1, e_pattern pattern)
+BRender::StrokeLine(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, b_pattern pattern)
 {
- StrokeLine(EPoint((float)x0 + 0.5f, (float)y0 + 0.5f), EPoint((float)x1 + 0.5f, (float)y1 + 0.5f), pattern);
+ StrokeLine(BPoint((float)x0 + 0.5f, (float)y0 + 0.5f), BPoint((float)x1 + 0.5f, (float)y1 + 0.5f), pattern);
 }
 
 
 void
-ERender::StrokeLine(EPoint pt0, EPoint pt1, e_pattern pattern)
+BRender::StrokeLine(BPoint pt0, BPoint pt1, b_pattern pattern)
 {
  if(!IsValid()) return;
 
@@ -47055,15 +47051,15 @@ ERender::StrokeLine(EPoint pt0, EPoint pt1, e_pattern pattern)
  if(fPenSize > 1)
  {
 
-  ETK_WARNING("[RENDER]: %s --- not support large pen yet.", __PRETTY_FUNCTION__);
+  BHAPI_WARNING("[RENDER]: %s --- not support large pen yet.", __PRETTY_FUNCTION__);
   return;
  }
  else
  {
-  if(pt0.y > pt1.y) do { EPoint tmp = pt0; pt0 = pt1; pt1 = tmp; } while(false);
+  if(pt0.y > pt1.y) do { BPoint tmp = pt0; pt0 = pt1; pt1 = tmp; } while(false);
 
-  ELineGenerator line(pt0, pt1);
-  eint32 x, y, step, pixels;
+  BLineGenerator line(pt0, pt1);
+  b_int32 x, y, step, pixels;
 
   if(line.Start(x, y, step, pixels, false, 1) == false) return;
   do
@@ -47076,9 +47072,9 @@ ERender::StrokeLine(EPoint pt0, EPoint pt1, e_pattern pattern)
 
 
 void
-ERender::StrokeTriangle(eint32 x0, eint32 y0, eint32 x1, eint32 y1, eint32 x2, eint32 y2, e_pattern pattern)
+BRender::StrokeTriangle(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, b_int32 x2, b_int32 y2, b_pattern pattern)
 {
- EPoint pts[3];
+ BPoint pts[3];
  pts[0].Set((float)x0 + 0.5f, (float)y0 + 0.5f);
  pts[1].Set((float)x1 + 0.5f, (float)y1 + 0.5f);
  pts[2].Set((float)x2 + 0.5f, (float)y2 + 0.5f);
@@ -47087,9 +47083,9 @@ ERender::StrokeTriangle(eint32 x0, eint32 y0, eint32 x1, eint32 y1, eint32 x2, e
 
 
 void
-ERender::StrokeTriangle(EPoint pt1, EPoint pt2, EPoint pt3, e_pattern pattern)
+BRender::StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, b_pattern pattern)
 {
- EPoint pts[3];
+ BPoint pts[3];
  pts[0] = pt1;
  pts[1] = pt2;
  pts[2] = pt3;
@@ -47098,31 +47094,31 @@ ERender::StrokeTriangle(EPoint pt1, EPoint pt2, EPoint pt3, e_pattern pattern)
 
 
 void
-ERender::FillTriangle(eint32 x0, eint32 y0, eint32 x1, eint32 y1, eint32 x2, eint32 y2, bool stroke_edge, e_pattern pattern)
+BRender::FillTriangle(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, b_int32 x2, b_int32 y2, bool stroke_edge, b_pattern pattern)
 {
- FillTriangle(EPoint((float)x0 + 0.5f, (float)y0 + 0.5f),
-       EPoint((float)x1 + 0.5f, (float)y1 + 0.5f),
-       EPoint((float)x2 + 0.5f, (float)y2 + 0.5f),
+ FillTriangle(BPoint((float)x0 + 0.5f, (float)y0 + 0.5f),
+       BPoint((float)x1 + 0.5f, (float)y1 + 0.5f),
+       BPoint((float)x2 + 0.5f, (float)y2 + 0.5f),
        stroke_edge, pattern);
 }
 
 
 void
-ERender::FillTriangle(EPoint pt0, EPoint pt1, EPoint pt2, bool stroke_edge, e_pattern pattern)
+BRender::FillTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge, b_pattern pattern)
 {
  if(!IsValid()) return;
 
 
 
- if(pt0.y > pt1.y) do { EPoint tmp = pt0; pt0 = pt1; pt1 = tmp; } while(false);
- if(pt0.y > pt2.y) do { EPoint tmp = pt0; pt0 = pt2; pt2 = tmp; } while(false);
- if(pt1.y > pt2.y) do { EPoint tmp = pt1; pt1 = pt2; pt2 = tmp; } while(false);
+ if(pt0.y > pt1.y) do { BPoint tmp = pt0; pt0 = pt1; pt1 = tmp; } while(false);
+ if(pt0.y > pt2.y) do { BPoint tmp = pt0; pt0 = pt2; pt2 = tmp; } while(false);
+ if(pt1.y > pt2.y) do { BPoint tmp = pt1; pt1 = pt2; pt2 = tmp; } while(false);
 
- ERenderTriangle triangle(pt0, pt1, pt2, stroke_edge);
+ BRenderTriangle triangle(pt0, pt1, pt2, stroke_edge);
 
  do
  {
-  eint32 y, minX, maxX;
+  b_int32 y, minX, maxX;
   if(triangle.Get(&y, &minX, &maxX) == false) break;
   if(minX <= maxX) FillRect(minX, y, maxX - minX + 1, 1, pattern);
  } while(triangle.Next());
@@ -47130,11 +47126,11 @@ ERender::FillTriangle(EPoint pt0, EPoint pt1, EPoint pt2, bool stroke_edge, e_pa
 
 
 void
-ERender::StrokeEllipse(eint32 x, eint32 y, euint32 width, euint32 height, e_pattern pattern)
+BRender::StrokeEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, b_pattern pattern)
 {
  if(!IsValid() || width == 0 || height == 0) return;
 
- ERect rect;
+ BRect rect;
  rect.SetLeftTop((float)x + 0.5f, (float)y + 0.5f);
  rect.SetRightBottom((float)x + (float)width - 0.5f, (float)y + (float)height - 0.5f);
 
@@ -47143,11 +47139,11 @@ ERender::StrokeEllipse(eint32 x, eint32 y, euint32 width, euint32 height, e_patt
 
 
 void
-ERender::FillEllipse(eint32 x, eint32 y, euint32 width, euint32 height, bool stroke_edge, e_pattern pattern)
+BRender::FillEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bool stroke_edge, b_pattern pattern)
 {
  if(!IsValid() || width == 0 || height == 0) return;
 
- ERect rect;
+ BRect rect;
  rect.SetLeftTop((float)x + 0.5f, (float)y + 0.5f);
  rect.SetRightBottom((float)x + (float)width - 0.5f, (float)y + (float)height - 0.5f);
 
@@ -47156,14 +47152,14 @@ ERender::FillEllipse(eint32 x, eint32 y, euint32 width, euint32 height, bool str
 
 
 void
-ERender::StrokeEllipse(eint32 xCenter, eint32 yCenter, eint32 xRadius, eint32 yRadius, e_pattern pattern)
+BRender::StrokeEllipse(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius, b_pattern pattern)
 {
  if(!IsValid()) return;
 
  if(xRadius < 0) xRadius = -xRadius;
  if(yRadius < 0) yRadius = -yRadius;
 
- ERect rect;
+ BRect rect;
  rect.left = (float)(xCenter - xRadius);
  rect.right = (float)(xCenter + xRadius);
  rect.top = (float)(yCenter - yRadius);
@@ -47176,14 +47172,14 @@ ERender::StrokeEllipse(eint32 xCenter, eint32 yCenter, eint32 xRadius, eint32 yR
 
 
 void
-ERender::FillEllipse(eint32 xCenter, eint32 yCenter, eint32 xRadius, eint32 yRadius, bool stroke_edge, e_pattern pattern)
+BRender::FillEllipse(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius, bool stroke_edge, b_pattern pattern)
 {
  if(!IsValid()) return;
 
  if(xRadius < 0) xRadius = -xRadius;
  if(yRadius < 0) yRadius = -yRadius;
 
- ERect rect;
+ BRect rect;
  rect.left = (float)(xCenter - xRadius);
  rect.right = (float)(xCenter + xRadius);
  rect.top = (float)(yCenter - yRadius);
@@ -47196,7 +47192,7 @@ ERender::FillEllipse(eint32 xCenter, eint32 yCenter, eint32 xRadius, eint32 yRad
 
 
 void
-ERender::StrokeEllipse(ERect rect, e_pattern pattern)
+BRender::StrokeEllipse(BRect rect, b_pattern pattern)
 {
  if(!IsValid() || !rect.IsValid()) return;
 
@@ -47205,29 +47201,29 @@ ERender::StrokeEllipse(ERect rect, e_pattern pattern)
  if(fPenSize > 1)
  {
 
-  ETK_WARNING("[RENDER]: %s --- not support large pen yet.", __PRETTY_FUNCTION__);
+  BHAPI_WARNING("[RENDER]: %s --- not support large pen yet.", __PRETTY_FUNCTION__);
   return;
  }
  else
  {
-  EPoint radius;
+  BPoint radius;
   radius.x = rect.Width() / 2.f;
   radius.y = rect.Height() / 2.f;
 
-  EPoint start, end, radius2;
+  BPoint start, end, radius2;
   start.Set(-radius.x, 0);
   end.Set(radius.x, 0);
   radius2.Set(-1, -1);
 
-  eint32 x, y;
-  eint32 xCenter, yCenter;
+  b_int32 x, y;
+  b_int32 xCenter, yCenter;
   float deltaNext;
 
-  EPoint center = rect.Center().FloorSelf();
-  xCenter = (eint32)center.x;
-  yCenter = (eint32)center.y;
+  BPoint center = rect.Center().FloorSelf();
+  xCenter = (b_int32)center.x;
+  yCenter = (b_int32)center.y;
 
-  while(etk_get_arc_12(radius, start, end, x, y, radius2, deltaNext))
+  while(bhapi_get_arc_12(radius, start, end, x, y, radius2, deltaNext))
   {
    if(x > 0) break;
 
@@ -47243,33 +47239,33 @@ ERender::StrokeEllipse(ERect rect, e_pattern pattern)
 
 
 void
-ERender::FillEllipse(ERect rect, bool stroke_edge, e_pattern pattern)
+BRender::FillEllipse(BRect rect, bool stroke_edge, b_pattern pattern)
 {
  if(!IsValid() || !rect.IsValid()) return;
 
 
 
- EPoint radius;
+ BPoint radius;
  radius.x = rect.Width() / 2.f;
  radius.y = rect.Height() / 2.f;
 
- EPoint start, end, radius2;
+ BPoint start, end, radius2;
  start.Set(-radius.x, 0);
  end.Set(radius.x, 0);
  radius2.Set(-1, -1);
 
- eint32 x, y, old_x = 0, old_y = 0, last_y = 0;
- eint32 xCenter, yCenter;
+ b_int32 x, y, old_x = 0, old_y = 0, last_y = 0;
+ b_int32 xCenter, yCenter;
  float deltaNext;
  bool first = true;
 
- EPoint center = rect.Center().FloorSelf();
- xCenter = (eint32)center.x;
- yCenter = (eint32)center.y;
+ BPoint center = rect.Center().FloorSelf();
+ xCenter = (b_int32)center.x;
+ yCenter = (b_int32)center.y;
 
  while(true)
  {
-  bool status = etk_get_arc_12(radius, start, end, x, y, radius2, deltaNext);
+  bool status = bhapi_get_arc_12(radius, start, end, x, y, radius2, deltaNext);
 
   if(first)
   {
@@ -47302,12 +47298,12 @@ ERender::FillEllipse(ERect rect, bool stroke_edge, e_pattern pattern)
 
 
 void
-ERender::StrokeArc(eint32 x, eint32 y, euint32 width, euint32 height,
-     eint32 startAngle, eint32 endAngle, e_pattern pattern)
+BRender::StrokeArc(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height,
+     b_int32 startAngle, b_int32 endAngle, b_pattern pattern)
 {
  if(!IsValid() || width == 0 || height == 0) return;
 
- ERect rect;
+ BRect rect;
  rect.SetLeftTop((float)x + 0.5f, (float)y + 0.5f);
  rect.SetRightBottom((float)x + (float)width - 0.5f, (float)y + (float)height - 0.5f);
 
@@ -47316,35 +47312,35 @@ ERender::StrokeArc(eint32 x, eint32 y, euint32 width, euint32 height,
 
 
 void
-ERender::StrokeArc(eint32 xCenter, eint32 yCenter, eint32 xRadius, eint32 yRadius,
-     eint32 startAngle, eint32 endAngle, e_pattern pattern)
+BRender::StrokeArc(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius,
+     b_int32 startAngle, b_int32 endAngle, b_pattern pattern)
 {
  if(!IsValid()) return;
 
- EPoint ctPt((float)xCenter + 0.5f, (float)yCenter + 0.5f);
+ BPoint ctPt((float)xCenter + 0.5f, (float)yCenter + 0.5f);
 
  StrokeArc(ctPt, (float)xRadius, (float)yRadius, (float)startAngle / 64.f, (float)(endAngle - startAngle) / 64.f, pattern);
 }
 
 
 void
-ERender::StrokeArc(EPoint ctPt, float xRadius, float yRadius, float startAngle, float arcAngle, e_pattern pattern)
+BRender::StrokeArc(BPoint ctPt, float xRadius, float yRadius, float startAngle, float arcAngle, b_pattern pattern)
 {
  if(!IsValid()) return;
 
  if(xRadius < 0) xRadius = -xRadius;
  if(yRadius < 0) yRadius = -yRadius;
 
- ERect rect;
- rect.SetLeftTop(ctPt - EPoint(xRadius, yRadius));
- rect.SetRightBottom(ctPt + EPoint(xRadius, yRadius));
+ BRect rect;
+ rect.SetLeftTop(ctPt - BPoint(xRadius, yRadius));
+ rect.SetRightBottom(ctPt + BPoint(xRadius, yRadius));
 
  StrokeArc(rect, startAngle, arcAngle, pattern);
 }
 
 
 void
-ERender::StrokeArc(ERect rect, float startAngle, float arcAngle, e_pattern pattern)
+BRender::StrokeArc(BRect rect, float startAngle, float arcAngle, b_pattern pattern)
 {
  if(!IsValid() || !rect.IsValid()) return;
 
@@ -47352,11 +47348,11 @@ ERender::StrokeArc(ERect rect, float startAngle, float arcAngle, e_pattern patte
  if(arcAngle >= 360.f || arcAngle <= -360.f) arcAngle = 360;
  if(startAngle < 0) startAngle += 360.f;
 
- EPoint radius;
+ BPoint radius;
  radius.x = rect.Width() / 2.f;
  radius.y = rect.Height() / 2.f;
 
- EPoint start, end;
+ BPoint start, end;
  start.x = rect.Center().x + radius.x * (float)cos(3.14159265358979323846 * (double)startAngle / 180.f);
  start.y = rect.Center().y - radius.y * (float)sin(3.14159265358979323846 * (double)startAngle / 180.f);
  end.x = rect.Center().x + radius.x * (float)cos(3.14159265358979323846 * (double)(startAngle + arcAngle) / 180.f);
@@ -47367,7 +47363,7 @@ ERender::StrokeArc(ERect rect, float startAngle, float arcAngle, e_pattern patte
 
 
 void
-ERender::StrokeArc(ERect rect, EPoint start, EPoint end, e_pattern pattern)
+BRender::StrokeArc(BRect rect, BPoint start, BPoint end, b_pattern pattern)
 {
  if(!IsValid() || !rect.IsValid()) return;
 
@@ -47376,14 +47372,14 @@ ERender::StrokeArc(ERect rect, EPoint start, EPoint end, e_pattern pattern)
  if(fPenSize > 1)
  {
 
-  ETK_WARNING("[RENDER]: %s --- not support large pen yet.", __PRETTY_FUNCTION__);
+  BHAPI_WARNING("[RENDER]: %s --- not support large pen yet.", __PRETTY_FUNCTION__);
   return;
  }
  else
  {
-  EArcGenerator arc(rect.Center(), rect.Width() / 2.f, rect.Height() / 2.f, start, end);
+  BArcGenerator arc(rect.Center(), rect.Width() / 2.f, rect.Height() / 2.f, start, end);
 
-  eint32 x, y, step, pixels, centerY = (eint32)floor((double)rect.Center().y);
+  b_int32 x, y, step, pixels, centerY = (b_int32)floor((double)rect.Center().y);
   bool firstTime = true;
   bool both = false;
 
@@ -47404,7 +47400,7 @@ ERender::StrokeArc(ERect rect, EPoint start, EPoint end, e_pattern pattern)
     FillRect(x, y, 1, 1 + pixels, pattern);
     if(both)
     {
-     eint32 y1 = centerY - (y - centerY) - pixels;
+     b_int32 y1 = centerY - (y - centerY) - pixels;
      if(y1 == y + pixels) {y1--; pixels--;}
      if(pixels > 0) FillRect(x, y1, 1, 1 + pixels, pattern);
     }
@@ -47414,7 +47410,7 @@ ERender::StrokeArc(ERect rect, EPoint start, EPoint end, e_pattern pattern)
     FillRect(x, y + pixels, 1, 1 - pixels, pattern);
     if(both)
     {
-     eint32 y1 = centerY - (y - centerY);
+     b_int32 y1 = centerY - (y - centerY);
      if(y1 == y) {y1++; pixels++;}
      if(pixels < 0) FillRect(x, y1, 1, 1 - pixels, pattern);
     }
@@ -47424,21 +47420,21 @@ ERender::StrokeArc(ERect rect, EPoint start, EPoint end, e_pattern pattern)
 }
 
 
-static bool etk_get_line_intersection(EPoint line0_start, EPoint line0_end, EPoint line1_start, EPoint line1_end,
-          EPoint *pt, bool line0_extend = false, bool line1_extend = false)
+static bool bhapi_get_line_intersection(BPoint line0_start, BPoint line0_end, BPoint line1_start, BPoint line1_end,
+          BPoint *pt, bool line0_extend = false, bool line1_extend = false)
 {
  if(pt == __null) return false;
 
  if(line0_start == line1_start || line0_start == line1_end) {*pt = line0_start; return true;}
  if(line0_end == line1_end) {*pt = line0_end; return true;}
 
- ERect rect0, rect1;
+ BRect rect0, rect1;
  rect0.SetLeftTop(((line0_start.x) > (line0_end.x) ? (line0_end.x) : (line0_start.x)), ((line0_start.y) > (line0_end.y) ? (line0_end.y) : (line0_start.y)));
  rect0.SetRightBottom(((line0_start.x) > (line0_end.x) ? (line0_start.x) : (line0_end.x)), ((line0_start.y) > (line0_end.y) ? (line0_start.y) : (line0_end.y)));
  rect1.SetLeftTop(((line1_start.x) > (line1_end.x) ? (line1_end.x) : (line1_start.x)), ((line1_start.y) > (line1_end.y) ? (line1_end.y) : (line1_start.y)));
  rect1.SetRightBottom(((line1_start.x) > (line1_end.x) ? (line1_start.x) : (line1_end.x)), ((line1_start.y) > (line1_end.y) ? (line1_start.y) : (line1_end.y)));
 
- ERect r = (rect0 & rect1);
+ BRect r = (rect0 & rect1);
  if(r.IsValid() == false && line0_extend == false && line1_extend == false) return false;
 
  if(r.LeftTop() == r.RightBottom())
@@ -47451,8 +47447,8 @@ static bool etk_get_line_intersection(EPoint line0_start, EPoint line0_end, EPoi
   if(line0_extend == false && line1_extend == false) return false;
  }
 
- EPoint delta0 = line0_end - line0_start;
- EPoint delta1 = line1_end - line1_start;
+ BPoint delta0 = line0_end - line0_start;
+ BPoint delta1 = line1_end - line1_start;
 
  float a = delta0.y * delta1.x - delta1.y * delta0.x;
  if(a == 0.f || line0_end == line1_start)
@@ -47479,7 +47475,7 @@ static bool etk_get_line_intersection(EPoint line0_start, EPoint line0_end, EPoi
 
 
 void
-ERender::StrokePolygon(const EPolygon *aPolygon, bool closed, e_pattern pattern)
+BRender::StrokePolygon(const BPolygon *aPolygon, bool closed, b_pattern pattern)
 {
  if(!IsValid() || aPolygon == __null) return;
  StrokePolygon(aPolygon->Points(), aPolygon->CountPoints(), closed, pattern);
@@ -47488,62 +47484,62 @@ ERender::StrokePolygon(const EPolygon *aPolygon, bool closed, e_pattern pattern)
 
 
 
-static void include_region(eint64 *region, eint32 *count, eint32 minX, eint32 maxX)
+static void include_region(b_int64 *region, b_int32 *count, b_int32 minX, b_int32 maxX)
 {
  if(minX > maxX) return;
 
- eint32 i = 0;
+ b_int32 i = 0;
  while(i < *count)
  {
-  eint64 v0 = *(region + i);
+  b_int64 v0 = *(region + i);
 
-  if(((((eint32)(v0 >> 32)) > (minX) ? ((eint32)(v0 >> 32)) : (minX)) <= (((eint32)(v0 & 0xffffffff)) > (maxX) ? (maxX) : ((eint32)(v0 & 0xffffffff))) ? ((v0 = (((eint64)(((eint32)(v0 >> 32)) > (minX) ? (minX) : ((eint32)(v0 >> 32)))) << 32) | (eint64)(((eint32)(v0 & 0xffffffff)) > (maxX) ? ((eint32)(v0 & 0xffffffff)) : (maxX))), true) : false) == false) {i++; continue;}
+  if(((((b_int32)(v0 >> 32)) > (minX) ? ((b_int32)(v0 >> 32)) : (minX)) <= (((b_int32)(v0 & 0xffffffff)) > (maxX) ? (maxX) : ((b_int32)(v0 & 0xffffffff))) ? ((v0 = (((b_int64)(((b_int32)(v0 >> 32)) > (minX) ? (minX) : ((b_int32)(v0 >> 32)))) << 32) | (b_int64)(((b_int32)(v0 & 0xffffffff)) > (maxX) ? ((b_int32)(v0 & 0xffffffff)) : (maxX))), true) : false) == false) {i++; continue;}
 
-  minX = (eint32)(v0 >> 32);
-  maxX = (eint32)(v0 & 0xffffffff);
+  minX = (b_int32)(v0 >> 32);
+  maxX = (b_int32)(v0 & 0xffffffff);
 
-  if(i < *count - 1) memmove(region + i, region + i + 1, (size_t)(*count - i - 1) * sizeof(eint64));
+  if(i < *count - 1) memmove(region + i, region + i + 1, (size_t)(*count - i - 1) * sizeof(b_int64));
   (*count) -= 1;
  }
 
- *(region + ((*count)++)) = (((eint64)minX) << 32) | (eint64)maxX;
+ *(region + ((*count)++)) = (((b_int64)minX) << 32) | (b_int64)maxX;
 }
 
 
 
-static void etk_stroke_objects(ERender *render, EList *objects, e_pattern pattern)
+static void bhapi_stroke_objects(BRender *render, BList *objects, b_pattern pattern)
 {
  if(objects->CountItems() <= 0) return;
 
- ERenderObject *aObject;
+ BRenderObject *aObject;
 
- objects->SortItems(ERenderObject::cmp);
+ objects->SortItems(BRenderObject::cmp);
 
- eint64 *region = (eint64*)malloc(sizeof(eint64) * objects->CountItems());
+ b_int64 *region = (b_int64*)malloc(sizeof(b_int64) * objects->CountItems());
  if(region == __null)
  {
-  while((aObject = (ERenderObject*)objects->RemoveItem((eint32)0)) != __null) delete aObject;
+  while((aObject = (BRenderObject*)objects->RemoveItem((b_int32)0)) != __null) delete aObject;
   return;
  }
 
  while(objects->CountItems() > 0)
  {
-  eint32 curY, tmpY, minX, maxX;
-  eint32 count = 0;
+  b_int32 curY, tmpY, minX, maxX;
+  b_int32 count = 0;
 
-  aObject = (ERenderObject*)objects->FirstItem();
+  aObject = (BRenderObject*)objects->FirstItem();
   if(aObject->Get(&curY, &minX, &maxX) == false)
   {
-   objects->RemoveItem((eint32)0);
+   objects->RemoveItem((b_int32)0);
    delete aObject;
    continue;
   }
 
   include_region(region, &count, minX, maxX);
 
-  for(eint32 i = 1; i < objects->CountItems(); i++)
+  for(b_int32 i = 1; i < objects->CountItems(); i++)
   {
-   aObject = (ERenderObject*)objects->ItemAt(i);
+   aObject = (BRenderObject*)objects->ItemAt(i);
 
    if(aObject->Get(&tmpY, &minX, &maxX) == false)
    {
@@ -47559,13 +47555,13 @@ static void etk_stroke_objects(ERender *render, EList *objects, e_pattern patter
    include_region(region, &count, minX, maxX);
   }
 
-  ((ERenderObject*)objects->FirstItem())->Next();
+  ((BRenderObject*)objects->FirstItem())->Next();
 
-  for(eint32 i = 0; i < count; i++)
+  for(b_int32 i = 0; i < count; i++)
   {
-   eint64 v = *(region + i);
-   minX = (eint32)(v >> 32);
-   maxX = (eint32)(v & 0xffffffff);
+   b_int64 v = *(region + i);
+   minX = (b_int32)(v >> 32);
+   maxX = (b_int32)(v & 0xffffffff);
 
    render->FillRect(minX, curY, maxX - minX + 1, 1, pattern);
   }
@@ -47576,7 +47572,7 @@ static void etk_stroke_objects(ERender *render, EList *objects, e_pattern patter
 
 
 void
-ERender::StrokePolygon(const EPoint *ptArray, eint32 numPts, bool closed, e_pattern pattern)
+BRender::StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed, b_pattern pattern)
 {
  if(!IsValid() || ptArray == __null || numPts <= 0) return;
 
@@ -47591,44 +47587,44 @@ ERender::StrokePolygon(const EPoint *ptArray, eint32 numPts, bool closed, e_patt
  if(fPenSize > 1)
  {
 
-  ETK_WARNING("[RENDER]: %s --- not support large pen yet.", __PRETTY_FUNCTION__);
+  BHAPI_WARNING("[RENDER]: %s --- not support large pen yet.", __PRETTY_FUNCTION__);
   return;
  }
  else
  {
-  EList lines;
-  EPoint pt0, pt1;
+  BList lines;
+  BPoint pt0, pt1;
 
-  for(eint32 k = 0; k < numPts; k++)
+  for(b_int32 k = 0; k < numPts; k++)
   {
    if(k == numPts - 1 && (closed == false || *(ptArray + k) == *ptArray)) break;
 
    pt0 = *(ptArray + k);
    pt1 = *(ptArray + (k < numPts - 1 ? k + 1 : 0));
 
-   if(pt0.y > pt1.y) do { EPoint tmp = pt0; pt0 = pt1; pt1 = tmp; } while(false);
-   ERenderLine *aLine = new ERenderLine(pt0, pt1);
+   if(pt0.y > pt1.y) do { BPoint tmp = pt0; pt0 = pt1; pt1 = tmp; } while(false);
+   BRenderLine *aLine = new BRenderLine(pt0, pt1);
 
    if(lines.AddItem(aLine) == false) {delete aLine; break;}
   }
 
-  etk_stroke_objects(this, &lines, pattern);
+  bhapi_stroke_objects(this, &lines, pattern);
  }
 }
 
 
 void
-ERender::FillPolygon(const EPolygon *aPolygon, bool stroke_edge, e_pattern pattern)
+BRender::FillPolygon(const BPolygon *aPolygon, bool stroke_edge, b_pattern pattern)
 {
  if(!IsValid() || aPolygon == __null) return;
  FillPolygon(aPolygon->Points(), aPolygon->CountPoints(), stroke_edge, pattern);
 }
 # 1393 "../src/render/Render.cpp"
 void
-ERender::FillPolygon(const EPoint *ptArray, eint32 numPts, bool stroke_edge, e_pattern pattern)
+BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, b_pattern pattern)
 {
- EPoint *aPt = __null;
- EPolygon *aPolygon = __null;
+ BPoint *aPt = __null;
+ BPolygon *aPolygon = __null;
 
  if(!IsValid() || ptArray == __null || numPts <= 0) return;
 
@@ -47647,14 +47643,14 @@ ERender::FillPolygon(const EPoint *ptArray, eint32 numPts, bool stroke_edge, e_p
   return;
  }
 
- EList pts(numPts);
+ BList pts(numPts);
  bool readyForDraw = true;
 
- for(eint32 i = 0; i < numPts; i++)
+ for(b_int32 i = 0; i < numPts; i++)
  {
   if(!(i == 0 || ptArray[i] != ptArray[i - 1])) continue;
 
-  aPt = new EPoint(ptArray[i]);
+  aPt = new BPoint(ptArray[i]);
   if(pts.AddItem(aPt)) continue;
 
   delete aPt;
@@ -47662,29 +47658,29 @@ ERender::FillPolygon(const EPoint *ptArray, eint32 numPts, bool stroke_edge, e_p
   break;
  }
 
- EPoint psPt, pePt, sPt, ePt, iPt;
- EList polygons;
- EPolygon tmp;
+ BPoint psPt, pePt, sPt, ePt, iPt;
+ BList polygons;
+ BPolygon tmp;
 
- for(eint32 i = 2; readyForDraw && i <= pts.CountItems(); i++)
+ for(b_int32 i = 2; readyForDraw && i <= pts.CountItems(); i++)
  {
   if(i < 2) continue;
 
-  sPt = *((EPoint*)pts.ItemAt(i - 1));
-  ePt = (i < pts.CountItems() ? *((EPoint*)pts.ItemAt(i)) : *((EPoint*)pts.FirstItem()));
+  sPt = *((BPoint*)pts.ItemAt(i - 1));
+  ePt = (i < pts.CountItems() ? *((BPoint*)pts.ItemAt(i)) : *((BPoint*)pts.FirstItem()));
 
-  for(eint32 k = i; readyForDraw && k >= 2; k--)
+  for(b_int32 k = i; readyForDraw && k >= 2; k--)
   {
-   psPt = *((EPoint*)pts.ItemAt(k - 2));
-   pePt = *((EPoint*)pts.ItemAt(k - 1));
+   psPt = *((BPoint*)pts.ItemAt(k - 2));
+   pePt = *((BPoint*)pts.ItemAt(k - 1));
 
-   if(etk_get_line_intersection(psPt, pePt, sPt, ePt, &iPt) == false ||
+   if(bhapi_get_line_intersection(psPt, pePt, sPt, ePt, &iPt) == false ||
       iPt == sPt || (iPt == ePt && i == pts.CountItems())) continue;
 
-   aPolygon = new EPolygon(&iPt, 1);
-   for(eint32 m = k - 1; m < i; m++)
+   aPolygon = new BPolygon(&iPt, 1);
+   for(b_int32 m = k - 1; m < i; m++)
    {
-    aPt = (EPoint*)pts.ItemAt(k - 1);
+    aPt = (BPoint*)pts.ItemAt(k - 1);
     if(aPt == __null || aPolygon->AddPoints(aPt, 1, false) == false) break;
 
     if(m == i - 1) *aPt = iPt;
@@ -47704,32 +47700,32 @@ ERender::FillPolygon(const EPoint *ptArray, eint32 numPts, bool stroke_edge, e_p
   }
  }
 
- while((aPt = (EPoint*)pts.RemoveItem((eint32)0)) != __null)
+ while((aPt = (BPoint*)pts.RemoveItem((b_int32)0)) != __null)
  {
   if(readyForDraw) readyForDraw = tmp.AddPoints(aPt, 1, false);
   delete aPt;
  }
 
  aPolygon = &tmp;
- EList objects;
+ BList objects;
 
  do {
-  if(stroke_edge) for(eint32 i = 0; readyForDraw && i < aPolygon->CountPoints(); i++)
+  if(stroke_edge) for(b_int32 i = 0; readyForDraw && i < aPolygon->CountPoints(); i++)
   {
    sPt = (*aPolygon)[i];
    ePt = (*aPolygon)[(i < aPolygon->CountPoints() - 1) ? i + 1 : 0];
 
-   if(sPt.y > ePt.y) do { EPoint tmp = sPt; sPt = ePt; ePt = tmp; } while(false);
-   ERenderLine *aLine = new ERenderLine(sPt, ePt);
+   if(sPt.y > ePt.y) do { BPoint tmp = sPt; sPt = ePt; ePt = tmp; } while(false);
+   BRenderLine *aLine = new BRenderLine(sPt, ePt);
    if(objects.AddItem(aLine) == false) {delete aLine; readyForDraw = false; break;}
   }
 
   while(readyForDraw && aPolygon->CountPoints() > 0)
   {
-   EPolygon drawingPolygon;
+   BPolygon drawingPolygon;
 
-   eint32 flags[2] = {0, 0};
-   for(eint32 i = 0; i < aPolygon->CountPoints(); i++)
+   b_int32 flags[2] = {0, 0};
+   for(b_int32 i = 0; i < aPolygon->CountPoints(); i++)
    {
     sPt = (*aPolygon)[i == 0 ? aPolygon->CountPoints() - 1: i - 1];
     iPt = (*aPolygon)[i];
@@ -47753,26 +47749,26 @@ ERender::FillPolygon(const EPoint *ptArray, eint32 numPts, bool stroke_edge, e_p
    else
    {
 
-    ETK_WARNING("[RENDER]: %s --- TODO", __PRETTY_FUNCTION__);
+    BHAPI_WARNING("[RENDER]: %s --- TODO", __PRETTY_FUNCTION__);
     break;
    }
 
    while(readyForDraw)
    {
-    EPoint pt0 = drawingPolygon[0];
-    EPoint pt1 = drawingPolygon[((0) > (drawingPolygon.CountPoints() - 2) ? (0) : (drawingPolygon.CountPoints() - 2))];
-    EPoint pt2 = drawingPolygon[drawingPolygon.CountPoints() - 1];
+    BPoint pt0 = drawingPolygon[0];
+    BPoint pt1 = drawingPolygon[((0) > (drawingPolygon.CountPoints() - 2) ? (0) : (drawingPolygon.CountPoints() - 2))];
+    BPoint pt2 = drawingPolygon[drawingPolygon.CountPoints() - 1];
 
-    if(pt0.y > pt1.y) do { EPoint tmp = pt0; pt0 = pt1; pt1 = tmp; } while(false);
+    if(pt0.y > pt1.y) do { BPoint tmp = pt0; pt0 = pt1; pt1 = tmp; } while(false);
     if(drawingPolygon.CountPoints() > 3)
     {
-     ERenderLine *aLine = new ERenderLine(pt0, pt1);
+     BRenderLine *aLine = new BRenderLine(pt0, pt1);
      if(objects.AddItem(aLine) == false) {delete aLine; readyForDraw = false; break;}
     }
 
-    if(pt0.y > pt2.y) do { EPoint tmp = pt0; pt0 = pt2; pt2 = tmp; } while(false);
-    if(pt1.y > pt2.y) do { EPoint tmp = pt1; pt1 = pt2; pt2 = tmp; } while(false);
-    ERenderTriangle *aTriangle = new ERenderTriangle(pt0, pt1, pt2, false);
+    if(pt0.y > pt2.y) do { BPoint tmp = pt0; pt0 = pt2; pt2 = tmp; } while(false);
+    if(pt1.y > pt2.y) do { BPoint tmp = pt1; pt1 = pt2; pt2 = tmp; } while(false);
+    BRenderTriangle *aTriangle = new BRenderTriangle(pt0, pt1, pt2, false);
     if(objects.AddItem(aTriangle) == false) {delete aTriangle; readyForDraw = false; break;}
 
     if(drawingPolygon.CountPoints() <= 3) break;
@@ -47781,15 +47777,15 @@ ERender::FillPolygon(const EPoint *ptArray, eint32 numPts, bool stroke_edge, e_p
   }
 
   if(aPolygon != (&tmp)) delete aPolygon;
- } while((aPolygon = (EPolygon*)polygons.RemoveItem((eint32)0)) != __null);
+ } while((aPolygon = (BPolygon*)polygons.RemoveItem((b_int32)0)) != __null);
 
  if(readyForDraw)
  {
-  etk_stroke_objects(this, &objects, pattern);
+  bhapi_stroke_objects(this, &objects, pattern);
  }
  else
  {
-  ERenderObject *aObject;
-  while((aObject = (ERenderObject*)objects.RemoveItem((eint32)0)) != __null) delete aObject;
+  BRenderObject *aObject;
+  while((aObject = (BRenderObject*)objects.RemoveItem((b_int32)0)) != __null) delete aObject;
  }
 }

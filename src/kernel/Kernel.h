@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_KERNEL_H__
-#define __ETK_KERNEL_H__
+#ifndef __BHAPI_KERNEL_H__
+#define __BHAPI_KERNEL_H__
 
 #include "OS.h"
 
@@ -37,207 +37,207 @@ extern "C" {
 #endif /* __cplusplus */
 
 /* time functions */
-_IMPEXP_ETK euint32	etk_real_time_clock(void);
-_IMPEXP_ETK e_bigtime_t	etk_real_time_clock_usecs(void);
-_IMPEXP_ETK e_bigtime_t	etk_system_boot_time(void); /* system boot time in microseconds */
-_IMPEXP_ETK e_bigtime_t etk_system_time(void); /* time since booting in microseconds */
+_IMPEXP_BHAPI b_uint32	bhapi_real_time_clock(void);
+_IMPEXP_BHAPI b_bigtime_t	bhapi_real_time_clock_usecs(void);
+_IMPEXP_BHAPI b_bigtime_t	bhapi_system_boot_time(void); /* system boot time in microseconds */
+_IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void); /* time since booting in microseconds */
 
 /* area functions */
-typedef struct etk_area_info {
-	char		name[E_OS_NAME_LENGTH + 1];
+typedef struct bhapi_area_info {
+    char		name[B_OS_NAME_LENGTH + 1];
 	size_t		size;
-	euint32		protection;
+    b_uint32		protection;
 	void		*address;
 	char		domain[5];
-} etk_area_info;
+} bhapi_area_info;
 
-#define ETK_AREA_SYSTEM_SEMAPHORE_DOMAIN	"ssem"
-#define ETK_AREA_SYSTEM_PORT_DOMAIN		"spot"
-#define ETK_AREA_USER_DOMAIN			"user"
+#define BHAPI_AREA_SYSTEM_SEMAPHORE_DOMAIN	"ssem"
+#define BHAPI_AREA_SYSTEM_PORT_DOMAIN		"spot"
+#define BHAPI_AREA_USER_DOMAIN			"user"
 
-typedef enum etk_area_access {
-	ETK_AREA_ACCESS_OWNER = 0,
-	ETK_AREA_ACCESS_GROUP_READ = 1,
-	ETK_AREA_ACCESS_GROUP_WRITE = 1 << 1,
-	ETK_AREA_ACCESS_OTHERS_READ = 1 << 2,
-	ETK_AREA_ACCESS_OTHERS_WRITE = 1 << 3,
-	ETK_AREA_ACCESS_ALL = 0xFF
-} etk_area_access;
+typedef enum bhapi_area_access {
+	BHAPI_AREA_ACCESS_OWNER = 0,
+	BHAPI_AREA_ACCESS_GROUP_READ = 1,
+	BHAPI_AREA_ACCESS_GROUP_WRITE = 1 << 1,
+	BHAPI_AREA_ACCESS_OTHERS_READ = 1 << 2,
+	BHAPI_AREA_ACCESS_OTHERS_WRITE = 1 << 3,
+	BHAPI_AREA_ACCESS_ALL = 0xFF
+} bhapi_area_access;
 
 #ifdef __cplusplus
-_IMPEXP_ETK void*	etk_create_area(const char *name, void **start_addr, size_t size, euint32 protection,
-				        const char *domain, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
+_IMPEXP_BHAPI void*	bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 protection,
+				        const char *domain, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 #else
-_IMPEXP_ETK void*	etk_create_area(const char *name, void **start_addr, size_t size, euint32 protection,
-				        const char *domain, etk_area_access area_access);
+_IMPEXP_BHAPI void*	bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 protection,
+				        const char *domain, bhapi_area_access area_access);
 #endif
-_IMPEXP_ETK void*	etk_clone_area(const char *name, void **dest_addr, euint32 protection, const char *domain);
-_IMPEXP_ETK void*	etk_clone_area_by_source(void *source_area, void **dest_addr, euint32 protection);
-_IMPEXP_ETK e_status_t	etk_get_area_info(void *area, etk_area_info *info);
-_IMPEXP_ETK e_status_t	etk_delete_area(void *area);
-_IMPEXP_ETK e_status_t	etk_delete_area_etc(void *area, bool no_clone);
+_IMPEXP_BHAPI void*	bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char *domain);
+_IMPEXP_BHAPI void*	bhapi_clone_area_by_source(void *source_area, void **dest_addr, b_uint32 protection);
+_IMPEXP_BHAPI b_status_t	bhapi_get_area_info(void *area, bhapi_area_info *info);
+_IMPEXP_BHAPI b_status_t	bhapi_delete_area(void *area);
+_IMPEXP_BHAPI b_status_t	bhapi_delete_area_etc(void *area, bool no_clone);
 
-/* etk_resize_area:
- * 	Only the original area that created by "etk_create_area" is allowed resizing.
+/* bhapi_resize_area:
+ * 	Only the original area that created by "bhapi_create_area" is allowed resizing.
  * 	When it was resized, the clone-area must reclone to get the valid address.
  * */
-_IMPEXP_ETK e_status_t	etk_resize_area(void *area, void **start_addr, size_t new_size);
-_IMPEXP_ETK e_status_t	etk_set_area_protection(void *area, euint32 new_protection);
+_IMPEXP_BHAPI b_status_t	bhapi_resize_area(void *area, void **start_addr, size_t new_size);
+_IMPEXP_BHAPI b_status_t	bhapi_set_area_protection(void *area, b_uint32 new_protection);
 
 /* locker functions */
-_IMPEXP_ETK void*	etk_create_locker(void);
-_IMPEXP_ETK void*	etk_clone_locker(void* locker);
-_IMPEXP_ETK e_status_t	etk_delete_locker(void* locker);
+_IMPEXP_BHAPI void*	bhapi_create_locker(void);
+_IMPEXP_BHAPI void*	bhapi_clone_locker(void* locker);
+_IMPEXP_BHAPI b_status_t	bhapi_delete_locker(void* locker);
 
-/* after you calling "etk_close_locker":
- * 	1. the next "etk_lock_locker..." function call will be failed
+/* after you calling "bhapi_close_locker":
+ * 	1. the next "bhapi_lock_locker..." function call will be failed
  * */
-_IMPEXP_ETK e_status_t	etk_close_locker(void* locker);
+_IMPEXP_BHAPI b_status_t	bhapi_close_locker(void* locker);
 
-_IMPEXP_ETK e_status_t	etk_lock_locker(void *locker);
-_IMPEXP_ETK e_status_t	etk_lock_locker_etc(void *locker, euint32 flags, e_bigtime_t timeout);
-_IMPEXP_ETK e_status_t	etk_unlock_locker(void *locker);
+_IMPEXP_BHAPI b_status_t	bhapi_lock_locker(void *locker);
+_IMPEXP_BHAPI b_status_t	bhapi_lock_locker_etc(void *locker, b_uint32 flags, b_bigtime_t timeout);
+_IMPEXP_BHAPI b_status_t	bhapi_unlock_locker(void *locker);
 
-/* etk_count_locker_locks:
+/* bhapi_count_locker_locks:
  * 	return count of locks when locked by current thread,
  * 	return less than 0 when locked by other thread or invalid,
  * 	return 0 when it isn't locked or valid.
  * */
-_IMPEXP_ETK eint64	etk_count_locker_locks(void *locker);
+_IMPEXP_BHAPI b_int64	bhapi_count_locker_locks(void *locker);
 
-/* etk_*_simple_locker:
+/* bhapi_*_simple_locker:
  *	The "simple_locker" DO NOT support nested-locking
  * */
-_IMPEXP_ETK void*	etk_create_simple_locker(void);
-_IMPEXP_ETK e_status_t	etk_delete_simple_locker(void* slocker);
-_IMPEXP_ETK bool	etk_lock_simple_locker(void *slocker);
-_IMPEXP_ETK void	etk_unlock_simple_locker(void *slocker);
+_IMPEXP_BHAPI void*	bhapi_create_simple_locker(void);
+_IMPEXP_BHAPI b_status_t	bhapi_delete_simple_locker(void* slocker);
+_IMPEXP_BHAPI bool	bhapi_lock_simple_locker(void *slocker);
+_IMPEXP_BHAPI void	bhapi_unlock_simple_locker(void *slocker);
 
-#ifdef ETK_BUILD_WITH_MEMORY_TRACING
-/* etk_memory_tracing_*:
- *	The ETK++ use this to handle synchronization problem.
+#ifdef BHAPI_BUILD_WITH_MEMORY_TRACING
+/* bhapi_memory_tracing_*:
+ *	The BHAPI++ use this to handle synchronization problem.
  * */
-_IMPEXP_ETK bool	etk_memory_tracing_lock(void);
-_IMPEXP_ETK void	etk_memory_tracing_unlock(void);
+_IMPEXP_BHAPI bool	bhapi_memory_tracing_lock(void);
+_IMPEXP_BHAPI void	bhapi_memory_tracing_unlock(void);
 #endif
 
 /* semaphore functions */
-typedef struct etk_sem_info {
-	char		name[E_OS_NAME_LENGTH + 1];
-	eint64		latest_holder_team;
-	eint64		latest_holder_thread;
-	eint64		count;
+typedef struct bhapi_sem_info {
+    char		name[B_OS_NAME_LENGTH + 1];
+    b_int64		latest_holder_team;
+    b_int64		latest_holder_thread;
+    b_int64		count;
 	bool		closed;
-} etk_sem_info;
+} bhapi_sem_info;
 
 #ifdef __cplusplus
-_IMPEXP_ETK void*	etk_create_sem(eint64 count, const char *name, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
+_IMPEXP_BHAPI void*	bhapi_create_sem(b_int64 count, const char *name, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 #else
-_IMPEXP_ETK void*	etk_create_sem(eint64 count, const char *name, etk_area_access area_access);
+_IMPEXP_BHAPI void*	bhapi_create_sem(b_int64 count, const char *name, bhapi_area_access area_access);
 #endif
-_IMPEXP_ETK void*	etk_clone_sem(const char *name);
-_IMPEXP_ETK void*	etk_clone_sem_by_source(void *sem);
-_IMPEXP_ETK e_status_t	etk_get_sem_info(void *sem, etk_sem_info *info);
-_IMPEXP_ETK e_status_t	etk_delete_sem(void *sem);
-_IMPEXP_ETK e_status_t	etk_delete_sem_etc(void *sem, bool no_clone);
+_IMPEXP_BHAPI void*	bhapi_clone_sem(const char *name);
+_IMPEXP_BHAPI void*	bhapi_clone_sem_by_source(void *sem);
+_IMPEXP_BHAPI b_status_t	bhapi_get_sem_info(void *sem, bhapi_sem_info *info);
+_IMPEXP_BHAPI b_status_t	bhapi_delete_sem(void *sem);
+_IMPEXP_BHAPI b_status_t	bhapi_delete_sem_etc(void *sem, bool no_clone);
 
-/* after you calling "etk_close_sem()":
- * 	1. the next "etk_release_sem..." function call will be failed
- * 	2. the next "etk_acquire_sem..." function call will be failed when the sem's count <= 0
+/* after you calling "bhapi_close_sem()":
+ * 	1. the next "bhapi_release_sem..." function call will be failed
+ * 	2. the next "bhapi_acquire_sem..." function call will be failed when the sem's count <= 0
  * */
-_IMPEXP_ETK e_status_t	etk_close_sem(void* sem);
+_IMPEXP_BHAPI b_status_t	bhapi_close_sem(void* sem);
 
-_IMPEXP_ETK e_status_t	etk_acquire_sem(void *sem);
-_IMPEXP_ETK e_status_t	etk_release_sem(void *sem);
-_IMPEXP_ETK e_status_t	etk_acquire_sem_etc(void *sem, eint64 count, euint32 flags, e_bigtime_t timeout);
-_IMPEXP_ETK e_status_t	etk_release_sem_etc(void *sem, eint64 count, euint32 flags);
-_IMPEXP_ETK e_status_t	etk_get_sem_count(void *sem, eint64 *count);
+_IMPEXP_BHAPI b_status_t	bhapi_acquire_sem(void *sem);
+_IMPEXP_BHAPI b_status_t	bhapi_release_sem(void *sem);
+_IMPEXP_BHAPI b_status_t	bhapi_acquire_sem_etc(void *sem, b_int64 count, b_uint32 flags, b_bigtime_t timeout);
+_IMPEXP_BHAPI b_status_t	bhapi_release_sem_etc(void *sem, b_int64 count, b_uint32 flags);
+_IMPEXP_BHAPI b_status_t	bhapi_get_sem_count(void *sem, b_int64 *count);
 
 
 /* thread functions */
 /* Default stack size of thread: 256KB */
-_IMPEXP_ETK e_status_t	etk_snooze(e_bigtime_t microseconds);
-_IMPEXP_ETK e_status_t	etk_snooze_until(e_bigtime_t time, int timebase);
+_IMPEXP_BHAPI b_status_t	bhapi_snooze(b_bigtime_t microseconds);
+_IMPEXP_BHAPI b_status_t	bhapi_snooze_until(b_bigtime_t time, int timebase);
 
-_IMPEXP_ETK eint64	etk_get_current_team_id(void);
-_IMPEXP_ETK eint64	etk_get_current_thread_id(void);
+_IMPEXP_BHAPI b_int64	bhapi_get_current_team_id(void);
+_IMPEXP_BHAPI b_int64	bhapi_get_current_thread_id(void);
 
-_IMPEXP_ETK void*	etk_create_thread_by_current_thread(void);
-_IMPEXP_ETK void*	etk_create_thread(e_thread_func threadFunction,
-					  eint32 priority,
+_IMPEXP_BHAPI void*	bhapi_create_thread_by_current_thread(void);
+_IMPEXP_BHAPI void*	bhapi_create_thread(b_thread_func threadFunction,
+                      b_int32 priority,
 					  void *arg,
-					  eint64 *threadId);
-_IMPEXP_ETK void*	etk_open_thread(eint64 threadId);
-_IMPEXP_ETK e_status_t	etk_delete_thread(void *thread);
+                      b_int64 *threadId);
+_IMPEXP_BHAPI void*	bhapi_open_thread(b_int64 threadId);
+_IMPEXP_BHAPI b_status_t	bhapi_delete_thread(void *thread);
 
-/* etk_suspend_thread():
+/* bhapi_suspend_thread():
  * 	Be careful please !!!
  * 	In POSIX-Thread implementation only supported to suspend the current thread.
- * 	It return E_OK if successed. */
-_IMPEXP_ETK e_status_t	etk_suspend_thread(void *thread);
-_IMPEXP_ETK e_status_t	etk_resume_thread(void *thread);
+ * 	It return B_OK if successed. */
+_IMPEXP_BHAPI b_status_t	bhapi_suspend_thread(void *thread);
+_IMPEXP_BHAPI b_status_t	bhapi_resume_thread(void *thread);
 
-_IMPEXP_ETK e_status_t	etk_on_exit_thread(void (*callback)(void *), void *user_data);
+_IMPEXP_BHAPI b_status_t	bhapi_on_exit_thread(void (*callback)(void *), void *user_data);
 
-_IMPEXP_ETK eint64	etk_get_thread_id(void *thread);
+_IMPEXP_BHAPI b_int64	bhapi_get_thread_id(void *thread);
 
 enum {
-	ETK_THREAD_INVALID = 0,
-	ETK_THREAD_READY,
-	ETK_THREAD_RUNNING,
-	ETK_THREAD_EXITED,
-	ETK_THREAD_SUSPENDED,
+	BHAPI_THREAD_INVALID = 0,
+	BHAPI_THREAD_READY,
+	BHAPI_THREAD_RUNNING,
+	BHAPI_THREAD_EXITED,
+	BHAPI_THREAD_SUSPENDED,
 };
-_IMPEXP_ETK euint32	etk_get_thread_run_state(void *thread);
+_IMPEXP_BHAPI b_uint32	bhapi_get_thread_run_state(void *thread);
 
-_IMPEXP_ETK e_status_t	etk_set_thread_priority(void *thread, eint32 new_priority);
-_IMPEXP_ETK eint32	etk_get_thread_priority(void *thread);
-_IMPEXP_ETK void	etk_exit_thread(e_status_t status);
-_IMPEXP_ETK e_status_t	etk_wait_for_thread(void *thread, e_status_t *thread_return_value);
-_IMPEXP_ETK e_status_t	etk_wait_for_thread_etc(void *thread, e_status_t *thread_return_value, euint32 flags, e_bigtime_t timeout);
+_IMPEXP_BHAPI b_status_t	bhapi_set_thread_priority(void *thread, b_int32 new_priority);
+_IMPEXP_BHAPI b_int32	bhapi_get_thread_priority(void *thread);
+_IMPEXP_BHAPI void	bhapi_exit_thread(b_status_t status);
+_IMPEXP_BHAPI b_status_t	bhapi_wait_for_thread(void *thread, b_status_t *thread_return_value);
+_IMPEXP_BHAPI b_status_t	bhapi_wait_for_thread_etc(void *thread, b_status_t *thread_return_value, b_uint32 flags, b_bigtime_t timeout);
 
 
-#define ETK_MAX_PORT_BUFFER_SIZE		((size_t)4096)
-#define ETK_VALID_MAX_PORT_QUEUE_LENGTH		((eint32)300)
+#define BHAPI_MAX_PORT_BUFFER_SIZE		((size_t)4096)
+#define BHAPI_VALID_MAX_PORT_QUEUE_LENGTH		((b_int32)300)
 
 
 /* port functions */
 #ifdef __cplusplus
-_IMPEXP_ETK void*	etk_create_port(eint32 queue_length, const char *name, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
+_IMPEXP_BHAPI void*	bhapi_create_port(b_int32 queue_length, const char *name, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 #else
-_IMPEXP_ETK void*	etk_create_port(eint32 queue_length, const char *name, etk_area_access area_access);
+_IMPEXP_BHAPI void*	bhapi_create_port(b_int32 queue_length, const char *name, bhapi_area_access area_access);
 #endif
-_IMPEXP_ETK void*	etk_open_port(const char *name);
-_IMPEXP_ETK void*	etk_open_port_by_source(void *port);
-_IMPEXP_ETK e_status_t	etk_delete_port(void *port);
+_IMPEXP_BHAPI void*	bhapi_open_port(const char *name);
+_IMPEXP_BHAPI void*	bhapi_open_port_by_source(void *port);
+_IMPEXP_BHAPI b_status_t	bhapi_delete_port(void *port);
 
-/* after you calling "etk_close_port":
- * 	1. the next "etk_write_port..." function call will be failed
- * 	2. the next "etk_read_port..." function call will be failed when queue is empty
+/* after you calling "bhapi_close_port":
+ * 	1. the next "bhapi_write_port..." function call will be failed
+ * 	2. the next "bhapi_read_port..." function call will be failed when queue is empty
  * */
-_IMPEXP_ETK e_status_t	etk_close_port(void *port);
+_IMPEXP_BHAPI b_status_t	bhapi_close_port(void *port);
 
-_IMPEXP_ETK e_status_t	etk_write_port(void *port, eint32 code, const void *buf, size_t buf_size);
-_IMPEXP_ETK ssize_t	etk_port_buffer_size(void *port);
-_IMPEXP_ETK e_status_t	etk_read_port(void *port, eint32 *code, void *buf, size_t buf_size);
+_IMPEXP_BHAPI b_status_t	bhapi_write_port(void *port, b_int32 code, const void *buf, size_t buf_size);
+_IMPEXP_BHAPI ssize_t	bhapi_port_buffer_size(void *port);
+_IMPEXP_BHAPI b_status_t	bhapi_read_port(void *port, b_int32 *code, void *buf, size_t buf_size);
 
-_IMPEXP_ETK e_status_t	etk_write_port_etc(void *port, eint32 code, const void *buf, size_t buf_size, euint32 flags, e_bigtime_t timeout);
-_IMPEXP_ETK ssize_t	etk_port_buffer_size_etc(void *port, euint32 flags, e_bigtime_t timeout);
-_IMPEXP_ETK e_status_t	etk_read_port_etc(void *port, eint32 *code, void *buf, size_t buf_size, euint32 flags, e_bigtime_t timeout);
+_IMPEXP_BHAPI b_status_t	bhapi_write_port_etc(void *port, b_int32 code, const void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t timeout);
+_IMPEXP_BHAPI ssize_t	bhapi_port_buffer_size_etc(void *port, b_uint32 flags, b_bigtime_t timeout);
+_IMPEXP_BHAPI b_status_t	bhapi_read_port_etc(void *port, b_int32 *code, void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t timeout);
 
-_IMPEXP_ETK eint32	etk_port_count(void *port);
+_IMPEXP_BHAPI b_int32	bhapi_port_count(void *port);
 
 
 /* image functions */
 
-_IMPEXP_ETK void*	etk_load_addon(const char* path);
-_IMPEXP_ETK e_status_t	etk_unload_addon(void *image);
-_IMPEXP_ETK e_status_t	etk_get_image_symbol(void *image, const char *name, void **ptr);
+_IMPEXP_BHAPI void*	bhapi_load_addon(const char* path);
+_IMPEXP_BHAPI b_status_t	bhapi_unload_addon(void *image);
+_IMPEXP_BHAPI b_status_t	bhapi_get_image_symbol(void *image, const char *name, void **ptr);
 
 
 #ifdef __cplusplus
 } /* extern "C" */
 #endif /* __cplusplus */
 
-#endif /* __ETK_KERNEL_H__ */
+#endif /* __BHAPI_KERNEL_H__ */
 

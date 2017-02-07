@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,53 +27,53 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_POLYGON_H__
-#define __ETK_POLYGON_H__
+#ifndef __BHAPI_POLYGON_H__
+#define __BHAPI_POLYGON_H__
 
 #include "./../interface/Rect.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EPolygon {
+class _IMPEXP_BHAPI BPolygon {
 public:
-	EPolygon(const EPoint *pts, eint32 nPts);
-	EPolygon();
-	EPolygon(const EPolygon *poly);
-	virtual ~EPolygon();
+    BPolygon(const BPoint *pts, b_int32 nPts);
+    BPolygon();
+    BPolygon(const BPolygon *poly);
+    virtual ~BPolygon();
 
-	EPolygon	&operator=(const EPolygon &poly);
-	ERect		Frame() const;
+    BPolygon	&operator=(const BPolygon &poly);
+	BRect		Frame() const;
 
-	bool		AddPoints(const EPoint *pts, eint32 nPts, bool updateFrame = true);
-	void		RemovePoints(eint32 fromIndex, eint32 toIndex, bool updateFrame = true);
+    bool		AddPoints(const BPoint *pts, b_int32 nPts, bool updateFrame = true);
+    void		RemovePoints(b_int32 fromIndex, b_int32 toIndex, bool updateFrame = true);
 
-	bool		AddPoint(const EPoint &aPt, bool updateFrame = true);
-	void		RemovePoint(eint32 index, bool updateFrame = true);
+	bool		AddPoint(const BPoint &aPt, bool updateFrame = true);
+    void		RemovePoint(b_int32 index, bool updateFrame = true);
 	void		UpdateFrame();
 
-	const EPoint	&operator[](eint32 index) const; // none checking
-	eint32		CountPoints() const;
+    const BPoint	&operator[](b_int32 index) const; // none checking
+    b_int32		CountPoints() const;
 
-	bool		MapTo(ERect srcRect, ERect dstRect);
+	bool		MapTo(BRect srcRect, BRect dstRect);
 
-	const EPoint	*Points() const;
+	const BPoint	*Points() const;
 	void		PrintToStream() const;
 
 private:
-	ERect fFrame;
-	eint32 fCount;
-	EPoint *fPts;
+	BRect fFrame;
+    b_int32 fCount;
+	BPoint *fPts;
 	bool fNeededToUpdateFrame;
 };
 
 
-inline bool EPolygon::AddPoint(const EPoint &aPt, bool updateFrame)
+inline bool BPolygon::AddPoint(const BPoint &aPt, bool updateFrame)
 {
 	return AddPoints(&aPt, 1, updateFrame);
 }
 
 
-inline void EPolygon::RemovePoint(eint32 index, bool updateFrame)
+inline void BPolygon::RemovePoint(b_int32 index, bool updateFrame)
 {
 	RemovePoints(index, index, updateFrame);
 }
@@ -81,5 +81,5 @@ inline void EPolygon::RemovePoint(eint32 index, bool updateFrame)
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_POLYGON_H__ */
+#endif /* __BHAPI_POLYGON_H__ */
 

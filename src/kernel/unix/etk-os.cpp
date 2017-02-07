@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -42,45 +42,45 @@
 
 
 #if 0
-extern ELocker* etk_get_handler_operator_locker();
+extern BLocker* bhapi_get_handler_operator_locker();
 
-class etk_posix_sig_action {
+class bhapi_posix_sig_action {
 public:
-	etk_posix_sig_action();
+	bhapi_posix_sig_action();
 	void (*old_intr)(int);
 	void (*old_abrt)(int);
 	void (*old_term)(int);
 	void (*old_quit)(int);
 };
-static etk_posix_sig_action _etk_posix_sig_action_;
+static bhapi_posix_sig_action _bhapi_posix_sig_action_;
 
-static void etk_posix_signal(int signumber)
+static void bhapi_posix_signal(int signumber)
 {
-	ELocker *hLocker = etk_get_handler_operator_locker();
+	BLocker *hLocker = bhapi_get_handler_operator_locker();
 
 	hLocker->Lock();
-	if(etk_app != NULL) etk_app->PostMessage(signumber == SIGINT ? E_QUIT_REQUESTED : _QUIT_);
+	if(bhapi_app != NULL) bhapi_app->PostMessage(signumber == SIGINT ? B_QUIT_REQUESTED : _QUIT_);
 	hLocker->Unlock();
 
 	void (*old_func)(int) = NULL;
 	switch(signumber)
 	{
-		case SIGINT: old_func = _etk_posix_sig_action_.old_intr; break;
-		case SIGABRT: old_func = _etk_posix_sig_action_.old_abrt; break;
-		case SIGTERM: old_func = _etk_posix_sig_action_.old_term; break;
-		case SIGQUIT: old_func = _etk_posix_sig_action_.old_quit; break;
+		case SIGINT: old_func = _bhapi_posix_sig_action_.old_intr; break;
+		case SIGABRT: old_func = _bhapi_posix_sig_action_.old_abrt; break;
+		case SIGTERM: old_func = _bhapi_posix_sig_action_.old_term; break;
+		case SIGQUIT: old_func = _bhapi_posix_sig_action_.old_quit; break;
 		default: break;
 	}
 
-//	ETK_WARNING("[KERNEL]: Signal(%s) done.", (signumber == SIGINT ? "SIGINT" : (
+//	BHAPI_WARNING("[KERNEL]: Signal(%s) done.", (signumber == SIGINT ? "SIGINT" : (
 //						   signumber == SIGABRT ? "SIGABRT" : (
 //						   signumber == SIGTERM ? "SIGTERM" : "SIGQUIT"))));
 
-	while(signumber != SIGINT && etk_app != NULL) e_snooze(1000);
+	while(signumber != SIGINT && bhapi_app != NULL) b_snooze(1000);
 
 	if(old_func != NULL)
 	{
-//		ETK_WARNING("[KERNEL]: Calling old signal functions...");
+//		BHAPI_WARNING("[KERNEL]: Calling old signal functions...");
 		(*old_func)(signumber);
 	}
 
@@ -88,12 +88,12 @@ static void etk_posix_signal(int signumber)
 }
 
 
-etk_posix_sig_action::etk_posix_sig_action()
+bhapi_posix_sig_action::bhapi_posix_sig_action()
 	: old_intr(NULL), old_abrt(NULL), old_term(NULL), old_quit(NULL)
 {
 #ifdef HAVE_SIGACTION
 	struct sigaction act, oact;
-	act.sa_handler = etk_posix_signal;
+	act.sa_handler = bhapi_posix_signal;
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = 0;
 	#ifdef SA_RESTART
@@ -114,23 +114,23 @@ etk_posix_sig_action::etk_posix_sig_action()
 #endif
 
 
-#ifdef ETK_OS_LINUX
-bool etk_get_prog_argc_argv_linux(EString &progName, EStringArray &progArgv)
+#ifdef BHAPI_OS_LINUX
+bool bhapi_get_prog_argc_argv_linux(BString &progName, BStringArray &progArgv)
 {
 	bool retVal = false;
 	long maxPath = pathconf("/", _PC_PATH_MAX);
 
 	if(maxPath > 0)
 	{
-		EString procFileName("/proc/");
+		BString procFileName("/proc/");
 		procFileName << (int)getpid() << "/exe";
 		char *procFileNameBuffer = (char*)malloc((size_t)(maxPath + 1));
 		if(procFileNameBuffer)
 		{
 			bzero(procFileNameBuffer, (size_t)(maxPath + 1));
 			int length = readlink(procFileName.String(), procFileNameBuffer, (size_t)(maxPath + 1));
-			EString str; eint32 strFound;
-			str.Append(procFileNameBuffer, length > 0 ? (eint32)length : 0);
+			BString str; b_int32 strFound;
+			str.Append(procFileNameBuffer, length > 0 ? (b_int32)length : 0);
 			if((strFound = str.FindLast('/')) >= 0)
 			{
 				str.Remove(strFound + 1, -1);
@@ -148,7 +148,7 @@ bool etk_get_prog_argc_argv_linux(EString &progName, EStringArray &progArgv)
 
 				if(length > 0)
 				{
-					progName.SetTo(procFileNameBuffer, (eint32)length);
+					progName.SetTo(procFileNameBuffer, (b_int32)length);
 					progArgv.MakeEmpty();
 
 					procFileName.RemoveLast("/exe");
@@ -157,7 +157,7 @@ bool etk_get_prog_argc_argv_linux(EString &progName, EStringArray &progArgv)
 					if(fp)
 					{
 						char cmdline = '\0';
-						EString sArgv;
+						BString sArgv;
 
 						while(true)
 						{
@@ -193,5 +193,5 @@ bool etk_get_prog_argc_argv_linux(EString &progName, EStringArray &progArgv)
 
 	return retVal;
 }
-#endif // ETK_OS_LINUX
+#endif // BHAPI_OS_LINUX
 

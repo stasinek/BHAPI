@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,7 +24,7 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  * File: Alert.cpp
- * Description: EAlert --- Display a modal window that notifies something
+ * Description: BAlert --- Display a modal window that notifies something
  * 
  * --------------------------------------------------------------------------*/
 
@@ -49,72 +49,72 @@
 #include "icons/stop.xpm"
 
 
-class EAlertTypeView : public EView {
+class BAlertTypeView : public BView {
 public:
-	EAlertTypeView(ERect frame, e_alert_type type);
-	virtual ~EAlertTypeView();
+    BAlertTypeView(BRect frame, b_alert_type type);
+    virtual ~BAlertTypeView();
 
-	virtual void SetViewColor(e_rgb_color c);
-	virtual void Draw(ERect updateRect);
+	virtual void SetViewColor(b_rgb_color c);
+	virtual void Draw(BRect updateRect);
 
 	virtual void GetPreferredSize(float *width, float *height);
 	void InitBitmap();
 
-	e_alert_type fAlertType;
-	EBitmap *fBitmap;
-	euint8 fState;
-	EInvoker *fInvoker;
+	b_alert_type fAlertType;
+	BBitmap *fBitmap;
+	b_uint8 fState;
+	BInvoker *fInvoker;
 	void *fSem;
 };
 
 
-class EAlertButton : public EButton {
+class BAlertButton : public BButton {
 public:
-	EAlertButton(ERect frame, const char *name, const char *label, EMessage *message,
-		     euint32 resizeMode, euint32 flags, euint8 index);
-	virtual e_status_t Invoke(const EMessage *msg);
+    BAlertButton(BRect frame, const char *name, const char *label, BMessage *message,
+		     b_uint32 resizeMode, b_uint32 flags, b_uint8 index);
+	virtual b_status_t Invoke(const BMessage *msg);
 
 private:
-	euint8 fIndex;
+	b_uint8 fIndex;
 };
 
 
-EAlertTypeView::EAlertTypeView(ERect frame, e_alert_type type)
-	: EView(frame, "alert_type_view", E_FOLLOW_LEFT | E_FOLLOW_TOP_BOTTOM, E_WILL_DRAW),
+BAlertTypeView::BAlertTypeView(BRect frame, b_alert_type type)
+	: BView(frame, "alert_type_view", B_FOLLOW_LEFT | B_FOLLOW_TOP_BOTTOM, B_WILL_DRAW),
 	  fAlertType(type), fBitmap(NULL), fState(0), fInvoker(NULL), fSem(NULL)
 {
 	InitBitmap();
 }
 
 
-EAlertTypeView::~EAlertTypeView()
+BAlertTypeView::~BAlertTypeView()
 {
 	if(fBitmap) delete fBitmap;
 }
 
 
 void
-EAlertTypeView::InitBitmap()
+BAlertTypeView::InitBitmap()
 {
 	const char **xpm_data = NULL;
 
 	switch(fAlertType)
 	{
-		case E_INFO_ALERT: xpm_data = (const char**)info_xpm; break;
-		case E_IDEA_ALERT: xpm_data = (const char**)idea_xpm; break;
-		case E_WARNING_ALERT: xpm_data = (const char**)warning_xpm; break;
-		case E_STOP_ALERT: xpm_data = (const char**)stop_xpm; break;
+		case B_INFO_ALERT: xpm_data = (const char**)info_xpm; break;
+		case B_IDEA_ALERT: xpm_data = (const char**)idea_xpm; break;
+		case B_WARNING_ALERT: xpm_data = (const char**)warning_xpm; break;
+		case B_STOP_ALERT: xpm_data = (const char**)stop_xpm; break;
 		default: break;
 	}
 
 	if(xpm_data != NULL)
 	{
-#if defined(ETK_OS_BEOS) || defined(ETK_BIG_ENDIAN)
-		EPixmap *pix = new EPixmap(ICON_WIDTH, ICON_HEIGHT, E_RGB24_BIG);
+#if defined(BHAPI_OS_BEOS) || defined(BHAPI_BIG_ENDIAN)
+		BPixmap *pix = new BPixmap(ICON_WIDTH, ICON_HEIGHT, B_RGB24_BIG);
 #else
-		EPixmap *pix = new EPixmap(ICON_WIDTH, ICON_HEIGHT, E_RGB24);
+		BPixmap *pix = new BPixmap(ICON_WIDTH, ICON_HEIGHT, B_RGB24);
 #endif
-		pix->SetDrawingMode(E_OP_COPY);
+		pix->SetDrawingMode(B_OP_COPY);
 		pix->SetHighColor(ViewColor());
 		pix->FillRect(0, 0, ICON_WIDTH, ICON_HEIGHT);
 		pix->SetHighColor(200, 200, 200);
@@ -122,18 +122,18 @@ EAlertTypeView::InitBitmap()
 		pix->DrawXPM(xpm_data, 0, 0, 0, 0);
 
 		if(fBitmap != NULL) delete fBitmap;
-		fBitmap = new EBitmap(pix);
+		fBitmap = new BBitmap(pix);
 		delete pix;
 	}
 }
 
 
 void
-EAlertTypeView::SetViewColor(e_rgb_color c)
+BAlertTypeView::SetViewColor(b_rgb_color c)
 {
 	if(ViewColor() != c)
 	{
-		EView::SetViewColor(c);
+		BView::SetViewColor(c);
 		InitBitmap();
 		Invalidate();
 	}
@@ -141,93 +141,93 @@ EAlertTypeView::SetViewColor(e_rgb_color c)
 
 
 void
-EAlertTypeView::Draw(ERect updateRect)
+BAlertTypeView::Draw(BRect updateRect)
 {
-	ERect rect = Bounds();
+	BRect rect = Bounds();
 	rect.right = rect.left + rect.Width() / 2;
 	SetHighColor(200, 200, 200);
 	FillRect(rect);
 
-	if(fBitmap) DrawBitmap(fBitmap, Bounds().Center() - EPoint(ICON_WIDTH / 2.f - 1.f, Bounds().Height() / 2.f - 10.f));
+	if(fBitmap) DrawBitmap(fBitmap, Bounds().Center() - BPoint(ICON_WIDTH / 2.f - 1.f, Bounds().Height() / 2.f - 10.f));
 }
 
 
 void
-EAlertTypeView::GetPreferredSize(float *width, float *height)
+BAlertTypeView::GetPreferredSize(float *width, float *height)
 {
 	if(width) *width = 100;
 	if(height) *height = 150;
 }
 
 
-EAlertButton::EAlertButton(ERect frame, const char *name, const char *label, EMessage *message,
-			   euint32 resizeMode, euint32 flags, euint8 index)
-	: EButton(frame, name, label, message, resizeMode, flags)
+BAlertButton::BAlertButton(BRect frame, const char *name, const char *label, BMessage *message,
+			   b_uint32 resizeMode, b_uint32 flags, b_uint8 index)
+	: BButton(frame, name, label, message, resizeMode, flags)
 {
 	fIndex = index;
 }
 
 
-e_status_t
-EAlertButton::Invoke(const EMessage *msg)
+b_status_t
+BAlertButton::Invoke(const BMessage *msg)
 {
-	EAlert *alert = e_cast_as(Window(), EAlert);
-	EAlertTypeView *alert_view = e_cast_as(Window()->FindView("alert_type_view"), EAlertTypeView);
+    BAlert *alert = b_cast_as(Window(), BAlert);
+    BAlertTypeView *alert_view = b_cast_as(Window()->FindView("alert_type_view"), BAlertTypeView);
 
 	if(alert == NULL || alert_view == NULL)
 	{
-		return EButton::Invoke(msg);
+		return BButton::Invoke(msg);
 	}
 
-	if(fIndex > 7) return E_ERROR;
+	if(fIndex > 7) return B_ERROR;
 
 	if(alert_view->fState & 0x80) // async
 	{
 		if(!(alert_view->fInvoker == NULL || alert_view->fInvoker->Message() == NULL))
 		{
-			EMessage aMsg = *(alert_view->fInvoker->Message());
-			aMsg.AddInt32("which", (eint32)fIndex);
+			BMessage aMsg = *(alert_view->fInvoker->Message());
+			aMsg.AddInt32("which", (b_int32)fIndex);
 			alert_view->fInvoker->Invoke(&aMsg);
 		}
 	}
 	else
 	{
 		alert_view->fState = (0x01 << fIndex);
-		if(alert_view->fSem) etk_release_sem_etc(alert_view->fSem, (eint64)(fIndex + 1), 0);
+		if(alert_view->fSem) bhapi_release_sem_etc(alert_view->fSem, (b_int64)(fIndex + 1), 0);
 	}
 
-	alert->PostMessage(E_QUIT_REQUESTED);
+	alert->PostMessage(B_QUIT_REQUESTED);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-EAlert::EAlert(const char *title,
+BAlert::BAlert(const char *title,
 	       const char *text,
 	       const char *button1_label,
 	       const char *button2_label,
 	       const char *button3_label,
-	       e_button_width btnWidth,
-	       e_alert_type type)
-	: EWindow(ERect(-100, -100, -10, -10), title, E_MODAL_WINDOW, 0)
+	       b_button_width btnWidth,
+	       b_alert_type type)
+	: BWindow(BRect(-100, -100, -10, -10), title, B_MODAL_WINDOW, 0)
 {
-	ERect tmpR(0, 0, 1, 1);
+	BRect tmpR(0, 0, 1, 1);
 
-	EView *alert_view = new EAlertTypeView(tmpR, type);
-	EView *info_view = new EView(tmpR, NULL, E_FOLLOW_ALL, 0);
-	EView *btns_view = new EView(tmpR, NULL, E_FOLLOW_LEFT_RIGHT | E_FOLLOW_BOTTOM, 0);
+    BView *alert_view = new BAlertTypeView(tmpR, type);
+	BView *info_view = new BView(tmpR, NULL, B_FOLLOW_ALL, 0);
+	BView *btns_view = new BView(tmpR, NULL, B_FOLLOW_LEFT_RIGHT | B_FOLLOW_BOTTOM, 0);
 
-	fButtons[0] = new EAlertButton(tmpR, NULL, button1_label ? button1_label : "OK", NULL, E_FOLLOW_RIGHT, E_WILL_DRAW, 0);
+    fButtons[0] = new BAlertButton(tmpR, NULL, button1_label ? button1_label : "OK", NULL, B_FOLLOW_RIGHT, B_WILL_DRAW, 0);
 
-	if(button2_label) fButtons[1] = new EAlertButton(tmpR, NULL, button2_label, NULL, E_FOLLOW_RIGHT, E_WILL_DRAW, 1);
+    if(button2_label) fButtons[1] = new BAlertButton(tmpR, NULL, button2_label, NULL, B_FOLLOW_RIGHT, B_WILL_DRAW, 1);
 	else fButtons[1] = NULL;
 
-	if(button3_label) fButtons[2] = new EAlertButton(tmpR, NULL, button3_label, NULL, E_FOLLOW_RIGHT, E_WILL_DRAW, 2);
+    if(button3_label) fButtons[2] = new BAlertButton(tmpR, NULL, button3_label, NULL, B_FOLLOW_RIGHT, B_WILL_DRAW, 2);
 	else fButtons[2] = NULL;
 
 	float max_w = 0, max_h = 20, all_w = 0;
 
-	for(eint8 i = 0; i < 3; i++)
+	for(b_int8 i = 0; i < 3; i++)
 	{
 		if(fButtons[i] == NULL) continue;
 
@@ -237,13 +237,13 @@ EAlert::EAlert(const char *title,
 		all_w += fButtons[i]->Frame().Width() + 10;
 	}
 
-	btns_view->ResizeTo(max_c((btnWidth == E_WIDTH_AS_USUAL ? (3 * max_w + 20) : all_w), 200), max_h);
-	ERect btnR = btns_view->Bounds();
+	btns_view->ResizeTo(max_c((btnWidth == B_WIDTH_AS_USUAL ? (3 * max_w + 20) : all_w), 200), max_h);
+	BRect btnR = btns_view->Bounds();
 
-	for(eint8 i = 2; i >= 0; i--)
+	for(b_int8 i = 2; i >= 0; i--)
 	{
 		if(fButtons[i] == NULL) continue;
-		btnR.left = btnR.right - (btnWidth == E_WIDTH_AS_USUAL ? max_w : fButtons[i]->Frame().Width());
+		btnR.left = btnR.right - (btnWidth == B_WIDTH_AS_USUAL ? max_w : fButtons[i]->Frame().Width());
 		fButtons[i]->ResizeTo(btnR.Width(), btnR.Height());
 		fButtons[i]->MoveTo(btnR.LeftTop());
 		btns_view->AddChild(fButtons[i]);
@@ -251,13 +251,13 @@ EAlert::EAlert(const char *title,
 		btnR.right -= btnR.Width() + 10;
 	}
 
-	fTextView = new ETextView(tmpR, NULL, tmpR, E_FOLLOW_NONE);
+	fTextView = new BTextView(tmpR, NULL, tmpR, B_FOLLOW_NONE);
 	fTextView->SetText(text);
 	fTextView->MakeEditable(false);
 	fTextView->MakeSelectable(false);
 	fTextView->ResizeToPreferred();
 	fTextView->MoveTo(5, 5);
-	btns_view->MoveTo(fTextView->Frame().LeftBottom() + EPoint(0, 10));
+	btns_view->MoveTo(fTextView->Frame().LeftBottom() + BPoint(0, 10));
 
 	alert_view->ResizeToPreferred();
 
@@ -281,36 +281,36 @@ EAlert::EAlert(const char *title,
 }
 
 
-EAlert::~EAlert()
+BAlert::~BAlert()
 {
 }
 
 
 bool
-EAlert::QuitRequested()
+BAlert::QuitRequested()
 {
 	return true;
 }
 
 
-eint32
-EAlert::Go(bool could_proxy)
+b_int32
+BAlert::Go(bool could_proxy)
 {
 	if(IsRunning() || Proxy() != this || IsLockedByCurrentThread())
 	{
-		ETK_WARNING("[INTERFACE]: %s --- IsRunning() || Proxy() != this || IsLockedByCurrentThread()", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[INTERFACE]: %s --- IsRunning() || Proxy() != this || IsLockedByCurrentThread()", __PRETTY_FUNCTION__);
 		return -1;
 	}
 
 	Lock();
 
-	EAlertTypeView *alert_view = e_cast_as(FindView("alert_type_view"), EAlertTypeView);
+    BAlertTypeView *alert_view = b_cast_as(FindView("alert_type_view"), BAlertTypeView);
 	alert_view->fState = 0x40;
 	alert_view->fInvoker = NULL;
 
 	if(could_proxy)
 	{
-		ELooper *looper = ELooper::LooperForThread(etk_get_current_thread_id());
+		BLooper *looper = BLooper::LooperForThread(bhapi_get_current_thread_id());
 		if(looper)
 		{
 			looper->Lock();
@@ -323,13 +323,13 @@ EAlert::Go(bool could_proxy)
 	SendBehind(NULL);
 	Activate();
 
-	eint32 retVal = -1;
+	b_int32 retVal = -1;
 
 	if(Proxy() != this)
 	{
 		while(true)
 		{
-			EMessage *aMsg = NextLooperMessage(E_INFINITE_TIMEOUT);
+			BMessage *aMsg = NextLooperMessage(B_INFINITE_TIMEOUT);
 			DispatchLooperMessage(aMsg);
 			if(aMsg == NULL) break;
 		}
@@ -345,37 +345,37 @@ EAlert::Go(bool could_proxy)
 	}
 	else
 	{
-		void *trackingSem = etk_create_sem(0, NULL);
+		void *trackingSem = bhapi_create_sem(0, NULL);
 		alert_view->fSem = trackingSem;
 
 		Unlock();
 
-		eint64 count = 0;
-		if(!(etk_acquire_sem(trackingSem) != E_OK ||
-		     etk_get_sem_count(trackingSem, &count) != E_OK ||
+		b_int64 count = 0;
+		if(!(bhapi_acquire_sem(trackingSem) != B_OK ||
+		     bhapi_get_sem_count(trackingSem, &count) != B_OK ||
 		     count < 0 || count > 2))
 		{
-			retVal = (eint32)count;
+			retVal = (b_int32)count;
 		}
-		etk_delete_sem(trackingSem);
+		bhapi_delete_sem(trackingSem);
 	}
 
 	return retVal;
 }
 
 
-e_status_t
-EAlert::Go(EInvoker *invoker)
+b_status_t
+BAlert::Go(BInvoker *invoker)
 {
 	if(IsRunning() || Proxy() != this || IsLockedByCurrentThread())
 	{
-		ETK_WARNING("[INTERFACE]: %s --- IsRunning() || Proxy() != this || IsLockedByCurrentThread()", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_WARNING("[INTERFACE]: %s --- IsRunning() || Proxy() != this || IsLockedByCurrentThread()", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
 	Lock();
 
-	EAlertTypeView *alert_view = e_cast_as(FindView("alert_type_view"), EAlertTypeView);
+    BAlertTypeView *alert_view = b_cast_as(FindView("alert_type_view"), BAlertTypeView);
 	alert_view->fState = 0x80;
 	alert_view->fInvoker = invoker;
 
@@ -384,20 +384,20 @@ EAlert::Go(EInvoker *invoker)
 
 	Unlock();
 
-	return E_OK;
+	return B_OK;
 }
 
 
-EButton*
-EAlert::ButtonAt(eint32 index) const
+BButton*
+BAlert::ButtonAt(b_int32 index) const
 {
 	if(index < 0 || index > 2) return NULL;
 	return fButtons[index];
 }
 
 
-ETextView*
-EAlert::TextView() const
+BTextView*
+BAlert::TextView() const
 {
 	return fTextView;
 }

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_APPLICATION_H__
-#define __ETK_APPLICATION_H__
+#ifndef __BHAPI_APPLICATION_H__
+#define __BHAPI_APPLICATION_H__
 
 #include "./../app/Looper.h"
 #include "./../app/MessageRunner.h"
@@ -38,19 +38,19 @@
 #ifdef __cplusplus /* Just for C++ */
 
 
-class EClipboard;
-class EGraphicsEngine;
+class BClipboard;
+class BGraphicsEngine;
 
 
-class _IMPEXP_ETK EApplication : public ELooper {
+class _IMPEXP_BHAPI BApplication : public BLooper {
 public:
-	EApplication(const char *signature, bool tryInterface = true);
-	virtual ~EApplication();
+	BApplication(const char *signature, bool tryInterface = true);
+	virtual ~BApplication();
 
 	// Archiving
-	EApplication(const EMessage *from);
-	virtual e_status_t Archive(EMessage *into, bool deep = true) const;
-	static EArchivable *Instantiate(const EMessage *from);
+	BApplication(const BMessage *from);
+	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+	static BArchivable *Instantiate(const BMessage *from);
 
 	const char		*Signature() const;
 
@@ -63,66 +63,66 @@ public:
 	virtual void		Pulse();
 	// Empty functions END
 
-	void			SetPulseRate(e_bigtime_t rate);
-	e_bigtime_t		PulseRate() const;
+    void			SetPulseRate(b_bigtime_t rate);
+	b_bigtime_t		PulseRate() const;
 
-	virtual void		MessageReceived(EMessage *msg);
-	virtual void		DispatchMessage(EMessage *msg, EHandler *target);
+	virtual void		MessageReceived(BMessage *msg);
+	virtual void		DispatchMessage(BMessage *msg, BHandler *target);
 
 	void			SetCursor(const void *cursor);
-	void			SetCursor(const ECursor *cursor, bool sync = true);
+    void			SetCursor(const BCursor *cursor, bool sync = true);
 	void			HideCursor();
 	void			ShowCursor();
 	void			ObscureCursor();
 	bool			IsCursorHidden() const;
 
 private:
-	friend class ELooper;
-	friend class EMessageRunner;
-	friend class EWindow;
-	friend class EView;
-	friend class EBitmap;
-	friend class EScreen;
+	friend class BLooper;
+	friend class BMessageRunner;
+    friend class BWindow;
+    friend class BView;
+    friend class BBitmap;
+    friend class BScreen;
 
-	friend _IMPEXP_ETK bool etk_update_font_families(bool);
+    friend _IMPEXP_BHAPI bool bhapi_updatb_font_families(bool);
 
 	bool fQuit;
 	char *fSignature;
-	e_bigtime_t fPulseRate;
-	EMessageRunner *fPulseRunner;
+	b_bigtime_t fPulseRate;
+	BMessageRunner *fPulseRunner;
 
-	static EList sRunnerList;
-	static e_bigtime_t sRunnerMinimumInterval;
-	static void etk_dispatch_message_runners();
+	static BList sRunnerList;
+	static b_bigtime_t sRunnerMinimumInterval;
+	static void bhapi_dispatch_message_runners();
 
-	bool etk_quit_all_loopers(bool force);
+	bool bhapi_quit_all_loopers(bool force);
 
-	EGraphicsEngine *fGraphicsEngine;
+    BGraphicsEngine *fGraphicsEngine;
 	void *fGraphicsEngineAddon;
 	void InitGraphicsEngine();
 
 	void Init(const char *signature, bool tryInterface);
 
-	EList fModalWindows;
-	bool AddModalWindow(EMessenger &msgr);
-	bool RemoveModalWindow(EMessenger &msgr);
+	BList fModalWindows;
+    bool AddModalWindow(BMessenger &msgr);
+    bool RemoveModalWindow(BMessenger &msgr);
 
-	ECursor fCursor;
+    BCursor fCursor;
 	bool fCursorHidden;
 	bool fCursorObscure;
 };
 
 
-inline void EApplication::SetCursor(const void *cursor)
+inline void BApplication::SetCursor(const void *cursor)
 {
-	ECursor theCursor(cursor);
+    BCursor theCursor(cursor);
 	SetCursor(&theCursor, true);
 }
 
 
-extern _IMPEXP_ETK EApplication *etk_app;
-extern _IMPEXP_ETK EMessenger etk_app_messenger;
-extern _IMPEXP_ETK EClipboard etk_clipboard;
+extern _IMPEXP_BHAPI BApplication *bhapi_app;
+extern _IMPEXP_BHAPI BMessenger bhapi_app_messenger;
+extern _IMPEXP_BHAPI BClipboard bhapi_clipboard;
 
 #endif /* __cplusplus */
 
@@ -136,5 +136,5 @@ extern _IMPEXP_ETK EClipboard etk_clipboard;
 #endif
 */
 
-#endif /* __ETK_APPLICATION_H__ */
+#endif /* __BHAPI_APPLICATION_H__ */
 

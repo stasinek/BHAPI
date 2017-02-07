@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,60 +27,60 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_SCROLL_VIEW_H__
-#define __ETK_SCROLL_VIEW_H__
+#ifndef __BHAPI_SCROLL_VIEW_H__
+#define __BHAPI_SCROLL_VIEW_H__
 
 #include "./../interface/ScrollBar.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EScrollView : public EView {
+class _IMPEXP_BHAPI BScrollView : public BView {
 public:
-	EScrollView(ERect frame, const char *name, EView *target,
-		    euint32 resizingMode = E_FOLLOW_LEFT | E_FOLLOW_TOP,
-		    euint32 flags = 0,
+	BScrollView(BRect frame, const char *name, BView *target,
+		    b_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+		    b_uint32 flags = 0,
 		    bool alwaysShowHorizontal = false,
 		    bool alwaysShowVertical = false,
-		    e_border_style border = E_FANCY_BORDER);
-	virtual ~EScrollView();
+		    b_border_style border = B_FANCY_BORDER);
+	virtual ~BScrollView();
 
-	// SetTarget: When it return E_OK, the oldTarget was removed and destroy automatically.
+	// SetTarget: When it return B_OK, the oldTarget was removed and destroy automatically.
 	//            If you want to keep the oldTarget, try oldTarget->RemoveSelf() before.
-	e_status_t	SetTarget(EView *newTarget);
-	EView		*Target() const;
-	ERect		TargetFrame() const;
+	b_status_t	SetTarget(BView *newTarget);
+	BView		*Target() const;
+	BRect		TargetFrame() const;
 
-	virtual void	SetBorder(e_border_style border);
-	e_border_style	Border() const;
+	virtual void	SetBorder(b_border_style border);
+	b_border_style	Border() const;
 
 	void		SetScrollBarAutoState(bool alwaysShowHorizontal, bool alwaysShowVertical);
 	void		GetScrollBarAutoState(bool *alwaysShowHorizontal, bool *alwaysShowVertical) const;
 
-	EScrollBar	*ScrollBar(e_orientation direction) const;
+	BScrollBar	*ScrollBar(b_orientation direction) const;
 
-	virtual void	SetFlags(euint32 flags); // auto-setting E_WILL_DRAW and E_FRAME_EVENTS
-	virtual void	Draw(ERect updateRect);
+	virtual void	SetFlags(b_uint32 flags); // auto-setting B_WILL_DRAW and B_FRAME_EVENTS
+	virtual void	Draw(BRect updateRect);
 	virtual void	FrameResized(float new_width, float new_height);
 
 protected:
-	virtual void	ChildRemoving(EView *child);
+	virtual void	ChildRemoving(BView *child);
 
 private:
-	friend class EView;
+	friend class BView;
 
-	e_border_style fBorder;
+	b_border_style fBorder;
 	bool fAlwaysShowHorizontal;
 	bool fAlwaysShowVertical;
 
-	EScrollBar *fHSB;
-	EScrollBar *fVSB;
-	EView *fTarget;
+	BScrollBar *fHSB;
+	BScrollBar *fVSB;
+	BView *fTarget;
 
-	ERect TargetValidFrame(bool ignore_scrollbar = false) const;
+	BRect TargetValidFrame(bool ignore_scrollbar = false) const;
 };
 
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_SCROLL_VIEW_H__ */
+#endif /* __BHAPI_SCROLL_VIEW_H__ */
 

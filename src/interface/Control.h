@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_CONTROL_H__
-#define __ETK_CONTROL_H__
+#ifndef __BHAPI_CONTROL_H__
+#define __BHAPI_CONTROL_H__
 
 #include "./../interface/View.h"
 #include "./../app/Invoker.h"
@@ -36,27 +36,27 @@
 #ifdef __cplusplus /* Just for C++ */
 
 enum {
-	E_CONTROL_OFF = 0,
-	E_CONTROL_ON = 1
+    B_CONTROL_OFF = 0,
+    B_CONTROL_ON = 1
 };
 
-class _IMPEXP_ETK EControl : public EView, public EInvoker {
+class _IMPEXP_BHAPI BControl : public BView, public BInvoker {
 public:
-	EControl(ERect frame,
+	BControl(BRect frame,
 		 const char *name,
 		 const char *label,
-		 EMessage *message,
-		 euint32 resizeMode,
-		 euint32 flags);
-	virtual ~EControl();
+		 BMessage *message,
+         b_uint32 resizeMode,
+         b_uint32 flags);
+	virtual ~BControl();
 
 	virtual void SetLabel(const char *label);
 	const char* Label() const;
 
-	virtual void SetValue(eint32 value);
-	eint32 Value() const;
+    virtual void SetValue(b_int32 value);
+    b_int32 Value() const;
 
-	virtual e_status_t Invoke(const EMessage *msg = NULL);
+	virtual b_status_t Invoke(const BMessage *msg = NULL);
 
 	virtual void AttachedToWindow();
 	virtual void DetachedFromWindow();
@@ -65,15 +65,15 @@ public:
 
 protected:
 	bool IsFocusChanging() const;
-	void SetValueNoUpdate(eint32 value);
+    void SetValueNoUpdate(b_int32 value);
 
 private:
 	char *fLabel;
-	eint32 fValue;
+    b_int32 fValue;
 	bool fFocusChanging;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_CONTROL_H__ */
+#endif /* __BHAPI_CONTROL_H__ */
 

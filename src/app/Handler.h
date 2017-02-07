@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,92 +28,92 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_HANDLER_H__
-#define __ETK_HANDLER_H__
+#ifndef __BHAPI_HANDLER_H__
+#define __BHAPI_HANDLER_H__
 
 #include "./../support/Archivable.h"
 #include "./../support/List.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class ELooper;
-class EMessage;
-class EMessageFilter;
-class EMessenger;
-class EToken;
+class BLooper;
+class BMessage;
+class BMessageFilter;
+class BMessenger;
+class BToken;
 
-#define E_OBSERVE_WHAT_CHANGE		"etk:observe_change_what"
-#define E_OBSERVE_ORIGINAL_WHAT		"etk:observe_orig_what"
-#define E_OBSERVER_OBSERVE_ALL		E_MAXUINT32
+#define B_OBSERVE_WHAT_CHANGE		"etk:observe_change_what"
+#define B_OBSERVE_ORIGINAL_WHAT		"etk:observe_orig_what"
+#define B_OBSERVER_OBSERVE_ALL	    B_MAXUINT32
 
-class _IMPEXP_ETK EHandler : public EArchivable {
+class _IMPEXP_BHAPI BHandler : public BArchivable {
 public:
-	EHandler(const char *name = NULL);
-	virtual ~EHandler();
+	BHandler(const char *name = NULL);
+	virtual ~BHandler();
 
 	// Archiving
-	EHandler(const EMessage *from);
-	virtual e_status_t Archive(EMessage *into, bool deep = true) const;
-	static EArchivable *Instantiate(const EMessage *from);
+	BHandler(const BMessage *from);
+	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+	static BArchivable *Instantiate(const BMessage *from);
 
 	void			SetName(const char *name);
 	const char		*Name() const;
 
-	virtual void		MessageReceived(EMessage *message);
+	virtual void		MessageReceived(BMessage *message);
 
-	ELooper			*Looper() const;
+	BLooper			*Looper() const;
 
-	virtual void		SetNextHandler(EHandler *handler);
-	EHandler		*NextHandler() const;
+	virtual void		SetNextHandler(BHandler *handler);
+	BHandler		*NextHandler() const;
 
 	bool			LockLooper();
-	e_status_t		LockLooperWithTimeout(e_bigtime_t microseconds_timeout);
+    b_status_t		LockLooperWithTimeout(b_bigtime_t microseconds_timeout);
 	void			UnlockLooper();
 
 	// Observer calls
-	e_status_t		StartWatching(EMessenger msgr, euint32 what);
-	e_status_t		StartWatchingAll(EMessenger msgr);
-	e_status_t		StopWatching(EMessenger msgr, euint32 what);
-	e_status_t		StopWatchingAll(EMessenger msgr);
+    b_status_t		StartWatching(BMessenger msgr, b_uint32 what);
+    b_status_t		StartWatchingAll(BMessenger msgr);
+    b_status_t		StopWatching(BMessenger msgr, b_uint32 what);
+    b_status_t		StopWatchingAll(BMessenger msgr);
 
-	e_status_t		StartWatching(EHandler *handler, euint32 what);
-	e_status_t		StartWatchingAll(EHandler *handler);
-	e_status_t		StopWatching(EHandler *handler, euint32 what);
-	e_status_t		StopWatchingAll(EHandler *handler);
+    b_status_t		StartWatching(BHandler *handler, b_uint32 what);
+	b_status_t		StartWatchingAll(BHandler *handler);
+    b_status_t		StopWatching(BHandler *handler, b_uint32 what);
+	b_status_t		StopWatchingAll(BHandler *handler);
 
 	// Notifier calls
-	virtual void		SendNotices(euint32 what, const EMessage *msg = NULL);
-	bool			IsWatched(euint32 what = E_OBSERVER_OBSERVE_ALL) const;
+    virtual void		SendNotices(b_uint32 what, const BMessage *msg = NULL);
+    bool			IsWatched(b_uint32 what = B_OBSERVER_OBSERVE_ALL) const;
 
 	// Message Filtering
-	virtual bool		AddFilter(EMessageFilter *filter);
-	virtual bool		RemoveFilter(EMessageFilter *filter);
-	virtual bool		SetFilterList(const EList *filterList);
-	const EList		*FilterList() const;
+	virtual bool		AddFilter(BMessageFilter *filter);
+	virtual bool		RemoveFilter(BMessageFilter *filter);
+	virtual bool		SetFilterList(const BList *filterList);
+	const BList		*FilterList() const;
 
 	// Scripting
-	virtual EHandler	*ResolveSpecifier(EMessage *msg, eint32 index, EMessage *specifier,
-						  eint32 what, const char *property);
-	virtual e_status_t	GetSupportedSuites(EMessage *data);
+    virtual BHandler	*ResolveSpecifier(BMessage *msg, b_int32 index, BMessage *specifier,
+                          b_int32 what, const char *property);
+	virtual b_status_t	GetSupportedSuites(BMessage *data);
 
 private:
-	friend class ELooper;
-	friend class EMessage;
+	friend class BLooper;
+	friend class BMessage;
 
-	friend euint64 etk_get_handler_token(const EHandler *handler);
+    friend b_uint64 bhapi_get_handler_token(const BHandler *handler);
 
-	EToken *fToken;
+	BToken *fToken;
 	char *fName;
-	ELooper *fLooper;
+	BLooper *fLooper;
 
-	EHandler *fPrevHandler;
-	EHandler *fNextHandler;
+	BHandler *fPrevHandler;
+	BHandler *fNextHandler;
 
 	void *fObserverList;
-	EList *fFilters;
+	BList *fFilters;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_HANDLER_H__ */
+#endif /* __BHAPI_HANDLER_H__ */
 

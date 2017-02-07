@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -29,7 +29,7 @@
  * --------------------------------------------------------------------------*/
 
 #include "./../kernel/Kernel.h"
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 #include "./../support/List.h"
 #include "./../support/SimpleLocker.h"
 
@@ -39,9 +39,9 @@
 
 class _LOCAL _ESystemClipboard {
 public:
-	ESimpleLocker fLocker;
-	EMessage fData;
-	EList fWatchingList;
+	BSimpleLocker fLocker;
+	BMessage fData;
+	BList fWatchingList;
 
 	_ESystemClipboard()
 	{
@@ -49,8 +49,8 @@ public:
 
 	~_ESystemClipboard()
 	{
-		EMessenger *msgr;
-		while((msgr = (EMessenger*)fWatchingList.RemoveItem((eint32)0)) != NULL) delete msgr;
+		BMessenger *msgr;
+		while((msgr = (BMessenger*)fWatchingList.RemoveItem((b_int32)0)) != NULL) delete msgr;
 	}
 
 	bool Lock()
@@ -63,90 +63,90 @@ public:
 		fLocker.Unlock();
 	}
 
-	const EMessage& Data()
+	const BMessage& Data()
 	{
 		return fData;
 	}
 
-	euint32 Count()
+	b_uint32 Count()
 	{
 		return(fData.IsEmpty() ? 0 : 1);
 	}
 
-	e_status_t AddWatching(const EMessenger &target)
+	b_status_t AddWatching(const BMessenger &target)
 	{
-		if(target.IsValid() == false) return E_ERROR;
+		if(target.IsValid() == false) return B_ERROR;
 
-		for(eint32 i = 0; i < fWatchingList.CountItems(); i++)
+		for(b_int32 i = 0; i < fWatchingList.CountItems(); i++)
 		{
-			EMessenger *msgr = (EMessenger*)fWatchingList.ItemAt(i);
-			if(*msgr == target) return E_ERROR;
+			BMessenger *msgr = (BMessenger*)fWatchingList.ItemAt(i);
+			if(*msgr == target) return B_ERROR;
 		}
 
-		EMessenger *msgr = new EMessenger(target);
+		BMessenger *msgr = new BMessenger(target);
 		if(msgr->IsValid() == false || fWatchingList.AddItem(msgr) == false)
 		{
 			delete msgr;
-			return E_ERROR;
+			return B_ERROR;
 		}
 
-		return E_OK;
+		return B_OK;
 	}
 
-	e_status_t RemoveWatching(const EMessenger &target)
+	b_status_t RemoveWatching(const BMessenger &target)
 	{
-		for(eint32 i = 0; i < fWatchingList.CountItems(); i++)
+		for(b_int32 i = 0; i < fWatchingList.CountItems(); i++)
 		{
-			EMessenger *msgr = (EMessenger*)fWatchingList.ItemAt(i);
+			BMessenger *msgr = (BMessenger*)fWatchingList.ItemAt(i);
 			if(*msgr == target)
 			{
 				fWatchingList.RemoveItem(msgr);
 				delete msgr;
-				return E_OK;
+				return B_OK;
 			}
 		}
 
-		return E_ERROR;
+		return B_ERROR;
 	}
 
-	e_status_t Commit(EMessage *msg)
+	b_status_t Commit(BMessage *msg)
 	{
-		if(msg == NULL || msg->IsEmpty()) return E_ERROR;
+		if(msg == NULL || msg->IsEmpty()) return B_ERROR;
 
 		fData = *msg;
 
-		EMessage aMsg(E_CLIPBOARD_CHANGED);
-		aMsg.AddInt64("when", e_real_time_clock_usecs());
+		BMessage aMsg(B_CLIPBOARD_CHANGED);
+		aMsg.AddInt64("when", b_real_time_clock_usecs());
 		aMsg.AddString("name", "system");
 
-		for(eint32 i = 0; i < fWatchingList.CountItems(); i++)
+		for(b_int32 i = 0; i < fWatchingList.CountItems(); i++)
 		{
-			EMessenger *msgr = (EMessenger*)fWatchingList.ItemAt(i);
+			BMessenger *msgr = (BMessenger*)fWatchingList.ItemAt(i);
 			msgr->SendMessage(&aMsg);
 		}
 
-		return E_OK;
+		return B_OK;
 	}
 };
 
-static _ESystemClipboard __etk_system_clipboard__;
+static _ESystemClipboard __bhapi_system_clipboard__;
 
 
-EClipboard::EClipboard(const char *name)
+BClipboard::BClipboard(const char *name)
 	: fName(NULL), fData(NULL)
 {
 	if(name == NULL || strcmp(name, "system") != 0)
 	{
-		ETK_WARNING("[APP]: %s --- Only \"system\" supported yet, waiting for implementing!", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[APP]: %s --- Only \"system\" supported yet, waiting for implementing!", __PRETTY_FUNCTION__);
 		return;
 	}
 
-	fName = (name == NULL ? NULL : EStrdup(name));
-	fData = new EMessage();
+	fName = (name == NULL ? NULL : b_strdup(name));
+	fData = new BMessage();
 }
 
 
-EClipboard::~EClipboard()
+BClipboard::~BClipboard()
 {
 	if(fName) delete[] fName;
 	if(fData) delete fData;
@@ -154,25 +154,25 @@ EClipboard::~EClipboard()
 
 
 const char*
-EClipboard::Name() const
+BClipboard::Name() const
 {
 	return fName;
 }
 
 
 bool
-EClipboard::Lock()
+BClipboard::Lock()
 {
 	// TODO
 	if(fName == NULL) return fLocker.Lock();
 
 	if(fLocker.Lock() == false) return false;
 
-	if(fLocker.CountLocks() == E_INT64_CONSTANT(1))
+	if(fLocker.CountLocks() == B_INT64_CONSTANT(1))
 	{
-		__etk_system_clipboard__.Lock();
-		*fData = __etk_system_clipboard__.Data();
-		__etk_system_clipboard__.Unlock();
+		__bhapi_system_clipboard__.Lock();
+		*fData = __bhapi_system_clipboard__.Data();
+		__bhapi_system_clipboard__.Unlock();
 	}
 
 	return true;
@@ -180,123 +180,123 @@ EClipboard::Lock()
 
 
 void
-EClipboard::Unlock()
+BClipboard::Unlock()
 {
 	fLocker.Unlock();
 }
 
 
-eint64
-EClipboard::CountLocks() const
+b_int64
+BClipboard::CountLocks() const
 {
 	return fLocker.CountLocks();
 }
 
 
-e_status_t
-EClipboard::Clear()
+b_status_t
+BClipboard::Clear()
 {
-	if(fLocker.CountLocks() <= E_INT64_CONSTANT(0) || fData == NULL) return E_ERROR;
+	if(fLocker.CountLocks() <= B_INT64_CONSTANT(0) || fData == NULL) return B_ERROR;
 	fData->MakeEmpty();
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EClipboard::Commit()
+b_status_t
+BClipboard::Commit()
 {
 	// TODO
-	if(fName == NULL) return E_ERROR;
+	if(fName == NULL) return B_ERROR;
 
-	if(fLocker.CountLocks() <= E_INT64_CONSTANT(0) || fData == NULL || fData->IsEmpty()) return E_ERROR;
+	if(fLocker.CountLocks() <= B_INT64_CONSTANT(0) || fData == NULL || fData->IsEmpty()) return B_ERROR;
 
-	__etk_system_clipboard__.Lock();
-	__etk_system_clipboard__.Commit(fData);
-	__etk_system_clipboard__.Unlock();
+	__bhapi_system_clipboard__.Lock();
+	__bhapi_system_clipboard__.Commit(fData);
+	__bhapi_system_clipboard__.Unlock();
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EClipboard::Revert()
+b_status_t
+BClipboard::Revert()
 {
 	// TODO
-	if(fName == NULL) return E_ERROR;
+	if(fName == NULL) return B_ERROR;
 
-	if(fLocker.CountLocks() <= E_INT64_CONSTANT(0) || fData == NULL) return E_ERROR;
+	if(fLocker.CountLocks() <= B_INT64_CONSTANT(0) || fData == NULL) return B_ERROR;
 
-	__etk_system_clipboard__.Lock();
-	*fData = __etk_system_clipboard__.Data();
-	__etk_system_clipboard__.Unlock();
+	__bhapi_system_clipboard__.Lock();
+	*fData = __bhapi_system_clipboard__.Data();
+	__bhapi_system_clipboard__.Unlock();
 
-	return E_OK;
+	return B_OK;
 }
 
 
-EMessenger
-EClipboard::DataSource() const
+BMessenger
+BClipboard::DataSource() const
 {
 	// TODO
-	if(fName == NULL) return EMessenger();
+	if(fName == NULL) return BMessenger();
 
-	return etk_app_messenger;
+	return bhapi_app_messenger;
 }
 
 
-EMessage*
-EClipboard::Data() const
+BMessage*
+BClipboard::Data() const
 {
 	return fData;
 }
 
 
-euint32
-EClipboard::LocalCount() const
+b_uint32
+BClipboard::LocalCount() const
 {
 	// TODO
 	return SystemCount();
 }
 
 
-euint32
-EClipboard::SystemCount() const
+b_uint32
+BClipboard::SystemCount() const
 {
 	// TODO
 	if(fName == NULL) return 0;
 
-	__etk_system_clipboard__.Lock();
-	euint32 retVal = __etk_system_clipboard__.Count();
-	__etk_system_clipboard__.Unlock();
+	__bhapi_system_clipboard__.Lock();
+	b_uint32 retVal = __bhapi_system_clipboard__.Count();
+	__bhapi_system_clipboard__.Unlock();
 
 	return retVal;
 }
 
 
-e_status_t
-EClipboard::StartWatching(const EMessenger &target)
+b_status_t
+BClipboard::StartWatching(const BMessenger &target)
 {
 	// TODO
-	if(fName == NULL) return E_ERROR;
+	if(fName == NULL) return B_ERROR;
 
-	if(target.IsValid() == false) return E_ERROR;
-	__etk_system_clipboard__.Lock();
-	e_status_t retVal = __etk_system_clipboard__.AddWatching(target);
-	__etk_system_clipboard__.Unlock();
+	if(target.IsValid() == false) return B_ERROR;
+	__bhapi_system_clipboard__.Lock();
+	b_status_t retVal = __bhapi_system_clipboard__.AddWatching(target);
+	__bhapi_system_clipboard__.Unlock();
 
 	return retVal;
 }
 
 
-e_status_t
-EClipboard::StopWatching(const EMessenger &target)
+b_status_t
+BClipboard::StopWatching(const BMessenger &target)
 {
 	// TODO
-	if(fName == NULL) return E_ERROR;
+	if(fName == NULL) return B_ERROR;
 
-	__etk_system_clipboard__.Lock();
-	e_status_t retVal = __etk_system_clipboard__.RemoveWatching(target);
-	__etk_system_clipboard__.Unlock();
+	__bhapi_system_clipboard__.Lock();
+	b_status_t retVal = __bhapi_system_clipboard__.RemoveWatching(target);
+	__bhapi_system_clipboard__.Unlock();
 
 	return retVal;
 }

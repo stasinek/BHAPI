@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -34,7 +34,7 @@
 #include "etk-x11.h"
 
 #include "./../../kernel/Kernel.h"
-#include "./../../support/String.h"
+#include "./../../support/StringMe.h"
 #include "./../../support/Locker.h"
 #include "./../../support/Autolock.h"
 #include "./../../app/Application.h"
@@ -44,56 +44,56 @@
 #define CLICK_TIMEOUT 200
 
 
-static void etk_x11_clipboard_changed(const char *aStr)
+static void bhapi_x11_clipboard_changed(const char *aStr)
 {
 	if(aStr == NULL || *aStr == 0) return;
 
-	EMessage *clipMsg = NULL;
-	if(etk_clipboard.Lock())
+	BMessage *clipMsg = NULL;
+	if(bhapi_clipboard.Lock())
 	{
-		if((clipMsg = etk_clipboard.Data()) != NULL)
+		if((clipMsg = bhapi_clipboard.Data()) != NULL)
 		{
 			const char *text = NULL;
 			ssize_t textLen = 0;
-			if(clipMsg->FindData("text/plain", E_MIME_TYPE, (const void**)&text, &textLen) == false ||
+			if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
 			   text == NULL || textLen != (ssize_t)strlen(aStr) || strncmp(text, aStr, (size_t)textLen) != 0)
 			{
-				etk_clipboard.Clear();
+				bhapi_clipboard.Clear();
 				clipMsg->AddBool("etk:msg_from_gui", true);
-				clipMsg->AddData("text/plain", E_MIME_TYPE, aStr, strlen(aStr));
-				etk_clipboard.Commit();
+				clipMsg->AddData("text/plain", B_MIME_TYPE, aStr, strlen(aStr));
+				bhapi_clipboard.Commit();
 			}
 		}
-		etk_clipboard.Unlock();
+		bhapi_clipboard.Unlock();
 	}
 }
 
 
-class _LOCAL EX11ClipboardMessageFilter : public EMessageFilter {
+class _LOCAL EX11ClipboardMessageFilter : public BMessageFilter {
 public:
 	EXGraphicsEngine *fEngine;
 
 	EX11ClipboardMessageFilter(EXGraphicsEngine *x11Engine)
-		: EMessageFilter(E_CLIPBOARD_CHANGED, NULL)
+		: BMessageFilter(B_CLIPBOARD_CHANGED, NULL)
 	{
 		fEngine = x11Engine;
 	}
 
-	virtual e_filter_result Filter(EMessage *message, EHandler **target)
+	virtual b_filter_result Filter(BMessage *message, BHandler **target)
 	{
-		if(fEngine == NULL || message->what != E_CLIPBOARD_CHANGED) return E_DISPATCH_MESSAGE;
+		if(fEngine == NULL || message->what != B_CLIPBOARD_CHANGED) return B_DISPATCH_MESSAGE;
 
 		do
 		{
 			const char *text = NULL;
 			ssize_t textLen = 0;
 
-			EMessage *msg;
+			BMessage *msg;
 
-			etk_clipboard.Lock();
-			if(!((msg = etk_clipboard.Data()) == NULL || msg->HasBool("etk:msg_from_gui")))
-				msg->FindData("text/plain", E_MIME_TYPE, (const void**)&text, &textLen);
-			etk_clipboard.Unlock();
+			bhapi_clipboard.Lock();
+			if(!((msg = bhapi_clipboard.Data()) == NULL || msg->HasBool("etk:msg_from_gui")))
+				msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
+			bhapi_clipboard.Unlock();
 
 			if(textLen <= 0) break;
 
@@ -102,27 +102,27 @@ public:
 			fEngine->Unlock();
 		} while(false);
 
-		return E_DISPATCH_MESSAGE;
+		return B_DISPATCH_MESSAGE;
 	}
 };
 
 
-static int etk_x_io_error_handler(Display *display)
+static int bhapi_x_io_error_handler(Display *display)
 {
-	ETK_ERROR("[GRAPHICS]: X11 IO Error!");
+	BHAPI_ERROR("[GRAPHICS]: X11 IO Error!");
 	return 0;
 }
 
 
-static int etk_x_error_handler(Display *display, XErrorEvent *event)
+static int bhapi_x_error_handler(Display *display, XErrorEvent *event)
 {
-#ifndef ETK_DISABLE_MORE_CHECKS
+#ifndef BHAPI_DISABLE_MORE_CHECKS
 	char buffer[1024];
 	bzero(buffer, sizeof(buffer));
 
 	XGetErrorText(display, event->error_code, buffer, 1024);
 
-	ETK_OUTPUT("\n[GRAPHICS]: X11 Error:\n"
+	BHAPI_OUTPUT("\n[GRAPHICS]: X11 Error:\n"
 		   "            X Error of failed request: %s\n"
 		   "            Major opcode of failed request: %d\n"
 		   "            Serial number of failed request: %d\n",
@@ -133,31 +133,31 @@ static int etk_x_error_handler(Display *display, XErrorEvent *event)
 }
 
 
-#ifndef ETK_GRAPHICS_X11_BUILT_IN
+#ifndef BHAPI_GRAPHICS_X11_BUILT_IN
 extern "C" {
-_EXPORT EGraphicsEngine* instantiate_graphics_engine()
+_EXPORT BGraphicsEngine* instantiate_graphics_engine()
 #else
-_IMPEXP_ETK EGraphicsEngine* etk_get_built_in_graphics_engine()
+_IMPEXP_BHAPI BGraphicsEngine* bhapi_get_built_in_graphics_engine()
 #endif
 {
-#if !(defined(ETK_GRAPHICS_X11_BUILT_IN) || defined(ETK_OS_UNIX) || defined(ETK_OS_CYGWIN))
-	EString useX11 = getenv("ETK_USE_X11");
+#if !(defined(BHAPI_GRAPHICS_X11_BUILT_IN) || defined(BHAPI_OS_UNIX) || defined(BHAPI_OS_CYGWIN))
+	BString useX11 = getenv("BHAPI_USE_X11");
 	if(!(useX11.ICompare("true") == 0 || useX11 == "1")) return NULL;
 #endif
 	if(getenv("DISPLAY") == NULL) return NULL;
 	return(new EXGraphicsEngine());
 }
-#ifndef ETK_GRAPHICS_X11_BUILT_IN
+#ifndef BHAPI_GRAPHICS_X11_BUILT_IN
 } // extern "C"
 #endif
 
 
 EXGraphicsEngine::EXGraphicsEngine()
-	: EGraphicsEngine(),
+	: BGraphicsEngine(),
 	  xDisplay(NULL), xSupportThreads(false),
 	  xVisual(NULL), xInputMethodEventMask(0), xInputMethod(NULL), xInputContext(NULL),
-	  xDoQuit(false), xPrevMouseDownSerial(E_MAXULONG), xPrevMouseDownTime(0), xPrevMouseDownCount(0),
-	  xLocksCount(E_INT64_CONSTANT(0)), fX11Thread(NULL), fClipboardFilter(NULL)
+	  xDoQuit(false), xPrevMouseDownSerial(B_MAXULONG), xPrevMouseDownTime(0), xPrevMouseDownCount(0),
+	  xLocksCount(B_INT64_CONSTANT(0)), fX11Thread(NULL), fClipboardFilter(NULL)
 {
 }
 
@@ -176,7 +176,7 @@ EXGraphicsEngine::Lock()
 
 	if(xDisplay != NULL && xSupportThreads)
 	{
-		if(xLocksCount == E_INT64_CONSTANT(0)) XLockDisplay(xDisplay);
+		if(xLocksCount == B_INT64_CONSTANT(0)) XLockDisplay(xDisplay);
 		xLocksCount++;
 	}
 
@@ -187,54 +187,54 @@ EXGraphicsEngine::Lock()
 void
 EXGraphicsEngine::Unlock()
 {
-	if(fLocker.CountLocks() <= E_INT64_CONSTANT(0))
+	if(fLocker.CountLocks() <= B_INT64_CONSTANT(0))
 	{
-		ETK_WARNING("[GRAPHICS]: %s -- Locker didn't locked by current thread.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[GRAPHICS]: %s -- Locker didn't locked by current thread.", __PRETTY_FUNCTION__);
 		return;
 	}
 
-	if(xDisplay != NULL && xLocksCount > E_INT64_CONSTANT(0) && xSupportThreads)
+	if(xDisplay != NULL && xLocksCount > B_INT64_CONSTANT(0) && xSupportThreads)
 	{
 		xLocksCount--;
-		if(xLocksCount == E_INT64_CONSTANT(0)) XUnlockDisplay(xDisplay);
+		if(xLocksCount == B_INT64_CONSTANT(0)) XUnlockDisplay(xDisplay);
 	}
 
 	fLocker.Unlock();
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsEngine::InitCheck()
 {
-	EAutolock <EXGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || xDisplay == NULL || xDoQuit) return E_NO_INIT;
-	return E_OK;
+	BAutolock <EXGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || xDisplay == NULL || xDoQuit) return B_NO_INIT;
+	return B_OK;
 }
 
 
 bool
-EXGraphicsEngine::GetContactor(Window w, EMessenger *msgr)
+EXGraphicsEngine::GetContactor(Window w, BMessenger *msgr)
 {
 	if(w == None || msgr == NULL) return false;
 
-	etk_x11_address_t *self_address = NULL;
+	bhapi_x11_address_t *self_address = NULL;
 	Atom type = None;
 	int format;
 	unsigned long nitems;
 	unsigned long bytes_after;
 
-	EAutolock <EXGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || InitCheck() != E_OK) return false;
+	BAutolock <EXGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || InitCheck() != B_OK) return false;
 
 	if(XGetWindowProperty(xDisplay, w,
-			      XInternAtom(xDisplay, "ATOM_ETK_WINDOW_ADDRESS", False), 0, ETK_X11_ADDRESS_T_NELEMENTS,
-			      False, XInternAtom(xDisplay, "ATOM_ETK_CAST_ADDRESS", False),
+			      XInternAtom(xDisplay, "ATOM_BHAPI_WINDOW_ADDRESS", False), 0, BHAPI_X11_ADDRESS_T_NELEMENTS,
+			      False, XInternAtom(xDisplay, "ATOM_BHAPI_CAST_ADDRESS", False),
 			      &type, &format, &nitems,
 			      &bytes_after, (unsigned char **)&self_address) != Success) return false;
 
-	if(!self_address || format != ETK_X11_ADDRESS_T_FORMAT || nitems != ETK_X11_ADDRESS_T_NELEMENTS)
+	if(!self_address || format != BHAPI_X11_ADDRESS_T_FORMAT || nitems != BHAPI_X11_ADDRESS_T_NELEMENTS)
 	{
-//		ETK_DEBUG("[GRAPHICS]: %s --- Can't get address for XWindow!", __PRETTY_FUNCTION__);
+//		BHAPI_DEBUG("[GRAPHICS]: %s --- Can't get address for XWindow!", __PRETTY_FUNCTION__);
 		if(self_address) XFree(self_address);
 		return false;
 	}
@@ -242,7 +242,7 @@ EXGraphicsEngine::GetContactor(Window w, EMessenger *msgr)
 	EXGraphicsWindow *win = (EXGraphicsWindow*)reinterpret_cast<void*>(*self_address);
 	if(!win)
 	{
-//		ETK_DEBUG("[GRAPHICS]: %s --- Can't get address for XWindow!", __PRETTY_FUNCTION__);
+//		BHAPI_DEBUG("[GRAPHICS]: %s --- Can't get address for XWindow!", __PRETTY_FUNCTION__);
 		XFree(self_address);
 		return false;
 	}
@@ -255,16 +255,16 @@ EXGraphicsEngine::GetContactor(Window w, EMessenger *msgr)
 }
 
 
-static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
+static void bhapi_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 {
 	if(x11Engine == NULL || event == NULL) return;
 
-	e_bigtime_t currentTime = e_real_time_clock_usecs();
-//	ETK_DEBUG("[GRAPHICS]: Event->Type = %ld", event->type);
+	b_bigtime_t currentTime = b_real_time_clock_usecs();
+//	BHAPI_DEBUG("[GRAPHICS]: Event->Type = %ld", event->type);
 
 	bool handled = false;
-	EMessenger etkWinMsgr;
-	EMessage message;
+	BMessenger etkWinMsgr;
+	BMessage message;
 
 	message.AddBool("etk:msg_from_gui", true);
 	message.AddInt64("when", currentTime);
@@ -292,24 +292,24 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				x11Engine->Lock();
 				if(event->xselectionrequest.selection == XA_PRIMARY)
 				{
-					EString aStr;
+					BString aStr;
 
-					if(etk_clipboard.Lock())
+					if(bhapi_clipboard.Lock())
 					{
-						EMessage *clipMsg = NULL;
-						if((clipMsg = etk_clipboard.Data()) != NULL)
+						BMessage *clipMsg = NULL;
+						if((clipMsg = bhapi_clipboard.Data()) != NULL)
 						{
 							const char *text = NULL;
 							ssize_t textLen = 0;
-							clipMsg->FindData("text/plain", E_MIME_TYPE, (const void**)&text, &textLen);
-							if(textLen > 0) aStr.SetTo(text, (eint32)textLen);
+							clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
+							if(textLen > 0) aStr.SetTo(text, (b_int32)textLen);
 						}
 					}
-					etk_clipboard.Unlock();
+					bhapi_clipboard.Unlock();
 
 					if(aStr.Length() > 0 && event->xselectionrequest.target == x11Engine->atomCompoundText)
 					{
-						eunichar32 *wStr = e_utf8_convert_to_utf32(aStr.String(), -1);
+						b_unichar32 *wStr = b_utf8_convert_to_utf32(aStr.String(), -1);
 						XTextProperty prop;
 						prop.value = NULL;
 						if(!(wStr == NULL ||
@@ -408,22 +408,22 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 							if(XwcTextPropertyToTextList(x11Engine->xDisplay,
 										     &tProp, &wStrList, &wCount) == Success)
 							{
-								EString tmpStr;
+								BString tmpStr;
 								const wchar_t **tmp = (const wchar_t **)wStrList;
 								for(int i = 0; i < wCount && *tmp != NULL; i++, tmp++)
 								{
-									char *wStr = e_utf32_convert_to_utf8((const eunichar32*)(*tmp), -1);
+									char *wStr = b_utf32_convert_to_utf8((const b_unichar32*)(*tmp), -1);
 									if(wStr == NULL) continue;
 									tmpStr.Append(wStr);
 									free(wStr);
 								}
-								if(tmpStr.Length() > 0) aStr = e_strdup(tmpStr.String());
-								XwcFreeStringList(wStrList);
+								if(tmpStr.Length() > 0) aStr = b_strdup(tmpStr.String());
+								XwcFreStringList(wStrList);
 							}
 						}
 						else if(event->xselection.target == XA_STRING)
 						{
-							aStr = e_strndup((const char*)prop, (eint32)len);
+							aStr = b_strndup((const char*)prop, (b_int32)len);
 						}
 					}
 				}
@@ -434,7 +434,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 
 				if(aStr != NULL)
 				{
-					etk_x11_clipboard_changed(aStr);
+					bhapi_x11_clipboard_changed(aStr);
 					free(aStr);
 				}
 			}
@@ -447,7 +447,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				handled = true;
 				if(etkWinMsgr.IsValid() == false) break;
 
-				ERect rect;
+				BRect rect;
 
 				Window child;
 				int x = 0, y = 0;
@@ -472,9 +472,9 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				message.AddFloat("width", rect.Width());
 				message.AddFloat("height", rect.Height());
 
-				message.what = E_WINDOW_RESIZED;
+				message.what = B_WINDOW_RESIZED;
 				etkWinMsgr.SendMessage(&message);
-				message.what = E_WINDOW_MOVED;
+				message.what = B_WINDOW_MOVED;
 				etkWinMsgr.SendMessage(&message);
 			}
 			break;
@@ -486,7 +486,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				handled = true;
 				if(etkWinMsgr.IsValid() == false) break;
 
-				ERect rect;
+				BRect rect;
 
 				rect.left = (float)event->xexpose.x;
 				rect.top = (float)event->xexpose.y;
@@ -509,7 +509,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				handled = true;
 				if(etkWinMsgr.IsValid() == false) break;
 
-				euint32 winWorkspace = 0;
+				b_uint32 winWorkspace = 0;
 				Atom type = None;
 				int format;
 				unsigned long nitems;
@@ -525,7 +525,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 					if(type != None && format == 32 && nitems == 1 && prop != NULL)
 					{
 						long desktop = *((long*)prop);
-						winWorkspace = ((unsigned long)desktop == 0xFFFFFFFF ? E_ALL_WORKSPACES : desktop + 1);
+						winWorkspace = ((unsigned long)desktop == 0xFFFFFFFF ? B_ALL_WORKSPACES : desktop + 1);
 					}
 				}
 				if(prop != NULL) XFree(prop);
@@ -533,8 +533,8 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 
 				if(winWorkspace != 0)
 				{
-					message.what = E_WORKSPACES_CHANGED;
-					message.AddInt32("new", (eint32)winWorkspace);
+					message.what = B_WORKSPACES_CHANGED;
+					message.AddInt32("new", (b_int32)winWorkspace);
 					etkWinMsgr.SendMessage(&message);
 				}
 			}
@@ -547,7 +547,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				handled = true;
 				if(etkWinMsgr.IsValid() == false) break;
 
-				euint8 winState = 0;
+				b_uint8 winState = 0;
 				Atom type = None;
 				int format;
 				unsigned long nitems;
@@ -557,8 +557,8 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				x11Engine->Lock();
 				unsigned char *prop = NULL;
 				XGetWindowProperty(x11Engine->xDisplay, xid_owner,
-						   XInternAtom(x11Engine->xDisplay, "ATOM_ETK_WINDOW_STATE", False), 0, 1,
-						   False, XInternAtom(x11Engine->xDisplay, "ATOM_ETK_BOOL", False),
+						   XInternAtom(x11Engine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False), 0, 1,
+						   False, XInternAtom(x11Engine->xDisplay, "ATOM_BHAPI_BOOL", False),
 						   &type, &format, &nitems,
 						   &bytes_after, &prop);
 				XGetWindowAttributes(x11Engine->xDisplay, xid_owner, &xattr);
@@ -567,7 +567,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 					x11Engine->Unlock();
 					break;
 				}
-				winState = (euint8)*prop;
+				winState = (b_uint8)*prop;
 				XFree(prop);
 				x11Engine->Unlock();
 
@@ -585,7 +585,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 						{
 							message.what = _UPDATE_;
 							message.AddRect("etk:frame",
-									ERect(0, 0, (float)xattr.width - 1.f, (float)xattr.height - 1.f));
+									BRect(0, 0, (float)xattr.width - 1.f, (float)xattr.height - 1.f));
 							etkWinMsgr.SendMessage(&message);
 						}
 						break;
@@ -595,18 +595,18 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 							x11Engine->Lock();
 							winState = 1; // shown
 							XChangeProperty(x11Engine->xDisplay, xid_owner,
-									XInternAtom(x11Engine->xDisplay, "ATOM_ETK_WINDOW_STATE", False),
-									XInternAtom(x11Engine->xDisplay, "ATOM_ETK_BOOL", False), 8,
+									XInternAtom(x11Engine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False),
+									XInternAtom(x11Engine->xDisplay, "ATOM_BHAPI_BOOL", False), 8,
 									PropModeReplace, (const unsigned char*)&winState, 1);
 							x11Engine->Unlock();
 
-							message.what = E_MINIMIZED;
+							message.what = B_MINIMIZED;
 							message.AddBool("minimize", false);
 							etkWinMsgr.SendMessage(&message);
 
 							message.what = _UPDATE_;
 							message.AddRect("etk:frame",
-									ERect(0, 0, (float)xattr.width - 1.f, (float)xattr.height - 1.f));
+									BRect(0, 0, (float)xattr.width - 1.f, (float)xattr.height - 1.f));
 							etkWinMsgr.SendMessage(&message);
 						}
 						break;
@@ -624,7 +624,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				handled = true;
 				if(etkWinMsgr.IsValid() == false) break;
 
-				euint8 winState = 0;
+				b_uint8 winState = 0;
 				Atom type = None;
 				int format;
 				unsigned long nitems;
@@ -633,8 +633,8 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				x11Engine->Lock();
 				unsigned char *prop = NULL;
 				XGetWindowProperty(x11Engine->xDisplay, xid_owner,
-						   XInternAtom(x11Engine->xDisplay, "ATOM_ETK_WINDOW_STATE", False), 0, 1,
-						   False, XInternAtom(x11Engine->xDisplay, "ATOM_ETK_BOOL", False),
+						   XInternAtom(x11Engine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False), 0, 1,
+						   False, XInternAtom(x11Engine->xDisplay, "ATOM_BHAPI_BOOL", False),
 						   &type, &format, &nitems,
 						   &bytes_after, &prop);
 				if(!prop)
@@ -642,7 +642,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 					x11Engine->Unlock();
 					break;
 				}
-				winState = (euint8)*prop;
+				winState = (b_uint8)*prop;
 				XFree(prop);
 				x11Engine->Unlock();
 
@@ -651,12 +651,12 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 					x11Engine->Lock();
 					winState = 2; // iconed
 					XChangeProperty(x11Engine->xDisplay, xid_owner,
-							XInternAtom(x11Engine->xDisplay, "ATOM_ETK_WINDOW_STATE", False),
-							XInternAtom(x11Engine->xDisplay, "ATOM_ETK_BOOL", False), 8,
+							XInternAtom(x11Engine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False),
+							XInternAtom(x11Engine->xDisplay, "ATOM_BHAPI_BOOL", False), 8,
 							PropModeReplace, (const unsigned char*)&winState, 1);
 					x11Engine->Unlock();
 
-					message.what = E_MINIMIZED;
+					message.what = B_MINIMIZED;
 					message.AddBool("minimize", true);
 					etkWinMsgr.SendMessage(&message);
 				}
@@ -670,12 +670,12 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				handled = true;
 				if(etkWinMsgr.IsValid() == false) break;
 
-				message.what = E_MOUSE_DOWN;
+				message.what = B_MOUSE_DOWN;
 
-				eint32 button = (eint32)(event->xbutton.button);
+				b_int32 button = (b_int32)(event->xbutton.button);
 				if(button >= 4 && button <= 7)
 				{
-					message.what = E_MOUSE_WHEEL_CHANGED;
+					message.what = B_MOUSE_WHEEL_CHANGED;
 					float delta_x = 0;
 					float delta_y = 0;
 					if(button <= 5) delta_y = (button == 4 ? -1.0f : 1.0f);
@@ -686,8 +686,8 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				}
 				else
 				{
-					eint32 buttons = button;
-					eint32 clicks = 1;
+					b_int32 buttons = button;
+					b_int32 clicks = 1;
 
 					unsigned int state = event->xbutton.state;
 					if((state & Button1Mask) && button != 1) buttons += 1;
@@ -711,14 +711,14 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 					message.AddInt32("buttons", buttons);
 					message.AddInt32("clicks", clicks);
 
-					message.AddPoint("where", EPoint((float)event->xbutton.x, (float)event->xbutton.y));
-					message.AddPoint("screen_where", EPoint((float)event->xbutton.x_root, (float)event->xbutton.y_root));
+					message.AddPoint("where", BPoint((float)event->xbutton.x, (float)event->xbutton.y));
+					message.AddPoint("screen_where", BPoint((float)event->xbutton.x_root, (float)event->xbutton.y_root));
 				}
 
 				// TODO: modifiers, clicks
 
 				message.AddMessenger("etk:msg_for_target", etkWinMsgr);
-				etkWinMsgr = EMessenger(etk_app);
+				etkWinMsgr = BMessenger(bhapi_app);
 				etkWinMsgr.SendMessage(&message);
 			}
 			break;
@@ -730,15 +730,15 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				handled = true;
 				if(etkWinMsgr.IsValid() == false) break;
 
-				eint32 button = (eint32)(event->xbutton.button);
+				b_int32 button = (b_int32)(event->xbutton.button);
 				if(button >= 4 && button <= 7) break;
 
-				message.what = E_MOUSE_UP;
+				message.what = B_MOUSE_UP;
 
-				message.AddPoint("where", EPoint((float)event->xbutton.x, (float)event->xbutton.y));
-				message.AddPoint("screen_where", EPoint((float)event->xbutton.x_root, (float)event->xbutton.y_root));
+				message.AddPoint("where", BPoint((float)event->xbutton.x, (float)event->xbutton.y));
+				message.AddPoint("screen_where", BPoint((float)event->xbutton.x_root, (float)event->xbutton.y_root));
 
-				eint32 buttons = 0;
+				b_int32 buttons = 0;
 				unsigned int state = event->xbutton.state;
 				if((state & Button1Mask) && button != 1) buttons += 1;
 				if((state & Button2Mask) && button != 2) buttons += 2;
@@ -749,7 +749,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				// TODO: modifiers
 
 				message.AddMessenger("etk:msg_for_target", etkWinMsgr);
-				etkWinMsgr = EMessenger(etk_app);
+				etkWinMsgr = BMessenger(bhapi_app);
 				etkWinMsgr.SendMessage(&message);
 			}
 			break;
@@ -761,19 +761,19 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				handled = true;
 				if(etkWinMsgr.IsValid() == false) break;
 
-				message.what = E_MOUSE_MOVED;
+				message.what = B_MOUSE_MOVED;
 
-				message.AddPoint("where", EPoint((float)event->xmotion.x, (float)event->xmotion.y));
-				message.AddPoint("screen_where", EPoint((float)event->xmotion.x_root, (float)event->xmotion.y_root));
+				message.AddPoint("where", BPoint((float)event->xmotion.x, (float)event->xmotion.y));
+				message.AddPoint("screen_where", BPoint((float)event->xmotion.x_root, (float)event->xmotion.y_root));
 
-				eint32 buttons = 0;
+				b_int32 buttons = 0;
 				if(event->xmotion.state & Button1Mask) buttons += 1;
 				if(event->xmotion.state & Button2Mask) buttons += 2;
 				if(event->xmotion.state & Button3Mask) buttons += 3;
 				message.AddInt32("buttons", buttons);
 
 				message.AddMessenger("etk:msg_for_target", etkWinMsgr);
-				etkWinMsgr = EMessenger(etk_app);
+				etkWinMsgr = BMessenger(bhapi_app);
 				etkWinMsgr.SendMessage(&message);
 			}
 			break;
@@ -802,7 +802,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				handled = true;
 				if(etkWinMsgr.IsValid() == false) break;
 
-				message.what = E_WINDOW_ACTIVATED;
+				message.what = B_WINDOW_ACTIVATED;
 				etkWinMsgr.SendMessage(&message);
 
 				x11Engine->Lock();
@@ -822,9 +822,9 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				handled = true;
 				if(etkWinMsgr.IsValid() == false) break;
 
-				message.what = (event->type == KeyPress ? E_KEY_DOWN : E_KEY_UP);
+				message.what = (event->type == KeyPress ? B_KEY_DOWN : B_KEY_UP);
 
-				message.AddInt32("key", (eint32)(event->xkey.keycode));
+				message.AddInt32("key", (b_int32)(event->xkey.keycode));
 
 				// TODO: etk:key_repeat, modifiers, states, raw_char
 
@@ -836,7 +836,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 
 				bzero(keybuffer, sizeof(keybuffer));
 
-				eint32 modifiers = 0;
+				b_int32 modifiers = 0;
 
 				x11Engine->Lock();
 				keynum = XLookupString(&event->xkey, keybuffer, 16, &keysym, &status);
@@ -852,36 +852,36 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				}
 #if 0
 				if(event->type == KeyRelease)
-					ETK_DEBUG("event->xkey.state & ShiftMask --- %s",
+					BHAPI_DEBUG("event->xkey.state & ShiftMask --- %s",
 						  (event->xkey.state & ShiftMask) ? "TRUE" : "FALSE");
 #endif
 				if((keysym >= XK_KP_F1 && keysym <= XK_KP_F4) || (keysym >= XK_F1 && keysym <= XK_F12) ||
 				    keysym == XK_Pause || keysym == XK_Scroll_Lock || keysym == XK_Print)
 				{
 					if(keysym >= XK_KP_F1 && keysym <= XK_KP_F4)
-						message.ReplaceInt32("key", keysym - XK_KP_F1 + E_F1_KEY);
+						message.ReplaceInt32("key", keysym - XK_KP_F1 + B_F1_KEY);
 					else if(keysym >= XK_F1 && keysym <= XK_F12)
-						message.ReplaceInt32("key", keysym - XK_F1 + E_F1_KEY);
+						message.ReplaceInt32("key", keysym - XK_F1 + B_F1_KEY);
 					else if(keysym == XK_Pause)
-						message.ReplaceInt32("key", E_PAUSE_KEY);
+						message.ReplaceInt32("key", B_PAUSE_KEY);
 					else if(keysym == XK_Scroll_Lock)
-						message.ReplaceInt32("key", E_SCROLL_KEY);
+						message.ReplaceInt32("key", B_SCROLL_KEY);
 					else if(keysym == XK_Print)
-						message.ReplaceInt32("key", E_PRINT_KEY);
-					modifiers |= E_FUNCTIONS_KEY;
-					keybuffer[0] = E_FUNCTION_KEY;
+						message.ReplaceInt32("key", B_PRINT_KEY);
+					modifiers |= B_FUNCTIONS_KEY;
+					keybuffer[0] = B_FUNCTION_KEY;
 					keybuffer[1] = 0;
 					keynum = 1;
 				}
 
-				if(event->xkey.state & ShiftMask) modifiers |= E_SHIFT_KEY;
-				if(event->xkey.state & ControlMask) modifiers |= E_CONTROL_KEY;
-				if(event->xkey.state & Mod1Mask) modifiers |= E_COMMAND_KEY;
+				if(event->xkey.state & ShiftMask) modifiers |= B_SHIFT_KEY;
+				if(event->xkey.state & ControlMask) modifiers |= B_CONTROL_KEY;
+				if(event->xkey.state & Mod1Mask) modifiers |= B_COMMAND_KEY;
 				if(event->type == KeyRelease) // WHY!!!: when XK_Shift_* released, but still ShiftMask
 				{
-					if(keysym == XK_Shift_L || keysym == XK_Shift_R) modifiers &= ~E_SHIFT_KEY;
-					if(keysym == XK_Control_L || keysym == XK_Control_R) modifiers &= ~E_CONTROL_KEY;
-					if(keysym == XK_Alt_L || keysym == XK_Alt_R) modifiers &= ~E_COMMAND_KEY;
+					if(keysym == XK_Shift_L || keysym == XK_Shift_R) modifiers &= ~B_SHIFT_KEY;
+					if(keysym == XK_Control_L || keysym == XK_Control_R) modifiers &= ~B_CONTROL_KEY;
+					if(keysym == XK_Alt_L || keysym == XK_Alt_R) modifiers &= ~B_COMMAND_KEY;
 				}
 				message.AddInt32("modifiers", modifiers);
 
@@ -898,7 +898,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 					int len = XwcLookupString(x11Engine->xInputContext, &(event->xkey), im_buf, 20, NULL, &im_status);
 					if(im_status == XBufferOverflow && len > 0)
 					{
-						ETK_WARNING("[GRAPHICS]: XIM --- im_status == XBufferOverflow, len: %d", len);
+						BHAPI_WARNING("[GRAPHICS]: XIM --- im_status == XBufferOverflow, len: %d", len);
 						wchar_t *newBuf = (wchar_t*)realloc(im_buf, sizeof(wchar_t) * (size_t)(len + 1));
 						if(newBuf != NULL)
 						{
@@ -914,11 +914,11 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 					}
 					else if(len > 20)
 					{
-						ETK_WARNING("[GRAPHICS]: XIM --- \"XwcLookupString\" has BUG");
+						BHAPI_WARNING("[GRAPHICS]: XIM --- \"XwcLookupString\" has BUG");
 						len = 0;
 					}
 					if(len > 0 && (len != 1 || *im_buf != 0x0000000d))
-						utf8_keybuffer = e_utf32_convert_to_utf8((const eunichar32*)im_buf, len);
+						utf8_keybuffer = b_utf32_convert_to_utf8((const b_unichar32*)im_buf, len);
 					free(im_buf);
 					break;
 				}
@@ -942,92 +942,92 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 
 				if(keysym == XK_BackSpace)
 				{
-					keybuffer[0] = E_BACKSPACE;
+					keybuffer[0] = B_BACKSPACE;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 				else if(keysym == XK_Return)
 				{
-					keybuffer[0] = E_ENTER;
+					keybuffer[0] = B_ENTER;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 				else if(keysym == XK_Tab)
 				{
-					keybuffer[0] = E_TAB;
+					keybuffer[0] = B_TAB;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 				else if(keysym == XK_Left)
 				{
-					keybuffer[0] = E_LEFT_ARROW;
+					keybuffer[0] = B_LEFT_ARROW;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 				else if(keysym == XK_Right)
 				{
-					keybuffer[0] = E_RIGHT_ARROW;
+					keybuffer[0] = B_RIGHT_ARROW;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 				else if(keysym == XK_Up)
 				{
-					keybuffer[0] = E_UP_ARROW;
+					keybuffer[0] = B_UP_ARROW;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 				else if(keysym == XK_Down)
 				{
-					keybuffer[0] = E_DOWN_ARROW;
+					keybuffer[0] = B_DOWN_ARROW;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 				else if(keysym == XK_Home)
 				{
-					keybuffer[0] = E_HOME;
+					keybuffer[0] = B_HOME;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 				else if(keysym == XK_End)
 				{
-					keybuffer[0] = E_END;
+					keybuffer[0] = B_END;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 				else if(keysym == XK_Insert)
 				{
-					keybuffer[0] = E_INSERT;
+					keybuffer[0] = B_INSERT;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 				else if(keysym == XK_Delete)
 				{
-					keybuffer[0] = E_DELETE;
+					keybuffer[0] = B_DELETE;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 				else if(keysym == XK_Page_Up)
 				{
-					keybuffer[0] = E_PAGE_UP;
+					keybuffer[0] = B_PAGE_UP;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 				else if(keysym == XK_Page_Down)
 				{
-					keybuffer[0] = E_PAGE_DOWN;
+					keybuffer[0] = B_PAGE_DOWN;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 				else if(keysym == XK_Escape)
 				{
-					keybuffer[0] = E_ESCAPE;
+					keybuffer[0] = B_ESCAPE;
 					keybuffer[1] = '\0';
 					keynum = 1;
 				}
 
 				if(keynum > 0)
 				{
-					if(keynum == 1) message.AddInt8("byte", (eint8)keybuffer[0]);
+					if(keynum == 1) message.AddInt8("byte", (b_int8)keybuffer[0]);
 					if(utf8_keybuffer == NULL) message.AddString("bytes", keybuffer);
 				}
 				if(utf8_keybuffer != NULL)
@@ -1037,7 +1037,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				}
 
 				message.AddMessenger("etk:msg_for_target", etkWinMsgr);
-				etkWinMsgr = EMessenger(etk_app);
+				etkWinMsgr = BMessenger(bhapi_app);
 				etkWinMsgr.SendMessage(&message);
 
 				bool dealed = true;
@@ -1045,39 +1045,39 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				{
 					case XK_Shift_L:
 						if(event->type == KeyPress)
-							modifiers &= ~(E_LEFT_SHIFT_KEY | E_SHIFT_KEY);
+							modifiers &= ~(B_LEFT_SHIFT_KEY | B_SHIFT_KEY);
 						else
-							modifiers |= (E_LEFT_SHIFT_KEY | E_SHIFT_KEY);
+							modifiers |= (B_LEFT_SHIFT_KEY | B_SHIFT_KEY);
 						break;
 					case XK_Shift_R:
 						if(event->type == KeyPress)
-							modifiers &= ~(E_RIGHT_SHIFT_KEY | E_SHIFT_KEY);
+							modifiers &= ~(B_RIGHT_SHIFT_KEY | B_SHIFT_KEY);
 						else
-							modifiers |= (E_RIGHT_SHIFT_KEY | E_SHIFT_KEY);
+							modifiers |= (B_RIGHT_SHIFT_KEY | B_SHIFT_KEY);
 						break;
 					case XK_Control_L:
 						if(event->type == KeyPress)
-							modifiers &= ~(E_LEFT_SHIFT_KEY | E_CONTROL_KEY);
+							modifiers &= ~(B_LEFT_SHIFT_KEY | B_CONTROL_KEY);
 						else
-							modifiers |= (E_LEFT_SHIFT_KEY | E_CONTROL_KEY);
+							modifiers |= (B_LEFT_SHIFT_KEY | B_CONTROL_KEY);
 						break;
 					case XK_Control_R:
 						if(event->type == KeyPress)
-							modifiers &= ~(E_RIGHT_SHIFT_KEY | E_CONTROL_KEY);
+							modifiers &= ~(B_RIGHT_SHIFT_KEY | B_CONTROL_KEY);
 						else
-							modifiers |= (E_RIGHT_SHIFT_KEY | E_CONTROL_KEY);
+							modifiers |= (B_RIGHT_SHIFT_KEY | B_CONTROL_KEY);
 						break;
 					case XK_Alt_L:
 						if(event->type == KeyPress)
-							modifiers &= ~(E_LEFT_SHIFT_KEY | E_COMMAND_KEY);
+							modifiers &= ~(B_LEFT_SHIFT_KEY | B_COMMAND_KEY);
 						else
-							modifiers |= (E_LEFT_SHIFT_KEY | E_COMMAND_KEY);
+							modifiers |= (B_LEFT_SHIFT_KEY | B_COMMAND_KEY);
 						break;
 					case XK_Alt_R:
 						if(event->type == KeyPress)
-							modifiers &= ~(E_RIGHT_SHIFT_KEY | E_COMMAND_KEY);
+							modifiers &= ~(B_RIGHT_SHIFT_KEY | B_COMMAND_KEY);
 						else
-							modifiers |= (E_RIGHT_SHIFT_KEY | E_COMMAND_KEY);
+							modifiers |= (B_RIGHT_SHIFT_KEY | B_COMMAND_KEY);
 						break;
 					default:
 						dealed = false;
@@ -1086,15 +1086,15 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 
 				if(dealed)
 				{
-					if((modifiers & E_LEFT_SHIFT_KEY) || (modifiers & E_RIGHT_SHIFT_KEY)) modifiers |= E_SHIFT_KEY;
-					if((modifiers & E_LEFT_CONTROL_KEY) || (modifiers & E_RIGHT_CONTROL_KEY)) modifiers |= E_CONTROL_KEY;
-					if((modifiers & E_LEFT_COMMAND_KEY) || (modifiers & E_RIGHT_COMMAND_KEY)) modifiers |= E_COMMAND_KEY;
-					if((modifiers & E_LEFT_OPTION_KEY) || (modifiers & E_RIGHT_OPTION_KEY)) modifiers |= E_OPTION_KEY;
-					message.what = E_MODIFIERS_CHANGED;
+					if((modifiers & B_LEFT_SHIFT_KEY) || (modifiers & B_RIGHT_SHIFT_KEY)) modifiers |= B_SHIFT_KEY;
+					if((modifiers & B_LEFT_CONTROL_KEY) || (modifiers & B_RIGHT_CONTROL_KEY)) modifiers |= B_CONTROL_KEY;
+					if((modifiers & B_LEFT_COMMAND_KEY) || (modifiers & B_RIGHT_COMMAND_KEY)) modifiers |= B_COMMAND_KEY;
+					if((modifiers & B_LEFT_OPTION_KEY) || (modifiers & B_RIGHT_OPTION_KEY)) modifiers |= B_OPTION_KEY;
+					message.what = B_MODIFIERS_CHANGED;
 					message.RemoveInt32("key");
 					message.RemoveInt32("etk:key_repeat");
 					message.RemoveInt8("byte");
-					message.RemoveString("bytes");
+					message.RemovString("bytes");
 					message.RemoveInt32("raw_char");
 					message.AddInt32("etk:old_modifiers", modifiers);
 					etkWinMsgr.SendMessage(&message);
@@ -1111,7 +1111,7 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 					handled = true;
 					if(etkWinMsgr.IsValid() == false) break;
 
-					message.what = E_QUIT_REQUESTED;
+					message.what = B_QUIT_REQUESTED;
 					etkWinMsgr.SendMessage(&message);
 				}
 				else if((Atom)event->xclient.data.l[0] == x11Engine->atomDeleteWindow)
@@ -1138,13 +1138,13 @@ static void etk_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 }
 
 
-static e_status_t etk_x11_task(void *arg)
+static b_status_t bhapi_x11_task(void *arg)
 {
 	EXGraphicsEngine *x11Engine = (EXGraphicsEngine*)arg;
 
 	XEvent event;
 
-	ETK_DEBUG("[GRAPHICS]: Enter X11 task...");
+	BHAPI_DEBUG("[GRAPHICS]: Enter X11 task...");
 
 	x11Engine->Lock();
 
@@ -1156,7 +1156,7 @@ static e_status_t etk_x11_task(void *arg)
 			XNextEvent(x11Engine->xDisplay, &event);
 			if(x11Engine->xInputMethod == NULL)
 			{
-				etk_process_x_event(x11Engine, &event);
+				bhapi_process_x_event(x11Engine, &event);
 			}
 			else
 			{
@@ -1167,7 +1167,7 @@ static e_status_t etk_x11_task(void *arg)
 
 				XLockDisplay(x11Engine->xDisplay);
 				x11Engine->Unlock();
-				if(status != True) etk_process_x_event(x11Engine, &event);
+				if(status != True) bhapi_process_x_event(x11Engine, &event);
 			}
 			x11Engine->Lock();
 		}
@@ -1193,7 +1193,7 @@ static e_status_t etk_x11_task(void *arg)
 			if(x11Engine->xInputMethod == NULL || XFilterEvent(&event, None) != True)
 			{
 				x11Engine->Unlock();
-				etk_process_x_event(x11Engine, &event);
+				bhapi_process_x_event(x11Engine, &event);
 				x11Engine->Lock();
 			}
 		}
@@ -1211,30 +1211,30 @@ static e_status_t etk_x11_task(void *arg)
 
 	x11Engine->Unlock();
 
-	ETK_DEBUG("[GRAPHICS]: X11 task quited.");
+	BHAPI_DEBUG("[GRAPHICS]: X11 task quited.");
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsEngine::Initalize()
 {
-	EMessageFilter *clipboardFilter = new EX11ClipboardMessageFilter(this);
-	etk_app->Lock();
-	etk_app->AddFilter(clipboardFilter);
-	etk_app->Unlock();
+	BMessageFilter *clipboardFilter = new EX11ClipboardMessageFilter(this);
+	bhapi_app->Lock();
+	bhapi_app->AddFilter(clipboardFilter);
+	bhapi_app->Unlock();
 
 	Lock();
 	if(fX11Thread != NULL)
 	{
 		Unlock();
 
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
-		return E_ERROR;
+		return B_ERROR;
 	}
 
 	setlocale(LC_ALL, "");
@@ -1247,19 +1247,19 @@ EXGraphicsEngine::Initalize()
 	if(xDisplay == NULL)
 	{
 		Unlock();
-		ETK_WARNING("[GRAPHICS]: %s --- Unable to open X11 display!", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[GRAPHICS]: %s --- Unable to open X11 display!", __PRETTY_FUNCTION__);
 
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
-		return E_ERROR;
+		return B_ERROR;
 	}
 
 	Lock();
 
-	XSetIOErrorHandler(etk_x_io_error_handler);
-	XSetErrorHandler(etk_x_error_handler);
+	XSetIOErrorHandler(bhapi_x_io_error_handler);
+	XSetErrorHandler(bhapi_x_error_handler);
 	xSocket = ConnectionNumber(xDisplay);
 	xScreen = DefaultScreen(xDisplay);
 	xRootWindow = RootWindow(xDisplay, xScreen);
@@ -1272,14 +1272,14 @@ EXGraphicsEngine::Initalize()
 					 0, 0, 10, 10, 0, CopyFromParent,
 					 InputOnly, NULL, 0, NULL);
 
-	atomProtocols = XInternAtom(xDisplay, "ATOM_ETK_PROTOCOLS", False);
-	atomDeleteWindow = XInternAtom(xDisplay, "ATOM_ETK_DELETE_WINDOW", False);
+	atomProtocols = XInternAtom(xDisplay, "ATOM_BHAPI_PROTOCOLS", False);
+	atomDeleteWindow = XInternAtom(xDisplay, "ATOM_BHAPI_DELETE_WINDOW", False);
 	atomWMDeleteWindow = XInternAtom(xDisplay, "WM_DELETE_WINDOW", False);
 	atomWMFocus = XInternAtom(xDisplay, "WM_TAKE_FOCUS", False);
 	atomWMDesktop =  XInternAtom(xDisplay, "_NET_WM_DESKTOP", False);
 	atomCurrentDesktop = XInternAtom(xDisplay, "_NET_CURRENT_DESKTOP", False);
-	atomEventPending = XInternAtom(xDisplay, "ATOM_ETK_EVENT_PENDING", False);
-	atomClipboard = XInternAtom(xDisplay, "ATOM_ETK_CLIPBOARD", False);
+	atomEventPending = XInternAtom(xDisplay, "ATOM_BHAPI_EVENT_PENDING", False);
+	atomClipboard = XInternAtom(xDisplay, "ATOM_BHAPI_CLIPBOARD", False);
 	atomCompoundText = XInternAtom(xDisplay, "COMPOUND_TEXT", False);
 
 	// TODO: atom for workspace, iconified etc.
@@ -1287,10 +1287,10 @@ EXGraphicsEngine::Initalize()
 	xBlackPixel = BlackPixel(xDisplay, xScreen);
 	xWhitePixel = WhitePixel(xDisplay, xScreen);
 
-#ifdef ETK_OS_LINUX
-	if(getenv("ETK_USE_XIM") == NULL)
+#ifdef BHAPI_OS_LINUX
+	if(getenv("BHAPI_USE_XIM") == NULL)
 	{
-		ETK_OUTPUT("[GRAPHICS]: X11 maybe has a bug when \"XFilterEvent\" processing as \"XInitThreads\" done.\n\tYou could find out how to fix it\n\tby visiting \"http://people.freedesktop.org/~alanc/thread-fixes/4041914.txt\".\n\tThen set the environment \"ETK_USE_XIM\" when you really want XIM.\n");
+		BHAPI_OUTPUT("[GRAPHICS]: X11 maybe has a bug when \"XFilterEvent\" processing as \"XInitThreads\" done.\n\tYou could find out how to fix it\n\tby visiting \"http://people.freedesktop.org/~alanc/thread-fixes/4041914.txt\".\n\tThen set the environment \"BHAPI_USE_XIM\" when you really want XIM.\n");
 	}
 	else
 	{
@@ -1306,7 +1306,7 @@ EXGraphicsEngine::Initalize()
 
 			if(xInputContext == NULL)
 			{
-				ETK_WARNING("[GRAPHICS]: %s --- \"XIMPreeditNothing|XIMStatusNothing\" unsupported.", __PRETTY_FUNCTION__);
+				BHAPI_WARNING("[GRAPHICS]: %s --- \"XIMPreeditNothing|XIMStatusNothing\" unsupported.", __PRETTY_FUNCTION__);
 				XCloseIM(xInputMethod);
 				xInputMethod = NULL;
 			}
@@ -1318,20 +1318,20 @@ EXGraphicsEngine::Initalize()
 			}
 		}
 	}
-	if(xInputMethod == NULL) ETK_WARNING("[GRAPHICS]: %s --- Unable to initalize XIM.", __PRETTY_FUNCTION__);
-#ifdef ETK_OS_LINUX
+	if(xInputMethod == NULL) BHAPI_WARNING("[GRAPHICS]: %s --- Unable to initalize XIM.", __PRETTY_FUNCTION__);
+#ifdef BHAPI_OS_LINUX
 	}
 #endif
 
 	xCursor = None;
 	xDoQuit = false;
 
-	if((fX11Thread = etk_create_thread(etk_x11_task, E_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL ||
-	   etk_resume_thread(fX11Thread) != E_OK)
+	if((fX11Thread = bhapi_create_thread(bhapi_x11_task, B_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL ||
+	   bhapi_resume_thread(fX11Thread) != B_OK)
 	{
 		if(fX11Thread)
 		{
-			etk_delete_thread(fX11Thread);
+			bhapi_delete_thread(fX11Thread);
 			fX11Thread = NULL;
 		}
 
@@ -1344,13 +1344,13 @@ EXGraphicsEngine::Initalize()
 		Unlock();
 		Unlock();
 
-		ETK_WARNING("[GRAPHICS]: %s --- Unable to spawn graphics thread!", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[GRAPHICS]: %s --- Unable to spawn graphics thread!", __PRETTY_FUNCTION__);
 
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
-		return E_ERROR;
+		return B_ERROR;
 	}
 
 	fClipboardFilter = clipboardFilter;
@@ -1359,20 +1359,20 @@ EXGraphicsEngine::Initalize()
 	Unlock();
 	Unlock();
 
-	return E_OK;
+	return B_OK;
 }
 
 
 void
 EXGraphicsEngine::Cancel()
 {
-	EMessageFilter *clipboardFilter = NULL;
+	BMessageFilter *clipboardFilter = NULL;
 
 	Lock();
 
 	if(fX11Thread != NULL)
 	{
-		void *x11Thread = etk_open_thread(etk_get_thread_id(fX11Thread));
+		void *x11Thread = bhapi_open_thread(bhapi_get_thread_id(fX11Thread));
 		if(x11Thread == NULL)
 		{
 			Unlock();
@@ -1398,18 +1398,18 @@ EXGraphicsEngine::Cancel()
 
 		Unlock();
 
-		e_status_t status;
-		etk_wait_for_thread(x11Thread, &status);
+		b_status_t status;
+		bhapi_wait_for_thread(x11Thread, &status);
 
 		Lock();
 
-		if(fX11Thread != NULL && etk_get_thread_id(fX11Thread) == etk_get_thread_id(x11Thread))
+		if(fX11Thread != NULL && bhapi_get_thread_id(fX11Thread) == bhapi_get_thread_id(x11Thread))
 		{
-			etk_delete_thread(fX11Thread);
+			bhapi_delete_thread(fX11Thread);
 			fX11Thread = NULL;
 		}
 
-		etk_delete_thread(x11Thread);
+		bhapi_delete_thread(x11Thread);
 
 		clipboardFilter = fClipboardFilter;
 		fClipboardFilter = NULL;
@@ -1419,55 +1419,55 @@ EXGraphicsEngine::Cancel()
 
 	if(clipboardFilter != NULL)
 	{
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
 	}
 }
 
 
-EGraphicsContext*
+BGraphicsContext*
 EXGraphicsEngine::CreateContext()
 {
 	return(new EXGraphicsContext(this));
 }
 
 
-EGraphicsDrawable*
-EXGraphicsEngine::CreatePixmap(euint32 w, euint32 h)
+BGraphicsDrawable*
+EXGraphicsEngine::CreatePixmap(b_uint32 w, b_uint32 h)
 {
 	return(new EXGraphicsDrawable(this, w, h));
 }
 
 
-EGraphicsWindow*
-EXGraphicsEngine::CreateWindow(eint32 x, eint32 y, euint32 w, euint32 h)
+BGraphicsWindow*
+EXGraphicsEngine::CreateWindow(b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
 	return(new EXGraphicsWindow(this, x, y, w, h));
 }
 
 
-e_status_t
-EXGraphicsEngine::GetDesktopBounds(euint32 *w, euint32 *h)
+b_status_t
+EXGraphicsEngine::GetDesktopBounds(b_uint32 *w, b_uint32 *h)
 {
-	EAutolock <EXGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || InitCheck() != B_OK) return B_ERROR;
 
 	if(w) *w = xDisplayWidth;
 	if(h) *h = xDisplayHeight;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsEngine::GetCurrentWorkspace(euint32 *workspace)
+b_status_t
+EXGraphicsEngine::GetCurrentWorkspace(b_uint32 *workspace)
 {
-	if(workspace == NULL) return E_ERROR;
+	if(workspace == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || InitCheck() != B_OK) return B_ERROR;
 
 	*workspace = 0;
 
@@ -1481,7 +1481,7 @@ EXGraphicsEngine::GetCurrentWorkspace(euint32 *workspace)
 			      False, AnyPropertyType,
 			      &type, &format, &nitems,
 			      &bytes_after, &prop) != Success ||
-	   type == None) return E_OK;
+	   type == None) return B_OK;
 
 	if(format == 32 && nitems == 1 && prop != NULL)
 	{
@@ -1490,39 +1490,39 @@ EXGraphicsEngine::GetCurrentWorkspace(euint32 *workspace)
 	}
 	if(prop != NULL) XFree(prop);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsEngine::SetCursor(const void *cursor_data)
 {
-	EAutolock <EXGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || InitCheck() != B_OK) return B_ERROR;
 
 	Cursor newCursor = None;
 
 	if(cursor_data)
 	{
-		ECursor cursor(cursor_data);
-		if(cursor.ColorDepth() != 1) return E_ERROR;
+		BCursor cursor(cursor_data);
+		if(cursor.ColorDepth() != 1) return B_ERROR;
 
-		const euint8 *bits = (const euint8*)cursor.Bits();
-		const euint8 *mask = (const euint8*)cursor.Mask();
+		const b_uint8 *bits = (const b_uint8*)cursor.Bits();
+		const b_uint8 *mask = (const b_uint8*)cursor.Mask();
 
-		euint8 *source_data = (euint8*)malloc((size_t)(mask - bits));
-		euint8 *mask_data = (euint8*)malloc((size_t)(mask - bits));
+		b_uint8 *source_data = (b_uint8*)malloc((size_t)(mask - bits));
+		b_uint8 *mask_data = (b_uint8*)malloc((size_t)(mask - bits));
 
 		if(source_data != NULL && mask_data != NULL)
 		{
-			euint8 *s = source_data;
-			euint8 *m = mask_data;
-			const euint8 *tmp = mask;
+			b_uint8 *s = source_data;
+			b_uint8 *m = mask_data;
+			const b_uint8 *tmp = mask;
 			for(; bits != tmp; bits++, mask++, s++, m++)
 			{
 				// convert left to right
 				*s = *m = 0;
-				for(euint8 i = 0; i < 8; i++)
+				for(b_uint8 i = 0; i < 8; i++)
 				{
 					*s |= ((*bits >> i) & 0x01) << (7 - i);
 					*m |= ((*mask >> i) & 0x01) << (7 - i);
@@ -1550,13 +1550,13 @@ EXGraphicsEngine::SetCursor(const void *cursor_data)
 		if(source_data) free(source_data);
 		if(mask_data) free(mask_data);
 
-		if(newCursor == None) return E_ERROR;
+		if(newCursor == None) return B_ERROR;
 
-//		ETK_DEBUG("[GRAPHICS]: SetCursor");
+//		BHAPI_DEBUG("[GRAPHICS]: SetCursor");
 	}
 	else
 	{
-		euint8 tmp = 0;
+		b_uint8 tmp = 0;
 
 		Pixmap source_pix = XCreateBitmapFromData(xDisplay, xRootWindow, (const char*)&tmp, 1, 1);
 		Pixmap mask_pix = XCreateBitmapFromData(xDisplay, xRootWindow, (const char*)&tmp, 1, 1);
@@ -1571,7 +1571,7 @@ EXGraphicsEngine::SetCursor(const void *cursor_data)
 		XFreePixmap(xDisplay, source_pix);
 		XFreePixmap(xDisplay, mask_pix);
 
-//		ETK_DEBUG("[GRAPHICS]: HideCursor");
+//		BHAPI_DEBUG("[GRAPHICS]: HideCursor");
 	}
 
 	Window focusWin = None;
@@ -1583,32 +1583,32 @@ EXGraphicsEngine::SetCursor(const void *cursor_data)
 	if(xCursor != None) XFreeCursor(xDisplay, xCursor);
 	xCursor = newCursor;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsEngine::GetDefaultCursor(ECursor *cursor)
+b_status_t
+EXGraphicsEngine::GetDefaultCursor(BCursor *cursor)
 {
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
 bool
-EXGraphicsEngine::ConvertRegion(const ERegion *region, Region *xRegion)
+EXGraphicsEngine::ConvertRegion(const BRegion *region, Region *xRegion)
 {
 	if(xRegion == NULL) return false;
 
-	EAutolock <EXGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || InitCheck() != E_OK) return false;
+	BAutolock <EXGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || InitCheck() != B_OK) return false;
 
 	if((*xRegion = XCreateRegion()) == NULL) return false;
 
 	if(region != NULL)
 	{
-		for(eint32 i = 0; i < region->CountRects(); i++)
+		for(b_int32 i = 0; i < region->CountRects(); i++)
 		{
-			ERect r = region->RectAt(i).FloorCopy();
+			BRect r = region->RectAt(i).FloorCopy();
 
 			XRectangle xRect;
 			xRect.x = (short)r.left;
@@ -1624,8 +1624,8 @@ EXGraphicsEngine::ConvertRegion(const ERegion *region, Region *xRegion)
 		XRectangle xRect;
 		xRect.x = 0;
 		xRect.y = 0;
-		xRect.width = E_MAXUSHORT;
-		xRect.height = E_MAXUSHORT;
+		xRect.width = B_MAXUSHORT;
+		xRect.height = B_MAXUSHORT;
 
 		XUnionRectWithRegion(&xRect, *xRegion, *xRegion);
 	}
@@ -1635,19 +1635,19 @@ EXGraphicsEngine::ConvertRegion(const ERegion *region, Region *xRegion)
 
 
 bool
-EXGraphicsEngine::ConvertRegion(const ERegion *region, XRectangle **xRects, int *nrects)
+EXGraphicsEngine::ConvertRegion(const BRegion *region, XRectangle **xRects, int *nrects)
 {
 	if(xRects == NULL || nrects == NULL) return false;
 
-	eint32 nrectsNeeded = max_c((region ? region->CountRects() : 0), 1);
+	b_int32 nrectsNeeded = max_c((region ? region->CountRects() : 0), 1);
 	if((*xRects = (XRectangle*)malloc(sizeof(XRectangle) * (size_t)nrectsNeeded)) == NULL) return false;
 	*nrects = 0;
 
 	if(region != NULL)
 	{
-		for(eint32 i = 0; i < region->CountRects(); i++)
+		for(b_int32 i = 0; i < region->CountRects(); i++)
 		{
-			ERect r = region->RectAt(i).FloorCopy();
+			BRect r = region->RectAt(i).FloorCopy();
 
 			(*xRects)[*nrects].x = (short)r.left;
 			(*xRects)[*nrects].y = (short)r.top;
@@ -1662,8 +1662,8 @@ EXGraphicsEngine::ConvertRegion(const ERegion *region, XRectangle **xRects, int 
 	{
 		(*xRects)->x = 0;
 		(*xRects)->y = 0;
-		(*xRects)->width = (region ? 0 : E_MAXUSHORT);
-		(*xRects)->height = (region ? 0 : E_MAXUSHORT);
+		(*xRects)->width = (region ? 0 : B_MAXUSHORT);
+		(*xRects)->height = (region ? 0 : B_MAXUSHORT);
 
 		*nrects = 1;
 	}

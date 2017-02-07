@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -30,18 +30,18 @@
 #include <windows.h>
 
 #include "./../kernel/Kernel.h"
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 
 #include "./../private/PrivateApplication.h"
 
 
-HINSTANCE etk_dll_hinstance = NULL;
+HINSTANCE bhapi_dll_hinstance = NULL;
 
 
 extern "C" {
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
-	etk_dll_hinstance = hinstDLL;
+	bhapi_dll_hinstance = hinstDLL;
 
 	switch(fdwReason) 
 	{
@@ -51,8 +51,8 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 		{
 			WSADATA wsaData;
 			WSAStartup(0x202, &wsaData);
-			etk_system_boot_time();
-			EApplicationConnector::Init();
+			bhapi_system_boot_time();
+			BApplicationConnector::Init();
 			break;
 		}
 
@@ -65,7 +65,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 		case DLL_PROCESS_DETACH:
 		/* The DLL unmapped from process's address space. Do necessary cleanup */
 		{
-			EApplicationConnector::Quit();
+			BApplicationConnector::Quit();
 			WSACleanup();
 			break;
 		}
@@ -81,11 +81,11 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 }
 
 
-char* etk_win32_convert_active_to_utf8(const char *str, eint32 length)
+char* bhapi_win32_convert_active_to_utf8(const char *str, b_int32 length)
 {
 	if(str == NULL || *str == 0 || length == 0) return NULL;
 
-	eint32 nChars = (eint32)strlen(str);
+	b_int32 nChars = (b_int32)strlen(str);
 	if(length < 0 || length > nChars) length = nChars;
 
 	WCHAR *wStr = (WCHAR*)malloc(sizeof(WCHAR) * (size_t)(length + 1));
@@ -93,19 +93,19 @@ char* etk_win32_convert_active_to_utf8(const char *str, eint32 length)
 	bzero(wStr, sizeof(WCHAR) * (size_t)(length + 1));
 	MultiByteToWideChar(CP_ACP, 0, str, length, wStr, length);
 
-	char *uStr = e_unicode_convert_to_utf8((const eunichar*)wStr, -1);
+	char *uStr = b_unicode_convert_to_utf8((const b_unichar*)wStr, -1);
 	free(wStr);
 
 	return uStr;
 }
 
 
-char* etk_win32_convert_utf8_to_active(const char *str, eint32 length)
+char* bhapi_win32_convert_utf8_to_active(const char *str, b_int32 length)
 {
-	eunichar *wStr = e_utf8_convert_to_unicode(str, length);
+	b_unichar *wStr = b_utf8_convert_to_unicode(str, length);
 	if(wStr == NULL) return NULL;
 
-	eint32 len = e_unicode_strlen(wStr);
+	b_int32 len = b_unicode_strlen(wStr);
 	char *aStr = (char*)malloc((size_t)len * 3 + 1);
 	if(aStr == NULL)
 	{

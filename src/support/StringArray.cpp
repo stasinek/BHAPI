@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,16 +27,17 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "List.h"
 #include "StringArray.h"
-
+#include "StringMe.h"
 
 typedef struct __string_node__ {
-	EString *str;
+    BString *str;
 	void *data;
 
 	__string_node__()
 	{
-		str = new EString();
+        str = new BString();
 		data = NULL;
 	}
 
@@ -47,68 +48,68 @@ typedef struct __string_node__ {
 } __string_node__;
 
 
-EStringArray::EStringArray()
+BStringArray::BStringArray()
 {
 }
 
 
-EStringArray::EStringArray(const char *string, void *attach_data)
-{
-	AddItem(string, attach_data);
-}
-
-
-EStringArray::EStringArray(const EString &string, void *attach_data)
+BStringArray::BStringArray(const char *string, void *attach_data)
 {
 	AddItem(string, attach_data);
 }
 
 
-EStringArray::EStringArray(const char **array)
+BStringArray::BStringArray(const BString &string, void *attach_data)
+{
+	AddItem(string, attach_data);
+}
+
+
+BStringArray::BStringArray(const char **array)
 {
 	operator=(array);
 }
 
 
-EStringArray::EStringArray(const EStringArray &array)
+BStringArray::BStringArray(const BStringArray &array)
 {
 	operator=(array);
 }
 
 
-EStringArray::~EStringArray()
+BStringArray::~BStringArray()
 {
 	MakeEmpty();
 }
 
 
 void
-EStringArray::MakeEmpty()
+BStringArray::MakeEmpty()
 {
 	if(!list.IsEmpty())
 	{
-		for(eint32 i = 0; i < list.CountItems(); i++) delete (__string_node__*)list.ItemAt(i);
+		for(b_int32 i = 0; i < list.CountItems(); i++) delete (__string_node__*)list.ItemAt(i);
 		list.MakeEmpty();
 	}
 }
 
 
 bool
-EStringArray::IsEmpty() const
+BStringArray::IsEmpty() const
 {
 	return list.IsEmpty();
 }
 
 
-eint32
-EStringArray::CountItems() const
+b_int32
+BStringArray::CountItems() const
 {
 	return list.CountItems();
 }
 
 
-EStringArray&
-EStringArray::operator=(const EStringArray &array)
+BStringArray&
+BStringArray::operator=(const BStringArray &array)
 {
 	MakeEmpty();
 	AddArray(array);
@@ -116,8 +117,8 @@ EStringArray::operator=(const EStringArray &array)
 }
 
 
-EStringArray&
-EStringArray::operator=(const char **array)
+BStringArray&
+BStringArray::operator=(const char **array)
 {
 	MakeEmpty();
 
@@ -134,32 +135,32 @@ EStringArray::operator=(const char **array)
 }
 
 
-EStringArray&
-EStringArray::operator+=(const char *string)
+BStringArray&
+BStringArray::operator+=(const char *string)
 {
 	AddItem(string);
 	return *this;
 }
 
 
-EStringArray&
-EStringArray::operator+=(const EString &string)
+BStringArray&
+BStringArray::operator+=(const BString &string)
 {
 	AddItem(string);
 	return *this;
 }
 
 
-EStringArray&
-EStringArray::operator+=(const EStringArray &array)
+BStringArray&
+BStringArray::operator+=(const BStringArray &array)
 {
 	AddArray(array);
 	return *this;
 }
 
 
-EStringArray&
-EStringArray::operator+=(const char **array)
+BStringArray&
+BStringArray::operator+=(const char **array)
 {
 	if(array)
 	{
@@ -175,7 +176,7 @@ EStringArray::operator+=(const char **array)
 
 
 bool
-EStringArray::AddItem(const char *item, void *attach_data)
+BStringArray::AddItem(const char *item, void *attach_data)
 {
 	__string_node__ *data = new __string_node__;
 	if(!data || !data->str) {if(data) delete data; return false;}
@@ -194,7 +195,7 @@ EStringArray::AddItem(const char *item, void *attach_data)
 
 
 bool
-EStringArray::AddItem(const char *item, eint32 atIndex, void *attach_data)
+BStringArray::AddItem(const char *item, b_int32 atIndex, void *attach_data)
 {
 	__string_node__ *data = new __string_node__;
 	if(!data || !data->str) {if(data) delete data; return false;}
@@ -213,30 +214,30 @@ EStringArray::AddItem(const char *item, eint32 atIndex, void *attach_data)
 
 
 bool
-EStringArray::AddItem(const EString &item, void *attach_data)
+BStringArray::AddItem(const BString &item, void *attach_data)
 {
-	return AddItem(item.String(), attach_data);
+    return AddItem(item.String(), attach_data);
 }
 
 
 bool
-EStringArray::AddItem(const EString &item, eint32 atIndex, void *attach_data)
+BStringArray::AddItem(const BString &item, b_int32 atIndex, void *attach_data)
 {
-	return AddItem(item.String(), atIndex, attach_data);
+    return AddItem(item.String(), atIndex, attach_data);
 }
 
 
 bool
-EStringArray::AddArray(const EStringArray &array)
+BStringArray::AddArray(const BStringArray &array)
 {
 	if(array.list.IsEmpty()) return false;
 
-	EStringArray _array;
-	for(eint32 i = 0; i < array.list.CountItems(); i++)
+    BStringArray _array;
+	for(b_int32 i = 0; i < array.list.CountItems(); i++)
 	{
 		const __string_node__ *node = (const __string_node__*)array.list.ItemAt(i);
 		if(!node || !node->str) continue;
-		if(_array.AddItem(node->str->String(), node->data) == false) return false;
+        if(_array.AddItem(node->str->String(), node->data) == false) return false;
 	}
 
 	if(list.AddList(&_array.list))
@@ -250,17 +251,17 @@ EStringArray::AddArray(const EStringArray &array)
 
 
 bool
-EStringArray::AddArray(const EStringArray &array, eint32 atIndex)
+BStringArray::AddArray(const BStringArray &array, b_int32 atIndex)
 {
 	if(array.list.IsEmpty()) return false;
 	if(atIndex < 0 || atIndex >= list.CountItems()) return false;
 
-	EStringArray _array;
-	for(eint32 i = 0; i < array.list.CountItems(); i++)
+    BStringArray _array;
+	for(b_int32 i = 0; i < array.list.CountItems(); i++)
 	{
 		const __string_node__ *node = (const __string_node__*)array.list.ItemAt(i);
 		if(!node || !node->str) continue;
-		if(_array.AddItem(node->str->String(), node->data) == false) return false;
+        if(_array.AddItem(node->str->String(), node->data) == false) return false;
 	}
 
 	if(list.AddList(&_array.list, atIndex))
@@ -273,8 +274,8 @@ EStringArray::AddArray(const EStringArray &array, eint32 atIndex)
 }
 
 
-const EString*
-EStringArray::ItemAt(eint32 index, void **attach_data) const
+const BString*
+BStringArray::ItemAt(b_int32 index, void **attach_data) const
 {
 	const __string_node__ *node = (const __string_node__*)list.ItemAt(index);
 	if(!node) return NULL;
@@ -283,8 +284,8 @@ EStringArray::ItemAt(eint32 index, void **attach_data) const
 }
 
 
-const EString*
-EStringArray::FirstItem(void **attach_data) const
+const BString*
+BStringArray::FirstItem(void **attach_data) const
 {
 	const __string_node__ *node = (const __string_node__*)list.FirstItem();
 	if(!node) return NULL;
@@ -293,8 +294,8 @@ EStringArray::FirstItem(void **attach_data) const
 }
 
 
-const EString*
-EStringArray::LastItem(void **attach_data) const
+const BString*
+BStringArray::LastItem(void **attach_data) const
 {
 	const __string_node__ *node = (const __string_node__*)list.LastItem();
 	if(!node) return NULL;
@@ -304,7 +305,7 @@ EStringArray::LastItem(void **attach_data) const
 
 
 bool
-EStringArray::RemoveItem(eint32 index)
+BStringArray::RemoveItem(b_int32 index)
 {
 	__string_node__ *node = (__string_node__*)list.RemoveItem(index);
 
@@ -319,7 +320,7 @@ EStringArray::RemoveItem(eint32 index)
 
 
 bool
-EStringArray::RemoveItems(eint32 index, eint32 count)
+BStringArray::RemoveItems(b_int32 index, b_int32 count)
 {
 	if(index < 0 || index >= list.CountItems()) return false;
 
@@ -328,7 +329,7 @@ EStringArray::RemoveItems(eint32 index, eint32 count)
 
 	if(count == 0) return true;
 
-	EList list_store(list);
+	BList list_store(list);
 	if(list_store.RemoveItems(0, index) == false) return false;
 	if(list_store.CountItems() < count) return false;
 	if(list_store.CountItems() > count)
@@ -336,7 +337,7 @@ EStringArray::RemoveItems(eint32 index, eint32 count)
 
 	if(list.RemoveItems(index, count))
 	{
-		for(eint32 i = 0; i < list_store.CountItems(); i++) delete (__string_node__*)list_store.ItemAt(i);
+		for(b_int32 i = 0; i < list_store.CountItems(); i++) delete (__string_node__*)list_store.ItemAt(i);
 		list_store.MakeEmpty();
 		return true;
 	}
@@ -346,7 +347,7 @@ EStringArray::RemoveItems(eint32 index, eint32 count)
 
 
 bool
-EStringArray::ReplaceItem(eint32 index, const char *string, void *attach_data)
+BStringArray::ReplaceItem(b_int32 index, const char *string, void *attach_data)
 {
 	__string_node__ *node = (__string_node__*)list.ItemAt(index);
 
@@ -362,7 +363,7 @@ EStringArray::ReplaceItem(eint32 index, const char *string, void *attach_data)
 
 
 bool
-EStringArray::ReplaceItem(eint32 index, const EString &string, void *attach_data)
+BStringArray::ReplaceItem(b_int32 index, const BString &string, void *attach_data)
 {
 	__string_node__ *node = (__string_node__*)list.ItemAt(index);
 
@@ -377,8 +378,8 @@ EStringArray::ReplaceItem(eint32 index, const EString &string, void *attach_data
 }
 
 
-EStringArray&
-EStringArray::SortItems(int (*cmp)(const EString**, const EString**))
+BStringArray&
+BStringArray::SortItems(int (*cmp)(const BString**, const BString**))
 {
 	list.SortItems((int (*)(const void*, const void*))cmp);
 
@@ -387,7 +388,7 @@ EStringArray::SortItems(int (*cmp)(const EString**, const EString**))
 
 
 bool
-EStringArray::SwapItems(eint32 indexA, eint32 indexB)
+BStringArray::SwapItems(b_int32 indexA, b_int32 indexB)
 {
 	if(indexA != indexB) return list.SwapItems(indexA, indexB);
 
@@ -396,7 +397,7 @@ EStringArray::SwapItems(eint32 indexA, eint32 indexB)
 
 
 bool
-EStringArray::MoveItem(eint32 fromIndex, eint32 toIndex)
+BStringArray::MoveItem(b_int32 fromIndex, b_int32 toIndex)
 {
 	if(fromIndex != toIndex) return list.MoveItem(fromIndex, toIndex);
 
@@ -404,16 +405,16 @@ EStringArray::MoveItem(eint32 fromIndex, eint32 toIndex)
 }
 
 
-eint32
-EStringArray::FindString(const char *string, eint32 startIndex, bool all_equal, bool invert) const
+b_int32
+BStringArray::FindString(const char *string, b_int32 startIndex, bool all_equal, bool invert) const
 {
 	if(startIndex < 0 || startIndex >= list.CountItems()) return -1;
 
-	eint32 i = startIndex;
+	b_int32 i = startIndex;
 
 	while(i >= 0 && i < list.CountItems())
 	{
-		const EString *str = ItemAt(i);
+        const BString *str = ItemAt(i);
 
 		if(str)
 		{
@@ -442,23 +443,23 @@ EStringArray::FindString(const char *string, eint32 startIndex, bool all_equal, 
 }
 
 
-eint32
-EStringArray::FindString(const EString &string, eint32 startIndex, bool all_equal, bool invert) const
+b_int32
+BStringArray::FindString(const BString &string, b_int32 startIndex, bool all_equal, bool invert) const
 {
-	return FindString(string.String(), startIndex, all_equal, invert);
+    return FindString(string.String(), startIndex, all_equal, invert);
 }
 
 
-eint32
-EStringArray::IFindString(const char *string, eint32 startIndex, bool all_equal, bool invert) const
+b_int32
+BStringArray::IFindString(const char *string, b_int32 startIndex, bool all_equal, bool invert) const
 {
 	if(startIndex < 0 || startIndex >= list.CountItems()) return -1;
 
-	eint32 i = startIndex;
+	b_int32 i = startIndex;
 
 	while(i >= 0 && i < list.CountItems())
 	{
-		const EString *str = ItemAt(i);
+        const BString *str = ItemAt(i);
 
 		if(str)
 		{
@@ -487,9 +488,9 @@ EStringArray::IFindString(const char *string, eint32 startIndex, bool all_equal,
 }
 
 
-eint32
-EStringArray::IFindString(const EString &string, eint32 startIndex, bool all_equal, bool invert) const
+b_int32
+BStringArray::IFindString(const BString &string, b_int32 startIndex, bool all_equal, bool invert) const
 {
-	return IFindString(string.String(), startIndex, all_equal, invert);
+    return IFindString(string.String(), startIndex, all_equal, invert);
 }
 

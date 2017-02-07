@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * DirectFB Graphics Add-on for ETK++
+ * DirectFB Graphics Add-on for BHAPI++
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -50,42 +50,42 @@
 void
 EDFBGraphicsWindow::AdjustFrameByDecoration()
 {
-	fWidth -= (euint32)(fMargins.left + fMargins.right);
-	fHeight -= (euint32)(fMargins.top + fMargins.bottom);
-	fOriginX += (eint32)fMargins.left;
-	fOriginY += (eint32)fMargins.top;
+	fWidth -= (b_uint32)(fMargins.left + fMargins.right);
+	fHeight -= (b_uint32)(fMargins.top + fMargins.bottom);
+	fOriginX += (b_int32)fMargins.left;
+	fOriginY += (b_int32)fMargins.top;
 
 	switch(fLook)
 	{
-		case E_BORDERED_WINDOW_LOOK:
-			fMargins = ERect(1, 1, 1, 1);
+		case B_BORDERED_WINDOW_LOOK:
+			fMargins = BRect(1, 1, 1, 1);
 			break;
 
-		case E_TITLED_WINDOW_LOOK:
-		case E_DOCUMENT_WINDOW_LOOK:
-			fMargins = ERect(DFB_WINDOW_NORMAL_BORDER_WIDTH, DFB_WINDOW_NORMAL_TITLEBAR_HEIGHT,
+		case B_TITLED_WINDOW_LOOK:
+		case B_DOCUMENT_WINDOW_LOOK:
+			fMargins = BRect(DFB_WINDOW_NORMAL_BORDER_WIDTH, DFB_WINDOW_NORMAL_TITLEBAR_HEIGHT,
 					 DFB_WINDOW_NORMAL_BORDER_WIDTH, DFB_WINDOW_NORMAL_BORDER_WIDTH);
 			break;
 
-		case E_MODAL_WINDOW_LOOK:
-			fMargins = ERect(DFB_WINDOW_THICK_BORDER_WIDTH, DFB_WINDOW_THICK_BORDER_WIDTH,
+		case B_MODAL_WINDOW_LOOK:
+			fMargins = BRect(DFB_WINDOW_THICK_BORDER_WIDTH, DFB_WINDOW_THICK_BORDER_WIDTH,
 					 DFB_WINDOW_THICK_BORDER_WIDTH, DFB_WINDOW_THICK_BORDER_WIDTH);
 			break;
 
-		case E_FLOATING_WINDOW_LOOK:
-			fMargins = ERect(DFB_WINDOW_THIN_BORDER_WIDTH, DFB_WINDOW_SMALL_TITLEBAR_HEIGHT,
+		case B_FLOATING_WINDOW_LOOK:
+			fMargins = BRect(DFB_WINDOW_THIN_BORDER_WIDTH, DFB_WINDOW_SMALL_TITLEBAR_HEIGHT,
 					 DFB_WINDOW_THIN_BORDER_WIDTH, DFB_WINDOW_THIN_BORDER_WIDTH);
 			break;
 
 		default:
-			fMargins = ERect(0, 0, 0, 0);
+			fMargins = BRect(0, 0, 0, 0);
 			break;
 	}
 
-	fWidth += (euint32)fMargins.left + (euint32)fMargins.right;
-	fHeight += (euint32)fMargins.top + (euint32)fMargins.bottom;
-	fOriginX -= (eint32)fMargins.left;
-	fOriginY -= (eint32)fMargins.top;
+	fWidth += (b_uint32)fMargins.left + (b_uint32)fMargins.right;
+	fHeight += (b_uint32)fMargins.top + (b_uint32)fMargins.bottom;
+	fOriginX -= (b_int32)fMargins.left;
+	fOriginY -= (b_int32)fMargins.top;
 }
 
 
@@ -98,18 +98,18 @@ EDFBGraphicsWindow::RenderDecoration()
 
 	switch(fLook)
 	{
-		case E_BORDERED_WINDOW_LOOK:
+		case B_BORDERED_WINDOW_LOOK:
 			{
 				dfbSurface->SetColor(dfbSurface, 0, 0, 0, 255);
 				dfbSurface->DrawRectangle(dfbSurface, 0, 0, fWidth, fHeight);
 			}
 			break;
 
-		case E_FLOATING_WINDOW_LOOK:
-		case E_TITLED_WINDOW_LOOK:
-		case E_DOCUMENT_WINDOW_LOOK:
+		case B_FLOATING_WINDOW_LOOK:
+		case B_TITLED_WINDOW_LOOK:
+		case B_DOCUMENT_WINDOW_LOOK:
 			{
-				int titlebar_height = (fLook == E_FLOATING_WINDOW_LOOK ?
+				int titlebar_height = (fLook == B_FLOATING_WINDOW_LOOK ?
 							DFB_WINDOW_SMALL_TITLEBAR_HEIGHT : DFB_WINDOW_NORMAL_TITLEBAR_HEIGHT);
 				int btn_space = 3;
 				int btn_h = titlebar_height - 5;
@@ -120,7 +120,7 @@ EDFBGraphicsWindow::RenderDecoration()
 				dfbSurface->DrawRectangle(dfbSurface, 0, 0, fWidth, fHeight);
 				dfbSurface->SetColor(dfbSurface, WINDOW_ACTIVED_COLOR);
 				dfbSurface->DrawRectangle(dfbSurface, 1, 1, fWidth - 2, fHeight - 2);
-				if(fLook != E_FLOATING_WINDOW_LOOK)
+				if(fLook != B_FLOATING_WINDOW_LOOK)
 				{
 					dfbSurface->SetColor(dfbSurface, WINDOW_ACTIVED_SHINER_COLOR);
 					dfbSurface->DrawLine(dfbSurface, 2, titlebar_height, 2, fHeight - 4);
@@ -143,7 +143,7 @@ EDFBGraphicsWindow::RenderDecoration()
 				dfbSurface->DrawLine(dfbSurface, 2, titlebar_height - 1, fWidth - 4, titlebar_height - 1);
 
 				dfbSurface->SetColor(dfbSurface, WINDOW_ACTIVED_BORDER_COLOR);
-				for(eint32 i = 0; i < 8; i += 2) dfbSurface->DrawLine(dfbSurface, 2, 3 + i, 10 - i, 3 + i);
+				for(b_int32 i = 0; i < 8; i += 2) dfbSurface->DrawLine(dfbSurface, 2, 3 + i, 10 - i, 3 + i);
 
 //				RenderTitle();
 
@@ -158,7 +158,7 @@ EDFBGraphicsWindow::RenderDecoration()
 				int btn_y = 3;
 
 				// draw close button
-				if(!(fFlags & E_NOT_CLOSABLE))
+				if(!(fFlags & B_NOT_CLOSABLE))
 				{
 					dfbSurface->SetColor(dfbSurface, WINDOW_ACTIVED_SHINER_COLOR);
 					dfbSurface->DrawRectangle(dfbSurface, btn_x, btn_y, btn_w, btn_h);
@@ -176,7 +176,7 @@ EDFBGraphicsWindow::RenderDecoration()
 
 #if 0
 				// draw zoom button
-				if(!(fFlags & E_NOT_ZOOMABLE))
+				if(!(fFlags & B_NOT_ZOOMABLE))
 				{
 					dfbSurface->SetColor(dfbSurface, WINDOW_ACTIVED_SHINER_COLOR);
 					dfbSurface->DrawRectangle(dfbSurface, btn_x, btn_y, btn_w, btn_h);
@@ -199,7 +199,7 @@ EDFBGraphicsWindow::RenderDecoration()
 				}
 
 				// draw minimize button
-				if(!(fFlags & E_NOT_MINIMIZABLE))
+				if(!(fFlags & B_NOT_MINIMIZABLE))
 				{
 					dfbSurface->SetColor(dfbSurface, WINDOW_ACTIVED_SHINER_COLOR);
 					dfbSurface->DrawRectangle(dfbSurface, btn_x, btn_y, btn_w, btn_h);
@@ -219,7 +219,7 @@ EDFBGraphicsWindow::RenderDecoration()
 			}
 			break;
 
-		case E_MODAL_WINDOW_LOOK:
+		case B_MODAL_WINDOW_LOOK:
 			{
 				dfbSurface->SetColor(dfbSurface, WINDOW_ACTIVED_BORDER_COLOR);
 				dfbSurface->DrawRectangle(dfbSurface, 0, 0, fWidth, fHeight);
@@ -259,15 +259,15 @@ EDFBGraphicsWindow::HandleMouseEvent(DFBWindowEvent *event)
 	dfbWindow->GetPosition(dfbWindow, &winLeft, &winTop);
 	dfbWindow->GetSize(dfbWindow, &winWidth, &winHeight);
 
-	EPoint where((float)(event->cx - winLeft), (float)(event->cy - winTop));
-	ERect allBounds(0, 0, (float)fWidth - 1, (float)fHeight - 1);
-	ERect winBounds = allBounds;
+	BPoint where((float)(event->cx - winLeft), (float)(event->cy - winTop));
+	BRect allBounds(0, 0, (float)fWidth - 1, (float)fHeight - 1);
+	BRect winBounds = allBounds;
 	winBounds.left += fMargins.left;
 	winBounds.top += fMargins.top;
 	winBounds.right -= fMargins.right;
 	winBounds.bottom -= fMargins.bottom;
 
-	eint32 button = 0;
+	b_int32 button = 0;
 	if(event->type != DWET_MOTION)
 	{
 		if(event->button == DIBI_LEFT) button = 1;
@@ -287,15 +287,15 @@ EDFBGraphicsWindow::HandleMouseEvent(DFBWindowEvent *event)
 
 	switch(fLook)
 	{
-		case E_MODAL_WINDOW_LOOK:
-		case E_FLOATING_WINDOW_LOOK:
-		case E_TITLED_WINDOW_LOOK:
-		case E_DOCUMENT_WINDOW_LOOK:
+		case B_MODAL_WINDOW_LOOK:
+		case B_FLOATING_WINDOW_LOOK:
+		case B_TITLED_WINDOW_LOOK:
+		case B_DOCUMENT_WINDOW_LOOK:
 			{
-				if(fEngine->dfbCurPointerGrabbed != E_MAXUINT) break;
+				if(fEngine->dfbCurPointerGrabbed != B_MAXUINT) break;
 				if(!(allBounds.Contains(where) && !winBounds.Contains(where))) break;
 
-				int titlebar_height = (fLook == E_FLOATING_WINDOW_LOOK ?
+				int titlebar_height = (fLook == B_FLOATING_WINDOW_LOOK ?
 							DFB_WINDOW_SMALL_TITLEBAR_HEIGHT : DFB_WINDOW_NORMAL_TITLEBAR_HEIGHT);
 
 				int btn_h = titlebar_height - 5;
@@ -305,14 +305,14 @@ EDFBGraphicsWindow::HandleMouseEvent(DFBWindowEvent *event)
 				int btn_y = 3;
 
 				// close button
-				if(!(fFlags & E_NOT_CLOSABLE) && fLook != E_MODAL_WINDOW_LOOK)
+				if(!(fFlags & B_NOT_CLOSABLE) && fLook != B_MODAL_WINDOW_LOOK)
 				{
-					ERect buttonBounds((float)btn_x, (float)btn_y, (float)(btn_x + btn_w), (float)(btn_y + btn_h));
+					BRect buttonBounds((float)btn_x, (float)btn_y, (float)(btn_x + btn_w), (float)(btn_y + btn_h));
 					if(buttonBounds.Contains(where))
 					{
 						if(button == 1 && event->type == DWET_BUTTONDOWN)
 						{
-							fMsgr.SendMessage(E_QUIT_REQUESTED);
+							fMsgr.SendMessage(B_QUIT_REQUESTED);
 							return true;
 						}
 					}
@@ -326,7 +326,7 @@ EDFBGraphicsWindow::HandleMouseEvent(DFBWindowEvent *event)
 					wmPointerOffsetX = event->cx - winLeft;
 					wmPointerOffsetY = event->cy - winTop;
 					if(where.x < 10 && where.y < 10) fHandlingResize = true; else fHandlingMove = true;
-					if(!(fFlags & E_AVOID_FOCUS)) dfbWindow->RaiseToTop(dfbWindow);
+					if(!(fFlags & B_AVOID_FOCUS)) dfbWindow->RaiseToTop(dfbWindow);
 					return true;
 				}
 			}
@@ -357,7 +357,7 @@ EDFBGraphicsWindow::HandleMouseEvent(DFBWindowEvent *event)
 		if(event->type == DWET_BUTTONUP)
 		{
 			dfbWindow->UngrabPointer(dfbWindow);
-			fEngine->dfbCurPointerGrabbed = E_MAXUINT;
+			fEngine->dfbCurPointerGrabbed = B_MAXUINT;
 			fHandlingMove = false;
 			fHandlingResize = false;
 		}

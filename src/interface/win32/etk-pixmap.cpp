@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -34,59 +34,59 @@
 #include "./../../support/ClassInfo.h"
 
 
-EWin32GraphicsDrawable::EWin32GraphicsDrawable(EWin32GraphicsEngine *win32Engine, euint32 w, euint32 h)
-	: EGraphicsDrawable(), win32Pixmap(NULL), win32HDC(NULL), win32Pen(NULL), win32Brush(NULL),
-	  fRequestAsyncWin(NULL), WM_ETK_MESSAGE(0)
+EWin32GraphicsDrawable::EWin32GraphicsDrawable(EWin32GraphicsEngine *win32Engine, b_uint32 w, b_uint32 h)
+	: BGraphicsDrawable(), win32Pixmap(NULL), win32HDC(NULL), win32Pen(NULL), win32Brush(NULL),
+	  fRequestAsyncWin(NULL), WM_BHAPI_MESSAGE(0)
 {
-	if(w == E_MAXUINT32 || h == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
 		return;
 	}
 
 	if(win32Engine == NULL) return;
 
 	do {
-		EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-		if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK ||
-		   win32Engine->WM_ETK_MESSAGE == 0 || win32Engine->win32RequestAsyncWin == NULL)
+		BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+		if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK ||
+		   win32Engine->WM_BHAPI_MESSAGE == 0 || win32Engine->win32RequestAsyncWin == NULL)
 		{
-			ETK_WARNING("[GRAPHICS]: %s --- Invalid engine or unable to duplicate handle.", __PRETTY_FUNCTION__);
+			BHAPI_WARNING("[GRAPHICS]: %s --- Invalid engine or unable to duplicate handle.", __PRETTY_FUNCTION__);
 			return;
 		}
 
-		WM_ETK_MESSAGE = win32Engine->WM_ETK_MESSAGE;
+		WM_BHAPI_MESSAGE = win32Engine->WM_BHAPI_MESSAGE;
 		fRequestAsyncWin = win32Engine->win32RequestAsyncWin;
 	} while(false);
 
-	e_rgb_color whiteColor = {255, 255, 255, 255};
-	EGraphicsDrawable::SetBackgroundColor(whiteColor);
+	b_rgb_color whiteColor = {255, 255, 255, 255};
+	BGraphicsDrawable::SetBackgroundColor(whiteColor);
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_CREATE_PIXMAP;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_CREATE_PIXMAP;
 	callback.pixmap = this;
 	callback.w = w;
 	callback.h = h;
 	callback.bkColor = whiteColor;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_PIXMAP, (LPARAM)&callback) == (LRESULT)TRUE);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_PIXMAP, (LPARAM)&callback) == (LRESULT)TRUE);
 
 	if(!successed || win32Pixmap == NULL || win32HDC == NULL)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Create pixmap failed: \"%s\".",
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Create pixmap failed: \"%s\".",
 			  __PRETTY_FUNCTION__, successed ? "win32Pixmap = NULL || win32HDC = NULL" : "SendMessageA failed");
 	}
 }
 
 
-LRESULT _etk_create_pixmap(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_create_pixmap(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_CREATE_PIXMAP || callback->pixmap == NULL) return FALSE;
+	   callback->command != WM_BHAPI_MESSAGE_CREATE_PIXMAP || callback->pixmap == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	int w = (int)callback->w + 1;
 	int h = (int)callback->h + 1;
@@ -122,27 +122,27 @@ EWin32GraphicsDrawable::~EWin32GraphicsDrawable()
 {
 	if(fRequestAsyncWin != NULL)
 	{
-		etk_win32_gdi_callback_t callback;
-		callback.command = WM_ETK_MESSAGE_DESTROY_PIXMAP;
+		bhapi_win32_gdi_callback_t callback;
+		callback.command = WM_BHAPI_MESSAGE_DESTROY_PIXMAP;
 		callback.pixmap = this;
 
-		bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-					       WM_ETK_MESSAGE_PIXMAP, (LPARAM)&callback) == (LRESULT)TRUE);
+		bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+					       WM_BHAPI_MESSAGE_PIXMAP, (LPARAM)&callback) == (LRESULT)TRUE);
 
 		if(!successed || win32Pixmap != NULL || win32HDC != NULL || win32Pen != NULL || win32Brush != NULL)
-			ETK_ERROR("[GRAPHICS]: %s --- Unable to destroy pixmap.", __PRETTY_FUNCTION__);
+			BHAPI_ERROR("[GRAPHICS]: %s --- Unable to destroy pixmap.", __PRETTY_FUNCTION__);
 	}
 }
 
 
-LRESULT _etk_destroy_pixmap(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_destroy_pixmap(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_DESTROY_PIXMAP || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_DESTROY_PIXMAP || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(callback->pixmap->win32Pen != NULL) DeleteObject(callback->pixmap->win32Pen);
 	if(callback->pixmap->win32Brush != NULL) DeleteObject(callback->pixmap->win32Brush);
@@ -160,56 +160,56 @@ LRESULT _etk_destroy_pixmap(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_cal
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::SetBackgroundColor(e_rgb_color bkColor)
+b_status_t
+EWin32GraphicsDrawable::SetBackgroundColor(b_rgb_color bkColor)
 {
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	EGraphicsDrawable::SetBackgroundColor(bkColor);
+	BGraphicsDrawable::SetBackgroundColor(bkColor);
 
 	// TODO: clear content
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::ResizeTo(euint32 w, euint32 h)
+b_status_t
+EWin32GraphicsDrawable::ResizeTo(b_uint32 w, b_uint32 h)
 {
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	if(w == E_MAXUINT32 || h == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_RESIZE_PIXMAP;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_RESIZE_PIXMAP;
 	callback.pixmap = this;
 	callback.w = w;
 	callback.h = h;
 	callback.bkColor = BackgroundColor();
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_PIXMAP, (LPARAM)&callback) == (LRESULT)TRUE);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_PIXMAP, (LPARAM)&callback) == (LRESULT)TRUE);
 
-	if(successed && win32Pixmap != NULL) return E_OK;
+	if(successed && win32Pixmap != NULL) return B_OK;
 
-	ETK_DEBUG("[GRAPHICS]: %s --- Unable to resize pixmap.", __PRETTY_FUNCTION__);
+	BHAPI_DEBUG("[GRAPHICS]: %s --- Unable to resize pixmap.", __PRETTY_FUNCTION__);
 
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-LRESULT _etk_resize_pixmap(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_resize_pixmap(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_RESIZE_PIXMAP || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_RESIZE_PIXMAP || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	int w = (int)callback->w + 1;
 	int h = (int)callback->h + 1;
@@ -247,29 +247,29 @@ LRESULT _etk_resize_pixmap(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_call
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::CopyTo(EGraphicsContext *dc,
-			       EGraphicsDrawable *dstDrawable,
-			       eint32 x, eint32 y, euint32 w, euint32 h,
-			       eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EWin32GraphicsDrawable::CopyTo(BGraphicsContext *dc,
+			       BGraphicsDrawable *dstDrawable,
+			       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+			       b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL || dstDrawable == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL || dstDrawable == NULL) return B_ERROR;
 
-	if(dc->DrawingMode() != E_OP_COPY)
+	if(dc->DrawingMode() != B_OP_COPY)
 	{
 		// TODO
-		ETK_DEBUG("[GRAPHICS]: %s --- FIXME: unsupported drawing mode.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- FIXME: unsupported drawing mode.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(w == E_MAXUINT32 || h == E_MAXUINT32 || dstW == E_MAXUINT32 || dstH == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32 || dstW == B_MAXUINT32 || dstH == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_DRAW_PIXMAP;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_DRAW_PIXMAP;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.dstDrawable = dstDrawable;
@@ -283,27 +283,27 @@ EWin32GraphicsDrawable::CopyTo(EGraphicsContext *dc,
 	callback.ww = dstW;
 	callback.wh = dstH;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_PIXMAP, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_PIXMAP, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-LRESULT _etk_draw_pixmap(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_draw_pixmap(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_DRAW_PIXMAP || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_DRAW_PIXMAP || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL ||
 	   callback->dc == NULL || callback->dstDrawable == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
-	EWin32GraphicsWindow *win = e_cast_as(callback->dstDrawable, EWin32GraphicsWindow);
-	EWin32GraphicsDrawable *pix = e_cast_as(callback->dstDrawable, EWin32GraphicsDrawable);
+	EWin32GraphicsWindow *win = b_cast_as(callback->dstDrawable, EWin32GraphicsWindow);
+	EWin32GraphicsDrawable *pix = b_cast_as(callback->dstDrawable, EWin32GraphicsDrawable);
 	if(win == NULL && pix == NULL)
 	{
-		ETK_WARNING("[GRAPHICS]: %s --- Invalid drawable.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[GRAPHICS]: %s --- Invalid drawable.", __PRETTY_FUNCTION__);
 		return FALSE;
 	}
 
@@ -312,7 +312,7 @@ LRESULT _etk_draw_pixmap(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callba
 		if(win->win32Window == NULL) return FALSE;
 
 #if 0
-		eint8 otherThread = (GetCurrentThreadId() == win32Engine->win32ThreadID ? 0 : 1);
+		b_int8 otherThread = (GetCurrentThreadId() == win32Engine->win32ThreadID ? 0 : 1);
 		if(otherThread == 1)
 			otherThread = (AttachThreadInput(win32Engine->win32ThreadID, GetCurrentThreadId(), TRUE) == 0 ? 2 : 1);
 		if(otherThread > 1) return FALSE;
@@ -379,21 +379,21 @@ LRESULT _etk_draw_pixmap(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callba
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::DrawPixmap(EGraphicsContext *dc, const EPixmap *pix,
-				   eint32 x, eint32 y, euint32 w, euint32 h,
-				   eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EWin32GraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
+				   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+				   b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	if(w == E_MAXUINT32 || h == E_MAXUINT32 || dstW == E_MAXUINT32 || dstH == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32 || dstW == B_MAXUINT32 || dstH == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_DRAW_EPIXMAP;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_DRAW_EPIXMAP;
 	callback.dc = dc;
 	callback.dstDrawable = this;
 	callback.x = x;
@@ -408,9 +408,9 @@ EWin32GraphicsDrawable::DrawPixmap(EGraphicsContext *dc, const EPixmap *pix,
 
 	callback.data = (const void*)pix;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_PIXMAP, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_PIXMAP, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 #endif /* WIN32 */

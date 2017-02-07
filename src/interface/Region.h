@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  * 
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,81 +24,81 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: Region.h
- * Description: ERegion --- Combination of rectangles to describe region
+ * Description: BRegion --- Combination of rectangles to describe region
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_REGION_H__
-#define __ETK_REGION_H__
+#ifndef __BHAPI_REGION_H__
+#define __BHAPI_REGION_H__
 
-#include "./../support/List.h"
 #include "./../interface/Rect.h"
+#include "./../support/List.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK ERegion {
+class _IMPEXP_BHAPI BRegion {
 public:
-	ERegion();
-	ERegion(const ERegion &region);
-	ERegion(const ERect &rect);
-	virtual ~ERegion();
+	BRegion();
+	BRegion(const BRegion &region);
+	BRegion(const BRect &rect);
+	virtual ~BRegion();
 
-	ERegion &operator=(const ERegion &from);
+	BRegion &operator=(const BRegion &from);
 
-	ERegion operator&(ERect r) const;
-	ERegion operator|(ERect r) const;
+	BRegion operator&(BRect r) const;
+	BRegion operator|(BRect r) const;
 
-	ERegion& operator&=(ERect r);
-	ERegion& operator|=(ERect r);
+	BRegion& operator&=(BRect r);
+	BRegion& operator|=(BRect r);
 
-	ERegion operator&(const ERegion &region) const;
-	ERegion operator|(const ERegion &region) const;
+	BRegion operator&(const BRegion &region) const;
+	BRegion operator|(const BRegion &region) const;
 
-	ERegion& operator&=(const ERegion &region);
-	ERegion& operator|=(const ERegion &region);
+	BRegion& operator&=(const BRegion &region);
+	BRegion& operator|=(const BRegion &region);
 
-	ERect Frame() const;
-	ERect RectAt(eint32 index) const;
-	eint32 CountRects() const;
+	BRect Frame() const;
+    BRect RectAt(b_int32 index) const;
+    b_int32 CountRects() const;
 
-	void Set(ERect singleBound);
+	void Set(BRect singleBound);
 	void MakeEmpty();
 
-	bool Include(ERect r);
-	bool Include(const ERegion *region);
+	bool Include(BRect r);
+	bool Include(const BRegion *region);
 
-	bool Exclude(ERect r);
-	bool Exclude(const ERegion *region);
+	bool Exclude(BRect r);
+	bool Exclude(const BRegion *region);
 
 	void OffsetBy(float dx, float dy);
-	void OffsetBy(EPoint pt);
-	ERegion& OffsetBySelf(float dx, float dy);
-	ERegion& OffsetBySelf(EPoint pt);
-	ERegion OffsetByCopy(float dx, float dy);
-	ERegion OffsetByCopy(EPoint pt);
+	void OffsetBy(BPoint pt);
+	BRegion& OffsetBySelf(float dx, float dy);
+	BRegion& OffsetBySelf(BPoint pt);
+	BRegion OffsetByCopy(float dx, float dy);
+	BRegion OffsetByCopy(BPoint pt);
 
 	void Scale(float scaling);
-	ERegion& ScaleSelf(float scaling);
-	ERegion ScaleCopy(float scaling);
+	BRegion& ScaleSelf(float scaling);
+	BRegion ScaleCopy(float scaling);
 
-	bool Intersects(ERect r) const;
+	bool Intersects(BRect r) const;
 	bool Intersects(float l, float t, float r, float b) const;
-	bool Intersects(const ERegion *region) const;
+	bool Intersects(const BRegion *region) const;
 
-	bool Contains(EPoint pt) const;
+	bool Contains(BPoint pt) const;
 	bool Contains(float x, float y) const;
-	bool Contains(ERect r) const;
+	bool Contains(BRect r) const;
 	bool Contains(float l, float t, float r, float b) const;
-	bool Contains(const ERegion *region) const;
+	bool Contains(const BRegion *region) const;
 
 	void PrintToStream() const;
 
 private:
-	EList fRects;
-	ERect fFrame;
+	BList fRects;
+	BRect fFrame;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_REGION_H__ */
+#endif /* __BHAPI_REGION_H__ */
 

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,141 +27,141 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_RECT_H__
-#define __ETK_RECT_H__
+#ifndef __BHAPI_RECT_H__
+#define __BHAPI_RECT_H__
 
 #include <math.h>
 #include "./../interface/Point.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK ERect {
+class _IMPEXP_BHAPI BRect {
 public:
 	float left;
 	float top;
 	float right;
 	float bottom;
 
-	ERect();
-	ERect(const ERect &r);
-	ERect(float l, float t, float r, float b);
-	ERect(EPoint leftTop, EPoint rightBottom);
+	BRect();
+	BRect(const BRect &r);
+	BRect(float l, float t, float r, float b);
+	BRect(BPoint leftTop, BPoint rightBottom);
 
-	ERect &operator=(const ERect &from);
+	BRect &operator=(const BRect &from);
 	void Set(float l, float t, float r, float b);
 
-	EPoint LeftTop() const;
-	EPoint RightBottom() const;
-	EPoint LeftBottom() const;
-	EPoint RightTop() const;
-	EPoint Center() const;
+	BPoint LeftTop() const;
+	BPoint RightBottom() const;
+	BPoint LeftBottom() const;
+	BPoint RightTop() const;
+	BPoint Center() const;
 
-	void SetLeftTop(const EPoint pt);
-	void SetRightBottom(const EPoint pt);
-	void SetLeftBottom(const EPoint pt);
-	void SetRightTop(const EPoint pt);
+	void SetLeftTop(const BPoint pt);
+	void SetRightBottom(const BPoint pt);
+	void SetLeftBottom(const BPoint pt);
+	void SetRightTop(const BPoint pt);
 
 	void SetLeftTop(float x, float y);
 	void SetRightBottom(float x, float y);
 	void SetLeftBottom(float x, float y);
 	void SetRightTop(float x, float y);
 
-	void InsetBy(EPoint pt);
+	void InsetBy(BPoint pt);
 	void InsetBy(float dx, float dy);
-	void OffsetBy(EPoint pt);
+	void OffsetBy(BPoint pt);
 	void OffsetBy(float dx, float dy);
-	void OffsetTo(EPoint pt);
+	void OffsetTo(BPoint pt);
 	void OffsetTo(float x, float y);
 
 	void Floor();
 	void Ceil();
 	void Round();
 
-	ERect& InsetBySelf(EPoint pt);
-	ERect& InsetBySelf(float dx, float dy);
-	ERect InsetByCopy(EPoint pt) const;
-	ERect InsetByCopy(float dx, float dy) const;
-	ERect& OffsetBySelf(EPoint pt);
-	ERect& OffsetBySelf(float dx, float dy);
-	ERect OffsetByCopy(EPoint pt) const;
-	ERect OffsetByCopy(float dx, float dy) const;
-	ERect& OffsetToSelf(EPoint pt);
-	ERect& OffsetToSelf(float x, float y);
-	ERect OffsetToCopy(EPoint pt) const;
-	ERect OffsetToCopy(float x, float y) const;
+	BRect& InsetBySelf(BPoint pt);
+	BRect& InsetBySelf(float dx, float dy);
+	BRect InsetByCopy(BPoint pt) const;
+	BRect InsetByCopy(float dx, float dy) const;
+	BRect& OffsetBySelf(BPoint pt);
+	BRect& OffsetBySelf(float dx, float dy);
+	BRect OffsetByCopy(BPoint pt) const;
+	BRect OffsetByCopy(float dx, float dy) const;
+	BRect& OffsetToSelf(BPoint pt);
+	BRect& OffsetToSelf(float x, float y);
+	BRect OffsetToCopy(BPoint pt) const;
+	BRect OffsetToCopy(float x, float y) const;
 
-	ERect& FloorSelf();
-	ERect FloorCopy() const;
-	ERect& CeilSelf();
-	ERect CeilCopy() const;
-	ERect& RoundSelf();
-	ERect RoundCopy() const;
+	BRect& FloorSelf();
+	BRect FloorCopy() const;
+	BRect& CeilSelf();
+	BRect CeilCopy() const;
+	BRect& RoundSelf();
+	BRect RoundCopy() const;
 
-	bool operator==(ERect r) const;
-	bool operator!=(ERect r) const;
+	bool operator==(BRect r) const;
+	bool operator!=(BRect r) const;
 
-	ERect operator&(ERect r) const;
-	ERect operator|(ERect r) const;
+	BRect operator&(BRect r) const;
+	BRect operator|(BRect r) const;
 
-	ERect& operator&=(ERect r);
-	ERect& operator|=(ERect r);
+	BRect& operator&=(BRect r);
+	BRect& operator|=(BRect r);
 
 	bool IsValid() const;
 	float Width() const;
-	eint32 IntegerWidth() const;
+    b_int32 IntegerWidth() const;
 	float Height() const;
-	eint32 IntegerHeight() const;
+    b_int32 IntegerHeight() const;
 
-	bool Intersects(ERect r) const;
+	bool Intersects(BRect r) const;
 	bool Intersects(float l, float t, float r, float b) const;
 
-	bool Contains(EPoint pt) const;
+	bool Contains(BPoint pt) const;
 	bool Contains(float x, float y) const;
-	bool Contains(ERect r) const;
+	bool Contains(BRect r) const;
 	bool Contains(float l, float t, float r, float b) const;
 
 	void PrintToStream() const;
 };
 
 
-inline EPoint ERect::LeftTop() const
+inline BPoint BRect::LeftTop() const
 {
-	return(EPoint(left, top));
+	return(BPoint(left, top));
 }
 
 
-inline EPoint ERect::RightBottom() const
+inline BPoint BRect::RightBottom() const
 {
-	return(EPoint(right, bottom));
+	return(BPoint(right, bottom));
 }
 
 
-inline EPoint ERect::LeftBottom() const
+inline BPoint BRect::LeftBottom() const
 {
-	return(EPoint(left, bottom));
+	return(BPoint(left, bottom));
 }
 
 
-inline EPoint ERect::RightTop() const
+inline BPoint BRect::RightTop() const
 {
-	return(EPoint(right, top));
+	return(BPoint(right, top));
 }
 
 
-inline EPoint ERect::Center() const
+inline BPoint BRect::Center() const
 {
-	return(EPoint(left + (right - left) / 2, top + (bottom - top) / 2));
+	return(BPoint(left + (right - left) / 2, top + (bottom - top) / 2));
 }
 
 
-inline ERect::ERect()
+inline BRect::BRect()
 {
 	top = left = 0;
 	bottom = right = -1;
 }
 
 
-inline ERect::ERect(float l, float t, float r, float b)
+inline BRect::BRect(float l, float t, float r, float b)
 {
 	left = l;
 	top = t;
@@ -170,7 +170,7 @@ inline ERect::ERect(float l, float t, float r, float b)
 }
 
 
-inline ERect::ERect(const ERect &r)
+inline BRect::BRect(const BRect &r)
 {
 	left = r.left;
 	top = r.top;
@@ -179,7 +179,7 @@ inline ERect::ERect(const ERect &r)
 }
 
 
-inline ERect::ERect(EPoint leftTop, EPoint rightBottom)
+inline BRect::BRect(BPoint leftTop, BPoint rightBottom)
 {
 	left = leftTop.x;
 	top = leftTop.y;
@@ -188,7 +188,7 @@ inline ERect::ERect(EPoint leftTop, EPoint rightBottom)
 }
 
 
-inline ERect& ERect::operator=(const ERect& from)
+inline BRect& BRect::operator=(const BRect& from)
 {
 	left = from.left;
 	top = from.top;
@@ -198,7 +198,7 @@ inline ERect& ERect::operator=(const ERect& from)
 }
 
 
-inline void ERect::Set(float l, float t, float r, float b)
+inline void BRect::Set(float l, float t, float r, float b)
 {
 	left = l;
 	top = t;
@@ -207,36 +207,36 @@ inline void ERect::Set(float l, float t, float r, float b)
 }
 
 
-inline bool ERect::IsValid() const
+inline bool BRect::IsValid() const
 {
 	return(left <= right && top <= bottom);
 }
 
 
-inline eint32 ERect::IntegerWidth() const
+inline b_int32 BRect::IntegerWidth() const
 {
-	return((eint32)ceil((double)(right - left)));
+    return((b_int32)ceil((double)(right - left)));
 }
 
 
-inline float ERect::Width() const
+inline float BRect::Width() const
 {
 	return(right - left);
 }
 
 
-inline eint32 ERect::IntegerHeight() const
+inline b_int32 BRect::IntegerHeight() const
 {
-	return((eint32)ceil((double)(bottom - top)));
+    return((b_int32)ceil((double)(bottom - top)));
 }
 
 
-inline float ERect::Height() const
+inline float BRect::Height() const
 {
 	return(bottom - top);
 }
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_RECT_H__ */
+#endif /* __BHAPI_RECT_H__ */
 

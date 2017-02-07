@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -30,46 +30,46 @@
 #include <stdlib.h>
 
 #include "./../kernel/Kernel.h"
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 #include "./../support/SimpleLocker.h"
 
-typedef struct etk_port_info {
-	etk_port_info()
+typedef struct bhapi_port_info {
+	bhapi_port_info()
 	{
 		InitData();
 	}
 
 	void InitData()
 	{
-		bzero(name, E_OS_NAME_LENGTH + 1);
+		bzero(name, B_OS_NAME_LENGTH + 1);
 		queue_length = 0;
 		queue_count = 0;
-		readerWaitCount = E_INT64_CONSTANT(0);
-		writerWaitCount = E_INT64_CONSTANT(0);
+		readerWaitCount = B_INT64_CONSTANT(0);
+		writerWaitCount = B_INT64_CONSTANT(0);
 		closed = false;
 	}
 
-	char			name[E_OS_NAME_LENGTH + 1];
-	eint32			queue_length;
-	eint32			queue_count;
-	eint64			readerWaitCount;
-	eint64			writerWaitCount;
+	char			name[B_OS_NAME_LENGTH + 1];
+	b_int32			queue_length;
+	b_int32			queue_count;
+	b_int64			readerWaitCount;
+	b_int64			writerWaitCount;
 	bool			closed;
-} etk_port_info;
+} bhapi_port_info;
 
-typedef struct etk_port_t {
-	etk_port_t()
+typedef struct bhapi_port_t {
+	bhapi_port_t()
 		: iLocker(NULL), readerSem(NULL), writerSem(NULL), mapping(NULL), queueBuffer(NULL),
 		  openedIPC(false), portInfo(NULL), created(false), refCount(0)
 	{
 	}
 
-	~etk_port_t()
+	~bhapi_port_t()
 	{
 		if(created)
 		{
 			created = false;
-			etk_delete_port((void*)this);
+			bhapi_delete_port((void*)this);
 		}
 	}
 
@@ -84,28 +84,28 @@ typedef struct etk_port_t {
 
 	bool			openedIPC;
 
-	etk_port_info*		portInfo;
+	bhapi_port_info*		portInfo;
 
 	bool			created;
-	euint32			refCount;
-} etk_port_t;
+	b_uint32			refCount;
+} bhapi_port_t;
 
-class etk_port_locker_t {
+class bhapi_port_locker_t {
 public:
 	void *fSem;
-	ESimpleLocker fLocker;
+	BSimpleLocker fLocker;
 
-	etk_port_locker_t()
+	bhapi_port_locker_t()
 		: fSem(NULL)
 	{
 	}
 
-	~etk_port_locker_t()
+	~bhapi_port_locker_t()
 	{
 		if(fSem != NULL)
 		{
-			// leave global semaphore, without "etk_delete_sem(fSem)"
-			etk_delete_sem_etc(fSem, false);
+			// leave global semaphore, without "bhapi_delete_sem(fSem)"
+			bhapi_delete_sem_etc(fSem, false);
 		}
 	}
 
@@ -113,9 +113,9 @@ public:
 	{
 		if(fSem != NULL) return;
 
-		if((fSem = etk_clone_sem("_port_global_")) == NULL)
-			fSem = etk_create_sem(1, "_port_global_", ETK_AREA_ACCESS_ALL);
-		if(fSem == NULL) ETK_ERROR("[KERNEL]: Can't initialize global port!");
+		if((fSem = bhapi_clone_sem("_port_global_")) == NULL)
+			fSem = bhapi_create_sem(1, "_port_global_", BHAPI_AREA_ACCESS_ALL);
+		if(fSem == NULL) BHAPI_ERROR("[KERNEL]: Can't initialize global port!");
 	}
 
 	void LockLocal()
@@ -133,116 +133,116 @@ public:
 		LockLocal();
 		Init();
 		UnlockLocal();
-		etk_acquire_sem(fSem);
+		bhapi_acquire_sem(fSem);
 	}
 
 	void UnlockIPC()
 	{
-		etk_release_sem(fSem);
+		bhapi_release_sem(fSem);
 	}
 };
 
-static etk_port_locker_t __etk_port_locker__;
-#define _ETK_LOCK_IPC_PORT_()		__etk_port_locker__.LockIPC()
-#define _ETK_UNLOCK_IPC_PORT_()		__etk_port_locker__.UnlockIPC()
-#define _ETK_LOCK_LOCAL_PORT_()		__etk_port_locker__.LockLocal()
-#define _ETK_UNLOCK_LOCAL_PORT_()	__etk_port_locker__.UnlockLocal()
+static bhapi_port_locker_t __bhapi_port_locker__;
+#define _BHAPI_LOCK_IPC_PORT_()		__bhapi_port_locker__.LockIPC()
+#define _BHAPI_UNLOCK_IPC_PORT_()		__bhapi_port_locker__.UnlockIPC()
+#define _BHAPI_LOCK_LOCAL_PORT_()		__bhapi_port_locker__.LockLocal()
+#define _BHAPI_UNLOCK_LOCAL_PORT_()	__bhapi_port_locker__.UnlockLocal()
 
 
-static bool etk_is_port_for_IPC(const etk_port_t *port)
+static bool bhapi_is_port_for_IPC(const bhapi_port_t *port)
 {
 	if(!port) return false;
 	return(port->mapping != NULL);
 }
 
 
-static void etk_lock_port_inter(etk_port_t *port)
+static void bhapi_lock_port_inter(bhapi_port_t *port)
 {
-	if(etk_is_port_for_IPC(port))
-		etk_acquire_sem(port->iLocker);
+	if(bhapi_is_port_for_IPC(port))
+		bhapi_acquire_sem(port->iLocker);
 	else
-		etk_lock_locker(port->iLocker);
+		bhapi_lock_locker(port->iLocker);
 }
 
 
-static void etk_unlock_port_inter(etk_port_t *port)
+static void bhapi_unlock_port_inter(bhapi_port_t *port)
 {
-	if(etk_is_port_for_IPC(port))
-		etk_release_sem(port->iLocker);
+	if(bhapi_is_port_for_IPC(port))
+		bhapi_release_sem(port->iLocker);
 	else
-		etk_unlock_locker(port->iLocker);
+		bhapi_unlock_locker(port->iLocker);
 }
 
-#define ETK_PORT_PER_MESSAGE_LENGTH	(sizeof(eint32) + sizeof(size_t) + ETK_MAX_PORT_BUFFER_SIZE)
+#define BHAPI_PORT_PER_MESSAGE_LENGTH	(sizeof(b_int32) + sizeof(size_t) + BHAPI_MAX_PORT_BUFFER_SIZE)
 
-static void* etk_create_port_for_IPC(eint32 queue_length, const char *name, etk_area_access area_access)
+static void* bhapi_create_port_for_IPC(b_int32 queue_length, const char *name, bhapi_area_access area_access)
 {
-	if(queue_length <= 0 || queue_length > ETK_VALID_MAX_PORT_QUEUE_LENGTH ||
-	   name == NULL || *name == 0 || strlen(name) > E_OS_NAME_LENGTH - 1) return NULL;
+	if(queue_length <= 0 || queue_length > BHAPI_VALID_MAX_PORT_QUEUE_LENGTH ||
+	   name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH - 1) return NULL;
 
-	char *tmpSemName = e_strdup_printf("%s ", name);
+	char *tmpSemName = b_strdup_printf("%s ", name);
 	if(!tmpSemName) return NULL;
 
-	etk_port_t *port = new etk_port_t();
+	bhapi_port_t *port = new bhapi_port_t();
 	if(!port)
 	{
 		free(tmpSemName);
 		return NULL;
 	}
 
-	_ETK_LOCK_IPC_PORT_();
-	if((port->mapping = etk_create_area(name, (void**)&(port->portInfo),
-					    sizeof(etk_port_info) + (size_t)queue_length * ETK_PORT_PER_MESSAGE_LENGTH,
-					    E_READ_AREA | E_WRITE_AREA, ETK_AREA_SYSTEM_PORT_DOMAIN, area_access)) == NULL ||
+	_BHAPI_LOCK_IPC_PORT_();
+	if((port->mapping = bhapi_create_area(name, (void**)&(port->portInfo),
+					    sizeof(bhapi_port_info) + (size_t)queue_length * BHAPI_PORT_PER_MESSAGE_LENGTH,
+					    B_READ_AREA | B_WRITE_AREA, BHAPI_AREA_SYSTEM_PORT_DOMAIN, area_access)) == NULL ||
 	   port->portInfo == NULL)
 	{
-		if(port->mapping) etk_delete_area(port->mapping);
-		_ETK_UNLOCK_IPC_PORT_();
+		if(port->mapping) bhapi_delete_area(port->mapping);
+		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
 
-	etk_port_info *port_info = port->portInfo;
+	bhapi_port_info *port_info = port->portInfo;
 	port_info->InitData();
 	memcpy(port_info->name, name, (size_t)strlen(name));
 	port_info->queue_length = queue_length;
 
-	if((port->iLocker = etk_create_sem(1, name, area_access)) == NULL)
+	if((port->iLocker = bhapi_create_sem(1, name, area_access)) == NULL)
 	{
-		etk_delete_area(port->mapping);
-		_ETK_UNLOCK_IPC_PORT_();
+		bhapi_delete_area(port->mapping);
+		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
 	tmpSemName[strlen(tmpSemName) - 1] = 'r';
-	if((port->readerSem = etk_create_sem(0, tmpSemName, area_access)) == NULL)
+	if((port->readerSem = bhapi_create_sem(0, tmpSemName, area_access)) == NULL)
 	{
-		etk_delete_sem(port->iLocker);
-		etk_delete_area(port->mapping);
-		_ETK_UNLOCK_IPC_PORT_();
+		bhapi_delete_sem(port->iLocker);
+		bhapi_delete_area(port->mapping);
+		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
 	tmpSemName[strlen(tmpSemName) - 1] = 'w';
-	if((port->writerSem = etk_create_sem(0, tmpSemName, area_access)) == NULL)
+	if((port->writerSem = bhapi_create_sem(0, tmpSemName, area_access)) == NULL)
 	{
-		etk_delete_sem(port->readerSem);
-		etk_delete_sem(port->iLocker);
-		etk_delete_area(port->mapping);
-		_ETK_UNLOCK_IPC_PORT_();
+		bhapi_delete_sem(port->readerSem);
+		bhapi_delete_sem(port->iLocker);
+		bhapi_delete_area(port->mapping);
+		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
-	_ETK_UNLOCK_IPC_PORT_();
+	_BHAPI_UNLOCK_IPC_PORT_();
 
 	free(tmpSemName);
 
 	char *buffer = (char*)(port->portInfo);
-	buffer += sizeof(etk_port_info);
+	buffer += sizeof(bhapi_port_info);
 	port->queueBuffer = (void*)buffer;
 
 	port->openedIPC = false;
@@ -252,67 +252,67 @@ static void* etk_create_port_for_IPC(eint32 queue_length, const char *name, etk_
 }
 
 
-_IMPEXP_ETK void* etk_open_port(const char *name)
+_IMPEXP_BHAPI void* bhapi_open_port(const char *name)
 {
-	if(name == NULL || *name == 0 || strlen(name) > E_OS_NAME_LENGTH - 1) return NULL;
+	if(name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH - 1) return NULL;
 
-	char *tmpSemName = e_strdup_printf("%s ", name);
+	char *tmpSemName = b_strdup_printf("%s ", name);
 	if(!tmpSemName) return NULL;
 
-	etk_port_t *port = new etk_port_t();
+	bhapi_port_t *port = new bhapi_port_t();
 	if(!port)
 	{
 		free(tmpSemName);
 		return NULL;
 	}
 
-	_ETK_LOCK_IPC_PORT_();
-	if((port->mapping = etk_clone_area(name, (void**)&(port->portInfo),
-					  E_READ_AREA | E_WRITE_AREA, ETK_AREA_SYSTEM_PORT_DOMAIN)) == NULL ||
+	_BHAPI_LOCK_IPC_PORT_();
+	if((port->mapping = bhapi_clone_area(name, (void**)&(port->portInfo),
+					  B_READ_AREA | B_WRITE_AREA, BHAPI_AREA_SYSTEM_PORT_DOMAIN)) == NULL ||
 	   port->portInfo == NULL)
 	{
-		if(port->mapping) etk_delete_area(port->mapping);
-		_ETK_UNLOCK_IPC_PORT_();
+		if(port->mapping) bhapi_delete_area(port->mapping);
+		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
 
-	if((port->iLocker = etk_clone_sem(name)) == NULL)
+	if((port->iLocker = bhapi_clone_sem(name)) == NULL)
 	{
-		etk_delete_area(port->mapping);
-		_ETK_UNLOCK_IPC_PORT_();
+		bhapi_delete_area(port->mapping);
+		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
 	tmpSemName[strlen(tmpSemName) - 1] = 'r';
-	if((port->readerSem = etk_clone_sem(tmpSemName)) == NULL)
+	if((port->readerSem = bhapi_clone_sem(tmpSemName)) == NULL)
 	{
-		etk_delete_sem(port->iLocker);
-		etk_delete_area(port->mapping);
-		_ETK_UNLOCK_IPC_PORT_();
+		bhapi_delete_sem(port->iLocker);
+		bhapi_delete_area(port->mapping);
+		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
 	tmpSemName[strlen(tmpSemName) - 1] = 'w';
-	if((port->writerSem = etk_clone_sem(tmpSemName)) == NULL)
+	if((port->writerSem = bhapi_clone_sem(tmpSemName)) == NULL)
 	{
-		etk_delete_sem(port->readerSem);
-		etk_delete_sem(port->iLocker);
-		etk_delete_area(port->mapping);
-		_ETK_UNLOCK_IPC_PORT_();
+		bhapi_delete_sem(port->readerSem);
+		bhapi_delete_sem(port->iLocker);
+		bhapi_delete_area(port->mapping);
+		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
-	_ETK_UNLOCK_IPC_PORT_();
+	_BHAPI_UNLOCK_IPC_PORT_();
 
 	free(tmpSemName);
 
 	char *buffer = (char*)(port->portInfo);
-	buffer += sizeof(etk_port_info);
+	buffer += sizeof(bhapi_port_info);
 	port->queueBuffer = (void*)buffer;
 
 	port->openedIPC = true;
@@ -322,67 +322,67 @@ _IMPEXP_ETK void* etk_open_port(const char *name)
 }
 
 
-_IMPEXP_ETK void* etk_open_port_by_source(void *data)
+_IMPEXP_BHAPI void* bhapi_open_port_by_source(void *data)
 {
-	etk_port_t *port = (etk_port_t*)data;
+	bhapi_port_t *port = (bhapi_port_t*)data;
 	if(!port || !port->portInfo) return NULL;
 
-	if(etk_is_port_for_IPC(port)) return etk_open_port(port->portInfo->name);
+	if(bhapi_is_port_for_IPC(port)) return bhapi_open_port(port->portInfo->name);
 
-	_ETK_LOCK_LOCAL_PORT_();
-	if(port->refCount == E_MAXUINT32 || port->refCount == 0 || port->portInfo->closed)
+	_BHAPI_LOCK_LOCAL_PORT_();
+	if(port->refCount == B_MAXUINT32 || port->refCount == 0 || port->portInfo->closed)
 	{
-		_ETK_UNLOCK_LOCAL_PORT_();
+		_BHAPI_UNLOCK_LOCAL_PORT_();
 		return NULL;
 	}
 	port->refCount += 1;
-	_ETK_UNLOCK_LOCAL_PORT_();
+	_BHAPI_UNLOCK_LOCAL_PORT_();
 
 	return data;
 }
 
 
-static void* etk_create_port_for_local(eint32 queue_length)
+static void* bhapi_create_port_for_local(b_int32 queue_length)
 {
-	if(queue_length <= 0 || queue_length > ETK_VALID_MAX_PORT_QUEUE_LENGTH) return NULL;
+	if(queue_length <= 0 || queue_length > BHAPI_VALID_MAX_PORT_QUEUE_LENGTH) return NULL;
 
-	etk_port_t *port = new etk_port_t();
+	bhapi_port_t *port = new bhapi_port_t();
 	if(!port) return NULL;
 
-	if((port->iLocker = etk_create_locker()) == NULL)
+	if((port->iLocker = bhapi_create_locker()) == NULL)
 	{
 		delete port;
 		return NULL;
 	}
-	if((port->readerSem = etk_create_sem(0, NULL)) == NULL)
+	if((port->readerSem = bhapi_create_sem(0, NULL)) == NULL)
 	{
-		etk_delete_locker(port->iLocker);
+		bhapi_delete_locker(port->iLocker);
 		delete port;
 		return NULL;
 	}
-	if((port->writerSem = etk_create_sem(0, NULL)) == NULL)
+	if((port->writerSem = bhapi_create_sem(0, NULL)) == NULL)
 	{
-		etk_delete_sem(port->readerSem);
-		etk_delete_locker(port->iLocker);
-		delete port;
-		return NULL;
-	}
-
-	if((port->portInfo = new etk_port_info()) == NULL)
-	{
-		etk_delete_sem(port->writerSem);
-		etk_delete_sem(port->readerSem);
-		etk_delete_locker(port->iLocker);
+		bhapi_delete_sem(port->readerSem);
+		bhapi_delete_locker(port->iLocker);
 		delete port;
 		return NULL;
 	}
 
-	if((port->queueBuffer = malloc((size_t)queue_length * ETK_PORT_PER_MESSAGE_LENGTH)) == NULL)
+	if((port->portInfo = new bhapi_port_info()) == NULL)
+	{
+		bhapi_delete_sem(port->writerSem);
+		bhapi_delete_sem(port->readerSem);
+		bhapi_delete_locker(port->iLocker);
+		delete port;
+		return NULL;
+	}
+
+	if((port->queueBuffer = malloc((size_t)queue_length * BHAPI_PORT_PER_MESSAGE_LENGTH)) == NULL)
 	{
 		delete port->portInfo;
-		etk_delete_sem(port->writerSem);
-		etk_delete_sem(port->readerSem);
-		etk_delete_locker(port->iLocker);
+		bhapi_delete_sem(port->writerSem);
+		bhapi_delete_sem(port->readerSem);
+		bhapi_delete_locker(port->iLocker);
 		delete port;
 		return NULL;
 	}
@@ -396,44 +396,44 @@ static void* etk_create_port_for_local(eint32 queue_length)
 }
 
 
-_IMPEXP_ETK void* etk_create_port(eint32 queue_length, const char *name, etk_area_access area_access)
+_IMPEXP_BHAPI void* bhapi_create_port(b_int32 queue_length, const char *name, bhapi_area_access area_access)
 {
 	return((name == NULL || *name == 0) ?
-			etk_create_port_for_local(queue_length) :
-			etk_create_port_for_IPC(queue_length, name, area_access));
+			bhapi_create_port_for_local(queue_length) :
+			bhapi_create_port_for_IPC(queue_length, name, area_access));
 }
 
 
-_IMPEXP_ETK e_status_t etk_delete_port(void *data)
+_IMPEXP_BHAPI b_status_t bhapi_delete_port(void *data)
 {
-	etk_port_t *port = (etk_port_t*)data;
-	if(!port) return E_BAD_VALUE;
+	bhapi_port_t *port = (bhapi_port_t*)data;
+	if(!port) return B_BAD_VALUE;
 
-	if(etk_is_port_for_IPC(port))
+	if(bhapi_is_port_for_IPC(port))
 	{
-		etk_delete_area(port->mapping);
-		etk_delete_sem(port->iLocker);
+		bhapi_delete_area(port->mapping);
+		bhapi_delete_sem(port->iLocker);
 	}
 	else
 	{
-		_ETK_LOCK_LOCAL_PORT_();
+		_BHAPI_LOCK_LOCAL_PORT_();
 		if(port->refCount == 0)
 		{
-			_ETK_UNLOCK_LOCAL_PORT_();
-			return E_ERROR;
+			_BHAPI_UNLOCK_LOCAL_PORT_();
+			return B_ERROR;
 		}
-		euint32 count = --(port->refCount);
-		_ETK_UNLOCK_LOCAL_PORT_();
+		b_uint32 count = --(port->refCount);
+		_BHAPI_UNLOCK_LOCAL_PORT_();
 
-		if(count > 0) return E_OK;
+		if(count > 0) return B_OK;
 
 		free(port->queueBuffer);
 		delete port->portInfo;
-		etk_delete_locker(port->iLocker);
+		bhapi_delete_locker(port->iLocker);
 	}
 
-	etk_delete_sem(port->writerSem);
-	etk_delete_sem(port->readerSem);
+	bhapi_delete_sem(port->writerSem);
+	bhapi_delete_sem(port->readerSem);
 
 	if(port->created)
 	{
@@ -441,90 +441,90 @@ _IMPEXP_ETK e_status_t etk_delete_port(void *data)
 		delete port;
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-_IMPEXP_ETK e_status_t etk_close_port(void *data)
+_IMPEXP_BHAPI b_status_t bhapi_close_port(void *data)
 {
-	etk_port_t *port = (etk_port_t*)data;
-	if(!port) return E_BAD_VALUE;
+	bhapi_port_t *port = (bhapi_port_t*)data;
+	if(!port) return B_BAD_VALUE;
 
-	etk_lock_port_inter(port);
+	bhapi_lock_port_inter(port);
 	if(port->portInfo->closed)
 	{
-		etk_unlock_port_inter(port);
-		return E_ERROR;
+		bhapi_unlock_port_inter(port);
+		return B_ERROR;
 	}
 	port->portInfo->closed = true;
-	etk_release_sem_etc(port->readerSem, port->portInfo->writerWaitCount, 0);
-	etk_release_sem_etc(port->writerSem, port->portInfo->readerWaitCount, 0);
-	etk_unlock_port_inter(port);
+	bhapi_release_sem_etc(port->readerSem, port->portInfo->writerWaitCount, 0);
+	bhapi_release_sem_etc(port->writerSem, port->portInfo->readerWaitCount, 0);
+	bhapi_unlock_port_inter(port);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-_IMPEXP_ETK e_status_t etk_write_port_etc(void *data, eint32 code, const void *buf, size_t buf_size, euint32 flags, e_bigtime_t microseconds_timeout)
+_IMPEXP_BHAPI b_status_t bhapi_write_port_etc(void *data, b_int32 code, const void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
-	etk_port_t *port = (etk_port_t*)data;
-	if(!port) return E_BAD_VALUE;
+	bhapi_port_t *port = (bhapi_port_t*)data;
+	if(!port) return B_BAD_VALUE;
 
-	if((!buf && buf_size > 0) || buf_size > ETK_MAX_PORT_BUFFER_SIZE || microseconds_timeout < E_INT64_CONSTANT(0)) return E_BAD_VALUE;
+	if((!buf && buf_size > 0) || buf_size > BHAPI_MAX_PORT_BUFFER_SIZE || microseconds_timeout < B_INT64_CONSTANT(0)) return B_BAD_VALUE;
 
-	e_bigtime_t currentTime = etk_real_time_clock_usecs();
+	b_bigtime_t currentTime = bhapi_real_time_clock_usecs();
 	bool wait_forever = false;
 
-	if(flags != E_ABSOLUTE_TIMEOUT)
+	if(flags != B_ABSOLUTE_TIMEOUT)
 	{
-		if(microseconds_timeout == E_INFINITE_TIMEOUT || microseconds_timeout > E_MAXINT64 - currentTime)
+		if(microseconds_timeout == B_INFINITE_TIMEOUT || microseconds_timeout > B_MAXINT64 - currentTime)
 			wait_forever = true;
 		else
 			microseconds_timeout += currentTime;
 	}
 
-	etk_lock_port_inter(port);
+	bhapi_lock_port_inter(port);
 
 	if(port->portInfo->closed)
 	{
-		etk_unlock_port_inter(port);
-		return E_ERROR;
+		bhapi_unlock_port_inter(port);
+		return B_ERROR;
 	}
 	else if(port->portInfo->queue_count < port->portInfo->queue_length)
 	{
-		size_t offset = (size_t)port->portInfo->queue_count * ETK_PORT_PER_MESSAGE_LENGTH;
+		size_t offset = (size_t)port->portInfo->queue_count * BHAPI_PORT_PER_MESSAGE_LENGTH;
 		char* buffer = (char*)(port->queueBuffer);
 		buffer += offset;
-		memcpy(buffer, &code, sizeof(eint32)); buffer += sizeof(eint32);
+		memcpy(buffer, &code, sizeof(b_int32)); buffer += sizeof(b_int32);
 		memcpy(buffer, &buf_size, sizeof(size_t)); buffer += sizeof(size_t);
 		if(buf_size > 0) memcpy(buffer, buf, buf_size);
 
 		port->portInfo->queue_count++;
 
-		etk_release_sem_etc(port->writerSem, port->portInfo->readerWaitCount, 0);
+		bhapi_release_sem_etc(port->writerSem, port->portInfo->readerWaitCount, 0);
 
-		etk_unlock_port_inter(port);
-		return E_OK;
+		bhapi_unlock_port_inter(port);
+		return B_OK;
 	}
 	else if(microseconds_timeout == currentTime && !wait_forever)
 	{
-		etk_unlock_port_inter(port);
-		return E_WOULD_BLOCK;
+		bhapi_unlock_port_inter(port);
+		return B_WOULD_BLOCK;
 	}
 
-	port->portInfo->writerWaitCount += E_INT64_CONSTANT(1);
+	port->portInfo->writerWaitCount += B_INT64_CONSTANT(1);
 
-	e_status_t retval = E_ERROR;
+	b_status_t retval = B_ERROR;
 
 	while(true)
 	{
-		etk_unlock_port_inter(port);
-		e_status_t status = (wait_forever ?
-						etk_acquire_sem(port->readerSem) :
-						etk_acquire_sem_etc(port->readerSem, 1, E_ABSOLUTE_TIMEOUT, microseconds_timeout));
-		etk_lock_port_inter(port);
+		bhapi_unlock_port_inter(port);
+		b_status_t status = (wait_forever ?
+						bhapi_acquire_sem(port->readerSem) :
+						bhapi_acquire_sem_etc(port->readerSem, 1, B_ABSOLUTE_TIMEOUT, microseconds_timeout));
+		bhapi_lock_port_inter(port);
 
-		if(status != E_OK)
+		if(status != B_OK)
 		{
 			retval = status;
 			break;
@@ -532,89 +532,89 @@ _IMPEXP_ETK e_status_t etk_write_port_etc(void *data, eint32 code, const void *b
 
 		if(port->portInfo->closed)
 		{
-			retval = E_ERROR;
+			retval = B_ERROR;
 			break;
 		}
 		else if(port->portInfo->queue_count < port->portInfo->queue_length)
 		{
-			size_t offset = (size_t)port->portInfo->queue_count * ETK_PORT_PER_MESSAGE_LENGTH;
+			size_t offset = (size_t)port->portInfo->queue_count * BHAPI_PORT_PER_MESSAGE_LENGTH;
 			char* buffer = (char*)(port->queueBuffer);
 			buffer += offset;
-			memcpy(buffer, &code, sizeof(eint32)); buffer += sizeof(eint32);
+			memcpy(buffer, &code, sizeof(b_int32)); buffer += sizeof(b_int32);
 			memcpy(buffer, &buf_size, sizeof(size_t)); buffer += sizeof(size_t);
 			if(buf_size > 0) memcpy(buffer, buf, buf_size);
 
 			port->portInfo->queue_count++;
-			etk_release_sem_etc(port->writerSem, port->portInfo->readerWaitCount, 0);
+			bhapi_release_sem_etc(port->writerSem, port->portInfo->readerWaitCount, 0);
 
-			retval = E_OK;
+			retval = B_OK;
 			break;
 		}
 	}
 
-	port->portInfo->writerWaitCount -= E_INT64_CONSTANT(1);
+	port->portInfo->writerWaitCount -= B_INT64_CONSTANT(1);
 
-	etk_unlock_port_inter(port);
+	bhapi_unlock_port_inter(port);
 
 	return retval;
 }
 
 
-_IMPEXP_ETK ssize_t etk_port_buffer_size_etc(void *data, euint32 flags, e_bigtime_t microseconds_timeout)
+_IMPEXP_BHAPI ssize_t bhapi_port_buffer_size_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
-	etk_port_t *port = (etk_port_t*)data;
-	if(!port) return E_BAD_VALUE;
+	bhapi_port_t *port = (bhapi_port_t*)data;
+	if(!port) return B_BAD_VALUE;
 
-	if(microseconds_timeout < E_INT64_CONSTANT(0)) return (ssize_t)E_BAD_VALUE;
+    if(microseconds_timeout < B_INT64_CONSTANT(0)) return (ssize_t)B_BAD_VALUE;
 
-	e_bigtime_t currentTime = etk_real_time_clock_usecs();
+	b_bigtime_t currentTime = bhapi_real_time_clock_usecs();
 	bool wait_forever = false;
 
-	if(flags != E_ABSOLUTE_TIMEOUT)
+	if(flags != B_ABSOLUTE_TIMEOUT)
 	{
-		if(microseconds_timeout == E_INFINITE_TIMEOUT || microseconds_timeout > E_MAXINT64 - currentTime)
+		if(microseconds_timeout == B_INFINITE_TIMEOUT || microseconds_timeout > B_MAXINT64 - currentTime)
 			wait_forever = true;
 		else
 			microseconds_timeout += currentTime;
 	}
 
-	etk_lock_port_inter(port);
+	bhapi_lock_port_inter(port);
 
 	if(port->portInfo->queue_count > 0)
 	{
 		const char* buffer = (const char*)(port->queueBuffer);
 		size_t msgLen = 0;
 
-		buffer += sizeof(eint32);
+		buffer += sizeof(b_int32);
 		memcpy(&msgLen, buffer, sizeof(size_t));
 
-		etk_unlock_port_inter(port);
+		bhapi_unlock_port_inter(port);
 		return (ssize_t)msgLen;
 	}
 	else if(port->portInfo->closed)
 	{
-		etk_unlock_port_inter(port);
-		return E_ERROR;
+		bhapi_unlock_port_inter(port);
+		return B_ERROR;
 	}
 	else if(microseconds_timeout == currentTime && !wait_forever)
 	{
-		etk_unlock_port_inter(port);
-		return E_WOULD_BLOCK;
+		bhapi_unlock_port_inter(port);
+		return B_WOULD_BLOCK;
 	}
 
-	port->portInfo->readerWaitCount += E_INT64_CONSTANT(1);
+	port->portInfo->readerWaitCount += B_INT64_CONSTANT(1);
 
-	e_status_t retval = E_ERROR;
+	b_status_t retval = B_ERROR;
 
 	while(true)
 	{
-		etk_unlock_port_inter(port);
-		e_status_t status = (wait_forever ?
-						etk_acquire_sem(port->writerSem) :
-						etk_acquire_sem_etc(port->writerSem, 1, E_ABSOLUTE_TIMEOUT, microseconds_timeout));
-		etk_lock_port_inter(port);
+		bhapi_unlock_port_inter(port);
+		b_status_t status = (wait_forever ?
+						bhapi_acquire_sem(port->writerSem) :
+						bhapi_acquire_sem_etc(port->writerSem, 1, B_ABSOLUTE_TIMEOUT, microseconds_timeout));
+		bhapi_lock_port_inter(port);
 
-		if(status != E_OK)
+		if(status != B_OK)
 		{
 			retval = status;
 			break;
@@ -625,91 +625,91 @@ _IMPEXP_ETK ssize_t etk_port_buffer_size_etc(void *data, euint32 flags, e_bigtim
 			const char* buffer = (const char*)(port->queueBuffer);
 			size_t msgLen = 0;
 
-			buffer += sizeof(eint32);
+			buffer += sizeof(b_int32);
 			memcpy(&msgLen, buffer, sizeof(size_t));
 
-			retval = (e_status_t)msgLen;
+			retval = (b_status_t)msgLen;
 			break;
 		}
 		else if(port->portInfo->closed)
 		{
-			retval = E_ERROR;
+			retval = B_ERROR;
 			break;
 		}
 	}
 
-	port->portInfo->readerWaitCount -= E_INT64_CONSTANT(1);
+	port->portInfo->readerWaitCount -= B_INT64_CONSTANT(1);
 
-	etk_unlock_port_inter(port);
+	bhapi_unlock_port_inter(port);
 
 	return (ssize_t)retval;
 }
 
 
-_IMPEXP_ETK e_status_t etk_read_port_etc(void *data, eint32 *code, void *buf, size_t buf_size, euint32 flags, e_bigtime_t microseconds_timeout)
+_IMPEXP_BHAPI b_status_t bhapi_read_port_etc(void *data, b_int32 *code, void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
-	etk_port_t *port = (etk_port_t*)data;
-	if(!port) return E_BAD_VALUE;
+	bhapi_port_t *port = (bhapi_port_t*)data;
+	if(!port) return B_BAD_VALUE;
 
-	if(!code || (!buf && buf_size > 0) || microseconds_timeout < E_INT64_CONSTANT(0)) return E_BAD_VALUE;
+	if(!code || (!buf && buf_size > 0) || microseconds_timeout < B_INT64_CONSTANT(0)) return B_BAD_VALUE;
 
-	e_bigtime_t currentTime = etk_real_time_clock_usecs();
+	b_bigtime_t currentTime = bhapi_real_time_clock_usecs();
 	bool wait_forever = false;
 
-	if(flags != E_ABSOLUTE_TIMEOUT)
+	if(flags != B_ABSOLUTE_TIMEOUT)
 	{
-		if(microseconds_timeout == E_INFINITE_TIMEOUT || microseconds_timeout > E_MAXINT64 - currentTime)
+		if(microseconds_timeout == B_INFINITE_TIMEOUT || microseconds_timeout > B_MAXINT64 - currentTime)
 			wait_forever = true;
 		else
 			microseconds_timeout += currentTime;
 	}
 
-	etk_lock_port_inter(port);
+	bhapi_lock_port_inter(port);
 
 	if(port->portInfo->queue_count > 0)
 	{
 		char* buffer = (char*)(port->queueBuffer);
 		size_t msgLen = 0;
-		memcpy(code, buffer, sizeof(eint32)); buffer += sizeof(eint32);
+		memcpy(code, buffer, sizeof(b_int32)); buffer += sizeof(b_int32);
 		memcpy(&msgLen, buffer, sizeof(size_t)); buffer += sizeof(size_t);
 		if(msgLen > 0 && buf_size > 0) memcpy(buf, buffer, min_c(msgLen, buf_size));
 		if(port->portInfo->queue_count > 1)
 		{
 			buffer = (char*)(port->queueBuffer);
-			memmove(buffer, buffer + ETK_PORT_PER_MESSAGE_LENGTH, (size_t)(port->portInfo->queue_count - 1) * ETK_PORT_PER_MESSAGE_LENGTH);
+			memmove(buffer, buffer + BHAPI_PORT_PER_MESSAGE_LENGTH, (size_t)(port->portInfo->queue_count - 1) * BHAPI_PORT_PER_MESSAGE_LENGTH);
 		}
 
 		port->portInfo->queue_count--;
 
-		etk_release_sem_etc(port->readerSem, port->portInfo->writerWaitCount, 0);
+		bhapi_release_sem_etc(port->readerSem, port->portInfo->writerWaitCount, 0);
 
-		etk_unlock_port_inter(port);
-		return E_OK;
+		bhapi_unlock_port_inter(port);
+		return B_OK;
 	}
 	else if(port->portInfo->closed)
 	{
-		etk_unlock_port_inter(port);
-		return E_ERROR;
+		bhapi_unlock_port_inter(port);
+		return B_ERROR;
 	}
 	else if(microseconds_timeout == currentTime && !wait_forever)
 	{
-		etk_unlock_port_inter(port);
-		return E_WOULD_BLOCK;
+		bhapi_unlock_port_inter(port);
+		return B_WOULD_BLOCK;
 	}
 
-	port->portInfo->readerWaitCount += E_INT64_CONSTANT(1);
+	port->portInfo->readerWaitCount += B_INT64_CONSTANT(1);
 
-	e_status_t retval = E_ERROR;
+	b_status_t retval = B_ERROR;
 
 	while(true)
 	{
-		etk_unlock_port_inter(port);
-		e_status_t status = (wait_forever ?
-						etk_acquire_sem(port->writerSem) :
-						etk_acquire_sem_etc(port->writerSem, 1, E_ABSOLUTE_TIMEOUT, microseconds_timeout));
-		etk_lock_port_inter(port);
+		bhapi_unlock_port_inter(port);
+		b_status_t status = (wait_forever ?
+						bhapi_acquire_sem(port->writerSem) :
+						bhapi_acquire_sem_etc(port->writerSem, 1, B_ABSOLUTE_TIMEOUT, microseconds_timeout));
+		bhapi_lock_port_inter(port);
 
-		if(status != E_OK)
+		if(status != B_OK)
 		{
 			retval = status;
 			break;
@@ -719,63 +719,63 @@ _IMPEXP_ETK e_status_t etk_read_port_etc(void *data, eint32 *code, void *buf, si
 		{
 			char* buffer = (char*)(port->queueBuffer);
 			size_t msgLen = 0;
-			memcpy(code, buffer, sizeof(eint32)); buffer += sizeof(eint32);
+			memcpy(code, buffer, sizeof(b_int32)); buffer += sizeof(b_int32);
 			memcpy(&msgLen, buffer, sizeof(size_t)); buffer += sizeof(size_t);
 			if(msgLen > 0 && buf_size > 0) memcpy(buf, buffer, min_c(msgLen, buf_size));
 			if(port->portInfo->queue_count > 1)
 			{
 				buffer = (char*)(port->queueBuffer);
-				memmove(buffer, buffer + ETK_PORT_PER_MESSAGE_LENGTH, (size_t)(port->portInfo->queue_count - 1) * ETK_PORT_PER_MESSAGE_LENGTH);
+				memmove(buffer, buffer + BHAPI_PORT_PER_MESSAGE_LENGTH, (size_t)(port->portInfo->queue_count - 1) * BHAPI_PORT_PER_MESSAGE_LENGTH);
 			}
 
 			port->portInfo->queue_count--;
 
-			etk_release_sem_etc(port->readerSem, port->portInfo->writerWaitCount, 0);
+			bhapi_release_sem_etc(port->readerSem, port->portInfo->writerWaitCount, 0);
 
-			retval = E_OK;
+			retval = B_OK;
 			break;
 		}
 		else if(port->portInfo->closed)
 		{
-			retval = E_ERROR;
+			retval = B_ERROR;
 			break;
 		}
 	}
 
-	port->portInfo->readerWaitCount -= E_INT64_CONSTANT(1);
+	port->portInfo->readerWaitCount -= B_INT64_CONSTANT(1);
 
-	etk_unlock_port_inter(port);
+	bhapi_unlock_port_inter(port);
 
 	return retval;
 }
 
 
-_IMPEXP_ETK e_status_t etk_write_port(void *data, eint32 code, const void *buf, size_t buf_size)
+_IMPEXP_BHAPI b_status_t bhapi_write_port(void *data, b_int32 code, const void *buf, size_t buf_size)
 {
-	return etk_write_port_etc(data, code, buf, buf_size, E_TIMEOUT, E_INFINITE_TIMEOUT);
+	return bhapi_write_port_etc(data, code, buf, buf_size, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-_IMPEXP_ETK ssize_t etk_port_buffer_size(void *data)
+_IMPEXP_BHAPI ssize_t bhapi_port_buffer_size(void *data)
 {
-	return etk_port_buffer_size_etc(data, E_TIMEOUT, E_INFINITE_TIMEOUT);
+	return bhapi_port_buffer_size_etc(data, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-_IMPEXP_ETK e_status_t etk_read_port(void *data, eint32 *code, void *buf, size_t buf_size)
+_IMPEXP_BHAPI b_status_t bhapi_read_port(void *data, b_int32 *code, void *buf, size_t buf_size)
 {
-	return etk_read_port_etc(data, code, buf, buf_size, E_TIMEOUT, E_INFINITE_TIMEOUT);
+	return bhapi_read_port_etc(data, code, buf, buf_size, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-_IMPEXP_ETK eint32 etk_port_count(void *data)
+_IMPEXP_BHAPI b_int32 bhapi_port_count(void *data)
 {
-	etk_port_t *port = (etk_port_t*)data;
-	if(!port) return E_BAD_VALUE;
+	bhapi_port_t *port = (bhapi_port_t*)data;
+	if(!port) return B_BAD_VALUE;
 
-	etk_lock_port_inter(port);
-	eint32 retval = port->portInfo->queue_count;
-	etk_unlock_port_inter(port);
+	bhapi_lock_port_inter(port);
+	b_int32 retval = port->portInfo->queue_count;
+	bhapi_unlock_port_inter(port);
 
 	return retval;
 }

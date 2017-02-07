@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  * 
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,7 +24,7 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: LineGenerator.cpp
- * Description: ELineGenerator --- Pixel generator for zero-width-line-drawing
+ * Description: BLineGenerator --- Pixel generator for zero-width-line-drawing
  * 
  * --------------------------------------------------------------------------*/
 
@@ -41,15 +41,15 @@
 /* --------------------------------------------------------------------------
 <document lang="zh_CN.UTF-8">
 <section id="ELINEGENERATOR_DESCRIPTION">
-	<title>ELineGenerator类描述</title>
+	<title>BLineGenerator类描述</title>
 	<para>声明所在：<emphasis>&lt;etk/render/LineGenerator.h&gt;</emphasis></para>
 	<para>链 接 库：<emphasis>libetkxx</emphasis></para>
-	<para>派生关系：<emphasis>ELineGenerator</emphasis></para>
-	<para>ELineGenerator是一个用来生成无宽度直线的逐个像素点坐标的类(采用Bresenham法)。</para>
+	<para>派生关系：<emphasis>BLineGenerator</emphasis></para>
+	<para>BLineGenerator是一个用来生成无宽度直线的逐个像素点坐标的类(采用Bresenham法)。</para>
 </section>
 
 <section id="ELINEGENERATOR_FUNCTIONS">
-	<title>ELineGenerator类成员函数</title>
+	<title>BLineGenerator类成员函数</title>
 	<xref linkend="ELINEGENERATOR_FUNCTION_CONSTRUCT" /><para></para>
 	<xref linkend="ELINEGENERATOR_FUNCTION_START" /><para></para>
 	<xref linkend="ELINEGENERATOR_FUNCTION_NEXT" />
@@ -67,7 +67,7 @@
 <section id="ELINEGENERATOR_FUNCTION_CONSTRUCT">
 	<title>构造函数</title>
 	<programlisting>
-ELineGenerator::ELineGenerator(EPoint <emphasis>start</emphasis>, EPoint <emphasis>end</emphasis>)
+BLineGenerator::BLineGenerator(BPoint <emphasis>start</emphasis>, BPoint <emphasis>end</emphasis>)
 	</programlisting>
 	<itemizedlist>
 		<listitem><para><emphasis>start</emphasis>是开始点坐标。
@@ -78,7 +78,7 @@ ELineGenerator::ELineGenerator(EPoint <emphasis>start</emphasis>, EPoint <emphas
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-ELineGenerator::ELineGenerator(EPoint start, EPoint end)
+BLineGenerator::BLineGenerator(BPoint start, BPoint end)
 	: fStep(0)
 {
 	fStart = start;
@@ -91,7 +91,7 @@ ELineGenerator::ELineGenerator(EPoint start, EPoint end)
 // 初始化直线方向
 // fDirection: 0 - 7 (0为水平递增方向,相应逆时针方向递增)
 void
-ELineGenerator::InitDirection()
+BLineGenerator::InitDirection()
 {
 	if(fEnd.y == fStart.y)
 		fDirection = (fEnd.x >= fStart.x ? 0 : 4);
@@ -109,10 +109,10 @@ ELineGenerator::InitDirection()
 <section id="ELINEGENERATOR_FUNCTION_START">
 	<title>开始像素点生成</title>
 	<programlisting>
-bool ELineGenerator::Start(eint32 &<emphasis>x</emphasis>,
-                           eint32 &<emphasis>y</emphasis>,
-                           eint32 &<emphasis>step</emphasis>,
-                           eint32 &<emphasis>pixels</emphasis>,
+bool BLineGenerator::Start(b_int32 &<emphasis>x</emphasis>,
+                           b_int32 &<emphasis>y</emphasis>,
+                           b_int32 &<emphasis>step</emphasis>,
+                           b_int32 &<emphasis>pixels</emphasis>,
                            bool <emphasis>isLoopX = true</emphasis>,
                            float <emphasis>pixelSize = 1</emphasis>)
 	</programlisting>
@@ -132,17 +132,17 @@ bool ELineGenerator::Start(eint32 &<emphasis>x</emphasis>,
 		<listitem><para><emphasis>pixelSize</emphasis>是每个像素相对应的坐标大小。
 		</para></listitem>
 	</itemizedlist>
-	<para>ELineGenerator::Start()声明开始画直线, 返回true时表示需要画点, 反之表示不需要画点。</para>
+	<para>BLineGenerator::Start()声明开始画直线, 返回true时表示需要画点, 反之表示不需要画点。</para>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
 bool
-ELineGenerator::Start(eint32 &x, eint32 &y, eint32 &step, eint32 &pixels, bool isLoopX, float pixel_size)
+BLineGenerator::Start(b_int32 &x, b_int32 &y, b_int32 &step, b_int32 &pixels, bool isLoopX, float pixel_size)
 {
 	if(pixel_size <= 0) return false;
 
-	float minf = E_MINFLOAT * pixel_size;
-	float maxf = E_MAXFLOAT * pixel_size;
+	float minf = B_MINFLOAT * pixel_size;
+	float maxf = B_MAXFLOAT * pixel_size;
 
 	// 避免浮点溢出
 	if((fStart.x > 0 && fStart.x > maxf) || (fStart.x < 0 && fStart.x < minf)) return false;
@@ -150,8 +150,8 @@ ELineGenerator::Start(eint32 &x, eint32 &y, eint32 &step, eint32 &pixels, bool i
 	if((fEnd.x > 0 && fEnd.x > maxf) || (fEnd.x < 0 && fEnd.x < minf)) return false;
 	if((fEnd.y > 0 && fEnd.y > maxf) || (fEnd.y < 0 && fEnd.y < minf)) return false;
 
-	EPoint ptStart = fStart;
-	EPoint ptEnd = fEnd;
+	BPoint ptStart = fStart;
+	BPoint ptEnd = fEnd;
 
 	if(pixel_size != 1)
 	{
@@ -164,8 +164,8 @@ ELineGenerator::Start(eint32 &x, eint32 &y, eint32 &step, eint32 &pixels, bool i
 	fIsLoopX = isLoopX;
 	fStep = 0;
 
-	EPoint ptStartR = ptStart.FloorCopy();
-	EPoint ptEndR = ptEnd.FloorCopy();
+	BPoint ptStartR = ptStart.FloorCopy();
+	BPoint ptEndR = ptEnd.FloorCopy();
 
 	if(ptStart.x == ptStartR.x || ptStart.y == ptStartR.y)
 	{
@@ -180,16 +180,16 @@ ELineGenerator::Start(eint32 &x, eint32 &y, eint32 &step, eint32 &pixels, bool i
 	}
 
 	// 数值范围检查
-	if(ptStartR.x > (float)E_MAXINT32 || ptStartR.x < (float)E_MININT32) return false;
-	if(ptStartR.y > (float)E_MAXINT32 || ptStartR.y < (float)E_MININT32) return false;
-	if(ptEndR.x > (float)E_MAXINT32 || ptEndR.x < (float)E_MININT32) return false;
-	if(ptEndR.y > (float)E_MAXINT32 || ptEndR.y < (float)E_MININT32) return false;
+	if(ptStartR.x > (float)B_MAXINT32 || ptStartR.x < (float)B_MININT32) return false;
+	if(ptStartR.y > (float)B_MAXINT32 || ptStartR.y < (float)B_MININT32) return false;
+	if(ptEndR.x > (float)B_MAXINT32 || ptEndR.x < (float)B_MININT32) return false;
+	if(ptEndR.y > (float)B_MAXINT32 || ptEndR.y < (float)B_MININT32) return false;
 
-	x = (eint32)ptStartR.x;
-	y = (eint32)ptStartR.y;
+	x = (b_int32)ptStartR.x;
+	y = (b_int32)ptStartR.y;
 
-	eint32 x2 = (eint32)ptEndR.x;
-	eint32 y2 = (eint32)ptEndR.y;
+	b_int32 x2 = (b_int32)ptEndR.x;
+	b_int32 y2 = (b_int32)ptEndR.y;
 
 	if((step = (fIsLoopX ? x2 - x : y2 - y)) == 0)
 	{
@@ -301,7 +301,7 @@ ELineGenerator::Start(eint32 &x, eint32 &y, eint32 &step, eint32 &pixels, bool i
 <section id="ELINEGENERATOR_FUNCTION_NEXT">
 	<title>下一个像素点生成</title>
 	<programlisting>
-bool ELineGenerator::Next(eint32 &<emphasis>next</emphasis>, eint32 &<emphasis>pixels</emphasis>)
+bool BLineGenerator::Next(b_int32 &<emphasis>next</emphasis>, b_int32 &<emphasis>pixels</emphasis>)
 	</programlisting>
 	<itemizedlist>
 		<listitem><para><emphasis>next</emphasis>是下一像素点 y(x) 坐标。
@@ -311,12 +311,12 @@ bool ELineGenerator::Next(eint32 &<emphasis>next</emphasis>, eint32 &<emphasis>p
 			<footnote><para>正值为 y(x) 递增, 负值为 y(x) 递减。</para></footnote>
 		</para></listitem>
 	</itemizedlist>
-	<para>ELineGenerator::Next()用于取得下一像素点 x(y) 坐标对应 y(x) 坐标, 返回true时表示需要画点, 反之表示不需要画点(或许未使用 Start(...) 函数)；注意使用Next()时x(y)应在此前根据调用Start()返回的step进行相应的加减运算。</para>
+	<para>BLineGenerator::Next()用于取得下一像素点 x(y) 坐标对应 y(x) 坐标, 返回true时表示需要画点, 反之表示不需要画点(或许未使用 Start(...) 函数)；注意使用Next()时x(y)应在此前根据调用Start()返回的step进行相应的加减运算。</para>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
 bool
-ELineGenerator::Next(eint32 &next, eint32 &pixels)
+BLineGenerator::Next(b_int32 &next, b_int32 &pixels)
 {
 	if(fStep == 0) return false;
 

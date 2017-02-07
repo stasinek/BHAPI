@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,17 +27,17 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_PRIVATE_STANDARD_IO_H__
-#define __ETK_PRIVATE_STANDARD_IO_H__
+#ifndef __BHAPI_PRIVATE_STANDARD_IO_H__
+#define __BHAPI_PRIVATE_STANDARD_IO_H__
 
 #include "./../support/StreamIO.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _LOCAL EStandardIO : public EStreamIO {
+class _LOCAL BStandardIO : public BStreamIO {
 public:
-	EStandardIO(int fd);
-	virtual ~EStandardIO();
+    BStandardIO(int fd);
+    virtual ~BStandardIO();
 
 	virtual ssize_t		Read(void *buffer, size_t size);
 	virtual ssize_t		Write(const void *buffer, size_t size);
@@ -48,5 +48,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_PRIVATE_STANDARD_IO_H__ */
+#endif /* __BHAPI_PRIVATE_STANDARD_IO_H__ */
 

@@ -85,7 +85,6 @@ INPUT(
 ./release/Locker.o
 ./release/SimpleLocker.o
 ./release/StreamIO.o
-./release/String.o
 ./release/StringArray.o
 ./release/SimpleXmlParser.o
 ./release/etkxx-doc.o
@@ -93,6 +92,7 @@ INPUT(
 ./release/LayoutContainer.o
 ./release/LayoutForm.o
 ./release/LayoutItem.o
+./release/StringMe.o
 ./release/etk-application.o
 ./release/etk-drawing.o
 ./release/etk-pixmap.o

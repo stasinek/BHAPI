@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -34,100 +34,100 @@
 #include "PopUpMenu.h"
 #include "Menu.h"
 
-#define ETK_MENU_ROW_SPACING	5
-#define ETK_MENU_COLUMN_SPACING	2
+#define BHAPI_MENU_ROW_SPACING	5
+#define BHAPI_MENU_COLUMN_SPACING	2
 
 
 class ESubmenuView;
 
-class _LOCAL ESubmenuWindow : public EWindow {
+class _LOCAL ESubmenuWindow : public BWindow {
 public:
-	ESubmenuWindow(EPoint where, EMenu *menu);
+	ESubmenuWindow(BPoint where, BMenu *menu);
 	virtual ~ESubmenuWindow();
 
-	virtual void DispatchMessage(EMessage *msg, EHandler *target);
+	virtual void DispatchMessage(BMessage *msg, BHandler *target);
 	virtual bool QuitRequested();
-	virtual void FrameMoved(EPoint new_position);
+	virtual void FrameMoved(BPoint new_position);
 
 private:
-	friend class EMenu;
+	friend class BMenu;
 	friend class ESubmenuView;
 
-	EMenu *fMenu;
+	BMenu *fMenu;
 
 	virtual bool IsDependsOnOthersWhenQuitRequested() const;
 };
 
 
-EMenu::EMenu(ERect frame, const char *title, euint32 resizeMode, euint32 flags, e_menu_layout layout, bool resizeToFit)
-	: EView(frame, title, resizeMode, flags), fSuperitem(NULL),
+BMenu::BMenu(BRect frame, const char *title, b_uint32 resizeMode, b_uint32 flags, b_menu_layout layout, bool resizeToFit)
+	: BView(frame, title, resizeMode, flags), fSuperitem(NULL),
 	  fRadioMode(false), fLabelFromMarked(false),
 	  fSelectedIndex(-1), fTrackingIndex(-1), fMarkedIndex(-1), fShowSubmenuByKeyDown(false)
 {
-	fMargins = ERect(0, 0, 0, 0);
+	fMargins = BRect(0, 0, 0, 0);
 
-	SetViewColor(e_ui_color(E_MENU_BACKGROUND_COLOR));
+	SetViewColor(b_ui_color(B_MENU_BACKGROUND_COLOR));
 
-	SetFlags(flags | E_WILL_DRAW);
+	SetFlags(flags | B_WILL_DRAW);
 
 	SetLayout(layout, frame.Width(), frame.Height(), resizeToFit);
 }
 
 
-EMenu::EMenu(const char *title, e_menu_layout layout)
-	: EView(ERect(0, 0, 10, 10), title, E_FOLLOW_NONE, E_WILL_DRAW), fSuperitem(NULL),
+BMenu::BMenu(const char *title, b_menu_layout layout)
+	: BView(BRect(0, 0, 10, 10), title, B_FOLLOW_NONE, B_WILL_DRAW), fSuperitem(NULL),
 	  fRadioMode(false), fLabelFromMarked(false),
 	  fSelectedIndex(-1), fTrackingIndex(-1), fMarkedIndex(-1), fShowSubmenuByKeyDown(false)
 {
-	fMargins = ERect(0, 0, 0, 0);
+	fMargins = BRect(0, 0, 0, 0);
 
-	SetViewColor(e_ui_color(E_MENU_BACKGROUND_COLOR));
+	SetViewColor(b_ui_color(B_MENU_BACKGROUND_COLOR));
 
-	SetLayout(layout, 10, 10, (layout != E_ITEMS_IN_MATRIX ? true : false));
+	SetLayout(layout, 10, 10, (layout != B_ITEMS_IN_MATRIX ? true : false));
 }
 
 
-EMenu::EMenu(const char *title, float width, float height)
-	: EView(ERect(0, 0, width > 10 ? width : 10, height > 10 ? height : 10), title, E_FOLLOW_NONE, E_WILL_DRAW), fSuperitem(NULL),
+BMenu::BMenu(const char *title, float width, float height)
+	: BView(BRect(0, 0, width > 10 ? width : 10, height > 10 ? height : 10), title, B_FOLLOW_NONE, B_WILL_DRAW), fSuperitem(NULL),
 	  fRadioMode(false), fLabelFromMarked(false),
 	  fSelectedIndex(-1), fTrackingIndex(-1), fMarkedIndex(-1), fShowSubmenuByKeyDown(false)
 {
-	fMargins = ERect(0, 0, 0, 0);
+	fMargins = BRect(0, 0, 0, 0);
 
-	SetViewColor(e_ui_color(E_MENU_BACKGROUND_COLOR));
+	SetViewColor(b_ui_color(B_MENU_BACKGROUND_COLOR));
 
-	SetLayout(E_ITEMS_IN_MATRIX, width, height, false);
+	SetLayout(B_ITEMS_IN_MATRIX, width, height, false);
 }
 
 
-EMenu::~EMenu()
+BMenu::~BMenu()
 {
-	for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 	{
-		EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(i);
+		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 		item->fMenu = NULL;
 		delete item;
 	}
 
 	if(fSuperitem)
 	{
-		ETK_WARNING("[INTERFACE]: %s --- Menu still have super-item as deleting.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[INTERFACE]: %s --- Menu still have super-item as deleting.", __PRETTY_FUNCTION__);
 		fSuperitem->fSubmenu = NULL;
 	}
 }
 
 
 bool
-EMenu::AddItem(EMenuItem *item)
+BMenu::AddItem(BMenuItem *item)
 {
 	return AddItem(item, fMenuItems.CountItems());
 }
 
 
 bool
-EMenu::AddItem(EMenuItem *item, eint32 index)
+BMenu::AddItem(BMenuItem *item, b_int32 index)
 {
-	if(!item || item->Menu() != NULL || fLayout == E_ITEMS_IN_MATRIX) return false;
+	if(!item || item->Menu() != NULL || fLayout == B_ITEMS_IN_MATRIX) return false;
 
 	if(fMenuItems.AddItem((void*)item, index) == false) return false;
 
@@ -142,9 +142,9 @@ EMenu::AddItem(EMenuItem *item, eint32 index)
 
 
 bool
-EMenu::AddItem(EMenuItem *item, ERect frame)
+BMenu::AddItem(BMenuItem *item, BRect frame)
 {
-	if(!item || item->Menu() != NULL || !frame.IsValid() || fLayout != E_ITEMS_IN_MATRIX) return false;
+	if(!item || item->Menu() != NULL || !frame.IsValid() || fLayout != B_ITEMS_IN_MATRIX) return false;
 
 	if(fMenuItems.AddItem((void*)item) == false) return false;
 
@@ -159,18 +159,18 @@ EMenu::AddItem(EMenuItem *item, ERect frame)
 
 
 bool
-EMenu::AddItem(EMenu *menu)
+BMenu::AddItem(BMenu *menu)
 {
 	return AddItem(menu, fMenuItems.CountItems());
 }
 
 
 bool
-EMenu::AddItem(EMenu *menu, eint32 index)
+BMenu::AddItem(BMenu *menu, b_int32 index)
 {
-	if(!menu || menu->Superitem() != NULL || fLayout == E_ITEMS_IN_MATRIX) return false;
+	if(!menu || menu->Superitem() != NULL || fLayout == B_ITEMS_IN_MATRIX) return false;
 
-	EMenuItem *item = new EMenuItem(menu, NULL);
+	BMenuItem *item = new BMenuItem(menu, NULL);
 	if(!item) return false;
 
 	if(fMenuItems.AddItem((void*)item, index) == false)
@@ -193,11 +193,11 @@ EMenu::AddItem(EMenu *menu, eint32 index)
 
 
 bool
-EMenu::AddItem(EMenu *menu, ERect frame)
+BMenu::AddItem(BMenu *menu, BRect frame)
 {
-	if(!menu || menu->Superitem() != NULL || !frame.IsValid() || fLayout != E_ITEMS_IN_MATRIX) return false;
+	if(!menu || menu->Superitem() != NULL || !frame.IsValid() || fLayout != B_ITEMS_IN_MATRIX) return false;
 
-	EMenuItem *item = new EMenuItem(menu, NULL);
+	BMenuItem *item = new BMenuItem(menu, NULL);
 	if(!item) return false;
 
 	if(fMenuItems.AddItem((void*)item) == false)
@@ -218,11 +218,11 @@ EMenu::AddItem(EMenu *menu, ERect frame)
 
 
 bool
-EMenu::AddSeparatorItem()
+BMenu::AddSeparatorItem()
 {
-	if(fLayout == E_ITEMS_IN_MATRIX) return false;
+	if(fLayout == B_ITEMS_IN_MATRIX) return false;
 
-	EMenuItem *item = new EMenuSeparatorItem();
+	BMenuItem *item = new BMenuSeparatorItem();
 	if(!item) return false;
 
 	if(!AddItem(item))
@@ -236,19 +236,19 @@ EMenu::AddSeparatorItem()
 
 
 bool
-EMenu::RemoveItem(EMenuItem *item)
+BMenu::RemoveItem(BMenuItem *item)
 {
-	eint32 index = IndexOf(item);
+	b_int32 index = IndexOf(item);
 	return(RemoveItem(index) != NULL);
 }
 
 
-EMenuItem*
-EMenu::RemoveItem(eint32 index)
+BMenuItem*
+BMenu::RemoveItem(b_int32 index)
 {
 	if(index < 0 || index >= fMenuItems.CountItems()) return NULL;
 
-	EMenuItem *item = (EMenuItem*)fMenuItems.RemoveItem(index);
+	BMenuItem *item = (BMenuItem*)fMenuItems.RemoveItem(index);
 	if(!item) return NULL;
 
 	item->fMenu = NULL;
@@ -268,12 +268,12 @@ EMenu::RemoveItem(eint32 index)
 
 
 bool
-EMenu::RemoveItem(EMenu *menu)
+BMenu::RemoveItem(BMenu *menu)
 {
 	if(!menu || menu->fSuperitem == NULL || menu->fSuperitem->fMenu != this) return false;
 
-	eint32 index = IndexOf(menu->fSuperitem);
-	EMenuItem *item = (EMenuItem*)fMenuItems.RemoveItem(index);
+	b_int32 index = IndexOf(menu->fSuperitem);
+	BMenuItem *item = (BMenuItem*)fMenuItems.RemoveItem(index);
 	if(!item) return false;
 
 	menu->fSuperitem = NULL;
@@ -296,57 +296,57 @@ EMenu::RemoveItem(EMenu *menu)
 }
 
 
-EMenuItem*
-EMenu::ItemAt(eint32 index) const
+BMenuItem*
+BMenu::ItemAt(b_int32 index) const
 {
-	return (EMenuItem*)fMenuItems.ItemAt(index);
+	return (BMenuItem*)fMenuItems.ItemAt(index);
 }
 
 
-EMenu*
-EMenu::SubmenuAt(eint32 index) const
+BMenu*
+BMenu::SubmenuAt(b_int32 index) const
 {
-	EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(index);
+	BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(index);
 	if(!item) return NULL;
 
 	return item->Submenu();
 }
 
 
-eint32
-EMenu::CountItems() const
+b_int32
+BMenu::CountItems() const
 {
 	return fMenuItems.CountItems();
 }
 
 
-eint32
-EMenu::IndexOf(const EMenuItem *item) const
+b_int32
+BMenu::IndexOf(const BMenuItem *item) const
 {
 	if(!item || item->fMenu != this) return -1;
 	return fMenuItems.IndexOf((void*)item);
 }
 
 
-eint32
-EMenu::IndexOf(const EMenu *menu) const
+b_int32
+BMenu::IndexOf(const BMenu *menu) const
 {
 	if(!menu || menu->Superitem() == NULL) return -1;
 	return fMenuItems.IndexOf((void*)menu->Superitem());
 }
 
 
-EMenuItem*
-EMenu::FindItem(euint32 command) const
+BMenuItem*
+BMenu::FindItem(b_uint32 command) const
 {
-	for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 	{
-		EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(i);
+		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
 		if(item->Command() == command) return item;
 		if(item->fSubmenu == NULL) continue;
 
-		EMenuItem *found = item->fSubmenu->FindItem(command);
+		BMenuItem *found = item->fSubmenu->FindItem(command);
 		if(found != NULL) return found;
 	}
 
@@ -354,7 +354,7 @@ EMenu::FindItem(euint32 command) const
 }
 
 
-inline bool etk_comapre_menuitem_name(const char *name1, const char *name2)
+inline bool bhapi_comapre_menuitem_name(const char *name1, const char *name2)
 {
 	if(!name1 && !name2) return true;
 	if(!name1 || !name2) return false;
@@ -364,17 +364,17 @@ inline bool etk_comapre_menuitem_name(const char *name1, const char *name2)
 }
 
 
-EMenuItem*
-EMenu::FindItem(const char *name) const
+BMenuItem*
+BMenu::FindItem(const char *name) const
 {
-	for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 	{
-		EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(i);
+		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
-		if(etk_comapre_menuitem_name(item->Label(), name)) return item;
+		if(bhapi_comapre_menuitem_name(item->Label(), name)) return item;
 		if(item->fSubmenu == NULL) continue;
 
-		EMenuItem *found = item->fSubmenu->FindItem(name);
+		BMenuItem *found = item->fSubmenu->FindItem(name);
 		if(found != NULL) return found;
 	}
 
@@ -382,54 +382,54 @@ EMenu::FindItem(const char *name) const
 }
 
 
-EMenu*
-EMenu::Supermenu() const
+BMenu*
+BMenu::Supermenu() const
 {
 	if(!fSuperitem) return NULL;
 	return fSuperitem->Menu();
 }
 
 
-EMenuItem*
-EMenu::Superitem() const
+BMenuItem*
+BMenu::Superitem() const
 {
 	return fSuperitem;
 }
 
 
-e_status_t
-EMenu::SetTargetForItems(EHandler *target)
+b_status_t
+BMenu::SetTargetForItems(BHandler *target)
 {
-	e_status_t status = E_OK;
-	EMessenger msgr(target, NULL, &status);
-	if(status != E_OK) return status;
+	b_status_t status = B_OK;
+	BMessenger msgr(target, NULL, &status);
+	if(status != B_OK) return status;
 
 	return SetTargetForItems(msgr);
 }
 
 
-e_status_t
-EMenu::SetTargetForItems(EMessenger messenger)
+b_status_t
+BMenu::SetTargetForItems(BMessenger messenger)
 {
-	for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 	{
-		EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(i);
-		e_status_t status = item->SetTarget(messenger);
-		if(status != E_OK) return status;
+		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
+		b_status_t status = item->SetTarget(messenger);
+		if(status != B_OK) return status;
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
 void
-EMenu::SetEnabled(bool state)
+BMenu::SetEnabled(bool state)
 {
-	if(EView::IsEnabled() != state)
+	if(BView::IsEnabled() != state)
 	{
-		EView::SetEnabled(state);
+		BView::SetEnabled(state);
 
-		e_rgb_color vColor = e_ui_color(E_MENU_BACKGROUND_COLOR);
+		b_rgb_color vColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
 
 		if(!state)
 		{
@@ -443,45 +443,45 @@ EMenu::SetEnabled(bool state)
 
 		if(!(fSuperitem  == NULL || fSuperitem->fEnabled == state)) fSuperitem->SetEnabled(state);
 
-		if(e_is_instance_of(Window(), ESubmenuWindow)) Window()->SetBackgroundColor(vColor);
+		if(b_is_instance_of(Window(), ESubmenuWindow)) Window()->SetBackgroundColor(vColor);
 	}
 }
 
 
 bool
-EMenu::IsEnabled() const
+BMenu::IsEnabled() const
 {
-	if(EView::IsEnabled() == false) return false;
+	if(BView::IsEnabled() == false) return false;
 	if(fSuperitem == NULL || fSuperitem->fMenu == NULL) return true;
 	return fSuperitem->fMenu->IsEnabled();
 }
 
 
 void
-EMenu::AttachedToWindow()
+BMenu::AttachedToWindow()
 {
-	if(e_is_instance_of(Window(), ESubmenuWindow)) SetEventMask(E_POINTER_EVENTS | E_KEYBOARD_EVENTS);
+	if(b_is_instance_of(Window(), ESubmenuWindow)) SetEventMask(B_POINTER_EVENTS | B_KEYBOARD_EVENTS);
 
 	Window()->DisableUpdates();
 	Refresh();
 	Window()->EnableUpdates();
 
-	if(!e_is_instance_of(Window(), ESubmenuWindow))
+    if(!b_is_instance_of(Window(), ESubmenuWindow))
 	{
-		Window()->StartWatching(this, E_MINIMIZED);
-		Window()->StartWatching(this, E_WINDOW_ACTIVATED);
+		Window()->StartWatching(this, B_MINIMIZED);
+		Window()->StartWatching(this, B_WINDOW_ACTIVATED);
 	}
 
-	Window()->StartWatching(this, E_WINDOW_MOVED);
-	Window()->StartWatching(this, E_WINDOW_RESIZED);
+	Window()->StartWatching(this, B_WINDOW_MOVED);
+	Window()->StartWatching(this, B_WINDOW_RESIZED);
 
-	for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 	{
-		EMenu *menu = ((EMenuItem*)fMenuItems.ItemAt(i))->fSubmenu;
+		BMenu *menu = ((BMenuItem*)fMenuItems.ItemAt(i))->fSubmenu;
 		if(menu == NULL) continue;
 		if(menu->fRadioMode == false || menu->fLabelFromMarked == false || menu->fSuperitem == NULL) continue;
 
-		EMenuItem *markedItem = (EMenuItem*)menu->fMenuItems.ItemAt(menu->fMarkedIndex);
+		BMenuItem *markedItem = (BMenuItem*)menu->fMenuItems.ItemAt(menu->fMarkedIndex);
 		if(markedItem)
 			menu->fSuperitem->SetLabel(markedItem->Label());
 		else
@@ -491,13 +491,13 @@ EMenu::AttachedToWindow()
 
 
 void
-EMenu::DetachedFromWindow()
+BMenu::DetachedFromWindow()
 {
 	Window()->StopWatchingAll(this);
 
-	for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 	{
-		EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(i);
+		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 		if(!(item == NULL || item->fSubmenu == NULL)) item->fSubmenu->ClosePopUp();
 	}
 
@@ -506,37 +506,37 @@ EMenu::DetachedFromWindow()
 
 
 void
-EMenu::MessageReceived(EMessage *msg)
+BMenu::MessageReceived(BMessage *msg)
 {
 	bool processed = false;
 
 	switch(msg->what)
 	{
-		case E_OBSERVER_NOTICE_CHANGE:
+		case B_OBSERVER_NOTICE_CHANGE:
 			{
 				if(Window() == NULL) break;
 
-				euint32 what;
-				if(msg->FindInt32(E_OBSERVE_ORIGINAL_WHAT, (eint32*)&what) == false ||
-				   !(what == E_WINDOW_MOVED ||
-				     what == E_WINDOW_RESIZED ||
-				     what == E_MINIMIZED ||
-				     what == E_WINDOW_ACTIVATED)) break;
+				b_uint32 what;
+				if(msg->FindInt32(B_OBSERVE_ORIGINAL_WHAT, (b_int32*)&what) == false ||
+				   !(what == B_WINDOW_MOVED ||
+				     what == B_WINDOW_RESIZED ||
+				     what == B_MINIMIZED ||
+				     what == B_WINDOW_ACTIVATED)) break;
 
 				processed = true;
 
 				if(fSelectedIndex < 0) break;
-				EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
+				BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
 				if(item == NULL || item->fSubmenu == NULL || item->fSubmenu->Window() == NULL) break;
 
-				if((e_is_instance_of(Window(), ESubmenuWindow) == false &&
+				if((b_is_instance_of(Window(), ESubmenuWindow) == false &&
 				    Window()->IsActivate() == false &&
 				    item->fSubmenu->Window()->IsActivate() == false) ||
 				   Window()->IsHidden() || Window()->IsMinimized())
 				{
 					item->fSubmenu->ClosePopUp();
 				}
-				else if(e_is_instance_of(item->fSubmenu->Window(), ESubmenuWindow))
+				else if(b_is_instance_of(item->fSubmenu->Window(), ESubmenuWindow))
 				{
 #if 0
 					// notice submenu to move
@@ -552,25 +552,25 @@ EMenu::MessageReceived(EMessage *msg)
 			{
 				if(Window() == NULL) break;
 
-				EMenuItem *item = NULL;
+				BMenuItem *item = NULL;
 				if(msg->FindPointer("source", (void**)&item) == false || item == NULL) break;
 
 				processed = true;
 
-				if(e_is_instance_of(Window(), ESubmenuWindow))
+				if(b_is_instance_of(Window(), ESubmenuWindow))
 				{
 					if(!(Supermenu() == NULL || Supermenu()->Window() == NULL))
 						Supermenu()->Window()->PostMessage(msg, Supermenu());
-					Window()->PostMessage(E_QUIT_REQUESTED);
+					Window()->PostMessage(B_QUIT_REQUESTED);
 				}
 				else
 				{
-					euint32 what;
-					if(msg->FindInt32("etk:menu_orig_what", (eint32*)&what))
+					b_uint32 what;
+					if(msg->FindInt32("etk:menu_orig_what", (b_int32*)&what))
 					{
-						EMessage aMsg = *msg;
+						BMessage aMsg = *msg;
 						aMsg.what = what;
-						item->EInvoker::Invoke(&aMsg);
+						item->BInvoker::Invoke(&aMsg);
 					}
 				}
 			}
@@ -580,29 +580,29 @@ EMenu::MessageReceived(EMessage *msg)
 			break;
 	}
 
-	if(!processed) EView::MessageReceived(msg);
+	if(!processed) BView::MessageReceived(msg);
 }
 
 
 void
-EMenu::MouseDown(EPoint where)
+BMenu::MouseDown(BPoint where)
 {
-	if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0 || !QueryCurrentMouse(true, E_PRIMARY_MOUSE_BUTTON)) return;
+	if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0 || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON)) return;
 
-	ERect rect = VisibleBounds();
+	BRect rect = VisibleBounds();
 	if(!rect.Contains(where)) return;
 
 	if(fTrackingIndex >= 0) return;
 
-	eint32 newIndex = FindItem(where);
+	b_int32 newIndex = FindItem(where);
 	if(newIndex < 0)return;
 
 	if(fSelectedIndex != newIndex)
 	{
-		EMenuItem *oldItem = (EMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
-		EMenuItem *newItem = (EMenuItem*)fMenuItems.ItemAt(newIndex);
+		BMenuItem *oldItem = (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
+		BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(newIndex);
 
-		eint32 oldSelectedIndex = fSelectedIndex;
+		b_int32 oldSelectedIndex = fSelectedIndex;
 		fSelectedIndex = newIndex;
 
 		Window()->DisableUpdates();
@@ -624,17 +624,17 @@ EMenu::MouseDown(EPoint where)
 
 
 void
-EMenu::MouseUp(EPoint where)
+BMenu::MouseUp(BPoint where)
 {
 	if(fTrackingIndex >= 0)
 	{
-		eint32 trackingIndex = fTrackingIndex;
+		b_int32 trackingIndex = fTrackingIndex;
 		fTrackingIndex = -1;
 
 		if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0) return;
 		if(trackingIndex != fSelectedIndex || ItemFrame(trackingIndex).Contains(where) == false) return;
 
-		EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
+		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
 		if(item == NULL || item->IsEnabled() == false) return;
 
 		if(item->fSubmenu)
@@ -643,35 +643,35 @@ EMenu::MouseUp(EPoint where)
 		}
 		else
 		{
-			if(e_is_instance_of(Window(), ESubmenuWindow))
+			if(b_is_instance_of(Window(), ESubmenuWindow))
 			{
 				if(!(Supermenu() == NULL || Supermenu()->Window() == NULL))
 				{
-					EMessage msg(_MENU_EVENT_);
+					BMessage msg(_MENU_EVENT_);
 					if(item->Message() != NULL)
 					{
 						msg = *(item->Message());
 						msg.AddInt32("etk:menu_orig_what", msg.what);
 						msg.what = _MENU_EVENT_;
 					}
-					msg.AddInt64("when", e_real_time_clock_usecs());
+					msg.AddInt64("when", b_real_time_clock_usecs());
 					msg.AddPointer("source", item);
 					msg.AddInt32("index", fSelectedIndex);
 
 					Supermenu()->Window()->PostMessage(&msg, Supermenu());
 				}
-				Window()->PostMessage(E_QUIT_REQUESTED);
+				Window()->PostMessage(B_QUIT_REQUESTED);
 			}
-			else if(e_is_kind_of(this, EPopUpMenu))
+			else if(b_is_kind_of(this, BPopUpMenu))
 			{
-				EMessage msg(_MENU_EVENT_);
+				BMessage msg(_MENU_EVENT_);
 				if(item->Message() != NULL)
 				{
 					msg = *(item->Message());
 					msg.AddInt32("etk:menu_orig_what", msg.what);
 					msg.what = _MENU_EVENT_;
 				}
-				msg.AddInt64("when", e_real_time_clock_usecs());
+				msg.AddInt64("when", b_real_time_clock_usecs());
 				msg.AddPointer("source", item);
 				msg.AddInt32("index", fSelectedIndex);
 
@@ -689,19 +689,19 @@ EMenu::MouseUp(EPoint where)
 
 
 void
-EMenu::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
+BMenu::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 {
 	if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0 || !VisibleBounds().Contains(where)) return;
 
-	eint32 newIndex = FindItem(where);
+	b_int32 newIndex = FindItem(where);
 	if(newIndex < 0) return;
 
 	if(fSelectedIndex != newIndex)
 	{
-		EMenuItem *oldItem = (EMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
-		EMenuItem *newItem = (EMenuItem*)fMenuItems.ItemAt(newIndex);
+		BMenuItem *oldItem = (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
+		BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(newIndex);
 
-		eint32 oldSelectedIndex = fSelectedIndex;
+		b_int32 oldSelectedIndex = fSelectedIndex;
 		fSelectedIndex = newIndex;
 
 		Window()->DisableUpdates();
@@ -721,13 +721,13 @@ EMenu::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
 
 
 void
-EMenu::KeyDown(const char *bytes, eint32 numBytes)
+BMenu::KeyDown(const char *bytes, b_int32 numBytes)
 {
 	if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0 || numBytes != 1 || bytes == NULL) return;
 	if(Window()->CurrentMessage() == NULL) return;
-	if(!(Window()->CurrentMessage()->what == E_KEY_DOWN || Window()->CurrentMessage()->what == E_UNMAPPED_KEY_DOWN)) return;
+	if(!(Window()->CurrentMessage()->what == B_KEY_DOWN || Window()->CurrentMessage()->what == B_UNMAPPED_KEY_DOWN)) return;
 
-	EMenuItem *selectedItem = (EMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
+	BMenuItem *selectedItem = (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
 
 	if(!(selectedItem == NULL || selectedItem->fSubmenu == NULL || selectedItem->fSubmenu->Window() == NULL ||
 	     Window()->CurrentMessage()->HasBool("_MENU_EVENT_")))
@@ -739,16 +739,16 @@ EMenu::KeyDown(const char *bytes, eint32 numBytes)
 	if(!fShowSubmenuByKeyDown)
 		fShowSubmenuByKeyDown = ((selectedItem->fSubmenu == NULL || selectedItem->fSubmenu->Window() == NULL) ? false : true);
 
-	eint32 oldIndex = fSelectedIndex;
+	b_int32 oldIndex = fSelectedIndex;
 	bool doRewind = false;
 	bool doInvert = false;
 
 	char ch = *bytes;
 	switch(ch)
 	{
-		case E_UP_ARROW:
+		case B_UP_ARROW:
 			{
-				if(fLayout != E_ITEMS_IN_ROW)
+				if(fLayout != B_ITEMS_IN_ROW)
 				{
 					fSelectedIndex--;
 					if(fSelectedIndex < 0) fSelectedIndex = fMenuItems.CountItems() - 1;
@@ -758,9 +758,9 @@ EMenu::KeyDown(const char *bytes, eint32 numBytes)
 			}
 			break;
 
-		case E_DOWN_ARROW:
+		case B_DOWN_ARROW:
 			{
-				if(fLayout != E_ITEMS_IN_ROW)
+				if(fLayout != B_ITEMS_IN_ROW)
 				{
 					fSelectedIndex++;
 					if(fSelectedIndex >= fMenuItems.CountItems()) fSelectedIndex = 0;
@@ -770,9 +770,9 @@ EMenu::KeyDown(const char *bytes, eint32 numBytes)
 			}
 			break;
 
-		case E_LEFT_ARROW:
+		case B_LEFT_ARROW:
 			{
-				if(fLayout != E_ITEMS_IN_COLUMN)
+				if(fLayout != B_ITEMS_IN_COLUMN)
 				{
 					fSelectedIndex--;
 					if(fSelectedIndex < 0) fSelectedIndex = fMenuItems.CountItems() - 1;
@@ -782,9 +782,9 @@ EMenu::KeyDown(const char *bytes, eint32 numBytes)
 			}
 			break;
 
-		case E_RIGHT_ARROW:
+		case B_RIGHT_ARROW:
 			{
-				if(fLayout != E_ITEMS_IN_COLUMN)
+				if(fLayout != B_ITEMS_IN_COLUMN)
 				{
 					fSelectedIndex++;
 					if(fSelectedIndex >= fMenuItems.CountItems()) fSelectedIndex = 0;
@@ -794,25 +794,25 @@ EMenu::KeyDown(const char *bytes, eint32 numBytes)
 			}
 			break;
 
-		case E_ENTER:
-		case E_SPACE:
+		case B_ENTER:
+		case B_SPACE:
 			{
 				if(fSelectedIndex < 0 || fTrackingIndex >= 0) break;
 				fTrackingIndex = fSelectedIndex;
 			}
 			break;
 
-		case E_ESCAPE:
-			if(!e_is_instance_of(Window(), ESubmenuWindow)) fTrackingIndex = fSelectedIndex = -1;
+		case B_ESCAPE:
+            if(!b_is_instance_of(Window(), ESubmenuWindow)) fTrackingIndex = fSelectedIndex = -1;
 			break;
 
-		case E_HOME:
+		case B_HOME:
 			fSelectedIndex = 0;
 			doRewind = false;
 			doInvert = false;
 			break;
 
-		case E_END:
+		case B_END:
 			fSelectedIndex = fMenuItems.CountItems() - 1;
 			doRewind = false;
 			doInvert = true;
@@ -824,29 +824,29 @@ EMenu::KeyDown(const char *bytes, eint32 numBytes)
 
 	if(oldIndex != fSelectedIndex && fSelectedIndex >= 0)
 	{
-		EMenuItem *oldItem = (EMenuItem*)fMenuItems.ItemAt(oldIndex);
+		BMenuItem *oldItem = (BMenuItem*)fMenuItems.ItemAt(oldIndex);
 
 		Window()->DisableUpdates();
 
 		if(oldItem) oldItem->SelectChanged();
 
-		eint32 tmp = fSelectedIndex;
+		b_int32 tmp = fSelectedIndex;
 		fSelectedIndex = -1;
 
 		if(!doInvert)
 		{
-			for(eint32 i = tmp; i < fMenuItems.CountItems(); i++)
+			for(b_int32 i = tmp; i < fMenuItems.CountItems(); i++)
 			{
-				EMenuItem *newItem = (EMenuItem*)fMenuItems.ItemAt(i);
+				BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(i);
 				fSelectedIndex = i;
 				if(newItem->SelectChanged()) break;
 				fSelectedIndex = -1;
 			}
 			if(fSelectedIndex < 0 && doRewind)
 			{
-				for(eint32 i = 0; i < tmp; i++)
+				for(b_int32 i = 0; i < tmp; i++)
 				{
-					EMenuItem *newItem = (EMenuItem*)fMenuItems.ItemAt(i);
+					BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(i);
 					fSelectedIndex = i;
 					if(newItem->SelectChanged()) break;
 					fSelectedIndex = -1;
@@ -855,18 +855,18 @@ EMenu::KeyDown(const char *bytes, eint32 numBytes)
 		}
 		else
 		{
-			for(eint32 i = tmp; i >= 0; i--)
+			for(b_int32 i = tmp; i >= 0; i--)
 			{
-				EMenuItem *newItem = (EMenuItem*)fMenuItems.ItemAt(i);
+				BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(i);
 				fSelectedIndex = i;
 				if(newItem->SelectChanged()) break;
 				fSelectedIndex = -1;
 			}
 			if(fSelectedIndex < 0 && doRewind)
 			{
-				for(eint32 i = fMenuItems.CountItems() - 1; i > tmp; i--)
+				for(b_int32 i = fMenuItems.CountItems() - 1; i > tmp; i--)
 				{
-					EMenuItem *newItem = (EMenuItem*)fMenuItems.ItemAt(i);
+					BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(i);
 					fSelectedIndex = i;
 					if(newItem->SelectChanged()) break;
 					fSelectedIndex = -1;
@@ -878,7 +878,7 @@ EMenu::KeyDown(const char *bytes, eint32 numBytes)
 	}
 	else if(fSelectedIndex < 0)
 	{
-		EMenuItem *oldItem = (EMenuItem*)fMenuItems.ItemAt(oldIndex);
+		BMenuItem *oldItem = (BMenuItem*)fMenuItems.ItemAt(oldIndex);
 		if(oldItem) oldItem->SelectChanged();
 		fShowSubmenuByKeyDown = false;
 	}
@@ -886,13 +886,13 @@ EMenu::KeyDown(const char *bytes, eint32 numBytes)
 
 
 void
-EMenu::KeyUp(const char *bytes, eint32 numBytes)
+BMenu::KeyUp(const char *bytes, b_int32 numBytes)
 {
 	if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0 || numBytes != 1 || bytes == NULL) return;
 	if(Window()->CurrentMessage() == NULL) return;
-	if(!(Window()->CurrentMessage()->what == E_KEY_UP || Window()->CurrentMessage()->what == E_UNMAPPED_KEY_UP)) return;
+	if(!(Window()->CurrentMessage()->what == B_KEY_UP || Window()->CurrentMessage()->what == B_UNMAPPED_KEY_UP)) return;
 
-	EMenuItem *selectedItem = (EMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
+	BMenuItem *selectedItem = (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
 	if(!(selectedItem == NULL || selectedItem->fSubmenu == NULL || selectedItem->fSubmenu->Window() == NULL ||
 	     Window()->CurrentMessage()->HasBool("_MENU_EVENT_")))
 	{
@@ -903,8 +903,8 @@ EMenu::KeyUp(const char *bytes, eint32 numBytes)
 	char ch = *bytes;
 	switch(ch)
 	{
-		case E_ENTER:
-		case E_SPACE:
+		case B_ENTER:
+		case B_SPACE:
 			{
 				if(fTrackingIndex < 0 || fTrackingIndex != fSelectedIndex) break;
 				if(selectedItem == NULL || selectedItem->IsEnabled() == false) break;
@@ -914,35 +914,35 @@ EMenu::KeyUp(const char *bytes, eint32 numBytes)
 					break;
 				}
 
-				if(e_is_instance_of(Window(), ESubmenuWindow))
+				if(b_is_instance_of(Window(), ESubmenuWindow))
 				{
 					if(!(Supermenu() == NULL || Supermenu()->Window() == NULL))
 					{
-						EMessage msg(_MENU_EVENT_);
+						BMessage msg(_MENU_EVENT_);
 						if(selectedItem->Message() != NULL)
 						{
 							msg = *(selectedItem->Message());
 							msg.AddInt32("etk:menu_orig_what", msg.what);
 							msg.what = _MENU_EVENT_;
 						}
-						msg.AddInt64("when", e_real_time_clock_usecs());
+						msg.AddInt64("when", b_real_time_clock_usecs());
 						msg.AddPointer("source", selectedItem);
 						msg.AddInt32("index", fSelectedIndex);
 
 						Supermenu()->Window()->PostMessage(&msg, Supermenu());
 					}
-					Window()->PostMessage(E_QUIT_REQUESTED);
+					Window()->PostMessage(B_QUIT_REQUESTED);
 				}
-				else if(e_is_kind_of(this, EPopUpMenu))
+				else if(b_is_kind_of(this, BPopUpMenu))
 				{
-					EMessage msg(_MENU_EVENT_);
+					BMessage msg(_MENU_EVENT_);
 					if(selectedItem->Message() != NULL)
 					{
 						msg = *(selectedItem->Message());
 						msg.AddInt32("etk:menu_orig_what", msg.what);
 						msg.what = _MENU_EVENT_;
 					}
-					msg.AddInt64("when", e_real_time_clock_usecs());
+					msg.AddInt64("when", b_real_time_clock_usecs());
 					msg.AddPointer("source", selectedItem);
 					msg.AddInt32("index", fSelectedIndex);
 
@@ -957,24 +957,24 @@ EMenu::KeyUp(const char *bytes, eint32 numBytes)
 			}
 			break;
 
-		case E_UP_ARROW:
+		case B_UP_ARROW:
 			{
-				if(fLayout == E_ITEMS_IN_ROW)
+				if(fLayout == B_ITEMS_IN_ROW)
 				{
-					if(!e_is_instance_of(Window(), ESubmenuWindow)) break;
-					if(Supermenu()->Layout() != E_ITEMS_IN_ROW && Supermenu()->Window() != NULL)
+                    if(!b_is_instance_of(Window(), ESubmenuWindow)) break;
+					if(Supermenu()->Layout() != B_ITEMS_IN_ROW && Supermenu()->Window() != NULL)
 					{
-						EMessage aMsg = *(Window()->CurrentMessage());
+						BMessage aMsg = *(Window()->CurrentMessage());
 						aMsg.AddBool("_MENU_EVENT_", true);
-						aMsg.ReplaceInt64("when", e_real_time_clock_usecs());
-						aMsg.what = E_KEY_DOWN;
+						aMsg.ReplaceInt64("when", b_real_time_clock_usecs());
+						aMsg.what = B_KEY_DOWN;
 						Supermenu()->Window()->PostMessage(&aMsg, Supermenu());
-						aMsg.what = E_KEY_UP;
+						aMsg.what = B_KEY_UP;
 						Supermenu()->Window()->PostMessage(&aMsg, Supermenu());
 					}
 					else
 					{
-						Window()->PostMessage(E_QUIT_REQUESTED);
+						Window()->PostMessage(B_QUIT_REQUESTED);
 					}
 				}
 				else if(fShowSubmenuByKeyDown)
@@ -985,24 +985,24 @@ EMenu::KeyUp(const char *bytes, eint32 numBytes)
 			}
 			break;
 
-		case E_DOWN_ARROW:
+		case B_DOWN_ARROW:
 			{
-				if(fLayout == E_ITEMS_IN_ROW)
+				if(fLayout == B_ITEMS_IN_ROW)
 				{
 					if(selectedItem)
 					{
-						if(e_is_instance_of(Window(), ESubmenuWindow))
+						if(b_is_instance_of(Window(), ESubmenuWindow))
 						{
-							if(Supermenu()->Layout() != E_ITEMS_IN_ROW && selectedItem->fSubmenu == NULL)
+							if(Supermenu()->Layout() != B_ITEMS_IN_ROW && selectedItem->fSubmenu == NULL)
 							{
 								if(Supermenu()->Window() != NULL)
 								{
-									EMessage aMsg = *(Window()->CurrentMessage());
+									BMessage aMsg = *(Window()->CurrentMessage());
 									aMsg.AddBool("_MENU_EVENT_", true);
-									aMsg.ReplaceInt64("when", e_real_time_clock_usecs());
-									aMsg.what = E_KEY_DOWN;
+									aMsg.ReplaceInt64("when", b_real_time_clock_usecs());
+									aMsg.what = B_KEY_DOWN;
 									Supermenu()->Window()->PostMessage(&aMsg, Supermenu());
-									aMsg.what = E_KEY_UP;
+									aMsg.what = B_KEY_UP;
 									Supermenu()->Window()->PostMessage(&aMsg, Supermenu());
 								}
 								break;
@@ -1020,24 +1020,24 @@ EMenu::KeyUp(const char *bytes, eint32 numBytes)
 			}
 			break;
 
-		case E_LEFT_ARROW:
+		case B_LEFT_ARROW:
 			{
-				if(fLayout == E_ITEMS_IN_COLUMN)
+				if(fLayout == B_ITEMS_IN_COLUMN)
 				{
-					if(!e_is_instance_of(Window(), ESubmenuWindow)) break;
-					if(Supermenu()->Layout() != E_ITEMS_IN_COLUMN && Supermenu()->Window() != NULL)
+                    if(!b_is_instance_of(Window(), ESubmenuWindow)) break;
+					if(Supermenu()->Layout() != B_ITEMS_IN_COLUMN && Supermenu()->Window() != NULL)
 					{
-						EMessage aMsg = *(Window()->CurrentMessage());
+						BMessage aMsg = *(Window()->CurrentMessage());
 						aMsg.AddBool("_MENU_EVENT_", true);
-						aMsg.ReplaceInt64("when", e_real_time_clock_usecs());
-						aMsg.what = E_KEY_DOWN;
+						aMsg.ReplaceInt64("when", b_real_time_clock_usecs());
+						aMsg.what = B_KEY_DOWN;
 						Supermenu()->Window()->PostMessage(&aMsg, Supermenu());
-						aMsg.what = E_KEY_UP;
+						aMsg.what = B_KEY_UP;
 						Supermenu()->Window()->PostMessage(&aMsg, Supermenu());
 					}
 					else
 					{
-						Window()->PostMessage(E_QUIT_REQUESTED);
+						Window()->PostMessage(B_QUIT_REQUESTED);
 					}
 				}
 				else if(fShowSubmenuByKeyDown)
@@ -1048,24 +1048,24 @@ EMenu::KeyUp(const char *bytes, eint32 numBytes)
 			}
 			break;
 
-		case E_RIGHT_ARROW:
+		case B_RIGHT_ARROW:
 			{
-				if(fLayout == E_ITEMS_IN_COLUMN)
+				if(fLayout == B_ITEMS_IN_COLUMN)
 				{
 					if(selectedItem)
 					{
-						if(e_is_instance_of(Window(), ESubmenuWindow))
+						if(b_is_instance_of(Window(), ESubmenuWindow))
 						{
-							if(Supermenu()->Layout() != E_ITEMS_IN_COLUMN && selectedItem->fSubmenu == NULL)
+							if(Supermenu()->Layout() != B_ITEMS_IN_COLUMN && selectedItem->fSubmenu == NULL)
 							{
 								if(Supermenu()->Window() != NULL)
 								{
-									EMessage aMsg = *(Window()->CurrentMessage());
+									BMessage aMsg = *(Window()->CurrentMessage());
 									aMsg.AddBool("_MENU_EVENT_", true);
-									aMsg.ReplaceInt64("when", e_real_time_clock_usecs());
-									aMsg.what = E_KEY_DOWN;
+									aMsg.ReplaceInt64("when", b_real_time_clock_usecs());
+									aMsg.what = B_KEY_DOWN;
 									Supermenu()->Window()->PostMessage(&aMsg, Supermenu());
-									aMsg.what = E_KEY_UP;
+									aMsg.what = B_KEY_UP;
 									Supermenu()->Window()->PostMessage(&aMsg, Supermenu());
 								}
 								break;
@@ -1083,15 +1083,15 @@ EMenu::KeyUp(const char *bytes, eint32 numBytes)
 			}
 			break;
 
-		case E_ESCAPE:
+		case B_ESCAPE:
 			{
-				if(e_is_instance_of(Window(), ESubmenuWindow)) Window()->PostMessage(E_QUIT_REQUESTED);
+				if(b_is_instance_of(Window(), ESubmenuWindow)) Window()->PostMessage(B_QUIT_REQUESTED);
 				if(Supermenu()) Supermenu()->fShowSubmenuByKeyDown = false;
 			}
 			break;
 
-		case E_HOME:
-		case E_END:
+		case B_HOME:
+		case B_END:
 			{
 				if(!fShowSubmenuByKeyDown) break;
 				if(selectedItem == NULL || selectedItem->fSubmenu == NULL) break;
@@ -1107,22 +1107,22 @@ EMenu::KeyUp(const char *bytes, eint32 numBytes)
 }
 
 
-ERect
-EMenu::ItemFrame(eint32 index) const
+BRect
+BMenu::ItemFrame(b_int32 index) const
 {
-	if(index < 0 || index >= fMenuItems.CountItems()) return ERect();
+	if(index < 0 || index >= fMenuItems.CountItems()) return BRect();
 
-	if(fLayout == E_ITEMS_IN_MATRIX)
+	if(fLayout == B_ITEMS_IN_MATRIX)
 	{
-		EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(index);
+		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(index);
 		return item->fFrame;
 	}
 
 	float left = fMargins.left, top = fMargins.top, w, h;
 
-	for(eint32 i = 0; i <= index; i++)
+	for(b_int32 i = 0; i <= index; i++)
 	{
-		EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(i);
+		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
 		w = 0; h = 0;
 		item->GetContentSize(&w, &h);
@@ -1131,27 +1131,27 @@ EMenu::ItemFrame(eint32 index) const
 
 		if(i == index) break;
 
-		if(fLayout == E_ITEMS_IN_ROW) left += w + ETK_MENU_ROW_SPACING;
-		else top += h + ETK_MENU_COLUMN_SPACING;
+		if(fLayout == B_ITEMS_IN_ROW) left += w + BHAPI_MENU_ROW_SPACING;
+		else top += h + BHAPI_MENU_COLUMN_SPACING;
 	}
 
-	if(fLayout == E_ITEMS_IN_ROW)
-		return ERect(left, fMargins.top, left + w, Frame().Height() - fMargins.bottom);
+	if(fLayout == B_ITEMS_IN_ROW)
+		return BRect(left, fMargins.top, left + w, Frame().Height() - fMargins.bottom);
 	else
-		return ERect(fMargins.left, top, Frame().Width() - fMargins.right, top + h);
+		return BRect(fMargins.left, top, Frame().Width() - fMargins.right, top + h);
 }
 
 
-eint32
-EMenu::FindItem(EPoint where)
+b_int32
+BMenu::FindItem(BPoint where)
 {
 	if(!VisibleBounds().Contains(where)) return false;
 
-	if(fLayout == E_ITEMS_IN_MATRIX)
+	if(fLayout == B_ITEMS_IN_MATRIX)
 	{
-		for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+		for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 		{
-			EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(i);
+			BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 			if(item->fFrame.Contains(where)) return i;
 		}
 
@@ -1160,25 +1160,25 @@ EMenu::FindItem(EPoint where)
 
 	float left = fMargins.left, top = fMargins.top, w, h;
 
-	for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 	{
-		EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(i);
+		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
 		w = 0; h = 0;
 		item->GetContentSize(&w, &h);
 		if(w < 4) w = 4;
 		if(h < 4) h = 4;
 
-		ERect r;
-		if(fLayout == E_ITEMS_IN_ROW)
-			r = ERect(left, fMargins.top, left + w, Frame().Height() - fMargins.bottom);
+		BRect r;
+		if(fLayout == B_ITEMS_IN_ROW)
+			r = BRect(left, fMargins.top, left + w, Frame().Height() - fMargins.bottom);
 		else
-			r = ERect(fMargins.left, top, Frame().Width() - fMargins.right, top + h);
+			r = BRect(fMargins.left, top, Frame().Width() - fMargins.right, top + h);
 
 		if(r.Contains(where)) return i;
 
-		if(fLayout == E_ITEMS_IN_ROW) left += w + ETK_MENU_ROW_SPACING;
-		else top += h + ETK_MENU_COLUMN_SPACING;
+		if(fLayout == B_ITEMS_IN_ROW) left += w + BHAPI_MENU_ROW_SPACING;
+		else top += h + BHAPI_MENU_COLUMN_SPACING;
 	}
 
 	return -1;
@@ -1186,16 +1186,16 @@ EMenu::FindItem(EPoint where)
 
 
 void
-EMenu::Refresh()
+BMenu::Refresh()
 {
-	if(e_is_instance_of(Window(), ESubmenuWindow) || fResizeToFit)
+	if(b_is_instance_of(Window(), ESubmenuWindow) || fResizeToFit)
 	{
-		ERect rect = Frame();
+		BRect rect = Frame();
 		ResizeToPreferred();
-		if(rect != Frame() && e_is_instance_of(Window(), ESubmenuWindow))
+		if(rect != Frame() && b_is_instance_of(Window(), ESubmenuWindow))
 		{
-			EMessage msg(_MENU_EVENT_);
-			msg.AddInt64("when", e_real_time_clock_usecs());
+			BMessage msg(_MENU_EVENT_);
+			msg.AddInt64("when", b_real_time_clock_usecs());
 			msg.AddRect("frame", Frame());
 			Window()->PostMessage(&msg, Window());
 		}
@@ -1206,11 +1206,11 @@ EMenu::Refresh()
 
 
 void
-EMenu::Draw(ERect updateRect)
+BMenu::Draw(BRect updateRect)
 {
 	if(!IsVisible()) return;
 
-	ERect bounds = Frame().OffsetToSelf(E_ORIGIN);
+	BRect bounds = Frame().OffsetToSelf(B_ORIGIN);
 	bounds.left += fMargins.left;
 	bounds.top += fMargins.top;
 	bounds.right -= fMargins.right;
@@ -1220,12 +1220,12 @@ EMenu::Draw(ERect updateRect)
 
 	PushState();
 
-	if(fLayout == E_ITEMS_IN_MATRIX)
+	if(fLayout == B_ITEMS_IN_MATRIX)
 	{
-		for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+		for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 		{
-			EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(i);
-			ERect r = item->fFrame;
+			BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
+			BRect r = item->fFrame;
 			r &= bounds;
 			if(!r.IsValid()) continue;
 			ConstrainClippingRegion(r);
@@ -1236,20 +1236,20 @@ EMenu::Draw(ERect updateRect)
 	{
 		float left = fMargins.left, top = fMargins.top, w, h;
 
-		for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+		for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 		{
-			EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(i);
+			BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
 			w = 0; h = 0;
 			item->GetContentSize(&w, &h);
 			if(w < 4) w = 4;
 			if(h < 4) h = 4;
 
-			ERect r;
-			if(fLayout == E_ITEMS_IN_ROW)
-				r = ERect(left, fMargins.top, left + w, Frame().Height() - fMargins.bottom);
+			BRect r;
+			if(fLayout == B_ITEMS_IN_ROW)
+				r = BRect(left, fMargins.top, left + w, Frame().Height() - fMargins.bottom);
 			else
-				r = ERect(fMargins.left, top, Frame().Width() - fMargins.right, top + h);
+				r = BRect(fMargins.left, top, Frame().Width() - fMargins.right, top + h);
 
 			r &= bounds;
 			if(r.IsValid())
@@ -1258,8 +1258,8 @@ EMenu::Draw(ERect updateRect)
 				item->Draw();
 			}
 
-			if(fLayout == E_ITEMS_IN_ROW) left += w + ETK_MENU_ROW_SPACING;
-			else top += h + ETK_MENU_COLUMN_SPACING;
+			if(fLayout == B_ITEMS_IN_ROW) left += w + BHAPI_MENU_ROW_SPACING;
+			else top += h + BHAPI_MENU_COLUMN_SPACING;
 		}
 	}
 
@@ -1267,20 +1267,20 @@ EMenu::Draw(ERect updateRect)
 }
 
 
-e_menu_layout
-EMenu::Layout() const
+b_menu_layout
+BMenu::Layout() const
 {
 	return fLayout;
 }
 
 
 void
-EMenu::SetLayout(e_menu_layout layout, float width, float height, bool resizeToFit)
+BMenu::SetLayout(b_menu_layout layout, float width, float height, bool resizeToFit)
 {
 	fLayout = layout;
 	fResizeToFit = resizeToFit;
 
-	if(layout == E_ITEMS_IN_MATRIX)
+	if(layout == B_ITEMS_IN_MATRIX)
 	{
 		if(width < fMargins.left + fMargins.right + 10) width = fMargins.left + fMargins.right + 10;
 		if(height < fMargins.top + fMargins.bottom + 10) height = fMargins.top + fMargins.bottom + 10;
@@ -1293,7 +1293,7 @@ EMenu::SetLayout(e_menu_layout layout, float width, float height, bool resizeToF
 
 
 void
-EMenu::SetRadioMode(bool state)
+BMenu::SetRadioMode(bool state)
 {
 	if(fRadioMode != state)
 	{
@@ -1305,7 +1305,7 @@ EMenu::SetRadioMode(bool state)
 
 			if(fLabelFromMarked && fSuperitem != NULL)
 			{
-				EMenuItem *markedItem = ItemAt(fMarkedIndex);
+				BMenuItem *markedItem = ItemAt(fMarkedIndex);
 				if(markedItem)
 					fSuperitem->SetLabel(markedItem->Label());
 				else
@@ -1329,18 +1329,18 @@ EMenu::SetRadioMode(bool state)
 
 
 bool
-EMenu::IsRadioMode() const
+BMenu::IsRadioMode() const
 {
 	return fRadioMode;
 }
 
 
-EMenuItem*
-EMenu::FindMarked(eint32 *index) const
+BMenuItem*
+BMenu::FindMarked(b_int32 *index) const
 {
 	if(fRadioMode && fMarkedIndex >= 0)
 	{
-		EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(fMarkedIndex);
+		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(fMarkedIndex);
 		if(!(item == NULL || item->IsMarked() == false))
 		{
 			if(index) *index = fMarkedIndex;
@@ -1348,9 +1348,9 @@ EMenu::FindMarked(eint32 *index) const
 		}
 	}
 
-	for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 	{
-		EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(i);
+		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
 		if(item->IsMarked())
 		{
@@ -1365,7 +1365,7 @@ EMenu::FindMarked(eint32 *index) const
 
 
 void
-EMenu::SetLabelFromMarked(bool state)
+BMenu::SetLabelFromMarked(bool state)
 {
 	if(fLabelFromMarked != state)
 	{
@@ -1380,7 +1380,7 @@ EMenu::SetLabelFromMarked(bool state)
 		{
 			if(state)
 			{
-				EMenuItem *markedItem = FindMarked();
+				BMenuItem *markedItem = FindMarked();
 				if(markedItem)
 					fSuperitem->SetLabel(markedItem->Label());
 				else
@@ -1396,26 +1396,26 @@ EMenu::SetLabelFromMarked(bool state)
 
 
 bool
-EMenu::IsLabelFromMarked() const
+BMenu::IsLabelFromMarked() const
 {
 	return(fRadioMode ? fLabelFromMarked : false);
 }
 
 
 void
-EMenu::GetPreferredSize(float *width, float *height)
+BMenu::GetPreferredSize(float *width, float *height)
 {
 	if(!width && !height) return;
 
-	if(fLayout == E_ITEMS_IN_MATRIX)
+	if(fLayout == B_ITEMS_IN_MATRIX)
 	{
-		ERect rect(0, 0, 0, 0);
+		BRect rect(0, 0, 0, 0);
 
-		for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+		for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 		{
-			EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(i);
+			BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
-			ERect r = item->fFrame;
+			BRect r = item->fFrame;
 			if(r.IsValid()) rect |= r;
 		}
 
@@ -1424,26 +1424,26 @@ EMenu::GetPreferredSize(float *width, float *height)
 	}
 	else
 	{
-		ERect rect(0, 0, 0, 0);
+		BRect rect(0, 0, 0, 0);
 
-		for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+		for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 		{
-			EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(i);
+			BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
 			float w = 0, h = 0;
 			item->GetContentSize(&w, &h);
 			if(w < 4) w = 4;
 			if(h < 4) h = 4;
 
-			if(fLayout == E_ITEMS_IN_ROW)
+			if(fLayout == B_ITEMS_IN_ROW)
 			{
-				w += (i == fMenuItems.CountItems() - 1 ? 0 : ETK_MENU_ROW_SPACING);
+				w += (i == fMenuItems.CountItems() - 1 ? 0 : BHAPI_MENU_ROW_SPACING);
 				rect.right += w;
 				rect.bottom = max_c(rect.bottom, h);
 			}
 			else
 			{
-				h += (i == fMenuItems.CountItems() - 1 ? 0 : ETK_MENU_COLUMN_SPACING);
+				h += (i == fMenuItems.CountItems() - 1 ? 0 : BHAPI_MENU_COLUMN_SPACING);
 				rect.bottom += h;
 				rect.right = max_c(rect.right, w);
 			}
@@ -1458,17 +1458,17 @@ EMenu::GetPreferredSize(float *width, float *height)
 }
 
 
-class ESubmenuView : public EView {
+class ESubmenuView : public BView {
 public:
-	ESubmenuView(ERect frame);
+	ESubmenuView(BRect frame);
 	virtual ~ESubmenuView();
 
-	virtual void Draw(ERect updateRect);
+	virtual void Draw(BRect updateRect);
 };
 
 
-ESubmenuView::ESubmenuView(ERect frame)
-	: EView(frame, NULL, E_FOLLOW_ALL, E_WILL_DRAW)
+ESubmenuView::ESubmenuView(BRect frame)
+	: BView(frame, NULL, B_FOLLOW_ALL, B_WILL_DRAW)
 {
 }
 
@@ -1479,15 +1479,15 @@ ESubmenuView::~ESubmenuView()
 
 
 void
-ESubmenuView::Draw(ERect updateRect)
+ESubmenuView::Draw(BRect updateRect)
 {
 	if(!(Bounds().InsetByCopy(1, 1).Contains(updateRect)))
 	{
-		SetDrawingMode(E_OP_COPY);
+		SetDrawingMode(B_OP_COPY);
 		SetPenSize(1);
-		e_rgb_color borderColor = e_ui_color(E_MENU_BORDER_COLOR);
+		b_rgb_color borderColor = b_ui_color(B_MENU_BORDER_COLOR);
 
-		ESubmenuWindow *win = e_cast_as(Window(), ESubmenuWindow);
+		ESubmenuWindow *win = b_cast_as(Window(), ESubmenuWindow);
 		if(win->fMenu == NULL || win->fMenu->IsEnabled() == false) borderColor.mix(0, 0, 0, 20);
 
 		SetHighColor(borderColor);
@@ -1496,8 +1496,8 @@ ESubmenuView::Draw(ERect updateRect)
 }
 
 
-ESubmenuWindow::ESubmenuWindow(EPoint where, EMenu *menu)
-	: EWindow(ERect(0, 0, 1, 1), NULL, E_NO_BORDER_WINDOW_LOOK, E_FLOATING_APP_WINDOW_FEEL, E_AVOID_FOCUS), fMenu(NULL)
+ESubmenuWindow::ESubmenuWindow(BPoint where, BMenu *menu)
+	: BWindow(BRect(0, 0, 1, 1), NULL, B_NO_BORDER_WINDOW_LOOK, B_FLOATING_APP_WINDOW_FEEL, B_AVOID_FOCUS), fMenu(NULL)
 {
 	Lock();
 	if(!(menu == NULL || menu->Supermenu() == NULL || menu->Supermenu()->Window() == NULL))
@@ -1512,14 +1512,14 @@ ESubmenuWindow::ESubmenuWindow(EPoint where, EMenu *menu)
 
 			fMenu = menu;
 
-			euint32 oldResizingMode = fMenu->ResizingMode();
-			fMenu->SetResizingMode(E_FOLLOW_NONE);
+			b_uint32 oldResizingMode = fMenu->ResizingMode();
+			fMenu->SetResizingMode(B_FOLLOW_NONE);
 			fMenu->ResizeToPreferred();
-			fMenu->MoveTo(EPoint(2, 2));
+			fMenu->MoveTo(BPoint(2, 2));
 			ResizeTo(fMenu->Frame().Width() + 4, fMenu->Frame().Height() + 4);
 			MoveTo(where);
 
-			e_rgb_color bkColor = e_ui_color(E_MENU_BACKGROUND_COLOR);
+			b_rgb_color bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
 			if(fMenu->IsEnabled() == false) bkColor.mix(0, 0, 0, 20);
 			SetBackgroundColor(bkColor);
 
@@ -1542,29 +1542,29 @@ ESubmenuWindow::IsDependsOnOthersWhenQuitRequested() const
 
 
 void
-ESubmenuWindow::DispatchMessage(EMessage *msg, EHandler *target)
+ESubmenuWindow::DispatchMessage(BMessage *msg, BHandler *target)
 {
 	if(target == this && msg->what == _MENU_EVENT_)
 	{
 		if(fMenu)
 		{
-			EPoint where;
-			ERect frame;
+			BPoint where;
+			BRect frame;
 			if(!(msg->FindRect("frame", &frame) == false || frame.IsValid() == false))
 				ResizeTo(frame.Width() + 4, frame.Height() + 4);
 			if(fMenu->GetPopUpWhere(&where)) MoveTo(where);
-			else PostMessage(E_QUIT_REQUESTED);
+			else PostMessage(B_QUIT_REQUESTED);
 		}
 
 		return;
 	}
 
-	EWindow::DispatchMessage(msg, target);
+	BWindow::DispatchMessage(msg, target);
 }
 
 
 void
-ESubmenuWindow::FrameMoved(EPoint new_position)
+ESubmenuWindow::FrameMoved(BPoint new_position)
 {
 	if(IsHidden() || fMenu == NULL || fMenu->Supermenu() == NULL || fMenu->Supermenu()->Window() == NULL) return;
 	fMenu->Supermenu()->Window()->SendBehind(this);
@@ -1576,7 +1576,7 @@ ESubmenuWindow::QuitRequested()
 {
 	if(!(fMenu == NULL || fMenu->Window() != this))
 	{
-		EMenu *menu = fMenu;
+		BMenu *menu = fMenu;
 
 		Hide();
 		fMenu = NULL;
@@ -1589,7 +1589,7 @@ ESubmenuWindow::QuitRequested()
 
 
 bool
-EMenu::PopUp(EPoint where, bool selectFirstItem)
+BMenu::PopUp(BPoint where, bool selectFirstItem)
 {
 	if(Window() != NULL) return false;
 	if(Supermenu() == NULL || Supermenu()->Window() == NULL) return false;
@@ -1606,9 +1606,9 @@ EMenu::PopUp(EPoint where, bool selectFirstItem)
 	fSelectedIndex = -1;
 	if(selectFirstItem)
 	{
-		for(eint32 i = 0; i < fMenuItems.CountItems(); i++)
+		for(b_int32 i = 0; i < fMenuItems.CountItems(); i++)
 		{
-			EMenuItem *newItem = (EMenuItem*)fMenuItems.ItemAt(i);
+			BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(i);
 			fSelectedIndex = i;
 			if(newItem->SelectChanged()) break;
 			fSelectedIndex = -1;
@@ -1626,9 +1626,9 @@ EMenu::PopUp(EPoint where, bool selectFirstItem)
 
 
 void
-EMenu::ClosePopUp()
+BMenu::ClosePopUp()
 {
-	ESubmenuWindow *win = e_cast_as(Window(), ESubmenuWindow);
+	ESubmenuWindow *win = b_cast_as(Window(), ESubmenuWindow);
 	if(!(win == NULL || win->fMenu != this))
 	{
 		win->Hide();
@@ -1636,23 +1636,23 @@ EMenu::ClosePopUp()
 
 		RemoveSelf();
 
-		if(win->Thread() == etk_get_current_thread_id())
+		if(win->Thread() == bhapi_get_current_thread_id())
 		{
 			win->Lock();
 			win->Quit();
 		}
 		else
 		{
-			win->PostMessage(E_QUIT_REQUESTED);
+			win->PostMessage(B_QUIT_REQUESTED);
 		}
 	}
 }
 
 
-//#define TEMP_DEBUG(Exp)	{if((Exp)) ETK_DEBUG("[INTERFACE]: %s --- %s", __PRETTY_FUNCTION__, #Exp);}
+//#define TEMP_DEBUG(Exp)	{if((Exp)) BHAPI_DEBUG("[INTERFACE]: %s --- %s", __PRETTY_FUNCTION__, #Exp);}
 
 bool
-EMenu::GetPopUpWhere(EPoint *where)
+BMenu::GetPopUpWhere(BPoint *where)
 {
 	if(!where) return false;
 
@@ -1664,7 +1664,7 @@ EMenu::GetPopUpWhere(EPoint *where)
 //		{
 //			TEMP_DEBUG(Supermenu()->Window()->IsHidden());
 //			TEMP_DEBUG(Supermenu()->Window()->IsMinimized());
-//			TEMP_DEBUG(!e_is_instance_of(Supermenu()->Window(), ESubmenuWindow));
+//			TEMP_DEBUG(!b_is_instance_of(Supermenu()->Window(), ESubmenuWindow));
 //		}
 
 		return false;
@@ -1672,14 +1672,14 @@ EMenu::GetPopUpWhere(EPoint *where)
 
 	if(Supermenu()->Window()->IsActivate() == false)
 	{
-		if(!(e_is_instance_of(Supermenu()->Window(), ESubmenuWindow) || e_is_instance_of(Supermenu(), EPopUpMenu))) return false;
-		if(e_is_instance_of(Supermenu(), EPopUpMenu))
+		if(!(b_is_instance_of(Supermenu()->Window(), ESubmenuWindow) || b_is_instance_of(Supermenu(), BPopUpMenu))) return false;
+		if(b_is_instance_of(Supermenu(), BPopUpMenu))
 		{
-			if(e_cast_as(Supermenu(), EPopUpMenu)->IsPopUpByGo() == false) return false;
+			if(b_cast_as(Supermenu(), BPopUpMenu)->IsPopUpByGo() == false) return false;
 		}
 	}
 
-	ERect frame = Superitem()->Frame();
+	BRect frame = Superitem()->Frame();
 	frame.left -= Supermenu()->fMargins.left;
 	frame.top -= Supermenu()->fMargins.top;
 	frame.right += Supermenu()->fMargins.right;
@@ -1688,10 +1688,10 @@ EMenu::GetPopUpWhere(EPoint *where)
 
 	if(frame.IsValid() == false) return false;
 
-	if(Supermenu()->Layout() == E_ITEMS_IN_COLUMN)
-		*where = frame.RightTop() + EPoint(1, 0);
+	if(Supermenu()->Layout() == B_ITEMS_IN_COLUMN)
+		*where = frame.RightTop() + BPoint(1, 0);
 	else
-		*where = frame.LeftBottom() + EPoint(0, 1);
+		*where = frame.LeftBottom() + BPoint(0, 1);
 	Supermenu()->ConvertToScreen(where);
 
 	return true;
@@ -1699,23 +1699,23 @@ EMenu::GetPopUpWhere(EPoint *where)
 
 
 void
-EMenu::SetItemMargins(float left, float top, float right, float bottom)
+BMenu::SetItemMargins(float left, float top, float right, float bottom)
 {
 	if(left < 0) left = 0;
 	if(top < 0) top = 0;
 	if(right < 0) right = 0;
 	if(bottom < 0) bottom = 0;
 
-	if(fMargins != ERect(left, top, right, bottom))
+	if(fMargins != BRect(left, top, right, bottom))
 	{
-		fMargins = ERect(left, top, right, bottom);
+		fMargins = BRect(left, top, right, bottom);
 		Refresh();
 	}
 }
 
 
 void
-EMenu::GetItemMargins(float *left, float *top, float *right, float *bottom) const
+BMenu::GetItemMargins(float *left, float *top, float *right, float *bottom) const
 {
 	if(left) *left = fMargins.left;
 	if(top) *top = fMargins.top;
@@ -1724,16 +1724,16 @@ EMenu::GetItemMargins(float *left, float *top, float *right, float *bottom) cons
 }
 
 
-EMenuItem*
-EMenu::CurrentSelection() const
+BMenuItem*
+BMenu::CurrentSelection() const
 {
 	if(Window() == NULL) return NULL;
-	return (EMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
+	return (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
 }
 
 
 void
-EMenu::ItemInvoked(EMenuItem *item)
+BMenu::ItemInvoked(BMenuItem *item)
 {
 	if(fRadioMode == false || item == NULL || item->fEnabled == false) return;
 	item->SetMarked(true);
@@ -1741,19 +1741,19 @@ EMenu::ItemInvoked(EMenuItem *item)
 
 
 void
-EMenu::SelectItem(EMenuItem *item, bool showSubmenu, bool selectFirstItem)
+BMenu::SelectItem(BMenuItem *item, bool showSubmenu, bool selectFirstItem)
 {
 	if(!(item == NULL || item->fMenu == this)) return;
-	eint32 newIndex = (item ? fMenuItems.IndexOf((void*)item) : -1);
+	b_int32 newIndex = (item ? fMenuItems.IndexOf((void*)item) : -1);
 
 	if(fSelectedIndex != newIndex && newIndex >= 0)
 	{
-		EWindow *win = Window();
+		BWindow *win = Window();
 
-		EMenuItem *oldItem = (EMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
-		EMenuItem *newItem = (EMenuItem*)fMenuItems.ItemAt(newIndex);
+		BMenuItem *oldItem = (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
+		BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(newIndex);
 
-		eint32 oldSelectedIndex = fSelectedIndex;
+		b_int32 oldSelectedIndex = fSelectedIndex;
 		fSelectedIndex = newIndex;
 
 		if(win) win->DisableUpdates();
@@ -1769,7 +1769,7 @@ EMenu::SelectItem(EMenuItem *item, bool showSubmenu, bool selectFirstItem)
 	}
 	else
 	{
-		EMenuItem *oldItem = (EMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
+		BMenuItem *oldItem = (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
 		fSelectedIndex = -1;
 		if(oldItem) oldItem->SelectChanged();
 	}
@@ -1779,14 +1779,14 @@ EMenu::SelectItem(EMenuItem *item, bool showSubmenu, bool selectFirstItem)
 
 
 void
-EMenu::Hide()
+BMenu::Hide()
 {
-	EView::Hide();
+	BView::Hide();
 	if(IsHidden())
 	{
 		if(fSelectedIndex >= 0)
 		{
-			EMenuItem *item = (EMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
+			BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
 			fSelectedIndex = -1;
 			if(item) item->SelectChanged();
 		}

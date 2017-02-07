@@ -44298,81 +44298,33 @@ typedef unsigned int GROUP;
 # 41 "../src/net/./../net/NetAddress.h"
 # 1 "../src/net/./../net/./../support/Archivable.h" 1
 # 33 "../src/net/./../net/./../support/Archivable.h"
-# 1 "../src/net/./../net/./../support/SupportDefs.h" 1
-# 89 "../src/net/./../net/./../support/SupportDefs.h"
-# 1 "../src/net/./../net/./../support/Errors.h" 1
-# 32 "../src/net/./../net/./../support/Errors.h"
+# 1 "../src/net/./../net/./../support/./SupportDefs.h" 1
+# 34 "../src/net/./../net/./../support/./SupportDefs.h"
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
+# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
+# 35 "../src/net/./../net/./../support/./SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
+# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+extern "C" {
+# 24 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
+
+  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
+
+
+}
+# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+typedef struct {
+  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
+  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
+} max_align_t;
+# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
+# 36 "../src/net/./../net/./../support/./SupportDefs.h" 2
+# 96 "../src/net/./../net/./../support/./SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 33 "../src/net/./../net/./../support/Errors.h" 2
-# 41 "../src/net/./../net/./../support/Errors.h"
-enum {
- E_NO_MEMORY = (-2147483647 - 1),
- E_IO_ERROR,
- E_PERMISSION_DENIED,
- E_BAD_INDEX,
- E_BAD_TYPE,
- E_BAD_VALUE,
- E_MISMATCHED_VALUES,
- E_NAME_NOT_FOUND,
- E_NAME_IN_USE,
- E_TIMED_OUT,
- E_INTERRUPTED,
- E_WOULD_BLOCK,
- E_CANCELED,
- E_NO_INIT,
- E_BUSY,
- E_NOT_ALLOWED,
-
- E_ERROR = -1,
- E_OK = 1,
- E_NO_ERROR = 1
-};
-
-
-enum {
- E_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
- E_NO_MORE_SEMS,
-
- E_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
- E_NO_MORE_THREADS,
- E_BAD_THREAD_STATE,
- E_BAD_TEAM_ID,
- E_NO_MORE_TEAMS,
-
- E_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
- E_NO_MORE_PORTS,
-
- E_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
- E_BAD_ADDRESS,
- E_NOT_AN_EXECUTABLE,
- E_MISSING_LIBRARY,
- E_MISSING_SYMBOL,
-
- E_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
-};
-
-
-enum {
- E_BAD_REPLY = (-2147483647 - 1) + 0x2000,
- E_DUPLICATE_REPLY,
- E_MESSAGE_TO_SELF,
- E_BAD_HANDLER,
- E_ALREADY_RUNNING,
-};
-
-
-enum {
- E_FILE_ERROR = (-2147483647 - 1) + 0x3000,
- E_ENTRY_NOT_FOUND,
- E_LINK_LIMIT,
- E_NAME_TOO_LONG,
-};
-# 90 "../src/net/./../net/./../support/SupportDefs.h" 2
-
-
-
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 94 "../src/net/./../net/./../support/SupportDefs.h" 2
+# 97 "../src/net/./../net/./../support/./SupportDefs.h" 2
 
 
 
@@ -44419,97 +44371,76 @@ extern long double __attribute__((__cdecl__)) _chgsignl (long double);
 
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 100 "../src/net/./../net/./../support/SupportDefs.h" 2
-# 111 "../src/net/./../net/./../support/SupportDefs.h"
-typedef int eunichar32;
-typedef short eunichar;
+# 103 "../src/net/./../net/./../support/./SupportDefs.h" 2
+# 114 "../src/net/./../net/./../support/./SupportDefs.h"
+typedef int b_unichar32;
+typedef short b_unichar;
 
-typedef char eint8;
-typedef unsigned char euint8;
-typedef short eint16;
-typedef unsigned short euint16;
-typedef int eint32;
-typedef unsigned int euint32;
-typedef long long eint64;
-typedef unsigned long long euint64;
+typedef char b_int8;
+typedef unsigned char b_uint8;
+typedef short b_int16;
+typedef unsigned short b_uint16;
+typedef int b_int32;
+typedef unsigned int b_uint32;
+typedef long long b_int64;
+typedef unsigned long long b_uint64;
 
-typedef eint32 e_status_t;
-typedef euint32 e_type_code;
-typedef euint32 e_perform_code;
-typedef eint64 e_bigtime_t;
-typedef eint64 e_thread_id;
-typedef size_t e_address_t;
+typedef b_int32 b_status_t;
+typedef b_uint32 b_type_code;
+typedef b_uint32 b_perform_code;
+typedef b_int64 b_bigtime_t;
+typedef b_int64 b_thread_id;
+typedef size_t b_address_t;
 
 enum {
-    E_ANY_TYPE = 'ANYT',
- E_BOOL_TYPE = 'BOOL',
- E_CHAR_TYPE = 'CHAR',
- E_DOUBLE_TYPE = 'DBLE',
- E_FLOAT_TYPE = 'FLOT',
- E_INT64_TYPE = 'LLNG',
- E_INT32_TYPE = 'LONG',
- E_INT16_TYPE = 'SHRT',
- E_INT8_TYPE = 'BYTE',
- E_MESSAGE_TYPE = 'MSGG',
- E_MESSENGER_TYPE = 'MSNG',
- E_POINTER_TYPE = 'PNTR',
- E_SIZE_T_TYPE = 'SIZT',
- E_SSIZE_T_TYPE = 'SSZT',
- E_STRING_TYPE = 'CSTR',
- E_UINT64_TYPE = 'ULLG',
- E_UINT32_TYPE = 'ULNG',
- E_UINT16_TYPE = 'USHT',
- E_UINT8_TYPE = 'UBYT',
- E_POINT_TYPE = 'SPNT',
-    E_RECT_TYPE = 'RECT',
-    E_MIME_TYPE = 'MIME',
- E_UNKNOWN_TYPE = 'UNKN'
+    B_ANY_TYPE = 'ANYT',
+    B_BOOL_TYPE = 'BOOL',
+    B_CHAR_TYPE = 'CHAR',
+    B_DOUBLE_TYPE = 'DBLE',
+    B_FLOAT_TYPE = 'FLOT',
+    B_INT64_TYPE = 'LLNG',
+    B_INT32_TYPE = 'LONG',
+    B_INT16_TYPE = 'SHRT',
+    B_INT8_TYPE = 'BYTE',
+    B_MESSAGE_TYPE = 'MSGG',
+    B_MESSENGER_TYPE = 'MSNG',
+    B_POINTER_TYPE = 'PNTR',
+    B_SIZE_T_TYPE = 'SIZT',
+    B_SSIZE_T_TYPE = 'SSZT',
+    B_STRING_TYPE = 'CSTR',
+    B_UINT64_TYPE = 'ULLG',
+    B_UINT32_TYPE = 'ULNG',
+    B_UINT16_TYPE = 'USHT',
+    B_UINT8_TYPE = 'UBYT',
+    B_POINT_TYPE = 'SPNT',
+    B_RECT_TYPE = 'RECT',
+    B_MIME_TYPE = 'MIME',
+    B_UNKNOWN_TYPE = 'UNKN'
 };
-# 252 "../src/net/./../net/./../support/SupportDefs.h"
+# 255 "../src/net/./../net/./../support/./SupportDefs.h"
 extern "C" {
 
 
-extern __attribute__((dllexport)) const euint8 etk_major_version;
-extern __attribute__((dllexport)) const euint8 etk_minor_version;
-extern __attribute__((dllexport)) const euint8 etk_micro_version;
-extern __attribute__((dllexport)) const euint8 etk_interface_age;
-extern __attribute__((dllexport)) const euint16 etk_binary_age;
+extern __attribute__((dllexport)) const b_uint8 bhapi_major_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_minor_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_micro_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_interface_age;
+extern __attribute__((dllexport)) const b_uint16 bhapi_binary_age;
 
 
 }
-# 293 "../src/net/./../net/./../support/SupportDefs.h"
+# 296 "../src/net/./../net/./../support/./SupportDefs.h"
 enum {
- E_SEEK_SET = 0,
- E_SEEK_CUR,
- E_SEEK_END,
+    B_SEEK_SET = 0,
+    B_SEEK_CUR,
+    B_SEEK_END,
 };
 
 
-# 1 "../src/net/./../net/./../support/./../kernel/Debug.h" 1
-# 33 "../src/net/./../net/./../support/./../kernel/Debug.h"
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
-# 34 "../src/net/./../net/./../support/./../kernel/Debug.h" 2
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
-# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-extern "C" {
-# 24 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
-
-  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
-
-
-}
-# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-typedef struct {
-  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
-  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
-} max_align_t;
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
-# 35 "../src/net/./../net/./../support/./../kernel/Debug.h" 2
-
+# 1 "../src/net/./../net/./../support/././../kernel/Debug.h" 1
+# 33 "../src/net/./../net/./../support/././../kernel/Debug.h"
+# 1 "../src/net/./../net/./../support/././../kernel/./../support/SupportDefs.h" 1
+# 34 "../src/net/./../net/./../support/././../kernel/Debug.h" 2
 
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/new" 1 3
@@ -45016,38 +44947,103 @@ inline void operator delete[](void*, void*) noexcept { }
 }
 
 #pragma GCC visibility pop
-# 39 "../src/net/./../net/./../support/./../kernel/Debug.h" 2
-
-
-# 1 "../src/net/./../net/./../support/./../kernel/./../support/SupportDefs.h" 1
-# 42 "../src/net/./../net/./../support/./../kernel/Debug.h" 2
-# 57 "../src/net/./../net/./../support/./../kernel/Debug.h"
+# 37 "../src/net/./../net/./../support/././../kernel/Debug.h" 2
+# 54 "../src/net/./../net/./../support/././../kernel/Debug.h"
 extern "C" {
 
 
-typedef enum etk_debug_level {
+typedef enum bhapi_debug_level {
  DEBUG_NORMAL,
  DEBUG_OUTPUT,
  DEBUG_WARNING,
  DEBUG_ERROR
-} etk_debug_level;
+} bhapi_debug_level;
 
-__attribute__((dllexport)) void etk_debug_log(etk_debug_level level, const char *format, va_list ap);
-# 83 "../src/net/./../net/./../support/./../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_DEBUG(const char *format, ...);
-
-
-
-__attribute__((dllexport)) void ETK_OUTPUT(const char *format, ...);
-# 103 "../src/net/./../net/./../support/./../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_WARNING(const char *format, ...);
+__attribute__((dllexport)) void bhapi_debug_log(bhapi_debug_level level, const char *format, va_list ap);
+# 80 "../src/net/./../net/./../support/././../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...);
 
 
 
-__attribute__((dllexport)) void ETK_ERROR(const char *format, ...);
-# 121 "../src/net/./../net/./../support/./../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...);
+# 100 "../src/net/./../net/./../support/././../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...);
+
+
+
+__attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...);
+# 118 "../src/net/./../net/./../support/././../kernel/Debug.h"
 }
-# 301 "../src/net/./../net/./../support/SupportDefs.h" 2
+# 304 "../src/net/./../net/./../support/./SupportDefs.h" 2
+
+# 1 "../src/net/./../net/./../support/./Errors.h" 1
+# 32 "../src/net/./../net/./../support/./Errors.h"
+# 1 "../src/net/./../net/./../support/./SupportDefs.h" 1
+# 33 "../src/net/./../net/./../support/./Errors.h" 2
+# 41 "../src/net/./../net/./../support/./Errors.h"
+enum {
+    B_NO_MEMORY = (-2147483647 - 1),
+    B_IO_ERROR,
+    B_PERMISSION_DENIED,
+    B_BAD_INDEX,
+    B_BAD_TYPE,
+    B_BAD_VALUE,
+    B_MISMATCHED_VALUES,
+    B_NAME_NOT_FOUND,
+    B_NAME_IN_USE,
+    B_TIMED_OUT,
+    B_INTERRUPTED,
+    B_WOULD_BLOCK,
+    B_CANCELED,
+    B_NO_INIT,
+    B_BUSY,
+    B_NOT_ALLOWED,
+
+    B_ERROR = -1,
+    B_OK = 1,
+    B_NO_ERROR = 1
+};
+
+
+enum {
+    B_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
+    B_NO_MORE_SEMS,
+
+    B_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
+    B_NO_MORE_THREADS,
+    B_BAD_THREAD_STATE,
+    B_BAD_TEAM_ID,
+    B_NO_MORE_TEAMS,
+
+    B_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
+    B_NO_MORE_PORTS,
+
+    B_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
+    B_BAD_ADDRESS,
+    B_NOT_AN_EXECUTABLE,
+    B_MISSING_LIBRARY,
+    B_MISSING_SYMBOL,
+
+    B_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
+};
+
+
+enum {
+    B_BAD_REPLY = (-2147483647 - 1) + 0x2000,
+    B_DUPLICATE_REPLY,
+    B_MESSAGE_TO_SELF,
+    B_BAD_HANDLER,
+    B_ALREADY_RUNNING,
+};
+
+
+enum {
+    B_FILE_ERROR = (-2147483647 - 1) + 0x3000,
+    B_ENTRY_NOT_FOUND,
+    B_LINK_LIMIT,
+    B_NAME_TOO_LONG,
+};
+# 306 "../src/net/./../net/./../support/./SupportDefs.h" 2
 # 34 "../src/net/./../net/./../support/Archivable.h" 2
 # 1 "../src/net/./../net/./../support/./../app/Message.h" 1
 # 34 "../src/net/./../net/./../support/./../app/Message.h"
@@ -45059,14 +45055,14 @@ __attribute__((dllexport)) void ETK_ERROR(const char *format, ...);
 # 1 "../src/net/./../net/./../support/./../app/./../kernel/./../support/SupportDefs.h" 1
 # 34 "../src/net/./../net/./../support/./../app/./../kernel/OS.h" 2
 
-typedef e_status_t (*e_thread_func)(void*);
+typedef b_status_t (*b_thread_func)(void*);
 # 55 "../src/net/./../net/./../support/./../app/./../kernel/OS.h"
 enum {
- E_CAN_INTERRUPT = 1,
- E_DO_NOT_RESCHEDULE = 2,
- E_TIMEOUT = 8,
- E_RELATIVE_TIMEOUT = 8,
- E_ABSOLUTE_TIMEOUT = 16
+    B_CAN_INTERRUPT = 1,
+    B_DO_NOT_RESCHEDULE = 2,
+    B_TIMEOUT = 8,
+    B_RELATIVE_TIMEOUT = 8,
+    B_ABSOLUTE_TIMEOUT = 16
 };
 
 
@@ -45080,200 +45076,196 @@ extern "C" {
 
 
 
-__attribute__((dllexport)) euint32 etk_real_time_clock(void);
-__attribute__((dllexport)) e_bigtime_t etk_real_time_clock_usecs(void);
-__attribute__((dllexport)) e_bigtime_t etk_system_boot_time(void);
-__attribute__((dllexport)) e_bigtime_t etk_system_time(void);
+__attribute__((dllexport)) b_uint32 bhapi_real_time_clock(void);
+__attribute__((dllexport)) b_bigtime_t bhapi_real_time_clock_usecs(void);
+__attribute__((dllexport)) b_bigtime_t bhapi_system_boot_time(void);
+__attribute__((dllexport)) b_bigtime_t bhapi_system_time(void);
 
 
-typedef struct etk_area_info {
- char name[32 + 1];
+typedef struct bhapi_area_info {
+    char name[32 + 1];
  size_t size;
- euint32 protection;
+    b_uint32 protection;
  void *address;
  char domain[5];
-} etk_area_info;
+} bhapi_area_info;
 
 
 
 
 
-typedef enum etk_area_access {
- ETK_AREA_ACCESS_OWNER = 0,
- ETK_AREA_ACCESS_GROUP_READ = 1,
- ETK_AREA_ACCESS_GROUP_WRITE = 1 << 1,
- ETK_AREA_ACCESS_OTHERS_READ = 1 << 2,
- ETK_AREA_ACCESS_OTHERS_WRITE = 1 << 3,
- ETK_AREA_ACCESS_ALL = 0xFF
-} etk_area_access;
+typedef enum bhapi_area_access {
+ BHAPI_AREA_ACCESS_OWNER = 0,
+ BHAPI_AREA_ACCESS_GROUP_READ = 1,
+ BHAPI_AREA_ACCESS_GROUP_WRITE = 1 << 1,
+ BHAPI_AREA_ACCESS_OTHERS_READ = 1 << 2,
+ BHAPI_AREA_ACCESS_OTHERS_WRITE = 1 << 3,
+ BHAPI_AREA_ACCESS_ALL = 0xFF
+} bhapi_area_access;
 
 
-__attribute__((dllexport)) void* etk_create_area(const char *name, void **start_addr, size_t size, euint32 protection,
-            const char *domain, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
-
-
-
-
-__attribute__((dllexport)) void* etk_clone_area(const char *name, void **dest_addr, euint32 protection, const char *domain);
-__attribute__((dllexport)) void* etk_clone_area_by_source(void *source_area, void **dest_addr, euint32 protection);
-__attribute__((dllexport)) e_status_t etk_get_area_info(void *area, etk_area_info *info);
-__attribute__((dllexport)) e_status_t etk_delete_area(void *area);
-__attribute__((dllexport)) e_status_t etk_delete_area_etc(void *area, bool no_clone);
+__attribute__((dllexport)) void* bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 protection,
+            const char *domain, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 
 
 
 
-
-__attribute__((dllexport)) e_status_t etk_resize_area(void *area, void **start_addr, size_t new_size);
-__attribute__((dllexport)) e_status_t etk_set_area_protection(void *area, euint32 new_protection);
-
-
-__attribute__((dllexport)) void* etk_create_locker(void);
-__attribute__((dllexport)) void* etk_clone_locker(void* locker);
-__attribute__((dllexport)) e_status_t etk_delete_locker(void* locker);
-
-
-
-
-__attribute__((dllexport)) e_status_t etk_close_locker(void* locker);
-
-__attribute__((dllexport)) e_status_t etk_lock_locker(void *locker);
-__attribute__((dllexport)) e_status_t etk_lock_locker_etc(void *locker, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) e_status_t etk_unlock_locker(void *locker);
+__attribute__((dllexport)) void* bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char *domain);
+__attribute__((dllexport)) void* bhapi_clone_area_by_source(void *source_area, void **dest_addr, b_uint32 protection);
+__attribute__((dllexport)) b_status_t bhapi_get_area_info(void *area, bhapi_area_info *info);
+__attribute__((dllexport)) b_status_t bhapi_delete_area(void *area);
+__attribute__((dllexport)) b_status_t bhapi_delete_area_etc(void *area, bool no_clone);
 
 
 
 
 
-
-__attribute__((dllexport)) eint64 etk_count_locker_locks(void *locker);
-
-
+__attribute__((dllexport)) b_status_t bhapi_resize_area(void *area, void **start_addr, size_t new_size);
+__attribute__((dllexport)) b_status_t bhapi_set_area_protection(void *area, b_uint32 new_protection);
 
 
-__attribute__((dllexport)) void* etk_create_simple_locker(void);
-__attribute__((dllexport)) e_status_t etk_delete_simple_locker(void* slocker);
-__attribute__((dllexport)) bool etk_lock_simple_locker(void *slocker);
-__attribute__((dllexport)) void etk_unlock_simple_locker(void *slocker);
+__attribute__((dllexport)) void* bhapi_create_locker(void);
+__attribute__((dllexport)) void* bhapi_clone_locker(void* locker);
+__attribute__((dllexport)) b_status_t bhapi_delete_locker(void* locker);
+
+
+
+
+__attribute__((dllexport)) b_status_t bhapi_close_locker(void* locker);
+
+__attribute__((dllexport)) b_status_t bhapi_lock_locker(void *locker);
+__attribute__((dllexport)) b_status_t bhapi_lock_locker_etc(void *locker, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_unlock_locker(void *locker);
+
+
+
+
+
+
+__attribute__((dllexport)) b_int64 bhapi_count_locker_locks(void *locker);
+
+
+
+
+__attribute__((dllexport)) void* bhapi_create_simple_locker(void);
+__attribute__((dllexport)) b_status_t bhapi_delete_simple_locker(void* slocker);
+__attribute__((dllexport)) bool bhapi_lock_simple_locker(void *slocker);
+__attribute__((dllexport)) void bhapi_unlock_simple_locker(void *slocker);
 # 125 "../src/net/./../net/./../support/./../app/./../kernel/Kernel.h"
-typedef struct etk_sem_info {
- char name[32 + 1];
- eint64 latest_holder_team;
- eint64 latest_holder_thread;
- eint64 count;
+typedef struct bhapi_sem_info {
+    char name[32 + 1];
+    b_int64 latest_holder_team;
+    b_int64 latest_holder_thread;
+    b_int64 count;
  bool closed;
-} etk_sem_info;
+} bhapi_sem_info;
 
 
-__attribute__((dllexport)) void* etk_create_sem(eint64 count, const char *name, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
-
-
-
-__attribute__((dllexport)) void* etk_clone_sem(const char *name);
-__attribute__((dllexport)) void* etk_clone_sem_by_source(void *sem);
-__attribute__((dllexport)) e_status_t etk_get_sem_info(void *sem, etk_sem_info *info);
-__attribute__((dllexport)) e_status_t etk_delete_sem(void *sem);
-__attribute__((dllexport)) e_status_t etk_delete_sem_etc(void *sem, bool no_clone);
+__attribute__((dllexport)) void* bhapi_create_sem(b_int64 count, const char *name, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 
 
 
-
-
-__attribute__((dllexport)) e_status_t etk_close_sem(void* sem);
-
-__attribute__((dllexport)) e_status_t etk_acquire_sem(void *sem);
-__attribute__((dllexport)) e_status_t etk_release_sem(void *sem);
-__attribute__((dllexport)) e_status_t etk_acquire_sem_etc(void *sem, eint64 count, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) e_status_t etk_release_sem_etc(void *sem, eint64 count, euint32 flags);
-__attribute__((dllexport)) e_status_t etk_get_sem_count(void *sem, eint64 *count);
+__attribute__((dllexport)) void* bhapi_clone_sem(const char *name);
+__attribute__((dllexport)) void* bhapi_clone_sem_by_source(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_get_sem_info(void *sem, bhapi_sem_info *info);
+__attribute__((dllexport)) b_status_t bhapi_delete_sem(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_delete_sem_etc(void *sem, bool no_clone);
 
 
 
 
-__attribute__((dllexport)) e_status_t etk_snooze(e_bigtime_t microseconds);
-__attribute__((dllexport)) e_status_t etk_snooze_until(e_bigtime_t time, int timebase);
 
-__attribute__((dllexport)) eint64 etk_get_current_team_id(void);
-__attribute__((dllexport)) eint64 etk_get_current_thread_id(void);
+__attribute__((dllexport)) b_status_t bhapi_close_sem(void* sem);
 
-__attribute__((dllexport)) void* etk_create_thread_by_current_thread(void);
-__attribute__((dllexport)) void* etk_create_thread(e_thread_func threadFunction,
-       eint32 priority,
+__attribute__((dllexport)) b_status_t bhapi_acquire_sem(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_release_sem(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_acquire_sem_etc(void *sem, b_int64 count, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_release_sem_etc(void *sem, b_int64 count, b_uint32 flags);
+__attribute__((dllexport)) b_status_t bhapi_get_sem_count(void *sem, b_int64 *count);
+
+
+
+
+__attribute__((dllexport)) b_status_t bhapi_snooze(b_bigtime_t microseconds);
+__attribute__((dllexport)) b_status_t bhapi_snooze_until(b_bigtime_t time, int timebase);
+
+__attribute__((dllexport)) b_int64 bhapi_get_current_team_id(void);
+__attribute__((dllexport)) b_int64 bhapi_get_current_thread_id(void);
+
+__attribute__((dllexport)) void* bhapi_create_thread_by_current_thread(void);
+__attribute__((dllexport)) void* bhapi_create_thread(b_thread_func threadFunction,
+                      b_int32 priority,
        void *arg,
-       eint64 *threadId);
-__attribute__((dllexport)) void* etk_open_thread(eint64 threadId);
-__attribute__((dllexport)) e_status_t etk_delete_thread(void *thread);
+                      b_int64 *threadId);
+__attribute__((dllexport)) void* bhapi_open_thread(b_int64 threadId);
+__attribute__((dllexport)) b_status_t bhapi_delete_thread(void *thread);
 
 
 
 
 
-__attribute__((dllexport)) e_status_t etk_suspend_thread(void *thread);
-__attribute__((dllexport)) e_status_t etk_resume_thread(void *thread);
+__attribute__((dllexport)) b_status_t bhapi_suspend_thread(void *thread);
+__attribute__((dllexport)) b_status_t bhapi_resume_thread(void *thread);
 
-__attribute__((dllexport)) e_status_t etk_on_exit_thread(void (*callback)(void *), void *user_data);
+__attribute__((dllexport)) b_status_t bhapi_on_exit_thread(void (*callback)(void *), void *user_data);
 
-__attribute__((dllexport)) eint64 etk_get_thread_id(void *thread);
+__attribute__((dllexport)) b_int64 bhapi_get_thread_id(void *thread);
 
 enum {
- ETK_THREAD_INVALID = 0,
- ETK_THREAD_READY,
- ETK_THREAD_RUNNING,
- ETK_THREAD_EXITED,
- ETK_THREAD_SUSPENDED,
+ BHAPI_THREAD_INVALID = 0,
+ BHAPI_THREAD_READY,
+ BHAPI_THREAD_RUNNING,
+ BHAPI_THREAD_EXITED,
+ BHAPI_THREAD_SUSPENDED,
 };
-__attribute__((dllexport)) euint32 etk_get_thread_run_state(void *thread);
+__attribute__((dllexport)) b_uint32 bhapi_get_thread_run_state(void *thread);
 
-__attribute__((dllexport)) e_status_t etk_set_thread_priority(void *thread, eint32 new_priority);
-__attribute__((dllexport)) eint32 etk_get_thread_priority(void *thread);
-__attribute__((dllexport)) void etk_exit_thread(e_status_t status);
-__attribute__((dllexport)) e_status_t etk_wait_for_thread(void *thread, e_status_t *thread_return_value);
-__attribute__((dllexport)) e_status_t etk_wait_for_thread_etc(void *thread, e_status_t *thread_return_value, euint32 flags, e_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_set_thread_priority(void *thread, b_int32 new_priority);
+__attribute__((dllexport)) b_int32 bhapi_get_thread_priority(void *thread);
+__attribute__((dllexport)) void bhapi_exit_thread(b_status_t status);
+__attribute__((dllexport)) b_status_t bhapi_wait_for_thread(void *thread, b_status_t *thread_return_value);
+__attribute__((dllexport)) b_status_t bhapi_wait_for_thread_etc(void *thread, b_status_t *thread_return_value, b_uint32 flags, b_bigtime_t timeout);
 # 206 "../src/net/./../net/./../support/./../app/./../kernel/Kernel.h"
-__attribute__((dllexport)) void* etk_create_port(eint32 queue_length, const char *name, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
+__attribute__((dllexport)) void* bhapi_create_port(b_int32 queue_length, const char *name, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 
 
 
-__attribute__((dllexport)) void* etk_open_port(const char *name);
-__attribute__((dllexport)) void* etk_open_port_by_source(void *port);
-__attribute__((dllexport)) e_status_t etk_delete_port(void *port);
-
-
-
-
-
-__attribute__((dllexport)) e_status_t etk_close_port(void *port);
-
-__attribute__((dllexport)) e_status_t etk_write_port(void *port, eint32 code, const void *buf, size_t buf_size);
-__attribute__((dllexport)) ssize_t etk_port_buffer_size(void *port);
-__attribute__((dllexport)) e_status_t etk_read_port(void *port, eint32 *code, void *buf, size_t buf_size);
-
-__attribute__((dllexport)) e_status_t etk_write_port_etc(void *port, eint32 code, const void *buf, size_t buf_size, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) ssize_t etk_port_buffer_size_etc(void *port, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) e_status_t etk_read_port_etc(void *port, eint32 *code, void *buf, size_t buf_size, euint32 flags, e_bigtime_t timeout);
-
-__attribute__((dllexport)) eint32 etk_port_count(void *port);
+__attribute__((dllexport)) void* bhapi_open_port(const char *name);
+__attribute__((dllexport)) void* bhapi_open_port_by_source(void *port);
+__attribute__((dllexport)) b_status_t bhapi_delete_port(void *port);
 
 
 
 
-__attribute__((dllexport)) void* etk_load_addon(const char* path);
-__attribute__((dllexport)) e_status_t etk_unload_addon(void *image);
-__attribute__((dllexport)) e_status_t etk_get_image_symbol(void *image, const char *name, void **ptr);
+
+__attribute__((dllexport)) b_status_t bhapi_close_port(void *port);
+
+__attribute__((dllexport)) b_status_t bhapi_write_port(void *port, b_int32 code, const void *buf, size_t buf_size);
+__attribute__((dllexport)) ssize_t bhapi_port_buffer_size(void *port);
+__attribute__((dllexport)) b_status_t bhapi_read_port(void *port, b_int32 *code, void *buf, size_t buf_size);
+
+__attribute__((dllexport)) b_status_t bhapi_write_port_etc(void *port, b_int32 code, const void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) ssize_t bhapi_port_buffer_size_etc(void *port, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_read_port_etc(void *port, b_int32 *code, void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t timeout);
+
+__attribute__((dllexport)) b_int32 bhapi_port_count(void *port);
+
+
+
+
+__attribute__((dllexport)) void* bhapi_load_addon(const char* path);
+__attribute__((dllexport)) b_status_t bhapi_unload_addon(void *image);
+__attribute__((dllexport)) b_status_t bhapi_get_image_symbol(void *image, const char *name, void **ptr);
 
 
 
 }
 # 65 "../src/net/./../net/./../support/./../app/./../kernel/OS.h" 2
 # 37 "../src/net/./../net/./../support/./../app/Message.h" 2
-# 1 "../src/net/./../net/./../support/./../app/./../support/String.h" 1
-# 34 "../src/net/./../net/./../support/./../app/./../support/String.h"
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
-# 35 "../src/net/./../net/./../support/./../app/./../support/String.h" 2
+# 1 "../src/net/./../net/./../support/./../app/./../support/StringMe.h" 1
+# 34 "../src/net/./../net/./../support/./../app/./../support/StringMe.h"
 # 1 "../src/net/./../net/./../support/./../app/./../support/SupportDefs.h" 1
-# 36 "../src/net/./../net/./../support/./../app/./../support/String.h" 2
+# 35 "../src/net/./../net/./../support/./../app/./../support/StringMe.h" 2
 
 
 extern "C" {
@@ -45281,135 +45273,136 @@ extern "C" {
 
 
 
-__attribute__((dllexport)) char* e_strdup(const char *src);
-__attribute__((dllexport)) char* e_strndup(const char *src, eint32 length);
-__attribute__((dllexport)) char* e_strdup_vprintf(const char *format, va_list ap);
-__attribute__((dllexport)) char* e_strdup_printf(const char *format, ...);
+__attribute__((dllexport)) char* b_strdup(const char *src);
+__attribute__((dllexport)) char* b_strndup(const char *src, b_int32 length);
+__attribute__((dllexport)) char* b_strdup_vprintf(const char *format, va_list ap);
+__attribute__((dllexport)) char* b_strdup_printf(const char *format, ...);
 
-__attribute__((dllexport)) eunichar* e_utf8_convert_to_unicode(const char *str, eint32 length);
-__attribute__((dllexport)) eunichar32* e_utf8_convert_to_utf32(const char *str, eint32 length);
-__attribute__((dllexport)) char* e_unicode_convert_to_utf8(const eunichar *str, eint32 ulength);
-__attribute__((dllexport)) eunichar32* e_unicode_convert_to_utf32(const eunichar *str, eint32 ulength);
-__attribute__((dllexport)) char* e_utf32_convert_to_utf8(const eunichar32 *str, eint32 ulength);
-__attribute__((dllexport)) eunichar* e_utf32_convert_to_unicode(const eunichar32 *str, eint32 ulength);
+__attribute__((dllexport)) b_unichar* b_utf8_convert_to_unicode(const char *str, b_int32 length);
+__attribute__((dllexport)) b_unichar32* b_utf8_convert_to_utf32(const char *str, b_int32 length);
+__attribute__((dllexport)) char* b_unicode_convert_to_utf8(const b_unichar *str, b_int32 ulength);
+__attribute__((dllexport)) b_unichar32* b_unicode_convert_to_utf32(const b_unichar *str, b_int32 ulength);
+__attribute__((dllexport)) char* b_utf32_convert_to_utf8(const b_unichar32 *str, b_int32 ulength);
+__attribute__((dllexport)) b_unichar* b_utf32_convert_to_unicode(const b_unichar32 *str, b_int32 ulength);
 
-__attribute__((dllexport)) bool e_utf8_is_token(const char *str);
-__attribute__((dllexport)) eint32 e_utf8_strlen(const char *str);
-__attribute__((dllexport)) eint32 e_utf8_strlen_etc(const char *str, eint32 nbytes);
-__attribute__((dllexport)) eint32 e_utf8_strlen_fast(const char *str, eint32 nbytes);
-__attribute__((dllexport)) const char* e_utf8_at(const char *str, eint32 index, euint8 *nbytes);
-__attribute__((dllexport)) const char* e_utf8_next(const char *str, euint8 *length);
+__attribute__((dllexport)) bool b_utf8_is_token(const char *str);
+__attribute__((dllexport)) b_int32 b_utf8_strlen(const char *str);
+__attribute__((dllexport)) b_int32 b_utf8_strlen_etc(const char *str, b_int32 nbytes);
+__attribute__((dllexport)) b_int32 b_utf8_strlen_fast(const char *str, b_int32 nbytes);
+__attribute__((dllexport)) const char* b_utf8_at(const char *str, b_int32 index, b_uint8 *nbytes);
+__attribute__((dllexport)) const char* b_utf8_next(const char *str, b_uint8 *length);
 
-__attribute__((dllexport)) eint32 e_unicode_strlen(const eunichar *ustr);
-__attribute__((dllexport)) eint32 e_unicode_strlen_etc(const eunichar *ustr, eint32 nchars, bool utf16_style);
-__attribute__((dllexport)) const eunichar* e_unicode_at(const eunichar* ustr, eint32 index, bool *utf16);
-__attribute__((dllexport)) const eunichar* e_unicode_next(const eunichar* ustr, bool *utf16);
+__attribute__((dllexport)) b_int32 b_unicode_strlen(const b_unichar *ustr);
+__attribute__((dllexport)) b_int32 b_unicode_strlen_etc(const b_unichar *ustr, b_int32 nchars, bool utf16_style);
+__attribute__((dllexport)) const b_unichar* b_unicode_at(const b_unichar* ustr, b_int32 index, bool *utf16);
+__attribute__((dllexport)) const b_unichar* b_unicode_next(const b_unichar* ustr, bool *utf16);
 
-__attribute__((dllexport)) eint32 e_utf32_strlen(const eunichar32 *ustr);
-__attribute__((dllexport)) eint32 e_utf32_strlen_etc(const eunichar32 *ustr, eint32 nchars);
-__attribute__((dllexport)) const eunichar32* e_utf32_at(const eunichar32* ustr, eint32 index);
-__attribute__((dllexport)) const eunichar32* e_utf32_next(const eunichar32* ustr);
+__attribute__((dllexport)) b_int32 b_utf32_strlen(const b_unichar32 *ustr);
+__attribute__((dllexport)) b_int32 b_utf32_strlen_etc(const b_unichar32 *ustr, b_int32 nchars);
+__attribute__((dllexport)) const b_unichar32* b_utf32_at(const b_unichar32* ustr, b_int32 index);
+__attribute__((dllexport)) const b_unichar32* b_utf32_next(const b_unichar32* ustr);
 
 
 }
 
 
-__attribute__((dllexport)) char *EStrdup(const char* src, eint32 length = -1);
+
+__attribute__((dllexport)) char *b_strdup_dirty(const char* src, b_int32 length = -1);
 
 
-class EStringArray;
+class BStringArray;
 
 
-class __attribute__((dllexport)) EString {
+class __attribute__((dllexport)) BString {
 public:
- EString();
- EString(const char *str);
- EString(const EString &str);
- EString(const char *str, eint32 maxLength);
- ~EString();
+    BString();
+    BString(const char *str);
+    BString(const BString &str);
+    BString(const char *str, b_int32 maxLength);
+    ~BString();
 
- const char *String() const;
+    const char *String() const;
 
- eint32 Length() const;
- eint32 CountChars() const;
+    b_int32 Length() const;
+    b_int32 CountChars() const;
 
- char operator[](eint32 index) const;
- char ByteAt(eint32 index) const;
- const char* CharAt(eint32 index, euint8 *length = __null) const;
+    char operator[](b_int32 index) const;
+    char ByteAt(b_int32 index) const;
+    const char* CharAt(b_int32 index, b_uint8 *length = __null) const;
 
- EString &operator=(const EString &str);
- EString &operator=(const char *str);
- EString &operator=(char c);
+    BString &operator=(const BString &str);
+    BString &operator=(const char *str);
+    BString &operator=(char c);
 
- EString &SetTo(const EString &str);
- EString &SetTo(const EString &str, eint32 length);
- EString &SetTo(const char *str);
- EString &SetTo(const char *str, eint32 length);
- EString &SetTo(char c, eint32 count);
+    BString &SetTo(const BString &str);
+    BString &SetTo(const BString &str, b_int32 length);
+    BString &SetTo(const char *str);
+    BString &SetTo(const char *str, b_int32 length);
+    BString &SetTo(char c, b_int32 count);
 
- EString &Adopt(EString &from);
- EString &Adopt(EString &from, eint32 length);
+    BString &Adopt(BString &from);
+    BString &Adopt(BString &from, b_int32 length);
 
- EString &CopyInto(EString &into, eint32 fromOffset, eint32 length) const;
- void CopyInto(char *into, size_t into_size, eint32 fromOffset, eint32 length) const;
+    BString &CopyInto(BString &into, b_int32 fromOffset, b_int32 length) const;
+    void CopyInto(char *into, size_t into_size, b_int32 fromOffset, b_int32 length) const;
 
- EString &MoveInto(EString &into, eint32 from, eint32 length);
- void MoveInto(char *into, size_t into_size, eint32 from, eint32 length);
+    BString &MoveInto(BString &into, b_int32 from, b_int32 length);
+    void MoveInto(char *into, size_t into_size, b_int32 from, b_int32 length);
 
  void MakeEmpty();
 
- EString &operator+=(const EString &str);
- EString &operator+=(const char *str);
- EString &operator+=(char c);
+    BString &operator+=(const BString &str);
+    BString &operator+=(const char *str);
+    BString &operator+=(char c);
 
- EString &Append(const EString &str);
- EString &Append(const EString &str, eint32 length);
- EString &Append(const char *str);
- EString &Append(const char *str, eint32 length);
- EString &Append(char c, eint32 count);
- EString &AppendFormat(const char *format, ...);
+    BString &Append(const BString &str);
+    BString &Append(const BString &str, b_int32 length);
+    BString &Append(const char *str);
+    BString &Append(const char *str, b_int32 length);
+    BString &Append(char c, b_int32 count);
+    BString &AppendFormat(const char *format, ...);
 
- EString &Prepend(const EString &str);
- EString &Prepend(const EString &str, eint32 length);
- EString &Prepend(const char *str);
- EString &Prepend(const char *str, eint32 length);
- EString &Prepend(char c, eint32 count);
- EString &PrependFormat(const char *format, ...);
+    BString &Prepend(const BString &str);
+    BString &Prepend(const BString &str, b_int32 length);
+    BString &Prepend(const char *str);
+    BString &Prepend(const char *str, b_int32 length);
+    BString &Prepend(char c, b_int32 count);
+    BString &PrependFormat(const char *format, ...);
 
- EString &Insert(const EString &str, eint32 pos);
- EString &Insert(const EString &str, eint32 length, eint32 pos);
- EString &Insert(const EString &str, eint32 fromOffset, eint32 length, eint32 pos);
- EString &Insert(const char *str, eint32 pos);
- EString &Insert(const char *str, eint32 length, eint32 pos);
- EString &Insert(const char *str, eint32 fromOffset, eint32 length, eint32 pos);
- EString &Insert(char c, eint32 count, eint32 pos);
+    BString &Insert(const BString &str, b_int32 pos);
+    BString &Insert(const BString &str, b_int32 length, b_int32 pos);
+    BString &Insert(const BString &str, b_int32 fromOffset, b_int32 length, b_int32 pos);
+    BString &Insert(const char *str, b_int32 pos);
+    BString &Insert(const char *str, b_int32 length, b_int32 pos);
+    BString &Insert(const char *str, b_int32 fromOffset, b_int32 length, b_int32 pos);
+    BString &Insert(char c, b_int32 count, b_int32 pos);
 
- EString &Truncate(eint32 newLength);
+    BString &Truncate(b_int32 newLength);
 
- EString &Remove(eint32 from, eint32 length);
+    BString &Remove(b_int32 from, b_int32 length);
 
- EString &RemoveFirst(const EString &str);
- EString &RemoveLast(const EString &str);
- EString &RemoveAll(const EString &str);
- EString &RemoveFirst(const char *str);
- EString &RemoveLast(const char *str);
- EString &RemoveAll(const char *str);
- EString &RemoveSet(const char *setOfCharsToRemove);
+    BString &RemoveFirst(const BString &str);
+    BString &RemoveLast(const BString &str);
+    BString &RemoveAll(const BString &str);
+    BString &RemoveFirst(const char *str);
+    BString &RemoveLast(const char *str);
+    BString &RemoveAll(const char *str);
+    BString &RemoveSet(const char *setOfCharsToRemove);
 
- EString &IRemoveFirst(const EString &str);
- EString &IRemoveLast(const EString &str);
- EString &IRemoveAll(const EString &str);
- EString &IRemoveFirst(const char *str);
- EString &IRemoveLast(const char *str);
- EString &IRemoveAll(const char *str);
- EString &IRemoveSet(const char *setOfCharsToRemove);
+    BString &IRemoveFirst(const BString &str);
+    BString &IRemoveLast(const BString &str);
+    BString &IRemoveAll(const BString &str);
+    BString &IRemoveFirst(const char *str);
+    BString &IRemoveLast(const char *str);
+    BString &IRemoveAll(const char *str);
+    BString &IRemoveSet(const char *setOfCharsToRemove);
 
- bool operator<(const EString &str) const;
- bool operator<=(const EString &str) const;
- bool operator==(const EString &str) const;
- bool operator>=(const EString &str) const;
- bool operator>(const EString &str) const;
- bool operator!=(const EString &str) const;
+    bool operator<(const BString &str) const;
+    bool operator<=(const BString &str) const;
+    bool operator==(const BString &str) const;
+    bool operator>=(const BString &str) const;
+    bool operator>(const BString &str) const;
+    bool operator!=(const BString &str) const;
 
  bool operator<(const char *str) const;
  bool operator<=(const char *str) const;
@@ -45418,85 +45411,85 @@ public:
  bool operator>(const char *str) const;
  bool operator!=(const char *str) const;
 
- int Compare(const EString &str) const;
+    int Compare(const BString &str) const;
  int Compare(const char *str) const;
- int Compare(const EString &str, eint32 n) const;
- int Compare(const char *str, eint32 n) const;
- int ICompare(const EString &str) const;
+    int Compare(const BString &str, b_int32 n) const;
+    int Compare(const char *str, b_int32 n) const;
+    int ICompare(const BString &str) const;
  int ICompare(const char *str) const;
- int ICompare(const EString &str, eint32 n) const;
- int ICompare(const char *str, eint32 n) const;
+    int ICompare(const BString &str, b_int32 n) const;
+    int ICompare(const char *str, b_int32 n) const;
 
- eint32 FindFirst(const EString &string) const;
- eint32 FindFirst(const char *string) const;
- eint32 FindFirst(const EString &string, eint32 fromOffset) const;
- eint32 FindFirst(const char *string, eint32 fromOffset) const;
- eint32 FindFirst(char c) const;
- eint32 FindFirst(char c, eint32 fromOffset) const;
+    b_int32 FindFirst(const BString &string) const;
+    b_int32 FindFirst(const char *string) const;
+    b_int32 FindFirst(const BString &string, b_int32 fromOffset) const;
+    b_int32 FindFirst(const char *string, b_int32 fromOffset) const;
+    b_int32 FindFirst(char c) const;
+    b_int32 FindFirst(char c, b_int32 fromOffset) const;
 
- eint32 FindLast(const EString &string) const;
- eint32 FindLast(const char *string) const;
- eint32 FindLast(const EString &string, eint32 beforeOffset) const;
- eint32 FindLast(const char *string, eint32 beforeOffset) const;
- eint32 FindLast(char c) const;
- eint32 FindLast(char c, eint32 beforeOffset) const;
+    b_int32 FindLast(const BString &string) const;
+    b_int32 FindLast(const char *string) const;
+    b_int32 FindLast(const BString &string, b_int32 beforeOffset) const;
+    b_int32 FindLast(const char *string, b_int32 beforeOffset) const;
+    b_int32 FindLast(char c) const;
+    b_int32 FindLast(char c, b_int32 beforeOffset) const;
 
- eint32 IFindFirst(const EString &string) const;
- eint32 IFindFirst(const char *string) const;
- eint32 IFindFirst(const EString &string, eint32 fromOffset) const;
- eint32 IFindFirst(const char *string, eint32 fromOffset) const;
- eint32 IFindFirst(char c) const;
- eint32 IFindFirst(char c, eint32 fromOffset) const;
+    b_int32 IFindFirst(const BString &string) const;
+    b_int32 IFindFirst(const char *string) const;
+    b_int32 IFindFirst(const BString &string, b_int32 fromOffset) const;
+    b_int32 IFindFirst(const char *string, b_int32 fromOffset) const;
+    b_int32 IFindFirst(char c) const;
+    b_int32 IFindFirst(char c, b_int32 fromOffset) const;
 
- eint32 IFindLast(const EString &string) const;
- eint32 IFindLast(const char *string) const;
- eint32 IFindLast(const EString &string, eint32 beforeOffset) const;
- eint32 IFindLast(const char *string, eint32 beforeOffset) const;
- eint32 IFindLast(char c) const;
- eint32 IFindLast(char c, eint32 beforeOffset) const;
+    b_int32 IFindLast(const BString &string) const;
+    b_int32 IFindLast(const char *string) const;
+    b_int32 IFindLast(const BString &string, b_int32 beforeOffset) const;
+    b_int32 IFindLast(const char *string, b_int32 beforeOffset) const;
+    b_int32 IFindLast(char c) const;
+    b_int32 IFindLast(char c, b_int32 beforeOffset) const;
 
- EString &ReplaceFirst(char replaceThis, char withThis);
- EString &ReplaceLast(char replaceThis, char withThis);
- EString &ReplaceAll(char replaceThis, char withThis, eint32 fromOffset = 0);
- EString &Replace(char replaceThis, char withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &ReplaceFirst(const char *replaceThis, const char *withThis);
- EString &ReplaceLast(const char *replaceThis, const char *withThis);
- EString &ReplaceAll(const char *replaceThis, const char *withThis, eint32 fromOffset = 0);
- EString &Replace(const char *replaceThis, const char *withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &ReplaceSet(const char *setOfChars, char with);
- EString &ReplaceSet(const char *setOfChars, const char *with);
+    BString &ReplaceFirst(char replaceThis, char withThis);
+    BString &ReplaceLast(char replaceThis, char withThis);
+    BString &ReplaceAll(char replaceThis, char withThis, b_int32 fromOffset = 0);
+    BString &Replace(char replaceThis, char withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &ReplaceFirst(const char *replaceThis, const char *withThis);
+    BString &ReplaceLast(const char *replaceThis, const char *withThis);
+    BString &ReplaceAll(const char *replaceThis, const char *withThis, b_int32 fromOffset = 0);
+    BString &Replace(const char *replaceThis, const char *withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &ReplaceSet(const char *setOfChars, char with);
+    BString &ReplaceSet(const char *setOfChars, const char *with);
 
- EString &IReplaceFirst(char replaceThis, char withThis);
- EString &IReplaceLast(char replaceThis, char withThis);
- EString &IReplaceAll(char replaceThis, char withThis, eint32 fromOffset = 0);
- EString &IReplace(char replaceThis, char withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &IReplaceFirst(const char *replaceThis, const char *withThis);
- EString &IReplaceLast(const char *replaceThis, const char *withThis);
- EString &IReplaceAll(const char *replaceThis, const char *withThis, eint32 fromOffset = 0);
- EString &IReplace(const char *replaceThis, const char *withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &IReplaceSet(const char *setOfChars, char with);
- EString &IReplaceSet(const char *setOfChars, const char *with);
+    BString &IReplaceFirst(char replaceThis, char withThis);
+    BString &IReplaceLast(char replaceThis, char withThis);
+    BString &IReplaceAll(char replaceThis, char withThis, b_int32 fromOffset = 0);
+    BString &IReplace(char replaceThis, char withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &IReplaceFirst(const char *replaceThis, const char *withThis);
+    BString &IReplaceLast(const char *replaceThis, const char *withThis);
+    BString &IReplaceAll(const char *replaceThis, const char *withThis, b_int32 fromOffset = 0);
+    BString &IReplace(const char *replaceThis, const char *withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &IReplaceSet(const char *setOfChars, char with);
+    BString &IReplaceSet(const char *setOfChars, const char *with);
 
- EString &ToLower();
- EString &ToUpper();
-
-
- EString &Capitalize();
+    BString &ToLower();
+    BString &ToUpper();
 
 
- EString &CapitalizeEachWord();
+    BString &Capitalize();
 
 
- EString &CharacterEscape(const char *original, const char *setOfCharsToEscape, char escapeWith);
+    BString &CapitalizeEachWord();
 
 
- EString &CharacterEscape(const char *setOfCharsToEscape, char escapeWith);
+    BString &CharacterEscape(const char *original, const char *setOfCharsToEscape, char escapeWith);
 
 
- EString &CharacterDeescape(const char *original, char escapeChar);
+    BString &CharacterEscape(const char *setOfCharsToEscape, char escapeWith);
 
 
- EString &CharacterDeescape(char escapeChar);
+    BString &CharacterDeescape(const char *original, char escapeChar);
+
+
+    BString &CharacterDeescape(char escapeChar);
 
 
  bool IsNumber() const;
@@ -45510,46 +45503,46 @@ public:
 
  bool GetDecimal(float *value) const;
  bool GetDecimal(double *value) const;
- bool GetInteger(eint8 *value) const;
- bool GetInteger(euint8 *value) const;
- bool GetInteger(eint16 *value) const;
- bool GetInteger(euint16 *value) const;
- bool GetInteger(eint32 *value) const;
- bool GetInteger(euint32 *value) const;
- bool GetInteger(eint64 *value) const;
- bool GetInteger(euint64 *value) const;
+    bool GetInteger(b_int8 *value) const;
+    bool GetInteger(b_uint8 *value) const;
+    bool GetInteger(b_int16 *value) const;
+    bool GetInteger(b_uint16 *value) const;
+    bool GetInteger(b_int32 *value) const;
+    bool GetInteger(b_uint32 *value) const;
+    bool GetInteger(b_int64 *value) const;
+    bool GetInteger(b_uint64 *value) const;
 
- EString &operator<<(const char *str);
- EString &operator<<(const EString &str);
- EString &operator<<(eint8 value);
- EString &operator<<(euint8 value);
- EString &operator<<(eint16 value);
- EString &operator<<(euint16 value);
- EString &operator<<(eint32 value);
- EString &operator<<(euint32 value);
- EString &operator<<(eint64 value);
- EString &operator<<(euint64 value);
- EString &operator<<(float value);
- EString &operator<<(double value);
-
-
-
-
- EStringArray *Split(const char *delimiter, euint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
- EStringArray *Split(const char delimiter, euint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
+    BString &operator<<(const char *str);
+    BString &operator<<(const BString &str);
+    BString &operator<<(b_int8 value);
+    BString &operator<<(b_uint8 value);
+    BString &operator<<(b_int16 value);
+    BString &operator<<(b_uint16 value);
+    BString &operator<<(b_int32 value);
+    BString &operator<<(b_uint32 value);
+    BString &operator<<(b_int64 value);
+    BString &operator<<(b_uint64 value);
+    BString &operator<<(float value);
+    BString &operator<<(double value);
 
 
 
- bool SetMinimumBufferSize(eint32 length);
- eint32 MinimumBufferSize() const;
+
+    BStringArray *Split(const char *delimiter, b_uint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
+    BStringArray *Split(const char delimiter, b_uint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
+
+
+
+    bool SetMinimumBufferSize(b_int32 length);
+    b_int32 MinimumBufferSize() const;
 
 private:
- eint32 fLen;
- eint32 fLenReal;
- eint32 fMinBufferSize;
+    b_int32 fLen;
+    b_int32 fLenReal;
+    b_int32 fMinBufferSize;
  char *fBuffer;
 
- bool _Resize(eint32 length);
+    bool _Resize(b_int32 length);
 };
 # 38 "../src/net/./../net/./../support/./../app/Message.h" 2
 # 1 "../src/net/./../net/./../support/./../app/./../support/List.h" 1
@@ -45559,50 +45552,50 @@ private:
 
 
 
-class __attribute__((dllexport)) EList {
+class __attribute__((dllexport)) BList {
 public:
 
 
 
 
 
- EList(eint32 initialAllocSize = 0);
- EList(eint32 initialAllocSize, eint32 nullItems);
+    BList(b_int32 initialAllocSize = 0);
+    BList(b_int32 initialAllocSize, b_int32 nullItems);
 
 
 
- EList(const EList &list);
- EList &operator=(const EList &from);
+    BList(const BList &list);
+    BList &operator=(const BList &from);
 
- virtual ~EList();
+    virtual ~BList();
 
  bool AddItem(void *item);
- bool AddItem(void *item, eint32 atIndex);
- bool AddList(const EList *newItems);
- bool AddList(const EList *newItems, eint32 atIndex);
+    bool AddItem(void *item, b_int32 atIndex);
+    bool AddList(const BList *newItems);
+    bool AddList(const BList *newItems, b_int32 atIndex);
 
 
  bool RemoveItem(void *item);
- void *RemoveItem(eint32 index);
- bool RemoveItems(eint32 index, eint32 count);
+    void *RemoveItem(b_int32 index);
+    bool RemoveItems(b_int32 index, b_int32 count);
 
 
- bool ReplaceItem(eint32 index, void *newItem, void **oldItem = __null);
+    bool ReplaceItem(b_int32 index, void *newItem, void **oldItem = __null);
 
  void MakeEmpty();
 
- bool SwapItems(eint32 indexA, eint32 indexB);
- bool MoveItem(eint32 fromIndex, eint32 toIndex);
+    bool SwapItems(b_int32 indexA, b_int32 indexB);
+    bool MoveItem(b_int32 fromIndex, b_int32 toIndex);
 
  void SortItems(int (*cmp)(const void *a, const void *b));
 
- void *ItemAt(eint32 index) const;
+    void *ItemAt(b_int32 index) const;
  void *FirstItem() const;
  void *LastItem() const;
 
  bool HasItem(void *item) const;
- eint32 IndexOf(void *item) const;
- eint32 CountItems() const;
+    b_int32 IndexOf(void *item) const;
+    b_int32 CountItems() const;
  bool IsEmpty() const;
 
  void DoForEach(bool (*func)(void *data));
@@ -45614,11 +45607,11 @@ public:
 private:
  void **fObjects;
 
- eint32 fItemCount;
- eint32 fItemReal;
- eint32 fMinimumCount;
+    b_int32 fItemCount;
+    b_int32 fItemReal;
+    b_int32 fMinimumCount;
 
- bool _Resize(eint32 count);
+    bool _Resize(b_int32 count);
 };
 # 39 "../src/net/./../net/./../support/./../app/Message.h" 2
 # 1 "../src/net/./../net/./../support/./../app/./../interface/Point.h" 1
@@ -45628,45 +45621,45 @@ private:
 
 
 
-class ERect;
+class BRect;
 
-class __attribute__((dllexport)) EPoint {
+class __attribute__((dllexport)) BPoint {
 public:
  float x;
  float y;
 
- EPoint();
- EPoint(float X, float Y);
- EPoint(const EPoint &pt);
+ BPoint();
+ BPoint(float X, float Y);
+ BPoint(const BPoint &pt);
 
- EPoint &operator=(const EPoint &from);
+ BPoint &operator=(const BPoint &from);
  void Set(float X, float Y);
 
- void ConstrainTo(ERect rect);
+ void ConstrainTo(BRect rect);
 
  void Ceil();
  void Floor();
  void Round();
 
- EPoint& FloorSelf();
- EPoint FloorCopy() const;
- EPoint& CeilSelf();
- EPoint CeilCopy() const;
- EPoint& RoundSelf();
- EPoint RoundCopy() const;
+ BPoint& FloorSelf();
+ BPoint FloorCopy() const;
+ BPoint& CeilSelf();
+ BPoint CeilCopy() const;
+ BPoint& RoundSelf();
+ BPoint RoundCopy() const;
 
- EPoint operator+(const EPoint &plus) const;
- EPoint operator-(const EPoint &minus) const;
- EPoint& operator+=(const EPoint &plus);
- EPoint& operator-=(const EPoint &minus);
+ BPoint operator+(const BPoint &plus) const;
+ BPoint operator-(const BPoint &minus) const;
+ BPoint& operator+=(const BPoint &plus);
+ BPoint& operator-=(const BPoint &minus);
 
- bool operator!=(const EPoint &pt) const;
- bool operator==(const EPoint &pt) const;
+ bool operator!=(const BPoint &pt) const;
+ bool operator==(const BPoint &pt) const;
 
  void PrintToStream() const;
 };
 
-extern __attribute__((dllexport)) const EPoint E_ORIGIN;
+extern __attribute__((dllexport)) const BPoint B_ORIGIN;
 # 40 "../src/net/./../net/./../support/./../app/Message.h" 2
 # 1 "../src/net/./../net/./../support/./../app/./../interface/Rect.h" 1
 # 33 "../src/net/./../net/./../support/./../app/./../interface/Rect.h"
@@ -46379,133 +46372,133 @@ __extension__ long long __attribute__((__cdecl__)) llrintl (long double);
 
 
 
-class __attribute__((dllexport)) ERect {
+class __attribute__((dllexport)) BRect {
 public:
  float left;
  float top;
  float right;
  float bottom;
 
- ERect();
- ERect(const ERect &r);
- ERect(float l, float t, float r, float b);
- ERect(EPoint leftTop, EPoint rightBottom);
+ BRect();
+ BRect(const BRect &r);
+ BRect(float l, float t, float r, float b);
+ BRect(BPoint leftTop, BPoint rightBottom);
 
- ERect &operator=(const ERect &from);
+ BRect &operator=(const BRect &from);
  void Set(float l, float t, float r, float b);
 
- EPoint LeftTop() const;
- EPoint RightBottom() const;
- EPoint LeftBottom() const;
- EPoint RightTop() const;
- EPoint Center() const;
+ BPoint LeftTop() const;
+ BPoint RightBottom() const;
+ BPoint LeftBottom() const;
+ BPoint RightTop() const;
+ BPoint Center() const;
 
- void SetLeftTop(const EPoint pt);
- void SetRightBottom(const EPoint pt);
- void SetLeftBottom(const EPoint pt);
- void SetRightTop(const EPoint pt);
+ void SetLeftTop(const BPoint pt);
+ void SetRightBottom(const BPoint pt);
+ void SetLeftBottom(const BPoint pt);
+ void SetRightTop(const BPoint pt);
 
  void SetLeftTop(float x, float y);
  void SetRightBottom(float x, float y);
  void SetLeftBottom(float x, float y);
  void SetRightTop(float x, float y);
 
- void InsetBy(EPoint pt);
+ void InsetBy(BPoint pt);
  void InsetBy(float dx, float dy);
- void OffsetBy(EPoint pt);
+ void OffsetBy(BPoint pt);
  void OffsetBy(float dx, float dy);
- void OffsetTo(EPoint pt);
+ void OffsetTo(BPoint pt);
  void OffsetTo(float x, float y);
 
  void Floor();
  void Ceil();
  void Round();
 
- ERect& InsetBySelf(EPoint pt);
- ERect& InsetBySelf(float dx, float dy);
- ERect InsetByCopy(EPoint pt) const;
- ERect InsetByCopy(float dx, float dy) const;
- ERect& OffsetBySelf(EPoint pt);
- ERect& OffsetBySelf(float dx, float dy);
- ERect OffsetByCopy(EPoint pt) const;
- ERect OffsetByCopy(float dx, float dy) const;
- ERect& OffsetToSelf(EPoint pt);
- ERect& OffsetToSelf(float x, float y);
- ERect OffsetToCopy(EPoint pt) const;
- ERect OffsetToCopy(float x, float y) const;
+ BRect& InsetBySelf(BPoint pt);
+ BRect& InsetBySelf(float dx, float dy);
+ BRect InsetByCopy(BPoint pt) const;
+ BRect InsetByCopy(float dx, float dy) const;
+ BRect& OffsetBySelf(BPoint pt);
+ BRect& OffsetBySelf(float dx, float dy);
+ BRect OffsetByCopy(BPoint pt) const;
+ BRect OffsetByCopy(float dx, float dy) const;
+ BRect& OffsetToSelf(BPoint pt);
+ BRect& OffsetToSelf(float x, float y);
+ BRect OffsetToCopy(BPoint pt) const;
+ BRect OffsetToCopy(float x, float y) const;
 
- ERect& FloorSelf();
- ERect FloorCopy() const;
- ERect& CeilSelf();
- ERect CeilCopy() const;
- ERect& RoundSelf();
- ERect RoundCopy() const;
+ BRect& FloorSelf();
+ BRect FloorCopy() const;
+ BRect& CeilSelf();
+ BRect CeilCopy() const;
+ BRect& RoundSelf();
+ BRect RoundCopy() const;
 
- bool operator==(ERect r) const;
- bool operator!=(ERect r) const;
+ bool operator==(BRect r) const;
+ bool operator!=(BRect r) const;
 
- ERect operator&(ERect r) const;
- ERect operator|(ERect r) const;
+ BRect operator&(BRect r) const;
+ BRect operator|(BRect r) const;
 
- ERect& operator&=(ERect r);
- ERect& operator|=(ERect r);
+ BRect& operator&=(BRect r);
+ BRect& operator|=(BRect r);
 
  bool IsValid() const;
  float Width() const;
- eint32 IntegerWidth() const;
+    b_int32 IntegerWidth() const;
  float Height() const;
- eint32 IntegerHeight() const;
+    b_int32 IntegerHeight() const;
 
- bool Intersects(ERect r) const;
+ bool Intersects(BRect r) const;
  bool Intersects(float l, float t, float r, float b) const;
 
- bool Contains(EPoint pt) const;
+ bool Contains(BPoint pt) const;
  bool Contains(float x, float y) const;
- bool Contains(ERect r) const;
+ bool Contains(BRect r) const;
  bool Contains(float l, float t, float r, float b) const;
 
  void PrintToStream() const;
 };
 
 
-inline EPoint ERect::LeftTop() const
+inline BPoint BRect::LeftTop() const
 {
- return(EPoint(left, top));
+ return(BPoint(left, top));
 }
 
 
-inline EPoint ERect::RightBottom() const
+inline BPoint BRect::RightBottom() const
 {
- return(EPoint(right, bottom));
+ return(BPoint(right, bottom));
 }
 
 
-inline EPoint ERect::LeftBottom() const
+inline BPoint BRect::LeftBottom() const
 {
- return(EPoint(left, bottom));
+ return(BPoint(left, bottom));
 }
 
 
-inline EPoint ERect::RightTop() const
+inline BPoint BRect::RightTop() const
 {
- return(EPoint(right, top));
+ return(BPoint(right, top));
 }
 
 
-inline EPoint ERect::Center() const
+inline BPoint BRect::Center() const
 {
- return(EPoint(left + (right - left) / 2, top + (bottom - top) / 2));
+ return(BPoint(left + (right - left) / 2, top + (bottom - top) / 2));
 }
 
 
-inline ERect::ERect()
+inline BRect::BRect()
 {
  top = left = 0;
  bottom = right = -1;
 }
 
 
-inline ERect::ERect(float l, float t, float r, float b)
+inline BRect::BRect(float l, float t, float r, float b)
 {
  left = l;
  top = t;
@@ -46514,7 +46507,7 @@ inline ERect::ERect(float l, float t, float r, float b)
 }
 
 
-inline ERect::ERect(const ERect &r)
+inline BRect::BRect(const BRect &r)
 {
  left = r.left;
  top = r.top;
@@ -46523,7 +46516,7 @@ inline ERect::ERect(const ERect &r)
 }
 
 
-inline ERect::ERect(EPoint leftTop, EPoint rightBottom)
+inline BRect::BRect(BPoint leftTop, BPoint rightBottom)
 {
  left = leftTop.x;
  top = leftTop.y;
@@ -46532,7 +46525,7 @@ inline ERect::ERect(EPoint leftTop, EPoint rightBottom)
 }
 
 
-inline ERect& ERect::operator=(const ERect& from)
+inline BRect& BRect::operator=(const BRect& from)
 {
  left = from.left;
  top = from.top;
@@ -46542,7 +46535,7 @@ inline ERect& ERect::operator=(const ERect& from)
 }
 
 
-inline void ERect::Set(float l, float t, float r, float b)
+inline void BRect::Set(float l, float t, float r, float b)
 {
  left = l;
  top = t;
@@ -46551,31 +46544,31 @@ inline void ERect::Set(float l, float t, float r, float b)
 }
 
 
-inline bool ERect::IsValid() const
+inline bool BRect::IsValid() const
 {
  return(left <= right && top <= bottom);
 }
 
 
-inline eint32 ERect::IntegerWidth() const
+inline b_int32 BRect::IntegerWidth() const
 {
- return((eint32)ceil((double)(right - left)));
+    return((b_int32)ceil((double)(right - left)));
 }
 
 
-inline float ERect::Width() const
+inline float BRect::Width() const
 {
  return(right - left);
 }
 
 
-inline eint32 ERect::IntegerHeight() const
+inline b_int32 BRect::IntegerHeight() const
 {
- return((eint32)ceil((double)(bottom - top)));
+    return((b_int32)ceil((double)(bottom - top)));
 }
 
 
-inline float ERect::Height() const
+inline float BRect::Height() const
 {
  return(bottom - top);
 }
@@ -46583,158 +46576,158 @@ inline float ERect::Height() const
 
 
 
-class EList;
-class EMessenger;
-class EHandler;
-class EStreamIO;
+class BList;
+class BMessenger;
+class BHandler;
+class BStreamIO;
 
-class __attribute__((dllexport)) EMessage {
+class __attribute__((dllexport)) BMessage {
 public:
- EMessage();
- EMessage(euint32 what);
- EMessage(const EMessage &msg);
- virtual ~EMessage();
+    BMessage();
+    BMessage(b_uint32 what);
+    BMessage(const BMessage &msg);
+    virtual ~BMessage();
 
- euint32 what;
+    b_uint32 what;
 
- EMessage &operator=(const EMessage &msg);
+    BMessage &operator=(const BMessage &msg);
 
- eint32 CountTypesByName(const char *name) const;
- eint32 CountTypesByName(eint32 nameIndex) const;
- bool TypeAt(const char *name, eint32 typeIndex, e_type_code *type) const;
- bool TypeAt(eint32 nameIndex, eint32 typeIndex, e_type_code *type) const;
-
-
+    b_int32 CountTypesByName(const char *name) const;
+    b_int32 CountTypesByName(b_int32 nameIndex) const;
+    bool TypeAt(const char *name, b_int32 typeIndex, b_type_code *type) const;
+    bool TypeAt(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type) const;
 
 
- eint32 CountItems(const char *name, e_type_code type) const;
- eint32 CountItems(eint32 nameIndex, eint32 typeIndex, e_type_code *type = __null) const;
+
+
+    b_int32 CountItems(const char *name, b_type_code type) const;
+    b_int32 CountItems(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type = __null) const;
 # 92 "../src/net/./../net/./../support/./../app/Message.h"
- eint32 CountNames(e_type_code type, bool count_all_names_when_any_type = true) const;
- eint32 FindName(const char *name) const;
- const char *NameAt(eint32 nameIndex) const;
+    b_int32 CountNames(b_type_code type, bool count_all_names_when_any_type = true) const;
+    b_int32 FindName(const char *name) const;
+    const char *NameAt(b_int32 nameIndex) const;
 
  void MakeEmpty();
  bool IsEmpty() const;
 
  bool Rename(const char *old_entry, const char *new_entry);
 
- bool AddString(const char *name, const char *aString);
- bool AddString(const char *name, const EString &aString);
- bool AddInt8(const char *name, eint8 val);
- bool AddInt16(const char *name, eint16 val);
- bool AddInt32(const char *name, eint32 val);
- bool AddInt64(const char *name, eint64 val);
+    bool AddString(const char *name, const char *aString);
+    bool AddString(const char *name, const BString &aString);
+    bool AddInt8(const char *name, b_int8 val);
+    bool AddInt16(const char *name, b_int16 val);
+    bool AddInt32(const char *name, b_int32 val);
+    bool AddInt64(const char *name, b_int64 val);
  bool AddBool(const char *name, bool aBoolean);
  bool AddFloat(const char *name, float aFloat);
  bool AddDouble(const char *name, double aDouble);
- bool AddPoint(const char *name, EPoint pt);
- bool AddRect(const char *name, ERect r);
+    bool AddPoint(const char *name, BPoint pt);
+    bool AddRect(const char *name, BRect r);
  bool AddPointer(const char *name, const void *ptr);
- bool AddMessage(const char *name, const EMessage *msg);
- bool AddMessenger(const char *name, const EMessenger *msgr);
- bool AddMessenger(const char *name, const EMessenger &msgr);
- bool AddData(const char *name, e_type_code type, const void *data, size_t numBytes, bool is_fixed_size = true);
+    bool AddMessage(const char *name, const BMessage *msg);
+    bool AddMessenger(const char *name, const BMessenger *msgr);
+    bool AddMessenger(const char *name, const BMessenger &msgr);
+    bool AddData(const char *name, b_type_code type, const void *data, size_t numBytes, bool is_fixed_size = true);
 
- bool FindString(const char *name, eint32 index, const char **str) const;
- bool FindString(const char *name, const char **str) const;
- bool FindString(const char *name, eint32 index, EString *str) const;
- bool FindString(const char *name, EString *str) const;
- bool FindInt8(const char *name, eint8 *val) const;
- bool FindInt8(const char *name, eint32 index, eint8 *val) const;
- bool FindInt16(const char *name, eint16 *val) const;
- bool FindInt16(const char *name, eint32 index, eint16 *val) const;
- bool FindInt32(const char *name, eint32 *val) const;
- bool FindInt32(const char *name, eint32 index, eint32 *val) const;
- bool FindInt64(const char *name, eint64 *val) const;
- bool FindInt64(const char *name, eint32 index, eint64 *val) const;
+    bool FindString(const char *name, b_int32 index, const char **str) const;
+    bool FindString(const char *name, const char **str) const;
+    bool FindString(const char *name, b_int32 index, BString *str) const;
+    bool FindString(const char *name, BString *str) const;
+    bool FindInt8(const char *name, b_int8 *val) const;
+    bool FindInt8(const char *name, b_int32 index, b_int8 *val) const;
+    bool FindInt16(const char *name, b_int16 *val) const;
+    bool FindInt16(const char *name, b_int32 index, b_int16 *val) const;
+    bool FindInt32(const char *name, b_int32 *val) const;
+    bool FindInt32(const char *name, b_int32 index, b_int32 *val) const;
+    bool FindInt64(const char *name, b_int64 *val) const;
+    bool FindInt64(const char *name, b_int32 index, b_int64 *val) const;
  bool FindBool(const char *name, bool *aBoolean) const;
- bool FindBool(const char *name, eint32 index, bool *aBoolean) const;
+    bool FindBool(const char *name, b_int32 index, bool *aBoolean) const;
  bool FindFloat(const char *name, float *f) const;
- bool FindFloat(const char *name, eint32 index, float *f) const;
+    bool FindFloat(const char *name, b_int32 index, float *f) const;
  bool FindDouble(const char *name, double *d) const;
- bool FindDouble(const char *name, eint32 index, double *d) const;
- bool FindPoint(const char *name, EPoint *pt) const;
- bool FindPoint(const char *name, eint32 index, EPoint *pt) const;
- bool FindRect(const char *name, ERect *r) const;
- bool FindRect(const char *name, eint32 index, ERect *r) const;
+    bool FindDouble(const char *name, b_int32 index, double *d) const;
+    bool FindPoint(const char *name, BPoint *pt) const;
+    bool FindPoint(const char *name, b_int32 index, BPoint *pt) const;
+    bool FindRect(const char *name, BRect *r) const;
+    bool FindRect(const char *name, b_int32 index, BRect *r) const;
  bool FindPointer(const char *name, void **ptr) const;
- bool FindPointer(const char *name, eint32 index, void **ptr) const;
- bool FindMessage(const char *name, EMessage *msg) const;
- bool FindMessage(const char *name, eint32 index, EMessage *msg) const;
- bool FindMessenger(const char *name, EMessenger *msgr) const;
- bool FindMessenger(const char *name, eint32 index, EMessenger *msgr) const;
- bool FindData(const char *name, e_type_code type, const void **data, ssize_t *numBytes) const;
- bool FindData(const char *name, e_type_code type, eint32 index, const void **data, ssize_t *numBytes) const;
- bool FindData(eint32 nameIndex, eint32 typeIndex, eint32 index, const void **data, ssize_t *numBytes) const;
+    bool FindPointer(const char *name, b_int32 index, void **ptr) const;
+    bool FindMessage(const char *name, BMessage *msg) const;
+    bool FindMessage(const char *name, b_int32 index, BMessage *msg) const;
+    bool FindMessenger(const char *name, BMessenger *msgr) const;
+    bool FindMessenger(const char *name, b_int32 index, BMessenger *msgr) const;
+    bool FindData(const char *name, b_type_code type, const void **data, ssize_t *numBytes) const;
+    bool FindData(const char *name, b_type_code type, b_int32 index, const void **data, ssize_t *numBytes) const;
+    bool FindData(b_int32 nameIndex, b_int32 typeIndex, b_int32 index, const void **data, ssize_t *numBytes) const;
 
- bool HasString(const char *name, eint32 index = 0) const;
- bool HasInt8(const char *name, eint32 index = 0) const;
- bool HasInt16(const char *name, eint32 index = 0) const;
- bool HasInt32(const char *name, eint32 index = 0) const;
- bool HasInt64(const char *name, eint32 index = 0) const;
- bool HasBool(const char *name, eint32 index = 0) const;
- bool HasFloat(const char *name, eint32 index = 0) const;
- bool HasDouble(const char *name, eint32 index = 0) const;
- bool HasPoint(const char *name, eint32 index = 0) const;
- bool HasRect(const char *name, eint32 index = 0) const;
- bool HasPointer(const char *name, eint32 index = 0) const;
- bool HasMessage(const char *name, eint32 index = 0) const;
- bool HasMessenger(const char *name, eint32 index = 0) const;
- bool HasData(const char *name, e_type_code type, eint32 index = 0) const;
+    bool HasString(const char *name, b_int32 index = 0) const;
+    bool HasInt8(const char *name, b_int32 index = 0) const;
+    bool HasInt16(const char *name, b_int32 index = 0) const;
+    bool HasInt32(const char *name, b_int32 index = 0) const;
+    bool HasInt64(const char *name, b_int32 index = 0) const;
+    bool HasBool(const char *name, b_int32 index = 0) const;
+    bool HasFloat(const char *name, b_int32 index = 0) const;
+    bool HasDouble(const char *name, b_int32 index = 0) const;
+    bool HasPoint(const char *name, b_int32 index = 0) const;
+    bool HasRect(const char *name, b_int32 index = 0) const;
+    bool HasPointer(const char *name, b_int32 index = 0) const;
+    bool HasMessage(const char *name, b_int32 index = 0) const;
+    bool HasMessenger(const char *name, b_int32 index = 0) const;
+    bool HasData(const char *name, b_type_code type, b_int32 index = 0) const;
 
- bool RemoveString(const char *name, eint32 index = 0);
- bool RemoveInt8(const char *name, eint32 index = 0);
- bool RemoveInt16(const char *name, eint32 index = 0);
- bool RemoveInt32(const char *name, eint32 index = 0);
- bool RemoveInt64(const char *name, eint32 index = 0);
- bool RemoveBool(const char *name, eint32 index = 0);
- bool RemoveFloat(const char *name, eint32 index = 0);
- bool RemoveDouble(const char *name, eint32 index = 0);
- bool RemovePoint(const char *name, eint32 index = 0);
- bool RemoveRect(const char *name, eint32 index = 0);
- bool RemovePointer(const char *name, eint32 index = 0);
- bool RemoveMessage(const char *name, eint32 index = 0);
- bool RemoveMessenger(const char *name, eint32 index = 0);
- bool RemoveData(const char *name, e_type_code type, eint32 index = 0);
- bool RemoveData(const char *name, e_type_code type);
+    bool RemovString(const char *name, b_int32 index = 0);
+    bool RemoveInt8(const char *name, b_int32 index = 0);
+    bool RemoveInt16(const char *name, b_int32 index = 0);
+    bool RemoveInt32(const char *name, b_int32 index = 0);
+    bool RemoveInt64(const char *name, b_int32 index = 0);
+    bool RemoveBool(const char *name, b_int32 index = 0);
+    bool RemoveFloat(const char *name, b_int32 index = 0);
+    bool RemoveDouble(const char *name, b_int32 index = 0);
+    bool RemovePoint(const char *name, b_int32 index = 0);
+    bool RemoveRect(const char *name, b_int32 index = 0);
+    bool RemovePointer(const char *name, b_int32 index = 0);
+    bool RemoveMessage(const char *name, b_int32 index = 0);
+    bool RemoveMessenger(const char *name, b_int32 index = 0);
+    bool RemoveData(const char *name, b_type_code type, b_int32 index = 0);
+    bool RemoveData(const char *name, b_type_code type);
  bool RemoveData(const char *name);
 
- bool ReplaceString(const char *name, eint32 index, const char *aString);
- bool ReplaceString(const char *name, const char *aString);
- bool ReplaceString(const char *name, eint32 index, const EString &aString);
- bool ReplaceString(const char *name, const EString &aString);
- bool ReplaceInt8(const char *name, eint8 val);
- bool ReplaceInt8(const char *name, eint32 index, eint8 val);
- bool ReplaceInt16(const char *name, eint16 val);
- bool ReplaceInt16(const char *name, eint32 index, eint16 val);
- bool ReplaceInt32(const char *name, eint32 val);
- bool ReplaceInt32(const char *name, eint32 index, eint32 val);
- bool ReplaceInt64(const char *name, eint64 val);
- bool ReplaceInt64(const char *name, eint32 index, eint64 val);
+    bool ReplacString(const char *name, b_int32 index, const char *aString);
+    bool ReplacString(const char *name, const char *aString);
+    bool ReplacString(const char *name, b_int32 index, const BString &aString);
+    bool ReplacString(const char *name, const BString &aString);
+    bool ReplaceInt8(const char *name, b_int8 val);
+    bool ReplaceInt8(const char *name, b_int32 index, b_int8 val);
+    bool ReplaceInt16(const char *name, b_int16 val);
+    bool ReplaceInt16(const char *name, b_int32 index, b_int16 val);
+    bool ReplaceInt32(const char *name, b_int32 val);
+    bool ReplaceInt32(const char *name, b_int32 index, b_int32 val);
+    bool ReplaceInt64(const char *name, b_int64 val);
+    bool ReplaceInt64(const char *name, b_int32 index, b_int64 val);
  bool ReplaceBool(const char *name, bool aBoolean);
- bool ReplaceBool(const char *name, eint32 index, bool aBoolean);
+    bool ReplaceBool(const char *name, b_int32 index, bool aBoolean);
  bool ReplaceFloat(const char *name, float f);
- bool ReplaceFloat(const char *name, eint32 index, float f);
+    bool ReplaceFloat(const char *name, b_int32 index, float f);
  bool ReplaceDouble(const char *name, double d);
- bool ReplaceDouble(const char *name, eint32 index, double d);
- bool ReplacePoint(const char *name, EPoint pt);
- bool ReplacePoint(const char *name, eint32 index, EPoint pt);
- bool ReplaceRect(const char *name, ERect r);
- bool ReplaceRect(const char *name, eint32 index, ERect r);
+    bool ReplaceDouble(const char *name, b_int32 index, double d);
+    bool ReplacePoint(const char *name, BPoint pt);
+    bool ReplacePoint(const char *name, b_int32 index, BPoint pt);
+    bool ReplaceRect(const char *name, BRect r);
+    bool ReplaceRect(const char *name, b_int32 index, BRect r);
  bool ReplacePointer(const char *name, const void *ptr);
- bool ReplacePointer(const char *name, eint32 index, const void *ptr);
- bool ReplaceMessage(const char *name, const EMessage *msg);
- bool ReplaceMessage(const char *name, eint32 index, const EMessage *msg);
- bool ReplaceMessenger(const char *name, const EMessenger *msgr);
- bool ReplaceMessenger(const char *name, eint32 index, const EMessenger *msgr);
- bool ReplaceMessenger(const char *name, const EMessenger &msgr);
- bool ReplaceMessenger(const char *name, eint32 index, const EMessenger &msgr);
- bool ReplaceData(const char *name, e_type_code type, const void *data, size_t numBytes, bool is_fixed_size);
- bool ReplaceData(const char *name, e_type_code type, eint32 index, const void *data, size_t numBytes, bool is_fixed_size);
+    bool ReplacePointer(const char *name, b_int32 index, const void *ptr);
+    bool ReplaceMessage(const char *name, const BMessage *msg);
+    bool ReplaceMessage(const char *name, b_int32 index, const BMessage *msg);
+    bool ReplaceMessenger(const char *name, const BMessenger *msgr);
+    bool ReplaceMessenger(const char *name, b_int32 index, const BMessenger *msgr);
+    bool ReplaceMessenger(const char *name, const BMessenger &msgr);
+    bool ReplaceMessenger(const char *name, b_int32 index, const BMessenger &msgr);
+    bool ReplaceData(const char *name, b_type_code type, const void *data, size_t numBytes, bool is_fixed_size);
+    bool ReplaceData(const char *name, b_type_code type, b_int32 index, const void *data, size_t numBytes, bool is_fixed_size);
 
  bool IsSystem() const;
- void PrintToStream(EStreamIO &stream) const;
+    void PrintToStream(BStreamIO &stream) const;
  void PrintToStream() const;
 
  size_t FlattenedSize() const;
@@ -46745,31 +46738,31 @@ public:
  bool IsReply() const;
  bool IsSourceWaiting() const;
 
- e_status_t SendReply(euint32 command, EHandler *replyHandler = __null) const;
- e_status_t SendReply(const EMessage *message,
-      EHandler *replyHandler = __null,
-      e_bigtime_t sendTimeout = 9223372036854775807ll) const;
+    b_status_t SendReply(b_uint32 command, BHandler *replyHandler = __null) const;
+    b_status_t SendReply(const BMessage *message,
+                  BHandler *replyHandler = __null,
+                  b_bigtime_t sendTimeout = 9223372036854775807ll) const;
 
 
- e_status_t BGetInfo(e_type_code type, eint32 index,
-     char **nameFound, e_type_code *typeFound, eint32 *countFound = __null) const;
- e_status_t BFindData(const char *name, e_type_code type, eint32 index,
+    b_status_t BGetInfo(b_type_code type, b_int32 index,
+                 char **nameFound, b_type_code *typeFound, b_int32 *countFound = __null) const;
+    b_status_t BFindData(const char *name, b_type_code type, b_int32 index,
       const void **data, ssize_t *numBytes) const;
- e_status_t BFindData(const char *name, e_type_code type,
+    b_status_t BFindData(const char *name, b_type_code type,
       const void **data, ssize_t *numBytes) const;
 
 private:
- friend class ELooper;
- friend class EMessenger;
+    friend class BLooper;
+    friend class BMessenger;
 
  typedef struct list_data {
   char *name;
-  EList list;
+        BList list;
  } list_data;
 
  typedef struct type_list_data {
-  e_type_code type;
-  EList list;
+        b_type_code type;
+        BList list;
  } type_list_data;
 
  typedef struct _object_t {
@@ -46778,17 +46771,17 @@ private:
   void *data;
  } _object_t;
 
- EList fObjectsList;
+    BList fObjectsList;
 
- static list_data *_find_list(const EList *list, const char *name, eint32 *index = __null);
- static type_list_data *_find_type_list(const EList *list, e_type_code type);
+    static list_data *_find_list(const BList *list, const char *name, b_int32 *index = __null);
+    static type_list_data *_find_type_list(const BList *list, b_type_code type);
 
- eint64 fTeam;
+    b_int64 fTeam;
 
- euint64 fTargetToken;
- e_bigtime_t fTargetTokenTimestamp;
- euint64 fReplyToken;
- e_bigtime_t fReplyTokenTimestamp;
+    b_uint64 fTargetToken;
+    b_bigtime_t fTargetTokenTimestamp;
+    b_uint64 fReplyToken;
+    b_bigtime_t fReplyTokenTimestamp;
 
  bool fNoticeSource;
  void *fSource;
@@ -46797,62 +46790,62 @@ private:
 };
 
 
-inline e_status_t
-EMessage::BGetInfo(e_type_code type, eint32 index,
-     char **nameFound, e_type_code *typeFound, eint32 *countFound) const
+inline b_status_t
+BMessage::BGetInfo(b_type_code type, b_int32 index,
+           char **nameFound, b_type_code *typeFound, b_int32 *countFound) const
 {
- if(index < 0) return E_BAD_INDEX;
- eint32 aIndex = index;
+    if(index < 0) return B_BAD_INDEX;
+    b_int32 aIndex = index;
 
- for(eint32 i = 0; i < CountNames(E_ANY_TYPE, true); i++)
+    for(b_int32 i = 0; i < CountNames(B_ANY_TYPE, true); i++)
  {
-  eint32 typesCount = CountTypesByName(i);
-  for(eint32 k = 0; k < typesCount; k++)
+        b_int32 typesCount = CountTypesByName(i);
+        for(b_int32 k = 0; k < typesCount; k++)
   {
-   e_type_code aType;
-   eint32 count = CountItems(i, k, &aType);
-   if(!(type == E_ANY_TYPE || aType == type) || (aIndex--) > 0) continue;
+            b_type_code aType;
+            b_int32 count = CountItems(i, k, &aType);
+            if(!(type == B_ANY_TYPE || aType == type) || (aIndex--) > 0) continue;
    if(nameFound) *nameFound = (char*)NameAt(i);
    if(typeFound) *typeFound = aType;
    if(countFound) *countFound = count;
-   return E_OK;
+            return B_OK;
   }
  }
 
- return(aIndex == index ? E_BAD_TYPE : E_BAD_INDEX);
+    return(aIndex == index ? B_BAD_TYPE : B_BAD_INDEX);
 }
 
 
-inline e_status_t
-EMessage::BFindData(const char *name, e_type_code type, eint32 index,
+inline b_status_t
+BMessage::BFindData(const char *name, b_type_code type, b_int32 index,
       const void **data, ssize_t *numBytes) const
 {
- if(index < 0) return E_BAD_INDEX;
+    if(index < 0) return B_BAD_INDEX;
 
- eint32 nameIndex = FindName(name);
- if(nameIndex < 0) return E_NAME_NOT_FOUND;
+    b_int32 nameIndex = FindName(name);
+    if(nameIndex < 0) return B_NAME_NOT_FOUND;
 
- eint32 typesCount = CountTypesByName(nameIndex);
- eint32 aIndex = index;
+    b_int32 typesCount = CountTypesByName(nameIndex);
+    b_int32 aIndex = index;
 
- for(eint32 k = 0; k < typesCount; k++)
+    for(b_int32 k = 0; k < typesCount; k++)
  {
-  e_type_code aType;
-  eint32 count = CountItems(nameIndex, k, &aType);
-  if(!(type == E_ANY_TYPE || aType == type)) continue;
+        b_type_code aType;
+        b_int32 count = CountItems(nameIndex, k, &aType);
+        if(!(type == B_ANY_TYPE || aType == type)) continue;
 
   if(aIndex < count)
-   return(FindData(nameIndex, k, aIndex, data, numBytes) ? E_OK : E_ERROR);
+            return(FindData(nameIndex, k, aIndex, data, numBytes) ? B_OK : B_ERROR);
 
   aIndex -= count;
  }
 
- return(aIndex == index ? E_BAD_TYPE : E_BAD_INDEX);
+    return(aIndex == index ? B_BAD_TYPE : B_BAD_INDEX);
 }
 
 
-inline e_status_t
-EMessage::BFindData(const char *name, e_type_code type,
+inline b_status_t
+BMessage::BFindData(const char *name, b_type_code type,
       const void **data, ssize_t *numBytes) const
 {
  return BFindData(name, type, 0, data, numBytes);
@@ -46861,104 +46854,104 @@ EMessage::BFindData(const char *name, e_type_code type,
 
 
 
-class __attribute__((dllexport)) EArchivable {
+class __attribute__((dllexport)) BArchivable {
 public:
- EArchivable();
- EArchivable(const EMessage *from);
- virtual ~EArchivable();
+    BArchivable();
+    BArchivable(const BMessage *from);
+    virtual ~BArchivable();
 
- virtual e_status_t Archive(EMessage *into, bool deep = true) const;
- static EArchivable *Instantiate(const EMessage *from);
+    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    static BArchivable *Instantiate(const BMessage *from);
 };
 
 
-typedef EArchivable *(*e_instantiation_func)(const EMessage*);
+typedef BArchivable *(*b_instantiation_func)(const BMessage*);
 
-__attribute__((dllexport)) bool e_validate_instantiation(const EMessage *from, const char *class_name);
-__attribute__((dllexport)) e_instantiation_func e_find_instantiation_func(const char *class_name);
-__attribute__((dllexport)) e_instantiation_func e_find_instantiation_func(const EMessage *archive_data);
+__attribute__((dllexport)) bool b_validatb_instantiation(const BMessage *from, const char *class_name);
+__attribute__((dllexport)) b_instantiation_func b_find_instantiation_func(const char *class_name);
+__attribute__((dllexport)) b_instantiation_func b_find_instantiation_func(const BMessage *archive_data);
 # 42 "../src/net/./../net/NetAddress.h" 2
 
 
 
-class __attribute__((dllexport)) ENetAddress : public EArchivable {
+class __attribute__((dllexport)) BNetAddress : public BArchivable {
 public:
- ENetAddress(const char *hostname = __null, euint16 port = 0);
- ENetAddress(const char *hostname, const char *protocol, const char *service);
- ENetAddress(const struct sockaddr_in &sa);
- ENetAddress(const struct in_addr addr, euint16 port = 0);
- ENetAddress(euint32 addr, euint16 port = 0);
- ENetAddress(const ENetAddress &from);
- virtual ~ENetAddress();
+    BNetAddress(const char *hostname = __null, b_uint16 port = 0);
+    BNetAddress(const char *hostname, const char *protocol, const char *service);
+    BNetAddress(const struct sockaddr_in &sa);
+    BNetAddress(const struct in_addr addr, b_uint16 port = 0);
+    BNetAddress(b_uint32 addr, b_uint16 port = 0);
+    BNetAddress(const BNetAddress &from);
+    virtual ~BNetAddress();
 
 
- ENetAddress(const EMessage *from);
- virtual e_status_t Archive(EMessage *into, bool deep = true) const;
- static EArchivable *Instantiate(const EMessage *from);
+    BNetAddress(const BMessage *from);
+ virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+ static BArchivable *Instantiate(const BMessage *from);
 
- e_status_t InitCheck() const;
+ b_status_t InitCheck() const;
 
- ENetAddress &operator=(const ENetAddress &addr);
+    BNetAddress &operator=(const BNetAddress &addr);
 
- e_status_t SetTo(const char *hostname, euint16 port = 0);
- e_status_t SetTo(const char *hostname, const char *protocol, const char *service);
- e_status_t SetTo(const struct sockaddr_in &sa);
- e_status_t SetTo(const struct in_addr addr, euint16 port = 0);
- e_status_t SetTo(euint32 addr = (u_long)0x00000000, euint16 port = 0);
+    b_status_t SetTo(const char *hostname, b_uint16 port = 0);
+ b_status_t SetTo(const char *hostname, const char *protocol, const char *service);
+ b_status_t SetTo(const struct sockaddr_in &sa);
+    b_status_t SetTo(const struct in_addr addr, b_uint16 port = 0);
+    b_status_t SetTo(b_uint32 addr = (u_long)0x00000000, b_uint16 port = 0);
 
- e_status_t GetAddr(char *hostname, size_t hostname_len, euint16 *port = __null) const;
- e_status_t GetAddr(struct sockaddr_in &sa) const;
- e_status_t GetAddr(struct in_addr &addr, euint16 *port = __null) const;
+    b_status_t GetAddr(char *hostname, size_t hostname_len, b_uint16 *port = __null) const;
+ b_status_t GetAddr(struct sockaddr_in &sa) const;
+    b_status_t GetAddr(struct in_addr &addr, b_uint16 *port = __null) const;
 
 private:
  struct sockaddr_in fAddr;
- e_status_t fStatus;
+ b_status_t fStatus;
 };
 # 34 "../src/net/NetEndpoint.h" 2
 # 1 "../src/net/./../net/NetBuffer.h" 1
 # 37 "../src/net/./../net/NetBuffer.h"
-class __attribute__((dllexport)) ENetBuffer : public EArchivable {
+class __attribute__((dllexport)) BNetBuffer : public BArchivable {
 public:
- ENetBuffer(size_t size = 0);
- ENetBuffer(const ENetBuffer &from);
- virtual ~ENetBuffer();
+ BNetBuffer(size_t size = 0);
+ BNetBuffer(const BNetBuffer &from);
+ virtual ~BNetBuffer();
 
 
- ENetBuffer(const EMessage *from);
- virtual e_status_t Archive(EMessage *into, bool deep = true) const;
- static EArchivable *Instantiate(const EMessage *from);
+ BNetBuffer(const BMessage *from);
+ virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+ static BArchivable *Instantiate(const BMessage *from);
 
- e_status_t InitCheck() const;
+ b_status_t InitCheck() const;
 
- ENetBuffer &operator=(const ENetBuffer &buf);
+ BNetBuffer &operator=(const BNetBuffer &buf);
 
- e_status_t AppendData(const void *data, size_t len);
- e_status_t AppendInt8(eint8 value);
- e_status_t AppendUint8(euint8 value);
- e_status_t AppendInt16(eint16 value);
- e_status_t AppendUint16(euint16 value);
- e_status_t AppendInt32(eint32 value);
- e_status_t AppendUint32(euint32 value);
- e_status_t AppendInt64(eint64 value);
- e_status_t AppendUint64(euint64 value);
- e_status_t AppendFloat(float value);
- e_status_t AppendDouble(double value);
- e_status_t AppendString(const char *string, eint32 len = -1);
- e_status_t AppendMessage(const EMessage &msg);
+ b_status_t AppendData(const void *data, size_t len);
+    b_status_t AppendInt8(b_int8 value);
+    b_status_t AppendUint8(b_uint8 value);
+    b_status_t AppendInt16(b_int16 value);
+    b_status_t AppendUint16(b_uint16 value);
+    b_status_t AppendInt32(b_int32 value);
+    b_status_t AppendUint32(b_uint32 value);
+    b_status_t AppendInt64(b_int64 value);
+    b_status_t AppendUint64(b_uint64 value);
+ b_status_t AppendFloat(float value);
+ b_status_t AppendDouble(double value);
+    b_status_t AppenString(const char *string, b_int32 len = -1);
+ b_status_t AppendMessage(const BMessage &msg);
 
- e_status_t RemoveData(void *data, size_t len);
- e_status_t RemoveInt8(eint8 &value);
- e_status_t RemoveUint8(euint8 &value);
- e_status_t RemoveInt16(eint16 &value);
- e_status_t RemoveUint16(euint16 &value);
- e_status_t RemoveInt32(eint32 &value);
- e_status_t RemoveUint32(euint32 &value);
- e_status_t RemoveInt64(eint64 &value);
- e_status_t RemoveUint64(euint64 &value);
- e_status_t RemoveFloat(float &value);
- e_status_t RemoveDouble(double &value);
- e_status_t RemoveString(char *string, size_t len);
- e_status_t RemoveMessage(EMessage &msg);
+ b_status_t RemoveData(void *data, size_t len);
+    b_status_t RemoveInt8(b_int8 &value);
+    b_status_t RemoveUint8(b_uint8 &value);
+    b_status_t RemoveInt16(b_int16 &value);
+    b_status_t RemoveUint16(b_uint16 &value);
+    b_status_t RemoveInt32(b_int32 &value);
+    b_status_t RemoveUint32(b_uint32 &value);
+    b_status_t RemoveInt64(b_int64 &value);
+    b_status_t RemoveUint64(b_uint64 &value);
+ b_status_t RemoveFloat(float &value);
+ b_status_t RemoveDouble(double &value);
+    b_status_t RemovString(char *string, size_t len);
+ b_status_t RemoveMessage(BMessage &msg);
 
  unsigned char *Data() const;
  size_t Size() const;
@@ -46973,60 +46966,60 @@ private:
 
 
 
-class __attribute__((dllexport)) ENetEndpoint : public EArchivable {
+class __attribute__((dllexport)) BNetEndpoint : public BArchivable {
 public:
- ENetEndpoint(int proto = 1);
- ENetEndpoint(const ENetEndpoint &from);
- virtual ~ENetEndpoint();
+ BNetEndpoint(int proto = 1);
+ BNetEndpoint(const BNetEndpoint &from);
+ virtual ~BNetEndpoint();
 
 
- ENetEndpoint(const EMessage *from);
- virtual e_status_t Archive(EMessage *into, bool deep = true) const;
- static EArchivable *Instantiate(const EMessage *from);
+ BNetEndpoint(const BMessage *from);
+ virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+ static BArchivable *Instantiate(const BMessage *from);
 
- e_status_t InitCheck() const;
+ b_status_t InitCheck() const;
 
- ENetEndpoint &operator=(const ENetEndpoint &endpoint);
+ BNetEndpoint &operator=(const BNetEndpoint &endpoint);
 
- e_status_t SetProtocol(int proto);
+ b_status_t SetProtocol(int proto);
 
- int SetSocketOption(eint32 level, eint32 option, const void *data, size_t data_len);
- int GetSocketOption(eint32 level, eint32 option, void *data, size_t *data_len) const;
+    int SetSocketOption(b_int32 level, b_int32 option, const void *data, size_t data_len);
+    int GetSocketOption(b_int32 level, b_int32 option, void *data, size_t *data_len) const;
 
  int SetNonBlocking(bool state = true);
  bool IsNonBlocking() const;
 
  int SetReuseAddr(bool state = true);
 
- const ENetAddress &LocalAddr() const;
- const ENetAddress &RemoteAddr() const;
+ const BNetAddress &LocalAddr() const;
+ const BNetAddress &RemoteAddr() const;
 
  virtual void Close();
 
- virtual e_status_t Bind(const ENetAddress &addr);
- virtual e_status_t Bind(euint16 port = 0);
+ virtual b_status_t Bind(const BNetAddress &addr);
+    virtual b_status_t Bind(b_uint16 port = 0);
 
- virtual e_status_t Connect(const ENetAddress &addr);
- virtual e_status_t Connect(const char *address, euint16 port);
+ virtual b_status_t Connect(const BNetAddress &addr);
+    virtual b_status_t Connect(const char *address, b_uint16 port);
 
- virtual e_status_t Listen(int backlog = 5);
- virtual ENetEndpoint *Accept(eint32 timeout_msec = -1);
+ virtual b_status_t Listen(int backlog = 5);
+    virtual BNetEndpoint *Accept(b_int32 timeout_msec = -1);
 
  int Error() const;
  const char *ErrorStr() const;
 
- virtual eint32 Send(const void *buf, size_t len, int flags = 0);
- virtual eint32 Send(const ENetBuffer &buf, int flags = 0);
- virtual eint32 SendTo(const void *buf, size_t len, const ENetAddress &to, int flags = 0);
- virtual eint32 SendTo(const ENetBuffer &buf, const ENetAddress &to, int flags = 0);
+    virtual b_int32 Send(const void *buf, size_t len, int flags = 0);
+    virtual b_int32 Send(const BNetBuffer &buf, int flags = 0);
+    virtual b_int32 SendTo(const void *buf, size_t len, const BNetAddress &to, int flags = 0);
+    virtual b_int32 SendTo(const BNetBuffer &buf, const BNetAddress &to, int flags = 0);
 
- void SetTimeout(e_bigtime_t timeout);
- virtual eint32 Receive(void *buf, size_t len, int flags = 0);
- virtual eint32 Receive(ENetBuffer &buf, size_t len, int flags = 0);
- virtual eint32 ReceiveFrom(void *buf, size_t len, const ENetAddress &from, int flags = 0);
- virtual eint32 ReceiveFrom(ENetBuffer &buf, size_t len, const ENetAddress &from, int flags = 0);
+    void SetTimeout(b_bigtime_t timeout);
+    virtual b_int32 Receive(void *buf, size_t len, int flags = 0);
+    virtual b_int32 Receive(BNetBuffer &buf, size_t len, int flags = 0);
+    virtual b_int32 ReceiveFrom(void *buf, size_t len, const BNetAddress &from, int flags = 0);
+    virtual b_int32 ReceiveFrom(BNetBuffer &buf, size_t len, const BNetAddress &from, int flags = 0);
 
- virtual bool IsDataPending(e_bigtime_t timeout = 0);
+    virtual bool IsDataPending(b_bigtime_t timeout = 0);
 
 protected:
 
@@ -47037,88 +47030,88 @@ private:
  int fProtocol;
  bool fBind;
  bool fNonBlocking;
- e_bigtime_t fTimeout;
+ b_bigtime_t fTimeout;
 
- ENetAddress fLocalAddr;
- ENetAddress fRemoteAddr;
+ BNetAddress fLocalAddr;
+ BNetAddress fRemoteAddr;
  void _Close();
 };
 
 
 inline int
-ENetEndpoint::SetReuseAddr(bool state)
+BNetEndpoint::SetReuseAddr(bool state)
 {
  int opt = (int)state;
  return SetSocketOption(0xffff, 0x0004, &opt, sizeof(opt));
 }
 # 65 "../src/net/NetEndpoint.cpp" 2
 # 80 "../src/net/NetEndpoint.cpp"
-ENetEndpoint::ENetEndpoint(int proto)
- : EArchivable(), fProtocol(proto), fBind(false), fNonBlocking(false), fTimeout(0)
+BNetEndpoint::BNetEndpoint(int proto)
+ : BArchivable(), fProtocol(proto), fBind(false), fNonBlocking(false), fTimeout(0)
 {
  fSocket = socket(2, fProtocol, 0);
 }
 
 
-ENetEndpoint::ENetEndpoint(const ENetEndpoint &from)
- : EArchivable(), fSocket(-1), fBind(false), fNonBlocking(false)
+BNetEndpoint::BNetEndpoint(const BNetEndpoint &from)
+ : BArchivable(), fSocket(-1), fBind(false), fNonBlocking(false)
 {
- ENetEndpoint::operator=(from);
+ BNetEndpoint::operator=(from);
 }
 
 
-ENetEndpoint::~ENetEndpoint()
+BNetEndpoint::~BNetEndpoint()
 {
  _Close();
 }
 
 
-ENetEndpoint::ENetEndpoint(const EMessage *from)
- : EArchivable(from), fSocket(-1), fBind(false), fNonBlocking(false)
+BNetEndpoint::BNetEndpoint(const BMessage *from)
+ : BArchivable(from), fSocket(-1), fBind(false), fNonBlocking(false)
 {
 
 }
 
 
-e_status_t
-ENetEndpoint::Archive(EMessage *into, bool deep) const
+b_status_t
+BNetEndpoint::Archive(BMessage *into, bool deep) const
 {
- if(!into) return E_ERROR;
+ if(!into) return B_ERROR;
 
- EArchivable::Archive(into, deep);
- into->AddString("class", "ENetEndpoint");
+ BArchivable::Archive(into, deep);
+ into->AddString("class", "BNetEndpoint");
 
 
 
- return E_OK;
+ return B_OK;
 }
 
 
-EArchivable*
-ENetEndpoint::Instantiate(const EMessage *from)
+BArchivable*
+BNetEndpoint::Instantiate(const BMessage *from)
 {
- if(e_validate_instantiation(from, "ENetEndpoint"))
-  return new ENetEndpoint(from);
+ if(b_validatb_instantiation(from, "BNetEndpoint"))
+  return new BNetEndpoint(from);
  return __null;
 }
 
 
-e_status_t
-ENetEndpoint::InitCheck() const
+b_status_t
+BNetEndpoint::InitCheck() const
 {
- return(fSocket == -1 ? E_ERROR : E_OK);
+ return(fSocket == -1 ? B_ERROR : B_OK);
 }
 
 
-ENetEndpoint&
-ENetEndpoint::operator=(const ENetEndpoint &endpoint)
+BNetEndpoint&
+BNetEndpoint::operator=(const BNetEndpoint &endpoint)
 {
- ENetEndpoint::Close();
+ BNetEndpoint::Close();
 
  if(endpoint.fSocket != -1)
  {
-  if(endpoint.fBind) ENetEndpoint::Bind(endpoint.fLocalAddr);
-  ENetEndpoint::Connect(endpoint.fRemoteAddr);
+  if(endpoint.fBind) BNetEndpoint::Bind(endpoint.fLocalAddr);
+  BNetEndpoint::Connect(endpoint.fRemoteAddr);
   if(endpoint.fNonBlocking) SetNonBlocking(true);
  }
 
@@ -47126,13 +47119,13 @@ ENetEndpoint::operator=(const ENetEndpoint &endpoint)
 }
 
 
-e_status_t
-ENetEndpoint::SetProtocol(int proto)
+b_status_t
+BNetEndpoint::SetProtocol(int proto)
 {
  if(fProtocol != proto)
  {
   int s = socket(2, proto, 0);
-  if(s == -1) return E_ERROR;
+  if(s == -1) return B_ERROR;
 
   _Close();
 
@@ -47140,12 +47133,12 @@ ENetEndpoint::SetProtocol(int proto)
   fProtocol = proto;
  }
 
- return E_OK;
+ return B_OK;
 }
 
 
 int
-ENetEndpoint::SetSocketOption(eint32 level, eint32 option, const void *data, size_t data_len)
+BNetEndpoint::SetSocketOption(b_int32 level, b_int32 option, const void *data, size_t data_len)
 {
  if(fSocket == -1) return -1;
 
@@ -47156,7 +47149,7 @@ ENetEndpoint::SetSocketOption(eint32 level, eint32 option, const void *data, siz
 
 
 int
-ENetEndpoint::GetSocketOption(eint32 level, eint32 option, void *data, size_t *data_len) const
+BNetEndpoint::GetSocketOption(b_int32 level, b_int32 option, void *data, size_t *data_len) const
 {
  if(fSocket == -1) return -1;
 # 209 "../src/net/NetEndpoint.cpp"
@@ -47169,7 +47162,7 @@ ENetEndpoint::GetSocketOption(eint32 level, eint32 option, void *data, size_t *d
 
 
 int
-ENetEndpoint::SetNonBlocking(bool state)
+BNetEndpoint::SetNonBlocking(bool state)
 {
  if(fSocket == -1) return -1;
 
@@ -47187,28 +47180,28 @@ ENetEndpoint::SetNonBlocking(bool state)
 
 
 bool
-ENetEndpoint::IsNonBlocking() const
+BNetEndpoint::IsNonBlocking() const
 {
  return fNonBlocking;
 }
 
 
-const ENetAddress&
-ENetEndpoint::LocalAddr() const
+const BNetAddress&
+BNetEndpoint::LocalAddr() const
 {
  return fLocalAddr;
 }
 
 
-const ENetAddress&
-ENetEndpoint::RemoteAddr() const
+const BNetAddress&
+BNetEndpoint::RemoteAddr() const
 {
  return fRemoteAddr;
 }
 
 
 void
-ENetEndpoint::_Close()
+BNetEndpoint::_Close()
 {
  if(fSocket != -1)
  {
@@ -47220,8 +47213,8 @@ ENetEndpoint::_Close()
   fSocket = -1;
  }
 
- fLocalAddr = ENetAddress();
- fRemoteAddr = ENetAddress();
+ fLocalAddr = BNetAddress();
+ fRemoteAddr = BNetAddress();
 
  fBind = false;
  fNonBlocking = false;
@@ -47229,25 +47222,25 @@ ENetEndpoint::_Close()
 
 
 void
-ENetEndpoint::Close()
+BNetEndpoint::Close()
 {
  _Close();
  fSocket = socket(2, fProtocol, 0);
 }
 
 
-e_status_t
-ENetEndpoint::Bind(const ENetAddress &addr)
+b_status_t
+BNetEndpoint::Bind(const BNetAddress &addr)
 {
- if(fSocket == -1) return E_ERROR;
+ if(fSocket == -1) return B_ERROR;
 
  struct sockaddr_in sa;
- if(addr.GetAddr(sa) != E_OK) return E_ERROR;
+ if(addr.GetAddr(sa) != B_OK) return B_ERROR;
 
  if(bind(fSocket, (struct sockaddr*)&sa, sizeof(sa)) != 0)
  {
-  ETK_DEBUG("[NET]: %s --- bind() failed (errno:%d).", __PRETTY_FUNCTION__, (*_errno()));
-  return E_ERROR;
+  BHAPI_DEBUG("[NET]: %s --- bind() failed (errno:%d).", __PRETTY_FUNCTION__, (*_errno()));
+  return B_ERROR;
  }
 
  int len = sizeof(sa);
@@ -47255,32 +47248,32 @@ ENetEndpoint::Bind(const ENetAddress &addr)
  fLocalAddr.SetTo(sa);
  fBind = true;
 
- return E_OK;
+ return B_OK;
 }
 
 
-e_status_t
-ENetEndpoint::Bind(euint16 port)
+b_status_t
+BNetEndpoint::Bind(b_uint16 port)
 {
- ENetAddress addr(0x7f000001, port);
+ BNetAddress addr(0x7f000001, port);
  return Bind(addr);
 }
 
 
-e_status_t
-ENetEndpoint::Connect(const ENetAddress &addr)
+b_status_t
+BNetEndpoint::Connect(const BNetAddress &addr)
 {
- if(fSocket == -1) return E_ERROR;
+ if(fSocket == -1) return B_ERROR;
 
  struct sockaddr_in sa;
  int len;
 
- if(addr.GetAddr(sa) != E_OK) return E_ERROR;
+ if(addr.GetAddr(sa) != B_OK) return B_ERROR;
 
  if(connect(fSocket, (struct sockaddr*)&sa, sizeof(sa)) != 0)
  {
-  ETK_DEBUG("[NET]: %s --- connect() failed (errno:%d).", __PRETTY_FUNCTION__, (*_errno()));
-  return E_ERROR;
+  BHAPI_DEBUG("[NET]: %s --- connect() failed (errno:%d).", __PRETTY_FUNCTION__, (*_errno()));
+  return B_ERROR;
  }
 
  if(fBind == false)
@@ -47292,28 +47285,28 @@ ENetEndpoint::Connect(const ENetAddress &addr)
  len = sizeof(sa);
  if(getpeername(fSocket, (struct sockaddr*)&sa, &len) == 0) fRemoteAddr.SetTo(sa);
 
- return E_OK;
+ return B_OK;
 }
 
 
-e_status_t
-ENetEndpoint::Connect(const char *address, euint16 port)
+b_status_t
+BNetEndpoint::Connect(const char *address, b_uint16 port)
 {
- ENetAddress addr(address, port);
- return ENetEndpoint::Connect(addr);
+ BNetAddress addr(address, port);
+ return BNetEndpoint::Connect(addr);
 }
 
 
-e_status_t
-ENetEndpoint::Listen(int backlog)
+b_status_t
+BNetEndpoint::Listen(int backlog)
 {
- if(fSocket == -1) return E_ERROR;
- return(listen(fSocket, backlog) == 0 ? E_OK : E_ERROR);
+ if(fSocket == -1) return B_ERROR;
+ return(listen(fSocket, backlog) == 0 ? B_OK : B_ERROR);
 }
 
 
-ENetEndpoint*
-ENetEndpoint::Accept(eint32 timeout_msec)
+BNetEndpoint*
+BNetEndpoint::Accept(b_int32 timeout_msec)
 {
  if(fSocket == -1) return __null;
 
@@ -47328,7 +47321,7 @@ ENetEndpoint::Accept(eint32 timeout_msec)
  else
  {
   bool saveState = fNonBlocking;
-  e_bigtime_t saveTime = etk_real_time_clock_usecs();
+  b_bigtime_t saveTime = bhapi_real_time_clock_usecs();
   SetNonBlocking(true);
   do
   {
@@ -47338,14 +47331,14 @@ ENetEndpoint::Accept(eint32 timeout_msec)
    if(!(err == (10000 + 35) ||
         err == (10000 + 53) ||
         err == (10000 + 4))) break;
-   if(timeout_msec > 0) etk_snooze(1000);
-  } while(etk_real_time_clock_usecs() - saveTime <= timeout_msec * (const long long)(1000));
+   if(timeout_msec > 0) bhapi_snooze(1000);
+  } while(bhapi_real_time_clock_usecs() - saveTime <= timeout_msec * (const long long)(1000));
   SetNonBlocking(saveState);
  }
 
  if(s == -1) return __null;
 
- ENetEndpoint *endpoint = new ENetEndpoint(fProtocol);
+ BNetEndpoint *endpoint = new BNetEndpoint(fProtocol);
  endpoint->_Close();
  endpoint->fSocket = s;
  endpoint->fLocalAddr = fLocalAddr;
@@ -47356,7 +47349,7 @@ ENetEndpoint::Accept(eint32 timeout_msec)
 
 
 int
-ENetEndpoint::Error() const
+BNetEndpoint::Error() const
 {
 
  return WSAGetLastError();
@@ -47367,22 +47360,22 @@ ENetEndpoint::Error() const
 
 
 const char*
-ENetEndpoint::ErrorStr() const
+BNetEndpoint::ErrorStr() const
 {
 
  return strerror(Error());
 }
 
 
-eint32
-ENetEndpoint::Send(const void *buf, size_t len, int flags)
+b_int32
+BNetEndpoint::Send(const void *buf, size_t len, int flags)
 {
- if(fSocket == -1 || fLocalAddr.InitCheck() != E_OK) return -1;
+ if(fSocket == -1 || fLocalAddr.InitCheck() != B_OK) return -1;
 
  if(fProtocol == 2)
  {
   struct sockaddr_in sa;
-  if(fRemoteAddr.GetAddr(sa) != E_OK) return -1;
+  if(fRemoteAddr.GetAddr(sa) != B_OK) return -1;
   return sendto(fSocket, (const char*)buf, len, flags, (struct sockaddr*)&sa, sizeof(sa));
  }
  else
@@ -47392,63 +47385,63 @@ ENetEndpoint::Send(const void *buf, size_t len, int flags)
 }
 
 
-eint32
-ENetEndpoint::Send(const ENetBuffer &buf, int flags)
+b_int32
+BNetEndpoint::Send(const BNetBuffer &buf, int flags)
 {
- return ENetEndpoint::Send(buf.Data(), buf.Size(), flags);
+ return BNetEndpoint::Send(buf.Data(), buf.Size(), flags);
 }
 
 
-eint32
-ENetEndpoint::SendTo(const void *buf, size_t len, const ENetAddress &to, int flags)
+b_int32
+BNetEndpoint::SendTo(const void *buf, size_t len, const BNetAddress &to, int flags)
 {
- if(fSocket == -1 || fLocalAddr.InitCheck() != E_OK) return -1;
+ if(fSocket == -1 || fLocalAddr.InitCheck() != B_OK) return -1;
  if(fProtocol != 2) return -1;
 
  struct sockaddr_in sa;
- if(fRemoteAddr.GetAddr(sa) != E_OK) return -1;
+ if(fRemoteAddr.GetAddr(sa) != B_OK) return -1;
  return sendto(fSocket, (const char*)buf, len, flags, (struct sockaddr*)&sa, sizeof(sa));
 }
 
 
-eint32
-ENetEndpoint::SendTo(const ENetBuffer &buf, const ENetAddress &to, int flags)
+b_int32
+BNetEndpoint::SendTo(const BNetBuffer &buf, const BNetAddress &to, int flags)
 {
- return ENetEndpoint::SendTo(buf.Data(), buf.Size(), to, flags);
+ return BNetEndpoint::SendTo(buf.Data(), buf.Size(), to, flags);
 }
 
 
 void
-ENetEndpoint::SetTimeout(e_bigtime_t timeout)
+BNetEndpoint::SetTimeout(b_bigtime_t timeout)
 {
  if(timeout < 0) timeout = 0;
  fTimeout = timeout;
 }
 
 
-eint32
-ENetEndpoint::Receive(void *buf, size_t len, int flags)
+b_int32
+BNetEndpoint::Receive(void *buf, size_t len, int flags)
 {
- if(fSocket == -1 || fLocalAddr.InitCheck() != E_OK) return -1;
- if(!ENetEndpoint::IsDataPending(fTimeout)) return -1;
+ if(fSocket == -1 || fLocalAddr.InitCheck() != B_OK) return -1;
+ if(!BNetEndpoint::IsDataPending(fTimeout)) return -1;
  return recv(fSocket, (char*)buf, len, flags);
 }
 
 
-eint32
-ENetEndpoint::Receive(ENetBuffer &buf, size_t len, int flags)
+b_int32
+BNetEndpoint::Receive(BNetBuffer &buf, size_t len, int flags)
 {
  void *data = (len != 0 ? malloc(len) : __null);
  if(data == __null) return -1;
 
- eint32 bytes = ENetEndpoint::Receive(data, len, flags);
+ b_int32 bytes = BNetEndpoint::Receive(data, len, flags);
  if(bytes < 0)
  {
   free(data);
   return -1;
  }
 
- buf = ENetBuffer(bytes);
+ buf = BNetBuffer(bytes);
  buf.AppendData(data, (size_t)bytes);
  free(data);
 
@@ -47456,36 +47449,36 @@ ENetEndpoint::Receive(ENetBuffer &buf, size_t len, int flags)
 }
 
 
-eint32
-ENetEndpoint::ReceiveFrom(void *buf, size_t len, const ENetAddress &from, int flags)
+b_int32
+BNetEndpoint::ReceiveFrom(void *buf, size_t len, const BNetAddress &from, int flags)
 {
- if(fSocket == -1 || fLocalAddr.InitCheck() != E_OK) return -1;
+ if(fSocket == -1 || fLocalAddr.InitCheck() != B_OK) return -1;
  if(fProtocol != 2) return -1;
 
  struct sockaddr_in sa;
- if(from.GetAddr(sa) != E_OK) return -1;
+ if(from.GetAddr(sa) != B_OK) return -1;
 
- if(!ENetEndpoint::IsDataPending(fTimeout)) return -1;
+ if(!BNetEndpoint::IsDataPending(fTimeout)) return -1;
 
  int _len = sizeof(sa);
  return recvfrom(fSocket, (char*)buf, len, flags, (struct sockaddr*)&sa, &_len);
 }
 
 
-eint32
-ENetEndpoint::ReceiveFrom(ENetBuffer &buf, size_t len, const ENetAddress &from, int flags)
+b_int32
+BNetEndpoint::ReceiveFrom(BNetBuffer &buf, size_t len, const BNetAddress &from, int flags)
 {
  void *data = (len != 0 ? malloc(len) : __null);
  if(data == __null) return -1;
 
- eint32 bytes = ENetEndpoint::ReceiveFrom(data, len, from, flags);
+ b_int32 bytes = BNetEndpoint::ReceiveFrom(data, len, from, flags);
  if(bytes < 0)
  {
   free(data);
   return -1;
  }
 
- buf = ENetBuffer(bytes);
+ buf = BNetBuffer(bytes);
  buf.AppendData(data, (size_t)bytes);
  free(data);
 
@@ -47494,7 +47487,7 @@ ENetEndpoint::ReceiveFrom(ENetBuffer &buf, size_t len, const ENetAddress &from, 
 
 
 bool
-ENetEndpoint::IsDataPending(e_bigtime_t _timeout)
+BNetEndpoint::IsDataPending(b_bigtime_t _timeout)
 {
  if(fSocket == -1) return false;
 
@@ -47521,7 +47514,7 @@ ENetEndpoint::IsDataPending(e_bigtime_t _timeout)
 
 
 int
-ENetEndpoint::Socket() const
+BNetEndpoint::Socket() const
 {
  return fSocket;
 }

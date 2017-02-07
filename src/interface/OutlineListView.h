@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,75 +24,75 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: OutlineListView.h
- * Description: EOutlineListView --- Displays a list of items that can be structured like an outline
+ * Description: BOutlineListView --- Displays a list of items that can be structured like an outline
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_OUTLINE_LIST_VIEW_H__
-#define __ETK_OUTLINE_LIST_VIEW_H__
+#ifndef __BHAPI_OUTLINE_LIST_VIEW_H__
+#define __BHAPI_OUTLINE_LIST_VIEW_H__
 
 #include "./../interface/ListView.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EOutlineListView : public EListView {
+class _IMPEXP_BHAPI BOutlineListView : public BListView {
 public:
-	EOutlineListView(ERect frame,
+    BOutlineListView(BRect frame,
 			 const char *name,
-			 e_list_view_type type = E_SINGLE_SELECTION_LIST,
-			 euint32 resizingMode = E_FOLLOW_LEFT | E_FOLLOW_TOP,
-			 euint32 flags = E_WILL_DRAW | E_NAVIGABLE | E_FRAME_EVENTS);
-	virtual ~EOutlineListView();
+			 b_list_view_type type = B_SINGLE_SELECTION_LIST,
+             b_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+             b_uint32 flags = B_WILL_DRAW | B_NAVIGABLE | B_FRAME_EVENTS);
+    virtual ~BOutlineListView();
 
-	virtual bool		AddUnder(EListItem *item, EListItem *superitem);
+	virtual bool		AddUnder(BListItem *item, BListItem *superitem);
 
-	virtual bool		AddItem(EListItem *item);
-	virtual bool		AddItem(EListItem *item, eint32 fullListIndex);
-	virtual bool		RemoveItem(EListItem *item, bool auto_destruct_item_and_subitems = true);
-	virtual bool		RemoveItems(eint32 fullListIndex, eint32 count, bool auto_destruct_items = true);
+	virtual bool		AddItem(BListItem *item);
+    virtual bool		AddItem(BListItem *item, b_int32 fullListIndex);
+	virtual bool		RemoveItem(BListItem *item, bool auto_destruct_item_and_subitems = true);
+    virtual bool		RemoveItems(b_int32 fullListIndex, b_int32 count, bool auto_destruct_items = true);
 
-	virtual EListItem	*RemoveItem(eint32 fullListIndex, bool auto_destruct_subitems, eint32 *count);
-	virtual EListItem	*RemoveItem(eint32 fullListIndex); // same as RemoveItem(fullListIndex, true, NULL)
+    virtual BListItem	*RemoveItem(b_int32 fullListIndex, bool auto_destruct_subitems, b_int32 *count);
+    virtual BListItem	*RemoveItem(b_int32 fullListIndex); // same as RemoveItem(fullListIndex, true, NULL)
 
-	EListItem		*FullListItemAt(eint32 fullListIndex) const;
-	eint32			FullListIndexOf(const EListItem *item) const;
-	EListItem		*FullListFirstItem() const;
-	EListItem		*FullListLastItem() const;
-	bool			FullListHasItem(const EListItem *item) const;
-	eint32			FullListCountItems() const;
-	eint32			FullListCurrentSelection(eint32 index = 0) const;
+    BListItem		*FullListItemAt(b_int32 fullListIndex) const;
+    b_int32			FullListIndexOf(const BListItem *item) const;
+	BListItem		*FullListFirstItem() const;
+	BListItem		*FullListLastItem() const;
+	bool			FullListHasItem(const BListItem *item) const;
+    b_int32			FullListCountItems() const;
+    b_int32			FullListCurrentSelection(b_int32 index = 0) const;
 	virtual void		MakeEmpty();
 	bool			FullListIsEmpty() const;
 
-	void			FullListDoForEach(bool (*func)(EListItem *item));
-	void			FullListDoForEach(bool (*func)(EListItem *item, void *user_data), void *user_data);
+	void			FullListDoForEach(bool (*func)(BListItem *item));
+	void			FullListDoForEach(bool (*func)(BListItem *item, void *user_data), void *user_data);
 
-	EListItem		*Superitem(const EListItem *item) const;
-	bool			HasSubitems(const EListItem *item) const;
+	BListItem		*Superitem(const BListItem *item) const;
+	bool			HasSubitems(const BListItem *item) const;
 
-	eint32			CountItemsUnder(EListItem *item, bool oneLevelOnly) const;
-	EListItem		*EachItemUnder(EListItem *item, bool oneLevelOnly,
-					       EListItem *(*eachFunc)(EListItem *item, void *user_data), void *user_data);
-	EListItem		*ItemUnderAt(EListItem *item, bool oneLevelOnly, eint32 index) const;
+    b_int32			CountItemsUnder(BListItem *item, bool oneLevelOnly) const;
+	BListItem		*EachItemUnder(BListItem *item, bool oneLevelOnly,
+					       BListItem *(*eachFunc)(BListItem *item, void *user_data), void *user_data);
+    BListItem		*ItemUnderAt(BListItem *item, bool oneLevelOnly, b_int32 index) const;
 
-	void			Expand(EListItem *item);
-	void			Collapse(EListItem *item);
-	bool			IsExpanded(eint32 fullListIndex) const;
+	void			Expand(BListItem *item);
+	void			Collapse(BListItem *item);
+    bool			IsExpanded(b_int32 fullListIndex) const;
 
 	// FullListItems(): return the list, use it carefully please
-	const EListItem		**FullListItems() const;
+	const BListItem		**FullListItems() const;
 
-	virtual void		MouseDown(EPoint where);
-	virtual void		MouseUp(EPoint where);
-	virtual void		MouseMoved(EPoint where, euint32 code, const EMessage *a_message);
-	virtual void		KeyDown(const char *bytes, eint32 numBytes);
-	virtual void		KeyUp(const char *bytes, eint32 numBytes);
+	virtual void		MouseDown(BPoint where);
+	virtual void		MouseUp(BPoint where);
+    virtual void		MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
+    virtual void		KeyDown(const char *bytes, b_int32 numBytes);
+    virtual void		KeyUp(const char *bytes, b_int32 numBytes);
 
 private:
-	EList fFullItems;
+	BList fFullItems;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_OUTLINE_LIST_VIEW_H__ */
+#endif /* __BHAPI_OUTLINE_LIST_VIEW_H__ */
 

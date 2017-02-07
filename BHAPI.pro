@@ -97,14 +97,14 @@ SOURCES += bhapi.cpp \
     src/support/Locker.cpp \
     src/support/SimpleLocker.cpp \
     src/support/StreamIO.cpp \
-    src/support/String.cpp \
     src/support/StringArray.cpp \
     src/xml/SimpleXmlParser.cpp \
     tools/etkxx-doc.cpp \
     src/support/ByteOrder.c \
     src/interface/layout/LayoutContainer.cpp \
     src/interface/layout/LayoutForm.cpp \
-    src/interface/layout/LayoutItem.cpp
+    src/interface/layout/LayoutItem.cpp \
+    src/support/StringMe.cpp
 
 contains(QMAKE_COMPILER_DEFINES, BEOS) {
 SOURCES +=  src/interface/beos/etk-application.cpp \
@@ -175,7 +175,8 @@ HEADERS += src/interface/carbon/etk-carbon.h
 }
 
 SOURCES += src/interface/wm/SimpleWM.cpp
-HEADERS += src/interface/wm/SimpleWM.h
+HEADERS += src/interface/wm/SimpleWM.h \
+    src/support/StringMe.h
 
 HEADERS += bhapi.h\
     bhapi_global.h \
@@ -272,12 +273,11 @@ HEADERS += bhapi.h\
     src/support/Locker.h \
     src/support/SimpleLocker.h \
     src/support/StreamIO.h \
-    src/support/String.h \
     src/support/StringArray.h \
     src/support/SupportDefs.h \
     src/xml/SimpleXmlParser.h \
     src/AppKit.h \
-    src/ETK.h \
+    src/BE.h \
     src/InterfaceKit.h \
     src/KernelKit.h \
     src/NetKit.h \
@@ -310,7 +310,7 @@ QMAKE_CXXFLAGS += -malign-double
 QMAKE_CXXFLAGS += -momit-leaf-frame-pointer
 QMAKE_CXXFLAGS += -fwrapv
 QMAKE_CXXFLAGS += -funroll-loops
-QMAKE_CXXFLAGS += -m32 -mfpmath=sse -flto -O3
+QMAKE_CXXFLAGS += -m32 -mfpmath=sse -flto #-O1
 QMAKE_CXXFLAGS += -mpreferred-stack-boundary=8
 QMAKE_CXXFLAGS += -mmmx -msse -msse2 #-msse3
 
@@ -339,7 +339,7 @@ QMAKE_CXXFLAGS += -malign-double
 QMAKE_CXXFLAGS += -momit-leaf-frame-pointer
 QMAKE_CXXFLAGS += -fwrapv
 QMAKE_CXXFLAGS += -funroll-loops
-QMAKE_CXXFLAGS += -m32 --32 -mfpmath=sse -flto -O3
+QMAKE_CXXFLAGS += -m32 --32 -mfpmath=sse -flto #-O1
 QMAKE_CXXFLAGS += -mpreferred-stack-boundary=8
 QMAKE_CXXFLAGS += -mmmx -msse -msse2 #-msse3
 QMAKE_CXXFLAGS += -Qunused-arguments -Wno-error=unused-command-line-argument-hard-error-in-future

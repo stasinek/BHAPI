@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -34,26 +34,26 @@
 #include "./../kernel/Kernel.h"
 #include "./../support/SimpleLocker.h"
 
-#define SECS_TO_US		E_INT64_CONSTANT(1000000)
+#define SECS_TO_US	    B_INT64_CONSTANT(1000000)
 
 
 // return the number of microseconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-_IMPEXP_ETK e_bigtime_t etk_real_time_clock_usecs(void)
+_IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
 {
-	eint64 current_time = E_INT64_CONSTANT(-1);
+	b_int64 current_time = B_INT64_CONSTANT(-1);
 #if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)
 	struct timespec ts;
 
 	if(clock_gettime(CLOCK_REALTIME, &ts) == 0)
-		current_time = (eint64)ts.tv_sec * SECS_TO_US + (eint64)(ts.tv_nsec + 500) / E_INT64_CONSTANT(1000);
+		current_time = (b_int64)ts.tv_sec * SECS_TO_US + (b_int64)(ts.tv_nsec + 500) / B_INT64_CONSTANT(1000);
 #else
 #ifdef HAVE_GETTIMEOFDAY
 	struct timeval tv;
 
 	if(gettimeofday(&tv, NULL) == 0)
-		current_time = (eint64)tv.tv_sec * SECS_TO_US + (eint64)tv.tv_usec;
+		current_time = (b_int64)tv.tv_sec * SECS_TO_US + (b_int64)tv.tv_usec;
 #else
-	#error "no time function implement etk_real_time_clock_usec!"
+	#error "no time function implement bhapi_real_time_clock_usec!"
 #endif
 #endif
 	return current_time;
@@ -61,37 +61,37 @@ _IMPEXP_ETK e_bigtime_t etk_real_time_clock_usecs(void)
 
 
 // return the number of seconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-_IMPEXP_ETK euint32 etk_real_time_clock(void)
+_IMPEXP_BHAPI b_uint32 bhapi_real_time_clock(void)
 {
-	euint32 current_time = 0;
+	b_uint32 current_time = 0;
 #if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)
 	struct timespec ts;
-	if(clock_gettime(CLOCK_REALTIME, &ts) == 0) current_time = (euint32)ts.tv_sec;
+	if(clock_gettime(CLOCK_REALTIME, &ts) == 0) current_time = (b_uint32)ts.tv_sec;
 #else
 #ifdef HAVE_GETTIMEOFDAY
 	struct timeval tv;
-	if(gettimeofday(&tv, NULL) == 0) current_time = (euint32)tv.tv_sec;
+	if(gettimeofday(&tv, NULL) == 0) current_time = (b_uint32)tv.tv_sec;
 #else
-	#error "no time function implement etk_real_time_clock!"
+	#error "no time function implement bhapi_real_time_clock!"
 #endif
 #endif
 	return current_time;
 }
 
 
-static eint64 etk_unix_boot_time = E_INT64_CONSTANT(-1);
-static ESimpleLocker etk_unix_boot_time_locker(true);
+static b_int64 bhapi_unix_boot_time = B_INT64_CONSTANT(-1);
+static BSimpleLocker bhapi_unix_boot_time_locker(true);
 
 
-_IMPEXP_ETK e_bigtime_t etk_system_boot_time(void)
+_IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
 {
-	e_bigtime_t retValue = E_INT64_CONSTANT(-1);
+	b_bigtime_t retValue = B_INT64_CONSTANT(-1);
 
-	etk_unix_boot_time_locker.Lock();
+	bhapi_unix_boot_time_locker.Lock();
 
-	if(etk_unix_boot_time >= E_INT64_CONSTANT(0))
+	if(bhapi_unix_boot_time >= B_INT64_CONSTANT(0))
 	{
-		retValue = etk_unix_boot_time;
+		retValue = bhapi_unix_boot_time;
 	}
 	else
 	{
@@ -100,24 +100,24 @@ _IMPEXP_ETK e_bigtime_t etk_system_boot_time(void)
 
 		if(clock_gettime(CLOCK_MONOTONIC, &ts) == 0)
 		{
-			e_bigtime_t up_time = (eint64)ts.tv_sec * SECS_TO_US + (eint64)(ts.tv_nsec + 500) / E_INT64_CONSTANT(1000);
-			retValue = etk_unix_boot_time = etk_real_time_clock_usecs() - up_time;
+			b_bigtime_t up_time = (b_int64)ts.tv_sec * SECS_TO_US + (b_int64)(ts.tv_nsec + 500) / B_INT64_CONSTANT(1000);
+			retValue = bhapi_unix_boot_time = bhapi_real_time_clock_usecs() - up_time;
 		}
 #else
-		#warning "fixme: no time function implement etk_system_boot_time!"
-		retValue = etk_unix_boot_time = E_INT64_CONSTANT(0);
+		#warning "fixme: no time function implement bhapi_system_boot_time!"
+		retValue = bhapi_unix_boot_time = B_INT64_CONSTANT(0);
 #endif
 	}
 
-	etk_unix_boot_time_locker.Unlock();
+	bhapi_unix_boot_time_locker.Unlock();
 
 	return retValue;
 }
 
 
-_IMPEXP_ETK e_bigtime_t etk_system_time(void)
+_IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void)
 {
 	// FIXME
-	return(etk_real_time_clock_usecs() - etk_system_boot_time());
+	return(bhapi_real_time_clock_usecs() - bhapi_system_boot_time());
 }
 

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,59 +24,61 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: Alert.h
- * Description: EAlert --- Display a modal window that notifies something
+ * Description: BAlert --- Display a modal window that notifies something
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_ALERT_H__
-#define __ETK_ALERT_H__
+#ifndef __BHAPI_ALERT_H__
+#define __BHAPI_ALERT_H__
+
+#include "./../support/SupportDefs.h"
 
 #include "./../interface/InterfaceDefs.h"
 #include "./../interface/Window.h"
 
-enum e_alert_type {
-	E_EMPTY_ALERT = 0,
-	E_INFO_ALERT,
-	E_IDEA_ALERT,
-	E_WARNING_ALERT,
-	E_STOP_ALERT
+enum b_alert_type {
+    B_EMPTY_ALERT = 0,
+    B_INFO_ALERT,
+    B_IDEA_ALERT,
+    B_WARNING_ALERT,
+    B_STOP_ALERT
 };
 
 #ifdef __cplusplus /* Just for C++ */
 
-class EInvoker;
-class EButton;
-class ETextView;
+class BInvoker;
+class BButton;
+class BTextView;
 
-class _IMPEXP_ETK EAlert : public EWindow {
+class _IMPEXP_BHAPI BAlert : public BWindow {
 public:
-	EAlert(const char *title,
+    BAlert(const char *title,
 	       const char *text,
 	       const char *button1_label,
 	       const char *button2_label = NULL,
 	       const char *button3_label = NULL,
-	       e_button_width width = E_WIDTH_AS_USUAL,
-	       e_alert_type type = E_INFO_ALERT);
-	virtual ~EAlert();
+	       b_button_width width = B_WIDTH_AS_USUAL,
+	       b_alert_type type = B_INFO_ALERT);
+    virtual ~BAlert();
 
 	// run synchronously then auto-destruct when it return.
-	// "could_proxy" must be "true" when it called from looper of EApplication!
-	eint32		Go(bool could_proxy = true);
+	// "could_proxy" must be "true" when it called from looper of BApplication!
+    b_int32		Go(bool could_proxy = true);
 
 	// run asynchronously and auto-destruct after message send
-	e_status_t	Go(EInvoker *invoker);
+	b_status_t	Go(BInvoker *invoker);
 
-	EButton		*ButtonAt(eint32 index) const;
-	ETextView	*TextView() const;
+    BButton		*ButtonAt(b_int32 index) const;
+    BTextView	*TextView() const;
 
 	virtual bool	QuitRequested();
 
 private:
-	EButton *fButtons[3];
-	ETextView *fTextView;
+    BButton *fButtons[3];
+    BTextView *fTextView;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_ALERT_H__ */
+#endif /* __BHAPI_ALERT_H__ */
 

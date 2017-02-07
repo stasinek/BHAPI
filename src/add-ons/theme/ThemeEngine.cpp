@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -30,11 +30,11 @@
 #include "ThemeEngine.h"
 
 
-extern e_theme_engine etk_default_theme_engine;
+extern b_theme_engine bhapi_default_theme_engine;
 
 
-_IMPEXP_ETK e_theme_engine* etk_get_current_theme_engine(void)
+_IMPEXP_BHAPI b_theme_engine* bhapi_get_current_theme_engine(void)
 {
-	return &etk_default_theme_engine;
+	return &bhapi_default_theme_engine;
 }
 

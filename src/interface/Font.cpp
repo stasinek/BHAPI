@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -36,23 +36,23 @@
 #include "Font.h"
 
 
-extern _IMPEXP_ETK const EFont* etk_plain_font = NULL;
-extern _IMPEXP_ETK const EFont* etk_bold_font = NULL;
-extern _IMPEXP_ETK const EFont* etk_fixed_font = NULL;
+extern _IMPEXP_BHAPI const BFont* bhapi_plain_font = NULL;
+extern _IMPEXP_BHAPI const BFont* bhapi_bold_font = NULL;
+extern _IMPEXP_BHAPI const BFont* bhapi_fixed_font = NULL;
 
-static ELocker etk_font_info_locker;
+static BLocker bhapi_font_info_locker;
 
-typedef struct etk_font_info {
-	EFontEngine *engine;
-	e_font_detach_callback *detach_callback;
+typedef struct bhapi_font_info {
+	BFontEngine *engine;
+	b_font_detach_callback *detach_callback;
 	float size;
 	float spacing;
 	float shear;
 	bool bold;
-	eint32 family_index;
-	eint32 style_index;
+	b_int32 family_index;
+	b_int32 style_index;
 
-	etk_font_info()
+	bhapi_font_info()
 	{
 		engine = NULL;
 		detach_callback = NULL;
@@ -64,27 +64,27 @@ typedef struct etk_font_info {
 		style_index = -1;
 	}
 
-	static void _detach_callback_(etk_font_info *info)
+	static void _detach_callback_(bhapi_font_info *info)
 	{
 		if(!info) return;
-		etk_font_info_locker.Lock();
+		bhapi_font_info_locker.Lock();
 		info->engine = NULL;
 		info->detach_callback = NULL;
-		etk_font_info_locker.Unlock();
+		bhapi_font_info_locker.Unlock();
 	}
 
-	etk_font_info& operator=(const etk_font_info &info)
+	bhapi_font_info& operator=(const bhapi_font_info &info)
 	{
-		etk_font_info_locker.Lock();
+		bhapi_font_info_locker.Lock();
 
-		EFontEngine *_engine_ = engine;
+		BFontEngine *_engine_ = engine;
 		if(_engine_)
 		{
 			_engine_->Lock();
 			if(_engine_->Detach(detach_callback) == false)
 			{
 				_engine_->Unlock();
-				etk_font_info_locker.Unlock();
+				bhapi_font_info_locker.Unlock();
 				return *this;
 			}
 			_engine_->Unlock();
@@ -98,7 +98,7 @@ typedef struct etk_font_info {
 			if((detach_callback = info.engine->Attach((void(*)(void*))_detach_callback_, this)) == NULL)
 			{
 				info.engine->Unlock();
-				etk_font_info_locker.Unlock();
+				bhapi_font_info_locker.Unlock();
 				return *this;
 			}
 			info.engine->Unlock();
@@ -112,35 +112,35 @@ typedef struct etk_font_info {
 		shear = info.shear;
 		bold = info.bold;
 
-		etk_font_info_locker.Unlock();
+		bhapi_font_info_locker.Unlock();
 
 		return *this;
 	}
 
-	bool operator==(const etk_font_info &info)
+	bool operator==(const bhapi_font_info &info)
 	{
-		EAutolock <ELocker> autolock(&etk_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
 		return(engine == info.engine && size == info.size && spacing == info.spacing && shear == info.shear && bold == info.bold ? true : false);
 	}
 
-	bool operator!=(const etk_font_info &info)
+	bool operator!=(const bhapi_font_info &info)
 	{
-		EAutolock <ELocker> autolock(&etk_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
 		return(engine == info.engine && size == info.size && spacing == info.spacing && shear == info.shear && bold == info.bold ? false : true);
 	}
 
-	bool SetEngine(EFontEngine *fengine)
+	bool SetEngine(BFontEngine *fengine)
 	{
-		etk_font_info_locker.Lock();
+		bhapi_font_info_locker.Lock();
 
-		EFontEngine *_engine_ = engine;
+		BFontEngine *_engine_ = engine;
 		if(_engine_)
 		{
 			_engine_->Lock();
 			if(_engine_->Detach(detach_callback) == false)
 			{
 				_engine_->Unlock();
-				etk_font_info_locker.Unlock();
+				bhapi_font_info_locker.Unlock();
 				return false;
 			}
 			_engine_->Unlock();
@@ -154,93 +154,93 @@ typedef struct etk_font_info {
 			if((detach_callback = fengine->Attach((void(*)(void*))_detach_callback_, this)) == NULL)
 			{
 				fengine->Unlock();
-				etk_font_info_locker.Unlock();
+				bhapi_font_info_locker.Unlock();
 				return false;
 			}
 			fengine->Unlock();
 		}
 
 		engine = fengine;
-		family_index = engine ? etk_get_font_family_index(engine->Family()) : -1;
-		style_index = engine ? etk_get_font_style_index(engine->Family(), engine->Style()) : -1;
+		family_index = engine ? bhapi_get_font_family_index(engine->Family()) : -1;
+		style_index = engine ? bhapi_get_font_style_index(engine->Family(), engine->Style()) : -1;
 
-		etk_font_info_locker.Unlock();
+		bhapi_font_info_locker.Unlock();
 
 		return true;
 	}
 
-	euint32 FamilyAndStyle() const
+	b_uint32 FamilyAndStyle() const
 	{
-		if(family_index < 0 || style_index < 0) return E_MAXUINT32;
-		euint32 fIndex = (euint32)family_index;
-		euint32 sIndex = (euint32)style_index;
+		if(family_index < 0 || style_index < 0) return B_MAXUINT32;
+		b_uint32 fIndex = (b_uint32)family_index;
+		b_uint32 sIndex = (b_uint32)style_index;
 		return((fIndex << 16) | sIndex);
 	}
 
-	EFontEngine* Engine() const
+	BFontEngine* Engine() const
 	{
-		EAutolock <ELocker> autolock(&etk_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
 		return engine;
 	}
 
 	void SetSize(float fsize)
 	{
-		EAutolock <ELocker> autolock(&etk_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
 		size = fsize;
 	}
 
 	float Size() const
 	{
-		EAutolock <ELocker> autolock(&etk_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
 		return size;
 	}
 
 	void SetSpacing(float fspacing)
 	{
-		EAutolock <ELocker> autolock(&etk_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
 		spacing = fspacing;
 	}
 
 	float Spacing() const
 	{
-		EAutolock <ELocker> autolock(&etk_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
 		return spacing;
 	}
 
 	void SetShear(float fshear)
 	{
-		EAutolock <ELocker> autolock(&etk_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
 		shear = fshear;
 	}
 
 	float Shear() const
 	{
-		EAutolock <ELocker> autolock(&etk_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
 		return shear;
 	}
 
 	void SetBoldStyle(bool fbold)
 	{
-		EAutolock <ELocker> autolock(&etk_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
 		bold = fbold;
 	}
 
 	bool IsBoldStyle() const
 	{
-		EAutolock <ELocker> autolock(&etk_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
 		return bold;
 	}
 
-	float StringWidth(const char *string, eint32 length, float tabWidth) const
+	float StringWidth(const char *string, b_int32 length, float tabWidth) const
 	{
 		if(string == NULL || *string == 0 || length == 0) return 0;
 
-		etk_font_info_locker.Lock();
+		bhapi_font_info_locker.Lock();
 
 		float width = 0;
 		if(engine)
 		{
-			EString aStr(string, length);
+			BString aStr(string, length);
 
 			engine->Lock();
 
@@ -253,15 +253,15 @@ typedef struct etk_font_info {
 				float spacing_width = spacing * size;
 				if(tabWidth < 0)
 				{
-					if(tabWidth < E_FONT_MIN_TAB_WIDTH) tabWidth = -E_FONT_MIN_TAB_WIDTH;
+                    if(tabWidth < B_FONT_MIN_TAB_WIDTH) tabWidth = -B_FONT_MIN_TAB_WIDTH;
 					else tabWidth = (float)(ceil((double)(-tabWidth)));
 					tabWidth = (tabWidth * engine->StringWidth(" ", size, spacing, shear, bold, 1)) +
 						   (tabWidth - 1.f) * spacing_width;
 				}
 
-				for(eint32 aOffset = 0; aOffset < aStr.Length(); aOffset++)
+				for(b_int32 aOffset = 0; aOffset < aStr.Length(); aOffset++)
 				{
-					eint32 oldOffset = aOffset, len;
+					b_int32 oldOffset = aOffset, len;
 					aOffset = aStr.FindFirst("\t", aOffset);
 
 					len = (aOffset < 0 ? aStr.Length() : aOffset) - oldOffset;
@@ -277,26 +277,26 @@ typedef struct etk_font_info {
 			engine->Unlock();
 		}
 
-		etk_font_info_locker.Unlock();
+		bhapi_font_info_locker.Unlock();
 
 		return width;
 	}
 
-	float* CharWidths(const char *string, eint32 length, eint32 *nChars, float tabWidth) const
+	float* CharWidths(const char *string, b_int32 length, b_int32 *nChars, float tabWidth) const
 	{
 		if(string == NULL || *string == 0 || length == 0 || nChars == NULL) return NULL;
 
-		eint32 strLen = (eint32)strlen(string);
+		b_int32 strLen = (b_int32)strlen(string);
 		if(length < 0 || length > strLen) length = strLen;
 
 		float *widths = new float[length];
 		if(widths == NULL) return NULL;
 
-		etk_font_info_locker.Lock();
+		bhapi_font_info_locker.Lock();
 
-		euint8 len = 0;
-		const char *ch = e_utf8_at(string, 0, &len);
-		eint32 count = 0;
+		b_uint8 len = 0;
+		const char *ch = b_utf8_at(string, 0, &len);
+		b_int32 count = 0;
 
 		if(engine)
 		{
@@ -304,7 +304,7 @@ typedef struct etk_font_info {
 			if(tabWidth < 0)
 			{
 				float spacing_width = spacing * size;
-				if(tabWidth < E_FONT_MIN_TAB_WIDTH) tabWidth = -E_FONT_MIN_TAB_WIDTH;
+                if(tabWidth < B_FONT_MIN_TAB_WIDTH) tabWidth = -B_FONT_MIN_TAB_WIDTH;
 				else tabWidth = (float)(ceil((double)(-tabWidth)));
 				tabWidth = (tabWidth * engine->StringWidth(" ", size, spacing, shear, bold, 1)) +
 					   (tabWidth - 1.f) * spacing_width;
@@ -319,7 +319,7 @@ typedef struct etk_font_info {
 			}
 			else if(tabWidth == 0 || *ch != '\t')
 			{
-				widths[count] = engine->StringWidth(ch, size, spacing, shear, bold, (eint32)len);
+				widths[count] = engine->StringWidth(ch, size, spacing, shear, bold, (b_int32)len);
 			}
 			else
 			{
@@ -327,22 +327,22 @@ typedef struct etk_font_info {
 			}
 
 			count++;
-			ch = e_utf8_next(ch, &len);
+			ch = b_utf8_next(ch, &len);
 		}
 		if(engine) engine->Unlock();
 
-		etk_font_info_locker.Unlock();
+		bhapi_font_info_locker.Unlock();
 
 		*nChars = count;
 
 		return widths;
 	}
 
-	void GetHeight(e_font_height *height) const
+	void GetHeight(b_font_height *height) const
 	{
 		if(!height) return;
 
-		etk_font_info_locker.Lock();
+		bhapi_font_info_locker.Lock();
 
 		if(engine)
 		{
@@ -351,13 +351,13 @@ typedef struct etk_font_info {
 			engine->Unlock();
 		}
 
-		etk_font_info_locker.Unlock();
+		bhapi_font_info_locker.Unlock();
 	}
 
-	~etk_font_info()
+	~bhapi_font_info()
 	{
-		etk_font_info_locker.Lock();
-		EFontEngine *_engine_ = engine;
+		bhapi_font_info_locker.Lock();
+		BFontEngine *_engine_ = engine;
 		if(_engine_)
 		{
 			_engine_->Lock();
@@ -367,53 +367,53 @@ typedef struct etk_font_info {
 		if(detach_callback) detach_callback->data = NULL;
 		engine = NULL;
 		detach_callback = NULL;
-		etk_font_info_locker.Unlock();
+		bhapi_font_info_locker.Unlock();
 	}
-} etk_font_info;
+} bhapi_font_info;
 
 
-EFont::EFont()
+BFont::BFont()
 	: fInfo(NULL)
 {
-	etk_font_info *fontInfo = new etk_font_info;
+	bhapi_font_info *fontInfo = new bhapi_font_info;
 	if(!fontInfo) return;
 
 	fInfo = (void*)fontInfo;
 }
 
 
-EFont::EFont(const EFont &font)
+BFont::BFont(const BFont &font)
 	: fInfo(NULL)
 {
-	etk_font_info *fontInfo = new etk_font_info;
+	bhapi_font_info *fontInfo = new bhapi_font_info;
 	if(!fontInfo) return;
 
 	if(font.fInfo)
-		*fontInfo = *((etk_font_info*)(font.fInfo));
+		*fontInfo = *((bhapi_font_info*)(font.fInfo));
 
 	fInfo = (void*)fontInfo;
 }
 
 
-EFont::EFont(const EFont *font)
+BFont::BFont(const BFont *font)
 	: fInfo(NULL)
 {
-	etk_font_info *fontInfo = new etk_font_info;
+	bhapi_font_info *fontInfo = new bhapi_font_info;
 	if(!fontInfo) return;
 
 	if(font)
 	{
-		if(font->fInfo) *fontInfo = *((etk_font_info*)(font->fInfo));
+		if(font->fInfo) *fontInfo = *((bhapi_font_info*)(font->fInfo));
 	}
 
 	fInfo = (void*)fontInfo;
 }
 
 
-EFont::EFont(const e_font_desc &fontDesc)
+BFont::BFont(const b_font_desc &fontDesc)
 	: fInfo(NULL)
 {
-	etk_font_info *fontInfo = new etk_font_info;
+	bhapi_font_info *fontInfo = new bhapi_font_info;
 	if(!fontInfo) return;
 
 	fInfo = (void*)fontInfo;
@@ -422,41 +422,41 @@ EFont::EFont(const e_font_desc &fontDesc)
 }
 
 
-EFont::~EFont()
+BFont::~BFont()
 {
-	if(fInfo) delete (etk_font_info*)fInfo;
+	if(fInfo) delete (bhapi_font_info*)fInfo;
 }
 
 
-EFont&
-EFont::operator=(const EFont &font)
+BFont&
+BFont::operator=(const BFont &font)
 {
 	if(font.fInfo == NULL)
 	{
-		if(fInfo) delete (etk_font_info*)fInfo;
+		if(fInfo) delete (bhapi_font_info*)fInfo;
 		fInfo = NULL;
 		return *this;
 	}
 
 	if(fInfo == NULL)
 	{
-		etk_font_info *fontInfo = new etk_font_info;
+		bhapi_font_info *fontInfo = new bhapi_font_info;
 		if(!fontInfo) return *this;
-		*fontInfo = *((etk_font_info*)(font.fInfo));
+		*fontInfo = *((bhapi_font_info*)(font.fInfo));
 		fInfo = (void*)fontInfo;
 	}
 	else
 	{
-		etk_font_info *fontInfo = (etk_font_info*)fInfo;
-		*fontInfo = *((etk_font_info*)(font.fInfo));
+		bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+		*fontInfo = *((bhapi_font_info*)(font.fInfo));
 	}
 
 	return *this;
 }
 
 
-EFont&
-EFont::operator=(const e_font_desc &fontDesc)
+BFont&
+BFont::operator=(const b_font_desc &fontDesc)
 {
 	SetFamilyAndStyle(fontDesc.family, fontDesc.style);
 	SetSize(fontDesc.size);
@@ -468,203 +468,203 @@ EFont::operator=(const e_font_desc &fontDesc)
 
 
 bool
-EFont::operator==(const EFont &font)
+BFont::operator==(const BFont &font)
 {
 	if(fInfo == NULL && font.fInfo == NULL) return true;
 	if(fInfo == NULL || font.fInfo == NULL) return false;
-	etk_font_info* fInfoA = (etk_font_info*)fInfo;
-	etk_font_info* fInfoB = (etk_font_info*)font.fInfo;
+	bhapi_font_info* fInfoA = (bhapi_font_info*)fInfo;
+	bhapi_font_info* fInfoB = (bhapi_font_info*)font.fInfo;
 	return(*fInfoA == *fInfoB);
 }
 
 
 bool
-EFont::operator!=(const EFont &font)
+BFont::operator!=(const BFont &font)
 {
 	if(fInfo == NULL && font.fInfo == NULL) return false;
 	if(fInfo == NULL || font.fInfo == NULL) return true;
-	etk_font_info* fInfoA = (etk_font_info*)fInfo;
-	etk_font_info* fInfoB = (etk_font_info*)font.fInfo;
+	bhapi_font_info* fInfoA = (bhapi_font_info*)fInfo;
+	bhapi_font_info* fInfoB = (bhapi_font_info*)font.fInfo;
 	return(*fInfoA != *fInfoB);
 }
 
 
 void
-EFont::SetSize(float size)
+BFont::SetSize(float size)
 {
 	if(size <= 0) return;
 
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
 	if(fontInfo) fontInfo->SetSize(size);
 }
 
 
 float
-EFont::Size() const
+BFont::Size() const
 {
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
 	return(fontInfo ? fontInfo->Size() : -1.f);
 }
 
 
 void
-EFont::SetSpacing(float spacing)
+BFont::SetSpacing(float spacing)
 {
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
 	if(fontInfo) fontInfo->SetSpacing(spacing);
 }
 
 
 float
-EFont::Spacing() const
+BFont::Spacing() const
 {
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
 	return(fontInfo ? fontInfo->Spacing() : 0.f);
 }
 
 
 void
-EFont::SetShear(float shear)
+BFont::SetShear(float shear)
 {
 	if(shear < 45.f) shear = 45.f;
 	else if(shear > 135.f) shear = 135.f;
 
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
 	if(fontInfo) fontInfo->SetShear(shear);
 }
 
 
 float
-EFont::Shear() const
+BFont::Shear() const
 {
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
 	return(fontInfo ? fontInfo->Shear() : -1.f);
 }
 
 
 void
-EFont::SetBoldStyle(bool bold)
+BFont::SetBoldStyle(bool bold)
 {
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
 	if(fontInfo) fontInfo->SetBoldStyle(bold);
 }
 
 
 bool
-EFont::IsBoldStyle() const
+BFont::IsBoldStyle() const
 {
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
 	return(fontInfo ? fontInfo->IsBoldStyle() : false);
 }
 
 
-EFontEngine*
-EFont::Engine() const
+BFontEngine*
+BFont::Engine() const
 {
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
 	return(fontInfo ? fontInfo->Engine() : NULL);
 }
 
 
 bool
-EFont::IsScalable() const
+BFont::IsScalable() const
 {
-	EFontEngine *engine = Engine();
+	BFontEngine *engine = Engine();
 	return(engine ? engine->IsScalable() : false);
 }
 
 
 bool
-EFont::HasFixedSize(eint32 *count) const
+BFont::HasFixedSize(b_int32 *count) const
 {
-	EFontEngine *engine = Engine();
+	BFontEngine *engine = Engine();
 	return(engine ? engine->HasFixedSize(count) : false);
 }
 
 
 bool
-EFont::GetFixedSize(float *size, eint32 index) const
+BFont::GetFixedSize(float *size, b_int32 index) const
 {
-	EFontEngine *engine = Engine();
+	BFontEngine *engine = Engine();
 	return(engine ? engine->GetFixedSize(size, index) : false);
 }
 
 
-e_status_t
-EFont::SetFamilyAndStyle(const e_font_family family, const e_font_style style)
+b_status_t
+BFont::SetFamilyAndStyle(const b_font_family family, const b_font_style style)
 {
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
-	if(!fontInfo) return E_ERROR;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	if(!fontInfo) return B_ERROR;
 
-	EFontEngine *engine = etk_get_font_engine(family, style);
-	if(!engine) return E_ERROR;
+	BFontEngine *engine = bhapi_get_font_engine(family, style);
+	if(!engine) return B_ERROR;
 
-	return(fontInfo->SetEngine(engine) ? E_OK : E_ERROR);
+	return(fontInfo->SetEngine(engine) ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EFont::SetFamilyAndStyle(euint32 code)
+b_status_t
+BFont::SetFamilyAndStyle(b_uint32 code)
 {
-	if(code == E_MAXUINT32) return E_BAD_VALUE;
+	if(code == B_MAXUINT32) return B_BAD_VALUE;
 
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
-	if(!fontInfo) return E_ERROR;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	if(!fontInfo) return B_ERROR;
 
-	euint32 familyIndex = code >> 16;
-	euint32 styleIndex = code & 0xffff;
+	b_uint32 familyIndex = code >> 16;
+	b_uint32 styleIndex = code & 0xffff;
 
-	EFontEngine *engine = etk_get_font_engine((eint32)familyIndex, (eint32)styleIndex);
-	if(!engine) return E_ERROR;
+	BFontEngine *engine = bhapi_get_font_engine((b_int32)familyIndex, (b_int32)styleIndex);
+	if(!engine) return B_ERROR;
 
-	return(fontInfo->SetEngine(engine) ? E_OK : E_ERROR);
+	return(fontInfo->SetEngine(engine) ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EFont::GetFamilyAndStyle(e_font_family *family, e_font_style *style) const
+b_status_t
+BFont::GetFamilyAndStyle(b_font_family *family, b_font_style *style) const
 {
-	if(!family || !style) return E_BAD_VALUE;
+	if(!family || !style) return B_BAD_VALUE;
 
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
-	if(!fontInfo) return E_ERROR;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	if(!fontInfo) return B_ERROR;
 
-	euint32 code = fontInfo->FamilyAndStyle();
-	if(code == E_MAXUINT32) return E_ERROR;
+	b_uint32 code = fontInfo->FamilyAndStyle();
+	if(code == B_MAXUINT32) return B_ERROR;
 
-	euint32 familyIndex = code >> 16;
-	euint32 styleIndex = code & 0xffff;
+	b_uint32 familyIndex = code >> 16;
+	b_uint32 styleIndex = code & 0xffff;
 
 	const char *fFamily = NULL;
 	const char *fStyle = NULL;
-	etk_get_font_family((eint32)familyIndex, &fFamily);
-	etk_get_font_style(fFamily, (eint32)styleIndex, &fStyle);
+	bhapi_get_font_family((b_int32)familyIndex, &fFamily);
+	bhapi_get_font_style(fFamily, (b_int32)styleIndex, &fStyle);
 
-	if(!fFamily || !fStyle) return E_ERROR;
+	if(!fFamily || !fStyle) return B_ERROR;
 
-	strncpy(*family, fFamily, sizeof(e_font_family));
-	strncpy(*style, fStyle, sizeof(e_font_style));
+	strncpy(*family, fFamily, sizeof(b_font_family));
+	strncpy(*style, fStyle, sizeof(b_font_style));
 
-	return E_OK;
+	return B_OK;
 }
 
 
-euint32
-EFont::FamilyAndStyle() const
+b_uint32
+BFont::FamilyAndStyle() const
 {
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
-	if(!fontInfo) return E_MAXUINT32;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	if(!fontInfo) return B_MAXUINT32;
 
 	return fontInfo->FamilyAndStyle();
 }
 
 
 float
-EFont::StringWidth(const char *string, eint32 length, float tabWidth) const
+BFont::StringWidth(const char *string, b_int32 length, float tabWidth) const
 {
 	if(string == NULL || *string == 0 || length == 0) return 0;
 
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
 	if(!fontInfo) return 0;
 
 	return fontInfo->StringWidth(string, length, tabWidth);
@@ -672,18 +672,18 @@ EFont::StringWidth(const char *string, eint32 length, float tabWidth) const
 
 
 float
-EFont::StringWidth(const EString &str, eint32 length, float tabWidth) const
+BFont::StringWidth(const BString &str, b_int32 length, float tabWidth) const
 {
 	return StringWidth(str.String(), length, tabWidth);
 }
 
 
 void
-EFont::GetHeight(e_font_height *height) const
+BFont::GetHeight(b_font_height *height) const
 {
 	if(!height) return;
 
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
 	if(!fontInfo) return;
 
 	fontInfo->GetHeight(height);
@@ -691,11 +691,11 @@ EFont::GetHeight(e_font_height *height) const
 
 
 float*
-EFont::CharWidths(const char *string, eint32 *nChars, float tabWidth) const
+BFont::CharWidths(const char *string, b_int32 *nChars, float tabWidth) const
 {
 	if(string == NULL || *string == 0 || nChars == NULL) return NULL;
 
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
 	if(!fontInfo) return NULL;
 
 	return fontInfo->CharWidths(string, -1, nChars, tabWidth);
@@ -703,18 +703,18 @@ EFont::CharWidths(const char *string, eint32 *nChars, float tabWidth) const
 
 
 float*
-EFont::CharWidths(const EString &str, eint32 *nChars, float tabWidth) const
+BFont::CharWidths(const BString &str, b_int32 *nChars, float tabWidth) const
 {
 	return CharWidths(str.String(), nChars, tabWidth);
 }
 
 
 float*
-EFont::CharWidths(const char *string, eint32 length, eint32 *nChars, float tabWidth) const
+BFont::CharWidths(const char *string, b_int32 length, b_int32 *nChars, float tabWidth) const
 {
 	if(string == NULL || *string == 0 || length == 0 || nChars == NULL) return NULL;
 
-	etk_font_info *fontInfo = (etk_font_info*)fInfo;
+	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
 	if(!fontInfo) return NULL;
 
 	return fontInfo->CharWidths(string, length, nChars, tabWidth);
@@ -722,45 +722,45 @@ EFont::CharWidths(const char *string, eint32 length, eint32 *nChars, float tabWi
 
 
 float*
-EFont::CharWidths(const EString &str, eint32 length, eint32 *nChars, float tabWidth) const
+BFont::CharWidths(const BString &str, b_int32 length, b_int32 *nChars, float tabWidth) const
 {
 	return CharWidths(str.String(), length, nChars, tabWidth);
 }
 
 
 void
-EFont::PrintToStream() const
+BFont::PrintToStream() const
 {
-	e_font_family family;
-	e_font_style style;
-	bzero(family, sizeof(e_font_family));
-	bzero(style, sizeof(e_font_style));
+	b_font_family family;
+	b_font_style style;
+	bzero(family, sizeof(b_font_family));
+	bzero(style, sizeof(b_font_style));
 	GetFamilyAndStyle(&family, &style);
-	euint32 code = FamilyAndStyle();
-	euint32 familyIndex = code >> 16;
-	euint32 styleIndex = code & 0xffff;
+	b_uint32 code = FamilyAndStyle();
+	b_uint32 familyIndex = code >> 16;
+	b_uint32 styleIndex = code & 0xffff;
 	float size = Size();
 	float spacing = Spacing();
 	float shear = Shear();
 	bool scalable = IsScalable();
 
-	ETK_OUTPUT("\n");
-	ETK_OUTPUT("Family: %s\t\tStyle: %s\t\t(%s)\n", family, style, scalable ? "Scalable" : "Not Scalable");
-	ETK_OUTPUT("code = %I32u(%I32u,%I32u)\n", code, familyIndex, styleIndex);
-	ETK_OUTPUT("size = %g\tspacing = %g\tshear = %g\n", size, spacing, shear);
+	BHAPI_OUTPUT("\n");
+	BHAPI_OUTPUT("Family: %s\t\tStyle: %s\t\t(%s)\n", family, style, scalable ? "Scalable" : "Not Scalable");
+	BHAPI_OUTPUT("code = %I32u(%I32u,%I32u)\n", code, familyIndex, styleIndex);
+	BHAPI_OUTPUT("size = %g\tspacing = %g\tshear = %g\n", size, spacing, shear);
 
-	eint32 count;
+	b_int32 count;
 	if(HasFixedSize(&count))
 	{
-		ETK_OUTPUT("fixed size [%I32i] --- ", count);
-		for(eint32 i = 0; i < count; i++)
+		BHAPI_OUTPUT("fixed size [%I32i] --- ", count);
+		for(b_int32 i = 0; i < count; i++)
 		{
 			float fixedSize;
-			if(GetFixedSize(&fixedSize, i)) ETK_OUTPUT("%g ", fixedSize);
+			if(GetFixedSize(&fixedSize, i)) BHAPI_OUTPUT("%g ", fixedSize);
 		}
 	}
 
-	ETK_OUTPUT("\n");
+	BHAPI_OUTPUT("\n");
 }
 
 

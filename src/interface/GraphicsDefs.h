@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,32 +27,32 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_GRAPHICS_DEFS_H__
-#define __ETK_GRAPHICS_DEFS_H__
+#ifndef __BHAPI_GRAPHICS_DEFS_H__
+#define __BHAPI_GRAPHICS_DEFS_H__
 
 #include "./../support/SupportDefs.h"
 
 
-typedef struct e_pattern {
-	euint8		data[8];
+typedef struct b_pattern {
+    b_uint8		data[8];
 #ifdef __cplusplus // just for C++
-	inline bool operator==(const e_pattern& o) const
+	inline bool operator==(const b_pattern& o) const
 	{
-		return (*((const euint64*)this)) == (*((const euint64*)&o));
+        return (*((const b_uint64*)this)) == (*((const b_uint64*)&o));
 	}
 
-	inline bool operator!=(const e_pattern& o) const
+	inline bool operator!=(const b_pattern& o) const
 	{
-		return (*((const euint64*)this)) != (*((const euint64*)&o));
+        return (*((const b_uint64*)this)) != (*((const b_uint64*)&o));
 	}
 #endif /* __cplusplus */
-} e_pattern;
+} b_pattern;
 
 
 #ifdef __cplusplus // just for C++
-inline e_pattern e_make_pattern(euint8 d1, euint8 d2, euint8 d3, euint8 d4, euint8 d5, euint8 d6, euint8 d7, euint8 d8)
+inline b_pattern b_makb_pattern(b_uint8 d1, b_uint8 d2, b_uint8 d3, b_uint8 d4, b_uint8 d5, b_uint8 d6, b_uint8 d7, b_uint8 d8)
 {
-	e_pattern p;
+	b_pattern p;
 	p.data[0] = d1;
 	p.data[1] = d2;
 	p.data[2] = d3;
@@ -70,106 +70,106 @@ inline e_pattern e_make_pattern(euint8 d1, euint8 d2, euint8 d3, euint8 d4, euin
 extern "C" {
 #endif /* __cplusplus */
 
-extern _IMPEXP_ETK const e_pattern E_SOLID_HIGH;
-extern _IMPEXP_ETK const e_pattern E_MIXED_COLORS;
-extern _IMPEXP_ETK const e_pattern E_SOLID_LOW;
+extern _IMPEXP_BHAPI const b_pattern B_SOLID_HIGH;
+extern _IMPEXP_BHAPI const b_pattern B_MIXED_COLORS;
+extern _IMPEXP_BHAPI const b_pattern B_SOLID_LOW;
 
 #ifdef __cplusplus
 } /* extern "C" */
 #endif /* __cplusplus */
 
 
-typedef struct e_rgb_color {
-	euint8		red;
-	euint8		green;
-	euint8		blue;
-	euint8		alpha;
+typedef struct b_rgb_color {
+    b_uint8		red;
+    b_uint8		green;
+    b_uint8		blue;
+    b_uint8		alpha;
 
 #ifdef __cplusplus // just for C++
-	inline e_rgb_color& set_to(euint8 r, euint8 g, euint8 b, euint8 a = 0xff)
+    inline b_rgb_color& set_to(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 0xff)
 	{
 		red = r; green = g; blue = b; alpha = a;
 		return *this;
 	}
 
-	inline e_rgb_color& set_to(const e_rgb_color& o)
+	inline b_rgb_color& set_to(const b_rgb_color& o)
 	{
 		return set_to(o.red, o.green, o.blue, o.alpha);
 	}
 
-	inline bool operator==(const e_rgb_color& o) const
+	inline bool operator==(const b_rgb_color& o) const
 	{
-		return(*((const euint32*)this)) == (*((const euint32*)&o));
+        return(*((const b_uint32*)this)) == (*((const b_uint32*)&o));
 	}
 	
-	inline bool operator!=(const e_rgb_color& o) const
+	inline bool operator!=(const b_rgb_color& o) const
 	{
-		return(*((const euint32*)this)) != (*((const euint32*)&o));
+        return(*((const b_uint32*)this)) != (*((const b_uint32*)&o));
 	}
 
-	e_rgb_color& mix(euint8 r, euint8 g, euint8 b, euint8 a);
-	e_rgb_color& mix(const e_rgb_color &o);
-	e_rgb_color& mix_copy(euint8 r, euint8 g, euint8 b, euint8 a) const;
-	e_rgb_color& mix_copy(const e_rgb_color &o) const;
+    b_rgb_color& mix(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
+	b_rgb_color& mix(const b_rgb_color &o);
+    b_rgb_color& mix_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const;
+	b_rgb_color& mix_copy(const b_rgb_color &o) const;
 
-	e_rgb_color& disable(euint8 r, euint8 g, euint8 b, euint8 a);
-	e_rgb_color& disable(const e_rgb_color &background);
-	e_rgb_color& disable_copy(euint8 r, euint8 g, euint8 b, euint8 a) const;
-	e_rgb_color& disable_copy(const e_rgb_color &background) const;
+    b_rgb_color& disable(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
+	b_rgb_color& disable(const b_rgb_color &background);
+    b_rgb_color& disable_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const;
+	b_rgb_color& disable_copy(const b_rgb_color &background) const;
 #endif /* __cplusplus */
-} e_rgb_color;
+} b_rgb_color;
 
 
 #ifdef __cplusplus // just for C++
-inline e_rgb_color e_make_rgb_color(euint8 r, euint8 g, euint8 b, euint8 a = 0xff)
+inline b_rgb_color b_makb_rgb_color(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 0xff)
 {
-	e_rgb_color c;
+	b_rgb_color c;
 	c.set_to(r, g, b, a);
 	return c;
 }
 #endif /* __cplusplus */
 
 
-typedef enum e_drawing_mode {
-	E_OP_COPY,
-	E_OP_XOR,
+typedef enum b_drawing_mode {
+    B_OP_COPY,
+    B_OP_XOR,
 
-	E_OP_OVER,
-	E_OP_ERASE,
-	E_OP_INVERT,
-	E_OP_ADD,
-	E_OP_SUBTRACT,
-	E_OP_BLEND,
-	E_OP_MIN,
-	E_OP_MAX,
-	E_OP_SELECT,
-	E_OP_ALPHA,
-} e_drawing_mode;
+    B_OP_OVER,
+    B_OP_ERASE,
+    B_OP_INVERT,
+    B_OP_ADD,
+    B_OP_SUBTRACT,
+    B_OP_BLEND,
+    B_OP_MIN,
+    B_OP_MAX,
+    B_OP_SELECT,
+    B_OP_ALPHA,
+} b_drawing_mode;
 
 
-typedef enum e_color_space {
-	E_CMAP8 = 0,		/* D(8) */
-	E_RGB32 = 1,		/* BGRx(8:8:8:8) */
-	E_RGBA32 = 2,		/* BGRA(8:8:8:8) */
-	E_RGB24 = 3,		/* BGR(8:8:8) */
-	E_RGB24_BIG = 4,	/* RGB(8:8:8) */
-} e_color_space;
+typedef enum b_color_space {
+    B_CMAP8 = 0,		/* D(8) */
+    B_RGB32 = 1,		/* BGRx(8:8:8:8) */
+    B_RGBA32 = 2,		/* BGRA(8:8:8:8) */
+    B_RGB24 = 3,		/* BGR(8:8:8) */
+    B_RGB24_BIG = 4,	/* RGB(8:8:8) */
+} b_color_space;
 
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
-extern _IMPEXP_ETK const e_rgb_color	E_TRANSPARENT_COLOR;
-extern _IMPEXP_ETK const euint32	E_TRANSPARENT_MAGIC_RGBA32;
+extern _IMPEXP_BHAPI const b_rgb_color    B_TRANSPARENT_COLOR;
+extern _IMPEXP_BHAPI const b_uint32    B_TRANSPARENT_MAGIC_RGBA32;
 
-_IMPEXP_ETK euint8 etk_find_index_for_color(euint8 r, euint8 g, euint8 b);
-_IMPEXP_ETK e_rgb_color etk_find_color_for_index(euint8 index);
+_IMPEXP_BHAPI b_uint8 bhapi_find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b);
+_IMPEXP_BHAPI b_rgb_color bhapi_find_color_for_index(b_uint8 index);
 
 #ifdef __cplusplus
 } /* extern "C" */
 #endif /* __cplusplus */
 
 
-#endif /* __ETK_GRAPHICS_DEFS_H__ */
+#endif /* __BHAPI_GRAPHICS_DEFS_H__ */
 

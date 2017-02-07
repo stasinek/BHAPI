@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,32 +27,32 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_PRIVATE_OBJECT_H__
-#define __ETK_PRIVATE_OBJECT_H__
+#ifndef __BHAPI_PRIVATE_OBJECT_H__
+#define __BHAPI_PRIVATE_OBJECT_H__
 
 #include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _LOCAL EObject
+class _LOCAL BObject
 {
 public:
-	EObject();
-	virtual ~EObject();
+    BObject();
+    virtual ~BObject();
 
-	EObject		&operator+=(euint64 vitalities);
-	EObject		&operator-=(euint64 vitalities);
-	EObject		&operator++();
-	EObject		&operator--();
-	euint64		Vitalities() const;
+    BObject		&operator+=(b_uint64 vitalities);
+    BObject		&operator-=(b_uint64 vitalities);
+    BObject		&operator++();
+    BObject		&operator--();
+    b_uint64		Vitalities() const;
 
 private:
-	euint64 fVitalities;
+    b_uint64 fVitalities;
 };
 
-_LOCAL void etk_delete_object(void *object);
+_LOCAL void bhapi_delete_object(void *object);
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_PRIVATE_OBJECT_H__ */
+#endif /* __BHAPI_PRIVATE_OBJECT_H__ */
 

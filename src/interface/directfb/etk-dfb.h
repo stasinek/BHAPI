@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * DirectFB Graphics Add-on for ETK++
+ * DirectFB Graphics Add-on for BHAPI++
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,8 +27,8 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_DIRECTFB_H__
-#define __ETK_DIRECTFB_H__
+#ifndef __BHAPI_DIRECTFB_H__
+#define __BHAPI_DIRECTFB_H__
 
 #ifdef LINUX
 #ifdef DIRECTFB
@@ -54,12 +54,12 @@
 #ifdef __cplusplus /* just for C++ */
 
 
-class EDFBGraphicsEngine : public EGraphicsEngine {
+class EDFBGraphicsEngine : public BGraphicsEngine {
 public:
 	EDFBGraphicsEngine();
 	virtual ~EDFBGraphicsEngine();
 
-	e_status_t			InitCheck();
+	b_status_t			InitCheck();
 
 	bool				Lock();
 	void				Unlock();
@@ -68,23 +68,23 @@ public:
 	void				*GetDFBWindowData(IDirectFBWindow *dfbWin);
 	void				*GetDFBWindowData(DFBWindowID dfbWinID);
 
-	bool				ConvertRegion(const ERegion *region, DFBRegion **dfbRegions, int *nRegions);
+	bool				ConvertRegion(const BRegion *region, DFBRegion **dfbRegions, int *nRegions);
 
-	virtual e_status_t		Initalize();
+	virtual b_status_t		Initalize();
 	virtual void			Cancel();
 
-	virtual EGraphicsContext*	CreateContext();
-	virtual EGraphicsDrawable*	CreatePixmap(euint32 w, euint32 h);
-	virtual EGraphicsWindow*	CreateWindow(eint32 x, eint32 y, euint32 w, euint32 h);
+	virtual BGraphicsContext*	CreateContext();
+	virtual BGraphicsDrawable*	CreatePixmap(b_uint32 w, b_uint32 h);
+	virtual BGraphicsWindow*	CreateWindow(b_int32 x, b_int32 y, b_uint32 w, b_uint32 h);
 
-	virtual e_status_t		InitalizeFonts();
+	virtual b_status_t		InitalizeFonts();
 	virtual void			DestroyFonts();
-	virtual e_status_t		UpdateFonts(bool check_only);
+	virtual b_status_t		UpdateFonts(bool check_only);
 
-	virtual e_status_t		GetDesktopBounds(euint32 *w, euint32 *h);
-	virtual e_status_t		GetCurrentWorkspace(euint32 *workspace);
-	virtual e_status_t		SetCursor(const void *cursor_data);
-	virtual e_status_t		GetDefaultCursor(ECursor *cursor);
+	virtual b_status_t		GetDesktopBounds(b_uint32 *w, b_uint32 *h);
+	virtual b_status_t		GetCurrentWorkspace(b_uint32 *workspace);
+	virtual b_status_t		SetCursor(const void *cursor_data);
+	virtual b_status_t		GetDefaultCursor(BCursor *cursor);
 
 	IDirectFB *dfbDisplay;
 	IDirectFBDisplayLayer *dfbDisplayLayer;
@@ -101,165 +101,165 @@ public:
 	bool dfbDoQuit;
 
 private:
-	ELocker fLocker;
+	BLocker fLocker;
 	void *fDFBThread;
-	EMessageFilter *fClipboardFilter;
+	BMessageFilter *fClipboardFilter;
 
-	struct etk_dfb_data {
+	struct bhapi_dfb_data {
 		IDirectFBWindow *win;
 		void *data;
 	};
-	EList fDFBDataList;
+	BList fDFBDataList;
 };
 
 
-class EDFBGraphicsDrawable : public EGraphicsDrawable {
+class EDFBGraphicsDrawable : public BGraphicsDrawable {
 public:
-	EDFBGraphicsDrawable(EDFBGraphicsEngine *dfbEngine, euint32 w, euint32 h);
+	EDFBGraphicsDrawable(EDFBGraphicsEngine *dfbEngine, b_uint32 w, b_uint32 h);
 	virtual ~EDFBGraphicsDrawable();
 
-	virtual e_status_t		SetBackgroundColor(e_rgb_color bkColor);
+	virtual b_status_t		SetBackgroundColor(b_rgb_color bkColor);
 
-	virtual e_status_t		ResizeTo(euint32 w, euint32 h);
-	virtual e_status_t		CopyTo(EGraphicsContext *dc,
-					       EGraphicsDrawable *dstDrawable,
-					       eint32 x, eint32 y, euint32 w, euint32 h,
-					       eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH);
-	virtual e_status_t		DrawPixmap(EGraphicsContext *dc, const EPixmap *pix,
-						   eint32 x, eint32 y, euint32 w, euint32 h,
-						   eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH);
+	virtual b_status_t		ResizeTo(b_uint32 w, b_uint32 h);
+	virtual b_status_t		CopyTo(BGraphicsContext *dc,
+					       BGraphicsDrawable *dstDrawable,
+					       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+					       b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH);
+	virtual b_status_t		DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
+						   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+						   b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH);
 
-	virtual e_status_t		StrokePoint(EGraphicsContext *dc,
-						    eint32 x, eint32 y);
-	virtual e_status_t		StrokePoints(EGraphicsContext *dc,
-						     const eint32 *pts, eint32 count);
-	virtual e_status_t		StrokePoints_Colors(EGraphicsContext *dc,
-							    const EList *ptsArrayLists, eint32 arrayCount,
-							    const e_rgb_color *highColors);
-	virtual e_status_t		StrokePoints_Alphas(EGraphicsContext *dc,
-							    const eint32 *pts, const euint8 *alpha, eint32 count);
-	virtual e_status_t		StrokeLine(EGraphicsContext *dc,
-						   eint32 x0, eint32 y0, eint32 x1, eint32 y1);
-	virtual e_status_t		StrokePolygon(EGraphicsContext *dc,
-						      const eint32 *pts, eint32 count, bool closed);
-	virtual e_status_t		FillPolygon(EGraphicsContext *dc,
-						    const eint32 *pts, eint32 count);
-	virtual e_status_t		StrokeRect(EGraphicsContext *dc,
-						   eint32 x, eint32 y, euint32 w, euint32 h);
-	virtual e_status_t		FillRect(EGraphicsContext *dc,
-						 eint32 x, eint32 y, euint32 w, euint32 h);
-	virtual e_status_t		StrokeRects(EGraphicsContext *dc,
-						    const eint32 *rects, eint32 count);
-	virtual e_status_t		FillRects(EGraphicsContext *dc,
-						  const eint32 *rects, eint32 count);
-	virtual e_status_t		FillRegion(EGraphicsContext *dc,
-						   const ERegion &region);
-	virtual e_status_t		StrokeRoundRect(EGraphicsContext *dc,
-							eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius);
-	virtual e_status_t		FillRoundRect(EGraphicsContext *dc,
-						      eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius);
-	virtual e_status_t		StrokeArc(EGraphicsContext *dc,
-						  eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle);
-	virtual e_status_t		FillArc(EGraphicsContext *dc,
-						eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle);
+	virtual b_status_t		StrokePoint(BGraphicsContext *dc,
+						    b_int32 x, b_int32 y);
+	virtual b_status_t		StrokePoints(BGraphicsContext *dc,
+						     const b_int32 *pts, b_int32 count);
+	virtual b_status_t		StrokePoints_Colors(BGraphicsContext *dc,
+							    const BList *ptsArrayLists, b_int32 arrayCount,
+							    const b_rgb_color *highColors);
+	virtual b_status_t		StrokePoints_Alphas(BGraphicsContext *dc,
+							    const b_int32 *pts, const b_uint8 *alpha, b_int32 count);
+	virtual b_status_t		StrokeLine(BGraphicsContext *dc,
+						   b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1);
+	virtual b_status_t		StrokePolygon(BGraphicsContext *dc,
+						      const b_int32 *pts, b_int32 count, bool closed);
+	virtual b_status_t		FillPolygon(BGraphicsContext *dc,
+						    const b_int32 *pts, b_int32 count);
+	virtual b_status_t		StrokeRect(BGraphicsContext *dc,
+						   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h);
+	virtual b_status_t		FillRect(BGraphicsContext *dc,
+						 b_int32 x, b_int32 y, b_uint32 w, b_uint32 h);
+	virtual b_status_t		StrokeRects(BGraphicsContext *dc,
+						    const b_int32 *rects, b_int32 count);
+	virtual b_status_t		FillRects(BGraphicsContext *dc,
+						  const b_int32 *rects, b_int32 count);
+	virtual b_status_t		FillRegion(BGraphicsContext *dc,
+						   const BRegion &region);
+	virtual b_status_t		StrokeRoundRect(BGraphicsContext *dc,
+							b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius);
+	virtual b_status_t		FillRoundRect(BGraphicsContext *dc,
+						      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius);
+	virtual b_status_t		StrokeArc(BGraphicsContext *dc,
+						  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle);
+	virtual b_status_t		FillArc(BGraphicsContext *dc,
+						b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle);
 
 	IDirectFBSurface *dfbSurface;
-	euint32 fWidth;
-	euint32 fHeight;
+	b_uint32 fWidth;
+	b_uint32 fHeight;
 
 private:
 	EDFBGraphicsEngine *fEngine;
 };
 
 
-class EDFBGraphicsWindow : public EGraphicsWindow {
+class EDFBGraphicsWindow : public BGraphicsWindow {
 public:
-	EDFBGraphicsWindow(EDFBGraphicsEngine *dfbEngine, eint32 x, eint32 y, euint32 w, euint32 h);
+	EDFBGraphicsWindow(EDFBGraphicsEngine *dfbEngine, b_int32 x, b_int32 y, b_uint32 w, b_uint32 h);
 	virtual ~EDFBGraphicsWindow();
 
-	e_status_t			GetContactor(EMessenger *msgr);
+	b_status_t			GetContactor(BMessenger *msgr);
 	void				AdjustFrameByDecoration();
 	void				RenderDecoration();
 	bool				HandleMouseEvent(DFBWindowEvent *event);
 
-	virtual e_status_t		ContactTo(const EMessenger *msgr);
-	virtual e_status_t		SetBackgroundColor(e_rgb_color bkColor);
-	virtual e_status_t		SetFlags(euint32 flags);
-	virtual e_status_t		SetLook(e_window_look look);
-	virtual e_status_t		SetFeel(e_window_feel feel);
-	virtual e_status_t		SetTitle(const char *title);
-	virtual e_status_t		SetWorkspaces(euint32 workspaces);
-	virtual e_status_t		GetWorkspaces(euint32 *workspaces);
-	virtual e_status_t		Iconify();
-	virtual e_status_t		Show();
-	virtual e_status_t		Hide();
-	virtual e_status_t		Raise();
-	virtual e_status_t		Lower(EGraphicsWindow *frontWin);
-	virtual e_status_t		Activate(bool state);
-	virtual e_status_t		GetActivatedState(bool *state) const;
-	virtual e_status_t		MoveTo(eint32 x, eint32 y);
-	virtual e_status_t		ResizeTo(euint32 w, euint32 h);
-	virtual e_status_t		MoveAndResizeTo(eint32 x, eint32 y, euint32 w, euint32 h);
-	virtual e_status_t		SetSizeLimits(euint32 min_w, euint32 max_w, euint32 min_h, euint32 max_h);
-	virtual e_status_t		GetSizeLimits(euint32 *min_w, euint32 *max_w, euint32 *min_h, euint32 *max_h);
-	virtual e_status_t		GrabMouse();
-	virtual e_status_t		UngrabMouse();
-	virtual e_status_t		GrabKeyboard();
-	virtual e_status_t		UngrabKeyboard();
-	virtual e_status_t		QueryMouse(eint32 *x, eint32 *y, eint32 *buttons);
+	virtual b_status_t		ContactTo(const BMessenger *msgr);
+	virtual b_status_t		SetBackgroundColor(b_rgb_color bkColor);
+	virtual b_status_t		SetFlags(b_uint32 flags);
+	virtual b_status_t		SetLook(b_window_look look);
+	virtual b_status_t		SetFeel(b_window_feel feel);
+	virtual b_status_t		SetTitle(const char *title);
+	virtual b_status_t		SetWorkspaces(b_uint32 workspaces);
+	virtual b_status_t		GetWorkspaces(b_uint32 *workspaces);
+	virtual b_status_t		Iconify();
+	virtual b_status_t		Show();
+	virtual b_status_t		Hide();
+	virtual b_status_t		Raise();
+	virtual b_status_t		Lower(BGraphicsWindow *frontWin);
+	virtual b_status_t		Activate(bool state);
+	virtual b_status_t		GetActivatedState(bool *state) const;
+	virtual b_status_t		MoveTo(b_int32 x, b_int32 y);
+	virtual b_status_t		ResizeTo(b_uint32 w, b_uint32 h);
+	virtual b_status_t		MoveAndResizeTo(b_int32 x, b_int32 y, b_uint32 w, b_uint32 h);
+	virtual b_status_t		SetSizeLimits(b_uint32 min_w, b_uint32 max_w, b_uint32 min_h, b_uint32 max_h);
+	virtual b_status_t		GetSizeLimits(b_uint32 *min_w, b_uint32 *max_w, b_uint32 *min_h, b_uint32 *max_h);
+	virtual b_status_t		GrabMouse();
+	virtual b_status_t		UngrabMouse();
+	virtual b_status_t		GrabKeyboard();
+	virtual b_status_t		UngrabKeyboard();
+	virtual b_status_t		QueryMouse(b_int32 *x, b_int32 *y, b_int32 *buttons);
 
-	virtual e_status_t		CopyTo(EGraphicsContext *dc,
-					       EGraphicsDrawable *dstDrawable,
-					       eint32 x, eint32 y, euint32 w, euint32 h,
-					       eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH);
-	virtual e_status_t		DrawPixmap(EGraphicsContext *dc, const EPixmap *pix,
-						   eint32 x, eint32 y, euint32 w, euint32 h,
-						   eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH);
+	virtual b_status_t		CopyTo(BGraphicsContext *dc,
+					       BGraphicsDrawable *dstDrawable,
+					       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+					       b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH);
+	virtual b_status_t		DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
+						   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+						   b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH);
 
-	virtual e_status_t		StrokePoint(EGraphicsContext *dc,
-						    eint32 x, eint32 y);
-	virtual e_status_t		StrokePoints(EGraphicsContext *dc,
-						     const eint32 *pts, eint32 count);
-	virtual e_status_t		StrokePoints_Colors(EGraphicsContext *dc,
-							    const EList *ptsArrayLists, eint32 arrayCount,
-							    const e_rgb_color *highColors);
-	virtual e_status_t		StrokePoints_Alphas(EGraphicsContext *dc,
-							    const eint32 *pts, const euint8 *alpha, eint32 count);
-	virtual e_status_t		StrokeLine(EGraphicsContext *dc,
-						   eint32 x0, eint32 y0, eint32 x1, eint32 y1);
-	virtual e_status_t		StrokePolygon(EGraphicsContext *dc,
-						      const eint32 *pts, eint32 count, bool closed);
-	virtual e_status_t		FillPolygon(EGraphicsContext *dc,
-						    const eint32 *pts, eint32 count);
-	virtual e_status_t		StrokeRect(EGraphicsContext *dc,
-						   eint32 x, eint32 y, euint32 w, euint32 h);
-	virtual e_status_t		FillRect(EGraphicsContext *dc,
-						 eint32 x, eint32 y, euint32 w, euint32 h);
-	virtual e_status_t		StrokeRects(EGraphicsContext *dc,
-						    const eint32 *rects, eint32 count);
-	virtual e_status_t		FillRects(EGraphicsContext *dc,
-						  const eint32 *rects, eint32 count);
-	virtual e_status_t		FillRegion(EGraphicsContext *dc,
-						   const ERegion &region);
-	virtual e_status_t		StrokeRoundRect(EGraphicsContext *dc,
-							eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius);
-	virtual e_status_t		FillRoundRect(EGraphicsContext *dc,
-						      eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius);
+	virtual b_status_t		StrokePoint(BGraphicsContext *dc,
+						    b_int32 x, b_int32 y);
+	virtual b_status_t		StrokePoints(BGraphicsContext *dc,
+						     const b_int32 *pts, b_int32 count);
+	virtual b_status_t		StrokePoints_Colors(BGraphicsContext *dc,
+							    const BList *ptsArrayLists, b_int32 arrayCount,
+							    const b_rgb_color *highColors);
+	virtual b_status_t		StrokePoints_Alphas(BGraphicsContext *dc,
+							    const b_int32 *pts, const b_uint8 *alpha, b_int32 count);
+	virtual b_status_t		StrokeLine(BGraphicsContext *dc,
+						   b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1);
+	virtual b_status_t		StrokePolygon(BGraphicsContext *dc,
+						      const b_int32 *pts, b_int32 count, bool closed);
+	virtual b_status_t		FillPolygon(BGraphicsContext *dc,
+						    const b_int32 *pts, b_int32 count);
+	virtual b_status_t		StrokeRect(BGraphicsContext *dc,
+						   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h);
+	virtual b_status_t		FillRect(BGraphicsContext *dc,
+						 b_int32 x, b_int32 y, b_uint32 w, b_uint32 h);
+	virtual b_status_t		StrokeRects(BGraphicsContext *dc,
+						    const b_int32 *rects, b_int32 count);
+	virtual b_status_t		FillRects(BGraphicsContext *dc,
+						  const b_int32 *rects, b_int32 count);
+	virtual b_status_t		FillRegion(BGraphicsContext *dc,
+						   const BRegion &region);
+	virtual b_status_t		StrokeRoundRect(BGraphicsContext *dc,
+							b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius);
+	virtual b_status_t		FillRoundRect(BGraphicsContext *dc,
+						      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius);
 
-	virtual e_status_t		StrokeArc(EGraphicsContext *dc,
-						  eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle);
-	virtual e_status_t		FillArc(EGraphicsContext *dc,
-						eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle);
+	virtual b_status_t		StrokeArc(BGraphicsContext *dc,
+						  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle);
+	virtual b_status_t		FillArc(BGraphicsContext *dc,
+						b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle);
 
 	IDirectFBWindow *dfbWindow;
 	IDirectFBSurface *dfbSurface;
-	ERect fMargins;
+	BRect fMargins;
 	DFBWindowID dfbWindowID;
-	euint32 fFlags;
-	eint32 fOriginX;
-	eint32 fOriginY;
-	euint32 fWidth;
-	euint32 fHeight;
+	b_uint32 fFlags;
+	b_int32 fOriginX;
+	b_int32 fOriginY;
+	b_uint32 fWidth;
+	b_uint32 fHeight;
 	bool fHidden;
 
 private:
@@ -267,10 +267,10 @@ private:
 
 	EDFBGraphicsEngine *fEngine;
 
-	EMessenger fMsgr;
+	BMessenger fMsgr;
 
-	e_window_look fLook;
-	e_window_feel fFeel;
+	b_window_look fLook;
+	b_window_feel fFeel;
 
 	char *fTitle;
 
@@ -290,48 +290,48 @@ private:
 
 
 #define DUET_EVENTPENDING	0
-#define DUET_WINDOWREDRAWALL	E_MAXUINT
+#define DUET_WINDOWREDRAWALL    B_MAXUINT
 
 
-extern e_status_t etk_dfb_stroke_point(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-				       eint32 x, eint32 y, ERect *margins = NULL);
-extern e_status_t etk_dfb_stroke_points(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-					const eint32 *pts, eint32 count, ERect *margins = NULL);
-extern e_status_t etk_dfb_stroke_points_color(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-				              const EList *ptsArrayLists, eint32 arrayCount, const e_rgb_color *highColors,
-					      ERect *margins = NULL);
-extern e_status_t etk_dfb_stroke_line(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-				      eint32 x0, eint32 y0, eint32 x1, eint32 y1, ERect *margins = NULL);
-extern e_status_t etk_dfb_stroke_rect(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-				      eint32 x, eint32 y, euint32 w, euint32 h, ERect *margins = NULL);
-extern e_status_t etk_dfb_fill_rect(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-				    eint32 x, eint32 y, euint32 w, euint32 h, ERect *margins = NULL);
-extern e_status_t etk_dfb_stroke_rects(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-				       const eint32 *rects, eint32 count, ERect *margins = NULL);
-extern e_status_t etk_dfb_fill_rects(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-				     const eint32 *rects, eint32 count, ERect *margins = NULL);
-extern e_status_t etk_dfb_fill_region(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-				      const ERegion &region, ERect *margins = NULL);
-extern e_status_t etk_dfb_stroke_arc(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-				     eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle, ERect *margins = NULL);
-extern e_status_t etk_dfb_fill_arc(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-				   eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle, ERect *margins = NULL);
-extern e_status_t etk_dfb_draw_epixmap(IDirectFBSurface *dfbSurface, EGraphicsContext *dc, const EPixmap *pix,
-				       eint32 x, eint32 y, euint32 w, euint32 h,
-				       eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH, ERect *margins = NULL);
+extern b_status_t bhapi_dfb_stroke_point(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+				       b_int32 x, b_int32 y, BRect *margins = NULL);
+extern b_status_t bhapi_dfb_stroke_points(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+					const b_int32 *pts, b_int32 count, BRect *margins = NULL);
+extern b_status_t bhapi_dfb_stroke_points_color(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+				              const BList *ptsArrayLists, b_int32 arrayCount, const b_rgb_color *highColors,
+					      BRect *margins = NULL);
+extern b_status_t bhapi_dfb_stroke_line(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+				      b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, BRect *margins = NULL);
+extern b_status_t bhapi_dfb_stroke_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+				      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, BRect *margins = NULL);
+extern b_status_t bhapi_dfb_fill_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+				    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, BRect *margins = NULL);
+extern b_status_t bhapi_dfb_stroke_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+				       const b_int32 *rects, b_int32 count, BRect *margins = NULL);
+extern b_status_t bhapi_dfb_fill_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+				     const b_int32 *rects, b_int32 count, BRect *margins = NULL);
+extern b_status_t bhapi_dfb_fill_region(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+				      const BRegion &region, BRect *margins = NULL);
+extern b_status_t bhapi_dfb_stroke_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+				     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle, BRect *margins = NULL);
+extern b_status_t bhapi_dfb_fill_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+				   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle, BRect *margins = NULL);
+extern b_status_t bhapi_dfb_draw_epixmap(IDirectFBSurface *dfbSurface, BGraphicsContext *dc, const BPixmap *pix,
+				       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+				       b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH, BRect *margins = NULL);
 
-extern e_status_t etk_dfb_stroke_points_alphas(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-					       const eint32 *pts, const euint8 *alpha, eint32 count, ERect *margins = NULL);
-extern e_status_t etk_dfb_stroke_polygon(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-					 const eint32 *pts, eint32 count, bool closed, ERect *margins = NULL);
-extern e_status_t etk_dfb_fill_polygon(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-				       const eint32 *pts, eint32 count, ERect *margins = NULL);
-extern e_status_t etk_dfb_stroke_round_rect(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-					    eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius,
-					    ERect *margins = NULL);
-extern e_status_t etk_dfb_fill_round_rect(IDirectFBSurface *dfbSurface, EGraphicsContext *dc,
-					  eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius,
-					  ERect *margins = NULL);
+extern b_status_t bhapi_dfb_stroke_points_alphas(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+					       const b_int32 *pts, const b_uint8 *alpha, b_int32 count, BRect *margins = NULL);
+extern b_status_t bhapi_dfb_stroke_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+					 const b_int32 *pts, b_int32 count, bool closed, BRect *margins = NULL);
+extern b_status_t bhapi_dfb_fill_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+				       const b_int32 *pts, b_int32 count, BRect *margins = NULL);
+extern b_status_t bhapi_dfb_stroke_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+					    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius,
+					    BRect *margins = NULL);
+extern b_status_t bhapi_dfb_fill_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+					  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius,
+					  BRect *margins = NULL);
 
 
 #endif /* __cplusplus */
@@ -339,5 +339,5 @@ extern e_status_t etk_dfb_fill_round_rect(IDirectFBSurface *dfbSurface, EGraphic
 #endif /* DIRECTFB */
 #endif /* LINUX */
 
-#endif /* __ETK_DIRECTFB_H__ */
+#endif /* __BHAPI_DIRECTFB_H__ */
 

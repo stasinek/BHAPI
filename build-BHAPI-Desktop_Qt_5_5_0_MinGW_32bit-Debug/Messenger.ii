@@ -823,7 +823,33 @@ void * __mingw_aligned_realloc (void *_Memory, size_t _Size, size_t _Offset);
 # 1 "../src/app/./../kernel/OS.h" 1
 # 33 "../src/app/./../kernel/OS.h"
 # 1 "../src/app/./../kernel/./../support/SupportDefs.h" 1
-# 88 "../src/app/./../kernel/./../support/SupportDefs.h"
+# 34 "../src/app/./../kernel/./../support/SupportDefs.h"
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
+# 140 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_stdarg.h" 1 3 4
+# 141 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 2 3 4
+# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
+# 35 "../src/app/./../kernel/./../support/SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
+# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+extern "C" {
+# 24 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
+
+  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
+
+
+}
+# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+typedef struct {
+  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
+  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
+} max_align_t;
+# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
+# 36 "../src/app/./../kernel/./../support/SupportDefs.h" 2
+
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
 # 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
 extern "C" {
@@ -1035,80 +1061,10 @@ extern "C" {
 
 }
 # 181 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 2 3
-# 89 "../src/app/./../kernel/./../support/SupportDefs.h" 2
-# 1 "../src/app/./../kernel/./../support/Errors.h" 1
-# 32 "../src/app/./../kernel/./../support/Errors.h"
+# 38 "../src/app/./../kernel/./../support/SupportDefs.h" 2
+# 96 "../src/app/./../kernel/./../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 33 "../src/app/./../kernel/./../support/Errors.h" 2
-# 41 "../src/app/./../kernel/./../support/Errors.h"
-enum {
- E_NO_MEMORY = (-2147483647 - 1),
- E_IO_ERROR,
- E_PERMISSION_DENIED,
- E_BAD_INDEX,
- E_BAD_TYPE,
- E_BAD_VALUE,
- E_MISMATCHED_VALUES,
- E_NAME_NOT_FOUND,
- E_NAME_IN_USE,
- E_TIMED_OUT,
- E_INTERRUPTED,
- E_WOULD_BLOCK,
- E_CANCELED,
- E_NO_INIT,
- E_BUSY,
- E_NOT_ALLOWED,
-
- E_ERROR = -1,
- E_OK = 1,
- E_NO_ERROR = 1
-};
-
-
-enum {
- E_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
- E_NO_MORE_SEMS,
-
- E_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
- E_NO_MORE_THREADS,
- E_BAD_THREAD_STATE,
- E_BAD_TEAM_ID,
- E_NO_MORE_TEAMS,
-
- E_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
- E_NO_MORE_PORTS,
-
- E_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
- E_BAD_ADDRESS,
- E_NOT_AN_EXECUTABLE,
- E_MISSING_LIBRARY,
- E_MISSING_SYMBOL,
-
- E_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
-};
-
-
-enum {
- E_BAD_REPLY = (-2147483647 - 1) + 0x2000,
- E_DUPLICATE_REPLY,
- E_MESSAGE_TO_SELF,
- E_BAD_HANDLER,
- E_ALREADY_RUNNING,
-};
-
-
-enum {
- E_FILE_ERROR = (-2147483647 - 1) + 0x3000,
- E_ENTRY_NOT_FOUND,
- E_LINK_LIMIT,
- E_NAME_TOO_LONG,
-};
-# 90 "../src/app/./../kernel/./../support/SupportDefs.h" 2
-
-
-
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 94 "../src/app/./../kernel/./../support/SupportDefs.h" 2
+# 97 "../src/app/./../kernel/./../support/SupportDefs.h" 2
 
 
 
@@ -1155,61 +1111,61 @@ extern long double __attribute__((__cdecl__)) _chgsignl (long double);
 
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 100 "../src/app/./../kernel/./../support/SupportDefs.h" 2
-# 111 "../src/app/./../kernel/./../support/SupportDefs.h"
-typedef int eunichar32;
-typedef short eunichar;
+# 103 "../src/app/./../kernel/./../support/SupportDefs.h" 2
+# 114 "../src/app/./../kernel/./../support/SupportDefs.h"
+typedef int b_unichar32;
+typedef short b_unichar;
 
-typedef char eint8;
-typedef unsigned char euint8;
-typedef short eint16;
-typedef unsigned short euint16;
-typedef int eint32;
-typedef unsigned int euint32;
-typedef long long eint64;
-typedef unsigned long long euint64;
+typedef char b_int8;
+typedef unsigned char b_uint8;
+typedef short b_int16;
+typedef unsigned short b_uint16;
+typedef int b_int32;
+typedef unsigned int b_uint32;
+typedef long long b_int64;
+typedef unsigned long long b_uint64;
 
-typedef eint32 e_status_t;
-typedef euint32 e_type_code;
-typedef euint32 e_perform_code;
-typedef eint64 e_bigtime_t;
-typedef eint64 e_thread_id;
-typedef size_t e_address_t;
+typedef b_int32 b_status_t;
+typedef b_uint32 b_type_code;
+typedef b_uint32 b_perform_code;
+typedef b_int64 b_bigtime_t;
+typedef b_int64 b_thread_id;
+typedef size_t b_address_t;
 
 enum {
-    E_ANY_TYPE = 'ANYT',
- E_BOOL_TYPE = 'BOOL',
- E_CHAR_TYPE = 'CHAR',
- E_DOUBLE_TYPE = 'DBLE',
- E_FLOAT_TYPE = 'FLOT',
- E_INT64_TYPE = 'LLNG',
- E_INT32_TYPE = 'LONG',
- E_INT16_TYPE = 'SHRT',
- E_INT8_TYPE = 'BYTE',
- E_MESSAGE_TYPE = 'MSGG',
- E_MESSENGER_TYPE = 'MSNG',
- E_POINTER_TYPE = 'PNTR',
- E_SIZE_T_TYPE = 'SIZT',
- E_SSIZE_T_TYPE = 'SSZT',
- E_STRING_TYPE = 'CSTR',
- E_UINT64_TYPE = 'ULLG',
- E_UINT32_TYPE = 'ULNG',
- E_UINT16_TYPE = 'USHT',
- E_UINT8_TYPE = 'UBYT',
- E_POINT_TYPE = 'SPNT',
-    E_RECT_TYPE = 'RECT',
-    E_MIME_TYPE = 'MIME',
- E_UNKNOWN_TYPE = 'UNKN'
+    B_ANY_TYPE = 'ANYT',
+    B_BOOL_TYPE = 'BOOL',
+    B_CHAR_TYPE = 'CHAR',
+    B_DOUBLE_TYPE = 'DBLE',
+    B_FLOAT_TYPE = 'FLOT',
+    B_INT64_TYPE = 'LLNG',
+    B_INT32_TYPE = 'LONG',
+    B_INT16_TYPE = 'SHRT',
+    B_INT8_TYPE = 'BYTE',
+    B_MESSAGE_TYPE = 'MSGG',
+    B_MESSENGER_TYPE = 'MSNG',
+    B_POINTER_TYPE = 'PNTR',
+    B_SIZE_T_TYPE = 'SIZT',
+    B_SSIZE_T_TYPE = 'SSZT',
+    B_STRING_TYPE = 'CSTR',
+    B_UINT64_TYPE = 'ULLG',
+    B_UINT32_TYPE = 'ULNG',
+    B_UINT16_TYPE = 'USHT',
+    B_UINT8_TYPE = 'UBYT',
+    B_POINT_TYPE = 'SPNT',
+    B_RECT_TYPE = 'RECT',
+    B_MIME_TYPE = 'MIME',
+    B_UNKNOWN_TYPE = 'UNKN'
 };
-# 252 "../src/app/./../kernel/./../support/SupportDefs.h"
+# 255 "../src/app/./../kernel/./../support/SupportDefs.h"
 extern "C" {
 
 
-extern __attribute__((dllexport)) const euint8 etk_major_version;
-extern __attribute__((dllexport)) const euint8 etk_minor_version;
-extern __attribute__((dllexport)) const euint8 etk_micro_version;
-extern __attribute__((dllexport)) const euint8 etk_interface_age;
-extern __attribute__((dllexport)) const euint16 etk_binary_age;
+extern __attribute__((dllexport)) const b_uint8 bhapi_major_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_minor_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_micro_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_interface_age;
+extern __attribute__((dllexport)) const b_uint16 bhapi_binary_age;
 
 
 }
@@ -1285,9 +1241,6 @@ extern "C" {
 # 66 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/windows.h" 2 3
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 140 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_stdarg.h" 1 3 4
-# 141 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 2 3 4
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
 # 67 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/windows.h" 2 3
 
@@ -5918,12 +5871,12 @@ typedef DWORD (__attribute__((__stdcall__)) *PRTL_RUN_ONCE_INIT_FN)(PRTL_RUN_ONC
 
 
     inline __attribute__((__always_inline__)) void TpInitializeCallbackEnviron (PTP_CALLBACK_ENVIRON cbe) {
-      cbe->Pool = 0;
-      cbe->CleanupGroup = 0;
-      cbe->CleanupGroupCancelCallback = 0;
-      cbe->RaceDll = 0;
-      cbe->ActivationContext = 0;
-      cbe->FinalizationCallback = 0;
+      cbe->Pool = __null;
+      cbe->CleanupGroup = __null;
+      cbe->CleanupGroupCancelCallback = __null;
+      cbe->RaceDll = __null;
+      cbe->ActivationContext = __null;
+      cbe->FinalizationCallback = __null;
       cbe->u.Flags = 0;
 
       cbe->Version = 1;
@@ -44359,40 +44312,19 @@ typedef unsigned int GROUP;
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAProviderConfigChange(LPHANDLE lpNotificationHandle,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 # 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
-# 270 "../src/app/./../kernel/./../support/SupportDefs.h" 2
-# 293 "../src/app/./../kernel/./../support/SupportDefs.h"
+# 273 "../src/app/./../kernel/./../support/SupportDefs.h" 2
+# 296 "../src/app/./../kernel/./../support/SupportDefs.h"
 enum {
- E_SEEK_SET = 0,
- E_SEEK_CUR,
- E_SEEK_END,
+    B_SEEK_SET = 0,
+    B_SEEK_CUR,
+    B_SEEK_END,
 };
 
 
 # 1 "../src/app/./../kernel/./../support/./../kernel/Debug.h" 1
 # 33 "../src/app/./../kernel/./../support/./../kernel/Debug.h"
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
+# 1 "../src/app/./../kernel/./../support/./../kernel/./../support/SupportDefs.h" 1
 # 34 "../src/app/./../kernel/./../support/./../kernel/Debug.h" 2
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
-# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-extern "C" {
-# 24 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
-
-  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
-
-
-}
-# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-typedef struct {
-  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
-  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
-} max_align_t;
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
-# 35 "../src/app/./../kernel/./../support/./../kernel/Debug.h" 2
-
 
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/new" 1 3
@@ -44899,48 +44831,113 @@ inline void operator delete[](void*, void*) noexcept { }
 }
 
 #pragma GCC visibility pop
-# 39 "../src/app/./../kernel/./../support/./../kernel/Debug.h" 2
-
-
-# 1 "../src/app/./../kernel/./../support/./../kernel/./../support/SupportDefs.h" 1
-# 42 "../src/app/./../kernel/./../support/./../kernel/Debug.h" 2
-# 57 "../src/app/./../kernel/./../support/./../kernel/Debug.h"
+# 37 "../src/app/./../kernel/./../support/./../kernel/Debug.h" 2
+# 54 "../src/app/./../kernel/./../support/./../kernel/Debug.h"
 extern "C" {
 
 
-typedef enum etk_debug_level {
+typedef enum bhapi_debug_level {
  DEBUG_NORMAL,
  DEBUG_OUTPUT,
  DEBUG_WARNING,
  DEBUG_ERROR
-} etk_debug_level;
+} bhapi_debug_level;
 
-__attribute__((dllexport)) void etk_debug_log(etk_debug_level level, const char *format, va_list ap);
-# 83 "../src/app/./../kernel/./../support/./../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_DEBUG(const char *format, ...);
-
-
-
-__attribute__((dllexport)) void ETK_OUTPUT(const char *format, ...);
-# 103 "../src/app/./../kernel/./../support/./../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_WARNING(const char *format, ...);
+__attribute__((dllexport)) void bhapi_debug_log(bhapi_debug_level level, const char *format, va_list ap);
+# 80 "../src/app/./../kernel/./../support/./../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...);
 
 
 
-__attribute__((dllexport)) void ETK_ERROR(const char *format, ...);
-# 121 "../src/app/./../kernel/./../support/./../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...);
+# 100 "../src/app/./../kernel/./../support/./../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...);
+
+
+
+__attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...);
+# 118 "../src/app/./../kernel/./../support/./../kernel/Debug.h"
 }
-# 301 "../src/app/./../kernel/./../support/SupportDefs.h" 2
+# 304 "../src/app/./../kernel/./../support/SupportDefs.h" 2
+
+# 1 "../src/app/./../kernel/./../support/Errors.h" 1
+# 32 "../src/app/./../kernel/./../support/Errors.h"
+# 1 "../src/app/./../kernel/./../support/SupportDefs.h" 1
+# 33 "../src/app/./../kernel/./../support/Errors.h" 2
+# 41 "../src/app/./../kernel/./../support/Errors.h"
+enum {
+    B_NO_MEMORY = (-2147483647 - 1),
+    B_IO_ERROR,
+    B_PERMISSION_DENIED,
+    B_BAD_INDEX,
+    B_BAD_TYPE,
+    B_BAD_VALUE,
+    B_MISMATCHED_VALUES,
+    B_NAME_NOT_FOUND,
+    B_NAME_IN_USE,
+    B_TIMED_OUT,
+    B_INTERRUPTED,
+    B_WOULD_BLOCK,
+    B_CANCELED,
+    B_NO_INIT,
+    B_BUSY,
+    B_NOT_ALLOWED,
+
+    B_ERROR = -1,
+    B_OK = 1,
+    B_NO_ERROR = 1
+};
+
+
+enum {
+    B_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
+    B_NO_MORE_SEMS,
+
+    B_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
+    B_NO_MORE_THREADS,
+    B_BAD_THREAD_STATE,
+    B_BAD_TEAM_ID,
+    B_NO_MORE_TEAMS,
+
+    B_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
+    B_NO_MORE_PORTS,
+
+    B_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
+    B_BAD_ADDRESS,
+    B_NOT_AN_EXECUTABLE,
+    B_MISSING_LIBRARY,
+    B_MISSING_SYMBOL,
+
+    B_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
+};
+
+
+enum {
+    B_BAD_REPLY = (-2147483647 - 1) + 0x2000,
+    B_DUPLICATE_REPLY,
+    B_MESSAGE_TO_SELF,
+    B_BAD_HANDLER,
+    B_ALREADY_RUNNING,
+};
+
+
+enum {
+    B_FILE_ERROR = (-2147483647 - 1) + 0x3000,
+    B_ENTRY_NOT_FOUND,
+    B_LINK_LIMIT,
+    B_NAME_TOO_LONG,
+};
+# 306 "../src/app/./../kernel/./../support/SupportDefs.h" 2
 # 34 "../src/app/./../kernel/OS.h" 2
 
-typedef e_status_t (*e_thread_func)(void*);
+typedef b_status_t (*b_thread_func)(void*);
 # 55 "../src/app/./../kernel/OS.h"
 enum {
- E_CAN_INTERRUPT = 1,
- E_DO_NOT_RESCHEDULE = 2,
- E_TIMEOUT = 8,
- E_RELATIVE_TIMEOUT = 8,
- E_ABSOLUTE_TIMEOUT = 16
+    B_CAN_INTERRUPT = 1,
+    B_DO_NOT_RESCHEDULE = 2,
+    B_TIMEOUT = 8,
+    B_RELATIVE_TIMEOUT = 8,
+    B_ABSOLUTE_TIMEOUT = 16
 };
 # 34 "../src/app/./../kernel/Kernel.h" 2
 
@@ -44949,186 +44946,186 @@ extern "C" {
 
 
 
-__attribute__((dllexport)) euint32 etk_real_time_clock(void);
-__attribute__((dllexport)) e_bigtime_t etk_real_time_clock_usecs(void);
-__attribute__((dllexport)) e_bigtime_t etk_system_boot_time(void);
-__attribute__((dllexport)) e_bigtime_t etk_system_time(void);
+__attribute__((dllexport)) b_uint32 bhapi_real_time_clock(void);
+__attribute__((dllexport)) b_bigtime_t bhapi_real_time_clock_usecs(void);
+__attribute__((dllexport)) b_bigtime_t bhapi_system_boot_time(void);
+__attribute__((dllexport)) b_bigtime_t bhapi_system_time(void);
 
 
-typedef struct etk_area_info {
- char name[32 + 1];
+typedef struct bhapi_area_info {
+    char name[32 + 1];
  size_t size;
- euint32 protection;
+    b_uint32 protection;
  void *address;
  char domain[5];
-} etk_area_info;
+} bhapi_area_info;
 
 
 
 
 
-typedef enum etk_area_access {
- ETK_AREA_ACCESS_OWNER = 0,
- ETK_AREA_ACCESS_GROUP_READ = 1,
- ETK_AREA_ACCESS_GROUP_WRITE = 1 << 1,
- ETK_AREA_ACCESS_OTHERS_READ = 1 << 2,
- ETK_AREA_ACCESS_OTHERS_WRITE = 1 << 3,
- ETK_AREA_ACCESS_ALL = 0xFF
-} etk_area_access;
+typedef enum bhapi_area_access {
+ BHAPI_AREA_ACCESS_OWNER = 0,
+ BHAPI_AREA_ACCESS_GROUP_READ = 1,
+ BHAPI_AREA_ACCESS_GROUP_WRITE = 1 << 1,
+ BHAPI_AREA_ACCESS_OTHERS_READ = 1 << 2,
+ BHAPI_AREA_ACCESS_OTHERS_WRITE = 1 << 3,
+ BHAPI_AREA_ACCESS_ALL = 0xFF
+} bhapi_area_access;
 
 
-__attribute__((dllexport)) void* etk_create_area(const char *name, void **start_addr, size_t size, euint32 protection,
-            const char *domain, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
-
-
-
-
-__attribute__((dllexport)) void* etk_clone_area(const char *name, void **dest_addr, euint32 protection, const char *domain);
-__attribute__((dllexport)) void* etk_clone_area_by_source(void *source_area, void **dest_addr, euint32 protection);
-__attribute__((dllexport)) e_status_t etk_get_area_info(void *area, etk_area_info *info);
-__attribute__((dllexport)) e_status_t etk_delete_area(void *area);
-__attribute__((dllexport)) e_status_t etk_delete_area_etc(void *area, bool no_clone);
+__attribute__((dllexport)) void* bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 protection,
+            const char *domain, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 
 
 
 
-
-__attribute__((dllexport)) e_status_t etk_resize_area(void *area, void **start_addr, size_t new_size);
-__attribute__((dllexport)) e_status_t etk_set_area_protection(void *area, euint32 new_protection);
-
-
-__attribute__((dllexport)) void* etk_create_locker(void);
-__attribute__((dllexport)) void* etk_clone_locker(void* locker);
-__attribute__((dllexport)) e_status_t etk_delete_locker(void* locker);
-
-
-
-
-__attribute__((dllexport)) e_status_t etk_close_locker(void* locker);
-
-__attribute__((dllexport)) e_status_t etk_lock_locker(void *locker);
-__attribute__((dllexport)) e_status_t etk_lock_locker_etc(void *locker, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) e_status_t etk_unlock_locker(void *locker);
+__attribute__((dllexport)) void* bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char *domain);
+__attribute__((dllexport)) void* bhapi_clone_area_by_source(void *source_area, void **dest_addr, b_uint32 protection);
+__attribute__((dllexport)) b_status_t bhapi_get_area_info(void *area, bhapi_area_info *info);
+__attribute__((dllexport)) b_status_t bhapi_delete_area(void *area);
+__attribute__((dllexport)) b_status_t bhapi_delete_area_etc(void *area, bool no_clone);
 
 
 
 
 
-
-__attribute__((dllexport)) eint64 etk_count_locker_locks(void *locker);
-
-
+__attribute__((dllexport)) b_status_t bhapi_resize_area(void *area, void **start_addr, size_t new_size);
+__attribute__((dllexport)) b_status_t bhapi_set_area_protection(void *area, b_uint32 new_protection);
 
 
-__attribute__((dllexport)) void* etk_create_simple_locker(void);
-__attribute__((dllexport)) e_status_t etk_delete_simple_locker(void* slocker);
-__attribute__((dllexport)) bool etk_lock_simple_locker(void *slocker);
-__attribute__((dllexport)) void etk_unlock_simple_locker(void *slocker);
+__attribute__((dllexport)) void* bhapi_create_locker(void);
+__attribute__((dllexport)) void* bhapi_clone_locker(void* locker);
+__attribute__((dllexport)) b_status_t bhapi_delete_locker(void* locker);
+
+
+
+
+__attribute__((dllexport)) b_status_t bhapi_close_locker(void* locker);
+
+__attribute__((dllexport)) b_status_t bhapi_lock_locker(void *locker);
+__attribute__((dllexport)) b_status_t bhapi_lock_locker_etc(void *locker, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_unlock_locker(void *locker);
+
+
+
+
+
+
+__attribute__((dllexport)) b_int64 bhapi_count_locker_locks(void *locker);
+
+
+
+
+__attribute__((dllexport)) void* bhapi_create_simple_locker(void);
+__attribute__((dllexport)) b_status_t bhapi_delete_simple_locker(void* slocker);
+__attribute__((dllexport)) bool bhapi_lock_simple_locker(void *slocker);
+__attribute__((dllexport)) void bhapi_unlock_simple_locker(void *slocker);
 # 125 "../src/app/./../kernel/Kernel.h"
-typedef struct etk_sem_info {
- char name[32 + 1];
- eint64 latest_holder_team;
- eint64 latest_holder_thread;
- eint64 count;
+typedef struct bhapi_sem_info {
+    char name[32 + 1];
+    b_int64 latest_holder_team;
+    b_int64 latest_holder_thread;
+    b_int64 count;
  bool closed;
-} etk_sem_info;
+} bhapi_sem_info;
 
 
-__attribute__((dllexport)) void* etk_create_sem(eint64 count, const char *name, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
-
-
-
-__attribute__((dllexport)) void* etk_clone_sem(const char *name);
-__attribute__((dllexport)) void* etk_clone_sem_by_source(void *sem);
-__attribute__((dllexport)) e_status_t etk_get_sem_info(void *sem, etk_sem_info *info);
-__attribute__((dllexport)) e_status_t etk_delete_sem(void *sem);
-__attribute__((dllexport)) e_status_t etk_delete_sem_etc(void *sem, bool no_clone);
+__attribute__((dllexport)) void* bhapi_create_sem(b_int64 count, const char *name, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 
 
 
-
-
-__attribute__((dllexport)) e_status_t etk_close_sem(void* sem);
-
-__attribute__((dllexport)) e_status_t etk_acquire_sem(void *sem);
-__attribute__((dllexport)) e_status_t etk_release_sem(void *sem);
-__attribute__((dllexport)) e_status_t etk_acquire_sem_etc(void *sem, eint64 count, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) e_status_t etk_release_sem_etc(void *sem, eint64 count, euint32 flags);
-__attribute__((dllexport)) e_status_t etk_get_sem_count(void *sem, eint64 *count);
+__attribute__((dllexport)) void* bhapi_clone_sem(const char *name);
+__attribute__((dllexport)) void* bhapi_clone_sem_by_source(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_get_sem_info(void *sem, bhapi_sem_info *info);
+__attribute__((dllexport)) b_status_t bhapi_delete_sem(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_delete_sem_etc(void *sem, bool no_clone);
 
 
 
 
-__attribute__((dllexport)) e_status_t etk_snooze(e_bigtime_t microseconds);
-__attribute__((dllexport)) e_status_t etk_snooze_until(e_bigtime_t time, int timebase);
 
-__attribute__((dllexport)) eint64 etk_get_current_team_id(void);
-__attribute__((dllexport)) eint64 etk_get_current_thread_id(void);
+__attribute__((dllexport)) b_status_t bhapi_close_sem(void* sem);
 
-__attribute__((dllexport)) void* etk_create_thread_by_current_thread(void);
-__attribute__((dllexport)) void* etk_create_thread(e_thread_func threadFunction,
-       eint32 priority,
+__attribute__((dllexport)) b_status_t bhapi_acquire_sem(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_release_sem(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_acquire_sem_etc(void *sem, b_int64 count, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_release_sem_etc(void *sem, b_int64 count, b_uint32 flags);
+__attribute__((dllexport)) b_status_t bhapi_get_sem_count(void *sem, b_int64 *count);
+
+
+
+
+__attribute__((dllexport)) b_status_t bhapi_snooze(b_bigtime_t microseconds);
+__attribute__((dllexport)) b_status_t bhapi_snooze_until(b_bigtime_t time, int timebase);
+
+__attribute__((dllexport)) b_int64 bhapi_get_current_team_id(void);
+__attribute__((dllexport)) b_int64 bhapi_get_current_thread_id(void);
+
+__attribute__((dllexport)) void* bhapi_create_thread_by_current_thread(void);
+__attribute__((dllexport)) void* bhapi_create_thread(b_thread_func threadFunction,
+                      b_int32 priority,
        void *arg,
-       eint64 *threadId);
-__attribute__((dllexport)) void* etk_open_thread(eint64 threadId);
-__attribute__((dllexport)) e_status_t etk_delete_thread(void *thread);
+                      b_int64 *threadId);
+__attribute__((dllexport)) void* bhapi_open_thread(b_int64 threadId);
+__attribute__((dllexport)) b_status_t bhapi_delete_thread(void *thread);
 
 
 
 
 
-__attribute__((dllexport)) e_status_t etk_suspend_thread(void *thread);
-__attribute__((dllexport)) e_status_t etk_resume_thread(void *thread);
+__attribute__((dllexport)) b_status_t bhapi_suspend_thread(void *thread);
+__attribute__((dllexport)) b_status_t bhapi_resume_thread(void *thread);
 
-__attribute__((dllexport)) e_status_t etk_on_exit_thread(void (*callback)(void *), void *user_data);
+__attribute__((dllexport)) b_status_t bhapi_on_exit_thread(void (*callback)(void *), void *user_data);
 
-__attribute__((dllexport)) eint64 etk_get_thread_id(void *thread);
+__attribute__((dllexport)) b_int64 bhapi_get_thread_id(void *thread);
 
 enum {
- ETK_THREAD_INVALID = 0,
- ETK_THREAD_READY,
- ETK_THREAD_RUNNING,
- ETK_THREAD_EXITED,
- ETK_THREAD_SUSPENDED,
+ BHAPI_THREAD_INVALID = 0,
+ BHAPI_THREAD_READY,
+ BHAPI_THREAD_RUNNING,
+ BHAPI_THREAD_EXITED,
+ BHAPI_THREAD_SUSPENDED,
 };
-__attribute__((dllexport)) euint32 etk_get_thread_run_state(void *thread);
+__attribute__((dllexport)) b_uint32 bhapi_get_thread_run_state(void *thread);
 
-__attribute__((dllexport)) e_status_t etk_set_thread_priority(void *thread, eint32 new_priority);
-__attribute__((dllexport)) eint32 etk_get_thread_priority(void *thread);
-__attribute__((dllexport)) void etk_exit_thread(e_status_t status);
-__attribute__((dllexport)) e_status_t etk_wait_for_thread(void *thread, e_status_t *thread_return_value);
-__attribute__((dllexport)) e_status_t etk_wait_for_thread_etc(void *thread, e_status_t *thread_return_value, euint32 flags, e_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_set_thread_priority(void *thread, b_int32 new_priority);
+__attribute__((dllexport)) b_int32 bhapi_get_thread_priority(void *thread);
+__attribute__((dllexport)) void bhapi_exit_thread(b_status_t status);
+__attribute__((dllexport)) b_status_t bhapi_wait_for_thread(void *thread, b_status_t *thread_return_value);
+__attribute__((dllexport)) b_status_t bhapi_wait_for_thread_etc(void *thread, b_status_t *thread_return_value, b_uint32 flags, b_bigtime_t timeout);
 # 206 "../src/app/./../kernel/Kernel.h"
-__attribute__((dllexport)) void* etk_create_port(eint32 queue_length, const char *name, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
+__attribute__((dllexport)) void* bhapi_create_port(b_int32 queue_length, const char *name, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 
 
 
-__attribute__((dllexport)) void* etk_open_port(const char *name);
-__attribute__((dllexport)) void* etk_open_port_by_source(void *port);
-__attribute__((dllexport)) e_status_t etk_delete_port(void *port);
-
-
-
-
-
-__attribute__((dllexport)) e_status_t etk_close_port(void *port);
-
-__attribute__((dllexport)) e_status_t etk_write_port(void *port, eint32 code, const void *buf, size_t buf_size);
-__attribute__((dllexport)) ssize_t etk_port_buffer_size(void *port);
-__attribute__((dllexport)) e_status_t etk_read_port(void *port, eint32 *code, void *buf, size_t buf_size);
-
-__attribute__((dllexport)) e_status_t etk_write_port_etc(void *port, eint32 code, const void *buf, size_t buf_size, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) ssize_t etk_port_buffer_size_etc(void *port, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) e_status_t etk_read_port_etc(void *port, eint32 *code, void *buf, size_t buf_size, euint32 flags, e_bigtime_t timeout);
-
-__attribute__((dllexport)) eint32 etk_port_count(void *port);
+__attribute__((dllexport)) void* bhapi_open_port(const char *name);
+__attribute__((dllexport)) void* bhapi_open_port_by_source(void *port);
+__attribute__((dllexport)) b_status_t bhapi_delete_port(void *port);
 
 
 
 
-__attribute__((dllexport)) void* etk_load_addon(const char* path);
-__attribute__((dllexport)) e_status_t etk_unload_addon(void *image);
-__attribute__((dllexport)) e_status_t etk_get_image_symbol(void *image, const char *name, void **ptr);
+
+__attribute__((dllexport)) b_status_t bhapi_close_port(void *port);
+
+__attribute__((dllexport)) b_status_t bhapi_write_port(void *port, b_int32 code, const void *buf, size_t buf_size);
+__attribute__((dllexport)) ssize_t bhapi_port_buffer_size(void *port);
+__attribute__((dllexport)) b_status_t bhapi_read_port(void *port, b_int32 *code, void *buf, size_t buf_size);
+
+__attribute__((dllexport)) b_status_t bhapi_write_port_etc(void *port, b_int32 code, const void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) ssize_t bhapi_port_buffer_size_etc(void *port, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_read_port_etc(void *port, b_int32 *code, void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t timeout);
+
+__attribute__((dllexport)) b_int32 bhapi_port_count(void *port);
+
+
+
+
+__attribute__((dllexport)) void* bhapi_load_addon(const char* path);
+__attribute__((dllexport)) b_status_t bhapi_unload_addon(void *image);
+__attribute__((dllexport)) b_status_t bhapi_get_image_symbol(void *image, const char *name, void **ptr);
 
 
 
@@ -45306,20 +45303,20 @@ namespace std
 
 
 
-class __attribute__((dllexport)) ELocker {
+class __attribute__((dllexport)) BLocker {
 public:
- ELocker();
- virtual ~ELocker();
+    BLocker();
+    virtual ~BLocker();
 
  bool Lock();
  void Unlock();
- e_status_t LockWithTimeout(e_bigtime_t microseconds);
+    b_status_t LockWithTimeout(b_bigtime_t microseconds);
 
 
 
 
 
- eint64 CountLocks() const;
+    b_int64 CountLocks() const;
  bool IsLockedByCurrentThread() const;
 
 private:
@@ -45329,22 +45326,22 @@ private:
 # 1 "../src/app/./../support/Autolock.h" 1
 # 35 "../src/app/./../support/Autolock.h"
 template<class C>
-class EAutolock
+class BAutolock
 {
 public:
- EAutolock(C *target)
+    BAutolock(C *target)
  {
   fLocker = target;
   fLocked = (fLocker ? fLocker->Lock() : false);
  }
 
- EAutolock(C &target)
+    BAutolock(C &target)
  {
   fLocker = &target;
   fLocked = fLocker->Lock();
  }
 
- ~EAutolock()
+    ~BAutolock()
  {
   if(fLocked && fLocker) fLocker->Unlock();
  }
@@ -45380,50 +45377,50 @@ private:
 
 
 
-class __attribute__((dllexport)) EList {
+class __attribute__((dllexport)) BList {
 public:
 
 
 
 
 
- EList(eint32 initialAllocSize = 0);
- EList(eint32 initialAllocSize, eint32 nullItems);
+    BList(b_int32 initialAllocSize = 0);
+    BList(b_int32 initialAllocSize, b_int32 nullItems);
 
 
 
- EList(const EList &list);
- EList &operator=(const EList &from);
+    BList(const BList &list);
+    BList &operator=(const BList &from);
 
- virtual ~EList();
+    virtual ~BList();
 
  bool AddItem(void *item);
- bool AddItem(void *item, eint32 atIndex);
- bool AddList(const EList *newItems);
- bool AddList(const EList *newItems, eint32 atIndex);
+    bool AddItem(void *item, b_int32 atIndex);
+    bool AddList(const BList *newItems);
+    bool AddList(const BList *newItems, b_int32 atIndex);
 
 
  bool RemoveItem(void *item);
- void *RemoveItem(eint32 index);
- bool RemoveItems(eint32 index, eint32 count);
+    void *RemoveItem(b_int32 index);
+    bool RemoveItems(b_int32 index, b_int32 count);
 
 
- bool ReplaceItem(eint32 index, void *newItem, void **oldItem = __null);
+    bool ReplaceItem(b_int32 index, void *newItem, void **oldItem = __null);
 
  void MakeEmpty();
 
- bool SwapItems(eint32 indexA, eint32 indexB);
- bool MoveItem(eint32 fromIndex, eint32 toIndex);
+    bool SwapItems(b_int32 indexA, b_int32 indexB);
+    bool MoveItem(b_int32 fromIndex, b_int32 toIndex);
 
  void SortItems(int (*cmp)(const void *a, const void *b));
 
- void *ItemAt(eint32 index) const;
+    void *ItemAt(b_int32 index) const;
  void *FirstItem() const;
  void *LastItem() const;
 
  bool HasItem(void *item) const;
- eint32 IndexOf(void *item) const;
- eint32 CountItems() const;
+    b_int32 IndexOf(void *item) const;
+    b_int32 CountItems() const;
  bool IsEmpty() const;
 
  void DoForEach(bool (*func)(void *data));
@@ -45435,11 +45432,11 @@ public:
 private:
  void **fObjects;
 
- eint32 fItemCount;
- eint32 fItemReal;
- eint32 fMinimumCount;
+    b_int32 fItemCount;
+    b_int32 fItemReal;
+    b_int32 fMinimumCount;
 
- bool _Resize(eint32 count);
+    bool _Resize(b_int32 count);
 };
 # 35 "../src/app/./../private/./../app/Looper.h" 2
 # 1 "../src/app/./../private/./../app/./../kernel/OS.h" 1
@@ -45451,39 +45448,39 @@ private:
 
 
 enum {
- E_ABOUT_REQUESTED = '_ABR',
- E_WINDOW_ACTIVATED = '_ACT',
- E_APP_ACTIVATED = '_ACT',
- E_APP_CURSOR_REQUESTED = '_CUR',
- E_ARGV_RECEIVED = '_ARG',
- E_QUIT_REQUESTED = '_QRQ',
- E_CANCEL = '_CNC',
- E_KEY_DOWN = '_KYD',
- E_KEY_UP = '_KYU',
- E_UNMAPPED_KEY_DOWN = '_UKD',
- E_UNMAPPED_KEY_UP = '_UKU',
- E_MODIFIERS_CHANGED = '_MCH',
- E_MINIMIZE = '_WMN',
- E_MINIMIZED = '_WMD',
- E_MOUSE_DOWN = '_MDN',
- E_MOUSE_MOVED = '_MMV',
- E_MOUSE_ENTER_EXIT = '_MEX',
- E_MOUSE_UP = '_MUP',
- E_MOUSE_WHEEL_CHANGED = '_MWC',
- E_OPEN_IN_WORKSPACE = '_OWS',
- E_PRINTER_CHANGED = '_PCH',
- E_PULSE = '_PUL',
- E_READY_TO_RUN = '_RTR',
- E_REFS_RECEIVED = '_RRC',
- E_SCREEN_CHANGED = '_SCH',
- E_VALUE_CHANGED = '_VCH',
- E_VIEW_MOVED = '_VMV',
- E_VIEW_RESIZED = '_VRS',
- E_WINDOW_MOVED = '_WMV',
- E_WINDOW_RESIZED = '_WRS',
- E_WORKSPACES_CHANGED = '_WCG',
- E_WORKSPACE_ACTIVATED = '_WAC',
- E_ZOOM = '_WZM',
+    B_ABOUT_REQUESTED = '_ABR',
+    B_WINDOW_ACTIVATED = '_ACT',
+    B_APP_ACTIVATED = '_ACT',
+    B_APP_CURSOR_REQUESTED = '_CUR',
+    B_ARGV_RECEIVED = '_ARG',
+    B_QUIT_REQUESTED = '_QRQ',
+    B_CANCEL = '_CNC',
+    B_KEY_DOWN = '_KYD',
+    B_KEY_UP = '_KYU',
+    B_UNMAPPED_KEY_DOWN = '_UKD',
+    B_UNMAPPED_KEY_UP = '_UKU',
+    B_MODIFIERS_CHANGED = '_MCH',
+    B_MINIMIZE = '_WMN',
+    B_MINIMIZED = '_WMD',
+    B_MOUSE_DOWN = '_MDN',
+    B_MOUSE_MOVED = '_MMV',
+    B_MOUSE_ENTER_EXIT = '_MEX',
+    B_MOUSE_UP = '_MUP',
+    B_MOUSE_WHEEL_CHANGED = '_MWC',
+    B_OPEN_IN_WORKSPACE = '_OWS',
+    B_PRINTER_CHANGED = '_PCH',
+    B_PULSE = '_PUL',
+    B_READY_TO_RUN = '_RTR',
+    B_REFS_RECEIVED = '_RRC',
+    B_SCREEN_CHANGED = '_SCH',
+    B_VALUE_CHANGED = '_VCH',
+    B_VIEW_MOVED = '_VMV',
+    B_VIEW_RESIZED = '_VRS',
+    B_WINDOW_MOVED = '_WMV',
+    B_WINDOW_RESIZED = '_WRS',
+    B_WORKSPACES_CHANGED = '_WCG',
+    B_WORKSPACE_ACTIVATED = '_WAC',
+    B_ZOOM = '_WZM',
 
  _QUIT_ = '_QIT',
  _EVENTS_PENDING_ = '_EVP',
@@ -45496,30 +45493,30 @@ enum {
 
 
 enum {
- E_UPDATE_STATUS_BAR = 'SBUP',
- E_RESET_STATUS_BAR = 'SBRS',
- E_OBSERVER_NOTICE_CHANGE = 'NTCH',
- E_CONTROL_INVOKED = 'CIVK',
- E_CONTROL_MODIFIED = 'CMOD',
- E_CLIPBOARD_CHANGED = 'CLCH',
- E_SAVE_REQUESTED = 'SAVE',
- E_NO_REPLY = 'NONE',
- E_REPLY = 'RPLY',
- E_SET_PROPERTY = 'PSET',
- E_GET_PROPERTY = 'PGET',
- E_CREATE_PROPERTY = 'PCRT',
- E_DELETE_PROPERTY = 'PDEL',
- E_COUNT_PROPERTIES = 'PCNT',
- E_EXECUTE_PROPERTY = 'PEXE',
- E_GET_SUPPORTED_SUITES = 'SUIT',
- E_INPUT_METHOD_EVENT = 'IMEV'
+    B_UPDATE_STATUS_BAR = 'SBUP',
+    B_RESET_STATUS_BAR = 'SBRS',
+    B_OBSERVER_NOTICE_CHANGE = 'NTCH',
+    B_CONTROL_INVOKED = 'CIVK',
+    B_CONTROL_MODIFIED = 'CMOD',
+    B_CLIPBOARD_CHANGED = 'CLCH',
+    B_SAVE_REQUESTED = 'SAVE',
+    B_NO_REPLY = 'NONE',
+    B_REPLY = 'RPLY',
+    B_SET_PROPERTY = 'PSET',
+    B_GET_PROPERTY = 'PGET',
+    B_CREATE_PROPERTY = 'PCRT',
+    B_DELETE_PROPERTY = 'PDEL',
+    B_COUNT_PROPERTIES = 'PCNT',
+    B_EXECUTE_PROPERTY = 'PEXE',
+    B_GET_SUPPORTED_SUITES = 'SUIT',
+    B_INPUT_METHOD_EVENT = 'IMEV'
 };
 # 37 "../src/app/./../private/./../app/Looper.h" 2
 # 1 "../src/app/./../private/./../app/./../app/Handler.h" 1
 # 34 "../src/app/./../private/./../app/./../app/Handler.h"
 # 1 "../src/app/./../private/./../app/./../app/./../support/Archivable.h" 1
 # 33 "../src/app/./../private/./../app/./../app/./../support/Archivable.h"
-# 1 "../src/app/./../private/./../app/./../app/./../support/SupportDefs.h" 1
+# 1 "../src/app/./../private/./../app/./../app/./../support/./SupportDefs.h" 1
 # 34 "../src/app/./../private/./../app/./../app/./../support/Archivable.h" 2
 # 1 "../src/app/./../private/./../app/./../app/./../support/./../app/Message.h" 1
 # 34 "../src/app/./../private/./../app/./../app/./../support/./../app/Message.h"
@@ -45528,14 +45525,10 @@ enum {
 
 # 1 "../src/app/./../private/./../app/./../app/./../support/./../app/./../kernel/OS.h" 1
 # 37 "../src/app/./../private/./../app/./../app/./../support/./../app/Message.h" 2
-# 1 "../src/app/./../private/./../app/./../app/./../support/./../app/./../support/String.h" 1
-# 34 "../src/app/./../private/./../app/./../app/./../support/./../app/./../support/String.h"
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
-# 35 "../src/app/./../private/./../app/./../app/./../support/./../app/./../support/String.h" 2
+# 1 "../src/app/./../private/./../app/./../app/./../support/./../app/./../support/StringMe.h" 1
+# 34 "../src/app/./../private/./../app/./../app/./../support/./../app/./../support/StringMe.h"
 # 1 "../src/app/./../private/./../app/./../app/./../support/./../app/./../support/SupportDefs.h" 1
-# 36 "../src/app/./../private/./../app/./../app/./../support/./../app/./../support/String.h" 2
+# 35 "../src/app/./../private/./../app/./../app/./../support/./../app/./../support/StringMe.h" 2
 
 
 extern "C" {
@@ -45543,135 +45536,135 @@ extern "C" {
 
 
 
-__attribute__((dllexport)) char* e_strdup(const char *src);
-__attribute__((dllexport)) char* e_strndup(const char *src, eint32 length);
-__attribute__((dllexport)) char* e_strdup_vprintf(const char *format, va_list ap);
-__attribute__((dllexport)) char* e_strdup_printf(const char *format, ...);
+__attribute__((dllexport)) char* b_strdup(const char *src);
+__attribute__((dllexport)) char* b_strndup(const char *src, b_int32 length);
+__attribute__((dllexport)) char* b_strdup_vprintf(const char *format, va_list ap);
+__attribute__((dllexport)) char* b_strdup_printf(const char *format, ...);
 
-__attribute__((dllexport)) eunichar* e_utf8_convert_to_unicode(const char *str, eint32 length);
-__attribute__((dllexport)) eunichar32* e_utf8_convert_to_utf32(const char *str, eint32 length);
-__attribute__((dllexport)) char* e_unicode_convert_to_utf8(const eunichar *str, eint32 ulength);
-__attribute__((dllexport)) eunichar32* e_unicode_convert_to_utf32(const eunichar *str, eint32 ulength);
-__attribute__((dllexport)) char* e_utf32_convert_to_utf8(const eunichar32 *str, eint32 ulength);
-__attribute__((dllexport)) eunichar* e_utf32_convert_to_unicode(const eunichar32 *str, eint32 ulength);
+__attribute__((dllexport)) b_unichar* b_utf8_convert_to_unicode(const char *str, b_int32 length);
+__attribute__((dllexport)) b_unichar32* b_utf8_convert_to_utf32(const char *str, b_int32 length);
+__attribute__((dllexport)) char* b_unicode_convert_to_utf8(const b_unichar *str, b_int32 ulength);
+__attribute__((dllexport)) b_unichar32* b_unicode_convert_to_utf32(const b_unichar *str, b_int32 ulength);
+__attribute__((dllexport)) char* b_utf32_convert_to_utf8(const b_unichar32 *str, b_int32 ulength);
+__attribute__((dllexport)) b_unichar* b_utf32_convert_to_unicode(const b_unichar32 *str, b_int32 ulength);
 
-__attribute__((dllexport)) bool e_utf8_is_token(const char *str);
-__attribute__((dllexport)) eint32 e_utf8_strlen(const char *str);
-__attribute__((dllexport)) eint32 e_utf8_strlen_etc(const char *str, eint32 nbytes);
-__attribute__((dllexport)) eint32 e_utf8_strlen_fast(const char *str, eint32 nbytes);
-__attribute__((dllexport)) const char* e_utf8_at(const char *str, eint32 index, euint8 *nbytes);
-__attribute__((dllexport)) const char* e_utf8_next(const char *str, euint8 *length);
+__attribute__((dllexport)) bool b_utf8_is_token(const char *str);
+__attribute__((dllexport)) b_int32 b_utf8_strlen(const char *str);
+__attribute__((dllexport)) b_int32 b_utf8_strlen_etc(const char *str, b_int32 nbytes);
+__attribute__((dllexport)) b_int32 b_utf8_strlen_fast(const char *str, b_int32 nbytes);
+__attribute__((dllexport)) const char* b_utf8_at(const char *str, b_int32 index, b_uint8 *nbytes);
+__attribute__((dllexport)) const char* b_utf8_next(const char *str, b_uint8 *length);
 
-__attribute__((dllexport)) eint32 e_unicode_strlen(const eunichar *ustr);
-__attribute__((dllexport)) eint32 e_unicode_strlen_etc(const eunichar *ustr, eint32 nchars, bool utf16_style);
-__attribute__((dllexport)) const eunichar* e_unicode_at(const eunichar* ustr, eint32 index, bool *utf16);
-__attribute__((dllexport)) const eunichar* e_unicode_next(const eunichar* ustr, bool *utf16);
+__attribute__((dllexport)) b_int32 b_unicode_strlen(const b_unichar *ustr);
+__attribute__((dllexport)) b_int32 b_unicode_strlen_etc(const b_unichar *ustr, b_int32 nchars, bool utf16_style);
+__attribute__((dllexport)) const b_unichar* b_unicode_at(const b_unichar* ustr, b_int32 index, bool *utf16);
+__attribute__((dllexport)) const b_unichar* b_unicode_next(const b_unichar* ustr, bool *utf16);
 
-__attribute__((dllexport)) eint32 e_utf32_strlen(const eunichar32 *ustr);
-__attribute__((dllexport)) eint32 e_utf32_strlen_etc(const eunichar32 *ustr, eint32 nchars);
-__attribute__((dllexport)) const eunichar32* e_utf32_at(const eunichar32* ustr, eint32 index);
-__attribute__((dllexport)) const eunichar32* e_utf32_next(const eunichar32* ustr);
+__attribute__((dllexport)) b_int32 b_utf32_strlen(const b_unichar32 *ustr);
+__attribute__((dllexport)) b_int32 b_utf32_strlen_etc(const b_unichar32 *ustr, b_int32 nchars);
+__attribute__((dllexport)) const b_unichar32* b_utf32_at(const b_unichar32* ustr, b_int32 index);
+__attribute__((dllexport)) const b_unichar32* b_utf32_next(const b_unichar32* ustr);
 
 
 }
 
 
-__attribute__((dllexport)) char *EStrdup(const char* src, eint32 length = -1);
+__attribute__((dllexport)) char *b_strdup_dirty(const char* src, b_int32 length = -1);
 
 
-class EStringArray;
+class BStringArray;
 
 
-class __attribute__((dllexport)) EString {
+class __attribute__((dllexport)) BString {
 public:
- EString();
- EString(const char *str);
- EString(const EString &str);
- EString(const char *str, eint32 maxLength);
- ~EString();
+    BString();
+    BString(const char *str);
+    BString(const BString &str);
+    BString(const char *str, b_int32 maxLength);
+    ~BString();
 
- const char *String() const;
+    const char *String() const;
 
- eint32 Length() const;
- eint32 CountChars() const;
+    b_int32 Length() const;
+    b_int32 CountChars() const;
 
- char operator[](eint32 index) const;
- char ByteAt(eint32 index) const;
- const char* CharAt(eint32 index, euint8 *length = __null) const;
+    char operator[](b_int32 index) const;
+    char ByteAt(b_int32 index) const;
+    const char* CharAt(b_int32 index, b_uint8 *length = __null) const;
 
- EString &operator=(const EString &str);
- EString &operator=(const char *str);
- EString &operator=(char c);
+    BString &operator=(const BString &str);
+    BString &operator=(const char *str);
+    BString &operator=(char c);
 
- EString &SetTo(const EString &str);
- EString &SetTo(const EString &str, eint32 length);
- EString &SetTo(const char *str);
- EString &SetTo(const char *str, eint32 length);
- EString &SetTo(char c, eint32 count);
+    BString &SetTo(const BString &str);
+    BString &SetTo(const BString &str, b_int32 length);
+    BString &SetTo(const char *str);
+    BString &SetTo(const char *str, b_int32 length);
+    BString &SetTo(char c, b_int32 count);
 
- EString &Adopt(EString &from);
- EString &Adopt(EString &from, eint32 length);
+    BString &Adopt(BString &from);
+    BString &Adopt(BString &from, b_int32 length);
 
- EString &CopyInto(EString &into, eint32 fromOffset, eint32 length) const;
- void CopyInto(char *into, size_t into_size, eint32 fromOffset, eint32 length) const;
+    BString &CopyInto(BString &into, b_int32 fromOffset, b_int32 length) const;
+    void CopyInto(char *into, size_t into_size, b_int32 fromOffset, b_int32 length) const;
 
- EString &MoveInto(EString &into, eint32 from, eint32 length);
- void MoveInto(char *into, size_t into_size, eint32 from, eint32 length);
+    BString &MoveInto(BString &into, b_int32 from, b_int32 length);
+    void MoveInto(char *into, size_t into_size, b_int32 from, b_int32 length);
 
  void MakeEmpty();
 
- EString &operator+=(const EString &str);
- EString &operator+=(const char *str);
- EString &operator+=(char c);
+    BString &operator+=(const BString &str);
+    BString &operator+=(const char *str);
+    BString &operator+=(char c);
 
- EString &Append(const EString &str);
- EString &Append(const EString &str, eint32 length);
- EString &Append(const char *str);
- EString &Append(const char *str, eint32 length);
- EString &Append(char c, eint32 count);
- EString &AppendFormat(const char *format, ...);
+    BString &Append(const BString &str);
+    BString &Append(const BString &str, b_int32 length);
+    BString &Append(const char *str);
+    BString &Append(const char *str, b_int32 length);
+    BString &Append(char c, b_int32 count);
+    BString &AppendFormat(const char *format, ...);
 
- EString &Prepend(const EString &str);
- EString &Prepend(const EString &str, eint32 length);
- EString &Prepend(const char *str);
- EString &Prepend(const char *str, eint32 length);
- EString &Prepend(char c, eint32 count);
- EString &PrependFormat(const char *format, ...);
+    BString &Prepend(const BString &str);
+    BString &Prepend(const BString &str, b_int32 length);
+    BString &Prepend(const char *str);
+    BString &Prepend(const char *str, b_int32 length);
+    BString &Prepend(char c, b_int32 count);
+    BString &PrependFormat(const char *format, ...);
 
- EString &Insert(const EString &str, eint32 pos);
- EString &Insert(const EString &str, eint32 length, eint32 pos);
- EString &Insert(const EString &str, eint32 fromOffset, eint32 length, eint32 pos);
- EString &Insert(const char *str, eint32 pos);
- EString &Insert(const char *str, eint32 length, eint32 pos);
- EString &Insert(const char *str, eint32 fromOffset, eint32 length, eint32 pos);
- EString &Insert(char c, eint32 count, eint32 pos);
+    BString &Insert(const BString &str, b_int32 pos);
+    BString &Insert(const BString &str, b_int32 length, b_int32 pos);
+    BString &Insert(const BString &str, b_int32 fromOffset, b_int32 length, b_int32 pos);
+    BString &Insert(const char *str, b_int32 pos);
+    BString &Insert(const char *str, b_int32 length, b_int32 pos);
+    BString &Insert(const char *str, b_int32 fromOffset, b_int32 length, b_int32 pos);
+    BString &Insert(char c, b_int32 count, b_int32 pos);
 
- EString &Truncate(eint32 newLength);
+    BString &Truncate(b_int32 newLength);
 
- EString &Remove(eint32 from, eint32 length);
+    BString &Remove(b_int32 from, b_int32 length);
 
- EString &RemoveFirst(const EString &str);
- EString &RemoveLast(const EString &str);
- EString &RemoveAll(const EString &str);
- EString &RemoveFirst(const char *str);
- EString &RemoveLast(const char *str);
- EString &RemoveAll(const char *str);
- EString &RemoveSet(const char *setOfCharsToRemove);
+    BString &RemoveFirst(const BString &str);
+    BString &RemoveLast(const BString &str);
+    BString &RemoveAll(const BString &str);
+    BString &RemoveFirst(const char *str);
+    BString &RemoveLast(const char *str);
+    BString &RemoveAll(const char *str);
+    BString &RemoveSet(const char *setOfCharsToRemove);
 
- EString &IRemoveFirst(const EString &str);
- EString &IRemoveLast(const EString &str);
- EString &IRemoveAll(const EString &str);
- EString &IRemoveFirst(const char *str);
- EString &IRemoveLast(const char *str);
- EString &IRemoveAll(const char *str);
- EString &IRemoveSet(const char *setOfCharsToRemove);
+    BString &IRemoveFirst(const BString &str);
+    BString &IRemoveLast(const BString &str);
+    BString &IRemoveAll(const BString &str);
+    BString &IRemoveFirst(const char *str);
+    BString &IRemoveLast(const char *str);
+    BString &IRemoveAll(const char *str);
+    BString &IRemoveSet(const char *setOfCharsToRemove);
 
- bool operator<(const EString &str) const;
- bool operator<=(const EString &str) const;
- bool operator==(const EString &str) const;
- bool operator>=(const EString &str) const;
- bool operator>(const EString &str) const;
- bool operator!=(const EString &str) const;
+    bool operator<(const BString &str) const;
+    bool operator<=(const BString &str) const;
+    bool operator==(const BString &str) const;
+    bool operator>=(const BString &str) const;
+    bool operator>(const BString &str) const;
+    bool operator!=(const BString &str) const;
 
  bool operator<(const char *str) const;
  bool operator<=(const char *str) const;
@@ -45680,85 +45673,85 @@ public:
  bool operator>(const char *str) const;
  bool operator!=(const char *str) const;
 
- int Compare(const EString &str) const;
+    int Compare(const BString &str) const;
  int Compare(const char *str) const;
- int Compare(const EString &str, eint32 n) const;
- int Compare(const char *str, eint32 n) const;
- int ICompare(const EString &str) const;
+    int Compare(const BString &str, b_int32 n) const;
+    int Compare(const char *str, b_int32 n) const;
+    int ICompare(const BString &str) const;
  int ICompare(const char *str) const;
- int ICompare(const EString &str, eint32 n) const;
- int ICompare(const char *str, eint32 n) const;
+    int ICompare(const BString &str, b_int32 n) const;
+    int ICompare(const char *str, b_int32 n) const;
 
- eint32 FindFirst(const EString &string) const;
- eint32 FindFirst(const char *string) const;
- eint32 FindFirst(const EString &string, eint32 fromOffset) const;
- eint32 FindFirst(const char *string, eint32 fromOffset) const;
- eint32 FindFirst(char c) const;
- eint32 FindFirst(char c, eint32 fromOffset) const;
+    b_int32 FindFirst(const BString &string) const;
+    b_int32 FindFirst(const char *string) const;
+    b_int32 FindFirst(const BString &string, b_int32 fromOffset) const;
+    b_int32 FindFirst(const char *string, b_int32 fromOffset) const;
+    b_int32 FindFirst(char c) const;
+    b_int32 FindFirst(char c, b_int32 fromOffset) const;
 
- eint32 FindLast(const EString &string) const;
- eint32 FindLast(const char *string) const;
- eint32 FindLast(const EString &string, eint32 beforeOffset) const;
- eint32 FindLast(const char *string, eint32 beforeOffset) const;
- eint32 FindLast(char c) const;
- eint32 FindLast(char c, eint32 beforeOffset) const;
+    b_int32 FindLast(const BString &string) const;
+    b_int32 FindLast(const char *string) const;
+    b_int32 FindLast(const BString &string, b_int32 beforeOffset) const;
+    b_int32 FindLast(const char *string, b_int32 beforeOffset) const;
+    b_int32 FindLast(char c) const;
+    b_int32 FindLast(char c, b_int32 beforeOffset) const;
 
- eint32 IFindFirst(const EString &string) const;
- eint32 IFindFirst(const char *string) const;
- eint32 IFindFirst(const EString &string, eint32 fromOffset) const;
- eint32 IFindFirst(const char *string, eint32 fromOffset) const;
- eint32 IFindFirst(char c) const;
- eint32 IFindFirst(char c, eint32 fromOffset) const;
+    b_int32 IFindFirst(const BString &string) const;
+    b_int32 IFindFirst(const char *string) const;
+    b_int32 IFindFirst(const BString &string, b_int32 fromOffset) const;
+    b_int32 IFindFirst(const char *string, b_int32 fromOffset) const;
+    b_int32 IFindFirst(char c) const;
+    b_int32 IFindFirst(char c, b_int32 fromOffset) const;
 
- eint32 IFindLast(const EString &string) const;
- eint32 IFindLast(const char *string) const;
- eint32 IFindLast(const EString &string, eint32 beforeOffset) const;
- eint32 IFindLast(const char *string, eint32 beforeOffset) const;
- eint32 IFindLast(char c) const;
- eint32 IFindLast(char c, eint32 beforeOffset) const;
+    b_int32 IFindLast(const BString &string) const;
+    b_int32 IFindLast(const char *string) const;
+    b_int32 IFindLast(const BString &string, b_int32 beforeOffset) const;
+    b_int32 IFindLast(const char *string, b_int32 beforeOffset) const;
+    b_int32 IFindLast(char c) const;
+    b_int32 IFindLast(char c, b_int32 beforeOffset) const;
 
- EString &ReplaceFirst(char replaceThis, char withThis);
- EString &ReplaceLast(char replaceThis, char withThis);
- EString &ReplaceAll(char replaceThis, char withThis, eint32 fromOffset = 0);
- EString &Replace(char replaceThis, char withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &ReplaceFirst(const char *replaceThis, const char *withThis);
- EString &ReplaceLast(const char *replaceThis, const char *withThis);
- EString &ReplaceAll(const char *replaceThis, const char *withThis, eint32 fromOffset = 0);
- EString &Replace(const char *replaceThis, const char *withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &ReplaceSet(const char *setOfChars, char with);
- EString &ReplaceSet(const char *setOfChars, const char *with);
+    BString &ReplaceFirst(char replaceThis, char withThis);
+    BString &ReplaceLast(char replaceThis, char withThis);
+    BString &ReplaceAll(char replaceThis, char withThis, b_int32 fromOffset = 0);
+    BString &Replace(char replaceThis, char withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &ReplaceFirst(const char *replaceThis, const char *withThis);
+    BString &ReplaceLast(const char *replaceThis, const char *withThis);
+    BString &ReplaceAll(const char *replaceThis, const char *withThis, b_int32 fromOffset = 0);
+    BString &Replace(const char *replaceThis, const char *withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &ReplaceSet(const char *setOfChars, char with);
+    BString &ReplaceSet(const char *setOfChars, const char *with);
 
- EString &IReplaceFirst(char replaceThis, char withThis);
- EString &IReplaceLast(char replaceThis, char withThis);
- EString &IReplaceAll(char replaceThis, char withThis, eint32 fromOffset = 0);
- EString &IReplace(char replaceThis, char withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &IReplaceFirst(const char *replaceThis, const char *withThis);
- EString &IReplaceLast(const char *replaceThis, const char *withThis);
- EString &IReplaceAll(const char *replaceThis, const char *withThis, eint32 fromOffset = 0);
- EString &IReplace(const char *replaceThis, const char *withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &IReplaceSet(const char *setOfChars, char with);
- EString &IReplaceSet(const char *setOfChars, const char *with);
+    BString &IReplaceFirst(char replaceThis, char withThis);
+    BString &IReplaceLast(char replaceThis, char withThis);
+    BString &IReplaceAll(char replaceThis, char withThis, b_int32 fromOffset = 0);
+    BString &IReplace(char replaceThis, char withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &IReplaceFirst(const char *replaceThis, const char *withThis);
+    BString &IReplaceLast(const char *replaceThis, const char *withThis);
+    BString &IReplaceAll(const char *replaceThis, const char *withThis, b_int32 fromOffset = 0);
+    BString &IReplace(const char *replaceThis, const char *withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &IReplaceSet(const char *setOfChars, char with);
+    BString &IReplaceSet(const char *setOfChars, const char *with);
 
- EString &ToLower();
- EString &ToUpper();
-
-
- EString &Capitalize();
+    BString &ToLower();
+    BString &ToUpper();
 
 
- EString &CapitalizeEachWord();
+    BString &Capitalize();
 
 
- EString &CharacterEscape(const char *original, const char *setOfCharsToEscape, char escapeWith);
+    BString &CapitalizeEachWord();
 
 
- EString &CharacterEscape(const char *setOfCharsToEscape, char escapeWith);
+    BString &CharacterEscape(const char *original, const char *setOfCharsToEscape, char escapeWith);
 
 
- EString &CharacterDeescape(const char *original, char escapeChar);
+    BString &CharacterEscape(const char *setOfCharsToEscape, char escapeWith);
 
 
- EString &CharacterDeescape(char escapeChar);
+    BString &CharacterDeescape(const char *original, char escapeChar);
+
+
+    BString &CharacterDeescape(char escapeChar);
 
 
  bool IsNumber() const;
@@ -45772,46 +45765,46 @@ public:
 
  bool GetDecimal(float *value) const;
  bool GetDecimal(double *value) const;
- bool GetInteger(eint8 *value) const;
- bool GetInteger(euint8 *value) const;
- bool GetInteger(eint16 *value) const;
- bool GetInteger(euint16 *value) const;
- bool GetInteger(eint32 *value) const;
- bool GetInteger(euint32 *value) const;
- bool GetInteger(eint64 *value) const;
- bool GetInteger(euint64 *value) const;
+    bool GetInteger(b_int8 *value) const;
+    bool GetInteger(b_uint8 *value) const;
+    bool GetInteger(b_int16 *value) const;
+    bool GetInteger(b_uint16 *value) const;
+    bool GetInteger(b_int32 *value) const;
+    bool GetInteger(b_uint32 *value) const;
+    bool GetInteger(b_int64 *value) const;
+    bool GetInteger(b_uint64 *value) const;
 
- EString &operator<<(const char *str);
- EString &operator<<(const EString &str);
- EString &operator<<(eint8 value);
- EString &operator<<(euint8 value);
- EString &operator<<(eint16 value);
- EString &operator<<(euint16 value);
- EString &operator<<(eint32 value);
- EString &operator<<(euint32 value);
- EString &operator<<(eint64 value);
- EString &operator<<(euint64 value);
- EString &operator<<(float value);
- EString &operator<<(double value);
-
-
-
-
- EStringArray *Split(const char *delimiter, euint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
- EStringArray *Split(const char delimiter, euint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
+    BString &operator<<(const char *str);
+    BString &operator<<(const BString &str);
+    BString &operator<<(b_int8 value);
+    BString &operator<<(b_uint8 value);
+    BString &operator<<(b_int16 value);
+    BString &operator<<(b_uint16 value);
+    BString &operator<<(b_int32 value);
+    BString &operator<<(b_uint32 value);
+    BString &operator<<(b_int64 value);
+    BString &operator<<(b_uint64 value);
+    BString &operator<<(float value);
+    BString &operator<<(double value);
 
 
 
- bool SetMinimumBufferSize(eint32 length);
- eint32 MinimumBufferSize() const;
+
+    BStringArray *Split(const char *delimiter, b_uint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
+    BStringArray *Split(const char delimiter, b_uint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
+
+
+
+    bool SetMinimumBufferSize(b_int32 length);
+    b_int32 MinimumBufferSize() const;
 
 private:
- eint32 fLen;
- eint32 fLenReal;
- eint32 fMinBufferSize;
+    b_int32 fLen;
+    b_int32 fLenReal;
+    b_int32 fMinBufferSize;
  char *fBuffer;
 
- bool _Resize(eint32 length);
+    bool _Resize(b_int32 length);
 };
 # 38 "../src/app/./../private/./../app/./../app/./../support/./../app/Message.h" 2
 # 1 "../src/app/./../private/./../app/./../app/./../support/./../app/./../support/List.h" 1
@@ -45823,45 +45816,45 @@ private:
 
 
 
-class ERect;
+class BRect;
 
-class __attribute__((dllexport)) EPoint {
+class __attribute__((dllexport)) BPoint {
 public:
  float x;
  float y;
 
- EPoint();
- EPoint(float X, float Y);
- EPoint(const EPoint &pt);
+ BPoint();
+ BPoint(float X, float Y);
+ BPoint(const BPoint &pt);
 
- EPoint &operator=(const EPoint &from);
+ BPoint &operator=(const BPoint &from);
  void Set(float X, float Y);
 
- void ConstrainTo(ERect rect);
+ void ConstrainTo(BRect rect);
 
  void Ceil();
  void Floor();
  void Round();
 
- EPoint& FloorSelf();
- EPoint FloorCopy() const;
- EPoint& CeilSelf();
- EPoint CeilCopy() const;
- EPoint& RoundSelf();
- EPoint RoundCopy() const;
+ BPoint& FloorSelf();
+ BPoint FloorCopy() const;
+ BPoint& CeilSelf();
+ BPoint CeilCopy() const;
+ BPoint& RoundSelf();
+ BPoint RoundCopy() const;
 
- EPoint operator+(const EPoint &plus) const;
- EPoint operator-(const EPoint &minus) const;
- EPoint& operator+=(const EPoint &plus);
- EPoint& operator-=(const EPoint &minus);
+ BPoint operator+(const BPoint &plus) const;
+ BPoint operator-(const BPoint &minus) const;
+ BPoint& operator+=(const BPoint &plus);
+ BPoint& operator-=(const BPoint &minus);
 
- bool operator!=(const EPoint &pt) const;
- bool operator==(const EPoint &pt) const;
+ bool operator!=(const BPoint &pt) const;
+ bool operator==(const BPoint &pt) const;
 
  void PrintToStream() const;
 };
 
-extern __attribute__((dllexport)) const EPoint E_ORIGIN;
+extern __attribute__((dllexport)) const BPoint B_ORIGIN;
 # 40 "../src/app/./../private/./../app/./../app/./../support/./../app/Message.h" 2
 # 1 "../src/app/./../private/./../app/./../app/./../support/./../app/./../interface/Rect.h" 1
 # 33 "../src/app/./../private/./../app/./../app/./../support/./../app/./../interface/Rect.h"
@@ -46574,133 +46567,133 @@ __extension__ long long __attribute__((__cdecl__)) llrintl (long double);
 
 
 
-class __attribute__((dllexport)) ERect {
+class __attribute__((dllexport)) BRect {
 public:
  float left;
  float top;
  float right;
  float bottom;
 
- ERect();
- ERect(const ERect &r);
- ERect(float l, float t, float r, float b);
- ERect(EPoint leftTop, EPoint rightBottom);
+ BRect();
+ BRect(const BRect &r);
+ BRect(float l, float t, float r, float b);
+ BRect(BPoint leftTop, BPoint rightBottom);
 
- ERect &operator=(const ERect &from);
+ BRect &operator=(const BRect &from);
  void Set(float l, float t, float r, float b);
 
- EPoint LeftTop() const;
- EPoint RightBottom() const;
- EPoint LeftBottom() const;
- EPoint RightTop() const;
- EPoint Center() const;
+ BPoint LeftTop() const;
+ BPoint RightBottom() const;
+ BPoint LeftBottom() const;
+ BPoint RightTop() const;
+ BPoint Center() const;
 
- void SetLeftTop(const EPoint pt);
- void SetRightBottom(const EPoint pt);
- void SetLeftBottom(const EPoint pt);
- void SetRightTop(const EPoint pt);
+ void SetLeftTop(const BPoint pt);
+ void SetRightBottom(const BPoint pt);
+ void SetLeftBottom(const BPoint pt);
+ void SetRightTop(const BPoint pt);
 
  void SetLeftTop(float x, float y);
  void SetRightBottom(float x, float y);
  void SetLeftBottom(float x, float y);
  void SetRightTop(float x, float y);
 
- void InsetBy(EPoint pt);
+ void InsetBy(BPoint pt);
  void InsetBy(float dx, float dy);
- void OffsetBy(EPoint pt);
+ void OffsetBy(BPoint pt);
  void OffsetBy(float dx, float dy);
- void OffsetTo(EPoint pt);
+ void OffsetTo(BPoint pt);
  void OffsetTo(float x, float y);
 
  void Floor();
  void Ceil();
  void Round();
 
- ERect& InsetBySelf(EPoint pt);
- ERect& InsetBySelf(float dx, float dy);
- ERect InsetByCopy(EPoint pt) const;
- ERect InsetByCopy(float dx, float dy) const;
- ERect& OffsetBySelf(EPoint pt);
- ERect& OffsetBySelf(float dx, float dy);
- ERect OffsetByCopy(EPoint pt) const;
- ERect OffsetByCopy(float dx, float dy) const;
- ERect& OffsetToSelf(EPoint pt);
- ERect& OffsetToSelf(float x, float y);
- ERect OffsetToCopy(EPoint pt) const;
- ERect OffsetToCopy(float x, float y) const;
+ BRect& InsetBySelf(BPoint pt);
+ BRect& InsetBySelf(float dx, float dy);
+ BRect InsetByCopy(BPoint pt) const;
+ BRect InsetByCopy(float dx, float dy) const;
+ BRect& OffsetBySelf(BPoint pt);
+ BRect& OffsetBySelf(float dx, float dy);
+ BRect OffsetByCopy(BPoint pt) const;
+ BRect OffsetByCopy(float dx, float dy) const;
+ BRect& OffsetToSelf(BPoint pt);
+ BRect& OffsetToSelf(float x, float y);
+ BRect OffsetToCopy(BPoint pt) const;
+ BRect OffsetToCopy(float x, float y) const;
 
- ERect& FloorSelf();
- ERect FloorCopy() const;
- ERect& CeilSelf();
- ERect CeilCopy() const;
- ERect& RoundSelf();
- ERect RoundCopy() const;
+ BRect& FloorSelf();
+ BRect FloorCopy() const;
+ BRect& CeilSelf();
+ BRect CeilCopy() const;
+ BRect& RoundSelf();
+ BRect RoundCopy() const;
 
- bool operator==(ERect r) const;
- bool operator!=(ERect r) const;
+ bool operator==(BRect r) const;
+ bool operator!=(BRect r) const;
 
- ERect operator&(ERect r) const;
- ERect operator|(ERect r) const;
+ BRect operator&(BRect r) const;
+ BRect operator|(BRect r) const;
 
- ERect& operator&=(ERect r);
- ERect& operator|=(ERect r);
+ BRect& operator&=(BRect r);
+ BRect& operator|=(BRect r);
 
  bool IsValid() const;
  float Width() const;
- eint32 IntegerWidth() const;
+    b_int32 IntegerWidth() const;
  float Height() const;
- eint32 IntegerHeight() const;
+    b_int32 IntegerHeight() const;
 
- bool Intersects(ERect r) const;
+ bool Intersects(BRect r) const;
  bool Intersects(float l, float t, float r, float b) const;
 
- bool Contains(EPoint pt) const;
+ bool Contains(BPoint pt) const;
  bool Contains(float x, float y) const;
- bool Contains(ERect r) const;
+ bool Contains(BRect r) const;
  bool Contains(float l, float t, float r, float b) const;
 
  void PrintToStream() const;
 };
 
 
-inline EPoint ERect::LeftTop() const
+inline BPoint BRect::LeftTop() const
 {
- return(EPoint(left, top));
+ return(BPoint(left, top));
 }
 
 
-inline EPoint ERect::RightBottom() const
+inline BPoint BRect::RightBottom() const
 {
- return(EPoint(right, bottom));
+ return(BPoint(right, bottom));
 }
 
 
-inline EPoint ERect::LeftBottom() const
+inline BPoint BRect::LeftBottom() const
 {
- return(EPoint(left, bottom));
+ return(BPoint(left, bottom));
 }
 
 
-inline EPoint ERect::RightTop() const
+inline BPoint BRect::RightTop() const
 {
- return(EPoint(right, top));
+ return(BPoint(right, top));
 }
 
 
-inline EPoint ERect::Center() const
+inline BPoint BRect::Center() const
 {
- return(EPoint(left + (right - left) / 2, top + (bottom - top) / 2));
+ return(BPoint(left + (right - left) / 2, top + (bottom - top) / 2));
 }
 
 
-inline ERect::ERect()
+inline BRect::BRect()
 {
  top = left = 0;
  bottom = right = -1;
 }
 
 
-inline ERect::ERect(float l, float t, float r, float b)
+inline BRect::BRect(float l, float t, float r, float b)
 {
  left = l;
  top = t;
@@ -46709,7 +46702,7 @@ inline ERect::ERect(float l, float t, float r, float b)
 }
 
 
-inline ERect::ERect(const ERect &r)
+inline BRect::BRect(const BRect &r)
 {
  left = r.left;
  top = r.top;
@@ -46718,7 +46711,7 @@ inline ERect::ERect(const ERect &r)
 }
 
 
-inline ERect::ERect(EPoint leftTop, EPoint rightBottom)
+inline BRect::BRect(BPoint leftTop, BPoint rightBottom)
 {
  left = leftTop.x;
  top = leftTop.y;
@@ -46727,7 +46720,7 @@ inline ERect::ERect(EPoint leftTop, EPoint rightBottom)
 }
 
 
-inline ERect& ERect::operator=(const ERect& from)
+inline BRect& BRect::operator=(const BRect& from)
 {
  left = from.left;
  top = from.top;
@@ -46737,7 +46730,7 @@ inline ERect& ERect::operator=(const ERect& from)
 }
 
 
-inline void ERect::Set(float l, float t, float r, float b)
+inline void BRect::Set(float l, float t, float r, float b)
 {
  left = l;
  top = t;
@@ -46746,31 +46739,31 @@ inline void ERect::Set(float l, float t, float r, float b)
 }
 
 
-inline bool ERect::IsValid() const
+inline bool BRect::IsValid() const
 {
  return(left <= right && top <= bottom);
 }
 
 
-inline eint32 ERect::IntegerWidth() const
+inline b_int32 BRect::IntegerWidth() const
 {
- return((eint32)ceil((double)(right - left)));
+    return((b_int32)ceil((double)(right - left)));
 }
 
 
-inline float ERect::Width() const
+inline float BRect::Width() const
 {
  return(right - left);
 }
 
 
-inline eint32 ERect::IntegerHeight() const
+inline b_int32 BRect::IntegerHeight() const
 {
- return((eint32)ceil((double)(bottom - top)));
+    return((b_int32)ceil((double)(bottom - top)));
 }
 
 
-inline float ERect::Height() const
+inline float BRect::Height() const
 {
  return(bottom - top);
 }
@@ -46778,158 +46771,158 @@ inline float ERect::Height() const
 
 
 
-class EList;
-class EMessenger;
-class EHandler;
-class EStreamIO;
+class BList;
+class BMessenger;
+class BHandler;
+class BStreamIO;
 
-class __attribute__((dllexport)) EMessage {
+class __attribute__((dllexport)) BMessage {
 public:
- EMessage();
- EMessage(euint32 what);
- EMessage(const EMessage &msg);
- virtual ~EMessage();
+    BMessage();
+    BMessage(b_uint32 what);
+    BMessage(const BMessage &msg);
+    virtual ~BMessage();
 
- euint32 what;
+    b_uint32 what;
 
- EMessage &operator=(const EMessage &msg);
+    BMessage &operator=(const BMessage &msg);
 
- eint32 CountTypesByName(const char *name) const;
- eint32 CountTypesByName(eint32 nameIndex) const;
- bool TypeAt(const char *name, eint32 typeIndex, e_type_code *type) const;
- bool TypeAt(eint32 nameIndex, eint32 typeIndex, e_type_code *type) const;
-
-
+    b_int32 CountTypesByName(const char *name) const;
+    b_int32 CountTypesByName(b_int32 nameIndex) const;
+    bool TypeAt(const char *name, b_int32 typeIndex, b_type_code *type) const;
+    bool TypeAt(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type) const;
 
 
- eint32 CountItems(const char *name, e_type_code type) const;
- eint32 CountItems(eint32 nameIndex, eint32 typeIndex, e_type_code *type = __null) const;
+
+
+    b_int32 CountItems(const char *name, b_type_code type) const;
+    b_int32 CountItems(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type = __null) const;
 # 92 "../src/app/./../private/./../app/./../app/./../support/./../app/Message.h"
- eint32 CountNames(e_type_code type, bool count_all_names_when_any_type = true) const;
- eint32 FindName(const char *name) const;
- const char *NameAt(eint32 nameIndex) const;
+    b_int32 CountNames(b_type_code type, bool count_all_names_when_any_type = true) const;
+    b_int32 FindName(const char *name) const;
+    const char *NameAt(b_int32 nameIndex) const;
 
  void MakeEmpty();
  bool IsEmpty() const;
 
  bool Rename(const char *old_entry, const char *new_entry);
 
- bool AddString(const char *name, const char *aString);
- bool AddString(const char *name, const EString &aString);
- bool AddInt8(const char *name, eint8 val);
- bool AddInt16(const char *name, eint16 val);
- bool AddInt32(const char *name, eint32 val);
- bool AddInt64(const char *name, eint64 val);
+    bool AddString(const char *name, const char *aString);
+    bool AddString(const char *name, const BString &aString);
+    bool AddInt8(const char *name, b_int8 val);
+    bool AddInt16(const char *name, b_int16 val);
+    bool AddInt32(const char *name, b_int32 val);
+    bool AddInt64(const char *name, b_int64 val);
  bool AddBool(const char *name, bool aBoolean);
  bool AddFloat(const char *name, float aFloat);
  bool AddDouble(const char *name, double aDouble);
- bool AddPoint(const char *name, EPoint pt);
- bool AddRect(const char *name, ERect r);
+    bool AddPoint(const char *name, BPoint pt);
+    bool AddRect(const char *name, BRect r);
  bool AddPointer(const char *name, const void *ptr);
- bool AddMessage(const char *name, const EMessage *msg);
- bool AddMessenger(const char *name, const EMessenger *msgr);
- bool AddMessenger(const char *name, const EMessenger &msgr);
- bool AddData(const char *name, e_type_code type, const void *data, size_t numBytes, bool is_fixed_size = true);
+    bool AddMessage(const char *name, const BMessage *msg);
+    bool AddMessenger(const char *name, const BMessenger *msgr);
+    bool AddMessenger(const char *name, const BMessenger &msgr);
+    bool AddData(const char *name, b_type_code type, const void *data, size_t numBytes, bool is_fixed_size = true);
 
- bool FindString(const char *name, eint32 index, const char **str) const;
- bool FindString(const char *name, const char **str) const;
- bool FindString(const char *name, eint32 index, EString *str) const;
- bool FindString(const char *name, EString *str) const;
- bool FindInt8(const char *name, eint8 *val) const;
- bool FindInt8(const char *name, eint32 index, eint8 *val) const;
- bool FindInt16(const char *name, eint16 *val) const;
- bool FindInt16(const char *name, eint32 index, eint16 *val) const;
- bool FindInt32(const char *name, eint32 *val) const;
- bool FindInt32(const char *name, eint32 index, eint32 *val) const;
- bool FindInt64(const char *name, eint64 *val) const;
- bool FindInt64(const char *name, eint32 index, eint64 *val) const;
+    bool FindString(const char *name, b_int32 index, const char **str) const;
+    bool FindString(const char *name, const char **str) const;
+    bool FindString(const char *name, b_int32 index, BString *str) const;
+    bool FindString(const char *name, BString *str) const;
+    bool FindInt8(const char *name, b_int8 *val) const;
+    bool FindInt8(const char *name, b_int32 index, b_int8 *val) const;
+    bool FindInt16(const char *name, b_int16 *val) const;
+    bool FindInt16(const char *name, b_int32 index, b_int16 *val) const;
+    bool FindInt32(const char *name, b_int32 *val) const;
+    bool FindInt32(const char *name, b_int32 index, b_int32 *val) const;
+    bool FindInt64(const char *name, b_int64 *val) const;
+    bool FindInt64(const char *name, b_int32 index, b_int64 *val) const;
  bool FindBool(const char *name, bool *aBoolean) const;
- bool FindBool(const char *name, eint32 index, bool *aBoolean) const;
+    bool FindBool(const char *name, b_int32 index, bool *aBoolean) const;
  bool FindFloat(const char *name, float *f) const;
- bool FindFloat(const char *name, eint32 index, float *f) const;
+    bool FindFloat(const char *name, b_int32 index, float *f) const;
  bool FindDouble(const char *name, double *d) const;
- bool FindDouble(const char *name, eint32 index, double *d) const;
- bool FindPoint(const char *name, EPoint *pt) const;
- bool FindPoint(const char *name, eint32 index, EPoint *pt) const;
- bool FindRect(const char *name, ERect *r) const;
- bool FindRect(const char *name, eint32 index, ERect *r) const;
+    bool FindDouble(const char *name, b_int32 index, double *d) const;
+    bool FindPoint(const char *name, BPoint *pt) const;
+    bool FindPoint(const char *name, b_int32 index, BPoint *pt) const;
+    bool FindRect(const char *name, BRect *r) const;
+    bool FindRect(const char *name, b_int32 index, BRect *r) const;
  bool FindPointer(const char *name, void **ptr) const;
- bool FindPointer(const char *name, eint32 index, void **ptr) const;
- bool FindMessage(const char *name, EMessage *msg) const;
- bool FindMessage(const char *name, eint32 index, EMessage *msg) const;
- bool FindMessenger(const char *name, EMessenger *msgr) const;
- bool FindMessenger(const char *name, eint32 index, EMessenger *msgr) const;
- bool FindData(const char *name, e_type_code type, const void **data, ssize_t *numBytes) const;
- bool FindData(const char *name, e_type_code type, eint32 index, const void **data, ssize_t *numBytes) const;
- bool FindData(eint32 nameIndex, eint32 typeIndex, eint32 index, const void **data, ssize_t *numBytes) const;
+    bool FindPointer(const char *name, b_int32 index, void **ptr) const;
+    bool FindMessage(const char *name, BMessage *msg) const;
+    bool FindMessage(const char *name, b_int32 index, BMessage *msg) const;
+    bool FindMessenger(const char *name, BMessenger *msgr) const;
+    bool FindMessenger(const char *name, b_int32 index, BMessenger *msgr) const;
+    bool FindData(const char *name, b_type_code type, const void **data, ssize_t *numBytes) const;
+    bool FindData(const char *name, b_type_code type, b_int32 index, const void **data, ssize_t *numBytes) const;
+    bool FindData(b_int32 nameIndex, b_int32 typeIndex, b_int32 index, const void **data, ssize_t *numBytes) const;
 
- bool HasString(const char *name, eint32 index = 0) const;
- bool HasInt8(const char *name, eint32 index = 0) const;
- bool HasInt16(const char *name, eint32 index = 0) const;
- bool HasInt32(const char *name, eint32 index = 0) const;
- bool HasInt64(const char *name, eint32 index = 0) const;
- bool HasBool(const char *name, eint32 index = 0) const;
- bool HasFloat(const char *name, eint32 index = 0) const;
- bool HasDouble(const char *name, eint32 index = 0) const;
- bool HasPoint(const char *name, eint32 index = 0) const;
- bool HasRect(const char *name, eint32 index = 0) const;
- bool HasPointer(const char *name, eint32 index = 0) const;
- bool HasMessage(const char *name, eint32 index = 0) const;
- bool HasMessenger(const char *name, eint32 index = 0) const;
- bool HasData(const char *name, e_type_code type, eint32 index = 0) const;
+    bool HasString(const char *name, b_int32 index = 0) const;
+    bool HasInt8(const char *name, b_int32 index = 0) const;
+    bool HasInt16(const char *name, b_int32 index = 0) const;
+    bool HasInt32(const char *name, b_int32 index = 0) const;
+    bool HasInt64(const char *name, b_int32 index = 0) const;
+    bool HasBool(const char *name, b_int32 index = 0) const;
+    bool HasFloat(const char *name, b_int32 index = 0) const;
+    bool HasDouble(const char *name, b_int32 index = 0) const;
+    bool HasPoint(const char *name, b_int32 index = 0) const;
+    bool HasRect(const char *name, b_int32 index = 0) const;
+    bool HasPointer(const char *name, b_int32 index = 0) const;
+    bool HasMessage(const char *name, b_int32 index = 0) const;
+    bool HasMessenger(const char *name, b_int32 index = 0) const;
+    bool HasData(const char *name, b_type_code type, b_int32 index = 0) const;
 
- bool RemoveString(const char *name, eint32 index = 0);
- bool RemoveInt8(const char *name, eint32 index = 0);
- bool RemoveInt16(const char *name, eint32 index = 0);
- bool RemoveInt32(const char *name, eint32 index = 0);
- bool RemoveInt64(const char *name, eint32 index = 0);
- bool RemoveBool(const char *name, eint32 index = 0);
- bool RemoveFloat(const char *name, eint32 index = 0);
- bool RemoveDouble(const char *name, eint32 index = 0);
- bool RemovePoint(const char *name, eint32 index = 0);
- bool RemoveRect(const char *name, eint32 index = 0);
- bool RemovePointer(const char *name, eint32 index = 0);
- bool RemoveMessage(const char *name, eint32 index = 0);
- bool RemoveMessenger(const char *name, eint32 index = 0);
- bool RemoveData(const char *name, e_type_code type, eint32 index = 0);
- bool RemoveData(const char *name, e_type_code type);
+    bool RemovString(const char *name, b_int32 index = 0);
+    bool RemoveInt8(const char *name, b_int32 index = 0);
+    bool RemoveInt16(const char *name, b_int32 index = 0);
+    bool RemoveInt32(const char *name, b_int32 index = 0);
+    bool RemoveInt64(const char *name, b_int32 index = 0);
+    bool RemoveBool(const char *name, b_int32 index = 0);
+    bool RemoveFloat(const char *name, b_int32 index = 0);
+    bool RemoveDouble(const char *name, b_int32 index = 0);
+    bool RemovePoint(const char *name, b_int32 index = 0);
+    bool RemoveRect(const char *name, b_int32 index = 0);
+    bool RemovePointer(const char *name, b_int32 index = 0);
+    bool RemoveMessage(const char *name, b_int32 index = 0);
+    bool RemoveMessenger(const char *name, b_int32 index = 0);
+    bool RemoveData(const char *name, b_type_code type, b_int32 index = 0);
+    bool RemoveData(const char *name, b_type_code type);
  bool RemoveData(const char *name);
 
- bool ReplaceString(const char *name, eint32 index, const char *aString);
- bool ReplaceString(const char *name, const char *aString);
- bool ReplaceString(const char *name, eint32 index, const EString &aString);
- bool ReplaceString(const char *name, const EString &aString);
- bool ReplaceInt8(const char *name, eint8 val);
- bool ReplaceInt8(const char *name, eint32 index, eint8 val);
- bool ReplaceInt16(const char *name, eint16 val);
- bool ReplaceInt16(const char *name, eint32 index, eint16 val);
- bool ReplaceInt32(const char *name, eint32 val);
- bool ReplaceInt32(const char *name, eint32 index, eint32 val);
- bool ReplaceInt64(const char *name, eint64 val);
- bool ReplaceInt64(const char *name, eint32 index, eint64 val);
+    bool ReplacString(const char *name, b_int32 index, const char *aString);
+    bool ReplacString(const char *name, const char *aString);
+    bool ReplacString(const char *name, b_int32 index, const BString &aString);
+    bool ReplacString(const char *name, const BString &aString);
+    bool ReplaceInt8(const char *name, b_int8 val);
+    bool ReplaceInt8(const char *name, b_int32 index, b_int8 val);
+    bool ReplaceInt16(const char *name, b_int16 val);
+    bool ReplaceInt16(const char *name, b_int32 index, b_int16 val);
+    bool ReplaceInt32(const char *name, b_int32 val);
+    bool ReplaceInt32(const char *name, b_int32 index, b_int32 val);
+    bool ReplaceInt64(const char *name, b_int64 val);
+    bool ReplaceInt64(const char *name, b_int32 index, b_int64 val);
  bool ReplaceBool(const char *name, bool aBoolean);
- bool ReplaceBool(const char *name, eint32 index, bool aBoolean);
+    bool ReplaceBool(const char *name, b_int32 index, bool aBoolean);
  bool ReplaceFloat(const char *name, float f);
- bool ReplaceFloat(const char *name, eint32 index, float f);
+    bool ReplaceFloat(const char *name, b_int32 index, float f);
  bool ReplaceDouble(const char *name, double d);
- bool ReplaceDouble(const char *name, eint32 index, double d);
- bool ReplacePoint(const char *name, EPoint pt);
- bool ReplacePoint(const char *name, eint32 index, EPoint pt);
- bool ReplaceRect(const char *name, ERect r);
- bool ReplaceRect(const char *name, eint32 index, ERect r);
+    bool ReplaceDouble(const char *name, b_int32 index, double d);
+    bool ReplacePoint(const char *name, BPoint pt);
+    bool ReplacePoint(const char *name, b_int32 index, BPoint pt);
+    bool ReplaceRect(const char *name, BRect r);
+    bool ReplaceRect(const char *name, b_int32 index, BRect r);
  bool ReplacePointer(const char *name, const void *ptr);
- bool ReplacePointer(const char *name, eint32 index, const void *ptr);
- bool ReplaceMessage(const char *name, const EMessage *msg);
- bool ReplaceMessage(const char *name, eint32 index, const EMessage *msg);
- bool ReplaceMessenger(const char *name, const EMessenger *msgr);
- bool ReplaceMessenger(const char *name, eint32 index, const EMessenger *msgr);
- bool ReplaceMessenger(const char *name, const EMessenger &msgr);
- bool ReplaceMessenger(const char *name, eint32 index, const EMessenger &msgr);
- bool ReplaceData(const char *name, e_type_code type, const void *data, size_t numBytes, bool is_fixed_size);
- bool ReplaceData(const char *name, e_type_code type, eint32 index, const void *data, size_t numBytes, bool is_fixed_size);
+    bool ReplacePointer(const char *name, b_int32 index, const void *ptr);
+    bool ReplaceMessage(const char *name, const BMessage *msg);
+    bool ReplaceMessage(const char *name, b_int32 index, const BMessage *msg);
+    bool ReplaceMessenger(const char *name, const BMessenger *msgr);
+    bool ReplaceMessenger(const char *name, b_int32 index, const BMessenger *msgr);
+    bool ReplaceMessenger(const char *name, const BMessenger &msgr);
+    bool ReplaceMessenger(const char *name, b_int32 index, const BMessenger &msgr);
+    bool ReplaceData(const char *name, b_type_code type, const void *data, size_t numBytes, bool is_fixed_size);
+    bool ReplaceData(const char *name, b_type_code type, b_int32 index, const void *data, size_t numBytes, bool is_fixed_size);
 
  bool IsSystem() const;
- void PrintToStream(EStreamIO &stream) const;
+    void PrintToStream(BStreamIO &stream) const;
  void PrintToStream() const;
 
  size_t FlattenedSize() const;
@@ -46940,31 +46933,31 @@ public:
  bool IsReply() const;
  bool IsSourceWaiting() const;
 
- e_status_t SendReply(euint32 command, EHandler *replyHandler = __null) const;
- e_status_t SendReply(const EMessage *message,
-      EHandler *replyHandler = __null,
-      e_bigtime_t sendTimeout = 9223372036854775807ll) const;
+    b_status_t SendReply(b_uint32 command, BHandler *replyHandler = __null) const;
+    b_status_t SendReply(const BMessage *message,
+                  BHandler *replyHandler = __null,
+                  b_bigtime_t sendTimeout = 9223372036854775807ll) const;
 
 
- e_status_t BGetInfo(e_type_code type, eint32 index,
-     char **nameFound, e_type_code *typeFound, eint32 *countFound = __null) const;
- e_status_t BFindData(const char *name, e_type_code type, eint32 index,
+    b_status_t BGetInfo(b_type_code type, b_int32 index,
+                 char **nameFound, b_type_code *typeFound, b_int32 *countFound = __null) const;
+    b_status_t BFindData(const char *name, b_type_code type, b_int32 index,
       const void **data, ssize_t *numBytes) const;
- e_status_t BFindData(const char *name, e_type_code type,
+    b_status_t BFindData(const char *name, b_type_code type,
       const void **data, ssize_t *numBytes) const;
 
 private:
- friend class ELooper;
- friend class EMessenger;
+    friend class BLooper;
+    friend class BMessenger;
 
  typedef struct list_data {
   char *name;
-  EList list;
+        BList list;
  } list_data;
 
  typedef struct type_list_data {
-  e_type_code type;
-  EList list;
+        b_type_code type;
+        BList list;
  } type_list_data;
 
  typedef struct _object_t {
@@ -46973,17 +46966,17 @@ private:
   void *data;
  } _object_t;
 
- EList fObjectsList;
+    BList fObjectsList;
 
- static list_data *_find_list(const EList *list, const char *name, eint32 *index = __null);
- static type_list_data *_find_type_list(const EList *list, e_type_code type);
+    static list_data *_find_list(const BList *list, const char *name, b_int32 *index = __null);
+    static type_list_data *_find_type_list(const BList *list, b_type_code type);
 
- eint64 fTeam;
+    b_int64 fTeam;
 
- euint64 fTargetToken;
- e_bigtime_t fTargetTokenTimestamp;
- euint64 fReplyToken;
- e_bigtime_t fReplyTokenTimestamp;
+    b_uint64 fTargetToken;
+    b_bigtime_t fTargetTokenTimestamp;
+    b_uint64 fReplyToken;
+    b_bigtime_t fReplyTokenTimestamp;
 
  bool fNoticeSource;
  void *fSource;
@@ -46992,62 +46985,62 @@ private:
 };
 
 
-inline e_status_t
-EMessage::BGetInfo(e_type_code type, eint32 index,
-     char **nameFound, e_type_code *typeFound, eint32 *countFound) const
+inline b_status_t
+BMessage::BGetInfo(b_type_code type, b_int32 index,
+           char **nameFound, b_type_code *typeFound, b_int32 *countFound) const
 {
- if(index < 0) return E_BAD_INDEX;
- eint32 aIndex = index;
+    if(index < 0) return B_BAD_INDEX;
+    b_int32 aIndex = index;
 
- for(eint32 i = 0; i < CountNames(E_ANY_TYPE, true); i++)
+    for(b_int32 i = 0; i < CountNames(B_ANY_TYPE, true); i++)
  {
-  eint32 typesCount = CountTypesByName(i);
-  for(eint32 k = 0; k < typesCount; k++)
+        b_int32 typesCount = CountTypesByName(i);
+        for(b_int32 k = 0; k < typesCount; k++)
   {
-   e_type_code aType;
-   eint32 count = CountItems(i, k, &aType);
-   if(!(type == E_ANY_TYPE || aType == type) || (aIndex--) > 0) continue;
+            b_type_code aType;
+            b_int32 count = CountItems(i, k, &aType);
+            if(!(type == B_ANY_TYPE || aType == type) || (aIndex--) > 0) continue;
    if(nameFound) *nameFound = (char*)NameAt(i);
    if(typeFound) *typeFound = aType;
    if(countFound) *countFound = count;
-   return E_OK;
+            return B_OK;
   }
  }
 
- return(aIndex == index ? E_BAD_TYPE : E_BAD_INDEX);
+    return(aIndex == index ? B_BAD_TYPE : B_BAD_INDEX);
 }
 
 
-inline e_status_t
-EMessage::BFindData(const char *name, e_type_code type, eint32 index,
+inline b_status_t
+BMessage::BFindData(const char *name, b_type_code type, b_int32 index,
       const void **data, ssize_t *numBytes) const
 {
- if(index < 0) return E_BAD_INDEX;
+    if(index < 0) return B_BAD_INDEX;
 
- eint32 nameIndex = FindName(name);
- if(nameIndex < 0) return E_NAME_NOT_FOUND;
+    b_int32 nameIndex = FindName(name);
+    if(nameIndex < 0) return B_NAME_NOT_FOUND;
 
- eint32 typesCount = CountTypesByName(nameIndex);
- eint32 aIndex = index;
+    b_int32 typesCount = CountTypesByName(nameIndex);
+    b_int32 aIndex = index;
 
- for(eint32 k = 0; k < typesCount; k++)
+    for(b_int32 k = 0; k < typesCount; k++)
  {
-  e_type_code aType;
-  eint32 count = CountItems(nameIndex, k, &aType);
-  if(!(type == E_ANY_TYPE || aType == type)) continue;
+        b_type_code aType;
+        b_int32 count = CountItems(nameIndex, k, &aType);
+        if(!(type == B_ANY_TYPE || aType == type)) continue;
 
   if(aIndex < count)
-   return(FindData(nameIndex, k, aIndex, data, numBytes) ? E_OK : E_ERROR);
+            return(FindData(nameIndex, k, aIndex, data, numBytes) ? B_OK : B_ERROR);
 
   aIndex -= count;
  }
 
- return(aIndex == index ? E_BAD_TYPE : E_BAD_INDEX);
+    return(aIndex == index ? B_BAD_TYPE : B_BAD_INDEX);
 }
 
 
-inline e_status_t
-EMessage::BFindData(const char *name, e_type_code type,
+inline b_status_t
+BMessage::BFindData(const char *name, b_type_code type,
       const void **data, ssize_t *numBytes) const
 {
  return BFindData(name, type, 0, data, numBytes);
@@ -47056,103 +47049,103 @@ EMessage::BFindData(const char *name, e_type_code type,
 
 
 
-class __attribute__((dllexport)) EArchivable {
+class __attribute__((dllexport)) BArchivable {
 public:
- EArchivable();
- EArchivable(const EMessage *from);
- virtual ~EArchivable();
+    BArchivable();
+    BArchivable(const BMessage *from);
+    virtual ~BArchivable();
 
- virtual e_status_t Archive(EMessage *into, bool deep = true) const;
- static EArchivable *Instantiate(const EMessage *from);
+    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    static BArchivable *Instantiate(const BMessage *from);
 };
 
 
-typedef EArchivable *(*e_instantiation_func)(const EMessage*);
+typedef BArchivable *(*b_instantiation_func)(const BMessage*);
 
-__attribute__((dllexport)) bool e_validate_instantiation(const EMessage *from, const char *class_name);
-__attribute__((dllexport)) e_instantiation_func e_find_instantiation_func(const char *class_name);
-__attribute__((dllexport)) e_instantiation_func e_find_instantiation_func(const EMessage *archive_data);
+__attribute__((dllexport)) bool b_validatb_instantiation(const BMessage *from, const char *class_name);
+__attribute__((dllexport)) b_instantiation_func b_find_instantiation_func(const char *class_name);
+__attribute__((dllexport)) b_instantiation_func b_find_instantiation_func(const BMessage *archive_data);
 # 35 "../src/app/./../private/./../app/./../app/Handler.h" 2
 # 1 "../src/app/./../private/./../app/./../app/./../support/List.h" 1
 # 36 "../src/app/./../private/./../app/./../app/Handler.h" 2
 
 
 
-class ELooper;
-class EMessage;
-class EMessageFilter;
-class EMessenger;
-class EToken;
+class BLooper;
+class BMessage;
+class BMessageFilter;
+class BMessenger;
+class BToken;
 
 
 
 
 
-class __attribute__((dllexport)) EHandler : public EArchivable {
+class __attribute__((dllexport)) BHandler : public BArchivable {
 public:
- EHandler(const char *name = __null);
- virtual ~EHandler();
+ BHandler(const char *name = __null);
+ virtual ~BHandler();
 
 
- EHandler(const EMessage *from);
- virtual e_status_t Archive(EMessage *into, bool deep = true) const;
- static EArchivable *Instantiate(const EMessage *from);
+ BHandler(const BMessage *from);
+ virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+ static BArchivable *Instantiate(const BMessage *from);
 
  void SetName(const char *name);
  const char *Name() const;
 
- virtual void MessageReceived(EMessage *message);
+ virtual void MessageReceived(BMessage *message);
 
- ELooper *Looper() const;
+ BLooper *Looper() const;
 
- virtual void SetNextHandler(EHandler *handler);
- EHandler *NextHandler() const;
+ virtual void SetNextHandler(BHandler *handler);
+ BHandler *NextHandler() const;
 
  bool LockLooper();
- e_status_t LockLooperWithTimeout(e_bigtime_t microseconds_timeout);
+    b_status_t LockLooperWithTimeout(b_bigtime_t microseconds_timeout);
  void UnlockLooper();
 
 
- e_status_t StartWatching(EMessenger msgr, euint32 what);
- e_status_t StartWatchingAll(EMessenger msgr);
- e_status_t StopWatching(EMessenger msgr, euint32 what);
- e_status_t StopWatchingAll(EMessenger msgr);
+    b_status_t StartWatching(BMessenger msgr, b_uint32 what);
+    b_status_t StartWatchingAll(BMessenger msgr);
+    b_status_t StopWatching(BMessenger msgr, b_uint32 what);
+    b_status_t StopWatchingAll(BMessenger msgr);
 
- e_status_t StartWatching(EHandler *handler, euint32 what);
- e_status_t StartWatchingAll(EHandler *handler);
- e_status_t StopWatching(EHandler *handler, euint32 what);
- e_status_t StopWatchingAll(EHandler *handler);
-
-
- virtual void SendNotices(euint32 what, const EMessage *msg = __null);
- bool IsWatched(euint32 what = (2147483647 * 2U + 1U)) const;
+    b_status_t StartWatching(BHandler *handler, b_uint32 what);
+ b_status_t StartWatchingAll(BHandler *handler);
+    b_status_t StopWatching(BHandler *handler, b_uint32 what);
+ b_status_t StopWatchingAll(BHandler *handler);
 
 
- virtual bool AddFilter(EMessageFilter *filter);
- virtual bool RemoveFilter(EMessageFilter *filter);
- virtual bool SetFilterList(const EList *filterList);
- const EList *FilterList() const;
+    virtual void SendNotices(b_uint32 what, const BMessage *msg = __null);
+    bool IsWatched(b_uint32 what = (2147483647 * 2U + 1U)) const;
 
 
- virtual EHandler *ResolveSpecifier(EMessage *msg, eint32 index, EMessage *specifier,
-        eint32 what, const char *property);
- virtual e_status_t GetSupportedSuites(EMessage *data);
+ virtual bool AddFilter(BMessageFilter *filter);
+ virtual bool RemoveFilter(BMessageFilter *filter);
+ virtual bool SetFilterList(const BList *filterList);
+ const BList *FilterList() const;
+
+
+    virtual BHandler *ResolveSpecifier(BMessage *msg, b_int32 index, BMessage *specifier,
+                          b_int32 what, const char *property);
+ virtual b_status_t GetSupportedSuites(BMessage *data);
 
 private:
- friend class ELooper;
- friend class EMessage;
+ friend class BLooper;
+ friend class BMessage;
 
- friend euint64 etk_get_handler_token(const EHandler *handler);
+    friend b_uint64 bhapi_get_handler_token(const BHandler *handler);
 
- EToken *fToken;
+ BToken *fToken;
  char *fName;
- ELooper *fLooper;
+ BLooper *fLooper;
 
- EHandler *fPrevHandler;
- EHandler *fNextHandler;
+ BHandler *fPrevHandler;
+ BHandler *fNextHandler;
 
  void *fObserverList;
- EList *fFilters;
+ BList *fFilters;
 };
 # 38 "../src/app/./../private/./../app/Looper.h" 2
 # 1 "../src/app/./../private/./../app/./../app/MessageQueue.h" 1
@@ -47162,34 +47155,34 @@ private:
 
 
 
-class __attribute__((dllexport)) EMessageQueue {
+class __attribute__((dllexport)) BMessageQueue {
 public:
- EMessageQueue();
- virtual ~EMessageQueue();
+ BMessageQueue();
+ virtual ~BMessageQueue();
 
 
- bool AddMessage(EMessage *an_event);
+ bool AddMessage(BMessage *an_event);
 
 
- bool RemoveMessage(EMessage *an_event);
+ bool RemoveMessage(BMessage *an_event);
 
 
- EMessage *NextMessage();
+ BMessage *NextMessage();
 
- EMessage *FindMessage(eint32 index) const;
- EMessage *FindMessage(euint32 what, eint32 fromIndex = 0) const;
- EMessage *FindMessage(euint32 what, eint32 fromIndex, eint32 count) const;
- eint32 IndexOfMessage(EMessage *an_event) const;
+    BMessage *FindMessage(b_int32 index) const;
+    BMessage *FindMessage(b_uint32 what, b_int32 fromIndex = 0) const;
+    BMessage *FindMessage(b_uint32 what, b_int32 fromIndex, b_int32 count) const;
+    b_int32 IndexOfMessage(BMessage *an_event) const;
 
- eint32 CountMessages() const;
+    b_int32 CountMessages() const;
  bool IsEmpty() const;
 
  bool Lock();
  void Unlock();
- e_status_t LockWithTimeout(e_bigtime_t microseconds_timeout);
+    b_status_t LockWithTimeout(b_bigtime_t microseconds_timeout);
 
 private:
- EList fMessagesList;
+ BList fMessagesList;
  void *fLocker;
 };
 # 39 "../src/app/./../private/./../app/Looper.h" 2
@@ -47198,181 +47191,181 @@ private:
 # 1 "../src/app/./../private/./../app/./../app/./../app/Handler.h" 1
 # 36 "../src/app/./../private/./../app/./../app/MessageFilter.h" 2
 
-typedef enum e_filter_result {
- E_SKIP_MESSAGE,
- E_DISPATCH_MESSAGE
-} e_filter_result;
+typedef enum b_filter_result {
+    B_SKIP_MESSAGE,
+    B_DISPATCH_MESSAGE
+} b_filter_result;
 
-typedef enum e_message_delivery {
- E_DROPPED_DELIVERY = 0x1,
- E_PROGRAMMED_DELIVERY = 0x2,
- E_ANY_DELIVERY = 0xff
-} e_message_delivery;
+typedef enum b_message_delivery {
+    B_DROPPED_DELIVERY = 0x1,
+    B_PROGRAMMED_DELIVERY = 0x2,
+    B_ANY_DELIVERY = 0xff
+} b_message_delivery;
 
-typedef enum e_message_source {
- E_LOCAL_SOURCE = 0x1,
- E_REMOTE_SOURCE = 0x2,
- E_ANY_SOURCE = 0xff
-} e_message_source;
-
-
-
-class EMessage;
-class EMessageFilter;
-
-typedef e_filter_result (*e_filter_hook)(EMessage *message, EHandler **target, EMessageFilter *filter);
+typedef enum b_message_source {
+    B_LOCAL_SOURCE = 0x1,
+    B_REMOTE_SOURCE = 0x2,
+    B_ANY_SOURCE = 0xff
+} b_message_source;
 
 
-class __attribute__((dllexport)) EMessageFilter {
+
+class BMessage;
+class BMessageFilter;
+
+typedef b_filter_result (*b_filter_hook)(BMessage *message, BHandler **target, BMessageFilter *filter);
+
+
+class __attribute__((dllexport)) BMessageFilter {
 public:
- EMessageFilter(e_message_delivery delivery, e_message_source source,
-         euint32 command, e_filter_hook filter = __null);
- EMessageFilter(e_message_delivery delivery, e_message_source source,
-         e_filter_hook filter = __null);
- EMessageFilter(euint32 command, e_filter_hook filter = __null);
- EMessageFilter(const EMessageFilter &filter);
- EMessageFilter(const EMessageFilter *filter);
- virtual ~EMessageFilter();
+    BMessageFilter(b_message_delivery delivery, b_message_source source,
+               b_uint32 command, b_filter_hook filter = __null);
+    BMessageFilter(b_message_delivery delivery, b_message_source source,
+         b_filter_hook filter = __null);
+    BMessageFilter(b_uint32 command, b_filter_hook filter = __null);
+ BMessageFilter(const BMessageFilter &filter);
+ BMessageFilter(const BMessageFilter *filter);
+ virtual ~BMessageFilter();
 
- EMessageFilter &operator=(const EMessageFilter &from);
+ BMessageFilter &operator=(const BMessageFilter &from);
 
- virtual e_filter_result Filter(EMessage *message, EHandler **target);
+ virtual b_filter_result Filter(BMessage *message, BHandler **target);
 
- e_message_delivery MessageDelivery() const;
- e_message_source MessageSource() const;
- euint32 Command() const;
+ b_message_delivery MessageDelivery() const;
+ b_message_source MessageSource() const;
+    b_uint32 Command() const;
  bool FiltersAnyCommand() const;
- ELooper *Looper() const;
+ BLooper *Looper() const;
 
 private:
- friend class ELooper;
- friend class EHandler;
+ friend class BLooper;
+ friend class BHandler;
 
- euint32 fCommand;
+    b_uint32 fCommand;
  bool fFiltersAny;
- e_message_delivery fDelivery;
- e_message_source fSource;
- e_filter_hook fFilterHook;
+ b_message_delivery fDelivery;
+ b_message_source fSource;
+ b_filter_hook fFilterHook;
 
- EHandler *fHandler;
+ BHandler *fHandler;
 
- e_filter_result doFilter(EMessage *message, EHandler **target);
+ b_filter_result doFilter(BMessage *message, BHandler **target);
 };
 # 40 "../src/app/./../private/./../app/Looper.h" 2
 
 
 
-class EApplication;
-class EMessenger;
+class BApplication;
+class BMessenger;
 
-class __attribute__((dllexport)) ELooper : public EHandler {
+class __attribute__((dllexport)) BLooper : public BHandler {
 public:
- ELooper(const char *name = __null,
-  eint32 priority = 10);
- virtual ~ELooper();
+ BLooper(const char *name = __null,
+  b_int32 priority = 10);
+ virtual ~BLooper();
 
 
- ELooper(const EMessage *from);
- virtual e_status_t Archive(EMessage *into, bool deep = true) const;
- static EArchivable *Instantiate(const EMessage *from);
+ BLooper(const BMessage *from);
+ virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+ static BArchivable *Instantiate(const BMessage *from);
 
- void AddHandler(EHandler *handler);
- bool RemoveHandler(EHandler *handler);
- eint32 CountHandlers() const;
- EHandler *HandlerAt(eint32 index) const;
- eint32 IndexOf(EHandler *handler) const;
+ void AddHandler(BHandler *handler);
+ bool RemoveHandler(BHandler *handler);
+ b_int32 CountHandlers() const;
+ BHandler *HandlerAt(b_int32 index) const;
+ b_int32 IndexOf(BHandler *handler) const;
 
- EHandler *PreferredHandler() const;
- void SetPreferredHandler(EHandler *handler);
+ BHandler *PreferredHandler() const;
+ void SetPreferredHandler(BHandler *handler);
 
  bool IsRunning() const;
  virtual void *Run();
  virtual void Quit();
  virtual bool QuitRequested();
- ELooper* Proxy() const;
- bool ProxyBy(ELooper *proxy);
+ BLooper* Proxy() const;
+ bool ProxyBy(BLooper *proxy);
 
- e_thread_id Thread() const;
+ b_thread_id Thread() const;
 
  bool Lock();
  void Unlock();
- e_status_t LockWithTimeout(e_bigtime_t microseconds_timeout);
+ b_status_t LockWithTimeout(b_bigtime_t microseconds_timeout);
 
- eint64 CountLocks() const;
+ b_int64 CountLocks() const;
  bool IsLockedByCurrentThread() const;
 
- virtual void DispatchMessage(EMessage *msg, EHandler *target);
+ virtual void DispatchMessage(BMessage *msg, BHandler *target);
 
 
- virtual void MessageReceived(EMessage *msg);
+ virtual void MessageReceived(BMessage *msg);
 
 
- EMessage *CurrentMessage() const;
- EMessage *DetachCurrentMessage();
- EMessageQueue *MessageQueue() const;
+ BMessage *CurrentMessage() const;
+ BMessage *DetachCurrentMessage();
+ BMessageQueue *MessageQueue() const;
 
- e_status_t PostMessage(euint32 command);
- e_status_t PostMessage(const EMessage *message);
- e_status_t PostMessage(euint32 command,
-        EHandler *handler,
-        EHandler *reply_to = __null);
- e_status_t PostMessage(const EMessage *message,
-        EHandler *handler,
-        EHandler *reply_to = __null);
+ b_status_t PostMessage(b_uint32 command);
+ b_status_t PostMessage(const BMessage *message);
+ b_status_t PostMessage(b_uint32 command,
+        BHandler *handler,
+        BHandler *reply_to = __null);
+ b_status_t PostMessage(const BMessage *message,
+        BHandler *handler,
+        BHandler *reply_to = __null);
 
- virtual bool AddCommonFilter(EMessageFilter *filter);
- virtual bool RemoveCommonFilter(EMessageFilter *filter);
- virtual bool SetCommonFilterList(const EList *filterList);
- const EList *CommonFilterList() const;
+ virtual bool AddCommonFilter(BMessageFilter *filter);
+ virtual bool RemoveCommonFilter(BMessageFilter *filter);
+ virtual bool SetCommonFilterList(const BList *filterList);
+ const BList *CommonFilterList() const;
 
- static ELooper *LooperForThread(e_thread_id tid);
+ static BLooper *LooperForThread(b_thread_id tid);
 
 protected:
 # 127 "../src/app/./../private/./../app/Looper.h"
- EMessage *NextLooperMessage(e_bigtime_t timeout = 9223372036854775807ll);
- void DispatchLooperMessage(EMessage *msg);
+ BMessage *NextLooperMessage(b_bigtime_t timeout = 9223372036854775807ll);
+ void DispatchLooperMessage(BMessage *msg);
 
 private:
- friend class EHandler;
- friend class EApplication;
- friend class EMessenger;
- friend e_status_t etk_lock_looper_of_handler(euint64 token, e_bigtime_t timeout);
+ friend class BHandler;
+ friend class BApplication;
+ friend class BMessenger;
+ friend b_status_t bhapi_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
 
  bool fDeconstructing;
- ELooper *fProxy;
- EList fClients;
+ BLooper *fProxy;
+ BList fClients;
 
- eint32 fThreadPriority;
+ b_int32 fThreadPriority;
 
- eint32 fHandlersCount;
- EHandler *fPreferredHandler;
+ b_int32 fHandlersCount;
+ BHandler *fPreferredHandler;
 
  void *fLocker;
- eint64 fLocksCount;
+ b_int64 fLocksCount;
 
  void *fThread;
  void *fSem;
 
- EMessageQueue *fMessageQueue;
- EMessage *fCurrentMessage;
+ BMessageQueue *fMessageQueue;
+ BMessage *fCurrentMessage;
 
- static e_status_t _task(void*);
- static e_status_t _taskLooper(ELooper*, void*);
+ static b_status_t _task(void*);
+ static b_status_t _taskLooper(BLooper*, void*);
  static void _taskError(void*);
 
- static EList sLooperList;
+ static BList sLooperList;
 
- EHandler *_MessageTarget(const EMessage *msg, bool *preferred);
- e_status_t _PostMessage(const EMessage *msg, euint64 handlerToken, euint64 replyToken, e_bigtime_t timeout);
+ BHandler *_MessageTarget(const BMessage *msg, bool *preferred);
+ b_status_t _PostMessage(const BMessage *msg, b_uint64 handlerToken, b_uint64 replyToken, b_bigtime_t timeout);
 
- ELooper *_Proxy() const;
- bool _ProxyBy(ELooper *proxy);
- ELooper *_GetNextClient(ELooper *client) const;
+ BLooper *_Proxy() const;
+ bool _ProxyBy(BLooper *proxy);
+ BLooper *_GetNextClient(BLooper *client) const;
 
  bool *fThreadExited;
 
- EList fCommonFilters;
- void _FilterAndDispatchMessage(EMessage *msg, EHandler *target);
+ BList fCommonFilters;
+ void _FilterAndDispatchMessage(BMessage *msg, BHandler *target);
 
  virtual bool IsDependsOnOthersWhenQuitRequested() const;
 };
@@ -47380,17 +47373,17 @@ private:
 
 
 
- ELocker* etk_get_handler_operator_locker();
- euint64 etk_get_handler_token(const EHandler *handler);
- euint64 etk_get_ref_handler_token(const EHandler *handler);
- EHandler* etk_get_handler(euint64 token);
- e_bigtime_t etk_get_handler_create_time_stamp(euint64 token);
- ELooper* etk_get_handler_looper(euint64 token);
- euint64 etk_get_ref_looper_token(euint64 token);
- e_status_t etk_lock_looper_of_handler(euint64 token, e_bigtime_t timeout);
- bool etk_is_current_at_looper_thread(euint64 token);
- bool etk_ref_handler(euint64 token);
- void etk_unref_handler(euint64 token);
+ BLocker* bhapi_get_handler_operator_locker();
+ b_uint64 bhapi_get_handler_token(const BHandler *handler);
+ b_uint64 bhapi_get_ref_handler_token(const BHandler *handler);
+ BHandler* bhapi_get_handler(b_uint64 token);
+ b_bigtime_t bhapi_get_handler_create_time_stamp(b_uint64 token);
+ BLooper* bhapi_get_handler_looper(b_uint64 token);
+ b_uint64 bhapi_get_ref_looper_token(b_uint64 token);
+ b_status_t bhapi_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
+ bool bhapi_is_current_at_looper_thread(b_uint64 token);
+ bool bhapi_ref_handler(b_uint64 token);
+ void bhapi_unref_handler(b_uint64 token);
 # 38 "../src/app/Messenger.cpp" 2
 
 # 1 "../src/app/Messenger.h" 1
@@ -47400,34 +47393,34 @@ private:
 
 
 
-class __attribute__((dllexport)) EMessenger {
+class __attribute__((dllexport)) BMessenger {
 public:
- EMessenger();
- EMessenger(const char *signature, eint64 team = 0, e_status_t *perr = __null);
- EMessenger(const EHandler *handler, const ELooper *looper = __null, e_status_t *perr = __null);
+ BMessenger();
+    BMessenger(const char *signature, b_int64 team = 0, b_status_t *perr = __null);
+ BMessenger(const BHandler *handler, const BLooper *looper = __null, b_status_t *perr = __null);
 
- EMessenger(const EMessenger &msgr);
- ~EMessenger();
+ BMessenger(const BMessenger &msgr);
+ ~BMessenger();
 
  bool IsTargetLocal() const;
  bool IsAtTargetLooperThread() const;
- EHandler* Target(ELooper **looper) const;
+ BHandler* Target(BLooper **looper) const;
 
  bool LockTarget() const;
- e_status_t LockTargetWithTimeout(e_bigtime_t timeout) const;
+    b_status_t LockTargetWithTimeout(b_bigtime_t timeout) const;
 
- e_status_t SendMessage(euint32 command, EHandler *reply_to = __null) const;
- e_status_t SendMessage(const EMessage *a_message, EHandler *reply_to = __null,
-        e_bigtime_t timeout = 9223372036854775807ll) const;
- e_status_t SendMessage(const EMessage *a_message, EMessage *reply_message,
-        e_bigtime_t sendTimeout = 9223372036854775807ll,
-        e_bigtime_t replyTimeout = 9223372036854775807ll) const;
+    b_status_t SendMessage(b_uint32 command, BHandler *reply_to = __null) const;
+ b_status_t SendMessage(const BMessage *a_message, BHandler *reply_to = __null,
+        b_bigtime_t timeout = 9223372036854775807ll) const;
+ b_status_t SendMessage(const BMessage *a_message, BMessage *reply_message,
+        b_bigtime_t sendTimeout = 9223372036854775807ll,
+        b_bigtime_t replyTimeout = 9223372036854775807ll) const;
 
  bool IsValid() const;
 
- EMessenger &operator=(const EMessenger &from);
- bool operator==(const EMessenger &other) const;
- bool operator!=(const EMessenger &other) const;
+ BMessenger &operator=(const BMessenger &from);
+ bool operator==(const BMessenger &other) const;
+ bool operator!=(const BMessenger &other) const;
 
  size_t FlattenedSize() const;
  bool Flatten(char *buffer, size_t bufferSize) const;
@@ -47436,49 +47429,49 @@ public:
  void PrintToStream() const;
 
 private:
- friend class EMessage;
- friend class EInvoker;
+ friend class BMessage;
+ friend class BInvoker;
 
- EMessenger(eint64 targetTeam, euint64 targetToken, e_bigtime_t timestamp, e_status_t *perr);
+    BMessenger(b_int64 targetTeam, b_uint64 targetToken, b_bigtime_t timestamp, b_status_t *perr);
 
- euint64 fHandlerToken;
- euint64 fLooperToken;
+    b_uint64 fHandlerToken;
+    b_uint64 fLooperToken;
 
  void *fPort;
  void *fSem;
 
- eint64 fTargetTeam;
+    b_int64 fTargetTeam;
 
- void InitData(const EHandler *handler, const ELooper *looper, e_status_t *perr);
+ void InitData(const BHandler *handler, const BLooper *looper, b_status_t *perr);
 
- static e_status_t _SendMessageToPort(void *port, const EMessage *msg, euint32 flags, e_bigtime_t timeout);
- static EMessage* _GetMessageFromPort(void *port, euint32 flags, e_bigtime_t timeout, e_status_t *err);
+    static b_status_t _SendMessageToPort(void *port, const BMessage *msg, b_uint32 flags, b_bigtime_t timeout);
+    static BMessage* _GetMessageFromPort(void *port, b_uint32 flags, b_bigtime_t timeout, b_status_t *err);
 
- e_status_t _SendMessage(const EMessage *a_message, euint64 replyToken, e_bigtime_t timeout) const;
+    b_status_t _SendMessage(const BMessage *a_message, b_uint64 replyToken, b_bigtime_t timeout) const;
 };
 # 40 "../src/app/Messenger.cpp" 2
 
 
-EMessenger::EMessenger()
+BMessenger::BMessenger()
  : fHandlerToken(0xffffffffffffffffull), fLooperToken(0xffffffffffffffffull),
    fPort(__null), fSem(__null), fTargetTeam((const long long)(0))
 {
 }
 
 
-EMessenger::EMessenger(const char *signature, eint64 team, e_status_t *perr)
+BMessenger::BMessenger(const char *signature, b_int64 team, b_status_t *perr)
  : fHandlerToken(0xffffffffffffffffull), fLooperToken(0xffffffffffffffffull),
    fPort(__null), fSem(__null), fTargetTeam((const long long)(0))
 {
 
- ETK_WARNING("[APP]: %s --- Remote target unsupported yet.", __PRETTY_FUNCTION__);
- if(perr) *perr = E_ERROR;
+ BHAPI_WARNING("[APP]: %s --- Remote target unsupported yet.", __PRETTY_FUNCTION__);
+ if(perr) *perr = B_ERROR;
 }
 
 
-EMessenger::EMessenger(const EHandler *handler,
-         const ELooper *looper,
-         e_status_t *perr)
+BMessenger::BMessenger(const BHandler *handler,
+         const BLooper *looper,
+         b_status_t *perr)
  : fHandlerToken(0xffffffffffffffffull), fLooperToken(0xffffffffffffffffull),
    fPort(__null), fSem(__null), fTargetTeam((const long long)(0))
 {
@@ -47486,30 +47479,30 @@ EMessenger::EMessenger(const EHandler *handler,
 }
 
 
-EMessenger::EMessenger(eint64 targetTeam, euint64 targetToken, e_bigtime_t timestamp, e_status_t *perr)
+BMessenger::BMessenger(b_int64 targetTeam, b_uint64 targetToken, b_bigtime_t timestamp, b_status_t *perr)
  : fHandlerToken(0xffffffffffffffffull), fLooperToken(0xffffffffffffffffull),
    fPort(__null), fSem(__null), fTargetTeam((const long long)(0))
 {
- if(targetTeam != etk_get_current_team_id())
+ if(targetTeam != bhapi_get_current_team_id())
  {
-  ETK_WARNING("[APP]: %s --- Remote target unsupported yet.", __PRETTY_FUNCTION__);
-  if(perr) *perr = E_ERROR;
+  BHAPI_WARNING("[APP]: %s --- Remote target unsupported yet.", __PRETTY_FUNCTION__);
+  if(perr) *perr = B_ERROR;
   return;
  }
 
- if(etk_ref_handler(targetToken) == false)
+ if(bhapi_ref_handler(targetToken) == false)
  {
-  if(perr) *perr = E_ERROR;
+  if(perr) *perr = B_ERROR;
   return;
  }
 
- euint64 looperToken = 0xffffffffffffffffull;
+ b_uint64 looperToken = 0xffffffffffffffffull;
 
- if(etk_get_handler_create_time_stamp(targetToken) != timestamp ||
-    (looperToken = etk_get_ref_looper_token(targetToken)) == 0xffffffffffffffffull)
+ if(bhapi_get_handler_create_time_stamp(targetToken) != timestamp ||
+    (looperToken = bhapi_get_ref_looper_token(targetToken)) == 0xffffffffffffffffull)
  {
-  etk_unref_handler(targetToken);
-  if(perr) *perr = E_ERROR;
+  bhapi_unref_handler(targetToken);
+  if(perr) *perr = B_ERROR;
   return;
  }
 
@@ -47517,54 +47510,54 @@ EMessenger::EMessenger(eint64 targetTeam, euint64 targetToken, e_bigtime_t times
  fHandlerToken = targetToken;
  fLooperToken = looperToken;
 
- if(perr) *perr = E_OK;
+ if(perr) *perr = B_OK;
 }
 
 
 void
-EMessenger::InitData(const EHandler *handler, const ELooper *looper, e_status_t *perr)
+BMessenger::InitData(const BHandler *handler, const BLooper *looper, b_status_t *perr)
 {
- if(fHandlerToken != 0xffffffffffffffffull) etk_unref_handler(fHandlerToken);
- if(fLooperToken != 0xffffffffffffffffull) etk_unref_handler(fLooperToken);
+ if(fHandlerToken != 0xffffffffffffffffull) bhapi_unref_handler(fHandlerToken);
+ if(fLooperToken != 0xffffffffffffffffull) bhapi_unref_handler(fLooperToken);
 
  fHandlerToken = 0xffffffffffffffffull; fLooperToken = 0xffffffffffffffffull;
 
- if(fSem) etk_delete_sem(fSem);
- if(fPort) etk_delete_port(fPort);
+ if(fSem) bhapi_delete_sem(fSem);
+ if(fPort) bhapi_delete_port(fPort);
 
  fSem = __null; fPort = __null; fTargetTeam = (const long long)(0);
 
- if(perr) *perr = E_BAD_HANDLER;
+ if(perr) *perr = B_BAD_HANDLER;
 
  if(handler)
  {
-  euint64 handlerToken = etk_get_ref_handler_token(handler);
+  b_uint64 handlerToken = bhapi_get_ref_handler_token(handler);
   if(handlerToken == 0xffffffffffffffffull) return;
 
-  euint64 looperToken = etk_get_ref_looper_token(handlerToken);
-  if(looperToken == 0xffffffffffffffffull) {etk_unref_handler(handlerToken); return;}
+  b_uint64 looperToken = bhapi_get_ref_looper_token(handlerToken);
+  if(looperToken == 0xffffffffffffffffull) {bhapi_unref_handler(handlerToken); return;}
 
-  fTargetTeam = etk_get_current_team_id();
+  fTargetTeam = bhapi_get_current_team_id();
   fHandlerToken = handlerToken;
   fLooperToken = looperToken;
 
-  if(perr) *perr = E_OK;
+  if(perr) *perr = B_OK;
  }
  else if(looper)
  {
-  euint64 looperToken = etk_get_ref_handler_token(looper);
+  b_uint64 looperToken = bhapi_get_ref_handler_token(looper);
   if(looperToken == 0xffffffffffffffffull) return;
 
-  fTargetTeam = etk_get_current_team_id();
+  fTargetTeam = bhapi_get_current_team_id();
   fHandlerToken = 0xffffffffffffffffull;
   fLooperToken = looperToken;
 
-  if(perr) *perr = E_OK;
+  if(perr) *perr = B_OK;
  }
 }
 
 
-EMessenger::EMessenger(const EMessenger &from)
+BMessenger::BMessenger(const BMessenger &from)
  : fHandlerToken(0xffffffffffffffffull), fLooperToken(0xffffffffffffffffull),
    fPort(__null), fSem(__null), fTargetTeam((const long long)(0))
 {
@@ -47572,16 +47565,16 @@ EMessenger::EMessenger(const EMessenger &from)
 }
 
 
-EMessenger&
-EMessenger::operator=(const EMessenger &from)
+BMessenger&
+BMessenger::operator=(const BMessenger &from)
 {
- if(fHandlerToken != 0xffffffffffffffffull) etk_unref_handler(fHandlerToken);
- if(fLooperToken != 0xffffffffffffffffull) etk_unref_handler(fLooperToken);
+ if(fHandlerToken != 0xffffffffffffffffull) bhapi_unref_handler(fHandlerToken);
+ if(fLooperToken != 0xffffffffffffffffull) bhapi_unref_handler(fLooperToken);
 
  fHandlerToken = 0xffffffffffffffffull; fLooperToken = 0xffffffffffffffffull;
 
- if(fSem) etk_delete_sem(fSem);
- if(fPort) etk_delete_port(fPort);
+ if(fSem) bhapi_delete_sem(fSem);
+ if(fPort) bhapi_delete_port(fPort);
 
  fSem = __null; fPort = __null; fTargetTeam = (const long long)(0);
 
@@ -47593,13 +47586,13 @@ EMessenger::operator=(const EMessenger &from)
   return *this;
  }
 
- if(from.fHandlerToken != 0xffffffffffffffffull) if(etk_ref_handler(from.fHandlerToken)) fHandlerToken = from.fHandlerToken;
- if(from.fLooperToken != 0xffffffffffffffffull) if(etk_ref_handler(from.fLooperToken)) fLooperToken = from.fLooperToken;
+ if(from.fHandlerToken != 0xffffffffffffffffull) if(bhapi_ref_handler(from.fHandlerToken)) fHandlerToken = from.fHandlerToken;
+ if(from.fLooperToken != 0xffffffffffffffffull) if(bhapi_ref_handler(from.fLooperToken)) fLooperToken = from.fLooperToken;
 
  if(fLooperToken == 0xffffffffffffffffull || fHandlerToken != from.fHandlerToken)
  {
-  if(fHandlerToken != 0xffffffffffffffffull) etk_unref_handler(fHandlerToken);
-  if(fLooperToken != 0xffffffffffffffffull) etk_unref_handler(fLooperToken);
+  if(fHandlerToken != 0xffffffffffffffffull) bhapi_unref_handler(fHandlerToken);
+  if(fLooperToken != 0xffffffffffffffffull) bhapi_unref_handler(fLooperToken);
 
   fHandlerToken = 0xffffffffffffffffull; fLooperToken = 0xffffffffffffffffull;
 
@@ -47613,7 +47606,7 @@ EMessenger::operator=(const EMessenger &from)
 
 
 bool
-EMessenger::operator==(const EMessenger &other) const
+BMessenger::operator==(const BMessenger &other) const
 {
  if(fTargetTeam != other.fTargetTeam) return false;
  return(fHandlerToken == other.fHandlerToken && fLooperToken == other.fLooperToken);
@@ -47621,100 +47614,100 @@ EMessenger::operator==(const EMessenger &other) const
 
 
 bool
-EMessenger::operator!=(const EMessenger &other) const
+BMessenger::operator!=(const BMessenger &other) const
 {
  if(fTargetTeam != other.fTargetTeam) return true;
  return((fHandlerToken == other.fHandlerToken && fLooperToken == other.fLooperToken) ? false : true);
 }
 
 
-EMessenger::~EMessenger()
+BMessenger::~BMessenger()
 {
  InitData(__null, __null, __null);
 }
 
 
 bool
-EMessenger::IsTargetLocal() const
+BMessenger::IsTargetLocal() const
 {
- return(fTargetTeam == etk_get_current_team_id());
+ return(fTargetTeam == bhapi_get_current_team_id());
 }
 
 
 bool
-EMessenger::IsAtTargetLooperThread() const
+BMessenger::IsAtTargetLooperThread() const
 {
- if(fTargetTeam != etk_get_current_team_id()) return false;
- return etk_is_current_at_looper_thread(fLooperToken);
+ if(fTargetTeam != bhapi_get_current_team_id()) return false;
+ return bhapi_is_current_at_looper_thread(fLooperToken);
 }
 
 
-EHandler*
-EMessenger::Target(ELooper **looper) const
+BHandler*
+BMessenger::Target(BLooper **looper) const
 {
  if(looper) *looper = __null;
  if(!IsTargetLocal()) return __null;
 
- EHandler *handler = etk_get_handler(fHandlerToken);
- if(looper) *looper = (etk_get_handler(fLooperToken) ? dynamic_cast<ELooper*>(etk_get_handler(fLooperToken)) : (ELooper*)__null);
+ BHandler *handler = bhapi_get_handler(fHandlerToken);
+ if(looper) *looper = (bhapi_get_handler(fLooperToken) ? dynamic_cast<BLooper*>(bhapi_get_handler(fLooperToken)) : (BLooper*)__null);
  return handler;
 }
 
 
 bool
-EMessenger::LockTarget() const
+BMessenger::LockTarget() const
 {
- return(LockTargetWithTimeout(9223372036854775807ll) == E_OK);
+ return(LockTargetWithTimeout(9223372036854775807ll) == B_OK);
 }
 
 
-e_status_t
-EMessenger::LockTargetWithTimeout(e_bigtime_t timeout) const
+b_status_t
+BMessenger::LockTargetWithTimeout(b_bigtime_t timeout) const
 {
- if(!IsTargetLocal()) return E_ERROR;
+ if(!IsTargetLocal()) return B_ERROR;
 
- ELocker *hLocker = etk_get_handler_operator_locker();
- EAutolock <ELocker>autolock(hLocker);
- ELooper *looper = etk_get_handler_looper(fLooperToken);
+ BLocker *hLocker = bhapi_get_handler_operator_locker();
+ BAutolock <BLocker>autolock(hLocker);
+ BLooper *looper = bhapi_get_handler_looper(fLooperToken);
 
- return(looper ? looper->LockWithTimeout(timeout) : E_ERROR);
+ return(looper ? looper->LockWithTimeout(timeout) : B_ERROR);
 }
 
 
 bool
-EMessenger::IsValid() const
+BMessenger::IsValid() const
 {
  if(IsTargetLocal()) return(fLooperToken != 0xffffffffffffffffull);
  else return(fPort != __null && fSem != __null);
 }
 
 
-e_status_t
-EMessenger::SendMessage(euint32 command, EHandler *reply_to) const
+b_status_t
+BMessenger::SendMessage(b_uint32 command, BHandler *reply_to) const
 {
- EMessage msg(command);
+ BMessage msg(command);
  return SendMessage(&msg, reply_to, 9223372036854775807ll);
 }
 
 
-e_status_t
-EMessenger::SendMessage(const EMessage *a_message,
-   EHandler *reply_to,
-   e_bigtime_t timeout) const
+b_status_t
+BMessenger::SendMessage(const BMessage *a_message,
+   BHandler *reply_to,
+   b_bigtime_t timeout) const
 {
  if(a_message == __null)
  {
-  ETK_WARNING("[APP]: %s --- Can't post empty message.", __PRETTY_FUNCTION__);
-  return E_BAD_VALUE;
+  BHAPI_WARNING("[APP]: %s --- Can't post empty message.", __PRETTY_FUNCTION__);
+  return B_BAD_VALUE;
  }
 
- euint64 replyToken = etk_get_handler_token(reply_to);
+ b_uint64 replyToken = bhapi_get_handler_token(reply_to);
 
- EMessage aMsg(*a_message);
+ BMessage aMsg(*a_message);
  aMsg.fIsReply = false;
  if(aMsg.fSource != __null)
  {
-  etk_delete_port(aMsg.fSource);
+  bhapi_delete_port(aMsg.fSource);
   aMsg.fSource = __null;
  }
 
@@ -47722,31 +47715,31 @@ EMessenger::SendMessage(const EMessage *a_message,
 }
 
 
-e_status_t
-EMessenger::SendMessage(const EMessage *a_message, EMessage *reply_message, e_bigtime_t sendTimeout, e_bigtime_t replyTimeout) const
+b_status_t
+BMessenger::SendMessage(const BMessage *a_message, BMessage *reply_message, b_bigtime_t sendTimeout, b_bigtime_t replyTimeout) const
 {
  if(a_message == __null || reply_message == __null)
  {
-  ETK_WARNING("[APP]: %s --- Can't post empty message or \"reply_message\" assigned to be \"NULL\".", __PRETTY_FUNCTION__);
-  return E_BAD_VALUE;
+  BHAPI_WARNING("[APP]: %s --- Can't post empty message or \"reply_message\" assigned to be \"NULL\".", __PRETTY_FUNCTION__);
+  return B_BAD_VALUE;
  }
 
- void *port = etk_create_port(1, __null, ETK_AREA_ACCESS_OWNER);
- if(port == __null) return E_NO_MORE_PORTS;
+ void *port = bhapi_create_port(1, __null, BHAPI_AREA_ACCESS_OWNER);
+ if(port == __null) return B_NO_MORE_PORTS;
 
- EMessage *aMsg = new EMessage(*a_message);
- if(aMsg->fSource != __null) etk_delete_port(aMsg->fSource);
- aMsg->fTeam = etk_get_current_team_id();
+ BMessage *aMsg = new BMessage(*a_message);
+ if(aMsg->fSource != __null) bhapi_delete_port(aMsg->fSource);
+ aMsg->fTeam = bhapi_get_current_team_id();
  aMsg->fIsReply = false;
  aMsg->fReplyToken = 0xffffffffffffffffull;
  aMsg->fReplyTokenTimestamp = 9223372036854775807ll;
  aMsg->fNoticeSource = true;
  aMsg->fSource = port;
 
- e_status_t status = _SendMessage(aMsg, 0xffffffffffffffffull, sendTimeout);
- if(status == E_OK)
+ b_status_t status = _SendMessage(aMsg, 0xffffffffffffffffull, sendTimeout);
+ if(status == B_OK)
  {
-  EMessage *reply = _GetMessageFromPort(port, E_TIMEOUT, replyTimeout, &status);
+  BMessage *reply = _GetMessageFromPort(port, B_TIMEOUT, replyTimeout, &status);
   if(reply != __null)
   {
    *reply_message = *reply;
@@ -47754,7 +47747,7 @@ EMessenger::SendMessage(const EMessage *a_message, EMessage *reply_message, e_bi
   }
   else
   {
-   reply_message->what = E_NO_REPLY;
+   reply_message->what = B_NO_REPLY;
   }
  }
 
@@ -47763,84 +47756,84 @@ EMessenger::SendMessage(const EMessage *a_message, EMessage *reply_message, e_bi
 }
 
 
-e_status_t
-EMessenger::_SendMessage(const EMessage *a_message,
-    euint64 replyToken,
-    e_bigtime_t timeout) const
+b_status_t
+BMessenger::_SendMessage(const BMessage *a_message,
+    b_uint64 replyToken,
+    b_bigtime_t timeout) const
 {
- if(a_message == __null) return E_BAD_VALUE;
- if(!IsValid()) return E_ERROR;
+ if(a_message == __null) return B_BAD_VALUE;
+ if(!IsValid()) return B_ERROR;
 
  if(!IsTargetLocal())
  {
 
-  return E_ERROR;
+  return B_ERROR;
  }
 
- e_status_t retVal = E_ERROR;
+ b_status_t retVal = B_ERROR;
 
- ELocker *hLocker = etk_get_handler_operator_locker();
- EAutolock <ELocker>autolock(hLocker);
+ BLocker *hLocker = bhapi_get_handler_operator_locker();
+ BAutolock <BLocker>autolock(hLocker);
 
- ELooper *looper = (etk_get_handler(fLooperToken) ? dynamic_cast<ELooper*>(etk_get_handler(fLooperToken)) : (ELooper*)__null);
+ BLooper *looper = (bhapi_get_handler(fLooperToken) ? dynamic_cast<BLooper*>(bhapi_get_handler(fLooperToken)) : (BLooper*)__null);
  if(looper) retVal = looper->_PostMessage(a_message, fHandlerToken, replyToken, timeout);
 
  return retVal;
 }
 
 
-e_status_t
-EMessenger::_SendMessageToPort(void *port, const EMessage *msg, euint32 flags, e_bigtime_t timeout)
+b_status_t
+BMessenger::_SendMessageToPort(void *port, const BMessage *msg, b_uint32 flags, b_bigtime_t timeout)
 {
- if(!port || !msg) return E_ERROR;
+ if(!port || !msg) return B_ERROR;
 
  size_t flattenedSize = msg->FlattenedSize();
  if(flattenedSize <= 0)
  {
-  ETK_WARNING("[APP]: Faltten size little than 1. (%s:%d)", "../src/app/Messenger.cpp", 380);
-  return E_ERROR;
+  BHAPI_WARNING("[APP]: Faltten size little than 1. (%s:%d)", "../src/app/Messenger.cpp", 380);
+  return B_ERROR;
  }
 
  char *buffer = (char*)malloc(flattenedSize);
  if(!buffer)
  {
-  ETK_WARNING("[APP]: Buffer malloc failed. (%s:%d)", "../src/app/Messenger.cpp", 387);
-  return E_NO_MEMORY;
+  BHAPI_WARNING("[APP]: Buffer malloc failed. (%s:%d)", "../src/app/Messenger.cpp", 387);
+  return B_NO_MEMORY;
  }
 
  if(msg->Flatten(buffer, flattenedSize) == false)
  {
   free(buffer);
-  ETK_WARNING("[APP]: Flatten message failed. (%s:%d)", "../src/app/Messenger.cpp", 394);
-  return E_ERROR;
+  BHAPI_WARNING("[APP]: Flatten message failed. (%s:%d)", "../src/app/Messenger.cpp", 394);
+  return B_ERROR;
  }
 
- e_status_t status;
- if((status = etk_write_port_etc(port, _EVENTS_PENDING_, buffer, flattenedSize, flags, timeout)) != E_OK)
+ b_status_t status;
+ if((status = bhapi_write_port_etc(port, _EVENTS_PENDING_, buffer, flattenedSize, flags, timeout)) != B_OK)
  {
   free(buffer);
-  ETK_WARNING("[APP]: write port %s. (%s:%d)", status == E_TIMEOUT ? "time out" : "failed", "../src/app/Messenger.cpp", 402);
+  BHAPI_WARNING("[APP]: write port %s. (%s:%d)", status == B_TIMEOUT ? "time out" : "failed", "../src/app/Messenger.cpp", 402);
   return status;
  }
 
  free(buffer);
 
- return E_OK;
+ return B_OK;
 }
 
 
-EMessage*
-EMessenger::_GetMessageFromPort(void *port, euint32 flags, e_bigtime_t timeout, e_status_t *err)
+BMessage*
+BMessenger::_GetMessageFromPort(void *port, b_uint32 flags, b_bigtime_t timeout, b_status_t *err)
 {
- e_status_t retErr = E_OK;
- EMessage* retMsg = __null;
+ b_status_t retErr = B_OK;
+ BMessage* retMsg = __null;
 
  do{
-  ssize_t bufferSize = etk_port_buffer_size_etc(port, flags, timeout);
+  ssize_t bufferSize = bhapi_port_buffer_size_etc(port, flags, timeout);
   if(bufferSize == 0)
   {
-   eint32 code;
-   retErr = etk_read_port_etc(port, &code, __null, 0, E_TIMEOUT, (const long long)(0));
+   b_int32 code;
+   retErr = bhapi_read_port_etc(port, &code, __null, 0, B_TIMEOUT, (const long long)(0));
 
    break;
   }
@@ -47855,14 +47848,14 @@ EMessenger::_GetMessageFromPort(void *port, euint32 flags, e_bigtime_t timeout, 
   char *buffer = (char*)malloc((size_t)bufferSize);
   if(!buffer)
   {
-   retErr = E_NO_MEMORY;
-   ETK_WARNING("[APP]: Memory alloc failed. (%s:%d)", "../src/app/Messenger.cpp", 439);
+   retErr = B_NO_MEMORY;
+   BHAPI_WARNING("[APP]: Memory alloc failed. (%s:%d)", "../src/app/Messenger.cpp", 439);
    break;
   }
   memset(buffer, 0, (size_t)bufferSize);
 
-  eint32 code;
-  if((retErr = etk_read_port_etc(port, &code, buffer, bufferSize, E_TIMEOUT, (const long long)(0))) != E_OK)
+  b_int32 code;
+  if((retErr = bhapi_read_port_etc(port, &code, buffer, bufferSize, B_TIMEOUT, (const long long)(0))) != B_OK)
   {
 
    free(buffer);
@@ -47870,9 +47863,9 @@ EMessenger::_GetMessageFromPort(void *port, euint32 flags, e_bigtime_t timeout, 
   }
   if(code != _EVENTS_PENDING_ || (size_t)bufferSize < sizeof(size_t))
   {
-   ETK_WARNING("[APP]: Message is invalid. (%s:%d)", "../src/app/Messenger.cpp", 453);
+   BHAPI_WARNING("[APP]: Message is invalid. (%s:%d)", "../src/app/Messenger.cpp", 453);
    free(buffer);
-   retErr = E_ERROR;
+   retErr = B_ERROR;
    break;
   }
 
@@ -47880,26 +47873,26 @@ EMessenger::_GetMessageFromPort(void *port, euint32 flags, e_bigtime_t timeout, 
   memcpy(&msgBufferSize, buffer, sizeof(size_t));
   if(bufferSize != (ssize_t)msgBufferSize)
   {
-   ETK_WARNING("[APP]: Message length is invalid. (%s:%d)", "../src/app/Messenger.cpp", 463);
+   BHAPI_WARNING("[APP]: Message length is invalid. (%s:%d)", "../src/app/Messenger.cpp", 463);
    free(buffer);
-   retErr = E_ERROR;
+   retErr = B_ERROR;
    break;
   }
 
-  if((retMsg = new EMessage()) == __null)
+  if((retMsg = new BMessage()) == __null)
   {
-   ETK_WARNING("[APP]: Memory alloc failed. (%s:%d)", "../src/app/Messenger.cpp", 471);
+   BHAPI_WARNING("[APP]: Memory alloc failed. (%s:%d)", "../src/app/Messenger.cpp", 471);
    free(buffer);
-   retErr = E_NO_MEMORY;
+   retErr = B_NO_MEMORY;
    break;
   }
 
   if(retMsg->Unflatten(buffer, msgBufferSize) == false)
   {
-   ETK_WARNING("[APP]: Message unflatten failed. (%s:%d)", "../src/app/Messenger.cpp", 479);
+   BHAPI_WARNING("[APP]: Message unflatten failed. (%s:%d)", "../src/app/Messenger.cpp", 479);
    delete retMsg;
    retMsg = __null;
-   retErr = E_ERROR;
+   retErr = B_ERROR;
   }
 
   free(buffer);
@@ -47911,80 +47904,80 @@ EMessenger::_GetMessageFromPort(void *port, euint32 flags, e_bigtime_t timeout, 
 
 
 size_t
-EMessenger::FlattenedSize() const
+BMessenger::FlattenedSize() const
 {
- return(2 * sizeof(euint64) + 2 * sizeof(e_bigtime_t) + sizeof(eint64));
+ return(2 * sizeof(b_uint64) + 2 * sizeof(b_bigtime_t) + sizeof(b_int64));
 }
 
 
 bool
-EMessenger::Flatten(char *buffer, size_t bufferSize) const
+BMessenger::Flatten(char *buffer, size_t bufferSize) const
 {
  if(buffer == __null || bufferSize < FlattenedSize()) return false;
 
- e_bigtime_t handler_stamp = etk_get_handler_create_time_stamp(fHandlerToken);
- e_bigtime_t looper_stamp = etk_get_handler_create_time_stamp(fLooperToken);
+ b_bigtime_t handler_stamp = bhapi_get_handler_create_time_stamp(fHandlerToken);
+ b_bigtime_t looper_stamp = bhapi_get_handler_create_time_stamp(fLooperToken);
 
- memcpy(buffer, &fTargetTeam, sizeof(eint64)); buffer += sizeof(eint64);
- memcpy(buffer, &fHandlerToken, sizeof(euint64)); buffer += sizeof(euint64);
- memcpy(buffer, &handler_stamp, sizeof(e_bigtime_t)); buffer += sizeof(e_bigtime_t);
- memcpy(buffer, &fLooperToken, sizeof(euint64)); buffer += sizeof(euint64);
- memcpy(buffer, &looper_stamp, sizeof(e_bigtime_t));
+ memcpy(buffer, &fTargetTeam, sizeof(b_int64)); buffer += sizeof(b_int64);
+ memcpy(buffer, &fHandlerToken, sizeof(b_uint64)); buffer += sizeof(b_uint64);
+ memcpy(buffer, &handler_stamp, sizeof(b_bigtime_t)); buffer += sizeof(b_bigtime_t);
+ memcpy(buffer, &fLooperToken, sizeof(b_uint64)); buffer += sizeof(b_uint64);
+ memcpy(buffer, &looper_stamp, sizeof(b_bigtime_t));
 
  return true;
 }
 
 
 bool
-EMessenger::Unflatten(const char *buffer, size_t bufferSize)
+BMessenger::Unflatten(const char *buffer, size_t bufferSize)
 {
  if(buffer == __null || bufferSize < FlattenedSize()) return false;
 
- e_bigtime_t handler_stamp = 9223372036854775807ll;
- e_bigtime_t looper_stamp = 9223372036854775807ll;
+ b_bigtime_t handler_stamp = 9223372036854775807ll;
+ b_bigtime_t looper_stamp = 9223372036854775807ll;
 
- eint64 target_team = (const long long)(0);
- euint64 handler_token = 0xffffffffffffffffull;
- euint64 looper_token = 0xffffffffffffffffull;
+ b_int64 target_team = (const long long)(0);
+ b_uint64 handler_token = 0xffffffffffffffffull;
+ b_uint64 looper_token = 0xffffffffffffffffull;
 
- memcpy(&target_team, buffer, sizeof(eint64)); buffer += sizeof(eint64);
- memcpy(&handler_token, buffer, sizeof(euint64)); buffer += sizeof(euint64);
- memcpy(&handler_stamp, buffer, sizeof(e_bigtime_t)); buffer += sizeof(e_bigtime_t);
- memcpy(&looper_token, buffer, sizeof(euint64)); buffer += sizeof(euint64);
- memcpy(&looper_stamp, buffer, sizeof(e_bigtime_t));
+ memcpy(&target_team, buffer, sizeof(b_int64)); buffer += sizeof(b_int64);
+ memcpy(&handler_token, buffer, sizeof(b_uint64)); buffer += sizeof(b_uint64);
+ memcpy(&handler_stamp, buffer, sizeof(b_bigtime_t)); buffer += sizeof(b_bigtime_t);
+ memcpy(&looper_token, buffer, sizeof(b_uint64)); buffer += sizeof(b_uint64);
+ memcpy(&looper_stamp, buffer, sizeof(b_bigtime_t));
 
- if(fHandlerToken != 0xffffffffffffffffull) etk_unref_handler(fHandlerToken);
- if(fLooperToken != 0xffffffffffffffffull) etk_unref_handler(fLooperToken);
+ if(fHandlerToken != 0xffffffffffffffffull) bhapi_unref_handler(fHandlerToken);
+ if(fLooperToken != 0xffffffffffffffffull) bhapi_unref_handler(fLooperToken);
 
  fHandlerToken = 0xffffffffffffffffull; fLooperToken = 0xffffffffffffffffull;
 
- if(fSem) etk_delete_sem(fSem);
- if(fPort) etk_delete_port(fPort);
+ if(fSem) bhapi_delete_sem(fSem);
+ if(fPort) bhapi_delete_port(fPort);
 
  fSem = __null; fPort = __null; fTargetTeam = (const long long)(0);
 
  do{
-  if(target_team != etk_get_current_team_id())
+  if(target_team != bhapi_get_current_team_id())
   {
 
-   ETK_DEBUG("[APP]: %s --- Remote target unsupported.", __PRETTY_FUNCTION__);
+   BHAPI_DEBUG("[APP]: %s --- Remote target unsupported.", __PRETTY_FUNCTION__);
    break;
   }
 
   if(handler_token == 0xffffffffffffffffull && looper_token == 0xffffffffffffffffull) break;
   if(handler_stamp == 9223372036854775807ll && looper_stamp == 9223372036854775807ll) break;
 
-  if(handler_token != 0xffffffffffffffffull) if(etk_ref_handler(handler_token)) fHandlerToken = handler_token;
-  if(looper_token != 0xffffffffffffffffull) if(etk_ref_handler(looper_token)) fLooperToken = looper_token;
+  if(handler_token != 0xffffffffffffffffull) if(bhapi_ref_handler(handler_token)) fHandlerToken = handler_token;
+  if(looper_token != 0xffffffffffffffffull) if(bhapi_ref_handler(looper_token)) fLooperToken = looper_token;
 
   if(fLooperToken == 0xffffffffffffffffull || fHandlerToken != handler_token ||
-     (fHandlerToken == 0xffffffffffffffffull ? false : etk_get_handler_create_time_stamp(fHandlerToken) != handler_stamp) ||
-     (fLooperToken == 0xffffffffffffffffull ? false : etk_get_handler_create_time_stamp(fLooperToken) != looper_stamp))
+     (fHandlerToken == 0xffffffffffffffffull ? false : bhapi_get_handler_create_time_stamp(fHandlerToken) != handler_stamp) ||
+     (fLooperToken == 0xffffffffffffffffull ? false : bhapi_get_handler_create_time_stamp(fLooperToken) != looper_stamp))
   {
-   if(fHandlerToken != 0xffffffffffffffffull) etk_unref_handler(fHandlerToken);
-   if(fLooperToken != 0xffffffffffffffffull) etk_unref_handler(fLooperToken);
+   if(fHandlerToken != 0xffffffffffffffffull) bhapi_unref_handler(fHandlerToken);
+   if(fLooperToken != 0xffffffffffffffffull) bhapi_unref_handler(fLooperToken);
    fHandlerToken = 0xffffffffffffffffull; fLooperToken = 0xffffffffffffffffull;
-   ETK_DEBUG("[APP]: %s --- Invalid target.", __PRETTY_FUNCTION__);
+   BHAPI_DEBUG("[APP]: %s --- Invalid target.", __PRETTY_FUNCTION__);
    break;
   }
 
@@ -47996,22 +47989,22 @@ EMessenger::Unflatten(const char *buffer, size_t bufferSize)
 
 
 void
-EMessenger::PrintToStream() const
+BMessenger::PrintToStream() const
 {
- ETK_OUTPUT("******** EMessenger Debug Output **********\n");
+ BHAPI_OUTPUT("******** BMessenger Debug Output **********\n");
 
- ETK_OUTPUT("\tTarget team: %I64i\n", fTargetTeam);
- ETK_OUTPUT("\tToken of target handler: ");
+ BHAPI_OUTPUT("\tTarget team: %I64i\n", fTargetTeam);
+ BHAPI_OUTPUT("\tToken of target handler: ");
 
- if(fHandlerToken == 0xffffffffffffffffull) ETK_OUTPUT("E_MAXUINT64\n");
- else ETK_OUTPUT("%I64u\n", fHandlerToken);
+ if(fHandlerToken == 0xffffffffffffffffull) BHAPI_OUTPUT("E_MAXUINT64\n");
+ else BHAPI_OUTPUT("%I64u\n", fHandlerToken);
 
- ETK_OUTPUT("\tToken of target looper: ");
- if(fLooperToken == 0xffffffffffffffffull) ETK_OUTPUT("E_MAXUINT64\n");
- else ETK_OUTPUT("%I64u - %p\n", fLooperToken, etk_get_handler(fLooperToken));
+ BHAPI_OUTPUT("\tToken of target looper: ");
+ if(fLooperToken == 0xffffffffffffffffull) BHAPI_OUTPUT("E_MAXUINT64\n");
+ else BHAPI_OUTPUT("%I64u - %p\n", fLooperToken, bhapi_get_handler(fLooperToken));
 
- if(fPort == __null) ETK_OUTPUT("\tPort invalid.\n");
- if(fSem == __null) ETK_OUTPUT("\tSemaphore invalid.\n");
+ if(fPort == __null) BHAPI_OUTPUT("\tPort invalid.\n");
+ if(fSem == __null) BHAPI_OUTPUT("\tSemaphore invalid.\n");
 
- ETK_OUTPUT("*******************************************\n");
+ BHAPI_OUTPUT("*******************************************\n");
 }

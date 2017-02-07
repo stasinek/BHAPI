@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,22 +27,22 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 #include "./../app/AppDefs.h"
 
 #include "StatusBar.h"
 
-EStatusBar::EStatusBar(ERect frame, const char *name, const char *label, const char *trailing_label)
-	: EView(frame, name, E_FOLLOW_ALL, E_WILL_DRAW),
+BStatusBar::BStatusBar(BRect frame, const char *name, const char *label, const char *trailing_label)
+	: BView(frame, name, B_FOLLOW_ALL, B_WILL_DRAW),
 	  fLabel(NULL), fTrailingLabel(NULL), fText(NULL), fTrailingText(NULL),
 	  fBarHeight(16), fMaxValue(100), fCurrentValue(0)
 {
-	if(label) fLabel = EStrdup(label);
-	if(trailing_label) fTrailingLabel = EStrdup(trailing_label);
+	if(label) fLabel = b_strdup(label);
+	if(trailing_label) fTrailingLabel = b_strdup(trailing_label);
 }
 
 
-EStatusBar::~EStatusBar()
+BStatusBar::~BStatusBar()
 {
 	if(fLabel) delete[] fLabel;
 	if(fTrailingLabel) delete[] fTrailingLabel;
@@ -52,30 +52,30 @@ EStatusBar::~EStatusBar()
 
 
 void
-EStatusBar::SetBarHeight(float height)
+BStatusBar::SetBarHeight(float height)
 {
 	if(fBarHeight != height && height >= 0) fBarHeight = height;
 }
 
 
 void
-EStatusBar::SetText(const char *str)
+BStatusBar::SetText(const char *str)
 {
 	if(fText) delete[] fText;
-	fText = (str == NULL ? NULL : EStrdup(str));
+	fText = (str == NULL ? NULL : b_strdup(str));
 }
 
 
 void
-EStatusBar::SetTrailingText(const char *str)
+BStatusBar::SetTrailingText(const char *str)
 {
 	if(fTrailingText) delete[] fTrailingText;
-	fTrailingText = (str == NULL ? NULL : EStrdup(str));
+	fTrailingText = (str == NULL ? NULL : b_strdup(str));
 }
 
 
 void
-EStatusBar::SetMaxValue(float max)
+BStatusBar::SetMaxValue(float max)
 {
 	if(fMaxValue != max && max >= 0)
 	{
@@ -86,28 +86,28 @@ EStatusBar::SetMaxValue(float max)
 
 
 void
-EStatusBar::Update(float delta, const char *text, const char *trailing_text)
+BStatusBar::Update(float delta, const char *text, const char *trailing_text)
 {
 	SetTo(max_c(0.f, min_c(fCurrentValue + delta, fMaxValue)), text, trailing_text);
 }
 
 
 void
-EStatusBar::Reset(const char *label, const char *trailing_label)
+BStatusBar::Reset(const char *label, const char *trailing_label)
 {
 	SetMaxValue(100);
 	SetTo(0, "", "");
 
 	if(fLabel) delete[] fLabel;
-	fLabel = (label == NULL ? NULL : EStrdup(label));
+	fLabel = (label == NULL ? NULL : b_strdup(label));
 
 	if(fTrailingLabel) delete[] fTrailingLabel;
-	fTrailingLabel = (trailing_label == NULL ? NULL : EStrdup(trailing_label));
+	fTrailingLabel = (trailing_label == NULL ? NULL : b_strdup(trailing_label));
 }
 
 
 void
-EStatusBar::SetTo(float value, const char *text, const char *trailing_text)
+BStatusBar::SetTo(float value, const char *text, const char *trailing_text)
 {
 	if(value < 0 || value > fMaxValue) return;
 
@@ -116,72 +116,72 @@ EStatusBar::SetTo(float value, const char *text, const char *trailing_text)
 	if(text)
 	{
 		if(fText) delete[] fText;
-		fText = (strlen(text) > 0 ? EStrdup(text) : NULL);
+		fText = (strlen(text) > 0 ? b_strdup(text) : NULL);
 	}
 
 	if(trailing_text)
 	{
 		if(fTrailingText) delete[] fTrailingText;
-		fTrailingText = (strlen(trailing_text) > 0 ? EStrdup(trailing_text) : NULL);
+		fTrailingText = (strlen(trailing_text) > 0 ? b_strdup(trailing_text) : NULL);
 	}
 }
 
 
 float
-EStatusBar::CurrentValue() const
+BStatusBar::CurrentValue() const
 {
 	return fCurrentValue;
 }
 
 
 float
-EStatusBar::MaxValue() const
+BStatusBar::MaxValue() const
 {
 	return fMaxValue;
 }
 
 
 float
-EStatusBar::BarHeight() const
+BStatusBar::BarHeight() const
 {
 	return fBarHeight;
 }
 
 
 const char*
-EStatusBar::Text() const
+BStatusBar::Text() const
 {
 	return fText;
 }
 
 
 const char*
-EStatusBar::TrailingText() const
+BStatusBar::TrailingText() const
 {
 	return fTrailingText;
 }
 
 
 const char*
-EStatusBar::Label() const
+BStatusBar::Label() const
 {
 	return fLabel;
 }
 
 
 const char*
-EStatusBar::TrailingLabel() const
+BStatusBar::TrailingLabel() const
 {
 	return fTrailingLabel;
 }
 
 
 void
-EStatusBar::MessageReceived(EMessage *msg)
+BStatusBar::MessageReceived(BMessage *msg)
 {
 	switch(msg->what)
 	{
-		case E_UPDATE_STATUS_BAR:
+		case B_UPDATE_STATUS_BAR:
 			{
 				if(!IsEnabled()) break;
 
@@ -195,7 +195,7 @@ EStatusBar::MessageReceived(EMessage *msg)
 			}
 			break;
 
-		case E_RESET_STATUS_BAR:
+		case B_RESET_STATUS_BAR:
 			{
 				if(!IsEnabled()) break;
 
@@ -208,20 +208,20 @@ EStatusBar::MessageReceived(EMessage *msg)
 			break;
 
 		default:
-			EView::MessageReceived(msg);
+			BView::MessageReceived(msg);
 	}
 }
 
 
 void
-EStatusBar::Draw(ERect updateRect)
+BStatusBar::Draw(BRect updateRect)
 {
-	e_rgb_color shineColor = e_ui_color(E_SHINE_COLOR);
-	e_rgb_color shadowColor = e_ui_color(E_SHADOW_COLOR);
-	e_rgb_color barColor = e_ui_color(E_STATUSBAR_COLOR);
+	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
+	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
+	b_rgb_color barColor = b_ui_color(B_STATUSBAR_COLOR);
 
-	EFont font;
-	e_font_height fontHeight;
+	BFont font;
+	b_font_height fontHeight;
 
 	GetFont(&font);
 	font.GetHeight(&fontHeight);
@@ -234,9 +234,9 @@ EStatusBar::Draw(ERect updateRect)
 		barColor.disable(ViewColor());
 	}
 
-	EPoint penLocation;
+	BPoint penLocation;
 
-	MovePenTo(E_ORIGIN);
+	MovePenTo(B_ORIGIN);
 	MovePenBy(0, fontHeight.ascent + 1);
 
 	if(fLabel != NULL)
@@ -244,14 +244,14 @@ EStatusBar::Draw(ERect updateRect)
 		if(!IsEnabled()) MovePenBy(1, 1);
 		penLocation = PenLocation();
 
-		SetHighColor(IsEnabled() ? e_ui_color(E_PANEL_TEXT_COLOR) : e_ui_color(E_SHINE_COLOR).disable(ViewColor()));
+		SetHighColor(IsEnabled() ? b_ui_color(B_PANEL_TEXT_COLOR) : b_ui_color(B_SHINE_COLOR).disable(ViewColor()));
 		SetLowColor(ViewColor());
 		DrawString(fLabel);
 
 		if(!IsEnabled())
 		{
-			SetHighColor(e_ui_color(E_SHADOW_COLOR).disable(ViewColor()));
-			DrawString(fLabel, penLocation - EPoint(1, 1));
+			SetHighColor(b_ui_color(B_SHADOW_COLOR).disable(ViewColor()));
+			DrawString(fLabel, penLocation - BPoint(1, 1));
 		}
 
 		MovePenBy(font.Spacing() * font.Size(), 0);
@@ -262,14 +262,14 @@ EStatusBar::Draw(ERect updateRect)
 		if(!IsEnabled()) MovePenBy(1, 1);
 		penLocation = PenLocation();
 
-		SetHighColor(IsEnabled() ? e_ui_color(E_PANEL_TEXT_COLOR) : e_ui_color(E_SHINE_COLOR).disable(ViewColor()));
+		SetHighColor(IsEnabled() ? b_ui_color(B_PANEL_TEXT_COLOR) : b_ui_color(B_SHINE_COLOR).disable(ViewColor()));
 		SetLowColor(ViewColor());
 		DrawString(fText);
 
 		if(!IsEnabled())
 		{
-			SetHighColor(e_ui_color(E_SHADOW_COLOR).disable(ViewColor()));
-			DrawString(fText, penLocation - EPoint(1, 1));
+			SetHighColor(b_ui_color(B_SHADOW_COLOR).disable(ViewColor()));
+			DrawString(fText, penLocation - BPoint(1, 1));
 		}
 	}
 
@@ -282,18 +282,18 @@ EStatusBar::Draw(ERect updateRect)
 		if(!IsEnabled()) MovePenBy(1, 1);
 		penLocation = PenLocation();
 
-		SetHighColor(IsEnabled() ? e_ui_color(E_PANEL_TEXT_COLOR) : e_ui_color(E_SHINE_COLOR).disable(ViewColor()));
+		SetHighColor(IsEnabled() ? b_ui_color(B_PANEL_TEXT_COLOR) : b_ui_color(B_SHINE_COLOR).disable(ViewColor()));
 		SetLowColor(ViewColor());
 		DrawString(fTrailingLabel);
 
 		if(!IsEnabled())
 		{
-			SetHighColor(e_ui_color(E_SHADOW_COLOR).disable(ViewColor()));
-			penLocation -= EPoint(1, 1);
+			SetHighColor(b_ui_color(B_SHADOW_COLOR).disable(ViewColor()));
+			penLocation -= BPoint(1, 1);
 			DrawString(fTrailingLabel, penLocation);
 		}
 
-		MovePenTo(penLocation + EPoint(-(font.Spacing() * font.Size()), 0));
+		MovePenTo(penLocation + BPoint(-(font.Spacing() * font.Size()), 0));
 	}
 
 	if(fTrailingText != NULL)
@@ -302,18 +302,18 @@ EStatusBar::Draw(ERect updateRect)
 		if(!IsEnabled()) MovePenBy(1, 1);
 		penLocation = PenLocation();
 
-		SetHighColor(IsEnabled() ? e_ui_color(E_PANEL_TEXT_COLOR) : e_ui_color(E_SHINE_COLOR).disable(ViewColor()));
+		SetHighColor(IsEnabled() ? b_ui_color(B_PANEL_TEXT_COLOR) : b_ui_color(B_SHINE_COLOR).disable(ViewColor()));
 		SetLowColor(ViewColor());
 		DrawString(fTrailingText);
 
 		if(!IsEnabled())
 		{
-			SetHighColor(e_ui_color(E_SHADOW_COLOR).disable(ViewColor()));
-			DrawString(fTrailingText, penLocation - EPoint(1, 1));
+			SetHighColor(b_ui_color(B_SHADOW_COLOR).disable(ViewColor()));
+			DrawString(fTrailingText, penLocation - BPoint(1, 1));
 		}
 	}
 
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	if(fLabel != NULL || fTrailingLabel != NULL || fText != NULL || fTrailingText != NULL) rect.top += sHeight + 5;
 	if(rect.IsValid() == false) return;
 
@@ -329,7 +329,7 @@ EStatusBar::Draw(ERect updateRect)
 	rect.InsetBy(1, 1);
 	if(rect.IsValid() == false) return;
 
-	ERect barRect = rect;
+	BRect barRect = rect;
 	SetHighColor(barColor);
 	if(fCurrentValue < fMaxValue) barRect.right = barRect.left + barRect.Width() * fCurrentValue / fMaxValue;
 	FillRect(barRect);
@@ -337,13 +337,13 @@ EStatusBar::Draw(ERect updateRect)
 
 
 void
-EStatusBar::GetPreferredSize(float *width, float *height)
+BStatusBar::GetPreferredSize(float *width, float *height)
 {
 	if(width == NULL && height == NULL) return;
 
-	EFont font;
+	BFont font;
 	GetFont(&font);
-	e_font_height fontHeight;
+	b_font_height fontHeight;
 	font.GetHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 

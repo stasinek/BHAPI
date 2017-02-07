@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -30,13 +30,13 @@
 #include "Flattenable.h"
 
 
-EFlattenable::~EFlattenable()
+BFlattenable::~BFlattenable()
 {
 }
 
 
 bool
-EFlattenable::AllowsTypeCode(e_type_code code) const
+BFlattenable::AllowsTypeCode(b_type_code code) const
 {
 	return(code == TypeCode());
 }

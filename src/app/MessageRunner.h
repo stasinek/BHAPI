@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,53 +28,53 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_MESSAGE_RUNNER_H__
-#define __ETK_MESSAGE_RUNNER_H__
+#ifndef __BHAPI_MESSAGE_RUNNER_H__
+#define __BHAPI_MESSAGE_RUNNER_H__
 
 #include "./../app/Messenger.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EMessageRunner {
+class _IMPEXP_BHAPI BMessageRunner {
 public:
-	EMessageRunner(const EMessenger &target,
-		       const EMessage *msg,
-		       e_bigtime_t interval,
-		       eint32 count = -1);
-	EMessageRunner(const EMessenger &target,
-		       const EMessage *msg,
-		       e_bigtime_t interval,
-		       eint32 count,
-		       const EMessenger &replyTo);
-	virtual ~EMessageRunner();
+	BMessageRunner(const BMessenger &target,
+		       const BMessage *msg,
+		       b_bigtime_t interval,
+               b_int32 count = -1);
+	BMessageRunner(const BMessenger &target,
+		       const BMessage *msg,
+		       b_bigtime_t interval,
+               b_int32 count,
+		       const BMessenger &replyTo);
+	virtual ~BMessageRunner();
 
 	bool		IsValid() const;
 
-	e_status_t	SetTarget(const EMessenger &target);
-	e_status_t	SetReplyTo(const EMessenger &replyTo);
-	e_status_t	SetMessage(const EMessage *msg);
-	e_status_t	SetInterval(e_bigtime_t interval);
-	e_status_t	SetCount(eint32 count);
+	b_status_t	SetTarget(const BMessenger &target);
+	b_status_t	SetReplyTo(const BMessenger &replyTo);
+	b_status_t	SetMessage(const BMessage *msg);
+    b_status_t	SetInterval(b_bigtime_t interval);
+    b_status_t	SetCount(b_int32 count);
 
-	e_status_t	GetInfo(e_bigtime_t *interval, eint32 *count) const;
-	e_status_t	GetInfo(EMessenger *target, EMessage *msg,
-				e_bigtime_t *interval, eint32 *count,
-				EMessenger *replyTo = NULL) const;
+    b_status_t	GetInfo(b_bigtime_t *interval, b_int32 *count) const;
+	b_status_t	GetInfo(BMessenger *target, BMessage *msg,
+                b_bigtime_t *interval, b_int32 *count,
+				BMessenger *replyTo = NULL) const;
 
 private:
-	friend class EApplication;
+	friend class BApplication;
 
-	eint32 fToken;
+    b_int32 fToken;
 
-	EMessenger *fTarget;
-	EMessenger *fReplyTo;
-	EMessage *fMessage;
-	e_bigtime_t fInterval;
-	e_bigtime_t fPrevSendTime;
-	eint32 fCount;
+	BMessenger *fTarget;
+	BMessenger *fReplyTo;
+	BMessage *fMessage;
+	b_bigtime_t fInterval;
+	b_bigtime_t fPrevSendTime;
+    b_int32 fCount;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_MESSAGE_RUNNER_H__ */
+#endif /* __BHAPI_MESSAGE_RUNNER_H__ */
 

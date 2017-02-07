@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,40 +27,40 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_MENU_ITEM_H__
-#define __ETK_MENU_ITEM_H__
+#ifndef __BHAPI_MENU_ITEM_H__
+#define __BHAPI_MENU_ITEM_H__
 
 #include "./../support/Archivable.h"
 #include "./../app/Invoker.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class EMenu;
+class BMenu;
 
-class _IMPEXP_ETK EMenuItem : public EArchivable, public EInvoker {
+class _IMPEXP_BHAPI BMenuItem : public BArchivable, public BInvoker {
 public:
-	EMenuItem(const char *label, EMessage *message, char shortcut = 0, euint32 modifiers = 0);
-	EMenuItem(EMenu *menu, EMessage *message = NULL);
-	virtual ~EMenuItem();
+    BMenuItem(const char *label, BMessage *message, char shortcut = 0, b_uint32 modifiers = 0);
+	BMenuItem(BMenu *menu, BMessage *message = NULL);
+	virtual ~BMenuItem();
 
 	virtual void		SetLabel(const char *label);
 	virtual void		SetEnabled(bool state);
 	virtual void		SetMarked(bool state);
-	virtual void		SetShortcut(char ch, euint32 modifiers);
+    virtual void		SetShortcut(char ch, b_uint32 modifiers);
 
 	const char*		Label() const;
 	bool			IsEnabled() const;
 	bool			IsMarked() const;
-	char			Shortcut(euint32 *modifiers = NULL) const;
+    char			Shortcut(b_uint32 *modifiers = NULL) const;
 
-	EMenu*			Submenu() const;
-	EMenu*			Menu() const;
-	ERect			Frame() const;
+	BMenu*			Submenu() const;
+	BMenu*			Menu() const;
+	BRect			Frame() const;
 
-	virtual e_status_t	Invoke(const EMessage *msg = NULL);
+	virtual b_status_t	Invoke(const BMessage *msg = NULL);
 
 protected:
-	friend class EMenu;
+	friend class BMenu;
 
 	bool		IsSelected() const;
 	virtual bool	SelectChanged();
@@ -73,26 +73,26 @@ protected:
 
 private:
 	char fShortcut;
-	euint32 fModifiers;
+    b_uint32 fModifiers;
 
-	ERect fFrame;
+	BRect fFrame;
 	bool fMarked;
 	bool fEnabled;
 
 	char *fLabel;
 	char *fShortcuts;
 
-	EMenu *fSubmenu;
-	EMenu *fMenu;
+	BMenu *fSubmenu;
+	BMenu *fMenu;
 
 	void ShowSubmenu(bool selectFirstItem = true);
 };
 
 
-class _IMPEXP_ETK EMenuSeparatorItem : public EMenuItem {
+class _IMPEXP_BHAPI BMenuSeparatorItem : public BMenuItem {
 public:
-	EMenuSeparatorItem();
-	virtual ~EMenuSeparatorItem();
+	BMenuSeparatorItem();
+	virtual ~BMenuSeparatorItem();
 
 protected:
 	virtual void	GetContentSize(float *width, float *height) const;
@@ -103,5 +103,5 @@ protected:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_MENU_ITEM_H__ */
+#endif /* __BHAPI_MENU_ITEM_H__ */
 

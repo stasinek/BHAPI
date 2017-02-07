@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -32,61 +32,61 @@
 #include "CheckBox.h"
 
 
-ECheckBox::ECheckBox(ERect frame, const char *name, const char *label,
-		     EMessage *message, euint32 resizeMode, euint32 flags)
-	: EControl(frame, name, label, message, resizeMode, flags)
+BCheckBox::BCheckBox(BRect frame, const char *name, const char *label,
+		     BMessage *message, b_uint32 resizeMode, b_uint32 flags)
+	: BControl(frame, name, label, message, resizeMode, flags)
 {
 }
 
 
-ECheckBox::~ECheckBox()
+BCheckBox::~BCheckBox()
 {
 }
 
 
 void
-ECheckBox::SetLabel(const char *label)
+BCheckBox::SetLabel(const char *label)
 {
-	EControl::SetLabel(label);
+	BControl::SetLabel(label);
 	Invalidate();
 }
 
 
 void
-ECheckBox::WindowActivated(bool state)
+BCheckBox::WindowActivated(bool state)
 {
 	Invalidate();
 }
 
 
 void
-ECheckBox::Draw(ERect updateRect)
+BCheckBox::Draw(BRect updateRect)
 {
 	if(Window() == NULL) return;
 
-	EFont font;
+	BFont font;
 	GetFont(&font);
-	e_font_height fontHeight;
+	b_font_height fontHeight;
 	font.GetHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	rect.InsetBy(5, (rect.Height() - sHeight) / 2);
 	if(rect.IsValid() == false) return;
 
 	if((IsFocus() || IsFocusChanging()) && IsEnabled() && Label() != NULL)
 	{
-		EPoint penLocation;
+		BPoint penLocation;
 		penLocation.Set(rect.left + rect.Height() + 5, rect.Center().y + sHeight / 2 + 1);
 
-		SetHighColor((IsFocus() && Window()->IsActivate()) ? e_ui_color(E_NAVIGATION_BASE_COLOR) : ViewColor());
-		StrokeLine(penLocation, penLocation + EPoint(font.StringWidth(Label()), 0));
+		SetHighColor((IsFocus() && Window()->IsActivate()) ? b_ui_color(B_NAVIGATION_BASE_COLOR) : ViewColor());
+		StrokeLine(penLocation, penLocation + BPoint(font.StringWidth(Label()), 0));
 	}
 
 	if(IsFocusChanging()) return;
 
-	e_rgb_color shineColor = e_ui_color(E_SHINE_COLOR);
-	e_rgb_color shadowColor = e_ui_color(E_SHADOW_COLOR);
+	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
+	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
 
 	if(!IsEnabled())
 	{
@@ -103,10 +103,10 @@ ECheckBox::Draw(ERect updateRect)
 	StrokeLine(rect.LeftBottom(), rect.LeftTop());
 	StrokeLine(rect.RightTop());
 
-	if(Value() == E_CONTROL_ON)
+	if(Value() == B_CONTROL_ON)
 	{
 		SetHighColor(shadowColor.mix_copy(255, 255, 255, 50));
-		ERect r = rect.InsetByCopy(3, 3);
+		BRect r = rect.InsetByCopy(3, 3);
 		if(r.Width() > 5)
 		{
 			StrokeLine(r.LeftTop(), r.RightBottom());
@@ -120,75 +120,75 @@ ECheckBox::Draw(ERect updateRect)
 
 	if(Label() != NULL)
 	{
-		EPoint penLocation;
+		BPoint penLocation;
 		penLocation.x = rect.right + 5;
 		penLocation.y = rect.Center().y - sHeight / 2.f;
 		penLocation.y += fontHeight.ascent + 1;
 
-		SetHighColor(IsEnabled() ? e_ui_color(E_PANEL_TEXT_COLOR) : e_ui_color(E_SHINE_COLOR).disable(ViewColor()));
+		SetHighColor(IsEnabled() ? b_ui_color(B_PANEL_TEXT_COLOR) : b_ui_color(B_SHINE_COLOR).disable(ViewColor()));
 		SetLowColor(ViewColor());
 		DrawString(Label(), penLocation);
 		if(!IsEnabled())
 		{
-			SetHighColor(e_ui_color(E_SHADOW_COLOR).disable(ViewColor()));
-			DrawString(Label(), penLocation - EPoint(1, 1));
+			SetHighColor(b_ui_color(B_SHADOW_COLOR).disable(ViewColor()));
+			DrawString(Label(), penLocation - BPoint(1, 1));
 		}
 	}
 }
 
 void
-ECheckBox::MouseDown(EPoint where)
+BCheckBox::MouseDown(BPoint where)
 {
-	if(!IsEnabled() || !QueryCurrentMouse(true, E_PRIMARY_MOUSE_BUTTON)) return;
+	if(!IsEnabled() || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON)) return;
 
 #if 0
-	e_font_height fontHeight;
+	b_font_height fontHeight;
 	GetFontHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	rect.InsetBy(5, (rect.Height() - sHeight) / 2);
 	if(rect.IsValid() == false) return;
 	rect.right = rect.left + rect.Height();
 	if(rect.Contains(where) == false) return;
 #endif
 
-	if((Flags() & E_NAVIGABLE) && !IsFocus()) MakeFocus();
+	if((Flags() & B_NAVIGABLE) && !IsFocus()) MakeFocus();
 
-	SetValueNoUpdate((Value() == E_CONTROL_ON) ? E_CONTROL_OFF : E_CONTROL_ON);
+	SetValueNoUpdate((Value() == B_CONTROL_ON) ? B_CONTROL_OFF : B_CONTROL_ON);
 	Invalidate();
 	Invoke();
 }
 
 
 void
-ECheckBox::KeyDown(const char *bytes, eint32 numBytes)
+BCheckBox::KeyDown(const char *bytes, b_int32 numBytes)
 {
 	if(!IsEnabled() || !IsFocus() || numBytes != 1) return;
-	if(!(bytes[0] == E_ENTER || bytes[0] == E_SPACE)) return;
+	if(!(bytes[0] == B_ENTER || bytes[0] == B_SPACE)) return;
 
-	SetValueNoUpdate((Value() == E_CONTROL_ON) ? E_CONTROL_OFF : E_CONTROL_ON);
+	SetValueNoUpdate((Value() == B_CONTROL_ON) ? B_CONTROL_OFF : B_CONTROL_ON);
 	Invalidate();
 	Invoke();
 }
 
 
 void
-ECheckBox::SetFont(const EFont *font, euint8 mask)
+BCheckBox::SetFont(const BFont *font, b_uint8 mask)
 {
-	EControl::SetFont(font, mask);
+	BControl::SetFont(font, mask);
 	Invalidate();
 }
 
 
 void
-ECheckBox::GetPreferredSize(float *width, float *height)
+BCheckBox::GetPreferredSize(float *width, float *height)
 {
 	if(width == NULL && height == NULL) return;
 
-	EFont font;
+	BFont font;
 	GetFont(&font);
-	e_font_height fontHeight;
+	b_font_height fontHeight;
 	font.GetHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 

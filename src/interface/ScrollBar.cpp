@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -34,8 +34,8 @@
 #include "ScrollBar.h"
 
 
-EScrollBar::EScrollBar(ERect frame, const char *name, float value, float min, float max, e_orientation direction)
-	: EView(frame, name, E_FOLLOW_NONE, E_WILL_DRAW),
+BScrollBar::BScrollBar(BRect frame, const char *name, float value, float min, float max, b_orientation direction)
+	: BView(frame, name, B_FOLLOW_NONE, B_WILL_DRAW),
 	  fStepSmall(1), fStepLarge(10), fTarget(NULL),
 	  fTracking(false), fTrackingState(0), fRunner(NULL)
 {
@@ -48,20 +48,20 @@ EScrollBar::EScrollBar(ERect frame, const char *name, float value, float min, fl
 
 	fOrientation = direction;
 
-	if(fOrientation == E_HORIZONTAL)
-		SetResizingMode(E_FOLLOW_LEFT_RIGHT | E_FOLLOW_BOTTOM);
+	if(fOrientation == B_HORIZONTAL)
+		SetResizingMode(B_FOLLOW_LEFT_RIGHT | B_FOLLOW_BOTTOM);
 	else
-		SetResizingMode(E_FOLLOW_TOP_BOTTOM | E_FOLLOW_RIGHT);
+		SetResizingMode(B_FOLLOW_TOP_BOTTOM | B_FOLLOW_RIGHT);
 }
 
 
-EScrollBar::~EScrollBar()
+BScrollBar::~BScrollBar()
 {
 }
 
 
 void
-EScrollBar::_SetValue(float value, bool response)
+BScrollBar::_SetValue(float value, bool response)
 {
 	if(value < fRangeMin) value = fRangeMin;
 	else if(value > fRangeMax) value = fRangeMax;
@@ -72,7 +72,7 @@ EScrollBar::_SetValue(float value, bool response)
 
 		if(fTarget != NULL && response)
 		{
-			if(fOrientation == E_HORIZONTAL)
+			if(fOrientation == B_HORIZONTAL)
 				fTarget->ScrollTo(fValue, fTarget->LeftTop().y);
 			else
 				fTarget->ScrollTo(fTarget->LeftTop().x, fValue);
@@ -86,21 +86,21 @@ EScrollBar::_SetValue(float value, bool response)
 
 
 void
-EScrollBar::SetValue(float value)
+BScrollBar::SetValue(float value)
 {
 	_SetValue(value, true);
 }
 
 
 float
-EScrollBar::Value() const
+BScrollBar::Value() const
 {
 	return fValue;
 }
 
 
 void
-EScrollBar::SetProportion(float ratio)
+BScrollBar::SetProportion(float ratio)
 {
 	if(ratio < 0 || ratio > 1) return;
 
@@ -114,7 +114,7 @@ EScrollBar::SetProportion(float ratio)
 
 
 float
-EScrollBar::Proportion() const
+BScrollBar::Proportion() const
 {
 	float range = (fRangeMax - fRangeMin);
 	if(range <= (UnitsPerPixel() * 0.1f)) return 0; // to avoid float divide error
@@ -124,13 +124,13 @@ EScrollBar::Proportion() const
 
 
 void
-EScrollBar::ValueChanged(float value)
+BScrollBar::ValueChanged(float value)
 {
 }
 
 
 void
-EScrollBar::SetRange(float min, float max)
+BScrollBar::SetRange(float min, float max)
 {
 	float rangeMin = min_c(min, max);
 	float rangeMax = max_c(min, max);
@@ -144,7 +144,7 @@ EScrollBar::SetRange(float min, float max)
 		{
 			fValue = (fValue < fRangeMin ? fRangeMin : fRangeMax);
 
-			if(fOrientation == E_HORIZONTAL)
+			if(fOrientation == B_HORIZONTAL)
 				fTarget->ScrollTo(fValue, fTarget->LeftTop().y);
 			else
 				fTarget->ScrollTo(fTarget->LeftTop().x, fValue);
@@ -156,7 +156,7 @@ EScrollBar::SetRange(float min, float max)
 
 
 void
-EScrollBar::GetRange(float *min, float *max) const
+BScrollBar::GetRange(float *min, float *max) const
 {
 	if(min != NULL) *min = fRangeMin;
 	if(max != NULL) *max = fRangeMax;
@@ -164,7 +164,7 @@ EScrollBar::GetRange(float *min, float *max) const
 
 
 void
-EScrollBar::SetSteps(float smallStep, float largeStep)
+BScrollBar::SetSteps(float smallStep, float largeStep)
 {
 	if(smallStep > 0)
 		fStepSmall = smallStep;
@@ -174,27 +174,27 @@ EScrollBar::SetSteps(float smallStep, float largeStep)
 
 
 void
-EScrollBar::GetSteps(float *smallStep, float *largeStep) const
+BScrollBar::GetSteps(float *smallStep, float *largeStep) const
 {
 	if(smallStep != NULL) *smallStep = fStepSmall;
 	if(largeStep != NULL) *largeStep = fStepLarge;
 }
 
 
-e_status_t
-EScrollBar::SetTarget(EView *target)
+b_status_t
+BScrollBar::SetTarget(BView *target)
 {
-	if(target == this) return E_ERROR;
-	if(target == fTarget) return E_OK;
+	if(target == this) return B_ERROR;
+	if(target == fTarget) return B_OK;
 
 	if(target != NULL)
 	{
 		if(!(target->Ancestor() == Ancestor() || (target->Window() == Window() && Window() != NULL)))
 		{
-			ETK_WARNING("[INTERFACE]: %s --- target hasn't same ancestor as this.", __PRETTY_FUNCTION__);
-			return E_BAD_VALUE;
+			BHAPI_WARNING("[INTERFACE]: %s --- target hasn't same ancestor as this.", __PRETTY_FUNCTION__);
+			return B_BAD_VALUE;
 		}
-		if(target->fScrollBar.AddItem(this) == false) return E_ERROR;
+		if(target->fScrollBar.AddItem(this) == false) return B_ERROR;
 	}
 
 	if(fTarget != NULL) fTarget->fScrollBar.RemoveItem(this);
@@ -202,41 +202,41 @@ EScrollBar::SetTarget(EView *target)
 
 	if(fTarget != NULL)
 	{
-		if(fOrientation == E_HORIZONTAL)
+		if(fOrientation == B_HORIZONTAL)
 			fTarget->ScrollTo(fValue, fTarget->LeftTop().y);
 		else
 			fTarget->ScrollTo(fTarget->LeftTop().x, fValue);
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-EView*
-EScrollBar::Target() const
+BView*
+BScrollBar::Target() const
 {
 	return fTarget;
 }
 
 
-e_orientation
-EScrollBar::Orientation() const
+b_orientation
+BScrollBar::Orientation() const
 {
 	return fOrientation;
 }
 
 
 void
-EScrollBar::Draw(ERect updateRect)
+BScrollBar::Draw(BRect updateRect)
 {
 	if(!IsVisible()) return;
 
-	e_theme_engine *theme = etk_get_current_theme_engine();
+	b_theme_engine *theme = bhapi_get_current_theme_engine();
 	if(theme == NULL || theme->draw_scrollbar == NULL) return;
 
 	PushState();
 	ConstrainClippingRegion(updateRect);
-	theme->draw_scrollbar(theme, this, Frame().OffsetToSelf(E_ORIGIN),
+	theme->draw_scrollbar(theme, this, Frame().OffsetToSelf(B_ORIGIN),
 			      fOrientation, fRangeMin, fRangeMax, fValue,
 			      (fTracking && fTrackingState > 0) ? fTrackingRegion.Contains(fMousePosition) : false,
 			      fMousePosition);
@@ -245,7 +245,7 @@ EScrollBar::Draw(ERect updateRect)
 
 
 void
-EScrollBar::DetachedFromWindow()
+BScrollBar::DetachedFromWindow()
 {
 	fTracking = false;
 	fTrackingState = 0;
@@ -253,18 +253,18 @@ EScrollBar::DetachedFromWindow()
 
 
 void
-EScrollBar::MouseDown(EPoint where)
+BScrollBar::MouseDown(BPoint where)
 {
-	if(fRangeMin == fRangeMax || IsEnabled() == false || !QueryCurrentMouse(true, E_PRIMARY_MOUSE_BUTTON)) return;
+	if(fRangeMin == fRangeMax || IsEnabled() == false || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON)) return;
 
-	ERect rect = VisibleBounds();
+	BRect rect = VisibleBounds();
 	if(!rect.Contains(where)) return;
 
 	if(fTrackingState != 0) return;
-	e_theme_engine *theme = etk_get_current_theme_engine();
+	b_theme_engine *theme = bhapi_get_current_theme_engine();
 	if(theme == NULL || theme->get_scrollbar_respondent_region == NULL) return;
-	ERegion dragTo, smallUp, smallDown, largeUp, largeDown;
-	theme->get_scrollbar_respondent_region(theme, this, Frame().OffsetToSelf(E_ORIGIN),
+	BRegion dragTo, smallUp, smallDown, largeUp, largeDown;
+	theme->get_scrollbar_respondent_region(theme, this, Frame().OffsetToSelf(B_ORIGIN),
 					       fOrientation, fRangeMin, fRangeMax, fValue, NULL,
 					       &dragTo, &smallUp, &smallDown, &largeUp, &largeDown);
 	if(smallUp.Contains(where)) {fTrackingState = 1; fTrackingRegion = smallUp;}
@@ -278,13 +278,13 @@ EScrollBar::MouseDown(EPoint where)
 	if(!fTracking) fTracking = true;
 	fMousePosition = where;
 
-	if(SetPrivateEventMask(E_POINTER_EVENTS, E_LOCK_WINDOW_FOCUS) != E_OK)
+	if(SetPrivateEventMask(B_POINTER_EVENTS, B_LOCK_WINDOW_FOCUS) != B_OK)
 	{
 		Invalidate();
 		Window()->UpdateIfNeeded();
-		e_snooze(50000);
+		b_snooze(50000);
 		fTracking = false;
-		eint8 state = fTrackingState;
+		b_int8 state = fTrackingState;
 		fTrackingState = 0;
 		Invalidate();
 		doScroll(state);
@@ -297,14 +297,14 @@ EScrollBar::MouseDown(EPoint where)
 
 
 void
-EScrollBar::MouseUp(EPoint where)
+BScrollBar::MouseUp(BPoint where)
 {
 	if(!fTracking) return;
 	fTracking = false;
 
 	if(fTrackingState != 0)
 	{
-		eint8 state = fTrackingState;
+		b_int8 state = fTrackingState;
 		fTrackingState = 0;
 		Invalidate();
 
@@ -314,7 +314,7 @@ EScrollBar::MouseUp(EPoint where)
 
 
 void
-EScrollBar::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
+BScrollBar::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 {
 	if(fRangeMin == fRangeMax || IsEnabled() == false) return;
 
@@ -324,21 +324,21 @@ EScrollBar::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
 	{
 		while(fMousePosition != where)
 		{
-			e_theme_engine *theme = etk_get_current_theme_engine();
+			b_theme_engine *theme = bhapi_get_current_theme_engine();
 			if(theme == NULL || theme->get_scrollbar_respondent_region == NULL) break;
 
 			float ratio = 0;
-			theme->get_scrollbar_respondent_region(theme, this, Frame().OffsetToSelf(E_ORIGIN),
+			theme->get_scrollbar_respondent_region(theme, this, Frame().OffsetToSelf(B_ORIGIN),
 							       fOrientation, fRangeMin, fRangeMax, fValue, &ratio,
 							       NULL, NULL, NULL, NULL, NULL);
 			if(ratio <= 0) break;
 
-			if(fOrientation == E_HORIZONTAL)
+			if(fOrientation == B_HORIZONTAL)
 				SetValue(fValue + (where.x - fMousePosition.x) / ratio);
 			else
 				SetValue(fValue + (where.y - fMousePosition.y) / ratio);
 
-			theme->get_scrollbar_respondent_region(theme, this, Frame().OffsetToSelf(E_ORIGIN),
+			theme->get_scrollbar_respondent_region(theme, this, Frame().OffsetToSelf(B_ORIGIN),
 							       fOrientation, fRangeMin, fRangeMax, fValue, NULL,
 							       &fTrackingRegion, NULL, NULL, NULL, NULL);
 
@@ -349,7 +349,7 @@ EScrollBar::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
 
 	fMousePosition = where;
 
-	if(code == E_ENTERED_VIEW)
+	if(code == B_ENTERED_VIEW)
 	{
 		if(fTrackingState < 0 && fTracking)
 		{
@@ -357,7 +357,7 @@ EScrollBar::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
 			update = true;
 		}
 	}
-	else if(code == E_EXITED_VIEW)
+	else if(code == B_EXITED_VIEW)
 	{
 		if(fTrackingState > 0 && fTracking)
 		{
@@ -371,7 +371,7 @@ EScrollBar::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
 
 
 void
-EScrollBar::doScroll(eint8 state)
+BScrollBar::doScroll(b_int8 state)
 {
 	if(state <= 0 || state > 4) return;
 

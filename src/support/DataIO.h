@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_DATA_IO_H__
-#define __ETK_DATA_IO_H__
+#ifndef __BHAPI_DATA_IO_H__
+#define __BHAPI_DATA_IO_H__
 
-#include "./../support/SupportDefs.h"
+#include "./SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
 
-class _IMPEXP_ETK EDataIO {
+class _IMPEXP_BHAPI EDataIO {
 public:
 	EDataIO();
 	virtual ~EDataIO();
@@ -45,34 +45,34 @@ public:
 };
 
 
-class _IMPEXP_ETK EPositionIO : public EDataIO {
+class _IMPEXP_BHAPI BPositionIO : public EDataIO {
 public:
-	EPositionIO();
-	virtual ~EPositionIO();
+    BPositionIO();
+    virtual ~BPositionIO();
 
 	virtual ssize_t		Read(void *buffer, size_t size);
 	virtual ssize_t		Write(const void *buffer, size_t size);
 
-	virtual ssize_t		ReadAt(eint64 pos, void *buffer, size_t size) = 0;
-	virtual ssize_t		WriteAt(eint64 pos, const void *buffer, size_t size) = 0;
+    virtual ssize_t		ReadAt(b_int64 pos, void *buffer, size_t size) = 0;
+    virtual ssize_t		WriteAt(b_int64 pos, const void *buffer, size_t size) = 0;
 
-	virtual eint64		Seek(eint64 position, euint32 seek_mode) = 0;
-	virtual eint64		Position() const = 0;
-	virtual e_status_t	SetSize(eint64 size) = 0;
+    virtual b_int64		Seek(b_int64 position, b_uint32 seek_mode) = 0;
+    virtual b_int64		Position() const = 0;
+    virtual b_status_t	SetSize(b_int64 size) = 0;
 };
 
 
-class _IMPEXP_ETK EMallocIO : public EPositionIO {
+class _IMPEXP_BHAPI BMallocIO : public BPositionIO {
 public:
-	EMallocIO();
-	virtual ~EMallocIO();
+    BMallocIO();
+    virtual ~BMallocIO();
 
-	virtual ssize_t		ReadAt(eint64 pos, void *buffer, size_t size);
-	virtual ssize_t		WriteAt(eint64 pos, const void *buffer, size_t size);
+    virtual ssize_t		ReadAt(b_int64 pos, void *buffer, size_t size);
+    virtual ssize_t		WriteAt(b_int64 pos, const void *buffer, size_t size);
 
-	virtual eint64		Seek(eint64 position, euint32 seek_mode);
-	virtual eint64		Position() const;
-	virtual e_status_t	SetSize(eint64 size);
+    virtual b_int64		Seek(b_int64 position, b_uint32 seek_mode);
+    virtual b_int64		Position() const;
+    virtual b_status_t	SetSize(b_int64 size);
 
 	void			SetBlockSize(size_t blocksize);
 	const void		*Buffer() const;
@@ -87,18 +87,18 @@ private:
 };
 
 
-class _IMPEXP_ETK EMemoryIO : public EPositionIO {
+class _IMPEXP_BHAPI BMemoryIO : public BPositionIO {
 public:
-	EMemoryIO(void *ptr, size_t length);
-	EMemoryIO(const void *ptr, size_t length);
-	virtual ~EMemoryIO();
+    BMemoryIO(void *ptr, size_t length);
+    BMemoryIO(const void *ptr, size_t length);
+    virtual ~BMemoryIO();
 
-	virtual ssize_t		ReadAt(eint64 pos, void *buffer, size_t size);
-	virtual ssize_t		WriteAt(eint64 pos, const void *buffer, size_t size);
+    virtual ssize_t		ReadAt(b_int64 pos, void *buffer, size_t size);
+    virtual ssize_t		WriteAt(b_int64 pos, const void *buffer, size_t size);
 
-	virtual eint64		Seek(eint64 position, euint32 seek_mode);
-	virtual eint64		Position() const;
-	virtual e_status_t	SetSize(eint64 size);
+    virtual b_int64		Seek(b_int64 position, b_uint32 seek_mode);
+    virtual b_int64		Position() const;
+    virtual b_status_t	SetSize(b_int64 size);
 
 private:
 	bool fReadOnly;
@@ -111,5 +111,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_DATA_IO_H__ */
+#endif /* __BHAPI_DATA_IO_H__ */
 

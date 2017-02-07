@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_PRIVATE_MESSAGE_BODY_H__
-#define __ETK_PRIVATE_MESSAGE_BODY_H__
+#ifndef __BHAPI_PRIVATE_MESSAGE_BODY_H__
+#define __BHAPI_PRIVATE_MESSAGE_BODY_H__
 
 #include "./../support/List.h"
 #include "./../support/StreamIO.h"
@@ -36,15 +36,15 @@
 #ifdef __cplusplus /* Just for C++ */
 
 
-class EMessageBody;
-class EMessageNode;
+class BMessageBody;
+class BMessageNode;
 
 
-class _LOCAL EMessageItem
+class _LOCAL BMessageItem
 {
 public:
-	EMessageItem(void *data, size_t nBytes, bool fixedSize = true);
-	~EMessageItem();
+    BMessageItem(void *data, size_t nBytes, bool fixedSize = true);
+    ~BMessageItem();
 
 	void		SetData(void *data, size_t nBytes, bool fixedSize = true);
 	void		*Data() const;
@@ -52,8 +52,8 @@ public:
 	bool		IsFixedSize() const;
 
 private:
-	friend class EMessageBody;
-	friend class EMessageNode;
+    friend class BMessageBody;
+    friend class BMessageNode;
 
 	bool fFixedSize;
 	size_t fBytes;
@@ -61,17 +61,17 @@ private:
 };
 
 
-class _LOCAL EMessageBody
+class _LOCAL BMessageBody
 {
 public:
-	EMessageBody();
-	~EMessageBody();
+    BMessageBody();
+    ~BMessageBody();
 
-	bool		AddItem(const char *name, e_type_code type, EMessageItem *item);
-	void		RemoveItem(EMessageItem *item);
+    bool		AddItem(const char *name, b_type_code type, BMessageItem *item);
+    void		RemoveItem(BMessageItem *item);
 
-	eint32		CountNames() const;
-	eint32		CountTypes() const;
+    b_int32		CountNames() const;
+    b_int32		CountTypes() const;
 
 	size_t		FlattenedSize() const;
 	bool		Flatten(char *buffer, size_t size) const;
@@ -79,17 +79,17 @@ public:
 	bool		Unflatten(const char *buffer, size_t size);
 	bool		Unflatten(EDataIO *stream, size_t size);
 
-	void		PrintToStream(EStreamIO &stream) const;
+	void		PrintToStream(BStreamIO &stream) const;
 	void		PrintToStream() const;
 
 private:
-	EList *fNames;
-	EList *fTypes;
+	BList *fNames;
+	BList *fTypes;
 };
 
 
 inline void
-EMessageBody::PrintToStream() const
+BMessageBody::PrintToStream() const
 {
 	PrintToStream(EOut);
 }
@@ -97,5 +97,5 @@ EMessageBody::PrintToStream() const
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_PRIVATE_MESSAGE_BODY_H__ */
+#endif /* __BHAPI_PRIVATE_MESSAGE_BODY_H__ */
 

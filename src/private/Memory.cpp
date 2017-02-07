@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -30,36 +30,36 @@
 #include "Memory.h"
 
 
-struct _LOCAL etk_mem {
+struct _LOCAL bhapi_mem {
 	void (*destroy_func)(void*);
 	void *data;
 };
 
 
 void*
-EMemory::Malloc(size_t size, void (*destroy_func)(void*))
+BMemory::Malloc(size_t size, void (*destroy_func)(void*))
 {
-	etk_mem *mem = NULL;
+	bhapi_mem *mem = NULL;
 
-	if(~((size_t)0) - sizeof(etk_mem) < size ||
-	   (mem = (etk_mem*)malloc(sizeof(etk_mem) + size)) == NULL) return NULL;
+	if(~((size_t)0) - sizeof(bhapi_mem) < size ||
+	   (mem = (bhapi_mem*)malloc(sizeof(bhapi_mem) + size)) == NULL) return NULL;
 
 	mem->destroy_func = destroy_func;
-	mem->data = (unsigned char*)mem + sizeof(etk_mem);
+	mem->data = (unsigned char*)mem + sizeof(bhapi_mem);
 
 	return(mem->data);
 }
 
 
 void
-EMemory::Free(void *data)
+BMemory::Free(void *data)
 {
-	etk_mem *mem = NULL;
+	bhapi_mem *mem = NULL;
 
 	if(data == NULL) return;
 
-	mem = (etk_mem*)((unsigned char*)data - sizeof(etk_mem));
-	if(mem->data != data) ETK_ERROR("[PRIVATE]: %s --- Invalid pointer.", __PRETTY_FUNCTION__);
+	mem = (bhapi_mem*)((unsigned char*)data - sizeof(bhapi_mem));
+	if(mem->data != data) BHAPI_ERROR("[PRIVATE]: %s --- Invalid pointer.", __PRETTY_FUNCTION__);
 	if(mem->destroy_func != NULL) mem->destroy_func(mem->data);
 	free(mem);
 }

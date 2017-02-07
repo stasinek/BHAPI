@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -32,29 +32,29 @@
 #include "./../kernel/Kernel.h"
 
 // return the number of microseconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-_IMPEXP_ETK e_bigtime_t etk_real_time_clock_usecs(void)
+_IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
 {
-	return (e_bigtime_t)real_time_clock_usecs();
+	return (b_bigtime_t)real_time_clock_usecs();
 }
 
 
 // return the number of seconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-_IMPEXP_ETK euint32 etk_real_time_clock(void)
+_IMPEXP_BHAPI b_uint32 bhapi_real_time_clock(void)
 {
-	return (euint32)real_time_clock();
+	return (b_uint32)real_time_clock();
 }
 
 
-_IMPEXP_ETK e_bigtime_t etk_system_boot_time(void)
+_IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
 {
 	system_info sysInfo;
 	get_system_info(&sysInfo);
-	return (e_bigtime_t)sysInfo.boot_time;
+	return (b_bigtime_t)sysInfo.boot_time;
 }
 
 
-_IMPEXP_ETK e_bigtime_t etk_system_time(void)
+_IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void)
 {
-	return (e_bigtime_t)system_time();
+	return (b_bigtime_t)system_time();
 }
 

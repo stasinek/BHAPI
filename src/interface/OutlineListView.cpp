@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,38 +24,38 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: OutlineListView.cpp
- * Description: EOutlineListView --- Displays a list of items that can be structured like an outline
+ * Description: BOutlineListView --- Displays a list of items that can be structured like an outline
  *
  * --------------------------------------------------------------------------*/
 
 #include "OutlineListView.h"
 
-EOutlineListView::EOutlineListView(ERect frame, const char *name, e_list_view_type type,
-				   euint32 resizingMode, euint32 flags)
-	: EListView(frame, name, type, resizingMode, flags)
+BOutlineListView::BOutlineListView(BRect frame, const char *name, b_list_view_type type,
+				   b_uint32 resizingMode, b_uint32 flags)
+	: BListView(frame, name, type, resizingMode, flags)
 {
 }
 
 
-EOutlineListView::~EOutlineListView()
+BOutlineListView::~BOutlineListView()
 {
-	EOutlineListView::MakeEmpty();
+	BOutlineListView::MakeEmpty();
 }
 
 
 bool
-EOutlineListView::AddUnder(EListItem *item, EListItem *superitem)
+BOutlineListView::AddUnder(BListItem *item, BListItem *superitem)
 {
 	if(item == NULL || item->fOwner != NULL || item->fFullOwner != NULL ||
-	   superitem == NULL || superitem->fFullOwner != this || superitem->fLevel == E_MAXUINT32) return false;
+	   superitem == NULL || superitem->fFullOwner != this || superitem->fLevel == B_MAXUINT32) return false;
 
-	eint32 index = fFullItems.IndexOf(superitem);
+	b_int32 index = fFullItems.IndexOf(superitem);
 	if(index < 0) return false;
 
-	euint32 tmp = item->fLevel;
+	b_uint32 tmp = item->fLevel;
 	item->fLevel = superitem->fLevel + 1;
 
-	bool retVal = EOutlineListView::AddItem(item, index + 1);
+	bool retVal = BOutlineListView::AddItem(item, index + 1);
 	if(retVal == false) item->fLevel = tmp;
 
 	return retVal;
@@ -63,14 +63,14 @@ EOutlineListView::AddUnder(EListItem *item, EListItem *superitem)
 
 
 bool
-EOutlineListView::AddItem(EListItem *item)
+BOutlineListView::AddItem(BListItem *item)
 {
-	return EOutlineListView::AddItem(item, fFullItems.CountItems());
+	return BOutlineListView::AddItem(item, fFullItems.CountItems());
 }
 
 
 bool
-EOutlineListView::AddItem(EListItem *item, eint32 fullListIndex)
+BOutlineListView::AddItem(BListItem *item, b_int32 fullListIndex)
 {
 	if(item == NULL || item->fOwner != NULL || item->fFullOwner != NULL) return false;
 	if(fFullItems.AddItem(item, fullListIndex) == false) return false;
@@ -79,42 +79,42 @@ EOutlineListView::AddItem(EListItem *item, eint32 fullListIndex)
 
 	if(item->IsVisible())
 	{
-		eint32 index = fullListIndex;
+		b_int32 index = fullListIndex;
 
-		if(index == 0) EListView::AddItem(item, 0);
+		if(index == 0) BListView::AddItem(item, 0);
 		else while(index > 0)
 		{
-			EListItem *aItem = (EListItem*)fFullItems.ItemAt(--index);
+			BListItem *aItem = (BListItem*)fFullItems.ItemAt(--index);
 			if((aItem->fLevel == item->fLevel && item->fLevel > 0) || aItem->fOwner == NULL) continue;
 
 			index = IndexOf(aItem);
-			EListView::AddItem(item, ++index);
+			BListView::AddItem(item, ++index);
 			break;
 		}
 
-		eint32 tIndex = fullListIndex;
+		b_int32 tIndex = fullListIndex;
 		while(tIndex < fFullItems.CountItems() - 1)
 		{
-			EListItem *aItem = (EListItem*)fFullItems.ItemAt(++tIndex);
+			BListItem *aItem = (BListItem*)fFullItems.ItemAt(++tIndex);
 			if(aItem->fLevel <= item->fLevel) break;
 
 			if(item->fExpanded)
 			{
 				if(aItem->fOwner != NULL)
 				{
-					eint32 aIndex = IndexOf(aItem);
-					EListView::RemoveItem(aItem, false);
+					b_int32 aIndex = IndexOf(aItem);
+					BListView::RemoveItem(aItem, false);
 					if(aIndex < index) index--;
 				}
 
 				if(aItem->IsVisible() == false) continue;
 
-				EListView::AddItem(aItem, ++index);
+				BListView::AddItem(aItem, ++index);
 			}
 			else
 			{
 				if(aItem->fOwner == NULL) continue;
-				EListView::RemoveItem(aItem, false);
+				BListView::RemoveItem(aItem, false);
 			}
 		}
 	}
@@ -124,30 +124,30 @@ EOutlineListView::AddItem(EListItem *item, eint32 fullListIndex)
 
 
 bool
-EOutlineListView::RemoveItem(EListItem *item, bool auto_destruct_item_and_subitems)
+BOutlineListView::RemoveItem(BListItem *item, bool auto_destruct_item_and_subitems)
 {
-	if(EOutlineListView::RemoveItem(FullListIndexOf(item), auto_destruct_item_and_subitems, NULL) == NULL) return false;
+	if(BOutlineListView::RemoveItem(FullListIndexOf(item), auto_destruct_item_and_subitems, NULL) == NULL) return false;
 	if(auto_destruct_item_and_subitems) delete item;
 
 	return true;
 }
 
 
-EListItem*
-EOutlineListView::RemoveItem(eint32 fullListIndex, bool auto_destruct_subitems, eint32 *count)
+BListItem*
+BOutlineListView::RemoveItem(b_int32 fullListIndex, bool auto_destruct_subitems, b_int32 *count)
 {
-	EListItem *item = (EListItem*)fFullItems.RemoveItem(fullListIndex);
+	BListItem *item = (BListItem*)fFullItems.RemoveItem(fullListIndex);
 	if(item == NULL) return NULL;
 
 	item->fFullOwner = NULL;
-	if(item->fOwner != NULL) EListView::RemoveItem(item, false);
+	if(item->fOwner != NULL) BListView::RemoveItem(item, false);
 
 	if(count) *count = 0;
 
-	eint32 tIndex = fullListIndex;
+	b_int32 tIndex = fullListIndex;
 	while(tIndex >= 0 && tIndex <= fFullItems.CountItems() - 1)
 	{
-		EListItem *aItem = (EListItem*)fFullItems.ItemAt(tIndex);
+		BListItem *aItem = (BListItem*)fFullItems.ItemAt(tIndex);
 		if(aItem->fLevel <= item->fLevel) break;
 
 		fFullItems.RemoveItem(tIndex);
@@ -155,22 +155,22 @@ EOutlineListView::RemoveItem(eint32 fullListIndex, bool auto_destruct_subitems, 
 		if(count) (*count) += 1;
 
 		aItem->fFullOwner = NULL;
-		if(aItem->fOwner != NULL) EListView::RemoveItem(aItem, auto_destruct_subitems);
+		if(aItem->fOwner != NULL) BListView::RemoveItem(aItem, auto_destruct_subitems);
 	}
 
 	return item;
 }
 
 
-EListItem*
-EOutlineListView::RemoveItem(eint32 fullListIndex)
+BListItem*
+BOutlineListView::RemoveItem(b_int32 fullListIndex)
 {
 	return RemoveItem(fullListIndex, true, NULL);
 }
 
 
 bool
-EOutlineListView::RemoveItems(eint32 fullListIndex, eint32 count, bool auto_destruct_items)
+BOutlineListView::RemoveItems(b_int32 fullListIndex, b_int32 count, bool auto_destruct_items)
 {
 	if(fullListIndex < 0 || fullListIndex >= fFullItems.CountItems()) return false;
 
@@ -180,9 +180,9 @@ EOutlineListView::RemoveItems(eint32 fullListIndex, eint32 count, bool auto_dest
 	// TODO: remove at once
 	while(count-- > 0)
 	{
-		eint32 tmp = 0;
+		b_int32 tmp = 0;
 
-		EListItem *item = EOutlineListView::RemoveItem(fullListIndex, auto_destruct_items, &tmp);
+		BListItem *item = BOutlineListView::RemoveItem(fullListIndex, auto_destruct_items, &tmp);
 		if(item == NULL) return false;
 
 		if(auto_destruct_items) delete item;
@@ -193,64 +193,64 @@ EOutlineListView::RemoveItems(eint32 fullListIndex, eint32 count, bool auto_dest
 }
 
 
-EListItem*
-EOutlineListView::FullListItemAt(eint32 fullListIndex) const
+BListItem*
+BOutlineListView::FullListItemAt(b_int32 fullListIndex) const
 {
-	return (EListItem*)fFullItems.ItemAt(fullListIndex);
+	return (BListItem*)fFullItems.ItemAt(fullListIndex);
 }
 
 
-eint32
-EOutlineListView::FullListIndexOf(const EListItem *item) const
+b_int32
+BOutlineListView::FullListIndexOf(const BListItem *item) const
 {
 	if(item == NULL || item->fFullOwner != this) return -1;
 	return fFullItems.IndexOf((void*)item);
 }
 
 
-EListItem*
-EOutlineListView::FullListFirstItem() const
+BListItem*
+BOutlineListView::FullListFirstItem() const
 {
-	return (EListItem*)fFullItems.FirstItem();
+	return (BListItem*)fFullItems.FirstItem();
 }
 
 
-EListItem*
-EOutlineListView::FullListLastItem() const
+BListItem*
+BOutlineListView::FullListLastItem() const
 {
-	return (EListItem*)fFullItems.LastItem();
+	return (BListItem*)fFullItems.LastItem();
 }
 
 
 bool
-EOutlineListView::FullListHasItem(const EListItem *item) const
+BOutlineListView::FullListHasItem(const BListItem *item) const
 {
 	return(!(item == NULL || item->fFullOwner != this));
 }
 
 
-eint32
-EOutlineListView::FullListCountItems() const
+b_int32
+BOutlineListView::FullListCountItems() const
 {
 	return fFullItems.CountItems();
 }
 
 
-eint32
-EOutlineListView::FullListCurrentSelection(eint32 index) const
+b_int32
+BOutlineListView::FullListCurrentSelection(b_int32 index) const
 {
-	eint32 tIndex = CurrentSelection(index);
-	EListItem *item = ItemAt(tIndex);
+	b_int32 tIndex = CurrentSelection(index);
+	BListItem *item = ItemAt(tIndex);
 	return(item == NULL ? -1 : fFullItems.IndexOf(item));
 }
 
 
 void
-EOutlineListView::MakeEmpty()
+BOutlineListView::MakeEmpty()
 {
 	while(fFullItems.CountItems() > 0)
 	{
-		EListItem *item = (EListItem*)fFullItems.RemoveItem((eint32)0);
+		BListItem *item = (BListItem*)fFullItems.RemoveItem((b_int32)0);
 		item->fFullOwner = NULL;
 		delete item;
 	}
@@ -258,37 +258,37 @@ EOutlineListView::MakeEmpty()
 
 
 bool
-EOutlineListView::FullListIsEmpty() const
+BOutlineListView::FullListIsEmpty() const
 {
 	return fFullItems.IsEmpty();
 }
 
 
 void
-EOutlineListView::FullListDoForEach(bool (*func)(EListItem *item))
+BOutlineListView::FullListDoForEach(bool (*func)(BListItem *item))
 {
 	fFullItems.DoForEach((bool (*)(void*))func);
 }
 
 
 void
-EOutlineListView::FullListDoForEach(bool (*func)(EListItem *item, void *user_data), void *user_data)
+BOutlineListView::FullListDoForEach(bool (*func)(BListItem *item, void *user_data), void *user_data)
 {
 	fFullItems.DoForEach((bool (*)(void*, void*))func, user_data);
 }
 
 
-EListItem*
-EOutlineListView::Superitem(const EListItem *item) const
+BListItem*
+BOutlineListView::Superitem(const BListItem *item) const
 {
 	if(item == NULL || item->fFullOwner != this) return NULL;
 
-	eint32 index = fFullItems.IndexOf((void*)item);
+	b_int32 index = fFullItems.IndexOf((void*)item);
 	if(index < 0) return NULL;
 
 	while(index > 0)
 	{
-		EListItem *aItem = (EListItem*)fFullItems.ItemAt(--index);
+		BListItem *aItem = (BListItem*)fFullItems.ItemAt(--index);
 		if(aItem->fLevel < item->fLevel) return aItem;
 	}
 
@@ -297,29 +297,29 @@ EOutlineListView::Superitem(const EListItem *item) const
 
 
 bool
-EOutlineListView::HasSubitems(const EListItem *item) const
+BOutlineListView::HasSubitems(const BListItem *item) const
 {
 	if(item == NULL || item->fFullOwner != this) return false;
 
-	eint32 index = fFullItems.IndexOf((void*)item);
+	b_int32 index = fFullItems.IndexOf((void*)item);
 	if(index < 0 || index == fFullItems.CountItems() - 1) return false;
 
-	EListItem *aItem = (EListItem*)fFullItems.ItemAt(index + 1);
+	BListItem *aItem = (BListItem*)fFullItems.ItemAt(index + 1);
 	return(aItem->fLevel > item->fLevel);
 }
 
 
-eint32
-EOutlineListView::CountItemsUnder(EListItem *item, bool oneLevelOnly) const
+b_int32
+BOutlineListView::CountItemsUnder(BListItem *item, bool oneLevelOnly) const
 {
 	if(item == NULL || item->fFullOwner != this) return 0;
 
-	eint32 retVal = 0;
-	eint32 tIndex = fFullItems.IndexOf((void*)item);
+	b_int32 retVal = 0;
+	b_int32 tIndex = fFullItems.IndexOf((void*)item);
 
 	while(tIndex >= 0 && tIndex < fFullItems.CountItems() - 1)
 	{
-		EListItem *aItem = (EListItem*)fFullItems.ItemAt(++tIndex);
+		BListItem *aItem = (BListItem*)fFullItems.ItemAt(++tIndex);
 		if(aItem->fLevel <= item->fLevel) break;
 		if(!oneLevelOnly || aItem->fLevel == item->fLevel + 1) retVal++;
 	}
@@ -328,16 +328,16 @@ EOutlineListView::CountItemsUnder(EListItem *item, bool oneLevelOnly) const
 }
 
 
-EListItem*
-EOutlineListView::ItemUnderAt(EListItem *item, bool oneLevelOnly, eint32 index) const
+BListItem*
+BOutlineListView::ItemUnderAt(BListItem *item, bool oneLevelOnly, b_int32 index) const
 {
 	if(item == NULL || item->fFullOwner != this || index < 0) return NULL;
 
-	eint32 tIndex = fFullItems.IndexOf((void*)item);
+	b_int32 tIndex = fFullItems.IndexOf((void*)item);
 
 	while(tIndex >= 0 && tIndex < fFullItems.CountItems() - 1)
 	{
-		EListItem *aItem = (EListItem*)fFullItems.ItemAt(++tIndex);
+		BListItem *aItem = (BListItem*)fFullItems.ItemAt(++tIndex);
 		if(aItem->fLevel <= item->fLevel) break;
 		if(!oneLevelOnly || aItem->fLevel == item->fLevel + 1)
 		{
@@ -350,24 +350,24 @@ EOutlineListView::ItemUnderAt(EListItem *item, bool oneLevelOnly, eint32 index) 
 }
 
 
-EListItem*
-EOutlineListView::EachItemUnder(EListItem *item, bool oneLevelOnly,
-				EListItem *(*eachFunc)(EListItem *item, void *user_data), void *user_data)
+BListItem*
+BOutlineListView::EachItemUnder(BListItem *item, bool oneLevelOnly,
+				BListItem *(*eachFunc)(BListItem *item, void *user_data), void *user_data)
 {
 	if(item == NULL || item->fFullOwner != this || eachFunc == NULL) return NULL;
 
-	EListItem *retVal = NULL;
-	eint32 tIndex = fFullItems.IndexOf((void*)item);
+	BListItem *retVal = NULL;
+	b_int32 tIndex = fFullItems.IndexOf((void*)item);
 
 	while(retVal == NULL && tIndex >= 0 && tIndex < fFullItems.CountItems() - 1)
 	{
-		EListItem *aItem = (EListItem*)fFullItems.ItemAt(++tIndex);
+		BListItem *aItem = (BListItem*)fFullItems.ItemAt(++tIndex);
 		if(aItem->fLevel <= item->fLevel) break;
 		if(!oneLevelOnly || aItem->fLevel == item->fLevel + 1) retVal = (*eachFunc)(aItem, user_data);
 		if(retVal == NULL) continue;
 		if(retVal->fFullOwner != this)
 		{
-			ETK_WARNING("[INTERFACE]: %s --- \"eachFunc\" shouldn't return item which owner not this!", __PRETTY_FUNCTION__);
+			BHAPI_WARNING("[INTERFACE]: %s --- \"eachFunc\" shouldn't return item which owner not this!", __PRETTY_FUNCTION__);
 			retVal = NULL;
 		}
 	}
@@ -377,94 +377,94 @@ EOutlineListView::EachItemUnder(EListItem *item, bool oneLevelOnly,
 
 
 void
-EOutlineListView::Expand(EListItem *item)
+BOutlineListView::Expand(BListItem *item)
 {
 	if(item == NULL || item->fFullOwner != this || item->fExpanded) return;
 
 	item->fExpanded = true;
 	if(item->IsVisible())
 	{
-		eint32 tIndex = fFullItems.IndexOf(item);
-		eint32 index = IndexOf(item);
+		b_int32 tIndex = fFullItems.IndexOf(item);
+		b_int32 index = IndexOf(item);
 		while(tIndex < fFullItems.CountItems() - 1)
 		{
-			EListItem *aItem = (EListItem*)fFullItems.ItemAt(++tIndex);
+			BListItem *aItem = (BListItem*)fFullItems.ItemAt(++tIndex);
 			if(aItem->fLevel <= item->fLevel) break;
 
 			if(aItem->fOwner != NULL)
 			{
-				eint32 aIndex = IndexOf(aItem);
-				EListView::RemoveItem(aItem, false);
+				b_int32 aIndex = IndexOf(aItem);
+				BListView::RemoveItem(aItem, false);
 				if(aIndex < index) index--;
 			}
 
 			if(aItem->IsVisible() == false) continue;
 
-			EListView::AddItem(aItem, ++index);
+			BListView::AddItem(aItem, ++index);
 		}
 	}
 }
 
 
 void
-EOutlineListView::Collapse(EListItem *item)
+BOutlineListView::Collapse(BListItem *item)
 {
 	if(item == NULL || item->fFullOwner != this || item->fExpanded == false) return;
 
 	item->fExpanded = false;
 	if(item->IsVisible())
 	{
-		eint32 tIndex = fFullItems.IndexOf(item);
+		b_int32 tIndex = fFullItems.IndexOf(item);
 		while(tIndex < fFullItems.CountItems() - 1)
 		{
-			EListItem *aItem = (EListItem*)fFullItems.ItemAt(++tIndex);
+			BListItem *aItem = (BListItem*)fFullItems.ItemAt(++tIndex);
 			if(aItem->fLevel <= item->fLevel) break;
 			if(aItem->fOwner == NULL) continue;
-			EListView::RemoveItem(aItem, false);
+			BListView::RemoveItem(aItem, false);
 		}
 	}
 }
 
 
 bool
-EOutlineListView::IsExpanded(eint32 fullListIndex) const
+BOutlineListView::IsExpanded(b_int32 fullListIndex) const
 {
-	EListItem *item = (EListItem*)fFullItems.ItemAt(fullListIndex);
+	BListItem *item = (BListItem*)fFullItems.ItemAt(fullListIndex);
 	return(item == NULL ? false : item->fExpanded);
 }
 
 
-const EListItem**
-EOutlineListView::FullListItems() const
+const BListItem**
+BOutlineListView::FullListItems() const
 {
-	return (const EListItem**)fFullItems.Items();
+	return (const BListItem**)fFullItems.Items();
 }
 
 
 void
-EOutlineListView::MouseDown(EPoint where)
+BOutlineListView::MouseDown(BPoint where)
 {
-	eint32 btnClicks = 1;
-	if(!IsEnabled() || !QueryCurrentMouse(true, E_PRIMARY_MOUSE_BUTTON, true, &btnClicks) || btnClicks > 1)
+	b_int32 btnClicks = 1;
+	if(!IsEnabled() || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON, true, &btnClicks) || btnClicks > 1)
 	{
-		EListView::MouseDown(where);
+		BListView::MouseDown(where);
 		return;
 	}
 
-	eint32 index = IndexOf(where, true);
-	EListItem *item = ItemAt(index);
+	b_int32 index = IndexOf(where, true);
+	BListItem *item = ItemAt(index);
 	if(item == NULL || item->fEnabled == false || item->HasSubitems() == false)
 	{
-		EListView::MouseDown(where);
+		BListView::MouseDown(where);
 		return;
 	}
 
-	ERect rect = ItemFrame(index);
+	BRect rect = ItemFrame(index);
 	if(item->fLevel > 0) rect.left += rect.Height() * 2.f * (float)item->fLevel;
 	rect.right = rect.left + rect.Height();
 	if(rect.Contains(where) == false)
 	{
-		EListView::MouseDown(where);
+		BListView::MouseDown(where);
 		return;
 	}
 
@@ -474,28 +474,28 @@ EOutlineListView::MouseDown(EPoint where)
 
 
 void
-EOutlineListView::MouseUp(EPoint where)
+BOutlineListView::MouseUp(BPoint where)
 {
-	EListView::MouseUp(where);
+	BListView::MouseUp(where);
 }
 
 
 void
-EOutlineListView::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
+BOutlineListView::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 {
-	EListView::MouseMoved(where, code, a_message);
+	BListView::MouseMoved(where, code, a_message);
 }
 
 
 void
-EOutlineListView::KeyDown(const char *bytes, eint32 numBytes)
+BOutlineListView::KeyDown(const char *bytes, b_int32 numBytes)
 {
-	EListItem *item = ItemAt(Position());
+	BListItem *item = ItemAt(Position());
 
 	if(!(item == NULL || IsEnabled() == false || IsFocus() == false ||
-	     numBytes != 1 || !(bytes[0] == E_LEFT_ARROW || bytes[0] == E_RIGHT_ARROW)))
+	     numBytes != 1 || !(bytes[0] == B_LEFT_ARROW || bytes[0] == B_RIGHT_ARROW)))
 	{
-		if(item->fExpanded ? (bytes[0] == E_LEFT_ARROW) : (bytes[0] == E_RIGHT_ARROW))
+		if(item->fExpanded ? (bytes[0] == B_LEFT_ARROW) : (bytes[0] == B_RIGHT_ARROW))
 		{
 			item->SetExpanded(!(item->fExpanded));
 			Invalidate();
@@ -503,13 +503,13 @@ EOutlineListView::KeyDown(const char *bytes, eint32 numBytes)
 		}
 	}
 
-	EListView::KeyDown(bytes, numBytes);
+	BListView::KeyDown(bytes, numBytes);
 }
 
 
 void
-EOutlineListView::KeyUp(const char *bytes, eint32 numBytes)
+BOutlineListView::KeyUp(const char *bytes, b_int32 numBytes)
 {
-	EListView::KeyUp(bytes, numBytes);
+	BListView::KeyUp(bytes, numBytes);
 }
 

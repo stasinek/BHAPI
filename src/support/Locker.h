@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,31 +24,31 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: Locker.h
- * Description: ELocker --- locker support nested-locking enough times
+ * Description: BLocker --- locker support nested-locking enough times
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_LOCKER_H__
-#define __ETK_LOCKER_H__
+#ifndef __BHAPI_LOCKER_H__
+#define __BHAPI_LOCKER_H__
 
 #include "./SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK ELocker {
+class _IMPEXP_BHAPI BLocker {
 public:
-	ELocker();
-	virtual ~ELocker();
+    BLocker();
+    virtual ~BLocker();
 
 	bool		Lock();
 	void		Unlock();
-	e_status_t	LockWithTimeout(e_bigtime_t microseconds);
+    b_status_t	LockWithTimeout(b_bigtime_t microseconds);
 
 	// CountLocks():
 	// 	return positive number when locked by current thread,
 	// 	return negative number when locked by other thread or invalid,
 	// 	return 0 when it isn't locked or valid.
-	eint64		CountLocks() const;
+    b_int64		CountLocks() const;
 	bool		IsLockedByCurrentThread() const;
 
 private:
@@ -57,5 +57,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_LOCKER_H__ */
+#endif /* __BHAPI_LOCKER_H__ */
 

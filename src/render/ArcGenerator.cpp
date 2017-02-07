@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  * 
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,7 +24,7 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: ArcGenerator.cpp
- * Description: EArcGenerator --- Pixel generator for zero-width-arc-drawing
+ * Description: BArcGenerator --- Pixel generator for zero-width-arc-drawing
  * 
  * --------------------------------------------------------------------------*/
 
@@ -34,7 +34,7 @@
 #include "ArcGenerator.h"
 
 
-_LOCAL bool etk_get_arc_12(EPoint &radius, EPoint &pStart, EPoint &pEnd, eint32 &x, eint32 &y, EPoint &radius2, float &deltaNext)
+_LOCAL bool bhapi_get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext)
 {
 	if(radius.x <= 0 || radius.y <= 0 || pStart.x > pEnd.x || pStart.y > 0 || pEnd.y > 0) return false;
 
@@ -43,8 +43,8 @@ _LOCAL bool etk_get_arc_12(EPoint &radius, EPoint &pStart, EPoint &pEnd, eint32 
 		radius2.x = radius.x * radius.x;
 		radius2.y = radius.y * radius.y;
 
-		EPoint start = pStart.FloorCopy(); start += EPoint(0.5f, 0.5f);
-		EPoint end = pEnd.FloorCopy(); end += EPoint(0.5f, 0.5f);
+		BPoint start = pStart.FloorCopy(); start += BPoint(0.5f, 0.5f);
+		BPoint end = pEnd.FloorCopy(); end += BPoint(0.5f, 0.5f);
 
 		if(start.x >= 0.5f) // region 1
 		{
@@ -73,8 +73,8 @@ _LOCAL bool etk_get_arc_12(EPoint &radius, EPoint &pStart, EPoint &pEnd, eint32 
 			}
 		}
 
-		x = (eint32)pStart.FloorCopy().x;
-		y = (eint32)pStart.FloorCopy().y;
+		x = (b_int32)pStart.FloorCopy().x;
+		y = (b_int32)pStart.FloorCopy().y;
 
 		return true;
 	}
@@ -185,7 +185,7 @@ _LOCAL bool etk_get_arc_12(EPoint &radius, EPoint &pStart, EPoint &pEnd, eint32 
 }
 
 
-EArcGenerator::EArcGenerator(EPoint center, float xRadius, float yRadius, EPoint start, EPoint end)
+BArcGenerator::BArcGenerator(BPoint center, float xRadius, float yRadius, BPoint start, BPoint end)
 	: fStep(0)
 {
 	fCenter = center;
@@ -198,13 +198,13 @@ EArcGenerator::EArcGenerator(EPoint center, float xRadius, float yRadius, EPoint
 
 
 bool
-EArcGenerator::Start(eint32 &x, eint32 &y, eint32 &step, eint32 &pixels, bool &both, bool isLoopX, float pixel_size)
+BArcGenerator::Start(b_int32 &x, b_int32 &y, b_int32 &step, b_int32 &pixels, bool &both, bool isLoopX, float pixel_size)
 {
 	fIsLoopX = isLoopX;
 
 	if(!fIsLoopX)
 	{
-		ETK_WARNING("[RENDER]: %s --- LoopY not supported yet!", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[RENDER]: %s --- LoopY not supported yet!", __PRETTY_FUNCTION__);
 		return false;
 	}
 
@@ -242,21 +242,21 @@ EArcGenerator::Start(eint32 &x, eint32 &y, eint32 &step, eint32 &pixels, bool &b
 		_fRadius.y = fRadius.y;
 	}
 
-	_fCenterX = (eint32)floor((double)(fCenter.x / pixel_size));
-	_fCenterY = (eint32)floor((double)(fCenter.y / pixel_size));
-	_fRadiusX = (eint32)floor((double)_fRadius.x);
-	_fStartX = (eint32)floor((double)(fStart.x / pixel_size));
-	_fStartY = (eint32)floor((double)(fStart.y / pixel_size));
-	_fEndX = (eint32)floor((double)(fEnd.x / pixel_size));
-	_fEndY = (eint32)floor((double)(fEnd.y / pixel_size));
+	_fCenterX = (b_int32)floor((double)(fCenter.x / pixel_size));
+	_fCenterY = (b_int32)floor((double)(fCenter.y / pixel_size));
+	_fRadiusX = (b_int32)floor((double)_fRadius.x);
+	_fStartX = (b_int32)floor((double)(fStart.x / pixel_size));
+	_fStartY = (b_int32)floor((double)(fStart.y / pixel_size));
+	_fEndX = (b_int32)floor((double)(fEnd.x / pixel_size));
+	_fEndY = (b_int32)floor((double)(fEnd.y / pixel_size));
 
-	fStep = (eint32)(_fEnd.FloorCopy().x - _fStart.FloorCopy().x);
+	fStep = (b_int32)(_fEnd.FloorCopy().x - _fStart.FloorCopy().x);
 	fRadius2.Set(-1, -1);
 
 	bool havePixels = false;
-	eint32 oldX = 0, oldY = 0, lastY = 0;
+	b_int32 oldX = 0, oldY = 0, lastY = 0;
 
-	while(etk_get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
+	while(bhapi_get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
 	{
 		if(!havePixels) {oldX = _X; lastY = oldY = _Y; havePixels = true;}
 		else if(oldX != _X) break;
@@ -306,19 +306,19 @@ EArcGenerator::Start(eint32 &x, eint32 &y, eint32 &step, eint32 &pixels, bool &b
 
 
 bool
-EArcGenerator::Next(eint32 &next, eint32 &pixels, bool &both)
+BArcGenerator::Next(b_int32 &next, b_int32 &pixels, bool &both)
 {
 	if(fStep <= 0) return false;
 
 	if(!fIsLoopX)
 	{
-		ETK_WARNING("[RENDER]: %s --- LoopY not supported yet!", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[RENDER]: %s --- LoopY not supported yet!", __PRETTY_FUNCTION__);
 		return false;
 	}
 
-	eint32 oldX = _X, oldY = _Y, lastY = _Y;
+	b_int32 oldX = _X, oldY = _Y, lastY = _Y;
 
-	while(etk_get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
+	while(bhapi_get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
 	{
 		if(oldX != _X) break;
 		else lastY = _Y;

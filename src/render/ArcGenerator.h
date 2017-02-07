@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  * 
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,51 +24,51 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: ArcGenerator.h
- * Description: EArcGenerator --- Pixel generator for zero-width-arc-drawing
+ * Description: BArcGenerator --- Pixel generator for zero-width-arc-drawing
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_ARC_GENERATOR_H__
-#define __ETK_ARC_GENERATOR_H__
+#ifndef __BHAPI_ARC_GENERATOR_H__
+#define __BHAPI_ARC_GENERATOR_H__
 
 #include "./../interface/Rect.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EArcGenerator {
+class _IMPEXP_BHAPI BArcGenerator {
 public:
-	EArcGenerator(EPoint center, float xRadius, float yRadius, EPoint start, EPoint end);
+    BArcGenerator(BPoint center, float xRadius, float yRadius, BPoint start, BPoint end);
 
-	bool Start(eint32 &x, eint32 &y, eint32 &step, eint32 &pixels, bool &both, bool isLoopX = true, float pixel_size = 1);
-	bool Next(eint32 &next, eint32 &pixels, bool &both);
+    bool Start(b_int32 &x, b_int32 &y, b_int32 &step, b_int32 &pixels, bool &both, bool isLoopX = true, float pixel_size = 1);
+    bool Next(b_int32 &next, b_int32 &pixels, bool &both);
 
 private:
-	EPoint fCenter;
-	EPoint fRadius;
-	EPoint fStart;
-	EPoint fEnd;
+    BPoint fCenter;
+    BPoint fRadius;
+    BPoint fStart;
+    BPoint fEnd;
 
-	eint32 fStep;
+    b_int32 fStep;
 	bool fIsLoopX;
 
-	EPoint fRadius2;
-	EPoint _fRadius;
-	EPoint _fStart;
-	EPoint _fEnd;
+    BPoint fRadius2;
+    BPoint _fRadius;
+    BPoint _fStart;
+    BPoint _fEnd;
 	float fDeltaNext;
 
-	eint32 _fCenterX;
-	eint32 _fCenterY;
-	eint32 _fRadiusX;
-	eint32 _fStartX;
-	eint32 _fStartY;
-	eint32 _fEndX;
-	eint32 _fEndY;
-	eint32 _X;
-	eint32 _Y;
+    b_int32 _fCenterX;
+    b_int32 _fCenterY;
+    b_int32 _fRadiusX;
+    b_int32 _fStartX;
+    b_int32 _fStartY;
+    b_int32 _fEndX;
+    b_int32 _fEndY;
+    b_int32 _X;
+    b_int32 _Y;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_ARC_GENERATOR_H__ */
+#endif /* __BHAPI_ARC_GENERATOR_H__ */
 

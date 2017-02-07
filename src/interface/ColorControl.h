@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,45 +24,45 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: ColorControl.h
- * Description: EColorControl --- Displays a palette of selectable colors
+ * Description: BColorControl --- Displays a palette of selectable colors
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_COLOR_CONTROL_H__
-#define __ETK_COLOR_CONTROL_H__
+#ifndef __BHAPI_COLOR_CONTROL_H__
+#define __BHAPI_COLOR_CONTROL_H__
 
 #include "./../interface/Control.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class EBitmap;
+class BBitmap;
 
-class _IMPEXP_ETK EColorControl : public EControl {
+class _IMPEXP_BHAPI BColorControl : public BControl {
 public:
-	EColorControl(EPoint leftTop, const char *name, EMessage *message = NULL, bool bufferedDrawing = false);
-	virtual ~EColorControl();
+    BColorControl(BPoint leftTop, const char *name, BMessage *message = NULL, bool bufferedDrawing = false);
+    virtual ~BColorControl();
 
-	virtual void	SetValue(eint32 color);
-	void		SetValue(e_rgb_color color);
-	e_rgb_color	ValueAsColor();
+    virtual void	SetValue(b_int32 color);
+    void		SetValue(b_rgb_color color);
+	b_rgb_color	ValueAsColor();
 
-	virtual void	Draw(ERect updateRect);
-	virtual void	MouseDown(EPoint where);
+	virtual void	Draw(BRect updateRect);
+    virtual void	MouseDown(BPoint where);
 	virtual void	GetPreferredSize(float *width, float *height);
 
 private:
-	EBitmap *fBitmap;
+	BBitmap *fBitmap;
 
-	ERect _MarkFrame(ERect colorFrame, euint8 channel);
-	ERect _ColorsFrame();
-	ERect _DescriptionFrame();
+    BRect _MarkFrame(BRect colorFrame, b_uint8 channel);
+	BRect _ColorsFrame();
+	BRect _DescriptionFrame();
 
-	void _DrawColors(ERect updateRect);
-	void _DrawDescription(ERect updateRect);
+	void _DrawColors(BRect updateRect);
+	void _DrawDescription(BRect updateRect);
 };
 
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_COLOR_CONTROL_H__ */
+#endif /* __BHAPI_COLOR_CONTROL_H__ */
 

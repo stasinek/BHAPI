@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * Carbon Graphics Add-on for ETK++
+ * Carbon Graphics Add-on for BHAPI++
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,12 +27,12 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_CARBON_H__
-#define __ETK_CARBON_H__
+#ifndef __BHAPI_CARBON_H__
+#define __BHAPI_CARBON_H__
 
 #ifdef MACOS
 #include <Carbon/Carbon.h>
 #endif /* MACOS */
 
-#endif /* __ETK_CARBON_H__ */
+#endif /* __BHAPI_CARBON_H__ */
 

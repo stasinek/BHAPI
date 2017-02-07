@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,21 +24,21 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: SimpleLocker.h
- * Description: ESimpleLocker --- locker DO NOT support nested-locking
+ * Description: BSimpleLocker --- locker DO NOT support nested-locking
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_SIMPLE_LOCKER_H__
-#define __ETK_SIMPLE_LOCKER_H__
+#ifndef __BHAPI_SIMPLE_LOCKER_H__
+#define __BHAPI_SIMPLE_LOCKER_H__
 
-#include "./SupportDefs.h"
+#include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK ESimpleLocker {
+class _IMPEXP_BHAPI BSimpleLocker {
 public:
-	ESimpleLocker(bool assert = false);
-	virtual ~ESimpleLocker();
+    BSimpleLocker(bool assert = false);
+    virtual ~BSimpleLocker();
 
 	bool		IsValid() const;
 	bool		Lock();
@@ -50,5 +50,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_SIMPLE_LOCKER_H__ */
+#endif /* __BHAPI_SIMPLE_LOCKER_H__ */
 

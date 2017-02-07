@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -32,54 +32,54 @@
 #include "Layout.h"
 
 
-ELayoutItem::ELayoutItem(ERect frame, euint32 resizingMode)
-	: ELayoutContainer(), fContainer(NULL),
+BLayoutItem::BLayoutItem(BRect frame, b_uint32 resizingMode)
+	: BLayoutContainer(), fContainer(NULL),
 	  fIndex(-1),
-	  fLocalOrigin(E_ORIGIN),
+	  fLocalOrigin(B_ORIGIN),
 	  fFrame(frame), fResizingMode(resizingMode),
 	  fHidden(false), fUpdating(false)
 {
 }
 
 
-ELayoutItem::~ELayoutItem()
+BLayoutItem::~BLayoutItem()
 {
 	RemoveSelf();
 }
 
 
-ELayoutContainer*
-ELayoutItem::Container() const
+BLayoutContainer*
+BLayoutItem::Container() const
 {
 	return fContainer;
 }
 
 
-ELayoutContainer*
-ELayoutItem::Ancestor() const
+BLayoutContainer*
+BLayoutItem::Ancestor() const
 {
-	if(fContainer == NULL) return e_cast_as((ELayoutItem*)this, ELayoutContainer);
-	if(e_is_kind_of(fContainer, ELayoutItem) == false) return fContainer;
-	return e_cast_as(fContainer, ELayoutItem)->Ancestor();
+	if(fContainer == NULL) return b_cast_as((BLayoutItem*)this, BLayoutContainer);
+	if(b_is_kind_of(fContainer, BLayoutItem) == false) return fContainer;
+	return b_cast_as(fContainer, BLayoutItem)->Ancestor();
 }
 
 
-ELayoutItem*
-ELayoutItem::PreviousSibling() const
+BLayoutItem*
+BLayoutItem::PreviousSibling() const
 {
-	return(fContainer == NULL ? NULL : (ELayoutItem*)fContainer->ItemAt(fIndex - 1));
+	return(fContainer == NULL ? NULL : (BLayoutItem*)fContainer->ItemAt(fIndex - 1));
 }
 
 
-ELayoutItem*
-ELayoutItem::NextSibling() const
+BLayoutItem*
+BLayoutItem::NextSibling() const
 {
-	return(fContainer == NULL ? NULL : (ELayoutItem*)fContainer->ItemAt(fIndex + 1));
+	return(fContainer == NULL ? NULL : (BLayoutItem*)fContainer->ItemAt(fIndex + 1));
 }
 
 
 bool
-ELayoutItem::RemoveSelf()
+BLayoutItem::RemoveSelf()
 {
 	if(fContainer == NULL) return false;
 	return fContainer->RemoveItem(this);
@@ -87,90 +87,90 @@ ELayoutItem::RemoveSelf()
 
 
 void
-ELayoutItem::SetResizingMode(euint32 mode)
+BLayoutItem::SetResizingMode(b_uint32 mode)
 {
 	fResizingMode = mode;
 }
 
 
-euint32
-ELayoutItem::ResizingMode() const
+b_uint32
+BLayoutItem::ResizingMode() const
 {
 	return fResizingMode;
 }
 
 
 void
-ELayoutItem::Show()
+BLayoutItem::Show()
 {
 	if(fHidden == false) return;
 
 	fHidden = false;
 
 	if(fUpdating || fContainer == NULL || fFrame.IsValid() == false) return;
-	for(ELayoutItem *item = this; item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
+	for(BLayoutItem *item = this; item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
 	fContainer->Invalidate(fFrame);
 }
 
 
 void
-ELayoutItem::Hide()
+BLayoutItem::Hide()
 {
 	if(fHidden == true) return;
 
 	fHidden = true;
 
 	if(fUpdating || fContainer == NULL || fFrame.IsValid() == false) return;
-	for(ELayoutItem *item = this; item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
+	for(BLayoutItem *item = this; item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
 	fContainer->Invalidate(fFrame);
 }
 
 
 bool
-ELayoutItem::IsHidden(bool check_containers) const
+BLayoutItem::IsHidden(bool check_containers) const
 {
 	if(check_containers == false) return fHidden;
 	if(fHidden || fContainer == NULL) return true;
-	if(e_is_kind_of(fContainer, ELayoutItem) == false) return false;
-	return e_cast_as(fContainer, ELayoutItem)->IsHidden(true);
+	if(b_is_kind_of(fContainer, BLayoutItem) == false) return false;
+	return b_cast_as(fContainer, BLayoutItem)->IsHidden(true);
 }
 
 
 void
-ELayoutItem::SendBehind(ELayoutItem *item)
+BLayoutItem::SendBehind(BLayoutItem *item)
 {
 	if(fContainer == NULL || item == NULL || !(item->fContainer == fContainer && item->fIndex > fIndex)) return;
 
-	eint32 index = (item == NULL ? 0 : item->fIndex);
+	b_int32 index = (item == NULL ? 0 : item->fIndex);
 	if(fContainer->fItems.MoveItem(fIndex, index) == false) return;
 
-	for(eint32 i = min_c(index, fIndex); i < fContainer->fItems.CountItems(); i++)
-		((ELayoutItem*)fContainer->fItems.ItemAt(i))->fIndex = i;
+	for(b_int32 i = min_c(index, fIndex); i < fContainer->fItems.CountItems(); i++)
+		((BLayoutItem*)fContainer->fItems.ItemAt(i))->fIndex = i;
 
 	if(fUpdating || fHidden || fFrame.IsValid() == false) return;
-	ERect updateRect = fFrame | item->fFrame;
-	for(eint32 i = min_c(index, fIndex); i < fContainer->fItems.CountItems(); i++)
-		((ELayoutItem*)fContainer->fItems.ItemAt(i))->UpdateVisibleRegion();
+	BRect updateRect = fFrame | item->fFrame;
+	for(b_int32 i = min_c(index, fIndex); i < fContainer->fItems.CountItems(); i++)
+		((BLayoutItem*)fContainer->fItems.ItemAt(i))->UpdateVisibleRegion();
 	fContainer->Invalidate(updateRect);
 }
 
 
 void
-ELayoutItem::MoveTo(EPoint where)
+BLayoutItem::MoveTo(BPoint where)
 {
 	if(fFrame.LeftTop() == where) return;
 
-	ERect oldFrame = fFrame;
+	BRect oldFrame = fFrame;
 	fFrame.OffsetTo(where);
 
 	if(fUpdating || fContainer == NULL || fHidden || fFrame.IsValid() == false) return;
-	for(ELayoutItem *item = this; item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
+	for(BLayoutItem *item = this; item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
 	fContainer->Invalidate(oldFrame | fFrame);
 }
 
 
 void
-ELayoutItem::ScrollTo(EPoint where)
+BLayoutItem::ScrollTo(BPoint where)
 {
 	if(where.x < 0) where.x = 0;
 	if(where.y < 0) where.y = 0;
@@ -186,34 +186,34 @@ ELayoutItem::ScrollTo(EPoint where)
 
 
 void
-ELayoutItem::ResizeTo(float width, float height)
+BLayoutItem::ResizeTo(float width, float height)
 {
 	if(fFrame.Width() == width && fFrame.Height() == height) return;
 
 	float width_ext = width - fFrame.Width();
 	float height_ext = height - fFrame.Height();
-	ERect oldFrame = fFrame;
-	EPoint center_offset = fFrame.Center() - oldFrame.Center();
+	BRect oldFrame = fFrame;
+	BPoint center_offset = fFrame.Center() - oldFrame.Center();
 
 	fFrame.right += width_ext;
 	fFrame.bottom += height_ext;
 
-	for(ELayoutItem *item = ItemAt(0); item != NULL; item = item->NextSibling())
+	for(BLayoutItem *item = ItemAt(0); item != NULL; item = item->NextSibling())
 	{
-		euint32 iMode = item->fResizingMode;
-		ERect iFrame = item->fFrame;
+		b_uint32 iMode = item->fResizingMode;
+		BRect iFrame = item->fFrame;
 
-		if(iMode == E_FOLLOW_NONE || iMode == (E_FOLLOW_LEFT | E_FOLLOW_TOP)) continue;
+		if(iMode == B_FOLLOW_NONE || iMode == (B_FOLLOW_LEFT | B_FOLLOW_TOP)) continue;
 
-		if((iMode & E_FOLLOW_H_CENTER) && (iMode & E_FOLLOW_LEFT_RIGHT) != E_FOLLOW_LEFT_RIGHT)
+		if((iMode & B_FOLLOW_H_CENTER) && (iMode & B_FOLLOW_LEFT_RIGHT) != B_FOLLOW_LEFT_RIGHT)
 		{
 			float newCenterX = iFrame.Center().x + center_offset.x;
-			if(iMode & E_FOLLOW_RIGHT)
+			if(iMode & B_FOLLOW_RIGHT)
 			{
 				iFrame.right += width_ext;
 				iFrame.left = iFrame.right - 2.f * (iFrame.right - newCenterX);
 			}
-			else if(iMode & E_FOLLOW_LEFT)
+			else if(iMode & B_FOLLOW_LEFT)
 			{
 				iFrame.right = iFrame.left + 2.f * (newCenterX - iFrame.left);
 			}
@@ -224,21 +224,21 @@ ELayoutItem::ResizeTo(float width, float height)
 				iFrame.right = newCenterX + iWidth / 2.f;
 			}
 		}
-		else if(iMode & E_FOLLOW_RIGHT)
+		else if(iMode & B_FOLLOW_RIGHT)
 		{
 			iFrame.right += width_ext;
-			if(!(iMode & E_FOLLOW_LEFT)) iFrame.left += width_ext;
+			if(!(iMode & B_FOLLOW_LEFT)) iFrame.left += width_ext;
 		}
 
-		if((iMode & E_FOLLOW_V_CENTER) && (iMode & E_FOLLOW_TOP_BOTTOM) != E_FOLLOW_TOP_BOTTOM)
+		if((iMode & B_FOLLOW_V_CENTER) && (iMode & B_FOLLOW_TOP_BOTTOM) != B_FOLLOW_TOP_BOTTOM)
 		{
 			float newCenterY = iFrame.Center().y + center_offset.y;
-			if(iMode & E_FOLLOW_TOP_BOTTOM)
+			if(iMode & B_FOLLOW_TOP_BOTTOM)
 			{
 				iFrame.bottom += height_ext;
 				iFrame.top = iFrame.bottom - 2.f * (iFrame.bottom - newCenterY);
 			}
-			else if(iMode & E_FOLLOW_TOP)
+			else if(iMode & B_FOLLOW_TOP)
 			{
 				iFrame.bottom = iFrame.top + 2.f * (newCenterY - iFrame.top);
 			}
@@ -249,10 +249,10 @@ ELayoutItem::ResizeTo(float width, float height)
 				iFrame.bottom = newCenterY + iHeight / 2.f;
 			}
 		}
-		else if(iMode & E_FOLLOW_BOTTOM)
+		else if(iMode & B_FOLLOW_BOTTOM)
 		{
 			iFrame.bottom += height_ext;
-			if(!(iMode & E_FOLLOW_TOP)) iFrame.top += height_ext;
+			if(!(iMode & B_FOLLOW_TOP)) iFrame.top += height_ext;
 		}
 
 		item->fFrame.OffsetTo(iFrame.LeftTop());
@@ -262,15 +262,15 @@ ELayoutItem::ResizeTo(float width, float height)
 	}
 
 	if(fUpdating || fContainer == NULL || fHidden || (oldFrame.IsValid() == false && fFrame.IsValid() == false)) return;
-	for(ELayoutItem *item = this; item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
+	for(BLayoutItem *item = this; item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
 	fContainer->Invalidate(oldFrame | fFrame);
 }
 
 
 void
-ELayoutItem::MoveAndResizeTo(EPoint where, float width, float height)
+BLayoutItem::MoveAndResizeTo(BPoint where, float width, float height)
 {
-	ERect oldFrame = fFrame;
+	BRect oldFrame = fFrame;
 
 	bool saveUpdating = fUpdating;
 	fUpdating = true;
@@ -280,31 +280,31 @@ ELayoutItem::MoveAndResizeTo(EPoint where, float width, float height)
 
 	if(oldFrame == fFrame) return;
 	if(fUpdating || fContainer == NULL || fHidden || (oldFrame.IsValid() == false && fFrame.IsValid() == false)) return;
-	for(ELayoutItem *item = this; item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
+	for(BLayoutItem *item = this; item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
 	fContainer->Invalidate(oldFrame | fFrame);
 }
 
 
 void
-ELayoutItem::GetPreferredSize(float *width, float *height)
+BLayoutItem::GetPreferredSize(float *width, float *height)
 {
 	if(width == NULL && height == NULL) return;
 
 	float w = 0, h = 0;
-	ERect rect = fFrame.OffsetToCopy(E_ORIGIN);
+	BRect rect = fFrame.OffsetToCopy(B_ORIGIN);
 
-	for(ELayoutItem *item = ItemAt(0); item != NULL; item = item->NextSibling())
+	for(BLayoutItem *item = ItemAt(0); item != NULL; item = item->NextSibling())
 	{
 		if(item->fHidden) continue;
 
 		float iW = 0, iH = 0;
 		item->GetPreferredSize(&iW, &iH);
 
-		euint32 iMode = item->fResizingMode;
-		if((iMode & E_FOLLOW_LEFT) || (iMode & E_FOLLOW_NONE)) iW += item->fFrame.left;
-		if(iMode & E_FOLLOW_RIGHT) iW += rect.right - item->fFrame.right;
-		if((iMode & E_FOLLOW_TOP) || (iMode & E_FOLLOW_NONE)) iH += item->fFrame.top;
-		if(iMode & E_FOLLOW_BOTTOM) iH += rect.bottom - item->fFrame.bottom;
+		b_uint32 iMode = item->fResizingMode;
+		if((iMode & B_FOLLOW_LEFT) || (iMode & B_FOLLOW_NONE)) iW += item->fFrame.left;
+		if(iMode & B_FOLLOW_RIGHT) iW += rect.right - item->fFrame.right;
+		if((iMode & B_FOLLOW_TOP) || (iMode & B_FOLLOW_NONE)) iH += item->fFrame.top;
+		if(iMode & B_FOLLOW_BOTTOM) iH += rect.bottom - item->fFrame.bottom;
 
 		w = max_c(w, iW);
 		h = max_c(h, iH);
@@ -316,7 +316,7 @@ ELayoutItem::GetPreferredSize(float *width, float *height)
 
 
 void
-ELayoutItem::ResizeToPreferred()
+BLayoutItem::ResizeToPreferred()
 {
 	float w = -1, h = -1;
 	GetPreferredSize(&w, &h);
@@ -324,32 +324,32 @@ ELayoutItem::ResizeToPreferred()
 	if(h < 0) h = fFrame.Height();
 	if(w == fFrame.Width() && h == fFrame.Height()) return;
 
-	ERect iFrame = fFrame;
-	euint32 iMode = fResizingMode;
+	BRect iFrame = fFrame;
+	b_uint32 iMode = fResizingMode;
 
-	if((iMode & E_FOLLOW_H_CENTER) && (iMode & E_FOLLOW_LEFT_RIGHT) != E_FOLLOW_LEFT_RIGHT)
+	if((iMode & B_FOLLOW_H_CENTER) && (iMode & B_FOLLOW_LEFT_RIGHT) != B_FOLLOW_LEFT_RIGHT)
 	{
 		float centerX = fFrame.Center().x;
 		iFrame.left = centerX - w / 2.f;
 		iFrame.right = centerX + w / 2.f;
 	}
-	else if((iMode & E_FOLLOW_LEFT_RIGHT) != E_FOLLOW_LEFT_RIGHT)
+	else if((iMode & B_FOLLOW_LEFT_RIGHT) != B_FOLLOW_LEFT_RIGHT)
 	{
-		if(iMode & E_FOLLOW_RIGHT)
+		if(iMode & B_FOLLOW_RIGHT)
 			iFrame.left = iFrame.right - w;
 		else
 			iFrame.right = iFrame.left + w;
 	}
 
-	if((iMode & E_FOLLOW_V_CENTER) && (iMode & E_FOLLOW_TOP_BOTTOM) != E_FOLLOW_TOP_BOTTOM)
+	if((iMode & B_FOLLOW_V_CENTER) && (iMode & B_FOLLOW_TOP_BOTTOM) != B_FOLLOW_TOP_BOTTOM)
 	{
 		float centerY = fFrame.Center().y;
 		iFrame.top = centerY - h / 2.f;
 		iFrame.bottom = centerY + h / 2.f;
 	}
-	else if((iMode & E_FOLLOW_TOP_BOTTOM) != E_FOLLOW_TOP_BOTTOM)
+	else if((iMode & B_FOLLOW_TOP_BOTTOM) != B_FOLLOW_TOP_BOTTOM)
 	{
-		if(iMode & E_FOLLOW_BOTTOM)
+		if(iMode & B_FOLLOW_BOTTOM)
 			iFrame.top = iFrame.bottom - h;
 		else
 			iFrame.bottom = iFrame.top + h;
@@ -358,69 +358,69 @@ ELayoutItem::ResizeToPreferred()
 	if(iFrame == fFrame) return;
 
 	bool saveUpdating = fUpdating;
-	ERect oldFrame = fFrame;
+	BRect oldFrame = fFrame;
 
 	fUpdating = true;
 	MoveAndResizeTo(iFrame.LeftTop(), iFrame.Width(), iFrame.Height());
 	fUpdating = saveUpdating;
 
 	if(fUpdating || fContainer == NULL || fHidden || (oldFrame.IsValid() == false && fFrame.IsValid() == false)) return;
-	for(ELayoutItem *item = this; item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
+	for(BLayoutItem *item = this; item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
 	fContainer->Invalidate(oldFrame | fFrame);
 }
 
 
-ERect
-ELayoutItem::Bounds() const
+BRect
+BLayoutItem::Bounds() const
 {
 	return fFrame.OffsetToCopy(fLocalOrigin);
 }
 
 
-ERect
-ELayoutItem::Frame() const
+BRect
+BLayoutItem::Frame() const
 {
 	return fFrame;
 }
 
 
-const ERegion*
-ELayoutItem::VisibleRegion() const
+const BRegion*
+BLayoutItem::VisibleRegion() const
 {
 	return &fVisibleRegion;
 }
 
 
 void
-ELayoutItem::GetVisibleRegion(ERegion **region)
+BLayoutItem::GetVisibleRegion(BRegion **region)
 {
 	if(region) *region = &fVisibleRegion;
 }
 
 
-EPoint
-ELayoutItem::LeftTop() const
+BPoint
+BLayoutItem::LeftTop() const
 {
 	return fLocalOrigin;
 }
 
 
 float
-ELayoutItem::Width() const
+BLayoutItem::Width() const
 {
 	return fFrame.Width();
 }
 
 
 float
-ELayoutItem::Height() const
+BLayoutItem::Height() const
 {
 	return fFrame.Height();
 }
 
 
 void
-ELayoutItem::ConvertToContainer(EPoint *pt) const
+BLayoutItem::ConvertToContainer(BPoint *pt) const
 {
 	if(pt == NULL) return;
 
@@ -429,8 +429,8 @@ ELayoutItem::ConvertToContainer(EPoint *pt) const
 }
 
 
-EPoint
-ELayoutItem::ConvertToContainer(EPoint pt) const
+BPoint
+BLayoutItem::ConvertToContainer(BPoint pt) const
 {
 	ConvertToContainer(&pt);
 	return pt;
@@ -438,7 +438,7 @@ ELayoutItem::ConvertToContainer(EPoint pt) const
 
 
 void
-ELayoutItem::ConvertFromContainer(EPoint *pt) const
+BLayoutItem::ConvertFromContainer(BPoint *pt) const
 {
 	if(pt == NULL) return;
 
@@ -447,8 +447,8 @@ ELayoutItem::ConvertFromContainer(EPoint *pt) const
 }
 
 
-EPoint
-ELayoutItem::ConvertFromContainer(EPoint pt) const
+BPoint
+BLayoutItem::ConvertFromContainer(BPoint pt) const
 {
 	ConvertFromContainer(&pt);
 	return pt;
@@ -456,9 +456,9 @@ ELayoutItem::ConvertFromContainer(EPoint pt) const
 
 
 void
-ELayoutItem::UpdateVisibleRegion()
+BLayoutItem::UpdateVisibleRegion()
 {
-	ELayoutItem *item;
+	BLayoutItem *item;
 
 	if(fUpdating) return;
 
@@ -468,13 +468,13 @@ ELayoutItem::UpdateVisibleRegion()
 	}
 	else
 	{
-		if(e_is_kind_of(fContainer, ELayoutItem) == false)
+		if(b_is_kind_of(fContainer, BLayoutItem) == false)
 		{
 			fVisibleRegion = fFrame;
 		}
 		else
 		{
-			fVisibleRegion = e_cast_as(fContainer, ELayoutItem)->fVisibleRegion;
+			fVisibleRegion = b_cast_as(fContainer, BLayoutItem)->fVisibleRegion;
 			fVisibleRegion &= fFrame;
 		}
 
@@ -486,7 +486,7 @@ ELayoutItem::UpdateVisibleRegion()
 			fVisibleRegion.Exclude(item->fFrame.InsetByCopy(-fContainer->UnitsPerPixel(), -fContainer->UnitsPerPixel()));
 		}
 
-		fVisibleRegion.OffsetBy(E_ORIGIN - fFrame.LeftTop() + fLocalOrigin);
+		fVisibleRegion.OffsetBy(B_ORIGIN - fFrame.LeftTop() + fLocalOrigin);
 	}
 
 	for(item = ItemAt(0); item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -36,98 +36,98 @@
 #include "Application.h"
 #include "MessageRunner.h"
 
-extern ELocker* etk_get_handler_operator_locker();
+extern BLocker* bhapi_get_handler_operator_locker();
 
-EMessageRunner::EMessageRunner(const EMessenger &target, const EMessage *msg, e_bigtime_t interval, eint32 count)
-	: fToken(-1), fTarget(NULL), fReplyTo(NULL), fMessage(NULL), fPrevSendTime(E_INT64_CONSTANT(-1))
+BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, b_bigtime_t interval, b_int32 count)
+	: fToken(-1), fTarget(NULL), fReplyTo(NULL), fMessage(NULL), fPrevSendTime(B_INT64_CONSTANT(-1))
 {
-	if(!(msg == NULL || (fMessage = new EMessage(*msg)) != NULL)) return;
+	if(!(msg == NULL || (fMessage = new BMessage(*msg)) != NULL)) return;
 	if(target.IsValid())
 	{
-		fTarget = new EMessenger(target);
+		fTarget = new BMessenger(target);
 		if(fTarget == NULL || fTarget->IsValid() == false) return;
 	}
 	fInterval = interval;
 	fCount = count;
 
-	ELocker *hLocker = etk_get_handler_operator_locker();
-	EAutolock <ELocker>autolock(hLocker);
+	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BAutolock <BLocker>autolock(hLocker);
 
-	eint32 token = EApplication::sRunnerList.IndexOf(NULL);
+	b_int32 token = BApplication::sRunnerList.IndexOf(NULL);
 	if(token >= 0)
 	{
-		if(EApplication::sRunnerList.ReplaceItem(token, this) == false) return;
+		if(BApplication::sRunnerList.ReplaceItem(token, this) == false) return;
 		fToken = token;
 	}
 	else
 	{
-		if(EApplication::sRunnerList.AddItem(this) == false) return;
-		fToken = EApplication::sRunnerList.CountItems() - 1;
+		if(BApplication::sRunnerList.AddItem(this) == false) return;
+		fToken = BApplication::sRunnerList.CountItems() - 1;
 	}
 
-	if(fCount != 0 && fInterval > E_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && etk_app != NULL)
+	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi_app != NULL)
 	{
-		EApplication::sRunnerMinimumInterval = E_INT64_CONSTANT(-1);
-		etk_app->PostMessage(_EVENTS_PENDING_, etk_app);
+		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
+		bhapi_app->PostMessage(_EVENTS_PENDING_, bhapi_app);
 	}
 }
 
 
-EMessageRunner::EMessageRunner(const EMessenger &target, const EMessage *msg, e_bigtime_t interval, eint32 count, const EMessenger &replyTo)
-	: fToken(-1), fTarget(NULL), fReplyTo(NULL), fMessage(NULL), fPrevSendTime(E_INT64_CONSTANT(-1))
+BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, b_bigtime_t interval, b_int32 count, const BMessenger &replyTo)
+	: fToken(-1), fTarget(NULL), fReplyTo(NULL), fMessage(NULL), fPrevSendTime(B_INT64_CONSTANT(-1))
 {
-	if(!(msg == NULL || (fMessage = new EMessage(*msg)) != NULL)) return;
+	if(!(msg == NULL || (fMessage = new BMessage(*msg)) != NULL)) return;
 	if(target.IsValid())
 	{
-		fTarget = new EMessenger(target);
+		fTarget = new BMessenger(target);
 		if(fTarget == NULL || fTarget->IsValid() == false) return;
 	}
 	if(replyTo.IsValid())
 	{
-		fReplyTo = new EMessenger(replyTo);
+		fReplyTo = new BMessenger(replyTo);
 		if(fReplyTo == NULL || fReplyTo->IsValid() == false) return;
 	}
 	fInterval = interval;
 	fCount = count;
 
-	ELocker *hLocker = etk_get_handler_operator_locker();
-	EAutolock <ELocker>autolock(hLocker);
+	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BAutolock <BLocker>autolock(hLocker);
 
-	eint32 token = EApplication::sRunnerList.IndexOf(NULL);
+	b_int32 token = BApplication::sRunnerList.IndexOf(NULL);
 	if(token >= 0)
 	{
-		if(EApplication::sRunnerList.ReplaceItem(token, this) == false) return;
+		if(BApplication::sRunnerList.ReplaceItem(token, this) == false) return;
 		fToken = token;
 	}
 	else
 	{
-		if(EApplication::sRunnerList.AddItem(this) == false) return;
-		fToken = EApplication::sRunnerList.CountItems() - 1;
+		if(BApplication::sRunnerList.AddItem(this) == false) return;
+		fToken = BApplication::sRunnerList.CountItems() - 1;
 	}
 
-	if(fCount != 0 && fInterval > E_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && etk_app != NULL)
+	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi_app != NULL)
 	{
-		EApplication::sRunnerMinimumInterval = E_INT64_CONSTANT(-1);
-		etk_app->PostMessage(_EVENTS_PENDING_, etk_app);
+		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
+		bhapi_app->PostMessage(_EVENTS_PENDING_, bhapi_app);
 	}
 }
 
 
-EMessageRunner::~EMessageRunner()
+BMessageRunner::~BMessageRunner()
 {
-	ELocker *hLocker = etk_get_handler_operator_locker();
-	EAutolock <ELocker>autolock(hLocker);
+	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BAutolock <BLocker>autolock(hLocker);
 
 	if(fToken >= 0)
 	{
 		void *oldItem = NULL;
-		bool removed = (fToken == EApplication::sRunnerList.CountItems() - 1 ?
-					(EApplication::sRunnerList.RemoveItem(fToken) == (void*)this) :
-					!(EApplication::sRunnerList.ReplaceItem(fToken, NULL, &oldItem) == false || oldItem != (void*)this));
+		bool removed = (fToken == BApplication::sRunnerList.CountItems() - 1 ?
+					(BApplication::sRunnerList.RemoveItem(fToken) == (void*)this) :
+					!(BApplication::sRunnerList.ReplaceItem(fToken, NULL, &oldItem) == false || oldItem != (void*)this));
 		if(!removed)
-			ETK_ERROR("[APP]: %s --- Unable to remove runner, it must something error.", __PRETTY_FUNCTION__);
+			BHAPI_ERROR("[APP]: %s --- Unable to remove runner, it must something error.", __PRETTY_FUNCTION__);
 	}
 	if(fTarget) delete fTarget;
 	if(fReplyTo) delete fReplyTo;
@@ -136,27 +136,27 @@ EMessageRunner::~EMessageRunner()
 
 
 bool
-EMessageRunner::IsValid() const
+BMessageRunner::IsValid() const
 {
 	return(fToken >= 0);
 }
 
 
-e_status_t
-EMessageRunner::SetTarget(const EMessenger &target)
+b_status_t
+BMessageRunner::SetTarget(const BMessenger &target)
 {
-	if(fToken < 0) return E_ERROR;
+	if(fToken < 0) return B_ERROR;
 
-	ELocker *hLocker = etk_get_handler_operator_locker();
-	EAutolock <ELocker>autolock(hLocker);
+	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BAutolock <BLocker>autolock(hLocker);
 
 	if(target.IsValid())
 	{
-		EMessenger *msgr = new EMessenger(target);
+		BMessenger *msgr = new BMessenger(target);
 		if(msgr == NULL || msgr->IsValid() == false)
 		{
 			if(msgr) delete msgr;
-			return E_ERROR;
+			return B_ERROR;
 		}
 		if(fTarget) delete fTarget;
 		fTarget = msgr;
@@ -167,34 +167,34 @@ EMessageRunner::SetTarget(const EMessenger &target)
 		fTarget = NULL;
 	}
 
-	fPrevSendTime = E_INT64_CONSTANT(-1);
+	fPrevSendTime = B_INT64_CONSTANT(-1);
 
-	if(fCount != 0 && fInterval > E_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && etk_app != NULL)
+	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi_app != NULL)
 	{
-		EApplication::sRunnerMinimumInterval = E_INT64_CONSTANT(-1);
-		etk_app->PostMessage(_EVENTS_PENDING_, etk_app);
+		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
+		bhapi_app->PostMessage(_EVENTS_PENDING_, bhapi_app);
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EMessageRunner::SetReplyTo(const EMessenger &replyTo)
+b_status_t
+BMessageRunner::SetReplyTo(const BMessenger &replyTo)
 {
-	if(fToken < 0) return E_ERROR;
+	if(fToken < 0) return B_ERROR;
 
-	ELocker *hLocker = etk_get_handler_operator_locker();
-	EAutolock <ELocker>autolock(hLocker);
+	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BAutolock <BLocker>autolock(hLocker);
 
 	if(replyTo.IsValid())
 	{
-		EMessenger *msgr = new EMessenger(replyTo);
+		BMessenger *msgr = new BMessenger(replyTo);
 		if(msgr == NULL || msgr->IsValid() == false)
 		{
 			if(msgr) delete msgr;
-			return E_ERROR;
+			return B_ERROR;
 		}
 		if(fReplyTo) delete fReplyTo;
 		fReplyTo = msgr;
@@ -205,110 +205,110 @@ EMessageRunner::SetReplyTo(const EMessenger &replyTo)
 		fReplyTo = NULL;
 	}
 
-	fPrevSendTime = E_INT64_CONSTANT(-1);
+	fPrevSendTime = B_INT64_CONSTANT(-1);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EMessageRunner::SetMessage(const EMessage *msg)
+b_status_t
+BMessageRunner::SetMessage(const BMessage *msg)
 {
-	EMessage *aMsg = NULL;
-	if(fToken < 0 || !(msg == NULL || (aMsg = new EMessage(*msg)) != NULL)) return E_ERROR;
+	BMessage *aMsg = NULL;
+	if(fToken < 0 || !(msg == NULL || (aMsg = new BMessage(*msg)) != NULL)) return B_ERROR;
 
-	ELocker *hLocker = etk_get_handler_operator_locker();
-	EAutolock <ELocker>autolock(hLocker);
+	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BAutolock <BLocker>autolock(hLocker);
 
 	if(fMessage) delete fMessage;
 	fMessage = aMsg;
 
-	fPrevSendTime = E_INT64_CONSTANT(-1);
+	fPrevSendTime = B_INT64_CONSTANT(-1);
 
-	if(fCount != 0 && fInterval > E_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && etk_app != NULL)
+	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi_app != NULL)
 	{
-		EApplication::sRunnerMinimumInterval = E_INT64_CONSTANT(-1);
-		etk_app->PostMessage(_EVENTS_PENDING_, etk_app);
+		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
+		bhapi_app->PostMessage(_EVENTS_PENDING_, bhapi_app);
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EMessageRunner::SetInterval(e_bigtime_t interval)
+b_status_t
+BMessageRunner::SetInterval(b_bigtime_t interval)
 {
-	if(fToken < 0) return E_ERROR;
+	if(fToken < 0) return B_ERROR;
 
-	ELocker *hLocker = etk_get_handler_operator_locker();
-	EAutolock <ELocker>autolock(hLocker);
+	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BAutolock <BLocker>autolock(hLocker);
 
 	fInterval = interval;
-	fPrevSendTime = E_INT64_CONSTANT(-1);
+	fPrevSendTime = B_INT64_CONSTANT(-1);
 
-	if(fCount != 0 && fInterval > E_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && etk_app != NULL)
+	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi_app != NULL)
 	{
-		EApplication::sRunnerMinimumInterval = E_INT64_CONSTANT(-1);
-		etk_app->PostMessage(_EVENTS_PENDING_, etk_app);
+		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
+		bhapi_app->PostMessage(_EVENTS_PENDING_, bhapi_app);
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EMessageRunner::SetCount(eint32 count)
+b_status_t
+BMessageRunner::SetCount(b_int32 count)
 {
-	if(fToken < 0) return E_ERROR;
+	if(fToken < 0) return B_ERROR;
 
-	ELocker *hLocker = etk_get_handler_operator_locker();
-	EAutolock <ELocker>autolock(hLocker);
+	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BAutolock <BLocker>autolock(hLocker);
 
 	fCount = count;
-	fPrevSendTime = E_INT64_CONSTANT(-1);
+	fPrevSendTime = B_INT64_CONSTANT(-1);
 
-	if(fCount != 0 && fInterval > E_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && etk_app != NULL)
+	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi_app != NULL)
 	{
-		EApplication::sRunnerMinimumInterval = E_INT64_CONSTANT(-1);
-		etk_app->PostMessage(_EVENTS_PENDING_, etk_app);
+		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
+		bhapi_app->PostMessage(_EVENTS_PENDING_, bhapi_app);
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EMessageRunner::GetInfo(e_bigtime_t *interval, eint32 *count) const
+b_status_t
+BMessageRunner::GetInfo(b_bigtime_t *interval, b_int32 *count) const
 {
-	if(fToken < 0 || (!interval && !count)) return E_ERROR;
+	if(fToken < 0 || (!interval && !count)) return B_ERROR;
 
-	ELocker *hLocker = etk_get_handler_operator_locker();
-	EAutolock <ELocker>autolock(hLocker);
+	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BAutolock <BLocker>autolock(hLocker);
 
 	if(interval) *interval = fInterval;
 	if(count) *count = fCount;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EMessageRunner::GetInfo(EMessenger *target, EMessage *msg, e_bigtime_t *interval, eint32 *count, EMessenger *replyTo) const
+b_status_t
+BMessageRunner::GetInfo(BMessenger *target, BMessage *msg, b_bigtime_t *interval, b_int32 *count, BMessenger *replyTo) const
 {
-	if(fToken < 0 || (!target && !msg && interval && !count && !replyTo)) return E_ERROR;
+	if(fToken < 0 || (!target && !msg && interval && !count && !replyTo)) return B_ERROR;
 
-	ELocker *hLocker = etk_get_handler_operator_locker();
-	EAutolock <ELocker>autolock(hLocker);
+	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BAutolock <BLocker>autolock(hLocker);
 
-	if(target) *target = (fTarget ? *fTarget : EMessenger());
-	if(replyTo) *replyTo = (fReplyTo ? *fReplyTo : EMessenger());
+	if(target) *target = (fTarget ? *fTarget : BMessenger());
+	if(replyTo) *replyTo = (fReplyTo ? *fReplyTo : BMessenger());
 	if(msg) {msg->MakeEmpty(); msg->what = 0; if(fMessage) *msg = *fMessage;}
 	if(interval) *interval = fInterval;
 	if(count) *count = fCount;
 
-	return E_OK;
+	return B_OK;
 }
 

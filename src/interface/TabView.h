@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,27 +27,27 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_TAB_VIEW_H__
-#define __ETK_TAB_VIEW_H__
+#ifndef __BHAPI_TAB_VIEW_H__
+#define __BHAPI_TAB_VIEW_H__
 
 #include "./../support/List.h"
 #include "./../interface/View.h"
 
 typedef enum {
-	E_TAB_FIRST = 0,
-	E_TAB_FRONT,
-	E_TAB_ANY
-} e_tab_position;
+    B_TAB_FIRST = 0,
+    B_TAB_FRONT,
+    B_TAB_ANY
+} b_tab_position;
 
 #ifdef __cplusplus /* Just for C++ */
 
-class ETabView;
+class BTabView;
 
 
-class _IMPEXP_ETK ETab : public EArchivable {
+class _IMPEXP_BHAPI BTab : public BArchivable {
 public:
-	ETab(EView *targetView = NULL);
-	virtual ~ETab();
+    BTab(BView *targetView = NULL);
+    virtual ~BTab();
 
 	virtual void		SetLabel(const char *label);
 	const char		*Label() const;
@@ -63,75 +63,75 @@ public:
 	bool			IsFocus() const;
 
 	// SetView: the old targetView will be destructed automatically if you assigned "oldTargetView" to be NULL.
-	virtual bool		SetView(EView *targetView, EView **oldTargetView = NULL);
-	EView			*View() const;
+	virtual bool		SetView(BView *targetView, BView **oldTargetView = NULL);
+	BView			*View() const;
 
-	ETabView		*TabView() const;
+    BTabView		*TabView() const;
 
-	virtual void		DrawFocusMark(EView* owner, ERect frame);
-	virtual void		DrawLabel(EView* owner, ERect frame);
-	virtual void		DrawTab(EView* owner, ERect frame, e_tab_position position, bool full = true);
+	virtual void		DrawFocusMark(BView* owner, BRect frame);
+	virtual void		DrawLabel(BView* owner, BRect frame);
+	virtual void		DrawTab(BView* owner, BRect frame, b_tab_position position, bool full = true);
 
 private:
-	friend class ETabView;
+    friend class BTabView;
 
 	char *fLabel;
 	bool fEnabled;
 	bool fFocus;
 
-	EView *fView;
-	ETabView *fOwner;
+	BView *fView;
+    BTabView *fOwner;
 };
 
 
-class _IMPEXP_ETK ETabView : public EView {
+class _IMPEXP_BHAPI BTabView : public BView {
 public:
-	ETabView(ERect frame, const char *name,
-		 e_button_width tabWidth = E_WIDTH_AS_USUAL,
-		 euint32 resizeMode = E_FOLLOW_ALL,
-		 euint32 flags = E_WILL_DRAW | E_NAVIGABLE_JUMP | E_FRAME_EVENTS | E_NAVIGABLE);
-	virtual ~ETabView();
+    BTabView(BRect frame, const char *name,
+		 b_button_width tabWidth = B_WIDTH_AS_USUAL,
+         b_uint32 resizeMode = B_FOLLOW_ALL,
+         b_uint32 flags = B_WILL_DRAW | B_NAVIGABLE_JUMP | B_FRAME_EVENTS | B_NAVIGABLE);
+    virtual ~BTabView();
 
-	virtual void		Select(eint32 tabIndex);
-	eint32			Selection() const;
+    virtual void		Select(b_int32 tabIndex);
+    b_int32			Selection() const;
 
-	virtual bool		AddTab(EView *tabTargetView, ETab *tab = NULL);
-	virtual ETab		*RemoveTab(eint32 tabIndex);
+    virtual bool		AddTab(BView *tabTargetView, BTab *tab = NULL);
+    virtual BTab		*RemoveTab(b_int32 tabIndex);
 
-	eint32			CountTabs() const;
-	ETab			*TabAt(eint32 tabIndex) const;
-	eint32			TabIndexOf(const ETab *tab) const;
-	EView			*ViewForTab(eint32 tabIndex) const;
-	EView			*ContainerView() const;
+    b_int32			CountTabs() const;
+    BTab			*TabAt(b_int32 tabIndex) const;
+    b_int32			TabIndexOf(const BTab *tab) const;
+    BView			*ViewForTab(b_int32 tabIndex) const;
+	BView			*ContainerView() const;
 
-	virtual ERect		TabFrame(eint32 tabIndex) const;
-	virtual ERect		DrawTabs();
-	virtual void		DrawBox(ERect selTabRect);
+    virtual BRect		TabFrame(b_int32 tabIndex) const;
+	virtual BRect		DrawTabs();
+	virtual void		DrawBox(BRect selTabRect);
 
-	virtual void		SetTabWidth(e_button_width tabWidth);
-	e_button_width		TabWidth() const;
+    virtual void		SetTabWidth(b_button_width tabWidth);
+	b_button_width		TabWidth() const;
 
 	virtual void		SetTabHeight(float tabHeight);
 	float			TabHeight() const;
 
-	virtual void		Draw(ERect updateRect);
-	virtual void		MouseDown(EPoint where);
+	virtual void		Draw(BRect updateRect);
+	virtual void		MouseDown(BPoint where);
 
 protected:
-	virtual void		ChildRemoving(EView *child);
+	virtual void		ChildRemoving(BView *child);
 
 private:
-	friend class ETab;
+    friend class BTab;
 
-	EList fTabs;
-	e_button_width fTabWidth;
+	BList fTabs;
+	b_button_width fTabWidth;
 	float fTabHeight;
-	eint32 fSelection;
+    b_int32 fSelection;
 
-	EView *fContainer;
+	BView *fContainer;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_TAB_VIEW_H__ */
+#endif /* __BHAPI_TAB_VIEW_H__ */
 

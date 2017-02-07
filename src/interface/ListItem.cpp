@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,7 +24,7 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: ListItem.cpp
- * Description: EListItem --- item for EListView/EOutlineListView
+ * Description: BListItem --- item for BListView/BOutlineListView
  *
  * --------------------------------------------------------------------------*/
 
@@ -34,8 +34,8 @@
 #include "OutlineListView.h"
 
 
-EListItem::EListItem(euint32 outlineLevel, bool expanded, euint32 flags)
-	: EArchivable(), fOwner(NULL), fFullOwner(NULL),
+BListItem::BListItem(b_uint32 outlineLevel, bool expanded, b_uint32 flags)
+	: BArchivable(), fOwner(NULL), fFullOwner(NULL),
 	  fWidth(-1), fHeight(-1), fSelected(false), fEnabled(true)
 {
 	fLevel = outlineLevel;
@@ -44,57 +44,57 @@ EListItem::EListItem(euint32 outlineLevel, bool expanded, euint32 flags)
 }
 
 
-EListItem::~EListItem()
+BListItem::~BListItem()
 {
-	if(fFullOwner != NULL) fFullOwner->EOutlineListView::RemoveItem(this, false);
-	else if(fOwner != NULL) fOwner->EListView::RemoveItem(this, false);
+	if(fFullOwner != NULL) fFullOwner->BOutlineListView::RemoveItem(this, false);
+	else if(fOwner != NULL) fOwner->BListView::RemoveItem(this, false);
 }
 
 
-EListItem::EListItem(EMessage *from)
-	: EArchivable(from), fOwner(NULL), fFullOwner(NULL),
+BListItem::BListItem(BMessage *from)
+	: BArchivable(from), fOwner(NULL), fFullOwner(NULL),
 	  fLevel(0), fExpanded(true), fWidth(-1), fHeight(-1), fSelected(false), fEnabled(true)
 {
 }
 
 
-e_status_t
-EListItem::Archive(EMessage *into, bool deep) const
+b_status_t
+BListItem::Archive(BMessage *into, bool deep) const
 {
-	if(!into) return E_ERROR;
+	if(!into) return B_ERROR;
 
-	EArchivable::Archive(into, deep);
-	into->AddString("class", "EListItem");
+	BArchivable::Archive(into, deep);
+	into->AddString("class", "BListItem");
 
 	// TODO
 
-	return E_OK;
+	return B_OK;
 }
 
 
 float
-EListItem::Height() const
+BListItem::Height() const
 {
 	return fHeight;
 }
 
 
 float
-EListItem::Width() const
+BListItem::Width() const
 {
 	return fWidth;
 }
 
 
 bool
-EListItem::IsSelected() const
+BListItem::IsSelected() const
 {
 	return fSelected;
 }
 
 
 void
-EListItem::Select()
+BListItem::Select()
 {
 	if(fOwner == NULL) return;
 	fOwner->Select(fOwner->IndexOf(this));
@@ -102,7 +102,7 @@ EListItem::Select()
 
 
 void
-EListItem::Deselect()
+BListItem::Deselect()
 {
 	if(fOwner == NULL) return;
 	fOwner->Deselect(fOwner->IndexOf(this));
@@ -110,21 +110,21 @@ EListItem::Deselect()
 
 
 void
-EListItem::SetEnabled(bool state)
+BListItem::SetEnabled(bool state)
 {
 	fEnabled = state;
 }
 
 
 bool
-EListItem::IsEnabled() const
+BListItem::IsEnabled() const
 {
 	return fEnabled;
 }
 
 
 void
-EListItem::SetHeight(float height)
+BListItem::SetHeight(float height)
 {
 	if(height < 0) return;
 	fHeight = height;
@@ -132,7 +132,7 @@ EListItem::SetHeight(float height)
 
 
 void
-EListItem::SetWidth(float width)
+BListItem::SetWidth(float width)
 {
 	if(width < 0) return;
 	fWidth = width;
@@ -140,14 +140,14 @@ EListItem::SetWidth(float width)
 
 
 bool
-EListItem::IsExpanded() const
+BListItem::IsExpanded() const
 {
 	return fExpanded;
 }
 
 
 void
-EListItem::SetExpanded(bool state)
+BListItem::SetExpanded(bool state)
 {
 	if(fFullOwner == NULL)
 	{
@@ -162,15 +162,15 @@ EListItem::SetExpanded(bool state)
 }
 
 
-euint32
-EListItem::OutlineLevel() const
+b_uint32
+BListItem::OutlineLevel() const
 {
 	return fLevel;
 }
 
 
 void
-EListItem::Invalidate()
+BListItem::Invalidate()
 {
 	if(fOwner == NULL) return;
 	fOwner->InvalidateItem(fOwner->IndexOf(this));
@@ -178,32 +178,32 @@ EListItem::Invalidate()
 
 
 bool
-EListItem::IsVisible() const
+BListItem::IsVisible() const
 {
 	if(fFullOwner == NULL) return false;
-	EListItem *superitem = fFullOwner->Superitem(this);
+	BListItem *superitem = fFullOwner->Superitem(this);
 	if(superitem == NULL) return true;
 	if(superitem->fExpanded == false) return false;
 	return superitem->IsVisible();
 }
 
 
-EListItem*
-EListItem::SuperItem() const
+BListItem*
+BListItem::SuperItem() const
 {
 	return(fFullOwner == NULL ? NULL : fFullOwner->Superitem(this));
 }
 
 
 bool
-EListItem::HasSubitems() const
+BListItem::HasSubitems() const
 {
 	return(fFullOwner == NULL ? false : fFullOwner->HasSubitems(this));
 }
 
 
 void
-EListItem::DrawLeader(EView *owner, ERect *itemRect)
+BListItem::DrawLeader(BView *owner, BRect *itemRect)
 {
 	if(fFullOwner == NULL || owner == NULL || itemRect == NULL || itemRect->IsValid() == false) return;
 
@@ -212,14 +212,14 @@ EListItem::DrawLeader(EView *owner, ERect *itemRect)
 
 	if(HasSubitems())
 	{
-		ERect rect(*itemRect);
+		BRect rect(*itemRect);
 		rect.right = rect.left + rect.Height();
 		rect.InsetBy(2.f, 2.f);
 
 		if(fExpanded)
-			owner->FillTriangle(rect.LeftTop(), rect.RightTop(), rect.LeftBottom() + EPoint(rect.Width() / 2.f, 0));
+			owner->FillTriangle(rect.LeftTop(), rect.RightTop(), rect.LeftBottom() + BPoint(rect.Width() / 2.f, 0));
 		else
-			owner->FillTriangle(rect.LeftTop(), rect.LeftBottom(), rect.RightTop() + EPoint(0, rect.Height() / 2.f));
+			owner->FillTriangle(rect.LeftTop(), rect.LeftBottom(), rect.RightTop() + BPoint(0, rect.Height() / 2.f));
 
 		itemRect->left += itemRect->Height();
 	}
@@ -227,7 +227,7 @@ EListItem::DrawLeader(EView *owner, ERect *itemRect)
 
 
 void
-EListItem::GetLeaderSize(float *width, float *height) const
+BListItem::GetLeaderSize(float *width, float *height) const
 {
 	if(width) *width = 0;
 	if(height) *height = fHeight;
@@ -241,67 +241,67 @@ EListItem::GetLeaderSize(float *width, float *height) const
 
 
 void
-EListItem::SetFlags(euint32 flags)
+BListItem::SetFlags(b_uint32 flags)
 {
 	fFlags = flags;
 }
 
 
-euint32
-EListItem::Flags() const
+b_uint32
+BListItem::Flags() const
 {
 	return fFlags;
 }
 
 
 void
-EListItem::MouseDown(EView *owner, EPoint where)
+BListItem::MouseDown(BView *owner, BPoint where)
 {
 }
 
 
 void
-EListItem::MouseUp(EView *owner, EPoint where)
+BListItem::MouseUp(BView *owner, BPoint where)
 {
 }
 
 
 void
-EListItem::MouseMoved(EView *owner, EPoint where, euint32 code, const EMessage *a_message)
+BListItem::MouseMoved(BView *owner, BPoint where, b_uint32 code, const BMessage *a_message)
 {
 }
 
 
 void
-EListItem::KeyDown(EView *owner, const char *bytes, eint32 numBytes)
+BListItem::KeyDown(BView *owner, const char *bytes, b_int32 numBytes)
 {
 }
 
 
 void
-EListItem::KeyUp(EView *owner, const char *bytes, eint32 numBytes)
+BListItem::KeyUp(BView *owner, const char *bytes, b_int32 numBytes)
 {
 }
 
 
-EStringItem::EStringItem(const char *text, euint32 outlineLevel, bool expanded)
-	: EListItem(outlineLevel, expanded, 0), fText(NULL)
+StringItem::StringItem(const char *text, b_uint32 outlineLevel, bool expanded)
+	: BListItem(outlineLevel, expanded, 0), fText(NULL)
 {
-	if(text) fText = EStrdup(text);
+	if(text) fText = b_strdup(text);
 }
 
 
-EStringItem::~EStringItem()
+StringItem::~StringItem()
 {
 	if(fText) delete[] fText;
 }
 
 
 void
-EStringItem::DrawItem(EView *owner, ERect itemRect, bool drawEverything)
+StringItem::DrawItem(BView *owner, BRect itemRect, bool drawEverything)
 {
-	e_rgb_color bkColor = (IsSelected() ? e_ui_color(E_DOCUMENT_HIGHLIGHT_COLOR): owner->ViewColor());
-	e_rgb_color fgColor = e_ui_color(E_DOCUMENT_TEXT_COLOR);
+	b_rgb_color bkColor = (IsSelected() ? b_ui_color(B_DOCUMENT_HIGHLIGHT_COLOR): owner->ViewColor());
+	b_rgb_color fgColor = b_ui_color(B_DOCUMENT_TEXT_COLOR);
 
 	if(!IsEnabled())
 	{
@@ -323,12 +323,12 @@ EStringItem::DrawItem(EView *owner, ERect itemRect, bool drawEverything)
 
 	if(fText)
 	{
-		e_font_height fontHeight;
+		b_font_height fontHeight;
 		owner->GetFontHeight(&fontHeight);
 
 		float sHeight = fontHeight.ascent + fontHeight.descent;
 
-		EPoint penLocation;
+		BPoint penLocation;
 		penLocation.x = itemRect.left;
 		penLocation.y = itemRect.Center().y - sHeight / 2.f;
 		penLocation.y += fontHeight.ascent + 1;
@@ -339,9 +339,9 @@ EStringItem::DrawItem(EView *owner, ERect itemRect, bool drawEverything)
 
 
 void
-EStringItem::Update(EView *owner, const EFont *font)
+StringItem::Update(BView *owner, const BFont *font)
 {
-	e_font_height fontHeight;
+	b_font_height fontHeight;
 	font->GetHeight(&fontHeight);
 	SetHeight(fontHeight.ascent + fontHeight.descent);
 
@@ -353,15 +353,15 @@ EStringItem::Update(EView *owner, const EFont *font)
 
 
 void
-EStringItem::SetText(const char *text)
+StringItem::SetText(const char *text)
 {
 	if(fText) delete[] fText;
-	fText = (text == NULL ? NULL : EStrdup(text));
+	fText = (text == NULL ? NULL : b_strdup(text));
 }
 
 
 const char*
-EStringItem::Text() const
+StringItem::Text() const
 {
 	return fText;
 }

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -29,27 +29,27 @@
 
 #include <stdlib.h>
 
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 #include "./../support/StringArray.h"
 
 #include "SimpleXmlParser.h"
 
 
-typedef struct etk_xml_attribute {
+typedef struct bhapi_xml_attribute {
 	char *name;
 	char *content;
-} etk_xml_attribute;
+} bhapi_xml_attribute;
 
 
-ESimpleXmlNode::ESimpleXmlNode(const char *name, const char *content)
+BSimpleXmlNode::BSimpleXmlNode(const char *name, const char *content)
 	: fName(NULL), fContent(NULL), fSuperNode(NULL)
 {
-	if(name) fName = EStrdup(name);
-	if(content) fContent = EStrdup(content);
+	if(name) fName = b_strdup(name);
+	if(content) fContent = b_strdup(content);
 }
 
 
-ESimpleXmlNode::~ESimpleXmlNode()
+BSimpleXmlNode::~BSimpleXmlNode()
 {
 	if(fSuperNode != NULL) fSuperNode->RemoveNode(this);
 
@@ -58,7 +58,7 @@ ESimpleXmlNode::~ESimpleXmlNode()
 
 	while(fAttributes.CountItems() > 0)
 	{
-		etk_xml_attribute* attr = (etk_xml_attribute*)fAttributes.RemoveItem((eint32)0);
+		bhapi_xml_attribute* attr = (bhapi_xml_attribute*)fAttributes.RemoveItem((b_int32)0);
 		if(attr == NULL) continue;
 		if(attr->name) delete[] attr->name;
 		if(attr->content) delete [] attr->content;
@@ -67,7 +67,7 @@ ESimpleXmlNode::~ESimpleXmlNode()
 
 	while(fNodes.CountItems() > 0)
 	{
-		ESimpleXmlNode* node = (ESimpleXmlNode*)fNodes.RemoveItem((eint32)0);
+		BSimpleXmlNode* node = (BSimpleXmlNode*)fNodes.RemoveItem((b_int32)0);
 		if(node == NULL) continue;
 		delete node;
 	}
@@ -75,36 +75,36 @@ ESimpleXmlNode::~ESimpleXmlNode()
 
 
 const char*
-ESimpleXmlNode::Name() const
+BSimpleXmlNode::Name() const
 {
 	return fName;
 }
 
 
 const char*
-ESimpleXmlNode::Content() const
+BSimpleXmlNode::Content() const
 {
 	return fContent;
 }
 
 
 const char*
-ESimpleXmlNode::AttributeAt(eint32 index, const char** attr_content) const
+BSimpleXmlNode::AttributeAt(b_int32 index, const char** attr_content) const
 {
-	etk_xml_attribute* attr = (etk_xml_attribute*)fAttributes.ItemAt(index);
+	bhapi_xml_attribute* attr = (bhapi_xml_attribute*)fAttributes.ItemAt(index);
 	if(attr == NULL) return NULL;
 	if(attr_content) *attr_content = attr->content;
 	return attr->name;
 }
 
 
-eint32
-ESimpleXmlNode::FindAttribute(const char *name, eint32 fromIndex) const
+b_int32
+BSimpleXmlNode::FindAttribute(const char *name, b_int32 fromIndex) const
 {
 	if(name == NULL || *name == 0 || fromIndex < 0 || fromIndex >= fAttributes.CountItems()) return -1;
-	for(eint32 i = fromIndex; i < fAttributes.CountItems(); i++)
+	for(b_int32 i = fromIndex; i < fAttributes.CountItems(); i++)
 	{
-		etk_xml_attribute* attr = (etk_xml_attribute*)fAttributes.ItemAt(i);
+		bhapi_xml_attribute* attr = (bhapi_xml_attribute*)fAttributes.ItemAt(i);
 		if(attr == NULL) continue;
 		if(attr->name == NULL) continue;
 		if(strlen(attr->name) != strlen(name)) continue;
@@ -114,20 +114,20 @@ ESimpleXmlNode::FindAttribute(const char *name, eint32 fromIndex) const
 }
 
 
-ESimpleXmlNode*
-ESimpleXmlNode::NodeAt(eint32 index) const
+BSimpleXmlNode*
+BSimpleXmlNode::NodeAt(b_int32 index) const
 {
-	return((ESimpleXmlNode*)fNodes.ItemAt(index));
+	return((BSimpleXmlNode*)fNodes.ItemAt(index));
 }
 
 
-eint32
-ESimpleXmlNode::FindNode(const char *name, eint32 fromIndex) const
+b_int32
+BSimpleXmlNode::FindNode(const char *name, b_int32 fromIndex) const
 {
 	if(name == NULL || *name == 0 || fromIndex < 0 || fromIndex >= fNodes.CountItems()) return -1;
-	for(eint32 i = fromIndex; i < fNodes.CountItems(); i++)
+	for(b_int32 i = fromIndex; i < fNodes.CountItems(); i++)
 	{
-		ESimpleXmlNode* node = (ESimpleXmlNode*)fNodes.ItemAt(i);
+		BSimpleXmlNode* node = (BSimpleXmlNode*)fNodes.ItemAt(i);
 		if(node == NULL) continue;
 		if(node->fName == NULL) continue;
 		if(strlen(node->fName) != strlen(name)) continue;
@@ -138,36 +138,36 @@ ESimpleXmlNode::FindNode(const char *name, eint32 fromIndex) const
 
 
 void
-ESimpleXmlNode::SetName(const char *name)
+BSimpleXmlNode::SetName(const char *name)
 {
 	if(fName) delete[] fName;
-	fName = (name == NULL ? NULL : EStrdup(name));
+	fName = (name == NULL ? NULL : b_strdup(name));
 }
 
 
 void
-ESimpleXmlNode::SetContent(const char *content)
+BSimpleXmlNode::SetContent(const char *content)
 {
 	if(fContent) delete[] fContent;
-	fContent = (content == NULL ? NULL : EStrdup(content));
+	fContent = (content == NULL ? NULL : b_strdup(content));
 }
 
 
 bool
-ESimpleXmlNode::AddAttribute(const char *name, const char *content, bool replace_content)
+BSimpleXmlNode::AddAttribute(const char *name, const char *content, bool replace_content)
 {
 	if(name == NULL || *name == 0) return false;
-	eint32 index = FindAttribute(name);
+	b_int32 index = FindAttribute(name);
 	if(index >= 0)
 	{
 		if(replace_content == false) return false;
-		etk_xml_attribute* attr = (etk_xml_attribute*)fAttributes.ItemAt(index);
+		bhapi_xml_attribute* attr = (bhapi_xml_attribute*)fAttributes.ItemAt(index);
 		if(attr->content) delete[] attr->content;
-		attr->content = (content == NULL ? NULL : EStrdup(content));
+		attr->content = (content == NULL ? NULL : b_strdup(content));
 		return true;
 	}
 
-	etk_xml_attribute* attr = new etk_xml_attribute;
+	bhapi_xml_attribute* attr = new bhapi_xml_attribute;
 	if(attr == NULL) return false;
 
 	if(fAttributes.AddItem(attr) == false)
@@ -176,19 +176,19 @@ ESimpleXmlNode::AddAttribute(const char *name, const char *content, bool replace
 		return false;
 	}
 
-	attr->name = EStrdup(name);
-	attr->content = (content == NULL ? NULL : EStrdup(content));
+	attr->name = b_strdup(name);
+	attr->content = (content == NULL ? NULL : b_strdup(content));
 
 	return true;
 }
 
 
 bool
-ESimpleXmlNode::RemoveAttribute(const char *name)
+BSimpleXmlNode::RemoveAttribute(const char *name)
 {
-	eint32 index = FindAttribute(name);
+	b_int32 index = FindAttribute(name);
 	if(index < 0) return false;
-	etk_xml_attribute* attr = (etk_xml_attribute*)fAttributes.RemoveItem(index);
+	bhapi_xml_attribute* attr = (bhapi_xml_attribute*)fAttributes.RemoveItem(index);
 	if(attr == NULL) return false;
 
 	if(attr->name) delete[] attr->name;
@@ -200,7 +200,7 @@ ESimpleXmlNode::RemoveAttribute(const char *name)
 
 
 bool
-ESimpleXmlNode::AddNode(ESimpleXmlNode *node, eint32 atIndex)
+BSimpleXmlNode::AddNode(BSimpleXmlNode *node, b_int32 atIndex)
 {
 	if(node == NULL || node->fSuperNode != NULL) return false;
 
@@ -213,7 +213,7 @@ ESimpleXmlNode::AddNode(ESimpleXmlNode *node, eint32 atIndex)
 
 
 bool
-ESimpleXmlNode::RemoveNode(ESimpleXmlNode *node)
+BSimpleXmlNode::RemoveNode(BSimpleXmlNode *node)
 {
 	if(node == NULL || node->fSuperNode != this) return false;
 
@@ -226,63 +226,63 @@ ESimpleXmlNode::RemoveNode(ESimpleXmlNode *node)
 
 
 bool
-ESimpleXmlNode::RemoveSelf()
+BSimpleXmlNode::RemoveSelf()
 {
 	if(fSuperNode == NULL) return false;
 	return fSuperNode->RemoveNode(this);
 }
 
 
-eint32
-ESimpleXmlNode::CountAttributes() const
+b_int32
+BSimpleXmlNode::CountAttributes() const
 {
 	return fAttributes.CountItems();
 }
 
 
-eint32
-ESimpleXmlNode::CountNodes() const
+b_int32
+BSimpleXmlNode::CountNodes() const
 {
 	return fNodes.CountItems();
 }
 
 
-ESimpleXmlNode*
-ESimpleXmlNode::SuperNode() const
+BSimpleXmlNode*
+BSimpleXmlNode::SuperNode() const
 {
 	return fSuperNode;
 }
 
 
 void
-ESimpleXmlNode::PrintToStream() const
+BSimpleXmlNode::PrintToStream() const
 {
-	eint32 nSuperNode = 0;
-	const ESimpleXmlNode *node = fSuperNode;
+	b_int32 nSuperNode = 0;
+	const BSimpleXmlNode *node = fSuperNode;
 	if(node) {nSuperNode++; while((node = node->fSuperNode) != NULL) nSuperNode++;}
-	if(nSuperNode == 0) ETK_OUTPUT("======================= ESimpleXmlNode =======================\n");
-	for(eint32 i = 0; i < nSuperNode; i++) ETK_OUTPUT("  ");
-	ETK_OUTPUT("|-- Name: \"%s\", Content: \"%s\"\n", fName ? fName : "[NULL]", fContent ? fContent : "[NULL]");
-	for(eint32 i = 0; i < fAttributes.CountItems(); i++)
+	if(nSuperNode == 0) BHAPI_OUTPUT("======================= BSimpleXmlNode =======================\n");
+	for(b_int32 i = 0; i < nSuperNode; i++) BHAPI_OUTPUT("  ");
+	BHAPI_OUTPUT("|-- Name: \"%s\", Content: \"%s\"\n", fName ? fName : "[NULL]", fContent ? fContent : "[NULL]");
+	for(b_int32 i = 0; i < fAttributes.CountItems(); i++)
 	{
-		etk_xml_attribute* attr = (etk_xml_attribute*)fAttributes.ItemAt(i);
+		bhapi_xml_attribute* attr = (bhapi_xml_attribute*)fAttributes.ItemAt(i);
 		if(attr == NULL) continue;
-		for(eint32 j = 0; j < nSuperNode; j++) ETK_OUTPUT("  ");
-		ETK_OUTPUT("|--(Attribute %d) Name: \"%s\", Content: \"%s\"\n",
+		for(b_int32 j = 0; j < nSuperNode; j++) BHAPI_OUTPUT("  ");
+		BHAPI_OUTPUT("|--(Attribute %d) Name: \"%s\", Content: \"%s\"\n",
 			   i, attr->name ? attr->name : "[NULL]", attr->content ? attr->content : "[NULL]");
 	}
-	for(eint32 i = 0; i < fNodes.CountItems(); i++)
+	for(b_int32 i = 0; i < fNodes.CountItems(); i++)
 	{
-		ESimpleXmlNode* node = (ESimpleXmlNode*)fNodes.ItemAt(i);
+		BSimpleXmlNode* node = (BSimpleXmlNode*)fNodes.ItemAt(i);
 		if(node) node->PrintToStream();
 	}
-	if(nSuperNode == 0) ETK_OUTPUT("==============================================================\n", this);
+	if(nSuperNode == 0) BHAPI_OUTPUT("==============================================================\n", this);
 }
 
 
-inline void remove_unwanted_characters(EString &str)
+inline void remove_unwanted_characters(BString &str)
 {
-	eint32 offset = 0;
+	b_int32 offset = 0;
 	bool quote = false;
 	for(; offset < str.Length(); offset++)
 	{
@@ -340,32 +340,32 @@ inline void remove_unwanted_characters(EString &str)
 }
 
 
-inline bool parse_simple_xml(EString *buffer, eint32 *offset, ESimpleXmlNode *node)
+inline bool parse_simple_xml(BString *buffer, b_int32 *offset, BSimpleXmlNode *node)
 {
 	if(buffer == NULL || offset == NULL || node == NULL || *offset < 0 || *offset >= buffer->Length()) return false;
 
-	eint32 start = buffer->FindFirst("<", *offset) + 1;
+	b_int32 start = buffer->FindFirst("<", *offset) + 1;
 	if(start <= 0) return false;
 	*offset = start;
 
-	eint32 end = buffer->FindFirst(">", start) - 1;
+	b_int32 end = buffer->FindFirst(">", start) - 1;
 	if(end < 0) return false;
 	*offset = end + 2;
 	if(end < start) return false;
 
-	EString str;
+	BString str;
 	buffer->CopyInto(str, start, end - start + 1);
 	remove_unwanted_characters(str);
 
 	if(str.ByteAt(str.Length() - 1) == '/') str.Insert(" ", str.Length() - 1);
 
-//	ETK_DEBUG("[XML]: \"%s\"", str.String());
+//	BHAPI_DEBUG("[XML]: \"%s\"", str.String());
 
 	if(str.Compare("!-- ", 4) == 0)
 	{
 		if(str.FindLast(" --") == str.Length() - 3)
 		{
-			EString tmp;
+			BString tmp;
 			str.CopyInto(tmp, 4, str.Length() - 7);
 
 			tmp.ReplaceAll("&nbsp;", " ");
@@ -376,14 +376,14 @@ inline bool parse_simple_xml(EString *buffer, eint32 *offset, ESimpleXmlNode *no
 			tmp.ReplaceAll("&reg;", "®");
 			tmp.ReplaceAll("&quot;", "\"");
 
-			ESimpleXmlNode *aNode = new ESimpleXmlNode("comment", tmp.String());
+			BSimpleXmlNode *aNode = new BSimpleXmlNode("comment", tmp.String());
 			if(!(aNode == NULL || node->AddNode(aNode))) delete aNode;
 			return true;
 		}
 		return false;
 	}
 
-	EStringArray *array = str.Split(' ');
+	BStringArray *array = str.Split(' ');
 	if(array == NULL) return false;
 
 	bool retVal = false;
@@ -392,17 +392,17 @@ inline bool parse_simple_xml(EString *buffer, eint32 *offset, ESimpleXmlNode *no
 	{
 		if(array->CountItems() < 1) {delete array; break;}
 		if(array->ItemAt(0) == NULL || array->ItemAt(0)->FindFirst('/') >= 0) {delete array; break;}
-		ESimpleXmlNode *aNode = new ESimpleXmlNode(array->ItemAt(0)->String());
+		BSimpleXmlNode *aNode = new BSimpleXmlNode(array->ItemAt(0)->String());
 		if(aNode == NULL) {delete array; break;}
-		for(eint32 i = 1; i < array->CountItems(); i++)
+		for(b_int32 i = 1; i < array->CountItems(); i++)
 		{
 			if(array->ItemAt(i) == NULL) continue;
 			if(array->ItemAt(i)->FindFirst('/') >= 0) continue;
-			eint32 sepIndex = array->ItemAt(i)->FindFirst('=');
+			b_int32 sepIndex = array->ItemAt(i)->FindFirst('=');
 			if(array->ItemAt(i)->FindLast('=') != sepIndex || sepIndex == 0) continue;
 			str.SetTo(array->ItemAt(i)->String(), sepIndex);
 
-			EString attr_content;
+			BString attr_content;
 			array->ItemAt(i)->CopyInto(attr_content, sepIndex + 1, -1);
 			attr_content.RemoveSet("\"\'");
 			attr_content.ReplaceAll("&nbsp;", " ");
@@ -443,7 +443,7 @@ inline bool parse_simple_xml(EString *buffer, eint32 *offset, ESimpleXmlNode *no
 					}
 					else
 					{
-						ESimpleXmlNode *cNode = new ESimpleXmlNode(NULL, str.String());
+						BSimpleXmlNode *cNode = new BSimpleXmlNode(NULL, str.String());
 						if(cNode != NULL) if(aNode->AddNode(cNode) == false) delete cNode;
 					}
 				}
@@ -459,13 +459,13 @@ inline bool parse_simple_xml(EString *buffer, eint32 *offset, ESimpleXmlNode *no
 			buffer->CopyInto(str, start, end - start + 1);
 			remove_unwanted_characters(str);
 
-//			ETK_DEBUG("[XML]: \"%s\"", str.String());
+//			BHAPI_DEBUG("[XML]: \"%s\"", str.String());
 
 			if(str.Length() <= 0 || (str.Length() == 1 && str.ByteAt(0) == ' ')) continue;
 
 			if(str.ByteAt(0) == '/' &&
 			   str.FindLast(aNode->Name()) == 1 &&
-			   str.Length() - (eint32)strlen(aNode->Name()) == 1) break;
+			   str.Length() - (b_int32)strlen(aNode->Name()) == 1) break;
 
 			*offset = start - 1;
 
@@ -481,20 +481,20 @@ inline bool parse_simple_xml(EString *buffer, eint32 *offset, ESimpleXmlNode *no
 }
 
 
-_IMPEXP_ETK e_status_t etk_parse_simple_xml(const char *buf, ESimpleXmlNode *node)
+_IMPEXP_BHAPI b_status_t bhapi_parse_simple_xml(const char *buf, BSimpleXmlNode *node)
 {
-	if(buf == NULL || *buf == 0 || node == NULL) return E_BAD_VALUE;
+	if(buf == NULL || *buf == 0 || node == NULL) return B_BAD_VALUE;
 
-	EString buffer(buf);
-	if(buffer.Length() <= 0) return E_ERROR;
+	BString buffer(buf);
+	if(buffer.Length() <= 0) return B_ERROR;
 
-	eint32 offset = 0;
+	b_int32 offset = 0;
 
 	while(offset < buffer.Length())
 	{
 		if(parse_simple_xml(&buffer, &offset, node) == false) break;
 	}
 
-	return E_OK;
+	return B_OK;
 }
 

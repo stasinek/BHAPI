@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_NET_ADDRESS_H__
-#define __ETK_NET_ADDRESS_H__
+#ifndef __BHAPI_NET_ADDRESS_H__
+#define __BHAPI_NET_ADDRESS_H__
 
 #ifndef _WIN32
 #include <sys/types.h>
@@ -42,41 +42,41 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK ENetAddress : public EArchivable {
+class _IMPEXP_BHAPI BNetAddress : public BArchivable {
 public:
-	ENetAddress(const char *hostname = NULL, euint16 port = 0);
-	ENetAddress(const char *hostname, const char *protocol, const char *service);
-	ENetAddress(const struct sockaddr_in &sa);
-	ENetAddress(const struct in_addr addr, euint16 port = 0);
-	ENetAddress(euint32 addr, euint16 port = 0);
-	ENetAddress(const ENetAddress &from);
-	virtual ~ENetAddress();
+    BNetAddress(const char *hostname = NULL, b_uint16 port = 0);
+    BNetAddress(const char *hostname, const char *protocol, const char *service);
+    BNetAddress(const struct sockaddr_in &sa);
+    BNetAddress(const struct in_addr addr, b_uint16 port = 0);
+    BNetAddress(b_uint32 addr, b_uint16 port = 0);
+    BNetAddress(const BNetAddress &from);
+    virtual ~BNetAddress();
 
 	// Archiving
-	ENetAddress(const EMessage *from);
-	virtual e_status_t Archive(EMessage *into, bool deep = true) const;
-	static EArchivable *Instantiate(const EMessage *from);
+    BNetAddress(const BMessage *from);
+	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+	static BArchivable *Instantiate(const BMessage *from);
 
-	e_status_t	InitCheck() const;
+	b_status_t	InitCheck() const;
 
-	ENetAddress	&operator=(const ENetAddress &addr);
+    BNetAddress	&operator=(const BNetAddress &addr);
 
-	e_status_t	SetTo(const char *hostname, euint16 port = 0);
-	e_status_t	SetTo(const char *hostname, const char *protocol, const char *service);
-	e_status_t	SetTo(const struct sockaddr_in &sa);
-	e_status_t	SetTo(const struct in_addr addr, euint16 port = 0);
-	e_status_t	SetTo(euint32 addr = INADDR_ANY, euint16 port = 0);
+    b_status_t	SetTo(const char *hostname, b_uint16 port = 0);
+	b_status_t	SetTo(const char *hostname, const char *protocol, const char *service);
+	b_status_t	SetTo(const struct sockaddr_in &sa);
+    b_status_t	SetTo(const struct in_addr addr, b_uint16 port = 0);
+    b_status_t	SetTo(b_uint32 addr = INADDR_ANY, b_uint16 port = 0);
 
-	e_status_t	GetAddr(char *hostname, size_t hostname_len, euint16 *port = NULL) const;
-	e_status_t	GetAddr(struct sockaddr_in &sa) const;
-	e_status_t	GetAddr(struct in_addr &addr, euint16 *port = NULL) const;
+    b_status_t	GetAddr(char *hostname, size_t hostname_len, b_uint16 *port = NULL) const;
+	b_status_t	GetAddr(struct sockaddr_in &sa) const;
+    b_status_t	GetAddr(struct in_addr &addr, b_uint16 *port = NULL) const;
 
 private:
 	struct sockaddr_in fAddr;
-	e_status_t fStatus;
+	b_status_t fStatus;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_NET_ADDRESS_H__ */
+#endif /* __BHAPI_NET_ADDRESS_H__ */
 

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -38,27 +38,27 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 
 #include "Path.h"
 
-inline void etk_path_prepend_current_directory(EString &path)
+inline void bhapi_path_prepend_current_directory(BString &path)
 {
-	char buf[E_MAXPATH + 1];
-	bzero(buf, E_MAXPATH + 1);
+	char buf[B_MAXPATH + 1];
+	bzero(buf, B_MAXPATH + 1);
 
 #ifndef _WIN32
-	getcwd(buf, E_MAXPATH);
+	getcwd(buf, B_MAXPATH);
 #else
-	_getcwd(buf, E_MAXPATH);
+	_getcwd(buf, B_MAXPATH);
 
-	EString str(buf);
+	BString str(buf);
 	str.ReplaceAll("\\", "/");
-	bzero(buf, E_MAXPATH + 1);
-	str.CopyInto(buf, E_MAXPATH, 0, -1);
+	bzero(buf, B_MAXPATH + 1);
+	str.CopyInto(buf, B_MAXPATH, 0, -1);
 #endif
 
-	eint32 len = (eint32)strlen(buf);
+	b_int32 len = (b_int32)strlen(buf);
 	if(buf[len - 1] != '/')
 	{
 		buf[len] = '/';
@@ -69,7 +69,7 @@ inline void etk_path_prepend_current_directory(EString &path)
 }
 
 
-inline bool etk_path_do_normalization(EString &path)
+inline bool bhapi_path_do_normalization(BString &path)
 {
 	if(path.Length() <= 0) return false;
 
@@ -80,7 +80,7 @@ inline bool etk_path_do_normalization(EString &path)
 	   !(((path[0] >= 'a' && path[0] <= 'z') || (path[0] >= 'A' && path[0] <= 'Z')) && path[1] == ':'))
 	{
 		retVal = true;
-		etk_path_prepend_current_directory(path);
+		bhapi_path_prepend_current_directory(path);
 	}
 	if(path[0] >= 'a' && path[0] <= 'z')
 	{
@@ -92,7 +92,7 @@ inline bool etk_path_do_normalization(EString &path)
 	if(path[0] != '/')
 	{
 		retVal = true;
-		etk_path_prepend_current_directory(path);
+		bhapi_path_prepend_current_directory(path);
 	}
 #endif
 
@@ -102,11 +102,11 @@ inline bool etk_path_do_normalization(EString &path)
 		path.ReplaceAll("/./", "/");
 	}
 
-	eint32 uponIndex;
+	b_int32 uponIndex;
 	while((uponIndex = path.FindLast("/../")) >= 0)
 	{
 		retVal = true;
-		eint32 tmp = path.FindLast("/", uponIndex - 1);
+		b_int32 tmp = path.FindLast("/", uponIndex - 1);
 		if(tmp < 0)
 			path.MakeEmpty(); // invalid path
 		else
@@ -133,19 +133,19 @@ inline bool etk_path_do_normalization(EString &path)
 }
 
 
-e_status_t etk_path_expound(EString &path, const char *dir, const char *leaf, bool *normalize)
+b_status_t bhapi_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize)
 {
-	EString str(dir);
-	EString str_leaf(leaf);
-	if(str.Length() <= 0) return E_BAD_VALUE;
+	BString str(dir);
+	BString str_leaf(leaf);
+	if(str.Length() <= 0) return B_BAD_VALUE;
 
 #ifdef _WIN32
-	if(str_leaf.FindFirst(":") >= 0) return E_BAD_VALUE;
+	if(str_leaf.FindFirst(":") >= 0) return B_BAD_VALUE;
 
 	str.ReplaceAll("\\", "/");
 	str_leaf.ReplaceAll("\\", "/");
 #else
-	if(!(str_leaf.Length() <= 0 || str_leaf[0] != '/')) return E_BAD_VALUE;
+	if(!(str_leaf.Length() <= 0 || str_leaf[0] != '/')) return B_BAD_VALUE;
 #endif
 
 	if(str_leaf.Length() > 0)
@@ -161,31 +161,31 @@ e_status_t etk_path_expound(EString &path, const char *dir, const char *leaf, bo
 		str.Append(str_leaf);
 	}
 
-	bool strNormalizeDone = etk_path_do_normalization(str);
-	if(str.Length() <= 0) return E_BAD_VALUE;
+	bool strNormalizeDone = bhapi_path_do_normalization(str);
+	if(str.Length() <= 0) return B_BAD_VALUE;
 #ifdef _WIN32
-	if(str.FindFirst(":", str.FindFirst(":") + 1) >= 0) return E_BAD_VALUE;
+	if(str.FindFirst(":", str.FindFirst(":") + 1) >= 0) return B_BAD_VALUE;
 #endif
 	if(strNormalizeDone && normalize != NULL) *normalize = true;
 
 	path = str;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t etk_path_get_parent(EString &parent, const char *path)
+b_status_t bhapi_path_get_parent(BString &parent, const char *path)
 {
-	if(path == NULL || *path == 0) return E_BAD_VALUE;
+	if(path == NULL || *path == 0) return B_BAD_VALUE;
 
 #ifdef _WIN32
-	if(strlen(path) <= 3) return E_ENTRY_NOT_FOUND;
+	if(strlen(path) <= 3) return B_ENTRY_NOT_FOUND;
 #else
-	if(strlen(path) == 1 && *path == '/') return E_ENTRY_NOT_FOUND;
+	if(strlen(path) == 1 && *path == '/') return B_ENTRY_NOT_FOUND;
 #endif
 
 	parent = path;
-	eint32 slashIndex = parent.FindLast("/");
+	b_int32 slashIndex = parent.FindLast("/");
 	parent.Remove(slashIndex, -1);
 #ifndef _WIN32
 	if(parent.Length() == 0) parent = "/";
@@ -193,47 +193,47 @@ e_status_t etk_path_get_parent(EString &parent, const char *path)
 	if(parent.Length() < 3) parent.Append("/");
 #endif
 
-	return E_OK;
+	return B_OK;
 }
 
 
 
-EPath::EPath()
+BPath::BPath()
 	: fPath(NULL)
 {
 }
 
 
-EPath::EPath(const char *dir, const char *leaf, bool normalize)
+BPath::BPath(const char *dir, const char *leaf, bool normalize)
 	: fPath(NULL)
 {
 	SetTo(dir, leaf, normalize);
 }
 
 
-EPath::EPath(const EPath &path)
+BPath::BPath(const BPath &path)
 	: fPath(NULL)
 {
-	if(path.fPath != NULL) fPath = EStrdup(path.fPath);
+	if(path.fPath != NULL) fPath = b_strdup(path.fPath);
 }
 
 
-EPath::~EPath()
+BPath::~BPath()
 {
 	if(fPath != NULL) delete[] fPath;
 }
 
 
-e_status_t
-EPath::SetTo(const char *dir, const char *leaf, bool normalize)
+b_status_t
+BPath::SetTo(const char *dir, const char *leaf, bool normalize)
 {
-	EString str;
-	e_status_t status = etk_path_expound(str, dir, leaf, &normalize);
-	if(status != E_OK) return status;
+	BString str;
+	b_status_t status = bhapi_path_expound(str, dir, leaf, &normalize);
+	if(status != B_OK) return status;
 
 	if(normalize)
 	{
-		EString filename(str);
+		BString filename(str);
 #ifdef _WIN32
 		filename.ReplaceAll("/", "\\");
 
@@ -245,30 +245,30 @@ EPath::SetTo(const char *dir, const char *leaf, bool normalize)
 #endif
 	}
 
-	if(str.Length() <= 0) return E_BAD_VALUE;
+	if(str.Length() <= 0) return B_BAD_VALUE;
 
-	char *aPath = EStrdup(str.String());
-	if(aPath == NULL) return E_NO_MEMORY;
+	char *aPath = b_strdup(str.String());
+	if(aPath == NULL) return B_NO_MEMORY;
 
 	if(fPath != NULL) delete[] fPath;
 	fPath = aPath;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EPath::Append(const char *path, bool normalize)
+b_status_t
+BPath::Append(const char *path, bool normalize)
 {
-	if(fPath == NULL) return E_BAD_VALUE;
-	if(path == NULL || *path == 0) return E_BAD_VALUE;
+	if(fPath == NULL) return B_BAD_VALUE;
+	if(path == NULL || *path == 0) return B_BAD_VALUE;
 
 	return SetTo(fPath, path, normalize);
 }
 
 
 void
-EPath::Unset()
+BPath::Unset()
 {
 	if(fPath != NULL)
 	{
@@ -279,14 +279,14 @@ EPath::Unset()
 
 
 const char*
-EPath::Path() const
+BPath::Path() const
 {
 	return fPath;
 }
 
 
 const char*
-EPath::Leaf() const
+BPath::Leaf() const
 {
 	if(fPath == NULL) return NULL;
 
@@ -294,9 +294,9 @@ EPath::Leaf() const
 	if(strlen(fPath) <= 3) return NULL;
 #endif
 
-	eint32 slashIndex = -1;
+	b_int32 slashIndex = -1;
 
-	for(eint32 i = (eint32)strlen(fPath) - 1; i >= 0; i--)
+	for(b_int32 i = (b_int32)strlen(fPath) - 1; i >= 0; i--)
 	{
 		if(fPath[i] == '/')
 		{
@@ -305,35 +305,35 @@ EPath::Leaf() const
 		}
 	}
 
-	if(slashIndex < 0 || slashIndex == (eint32)strlen(fPath) - 1) return NULL;
+	if(slashIndex < 0 || slashIndex == (b_int32)strlen(fPath) - 1) return NULL;
 
 	return(fPath + (slashIndex + 1));
 }
 
 
-e_status_t
-EPath::GetParent(EPath *parent) const
+b_status_t
+BPath::GetParent(BPath *parent) const
 {
-	if(parent == NULL) return E_BAD_VALUE;
-	if(fPath == NULL) return E_NO_INIT;
+	if(parent == NULL) return B_BAD_VALUE;
+	if(fPath == NULL) return B_NO_INIT;
 
-	EString str;
-	e_status_t status = etk_path_get_parent(str, fPath);
-	if(status != E_OK) return status;
+	BString str;
+	b_status_t status = bhapi_path_get_parent(str, fPath);
+	if(status != B_OK) return status;
 
 	return parent->SetTo(str.String(), NULL, false);
 }
 
 
 bool
-EPath::operator==(const EPath &path) const
+BPath::operator==(const BPath &path) const
 {
 	return operator==(path.fPath);
 }
 
 
 bool
-EPath::operator==(const char *path) const
+BPath::operator==(const char *path) const
 {
 	if(fPath == NULL && path == NULL) return true;
 	if(fPath == NULL || path == NULL) return false;
@@ -342,14 +342,14 @@ EPath::operator==(const char *path) const
 
 
 bool
-EPath::operator!=(const EPath &path) const
+BPath::operator!=(const BPath &path) const
 {
 	return operator!=(path.fPath);
 }
 
 
 bool
-EPath::operator!=(const char *path) const
+BPath::operator!=(const char *path) const
 {
 	if(fPath == NULL && path == NULL) return false;
 	if(fPath == NULL || path == NULL) return true;
@@ -358,20 +358,20 @@ EPath::operator!=(const char *path) const
 }
 
 
-EPath&
-EPath::operator=(const EPath &path)
+BPath&
+BPath::operator=(const BPath &path)
 {
 	if(fPath != NULL) delete[] fPath;
 	if(path.fPath != NULL)
-		fPath = EStrdup(path.fPath);
+		fPath = b_strdup(path.fPath);
 	else
 		fPath = NULL;
 	return *this;
 }
 
 
-EPath&
-EPath::operator=(const char *path)
+BPath&
+BPath::operator=(const char *path)
 {
 	if(fPath != NULL) delete[] fPath;
 	fPath = NULL;

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -31,60 +31,60 @@
 
 #include "Polygon.h"
 
-EPolygon::EPolygon(const EPoint *pts, eint32 nPts)
+BPolygon::BPolygon(const BPoint *pts, b_int32 nPts)
 	: fCount(0), fPts(NULL), fNeededToUpdateFrame(false)
 {
 	AddPoints(pts, nPts);
 }
 
 
-EPolygon::EPolygon()
+BPolygon::BPolygon()
 	: fCount(0), fPts(NULL), fNeededToUpdateFrame(false)
 {
 }
 
 
-EPolygon::EPolygon(const EPolygon *poly)
+BPolygon::BPolygon(const BPolygon *poly)
 	: fCount(0), fPts(NULL), fNeededToUpdateFrame(false)
 {
 	if(poly != NULL) AddPoints(poly->fPts, poly->fCount);
 }
 
 
-EPolygon::~EPolygon()
+BPolygon::~BPolygon()
 {
 	if(fPts) free(fPts);
 }
 
 
-EPolygon&
-EPolygon::operator=(const EPolygon &poly)
+BPolygon&
+BPolygon::operator=(const BPolygon &poly)
 {
 	if(fPts) free(fPts);
-	fCount = 0; fPts = NULL; fFrame = ERect(); fNeededToUpdateFrame = false;
+	fCount = 0; fPts = NULL; fFrame = BRect(); fNeededToUpdateFrame = false;
 	AddPoints(poly.fPts, poly.fCount);
 
 	return *this;
 }
 
 
-ERect
-EPolygon::Frame() const
+BRect
+BPolygon::Frame() const
 {
 	return fFrame;
 }
 
 
 void
-EPolygon::UpdateFrame()
+BPolygon::UpdateFrame()
 {
 	if(fNeededToUpdateFrame == false) return;
 
 	fNeededToUpdateFrame = false;
-	fFrame = ERect();
-	EPoint *pts = fPts;
+	fFrame = BRect();
+	BPoint *pts = fPts;
 
-	for(eint32 i = 0; i < fCount; i++, pts++)
+	for(b_int32 i = 0; i < fCount; i++, pts++)
 	{
 		if(i > 0)
 		{
@@ -103,28 +103,28 @@ EPolygon::UpdateFrame()
 
 
 bool
-EPolygon::AddPoints(const EPoint *pts, eint32 nPts, bool updateFrame)
+BPolygon::AddPoints(const BPoint *pts, b_int32 nPts, bool updateFrame)
 {
-	if(pts == NULL || nPts <= 0 || E_MAXINT32 - nPts < fCount) return false;
+	if(pts == NULL || nPts <= 0 || B_MAXINT32 - nPts < fCount) return false;
 
 	if(fCount < 0 || fPts == NULL) fCount = 0;
 
-	EPoint *newPts = (EPoint*)realloc(fPts, sizeof(EPoint) * (size_t)(fCount + nPts));
+	BPoint *newPts = (BPoint*)realloc(fPts, sizeof(BPoint) * (size_t)(fCount + nPts));
 	if(newPts == NULL) return false;
 	fPts = newPts;
 
 	if(updateFrame == false)
 	{
 		fNeededToUpdateFrame = true;
-		memcpy(fPts + fCount, pts, sizeof(EPoint) * (size_t)nPts);
+		memcpy(fPts + fCount, pts, sizeof(BPoint) * (size_t)nPts);
 		fCount += nPts;
 	}
 	else
 	{
 		UpdateFrame();
 
-		EPoint *destPts = fPts + fCount;
-		eint32 i = fCount;
+		BPoint *destPts = fPts + fCount;
+		b_int32 i = fCount;
 		fCount += nPts;
 
 		for(; i < fCount; i++, destPts++, pts++)
@@ -150,11 +150,11 @@ EPolygon::AddPoints(const EPoint *pts, eint32 nPts, bool updateFrame)
 
 
 void
-EPolygon::RemovePoints(eint32 fromIndex, eint32 toIndex, bool updateFrame)
+BPolygon::RemovePoints(b_int32 fromIndex, b_int32 toIndex, bool updateFrame)
 {
 	if(fPts == NULL || fromIndex < 0 || fromIndex >= fCount || fromIndex > toIndex) return;
 
-	if(toIndex < fCount - 1) memmove(fPts + fromIndex, fPts + toIndex + 1, sizeof(EPoint) * (size_t)(fCount - toIndex - 1));
+	if(toIndex < fCount - 1) memmove(fPts + fromIndex, fPts + toIndex + 1, sizeof(BPoint) * (size_t)(fCount - toIndex - 1));
 	fCount -= (toIndex - fromIndex + 1);
 
 	if(fCount == 0) {free(fPts); fPts = NULL;}
@@ -164,22 +164,22 @@ EPolygon::RemovePoints(eint32 fromIndex, eint32 toIndex, bool updateFrame)
 }
 
 
-const EPoint&
-EPolygon::operator[](eint32 index) const
+const BPoint&
+BPolygon::operator[](b_int32 index) const
 {
 	return(*(fPts + index));
 }
 
 
-eint32
-EPolygon::CountPoints() const
+b_int32
+BPolygon::CountPoints() const
 {
 	return fCount;
 }
 
 
 bool
-EPolygon::MapTo(ERect srcRect, ERect dstRect)
+BPolygon::MapTo(BRect srcRect, BRect dstRect)
 {
 	if(fCount <= 0 || fPts == NULL) return false;
 	if(!srcRect.IsValid() || !dstRect.IsValid()) return false;
@@ -188,11 +188,11 @@ EPolygon::MapTo(ERect srcRect, ERect dstRect)
 	float xScale = dstRect.Width() / srcRect.Width();
 	float yScale = dstRect.Height() / srcRect.Height();
 
-	fFrame = ERect();
+	fFrame = BRect();
 	fNeededToUpdateFrame = false;
 
-	EPoint *pts = fPts;
-	for(eint32 i = 0; i < fCount; i++, pts++)
+	BPoint *pts = fPts;
+	for(b_int32 i = 0; i < fCount; i++, pts++)
 	{
 		pts->x = dstRect.left + (pts->x - srcRect.left) * xScale;
 		pts->y = dstRect.top + (pts->y - srcRect.top) * yScale;
@@ -215,21 +215,21 @@ EPolygon::MapTo(ERect srcRect, ERect dstRect)
 }
 
 
-const EPoint*
-EPolygon::Points() const
+const BPoint*
+BPolygon::Points() const
 {
 	return fPts;
 }
 
 
 void
-EPolygon::PrintToStream() const
+BPolygon::PrintToStream() const
 {
-	const EPoint *pts = fPts;
-	for(eint32 i = 0; i < fCount; i++, pts++)
+	const BPoint *pts = fPts;
+	for(b_int32 i = 0; i < fCount; i++, pts++)
 	{
 		pts->PrintToStream();
-		if(i < fCount - 1) ETK_OUTPUT(", ");
+		if(i < fCount - 1) BHAPI_OUTPUT(", ");
 	}
 }
 

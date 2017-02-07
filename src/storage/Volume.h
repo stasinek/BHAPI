@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,44 +27,44 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_VOLUME_H__
-#define __ETK_VOLUME_H__
+#ifndef __BHAPI_VOLUME_H__
+#define __BHAPI_VOLUME_H__
 
 #include "./StorageDefs.h"
 #include "./Directory.h"
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EVolume {
+class _IMPEXP_BHAPI BVolume {
 public:
-	EVolume();
-	EVolume(e_dev_t dev);
-	EVolume(const EVolume &from);
-	virtual ~EVolume();
+    BVolume();
+    BVolume(b_dev_t dev);
+    BVolume(const BVolume &from);
+    virtual ~BVolume();
 
-	e_status_t	InitCheck() const;
-	e_status_t	SetTo(e_dev_t dev);
+	b_status_t	InitCheck() const;
+    b_status_t	SetTo(b_dev_t dev);
 	void		Unset();
 
-	e_dev_t		Device() const;
+	b_dev_t		Device() const;
 
-	e_status_t	GetName(char *name, size_t nameSize) const;
-	e_status_t	GetName(EString *name) const;
-	e_status_t	SetName(const char *name);
+	b_status_t	GetName(char *name, size_t nameSize) const;
+    b_status_t	GetName(BString *name) const;
+	b_status_t	SetName(const char *name);
 
-	e_status_t	GetRootDirectory(EDirectory *dir) const;
+	b_status_t	GetRootDirectory(BDirectory *dir) const;
 
-	bool		operator==(const EVolume &vol) const;
-	bool		operator!=(const EVolume &vol) const;
-	EVolume&	operator=(const EVolume &vol);
+    bool		operator==(const BVolume &vol) const;
+    bool		operator!=(const BVolume &vol) const;
+    BVolume&	operator=(const BVolume &vol);
 
 private:
-	e_dev_t fDevice;
+	b_dev_t fDevice;
 	void *fData;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_VOLUME_H__ */
+#endif /* __BHAPI_VOLUME_H__ */
 

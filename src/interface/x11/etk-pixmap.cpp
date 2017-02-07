@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -34,28 +34,28 @@
 #include "./../support/ClassInfo.h"
 
 
-EXGraphicsDrawable::EXGraphicsDrawable(EXGraphicsEngine *x11Engine, euint32 w, euint32 h)
-	: EGraphicsDrawable(), fEngine(NULL)
+EXGraphicsDrawable::EXGraphicsDrawable(EXGraphicsEngine *x11Engine, b_uint32 w, b_uint32 h)
+	: BGraphicsDrawable(), fEngine(NULL)
 {
-	if(w == E_MAXUINT32 || h == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
 		return;
 	}
 
 	fEngine = x11Engine;
 	if(fEngine == NULL) return;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) {fEngine = NULL; return;}
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) {fEngine = NULL; return;}
 
 	xPixmap = XCreatePixmap(fEngine->xDisplay, fEngine->xRootWindow, w + 1, h + 1, fEngine->xDepth);
 #ifdef HAVE_XFT
 	xDraw = XftDrawCreate(fEngine->xDisplay, xPixmap, fEngine->xVisual, fEngine->xColormap);
 #endif
 
-	e_rgb_color whiteColor = e_make_rgb_color(255, 255, 255, 255);
-	EGraphicsDrawable::SetBackgroundColor(whiteColor);
+	b_rgb_color whiteColor = b_makb_rgb_color(255, 255, 255, 255);
+	BGraphicsDrawable::SetBackgroundColor(whiteColor);
 	xBackground = fEngine->xWhitePixel;
 	xBackgroundAlloced = false;
 
@@ -79,9 +79,9 @@ EXGraphicsDrawable::~EXGraphicsDrawable()
 {
 	if(fEngine != NULL)
 	{
-		EAutolock <EXGraphicsEngine> autolock(fEngine);
-		if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK)
-			ETK_ERROR("[GRAPHICS]: %s --- Invalid graphics engine.", __PRETTY_FUNCTION__);
+		BAutolock <EXGraphicsEngine> autolock(fEngine);
+		if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK)
+			BHAPI_ERROR("[GRAPHICS]: %s --- Invalid graphics engine.", __PRETTY_FUNCTION__);
 
 		XFreePixmap(fEngine->xDisplay, xPixmap);
 		XFreeGC(fEngine->xDisplay, xGC);
@@ -95,19 +95,19 @@ EXGraphicsDrawable::~EXGraphicsDrawable()
 }
 
 
-e_status_t
-EXGraphicsDrawable::SetBackgroundColor(e_rgb_color bkColor)
+b_status_t
+EXGraphicsDrawable::SetBackgroundColor(b_rgb_color bkColor)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	e_rgb_color color = BackgroundColor();
+	b_rgb_color color = BackgroundColor();
 	bkColor.alpha = color.alpha = 255;
 
-	if(bkColor == color) return E_OK;
+	if(bkColor == color) return B_OK;
 
 	do {
-		EAutolock <EXGraphicsEngine> autolock(fEngine);
-		if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+		BAutolock <EXGraphicsEngine> autolock(fEngine);
+		if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 		if(bkColor.red == 0 && bkColor.green == 0 && bkColor.blue == 0)
 		{
@@ -124,7 +124,7 @@ EXGraphicsDrawable::SetBackgroundColor(e_rgb_color bkColor)
 		else
 		{
 			unsigned long p;
-			if(EXGraphicsContext::AllocXColor(fEngine, bkColor, &p) == false) return E_ERROR;
+			if(EXGraphicsContext::AllocXColor(fEngine, bkColor, &p) == false) return B_ERROR;
 			if(xBackgroundAlloced) EXGraphicsContext::FreeXColor(fEngine, xBackground);
 			xBackground = p;
 			xBackgroundAlloced = true;
@@ -133,23 +133,23 @@ EXGraphicsDrawable::SetBackgroundColor(e_rgb_color bkColor)
 		// TODO: clear content of pixmap
 	} while(false);
 
-	EGraphicsDrawable::SetBackgroundColor(bkColor);
+	BGraphicsDrawable::SetBackgroundColor(bkColor);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsDrawable::ResizeTo(euint32 w, euint32 h)
+b_status_t
+EXGraphicsDrawable::ResizeTo(b_uint32 w, b_uint32 h)
 {
-	if(w == E_MAXUINT32 || h == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	XSetForeground(fEngine->xDisplay, xGC, xBackground);
 	XSetFunction(fEngine->xDisplay, xGC, GXcopy);
@@ -165,54 +165,54 @@ EXGraphicsDrawable::ResizeTo(euint32 w, euint32 h)
 	XFreePixmap(fEngine->xDisplay, xPixmap);
 	xPixmap = newXPixmap;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsDrawable::CopyTo(EGraphicsContext *_dc_,
-			   EGraphicsDrawable *dstDrawable,
-			   eint32 x, eint32 y, euint32 w, euint32 h,
-			   eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EXGraphicsDrawable::CopyTo(BGraphicsContext *_dc_,
+			   BGraphicsDrawable *dstDrawable,
+			   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+			   b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
 	if(w != dstW || h != dstH)
 	{
 		// TODO
-		ETK_DEBUG("[GRAPHICS]: %s --- FIXME: (w != dstW || h != dstY).", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- FIXME: (w != dstW || h != dstY).", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(w == E_MAXUINT32 || h == E_MAXUINT32 || dstW == E_MAXUINT32 || dstH == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32 || dstW == B_MAXUINT32 || dstH == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(fEngine == NULL || dstDrawable == NULL) return E_ERROR;
+	if(fEngine == NULL || dstDrawable == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(dc == NULL || dc->fEngine != fEngine) return E_ERROR;
-	if(dc->DrawingMode() != E_OP_COPY)
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(dc == NULL || dc->fEngine != fEngine) return B_ERROR;
+	if(dc->DrawingMode() != B_OP_COPY)
 	{
 		// TODO
-		ETK_DEBUG("[GRAPHICS]: %s --- FIXME: unsupported drawing mode.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- FIXME: unsupported drawing mode.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
 	EXGraphicsWindow *win = NULL;
 	EXGraphicsDrawable *pix = NULL;
 
-	e_status_t retVal = E_OK;
+	b_status_t retVal = B_OK;
 
-	if((win = e_cast_as(dstDrawable, EXGraphicsWindow)) != NULL)
+	if((win = b_cast_as(dstDrawable, EXGraphicsWindow)) != NULL)
 		XCopyArea(fEngine->xDisplay, xPixmap, win->xWindow, xGC, x, y, w + 1, h + 1, dstX, dstY);
-	else if((pix = e_cast_as(dstDrawable, EXGraphicsDrawable)) != NULL)
+	else if((pix = b_cast_as(dstDrawable, EXGraphicsDrawable)) != NULL)
 		XCopyArea(fEngine->xDisplay, xPixmap, pix->xPixmap, xGC, x, y, w + 1, h + 1, dstX, dstY);
 	else
-		retVal = E_ERROR;
+		retVal = B_ERROR;
 
 	XFlush(fEngine->xDisplay);
 

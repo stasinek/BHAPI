@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -29,44 +29,44 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_CLIPBOARD_H__
-#define __ETK_CLIPBOARD_H__
+#ifndef __BHAPI_CLIPBOARD_H__
+#define __BHAPI_CLIPBOARD_H__
 
 #include "./../app/Messenger.h"
 #include "./../support/Locker.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EClipboard {
+class _IMPEXP_BHAPI BClipboard {
 public:
-	EClipboard(const char *name);
-	virtual ~EClipboard();
+	BClipboard(const char *name);
+	virtual ~BClipboard();
 
 	const char	*Name() const;
 
-	euint32		LocalCount() const;
-	euint32		SystemCount() const;
-	e_status_t	StartWatching(const EMessenger &target);
-	e_status_t	StopWatching(const EMessenger &target);
+	b_uint32		LocalCount() const;
+	b_uint32		SystemCount() const;
+	b_status_t	StartWatching(const BMessenger &target);
+	b_status_t	StopWatching(const BMessenger &target);
 
 	bool		Lock();
 	void		Unlock();
-	eint64		CountLocks() const;
+	b_int64		CountLocks() const;
 
-	e_status_t	Clear();
-	e_status_t	Commit();
-	e_status_t	Revert();
+	b_status_t	Clear();
+	b_status_t	Commit();
+	b_status_t	Revert();
 
-	EMessenger	DataSource() const;
-	EMessage	*Data() const;
+	BMessenger	DataSource() const;
+	BMessage	*Data() const;
 
 private:
 	char *fName;
-	ELocker fLocker;
-	EMessage *fData;
+	BLocker fLocker;
+	BMessage *fData;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_CLIPBOARD_H__ */
+#endif /* __BHAPI_CLIPBOARD_H__ */
 

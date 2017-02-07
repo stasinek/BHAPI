@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,51 +24,51 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: TextControl.h
- * Description: ETextControl --- display a labeled field could deliver a message as modifying
+ * Description: BTextControl --- display a labeled field could deliver a message as modifying
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_TEXT_CONTROL_H__
-#define __ETK_TEXT_CONTROL_H__
+#ifndef __BHAPI_TEXT_CONTROL_H__
+#define __BHAPI_TEXT_CONTROL_H__
 
 #include "./../interface/TextEditable.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK ETextControl : public ETextEditable {
+class _IMPEXP_BHAPI BTextControl : public BTextEditable {
 public:
-	ETextControl(ERect frame,
+	BTextControl(BRect frame,
 		     const char *name,
 		     const char *label,
 		     const char *text,
-		     EMessage *message,
-		     euint32 resizeMode = E_FOLLOW_LEFT | E_FOLLOW_TOP,
-		     euint32 flags = E_WILL_DRAW | E_FRAME_EVENTS | E_NAVIGABLE);
-	virtual ~ETextControl();
+		     BMessage *message,
+		     b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+		     b_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS | B_NAVIGABLE);
+	virtual ~BTextControl();
 
 	virtual void	SetText(const char *text);
 
 	virtual void	SetDivider(float divider);
 	float		Divider() const;
 
-	virtual void	SetAlignment(e_alignment forLabel, e_alignment forText);
-	void		GetAlignment(e_alignment *forLabel, e_alignment *forText) const;
+	virtual void	SetAlignment(b_alignment forLabel, b_alignment forText);
+	void		GetAlignment(b_alignment *forLabel, b_alignment *forText) const;
 
-	virtual void	SetModificationMessage(EMessage *msg);
-	EMessage	*ModificationMessage() const;
+	virtual void	SetModificationMessage(BMessage *msg);
+	BMessage	*ModificationMessage() const;
 
 	virtual void	SetLabel(const char *label);
-	virtual void	Draw(ERect updateRect);
+	virtual void	Draw(BRect updateRect);
 	virtual void	GetPreferredSize(float *width, float *height);
-	virtual void	KeyDown(const char *bytes, eint32 numBytes);
+	virtual void	KeyDown(const char *bytes, b_int32 numBytes);
 
 private:
-	e_alignment fLabelAlignment;
+	b_alignment fLabelAlignment;
 	float fDivider;
-	EMessage *fModificationMessage;
+	BMessage *fModificationMessage;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_TEXT_CONTROL_H__ */
+#endif /* __BHAPI_TEXT_CONTROL_H__ */
 

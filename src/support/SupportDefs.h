@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,8 +28,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_SUPPORT_DEFS_H__
-#define __ETK_SUPPORT_DEFS_H__
+#ifndef __BHAPI_SUPPORT_DEFS_H__
+#define __BHAPI_SUPPORT_DEFS_H__
+
+#include <stdarg.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <string.h> /* for bzero */
 
 /* The size of a `float', as computed by sizeof. */
 #define SIZEOF_FLOAT 4
@@ -80,25 +85,23 @@
 /* Define to `unsigned' if <sys/types.h> does not define. */
 /* #undef size_t */
 
-#define ETK_COMPILATION
+#define BHAPI_COMPILATION
+
 #ifdef _WIN32
-#define ETK_OS_WIN32
+#define BHAPI_OS_WIN32
 #endif
 
-#include <string.h> /* for bzero */
-#include "Errors.h"
-
-#define E_INT64_CONSTANT(x) (const __int64)(x)
+#define B_INT64_CONSTANT(x) (const __int64)(x)
 
 #include <limits.h>
-#define E_MININT32 INT_MIN
-#define E_MAXUINT32 UINT_MAX
-#define E_MAXINT32 INT_MAX
-#define E_MAXUINT64 ULLONG_MAX
-#define E_MAXINT64 LLONG_MAX
+#define B_MININT32 INT_MIN
+#define B_MAXUINT32 UINT_MAX
+#define B_MAXINT32 INT_MAX
+#define B_MAXUINT64 ULLONG_MAX
+#define B_MAXINT64 LLONG_MAX
 #include <float.h>
-#define E_MAXFLOAT FLT_MAX
-#define E_MINFLOAT FLT_MIN
+#define B_MAXFLOAT FLT_MAX
+#define B_MINFLOAT FLT_MIN
 
 #ifndef SIZEOF_FLOAT
 #define SIZEOF_FLOAT 4
@@ -108,49 +111,49 @@
 #define SIZEOF_DOUBLE 8
 #endif
 
-typedef __int32 eunichar32;
-typedef __int16 eunichar;
+typedef __int32 b_unichar32;
+typedef __int16 b_unichar;
 
-typedef	__int8 eint8;
-typedef	unsigned __int8 euint8;
-typedef	__int16 eint16;
-typedef	unsigned __int16 euint16;
-typedef	__int32 eint32;
-typedef	unsigned __int32 euint32;
-typedef	__int64 eint64;
-typedef	unsigned __int64 euint64;
+typedef	__int8 b_int8;
+typedef	unsigned __int8 b_uint8;
+typedef	__int16 b_int16;
+typedef	unsigned __int16 b_uint16;
+typedef	__int32 b_int32;
+typedef	unsigned __int32 b_uint32;
+typedef	__int64 b_int64;
+typedef	unsigned __int64 b_uint64;
 
-typedef eint32	e_status_t;
-typedef euint32	e_type_code;
-typedef euint32	e_perform_code;
-typedef eint64	e_bigtime_t;
-typedef eint64	e_thread_id;
-typedef size_t	e_address_t;
+typedef b_int32	b_status_t;
+typedef b_uint32	b_type_code;
+typedef b_uint32	b_perform_code;
+typedef b_int64	b_bigtime_t;
+typedef b_int64	b_thread_id;
+typedef size_t	b_address_t;
 
 enum {
-    E_ANY_TYPE                  = 'ANYT',
-	E_BOOL_TYPE 				= 'BOOL',
-	E_CHAR_TYPE 				= 'CHAR',
-	E_DOUBLE_TYPE 				= 'DBLE',
-	E_FLOAT_TYPE 				= 'FLOT',
-	E_INT64_TYPE 				= 'LLNG',
-	E_INT32_TYPE 				= 'LONG',
-	E_INT16_TYPE 				= 'SHRT',
-	E_INT8_TYPE 				= 'BYTE',
-	E_MESSAGE_TYPE				= 'MSGG',
-	E_MESSENGER_TYPE			= 'MSNG',
-	E_POINTER_TYPE				= 'PNTR',
-	E_SIZE_T_TYPE	 			= 'SIZT',
-	E_SSIZE_T_TYPE	 			= 'SSZT',
-	E_STRING_TYPE 				= 'CSTR',
-	E_UINT64_TYPE				= 'ULLG',
-	E_UINT32_TYPE				= 'ULNG',
-	E_UINT16_TYPE 				= 'USHT',
-	E_UINT8_TYPE 				= 'UBYT',
-	E_POINT_TYPE				= 'SPNT',
-    E_RECT_TYPE                 = 'RECT',
-    E_MIME_TYPE                 = 'MIME',
-	E_UNKNOWN_TYPE				= 'UNKN'
+    B_ANY_TYPE                  = 'ANYT',
+    B_BOOL_TYPE 				= 'BOOL',
+    B_CHAR_TYPE 				= 'CHAR',
+    B_DOUBLE_TYPE 				= 'DBLE',
+    B_FLOAT_TYPE 				= 'FLOT',
+    B_INT64_TYPE 				= 'LLNG',
+    B_INT32_TYPE 				= 'LONG',
+    B_INT16_TYPE 				= 'SHRT',
+    B_INT8_TYPE 				= 'BYTE',
+    B_MESSAGE_TYPE				= 'MSGG',
+    B_MESSENGER_TYPE			= 'MSNG',
+    B_POINTER_TYPE				= 'PNTR',
+    B_SIZE_T_TYPE	 			= 'SIZT',
+    B_SSIZE_T_TYPE	 			= 'SSZT',
+    B_STRING_TYPE 				= 'CSTR',
+    B_UINT64_TYPE				= 'ULLG',
+    B_UINT32_TYPE				= 'ULNG',
+    B_UINT16_TYPE 				= 'USHT',
+    B_UINT8_TYPE 				= 'UBYT',
+    B_POINT_TYPE				= 'SPNT',
+    B_RECT_TYPE                 = 'RECT',
+    B_MIME_TYPE                 = 'MIME',
+    B_UNKNOWN_TYPE				= 'UNKN'
 };
 
 #ifndef HAVE_BZERO
@@ -161,7 +164,7 @@ enum {
 
 #ifndef __cplusplus
 
-typedef	eint8	bool;
+typedef	b_int8	bool;
 
 #ifndef false
 #define false (0)
@@ -207,19 +210,19 @@ typedef	eint8	bool;
 #  endif /* !__cplusplus */
 #endif
 
-#ifdef ETK_OS_WIN32
+#ifdef BHAPI_OS_WIN32
 #	ifdef __GNUC__
 #		ifndef _stdcall
 #		define _stdcall  __attribute__((stdcall))
 #		endif /* stdcall */
 #	endif /* __GNUC__ */
-#endif /* ETK_OS_WIN32 */
+#endif /* BHAPI_OS_WIN32 */
 
 /* We prefix variable declarations so they can
  * properly get exported in windows dlls or Metrowerks'.
  */
 #ifndef _EXPORT
-#  if defined(ETK_OS_WIN32) || defined(ETK_OS_CYGWIN) || (defined(ETK_OS_BEOS) && defined(ETK_BIG_ENDIAN))
+#  if defined(BHAPI_OS_WIN32) || defined(BHAPI_OS_CYGWIN) || (defined(BHAPI_OS_BEOS) && defined(BHAPI_BIG_ENDIAN))
 #    define _EXPORT __declspec(dllexport)
 #  else
 #    define _EXPORT
@@ -227,7 +230,7 @@ typedef	eint8	bool;
 #endif /* _EXPORT */
 
 #ifndef _IMPORT
-#  if defined(ETK_OS_WIN32) || defined(ETK_OS_CYGWIN) || (defined(ETK_OS_BEOS) && defined(ETK_BIG_ENDIAN))
+#  if defined(BHAPI_OS_WIN32) || defined(BHAPI_OS_CYGWIN) || (defined(BHAPI_OS_BEOS) && defined(BHAPI_BIG_ENDIAN))
 #    define _IMPORT __declspec(dllimport)
 #  else
 #    define _IMPORT
@@ -242,21 +245,21 @@ typedef	eint8	bool;
 #  endif
 #endif /* _LOCAL */
 
-#ifdef ETK_COMPILATION
-    #define _IMPEXP_ETK _EXPORT
-#else /* !ETK_COMPILATION */
-    #define _IMPEXP_ETK _IMPORT
-#endif /* ETK_COMPILATION */
+#ifdef BHAPI_COMPILATION
+    #define _IMPEXP_BHAPI _EXPORT
+#else /* !BHAPI_COMPILATION */
+    #define _IMPEXP_BHAPI _IMPORT
+#endif /* BHAPI_COMPILATION */
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
-extern _IMPEXP_ETK const euint8 etk_major_version;
-extern _IMPEXP_ETK const euint8 etk_minor_version;
-extern _IMPEXP_ETK const euint8 etk_micro_version;
-extern _IMPEXP_ETK const euint8 etk_interface_age;
-extern _IMPEXP_ETK const euint16 etk_binary_age;
+extern _IMPEXP_BHAPI const b_uint8 bhapi_major_version;
+extern _IMPEXP_BHAPI const b_uint8 bhapi_minor_version;
+extern _IMPEXP_BHAPI const b_uint8 bhapi_micro_version;
+extern _IMPEXP_BHAPI const b_uint8 bhapi_interface_age;
+extern _IMPEXP_BHAPI const b_uint16 bhapi_binary_age;
 
 #ifdef __cplusplus
 } /* extern "C" */
@@ -264,7 +267,7 @@ extern _IMPEXP_ETK const euint16 etk_binary_age;
 
 #ifdef __cplusplus
 
-#ifdef ETK_OS_WIN32
+#ifdef BHAPI_OS_WIN32
 	#ifdef _WIN32
 #include <winsock2.h>
         #include <windows.h>
@@ -285,20 +288,20 @@ extern _IMPEXP_ETK const euint16 etk_binary_age;
 	#if defined(_MSC_VER) && _MSC_VER <= 0x4b0
 		#define for	if (0); else for
 	#endif
-#endif /* ETK_OS_WIN32 */
+#endif /* BHAPI_OS_WIN32 */
 
 #endif /* __cplusplus */
 
 /* seek_mode */
 enum {
-	E_SEEK_SET = 0,
-	E_SEEK_CUR,
-	E_SEEK_END,
+    B_SEEK_SET = 0,
+    B_SEEK_CUR,
+    B_SEEK_END,
 };
 
-#ifndef __ETK_DEBUG_H__
-#include "./../kernel/Debug.h"
+#ifndef __BHAPI_DEBUG_H__
+//#include "./../kernel/Debug.h"
 #endif
 
-#endif /* __ETK_SUPPORT_DEFS_H__ */
+#endif /* __BHAPI_SUPPORT_DEFS_H__ */
 

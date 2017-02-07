@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,28 +27,28 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_FLATTENABLE_H__
-#define __ETK_FLATTENABLE_H__
+#ifndef __BHAPI_FLATTENABLE_H__
+#define __BHAPI_FLATTENABLE_H__
 
-#include "./SupportDefs.h"
+#include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EFlattenable {
+class _IMPEXP_BHAPI BFlattenable {
 public:
-	virtual ~EFlattenable();
+    virtual ~BFlattenable();
 
 	virtual bool		IsFixedSize() const = 0;
 
-	virtual e_type_code	TypeCode() const = 0;
-	virtual bool		AllowsTypeCode(e_type_code code) const;
+    virtual b_type_code	TypeCode() const = 0;
+    virtual bool		AllowsTypeCode(b_type_code code) const;
 
 	virtual ssize_t		FlattenedSize() const = 0;
-	virtual e_status_t	Flatten(void *buffer, ssize_t numBytes) = 0;
-	virtual e_status_t	Unflatten(e_type_code, const void *buffer, ssize_t numBytes) = 0;
+    virtual b_status_t	Flatten(void *buffer, ssize_t numBytes) = 0;
+    virtual b_status_t	Unflatten(b_type_code, const void *buffer, ssize_t numBytes) = 0;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_FLATTENABLE_H__ */
+#endif /* __BHAPI_FLATTENABLE_H__ */
 

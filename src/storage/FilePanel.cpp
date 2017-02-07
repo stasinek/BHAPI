@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -87,29 +87,29 @@
 #define TEXT_NOTICE_EMPTY	"[Empty]"
 #define TEXT_NOTICE_VOLUME	"[Volume]"
 
-#ifdef ETK_OS_WIN32
+#ifdef BHAPI_OS_WIN32
 extern "C" {
-extern char* etk_win32_convert_active_to_utf8(const char *str, eint32 length);
+extern char* bhapi_win32_convert_active_to_utf8(const char *str, b_int32 length);
 }
 #endif
 
-class EFilePanelView;
-class EFilePanelWindow;
+class BFilePanelView;
+class BFilePanelWindow;
 
 
-class _LOCAL EFilePanelLabel : public EStringView {
+class _LOCAL BFilePanelLabel : public BStringView {
 public:
-	EFilePanelLabel(ERect frame, const char *name, const char *text, euint32 resizeMode);
+	BFilePanelLabel(BRect frame, const char *name, const char *text, b_uint32 resizeMode);
 
-	virtual void	Draw(ERect updateRect);
+	virtual void	Draw(BRect updateRect);
 	virtual void	GetPreferredSize(float *width, float *height);
 };
 
 
-class _LOCAL EFilePanelListItem : public EListItem {
+class _LOCAL BFilePanelListItem : public BListItem {
 public:
-	EFilePanelListItem(const char *path, EFilePanelView *panel_view, e_dev_t dev = -1);
-	virtual ~EFilePanelListItem();
+	BFilePanelListItem(const char *path, BFilePanelView *panel_view, b_dev_t dev = -1);
+	virtual ~BFilePanelListItem();
 
 	const char	*Path() const;
 	const char	*Leaf() const;
@@ -117,67 +117,67 @@ public:
 	bool		IsVolume() const;
 	bool		IsDirectory() const;
 
-	eint64		Size() const;
-	e_bigtime_t	ModifiedTime() const;
-	EFilePanelView	*PanelView() const;
+	b_int64		Size() const;
+	b_bigtime_t	ModifiedTime() const;
+	BFilePanelView	*PanelView() const;
 
 private:
-	EPath fPath;
+	BPath fPath;
 	char *fLeaf;
 
-	eint32 fFlags;
-	eint64 fSize;
-	e_bigtime_t fModifiedTime;
+	b_int32 fFlags;
+	b_int64 fSize;
+	b_bigtime_t fModifiedTime;
 
-	EFilePanelView *fPanelView;
+	BFilePanelView *fPanelView;
 
-	virtual void	DrawItem(EView *owner, ERect itemRect, bool drawEverything);
-	virtual void	Update(EView *owner, const EFont *font);
+	virtual void	DrawItem(BView *owner, BRect itemRect, bool drawEverything);
+	virtual void	Update(BView *owner, const BFont *font);
 };
 
 
-class _LOCAL EFilePanelListView : public EListView {
+class _LOCAL BFilePanelListView : public BListView {
 public:
-	EFilePanelListView(ERect frame, const char *name, e_list_view_type type);
+	BFilePanelListView(BRect frame, const char *name, b_list_view_type type);
 
-	void			SortItems(int (*sort_func)(const EFilePanelListItem**, const EFilePanelListItem**),
+	void			SortItems(int (*sort_func)(const BFilePanelListItem**, const BFilePanelListItem**),
 					  bool clear_position);
 
 	virtual void		SelectionChanged();
-	virtual e_status_t	Invoke(const EMessage *msg);
-	virtual void		KeyDown(const char *bytes, eint32 numBytes);
+	virtual b_status_t	Invoke(const BMessage *msg);
+	virtual void		KeyDown(const char *bytes, b_int32 numBytes);
 };
 
 
-class _LOCAL EFilePanelTitleView : public EView {
+class _LOCAL BFilePanelTitleView : public BView {
 public:
-	EFilePanelTitleView(ERect parent_bounds);
+	BFilePanelTitleView(BRect parent_bounds);
 
-	virtual void	Draw(ERect updateRect);
+	virtual void	Draw(BRect updateRect);
 	virtual void	GetPreferredSize(float *width, float *height);
-	virtual void	ScrollTo(EPoint where);
-	virtual void	MouseUp(EPoint where);
+	virtual void	ScrollTo(BPoint where);
+	virtual void	MouseUp(BPoint where);
 };
 
 
-class _LOCAL EFilePanelView : public EView {
+class _LOCAL BFilePanelView : public BView {
 public:
-	EFilePanelView(ERect frame, bool allow_multiple_selection);
-	virtual ~EFilePanelView();
+	BFilePanelView(BRect frame, bool allow_multiple_selection);
+	virtual ~BFilePanelView();
 
 	void		AddColumn(const char *name, float width,
-				  void (*draw_func)(EView*, ERect, EFilePanelListItem*),
-				  int (*sort_func)(const EFilePanelListItem**, const EFilePanelListItem**));
-	void		RemoveColumn(eint32 index);
-	void		SwapColumns(eint32 indexA, eint32 indexB);
+				  void (*draw_func)(BView*, BRect, BFilePanelListItem*),
+				  int (*sort_func)(const BFilePanelListItem**, const BFilePanelListItem**));
+	void		RemoveColumn(b_int32 index);
+	void		SwapColumns(b_int32 indexA, b_int32 indexB);
 
-	eint32		CountColumns() const;
-	const char	*GetNameOfColumn(eint32 index) const;
-	float		GetWidthOfColumn(eint32 index) const;
+	b_int32		CountColumns() const;
+	const char	*GetNameOfColumn(b_int32 index) const;
+	float		GetWidthOfColumn(b_int32 index) const;
 
-	void		DrawItem(EView *owner, ERect itemRect, EFilePanelListItem*);
-	void		SortItems(eint32 nColumn);
-	int		GetSortIndex(eint32 *index) const;
+	void		DrawItem(BView *owner, BRect itemRect, BFilePanelListItem*);
+	void		SortItems(b_int32 nColumn);
+	int		GetSortIndex(b_int32 *index) const;
 
 	virtual void	FrameResized(float new_width, float new_height);
 
@@ -185,72 +185,72 @@ private:
 	struct column_data {
 		char *name;
 		float width;
-		void (*draw_func)(EView*, ERect, EFilePanelListItem*);
-		int (*sort_func)(const EFilePanelListItem**, const EFilePanelListItem**);
+		void (*draw_func)(BView*, BRect, BFilePanelListItem*);
+		int (*sort_func)(const BFilePanelListItem**, const BFilePanelListItem**);
 	};
 
-	EList fColumns;
-	EFilePanelTitleView *fTitleView;
-	EFilePanelListView *fListView;
-	EScrollBar *fHSB;
-	EScrollBar *fVSB;
-	eint32 fSort;
+	BList fColumns;
+	BFilePanelTitleView *fTitleView;
+	BFilePanelListView *fListView;
+	BScrollBar *fHSB;
+	BScrollBar *fVSB;
+	b_int32 fSort;
 };
 
 
-class _LOCAL EFilePanelWindow : public EWindow {
+class _LOCAL BFilePanelWindow : public BWindow {
 public:
-	EFilePanelWindow(EFilePanel *panel,
-			 e_file_panel_mode mode,
-			 euint32 node_flavors,
+	BFilePanelWindow(BFilePanel *panel,
+			 b_file_panel_mode mode,
+			 b_uint32 node_flavors,
 			 bool modal,
 			 bool allow_multiple_selection);
-	virtual ~EFilePanelWindow();
+	virtual ~BFilePanelWindow();
 
-	virtual void		MessageReceived(EMessage *msg);
+	virtual void		MessageReceived(BMessage *msg);
 	virtual bool		QuitRequested();
 
-	EFilePanel		*Panel() const;
-	EMessenger		*Target() const;
+	BFilePanel		*Panel() const;
+	BMessenger		*Target() const;
 
-	e_file_panel_mode	PanelMode() const;
+	b_file_panel_mode	PanelMode() const;
 
-	void			SetTarget(const EMessenger *target);
-	void			SetMessage(const EMessage *msg);
+	void			SetTarget(const BMessenger *target);
+	void			SetMessage(const BMessage *msg);
 
 	void			Refresh();
 	void			SetPanelDirectory(const char *path);
 	const char		*PanelDirectory() const;
 
-	void			SetFilter(EFilePanelFilter *filter);
+	void			SetFilter(BFilePanelFilter *filter);
 	void			SetSaveText(const char *text);
-	void			SetButtonLabel(e_file_panel_button btn, const char *label);
+	void			SetButtonLabel(b_file_panel_button btn, const char *label);
 	void			SetHideWhenDone(bool state);
 
 	void			Rewind();
-	e_status_t		GetNextSelected(EEntry *entry);
+	b_status_t		GetNextSelected(BEntry *entry);
 
 	void			RefreshDirMenu();
 
 private:
-	friend class EFilePanel;
-	friend class EFilePanelListView;
+	friend class BFilePanel;
+	friend class BFilePanelListView;
 
-	EFilePanel *fPanel;
+	BFilePanel *fPanel;
 
-	EPath fPath;
+	BPath fPath;
 
-	e_file_panel_mode fMode;
-	euint32 fNodeFlavors;
-	EMessenger *fTarget;
-	EMessage *fMessage;
-	EFilePanelFilter *fFilter;
+	b_file_panel_mode fMode;
+	b_uint32 fNodeFlavors;
+	BMessenger *fTarget;
+	BMessage *fMessage;
+	BFilePanelFilter *fFilter;
 	bool fHidesWhenDone;
 
-	EFilePanelView *fPanelView;
-	EMenu *fDirMenu;
+	BFilePanelView *fPanelView;
+	BMenu *fDirMenu;
 
-	eint32 fSelIndex;
+	b_int32 fSelIndex;
 	bool fShowHidden;
 
 	static bool	RefreshCallback(const char *path, void *data);
@@ -258,25 +258,25 @@ private:
 };
 
 
-EFilePanelLabel::EFilePanelLabel(ERect frame, const char *name, const char *text, euint32 resizeMode)
-	: EStringView(frame, name, text, resizeMode, E_WILL_DRAW)
+BFilePanelLabel::BFilePanelLabel(BRect frame, const char *name, const char *text, b_uint32 resizeMode)
+	: BStringView(frame, name, text, resizeMode, B_WILL_DRAW)
 {
-	SetAlignment(E_ALIGN_CENTER);
-	SetVerticalAlignment(E_ALIGN_MIDDLE);
+	SetAlignment(B_ALIGN_CENTER);
+	SetVerticalAlignment(B_ALIGN_MIDDLE);
 }
 
 
 void
-EFilePanelLabel::Draw(ERect updateRect)
+BFilePanelLabel::Draw(BRect updateRect)
 {
-	EStringView::Draw(updateRect);
+	BStringView::Draw(updateRect);
 
 	PushState();
-	SetDrawingMode(E_OP_COPY);
+	SetDrawingMode(B_OP_COPY);
 	SetPenSize(0);
-	SetHighColor(e_ui_color(E_SHINE_COLOR));
+	SetHighColor(b_ui_color(B_SHINE_COLOR));
 	StrokeRect(Bounds());
-	SetHighColor(e_ui_color(E_SHADOW_COLOR));
+	SetHighColor(b_ui_color(B_SHADOW_COLOR));
 	StrokeLine(Bounds().LeftBottom(), Bounds().RightBottom());
 	StrokeLine(Bounds().RightTop());
 	PopState();
@@ -284,34 +284,34 @@ EFilePanelLabel::Draw(ERect updateRect)
 
 
 void
-EFilePanelLabel::GetPreferredSize(float *width, float *height)
+BFilePanelLabel::GetPreferredSize(float *width, float *height)
 {
-	EStringView::GetPreferredSize(width, height);
+	BStringView::GetPreferredSize(width, height);
 	if(width != NULL) *width += 2;
 	if(height != NULL) *height += 2;
 }
 
 
-EFilePanelListItem::EFilePanelListItem(const char *path, EFilePanelView *panel_view, e_dev_t dev)
-	: EListItem(), fPath(path), fSize(0), fModifiedTime(0), fPanelView(panel_view)
+BFilePanelListItem::BFilePanelListItem(const char *path, BFilePanelView *panel_view, b_dev_t dev)
+	: BListItem(), fPath(path), fSize(0), fModifiedTime(0), fPanelView(panel_view)
 {
 	if(dev >= 0)
 	{
-		EVolume vol(dev);
-		EString name;
+		BVolume vol(dev);
+		BString name;
 		vol.GetName(&name);
 		fFlags = 2;
-		fLeaf = e_strdup(name.String());
+		fLeaf = b_strdup(name.String());
 	}
 	else
 	{
-		EEntry aEntry(path);
+		BEntry aEntry(path);
 		fFlags = (aEntry.IsDirectory() ? 1 : 0);
 
-#ifndef ETK_OS_WIN32
-		fLeaf = e_strdup(fPath.Leaf());
+#ifndef BHAPI_OS_WIN32
+		fLeaf = b_strdup(fPath.Leaf());
 #else
-		fLeaf = etk_win32_convert_active_to_utf8(fPath.Leaf(), -1);
+		fLeaf = bhapi_win32_convert_active_to_utf8(fPath.Leaf(), -1);
 #endif
 
 		if(fFlags == 0) aEntry.GetSize(&fSize);
@@ -320,17 +320,17 @@ EFilePanelListItem::EFilePanelListItem(const char *path, EFilePanelView *panel_v
 }
 
 
-EFilePanelListItem::~EFilePanelListItem()
+BFilePanelListItem::~BFilePanelListItem()
 {
 	if(fLeaf) free(fLeaf);
 }
 
 
 void
-EFilePanelListItem::DrawItem(EView *owner, ERect itemRect, bool drawEverything)
+BFilePanelListItem::DrawItem(BView *owner, BRect itemRect, bool drawEverything)
 {
-	e_rgb_color bkColor = (IsSelected() ? e_ui_color(E_DOCUMENT_HIGHLIGHT_COLOR): owner->ViewColor());
-	e_rgb_color fgColor = e_ui_color(E_DOCUMENT_TEXT_COLOR);
+	b_rgb_color bkColor = (IsSelected() ? b_ui_color(B_DOCUMENT_HIGHLIGHT_COLOR): owner->ViewColor());
+	b_rgb_color fgColor = b_ui_color(B_DOCUMENT_TEXT_COLOR);
 
 	if(!IsEnabled())
 	{
@@ -360,90 +360,90 @@ EFilePanelListItem::DrawItem(EView *owner, ERect itemRect, bool drawEverything)
 
 
 void
-EFilePanelListItem::Update(EView *owner, const EFont *font)
+BFilePanelListItem::Update(BView *owner, const BFont *font)
 {
-	e_font_height fontHeight;
+	b_font_height fontHeight;
 	font->GetHeight(&fontHeight);
 	SetHeight(max_c(fontHeight.ascent + fontHeight.descent, ICON_HEIGHT) + 4);
 
 	float width = 0;
 	GetLeaderSize(&width, NULL);
-	for(eint32 i = 0; i < fPanelView->CountColumns(); i++) width += fPanelView->GetWidthOfColumn(i);
+	for(b_int32 i = 0; i < fPanelView->CountColumns(); i++) width += fPanelView->GetWidthOfColumn(i);
 	SetWidth(width);
 }
 
 
 const char*
-EFilePanelListItem::Path() const
+BFilePanelListItem::Path() const
 {
 	return fPath.Path();
 }
 
 
 const char*
-EFilePanelListItem::Leaf() const
+BFilePanelListItem::Leaf() const
 {
 	return fLeaf;
 }
 
 
 bool
-EFilePanelListItem::IsDirectory() const
+BFilePanelListItem::IsDirectory() const
 {
 	return(fFlags == 1);
 }
 
 
 bool
-EFilePanelListItem::IsVolume() const
+BFilePanelListItem::IsVolume() const
 {
 	return(fFlags == 2);
 }
 
 
-eint64
-EFilePanelListItem::Size() const
+b_int64
+BFilePanelListItem::Size() const
 {
 	return fSize;
 }
 
 
-e_bigtime_t
-EFilePanelListItem::ModifiedTime() const
+b_bigtime_t
+BFilePanelListItem::ModifiedTime() const
 {
 	return fModifiedTime;
 }
 
 
-EFilePanelView*
-EFilePanelListItem::PanelView() const
+BFilePanelView*
+BFilePanelListItem::PanelView() const
 {
 	return fPanelView;
 }
 
 
-EFilePanelListView::EFilePanelListView(ERect frame, const char *name, e_list_view_type type)
-	: EListView(frame, name, type, E_FOLLOW_ALL)
+BFilePanelListView::BFilePanelListView(BRect frame, const char *name, b_list_view_type type)
+	: BListView(frame, name, type, B_FOLLOW_ALL)
 {
 }
 
 
 void
-EFilePanelListView::SelectionChanged()
+BFilePanelListView::SelectionChanged()
 {
-	EFilePanelWindow *win = (EFilePanelWindow*)Window();
+	BFilePanelWindow *win = (BFilePanelWindow*)Window();
 	if(win)
 	{
-		EButton *btn = (EButton*)win->FindView("default button");
-		EMenuBar *menuBar = (EMenuBar*)win->FindView("MenuBar");
-		EMenu *menu = menuBar->FindItem(TEXT_FILE)->Submenu();
-		EMenuItem *menuItem = menu->FindItem(win->PanelMode() == E_OPEN_PANEL ? TEXT_OPEN : TEXT_SAVE);
-		EFilePanelListItem *item;
+		BButton *btn = (BButton*)win->FindView("default button");
+		BMenuBar *menuBar = (BMenuBar*)win->FindView("MenuBar");
+		BMenu *menu = menuBar->FindItem(TEXT_FILE)->Submenu();
+		BMenuItem *menuItem = menu->FindItem(win->PanelMode() == B_OPEN_PANEL ? TEXT_OPEN : TEXT_SAVE);
+		BFilePanelListItem *item;
 
-		for(eint32 i = 0; (item = (EFilePanelListItem*)ItemAt(CurrentSelection(i))) != NULL; i++)
+		for(b_int32 i = 0; (item = (BFilePanelListItem*)ItemAt(CurrentSelection(i))) != NULL; i++)
 		{
-			if(win->fNodeFlavors == E_DIRECTORY_NODE && !item->IsDirectory()) break;
-			if(win->fNodeFlavors == E_FILE_NODE && item->IsDirectory()) break;
+			if(win->fNodeFlavors == B_DIRECTORY_NODE && !item->IsDirectory()) break;
+			if(win->fNodeFlavors == B_FILE_NODE && item->IsDirectory()) break;
 		}
 
 		btn->SetEnabled(item == NULL);
@@ -454,41 +454,41 @@ EFilePanelListView::SelectionChanged()
 }
 
 
-e_status_t
-EFilePanelListView::Invoke(const EMessage *msg)
+b_status_t
+BFilePanelListView::Invoke(const BMessage *msg)
 {
-	const EMessage *message = (msg ? msg : Message());
-	if(!message) return E_BAD_VALUE;
+	const BMessage *message = (msg ? msg : Message());
+	if(!message) return B_BAD_VALUE;
 
-	EMessage aMsg(*message);
+	BMessage aMsg(*message);
 	aMsg.AddInt32("index", Position());
 
-	return EInvoker::Invoke(&aMsg);
+	return BInvoker::Invoke(&aMsg);
 }
 
 
 void
-EFilePanelListView::KeyDown(const char *bytes, eint32 numBytes)
+BFilePanelListView::KeyDown(const char *bytes, b_int32 numBytes)
 {
-	eint32 oldPos = Position();
-	EListView::KeyDown(bytes, numBytes);
+	b_int32 oldPos = Position();
+	BListView::KeyDown(bytes, numBytes);
 	if(oldPos != Position()) ScrollToItem(Position());
 }
 
 
 void
-EFilePanelListView::SortItems(int (*sort_func)(const EFilePanelListItem**, const EFilePanelListItem**),
+BFilePanelListView::SortItems(int (*sort_func)(const BFilePanelListItem**, const BFilePanelListItem**),
 			      bool clear_position)
 {
 	if(clear_position) SetPosition(-1);
-	EListView::SortItems((int (*)(const EListItem**, const EListItem**))sort_func);
+	BListView::SortItems((int (*)(const BListItem**, const BListItem**))sort_func);
 }
 
 
-static int column_name_sort_callback(const EFilePanelListItem **_itemA, const EFilePanelListItem **_itemB)
+static int column_name_sort_callback(const BFilePanelListItem **_itemA, const BFilePanelListItem **_itemB)
 {
-	const EFilePanelListItem *itemA = *_itemA;
-	const EFilePanelListItem *itemB = *_itemB;
+	const BFilePanelListItem *itemA = *_itemA;
+	const BFilePanelListItem *itemB = *_itemB;
 
 	if(itemA->IsVolume() != itemB->IsVolume() &&
 	   (itemA->IsVolume() || itemB->IsVolume()))
@@ -501,14 +501,14 @@ static int column_name_sort_callback(const EFilePanelListItem **_itemA, const EF
 		return(itemA->IsDirectory() ? -1 : 1);
 	}
 
-	EString strA(itemA->Leaf()), strB(itemB->Leaf());
+	BString strA(itemA->Leaf()), strB(itemB->Leaf());
 	if(strA == strB) return 0;
 
 	return(itemA->PanelView()->GetSortIndex(NULL) * (strA < strB ? -1 : 1));
 }
 
 
-static void column_name_drawing_callback(EView *owner, ERect rect, EFilePanelListItem *item)
+static void column_namb_drawing_callback(BView *owner, BRect rect, BFilePanelListItem *item)
 {
 	if(!rect.IsValid()) return;
 
@@ -519,27 +519,27 @@ static void column_name_drawing_callback(EView *owner, ERect rect, EFilePanelLis
 
 	if(xpm_data != NULL)
 	{
-		EPixmap *pixmap = new EPixmap(ICON_WIDTH, ICON_HEIGHT, E_RGB24);
-		pixmap->SetDrawingMode(E_OP_COPY);
+		BPixmap *pixmap = new BPixmap(ICON_WIDTH, ICON_HEIGHT, B_RGB24);
+		pixmap->SetDrawingMode(B_OP_COPY);
 		pixmap->SetHighColor(owner->LowColor());
 		pixmap->FillRect(0, 0, ICON_WIDTH, ICON_HEIGHT);
 		pixmap->DrawXPM(xpm_data, 0, 0, 0, 0);
 
-		EBitmap *bitmap = new EBitmap(pixmap);
+		BBitmap *bitmap = new BBitmap(pixmap);
 		delete pixmap;
 
-		owner->DrawBitmap(bitmap, EPoint(rect.left, rect.Center().y - ICON_HEIGHT / 2));
+		owner->DrawBitmap(bitmap, BPoint(rect.left, rect.Center().y - ICON_HEIGHT / 2));
 		delete bitmap;
 	}
 
 	if(item->Leaf())
 	{
-		e_font_height fontHeight;
+		b_font_height fontHeight;
 		owner->GetFontHeight(&fontHeight);
 
 		float sHeight = fontHeight.ascent + fontHeight.descent;
 
-		EPoint penLocation;
+		BPoint penLocation;
 		penLocation.x = rect.left + ICON_WIDTH + 5;
 		penLocation.y = rect.Center().y - sHeight / 2.f;
 		penLocation.y += fontHeight.ascent + 1;
@@ -549,10 +549,10 @@ static void column_name_drawing_callback(EView *owner, ERect rect, EFilePanelLis
 }
 
 
-static int column_size_sort_callback(const EFilePanelListItem **_itemA, const EFilePanelListItem **_itemB)
+static int column_size_sort_callback(const BFilePanelListItem **_itemA, const BFilePanelListItem **_itemB)
 {
-	const EFilePanelListItem *itemA = *_itemA;
-	const EFilePanelListItem *itemB = *_itemB;
+	const BFilePanelListItem *itemA = *_itemA;
+	const BFilePanelListItem *itemB = *_itemB;
 
 	if(itemA->IsVolume() != itemB->IsVolume() &&
 	   (itemA->IsVolume() || itemB->IsVolume()))
@@ -571,24 +571,24 @@ static int column_size_sort_callback(const EFilePanelListItem **_itemA, const EF
 }
 
 
-static void column_size_drawing_callback(EView *owner, ERect rect, EFilePanelListItem *item)
+static void column_sizb_drawing_callback(BView *owner, BRect rect, BFilePanelListItem *item)
 {
 	if(!rect.IsValid() || item->IsVolume() || item->IsDirectory()) return;
 
-	EString str;
+	BString str;
 	if(item->Size() >= 0x40000000) str.AppendFormat("%.2gG", (float)item->Size() / (float)0x40000000);
 	else if(item->Size() >= 0x100000) str.AppendFormat("%.2gM", (float)item->Size() / (float)0x100000);
 	else if(item->Size() >= 0x400) str.AppendFormat("%.2gK", (float)item->Size() / (float)0x400);
 	else str.AppendFormat("%I64i %s", item->Size(), TEXT_BYTES);
 
-	EFont font;
-	e_font_height fontHeight;
+	BFont font;
+	b_font_height fontHeight;
 	owner->GetFont(&font);
 	font.GetHeight(&fontHeight);
 
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 
-	EPoint penLocation;
+	BPoint penLocation;
 	penLocation.x = rect.right - font.StringWidth(str.String());
 	penLocation.y = rect.Center().y - sHeight / 2.f;
 	penLocation.y += fontHeight.ascent + 1;
@@ -597,10 +597,10 @@ static void column_size_drawing_callback(EView *owner, ERect rect, EFilePanelLis
 }
 
 
-static int column_modified_sort_callback(const EFilePanelListItem **_itemA, const EFilePanelListItem **_itemB)
+static int column_modified_sort_callback(const BFilePanelListItem **_itemA, const BFilePanelListItem **_itemB)
 {
-	const EFilePanelListItem *itemA = *_itemA;
-	const EFilePanelListItem *itemB = *_itemB;
+	const BFilePanelListItem *itemA = *_itemA;
+	const BFilePanelListItem *itemB = *_itemB;
 
 	if(itemA->IsVolume() != itemB->IsVolume() &&
 	   (itemA->IsVolume() || itemB->IsVolume()))
@@ -619,11 +619,11 @@ static int column_modified_sort_callback(const EFilePanelListItem **_itemA, cons
 }
 
 
-static void column_modified_drawing_callback(EView *owner, ERect rect, EFilePanelListItem *item)
+static void column_modified_drawing_callback(BView *owner, BRect rect, BFilePanelListItem *item)
 {
 	if(!rect.IsValid() || item->IsVolume()) return;
 
-	time_t timer = (time_t)(item->ModifiedTime() / E_INT64_CONSTANT(1000000));
+	time_t timer = (time_t)(item->ModifiedTime() / B_INT64_CONSTANT(1000000));
 	struct tm *tmTime = NULL;
 
 #ifndef HAVE_LOCALTIME_R
@@ -635,17 +635,17 @@ static void column_modified_drawing_callback(EView *owner, ERect rect, EFilePane
 
 	if(tmTime == NULL) return;
 
-	EString str;
+	BString str;
 	str.AppendFormat("%d-%02d-%02d, %02d:%02d",
 			 1900 + tmTime->tm_year, 1 + tmTime->tm_mon, tmTime->tm_mday,
 			 tmTime->tm_hour, tmTime->tm_min);
 
-	e_font_height fontHeight;
+	b_font_height fontHeight;
 	owner->GetFontHeight(&fontHeight);
 
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 
-	EPoint penLocation;
+	BPoint penLocation;
 	penLocation.x = rect.left + 5;
 	penLocation.y = rect.Center().y - sHeight / 2.f;
 	penLocation.y += fontHeight.ascent + 1;
@@ -654,37 +654,37 @@ static void column_modified_drawing_callback(EView *owner, ERect rect, EFilePane
 }
 
 
-EFilePanelView::EFilePanelView(ERect frame, bool allow_multiple_selection)
-	: EView(frame, NULL, E_FOLLOW_ALL, E_FRAME_EVENTS), fSort(1)
+BFilePanelView::BFilePanelView(BRect frame, bool allow_multiple_selection)
+	: BView(frame, NULL, B_FOLLOW_ALL, B_FRAME_EVENTS), fSort(1)
 {
-	EFilePanelLabel *label;
+	BFilePanelLabel *label;
 
-	ERect rect = Bounds();
+	BRect rect = Bounds();
 
-	fTitleView = new EFilePanelTitleView(rect);
+	fTitleView = new BFilePanelTitleView(rect);
 	AddChild(fTitleView);
 
-	fHSB = new EScrollBar(rect, "HScrollBar", 0, 0, 0, E_HORIZONTAL);
-	fHSB->ResizeBy(-(105 + E_V_SCROLL_BAR_WIDTH), E_H_SCROLL_BAR_HEIGHT - rect.Height());
-	fHSB->MoveTo(105, rect.bottom - E_H_SCROLL_BAR_HEIGHT);
+	fHSB = new BScrollBar(rect, "HScrollBar", 0, 0, 0, B_HORIZONTAL);
+	fHSB->ResizeBy(-(105 + B_V_SCROLL_BAR_WIDTH), B_H_SCROLL_BAR_HEIGHT - rect.Height());
+	fHSB->MoveTo(105, rect.bottom - B_H_SCROLL_BAR_HEIGHT);
 	AddChild(fHSB);
 
-	label = new EFilePanelLabel(ERect(0, rect.bottom - E_H_SCROLL_BAR_HEIGHT, 100, rect.bottom),
+	label = new BFilePanelLabel(BRect(0, rect.bottom - B_H_SCROLL_BAR_HEIGHT, 100, rect.bottom),
 				    "CountVw", NULL,
-				    E_FOLLOW_LEFT | E_FOLLOW_BOTTOM);
+				    B_FOLLOW_LEFT | B_FOLLOW_BOTTOM);
 	AddChild(label);
 
-	fVSB = new EScrollBar(rect, "VScrollBar", 0, 0, 0, E_VERTICAL);
-	fVSB->ResizeBy(E_V_SCROLL_BAR_WIDTH - rect.Width(), -E_H_SCROLL_BAR_HEIGHT);
-	fVSB->MoveTo(rect.right - E_V_SCROLL_BAR_WIDTH, 0);
+	fVSB = new BScrollBar(rect, "VScrollBar", 0, 0, 0, B_VERTICAL);
+    fVSB->ResizeBy(B_V_SCROLL_BAR_WIDTH - rect.Width(), -B_H_SCROLL_BAR_HEIGHT);
+	fVSB->MoveTo(rect.right - B_V_SCROLL_BAR_WIDTH, 0);
 	AddChild(fVSB);
 
-	rect.right -= E_V_SCROLL_BAR_WIDTH + 1;
+	rect.right -= B_V_SCROLL_BAR_WIDTH + 1;
 	rect.top += fTitleView->Frame().Height() + 1;
-	rect.bottom -= E_H_SCROLL_BAR_HEIGHT + 1;
-	fListView = new EFilePanelListView(rect, "PoseView",
-					   allow_multiple_selection ? E_MULTIPLE_SELECTION_LIST : E_SINGLE_SELECTION_LIST);
-	fListView->SetMessage(new EMessage(MSG_PANEL_SELECTED));
+	rect.bottom -= B_H_SCROLL_BAR_HEIGHT + 1;
+	fListView = new BFilePanelListView(rect, "PoseView",
+					   allow_multiple_selection ? B_MULTIPLE_SELECTION_LIST : B_SINGLE_SELECTION_LIST);
+	fListView->SetMessage(new BMessage(MSG_PANEL_SELECTED));
 	AddChild(fListView);
 
 	fHSB->SetTarget(fTitleView);
@@ -693,13 +693,13 @@ EFilePanelView::EFilePanelView(ERect frame, bool allow_multiple_selection)
 	fVSB->SetTarget(fListView);
 	fVSB->SetEnabled(false);
 
-	AddColumn(TEXT_NAME, 250, column_name_drawing_callback, column_name_sort_callback);
-	AddColumn(TEXT_SIZE, 100, column_size_drawing_callback, column_size_sort_callback);
+	AddColumn(TEXT_NAME, 250, column_namb_drawing_callback, column_name_sort_callback);
+	AddColumn(TEXT_SIZE, 100, column_sizb_drawing_callback, column_size_sort_callback);
 	AddColumn(TEXT_MODIFIED, 200, column_modified_drawing_callback, column_modified_sort_callback);
 }
 
 
-EFilePanelView::~EFilePanelView()
+BFilePanelView::~BFilePanelView()
 {
 	struct column_data *data;
 	while((data = (struct column_data*)fColumns.RemoveItem(0)) != NULL)
@@ -711,13 +711,13 @@ EFilePanelView::~EFilePanelView()
 
 
 void
-EFilePanelView::AddColumn(const char *name, float width,
-			  void (*draw_func)(EView*, ERect, EFilePanelListItem*),
-			  int (*sort_func)(const EFilePanelListItem**, const EFilePanelListItem**))
+BFilePanelView::AddColumn(const char *name, float width,
+			  void (*draw_func)(BView*, BRect, BFilePanelListItem*),
+			  int (*sort_func)(const BFilePanelListItem**, const BFilePanelListItem**))
 {
 	struct column_data *data = new struct column_data;
 
-	data->name = EStrdup(name);
+	data->name = b_strdup(name);
 	data->width = width;
 	data->draw_func = draw_func;
 	data->sort_func = sort_func;
@@ -731,7 +731,7 @@ EFilePanelView::AddColumn(const char *name, float width,
 
 
 void
-EFilePanelView::RemoveColumn(eint32 index)
+BFilePanelView::RemoveColumn(b_int32 index)
 {
 	struct column_data *data = (struct column_data*)fColumns.RemoveItem(index);
 	if(data != NULL)
@@ -747,22 +747,22 @@ EFilePanelView::RemoveColumn(eint32 index)
 
 
 void
-EFilePanelView::SwapColumns(eint32 indexA, eint32 indexB)
+BFilePanelView::SwapColumns(b_int32 indexA, b_int32 indexB)
 {
 	fColumns.SwapItems(indexA, indexB);
 	Invalidate();
 }
 
 
-eint32
-EFilePanelView::CountColumns() const
+b_int32
+BFilePanelView::CountColumns() const
 {
 	return fColumns.CountItems();
 }
 
 
 const char*
-EFilePanelView::GetNameOfColumn(eint32 index) const
+BFilePanelView::GetNameOfColumn(b_int32 index) const
 {
 	struct column_data *data = (struct column_data*)fColumns.ItemAt(index);
 	return(data != NULL ? data->name : NULL);
@@ -770,7 +770,7 @@ EFilePanelView::GetNameOfColumn(eint32 index) const
 
 
 float
-EFilePanelView::GetWidthOfColumn(eint32 index) const
+BFilePanelView::GetWidthOfColumn(b_int32 index) const
 {
 	struct column_data *data = (struct column_data*)fColumns.ItemAt(index);
 	return(data != NULL ? data->width : 0);
@@ -778,12 +778,12 @@ EFilePanelView::GetWidthOfColumn(eint32 index) const
 
 
 void
-EFilePanelView::DrawItem(EView *owner, ERect itemRect, EFilePanelListItem *item)
+BFilePanelView::DrawItem(BView *owner, BRect itemRect, BFilePanelListItem *item)
 {
-	ERect rect = itemRect;
+	BRect rect = itemRect;
 	rect.right = rect.left;
 
-	for(eint32 i = 0; i < fColumns.CountItems(); i++)
+	for(b_int32 i = 0; i < fColumns.CountItems(); i++)
 	{
 		struct column_data *data = (struct column_data*)fColumns.ItemAt(i);
 
@@ -793,7 +793,7 @@ EFilePanelView::DrawItem(EView *owner, ERect itemRect, EFilePanelListItem *item)
 		if(data->draw_func == NULL) continue;
 
 		owner->PushState();
-		ERect aRect = rect.InsetByCopy(2, 2) & itemRect;
+		BRect aRect = rect.InsetByCopy(2, 2) & itemRect;
 		owner->ConstrainClippingRegion(aRect);
 		data->draw_func(owner, aRect, item);
 		owner->PopState();
@@ -802,7 +802,7 @@ EFilePanelView::DrawItem(EView *owner, ERect itemRect, EFilePanelListItem *item)
 
 
 void
-EFilePanelView::SortItems(eint32 nColumn)
+BFilePanelView::SortItems(b_int32 nColumn)
 {
 	if(nColumn > 0) fSort = ((fSort < 0 ? -fSort : fSort) == nColumn ? -fSort : nColumn);
 
@@ -815,7 +815,7 @@ EFilePanelView::SortItems(eint32 nColumn)
 
 
 int
-EFilePanelView::GetSortIndex(eint32 *index) const
+BFilePanelView::GetSortIndex(b_int32 *index) const
 {
 	if(fSort == 0) return 0;
 	if(index) *index = (fSort < 0 ? -fSort : fSort) - 1;
@@ -824,12 +824,12 @@ EFilePanelView::GetSortIndex(eint32 *index) const
 
 
 void
-EFilePanelView::FrameResized(float new_width, float new_height)
+BFilePanelView::FrameResized(float new_width, float new_height)
 {
 	float w = 0;
-	ERect rect;
-	for(eint32 i = 0; i < CountColumns(); i++) w += GetWidthOfColumn(i);
-	for(eint32 i = 0; i < fListView->CountItems(); i++) rect |= fListView->ItemFrame(i);
+	BRect rect;
+	for(b_int32 i = 0; i < CountColumns(); i++) w += GetWidthOfColumn(i);
+	for(b_int32 i = 0; i < fListView->CountItems(); i++) rect |= fListView->ItemFrame(i);
 
 	fHSB->SetRange(0, max_c(w - new_width, 0));
 	fHSB->SetEnabled(new_width < w);
@@ -839,30 +839,30 @@ EFilePanelView::FrameResized(float new_width, float new_height)
 }
 
 
-EFilePanelTitleView::EFilePanelTitleView(ERect parent_bounds)
-	: EView(parent_bounds, "TitleView", E_FOLLOW_LEFT_RIGHT | E_FOLLOW_TOP, E_WILL_DRAW)
+BFilePanelTitleView::BFilePanelTitleView(BRect parent_bounds)
+	: BView(parent_bounds, "TitleView", B_FOLLOW_LEFT_RIGHT | B_FOLLOW_TOP, B_WILL_DRAW)
 {
-	e_font_height fontHeight;
+	b_font_height fontHeight;
 	GetFontHeight(&fontHeight);
 
-	ResizeTo(parent_bounds.Width() - E_V_SCROLL_BAR_WIDTH - 1,
+	ResizeTo(parent_bounds.Width() - B_V_SCROLL_BAR_WIDTH - 1,
 		 fontHeight.ascent + fontHeight.descent + 4);
 	MoveTo(0, 0);
 }
 
 
 void
-EFilePanelTitleView::Draw(ERect updateRect)
+BFilePanelTitleView::Draw(BRect updateRect)
 {
-	EFilePanelView *parent = (EFilePanelView*)Parent();
-	eint32 sortIndex = -1;
+	BFilePanelView *parent = (BFilePanelView*)Parent();
+	b_int32 sortIndex = -1;
 
 	if(parent == NULL) return;
 	parent->GetSortIndex(&sortIndex);
 
-	e_rgb_color textColor = e_ui_color(E_PANEL_TEXT_COLOR);
-	e_rgb_color shineColor = e_ui_color(E_SHINE_COLOR);
-	e_rgb_color shadowColor = e_ui_color(E_SHADOW_COLOR);
+	b_rgb_color textColor = b_ui_color(B_PANEL_TEXT_COLOR);
+	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
+	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
 	if(!IsEnabled())
 	{
 		textColor.disable(ViewColor());
@@ -870,23 +870,23 @@ EFilePanelTitleView::Draw(ERect updateRect)
 		shadowColor.disable(ViewColor());
 	}
 
-	EFont font;
-	e_font_height fontHeight;
+	BFont font;
+	b_font_height fontHeight;
 	GetFont(&font);
 	font.GetHeight(&fontHeight);
 
 	PushState();
 
-	SetDrawingMode(E_OP_COPY);
+	SetDrawingMode(B_OP_COPY);
 	SetPenSize(0);
 
-	ERect bounds = Frame().OffsetToSelf(E_ORIGIN);
+	BRect bounds = Frame().OffsetToSelf(B_ORIGIN);
 	SetHighColor(ViewColor());
 	FillRect(bounds);
 
-	ERect rect = bounds;
+	BRect rect = bounds;
 	rect.right = rect.left;
-	for(eint32 i = 0; i <= parent->CountColumns(); i++)
+	for(b_int32 i = 0; i <= parent->CountColumns(); i++)
 	{
 		if(i == parent->CountColumns())
 		{
@@ -903,7 +903,7 @@ EFilePanelTitleView::Draw(ERect updateRect)
 
 			if(name)
 			{
-				EPoint penLocation;
+				BPoint penLocation;
 				float strWidth = font.StringWidth(name);
 
 				penLocation.x = rect.Center().x - strWidth / 2.f;
@@ -914,7 +914,7 @@ EFilePanelTitleView::Draw(ERect updateRect)
 				DrawString(name, penLocation);
 
 				if(i == sortIndex)
-					StrokeLine(penLocation, penLocation + EPoint(strWidth, 0));
+					StrokeLine(penLocation, penLocation + BPoint(strWidth, 0));
 			}
 		}
 
@@ -930,19 +930,19 @@ EFilePanelTitleView::Draw(ERect updateRect)
 
 
 void
-EFilePanelTitleView::GetPreferredSize(float *width, float *height)
+BFilePanelTitleView::GetPreferredSize(float *width, float *height)
 {
 	if(width)
 	{
 		*width = 0;
 
-		EFilePanelView *parent = (EFilePanelView*)Parent();
-		for(eint32 i = 0; i < parent->CountColumns(); i++) *width += parent->GetWidthOfColumn(i);
+		BFilePanelView *parent = (BFilePanelView*)Parent();
+		for(b_int32 i = 0; i < parent->CountColumns(); i++) *width += parent->GetWidthOfColumn(i);
 	}
 
 	if(height)
 	{
-		e_font_height fontHeight;
+		b_font_height fontHeight;
 		GetFontHeight(&fontHeight);
 		*height = fontHeight.ascent + fontHeight.descent + 4;
 	}
@@ -950,22 +950,22 @@ EFilePanelTitleView::GetPreferredSize(float *width, float *height)
 
 
 void
-EFilePanelTitleView::ScrollTo(EPoint where)
+BFilePanelTitleView::ScrollTo(BPoint where)
 {
-	EListView *listView = (EListView*)Parent()->FindView("PoseView");
+	BListView *listView = (BListView*)Parent()->FindView("PoseView");
 
-	EView::ScrollTo(where);
-	listView->ScrollTo(where.x, listView->Frame().top - listView->ConvertToParent(EPoint(0, 0)).y);
+	BView::ScrollTo(where);
+	listView->ScrollTo(where.x, listView->Frame().top - listView->ConvertToParent(BPoint(0, 0)).y);
 }
 
 
 void
-EFilePanelTitleView::MouseUp(EPoint where)
+BFilePanelTitleView::MouseUp(BPoint where)
 {
-	EFilePanelView *parent = (EFilePanelView*)Parent();
+	BFilePanelView *parent = (BFilePanelView*)Parent();
 
 	float left = 0, right = 0;
-	for(eint32 i = 0; i < parent->CountColumns(); i++)
+	for(b_int32 i = 0; i < parent->CountColumns(); i++)
 	{
 		left = right + (i == 0 ? 0.f : 1.f);
 		right = left + parent->GetWidthOfColumn(i);
@@ -977,67 +977,67 @@ EFilePanelTitleView::MouseUp(EPoint where)
 }
 
 
-static e_filter_result filter_key_down_hook(EMessage *message, EHandler **target, EMessageFilter *filter)
+static b_filter_result filter_key_down_hook(BMessage *message, BHandler **target, BMessageFilter *filter)
 {
-	eint32 modifiers;
+	b_int32 modifiers;
 	const char *bytes;
 
-	EFilePanelWindow *panelWindow = (EFilePanelWindow*)filter->Looper();
+	BFilePanelWindow *panelWindow = (BFilePanelWindow*)filter->Looper();
 
-	if(message->FindInt32("modifiers", &modifiers) == false) return E_DISPATCH_MESSAGE;
-	if(message->FindString("bytes", &bytes) == false || bytes == NULL) return E_DISPATCH_MESSAGE;
+	if(message->FindInt32("modifiers", &modifiers) == false) return B_DISPATCH_MESSAGE;
+    if(message->FindString("bytes", &bytes) == false || bytes == NULL) return B_DISPATCH_MESSAGE;
 
-	if((modifiers & (E_COMMAND_KEY | E_CONTROL_KEY)) && !(bytes[0] != E_UP_ARROW || bytes[1] != 0))
+	if((modifiers & (B_COMMAND_KEY | B_CONTROL_KEY)) && !(bytes[0] != B_UP_ARROW || bytes[1] != 0))
 	{
-		EPath aPath(panelWindow->PanelDirectory());
-		if(aPath.GetParent(&aPath) != E_OK) aPath.Unset();
+		BPath aPath(panelWindow->PanelDirectory());
+		if(aPath.GetParent(&aPath) != B_OK) aPath.Unset();
 		panelWindow->SetPanelDirectory(aPath.Path());
-		return E_SKIP_MESSAGE;
+		return B_SKIP_MESSAGE;
 	}
 
-	return E_DISPATCH_MESSAGE;
+	return B_DISPATCH_MESSAGE;
 }
 
 
-EFilePanelWindow::EFilePanelWindow(EFilePanel *panel,
-				   e_file_panel_mode mode,
-				   euint32 node_flavors,
+BFilePanelWindow::BFilePanelWindow(BFilePanel *panel,
+				   b_file_panel_mode mode,
+				   b_uint32 node_flavors,
 				   bool modal,
 				   bool allow_multiple_selection)
-	: EWindow(ERect(0, 0, 600, 400),
-		  mode == E_OPEN_PANEL ? TEXT_OPEN_FILE : TEXT_SAVE_FILE,
-		  modal ? E_MODAL_WINDOW : E_TITLED_WINDOW, 0),
-	  fPanel(panel), fMode(mode), fNodeFlavors(node_flavors == 0 ? E_FILE_NODE : node_flavors),
+	: BWindow(BRect(0, 0, 600, 400),
+		  mode == B_OPEN_PANEL ? TEXT_OPEN_FILE : TEXT_SAVE_FILE,
+		  modal ? B_MODAL_WINDOW : B_TITLED_WINDOW, 0),
+	  fPanel(panel), fMode(mode), fNodeFlavors(node_flavors == 0 ? B_FILE_NODE : node_flavors),
 	  fTarget(NULL), fMessage(NULL), fFilter(NULL), fHidesWhenDone(true),
 	  fSelIndex(0), fShowHidden(false)
 {
-	EView *topView, *aView;
-	EMenuBar *menuBar;
-	EMenu *menu;
-	EMenuItem *menuItem;
-	EMenuField *menuField;
-	EButton *button;
+	BView *topView, *aView;
+	BMenuBar *menuBar;
+	BMenu *menu;
+	BMenuItem *menuItem;
+	BMenuField *menuField;
+	BButton *button;
 
-	ERect rect = Bounds();
+	BRect rect = Bounds();
 
-	topView = new EView(rect, NULL, E_FOLLOW_ALL, 0);
-	topView->SetViewColor(e_ui_color(E_PANEL_BACKGROUND_COLOR));
+	topView = new BView(rect, NULL, B_FOLLOW_ALL, 0);
+	topView->SetViewColor(b_ui_color(B_PANEL_BACKGROUND_COLOR));
 	AddChild(topView);
 
-	menu = new EMenu(TEXT_FILE, E_ITEMS_IN_COLUMN);
-	menu->AddItem(new EMenuItem(mode == E_OPEN_PANEL ? TEXT_OPEN : TEXT_SAVE, new EMessage(MSG_PANEL_DONE)));
+	menu = new BMenu(TEXT_FILE, B_ITEMS_IN_COLUMN);
+	menu->AddItem(new BMenuItem(mode == B_OPEN_PANEL ? TEXT_OPEN : TEXT_SAVE, new BMessage(MSG_PANEL_DONE)));
 	menu->AddSeparatorItem();
-	menu->AddItem(new EMenuItem(TEXT_SELECT_ALL, new EMessage(MSG_PANEL_SELECT_ALL)));
-	menu->AddItem(new EMenuItem(TEXT_DESELECT_ALL, new EMessage(MSG_PANEL_DESELECT_ALL)));
+	menu->AddItem(new BMenuItem(TEXT_SELECT_ALL, new BMessage(MSG_PANEL_SELECT_ALL)));
+	menu->AddItem(new BMenuItem(TEXT_DESELECT_ALL, new BMessage(MSG_PANEL_DESELECT_ALL)));
 	menu->AddSeparatorItem();
-	menu->AddItem(new EMenuItem(TEXT_SHOW_HIDDEN_FILES, new EMessage(MSG_PANEL_TOGGLE_HIDDEN)));
+	menu->AddItem(new BMenuItem(TEXT_SHOW_HIDDEN_FILES, new BMessage(MSG_PANEL_TOGGLE_HIDDEN)));
 	menu->AddSeparatorItem();
-	menu->AddItem(new EMenuItem(TEXT_CANCEL, new EMessage(E_CANCEL)));
-	for(eint32 i = 0; (menuItem = menu->ItemAt(i)) != NULL; i++) menuItem->SetTarget(this);
+	menu->AddItem(new BMenuItem(TEXT_CANCEL, new BMessage(B_CANCEL)));
+	for(b_int32 i = 0; (menuItem = menu->ItemAt(i)) != NULL; i++) menuItem->SetTarget(this);
 
-	menuBar = new EMenuBar(rect, NULL,
-			       E_FOLLOW_LEFT_RIGHT | E_FOLLOW_TOP,
-			       E_ITEMS_IN_ROW, false);
+	menuBar = new BMenuBar(rect, NULL,
+			       B_FOLLOW_LEFT_RIGHT | B_FOLLOW_TOP,
+			       B_ITEMS_IN_ROW, false);
 	menuBar->SetName("MenuBar");
 	menuBar->AddItem(menu);
 	menuBar->GetPreferredSize(NULL, &rect.bottom);
@@ -1047,13 +1047,13 @@ EFilePanelWindow::EFilePanelWindow(EFilePanel *panel,
 	rect.top = rect.bottom + 1;
 	rect.bottom = Bounds().bottom;
 	rect.InsetBy(5, 5);
-	aView = new EView(rect, NULL, E_FOLLOW_ALL, 0);
+	aView = new BView(rect, NULL, B_FOLLOW_ALL, 0);
 	topView->AddChild(aView);
 
-	rect.OffsetTo(E_ORIGIN);
+	rect.OffsetTo(B_ORIGIN);
 
-	fDirMenu = new EMenu(NULL, E_ITEMS_IN_COLUMN);
-	menuField = new EMenuField(rect, "DirMenuField", TEXT_LOCATION, fDirMenu, false);
+	fDirMenu = new BMenu(NULL, B_ITEMS_IN_COLUMN);
+	menuField = new BMenuField(rect, "DirMenuField", TEXT_LOCATION, fDirMenu, false);
 	menuField->GetPreferredSize(NULL, &rect.bottom);
 	menuField->ResizeTo(rect.Width(), rect.Height());
 	menuField->MoveTo(0, 0);
@@ -1062,45 +1062,45 @@ EFilePanelWindow::EFilePanelWindow(EFilePanel *panel,
 	rect.bottom = aView->Bounds().bottom;
 	rect.top = rect.bottom - 20;
 
-	if(mode == E_SAVE_PANEL)
+	if(mode == B_SAVE_PANEL)
 	{
-		ETextControl *textControl = new ETextControl(rect, "text control",
+		BTextControl *textControl = new BTextControl(rect, "text control",
 							     NULL, NULL, NULL,
-							     E_FOLLOW_LEFT | E_FOLLOW_BOTTOM);
+							     B_FOLLOW_LEFT | B_FOLLOW_BOTTOM);
 		textControl->ResizeTo(200, rect.Height());
 		aView->AddChild(textControl);
 	}
 
 	rect.left = rect.right - 100;
-	button = new EButton(rect, "default button",
-			     mode == E_OPEN_PANEL ? TEXT_OPEN : TEXT_SAVE,
-			     new EMessage(MSG_PANEL_DONE),
-			     E_FOLLOW_RIGHT | E_FOLLOW_BOTTOM);
+	button = new BButton(rect, "default button",
+			     mode == B_OPEN_PANEL ? TEXT_OPEN : TEXT_SAVE,
+			     new BMessage(MSG_PANEL_DONE),
+			     B_FOLLOW_RIGHT | B_FOLLOW_BOTTOM);
 	aView->AddChild(button);
 
 	rect.OffsetBy(-110, 0);
-	button = new EButton(rect, "cancel button",
+	button = new BButton(rect, "cancel button",
 			     TEXT_CANCEL,
-			     new EMessage(E_CANCEL),
-			     E_FOLLOW_RIGHT | E_FOLLOW_BOTTOM);
+			     new BMessage(B_CANCEL),
+			     B_FOLLOW_RIGHT | B_FOLLOW_BOTTOM);
 	aView->AddChild(button);
 
 	rect = aView->Bounds();
 	rect.top = menuField->Frame().bottom + 5;
 	rect.bottom -= 25;
-	fPanelView = new EFilePanelView(rect, allow_multiple_selection);
+	fPanelView = new BFilePanelView(rect, allow_multiple_selection);
 	aView->AddChild(fPanelView);
 
 	MoveToCenter();
 
-	e_find_directory(E_USER_DIRECTORY, &fPath);
-	AddCommonFilter(new EMessageFilter(E_KEY_DOWN, filter_key_down_hook));
+	b_find_directory(B_USER_DIRECTORY, &fPath);
+	AddCommonFilter(new BMessageFilter(B_KEY_DOWN, filter_key_down_hook));
 
 	Run();
 }
 
 
-EFilePanelWindow::~EFilePanelWindow()
+BFilePanelWindow::~BFilePanelWindow()
 {
 	if(fTarget) delete fTarget;
 	if(fMessage) delete fMessage;
@@ -1108,7 +1108,7 @@ EFilePanelWindow::~EFilePanelWindow()
 
 
 bool
-EFilePanelWindow::QuitRequested()
+BFilePanelWindow::QuitRequested()
 {
 	if(!IsHidden())
 	{
@@ -1120,17 +1120,17 @@ EFilePanelWindow::QuitRequested()
 
 
 void
-EFilePanelWindow::MessageReceived(EMessage *msg)
+BFilePanelWindow::MessageReceived(BMessage *msg)
 {
-	eint32 index;
+	b_int32 index;
 	const char *dir;
-	const EMessenger *msgr;
-	EMessage *aMsg = NULL;
-	EListView *listView;
-	EFilePanelListItem *item;
+	const BMessenger *msgr;
+	BMessage *aMsg = NULL;
+	BListView *listView;
+	BFilePanelListItem *item;
 
-	EMenu *menu;
-	EMenuItem *menuItem;
+	BMenu *menu;
+	BMenuItem *menuItem;
 
 	switch(msg->what)
 	{
@@ -1140,26 +1140,26 @@ EFilePanelWindow::MessageReceived(EMessage *msg)
 			break;
 
 		case MSG_PANEL_SET_DIR:
-			if(msg->FindString("PanelDirectory", &dir) == false || dir == NULL) break;
+            if(msg->FindString("PanelDirectory", &dir) == false || dir == NULL) break;
 			fPath.SetTo(dir);
 			Refresh();
 			break;
 
 		case MSG_PANEL_TOGGLE_HIDDEN:
-			menu = ((EMenuBar*)FindView("MenuBar"))->FindItem(TEXT_FILE)->Submenu();
+			menu = ((BMenuBar*)FindView("MenuBar"))->FindItem(TEXT_FILE)->Submenu();
 			menuItem = menu->FindItem(TEXT_SHOW_HIDDEN_FILES);
 			menuItem->SetMarked(fShowHidden = !menuItem->IsMarked());
 			Refresh();
 			break;
 
 		case MSG_PANEL_SELECT_ALL:
-			listView = (EListView*)FindView("PoseView");
+			listView = (BListView*)FindView("PoseView");
 			listView->Select(0, -1);
 			listView->Invalidate();
 			break;
 
 		case MSG_PANEL_DESELECT_ALL:
-			listView = (EListView*)FindView("PoseView");
+			listView = (BListView*)FindView("PoseView");
 			listView->DeselectAll();
 			listView->Invalidate();
 			break;
@@ -1167,14 +1167,14 @@ EFilePanelWindow::MessageReceived(EMessage *msg)
 		case MSG_PANEL_SELECTED:
 			if(msg->FindInt32("index", &index))
 			{
-				listView = (EListView*)FindView("PoseView");
-				if((item = (EFilePanelListItem*)listView->ItemAt(index)) == NULL) break;
+				listView = (BListView*)FindView("PoseView");
+				if((item = (BFilePanelListItem*)listView->ItemAt(index)) == NULL) break;
 				if(item->IsVolume() || item->IsDirectory())
 				{
 					fPath.SetTo(item->Path());
 					Refresh();
 				}
-				else if(listView->ListType() == E_SINGLE_SELECTION_LIST)
+				else if(listView->ListType() == B_SINGLE_SELECTION_LIST)
 				{
 					PostMessage(MSG_PANEL_DONE);
 				}
@@ -1183,28 +1183,28 @@ EFilePanelWindow::MessageReceived(EMessage *msg)
 
 		case MSG_PANEL_DONE:
 			if(FindView("default button")->IsEnabled() == false) break;
-			listView = (EListView*)FindView("PoseView");
-			if(fMode == E_OPEN_PANEL && listView->CurrentSelection() < 0) break;
-			if(fMode == E_SAVE_PANEL)
+			listView = (BListView*)FindView("PoseView");
+			if(fMode == B_OPEN_PANEL && listView->CurrentSelection() < 0) break;
+			if(fMode == B_SAVE_PANEL)
 			{
 				if(listView->CurrentSelection() < 0)
 				{
-					ETextControl *textControl = (ETextControl*)FindView("text control");
+					BTextControl *textControl = (BTextControl*)FindView("text control");
 					if(textControl->Text() == NULL) break;
 				}
 			}
 
-			msgr = (fTarget == NULL ? &etk_app_messenger : fTarget);
-			if(fMessage) aMsg = new EMessage(*fMessage);
-			else aMsg = new EMessage(fMode == E_OPEN_PANEL ? (euint32)E_REFS_RECEIVED : (euint32)E_SAVE_REQUESTED);
+			msgr = (fTarget == NULL ? &bhapi_app_messenger : fTarget);
+			if(fMessage) aMsg = new BMessage(*fMessage);
+            else aMsg = new BMessage(fMode == B_OPEN_PANEL ? (b_uint32)B_REFS_RECEIVED : (b_uint32)B_SAVE_REQUESTED);
 			aMsg->AddString("directory", fPath.Path());
-			for(eint32 i = 0; (index = listView->CurrentSelection(i)) > 0; i++)
+			for(b_int32 i = 0; (index = listView->CurrentSelection(i)) > 0; i++)
 			{
-				item = (EFilePanelListItem*)listView->ItemAt(index);
-				aMsg->AddString("name", EPath(item->Path()).Leaf());
+				item = (BFilePanelListItem*)listView->ItemAt(index);
+				aMsg->AddString("name", BPath(item->Path()).Leaf());
 			}
-			if(fMode == E_SAVE_PANEL)
-				aMsg->AddString("name",	((ETextControl*)FindView("text control"))->Text());
+			if(fMode == B_SAVE_PANEL)
+				aMsg->AddString("name",	((BTextControl*)FindView("text control"))->Text());
 			fPanel->SendMessage(msgr, aMsg);
 			delete aMsg;
 
@@ -1215,114 +1215,114 @@ EFilePanelWindow::MessageReceived(EMessage *msg)
 			}
 			break;
 
-		case E_CANCEL:
-			msgr = (fTarget == NULL ? &etk_app_messenger : fTarget);
+		case B_CANCEL:
+			msgr = (fTarget == NULL ? &bhapi_app_messenger : fTarget);
 			if(fMessage)
 			{
-				aMsg = new EMessage(*fMessage);
+				aMsg = new BMessage(*fMessage);
 				aMsg->AddInt32("old_what", aMsg->what);
-				aMsg->what = E_CANCEL;
+				aMsg->what = B_CANCEL;
 			}
 			else
 			{
-				aMsg = new EMessage(E_CANCEL);
+				aMsg = new BMessage(B_CANCEL);
 			}
 			aMsg->AddPointer("source", fPanel);
 			fPanel->SendMessage(msgr, aMsg);
 			delete aMsg;
 
-			PostMessage(E_QUIT_REQUESTED);
+			PostMessage(B_QUIT_REQUESTED);
 			break;
 
 		default:
-			EWindow::MessageReceived(msg);
+			BWindow::MessageReceived(msg);
 			break;
 	}
 }
 
 
-EFilePanel*
-EFilePanelWindow::Panel() const
+BFilePanel*
+BFilePanelWindow::Panel() const
 {
 	return fPanel;
 }
 
 
-EMessenger*
-EFilePanelWindow::Target() const
+BMessenger*
+BFilePanelWindow::Target() const
 {
 	return fTarget;
 }
 
 
-e_file_panel_mode
-EFilePanelWindow::PanelMode() const
+b_file_panel_mode
+BFilePanelWindow::PanelMode() const
 {
 	return fMode;
 }
 
 
 void
-EFilePanelWindow::SetTarget(const EMessenger *target)
+BFilePanelWindow::SetTarget(const BMessenger *target)
 {
 	if(fTarget) delete fTarget;
-	fTarget = (target != NULL ? new EMessenger(*target) : NULL);
+	fTarget = (target != NULL ? new BMessenger(*target) : NULL);
 }
 
 
 void
-EFilePanelWindow::SetMessage(const EMessage *msg)
+BFilePanelWindow::SetMessage(const BMessage *msg)
 {
 	if(fMessage) delete fMessage;
-	fMessage = (msg != NULL ? new EMessage(*msg) : NULL);
+	fMessage = (msg != NULL ? new BMessage(*msg) : NULL);
 }
 
 
 bool
-EFilePanelWindow::RefreshCallback(const char *path, void *data)
+BFilePanelWindow::RefreshCallback(const char *path, void *data)
 {
-	EListView *listView = (EListView*)data;
-	EFilePanelWindow *self = (EFilePanelWindow*)listView->Window();
+	BListView *listView = (BListView*)data;
+	BFilePanelWindow *self = (BFilePanelWindow*)listView->Window();
 
-	EEntry aEntry(path);
+	BEntry aEntry(path);
 	if(self->fShowHidden == false && aEntry.IsHidden()) return false;
 	if(!(self->fFilter == NULL || self->fFilter->Filter(&aEntry))) return false;
 
-	listView->AddItem(new EFilePanelListItem(path, self->fPanelView));
+	listView->AddItem(new BFilePanelListItem(path, self->fPanelView));
 
 	return false;
 }
 
 
 bool
-EFilePanelWindow::IsDependsOnOthersWhenQuitRequested() const
+BFilePanelWindow::IsDependsOnOthersWhenQuitRequested() const
 {
 	return true;
 }
 
 
 void
-EFilePanelWindow::Refresh()
+BFilePanelWindow::Refresh()
 {
-	EListView *listView = (EListView*)FindView("PoseView");
+	BListView *listView = (BListView*)FindView("PoseView");
 
 	listView->RemoveItems(0, -1, true);
 
 	if(fPath.Path() != NULL)
 	{
-		EDirectory dir(fPath.Path());
+		BDirectory dir(fPath.Path());
 		dir.DoForEach(RefreshCallback, (void*)listView);
 	}
 	else
 	{
-		EVolumeRoster volRoster;
-		EVolume vol;
+		BVolumeRoster volRoster;
+		BVolume vol;
 
-		while(volRoster.GetNextVolume(&vol) == E_NO_ERROR)
+		while(volRoster.GetNextVolume(&vol) == B_NO_ERROR)
 		{
-			EDirectory volRootDir;
-			EEntry aEntry;
-			EPath aPath;
+			BDirectory volRootDir;
+			BEntry aEntry;
+			BPath aPath;
 
 			vol.GetRootDirectory(&volRootDir);
 			volRootDir.GetEntry(&aEntry);
@@ -1330,12 +1330,12 @@ EFilePanelWindow::Refresh()
 
 			if(aPath.Path() == NULL) continue;
 
-			listView->AddItem(new EFilePanelListItem(aPath.Path(), fPanelView, vol.Device()));
+			listView->AddItem(new BFilePanelListItem(aPath.Path(), fPanelView, vol.Device()));
 		}
 	}
 
-	EFilePanelLabel *label = (EFilePanelLabel*)FindView("CountVw");
-	EString str;
+	BFilePanelLabel *label = (BFilePanelLabel*)FindView("CountVw");
+	BString str;
 	str << listView->CountItems() << " " << TEXT_ITEMS;
 	label->SetText(str.String());
 
@@ -1347,7 +1347,7 @@ EFilePanelWindow::Refresh()
 
 
 void
-EFilePanelWindow::SetPanelDirectory(const char *path)
+BFilePanelWindow::SetPanelDirectory(const char *path)
 {
 	fPath.Unset();
 	fPath.SetTo(path);
@@ -1356,14 +1356,14 @@ EFilePanelWindow::SetPanelDirectory(const char *path)
 
 
 const char*
-EFilePanelWindow::PanelDirectory() const
+BFilePanelWindow::PanelDirectory() const
 {
 	return fPath.Path();
 }
 
 
 void
-EFilePanelWindow::SetFilter(EFilePanelFilter *filter)
+BFilePanelWindow::SetFilter(BFilePanelFilter *filter)
 {
 	if(fFilter) delete fFilter;
 	fFilter = filter;
@@ -1371,89 +1371,89 @@ EFilePanelWindow::SetFilter(EFilePanelFilter *filter)
 
 
 void
-EFilePanelWindow::SetSaveText(const char *text)
+BFilePanelWindow::SetSaveText(const char *text)
 {
-	ETextControl *textControl = (ETextControl*)FindView("text control");
+	BTextControl *textControl = (BTextControl*)FindView("text control");
 	if(textControl) textControl->SetText(text);
 }
 
 
 void
-EFilePanelWindow::SetButtonLabel(e_file_panel_button btn, const char *label)
+BFilePanelWindow::SetButtonLabel(b_file_panel_button btn, const char *label)
 {
-	EButton *button = (EButton*)FindView(btn == E_CANCEL_BUTTON ? "cancel button" : "default button");
+	BButton *button = (BButton*)FindView(btn == B_CANCEL_BUTTON ? "cancel button" : "default button");
 	if(button) button->SetLabel(label);
 }
 
 
 void
-EFilePanelWindow::SetHideWhenDone(bool state)
+BFilePanelWindow::SetHideWhenDone(bool state)
 {
 	fHidesWhenDone = state;
 }
 
 
 void
-EFilePanelWindow::Rewind()
+BFilePanelWindow::Rewind()
 {
 	fSelIndex = 0;
 }
 
 
-e_status_t
-EFilePanelWindow::GetNextSelected(EEntry *entry)
+b_status_t
+BFilePanelWindow::GetNextSelected(BEntry *entry)
 {
-	EListView *listView = (EListView*)FindView("PoseView");
-	EFilePanelListItem *item = (EFilePanelListItem*)listView->ItemAt(listView->CurrentSelection(fSelIndex));
+	BListView *listView = (BListView*)FindView("PoseView");
+	BFilePanelListItem *item = (BFilePanelListItem*)listView->ItemAt(listView->CurrentSelection(fSelIndex));
 
 	if(item == NULL)
 	{
-		if(fMode == E_SAVE_PANEL && fSelIndex++ == 0)
+		if(fMode == B_SAVE_PANEL && fSelIndex++ == 0)
 		{
-			ETextControl *textControl = (ETextControl*)FindView("text control");
+			BTextControl *textControl = (BTextControl*)FindView("text control");
 			if(textControl->Text() != NULL)
 			{
-				EPath aPath = fPath;
+				BPath aPath = fPath;
 				aPath.Append(textControl->Text());
 				entry->SetTo(aPath.Path());
-				return E_OK;
+				return B_OK;
 			}
 		}
 
-		return E_ERROR;
+		return B_ERROR;
 	}
 
 	entry->SetTo(item->Path());
 
 	fSelIndex++;
 
-	return E_OK;
+	return B_OK;
 }
 
 
 void
-EFilePanelWindow::RefreshDirMenu()
+BFilePanelWindow::RefreshDirMenu()
 {
-	EString str;
-	EMessage *msg;
-	EMenuItem *menuItem;
+	BString str;
+	BMessage *msg;
+	BMenuItem *menuItem;
 
 	if(fDirMenu->CountItems() == 0)
 	{
-		EVolumeRoster volRoster;
-		EVolume vol;
-		EPath aPath;
+		BVolumeRoster volRoster;
+		BVolume vol;
+		BPath aPath;
 
-		while(volRoster.GetNextVolume(&vol) == E_NO_ERROR)
+		while(volRoster.GetNextVolume(&vol) == B_NO_ERROR)
 		{
-			EDirectory volRootDir;
-			EEntry aEntry;
+			BDirectory volRootDir;
+			BEntry aEntry;
 
 			vol.GetRootDirectory(&volRootDir);
 			volRootDir.GetEntry(&aEntry);
-			if(aEntry.GetPath(&aPath) != E_OK || aPath.Path() == NULL) continue;
+			if(aEntry.GetPath(&aPath) != B_OK || aPath.Path() == NULL) continue;
 
-			msg = new EMessage(MSG_PANEL_SET_DIR);
+			msg = new BMessage(MSG_PANEL_SET_DIR);
 			msg->AddString("PanelDirectory", aPath.Path());
 
 			str.MakeEmpty();
@@ -1461,50 +1461,50 @@ EFilePanelWindow::RefreshDirMenu()
 			if(str.Length() == 0) str = TEXT_NO_NAME;
 			str.PrependFormat("%s ", TEXT_NOTICE_VOLUME);
 
-			menuItem = new EMenuItem(str.String(), msg);
+			menuItem = new BMenuItem(str.String(), msg);
 			menuItem->SetTarget(this);
 			fDirMenu->AddItem(menuItem);
 		}
 
-		if(fDirMenu->CountItems() > 0) fDirMenu->AddItem(new EMenuSeparatorItem(), 0);
+		if(fDirMenu->CountItems() > 0) fDirMenu->AddItem(new BMenuSeparatorItem(), 0);
 
-		if(e_find_directory(E_USER_DIRECTORY, &aPath) == E_OK)
+		if(b_find_directory(B_USER_DIRECTORY, &aPath) == B_OK)
 		{
-			msg = new EMessage(MSG_PANEL_SET_DIR);
+			msg = new BMessage(MSG_PANEL_SET_DIR);
 			msg->AddString("PanelDirectory", aPath.Path());
 
-			menuItem = new EMenuItem(TEXT_HOME, msg);
+			menuItem = new BMenuItem(TEXT_HOME, msg);
 			menuItem->SetTarget(this);
 			fDirMenu->AddItem(menuItem, 0);
 
-			fDirMenu->AddItem(new EMenuSeparatorItem(), 0);
+			fDirMenu->AddItem(new BMenuSeparatorItem(), 0);
 		}
 	}
 	else
 	{
 		while((menuItem = fDirMenu->ItemAt(0)) != NULL)
 		{
-			if(e_is_instance_of(menuItem, EMenuSeparatorItem)) break;
+			if(b_is_instance_of(menuItem, BMenuSeparatorItem)) break;
 			fDirMenu->RemoveItem(0);
 			delete menuItem;
 		}
 	}
 
-	EMenu *menu = new EMenu(TEXT_OTHER_DIRECTORYIES, E_ITEMS_IN_COLUMN);
+	BMenu *menu = new BMenu(TEXT_OTHER_DIRECTORYIES, B_ITEMS_IN_COLUMN);
 	fDirMenu->AddItem(menu, 0);
 
-	EPath aPath = fPath;
-	while(aPath.GetParent(&aPath) == E_OK)
+	BPath aPath = fPath;
+	while(aPath.GetParent(&aPath) == B_OK)
 	{
-		msg = new EMessage(MSG_PANEL_SET_DIR);
+		msg = new BMessage(MSG_PANEL_SET_DIR);
 		msg->AddString("PanelDirectory", aPath.Path());
 
-#ifdef ETK_OS_WIN32
-		char *path = etk_win32_convert_active_to_utf8(aPath.Path(), -1);
-		menuItem = new EMenuItem(path ? path : aPath.Path(), msg);
+#ifdef BHAPI_OS_WIN32
+		char *path = bhapi_win32_convert_active_to_utf8(aPath.Path(), -1);
+		menuItem = new BMenuItem(path ? path : aPath.Path(), msg);
 		if(path) free(path);
 #else
-		menuItem = new EMenuItem(aPath.Path(), msg);
+		menuItem = new BMenuItem(aPath.Path(), msg);
 #endif
 		menuItem->SetTarget(this);
 		menu->AddItem(menuItem);
@@ -1512,13 +1512,13 @@ EFilePanelWindow::RefreshDirMenu()
 
 	if(menu->CountItems() == 0)
 	{
-		menuItem = new EMenuItem(TEXT_NOTICE_EMPTY, NULL);
+		menuItem = new BMenuItem(TEXT_NOTICE_EMPTY, NULL);
 		menuItem->SetEnabled(false);
 		menu->AddItem(menuItem);
 	}
 
-#ifdef ETK_OS_WIN32
-	char *path = etk_win32_convert_active_to_utf8(fPath.Path(), -1);
+#ifdef BHAPI_OS_WIN32
+	char *path = bhapi_win32_convert_active_to_utf8(fPath.Path(), -1);
 	fDirMenu->Superitem()->SetLabel(path ? path : (fPath.Path() == NULL ? TEXT_ALL_VOLUMES : fPath.Path()));
 	if(path) free(path);
 #else
@@ -1527,22 +1527,22 @@ EFilePanelWindow::RefreshDirMenu()
 }
 
 
-EFilePanelFilter::~EFilePanelFilter()
+BFilePanelFilter::~BFilePanelFilter()
 {
 }
 
 
-EFilePanel::EFilePanel(e_file_panel_mode mode,
-		       const EMessenger *target,
+BFilePanel::BFilePanel(b_file_panel_mode mode,
+		       const BMessenger *target,
 		       const char *panel_directory,
-		       euint32 node_flavors,
+		       b_uint32 node_flavors,
 		       bool allow_multiple_selection,
-		       const EMessage *message,
-		       EFilePanelFilter *filter,
+		       const BMessage *message,
+		       BFilePanelFilter *filter,
 		       bool modal,
 		       bool hide_when_done)
 {
-	fWindow = new EFilePanelWindow(this, mode, node_flavors, modal, allow_multiple_selection);
+	fWindow = new BFilePanelWindow(this, mode, node_flavors, modal, allow_multiple_selection);
 	if(panel_directory) SetPanelDirectory(panel_directory);
 	SetTarget(target);
 	SetMessage(message);
@@ -1551,7 +1551,7 @@ EFilePanel::EFilePanel(e_file_panel_mode mode,
 }
 
 
-EFilePanel::~EFilePanel()
+BFilePanel::~BFilePanel()
 {
 	fWindow->Lock();
 	fWindow->Quit();
@@ -1559,10 +1559,10 @@ EFilePanel::~EFilePanel()
 
 
 void
-EFilePanel::Show()
+BFilePanel::Show()
 {
-	EFilePanelWindow *win = (EFilePanelWindow*)fWindow;
-	EAutolock <EFilePanelWindow> autolock(win);
+	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
+	BAutolock <BFilePanelWindow> autolock(win);
 
 	if(win->IsHidden())
 	{
@@ -1573,165 +1573,165 @@ EFilePanel::Show()
 
 
 void
-EFilePanel::Hide()
+BFilePanel::Hide()
 {
-	EAutolock <EWindow> autolock(fWindow);
+	BAutolock <BWindow> autolock(fWindow);
 
 	fWindow->Hide();
 }
 
 
 bool
-EFilePanel::IsShowing() const
+BFilePanel::IsShowing() const
 {
 	return(!fWindow->IsHidden());
 }
 
 
 void
-EFilePanel::WasHidden()
+BFilePanel::WasHidden()
 {
 }
 
 
 void
-EFilePanel::SelectionChanged()
+BFilePanel::SelectionChanged()
 {
 }
 
 
 void
-EFilePanel::SendMessage(const EMessenger *msgr, EMessage *msg)
+BFilePanel::SendMessage(const BMessenger *msgr, BMessage *msg)
 {
 	if(msgr && msg) msgr->SendMessage(msg);
 }
 
 
-EWindow*
-EFilePanel::Window() const
+BWindow*
+BFilePanel::Window() const
 {
 	return fWindow;
 }
 
 
-EMessenger*
-EFilePanel::Target() const
+BMessenger*
+BFilePanel::Target() const
 {
-	EFilePanelWindow *win = (EFilePanelWindow*)fWindow;
+	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
 	return win->Target();
 }
 
 
-EFilePanelFilter*
-EFilePanel::Filter() const
+BFilePanelFilter*
+BFilePanel::Filter() const
 {
-	return ((EFilePanelWindow*)fWindow)->fFilter;
+	return ((BFilePanelWindow*)fWindow)->fFilter;
 }
 
 
-e_file_panel_mode
-EFilePanel::PanelMode() const
+b_file_panel_mode
+BFilePanel::PanelMode() const
 {
-	EFilePanelWindow *win = (EFilePanelWindow*)fWindow;
+	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
 	return win->PanelMode();
 }
 
 
 void
-EFilePanel::SetTarget(const EMessenger *target)
+BFilePanel::SetTarget(const BMessenger *target)
 {
-	EFilePanelWindow *win = (EFilePanelWindow*)fWindow;
-	EAutolock <EFilePanelWindow> autolock(win);
+	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
+	BAutolock <BFilePanelWindow> autolock(win);
 
 	win->SetTarget(target);
 }
 
 
 void
-EFilePanel::SetMessage(const EMessage *msg)
+BFilePanel::SetMessage(const BMessage *msg)
 {
-	EFilePanelWindow *win = (EFilePanelWindow*)fWindow;
-	EAutolock <EFilePanelWindow> autolock(win);
+	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
+	BAutolock <BFilePanelWindow> autolock(win);
 
 	win->SetMessage(msg);
 }
 
 
 void
-EFilePanel::SetFilter(EFilePanelFilter *filter)
+BFilePanel::SetFilter(BFilePanelFilter *filter)
 {
-	EFilePanelWindow *win = (EFilePanelWindow*)fWindow;
-	EAutolock <EFilePanelWindow> autolock(win);
+	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
+	BAutolock <BFilePanelWindow> autolock(win);
 
 	win->SetFilter(filter);
 }
 
 
 void
-EFilePanel::SetSaveText(const char *text)
+BFilePanel::SetSaveText(const char *text)
 {
-	EFilePanelWindow *win = (EFilePanelWindow*)fWindow;
-	EAutolock <EFilePanelWindow> autolock(win);
+	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
+	BAutolock <BFilePanelWindow> autolock(win);
 
 	win->SetSaveText(text);
 }
 
 
 void
-EFilePanel::SetButtonLabel(e_file_panel_button btn, const char *label)
+BFilePanel::SetButtonLabel(b_file_panel_button btn, const char *label)
 {
-	EFilePanelWindow *win = (EFilePanelWindow*)fWindow;
-	EAutolock <EFilePanelWindow> autolock(win);
+	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
+	BAutolock <BFilePanelWindow> autolock(win);
 
 	win->SetButtonLabel(btn, label);
 }
 
 
 void
-EFilePanel::SetHideWhenDone(bool state)
+BFilePanel::SetHideWhenDone(bool state)
 {
-	EFilePanelWindow *win = (EFilePanelWindow*)fWindow;
-	EAutolock <EFilePanelWindow> autolock(win);
+	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
+	BAutolock <BFilePanelWindow> autolock(win);
 
 	win->SetHideWhenDone(state);
 }
 
 
 bool
-EFilePanel::HidesWhenDone() const
+BFilePanel::HidesWhenDone() const
 {
-	return ((EFilePanelWindow*)fWindow)->fHidesWhenDone;
+	return ((BFilePanelWindow*)fWindow)->fHidesWhenDone;
 }
 
 
 void
-EFilePanel::GetPanelDirectory(EEntry *entry) const
+BFilePanel::GetPanelDirectory(BEntry *entry) const
 {
 	if(entry == NULL) return;
 
-	if(fWindow->Thread() != etk_get_current_thread_id())
+	if(fWindow->Thread() != bhapi_get_current_thread_id())
 	{
-		EMessenger msgr(fWindow, fWindow);
-		EMessage msg(MSG_PANEL_GET_DIR);
+		BMessenger msgr(fWindow, fWindow);
+		BMessage msg(MSG_PANEL_GET_DIR);
 		const char *path = NULL;
 
 		entry->Unset();
-		if(msgr.SendMessage(&msg, &msg) != E_OK) return;
-		if(msg.FindString("PanelDirectory", &path) == false) return;
+		if(msgr.SendMessage(&msg, &msg) != B_OK) return;
+        if(msg.FindString("PanelDirectory", &path) == false) return;
 		entry->SetTo(path);
 	}
 	else
 	{
 		entry->Unset();
-		entry->SetTo(((EFilePanelWindow*)fWindow)->fPath.Path());
+		entry->SetTo(((BFilePanelWindow*)fWindow)->fPath.Path());
 	}
 }
 
 
 void
-EFilePanel::GetPanelDirectory(EPath *path) const
+BFilePanel::GetPanelDirectory(BPath *path) const
 {
-	EEntry aEntry;
+	BEntry aEntry;
 
 	if(path == NULL) return;
 
@@ -1742,9 +1742,9 @@ EFilePanel::GetPanelDirectory(EPath *path) const
 
 
 void
-EFilePanel::GetPanelDirectory(EDirectory *directory) const
+BFilePanel::GetPanelDirectory(BDirectory *directory) const
 {
-	EPath aPath;
+	BPath aPath;
 
 	if(directory == NULL) return;
 
@@ -1755,9 +1755,9 @@ EFilePanel::GetPanelDirectory(EDirectory *directory) const
 
 
 void
-EFilePanel::SetPanelDirectory(const EEntry *entry)
+BFilePanel::SetPanelDirectory(const BEntry *entry)
 {
-	EPath path;
+	BPath path;
 
 	if(entry) entry->GetPath(&path);
 	SetPanelDirectory(path.Path());
@@ -1765,9 +1765,9 @@ EFilePanel::SetPanelDirectory(const EEntry *entry)
 
 
 void
-EFilePanel::SetPanelDirectory(const EDirectory *directory)
+BFilePanel::SetPanelDirectory(const BDirectory *directory)
 {
-	EEntry entry;
+	BEntry entry;
 
 	if(directory) directory->GetEntry(&entry);
 	SetPanelDirectory(&entry);
@@ -1775,42 +1775,42 @@ EFilePanel::SetPanelDirectory(const EDirectory *directory)
 
 
 void
-EFilePanel::SetPanelDirectory(const char *directory)
+BFilePanel::SetPanelDirectory(const char *directory)
 {
-	EFilePanelWindow *win = (EFilePanelWindow*)fWindow;
-	EAutolock <EFilePanelWindow> autolock(win);
+	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
+	BAutolock <BFilePanelWindow> autolock(win);
 
 	win->SetPanelDirectory(directory);
 }
 
 
 void
-EFilePanel::Refresh()
+BFilePanel::Refresh()
 {
-	EFilePanelWindow *win = (EFilePanelWindow*)fWindow;
-	EAutolock <EFilePanelWindow> autolock(win);
+	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
+	BAutolock <BFilePanelWindow> autolock(win);
 
 	win->Refresh();
 }
 
 
 void
-EFilePanel::Rewind()
+BFilePanel::Rewind()
 {
-	EFilePanelWindow *win = (EFilePanelWindow*)fWindow;
-	EAutolock <EFilePanelWindow> autolock(win);
+	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
+	BAutolock <BFilePanelWindow> autolock(win);
 
 	win->Rewind();
 }
 
 
-e_status_t
-EFilePanel::GetNextSelected(EEntry *entry)
+b_status_t
+BFilePanel::GetNextSelected(BEntry *entry)
 {
-	if(entry == NULL) return E_ERROR;
+	if(entry == NULL) return B_ERROR;
 
-	EFilePanelWindow *win = (EFilePanelWindow*)fWindow;
-	EAutolock <EFilePanelWindow> autolock(win);
+	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
+	BAutolock <BFilePanelWindow> autolock(win);
 
 	return win->GetNextSelected(entry);
 }

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -34,39 +34,39 @@
 #include "Token.h"
 
 
-struct _LOCAL _etk_token_t {
-	euint64 vitalities;
-	e_bigtime_t time_stamp;
+struct _LOCAL _bhapi_token_t {
+	b_uint64 vitalities;
+	b_bigtime_t time_stamp;
 	void *data;
 };
 
 
-class _LOCAL ETokensDepotPrivateData : public EList {
+class _LOCAL BTokensDepotPrivateData : public BList {
 public:
-	ETokensDepotPrivateData();
-	virtual ~ETokensDepotPrivateData();
+	BTokensDepotPrivateData();
+	virtual ~BTokensDepotPrivateData();
 
-	euint64		AddToken(void *data);
-	void		RemoveToken(euint64 token);
-	_etk_token_t	*TokenAt(euint64 token) const;
+	b_uint64		AddToken(void *data);
+	void		RemoveToken(b_uint64 token);
+	_bhapi_token_t	*TokenAt(b_uint64 token) const;
 };
 
 
-ETokensDepotPrivateData::ETokensDepotPrivateData()
-	: EList()
+BTokensDepotPrivateData::BTokensDepotPrivateData()
+	: BList()
 {
 }
 
 
-ETokensDepotPrivateData::~ETokensDepotPrivateData()
+BTokensDepotPrivateData::~BTokensDepotPrivateData()
 {
-	EList *list;
+	BList *list;
 
-	while((list = (EList*)RemoveItem(0)) != NULL)
+	while((list = (BList*)RemoveItem(0)) != NULL)
 	{
-		for(eint32 i = 0; i < list->CountItems(); i++)
+		for(b_int32 i = 0; i < list->CountItems(); i++)
 		{
-			_etk_token_t *aToken = (_etk_token_t*)list->ItemAt(i);
+			_bhapi_token_t *aToken = (_bhapi_token_t*)list->ItemAt(i);
 			if(aToken != NULL) delete aToken;
 		}
 		delete list;
@@ -74,57 +74,57 @@ ETokensDepotPrivateData::~ETokensDepotPrivateData()
 }
 
 
-euint64
-ETokensDepotPrivateData::AddToken(void *data)
+b_uint64
+BTokensDepotPrivateData::AddToken(void *data)
 {
-	euint64 token = E_MAXUINT64;
-	_etk_token_t *aToken = new _etk_token_t;
+	b_uint64 token = B_MAXUINT64;
+	_bhapi_token_t *aToken = new _bhapi_token_t;
 
-	EList *list = NULL;
-	for(eint32 i = 0; i < CountItems(); i++)
+	BList *list = NULL;
+	for(b_int32 i = 0; i < CountItems(); i++)
 	{
-		list = (EList*)ItemAt(i);
-		if(list->CountItems() >= E_MAXINT32 - 1 || list->AddItem(aToken) == false)
+		list = (BList*)ItemAt(i);
+		if(list->CountItems() >= B_MAXINT32 - 1 || list->AddItem(aToken) == false)
 		{
 			list = NULL;
 			continue;
 		}
-		token = ((euint64)i << 32) | (euint64)(list->CountItems() - 1);
+		token = ((b_uint64)i << 32) | (b_uint64)(list->CountItems() - 1);
 	}
 
-	if(token == E_MAXUINT64)
+	if(token == B_MAXUINT64)
 	{
-		if(CountItems() < E_MAXINT32 - 1)
+		if(CountItems() < B_MAXINT32 - 1)
 		{
-			if(AddItem(list = new EList()) == false || list->AddItem(aToken) == false)
+			if(AddItem(list = new BList()) == false || list->AddItem(aToken) == false)
 			{
 				RemoveItem(list);
 				delete list;
 			}
 			else
 			{
-				token = ((euint64)(CountItems() - 1) << 32) | (euint64)(list->CountItems() - 1);
+				token = ((b_uint64)(CountItems() - 1) << 32) | (b_uint64)(list->CountItems() - 1);
 			}
 		}
-		else for(eint32 i = 0; i < CountItems(); i++)
+		else for(b_int32 i = 0; i < CountItems(); i++)
 		{
-			list = (EList*)ItemAt(i);
-			eint32 index = list->IndexOf(NULL);
+			list = (BList*)ItemAt(i);
+			b_int32 index = list->IndexOf(NULL);
 			if(index < 0)
 			{
 				list = NULL;
 				continue;
 			}
 			list->ReplaceItem(index, aToken);
-			token = ((euint64)i << 32) | (euint64)index;
+			token = ((b_uint64)i << 32) | (b_uint64)index;
 		}
 	}
 
-	if(token != E_MAXUINT64)
+	if(token != B_MAXUINT64)
 	{
 		aToken->vitalities = 1;
-		aToken->time_stamp = e_system_time();
-		while(aToken->time_stamp == e_system_time())
+		aToken->time_stamp = b_system_time();
+		while(aToken->time_stamp == b_system_time())
 		{
 			// do nothing, waiting till "e_system_time()" changed.
 		}
@@ -140,16 +140,16 @@ ETokensDepotPrivateData::AddToken(void *data)
 
 
 void
-ETokensDepotPrivateData::RemoveToken(euint64 token)
+BTokensDepotPrivateData::RemoveToken(b_uint64 token)
 {
-	euint64 index = token >> 32;
-	if(index > (euint64)E_MAXINT32 - 1) return;
+	b_uint64 index = token >> 32;
+	if(index > (b_uint64)B_MAXINT32 - 1) return;
 
-	EList *list = (EList*)ItemAt((eint32)index);
+	BList *list = (BList*)ItemAt((b_int32)index);
 	if(list == NULL) return;
 
 	index = token & 0xffffffff;
-	_etk_token_t *aToken = (_etk_token_t*)(list->ItemAt((eint32)index));
+	_bhapi_token_t *aToken = (_bhapi_token_t*)(list->ItemAt((b_int32)index));
 	if(aToken == NULL) return;
 
 	if(aToken->vitalities > 1)
@@ -159,17 +159,17 @@ ETokensDepotPrivateData::RemoveToken(euint64 token)
 	}
 	else
 	{
-		if(index < (euint64)list->CountItems() - 1)
+		if(index < (b_uint64)list->CountItems() - 1)
 		{
-			list->ReplaceItem((eint32)index, NULL);
+			list->ReplaceItem((b_int32)index, NULL);
 		}
 		else
 		{
-			list->RemoveItem((eint32)index);
+			list->RemoveItem((b_int32)index);
 			while(list->LastItem() == NULL && list->IsEmpty() == false) list->RemoveItem(list->CountItems() - 1);
-			for(; !(list == NULL || LastItem() != (void*)list || list->IsEmpty() == false); list = (EList*)LastItem())
+			for(; !(list == NULL || LastItem() != (void*)list || list->IsEmpty() == false); list = (BList*)LastItem())
 			{
-				delete (EList*)RemoveItem(CountItems() - 1);
+				delete (BList*)RemoveItem(CountItems() - 1);
 			}
 		}
 		delete aToken;
@@ -177,48 +177,48 @@ ETokensDepotPrivateData::RemoveToken(euint64 token)
 }
 
 
-_etk_token_t*
-ETokensDepotPrivateData::TokenAt(euint64 token) const
+_bhapi_token_t*
+BTokensDepotPrivateData::TokenAt(b_uint64 token) const
 {
-	euint64 index = token >> 32;
-	if(index > (euint64)E_MAXINT32 - 1) return NULL;
+	b_uint64 index = token >> 32;
+	if(index > (b_uint64)B_MAXINT32 - 1) return NULL;
 
-	EList *list = (EList*)ItemAt((eint32)index);
+	BList *list = (BList*)ItemAt((b_int32)index);
 	if(list == NULL) return NULL;
 
 	index = token & 0xffffffff;
-	return((_etk_token_t*)(list->ItemAt((eint32)index)));
+	return((_bhapi_token_t*)(list->ItemAt((b_int32)index)));
 }
 
 
-ETokensDepot::ETokensDepot(ELocker *locker, bool deconstruct_locker)
+BTokensDepot::BTokensDepot(BLocker *locker, bool deconstruct_locker)
 	: fLocker(locker), fDeconstructLocker(deconstruct_locker)
 {
-	fData = reinterpret_cast<void*>(new ETokensDepotPrivateData());
+	fData = reinterpret_cast<void*>(new BTokensDepotPrivateData());
 }
 
 
-ETokensDepot::~ETokensDepot()
+BTokensDepot::~BTokensDepot()
 {
 	fToken.fDepot = NULL;
-	delete reinterpret_cast<ETokensDepotPrivateData*>(fData);
+	delete reinterpret_cast<BTokensDepotPrivateData*>(fData);
 	if(fDeconstructLocker && fLocker != NULL) delete fLocker;
 }
 
 
-EToken*
-ETokensDepot::CreateToken(void *data)
+BToken*
+BTokensDepot::CreateToken(void *data)
 {
-	EToken *aToken = NULL;
+	BToken *aToken = NULL;
 
 	if(Lock())
 	{
-		ETokensDepotPrivateData *private_data = reinterpret_cast<ETokensDepotPrivateData*>(fData);
-		euint64 token = private_data->AddToken(data);
-		_etk_token_t *_token = private_data->TokenAt(token);
+		BTokensDepotPrivateData *private_data = reinterpret_cast<BTokensDepotPrivateData*>(fData);
+		b_uint64 token = private_data->AddToken(data);
+		_bhapi_token_t *_token = private_data->TokenAt(token);
 		if(_token != NULL)
 		{
-			aToken = new EToken();
+			aToken = new BToken();
 			aToken->fOriginal = true;
 			aToken->fToken = token;
 			aToken->fTimeStamp = _token->time_stamp;
@@ -231,21 +231,21 @@ ETokensDepot::CreateToken(void *data)
 }
 
 
-EToken*
-ETokensDepot::OpenToken(euint64 token, EToken *fetch_token)
+BToken*
+BTokensDepot::OpenToken(b_uint64 token, BToken *fetch_token)
 {
-	EToken *aToken = NULL;
+	BToken *aToken = NULL;
 
 	if(fetch_token == NULL || fetch_token->fDepot == NULL)
 	{
 		if(Lock())
 		{
-			ETokensDepotPrivateData *private_data = reinterpret_cast<ETokensDepotPrivateData*>(fData);
-			_etk_token_t *_token = private_data->TokenAt(token);
-			if(!(_token == NULL || _token->vitalities == E_MAXUINT64))
+			BTokensDepotPrivateData *private_data = reinterpret_cast<BTokensDepotPrivateData*>(fData);
+			_bhapi_token_t *_token = private_data->TokenAt(token);
+			if(!(_token == NULL || _token->vitalities == B_MAXUINT64))
 			{
 				_token->vitalities += 1;
-				aToken = (fetch_token != NULL ? fetch_token : new EToken());
+				aToken = (fetch_token != NULL ? fetch_token : new BToken());
 				aToken->fToken = token;
 				aToken->fTimeStamp = _token->time_stamp;
 				aToken->fDepot = this;
@@ -255,21 +255,21 @@ ETokensDepot::OpenToken(euint64 token, EToken *fetch_token)
 	}
 	else
 	{
-		ETK_WARNING("[PRIVATE]: %s --- fetch_token isn't empty.\n", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[PRIVATE]: %s --- fetch_token isn't empty.\n", __PRETTY_FUNCTION__);
 	}
 
 	return aToken;
 }
 
 
-EToken*
-ETokensDepot::FetchToken(euint64 token)
+BToken*
+BTokensDepot::FetchToken(b_uint64 token)
 {
 	if(!(fLocker == NULL || fLocker->IsLockedByCurrentThread()))
-		ETK_ERROR("[PRIVATE]: %s --- Invalid operation", __PRETTY_FUNCTION__);
+		BHAPI_ERROR("[PRIVATE]: %s --- Invalid operation", __PRETTY_FUNCTION__);
 
-	ETokensDepotPrivateData *private_data = reinterpret_cast<ETokensDepotPrivateData*>(fData);
-	_etk_token_t *_token = private_data->TokenAt(token);
+	BTokensDepotPrivateData *private_data = reinterpret_cast<BTokensDepotPrivateData*>(fData);
+	_bhapi_token_t *_token = private_data->TokenAt(token);
 	if(_token == NULL) return NULL;
 
 	fToken.fToken = token;
@@ -281,7 +281,7 @@ ETokensDepot::FetchToken(euint64 token)
 
 
 void
-ETokensDepot::SetLocker(ELocker *locker, bool deconstruct_locker)
+BTokensDepot::SetLocker(BLocker *locker, bool deconstruct_locker)
 {
 	if(fLocker != NULL && fDeconstructLocker) delete fLocker;
 	fLocker = locker;
@@ -289,48 +289,48 @@ ETokensDepot::SetLocker(ELocker *locker, bool deconstruct_locker)
 }
 
 
-ELocker*
-ETokensDepot::Locker() const
+BLocker*
+BTokensDepot::Locker() const
 {
 	return fLocker;
 }
 
 
 bool
-ETokensDepot::Lock()
+BTokensDepot::Lock()
 {
 	return(fLocker == NULL ? true : fLocker->Lock());
 }
 
 
 void
-ETokensDepot::Unlock()
+BTokensDepot::Unlock()
 {
 	if(fLocker != NULL) fLocker->Unlock();
 }
 
 
-EToken::EToken()
-	: fOriginal(false), fToken(E_MAXUINT64), fTimeStamp(E_MAXINT64), fDepot(NULL)
+BToken::BToken()
+	: fOriginal(false), fToken(B_MAXUINT64), fTimeStamp(B_MAXINT64), fDepot(NULL)
 {
 }
 
 
-EToken::~EToken()
+BToken::~BToken()
 {
 	MakeEmpty();
 }
 
 
 bool
-EToken::IsValid() const
+BToken::IsValid() const
 {
 	bool retVal = false;
 
-	if(!(fToken == E_MAXUINT64 || fDepot == NULL || fDepot->Lock() == false))
+	if(!(fToken == B_MAXUINT64 || fDepot == NULL || fDepot->Lock() == false))
 	{
-		ETokensDepotPrivateData *depot_private = reinterpret_cast<ETokensDepotPrivateData*>(fDepot->fData);
-		_etk_token_t *aToken = depot_private->TokenAt(fToken);
+		BTokensDepotPrivateData *depot_private = reinterpret_cast<BTokensDepotPrivateData*>(fDepot->fData);
+		_bhapi_token_t *aToken = depot_private->TokenAt(fToken);
 		if(!(aToken == NULL || aToken->time_stamp != fTimeStamp)) retVal = true;
 		fDepot->Unlock();
 	}
@@ -339,30 +339,30 @@ EToken::IsValid() const
 }
 
 
-euint64
-EToken::Token() const
+b_uint64
+BToken::Token() const
 {
 	return fToken;
 }
 
 
-e_bigtime_t
-EToken::TimeStamp() const
+b_bigtime_t
+BToken::TimeStamp() const
 {
 	return fTimeStamp;
 }
 
 
-EToken&
-EToken::operator+=(euint64 vitalities)
+BToken&
+BToken::operator+=(b_uint64 vitalities)
 {
-	if(fToken == E_MAXUINT64 || fDepot == NULL) ETK_ERROR("[PRIVATE]: %s --- Invalid operation.", __PRETTY_FUNCTION__);
-	if(fDepot->Lock() == false) ETK_ERROR("[PRIVATE]: %s --- Unable to lock depot.", __PRETTY_FUNCTION__);
-	if(IsValid() == false) ETK_ERROR("[PRIVATE]: %s --- Invalid token.", __PRETTY_FUNCTION__);
+	if(fToken == B_MAXUINT64 || fDepot == NULL) BHAPI_ERROR("[PRIVATE]: %s --- Invalid operation.", __PRETTY_FUNCTION__);
+	if(fDepot->Lock() == false) BHAPI_ERROR("[PRIVATE]: %s --- Unable to lock depot.", __PRETTY_FUNCTION__);
+	if(IsValid() == false) BHAPI_ERROR("[PRIVATE]: %s --- Invalid token.", __PRETTY_FUNCTION__);
 
-	ETokensDepotPrivateData *depot_private = reinterpret_cast<ETokensDepotPrivateData*>(fDepot->fData);
-	_etk_token_t *aToken = depot_private->TokenAt(fToken);
-	if(aToken->vitalities > E_MAXUINT64 - vitalities) ETK_ERROR("[PRIVATE]: %s --- Invalid vitalities.", __PRETTY_FUNCTION__);
+	BTokensDepotPrivateData *depot_private = reinterpret_cast<BTokensDepotPrivateData*>(fDepot->fData);
+	_bhapi_token_t *aToken = depot_private->TokenAt(fToken);
+	if(aToken->vitalities > B_MAXUINT64 - vitalities) BHAPI_ERROR("[PRIVATE]: %s --- Invalid vitalities.", __PRETTY_FUNCTION__);
 	aToken->vitalities += vitalities;
 
 	fDepot->Unlock();
@@ -371,23 +371,23 @@ EToken::operator+=(euint64 vitalities)
 }
 
 
-EToken&
-EToken::operator-=(euint64 vitalities)
+BToken&
+BToken::operator-=(b_uint64 vitalities)
 {
-	if(fToken == E_MAXUINT64 || fDepot == NULL) ETK_ERROR("[PRIVATE]: %s --- Invalid operation.", __PRETTY_FUNCTION__);
-	if(fDepot->Lock() == false) ETK_ERROR("[PRIVATE]: %s --- Unable to lock depot.", __PRETTY_FUNCTION__);
-	if(IsValid() == false) ETK_ERROR("[PRIVATE]: %s --- Invalid token.", __PRETTY_FUNCTION__);
+	if(fToken == B_MAXUINT64 || fDepot == NULL) BHAPI_ERROR("[PRIVATE]: %s --- Invalid operation.", __PRETTY_FUNCTION__);
+	if(fDepot->Lock() == false) BHAPI_ERROR("[PRIVATE]: %s --- Unable to lock depot.", __PRETTY_FUNCTION__);
+	if(IsValid() == false) BHAPI_ERROR("[PRIVATE]: %s --- Invalid token.", __PRETTY_FUNCTION__);
 
-	ETokensDepotPrivateData *depot_private = reinterpret_cast<ETokensDepotPrivateData*>(fDepot->fData);
-	_etk_token_t *aToken = depot_private->TokenAt(fToken);
-	if(aToken->vitalities < vitalities) ETK_ERROR("[PRIVATE]: %s --- Invalid vitalities.", __PRETTY_FUNCTION__);
+	BTokensDepotPrivateData *depot_private = reinterpret_cast<BTokensDepotPrivateData*>(fDepot->fData);
+	_bhapi_token_t *aToken = depot_private->TokenAt(fToken);
+	if(aToken->vitalities < vitalities) BHAPI_ERROR("[PRIVATE]: %s --- Invalid vitalities.", __PRETTY_FUNCTION__);
 	if((aToken->vitalities -= vitalities) == 0)
 	{
 		depot_private->RemoveToken(fToken);
 		fDepot->Unlock();
 		fOriginal = false;
-		fToken = E_MAXUINT64;
-		fTimeStamp = E_MAXINT64;
+		fToken = B_MAXUINT64;
+		fTimeStamp = B_MAXINT64;
 		fDepot = NULL;
 	}
 	else
@@ -399,30 +399,30 @@ EToken::operator-=(euint64 vitalities)
 }
 
 
-EToken&
-EToken::operator++()
+BToken&
+BToken::operator++()
 {
 	return operator+=(1);
 }
 
 
-EToken&
-EToken::operator--()
+BToken&
+BToken::operator--()
 {
 	return operator-=(1);
 }
 
 
-euint64
-EToken::Vitalities() const
+b_uint64
+BToken::Vitalities() const
 {
-	euint64 retVal = 0;
+	b_uint64 retVal = 0;
 
-	if(!(fToken == E_MAXUINT64 || fDepot == NULL || fDepot->Lock() == false))
+	if(!(fToken == B_MAXUINT64 || fDepot == NULL || fDepot->Lock() == false))
 	{
 		if(IsValid())
 		{
-			ETokensDepotPrivateData *depot_private = reinterpret_cast<ETokensDepotPrivateData*>(fDepot->fData);
+			BTokensDepotPrivateData *depot_private = reinterpret_cast<BTokensDepotPrivateData*>(fDepot->fData);
 			retVal = depot_private->TokenAt(fToken)->vitalities;
 		}
 		fDepot->Unlock();
@@ -433,15 +433,15 @@ EToken::Vitalities() const
 
 
 void*
-EToken::Data() const
+BToken::Data() const
 {
 	void *retVal = NULL;
 
-	if(!(fToken == E_MAXUINT64 || fDepot == NULL || fDepot->Lock() == false))
+	if(!(fToken == B_MAXUINT64 || fDepot == NULL || fDepot->Lock() == false))
 	{
 		if(IsValid())
 		{
-			ETokensDepotPrivateData *depot_private = reinterpret_cast<ETokensDepotPrivateData*>(fDepot->fData);
+			BTokensDepotPrivateData *depot_private = reinterpret_cast<BTokensDepotPrivateData*>(fDepot->fData);
 			retVal = depot_private->TokenAt(fToken)->data;
 		}
 		fDepot->Unlock();
@@ -452,13 +452,13 @@ EToken::Data() const
 
 
 void
-EToken::SetData(void *data)
+BToken::SetData(void *data)
 {
-	if(!(fOriginal == false || fToken == E_MAXUINT64 || fDepot == NULL || fDepot->Lock() == false))
+	if(!(fOriginal == false || fToken == B_MAXUINT64 || fDepot == NULL || fDepot->Lock() == false))
 	{
 		if(IsValid())
 		{
-			ETokensDepotPrivateData *depot_private = reinterpret_cast<ETokensDepotPrivateData*>(fDepot->fData);
+			BTokensDepotPrivateData *depot_private = reinterpret_cast<BTokensDepotPrivateData*>(fDepot->fData);
 			depot_private->TokenAt(fToken)->data = data;
 		}
 		fDepot->Unlock();
@@ -466,21 +466,21 @@ EToken::SetData(void *data)
 }
 
 
-ETokensDepot*
-EToken::Depot() const
+BTokensDepot*
+BToken::Depot() const
 {
 	return fDepot;
 }
 
 
 void
-EToken::MakeEmpty()
+BToken::MakeEmpty()
 {
-	if(!(fToken == E_MAXUINT64 || fDepot == NULL || fDepot->Lock() == false))
+	if(!(fToken == B_MAXUINT64 || fDepot == NULL || fDepot->Lock() == false))
 	{
 		if(IsValid())
 		{
-			ETokensDepotPrivateData *depot_private = reinterpret_cast<ETokensDepotPrivateData*>(fDepot->fData);
+			BTokensDepotPrivateData *depot_private = reinterpret_cast<BTokensDepotPrivateData*>(fDepot->fData);
 			if(fOriginal)
 				depot_private->RemoveToken(fToken);
 			else
@@ -490,8 +490,8 @@ EToken::MakeEmpty()
 	}
 
 	fOriginal = false;
-	fToken = E_MAXUINT64;
-	fTimeStamp = E_MAXINT64;
+	fToken = B_MAXUINT64;
+	fTimeStamp = B_MAXINT64;
 	fDepot = NULL;
 }
 

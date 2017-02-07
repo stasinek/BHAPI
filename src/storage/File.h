@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,49 +27,49 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_FILE_H__
-#define __ETK_FILE_H__ 
+#ifndef __BHAPI_FILE_H__
+#define __BHAPI_FILE_H__ 
 
 #include "./StorageDefs.h"
 #include "./Directory.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EFile {
+class _IMPEXP_BHAPI BFile {
 public:
-	EFile();
-	EFile(const char *path, euint32 open_mode, euint32 access_mode = E_USER_READ | E_USER_WRITE);
-	EFile(const EEntry *entry, euint32 open_mode, euint32 access_mode = E_USER_READ | E_USER_WRITE);
-	EFile(const EDirectory *dir, const char *leaf, euint32 open_mode, euint32 access_mode = E_USER_READ | E_USER_WRITE);
-	EFile(const EFile &from);
-	virtual ~EFile();
+    BFile();
+    BFile(const char *path, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    BFile(const BEntry *entry, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    BFile(const BDirectory *dir, const char *leaf, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    BFile(const BFile &from);
+    virtual ~BFile();
 
-	e_status_t	InitCheck() const;
-	e_status_t	SetTo(const char *path, euint32 open_mode, euint32 access_mode = E_USER_READ | E_USER_WRITE);
-	e_status_t	SetTo(const EEntry *entry, euint32 open_mode, euint32 access_mode = E_USER_READ | E_USER_WRITE);
-	e_status_t	SetTo(const EDirectory *dir, const char *leaf, euint32 open_mode, euint32 access_mode = E_USER_READ | E_USER_WRITE);
+	b_status_t	InitCheck() const;
+    b_status_t	SetTo(const char *path, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    b_status_t	SetTo(const BEntry *entry, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    b_status_t	SetTo(const BDirectory *dir, const char *leaf, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
 	void		Unset();
 
 	bool		IsReadable() const;
 	bool		IsWritable() const;
 
 	ssize_t		Read(void *buffer, size_t size);
-	ssize_t		ReadAt(eint64 pos, void *buffer, size_t size);
+    ssize_t		ReadAt(b_int64 pos, void *buffer, size_t size);
 	ssize_t		Write(const void *buffer, size_t size);
-	ssize_t		WriteAt(eint64 pos, const void *buffer, size_t size);
+    ssize_t		WriteAt(b_int64 pos, const void *buffer, size_t size);
 
-	eint64		Seek(eint64 position, euint32 seek_mode);
-	eint64		Position() const;
-	e_status_t	SetSize(eint64 size);
+    b_int64		Seek(b_int64 position, b_uint32 seek_mode);
+    b_int64		Position() const;
+    b_status_t	SetSize(b_int64 size);
 
-	EFile&		operator=(const EFile &from);
+    BFile&		operator=(const BFile &from);
 
 private:
 	void *fFD;
-	euint32 fMode;
+    b_uint32 fMode;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_FILE_H__ */
+#endif /* __BHAPI_FILE_H__ */
 

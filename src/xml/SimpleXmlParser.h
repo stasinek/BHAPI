@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,17 +27,17 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_SIMPLE_XML_PARSER_H__
-#define __ETK_SIMPLE_XML_PARSER_H__
+#ifndef __BHAPI_SIMPLE_XML_PARSER_H__
+#define __BHAPI_SIMPLE_XML_PARSER_H__
 
 #include "./../support/List.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK ESimpleXmlNode {
+class _IMPEXP_BHAPI BSimpleXmlNode {
 public:
-	ESimpleXmlNode(const char *name, const char *content = NULL);
-	~ESimpleXmlNode();
+	BSimpleXmlNode(const char *name, const char *content = NULL);
+	~BSimpleXmlNode();
 
 	const char		*Name() const;
 	void			SetName(const char *name);
@@ -45,36 +45,36 @@ public:
 	const char		*Content() const;
 	void			SetContent(const char *content);
 
-	const char		*AttributeAt(eint32 index, const char** attr_content = NULL) const;
+    const char		*AttributeAt(b_int32 index, const char** attr_content = NULL) const;
 	bool			AddAttribute(const char *name, const char *content, bool replace_content = true);
 	bool			RemoveAttribute(const char *name);
-	eint32			FindAttribute(const char *name, eint32 fromIndex = 0) const;
-	eint32			CountAttributes() const;
+    b_int32			FindAttribute(const char *name, b_int32 fromIndex = 0) const;
+    b_int32			CountAttributes() const;
 
-	ESimpleXmlNode		*NodeAt(eint32 index) const;
-	bool			AddNode(ESimpleXmlNode *node, eint32 atIndex = -1);
-	bool			RemoveNode(ESimpleXmlNode *node);
+    BSimpleXmlNode		*NodeAt(b_int32 index) const;
+    bool			AddNode(BSimpleXmlNode *node, b_int32 atIndex = -1);
+	bool			RemoveNode(BSimpleXmlNode *node);
 	bool			RemoveSelf();
-	eint32			FindNode(const char *name, eint32 fromIndex = 0) const;
-	eint32			CountNodes() const;
-	ESimpleXmlNode		*SuperNode() const;
+    b_int32			FindNode(const char *name, b_int32 fromIndex = 0) const;
+    b_int32			CountNodes() const;
+	BSimpleXmlNode		*SuperNode() const;
 
 	void			PrintToStream() const;
 
 private:
 	char *fName;
 	char *fContent;
-	EList fAttributes;
-	EList fNodes;
+	BList fAttributes;
+	BList fNodes;
 
-	ESimpleXmlNode *fSuperNode;
+	BSimpleXmlNode *fSuperNode;
 };
 
 
-_IMPEXP_ETK e_status_t etk_parse_simple_xml(const char *simple_xml_buffer, ESimpleXmlNode *node);
+_IMPEXP_BHAPI b_status_t bhapi_parse_simple_xml(const char *simple_xml_buffer, BSimpleXmlNode *node);
 
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_SIMPLE_XML_PARSER_H__ */
+#endif /* __BHAPI_SIMPLE_XML_PARSER_H__ */
 

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_INPUT_H__
-#define __ETK_INPUT_H__
+#ifndef __BHAPI_INPUT_H__
+#define __BHAPI_INPUT_H__
 
 enum {
-	E_INPUT_METHOD_STARTED = 0,
-	E_INPUT_METHOD_STOPPED,
-	E_INPUT_METHOD_CHANGED,
-	E_INPUT_METHOD_LOCATION_REQUEST
+    B_INPUT_METHOD_STARTED = 0,
+    B_INPUT_METHOD_STOPPED,
+    B_INPUT_METHOD_CHANGED,
+    B_INPUT_METHOD_LOCATION_REQUEST
 };
 
-#endif /* __ETK_INPUT_H__ */
+#endif /* __BHAPI_INPUT_H__ */
 

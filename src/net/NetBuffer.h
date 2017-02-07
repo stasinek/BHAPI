@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,55 +27,55 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_NET_BUFFER_H__
-#define __ETK_NET_BUFFER_H__
+#ifndef __BHAPI_NET_BUFFER_H__
+#define __BHAPI_NET_BUFFER_H__
 
 #include "./../support/Archivable.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK ENetBuffer : public EArchivable {
+class _IMPEXP_BHAPI BNetBuffer : public BArchivable {
 public:
-	ENetBuffer(size_t size = 0);
-	ENetBuffer(const ENetBuffer &from);
-	virtual ~ENetBuffer();
+	BNetBuffer(size_t size = 0);
+	BNetBuffer(const BNetBuffer &from);
+	virtual ~BNetBuffer();
 
 	// Archiving
-	ENetBuffer(const EMessage *from);
-	virtual e_status_t Archive(EMessage *into, bool deep = true) const;
-	static EArchivable *Instantiate(const EMessage *from);
+	BNetBuffer(const BMessage *from);
+	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+	static BArchivable *Instantiate(const BMessage *from);
 
-	e_status_t	InitCheck() const;
+	b_status_t	InitCheck() const;
 
-	ENetBuffer	&operator=(const ENetBuffer &buf);
+	BNetBuffer	&operator=(const BNetBuffer &buf);
 
-	e_status_t	AppendData(const void *data, size_t len);
-	e_status_t	AppendInt8(eint8 value);
-	e_status_t	AppendUint8(euint8 value);
-	e_status_t	AppendInt16(eint16 value);
-	e_status_t	AppendUint16(euint16 value);
-	e_status_t	AppendInt32(eint32 value);
-	e_status_t	AppendUint32(euint32 value);
-	e_status_t	AppendInt64(eint64 value);
-	e_status_t	AppendUint64(euint64 value);
-	e_status_t	AppendFloat(float value);
-	e_status_t	AppendDouble(double value);
-	e_status_t	AppendString(const char *string, eint32 len = -1);
-	e_status_t	AppendMessage(const EMessage &msg);
+	b_status_t	AppendData(const void *data, size_t len);
+    b_status_t	AppendInt8(b_int8 value);
+    b_status_t	AppendUint8(b_uint8 value);
+    b_status_t	AppendInt16(b_int16 value);
+    b_status_t	AppendUint16(b_uint16 value);
+    b_status_t	AppendInt32(b_int32 value);
+    b_status_t	AppendUint32(b_uint32 value);
+    b_status_t	AppendInt64(b_int64 value);
+    b_status_t	AppendUint64(b_uint64 value);
+	b_status_t	AppendFloat(float value);
+	b_status_t	AppendDouble(double value);
+    b_status_t	AppenString(const char *string, b_int32 len = -1);
+	b_status_t	AppendMessage(const BMessage &msg);
 
-	e_status_t	RemoveData(void *data, size_t len);
-	e_status_t	RemoveInt8(eint8 &value);
-	e_status_t	RemoveUint8(euint8 &value);
-	e_status_t	RemoveInt16(eint16 &value);
-	e_status_t	RemoveUint16(euint16 &value);
-	e_status_t	RemoveInt32(eint32 &value);
-	e_status_t	RemoveUint32(euint32 &value);
-	e_status_t	RemoveInt64(eint64 &value);
-	e_status_t	RemoveUint64(euint64 &value);
-	e_status_t	RemoveFloat(float &value);
-	e_status_t	RemoveDouble(double &value);
-	e_status_t	RemoveString(char *string, size_t len);
-	e_status_t	RemoveMessage(EMessage &msg);
+	b_status_t	RemoveData(void *data, size_t len);
+    b_status_t	RemoveInt8(b_int8 &value);
+    b_status_t	RemoveUint8(b_uint8 &value);
+    b_status_t	RemoveInt16(b_int16 &value);
+    b_status_t	RemoveUint16(b_uint16 &value);
+    b_status_t	RemoveInt32(b_int32 &value);
+    b_status_t	RemoveUint32(b_uint32 &value);
+    b_status_t	RemoveInt64(b_int64 &value);
+    b_status_t	RemoveUint64(b_uint64 &value);
+	b_status_t	RemoveFloat(float &value);
+	b_status_t	RemoveDouble(double &value);
+    b_status_t	RemovString(char *string, size_t len);
+	b_status_t	RemoveMessage(BMessage &msg);
 
 	unsigned char	*Data() const;
 	size_t		Size() const;
@@ -89,5 +89,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_NET_BUFFER_H__ */
+#endif /* __BHAPI_NET_BUFFER_H__ */
 

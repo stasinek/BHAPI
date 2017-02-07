@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -34,7 +34,7 @@
 #ifdef _WIN32_WINNT
 #include <userenv.h>
 #endif
-extern HINSTANCE etk_dll_hinstance;
+extern HINSTANCE bhapi_dll_hinstance;
 #endif
 
 #ifdef __BEOS__
@@ -45,34 +45,33 @@ extern HINSTANCE etk_dll_hinstance;
 
 
 #include "./../support/SupportDefs.h"
-#include "./../support/String.h"
-
+#include "./../support/StringMe.h"
 #include "FindDirectory.h"
 
-e_status_t e_find_directory(e_directory_which which, EPath *path)
+b_status_t b_find_directory(b_directory_which which, BPath *path)
 {
-	if(path == NULL) return E_ERROR;
+	if(path == NULL) return B_ERROR;
 
-	e_status_t retVal = E_ERROR;
+	b_status_t retVal = B_ERROR;
 
 #ifdef _WIN32
-	char buffer[E_MAXPATH + 1];
+	char buffer[B_MAXPATH + 1];
 
 	// here we find directory contains libetk.dll
 	bzero(buffer, sizeof(buffer));
-    if(GetModuleFileNameA((HMODULE)etk_dll_hinstance, buffer, E_MAXPATH) == 0) return E_ERROR;
-	EPath prefixPath;
+    if(GetModuleFileNameA((HMODULE)bhapi_dll_hinstance, buffer, B_MAXPATH) == 0) return B_ERROR;
+	BPath prefixPath;
 	prefixPath.SetTo(buffer);
 	prefixPath.GetParent(&prefixPath);
-	if(prefixPath.Path() == NULL) return E_ERROR;
+	if(prefixPath.Path() == NULL) return B_ERROR;
 
-	EString homeDir;
+	BString homeDir;
 #ifdef _WIN32_WINNT
 	HANDLE hToken = INVALID_HANDLE_VALUE;
 	OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &hToken);
 	if(hToken != INVALID_HANDLE_VALUE)
 	{
-		DWORD len = E_MAXPATH;
+		DWORD len = B_MAXPATH;
 		bzero(buffer, sizeof(buffer));
         if(GetUserProfileDirectoryA(hToken, buffer, &len) != 0) homeDir = buffer;
 		CloseHandle(hToken);
@@ -89,216 +88,216 @@ e_status_t e_find_directory(e_directory_which which, EPath *path)
 	bzero(buffer, sizeof(buffer));
 	switch(which)
 	{
-		case E_BOOT_DIRECTORY:
-            if(GetWindowsDirectoryA(buffer, E_MAXPATH) != 0)
+		case B_BOOT_DIRECTORY:
+            if(GetWindowsDirectoryA(buffer, B_MAXPATH) != 0)
 			{
 				buffer[3] = '\0';
-				if(path->SetTo(buffer) == E_OK) retVal = E_OK;
+				if(path->SetTo(buffer) == B_OK) retVal = B_OK;
 			}
 			break;
 
-		case E_APPS_DIRECTORY:
-            if(GetWindowsDirectoryA(buffer, E_MAXPATH) != 0)
+		case B_APPS_DIRECTORY:
+            if(GetWindowsDirectoryA(buffer, B_MAXPATH) != 0)
 			{
 				buffer[3] = '\0';
-				if(path->SetTo(buffer, "Program Files") == E_OK) retVal = E_OK;
+				if(path->SetTo(buffer, "Program Files") == B_OK) retVal = B_OK;
 			}
 			break;
 
-		case E_BIN_DIRECTORY:
-			if(!(path->SetTo(prefixPath.Path()) != E_OK ||
-			     path->GetParent(path) != E_OK ||
-			     path->Append("bin", true) != E_OK))
-				retVal = E_OK;
-			else if(path->SetTo(prefixPath.Path()) == E_OK)
-				retVal = E_OK;
+		case B_BIN_DIRECTORY:
+			if(!(path->SetTo(prefixPath.Path()) != B_OK ||
+			     path->GetParent(path) != B_OK ||
+			     path->Append("bin", true) != B_OK))
+				retVal = B_OK;
+			else if(path->SetTo(prefixPath.Path()) == B_OK)
+				retVal = B_OK;
 			break;
 
-		case E_LIB_DIRECTORY:
-			if(!(path->SetTo(prefixPath.Path()) != E_OK ||
-			     path->GetParent(path) != E_OK ||
-			     path->Append("lib", true) != E_OK))
-				retVal = E_OK;
-            else if(!(GetSystemDirectoryA(buffer, E_MAXPATH) == 0 || path->SetTo(buffer) != E_OK))
-				retVal = E_OK;
+		case B_LIB_DIRECTORY:
+			if(!(path->SetTo(prefixPath.Path()) != B_OK ||
+			     path->GetParent(path) != B_OK ||
+			     path->Append("lib", true) != B_OK))
+				retVal = B_OK;
+            else if(!(GetSystemDirectoryA(buffer, B_MAXPATH) == 0 || path->SetTo(buffer) != B_OK))
+				retVal = B_OK;
 			break;
 
-		case E_ETC_DIRECTORY:
-			if(!(path->SetTo(prefixPath.Path()) != E_OK ||
-			     path->GetParent(path) != E_OK ||
-			     path->Append("etc") != E_OK)) retVal = E_OK;
+		case B_ETC_DIRECTORY:
+			if(!(path->SetTo(prefixPath.Path()) != B_OK ||
+			     path->GetParent(path) != B_OK ||
+			     path->Append("etc") != B_OK)) retVal = B_OK;
 			break;
 
-		case E_ADDONS_DIRECTORY:
-			if(!(path->SetTo(prefixPath.Path()) != E_OK ||
-			     path->GetParent(path) != E_OK ||
-			     path->Append("lib/add-ons") != E_OK)) retVal = E_OK;
+		case B_ADDONS_DIRECTORY:
+			if(!(path->SetTo(prefixPath.Path()) != B_OK ||
+			     path->GetParent(path) != B_OK ||
+			     path->Append("lib/add-ons") != B_OK)) retVal = B_OK;
 			break;
 
-		case E_TEMP_DIRECTORY:
-            if(!(GetTempPathA(E_MAXPATH, buffer) == 0 || path->SetTo(buffer) != E_OK)) retVal = E_OK;
+		case B_TEMP_DIRECTORY:
+            if(!(GetTempPathA(B_MAXPATH, buffer) == 0 || path->SetTo(buffer) != B_OK)) retVal = B_OK;
 			break;
 
-		case E_USER_DIRECTORY:
-			if(path->SetTo(homeDir.String()) == E_OK) retVal = E_OK;
+		case B_USER_DIRECTORY:
+			if(path->SetTo(homeDir.String()) == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_CONFIG_DIRECTORY:
-			if(path->SetTo(homeDir.String(), "config") == E_OK) retVal = E_OK;
+		case B_USER_CONFIG_DIRECTORY:
+			if(path->SetTo(homeDir.String(), "config") == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_BIN_DIRECTORY:
-			if(path->SetTo(homeDir.String(), "config/bin") == E_OK) retVal = E_OK;
+		case B_USER_BIN_DIRECTORY:
+			if(path->SetTo(homeDir.String(), "config/bin") == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_LIB_DIRECTORY:
-			if(path->SetTo(homeDir.String(), "config/lib") == E_OK) retVal = E_OK;
+		case B_USER_LIB_DIRECTORY:
+			if(path->SetTo(homeDir.String(), "config/lib") == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_ETC_DIRECTORY:
-			if(path->SetTo(homeDir.String(), "config/etc") == E_OK) retVal = E_OK;
+		case B_USER_ETC_DIRECTORY:
+			if(path->SetTo(homeDir.String(), "config/etc") == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_ADDONS_DIRECTORY:
-			if(path->SetTo(homeDir.String(), "config/add-ons") == E_OK) retVal = E_OK;
+		case B_USER_ADDONS_DIRECTORY:
+			if(path->SetTo(homeDir.String(), "config/add-ons") == B_OK) retVal = B_OK;
 			break;
 
 		default:
 			break;
 	}
 #else // !_WIN32
-#ifdef ETK_OS_BEOS
+#ifdef BHAPI_OS_BEOS
 	BPath bPath;
 
 	switch(which)
 	{
-		case E_BOOT_DIRECTORY:
+		case B_BOOT_DIRECTORY:
 			if(find_directory(B_BEOS_BOOT_DIRECTORY, &bPath, false, NULL) != B_OK) break;
-			if(path->SetTo(bPath.Path()) == E_OK) retVal = E_OK;
+			if(path->SetTo(bPath.Path()) == B_OK) retVal = B_OK;
 			break;
 
-		case E_APPS_DIRECTORY:
+		case B_APPS_DIRECTORY:
 			if(find_directory(B_BEOS_APPS_DIRECTORY, &bPath, false, NULL) != B_OK) break;
-			if(path->SetTo(bPath.Path()) == E_OK) retVal = E_OK;
+			if(path->SetTo(bPath.Path()) == B_OK) retVal = B_OK;
 			break;
 
-		case E_BIN_DIRECTORY:
+		case B_BIN_DIRECTORY:
 			if(find_directory(B_BEOS_BIN_DIRECTORY, &bPath, false, NULL) != B_OK) break;
-			if(path->SetTo(bPath.Path()) == E_OK) retVal = E_OK;
+			if(path->SetTo(bPath.Path()) == B_OK) retVal = B_OK;
 			break;
 
-		case E_LIB_DIRECTORY:
+		case B_LIB_DIRECTORY:
 			if(find_directory(B_BEOS_LIB_DIRECTORY, &bPath, false, NULL) != B_OK) break;
-			if(path->SetTo(bPath.Path()) == E_OK) retVal = E_OK;
+			if(path->SetTo(bPath.Path()) == B_OK) retVal = B_OK;
 			break;
 
-		case E_ETC_DIRECTORY:
+		case B_ETC_DIRECTORY:
 			if(find_directory(B_BEOS_ETC_DIRECTORY, &bPath, false, NULL) != B_OK) break;
-			if(path->SetTo(bPath.Path()) == E_OK) retVal = E_OK;
+			if(path->SetTo(bPath.Path()) == B_OK) retVal = B_OK;
 			break;
 
-		case E_ADDONS_DIRECTORY:
+		case B_ADDONS_DIRECTORY:
 			if(find_directory(B_BEOS_ADDONS_DIRECTORY, &bPath, false, NULL) != B_OK) break;
-			if(path->SetTo(bPath.Path()) == E_OK) retVal = E_OK;
+			if(path->SetTo(bPath.Path()) == B_OK) retVal = B_OK;
 			break;
 
-		case E_TEMP_DIRECTORY:
+		case B_TEMP_DIRECTORY:
 			if(find_directory(B_COMMON_TEMP_DIRECTORY, &bPath, false, NULL) != B_OK) break;
-			if(path->SetTo(bPath.Path()) == E_OK) retVal = E_OK;
+			if(path->SetTo(bPath.Path()) == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_DIRECTORY:
+		case B_USER_DIRECTORY:
 			if(find_directory(B_USER_DIRECTORY, &bPath, false, NULL) != B_OK) break;
-			if(path->SetTo(bPath.Path()) == E_OK) retVal = E_OK;
+			if(path->SetTo(bPath.Path()) == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_CONFIG_DIRECTORY:
+		case B_USER_CONFIG_DIRECTORY:
 			if(find_directory(B_USER_CONFIG_DIRECTORY, &bPath, false, NULL) != B_OK) break;
-			if(path->SetTo(bPath.Path()) == E_OK) retVal = E_OK;
+			if(path->SetTo(bPath.Path()) == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_BIN_DIRECTORY:
+		case B_USER_BIN_DIRECTORY:
 			if(find_directory(B_USER_CONFIG_DIRECTORY, &bPath, false, NULL) != B_OK) break;
-			if(path->SetTo(bPath.Path(), "bin") == E_OK) retVal = E_OK;
+			if(path->SetTo(bPath.Path(), "bin") == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_LIB_DIRECTORY:
+		case B_USER_LIB_DIRECTORY:
 			if(find_directory(B_USER_LIB_DIRECTORY, &bPath, false, NULL) != B_OK) break;
-			if(path->SetTo(bPath.Path()) == E_OK) retVal = E_OK;
+			if(path->SetTo(bPath.Path()) == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_ETC_DIRECTORY:
+		case B_USER_ETC_DIRECTORY:
 			if(find_directory(B_USER_CONFIG_DIRECTORY, &bPath, false, NULL) != B_OK) break;
-			if(path->SetTo(bPath.Path(), "etc") == E_OK) retVal = E_OK;
+			if(path->SetTo(bPath.Path(), "etc") == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_ADDONS_DIRECTORY:
+		case B_USER_ADDONS_DIRECTORY:
 			if(find_directory(B_USER_ADDONS_DIRECTORY, &bPath, false, NULL) != B_OK) break;
-			if(path->SetTo(bPath.Path()) == E_OK) retVal = E_OK;
+			if(path->SetTo(bPath.Path()) == B_OK) retVal = B_OK;
 			break;
 
 		default:
 			break;
 	}
-#else // !ETK_OS_BEOS
+#else // !BHAPI_OS_BEOS
 	switch(which)
 	{
-		case E_BOOT_DIRECTORY:
-			if(path->SetTo("/") == E_OK) retVal = E_OK;
+		case B_BOOT_DIRECTORY:
+			if(path->SetTo("/") == B_OK) retVal = B_OK;
 			break;
 
-		case E_APPS_DIRECTORY:
-			if(path->SetTo(DATA_DIR, "apps") == E_OK) retVal = E_OK;
+		case B_APPS_DIRECTORY:
+			if(path->SetTo(DATA_DIR, "apps") == B_OK) retVal = B_OK;
 			break;
 
-		case E_BIN_DIRECTORY:
-			if(path->SetTo(BIN_DIR) == E_OK) retVal = E_OK;
+		case B_BIN_DIRECTORY:
+			if(path->SetTo(BIN_DIR) == B_OK) retVal = B_OK;
 			break;
 
-		case E_LIB_DIRECTORY:
-			if(path->SetTo(LIB_DIR) == E_OK) retVal = E_OK;
+		case B_LIB_DIRECTORY:
+			if(path->SetTo(LIB_DIR) == B_OK) retVal = B_OK;
 			break;
 
-		case E_ETC_DIRECTORY:
-			if(path->SetTo(ETC_DIR) == E_OK) retVal = E_OK;
+		case B_ETC_DIRECTORY:
+			if(path->SetTo(ETC_DIR) == B_OK) retVal = B_OK;
 			break;
 
-		case E_ADDONS_DIRECTORY:
-			if(path->SetTo(LIB_DIR, "add-ons") == E_OK) retVal = E_OK;
+		case B_ADDONS_DIRECTORY:
+			if(path->SetTo(LIB_DIR, "add-ons") == B_OK) retVal = B_OK;
 			break;
 
-		case E_TEMP_DIRECTORY:
-			if(path->SetTo("/tmp") == E_OK) retVal = E_OK;
+		case B_TEMP_DIRECTORY:
+			if(path->SetTo("/tmp") == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_DIRECTORY:
-			if(path->SetTo(getenv("HOME")) == E_OK) retVal = E_OK;
+		case B_USER_DIRECTORY:
+			if(path->SetTo(getenv("HOME")) == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_CONFIG_DIRECTORY:
-			if(path->SetTo(getenv("HOME"), ".config") == E_OK) retVal = E_OK;
+		case B_USER_CONFIG_DIRECTORY:
+			if(path->SetTo(getenv("HOME"), ".config") == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_BIN_DIRECTORY:
-			if(path->SetTo(getenv("HOME"), ".config/bin") == E_OK) retVal = E_OK;
+		case B_USER_BIN_DIRECTORY:
+			if(path->SetTo(getenv("HOME"), ".config/bin") == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_LIB_DIRECTORY:
-			if(path->SetTo(getenv("HOME"), ".config/lib") == E_OK) retVal = E_OK;
+		case B_USER_LIB_DIRECTORY:
+			if(path->SetTo(getenv("HOME"), ".config/lib") == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_ETC_DIRECTORY:
-			if(path->SetTo(getenv("HOME"), ".config/etc") == E_OK) retVal = E_OK;
+		case B_USER_ETC_DIRECTORY:
+			if(path->SetTo(getenv("HOME"), ".config/etc") == B_OK) retVal = B_OK;
 			break;
 
-		case E_USER_ADDONS_DIRECTORY:
-			if(path->SetTo(getenv("HOME"), ".config/add-ons") == E_OK) retVal = E_OK;
+		case B_USER_ADDONS_DIRECTORY:
+			if(path->SetTo(getenv("HOME"), ".config/add-ons") == B_OK) retVal = B_OK;
 			break;
 
 		default:
 			break;
 	}
-#endif // ETK_OS_BEOS
+#endif // BHAPI_OS_BEOS
 #endif // _WIN32
 
 	return retVal;

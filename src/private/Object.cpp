@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -30,57 +30,57 @@
 #include "Object.h"
 
 
-EObject::EObject()
+BObject::BObject()
 	: fVitalities(0)
 {
 }
 
 
-EObject::~EObject()
+BObject::~BObject()
 {
 }
 
 
-EObject&
-EObject::operator+=(euint64 vitalities)
+BObject&
+BObject::operator+=(b_uint64 vitalities)
 {
-	if(fVitalities <= E_MAXUINT64 - vitalities) fVitalities += vitalities;
+	if(fVitalities <= B_MAXUINT64 - vitalities) fVitalities += vitalities;
 	return *this;
 }
 
 
-EObject&
-EObject::operator-=(euint64 vitalities)
+BObject&
+BObject::operator-=(b_uint64 vitalities)
 {
 	fVitalities -= min_c(fVitalities, vitalities);
 	return *this;
 }
 
 
-EObject&
-EObject::operator++()
+BObject&
+BObject::operator++()
 {
-	return EObject::operator+=(1);
+	return BObject::operator+=(1);
 }
 
 
-EObject&
-EObject::operator--()
+BObject&
+BObject::operator--()
 {
-	return EObject::operator-=(1);
+	return BObject::operator-=(1);
 }
 
 
-euint64
-EObject::Vitalities() const
+b_uint64
+BObject::Vitalities() const
 {
 	return fVitalities;
 }
 
 
-void etk_delete_object(void *object)
+void bhapi_delete_object(void *object)
 {
-	EObject *obj = reinterpret_cast<EObject*>(object);
+	BObject *obj = reinterpret_cast<BObject*>(object);
 	if(obj != NULL) delete obj;
 }
 

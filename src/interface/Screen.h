@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,32 +27,32 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_SCREEN_H__
-#define __ETK_SCREEN_H__
+#ifndef __BHAPI_SCREEN_H__
+#define __BHAPI_SCREEN_H__
 
 #include "./../interface/Rect.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class EWindow;
+class BWindow;
 
-class _IMPEXP_ETK EScreen {
+class _IMPEXP_BHAPI BScreen {
 public:
-	EScreen(euint32 id = 0);
-	EScreen(EWindow *win);
-	~EScreen();
+    BScreen(b_uint32 id = 0);
+    BScreen(BWindow *win);
+    ~BScreen();
 
 	bool		IsValid() const;
-	e_status_t	SetToNext();
+	b_status_t	SetToNext();
 
-	ERect		Frame() const;
-	euint32		ID() const;
+	BRect		Frame() const;
+    b_uint32		ID() const;
 
 private:
-	euint32 fID;
+    b_uint32 fID;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_SCREEN_H__ */
+#endif /* __BHAPI_SCREEN_H__ */
 

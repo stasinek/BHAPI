@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,7 +24,7 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: ListView.cpp
- * Description: EListView --- Displays a list of items the user can select and invoke
+ * Description: BListView --- Displays a list of items the user can select and invoke
  *
  * --------------------------------------------------------------------------*/
 
@@ -35,12 +35,12 @@
 #include "Window.h"
 
 
-EListView::EListView(ERect frame,
+BListView::BListView(BRect frame,
 		     const char *name,
-		     e_list_view_type type,
-		     euint32 resizingMode,
-		     euint32 flags)
-	: EView(frame, name, resizingMode, flags), EInvoker(),
+		     b_list_view_type type,
+		     b_uint32 resizingMode,
+		     b_uint32 flags)
+	: BView(frame, name, resizingMode, flags), BInvoker(),
 	  fFirstSelected(-1), fLastSelected(-1), fPos(-1),
 	  fSelectionMessage(NULL)
 {
@@ -48,24 +48,24 @@ EListView::EListView(ERect frame,
 }
 
 
-EListView::~EListView()
+BListView::~BListView()
 {
-	EListView::MakeEmpty();
+	BListView::MakeEmpty();
 	if(fSelectionMessage != NULL) delete fSelectionMessage;
 }
 
 
 void
-EListView::MakeFocus(bool focusState)
+BListView::MakeFocus(bool focusState)
 {
 	if(IsFocus() != focusState)
 	{
-		EView::MakeFocus(focusState);
+		BView::MakeFocus(focusState);
 
-		if(IsVisible() && (Flags() & E_WILL_DRAW))
+		if(IsVisible() && (Flags() & B_WILL_DRAW))
 		{
 			PushState();
-			SetHighColor(IsFocus() ? e_ui_color(E_NAVIGATION_BASE_COLOR) : ViewColor());
+			SetHighColor(IsFocus() ? b_ui_color(B_NAVIGATION_BASE_COLOR) : ViewColor());
 			StrokeRect(Bounds());
 			PopState();
 
@@ -76,26 +76,26 @@ EListView::MakeFocus(bool focusState)
 
 
 void
-EListView::WindowActivated(bool state)
+BListView::WindowActivated(bool state)
 {
 	InvalidateItem(fPos);
-	if(!(IsFocus() && (Flags() & E_WILL_DRAW))) return;
+	if(!(IsFocus() && (Flags() & B_WILL_DRAW))) return;
 	PushState();
-	SetHighColor(state ? e_ui_color(E_NAVIGATION_BASE_COLOR) : ViewColor());
+	SetHighColor(state ? b_ui_color(B_NAVIGATION_BASE_COLOR) : ViewColor());
 	StrokeRect(Bounds());
 	PopState();
 }
 
 
 bool
-EListView::AddItem(EListItem *item)
+BListView::AddItem(BListItem *item)
 {
-	return EListView::AddItem(item, fItems.CountItems());
+	return BListView::AddItem(item, fItems.CountItems());
 }
 
 
 bool
-EListView::AddItem(EListItem *item, eint32 atIndex)
+BListView::AddItem(BListItem *item, b_int32 atIndex)
 {
 	if(item == NULL || item->fOwner != NULL) return false;
 	if(fItems.AddItem(item, atIndex) == false) return false;
@@ -109,7 +109,7 @@ EListView::AddItem(EListItem *item, eint32 atIndex)
 		SelectionChanged();
 	}
 
-	EFont font;
+	BFont font;
 	GetFont(&font);
 	item->Update(this, &font);
 
@@ -120,19 +120,19 @@ EListView::AddItem(EListItem *item, eint32 atIndex)
 
 
 bool
-EListView::RemoveItem(EListItem *item, bool auto_destruct_item)
+BListView::RemoveItem(BListItem *item, bool auto_destruct_item)
 {
-	if(EListView::RemoveItem(IndexOf(item)) == NULL) return false;
+	if(BListView::RemoveItem(IndexOf(item)) == NULL) return false;
 	if(auto_destruct_item) delete item;
 
 	return true;
 }
 
 
-EListItem*
-EListView::RemoveItem(eint32 index)
+BListItem*
+BListView::RemoveItem(b_int32 index)
 {
-	EListItem *item = (EListItem*)fItems.RemoveItem(index);
+	BListItem *item = (BListItem*)fItems.RemoveItem(index);
 	if(item == NULL) return NULL;
 
 	item->fOwner = NULL;
@@ -143,9 +143,9 @@ EListView::RemoveItem(eint32 index)
 			fFirstSelected = -1;
 			fLastSelected--;
 
-			while(fListType == E_MULTIPLE_SELECTION_LIST && index < min_c(fItems.CountItems(), fLastSelected + 1))
+			while(fListType == B_MULTIPLE_SELECTION_LIST && index < min_c(fItems.CountItems(), fLastSelected + 1))
 			{
-				item = (EListItem*)fItems.ItemAt(index);
+				item = (BListItem*)fItems.ItemAt(index);
 				if(item->fSelected) {fFirstSelected = index; break;}
 				index++;
 			}
@@ -158,7 +158,7 @@ EListView::RemoveItem(eint32 index)
 
 			while(index >= max_c(0, fFirstSelected))
 			{
-				item = (EListItem*)fItems.ItemAt(index);
+				item = (BListItem*)fItems.ItemAt(index);
 				if(item->fSelected) {fLastSelected = index; break;}
 				index--;
 			}
@@ -187,7 +187,7 @@ EListView::RemoveItem(eint32 index)
 
 
 bool
-EListView::RemoveItems(eint32 index, eint32 count, bool auto_destruct_items)
+BListView::RemoveItems(b_int32 index, b_int32 count, bool auto_destruct_items)
 {
 	if(index < 0 || index >= fItems.CountItems()) return false;
 
@@ -197,7 +197,7 @@ EListView::RemoveItems(eint32 index, eint32 count, bool auto_destruct_items)
 	// TODO: remove at once
 	while(count-- > 0)
 	{
-		EListItem *item = EListView::RemoveItem(index);
+		BListItem *item = BListView::RemoveItem(index);
 		if(item == NULL) return false;
 		if(auto_destruct_items) delete item;
 	}
@@ -207,71 +207,71 @@ EListView::RemoveItems(eint32 index, eint32 count, bool auto_destruct_items)
 
 
 void
-EListView::SetListType(e_list_view_type type)
+BListView::SetListType(b_list_view_type type)
 {
 	if(fListType != type)
 	{
 		fListType = type;
-		if(fListType == E_SINGLE_SELECTION_LIST) Select(CurrentSelection(0), false);
+		if(fListType == B_SINGLE_SELECTION_LIST) Select(CurrentSelection(0), false);
 	}
 }
 
 
-e_list_view_type
-EListView::ListType() const
+b_list_view_type
+BListView::ListType() const
 {
 	return fListType;
 }
 
 
-EListItem*
-EListView::ItemAt(eint32 index) const
+BListItem*
+BListView::ItemAt(b_int32 index) const
 {
-	return (EListItem*)fItems.ItemAt(index);
+	return (BListItem*)fItems.ItemAt(index);
 }
 
 
-EListItem*
-EListView::FirstItem() const
+BListItem*
+BListView::FirstItem() const
 {
-	return (EListItem*)fItems.FirstItem();
+	return (BListItem*)fItems.FirstItem();
 }
 
 
-EListItem*
-EListView::LastItem() const
+BListItem*
+BListView::LastItem() const
 {
-	return (EListItem*)fItems.LastItem();
+	return (BListItem*)fItems.LastItem();
 }
 
 
-eint32
-EListView::IndexOf(const EListItem *item) const
+b_int32
+BListView::IndexOf(const BListItem *item) const
 {
 	if(item == NULL || item->fOwner != this) return -1;
 	return fItems.IndexOf((void*)item);
 }
 
 
-eint32
-EListView::IndexOf(EPoint where, bool mustVisible) const
+b_int32
+BListView::IndexOf(BPoint where, bool mustVisible) const
 {
 	float boundsBottom = -1;
 
 	if(mustVisible)
 	{
-		ERect vRect = VisibleBounds();
+		BRect vRect = VisibleBounds();
 		if(vRect.Contains(where) == false) return -1;
 		boundsBottom = vRect.bottom;
 	}
 
-	ERect rect(1, 1, Frame().Width() - 1, 1);
+	BRect rect(1, 1, Frame().Width() - 1, 1);
 
-	eint32 retVal = -1;
+	b_int32 retVal = -1;
 
-	for(eint32 i = 0; i < fItems.CountItems(); i++)
+	for(b_int32 i = 0; i < fItems.CountItems(); i++)
 	{
-		EListItem *item = (EListItem*)fItems.ItemAt(i);
+		BListItem *item = (BListItem*)fItems.ItemAt(i);
 		if(item->Height() < 0) continue;
 
 		rect.top = rect.bottom;
@@ -293,25 +293,25 @@ EListView::IndexOf(EPoint where, bool mustVisible) const
 
 
 bool
-EListView::HasItem(const EListItem *item) const
+BListView::HasItem(const BListItem *item) const
 {
 	return((item == NULL || item->fOwner != this) ? false : true);
 }
 
 
-eint32
-EListView::CountItems() const
+b_int32
+BListView::CountItems() const
 {
 	return fItems.CountItems();
 }
 
 
 void
-EListView::MakeEmpty()
+BListView::MakeEmpty()
 {
 	while(fItems.CountItems() > 0)
 	{
-		EListItem *item = (EListItem*)fItems.RemoveItem((eint32)0);
+		BListItem *item = (BListItem*)fItems.RemoveItem((b_int32)0);
 		item->fOwner = NULL;
 		delete item;
 	}
@@ -321,41 +321,41 @@ EListView::MakeEmpty()
 
 
 bool
-EListView::IsEmpty() const
+BListView::IsEmpty() const
 {
 	return fItems.IsEmpty();
 }
 
 
 void
-EListView::SelectionChanged()
+BListView::SelectionChanged()
 {
 }
 
 
 void
-EListView::Draw(ERect updateRect)
+BListView::Draw(BRect updateRect)
 {
 	if(Window() == NULL) return;
-	ERect bounds = Bounds();
+	BRect bounds = Bounds();
 	bool winActivated = Window()->IsActivate();
 
 	if(IsFocus() && winActivated)
 	{
 		PushState();
 		SetPenSize(0);
-		SetDrawingMode(E_OP_COPY);
-		SetHighColor(e_ui_color(E_NAVIGATION_BASE_COLOR));
+		SetDrawingMode(B_OP_COPY);
+		SetHighColor(b_ui_color(B_NAVIGATION_BASE_COLOR));
 		StrokeRect(bounds);
 		PopState();
 	}
 
 	bounds.InsetBy(1, 1);
-	ERect rect(1, 1, bounds.right - 1, 1);
+	BRect rect(1, 1, bounds.right - 1, 1);
 
-	for(eint32 i = 0; i < fItems.CountItems(); i++)
+	for(b_int32 i = 0; i < fItems.CountItems(); i++)
 	{
-		EListItem *item = (EListItem*)fItems.ItemAt(i);
+		BListItem *item = (BListItem*)fItems.ItemAt(i);
 		if(item->Height() < 0) continue;
 
 		rect.top = rect.bottom;
@@ -371,7 +371,7 @@ EListView::Draw(ERect updateRect)
 		if(!(i != fPos || !IsEnabled() || !IsFocus() || !winActivated))
 		{
 			SetPenSize(0);
-			SetDrawingMode(E_OP_COPY);
+			SetDrawingMode(B_OP_COPY);
 			SetHighColor(0, 0, 0);
 			StrokeRect(rect);
 		}
@@ -381,39 +381,39 @@ EListView::Draw(ERect updateRect)
 
 
 void
-EListView::KeyDown(const char *bytes, eint32 numBytes)
+BListView::KeyDown(const char *bytes, b_int32 numBytes)
 {
 	if(!IsEnabled() || !IsFocus() || numBytes != 1) return;
 
-	eint32 oldPos = -1, newPos = -1;
+	b_int32 oldPos = -1, newPos = -1;
 	bool doDown = false;
 
 	switch(bytes[0])
 	{
-		case E_ENTER:
+		case B_ENTER:
 			if(fPos >= 0 && fPos >= fFirstSelected && fPos <= fLastSelected)
 			{
-				EListItem *item = (EListItem*)fItems.ItemAt(fPos);
+				BListItem *item = (BListItem*)fItems.ItemAt(fPos);
 				if(!(item == NULL || item->fSelected == false))
 				{
 					Invoke();
 					break;
 				}
 			}
-		case E_SPACE:
+		case B_SPACE:
 			if(fPos >= 0 && fPos < fItems.CountItems())
 			{
-				if(((EListItem*)fItems.ItemAt(fPos))->fEnabled == false) break;
-				if(((EListItem*)fItems.ItemAt(fPos))->fSelected)
+				if(((BListItem*)fItems.ItemAt(fPos))->fEnabled == false) break;
+				if(((BListItem*)fItems.ItemAt(fPos))->fSelected)
 					Deselect(fPos);
 				else
-					Select(fPos, fListType != E_SINGLE_SELECTION_LIST);
+					Select(fPos, fListType != B_SINGLE_SELECTION_LIST);
 
 				Invalidate();
 			}
 			break;
 
-		case E_ESCAPE:
+		case B_ESCAPE:
 			if(fPos >= 0)
 			{
 				InvalidateItem(fPos);
@@ -426,7 +426,7 @@ EListView::KeyDown(const char *bytes, eint32 numBytes)
 			}
 			break;
 
-		case E_UP_ARROW:
+		case B_UP_ARROW:
 			{
 				if(fPos <= 0) break;
 				oldPos = fPos;
@@ -434,7 +434,7 @@ EListView::KeyDown(const char *bytes, eint32 numBytes)
 			}
 			break;
 
-		case E_DOWN_ARROW:
+		case B_DOWN_ARROW:
 			{
 				if(fPos >= fItems.CountItems() - 1) break;
 				oldPos = fPos;
@@ -443,14 +443,14 @@ EListView::KeyDown(const char *bytes, eint32 numBytes)
 			}
 			break;
 
-		case E_PAGE_UP:
-		case E_PAGE_DOWN:
+		case B_PAGE_UP:
+		case B_PAGE_DOWN:
 			{
 				// TODO
 			}
 			break;
 
-		case E_HOME:
+		case B_HOME:
 			{
 				if(fPos <= 0) break;
 				oldPos = fPos;
@@ -458,7 +458,7 @@ EListView::KeyDown(const char *bytes, eint32 numBytes)
 			}
 			break;
 
-		case E_END:
+		case B_END:
 			{
 				if(fPos >= fItems.CountItems() - 1) break;
 				oldPos = fPos;
@@ -473,16 +473,16 @@ EListView::KeyDown(const char *bytes, eint32 numBytes)
 
 	if(oldPos >= 0 || newPos >= 0)
 	{
-		ERect rect = ItemFrame(newPos);
+		BRect rect = ItemFrame(newPos);
 		if(rect.IsValid() == false ||
-		   e_is_kind_of(Parent(), EScrollView) == false || e_cast_as(Parent(), EScrollView)->Target() != this)
+		   b_is_kind_of(Parent(), BScrollView) == false || b_cast_as(Parent(), BScrollView)->Target() != this)
 		{
 			InvalidateItem(oldPos);
 			if(rect.IsValid()) Invalidate(rect);
 		}
 		else
 		{
-			ERect vRect = ConvertFromParent(e_cast_as(Parent(), EScrollView)->TargetFrame());
+			BRect vRect = ConvertFromParent(b_cast_as(Parent(), BScrollView)->TargetFrame());
 			if(vRect.top <= rect.top && vRect.bottom >= rect.bottom)
 			{
 				InvalidateItem(oldPos);
@@ -490,7 +490,7 @@ EListView::KeyDown(const char *bytes, eint32 numBytes)
 			}
 			else
 			{
-				float xOffset = Frame().left - ConvertToParent(EPoint(0, 0)).x;
+				float xOffset = Frame().left - ConvertToParent(BPoint(0, 0)).x;
 				if(doDown == false)
 					ScrollTo(xOffset, rect.top);
 				else
@@ -499,24 +499,24 @@ EListView::KeyDown(const char *bytes, eint32 numBytes)
 		}
 	}
 
-	if(!(!(bytes[0] == E_LEFT_ARROW || bytes[0] == E_RIGHT_ARROW) ||
-	     e_is_kind_of(Parent(), EScrollView) == false ||
-	     e_cast_as(Parent(), EScrollView)->Target() != this))
+	if(!(!(bytes[0] == B_LEFT_ARROW || bytes[0] == B_RIGHT_ARROW) ||
+	     b_is_kind_of(Parent(), BScrollView) == false ||
+	     b_cast_as(Parent(), BScrollView)->Target() != this))
 	{
-		float visibleWidth = e_cast_as(Parent(), EScrollView)->TargetFrame().Width();
-		ERect frame = Frame();
+		float visibleWidth = b_cast_as(Parent(), BScrollView)->TargetFrame().Width();
+		BRect frame = Frame();
 
 		if(visibleWidth >= frame.Width()) return;
 
-		EScrollBar *hsb = e_cast_as(Parent(), EScrollView)->ScrollBar(E_HORIZONTAL);
+		BScrollBar *hsb = b_cast_as(Parent(), BScrollView)->ScrollBar(B_HORIZONTAL);
 		if(hsb == NULL) return;
 
-		EPoint originOffset = frame.LeftTop() - ConvertToParent(EPoint(0, 0));
+		BPoint originOffset = frame.LeftTop() - ConvertToParent(BPoint(0, 0));
 
 		float step = 0;
 		hsb->GetSteps(NULL, &step);
 
-		if(bytes[0] == E_LEFT_ARROW) originOffset.x -= step;
+		if(bytes[0] == B_LEFT_ARROW) originOffset.x -= step;
 		else originOffset.x += step;
 
 		if(originOffset.x > frame.Width() - visibleWidth) originOffset.x = frame.Width() - visibleWidth;
@@ -528,19 +528,19 @@ EListView::KeyDown(const char *bytes, eint32 numBytes)
 
 
 void
-EListView::KeyUp(const char *bytes, eint32 numBytes)
+BListView::KeyUp(const char *bytes, b_int32 numBytes)
 {
 }
 
 
 void
-EListView::MouseDown(EPoint where)
+BListView::MouseDown(BPoint where)
 {
-	eint32 btnClicks = 1;
+	b_int32 btnClicks = 1;
 
-	if(!IsEnabled() || !QueryCurrentMouse(true, E_PRIMARY_MOUSE_BUTTON, true, &btnClicks) || btnClicks > 2) return;
+	if(!IsEnabled() || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON, true, &btnClicks) || btnClicks > 2) return;
 
-	if((Flags() & E_NAVIGABLE) && !IsFocus()) MakeFocus();
+	if((Flags() & B_NAVIGABLE) && !IsFocus()) MakeFocus();
 
 	if(btnClicks == 2)
 	{
@@ -548,14 +548,14 @@ EListView::MouseDown(EPoint where)
 		return;
 	}
 
-	eint32 selectIndex = IndexOf(where, true);
-	EListItem *item = ItemAt(selectIndex);
+	b_int32 selectIndex = IndexOf(where, true);
+	BListItem *item = ItemAt(selectIndex);
 	if(item == NULL || item->fEnabled == false) return;
 
 	if(item->fSelected)
 		Deselect(selectIndex);
 	else
-		Select(selectIndex, fListType != E_SINGLE_SELECTION_LIST);
+		Select(selectIndex, fListType != B_SINGLE_SELECTION_LIST);
 
 	fPos = selectIndex;
 	Invalidate();
@@ -563,36 +563,36 @@ EListView::MouseDown(EPoint where)
 
 
 void
-EListView::MouseUp(EPoint where)
+BListView::MouseUp(BPoint where)
 {
 }
 
 
 void
-EListView::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
+BListView::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 {
 }
 
 
 void
-EListView::SetFont(const EFont *font, euint8 mask)
+BListView::SetFont(const BFont *font, b_uint8 mask)
 {
 	if(font == NULL) return;
 
-	EView::SetFont(font, mask);
+	BView::SetFont(font, mask);
 
-	EFont aFont;
+	BFont aFont;
 	GetFont(&aFont);
-	for(eint32 i = 0; i < fItems.CountItems(); i++)
+	for(b_int32 i = 0; i < fItems.CountItems(); i++)
 	{
-		EListItem *item = (EListItem*)fItems.ItemAt(i);
+		BListItem *item = (BListItem*)fItems.ItemAt(i);
 		item->Update(this, &aFont);
 	}
 }
 
 
 void
-EListView::SetSelectionMessage(EMessage *message)
+BListView::SetSelectionMessage(BMessage *message)
 {
 	if(message == fSelectionMessage) return;
 	if(fSelectionMessage != NULL) delete fSelectionMessage;
@@ -601,81 +601,81 @@ EListView::SetSelectionMessage(EMessage *message)
 
 
 void
-EListView::SetInvocationMessage(EMessage *message)
+BListView::SetInvocationMessage(BMessage *message)
 {
 	SetMessage(message);
 }
 
 
-EMessage*
-EListView::SelectionMessage() const
+BMessage*
+BListView::SelectionMessage() const
 {
 	return fSelectionMessage;
 }
 
 
-euint32
-EListView::SelectionCommand() const
+b_uint32
+BListView::SelectionCommand() const
 {
 	return(fSelectionMessage ? fSelectionMessage->what : 0);
 }
 
 
-EMessage*
-EListView::InvocationMessage() const
+BMessage*
+BListView::InvocationMessage() const
 {
 	return Message();
 }
 
 
-euint32
-EListView::InvocationCommand() const
+b_uint32
+BListView::InvocationCommand() const
 {
 	return Command();
 }
 
 
-e_status_t
-EListView::Invoke(const EMessage *msg)
+b_status_t
+BListView::Invoke(const BMessage *msg)
 {
 	if(fFirstSelected < 0)
 	{
-		return EInvoker::Invoke(msg);
+		return BInvoker::Invoke(msg);
 	}
 	else
 	{
-		const EMessage *message = (msg ? msg : Message());
-		if(!message) return E_BAD_VALUE;
+		const BMessage *message = (msg ? msg : Message());
+		if(!message) return B_BAD_VALUE;
 
-		EMessage aMsg(*message);
+		BMessage aMsg(*message);
 
-		for(eint32 i = fFirstSelected; i <= fLastSelected; i++)
+		for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
 		{
-			EListItem *item = (EListItem*)fItems.ItemAt(i);
+			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item == NULL) continue;
 			if(item->fSelected) aMsg.AddInt32("index", i);
 		}
 
-		return EInvoker::Invoke(&aMsg);
+		return BInvoker::Invoke(&aMsg);
 	}
 }
 
 
 void
-EListView::Select(eint32 index, bool extend)
+BListView::Select(b_int32 index, bool extend)
 {
 	Select(index, index, extend);
 }
 
 
 void
-EListView::Select(eint32 start, eint32 finish, bool extend)
+BListView::Select(b_int32 start, b_int32 finish, bool extend)
 {
 	if(extend == false)
 	{
-		for(eint32 i = fFirstSelected; i <= fLastSelected; i++)
+		for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
 		{
-			EListItem *item = (EListItem*)fItems.ItemAt(i);
+			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item == NULL) continue;
 			item->fSelected = false;
 		}
@@ -688,9 +688,9 @@ EListView::Select(eint32 start, eint32 finish, bool extend)
 
 		if(finish < 0 || finish >= fItems.CountItems()) finish = fItems.CountItems() - 1;
 
-		for(eint32 index = start; index <= finish; index++)
+		for(b_int32 index = start; index <= finish; index++)
 		{
-			EListItem *item = (EListItem*)fItems.ItemAt(index);
+			BListItem *item = (BListItem*)fItems.ItemAt(index);
 			if(item == NULL || item->fSelected == true) continue;
 
 			item->fSelected = true;
@@ -708,22 +708,22 @@ EListView::Select(eint32 start, eint32 finish, bool extend)
 
 
 bool
-EListView::IsItemSelected(eint32 index) const
+BListView::IsItemSelected(b_int32 index) const
 {
-	EListItem *item = (EListItem*)fItems.ItemAt(index);
+	BListItem *item = (BListItem*)fItems.ItemAt(index);
 	return(item == NULL ? false : item->fSelected);
 }
 
 
-eint32
-EListView::CurrentSelection(eint32 index) const
+b_int32
+BListView::CurrentSelection(b_int32 index) const
 {
 	if(fFirstSelected < 0 || index < 0) return -1;
 
 	// TODO: speed up
-	for(eint32 i = fFirstSelected; i <= fLastSelected; i++)
+	for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
 	{
-		EListItem *item = (EListItem*)fItems.ItemAt(i);
+		BListItem *item = (BListItem*)fItems.ItemAt(i);
 		if(item == NULL) continue;
 		if(item->fSelected) index--;
 		if(index < 0) return i;
@@ -734,9 +734,9 @@ EListView::CurrentSelection(eint32 index) const
 
 
 void
-EListView::Deselect(eint32 index)
+BListView::Deselect(b_int32 index)
 {
-	EListItem *item = (EListItem*)fItems.ItemAt(index);
+	BListItem *item = (BListItem*)fItems.ItemAt(index);
 	if(item == NULL || item->fSelected == false) return;
 
 	item->fSelected = false;
@@ -747,7 +747,7 @@ EListView::Deselect(eint32 index)
 
 		while((++index) < min_c(fItems.CountItems(), fLastSelected + 1))
 		{
-			item = (EListItem*)fItems.ItemAt(index);
+			item = (BListItem*)fItems.ItemAt(index);
 			if(item->fSelected) {fFirstSelected = index; break;}
 		}
 
@@ -759,7 +759,7 @@ EListView::Deselect(eint32 index)
 
 		while((--index) >= max_c(0, fFirstSelected))
 		{
-			item = (EListItem*)fItems.ItemAt(index);
+			item = (BListItem*)fItems.ItemAt(index);
 			if(item->fSelected) {fLastSelected = index; break;}
 		}
 
@@ -771,13 +771,13 @@ EListView::Deselect(eint32 index)
 
 
 void
-EListView::DeselectAll()
+BListView::DeselectAll()
 {
 	if(fFirstSelected < 0) return;
 
-	for(eint32 i = fFirstSelected; i <= fLastSelected; i++)
+	for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
 	{
-		EListItem *item = (EListItem*)fItems.ItemAt(i);
+		BListItem *item = (BListItem*)fItems.ItemAt(i);
 		if(item == NULL) continue;
 		item->fSelected = false;
 	}
@@ -789,17 +789,17 @@ EListView::DeselectAll()
 
 
 void
-EListView::DeselectExcept(eint32 start, eint32 finish)
+BListView::DeselectExcept(b_int32 start, b_int32 finish)
 {
 	if(fFirstSelected < 0) return;
 
 	if(start >= 0 && (finish < 0 || finish >= fItems.CountItems())) finish = fItems.CountItems() - 1;
 
-	for(eint32 i = fFirstSelected; i <= fLastSelected; i++)
+	for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
 	{
 		if(start >= 0 && start <= finish && i >= start && i <= finish) continue;
 
-		EListItem *item = (EListItem*)fItems.ItemAt(i);
+		BListItem *item = (BListItem*)fItems.ItemAt(i);
 		if(item == NULL) continue;
 		item->fSelected = false;
 	}
@@ -819,7 +819,7 @@ EListView::DeselectExcept(eint32 start, eint32 finish)
 
 
 bool
-EListView::SwapItems(eint32 indexA, eint32 indexB)
+BListView::SwapItems(b_int32 indexA, b_int32 indexB)
 {
 	bool retVal = false;
 
@@ -831,7 +831,7 @@ EListView::SwapItems(eint32 indexA, eint32 indexB)
 		if(indexA >= fFirstSelected && indexA <= fLastSelected &&
 		   indexB >= fFirstSelected && indexB <= fLastSelected) break;
 
-		eint32 newIn = -1;
+		b_int32 newIn = -1;
 
 		if(indexA >= fFirstSelected && indexA <= fLastSelected) newIn = indexB;
 		else if(indexB >= fFirstSelected && indexB <= fLastSelected) newIn = indexA;
@@ -841,16 +841,16 @@ EListView::SwapItems(eint32 indexA, eint32 indexB)
 		fFirstSelected = min_c(fFirstSelected, newIn);
 		fLastSelected = max_c(fLastSelected, newIn);
 
-		for(eint32 i = fFirstSelected; i <= fLastSelected; i++)
+		for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
 		{
-			EListItem *item = (EListItem*)fItems.ItemAt(i);
+			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item->fSelected == true) break;
 			fFirstSelected++;
 		}
 
-		for(eint32 i = fLastSelected; i >= fFirstSelected; i--)
+		for(b_int32 i = fLastSelected; i >= fFirstSelected; i--)
 		{
-			EListItem *item = (EListItem*)fItems.ItemAt(i);
+			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item->fSelected == true) break;
 			fLastSelected--;
 		}
@@ -865,7 +865,7 @@ EListView::SwapItems(eint32 indexA, eint32 indexB)
 
 
 bool
-EListView::MoveItem(eint32 fromIndex, eint32 toIndex)
+BListView::MoveItem(b_int32 fromIndex, b_int32 toIndex)
 {
 	bool retVal = false;
 
@@ -879,9 +879,9 @@ EListView::MoveItem(eint32 fromIndex, eint32 toIndex)
 
 		// TODO: speed up
 		fFirstSelected = fLastSelected = -1;
-		for(eint32 i = 0; i < fItems.CountItems(); i++)
+		for(b_int32 i = 0; i < fItems.CountItems(); i++)
 		{
-			EListItem *item = (EListItem*)fItems.ItemAt(i);
+			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item->fSelected == false) continue;
 			fFirstSelected = (fFirstSelected < 0 ? i : min_c(fFirstSelected, i));
 			fLastSelected = (fLastSelected < 0 ? i : max_c(fLastSelected, i));
@@ -894,10 +894,10 @@ EListView::MoveItem(eint32 fromIndex, eint32 toIndex)
 
 
 bool
-EListView::ReplaceItem(eint32 index, EListItem *newItem, EListItem **oldItem)
+BListView::ReplaceItem(b_int32 index, BListItem *newItem, BListItem **oldItem)
 {
 	bool retVal = false;
-	EListItem *old_item = NULL;
+	BListItem *old_item = NULL;
 
 	do
 	{
@@ -913,16 +913,16 @@ EListView::ReplaceItem(eint32 index, EListItem *newItem, EListItem **oldItem)
 
 		if(oldItemSelected == false || fFirstSelected < 0) break;
 
-		for(eint32 i = fFirstSelected; i <= fLastSelected; i++)
+		for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
 		{
-			EListItem *item = (EListItem*)fItems.ItemAt(i);
+			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item->fSelected == true) break;
 			fFirstSelected++;
 		}
 
-		for(eint32 i = fLastSelected; i >= fFirstSelected; i--)
+		for(b_int32 i = fLastSelected; i >= fFirstSelected; i--)
 		{
-			EListItem *item = (EListItem*)fItems.ItemAt(i);
+			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item->fSelected == true) break;
 			fLastSelected--;
 		}
@@ -939,7 +939,7 @@ EListView::ReplaceItem(eint32 index, EListItem *newItem, EListItem **oldItem)
 
 
 void
-EListView::SortItems(int (*cmp)(const EListItem **a, const EListItem **b))
+BListView::SortItems(int (*cmp)(const BListItem **a, const BListItem **b))
 {
 	if(cmp == NULL) return;
 
@@ -948,9 +948,9 @@ EListView::SortItems(int (*cmp)(const EListItem **a, const EListItem **b))
 	if(fFirstSelected > 0)
 	{
 		fFirstSelected = fLastSelected = -1;
-		for(eint32 i = 0; i < fItems.CountItems(); i++)
+		for(b_int32 i = 0; i < fItems.CountItems(); i++)
 		{
-			EListItem *item = (EListItem*)fItems.ItemAt(i);
+			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item->fSelected == false) continue;
 			fFirstSelected = (fFirstSelected < 0 ? i : min_c(fFirstSelected, i));
 			fLastSelected = (fLastSelected < 0 ? i : max_c(fLastSelected, i));
@@ -961,41 +961,41 @@ EListView::SortItems(int (*cmp)(const EListItem **a, const EListItem **b))
 
 
 void
-EListView::DoForEach(bool (*func)(EListItem *item))
+BListView::DoForEach(bool (*func)(BListItem *item))
 {
 	fItems.DoForEach((bool (*)(void*))func);
 }
 
 
 void
-EListView::DoForEach(bool (*func)(EListItem *item, void *user_data), void *user_data)
+BListView::DoForEach(bool (*func)(BListItem *item, void *user_data), void *user_data)
 {
 	fItems.DoForEach((bool (*)(void*, void*))func, user_data);
 }
 
 
-const EListItem**
-EListView::Items() const
+const BListItem**
+BListView::Items() const
 {
-	return (const EListItem**)fItems.Items();
+	return (const BListItem**)fItems.Items();
 }
 
 
-ERect
-EListView::ItemFrame(eint32 index) const
+BRect
+BListView::ItemFrame(b_int32 index) const
 {
-	ERect r;
+	BRect r;
 
 	if(index >= 0 && index < fItems.CountItems())
 	{
-		EListItem *item = (EListItem*)fItems.ItemAt(index);
+		BListItem *item = (BListItem*)fItems.ItemAt(index);
 		if(item->Height() >= 0)
 		{
 			r.Set(1, 1, Frame().Width() - 1, 1);
 
-			for(eint32 i = 0; i <= index; i++)
+			for(b_int32 i = 0; i <= index; i++)
 			{
-                item = (EListItem*)fItems.ItemAt(i);
+                item = (BListItem*)fItems.ItemAt(i);
 				if(item->Height() < 0) continue;
 
 				r.top = r.bottom;
@@ -1010,74 +1010,74 @@ EListView::ItemFrame(eint32 index) const
 
 
 void
-EListView::InvalidateItem(eint32 index)
+BListView::InvalidateItem(b_int32 index)
 {
-	ERect r = ItemFrame(index);
+	BRect r = ItemFrame(index);
 	if(r.IsValid()) Invalidate(r, true);
 }
 
 
 void
-EListView::ScrollToItem(eint32 index)
+BListView::ScrollToItem(b_int32 index)
 {
-	ERect rect = ItemFrame(index);
+	BRect rect = ItemFrame(index);
 	if(rect.IsValid() == false) return;
 
-	ERect vRect = Bounds();
+	BRect vRect = Bounds();
 	if(vRect.top <= rect.top && vRect.bottom >= rect.bottom) return;
 
-	EPoint pt = rect.LeftTop();
+	BPoint pt = rect.LeftTop();
 	pt.ConstrainTo(vRect);
 
-	ScrollTo(Frame().left - ConvertToParent(EPoint(0, 0)).x,
+	ScrollTo(Frame().left - ConvertToParent(BPoint(0, 0)).x,
 		 pt.y == vRect.top ? rect.top : rect.bottom - vRect.Height());
 }
 
 
 void
-EListView::ScrollToSelection()
+BListView::ScrollToSelection()
 {
-	EScrollView *scrollView = e_cast_as(Parent(), EScrollView);
+	BScrollView *scrollView = b_cast_as(Parent(), BScrollView);
 	if(scrollView == NULL || scrollView->Target() != this) return;
 
-	ERect rect = ItemFrame(fFirstSelected);
+	BRect rect = ItemFrame(fFirstSelected);
 	if(rect.IsValid() == false) return;
 
-	ERect vRect = ConvertFromParent(scrollView->TargetFrame());
+	BRect vRect = ConvertFromParent(scrollView->TargetFrame());
 	if(vRect.top <= rect.top && vRect.bottom >= rect.bottom) return;
 
-	EPoint pt = rect.LeftTop();
+	BPoint pt = rect.LeftTop();
 	pt.ConstrainTo(vRect);
 
-	ScrollTo(Frame().left - ConvertToParent(EPoint(0, 0)).x,
+	ScrollTo(Frame().left - ConvertToParent(BPoint(0, 0)).x,
 		 pt.y == vRect.top ? rect.top : rect.bottom - vRect.Height());
 }
 
 
 void
-EListView::AttachedToWindow()
+BListView::AttachedToWindow()
 {
 	if(Target() == NULL) SetTarget(Window());
 }
 
 
 void
-EListView::DetachedFromWindow()
+BListView::DetachedFromWindow()
 {
 	if(Target() == Window()) SetTarget(NULL);
 }
 
 
 void
-EListView::SetPosition(eint32 pos)
+BListView::SetPosition(b_int32 pos)
 {
 	if(pos >= fItems.CountItems()) pos = -1;
 	fPos = pos;
 }
 
 
-eint32
-EListView::Position() const
+b_int32
+BListView::Position() const
 {
 	return fPos;
 }

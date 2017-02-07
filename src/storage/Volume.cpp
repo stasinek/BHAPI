@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -49,15 +49,15 @@
 #include "Volume.h"
 
 
-typedef struct e_dev_data_t {
+typedef struct b_dev_data_t {
 	char *name;
 	char *root_dir;
-} e_dev_data_t;
+} b_dev_data_t;
 
 
-inline e_dev_data_t* etk_new_dev_data()
+inline b_dev_data_t* bhapi_new_dev_data()
 {
-	e_dev_data_t* data = (e_dev_data_t*)malloc(sizeof(e_dev_data_t));
+	b_dev_data_t* data = (b_dev_data_t*)malloc(sizeof(b_dev_data_t));
 	if(data == NULL) return NULL;
 	data->name = NULL;
 	data->root_dir = NULL;
@@ -65,33 +65,33 @@ inline e_dev_data_t* etk_new_dev_data()
 }
 
 
-inline e_status_t etk_set_dev_data(e_dev_data_t *data, const char *name, const char *root_dir)
+inline b_status_t bhapi_set_dev_data(b_dev_data_t *data, const char *name, const char *root_dir)
 {
-	if(data == NULL) return E_BAD_VALUE;
-	if(root_dir == NULL || *root_dir == 0) return E_BAD_VALUE;
+	if(data == NULL) return B_BAD_VALUE;
+	if(root_dir == NULL || *root_dir == 0) return B_BAD_VALUE;
 
-#ifdef ETK_OS_UNIX
-	if(*root_dir != '/') return E_BAD_VALUE;
-#ifdef ETK_OS_LINUX
-	if(strlen(root_dir) == 5 && strcmp(root_dir, "/proc") == 0) return E_BAD_VALUE;
-	if(strlen(root_dir) == 4 && strcmp(root_dir, "/dev") == 0) return E_BAD_VALUE;
-#endif // ETK_OS_LINUX
+#ifdef BHAPI_OS_UNIX
+	if(*root_dir != '/') return B_BAD_VALUE;
+#ifdef BHAPI_OS_LINUX
+	if(strlen(root_dir) == 5 && strcmp(root_dir, "/proc") == 0) return B_BAD_VALUE;
+	if(strlen(root_dir) == 4 && strcmp(root_dir, "/dev") == 0) return B_BAD_VALUE;
+#endif // BHAPI_OS_LINUX
 #else
 #ifdef _WIN32
 	if(strlen(root_dir) < 3 ||
 	   !((*root_dir >= 'a' && *root_dir <= 'z') || (*root_dir >= 'A' && *root_dir <= 'Z')) ||
-	   root_dir[1] != ':' || root_dir[2] != '/') return E_BAD_VALUE;
+	   root_dir[1] != ':' || root_dir[2] != '/') return B_BAD_VALUE;
 #endif // _WIN32
-#endif // ETK_OS_UNIX
+#endif // BHAPI_OS_UNIX
 
-	char *fname = (name == NULL ? NULL : e_strdup(name));
-	char *fdir = e_strdup(root_dir);
+	char *fname = (name == NULL ? NULL : b_strdup(name));
+	char *fdir = b_strdup(root_dir);
 
 	if((fname == NULL && !(name == NULL || *name == 0)) || fdir == NULL)
 	{
 		if(fname) free(fname);
 		if(fdir) free(fdir);
-		return E_NO_MEMORY;
+		return B_NO_MEMORY;
 	}
 
 	if(data->name) free(data->name);
@@ -100,11 +100,11 @@ inline e_status_t etk_set_dev_data(e_dev_data_t *data, const char *name, const c
 	data->name = fname;
 	data->root_dir = fdir;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-inline void etk_delete_dev_data(e_dev_data_t *data)
+inline void bhapi_delete_dev_data(b_dev_data_t *data)
 {
 	if(data == NULL) return;
 	if(data->name) free(data->name);
@@ -113,41 +113,41 @@ inline void etk_delete_dev_data(e_dev_data_t *data)
 }
 
 
-EVolume::EVolume()
+BVolume::BVolume()
 	: fDevice(0), fData(NULL)
 {
 }
 
 
-EVolume::EVolume(e_dev_t dev)
+BVolume::BVolume(b_dev_t dev)
 	: fDevice(0), fData(NULL)
 {
 	SetTo(dev);
 }
 
 
-EVolume::EVolume(const EVolume &from)
+BVolume::BVolume(const BVolume &from)
 	: fDevice(0), fData(NULL)
 {
 	SetTo(from.fDevice);
 }
 
 
-EVolume::~EVolume()
+BVolume::~BVolume()
 {
 	Unset();
 }
 
 
-e_status_t
-EVolume::InitCheck() const
+b_status_t
+BVolume::InitCheck() const
 {
-	return(fDevice == 0 || fData == NULL ? E_NO_INIT : E_OK);
+	return(fDevice == 0 || fData == NULL ? B_NO_INIT : B_OK);
 }
 
 
-e_status_t
-EVolume::SetTo(e_dev_t dev)
+b_status_t
+BVolume::SetTo(b_dev_t dev)
 {
 #ifdef HAVE_MNTENT_H
 	if(dev <= 0)
@@ -159,37 +159,37 @@ EVolume::SetTo(e_dev_t dev)
 		FILE *ent = setmntent("/etc/fstab", "r");
 		if(ent == NULL)
 		{
-			ETK_DEBUG("[STORAGE]: %s --- Unable to open /etc/fstab", __PRETTY_FUNCTION__);
-			return E_ENTRY_NOT_FOUND;
+			BHAPI_DEBUG("[STORAGE]: %s --- Unable to open /etc/fstab", __PRETTY_FUNCTION__);
+			return B_ENTRY_NOT_FOUND;
 		}
 
 		struct mntent *mnt = NULL;
-		for(e_dev_t i = 0; i < dev; i++) {if((mnt = getmntent(ent)) == NULL) break;}
+		for(b_dev_t i = 0; i < dev; i++) {if((mnt = getmntent(ent)) == NULL) break;}
 
 		if(mnt == NULL)
 		{
 			endmntent(ent);
-			return E_ENTRY_NOT_FOUND;
+			return B_ENTRY_NOT_FOUND;
 		}
 
 		if(fData == NULL)
 		{
-			if((fData = etk_new_dev_data()) == NULL)
+			if((fData = bhapi_new_dev_data()) == NULL)
 			{
 				endmntent(ent);
-				return E_NO_MEMORY;
+				return B_NO_MEMORY;
 			}
 		}
 
-		e_status_t status = etk_set_dev_data((e_dev_data_t*)fData, mnt->mnt_fsname, mnt->mnt_dir);
+		b_status_t status = bhapi_set_dev_data((b_dev_data_t*)fData, mnt->mnt_fsname, mnt->mnt_dir);
 		endmntent(ent);
 
-		if(status != E_OK) return status;
+		if(status != B_OK) return status;
 
 		fDevice = dev;
 	}
 
-	return E_OK;
+	return B_OK;
 #else // !HAVE_MNTENT_H
 #ifdef _WIN32
 	if(dev <= 0)
@@ -198,21 +198,21 @@ EVolume::SetTo(e_dev_t dev)
 	}
 	else if(fDevice != dev)
 	{
-		if(dev > 26) return E_ENTRY_NOT_FOUND;
+		if(dev > 26) return B_ENTRY_NOT_FOUND;
 
 		DWORD driveMask = GetLogicalDrives();
-		if(driveMask == 0) return E_ENTRY_NOT_FOUND;
-		if(!(driveMask & (1UL << (dev - 1)))) return E_BAD_VALUE;
+		if(driveMask == 0) return B_ENTRY_NOT_FOUND;
+		if(!(driveMask & (1UL << (dev - 1)))) return B_BAD_VALUE;
 
 		if(fData == NULL)
 		{
-			if((fData = etk_new_dev_data()) == NULL) return E_NO_MEMORY;
+			if((fData = bhapi_new_dev_data()) == NULL) return B_NO_MEMORY;
 		}
 
 		char dirname[4] = "A:\\";
 		*dirname += (dev - 1);
 
-		EString nameStr;
+		BString nameStr;
 		char nameBuf[301];
 		bzero(nameBuf, 301);
         if(!(GetVolumeInformationA(dirname, nameBuf, 300, NULL, NULL, NULL, NULL, 0) == 0 || nameBuf[0] == 0))
@@ -220,7 +220,7 @@ EVolume::SetTo(e_dev_t dev)
 			WCHAR wStr[301];
 			bzero(wStr, sizeof(WCHAR) * 301);
 			MultiByteToWideChar(CP_ACP, 0, nameBuf, -1, wStr, 300);
-			char *utf8Name = e_unicode_convert_to_utf8((const eunichar*)wStr, -1);
+			char *utf8Name = b_unicode_convert_to_utf8((const b_unichar*)wStr, -1);
 			if(utf8Name != NULL)
 			{
 				nameStr.SetTo(utf8Name);
@@ -230,14 +230,14 @@ EVolume::SetTo(e_dev_t dev)
 		if(nameStr.Length() <= 0) nameStr.SetTo(nameBuf);
 		dirname[2] = '/';
 
-		e_status_t status = etk_set_dev_data((e_dev_data_t*)fData, nameStr.String(), dirname);
+		b_status_t status = bhapi_set_dev_data((b_dev_data_t*)fData, nameStr.String(), dirname);
 
-		if(status != E_OK) return status;
+		if(status != B_OK) return status;
 
 		fDevice = dev;
 	}
 
-	return E_OK;
+	return B_OK;
 #else // !_WIN32
 #ifdef __BEOS__
 	if(dev <= 0)
@@ -247,7 +247,7 @@ EVolume::SetTo(e_dev_t dev)
 	else if(fDevice != dev)
 	{
 		if(fData == NULL)
-			if((fData = etk_new_dev_data()) == NULL) return E_NO_MEMORY;
+			if((fData = bhapi_new_dev_data()) == NULL) return B_NO_MEMORY;
 
 		BVolume vol;
 		BVolumeRoster volRoster;
@@ -257,44 +257,44 @@ EVolume::SetTo(e_dev_t dev)
 		char volName[B_FILE_NAME_LENGTH + 1];
 		bzero(volName, B_FILE_NAME_LENGTH + 1);
 
-		e_dev_t tmp = dev;
+		b_dev_t tmp = dev;
 		while(tmp > 0)
 		{
-			if(volRoster.GetNextVolume(&vol) != B_OK) return E_ENTRY_NOT_FOUND;
+			if(volRoster.GetNextVolume(&vol) != B_OK) return B_ENTRY_NOT_FOUND;
 			if(--tmp > 0) continue;
 			if(vol.GetRootDirectory(&beDir) != B_OK ||
 			   beDir.GetEntry(&beEntry) != B_OK ||
-			   beEntry.GetPath(&bePath) != B_OK) return E_ENTRY_NOT_FOUND;
+			   beEntry.GetPath(&bePath) != B_OK) return B_ENTRY_NOT_FOUND;
 			vol.GetName(volName);
 		}
 
-		e_status_t status = etk_set_dev_data((e_dev_data_t*)fData, volName, bePath.Path());
-		if(status != E_OK) return status;
+		b_status_t status = bhapi_set_dev_data((b_dev_data_t*)fData, volName, bePath.Path());
+		if(status != B_OK) return status;
 
 		fDevice = dev;
 	}
 
-	return E_OK;
+	return B_OK;
 #else // !__BEOS__
-	#warning "fixme: EVolume::SetTo"
+	#warning "fixme: BVolume::SetTo"
 	if(dev <= 0)
 	{
 		Unset();
-		return E_OK;
+		return B_OK;
 	}
 	else if(fDevice != dev && dev == 1)
 	{
 		if(fData == NULL)
-			if((fData = etk_new_dev_data()) == NULL) return E_NO_MEMORY;
+			if((fData = bhapi_new_dev_data()) == NULL) return B_NO_MEMORY;
 
-		e_status_t status = etk_set_dev_data((e_dev_data_t*)fData, "root", "/");
-		if(status != E_OK) return status;
+		b_status_t status = bhapi_set_dev_data((b_dev_data_t*)fData, "root", "/");
+		if(status != B_OK) return status;
 
 		fDevice = dev;
-		return E_OK;
+		return B_OK;
 	}
 
-	return E_ENTRY_NOT_FOUND;
+	return B_ENTRY_NOT_FOUND;
 #endif // __BEOS__
 #endif // _WIN32
 #endif // HAVE_MNTENT_H
@@ -302,79 +302,79 @@ EVolume::SetTo(e_dev_t dev)
 
 
 void
-EVolume::Unset()
+BVolume::Unset()
 {
-	if(fData != NULL) etk_delete_dev_data((e_dev_data_t*)fData);
+	if(fData != NULL) bhapi_delete_dev_data((b_dev_data_t*)fData);
 
 	fData = NULL;
 	fDevice = 0;
 }
 
 
-e_dev_t
-EVolume::Device() const
+b_dev_t
+BVolume::Device() const
 {
 	return fDevice;
 }
 
 
-e_status_t
-EVolume::GetName(EString *name) const
+b_status_t
+BVolume::GetName(BString *name) const
 {
-	if(name == NULL) return E_BAD_VALUE;
-	if(fData == NULL) return E_NO_INIT;
+	if(name == NULL) return B_BAD_VALUE;
+	if(fData == NULL) return B_NO_INIT;
 
-	*name = ((e_dev_data_t*)fData)->name;
-	return E_OK;
+	*name = ((b_dev_data_t*)fData)->name;
+	return B_OK;
 }
 
 
-e_status_t EVolume::GetName(char *name, size_t nameSize) const
+b_status_t BVolume::GetName(char *name, size_t nameSize) const
 {
-	EString str;
+	BString str;
 
-	e_status_t status = GetName(&str);
-	if(status == E_OK) str.CopyInto(name, nameSize, 0, -1);
+	b_status_t status = GetName(&str);
+	if(status == B_OK) str.CopyInto(name, nameSize, 0, -1);
 
 	return status;
 }
 
 
-e_status_t
-EVolume::SetName(const char *name)
+b_status_t
+BVolume::SetName(const char *name)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EVolume::GetRootDirectory(EDirectory *dir) const
+b_status_t
+BVolume::GetRootDirectory(BDirectory *dir) const
 {
-	if(dir == NULL) return E_BAD_VALUE;
+	if(dir == NULL) return B_BAD_VALUE;
 
 	dir->Unset();
-	if(fData == NULL) return E_NO_INIT;
-	return dir->SetTo(((e_dev_data_t*)fData)->root_dir);
+	if(fData == NULL) return B_NO_INIT;
+	return dir->SetTo(((b_dev_data_t*)fData)->root_dir);
 }
 
 
 bool
-EVolume::operator==(const EVolume &vol) const
+BVolume::operator==(const BVolume &vol) const
 {
 	return(fDevice == vol.fDevice);
 }
 
 
 bool
-EVolume::operator!=(const EVolume &vol) const
+BVolume::operator!=(const BVolume &vol) const
 {
 	return(fDevice != vol.fDevice);
 }
 
 
-EVolume&
-EVolume::operator=(const EVolume &vol)
+BVolume&
+BVolume::operator=(const BVolume &vol)
 {
 	Unset();
 	SetTo(vol.fDevice);

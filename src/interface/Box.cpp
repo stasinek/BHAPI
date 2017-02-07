@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -33,20 +33,20 @@
 
 #include "Box.h"
 
-EBox::EBox(ERect frame, const char *name, euint32 resizingMode, euint32 flags, e_border_style border)
-	: EView(frame, name, resizingMode, flags), fLabelView(NULL), fBorder(E_NO_BORDER), fAlignment(E_ALIGN_LEFT)
+BBox::BBox(BRect frame, const char *name, b_uint32 resizingMode, b_uint32 flags, b_border_style border)
+	: BView(frame, name, resizingMode, flags), fLabelView(NULL), fBorder(B_NO_BORDER), fAlignment(B_ALIGN_LEFT)
 {
 	fBorder = border;
 }
 
 
-EBox::~EBox()
+BBox::~BBox()
 {
 }
 
 
 void
-EBox::SetBorder(e_border_style border)
+BBox::SetBorder(b_border_style border)
 {
 	if(fBorder != border)
 	{
@@ -56,15 +56,15 @@ EBox::SetBorder(e_border_style border)
 }
 
 
-e_border_style
-EBox::Border() const
+b_border_style
+BBox::Border() const
 {
 	return fBorder;
 }
 
 
 void
-EBox::SetLabelAlignment(e_alignment labelAlignment)
+BBox::SetLabelAlignment(b_alignment labelAlignment)
 {
 	if(fAlignment != labelAlignment)
 	{
@@ -74,19 +74,19 @@ EBox::SetLabelAlignment(e_alignment labelAlignment)
 }
 
 
-e_alignment
-EBox::LabelAlignment() const
+b_alignment
+BBox::LabelAlignment() const
 {
 	return fAlignment;
 }
 
 
 void
-EBox::SetLabel(const char *label)
+BBox::SetLabel(const char *label)
 {
 	if(!(label == NULL || *label == 0))
 	{
-		EStringView *strView = e_cast_as(fLabelView, EStringView);
+		BStringView *strView = b_cast_as(fLabelView, BStringView);
 		if(strView != NULL)
 		{
 			strView->SetText(label);
@@ -95,14 +95,14 @@ EBox::SetLabel(const char *label)
 			return;
 		}
 
-		if((strView = new EStringView(ERect(0, 0, 1, 1), NULL, label, E_FOLLOW_NONE)) == NULL) return;
-		strView->SetFont(etk_bold_font);
+		if((strView = new BStringView(BRect(0, 0, 1, 1), NULL, label, B_FOLLOW_NONE)) == NULL) return;
+		strView->SetFont(bhapi_bold_font);
 		strView->ResizeToPreferred();
-		if(SetLabel(strView) != E_OK) delete strView;
+		if(SetLabel(strView) != B_OK) delete strView;
 	}
 	else if(fLabelView != NULL)
 	{
-		EView *view = fLabelView;
+		BView *view = fLabelView;
 		fLabelView = NULL;
 
 		view->RemoveSelf();
@@ -111,24 +111,24 @@ EBox::SetLabel(const char *label)
 }
 
 
-e_status_t
-EBox::SetLabel(EView *viewLabel)
+b_status_t
+BBox::SetLabel(BView *viewLabel)
 {
 	if(viewLabel != NULL)
 	{
-		if(viewLabel == this || viewLabel->Window() != NULL || viewLabel->Parent() != NULL) return E_ERROR;
+		if(viewLabel == this || viewLabel->Window() != NULL || viewLabel->Parent() != NULL) return B_ERROR;
 		AddChild(viewLabel, ChildAt(0));
-		if(viewLabel->Parent() != this) return E_ERROR;
-		viewLabel->SetResizingMode(E_FOLLOW_NONE);
+		if(viewLabel->Parent() != this) return B_ERROR;
+		viewLabel->SetResizingMode(B_FOLLOW_NONE);
 	}
 	else if(fLabelView == NULL)
 	{
-		return E_OK;
+		return B_OK;
 	}
 
 	if(fLabelView != NULL)
 	{
-		EView *view = fLabelView;
+		BView *view = fLabelView;
 		fLabelView = NULL;
 
 		view->RemoveSelf();
@@ -138,33 +138,33 @@ EBox::SetLabel(EView *viewLabel)
 	fLabelView = viewLabel;
 	ReAdjustLabel();
 
-	return E_OK;
+	return B_OK;
 }
 
 
 const char*
-EBox::Label() const
+BBox::Label() const
 {
 	if(fLabelView == NULL) return NULL;
 
-	EStringView *strView = e_cast_as(fLabelView, EStringView);
+	BStringView *strView = b_cast_as(fLabelView, BStringView);
 	if(strView == NULL) return NULL;
 
 	return strView->Text();
 }
 
 
-EView*
-EBox::LabelView() const
+BView*
+BBox::LabelView() const
 {
 	return fLabelView;
 }
 
 
-ERect
-EBox::ContentBounds() const
+BRect
+BBox::ContentBounds() const
 {
-	e_theme_engine *theme = etk_get_current_theme_engine();
+	b_theme_engine *theme = bhapi_get_current_theme_engine();
 
 	float l = 0, t = 0, r = 0, b = 0;
 	if(!(theme == NULL || theme->get_border_margins == NULL))
@@ -172,7 +172,7 @@ EBox::ContentBounds() const
 
 	float labelHeight = ((fLabelView == NULL || fLabelView->Frame().Width() <= 0) ? 0.f : fLabelView->Frame().Height());
 
-	ERect bounds = Frame().OffsetToSelf(E_ORIGIN);
+	BRect bounds = Frame().OffsetToSelf(B_ORIGIN);
 	bounds.left += l;
 	bounds.top += max_c(t, labelHeight);
 	bounds.right -= r;
@@ -183,23 +183,23 @@ EBox::ContentBounds() const
 
 
 void
-EBox::Draw(ERect updateRect)
+BBox::Draw(BRect updateRect)
 {
-	if(!IsVisible() || fBorder == E_NO_BORDER) return;
+	if(!IsVisible() || fBorder == B_NO_BORDER) return;
 
-	e_theme_engine *theme = etk_get_current_theme_engine();
+	b_theme_engine *theme = bhapi_get_current_theme_engine();
 	if(theme == NULL || theme->get_border_margins == NULL || theme->draw_border == NULL) return;
 
 	float l = 0, t = 0, r = 0, b = 0;
 	theme->get_border_margins(theme, this, &l, &t, &r, &b, fBorder, PenSize());
 
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	if(!(fLabelView == NULL || fLabelView->Frame().Width() <= 0 || fLabelView->Frame().Height() < t))
 		rect.top += (fLabelView->Frame().Height() - t) / 2.f;
 
 	PushState();
 
-	ERegion clipping(updateRect);
+	BRegion clipping(updateRect);
 	if(!(fLabelView == NULL || fLabelView->Frame().IsValid() == false)) clipping.Exclude(fLabelView->Frame());
 	ConstrainClippingRegion(&clipping);
 
@@ -210,29 +210,29 @@ EBox::Draw(ERect updateRect)
 
 
 void
-EBox::FrameResized(float new_width, float new_height)
+BBox::FrameResized(float new_width, float new_height)
 {
 	ReAdjustLabel();
 }
 
 
 void
-EBox::ResizeToPreferred()
+BBox::ResizeToPreferred()
 {
 	if(fLabelView) fLabelView->ResizeToPreferred();
-	EView::ResizeToPreferred();
+	BView::ResizeToPreferred();
 }
 
 
 void
-EBox::GetPreferredSize(float *width, float *height)
+BBox::GetPreferredSize(float *width, float *height)
 {
 	if(!width && !height) return;
 
 	float w = 0, h = 0;
 	if(fLabelView) fLabelView->GetPreferredSize(&w, &h);
 
-	e_theme_engine *theme = etk_get_current_theme_engine();
+	b_theme_engine *theme = bhapi_get_current_theme_engine();
 
 	float l = 0, t = 0, r = 0, b = 0;
 	if(!(theme == NULL || theme->get_border_margins == NULL))
@@ -248,16 +248,16 @@ EBox::GetPreferredSize(float *width, float *height)
 
 
 void
-EBox::ReAdjustLabel()
+BBox::ReAdjustLabel()
 {
 	if(fLabelView == NULL) return;
 
 	switch(fAlignment)
 	{
-		case E_ALIGN_RIGHT:
+		case B_ALIGN_RIGHT:
 			fLabelView->MoveTo(Frame().Width() - fLabelView->Frame().Width() - 5.f, 0);
 			break;
-		case E_ALIGN_CENTER:
+		case B_ALIGN_CENTER:
 			fLabelView->MoveTo((Frame().Width() - fLabelView->Frame().Width()) / 2.f, 0);
 			break;
 		default:
@@ -267,7 +267,7 @@ EBox::ReAdjustLabel()
 
 
 void
-EBox::ChildRemoving(EView *child)
+BBox::ChildRemoving(BView *child)
 {
 	if(fLabelView == child) fLabelView = NULL;
 }

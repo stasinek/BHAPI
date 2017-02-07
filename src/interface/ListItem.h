@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,12 +24,12 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: ListItem.h
- * Description: EListItem --- item for EListView/EOutlineListView
+ * Description: BListItem --- item for BListView/BOutlineListView
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_LIST_ITEM_H__
-#define __ETK_LIST_ITEM_H__
+#ifndef __BHAPI_LIST_ITEM_H__
+#define __BHAPI_LIST_ITEM_H__
 
 #include "./../support/Archivable.h"
 #include "./../support/List.h"
@@ -37,17 +37,17 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class EListView;
-class EOutlineListView;
+class BListView;
+class BOutlineListView;
 
-class _IMPEXP_ETK EListItem : public EArchivable {
+class _IMPEXP_BHAPI BListItem : public BArchivable {
 public:
-	EListItem(euint32 outlineLevel = 0, bool expanded = true, euint32 flags = 0);
-	virtual ~EListItem();
+	BListItem(b_uint32 outlineLevel = 0, bool expanded = true, b_uint32 flags = 0);
+	virtual ~BListItem();
 
 	// Archiving
-	EListItem(EMessage *from);
-	virtual e_status_t Archive(EMessage *into, bool deep = true) const;
+	BListItem(BMessage *from);
+	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
 
 	float		Height() const;
 	float		Width() const;
@@ -61,55 +61,55 @@ public:
 	void		SetHeight(float height);
 	void		SetWidth(float width);
 
-	virtual void	SetFlags(euint32 flags);
-	euint32		Flags() const;
+	virtual void	SetFlags(b_uint32 flags);
+	b_uint32		Flags() const;
 
 	void		Invalidate();
 
-	// for item of EOutlineListView
+	// for item of BOutlineListView
 	bool 		IsExpanded() const;
 	void 		SetExpanded(bool expanded);
-	euint32 	OutlineLevel() const;
+	b_uint32 	OutlineLevel() const;
 	bool		IsVisible() const;
-	EListItem	*SuperItem() const;
+	BListItem	*SuperItem() const;
 	bool		HasSubitems() const;
 
 protected:
-	// for item of EOutlineListView
-	void		DrawLeader(EView *owner, ERect *itemRect);
+	// for item of BOutlineListView
+	void		DrawLeader(BView *owner, BRect *itemRect);
 	void		GetLeaderSize(float *width, float *height) const;
 
 private:
-	friend class EListView;
-	friend class EOutlineListView;
+	friend class BListView;
+	friend class BOutlineListView;
 
-	EListView *fOwner;
-	EOutlineListView *fFullOwner;
+	BListView *fOwner;
+	BOutlineListView *fFullOwner;
 
-	euint32 	fLevel;
+	b_uint32 	fLevel;
 	bool 		fExpanded;
-	euint32		fFlags;
+	b_uint32		fFlags;
 
 	float		fWidth;
 	float		fHeight;
 	bool		fSelected;
 	bool		fEnabled;
 
-	virtual void	DrawItem(EView *owner, ERect itemRect, bool drawEverything) = 0;
-	virtual void	Update(EView *owner, const EFont *font) = 0;
+	virtual void	DrawItem(BView *owner, BRect itemRect, bool drawEverything) = 0;
+	virtual void	Update(BView *owner, const BFont *font) = 0;
 
-	virtual void	MouseDown(EView *owner, EPoint where);
-	virtual void	MouseUp(EView *owner, EPoint where);
-	virtual void	MouseMoved(EView *owner, EPoint where, euint32 code, const EMessage *a_message);
-	virtual void	KeyDown(EView *owner, const char *bytes, eint32 numBytes);
-	virtual void	KeyUp(EView *owner, const char *bytes, eint32 numBytes);
+	virtual void	MouseDown(BView *owner, BPoint where);
+	virtual void	MouseUp(BView *owner, BPoint where);
+	virtual void	MouseMoved(BView *owner, BPoint where, b_uint32 code, const BMessage *a_message);
+	virtual void	KeyDown(BView *owner, const char *bytes, b_int32 numBytes);
+	virtual void	KeyUp(BView *owner, const char *bytes, b_int32 numBytes);
 };
 
 
-class _IMPEXP_ETK EStringItem : public EListItem {
+class _IMPEXP_BHAPI StringItem : public BListItem {
 public:
-	EStringItem(const char *text, euint32 outlineLevel = 0, bool expanded = true);
-	virtual ~EStringItem();
+	StringItem(const char *text, b_uint32 outlineLevel = 0, bool expanded = true);
+	virtual ~StringItem();
 
 	virtual void	SetText(const char *text);
 	const char	*Text() const;
@@ -117,12 +117,12 @@ public:
 private:
 	char* fText;
 
-	virtual void	DrawItem(EView *owner, ERect itemRect, bool drawEverything);
-	virtual void	Update(EView *owner, const EFont *font);
+	virtual void	DrawItem(BView *owner, BRect itemRect, bool drawEverything);
+	virtual void	Update(BView *owner, const BFont *font);
 };
 
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_LIST_ITEM_H__ */
+#endif /* __BHAPI_LIST_ITEM_H__ */
 

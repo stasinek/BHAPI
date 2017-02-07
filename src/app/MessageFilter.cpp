@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,7 +24,7 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: MessageFilter.cpp
- * Description: Filter message before ELooper::DispatchMessage
+ * Description: Filter message before BLooper::DispatchMessage
  *
  * --------------------------------------------------------------------------*/
 
@@ -32,7 +32,7 @@
 #include "MessageFilter.h"
 
 
-EMessageFilter::EMessageFilter(e_message_delivery delivery, e_message_source source, euint32 command, e_filter_hook filter)
+BMessageFilter::BMessageFilter(b_message_delivery delivery, b_message_source source, b_uint32 command, b_filter_hook filter)
 	: fFiltersAny(false), fHandler(NULL)
 {
 	fDelivery = delivery;
@@ -42,7 +42,7 @@ EMessageFilter::EMessageFilter(e_message_delivery delivery, e_message_source sou
 }
 
 
-EMessageFilter::EMessageFilter(e_message_delivery delivery, e_message_source source, e_filter_hook filter)
+BMessageFilter::BMessageFilter(b_message_delivery delivery, b_message_source source, b_filter_hook filter)
 	: fCommand(0), fFiltersAny(true), fHandler(NULL)
 {
 	fDelivery = delivery;
@@ -51,15 +51,15 @@ EMessageFilter::EMessageFilter(e_message_delivery delivery, e_message_source sou
 }
 
 
-EMessageFilter::EMessageFilter(euint32 command, e_filter_hook filter)
-	: fFiltersAny(false), fDelivery(E_ANY_DELIVERY), fSource(E_ANY_SOURCE), fHandler(NULL)
+BMessageFilter::BMessageFilter(b_uint32 command, b_filter_hook filter)
+	: fFiltersAny(false), fDelivery(B_ANY_DELIVERY), fSource(B_ANY_SOURCE), fHandler(NULL)
 {
 	fCommand = command;
 	fFilterHook = filter;
 }
 
 
-EMessageFilter::EMessageFilter(const EMessageFilter &filter)
+BMessageFilter::BMessageFilter(const BMessageFilter &filter)
 	: fHandler(NULL)
 {
 	fCommand = filter.fCommand;
@@ -70,31 +70,31 @@ EMessageFilter::EMessageFilter(const EMessageFilter &filter)
 }
 
 
-EMessageFilter::EMessageFilter(const EMessageFilter *filter)
+BMessageFilter::BMessageFilter(const BMessageFilter *filter)
 	: fHandler(NULL)
 {
 	fCommand = (filter ? 0 : filter->fCommand);
 	fFiltersAny = (filter ? true : filter->fFiltersAny);
-	fDelivery = (filter ? E_ANY_DELIVERY : filter->fDelivery);
-	fSource = (filter ? E_ANY_SOURCE : filter->fSource);
+	fDelivery = (filter ? B_ANY_DELIVERY : filter->fDelivery);
+	fSource = (filter ? B_ANY_SOURCE : filter->fSource);
 	fFilterHook = (filter ? NULL : filter->fFilterHook);
 }
 
 
-EMessageFilter::~EMessageFilter()
+BMessageFilter::~BMessageFilter()
 {
 	// TODO
 
 	if(fHandler != NULL)
 	{
-		if(fHandler->EHandler::RemoveFilter(this) == false &&
-		   fHandler->Looper() != NULL) fHandler->Looper()->ELooper::RemoveCommonFilter(this);
+		if(fHandler->BHandler::RemoveFilter(this) == false &&
+		   fHandler->Looper() != NULL) fHandler->Looper()->BLooper::RemoveCommonFilter(this);
 	}
 }
 
 
-EMessageFilter&
-EMessageFilter::operator=(const EMessageFilter &filter)
+BMessageFilter&
+BMessageFilter::operator=(const BMessageFilter &filter)
 {
 	// TODO
 
@@ -108,61 +108,61 @@ EMessageFilter::operator=(const EMessageFilter &filter)
 }
 
 
-e_filter_result
-EMessageFilter::Filter(EMessage *message, EHandler **target)
+b_filter_result
+BMessageFilter::Filter(BMessage *message, BHandler **target)
 {
-	return E_DISPATCH_MESSAGE;
+	return B_DISPATCH_MESSAGE;
 }
 
 
-e_filter_result
-EMessageFilter::doFilter(EMessage *message, EHandler **target)
+b_filter_result
+BMessageFilter::doFilter(BMessage *message, BHandler **target)
 {
-	if(message == NULL || target == NULL || fHandler == NULL) return E_SKIP_MESSAGE;
+	if(message == NULL || target == NULL || fHandler == NULL) return B_SKIP_MESSAGE;
 
-	e_filter_result retVal = E_DISPATCH_MESSAGE;
+	b_filter_result retVal = B_DISPATCH_MESSAGE;
 
 	// TODO: delivery & source
 	if(fFiltersAny || message->what == fCommand)
 	{
 		if(fFilterHook != NULL) retVal = (*fFilterHook)(message, target, this);
-		if(retVal == E_DISPATCH_MESSAGE) retVal = Filter(message, target);
+		if(retVal == B_DISPATCH_MESSAGE) retVal = Filter(message, target);
 	}
 
 	return retVal;
 }
 
 
-e_message_delivery
-EMessageFilter::MessageDelivery() const
+b_message_delivery
+BMessageFilter::MessageDelivery() const
 {
 	return fDelivery;
 }
 
 
-e_message_source
-EMessageFilter::MessageSource() const
+b_message_source
+BMessageFilter::MessageSource() const
 {
 	return fSource;
 }
 
 
-euint32
-EMessageFilter::Command() const
+b_uint32
+BMessageFilter::Command() const
 {
 	return fCommand;
 }
 
 
 bool
-EMessageFilter::FiltersAnyCommand() const
+BMessageFilter::FiltersAnyCommand() const
 {
 	return fFiltersAny;
 }
 
 
-ELooper*
-EMessageFilter::Looper() const
+BLooper*
+BMessageFilter::Looper() const
 {
 	if(fHandler == NULL) return NULL;
 	return fHandler->Looper();

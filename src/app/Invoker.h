@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,71 +28,71 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_INVOKER_H__
-#define __ETK_INVOKER_H__
+#ifndef __BHAPI_INVOKER_H__
+#define __BHAPI_INVOKER_H__
 
 #include "./../app/Messenger.h"
 #include "./../support/List.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EInvoker {
+class _IMPEXP_BHAPI BInvoker {
 public:
-	EInvoker();
-	EInvoker(EMessage *message,
-		 const EHandler *handler,
-		 const ELooper *looper = NULL);
-	EInvoker(EMessage *message, EMessenger target);
+    BInvoker();
+    BInvoker(BMessage *message,
+		 const BHandler *handler,
+		 const BLooper *looper = NULL);
+    BInvoker(BMessage *message, BMessenger target);
 
-	virtual ~EInvoker();
+    virtual ~BInvoker();
 
-	virtual e_status_t	SetMessage(EMessage *message);
-	EMessage*		Message() const;
-	euint32			Command() const;
+	virtual b_status_t	SetMessage(BMessage *message);
+	BMessage*		Message() const;
+    b_uint32			Command() const;
 
-	virtual e_status_t	SetTarget(const EHandler *handler, const ELooper *looper = NULL);
-	virtual e_status_t	SetTarget(EMessenger messenger);
+	virtual b_status_t	SetTarget(const BHandler *handler, const BLooper *looper = NULL);
+	virtual b_status_t	SetTarget(BMessenger messenger);
 
 	bool			IsTargetLocal() const;
-	EHandler*		Target(ELooper **looper = NULL) const;
-	EMessenger		Messenger() const;
+	BHandler*		Target(BLooper **looper = NULL) const;
+	BMessenger		Messenger() const;
 
-	virtual e_status_t	SetHandlerForReply(const EHandler *handler);
-	EHandler*		HandlerForReply() const;
+	virtual b_status_t	SetHandlerForReply(const BHandler *handler);
+	BHandler*		HandlerForReply() const;
 
-	virtual e_status_t	Invoke(const EMessage *msg = NULL);
-	e_status_t		InvokeNotify(const EMessage *msg, euint32 kind = E_CONTROL_INVOKED);
+	virtual b_status_t	Invoke(const BMessage *msg = NULL);
+    b_status_t		InvokeNotify(const BMessage *msg, b_uint32 kind = B_CONTROL_INVOKED);
 
-	e_status_t		SetTimeout(e_bigtime_t timeout);
-	e_bigtime_t		Timeout() const;
+    b_status_t		SetTimeout(b_bigtime_t timeout);
+	b_bigtime_t		Timeout() const;
 
 protected:
 	/* Return the change code for a notification.  This is either
-	   E_CONTROL_INVOKED for raw Invoke() calls, or the kind
+	   B_CONTROL_INVOKED for raw Invoke() calls, or the kind
 	   supplied to InvokeNotify().  In addition, 'notify' will be
 	   set to true if this was an InvokeNotify() call, else false. */
-	euint32			InvokeKind(bool* notify = NULL);
+    b_uint32			InvokeKind(bool* notify = NULL);
 
 	/* Start and end an InvokeNotify context around an Invoke() call.
 	   These are only needed for writing custom methods that
 	   emulate the standard InvokeNotify() call. */
-	void			BeginInvokeNotify(euint32 kind = E_CONTROL_INVOKED);
+    void			BeginInvokeNotify(b_uint32 kind = B_CONTROL_INVOKED);
 	void			EndInvokeNotify();
 
 private:
-	EMessage *fMessage;
-	EMessenger fMessenger;
-	euint64 fReplyHandlerToken;
+	BMessage *fMessage;
+	BMessenger fMessenger;
+    b_uint64 fReplyHandlerToken;
 
-	e_bigtime_t fTimeout;
+	b_bigtime_t fTimeout;
 
-	euint32 fNotifyKind;
+    b_uint32 fNotifyKind;
 	bool fNotifyCalled;
 
-	EList fNotifyStatesList;
+	BList fNotifyStatesList;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_INVOKER_H__ */
+#endif /* __BHAPI_INVOKER_H__ */
 

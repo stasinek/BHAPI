@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -36,43 +36,43 @@
 #include "MessageQueue.h"
 
 
-EMessageQueue::EMessageQueue()
+BMessageQueue::BMessageQueue()
 {
-	if((fLocker = etk_create_locker()) == NULL)
-		ETK_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
+	if((fLocker = bhapi_create_locker()) == NULL)
+		BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
 }
 
 
-EMessageQueue::~EMessageQueue()
+BMessageQueue::~BMessageQueue()
 {
-	for(eint32 i = 0; i < fMessagesList.CountItems(); i++) delete (EMessage*)fMessagesList.ItemAt(i);
+	for(b_int32 i = 0; i < fMessagesList.CountItems(); i++) delete (BMessage*)fMessagesList.ItemAt(i);
 	if(fLocker != NULL)
 	{
-		etk_close_locker(fLocker);
-		etk_delete_locker(fLocker);
+		bhapi_close_locker(fLocker);
+		bhapi_delete_locker(fLocker);
 	}
 }
 
 
-e_status_t
-EMessageQueue::LockWithTimeout(e_bigtime_t timeout)
+b_status_t
+BMessageQueue::LockWithTimeout(b_bigtime_t timeout)
 {
-	ELocker *handlers_locker = etk_get_handler_operator_locker();
+	BLocker *handlers_locker = bhapi_get_handler_operator_locker();
 
 	handlers_locker->Lock();
 
-	void *locker = etk_clone_locker(fLocker);
+	void *locker = bhapi_clone_locker(fLocker);
 	if(locker == NULL)
 	{
 		handlers_locker->Unlock();
-		return E_ERROR;
+		return B_ERROR;
 	}
 
-	eint64 save_count = handlers_locker->CountLocks();
+	b_int64 save_count = handlers_locker->CountLocks();
 	while(handlers_locker->CountLocks() > 0) handlers_locker->Unlock();
 
-	e_status_t retVal = etk_lock_locker_etc(fLocker, E_TIMEOUT, timeout);
-	etk_delete_locker(locker);
+	b_status_t retVal = bhapi_lock_locker_etc(fLocker, B_TIMEOUT, timeout);
+	bhapi_delete_locker(locker);
 
 	while(save_count-- > 1) handlers_locker->Lock();
 
@@ -81,41 +81,41 @@ EMessageQueue::LockWithTimeout(e_bigtime_t timeout)
 
 
 bool
-EMessageQueue::Lock()
+BMessageQueue::Lock()
 {
-	return(LockWithTimeout(E_INFINITE_TIMEOUT) == E_OK);
+	return(LockWithTimeout(B_INFINITE_TIMEOUT) == B_OK);
 }
 
 
 void
-EMessageQueue::Unlock()
+BMessageQueue::Unlock()
 {
-	if(etk_count_locker_locks(fLocker) <= 0)
+	if(bhapi_count_locker_locks(fLocker) <= 0)
 	{
-		ETK_WARNING("[APP]: %s -- MessageQueue wasn't locked by current thread.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[APP]: %s -- MessageQueue wasn't locked by current thread.", __PRETTY_FUNCTION__);
 		return;
 	}
 
-	etk_unlock_locker(fLocker);
+	bhapi_unlock_locker(fLocker);
 }
 
 
-eint32
-EMessageQueue::CountMessages() const
+b_int32
+BMessageQueue::CountMessages() const
 {
 	return fMessagesList.CountItems();
 }
 
 
 bool
-EMessageQueue::IsEmpty() const
+BMessageQueue::IsEmpty() const
 {
 	return fMessagesList.IsEmpty();
 }
 
 
 bool
-EMessageQueue::AddMessage(EMessage *an_event)
+BMessageQueue::AddMessage(BMessage *an_event)
 {
 	if(an_event == NULL) return false;
 
@@ -127,7 +127,7 @@ EMessageQueue::AddMessage(EMessage *an_event)
 
 
 bool
-EMessageQueue::RemoveMessage(EMessage *an_event)
+BMessageQueue::RemoveMessage(BMessage *an_event)
 {
 	if(an_event == NULL) return false;
 
@@ -138,26 +138,26 @@ EMessageQueue::RemoveMessage(EMessage *an_event)
 }
 
 
-EMessage*
-EMessageQueue::NextMessage()
+BMessage*
+BMessageQueue::NextMessage()
 {
-	return((EMessage*)fMessagesList.RemoveItem(0));
+	return((BMessage*)fMessagesList.RemoveItem(0));
 }
 
 
-EMessage*
-EMessageQueue::FindMessage(eint32 index) const
+BMessage*
+BMessageQueue::FindMessage(b_int32 index) const
 {
-	return((EMessage*)fMessagesList.ItemAt(index));
+	return((BMessage*)fMessagesList.ItemAt(index));
 }
 
 
-EMessage*
-EMessageQueue::FindMessage(euint32 what, eint32 fromIndex) const
+BMessage*
+BMessageQueue::FindMessage(b_uint32 what, b_int32 fromIndex) const
 {
-	for(eint32 i = fromIndex; i < fMessagesList.CountItems(); i++)
+	for(b_int32 i = fromIndex; i < fMessagesList.CountItems(); i++)
 	{
-		EMessage *msg = (EMessage*)fMessagesList.ItemAt(i);
+		BMessage *msg = (BMessage*)fMessagesList.ItemAt(i);
 		if(msg->what == what) return msg;
 	}
 
@@ -165,12 +165,12 @@ EMessageQueue::FindMessage(euint32 what, eint32 fromIndex) const
 }
 
 
-EMessage*
-EMessageQueue::FindMessage(euint32 what, eint32 fromIndex, eint32 count) const
+BMessage*
+BMessageQueue::FindMessage(b_uint32 what, b_int32 fromIndex, b_int32 count) const
 {
-	for(eint32 i = fromIndex, j = 0; i < fMessagesList.CountItems() && j < count; i++, j++)
+	for(b_int32 i = fromIndex, j = 0; i < fMessagesList.CountItems() && j < count; i++, j++)
 	{
-		EMessage *msg = (EMessage*)fMessagesList.ItemAt(i);
+		BMessage *msg = (BMessage*)fMessagesList.ItemAt(i);
 		if(msg->what == what) return msg;
 	}
 
@@ -178,8 +178,8 @@ EMessageQueue::FindMessage(euint32 what, eint32 fromIndex, eint32 count) const
 }
 
 
-eint32
-EMessageQueue::IndexOfMessage(EMessage *an_event) const
+b_int32
+BMessageQueue::IndexOfMessage(BMessage *an_event) const
 {
 	return fMessagesList.IndexOf(an_event);
 }

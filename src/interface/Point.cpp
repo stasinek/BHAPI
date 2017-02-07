@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -37,7 +37,7 @@
 
 
 #ifndef HAVE_ROUND
-inline double etk_round(double value)
+inline double bhapi_round(double value)
 {
 	double iValue = 0;
 	double fValue = modf(value, &iValue);
@@ -48,33 +48,33 @@ inline double etk_round(double value)
 	return iValue;
 }
 #else
-#define etk_round(a) round(a)
+#define bhapi_round(a) round(a)
 #endif // HAVE_ROUND
 
 
-EPoint::EPoint()
+BPoint::BPoint()
 {
 	x = 0;
 	y = 0;
 }
 
 
-EPoint::EPoint(float X, float Y)
+BPoint::BPoint(float X, float Y)
 {
 	x = X;
 	y = Y;
 }
 
 
-EPoint::EPoint(const EPoint& pt)
+BPoint::BPoint(const BPoint& pt)
 {
 	x = pt.x;
 	y = pt.y;
 }
 
 
-EPoint&
-EPoint::operator=(const EPoint& from)
+BPoint&
+BPoint::operator=(const BPoint& from)
 {
 	x = from.x;
 	y = from.y;
@@ -84,29 +84,29 @@ EPoint::operator=(const EPoint& from)
 
 
 void
-EPoint::Set(float X, float Y)
+BPoint::Set(float X, float Y)
 {
 	x = X;
 	y = Y;
 }
 
 
-EPoint
-EPoint::operator+(const EPoint &plus) const
+BPoint
+BPoint::operator+(const BPoint &plus) const
 {
-	return(EPoint(this->x + plus.x, this->y + plus.y)); 
+	return(BPoint(this->x + plus.x, this->y + plus.y)); 
 }
 
 
-EPoint
-EPoint::operator-(const EPoint &minus) const
+BPoint
+BPoint::operator-(const BPoint &minus) const
 {
-	return(EPoint(this->x - minus.x, this->y - minus.y));
+	return(BPoint(this->x - minus.x, this->y - minus.y));
 }
 
 
-EPoint&
-EPoint::operator+=(const EPoint &plus)
+BPoint&
+BPoint::operator+=(const BPoint &plus)
 {
 	x += plus.x;
 	y += plus.y;
@@ -115,8 +115,8 @@ EPoint::operator+=(const EPoint &plus)
 }
 
 
-EPoint&
-EPoint::operator-=(const EPoint &minus)
+BPoint&
+BPoint::operator-=(const BPoint &minus)
 {
 	x -= minus.x;
 	y -= minus.y;
@@ -126,20 +126,20 @@ EPoint::operator-=(const EPoint &minus)
 
 
 bool
-EPoint::operator!=(const EPoint &pt) const
+BPoint::operator!=(const BPoint &pt) const
 {
 	return(x != pt.x || y != pt.y);
 }
 
 
 bool
-EPoint::operator==(const EPoint &pt) const
+BPoint::operator==(const BPoint &pt) const
 {
 	return(x == pt.x && y == pt.y);
 }
 
 void
-EPoint::ConstrainTo(ERect rect)
+BPoint::ConstrainTo(BRect rect)
 {
 	if(!(x >= rect.left && x <= rect.right))
 	{
@@ -170,15 +170,15 @@ EPoint::ConstrainTo(ERect rect)
 
 
 void
-EPoint::Floor()
+BPoint::Floor()
 {
 	x = (float)floor((double)x);
 	y = (float)floor((double)y);
 }
 
 
-EPoint&
-EPoint::FloorSelf()
+BPoint&
+BPoint::FloorSelf()
 {
 	x = (float)floor((double)x);
 	y = (float)floor((double)y);
@@ -186,25 +186,25 @@ EPoint::FloorSelf()
 }
 
 
-EPoint
-EPoint::FloorCopy() const
+BPoint
+BPoint::FloorCopy() const
 {
 	float _x = (float)floor((double)x);
 	float _y = (float)floor((double)y);
-	return(EPoint(_x, _y));
+	return(BPoint(_x, _y));
 }
 
 
 void
-EPoint::Ceil()
+BPoint::Ceil()
 {
 	x = (float)ceil((double)x);
 	y = (float)ceil((double)y);
 }
 
 
-EPoint&
-EPoint::CeilSelf()
+BPoint&
+BPoint::CeilSelf()
 {
 	x = (float)ceil((double)x);
 	y = (float)ceil((double)y);
@@ -212,44 +212,44 @@ EPoint::CeilSelf()
 }
 
 
-EPoint
-EPoint::CeilCopy() const
+BPoint
+BPoint::CeilCopy() const
 {
 	float _x = (float)ceil((double)x);
 	float _y = (float)ceil((double)y);
-	return(EPoint(_x, _y));
+	return(BPoint(_x, _y));
 }
 
 
 void
-EPoint::Round()
+BPoint::Round()
 {
-	x = (float)etk_round((double)x);
-	y = (float)etk_round((double)y);
+	x = (float)bhapi_round((double)x);
+	y = (float)bhapi_round((double)y);
 }
 
 
-EPoint&
-EPoint::RoundSelf()
+BPoint&
+BPoint::RoundSelf()
 {
-	x = (float)etk_round((double)x);
-	y = (float)etk_round((double)y);
+	x = (float)bhapi_round((double)x);
+	y = (float)bhapi_round((double)y);
 	return *this;
 }
 
 
-EPoint
-EPoint::RoundCopy() const
+BPoint
+BPoint::RoundCopy() const
 {
-	float _x = (float)etk_round((double)x);
-	float _y = (float)etk_round((double)y);
-	return(EPoint(_x, _y));
+	float _x = (float)bhapi_round((double)x);
+	float _y = (float)bhapi_round((double)y);
+	return(BPoint(_x, _y));
 }
 
 
 void
-EPoint::PrintToStream() const
+BPoint::PrintToStream() const
 {
-	ETK_OUTPUT("EPoint(%g, %g)", x, y);
+	BHAPI_OUTPUT("BPoint(%g, %g)", x, y);
 }
 

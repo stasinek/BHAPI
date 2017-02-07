@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,55 +24,55 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: Bitmap.h
- * Description: EBitmap --- a rectangular image for drawing
+ * Description: BBitmap --- a rectangular image for drawing
  * Warning: Unfinished.
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_BITMAP_H__
-#define __ETK_BITMAP_H__
+#ifndef __BHAPI_BITMAP_H__
+#define __BHAPI_BITMAP_H__
 
 #include "./../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class EGraphicsDrawable;
-class EPixmap;
+class BGraphicsDrawable;
+class BPixmap;
 
-class _IMPEXP_ETK EBitmap : public EArchivable {
+class _IMPEXP_BHAPI BBitmap : public BArchivable {
 public:
-	EBitmap(ERect bounds, bool acceptsViews = false);
-	EBitmap(const EBitmap *bitmap, bool acceptsViews = false);
-	EBitmap(const EPixmap *pixmap, bool acceptsViews = false);
-	virtual ~EBitmap();
+    BBitmap(BRect bounds, bool acceptsViews = false);
+    BBitmap(const BBitmap *bitmap, bool acceptsViews = false);
+    BBitmap(const BPixmap *pixmap, bool acceptsViews = false);
+    virtual ~BBitmap();
 
-	e_status_t	InitCheck() const;
+	b_status_t	InitCheck() const;
 	bool		IsValid() const;
 
-	ERect		Bounds() const;
+	BRect		Bounds() const;
 
-	virtual	void	AddChild(EView *view);
-	virtual	bool	RemoveChild(EView *view);
-	eint32		CountChildren() const;
-	EView		*ChildAt(eint32 index) const;
-	EView		*FindView(const char *name) const;
-	EView		*FindView(EPoint where) const;
+	virtual	void	AddChild(BView *view);
+	virtual	bool	RemoveChild(BView *view);
+    b_int32		CountChildren() const;
+    BView		*ChildAt(b_int32 index) const;
+	BView		*FindView(const char *name) const;
+    BView		*FindView(BPoint where) const;
 	bool		Lock();
 	void		Unlock();
 
 private:
-	friend class EView;
+	friend class BView;
 
-	euint32 fRows;
-	euint32 fColumns;
+    b_uint32 fRows;
+    b_uint32 fColumns;
 
-	EGraphicsDrawable *fPixmap;
-	EWindow *fWindow;
+	BGraphicsDrawable *fPixmap;
+    BWindow *fWindow;
 
-	void InitSelf(ERect, bool);
+	void InitSelf(BRect, bool);
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_BITMAP_H__ */
+#endif /* __BHAPI_BITMAP_H__ */
 

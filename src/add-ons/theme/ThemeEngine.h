@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,75 +28,75 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_THEME_ENGINE_H__
-#define __ETK_THEME_ENGINE_H__
+#ifndef __BHAPI_THEME_ENGINE_H__
+#define __BHAPI_THEME_ENGINE_H__
 
 #include "./../../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
 enum {
-	E_THEME_FOCUS_FLASH_BORDER = 1,
-	E_THEME_FOCUS_FLASH_CONTENT = 1 << 1,
+    B_THEME_FOCUS_FLASH_BORDER = 1,
+    B_THEME_FOCUS_FLASH_CONTENT = 1 << 1,
 };
 
-typedef struct e_theme_engine {
+typedef struct b_theme_engine {
 	// custom data
 	void *data;
 
 	// border
-	void (*get_border_margins)(struct e_theme_engine *engine,
-				   const EView *view, float *left, float *top, float *right, float *bottom,
-				   e_border_style border, float border_width);
-	void (*draw_border)(struct e_theme_engine *engine,
-			    EView *view, ERect frame,
-			    e_border_style border, float border_width);
+	void (*get_border_margins)(struct b_theme_engine *engine,
+                   const BView *view, float *left, float *top, float *right, float *bottom,
+				   b_border_style border, float border_width);
+	void (*draw_border)(struct b_theme_engine *engine,
+                BView *view, BRect frame,
+			    b_border_style border, float border_width);
 
 	// scrollbar
-	void (*get_scrollbar_preferred_size)(struct e_theme_engine *engine,
-					     const EView *view, float *width, float *height,
-					     e_orientation direction);
-	void (*get_scrollbar_respondent_region)(struct e_theme_engine *engine,
-						const EView *view, ERect frame,
-						e_orientation direction, float minValue, float maxValue, float curValue, float *ratio,
-						ERegion *drag, ERegion *smallUp, ERegion *smallDown, ERegion *largeUp, ERegion *largeDown);
-	void (*draw_scrollbar)(struct e_theme_engine *engine,
-			       EView *view, ERect frame,
-			       e_orientation direction, float minValue, float maxValue, float curValue,
-			       bool mouse_down, EPoint mouse_pos);
+	void (*get_scrollbar_preferred_size)(struct b_theme_engine *engine,
+                         const BView *view, float *width, float *height,
+					     b_orientation direction);
+	void (*get_scrollbar_respondent_region)(struct b_theme_engine *engine,
+                        const BView *view, BRect frame,
+						b_orientation direction, float minValue, float maxValue, float curValue, float *ratio,
+                        BRegion *drag, BRegion *smallUp, BRegion *smallDown, BRegion *largeUp, BRegion *largeDown);
+	void (*draw_scrollbar)(struct b_theme_engine *engine,
+                   BView *view, BRect frame,
+			       b_orientation direction, float minValue, float maxValue, float curValue,
+                   bool mouse_down, BPoint mouse_pos);
 
 	// button
-	void (*get_button_preferred_size)(struct e_theme_engine *engine,
-					  const EView *view, float *width, float *height,
+	void (*get_button_preferred_size)(struct b_theme_engine *engine,
+                      const BView *view, float *width, float *height,
 					  const char *button_label);
-	euint8 (*should_button_do_focus_flash)(struct e_theme_engine *engine, const EView *view);
-	void (*get_button_border_margins)(struct e_theme_engine *engine,
-					  const EView *view, float *left, float *top, float *right, float *bottom);
-	void (*draw_button_border)(struct e_theme_engine *engine,
-				   EView *view, ERect frame,
-				   bool button_pushed, bool mouse_inside_button, euint8 focus_flash);
-	void (*clear_button_content)(struct e_theme_engine *engine,
-				     EView *view, ERect frame,
-				     bool button_pushed, bool mouse_inside_button, euint8 focus_flash);
-	void (*draw_button_label)(struct e_theme_engine *engine,
-				  EView *view, ERect frame,
+    b_uint8 (*should_button_do_focus_flash)(struct b_theme_engine *engine, const BView *view);
+	void (*get_button_border_margins)(struct b_theme_engine *engine,
+                      const BView *view, float *left, float *top, float *right, float *bottom);
+	void (*draw_button_border)(struct b_theme_engine *engine,
+                   BView *view, BRect frame,
+                   bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash);
+	void (*clear_button_content)(struct b_theme_engine *engine,
+                     BView *view, BRect frame,
+                     bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash);
+	void (*draw_button_label)(struct b_theme_engine *engine,
+                  BView *view, BRect frame,
 				  const char *button_label,
-				  bool button_pushed, bool mouse_inside_button, euint8 focus_flash);
-	void (*draw_button)(struct e_theme_engine *engine,
-			    EView *view, ERect frame,
+                  bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash);
+	void (*draw_button)(struct b_theme_engine *engine,
+                BView *view, BRect frame,
 			    const char *button_label,
-			    bool button_pushed, bool mouse_inside_button, euint8 focus_flash);
+                bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash);
 
 	// engine
-	bool (*init)(struct e_theme_engine *engine);
-	void (*destroy)(struct e_theme_engine *engine);
-} e_theme_engine;
+	bool (*init)(struct b_theme_engine *engine);
+	void (*destroy)(struct b_theme_engine *engine);
+} b_theme_engine;
 
 
-_IMPEXP_ETK e_theme_engine *etk_get_current_theme_engine(void);
+_IMPEXP_BHAPI b_theme_engine *bhapi_get_current_theme_engine(void);
 
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_THEME_ENGINE_H__ */
+#endif /* __BHAPI_THEME_ENGINE_H__ */
 

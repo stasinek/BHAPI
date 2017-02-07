@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -23,51 +23,51 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
- * File: StringView.h
- * Description: EStringView --- A view just for display a string
+ * File: BStringView.h
+ * Description: BStringView --- A view just for display a string
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_STRING_VIEW_H__
-#define __ETK_STRING_VIEW_H__
+#ifndef __BHAPI_STRING_VIEW_H__
+#define __BHAPI_STRING_VIEW_H__
 
 #include "./../support/StringArray.h"
 #include "./../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EStringView : public EView {
+class _IMPEXP_BHAPI BStringView : public BView {
 public:
-	EStringView(ERect frame,
+    BStringView(BRect frame,
 		    const char *name,
 		    const char *initial_text,
-		    euint32 resizeMode = E_FOLLOW_LEFT | E_FOLLOW_TOP,
-		    euint32 flags = E_WILL_DRAW);
-	virtual ~EStringView();
+            b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+            b_uint32 flags = B_WILL_DRAW);
+    virtual ~BStringView();
 
 	virtual void		SetText(const char *text);
-	void			SetText(const EString &text);
+    void			SetText(const BString &text);
 	const char*		Text() const;
 
-	virtual void		SetAlignment(e_alignment alignment);
-	e_alignment		Alignment() const;
+    virtual void		SetAlignment(b_alignment alignment);
+	b_alignment		Alignment() const;
 
-	virtual void		SetVerticalAlignment(e_vertical_alignment alignment);
-	e_vertical_alignment	VerticalAlignment() const;
+    virtual void		SetVerticalAlignment(b_vertical_alignment alignment);
+	b_vertical_alignment	VerticalAlignment() const;
 
-	virtual void		Draw(ERect updateRect);
-	virtual void		SetFont(const EFont *font, euint8 mask = E_FONT_ALL);
+	virtual void		Draw(BRect updateRect);
+    virtual void		SetFont(const BFont *font, b_uint8 mask = B_FONT_ALL);
 	virtual void		GetPreferredSize(float *width, float *height);
 
 private:
-	EString fText;
-	EStringArray *fTextArray;
-	e_alignment fAlignment;
-	e_vertical_alignment fVerticalAlignment;
+    BString fText;
+    BStringArray *fTextArray;
+	b_alignment fAlignment;
+	b_vertical_alignment fVerticalAlignment;
 };
 
 
-inline void EStringView::SetText(const EString &text)
+inline void BStringView::SetText(const BString &text)
 {
 	SetText(text.String());
 }
@@ -75,5 +75,5 @@ inline void EStringView::SetText(const EString &text)
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_STRING_VIEW_H__ */
+#endif /* __BHAPI_STRING_VIEW_H__ */
 

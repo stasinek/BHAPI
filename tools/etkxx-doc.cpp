@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -40,17 +40,17 @@
 
 inline void print_usage(const char *prog_name)
 {
-	ETK_OUTPUT("Usage: %s [--debug] [--showinfo] [-s style] [-t options] [-o output] [-l language] file1 file2 ...\n", prog_name);
-	ETK_OUTPUT("       style         ---   DocBook/None [default=DocBook]\n");
-	ETK_OUTPUT("       options       ---   options for style\n");
-	ETK_OUTPUT("       output        ---   Output filename\n");
-	ETK_OUTPUT("       language      ---   language of document\n");
-	ETK_OUTPUT("       file1 file2   ---   files to be converted\n\n");
-	ETK_OUTPUT("Tips: Run \"xsltproc -o AAA.html docbook-html.xsl AAA.xml\" to convert DocBook to HTML\n");
+	BHAPI_OUTPUT("Usage: %s [--debug] [--showinfo] [-s style] [-t options] [-o output] [-l language] file1 file2 ...\n", prog_name);
+	BHAPI_OUTPUT("       style         ---   DocBook/None [default=DocBook]\n");
+	BHAPI_OUTPUT("       options       ---   options for style\n");
+	BHAPI_OUTPUT("       output        ---   Output filename\n");
+	BHAPI_OUTPUT("       language      ---   language of document\n");
+	BHAPI_OUTPUT("       file1 file2   ---   files to be converted\n\n");
+	BHAPI_OUTPUT("Tips: Run \"xsltproc -o AAA.html docbook-html.xsl AAA.xml\" to convert DocBook to HTML\n");
 }
 
 
-inline void quote_string(EString &str)
+inline void quote_string(BString &str)
 {
 	str.ReplaceAll("&br;", "\n");
 	str.ReplaceAll("&", "&amp;");
@@ -63,12 +63,12 @@ inline void quote_string(EString &str)
 }
 
 
-inline ESimpleXmlNode* find_xml_node_deep(ESimpleXmlNode* node, const char *name)
+inline BSimpleXmlNode* find_xml_node_deep(BSimpleXmlNode* node, const char *name)
 {
 	if(node == NULL) return NULL;
-	ESimpleXmlNode *aNode = node->NodeAt(node->FindNode(name));
+	BSimpleXmlNode *aNode = node->NodeAt(node->FindNode(name));
 	if(aNode != NULL) return aNode;
-	for(eint32 i = 0; i < node->CountNodes(); i++)
+	for(b_int32 i = 0; i < node->CountNodes(); i++)
 	{
 		if((aNode = find_xml_node_deep(node->NodeAt(i), name)) != NULL) return aNode;
 	}
@@ -76,12 +76,12 @@ inline ESimpleXmlNode* find_xml_node_deep(ESimpleXmlNode* node, const char *name
 }
 
 
-inline bool foreach_xml_node(ESimpleXmlNode *node, const char *name, bool (*foreachFunc)(ESimpleXmlNode*, void*), void *userData)
+inline bool foreach_xml_node(BSimpleXmlNode *node, const char *name, bool (*foreachFunc)(BSimpleXmlNode*, void*), void *userData)
 {
 	if(node == NULL || foreachFunc == NULL) return false;
-	for(eint32 i = 0; i < node->CountNodes(); i++)
+	for(b_int32 i = 0; i < node->CountNodes(); i++)
 	{
-		ESimpleXmlNode *aNode = node->NodeAt(i);
+		BSimpleXmlNode *aNode = node->NodeAt(i);
 		if(name == NULL || !(aNode->Name() == NULL || strcmp(name, aNode->Name()) != 0))
 		{
 			if((*foreachFunc)(aNode, userData)) return true;
@@ -92,7 +92,7 @@ inline bool foreach_xml_node(ESimpleXmlNode *node, const char *name, bool (*fore
 }
 
 
-static bool docbook_foreach(ESimpleXmlNode *node, void *userData)
+static bool docbook_foreach(BSimpleXmlNode *node, void *userData)
 {
 	if(node->Name() == NULL) return false;
 
@@ -100,28 +100,28 @@ static bool docbook_foreach(ESimpleXmlNode *node, void *userData)
 	{
 		if(node->Content() != NULL || node->FindAttribute("endterm") >= 0) return false;
 
-		eint32 index = node->FindAttribute("linkend");
+		b_int32 index = node->FindAttribute("linkend");
 		if(index < 0) return false;
 
 		const char *content = NULL;
 		if(node->AttributeAt(index, &content) == NULL || content == NULL) return false;
 
-		EString str(content);
+		BString str(content);
 		str.Append("_TITLE");
 		node->AddAttribute("endterm", str.String(), true);
 	}
 	else if(strcmp(node->Name(), "section") == 0)
 	{
-		eint32 index = node->FindAttribute("id");
+		b_int32 index = node->FindAttribute("id");
 		if(index < 0) return false;
 
 		const char *content = NULL;
-		ESimpleXmlNode *aNode = NULL;
+		BSimpleXmlNode *aNode = NULL;
 
 		if(node->AttributeAt(index, &content) == NULL || content == NULL) return false;
 		if((index = node->FindNode("title")) < 0 || (aNode = node->NodeAt(index)) == NULL) return false;
 
-		EString str(content);
+		BString str(content);
 		str.Append("_TITLE");
 		aNode->AddAttribute("id", str.String(), true);
 	}
@@ -130,11 +130,11 @@ static bool docbook_foreach(ESimpleXmlNode *node, void *userData)
 }
 
 
-inline void convert_document_to_docbook(const ESimpleXmlNode *node, EString *buffer)
+inline void convert_document_to_docbook(const BSimpleXmlNode *node, BString *buffer)
 {
 	if(node == NULL || buffer == NULL) return;
 
-	EString str;
+	BString str;
 
 	if(node->Name() == NULL)
 	{
@@ -168,7 +168,7 @@ inline void convert_document_to_docbook(const ESimpleXmlNode *node, EString *buf
 	{
 		buffer->AppendFormat("<%s", node->Name());
 
-		for(eint32 i = 0; i < node->CountAttributes(); i++)
+		for(b_int32 i = 0; i < node->CountAttributes(); i++)
 		{
 			const char *attr_content = NULL;
 			const char *attr_name = node->AttributeAt(i, &attr_content);
@@ -185,7 +185,7 @@ inline void convert_document_to_docbook(const ESimpleXmlNode *node, EString *buf
 		buffer->Append(str);
 	}
 
-	for(eint32 i = 0; i < node->CountNodes(); i++)
+	for(b_int32 i = 0; i < node->CountNodes(); i++)
 		convert_document_to_docbook(node->NodeAt(i), buffer);
 
 	if(strcmp(node->Name(), "legalnotice") == 0)
@@ -203,11 +203,11 @@ inline void convert_document_to_docbook(const ESimpleXmlNode *node, EString *buf
 }
 
 
-inline e_status_t convert_to_docbook(ESimpleXmlNode *node, EString *buffer, const char *options, const char *lang)
+inline b_status_t convert_to_docbook(BSimpleXmlNode *node, BString *buffer, const char *options, const char *lang)
 {
-	if(node == NULL || buffer == NULL || lang == NULL || strlen(lang) == 0) return E_ERROR;
+	if(node == NULL || buffer == NULL || lang == NULL || strlen(lang) == 0) return B_ERROR;
 
-	ESimpleXmlNode *aNode = node->NodeAt(node->FindNode("documentinfo"));
+	BSimpleXmlNode *aNode = node->NodeAt(node->FindNode("documentinfo"));
 
 	if(options == NULL) options = "article";
 	buffer->MakeEmpty();
@@ -221,7 +221,7 @@ inline e_status_t convert_to_docbook(ESimpleXmlNode *node, EString *buffer, cons
 
 		if(aNode)
 		{
-			EString str;
+			BString str;
 			str << options << "info";
 			aNode->SetName(str.String());
 			aNode->RemoveSelf();
@@ -229,7 +229,7 @@ inline e_status_t convert_to_docbook(ESimpleXmlNode *node, EString *buffer, cons
 	}
 	else if(aNode)
 	{
-		ESimpleXmlNode *cNode = aNode->NodeAt(aNode->FindNode("title"));
+		BSimpleXmlNode *cNode = aNode->NodeAt(aNode->FindNode("title"));
 		if(cNode) cNode->RemoveSelf();
 		aNode->RemoveSelf();
 		delete aNode;
@@ -246,7 +246,7 @@ inline e_status_t convert_to_docbook(ESimpleXmlNode *node, EString *buffer, cons
 		aNode = NULL;
 	}
 
-	eint32 offset = 0;
+	b_int32 offset = 0;
 	while(offset >= 0 && offset < node->CountNodes())
 	{
 		if((offset = node->FindNode("document", offset)) < 0) break;
@@ -260,7 +260,7 @@ inline e_status_t convert_to_docbook(ESimpleXmlNode *node, EString *buffer, cons
 
 	buffer->AppendFormat("\n</%s>\n\n", options);
 
-	return E_OK;
+	return B_OK;
 }
 
 
@@ -270,8 +270,8 @@ int main(int argc, char **argv)
 	bool showDebug = false;
 	bool showInfo = false;
 
-	EPath prog(argv[0]);
-	EStringArray files;
+	BPath prog(argv[0]);
+	BStringArray files;
 	const char *lang = "C";
 	const char *style = "DocBook";
 	const char *options = NULL;
@@ -335,22 +335,22 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 
-	EString xml_buffer;
-	EString strDocStart = "<document ";
-	EString strDocEnd = "</document>";
+	BString xml_buffer;
+	BString strDocStart = "<document ";
+	BString strDocEnd = "</document>";
 
-	for(eint32 i = 1; i < files.CountItems(); i++)
+	for(b_int32 i = 1; i < files.CountItems(); i++)
 	{
 		if(files.ItemAt(i) == NULL) continue;
-		EPath readInPath(files.ItemAt(i)->String(), NULL, true);
-		EFile readIn(readInPath.Path(), E_READ_ONLY);
-		if(readIn.InitCheck() != E_OK)
+		BPath readInPath(files.ItemAt(i)->String(), NULL, true);
+		BFile readIn(readInPath.Path(), B_READ_ONLY);
+		if(readIn.InitCheck() != B_OK)
 		{
-			ETK_DEBUG("[%s] --- Unable to read \"%s\".", prog.Leaf(), files.ItemAt(i)->String());
+			BHAPI_DEBUG("[%s] --- Unable to read \"%s\".", prog.Leaf(), files.ItemAt(i)->String());
 			continue;
 		}
 
-		eint32 old_length = xml_buffer.Length();
+		b_int32 old_length = xml_buffer.Length();
 
 		char buffer[BUFFER_SIZE];
 		bool foundDocEnd = true;
@@ -360,10 +360,10 @@ int main(int argc, char **argv)
 		{
 			ssize_t len = readIn.Read(buffer + nLeave, BUFFER_SIZE - nLeave);
 			if(len <= 0) break;
-			EString str;
+			BString str;
 			str.SetTo(buffer, len + nLeave);
 			str.RemoveAll("\r");
-			eint32 offset = 0;
+			b_int32 offset = 0;
 			while(offset >= 0 && offset < str.Length())
 			{
 				nLeave = 0;
@@ -390,7 +390,7 @@ int main(int argc, char **argv)
 
 					if(strDocStart.Compare(str.String() + offset, strDocStart.Length()) != 0)
 					{
-						eint32 tmp = str.FindLast("<");
+						b_int32 tmp = str.FindLast("<");
 						if(tmp >= 0 && str.Length() - tmp < strDocStart.Length())
 						{
 							nLeave = str.Length() - tmp;
@@ -405,7 +405,7 @@ int main(int argc, char **argv)
 					foundDocEnd = false;
 				}
 
-				eint32 endOffset = str.FindFirst(strDocEnd, offset);
+				b_int32 endOffset = str.FindFirst(strDocEnd, offset);
 				if(endOffset >= 0)
 				{
 					endOffset += strDocEnd.Length();
@@ -414,7 +414,7 @@ int main(int argc, char **argv)
 				}
 				else
 				{
-					eint32 tmp = str.FindLast("<");
+					b_int32 tmp = str.FindLast("<");
 					if(tmp >= 0 && str.Length() - tmp < strDocEnd.Length())
 					{
 						nLeave = str.Length() - tmp;
@@ -435,11 +435,11 @@ int main(int argc, char **argv)
 		if(foundDocEnd == false)
 		{
 			xml_buffer.Remove(old_length, -1);
-			ETK_DEBUG("[%s] --- Invalid document \"%s\".", prog.Leaf(), readInPath.Path());
+			BHAPI_DEBUG("[%s] --- Invalid document \"%s\".", prog.Leaf(), readInPath.Path());
 		}
 	}
 
-	EString output_buffer;
+	BString output_buffer;
 
 	if(strcmp(style, "None") == 0)
 	{
@@ -455,34 +455,34 @@ int main(int argc, char **argv)
 		xml_buffer.ReplaceAll("®", "&reg;");
 		xml_buffer.ReplaceAll("\n", "&br;");
 
-		eint32 offset = 0;
+		b_int32 offset = 0;
 		while(offset >= 0 && offset < xml_buffer.Length())
 		{
 			if((offset = xml_buffer.FindFirst(">", offset)) < 0) break;
-			eint32 tmp = xml_buffer.FindFirst("<", offset);
+			b_int32 tmp = xml_buffer.FindFirst("<", offset);
 			if(tmp < 0 || tmp - offset <= 1) {offset = tmp; continue;}
-			EString str;
+			BString str;
 			xml_buffer.MoveInto(str, offset + 1, tmp - offset);
 			str.ReplaceAll(" ", "&nbsp;");
 			xml_buffer.Insert(str, offset + 1);
 			offset += str.Length() + 1;
 		}
 
-		ESimpleXmlNode node(NULL, NULL);
-		if(etk_parse_simple_xml(xml_buffer.String(), &node) != E_OK)
+		BSimpleXmlNode node(NULL, NULL);
+		if(bhapi_parse_simple_xml(xml_buffer.String(), &node) != B_OK)
 		{
-			ETK_OUTPUT("[%s] --- Unable to parse.\n", prog.Leaf());
+			BHAPI_OUTPUT("[%s] --- Unable to parse.\n", prog.Leaf());
 			exit(1);
 		}
 
-		ESimpleXmlNode *aNode = NULL;
+		BSimpleXmlNode *aNode = NULL;
 		offset = 0;
 		while(offset >= 0 && offset < node.CountNodes())
 		{
 			if((offset = node.FindNode("document", offset)) < 0) break;
 			if((aNode = node.NodeAt(offset)) == NULL) break;
 
-			eint32 index = aNode->FindAttribute("lang");
+			b_int32 index = aNode->FindAttribute("lang");
 			const char *tmp = NULL;
 			if(index < 0 || aNode->AttributeAt(index, &tmp) == NULL || tmp == NULL || strcmp(tmp, lang) != 0)
 			{
@@ -499,9 +499,9 @@ int main(int argc, char **argv)
 		{
 			if(!showInfo)
 			{
-				ESimpleXmlNode *cNode = aNode->NodeAt(aNode->FindNode("title"));
+				BSimpleXmlNode *cNode = aNode->NodeAt(aNode->FindNode("title"));
 				if(cNode) cNode->RemoveSelf();
-				ESimpleXmlNode *nNode;
+				BSimpleXmlNode *nNode;
 				while((nNode = aNode->NodeAt(0)) != NULL) {nNode->RemoveSelf(); delete nNode;}
 				if(cNode) aNode->AddNode(cNode);
 			}
@@ -513,37 +513,37 @@ int main(int argc, char **argv)
 
 		if(showDebug) node.PrintToStream();
 
-		if(convert_to_docbook(&node, &output_buffer, options, lang) != E_OK)
+		if(convert_to_docbook(&node, &output_buffer, options, lang) != B_OK)
 		{
-			ETK_OUTPUT("[%s] --- Unable to convert to \"DocBook\" style.\n", prog.Leaf());
+			BHAPI_OUTPUT("[%s] --- Unable to convert to \"DocBook\" style.\n", prog.Leaf());
 			exit(1);
 		}
 	}
 	else
 	{
-		ETK_OUTPUT("[%s] --- style \"%s\" unsupport yet.\n", prog.Leaf(), style);
+		BHAPI_OUTPUT("[%s] --- style \"%s\" unsupport yet.\n", prog.Leaf(), style);
 		exit(1);
 	}
 
 	if(files.ItemAt(0) == NULL || files.ItemAt(0)->String() == NULL)
 	{
-		for(eint32 offset = 0; offset < output_buffer.Length(); offset += BUFFER_SIZE)
+		for(b_int32 offset = 0; offset < output_buffer.Length(); offset += BUFFER_SIZE)
 		{
-			EString str(output_buffer.String() + offset, BUFFER_SIZE);
+			BString str(output_buffer.String() + offset, BUFFER_SIZE);
 			fprintf(stdout, "%s", str.String());
 		}
 	}
 	else
 	{
-		EFile writeOut(files.ItemAt(0)->String(), E_WRITE_ONLY | E_CREATE_FILE | E_ERASE_FILE);
-		if(writeOut.InitCheck() != E_OK)
+		BFile writeOut(files.ItemAt(0)->String(), B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
+		if(writeOut.InitCheck() != B_OK)
 		{
-			ETK_OUTPUT("[%s] --- Unable to write \"%s\".\n", prog.Leaf(), files.ItemAt(0)->String());
+			BHAPI_OUTPUT("[%s] --- Unable to write \"%s\".\n", prog.Leaf(), files.ItemAt(0)->String());
 			exit(1);
 		}
 		else
 		{
-			for(eint32 offset = 0; offset < output_buffer.Length(); offset += BUFFER_SIZE)
+			for(b_int32 offset = 0; offset < output_buffer.Length(); offset += BUFFER_SIZE)
 				writeOut.Write(output_buffer.String() + offset, min_c(BUFFER_SIZE, output_buffer.Length() - offset));
 		}
 	}

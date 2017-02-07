@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,33 +27,33 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_FIND_DIRECTORY_H__
-#define __ETK_FIND_DIRECTORY_H__ 
+#ifndef __BHAPI_FIND_DIRECTORY_H__
+#define __BHAPI_FIND_DIRECTORY_H__ 
 
 #include "./Path.h"
 
 typedef enum {
-	E_BOOT_DIRECTORY = 0,
-	E_APPS_DIRECTORY,
-	E_BIN_DIRECTORY,
-	E_LIB_DIRECTORY,
-	E_ETC_DIRECTORY,
-	E_ADDONS_DIRECTORY,
-	E_TEMP_DIRECTORY,
+    B_BOOT_DIRECTORY = 0,
+    B_APPS_DIRECTORY,
+    B_BIN_DIRECTORY,
+    B_LIB_DIRECTORY,
+    B_ETC_DIRECTORY,
+    B_ADDONS_DIRECTORY,
+    B_TEMP_DIRECTORY,
 
-	E_USER_DIRECTORY = 1000,
-	E_USER_CONFIG_DIRECTORY,
-	E_USER_BIN_DIRECTORY,
-	E_USER_LIB_DIRECTORY,
-	E_USER_ETC_DIRECTORY,
-	E_USER_ADDONS_DIRECTORY,
-} e_directory_which;
+    B_USER_DIRECTORY = 1000,
+    B_USER_CONFIG_DIRECTORY,
+    B_USER_BIN_DIRECTORY,
+    B_USER_LIB_DIRECTORY,
+    B_USER_ETC_DIRECTORY,
+    B_USER_ADDONS_DIRECTORY,
+} b_directory_which;
 
 #ifdef __cplusplus /* Just for C++ */
 
-_IMPEXP_ETK e_status_t e_find_directory(e_directory_which which, EPath *path);
+_IMPEXP_BHAPI b_status_t b_find_directory(b_directory_which which, BPath *path);
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_FIND_DIRECTORY_H__ */
+#endif /* __BHAPI_FIND_DIRECTORY_H__ */
 

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,46 +27,46 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_STORAGE_DEFS_H__
-#define __ETK_STORAGE_DEFS_H__
+#ifndef __BHAPI_STORAGE_DEFS_H__
+#define __BHAPI_STORAGE_DEFS_H__
 
 #include "./../support/SupportDefs.h"
 
-typedef eint32	e_dev_t;
+typedef b_int32	b_dev_t;
 
 /* open_mode */
 enum {
-	E_READ_ONLY		=	0x00,	/* read only */
-	E_WRITE_ONLY		=	0x01,	/* write only */
-	E_READ_WRITE		=	0x02,	/* read and write */
-	E_FAIL_IF_EXISTS	=	0x04,	/* exclusive create */
-	E_CREATE_FILE		=	0x08,	/* create the file */
-	E_ERASE_FILE		=	0x10,	/* erase the file's data */
-	E_OPEN_AT_END		=	0x20,	/* point to the end of the data */
+    B_READ_ONLY		=	0x00,	/* read only */
+    B_WRITE_ONLY		=	0x01,	/* write only */
+    B_READ_WRITE		=	0x02,	/* read and write */
+    B_FAIL_IF_EXISTS	=	0x04,	/* exclusive create */
+    B_CREATE_FILE		=	0x08,	/* create the file */
+    B_ERASE_FILE		=	0x10,	/* erase the file's data */
+    B_OPEN_AT_END		=	0x20,	/* point to the end of the data */
 };
 
 /* access_mode */
 enum {
-	E_USER_READ		=	0x01,
-	E_USER_WRITE		=	0x02,
-	E_USER_EXEC		=	0x04,
-	E_USER_ALL		=	0x07,
-	E_GROUP_READ		=	0x08,
-	E_GROUP_WRITE		=	0x10,
-	E_GROUP_EXEC		=	0x20,
-	E_GROUP_ALL		=	0x38,
-	E_OTHERS_READ		=	0x40,
-	E_OTHERS_WRITE		=	0x80,
-	E_OTHERS_EXEC		=	0x0100,
-	E_OTHERS_ALL		=	0x01c0,
+    B_USER_READ		=	0x01,
+    B_USER_WRITE		=	0x02,
+    B_USER_EXEC		=	0x04,
+    B_USER_ALL		=	0x07,
+    B_GROUP_READ		=	0x08,
+    B_GROUP_WRITE		=	0x10,
+    B_GROUP_EXEC		=	0x20,
+    B_GROUP_ALL		=	0x38,
+    B_OTHERS_READ		=	0x40,
+    B_OTHERS_WRITE		=	0x80,
+    B_OTHERS_EXEC		=	0x0100,
+    B_OTHERS_ALL		=	0x01c0,
 };
 
 /* node flavor */
 enum {
-	E_FILE_NODE		=	0x01,
-	E_DIRECTORY_NODE	=	0x02,
-	E_ANY_NODE		=	0xff,
+    B_FILE_NODE		=	0x01,
+    B_DIRECTORY_NODE	=	0x02,
+    B_ANY_NODE		=	0xff,
 };
 
-#endif /* __ETK_STORAGE_DEFS_H__ */
+#endif /* __BHAPI_STORAGE_DEFS_H__ */
 

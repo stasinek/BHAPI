@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -42,21 +42,21 @@
 
 
 EXGraphicsContext::EXGraphicsContext(EXGraphicsEngine *x11Engine)
-	: EGraphicsContext(), fEngine(NULL)
+	: BGraphicsContext(), fEngine(NULL)
 {
 	fEngine = x11Engine;
 	if(fEngine == NULL) return;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) {fEngine = NULL; return;}
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) {fEngine = NULL; return;}
 
-	EGraphicsContext::SetDrawingMode(E_OP_COPY);
-	EGraphicsContext::SetPattern(E_SOLID_HIGH);
-	EGraphicsContext::SetPenSize(0);
+	BGraphicsContext::SetDrawingMode(B_OP_COPY);
+	BGraphicsContext::SetPattern(B_SOLID_HIGH);
+	BGraphicsContext::SetPenSize(0);
 
-	e_rgb_color blackColor = {0, 0, 0, 255};
-	EGraphicsContext::SetHighColor(blackColor);
-	EGraphicsContext::SetLowColor(blackColor);
+	b_rgb_color blackColor = {0, 0, 0, 255};
+	BGraphicsContext::SetHighColor(blackColor);
+	BGraphicsContext::SetLowColor(blackColor);
 	xHighColor = xLowColor = fEngine->xBlackPixel;
 	xHighColorAlloced = xLowColorAlloced = false;
 
@@ -71,7 +71,7 @@ EXGraphicsContext::EXGraphicsContext(EXGraphicsEngine *x11Engine)
 			GCFunction | GCLineWidth | GCLineStyle | GCFillStyle | GCCapStyle | GCGraphicsExposures, &xgcvals);
 
 	xClipping = NULL;
-	EGraphicsContext::SetClipping(ERegion());
+	BGraphicsContext::SetClipping(BRegion());
 
 	XRectangle clipping;
 	clipping.x = 0;
@@ -80,7 +80,7 @@ EXGraphicsContext::EXGraphicsContext(EXGraphicsEngine *x11Engine)
 	clipping.height = 0;
 	XSetClipRectangles(fEngine->xDisplay, xGC, 0, 0, &clipping, 1, Unsorted);
 
-	EGraphicsContext::SetSquarePointStyle(false);
+	BGraphicsContext::SetSquarePointStyle(false);
 }
 
 
@@ -88,9 +88,9 @@ EXGraphicsContext::~EXGraphicsContext()
 {
 	if(fEngine != NULL)
 	{
-		EAutolock <EXGraphicsEngine> autolock(fEngine);
-		if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK)
-			ETK_ERROR("[GRAPHICS]: %s --- Invalid graphics engine.", __PRETTY_FUNCTION__);
+		BAutolock <EXGraphicsEngine> autolock(fEngine);
+		if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK)
+			BHAPI_ERROR("[GRAPHICS]: %s --- Invalid graphics engine.", __PRETTY_FUNCTION__);
 
 		if(xClipping != NULL) XDestroyRegion(xClipping);
 		XFreeGC(fEngine->xDisplay, xGC);
@@ -101,7 +101,7 @@ EXGraphicsContext::~EXGraphicsContext()
 
 
 bool
-EXGraphicsContext::AllocXColor(EXGraphicsEngine *engine, e_rgb_color color, unsigned long *pixel)
+EXGraphicsContext::AllocXColor(EXGraphicsEngine *engine, b_rgb_color color, unsigned long *pixel)
 {
 	if(engine == NULL || pixel == NULL) return false;
 
@@ -128,33 +128,33 @@ EXGraphicsContext::FreeXColor(EXGraphicsEngine *engine, unsigned long pixel)
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsContext::GetXClipping(Region *xRegion) const
 {
-	if(xRegion == NULL) return E_BAD_VALUE;
-	if(xClipping == NULL) return E_ERROR;
+	if(xRegion == NULL) return B_BAD_VALUE;
+	if(xClipping == NULL) return B_ERROR;
 
 	*xRegion = xClipping;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsContext::GetXHighColor(unsigned long *pixel) const
 {
-	if(pixel == NULL) return E_BAD_VALUE;
+	if(pixel == NULL) return B_BAD_VALUE;
 	*pixel = xHighColor;
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsContext::GetXLowColor(unsigned long *pixel) const
 {
-	if(pixel == NULL) return E_BAD_VALUE;
+	if(pixel == NULL) return B_BAD_VALUE;
 	*pixel = xLowColor;
-	return E_OK;
+	return B_OK;
 }
 
 
@@ -163,10 +163,10 @@ EXGraphicsContext::PrepareXColor()
 {
 	if(fEngine == NULL) return;
 
-	if(Pattern() == E_SOLID_HIGH || Pattern() == E_SOLID_LOW)
+	if(Pattern() == B_SOLID_HIGH || Pattern() == B_SOLID_LOW)
 	{
-		XSetForeground(fEngine->xDisplay, xGC, (Pattern() == E_SOLID_HIGH ? xHighColor : xLowColor));
-		XSetBackground(fEngine->xDisplay, xGC, (Pattern() == E_SOLID_HIGH ? xHighColor : xLowColor));
+		XSetForeground(fEngine->xDisplay, xGC, (Pattern() == B_SOLID_HIGH ? xHighColor : xLowColor));
+		XSetBackground(fEngine->xDisplay, xGC, (Pattern() == B_SOLID_HIGH ? xHighColor : xLowColor));
 	}
 	else
 	{
@@ -176,76 +176,76 @@ EXGraphicsContext::PrepareXColor()
 }
 
 
-e_status_t
-EXGraphicsContext::SetDrawingMode(e_drawing_mode mode)
+b_status_t
+EXGraphicsContext::SetDrawingMode(b_drawing_mode mode)
 {
-	if(fEngine == NULL) return E_ERROR;
-	if(DrawingMode() == mode) return E_OK;
+	if(fEngine == NULL) return B_ERROR;
+	if(DrawingMode() == mode) return B_OK;
 
 	int function = GXcopy;
 	switch(mode)
 	{
-		case E_OP_COPY:
-//		case E_OP_OVER:
+		case B_OP_COPY:
+//		case B_OP_OVER:
 			function = GXcopy; break;
-		case E_OP_XOR:
+		case B_OP_XOR:
 			function = GXxor; break;
-//		case E_OP_ERASE:
+//		case B_OP_ERASE:
 //			function = GXclear; break;
-//		case E_OP_INVERT:
+//		case B_OP_INVERT:
 //			function = GXinvert; break;
 		default:
-			ETK_WARNING("[GRAPHICS]: %s --- DrawingMode %u not support!", __PRETTY_FUNCTION__, (unsigned int)mode);
-			return E_ERROR;
+			BHAPI_WARNING("[GRAPHICS]: %s --- DrawingMode %u not support!", __PRETTY_FUNCTION__, (unsigned int)mode);
+			return B_ERROR;
 	}
 
 	do {
-		EAutolock <EXGraphicsEngine> autolock(fEngine);
-		if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+		BAutolock <EXGraphicsEngine> autolock(fEngine);
+		if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 		XSetFunction(fEngine->xDisplay, xGC, function);
 	} while(false);
 
-	EGraphicsContext::SetDrawingMode(mode);
+	BGraphicsContext::SetDrawingMode(mode);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsContext::SetClipping(const ERegion &region)
+b_status_t
+EXGraphicsContext::SetClipping(const BRegion &region)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	Region xRegion = NULL;
 
-	if(fEngine->ConvertRegion(&region, &xRegion) == false) return E_ERROR;
+	if(fEngine->ConvertRegion(&region, &xRegion) == false) return B_ERROR;
 
 	XSetRegion(fEngine->xDisplay, xGC, xRegion);
 
 	if(xClipping != NULL) XDestroyRegion(xClipping);
 	xClipping = xRegion;
 
-	EGraphicsContext::SetClipping(region);
+	BGraphicsContext::SetClipping(region);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsContext::SetHighColor(e_rgb_color highColor)
+b_status_t
+EXGraphicsContext::SetHighColor(b_rgb_color highColor)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	e_rgb_color color = HighColor();
+	b_rgb_color color = HighColor();
 	highColor.alpha = color.alpha = 255;
-	if(highColor == color) return E_OK;
+	if(highColor == color) return B_OK;
 
 	do {
-		EAutolock <EXGraphicsEngine> autolock(fEngine);
-		if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+		BAutolock <EXGraphicsEngine> autolock(fEngine);
+		if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 		if(highColor.red == 0 && highColor.green == 0 && highColor.blue == 0)
 		{
@@ -262,31 +262,31 @@ EXGraphicsContext::SetHighColor(e_rgb_color highColor)
 		else
 		{
 			unsigned long p;
-			if(AllocXColor(fEngine, highColor, &p) == false) return E_ERROR;
+			if(AllocXColor(fEngine, highColor, &p) == false) return B_ERROR;
 			if(xHighColorAlloced) FreeXColor(fEngine, xHighColor);
 			xHighColor = p;
 			xHighColorAlloced = true;
 		}
 	} while(false);
 
-	EGraphicsContext::SetHighColor(highColor);
+	BGraphicsContext::SetHighColor(highColor);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsContext::SetLowColor(e_rgb_color lowColor)
+b_status_t
+EXGraphicsContext::SetLowColor(b_rgb_color lowColor)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	e_rgb_color color = LowColor();
+	b_rgb_color color = LowColor();
 	lowColor.alpha = color.alpha = 255;
-	if(lowColor == color) return E_OK;
+	if(lowColor == color) return B_OK;
 
 	do {
-		EAutolock <EXGraphicsEngine> autolock(fEngine);
-		if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+		BAutolock <EXGraphicsEngine> autolock(fEngine);
+		if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 		if(lowColor.red == 0 && lowColor.green == 0 && lowColor.blue == 0)
 		{
@@ -303,41 +303,41 @@ EXGraphicsContext::SetLowColor(e_rgb_color lowColor)
 		else
 		{
 			unsigned long p;
-			if(AllocXColor(fEngine, lowColor, &p) == false) return E_ERROR;
+			if(AllocXColor(fEngine, lowColor, &p) == false) return B_ERROR;
 			if(xLowColorAlloced) FreeXColor(fEngine, xLowColor);
 			xLowColor = p;
 			xLowColorAlloced = true;
 		}
 	} while(false);
 
-	EGraphicsContext::SetLowColor(lowColor);
+	BGraphicsContext::SetLowColor(lowColor);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsContext::SetPattern(e_pattern pattern)
+b_status_t
+EXGraphicsContext::SetPattern(b_pattern pattern)
 {
-	if(fEngine == NULL) return E_ERROR;
-	if(Pattern() == pattern) return E_OK;
+	if(fEngine == NULL) return B_ERROR;
+	if(Pattern() == pattern) return B_OK;
 
 	do {
-		EAutolock <EXGraphicsEngine> autolock(fEngine);
-		if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+		BAutolock <EXGraphicsEngine> autolock(fEngine);
+		if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 		XGCValues xgcvals;
-		if(pattern == E_SOLID_HIGH || pattern == E_SOLID_LOW)
+		if(pattern == B_SOLID_HIGH || pattern == B_SOLID_LOW)
 		{
 			xgcvals.fill_style = FillSolid;
 		}
 		else
 		{
-			// convert e_pattern to XBitmapFile format --- convert left to right.
+			// convert b_pattern to XBitmapFile format --- convert left to right.
 			char pat[8];
 			bzero(pat, sizeof(pat));
-			for(euint8 i = 0; i < 8; i++)
-				for(euint8 j = 0; j < 8; j++)
+			for(b_uint8 i = 0; i < 8; i++)
+				for(b_uint8 j = 0; j < 8; j++)
 					pat[i] |= ((pattern.data[i] >> j) & 0x01) << (7 - j);
 
 			Pixmap stipple = XCreateBitmapFromData(fEngine->xDisplay, fEngine->xRootWindow, pat, 8, 8);
@@ -350,21 +350,21 @@ EXGraphicsContext::SetPattern(e_pattern pattern)
 		XChangeGC(fEngine->xDisplay, xGC, GCFillStyle, &xgcvals);
 	} while(false);
 
-	EGraphicsContext::SetPattern(pattern);
+	BGraphicsContext::SetPattern(pattern);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsContext::SetPenSize(euint32 penSize)
+b_status_t
+EXGraphicsContext::SetPenSize(b_uint32 penSize)
 {
-	if(fEngine == NULL) return E_ERROR;
-	if(PenSize() == penSize) return E_OK;
+	if(fEngine == NULL) return B_ERROR;
+	if(PenSize() == penSize) return B_OK;
 
 	do {
-		EAutolock <EXGraphicsEngine> autolock(fEngine);
-		if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+		BAutolock <EXGraphicsEngine> autolock(fEngine);
+		if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 		XGCValues xgcvals;
 		xgcvals.line_width = (int)(penSize <= 1 ? 0 : penSize);
@@ -372,16 +372,16 @@ EXGraphicsContext::SetPenSize(euint32 penSize)
 		XChangeGC(fEngine->xDisplay, xGC, GCLineWidth, &xgcvals);
 	} while(false);
 
-	EGraphicsContext::SetPenSize(penSize);
+	BGraphicsContext::SetPenSize(penSize);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_stroke_point(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				   eint32 x, eint32 y)
+static b_status_t bhapi_stroke_point(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+				   b_int32 x, b_int32 y)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
 	dc->PrepareXColor();
 
@@ -414,21 +414,21 @@ static e_status_t etk_stroke_point(Drawable xDrawable, EXGraphicsEngine *engine,
 		}
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_stroke_points(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				    const eint32 *pts, eint32 count)
+static b_status_t bhapi_stroke_points(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+				    const b_int32 *pts, b_int32 count)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || count <= 0) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || count <= 0) return B_ERROR;
 
 	if(dc->PenSize() <= 1)
 	{
 		XPoint *xPts = new XPoint[count];
-		if(!xPts) return E_ERROR;
+		if(!xPts) return B_ERROR;
 
-		for(eint32 i = 0; i < count; i++) {xPts[i].x = *pts++; xPts[i].y = *pts++;}
+		for(b_int32 i = 0; i < count; i++) {xPts[i].x = *pts++; xPts[i].y = *pts++;}
 
 		dc->PrepareXColor();
 		XDrawPoints(engine->xDisplay, xDrawable, dc->xGC, xPts, count, CoordModeOrigin);
@@ -438,10 +438,10 @@ static e_status_t etk_stroke_points(Drawable xDrawable, EXGraphicsEngine *engine
 	else if(dc->IsSquarePointStyle())
 	{
 		XRectangle *rs = new XRectangle[count];
-		if(!rs) return E_ERROR;
+		if(!rs) return B_ERROR;
 
 		int pos = (int)((dc->PenSize() - 1) / 2);
-		for(eint32 i = 0; i < count; i++)
+		for(b_int32 i = 0; i < count; i++)
 		{
 			rs[i].x = *pts++; rs[i].y = *pts++;
 			rs[i].x -= pos; rs[i].y -= pos;
@@ -456,9 +456,9 @@ static e_status_t etk_stroke_points(Drawable xDrawable, EXGraphicsEngine *engine
 	else
 	{
 		XSegment *xSegs = new XSegment[count];
-		if(!xSegs) return E_ERROR;
+		if(!xSegs) return B_ERROR;
 
-		for(eint32 i = 0; i < count; i++) {xSegs[i].x1 = xSegs[i].x2 = *pts++; xSegs[i].y1 = xSegs[i].y2 = *pts++;}
+		for(b_int32 i = 0; i < count; i++) {xSegs[i].x1 = xSegs[i].x2 = *pts++; xSegs[i].y1 = xSegs[i].y2 = *pts++;}
 
 		dc->PrepareXColor();
 
@@ -482,38 +482,38 @@ static e_status_t etk_stroke_points(Drawable xDrawable, EXGraphicsEngine *engine
 		delete[] xSegs;
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_stroke_points_colors(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-					   const EList *ptsArrayLists, eint32 arrayCount,
-					   const e_rgb_color *high_colors)
+static b_status_t bhapi_stroke_points_colors(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+					   const BList *ptsArrayLists, b_int32 arrayCount,
+					   const b_rgb_color *high_colors)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL || ptsArrayLists == NULL || arrayCount <= 0) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL || ptsArrayLists == NULL || arrayCount <= 0) return B_ERROR;
 
-	e_rgb_color oldColor = dc->HighColor();
+	b_rgb_color oldColor = dc->HighColor();
 
-	for(eint32 k = 0; k < arrayCount; k++, ptsArrayLists++)
+	for(b_int32 k = 0; k < arrayCount; k++, ptsArrayLists++)
 	{
 		if(ptsArrayLists == NULL) break;
 
-		e_rgb_color color = (high_colors == NULL ? oldColor : *high_colors++);
+		b_rgb_color color = (high_colors == NULL ? oldColor : *high_colors++);
 
-		eint32 count = ptsArrayLists->CountItems();
+		b_int32 count = ptsArrayLists->CountItems();
 		if(count <= 0) continue;
 
-		if(dc->SetHighColor(color) != E_OK) continue;
+		if(dc->SetHighColor(color) != B_OK) continue;
 
 		if(dc->PenSize() <= 1)
 		{
 			XPoint *xPts = new XPoint[count];
 			if(!xPts) continue;
 
-			eint32 _count_ = 0;
-			for(eint32 i = 0; i < count; i++)
+			b_int32 _count_ = 0;
+			for(b_int32 i = 0; i < count; i++)
 			{
-				const eint32 *pt = (const eint32*)ptsArrayLists->ItemAt(i);
+				const b_int32 *pt = (const b_int32*)ptsArrayLists->ItemAt(i);
 				if(!pt) continue;
 
 				xPts[_count_].x = *pt++; xPts[_count_].y = *pt++;
@@ -534,10 +534,10 @@ static e_status_t etk_stroke_points_colors(Drawable xDrawable, EXGraphicsEngine 
 			if(!rs) continue;
 
 			int pos = (int)((dc->PenSize() - 1) / 2);
-			eint32 _count_ = 0;
-			for(eint32 i = 0; i < count; i++)
+			b_int32 _count_ = 0;
+			for(b_int32 i = 0; i < count; i++)
 			{
-				const eint32 *pt = (const eint32*)ptsArrayLists->ItemAt(i);
+				const b_int32 *pt = (const b_int32*)ptsArrayLists->ItemAt(i);
 				if(!pt) continue;
 
 				rs[_count_].x = *pt++; rs[_count_].y = *pt++;
@@ -559,10 +559,10 @@ static e_status_t etk_stroke_points_colors(Drawable xDrawable, EXGraphicsEngine 
 			XSegment *xSegs = new XSegment[count];
 			if(!xSegs) continue;
 
-			eint32 _count_ = 0;
-			for(eint32 i = 0; i < count; i++)
+			b_int32 _count_ = 0;
+			for(b_int32 i = 0; i < count; i++)
 			{
-				const eint32 *pt = (const eint32*)ptsArrayLists->ItemAt(i);
+				const b_int32 *pt = (const b_int32*)ptsArrayLists->ItemAt(i);
 				if(!pt) continue;
 
 				xSegs[_count_].x1 = xSegs[_count_].x2 = *pt++; xSegs[_count_].y1 = xSegs[_count_].y2 = *pt++;
@@ -597,22 +597,22 @@ static e_status_t etk_stroke_points_colors(Drawable xDrawable, EXGraphicsEngine 
 
 	dc->SetHighColor(oldColor);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_stroke_points_alphas(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-					  const eint32 *pts, const euint8 *alpha, eint32 count)
+static b_status_t bhapi_stroke_points_alphas(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+					  const b_int32 *pts, const b_uint8 *alpha, b_int32 count)
 {
 #ifdef HAVE_XRENDER
-	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || alpha == NULL || count <= 0) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || alpha == NULL || count <= 0) return B_ERROR;
 
 	XRectangle *xRects = NULL;
 	int nRects = 0;
 
-	if(engine->ConvertRegion(dc->Clipping(), &xRects, &nRects) != E_OK || xRects == NULL) return E_ERROR;
+	if(engine->ConvertRegion(dc->Clipping(), &xRects, &nRects) != B_OK || xRects == NULL) return B_ERROR;
 
-	e_rgb_color color = dc->HighColor();
+	b_rgb_color color = dc->HighColor();
 	Picture xPict = XRenderCreatePicture(engine->xDisplay, xDrawable,
 					     XRenderFindVisualFormat(engine->xDisplay, engine->xVisual), 0, NULL);
 	XRenderSetPictureClipRectangles(engine->xDisplay, xPict, 0, 0, xRects, nRects);
@@ -623,27 +623,27 @@ static e_status_t etk_stroke_points_alphas(Drawable xDrawable, EXGraphicsEngine 
 	xrcolor.green = (unsigned short)color.green * 257;
 	xrcolor.blue = (unsigned short)color.blue * 257;
 
-	for(eint32 i = 0; i < count; i++)
+	for(b_int32 i = 0; i < count; i++)
 	{
 		xrcolor.alpha = (unsigned short)(*alpha++) * 257;
 		if(dc->PenSize() <= 1)
 		{
-			eint32 x = *pts++;
-			eint32 y = *pts++;
+			b_int32 x = *pts++;
+			b_int32 y = *pts++;
 			XRenderFillRectangle(engine->xDisplay, PictOpOver, xPict, &xrcolor, x, y, 1, 1);
 		}
 		else if(dc->IsSquarePointStyle())
 		{
-			eint32 x = *pts++;
-			eint32 y = *pts++;
+			b_int32 x = *pts++;
+			b_int32 y = *pts++;
 			XRenderFillRectangle(engine->xDisplay, PictOpOver, xPict, &xrcolor,
 					     x - (int)((dc->PenSize() - 1) / 2), y - (int)((dc->PenSize() - 1) / 2),
 					     dc->PenSize(), dc->PenSize());
 		}
 		else
 		{
-			eint32 x = *pts++;
-			eint32 y = *pts++;
+			b_int32 x = *pts++;
+			b_int32 y = *pts++;
 			int pos = (int)((dc->PenSize() - 1) / 2);
 
 			Pixmap srcPixmap = XCreatePixmap(engine->xDisplay, engine->xRootWindow,
@@ -708,49 +708,49 @@ static e_status_t etk_stroke_points_alphas(Drawable xDrawable, EXGraphicsEngine 
 
 	XRenderFreePicture(engine->xDisplay, xPict);
 
-	return E_OK;
+	return B_OK;
 #else
-	ETK_WARNING("[GRAPHICS]: %s --- alpha unsupported.", __PRETTY_FUNCTION__);
-	return E_ERROR;
+	BHAPI_WARNING("[GRAPHICS]: %s --- alpha unsupported.", __PRETTY_FUNCTION__);
+	return B_ERROR;
 #endif // HAVE_XRENDER
 }
 
 
-static e_status_t etk_stroke_line(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				  eint32 x0, eint32 y0, eint32 x1, eint32 y1)
+static b_status_t bhapi_stroke_line(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+				  b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1)
 {
-	if(x0 == x1 && y0 == y1) return etk_stroke_point(xDrawable, engine, dc, x0, y0);
+	if(x0 == x1 && y0 == y1) return bhapi_stroke_point(xDrawable, engine, dc, x0, y0);
 
-	if(xDrawable == None || engine == NULL || dc == NULL) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
 	dc->PrepareXColor();
 	XDrawLine(engine->xDisplay, xDrawable, dc->xGC, x0, y0, x1, y1);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_stroke_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				  eint32 x, eint32 y, euint32 w, euint32 h)
+static b_status_t bhapi_stroke_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+				  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
 	if(w == 0 && h == 0)
-		return etk_stroke_point(xDrawable, engine, dc, x, y);
+		return bhapi_stroke_point(xDrawable, engine, dc, x, y);
 	else if(w == 0 || h == 0)
-		return etk_stroke_line(xDrawable, engine, dc, x, y, x + (eint32)w, y + (eint32)h);
+		return bhapi_stroke_line(xDrawable, engine, dc, x, y, x + (b_int32)w, y + (b_int32)h);
 
-	if(xDrawable == None || engine == NULL || dc == NULL) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
 	dc->PrepareXColor();
 	XDrawRectangle(engine->xDisplay, xDrawable, dc->xGC, x, y, w, h);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_stroke_rects(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				   const eint32 *rects, eint32 count)
+static b_status_t bhapi_stroke_rects(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+				   const b_int32 *rects, b_int32 count)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL || rects == NULL || count <= 0) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL || rects == NULL || count <= 0) return B_ERROR;
 
 	XRectangle *rs = new XRectangle[count];
 	XSegment *segs = new XSegment[count];
@@ -758,15 +758,15 @@ static e_status_t etk_stroke_rects(Drawable xDrawable, EXGraphicsEngine *engine,
 	{
 		if(rs) delete[] rs;
 		if(segs) delete[] segs;
-		return E_ERROR;
+		return B_ERROR;
 	}
 
-	eint32 rsCount = 0;
-	eint32 segsCount = 0;
+	b_int32 rsCount = 0;
+	b_int32 segsCount = 0;
 
-	for(eint32 i = 0; i < count; i++)
+	for(b_int32 i = 0; i < count; i++)
 	{
-		eint32 x = *rects++; eint32 y = *rects++; euint32 w = (euint32)(*rects++); euint32 h = (euint32)(*rects++);
+		b_int32 x = *rects++; b_int32 y = *rects++; b_uint32 w = (b_uint32)(*rects++); b_uint32 h = (b_uint32)(*rects++);
 		if(w == 0 || h == 0)
 		{
 			segs[segsCount].x1 = x; segs[segsCount].y1 = y;
@@ -791,33 +791,33 @@ static e_status_t etk_stroke_rects(Drawable xDrawable, EXGraphicsEngine *engine,
 	delete[] rs;
 	delete[] segs;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_fill_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				eint32 x, eint32 y, euint32 w, euint32 h)
+static b_status_t bhapi_fill_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+				b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
 	dc->PrepareXColor();
 	XFillRectangle(engine->xDisplay, xDrawable, dc->xGC, x, y, w + 1, h + 1);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_fill_rects(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				 const eint32 *rects, eint32 count)
+static b_status_t bhapi_fill_rects(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+				 const b_int32 *rects, b_int32 count)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL || rects == NULL || count <= 0) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL || rects == NULL || count <= 0) return B_ERROR;
 
 	XRectangle *rs = new XRectangle[count];
-	if(!rs) return E_ERROR;
+	if(!rs) return B_ERROR;
 
-	for(eint32 i = 0; i < count; i++)
+	for(b_int32 i = 0; i < count; i++)
 	{
-		eint32 x = *rects++; eint32 y = *rects++; euint32 w = (euint32)(*rects++); euint32 h = (euint32)(*rects++);
+		b_int32 x = *rects++; b_int32 y = *rects++; b_uint32 w = (b_uint32)(*rects++); b_uint32 h = (b_uint32)(*rects++);
 		rs[i].x = x; rs[i].y = y;
 		rs[i].width = w + 1; rs[i].height = h + 1;
 	}
@@ -826,33 +826,33 @@ static e_status_t etk_fill_rects(Drawable xDrawable, EXGraphicsEngine *engine, E
 	XFillRectangles(engine->xDisplay, xDrawable, dc->xGC, rs, count);
 	delete[] rs;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_fill_region(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				  const ERegion &region)
+static b_status_t bhapi_fill_region(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+				  const BRegion &region)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL || region.CountRects() <= 0) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL || region.CountRects() <= 0) return B_ERROR;
 
-	ERegion aRegion(region);
+	BRegion aRegion(region);
 	aRegion &= *(dc->Clipping());
 	if(aRegion.CountRects() == 1)
 	{
-		ERect r = aRegion.Frame().FloorSelf();
-		return etk_fill_rect(xDrawable, engine, dc, (eint32)r.left, (eint32)r.top, (euint32)r.Width(), (euint32)r.Height());
+		BRect r = aRegion.Frame().FloorSelf();
+		return bhapi_fill_rect(xDrawable, engine, dc, (b_int32)r.left, (b_int32)r.top, (b_uint32)r.Width(), (b_uint32)r.Height());
 	}
-	else if(aRegion.CountRects() <= 0) return E_ERROR;
+	else if(aRegion.CountRects() <= 0) return B_ERROR;
 
 	Region xOldRegion = NULL;
-	if(dc->GetXClipping(&xOldRegion) != E_OK || xOldRegion == NULL) return E_ERROR;
+	if(dc->GetXClipping(&xOldRegion) != B_OK || xOldRegion == NULL) return B_ERROR;
 
 	Region xRegion = XCreateRegion();
-	if(xRegion == NULL) return E_ERROR;
+	if(xRegion == NULL) return B_ERROR;
 
-	for(eint32 i = 0; i < aRegion.CountRects(); i++)
+	for(b_int32 i = 0; i < aRegion.CountRects(); i++)
 	{
-		ERect r = aRegion.RectAt(i).FloorSelf();
+		BRect r = aRegion.RectAt(i).FloorSelf();
 
 		XRectangle xRect;
 		xRect.x = (short)r.left; xRect.y = (short)r.top;
@@ -863,24 +863,24 @@ static e_status_t etk_fill_region(Drawable xDrawable, EXGraphicsEngine *engine, 
 
 	dc->PrepareXColor();
 
-	ERect r = aRegion.Frame().FloorSelf();
+	BRect r = aRegion.Frame().FloorSelf();
 	XSetRegion(engine->xDisplay, dc->xGC, xRegion);
 	XFillRectangle(engine->xDisplay, xDrawable, dc->xGC,
 		       (int)r.left, (int)r.top, (unsigned int)r.Width() + 1, (unsigned int)r.Height() + 1);
 	XSetRegion(engine->xDisplay, dc->xGC, xOldRegion);
 	XDestroyRegion(xRegion);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_stroke_arc(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				 eint32 x, eint32 y, euint32 w, euint32 h, float start_angle, float end_angle)
+static b_status_t bhapi_stroke_arc(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+				 b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float start_angle, float end_angle)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
-	if(w == 0 && h == 0) return etk_stroke_point(xDrawable, engine, dc, x, y);
-	else if(w == 0 || h == 0) return etk_stroke_line(xDrawable, engine, dc, x, y, x + (eint32)w, y + (eint32)h);
+	if(w == 0 && h == 0) return bhapi_stroke_point(xDrawable, engine, dc, x, y);
+	else if(w == 0 || h == 0) return bhapi_stroke_line(xDrawable, engine, dc, x, y, x + (b_int32)w, y + (b_int32)h);
 
 	if(end_angle - start_angle >= 360 || end_angle - start_angle <= -360)
 	{
@@ -899,16 +899,16 @@ static e_status_t etk_stroke_arc(Drawable xDrawable, EXGraphicsEngine *engine, E
 	XDrawArc(engine->xDisplay, xDrawable, dc->xGC, x, y, w, h,
 		 (int)(start_angle * 64.f), (int)((end_angle - start_angle) * 64.f));
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_fill_arc(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-			       eint32 x, eint32 y, euint32 w, euint32 h, float start_angle, float end_angle)
+static b_status_t bhapi_fill_arc(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+			       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float start_angle, float end_angle)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
-	if(w == 0 || h == 0) return etk_fill_rect(xDrawable, engine, dc, x, y, w, h);
+	if(w == 0 || h == 0) return bhapi_fill_rect(xDrawable, engine, dc, x, y, w, h);
 
 	if(end_angle - start_angle >= 360 || end_angle - start_angle <= -360)
 	{
@@ -927,25 +927,25 @@ static e_status_t etk_fill_arc(Drawable xDrawable, EXGraphicsEngine *engine, EXG
 	XFillArc(engine->xDisplay, xDrawable, dc->xGC, x, y, w + 1, h + 1,
 		 (int)(start_angle * 64.f), (int)((end_angle - start_angle) * 64.f));
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-					eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+static b_status_t bhapi_stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+					b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
 	bool xRadiusLarge = (2 * xRadius >= w ? true : false);
 	bool yRadiusLarge = (2 * yRadius >= h ? true : false);
 
-	if(xRadius == 0 || yRadius == 0) return etk_stroke_rect(xDrawable, engine, dc, x, y, w, h);
-	else if(xRadiusLarge && yRadiusLarge) return etk_stroke_arc(xDrawable, engine, dc, x, y, w, h, 0, 360);
+	if(xRadius == 0 || yRadius == 0) return bhapi_stroke_rect(xDrawable, engine, dc, x, y, w, h);
+	else if(xRadiusLarge && yRadiusLarge) return bhapi_stroke_arc(xDrawable, engine, dc, x, y, w, h, 0, 360);
 
 	if(w == 0 && h == 0)
-		return etk_stroke_point(xDrawable, engine, dc, x, y);
+		return bhapi_stroke_point(xDrawable, engine, dc, x, y);
 	else if(w == 0 || h == 0)
-		return etk_stroke_line(xDrawable, engine, dc, x, y, x + (eint32)w, y + (eint32)h);
+		return bhapi_stroke_line(xDrawable, engine, dc, x, y, x + (b_int32)w, y + (b_int32)h);
 
 	XArc xarcs[4];
 	XSegment xsegments[4];
@@ -957,17 +957,17 @@ static e_status_t etk_stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *en
 		xarcs[0].width = w; xarcs[0].height = 2 * yRadius;
 		xarcs[0].angle1 = 0; xarcs[0].angle2 = 180 * 64;
 
-		xarcs[1].x = x; xarcs[1].y = y + (eint32)(h - 2 * yRadius);
+		xarcs[1].x = x; xarcs[1].y = y + (b_int32)(h - 2 * yRadius);
 		xarcs[1].width = w; xarcs[1].height = 2 * yRadius;
 		xarcs[1].angle1 = 180 * 64; xarcs[1].angle2 = 180 * 64;
 
 		nxarcs = 2;
 
-		xsegments[0].x1 = x; xsegments[0].y1 = y + (eint32)yRadius + 1;
-		xsegments[0].x2 = x; xsegments[0].y2 = y + (eint32)(h - yRadius) - 1;
+		xsegments[0].x1 = x; xsegments[0].y1 = y + (b_int32)yRadius + 1;
+		xsegments[0].x2 = x; xsegments[0].y2 = y + (b_int32)(h - yRadius) - 1;
 
-		xsegments[1].x1 = x + (eint32)w; xsegments[1].y1 = y + (eint32)yRadius + 1;
-		xsegments[1].x2 = x + (eint32)w; xsegments[1].y2 = y + (eint32)(h - yRadius) - 1;
+		xsegments[1].x1 = x + (b_int32)w; xsegments[1].y1 = y + (b_int32)yRadius + 1;
+		xsegments[1].x2 = x + (b_int32)w; xsegments[1].y2 = y + (b_int32)(h - yRadius) - 1;
 
 		nxsegments = 2;
 	}
@@ -977,17 +977,17 @@ static e_status_t etk_stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *en
 		xarcs[0].width = 2 * xRadius; xarcs[0].height = h;
 		xarcs[0].angle1 = 90 * 64; xarcs[0].angle2 = 180 * 64;
 
-		xarcs[1].x = x + (eint32)(w - 2 * xRadius); xarcs[1].y = y;
+		xarcs[1].x = x + (b_int32)(w - 2 * xRadius); xarcs[1].y = y;
 		xarcs[1].width = 2 * xRadius; xarcs[1].height = h;
 		xarcs[1].angle1 = -90 * 64; xarcs[1].angle2 = 180 * 64;
 
 		nxarcs = 2;
 
-		xsegments[0].x1 = x + (eint32)xRadius + 1; xsegments[0].y1 = y;
-		xsegments[0].x2 = x + (eint32)(w - xRadius) - 1; xsegments[0].y2 = y;
+		xsegments[0].x1 = x + (b_int32)xRadius + 1; xsegments[0].y1 = y;
+		xsegments[0].x2 = x + (b_int32)(w - xRadius) - 1; xsegments[0].y2 = y;
 
-		xsegments[1].x1 = x + (eint32)xRadius + 1; xsegments[1].y1 = y + (eint32)h;
-		xsegments[1].x2 = x + (eint32)(w - xRadius) - 1; xsegments[1].y2 = y + (eint32)h;
+		xsegments[1].x1 = x + (b_int32)xRadius + 1; xsegments[1].y1 = y + (b_int32)h;
+		xsegments[1].x2 = x + (b_int32)(w - xRadius) - 1; xsegments[1].y2 = y + (b_int32)h;
 
 		nxsegments = 2;
 	}
@@ -997,31 +997,31 @@ static e_status_t etk_stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *en
 		xarcs[0].width = 2 * xRadius; xarcs[0].height = 2 * yRadius;
 		xarcs[0].angle1 = 90 * 64; xarcs[0].angle2 = 90 * 64;
 
-		xarcs[1].x = x + (eint32)(w - 2 * xRadius); xarcs[1].y = y;
+		xarcs[1].x = x + (b_int32)(w - 2 * xRadius); xarcs[1].y = y;
 		xarcs[1].width = 2 * xRadius; xarcs[1].height = 2 * yRadius;
 		xarcs[1].angle1 = 0; xarcs[1].angle2 = 90 * 64;
 
-		xarcs[2].x = x; xarcs[2].y = y + (eint32)(h - 2 * yRadius);
+		xarcs[2].x = x; xarcs[2].y = y + (b_int32)(h - 2 * yRadius);
 		xarcs[2].width = 2 * xRadius; xarcs[2].height = 2 * yRadius;
 		xarcs[2].angle1 = 180 * 64; xarcs[2].angle2 = 90 * 64;
 
-		xarcs[3].x = x + (eint32)(w - 2 * xRadius); xarcs[3].y = y + (eint32)(h - 2 * yRadius);
+		xarcs[3].x = x + (b_int32)(w - 2 * xRadius); xarcs[3].y = y + (b_int32)(h - 2 * yRadius);
 		xarcs[3].width = 2 * xRadius; xarcs[3].height = 2 * yRadius;
 		xarcs[3].angle1 = 270 * 64; xarcs[3].angle2 = 90 * 64;
 
 		nxarcs = 4;
 
-		xsegments[0].x1 = x; xsegments[0].y1 = y + (eint32)yRadius + 1;
-		xsegments[0].x2 = x; xsegments[0].y2 = y + (eint32)(h - yRadius) - 1;
+		xsegments[0].x1 = x; xsegments[0].y1 = y + (b_int32)yRadius + 1;
+		xsegments[0].x2 = x; xsegments[0].y2 = y + (b_int32)(h - yRadius) - 1;
 
-		xsegments[1].x1 = x + (eint32)w; xsegments[1].y1 = y + (eint32)yRadius + 1;
-		xsegments[1].x2 = x + (eint32)w; xsegments[1].y2 = y + (eint32)(h - yRadius) - 1;
+		xsegments[1].x1 = x + (b_int32)w; xsegments[1].y1 = y + (b_int32)yRadius + 1;
+		xsegments[1].x2 = x + (b_int32)w; xsegments[1].y2 = y + (b_int32)(h - yRadius) - 1;
 
-		xsegments[2].x1 = x + (eint32)xRadius + 1; xsegments[2].y1 = y;
-		xsegments[2].x2 = x + (eint32)(w - xRadius) - 1; xsegments[2].y2 = y;
+		xsegments[2].x1 = x + (b_int32)xRadius + 1; xsegments[2].y1 = y;
+		xsegments[2].x2 = x + (b_int32)(w - xRadius) - 1; xsegments[2].y2 = y;
 
-		xsegments[3].x1 = x + (eint32)xRadius + 1; xsegments[3].y1 = y + (eint32)h;
-		xsegments[3].x2 = x + (eint32)(w - xRadius) - 1; xsegments[3].y2 = y + (eint32)h;
+		xsegments[3].x1 = x + (b_int32)xRadius + 1; xsegments[3].y1 = y + (b_int32)h;
+		xsegments[3].x2 = x + (b_int32)(w - xRadius) - 1; xsegments[3].y2 = y + (b_int32)h;
 
 		nxsegments = 4;
 	}
@@ -1030,22 +1030,22 @@ static e_status_t etk_stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *en
 	XDrawArcs(engine->xDisplay, xDrawable, dc->xGC, xarcs, nxarcs);
 	XDrawSegments(engine->xDisplay, xDrawable, dc->xGC, xsegments, nxsegments);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_fill_round_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				      eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+static b_status_t bhapi_fill_round_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+				      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
 	bool xRadiusLarge = (2 * xRadius >= w ? true : false);
 	bool yRadiusLarge = (2 * yRadius >= h ? true : false);
 
-	if(xRadius == 0 || yRadius == 0) return etk_fill_rect(xDrawable, engine, dc, x, y, w, h);
-	else if(xRadiusLarge && yRadiusLarge) return etk_fill_arc(xDrawable, engine, dc, x, y, w, h, 0, 360);
+	if(xRadius == 0 || yRadius == 0) return bhapi_fill_rect(xDrawable, engine, dc, x, y, w, h);
+	else if(xRadiusLarge && yRadiusLarge) return bhapi_fill_arc(xDrawable, engine, dc, x, y, w, h, 0, 360);
 
-	if(w == 0 || h == 0) return etk_fill_rect(xDrawable, engine, dc, x, y, w, h);
+	if(w == 0 || h == 0) return bhapi_fill_rect(xDrawable, engine, dc, x, y, w, h);
 
 	w += 1;
 	h += 1;
@@ -1060,13 +1060,13 @@ static e_status_t etk_fill_round_rect(Drawable xDrawable, EXGraphicsEngine *engi
 		xarcs[0].width = w; xarcs[0].height = 2 * yRadius;
 		xarcs[0].angle1 = 0; xarcs[0].angle2 = 180 * 64;
 
-		xarcs[1].x = x; xarcs[1].y = y + (eint32)(h - 2 * yRadius);
+		xarcs[1].x = x; xarcs[1].y = y + (b_int32)(h - 2 * yRadius);
 		xarcs[1].width = w; xarcs[1].height = 2 * yRadius;
 		xarcs[1].angle1 = 180 * 64; xarcs[1].angle2 = 180 * 64;
 
 		nxarcs = 2;
 
-		xrectangles[0].x = x; xrectangles[0].y = y + (eint32)yRadius;
+		xrectangles[0].x = x; xrectangles[0].y = y + (b_int32)yRadius;
 		xrectangles[0].width = w; xrectangles[0].height = h - 2 * yRadius;
 
 		nxrectangles = 1;
@@ -1077,13 +1077,13 @@ static e_status_t etk_fill_round_rect(Drawable xDrawable, EXGraphicsEngine *engi
 		xarcs[0].width = 2 * xRadius; xarcs[0].height = h;
 		xarcs[0].angle1 = 90 * 64; xarcs[0].angle2 = 180 * 64;
 
-		xarcs[1].x = x + (eint32)(w - 2 * xRadius); xarcs[1].y = y;
+		xarcs[1].x = x + (b_int32)(w - 2 * xRadius); xarcs[1].y = y;
 		xarcs[1].width = 2 * xRadius; xarcs[1].height = h;
 		xarcs[1].angle1 = -90 * 64; xarcs[1].angle2 = 180 * 64;
 
 		nxarcs = 2;
 
-		xrectangles[0].x = x + (eint32)xRadius; xrectangles[0].y = y;
+		xrectangles[0].x = x + (b_int32)xRadius; xrectangles[0].y = y;
 		xrectangles[0].width = w - 2 * xRadius; xrectangles[0].height = h;
 
 		nxrectangles = 1;
@@ -1094,27 +1094,27 @@ static e_status_t etk_fill_round_rect(Drawable xDrawable, EXGraphicsEngine *engi
 		xarcs[0].width = 2 * xRadius; xarcs[0].height = 2 * yRadius;
 		xarcs[0].angle1 = 90 * 64; xarcs[0].angle2 = 90 * 64;
 
-		xarcs[1].x = x + (eint32)(w - 2 * xRadius); xarcs[1].y = y;
+		xarcs[1].x = x + (b_int32)(w - 2 * xRadius); xarcs[1].y = y;
 		xarcs[1].width = 2 * xRadius; xarcs[1].height = 2 * yRadius;
 		xarcs[1].angle1 = 0; xarcs[1].angle2 = 90 * 64;
 
-		xarcs[2].x = x; xarcs[2].y = y + (eint32)(h - 2 * yRadius);
+		xarcs[2].x = x; xarcs[2].y = y + (b_int32)(h - 2 * yRadius);
 		xarcs[2].width = 2 * xRadius; xarcs[2].height = 2 * yRadius;
 		xarcs[2].angle1 = 180 * 64; xarcs[2].angle2 = 90 * 64;
 
-		xarcs[3].x = x + (eint32)(w - 2 * xRadius); xarcs[3].y = y + (eint32)(h - 2 * yRadius);
+		xarcs[3].x = x + (b_int32)(w - 2 * xRadius); xarcs[3].y = y + (b_int32)(h - 2 * yRadius);
 		xarcs[3].width = 2 * xRadius; xarcs[3].height = 2 * yRadius;
 		xarcs[3].angle1 = 270 * 64; xarcs[3].angle2 = 90 * 64;
 
 		nxarcs = 4;
 
-		xrectangles[0].x = x; xrectangles[0].y = y + (eint32)yRadius;
+		xrectangles[0].x = x; xrectangles[0].y = y + (b_int32)yRadius;
 		xrectangles[0].width = w; xrectangles[0].height = h - 2 * yRadius;
 
-		xrectangles[1].x = x + (eint32)xRadius; xrectangles[1].y = y;
+		xrectangles[1].x = x + (b_int32)xRadius; xrectangles[1].y = y;
 		xrectangles[1].width = w - 2 * xRadius; xrectangles[1].height = yRadius;
 
-		xrectangles[2].x = x + (eint32)xRadius; xrectangles[2].y = y + (eint32)(h - yRadius);
+		xrectangles[2].x = x + (b_int32)xRadius; xrectangles[2].y = y + (b_int32)(h - yRadius);
 		xrectangles[2].width = w - 2 * xRadius; xrectangles[2].height = yRadius;
 
 		nxrectangles = 3;
@@ -1124,22 +1124,22 @@ static e_status_t etk_fill_round_rect(Drawable xDrawable, EXGraphicsEngine *engi
 	XFillArcs(engine->xDisplay, xDrawable, dc->xGC, xarcs, nxarcs);
 	XFillRectangles(engine->xDisplay, xDrawable, dc->xGC, xrectangles, nxrectangles);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_stroke_polygon(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				     const eint32 *pts, eint32 count, bool closed)
+static b_status_t bhapi_stroke_polygon(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+				     const b_int32 *pts, b_int32 count, bool closed)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || count <= 0 || count >= E_MAXINT) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || count <= 0 || count >= B_MAXINT) return B_ERROR;
 
-	if(count == 1) return etk_stroke_point(xDrawable, engine, dc, pts[0], pts[1]);
-	else if(count == 2) return etk_stroke_line(xDrawable, engine, dc, pts[0], pts[1], pts[2], pts[3]);
+	if(count == 1) return bhapi_stroke_point(xDrawable, engine, dc, pts[0], pts[1]);
+	else if(count == 2) return bhapi_stroke_line(xDrawable, engine, dc, pts[0], pts[1], pts[2], pts[3]);
 
 	XPoint *xPts = new XPoint[count + 1];
-	if(!xPts) return E_ERROR;
+	if(!xPts) return B_ERROR;
 
-	for(eint32 i = 0; i < count; i++) {xPts[i].x = *pts++; xPts[i].y = *pts++;}
+	for(b_int32 i = 0; i < count; i++) {xPts[i].x = *pts++; xPts[i].y = *pts++;}
 
 	int ptsCount = count;
 	if((xPts[count - 1].x != xPts[0].x || xPts[count - 1].y != xPts[0].y) && closed)
@@ -1153,16 +1153,16 @@ static e_status_t etk_stroke_polygon(Drawable xDrawable, EXGraphicsEngine *engin
 	XDrawLines(engine->xDisplay, xDrawable, dc->xGC, xPts, ptsCount, CoordModeOrigin);
 	delete[] xPts;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_fill_polygon(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				   const eint32 *pts, eint32 count)
+static b_status_t bhapi_fill_polygon(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+				   const b_int32 *pts, b_int32 count)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || count <= 0 || count >= E_MAXINT) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || count <= 0 || count >= B_MAXINT) return B_ERROR;
 
-	if(count == 1) return etk_fill_rect(xDrawable, engine, dc, pts[0], pts[1], 0, 0);
+	if(count == 1) return bhapi_fill_rect(xDrawable, engine, dc, pts[0], pts[1], 0, 0);
 	else if(count == 2)
 	{
 		dc->PrepareXColor();
@@ -1184,13 +1184,13 @@ static e_status_t etk_fill_polygon(Drawable xDrawable, EXGraphicsEngine *engine,
 			XChangeGC(engine->xDisplay, dc->xGC, GCLineWidth, &xgcvals);
 		}
 
-		return E_OK;
+		return B_OK;
 	}
 
 	XPoint *xPts = new XPoint[count];
-	if(!xPts) return E_ERROR;
+	if(!xPts) return B_ERROR;
 
-	for(eint32 i = 0; i < count; i++) {xPts[i].x = *pts++; xPts[i].y = *pts++;}
+	for(b_int32 i = 0; i < count; i++) {xPts[i].x = *pts++; xPts[i].y = *pts++;}
 
 	int ptsCount = count;
 	if(xPts[count - 1].x == xPts[0].x && xPts[count - 1].y == xPts[0].y) ptsCount--;
@@ -1199,21 +1199,21 @@ static e_status_t etk_fill_polygon(Drawable xDrawable, EXGraphicsEngine *engine,
 	XFillPolygon(engine->xDisplay, xDrawable, dc->xGC, xPts, ptsCount, Complex, CoordModeOrigin);
 	delete[] xPts;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-static e_status_t etk_draw_epixmap(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc, const EPixmap *epixmap,
-				   eint32 x, eint32 y, euint32 w, euint32 h,
-				   eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+static b_status_t bhapi_draw_epixmap(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc, const BPixmap *epixmap,
+				   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+				   b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
-	if(xDrawable == None || engine == NULL || dc == NULL || epixmap == NULL || epixmap->IsValid() == false) return E_ERROR;
+	if(xDrawable == None || engine == NULL || dc == NULL || epixmap == NULL || epixmap->IsValid() == false) return B_ERROR;
 
 	if(w != dstW || h != dstH)
 	{
 		// TODO
-		ETK_DEBUG("[GRAPHICS]: %s --- FIXME: (w != dstW || h != dstY).", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- FIXME: (w != dstW || h != dstY).", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
 	XImage xImage;
@@ -1228,22 +1228,22 @@ static e_status_t etk_draw_epixmap(Drawable xDrawable, EXGraphicsEngine *engine,
 
 	switch(epixmap->ColorSpace())
 	{
-		case E_RGB24:
+		case B_RGB24:
 			xImage.byte_order = LSBFirst;
 			xImage.bitmap_pad = 8;
 			xImage.bitmap_unit = 8;
 			xImage.bits_per_pixel = 24;
 			break;
 
-		case E_RGB24_BIG:
+		case B_RGB24_BIG:
 			xImage.byte_order = MSBFirst;
 			xImage.bitmap_pad = 8;
 			xImage.bitmap_unit = 8;
 			xImage.bits_per_pixel = 24;
 			break;
 
-		case E_RGB32:
-		case E_RGBA32:
+		case B_RGB32:
+		case B_RGBA32:
 			xImage.byte_order = LSBFirst;
 			xImage.bitmap_pad = 32;
 			xImage.bitmap_unit = 32;
@@ -1251,494 +1251,494 @@ static e_status_t etk_draw_epixmap(Drawable xDrawable, EXGraphicsEngine *engine,
 			break;
 
 		default:
-			ETK_WARNING("[GRAPHICS]: %s --- Unsupported color space (0x%x).", __PRETTY_FUNCTION__, epixmap->ColorSpace());
-			return E_ERROR;
+			BHAPI_WARNING("[GRAPHICS]: %s --- Unsupported color space (0x%x).", __PRETTY_FUNCTION__, epixmap->ColorSpace());
+			return B_ERROR;
 	}
 
-	if(XInitImage(&xImage) == 0) return E_ERROR;
+	if(XInitImage(&xImage) == 0) return B_ERROR;
 	XPutImage(engine->xDisplay, xDrawable, dc->xGC, &xImage, x, y, dstX, dstY, w + 1, h + 1);
 	XFlush(engine->xDisplay);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsDrawable::StrokePoint(EGraphicsContext *_dc_,
-				eint32 x, eint32 y)
+b_status_t
+EXGraphicsDrawable::StrokePoint(BGraphicsContext *_dc_,
+				b_int32 x, b_int32 y)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_point(xPixmap, fEngine, dc, x, y);
+	return bhapi_stroke_point(xPixmap, fEngine, dc, x, y);
 }
 
 
-e_status_t
-EXGraphicsDrawable::StrokePoints(EGraphicsContext *_dc_,
-				 const eint32 *pts, eint32 count)
+b_status_t
+EXGraphicsDrawable::StrokePoints(BGraphicsContext *_dc_,
+				 const b_int32 *pts, b_int32 count)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_points(xPixmap, fEngine, dc, pts, count);
+	return bhapi_stroke_points(xPixmap, fEngine, dc, pts, count);
 }
 
 
-e_status_t
-EXGraphicsDrawable::StrokePoints_Colors(EGraphicsContext *_dc_,
-					const EList *ptsArrayLists, eint32 arrayCount,
-					const e_rgb_color *highColors)
+b_status_t
+EXGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *_dc_,
+					const BList *ptsArrayLists, b_int32 arrayCount,
+					const b_rgb_color *highColors)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_points_colors(xPixmap, fEngine, dc, ptsArrayLists, arrayCount, highColors);
+	return bhapi_stroke_points_colors(xPixmap, fEngine, dc, ptsArrayLists, arrayCount, highColors);
 }
 
 
-e_status_t
-EXGraphicsDrawable::StrokePoints_Alphas(EGraphicsContext *_dc_,
-					const eint32 *pts, const euint8 *alpha, eint32 count)
+b_status_t
+EXGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *_dc_,
+					const b_int32 *pts, const b_uint8 *alpha, b_int32 count)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_points_alphas(xPixmap, fEngine, dc, pts, alpha, count);
+	return bhapi_stroke_points_alphas(xPixmap, fEngine, dc, pts, alpha, count);
 }
 
 
-e_status_t
-EXGraphicsDrawable::StrokeLine(EGraphicsContext *_dc_,
-			       eint32 x0, eint32 y0, eint32 x1, eint32 y1)
+b_status_t
+EXGraphicsDrawable::StrokeLine(BGraphicsContext *_dc_,
+			       b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_line(xPixmap, fEngine, dc, x0, y0, x1, y1);
+	return bhapi_stroke_line(xPixmap, fEngine, dc, x0, y0, x1, y1);
 }
 
 
-e_status_t
-EXGraphicsDrawable::StrokePolygon(EGraphicsContext *_dc_,
-				  const eint32 *pts, eint32 count, bool closed)
+b_status_t
+EXGraphicsDrawable::StrokePolygon(BGraphicsContext *_dc_,
+				  const b_int32 *pts, b_int32 count, bool closed)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_polygon(xPixmap, fEngine, dc, pts, count, closed);
+	return bhapi_stroke_polygon(xPixmap, fEngine, dc, pts, count, closed);
 }
 
 
-e_status_t
-EXGraphicsDrawable::FillPolygon(EGraphicsContext *_dc_,
-				const eint32 *pts, eint32 count)
+b_status_t
+EXGraphicsDrawable::FillPolygon(BGraphicsContext *_dc_,
+				const b_int32 *pts, b_int32 count)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_fill_polygon(xPixmap, fEngine, dc, pts, count);
+	return bhapi_fill_polygon(xPixmap, fEngine, dc, pts, count);
 }
 
 
-e_status_t
-EXGraphicsDrawable::StrokeRect(EGraphicsContext *_dc_,
-			       eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EXGraphicsDrawable::StrokeRect(BGraphicsContext *_dc_,
+			       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_rect(xPixmap, fEngine, dc, x, y, w, h);
+	return bhapi_stroke_rect(xPixmap, fEngine, dc, x, y, w, h);
 }
 
 
-e_status_t
-EXGraphicsDrawable::FillRect(EGraphicsContext *_dc_,
-			     eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EXGraphicsDrawable::FillRect(BGraphicsContext *_dc_,
+			     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_fill_rect(xPixmap, fEngine, dc, x, y, w, h);
+	return bhapi_fill_rect(xPixmap, fEngine, dc, x, y, w, h);
 }
 
 
-e_status_t
-EXGraphicsDrawable::StrokeRects(EGraphicsContext *_dc_,
-				const eint32 *rects, eint32 count)
+b_status_t
+EXGraphicsDrawable::StrokeRects(BGraphicsContext *_dc_,
+				const b_int32 *rects, b_int32 count)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_rects(xPixmap, fEngine, dc, rects, count);
+	return bhapi_stroke_rects(xPixmap, fEngine, dc, rects, count);
 }
 
 
-e_status_t
-EXGraphicsDrawable::FillRects(EGraphicsContext *_dc_,
-			      const eint32 *rects, eint32 count)
+b_status_t
+EXGraphicsDrawable::FillRects(BGraphicsContext *_dc_,
+			      const b_int32 *rects, b_int32 count)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_fill_rects(xPixmap, fEngine, dc, rects, count);
+	return bhapi_fill_rects(xPixmap, fEngine, dc, rects, count);
 }
 
 
-e_status_t
-EXGraphicsDrawable::FillRegion(EGraphicsContext *_dc_,
-			       const ERegion &region)
+b_status_t
+EXGraphicsDrawable::FillRegion(BGraphicsContext *_dc_,
+			       const BRegion &region)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_fill_region(xPixmap, fEngine, dc, region);
+	return bhapi_fill_region(xPixmap, fEngine, dc, region);
 }
 
 
-e_status_t
-EXGraphicsDrawable::StrokeRoundRect(EGraphicsContext *_dc_,
-				    eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EXGraphicsDrawable::StrokeRoundRect(BGraphicsContext *_dc_,
+				    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_round_rect(xPixmap, fEngine, dc, x, y, w, h, xRadius, yRadius);
+	return bhapi_stroke_round_rect(xPixmap, fEngine, dc, x, y, w, h, xRadius, yRadius);
 }
 
 
-e_status_t
-EXGraphicsDrawable::FillRoundRect(EGraphicsContext *_dc_,
-				  eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EXGraphicsDrawable::FillRoundRect(BGraphicsContext *_dc_,
+				  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_fill_round_rect(xPixmap, fEngine, dc, x, y, w, h, xRadius, yRadius);
+	return bhapi_fill_round_rect(xPixmap, fEngine, dc, x, y, w, h, xRadius, yRadius);
 }
 
 
-e_status_t
-EXGraphicsDrawable::StrokeArc(EGraphicsContext *_dc_,
-			      eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EXGraphicsDrawable::StrokeArc(BGraphicsContext *_dc_,
+			      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_arc(xPixmap, fEngine, dc, x, y, w, h, startAngle, endAngle);
+	return bhapi_stroke_arc(xPixmap, fEngine, dc, x, y, w, h, startAngle, endAngle);
 }
 
 
-e_status_t
-EXGraphicsDrawable::FillArc(EGraphicsContext *_dc_,
-			    eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EXGraphicsDrawable::FillArc(BGraphicsContext *_dc_,
+			    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_fill_arc(xPixmap, fEngine, dc, x, y, w, h, startAngle, endAngle);
+	return bhapi_fill_arc(xPixmap, fEngine, dc, x, y, w, h, startAngle, endAngle);
 }
 
 
-e_status_t
-EXGraphicsDrawable::DrawPixmap(EGraphicsContext *_dc_, const EPixmap *pix,
-			       eint32 x, eint32 y, euint32 w, euint32 h,
-			       eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EXGraphicsDrawable::DrawPixmap(BGraphicsContext *_dc_, const BPixmap *pix,
+			       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+			       b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_draw_epixmap(xPixmap, fEngine, dc, pix, x, y, w, h, dstX, dstY, dstW, dstH);
+	return bhapi_draw_epixmap(xPixmap, fEngine, dc, pix, x, y, w, h, dstX, dstY, dstW, dstH);
 }
 
-e_status_t
-EXGraphicsWindow::StrokePoint(EGraphicsContext *_dc_,
-			      eint32 x, eint32 y)
+b_status_t
+EXGraphicsWindow::StrokePoint(BGraphicsContext *_dc_,
+			      b_int32 x, b_int32 y)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_point(xWindow, fEngine, dc, x, y);
-}
-
-
-e_status_t
-EXGraphicsWindow::StrokePoints(EGraphicsContext *_dc_,
-			       const eint32 *pts, eint32 count)
-{
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
-
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
-
-	return etk_stroke_points(xWindow, fEngine, dc, pts, count);
+	return bhapi_stroke_point(xWindow, fEngine, dc, x, y);
 }
 
 
-e_status_t
-EXGraphicsWindow::StrokePoints_Colors(EGraphicsContext *_dc_,
-				      const EList *ptsArrayLists, eint32 arrayCount,
-				      const e_rgb_color *highColors)
+b_status_t
+EXGraphicsWindow::StrokePoints(BGraphicsContext *_dc_,
+			       const b_int32 *pts, b_int32 count)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_points_colors(xWindow, fEngine, dc, ptsArrayLists, arrayCount, highColors);
+	return bhapi_stroke_points(xWindow, fEngine, dc, pts, count);
 }
 
 
-e_status_t
-EXGraphicsWindow::StrokePoints_Alphas(EGraphicsContext *_dc_,
-				      const eint32 *pts, const euint8 *alpha, eint32 count)
+b_status_t
+EXGraphicsWindow::StrokePoints_Colors(BGraphicsContext *_dc_,
+				      const BList *ptsArrayLists, b_int32 arrayCount,
+				      const b_rgb_color *highColors)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_points_alphas(xWindow, fEngine, dc, pts, alpha, count);
+	return bhapi_stroke_points_colors(xWindow, fEngine, dc, ptsArrayLists, arrayCount, highColors);
 }
 
 
-e_status_t
-EXGraphicsWindow::StrokeLine(EGraphicsContext *_dc_,
-			     eint32 x0, eint32 y0, eint32 x1, eint32 y1)
+b_status_t
+EXGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *_dc_,
+				      const b_int32 *pts, const b_uint8 *alpha, b_int32 count)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_line(xWindow, fEngine, dc, x0, y0, x1, y1);
+	return bhapi_stroke_points_alphas(xWindow, fEngine, dc, pts, alpha, count);
 }
 
 
-e_status_t
-EXGraphicsWindow::StrokePolygon(EGraphicsContext *_dc_,
-				const eint32 *pts, eint32 count, bool closed)
+b_status_t
+EXGraphicsWindow::StrokeLine(BGraphicsContext *_dc_,
+			     b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_polygon(xWindow, fEngine, dc, pts, count, closed);
+	return bhapi_stroke_line(xWindow, fEngine, dc, x0, y0, x1, y1);
 }
 
 
-e_status_t
-EXGraphicsWindow::FillPolygon(EGraphicsContext *_dc_,
-			      const eint32 *pts, eint32 count)
+b_status_t
+EXGraphicsWindow::StrokePolygon(BGraphicsContext *_dc_,
+				const b_int32 *pts, b_int32 count, bool closed)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_fill_polygon(xWindow, fEngine, dc, pts, count);
+	return bhapi_stroke_polygon(xWindow, fEngine, dc, pts, count, closed);
 }
 
 
-e_status_t
-EXGraphicsWindow::StrokeRect(EGraphicsContext *_dc_,
-			     eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EXGraphicsWindow::FillPolygon(BGraphicsContext *_dc_,
+			      const b_int32 *pts, b_int32 count)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_rect(xWindow, fEngine, dc, x, y, w, h);
+	return bhapi_fill_polygon(xWindow, fEngine, dc, pts, count);
 }
 
 
-e_status_t
-EXGraphicsWindow::FillRect(EGraphicsContext *_dc_,
-			   eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EXGraphicsWindow::StrokeRect(BGraphicsContext *_dc_,
+			     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_fill_rect(xWindow, fEngine, dc, x, y, w, h);
+	return bhapi_stroke_rect(xWindow, fEngine, dc, x, y, w, h);
 }
 
 
-e_status_t
-EXGraphicsWindow::StrokeRects(EGraphicsContext *_dc_,
-			      const eint32 *rects, eint32 count)
+b_status_t
+EXGraphicsWindow::FillRect(BGraphicsContext *_dc_,
+			   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_rects(xWindow, fEngine, dc, rects, count);
+	return bhapi_fill_rect(xWindow, fEngine, dc, x, y, w, h);
 }
 
 
-e_status_t
-EXGraphicsWindow::FillRects(EGraphicsContext *_dc_,
-			    const eint32 *rects, eint32 count)
+b_status_t
+EXGraphicsWindow::StrokeRects(BGraphicsContext *_dc_,
+			      const b_int32 *rects, b_int32 count)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_fill_rects(xWindow, fEngine, dc, rects, count);
+	return bhapi_stroke_rects(xWindow, fEngine, dc, rects, count);
 }
 
 
-e_status_t
-EXGraphicsWindow::FillRegion(EGraphicsContext *_dc_,
-			     const ERegion &region)
+b_status_t
+EXGraphicsWindow::FillRects(BGraphicsContext *_dc_,
+			    const b_int32 *rects, b_int32 count)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_fill_region(xWindow, fEngine, dc, region);
+	return bhapi_fill_rects(xWindow, fEngine, dc, rects, count);
 }
 
 
-e_status_t
-EXGraphicsWindow::StrokeRoundRect(EGraphicsContext *_dc_,
-				  eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EXGraphicsWindow::FillRegion(BGraphicsContext *_dc_,
+			     const BRegion &region)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_round_rect(xWindow, fEngine, dc, x, y, w, h, xRadius, yRadius);
+	return bhapi_fill_region(xWindow, fEngine, dc, region);
 }
 
 
-e_status_t
-EXGraphicsWindow::FillRoundRect(EGraphicsContext *_dc_,
-				eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EXGraphicsWindow::StrokeRoundRect(BGraphicsContext *_dc_,
+				  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_fill_round_rect(xWindow, fEngine, dc, x, y, w, h, xRadius, yRadius);
+	return bhapi_stroke_round_rect(xWindow, fEngine, dc, x, y, w, h, xRadius, yRadius);
 }
 
 
-e_status_t
-EXGraphicsWindow::StrokeArc(EGraphicsContext *_dc_,
-			    eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EXGraphicsWindow::FillRoundRect(BGraphicsContext *_dc_,
+				b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_stroke_arc(xWindow, fEngine, dc, x, y, w, h, startAngle, endAngle);
+	return bhapi_fill_round_rect(xWindow, fEngine, dc, x, y, w, h, xRadius, yRadius);
 }
 
 
-e_status_t
-EXGraphicsWindow::FillArc(EGraphicsContext *_dc_,
-			  eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EXGraphicsWindow::StrokeArc(BGraphicsContext *_dc_,
+			    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_fill_arc(xWindow, fEngine, dc, x, y, w, h, startAngle, endAngle);
+	return bhapi_stroke_arc(xWindow, fEngine, dc, x, y, w, h, startAngle, endAngle);
 }
 
 
-e_status_t
-EXGraphicsWindow::DrawPixmap(EGraphicsContext *_dc_, const EPixmap *pix,
-			     eint32 x, eint32 y, euint32 w, euint32 h,
-			     eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EXGraphicsWindow::FillArc(BGraphicsContext *_dc_,
+			  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return E_ERROR;
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_draw_epixmap(xWindow, fEngine, dc, pix, x, y, w, h, dstX, dstY, dstW, dstH);
+	return bhapi_fill_arc(xWindow, fEngine, dc, x, y, w, h, startAngle, endAngle);
+}
+
+
+b_status_t
+EXGraphicsWindow::DrawPixmap(BGraphicsContext *_dc_, const BPixmap *pix,
+			     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+			     b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
+{
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
+
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
+
+	return bhapi_draw_epixmap(xWindow, fEngine, dc, pix, x, y, w, h, dstX, dstY, dstW, dstH);
 }
 
 #endif /* LINUX */

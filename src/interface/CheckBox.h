@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,33 +24,33 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  * File: CheckBox.h
- * Description: ECheckBox --- A view could change it's state when click the box
+ * Description: BCheckBox --- A view could change it's state when click the box
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_CHECK_BOX_H__
-#define __ETK_CHECK_BOX_H__
+#ifndef __BHAPI_CHECK_BOX_H__
+#define __BHAPI_CHECK_BOX_H__
 
 #include "./../interface/Control.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK ECheckBox : public EControl {
+class _IMPEXP_BHAPI BCheckBox : public BControl {
 public:
-	ECheckBox(ERect frame,
+    BCheckBox(BRect frame,
 		  const char *name,
 		  const char *label,
-		  EMessage *message,
-		  euint32 resizeMode = E_FOLLOW_LEFT | E_FOLLOW_TOP,
-		  euint32 flags = E_WILL_DRAW | E_NAVIGABLE);
-	virtual ~ECheckBox();
+		  BMessage *message,
+          b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+          b_uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+    virtual ~BCheckBox();
 
 	virtual void	SetLabel(const char *label);
 
-	virtual void	Draw(ERect updateRect);
-	virtual void	MouseDown(EPoint where);
-	virtual void	KeyDown(const char *bytes, eint32 numBytes);
-	virtual void	SetFont(const EFont *font, euint8 mask = E_FONT_ALL);
+	virtual void	Draw(BRect updateRect);
+    virtual void	MouseDown(BPoint where);
+    virtual void	KeyDown(const char *bytes, b_int32 numBytes);
+    virtual void	SetFont(const BFont *font, b_uint8 mask = B_FONT_ALL);
 	virtual void	WindowActivated(bool state);
 
 	virtual void	GetPreferredSize(float *width, float *height);
@@ -58,5 +58,5 @@ public:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_CHECK_BOX_H__ */
+#endif /* __BHAPI_CHECK_BOX_H__ */
 

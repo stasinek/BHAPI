@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_POP_UP_MENU_H__
-#define __ETK_POP_UP_MENU_H__
+#ifndef __BHAPI_POP_UP_MENU_H__
+#define __BHAPI_POP_UP_MENU_H__
 
 #include "./../support/Locker.h"
 #include "./../interface/Menu.h"
@@ -36,16 +36,16 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EPopUpMenu : public EMenu {
+class _IMPEXP_BHAPI BPopUpMenu : public BMenu {
 public:
-	EPopUpMenu(const char *title,
+    BPopUpMenu(const char *title,
 		   bool radioMode = true,
 		   bool labelFromMarked = true,
-		   e_menu_layout layout = E_ITEMS_IN_COLUMN);
-	virtual ~EPopUpMenu();
+		   b_menu_layout layout = B_ITEMS_IN_COLUMN);
+    virtual ~BPopUpMenu();
 
-	// "could_proxy_when_sync" must be "true" when it called synchronously from looper of EApplication!
-	EMenuItem*	Go(EPoint where,
+	// "could_proxy_when_sync" must be "true" when it called synchronously from looper of BApplication!
+	BMenuItem*	Go(BPoint where,
 			   bool delivers_message_when_sync = false,
 			   bool open_anyway = false,
 			   bool asynchronous = false,
@@ -54,18 +54,18 @@ public:
 	void		SetAsyncAutoDestruct(bool state);
 	bool		AsyncAutoDestruct() const;
 
-	virtual void	MessageReceived(EMessage *msg);
-	virtual void	MouseUp(EPoint where);
+	virtual void	MessageReceived(BMessage *msg);
+	virtual void	MouseUp(BPoint where);
 
 private:
-	friend class EMenu;
+	friend class BMenu;
 
-	EMenuItem *fSelectedItem;
+	BMenuItem *fSelectedItem;
 	bool fAutoDestruct;
 	bool IsPopUpByGo() const;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_POP_UP_MENU_H__ */
+#endif /* __BHAPI_POP_UP_MENU_H__ */
 

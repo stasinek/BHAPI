@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,28 +27,28 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_VOLUME_ROSTER_H__
-#define __ETK_VOLUME_ROSTER_H__
+#ifndef __BHAPI_VOLUME_ROSTER_H__
+#define __BHAPI_VOLUME_ROSTER_H__
 
 #include "Volume.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EVolumeRoster {
+class _IMPEXP_BHAPI BVolumeRoster {
 public:
-	EVolumeRoster();
-	virtual ~EVolumeRoster();
+	BVolumeRoster();
+	virtual ~BVolumeRoster();
 
-	e_status_t	GetNextVolume(EVolume *vol);
+	b_status_t	GetNextVolume(BVolume *vol);
 	void		Rewind();
 
-	e_status_t	GetBootVolume(EVolume *vol);
+	b_status_t	GetBootVolume(BVolume *vol);
 
 private:
-	eint32 fPos;
+    b_int32 fPos;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_VOLUME_ROSTER_H__ */
+#endif /* __BHAPI_VOLUME_ROSTER_H__ */
 

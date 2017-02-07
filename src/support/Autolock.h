@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,28 +27,28 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_AUTOLOCK_H__
-#define __ETK_AUTOLOCK_H__
+#ifndef __BHAPI_AUTOLOCK_H__
+#define __BHAPI_AUTOLOCK_H__
 
 #ifdef __cplusplus /* Just for C++ */
 
 template<class C>
-class EAutolock
+class BAutolock
 {
 public:
-	EAutolock(C *target)
+    BAutolock(C *target)
 	{
 		fLocker = target;
 		fLocked = (fLocker ? fLocker->Lock() : false);
 	}
 
-	EAutolock(C &target)
+    BAutolock(C &target)
 	{
 		fLocker = &target;
 		fLocked = fLocker->Lock();
 	}
 
-	~EAutolock()
+    ~BAutolock()
 	{
 		if(fLocked && fLocker) fLocker->Unlock();
 	}
@@ -70,5 +70,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_AUTOLOCK_H__ */
+#endif /* __BHAPI_AUTOLOCK_H__ */
 

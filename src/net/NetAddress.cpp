@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -49,99 +49,99 @@
 #include "NetAddress.h"
 
 
-ENetAddress::ENetAddress(const char *hostname, euint16 port)
-	: EArchivable(), fStatus(E_NO_INIT)
+BNetAddress::BNetAddress(const char *hostname, b_uint16 port)
+	: BArchivable(), fStatus(B_NO_INIT)
 {
 	bzero(&fAddr, sizeof(struct sockaddr_in));
 	SetTo(hostname, port);
 }
 
 
-ENetAddress::ENetAddress(const char *hostname, const char *protocol, const char *service)
-	: EArchivable(), fStatus(E_NO_INIT)
+BNetAddress::BNetAddress(const char *hostname, const char *protocol, const char *service)
+	: BArchivable(), fStatus(B_NO_INIT)
 {
 	bzero(&fAddr, sizeof(struct sockaddr_in));
 	SetTo(hostname, protocol, service);
 }
 
 
-ENetAddress::ENetAddress(const struct sockaddr_in &sa)
-	: EArchivable(), fStatus(E_NO_INIT)
+BNetAddress::BNetAddress(const struct sockaddr_in &sa)
+	: BArchivable(), fStatus(B_NO_INIT)
 {
 	bzero(&fAddr, sizeof(struct sockaddr_in));
 	SetTo(sa);
 }
 
 
-ENetAddress::ENetAddress(const struct in_addr addr, euint16 port)
-	: EArchivable(), fStatus(E_NO_INIT)
+BNetAddress::BNetAddress(const struct in_addr addr, b_uint16 port)
+	: BArchivable(), fStatus(B_NO_INIT)
 {
 	bzero(&fAddr, sizeof(struct sockaddr_in));
 	SetTo(addr, port);
 }
 
 
-ENetAddress::ENetAddress(euint32 addr, euint16 port)
-	: EArchivable(), fStatus(E_NO_INIT)
+BNetAddress::BNetAddress(b_uint32 addr, b_uint16 port)
+	: BArchivable(), fStatus(B_NO_INIT)
 {
 	bzero(&fAddr, sizeof(struct sockaddr_in));
 	SetTo(addr, port);
 }
 
 
-ENetAddress::ENetAddress(const ENetAddress &from)
-	: EArchivable(), fStatus(E_NO_INIT)
+BNetAddress::BNetAddress(const BNetAddress &from)
+	: BArchivable(), fStatus(B_NO_INIT)
 {
 	bzero(&fAddr, sizeof(struct sockaddr_in));
-	ENetAddress::operator=(from);
+	BNetAddress::operator=(from);
 }
 
 
-ENetAddress::~ENetAddress()
+BNetAddress::~BNetAddress()
 {
 }
 
 
-ENetAddress::ENetAddress(const EMessage *from)
-	: EArchivable(from), fStatus(E_NO_INIT)
+BNetAddress::BNetAddress(const BMessage *from)
+	: BArchivable(from), fStatus(B_NO_INIT)
 {
 	bzero(&fAddr, sizeof(struct sockaddr_in));
 	// TODO
 }
 
 
-e_status_t
-ENetAddress::Archive(EMessage *into, bool deep) const
+b_status_t
+BNetAddress::Archive(BMessage *into, bool deep) const
 {
-	if(!into) return E_ERROR;
+	if(!into) return B_ERROR;
 
-	EArchivable::Archive(into, deep);
-	into->AddString("class", "ENetAddress");
+	BArchivable::Archive(into, deep);
+	into->AddString("class", "BNetAddress");
 
 	// TODO
 
-	return E_OK;
+	return B_OK;
 }
 
 
-EArchivable*
-ENetAddress::Instantiate(const EMessage *from)
+BArchivable*
+BNetAddress::Instantiate(const BMessage *from)
 {
-	if(e_validate_instantiation(from, "ENetAddress"))
-		return new ENetAddress(from);
+	if(b_validatb_instantiation(from, "BNetAddress"))
+		return new BNetAddress(from);
 	return NULL;
 }
 
 
-e_status_t
-ENetAddress::InitCheck() const
+b_status_t
+BNetAddress::InitCheck() const
 {
 	return fStatus;
 }
 
 
-ENetAddress&
-ENetAddress::operator=(const ENetAddress &addr)
+BNetAddress&
+BNetAddress::operator=(const BNetAddress &addr)
 {
 	fStatus = addr.fStatus;
 	fAddr = addr.fAddr;
@@ -149,10 +149,10 @@ ENetAddress::operator=(const ENetAddress &addr)
 }
 
 
-e_status_t
-ENetAddress::SetTo(const char *hostname, euint16 port)
+b_status_t
+BNetAddress::SetTo(const char *hostname, b_uint16 port)
 {
-	if(hostname == NULL) return E_ERROR;
+	if(hostname == NULL) return B_ERROR;
 
 	struct hostent *ent = NULL;
 
@@ -160,12 +160,12 @@ ENetAddress::SetTo(const char *hostname, euint16 port)
 	ent = gethostbyname(hostname);
 #else
 
-#ifdef ETK_OS_SOLARIS
+#ifdef BHAPI_OS_SOLARIS
 	struct hostent _ent;
 	char buf[8192];
 	int err;
 	ent = gethostbyname_r(hostname, &_ent, buf, sizeof(buf), &err);
-#elif defined(ETK_OS_LINUX)
+#elif defined(BHAPI_OS_LINUX)
 	struct hostent _ent;
 	char buf[8192];
 	int err;
@@ -176,21 +176,21 @@ ENetAddress::SetTo(const char *hostname, euint16 port)
 
 #endif
 
-	if(ent == NULL) return E_ERROR;
+	if(ent == NULL) return B_ERROR;
 
-	e_status_t retVal = E_ERROR;
+	b_status_t retVal = B_ERROR;
 
 	switch(ent->h_addrtype)
 	{
 		case AF_INET:
-			fAddr.sin_addr.s_addr = *((euint32*)ent->h_addr);
+			fAddr.sin_addr.s_addr = *((b_uint32*)ent->h_addr);
 			fAddr.sin_family = AF_INET;
 			fAddr.sin_port = htons(port);
-			retVal = fStatus = E_OK;
+			retVal = fStatus = B_OK;
 			break;
 
 		default:
-			ETK_DEBUG("[NET]: %s --- unknown address type.", __PRETTY_FUNCTION__);
+			BHAPI_DEBUG("[NET]: %s --- unknown address type.", __PRETTY_FUNCTION__);
 			break;
 	}
 
@@ -198,10 +198,10 @@ ENetAddress::SetTo(const char *hostname, euint16 port)
 }
 
 
-e_status_t
-ENetAddress::SetTo(const char *hostname, const char *protocol, const char *service)
+b_status_t
+BNetAddress::SetTo(const char *hostname, const char *protocol, const char *service)
 {
-	if(hostname == NULL) return E_ERROR;
+	if(hostname == NULL) return B_ERROR;
 
 	struct servent *ent = NULL;
 
@@ -209,11 +209,11 @@ ENetAddress::SetTo(const char *hostname, const char *protocol, const char *servi
 	ent = getservbyname(service, protocol);
 #else
 
-#ifdef ETK_OS_SOLARIS
+#ifdef BHAPI_OS_SOLARIS
 	struct servent _ent;
 	char buf[8192];
 	ent = getservbyname_r(service, protocol, &_ent, buf, sizeof(buf));
-#elif defined(ETK_OS_LINUX)
+#elif defined(BHAPI_OS_LINUX)
 	struct servent _ent;
 	char buf[8192];
 	getservbyname_r(service, protocol, &_ent, buf, sizeof(buf), &ent);
@@ -223,50 +223,50 @@ ENetAddress::SetTo(const char *hostname, const char *protocol, const char *servi
 
 #endif
 
-	if(ent == NULL) return E_ERROR;
+	if(ent == NULL) return B_ERROR;
 
 	return SetTo(hostname, ntohs(ent->s_port));
 }
 
 
-e_status_t
-ENetAddress::SetTo(const struct sockaddr_in &sa)
+b_status_t
+BNetAddress::SetTo(const struct sockaddr_in &sa)
 {
 	if(sa.sin_family != AF_INET)
 	{
 		// TODO
-		return E_ERROR;
+		return B_ERROR;
 	}
 
 	fAddr = sa;
-	return(fStatus = E_OK);
+	return(fStatus = B_OK);
 }
 
 
-e_status_t
-ENetAddress::SetTo(const struct in_addr addr, euint16 port)
+b_status_t
+BNetAddress::SetTo(const struct in_addr addr, b_uint16 port)
 {
 	fAddr.sin_family = AF_INET;
 	fAddr.sin_port = htons(port);
 	fAddr.sin_addr = addr;
-	return(fStatus = E_OK);
+	return(fStatus = B_OK);
 }
 
 
-e_status_t
-ENetAddress::SetTo(euint32 addr, euint16 port)
+b_status_t
+BNetAddress::SetTo(b_uint32 addr, b_uint16 port)
 {
 	fAddr.sin_family = AF_INET;
 	fAddr.sin_port = htons(port);
 	fAddr.sin_addr.s_addr = htonl(addr);
-	return(fStatus = E_OK);
+	return(fStatus = B_OK);
 }
 
 
-e_status_t
-ENetAddress::GetAddr(char *hostname, size_t hostname_len, euint16 *port) const
+b_status_t
+BNetAddress::GetAddr(char *hostname, size_t hostname_len, b_uint16 *port) const
 {
-	if(fStatus != E_OK) return E_ERROR;
+	if(fStatus != B_OK) return B_ERROR;
 	if(!(hostname == NULL || hostname_len == 0))
 	{
 		struct hostent *ent = NULL;
@@ -275,13 +275,13 @@ ENetAddress::GetAddr(char *hostname, size_t hostname_len, euint16 *port) const
 		ent = gethostbyaddr((const char*)&fAddr.sin_addr, sizeof(struct in_addr), AF_INET);
 #else
 
-#ifdef ETK_OS_SOLARIS
+#ifdef BHAPI_OS_SOLARIS
 		struct hostent _ent;
 		char buf[8192];
 		int err;
 		ent = gethostbyaddr_r((const char*)&fAddr.sin_addr, sizeof(struct in_addr), AF_INET,
 				      &_ent, buf, sizeof(buf), &err);
-#elif defined(ETK_OS_LINUX)
+#elif defined(BHAPI_OS_LINUX)
 		struct hostent _ent;
 		char buf[8192];
 		int err;
@@ -293,7 +293,7 @@ ENetAddress::GetAddr(char *hostname, size_t hostname_len, euint16 *port) const
 
 #endif
 
-		if(ent == NULL) return E_ERROR;
+		if(ent == NULL) return B_ERROR;
 
 		if(hostname_len > 1)
 		{
@@ -304,25 +304,25 @@ ENetAddress::GetAddr(char *hostname, size_t hostname_len, euint16 *port) const
 		*(hostname + hostname_len - 1) = 0;
 	}
 	if(port) *port = ntohs(fAddr.sin_port);
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-ENetAddress::GetAddr(struct sockaddr_in &sa) const
+b_status_t
+BNetAddress::GetAddr(struct sockaddr_in &sa) const
 {
-	if(fStatus != E_OK) return E_ERROR;
+	if(fStatus != B_OK) return B_ERROR;
 	sa = fAddr;
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-ENetAddress::GetAddr(struct in_addr &addr, euint16 *port) const
+b_status_t
+BNetAddress::GetAddr(struct in_addr &addr, b_uint16 *port) const
 {
-	if(fStatus != E_OK) return E_ERROR;
+	if(fStatus != B_OK) return B_ERROR;
 	addr = fAddr.sin_addr;
 	if(port) *port = ntohs(fAddr.sin_port);
-	return E_OK;
+	return B_OK;
 }
 

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,74 +27,74 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_PRIVATE_TOKEN_H__
-#define __ETK_PRIVATE_TOKEN_H__
+#ifndef __BHAPI_PRIVATE_TOKEN_H__
+#define __BHAPI_PRIVATE_TOKEN_H__
 
 #include "./../support/Locker.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
 
-class ETokensDepot;
+class BTokensDepot;
 
 
-class _LOCAL EToken {
+class _LOCAL BToken {
 public:
-	EToken();
-	~EToken();
+    BToken();
+    ~BToken();
 
 	bool		IsValid() const;
-	euint64		Token() const;
-	e_bigtime_t	TimeStamp() const;
+    b_uint64		Token() const;
+	b_bigtime_t	TimeStamp() const;
 
-	EToken		&operator+=(euint64 vitalities);
-	EToken		&operator-=(euint64 vitalities);
-	EToken		&operator++();
-	EToken		&operator--();
-	euint64		Vitalities() const;
+    BToken		&operator+=(b_uint64 vitalities);
+    BToken		&operator-=(b_uint64 vitalities);
+    BToken		&operator++();
+    BToken		&operator--();
+    b_uint64		Vitalities() const;
 
 	void		*Data() const;
 	void		SetData(void *data);
 
-	ETokensDepot	*Depot() const;
+    BTokensDepot	*Depot() const;
 	void		MakeEmpty();
 
 private:
-	friend class ETokensDepot;
+    friend class BTokensDepot;
 
 	bool fOriginal;
-	euint64 fToken;
-	e_bigtime_t fTimeStamp;
+    b_uint64 fToken;
+	b_bigtime_t fTimeStamp;
 
-	ETokensDepot *fDepot;
+    BTokensDepot *fDepot;
 };
 
 
-class _LOCAL ETokensDepot {
+class _LOCAL BTokensDepot {
 public:
-	ETokensDepot(ELocker *locker = NULL,
+    BTokensDepot(BLocker *locker = NULL,
 		     bool deconstruct_locker = false);
-	virtual ~ETokensDepot();
+    virtual ~BTokensDepot();
 
 	// CreateToken : return a new allocated object
-	EToken		*CreateToken(void *data = NULL);
+    BToken		*CreateToken(void *data = NULL);
 	// OpenToken : return an allocated object associated with "token" when "fetch_token = NULL"
-	EToken		*OpenToken(euint64 token, EToken *fetch_token = NULL);
+    BToken		*OpenToken(b_uint64 token, BToken *fetch_token = NULL);
 	// FetchToken : return the static object associated with "token", it should be called within Lock()/Unlock()
-	EToken		*FetchToken(euint64 token);
+    BToken		*FetchToken(b_uint64 token);
 
-	void		SetLocker(ELocker *locker, bool deconstruct_locker);
-	ELocker		*Locker() const;
+	void		SetLocker(BLocker *locker, bool deconstruct_locker);
+	BLocker		*Locker() const;
 
 	bool		Lock();
 	void		Unlock();
 
 private:
-	friend class EToken;
+    friend class BToken;
 
-	ELocker *fLocker;
+	BLocker *fLocker;
 	bool fDeconstructLocker;
-	EToken fToken;
+    BToken fToken;
 
 	void *fData;
 };
@@ -102,5 +102,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_PRIVATE_TOKEN_H__ */
+#endif /* __BHAPI_PRIVATE_TOKEN_H__ */
 

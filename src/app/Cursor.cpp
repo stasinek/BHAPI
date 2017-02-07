@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,29 +28,29 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../ETK.h"
+#include "./../BE.h"
 
 #include "Cursor.h"
 
 
-static euint32 etk_get_cursor_data_bits_length(const euint8 *data)
+static b_uint32 bhapi_get_cursor_data_bits_length(const b_uint8 *data)
 {
 	if(data == NULL || data[0] == 0 || data[1] > 32) return 0;
-	euint32 rowBytes = (((euint32)data[0] * (euint32)data[1] + 0x00000007) & 0xfffffff8) >> 3;
-	return((euint32)data[0] * (euint32)rowBytes);
+	b_uint32 rowBytes = (((b_uint32)data[0] * (b_uint32)data[1] + 0x00000007) & 0xfffffff8) >> 3;
+	return((b_uint32)data[0] * (b_uint32)rowBytes);
 }
 
 
-static euint32 etk_get_cursor_data_length(const euint8 *data)
+static b_uint32 bhapi_get_cursor_data_length(const b_uint8 *data)
 {
-	euint32 bits_length = etk_get_cursor_data_bits_length(data);
+	b_uint32 bits_length = bhapi_get_cursor_data_bits_length(data);
 	return(bits_length > 0 ? (4 + 2 * bits_length) : 0);
 }
 
 
-static void* etk_duplicate_cursor_data(const euint8 *data)
+static void* bhapi_duplicate_cursor_data(const b_uint8 *data)
 {
-	size_t len = (size_t)etk_get_cursor_data_length(data);
+	size_t len = (size_t)bhapi_get_cursor_data_length(data);
 
 	void *cursor_data = (len > 0 ? malloc(len) : NULL);
 	if(cursor_data) memcpy(cursor_data, data, len);
@@ -59,37 +59,37 @@ static void* etk_duplicate_cursor_data(const euint8 *data)
 }
 
 
-ECursor::ECursor(const void *cursorData)
-	: EArchivable()
+BCursor::BCursor(const void *cursorData)
+	: BArchivable()
 {
-	fData = etk_duplicate_cursor_data((const euint8*)cursorData);
+	fData = bhapi_duplicate_cursor_data((const b_uint8*)cursorData);
 }
 
 
-ECursor::ECursor(const ECursor &cursor)
-	: EArchivable()
+BCursor::BCursor(const BCursor &cursor)
+	: BArchivable()
 {
-	fData = etk_duplicate_cursor_data((const euint8*)cursor.fData);
+	fData = bhapi_duplicate_cursor_data((const b_uint8*)cursor.fData);
 }
 
 
-ECursor::~ECursor()
+BCursor::~BCursor()
 {
 	if(fData) free(fData);
 }
 
 
-ECursor&
-ECursor::operator=(const ECursor &from)
+BCursor&
+BCursor::operator=(const BCursor &from)
 {
 	if(fData) free(fData);
-	fData = etk_duplicate_cursor_data((const euint8*)from.fData);
+	fData = bhapi_duplicate_cursor_data((const b_uint8*)from.fData);
 	return *this;
 }
 
 
 bool
-ECursor::operator==(const ECursor &other) const
+BCursor::operator==(const BCursor &other) const
 {
 	if(DataLength() == 0 && other.DataLength() == 0) return true;
 	if(DataLength() == 0 || other.DataLength() == 0 || DataLength() != other.DataLength()) return false;
@@ -98,7 +98,7 @@ ECursor::operator==(const ECursor &other) const
 
 
 bool
-ECursor::operator!=(const ECursor &other) const
+BCursor::operator!=(const BCursor &other) const
 {
 	if(DataLength() == 0 && other.DataLength() == 0) return false;
 	if(DataLength() == 0 || other.DataLength() == 0 || DataLength() != other.DataLength()) return true;
@@ -107,71 +107,71 @@ ECursor::operator!=(const ECursor &other) const
 
 
 const void*
-ECursor::Data() const
+BCursor::Data() const
 {
 	return fData;
 }
 
 
-euint32
-ECursor::DataLength() const
+b_uint32
+BCursor::DataLength() const
 {
-	return(etk_get_cursor_data_length((const euint8*)fData));
+	return(bhapi_get_cursor_data_length((const b_uint8*)fData));
 }
 
 
-euint8
-ECursor::Width() const
+b_uint8
+BCursor::Width() const
 {
-	return(fData ? *((const euint8*)fData) : 0);
+	return(fData ? *((const b_uint8*)fData) : 0);
 }
 
 
-euint8
-ECursor::Height() const
+b_uint8
+BCursor::Height() const
 {
-	return(fData ? *((const euint8*)fData) : 0);
+	return(fData ? *((const b_uint8*)fData) : 0);
 }
 
 
-euint8
-ECursor::ColorDepth() const
+b_uint8
+BCursor::ColorDepth() const
 {
-	return(fData ? *((const euint8*)fData + 1) : 0);
+	return(fData ? *((const b_uint8*)fData + 1) : 0);
 }
 
 
-euint16
-ECursor::Spot() const
+b_uint16
+BCursor::Spot() const
 {
 	if(fData == NULL) return 0;
 
-#ifdef ETK_LITTLE_ENDIAN
-	return(*((euint16*)fData + 1));
+#ifdef BHAPI_LITTLE_ENDIAN
+	return(*((b_uint16*)fData + 1));
 #else
-	const euint8 *tmp = (const euint8*)fData + 2;
-	return((euint16)tmp[0] | ((euint16)tmp[1] << 8));
+	const b_uint8 *tmp = (const b_uint8*)fData + 2;
+	return((b_uint16)tmp[0] | ((b_uint16)tmp[1] << 8));
 #endif
 }
 
 
 const void*
-ECursor::Bits() const
+BCursor::Bits() const
 {
 	if(fData == NULL) return NULL;
-	return((const void*)((const euint32*)fData + 1));
+	return((const void*)((const b_uint32*)fData + 1));
 }
 
 
 const void*
-ECursor::Mask() const
+BCursor::Mask() const
 {
 	if(fData == NULL) return NULL;
-	return((const void*)((const euint8*)fData + 4 + etk_get_cursor_data_bits_length((const euint8*)fData)));
+	return((const void*)((const b_uint8*)fData + 4 + bhapi_get_cursor_data_bits_length((const b_uint8*)fData)));
 }
 
 
-static euint8 cursor_hand[] = {
+static b_uint8 cursor_hand[] = {
 /* size, depth */
 16, 1,
 
@@ -216,7 +216,7 @@ static euint8 cursor_hand[] = {
 };
 
 
-static euint8 cursor_hand_move[] = {
+static b_uint8 cursor_hand_move[] = {
 /* size, depth */
 16, 1,
 
@@ -261,7 +261,7 @@ static euint8 cursor_hand_move[] = {
 };
 
 
-static euint8 cursor_i_beam[] = {
+static b_uint8 cursor_i_beam[] = {
 /* size, depth */
 16, 1,
 
@@ -306,11 +306,11 @@ static euint8 cursor_i_beam[] = {
 };
 
 
-_LOCAL ECursor _E_CURSOR_HAND(cursor_hand);
-_LOCAL ECursor _E_CURSOR_HAND_MOVE(cursor_hand_move);
-_LOCAL ECursor _E_CURSOR_I_BEAM(cursor_i_beam);
+_LOCAL BCursor _B_CURSOR_HAND(cursor_hand);
+_LOCAL BCursor _B_CURSOR_HAND_MOVE(cursor_hand_move);
+_LOCAL BCursor _B_CURSOR_I_BEAM(cursor_i_beam);
 
-_IMPEXP_ETK const ECursor *E_CURSOR_HAND = &_E_CURSOR_HAND;
-_IMPEXP_ETK const ECursor *E_CURSOR_HAND_MOVE = &_E_CURSOR_HAND_MOVE;
-_IMPEXP_ETK const ECursor *E_CURSOR_I_BEAM = &_E_CURSOR_I_BEAM;
+_IMPEXP_BHAPI const BCursor *B_CURSOR_HAND = &_B_CURSOR_HAND;
+_IMPEXP_BHAPI const BCursor *B_CURSOR_HAND_MOVE = &_B_CURSOR_HAND_MOVE;
+_IMPEXP_BHAPI const BCursor *B_CURSOR_I_BEAM = &_B_CURSOR_I_BEAM;
 

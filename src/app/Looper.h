@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_LOOPER_H__
-#define __ETK_LOOPER_H__
+#ifndef __BHAPI_LOOPER_H__
+#define __BHAPI_LOOPER_H__
 
 #include "./../support/List.h"
 #include "./../kernel/OS.h"
@@ -40,77 +40,77 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class EApplication;
-class EMessenger;
+class BApplication;
+class BMessenger;
 
-class _IMPEXP_ETK ELooper : public EHandler {
+class _IMPEXP_BHAPI BLooper : public BHandler {
 public:
-	ELooper(const char *name = NULL,
-		eint32 priority = E_NORMAL_PRIORITY);
-	virtual ~ELooper();
+	BLooper(const char *name = NULL,
+		b_int32 priority = B_NORMAL_PRIORITY);
+	virtual ~BLooper();
 
 	// Archiving
-	ELooper(const EMessage *from);
-	virtual e_status_t Archive(EMessage *into, bool deep = true) const;
-	static EArchivable *Instantiate(const EMessage *from);
+	BLooper(const BMessage *from);
+	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+	static BArchivable *Instantiate(const BMessage *from);
 
-	void		AddHandler(EHandler *handler);
-	bool		RemoveHandler(EHandler *handler);
-	eint32		CountHandlers() const;
-	EHandler	*HandlerAt(eint32 index) const;
-	eint32		IndexOf(EHandler *handler) const;
+	void		AddHandler(BHandler *handler);
+	bool		RemoveHandler(BHandler *handler);
+	b_int32		CountHandlers() const;
+	BHandler	*HandlerAt(b_int32 index) const;
+	b_int32		IndexOf(BHandler *handler) const;
 
-	EHandler	*PreferredHandler() const;
-	void		SetPreferredHandler(EHandler *handler);
+	BHandler	*PreferredHandler() const;
+	void		SetPreferredHandler(BHandler *handler);
 
 	bool		IsRunning() const;
 	virtual void	*Run();
 	virtual void	Quit();
 	virtual bool	QuitRequested();
-	ELooper*	Proxy() const;
-	bool		ProxyBy(ELooper *proxy);
+	BLooper*	Proxy() const;
+	bool		ProxyBy(BLooper *proxy);
 
-	e_thread_id	Thread() const;
+	b_thread_id	Thread() const;
 
 	bool		Lock();
 	void		Unlock();
-	e_status_t	LockWithTimeout(e_bigtime_t microseconds_timeout);
+	b_status_t	LockWithTimeout(b_bigtime_t microseconds_timeout);
 
-	eint64		CountLocks() const;
+	b_int64		CountLocks() const;
 	bool		IsLockedByCurrentThread() const;
 
-	virtual void	DispatchMessage(EMessage *msg, EHandler *target);
+	virtual void	DispatchMessage(BMessage *msg, BHandler *target);
 
 	// Empty functions BEGIN --- just for derivative class
-	virtual void	MessageReceived(EMessage *msg);
+	virtual void	MessageReceived(BMessage *msg);
 	// Empty functions END
 
-	EMessage	*CurrentMessage() const;
-	EMessage	*DetachCurrentMessage();
-	EMessageQueue	*MessageQueue() const;
+	BMessage	*CurrentMessage() const;
+	BMessage	*DetachCurrentMessage();
+	BMessageQueue	*MessageQueue() const;
 
-	e_status_t	PostMessage(euint32 command);
-	e_status_t	PostMessage(const EMessage *message);
-	e_status_t	PostMessage(euint32 command,
-				    EHandler *handler,
-				    EHandler *reply_to = NULL);
-	e_status_t	PostMessage(const EMessage *message,
-				    EHandler *handler,
-				    EHandler *reply_to = NULL);
+	b_status_t	PostMessage(b_uint32 command);
+	b_status_t	PostMessage(const BMessage *message);
+	b_status_t	PostMessage(b_uint32 command,
+				    BHandler *handler,
+				    BHandler *reply_to = NULL);
+	b_status_t	PostMessage(const BMessage *message,
+				    BHandler *handler,
+				    BHandler *reply_to = NULL);
 
-	virtual bool	AddCommonFilter(EMessageFilter *filter);
-	virtual bool	RemoveCommonFilter(EMessageFilter *filter);
-	virtual bool	SetCommonFilterList(const EList *filterList);
-	const EList	*CommonFilterList() const;
+	virtual bool	AddCommonFilter(BMessageFilter *filter);
+	virtual bool	RemoveCommonFilter(BMessageFilter *filter);
+	virtual bool	SetCommonFilterList(const BList *filterList);
+	const BList	*CommonFilterList() const;
 
-	static ELooper	*LooperForThread(e_thread_id tid);
+	static BLooper	*LooperForThread(b_thread_id tid);
 
 protected:
 	// NextLooperMessage & DispatchLooperMessage: called from task of looper, like below
 	//	while(true)
 	//	{
 	//		...
-	//		EMessage *aMsg = NextLooperMessage(E_INFINITE_TIMEOUT);
+	//		BMessage *aMsg = NextLooperMessage(B_INFINITE_TIMEOUT);
 	//
 	//		if(aMsg == NULL) /* after "this->QuitRequested()" return "true" or proxy deconstructing. */
 	//		{
@@ -124,55 +124,55 @@ protected:
 	//		}
 	//		...
 	//	}
-	EMessage	*NextLooperMessage(e_bigtime_t timeout = E_INFINITE_TIMEOUT);
-	void		DispatchLooperMessage(EMessage *msg);
+	BMessage	*NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT);
+	void		DispatchLooperMessage(BMessage *msg);
 
 private:
-	friend class EHandler;
-	friend class EApplication;
-	friend class EMessenger;
-	friend e_status_t etk_lock_looper_of_handler(euint64 token, e_bigtime_t timeout);
+	friend class BHandler;
+	friend class BApplication;
+	friend class BMessenger;
+	friend b_status_t bhapi_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
 
 	bool fDeconstructing;
-	ELooper *fProxy;
-	EList fClients;
+	BLooper *fProxy;
+	BList fClients;
 
-	eint32 fThreadPriority;
+	b_int32 fThreadPriority;
 
-	eint32 fHandlersCount;
-	EHandler *fPreferredHandler;
+	b_int32 fHandlersCount;
+	BHandler *fPreferredHandler;
 
 	void *fLocker;
-	eint64 fLocksCount;
+	b_int64 fLocksCount;
 
 	void *fThread;
 	void *fSem;
 
-	EMessageQueue *fMessageQueue;
-	EMessage *fCurrentMessage;
+	BMessageQueue *fMessageQueue;
+	BMessage *fCurrentMessage;
 
-	static e_status_t _task(void*);
-	static e_status_t _taskLooper(ELooper*, void*);
+	static b_status_t _task(void*);
+	static b_status_t _taskLooper(BLooper*, void*);
 	static void _taskError(void*);
 
-	static EList sLooperList;
+	static BList sLooperList;
 
-	EHandler *_MessageTarget(const EMessage *msg, bool *preferred);
-	e_status_t _PostMessage(const EMessage *msg, euint64 handlerToken, euint64 replyToken, e_bigtime_t timeout);
+	BHandler *_MessageTarget(const BMessage *msg, bool *preferred);
+	b_status_t _PostMessage(const BMessage *msg, b_uint64 handlerToken, b_uint64 replyToken, b_bigtime_t timeout);
 
-	ELooper *_Proxy() const;
-	bool _ProxyBy(ELooper *proxy);
-	ELooper *_GetNextClient(ELooper *client) const;
+	BLooper *_Proxy() const;
+	bool _ProxyBy(BLooper *proxy);
+	BLooper *_GetNextClient(BLooper *client) const;
 
 	bool *fThreadExited;
 
-	EList fCommonFilters;
-	void _FilterAndDispatchMessage(EMessage *msg, EHandler *target);
+	BList fCommonFilters;
+	void _FilterAndDispatchMessage(BMessage *msg, BHandler *target);
 
 	virtual bool	IsDependsOnOthersWhenQuitRequested() const;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_LOOPER_H__ */
+#endif /* __BHAPI_LOOPER_H__ */
 

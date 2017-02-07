@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,7 +24,7 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  * File: TextControl.cpp
- * Description: ETextControl --- display a labeled field could deliver a message as modifying
+ * Description: BTextControl --- display a labeled field could deliver a message as modifying
  * 
  * --------------------------------------------------------------------------*/
 
@@ -35,25 +35,25 @@
 #include "TextControl.h"
 
 
-ETextControl::ETextControl(ERect frame, const char *name,
-			   const char *label, const char *text, EMessage *message,
-			   euint32 resizeMode, euint32 flags)
-	: ETextEditable(frame, name, text, message, resizeMode, flags),
-	  fLabelAlignment(E_ALIGN_LEFT), fDivider(-1), fModificationMessage(NULL)
+BTextControl::BTextControl(BRect frame, const char *name,
+			   const char *label, const char *text, BMessage *message,
+			   b_uint32 resizeMode, b_uint32 flags)
+	: BTextEditable(frame, name, text, message, resizeMode, flags),
+	  fLabelAlignment(B_ALIGN_LEFT), fDivider(-1), fModificationMessage(NULL)
 {
-	SetTextAlignment(E_ALIGN_LEFT);
+	SetTextAlignment(B_ALIGN_LEFT);
 	SetLabel(label);
 }
 
 
-ETextControl::~ETextControl()
+BTextControl::~BTextControl()
 {
 	if(fModificationMessage) delete fModificationMessage;
 }
 
 
 void
-ETextControl::SetDivider(float divider)
+BTextControl::SetDivider(float divider)
 {
 	if(fDivider < 0 && divider < 0) return;
 
@@ -61,13 +61,13 @@ ETextControl::SetDivider(float divider)
 	{
 		fDivider = divider;
 
-		EFont font;
+		BFont font;
 		GetFont(&font);
-		e_font_height fontHeight;
+		b_font_height fontHeight;
 		font.GetHeight(&fontHeight);
 		float sHeight = fontHeight.ascent + fontHeight.descent;
 
-		ERect margins(1, 1, 1, 1);
+		BRect margins(1, 1, 1, 1);
 		margins.left += (fDivider >= 0 ? fDivider : max_c(font.StringWidth(Label()), 0)) + UnitsPerPixel();
 		if(sHeight + 2.f * UnitsPerPixel() > Frame().Height())
 			margins.top = margins.bottom = (sHeight - Frame().Height()) / 2.f + UnitsPerPixel();
@@ -77,14 +77,14 @@ ETextControl::SetDivider(float divider)
 
 
 float
-ETextControl::Divider() const
+BTextControl::Divider() const
 {
 	return fDivider;
 }
 
 
 void
-ETextControl::SetModificationMessage(EMessage *msg)
+BTextControl::SetModificationMessage(BMessage *msg)
 {
 	if(msg == fModificationMessage) return;
 	if(fModificationMessage) delete fModificationMessage;
@@ -92,31 +92,31 @@ ETextControl::SetModificationMessage(EMessage *msg)
 }
 
 
-EMessage*
-ETextControl::ModificationMessage() const
+BMessage*
+BTextControl::ModificationMessage() const
 {
 	return fModificationMessage;
 }
 
 
 void
-ETextControl::SetText(const char *text)
+BTextControl::SetText(const char *text)
 {
-	ETextEditable::SetText(text);
+	BTextEditable::SetText(text);
 	if(fModificationMessage != NULL) Invoke(fModificationMessage);
 }
 
 
 void
-ETextControl::SetLabel(const char *label)
+BTextControl::SetLabel(const char *label)
 {
-	ERect margins(1, 1, 1, 1);
+	BRect margins(1, 1, 1, 1);
 
-	EControl::SetLabel(label);
+	BControl::SetLabel(label);
 
-	EFont font;
+	BFont font;
 	GetFont(&font);
-	e_font_height fontHeight;
+	b_font_height fontHeight;
 	font.GetHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 	margins.left += (fDivider >= 0 ? fDivider : max_c(font.StringWidth(Label()), 0)) + UnitsPerPixel();
@@ -128,24 +128,24 @@ ETextControl::SetLabel(const char *label)
 
 
 void
-ETextControl::Draw(ERect updateRect)
+BTextControl::Draw(BRect updateRect)
 {
 	if(Label() != NULL && fDivider != 0 && !IsFocusChanging())
 	{
-		EFont font;
+		BFont font;
 		GetFont(&font);
-		e_font_height fontHeight;
+		b_font_height fontHeight;
 		font.GetHeight(&fontHeight);
 		float sHeight = fontHeight.ascent + fontHeight.descent;
 
-		ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+		BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 		rect.right = (fDivider >= 0 ? fDivider : max_c(font.StringWidth(Label()), 0));
 
-		EPoint penLocation;
+		BPoint penLocation;
 
-		if(fLabelAlignment == E_ALIGN_LEFT || fDivider < 0)
+		if(fLabelAlignment == B_ALIGN_LEFT || fDivider < 0)
 			penLocation.x = 0;
-		else if(fLabelAlignment == E_ALIGN_RIGHT)
+		else if(fLabelAlignment == B_ALIGN_RIGHT)
 			penLocation.x = rect.right - max_c(font.StringWidth(Label()), 0);
 		else
 			penLocation.x = (rect.right - max_c(font.StringWidth(Label()), 0)) / 2;
@@ -155,23 +155,23 @@ ETextControl::Draw(ERect updateRect)
 
 		PushState();
 		ConstrainClippingRegion(rect);
-		SetHighColor(IsEnabled() ? e_ui_color(E_PANEL_TEXT_COLOR) : e_ui_color(E_SHINE_COLOR).disable(ViewColor()));
+		SetHighColor(IsEnabled() ? b_ui_color(B_PANEL_TEXT_COLOR) : b_ui_color(B_SHINE_COLOR).disable(ViewColor()));
 		SetLowColor(ViewColor());
 		DrawString(Label(), penLocation);
 		if(!IsEnabled())
 		{
-			SetHighColor(e_ui_color(E_SHADOW_COLOR).disable(ViewColor()));
-			DrawString(Label(), penLocation - EPoint(1, 1));
+			SetHighColor(b_ui_color(B_SHADOW_COLOR).disable(ViewColor()));
+			DrawString(Label(), penLocation - BPoint(1, 1));
 		}
 		PopState();
 	}
 
-	ETextEditable::Draw(updateRect);
+	BTextEditable::Draw(updateRect);
 
 	if(IsFocusChanging()) return;
 
-	e_rgb_color shineColor = e_ui_color(E_SHINE_COLOR);
-	e_rgb_color shadowColor = e_ui_color(E_SHADOW_COLOR);
+	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
+	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
 
 	if(!IsEnabled())
 	{
@@ -181,7 +181,7 @@ ETextControl::Draw(ERect updateRect)
 
 	float l, t, r, b;
 	GetMargins(&l, &t, &r, &b);
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	rect.left += l;
 	rect.top += t;
 	rect.right -= r;
@@ -197,23 +197,23 @@ ETextControl::Draw(ERect updateRect)
 
 
 void
-ETextControl::GetPreferredSize(float *width, float *height)
+BTextControl::GetPreferredSize(float *width, float *height)
 {
 	if(width) *width = 0;
 	if(height) *height = 0;
 
-	ETextEditable::GetPreferredSize(width, height);
+	BTextEditable::GetPreferredSize(width, height);
 
 	if(width != NULL)
 	{
-		EFont font;
+		BFont font;
 		GetFont(&font);
 		*width += (fDivider >= 0 ? fDivider : max_c(font.StringWidth(Label()), 0)) + 20;
 	}
 
 	if(height != NULL)
 	{
-		e_font_height fontHeight;
+		b_font_height fontHeight;
 		GetFontHeight(&fontHeight);
 		float sHeight = fontHeight.ascent + fontHeight.descent;
 		if(sHeight + 10 > *height) *height = sHeight + 10;
@@ -222,7 +222,7 @@ ETextControl::GetPreferredSize(float *width, float *height)
 
 
 void
-ETextControl::SetAlignment(e_alignment forLabel, e_alignment forText)
+BTextControl::SetAlignment(b_alignment forLabel, b_alignment forText)
 {
 	if(forLabel == fLabelAlignment && TextAlignment() == forText) return;
 
@@ -234,7 +234,7 @@ ETextControl::SetAlignment(e_alignment forLabel, e_alignment forText)
 
 
 void
-ETextControl::GetAlignment(e_alignment *forLabel, e_alignment *forText) const
+BTextControl::GetAlignment(b_alignment *forLabel, b_alignment *forText) const
 {
 	if(forLabel) *forLabel = fLabelAlignment;
 	if(forText) *forText = TextAlignment();
@@ -242,36 +242,36 @@ ETextControl::GetAlignment(e_alignment *forLabel, e_alignment *forText) const
 
 
 void
-ETextControl::KeyDown(const char *bytes, eint32 numBytes)
+BTextControl::KeyDown(const char *bytes, b_int32 numBytes)
 {
-	EMessage *msg = (Window() == NULL ? NULL : Window()->CurrentMessage());
+	BMessage *msg = (Window() == NULL ? NULL : Window()->CurrentMessage());
 
-	eint32 modifiers = 0;
+	b_int32 modifiers = 0;
 	if(msg != NULL) msg->FindInt32("modifiers", &modifiers);
 
-	if(!(numBytes != 1 || msg == NULL || msg->what != E_KEY_DOWN || !IsEnabled() || !IsEditable() || !(modifiers & E_CONTROL_KEY)))
+	if(!(numBytes != 1 || msg == NULL || msg->what != B_KEY_DOWN || !IsEnabled() || !IsEditable() || !(modifiers & B_CONTROL_KEY)))
 	{
 		if(*bytes == 'c' || *bytes == 'C' || *bytes == 'x' || *bytes == 'X')
 		{
-			eint32 startPos, endPos;
+			b_int32 startPos, endPos;
 			char *selText = NULL;
-			EMessage *clipMsg = NULL;
+			BMessage *clipMsg = NULL;
 
-			if(GetSelection(&startPos, &endPos) == false || etk_clipboard.Lock() == false) return;
-			if((selText = DuplicateText(startPos, endPos)) != NULL && (clipMsg = etk_clipboard.Data()) != NULL)
+			if(GetSelection(&startPos, &endPos) == false || bhapi_clipboard.Lock() == false) return;
+			if((selText = DuplicateText(startPos, endPos)) != NULL && (clipMsg = bhapi_clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
 				ssize_t textLen = 0;
-				if(clipMsg->FindData("text/plain", E_MIME_TYPE, (const void**)&text, &textLen) == false ||
+				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
 				   text == NULL || textLen != (ssize_t)strlen(selText) || strncmp(text, selText, (size_t)textLen) != 0)
 				{
-					etk_clipboard.Clear();
-					clipMsg->AddData("text/plain", E_MIME_TYPE, selText, strlen(selText));
-					etk_clipboard.Commit();
+					bhapi_clipboard.Clear();
+					clipMsg->AddData("text/plain", B_MIME_TYPE, selText, strlen(selText));
+					bhapi_clipboard.Commit();
 				}
 			}
 			if(selText) free(selText);
-			etk_clipboard.Unlock();
+			bhapi_clipboard.Unlock();
 
 			if(*bytes == 'x' || *bytes == 'X')
 			{
@@ -283,22 +283,22 @@ ETextControl::KeyDown(const char *bytes, eint32 numBytes)
 		}
 		else if(*bytes == 'v' || *bytes == 'V')
 		{
-			EString str;
-			EMessage *clipMsg = NULL;
+			BString str;
+			BMessage *clipMsg = NULL;
 
-			if(etk_clipboard.Lock() == false) return;
-			if((clipMsg = etk_clipboard.Data()) != NULL)
+			if(bhapi_clipboard.Lock() == false) return;
+			if((clipMsg = bhapi_clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
 				ssize_t len = 0;
-				if(clipMsg->FindData("text/plain", E_MIME_TYPE, (const void**)&text, &len)) str.SetTo(text, (eint32)len);
+				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &len)) str.SetTo(text, (b_int32)len);
 			}
-			etk_clipboard.Unlock();
+			bhapi_clipboard.Unlock();
 
 			if(str.Length() <= 0) return;
 
-			eint32 curPos = Position();
-			eint32 startPos, endPos;
+			b_int32 curPos = Position();
+			b_int32 startPos, endPos;
 			if(GetSelection(&startPos, &endPos)) {RemoveText(startPos, endPos); curPos = startPos;}
 			InsertText(str.String(), -1, curPos);
 			SetPosition(curPos + str.CountChars());
@@ -307,6 +307,6 @@ ETextControl::KeyDown(const char *bytes, eint32 numBytes)
 		}
 	}
 
-	ETextEditable::KeyDown(bytes, numBytes);
+	BTextEditable::KeyDown(bytes, numBytes);
 }
 

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,71 +27,72 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_STRING_ARRAY_H__
-#define __ETK_STRING_ARRAY_H__
-
-#include "List.h"
-#include "String.h"
+#ifndef __BHAPI_STRING_ARRAY_H__
+#define __BHAPI_STRING_ARRAY_H__
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EStringArray {
+#include "SupportDefs.h"
+class BString;
+#include "List.h"
+
+class _IMPEXP_BHAPI BStringArray {
 public:
-	EStringArray();
+    BStringArray();
 
-	EStringArray(const char *string, void *attach_data = NULL); // string: first item
-	EStringArray(const EString &string, void *attach_data = NULL);
+    BStringArray(const char *string, void *attach_data = NULL); // string: first item
+    BStringArray(const BString &string, void *attach_data = NULL);
 
-	EStringArray(const char **array); // array: NULL-terminated array of strings
-	EStringArray(const EStringArray &array);
+    BStringArray(const char **array); // array: NULL-terminated array of strings
+    BStringArray(const BStringArray &array);
 
-	~EStringArray();
+    ~BStringArray();
 
-	EStringArray&	operator=(const char **array);
-	EStringArray&	operator=(const EStringArray &array);
+    BStringArray&	operator=(const char **array);
+    BStringArray&	operator=(const BStringArray &array);
 
-	EStringArray&	operator+=(const char *string);
-	EStringArray&	operator+=(const EString &string);
-	EStringArray&	operator+=(const char **array);
-	EStringArray&	operator+=(const EStringArray &array);
+    BStringArray&	operator+=(const char *string);
+    BStringArray&	operator+=(const BString &string);
+    BStringArray&	operator+=(const char **array);
+    BStringArray&	operator+=(const BStringArray &array);
 
 	bool		AddItem(const char *item, void *attach_data = NULL);
-	bool		AddItem(const char *item, eint32 atIndex, void *attach_data = NULL);
-	bool		AddItem(const EString &item, void *attach_data = NULL);
-	bool		AddItem(const EString &item, eint32 atIndex, void *attach_data = NULL);
-	bool		AddArray(const EStringArray &array);
-	bool		AddArray(const EStringArray &array, eint32 atIndex);
+    bool		AddItem(const char *item, b_int32 atIndex, void *attach_data = NULL);
+    bool		AddItem(const BString &item, void *attach_data = NULL);
+    bool		AddItem(const BString &item, b_int32 atIndex, void *attach_data = NULL);
+    bool		AddArray(const BStringArray &array);
+    bool		AddArray(const BStringArray &array, b_int32 atIndex);
 
-	bool		RemoveItem(eint32 index);
-	bool		RemoveItems(eint32 index, eint32 count);
+    bool		RemoveItem(b_int32 index);
+    bool		RemoveItems(b_int32 index, b_int32 count);
 
-	bool		ReplaceItem(eint32 index, const char *string, void *attach_data = NULL);
-	bool		ReplaceItem(eint32 index, const EString &string, void *attach_data = NULL);
+    bool		ReplaceItem(b_int32 index, const char *string, void *attach_data = NULL);
+    bool		ReplaceItem(b_int32 index, const BString &string, void *attach_data = NULL);
 
-	EStringArray&	SortItems(int (*cmp)(const EString**, const EString**));
-	bool		SwapItems(eint32 indexA, eint32 indexB);
-	bool		MoveItem(eint32 fromIndex, eint32 toIndex);
+    BStringArray&	SortItems(int (*cmp)(const BString**, const BString**));
+    bool		SwapItems(b_int32 indexA, b_int32 indexB);
+    bool		MoveItem(b_int32 fromIndex, b_int32 toIndex);
 
 	bool		IsEmpty() const;
 	void		MakeEmpty();
 
-	const EString*	ItemAt(eint32 index, void **attach_data = NULL) const;
-	const EString*	FirstItem(void **attach_data = NULL) const;
-	const EString*	LastItem(void **attach_data = NULL) const;
+    const BString*	ItemAt(b_int32 index, void **attach_data = NULL) const;
+    const BString*	FirstItem(void **attach_data = NULL) const;
+    const BString*	LastItem(void **attach_data = NULL) const;
 
-	eint32		CountItems() const;
+    b_int32		CountItems() const;
 
 	// return value: string index if found, else return -1
-	eint32		FindString(const char *string, eint32 startIndex = 0, bool all_equal = true, bool invert = false) const;
-	eint32		FindString(const EString &string, eint32 startIndex = 0, bool all_equal = true, bool invert = false) const;
-	eint32		IFindString(const char *string, eint32 startIndex = 0, bool all_equal = true, bool invert = false) const;
-	eint32		IFindString(const EString &string, eint32 startIndex = 0, bool all_equal = true, bool invert = false) const;
+    b_int32		FindString(const char *string, b_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
+    b_int32		FindString(const BString &string, b_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
+    b_int32		IFindString(const char *string, b_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
+    b_int32		IFindString(const BString &string, b_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
 
 private:
-	EList list;
+    BList list;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_STRING_ARRAY_H__ */
+#endif /* __BHAPI_STRING_ARRAY_H__ */
 

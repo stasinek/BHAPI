@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * DirectFB Graphics Add-on for ETK++
+ * DirectFB Graphics Add-on for BHAPI++
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -35,26 +35,26 @@
 #include "etk-dfb.h"
 
 
-EDFBGraphicsWindow::EDFBGraphicsWindow(EDFBGraphicsEngine *dfbEngine, eint32 x, eint32 y, euint32 w, euint32 h)
-	: EGraphicsWindow(), fFlags(0), fEngine(NULL), fTitle(NULL),
+EDFBGraphicsWindow::EDFBGraphicsWindow(EDFBGraphicsEngine *dfbEngine, b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
+	: BGraphicsWindow(), fFlags(0), fEngine(NULL), fTitle(NULL),
 	  fHandlingMove(false), fHandlingResize(false)
 {
-	if(w >= E_MAXINT32 || h >= E_MAXINT32)
+	if(w >= B_MAXINT32 || h >= B_MAXINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
 		return;
 	}
 
 	fEngine = dfbEngine;
 	if(fEngine == NULL) return;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) {fEngine = NULL; return;}
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) {fEngine = NULL; return;}
 
 	fHidden = true;
 
-	fLook = E_TITLED_WINDOW_LOOK;
-	fFeel = (e_window_feel)0;
+	fLook = B_TITLED_WINDOW_LOOK;
+	fFeel = (b_window_feel)0;
 
 	fMargins.Set(0, 0, 0, 0);
 	fOriginX = x;
@@ -64,8 +64,8 @@ EDFBGraphicsWindow::EDFBGraphicsWindow(EDFBGraphicsEngine *dfbEngine, eint32 x, 
 
 	AdjustFrameByDecoration();
 
-	e_rgb_color whiteColor = e_make_rgb_color(255, 255, 255, 255);
-	EGraphicsDrawable::SetBackgroundColor(whiteColor);
+	b_rgb_color whiteColor = b_makb_rgb_color(255, 255, 255, 255);
+	BGraphicsDrawable::SetBackgroundColor(whiteColor);
 
 	DFBWindowDescription desc;
 	desc.flags = (DFBWindowDescriptionFlags)(DWDESC_POSX | DWDESC_POSY | DWDESC_WIDTH | DWDESC_HEIGHT | DWDESC_CAPS);
@@ -78,7 +78,7 @@ EDFBGraphicsWindow::EDFBGraphicsWindow(EDFBGraphicsEngine *dfbEngine, eint32 x, 
 	if(fEngine->dfbDisplayLayer->CreateWindow(fEngine->dfbDisplayLayer, &desc, &dfbWindow) != DFB_OK ||
 	   dfbWindow->GetSurface(dfbWindow, &dfbSurface) != DFB_OK)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Unable to create window.", __PRETTY_FUNCTION__);
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Unable to create window.", __PRETTY_FUNCTION__);
 
 		if(dfbWindow) dfbWindow->Release(dfbWindow);
 		fEngine = NULL;
@@ -110,9 +110,9 @@ EDFBGraphicsWindow::~EDFBGraphicsWindow()
 {
 	if(fEngine != NULL)
 	{
-		EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-		if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK)
-			ETK_ERROR("[GRAPHICS]: %s --- Invalid graphics engine.", __PRETTY_FUNCTION__);
+		BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+		if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK)
+			BHAPI_ERROR("[GRAPHICS]: %s --- Invalid graphics engine.", __PRETTY_FUNCTION__);
 
 		fEngine->SetDFBWindowData(dfbWindow, NULL, NULL);
 
@@ -124,51 +124,51 @@ EDFBGraphicsWindow::~EDFBGraphicsWindow()
 }
 
 
-e_status_t
-EDFBGraphicsWindow::GetContactor(EMessenger *msgr)
+b_status_t
+EDFBGraphicsWindow::GetContactor(BMessenger *msgr)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	if(msgr) *msgr = fMsgr;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::ContactTo(const EMessenger *msgr)
+b_status_t
+EDFBGraphicsWindow::ContactTo(const BMessenger *msgr)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	if(msgr) fMsgr = *msgr;
-	else fMsgr = EMessenger();
+	else fMsgr = BMessenger();
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::SetBackgroundColor(e_rgb_color bkColor)
+b_status_t
+EDFBGraphicsWindow::SetBackgroundColor(b_rgb_color bkColor)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	e_rgb_color c = BackgroundColor();
+	b_rgb_color c = BackgroundColor();
 	if(c != bkColor)
 	{
-		EGraphicsDrawable::SetBackgroundColor(c);
+		BGraphicsDrawable::SetBackgroundColor(c);
 		dfbSurface->Clear(dfbSurface, c.red, c.green, c.blue, 255);
 		RenderDecoration();
 #if 0
-		// redraw all will process within EWindow
+		// redraw all will process within BWindow
 		DFBUserEvent evt;
 		evt.clazz = DFEC_USER;
 		evt.type = DUET_WINDOWREDRAWALL;
@@ -177,24 +177,24 @@ EDFBGraphicsWindow::SetBackgroundColor(e_rgb_color bkColor)
 #endif
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::SetFlags(euint32 flags)
+b_status_t
+EDFBGraphicsWindow::SetFlags(b_uint32 flags)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	if(fFlags != flags)
 	{
 		fFlags = flags;
-		if(fFlags & E_AVOID_FOCUS)
+		if(fFlags & B_AVOID_FOCUS)
 		{
-			if(fEngine->dfbCurFocusWin == dfbWindowID) fEngine->dfbCurFocusWin = E_MAXUINT;
+			if(fEngine->dfbCurFocusWin == dfbWindowID) fEngine->dfbCurFocusWin = B_MAXUINT;
 			dfbWindow->SetOpacity(dfbWindow, 0xff);
 		}
 		else
@@ -203,17 +203,17 @@ EDFBGraphicsWindow::SetFlags(euint32 flags)
 		}
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::SetLook(e_window_look look)
+b_status_t
+EDFBGraphicsWindow::SetLook(b_window_look look)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	if(fLook != look)
 	{
@@ -247,57 +247,57 @@ EDFBGraphicsWindow::SetLook(e_window_look look)
 		fEngine->dfbEventBuffer->PostEvent(fEngine->dfbEventBuffer, DFB_EVENT(&uevt));
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::SetFeel(e_window_feel feel)
+b_status_t
+EDFBGraphicsWindow::SetFeel(b_window_feel feel)
 {
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsWindow::SetTitle(const char *title)
 {
 	if(fTitle) delete[] fTitle;
-	fTitle = (title == NULL ? NULL : EStrdup(title));
+	fTitle = (title == NULL ? NULL : b_strdup(title));
 
 	// TODO
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::SetWorkspaces(euint32 workspaces)
+b_status_t
+EDFBGraphicsWindow::SetWorkspaces(b_uint32 workspaces)
 {
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::GetWorkspaces(euint32 *workspaces)
+b_status_t
+EDFBGraphicsWindow::GetWorkspaces(b_uint32 *workspaces)
 {
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsWindow::Iconify()
 {
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsWindow::Show()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	if(fHidden)
 	{
@@ -305,24 +305,24 @@ EDFBGraphicsWindow::Show()
 //		dfbWindow->RaiseToTop(dfbWindow);
 		fHidden = false;
 
-		if(fEngine->dfbCurFocusWin == E_MAXUINT && !(fFlags & E_AVOID_FOCUS))
+		if(fEngine->dfbCurFocusWin == B_MAXUINT && !(fFlags & B_AVOID_FOCUS))
 		{
 			fEngine->dfbCurFocusWin = dfbWindowID;
 			dfbWindow->SetOpacity(dfbWindow, 0xff);
 		}
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsWindow::Hide()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	if(!fHidden)
 	{
@@ -331,48 +331,48 @@ EDFBGraphicsWindow::Hide()
 		dfbWindow->EnableEvents(dfbWindow, DWET_ALL);
 		fHidden = true;
 
-		if(fEngine->dfbCurFocusWin == dfbWindowID) fEngine->dfbCurFocusWin = E_MAXUINT;
+		if(fEngine->dfbCurFocusWin == dfbWindowID) fEngine->dfbCurFocusWin = B_MAXUINT;
 		if(fEngine->dfbCurPointerGrabbed == dfbWindowID)
 		{
 			dfbWindow->UngrabPointer(dfbWindow);
-			fEngine->dfbCurPointerGrabbed = E_MAXUINT;
+			fEngine->dfbCurPointerGrabbed = B_MAXUINT;
 			fHandlingMove = false;
 			fHandlingResize = false;
 		}
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsWindow::Raise()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	if(fHidden) return E_ERROR;
+	if(fHidden) return B_ERROR;
 
 	dfbWindow->RaiseToTop(dfbWindow);
 	dfbWindow->RequestFocus(dfbWindow);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::Lower(EGraphicsWindow *_frontWin)
+b_status_t
+EDFBGraphicsWindow::Lower(BGraphicsWindow *_frontWin)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	if(fHidden) return E_ERROR;
+	if(fHidden) return B_ERROR;
 
-	EDFBGraphicsWindow *frontWin = e_cast_as(_frontWin, EDFBGraphicsWindow);
+	EDFBGraphicsWindow *frontWin = b_cast_as(_frontWin, EDFBGraphicsWindow);
 
 	if(frontWin == NULL)
 	{
@@ -382,19 +382,19 @@ EDFBGraphicsWindow::Lower(EGraphicsWindow *_frontWin)
 	{
 		dfbWindow->PutBelow(dfbWindow, frontWin->dfbWindow);
 	}
-	else return E_ERROR;
+	else return B_ERROR;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsWindow::Activate(bool state)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	if(state) dfbWindow->RequestFocus(dfbWindow);
 	else if(fEngine->dfbCurFocusWin == dfbWindowID)
@@ -406,34 +406,34 @@ EDFBGraphicsWindow::Activate(bool state)
 		fEngine->dfbEventBuffer->PostEvent(fEngine->dfbEventBuffer, DFB_EVENT(&evt));
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsWindow::GetActivatedState(bool *state) const
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	*state = (fEngine->dfbCurFocusWin == dfbWindowID);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::MoveTo(eint32 x, eint32 y)
+b_status_t
+EDFBGraphicsWindow::MoveTo(b_int32 x, b_int32 y)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	fOriginX = x - (eint32)fMargins.left;
-	fOriginY = y - (eint32)fMargins.top;
+	fOriginX = x - (b_int32)fMargins.left;
+	fOriginY = y - (b_int32)fMargins.top;
 
 	if(!fHidden)
 	{
@@ -450,26 +450,26 @@ EDFBGraphicsWindow::MoveTo(eint32 x, eint32 y)
 	evt.y = fOriginY;
 	fEngine->dfbEventBuffer->PostEvent(fEngine->dfbEventBuffer, DFB_EVENT(&evt));
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::ResizeTo(euint32 w, euint32 h)
+b_status_t
+EDFBGraphicsWindow::ResizeTo(b_uint32 w, b_uint32 h)
 {
-	if(w >= E_MAXINT32 || h >= E_MAXINT32)
+	if(w >= B_MAXINT32 || h >= B_MAXINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	fWidth = w + 1 + (euint32)fMargins.left + (euint32)fMargins.right;
-	fHeight = h + 1 + (euint32)fMargins.top + (euint32)fMargins.bottom;
+	fWidth = w + 1 + (b_uint32)fMargins.left + (b_uint32)fMargins.right;
+	fHeight = h + 1 + (b_uint32)fMargins.top + (b_uint32)fMargins.bottom;
 
 	dfbWindow->DisableEvents(dfbWindow, DWET_POSITION_SIZE);
 	dfbWindow->Resize(dfbWindow, (int)fWidth, (int)fHeight);
@@ -480,7 +480,7 @@ EDFBGraphicsWindow::ResizeTo(euint32 w, euint32 h)
 	else dfbWindow->MoveTo(dfbWindow, fOriginX, fOriginY);
 	dfbWindow->EnableEvents(dfbWindow, DWET_ALL);
 
-	e_rgb_color c = BackgroundColor();
+	b_rgb_color c = BackgroundColor();
 	dfbSurface->Clear(dfbSurface, c.red, c.green, c.blue, 255);
 	RenderDecoration();
 
@@ -494,28 +494,28 @@ EDFBGraphicsWindow::ResizeTo(euint32 w, euint32 h)
 	evt.h = (int)fHeight;
 	fEngine->dfbEventBuffer->PostEvent(fEngine->dfbEventBuffer, DFB_EVENT(&evt));
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::MoveAndResizeTo(eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EDFBGraphicsWindow::MoveAndResizeTo(b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	if(w >= E_MAXINT32 || h >= E_MAXINT32)
+	if(w >= B_MAXINT32 || h >= B_MAXINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	fOriginX = x - (eint32)fMargins.left;
-	fOriginY = y - (eint32)fMargins.top;
-	fWidth = w + 1 + (euint32)fMargins.left + (euint32)fMargins.right;
-	fHeight = h + 1 + (euint32)fMargins.top + (euint32)fMargins.bottom;
+	fOriginX = x - (b_int32)fMargins.left;
+	fOriginY = y - (b_int32)fMargins.top;
+	fWidth = w + 1 + (b_uint32)fMargins.left + (b_uint32)fMargins.right;
+	fHeight = h + 1 + (b_uint32)fMargins.top + (b_uint32)fMargins.bottom;
 
 	dfbWindow->DisableEvents(dfbWindow, DWET_POSITION_SIZE);
 	dfbWindow->Resize(dfbWindow, (int)fWidth, (int)fHeight);
@@ -526,7 +526,7 @@ EDFBGraphicsWindow::MoveAndResizeTo(eint32 x, eint32 y, euint32 w, euint32 h)
 	else dfbWindow->MoveTo(dfbWindow, fOriginX, fOriginY);
 	dfbWindow->EnableEvents(dfbWindow, DWET_ALL);
 
-	e_rgb_color c = BackgroundColor();
+	b_rgb_color c = BackgroundColor();
 	dfbSurface->Clear(dfbSurface, c.red, c.green, c.blue, 255);
 	RenderDecoration();
 
@@ -540,134 +540,134 @@ EDFBGraphicsWindow::MoveAndResizeTo(eint32 x, eint32 y, euint32 w, euint32 h)
 	evt.h = (int)fHeight;
 	fEngine->dfbEventBuffer->PostEvent(fEngine->dfbEventBuffer, DFB_EVENT(&evt));
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::SetSizeLimits(euint32 min_w, euint32 max_w, euint32 min_h, euint32 max_h)
+b_status_t
+EDFBGraphicsWindow::SetSizeLimits(b_uint32 min_w, b_uint32 max_w, b_uint32 min_h, b_uint32 max_h)
 {
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::GetSizeLimits(euint32 *min_w, euint32 *max_w, euint32 *min_h, euint32 *max_h)
+b_status_t
+EDFBGraphicsWindow::GetSizeLimits(b_uint32 *min_w, b_uint32 *max_w, b_uint32 *min_h, b_uint32 *max_h)
 {
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsWindow::GrabMouse()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	if(fEngine->dfbCurPointerGrabbed != E_MAXUINT) return E_ERROR;
+	if(fEngine->dfbCurPointerGrabbed != B_MAXUINT) return B_ERROR;
 
 	if(dfbWindow->GrabPointer(dfbWindow) == DFB_OK)
 	{
 		fEngine->dfbCurPointerGrabbed = dfbWindowID;
-		return E_OK;
+		return B_OK;
 	}
 
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsWindow::UngrabMouse()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	if(fEngine->dfbCurPointerGrabbed != dfbWindowID) return E_ERROR;
+	if(fEngine->dfbCurPointerGrabbed != dfbWindowID) return B_ERROR;
 
 	if(dfbWindow->UngrabPointer(dfbWindow) == DFB_OK)
 	{
-		fEngine->dfbCurPointerGrabbed = E_MAXUINT;
+		fEngine->dfbCurPointerGrabbed = B_MAXUINT;
 		fHandlingMove = false;
 		fHandlingResize = false;
-		return E_OK;
+		return B_OK;
 	}
 
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsWindow::GrabKeyboard()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return(dfbWindow->GrabKeyboard(dfbWindow) == DFB_OK ? E_OK : E_ERROR);
+	return(dfbWindow->GrabKeyboard(dfbWindow) == DFB_OK ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsWindow::UngrabKeyboard()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return(dfbWindow->UngrabKeyboard(dfbWindow) == DFB_OK ? E_OK : E_ERROR);
+	return(dfbWindow->UngrabKeyboard(dfbWindow) == DFB_OK ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::QueryMouse(eint32 *x, eint32 *y, eint32 *buttons)
+b_status_t
+EDFBGraphicsWindow::QueryMouse(b_int32 *x, b_int32 *y, b_int32 *buttons)
 {
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::CopyTo(EGraphicsContext *dc,
-		           EGraphicsDrawable *dstDrawable,
-			   eint32 x, eint32 y, euint32 w, euint32 h,
-			   eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EDFBGraphicsWindow::CopyTo(BGraphicsContext *dc,
+		           BGraphicsDrawable *dstDrawable,
+			   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+			   b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
-	if(w >= E_MAXINT32 || h >= E_MAXINT32 || dstW >= E_MAXINT32 || dstH >= E_MAXINT32)
+	if(w >= B_MAXINT32 || h >= B_MAXINT32 || dstW >= B_MAXINT32 || dstH >= B_MAXINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(fEngine == NULL || dc == NULL || dstDrawable == NULL) return E_ERROR;
+	if(fEngine == NULL || dc == NULL || dstDrawable == NULL) return B_ERROR;
 
-	if(dc->DrawingMode() != E_OP_COPY)
+	if(dc->DrawingMode() != B_OP_COPY)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- FIXME: unsupported drawing mode.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- FIXME: unsupported drawing mode.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	EDFBGraphicsWindow *win = NULL;
 	EDFBGraphicsDrawable *pix = NULL;
 	IDirectFBSurface *destSurface = NULL;
-	ERect margins(0, 0, 0, 0);
+	BRect margins(0, 0, 0, 0);
 
-	if((win = e_cast_as(dstDrawable, EDFBGraphicsWindow)) != NULL) {destSurface = win->dfbSurface; margins = win->fMargins;}
-	else if((pix = e_cast_as(dstDrawable, EDFBGraphicsDrawable)) != NULL) destSurface = pix->dfbSurface;
+	if((win = b_cast_as(dstDrawable, EDFBGraphicsWindow)) != NULL) {destSurface = win->dfbSurface; margins = win->fMargins;}
+	else if((pix = b_cast_as(dstDrawable, EDFBGraphicsDrawable)) != NULL) destSurface = pix->dfbSurface;
 
-	if(destSurface == NULL) return E_ERROR;
+	if(destSurface == NULL) return B_ERROR;
 
 	DFBRegion *dfbRegions = NULL;
 	int nRegions = 0;
 
-	if(fEngine->ConvertRegion(dc->Clipping(), &dfbRegions, &nRegions) == false) return E_ERROR;
+	if(fEngine->ConvertRegion(dc->Clipping(), &dfbRegions, &nRegions) == false) return B_ERROR;
 
 	for(int i = 0; i < nRegions; i++)
 	{
@@ -692,230 +692,230 @@ EDFBGraphicsWindow::CopyTo(EGraphicsContext *dc,
 
 	free(dfbRegions);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDFBGraphicsWindow::DrawPixmap(EGraphicsContext *dc, const EPixmap *pix,
-			       eint32 x, eint32 y, euint32 w, euint32 h,
-			       eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EDFBGraphicsWindow::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
+			       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+			       b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_draw_epixmap(dfbSurface, dc, pix, x, y, w, h, dstX, dstY, dstW, dstH, &fMargins);
+	return bhapi_dfb_draw_epixmap(dfbSurface, dc, pix, x, y, w, h, dstX, dstY, dstW, dstH, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::StrokePoint(EGraphicsContext *dc,
-				eint32 x, eint32 y)
+b_status_t
+EDFBGraphicsWindow::StrokePoint(BGraphicsContext *dc,
+				b_int32 x, b_int32 y)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_point(dfbSurface, dc, x, y, &fMargins);
+	return bhapi_dfb_stroke_point(dfbSurface, dc, x, y, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::StrokePoints(EGraphicsContext *dc,
-				 const eint32 *pts, eint32 count)
+b_status_t
+EDFBGraphicsWindow::StrokePoints(BGraphicsContext *dc,
+				 const b_int32 *pts, b_int32 count)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_points(dfbSurface, dc, pts, count, &fMargins);
+	return bhapi_dfb_stroke_points(dfbSurface, dc, pts, count, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::StrokePoints_Colors(EGraphicsContext *dc,
-					const EList *ptsArrayLists, eint32 arrayCount,
-					const e_rgb_color *highColors)
+b_status_t
+EDFBGraphicsWindow::StrokePoints_Colors(BGraphicsContext *dc,
+					const BList *ptsArrayLists, b_int32 arrayCount,
+					const b_rgb_color *highColors)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_points_color(dfbSurface, dc, ptsArrayLists, arrayCount, highColors, &fMargins);
+	return bhapi_dfb_stroke_points_color(dfbSurface, dc, ptsArrayLists, arrayCount, highColors, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::StrokePoints_Alphas(EGraphicsContext *dc,
-					const eint32 *pts, const euint8 *alpha, eint32 count)
+b_status_t
+EDFBGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *dc,
+					const b_int32 *pts, const b_uint8 *alpha, b_int32 count)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_points_alphas(dfbSurface, dc, pts, alpha, count, &fMargins);
+	return bhapi_dfb_stroke_points_alphas(dfbSurface, dc, pts, alpha, count, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::StrokeLine(EGraphicsContext *dc,
-			       eint32 x0, eint32 y0, eint32 x1, eint32 y1)
+b_status_t
+EDFBGraphicsWindow::StrokeLine(BGraphicsContext *dc,
+			       b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_line(dfbSurface, dc, x0, y0, x1, y1, &fMargins);
+	return bhapi_dfb_stroke_line(dfbSurface, dc, x0, y0, x1, y1, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::StrokePolygon(EGraphicsContext *dc,
-				  const eint32 *pts, eint32 count, bool closed)
+b_status_t
+EDFBGraphicsWindow::StrokePolygon(BGraphicsContext *dc,
+				  const b_int32 *pts, b_int32 count, bool closed)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_polygon(dfbSurface, dc, pts, count, closed, &fMargins);
+	return bhapi_dfb_stroke_polygon(dfbSurface, dc, pts, count, closed, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::FillPolygon(EGraphicsContext *dc,
-				const eint32 *pts, eint32 count)
+b_status_t
+EDFBGraphicsWindow::FillPolygon(BGraphicsContext *dc,
+				const b_int32 *pts, b_int32 count)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_fill_polygon(dfbSurface, dc, pts, count, &fMargins);
+	return bhapi_dfb_fill_polygon(dfbSurface, dc, pts, count, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::StrokeRect(EGraphicsContext *dc,
-			       eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EDFBGraphicsWindow::StrokeRect(BGraphicsContext *dc,
+			       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_rect(dfbSurface, dc, x, y, w, h, &fMargins);
+	return bhapi_dfb_stroke_rect(dfbSurface, dc, x, y, w, h, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::FillRect(EGraphicsContext *dc,
-			     eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EDFBGraphicsWindow::FillRect(BGraphicsContext *dc,
+			     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_fill_rect(dfbSurface, dc, x, y, w, h, &fMargins);
+	return bhapi_dfb_fill_rect(dfbSurface, dc, x, y, w, h, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::StrokeRects(EGraphicsContext *dc,
-				const eint32 *rects, eint32 count)
+b_status_t
+EDFBGraphicsWindow::StrokeRects(BGraphicsContext *dc,
+				const b_int32 *rects, b_int32 count)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_rects(dfbSurface, dc, rects, count, &fMargins);
+	return bhapi_dfb_stroke_rects(dfbSurface, dc, rects, count, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::FillRects(EGraphicsContext *dc,
-			      const eint32 *rects, eint32 count)
+b_status_t
+EDFBGraphicsWindow::FillRects(BGraphicsContext *dc,
+			      const b_int32 *rects, b_int32 count)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_fill_rects(dfbSurface, dc, rects, count, &fMargins);
+	return bhapi_dfb_fill_rects(dfbSurface, dc, rects, count, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::FillRegion(EGraphicsContext *dc,
-			       const ERegion &region)
+b_status_t
+EDFBGraphicsWindow::FillRegion(BGraphicsContext *dc,
+			       const BRegion &region)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_fill_region(dfbSurface, dc, region, &fMargins);
+	return bhapi_dfb_fill_region(dfbSurface, dc, region, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::StrokeRoundRect(EGraphicsContext *dc,
-				    eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EDFBGraphicsWindow::StrokeRoundRect(BGraphicsContext *dc,
+				    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius, &fMargins);
+	return bhapi_dfb_stroke_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::FillRoundRect(EGraphicsContext *dc,
-				  eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EDFBGraphicsWindow::FillRoundRect(BGraphicsContext *dc,
+				  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_fill_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius, &fMargins);
+	return bhapi_dfb_fill_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::StrokeArc(EGraphicsContext *dc,
-			      eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EDFBGraphicsWindow::StrokeArc(BGraphicsContext *dc,
+			      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_stroke_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle, &fMargins);
+	return bhapi_dfb_stroke_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle, &fMargins);
 }
 
 
-e_status_t
-EDFBGraphicsWindow::FillArc(EGraphicsContext *dc,
-			    eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EDFBGraphicsWindow::FillArc(BGraphicsContext *dc,
+			    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return etk_dfb_fill_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle, &fMargins);
+	return bhapi_dfb_fill_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle, &fMargins);
 }
 
 #endif /* DIRECTFB */

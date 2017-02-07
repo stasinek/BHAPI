@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -29,217 +29,217 @@
 
 #include "GraphicsEngine.h"
 
-EGraphicsContext::EGraphicsContext()
+BGraphicsContext::BGraphicsContext()
 {
-	fDrawingMode = E_OP_COPY;
+	fDrawingMode = B_OP_COPY;
 	fHighColor.set_to(0, 0, 0, 255);
 	fLowColor.set_to(255, 255, 255, 255);
-	fPattern = E_SOLID_HIGH;
+	fPattern = B_SOLID_HIGH;
 	fPenSize = 0;
 	fSquarePoint = false;
 }
 
 
-EGraphicsContext::~EGraphicsContext()
+BGraphicsContext::~BGraphicsContext()
 {
 }
 
 
-e_status_t
-EGraphicsContext::SetDrawingMode(e_drawing_mode mode)
+b_status_t
+BGraphicsContext::SetDrawingMode(b_drawing_mode mode)
 {
 	fDrawingMode = mode;
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EGraphicsContext::SetClipping(const ERegion &clipping)
+b_status_t
+BGraphicsContext::SetClipping(const BRegion &clipping)
 {
 	fClipping = clipping;
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EGraphicsContext::SetHighColor(e_rgb_color highColor)
+b_status_t
+BGraphicsContext::SetHighColor(b_rgb_color highColor)
 {
 	fHighColor.set_to(highColor);
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EGraphicsContext::SetHighColor(euint8 r, euint8 g, euint8 b, euint8 a)
+b_status_t
+BGraphicsContext::SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
 {
-	e_rgb_color color;
+	b_rgb_color color;
 	color.set_to(r, g, b, a);
 	return SetHighColor(color);
 }
 
 
-e_status_t
-EGraphicsContext::SetLowColor(e_rgb_color lowColor)
+b_status_t
+BGraphicsContext::SetLowColor(b_rgb_color lowColor)
 {
 	fLowColor.set_to(lowColor);
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EGraphicsContext::SetLowColor(euint8 r, euint8 g, euint8 b, euint8 a)
+b_status_t
+BGraphicsContext::SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
 {
-	e_rgb_color color;
+	b_rgb_color color;
 	color.set_to(r, g, b, a);
 	return SetLowColor(color);
 }
 
 
-e_status_t
-EGraphicsContext::SetPattern(e_pattern pattern)
+b_status_t
+BGraphicsContext::SetPattern(b_pattern pattern)
 {
 	fPattern = pattern;
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EGraphicsContext::SetPenSize(euint32 penSize)
+b_status_t
+BGraphicsContext::SetPenSize(b_uint32 penSize)
 {
 	fPenSize = penSize;
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EGraphicsContext::SetSquarePointStyle(bool state)
+b_status_t
+BGraphicsContext::SetSquarePointStyle(bool state)
 {
 	fSquarePoint = state;
-	return E_OK;
+	return B_OK;
 }
 
 
-e_drawing_mode
-EGraphicsContext::DrawingMode() const
+b_drawing_mode
+BGraphicsContext::DrawingMode() const
 {
 	return fDrawingMode;
 }
 
 
-const ERegion*
-EGraphicsContext::Clipping() const
+const BRegion*
+BGraphicsContext::Clipping() const
 {
 	return &fClipping;
 }
 
 
-e_rgb_color
-EGraphicsContext::HighColor() const
+b_rgb_color
+BGraphicsContext::HighColor() const
 {
 	return fHighColor;
 }
 
 
-e_rgb_color
-EGraphicsContext::LowColor() const
+b_rgb_color
+BGraphicsContext::LowColor() const
 {
 	return fLowColor;
 }
 
 
-e_pattern
-EGraphicsContext::Pattern() const
+b_pattern
+BGraphicsContext::Pattern() const
 {
 	return fPattern;
 }
 
 
-euint32
-EGraphicsContext::PenSize() const
+b_uint32
+BGraphicsContext::PenSize() const
 {
 	return fPenSize;
 }
 
 
 bool
-EGraphicsContext::IsSquarePointStyle() const
+BGraphicsContext::IsSquarePointStyle() const
 {
 	return fSquarePoint;
 }
 
 
-EGraphicsDrawable::EGraphicsDrawable()
+BGraphicsDrawable::BGraphicsDrawable()
 {
 	fBkColor.set_to(255, 255, 255, 255);
 }
 
 
-EGraphicsDrawable::~EGraphicsDrawable()
+BGraphicsDrawable::~BGraphicsDrawable()
 {
 }
 
 
-e_status_t
-EGraphicsDrawable::SetBackgroundColor(e_rgb_color bkColor)
+b_status_t
+BGraphicsDrawable::SetBackgroundColor(b_rgb_color bkColor)
 {
 	fBkColor.set_to(bkColor);
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EGraphicsDrawable::SetBackgroundColor(euint8 r, euint8 g, euint8 b, euint8 a)
+b_status_t
+BGraphicsDrawable::SetBackgroundColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
 {
-	e_rgb_color color;
+	b_rgb_color color;
 	color.set_to(r, g, b, a);
 	return SetBackgroundColor(color);
 }
 
 
-e_rgb_color
-EGraphicsDrawable::BackgroundColor() const
+b_rgb_color
+BGraphicsDrawable::BackgroundColor() const
 {
 	return fBkColor;
 }
 
 
-EGraphicsWindow::EGraphicsWindow()
-	: EGraphicsDrawable()
+BGraphicsWindow::BGraphicsWindow()
+	: BGraphicsDrawable()
 {
 }
 
 
-EGraphicsWindow::~EGraphicsWindow()
+BGraphicsWindow::~BGraphicsWindow()
 {
 }
 
 
-EGraphicsEngine::EGraphicsEngine()
+BGraphicsEngine::BGraphicsEngine()
 {
 }
 
 
-EGraphicsEngine::~EGraphicsEngine()
+BGraphicsEngine::~BGraphicsEngine()
 {
 }
 
 
-EGraphicsWindow*
-EGraphicsEngine::GetWindow(EWindow *win)
+BGraphicsWindow*
+BGraphicsEngine::GetWindow(BWindow *win)
 {
 	return(win == NULL ? NULL : win->fWindow);
 }
 
 
-EGraphicsDrawable*
-EGraphicsEngine::GetPixmap(EWindow *win)
+BGraphicsDrawable*
+BGraphicsEngine::GetPixmap(BWindow *win)
 {
 	return(win == NULL ? NULL : win->fPixmap);
 }
 
 
-EGraphicsContext*
-EGraphicsEngine::GetContext(EView *view)
+BGraphicsContext*
+BGraphicsEngine::GetContext(BView *view)
 {
 	return(view == NULL ? NULL : view->fDC);
 }

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -30,7 +30,7 @@
 #include <ctype.h>
 #include <string.h>
 
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 #include "./../support/ClassInfo.h"
 
 #include "Window.h"
@@ -38,18 +38,18 @@
 #include "MenuItem.h"
 
 
-EMenuItem::EMenuItem(const char *label, EMessage *message, char shortcut, euint32 modifiers)
-	: EArchivable(), EInvoker(message, NULL, NULL),
+BMenuItem::BMenuItem(const char *label, BMessage *message, char shortcut, b_uint32 modifiers)
+	: BArchivable(), BInvoker(message, NULL, NULL),
 	  fShortcut(0), fModifiers(0), fMarked(false), fEnabled(true),
 	  fLabel(NULL), fShortcuts(NULL), fSubmenu(NULL), fMenu(NULL)
 {
 	SetShortcut(shortcut, modifiers);
-	if(label) fLabel = EStrdup(label);
+	if(label) fLabel = b_strdup(label);
 }
 
 
-EMenuItem::EMenuItem(EMenu *menu, EMessage *message)
-	: EArchivable(), EInvoker(message, NULL, NULL),
+BMenuItem::BMenuItem(BMenu *menu, BMessage *message)
+	: BArchivable(), BInvoker(message, NULL, NULL),
 	  fShortcut(0), fModifiers(0), fMarked(false), fEnabled(true),
 	  fLabel(NULL), fShortcuts(NULL), fSubmenu(NULL), fMenu(NULL)
 {
@@ -58,25 +58,25 @@ EMenuItem::EMenuItem(EMenu *menu, EMessage *message)
 		if(menu->fSuperitem == NULL)
 		{
 			fSubmenu = menu;
-			if(menu->Name() != NULL) fLabel = EStrdup(menu->Name());
+			if(menu->Name() != NULL) fLabel = b_strdup(menu->Name());
 			menu->fSuperitem = this;
-			if(menu->EView::IsEnabled() == false) fEnabled = false;
+			if(menu->BView::IsEnabled() == false) fEnabled = false;
 		}
 		else
 		{
-			ETK_ERROR("[INTERFACE]: %s --- The menu already attached to other item.", __PRETTY_FUNCTION__);
+			BHAPI_ERROR("[INTERFACE]: %s --- The menu already attached to other item.", __PRETTY_FUNCTION__);
 		}
 	}
 }
 
 
-EMenuItem::~EMenuItem()
+BMenuItem::~BMenuItem()
 {
 	if(fMenu)
 	{
-		ETK_WARNING("[INTERFACE]: %s --- Item still attach to menu, detaching from menu automatically.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[INTERFACE]: %s --- Item still attach to menu, detaching from menu automatically.", __PRETTY_FUNCTION__);
 		if(fMenu->RemoveItem(this) == false)
-			ETK_ERROR("[INTERFACE]: %s --- Detaching from menu failed.", __PRETTY_FUNCTION__);
+			BHAPI_ERROR("[INTERFACE]: %s --- Detaching from menu failed.", __PRETTY_FUNCTION__);
 	}
 
 	if(fLabel) delete[] fLabel;
@@ -92,12 +92,12 @@ EMenuItem::~EMenuItem()
 
 
 void
-EMenuItem::SetLabel(const char *label)
+BMenuItem::SetLabel(const char *label)
 {
 	if((fLabel == NULL || strlen(fLabel) == 0) && (label == NULL || strlen(label) == 0)) return;
 	if(!((fLabel == NULL || strlen(fLabel) == 0) || (label == NULL || strlen(label) == 0) || strcmp(fLabel, label) != 0)) return;
 
-	ERect oldFrame = Frame();
+	BRect oldFrame = Frame();
 
 	if(fLabel)
 	{
@@ -105,7 +105,7 @@ EMenuItem::SetLabel(const char *label)
 		fLabel = NULL;
 	}
 
-	if(label) fLabel = EStrdup(label);
+	if(label) fLabel = b_strdup(label);
 
 	if(fMenu == NULL) return;
 
@@ -117,26 +117,26 @@ EMenuItem::SetLabel(const char *label)
 
 
 void
-EMenuItem::SetEnabled(bool state)
+BMenuItem::SetEnabled(bool state)
 {
 	if(fEnabled != state)
 	{
 		fEnabled = state;
-		if(!(fSubmenu == NULL || fSubmenu->EView::IsEnabled() != state)) fSubmenu->SetEnabled(state);
+		if(!(fSubmenu == NULL || fSubmenu->BView::IsEnabled() != state)) fSubmenu->SetEnabled(state);
 		if(fMenu) fMenu->Invalidate(Frame());
 	}
 }
 
 
 void
-EMenuItem::SetMarked(bool state)
+BMenuItem::SetMarked(bool state)
 {
 	if(fMarked != state || !(fMenu == NULL || fMenu->fRadioMode == false))
 	{
 		fMarked = state;
 		if(fMenu)
 		{
-			eint32 index = fMenu->IndexOf(this);
+			b_int32 index = fMenu->IndexOf(this);
 
 			if(fMenu->fRadioMode)
 			{
@@ -144,7 +144,7 @@ EMenuItem::SetMarked(bool state)
 				{
 					if(fMenu->fMarkedIndex != index)
 					{
-						eint32 oldIndex = fMenu->fMarkedIndex;
+						b_int32 oldIndex = fMenu->fMarkedIndex;
 						fMenu->fMarkedIndex = index;
 						if(oldIndex >= 0) fMenu->Invalidate(fMenu->ItemFrame(oldIndex));
 					}
@@ -165,12 +165,12 @@ EMenuItem::SetMarked(bool state)
 
 
 void
-EMenuItem::SetShortcut(char ch, euint32 modifiers)
+BMenuItem::SetShortcut(char ch, b_uint32 modifiers)
 {
 	if(fShortcut != ch || fModifiers != modifiers)
 	{
 		// TODO: update shortcut when window attached
-		ERect oldFrame = Frame();
+		BRect oldFrame = Frame();
 
 		fShortcut = ch;
 		fModifiers = modifiers;
@@ -180,54 +180,54 @@ EMenuItem::SetShortcut(char ch, euint32 modifiers)
 
 		if(fShortcut != 0 && fModifiers != 0)
 		{
-			EString str;
-			if(fModifiers & E_CONTROL_KEY) str << "Ctrl+";
-			if(fModifiers & E_SHIFT_KEY) str << "Shift+";
-			if(fModifiers & E_COMMAND_KEY) str << "Alt+";
+			BString str;
+			if(fModifiers & B_CONTROL_KEY) str << "Ctrl+";
+			if(fModifiers & B_SHIFT_KEY) str << "Shift+";
+			if(fModifiers & B_COMMAND_KEY) str << "Alt+";
 
-			if(fModifiers & E_FUNCTIONS_KEY)
+			if(fModifiers & B_FUNCTIONS_KEY)
 			{
 				switch(fShortcut)
 				{
-					case E_F1_KEY: str << "F1"; break;
-					case E_F2_KEY: str << "F2"; break;
-					case E_F3_KEY: str << "F3"; break;
-					case E_F4_KEY: str << "F4"; break;
-					case E_F5_KEY: str << "F5"; break;
-					case E_F6_KEY: str << "F6"; break;
-					case E_F7_KEY: str << "F7"; break;
-					case E_F8_KEY: str << "F8"; break;
-					case E_F9_KEY: str << "F9"; break;
-					case E_F10_KEY: str << "F10"; break;
-					case E_F11_KEY: str << "F11"; break;
-					case E_F12_KEY: str << "F12"; break;
-					case E_PRINT_KEY: str << "Print"; break;
-					case E_SCROLL_KEY: str << "Scroll"; break;
-					case E_PAUSE_KEY: str << "Pause"; break;
+					case B_F1_KEY: str << "F1"; break;
+					case B_F2_KEY: str << "F2"; break;
+					case B_F3_KEY: str << "F3"; break;
+					case B_F4_KEY: str << "F4"; break;
+					case B_F5_KEY: str << "F5"; break;
+					case B_F6_KEY: str << "F6"; break;
+					case B_F7_KEY: str << "F7"; break;
+					case B_F8_KEY: str << "F8"; break;
+					case B_F9_KEY: str << "F9"; break;
+					case B_F10_KEY: str << "F10"; break;
+					case B_F11_KEY: str << "F11"; break;
+					case B_F12_KEY: str << "F12"; break;
+					case B_PRINT_KEY: str << "Print"; break;
+					case B_SCROLL_KEY: str << "Scroll"; break;
+					case B_PAUSE_KEY: str << "Pause"; break;
 					default: str.MakeEmpty(); break; // here don't support
 				}
 			}
 			else switch(fShortcut)
 			{
-				case E_ENTER: str << "Enter"; break;
-				case E_BACKSPACE: str << "Backspace"; break;
-				case E_SPACE: str << "Space"; break;
-				case E_TAB: str << "Tab"; break;
-				case E_ESCAPE: str << "Esc"; break;
-				case E_LEFT_ARROW: str << "Left"; break;
-				case E_RIGHT_ARROW: str << "Right"; break;
-				case E_UP_ARROW: str << "Up"; break;
-				case E_DOWN_ARROW: str << "Down"; break;
-				case E_INSERT: str << "Insert"; break;
-				case E_DELETE: str << "Delete"; break;
-				case E_HOME: str << "Home"; break;
-				case E_END: str << "End"; break;
-				case E_PAGE_UP: str << "PageUp"; break;
-				case E_PAGE_DOWN: str << "PageDown"; break;
+				case B_ENTER: str << "Enter"; break;
+				case B_BACKSPACE: str << "Backspace"; break;
+				case B_SPACE: str << "Space"; break;
+				case B_TAB: str << "Tab"; break;
+				case B_ESCAPE: str << "Esc"; break;
+				case B_LEFT_ARROW: str << "Left"; break;
+				case B_RIGHT_ARROW: str << "Right"; break;
+				case B_UP_ARROW: str << "Up"; break;
+				case B_DOWN_ARROW: str << "Down"; break;
+				case B_INSERT: str << "Insert"; break;
+				case B_DELETE: str << "Delete"; break;
+				case B_HOME: str << "Home"; break;
+				case B_END: str << "End"; break;
+				case B_PAGE_UP: str << "PageUp"; break;
+				case B_PAGE_DOWN: str << "PageDown"; break;
 				default: str.Append((char)toupper(fShortcut), 1);
 			}
 
-			if(str.Length() > 0) fShortcuts = EStrdup(str.String());
+			if(str.Length() > 0) fShortcuts = b_strdup(str.String());
 		}
 
 		if(fMenu == NULL) return;
@@ -241,59 +241,59 @@ EMenuItem::SetShortcut(char ch, euint32 modifiers)
 
 
 const char*
-EMenuItem::Label() const
+BMenuItem::Label() const
 {
 	return fLabel;
 }
 
 
 bool
-EMenuItem::IsEnabled() const
+BMenuItem::IsEnabled() const
 {
 	return fEnabled;
 }
 
 
 bool
-EMenuItem::IsMarked() const
+BMenuItem::IsMarked() const
 {
 	return fMarked;
 }
 
 
 char
-EMenuItem::Shortcut(euint32 *modifiers) const
+BMenuItem::Shortcut(b_uint32 *modifiers) const
 {
 	if(modifiers) *modifiers = fModifiers;
 	return fShortcut;
 }
 
 
-EMenu*
-EMenuItem::Submenu() const
+BMenu*
+BMenuItem::Submenu() const
 {
 	return fSubmenu;
 }
 
 
-EMenu*
-EMenuItem::Menu() const
+BMenu*
+BMenuItem::Menu() const
 {
 	return fMenu;
 }
 
 
-ERect
-EMenuItem::Frame() const
+BRect
+BMenuItem::Frame() const
 {
-	if(!fMenu) return ERect();
-	eint32 index = fMenu->IndexOf(this);
+	if(!fMenu) return BRect();
+	b_int32 index = fMenu->IndexOf(this);
 	return fMenu->ItemFrame(index);
 }
 
 
 bool
-EMenuItem::IsSelected() const
+BMenuItem::IsSelected() const
 {
 	if(!fMenu) return false;
 	return(fMenu->CurrentSelection() == this);
@@ -301,21 +301,21 @@ EMenuItem::IsSelected() const
 
 
 void
-EMenuItem::GetContentSize(float *width, float *height) const
+BMenuItem::GetContentSize(float *width, float *height) const
 {
     if((!width && !height) || !fMenu) return;
 
-	EFont font(etk_plain_font);
+	BFont font(bhapi_plain_font);
 
 	if(width)
 	{
 		*width = Label() ? (float)ceil((double)font.StringWidth(Label())) : 0;
 
-		if(fMenu->Layout() == E_ITEMS_IN_COLUMN)
+		if(fMenu->Layout() == B_ITEMS_IN_COLUMN)
 		{
 			if(fSubmenu)
 			{
-				e_font_height fontHeight;
+				b_font_height fontHeight;
 				font.GetHeight(&fontHeight);
 				*width += (float)ceil((double)(fontHeight.ascent + fontHeight.descent) / 2.f) + 10;
 			}
@@ -332,7 +332,7 @@ EMenuItem::GetContentSize(float *width, float *height) const
 
 	if(height)
 	{
-		e_font_height fontHeight;
+		b_font_height fontHeight;
 		font.GetHeight(&fontHeight);
 		*height = (float)ceil((double)(fontHeight.ascent + fontHeight.descent));
 		*height += 4;
@@ -341,67 +341,67 @@ EMenuItem::GetContentSize(float *width, float *height) const
 
 
 void
-EMenuItem::DrawContent()
+BMenuItem::DrawContent()
 {
 	if(fMenu == NULL || fMenu->Window() == NULL) return;
 
 	fMenu->PushState();
 
-	EFont font(etk_plain_font);
-	e_font_height fontHeight;
+	BFont font(bhapi_plain_font);
+	b_font_height fontHeight;
 	font.GetHeight(&fontHeight);
-	fMenu->SetFont(&font, E_FONT_ALL);
+	fMenu->SetFont(&font, B_FONT_ALL);
 
-	ERect rect = Frame().InsetByCopy(2, 2);
-	if(fMenu->Layout() == E_ITEMS_IN_COLUMN) rect.left += 16;
+	BRect rect = Frame().InsetByCopy(2, 2);
+	if(fMenu->Layout() == B_ITEMS_IN_COLUMN) rect.left += 16;
 	if(fMenu->PenLocation().x > rect.left && fMenu->PenLocation().x < rect.right) rect.left = fMenu->PenLocation().x;
 
 	float sHeight = fontHeight.ascent + fontHeight.descent;
-	EPoint location;
-	if(fMenu->Layout() == E_ITEMS_IN_COLUMN)
+	BPoint location;
+	if(fMenu->Layout() == B_ITEMS_IN_COLUMN)
 		location.x = rect.left;
 	else
 		location.x = rect.Center().x - font.StringWidth(Label()) / 2.f;
 	location.y = rect.Center().y - sHeight / 2.f;
 	location.y += fontHeight.ascent + 1;
 
-	e_rgb_color bkColor, textColor;
+	b_rgb_color bkColor, textColor;
 
 	if(fEnabled && fMenu->IsEnabled())
 	{
 		if(IsSelected())
 		{
-			bkColor = e_ui_color(E_MENU_SELECTED_BACKGROUND_COLOR);
-			textColor = e_ui_color(E_MENU_SELECTED_ITEM_TEXT_COLOR);
+			bkColor = b_ui_color(B_MENU_SELECTED_BACKGROUND_COLOR);
+			textColor = b_ui_color(B_MENU_SELECTED_ITEM_TEXT_COLOR);
 		}
 		else
 		{
-			bkColor = e_ui_color(E_MENU_BACKGROUND_COLOR);
-			textColor = e_ui_color(E_MENU_ITEM_TEXT_COLOR);
+			bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
+			textColor = b_ui_color(B_MENU_ITEM_TEXT_COLOR);
 		}
 	}
 	else
 	{
-		bkColor = e_ui_color(E_MENU_BACKGROUND_COLOR);
+		bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
 		if(fMenu->IsEnabled() == false) bkColor.mix(0, 0, 0, 20);
 
-		textColor = e_ui_color(E_MENU_ITEM_TEXT_COLOR);
-		e_rgb_color color = bkColor;
+		textColor = b_ui_color(B_MENU_ITEM_TEXT_COLOR);
+		b_rgb_color color = bkColor;
 		color.alpha = 127;
 		textColor.mix(color);
 	}
 
-	fMenu->SetDrawingMode(E_OP_COPY);
+	fMenu->SetDrawingMode(B_OP_COPY);
 	fMenu->SetHighColor(textColor);
 	fMenu->SetLowColor(bkColor);
 	fMenu->DrawString(Label(), location);
 
-	if(fMenu->Layout() == E_ITEMS_IN_COLUMN)
+	if(fMenu->Layout() == B_ITEMS_IN_COLUMN)
 	{
 		if(fSubmenu != NULL)
 		{
-			ERect r = Frame().InsetByCopy(5, 2);
-			EPoint pt1, pt2, pt3;
+			BRect r = Frame().InsetByCopy(5, 2);
+			BPoint pt1, pt2, pt3;
 			pt1.x = r.right;
 			pt1.y = r.Center().y;
 			pt2.x = pt3.x = pt1.x - (float)ceil((double)(fontHeight.ascent + fontHeight.descent) / 2.f);
@@ -421,49 +421,49 @@ EMenuItem::DrawContent()
 
 
 void
-EMenuItem::Draw()
+BMenuItem::Draw()
 {
 	if(fMenu == NULL || fMenu->Window() == NULL || fMenu->IsVisible() == false) return;
 
-	eint32 index = fMenu->IndexOf(this);
-	ERect frame = fMenu->ItemFrame(index);
+	b_int32 index = fMenu->IndexOf(this);
+	BRect frame = fMenu->ItemFrame(index);
 	if(index < 0 || frame.IsValid() == false) return;
 
-	e_rgb_color bkColor, textColor;
+	b_rgb_color bkColor, textColor;
 
 	if(fEnabled && fMenu->IsEnabled())
 	{
 		if(IsSelected())
 		{
-			bkColor = e_ui_color(E_MENU_SELECTED_BACKGROUND_COLOR);
-			textColor = e_ui_color(E_MENU_SELECTED_ITEM_TEXT_COLOR);
+			bkColor = b_ui_color(B_MENU_SELECTED_BACKGROUND_COLOR);
+			textColor = b_ui_color(B_MENU_SELECTED_ITEM_TEXT_COLOR);
 		}
 		else
 		{
-			bkColor = e_ui_color(E_MENU_BACKGROUND_COLOR);
-			textColor = e_ui_color(E_MENU_ITEM_TEXT_COLOR);
+			bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
+			textColor = b_ui_color(B_MENU_ITEM_TEXT_COLOR);
 		}
 	}
 	else
 	{
-		bkColor = e_ui_color(E_MENU_BACKGROUND_COLOR);
+		bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
 		if(fMenu->IsEnabled() == false) bkColor.mix(0, 0, 0, 20);
 
-		textColor = e_ui_color(E_MENU_ITEM_TEXT_COLOR);
-		e_rgb_color color = bkColor;
+		textColor = b_ui_color(B_MENU_ITEM_TEXT_COLOR);
+		b_rgb_color color = bkColor;
 		color.alpha = 127;
 		textColor.mix(color);
 	}
 
 	fMenu->PushState();
-	fMenu->SetDrawingMode(E_OP_COPY);
+	fMenu->SetDrawingMode(B_OP_COPY);
 	fMenu->SetPenSize(1);
 	fMenu->SetHighColor(bkColor);
 	fMenu->FillRect(frame);
 
 	if(fEnabled && fMenu->IsEnabled() && IsSelected())
 	{
-		fMenu->SetHighColor(e_ui_color(E_MENU_SELECTED_BORDER_COLOR));
+		fMenu->SetHighColor(b_ui_color(B_MENU_SELECTED_BORDER_COLOR));
 		fMenu->StrokeRect(frame);
 	}
 
@@ -471,16 +471,16 @@ EMenuItem::Draw()
 
 	bool drawMarked = (fMenu->fRadioMode ? fMenu->fMarkedIndex == index : fMarked);
 
-	if(fMenu->Layout() == E_ITEMS_IN_COLUMN)
+	if(fMenu->Layout() == B_ITEMS_IN_COLUMN)
 	{
 		if(drawMarked)
 		{
 			fMenu->SetHighColor(textColor);
-			ERect rect = frame;
+			BRect rect = frame;
 			rect.right = rect.left + 15;
 			rect.InsetBy(3, 3);
-			fMenu->MovePenTo(rect.LeftTop() + EPoint(0, rect.Height() / 2.f));
-			fMenu->StrokeLine(rect.LeftBottom() + EPoint(rect.Width() / 2.f, 0));
+			fMenu->MovePenTo(rect.LeftTop() + BPoint(0, rect.Height() / 2.f));
+			fMenu->StrokeLine(rect.LeftBottom() + BPoint(rect.Width() / 2.f, 0));
 			fMenu->StrokeLine(rect.RightTop());
 		}
 
@@ -503,13 +503,13 @@ EMenuItem::Draw()
 
 
 void
-EMenuItem::Highlight(bool on)
+BMenuItem::Highlight(bool on)
 {
 }
 
 
 void
-EMenuItem::ShowSubmenu(bool selectFirstItem)
+BMenuItem::ShowSubmenu(bool selectFirstItem)
 {
 	if(fSubmenu == NULL) return;
 	if(fSubmenu->Window() != NULL)
@@ -518,24 +518,24 @@ EMenuItem::ShowSubmenu(bool selectFirstItem)
 		return;
 	}
 
-	EPoint where;
+	BPoint where;
 	if(fSubmenu->GetPopUpWhere(&where) == false) return;
 
 	if(fSubmenu->PopUp(where, selectFirstItem) && Message() != NULL)
 	{
-		EMessage aMsg = *(Message());
+		BMessage aMsg = *(Message());
 
-		aMsg.AddInt64("when", e_real_time_clock_usecs());
+		aMsg.AddInt64("when", b_real_time_clock_usecs());
 		aMsg.AddPointer("source", this);
 		if(fMenu) aMsg.AddInt32("index", fMenu->IndexOf(this));
 
-		EInvoker::Invoke(&aMsg);
+		BInvoker::Invoke(&aMsg);
 	}
 }
 
 
 bool
-EMenuItem::SelectChanged()
+BMenuItem::SelectChanged()
 {
 	if(fMenu == NULL) return false;
 
@@ -546,7 +546,7 @@ EMenuItem::SelectChanged()
 		{
 			if(IsSelected() &&
 			   !(fMenu->Window()->CurrentMessage() == NULL ||
-			     fMenu->Window()->CurrentMessage()->what != E_MOUSE_MOVED))
+			     fMenu->Window()->CurrentMessage()->what != B_MOUSE_MOVED))
 				ShowSubmenu(true);
 			else if(!IsSelected())
 				fSubmenu->ClosePopUp();
@@ -557,34 +557,34 @@ EMenuItem::SelectChanged()
 }
 
 
-e_status_t
-EMenuItem::Invoke(const EMessage *msg)
+b_status_t
+BMenuItem::Invoke(const BMessage *msg)
 {
-	if(!msg && Message() == NULL) return E_ERROR;
+	if(!msg && Message() == NULL) return B_ERROR;
 
-	EMessage aMsg = (msg ? *msg : *(Message()));
+	BMessage aMsg = (msg ? *msg : *(Message()));
 
-	aMsg.AddInt64("when", e_real_time_clock_usecs());
+	aMsg.AddInt64("when", b_real_time_clock_usecs());
 	aMsg.AddPointer("source", this);
 	if(fMenu) aMsg.AddInt32("index", fMenu->IndexOf(this));
 
-	return EInvoker::Invoke(&aMsg);
+	return BInvoker::Invoke(&aMsg);
 }
 
 
-EMenuSeparatorItem::EMenuSeparatorItem()
-	: EMenuItem(NULL, NULL, 0, 0)
+BMenuSeparatorItem::BMenuSeparatorItem()
+	: BMenuItem(NULL, NULL, 0, 0)
 {
 }
 
 
-EMenuSeparatorItem::~EMenuSeparatorItem()
+BMenuSeparatorItem::~BMenuSeparatorItem()
 {
 }
 
 
 void
-EMenuSeparatorItem::GetContentSize(float *width, float *height) const
+BMenuSeparatorItem::GetContentSize(float *width, float *height) const
 {
 	if(Menu() == NULL || (!width && !height)) return;
 
@@ -594,53 +594,53 @@ EMenuSeparatorItem::GetContentSize(float *width, float *height) const
 
 
 bool
-EMenuSeparatorItem::SelectChanged()
+BMenuSeparatorItem::SelectChanged()
 {
 	return false;
 }
 
 
 void
-EMenuSeparatorItem::Draw()
+BMenuSeparatorItem::Draw()
 {
-	ERect frame = Frame();
+	BRect frame = Frame();
 	if(Menu() == NULL || Menu()->Window() == NULL || !frame.IsValid()) return;
 
-	e_rgb_color bkColor;
+	b_rgb_color bkColor;
 
 	if(IsEnabled() && Menu()->IsEnabled())
 	{
-		bkColor = e_ui_color(E_MENU_BACKGROUND_COLOR);
+		bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
 	}
 	else
 	{
-		bkColor = e_ui_color(E_MENU_BACKGROUND_COLOR);
+		bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
 		if(Menu()->IsEnabled() == false) bkColor.mix(0, 0, 0, 20);
 	}
 
 	Menu()->PushState();
 
-	Menu()->SetDrawingMode(E_OP_COPY);
+	Menu()->SetDrawingMode(B_OP_COPY);
 	Menu()->SetPenSize(1);
 	Menu()->SetHighColor(bkColor);
 	Menu()->FillRect(frame);
 
-	e_rgb_color shinerColor = Menu()->ViewColor();
-	e_rgb_color darkerColor = shinerColor;
+	b_rgb_color shinerColor = Menu()->ViewColor();
+	b_rgb_color darkerColor = shinerColor;
 	shinerColor.mix(255, 255, 255, 100);
 	darkerColor.mix(0, 0, 0, 100);
 
-	if(Menu()->Layout() == E_ITEMS_IN_ROW || (Menu()->Layout() == E_ITEMS_IN_MATRIX && frame.Height() > frame.Width()))
+	if(Menu()->Layout() == B_ITEMS_IN_ROW || (Menu()->Layout() == B_ITEMS_IN_MATRIX && frame.Height() > frame.Width()))
 	{
 		Menu()->PushState();
 		Menu()->ConstrainClippingRegion(frame);
-		Menu()->SetDrawingMode(E_OP_COPY);
+		Menu()->SetDrawingMode(B_OP_COPY);
 		Menu()->SetPenSize(1);
 		Menu()->SetHighColor(shinerColor);
 		frame.InsetBy(0, 2);
-		EPoint pt1 = frame.Center();
+		BPoint pt1 = frame.Center();
 		pt1.y = frame.top + 1;
-		EPoint pt2 = pt1;
+		BPoint pt2 = pt1;
 		pt2.y = frame.bottom - 1;
 		Menu()->StrokeLine(pt1, pt2);
 		pt1.x += 1; pt2.x += 1;
@@ -648,17 +648,17 @@ EMenuSeparatorItem::Draw()
 		Menu()->StrokeLine(pt1, pt2);
 		Menu()->PopState();
 	}
-	else if(Menu()->Layout() == E_ITEMS_IN_COLUMN || (Menu()->Layout() == E_ITEMS_IN_MATRIX && frame.Width() >= frame.Height()))
+	else if(Menu()->Layout() == B_ITEMS_IN_COLUMN || (Menu()->Layout() == B_ITEMS_IN_MATRIX && frame.Width() >= frame.Height()))
 	{
 		Menu()->PushState();
 		Menu()->ConstrainClippingRegion(frame);
-		Menu()->SetDrawingMode(E_OP_COPY);
+		Menu()->SetDrawingMode(B_OP_COPY);
 		Menu()->SetPenSize(1);
 		Menu()->SetHighColor(shinerColor);
 		frame.InsetBy(2, 0);
-		EPoint pt1 = frame.Center();
+		BPoint pt1 = frame.Center();
 		pt1.x = frame.left + 1;
-		EPoint pt2 = pt1;
+		BPoint pt2 = pt1;
 		pt2.x = frame.right - 1;
 		Menu()->StrokeLine(pt1, pt2);
 		pt1.y += 1; pt2.y += 1;

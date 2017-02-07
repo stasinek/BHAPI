@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,43 +27,43 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_PATH_H__
-#define __ETK_PATH_H__ 
+#ifndef __BHAPI_PATH_H__
+#define __BHAPI_PATH_H__ 
 
 #include "./../support/SupportDefs.h"
 
 #ifdef WIN32
 #include <winsock2.h>
 #include <windows.h>
-#define E_MAXPATH MAX_PATH
+#define B_MAXPATH MAX_PATH
 #else
-#define E_MAXPATH 255
+#define B_MAXPATH 255
 #endif
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EPath {
+class _IMPEXP_BHAPI BPath {
 public:
-	EPath();
-	EPath(const char *dir, const char *leaf = NULL, bool normalize = false);
-	EPath(const EPath &path);
-	virtual ~EPath();
+	BPath();
+	BPath(const char *dir, const char *leaf = NULL, bool normalize = false);
+	BPath(const BPath &path);
+	virtual ~BPath();
 
-	e_status_t	SetTo(const char *dir, const char *leaf = NULL, bool normalize = false);
-	e_status_t	Append(const char *path, bool normalize = false);
+	b_status_t	SetTo(const char *dir, const char *leaf = NULL, bool normalize = false);
+	b_status_t	Append(const char *path, bool normalize = false);
 	void		Unset();
 
 	const char	*Path() const;
 	const char	*Leaf() const;
 
-	e_status_t	GetParent(EPath *parent) const;
+	b_status_t	GetParent(BPath *parent) const;
 
-	bool		operator==(const EPath &path) const;
+	bool		operator==(const BPath &path) const;
 	bool		operator==(const char *path) const;
-	bool		operator!=(const EPath &path) const;
+	bool		operator!=(const BPath &path) const;
 	bool		operator!=(const char *path) const;
-	EPath&		operator=(const EPath &path);
-	EPath&		operator=(const char *path);
+	BPath&		operator=(const BPath &path);
+	BPath&		operator=(const char *path);
 
 private:
 	char *fPath;
@@ -71,5 +71,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_PATH_H__ */
+#endif /* __BHAPI_PATH_H__ */
 

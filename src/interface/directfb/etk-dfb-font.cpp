@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * DirectFB Graphics Add-on for ETK++
+ * DirectFB Graphics Add-on for BHAPI++
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -39,10 +39,10 @@
 #include "./../../storage/Directory.h"
 #include "./../../storage/Path.h"
 
-#define ETK_DIRECTFONT_DEFAULT_SIZE	12
+#define BHAPI_DIRECTFONT_DEFAULT_SIZE	12
 
 
-class EDFBFont : public EFontEngine {
+class EDFBFont : public BFontEngine {
 public:
 	EDFBFont(EDFBGraphicsEngine *dfbEngine, const char *filename);
 	virtual ~EDFBFont();
@@ -51,12 +51,12 @@ public:
 	virtual bool IsScalable() const;
 	virtual void ForceFontAliasing(bool enable);
 
-	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold, eint32 length) const;
-	virtual void GetHeight(e_font_height *height, float size, float shear, bool bold) const;
-	virtual ERect RenderString(EHandler *view, const char *string, float size, float spacing, float shear, bool bold, eint32 length);
+	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold, b_int32 length) const;
+	virtual void GetHeight(b_font_height *height, float size, float shear, bool bold) const;
+	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold, b_int32 length);
 
-	virtual e_font_detach_callback* Attach(void (*callback)(void*), void *data);
-	virtual bool Detach(e_font_detach_callback *callback);
+	virtual b_font_detach_callback* Attach(void (*callback)(void*), void *data);
+	virtual bool Detach(b_font_detach_callback *callback);
 
 private:
 	bool fScalable;
@@ -69,29 +69,29 @@ private:
 
 
 EDFBFont::EDFBFont(EDFBGraphicsEngine *dfbEngine, const char *filename)
-	: EFontEngine(), fScalable(false), fForceFontAliasing(false), fFilename(NULL), fEngine(NULL)
+	: BFontEngine(), fScalable(false), fForceFontAliasing(false), fFilename(NULL), fEngine(NULL)
 {
 	if(dfbEngine == NULL) return;
 
 	fEngine = dfbEngine;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) {fEngine = NULL; return;}
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) {fEngine = NULL; return;}
 
 	DFBFontDescription fontdesc;
 	fontdesc.flags = (DFBFontDescriptionFlags)(DFDESC_ATTRIBUTES | DFDESC_HEIGHT);
 	fontdesc.attributes = DFFA_NONE;
-	fontdesc.height = ETK_DIRECTFONT_DEFAULT_SIZE;
+	fontdesc.height = BHAPI_DIRECTFONT_DEFAULT_SIZE;
 
 	if(fEngine->dfbDisplay->CreateFont(fEngine->dfbDisplay, filename, &fontdesc, &fDFBFont) != DFB_OK)
 	{
-		ETK_DEBUG("[FONT]: CreateFont(%s) failed.", filename);
+		BHAPI_DEBUG("[FONT]: CreateFont(%s) failed.", filename);
 		fEngine = NULL;
 		return;
 	}
 
-	EPath aPath(filename);
-	if(aPath.Path() != NULL) fFilename = EStrdup(aPath.Path());
+	BPath aPath(filename);
+	if(aPath.Path() != NULL) fFilename = b_strdup(aPath.Path());
 	SetFamily(aPath.Leaf() ? aPath.Leaf() : "DFB-Default");
 	SetStyle("Regular");
 
@@ -100,7 +100,7 @@ EDFBFont::EDFBFont(EDFBGraphicsEngine *dfbEngine, const char *filename)
 	float sizes = (float)height;
 	SetFixedSize(&sizes, 1);
 
-	SetRenderMode(E_FONT_RENDER_DIRECTLY);
+	SetRenderMode(B_FONT_RENDER_DIRECTLY);
 }
 
 
@@ -108,9 +108,9 @@ EDFBFont::~EDFBFont()
 {
 	if(fEngine != NULL)
 	{
-		EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-		if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK)
-			ETK_ERROR("[FONT]: %s --- Invalid graphics engine.", __PRETTY_FUNCTION__);
+		BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+		if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK)
+			BHAPI_ERROR("[FONT]: %s --- Invalid graphics engine.", __PRETTY_FUNCTION__);
 
 		fDFBFont->Release(fDFBFont);
 	}
@@ -119,23 +119,23 @@ EDFBFont::~EDFBFont()
 }
 
 
-e_font_detach_callback*
+b_font_detach_callback*
 EDFBFont::Attach(void (*callback)(void*), void *data)
 {
 	if(fEngine == NULL) return NULL;
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return NULL;
-	return EFontEngine::Attach(callback, data);
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return NULL;
+	return BFontEngine::Attach(callback, data);
 }
 
 
 bool
-EDFBFont::Detach(e_font_detach_callback *callback)
+EDFBFont::Detach(b_font_detach_callback *callback)
 {
 	if(fEngine == NULL) return false;
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false) return false;
-	if(!EFontEngine::Detach(callback)) return false;
+	if(!BFontEngine::Detach(callback)) return false;
 	return true;
 }
 
@@ -158,8 +158,8 @@ void
 EDFBFont::ForceFontAliasing(bool enable)
 {
 	if(fEngine == NULL) return;
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return;
 
 	if(fForceFontAliasing != enable)
 	{
@@ -168,7 +168,7 @@ EDFBFont::ForceFontAliasing(bool enable)
 		DFBFontDescription fontdesc;
 		fontdesc.flags = (DFBFontDescriptionFlags)(DFDESC_ATTRIBUTES | DFDESC_HEIGHT);
 		fontdesc.attributes = (fForceFontAliasing ? DFFA_MONOCHROME : DFFA_NONE);
-		fontdesc.height = ETK_DIRECTFONT_DEFAULT_SIZE;
+		fontdesc.height = BHAPI_DIRECTFONT_DEFAULT_SIZE;
 
 		IDirectFBFont *newFont = NULL;
 		fEngine->dfbDisplay->CreateFont(fEngine->dfbDisplay, fFilename, &fontdesc, &newFont);
@@ -187,13 +187,13 @@ EDFBFont::ForceFontAliasing(bool enable)
 
 
 float
-EDFBFont::StringWidth(const char *string, float size, float spacing, float shear, bool bold, eint32 length) const
+EDFBFont::StringWidth(const char *string, float size, float spacing, float shear, bool bold, b_int32 length) const
 {
 	if(fEngine == NULL) return 0;
 	if((int)size <= 0 || string == NULL || *string == 0 || length == 0 || !IsAttached()) return 0;
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return 0;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return 0;
 
 	int height = 0;
 	fDFBFont->GetHeight(fDFBFont, &height);
@@ -201,21 +201,21 @@ EDFBFont::StringWidth(const char *string, float size, float spacing, float shear
 	if(size != (float)height) return 0;
 
 	float width = 0;
-	if(length < 0 || (size_t)length > strlen(string)) length = (eint32)strlen(string);
+	if(length < 0 || (size_t)length > strlen(string)) length = (b_int32)strlen(string);
 	float delta = (float)ceil((double)(spacing * size));
 
-	euint8 bytes = 0;
-	const char *str = e_utf8_at(string, 0, &bytes);
+	b_uint8 bytes = 0;
+	const char *str = b_utf8_at(string, 0, &bytes);
 	const char *tmp = str;
 	while(!(tmp == NULL || bytes == 0 || (size_t)(tmp - string) > (size_t)length - (size_t)bytes))
 	{
-		EString aStr(tmp, (eint32)bytes);
+		BString aStr(tmp, (b_int32)bytes);
 
 		int bWidth = -1;
 		fDFBFont->GetStringWidth(fDFBFont, aStr.String(), aStr.Length(), &bWidth);
 
 		width += (float)(bWidth > 0 ? bWidth : height) + (tmp == str ? 0.f : delta);
-		tmp = e_utf8_next(tmp, &bytes);
+		tmp = b_utf8_next(tmp, &bytes);
 	}
 
 	return width;
@@ -223,14 +223,14 @@ EDFBFont::StringWidth(const char *string, float size, float spacing, float shear
 
 
 void
-EDFBFont::GetHeight(e_font_height *height, float size, float shear, bool bold) const
+EDFBFont::GetHeight(b_font_height *height, float size, float shear, bool bold) const
 {
 	if(fEngine == NULL || height == NULL) return;
 
-	bzero(height, sizeof(e_font_height));
+	bzero(height, sizeof(b_font_height));
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return;
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return;
 
 	int dfbHeight = 0;
 	fDFBFont->GetHeight(fDFBFont, &dfbHeight);
@@ -249,59 +249,59 @@ EDFBFont::GetHeight(e_font_height *height, float size, float shear, bool bold) c
 }
 
 
-ERect
-EDFBFont::RenderString(EHandler *_view, const char *string, float size, float spacing, float shear, bool bold, eint32 length)
+BRect
+EDFBFont::RenderString(BHandler *_view, const char *string, float size, float spacing, float shear, bool bold, b_int32 length)
 {
-	if(fEngine == NULL || (int)size <= 0 || string == NULL || *string == 0 || length == 0) return ERect();
+	if(fEngine == NULL || (int)size <= 0 || string == NULL || *string == 0 || length == 0) return BRect();
 
-	EView *view = e_cast_as(_view, EView);
-	if(view == NULL || view->Window() == NULL || view->IsPrinting()) return ERect();
+	BView *view = b_cast_as(_view, BView);
+	if(view == NULL || view->Window() == NULL || view->IsPrinting()) return BRect();
 
-	ERegion viewClipping;
+	BRegion viewClipping;
 	view->GetClippingRegion(&viewClipping);
-	if(viewClipping.CountRects() <= 0) return ERect();
+	if(viewClipping.CountRects() <= 0) return BRect();
 
-	EAutolock <EDFBGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return ERect();
+	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return BRect();
 
-	EDFBGraphicsDrawable *pix = e_cast_as(EGraphicsEngine::GetPixmap(view->Window()), EDFBGraphicsDrawable);
-	EGraphicsContext *dc = EGraphicsEngine::GetContext(view);
-	if(pix == NULL || pix->dfbSurface == NULL || dc == NULL) return ERect();
+	EDFBGraphicsDrawable *pix = b_cast_as(BGraphicsEngine::GetPixmap(view->Window()), EDFBGraphicsDrawable);
+	BGraphicsContext *dc = BGraphicsEngine::GetContext(view);
+	if(pix == NULL || pix->dfbSurface == NULL || dc == NULL) return BRect();
 
-	if(!IsAttached()) return ERect();
+	if(!IsAttached()) return BRect();
 
 	int height = 0, ascent = 0, descent = 0;
 	fDFBFont->GetHeight(fDFBFont, &height);
 	fDFBFont->GetAscender(fDFBFont, &ascent);
 	fDFBFont->GetDescender(fDFBFont, &descent);
 
-	if(size != (float)height) return ERect();
+	if(size != (float)height) return BRect();
 
 	float width = 0;
-	if(length < 0 || (size_t)length > strlen(string)) length = (eint32)strlen(string);
+	if(length < 0 || (size_t)length > strlen(string)) length = (b_int32)strlen(string);
 	float delta = (float)ceil((double)(spacing * size));
 
-	EPoint pt = view->ConvertToWindow(view->PenLocation());
+	BPoint pt = view->ConvertToWindow(view->PenLocation());
 	pt.y -= (float)(ascent + 1);
 
-	e_rgb_color c = dc->HighColor();
+	b_rgb_color c = dc->HighColor();
 	pix->dfbSurface->SetColor(pix->dfbSurface, c.red, c.green, c.blue, 255);
 	pix->dfbSurface->SetDrawingFlags(pix->dfbSurface, DSDRAW_NOFX);
 	pix->dfbSurface->SetFont(pix->dfbSurface, fDFBFont);
 
-	euint8 bytes = 0;
-	const char *str = e_utf8_at(string, 0, &bytes);
+	b_uint8 bytes = 0;
+	const char *str = b_utf8_at(string, 0, &bytes);
 	const char *tmp = str;
 	while(!(tmp == NULL || bytes == 0 || (size_t)(tmp - string) > (size_t)length - (size_t)bytes))
 	{
-		EString aStr(tmp, (eint32)bytes);
+		BString aStr(tmp, (b_int32)bytes);
 
 		int bWidth = -1;
 		fDFBFont->GetStringWidth(fDFBFont, aStr.String(), aStr.Length(), &bWidth);
 
-		for(eint32 i = 0; i < dc->Clipping()->CountRects(); i++)
+		for(b_int32 i = 0; i < dc->Clipping()->CountRects(); i++)
 		{
-			ERect rect = dc->Clipping()->RectAt(i).FloorCopy();
+			BRect rect = dc->Clipping()->RectAt(i).FloorCopy();
 
 			DFBRegion clipping;
 			clipping.x1 = (int)rect.left;
@@ -321,12 +321,12 @@ EDFBFont::RenderString(EHandler *_view, const char *string, float size, float sp
 		pt.x += (float)(bWidth > 0 ? bWidth : height) + delta;
 		width += (float)(bWidth > 0 ? bWidth : height) + (tmp == str ? 0.f : delta);
 
-		tmp = e_utf8_next(tmp, &bytes);
+		tmp = b_utf8_next(tmp, &bytes);
 	}
 
 	pix->dfbSurface->SetFont(pix->dfbSurface, NULL);
 
-	ERect updateRect;
+	BRect updateRect;
 	updateRect.left = pt.x;
 	updateRect.right = pt.x + width;
 	updateRect.top = pt.y;
@@ -338,11 +338,11 @@ EDFBFont::RenderString(EHandler *_view, const char *string, float size, float sp
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsEngine::InitalizeFonts()
 {
-	EAutolock <EDFBGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false) return B_ERROR;
 
 	return InitCheck();
 }
@@ -354,57 +354,57 @@ EDFBGraphicsEngine::DestroyFonts()
 }
 
 
-e_status_t
+b_status_t
 EDFBGraphicsEngine::UpdateFonts(bool check_only)
 {
-	EString fonts_dirs;
+	BString fonts_dirs;
 
 	const char *dirs = getenv("DIRECTFB_FONTS_DIR");
 	if(dirs) fonts_dirs += dirs;
 
 	if(fonts_dirs.Length() <= 0)
-		ETK_WARNING("[FONT]: you can set the environment \"DIRECTFB_FONTS_DIR\" to match the correct dirs.");
+		BHAPI_WARNING("[FONT]: you can set the environment \"DIRECTFB_FONTS_DIR\" to match the correct dirs.");
 
-	EAutolock <EDFBGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EDFBGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || InitCheck() != B_OK) return B_ERROR;
 
 	if(check_only)
 	{
-		ETK_WARNING("[GRAPHICS]: %s --- check_only not implement yet.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_WARNING("[GRAPHICS]: %s --- check_only not implement yet.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	ETK_DEBUG("[GRAPHICS]: Updating DirectFB fonts ...");
+	BHAPI_DEBUG("[GRAPHICS]: Updating DirectFB fonts ...");
 
-	EStringArray *fonts_dirs_array = fonts_dirs.Split(":");
-	ETK_DEBUG("[FONT]: Fonts directory number: %d", (fonts_dirs_array ? fonts_dirs_array->CountItems() : 0));
+	BStringArray *fonts_dirs_array = fonts_dirs.Split(":");
+	BHAPI_DEBUG("[FONT]: Fonts directory number: %d", (fonts_dirs_array ? fonts_dirs_array->CountItems() : 0));
 
-	eint32 count = 0;
-	const EString *_fonts_dir;
-	for(eint32 m = 0; (_fonts_dir = (fonts_dirs_array ? fonts_dirs_array->ItemAt(m) : NULL)) != NULL; m++)
+	b_int32 count = 0;
+	const BString *_fonts_dir;
+	for(b_int32 m = 0; (_fonts_dir = (fonts_dirs_array ? fonts_dirs_array->ItemAt(m) : NULL)) != NULL; m++)
 	{
-		EDirectory directory(_fonts_dir->String());
-		if(directory.InitCheck() != E_OK)
+		BDirectory directory(_fonts_dir->String());
+		if(directory.InitCheck() != B_OK)
 		{
-			ETK_WARNING("[FONT]: CAN NOT open fonts directory - \"%s\"!", _fonts_dir->String());
+			BHAPI_WARNING("[FONT]: CAN NOT open fonts directory - \"%s\"!", _fonts_dir->String());
 			continue;
 		}
-		ETK_DEBUG("[FONT]: Opening font directory \"%s\"...", _fonts_dir->String());
+		BHAPI_DEBUG("[FONT]: Opening font directory \"%s\"...", _fonts_dir->String());
 
-		EEntry aEntry;
-		while(directory.GetNextEntry(&aEntry, true) == E_OK)
+		BEntry aEntry;
+		while(directory.GetNextEntry(&aEntry, true) == B_OK)
 		{
-			EPath aPath;
-			if(aEntry.GetPath(&aPath) != E_OK) continue;
-			EString filename = aPath.Leaf();
+			BPath aPath;
+			if(aEntry.GetPath(&aPath) != B_OK) continue;
+			BString filename = aPath.Leaf();
 
 			if(filename.Length() <= 0 || filename == "." || filename == "..") continue;
 
-			ETK_DEBUG("[FONT]: Reading font file \"%s\" ...", aPath.Path());
+			BHAPI_DEBUG("[FONT]: Reading font file \"%s\" ...", aPath.Path());
 
 			EDFBFont *engine = new EDFBFont(this, aPath.Path());
 			if(engine == NULL || engine->IsValid() == false ||
-			   etk_font_add(engine->Family(), engine->Style(), engine) == false)
+			   bhapi_font_add(engine->Family(), engine->Style(), engine) == false)
 			{
 				if(engine) delete engine;
 				continue;
@@ -419,15 +419,15 @@ EDFBGraphicsEngine::UpdateFonts(bool check_only)
 	{
 		EDFBFont *engine = new EDFBFont(this, NULL);
 		if(engine == NULL || engine->IsValid() == false ||
-		   etk_font_add(engine->Family(), engine->Style(), engine) == false)
+		   bhapi_font_add(engine->Family(), engine->Style(), engine) == false)
 		{
 			if(engine) delete engine;
 		}
 	}
 
-	ETK_DEBUG("[GRAPHICS]: DirectFB fonts updated.");
+	BHAPI_DEBUG("[GRAPHICS]: DirectFB fonts updated.");
 
-	return E_OK;
+	return B_OK;
 }
 
 #endif /* DIRECTFB */

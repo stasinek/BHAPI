@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_PRIVATE_MEMORY_H__
-#define __ETK_PRIVATE_MEMORY_H__
+#ifndef __BHAPI_PRIVATE_MEMORY_H__
+#define __BHAPI_PRIVATE_MEMORY_H__
 
 #include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _LOCAL EMemory
+class _LOCAL BMemory
 {
 public:
 	static void	*Malloc(size_t size, void (*destroy_func)(void*) = NULL);
@@ -43,5 +43,5 @@ public:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_PRIVATE_MEMORY_H__ */
+#endif /* __BHAPI_PRIVATE_MEMORY_H__ */
 

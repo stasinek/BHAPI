@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -35,28 +35,28 @@
 #include "PrivateHandler.h"
 
 
-ELocker* etk_get_handler_operator_locker()
+BLocker* bhapi_get_handler_operator_locker()
 {
-	return etk_app_connector->HandlersDepot()->Locker();
+	return bhapi_app_connector->HandlersDepot()->Locker();
 }
 
 
-euint64 etk_get_handler_token(const EHandler *handler)
+b_uint64 bhapi_get_handler_token(const BHandler *handler)
 {
-	return((handler == NULL || handler->fToken == NULL) ? E_MAXUINT64 : handler->fToken->Token());
+	return((handler == NULL || handler->fToken == NULL) ? B_MAXUINT64 : handler->fToken->Token());
 }
 
 
-euint64 etk_get_ref_handler_token(const EHandler *handler)
+b_uint64 bhapi_get_ref_handler_token(const BHandler *handler)
 {
-	euint64 retVal = E_MAXUINT64;
+	b_uint64 retVal = B_MAXUINT64;
 
-	EAutolock <ETokensDepot>autolock(etk_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
 
-	EToken *aToken = etk_app_connector->HandlersDepot()->FetchToken(etk_get_handler_token(handler));
+	BToken *aToken = bhapi_app_connector->HandlersDepot()->FetchToken(bhapi_get_handler_token(handler));
 	if(aToken != NULL)
 	{
-		euint64 vitalities = aToken->Vitalities();
+		b_uint64 vitalities = aToken->Vitalities();
 		aToken->operator++();
 		if(aToken->Vitalities() != vitalities) retVal = aToken->Token();
 	}
@@ -65,78 +65,78 @@ euint64 etk_get_ref_handler_token(const EHandler *handler)
 }
 
 
-EHandler* etk_get_handler(euint64 token)
+BHandler* bhapi_get_handler(b_uint64 token)
 {
-	EHandler *retVal = NULL;
+	BHandler *retVal = NULL;
 
-	EAutolock <ETokensDepot>autolock(etk_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
 
-	EToken *aToken = etk_app_connector->HandlersDepot()->FetchToken(token);
-	if(aToken != NULL) retVal = reinterpret_cast<EHandler*>(aToken->Data());
+	BToken *aToken = bhapi_app_connector->HandlersDepot()->FetchToken(token);
+	if(aToken != NULL) retVal = reinterpret_cast<BHandler*>(aToken->Data());
 
 	return retVal;
 }
 
 
-e_bigtime_t etk_get_handler_create_time_stamp(euint64 token)
+b_bigtime_t bhapi_get_handler_create_time_stamp(b_uint64 token)
 {
-	e_bigtime_t retVal = E_MAXINT64;
+	b_bigtime_t retVal = B_MAXINT64;
 
-	EAutolock <ETokensDepot>autolock(etk_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
 
-	EToken *aToken = etk_app_connector->HandlersDepot()->FetchToken(token);
+	BToken *aToken = bhapi_app_connector->HandlersDepot()->FetchToken(token);
 	if(aToken != NULL) retVal = aToken->TimeStamp();
 
 	return retVal;
 }
 
 
-ELooper* etk_get_handler_looper(euint64 token)
+BLooper* bhapi_get_handler_looper(b_uint64 token)
 {
-	EAutolock <ETokensDepot>autolock(etk_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
 
-	EHandler *handler = etk_get_handler(token);
+	BHandler *handler = bhapi_get_handler(token);
 	return(handler == NULL ? NULL : handler->Looper());
 }
 
 
-euint64 etk_get_ref_looper_token(euint64 token)
+b_uint64 bhapi_get_ref_looper_token(b_uint64 token)
 {
-	EAutolock <ETokensDepot>autolock(etk_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
 
-	EHandler *handler = etk_get_handler(token);
-	return(handler == NULL ? E_MAXUINT64 : etk_get_ref_handler_token(handler->Looper()));
+	BHandler *handler = bhapi_get_handler(token);
+	return(handler == NULL ? B_MAXUINT64 : bhapi_get_ref_handler_token(handler->Looper()));
 }
 
 
-e_status_t etk_lock_looper_of_handler(euint64 token, e_bigtime_t timeout)
+b_status_t bhapi_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout)
 {
-	ELocker *handlers_locker = etk_get_handler_operator_locker();
+	BLocker *handlers_locker = bhapi_get_handler_operator_locker();
 
 	handlers_locker->Lock();
 
-	ELooper *looper = etk_get_handler_looper(token);
-	ELooper *looper_proxy = (looper != NULL ? looper->_Proxy() : NULL);
-	void *locker = ((looper == NULL || looper->fLocker == NULL) ? NULL : etk_clone_locker(looper->fLocker));
+	BLooper *looper = bhapi_get_handler_looper(token);
+	BLooper *looper_proxy = (looper != NULL ? looper->_Proxy() : NULL);
+	void *locker = ((looper == NULL || looper->fLocker == NULL) ? NULL : bhapi_clone_locker(looper->fLocker));
 
 	if(locker == NULL)
 	{
 		handlers_locker->Unlock();
-		return E_BAD_VALUE;
+		return B_BAD_VALUE;
 	}
 
-	eint64 save_count = handlers_locker->CountLocks();
+	b_int64 save_count = handlers_locker->CountLocks();
 	while(handlers_locker->CountLocks() > 0) handlers_locker->Unlock();
 
-	e_status_t retVal = etk_lock_locker_etc(locker, E_TIMEOUT, timeout);
-	if(retVal == E_OK)
+	b_status_t retVal = bhapi_lock_locker_etc(locker, B_TIMEOUT, timeout);
+	if(retVal == B_OK)
 	{
 		handlers_locker->Lock();
-		if(looper != etk_get_handler_looper(token) || looper_proxy != looper->_Proxy()) retVal = E_MISMATCHED_VALUES;
+		if(looper != bhapi_get_handler_looper(token) || looper_proxy != looper->_Proxy()) retVal = B_MISMATCHED_VALUES;
 		if(save_count-- == 1) handlers_locker->Unlock();
-		if(retVal != E_OK) etk_unlock_locker(locker);
+		if(retVal != B_OK) bhapi_unlock_locker(locker);
 	}
-	etk_delete_locker(locker);
+	bhapi_delete_locker(locker);
 
 	while(save_count-- > 1) handlers_locker->Lock();
 
@@ -144,29 +144,29 @@ e_status_t etk_lock_looper_of_handler(euint64 token, e_bigtime_t timeout)
 }
 
 
-bool etk_is_current_at_looper_thread(euint64 token)
+bool bhapi_is_current_at_looper_thread(b_uint64 token)
 {
-	EAutolock <ETokensDepot>autolock(etk_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
 
-	ELooper *looper = e_cast_as(etk_get_handler(token), ELooper);
+	BLooper *looper = b_cast_as(bhapi_get_handler(token), BLooper);
 	if(looper == NULL) return false;
 
-	bool retVal = (looper->Thread() == etk_get_current_thread_id() ? true : false);
+	bool retVal = (looper->Thread() == bhapi_get_current_thread_id() ? true : false);
 
 	return retVal;
 }
 
 
-bool etk_ref_handler(euint64 token)
+bool bhapi_ref_handler(b_uint64 token)
 {
 	bool retVal = false;
 
-	EAutolock <ETokensDepot>autolock(etk_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
 
-	EToken *aToken = etk_app_connector->HandlersDepot()->FetchToken(token);
+	BToken *aToken = bhapi_app_connector->HandlersDepot()->FetchToken(token);
 	if(aToken != NULL)
 	{
-		euint64 vitalities = aToken->Vitalities();
+		b_uint64 vitalities = aToken->Vitalities();
 		aToken->operator++();
 		if(aToken->Vitalities() != vitalities) retVal = true;
 	}
@@ -175,11 +175,11 @@ bool etk_ref_handler(euint64 token)
 }
 
 
-void etk_unref_handler(euint64 token)
+void bhapi_unref_handler(b_uint64 token)
 {
-	EAutolock <ETokensDepot>autolock(etk_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
 
-	EToken *aToken = etk_app_connector->HandlersDepot()->FetchToken(token);
+	BToken *aToken = bhapi_app_connector->HandlersDepot()->FetchToken(token);
 	if(aToken != NULL) aToken->operator--();
 }
 

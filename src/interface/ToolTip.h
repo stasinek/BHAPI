@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_TOOL_TIP_H__
-#define __ETK_TOOL_TIP_H__
+#ifndef __BHAPI_TOOL_TIP_H__
+#define __BHAPI_TOOL_TIP_H__
 
 #include "./../app/Messenger.h"
 #include "./../interface/GraphicsDefs.h"
@@ -37,55 +37,55 @@
 
 
 #if 0
-class _IMPEXP_ETK EToolTipInfo {
+class _IMPEXP_BHAPI BToolTipInfo {
 public:
-	EToolTipInfo();
-	virtual ~EToolTipInfo();
+    BToolTipInfo();
+    virtual ~BToolTipInfo();
 
 	void			SetText(const char *text);
 	const char		*Text() const;
 
-	void			SetFont(const EFont *font);
-	const EFont*		Font() const;
+	void			SetFont(const BFont *font);
+	const BFont*		Font() const;
 
-	void			SetBackgroundColor(e_rgb_color color);
-	e_rgb_color		BackgroundColor() const;
+    void			SetBackgroundColor(b_rgb_color color);
+	b_rgb_color		BackgroundColor() const;
 
-	void			SetTextColor(e_rgb_color color);
-	e_rgb_color		TextColor() const;
+    void			SetTextColor(b_rgb_color color);
+	b_rgb_color		TextColor() const;
 
 	void			SetInline(bool state);
 	bool			IsInline() const;
 
-	void			SetTextOrigin(EPoint origin);
-	EPoint			TextOrigin() const;
+	void			SetTextOrigin(BPoint origin);
+	BPoint			TextOrigin() const;
 
 private:
 	char *fText;
-	EFont fFont;
-	e_rgb_color fColor[2];
+	BFont fFont;
+	b_rgb_color fColor[2];
 	bool fIsInline;
-	EPoint fTextOrigin;
+	BPoint fTextOrigin;
 };
 
 
-class _IMPEXP_ETK EToolTip {
+class _IMPEXP_BHAPI BToolTip {
 public:
-	EToolTip();
-	virtual ~EToolTip();
+    BToolTip();
+    virtual ~BToolTip();
 
-	virtual e_status_t	ShowTip(const EMessenger &msgr);
-	virtual e_status_t	HideTip(const EMessenger &msgr);
-	virtual e_status_t	KillTip(const EMessenger &msgr);
-	virtual e_status_t	SetToolTipInfo(const EMessenger &msgr,
-					       ERect region,
-					       EToolTipInfo *info);
+	virtual b_status_t	ShowTip(const BMessenger &msgr);
+	virtual b_status_t	HideTip(const BMessenger &msgr);
+	virtual b_status_t	KillTip(const BMessenger &msgr);
+	virtual b_status_t	SetToolTipInfo(const BMessenger &msgr,
+					       BRect region,
+                           BToolTipInfo *info);
 
-	virtual e_status_t	CursorMoved(const EMessenger &msgr,
-					    EPoint where,
-					    EPoint delta);
+	virtual b_status_t	CursorMoved(const BMessenger &msgr,
+					    BPoint where,
+					    BPoint delta);
 
-	static EToolTip		*Default();
+    static BToolTip		*Default();
 
 private:
 	void *fData;
@@ -93,5 +93,5 @@ private:
 #endif
 
 
-#endif /* __ETK_TOOL_TIP_H__ */
+#endif /* __BHAPI_TOOL_TIP_H__ */
 

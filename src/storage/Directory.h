@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,33 +27,33 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_DIRECTORY_H__
-#define __ETK_DIRECTORY_H__ 
+#ifndef __BHAPI_DIRECTORY_H__
+#define __BHAPI_DIRECTORY_H__ 
 
 #include "./Entry.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EDirectory {
+class _IMPEXP_BHAPI BDirectory {
 public:
-	EDirectory();
-	EDirectory(const char *path);
-	virtual ~EDirectory();
+    BDirectory();
+    BDirectory(const char *path);
+    virtual ~BDirectory();
 
-	e_status_t	InitCheck() const;
-	e_status_t	SetTo(const char *path);
+	b_status_t	InitCheck() const;
+	b_status_t	SetTo(const char *path);
 	void		Unset();
 
-	e_status_t	GetEntry(EEntry *entry) const;
-	e_status_t	GetNextEntry(EEntry *entry, bool traverse = false);
-	e_status_t	Rewind();
-	eint32		CountEntries();
+    b_status_t	GetEntry(BEntry *entry) const;
+    b_status_t	GetNextEntry(BEntry *entry, bool traverse = false);
+	b_status_t	Rewind();
+    b_int32		CountEntries();
 
 	void		DoForEach(bool (*func)(const char *path));
 	void		DoForEach(bool (*func)(const char *path, void *user_data), void *user_data);
 
 private:
-	friend class EEntry;
+    friend class BEntry;
 
 	void *fDir;
 	char *fName;
@@ -61,5 +61,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_DIRECTORY_H__ */
+#endif /* __BHAPI_DIRECTORY_H__ */
 

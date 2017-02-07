@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,50 +27,50 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_STREAM_IO_H__
-#define __ETK_STREAM_IO_H__
+#ifndef __BHAPI_STREAM_IO_H__
+#define __BHAPI_STREAM_IO_H__
 
 #include "DataIO.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class EString;
+class BString;
 
-class _IMPEXP_ETK EStreamIO : public EDataIO {
+class _IMPEXP_BHAPI BStreamIO : public EDataIO {
 public:
-	EStreamIO();
-	virtual ~EStreamIO();
+    BStreamIO();
+    virtual ~BStreamIO();
 
 	virtual ssize_t		Read(void *buffer, size_t size);
 	virtual ssize_t		Write(const void *buffer, size_t size);
 
-	EStreamIO 		&operator<<(eint8 value);
-	EStreamIO 		&operator<<(euint8 value);
-	EStreamIO 		&operator<<(eint16 value);
-	EStreamIO 		&operator<<(euint16 value);
-	EStreamIO 		&operator<<(eint32 value);
-	EStreamIO 		&operator<<(euint32 value);
-	EStreamIO 		&operator<<(eint64 value);
-	EStreamIO 		&operator<<(euint64 value);
-	EStreamIO 		&operator<<(float value);
-	EStreamIO 		&operator<<(double value);
-	EStreamIO 		&operator<<(const void *value);
-	EStreamIO 		&operator<<(bool value);
-	EStreamIO 		&operator<<(const char *str);
-	EStreamIO 		&operator<<(const EString &str);
-	EStreamIO 		&operator<<(EStreamIO &stream);
+    BStreamIO 		&operator<<(b_int8 value);
+    BStreamIO 		&operator<<(b_uint8 value);
+    BStreamIO 		&operator<<(b_int16 value);
+    BStreamIO 		&operator<<(b_uint16 value);
+    BStreamIO 		&operator<<(b_int32 value);
+    BStreamIO 		&operator<<(b_uint32 value);
+    BStreamIO 		&operator<<(b_int64 value);
+    BStreamIO 		&operator<<(b_uint64 value);
+    BStreamIO 		&operator<<(float value);
+    BStreamIO 		&operator<<(double value);
+    BStreamIO 		&operator<<(const void *value);
+    BStreamIO 		&operator<<(bool value);
+    BStreamIO 		&operator<<(const char *str);
+    BStreamIO 		&operator<<(const BString &str);
+    BStreamIO 		&operator<<(BStreamIO &stream);
 
 	// TODO: operator>>()
 };
 
-extern _IMPEXP_ETK EStreamIO& endl;
-extern _IMPEXP_ETK EStreamIO& ends;
+extern _IMPEXP_BHAPI BStreamIO& endl;
+extern _IMPEXP_BHAPI BStreamIO& ends;
 
-extern _IMPEXP_ETK EStreamIO& EIn;
-extern _IMPEXP_ETK EStreamIO& EOut;
-extern _IMPEXP_ETK EStreamIO& EErr;
+extern _IMPEXP_BHAPI BStreamIO& EIn;
+extern _IMPEXP_BHAPI BStreamIO& EOut;
+extern _IMPEXP_BHAPI BStreamIO& EErr;
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_STREAM_IO_H__ */
+#endif /* __BHAPI_STREAM_IO_H__ */
 

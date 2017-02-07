@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -33,11 +33,11 @@
 #include "./../../kernel/Kernel.h"
 #include "./../../support/Autolock.h"
 #include "./../../app/Application.h"
-#include "./../../support/String.h"
+#include "./../../support/StringMe.h"
 #include "./../../support/ClassInfo.h"
 
 
-bool etk_win32_window_convert_to_screen(HWND hWnd, int *x, int *y)
+bool bhapi_win32_window_convert_to_screen(HWND hWnd, int *x, int *y)
 {
 	if(hWnd == NULL || x == NULL || y == NULL) return false;
 
@@ -54,7 +54,7 @@ bool etk_win32_window_convert_to_screen(HWND hWnd, int *x, int *y)
 }
 
 
-bool etk_win32_window_get_rect(HWND hWnd, RECT *r)
+bool bhapi_win32_window_get_rect(HWND hWnd, RECT *r)
 {
 	if(hWnd == NULL || r == NULL) return false;
 
@@ -62,7 +62,7 @@ bool etk_win32_window_get_rect(HWND hWnd, RECT *r)
 
 	if(GetClientRect(hWnd, r) == 0) return false;
 
-	if(!etk_win32_window_convert_to_screen(hWnd, &x, &y)) return false;
+	if(!bhapi_win32_window_convert_to_screen(hWnd, &x, &y)) return false;
 
 	r->left += x;
 	r->top += y;
@@ -73,7 +73,7 @@ bool etk_win32_window_get_rect(HWND hWnd, RECT *r)
 }
 
 
-bool etk_win32_window_convert_window_to_client(HWND hWnd, RECT *wr)
+bool bhapi_win32_window_convert_window_to_client(HWND hWnd, RECT *wr)
 {
 	if(hWnd == NULL || wr == NULL) return false;
 
@@ -97,41 +97,41 @@ bool etk_win32_window_convert_window_to_client(HWND hWnd, RECT *wr)
 }
 
 
-EWin32GraphicsWindow::EWin32GraphicsWindow(EWin32GraphicsEngine *win32Engine, eint32 x, eint32 y, euint32 w, euint32 h)
-	: EGraphicsWindow(), win32Window(NULL),
-	  fLook((e_window_look)0), fFeel((e_window_feel)0), fActivateWhenShown(false), hbrBackground(NULL),
-	  fEngine(NULL), fRequestWin(NULL), fRequestAsyncWin(NULL), WM_ETK_MESSAGE(0)
+EWin32GraphicsWindow::EWin32GraphicsWindow(EWin32GraphicsEngine *win32Engine, b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
+	: BGraphicsWindow(), win32Window(NULL),
+	  fLook((b_window_look)0), fFeel((b_window_feel)0), fActivateWhenShown(false), hbrBackground(NULL),
+	  fEngine(NULL), fRequestWin(NULL), fRequestAsyncWin(NULL), WM_BHAPI_MESSAGE(0)
 {
-	if(w == E_MAXUINT32 || h == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
 		return;
 	}
 
 	if(win32Engine == NULL) return;
 
 	do {
-		EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-		if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK ||
-		   win32Engine->WM_ETK_MESSAGE == 0 ||
+		BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+		if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK ||
+		   win32Engine->WM_BHAPI_MESSAGE == 0 ||
 		   win32Engine->win32RequestWin == NULL || win32Engine->win32RequestAsyncWin == NULL)
 		{
 			if(fRequestWin != NULL) CloseHandle(fRequestWin);
 			if(fRequestAsyncWin != NULL) CloseHandle(fRequestAsyncWin);
-			ETK_WARNING("[GRAPHICS]: %s --- Invalid engine or unable to duplicate handle.", __PRETTY_FUNCTION__);
+			BHAPI_WARNING("[GRAPHICS]: %s --- Invalid engine or unable to duplicate handle.", __PRETTY_FUNCTION__);
 			return;
 		}
 
-		WM_ETK_MESSAGE = win32Engine->WM_ETK_MESSAGE;
+		WM_BHAPI_MESSAGE = win32Engine->WM_BHAPI_MESSAGE;
 		fRequestWin = win32Engine->win32RequestWin;
 		fRequestAsyncWin = win32Engine->win32RequestAsyncWin;
 	} while(false);
 
-	e_rgb_color whiteColor = {255, 255, 255, 255};
-	EGraphicsDrawable::SetBackgroundColor(whiteColor);
+	b_rgb_color whiteColor = {255, 255, 255, 255};
+	BGraphicsDrawable::SetBackgroundColor(whiteColor);
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_CREATE_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_CREATE_WINDOW;
 	callback.win = this;
 	callback.x = x;
 	callback.y = y;
@@ -139,12 +139,12 @@ EWin32GraphicsWindow::EWin32GraphicsWindow(EWin32GraphicsEngine *win32Engine, ei
 	callback.h = h;
 	callback.bkColor = whiteColor;
 
-	bool successed = (SendMessageA(fRequestWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	bool successed = (SendMessageA(fRequestWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
 
 	if(successed == false || win32Window == NULL)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Unable to create window: \"%s\".",
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Unable to create window: \"%s\".",
 			  __PRETTY_FUNCTION__, successed ? "win32Window = NULL" : "SendMessageA failed");
 	}
 	else
@@ -154,25 +154,25 @@ EWin32GraphicsWindow::EWin32GraphicsWindow(EWin32GraphicsEngine *win32Engine, ei
 }
 
 
-inline LONG _etk_get_window_style_ex(e_window_look look)
+inline LONG _bhapi_get_window_style_ex(b_window_look look)
 {
 	LONG style;
 
 	switch(look)
 	{
-		case E_BORDERED_WINDOW_LOOK:
+		case B_BORDERED_WINDOW_LOOK:
 			style = 0;
 			break;
 
-		case E_NO_BORDER_WINDOW_LOOK:
+		case B_NO_BORDER_WINDOW_LOOK:
 			style = WS_EX_TOOLWINDOW;
 			break;
 
-		case E_FLOATING_WINDOW_LOOK:
+		case B_FLOATING_WINDOW_LOOK:
 			style = WS_EX_TOOLWINDOW | WS_EX_APPWINDOW;
 			break;
 
-		case E_MODAL_WINDOW_LOOK:
+		case B_MODAL_WINDOW_LOOK:
 			style = WS_EX_DLGMODALFRAME;
 			break;
 
@@ -185,26 +185,26 @@ inline LONG _etk_get_window_style_ex(e_window_look look)
 }
 
 
-inline LONG _etk_get_window_style(e_window_look look)
+inline LONG _bhapi_get_window_style(b_window_look look)
 {
 	LONG style;
 
 	switch(look)
 	{
-		case E_BORDERED_WINDOW_LOOK:
+		case B_BORDERED_WINDOW_LOOK:
 			style = WS_POPUPWINDOW;
 			break;
 
-		case E_NO_BORDER_WINDOW_LOOK:
+		case B_NO_BORDER_WINDOW_LOOK:
 			style = WS_POPUP;
 			break;
 
-		case E_MODAL_WINDOW_LOOK:
+		case B_MODAL_WINDOW_LOOK:
 //			style = WS_DLGFRAME;
 			style = WS_CAPTION;
 			break;
 
-		case E_FLOATING_WINDOW_LOOK:
+		case B_FLOATING_WINDOW_LOOK:
 			style = WS_THICKFRAME | WS_CAPTION | WS_SYSMENU | WS_MAXIMIZEBOX | WS_MINIMIZEBOX;
 			break;
 
@@ -217,16 +217,16 @@ inline LONG _etk_get_window_style(e_window_look look)
 }
 
 
-LRESULT _etk_create_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_create_window(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_CREATE_WINDOW || callback->win == NULL) return FALSE;
+	   callback->command != WM_BHAPI_MESSAGE_CREATE_WINDOW || callback->win == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
-	LONG style = _etk_get_window_style(E_TITLED_WINDOW_LOOK);
-	LONG styleEx = _etk_get_window_style_ex(E_TITLED_WINDOW_LOOK);
+	LONG style = _bhapi_get_window_style(B_TITLED_WINDOW_LOOK);
+	LONG styleEx = _bhapi_get_window_style_ex(B_TITLED_WINDOW_LOOK);
 
 	RECT r;
 	r.left = callback->x;
@@ -240,7 +240,7 @@ LRESULT _etk_create_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_call
 							r.left, r.top, r.right - r.left + 1, r.bottom - r.top + 1,
 							NULL, NULL, win32Engine->win32Hinstance, NULL)) == NULL) return FALSE;
 
-	callback->win->fLook = E_TITLED_WINDOW_LOOK;
+	callback->win->fLook = B_TITLED_WINDOW_LOOK;
 
 	// FIXME: maybe 64-bit pointer
 	SetWindowLong(callback->win->win32Window, 0, reinterpret_cast<long>(win32Engine));
@@ -254,27 +254,27 @@ EWin32GraphicsWindow::~EWin32GraphicsWindow()
 {
 	if(fRequestWin != NULL)
 	{
-		etk_win32_gdi_callback_t callback;
-		callback.command = WM_ETK_MESSAGE_DESTROY_WINDOW;
+		bhapi_win32_gdi_callback_t callback;
+		callback.command = WM_BHAPI_MESSAGE_DESTROY_WINDOW;
 		callback.win = this;
 
-		bool successed = (SendMessageA(fRequestWin, WM_ETK_MESSAGE,
-					       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+		bool successed = (SendMessageA(fRequestWin, WM_BHAPI_MESSAGE,
+					       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
 
 		if(!successed || win32Window != NULL)
-			ETK_ERROR("[GRAPHICS]: %s --- Unable to destory window.", __PRETTY_FUNCTION__);
+			BHAPI_ERROR("[GRAPHICS]: %s --- Unable to destory window.", __PRETTY_FUNCTION__);
 	}
 }
 
 
-LRESULT _etk_destroy_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_destroy_window(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_DESTROY_WINDOW || callback->win == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_DESTROY_WINDOW || callback->win == NULL ||
 	   callback->win->win32Window == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
  
 	// FIXME: maybe 64-bit pointer
 	SetWindowLong(callback->win->win32Window, GWL_USERDATA, 0);
@@ -291,51 +291,51 @@ LRESULT _etk_destroy_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_cal
 }
 
 
-e_status_t
-EWin32GraphicsWindow::ContactTo(const EMessenger *msgr)
+b_status_t
+EWin32GraphicsWindow::ContactTo(const BMessenger *msgr)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EWin32GraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EWin32GraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	fMsgr = EMessenger();
+	fMsgr = BMessenger();
 	if(msgr) fMsgr = *msgr;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::SetBackgroundColor(e_rgb_color bkColor)
+b_status_t
+EWin32GraphicsWindow::SetBackgroundColor(b_rgb_color bkColor)
 {
-	if(bkColor == BackgroundColor()) return E_OK;
+	if(bkColor == BackgroundColor()) return B_OK;
 
-	if(fRequestWin == NULL) return E_ERROR;
+	if(fRequestWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_SET_WINDOW_BACKGROUND;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_SET_WINDOW_BACKGROUND;
 	callback.win = this;
 	callback.bkColor = bkColor;
 
-	bool successed = (SendMessageA(fRequestWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	bool successed = (SendMessageA(fRequestWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
 
-	if(!successed) return E_ERROR;
+	if(!successed) return B_ERROR;
 
-	EGraphicsDrawable::SetBackgroundColor(bkColor);
-	return E_OK;
+	BGraphicsDrawable::SetBackgroundColor(bkColor);
+	return B_OK;
 }
 
 
-LRESULT _etk_set_window_background(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_set_window_background(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_SET_WINDOW_BACKGROUND || callback->win == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_SET_WINDOW_BACKGROUND || callback->win == NULL ||
 	   callback->win->win32Window == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	HBRUSH hbrBackground = CreateSolidBrush(RGB(callback->bkColor.red, callback->bkColor.green, callback->bkColor.blue));
 	if(hbrBackground == NULL) return FALSE;
@@ -347,37 +347,37 @@ LRESULT _etk_set_window_background(EWin32GraphicsEngine *win32Engine, etk_win32_
 }
 
 
-e_status_t
-EWin32GraphicsWindow::SetLook(e_window_look look)
+b_status_t
+EWin32GraphicsWindow::SetLook(b_window_look look)
 {
-	if(fRequestWin == NULL) return E_ERROR;
+	if(fRequestWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_SET_WINDOW_LOOK;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_SET_WINDOW_LOOK;
 	callback.win = this;
 	callback.look = look;
 
-	bool successed = (SendMessageA(fRequestWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-LRESULT _etk_set_window_look(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_set_window_look(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_SET_WINDOW_LOOK || callback->win == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_SET_WINDOW_LOOK || callback->win == NULL ||
 	   callback->win->win32Window == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	BOOL visible = IsWindowVisible(callback->win->win32Window);
 
 	if(callback->win->fLook != callback->look)
 	{
-		LONG style = _etk_get_window_style(callback->look);
-		LONG styleEx = _etk_get_window_style_ex(callback->look);
+		LONG style = _bhapi_get_window_style(callback->look);
+		LONG styleEx = _bhapi_get_window_style_ex(callback->look);
 		SetWindowLong(callback->win->win32Window, GWL_EXSTYLE, styleEx);
 		SetWindowLong(callback->win->win32Window, GWL_STYLE, style);
 		SetWindowPos(callback->win->win32Window, NULL, 0, 0, 0, 0,
@@ -397,22 +397,22 @@ LRESULT _etk_set_window_look(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_ca
 }
 
 
-e_status_t
+b_status_t
 EWin32GraphicsWindow::SetTitle(const char *title)
 {
-	if(win32Window == NULL) return E_ERROR;
+	if(win32Window == NULL) return B_ERROR;
 
-	e_status_t status;
+	b_status_t status;
 	if(GetVersion() < 0x80000000) // Windows NT/2000/XP
 	{
-		eunichar *uTitle = e_utf8_convert_to_unicode(title, -1);
-		status = (SetWindowTextW(win32Window, (WCHAR*)uTitle) == 0 ? E_ERROR : E_OK);
+		b_unichar *uTitle = b_utf8_convert_to_unicode(title, -1);
+		status = (SetWindowTextW(win32Window, (WCHAR*)uTitle) == 0 ? B_ERROR : B_OK);
 		if(uTitle) free(uTitle);
 	}
 	else // Windows 95/98
 	{
-		char *aTitle = etk_win32_convert_utf8_to_active(title, -1);
-		status = (SetWindowTextA(win32Window, aTitle) == 0 ? E_ERROR : E_OK);
+		char *aTitle = bhapi_win32_convert_utf8_to_active(title, -1);
+		status = (SetWindowTextA(win32Window, aTitle) == 0 ? B_ERROR : B_OK);
 		if(aTitle) free(aTitle);
 	}
 
@@ -420,46 +420,46 @@ EWin32GraphicsWindow::SetTitle(const char *title)
 }
 
 
-e_status_t
-EWin32GraphicsWindow::SetWorkspaces(euint32 workspaces)
+b_status_t
+EWin32GraphicsWindow::SetWorkspaces(b_uint32 workspaces)
 {
 	// don't support workspace
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::GetWorkspaces(euint32 *workspaces)
+b_status_t
+EWin32GraphicsWindow::GetWorkspaces(b_uint32 *workspaces)
 {
 	// don't support workspace
 	if(workspaces) *workspaces = 0;
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
+b_status_t
 EWin32GraphicsWindow::Iconify()
 {
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_ICONIFY_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_ICONIFY_WINDOW;
 	callback.win = this;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-LRESULT _etk_iconify_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_iconify_window(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_ICONIFY_WINDOW || callback->win == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_ICONIFY_WINDOW || callback->win == NULL ||
 	   callback->win->win32Window == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	ShowWindowAsync(callback->win->win32Window, SW_MINIMIZE);
 	callback->win->fActivateWhenShown = false;
@@ -468,29 +468,29 @@ LRESULT _etk_iconify_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_cal
 }
 
 
-e_status_t
+b_status_t
 EWin32GraphicsWindow::Show()
 {
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_SHOW_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_SHOW_WINDOW;
 	callback.win = this;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-LRESULT _etk_show_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_show_window(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_SHOW_WINDOW || callback->win == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_SHOW_WINDOW || callback->win == NULL ||
 	   callback->win->win32Window == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	ShowWindowAsync(callback->win->win32Window, callback->win->fActivateWhenShown ? SW_SHOWNORMAL : SW_SHOWNA);
 	callback->win->fActivateWhenShown = false;
@@ -499,29 +499,29 @@ LRESULT _etk_show_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callba
 }
 
 
-e_status_t
+b_status_t
 EWin32GraphicsWindow::Hide()
 {
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_HIDE_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_HIDE_WINDOW;
 	callback.win = this;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-LRESULT _etk_hide_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_hide_window(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_HIDE_WINDOW || callback->win == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_HIDE_WINDOW || callback->win == NULL ||
 	   callback->win->win32Window == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	ShowWindowAsync(callback->win->win32Window, SW_HIDE);
 
@@ -534,59 +534,59 @@ LRESULT _etk_hide_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callba
 }
 
 
-e_status_t
+b_status_t
 EWin32GraphicsWindow::Raise()
 {
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_RAISE_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_RAISE_WINDOW;
 	callback.win = this;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-LRESULT _etk_raise_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_raise_window(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_RAISE_WINDOW || callback->win == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_RAISE_WINDOW || callback->win == NULL ||
 	   callback->win->win32Window == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	return(SetWindowPos(callback->win->win32Window, HWND_TOP, 0, 0, 0, 0,
 			    SWP_ASYNCWINDOWPOS | SWP_DEFERERASE | SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE) == 0 ? FALSE : TRUE);
 }
 
 
-e_status_t
-EWin32GraphicsWindow::Lower(EGraphicsWindow *frontWin)
+b_status_t
+EWin32GraphicsWindow::Lower(BGraphicsWindow *frontWin)
 {
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_LOWER_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_LOWER_WINDOW;
 	callback.win = this;
-	callback.frontWin = e_cast_as(frontWin, EWin32GraphicsWindow);
+	callback.frontWin = b_cast_as(frontWin, EWin32GraphicsWindow);
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-LRESULT _etk_lower_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_lower_window(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_LOWER_WINDOW || callback->win == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_LOWER_WINDOW || callback->win == NULL ||
 	   callback->win->win32Window == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(callback->frontWin == NULL || callback->frontWin->win32Window == NULL)
 		return(SetWindowPos(callback->win->win32Window, HWND_BOTTOM, 0, 0, 0, 0,
@@ -597,30 +597,30 @@ LRESULT _etk_lower_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callb
 }
 
 
-e_status_t
+b_status_t
 EWin32GraphicsWindow::Activate(bool state)
 {
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_ACTIVATE_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_ACTIVATE_WINDOW;
 	callback.win = this;
 	callback.activate_state = state;
 
-	bool successed = (SendMessageA(fRequestWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-LRESULT _etk_activate_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_activate_window(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_ACTIVATE_WINDOW || callback->win == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_ACTIVATE_WINDOW || callback->win == NULL ||
 	   callback->win->win32Window == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(callback->activate_state)
 	{
@@ -631,7 +631,7 @@ LRESULT _etk_activate_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_ca
 		}
 #if 0
 		DWORD tidForeground = GetWindowThreadProcessId(GetForegroundWindow(), NULL);
-		eint8 otherThread = (tidForeground == win32Engine->win32ThreadID ? 0 : 1);
+		b_int8 otherThread = (tidForeground == win32Engine->win32ThreadID ? 0 : 1);
 		BOOL retVal = FALSE;
 		if(otherThread == 1) otherThread = (AttachThreadInput(tidForeground, win32Engine->win32ThreadID, TRUE) == 0 ? 2 : 1);
 		if(otherThread <= 1) retVal = (SetForegroundWindow(callback->win->win32Window) == 0 ? FALSE : TRUE);
@@ -654,33 +654,33 @@ LRESULT _etk_activate_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_ca
 }
 
 
-e_status_t
+b_status_t
 EWin32GraphicsWindow::GetActivatedState(bool *state) const
 {
-	if(fRequestAsyncWin == NULL || state == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL || state == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_GET_WINDOW_ACTIVATE_STATE;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_GET_WINDOW_ACTIVATE_STATE;
 	callback.win = (EWin32GraphicsWindow*)this;
 
-	bool successed = (SendMessageA(fRequestWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	if(!successed) return E_ERROR;
+	bool successed = (SendMessageA(fRequestWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	if(!successed) return B_ERROR;
 
 	*state = callback.activate_state;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-LRESULT _etk_get_window_activate_state(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_get_window_activate_state(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_GET_WINDOW_ACTIVATE_STATE || callback->win == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_GET_WINDOW_ACTIVATE_STATE || callback->win == NULL ||
 	   callback->win->win32Window == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	bool activate_state = false;
 
@@ -696,84 +696,84 @@ LRESULT _etk_get_window_activate_state(EWin32GraphicsEngine *win32Engine, etk_wi
 }
 
 
-e_status_t
-EWin32GraphicsWindow::MoveTo(eint32 x, eint32 y)
+b_status_t
+EWin32GraphicsWindow::MoveTo(b_int32 x, b_int32 y)
 {
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_MOVE_RESIZE_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_MOVE_RESIZE_WINDOW;
 	callback.win = this;
 	callback.x = x;
 	callback.y = y;
-	callback.w = E_MAXUINT32;
-	callback.h = E_MAXUINT32;
+	callback.w = B_MAXUINT32;
+	callback.h = B_MAXUINT32;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsWindow::ResizeTo(euint32 w, euint32 h)
+b_status_t
+EWin32GraphicsWindow::ResizeTo(b_uint32 w, b_uint32 h)
 {
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	if(w == E_MAXUINT32 || h == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_RESIZE_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_RESIZE_WINDOW;
 	callback.win = this;
 	callback.w = w;
 	callback.h = h;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsWindow::MoveAndResizeTo(eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EWin32GraphicsWindow::MoveAndResizeTo(b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	if(w == E_MAXUINT32 || h == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_MOVE_RESIZE_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_MOVE_RESIZE_WINDOW;
 	callback.win = this;
 	callback.x = x;
 	callback.y = y;
 	callback.w = w;
 	callback.h = h;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-LRESULT _etk_move_resize_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_move_resize_window(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   !(callback->command == WM_ETK_MESSAGE_MOVE_RESIZE_WINDOW || callback->command == WM_ETK_MESSAGE_RESIZE_WINDOW) ||
+	   !(callback->command == WM_BHAPI_MESSAGE_MOVE_RESIZE_WINDOW || callback->command == WM_BHAPI_MESSAGE_RESIZE_WINDOW) ||
 	   callback->win == NULL || callback->win->win32Window == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
-	LONG style = _etk_get_window_style(callback->win->fLook);
-	LONG styleEx = _etk_get_window_style_ex(callback->win->fLook);
+	LONG style = _bhapi_get_window_style(callback->win->fLook);
+	LONG styleEx = _bhapi_get_window_style_ex(callback->win->fLook);
 
 	RECT r;
 	r.left = callback->x;
@@ -784,8 +784,8 @@ LRESULT _etk_move_resize_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi
 	AdjustWindowRectEx(&r, style, FALSE, styleEx);
 
 	UINT flags = SWP_ASYNCWINDOWPOS | SWP_DEFERERASE | SWP_NOACTIVATE | SWP_NOZORDER;
-	if(callback->w == E_MAXUINT32 || callback->h == E_MAXUINT32) flags |= SWP_NOSIZE;
-	else if(callback->command == WM_ETK_MESSAGE_RESIZE_WINDOW) flags |= SWP_NOMOVE;
+	if(callback->w == B_MAXUINT32 || callback->h == B_MAXUINT32) flags |= SWP_NOSIZE;
+	else if(callback->command == WM_BHAPI_MESSAGE_RESIZE_WINDOW) flags |= SWP_NOMOVE;
 
 	SetWindowPos(callback->win->win32Window, HWND_TOP, r.left, r.top, r.right - r.left + 1, r.bottom - r.top + 1, flags);
 
@@ -793,82 +793,82 @@ LRESULT _etk_move_resize_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi
 }
 
 
-e_status_t
+b_status_t
 EWin32GraphicsWindow::GrabMouse()
 {
-	if(fRequestWin == NULL) return E_ERROR;
+	if(fRequestWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_GRAB_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_GRAB_WINDOW;
 	callback.win = this;
 	callback.grab_mouse = true;
 	callback.grab_state = true;
 
-	bool successed = (SendMessageA(fRequestWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EWin32GraphicsWindow::UngrabMouse()
 {
-	if(fRequestWin == NULL) return E_ERROR;
+	if(fRequestWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_GRAB_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_GRAB_WINDOW;
 	callback.win = this;
 	callback.grab_mouse = true;
 	callback.grab_state = false;
 
-	bool successed = (SendMessageA(fRequestWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EWin32GraphicsWindow::GrabKeyboard()
 {
-	if(fRequestWin == NULL) return E_ERROR;
+	if(fRequestWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_GRAB_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_GRAB_WINDOW;
 	callback.win = this;
 	callback.grab_mouse = false;
 	callback.grab_state = true;
 
-	bool successed = (SendMessageA(fRequestWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EWin32GraphicsWindow::UngrabKeyboard()
 {
-	if(fRequestWin == NULL) return E_ERROR;
+	if(fRequestWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_GRAB_WINDOW;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_GRAB_WINDOW;
 	callback.win = this;
 	callback.grab_mouse = false;
 	callback.grab_state = false;
 
-	bool successed = (SendMessageA(fRequestWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-LRESULT _etk_grab_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_grab_window(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_GRAB_WINDOW || callback->win == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_GRAB_WINDOW || callback->win == NULL ||
 	   callback->win->win32Window == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	// TODO: keyboard grab
 	if(callback->grab_mouse == false) return FALSE;
@@ -898,282 +898,282 @@ LRESULT _etk_grab_window(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callba
 }
 
 
-e_status_t
-EWin32GraphicsWindow::SetFlags(euint32 flags)
+b_status_t
+EWin32GraphicsWindow::SetFlags(b_uint32 flags)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 #if 0
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_SET_WINDOW_FLAGS;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_SET_WINDOW_FLAGS;
 	callback.win = this;
 	callback.flags = flags;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 #endif
 }
 
 
-e_status_t
-EWin32GraphicsWindow::SetFeel(e_window_feel feel)
+b_status_t
+EWin32GraphicsWindow::SetFeel(b_window_feel feel)
 {
 	// TODO
-	return E_OK;
+	return B_OK;
 #if 0
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_SET_WINDOW_FEEL;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_SET_WINDOW_FEEL;
 	callback.win = this;
 	callback.feel = feel;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 #endif
 }
 
 
-e_status_t
-EWin32GraphicsWindow::SetSizeLimits(euint32 min_w, euint32 max_w, euint32 min_h, euint32 max_h)
+b_status_t
+EWin32GraphicsWindow::SetSizeLimits(b_uint32 min_w, b_uint32 max_w, b_uint32 min_h, b_uint32 max_h)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 #if 0
-	if(fRequestAsyncWin == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_SET_WINDOW_USIZE;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_SET_WINDOW_USIZE;
 	callback.win = this;
 	callback.min_w = min_w;
 	callback.min_h = min_h;
 	callback.max_w = max_w;
 	callback.max_h = max_h;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 #endif
 }
 
 
-LRESULT _etk_set_window_usize(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_set_window_usize(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	// TODO
 	return FALSE;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::GetSizeLimits(euint32 *min_w, euint32 *max_w, euint32 *min_h, euint32 *max_h)
+b_status_t
+EWin32GraphicsWindow::GetSizeLimits(b_uint32 *min_w, b_uint32 *max_w, b_uint32 *min_h, b_uint32 *max_h)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 #if 0
-	if(fRequestAsyncWin == NULL) return E_ERROR;
-	if(min_w == NULL || max_w == NULL || min_h == NULL || max_h == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL) return B_ERROR;
+	if(min_w == NULL || max_w == NULL || min_h == NULL || max_h == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_GET_WINDOW_USIZE;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_GET_WINDOW_USIZE;
 	callback.win = this;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_WINDOW, (LPARAM)&callback) == (LRESULT)TRUE);
 
-	if(!successed) return E_ERROR;
+	if(!successed) return B_ERROR;
 
 	*min_w = callback.min_w;
 	*min_h = callback.min_h;
 	*max_w = callback.max_w;
 	*max_h = callback.max_h;
 
-	return E_OK;
+	return B_OK;
 #endif
 }
 
 
-LRESULT _etk_get_window_usize(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_get_window_usize(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	// TODO
 	return FALSE;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::QueryMouse(eint32 *x, eint32 *y, eint32 *buttons)
+b_status_t
+EWin32GraphicsWindow::QueryMouse(b_int32 *x, b_int32 *y, b_int32 *buttons)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::CopyTo(EGraphicsContext *dc,
-			     EGraphicsDrawable *dstDrawable,
-			     eint32 x, eint32 y, euint32 w, euint32 h,
-			     eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EWin32GraphicsWindow::CopyTo(BGraphicsContext *dc,
+			     BGraphicsDrawable *dstDrawable,
+			     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+			     b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::DrawPixmap(EGraphicsContext *dc, const EPixmap *pix,
-				 eint32 x, eint32 y, euint32 w, euint32 h,
-				 eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EWin32GraphicsWindow::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
+				 b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+				 b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::StrokePoint(EGraphicsContext *dc,
-				  eint32 x, eint32 y)
+b_status_t
+EWin32GraphicsWindow::StrokePoint(BGraphicsContext *dc,
+				  b_int32 x, b_int32 y)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::StrokePoints(EGraphicsContext *dc,
-				   const eint32 *pts, eint32 count)
+b_status_t
+EWin32GraphicsWindow::StrokePoints(BGraphicsContext *dc,
+				   const b_int32 *pts, b_int32 count)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::StrokePoints_Colors(EGraphicsContext *dc,
-					  const EList *ptsArrayLists, eint32 arrayCount,
-					  const e_rgb_color *highColors)
+b_status_t
+EWin32GraphicsWindow::StrokePoints_Colors(BGraphicsContext *dc,
+					  const BList *ptsArrayLists, b_int32 arrayCount,
+					  const b_rgb_color *highColors)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::StrokePoints_Alphas(EGraphicsContext *dc,
-					  const eint32 *pts, const euint8 *alpha, eint32 count)
+b_status_t
+EWin32GraphicsWindow::StrokePoints_Alphas(BGraphicsContext *dc,
+					  const b_int32 *pts, const b_uint8 *alpha, b_int32 count)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::StrokeLine(EGraphicsContext *dc,
-			         eint32 x0, eint32 y0, eint32 x1, eint32 y1)
+b_status_t
+EWin32GraphicsWindow::StrokeLine(BGraphicsContext *dc,
+			         b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::StrokePolygon(EGraphicsContext *dc,
-				    const eint32 *pts, eint32 count, bool closed)
+b_status_t
+EWin32GraphicsWindow::StrokePolygon(BGraphicsContext *dc,
+				    const b_int32 *pts, b_int32 count, bool closed)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::FillPolygon(EGraphicsContext *dc,
-				  const eint32 *pts, eint32 count)
+b_status_t
+EWin32GraphicsWindow::FillPolygon(BGraphicsContext *dc,
+				  const b_int32 *pts, b_int32 count)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::StrokeRect(EGraphicsContext *dc,
-			         eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EWin32GraphicsWindow::StrokeRect(BGraphicsContext *dc,
+			         b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::FillRect(EGraphicsContext *dc,
-			       eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EWin32GraphicsWindow::FillRect(BGraphicsContext *dc,
+			       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::StrokeRects(EGraphicsContext *dc,
-				  const eint32 *rects, eint32 count)
+b_status_t
+EWin32GraphicsWindow::StrokeRects(BGraphicsContext *dc,
+				  const b_int32 *rects, b_int32 count)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::FillRects(EGraphicsContext *dc,
-			        const eint32 *rects, eint32 count)
+b_status_t
+EWin32GraphicsWindow::FillRects(BGraphicsContext *dc,
+			        const b_int32 *rects, b_int32 count)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::FillRegion(EGraphicsContext *dc,
-			         const ERegion &region)
+b_status_t
+EWin32GraphicsWindow::FillRegion(BGraphicsContext *dc,
+			         const BRegion &region)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::StrokeRoundRect(EGraphicsContext *dc,
-				      eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EWin32GraphicsWindow::StrokeRoundRect(BGraphicsContext *dc,
+				      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::FillRoundRect(EGraphicsContext *dc,
-				    eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EWin32GraphicsWindow::FillRoundRect(BGraphicsContext *dc,
+				    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::StrokeArc(EGraphicsContext *dc,
-			        eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EWin32GraphicsWindow::StrokeArc(BGraphicsContext *dc,
+			        b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EWin32GraphicsWindow::FillArc(EGraphicsContext *dc,
-			      eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EWin32GraphicsWindow::FillArc(BGraphicsContext *dc,
+			      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 #endif /* WIN32 */

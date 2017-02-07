@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -42,34 +42,34 @@
 #include <windows.h>
 #endif // _WIN32
 
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 
 #ifdef _WIN32
-extern "C" char* etk_win32_convert_utf8_to_active(const char *str, eint32 length);
+extern "C" char* bhapi_win32_convert_utf8_to_active(const char *str, b_int32 length);
 #endif // _WIN32
 
 #include "Path.h"
 #include "File.h"
 
-extern e_status_t etk_path_expound(EString &path, const char *dir, const char *leaf, bool *normalize);
+extern b_status_t bhapi_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);
 
 #ifndef _WIN32
-inline int etk_file_openmode_to_flags(euint32 open_mode)
+inline int bhapi_file_openmode_to_flags(b_uint32 open_mode)
 {
 	int flags;
 
-	if(open_mode & E_READ_WRITE) flags = O_RDWR;
-	else if(open_mode & E_WRITE_ONLY) flags = O_WRONLY;
+	if(open_mode & B_READ_WRITE) flags = O_RDWR;
+	else if(open_mode & B_WRITE_ONLY) flags = O_WRONLY;
 	else flags = O_RDONLY;
 
-	if(open_mode & E_CREATE_FILE)
+	if(open_mode & B_CREATE_FILE)
 	{
 		flags |= O_CREAT;
-		if(open_mode & E_FAIL_IF_EXISTS) flags |= O_EXCL;
+		if(open_mode & B_FAIL_IF_EXISTS) flags |= O_EXCL;
 	}
 
-	if(open_mode & E_ERASE_FILE) flags |= O_TRUNC;
-	if(open_mode & E_OPEN_AT_END) flags |= O_APPEND;
+	if(open_mode & B_ERASE_FILE) flags |= O_TRUNC;
+	if(open_mode & B_OPEN_AT_END) flags |= O_APPEND;
 
 #ifdef O_LARGEFILE
 	flags |= O_LARGEFILE;
@@ -78,78 +78,78 @@ inline int etk_file_openmode_to_flags(euint32 open_mode)
 	return flags;
 }
 #else
-inline DWORD etk_file_openmode_to_creation_disposition(euint32 open_mode)
+inline DWORD bhapi_file_openmode_to_creation_disposition(b_uint32 open_mode)
 {
-	if(open_mode & E_CREATE_FILE)
+	if(open_mode & B_CREATE_FILE)
 	{
-		if(open_mode & E_FAIL_IF_EXISTS) return CREATE_NEW;
-		if(open_mode & E_ERASE_FILE) return CREATE_ALWAYS;
+		if(open_mode & B_FAIL_IF_EXISTS) return CREATE_NEW;
+		if(open_mode & B_ERASE_FILE) return CREATE_ALWAYS;
 		return OPEN_ALWAYS;
 	}
 
-	if(open_mode & E_ERASE_FILE) return TRUNCATE_EXISTING;
+	if(open_mode & B_ERASE_FILE) return TRUNCATE_EXISTING;
 	return OPEN_EXISTING;
 }
 #endif
 
 
 #ifndef _WIN32
-inline mode_t etk_file_access_mode_to_mode_t(euint32 access_mode)
+inline mode_t bhapi_file_access_mode_to_mode_t(b_uint32 access_mode)
 {
 	mode_t mode = 0;
 
-	if(access_mode & E_USER_READ) mode |= S_IRUSR;
-	if(access_mode & E_USER_WRITE) mode |= S_IWUSR;
-	if(access_mode & E_USER_EXEC) mode |= S_IXUSR;
+	if(access_mode & B_USER_READ) mode |= S_IRUSR;
+	if(access_mode & B_USER_WRITE) mode |= S_IWUSR;
+	if(access_mode & B_USER_EXEC) mode |= S_IXUSR;
 
-	if(access_mode & E_GROUP_READ) mode |= S_IRGRP;
-	if(access_mode & E_GROUP_WRITE) mode |= S_IWGRP;
-	if(access_mode & E_GROUP_EXEC) mode |= S_IXGRP;
+	if(access_mode & B_GROUP_READ) mode |= S_IRGRP;
+	if(access_mode & B_GROUP_WRITE) mode |= S_IWGRP;
+	if(access_mode & B_GROUP_EXEC) mode |= S_IXGRP;
 
-	if(access_mode & E_OTHERS_READ) mode |= S_IROTH;
-	if(access_mode & E_OTHERS_WRITE) mode |= S_IWOTH;
-	if(access_mode & E_OTHERS_EXEC) mode |= S_IXOTH;
+	if(access_mode & B_OTHERS_READ) mode |= S_IROTH;
+	if(access_mode & B_OTHERS_WRITE) mode |= S_IWOTH;
+	if(access_mode & B_OTHERS_EXEC) mode |= S_IXOTH;
 
 	return mode;
 }
 #endif
 
 
-EFile::EFile()
+BFile::BFile()
 	: fFD(NULL), fMode(0)
 {
 }
 
 
-EFile::EFile(const char *path, euint32 open_mode, euint32 access_mode)
+BFile::BFile(const char *path, b_uint32 open_mode, b_uint32 access_mode)
 	: fFD(NULL), fMode(0)
 {
 	SetTo(path, open_mode, access_mode);
 }
 
 
-EFile::EFile(const EEntry *entry, euint32 open_mode, euint32 access_mode)
+BFile::BFile(const BEntry *entry, b_uint32 open_mode, b_uint32 access_mode)
 	: fFD(NULL), fMode(0)
 {
 	SetTo(entry, open_mode, access_mode);
 }
 
 
-EFile::EFile(const EDirectory *dir, const char *leaf, euint32 open_mode, euint32 access_mode)
+BFile::BFile(const BDirectory *dir, const char *leaf, b_uint32 open_mode, b_uint32 access_mode)
 	: fFD(NULL), fMode(0)
 {
 	SetTo(dir, leaf, open_mode, access_mode);
 }
 
 
-EFile::EFile(const EFile &from)
+BFile::BFile(const BFile &from)
 	: fFD(NULL), fMode(0)
 {
 	operator=(from);
 }
 
 
-EFile::~EFile()
+BFile::~BFile()
 {
 	if(fFD != NULL)
 	{
@@ -163,25 +163,25 @@ EFile::~EFile()
 }
 
 
-e_status_t
-EFile::InitCheck() const
+b_status_t
+BFile::InitCheck() const
 {
-	return(fFD == NULL ? E_NO_INIT : E_OK);
+	return(fFD == NULL ? B_NO_INIT : B_OK);
 }
 
 
-e_status_t
-EFile::SetTo(const char *path, euint32 open_mode, euint32 access_mode)
+b_status_t
+BFile::SetTo(const char *path, b_uint32 open_mode, b_uint32 access_mode)
 {
-	if(path == NULL || *path == 0) return E_BAD_VALUE;
+	if(path == NULL || *path == 0) return B_BAD_VALUE;
 
-	EString strPath;
-	etk_path_expound(strPath, path, NULL, NULL);
-	if(strPath.Length() <= 0) return E_BAD_VALUE;
+	BString strPath;
+	bhapi_path_expound(strPath, path, NULL, NULL);
+	if(strPath.Length() <= 0) return B_BAD_VALUE;
 
 #ifndef _WIN32
-	int newFD = open(strPath.String(), etk_file_openmode_to_flags(open_mode), etk_file_access_mode_to_mode_t(access_mode));
-	if(newFD == -1) return E_FILE_ERROR;
+	int newFD = open(strPath.String(), bhapi_file_openmode_to_flags(open_mode), bhapi_file_access_mode_to_mode_t(access_mode));
+	if(newFD == -1) return B_FILE_ERROR;
 	if(fFD != NULL)
 	{
 		close(*((int*)fFD));
@@ -189,68 +189,68 @@ EFile::SetTo(const char *path, euint32 open_mode, euint32 access_mode)
 	else if((fFD = malloc(sizeof(int))) == NULL)
 	{
 		close(newFD);
-		return E_NO_MEMORY;
+		return B_NO_MEMORY;
 	}
 	*((int*)fFD) = newFD;
 #else
 	strPath.ReplaceAll("/", "\\");
-	char *active_str = etk_win32_convert_utf8_to_active(strPath.String(), -1);
+	char *active_str = bhapi_win32_convert_utf8_to_active(strPath.String(), -1);
 	if(active_str != NULL)
 	{
 		strPath = active_str;
 		free(active_str);
 	}
     HANDLE newFD = CreateFileA(strPath.String(),
-				  (open_mode & E_READ_WRITE) ? (GENERIC_WRITE | GENERIC_READ) :
-				  	(open_mode & E_WRITE_ONLY ? GENERIC_WRITE : GENERIC_READ),
+				  (open_mode & B_READ_WRITE) ? (GENERIC_WRITE | GENERIC_READ) :
+				  	(open_mode & B_WRITE_ONLY ? GENERIC_WRITE : GENERIC_READ),
 				  FILE_SHARE_READ | FILE_SHARE_WRITE,
 				  NULL,
-				  etk_file_openmode_to_creation_disposition(open_mode),
+				  bhapi_file_openmode_to_creation_disposition(open_mode),
 				  FILE_ATTRIBUTE_NORMAL,
 				  NULL);
-	if(newFD == INVALID_HANDLE_VALUE) return E_FILE_ERROR;
+	if(newFD == INVALID_HANDLE_VALUE) return B_FILE_ERROR;
 	if(fFD != NULL) CloseHandle((HANDLE)fFD);
 	fFD = (void*)newFD;
-	if(open_mode & E_OPEN_AT_END) SetFilePointer(newFD, 0, NULL, FILE_END);
+	if(open_mode & B_OPEN_AT_END) SetFilePointer(newFD, 0, NULL, FILE_END);
 #endif
 
 	fMode = open_mode;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EFile::SetTo(const EEntry *entry, euint32 open_mode, euint32 access_mode)
+b_status_t
+BFile::SetTo(const BEntry *entry, b_uint32 open_mode, b_uint32 access_mode)
 {
-	if(entry == NULL) return E_BAD_VALUE;
+	if(entry == NULL) return B_BAD_VALUE;
 
-	EPath path;
-	if(entry->GetPath(&path) != E_OK) return E_BAD_VALUE;
+	BPath path;
+	if(entry->GetPath(&path) != B_OK) return B_BAD_VALUE;
 
 	return SetTo(path.Path(), open_mode, access_mode);
 }
 
 
-e_status_t
-EFile::SetTo(const EDirectory *dir, const char *leaf, euint32 open_mode, euint32 access_mode)
+b_status_t
+BFile::SetTo(const BDirectory *dir, const char *leaf, b_uint32 open_mode, b_uint32 access_mode)
 {
-	if(dir == NULL || leaf == NULL) return E_BAD_VALUE;
+	if(dir == NULL || leaf == NULL) return B_BAD_VALUE;
 
-	EEntry entry;
-	if(dir->GetEntry(&entry) != E_OK) return E_BAD_VALUE;
+	BEntry entry;
+	if(dir->GetEntry(&entry) != B_OK) return B_BAD_VALUE;
 
-	EPath path;
-	if(entry.GetPath(&path) != E_OK) return E_BAD_VALUE;
+	BPath path;
+	if(entry.GetPath(&path) != B_OK) return B_BAD_VALUE;
 
-	if(path.Append(leaf, false) != E_OK) return E_BAD_VALUE;
+	if(path.Append(leaf, false) != B_OK) return B_BAD_VALUE;
 
 	return SetTo(path.Path(), open_mode, access_mode);
 }
 
 
 void
-EFile::Unset()
+BFile::Unset()
 {
 	if(fFD != NULL)
 	{
@@ -267,22 +267,22 @@ EFile::Unset()
 
 
 bool
-EFile::IsReadable() const
+BFile::IsReadable() const
 {
 	return(fFD == NULL ? false : true);
 }
 
 
 bool
-EFile::IsWritable() const
+BFile::IsWritable() const
 {
 	if(fFD == NULL) return false;
-	return((fMode & (E_WRITE_ONLY | E_READ_WRITE)) ? true : false);
+	return((fMode & (B_WRITE_ONLY | B_READ_WRITE)) ? true : false);
 }
 
 
 ssize_t
-EFile::Read(void *buffer, size_t size)
+BFile::Read(void *buffer, size_t size)
 {
 	if(!IsReadable() || buffer == NULL) return -1;
 #ifndef _WIN32
@@ -296,19 +296,19 @@ EFile::Read(void *buffer, size_t size)
 
 
 ssize_t
-EFile::ReadAt(eint64 pos, void *buffer, size_t size)
+BFile::ReadAt(b_int64 pos, void *buffer, size_t size)
 {
 	if(!IsReadable() || buffer == NULL) return -1;
-	eint64 savePosition = Position();
-	if(Seek(pos, E_SEEK_SET) < E_INT64_CONSTANT(0)) return -1;
+	b_int64 savePosition = Position();
+	if(Seek(pos, B_SEEK_SET) < B_INT64_CONSTANT(0)) return -1;
 	ssize_t retVal = Read(buffer, size);
-	Seek(savePosition, E_SEEK_SET);
+	Seek(savePosition, B_SEEK_SET);
 	return retVal;
 }
 
 
 ssize_t
-EFile::Write(const void *buffer, size_t size)
+BFile::Write(const void *buffer, size_t size)
 {
 	if(!IsWritable() || buffer == NULL) return -1;
 #ifndef _WIN32
@@ -322,91 +322,91 @@ EFile::Write(const void *buffer, size_t size)
 
 
 ssize_t
-EFile::WriteAt(eint64 pos, const void *buffer, size_t size)
+BFile::WriteAt(b_int64 pos, const void *buffer, size_t size)
 {
 	if(!IsWritable() || buffer == NULL) return -1;
-	eint64 savePosition = Position();
-	if(Seek(pos, E_SEEK_SET) < E_INT64_CONSTANT(0)) return -1;
+	b_int64 savePosition = Position();
+	if(Seek(pos, B_SEEK_SET) < B_INT64_CONSTANT(0)) return -1;
 	ssize_t retVal = Write(buffer, size);
-	Seek(savePosition, E_SEEK_SET);
+	Seek(savePosition, B_SEEK_SET);
 	return retVal;
 }
 
 
-eint64
-EFile::Seek(eint64 position, euint32 seek_mode)
+b_int64
+BFile::Seek(b_int64 position, b_uint32 seek_mode)
 {
-	if(fFD == NULL || (seek_mode == E_SEEK_SET && position < E_INT64_CONSTANT(0))) return E_INT64_CONSTANT(-1);
+	if(fFD == NULL || (seek_mode == B_SEEK_SET && position < B_INT64_CONSTANT(0))) return B_INT64_CONSTANT(-1);
 
 #ifndef _WIN32
 	int whence = SEEK_SET;
-	if(seek_mode == E_SEEK_CUR) whence = SEEK_CUR;
-	else if(seek_mode == E_SEEK_END) whence = SEEK_END;
+	if(seek_mode == B_SEEK_CUR) whence = SEEK_CUR;
+	else if(seek_mode == B_SEEK_END) whence = SEEK_END;
 
 	off_t pos = (off_t)-1;
-	if(sizeof(off_t) > 4 || pos < (eint64)E_MAXUINT32) pos = lseek(*((int*)fFD), (off_t)position, whence);
-	if(pos == (off_t)-1) return E_INT64_CONSTANT(-1);
-	return (eint64)pos;
+	if(sizeof(off_t) > 4 || pos < (b_int64)B_MAXUINT32) pos = lseek(*((int*)fFD), (off_t)position, whence);
+	if(pos == (off_t)-1) return B_INT64_CONSTANT(-1);
+	return (b_int64)pos;
 #else
 	DWORD whence = FILE_BEGIN;
-	if(seek_mode == E_SEEK_CUR) whence = FILE_CURRENT;
-	else if(seek_mode == E_SEEK_END) whence = FILE_END;
+	if(seek_mode == B_SEEK_CUR) whence = FILE_CURRENT;
+	else if(seek_mode == B_SEEK_END) whence = FILE_END;
 
 	LARGE_INTEGER li;
 	li.QuadPart = position;
 	li.LowPart = SetFilePointer((HANDLE)fFD, li.LowPart, &li.HighPart, whence);
-	if(li.LowPart == (DWORD)-1/*INVALID_SET_FILE_POINTER*/) return E_INT64_CONSTANT(-1);
+	if(li.LowPart == (DWORD)-1/*INVALID_SET_FILE_POINTER*/) return B_INT64_CONSTANT(-1);
 	return li.QuadPart;
 #endif
 }
 
 
-eint64
-EFile::Position() const
+b_int64
+BFile::Position() const
 {
-	if(fFD == NULL) return E_INT64_CONSTANT(-1);
+	if(fFD == NULL) return B_INT64_CONSTANT(-1);
 
 #ifndef _WIN32
 	off_t pos = lseek(*((int*)fFD), 0, SEEK_CUR);
-	if(pos == (off_t)-1) return E_INT64_CONSTANT(-1);
-	return (eint64)pos;
+	if(pos == (off_t)-1) return B_INT64_CONSTANT(-1);
+	return (b_int64)pos;
 #else
 	LARGE_INTEGER li;
 	li.HighPart = 0;
 	li.LowPart = SetFilePointer((HANDLE)fFD, 0, &li.HighPart, FILE_CURRENT);
-	if(li.LowPart == (DWORD)-1/*INVALID_SET_FILE_POINTER*/) return E_INT64_CONSTANT(-1);
+	if(li.LowPart == (DWORD)-1/*INVALID_SET_FILE_POINTER*/) return B_INT64_CONSTANT(-1);
 	return li.QuadPart;
 #endif
 }
 
 
-e_status_t
-EFile::SetSize(eint64 size)
+b_status_t
+BFile::SetSize(b_int64 size)
 {
-	if(fFD == NULL || size < E_INT64_CONSTANT(0) || size == E_MAXINT64) return E_BAD_VALUE;
+	if(fFD == NULL || size < B_INT64_CONSTANT(0) || size == B_MAXINT64) return B_BAD_VALUE;
 #ifndef _WIN32
 	int status = -1;
-	if(sizeof(off_t) > 4 || size < (eint64)E_MAXUINT32) status = ftruncate(*((int*)fFD), (off_t)size);
-	if(status != 0) return E_FILE_ERROR;
+	if(sizeof(off_t) > 4 || size < (b_int64)B_MAXUINT32) status = ftruncate(*((int*)fFD), (off_t)size);
+	if(status != 0) return B_FILE_ERROR;
 
 	lseek(*((int*)fFD), 0, SEEK_SET);
-	return E_OK;
+	return B_OK;
 #else
-	eint64 oldPos = Position();
-	if(Seek(size, E_SEEK_SET) < E_INT64_CONSTANT(0) || SetEndOfFile((HANDLE)fFD) == 0)
+	b_int64 oldPos = Position();
+	if(Seek(size, B_SEEK_SET) < B_INT64_CONSTANT(0) || SetEndOfFile((HANDLE)fFD) == 0)
 	{
-		Seek(oldPos, E_SEEK_SET);
-		return E_FILE_ERROR;
+		Seek(oldPos, B_SEEK_SET);
+		return B_FILE_ERROR;
 	}
 
-	Seek(0, E_SEEK_SET);
-	return E_OK;
+	Seek(0, B_SEEK_SET);
+	return B_OK;
 #endif
 }
 
 
-EFile&
-EFile::operator=(const EFile &from)
+BFile&
+BFile::operator=(const BFile &from)
 {
 #ifndef _WIN32
 	int newFD = (from.fFD == NULL ? -1 : dup(*((int*)from.fFD)));

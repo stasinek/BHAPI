@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,40 +27,40 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_PRIVATE_APPLICATION_H__
-#define __ETK_PRIVATE_APPLICATION_H__
+#ifndef __BHAPI_PRIVATE_APPLICATION_H__
+#define __BHAPI_PRIVATE_APPLICATION_H__
 
 #include "./../support/SimpleLocker.h"
 #include "./../private/Token.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _LOCAL EApplicationConnector
+class _LOCAL BApplicationConnector
 {
 public:
-	EApplicationConnector();
-	~EApplicationConnector();
+    BApplicationConnector();
+    ~BApplicationConnector();
 
 	bool		Lock();
 	void		Unlock();
 
-	ETokensDepot	*HandlersDepot() const;
+    BTokensDepot	*HandlersDepot() const;
 
 	static void	Init();
 	static void	Quit();
 
 private:
-	ESimpleLocker fLocker;
+	BSimpleLocker fLocker;
 	void *fPort;
 	void *fThread;
-	ETokensDepot *fHandlersDepot;
+    BTokensDepot *fHandlersDepot;
 
-	static e_status_t task(void*);
+	static b_status_t task(void*);
 };
 
-extern EApplicationConnector *etk_app_connector;
+extern BApplicationConnector *bhapi_app_connector;
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_PRIVATE_APPLICATION_H__ */
+#endif /* __BHAPI_PRIVATE_APPLICATION_H__ */
 

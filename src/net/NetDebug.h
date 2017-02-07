@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_NET_DEBUG_H__
-#define __ETK_NET_DEBUG_H__
+#ifndef __BHAPI_NET_DEBUG_H__
+#define __BHAPI_NET_DEBUG_H__
 
 #include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK ENetDebug {
+class _IMPEXP_BHAPI BNetDebug {
 public:
 	static void	Enable(bool state);
 	static bool	IsEnabled();
@@ -46,5 +46,5 @@ public:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_NET_DEBUG_H__ */
+#endif /* __BHAPI_NET_DEBUG_H__ */
 

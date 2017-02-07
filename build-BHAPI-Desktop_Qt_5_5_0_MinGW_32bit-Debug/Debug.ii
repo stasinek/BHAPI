@@ -45000,80 +45000,32 @@ extern "C" {
 
 
 # 1 "../src/kernel/./../support/SupportDefs.h" 1
-# 89 "../src/kernel/./../support/SupportDefs.h"
-# 1 "../src/kernel/./../support/Errors.h" 1
-# 32 "../src/kernel/./../support/Errors.h"
+# 34 "../src/kernel/./../support/SupportDefs.h"
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
+# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
+# 35 "../src/kernel/./../support/SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
+# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+extern "C" {
+# 24 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
+
+  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
+
+
+}
+# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+typedef struct {
+  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
+  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
+} max_align_t;
+# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
+# 36 "../src/kernel/./../support/SupportDefs.h" 2
+# 96 "../src/kernel/./../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 33 "../src/kernel/./../support/Errors.h" 2
-# 41 "../src/kernel/./../support/Errors.h"
-enum {
- E_NO_MEMORY = (-2147483647 - 1),
- E_IO_ERROR,
- E_PERMISSION_DENIED,
- E_BAD_INDEX,
- E_BAD_TYPE,
- E_BAD_VALUE,
- E_MISMATCHED_VALUES,
- E_NAME_NOT_FOUND,
- E_NAME_IN_USE,
- E_TIMED_OUT,
- E_INTERRUPTED,
- E_WOULD_BLOCK,
- E_CANCELED,
- E_NO_INIT,
- E_BUSY,
- E_NOT_ALLOWED,
-
- E_ERROR = -1,
- E_OK = 1,
- E_NO_ERROR = 1
-};
-
-
-enum {
- E_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
- E_NO_MORE_SEMS,
-
- E_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
- E_NO_MORE_THREADS,
- E_BAD_THREAD_STATE,
- E_BAD_TEAM_ID,
- E_NO_MORE_TEAMS,
-
- E_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
- E_NO_MORE_PORTS,
-
- E_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
- E_BAD_ADDRESS,
- E_NOT_AN_EXECUTABLE,
- E_MISSING_LIBRARY,
- E_MISSING_SYMBOL,
-
- E_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
-};
-
-
-enum {
- E_BAD_REPLY = (-2147483647 - 1) + 0x2000,
- E_DUPLICATE_REPLY,
- E_MESSAGE_TO_SELF,
- E_BAD_HANDLER,
- E_ALREADY_RUNNING,
-};
-
-
-enum {
- E_FILE_ERROR = (-2147483647 - 1) + 0x3000,
- E_ENTRY_NOT_FOUND,
- E_LINK_LIMIT,
- E_NAME_TOO_LONG,
-};
-# 90 "../src/kernel/./../support/SupportDefs.h" 2
-
-
-
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 94 "../src/kernel/./../support/SupportDefs.h" 2
+# 97 "../src/kernel/./../support/SupportDefs.h" 2
 
 
 
@@ -45120,61 +45072,61 @@ extern long double __attribute__((__cdecl__)) _chgsignl (long double);
 
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 100 "../src/kernel/./../support/SupportDefs.h" 2
-# 111 "../src/kernel/./../support/SupportDefs.h"
-typedef int eunichar32;
-typedef short eunichar;
+# 103 "../src/kernel/./../support/SupportDefs.h" 2
+# 114 "../src/kernel/./../support/SupportDefs.h"
+typedef int b_unichar32;
+typedef short b_unichar;
 
-typedef char eint8;
-typedef unsigned char euint8;
-typedef short eint16;
-typedef unsigned short euint16;
-typedef int eint32;
-typedef unsigned int euint32;
-typedef long long eint64;
-typedef unsigned long long euint64;
+typedef char b_int8;
+typedef unsigned char b_uint8;
+typedef short b_int16;
+typedef unsigned short b_uint16;
+typedef int b_int32;
+typedef unsigned int b_uint32;
+typedef long long b_int64;
+typedef unsigned long long b_uint64;
 
-typedef eint32 e_status_t;
-typedef euint32 e_type_code;
-typedef euint32 e_perform_code;
-typedef eint64 e_bigtime_t;
-typedef eint64 e_thread_id;
-typedef size_t e_address_t;
+typedef b_int32 b_status_t;
+typedef b_uint32 b_type_code;
+typedef b_uint32 b_perform_code;
+typedef b_int64 b_bigtime_t;
+typedef b_int64 b_thread_id;
+typedef size_t b_address_t;
 
 enum {
-    E_ANY_TYPE = 'ANYT',
- E_BOOL_TYPE = 'BOOL',
- E_CHAR_TYPE = 'CHAR',
- E_DOUBLE_TYPE = 'DBLE',
- E_FLOAT_TYPE = 'FLOT',
- E_INT64_TYPE = 'LLNG',
- E_INT32_TYPE = 'LONG',
- E_INT16_TYPE = 'SHRT',
- E_INT8_TYPE = 'BYTE',
- E_MESSAGE_TYPE = 'MSGG',
- E_MESSENGER_TYPE = 'MSNG',
- E_POINTER_TYPE = 'PNTR',
- E_SIZE_T_TYPE = 'SIZT',
- E_SSIZE_T_TYPE = 'SSZT',
- E_STRING_TYPE = 'CSTR',
- E_UINT64_TYPE = 'ULLG',
- E_UINT32_TYPE = 'ULNG',
- E_UINT16_TYPE = 'USHT',
- E_UINT8_TYPE = 'UBYT',
- E_POINT_TYPE = 'SPNT',
-    E_RECT_TYPE = 'RECT',
-    E_MIME_TYPE = 'MIME',
- E_UNKNOWN_TYPE = 'UNKN'
+    B_ANY_TYPE = 'ANYT',
+    B_BOOL_TYPE = 'BOOL',
+    B_CHAR_TYPE = 'CHAR',
+    B_DOUBLE_TYPE = 'DBLE',
+    B_FLOAT_TYPE = 'FLOT',
+    B_INT64_TYPE = 'LLNG',
+    B_INT32_TYPE = 'LONG',
+    B_INT16_TYPE = 'SHRT',
+    B_INT8_TYPE = 'BYTE',
+    B_MESSAGE_TYPE = 'MSGG',
+    B_MESSENGER_TYPE = 'MSNG',
+    B_POINTER_TYPE = 'PNTR',
+    B_SIZE_T_TYPE = 'SIZT',
+    B_SSIZE_T_TYPE = 'SSZT',
+    B_STRING_TYPE = 'CSTR',
+    B_UINT64_TYPE = 'ULLG',
+    B_UINT32_TYPE = 'ULNG',
+    B_UINT16_TYPE = 'USHT',
+    B_UINT8_TYPE = 'UBYT',
+    B_POINT_TYPE = 'SPNT',
+    B_RECT_TYPE = 'RECT',
+    B_MIME_TYPE = 'MIME',
+    B_UNKNOWN_TYPE = 'UNKN'
 };
-# 252 "../src/kernel/./../support/SupportDefs.h"
+# 255 "../src/kernel/./../support/SupportDefs.h"
 extern "C" {
 
 
-extern __attribute__((dllexport)) const euint8 etk_major_version;
-extern __attribute__((dllexport)) const euint8 etk_minor_version;
-extern __attribute__((dllexport)) const euint8 etk_micro_version;
-extern __attribute__((dllexport)) const euint8 etk_interface_age;
-extern __attribute__((dllexport)) const euint16 etk_binary_age;
+extern __attribute__((dllexport)) const b_uint8 bhapi_major_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_minor_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_micro_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_interface_age;
+extern __attribute__((dllexport)) const b_uint16 bhapi_binary_age;
 
 
 }
@@ -45612,74 +45564,115 @@ typedef unsigned int GROUP;
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAProviderConfigChange(LPHANDLE lpNotificationHandle,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 # 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
-# 270 "../src/kernel/./../support/SupportDefs.h" 2
-# 293 "../src/kernel/./../support/SupportDefs.h"
+# 273 "../src/kernel/./../support/SupportDefs.h" 2
+# 296 "../src/kernel/./../support/SupportDefs.h"
 enum {
- E_SEEK_SET = 0,
- E_SEEK_CUR,
- E_SEEK_END,
+    B_SEEK_SET = 0,
+    B_SEEK_CUR,
+    B_SEEK_END,
 };
 
 
 # 1 "../src/kernel/./../support/./../kernel/Debug.h" 1
 # 33 "../src/kernel/./../support/./../kernel/Debug.h"
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
-# 34 "../src/kernel/./../support/./../kernel/Debug.h" 2
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
-# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-extern "C" {
-# 24 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
-
-  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
-
-
-}
-# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-typedef struct {
-  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
-  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
-} max_align_t;
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
-# 35 "../src/kernel/./../support/./../kernel/Debug.h" 2
-
-
-
-
-
-
 # 1 "../src/kernel/./../support/./../kernel/./../support/SupportDefs.h" 1
-# 42 "../src/kernel/./../support/./../kernel/Debug.h" 2
-# 57 "../src/kernel/./../support/./../kernel/Debug.h"
+# 34 "../src/kernel/./../support/./../kernel/Debug.h" 2
+# 54 "../src/kernel/./../support/./../kernel/Debug.h"
 extern "C" {
 
 
-typedef enum etk_debug_level {
+typedef enum bhapi_debug_level {
  DEBUG_NORMAL,
  DEBUG_OUTPUT,
  DEBUG_WARNING,
  DEBUG_ERROR
-} etk_debug_level;
+} bhapi_debug_level;
 
-__attribute__((dllexport)) void etk_debug_log(etk_debug_level level, const char *format, va_list ap);
-# 83 "../src/kernel/./../support/./../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_DEBUG(const char *format, ...);
-
-
-
-__attribute__((dllexport)) void ETK_OUTPUT(const char *format, ...);
-# 103 "../src/kernel/./../support/./../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_WARNING(const char *format, ...);
+__attribute__((dllexport)) void bhapi_debug_log(bhapi_debug_level level, const char *format, va_list ap);
+# 80 "../src/kernel/./../support/./../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...);
 
 
 
-__attribute__((dllexport)) void ETK_ERROR(const char *format, ...);
-# 121 "../src/kernel/./../support/./../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...);
+# 100 "../src/kernel/./../support/./../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...);
+
+
+
+__attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...);
+# 118 "../src/kernel/./../support/./../kernel/Debug.h"
 }
-# 301 "../src/kernel/./../support/SupportDefs.h" 2
+# 304 "../src/kernel/./../support/SupportDefs.h" 2
+
+# 1 "../src/kernel/./../support/Errors.h" 1
+# 32 "../src/kernel/./../support/Errors.h"
+# 1 "../src/kernel/./../support/SupportDefs.h" 1
+# 33 "../src/kernel/./../support/Errors.h" 2
+# 41 "../src/kernel/./../support/Errors.h"
+enum {
+    B_NO_MEMORY = (-2147483647 - 1),
+    B_IO_ERROR,
+    B_PERMISSION_DENIED,
+    B_BAD_INDEX,
+    B_BAD_TYPE,
+    B_BAD_VALUE,
+    B_MISMATCHED_VALUES,
+    B_NAME_NOT_FOUND,
+    B_NAME_IN_USE,
+    B_TIMED_OUT,
+    B_INTERRUPTED,
+    B_WOULD_BLOCK,
+    B_CANCELED,
+    B_NO_INIT,
+    B_BUSY,
+    B_NOT_ALLOWED,
+
+    B_ERROR = -1,
+    B_OK = 1,
+    B_NO_ERROR = 1
+};
+
+
+enum {
+    B_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
+    B_NO_MORE_SEMS,
+
+    B_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
+    B_NO_MORE_THREADS,
+    B_BAD_THREAD_STATE,
+    B_BAD_TEAM_ID,
+    B_NO_MORE_TEAMS,
+
+    B_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
+    B_NO_MORE_PORTS,
+
+    B_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
+    B_BAD_ADDRESS,
+    B_NOT_AN_EXECUTABLE,
+    B_MISSING_LIBRARY,
+    B_MISSING_SYMBOL,
+
+    B_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
+};
+
+
+enum {
+    B_BAD_REPLY = (-2147483647 - 1) + 0x2000,
+    B_DUPLICATE_REPLY,
+    B_MESSAGE_TO_SELF,
+    B_BAD_HANDLER,
+    B_ALREADY_RUNNING,
+};
+
+
+enum {
+    B_FILE_ERROR = (-2147483647 - 1) + 0x3000,
+    B_ENTRY_NOT_FOUND,
+    B_LINK_LIMIT,
+    B_NAME_TOO_LONG,
+};
+# 306 "../src/kernel/./../support/SupportDefs.h" 2
 # 39 "../src/kernel/Debug.cpp" 2
 
 
@@ -45693,14 +45686,14 @@ __attribute__((dllexport)) void ETK_ERROR(const char *format, ...);
 # 33 "../src/kernel/Kernel.h"
 # 1 "../src/kernel/OS.h" 1
 # 35 "../src/kernel/OS.h"
-typedef e_status_t (*e_thread_func)(void*);
+typedef b_status_t (*b_thread_func)(void*);
 # 55 "../src/kernel/OS.h"
 enum {
- E_CAN_INTERRUPT = 1,
- E_DO_NOT_RESCHEDULE = 2,
- E_TIMEOUT = 8,
- E_RELATIVE_TIMEOUT = 8,
- E_ABSOLUTE_TIMEOUT = 16
+    B_CAN_INTERRUPT = 1,
+    B_DO_NOT_RESCHEDULE = 2,
+    B_TIMEOUT = 8,
+    B_RELATIVE_TIMEOUT = 8,
+    B_ABSOLUTE_TIMEOUT = 16
 };
 # 34 "../src/kernel/Kernel.h" 2
 
@@ -45709,336 +45702,329 @@ extern "C" {
 
 
 
-__attribute__((dllexport)) euint32 etk_real_time_clock(void);
-__attribute__((dllexport)) e_bigtime_t etk_real_time_clock_usecs(void);
-__attribute__((dllexport)) e_bigtime_t etk_system_boot_time(void);
-__attribute__((dllexport)) e_bigtime_t etk_system_time(void);
+__attribute__((dllexport)) b_uint32 bhapi_real_time_clock(void);
+__attribute__((dllexport)) b_bigtime_t bhapi_real_time_clock_usecs(void);
+__attribute__((dllexport)) b_bigtime_t bhapi_system_boot_time(void);
+__attribute__((dllexport)) b_bigtime_t bhapi_system_time(void);
 
 
-typedef struct etk_area_info {
- char name[32 + 1];
+typedef struct bhapi_area_info {
+    char name[32 + 1];
  size_t size;
- euint32 protection;
+    b_uint32 protection;
  void *address;
  char domain[5];
-} etk_area_info;
+} bhapi_area_info;
 
 
 
 
 
-typedef enum etk_area_access {
- ETK_AREA_ACCESS_OWNER = 0,
- ETK_AREA_ACCESS_GROUP_READ = 1,
- ETK_AREA_ACCESS_GROUP_WRITE = 1 << 1,
- ETK_AREA_ACCESS_OTHERS_READ = 1 << 2,
- ETK_AREA_ACCESS_OTHERS_WRITE = 1 << 3,
- ETK_AREA_ACCESS_ALL = 0xFF
-} etk_area_access;
+typedef enum bhapi_area_access {
+ BHAPI_AREA_ACCESS_OWNER = 0,
+ BHAPI_AREA_ACCESS_GROUP_READ = 1,
+ BHAPI_AREA_ACCESS_GROUP_WRITE = 1 << 1,
+ BHAPI_AREA_ACCESS_OTHERS_READ = 1 << 2,
+ BHAPI_AREA_ACCESS_OTHERS_WRITE = 1 << 3,
+ BHAPI_AREA_ACCESS_ALL = 0xFF
+} bhapi_area_access;
 
 
-__attribute__((dllexport)) void* etk_create_area(const char *name, void **start_addr, size_t size, euint32 protection,
-            const char *domain, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
-
-
-
-
-__attribute__((dllexport)) void* etk_clone_area(const char *name, void **dest_addr, euint32 protection, const char *domain);
-__attribute__((dllexport)) void* etk_clone_area_by_source(void *source_area, void **dest_addr, euint32 protection);
-__attribute__((dllexport)) e_status_t etk_get_area_info(void *area, etk_area_info *info);
-__attribute__((dllexport)) e_status_t etk_delete_area(void *area);
-__attribute__((dllexport)) e_status_t etk_delete_area_etc(void *area, bool no_clone);
+__attribute__((dllexport)) void* bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 protection,
+            const char *domain, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 
 
 
 
-
-__attribute__((dllexport)) e_status_t etk_resize_area(void *area, void **start_addr, size_t new_size);
-__attribute__((dllexport)) e_status_t etk_set_area_protection(void *area, euint32 new_protection);
-
-
-__attribute__((dllexport)) void* etk_create_locker(void);
-__attribute__((dllexport)) void* etk_clone_locker(void* locker);
-__attribute__((dllexport)) e_status_t etk_delete_locker(void* locker);
-
-
-
-
-__attribute__((dllexport)) e_status_t etk_close_locker(void* locker);
-
-__attribute__((dllexport)) e_status_t etk_lock_locker(void *locker);
-__attribute__((dllexport)) e_status_t etk_lock_locker_etc(void *locker, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) e_status_t etk_unlock_locker(void *locker);
+__attribute__((dllexport)) void* bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char *domain);
+__attribute__((dllexport)) void* bhapi_clone_area_by_source(void *source_area, void **dest_addr, b_uint32 protection);
+__attribute__((dllexport)) b_status_t bhapi_get_area_info(void *area, bhapi_area_info *info);
+__attribute__((dllexport)) b_status_t bhapi_delete_area(void *area);
+__attribute__((dllexport)) b_status_t bhapi_delete_area_etc(void *area, bool no_clone);
 
 
 
 
 
-
-__attribute__((dllexport)) eint64 etk_count_locker_locks(void *locker);
-
-
+__attribute__((dllexport)) b_status_t bhapi_resize_area(void *area, void **start_addr, size_t new_size);
+__attribute__((dllexport)) b_status_t bhapi_set_area_protection(void *area, b_uint32 new_protection);
 
 
-__attribute__((dllexport)) void* etk_create_simple_locker(void);
-__attribute__((dllexport)) e_status_t etk_delete_simple_locker(void* slocker);
-__attribute__((dllexport)) bool etk_lock_simple_locker(void *slocker);
-__attribute__((dllexport)) void etk_unlock_simple_locker(void *slocker);
+__attribute__((dllexport)) void* bhapi_create_locker(void);
+__attribute__((dllexport)) void* bhapi_clone_locker(void* locker);
+__attribute__((dllexport)) b_status_t bhapi_delete_locker(void* locker);
+
+
+
+
+__attribute__((dllexport)) b_status_t bhapi_close_locker(void* locker);
+
+__attribute__((dllexport)) b_status_t bhapi_lock_locker(void *locker);
+__attribute__((dllexport)) b_status_t bhapi_lock_locker_etc(void *locker, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_unlock_locker(void *locker);
+
+
+
+
+
+
+__attribute__((dllexport)) b_int64 bhapi_count_locker_locks(void *locker);
+
+
+
+
+__attribute__((dllexport)) void* bhapi_create_simple_locker(void);
+__attribute__((dllexport)) b_status_t bhapi_delete_simple_locker(void* slocker);
+__attribute__((dllexport)) bool bhapi_lock_simple_locker(void *slocker);
+__attribute__((dllexport)) void bhapi_unlock_simple_locker(void *slocker);
 # 125 "../src/kernel/Kernel.h"
-typedef struct etk_sem_info {
- char name[32 + 1];
- eint64 latest_holder_team;
- eint64 latest_holder_thread;
- eint64 count;
+typedef struct bhapi_sem_info {
+    char name[32 + 1];
+    b_int64 latest_holder_team;
+    b_int64 latest_holder_thread;
+    b_int64 count;
  bool closed;
-} etk_sem_info;
+} bhapi_sem_info;
 
 
-__attribute__((dllexport)) void* etk_create_sem(eint64 count, const char *name, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
-
-
-
-__attribute__((dllexport)) void* etk_clone_sem(const char *name);
-__attribute__((dllexport)) void* etk_clone_sem_by_source(void *sem);
-__attribute__((dllexport)) e_status_t etk_get_sem_info(void *sem, etk_sem_info *info);
-__attribute__((dllexport)) e_status_t etk_delete_sem(void *sem);
-__attribute__((dllexport)) e_status_t etk_delete_sem_etc(void *sem, bool no_clone);
+__attribute__((dllexport)) void* bhapi_create_sem(b_int64 count, const char *name, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 
 
 
-
-
-__attribute__((dllexport)) e_status_t etk_close_sem(void* sem);
-
-__attribute__((dllexport)) e_status_t etk_acquire_sem(void *sem);
-__attribute__((dllexport)) e_status_t etk_release_sem(void *sem);
-__attribute__((dllexport)) e_status_t etk_acquire_sem_etc(void *sem, eint64 count, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) e_status_t etk_release_sem_etc(void *sem, eint64 count, euint32 flags);
-__attribute__((dllexport)) e_status_t etk_get_sem_count(void *sem, eint64 *count);
+__attribute__((dllexport)) void* bhapi_clone_sem(const char *name);
+__attribute__((dllexport)) void* bhapi_clone_sem_by_source(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_get_sem_info(void *sem, bhapi_sem_info *info);
+__attribute__((dllexport)) b_status_t bhapi_delete_sem(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_delete_sem_etc(void *sem, bool no_clone);
 
 
 
 
-__attribute__((dllexport)) e_status_t etk_snooze(e_bigtime_t microseconds);
-__attribute__((dllexport)) e_status_t etk_snooze_until(e_bigtime_t time, int timebase);
 
-__attribute__((dllexport)) eint64 etk_get_current_team_id(void);
-__attribute__((dllexport)) eint64 etk_get_current_thread_id(void);
+__attribute__((dllexport)) b_status_t bhapi_close_sem(void* sem);
 
-__attribute__((dllexport)) void* etk_create_thread_by_current_thread(void);
-__attribute__((dllexport)) void* etk_create_thread(e_thread_func threadFunction,
-       eint32 priority,
+__attribute__((dllexport)) b_status_t bhapi_acquire_sem(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_release_sem(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_acquire_sem_etc(void *sem, b_int64 count, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_release_sem_etc(void *sem, b_int64 count, b_uint32 flags);
+__attribute__((dllexport)) b_status_t bhapi_get_sem_count(void *sem, b_int64 *count);
+
+
+
+
+__attribute__((dllexport)) b_status_t bhapi_snooze(b_bigtime_t microseconds);
+__attribute__((dllexport)) b_status_t bhapi_snooze_until(b_bigtime_t time, int timebase);
+
+__attribute__((dllexport)) b_int64 bhapi_get_current_team_id(void);
+__attribute__((dllexport)) b_int64 bhapi_get_current_thread_id(void);
+
+__attribute__((dllexport)) void* bhapi_create_thread_by_current_thread(void);
+__attribute__((dllexport)) void* bhapi_create_thread(b_thread_func threadFunction,
+                      b_int32 priority,
        void *arg,
-       eint64 *threadId);
-__attribute__((dllexport)) void* etk_open_thread(eint64 threadId);
-__attribute__((dllexport)) e_status_t etk_delete_thread(void *thread);
+                      b_int64 *threadId);
+__attribute__((dllexport)) void* bhapi_open_thread(b_int64 threadId);
+__attribute__((dllexport)) b_status_t bhapi_delete_thread(void *thread);
 
 
 
 
 
-__attribute__((dllexport)) e_status_t etk_suspend_thread(void *thread);
-__attribute__((dllexport)) e_status_t etk_resume_thread(void *thread);
+__attribute__((dllexport)) b_status_t bhapi_suspend_thread(void *thread);
+__attribute__((dllexport)) b_status_t bhapi_resume_thread(void *thread);
 
-__attribute__((dllexport)) e_status_t etk_on_exit_thread(void (*callback)(void *), void *user_data);
+__attribute__((dllexport)) b_status_t bhapi_on_exit_thread(void (*callback)(void *), void *user_data);
 
-__attribute__((dllexport)) eint64 etk_get_thread_id(void *thread);
+__attribute__((dllexport)) b_int64 bhapi_get_thread_id(void *thread);
 
 enum {
- ETK_THREAD_INVALID = 0,
- ETK_THREAD_READY,
- ETK_THREAD_RUNNING,
- ETK_THREAD_EXITED,
- ETK_THREAD_SUSPENDED,
+ BHAPI_THREAD_INVALID = 0,
+ BHAPI_THREAD_READY,
+ BHAPI_THREAD_RUNNING,
+ BHAPI_THREAD_EXITED,
+ BHAPI_THREAD_SUSPENDED,
 };
-__attribute__((dllexport)) euint32 etk_get_thread_run_state(void *thread);
+__attribute__((dllexport)) b_uint32 bhapi_get_thread_run_state(void *thread);
 
-__attribute__((dllexport)) e_status_t etk_set_thread_priority(void *thread, eint32 new_priority);
-__attribute__((dllexport)) eint32 etk_get_thread_priority(void *thread);
-__attribute__((dllexport)) void etk_exit_thread(e_status_t status);
-__attribute__((dllexport)) e_status_t etk_wait_for_thread(void *thread, e_status_t *thread_return_value);
-__attribute__((dllexport)) e_status_t etk_wait_for_thread_etc(void *thread, e_status_t *thread_return_value, euint32 flags, e_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_set_thread_priority(void *thread, b_int32 new_priority);
+__attribute__((dllexport)) b_int32 bhapi_get_thread_priority(void *thread);
+__attribute__((dllexport)) void bhapi_exit_thread(b_status_t status);
+__attribute__((dllexport)) b_status_t bhapi_wait_for_thread(void *thread, b_status_t *thread_return_value);
+__attribute__((dllexport)) b_status_t bhapi_wait_for_thread_etc(void *thread, b_status_t *thread_return_value, b_uint32 flags, b_bigtime_t timeout);
 # 206 "../src/kernel/Kernel.h"
-__attribute__((dllexport)) void* etk_create_port(eint32 queue_length, const char *name, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
+__attribute__((dllexport)) void* bhapi_create_port(b_int32 queue_length, const char *name, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 
 
 
-__attribute__((dllexport)) void* etk_open_port(const char *name);
-__attribute__((dllexport)) void* etk_open_port_by_source(void *port);
-__attribute__((dllexport)) e_status_t etk_delete_port(void *port);
-
-
-
-
-
-__attribute__((dllexport)) e_status_t etk_close_port(void *port);
-
-__attribute__((dllexport)) e_status_t etk_write_port(void *port, eint32 code, const void *buf, size_t buf_size);
-__attribute__((dllexport)) ssize_t etk_port_buffer_size(void *port);
-__attribute__((dllexport)) e_status_t etk_read_port(void *port, eint32 *code, void *buf, size_t buf_size);
-
-__attribute__((dllexport)) e_status_t etk_write_port_etc(void *port, eint32 code, const void *buf, size_t buf_size, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) ssize_t etk_port_buffer_size_etc(void *port, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) e_status_t etk_read_port_etc(void *port, eint32 *code, void *buf, size_t buf_size, euint32 flags, e_bigtime_t timeout);
-
-__attribute__((dllexport)) eint32 etk_port_count(void *port);
+__attribute__((dllexport)) void* bhapi_open_port(const char *name);
+__attribute__((dllexport)) void* bhapi_open_port_by_source(void *port);
+__attribute__((dllexport)) b_status_t bhapi_delete_port(void *port);
 
 
 
 
-__attribute__((dllexport)) void* etk_load_addon(const char* path);
-__attribute__((dllexport)) e_status_t etk_unload_addon(void *image);
-__attribute__((dllexport)) e_status_t etk_get_image_symbol(void *image, const char *name, void **ptr);
+
+__attribute__((dllexport)) b_status_t bhapi_close_port(void *port);
+
+__attribute__((dllexport)) b_status_t bhapi_write_port(void *port, b_int32 code, const void *buf, size_t buf_size);
+__attribute__((dllexport)) ssize_t bhapi_port_buffer_size(void *port);
+__attribute__((dllexport)) b_status_t bhapi_read_port(void *port, b_int32 *code, void *buf, size_t buf_size);
+
+__attribute__((dllexport)) b_status_t bhapi_write_port_etc(void *port, b_int32 code, const void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) ssize_t bhapi_port_buffer_size_etc(void *port, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_read_port_etc(void *port, b_int32 *code, void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t timeout);
+
+__attribute__((dllexport)) b_int32 bhapi_port_count(void *port);
+
+
+
+
+__attribute__((dllexport)) void* bhapi_load_addon(const char* path);
+__attribute__((dllexport)) b_status_t bhapi_unload_addon(void *image);
+__attribute__((dllexport)) b_status_t bhapi_get_image_symbol(void *image, const char *name, void **ptr);
 
 
 
 }
 # 47 "../src/kernel/Debug.cpp" 2
 
-# 1 "../src/kernel/./../support/String.h" 1
-# 34 "../src/kernel/./../support/String.h"
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
-# 35 "../src/kernel/./../support/String.h" 2
-# 1 "../src/kernel/./../support/SupportDefs.h" 1
-# 36 "../src/kernel/./../support/String.h" 2
-
-
+# 1 "../src/kernel/./../support/StringMe.h" 1
+# 37 "../src/kernel/./../support/StringMe.h"
 extern "C" {
 
 
 
 
-__attribute__((dllexport)) char* e_strdup(const char *src);
-__attribute__((dllexport)) char* e_strndup(const char *src, eint32 length);
-__attribute__((dllexport)) char* e_strdup_vprintf(const char *format, va_list ap);
-__attribute__((dllexport)) char* e_strdup_printf(const char *format, ...);
+__attribute__((dllexport)) char* b_strdup(const char *src);
+__attribute__((dllexport)) char* b_strndup(const char *src, b_int32 length);
+__attribute__((dllexport)) char* b_strdup_vprintf(const char *format, va_list ap);
+__attribute__((dllexport)) char* b_strdup_printf(const char *format, ...);
 
-__attribute__((dllexport)) eunichar* e_utf8_convert_to_unicode(const char *str, eint32 length);
-__attribute__((dllexport)) eunichar32* e_utf8_convert_to_utf32(const char *str, eint32 length);
-__attribute__((dllexport)) char* e_unicode_convert_to_utf8(const eunichar *str, eint32 ulength);
-__attribute__((dllexport)) eunichar32* e_unicode_convert_to_utf32(const eunichar *str, eint32 ulength);
-__attribute__((dllexport)) char* e_utf32_convert_to_utf8(const eunichar32 *str, eint32 ulength);
-__attribute__((dllexport)) eunichar* e_utf32_convert_to_unicode(const eunichar32 *str, eint32 ulength);
+__attribute__((dllexport)) b_unichar* b_utf8_convert_to_unicode(const char *str, b_int32 length);
+__attribute__((dllexport)) b_unichar32* b_utf8_convert_to_utf32(const char *str, b_int32 length);
+__attribute__((dllexport)) char* b_unicode_convert_to_utf8(const b_unichar *str, b_int32 ulength);
+__attribute__((dllexport)) b_unichar32* b_unicode_convert_to_utf32(const b_unichar *str, b_int32 ulength);
+__attribute__((dllexport)) char* b_utf32_convert_to_utf8(const b_unichar32 *str, b_int32 ulength);
+__attribute__((dllexport)) b_unichar* b_utf32_convert_to_unicode(const b_unichar32 *str, b_int32 ulength);
 
-__attribute__((dllexport)) bool e_utf8_is_token(const char *str);
-__attribute__((dllexport)) eint32 e_utf8_strlen(const char *str);
-__attribute__((dllexport)) eint32 e_utf8_strlen_etc(const char *str, eint32 nbytes);
-__attribute__((dllexport)) eint32 e_utf8_strlen_fast(const char *str, eint32 nbytes);
-__attribute__((dllexport)) const char* e_utf8_at(const char *str, eint32 index, euint8 *nbytes);
-__attribute__((dllexport)) const char* e_utf8_next(const char *str, euint8 *length);
+__attribute__((dllexport)) bool b_utf8_is_token(const char *str);
+__attribute__((dllexport)) b_int32 b_utf8_strlen(const char *str);
+__attribute__((dllexport)) b_int32 b_utf8_strlen_etc(const char *str, b_int32 nbytes);
+__attribute__((dllexport)) b_int32 b_utf8_strlen_fast(const char *str, b_int32 nbytes);
+__attribute__((dllexport)) const char* b_utf8_at(const char *str, b_int32 index, b_uint8 *nbytes);
+__attribute__((dllexport)) const char* b_utf8_next(const char *str, b_uint8 *length);
 
-__attribute__((dllexport)) eint32 e_unicode_strlen(const eunichar *ustr);
-__attribute__((dllexport)) eint32 e_unicode_strlen_etc(const eunichar *ustr, eint32 nchars, bool utf16_style);
-__attribute__((dllexport)) const eunichar* e_unicode_at(const eunichar* ustr, eint32 index, bool *utf16);
-__attribute__((dllexport)) const eunichar* e_unicode_next(const eunichar* ustr, bool *utf16);
+__attribute__((dllexport)) b_int32 b_unicode_strlen(const b_unichar *ustr);
+__attribute__((dllexport)) b_int32 b_unicode_strlen_etc(const b_unichar *ustr, b_int32 nchars, bool utf16_style);
+__attribute__((dllexport)) const b_unichar* b_unicode_at(const b_unichar* ustr, b_int32 index, bool *utf16);
+__attribute__((dllexport)) const b_unichar* b_unicode_next(const b_unichar* ustr, bool *utf16);
 
-__attribute__((dllexport)) eint32 e_utf32_strlen(const eunichar32 *ustr);
-__attribute__((dllexport)) eint32 e_utf32_strlen_etc(const eunichar32 *ustr, eint32 nchars);
-__attribute__((dllexport)) const eunichar32* e_utf32_at(const eunichar32* ustr, eint32 index);
-__attribute__((dllexport)) const eunichar32* e_utf32_next(const eunichar32* ustr);
+__attribute__((dllexport)) b_int32 b_utf32_strlen(const b_unichar32 *ustr);
+__attribute__((dllexport)) b_int32 b_utf32_strlen_etc(const b_unichar32 *ustr, b_int32 nchars);
+__attribute__((dllexport)) const b_unichar32* b_utf32_at(const b_unichar32* ustr, b_int32 index);
+__attribute__((dllexport)) const b_unichar32* b_utf32_next(const b_unichar32* ustr);
 
 
 }
 
 
-__attribute__((dllexport)) char *EStrdup(const char* src, eint32 length = -1);
+
+__attribute__((dllexport)) char *b_strdup_dirty(const char* src, b_int32 length = -1);
 
 
-class EStringArray;
+class BStringArray;
 
 
-class __attribute__((dllexport)) EString {
+class __attribute__((dllexport)) BString {
 public:
- EString();
- EString(const char *str);
- EString(const EString &str);
- EString(const char *str, eint32 maxLength);
- ~EString();
+    BString();
+    BString(const char *str);
+    BString(const BString &str);
+    BString(const char *str, b_int32 maxLength);
+    ~BString();
 
- const char *String() const;
+    const char *String() const;
 
- eint32 Length() const;
- eint32 CountChars() const;
+    b_int32 Length() const;
+    b_int32 CountChars() const;
 
- char operator[](eint32 index) const;
- char ByteAt(eint32 index) const;
- const char* CharAt(eint32 index, euint8 *length = __null) const;
+    char operator[](b_int32 index) const;
+    char ByteAt(b_int32 index) const;
+    const char* CharAt(b_int32 index, b_uint8 *length = __null) const;
 
- EString &operator=(const EString &str);
- EString &operator=(const char *str);
- EString &operator=(char c);
+    BString &operator=(const BString &str);
+    BString &operator=(const char *str);
+    BString &operator=(char c);
 
- EString &SetTo(const EString &str);
- EString &SetTo(const EString &str, eint32 length);
- EString &SetTo(const char *str);
- EString &SetTo(const char *str, eint32 length);
- EString &SetTo(char c, eint32 count);
+    BString &SetTo(const BString &str);
+    BString &SetTo(const BString &str, b_int32 length);
+    BString &SetTo(const char *str);
+    BString &SetTo(const char *str, b_int32 length);
+    BString &SetTo(char c, b_int32 count);
 
- EString &Adopt(EString &from);
- EString &Adopt(EString &from, eint32 length);
+    BString &Adopt(BString &from);
+    BString &Adopt(BString &from, b_int32 length);
 
- EString &CopyInto(EString &into, eint32 fromOffset, eint32 length) const;
- void CopyInto(char *into, size_t into_size, eint32 fromOffset, eint32 length) const;
+    BString &CopyInto(BString &into, b_int32 fromOffset, b_int32 length) const;
+    void CopyInto(char *into, size_t into_size, b_int32 fromOffset, b_int32 length) const;
 
- EString &MoveInto(EString &into, eint32 from, eint32 length);
- void MoveInto(char *into, size_t into_size, eint32 from, eint32 length);
+    BString &MoveInto(BString &into, b_int32 from, b_int32 length);
+    void MoveInto(char *into, size_t into_size, b_int32 from, b_int32 length);
 
  void MakeEmpty();
 
- EString &operator+=(const EString &str);
- EString &operator+=(const char *str);
- EString &operator+=(char c);
+    BString &operator+=(const BString &str);
+    BString &operator+=(const char *str);
+    BString &operator+=(char c);
 
- EString &Append(const EString &str);
- EString &Append(const EString &str, eint32 length);
- EString &Append(const char *str);
- EString &Append(const char *str, eint32 length);
- EString &Append(char c, eint32 count);
- EString &AppendFormat(const char *format, ...);
+    BString &Append(const BString &str);
+    BString &Append(const BString &str, b_int32 length);
+    BString &Append(const char *str);
+    BString &Append(const char *str, b_int32 length);
+    BString &Append(char c, b_int32 count);
+    BString &AppendFormat(const char *format, ...);
 
- EString &Prepend(const EString &str);
- EString &Prepend(const EString &str, eint32 length);
- EString &Prepend(const char *str);
- EString &Prepend(const char *str, eint32 length);
- EString &Prepend(char c, eint32 count);
- EString &PrependFormat(const char *format, ...);
+    BString &Prepend(const BString &str);
+    BString &Prepend(const BString &str, b_int32 length);
+    BString &Prepend(const char *str);
+    BString &Prepend(const char *str, b_int32 length);
+    BString &Prepend(char c, b_int32 count);
+    BString &PrependFormat(const char *format, ...);
 
- EString &Insert(const EString &str, eint32 pos);
- EString &Insert(const EString &str, eint32 length, eint32 pos);
- EString &Insert(const EString &str, eint32 fromOffset, eint32 length, eint32 pos);
- EString &Insert(const char *str, eint32 pos);
- EString &Insert(const char *str, eint32 length, eint32 pos);
- EString &Insert(const char *str, eint32 fromOffset, eint32 length, eint32 pos);
- EString &Insert(char c, eint32 count, eint32 pos);
+    BString &Insert(const BString &str, b_int32 pos);
+    BString &Insert(const BString &str, b_int32 length, b_int32 pos);
+    BString &Insert(const BString &str, b_int32 fromOffset, b_int32 length, b_int32 pos);
+    BString &Insert(const char *str, b_int32 pos);
+    BString &Insert(const char *str, b_int32 length, b_int32 pos);
+    BString &Insert(const char *str, b_int32 fromOffset, b_int32 length, b_int32 pos);
+    BString &Insert(char c, b_int32 count, b_int32 pos);
 
- EString &Truncate(eint32 newLength);
+    BString &Truncate(b_int32 newLength);
 
- EString &Remove(eint32 from, eint32 length);
+    BString &Remove(b_int32 from, b_int32 length);
 
- EString &RemoveFirst(const EString &str);
- EString &RemoveLast(const EString &str);
- EString &RemoveAll(const EString &str);
- EString &RemoveFirst(const char *str);
- EString &RemoveLast(const char *str);
- EString &RemoveAll(const char *str);
- EString &RemoveSet(const char *setOfCharsToRemove);
+    BString &RemoveFirst(const BString &str);
+    BString &RemoveLast(const BString &str);
+    BString &RemoveAll(const BString &str);
+    BString &RemoveFirst(const char *str);
+    BString &RemoveLast(const char *str);
+    BString &RemoveAll(const char *str);
+    BString &RemoveSet(const char *setOfCharsToRemove);
 
- EString &IRemoveFirst(const EString &str);
- EString &IRemoveLast(const EString &str);
- EString &IRemoveAll(const EString &str);
- EString &IRemoveFirst(const char *str);
- EString &IRemoveLast(const char *str);
- EString &IRemoveAll(const char *str);
- EString &IRemoveSet(const char *setOfCharsToRemove);
+    BString &IRemoveFirst(const BString &str);
+    BString &IRemoveLast(const BString &str);
+    BString &IRemoveAll(const BString &str);
+    BString &IRemoveFirst(const char *str);
+    BString &IRemoveLast(const char *str);
+    BString &IRemoveAll(const char *str);
+    BString &IRemoveSet(const char *setOfCharsToRemove);
 
- bool operator<(const EString &str) const;
- bool operator<=(const EString &str) const;
- bool operator==(const EString &str) const;
- bool operator>=(const EString &str) const;
- bool operator>(const EString &str) const;
- bool operator!=(const EString &str) const;
+    bool operator<(const BString &str) const;
+    bool operator<=(const BString &str) const;
+    bool operator==(const BString &str) const;
+    bool operator>=(const BString &str) const;
+    bool operator>(const BString &str) const;
+    bool operator!=(const BString &str) const;
 
  bool operator<(const char *str) const;
  bool operator<=(const char *str) const;
@@ -46047,85 +46033,85 @@ public:
  bool operator>(const char *str) const;
  bool operator!=(const char *str) const;
 
- int Compare(const EString &str) const;
+    int Compare(const BString &str) const;
  int Compare(const char *str) const;
- int Compare(const EString &str, eint32 n) const;
- int Compare(const char *str, eint32 n) const;
- int ICompare(const EString &str) const;
+    int Compare(const BString &str, b_int32 n) const;
+    int Compare(const char *str, b_int32 n) const;
+    int ICompare(const BString &str) const;
  int ICompare(const char *str) const;
- int ICompare(const EString &str, eint32 n) const;
- int ICompare(const char *str, eint32 n) const;
+    int ICompare(const BString &str, b_int32 n) const;
+    int ICompare(const char *str, b_int32 n) const;
 
- eint32 FindFirst(const EString &string) const;
- eint32 FindFirst(const char *string) const;
- eint32 FindFirst(const EString &string, eint32 fromOffset) const;
- eint32 FindFirst(const char *string, eint32 fromOffset) const;
- eint32 FindFirst(char c) const;
- eint32 FindFirst(char c, eint32 fromOffset) const;
+    b_int32 FindFirst(const BString &string) const;
+    b_int32 FindFirst(const char *string) const;
+    b_int32 FindFirst(const BString &string, b_int32 fromOffset) const;
+    b_int32 FindFirst(const char *string, b_int32 fromOffset) const;
+    b_int32 FindFirst(char c) const;
+    b_int32 FindFirst(char c, b_int32 fromOffset) const;
 
- eint32 FindLast(const EString &string) const;
- eint32 FindLast(const char *string) const;
- eint32 FindLast(const EString &string, eint32 beforeOffset) const;
- eint32 FindLast(const char *string, eint32 beforeOffset) const;
- eint32 FindLast(char c) const;
- eint32 FindLast(char c, eint32 beforeOffset) const;
+    b_int32 FindLast(const BString &string) const;
+    b_int32 FindLast(const char *string) const;
+    b_int32 FindLast(const BString &string, b_int32 beforeOffset) const;
+    b_int32 FindLast(const char *string, b_int32 beforeOffset) const;
+    b_int32 FindLast(char c) const;
+    b_int32 FindLast(char c, b_int32 beforeOffset) const;
 
- eint32 IFindFirst(const EString &string) const;
- eint32 IFindFirst(const char *string) const;
- eint32 IFindFirst(const EString &string, eint32 fromOffset) const;
- eint32 IFindFirst(const char *string, eint32 fromOffset) const;
- eint32 IFindFirst(char c) const;
- eint32 IFindFirst(char c, eint32 fromOffset) const;
+    b_int32 IFindFirst(const BString &string) const;
+    b_int32 IFindFirst(const char *string) const;
+    b_int32 IFindFirst(const BString &string, b_int32 fromOffset) const;
+    b_int32 IFindFirst(const char *string, b_int32 fromOffset) const;
+    b_int32 IFindFirst(char c) const;
+    b_int32 IFindFirst(char c, b_int32 fromOffset) const;
 
- eint32 IFindLast(const EString &string) const;
- eint32 IFindLast(const char *string) const;
- eint32 IFindLast(const EString &string, eint32 beforeOffset) const;
- eint32 IFindLast(const char *string, eint32 beforeOffset) const;
- eint32 IFindLast(char c) const;
- eint32 IFindLast(char c, eint32 beforeOffset) const;
+    b_int32 IFindLast(const BString &string) const;
+    b_int32 IFindLast(const char *string) const;
+    b_int32 IFindLast(const BString &string, b_int32 beforeOffset) const;
+    b_int32 IFindLast(const char *string, b_int32 beforeOffset) const;
+    b_int32 IFindLast(char c) const;
+    b_int32 IFindLast(char c, b_int32 beforeOffset) const;
 
- EString &ReplaceFirst(char replaceThis, char withThis);
- EString &ReplaceLast(char replaceThis, char withThis);
- EString &ReplaceAll(char replaceThis, char withThis, eint32 fromOffset = 0);
- EString &Replace(char replaceThis, char withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &ReplaceFirst(const char *replaceThis, const char *withThis);
- EString &ReplaceLast(const char *replaceThis, const char *withThis);
- EString &ReplaceAll(const char *replaceThis, const char *withThis, eint32 fromOffset = 0);
- EString &Replace(const char *replaceThis, const char *withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &ReplaceSet(const char *setOfChars, char with);
- EString &ReplaceSet(const char *setOfChars, const char *with);
+    BString &ReplaceFirst(char replaceThis, char withThis);
+    BString &ReplaceLast(char replaceThis, char withThis);
+    BString &ReplaceAll(char replaceThis, char withThis, b_int32 fromOffset = 0);
+    BString &Replace(char replaceThis, char withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &ReplaceFirst(const char *replaceThis, const char *withThis);
+    BString &ReplaceLast(const char *replaceThis, const char *withThis);
+    BString &ReplaceAll(const char *replaceThis, const char *withThis, b_int32 fromOffset = 0);
+    BString &Replace(const char *replaceThis, const char *withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &ReplaceSet(const char *setOfChars, char with);
+    BString &ReplaceSet(const char *setOfChars, const char *with);
 
- EString &IReplaceFirst(char replaceThis, char withThis);
- EString &IReplaceLast(char replaceThis, char withThis);
- EString &IReplaceAll(char replaceThis, char withThis, eint32 fromOffset = 0);
- EString &IReplace(char replaceThis, char withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &IReplaceFirst(const char *replaceThis, const char *withThis);
- EString &IReplaceLast(const char *replaceThis, const char *withThis);
- EString &IReplaceAll(const char *replaceThis, const char *withThis, eint32 fromOffset = 0);
- EString &IReplace(const char *replaceThis, const char *withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &IReplaceSet(const char *setOfChars, char with);
- EString &IReplaceSet(const char *setOfChars, const char *with);
+    BString &IReplaceFirst(char replaceThis, char withThis);
+    BString &IReplaceLast(char replaceThis, char withThis);
+    BString &IReplaceAll(char replaceThis, char withThis, b_int32 fromOffset = 0);
+    BString &IReplace(char replaceThis, char withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &IReplaceFirst(const char *replaceThis, const char *withThis);
+    BString &IReplaceLast(const char *replaceThis, const char *withThis);
+    BString &IReplaceAll(const char *replaceThis, const char *withThis, b_int32 fromOffset = 0);
+    BString &IReplace(const char *replaceThis, const char *withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &IReplaceSet(const char *setOfChars, char with);
+    BString &IReplaceSet(const char *setOfChars, const char *with);
 
- EString &ToLower();
- EString &ToUpper();
-
-
- EString &Capitalize();
+    BString &ToLower();
+    BString &ToUpper();
 
 
- EString &CapitalizeEachWord();
+    BString &Capitalize();
 
 
- EString &CharacterEscape(const char *original, const char *setOfCharsToEscape, char escapeWith);
+    BString &CapitalizeEachWord();
 
 
- EString &CharacterEscape(const char *setOfCharsToEscape, char escapeWith);
+    BString &CharacterEscape(const char *original, const char *setOfCharsToEscape, char escapeWith);
 
 
- EString &CharacterDeescape(const char *original, char escapeChar);
+    BString &CharacterEscape(const char *setOfCharsToEscape, char escapeWith);
 
 
- EString &CharacterDeescape(char escapeChar);
+    BString &CharacterDeescape(const char *original, char escapeChar);
+
+
+    BString &CharacterDeescape(char escapeChar);
 
 
  bool IsNumber() const;
@@ -46139,56 +46125,56 @@ public:
 
  bool GetDecimal(float *value) const;
  bool GetDecimal(double *value) const;
- bool GetInteger(eint8 *value) const;
- bool GetInteger(euint8 *value) const;
- bool GetInteger(eint16 *value) const;
- bool GetInteger(euint16 *value) const;
- bool GetInteger(eint32 *value) const;
- bool GetInteger(euint32 *value) const;
- bool GetInteger(eint64 *value) const;
- bool GetInteger(euint64 *value) const;
+    bool GetInteger(b_int8 *value) const;
+    bool GetInteger(b_uint8 *value) const;
+    bool GetInteger(b_int16 *value) const;
+    bool GetInteger(b_uint16 *value) const;
+    bool GetInteger(b_int32 *value) const;
+    bool GetInteger(b_uint32 *value) const;
+    bool GetInteger(b_int64 *value) const;
+    bool GetInteger(b_uint64 *value) const;
 
- EString &operator<<(const char *str);
- EString &operator<<(const EString &str);
- EString &operator<<(eint8 value);
- EString &operator<<(euint8 value);
- EString &operator<<(eint16 value);
- EString &operator<<(euint16 value);
- EString &operator<<(eint32 value);
- EString &operator<<(euint32 value);
- EString &operator<<(eint64 value);
- EString &operator<<(euint64 value);
- EString &operator<<(float value);
- EString &operator<<(double value);
-
-
-
-
- EStringArray *Split(const char *delimiter, euint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
- EStringArray *Split(const char delimiter, euint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
+    BString &operator<<(const char *str);
+    BString &operator<<(const BString &str);
+    BString &operator<<(b_int8 value);
+    BString &operator<<(b_uint8 value);
+    BString &operator<<(b_int16 value);
+    BString &operator<<(b_uint16 value);
+    BString &operator<<(b_int32 value);
+    BString &operator<<(b_uint32 value);
+    BString &operator<<(b_int64 value);
+    BString &operator<<(b_uint64 value);
+    BString &operator<<(float value);
+    BString &operator<<(double value);
 
 
 
- bool SetMinimumBufferSize(eint32 length);
- eint32 MinimumBufferSize() const;
+
+    BStringArray *Split(const char *delimiter, b_uint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
+    BStringArray *Split(const char delimiter, b_uint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
+
+
+
+    bool SetMinimumBufferSize(b_int32 length);
+    b_int32 MinimumBufferSize() const;
 
 private:
- eint32 fLen;
- eint32 fLenReal;
- eint32 fMinBufferSize;
+    b_int32 fLen;
+    b_int32 fLenReal;
+    b_int32 fMinBufferSize;
  char *fBuffer;
 
- bool _Resize(eint32 length);
+    bool _Resize(b_int32 length);
 };
 # 49 "../src/kernel/Debug.cpp" 2
 # 63 "../src/kernel/Debug.cpp"
-extern "C" char* etk_win32_convert_utf8_to_active(const char *str, eint32 length);
+extern "C" char* bhapi_win32_convert_utf8_to_active(const char *str, b_int32 length);
 
 
 
 extern "C" {
 
-__attribute__((dllexport)) void etk_debug_log(etk_debug_level level, const char *format, va_list ap)
+__attribute__((dllexport)) void bhapi_debug_log(bhapi_debug_level level, const char *format, va_list ap)
 {
  char *buffer = __null;
  char *prefix = __null;
@@ -46199,7 +46185,7 @@ __attribute__((dllexport)) void etk_debug_log(etk_debug_level level, const char 
  {
   va_list args;
   __builtin_va_copy(args,ap);
-  buffer = e_strdup_vprintf(format, args);
+  buffer = b_strdup_vprintf(format, args);
   __builtin_va_end(args);
 
   switch(level)
@@ -46221,12 +46207,12 @@ __attribute__((dllexport)) void etk_debug_log(etk_debug_level level, const char 
  if(level == DEBUG_ERROR)
  {
 
-  char *newLine = e_strdup_printf("%s%s\n", prefix, buffer);
+  char *newLine = b_strdup_printf("%s%s\n", prefix, buffer);
   if(newLine)
   {
    if(GetVersion() < 0x80000000)
    {
-    eunichar *uStr = e_utf8_convert_to_unicode(newLine, -1);
+    b_unichar *uStr = b_utf8_convert_to_unicode(newLine, -1);
     if(uStr != __null)
     {
      MessageBoxW(__null, (WCHAR*)uStr, __null,
@@ -46236,7 +46222,7 @@ __attribute__((dllexport)) void etk_debug_log(etk_debug_level level, const char 
    }
    else
    {
-    char *aStr = etk_win32_convert_utf8_to_active(newLine, -1);
+    char *aStr = bhapi_win32_convert_utf8_to_active(newLine, -1);
     if(aStr != __null)
     {
      MessageBoxA(__null, aStr, __null, 0x00000010l | 0x00010000l);
@@ -46272,31 +46258,31 @@ __attribute__((dllexport)) void etk_debug_log(etk_debug_level level, const char 
   HANDLE hStdOut = GetStdHandle(((DWORD)-11));
   while(hStdOut != __null)
   {
-   char *newLine = e_strdup_printf("%s%s%s", prefix, buffer, level == DEBUG_OUTPUT ? "" : "\n");
+   char *newLine = b_strdup_printf("%s%s%s", prefix, buffer, level == DEBUG_OUTPUT ? "" : "\n");
    if(newLine == __null) break;
 
    if(level == DEBUG_WARNING) SetConsoleTextAttribute(hStdOut, 0x2);
    if(GetVersion() < 0x80000000)
    {
-    eunichar *uStr = e_utf8_convert_to_unicode(newLine, -1);
+    b_unichar *uStr = b_utf8_convert_to_unicode(newLine, -1);
     if(uStr != __null)
     {
      DWORD wrote = 0;
-     DWORD len = (DWORD)e_unicode_strlen(uStr);
-     const eunichar *buf = uStr;
+                    DWORD len = (DWORD)b_unicode_strlen(uStr);
+     const b_unichar *buf = uStr;
      while(true)
      {
       if(WriteConsoleW(hStdOut, (const void*)buf, len, &wrote, __null) == 0) break;
       if(wrote >= len) break;
       len -= wrote;
-      for(DWORD i = 0; i < wrote; i++) buf = e_unicode_next(buf, __null);
+      for(DWORD i = 0; i < wrote; i++) buf = b_unicode_next(buf, __null);
      }
      free(uStr);
     }
    }
    else
    {
-    char *aStr = etk_win32_convert_utf8_to_active(newLine, -1);
+    char *aStr = bhapi_win32_convert_utf8_to_active(newLine, -1);
     if(aStr != __null)
     {
      DWORD wrote = 0;
@@ -46324,38 +46310,38 @@ __attribute__((dllexport)) void etk_debug_log(etk_debug_level level, const char 
 }
 
 
-__attribute__((dllexport)) void ETK_DEBUG(const char *format, ...)
+__attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...)
 {
  va_list args;
  __builtin_va_start(args,format);
- etk_debug_log(DEBUG_NORMAL, format, args);
+ bhapi_debug_log(DEBUG_NORMAL, format, args);
  __builtin_va_end(args);
 }
 
 
-__attribute__((dllexport)) void ETK_OUTPUT(const char *format, ...)
+__attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...)
 {
  va_list args;
  __builtin_va_start(args,format);
- etk_debug_log(DEBUG_OUTPUT, format, args);
+ bhapi_debug_log(DEBUG_OUTPUT, format, args);
  __builtin_va_end(args);
 }
 
 
-__attribute__((dllexport)) void ETK_WARNING(const char *format, ...)
+__attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...)
 {
  va_list args;
  __builtin_va_start(args,format);
- etk_debug_log(DEBUG_WARNING, format, args);
+ bhapi_debug_log(DEBUG_WARNING, format, args);
  __builtin_va_end(args);
 }
 
 
-__attribute__((dllexport)) void ETK_ERROR(const char *format, ...)
+__attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...)
 {
  va_list args;
  __builtin_va_start(args,format);
- etk_debug_log(DEBUG_ERROR, format, args);
+ bhapi_debug_log(DEBUG_ERROR, format, args);
  __builtin_va_end(args);
 }
 

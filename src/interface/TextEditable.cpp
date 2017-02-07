@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,34 +24,34 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  * File: TextEditable.cpp
- * Description: ETextEditable --- a single-line editable field
+ * Description: BTextEditable --- a single-line editable field
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 #include "./../app/Application.h"
 
 #include "Window.h"
 #include "TextEditable.h"
 
 
-ETextEditable::ETextEditable(ERect frame,
+BTextEditable::BTextEditable(BRect frame,
 			     const char *name,
        			     const char *initial_text,
-       			     EMessage *message,
-       			     euint32 resizeMode,
-       			     euint32 flags)
-	: EControl(frame, name, NULL, message, resizeMode, flags),
-	  fText(NULL), fEditable(true), fSelectable(true), fAlignment(E_ALIGN_LEFT), fPosition(0), fSelectStart(-1), fSelectEnd(-1),
-	  fCharWidths(NULL), fCount(0), locationOffset(0), fSelectTracking(-1), fMaxChars(E_MAXINT32), fTypingHidden(0)
+       			     BMessage *message,
+       			     b_uint32 resizeMode,
+       			     b_uint32 flags)
+	: BControl(frame, name, NULL, message, resizeMode, flags),
+	  fText(NULL), fEditable(true), fSelectable(true), fAlignment(B_ALIGN_LEFT), fPosition(0), fSelectStart(-1), fSelectEnd(-1),
+	  fCharWidths(NULL), fCount(0), locationOffset(0), fSelectTracking(-1), fMaxChars(B_MAXINT32), fTypingHidden(0)
 {
-	fMargins = ERect(0, 0, 0, 0);
+	fMargins = BRect(0, 0, 0, 0);
 	if(initial_text)
 	{
-		fText = EStrdup(initial_text);
+		fText = b_strdup(initial_text);
 		if(fText)
 		{
-			EFont font;
+			BFont font;
 			GetFont(&font);
 			fCharWidths = _CharWidths(font, fText, &fCount);
 		}
@@ -59,7 +59,7 @@ ETextEditable::ETextEditable(ERect frame,
 }
 
 
-ETextEditable::~ETextEditable()
+BTextEditable::~BTextEditable()
 {
 	if(fText) delete[] fText;
 	if(fCharWidths) delete[] fCharWidths;
@@ -67,7 +67,7 @@ ETextEditable::~ETextEditable()
 
 
 void
-ETextEditable::MakeEditable(bool editable)
+BTextEditable::MakeEditable(bool editable)
 {
 	if(fEditable != editable)
 	{
@@ -83,14 +83,14 @@ ETextEditable::MakeEditable(bool editable)
 
 
 bool
-ETextEditable::IsEditable() const
+BTextEditable::IsEditable() const
 {
 	return fEditable;
 }
 
 
 void
-ETextEditable::MakeSelectable(bool selectable)
+BTextEditable::MakeSelectable(bool selectable)
 {
 	if(fSelectable != selectable)
 	{
@@ -107,14 +107,14 @@ ETextEditable::MakeSelectable(bool selectable)
 
 
 bool
-ETextEditable::IsSelectable() const
+BTextEditable::IsSelectable() const
 {
 	return fSelectable;
 }
 
 
 void
-ETextEditable::SetTextAlignment(e_alignment alignment)
+BTextEditable::SetTextAlignment(b_alignment alignment)
 {
 	if(fAlignment != alignment)
 	{
@@ -125,15 +125,15 @@ ETextEditable::SetTextAlignment(e_alignment alignment)
 }
 
 
-e_alignment
-ETextEditable::TextAlignment() const
+b_alignment
+BTextEditable::TextAlignment() const
 {
 	return fAlignment;
 }
 
 
 void
-ETextEditable::SetPosition(eint32 pos)
+BTextEditable::SetPosition(b_int32 pos)
 {
 	if(pos < 0 || pos > fCount) pos = fCount;
 
@@ -151,26 +151,26 @@ ETextEditable::SetPosition(eint32 pos)
 }
 
 
-eint32
-ETextEditable::Position() const
+b_int32
+BTextEditable::Position() const
 {
 	return fPosition;
 }
 
 
 void
-ETextEditable::SetText(const char *str)
+BTextEditable::SetText(const char *str)
 {
 	if(fText) delete[] fText;
 
-	const char *end = e_utf8_at(str, min_c(e_utf8_strlen(str), fMaxChars), NULL);
-	fText = (str ? EStrdup(str, end == NULL ? -1 : (end - str)) : NULL);
+	const char *end = b_utf8_at(str, min_c(b_utf8_strlen(str), fMaxChars), NULL);
+    fText = (str ? b_strdup_dirty(str, end == NULL ? -1 : (end - str)) : NULL);
 
 	if(fCharWidths) delete[] fCharWidths;
 	fCount = 0; fCharWidths = NULL;
 	if(fText)
 	{
-		EFont font;
+		BFont font;
 		GetFont(&font);
 		fCharWidths = _CharWidths(font, fText, &fCount);
 	}
@@ -189,68 +189,68 @@ ETextEditable::SetText(const char *str)
 
 
 void
-ETextEditable::SetText(const EString &text)
+BTextEditable::SetText(const BString &text)
 {
 	SetText(text.String());
 }
 
 
 const char*
-ETextEditable::Text() const
+BTextEditable::Text() const
 {
 	return fText;
 }
 
 
 char*
-ETextEditable::DuplicateText(eint32 startPos, eint32 endPos)
+BTextEditable::DuplicateText(b_int32 startPos, b_int32 endPos)
 {
 	if(!fText || fCount <= 0 || startPos < 0) return NULL;
 	if(endPos < 0 || endPos >= fCount) endPos = fCount - 1;
 	if(endPos < startPos) return NULL;
 
-	const char* start = e_utf8_at(fText, startPos, NULL);
-	euint8 endLen = 0;
-	const char* end = e_utf8_at(fText, endPos, &endLen);
+	const char* start = b_utf8_at(fText, startPos, NULL);
+	b_uint8 endLen = 0;
+	const char* end = b_utf8_at(fText, endPos, &endLen);
 
 	if(start == NULL || (end == NULL || endLen == 0)) return NULL;
 
-	return e_strndup(start, end - start + (eint32)endLen);
+	return b_strndup(start, end - start + (b_int32)endLen);
 }
 
 
 
 void
-ETextEditable::InsertText(const char *text, eint32 nChars, eint32 position)
+BTextEditable::InsertText(const char *text, b_int32 nChars, b_int32 position)
 {
 	if(text == NULL || *text == 0 || nChars == 0) return;
 	if(position < 0) position = fCount;
 
-	eint32 length = 0;
-	euint8 chLen = 0;
+	b_int32 length = 0;
+	b_uint8 chLen = 0;
 	const char* str = NULL;
-	if(!(nChars < 0 || (str = e_utf8_at(text, nChars - 1, &chLen)) == NULL || chLen == 0)) length = (eint32)chLen + (str - text);
-	else length = (eint32)strlen(text);
+	if(!(nChars < 0 || (str = b_utf8_at(text, nChars - 1, &chLen)) == NULL || chLen == 0)) length = (b_int32)chLen + (str - text);
+	else length = (b_int32)strlen(text);
 
 	if(length <= 0) return;
 
 	if(fText == NULL)
 	{
-		EString astr(text, length);
+		BString astr(text, length);
 		SetText(astr);
 	}
 	else
 	{
-		eint32 pos = -1;
+		b_int32 pos = -1;
 		if(position < fCount)
 		{
-			euint8 len = 0;
-			str = e_utf8_at(fText, position, &len);
+			b_uint8 len = 0;
+			str = b_utf8_at(fText, position, &len);
 			if(!(str == NULL || len == 0)) pos = (str - fText);
 		}
 
-		EString astr(fText);
-		if(pos < 0 || pos >= (eint32)strlen(fText))
+		BString astr(fText);
+		if(pos < 0 || pos >= (b_int32)strlen(fText))
 			astr.Append(text, length);
 		else
 			astr.Insert(text, length, pos);
@@ -260,26 +260,26 @@ ETextEditable::InsertText(const char *text, eint32 nChars, eint32 position)
 
 
 void
-ETextEditable::RemoveText(eint32 startPos, eint32 endPos)
+BTextEditable::RemoveText(b_int32 startPos, b_int32 endPos)
 {
 	if(!fText || fCount <= 0 || startPos < 0) return;
 	if(endPos < 0 || endPos >= fCount) endPos = fCount - 1;
 	if(endPos < startPos) return;
 
-	const char* start = e_utf8_at(fText, startPos, NULL);
-	euint8 endLen = 0;
-	const char* end = e_utf8_at(fText, endPos, &endLen);
+	const char* start = b_utf8_at(fText, startPos, NULL);
+	b_uint8 endLen = 0;
+	const char* end = b_utf8_at(fText, endPos, &endLen);
 
 	if(start == NULL || (end == NULL || endLen == 0)) return;
 
-	EString astr(fText);
-	astr.Remove(start - fText, end - start + (eint32)endLen);
+	BString astr(fText);
+	astr.Remove(start - fText, end - start + (b_int32)endLen);
 	SetText(astr);
 }
 
 
 void
-ETextEditable::Select(eint32 startPos, eint32 endPos)
+BTextEditable::Select(b_int32 startPos, b_int32 endPos)
 {
 	if((startPos == fSelectStart && endPos == fSelectEnd) || fText == NULL || fCount <= 0) return;
 	if(endPos < 0 || endPos >= fCount) endPos = fCount - 1;
@@ -303,7 +303,7 @@ ETextEditable::Select(eint32 startPos, eint32 endPos)
 
 
 bool
-ETextEditable::GetSelection(eint32 *startPos, eint32 *endPos) const
+BTextEditable::GetSelection(b_int32 *startPos, b_int32 *endPos) const
 {
 	if(fSelectStart < 0 || fSelectEnd < 0 || fSelectEnd < fSelectStart || fSelectEnd >= fCount) return false;
 	if(!startPos && !endPos) return true;
@@ -316,14 +316,14 @@ ETextEditable::GetSelection(eint32 *startPos, eint32 *endPos) const
 
 
 void
-ETextEditable::SetMargins(float left, float top, float right, float bottom)
+BTextEditable::SetMargins(float left, float top, float right, float bottom)
 {
 	if(left < 0) left = 0;
 	if(top < 0) top = 0;
 	if(right < 0) right = 0;
 	if(bottom < 0) bottom = 0;
 
-	ERect r(left, top, right, bottom);
+	BRect r(left, top, right, bottom);
 	if(r != fMargins)
 	{
 		fMargins = r;
@@ -333,7 +333,7 @@ ETextEditable::SetMargins(float left, float top, float right, float bottom)
 
 
 void
-ETextEditable::GetMargins(float *left, float *top, float *right, float *bottom) const
+BTextEditable::GetMargins(float *left, float *top, float *right, float *bottom) const
 {
 	if(left) *left = fMargins.left;
 	if(top) *top = fMargins.top;
@@ -343,12 +343,12 @@ ETextEditable::GetMargins(float *left, float *top, float *right, float *bottom) 
 
 
 void
-ETextEditable::SetFont(const EFont *font, euint8 mask)
+BTextEditable::SetFont(const BFont *font, b_uint8 mask)
 {
-	EFont fontPrev;
-	EFont fontCurr;
+	BFont fontPrev;
+	BFont fontCurr;
 	GetFont(&fontPrev);
-	EControl::SetFont(font, mask);
+	BControl::SetFont(font, mask);
 	GetFont(&fontCurr);
 
 	if(fontPrev != fontCurr)
@@ -362,7 +362,7 @@ ETextEditable::SetFont(const EFont *font, euint8 mask)
 
 
 void
-ETextEditable::FrameResized(float new_width, float new_height)
+BTextEditable::FrameResized(float new_width, float new_height)
 {
 	locationOffset = 0;
 	Invalidate();
@@ -370,11 +370,11 @@ ETextEditable::FrameResized(float new_width, float new_height)
 
 
 void
-ETextEditable::Draw(ERect updateRect)
+BTextEditable::Draw(BRect updateRect)
 {
 	if(!IsVisible()) return;
 
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	rect.left += fMargins.left;
 	rect.top += fMargins.top;
 	rect.right -= fMargins.right;
@@ -382,14 +382,14 @@ ETextEditable::Draw(ERect updateRect)
 
 	if(!rect.IsValid()) return;
 
-	ERegion clipping;
+	BRegion clipping;
 	GetClippingRegion(&clipping);
 	if(clipping.CountRects() > 0) clipping &= (rect & updateRect);
 	else clipping = (rect & updateRect);
 	if(clipping.CountRects() <= 0) return;
 
-	e_rgb_color bkColor = e_ui_color(E_DOCUMENT_BACKGROUND_COLOR);
-	e_rgb_color fgColor = e_ui_color(E_DOCUMENT_TEXT_COLOR);
+	b_rgb_color bkColor = b_ui_color(B_DOCUMENT_BACKGROUND_COLOR);
+	b_rgb_color fgColor = b_ui_color(B_DOCUMENT_TEXT_COLOR);
 
 	if(!IsEnabled())
 	{
@@ -401,15 +401,15 @@ ETextEditable::Draw(ERect updateRect)
 	{
 		PushState();
 		ConstrainClippingRegion(&clipping);
-		SetDrawingMode(E_OP_COPY);
+		SetDrawingMode(B_OP_COPY);
 		SetPenSize(0);
 		SetHighColor(bkColor);
-		FillRect(rect & updateRect, E_SOLID_HIGH);
+		FillRect(rect & updateRect, B_SOLID_HIGH);
 		PopState();
 	}
 
-	EFont font;
-	e_font_height fontHeight;
+	BFont font;
+	b_font_height fontHeight;
 	GetFont(&font);
 	font.GetHeight(&fontHeight);
 
@@ -422,11 +422,11 @@ ETextEditable::Draw(ERect updateRect)
 		float x = 0, y = 0;
 		if(GetCharLocation(0, &x, &y, &font))
 		{
-			SetDrawingMode(E_OP_COPY);
+			SetDrawingMode(B_OP_COPY);
 			SetPenSize(0);
 			SetHighColor(fgColor);
 			SetLowColor(bkColor);
-			_DrawString(fText, EPoint(x, y));
+			_DrawString(fText, BPoint(x, y));
 
 			if(IsEnabled() && IsSelected())
 			{
@@ -437,8 +437,8 @@ ETextEditable::Draw(ERect updateRect)
 					if(GetCharLocation(fSelectStart, &x, &y, &font))
 					{
 						DrawSelectedBackground(updateRect);
-						SetLowColor(e_ui_color(E_DOCUMENT_HIGHLIGHT_COLOR));
-						_DrawString(selectedText, EPoint(x, y));
+						SetLowColor(b_ui_color(B_DOCUMENT_HIGHLIGHT_COLOR));
+						_DrawString(selectedText, BPoint(x, y));
 					}
 					free(selectedText);
 				}
@@ -456,29 +456,29 @@ ETextEditable::Draw(ERect updateRect)
 		PopState();
 	}
 
-	if((IsFocus() || IsFocusChanging()) && Window()->IsActivate() && IsEnabled() && (Flags() & E_NAVIGABLE))
+	if((IsFocus() || IsFocusChanging()) && Window()->IsActivate() && IsEnabled() && (Flags() & B_NAVIGABLE))
 	{
-		e_rgb_color color = e_ui_color(E_NAVIGATION_BASE_COLOR);
-		if(IsFocusChanging() && !IsFocus()) color = e_ui_color(E_DOCUMENT_BACKGROUND_COLOR);
+		b_rgb_color color = b_ui_color(B_NAVIGATION_BASE_COLOR);
+		if(IsFocusChanging() && !IsFocus()) color = b_ui_color(B_DOCUMENT_BACKGROUND_COLOR);
 
 		PushState();
 		ConstrainClippingRegion(&clipping);
-		SetDrawingMode(E_OP_COPY);
+		SetDrawingMode(B_OP_COPY);
 		SetPenSize(0);
 		SetHighColor(color);
-		StrokeRect(rect, E_SOLID_HIGH);
+		StrokeRect(rect, B_SOLID_HIGH);
 		PopState();
 	}
 }
 
 
 void
-ETextEditable::DrawSelectedBackground(ERect updateRect)
+BTextEditable::DrawSelectedBackground(BRect updateRect)
 {
 	if(fCount <= 0 || !IsEnabled()) return;
 	if(fSelectStart < 0 || fSelectEnd < 0 || fSelectEnd < fSelectStart || fSelectEnd >= fCount || fCharWidths == NULL) return;
 
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	rect.left += fMargins.left;
 	rect.top += fMargins.top;
 	rect.right -= fMargins.right;
@@ -486,18 +486,18 @@ ETextEditable::DrawSelectedBackground(ERect updateRect)
 
 	if(!rect.IsValid()) return;
 
-	EFont font;
-	e_font_height fontHeight;
+	BFont font;
+	b_font_height fontHeight;
 	GetFont(&font);
 	font.GetHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 
-	ERect hlRect;
+	BRect hlRect;
 	if(!GetCharLocation(0, &(hlRect.left), NULL, &font)) return;
 	hlRect.top = rect.Center().y - sHeight / 2.f - 1;
 	hlRect.bottom = rect.Center().y + sHeight / 2.f + 1;
 
-	for(eint32 i = 0; i < fSelectStart; i++)
+	for(b_int32 i = 0; i < fSelectStart; i++)
 	{
 		hlRect.left += (float)ceil((double)fCharWidths[i]);
 		hlRect.left += (float)ceil((double)(font.Spacing() * font.Size()));
@@ -505,7 +505,7 @@ ETextEditable::DrawSelectedBackground(ERect updateRect)
 
 	hlRect.right = hlRect.left;
 
-	for(eint32 i = fSelectStart; i <= fSelectEnd; i++)
+	for(b_int32 i = fSelectStart; i <= fSelectEnd; i++)
 	{
 		hlRect.right += (float)ceil((double)fCharWidths[i]);
 		if(i != fSelectEnd) hlRect.right += (float)ceil((double)(font.Spacing() * font.Size()));
@@ -514,27 +514,27 @@ ETextEditable::DrawSelectedBackground(ERect updateRect)
 	hlRect &= updateRect;
 	if(!hlRect.IsValid()) return;
 
-	e_rgb_color hlColor = e_ui_color(E_DOCUMENT_HIGHLIGHT_COLOR);
+	b_rgb_color hlColor = b_ui_color(B_DOCUMENT_HIGHLIGHT_COLOR);
 
 	PushState();
 
-	SetDrawingMode(E_OP_COPY);
+	SetDrawingMode(B_OP_COPY);
 	SetPenSize(0);
 	SetHighColor(hlColor);
-	FillRect(hlRect, E_SOLID_HIGH);
+	FillRect(hlRect, B_SOLID_HIGH);
 
 	PopState();
 }
 
 
 void
-ETextEditable::DrawCursor()
+BTextEditable::DrawCursor()
 {
 	if(!IsEnabled() || !IsEditable() || fPosition < 0 || fPosition > fCount || (fCount > 0 && fCharWidths == NULL)) return;
 	if(Window() == NULL || Window()->IsActivate() == false) return;
 	if(!(IsFocus() || IsFocusChanging())) return;
 
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	rect.left += fMargins.left;
 	rect.top += fMargins.top;
 	rect.right -= fMargins.right;
@@ -542,69 +542,69 @@ ETextEditable::DrawCursor()
 
 	if(!rect.IsValid()) return;
 
-	EFont font;
-	e_font_height fontHeight;
+	BFont font;
+	b_font_height fontHeight;
 	GetFont(&font);
 	font.GetHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 
-	EPoint pt1;
+	BPoint pt1;
 	if(!GetCharLocation(fPosition, &(pt1.x), NULL, &font)) return;
 	pt1.x -= 1;
 	pt1.y = rect.Center().y - sHeight / 2.f;
 
-	EPoint pt2 = pt1;
+	BPoint pt2 = pt1;
 	pt2.y += sHeight;
 
-	e_rgb_color crColor = e_ui_color(E_DOCUMENT_CURSOR_COLOR);
+	b_rgb_color crColor = b_ui_color(B_DOCUMENT_CURSOR_COLOR);
 
 	if(IsFocusChanging() && !IsFocus())
 	{
 		if(fPosition > fSelectStart && fPosition <= fSelectEnd && fSelectEnd > fSelectStart)
 		{
-			crColor = e_ui_color(E_DOCUMENT_HIGHLIGHT_COLOR);
+			crColor = b_ui_color(B_DOCUMENT_HIGHLIGHT_COLOR);
 		}
 		else
 		{
-			crColor = e_ui_color(E_DOCUMENT_BACKGROUND_COLOR);
+			crColor = b_ui_color(B_DOCUMENT_BACKGROUND_COLOR);
 		}
 	}
 
 	PushState();
 
-	SetDrawingMode(E_OP_COPY);
+	SetDrawingMode(B_OP_COPY);
 	SetPenSize(0);
 	SetHighColor(crColor);
-	StrokeLine(pt1, pt2, E_SOLID_HIGH);
+	StrokeLine(pt1, pt2, B_SOLID_HIGH);
 
 	PopState();
 }
 
 
 void
-ETextEditable::MouseDown(EPoint where)
+BTextEditable::MouseDown(BPoint where)
 {
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	rect.left += fMargins.left;
 	rect.top += fMargins.top;
 	rect.right -= fMargins.right;
 	rect.bottom -= fMargins.bottom;
 
-	if(!IsEnabled() || !rect.Contains(where) || !QueryCurrentMouse(true, E_PRIMARY_MOUSE_BUTTON)) return;
+	if(!IsEnabled() || !rect.Contains(where) || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON)) return;
 	if(!(IsEditable() || IsSelectable())) return;
 	if(!IsFocus()) MakeFocus(true);
 
-	EFont font;
+	BFont font;
 	GetFont(&font);
 
 	float x = 0;
 	if(!GetCharLocation(0, &x, NULL, &font)) return;
 
-	eint32 pos = 0;
+	b_int32 pos = 0;
 
 	if(where.x > x)
 	{
-		for(eint32 i = 0; i <= fCount; i++)
+		for(b_int32 i = 0; i <= fCount; i++)
 		{
 			if(i == fCount)
 			{
@@ -632,7 +632,7 @@ ETextEditable::MouseDown(EPoint where)
 
 	if(IsFocus() && fSelectTracking < 0)
 	{
-		if(!(!IsSelectable() || SetPrivateEventMask(E_POINTER_EVENTS, E_LOCK_WINDOW_FOCUS) != E_OK))
+		if(!(!IsSelectable() || SetPrivateEventMask(B_POINTER_EVENTS, B_LOCK_WINDOW_FOCUS) != B_OK))
 		{
 			fSelectStart = fSelectEnd = -1;
 			fSelectTracking = pos;
@@ -658,56 +658,56 @@ ETextEditable::MouseDown(EPoint where)
 
 
 void
-ETextEditable::MouseUp(EPoint where)
+BTextEditable::MouseUp(BPoint where)
 {
 	fSelectTracking = -1;
 
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	rect.left += fMargins.left;
 	rect.top += fMargins.top;
 	rect.right -= fMargins.right;
 	rect.bottom -= fMargins.bottom;
 
-	if(rect.Contains(where)) etk_app->ObscureCursor();
+	if(rect.Contains(where)) bhapi_app->ObscureCursor();
 }
 
 
 void
-ETextEditable::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
+BTextEditable::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 {
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	rect.left += fMargins.left;
 	rect.top += fMargins.top;
 	rect.right -= fMargins.right;
 	rect.bottom -= fMargins.bottom;
 
-	if(rect.Contains(where) == false || code == E_EXITED_VIEW)
+	if(rect.Contains(where) == false || code == B_EXITED_VIEW)
 	{
-		etk_app->SetCursor(E_CURSOR_SYSTEM_DEFAULT, false);
+		bhapi_app->SetCursor(B_CURSOR_SYSTEM_DEFAULT, false);
 		return;
 	}
 
-	etk_app->SetCursor(E_CURSOR_I_BEAM, false);
+	bhapi_app->SetCursor(B_CURSOR_I_BEAM, false);
 
 	if(!IsEnabled() || !IsSelectable() || fSelectTracking < 0) return;
 
-	EWindow *win = Window();
+	BWindow *win = Window();
 	if(!win) return;
 
 	if(!VisibleBounds().Contains(where)) return;
 	if(!(IsEditable() || IsSelectable())) return;
 
-	EFont font;
+	BFont font;
 	GetFont(&font);
 
 	float x = 0;
 	if(!GetCharLocation(0, &x, NULL, &font)) return;
 
-	eint32 pos = 0;
+	b_int32 pos = 0;
 
 	if(where.x > x)
 	{
-		for(eint32 i = 0; i <= fCount; i++)
+		for(b_int32 i = 0; i <= fCount; i++)
 		{
 			if(i == fCount)
 			{
@@ -733,8 +733,8 @@ ETextEditable::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
 
 	bool redraw = false;
 
-	eint32 oldStart = fSelectStart;
-	eint32 oldEnd = fSelectEnd;
+	b_int32 oldStart = fSelectStart;
+	b_int32 oldEnd = fSelectEnd;
 	if(pos == fSelectTracking)
 	{
 		if(IsSelected()) redraw = true;
@@ -769,7 +769,7 @@ ETextEditable::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
 
 
 void
-ETextEditable::WindowActivated(bool state)
+BTextEditable::WindowActivated(bool state)
 {
 	fSelectTracking = -1;
 	Invalidate();
@@ -777,34 +777,34 @@ ETextEditable::WindowActivated(bool state)
 
 
 void
-ETextEditable::KeyDown(const char *bytes, eint32 numBytes)
+BTextEditable::KeyDown(const char *bytes, b_int32 numBytes)
 {
 	if(!IsEnabled() || !(IsEditable() || IsSelectable()) || !IsFocus() || numBytes < 1) return;
-	if(bytes[0] == E_ENTER) return;
+	if(bytes[0] == B_ENTER) return;
 
-	EWindow *win = Window();
+	BWindow *win = Window();
 	if(!win) return;
 
-	EMessage *msg = win->CurrentMessage();
-	if(!msg || !(msg->what == E_KEY_DOWN || msg->what == E_UNMAPPED_KEY_DOWN)) return;
+	BMessage *msg = win->CurrentMessage();
+	if(!msg || !(msg->what == B_KEY_DOWN || msg->what == B_UNMAPPED_KEY_DOWN)) return;
 
-	eint32 modifiers = 0;
+	b_int32 modifiers = 0;
 	msg->FindInt32("modifiers", &modifiers);
-	if((modifiers & E_CONTROL_KEY) || (modifiers & E_COMMAND_KEY) ||
-	   (modifiers & E_MENU_KEY) || (modifiers & E_OPTION_KEY)) return;
+	if((modifiers & B_CONTROL_KEY) || (modifiers & B_COMMAND_KEY) ||
+	   (modifiers & B_MENU_KEY) || (modifiers & B_OPTION_KEY)) return;
 
 	bool shift_only = false;
 	if(IsSelectable())
 	{
-		modifiers &= ~(E_CAPS_LOCK | E_SCROLL_LOCK | E_NUM_LOCK | E_LEFT_SHIFT_KEY | E_RIGHT_SHIFT_KEY);
-		if(modifiers == E_SHIFT_KEY) shift_only = true;
+		modifiers &= ~(B_CAPS_LOCK | B_SCROLL_LOCK | B_NUM_LOCK | B_LEFT_SHIFT_KEY | B_RIGHT_SHIFT_KEY);
+		if(modifiers == B_SHIFT_KEY) shift_only = true;
 	}
 
 	if(numBytes == 1)
 	{
 		switch(bytes[0])
 		{
-			case E_ESCAPE:
+			case B_ESCAPE:
 				if(IsSelectable() && (fSelectTracking > 0 || IsSelected()))
 				{
 					fSelectTracking = -1;
@@ -817,16 +817,16 @@ ETextEditable::KeyDown(const char *bytes, eint32 numBytes)
 				}
 				break;
 
-			case E_UP_ARROW:
-			case E_DOWN_ARROW:
+			case B_UP_ARROW:
+			case B_DOWN_ARROW:
 				break;
 
-			case E_LEFT_ARROW:
+			case B_LEFT_ARROW:
 				{
 					bool redraw = false;
 
-					eint32 oldStart = fSelectStart;
-					eint32 oldEnd = fSelectEnd;
+					b_int32 oldStart = fSelectStart;
+					b_int32 oldEnd = fSelectEnd;
 					if(IsSelectable() && shift_only)
 					{
 						if(fSelectTracking < 0)
@@ -878,12 +878,12 @@ ETextEditable::KeyDown(const char *bytes, eint32 numBytes)
 				}
 				break;
 
-			case E_RIGHT_ARROW:
+			case B_RIGHT_ARROW:
 				{
 					bool redraw = false;
 
-					eint32 oldStart = fSelectStart;
-					eint32 oldEnd = fSelectEnd;
+					b_int32 oldStart = fSelectStart;
+					b_int32 oldEnd = fSelectEnd;
 					if(IsSelectable() && shift_only)
 					{
 						if(fSelectTracking < 0)
@@ -935,10 +935,10 @@ ETextEditable::KeyDown(const char *bytes, eint32 numBytes)
 				}
 				break;
 
-			case E_DELETE:
+			case B_DELETE:
 				if(IsSelectable() && IsEditable() && IsSelected())
 				{
-					eint32 oldPos = fSelectStart;
+					b_int32 oldPos = fSelectStart;
 					RemoveText(fSelectStart, fSelectEnd);
 					SetPosition(oldPos);
 				}
@@ -948,28 +948,28 @@ ETextEditable::KeyDown(const char *bytes, eint32 numBytes)
 				}
 				break;
 
-			case E_BACKSPACE:
+			case B_BACKSPACE:
 				if(IsSelectable() && IsEditable() && IsSelected())
 				{
-					eint32 oldPos = fSelectStart;
+					b_int32 oldPos = fSelectStart;
 					RemoveText(fSelectStart, fSelectEnd);
 					SetPosition(oldPos);
 				}
 				else if(fPosition > 0 && fPosition <= fCount && IsEditable())
 				{
-					eint32 oldCount = fCount;
-					eint32 oldPos = fPosition;
+					b_int32 oldCount = fCount;
+					b_int32 oldPos = fPosition;
 					RemoveText(fPosition - 1, fPosition - 1);
 					if(fCount < oldCount && oldPos == fPosition) SetPosition(oldPos - 1);
 				}
 				break;
 
-			case E_HOME:
+			case B_HOME:
 				{
 					bool redraw = false;
 
-					eint32 oldStart = fSelectStart;
-					eint32 oldEnd = fSelectEnd;
+					b_int32 oldStart = fSelectStart;
+					b_int32 oldEnd = fSelectEnd;
 					if(IsSelectable() && shift_only)
 					{
 						if(fSelectTracking < 0)
@@ -1004,12 +1004,12 @@ ETextEditable::KeyDown(const char *bytes, eint32 numBytes)
 				}
 				break;
 
-			case E_END:
+			case B_END:
 				{
 					bool redraw = false;
 
-					eint32 oldStart = fSelectStart;
-					eint32 oldEnd = fSelectEnd;
+					b_int32 oldStart = fSelectStart;
+					b_int32 oldEnd = fSelectEnd;
 					if(IsSelectable() && shift_only)
 					{
 						if(fSelectTracking < 0)
@@ -1049,15 +1049,15 @@ ETextEditable::KeyDown(const char *bytes, eint32 numBytes)
 				{
 					if(IsSelectable() && IsSelected())
 					{
-						eint32 oldPos = fSelectStart;
+						b_int32 oldPos = fSelectStart;
 						RemoveText(fSelectStart, fSelectEnd);
 						InsertText(bytes, 1, oldPos);
 						SetPosition(oldPos + 1);
 					}
 					else
 					{
-						eint32 oldCount = fCount;
-						eint32 oldPos = fPosition;
+						b_int32 oldCount = fCount;
+						b_int32 oldPos = fPosition;
 						InsertText(bytes, 1, fPosition);
 						if(fCount > oldCount && oldPos == fPosition) SetPosition(oldPos + 1);
 					}
@@ -1069,20 +1069,20 @@ ETextEditable::KeyDown(const char *bytes, eint32 numBytes)
 	{
 		if(IsEditable())
 		{
-			eint32 len = e_utf8_strlen(bytes);
+			b_int32 len = b_utf8_strlen(bytes);
 			if(len > 0)
 			{
 				if(IsSelectable() && IsSelected())
 				{
-					eint32 oldPos = fSelectStart;
+					b_int32 oldPos = fSelectStart;
 					RemoveText(fSelectStart, fSelectEnd);
 					InsertText(bytes, len, oldPos);
 					SetPosition(oldPos + len);
 				}
 				else
 				{
-					eint32 oldCount = fCount;
-					eint32 oldPos = fPosition;
+					b_int32 oldCount = fCount;
+					b_int32 oldPos = fPosition;
 					InsertText(bytes, len, fPosition);
 					if(fCount > oldCount && oldPos == fPosition) SetPosition(oldPos + len);
 				}
@@ -1095,13 +1095,13 @@ ETextEditable::KeyDown(const char *bytes, eint32 numBytes)
 
 
 void
-ETextEditable::KeyUp(const char *bytes, eint32 numBytes)
+BTextEditable::KeyUp(const char *bytes, b_int32 numBytes)
 {
-	if(!IsEnabled() || !IsEditable() || !IsFocus() || numBytes != 1 || bytes[0] != E_ENTER) return;
+	if(!IsEnabled() || !IsEditable() || !IsFocus() || numBytes != 1 || bytes[0] != B_ENTER) return;
 
 	if(Message() != NULL && fCount >= 0 && fText != NULL)
 	{
-		EMessage msg(*Message());
+		BMessage msg(*Message());
 		msg.AddString("etk:texteditable-content", fText);
 		Invoke(&msg);
 	}
@@ -1113,25 +1113,25 @@ ETextEditable::KeyUp(const char *bytes, eint32 numBytes)
 
 
 void
-ETextEditable::MessageReceived(EMessage *msg)
+BTextEditable::MessageReceived(BMessage *msg)
 {
-	if(msg->what == E_MODIFIERS_CHANGED)
+	if(msg->what == B_MODIFIERS_CHANGED)
 	{
-		eint32 modifiers = 0, old_modifiers = 0;
+		b_int32 modifiers = 0, old_modifiers = 0;
 		msg->FindInt32("modifiers", &modifiers);
 		msg->FindInt32("etk:old_modifiers", &old_modifiers);
-		if((old_modifiers & E_SHIFT_KEY) && !(modifiers & E_SHIFT_KEY)) fSelectTracking = -1;
+		if((old_modifiers & B_SHIFT_KEY) && !(modifiers & B_SHIFT_KEY)) fSelectTracking = -1;
 	}
-	EControl::MessageReceived(msg);
+	BControl::MessageReceived(msg);
 }
 
 
 void
-ETextEditable::GetPreferredSize(float *width, float *height)
+BTextEditable::GetPreferredSize(float *width, float *height)
 {
 	if(!width && !height) return;
 
-	EFont font;
+	BFont font;
 	GetFont(&font);
 
 	if(width)
@@ -1142,7 +1142,7 @@ ETextEditable::GetPreferredSize(float *width, float *height)
 
 	if(height)
 	{
-		e_font_height fontHeight;
+		b_font_height fontHeight;
 		font.GetHeight(&fontHeight);
 		*height = fText ? (float)ceil((double)(fontHeight.ascent + fontHeight.descent)) : 0;
 		*height += 4;
@@ -1151,11 +1151,11 @@ ETextEditable::GetPreferredSize(float *width, float *height)
 
 
 bool
-ETextEditable::GetCharLocation(eint32 pos, float *x, float *y, EFont *tFont)
+BTextEditable::GetCharLocation(b_int32 pos, float *x, float *y, BFont *tFont)
 {
 	if(!x) return false;
 
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	rect.left += fMargins.left;
 	rect.top += fMargins.top;
 	rect.right -= fMargins.right;
@@ -1165,8 +1165,8 @@ ETextEditable::GetCharLocation(eint32 pos, float *x, float *y, EFont *tFont)
 
 	if(!rect.IsValid()) return false;
 
-	EFont font;
-	e_font_height fontHeight;
+	BFont font;
+	b_font_height fontHeight;
 
 	if(tFont) font = *tFont;
 	else GetFont(&font);
@@ -1175,9 +1175,9 @@ ETextEditable::GetCharLocation(eint32 pos, float *x, float *y, EFont *tFont)
 	float strWidth = (fCount <= 0 ? 0.f : max_c(0.f, _StringWidth(font, fText)));
 	float fontSpacing = (float)ceil((double)font.Spacing() * font.Size());
 
-	if(fAlignment == E_ALIGN_RIGHT) *x = rect.right - strWidth;
-	else if(fAlignment == E_ALIGN_CENTER) *x = rect.Center().x - strWidth / 2.f;
-	else *x = rect.left; /* E_ALIGN_LEFT */
+	if(fAlignment == B_ALIGN_RIGHT) *x = rect.right - strWidth;
+	else if(fAlignment == B_ALIGN_CENTER) *x = rect.Center().x - strWidth / 2.f;
+	else *x = rect.left; /* B_ALIGN_LEFT */
 	if(y) *y = (rect.Center().y - sHeight/ 2.f + fontHeight.ascent + 1);
 
 	if(strWidth <= rect.Width() || !IsEnabled() ||
@@ -1192,11 +1192,11 @@ ETextEditable::GetCharLocation(eint32 pos, float *x, float *y, EFont *tFont)
 
 		if(fPosition > 0 && fPosition < fCount)
 		{
-			const char *p = e_utf8_at((const char*)fText, fPosition, NULL);
+			const char *p = b_utf8_at((const char*)fText, fPosition, NULL);
 			if(p != NULL)
 			{
-				EString str;
-				str.Append(fText, (eint32)(p - (const char*)fText));
+				BString str;
+				str.Append(fText, (b_int32)(p - (const char*)fText));
 				xx += _StringWidth(font, str.String()) + fontSpacing;
 			}
 		}
@@ -1215,11 +1215,11 @@ ETextEditable::GetCharLocation(eint32 pos, float *x, float *y, EFont *tFont)
 
 	if(pos > 0 && pos < fCount)
 	{
-		const char *p = e_utf8_at((const char*)fText, pos, NULL);
+		const char *p = b_utf8_at((const char*)fText, pos, NULL);
 		if(p != NULL)
 		{
-			EString str;
-			str.Append(fText, (eint32)(p - (const char*)fText));
+			BString str;
+			str.Append(fText, (b_int32)(p - (const char*)fText));
 			*x += _StringWidth(font, str.String()) + fontSpacing;
 		}
 	}
@@ -1233,17 +1233,17 @@ ETextEditable::GetCharLocation(eint32 pos, float *x, float *y, EFont *tFont)
 
 
 void
-ETextEditable::MakeFocus(bool focusState)
+BTextEditable::MakeFocus(bool focusState)
 {
 	if(!focusState) fSelectTracking = -1;
-	EControl::MakeFocus(focusState);
+	BControl::MakeFocus(focusState);
 }
 
 
 void
-ETextEditable::SetMaxChars(eint32 max)
+BTextEditable::SetMaxChars(b_int32 max)
 {
-	if(max < 0) max = E_MAXINT32;
+	if(max < 0) max = B_MAXINT32;
 	if(fMaxChars != max)
 	{
 		fMaxChars = max;
@@ -1256,15 +1256,15 @@ ETextEditable::SetMaxChars(eint32 max)
 }
 
 
-eint32
-ETextEditable::MaxChars() const
+b_int32
+BTextEditable::MaxChars() const
 {
 	return fMaxChars;
 }
 
 
 void
-ETextEditable::HideTyping(euint8 flag)
+BTextEditable::HideTyping(b_uint8 flag)
 {
 	if((flag != 0x00 && flag < 0x20) || flag > 0x7e) flag = 0x01;
 
@@ -1272,47 +1272,47 @@ ETextEditable::HideTyping(euint8 flag)
 	{
 		fTypingHidden = flag;
 
-		EString aStr(fText);
-		ETextEditable::SetText(aStr.String());
+		BString aStr(fText);
+		BTextEditable::SetText(aStr.String());
 
 		Invalidate();
 	}
 }
 
 
-euint8
-ETextEditable::IsTypingHidden() const
+b_uint8
+BTextEditable::IsTypingHidden() const
 {
 	return fTypingHidden;
 }
 
 
 float
-ETextEditable::_StringWidth(const EFont &font, const char *str) const
+BTextEditable::_StringWidth(const BFont &font, const char *str) const
 {
 	if(fTypingHidden == 0x01 || str == NULL || *str == 0) return 0;
 	if(fTypingHidden == 0x00) return font.StringWidth(str);
 
-	EString aStr;
-	aStr.Append(*((char*)&fTypingHidden), e_utf8_strlen(str));
+	BString aStr;
+	aStr.Append(*((char*)&fTypingHidden), b_utf8_strlen(str));
 	return font.StringWidth(aStr);
 }
 
 
 float*
-ETextEditable::_CharWidths(const EFont &font, const char *str, eint32 *count) const
+BTextEditable::_CharWidths(const BFont &font, const char *str, b_int32 *count) const
 {
 	if(fTypingHidden == 0x01 || str == NULL || *str == 0) return NULL;
 	if(fTypingHidden == 0x00) return font.CharWidths(str, count);
 
-	EString aStr;
-	aStr.Append(*((char*)&fTypingHidden), e_utf8_strlen(str));
+	BString aStr;
+	aStr.Append(*((char*)&fTypingHidden), b_utf8_strlen(str));
 	return font.CharWidths(aStr.String(), count);
 }
 
 
 void
-ETextEditable::_DrawString(const char *str, EPoint location)
+BTextEditable::_DrawString(const char *str, BPoint location)
 {
 	if(fTypingHidden == 0x01 || str == NULL || *str == 0) return;
 
@@ -1322,8 +1322,8 @@ ETextEditable::_DrawString(const char *str, EPoint location)
 	}
 	else
 	{
-		EString aStr;
-		aStr.Append(*((char*)&fTypingHidden), e_utf8_strlen(str));
+		BString aStr;
+		aStr.Append(*((char*)&fTypingHidden), b_utf8_strlen(str));
 		DrawString(aStr.String(), location);
 	}
 }

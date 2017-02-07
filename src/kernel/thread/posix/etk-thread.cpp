@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -38,48 +38,48 @@
 #include "./../config.h"
 #include "./../kernel/Kernel.h"
 #include "./../support/List.h"
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 
 typedef struct _threadCallback_ {
-	e_thread_func	func;
+	b_thread_func	func;
 	void		*user_data;
 } _threadCallback_;
 
 
-typedef struct etk_posix_thread_t {
-	eint32			priority;
-	eint32			running;
+typedef struct bhapi_posix_thread_t {
+	b_int32			priority;
+	b_int32			running;
 	bool			exited;
-	e_status_t		status;
-	eint64			ID;
+	b_status_t		status;
+	b_int64			ID;
 	_threadCallback_	callback;
-	EList			exit_callbacks;
+	BList			exit_callbacks;
 
 	pthread_mutex_t		locker;
 	pthread_cond_t		cond;
 
 	bool			existent;
 
-	EList			private_threads;
-} etk_posix_thread_t;
+	BList			private_threads;
+} bhapi_posix_thread_t;
 
 
-typedef struct etk_posix_thread_private_t {
-	etk_posix_thread_t *thread;
+typedef struct bhapi_posix_thread_private_t {
+	bhapi_posix_thread_t *thread;
 	bool copy;
-} etk_posix_thread_private_t;
+} bhapi_posix_thread_private_t;
 
 
-static etk_posix_thread_t* __etk_create_thread__()
+static bhapi_posix_thread_t* __bhapi_create_thread__()
 {
-	etk_posix_thread_t *thread = new etk_posix_thread_t;
+	bhapi_posix_thread_t *thread = new bhapi_posix_thread_t;
 	if(thread == NULL) return NULL;
 
 	thread->priority = -1;
 	thread->running = 0;
 	thread->exited = false;
-	thread->status = E_OK;
-	thread->ID = E_INT64_CONSTANT(0);
+	thread->status = B_OK;
+	thread->ID = B_INT64_CONSTANT(0);
 	thread->callback.func = NULL;
 	thread->callback.user_data = NULL;
 
@@ -92,12 +92,12 @@ static etk_posix_thread_t* __etk_create_thread__()
 }
 
 
-static void __etk_delete_thread__(etk_posix_thread_t *thread)
+static void __bhapi_delete_thread__(bhapi_posix_thread_t *thread)
 {
 	if(thread == NULL) return;
 
-	etk_posix_thread_private_t *priThread;
-	while((priThread = (etk_posix_thread_private_t*)thread->private_threads.RemoveItem(0)) != NULL) delete priThread;
+	bhapi_posix_thread_private_t *priThread;
+	while((priThread = (bhapi_posix_thread_private_t*)thread->private_threads.RemoveItem(0)) != NULL) delete priThread;
 
 	_threadCallback_ *exitCallback;
 	while((exitCallback = (_threadCallback_*)thread->exit_callbacks.RemoveItem(0)) != NULL) delete exitCallback;
@@ -109,33 +109,33 @@ static void __etk_delete_thread__(etk_posix_thread_t *thread)
 }
 
 
-static pthread_mutex_t __etk_thread_locker__ = PTHREAD_MUTEX_INITIALIZER;
-#define _ETK_LOCK_THREAD_()	pthread_mutex_lock(&__etk_thread_locker__)
-#define _ETK_UNLOCK_THREAD_()	pthread_mutex_unlock(&__etk_thread_locker__)
+static pthread_mutex_t __bhapi_thread_locker__ = PTHREAD_MUTEX_INITIALIZER;
+#define _BHAPI_LOCK_THREAD_()	pthread_mutex_lock(&__bhapi_thread_locker__)
+#define _BHAPI_UNLOCK_THREAD_()	pthread_mutex_unlock(&__bhapi_thread_locker__)
 
 
-static eint64 etk_convert_pthread_id_to_etk(pthread_t tid)
+static b_int64 bhapi_convert_pthread_id_to_etk(pthread_t tid)
 {
-	if(sizeof(eint64) < sizeof(pthread_t))
+	if(sizeof(b_int64) < sizeof(pthread_t))
 	{
 		// not support
-		return E_INT64_CONSTANT(0);
+		return B_INT64_CONSTANT(0);
 	}
 
-	eint64 cid = E_INT64_CONSTANT(0);
+	b_int64 cid = B_INT64_CONSTANT(0);
 
-	if(memcpy(&cid, &tid, sizeof(pthread_t)) == NULL) return E_INT64_CONSTANT(0);
+	if(memcpy(&cid, &tid, sizeof(pthread_t)) == NULL) return B_INT64_CONSTANT(0);
 
 	return cid;
 }
 
 
-static pthread_t etk_convert_thread_id_to_pthread(eint64 cid)
+static pthread_t bhapi_convert_thread_id_to_pthread(b_int64 cid)
 {
 	pthread_t tid;
 	bzero(&tid, sizeof(pthread_t));
 
-	if(sizeof(eint64) >= sizeof(pthread_t) && cid != E_INT64_CONSTANT(0)) memcpy(&tid, &cid, sizeof(pthread_t));
+	if(sizeof(b_int64) >= sizeof(pthread_t) && cid != B_INT64_CONSTANT(0)) memcpy(&tid, &cid, sizeof(pthread_t));
 
 	return tid;
 }
@@ -143,7 +143,7 @@ static pthread_t etk_convert_thread_id_to_pthread(eint64 cid)
 
 class EThreadsList {
 public:
-	EList fList;
+	BList fList;
 
 	EThreadsList()
 	{
@@ -151,18 +151,18 @@ public:
 
 	~EThreadsList()
 	{
-		etk_posix_thread_t *td;
-		while((td = (etk_posix_thread_t*)fList.RemoveItem(0)) != NULL)
+		bhapi_posix_thread_t *td;
+		while((td = (bhapi_posix_thread_t*)fList.RemoveItem(0)) != NULL)
 		{
-			ETK_WARNING("[KERNEL]: Thread %I64i leaked.", td->ID);
-			__etk_delete_thread__(td);
+			BHAPI_WARNING("[KERNEL]: Thread %I64i leaked.", td->ID);
+			__bhapi_delete_thread__(td);
 		}
 	}
 
-	etk_posix_thread_private_t* AddThread(etk_posix_thread_t *td)
+	bhapi_posix_thread_private_t* AddThread(bhapi_posix_thread_t *td)
 	{
 		if(td == NULL || td->private_threads.CountItems() != 0 || fList.AddItem((void*)td, 0) == false) return NULL;
-		etk_posix_thread_private_t *priThread = new etk_posix_thread_private_t;
+		bhapi_posix_thread_private_t *priThread = new bhapi_posix_thread_private_t;
 		if(priThread == NULL || td->private_threads.AddItem((void*)priThread, 0) == false)
 		{
 			fList.RemoveItem((void*)td);
@@ -174,10 +174,10 @@ public:
 		return priThread;
 	}
 
-	etk_posix_thread_private_t* RefThread(etk_posix_thread_t *td)
+	bhapi_posix_thread_private_t* RefThread(bhapi_posix_thread_t *td)
 	{
 		if(td == NULL || td->private_threads.CountItems() == 0 || fList.IndexOf((void*)td) < 0) return NULL;
-		etk_posix_thread_private_t *priThread = new etk_posix_thread_private_t;
+		bhapi_posix_thread_private_t *priThread = new bhapi_posix_thread_private_t;
 		if(priThread == NULL || td->private_threads.AddItem((void*)priThread, 0) == false)
 		{
 			if(priThread != NULL) delete priThread;
@@ -188,23 +188,23 @@ public:
 		return priThread;
 	}
 
-	eint32 UnrefThread(etk_posix_thread_private_t *priThread)
+	b_int32 UnrefThread(bhapi_posix_thread_private_t *priThread)
 	{
-		etk_posix_thread_t *td = (priThread == NULL ? NULL : priThread->thread);
+		bhapi_posix_thread_t *td = (priThread == NULL ? NULL : priThread->thread);
 		if(td == NULL || td->private_threads.CountItems() == 0 || fList.IndexOf((void*)td) < 0) return -1;
 		if(td->private_threads.RemoveItem((void*)priThread) == false) return -1;
 		delete priThread;
-		eint32 count = td->private_threads.CountItems();
+		b_int32 count = td->private_threads.CountItems();
 		if(count == 0) fList.RemoveItem((void*)td);
 		return count;
 	}
 
-	etk_posix_thread_private_t* OpenThread(eint64 tid)
+	bhapi_posix_thread_private_t* OpenThread(b_int64 tid)
 	{
-		if(tid == E_INT64_CONSTANT(0)) return NULL;
-		for(eint32 i = 0; i < fList.CountItems(); i++)
+		if(tid == B_INT64_CONSTANT(0)) return NULL;
+		for(b_int32 i = 0; i < fList.CountItems(); i++)
 		{
-			etk_posix_thread_t* td = (etk_posix_thread_t*)fList.ItemAt(i);
+			bhapi_posix_thread_t* td = (bhapi_posix_thread_t*)fList.ItemAt(i);
 			if(td->ID == tid) return RefThread(td);
 		}
 		return NULL;
@@ -212,102 +212,102 @@ public:
 };
 
 
-static EThreadsList __etk_thread_lists__;
-#define _ETK_ADD_THREAD_(td)	__etk_thread_lists__.AddThread(td)
-#define _ETK_REF_THREAD_(td)	__etk_thread_lists__.RefThread(td)
-#define _ETK_UNREF_THREAD_(td)	__etk_thread_lists__.UnrefThread(td)
-#define _ETK_OPEN_THREAD_(tid)	__etk_thread_lists__.OpenThread(tid)
+static EThreadsList __bhapi_thread_lists__;
+#define _BHAPI_ADD_THREAD_(td)	__bhapi_thread_lists__.AddThread(td)
+#define _BHAPI_REF_THREAD_(td)	__bhapi_thread_lists__.RefThread(td)
+#define _BHAPI_UNREF_THREAD_(td)	__bhapi_thread_lists__.UnrefThread(td)
+#define _BHAPI_OPEN_THREAD_(tid)	__bhapi_thread_lists__.OpenThread(tid)
 
 
-_IMPEXP_ETK eint64 etk_get_current_thread_id(void)
+_IMPEXP_BHAPI b_int64 bhapi_get_current_thread_id(void)
 {
-	return(etk_convert_pthread_id_to_etk(pthread_self()));
+	return(bhapi_convert_pthread_id_to_etk(pthread_self()));
 }
 
 
-static void etk_lock_thread_inter(etk_posix_thread_t *thread)
+static void bhapi_lock_thread_inter(bhapi_posix_thread_t *thread)
 {
 	pthread_mutex_lock(&(thread->locker));
 }
 
 
-static void etk_unlock_thread_inter(etk_posix_thread_t *thread)
+static void bhapi_unlock_thread_inter(bhapi_posix_thread_t *thread)
 {
 	pthread_mutex_unlock(&(thread->locker));
 }
 
 
-static void* etk_spawn_thread_func(void *data)
+static void* bhapi_spawn_thread_func(void *data)
 {
-	etk_posix_thread_t *thread = (etk_posix_thread_t*)data;
-	etk_posix_thread_private_t *priThread = NULL;
+	bhapi_posix_thread_t *thread = (bhapi_posix_thread_t*)data;
+	bhapi_posix_thread_private_t *priThread = NULL;
 
-	etk_lock_thread_inter(thread);
+	bhapi_lock_thread_inter(thread);
 	pthread_cond_wait(&(thread->cond), &(thread->locker));
 	if(thread->callback.func == NULL)
 	{
 		thread->exited = true;
 		pthread_cond_broadcast(&(thread->cond));
-		etk_unlock_thread_inter(thread);
+		bhapi_unlock_thread_inter(thread);
 		return NULL;
 	}
-	e_thread_func threadFunc = thread->callback.func;
+	b_thread_func threadFunc = thread->callback.func;
 	void *userData = thread->callback.user_data;
 	thread->callback.func = NULL;
 	thread->running = 1;
-	etk_unlock_thread_inter(thread);
+	bhapi_unlock_thread_inter(thread);
 
-	_ETK_LOCK_THREAD_();
-	if((priThread = _ETK_REF_THREAD_(thread)) == NULL)
+	_BHAPI_LOCK_THREAD_();
+	if((priThread = _BHAPI_REF_THREAD_(thread)) == NULL)
 	{
-		_ETK_UNLOCK_THREAD_();
+		_BHAPI_UNLOCK_THREAD_();
 
-		etk_lock_thread_inter(thread);
+		bhapi_lock_thread_inter(thread);
 		thread->exited = true;
 		pthread_cond_broadcast(&(thread->cond));
-		etk_unlock_thread_inter(thread);
+		bhapi_unlock_thread_inter(thread);
 
 		return NULL;
 	}
-	_ETK_UNLOCK_THREAD_();
+	_BHAPI_UNLOCK_THREAD_();
 
-	if(etk_on_exit_thread((void (*)(void *))etk_delete_thread, priThread) != E_OK)
+	if(bhapi_on_exit_thread((void (*)(void *))bhapi_delete_thread, priThread) != B_OK)
 	{
-		ETK_WARNING("[KERNEL]: %s --- Unexpected error! Thread WON'T RUN!", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[KERNEL]: %s --- Unexpected error! Thread WON'T RUN!", __PRETTY_FUNCTION__);
 
-		etk_lock_thread_inter(thread);
+		bhapi_lock_thread_inter(thread);
 
 		thread->running = 0;
 		thread->exited = true;
 
 		pthread_cond_broadcast(&(thread->cond));
 
-		EList exitCallbackList(thread->exit_callbacks);
+		BList exitCallbackList(thread->exit_callbacks);
 		thread->exit_callbacks.MakeEmpty();
 
-		etk_unlock_thread_inter(thread);
+		bhapi_unlock_thread_inter(thread);
 
 		_threadCallback_ *exitCallback;
 		while((exitCallback = (_threadCallback_*)exitCallbackList.RemoveItem(0)) != NULL) delete exitCallback;
 
-		etk_delete_thread(priThread);
+		bhapi_delete_thread(priThread);
 
 		return NULL;
 	}
 
-	e_status_t status = (threadFunc == NULL ? E_ERROR : (*threadFunc)(userData));
+	b_status_t status = (threadFunc == NULL ? B_ERROR : (*threadFunc)(userData));
 
-	etk_lock_thread_inter(thread);
+	bhapi_lock_thread_inter(thread);
 
 	thread->running = 0;
 	thread->exited = true;
 	thread->status = status;
 	pthread_cond_broadcast(&(thread->cond));
 
-	EList exitCallbackList(thread->exit_callbacks);
+	BList exitCallbackList(thread->exit_callbacks);
 	thread->exit_callbacks.MakeEmpty();
 
-	etk_unlock_thread_inter(thread);
+	bhapi_unlock_thread_inter(thread);
 
 	_threadCallback_ *exitCallback;
 	while((exitCallback = (_threadCallback_*)exitCallbackList.RemoveItem(0)) != NULL)
@@ -320,48 +320,48 @@ static void* etk_spawn_thread_func(void *data)
 }
 
 
-_IMPEXP_ETK void* etk_create_thread_by_current_thread(void)
+_IMPEXP_BHAPI void* bhapi_create_thread_by_current_thread(void)
 {
-	etk_posix_thread_private_t *priThread = NULL;
+	bhapi_posix_thread_private_t *priThread = NULL;
 
-	_ETK_LOCK_THREAD_();
-	if((priThread = _ETK_OPEN_THREAD_(etk_get_current_thread_id())) != NULL)
+	_BHAPI_LOCK_THREAD_();
+	if((priThread = _BHAPI_OPEN_THREAD_(bhapi_get_current_thread_id())) != NULL)
 	{
-		_ETK_UNREF_THREAD_(priThread);
-		_ETK_UNLOCK_THREAD_();
+		_BHAPI_UNREF_THREAD_(priThread);
+		_BHAPI_UNLOCK_THREAD_();
 		return NULL;
 	}
 
-	etk_posix_thread_t *thread = __etk_create_thread__();
+	bhapi_posix_thread_t *thread = __bhapi_create_thread__();
 	if(thread == NULL) return NULL;
 
-	if((priThread = _ETK_ADD_THREAD_(thread)) == NULL)
+	if((priThread = _BHAPI_ADD_THREAD_(thread)) == NULL)
 	{
-		_ETK_UNLOCK_THREAD_();
-		__etk_delete_thread__(thread);
+		_BHAPI_UNLOCK_THREAD_();
+		__bhapi_delete_thread__(thread);
 		return NULL;
 	}
 
 	thread->priority = 0;
 	thread->running = 1;
 	thread->exited = false;
-	thread->ID = etk_get_current_thread_id();
+	thread->ID = bhapi_get_current_thread_id();
 	thread->existent = true;
 
-	_ETK_UNLOCK_THREAD_();
+	_BHAPI_UNLOCK_THREAD_();
 
 	return (void*)priThread;
 }
 
 
-_IMPEXP_ETK void* etk_create_thread(e_thread_func threadFunction,
-				    eint32 priority,
+_IMPEXP_BHAPI void* bhapi_create_thread(b_thread_func threadFunction,
+				    b_int32 priority,
 				    void *arg,
-				    eint64 *threadId)
+				    b_int64 *threadId)
 {
 	if(!threadFunction) return NULL;
 
-	etk_posix_thread_t *thread = __etk_create_thread__();
+	bhapi_posix_thread_t *thread = __bhapi_create_thread__();
 	if(thread == NULL) return NULL;
 
 	thread->callback.func = threadFunction;
@@ -376,98 +376,98 @@ _IMPEXP_ETK void* etk_create_thread(e_thread_func threadFunction,
 	pthread_attr_setstacksize(&posixThreadAttr, 0x40000);
 #endif // _POSIX_THREAD_ATTR_STACKSIZE
 
-	if(pthread_create(&posixThreadId, &posixThreadAttr, etk_spawn_thread_func, (void*)thread) != 0)
+	if(pthread_create(&posixThreadId, &posixThreadAttr, bhapi_spawn_thread_func, (void*)thread) != 0)
 	{
 		pthread_attr_destroy(&posixThreadAttr);
-		ETK_WARNING("[KERNEL]: %s --- Not enough system resources to create a new thread.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[KERNEL]: %s --- Not enough system resources to create a new thread.", __PRETTY_FUNCTION__);
 
-		__etk_delete_thread__(thread);
+		__bhapi_delete_thread__(thread);
 		return NULL;
 	}
 	pthread_attr_destroy(&posixThreadAttr);
 
-	etk_posix_thread_private_t *priThread = NULL;
+	bhapi_posix_thread_private_t *priThread = NULL;
 
-	_ETK_LOCK_THREAD_();
-	if((priThread = _ETK_ADD_THREAD_(thread)) == NULL)
+	_BHAPI_LOCK_THREAD_();
+	if((priThread = _BHAPI_ADD_THREAD_(thread)) == NULL)
 	{
-		_ETK_UNLOCK_THREAD_();
+		_BHAPI_UNLOCK_THREAD_();
 
-		ETK_WARNING("[KERNEL]: %s --- Unexpected error! Thread WON'T RUN!", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[KERNEL]: %s --- Unexpected error! Thread WON'T RUN!", __PRETTY_FUNCTION__);
 
-		etk_lock_thread_inter(thread);
+		bhapi_lock_thread_inter(thread);
 		thread->callback.func = NULL;
 		while(thread->exited == false && thread->running != 1)
 		{
 			pthread_cond_broadcast(&(thread->cond));
-			etk_unlock_thread_inter(thread);
-			e_snooze(500);
-			etk_lock_thread_inter(thread);
+			bhapi_unlock_thread_inter(thread);
+			b_snooze(500);
+			bhapi_lock_thread_inter(thread);
 		}
-		etk_unlock_thread_inter(thread);
+		bhapi_unlock_thread_inter(thread);
 
 		pthread_join(posixThreadId, NULL);
 
-		__etk_delete_thread__(thread);
+		__bhapi_delete_thread__(thread);
 		return NULL;
 	}
 
 	thread->priority = -1;
 	thread->running = 0;
 	thread->exited = false;
-	thread->ID = etk_convert_pthread_id_to_etk(posixThreadId);
+	thread->ID = bhapi_convert_pthread_id_to_etk(posixThreadId);
 	thread->existent = false;
 
-	_ETK_UNLOCK_THREAD_();
+	_BHAPI_UNLOCK_THREAD_();
 
-	etk_set_thread_priority(priThread, priority);
+	bhapi_set_thread_priority(priThread, priority);
 
 	if(threadId) *threadId = thread->ID;
 	return (void*)priThread;
 }
 
 
-_IMPEXP_ETK void* etk_open_thread(eint64 threadId)
+_IMPEXP_BHAPI void* bhapi_open_thread(b_int64 threadId)
 {
-	_ETK_LOCK_THREAD_();
-	etk_posix_thread_private_t *priThread = _ETK_OPEN_THREAD_(threadId);
-	_ETK_UNLOCK_THREAD_();
+	_BHAPI_LOCK_THREAD_();
+	bhapi_posix_thread_private_t *priThread = _BHAPI_OPEN_THREAD_(threadId);
+	_BHAPI_UNLOCK_THREAD_();
 
 	return (void*)priThread;
 }
 
 
-_IMPEXP_ETK e_status_t etk_delete_thread(void *data)
+_IMPEXP_BHAPI b_status_t bhapi_delete_thread(void *data)
 {
-	etk_posix_thread_private_t *priThread = (etk_posix_thread_private_t*)data;
-	etk_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
-	if(priThread == NULL || thread == NULL) return E_BAD_VALUE;
+	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
+	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	if(priThread == NULL || thread == NULL) return B_BAD_VALUE;
 
 	bool threadIsCopy = priThread->copy;
 
-	_ETK_LOCK_THREAD_();
-	eint32 count = _ETK_UNREF_THREAD_(priThread);
-	_ETK_UNLOCK_THREAD_();
+	_BHAPI_LOCK_THREAD_();
+	b_int32 count = _BHAPI_UNREF_THREAD_(priThread);
+	_BHAPI_UNLOCK_THREAD_();
 
-	if(count < 0) return E_ERROR;
+	if(count < 0) return B_ERROR;
 
 	if(thread->existent && !threadIsCopy)
 	{
-		EList exitCallbackList;
+		BList exitCallbackList;
 
-		etk_lock_thread_inter(thread);
-		if(thread->ID == etk_get_current_thread_id())
+		bhapi_lock_thread_inter(thread);
+		if(thread->ID == bhapi_get_current_thread_id())
 		{
 			thread->running = 0;
 			thread->exited = true;
-			thread->status = E_OK;
+			thread->status = B_OK;
 
 			pthread_cond_broadcast(&(thread->cond));
 
 			exitCallbackList = thread->exit_callbacks;
 			thread->exit_callbacks.MakeEmpty();
 		}
-		etk_unlock_thread_inter(thread);
+		bhapi_unlock_thread_inter(thread);
 
 		_threadCallback_ *exitCallback;
 		while((exitCallback = (_threadCallback_*)exitCallbackList.RemoveItem(0)) != NULL)
@@ -477,23 +477,23 @@ _IMPEXP_ETK e_status_t etk_delete_thread(void *data)
 		}
 	}
 
-	if(count > 0) return E_OK;
+	if(count > 0) return B_OK;
 
 	if(thread->existent == false)
 	{
-		pthread_t posixThreadId = etk_convert_thread_id_to_pthread(thread->ID);
+		pthread_t posixThreadId = bhapi_convert_thread_id_to_pthread(thread->ID);
 		if(pthread_equal(posixThreadId, pthread_self()) == 0)
 		{
-			etk_lock_thread_inter(thread);
+			bhapi_lock_thread_inter(thread);
 			thread->callback.func = NULL;
 			while(thread->exited == false && thread->running != 1)
 			{
 				pthread_cond_broadcast(&(thread->cond));
-				etk_unlock_thread_inter(thread);
-				e_snooze(500);
-				etk_lock_thread_inter(thread);
+				bhapi_unlock_thread_inter(thread);
+				b_snooze(500);
+				bhapi_lock_thread_inter(thread);
 			}
-			etk_unlock_thread_inter(thread);
+			bhapi_unlock_thread_inter(thread);
 
 			pthread_join(posixThreadId, NULL);
 		}
@@ -503,7 +503,7 @@ _IMPEXP_ETK e_status_t etk_delete_thread(void *data)
 		}
 	}
 
-	EList exitCallbackList(thread->exit_callbacks);
+	BList exitCallbackList(thread->exit_callbacks);
 	thread->exit_callbacks.MakeEmpty();
 
 	_threadCallback_ *exitCallback;
@@ -513,128 +513,128 @@ _IMPEXP_ETK e_status_t etk_delete_thread(void *data)
 		delete exitCallback;
 	}
 
-	__etk_delete_thread__(thread);
+	__bhapi_delete_thread__(thread);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-_IMPEXP_ETK e_status_t etk_resume_thread(void *data)
+_IMPEXP_BHAPI b_status_t bhapi_resume_thread(void *data)
 {
-	etk_posix_thread_private_t *priThread = (etk_posix_thread_private_t*)data;
-	etk_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
-	if(thread == NULL) return E_BAD_VALUE;
+	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
+	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	if(thread == NULL) return B_BAD_VALUE;
 
-	e_status_t retVal = E_ERROR;
+	b_status_t retVal = B_ERROR;
 
-	etk_lock_thread_inter(thread);
+	bhapi_lock_thread_inter(thread);
 	if(((thread->callback.func != NULL && thread->running == 0) || thread->running == 2) &&
 	   thread->exited == false)
 	{
-		retVal = E_OK;
+		retVal = B_OK;
 
 		while(thread->exited == false && thread->running != 1)
 		{
 			pthread_cond_broadcast(&(thread->cond));
-			etk_unlock_thread_inter(thread);
-			e_snooze(500);
-			etk_lock_thread_inter(thread);
+			bhapi_unlock_thread_inter(thread);
+			b_snooze(500);
+			bhapi_lock_thread_inter(thread);
 		}
 	}
-	etk_unlock_thread_inter(thread);
+	bhapi_unlock_thread_inter(thread);
 
 	return retVal;
 }
 
 
-_IMPEXP_ETK e_status_t etk_suspend_thread(void *data)
+_IMPEXP_BHAPI b_status_t bhapi_suspend_thread(void *data)
 {
-	etk_posix_thread_private_t *priThread = (etk_posix_thread_private_t*)data;
-	etk_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
-	if(thread == NULL) return E_BAD_VALUE;
+	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
+	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	if(thread == NULL) return B_BAD_VALUE;
 
-	e_status_t retVal = E_ERROR;
+	b_status_t retVal = B_ERROR;
 
-	etk_lock_thread_inter(thread);
-	bool suspend_cur_thread = (thread->ID == etk_get_current_thread_id());
+	bhapi_lock_thread_inter(thread);
+	bool suspend_cur_thread = (thread->ID == bhapi_get_current_thread_id());
 	if(thread->running == 1 && thread->exited == false)
 	{
 		if(suspend_cur_thread)
 		{
 			thread->running = 2;
-			retVal = pthread_cond_wait(&(thread->cond), &(thread->locker)) != 0 ? E_ERROR : E_OK;
-			if(retVal != E_OK) etk_lock_thread_inter(thread);
+			retVal = pthread_cond_wait(&(thread->cond), &(thread->locker)) != 0 ? B_ERROR : B_OK;
+			if(retVal != B_OK) bhapi_lock_thread_inter(thread);
 			thread->running = 1;
 		}
 		else
 		{
 			// TODO
-			ETK_WARNING("[KERNEL]: %s --- Only supported to suspend the current thread !!!", __PRETTY_FUNCTION__);
+			BHAPI_WARNING("[KERNEL]: %s --- Only supported to suspend the current thread !!!", __PRETTY_FUNCTION__);
 		}
 	}
-	etk_unlock_thread_inter(thread);
+	bhapi_unlock_thread_inter(thread);
 
 	return retVal;
 }
 
 
-_IMPEXP_ETK eint64 etk_get_thread_id(void *data)
+_IMPEXP_BHAPI b_int64 bhapi_get_thread_id(void *data)
 {
-	etk_posix_thread_private_t *priThread = (etk_posix_thread_private_t*)data;
-	etk_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
-	if(thread == NULL) return E_INT64_CONSTANT(0);
+	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
+	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	if(thread == NULL) return B_INT64_CONSTANT(0);
 
-	etk_lock_thread_inter(thread);
-	eint64 thread_id = thread->ID;
-	etk_unlock_thread_inter(thread);
+	bhapi_lock_thread_inter(thread);
+	b_int64 thread_id = thread->ID;
+	bhapi_unlock_thread_inter(thread);
 
 	return thread_id;
 }
 
 
-_IMPEXP_ETK euint32 etk_get_thread_run_state(void *data)
+_IMPEXP_BHAPI b_uint32 bhapi_get_thread_run_state(void *data)
 {
-	etk_posix_thread_private_t *priThread = (etk_posix_thread_private_t*)data;
-	etk_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
-	if(thread == NULL) return ETK_THREAD_INVALID;
+	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
+	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	if(thread == NULL) return BHAPI_THREAD_INVALID;
 
-	euint32 retVal = ETK_THREAD_INVALID;
+	b_uint32 retVal = BHAPI_THREAD_INVALID;
 
-	etk_lock_thread_inter(thread);
+	bhapi_lock_thread_inter(thread);
 
 	if(thread->exited)
 	{
 		if(thread->running == 0)
-			retVal = ETK_THREAD_EXITED;
+			retVal = BHAPI_THREAD_EXITED;
 	}
 	else switch(thread->running)
 	{
 		case 0:
-			retVal = ETK_THREAD_READY;
+			retVal = BHAPI_THREAD_READY;
 			break;
 
 		case 1:
-			retVal = ETK_THREAD_RUNNING;
+			retVal = BHAPI_THREAD_RUNNING;
 			break;
 
 		case 2:
-			retVal = ETK_THREAD_SUSPENDED;
+			retVal = BHAPI_THREAD_SUSPENDED;
 			break;
 
 		default:
 			break;
 	}
 
-	etk_unlock_thread_inter(thread);
+	bhapi_unlock_thread_inter(thread);
 
 	return retVal;
 }
 
 
-_IMPEXP_ETK e_status_t etk_set_thread_priority(void *data, eint32 new_priority)
+_IMPEXP_BHAPI b_status_t bhapi_set_thread_priority(void *data, b_int32 new_priority)
 {
-	etk_posix_thread_private_t *priThread = (etk_posix_thread_private_t*)data;
-	etk_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
+	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL) return -1;
 
 	if(new_priority < 0) new_priority = 15;
@@ -644,14 +644,14 @@ _IMPEXP_ETK e_status_t etk_set_thread_priority(void *data, eint32 new_priority)
 	sched_param param;
 	int priority_max, priority_min;
 
-	etk_lock_thread_inter(thread);
+	bhapi_lock_thread_inter(thread);
 
 	if(thread->exited || (priority_max = sched_get_priority_max(policy)) < 0 || (priority_min = sched_get_priority_min(policy)) < 0)
 	{
-		ETK_WARNING("[KERNEL]: %s --- %s", __PRETTY_FUNCTION__,
+		BHAPI_WARNING("[KERNEL]: %s --- %s", __PRETTY_FUNCTION__,
 			    thread->exited ? "Thread exited." : "Sched get priority region failed.");
-		etk_unlock_thread_inter(thread);
-		return E_ERROR;
+		bhapi_unlock_thread_inter(thread);
+		return B_ERROR;
 	}
 
 	if(new_priority < 100)
@@ -659,90 +659,90 @@ _IMPEXP_ETK e_status_t etk_set_thread_priority(void *data, eint32 new_priority)
 	else
 		param.sched_priority = priority_min + (int)(((float)(new_priority - 100) / 20.f) * (float)(priority_max - priority_min));
 
-//	ETK_DEBUG("[KERNEL]: POLICY: %d, PRIORITY_MAX: %d, PRIORITY_MIN: %d, Current Priority: %d",
+//	BHAPI_DEBUG("[KERNEL]: POLICY: %d, PRIORITY_MAX: %d, PRIORITY_MIN: %d, Current Priority: %d",
 //		  policy, priority_max, priority_min, param.sched_priority);
 
-	if(pthread_setschedparam(etk_convert_thread_id_to_pthread(thread->ID), policy, &param) != 0)
+	if(pthread_setschedparam(bhapi_convert_thread_id_to_pthread(thread->ID), policy, &param) != 0)
 	{
-		ETK_WARNING("[KERNEL]: %s --- Set thread priority failed.", __PRETTY_FUNCTION__);
-		etk_unlock_thread_inter(thread);
-		return E_ERROR;
+		BHAPI_WARNING("[KERNEL]: %s --- Set thread priority failed.", __PRETTY_FUNCTION__);
+		bhapi_unlock_thread_inter(thread);
+		return B_ERROR;
 	}
 
-	eint32 old_priority = thread->priority;
+	b_int32 old_priority = thread->priority;
 	thread->priority = new_priority;
 
-	etk_unlock_thread_inter(thread);
+	bhapi_unlock_thread_inter(thread);
 
 	return old_priority;
 }
 
 
-_IMPEXP_ETK eint32 etk_get_thread_priority(void *data)
+_IMPEXP_BHAPI b_int32 bhapi_get_thread_priority(void *data)
 {
-	etk_posix_thread_private_t *priThread = (etk_posix_thread_private_t*)data;
-	etk_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
+	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL) return -1;
 
-	etk_lock_thread_inter(thread);
-	eint32 priority = thread->priority;
-	etk_unlock_thread_inter(thread);
+	bhapi_lock_thread_inter(thread);
+	b_int32 priority = thread->priority;
+	bhapi_unlock_thread_inter(thread);
 
 	return priority;
 }
 
 
-_IMPEXP_ETK e_status_t etk_on_exit_thread(void (*callback)(void *), void *user_data)
+_IMPEXP_BHAPI b_status_t bhapi_on_exit_thread(void (*callback)(void *), void *user_data)
 {
-	if(!callback) return E_BAD_VALUE;
+	if(!callback) return B_BAD_VALUE;
 
-	etk_posix_thread_private_t *priThread = (etk_posix_thread_private_t*)etk_open_thread(etk_get_current_thread_id());
+	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)bhapi_open_thread(bhapi_get_current_thread_id());
 	if(priThread == NULL)
 	{
-		ETK_WARNING("[KERNEL]: %s --- Thread wasn't created by this toolkit!", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_WARNING("[KERNEL]: %s --- Thread wasn't created by this toolkit!", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	etk_posix_thread_t *thread = priThread->thread;
+	bhapi_posix_thread_t *thread = priThread->thread;
 
 	_threadCallback_ *exitCallback = new _threadCallback_;
 	if(exitCallback == NULL)
 	{
-		etk_delete_thread(priThread);
-		return E_NO_MEMORY;
+		bhapi_delete_thread(priThread);
+		return B_NO_MEMORY;
 	}
 
-	exitCallback->func = (e_thread_func)callback;
+	exitCallback->func = (b_thread_func)callback;
 	exitCallback->user_data = user_data;
 
-	e_status_t retVal = E_OK;
+	b_status_t retVal = B_OK;
 
-	etk_lock_thread_inter(thread);
+	bhapi_lock_thread_inter(thread);
 	if(thread->exited || thread->exit_callbacks.AddItem((void*)exitCallback, 0) == false)
 	{
 		delete exitCallback;
-		retVal = E_ERROR;
+		retVal = B_ERROR;
 	}
-	etk_unlock_thread_inter(thread);
+	bhapi_unlock_thread_inter(thread);
 
-	etk_delete_thread(priThread);
+	bhapi_delete_thread(priThread);
 
 	return retVal;
 }
 
 
-_IMPEXP_ETK void etk_exit_thread(e_status_t status)
+_IMPEXP_BHAPI void bhapi_exit_thread(b_status_t status)
 {
-	etk_posix_thread_private_t *priThread = (etk_posix_thread_private_t*)etk_open_thread(etk_get_current_thread_id());
+	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)bhapi_open_thread(bhapi_get_current_thread_id());
 	if(priThread == NULL)
 	{
-		ETK_WARNING("[KERNEL]: %s --- thread wasn't created by this toolkit!", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[KERNEL]: %s --- thread wasn't created by this toolkit!", __PRETTY_FUNCTION__);
 		return;
 	}
 
-	etk_posix_thread_t *thread = priThread->thread;
+	bhapi_posix_thread_t *thread = priThread->thread;
 
-	etk_lock_thread_inter(thread);
+	bhapi_lock_thread_inter(thread);
 
 	thread->running = 0;
 	thread->exited = true;
@@ -750,10 +750,10 @@ _IMPEXP_ETK void etk_exit_thread(e_status_t status)
 
 	pthread_cond_broadcast(&(thread->cond));
 
-	EList exitCallbackList(thread->exit_callbacks);
+	BList exitCallbackList(thread->exit_callbacks);
 	thread->exit_callbacks.MakeEmpty();
 
-	etk_unlock_thread_inter(thread);
+	bhapi_unlock_thread_inter(thread);
 
 	_threadCallback_ *exitCallback;
 	while((exitCallback = (_threadCallback_*)exitCallbackList.RemoveItem(0)) != NULL)
@@ -762,52 +762,52 @@ _IMPEXP_ETK void etk_exit_thread(e_status_t status)
 		delete exitCallback;
 	}
 
-	etk_delete_thread(priThread);
+	bhapi_delete_thread(priThread);
 
 	pthread_exit(NULL);
 }
 
 
-_IMPEXP_ETK e_status_t etk_wait_for_thread_etc(void *data, e_status_t *thread_return_value, euint32 flags, e_bigtime_t microseconds_timeout)
+_IMPEXP_BHAPI b_status_t bhapi_wait_for_thread_etc(void *data, b_status_t *thread_return_value, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
-	etk_posix_thread_private_t *priThread = (etk_posix_thread_private_t*)data;
-	etk_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
-	if(thread == NULL || microseconds_timeout < E_INT64_CONSTANT(0) || thread_return_value == NULL) return E_BAD_VALUE;
+	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
+	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	if(thread == NULL || microseconds_timeout < B_INT64_CONSTANT(0) || thread_return_value == NULL) return B_BAD_VALUE;
 
-	e_bigtime_t currentTime = etk_real_time_clock_usecs();
+	b_bigtime_t currentTime = bhapi_real_time_clock_usecs();
 	bool wait_forever = false;
 
-	if(flags != E_ABSOLUTE_TIMEOUT)
+	if(flags != B_ABSOLUTE_TIMEOUT)
 	{
-		if(microseconds_timeout == E_INFINITE_TIMEOUT || microseconds_timeout > E_MAXINT64 - currentTime)
+		if(microseconds_timeout == B_INFINITE_TIMEOUT || microseconds_timeout > B_MAXINT64 - currentTime)
 			wait_forever = true;
 		else
 			microseconds_timeout += currentTime;
 	}
 
-	etk_lock_thread_inter(thread);
+	bhapi_lock_thread_inter(thread);
 
-	pthread_t posixThreadId = etk_convert_thread_id_to_pthread(thread->ID);
+	pthread_t posixThreadId = bhapi_convert_thread_id_to_pthread(thread->ID);
 
 	if(pthread_equal(posixThreadId, pthread_self()) != 0)
 	{
-		ETK_WARNING("[KERNEL]: %s --- Can't wait self.", __PRETTY_FUNCTION__);
-		etk_unlock_thread_inter(thread);
-		return E_ERROR;
+		BHAPI_WARNING("[KERNEL]: %s --- Can't wait self.", __PRETTY_FUNCTION__);
+		bhapi_unlock_thread_inter(thread);
+		return B_ERROR;
 	}
 	else if(thread->exited)
 	{
-		etk_unlock_thread_inter(thread);
+		bhapi_unlock_thread_inter(thread);
 		pthread_join(posixThreadId, NULL);
-		return E_OK;
+		return B_OK;
 	}
 	else if(microseconds_timeout == currentTime && !wait_forever)
 	{
-		etk_unlock_thread_inter(thread);
-		return E_WOULD_BLOCK;
+		bhapi_unlock_thread_inter(thread);
+		return B_WOULD_BLOCK;
 	}
 
-	e_status_t retVal = E_ERROR;
+	b_status_t retVal = B_ERROR;
 
 	if(((thread->callback.func != NULL && thread->running == 0) || thread->running == 2) &&
 	   thread->exited == false)
@@ -815,15 +815,15 @@ _IMPEXP_ETK e_status_t etk_wait_for_thread_etc(void *data, e_status_t *thread_re
 		while(thread->exited == false && thread->running != 1)
 		{
 			pthread_cond_broadcast(&(thread->cond));
-			etk_unlock_thread_inter(thread);
-			e_snooze(500);
-			etk_lock_thread_inter(thread);
+			bhapi_unlock_thread_inter(thread);
+			b_snooze(500);
+			bhapi_lock_thread_inter(thread);
 		}
 	}
 
 	struct timespec ts;
-	ts.tv_sec = (long)(microseconds_timeout / E_INT64_CONSTANT(1000000));
-	ts.tv_nsec = (long)(microseconds_timeout % E_INT64_CONSTANT(1000000)) * 1000L;
+	ts.tv_sec = (long)(microseconds_timeout / B_INT64_CONSTANT(1000000));
+	ts.tv_nsec = (long)(microseconds_timeout % B_INT64_CONSTANT(1000000)) * 1000L;
 
 	while(true)
 	{
@@ -831,7 +831,7 @@ _IMPEXP_ETK e_status_t etk_wait_for_thread_etc(void *data, e_status_t *thread_re
 		{
 			*thread_return_value = thread->status;
 
-			retVal = E_OK;
+			retVal = B_OK;
 			break;
 		}
 
@@ -842,36 +842,36 @@ _IMPEXP_ETK e_status_t etk_wait_for_thread_etc(void *data, e_status_t *thread_re
 		{
 			if(ret == ETIMEDOUT && !wait_forever)
 			{
-				etk_unlock_thread_inter(thread);
-				return E_TIMED_OUT;
+				bhapi_unlock_thread_inter(thread);
+				return B_TIMED_OUT;
 			}
-			else return E_ERROR;
+			else return B_ERROR;
 		}
 	}
 
-	etk_unlock_thread_inter(thread);
+	bhapi_unlock_thread_inter(thread);
 
-	if(retVal == E_OK) pthread_join(posixThreadId, NULL);
+	if(retVal == B_OK) pthread_join(posixThreadId, NULL);
 
 	return retVal;
 }
 
 
-_IMPEXP_ETK e_status_t etk_wait_for_thread(void *data, e_status_t *thread_return_value)
+_IMPEXP_BHAPI b_status_t bhapi_wait_for_thread(void *data, b_status_t *thread_return_value)
 {
-	return etk_wait_for_thread_etc(data, thread_return_value, E_TIMEOUT, E_INFINITE_TIMEOUT);
+	return bhapi_wait_for_thread_etc(data, thread_return_value, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-_IMPEXP_ETK e_status_t etk_snooze(e_bigtime_t microseconds)
+_IMPEXP_BHAPI b_status_t bhapi_snooze(b_bigtime_t microseconds)
 {
-	if(microseconds <= 0) return E_ERROR;
+	if(microseconds <= 0) return B_ERROR;
 
-	microseconds += etk_real_time_clock_usecs();
+	microseconds += bhapi_real_time_clock_usecs();
 
 	struct timespec ts;
-	ts.tv_sec = (long)(microseconds / E_INT64_CONSTANT(1000000));
-	ts.tv_nsec = (long)(microseconds % E_INT64_CONSTANT(1000000)) * 1000L;
+	ts.tv_sec = (long)(microseconds / B_INT64_CONSTANT(1000000));
+	ts.tv_nsec = (long)(microseconds % B_INT64_CONSTANT(1000000)) * 1000L;
 
 	pthread_mutex_t mptr;
 	pthread_cond_t cptr;
@@ -887,32 +887,32 @@ _IMPEXP_ETK e_status_t etk_snooze(e_bigtime_t microseconds)
 	pthread_cond_destroy(&cptr);
 
 	if(ret == 0 || ret == ETIMEDOUT)
-		return E_OK;
+		return B_OK;
 	else
-		return E_ERROR;
+		return B_ERROR;
 }
 
 
-_IMPEXP_ETK e_status_t etk_snooze_until(e_bigtime_t time, int timebase)
+_IMPEXP_BHAPI b_status_t bhapi_snooze_until(b_bigtime_t time, int timebase)
 {
-	if(time < E_INT64_CONSTANT(0)) return E_ERROR;
+	if(time < B_INT64_CONSTANT(0)) return B_ERROR;
 
 	switch(timebase)
 	{
-		case E_SYSTEM_TIMEBASE:
-			time += etk_system_boot_time();
+		case B_SYSTEM_TIMEBASE:
+			time += bhapi_system_boot_time();
 			break;
 
-		case E_REAL_TIME_TIMEBASE:
+		case B_REAL_TIME_TIMEBASE:
 			break;
 
 		default:
-			return E_ERROR;
+			return B_ERROR;
 	}
 
 	struct timespec ts;
-	ts.tv_sec = (long)(time / E_INT64_CONSTANT(1000000));
-	ts.tv_nsec = (long)(time % E_INT64_CONSTANT(1000000)) * 1000L;
+	ts.tv_sec = (long)(time / B_INT64_CONSTANT(1000000));
+	ts.tv_nsec = (long)(time % B_INT64_CONSTANT(1000000)) * 1000L;
 
 	pthread_mutex_t mptr;
 	pthread_cond_t cptr;
@@ -928,57 +928,57 @@ _IMPEXP_ETK e_status_t etk_snooze_until(e_bigtime_t time, int timebase)
 	pthread_cond_destroy(&cptr);
 
 	if(ret == 0 || ret == ETIMEDOUT)
-		return E_OK;
+		return B_OK;
 	else
-		return E_ERROR;
+		return B_ERROR;
 }
 
 
-#ifdef ETK_OS_LINUX
-static pthread_mutex_t __etk_team_id_locker__ = PTHREAD_MUTEX_INITIALIZER;
-class __etk_pid_impl__ {
+#ifdef BHAPI_OS_LINUX
+static pthread_mutex_t __bhapi_team_id_locker__ = PTHREAD_MUTEX_INITIALIZER;
+class __bhapi_pid_impl__ {
 public:
 	bool warning;
-	eint64 fTeam;
+	b_int64 fTeam;
 
-	__etk_pid_impl__()
+	__bhapi_pid_impl__()
 		: warning(true)
 	{
-		fTeam = (eint64)getpid();
+		fTeam = (b_int64)getpid();
 	}
 
-	~__etk_pid_impl__()
+	~__bhapi_pid_impl__()
 	{
 	}
 
-	eint64 Team()
+	b_int64 Team()
 	{
 		pid_t id = getpid();
 
 		if((pid_t)fTeam != id)
 		{
-			pthread_mutex_lock(&__etk_team_id_locker__);
+			pthread_mutex_lock(&__bhapi_team_id_locker__);
 			if(warning)
 			{
 				fprintf(stdout, "\x1b[31m[KERNEL]: You need GNU C Library that support for NPTL.\x1b[0m\n");
 				warning = false;
 			}
-			pthread_mutex_unlock(&__etk_team_id_locker__);
+			pthread_mutex_unlock(&__bhapi_team_id_locker__);
 		}
 
 		return fTeam;
 	}
 };
-static __etk_pid_impl__ __etk_team_id__;
-#endif // ETK_OS_LINUX
+static __bhapi_pid_impl__ __bhapi_team_id__;
+#endif // BHAPI_OS_LINUX
 
 
-_IMPEXP_ETK eint64 etk_get_current_team_id(void)
+_IMPEXP_BHAPI b_int64 bhapi_get_current_team_id(void)
 {
-#ifdef ETK_OS_LINUX
-	return __etk_team_id__.Team();
+#ifdef BHAPI_OS_LINUX
+	return __bhapi_team_id__.Team();
 #else
-	return((eint64)getpid());
+	return((b_int64)getpid());
 #endif
 }
 

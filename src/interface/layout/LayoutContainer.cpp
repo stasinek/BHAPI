@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -32,17 +32,17 @@
 #include "Layout.h"
 
 
-ELayoutContainer::ELayoutContainer()
+BLayoutContainer::BLayoutContainer()
 	: fUnitsPerPixel(1)
 {
 	fPrivate[0] = fPrivate[1] = NULL;
 }
 
 
-ELayoutContainer::~ELayoutContainer()
+BLayoutContainer::~BLayoutContainer()
 {
-	ELayoutItem *item;
-	while((item = (ELayoutItem*)fItems.RemoveItem(0)) != NULL)
+	BLayoutItem *item;
+	while((item = (BLayoutItem*)fItems.RemoveItem(0)) != NULL)
 	{
 		item->fContainer = NULL;
 		delete item;
@@ -54,7 +54,7 @@ ELayoutContainer::~ELayoutContainer()
 
 
 bool
-ELayoutContainer::AddItem(ELayoutItem *item, eint32 index)
+BLayoutContainer::AddItem(BLayoutItem *item, b_int32 index)
 {
 	if(item == NULL || item->fContainer != NULL) return false;
 	if(index < 0 || index > fItems.CountItems()) index = fItems.CountItems();
@@ -62,10 +62,10 @@ ELayoutContainer::AddItem(ELayoutItem *item, eint32 index)
 	if(fItems.AddItem((void*)item, index) == false) return false;
 
 	item->fContainer = this;
-	for(eint32 i = index; i < fItems.CountItems(); i++) ((ELayoutItem*)fItems.ItemAt(i))->fIndex = i;
+	for(b_int32 i = index; i < fItems.CountItems(); i++) ((BLayoutItem*)fItems.ItemAt(i))->fIndex = i;
 	if(!(item->fHidden || item->fFrame.IsValid() == false))
 	{
-		ERect updateRect = item->fFrame;
+		BRect updateRect = item->fFrame;
 		for(; item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
 		Invalidate(updateRect);
 	}
@@ -75,22 +75,22 @@ ELayoutContainer::AddItem(ELayoutItem *item, eint32 index)
 
 
 bool
-ELayoutContainer::RemoveItem(ELayoutItem *item)
+BLayoutContainer::RemoveItem(BLayoutItem *item)
 {
 	if(item == NULL || item->fContainer != this) return false;
 
-	eint32 index = item->fIndex;
+	b_int32 index = item->fIndex;
 	if(fItems.RemoveItem(index) == false) return false;
 
 	item->fContainer = NULL;
 	item->fIndex = -1;
 	item->UpdateVisibleRegion();
 
-	for(eint32 i = index; i < fItems.CountItems(); i++) ((ELayoutItem*)fItems.ItemAt(i))->fIndex = i;
+	for(b_int32 i = index; i < fItems.CountItems(); i++) ((BLayoutItem*)fItems.ItemAt(i))->fIndex = i;
 	if(!(item->fHidden || item->fFrame.IsValid() == false))
 	{
-		ERect updateRect = item->fFrame;
-		for(item = (ELayoutItem*)fItems.ItemAt(index); item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
+		BRect updateRect = item->fFrame;
+		for(item = (BLayoutItem*)fItems.ItemAt(index); item != NULL; item = item->NextSibling()) item->UpdateVisibleRegion();
 		Invalidate(updateRect);
 	}
 
@@ -98,60 +98,60 @@ ELayoutContainer::RemoveItem(ELayoutItem *item)
 }
 
 
-ELayoutItem*
-ELayoutContainer::RemoveItem(eint32 index)
+BLayoutItem*
+BLayoutContainer::RemoveItem(b_int32 index)
 {
-	ELayoutItem *item = ItemAt(index);
+	BLayoutItem *item = ItemAt(index);
 	return(RemoveItem(item) ? item : NULL);
 }
 
 
-ELayoutItem*
-ELayoutContainer::ItemAt(eint32 index) const
+BLayoutItem*
+BLayoutContainer::ItemAt(b_int32 index) const
 {
-	return (ELayoutItem*)fItems.ItemAt(index);
+	return (BLayoutItem*)fItems.ItemAt(index);
 }
 
 
-eint32
-ELayoutContainer::IndexOf(const ELayoutItem *item) const
+b_int32
+BLayoutContainer::IndexOf(const BLayoutItem *item) const
 {
 	return((item == NULL || item->fContainer != this) ? -1 : item->fIndex);
 }
 
 
-eint32
-ELayoutContainer::CountItems() const
+b_int32
+BLayoutContainer::CountItems() const
 {
 	return fItems.CountItems();
 }
 
 
 float
-ELayoutContainer::UnitsPerPixel() const
+BLayoutContainer::UnitsPerPixel() const
 {
 	return fUnitsPerPixel;
 }
 
 
 void
-ELayoutContainer::SetUnitsPerPixel(float value, bool deep)
+BLayoutContainer::SetUnitsPerPixel(float value, bool deep)
 {
 	if(value <= 0) return;
 
 	fUnitsPerPixel = value;
 
-	ELayoutItem *item;
+	BLayoutItem *item;
 	if(deep)
 	{
-		item = (ELayoutItem*)fItems.ItemAt(0);
+		item = (BLayoutItem*)fItems.ItemAt(0);
 		while(item != NULL)
 		{
-			e_cast_as(item, ELayoutContainer)->fUnitsPerPixel = value;
+			b_cast_as(item, BLayoutContainer)->fUnitsPerPixel = value;
 
-			if(e_cast_as(item, ELayoutContainer)->fItems.CountItems() > 0)
+			if(b_cast_as(item, BLayoutContainer)->fItems.CountItems() > 0)
 			{
-				item = (ELayoutItem*)e_cast_as(item, ELayoutContainer)->fItems.ItemAt(0);
+                item = (BLayoutItem*)b_cast_as(item, BLayoutContainer)->fItems.ItemAt(0);
 			}
 			else if(item->fContainer == this)
 			{
@@ -165,18 +165,18 @@ ELayoutContainer::SetUnitsPerPixel(float value, bool deep)
 					continue;
 				}
 
-				while(e_cast_as(item->fContainer, ELayoutItem)->NextSibling() == NULL)
+				while(b_cast_as(item->fContainer, BLayoutItem)->NextSibling() == NULL)
 				{
-					item = e_cast_as(item->fContainer, ELayoutItem);
+					item = b_cast_as(item->fContainer, BLayoutItem);
 					if(item->fContainer == this) break;
 				}
-				item = e_cast_as(item->fContainer, ELayoutItem)->NextSibling();
+				item = b_cast_as(item->fContainer, BLayoutItem)->NextSibling();
 			}
 		}
 	}
 
-	ERect updateRect;
-	for(item = (ELayoutItem*)fItems.ItemAt(0); item != NULL; item = item->NextSibling())
+	BRect updateRect;
+	for(item = (BLayoutItem*)fItems.ItemAt(0); item != NULL; item = item->NextSibling())
 	{
 		if(item->fHidden || item->fFrame.IsValid() == false) continue;
 		updateRect |= item->fFrame;
@@ -187,13 +187,13 @@ ELayoutContainer::SetUnitsPerPixel(float value, bool deep)
 
 
 void
-ELayoutContainer::Invalidate(ERect rect)
+BLayoutContainer::Invalidate(BRect rect)
 {
 }
 
 
 void
-ELayoutContainer::SetPrivateData(void *data, void (*destroy_func)(void*))
+BLayoutContainer::SetPrivateData(void *data, void (*destroy_func)(void*))
 {
 	if(fPrivate[0] != NULL && fPrivate[1] != NULL)
 		((void (*)(void*))fPrivate[1])(fPrivate[0]);
@@ -203,7 +203,7 @@ ELayoutContainer::SetPrivateData(void *data, void (*destroy_func)(void*))
 
 
 void*
-ELayoutContainer::PrivateData() const
+BLayoutContainer::PrivateData() const
 {
 	return fPrivate[0];
 }

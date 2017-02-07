@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -39,34 +39,34 @@
 #include "./../storage/Path.h"
 
 
-_IMPEXP_ETK void*
-etk_load_addon(const char* path)
+_IMPEXP_BHAPI void*
+bhapi_load_addon(const char* path)
 {
-	EPath aPath(path, NULL, true);
-	if(aPath.Path() == NULL || strlen(aPath.Path()) > E_MAXPATH) return NULL;
+	BPath aPath(path, NULL, true);
+	if(aPath.Path() == NULL || strlen(aPath.Path()) > B_MAXPATH) return NULL;
 	return dlopen(aPath.Path(), RTLD_LAZY);
 }
 
 
-_IMPEXP_ETK e_status_t
-etk_unload_addon(void *data)
+_IMPEXP_BHAPI b_status_t
+bhapi_unload_addon(void *data)
 {
-	if(data == NULL) return E_ERROR;
-	if(dlclose(data) != 0) return E_ERROR;
-	return E_OK;
+	if(data == NULL) return B_ERROR;
+	if(dlclose(data) != 0) return B_ERROR;
+	return B_OK;
 }
 
 
-_IMPEXP_ETK e_status_t
-etk_get_image_symbol(void *data, const char *name, void **ptr)
+_IMPEXP_BHAPI b_status_t
+bhapi_get_image_symbol(void *data, const char *name, void **ptr)
 {
-	if(data == NULL || name == NULL || *name == 0 || ptr == NULL) return E_BAD_VALUE;
+	if(data == NULL || name == NULL || *name == 0 || ptr == NULL) return B_BAD_VALUE;
 
 	void *aPtr = dlsym(data, name);
-	if(aPtr == NULL) return E_ERROR;
+	if(aPtr == NULL) return B_ERROR;
 
 	*ptr = aPtr;
 
-	return E_OK;
+	return B_OK;
 }
 

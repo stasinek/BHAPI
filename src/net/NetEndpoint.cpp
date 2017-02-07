@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -65,84 +65,84 @@
 
 
 #ifdef SIGPIPE
-class _LOCAL ENetEndpointSignalIgnore {
+class _LOCAL BNetEndpointSignalIgnore {
 public:
-	ENetEndpointSignalIgnore()
+	BNetEndpointSignalIgnore()
 	{
-		ETK_DEBUG("[NET]: Ignore SIGPIPE.");
+		BHAPI_DEBUG("[NET]: Ignore SIGPIPE.");
 		signal(SIGPIPE, SIG_IGN);
 	}
 };
-static ENetEndpointSignalIgnore _ignore;
+static BNetEndpointSignalIgnore _ignore;
 #endif
 
 
-ENetEndpoint::ENetEndpoint(int proto)
-	: EArchivable(), fProtocol(proto), fBind(false), fNonBlocking(false), fTimeout(0)
+BNetEndpoint::BNetEndpoint(int proto)
+	: BArchivable(), fProtocol(proto), fBind(false), fNonBlocking(false), fTimeout(0)
 {
 	fSocket = socket(AF_INET, fProtocol, 0);
 }
 
 
-ENetEndpoint::ENetEndpoint(const ENetEndpoint &from)
-	: EArchivable(), fSocket(-1), fBind(false), fNonBlocking(false)
+BNetEndpoint::BNetEndpoint(const BNetEndpoint &from)
+	: BArchivable(), fSocket(-1), fBind(false), fNonBlocking(false)
 {
-	ENetEndpoint::operator=(from);
+	BNetEndpoint::operator=(from);
 }
 
 
-ENetEndpoint::~ENetEndpoint()
+BNetEndpoint::~BNetEndpoint()
 {
 	_Close();
 }
 
 
-ENetEndpoint::ENetEndpoint(const EMessage *from)
-	: EArchivable(from), fSocket(-1), fBind(false), fNonBlocking(false)
+BNetEndpoint::BNetEndpoint(const BMessage *from)
+	: BArchivable(from), fSocket(-1), fBind(false), fNonBlocking(false)
 {
 	// TODO
 }
 
 
-e_status_t
-ENetEndpoint::Archive(EMessage *into, bool deep) const
+b_status_t
+BNetEndpoint::Archive(BMessage *into, bool deep) const
 {
-	if(!into) return E_ERROR;
+	if(!into) return B_ERROR;
 
-	EArchivable::Archive(into, deep);
-	into->AddString("class", "ENetEndpoint");
+	BArchivable::Archive(into, deep);
+	into->AddString("class", "BNetEndpoint");
 
 	// TODO
 
-	return E_OK;
+	return B_OK;
 }
 
 
-EArchivable*
-ENetEndpoint::Instantiate(const EMessage *from)
+BArchivable*
+BNetEndpoint::Instantiate(const BMessage *from)
 {
-	if(e_validate_instantiation(from, "ENetEndpoint"))
-		return new ENetEndpoint(from);
+	if(b_validatb_instantiation(from, "BNetEndpoint"))
+		return new BNetEndpoint(from);
 	return NULL;
 }
 
 
-e_status_t
-ENetEndpoint::InitCheck() const
+b_status_t
+BNetEndpoint::InitCheck() const
 {
-	return(fSocket == -1 ? E_ERROR : E_OK);
+	return(fSocket == -1 ? B_ERROR : B_OK);
 }
 
 
-ENetEndpoint&
-ENetEndpoint::operator=(const ENetEndpoint &endpoint)
+BNetEndpoint&
+BNetEndpoint::operator=(const BNetEndpoint &endpoint)
 {
-	ENetEndpoint::Close();
+	BNetEndpoint::Close();
 
 	if(endpoint.fSocket != -1)
 	{
-		if(endpoint.fBind) ENetEndpoint::Bind(endpoint.fLocalAddr);
-		ENetEndpoint::Connect(endpoint.fRemoteAddr);
+		if(endpoint.fBind) BNetEndpoint::Bind(endpoint.fLocalAddr);
+		BNetEndpoint::Connect(endpoint.fRemoteAddr);
 		if(endpoint.fNonBlocking) SetNonBlocking(true);
 	}
 
@@ -150,13 +150,13 @@ ENetEndpoint::operator=(const ENetEndpoint &endpoint)
 }
 
 
-e_status_t
-ENetEndpoint::SetProtocol(int proto)
+b_status_t
+BNetEndpoint::SetProtocol(int proto)
 {
 	if(fProtocol != proto)
 	{
 		int s = socket(AF_INET, proto, 0);
-		if(s == -1) return E_ERROR;
+		if(s == -1) return B_ERROR;
 
 		_Close();
 
@@ -164,12 +164,12 @@ ENetEndpoint::SetProtocol(int proto)
 		fProtocol = proto;
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
 int
-ENetEndpoint::SetSocketOption(eint32 level, eint32 option, const void *data, size_t data_len)
+BNetEndpoint::SetSocketOption(b_int32 level, b_int32 option, const void *data, size_t data_len)
 {
 	if(fSocket == -1) return -1;
 
@@ -179,7 +179,7 @@ ENetEndpoint::SetSocketOption(eint32 level, eint32 option, const void *data, siz
 	if(retVal == 0 && option == SO_NONBLOCK)
 	{
 		fNonBlocking = false;
-		for(const euint8 *tmp = (const euint8*)data; data_len > 0; data_len--, tmp--)
+		for(const b_uint8 *tmp = (const b_uint8*)data; data_len > 0; data_len--, tmp--)
 		{
 			if(*tmp != 0)
 			{
@@ -195,7 +195,7 @@ ENetEndpoint::SetSocketOption(eint32 level, eint32 option, const void *data, siz
 
 
 int
-ENetEndpoint::GetSocketOption(eint32 level, eint32 option, void *data, size_t *data_len) const
+BNetEndpoint::GetSocketOption(b_int32 level, b_int32 option, void *data, size_t *data_len) const
 {
 	if(fSocket == -1) return -1;
 
@@ -203,7 +203,7 @@ ENetEndpoint::GetSocketOption(eint32 level, eint32 option, void *data, size_t *d
 	if(level != SOL_SOCKET || option != SO_NONBLOCK ||
 	   data == NULL || data_len == NULL || *data_len == 0) return -1;
 	bzero(data, *data_len);
-	if(fNonBlocking) *((euint8*)data) = 1;
+	if(fNonBlocking) *((b_uint8*)data) = 1;
 	return 0;
 #else
 	socklen_t len = (data_len ? (socklen_t)*data_len : 0);
@@ -215,7 +215,7 @@ ENetEndpoint::GetSocketOption(eint32 level, eint32 option, void *data, size_t *d
 
 
 int
-ENetEndpoint::SetNonBlocking(bool state)
+BNetEndpoint::SetNonBlocking(bool state)
 {
 	if(fSocket == -1) return -1;
 
@@ -240,28 +240,28 @@ ENetEndpoint::SetNonBlocking(bool state)
 
 
 bool
-ENetEndpoint::IsNonBlocking() const
+BNetEndpoint::IsNonBlocking() const
 {
 	return fNonBlocking;
 }
 
 
-const ENetAddress&
-ENetEndpoint::LocalAddr() const
+const BNetAddress&
+BNetEndpoint::LocalAddr() const
 {
 	return fLocalAddr;
 }
 
 
-const ENetAddress&
-ENetEndpoint::RemoteAddr() const
+const BNetAddress&
+BNetEndpoint::RemoteAddr() const
 {
 	return fRemoteAddr;
 }
 
 
 void
-ENetEndpoint::_Close()
+BNetEndpoint::_Close()
 {
 	if(fSocket != -1)
 	{
@@ -273,8 +273,8 @@ ENetEndpoint::_Close()
 		fSocket = -1;
 	}
 
-	fLocalAddr = ENetAddress();
-	fRemoteAddr = ENetAddress();
+	fLocalAddr = BNetAddress();
+	fRemoteAddr = BNetAddress();
 
 	fBind = false;
 	fNonBlocking = false;
@@ -282,25 +282,25 @@ ENetEndpoint::_Close()
 
 
 void
-ENetEndpoint::Close()
+BNetEndpoint::Close()
 {
 	_Close();
 	fSocket = socket(AF_INET, fProtocol, 0);
 }
 
 
-e_status_t
-ENetEndpoint::Bind(const ENetAddress &addr)
+b_status_t
+BNetEndpoint::Bind(const BNetAddress &addr)
 {
-	if(fSocket == -1) return E_ERROR;
+	if(fSocket == -1) return B_ERROR;
 
 	struct sockaddr_in sa;
-	if(addr.GetAddr(sa) != E_OK) return E_ERROR;
+	if(addr.GetAddr(sa) != B_OK) return B_ERROR;
 
 	if(bind(fSocket, (struct sockaddr*)&sa, sizeof(sa)) != 0)
 	{
-		ETK_DEBUG("[NET]: %s --- bind() failed (errno:%d).", __PRETTY_FUNCTION__, errno);
-		return E_ERROR;
+		BHAPI_DEBUG("[NET]: %s --- bind() failed (errno:%d).", __PRETTY_FUNCTION__, errno);
+		return B_ERROR;
 	}
 
 	socklen_t len = sizeof(sa);
@@ -308,32 +308,32 @@ ENetEndpoint::Bind(const ENetAddress &addr)
 	fLocalAddr.SetTo(sa);
 	fBind = true;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-ENetEndpoint::Bind(euint16 port)
+b_status_t
+BNetEndpoint::Bind(b_uint16 port)
 {
-	ENetAddress addr(INADDR_LOOPBACK, port);
+	BNetAddress addr(INADDR_LOOPBACK, port);
 	return Bind(addr);
 }
 
 
-e_status_t
-ENetEndpoint::Connect(const ENetAddress &addr)
+b_status_t
+BNetEndpoint::Connect(const BNetAddress &addr)
 {
-	if(fSocket == -1) return E_ERROR;
+	if(fSocket == -1) return B_ERROR;
 
 	struct sockaddr_in sa;
 	socklen_t len;
 
-	if(addr.GetAddr(sa) != E_OK) return E_ERROR;
+	if(addr.GetAddr(sa) != B_OK) return B_ERROR;
 
 	if(connect(fSocket, (struct sockaddr*)&sa, sizeof(sa)) != 0)
 	{
-		ETK_DEBUG("[NET]: %s --- connect() failed (errno:%d).", __PRETTY_FUNCTION__, errno);
-		return E_ERROR;
+		BHAPI_DEBUG("[NET]: %s --- connect() failed (errno:%d).", __PRETTY_FUNCTION__, errno);
+		return B_ERROR;
 	}
 
 	if(fBind == false)
@@ -345,28 +345,28 @@ ENetEndpoint::Connect(const ENetAddress &addr)
 	len = sizeof(sa);
 	if(getpeername(fSocket, (struct sockaddr*)&sa, &len) == 0) fRemoteAddr.SetTo(sa);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-ENetEndpoint::Connect(const char *address, euint16 port)
+b_status_t
+BNetEndpoint::Connect(const char *address, b_uint16 port)
 {
-	ENetAddress addr(address, port);
-	return ENetEndpoint::Connect(addr);
+	BNetAddress addr(address, port);
+	return BNetEndpoint::Connect(addr);
 }
 
 
-e_status_t
-ENetEndpoint::Listen(int backlog)
+b_status_t
+BNetEndpoint::Listen(int backlog)
 {
-	if(fSocket == -1) return E_ERROR;
-	return(listen(fSocket, backlog) == 0 ? E_OK : E_ERROR);
+	if(fSocket == -1) return B_ERROR;
+	return(listen(fSocket, backlog) == 0 ? B_OK : B_ERROR);
 }
 
 
-ENetEndpoint*
-ENetEndpoint::Accept(eint32 timeout_msec)
+BNetEndpoint*
+BNetEndpoint::Accept(b_int32 timeout_msec)
 {
 	if(fSocket == -1) return NULL;
 
@@ -381,7 +381,7 @@ ENetEndpoint::Accept(eint32 timeout_msec)
 	else
 	{
 		bool saveState = fNonBlocking;
-		e_bigtime_t saveTime = e_real_time_clock_usecs();
+		b_bigtime_t saveTime = b_real_time_clock_usecs();
 		SetNonBlocking(true);
 		do
 		{
@@ -391,14 +391,14 @@ ENetEndpoint::Accept(eint32 timeout_msec)
 			if(!(err == EWOULDBLOCK ||
 			     err == ECONNABORTED ||
 			     err == EINTR)) break;
-			if(timeout_msec > 0) e_snooze(1000);
-		} while(e_real_time_clock_usecs() - saveTime <= timeout_msec * E_INT64_CONSTANT(1000));
+			if(timeout_msec > 0) b_snooze(1000);
+		} while(b_real_time_clock_usecs() - saveTime <= timeout_msec * B_INT64_CONSTANT(1000));
 		SetNonBlocking(saveState);
 	}
 
 	if(s == -1) return NULL;
 
-	ENetEndpoint *endpoint = new ENetEndpoint(fProtocol);
+	BNetEndpoint *endpoint = new BNetEndpoint(fProtocol);
 	endpoint->_Close();
 	endpoint->fSocket = s;
 	endpoint->fLocalAddr = fLocalAddr;
@@ -409,7 +409,7 @@ ENetEndpoint::Accept(eint32 timeout_msec)
 
 
 int
-ENetEndpoint::Error() const
+BNetEndpoint::Error() const
 {
 #ifdef _WIN32
 	return WSAGetLastError();
@@ -420,22 +420,22 @@ ENetEndpoint::Error() const
 
 
 const char*
-ENetEndpoint::ErrorStr() const
+BNetEndpoint::ErrorStr() const
 {
 	// FIXME: wrong on Win32
 	return strerror(Error());
 }
 
 
-eint32
-ENetEndpoint::Send(const void *buf, size_t len, int flags)
+b_int32
+BNetEndpoint::Send(const void *buf, size_t len, int flags)
 {
-	if(fSocket == -1 || fLocalAddr.InitCheck() != E_OK) return -1;
+	if(fSocket == -1 || fLocalAddr.InitCheck() != B_OK) return -1;
 
 	if(fProtocol == SOCK_DGRAM)
 	{
 		struct sockaddr_in sa;
-		if(fRemoteAddr.GetAddr(sa) != E_OK) return -1;
+		if(fRemoteAddr.GetAddr(sa) != B_OK) return -1;
 		return sendto(fSocket, (const char*)buf, len, flags, (struct sockaddr*)&sa, sizeof(sa));
 	}
 	else
@@ -445,63 +445,63 @@ ENetEndpoint::Send(const void *buf, size_t len, int flags)
 }
 
 
-eint32
-ENetEndpoint::Send(const ENetBuffer &buf, int flags)
+b_int32
+BNetEndpoint::Send(const BNetBuffer &buf, int flags)
 {
-	return ENetEndpoint::Send(buf.Data(), buf.Size(), flags);
+	return BNetEndpoint::Send(buf.Data(), buf.Size(), flags);
 }
 
 
-eint32
-ENetEndpoint::SendTo(const void *buf, size_t len, const ENetAddress &to, int flags)
+b_int32
+BNetEndpoint::SendTo(const void *buf, size_t len, const BNetAddress &to, int flags)
 {
-	if(fSocket == -1 || fLocalAddr.InitCheck() != E_OK) return -1;
+	if(fSocket == -1 || fLocalAddr.InitCheck() != B_OK) return -1;
 	if(fProtocol != SOCK_DGRAM) return -1;
 
 	struct sockaddr_in sa;
-	if(fRemoteAddr.GetAddr(sa) != E_OK) return -1;
+	if(fRemoteAddr.GetAddr(sa) != B_OK) return -1;
 	return sendto(fSocket, (const char*)buf, len, flags, (struct sockaddr*)&sa, sizeof(sa));
 }
 
 
-eint32
-ENetEndpoint::SendTo(const ENetBuffer &buf, const ENetAddress &to, int flags)
+b_int32
+BNetEndpoint::SendTo(const BNetBuffer &buf, const BNetAddress &to, int flags)
 {
-	return ENetEndpoint::SendTo(buf.Data(), buf.Size(), to, flags);
+	return BNetEndpoint::SendTo(buf.Data(), buf.Size(), to, flags);
 }
 
 
 void
-ENetEndpoint::SetTimeout(e_bigtime_t timeout)
+BNetEndpoint::SetTimeout(b_bigtime_t timeout)
 {
 	if(timeout < 0) timeout = 0;
 	fTimeout = timeout;
 }
 
 
-eint32
-ENetEndpoint::Receive(void *buf, size_t len, int flags)
+b_int32
+BNetEndpoint::Receive(void *buf, size_t len, int flags)
 {
-	if(fSocket == -1 || fLocalAddr.InitCheck() != E_OK) return -1;
-	if(!ENetEndpoint::IsDataPending(fTimeout)) return -1;
+	if(fSocket == -1 || fLocalAddr.InitCheck() != B_OK) return -1;
+	if(!BNetEndpoint::IsDataPending(fTimeout)) return -1;
 	return recv(fSocket, (char*)buf, len, flags);
 }
 
 
-eint32
-ENetEndpoint::Receive(ENetBuffer &buf, size_t len, int flags)
+b_int32
+BNetEndpoint::Receive(BNetBuffer &buf, size_t len, int flags)
 {
 	void *data = (len != 0 ? malloc(len) : NULL);
 	if(data == NULL) return -1;
 
-	eint32 bytes = ENetEndpoint::Receive(data, len, flags);
+	b_int32 bytes = BNetEndpoint::Receive(data, len, flags);
 	if(bytes < 0)
 	{
 		free(data);
 		return -1;
 	}
 
-	buf = ENetBuffer(bytes);
+	buf = BNetBuffer(bytes);
 	buf.AppendData(data, (size_t)bytes);
 	free(data);
 
@@ -509,36 +509,36 @@ ENetEndpoint::Receive(ENetBuffer &buf, size_t len, int flags)
 }
 
 
-eint32
-ENetEndpoint::ReceiveFrom(void *buf, size_t len, const ENetAddress &from, int flags)
+b_int32
+BNetEndpoint::ReceiveFrom(void *buf, size_t len, const BNetAddress &from, int flags)
 {
-	if(fSocket == -1 || fLocalAddr.InitCheck() != E_OK) return -1;
+	if(fSocket == -1 || fLocalAddr.InitCheck() != B_OK) return -1;
 	if(fProtocol != SOCK_DGRAM) return -1;
 
 	struct sockaddr_in sa;
-	if(from.GetAddr(sa) != E_OK) return -1;
+	if(from.GetAddr(sa) != B_OK) return -1;
 
-	if(!ENetEndpoint::IsDataPending(fTimeout)) return -1;
+	if(!BNetEndpoint::IsDataPending(fTimeout)) return -1;
 
 	socklen_t _len = sizeof(sa);
 	return recvfrom(fSocket, (char*)buf, len, flags, (struct sockaddr*)&sa, &_len);
 }
 
 
-eint32
-ENetEndpoint::ReceiveFrom(ENetBuffer &buf, size_t len, const ENetAddress &from, int flags)
+b_int32
+BNetEndpoint::ReceiveFrom(BNetBuffer &buf, size_t len, const BNetAddress &from, int flags)
 {
 	void *data = (len != 0 ? malloc(len) : NULL);
 	if(data == NULL) return -1;
 
-	eint32 bytes = ENetEndpoint::ReceiveFrom(data, len, from, flags);
+	b_int32 bytes = BNetEndpoint::ReceiveFrom(data, len, from, flags);
 	if(bytes < 0)
 	{
 		free(data);
 		return -1;
 	}
 
-	buf = ENetBuffer(bytes);
+	buf = BNetBuffer(bytes);
 	buf.AppendData(data, (size_t)bytes);
 	free(data);
 
@@ -547,7 +547,7 @@ ENetEndpoint::ReceiveFrom(ENetBuffer &buf, size_t len, const ENetAddress &from, 
 
 
 bool
-ENetEndpoint::IsDataPending(e_bigtime_t _timeout)
+BNetEndpoint::IsDataPending(b_bigtime_t _timeout)
 {
 	if(fSocket == -1) return false;
 
@@ -557,10 +557,10 @@ ENetEndpoint::IsDataPending(e_bigtime_t _timeout)
 		timeout.tv_sec = 0;
 		timeout.tv_usec = 0;
 	}
-	else if(_timeout != E_INFINITE_TIMEOUT)
+	else if(_timeout != B_INFINITE_TIMEOUT)
 	{
-		timeout.tv_sec = (long)(_timeout / E_INT64_CONSTANT(1000000));
-		timeout.tv_usec = (long)(_timeout % E_INT64_CONSTANT(1000000));
+		timeout.tv_sec = (long)(_timeout / B_INT64_CONSTANT(1000000));
+		timeout.tv_usec = (long)(_timeout % B_INT64_CONSTANT(1000000));
 	}
 
 	fd_set rset;
@@ -568,13 +568,13 @@ ENetEndpoint::IsDataPending(e_bigtime_t _timeout)
 	FD_SET(fSocket, &rset);
 
 	int status = select(fSocket + 1, &rset, NULL, NULL,
-			    (fNonBlocking || _timeout != E_INFINITE_TIMEOUT) ? &timeout : NULL);
+			    (fNonBlocking || _timeout != B_INFINITE_TIMEOUT) ? &timeout : NULL);
 	return(status > 0 && FD_ISSET(fSocket, &rset));
 }
 
 
 int
-ENetEndpoint::Socket() const
+BNetEndpoint::Socket() const
 {
 	return fSocket;
 }

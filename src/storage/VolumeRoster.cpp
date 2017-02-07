@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -30,75 +30,75 @@
 #include "VolumeRoster.h"
 
 
-EVolumeRoster::EVolumeRoster()
+BVolumeRoster::BVolumeRoster()
 	: fPos(0)
 {
 }
 
 
-EVolumeRoster::~EVolumeRoster()
+BVolumeRoster::~BVolumeRoster()
 {
 }
 
 
-e_status_t
-EVolumeRoster::GetNextVolume(EVolume *vol)
+b_status_t
+BVolumeRoster::GetNextVolume(BVolume *vol)
 {
-	if(vol == NULL) return E_BAD_VALUE;
+	if(vol == NULL) return B_BAD_VALUE;
 
-	EVolume aVol;
+	BVolume aVol;
 	while(true)
 	{
 		fPos++;
 
-		e_status_t status = aVol.SetTo((e_dev_t)fPos);
-		if(status == E_ENTRY_NOT_FOUND) return E_BAD_VALUE;
-		if(status == E_BAD_VALUE) continue;
-		if(status != E_OK) return status;
+		b_status_t status = aVol.SetTo((b_dev_t)fPos);
+		if(status == B_ENTRY_NOT_FOUND) return B_BAD_VALUE;
+		if(status == B_BAD_VALUE) continue;
+		if(status != B_OK) return status;
 
 		status = vol->SetTo(aVol.Device());
 		return status;
 	}
 
-	return E_NO_ERROR;
+	return B_NO_ERROR;
 }
 
 
 void
-EVolumeRoster::Rewind()
+BVolumeRoster::Rewind()
 {
 	fPos = 0;
 }
 
 
-e_status_t
-EVolumeRoster::GetBootVolume(EVolume *vol)
+b_status_t
+BVolumeRoster::GetBootVolume(BVolume *vol)
 {
-	if(vol == NULL) return E_BAD_VALUE;
+	if(vol == NULL) return B_BAD_VALUE;
 
 #ifdef _WIN32
-	if(vol->SetTo(3) == E_OK) return E_NO_ERROR;
-	return E_ENTRY_NOT_FOUND;
+	if(vol->SetTo(3) == B_OK) return B_NO_ERROR;
+	return B_ENTRY_NOT_FOUND;
 #else
-	e_dev_t dev = 0;
-	EVolume aVol;
+	b_dev_t dev = 0;
+	BVolume aVol;
 	while(true)
 	{
 		dev++;
 
-		e_status_t status = aVol.SetTo(dev);
-		if(status == E_ENTRY_NOT_FOUND) return E_BAD_VALUE;
-		if(status == E_BAD_VALUE) continue;
-		if(status != E_OK) return status;
+		b_status_t status = aVol.SetTo(dev);
+		if(status == B_ENTRY_NOT_FOUND) return B_BAD_VALUE;
+		if(status == B_BAD_VALUE) continue;
+		if(status != B_OK) return status;
 
-		EDirectory dir;
-		if(aVol.GetRootDirectory(&dir) != E_OK) continue;
+		BDirectory dir;
+		if(aVol.GetRootDirectory(&dir) != B_OK) continue;
 
-		EEntry entry;
-		if(dir.GetEntry(&entry) != E_OK) continue;
+		BEntry entry;
+		if(dir.GetEntry(&entry) != B_OK) continue;
 
-		EPath path;
-		if(entry.GetPath(&path) != E_OK) continue;
+		BPath path;
+		if(entry.GetPath(&path) != B_OK) continue;
 
 #ifndef __BEOS__
 		if(path != "/") continue;
@@ -106,11 +106,11 @@ EVolumeRoster::GetBootVolume(EVolume *vol)
 		if(path != "/boot") continue;
 #endif
 
-		if(vol->SetTo(dev) == E_OK) return E_NO_ERROR;
+		if(vol->SetTo(dev) == B_OK) return B_NO_ERROR;
 		break;
 	}
 
-	return E_ENTRY_NOT_FOUND;
+	return B_ENTRY_NOT_FOUND;
 #endif
 }
 

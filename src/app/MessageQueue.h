@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,45 +28,45 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_MESSAGE_QUEUE_H__
-#define __ETK_MESSAGE_QUEUE_H__
+#ifndef __BHAPI_MESSAGE_QUEUE_H__
+#define __BHAPI_MESSAGE_QUEUE_H__
 
 #include "./../app/Message.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EMessageQueue {
+class _IMPEXP_BHAPI BMessageQueue {
 public:
-	EMessageQueue();
-	virtual ~EMessageQueue();
+	BMessageQueue();
+	virtual ~BMessageQueue();
 
 	// add "an_event" to the queue and delete it automatically when FAILED
-	bool		AddMessage(EMessage *an_event);
+	bool		AddMessage(BMessage *an_event);
 
 	// remove "an_event" from the queue and delete it automatically when FOUNDED
-	bool		RemoveMessage(EMessage *an_event);
+	bool		RemoveMessage(BMessage *an_event);
 
 	// return the FIRST message and detach from the queue, you should "delete" by yourself
-	EMessage	*NextMessage();
+	BMessage	*NextMessage();
 
-	EMessage	*FindMessage(eint32 index) const;
-	EMessage	*FindMessage(euint32 what, eint32 fromIndex = 0) const;
-	EMessage	*FindMessage(euint32 what, eint32 fromIndex, eint32 count) const;
-	eint32		IndexOfMessage(EMessage *an_event) const;
+    BMessage	*FindMessage(b_int32 index) const;
+    BMessage	*FindMessage(b_uint32 what, b_int32 fromIndex = 0) const;
+    BMessage	*FindMessage(b_uint32 what, b_int32 fromIndex, b_int32 count) const;
+    b_int32		IndexOfMessage(BMessage *an_event) const;
 
-	eint32		CountMessages() const;
+    b_int32		CountMessages() const;
 	bool		IsEmpty() const;
 
 	bool		Lock();
 	void		Unlock();
-	e_status_t	LockWithTimeout(e_bigtime_t microseconds_timeout);
+    b_status_t	LockWithTimeout(b_bigtime_t microseconds_timeout);
 
 private:
-	EList fMessagesList;
+	BList fMessagesList;
 	void *fLocker;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_MESSAGE_QUEUE_H__ */
+#endif /* __BHAPI_MESSAGE_QUEUE_H__ */
 

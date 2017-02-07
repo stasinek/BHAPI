@@ -61,25 +61,25 @@
 
 	.text
 Ltext0:
-	.section	.gnu.lto_.profile.f4cd9ea,"dr0"
+	.section	.gnu.lto_.profile.1597f203,"dr0"
 	.ascii "x\234cf```d\200\2\0\0=\0\5"
 	.text
-	.section	.gnu.lto_.inline.f4cd9ea,"dr0"
+	.section	.gnu.lto_.inline.1597f203,"dr0"
 	.ascii "x\234cf\300\16\230\340,\0\0\234\0\6"
 	.text
-	.section	.gnu.lto_.pureconst.f4cd9ea,"dr0"
+	.section	.gnu.lto_.pureconst.1597f203,"dr0"
 	.ascii "x\234cf```d\200\2\0\0=\0\5"
 	.text
-	.section	.gnu.lto_.symbol_nodes.f4cd9ea,"dr0"
+	.section	.gnu.lto_.symbol_nodes.1597f203,"dr0"
 	.ascii "x\234cf```b\200\1\0\0L\0\6"
 	.text
-	.section	.gnu.lto_.refs.f4cd9ea,"dr0"
+	.section	.gnu.lto_.refs.1597f203,"dr0"
 	.ascii "x\234cf```d\200\2\0\0=\0\5"
 	.text
-	.section	.gnu.lto_.decls.f4cd9ea,"dr0"
+	.section	.gnu.lto_.decls.1597f203,"dr0"
 	.ascii "x\234cf``P\1\342\377@\0\244\30\30\241\330\237\201\0\0\0\320\27\4u"
 	.text
-	.section	.gnu.lto_.symtab.f4cd9ea,"dr0"
+	.section	.gnu.lto_.symtab.1597f203,"dr0"
 	.text
 	.section	.gnu.lto_.opts,"dr0"
 	.ascii "'-fno-trapv' '-dD' '-malign-double' '-momit-leaf-frame-pointer' '-m32' '-mfpmath=sse' '-mpreferred-stack-boundary=8' '-mmmx' '-msse' '-msse2' '-mthreads' '-mtune=generic' '-march=i686' '-g' '-g' '-O3' '-fverbose-asm' '-fstrict-aliasing' '-fwrapv' '-funroll-loops' '-flto' '-fexceptions'\0"

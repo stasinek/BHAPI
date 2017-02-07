@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -34,32 +34,32 @@
 #include "etk-x11.h"
 
 #include "./../support/Autolock.h"
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 #include "./../support/ClassInfo.h"
 #include "./../app/Application.h"
 
 
-EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine, eint32 x, eint32 y, euint32 w, euint32 h)
-	: EGraphicsWindow(), fEngine(NULL), fFlags(0)
+EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine, b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
+	: BGraphicsWindow(), fEngine(NULL), fFlags(0)
 {
-	if(w == E_MAXUINT32 || h == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
 		return;
 	}
 
 	fEngine = x11Engine;
 	if(fEngine == NULL) return;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) {fEngine = NULL; return;}
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) {fEngine = NULL; return;}
 
-	e_rgb_color whiteColor = {255, 255, 255, 255};
-	EGraphicsDrawable::SetBackgroundColor(whiteColor);
+	b_rgb_color whiteColor = {255, 255, 255, 255};
+	BGraphicsDrawable::SetBackgroundColor(whiteColor);
 	xBackground = fEngine->xWhitePixel;
 	xBackgroundAlloced = false;
-	fLook = (e_window_look)0;
-	fFeel = (e_window_feel)0;
+	fLook = (b_window_look)0;
+	fFeel = (b_window_feel)0;
 
 	XSetWindowAttributes xAttributes;
 
@@ -77,7 +77,7 @@ EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine, eint32 x, eint32
 				    CWEventMask | CWBackPixel | CWColormap | CWBitGravity | CWWinGravity |
 				    CWOverrideRedirect | CWBorderPixel | CWBorderWidth, &xAttributes)) == None)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Unable to create window.", __PRETTY_FUNCTION__);
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Unable to create window.", __PRETTY_FUNCTION__);
 		fEngine = NULL;
 		return;
 	}
@@ -96,7 +96,7 @@ EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine, eint32 x, eint32
 
 	XClassHint class_hint;
 	class_hint.res_name = NULL;
-	class_hint.res_class = (char*)etk_app->Signature();
+	class_hint.res_class = (char*)bhapi_app->Signature();
 
 	XSetWMProperties(fEngine->xDisplay, xWindow, NULL, NULL, NULL, 0, &size_hints, &wm_hints, &class_hint);
 
@@ -106,16 +106,16 @@ EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine, eint32 x, eint32
 
 	XSetWMProtocols(fEngine->xDisplay, xWindow, protocols, 2);
 
-	etk_x11_address_t self_address = reinterpret_cast<etk_x11_address_t>((void*)this);
+	bhapi_x11_address_t self_address = reinterpret_cast<bhapi_x11_address_t>((void*)this);
 	XChangeProperty(fEngine->xDisplay, xWindow,
-			XInternAtom(fEngine->xDisplay, "ATOM_ETK_WINDOW_ADDRESS", False),
-			XInternAtom(fEngine->xDisplay, "ATOM_ETK_CAST_ADDRESS", False), ETK_X11_ADDRESS_T_FORMAT,
-			PropModeReplace, (const unsigned char*)&self_address, ETK_X11_ADDRESS_T_NELEMENTS);
+			XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_WINDOW_ADDRESS", False),
+			XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_CAST_ADDRESS", False), BHAPI_X11_ADDRESS_T_FORMAT,
+			PropModeReplace, (const unsigned char*)&self_address, BHAPI_X11_ADDRESS_T_NELEMENTS);
 
-	euint8 winState = 0; // hidden
+	b_uint8 winState = 0; // hidden
 	XChangeProperty(fEngine->xDisplay, xWindow,
-			XInternAtom(fEngine->xDisplay, "ATOM_ETK_WINDOW_STATE", False),
-			XInternAtom(fEngine->xDisplay, "ATOM_ETK_BOOL", False), 8,
+			XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False),
+			XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_BOOL", False), 8,
 			PropModeReplace, (const unsigned char*)&winState, 1);
 
 	XGCValues xgcvals;
@@ -136,11 +136,11 @@ EXGraphicsWindow::~EXGraphicsWindow()
 {
 	if(fEngine != NULL)
 	{
-		EAutolock <EXGraphicsEngine> autolock(fEngine);
-		if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK)
-			ETK_ERROR("[GRAPHICS]: %s --- Invalid graphics engine.", __PRETTY_FUNCTION__);
+		BAutolock <EXGraphicsEngine> autolock(fEngine);
+		if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK)
+			BHAPI_ERROR("[GRAPHICS]: %s --- Invalid graphics engine.", __PRETTY_FUNCTION__);
 
-		XDeleteProperty(fEngine->xDisplay, xWindow, XInternAtom(fEngine->xDisplay, "ATOM_ETK_WINDOW_ADDRESS", False));
+		XDeleteProperty(fEngine->xDisplay, xWindow, XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_WINDOW_ADDRESS", False));
 		XSelectInput(fEngine->xDisplay, xWindow, NoEventMask);
 
 		XClientMessageEvent xevent;
@@ -155,7 +155,7 @@ EXGraphicsWindow::~EXGraphicsWindow()
 		XSendEvent(fEngine->xDisplay, fEngine->xProtocolsWindow, False, 0, (XEvent *)&xevent);
 
 		if(xBackgroundAlloced) EXGraphicsContext::FreeXColor(fEngine, xBackground);
-		fMsgr = EMessenger();
+		fMsgr = BMessenger();
 
 		XFreeGC(fEngine->xDisplay, xGC);
 
@@ -164,34 +164,34 @@ EXGraphicsWindow::~EXGraphicsWindow()
 }
 
 
-e_status_t
-EXGraphicsWindow::ContactTo(const EMessenger *msgr)
+b_status_t
+EXGraphicsWindow::ContactTo(const BMessenger *msgr)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	if(msgr) fMsgr = *msgr;
-	else fMsgr = EMessenger();
+	else fMsgr = BMessenger();
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::SetBackgroundColor(e_rgb_color bkColor)
+b_status_t
+EXGraphicsWindow::SetBackgroundColor(b_rgb_color bkColor)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	e_rgb_color color = BackgroundColor();
+	b_rgb_color color = BackgroundColor();
 	bkColor.alpha = color.alpha = 255;
 
-	if(bkColor == color) return E_OK;
+	if(bkColor == color) return B_OK;
 
 	do {
-		EAutolock <EXGraphicsEngine> autolock(fEngine);
-		if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+		BAutolock <EXGraphicsEngine> autolock(fEngine);
+		if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 		if(bkColor.red == 0 && bkColor.green == 0 && bkColor.blue == 0)
 		{
@@ -208,7 +208,7 @@ EXGraphicsWindow::SetBackgroundColor(e_rgb_color bkColor)
 		else
 		{
 			unsigned long p;
-			if(EXGraphicsContext::AllocXColor(fEngine, bkColor, &p) == false) return E_ERROR;
+			if(EXGraphicsContext::AllocXColor(fEngine, bkColor, &p) == false) return B_ERROR;
 			if(xBackgroundAlloced) EXGraphicsContext::FreeXColor(fEngine, xBackground);
 			xBackground = p;
 			xBackgroundAlloced = true;
@@ -218,42 +218,42 @@ EXGraphicsWindow::SetBackgroundColor(e_rgb_color bkColor)
 		XFlush(fEngine->xDisplay);
 	} while(false);
 
-	EGraphicsDrawable::SetBackgroundColor(bkColor);
+	BGraphicsDrawable::SetBackgroundColor(bkColor);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::SetFlags(euint32 flags)
+b_status_t
+EXGraphicsWindow::SetFlags(b_uint32 flags)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	if(fFlags == flags) return E_OK;
+	if(fFlags == flags) return B_OK;
 
 	fFlags = flags;
 
 	// Focus
 	XWMHints wm_hints;
 	wm_hints.flags = InputHint;
-	wm_hints.input = (flags & E_AVOID_FOCUS ? False : True);
+	wm_hints.input = (flags & B_AVOID_FOCUS ? False : True);
 	XSetWMHints(fEngine->xDisplay, xWindow, &wm_hints);
 
 	// Window Action
 	long data[20];
 	int n = 0;
-	if(!(flags & E_NOT_MOVABLE)) {data[n] = XInternAtom(fEngine->xDisplay, "_NET_WM_ACTION_MOVE", False); n++;}
-	if(!(flags & E_NOT_RESIZABLE)) {data[n] = XInternAtom(fEngine->xDisplay, "_NET_WM_ACTION_RESIZE", False); n++;}
-	if(!(flags & E_NOT_MINIMIZABLE)) {data[n] = XInternAtom(fEngine->xDisplay, "_NET_WM_ACTION_MINIMIZE", False); n++;}
-	if(!(flags & E_NOT_ZOOMABLE))
+	if(!(flags & B_NOT_MOVABLE)) {data[n] = XInternAtom(fEngine->xDisplay, "_NET_WM_ACTION_MOVE", False); n++;}
+	if(!(flags & B_NOT_RESIZABLE)) {data[n] = XInternAtom(fEngine->xDisplay, "_NET_WM_ACTION_RESIZE", False); n++;}
+	if(!(flags & B_NOT_MINIMIZABLE)) {data[n] = XInternAtom(fEngine->xDisplay, "_NET_WM_ACTION_MINIMIZE", False); n++;}
+	if(!(flags & B_NOT_ZOOMABLE))
 	{
 		data[n] = XInternAtom(fEngine->xDisplay, "_NET_WM_ACTION_MAXIMIZE_HORZ", False); n++;
 		data[n] = XInternAtom(fEngine->xDisplay, "_NET_WM_ACTION_MAXIMIZE_VERT", False); n++;
 	}
-	if(!(flags & E_NOT_CLOSABLE)) {data[n] = XInternAtom(fEngine->xDisplay, "_NET_WM_ACTION_CLOSE", False); n++;}
+	if(!(flags & B_NOT_CLOSABLE)) {data[n] = XInternAtom(fEngine->xDisplay, "_NET_WM_ACTION_CLOSE", False); n++;}
 	data[n] = 0;
   
 	XChangeProperty(fEngine->xDisplay, xWindow,
@@ -262,19 +262,19 @@ EXGraphicsWindow::SetFlags(euint32 flags)
 
 	XFlush(fEngine->xDisplay);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::SetLook(e_window_look look)
+b_status_t
+EXGraphicsWindow::SetLook(b_window_look look)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	if(fLook == look) return E_OK;
+	if(fLook == look) return B_OK;
 	fLook = look;
 
 	XWindowAttributes xattr;
@@ -287,29 +287,29 @@ EXGraphicsWindow::SetLook(e_window_look look)
 	Atom wmAtom;
 	switch(look)
 	{
-		case E_TITLED_WINDOW_LOOK:
-		case E_DOCUMENT_WINDOW_LOOK:
+		case B_TITLED_WINDOW_LOOK:
+		case B_DOCUMENT_WINDOW_LOOK:
 			wmAtom =  XInternAtom(fEngine->xDisplay, "_NET_WM_WINDOW_TYPE_NORMAL", False);
 			break;
-		case E_FLOATING_WINDOW_LOOK:
+		case B_FLOATING_WINDOW_LOOK:
 			wmAtom =  XInternAtom(fEngine->xDisplay, "_NET_WM_WINDOW_TYPE_UTILITY", False);
 			break;
-		case E_MODAL_WINDOW_LOOK:
+		case B_MODAL_WINDOW_LOOK:
 			wmAtom =  XInternAtom(fEngine->xDisplay, "_NET_WM_WINDOW_TYPE_DIALOG", False);
 			break;
-		case E_BORDERED_WINDOW_LOOK:
+		case B_BORDERED_WINDOW_LOOK:
 			wmAtom =  XInternAtom(fEngine->xDisplay, "_NET_WM_WINDOW_TYPE_SPLASH", False);
 			break;
 		default:
 			break;
 	}
 
-	if(look != E_NO_BORDER_WINDOW_LOOK)
+	if(look != B_NO_BORDER_WINDOW_LOOK)
 		XChangeProperty(fEngine->xDisplay, xWindow,
 				XInternAtom(fEngine->xDisplay, "_NET_WM_WINDOW_TYPE", False), XA_ATOM, 32,
 				PropModeReplace, (const unsigned char*)&wmAtom, 1);
 
-	if(look == E_BORDERED_WINDOW_LOOK)
+	if(look == B_BORDERED_WINDOW_LOOK)
 	{
 		XSetWindowBorder(fEngine->xDisplay, xWindow, fEngine->xBlackPixel);
 		XSetWindowBorderWidth(fEngine->xDisplay, xWindow, 1);
@@ -320,13 +320,13 @@ EXGraphicsWindow::SetLook(e_window_look look)
 	}
 
 	XSetWindowAttributes xsetattr;
-	xsetattr.override_redirect = (look == E_NO_BORDER_WINDOW_LOOK ? True : False);
+	xsetattr.override_redirect = (look == B_NO_BORDER_WINDOW_LOOK ? True : False);
 	XChangeWindowAttributes(fEngine->xDisplay, xWindow, CWOverrideRedirect, &xsetattr);
 
 	if(xattr.map_state != IsUnmapped)
 	{
-		// FIXME: when change look from E_BORDERED_WINDOW_LOOK to E_NO_BORDER_WINDOW_LOOK, the window disappeared.
-		if(look == E_NO_BORDER_WINDOW_LOOK)
+		// FIXME: when change look from B_BORDERED_WINDOW_LOOK to B_NO_BORDER_WINDOW_LOOK, the window disappeared.
+		if(look == B_NO_BORDER_WINDOW_LOOK)
 			XMapRaised(fEngine->xDisplay, xWindow);
 		else
 			XMapWindow(fEngine->xDisplay, xWindow);
@@ -334,41 +334,41 @@ EXGraphicsWindow::SetLook(e_window_look look)
 
 	XFlush(fEngine->xDisplay);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::SetFeel(e_window_feel feel)
+b_status_t
+EXGraphicsWindow::SetFeel(b_window_feel feel)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	if(fFeel == feel) return E_OK;
+	if(fFeel == feel) return B_OK;
 	fFeel = feel;
 
 	// TODO
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsWindow::SetTitle(const char *title)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	if(title == NULL || *title == 0) title = " ";
 
 	XTextProperty prop;
 	prop.value = NULL;
 
-	eunichar32 *utf32_title = e_utf8_convert_to_utf32(title, -1);
+	b_unichar32 *utf32_title = b_utf8_convert_to_utf32(title, -1);
 
 	if(!utf32_title || XwcTextListToTextProperty(fEngine->xDisplay, (wchar_t**)&utf32_title, 1, XCompoundTextStyle, &prop) != Success)
 	{
@@ -393,23 +393,23 @@ EXGraphicsWindow::SetTitle(const char *title)
 
 	XClassHint class_hint;
 	class_hint.res_name = (char*)title;
-	class_hint.res_class = (char*)etk_app->Signature();
+	class_hint.res_class = (char*)bhapi_app->Signature();
 
 	XSetClassHint(fEngine->xDisplay, xWindow, &class_hint);
 
 	XFlush(fEngine->xDisplay);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::SetWorkspaces(euint32 workspaces)
+b_status_t
+EXGraphicsWindow::SetWorkspaces(b_uint32 workspaces)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	long maxWorkspace = 0;
 
@@ -422,13 +422,13 @@ EXGraphicsWindow::SetWorkspaces(euint32 workspaces)
 			      XInternAtom(fEngine->xDisplay, "_NET_NUMBER_OF_DESKTOPS", False), 0, 1,
 			      False, AnyPropertyType,
 			      &type, &format, &nitems,
-			      &bytes_after, &prop) != Success || type == None) return E_ERROR;
+			      &bytes_after, &prop) != Success || type == None) return B_ERROR;
 	if(format == 32 && nitems == 1 && prop != NULL) maxWorkspace = *((long*)prop);
 	if(prop != NULL) XFree(prop);
-//	ETK_DEBUG("[GRAPHICS]: Max Workspace is %ld", maxWorkspace);
-	if(workspaces != E_ALL_WORKSPACES && workspaces > (euint32)maxWorkspace) return E_ERROR;
+//	BHAPI_DEBUG("[GRAPHICS]: Max Workspace is %ld", maxWorkspace);
+	if(workspaces != B_ALL_WORKSPACES && workspaces > (b_uint32)maxWorkspace) return B_ERROR;
 
-	long desktop = (workspaces == E_ALL_WORKSPACES ? (long)0xFFFFFFFF : (long)(workspaces - 1));
+	long desktop = (workspaces == B_ALL_WORKSPACES ? (long)0xFFFFFFFF : (long)(workspaces - 1));
 
 	XWindowAttributes xattr;
 	XGetWindowAttributes(fEngine->xDisplay, xWindow, &xattr);
@@ -458,17 +458,17 @@ EXGraphicsWindow::SetWorkspaces(euint32 workspaces)
 
 	XFlush(fEngine->xDisplay);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::GetWorkspaces(euint32 *workspaces)
+b_status_t
+EXGraphicsWindow::GetWorkspaces(b_uint32 *workspaces)
 {
-	if(fEngine == NULL || workspaces == NULL) return E_ERROR;
+	if(fEngine == NULL || workspaces == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	*workspaces = 0;
 
@@ -482,48 +482,48 @@ EXGraphicsWindow::GetWorkspaces(euint32 *workspaces)
 			      False, AnyPropertyType,
 			      &type, &format, &nitems,
 			      &bytes_after, &prop) != Success ||
-	   type == None) return E_OK;
+	   type == None) return B_OK;
 
 	if(format == 32 && nitems == 1 && prop != NULL)
 	{
 		long desktop = *((long*)prop);
 		if((unsigned long)desktop != 0xFFFFFFFF) *workspaces = desktop + 1;
-		else *workspaces = E_ALL_WORKSPACES;
+		else *workspaces = B_ALL_WORKSPACES;
 	}
 	if(prop != NULL) XFree(prop);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsWindow::Iconify()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	euint8 *_winState = NULL;
+	b_uint8 *_winState = NULL;
 	Atom type = None;
 	int format;
 	unsigned long nitems;
 	unsigned long bytes_after;
 
 	XGetWindowProperty(fEngine->xDisplay, xWindow,
-			   XInternAtom(fEngine->xDisplay, "ATOM_ETK_WINDOW_STATE", False), 0, 1,
-			   False, XInternAtom(fEngine->xDisplay, "ATOM_ETK_BOOL", False),
+			   XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False), 0, 1,
+			   False, XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_BOOL", False),
 			   &type, &format, &nitems,
 			   &bytes_after, (unsigned char **)&_winState);
 
-	if(_winState == NULL) return E_ERROR;
+	if(_winState == NULL) return B_ERROR;
 
-	if(*_winState != 2) // if not iconed, here we don't check whether the window is hidden, leave it to ETK++
+	if(*_winState != 2) // if not iconed, here we don't check whether the window is hidden, leave it to BHAPI++
 	{
-		euint8 winState = 2; // iconed
+		b_uint8 winState = 2; // iconed
 		XChangeProperty(fEngine->xDisplay, xWindow,
-				XInternAtom(fEngine->xDisplay, "ATOM_ETK_WINDOW_STATE", False),
-				XInternAtom(fEngine->xDisplay, "ATOM_ETK_BOOL", False), 8,
+				XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False),
+				XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_BOOL", False), 8,
 				PropModeReplace, (const unsigned char*)&winState, 1);
 		XIconifyWindow(fEngine->xDisplay, xWindow, fEngine->xScreen);
 		XFlush(fEngine->xDisplay);
@@ -531,38 +531,38 @@ EXGraphicsWindow::Iconify()
 
 	XFree(_winState);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsWindow::Show()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	euint8 *_winState = NULL;
+	b_uint8 *_winState = NULL;
 	Atom type = None;
 	int format;
 	unsigned long nitems;
 	unsigned long bytes_after;
 
 	XGetWindowProperty(fEngine->xDisplay, xWindow,
-			   XInternAtom(fEngine->xDisplay, "ATOM_ETK_WINDOW_STATE", False), 0, 1,
-			   False, XInternAtom(fEngine->xDisplay, "ATOM_ETK_BOOL", False),
+			   XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False), 0, 1,
+			   False, XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_BOOL", False),
 			   &type, &format, &nitems,
 			   &bytes_after, (unsigned char **)&_winState);
 
-	if(_winState == NULL) return E_ERROR;
+	if(_winState == NULL) return B_ERROR;
 
 	if(*_winState != 1) // if not shown
 	{
-		euint8 winState = 1; // shown
+		b_uint8 winState = 1; // shown
 		XChangeProperty(fEngine->xDisplay, xWindow,
-				XInternAtom(fEngine->xDisplay, "ATOM_ETK_WINDOW_STATE", False),
-				XInternAtom(fEngine->xDisplay, "ATOM_ETK_BOOL", False), 8,
+				XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False),
+				XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_BOOL", False), 8,
 				PropModeReplace, (const unsigned char*)&winState, 1);
 		XMapWindow(fEngine->xDisplay, xWindow);
 		XFlush(fEngine->xDisplay);
@@ -570,38 +570,38 @@ EXGraphicsWindow::Show()
 
 	XFree(_winState);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsWindow::Hide()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	euint8 *_winState = NULL;
+	b_uint8 *_winState = NULL;
 	Atom type = None;
 	int format;
 	unsigned long nitems;
 	unsigned long bytes_after;
 
 	XGetWindowProperty(fEngine->xDisplay, xWindow,
-			   XInternAtom(fEngine->xDisplay, "ATOM_ETK_WINDOW_STATE", False), 0, 1,
-			   False, XInternAtom(fEngine->xDisplay, "ATOM_ETK_BOOL", False),
+			   XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False), 0, 1,
+			   False, XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_BOOL", False),
 			   &type, &format, &nitems,
 			   &bytes_after, (unsigned char **)&_winState);
 
-	if(_winState == NULL) return E_ERROR;
+	if(_winState == NULL) return B_ERROR;
 
 	if(*_winState != 0) // if not hide
 	{
-		euint8 winState = 0; // hidden
+		b_uint8 winState = 0; // hidden
 		XChangeProperty(fEngine->xDisplay, xWindow,
-				XInternAtom(fEngine->xDisplay, "ATOM_ETK_WINDOW_STATE", False),
-				XInternAtom(fEngine->xDisplay, "ATOM_ETK_BOOL", False), 8,
+				XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False),
+				XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_BOOL", False), 8,
 				PropModeReplace, (const unsigned char*)&winState, 1);
 		XUnmapWindow(fEngine->xDisplay, xWindow);
 		XFlush(fEngine->xDisplay);
@@ -609,79 +609,79 @@ EXGraphicsWindow::Hide()
 
 	XFree(_winState);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::MoveTo(eint32 x, eint32 y)
+b_status_t
+EXGraphicsWindow::MoveTo(b_int32 x, b_int32 y)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	XMoveWindow(fEngine->xDisplay, xWindow, x, y);
 
 	XFlush(fEngine->xDisplay);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::ResizeTo(euint32 w, euint32 h)
+b_status_t
+EXGraphicsWindow::ResizeTo(b_uint32 w, b_uint32 h)
 {
-	if(w == E_MAXUINT32 || h == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	XResizeWindow(fEngine->xDisplay, xWindow, w + 1, h + 1);
 
 	XFlush(fEngine->xDisplay);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::MoveAndResizeTo(eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EXGraphicsWindow::MoveAndResizeTo(b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	if(w == E_MAXUINT32 || h == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	XMoveResizeWindow(fEngine->xDisplay, xWindow, x, y, w + 1, h + 1);
 
 	XFlush(fEngine->xDisplay);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsWindow::Raise()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	euint8 *_winState = NULL;
+	b_uint8 *_winState = NULL;
 	Atom type = None;
 	int format;
 	unsigned long nitems;
@@ -689,32 +689,32 @@ EXGraphicsWindow::Raise()
 	bool winShown = false;
 
 	XGetWindowProperty(fEngine->xDisplay, xWindow,
-			   XInternAtom(fEngine->xDisplay, "ATOM_ETK_WINDOW_STATE", False), 0, 1,
-			   False, XInternAtom(fEngine->xDisplay, "ATOM_ETK_BOOL", False),
+			   XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False), 0, 1,
+			   False, XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_BOOL", False),
 			   &type, &format, &nitems,
 			   &bytes_after, (unsigned char **)&_winState);
 
 	if(!(_winState == NULL || *_winState != 1)) winShown = true;
 	if(_winState) XFree(_winState);
 
-	if(!winShown) return E_ERROR;
+	if(!winShown) return B_ERROR;
 
 	XRaiseWindow(fEngine->xDisplay, xWindow);
 	XFlush(fEngine->xDisplay);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::Lower(EGraphicsWindow *frontW)
+b_status_t
+EXGraphicsWindow::Lower(BGraphicsWindow *frontW)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	euint8 *_winState = NULL;
+	b_uint8 *_winState = NULL;
 	Atom type = None;
 	int format;
 	unsigned long nitems;
@@ -722,12 +722,12 @@ EXGraphicsWindow::Lower(EGraphicsWindow *frontW)
 	bool winShown = false;
 	bool frontShown = false;
 
-	EXGraphicsWindow *frontWin = e_cast_as(frontW, EXGraphicsWindow);
-	if(!(frontWin == NULL || (fEngine == frontWin->fEngine && xWindow != frontWin->xWindow))) return E_ERROR;
+	EXGraphicsWindow *frontWin = b_cast_as(frontW, EXGraphicsWindow);
+	if(!(frontWin == NULL || (fEngine == frontWin->fEngine && xWindow != frontWin->xWindow))) return B_ERROR;
 
 	XGetWindowProperty(fEngine->xDisplay, xWindow,
-			   XInternAtom(fEngine->xDisplay, "ATOM_ETK_WINDOW_STATE", False), 0, 1,
-			   False, XInternAtom(fEngine->xDisplay, "ATOM_ETK_BOOL", False),
+			   XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False), 0, 1,
+			   False, XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_BOOL", False),
 			   &type, &format, &nitems,
 			   &bytes_after, (unsigned char **)&_winState);
 
@@ -735,13 +735,13 @@ EXGraphicsWindow::Lower(EGraphicsWindow *frontW)
 	if(_winState) XFree(_winState);
 	_winState = NULL;
 
-	if(!winShown) return E_ERROR;
+	if(!winShown) return B_ERROR;
 
 	if(frontWin != NULL)
 	{
 		XGetWindowProperty(fEngine->xDisplay, frontWin->xWindow,
-				   XInternAtom(fEngine->xDisplay, "ATOM_ETK_WINDOW_STATE", False), 0, 1,
-				   False, XInternAtom(fEngine->xDisplay, "ATOM_ETK_BOOL", False),
+				   XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_WINDOW_STATE", False), 0, 1,
+				   False, XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_BOOL", False),
 				   &type, &format, &nitems,
 				   &bytes_after, (unsigned char **)&_winState);
 
@@ -761,37 +761,37 @@ EXGraphicsWindow::Lower(EGraphicsWindow *frontW)
 		winChanges.stack_mode = Above;
 
 		if(XReconfigureWMWindow(fEngine->xDisplay, frontWin->xWindow, fEngine->xScreen,
-					CWSibling | CWStackMode, &winChanges) == 0) return E_ERROR;
+					CWSibling | CWStackMode, &winChanges) == 0) return B_ERROR;
 	}
-	else return E_ERROR;
+	else return B_ERROR;
 
 	XFlush(fEngine->xDisplay);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsWindow::Activate(bool state)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	XWindowAttributes xattr;
 	XGetWindowAttributes(fEngine->xDisplay, xWindow, &xattr);
 
 	if(xattr.map_state != IsViewable)
 	{
-		return(state ? E_ERROR : E_OK);
+		return(state ? B_ERROR : B_OK);
 	}
 
 	XWMHints *wm_hints = XGetWMHints(fEngine->xDisplay, xWindow);
 	if((wm_hints == NULL || wm_hints->input == False) && state)
 	{
 		if(wm_hints) XFree(wm_hints);
-		return E_ERROR;
+		return B_ERROR;
 	}
 	if(wm_hints) XFree(wm_hints);
 
@@ -846,19 +846,19 @@ EXGraphicsWindow::Activate(bool state)
 
 	XFlush(fEngine->xDisplay);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsWindow::GetActivatedState(bool *state) const
 {
-	if(fEngine == NULL || state == NULL) return E_ERROR;
+	if(fEngine == NULL || state == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	if(fFlags & E_AVOID_FOCUS)
+	if(fFlags & B_AVOID_FOCUS)
 	{
 		*state = false;
 	}
@@ -870,153 +870,153 @@ EXGraphicsWindow::GetActivatedState(bool *state) const
 		*state = (focusWin == xWindow);
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsWindow::GrabMouse()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	Window focusWin;
 	int revert;
 	XGetInputFocus(fEngine->xDisplay, &focusWin, &revert);
 
-	if(focusWin != xWindow) return E_ERROR;
+	if(focusWin != xWindow) return B_ERROR;
 
 	int status = XGrabPointer(fEngine->xDisplay, xWindow, False,
 				  ButtonPressMask|ButtonReleaseMask|PointerMotionMask|
 				  EnterWindowMask|LeaveWindowMask|KeymapStateMask,
 				  GrabModeAsync, GrabModeAsync, None, None, CurrentTime);
 
-	return(status == GrabSuccess ? E_OK : E_ERROR);
+	return(status == GrabSuccess ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsWindow::UngrabMouse()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	XUngrabPointer(fEngine->xDisplay, CurrentTime);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsWindow::GrabKeyboard()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	Window focusWin;
 	int revert;
 	XGetInputFocus(fEngine->xDisplay, &focusWin, &revert);
 
-	if(focusWin != xWindow) return E_ERROR;
+	if(focusWin != xWindow) return B_ERROR;
 
 	int status = XGrabKeyboard(fEngine->xDisplay, xWindow, False, GrabModeAsync, GrabModeAsync, CurrentTime);
 
-	return(status == GrabSuccess ? E_OK : E_ERROR);
+	return(status == GrabSuccess ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EXGraphicsWindow::UngrabKeyboard()
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	XUngrabKeyboard(fEngine->xDisplay, CurrentTime);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::SetSizeLimits(euint32 min_w, euint32 max_w, euint32 min_h, euint32 max_h)
+b_status_t
+EXGraphicsWindow::SetSizeLimits(b_uint32 min_w, b_uint32 max_w, b_uint32 min_h, b_uint32 max_h)
 {
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	XSizeHints size_hints;
 	size_hints.flags = PMinSize | PMaxSize;
-	size_hints.min_width = (min_w == E_MAXUINT32 ? 0 : (min_w + 1));
-	size_hints.min_height = (min_h == E_MAXUINT32 ? 0 : (min_h + 1));
-	size_hints.max_width = (max_w == E_MAXUINT32 ? 0 : (max_w + 1));
-	size_hints.max_height = (max_h == E_MAXUINT32 ? 0 : (max_h + 1));
+	size_hints.min_width = (min_w == B_MAXUINT32 ? 0 : (min_w + 1));
+	size_hints.min_height = (min_h == B_MAXUINT32 ? 0 : (min_h + 1));
+	size_hints.max_width = (max_w == B_MAXUINT32 ? 0 : (max_w + 1));
+	size_hints.max_height = (max_h == B_MAXUINT32 ? 0 : (max_h + 1));
 
 	XSetWMNormalHints(fEngine->xDisplay, xWindow, &size_hints);
 	XFlush(fEngine->xDisplay);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::GetSizeLimits(euint32 *min_w, euint32 *max_w, euint32 *min_h, euint32 *max_h)
+b_status_t
+EXGraphicsWindow::GetSizeLimits(b_uint32 *min_w, b_uint32 *max_w, b_uint32 *min_h, b_uint32 *max_h)
 {
-	if(min_w == NULL || max_w == NULL || min_h == NULL || max_h == NULL) return E_ERROR;
+	if(min_w == NULL || max_w == NULL || min_h == NULL || max_h == NULL) return B_ERROR;
 
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	XSizeHints size_hints;
 	long supplied_return = 0;
 
-	if(!XGetWMNormalHints(fEngine->xDisplay, xWindow, &size_hints, &supplied_return)) return E_ERROR;
+	if(!XGetWMNormalHints(fEngine->xDisplay, xWindow, &size_hints, &supplied_return)) return B_ERROR;
 
-	*min_w = E_MAXUINT32;
-	*max_w = E_MAXUINT32;
-	*min_h = E_MAXUINT32;
-	*max_h = E_MAXUINT32;
+	*min_w = B_MAXUINT32;
+	*max_w = B_MAXUINT32;
+	*min_h = B_MAXUINT32;
+	*max_h = B_MAXUINT32;
 
 	if(size_hints.flags & PMinSize)
 	{
-		*min_w = (size_hints.min_width > 0 ? (size_hints.min_width - 1) : E_MAXUINT32);
-		*min_h = (size_hints.min_height > 0 ? (size_hints.min_height - 1) : E_MAXUINT32);
+		*min_w = (size_hints.min_width > 0 ? (size_hints.min_width - 1) : B_MAXUINT32);
+		*min_h = (size_hints.min_height > 0 ? (size_hints.min_height - 1) : B_MAXUINT32);
 	}
 
 	if(size_hints.flags & PMaxSize)
 	{
-		*max_w = (size_hints.max_width > 0 ? (size_hints.max_width - 1) : E_MAXUINT32);
-		*max_h = (size_hints.max_height > 0 ? (size_hints.max_height - 1) : E_MAXUINT32);
+		*max_w = (size_hints.max_width > 0 ? (size_hints.max_width - 1) : B_MAXUINT32);
+		*max_h = (size_hints.max_height > 0 ? (size_hints.max_height - 1) : B_MAXUINT32);
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::QueryMouse(eint32 *x, eint32 *y, eint32 *buttons)
+b_status_t
+EXGraphicsWindow::QueryMouse(b_int32 *x, b_int32 *y, b_int32 *buttons)
 {
-	if(x == NULL && y == NULL && buttons == NULL) return E_ERROR;
+	if(x == NULL && y == NULL && buttons == NULL) return B_ERROR;
 
-	if(fEngine == NULL) return E_ERROR;
+	if(fEngine == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
 	int rx, ry, wx, wy;
 	unsigned int state;
 	Window rootReturn, childReturn;
-	if(XQueryPointer(fEngine->xDisplay, xWindow, &rootReturn, &childReturn, &rx, &ry, &wx, &wy, &state) == False) return E_ERROR;
+	if(XQueryPointer(fEngine->xDisplay, xWindow, &rootReturn, &childReturn, &rx, &ry, &wx, &wy, &state) == False) return B_ERROR;
 
 	if(x) *x = wx;
 	if(y) *y = wy;
@@ -1028,56 +1028,56 @@ EXGraphicsWindow::QueryMouse(eint32 *x, eint32 *y, eint32 *buttons)
 		if(state & Button3Mask) *buttons += 3;
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EXGraphicsWindow::CopyTo(EGraphicsContext *_dc_,
-			 EGraphicsDrawable *dstDrawable,
-			 eint32 x, eint32 y, euint32 w, euint32 h,
-			 eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EXGraphicsWindow::CopyTo(BGraphicsContext *_dc_,
+			 BGraphicsDrawable *dstDrawable,
+			 b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+			 b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
 	if(w != dstW || h != dstH)
 	{
 		// TODO
-		ETK_DEBUG("[GRAPHICS]: %s --- FIXME: (w != dstW || h != dstY).", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- FIXME: (w != dstW || h != dstY).", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(w == E_MAXUINT32 || h == E_MAXUINT32 || dstW == E_MAXUINT32 || dstH == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32 || dstW == B_MAXUINT32 || dstH == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(fEngine == NULL || dstDrawable == NULL) return E_ERROR;
+	if(fEngine == NULL || dstDrawable == NULL) return B_ERROR;
 
-	EAutolock <EXGraphicsEngine> autolock(fEngine);
-	if(autolock.IsLocked() == false || fEngine->InitCheck() != E_OK) return E_ERROR;
+	BAutolock <EXGraphicsEngine> autolock(fEngine);
+	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	EXGraphicsContext *dc = e_cast_as(_dc_, EXGraphicsContext);
-	if(dc == NULL || dc->fEngine != fEngine) return E_ERROR;
-	if(dc->DrawingMode() != E_OP_COPY)
+	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	if(dc == NULL || dc->fEngine != fEngine) return B_ERROR;
+	if(dc->DrawingMode() != B_OP_COPY)
 	{
 		// TODO
-		ETK_DEBUG("[GRAPHICS]: %s --- FIXME: unsupported drawing mode.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- FIXME: unsupported drawing mode.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
 	EXGraphicsWindow *win = NULL;
 	EXGraphicsDrawable *pix = NULL;
 
-	e_status_t retVal = E_OK;
+	b_status_t retVal = B_OK;
 
-	if((win = e_cast_as(dstDrawable, EXGraphicsWindow)) != NULL)
+	if((win = b_cast_as(dstDrawable, EXGraphicsWindow)) != NULL)
 		XCopyArea(fEngine->xDisplay, xWindow, win->xWindow, DefaultGC(fEngine->xDisplay, fEngine->xScreen),
 			  x, y, w + 1, h + 1, dstX, dstY);
-	else if((pix = e_cast_as(dstDrawable, EXGraphicsDrawable)) != NULL)
+	else if((pix = b_cast_as(dstDrawable, EXGraphicsDrawable)) != NULL)
 		XCopyArea(fEngine->xDisplay, xWindow, pix->xPixmap, DefaultGC(fEngine->xDisplay, fEngine->xScreen),
 			  x, y, w + 1, h + 1, dstX, dstY);
 	else
-		retVal = E_ERROR;
+		retVal = B_ERROR;
 
 	XFlush(fEngine->xDisplay);
 

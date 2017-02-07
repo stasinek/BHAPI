@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -40,94 +40,94 @@
 #include "./../../render/Pixmap.h"
 
 
-e_status_t
-EWin32GraphicsDrawable::StrokePoint(EGraphicsContext *dc,
-				    eint32 x, eint32 y)
+b_status_t
+EWin32GraphicsDrawable::StrokePoint(BGraphicsContext *dc,
+				    b_int32 x, b_int32 y)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_STROKE_POINT;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_STROKE_POINT;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.x = x;
 	callback.y = y;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::StrokePoints(EGraphicsContext *dc,
-				     const eint32 *pts, eint32 count)
+b_status_t
+EWin32GraphicsDrawable::StrokePoints(BGraphicsContext *dc,
+				     const b_int32 *pts, b_int32 count)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || count <= 0) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || count <= 0) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_STROKE_POINTS;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_STROKE_POINTS;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.pts = pts;
 	callback.ptsCount = count;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::StrokePoints_Colors(EGraphicsContext *dc,
-					    const EList *ptsArrayLists, eint32 arrayCount, const e_rgb_color *highColors)
+b_status_t
+EWin32GraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
+					    const BList *ptsArrayLists, b_int32 arrayCount, const b_rgb_color *highColors)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL || ptsArrayLists == NULL || arrayCount <= 0) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL || ptsArrayLists == NULL || arrayCount <= 0) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_STROKE_POINTS_COLOR;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_STROKE_POINTS_COLOR;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.ptsArrayLists = ptsArrayLists;
 	callback.ptsArrayCount = arrayCount;
 	callback.ptsColors = highColors;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::StrokePoints_Alphas(EGraphicsContext *dc,
-					    const eint32 *pts, const euint8 *alpha, eint32 count)
+b_status_t
+EWin32GraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
+					    const b_int32 *pts, const b_uint8 *alpha, b_int32 count)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || alpha == NULL || count <= 0) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || alpha == NULL || count <= 0) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_STROKE_POINTS_ALPHA;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_STROKE_POINTS_ALPHA;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.pts = pts;
 	callback.ptsAlpha = alpha;
 	callback.ptsCount = count;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::StrokeLine(EGraphicsContext *dc,
-				   eint32 x0, eint32 y0, eint32 x1, eint32 y1)
+b_status_t
+EWin32GraphicsDrawable::StrokeLine(BGraphicsContext *dc,
+				   b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1)
 {
 	if(x0 == x1 && y0 == y1) return StrokePoint(dc, x0, y0);
 
-	if(fRequestAsyncWin == NULL || dc == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_STROKE_LINE;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_STROKE_LINE;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.x = x0;
@@ -135,25 +135,25 @@ EWin32GraphicsDrawable::StrokeLine(EGraphicsContext *dc,
 	callback.wx = x1;
 	callback.wy = y1;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::StrokeRect(EGraphicsContext *dc,
-				   eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EWin32GraphicsDrawable::StrokeRect(BGraphicsContext *dc,
+				   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
 	if(w == 0 && h == 0)
 		return StrokePoint(dc, x, y);
 	else if(w == 0 || h == 0)
-		return StrokeLine(dc, x, y, x + (eint32)w, y + (eint32)h);
+		return StrokeLine(dc, x, y, x + (b_int32)w, y + (b_int32)h);
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_STROKE_RECT;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_STROKE_RECT;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.x = x;
@@ -161,39 +161,39 @@ EWin32GraphicsDrawable::StrokeRect(EGraphicsContext *dc,
 	callback.w = w;
 	callback.h = h;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::StrokeRects(EGraphicsContext *dc,
-				    const eint32 *rects, eint32 count)
+b_status_t
+EWin32GraphicsDrawable::StrokeRects(BGraphicsContext *dc,
+				    const b_int32 *rects, b_int32 count)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL || rects == NULL || count <= 0) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL || rects == NULL || count <= 0) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_STROKE_RECTS;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_STROKE_RECTS;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.pts = rects;
 	callback.ptsCount = count;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::FillRect(EGraphicsContext *dc,
-				 eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EWin32GraphicsDrawable::FillRect(BGraphicsContext *dc,
+				 b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_FILL_RECT;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_FILL_RECT;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.x = x;
@@ -201,60 +201,60 @@ EWin32GraphicsDrawable::FillRect(EGraphicsContext *dc,
 	callback.w = w;
 	callback.h = h;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::FillRects(EGraphicsContext *dc,
-				  const eint32 *rects, eint32 count)
+b_status_t
+EWin32GraphicsDrawable::FillRects(BGraphicsContext *dc,
+				  const b_int32 *rects, b_int32 count)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL || rects == NULL || count <= 0) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL || rects == NULL || count <= 0) return B_ERROR;
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_FILL_RECTS;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_FILL_RECTS;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.pts = rects;
 	callback.ptsCount = count;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::FillRegion(EGraphicsContext *dc,
-				   const ERegion &region)
+b_status_t
+EWin32GraphicsDrawable::FillRegion(BGraphicsContext *dc,
+				   const BRegion &region)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL || region.CountRects() <= 0) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL || region.CountRects() <= 0) return B_ERROR;
 
 	if(region.CountRects() == 1)
 	{
-		ERect r = region.RectAt(0).FloorSelf();
-		return FillRect(dc, (eint32)r.left, (eint32)r.top, (euint32)r.Width(), (euint32)r.Height());
+		BRect r = region.RectAt(0).FloorSelf();
+		return FillRect(dc, (b_int32)r.left, (b_int32)r.top, (b_uint32)r.Width(), (b_uint32)r.Height());
 	}
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_FILL_REGION;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_FILL_REGION;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.region = &region;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::StrokeRoundRect(EGraphicsContext *dc,
-					eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EWin32GraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
+					b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
 	bool xRadiusLarge = (2 * xRadius >= w ? true : false);
 	bool yRadiusLarge = (2 * yRadius >= h ? true : false);
@@ -265,10 +265,10 @@ EWin32GraphicsDrawable::StrokeRoundRect(EGraphicsContext *dc,
 	if(w == 0 && h == 0)
 		return StrokePoint(dc, x, y);
 	else if(w == 0 || h == 0)
-		return StrokeLine(dc, x, y, x + (eint32)w, y + (eint32)h);
+		return StrokeLine(dc, x, y, x + (b_int32)w, y + (b_int32)h);
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_STROKE_ROUND_RECT;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_STROKE_ROUND_RECT;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.x = x;
@@ -278,17 +278,17 @@ EWin32GraphicsDrawable::StrokeRoundRect(EGraphicsContext *dc,
 	callback.ww = 2 * xRadius;
 	callback.wh = 2 * yRadius;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::FillRoundRect(EGraphicsContext *dc,
-				      eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EWin32GraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
+				      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
 	bool xRadiusLarge = (2 * xRadius >= w ? true : false);
 	bool yRadiusLarge = (2 * yRadius >= h ? true : false);
@@ -298,8 +298,8 @@ EWin32GraphicsDrawable::FillRoundRect(EGraphicsContext *dc,
 
 	if(w == 0 || h == 0) return FillRect(dc, x, y, w, h);
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_FILL_ROUND_RECT;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_FILL_ROUND_RECT;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.x = x;
@@ -309,25 +309,25 @@ EWin32GraphicsDrawable::FillRoundRect(EGraphicsContext *dc,
 	callback.ww = 2 * xRadius;
 	callback.wh = 2 * yRadius;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::StrokeArc(EGraphicsContext *dc,
-				  eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EWin32GraphicsDrawable::StrokeArc(BGraphicsContext *dc,
+				  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
 	if(w == 0 && h == 0)
 		return StrokePoint(dc, x, y);
 	else if(w == 0 || h == 0)
-		return StrokeLine(dc, x, y, x + (eint32)w, y + (eint32)h);
+		return StrokeLine(dc, x, y, x + (b_int32)w, y + (b_int32)h);
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_STROKE_ARC;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_STROKE_ARC;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.x = x;
@@ -337,22 +337,22 @@ EWin32GraphicsDrawable::StrokeArc(EGraphicsContext *dc,
 	callback.startAngle = startAngle;
 	callback.endAngle = endAngle;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::FillArc(EGraphicsContext *dc,
-				eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EWin32GraphicsDrawable::FillArc(BGraphicsContext *dc,
+				b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
 	if(w == 0 || h == 0) return FillRect(dc, x, y, w, h);
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_FILL_ARC;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_FILL_ARC;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.x = x;
@@ -362,66 +362,66 @@ EWin32GraphicsDrawable::FillArc(EGraphicsContext *dc,
 	callback.startAngle = startAngle;
 	callback.endAngle = endAngle;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::StrokePolygon(EGraphicsContext *dc,
-				      const eint32 *pts, eint32 count, bool closed)
+b_status_t
+EWin32GraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
+				      const b_int32 *pts, b_int32 count, bool closed)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || count <= 0) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || count <= 0) return B_ERROR;
 
 	if(count == 1)
 		return StrokePoint(dc, pts[0], pts[1]);
 	else if(count == 2)
 		return StrokeLine(dc, pts[0], pts[1], pts[2], pts[3]);
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_STROKE_POLYGON;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_STROKE_POLYGON;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.pts = pts;
 	callback.ptsCount = count;
 	callback.polyClosed = closed;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EWin32GraphicsDrawable::FillPolygon(EGraphicsContext *dc,
-				    const eint32 *pts, eint32 count)
+b_status_t
+EWin32GraphicsDrawable::FillPolygon(BGraphicsContext *dc,
+				    const b_int32 *pts, b_int32 count)
 {
-	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || count <= 0) return E_ERROR;
+	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || count <= 0) return B_ERROR;
 
 	if(count == 1) return FillRect(dc, pts[0], pts[1], 0, 0);
 
-	etk_win32_gdi_callback_t callback;
-	callback.command = WM_ETK_MESSAGE_FILL_POLYGON;
+	bhapi_win32_gdi_callback_t callback;
+	callback.command = WM_BHAPI_MESSAGE_FILL_POLYGON;
 	callback.pixmap = this;
 	callback.dc = dc;
 	callback.pts = pts;
 	callback.ptsCount = count;
 
-	bool successed = (SendMessageA(fRequestAsyncWin, WM_ETK_MESSAGE,
-				       WM_ETK_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
-	return(successed ? E_OK : E_ERROR);
+	bool successed = (SendMessageA(fRequestAsyncWin, WM_BHAPI_MESSAGE,
+				       WM_BHAPI_MESSAGE_DRAWING, (LPARAM)&callback) == (LRESULT)TRUE);
+	return(successed ? B_OK : B_ERROR);
 }
 
 
 HRGN
-EWin32GraphicsEngine::ConvertRegion(const ERegion *region)
+EWin32GraphicsEngine::ConvertRegion(const BRegion *region)
 {
 	HRGN hrgn = NULL;
 
-	for(eint32 i = 0; i < (region ? region->CountRects() : 0); i++)
+	for(b_int32 i = 0; i < (region ? region->CountRects() : 0); i++)
 	{
-		ERect r = region->RectAt(i).FloorCopy();
+		BRect r = region->RectAt(i).FloorCopy();
 		if(i == 0) {hrgn = CreateRectRgn((int)r.left, (int)r.top, (int)r.right + 1, (int)r.bottom + 1); continue;}
 		else if(hrgn == NULL) break;
 
@@ -437,7 +437,7 @@ EWin32GraphicsEngine::ConvertRegion(const ERegion *region)
 
 
 bool
-EWin32GraphicsEngine::PrepareContext(EWin32GraphicsDrawable *pixmap, EGraphicsContext *dc,
+EWin32GraphicsEngine::PrepareContext(EWin32GraphicsDrawable *pixmap, BGraphicsContext *dc,
 				     bool hollowBrush, bool setPenSize)
 {
 	if(pixmap == NULL || pixmap->win32HDC == NULL || dc == NULL || dc->Clipping()->CountRects() <= 0) return false;
@@ -450,10 +450,10 @@ EWin32GraphicsEngine::PrepareContext(EWin32GraphicsDrawable *pixmap, EGraphicsCo
 	HGDIOBJ oldHbm = NULL;
 	HDC hdc = NULL;
 	plb.lbHatch = 0;
-	if(dc->Pattern() == E_SOLID_HIGH || dc->Pattern() == E_SOLID_LOW)
+	if(dc->Pattern() == B_SOLID_HIGH || dc->Pattern() == B_SOLID_LOW)
 	{
 		plb.lbStyle = BS_SOLID;
-		if(dc->Pattern() == E_SOLID_HIGH)
+		if(dc->Pattern() == B_SOLID_HIGH)
 			plb.lbColor = RGB(dc->HighColor().red, dc->HighColor().green, dc->HighColor().blue);
 		else
 			plb.lbColor = RGB(dc->LowColor().red, dc->LowColor().green, dc->LowColor().blue);
@@ -475,7 +475,7 @@ EWin32GraphicsEngine::PrepareContext(EWin32GraphicsDrawable *pixmap, EGraphicsCo
 		}
 		else
 		{
-			ETK_DEBUG("[GRAPHICS]: %s --- CreateCompatibleBitmap failed.", __PRETTY_FUNCTION__);
+			BHAPI_DEBUG("[GRAPHICS]: %s --- CreateCompatibleBitmap failed.", __PRETTY_FUNCTION__);
 		}
 		plb.lbHatch = (LONG)hbm;
 	}
@@ -521,19 +521,19 @@ EWin32GraphicsEngine::PrepareContext(EWin32GraphicsDrawable *pixmap, EGraphicsCo
 	int fnDrawMode;
 	switch(dc->DrawingMode())
 	{
-		case E_OP_COPY: fnDrawMode = R2_COPYPEN; break;
-		case E_OP_XOR: fnDrawMode = R2_XORPEN; break;
-//		case E_OP_INVERT: fnDrawMode = R2_NOT; break;
-//		case E_OP_ERASE: fnDrawMode = R2_BLACK; break;
-//		case E_OP_ADD: fnDrawMode = R2_MERGEPEN; break;
-//		case E_OP_SUBTRACT: fnDrawMode = R2_NOTMERGEPEN; break;
-//		case E_OP_SELECT: fnDrawMode = R2_MASKPEN; break;
-//		case E_OP_BLEND: break;
-//		case E_OP_MIN: break;
-//		case E_OP_MAX: break;
-//		case E_OP_ALPHA: break; /* TODO */
+		case B_OP_COPY: fnDrawMode = R2_COPYPEN; break;
+		case B_OP_XOR: fnDrawMode = R2_XORPEN; break;
+//		case B_OP_INVERT: fnDrawMode = R2_NOT; break;
+//		case B_OP_ERASE: fnDrawMode = R2_BLACK; break;
+//		case B_OP_ADD: fnDrawMode = R2_MERGEPEN; break;
+//		case B_OP_SUBTRACT: fnDrawMode = R2_NOTMERGEPEN; break;
+//		case B_OP_SELECT: fnDrawMode = R2_MASKPEN; break;
+//		case B_OP_BLEND: break;
+//		case B_OP_MIN: break;
+//		case B_OP_MAX: break;
+//		case B_OP_ALPHA: break; /* TODO */
 		default:
-			ETK_WARNING("[GRAPHICS]: %s --- DrawingMode %u not support!", __PRETTY_FUNCTION__, (unsigned int)dc->DrawingMode());
+			BHAPI_WARNING("[GRAPHICS]: %s --- DrawingMode %u not support!", __PRETTY_FUNCTION__, (unsigned int)dc->DrawingMode());
 			fnDrawMode = R2_COPYPEN;
 			break;
 	}
@@ -543,29 +543,29 @@ EWin32GraphicsEngine::PrepareContext(EWin32GraphicsDrawable *pixmap, EGraphicsCo
 }
 
 
-static bool _etk_dc_query_high_color(const e_pattern &pattern, eint32 x, eint32 y)
+static bool _bhapi_dc_query_high_color(const b_pattern &pattern, b_int32 x, b_int32 y)
 {
-	if(pattern == E_SOLID_HIGH) return true;
-	else if(pattern == E_SOLID_LOW) return false;
+	if(pattern == B_SOLID_HIGH) return true;
+	else if(pattern == B_SOLID_LOW) return false;
 
 	x %= 8;
 	y %= 8;
 
-	euint8 pat = pattern.data[y];
+	b_uint8 pat = pattern.data[y];
 	if(pat & (1 << (7 - x))) return true;
 
 	return false;
 }
 
 
-LRESULT _etk_stroke_point(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_point(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_STROKE_POINT || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_STROKE_POINT || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false) return FALSE;
 
@@ -574,7 +574,7 @@ LRESULT _etk_stroke_point(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callb
 	if(callback->dc->PenSize() <= 1)
 	{
 		COLORREF color;
-		if(_etk_dc_query_high_color(callback->dc->Pattern(), callback->x, callback->y))
+		if(_bhapi_dc_query_high_color(callback->dc->Pattern(), callback->x, callback->y))
 			color = RGB(callback->dc->HighColor().red, callback->dc->HighColor().green, callback->dc->HighColor().blue);
 		else
 			color = RGB(callback->dc->LowColor().red, callback->dc->LowColor().green, callback->dc->LowColor().blue);
@@ -598,38 +598,38 @@ LRESULT _etk_stroke_point(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callb
 }
 
 
-LRESULT _etk_stroke_points(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_points(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_STROKE_POINTS || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_STROKE_POINTS || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL ||
 	   callback->pts == NULL || callback->ptsCount <= 0) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false) return FALSE;
 
-	const eint32 *pts = callback->pts;
+	const b_int32 *pts = callback->pts;
 	if(callback->dc->PenSize() <= 1)
 	{
 		COLORREF wHighColor = RGB(callback->dc->HighColor().red, callback->dc->HighColor().green, callback->dc->HighColor().blue);
 		COLORREF wLowColor = RGB(callback->dc->LowColor().red, callback->dc->LowColor().green, callback->dc->LowColor().blue);
 
-		for(eint32 i = 0; i < callback->ptsCount; i++)
+		for(b_int32 i = 0; i < callback->ptsCount; i++)
 		{
-			eint32 x = *pts++;
-			eint32 y = *pts++;
+			b_int32 x = *pts++;
+			b_int32 y = *pts++;
 			SetPixel(callback->pixmap->win32HDC, x, y,
-				 (_etk_dc_query_high_color(callback->dc->Pattern(), x, y) ? wHighColor : wLowColor));
+				 (_bhapi_dc_query_high_color(callback->dc->Pattern(), x, y) ? wHighColor : wLowColor));
 		}
 	}
 	else
 	{
-		for(eint32 i = 0; i < callback->ptsCount; i++)
+		for(b_int32 i = 0; i < callback->ptsCount; i++)
 		{
-			eint32 x = *pts++;
-			eint32 y = *pts++;
+			b_int32 x = *pts++;
+			b_int32 y = *pts++;
 
 			int left = x - (int)((callback->dc->PenSize() - 1) / 2);
 			int top = y - (int)((callback->dc->PenSize() - 1) / 2);
@@ -647,18 +647,18 @@ LRESULT _etk_stroke_points(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_call
 }
 
 
-static bool _etk_pixmap_change_brush_high_color(EWin32GraphicsEngine *win32Engine, EWin32GraphicsDrawable *pixmap,
-						EGraphicsContext *dc, e_rgb_color high_color)
+static bool _bhapi_pixmap_change_brush_high_color(EWin32GraphicsEngine *win32Engine, EWin32GraphicsDrawable *pixmap,
+						BGraphicsContext *dc, b_rgb_color high_color)
 {
 	LOGBRUSH plb;
 	plb.lbHatch = 0;
 	HBITMAP hbm = NULL;
 	HGDIOBJ oldHbm = NULL;
 	HDC hdc = NULL;
-	if(dc->Pattern() == E_SOLID_HIGH || dc->Pattern() == E_SOLID_LOW)
+	if(dc->Pattern() == B_SOLID_HIGH || dc->Pattern() == B_SOLID_LOW)
 	{
 		plb.lbStyle = BS_SOLID;
-		if(dc->Pattern() == E_SOLID_HIGH)
+		if(dc->Pattern() == B_SOLID_HIGH)
 			plb.lbColor = RGB(high_color.red, high_color.green, high_color.blue);
 		else
 			plb.lbColor = RGB(dc->LowColor().red, dc->LowColor().green, dc->LowColor().blue);
@@ -680,7 +680,7 @@ static bool _etk_pixmap_change_brush_high_color(EWin32GraphicsEngine *win32Engin
 		}
 		else
 		{
-			ETK_DEBUG("[GRAPHICS]: %s --- CreateCompatibleBitmap failed.", __PRETTY_FUNCTION__);
+			BHAPI_DEBUG("[GRAPHICS]: %s --- CreateCompatibleBitmap failed.", __PRETTY_FUNCTION__);
 		}
 		plb.lbHatch = (LONG)hbm;
 	}
@@ -708,30 +708,30 @@ static bool _etk_pixmap_change_brush_high_color(EWin32GraphicsEngine *win32Engin
 }
 
 
-LRESULT _etk_stroke_points_color(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_points_color(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_STROKE_POINTS_COLOR || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_STROKE_POINTS_COLOR || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL ||
 	   callback->ptsArrayLists == NULL || callback->ptsArrayCount <= 0) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false) return FALSE;
 
-	const EList *ptsArrayLists = callback->ptsArrayLists;
-	const e_rgb_color *high_colors = callback->ptsColors;
+	const BList *ptsArrayLists = callback->ptsArrayLists;
+	const b_rgb_color *high_colors = callback->ptsColors;
 
-	e_rgb_color oldColor = callback->dc->HighColor();
+	b_rgb_color oldColor = callback->dc->HighColor();
 
-	for(eint32 k = 0; k < callback->ptsArrayCount; k++, ptsArrayLists++)
+	for(b_int32 k = 0; k < callback->ptsArrayCount; k++, ptsArrayLists++)
 	{
 		if(ptsArrayLists == NULL) break;
 
-		e_rgb_color color = (high_colors == NULL ? callback->dc->HighColor() : *high_colors++);
+		b_rgb_color color = (high_colors == NULL ? callback->dc->HighColor() : *high_colors++);
 
-		eint32 count = ptsArrayLists->CountItems();
+		b_int32 count = ptsArrayLists->CountItems();
 		if(count <= 0) continue;
 
 		if(callback->dc->PenSize() <= 1)
@@ -741,31 +741,31 @@ LRESULT _etk_stroke_points_color(EWin32GraphicsEngine *win32Engine, etk_win32_gd
 						 callback->dc->LowColor().green,
 						 callback->dc->LowColor().blue);
 
-			for(eint32 i = 0; i < count; i++)
+			for(b_int32 i = 0; i < count; i++)
 			{
-				const eint32 *pt = (const eint32*)ptsArrayLists->ItemAt(i);
+				const b_int32 *pt = (const b_int32*)ptsArrayLists->ItemAt(i);
 				if(pt == NULL) continue;
 
-				eint32 x = *pt++;
-				eint32 y = *pt++;
+				b_int32 x = *pt++;
+				b_int32 y = *pt++;
 
 				SetPixel(callback->pixmap->win32HDC, x, y,
-					 (_etk_dc_query_high_color(callback->dc->Pattern(), x, y) ? wHighColor : wLowColor));
+					 (_bhapi_dc_query_high_color(callback->dc->Pattern(), x, y) ? wHighColor : wLowColor));
 			}
 		}
 		else
 		{
-			for(eint32 i = 0; i < count; i++)
+			for(b_int32 i = 0; i < count; i++)
 			{
-				const eint32 *pt = (const eint32*)ptsArrayLists->ItemAt(i);
+				const b_int32 *pt = (const b_int32*)ptsArrayLists->ItemAt(i);
 				if(pt == NULL) continue;
 
-				eint32 x = *pt++;
-				eint32 y = *pt++;
+				b_int32 x = *pt++;
+				b_int32 y = *pt++;
 
 				if(oldColor != color)
 				{
-					_etk_pixmap_change_brush_high_color(win32Engine, callback->pixmap, callback->dc, color);
+					_bhapi_pixmap_change_brush_high_color(win32Engine, callback->pixmap, callback->dc, color);
 					oldColor = color;
 				}
 
@@ -786,31 +786,31 @@ LRESULT _etk_stroke_points_color(EWin32GraphicsEngine *win32Engine, etk_win32_gd
 }
 
 
-LRESULT _etk_stroke_points_alpha(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_points_alpha(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_STROKE_POINTS_ALPHA || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_STROKE_POINTS_ALPHA || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL ||
 	   callback->pts == NULL || callback->ptsAlpha == NULL || callback->ptsCount <= 0) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false) return FALSE;
 
 	if(callback->dc->PenSize() <= 1)
 	{
-		const eint32 *pts = callback->pts;
-		const euint8 *alphas = callback->ptsAlpha;
+		const b_int32 *pts = callback->pts;
+		const b_uint8 *alphas = callback->ptsAlpha;
 
-		for(eint32 i = 0; i < callback->ptsCount; i++)
+		for(b_int32 i = 0; i < callback->ptsCount; i++)
 		{
-			eint32 x = *pts++;
-			eint32 y = *pts++;
-			euint8 alpha = *alphas++;
+			b_int32 x = *pts++;
+			b_int32 y = *pts++;
+			b_uint8 alpha = *alphas++;
 
 			COLORREF wcolor = GetPixel(callback->pixmap->win32HDC, (int)x, (int)y);
-			e_rgb_color color;
+			b_rgb_color color;
 			color.set_to(GetRValue(wcolor), GetGValue(wcolor), GetBValue(wcolor), 255);
 			color.mix(callback->dc->HighColor().red,
 				  callback->dc->HighColor().green,
@@ -825,7 +825,7 @@ LRESULT _etk_stroke_points_alpha(EWin32GraphicsEngine *win32Engine, etk_win32_gd
 	}
 	else
 	{
-		ETK_WARNING("[GRAPHICS]: %s --- stroke large point not support yet.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[GRAPHICS]: %s --- stroke large point not support yet.", __PRETTY_FUNCTION__);
 	}
 
 	// TODO
@@ -833,14 +833,14 @@ LRESULT _etk_stroke_points_alpha(EWin32GraphicsEngine *win32Engine, etk_win32_gd
 }
 
 
-LRESULT _etk_stroke_line(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_line(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_STROKE_LINE || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_STROKE_LINE || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, true, true) == false) return FALSE;
 
@@ -853,7 +853,7 @@ LRESULT _etk_stroke_line(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callba
 	if(callback->dc->PenSize() <= 1)
 	{
 		COLORREF wcolor;
-		if(_etk_dc_query_high_color(callback->dc->Pattern(), pt.x, pt.y))
+		if(_bhapi_dc_query_high_color(callback->dc->Pattern(), pt.x, pt.y))
 			wcolor = RGB(callback->dc->HighColor().red, callback->dc->HighColor().green, callback->dc->HighColor().blue);
 		else
 			wcolor = RGB(callback->dc->LowColor().red, callback->dc->LowColor().green, callback->dc->LowColor().blue);
@@ -869,14 +869,14 @@ LRESULT _etk_stroke_line(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callba
 }
 
 
-LRESULT _etk_stroke_rect(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_rect(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_STROKE_RECT || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_STROKE_RECT || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, true, true) == false) return FALSE;
 
@@ -887,22 +887,22 @@ LRESULT _etk_stroke_rect(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callba
 }
 
 
-LRESULT _etk_stroke_rects(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_rects(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_STROKE_RECTS || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_STROKE_RECTS || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->dc == NULL ||
 	   callback->pts == NULL || callback->pixmap->win32HDC == NULL || callback->ptsCount <= 0) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, true, true) == false) return FALSE;
 
-	const eint32 *pts = callback->pts;
-	for(eint32 i = 0; i < callback->ptsCount; i++)
+	const b_int32 *pts = callback->pts;
+	for(b_int32 i = 0; i < callback->ptsCount; i++)
 	{
-		eint32 x = *pts++; eint32 y = *pts++; euint32 w = (euint32)(*pts++); euint32 h = (euint32)(*pts++);
+		b_int32 x = *pts++; b_int32 y = *pts++; b_uint32 w = (b_uint32)(*pts++); b_uint32 h = (b_uint32)(*pts++);
 		Rectangle(callback->pixmap->win32HDC, x, y, x + (int)w + 1, y + (int)h + 1);
 	}
 
@@ -910,14 +910,14 @@ LRESULT _etk_stroke_rects(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callb
 }
 
 
-LRESULT _etk_fill_rect(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_fill_rect(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_FILL_RECT || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_FILL_RECT || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false) return FALSE;
 
@@ -928,22 +928,22 @@ LRESULT _etk_fill_rect(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback
 }
 
 
-LRESULT _etk_fill_rects(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_fill_rects(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_FILL_RECTS || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_FILL_RECTS || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL ||
 	   callback->pts == NULL || callback->ptsCount <= 0) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false) return FALSE;
 
-	const eint32 *pts = callback->pts;
-	for(eint32 i = 0; i < callback->ptsCount; i++)
+	const b_int32 *pts = callback->pts;
+	for(b_int32 i = 0; i < callback->ptsCount; i++)
 	{
-		eint32 x = *pts++; eint32 y = *pts++; euint32 w = (euint32)(*pts++); euint32 h = (euint32)(*pts++);
+		b_int32 x = *pts++; b_int32 y = *pts++; b_uint32 w = (b_uint32)(*pts++); b_uint32 h = (b_uint32)(*pts++);
 		Rectangle(callback->pixmap->win32HDC, x, y, x + (int)w + 1, y + (int)h + 1);
 	}
 
@@ -951,21 +951,21 @@ LRESULT _etk_fill_rects(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callbac
 }
 
 
-LRESULT _etk_fill_region(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_fill_region(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_FILL_REGION || callback->region == NULL || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_FILL_REGION || callback->region == NULL || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false) return FALSE;
 
 	HRGN hrgn = NULL;
-	for(eint32 i = 0; i < callback->region->CountRects(); i++)
+	for(b_int32 i = 0; i < callback->region->CountRects(); i++)
 	{
-		ERect r = callback->region->RectAt(i).FloorSelf();
+		BRect r = callback->region->RectAt(i).FloorSelf();
 		if(i == 0) {hrgn = CreateRectRgn((int)r.left, (int)r.top, (int)r.right + 1, (int)r.bottom + 1); continue;}
 		else if(hrgn == NULL) break;
 
@@ -977,7 +977,7 @@ LRESULT _etk_fill_region(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callba
 	}
 	if(hrgn == NULL)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Unable to create win32 region.", __PRETTY_FUNCTION__);
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Unable to create win32 region.", __PRETTY_FUNCTION__);
 		return FALSE;
 	}
 
@@ -989,14 +989,14 @@ LRESULT _etk_fill_region(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callba
 }
 
 
-LRESULT _etk_stroke_round_rect(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_round_rect(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_STROKE_ROUND_RECT || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_STROKE_ROUND_RECT || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, true, true) == false) return FALSE;
 
@@ -1008,14 +1008,14 @@ LRESULT _etk_stroke_round_rect(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_
 }
 
 
-LRESULT _etk_fill_round_rect(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_fill_round_rect(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_FILL_ROUND_RECT || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_FILL_ROUND_RECT || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false) return FALSE;
 
@@ -1027,10 +1027,10 @@ LRESULT _etk_fill_round_rect(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_ca
 }
 
 
-LRESULT _etk_stroke_arc(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_arc(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_STROKE_ARC || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_STROKE_ARC || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL) return FALSE;
 
 	float start_angle = callback->startAngle;
@@ -1054,10 +1054,10 @@ LRESULT _etk_stroke_arc(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callbac
 	float w = (float)callback->w;
 	float h = (float)callback->h;
 
-	EPoint ptStart, ptEnd;
+	BPoint ptStart, ptEnd;
 	if(start_angle == end_angle || end_angle - start_angle == 360)
 	{
-		ptStart = ptEnd = EPoint(x + w, y + h / 2.f);
+		ptStart = ptEnd = BPoint(x + w, y + h / 2.f);
 	}
 	else
 	{
@@ -1073,8 +1073,8 @@ LRESULT _etk_stroke_arc(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callbac
 	ptStart.FloorSelf();
 	ptEnd.FloorSelf();
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, true, true) == false) return FALSE;
 
@@ -1082,12 +1082,12 @@ LRESULT _etk_stroke_arc(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callbac
 	if(ptStart == ptEnd)
 	{
 		status = Ellipse(callback->pixmap->win32HDC,
-				 callback->x, callback->y, callback->x + (eint32)callback->w + 1, callback->y + (eint32)callback->h + 1);
+				 callback->x, callback->y, callback->x + (b_int32)callback->w + 1, callback->y + (b_int32)callback->h + 1);
 	}
 	else
 	{
 		status = Arc(callback->pixmap->win32HDC,
-			     callback->x, callback->y, callback->x + (eint32)callback->w + 1, callback->y + (eint32)callback->h + 1,
+			     callback->x, callback->y, callback->x + (b_int32)callback->w + 1, callback->y + (b_int32)callback->h + 1,
 			     (int)ptStart.x, (int)ptStart.y, (int)ptEnd.x, (int)ptEnd.y);
 	}
 
@@ -1095,10 +1095,10 @@ LRESULT _etk_stroke_arc(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callbac
 }
 
 
-LRESULT _etk_fill_arc(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_fill_arc(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_FILL_ARC || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_FILL_ARC || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL) return FALSE;
 
 	float start_angle = callback->startAngle;
@@ -1122,10 +1122,10 @@ LRESULT _etk_fill_arc(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_
 	float w = (float)callback->w;
 	float h = (float)callback->h;
 
-	EPoint ptStart, ptEnd;
+	BPoint ptStart, ptEnd;
 	if(start_angle == end_angle || end_angle - start_angle == 360)
 	{
-		ptStart = ptEnd = EPoint(x + w, y + h / 2.f);
+		ptStart = ptEnd = BPoint(x + w, y + h / 2.f);
 	}
 	else
 	{
@@ -1141,8 +1141,8 @@ LRESULT _etk_fill_arc(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_
 	ptStart.FloorSelf();
 	ptEnd.FloorSelf();
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false) return FALSE;
 
@@ -1150,12 +1150,12 @@ LRESULT _etk_fill_arc(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_
 	if(ptStart == ptEnd)
 	{
 		status = Ellipse(callback->pixmap->win32HDC,
-				 callback->x, callback->y, callback->x + (eint32)callback->w + 1, callback->y + (eint32)callback->h + 1);
+				 callback->x, callback->y, callback->x + (b_int32)callback->w + 1, callback->y + (b_int32)callback->h + 1);
 	}
 	else
 	{
 		status = Pie(callback->pixmap->win32HDC,
-			     callback->x, callback->y, callback->x + (eint32)callback->w + 1, callback->y + (eint32)callback->h + 1,
+			     callback->x, callback->y, callback->x + (b_int32)callback->w + 1, callback->y + (b_int32)callback->h + 1,
 			     (int)ptStart.x, (int)ptStart.y, (int)ptEnd.x, (int)ptEnd.y);
 	}
 
@@ -1163,18 +1163,18 @@ LRESULT _etk_fill_arc(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_
 }
 
 
-LRESULT _etk_stroke_polygon(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_polygon(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_STROKE_POLYGON || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_STROKE_POLYGON || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL ||
-	   callback->pts == NULL || callback->ptsCount < 3 || callback->ptsCount >= E_MAXINT) return FALSE;
+	   callback->pts == NULL || callback->ptsCount < 3 || callback->ptsCount >= B_MAXINT) return FALSE;
 
 	POINT *wPts = new POINT[callback->ptsCount + 1];
 	if(wPts == NULL) return FALSE;
 
-	const eint32 *pts = callback->pts;
-	for(eint32 i = 0; i < callback->ptsCount; i++)
+	const b_int32 *pts = callback->pts;
+	for(b_int32 i = 0; i < callback->ptsCount; i++)
 	{
 		wPts[i].x = *pts++;
 		wPts[i].y = *pts++;
@@ -1193,8 +1193,8 @@ LRESULT _etk_stroke_polygon(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_cal
 		poly_closed = true;
 	}
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, true, true) == false)
 	{
@@ -1214,7 +1214,7 @@ LRESULT _etk_stroke_polygon(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_cal
 			if(callback->dc->PenSize() <= 1)
 			{
 				COLORREF wcolor;
-				if(_etk_dc_query_high_color(callback->dc->Pattern(), wPts[count - 1].x, wPts[count - 1].y))
+				if(_bhapi_dc_query_high_color(callback->dc->Pattern(), wPts[count - 1].x, wPts[count - 1].y))
 					wcolor = RGB(callback->dc->HighColor().red,
 						     callback->dc->HighColor().green,
 						     callback->dc->HighColor().blue);
@@ -1238,17 +1238,17 @@ LRESULT _etk_stroke_polygon(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_cal
 }
 
 
-LRESULT _etk_fill_polygon(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_fill_polygon(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_FILL_POLYGON || callback->pixmap == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_FILL_POLYGON || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL ||
-	   callback->pts == NULL || callback->ptsCount < 2 || callback->ptsCount > E_MAXINT) return FALSE;
+	   callback->pts == NULL || callback->ptsCount < 2 || callback->ptsCount > B_MAXINT) return FALSE;
 
 	if(callback->ptsCount == 2)
 	{
-		EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-		if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+		BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+		if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 		if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false) return FALSE;
 
@@ -1259,7 +1259,7 @@ LRESULT _etk_fill_polygon(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callb
 		LineTo(callback->pixmap->win32HDC, pt.x, pt.y);
 
 		COLORREF wcolor;
-		if(_etk_dc_query_high_color(callback->dc->Pattern(), pt.x, pt.y))
+		if(_bhapi_dc_query_high_color(callback->dc->Pattern(), pt.x, pt.y))
 			wcolor = RGB(callback->dc->HighColor().red, callback->dc->HighColor().green, callback->dc->HighColor().blue);
 		else
 			wcolor = RGB(callback->dc->LowColor().red, callback->dc->LowColor().green, callback->dc->LowColor().blue);
@@ -1272,8 +1272,8 @@ LRESULT _etk_fill_polygon(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callb
 	POINT *wPts = new POINT[callback->ptsCount];
 	if(wPts == NULL) return FALSE;
 
-	const eint32 *pts = callback->pts;
-	for(eint32 i = 0; i < callback->ptsCount; i++)
+	const b_int32 *pts = callback->pts;
+	for(b_int32 i = 0; i < callback->ptsCount; i++)
 	{
 		wPts[i].x = *pts++;
 		wPts[i].y = *pts++;
@@ -1282,8 +1282,8 @@ LRESULT _etk_fill_polygon(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callb
 	int count = callback->ptsCount;
 	if(wPts[count - 1].x == wPts[0].x && wPts[count - 1].y == wPts[0].y) count--;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false)
 	{
@@ -1299,22 +1299,22 @@ LRESULT _etk_fill_polygon(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callb
 }
 
 
-LRESULT _etk_draw_epixmap(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callback_t *callback)
+LRESULT _bhapi_draw_epixmap(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
-	   callback->command != WM_ETK_MESSAGE_DRAW_EPIXMAP || callback->data == NULL ||
+	   callback->command != WM_BHAPI_MESSAGE_DRAW_EPIXMAP || callback->data == NULL ||
 	   callback->dc == NULL || callback->dstDrawable == NULL) return FALSE;
 
-	EAutolock <EWin32GraphicsEngine> autolock(win32Engine);
-	if(autolock.IsLocked() == false || win32Engine->InitCheck() != E_OK) return FALSE;
+	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
+	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
-	EWin32GraphicsWindow *win = e_cast_as(callback->dstDrawable, EWin32GraphicsWindow);
-	EWin32GraphicsDrawable *pix = e_cast_as(callback->dstDrawable, EWin32GraphicsDrawable);
-	const EPixmap *epixmap = (const EPixmap *)callback->data;
+	EWin32GraphicsWindow *win = b_cast_as(callback->dstDrawable, EWin32GraphicsWindow);
+	EWin32GraphicsDrawable *pix = b_cast_as(callback->dstDrawable, EWin32GraphicsDrawable);
+	const BPixmap *epixmap = (const BPixmap *)callback->data;
 
 	if(win == NULL && pix == NULL)
 	{
-		ETK_WARNING("[GRAPHICS]: %s --- Invalid drawable.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[GRAPHICS]: %s --- Invalid drawable.", __PRETTY_FUNCTION__);
 		return FALSE;
 	}
 
@@ -1329,12 +1329,12 @@ LRESULT _etk_draw_epixmap(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callb
 
 	switch(epixmap->ColorSpace())
 	{
-		case E_RGB24_BIG:
+		case B_RGB24_BIG:
 			if((bits = malloc((size_t)epixmap->BitsLength())) != NULL)
 			{
-				euint8 *tmp = (euint8*)bits;
-				const euint8 *src = (const euint8*)epixmap->Bits();
-				for(euint32 i = 0; i < epixmap->BitsLength(); i += 3, tmp += 3, src += 3)
+				b_uint8 *tmp = (b_uint8*)bits;
+				const b_uint8 *src = (const b_uint8*)epixmap->Bits();
+				for(b_uint32 i = 0; i < epixmap->BitsLength(); i += 3, tmp += 3, src += 3)
 				{
 					tmp[0] = src[2];
 					tmp[1] = src[1];
@@ -1345,14 +1345,14 @@ LRESULT _etk_draw_epixmap(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callb
 			}
 			break;
 
-		case E_RGB24:
+		case B_RGB24:
 			bits = (void*)epixmap->Bits();
 			bitsInfo.bmiHeader.biBitCount = 24;
 			bitsInfo.bmiHeader.biSizeImage = (DWORD)epixmap->BitsLength();
 			break;
 
-		case E_RGB32:
-		case E_RGBA32:
+		case B_RGB32:
+		case B_RGBA32:
 			bits = (void*)epixmap->Bits();
 			bitsInfo.bmiHeader.biBitCount = 32;
 			bitsInfo.bmiHeader.biCompression = BI_RGB;
@@ -1365,7 +1365,7 @@ LRESULT _etk_draw_epixmap(EWin32GraphicsEngine *win32Engine, etk_win32_gdi_callb
 
 	if(bits == NULL)
 	{
-		ETK_WARNING("[GRAPHICS]: %s --- Unsupported color space (0x%x).", __PRETTY_FUNCTION__, epixmap->ColorSpace());
+		BHAPI_WARNING("[GRAPHICS]: %s --- Unsupported color space (0x%x).", __PRETTY_FUNCTION__, epixmap->ColorSpace());
 		return FALSE;
 	}
 

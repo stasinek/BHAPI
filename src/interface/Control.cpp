@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 #include "./../kernel/OS.h"
 #include "./../app/Looper.h"
 
@@ -35,65 +35,65 @@
 #include "Control.h"
 
 
-EControl::EControl(ERect frame, const char *name, const char *label,
-		   EMessage *message, euint32 resizeMode, euint32 flags)
-	: EView(frame, name, resizeMode, flags), EInvoker(message, NULL, NULL),
-	  fLabel(NULL), fValue(E_CONTROL_OFF), fFocusChanging(false)
+BControl::BControl(BRect frame, const char *name, const char *label,
+		   BMessage *message, b_uint32 resizeMode, b_uint32 flags)
+	: BView(frame, name, resizeMode, flags), BInvoker(message, NULL, NULL),
+	  fLabel(NULL), fValue(B_CONTROL_OFF), fFocusChanging(false)
 {
-	if(label) fLabel = EStrdup(label);
+	if(label) fLabel = b_strdup(label);
 }
 
 
-EControl::~EControl()
+BControl::~BControl()
 {
 	if(fLabel) delete[] fLabel;
 }
 
 
 void
-EControl::SetLabel(const char *label)
+BControl::SetLabel(const char *label)
 {
 	if(fLabel) delete[] fLabel;
 	if(label)
-		fLabel = EStrdup(label);
+		fLabel = b_strdup(label);
 	else
 		fLabel = NULL;
 }
 
 
 const char*
-EControl::Label() const
+BControl::Label() const
 {
 	return fLabel;
 }
 
 
 void
-EControl::SetValue(eint32 value)
+BControl::SetValue(b_int32 value)
 {
 	if(fValue != value)
 	{
 		fValue = value;
-		if((Flags() & E_WILL_DRAW) && Window() != NULL) Draw(Bounds());
+		if((Flags() & B_WILL_DRAW) && Window() != NULL) Draw(Bounds());
 	}
 }
 
 
-eint32
-EControl::Value() const
+b_int32
+BControl::Value() const
 {
 	return fValue;
 }
 
 
-e_status_t
-EControl::Invoke(const EMessage *aMsg)
+b_status_t
+BControl::Invoke(const BMessage *aMsg)
 {
 	bool IsNotify = false;
-	euint32 kind = InvokeKind(&IsNotify);
+	b_uint32 kind = InvokeKind(&IsNotify);
       
-	EMessage msg(kind);
-	e_status_t status = E_BAD_VALUE;
+	BMessage msg(kind);
+	b_status_t status = B_BAD_VALUE;
       
 	if(!aMsg && !IsNotify) aMsg = Message();
 
@@ -106,9 +106,9 @@ EControl::Invoke(const EMessage *aMsg)
 		msg = *aMsg;
 	}
 
-	msg.AddInt64("when", e_real_time_clock_usecs());
+	msg.AddInt64("when", b_real_time_clock_usecs());
 	msg.AddPointer("source", this);
-	if(aMsg) status = EInvoker::Invoke(&msg);
+	if(aMsg) status = BInvoker::Invoke(&msg);
 
 	if(IsNotify) SendNotices(kind, &msg);
 
@@ -117,34 +117,34 @@ EControl::Invoke(const EMessage *aMsg)
 
 
 void
-EControl::AttachedToWindow()
+BControl::AttachedToWindow()
 {
 	if(Target() == NULL) SetTarget(Window());
 }
 
 
 void
-EControl::DetachedFromWindow()
+BControl::DetachedFromWindow()
 {
 	if(Target() == Window()) SetTarget(NULL);
 }
 
 
 void
-EControl::MakeFocus(bool focusState)
+BControl::MakeFocus(bool focusState)
 {
 	if(IsFocus() != focusState)
 	{
-		EView::MakeFocus(focusState);
+		BView::MakeFocus(focusState);
 
-		if(IsVisible() && (Flags() & E_WILL_DRAW))
+		if(IsVisible() && (Flags() & B_WILL_DRAW))
 		{
-			ERegion aRegion = VisibleBoundsRegion();
+			BRegion aRegion = VisibleBoundsRegion();
 			if(aRegion.CountRects() <= 0) return;
 
 			fFocusChanging = true;
-			if(Flags() & E_UPDATE_WITH_REGION)
-				for(eint32 i = 0; i < aRegion.CountRects(); i++) Draw(aRegion.RectAt(i));
+			if(Flags() & B_UPDATE_WITH_REGION)
+				for(b_int32 i = 0; i < aRegion.CountRects(); i++) Draw(aRegion.RectAt(i));
 			else
 				Draw(aRegion.Frame());
 			fFocusChanging = false;
@@ -154,14 +154,14 @@ EControl::MakeFocus(bool focusState)
 
 
 bool
-EControl::IsFocusChanging() const
+BControl::IsFocusChanging() const
 {
 	return fFocusChanging;
 }
 
 
 void
-EControl::SetValueNoUpdate(eint32 value)
+BControl::SetValueNoUpdate(b_int32 value)
 {
 	fValue = value;
 }

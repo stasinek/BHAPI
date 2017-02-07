@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -33,60 +33,60 @@
 #include "Screen.h"
 #include "Window.h"
 
-EScreen::EScreen(euint32 id)
+BScreen::BScreen(b_uint32 id)
 	: fID(id)
 {
 	// TODO
 }
 
 
-EScreen::EScreen(EWindow *win)
-	: fID(E_MAXUINT32)
+BScreen::BScreen(BWindow *win)
+	: fID(B_MAXUINT32)
 {
 	// TODO
 	if(win) fID = 0;
 }
 
 
-EScreen::~EScreen()
+BScreen::~BScreen()
 {
 	// TODO
 }
 
 
 bool
-EScreen::IsValid() const
+BScreen::IsValid() const
 {
 	// TODO
 	if(fID != 0) return false;
-	return(!(etk_app == NULL || etk_app->fGraphicsEngine == NULL));
+	return(!(bhapi_app == NULL || bhapi_app->fGraphicsEngine == NULL));
 }
 
 
-e_status_t
-EScreen::SetToNext()
+b_status_t
+BScreen::SetToNext()
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-ERect
-EScreen::Frame() const
+BRect
+BScreen::Frame() const
 {
-	ERect r;
-	if(fID == 0 && !(etk_app == NULL || etk_app->fGraphicsEngine == NULL))
+	BRect r;
+	if(fID == 0 && !(bhapi_app == NULL || bhapi_app->fGraphicsEngine == NULL))
 	{
-		euint32 scrW = 0, scrH = 0;
-		etk_app->fGraphicsEngine->GetDesktopBounds(&scrW, &scrH);
+		b_uint32 scrW = 0, scrH = 0;
+		bhapi_app->fGraphicsEngine->GetDesktopBounds(&scrW, &scrH);
 		if(scrW > 0 && scrH > 0) r.Set(0, 0, (float)(scrW - 1), (float)(scrH - 1));
 	}
 	return r;
 }
 
 
-euint32
-EScreen::ID() const
+b_uint32
+BScreen::ID() const
 {
 	return fID;
 }

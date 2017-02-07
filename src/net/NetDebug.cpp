@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -32,35 +32,35 @@
 
 #include "./../support/Autolock.h"
 #include "./../support/SimpleLocker.h"
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 
 #include "NetDebug.h"
 
-static ESimpleLocker _e_net_locker(true);
+static BSimpleLocker _e_net_locker(true);
 static bool _e_net_enabled = false;
 
 
 void
-ENetDebug::Enable(bool state)
+BNetDebug::Enable(bool state)
 {
-	EAutolock <ESimpleLocker> autolock(_e_net_locker);
+	BAutolock <BSimpleLocker> autolock(_e_net_locker);
 	if(autolock.IsLocked()) _e_net_enabled = state;
 }
 
 
 bool
-ENetDebug::IsEnabled()
+BNetDebug::IsEnabled()
 {
 	return _e_net_enabled;
 }
 
 
 void
-ENetDebug::Debug(const char *format, ...)
+BNetDebug::Debug(const char *format, ...)
 {
 	if(!format) return;
 
-	EAutolock <ESimpleLocker> autolock(_e_net_locker);
+	BAutolock <BSimpleLocker> autolock(_e_net_locker);
 	if(!autolock.IsLocked() || !_e_net_enabled) return;
 
 	va_list args;
@@ -68,7 +68,7 @@ ENetDebug::Debug(const char *format, ...)
 	char *buffer = NULL;
 
 	va_start(args, format);
-	buffer = e_strdup_vprintf(format, args);
+	buffer = b_strdup_vprintf(format, args);
 	va_end(args);
 
 	if(buffer == NULL) return;
@@ -79,11 +79,11 @@ ENetDebug::Debug(const char *format, ...)
 
 
 void
-ENetDebug::Print(const char *string)
+BNetDebug::Print(const char *string)
 {
 	if(string == NULL || *string == 0) return;
 
-	EAutolock <ESimpleLocker> autolock(_e_net_locker);
+	BAutolock <BSimpleLocker> autolock(_e_net_locker);
 	if(!autolock.IsLocked() || !_e_net_enabled) return;
 
 	fputs(string, stderr);
@@ -91,11 +91,11 @@ ENetDebug::Print(const char *string)
 
 
 void
-ENetDebug::Dump(const char *data, size_t len, const char *title)
+BNetDebug::Dump(const char *data, size_t len, const char *title)
 {
 	if(!data || len == 0) return;
 
-	EAutolock <ESimpleLocker> autolock(_e_net_locker);
+	BAutolock <BSimpleLocker> autolock(_e_net_locker);
 	if(!autolock.IsLocked() || !_e_net_enabled) return;
 
 	fprintf(stderr, "[NET]: -------- %s (START) --------\n", title ? title : "No title");
@@ -104,7 +104,7 @@ ENetDebug::Dump(const char *data, size_t len, const char *title)
 	{
 		for(int i = 0; i < 16 && len > 0; i++, len--, data++)
 		{
-			fprintf(stderr, "%02x", (euint8)*data);
+			fprintf(stderr, "%02x", (b_uint8)*data);
 			if(!(i == 15 || len == 1)) fputc(' ', stderr);
 		}
 		fputs("\n", stderr);

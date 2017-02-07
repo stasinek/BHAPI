@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,33 +28,33 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_CURSOR_H__
-#define __ETK_CURSOR_H__
+#ifndef __BHAPI_CURSOR_H__
+#define __BHAPI_CURSOR_H__
 
 #include "./../support/Archivable.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK ECursor : public EArchivable {
+class _IMPEXP_BHAPI BCursor : public BArchivable {
 public:
-	ECursor(const void *cursorData);
-	ECursor(const ECursor &cursor);
-	virtual ~ECursor();
+    BCursor(const void *cursorData);
+    BCursor(const BCursor &cursor);
+    virtual ~BCursor();
 
-	ECursor		&operator=(const ECursor &from);
-	bool		operator==(const ECursor &other) const;
-	bool		operator!=(const ECursor &other) const;
+    BCursor		&operator=(const BCursor &from);
+    bool		operator==(const BCursor &other) const;
+    bool		operator!=(const BCursor &other) const;
 
 	const void 	*Data() const;
-	euint32		DataLength() const;
+    b_uint32		DataLength() const;
 
-	euint8		ColorDepth() const;
-	euint8		Width() const;
-	euint8		Height() const;
+    b_uint8		ColorDepth() const;
+    b_uint8		Width() const;
+    b_uint8		Height() const;
 
-	euint16		Spot() const;
-	euint8		SpotX() const;
-	euint8		SpotY() const;
+    b_uint16		Spot() const;
+    b_uint8		SpotX() const;
+    b_uint8		SpotY() const;
 
 	const void	*Bits() const;
 	const void	*Mask() const;
@@ -64,25 +64,25 @@ private:
 };
 
 
-inline euint8 ECursor::SpotX() const
+inline b_uint8 BCursor::SpotX() const
 {
 	return(Spot() >> 8);
 }
 
 
-inline euint8 ECursor::SpotY() const
+inline b_uint8 BCursor::SpotY() const
 {
 	return(Spot() & 0xff);
 }
 
 
-extern _IMPEXP_ETK const ECursor *E_CURSOR_SYSTEM_DEFAULT;
-extern _IMPEXP_ETK const ECursor *E_CURSOR_HAND;
-extern _IMPEXP_ETK const ECursor *E_CURSOR_HAND_MOVE;
-extern _IMPEXP_ETK const ECursor *E_CURSOR_I_BEAM;
+extern _IMPEXP_BHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT;
+extern _IMPEXP_BHAPI const BCursor *B_CURSOR_HAND;
+extern _IMPEXP_BHAPI const BCursor *B_CURSOR_HAND_MOVE;
+extern _IMPEXP_BHAPI const BCursor *B_CURSOR_I_BEAM;
 
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_CURSOR_H__ */
+#endif /* __BHAPI_CURSOR_H__ */
 

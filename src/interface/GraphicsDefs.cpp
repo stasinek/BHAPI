@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -30,37 +30,37 @@
 #include "GraphicsDefs.h"
 #include "Point.h"
 
-extern _IMPEXP_ETK const EPoint E_ORIGIN(0, 0);
+extern _IMPEXP_BHAPI const BPoint B_ORIGIN(0, 0);
 
 extern "C" {
 
-extern _IMPEXP_ETK const e_pattern E_SOLID_HIGH = e_make_pattern(0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff);
-extern _IMPEXP_ETK const e_pattern E_MIXED_COLORS = e_make_pattern(0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55);
-extern _IMPEXP_ETK const e_pattern E_SOLID_LOW = e_make_pattern(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
+extern _IMPEXP_BHAPI const b_pattern B_SOLID_HIGH = b_makb_pattern(0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff);
+extern _IMPEXP_BHAPI const b_pattern B_MIXED_COLORS = b_makb_pattern(0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55);
+extern _IMPEXP_BHAPI const b_pattern B_SOLID_LOW = b_makb_pattern(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
-extern _IMPEXP_ETK const e_rgb_color E_TRANSPARENT_COLOR = e_make_rgb_color(233, 233, 233, 255);
+extern _IMPEXP_BHAPI const b_rgb_color B_TRANSPARENT_COLOR = b_makb_rgb_color(233, 233, 233, 255);
 
-#ifdef ETK_BIG_ENDIAN
-extern _IMPEXP_ETK const euint32 E_TRANSPARENT_MAGIC_RGBA32 = 0xE9E9E9FF;
+#ifdef BHAPI_BIG_ENDIAN
+extern _IMPEXP_BHAPI const b_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xE9E9E9FF;
 #else
-extern _IMPEXP_ETK const euint32 E_TRANSPARENT_MAGIC_RGBA32 = 0xFFE9E9E9;
+extern _IMPEXP_BHAPI const b_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xFFE9E9E9;
 #endif
 
 
-_IMPEXP_ETK euint8 etk_find_index_for_color(euint8 r, euint8 g, euint8 b)
+_IMPEXP_BHAPI b_uint8 bhapi_find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b)
 {
 	// RGB: 3-3-2
 	return((r & 0xe0) | ((g >> 3) & 0x1c) | (b >> 6));
 }
 
 
-_IMPEXP_ETK e_rgb_color etk_find_color_for_index(euint8 index)
+_IMPEXP_BHAPI b_rgb_color bhapi_find_color_for_index(b_uint8 index)
 {
 	// RGB: 3-3-2
-	euint8 r = index & 0xe0;
-	euint8 g = (index & 0x1c) << 3;
-	euint8 b = (index & 0x03) << 6;
-	return e_make_rgb_color(r | (r >> 3) | (r >> 6),
+	b_uint8 r = index & 0xe0;
+	b_uint8 g = (index & 0x1c) << 3;
+	b_uint8 b = (index & 0x03) << 6;
+	return b_makb_rgb_color(r | (r >> 3) | (r >> 6),
 	       			g | (g >> 3) | (g >> 6),
 				b | (b >> 2) | (b >> 4) | (b >> 6),
 				0xff);
@@ -70,8 +70,8 @@ _IMPEXP_ETK e_rgb_color etk_find_color_for_index(euint8 index)
 } // extern "C"
 
 
-e_rgb_color&
-e_rgb_color::mix(euint8 r, euint8 g, euint8 b, euint8 a)
+b_rgb_color&
+b_rgb_color::mix(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
 {
 	if(a == 0xff)
 	{
@@ -79,67 +79,67 @@ e_rgb_color::mix(euint8 r, euint8 g, euint8 b, euint8 a)
 	}
 	else if(a != 0)
 	{
-		red = (euint8)(((euint16)red * ((euint16)0xff - (euint16)a) + (euint16)r * (euint16)a) / (euint16)0xff);
-		green = (euint8)(((euint16)green * ((euint16)0xff - (euint16)a) + (euint16)g * (euint16)a) / (euint16)0xff);
-		blue = (euint8)(((euint16)blue * ((euint16)0xff - (euint16)a) + (euint16)b * (euint16)a) / (euint16)0xff);
+		red = (b_uint8)(((b_uint16)red * ((b_uint16)0xff - (b_uint16)a) + (b_uint16)r * (b_uint16)a) / (b_uint16)0xff);
+		green = (b_uint8)(((b_uint16)green * ((b_uint16)0xff - (b_uint16)a) + (b_uint16)g * (b_uint16)a) / (b_uint16)0xff);
+		blue = (b_uint8)(((b_uint16)blue * ((b_uint16)0xff - (b_uint16)a) + (b_uint16)b * (b_uint16)a) / (b_uint16)0xff);
 	}
 
 	return *this;
 }
 
 
-e_rgb_color&
-e_rgb_color::mix(const e_rgb_color &o)
+b_rgb_color&
+b_rgb_color::mix(const b_rgb_color &o)
 {
 	return mix(o.red, o.green, o.blue, o.alpha);
 }
 
 
-e_rgb_color&
-e_rgb_color::mix_copy(euint8 r, euint8 g, euint8 b, euint8 a) const
+b_rgb_color&
+b_rgb_color::mix_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const
 {
-	e_rgb_color color = *this;
+	b_rgb_color color = *this;
 	return color.mix(r, g, b, a);
 }
 
 
-e_rgb_color&
-e_rgb_color::mix_copy(const e_rgb_color &o) const
+b_rgb_color&
+b_rgb_color::mix_copy(const b_rgb_color &o) const
 {
-	e_rgb_color color = *this;
+	b_rgb_color color = *this;
 	return color.mix(o.red, o.green, o.blue, o.alpha);
 }
 
 
-e_rgb_color&
-e_rgb_color::disable(euint8 r, euint8 g, euint8 b, euint8 a)
+b_rgb_color&
+b_rgb_color::disable(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
 {
-	e_rgb_color color;
+	b_rgb_color color;
 	color.set_to(r, g, b, a);
 	return disable(color);
 }
 
 
-e_rgb_color&
-e_rgb_color::disable(const e_rgb_color &background)
+b_rgb_color&
+b_rgb_color::disable(const b_rgb_color &background)
 {
 	*this = background.mix_copy(red, green, blue, 150);
 	return mix(0, 0, 0, 20);
 }
 
 
-e_rgb_color&
-e_rgb_color::disable_copy(euint8 r, euint8 g, euint8 b, euint8 a) const
+b_rgb_color&
+b_rgb_color::disable_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const
 {
-	e_rgb_color color = *this;
+	b_rgb_color color = *this;
 	return color.disable(r, g, b, a);
 }
 
 
-e_rgb_color&
-e_rgb_color::disable_copy(const e_rgb_color &background) const
+b_rgb_color&
+b_rgb_color::disable_copy(const b_rgb_color &background) const
 {
-	e_rgb_color color = *this;
+	b_rgb_color color = *this;
 	return color.disable(background.red, background.green, background.blue, background.alpha);
 }
 

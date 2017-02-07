@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,41 +28,41 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_MESSENGER_H__
-#define __ETK_MESSENGER_H__
+#ifndef __BHAPI_MESSENGER_H__
+#define __BHAPI_MESSENGER_H__
 
 #include "./../app/Looper.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EMessenger {
+class _IMPEXP_BHAPI BMessenger {
 public:
-	EMessenger();
-	EMessenger(const char *signature, eint64 team = 0, e_status_t *perr = NULL);
-	EMessenger(const EHandler *handler, const ELooper *looper = NULL, e_status_t *perr = NULL);
+	BMessenger();
+    BMessenger(const char *signature, b_int64 team = 0, b_status_t *perr = NULL);
+	BMessenger(const BHandler *handler, const BLooper *looper = NULL, b_status_t *perr = NULL);
 
-	EMessenger(const EMessenger &msgr);
-	~EMessenger();
+	BMessenger(const BMessenger &msgr);
+	~BMessenger();
 
 	bool		IsTargetLocal() const;
 	bool		IsAtTargetLooperThread() const;
-	EHandler*	Target(ELooper **looper) const;
+	BHandler*	Target(BLooper **looper) const;
 
 	bool		LockTarget() const;
-	e_status_t	LockTargetWithTimeout(e_bigtime_t timeout) const;
+    b_status_t	LockTargetWithTimeout(b_bigtime_t timeout) const;
 
-	e_status_t	SendMessage(euint32 command, EHandler *reply_to = NULL) const;
-	e_status_t	SendMessage(const EMessage *a_message, EHandler *reply_to = NULL,
-				    e_bigtime_t timeout = E_INFINITE_TIMEOUT) const;
-	e_status_t	SendMessage(const EMessage *a_message, EMessage *reply_message,
-				    e_bigtime_t sendTimeout = E_INFINITE_TIMEOUT,
-				    e_bigtime_t replyTimeout = E_INFINITE_TIMEOUT) const;
+    b_status_t	SendMessage(b_uint32 command, BHandler *reply_to = NULL) const;
+	b_status_t	SendMessage(const BMessage *a_message, BHandler *reply_to = NULL,
+				    b_bigtime_t timeout = B_INFINITE_TIMEOUT) const;
+	b_status_t	SendMessage(const BMessage *a_message, BMessage *reply_message,
+				    b_bigtime_t sendTimeout = B_INFINITE_TIMEOUT,
+				    b_bigtime_t replyTimeout = B_INFINITE_TIMEOUT) const;
 
 	bool		IsValid() const;
 
-	EMessenger	&operator=(const EMessenger &from);
-	bool		operator==(const EMessenger &other) const;
-	bool		operator!=(const EMessenger &other) const;
+	BMessenger	&operator=(const BMessenger &from);
+	bool		operator==(const BMessenger &other) const;
+	bool		operator!=(const BMessenger &other) const;
 
 	size_t		FlattenedSize() const;
 	bool		Flatten(char *buffer, size_t bufferSize) const;
@@ -71,28 +71,28 @@ public:
 	void		PrintToStream() const;
 
 private:
-	friend class EMessage;
-	friend class EInvoker;
+	friend class BMessage;
+	friend class BInvoker;
 
-	EMessenger(eint64 targetTeam, euint64 targetToken, e_bigtime_t timestamp, e_status_t *perr);
+    BMessenger(b_int64 targetTeam, b_uint64 targetToken, b_bigtime_t timestamp, b_status_t *perr);
 
-	euint64 fHandlerToken;
-	euint64 fLooperToken;
+    b_uint64 fHandlerToken;
+    b_uint64 fLooperToken;
 
 	void *fPort;
 	void *fSem;
 
-	eint64 fTargetTeam;
+    b_int64 fTargetTeam;
 
-	void InitData(const EHandler *handler, const ELooper *looper, e_status_t *perr);
+	void InitData(const BHandler *handler, const BLooper *looper, b_status_t *perr);
 
-	static e_status_t _SendMessageToPort(void *port, const EMessage *msg, euint32 flags, e_bigtime_t timeout);
-	static EMessage* _GetMessageFromPort(void *port, euint32 flags, e_bigtime_t timeout, e_status_t *err);
+    static b_status_t _SendMessageToPort(void *port, const BMessage *msg, b_uint32 flags, b_bigtime_t timeout);
+    static BMessage* _GetMessageFromPort(void *port, b_uint32 flags, b_bigtime_t timeout, b_status_t *err);
 
-	e_status_t _SendMessage(const EMessage *a_message, euint64 replyToken, e_bigtime_t timeout) const;
+    b_status_t _SendMessage(const BMessage *a_message, b_uint64 replyToken, b_bigtime_t timeout) const;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_MESSENGER_H__ */
+#endif /* __BHAPI_MESSENGER_H__ */
 

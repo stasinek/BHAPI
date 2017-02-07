@@ -43620,80 +43620,32 @@ extern "C" {
 # 1 "../src/interface/win32/./../../support/Locker.h" 1
 # 34 "../src/interface/win32/./../../support/Locker.h"
 # 1 "../src/interface/win32/./../../support/./SupportDefs.h" 1
-# 89 "../src/interface/win32/./../../support/./SupportDefs.h"
-# 1 "../src/interface/win32/./../../support/./Errors.h" 1
-# 32 "../src/interface/win32/./../../support/./Errors.h"
+# 34 "../src/interface/win32/./../../support/./SupportDefs.h"
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
+# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
+# 35 "../src/interface/win32/./../../support/./SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
+# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+extern "C" {
+# 24 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
+
+  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
+
+
+}
+# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+typedef struct {
+  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
+  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
+} max_align_t;
+# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
+# 36 "../src/interface/win32/./../../support/./SupportDefs.h" 2
+# 96 "../src/interface/win32/./../../support/./SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 33 "../src/interface/win32/./../../support/./Errors.h" 2
-# 41 "../src/interface/win32/./../../support/./Errors.h"
-enum {
- E_NO_MEMORY = (-2147483647 - 1),
- E_IO_ERROR,
- E_PERMISSION_DENIED,
- E_BAD_INDEX,
- E_BAD_TYPE,
- E_BAD_VALUE,
- E_MISMATCHED_VALUES,
- E_NAME_NOT_FOUND,
- E_NAME_IN_USE,
- E_TIMED_OUT,
- E_INTERRUPTED,
- E_WOULD_BLOCK,
- E_CANCELED,
- E_NO_INIT,
- E_BUSY,
- E_NOT_ALLOWED,
-
- E_ERROR = -1,
- E_OK = 1,
- E_NO_ERROR = 1
-};
-
-
-enum {
- E_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
- E_NO_MORE_SEMS,
-
- E_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
- E_NO_MORE_THREADS,
- E_BAD_THREAD_STATE,
- E_BAD_TEAM_ID,
- E_NO_MORE_TEAMS,
-
- E_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
- E_NO_MORE_PORTS,
-
- E_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
- E_BAD_ADDRESS,
- E_NOT_AN_EXECUTABLE,
- E_MISSING_LIBRARY,
- E_MISSING_SYMBOL,
-
- E_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
-};
-
-
-enum {
- E_BAD_REPLY = (-2147483647 - 1) + 0x2000,
- E_DUPLICATE_REPLY,
- E_MESSAGE_TO_SELF,
- E_BAD_HANDLER,
- E_ALREADY_RUNNING,
-};
-
-
-enum {
- E_FILE_ERROR = (-2147483647 - 1) + 0x3000,
- E_ENTRY_NOT_FOUND,
- E_LINK_LIMIT,
- E_NAME_TOO_LONG,
-};
-# 90 "../src/interface/win32/./../../support/./SupportDefs.h" 2
-
-
-
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 94 "../src/interface/win32/./../../support/./SupportDefs.h" 2
+# 97 "../src/interface/win32/./../../support/./SupportDefs.h" 2
 
 
 
@@ -43740,61 +43692,61 @@ extern long double __attribute__((__cdecl__)) _chgsignl (long double);
 
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 100 "../src/interface/win32/./../../support/./SupportDefs.h" 2
-# 111 "../src/interface/win32/./../../support/./SupportDefs.h"
-typedef int eunichar32;
-typedef short eunichar;
+# 103 "../src/interface/win32/./../../support/./SupportDefs.h" 2
+# 114 "../src/interface/win32/./../../support/./SupportDefs.h"
+typedef int b_unichar32;
+typedef short b_unichar;
 
-typedef char eint8;
-typedef unsigned char euint8;
-typedef short eint16;
-typedef unsigned short euint16;
-typedef int eint32;
-typedef unsigned int euint32;
-typedef long long eint64;
-typedef unsigned long long euint64;
+typedef char b_int8;
+typedef unsigned char b_uint8;
+typedef short b_int16;
+typedef unsigned short b_uint16;
+typedef int b_int32;
+typedef unsigned int b_uint32;
+typedef long long b_int64;
+typedef unsigned long long b_uint64;
 
-typedef eint32 e_status_t;
-typedef euint32 e_type_code;
-typedef euint32 e_perform_code;
-typedef eint64 e_bigtime_t;
-typedef eint64 e_thread_id;
-typedef size_t e_address_t;
+typedef b_int32 b_status_t;
+typedef b_uint32 b_type_code;
+typedef b_uint32 b_perform_code;
+typedef b_int64 b_bigtime_t;
+typedef b_int64 b_thread_id;
+typedef size_t b_address_t;
 
 enum {
-    E_ANY_TYPE = 'ANYT',
- E_BOOL_TYPE = 'BOOL',
- E_CHAR_TYPE = 'CHAR',
- E_DOUBLE_TYPE = 'DBLE',
- E_FLOAT_TYPE = 'FLOT',
- E_INT64_TYPE = 'LLNG',
- E_INT32_TYPE = 'LONG',
- E_INT16_TYPE = 'SHRT',
- E_INT8_TYPE = 'BYTE',
- E_MESSAGE_TYPE = 'MSGG',
- E_MESSENGER_TYPE = 'MSNG',
- E_POINTER_TYPE = 'PNTR',
- E_SIZE_T_TYPE = 'SIZT',
- E_SSIZE_T_TYPE = 'SSZT',
- E_STRING_TYPE = 'CSTR',
- E_UINT64_TYPE = 'ULLG',
- E_UINT32_TYPE = 'ULNG',
- E_UINT16_TYPE = 'USHT',
- E_UINT8_TYPE = 'UBYT',
- E_POINT_TYPE = 'SPNT',
-    E_RECT_TYPE = 'RECT',
-    E_MIME_TYPE = 'MIME',
- E_UNKNOWN_TYPE = 'UNKN'
+    B_ANY_TYPE = 'ANYT',
+    B_BOOL_TYPE = 'BOOL',
+    B_CHAR_TYPE = 'CHAR',
+    B_DOUBLE_TYPE = 'DBLE',
+    B_FLOAT_TYPE = 'FLOT',
+    B_INT64_TYPE = 'LLNG',
+    B_INT32_TYPE = 'LONG',
+    B_INT16_TYPE = 'SHRT',
+    B_INT8_TYPE = 'BYTE',
+    B_MESSAGE_TYPE = 'MSGG',
+    B_MESSENGER_TYPE = 'MSNG',
+    B_POINTER_TYPE = 'PNTR',
+    B_SIZE_T_TYPE = 'SIZT',
+    B_SSIZE_T_TYPE = 'SSZT',
+    B_STRING_TYPE = 'CSTR',
+    B_UINT64_TYPE = 'ULLG',
+    B_UINT32_TYPE = 'ULNG',
+    B_UINT16_TYPE = 'USHT',
+    B_UINT8_TYPE = 'UBYT',
+    B_POINT_TYPE = 'SPNT',
+    B_RECT_TYPE = 'RECT',
+    B_MIME_TYPE = 'MIME',
+    B_UNKNOWN_TYPE = 'UNKN'
 };
-# 252 "../src/interface/win32/./../../support/./SupportDefs.h"
+# 255 "../src/interface/win32/./../../support/./SupportDefs.h"
 extern "C" {
 
 
-extern __attribute__((dllexport)) const euint8 etk_major_version;
-extern __attribute__((dllexport)) const euint8 etk_minor_version;
-extern __attribute__((dllexport)) const euint8 etk_micro_version;
-extern __attribute__((dllexport)) const euint8 etk_interface_age;
-extern __attribute__((dllexport)) const euint16 etk_binary_age;
+extern __attribute__((dllexport)) const b_uint8 bhapi_major_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_minor_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_micro_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_interface_age;
+extern __attribute__((dllexport)) const b_uint16 bhapi_binary_age;
 
 
 }
@@ -44232,40 +44184,19 @@ typedef unsigned int GROUP;
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAProviderConfigChange(LPHANDLE lpNotificationHandle,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 # 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
-# 270 "../src/interface/win32/./../../support/./SupportDefs.h" 2
-# 293 "../src/interface/win32/./../../support/./SupportDefs.h"
+# 273 "../src/interface/win32/./../../support/./SupportDefs.h" 2
+# 296 "../src/interface/win32/./../../support/./SupportDefs.h"
 enum {
- E_SEEK_SET = 0,
- E_SEEK_CUR,
- E_SEEK_END,
+    B_SEEK_SET = 0,
+    B_SEEK_CUR,
+    B_SEEK_END,
 };
 
 
 # 1 "../src/interface/win32/./../../support/././../kernel/Debug.h" 1
 # 33 "../src/interface/win32/./../../support/././../kernel/Debug.h"
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
+# 1 "../src/interface/win32/./../../support/././../kernel/./../support/SupportDefs.h" 1
 # 34 "../src/interface/win32/./../../support/././../kernel/Debug.h" 2
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
-# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-extern "C" {
-# 24 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
-
-  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
-
-
-}
-# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-typedef struct {
-  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
-  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
-} max_align_t;
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
-# 35 "../src/interface/win32/./../../support/././../kernel/Debug.h" 2
-
 
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/new" 1 3
@@ -44772,56 +44703,121 @@ inline void operator delete[](void*, void*) noexcept { }
 }
 
 #pragma GCC visibility pop
-# 39 "../src/interface/win32/./../../support/././../kernel/Debug.h" 2
-
-
-# 1 "../src/interface/win32/./../../support/././../kernel/./../support/SupportDefs.h" 1
-# 42 "../src/interface/win32/./../../support/././../kernel/Debug.h" 2
-# 57 "../src/interface/win32/./../../support/././../kernel/Debug.h"
+# 37 "../src/interface/win32/./../../support/././../kernel/Debug.h" 2
+# 54 "../src/interface/win32/./../../support/././../kernel/Debug.h"
 extern "C" {
 
 
-typedef enum etk_debug_level {
+typedef enum bhapi_debug_level {
  DEBUG_NORMAL,
  DEBUG_OUTPUT,
  DEBUG_WARNING,
  DEBUG_ERROR
-} etk_debug_level;
+} bhapi_debug_level;
 
-__attribute__((dllexport)) void etk_debug_log(etk_debug_level level, const char *format, va_list ap);
-# 83 "../src/interface/win32/./../../support/././../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_DEBUG(const char *format, ...);
-
-
-
-__attribute__((dllexport)) void ETK_OUTPUT(const char *format, ...);
-# 103 "../src/interface/win32/./../../support/././../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_WARNING(const char *format, ...);
+__attribute__((dllexport)) void bhapi_debug_log(bhapi_debug_level level, const char *format, va_list ap);
+# 80 "../src/interface/win32/./../../support/././../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...);
 
 
 
-__attribute__((dllexport)) void ETK_ERROR(const char *format, ...);
-# 121 "../src/interface/win32/./../../support/././../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...);
+# 100 "../src/interface/win32/./../../support/././../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...);
+
+
+
+__attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...);
+# 118 "../src/interface/win32/./../../support/././../kernel/Debug.h"
 }
-# 301 "../src/interface/win32/./../../support/./SupportDefs.h" 2
+# 304 "../src/interface/win32/./../../support/./SupportDefs.h" 2
+
+# 1 "../src/interface/win32/./../../support/./Errors.h" 1
+# 32 "../src/interface/win32/./../../support/./Errors.h"
+# 1 "../src/interface/win32/./../../support/./SupportDefs.h" 1
+# 33 "../src/interface/win32/./../../support/./Errors.h" 2
+# 41 "../src/interface/win32/./../../support/./Errors.h"
+enum {
+    B_NO_MEMORY = (-2147483647 - 1),
+    B_IO_ERROR,
+    B_PERMISSION_DENIED,
+    B_BAD_INDEX,
+    B_BAD_TYPE,
+    B_BAD_VALUE,
+    B_MISMATCHED_VALUES,
+    B_NAME_NOT_FOUND,
+    B_NAME_IN_USE,
+    B_TIMED_OUT,
+    B_INTERRUPTED,
+    B_WOULD_BLOCK,
+    B_CANCELED,
+    B_NO_INIT,
+    B_BUSY,
+    B_NOT_ALLOWED,
+
+    B_ERROR = -1,
+    B_OK = 1,
+    B_NO_ERROR = 1
+};
+
+
+enum {
+    B_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
+    B_NO_MORE_SEMS,
+
+    B_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
+    B_NO_MORE_THREADS,
+    B_BAD_THREAD_STATE,
+    B_BAD_TEAM_ID,
+    B_NO_MORE_TEAMS,
+
+    B_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
+    B_NO_MORE_PORTS,
+
+    B_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
+    B_BAD_ADDRESS,
+    B_NOT_AN_EXECUTABLE,
+    B_MISSING_LIBRARY,
+    B_MISSING_SYMBOL,
+
+    B_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
+};
+
+
+enum {
+    B_BAD_REPLY = (-2147483647 - 1) + 0x2000,
+    B_DUPLICATE_REPLY,
+    B_MESSAGE_TO_SELF,
+    B_BAD_HANDLER,
+    B_ALREADY_RUNNING,
+};
+
+
+enum {
+    B_FILE_ERROR = (-2147483647 - 1) + 0x3000,
+    B_ENTRY_NOT_FOUND,
+    B_LINK_LIMIT,
+    B_NAME_TOO_LONG,
+};
+# 306 "../src/interface/win32/./../../support/./SupportDefs.h" 2
 # 35 "../src/interface/win32/./../../support/Locker.h" 2
 
 
 
-class __attribute__((dllexport)) ELocker {
+class __attribute__((dllexport)) BLocker {
 public:
- ELocker();
- virtual ~ELocker();
+    BLocker();
+    virtual ~BLocker();
 
  bool Lock();
  void Unlock();
- e_status_t LockWithTimeout(e_bigtime_t microseconds);
+    b_status_t LockWithTimeout(b_bigtime_t microseconds);
 
 
 
 
 
- eint64 CountLocks() const;
+    b_int64 CountLocks() const;
  bool IsLockedByCurrentThread() const;
 
 private:
@@ -44839,50 +44835,50 @@ private:
 
 
 
-class __attribute__((dllexport)) EList {
+class __attribute__((dllexport)) BList {
 public:
 
 
 
 
 
- EList(eint32 initialAllocSize = 0);
- EList(eint32 initialAllocSize, eint32 nullItems);
+    BList(b_int32 initialAllocSize = 0);
+    BList(b_int32 initialAllocSize, b_int32 nullItems);
 
 
 
- EList(const EList &list);
- EList &operator=(const EList &from);
+    BList(const BList &list);
+    BList &operator=(const BList &from);
 
- virtual ~EList();
+    virtual ~BList();
 
  bool AddItem(void *item);
- bool AddItem(void *item, eint32 atIndex);
- bool AddList(const EList *newItems);
- bool AddList(const EList *newItems, eint32 atIndex);
+    bool AddItem(void *item, b_int32 atIndex);
+    bool AddList(const BList *newItems);
+    bool AddList(const BList *newItems, b_int32 atIndex);
 
 
  bool RemoveItem(void *item);
- void *RemoveItem(eint32 index);
- bool RemoveItems(eint32 index, eint32 count);
+    void *RemoveItem(b_int32 index);
+    bool RemoveItems(b_int32 index, b_int32 count);
 
 
- bool ReplaceItem(eint32 index, void *newItem, void **oldItem = __null);
+    bool ReplaceItem(b_int32 index, void *newItem, void **oldItem = __null);
 
  void MakeEmpty();
 
- bool SwapItems(eint32 indexA, eint32 indexB);
- bool MoveItem(eint32 fromIndex, eint32 toIndex);
+    bool SwapItems(b_int32 indexA, b_int32 indexB);
+    bool MoveItem(b_int32 fromIndex, b_int32 toIndex);
 
  void SortItems(int (*cmp)(const void *a, const void *b));
 
- void *ItemAt(eint32 index) const;
+    void *ItemAt(b_int32 index) const;
  void *FirstItem() const;
  void *LastItem() const;
 
  bool HasItem(void *item) const;
- eint32 IndexOf(void *item) const;
- eint32 CountItems() const;
+    b_int32 IndexOf(void *item) const;
+    b_int32 CountItems() const;
  bool IsEmpty() const;
 
  void DoForEach(bool (*func)(void *data));
@@ -44894,11 +44890,11 @@ public:
 private:
  void **fObjects;
 
- eint32 fItemCount;
- eint32 fItemReal;
- eint32 fMinimumCount;
+    b_int32 fItemCount;
+    b_int32 fItemReal;
+    b_int32 fMinimumCount;
 
- bool _Resize(eint32 count);
+    bool _Resize(b_int32 count);
 };
 # 34 "../src/interface/win32/./../../add-ons/graphics/./../../interface/Window.h" 2
 # 1 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./GraphicsDefs.h" 1
@@ -44907,26 +44903,26 @@ private:
 # 34 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./GraphicsDefs.h" 2
 
 
-typedef struct e_pattern {
- euint8 data[8];
+typedef struct b_pattern {
+    b_uint8 data[8];
 
- inline bool operator==(const e_pattern& o) const
+ inline bool operator==(const b_pattern& o) const
  {
-  return (*((const euint64*)this)) == (*((const euint64*)&o));
+        return (*((const b_uint64*)this)) == (*((const b_uint64*)&o));
  }
 
- inline bool operator!=(const e_pattern& o) const
+ inline bool operator!=(const b_pattern& o) const
  {
-  return (*((const euint64*)this)) != (*((const euint64*)&o));
+        return (*((const b_uint64*)this)) != (*((const b_uint64*)&o));
  }
 
-} e_pattern;
+} b_pattern;
 
 
 
-inline e_pattern e_make_pattern(euint8 d1, euint8 d2, euint8 d3, euint8 d4, euint8 d5, euint8 d6, euint8 d7, euint8 d8)
+inline b_pattern b_makb_pattern(b_uint8 d1, b_uint8 d2, b_uint8 d3, b_uint8 d4, b_uint8 d5, b_uint8 d6, b_uint8 d7, b_uint8 d8)
 {
- e_pattern p;
+ b_pattern p;
  p.data[0] = d1;
  p.data[1] = d2;
  p.data[2] = d3;
@@ -44944,101 +44940,101 @@ inline e_pattern e_make_pattern(euint8 d1, euint8 d2, euint8 d3, euint8 d4, euin
 extern "C" {
 
 
-extern __attribute__((dllexport)) const e_pattern E_SOLID_HIGH;
-extern __attribute__((dllexport)) const e_pattern E_MIXED_COLORS;
-extern __attribute__((dllexport)) const e_pattern E_SOLID_LOW;
+extern __attribute__((dllexport)) const b_pattern B_SOLID_HIGH;
+extern __attribute__((dllexport)) const b_pattern B_MIXED_COLORS;
+extern __attribute__((dllexport)) const b_pattern B_SOLID_LOW;
 
 
 }
 
 
 
-typedef struct e_rgb_color {
- euint8 red;
- euint8 green;
- euint8 blue;
- euint8 alpha;
+typedef struct b_rgb_color {
+    b_uint8 red;
+    b_uint8 green;
+    b_uint8 blue;
+    b_uint8 alpha;
 
 
- inline e_rgb_color& set_to(euint8 r, euint8 g, euint8 b, euint8 a = 0xff)
+    inline b_rgb_color& set_to(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 0xff)
  {
   red = r; green = g; blue = b; alpha = a;
   return *this;
  }
 
- inline e_rgb_color& set_to(const e_rgb_color& o)
+ inline b_rgb_color& set_to(const b_rgb_color& o)
  {
   return set_to(o.red, o.green, o.blue, o.alpha);
  }
 
- inline bool operator==(const e_rgb_color& o) const
+ inline bool operator==(const b_rgb_color& o) const
  {
-  return(*((const euint32*)this)) == (*((const euint32*)&o));
+        return(*((const b_uint32*)this)) == (*((const b_uint32*)&o));
  }
 
- inline bool operator!=(const e_rgb_color& o) const
+ inline bool operator!=(const b_rgb_color& o) const
  {
-  return(*((const euint32*)this)) != (*((const euint32*)&o));
+        return(*((const b_uint32*)this)) != (*((const b_uint32*)&o));
  }
 
- e_rgb_color& mix(euint8 r, euint8 g, euint8 b, euint8 a);
- e_rgb_color& mix(const e_rgb_color &o);
- e_rgb_color& mix_copy(euint8 r, euint8 g, euint8 b, euint8 a) const;
- e_rgb_color& mix_copy(const e_rgb_color &o) const;
+    b_rgb_color& mix(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
+ b_rgb_color& mix(const b_rgb_color &o);
+    b_rgb_color& mix_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const;
+ b_rgb_color& mix_copy(const b_rgb_color &o) const;
 
- e_rgb_color& disable(euint8 r, euint8 g, euint8 b, euint8 a);
- e_rgb_color& disable(const e_rgb_color &background);
- e_rgb_color& disable_copy(euint8 r, euint8 g, euint8 b, euint8 a) const;
- e_rgb_color& disable_copy(const e_rgb_color &background) const;
+    b_rgb_color& disable(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
+ b_rgb_color& disable(const b_rgb_color &background);
+    b_rgb_color& disable_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const;
+ b_rgb_color& disable_copy(const b_rgb_color &background) const;
 
-} e_rgb_color;
+} b_rgb_color;
 
 
 
-inline e_rgb_color e_make_rgb_color(euint8 r, euint8 g, euint8 b, euint8 a = 0xff)
+inline b_rgb_color b_makb_rgb_color(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 0xff)
 {
- e_rgb_color c;
+ b_rgb_color c;
  c.set_to(r, g, b, a);
  return c;
 }
 
 
 
-typedef enum e_drawing_mode {
- E_OP_COPY,
- E_OP_XOR,
+typedef enum b_drawing_mode {
+    B_OP_COPY,
+    B_OP_XOR,
 
- E_OP_OVER,
- E_OP_ERASE,
- E_OP_INVERT,
- E_OP_ADD,
- E_OP_SUBTRACT,
- E_OP_BLEND,
- E_OP_MIN,
- E_OP_MAX,
- E_OP_SELECT,
- E_OP_ALPHA,
-} e_drawing_mode;
+    B_OP_OVER,
+    B_OP_ERASE,
+    B_OP_INVERT,
+    B_OP_ADD,
+    B_OP_SUBTRACT,
+    B_OP_BLEND,
+    B_OP_MIN,
+    B_OP_MAX,
+    B_OP_SELECT,
+    B_OP_ALPHA,
+} b_drawing_mode;
 
 
-typedef enum e_color_space {
- E_CMAP8 = 0,
- E_RGB32 = 1,
- E_RGBA32 = 2,
- E_RGB24 = 3,
- E_RGB24_BIG = 4,
-} e_color_space;
+typedef enum b_color_space {
+    B_CMAP8 = 0,
+    B_RGB32 = 1,
+    B_RGBA32 = 2,
+    B_RGB24 = 3,
+    B_RGB24_BIG = 4,
+} b_color_space;
 
 
 
 extern "C" {
 
 
-extern __attribute__((dllexport)) const e_rgb_color E_TRANSPARENT_COLOR;
-extern __attribute__((dllexport)) const euint32 E_TRANSPARENT_MAGIC_RGBA32;
+extern __attribute__((dllexport)) const b_rgb_color B_TRANSPARENT_COLOR;
+extern __attribute__((dllexport)) const b_uint32 B_TRANSPARENT_MAGIC_RGBA32;
 
-__attribute__((dllexport)) euint8 etk_find_index_for_color(euint8 r, euint8 g, euint8 b);
-__attribute__((dllexport)) e_rgb_color etk_find_color_for_index(euint8 index);
+__attribute__((dllexport)) b_uint8 bhapi_find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b);
+__attribute__((dllexport)) b_rgb_color bhapi_find_color_for_index(b_uint8 index);
 
 
 }
@@ -45760,176 +45756,176 @@ __extension__ long long __attribute__((__cdecl__)) llrintl (long double);
 
 
 
-class ERect;
+class BRect;
 
-class __attribute__((dllexport)) EPoint {
+class __attribute__((dllexport)) BPoint {
 public:
  float x;
  float y;
 
- EPoint();
- EPoint(float X, float Y);
- EPoint(const EPoint &pt);
+ BPoint();
+ BPoint(float X, float Y);
+ BPoint(const BPoint &pt);
 
- EPoint &operator=(const EPoint &from);
+ BPoint &operator=(const BPoint &from);
  void Set(float X, float Y);
 
- void ConstrainTo(ERect rect);
+ void ConstrainTo(BRect rect);
 
  void Ceil();
  void Floor();
  void Round();
 
- EPoint& FloorSelf();
- EPoint FloorCopy() const;
- EPoint& CeilSelf();
- EPoint CeilCopy() const;
- EPoint& RoundSelf();
- EPoint RoundCopy() const;
+ BPoint& FloorSelf();
+ BPoint FloorCopy() const;
+ BPoint& CeilSelf();
+ BPoint CeilCopy() const;
+ BPoint& RoundSelf();
+ BPoint RoundCopy() const;
 
- EPoint operator+(const EPoint &plus) const;
- EPoint operator-(const EPoint &minus) const;
- EPoint& operator+=(const EPoint &plus);
- EPoint& operator-=(const EPoint &minus);
+ BPoint operator+(const BPoint &plus) const;
+ BPoint operator-(const BPoint &minus) const;
+ BPoint& operator+=(const BPoint &plus);
+ BPoint& operator-=(const BPoint &minus);
 
- bool operator!=(const EPoint &pt) const;
- bool operator==(const EPoint &pt) const;
+ bool operator!=(const BPoint &pt) const;
+ bool operator==(const BPoint &pt) const;
 
  void PrintToStream() const;
 };
 
-extern __attribute__((dllexport)) const EPoint E_ORIGIN;
+extern __attribute__((dllexport)) const BPoint B_ORIGIN;
 # 35 "../src/interface/win32/./../../add-ons/graphics/./../../interface/././../interface/Rect.h" 2
 
 
 
-class __attribute__((dllexport)) ERect {
+class __attribute__((dllexport)) BRect {
 public:
  float left;
  float top;
  float right;
  float bottom;
 
- ERect();
- ERect(const ERect &r);
- ERect(float l, float t, float r, float b);
- ERect(EPoint leftTop, EPoint rightBottom);
+ BRect();
+ BRect(const BRect &r);
+ BRect(float l, float t, float r, float b);
+ BRect(BPoint leftTop, BPoint rightBottom);
 
- ERect &operator=(const ERect &from);
+ BRect &operator=(const BRect &from);
  void Set(float l, float t, float r, float b);
 
- EPoint LeftTop() const;
- EPoint RightBottom() const;
- EPoint LeftBottom() const;
- EPoint RightTop() const;
- EPoint Center() const;
+ BPoint LeftTop() const;
+ BPoint RightBottom() const;
+ BPoint LeftBottom() const;
+ BPoint RightTop() const;
+ BPoint Center() const;
 
- void SetLeftTop(const EPoint pt);
- void SetRightBottom(const EPoint pt);
- void SetLeftBottom(const EPoint pt);
- void SetRightTop(const EPoint pt);
+ void SetLeftTop(const BPoint pt);
+ void SetRightBottom(const BPoint pt);
+ void SetLeftBottom(const BPoint pt);
+ void SetRightTop(const BPoint pt);
 
  void SetLeftTop(float x, float y);
  void SetRightBottom(float x, float y);
  void SetLeftBottom(float x, float y);
  void SetRightTop(float x, float y);
 
- void InsetBy(EPoint pt);
+ void InsetBy(BPoint pt);
  void InsetBy(float dx, float dy);
- void OffsetBy(EPoint pt);
+ void OffsetBy(BPoint pt);
  void OffsetBy(float dx, float dy);
- void OffsetTo(EPoint pt);
+ void OffsetTo(BPoint pt);
  void OffsetTo(float x, float y);
 
  void Floor();
  void Ceil();
  void Round();
 
- ERect& InsetBySelf(EPoint pt);
- ERect& InsetBySelf(float dx, float dy);
- ERect InsetByCopy(EPoint pt) const;
- ERect InsetByCopy(float dx, float dy) const;
- ERect& OffsetBySelf(EPoint pt);
- ERect& OffsetBySelf(float dx, float dy);
- ERect OffsetByCopy(EPoint pt) const;
- ERect OffsetByCopy(float dx, float dy) const;
- ERect& OffsetToSelf(EPoint pt);
- ERect& OffsetToSelf(float x, float y);
- ERect OffsetToCopy(EPoint pt) const;
- ERect OffsetToCopy(float x, float y) const;
+ BRect& InsetBySelf(BPoint pt);
+ BRect& InsetBySelf(float dx, float dy);
+ BRect InsetByCopy(BPoint pt) const;
+ BRect InsetByCopy(float dx, float dy) const;
+ BRect& OffsetBySelf(BPoint pt);
+ BRect& OffsetBySelf(float dx, float dy);
+ BRect OffsetByCopy(BPoint pt) const;
+ BRect OffsetByCopy(float dx, float dy) const;
+ BRect& OffsetToSelf(BPoint pt);
+ BRect& OffsetToSelf(float x, float y);
+ BRect OffsetToCopy(BPoint pt) const;
+ BRect OffsetToCopy(float x, float y) const;
 
- ERect& FloorSelf();
- ERect FloorCopy() const;
- ERect& CeilSelf();
- ERect CeilCopy() const;
- ERect& RoundSelf();
- ERect RoundCopy() const;
+ BRect& FloorSelf();
+ BRect FloorCopy() const;
+ BRect& CeilSelf();
+ BRect CeilCopy() const;
+ BRect& RoundSelf();
+ BRect RoundCopy() const;
 
- bool operator==(ERect r) const;
- bool operator!=(ERect r) const;
+ bool operator==(BRect r) const;
+ bool operator!=(BRect r) const;
 
- ERect operator&(ERect r) const;
- ERect operator|(ERect r) const;
+ BRect operator&(BRect r) const;
+ BRect operator|(BRect r) const;
 
- ERect& operator&=(ERect r);
- ERect& operator|=(ERect r);
+ BRect& operator&=(BRect r);
+ BRect& operator|=(BRect r);
 
  bool IsValid() const;
  float Width() const;
- eint32 IntegerWidth() const;
+    b_int32 IntegerWidth() const;
  float Height() const;
- eint32 IntegerHeight() const;
+    b_int32 IntegerHeight() const;
 
- bool Intersects(ERect r) const;
+ bool Intersects(BRect r) const;
  bool Intersects(float l, float t, float r, float b) const;
 
- bool Contains(EPoint pt) const;
+ bool Contains(BPoint pt) const;
  bool Contains(float x, float y) const;
- bool Contains(ERect r) const;
+ bool Contains(BRect r) const;
  bool Contains(float l, float t, float r, float b) const;
 
  void PrintToStream() const;
 };
 
 
-inline EPoint ERect::LeftTop() const
+inline BPoint BRect::LeftTop() const
 {
- return(EPoint(left, top));
+ return(BPoint(left, top));
 }
 
 
-inline EPoint ERect::RightBottom() const
+inline BPoint BRect::RightBottom() const
 {
- return(EPoint(right, bottom));
+ return(BPoint(right, bottom));
 }
 
 
-inline EPoint ERect::LeftBottom() const
+inline BPoint BRect::LeftBottom() const
 {
- return(EPoint(left, bottom));
+ return(BPoint(left, bottom));
 }
 
 
-inline EPoint ERect::RightTop() const
+inline BPoint BRect::RightTop() const
 {
- return(EPoint(right, top));
+ return(BPoint(right, top));
 }
 
 
-inline EPoint ERect::Center() const
+inline BPoint BRect::Center() const
 {
- return(EPoint(left + (right - left) / 2, top + (bottom - top) / 2));
+ return(BPoint(left + (right - left) / 2, top + (bottom - top) / 2));
 }
 
 
-inline ERect::ERect()
+inline BRect::BRect()
 {
  top = left = 0;
  bottom = right = -1;
 }
 
 
-inline ERect::ERect(float l, float t, float r, float b)
+inline BRect::BRect(float l, float t, float r, float b)
 {
  left = l;
  top = t;
@@ -45938,7 +45934,7 @@ inline ERect::ERect(float l, float t, float r, float b)
 }
 
 
-inline ERect::ERect(const ERect &r)
+inline BRect::BRect(const BRect &r)
 {
  left = r.left;
  top = r.top;
@@ -45947,7 +45943,7 @@ inline ERect::ERect(const ERect &r)
 }
 
 
-inline ERect::ERect(EPoint leftTop, EPoint rightBottom)
+inline BRect::BRect(BPoint leftTop, BPoint rightBottom)
 {
  left = leftTop.x;
  top = leftTop.y;
@@ -45956,7 +45952,7 @@ inline ERect::ERect(EPoint leftTop, EPoint rightBottom)
 }
 
 
-inline ERect& ERect::operator=(const ERect& from)
+inline BRect& BRect::operator=(const BRect& from)
 {
  left = from.left;
  top = from.top;
@@ -45966,7 +45962,7 @@ inline ERect& ERect::operator=(const ERect& from)
 }
 
 
-inline void ERect::Set(float l, float t, float r, float b)
+inline void BRect::Set(float l, float t, float r, float b)
 {
  left = l;
  top = t;
@@ -45975,31 +45971,31 @@ inline void ERect::Set(float l, float t, float r, float b)
 }
 
 
-inline bool ERect::IsValid() const
+inline bool BRect::IsValid() const
 {
  return(left <= right && top <= bottom);
 }
 
 
-inline eint32 ERect::IntegerWidth() const
+inline b_int32 BRect::IntegerWidth() const
 {
- return((eint32)ceil((double)(right - left)));
+    return((b_int32)ceil((double)(right - left)));
 }
 
 
-inline float ERect::Width() const
+inline float BRect::Width() const
 {
  return(right - left);
 }
 
 
-inline eint32 ERect::IntegerHeight() const
+inline b_int32 BRect::IntegerHeight() const
 {
- return((eint32)ceil((double)(bottom - top)));
+    return((b_int32)ceil((double)(bottom - top)));
 }
 
 
-inline float ERect::Height() const
+inline float BRect::Height() const
 {
  return(bottom - top);
 }
@@ -46007,66 +46003,66 @@ inline float ERect::Height() const
 
 
 
-class __attribute__((dllexport)) ERegion {
+class __attribute__((dllexport)) BRegion {
 public:
- ERegion();
- ERegion(const ERegion &region);
- ERegion(const ERect &rect);
- virtual ~ERegion();
+ BRegion();
+ BRegion(const BRegion &region);
+ BRegion(const BRect &rect);
+ virtual ~BRegion();
 
- ERegion &operator=(const ERegion &from);
+ BRegion &operator=(const BRegion &from);
 
- ERegion operator&(ERect r) const;
- ERegion operator|(ERect r) const;
+ BRegion operator&(BRect r) const;
+ BRegion operator|(BRect r) const;
 
- ERegion& operator&=(ERect r);
- ERegion& operator|=(ERect r);
+ BRegion& operator&=(BRect r);
+ BRegion& operator|=(BRect r);
 
- ERegion operator&(const ERegion &region) const;
- ERegion operator|(const ERegion &region) const;
+ BRegion operator&(const BRegion &region) const;
+ BRegion operator|(const BRegion &region) const;
 
- ERegion& operator&=(const ERegion &region);
- ERegion& operator|=(const ERegion &region);
+ BRegion& operator&=(const BRegion &region);
+ BRegion& operator|=(const BRegion &region);
 
- ERect Frame() const;
- ERect RectAt(eint32 index) const;
- eint32 CountRects() const;
+ BRect Frame() const;
+    BRect RectAt(b_int32 index) const;
+    b_int32 CountRects() const;
 
- void Set(ERect singleBound);
+ void Set(BRect singleBound);
  void MakeEmpty();
 
- bool Include(ERect r);
- bool Include(const ERegion *region);
+ bool Include(BRect r);
+ bool Include(const BRegion *region);
 
- bool Exclude(ERect r);
- bool Exclude(const ERegion *region);
+ bool Exclude(BRect r);
+ bool Exclude(const BRegion *region);
 
  void OffsetBy(float dx, float dy);
- void OffsetBy(EPoint pt);
- ERegion& OffsetBySelf(float dx, float dy);
- ERegion& OffsetBySelf(EPoint pt);
- ERegion OffsetByCopy(float dx, float dy);
- ERegion OffsetByCopy(EPoint pt);
+ void OffsetBy(BPoint pt);
+ BRegion& OffsetBySelf(float dx, float dy);
+ BRegion& OffsetBySelf(BPoint pt);
+ BRegion OffsetByCopy(float dx, float dy);
+ BRegion OffsetByCopy(BPoint pt);
 
  void Scale(float scaling);
- ERegion& ScaleSelf(float scaling);
- ERegion ScaleCopy(float scaling);
+ BRegion& ScaleSelf(float scaling);
+ BRegion ScaleCopy(float scaling);
 
- bool Intersects(ERect r) const;
+ bool Intersects(BRect r) const;
  bool Intersects(float l, float t, float r, float b) const;
- bool Intersects(const ERegion *region) const;
+ bool Intersects(const BRegion *region) const;
 
- bool Contains(EPoint pt) const;
+ bool Contains(BPoint pt) const;
  bool Contains(float x, float y) const;
- bool Contains(ERect r) const;
+ bool Contains(BRect r) const;
  bool Contains(float l, float t, float r, float b) const;
- bool Contains(const ERegion *region) const;
+ bool Contains(const BRegion *region) const;
 
  void PrintToStream() const;
 
 private:
- EList fRects;
- ERect fFrame;
+ BList fRects;
+ BRect fFrame;
 };
 # 36 "../src/interface/win32/./../../add-ons/graphics/./../../interface/Window.h" 2
 # 1 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/Looper.h" 1
@@ -46078,14 +46074,14 @@ private:
 # 1 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../kernel/./../support/SupportDefs.h" 1
 # 34 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../kernel/OS.h" 2
 
-typedef e_status_t (*e_thread_func)(void*);
+typedef b_status_t (*b_thread_func)(void*);
 # 55 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../kernel/OS.h"
 enum {
- E_CAN_INTERRUPT = 1,
- E_DO_NOT_RESCHEDULE = 2,
- E_TIMEOUT = 8,
- E_RELATIVE_TIMEOUT = 8,
- E_ABSOLUTE_TIMEOUT = 16
+    B_CAN_INTERRUPT = 1,
+    B_DO_NOT_RESCHEDULE = 2,
+    B_TIMEOUT = 8,
+    B_RELATIVE_TIMEOUT = 8,
+    B_ABSOLUTE_TIMEOUT = 16
 };
 
 
@@ -46099,186 +46095,186 @@ extern "C" {
 
 
 
-__attribute__((dllexport)) euint32 etk_real_time_clock(void);
-__attribute__((dllexport)) e_bigtime_t etk_real_time_clock_usecs(void);
-__attribute__((dllexport)) e_bigtime_t etk_system_boot_time(void);
-__attribute__((dllexport)) e_bigtime_t etk_system_time(void);
+__attribute__((dllexport)) b_uint32 bhapi_real_time_clock(void);
+__attribute__((dllexport)) b_bigtime_t bhapi_real_time_clock_usecs(void);
+__attribute__((dllexport)) b_bigtime_t bhapi_system_boot_time(void);
+__attribute__((dllexport)) b_bigtime_t bhapi_system_time(void);
 
 
-typedef struct etk_area_info {
- char name[32 + 1];
+typedef struct bhapi_area_info {
+    char name[32 + 1];
  size_t size;
- euint32 protection;
+    b_uint32 protection;
  void *address;
  char domain[5];
-} etk_area_info;
+} bhapi_area_info;
 
 
 
 
 
-typedef enum etk_area_access {
- ETK_AREA_ACCESS_OWNER = 0,
- ETK_AREA_ACCESS_GROUP_READ = 1,
- ETK_AREA_ACCESS_GROUP_WRITE = 1 << 1,
- ETK_AREA_ACCESS_OTHERS_READ = 1 << 2,
- ETK_AREA_ACCESS_OTHERS_WRITE = 1 << 3,
- ETK_AREA_ACCESS_ALL = 0xFF
-} etk_area_access;
+typedef enum bhapi_area_access {
+ BHAPI_AREA_ACCESS_OWNER = 0,
+ BHAPI_AREA_ACCESS_GROUP_READ = 1,
+ BHAPI_AREA_ACCESS_GROUP_WRITE = 1 << 1,
+ BHAPI_AREA_ACCESS_OTHERS_READ = 1 << 2,
+ BHAPI_AREA_ACCESS_OTHERS_WRITE = 1 << 3,
+ BHAPI_AREA_ACCESS_ALL = 0xFF
+} bhapi_area_access;
 
 
-__attribute__((dllexport)) void* etk_create_area(const char *name, void **start_addr, size_t size, euint32 protection,
-            const char *domain, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
-
-
-
-
-__attribute__((dllexport)) void* etk_clone_area(const char *name, void **dest_addr, euint32 protection, const char *domain);
-__attribute__((dllexport)) void* etk_clone_area_by_source(void *source_area, void **dest_addr, euint32 protection);
-__attribute__((dllexport)) e_status_t etk_get_area_info(void *area, etk_area_info *info);
-__attribute__((dllexport)) e_status_t etk_delete_area(void *area);
-__attribute__((dllexport)) e_status_t etk_delete_area_etc(void *area, bool no_clone);
+__attribute__((dllexport)) void* bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 protection,
+            const char *domain, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 
 
 
 
-
-__attribute__((dllexport)) e_status_t etk_resize_area(void *area, void **start_addr, size_t new_size);
-__attribute__((dllexport)) e_status_t etk_set_area_protection(void *area, euint32 new_protection);
-
-
-__attribute__((dllexport)) void* etk_create_locker(void);
-__attribute__((dllexport)) void* etk_clone_locker(void* locker);
-__attribute__((dllexport)) e_status_t etk_delete_locker(void* locker);
-
-
-
-
-__attribute__((dllexport)) e_status_t etk_close_locker(void* locker);
-
-__attribute__((dllexport)) e_status_t etk_lock_locker(void *locker);
-__attribute__((dllexport)) e_status_t etk_lock_locker_etc(void *locker, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) e_status_t etk_unlock_locker(void *locker);
+__attribute__((dllexport)) void* bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char *domain);
+__attribute__((dllexport)) void* bhapi_clone_area_by_source(void *source_area, void **dest_addr, b_uint32 protection);
+__attribute__((dllexport)) b_status_t bhapi_get_area_info(void *area, bhapi_area_info *info);
+__attribute__((dllexport)) b_status_t bhapi_delete_area(void *area);
+__attribute__((dllexport)) b_status_t bhapi_delete_area_etc(void *area, bool no_clone);
 
 
 
 
 
-
-__attribute__((dllexport)) eint64 etk_count_locker_locks(void *locker);
-
-
+__attribute__((dllexport)) b_status_t bhapi_resize_area(void *area, void **start_addr, size_t new_size);
+__attribute__((dllexport)) b_status_t bhapi_set_area_protection(void *area, b_uint32 new_protection);
 
 
-__attribute__((dllexport)) void* etk_create_simple_locker(void);
-__attribute__((dllexport)) e_status_t etk_delete_simple_locker(void* slocker);
-__attribute__((dllexport)) bool etk_lock_simple_locker(void *slocker);
-__attribute__((dllexport)) void etk_unlock_simple_locker(void *slocker);
+__attribute__((dllexport)) void* bhapi_create_locker(void);
+__attribute__((dllexport)) void* bhapi_clone_locker(void* locker);
+__attribute__((dllexport)) b_status_t bhapi_delete_locker(void* locker);
+
+
+
+
+__attribute__((dllexport)) b_status_t bhapi_close_locker(void* locker);
+
+__attribute__((dllexport)) b_status_t bhapi_lock_locker(void *locker);
+__attribute__((dllexport)) b_status_t bhapi_lock_locker_etc(void *locker, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_unlock_locker(void *locker);
+
+
+
+
+
+
+__attribute__((dllexport)) b_int64 bhapi_count_locker_locks(void *locker);
+
+
+
+
+__attribute__((dllexport)) void* bhapi_create_simple_locker(void);
+__attribute__((dllexport)) b_status_t bhapi_delete_simple_locker(void* slocker);
+__attribute__((dllexport)) bool bhapi_lock_simple_locker(void *slocker);
+__attribute__((dllexport)) void bhapi_unlock_simple_locker(void *slocker);
 # 125 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../kernel/Kernel.h"
-typedef struct etk_sem_info {
- char name[32 + 1];
- eint64 latest_holder_team;
- eint64 latest_holder_thread;
- eint64 count;
+typedef struct bhapi_sem_info {
+    char name[32 + 1];
+    b_int64 latest_holder_team;
+    b_int64 latest_holder_thread;
+    b_int64 count;
  bool closed;
-} etk_sem_info;
+} bhapi_sem_info;
 
 
-__attribute__((dllexport)) void* etk_create_sem(eint64 count, const char *name, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
-
-
-
-__attribute__((dllexport)) void* etk_clone_sem(const char *name);
-__attribute__((dllexport)) void* etk_clone_sem_by_source(void *sem);
-__attribute__((dllexport)) e_status_t etk_get_sem_info(void *sem, etk_sem_info *info);
-__attribute__((dllexport)) e_status_t etk_delete_sem(void *sem);
-__attribute__((dllexport)) e_status_t etk_delete_sem_etc(void *sem, bool no_clone);
+__attribute__((dllexport)) void* bhapi_create_sem(b_int64 count, const char *name, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 
 
 
-
-
-__attribute__((dllexport)) e_status_t etk_close_sem(void* sem);
-
-__attribute__((dllexport)) e_status_t etk_acquire_sem(void *sem);
-__attribute__((dllexport)) e_status_t etk_release_sem(void *sem);
-__attribute__((dllexport)) e_status_t etk_acquire_sem_etc(void *sem, eint64 count, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) e_status_t etk_release_sem_etc(void *sem, eint64 count, euint32 flags);
-__attribute__((dllexport)) e_status_t etk_get_sem_count(void *sem, eint64 *count);
+__attribute__((dllexport)) void* bhapi_clone_sem(const char *name);
+__attribute__((dllexport)) void* bhapi_clone_sem_by_source(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_get_sem_info(void *sem, bhapi_sem_info *info);
+__attribute__((dllexport)) b_status_t bhapi_delete_sem(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_delete_sem_etc(void *sem, bool no_clone);
 
 
 
 
-__attribute__((dllexport)) e_status_t etk_snooze(e_bigtime_t microseconds);
-__attribute__((dllexport)) e_status_t etk_snooze_until(e_bigtime_t time, int timebase);
 
-__attribute__((dllexport)) eint64 etk_get_current_team_id(void);
-__attribute__((dllexport)) eint64 etk_get_current_thread_id(void);
+__attribute__((dllexport)) b_status_t bhapi_close_sem(void* sem);
 
-__attribute__((dllexport)) void* etk_create_thread_by_current_thread(void);
-__attribute__((dllexport)) void* etk_create_thread(e_thread_func threadFunction,
-       eint32 priority,
+__attribute__((dllexport)) b_status_t bhapi_acquire_sem(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_release_sem(void *sem);
+__attribute__((dllexport)) b_status_t bhapi_acquire_sem_etc(void *sem, b_int64 count, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_release_sem_etc(void *sem, b_int64 count, b_uint32 flags);
+__attribute__((dllexport)) b_status_t bhapi_get_sem_count(void *sem, b_int64 *count);
+
+
+
+
+__attribute__((dllexport)) b_status_t bhapi_snooze(b_bigtime_t microseconds);
+__attribute__((dllexport)) b_status_t bhapi_snooze_until(b_bigtime_t time, int timebase);
+
+__attribute__((dllexport)) b_int64 bhapi_get_current_team_id(void);
+__attribute__((dllexport)) b_int64 bhapi_get_current_thread_id(void);
+
+__attribute__((dllexport)) void* bhapi_create_thread_by_current_thread(void);
+__attribute__((dllexport)) void* bhapi_create_thread(b_thread_func threadFunction,
+                      b_int32 priority,
        void *arg,
-       eint64 *threadId);
-__attribute__((dllexport)) void* etk_open_thread(eint64 threadId);
-__attribute__((dllexport)) e_status_t etk_delete_thread(void *thread);
+                      b_int64 *threadId);
+__attribute__((dllexport)) void* bhapi_open_thread(b_int64 threadId);
+__attribute__((dllexport)) b_status_t bhapi_delete_thread(void *thread);
 
 
 
 
 
-__attribute__((dllexport)) e_status_t etk_suspend_thread(void *thread);
-__attribute__((dllexport)) e_status_t etk_resume_thread(void *thread);
+__attribute__((dllexport)) b_status_t bhapi_suspend_thread(void *thread);
+__attribute__((dllexport)) b_status_t bhapi_resume_thread(void *thread);
 
-__attribute__((dllexport)) e_status_t etk_on_exit_thread(void (*callback)(void *), void *user_data);
+__attribute__((dllexport)) b_status_t bhapi_on_exit_thread(void (*callback)(void *), void *user_data);
 
-__attribute__((dllexport)) eint64 etk_get_thread_id(void *thread);
+__attribute__((dllexport)) b_int64 bhapi_get_thread_id(void *thread);
 
 enum {
- ETK_THREAD_INVALID = 0,
- ETK_THREAD_READY,
- ETK_THREAD_RUNNING,
- ETK_THREAD_EXITED,
- ETK_THREAD_SUSPENDED,
+ BHAPI_THREAD_INVALID = 0,
+ BHAPI_THREAD_READY,
+ BHAPI_THREAD_RUNNING,
+ BHAPI_THREAD_EXITED,
+ BHAPI_THREAD_SUSPENDED,
 };
-__attribute__((dllexport)) euint32 etk_get_thread_run_state(void *thread);
+__attribute__((dllexport)) b_uint32 bhapi_get_thread_run_state(void *thread);
 
-__attribute__((dllexport)) e_status_t etk_set_thread_priority(void *thread, eint32 new_priority);
-__attribute__((dllexport)) eint32 etk_get_thread_priority(void *thread);
-__attribute__((dllexport)) void etk_exit_thread(e_status_t status);
-__attribute__((dllexport)) e_status_t etk_wait_for_thread(void *thread, e_status_t *thread_return_value);
-__attribute__((dllexport)) e_status_t etk_wait_for_thread_etc(void *thread, e_status_t *thread_return_value, euint32 flags, e_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_set_thread_priority(void *thread, b_int32 new_priority);
+__attribute__((dllexport)) b_int32 bhapi_get_thread_priority(void *thread);
+__attribute__((dllexport)) void bhapi_exit_thread(b_status_t status);
+__attribute__((dllexport)) b_status_t bhapi_wait_for_thread(void *thread, b_status_t *thread_return_value);
+__attribute__((dllexport)) b_status_t bhapi_wait_for_thread_etc(void *thread, b_status_t *thread_return_value, b_uint32 flags, b_bigtime_t timeout);
 # 206 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../kernel/Kernel.h"
-__attribute__((dllexport)) void* etk_create_port(eint32 queue_length, const char *name, etk_area_access area_access = ETK_AREA_ACCESS_OWNER);
+__attribute__((dllexport)) void* bhapi_create_port(b_int32 queue_length, const char *name, bhapi_area_access area_access = BHAPI_AREA_ACCESS_OWNER);
 
 
 
-__attribute__((dllexport)) void* etk_open_port(const char *name);
-__attribute__((dllexport)) void* etk_open_port_by_source(void *port);
-__attribute__((dllexport)) e_status_t etk_delete_port(void *port);
-
-
-
-
-
-__attribute__((dllexport)) e_status_t etk_close_port(void *port);
-
-__attribute__((dllexport)) e_status_t etk_write_port(void *port, eint32 code, const void *buf, size_t buf_size);
-__attribute__((dllexport)) ssize_t etk_port_buffer_size(void *port);
-__attribute__((dllexport)) e_status_t etk_read_port(void *port, eint32 *code, void *buf, size_t buf_size);
-
-__attribute__((dllexport)) e_status_t etk_write_port_etc(void *port, eint32 code, const void *buf, size_t buf_size, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) ssize_t etk_port_buffer_size_etc(void *port, euint32 flags, e_bigtime_t timeout);
-__attribute__((dllexport)) e_status_t etk_read_port_etc(void *port, eint32 *code, void *buf, size_t buf_size, euint32 flags, e_bigtime_t timeout);
-
-__attribute__((dllexport)) eint32 etk_port_count(void *port);
+__attribute__((dllexport)) void* bhapi_open_port(const char *name);
+__attribute__((dllexport)) void* bhapi_open_port_by_source(void *port);
+__attribute__((dllexport)) b_status_t bhapi_delete_port(void *port);
 
 
 
 
-__attribute__((dllexport)) void* etk_load_addon(const char* path);
-__attribute__((dllexport)) e_status_t etk_unload_addon(void *image);
-__attribute__((dllexport)) e_status_t etk_get_image_symbol(void *image, const char *name, void **ptr);
+
+__attribute__((dllexport)) b_status_t bhapi_close_port(void *port);
+
+__attribute__((dllexport)) b_status_t bhapi_write_port(void *port, b_int32 code, const void *buf, size_t buf_size);
+__attribute__((dllexport)) ssize_t bhapi_port_buffer_size(void *port);
+__attribute__((dllexport)) b_status_t bhapi_read_port(void *port, b_int32 *code, void *buf, size_t buf_size);
+
+__attribute__((dllexport)) b_status_t bhapi_write_port_etc(void *port, b_int32 code, const void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) ssize_t bhapi_port_buffer_size_etc(void *port, b_uint32 flags, b_bigtime_t timeout);
+__attribute__((dllexport)) b_status_t bhapi_read_port_etc(void *port, b_int32 *code, void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t timeout);
+
+__attribute__((dllexport)) b_int32 bhapi_port_count(void *port);
+
+
+
+
+__attribute__((dllexport)) void* bhapi_load_addon(const char* path);
+__attribute__((dllexport)) b_status_t bhapi_unload_addon(void *image);
+__attribute__((dllexport)) b_status_t bhapi_get_image_symbol(void *image, const char *name, void **ptr);
 
 
 
@@ -46292,39 +46288,39 @@ __attribute__((dllexport)) e_status_t etk_get_image_symbol(void *image, const ch
 
 
 enum {
- E_ABOUT_REQUESTED = '_ABR',
- E_WINDOW_ACTIVATED = '_ACT',
- E_APP_ACTIVATED = '_ACT',
- E_APP_CURSOR_REQUESTED = '_CUR',
- E_ARGV_RECEIVED = '_ARG',
- E_QUIT_REQUESTED = '_QRQ',
- E_CANCEL = '_CNC',
- E_KEY_DOWN = '_KYD',
- E_KEY_UP = '_KYU',
- E_UNMAPPED_KEY_DOWN = '_UKD',
- E_UNMAPPED_KEY_UP = '_UKU',
- E_MODIFIERS_CHANGED = '_MCH',
- E_MINIMIZE = '_WMN',
- E_MINIMIZED = '_WMD',
- E_MOUSE_DOWN = '_MDN',
- E_MOUSE_MOVED = '_MMV',
- E_MOUSE_ENTER_EXIT = '_MEX',
- E_MOUSE_UP = '_MUP',
- E_MOUSE_WHEEL_CHANGED = '_MWC',
- E_OPEN_IN_WORKSPACE = '_OWS',
- E_PRINTER_CHANGED = '_PCH',
- E_PULSE = '_PUL',
- E_READY_TO_RUN = '_RTR',
- E_REFS_RECEIVED = '_RRC',
- E_SCREEN_CHANGED = '_SCH',
- E_VALUE_CHANGED = '_VCH',
- E_VIEW_MOVED = '_VMV',
- E_VIEW_RESIZED = '_VRS',
- E_WINDOW_MOVED = '_WMV',
- E_WINDOW_RESIZED = '_WRS',
- E_WORKSPACES_CHANGED = '_WCG',
- E_WORKSPACE_ACTIVATED = '_WAC',
- E_ZOOM = '_WZM',
+    B_ABOUT_REQUESTED = '_ABR',
+    B_WINDOW_ACTIVATED = '_ACT',
+    B_APP_ACTIVATED = '_ACT',
+    B_APP_CURSOR_REQUESTED = '_CUR',
+    B_ARGV_RECEIVED = '_ARG',
+    B_QUIT_REQUESTED = '_QRQ',
+    B_CANCEL = '_CNC',
+    B_KEY_DOWN = '_KYD',
+    B_KEY_UP = '_KYU',
+    B_UNMAPPED_KEY_DOWN = '_UKD',
+    B_UNMAPPED_KEY_UP = '_UKU',
+    B_MODIFIERS_CHANGED = '_MCH',
+    B_MINIMIZE = '_WMN',
+    B_MINIMIZED = '_WMD',
+    B_MOUSE_DOWN = '_MDN',
+    B_MOUSE_MOVED = '_MMV',
+    B_MOUSE_ENTER_EXIT = '_MEX',
+    B_MOUSE_UP = '_MUP',
+    B_MOUSE_WHEEL_CHANGED = '_MWC',
+    B_OPEN_IN_WORKSPACE = '_OWS',
+    B_PRINTER_CHANGED = '_PCH',
+    B_PULSE = '_PUL',
+    B_READY_TO_RUN = '_RTR',
+    B_REFS_RECEIVED = '_RRC',
+    B_SCREEN_CHANGED = '_SCH',
+    B_VALUE_CHANGED = '_VCH',
+    B_VIEW_MOVED = '_VMV',
+    B_VIEW_RESIZED = '_VRS',
+    B_WINDOW_MOVED = '_WMV',
+    B_WINDOW_RESIZED = '_WRS',
+    B_WORKSPACES_CHANGED = '_WCG',
+    B_WORKSPACE_ACTIVATED = '_WAC',
+    B_ZOOM = '_WZM',
 
  _QUIT_ = '_QIT',
  _EVENTS_PENDING_ = '_EVP',
@@ -46337,30 +46333,30 @@ enum {
 
 
 enum {
- E_UPDATE_STATUS_BAR = 'SBUP',
- E_RESET_STATUS_BAR = 'SBRS',
- E_OBSERVER_NOTICE_CHANGE = 'NTCH',
- E_CONTROL_INVOKED = 'CIVK',
- E_CONTROL_MODIFIED = 'CMOD',
- E_CLIPBOARD_CHANGED = 'CLCH',
- E_SAVE_REQUESTED = 'SAVE',
- E_NO_REPLY = 'NONE',
- E_REPLY = 'RPLY',
- E_SET_PROPERTY = 'PSET',
- E_GET_PROPERTY = 'PGET',
- E_CREATE_PROPERTY = 'PCRT',
- E_DELETE_PROPERTY = 'PDEL',
- E_COUNT_PROPERTIES = 'PCNT',
- E_EXECUTE_PROPERTY = 'PEXE',
- E_GET_SUPPORTED_SUITES = 'SUIT',
- E_INPUT_METHOD_EVENT = 'IMEV'
+    B_UPDATE_STATUS_BAR = 'SBUP',
+    B_RESET_STATUS_BAR = 'SBRS',
+    B_OBSERVER_NOTICE_CHANGE = 'NTCH',
+    B_CONTROL_INVOKED = 'CIVK',
+    B_CONTROL_MODIFIED = 'CMOD',
+    B_CLIPBOARD_CHANGED = 'CLCH',
+    B_SAVE_REQUESTED = 'SAVE',
+    B_NO_REPLY = 'NONE',
+    B_REPLY = 'RPLY',
+    B_SET_PROPERTY = 'PSET',
+    B_GET_PROPERTY = 'PGET',
+    B_CREATE_PROPERTY = 'PCRT',
+    B_DELETE_PROPERTY = 'PDEL',
+    B_COUNT_PROPERTIES = 'PCNT',
+    B_EXECUTE_PROPERTY = 'PEXE',
+    B_GET_SUPPORTED_SUITES = 'SUIT',
+    B_INPUT_METHOD_EVENT = 'IMEV'
 };
 # 37 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/Looper.h" 2
 # 1 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/Handler.h" 1
 # 34 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/Handler.h"
 # 1 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/./../support/Archivable.h" 1
 # 33 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/./../support/Archivable.h"
-# 1 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/./../support/SupportDefs.h" 1
+# 1 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/./../support/./SupportDefs.h" 1
 # 34 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/./../support/Archivable.h" 2
 # 1 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/./../support/./../app/Message.h" 1
 # 34 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/./../support/./../app/Message.h"
@@ -46369,9 +46365,4 @@ enum {
 
 # 1 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/./../support/./../app/./../kernel/OS.h" 1
 # 37 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/./../support/./../app/Message.h" 2
-# 1 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/./../support/./../app/./../support/String.h" 1
-# 34 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/./../support/./../app/./../support/String.h"
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
-# 35 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/./../support/./../app/./../support/String.h" 2
+# 1 "../src/interface/win32/./../../add-ons/graphics/./../../interface/./../app/./../app/./../support/./../app/./../support/StringMe.h" 1

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,7 +24,7 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: Locker.cpp
- * Description: ELocker --- locker support nested-locking enough times
+ * Description: BLocker --- locker support nested-locking enough times
  *
  * --------------------------------------------------------------------------*/
 
@@ -33,55 +33,55 @@
 #include "Locker.h"
 
 
-ELocker::ELocker()
+BLocker::BLocker()
 {
-	fLocker = etk_create_locker();
+	fLocker = bhapi_create_locker();
 }
 
 
-ELocker::~ELocker()
+BLocker::~BLocker()
 {
-	if(fLocker != NULL) etk_delete_locker(fLocker);
+	if(fLocker != NULL) bhapi_delete_locker(fLocker);
 }
 
 
 bool
-ELocker::Lock()
+BLocker::Lock()
 {
-	return(etk_lock_locker(fLocker) == E_OK);
+	return(bhapi_lock_locker(fLocker) == B_OK);
 }
 
 
 void
-ELocker::Unlock()
+BLocker::Unlock()
 {
-	if(etk_count_locker_locks(fLocker) <= 0)
+	if(bhapi_count_locker_locks(fLocker) <= 0)
 	{
-		ETK_WARNING("[SUPPORT]: %s -- Locker didn't locked by current thread.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[SUPPORT]: %s -- Locker didn't locked by current thread.", __PRETTY_FUNCTION__);
 		return;
 	}
 
-	etk_unlock_locker(fLocker);
+	bhapi_unlock_locker(fLocker);
 }
 
 
-e_status_t
-ELocker::LockWithTimeout(e_bigtime_t microseconds)
+b_status_t
+BLocker::LockWithTimeout(b_bigtime_t microseconds)
 {
-	return etk_lock_locker_etc(fLocker, E_TIMEOUT, microseconds);
+	return bhapi_lock_locker_etc(fLocker, B_TIMEOUT, microseconds);
 }
 
 
-eint64
-ELocker::CountLocks() const
+b_int64
+BLocker::CountLocks() const
 {
-	return etk_count_locker_locks(fLocker);
+	return bhapi_count_locker_locks(fLocker);
 }
 
 
 bool
-ELocker::IsLockedByCurrentThread() const
+BLocker::IsLockedByCurrentThread() const
 {
-	return(etk_count_locker_locks(fLocker) > 0);
+	return(bhapi_count_locker_locks(fLocker) > 0);
 }
 

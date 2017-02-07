@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -29,42 +29,42 @@
 
 #include "ScrollView.h"
 
-ERect
-EScrollView::TargetValidFrame(bool ignore_scrollbar) const
+BRect
+BScrollView::TargetValidFrame(bool ignore_scrollbar) const
 {
 	// TODO: affect by border style
 
-	if(fTarget == NULL) return ERect();
+	if(fTarget == NULL) return BRect();
 
-	ERect r = Frame().OffsetToSelf(E_ORIGIN);
+	BRect r = Frame().OffsetToSelf(B_ORIGIN);
 
 	if(!ignore_scrollbar)
 	{
-		if(!(fVSB == NULL || fVSB->IsHidden())) r.right -= E_V_SCROLL_BAR_WIDTH + UnitsPerPixel();
-		if(!(fHSB == NULL || fHSB->IsHidden())) r.bottom -= E_H_SCROLL_BAR_HEIGHT + UnitsPerPixel();
+		if(!(fVSB == NULL || fVSB->IsHidden())) r.right -= B_V_SCROLL_BAR_WIDTH + UnitsPerPixel();
+		if(!(fHSB == NULL || fHSB->IsHidden())) r.bottom -= B_H_SCROLL_BAR_HEIGHT + UnitsPerPixel();
 	}
 
 	return r;
 }
 
 
-EScrollView::EScrollView(ERect frame, const char *name, EView *target, euint32 resizingMode, euint32 flags,
-			 bool alwaysShowHorizontal, bool alwaysShowVertical, e_border_style border)
-	: EView(frame, name, resizingMode, 0), fTarget(NULL)
+BScrollView::BScrollView(BRect frame, const char *name, BView *target, b_uint32 resizingMode, b_uint32 flags,
+			 bool alwaysShowHorizontal, bool alwaysShowVertical, b_border_style border)
+	: BView(frame, name, resizingMode, 0), fTarget(NULL)
 {
 	fBorder = border;
 	fAlwaysShowHorizontal = alwaysShowHorizontal;
 	fAlwaysShowVertical = alwaysShowVertical;
 
-	ERect hR = Bounds();
-	ERect vR = Bounds();
-	hR.top = hR.bottom - E_H_SCROLL_BAR_HEIGHT;
-	hR.right -= E_V_SCROLL_BAR_WIDTH;
-	vR.left = vR.right - E_V_SCROLL_BAR_WIDTH;
-	vR.bottom -= E_H_SCROLL_BAR_HEIGHT;
+	BRect hR = Bounds();
+	BRect vR = Bounds();
+	hR.top = hR.bottom - B_H_SCROLL_BAR_HEIGHT;
+	hR.right -= B_V_SCROLL_BAR_WIDTH;
+	vR.left = vR.right - B_V_SCROLL_BAR_WIDTH;
+	vR.bottom -= B_H_SCROLL_BAR_HEIGHT;
 
-	fHSB = new EScrollBar(hR, NULL, 0, 0, 0, E_HORIZONTAL);
-	fVSB = new EScrollBar(vR, NULL, 0, 0, 0, E_VERTICAL);
+	fHSB = new BScrollBar(hR, NULL, 0, 0, 0, B_HORIZONTAL);
+	fVSB = new BScrollBar(vR, NULL, 0, 0, 0, B_VERTICAL);
 	fHSB->Hide();
 	fVSB->Hide();
 	AddChild(fHSB);
@@ -73,33 +73,33 @@ EScrollView::EScrollView(ERect frame, const char *name, EView *target, euint32 r
 	if(fHSB->Parent() != this) {delete fHSB; fHSB = NULL;}
 	if(fVSB->Parent() != this) {delete fVSB; fVSB = NULL;}
 
-	flags |= E_FRAME_EVENTS;
+	flags |= B_FRAME_EVENTS;
 
-	if(fBorder != E_NO_BORDER)
-		EView::SetFlags(flags | E_WILL_DRAW);
+	if(fBorder != B_NO_BORDER)
+		BView::SetFlags(flags | B_WILL_DRAW);
 	else
-		EView::SetFlags(flags & ~E_WILL_DRAW);
+        BView::SetFlags(flags & ~B_WILL_DRAW);
 
 	if(target != NULL) SetTarget(target);
 }
 
 
-EScrollView::~EScrollView()
+BScrollView::~BScrollView()
 {
 	SetTarget(NULL);
 }
 
 
-e_status_t
-EScrollView::SetTarget(EView *newTarget)
+b_status_t
+BScrollView::SetTarget(BView *newTarget)
 {
-	if(newTarget == fTarget || newTarget == this) return E_ERROR;
+	if(newTarget == fTarget || newTarget == this) return B_ERROR;
 	if(newTarget != NULL)
-		if(newTarget->Window() != NULL || newTarget->Parent() != NULL) return E_ERROR;
+		if(newTarget->Window() != NULL || newTarget->Parent() != NULL) return B_ERROR;
 
 	if(fTarget != NULL)
 	{
-		EView *target = fTarget;
+		BView *target = fTarget;
 		fTarget = NULL;
 
 		target->RemoveSelf();
@@ -122,78 +122,78 @@ EScrollView::SetTarget(EView *newTarget)
 			fVSB->SetEnabled(false);
 		}
 
-		return E_OK;
+		return B_OK;
 	}
 
 	fTarget = newTarget;
 	AddChild(newTarget);
 	if(newTarget->Parent() != this)
 	{
-		ETK_WARNING("[INTERFACE]: %s --- Unable to add target.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[INTERFACE]: %s --- Unable to add target.", __PRETTY_FUNCTION__);
 		fTarget = NULL;
-		return E_ERROR;
+		return B_ERROR;
 	}
 
 	if(fHSB != NULL) fHSB->SetTarget(fTarget);
 	if(fVSB != NULL) fVSB->SetTarget(fTarget);
-	EScrollView::FrameResized(Frame().Width(), Frame().Height());
+	BScrollView::FrameResized(Frame().Width(), Frame().Height());
 	fTarget->TargetedByScrollView(this);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-EView*
-EScrollView::Target() const
+BView*
+BScrollView::Target() const
 {
 	return fTarget;
 }
 
 
 void
-EScrollView::SetBorder(e_border_style border)
+BScrollView::SetBorder(b_border_style border)
 {
 	if(fBorder != border)
 	{
 		fBorder = border;
 
-		if(fBorder != E_NO_BORDER)
-			EView::SetFlags(Flags() | E_WILL_DRAW);
+		if(fBorder != B_NO_BORDER)
+			BView::SetFlags(Flags() | B_WILL_DRAW);
 		else
-			EView::SetFlags(Flags() & ~E_WILL_DRAW);
+            BView::SetFlags(Flags() & ~B_WILL_DRAW);
 
 		Invalidate();
 	}
 }
 
 
-e_border_style
-EScrollView::Border() const
+b_border_style
+BScrollView::Border() const
 {
 	return fBorder;
 }
 
 
-EScrollBar*
-EScrollView::ScrollBar(e_orientation direction) const
+BScrollBar*
+BScrollView::ScrollBar(b_orientation direction) const
 {
-	return(direction == E_HORIZONTAL ? fHSB : fVSB);
+	return(direction == B_HORIZONTAL ? fHSB : fVSB);
 }
 
 
 void
-EScrollView::Draw(ERect updateRect)
+BScrollView::Draw(BRect updateRect)
 {
 	// TODO
 }
 
 
 void
-EScrollView::FrameResized(float new_width, float new_height)
+BScrollView::FrameResized(float new_width, float new_height)
 {
 	if(fTarget == NULL) return;
 
-	ERect targetFrame = fTarget->Frame();
+	BRect targetFrame = fTarget->Frame();
 
 	if(fHSB != NULL)
 	{
@@ -232,27 +232,27 @@ EScrollView::FrameResized(float new_width, float new_height)
 	{
 		if(vsbHidden && fHSB != NULL)
 		{
-			ERect hR = Frame().OffsetToSelf(E_ORIGIN);
-			hR.top = hR.bottom - E_H_SCROLL_BAR_HEIGHT;
+			BRect hR = Frame().OffsetToSelf(B_ORIGIN);
+			hR.top = hR.bottom - B_H_SCROLL_BAR_HEIGHT;
 			fHSB->ResizeTo(hR.Width(), hR.Height());
 			fHSB->MoveTo(hR.LeftTop());
 		}
 		else if(hsbHidden && fVSB != NULL)
 		{
-			ERect vR = Frame().OffsetToSelf(E_ORIGIN);
-			vR.left = vR.right - E_V_SCROLL_BAR_WIDTH;
+			BRect vR = Frame().OffsetToSelf(B_ORIGIN);
+			vR.left = vR.right - B_V_SCROLL_BAR_WIDTH;
 			fVSB->ResizeTo(vR.Width(), vR.Height());
 			fVSB->MoveTo(vR.LeftTop());
 		}
 	}
 	else
 	{
-		ERect hR = Frame().OffsetToSelf(E_ORIGIN);
-		ERect vR = Frame().OffsetToSelf(E_ORIGIN);
-		hR.top = hR.bottom - E_H_SCROLL_BAR_HEIGHT;
-		hR.right -= E_V_SCROLL_BAR_WIDTH;
-		vR.left = vR.right - E_V_SCROLL_BAR_WIDTH;
-		vR.bottom -= E_H_SCROLL_BAR_HEIGHT;
+		BRect hR = Frame().OffsetToSelf(B_ORIGIN);
+		BRect vR = Frame().OffsetToSelf(B_ORIGIN);
+		hR.top = hR.bottom - B_H_SCROLL_BAR_HEIGHT;
+		hR.right -= B_V_SCROLL_BAR_WIDTH;
+		vR.left = vR.right - B_V_SCROLL_BAR_WIDTH;
+		vR.bottom -= B_H_SCROLL_BAR_HEIGHT;
 
 		fHSB->ResizeTo(hR.Width(), hR.Height());
 		fHSB->MoveTo(hR.LeftTop());
@@ -263,17 +263,17 @@ EScrollView::FrameResized(float new_width, float new_height)
 
 
 void
-EScrollView::SetScrollBarAutoState(bool alwaysShowHorizontal, bool alwaysShowVertical)
+BScrollView::SetScrollBarAutoState(bool alwaysShowHorizontal, bool alwaysShowVertical)
 {
 	fAlwaysShowHorizontal = alwaysShowHorizontal;
 	fAlwaysShowVertical = alwaysShowVertical;
 
-	EScrollView::FrameResized(Frame().Width(), Frame().Height());
+	BScrollView::FrameResized(Frame().Width(), Frame().Height());
 }
 
 
 void
-EScrollView::GetScrollBarAutoState(bool *alwaysShowHorizontal, bool *alwaysShowVertical) const
+BScrollView::GetScrollBarAutoState(bool *alwaysShowHorizontal, bool *alwaysShowVertical) const
 {
 	if(alwaysShowHorizontal) *alwaysShowHorizontal = fAlwaysShowHorizontal;
 	if(alwaysShowVertical) *alwaysShowVertical = fAlwaysShowVertical;
@@ -281,19 +281,19 @@ EScrollView::GetScrollBarAutoState(bool *alwaysShowHorizontal, bool *alwaysShowV
 
 
 void
-EScrollView::SetFlags(euint32 flags)
+BScrollView::SetFlags(b_uint32 flags)
 {
-	flags |= E_FRAME_EVENTS;
-	if(fBorder != E_NO_BORDER)
-		flags |= E_WILL_DRAW;
+	flags |= B_FRAME_EVENTS;
+	if(fBorder != B_NO_BORDER)
+		flags |= B_WILL_DRAW;
 	else
-		flags &= ~E_WILL_DRAW;
-	EView::SetFlags(flags);
+        flags &= ~B_WILL_DRAW;
+	BView::SetFlags(flags);
 }
 
 
 void
-EScrollView::ChildRemoving(EView *child)
+BScrollView::ChildRemoving(BView *child)
 {
 	if(fHSB == child)
 	{
@@ -311,11 +311,11 @@ EScrollView::ChildRemoving(EView *child)
 }
 
 
-ERect
-EScrollView::TargetFrame() const
+BRect
+BScrollView::TargetFrame() const
 {
-	ERect r = TargetValidFrame(false);
-	if(fTarget) r &= fTarget->ConvertToParent(fTarget->Frame().OffsetToSelf(E_ORIGIN));
+	BRect r = TargetValidFrame(false);
+	if(fTarget) r &= fTarget->ConvertToParent(fTarget->Frame().OffsetToSelf(B_ORIGIN));
 	return r;
 }
 

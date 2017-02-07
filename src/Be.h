@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ --- The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -23,24 +23,24 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * File: ETK.h
+ * File: BHAPI.h
  *
  * --------------------------------------------------------------------------*/
 
 #include "./support/SupportDefs.h"
-#define ETK_MAJOR_VERSION 0
-#define ETK_MINOR_VERSION 0
-#define ETK_MICRO_VERSION 1
-#define ETK_INTERFACE_AGE 1
-#define ETK_BINARY_AGE 1
+#define BHAPI_MAJOR_VERSION 0
+#define BHAPI_MINOR_VERSION 0
+#define BHAPI_MICRO_VERSION 1
+#define BHAPI_INTERFACE_AGE 1
+#define BHAPI_BINARY_AGE 1
 
 extern "C" {
 
-extern _IMPEXP_ETK const euint8 etk_major_version = ETK_MAJOR_VERSION;
-extern _IMPEXP_ETK const euint8 etk_minor_version = ETK_MINOR_VERSION;
-extern _IMPEXP_ETK const euint8 etk_micro_version = ETK_MICRO_VERSION;
-extern _IMPEXP_ETK const euint8 etk_interface_age = ETK_INTERFACE_AGE;
-extern _IMPEXP_ETK const euint16 etk_binary_age = ETK_BINARY_AGE;
+extern _IMPEXP_BHAPI const b_uint8 bhapi_major_version = BHAPI_MAJOR_VERSION;
+extern _IMPEXP_BHAPI const b_uint8 bhapi_minor_version = BHAPI_MINOR_VERSION;
+extern _IMPEXP_BHAPI const b_uint8 bhapi_micro_version = BHAPI_MICRO_VERSION;
+extern _IMPEXP_BHAPI const b_uint8 bhapi_interface_age = BHAPI_INTERFACE_AGE;
+extern _IMPEXP_BHAPI const b_uint16 bhapi_binary_age = BHAPI_BINARY_AGE;
 
 } // extern "C"
 

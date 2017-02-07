@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,47 +27,47 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_FONT_H__
-#define __ETK_FONT_H__
+#ifndef __BHAPI_FONT_H__
+#define __BHAPI_FONT_H__
 
 #include "./../support/SupportDefs.h"
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 
-#define E_FONT_FAMILY_LENGTH	127
-#define E_FONT_STYLE_LENGTH	63
-#define E_FONT_MIN_TAB_WIDTH	(-16.f)
+#define B_FONT_FAMILY_LENGTH	127
+#define B_FONT_STYLE_LENGTH	63
+#define B_FONT_MIN_TAB_WIDTH	(-16.f)
 
 
-typedef char e_font_family[E_FONT_FAMILY_LENGTH + 1];
-typedef char e_font_style[E_FONT_STYLE_LENGTH + 1];
+typedef char b_font_family[B_FONT_FAMILY_LENGTH + 1];
+typedef char b_font_style[B_FONT_STYLE_LENGTH + 1];
 
-typedef struct e_font_height {
+typedef struct b_font_height {
 	float ascent;
 	float descent;
 	float leading;
-} e_font_height;
+} b_font_height;
 
-typedef struct _e_font_desc e_font_desc;
+typedef struct _b_font_desc b_font_desc;
 
 
 #ifdef __cplusplus /* Just for C++ */
 
-class EView;
-class EFontEngine;
+class BView;
+class BFontEngine;
 
-class _IMPEXP_ETK EFont {
+class _IMPEXP_BHAPI BFont {
 public:
-	EFont();
-	EFont(const EFont &font);
-	EFont(const EFont *font);
-	EFont(const e_font_desc &fontDesc);
-	virtual ~EFont();
+	BFont();
+	BFont(const BFont &font);
+	BFont(const BFont *font);
+	BFont(const b_font_desc &fontDesc);
+	virtual ~BFont();
 
-	e_status_t	SetFamilyAndStyle(const e_font_family family, const e_font_style style);
-	e_status_t	SetFamilyAndStyle(euint32 code);
+	b_status_t	SetFamilyAndStyle(const b_font_family family, const b_font_style style);
+    b_status_t	SetFamilyAndStyle(b_uint32 code);
 
-	e_status_t	GetFamilyAndStyle(e_font_family *family, e_font_style *style) const;
-	euint32		FamilyAndStyle() const;
+    b_status_t	GetFamilyAndStyle(b_font_family *family, b_font_style *style) const;
+    b_uint32		FamilyAndStyle() const;
 
 	void		SetSize(float size);
 	void		SetSpacing(float spacing);
@@ -80,69 +80,69 @@ public:
 	bool		IsBoldStyle() const;
 
 	bool		IsScalable() const;
-	bool		HasFixedSize(eint32 *count = NULL) const;
-	bool		GetFixedSize(float *size, eint32 index = 0) const;
+    bool		HasFixedSize(b_int32 *count = NULL) const;
+    bool		GetFixedSize(float *size, b_int32 index = 0) const;
 
 	// tabWidth:
 	// 	positive --- fixed size
 	// 	0        --- decided on the font
 	// 	negative --- multiple of space
-	float		StringWidth(const char *string, eint32 length = -1, float tabWidth = 0) const;
-	float		StringWidth(const EString &str, eint32 length = -1, float tabWidth = 0) const;
-	void		GetHeight(e_font_height *height) const;
+    float		StringWidth(const char *string, b_int32 length = -1, float tabWidth = 0) const;
+    float		StringWidth(const BString &str, b_int32 length = -1, float tabWidth = 0) const;
+    void		GetHeight(b_font_height *height) const;
 
 	// CharWidths(): return value must free by "delete[]"
-	float		*CharWidths(const char *string, eint32 *nChars, float tabWidth = 0) const;
-	float		*CharWidths(const EString &str, eint32 *nChars, float tabWidth = 0) const;
-	float		*CharWidths(const char *string, eint32 length, eint32 *nChars, float tabWidth = 0) const;
-	float		*CharWidths(const EString &str, eint32 length, eint32 *nChars, float tabWidth = 0) const;
+    float		*CharWidths(const char *string, b_int32 *nChars, float tabWidth = 0) const;
+    float		*CharWidths(const BString &str, b_int32 *nChars, float tabWidth = 0) const;
+    float		*CharWidths(const char *string, b_int32 length, b_int32 *nChars, float tabWidth = 0) const;
+    float		*CharWidths(const BString &str, b_int32 length, b_int32 *nChars, float tabWidth = 0) const;
 
-	EFont		&operator=(const EFont &font);
-	EFont		&operator=(const e_font_desc &fontDesc);
+	BFont		&operator=(const BFont &font);
+	BFont		&operator=(const b_font_desc &fontDesc);
 
-	bool		operator==(const EFont &font);
-	bool		operator!=(const EFont &font);
+	bool		operator==(const BFont &font);
+	bool		operator!=(const BFont &font);
 
 	void		PrintToStream() const;
 
 private:
-	friend class EView;
+	friend class BView;
 
 	void *fInfo;
 
-	EFontEngine *Engine() const;
+	BFontEngine *Engine() const;
 };
 
-extern _IMPEXP_ETK const EFont* etk_plain_font;
-extern _IMPEXP_ETK const EFont* etk_bold_font;
-extern _IMPEXP_ETK const EFont* etk_fixed_font;
+extern _IMPEXP_BHAPI const BFont* bhapi_plain_font;
+extern _IMPEXP_BHAPI const BFont* bhapi_bold_font;
+extern _IMPEXP_BHAPI const BFont* bhapi_fixed_font;
 
-_IMPEXP_ETK eint32	etk_count_font_families(void);
-_IMPEXP_ETK e_status_t	etk_get_font_family(eint32 index, const char **name);
-_IMPEXP_ETK eint32	etk_get_font_family_index(const char *name);
-_IMPEXP_ETK eint32	etk_count_font_styles(const char *family);
-_IMPEXP_ETK eint32	etk_count_font_styles(eint32 index);
-_IMPEXP_ETK e_status_t	etk_get_font_style(const char *family, eint32 index, const char **name);
-_IMPEXP_ETK eint32	etk_get_font_style_index(const char *family, const char *name);
-_IMPEXP_ETK bool	etk_update_font_families(bool check_only);
+_IMPEXP_BHAPI b_int32	bhapi_count_font_families(void);
+_IMPEXP_BHAPI b_status_t	bhapi_get_font_family(b_int32 index, const char **name);
+_IMPEXP_BHAPI b_int32	bhapi_get_font_family_index(const char *name);
+_IMPEXP_BHAPI b_int32	bhapi_count_font_styles(const char *family);
+_IMPEXP_BHAPI b_int32	bhapi_count_font_styles(b_int32 index);
+_IMPEXP_BHAPI b_status_t	bhapi_get_font_style(const char *family, b_int32 index, const char **name);
+_IMPEXP_BHAPI b_int32	bhapi_get_font_style_index(const char *family, const char *name);
+_IMPEXP_BHAPI bool	bhapi_updatb_font_families(bool check_only);
 
 #endif /* __cplusplus */
 
 
-struct _e_font_desc {
-	e_font_family	family;
-	e_font_style	style;
+struct _b_font_desc {
+	b_font_family	family;
+	b_font_style	style;
 	float		size;
 	float		spacing;
 	float		shear;
 	bool		bold;
 #ifdef __cplusplus
-	inline _e_font_desc()
+    inline _b_font_desc()
 	{
-		bzero(this, sizeof(struct _e_font_desc));
+        bzero(this, sizeof(struct _b_font_desc));
 	}
 
-	inline _e_font_desc &operator=(const EFont &from)
+    inline _b_font_desc &operator=(const BFont &from)
 	{
 		from.GetFamilyAndStyle(&family, &style);
 		size = from.Size();
@@ -152,12 +152,12 @@ struct _e_font_desc {
 		return *this;
 	}
 
-	inline void SetFamilyAndStyle(const e_font_family f, const e_font_style s)
+	inline void SetFamilyAndStyle(const b_font_family f, const b_font_style s)
 	{
-		bzero(family, sizeof(e_font_family));
-		bzero(style, sizeof(e_font_style));
-		memcpy(family, f, min_c(E_FONT_FAMILY_LENGTH, strlen(f)));
-		memcpy(style, s, min_c(E_FONT_STYLE_LENGTH, strlen(s)));
+        bzero(family, sizeof(b_font_family));
+        bzero(style, sizeof(b_font_style));
+        memcpy(family, f, min_c(B_FONT_FAMILY_LENGTH, strlen(f)));
+        memcpy(style, s, min_c(B_FONT_STYLE_LENGTH, strlen(s)));
 	}
 
 	inline void SetSize(float val) {size = val;}
@@ -165,10 +165,10 @@ struct _e_font_desc {
 	inline void SetShear(float val) {shear = val;}
 	inline void SetBoldStyle(bool val) {bold = val;}
 
-	inline void GetFamilyAndStyle(e_font_family *f, e_font_style *s)
+    inline void GetFamilyAndStyle(b_font_family *f, b_font_style *s)
 	{
-		if(f) memcpy(*f, family, E_FONT_FAMILY_LENGTH + 1);
-		if(s) memcpy(*s, style, E_FONT_STYLE_LENGTH + 1);
+		if(f) memcpy(*f, family, B_FONT_FAMILY_LENGTH + 1);
+		if(s) memcpy(*s, style, B_FONT_STYLE_LENGTH + 1);
 	}
 
 	inline float Size() const {return size;}
@@ -179,5 +179,5 @@ struct _e_font_desc {
 };
 
 
-#endif /* __ETK_FONT_H__ */
+#endif /* __BHAPI_FONT_H__ */
 

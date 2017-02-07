@@ -85,7 +85,6 @@ INPUT(
 ./debug/Locker.o
 ./debug/SimpleLocker.o
 ./debug/StreamIO.o
-./debug/String.o
 ./debug/StringArray.o
 ./debug/SimpleXmlParser.o
 ./debug/etkxx-doc.o
@@ -93,6 +92,7 @@ INPUT(
 ./debug/LayoutContainer.o
 ./debug/LayoutForm.o
 ./debug/LayoutItem.o
+./debug/StringMe.o
 ./debug/etk-application.o
 ./debug/etk-drawing.o
 ./debug/etk-pixmap.o

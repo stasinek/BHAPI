@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,71 +24,71 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  * File: MenuField.h
- * Description: EMenuField --- display a labeled pop-up menu
+ * Description: BMenuField --- display a labeled pop-up menu
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_MENU_FIELD_H__
-#define __ETK_MENU_FIELD_H__
+#ifndef __BHAPI_MENU_FIELD_H__
+#define __BHAPI_MENU_FIELD_H__
 
 #include "./../interface/MenuBar.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EMenuField : public EView {
+class _IMPEXP_BHAPI BMenuField : public BView {
 public:
-	EMenuField(ERect frame,
+	BMenuField(BRect frame,
 		   const char *name,
 		   const char *label,
-		   EMenu *menu,
+		   BMenu *menu,
 		   bool fixedSize = false,
-		   euint32 resizeMode = E_FOLLOW_LEFT | E_FOLLOW_TOP,
-		   euint32 flags = E_WILL_DRAW | E_NAVIGABLE | E_FRAME_EVENTS);
-	virtual ~EMenuField();
+		   b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+		   b_uint32 flags = B_WILL_DRAW | B_NAVIGABLE | B_FRAME_EVENTS);
+	virtual ~BMenuField();
 
 	virtual void	SetLabel(const char *label);
 	const char	*Label() const;
 
-	virtual void	SetAlignment(e_alignment alignment);
-	e_alignment	Alignment() const;
+	virtual void	SetAlignment(b_alignment alignment);
+	b_alignment	Alignment() const;
 
 	virtual void	SetDivider(float divider);
 	float		Divider() const;
 
 	// SetMenu: the old menu will be destructed automatically.
-	virtual bool	SetMenu(EMenu *menu);
-	EMenu		*Menu() const;
+	virtual bool	SetMenu(BMenu *menu);
+	BMenu		*Menu() const;
 
-	EMenuBar	*MenuBar() const;
-	EMenuItem	*MenuItem() const;
+	BMenuBar	*MenuBar() const;
+	BMenuItem	*MenuItem() const;
 
-	virtual void	Draw(ERect updateRect);
+	virtual void	Draw(BRect updateRect);
 	virtual void	GetPreferredSize(float *width, float *height);
-	virtual void	FrameMoved(EPoint new_position);
+	virtual void	FrameMoved(BPoint new_position);
 	virtual void	FrameResized(float new_width, float new_height);
 	virtual void	WindowActivated(bool state);
 	virtual void	MakeFocus(bool focusState = true);
-	virtual void	SetFont(const EFont *font, euint8 mask = E_FONT_ALL);
-	virtual void	MouseDown(EPoint where);
-	virtual void	MouseUp(EPoint where);
-	virtual void	MouseMoved(EPoint where, euint32 code, const EMessage *a_message);
-	virtual void	KeyDown(const char *bytes, eint32 numBytes);
-	virtual void	KeyUp(const char *bytes, eint32 numBytes);
+	virtual void	SetFont(const BFont *font, b_uint8 mask = B_FONT_ALL);
+	virtual void	MouseDown(BPoint where);
+	virtual void	MouseUp(BPoint where);
+	virtual void	MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
+	virtual void	KeyDown(const char *bytes, b_int32 numBytes);
+	virtual void	KeyUp(const char *bytes, b_int32 numBytes);
 
 protected:
-	virtual void	ChildRemoving(EView *child);
+	virtual void	ChildRemoving(BView *child);
 
 private:
 	bool fFixedSize;
-	e_alignment fAlignment;
+	b_alignment fAlignment;
 	float fDivider;
 
 	char *fLabel;
-	EMenuBar *fMenuBar;
-	EMenu *fMenu;
+	BMenuBar *fMenuBar;
+	BMenu *fMenu;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_MENU_FIELD_H__ */
+#endif /* __BHAPI_MENU_FIELD_H__ */
 

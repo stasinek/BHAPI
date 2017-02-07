@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -31,35 +31,35 @@
 #include <errno.h"
 
 #include "./../kernel/Kernel.h"
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 
-typedef struct etk_posix_locker_t {
-	etk_posix_locker_t()
-		: holderThreadId(E_INT64_CONSTANT(0)), lockCount(E_INT64_CONSTANT(0)), closed(false), created(false), refCount(0)
+typedef struct bhapi_posix_locker_t {
+	bhapi_posix_locker_t()
+		: holderThreadId(B_INT64_CONSTANT(0)), lockCount(B_INT64_CONSTANT(0)), closed(false), created(false), refCount(0)
 	{
 	}
 
-	~etk_posix_locker_t()
+	~bhapi_posix_locker_t()
 	{
 		if(created)
 		{
 			created = false;
-			etk_delete_locker((void*)this);
+			bhapi_delete_locker((void*)this);
 		}
 	}
 
-	void SetHolderThreadId(eint64 id)
+	void SetHolderThreadId(b_int64 id)
 	{
 		holderThreadId = id;
 	}
 
 	bool HolderThreadIsCurrent(void)
 	{
-		return(holderThreadId == etk_get_current_thread_id());
+		return(holderThreadId == bhapi_get_current_thread_id());
 	}
 
-	eint64			holderThreadId;
-	eint64			lockCount;
+	b_int64			holderThreadId;
+	b_int64			lockCount;
 	bool			closed;
 	pthread_mutex_t		iLocker;
 	pthread_mutex_t		Locker;
@@ -67,28 +67,28 @@ typedef struct etk_posix_locker_t {
 
 	bool			created;
 
-	euint32			refCount;
-} etk_posix_locker_t;
+	b_uint32			refCount;
+} bhapi_posix_locker_t;
 
 
-static void etk_lock_locker_inter(etk_posix_locker_t *locker)
+static void bhapi_lock_locker_inter(bhapi_posix_locker_t *locker)
 {
 	pthread_mutex_lock(&(locker->iLocker));
 }
 
 
-static void etk_unlock_locker_inter(etk_posix_locker_t *locker)
+static void bhapi_unlock_locker_inter(bhapi_posix_locker_t *locker)
 {
 	pthread_mutex_unlock(&(locker->iLocker));
 }
 
 
-_IMPEXP_ETK void* etk_create_locker(void)
+_IMPEXP_BHAPI void* bhapi_create_locker(void)
 {
-	etk_posix_locker_t *locker = new etk_posix_locker_t();
+	bhapi_posix_locker_t *locker = new bhapi_posix_locker_t();
 	if(!locker) return NULL;
 
-	euint32 successFlags = 0;
+	b_uint32 successFlags = 0;
 
 	if(pthread_mutex_init(&(locker->iLocker), NULL) != 0) successFlags |= (1 << 1);
 	if(pthread_mutex_init(&(locker->Locker), NULL) != 0) successFlags |= (1 << 2);
@@ -110,44 +110,44 @@ _IMPEXP_ETK void* etk_create_locker(void)
 }
 
 
-_IMPEXP_ETK void* etk_clone_locker(void *data)
+_IMPEXP_BHAPI void* bhapi_clone_locker(void *data)
 {
-	etk_posix_locker_t *locker = (etk_posix_locker_t*)data;
+	bhapi_posix_locker_t *locker = (bhapi_posix_locker_t*)data;
 	if(!locker) return NULL;
 
-	etk_lock_locker_inter(locker);
+	bhapi_lock_locker_inter(locker);
 
-	if(locker->closed || locker->refCount >= E_MAXUINT32)
+	if(locker->closed || locker->refCount >= B_MAXUINT32)
 	{
-		etk_unlock_locker_inter(locker);
+		bhapi_unlock_locker_inter(locker);
 		return NULL;
 	}
 
 	locker->refCount += 1;
 
-	etk_unlock_locker_inter(locker);
+	bhapi_unlock_locker_inter(locker);
 
 	return data;
 }
 
 
-_IMPEXP_ETK e_status_t etk_delete_locker(void *data)
+_IMPEXP_BHAPI b_status_t bhapi_delete_locker(void *data)
 {
-	etk_posix_locker_t *locker = (etk_posix_locker_t*)data;
-	if(!locker) return E_BAD_VALUE;
+	bhapi_posix_locker_t *locker = (bhapi_posix_locker_t*)data;
+	if(!locker) return B_BAD_VALUE;
 
-	etk_lock_locker_inter(locker);
-	euint32 count = --(locker->refCount);
+	bhapi_lock_locker_inter(locker);
+	b_uint32 count = --(locker->refCount);
 #if 0
 	bool showWarning = (locker->HolderThreadIsCurrent() && locker->closed == false && count > 0);
 #endif
-	etk_unlock_locker_inter(locker);
+	bhapi_unlock_locker_inter(locker);
 
 #if 0
 	if(showWarning)
-		ETK_OUTPUT("\n\
+		BHAPI_OUTPUT("\n\
 **************************************************************************\n\
-*                      [KERNEL]: etk_delete_locker                       *\n\
+*                      [KERNEL]: bhapi_delete_locker                       *\n\
 *                                                                        *\n\
 *  Locker still locked by current thread, and some clone-copies existed  *\n\
 *  It's recommended that unlock or close the locker before delete it.    *\n\
@@ -155,7 +155,7 @@ _IMPEXP_ETK e_status_t etk_delete_locker(void *data)
 **************************************************************************\n");
 #endif
 
-	if(count > 0) return E_OK;
+	if(count > 0) return B_OK;
 
 	pthread_mutex_destroy(&(locker->iLocker));
 	pthread_mutex_destroy(&(locker->Locker));
@@ -167,61 +167,61 @@ _IMPEXP_ETK e_status_t etk_delete_locker(void *data)
 		delete locker;
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-/* after you call "etk_close_locker":
- * 	1. the next "etk_lock_locker..." function call will be failed
+/* after you call "bhapi_close_locker":
+ * 	1. the next "bhapi_lock_locker..." function call will be failed
  * */
-_IMPEXP_ETK e_status_t etk_close_locker(void *data)
+_IMPEXP_BHAPI b_status_t bhapi_close_locker(void *data)
 {
-	etk_posix_locker_t *locker = (etk_posix_locker_t*)data;
-	if(!locker) return E_BAD_VALUE;
+	bhapi_posix_locker_t *locker = (bhapi_posix_locker_t*)data;
+	if(!locker) return B_BAD_VALUE;
 
-	etk_lock_locker_inter(locker);
+	bhapi_lock_locker_inter(locker);
 	if(locker->closed)
 	{
-		etk_unlock_locker_inter(locker);
-		return E_ERROR;
+		bhapi_unlock_locker_inter(locker);
+		return B_ERROR;
 	}
 	locker->closed = true;
 	pthread_cond_broadcast(&(locker->Cond));
-	etk_unlock_locker_inter(locker);
+	bhapi_unlock_locker_inter(locker);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-_IMPEXP_ETK e_status_t etk_lock_locker(void *data)
+_IMPEXP_BHAPI b_status_t bhapi_lock_locker(void *data)
 {
-	return etk_lock_locker_etc(data, E_TIMEOUT, E_INFINITE_TIMEOUT);
+	return bhapi_lock_locker_etc(data, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-_IMPEXP_ETK e_status_t etk_lock_locker_etc(void *data, euint32 flags, e_bigtime_t microseconds_timeout)
+_IMPEXP_BHAPI b_status_t bhapi_lock_locker_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
-	etk_posix_locker_t *locker = (etk_posix_locker_t*)data;
-	if(!locker) return E_BAD_VALUE;
+	bhapi_posix_locker_t *locker = (bhapi_posix_locker_t*)data;
+	if(!locker) return B_BAD_VALUE;
 
-	if(microseconds_timeout < E_INT64_CONSTANT(0)) return E_BAD_VALUE;
+	if(microseconds_timeout < B_INT64_CONSTANT(0)) return B_BAD_VALUE;
 
 	bool wait_forever = false;
-	e_bigtime_t currentTime = etk_real_time_clock_usecs();
-	if(flags != E_ABSOLUTE_TIMEOUT)
+	b_bigtime_t currentTime = bhapi_real_time_clock_usecs();
+	if(flags != B_ABSOLUTE_TIMEOUT)
 	{
-		if(microseconds_timeout == E_INFINITE_TIMEOUT || microseconds_timeout > E_MAXINT64 - currentTime)
+		if(microseconds_timeout == B_INFINITE_TIMEOUT || microseconds_timeout > B_MAXINT64 - currentTime)
 			wait_forever = true;
 		else
 			microseconds_timeout += currentTime;
 	}
 
-	etk_lock_locker_inter(locker);
+	bhapi_lock_locker_inter(locker);
 
 	if(locker->closed)
 	{
-		etk_unlock_locker_inter(locker);
-		return E_ERROR;
+		bhapi_unlock_locker_inter(locker);
+		return B_ERROR;
 	}
 
 	if(locker->HolderThreadIsCurrent() == false)
@@ -234,24 +234,24 @@ _IMPEXP_ETK e_status_t etk_lock_locker_etc(void *data, euint32 flags, e_bigtime_
 		{
 			if(pthread_mutex_trylock(Locker) != 0)
 			{
-				etk_unlock_locker_inter(locker);
-				return E_WOULD_BLOCK;
+				bhapi_unlock_locker_inter(locker);
+				return B_WOULD_BLOCK;
 			}
 		}
 		else
 		{
 			struct timespec ts;
 
-			ts.tv_sec = (long)(microseconds_timeout / E_INT64_CONSTANT(1000000));
-			ts.tv_nsec = (long)(microseconds_timeout % E_INT64_CONSTANT(1000000)) * 1000L;
+			ts.tv_sec = (long)(microseconds_timeout / B_INT64_CONSTANT(1000000));
+			ts.tv_nsec = (long)(microseconds_timeout % B_INT64_CONSTANT(1000000)) * 1000L;
 
 			int ret;
 			while((ret = pthread_mutex_trylock(Locker)) != 0)
 			{
 				if(ret != EBUSY || locker->closed)
 				{
-					etk_unlock_locker_inter(locker);
-					return E_ERROR;
+					bhapi_unlock_locker_inter(locker);
+					return B_ERROR;
 				}
 
 				ret = (wait_forever ? pthread_cond_wait(Cond, iLocker) : pthread_cond_timedwait(Cond, iLocker, &ts));
@@ -260,10 +260,10 @@ _IMPEXP_ETK e_status_t etk_lock_locker_etc(void *data, euint32 flags, e_bigtime_
 				{
 					if(ret == ETIMEDOUT && !wait_forever)
 					{
-						etk_unlock_locker_inter(locker);
-						return E_TIMED_OUT;
+						bhapi_unlock_locker_inter(locker);
+						return B_TIMED_OUT;
 					}
-					else return E_ERROR;
+					else return B_ERROR;
 				}
 			}
 		}
@@ -271,90 +271,90 @@ _IMPEXP_ETK e_status_t etk_lock_locker_etc(void *data, euint32 flags, e_bigtime_
 		if(locker->closed)
 		{
 			pthread_mutex_unlock(Locker);
-			etk_unlock_locker_inter(locker);
-			return E_ERROR;
+			bhapi_unlock_locker_inter(locker);
+			return B_ERROR;
 		}
 
-		locker->SetHolderThreadId(etk_get_current_thread_id());
-		locker->lockCount = E_INT64_CONSTANT(1);
+		locker->SetHolderThreadId(bhapi_get_current_thread_id());
+		locker->lockCount = B_INT64_CONSTANT(1);
 
-		etk_unlock_locker_inter(locker);
+		bhapi_unlock_locker_inter(locker);
 	}
 	else
 	{
-		if(E_MAXINT64 - locker->lockCount < E_INT64_CONSTANT(1))
+		if(B_MAXINT64 - locker->lockCount < B_INT64_CONSTANT(1))
 		{
-			etk_unlock_locker_inter(locker);
-			return E_ERROR;
+			bhapi_unlock_locker_inter(locker);
+			return B_ERROR;
 		}
 
 		locker->lockCount++;
-		etk_unlock_locker_inter(locker);
+		bhapi_unlock_locker_inter(locker);
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-_IMPEXP_ETK e_status_t etk_unlock_locker(void *data)
+_IMPEXP_BHAPI b_status_t bhapi_unlock_locker(void *data)
 {
-	etk_posix_locker_t *locker = (etk_posix_locker_t*)data;
-	if(!locker) return E_BAD_VALUE;
+	bhapi_posix_locker_t *locker = (bhapi_posix_locker_t*)data;
+	if(!locker) return B_BAD_VALUE;
 
-	etk_lock_locker_inter(locker);
+	bhapi_lock_locker_inter(locker);
 
 	if(locker->HolderThreadIsCurrent() == false)
 	{
-		etk_unlock_locker_inter(locker);
-		ETK_WARNING("[KERNEL]: %s -- Can't unlock when didn't hold it in current thread!", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		bhapi_unlock_locker_inter(locker);
+		BHAPI_WARNING("[KERNEL]: %s -- Can't unlock when didn't hold it in current thread!", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 	else
 	{
-		if(locker->lockCount <= E_INT64_CONSTANT(1))
+		if(locker->lockCount <= B_INT64_CONSTANT(1))
 		{
 			if(pthread_mutex_unlock(&(locker->Locker)) != 0)
 			{
-				etk_unlock_locker_inter(locker);
-				return E_ERROR;
+				bhapi_unlock_locker_inter(locker);
+				return B_ERROR;
 			}
 		}
 
 		locker->lockCount--;
 
-		if(locker->lockCount <= E_INT64_CONSTANT(0))
+		if(locker->lockCount <= B_INT64_CONSTANT(0))
 		{
-			locker->SetHolderThreadId(E_INT64_CONSTANT(0));
-			locker->lockCount = E_INT64_CONSTANT(0);
+			locker->SetHolderThreadId(B_INT64_CONSTANT(0));
+			locker->lockCount = B_INT64_CONSTANT(0);
 			pthread_cond_broadcast(&(locker->Cond));
 		}
 
-		etk_unlock_locker_inter(locker);
+		bhapi_unlock_locker_inter(locker);
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-_IMPEXP_ETK eint64 etk_count_locker_locks(void *data)
+_IMPEXP_BHAPI b_int64 bhapi_count_locker_locks(void *data)
 {
-	eint64 retVal = E_INT64_CONSTANT(0);
+	b_int64 retVal = B_INT64_CONSTANT(0);
 
-	etk_posix_locker_t *locker = (etk_posix_locker_t*)data;
+	bhapi_posix_locker_t *locker = (bhapi_posix_locker_t*)data;
 
 	if(locker)
 	{
-		etk_lock_locker_inter(locker);
+		bhapi_lock_locker_inter(locker);
 		if(locker->HolderThreadIsCurrent()) retVal = locker->lockCount;
-		else if(locker->lockCount > E_INT64_CONSTANT(0)) retVal = -(locker->lockCount);
-		etk_unlock_locker_inter(locker);
+		else if(locker->lockCount > B_INT64_CONSTANT(0)) retVal = -(locker->lockCount);
+		bhapi_unlock_locker_inter(locker);
 	}
 
 	return retVal;
 }
 
 
-_IMPEXP_ETK void* etk_create_simple_locker(void)
+_IMPEXP_BHAPI void* bhapi_create_simple_locker(void)
 {
 	pthread_mutex_t *locker = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
 	if(!locker) return NULL;
@@ -369,17 +369,17 @@ _IMPEXP_ETK void* etk_create_simple_locker(void)
 }
 
 
-_IMPEXP_ETK e_status_t etk_delete_simple_locker(void* data)
+_IMPEXP_BHAPI b_status_t bhapi_delete_simple_locker(void* data)
 {
 	pthread_mutex_t *locker = (pthread_mutex_t*)data;
-	if(!locker) return E_ERROR;
+	if(!locker) return B_ERROR;
 	pthread_mutex_destroy(locker);
 	free(locker);
-	return E_OK;
+	return B_OK;
 }
 
 
-_IMPEXP_ETK bool etk_lock_simple_locker(void *data)
+_IMPEXP_BHAPI bool bhapi_lock_simple_locker(void *data)
 {
 	pthread_mutex_t *locker = (pthread_mutex_t*)data;
 	if(!locker) return false;
@@ -390,7 +390,7 @@ _IMPEXP_ETK bool etk_lock_simple_locker(void *data)
 }
 
 
-_IMPEXP_ETK void etk_unlock_simple_locker(void *data)
+_IMPEXP_BHAPI void bhapi_unlock_simple_locker(void *data)
 {
 	pthread_mutex_t *locker = (pthread_mutex_t*)data;
 	if(!locker) return;
@@ -399,20 +399,20 @@ _IMPEXP_ETK void etk_unlock_simple_locker(void *data)
 }
 
 
-#ifdef ETK_BUILD_WITH_MEMORY_TRACING
-static pthread_mutex_t __etk_posix_memory_tracing_locker = PTHREAD_MUTEX_INITIALIZER;
+#ifdef BHAPI_BUILD_WITH_MEMORY_TRACING
+static pthread_mutex_t __bhapi_posix_memory_tracing_locker = PTHREAD_MUTEX_INITIALIZER;
 
 
-_IMPEXP_ETK bool etk_memory_tracing_lock(void)
+_IMPEXP_BHAPI bool bhapi_memory_tracing_lock(void)
 {
-	if(pthread_mutex_lock(&__etk_posix_memory_tracing_locker) != 0) return false;
+	if(pthread_mutex_lock(&__bhapi_posix_memory_tracing_locker) != 0) return false;
 	return true;
 }
 
 
-_IMPEXP_ETK void etk_memory_tracing_unlock(void)
+_IMPEXP_BHAPI void bhapi_memory_tracing_unlock(void)
 {
-	pthread_mutex_unlock(&__etk_posix_memory_tracing_locker);
+	pthread_mutex_unlock(&__bhapi_posix_memory_tracing_locker);
 }
-#endif // ETK_BUILD_WITH_MEMORY_TRACING
+#endif // BHAPI_BUILD_WITH_MEMORY_TRACING
 

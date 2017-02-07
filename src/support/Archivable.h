@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,32 +27,32 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_ARCHIVABLE_H__
-#define __ETK_ARCHIVABLE_H__
+#ifndef __BHAPI_ARCHIVABLE_H__
+#define __BHAPI_ARCHIVABLE_H__
 
-#include "SupportDefs.h"
+#include "./SupportDefs.h"
 #include "./../app/Message.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EArchivable {
+class _IMPEXP_BHAPI BArchivable {
 public:
-	EArchivable();
-	EArchivable(const EMessage *from);
-	virtual ~EArchivable();
+    BArchivable();
+    BArchivable(const BMessage *from);
+    virtual ~BArchivable();
 
-	virtual e_status_t Archive(EMessage *into, bool deep = true) const;
-	static EArchivable *Instantiate(const EMessage *from);
+    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    static BArchivable *Instantiate(const BMessage *from);
 };
 
 
-typedef EArchivable *(*e_instantiation_func)(const EMessage*);
+typedef BArchivable *(*b_instantiation_func)(const BMessage*);
 
-_IMPEXP_ETK bool			e_validate_instantiation(const EMessage *from, const char *class_name);
-_IMPEXP_ETK e_instantiation_func	e_find_instantiation_func(const char *class_name);
-_IMPEXP_ETK e_instantiation_func	e_find_instantiation_func(const EMessage *archive_data);
+_IMPEXP_BHAPI bool			b_validatb_instantiation(const BMessage *from, const char *class_name);
+_IMPEXP_BHAPI b_instantiation_func	b_find_instantiation_func(const char *class_name);
+_IMPEXP_BHAPI b_instantiation_func	b_find_instantiation_func(const BMessage *archive_data);
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_ARCHIVABLE_H__ */
+#endif /* __BHAPI_ARCHIVABLE_H__ */
 

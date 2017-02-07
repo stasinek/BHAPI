@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_LAYOUT_H__
-#define __ETK_LAYOUT_H__
+#ifndef __BHAPI_LAYOUT_H__
+#define __BHAPI_LAYOUT_H__
 
 #include "./../../support/List.h"
 #include "./../../interface/InterfaceDefs.h"
@@ -36,108 +36,108 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class ELayoutItem;
-class ELayoutForm;
+class BLayoutItem;
+class BLayoutForm;
 
 
-class _IMPEXP_ETK ELayoutContainer {
+class _IMPEXP_BHAPI BLayoutContainer {
 public:
-	ELayoutContainer();
-	virtual ~ELayoutContainer();
+	BLayoutContainer();
+	virtual ~BLayoutContainer();
 
-	virtual bool		AddItem(ELayoutItem *item, eint32 index = -1);
-	virtual bool		RemoveItem(ELayoutItem *item);
-	ELayoutItem		*RemoveItem(eint32 index);
+	virtual bool		AddItem(BLayoutItem *item, b_int32 index = -1);
+	virtual bool		RemoveItem(BLayoutItem *item);
+	BLayoutItem		*RemoveItem(b_int32 index);
 
-	ELayoutItem		*ItemAt(eint32 index) const;
-	eint32			IndexOf(const ELayoutItem *item) const;
-	eint32			CountItems() const;
+	BLayoutItem		*ItemAt(b_int32 index) const;
+	b_int32			IndexOf(const BLayoutItem *item) const;
+	b_int32			CountItems() const;
 
 	float			UnitsPerPixel() const;
 	void			SetUnitsPerPixel(float value, bool deep = true);
 
-	virtual void		Invalidate(ERect rect);
+	virtual void		Invalidate(BRect rect);
 
 	void			SetPrivateData(void *data, void (*destroy_func)(void*) = NULL);
 	void			*PrivateData() const;
 
 private:
-	friend class ELayoutItem;
+	friend class BLayoutItem;
 
 	float fUnitsPerPixel;
-	EList fItems;
+	BList fItems;
 	void *fPrivate[2];
 };
 
 
-class _IMPEXP_ETK ELayoutItem : public ELayoutContainer {
+class _IMPEXP_BHAPI BLayoutItem : public BLayoutContainer {
 public:
-	ELayoutItem(ERect frame, euint32 resizingMode);
-	virtual ~ELayoutItem();
+	BLayoutItem(BRect frame, b_uint32 resizingMode);
+	virtual ~BLayoutItem();
 
-	ELayoutContainer	*Container() const;
-	ELayoutContainer	*Ancestor() const;
+	BLayoutContainer	*Container() const;
+	BLayoutContainer	*Ancestor() const;
 
 	bool			RemoveSelf();
 
-	ELayoutItem		*PreviousSibling() const;
-	ELayoutItem		*NextSibling() const;
+	BLayoutItem		*PreviousSibling() const;
+	BLayoutItem		*NextSibling() const;
 
-	virtual void		SetResizingMode(euint32 mode);
-	euint32			ResizingMode() const;
+	virtual void		SetResizingMode(b_uint32 mode);
+	b_uint32			ResizingMode() const;
 
 	virtual void		Show();
 	virtual void		Hide();
 	bool			IsHidden(bool check_containers = true) const;
 
-	virtual void		SendBehind(ELayoutItem *item);
-	virtual void		MoveTo(EPoint where);
-	virtual void		ScrollTo(EPoint where);
+	virtual void		SendBehind(BLayoutItem *item);
+	virtual void		MoveTo(BPoint where);
+	virtual void		ScrollTo(BPoint where);
 	virtual void		ResizeTo(float width, float height);
-	void			MoveAndResizeTo(EPoint where, float width, float height);
+	void			MoveAndResizeTo(BPoint where, float width, float height);
 
 	virtual void		GetPreferredSize(float *width, float *height);
 	virtual void		ResizeToPreferred();
 
-	ERect			Bounds() const; // in it's coordinate system
-	ERect			Frame() const; // in container's coordinate system
-	const ERegion		*VisibleRegion() const; // in it's coordinate system
+	BRect			Bounds() const; // in it's coordinate system
+	BRect			Frame() const; // in container's coordinate system
+	const BRegion		*VisibleRegion() const; // in it's coordinate system
 
-	EPoint			LeftTop() const;
+	BPoint			LeftTop() const;
 	float			Width() const;
 	float			Height() const;
 
-	void			ConvertToContainer(EPoint *pt) const;
-	EPoint			ConvertToContainer(EPoint pt) const;
-	void			ConvertFromContainer(EPoint *pt) const;
-	EPoint			ConvertFromContainer(EPoint pt) const;
+	void			ConvertToContainer(BPoint *pt) const;
+	BPoint			ConvertToContainer(BPoint pt) const;
+	void			ConvertFromContainer(BPoint *pt) const;
+	BPoint			ConvertFromContainer(BPoint pt) const;
 
 	virtual void		UpdateVisibleRegion();
 
 protected:
-	void			GetVisibleRegion(ERegion **region);
+	void			GetVisibleRegion(BRegion **region);
 
 private:
-	friend class ELayoutContainer;
-	friend class ELayoutForm;
+	friend class BLayoutContainer;
+	friend class BLayoutForm;
 
-	ELayoutContainer *fContainer;
-	eint32 fIndex;
+	BLayoutContainer *fContainer;
+	b_int32 fIndex;
 
-	EPoint fLocalOrigin;
-	ERegion fVisibleRegion;
+	BPoint fLocalOrigin;
+	BRegion fVisibleRegion;
 
-	ERect fFrame;
-	euint32 fResizingMode;
+	BRect fFrame;
+	b_uint32 fResizingMode;
 	bool fHidden;
 	bool fUpdating;
 };
 
 
-class _IMPEXP_ETK ELayoutForm : public ELayoutItem {
+class _IMPEXP_BHAPI BLayoutForm : public BLayoutItem {
 public:
-	ELayoutForm(ERect frame, euint32 resizingMode, eint32 rows, eint32 columns);
-	virtual ~ELayoutForm();
+	BLayoutForm(BRect frame, b_uint32 resizingMode, b_int32 rows, b_int32 columns);
+	virtual ~BLayoutForm();
 
 private:
 	void *fData;
@@ -145,5 +145,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_LAYOUT_H__ */
+#endif /* __BHAPI_LAYOUT_H__ */
 

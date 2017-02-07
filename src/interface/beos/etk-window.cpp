@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -44,7 +44,7 @@
 class EBePrivateWin : public BWindow
 {
 public:
-	EBePrivateWin(eint32 x, eint32 y, eint32 w, eint32 h);
+	EBePrivateWin(b_int32 x, b_int32 y, b_int32 w, b_int32 h);
 	virtual ~EBePrivateWin();
 
 	virtual bool QuitRequested();
@@ -54,13 +54,13 @@ public:
 	virtual void WorkspacesChanged(uint32 old_ws, uint32 new_ws);
 	virtual void DispatchMessage(BMessage *bMsg, BHandler *handler);
 
-	EMessenger fContactor;
+	BMessenger fContactor;
 	BView *fTopView;
 
 private:
 	bool doQuit;
 	bigtime_t fPrevMouseDownTime;
-	eint32 fPrevMouseDownCount;
+	b_int32 fPrevMouseDownCount;
 };
 
 
@@ -87,15 +87,15 @@ EBePrivateWinTopView::~EBePrivateWinTopView()
 void
 EBePrivateWinTopView::Draw(BRect updateRect)
 {
-	EBePrivateWin *win = e_cast_as(Window(), EBePrivateWin);
+	EBePrivateWin *win = b_cast_as(Window(), EBePrivateWin);
 	if(!(win == NULL || win->fContactor.IsValid() == false))
 	{
-		EMessage message(_UPDATE_);
+		BMessage message(_UPDATE_);
 
 		message.AddBool("etk:msg_from_gui", true);
-		message.AddInt64("when", e_real_time_clock_usecs());
+		message.AddInt64("when", b_real_time_clock_usecs());
 
-		ERect rect;
+		BRect rect;
 		rect.left = updateRect.left;
 		rect.top = updateRect.top;
 		rect.right = updateRect.right;
@@ -107,7 +107,7 @@ EBePrivateWinTopView::Draw(BRect updateRect)
 }
 
 
-EBePrivateWin::EBePrivateWin(eint32 x, eint32 y, eint32 w, eint32 h)
+EBePrivateWin::EBePrivateWin(b_int32 x, b_int32 y, b_int32 w, b_int32 h)
 	: BWindow(BRect(0, 0, 10, 10), NULL, B_TITLED_WINDOW, 0),
 	  fTopView(NULL), doQuit(false),
 	  fPrevMouseDownTime(0), fPrevMouseDownCount(0)
@@ -134,13 +134,13 @@ EBePrivateWin::QuitRequested()
 {
 	if(doQuit) return true;
 
-	EMessage message(E_QUIT_REQUESTED);
+	BMessage message(B_QUIT_REQUESTED);
 	fContactor.SendMessage(&message);
 	return false;
 }
 
 
-static bool etk_beos_get_byte(int32 modifiers, int32 key_code, char *result)
+static bool bhapi_beos_get_byte(int32 modifiers, int32 key_code, char *result)
 {
 	if(result == NULL || key_code < 0 || key_code >= 128) return false;
 	
@@ -180,15 +180,15 @@ static bool etk_beos_get_byte(int32 modifiers, int32 key_code, char *result)
 }
 
 
-static void __etk_convert_region(const ERegion *region, BRegion *beRegion, BRect maxRect)
+static void __bhapi_convert_region(const BRegion *region, BRegion *beRegion, BRect maxRect)
 {
 	if(beRegion == NULL) return;
 
 	if(region != NULL)
 	{
-		for(eint32 i = 0; i < region->CountRects(); i++)
+		for(b_int32 i = 0; i < region->CountRects(); i++)
 		{
-			ERect r = region->RectAt(i);
+			BRect r = region->RectAt(i);
 			BRect bRect(r.left, r.top, r.right, r.bottom);
 			beRegion->Include(bRect);
 		}
@@ -205,21 +205,21 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 {
 	bool handled = true;
 
-	if(bMsg->what == 'etk_')
+	if(bMsg->what == 'bhapi_')
 	{
 		int32 what = 0;
 		bMsg->FindInt32("etk:what", &what);
 
 		switch(what)
 		{
-			case ETK_BEOS_QUIT:
+			case BHAPI_BEOS_QUIT:
 				doQuit = true;
 				PostMessage(B_QUIT_REQUESTED);
 				break;
 
-			case ETK_BEOS_CONTACT_TO:
+			case BHAPI_BEOS_CONTACT_TO:
 				{
-					fContactor = EMessenger();
+					fContactor = BMessenger();
 					const char *buffer = NULL;
 					ssize_t size = -1;
 					if(bMsg->FindData("etk:messenger", B_ANY_TYPE, (const void**)&buffer, &size) != B_OK) break;
@@ -228,7 +228,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				}
 				break;
 
-			case ETK_BEOS_SET_BACKGROUND:
+			case BHAPI_BEOS_SET_BACKGROUND:
 				{
 					rgb_color bkColor;
 					if(bMsg->FindInt32("background", (int32*)&bkColor) != B_OK) break;
@@ -237,33 +237,33 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				}
 				break;
 
-			case ETK_BEOS_SET_LOOK:
+			case BHAPI_BEOS_SET_LOOK:
 				{
 					int8 look;
 					if(bMsg->FindInt8("look", &look) != B_OK) break;
-					switch((e_window_look)look)
+					switch((b_window_look)look)
 					{
-						case E_BORDERED_WINDOW_LOOK:
+						case B_BORDERED_WINDOW_LOOK:
 							SetLook(B_BORDERED_WINDOW_LOOK);
 							break;
 
-						case E_NO_BORDER_WINDOW_LOOK:
+						case B_NO_BORDER_WINDOW_LOOK:
 							SetLook(B_NO_BORDER_WINDOW_LOOK);
 							break;
 
-						case E_TITLED_WINDOW_LOOK:
+						case B_TITLED_WINDOW_LOOK:
 							SetLook(B_TITLED_WINDOW_LOOK);
 							break;
 
-						case E_DOCUMENT_WINDOW_LOOK:
+						case B_DOCUMENT_WINDOW_LOOK:
 							SetLook(B_DOCUMENT_WINDOW_LOOK);
 							break;
 
-						case E_MODAL_WINDOW_LOOK:
+						case B_MODAL_WINDOW_LOOK:
 							SetLook(B_MODAL_WINDOW_LOOK);
 							break;
 
-						case E_FLOATING_WINDOW_LOOK:
+						case B_FLOATING_WINDOW_LOOK:
 							SetLook(B_FLOATING_WINDOW_LOOK);
 							break;
 
@@ -273,7 +273,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				}
 				break;
 
-			case ETK_BEOS_SET_TITLE:
+			case BHAPI_BEOS_SET_TITLE:
 				{
 					const char *title = NULL;
 					if(bMsg->FindString("title", &title) != B_OK) break;
@@ -281,7 +281,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				}
 				break;
 
-			case ETK_BEOS_SET_WORKSPACES:
+			case BHAPI_BEOS_SET_WORKSPACES:
 				{
 					uint32 workspaces = 0;
 					if(bMsg->FindInt32("workspaces", (int32*)&workspaces) != B_OK) break;
@@ -290,18 +290,18 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				}
 				break;
 
-			case ETK_BEOS_GET_WORKSPACES:
+			case BHAPI_BEOS_GET_WORKSPACES:
 				{
 					uint32 workspaces = Workspaces();
 					bMsg->AddInt32("workspaces", *((int32*)&workspaces));
 				}
 				break;
 
-			case ETK_BEOS_ICONIFY:
+			case BHAPI_BEOS_ICONIFY:
 				if(!IsMinimized()) Minimize(true);
 				break;
 
-			case ETK_BEOS_SHOW:
+			case BHAPI_BEOS_SHOW:
 				if(IsHidden())
 				{
 					uint32 oldFlags = Flags();
@@ -311,11 +311,11 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				}
 				break;
 
-			case ETK_BEOS_HIDE:
+			case BHAPI_BEOS_HIDE:
 				if(!IsHidden()) Hide();
 				break;
 
-			case ETK_BEOS_RAISE:
+			case BHAPI_BEOS_RAISE:
 				if(!IsFront())
 				{
 					uint32 oldFlags = Flags();
@@ -325,18 +325,18 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				}
 				break;
 
-			case ETK_BEOS_LOWER:
+			case BHAPI_BEOS_LOWER:
 				{
 					BHandler *_frontWin = NULL;
 					if(bMsg->FindPointer("front", (void**)&_frontWin) != B_OK) break;
-					BWindow *frontWin = e_cast_as(_frontWin, BWindow);
+					BWindow *frontWin = b_cast_as(_frontWin, BWindow);
 					if(frontWin == NULL) break;
 					SendBehind(frontWin);
 					bMsg->AddBool("done", true);
 				}
 				break;
 
-			case ETK_BEOS_ACTIVATE:
+			case BHAPI_BEOS_ACTIVATE:
 				{
 					bool state;
 					if(bMsg->FindBool("state", &state) != B_OK || state == IsActive()) break;
@@ -344,11 +344,11 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				}
 				break;
 
-			case ETK_BEOS_GET_ACTIVATED_STATE:
+			case BHAPI_BEOS_GET_ACTIVATED_STATE:
 				bMsg->AddBool("state", IsActive());
 				break;
 
-			case ETK_BEOS_MOVE_RESIZE:
+			case BHAPI_BEOS_MOVE_RESIZE:
 				{
 					if(bMsg->HasPoint("where"))
 					{
@@ -367,11 +367,11 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				}
 				break;
 
-			case ETK_BEOS_DRAW_BITMAP:
+			case BHAPI_BEOS_DRAW_BITMAP:
 				{
 					BBitmap *bitmap = NULL;
 					BRect srcRect, destRect;
-					const ERegion *clipping = NULL;
+					const BRegion *clipping = NULL;
 
 					if(bMsg->FindPointer("bitmap", (void**)&bitmap) != B_OK || bitmap == NULL) break;
 					bMsg->FindRect("src", &srcRect);
@@ -380,31 +380,31 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 					bMsg->FindPointer("clipping", (void**)&clipping); 
 
 					BRegion beRegion;
-					__etk_convert_region(clipping, &beRegion, fTopView->Bounds());
+					__bhapi_convert_region(clipping, &beRegion, fTopView->Bounds());
 					fTopView->ConstrainClippingRegion(&beRegion);
 					fTopView->DrawBitmap(bitmap, srcRect, destRect);
 				}
 				break;
 
-			case ETK_BEOS_GRAB_MOUSE:
-			case ETK_BEOS_UNGRAB_MOUSE:
+			case BHAPI_BEOS_GRAB_MOUSE:
+			case BHAPI_BEOS_UNGRAB_MOUSE:
 				{
-					uint32 options = (what == ETK_BEOS_GRAB_MOUSE ? B_LOCK_WINDOW_FOCUS : 0);
+					uint32 options = (what == BHAPI_BEOS_GRAB_MOUSE ? B_LOCK_WINDOW_FOCUS : 0);
 					if(fTopView->SetEventMask(B_POINTER_EVENTS, options) != B_OK) break;
-					bMsg->AddBool("state", what == ETK_BEOS_GRAB_MOUSE);
+					bMsg->AddBool("state", what == BHAPI_BEOS_GRAB_MOUSE);
 				}
 				break;
 
-			case ETK_BEOS_GRAB_KEYBOARD:
-			case ETK_BEOS_UNGRAB_KEYBOARD:
+			case BHAPI_BEOS_GRAB_KEYBOARD:
+			case BHAPI_BEOS_UNGRAB_KEYBOARD:
 				{
-					uint32 options = (what == ETK_BEOS_GRAB_KEYBOARD ? B_LOCK_WINDOW_FOCUS : 0);
+					uint32 options = (what == BHAPI_BEOS_GRAB_KEYBOARD ? B_LOCK_WINDOW_FOCUS : 0);
 					if(fTopView->SetEventMask(B_KEYBOARD_EVENTS, options) != B_OK) break;
-					bMsg->AddBool("state", what == ETK_BEOS_GRAB_KEYBOARD);
+					bMsg->AddBool("state", what == BHAPI_BEOS_GRAB_KEYBOARD);
 				}
 				break;
 
-			case ETK_BEOS_QUERY_MOUSE:
+			case BHAPI_BEOS_QUERY_MOUSE:
 				{
 					BPoint pt;
 					uint32 btns = 0;
@@ -415,7 +415,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				}
 				break;
 
-			case ETK_BEOS_SET_SIZE_LIMITS:
+			case BHAPI_BEOS_SET_SIZE_LIMITS:
 				{
 					BRect r;
 					if(bMsg->FindRect("limits", &r) != B_OK) break;
@@ -424,7 +424,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				}
 				break;
 
-			case ETK_BEOS_GET_SIZE_LIMITS:
+			case BHAPI_BEOS_GET_SIZE_LIMITS:
 				{
 					BRect r(-1, -1, -1, -1);
 					GetSizeLimits(&(r.left), &(r.right), &(r.top), &(r.bottom));
@@ -452,9 +452,9 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				handled = false;
 
 				if(fContactor.IsValid() == false) break;
-				EMessage message(E_WINDOW_ACTIVATED);
+				BMessage message(B_WINDOW_ACTIVATED);
 				message.AddBool("etk:msg_from_gui", true);
-				message.AddInt64("when", e_real_time_clock_usecs());
+				message.AddInt64("when", b_real_time_clock_usecs());
 				fContactor.SendMessage(&message);
 			}
 			break;
@@ -489,24 +489,24 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 #endif
 				}
 
-				EMessage message;
-				if(bMsg->what == B_MOUSE_DOWN) message.what = E_MOUSE_DOWN;
-				else if(bMsg->what == B_MOUSE_UP) message.what = E_MOUSE_UP;
-				else message.what = E_MOUSE_MOVED;
+				BMessage message;
+				if(bMsg->what == B_MOUSE_DOWN) message.what = B_MOUSE_DOWN;
+				else if(bMsg->what == B_MOUSE_UP) message.what = B_MOUSE_UP;
+				else message.what = B_MOUSE_MOVED;
 
 				message.AddBool("etk:msg_from_gui", true);
-				message.AddInt64("when", e_real_time_clock_usecs());
+				message.AddInt64("when", b_real_time_clock_usecs());
 				if(bMsg->what != B_MOUSE_UP) message.AddInt32("buttons", buttons);
 				if(bMsg->what == B_MOUSE_DOWN) message.AddInt32("clicks", clicks);
-				message.AddPoint("where", EPoint(where.x, where.y));
+				message.AddPoint("where", BPoint(where.x, where.y));
 				ConvertToScreen(&where);
-				message.AddPoint("screen_where", EPoint(where.x, where.y));
+				message.AddPoint("screen_where", BPoint(where.x, where.y));
 
 				// TODO: modifiers
 
 				message.AddMessenger("etk:msg_for_target", fContactor);
 
-				etk_app->PostMessage(&message);
+				bhapi_app->PostMessage(&message);
 			}
 			break;
 
@@ -523,7 +523,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				int32 key = 0;
 				int32 key_repeat = 0;
 				int32 beModifiers = 0;
-				eint32 modifiers = 0;
+				b_int32 modifiers = 0;
 
 				bMsg->FindInt32("key", &key);
 				bMsg->FindInt32("modifiers", &beModifiers);
@@ -537,21 +537,21 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				}
 				else
 				{
-					etk_beos_get_byte(beModifiers, key, (char*)byte);
+					bhapi_beos_get_byte(beModifiers, key, (char*)byte);
 				}
 
-				if(beModifiers & B_SHIFT_KEY) modifiers |= E_SHIFT_KEY;
-				if(beModifiers & B_CONTROL_KEY) modifiers |= E_CONTROL_KEY;
-				if(beModifiers & B_COMMAND_KEY) modifiers |= E_COMMAND_KEY;
+				if(beModifiers & B_SHIFT_KEY) modifiers |= B_SHIFT_KEY;
+				if(beModifiers & B_CONTROL_KEY) modifiers |= B_CONTROL_KEY;
+				if(beModifiers & B_COMMAND_KEY) modifiers |= B_COMMAND_KEY;
 
-				EMessage message;
-				if(bMsg->what == B_KEY_DOWN) message.what = E_KEY_DOWN;
-				else if(bMsg->what == B_KEY_UP) message.what = E_KEY_UP;
-				else if(bMsg->what == B_UNMAPPED_KEY_DOWN) message.what = E_UNMAPPED_KEY_DOWN;
-				else message.what = E_UNMAPPED_KEY_UP;
+				BMessage message;
+				if(bMsg->what == B_KEY_DOWN) message.what = B_KEY_DOWN;
+				else if(bMsg->what == B_KEY_UP) message.what = B_KEY_UP;
+				else if(bMsg->what == B_UNMAPPED_KEY_DOWN) message.what = B_UNMAPPED_KEY_DOWN;
+				else message.what = B_UNMAPPED_KEY_UP;
 
 				message.AddBool("etk:msg_from_gui", true);
-				message.AddInt64("when", e_real_time_clock_usecs());
+				message.AddInt64("when", b_real_time_clock_usecs());
 				message.AddInt32("key", key);
 				message.AddInt32("modifiers", modifiers);
 
@@ -561,7 +561,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 					for(int32 i = 0; i < 3; i++) message.AddInt8("byte", byte[i]);
 					if(!(numBytes != 1 || *bytes != byte[0]))
 					{
-						etk_beos_get_byte(beModifiers, key, (char*)byte);
+						bhapi_beos_get_byte(beModifiers, key, (char*)byte);
 						message.AddString("bytes", (char*)byte);
 					}
 					else if(numBytes > 0)
@@ -577,7 +577,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 				message.AddMessenger("etk:msg_for_target", fContactor);
 
-				etk_app->PostMessage(&message);
+				bhapi_app->PostMessage(&message);
 			}
 			break;
 
@@ -585,32 +585,32 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 			{
 				if(fContactor.IsValid() == false) break;
 
-				eint32 modifiers = 0;
-				eint32 old_modifiers = 0;
+				b_int32 modifiers = 0;
+				b_int32 old_modifiers = 0;
 				int32 beModifiers = 0;
 				int32 old_beModifiers = 0;
 
 				bMsg->FindInt32("modifiers", &beModifiers);
 				bMsg->FindInt32("be:old_modifiers", &old_beModifiers);
 
-				if(beModifiers & B_SHIFT_KEY) modifiers |= E_SHIFT_KEY;
-				if(beModifiers & B_CONTROL_KEY) modifiers |= E_CONTROL_KEY;
-				if(beModifiers & B_COMMAND_KEY) modifiers |= E_COMMAND_KEY;
+				if(beModifiers & B_SHIFT_KEY) modifiers |= B_SHIFT_KEY;
+				if(beModifiers & B_CONTROL_KEY) modifiers |= B_CONTROL_KEY;
+				if(beModifiers & B_COMMAND_KEY) modifiers |= B_COMMAND_KEY;
 
-				if(old_beModifiers & B_SHIFT_KEY) old_modifiers |= E_SHIFT_KEY;
-				if(old_beModifiers & B_CONTROL_KEY) old_modifiers |= E_CONTROL_KEY;
-				if(old_beModifiers & B_COMMAND_KEY) old_modifiers |= E_COMMAND_KEY;
+				if(old_beModifiers & B_SHIFT_KEY) old_modifiers |= B_SHIFT_KEY;
+				if(old_beModifiers & B_CONTROL_KEY) old_modifiers |= B_CONTROL_KEY;
+				if(old_beModifiers & B_COMMAND_KEY) old_modifiers |= B_COMMAND_KEY;
 
-				EMessage message(E_MODIFIERS_CHANGED);
+				BMessage message(B_MODIFIERS_CHANGED);
 
 				message.AddBool("etk:msg_from_gui", true);
-				message.AddInt64("when", e_real_time_clock_usecs());
+				message.AddInt64("when", b_real_time_clock_usecs());
 				message.AddInt32("modifiers", modifiers);
 				message.AddInt32("etk:old_modifiers", old_modifiers);
 
 				message.AddMessenger("etk:msg_for_target", fContactor);
 
-				etk_app->PostMessage(&message);
+				bhapi_app->PostMessage(&message);
 			}
 			break;
 
@@ -630,10 +630,10 @@ EBePrivateWin::FrameMoved(BPoint new_position)
 
 	if(fContactor.IsValid())
 	{
-		EMessage message(E_WINDOW_MOVED);
+		BMessage message(B_WINDOW_MOVED);
 		message.AddBool("etk:msg_from_gui", true);
-		message.AddInt64("when", e_real_time_clock_usecs());
-		message.AddPoint("where", EPoint(new_position.x, new_position.y));
+		message.AddInt64("when", b_real_time_clock_usecs());
+		message.AddPoint("where", BPoint(new_position.x, new_position.y));
 		fContactor.SendMessage(&message);
 	}
 }
@@ -646,9 +646,9 @@ EBePrivateWin::FrameResized(float new_width, float new_height)
 
 	if(fContactor.IsValid())
 	{
-		EMessage message(E_WINDOW_RESIZED);
+		BMessage message(B_WINDOW_RESIZED);
 		message.AddBool("etk:msg_from_gui", true);
-		message.AddInt64("when", e_real_time_clock_usecs());
+		message.AddInt64("when", b_real_time_clock_usecs());
 		message.AddFloat("width", new_width);
 		message.AddFloat("height", new_height);
 		fContactor.SendMessage(&message);
@@ -663,21 +663,21 @@ EBePrivateWin::WorkspacesChanged(uint32 old_ws, uint32 new_ws)
 
 	if(fContactor.IsValid())
 	{
-		EMessage message(E_WORKSPACES_CHANGED);
+		BMessage message(B_WORKSPACES_CHANGED);
 		message.AddBool("etk:msg_from_gui", true);
-		message.AddInt64("when", e_real_time_clock_usecs());
-		message.AddInt32("new", (eint32)new_ws);
+		message.AddInt64("when", b_real_time_clock_usecs());
+		message.AddInt32("new", (b_int32)new_ws);
 		fContactor.SendMessage(&message);
 	}
 }
 
 
-EBeGraphicsWindow::EBeGraphicsWindow(EBeGraphicsEngine *beEngine, eint32 x, eint32 y, euint32 w, euint32 h)
-	: EGraphicsWindow(), fEngine(NULL)
+EBeGraphicsWindow::EBeGraphicsWindow(EBeGraphicsEngine *beEngine, b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
+	: BGraphicsWindow(), fEngine(NULL)
 {
-	if(w == E_MAXUINT32 || h == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
 		return;
 	}
 
@@ -694,8 +694,8 @@ EBeGraphicsWindow::EBeGraphicsWindow(EBeGraphicsEngine *beEngine, eint32 x, eint
 	}
 	beWindow->Unlock();
 
-	e_rgb_color whiteColor = {255, 255, 255, 255};
-	EGraphicsDrawable::SetBackgroundColor(whiteColor);
+	b_rgb_color whiteColor = {255, 255, 255, 255};
+	BGraphicsDrawable::SetBackgroundColor(whiteColor);
 }
 
 
@@ -703,575 +703,575 @@ EBeGraphicsWindow::~EBeGraphicsWindow()
 {
 	if(beWinMsgr.IsValid())
 	{
-		BMessage msg('etk_');
-		msg.AddInt32("etk:what", ETK_BEOS_QUIT);
+		BMessage msg('bhapi_');
+		msg.AddInt32("etk:what", BHAPI_BEOS_QUIT);
 		beWinMsgr.SendMessage(&msg, &msg);
 	}
 }
 
 
-e_status_t
-EBeGraphicsWindow::ContactTo(const EMessenger *msgr)
+b_status_t
+EBeGraphicsWindow::ContactTo(const BMessenger *msgr)
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_CONTACT_TO);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_CONTACT_TO);
 	if(msgr != NULL)
 	{
 		size_t size = msgr->FlattenedSize();
-		if(size == 0) return E_ERROR;
+		if(size == 0) return B_ERROR;
 		char *buffer = (char*)malloc(size);
-		if(buffer == NULL) return E_NO_MEMORY;
-		if(msgr->Flatten(buffer, size) == false) {free(buffer); return E_ERROR;}
+		if(buffer == NULL) return B_NO_MEMORY;
+		if(msgr->Flatten(buffer, size) == false) {free(buffer); return B_ERROR;}
 		msg.AddData("etk:messenger", B_ANY_TYPE, buffer, (ssize_t)size, true, 1);
 		free(buffer);
 	}
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() ? E_OK : E_ERROR);
+	return(msg.IsReply() ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EBeGraphicsWindow::SetBackgroundColor(e_rgb_color bkColor)
+b_status_t
+EBeGraphicsWindow::SetBackgroundColor(b_rgb_color bkColor)
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_SET_BACKGROUND);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_SET_BACKGROUND);
 	msg.AddInt32("background", *((int32*)&bkColor));
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	if(msg.IsReply())
 	{
-		EGraphicsDrawable::SetBackgroundColor(bkColor);
-		return E_OK;
+		BGraphicsDrawable::SetBackgroundColor(bkColor);
+		return B_OK;
 	}
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::SetFlags(euint32 flags)
+b_status_t
+EBeGraphicsWindow::SetFlags(b_uint32 flags)
 {
 	// TODO
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EBeGraphicsWindow::SetLook(e_window_look look)
+b_status_t
+EBeGraphicsWindow::SetLook(b_window_look look)
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_SET_LOOK);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_SET_LOOK);
 	msg.AddInt8("look", (int8)look);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() ? E_OK : E_ERROR);
+	return(msg.IsReply() ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EBeGraphicsWindow::SetFeel(e_window_feel feel)
+b_status_t
+EBeGraphicsWindow::SetFeel(b_window_feel feel)
 {
 	// TODO
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsWindow::SetTitle(const char *title)
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_SET_TITLE);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_SET_TITLE);
 	msg.AddString("title", title ? title : "");
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() ? E_OK : E_ERROR);
+	return(msg.IsReply() ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EBeGraphicsWindow::SetWorkspaces(euint32 workspaces)
+b_status_t
+EBeGraphicsWindow::SetWorkspaces(b_uint32 workspaces)
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_SET_WORKSPACES);
-	msg.AddInt32("workspaces", *((eint32*)&workspaces));
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_SET_WORKSPACES);
+	msg.AddInt32("workspaces", *((b_int32*)&workspaces));
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() ? E_OK : E_ERROR);
+	return(msg.IsReply() ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EBeGraphicsWindow::GetWorkspaces(euint32 *workspaces)
+b_status_t
+EBeGraphicsWindow::GetWorkspaces(b_uint32 *workspaces)
 {
-	if(beWinMsgr.IsValid() == false || workspaces == NULL) return E_ERROR;
+	if(beWinMsgr.IsValid() == false || workspaces == NULL) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_GET_WORKSPACES);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_GET_WORKSPACES);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	if(msg.IsReply() == false) return E_ERROR;
-	return(msg.FindInt32("workspaces", (int32*)workspaces) == B_OK ? E_OK : E_ERROR);
+	if(msg.IsReply() == false) return B_ERROR;
+	return(msg.FindInt32("workspaces", (int32*)workspaces) == B_OK ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsWindow::Iconify()
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_ICONIFY);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_ICONIFY);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() ? E_OK : E_ERROR);
+	return(msg.IsReply() ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsWindow::Show()
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_SHOW);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_SHOW);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() ? E_OK : E_ERROR);
+	return(msg.IsReply() ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsWindow::Hide()
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_HIDE);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_HIDE);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() ? E_OK : E_ERROR);
+	return(msg.IsReply() ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsWindow::Raise()
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_RAISE);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_RAISE);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() ? E_OK : E_ERROR);
+	return(msg.IsReply() ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EBeGraphicsWindow::Lower(EGraphicsWindow *_frontWin)
+b_status_t
+EBeGraphicsWindow::Lower(BGraphicsWindow *_frontWin)
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	EBeGraphicsWindow *frontWin = e_cast_as(_frontWin, EBeGraphicsWindow);
-	if(frontWin == NULL) return E_ERROR;
+	EBeGraphicsWindow *frontWin = b_cast_as(_frontWin, EBeGraphicsWindow);
+	if(frontWin == NULL) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_LOWER);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_LOWER);
 	msg.AddPointer("front", (void*)frontWin->beWinMsgr.Target(NULL));
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() == false || msg.HasBool("done") == false ? E_ERROR : E_OK);
+	return(msg.IsReply() == false || msg.HasBool("done") == false ? B_ERROR : B_OK);
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsWindow::Activate(bool state)
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_ACTIVATE);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_ACTIVATE);
 	msg.AddBool("state", state);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() ? E_OK : E_ERROR);
+	return(msg.IsReply() ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsWindow::GetActivatedState(bool *state) const
 {
-	if(beWinMsgr.IsValid() == false || state == NULL) return E_ERROR;
+	if(beWinMsgr.IsValid() == false || state == NULL) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_GET_ACTIVATED_STATE);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_GET_ACTIVATED_STATE);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	if(msg.IsReply() == false) return E_ERROR;
-	return(msg.FindBool("state", state) == B_OK ? E_OK : E_ERROR);
+	if(msg.IsReply() == false) return B_ERROR;
+	return(msg.FindBool("state", state) == B_OK ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EBeGraphicsWindow::MoveTo(eint32 x, eint32 y)
+b_status_t
+EBeGraphicsWindow::MoveTo(b_int32 x, b_int32 y)
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_MOVE_RESIZE);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_MOVE_RESIZE);
 	msg.AddPoint("where", BPoint(x, y));
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() ? E_OK : E_ERROR);
+	return(msg.IsReply() ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EBeGraphicsWindow::ResizeTo(euint32 w, euint32 h)
+b_status_t
+EBeGraphicsWindow::ResizeTo(b_uint32 w, b_uint32 h)
 {
-	if(w == E_MAXUINT32 || h == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_MOVE_RESIZE);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_MOVE_RESIZE);
 	msg.AddFloat("width", (float)w);
 	msg.AddFloat("height", (float)h);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() ? E_OK : E_ERROR);
+	return(msg.IsReply() ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EBeGraphicsWindow::MoveAndResizeTo(eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EBeGraphicsWindow::MoveAndResizeTo(b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	if(w == E_MAXUINT32 || h == E_MAXUINT32)
+	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
-		ETK_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
-		return E_ERROR;
+		BHAPI_DEBUG("[GRAPHICS]: %s --- Either width or height is so large.", __PRETTY_FUNCTION__);
+		return B_ERROR;
 	}
 
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_MOVE_RESIZE);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_MOVE_RESIZE);
 	msg.AddPoint("where", BPoint(x, y));
 	msg.AddFloat("width", (float)w);
 	msg.AddFloat("height", (float)h);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() ? E_OK : E_ERROR);
+	return(msg.IsReply() ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EBeGraphicsWindow::SetSizeLimits(euint32 min_w, euint32 max_w, euint32 min_h, euint32 max_h)
+b_status_t
+EBeGraphicsWindow::SetSizeLimits(b_uint32 min_w, b_uint32 max_w, b_uint32 min_h, b_uint32 max_h)
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_SET_SIZE_LIMITS);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_SET_SIZE_LIMITS);
 	msg.AddRect("limits", BRect((float)min_w, (float)min_h, (float)max_w, (float)max_h));
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	return(msg.IsReply() == false || msg.HasBool("done") == false ? E_ERROR : E_OK);
+	return(msg.IsReply() == false || msg.HasBool("done") == false ? B_ERROR : B_OK);
 }
 
 
-e_status_t
-EBeGraphicsWindow::GetSizeLimits(euint32 *min_w, euint32 *max_w, euint32 *min_h, euint32 *max_h)
+b_status_t
+EBeGraphicsWindow::GetSizeLimits(b_uint32 *min_w, b_uint32 *max_w, b_uint32 *min_h, b_uint32 *max_h)
 {
-	if(min_w == NULL || max_w == NULL || min_h == NULL || max_h == NULL) return E_ERROR;
+	if(min_w == NULL || max_w == NULL || min_h == NULL || max_h == NULL) return B_ERROR;
 
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	*min_w = E_MAXUINT32;
-	*max_w = E_MAXUINT32;
-	*min_h = E_MAXUINT32;
-	*max_h = E_MAXUINT32;
+	*min_w = B_MAXUINT32;
+	*max_w = B_MAXUINT32;
+	*min_h = B_MAXUINT32;
+	*max_h = B_MAXUINT32;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_GET_SIZE_LIMITS);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_GET_SIZE_LIMITS);
 
 	beWinMsgr.SendMessage(&msg, &msg);
 
 	BRect r;
-	if(msg.IsReply() == false || msg.FindRect("limits", &r) != B_OK) return E_ERROR;
+	if(msg.IsReply() == false || msg.FindRect("limits", &r) != B_OK) return B_ERROR;
 
-	if(r.left >= 0) *min_w = (euint32)r.left;
-	if(r.right >= 0) *max_w = (euint32)r.right;
-	if(r.top >= 0) *min_h = (euint32)r.top;
-	if(r.bottom >= 0) *max_h = (euint32)r.bottom;
+	if(r.left >= 0) *min_w = (b_uint32)r.left;
+	if(r.right >= 0) *max_w = (b_uint32)r.right;
+	if(r.top >= 0) *min_h = (b_uint32)r.top;
+	if(r.bottom >= 0) *max_h = (b_uint32)r.bottom;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsWindow::GrabMouse()
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_GRAB_MOUSE);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_GRAB_MOUSE);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	if(msg.IsReply() == false) return E_ERROR;
+	if(msg.IsReply() == false) return B_ERROR;
 
 	bool state = false;
 	msg.FindBool("state", &state);
-	return(state ? E_OK : E_ERROR);
+	return(state ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsWindow::UngrabMouse()
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_UNGRAB_MOUSE);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_UNGRAB_MOUSE);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	if(msg.IsReply() == false) return E_ERROR;
+	if(msg.IsReply() == false) return B_ERROR;
 
 	bool state = true;
 	msg.FindBool("state", &state);
-	return(!state ? E_OK : E_ERROR);
+	return(!state ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsWindow::GrabKeyboard()
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_GRAB_KEYBOARD);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_GRAB_KEYBOARD);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	if(msg.IsReply() == false) return E_ERROR;
+	if(msg.IsReply() == false) return B_ERROR;
 
 	bool state = false;
 	msg.FindBool("state", &state);
-	return(state ? E_OK : E_ERROR);
+	return(state ? B_OK : B_ERROR);
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsWindow::UngrabKeyboard()
 {
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_UNGRAB_KEYBOARD);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_UNGRAB_KEYBOARD);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	if(msg.IsReply() == false) return E_ERROR;
+	if(msg.IsReply() == false) return B_ERROR;
 
 	bool state = true;
 	msg.FindBool("state", &state);
-	return(!state ? E_OK : E_ERROR);
+	return(!state ? B_OK : B_ERROR);
 }
 
 
-e_status_t
-EBeGraphicsWindow::QueryMouse(eint32 *x, eint32 *y, eint32 *buttons)
+b_status_t
+EBeGraphicsWindow::QueryMouse(b_int32 *x, b_int32 *y, b_int32 *buttons)
 {
-	if(x == NULL && y == NULL && buttons == NULL) return E_ERROR;
-	if(beWinMsgr.IsValid() == false) return E_ERROR;
+	if(x == NULL && y == NULL && buttons == NULL) return B_ERROR;
+	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('etk_');
-	msg.AddInt32("etk:what", ETK_BEOS_QUERY_MOUSE);
+	BMessage msg('bhapi_');
+	msg.AddInt32("etk:what", BHAPI_BEOS_QUERY_MOUSE);
 
 	beWinMsgr.SendMessage(&msg, &msg);
-	if(msg.IsReply() == false) return E_ERROR;
+	if(msg.IsReply() == false) return B_ERROR;
 
-	if(x) if(msg.FindInt32("x", (int32*)x) != B_OK) return E_ERROR;
-	if(y) if(msg.FindInt32("y", (int32*)y) != B_OK) return E_ERROR;
-	if(buttons) if(msg.FindInt32("buttons", (int32*)buttons) != B_OK) return E_ERROR;
+	if(x) if(msg.FindInt32("x", (int32*)x) != B_OK) return B_ERROR;
+	if(y) if(msg.FindInt32("y", (int32*)y) != B_OK) return B_ERROR;
+	if(buttons) if(msg.FindInt32("buttons", (int32*)buttons) != B_OK) return B_ERROR;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EBeGraphicsWindow::CopyTo(EGraphicsContext *dc,
-			  EGraphicsDrawable *dstDrawable,
-			  eint32 x, eint32 y, euint32 w, euint32 h,
-			  eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EBeGraphicsWindow::CopyTo(BGraphicsContext *dc,
+			  BGraphicsDrawable *dstDrawable,
+			  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+			  b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::DrawPixmap(EGraphicsContext *dc, const EPixmap *pix,
-			      eint32 x, eint32 y, euint32 w, euint32 h,
-			      eint32 dstX, eint32 dstY, euint32 dstW, euint32 dstH)
+b_status_t
+EBeGraphicsWindow::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
+			      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
+			      b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::StrokePoint(EGraphicsContext *dc,
-			       eint32 x, eint32 y)
+b_status_t
+EBeGraphicsWindow::StrokePoint(BGraphicsContext *dc,
+			       b_int32 x, b_int32 y)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::StrokePoints(EGraphicsContext *dc,
-				const eint32 *pts, eint32 count)
+b_status_t
+EBeGraphicsWindow::StrokePoints(BGraphicsContext *dc,
+				const b_int32 *pts, b_int32 count)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::StrokePoints_Colors(EGraphicsContext *dc,
-				       const EList *ptsArrayLists, eint32 arrayCount,
-				       const e_rgb_color *highColors)
+b_status_t
+EBeGraphicsWindow::StrokePoints_Colors(BGraphicsContext *dc,
+				       const BList *ptsArrayLists, b_int32 arrayCount,
+				       const b_rgb_color *highColors)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::StrokePoints_Alphas(EGraphicsContext *dc,
-				       const eint32 *pts, const euint8 *alpha, eint32 count)
+b_status_t
+EBeGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *dc,
+				       const b_int32 *pts, const b_uint8 *alpha, b_int32 count)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::StrokeLine(EGraphicsContext *dc,
-			      eint32 x0, eint32 y0, eint32 x1, eint32 y1)
+b_status_t
+EBeGraphicsWindow::StrokeLine(BGraphicsContext *dc,
+			      b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::StrokePolygon(EGraphicsContext *dc,
-				 const eint32 *pts, eint32 count, bool closed)
+b_status_t
+EBeGraphicsWindow::StrokePolygon(BGraphicsContext *dc,
+				 const b_int32 *pts, b_int32 count, bool closed)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::FillPolygon(EGraphicsContext *dc,
-			       const eint32 *pts, eint32 count)
+b_status_t
+EBeGraphicsWindow::FillPolygon(BGraphicsContext *dc,
+			       const b_int32 *pts, b_int32 count)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::StrokeRect(EGraphicsContext *dc,
-			      eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EBeGraphicsWindow::StrokeRect(BGraphicsContext *dc,
+			      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::FillRect(EGraphicsContext *dc,
-			    eint32 x, eint32 y, euint32 w, euint32 h)
+b_status_t
+EBeGraphicsWindow::FillRect(BGraphicsContext *dc,
+			    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::StrokeRects(EGraphicsContext *dc,
-			       const eint32 *rects, eint32 count)
+b_status_t
+EBeGraphicsWindow::StrokeRects(BGraphicsContext *dc,
+			       const b_int32 *rects, b_int32 count)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::FillRects(EGraphicsContext *dc,
-			     const eint32 *rects, eint32 count)
+b_status_t
+EBeGraphicsWindow::FillRects(BGraphicsContext *dc,
+			     const b_int32 *rects, b_int32 count)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::FillRegion(EGraphicsContext *dc,
-			      const ERegion &region)
+b_status_t
+EBeGraphicsWindow::FillRegion(BGraphicsContext *dc,
+			      const BRegion &region)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::StrokeRoundRect(EGraphicsContext *dc,
-				   eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EBeGraphicsWindow::StrokeRoundRect(BGraphicsContext *dc,
+				   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::FillRoundRect(EGraphicsContext *dc,
-				 eint32 x, eint32 y, euint32 w, euint32 h, euint32 xRadius, euint32 yRadius)
+b_status_t
+EBeGraphicsWindow::FillRoundRect(BGraphicsContext *dc,
+				 b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::StrokeArc(EGraphicsContext *dc,
-			     eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EBeGraphicsWindow::StrokeArc(BGraphicsContext *dc,
+			     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 
-e_status_t
-EBeGraphicsWindow::FillArc(EGraphicsContext *dc,
-			   eint32 x, eint32 y, euint32 w, euint32 h, float startAngle, float endAngle)
+b_status_t
+EBeGraphicsWindow::FillArc(BGraphicsContext *dc,
+			   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
 	// TODO
-	return E_ERROR;
+	return B_ERROR;
 }
 
 #endif /* BEOS */

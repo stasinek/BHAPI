@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -30,98 +30,98 @@
 #include "InterfaceDefs.h"
 
 
-_IMPEXP_ETK e_rgb_color e_ui_color(e_color_which which)
+_IMPEXP_BHAPI b_rgb_color b_ui_color(b_color_which which)
 {
-	e_rgb_color color;
+	b_rgb_color color;
 
 	switch(which)
 	{
-		case E_DESKTOP_COLOR:
+		case B_DESKTOP_COLOR:
 			color.set_to(118, 132, 143);
 			break;
 
-		case E_PANEL_BACKGROUND_COLOR:
+		case B_PANEL_BACKGROUND_COLOR:
 			color.set_to(240, 240, 235);
 			break;
 
-		case E_TOOLTIP_TEXT_COLOR:
-		case E_BUTTON_TEXT_COLOR:
-		case E_DOCUMENT_TEXT_COLOR:
-		case E_PANEL_TEXT_COLOR:
+		case B_TOOLTIP_TEXT_COLOR:
+		case B_BUTTON_TEXT_COLOR:
+		case B_DOCUMENT_TEXT_COLOR:
+		case B_PANEL_TEXT_COLOR:
 			color.set_to(0, 0, 0);
 			break;
 
-		case E_DOCUMENT_BACKGROUND_COLOR:
+		case B_DOCUMENT_BACKGROUND_COLOR:
 			color.set_to(250, 250, 250);
 			break;
 
-		case E_DOCUMENT_HIGHLIGHT_COLOR:
+		case B_DOCUMENT_HIGHLIGHT_COLOR:
 			color.set_to(170, 210, 240);
 			break;
 
-		case E_DOCUMENT_CURSOR_COLOR:
+		case B_DOCUMENT_CURSOR_COLOR:
 			color.set_to(0, 0, 0);
 			break;
 
-		case E_BUTTON_BACKGROUND_COLOR:
+		case B_BUTTON_BACKGROUND_COLOR:
 			color.set_to(245, 245, 245);
 			break;
 
-		case E_BUTTON_BORDER_COLOR:
+		case B_BUTTON_BORDER_COLOR:
 //			color.set_to(200, 150, 150);
 			color.set_to(50, 50, 50);
 			break;
 
-		case E_NAVIGATION_BASE_COLOR:
+		case B_NAVIGATION_BASE_COLOR:
 //			color.set_to(225, 140, 190);
 			color.set_to(170, 210, 240);
 			break;
 
-		case E_NAVIGATION_PULSE_COLOR:
+		case B_NAVIGATION_PULSE_COLOR:
 //			color.set_to(190, 120, 160);
 			color.set_to(90, 100, 120);
 			break;
 
-		case E_MENU_BACKGROUND_COLOR:
+		case B_MENU_BACKGROUND_COLOR:
 			color.set_to(245, 245, 245);
 			break;
 
-		case E_MENU_BORDER_COLOR:
+		case B_MENU_BORDER_COLOR:
 //			color.set_to(200, 150, 150);
 			color.set_to(50, 50, 50);
 			break;
 
-		case E_MENU_SELECTED_BACKGROUND_COLOR:
+		case B_MENU_SELECTED_BACKGROUND_COLOR:
 //			color.set_to(225, 170, 170);
 			color.set_to(170, 210, 240);
 			break;
 
-		case E_MENU_ITEM_TEXT_COLOR:
+		case B_MENU_ITEM_TEXT_COLOR:
 			color.set_to(80, 80, 80);
 			break;
 
-		case E_MENU_SELECTED_ITEM_TEXT_COLOR:
+		case B_MENU_SELECTED_ITEM_TEXT_COLOR:
 			color.set_to(0, 0, 0);
 			break;
 
-		case E_MENU_SELECTED_BORDER_COLOR:
+		case B_MENU_SELECTED_BORDER_COLOR:
 //			color.set_to(225, 140, 190);
 			color.set_to(100, 100, 100);
 			break;
 
-		case E_TOOLTIP_BACKGROUND_COLOR:
+		case B_TOOLTIP_BACKGROUND_COLOR:
 			color.set_to(235, 220, 30);
 			break;
 
-		case E_SHINE_COLOR:
+		case B_SHINE_COLOR:
 			color.set_to(250, 250, 250);
 			break;
 
-		case E_SHADOW_COLOR:
+		case B_SHADOW_COLOR:
 			color.set_to(50, 50, 50);
 			break;
 
-		case E_STATUSBAR_COLOR:
+		case B_STATUSBAR_COLOR:
 			color.set_to(235, 220, 30);
 			break;
 
@@ -133,13 +133,13 @@ _IMPEXP_ETK e_rgb_color e_ui_color(e_color_which which)
 }
 
 
-_IMPEXP_ETK float e_ui_get_scrollbar_vertical_width()
+_IMPEXP_BHAPI float b_ui_get_scrollbar_vertical_width()
 {
 	return 16;
 }
 
 
-_IMPEXP_ETK float e_ui_get_scrollbar_horizontal_height()
+_IMPEXP_BHAPI float b_ui_get_scrollbar_horizontal_height()
 {
 	return 16;
 }

@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -30,44 +30,44 @@
 #include "Archivable.h"
 
 
-EArchivable::EArchivable()
+BArchivable::BArchivable()
 {
 }
 
 
-EArchivable::EArchivable(const EMessage *from)
+BArchivable::BArchivable(const BMessage *from)
 {
 }
 
 
-EArchivable::~EArchivable()
+BArchivable::~BArchivable()
 {
 }
 
 
-e_status_t
-EArchivable::Archive(EMessage *into, bool deep) const
+b_status_t
+BArchivable::Archive(BMessage *into, bool deep) const
 {
-	if(into == NULL) return E_ERROR;
-	into->AddString("class", "EArchivable");
-	return E_OK;
+	if(into == NULL) return B_ERROR;
+	into->AddString("class", "BArchivable");
+	return B_OK;
 }
 
 
-EArchivable*
-EArchivable::Instantiate(const EMessage *from)
+BArchivable*
+BArchivable::Instantiate(const BMessage *from)
 {
-	ETK_ERROR("[SUPPORT]: %s --- Can't instantiate a \"EArchivable\"", __PRETTY_FUNCTION__);
+	BHAPI_ERROR("[SUPPORT]: %s --- Can't instantiate a \"BArchivable\"", __PRETTY_FUNCTION__);
 	return NULL;
 }
 
 
-_IMPEXP_ETK bool e_validate_instantiation(const EMessage *from, const char *class_name)
+_IMPEXP_BHAPI bool b_validatb_instantiation(const BMessage *from, const char *class_name)
 {
 	if(from == NULL || class_name == NULL || *class_name == 0) return false;
 
-	eint32 items = from->CountItems("class", E_STRING_TYPE);
-	for(eint32 i = 0; i < items; i++)
+	b_int32 items = from->CountItems("class", B_STRING_TYPE);
+	for(b_int32 i = 0; i < items; i++)
 	{
 		const char *_class_name = NULL;
 		from->FindString("class", i, &_class_name);
@@ -81,18 +81,18 @@ _IMPEXP_ETK bool e_validate_instantiation(const EMessage *from, const char *clas
 }
 
 
-_IMPEXP_ETK e_instantiation_func e_find_instantiation_func(const char *class_name)
+_IMPEXP_BHAPI b_instantiation_func b_find_instantiation_func(const char *class_name)
 {
 	// TODO
 	return NULL;
 }
 
 
-_IMPEXP_ETK e_instantiation_func e_find_instantiation_func(const EMessage *archive_data)
+_IMPEXP_BHAPI b_instantiation_func b_find_instantiation_func(const BMessage *archive_data)
 {
 	const char *class_name = NULL;
 	if(archive_data == NULL) return NULL;
-	archive_data->FindString("class", archive_data->CountItems("class", E_STRING_TYPE) - 1, &class_name);
-	return e_find_instantiation_func(class_name);
+	archive_data->FindString("class", archive_data->CountItems("class", B_STRING_TYPE) - 1, &class_name);
+	return b_find_instantiation_func(class_name);
 }
 

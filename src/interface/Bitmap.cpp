@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,7 +24,7 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: Bitmap.cpp
- * Description: EBitmap --- a rectangular image for drawing
+ * Description: BBitmap --- a rectangular image for drawing
  * Warning: Unfinished.
  *
  * --------------------------------------------------------------------------*/
@@ -36,36 +36,36 @@
 
 #include "Bitmap.h"
 
-class _LOCAL EBitmapWindow : public EWindow {
+class _LOCAL BBitmapWindow : public BWindow {
 public:
-	EBitmapWindow(ERect frame);
-	virtual ~EBitmapWindow();
+	BBitmapWindow(BRect frame);
+	virtual ~BBitmapWindow();
 
 private:
 	virtual bool IsDependsOnOthersWhenQuitRequested() const;
 };
 
 
-EBitmapWindow::EBitmapWindow(ERect frame)
-	: EWindow(frame, NULL, E_NO_BORDER_WINDOW_LOOK, E_NORMAL_WINDOW_FEEL, 0)
+BBitmapWindow::BBitmapWindow(BRect frame)
+	: BWindow(frame, NULL, B_NO_BORDER_WINDOW_LOOK, B_NORMAL_WINDOW_FEEL, 0)
 {
 }
 
 
-EBitmapWindow::~EBitmapWindow()
+BBitmapWindow::~BBitmapWindow()
 {
 }
 
 
 bool
-EBitmapWindow::IsDependsOnOthersWhenQuitRequested() const
+BBitmapWindow::IsDependsOnOthersWhenQuitRequested() const
 {
 	return true;
 }
 
 
 void
-EBitmap::InitSelf(ERect bounds, bool acceptsViews)
+BBitmap::InitSelf(BRect bounds, bool acceptsViews)
 {
 	fRows = 0;
 	fColumns = 0;
@@ -74,22 +74,22 @@ EBitmap::InitSelf(ERect bounds, bool acceptsViews)
 
 	if(bounds.IsValid() == false) return;
 
-	if(etk_app == NULL || etk_app->fGraphicsEngine == NULL)
+	if(bhapi_app == NULL || bhapi_app->fGraphicsEngine == NULL)
 	{
-		ETK_WARNING("[INTERFACE]: %s --- You should create EBitmap within graphics engine.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[INTERFACE]: %s --- You should create BBitmap within graphics engine.", __PRETTY_FUNCTION__);
 		return;
 	}
 
-	fColumns = (euint32)bounds.IntegerWidth() + 1;
-	fRows = (euint32)bounds.IntegerHeight() + 1;
+	fColumns = (b_uint32)bounds.IntegerWidth() + 1;
+	fRows = (b_uint32)bounds.IntegerHeight() + 1;
 
 	if(acceptsViews == false)
 	{
-		fPixmap = etk_app->fGraphicsEngine->CreatePixmap(fColumns - 1, fRows - 1);
+		fPixmap = bhapi_app->fGraphicsEngine->CreatePixmap(fColumns - 1, fRows - 1);
 	}
 	else
 	{
-		fWindow = new EBitmapWindow(bounds);
+		fWindow = new BBitmapWindow(bounds);
 		fWindow->Lock();
 		delete fWindow->fWindow;
 		fWindow->fWindow = NULL;
@@ -100,20 +100,20 @@ EBitmap::InitSelf(ERect bounds, bool acceptsViews)
 }
 
 
-EBitmap::EBitmap(ERect bounds, bool acceptsViews)
-	: EArchivable()
+BBitmap::BBitmap(BRect bounds, bool acceptsViews)
+	: BArchivable()
 {
 	InitSelf(bounds, acceptsViews);
 }
 
 
-EBitmap::EBitmap(const EBitmap *bitmap, bool acceptsViews)
-	: EArchivable()
+BBitmap::BBitmap(const BBitmap *bitmap, bool acceptsViews)
+	: BArchivable()
 {
-	InitSelf(bitmap == NULL ? ERect() : bitmap->Bounds(), acceptsViews);
+	InitSelf(bitmap == NULL ? BRect() : bitmap->Bounds(), acceptsViews);
 	if(bitmap->fPixmap != NULL)
 	{
-		EGraphicsContext *dc = etk_app->fGraphicsEngine->CreateContext();
+		BGraphicsContext *dc = bhapi_app->fGraphicsEngine->CreateContext();
 		if(dc)
 		{
 			bitmap->fPixmap->CopyTo(dc, fPixmap, 0, 0, fColumns - 1, fRows - 1, 0, 0, fColumns - 1, fRows - 1);
@@ -123,18 +123,18 @@ EBitmap::EBitmap(const EBitmap *bitmap, bool acceptsViews)
 }
 
 
-EBitmap::EBitmap(const EPixmap *pixmap, bool acceptsViews)
-	: EArchivable()
+BBitmap::BBitmap(const BPixmap *pixmap, bool acceptsViews)
+	: BArchivable()
 {
-	InitSelf((pixmap == NULL || pixmap->IsValid() == false) ? ERect() : pixmap->Bounds(), acceptsViews);
+	InitSelf((pixmap == NULL || pixmap->IsValid() == false) ? BRect() : pixmap->Bounds(), acceptsViews);
 	if(fPixmap != NULL)
 	{
-		EGraphicsContext *dc = etk_app->fGraphicsEngine->CreateContext();
+		BGraphicsContext *dc = bhapi_app->fGraphicsEngine->CreateContext();
 		if(dc)
 		{
-			dc->SetDrawingMode(E_OP_COPY);
+			dc->SetDrawingMode(B_OP_COPY);
 			dc->SetHighColor(0, 0, 0, 255);
-			dc->SetClipping(ERegion(pixmap->Bounds()));
+			dc->SetClipping(BRegion(pixmap->Bounds()));
 			fPixmap->DrawPixmap(dc, pixmap, 0, 0, fColumns - 1, fRows - 1, 0, 0, fColumns - 1, fRows - 1);
 			delete dc;
 		}
@@ -142,7 +142,7 @@ EBitmap::EBitmap(const EPixmap *pixmap, bool acceptsViews)
 }
 
 
-EBitmap::~EBitmap()
+BBitmap::~BBitmap()
 {
 	if(fWindow)
 	{
@@ -156,79 +156,79 @@ EBitmap::~EBitmap()
 }
 
 
-e_status_t
-EBitmap::InitCheck() const
+b_status_t
+BBitmap::InitCheck() const
 {
-	return(fPixmap != NULL ? E_OK : E_ERROR);
+	return(fPixmap != NULL ? B_OK : B_ERROR);
 }
 
 
 bool
-EBitmap::IsValid() const
+BBitmap::IsValid() const
 {
 	return(fPixmap != NULL);
 }
 
 
-ERect
-EBitmap::Bounds() const
+BRect
+BBitmap::Bounds() const
 {
-	if(fPixmap == NULL) return ERect();
-	return ERect(0, 0, (float)(fColumns - 1), (float)(fRows - 1));
+	if(fPixmap == NULL) return BRect();
+	return BRect(0, 0, (float)(fColumns - 1), (float)(fRows - 1));
 }
 
 
 void
-EBitmap::AddChild(EView *view)
+BBitmap::AddChild(BView *view)
 {
 	if(fWindow != NULL) fWindow->AddChild(view);
 }
 
 
 bool
-EBitmap::RemoveChild(EView *view)
+BBitmap::RemoveChild(BView *view)
 {
 	return(fWindow != NULL ? fWindow->RemoveChild(view) : false);
 }
 
 
-eint32
-EBitmap::CountChildren() const
+b_int32
+BBitmap::CountChildren() const
 {
 	return(fWindow != NULL ? fWindow->CountChildren() : 0);
 }
 
 
-EView*
-EBitmap::ChildAt(eint32 index) const
+BView*
+BBitmap::ChildAt(b_int32 index) const
 {
 	return(fWindow != NULL ? fWindow->ChildAt(index) : NULL);
 }
 
 
-EView*
-EBitmap::FindView(const char *name) const
+BView*
+BBitmap::FindView(const char *name) const
 {
 	return(fWindow != NULL ? fWindow->FindView(name) : NULL);
 }
 
 
-EView*
-EBitmap::FindView(EPoint where) const
+BView*
+BBitmap::FindView(BPoint where) const
 {
 	return(fWindow != NULL ? fWindow->FindView(where) : NULL);
 }
 
 
 bool
-EBitmap::Lock()
+BBitmap::Lock()
 {
 	return(fWindow != NULL ? fWindow->Lock() : false);
 }
 
 
 void
-EBitmap::Unlock()
+BBitmap::Unlock()
 {
 	if(fWindow != NULL) fWindow->Unlock();
 }

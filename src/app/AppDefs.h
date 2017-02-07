@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,76 +28,76 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_APPDEFS_H__
-#define __ETK_APPDEFS_H__
+#ifndef __BHAPI_APPDEFS_H__
+#define __BHAPI_APPDEFS_H__
 
 #include "./../support/SupportDefs.h"
 
 /* System Message Codes */
 enum {
-	E_ABOUT_REQUESTED			= '_ABR',
-	E_WINDOW_ACTIVATED			= '_ACT',
-	E_APP_ACTIVATED				= '_ACT', /* Same as E_WINDOW_ACTIVATED */
-	E_APP_CURSOR_REQUESTED			= '_CUR',
-	E_ARGV_RECEIVED 			= '_ARG',
-	E_QUIT_REQUESTED 			= '_QRQ',
-	E_CANCEL				= '_CNC',
-	E_KEY_DOWN 				= '_KYD',
-	E_KEY_UP 				= '_KYU',
-	E_UNMAPPED_KEY_DOWN 			= '_UKD',
-	E_UNMAPPED_KEY_UP 			= '_UKU',
-	E_MODIFIERS_CHANGED			= '_MCH',
-	E_MINIMIZE				= '_WMN',
-	E_MINIMIZED				= '_WMD',
-	E_MOUSE_DOWN 				= '_MDN',
-	E_MOUSE_MOVED 				= '_MMV',
-	E_MOUSE_ENTER_EXIT			= '_MEX',
-	E_MOUSE_UP 				= '_MUP',
-	E_MOUSE_WHEEL_CHANGED			= '_MWC',
-	E_OPEN_IN_WORKSPACE			= '_OWS',
-	E_PRINTER_CHANGED			= '_PCH',
-	E_PULSE 				= '_PUL',
-	E_READY_TO_RUN 				= '_RTR',
-	E_REFS_RECEIVED 			= '_RRC',
-	E_SCREEN_CHANGED 			= '_SCH',
-	E_VALUE_CHANGED 			= '_VCH',
-	E_VIEW_MOVED 				= '_VMV',
-	E_VIEW_RESIZED 				= '_VRS',
-	E_WINDOW_MOVED 				= '_WMV',
-	E_WINDOW_RESIZED 			= '_WRS',
-	E_WORKSPACES_CHANGED			= '_WCG',
-	E_WORKSPACE_ACTIVATED			= '_WAC',
-	E_ZOOM					= '_WZM',
-#if !(defined(ETK_OS_BEOS) && defined(_APP_DEFS_H))
+    B_ABOUT_REQUESTED			= '_ABR',
+    B_WINDOW_ACTIVATED			= '_ACT',
+    B_APP_ACTIVATED				= '_ACT', /* Same as B_WINDOW_ACTIVATED */
+    B_APP_CURSOR_REQUESTED			= '_CUR',
+    B_ARGV_RECEIVED 			= '_ARG',
+    B_QUIT_REQUESTED 			= '_QRQ',
+    B_CANCEL				= '_CNC',
+    B_KEY_DOWN 				= '_KYD',
+    B_KEY_UP 				= '_KYU',
+    B_UNMAPPED_KEY_DOWN 			= '_UKD',
+    B_UNMAPPED_KEY_UP 			= '_UKU',
+    B_MODIFIERS_CHANGED			= '_MCH',
+    B_MINIMIZE				= '_WMN',
+    B_MINIMIZED				= '_WMD',
+    B_MOUSE_DOWN 				= '_MDN',
+    B_MOUSE_MOVED 				= '_MMV',
+    B_MOUSE_ENTER_EXIT			= '_MEX',
+    B_MOUSE_UP 				= '_MUP',
+    B_MOUSE_WHEEL_CHANGED			= '_MWC',
+    B_OPEN_IN_WORKSPACE			= '_OWS',
+    B_PRINTER_CHANGED			= '_PCH',
+    B_PULSE 				= '_PUL',
+    B_READY_TO_RUN 				= '_RTR',
+    B_REFS_RECEIVED 			= '_RRC',
+    B_SCREEN_CHANGED 			= '_SCH',
+    B_VALUE_CHANGED 			= '_VCH',
+    B_VIEW_MOVED 				= '_VMV',
+    B_VIEW_RESIZED 				= '_VRS',
+    B_WINDOW_MOVED 				= '_WMV',
+    B_WINDOW_RESIZED 			= '_WRS',
+    B_WORKSPACES_CHANGED			= '_WCG',
+    B_WORKSPACE_ACTIVATED			= '_WAC',
+    B_ZOOM					= '_WZM',
+#if !(defined(BHAPI_OS_BEOS) && defined(_APP_DEFS_H))
 	_QUIT_					= '_QIT',
 	_EVENTS_PENDING_			= '_EVP',
 	_UPDATE_				= '_UPD',
 	_UPDATE_IF_NEEDED_			= '_UPN',
 	_MENU_EVENT_				= '_MEV'
-#endif /* !(ETK_OS_BEOS && _APP_DEFS_H) */
+#endif /* !(BHAPI_OS_BEOS && _APP_DEFS_H) */
 };
 
 
 /* Other Command */
 enum {
-	E_UPDATE_STATUS_BAR			= 'SBUP',
-	E_RESET_STATUS_BAR			= 'SBRS',
-	E_OBSERVER_NOTICE_CHANGE		= 'NTCH',
-	E_CONTROL_INVOKED			= 'CIVK',
-	E_CONTROL_MODIFIED			= 'CMOD',
-	E_CLIPBOARD_CHANGED			= 'CLCH',
-	E_SAVE_REQUESTED			= 'SAVE',
-	E_NO_REPLY				= 'NONE',
-	E_REPLY					= 'RPLY',
-	E_SET_PROPERTY				= 'PSET',
-	E_GET_PROPERTY				= 'PGET',
-	E_CREATE_PROPERTY			= 'PCRT',
-	E_DELETE_PROPERTY			= 'PDEL',
-	E_COUNT_PROPERTIES			= 'PCNT',
-	E_EXECUTE_PROPERTY			= 'PEXE',
-	E_GET_SUPPORTED_SUITES			= 'SUIT',
-	E_INPUT_METHOD_EVENT			= 'IMEV'
+    B_UPDATE_STATUS_BAR			= 'SBUP',
+    B_RESET_STATUS_BAR			= 'SBRS',
+    B_OBSERVER_NOTICE_CHANGE		= 'NTCH',
+    B_CONTROL_INVOKED			= 'CIVK',
+    B_CONTROL_MODIFIED			= 'CMOD',
+    B_CLIPBOARD_CHANGED			= 'CLCH',
+    B_SAVE_REQUESTED			= 'SAVE',
+    B_NO_REPLY				= 'NONE',
+    B_REPLY					= 'RPLY',
+    B_SET_PROPERTY				= 'PSET',
+    B_GET_PROPERTY				= 'PGET',
+    B_CREATE_PROPERTY			= 'PCRT',
+    B_DELETE_PROPERTY			= 'PDEL',
+    B_COUNT_PROPERTIES			= 'PCNT',
+    B_EXECUTE_PROPERTY			= 'PEXE',
+    B_GET_SUPPORTED_SUITES			= 'SUIT',
+    B_INPUT_METHOD_EVENT			= 'IMEV'
 };
 
-#endif /* __ETK_APPDEFS_H__ */
+#endif /* __BHAPI_APPDEFS_H__ */
 

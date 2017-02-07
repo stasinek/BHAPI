@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,7 +24,7 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: SimpleLocker.h
- * Description: ESimpleLocker --- locker DO NOT support nested-locking
+ * Description: BSimpleLocker --- locker DO NOT support nested-locking
  *
  * --------------------------------------------------------------------------*/
 
@@ -33,36 +33,36 @@
 #include "SimpleLocker.h"
 
 
-ESimpleLocker::ESimpleLocker(bool assert)
+BSimpleLocker::BSimpleLocker(bool assert)
 {
-	fLocker = etk_create_simple_locker();
-	if(fLocker == NULL && assert) ETK_ERROR("[SUPPORT]: %s --- Create simple locker failed!", __PRETTY_FUNCTION__);
+	fLocker = bhapi_create_simple_locker();
+	if(fLocker == NULL && assert) BHAPI_ERROR("[SUPPORT]: %s --- Create simple locker failed!", __PRETTY_FUNCTION__);
 }
 
 
-ESimpleLocker::~ESimpleLocker()
+BSimpleLocker::~BSimpleLocker()
 {
-	if(fLocker != NULL) etk_delete_simple_locker(fLocker);
+	if(fLocker != NULL) bhapi_delete_simple_locker(fLocker);
 }
 
 
 bool
-ESimpleLocker::IsValid() const
+BSimpleLocker::IsValid() const
 {
 	return(fLocker != NULL);
 }
 
 
 bool
-ESimpleLocker::Lock()
+BSimpleLocker::Lock()
 {
-	return(fLocker != NULL ? etk_lock_simple_locker(fLocker) : false);
+	return(fLocker != NULL ? bhapi_lock_simple_locker(fLocker) : false);
 }
 
 
 void
-ESimpleLocker::Unlock()
+BSimpleLocker::Unlock()
 {
-	if(fLocker != NULL) etk_unlock_simple_locker(fLocker);
+	if(fLocker != NULL) bhapi_unlock_simple_locker(fLocker);
 }
 

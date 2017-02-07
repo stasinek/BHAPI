@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -33,11 +33,11 @@
 #include "./../storage/Path.h"
 
 
-_IMPEXP_ETK void*
-etk_load_addon(const char* path)
+_IMPEXP_BHAPI void*
+bhapi_load_addon(const char* path)
 {
-	EPath aPath(path, NULL, true);
-	if(aPath.Path() == NULL || strlen(aPath.Path()) > E_MAXPATH) return NULL;
+	BPath aPath(path, NULL, true);
+	if(aPath.Path() == NULL || strlen(aPath.Path()) > B_MAXPATH) return NULL;
 
 	image_id *image = (image_id*)malloc(sizeof(image_id));
 	if(image == NULL) return NULL;
@@ -52,27 +52,27 @@ etk_load_addon(const char* path)
 }
 
 
-_IMPEXP_ETK e_status_t
-etk_unload_addon(void *data)
+_IMPEXP_BHAPI b_status_t
+bhapi_unload_addon(void *data)
 {
-	if(data == NULL) return E_ERROR;
-	if(unload_add_on(*((image_id*)data)) != B_OK) return E_ERROR;
+	if(data == NULL) return B_ERROR;
+	if(unload_add_on(*((image_id*)data)) != B_OK) return B_ERROR;
 	free(data);
-	return E_OK;
+	return B_OK;
 }
 
 
-_IMPEXP_ETK e_status_t
-etk_get_image_symbol(void *data, const char *name, void **ptr)
+_IMPEXP_BHAPI b_status_t
+bhapi_get_image_symbol(void *data, const char *name, void **ptr)
 {
-	if(data == NULL || name == NULL || *name == 0 || ptr == NULL) return E_BAD_VALUE;
+	if(data == NULL || name == NULL || *name == 0 || ptr == NULL) return B_BAD_VALUE;
 
 	void *aPtr = NULL;
-	if(get_image_symbol(*((image_id*)data), name, B_SYMBOL_TYPE_ANY, &aPtr) != B_OK) return E_ERROR;
-	if(aPtr == NULL) return E_ERROR;
+	if(get_image_symbol(*((image_id*)data), name, B_SYMBOL_TYPE_ANY, &aPtr) != B_OK) return B_ERROR;
+	if(aPtr == NULL) return B_ERROR;
 
 	*ptr = aPtr;
 
-	return E_OK;
+	return B_OK;
 }
 

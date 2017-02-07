@@ -44314,87 +44314,35 @@ extern "C" {
 # 43 "../src/storage/File.cpp" 2
 
 
-# 1 "../src/storage/./../support/String.h" 1
-# 34 "../src/storage/./../support/String.h"
+# 1 "../src/storage/./../support/StringMe.h" 1
+# 34 "../src/storage/./../support/StringMe.h"
+# 1 "../src/storage/./../support/SupportDefs.h" 1
+# 34 "../src/storage/./../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
-# 35 "../src/storage/./../support/String.h" 2
-# 1 "../src/storage/./../support/SupportDefs.h" 1
-# 89 "../src/storage/./../support/SupportDefs.h"
-# 1 "../src/storage/./../support/Errors.h" 1
-# 32 "../src/storage/./../support/Errors.h"
+# 35 "../src/storage/./../support/SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
+# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+extern "C" {
+# 24 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
+
+  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
+
+
+}
+# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
+typedef struct {
+  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
+  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
+} max_align_t;
+# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
+# 36 "../src/storage/./../support/SupportDefs.h" 2
+# 96 "../src/storage/./../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 33 "../src/storage/./../support/Errors.h" 2
-# 41 "../src/storage/./../support/Errors.h"
-enum {
- E_NO_MEMORY = (-2147483647 - 1),
- E_IO_ERROR,
- E_PERMISSION_DENIED,
- E_BAD_INDEX,
- E_BAD_TYPE,
- E_BAD_VALUE,
- E_MISMATCHED_VALUES,
- E_NAME_NOT_FOUND,
- E_NAME_IN_USE,
- E_TIMED_OUT,
- E_INTERRUPTED,
- E_WOULD_BLOCK,
- E_CANCELED,
- E_NO_INIT,
- E_BUSY,
- E_NOT_ALLOWED,
-
- E_ERROR = -1,
- E_OK = 1,
- E_NO_ERROR = 1
-};
-
-
-enum {
- E_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
- E_NO_MORE_SEMS,
-
- E_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
- E_NO_MORE_THREADS,
- E_BAD_THREAD_STATE,
- E_BAD_TEAM_ID,
- E_NO_MORE_TEAMS,
-
- E_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
- E_NO_MORE_PORTS,
-
- E_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
- E_BAD_ADDRESS,
- E_NOT_AN_EXECUTABLE,
- E_MISSING_LIBRARY,
- E_MISSING_SYMBOL,
-
- E_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
-};
-
-
-enum {
- E_BAD_REPLY = (-2147483647 - 1) + 0x2000,
- E_DUPLICATE_REPLY,
- E_MESSAGE_TO_SELF,
- E_BAD_HANDLER,
- E_ALREADY_RUNNING,
-};
-
-
-enum {
- E_FILE_ERROR = (-2147483647 - 1) + 0x3000,
- E_ENTRY_NOT_FOUND,
- E_LINK_LIMIT,
- E_NAME_TOO_LONG,
-};
-# 90 "../src/storage/./../support/SupportDefs.h" 2
-
-
-
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 94 "../src/storage/./../support/SupportDefs.h" 2
+# 97 "../src/storage/./../support/SupportDefs.h" 2
 
 
 
@@ -44441,61 +44389,61 @@ extern long double __attribute__((__cdecl__)) _chgsignl (long double);
 
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 100 "../src/storage/./../support/SupportDefs.h" 2
-# 111 "../src/storage/./../support/SupportDefs.h"
-typedef int eunichar32;
-typedef short eunichar;
+# 103 "../src/storage/./../support/SupportDefs.h" 2
+# 114 "../src/storage/./../support/SupportDefs.h"
+typedef int b_unichar32;
+typedef short b_unichar;
 
-typedef char eint8;
-typedef unsigned char euint8;
-typedef short eint16;
-typedef unsigned short euint16;
-typedef int eint32;
-typedef unsigned int euint32;
-typedef long long eint64;
-typedef unsigned long long euint64;
+typedef char b_int8;
+typedef unsigned char b_uint8;
+typedef short b_int16;
+typedef unsigned short b_uint16;
+typedef int b_int32;
+typedef unsigned int b_uint32;
+typedef long long b_int64;
+typedef unsigned long long b_uint64;
 
-typedef eint32 e_status_t;
-typedef euint32 e_type_code;
-typedef euint32 e_perform_code;
-typedef eint64 e_bigtime_t;
-typedef eint64 e_thread_id;
-typedef size_t e_address_t;
+typedef b_int32 b_status_t;
+typedef b_uint32 b_type_code;
+typedef b_uint32 b_perform_code;
+typedef b_int64 b_bigtime_t;
+typedef b_int64 b_thread_id;
+typedef size_t b_address_t;
 
 enum {
-    E_ANY_TYPE = 'ANYT',
- E_BOOL_TYPE = 'BOOL',
- E_CHAR_TYPE = 'CHAR',
- E_DOUBLE_TYPE = 'DBLE',
- E_FLOAT_TYPE = 'FLOT',
- E_INT64_TYPE = 'LLNG',
- E_INT32_TYPE = 'LONG',
- E_INT16_TYPE = 'SHRT',
- E_INT8_TYPE = 'BYTE',
- E_MESSAGE_TYPE = 'MSGG',
- E_MESSENGER_TYPE = 'MSNG',
- E_POINTER_TYPE = 'PNTR',
- E_SIZE_T_TYPE = 'SIZT',
- E_SSIZE_T_TYPE = 'SSZT',
- E_STRING_TYPE = 'CSTR',
- E_UINT64_TYPE = 'ULLG',
- E_UINT32_TYPE = 'ULNG',
- E_UINT16_TYPE = 'USHT',
- E_UINT8_TYPE = 'UBYT',
- E_POINT_TYPE = 'SPNT',
-    E_RECT_TYPE = 'RECT',
-    E_MIME_TYPE = 'MIME',
- E_UNKNOWN_TYPE = 'UNKN'
+    B_ANY_TYPE = 'ANYT',
+    B_BOOL_TYPE = 'BOOL',
+    B_CHAR_TYPE = 'CHAR',
+    B_DOUBLE_TYPE = 'DBLE',
+    B_FLOAT_TYPE = 'FLOT',
+    B_INT64_TYPE = 'LLNG',
+    B_INT32_TYPE = 'LONG',
+    B_INT16_TYPE = 'SHRT',
+    B_INT8_TYPE = 'BYTE',
+    B_MESSAGE_TYPE = 'MSGG',
+    B_MESSENGER_TYPE = 'MSNG',
+    B_POINTER_TYPE = 'PNTR',
+    B_SIZE_T_TYPE = 'SIZT',
+    B_SSIZE_T_TYPE = 'SSZT',
+    B_STRING_TYPE = 'CSTR',
+    B_UINT64_TYPE = 'ULLG',
+    B_UINT32_TYPE = 'ULNG',
+    B_UINT16_TYPE = 'USHT',
+    B_UINT8_TYPE = 'UBYT',
+    B_POINT_TYPE = 'SPNT',
+    B_RECT_TYPE = 'RECT',
+    B_MIME_TYPE = 'MIME',
+    B_UNKNOWN_TYPE = 'UNKN'
 };
-# 252 "../src/storage/./../support/SupportDefs.h"
+# 255 "../src/storage/./../support/SupportDefs.h"
 extern "C" {
 
 
-extern __attribute__((dllexport)) const euint8 etk_major_version;
-extern __attribute__((dllexport)) const euint8 etk_minor_version;
-extern __attribute__((dllexport)) const euint8 etk_micro_version;
-extern __attribute__((dllexport)) const euint8 etk_interface_age;
-extern __attribute__((dllexport)) const euint16 etk_binary_age;
+extern __attribute__((dllexport)) const b_uint8 bhapi_major_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_minor_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_micro_version;
+extern __attribute__((dllexport)) const b_uint8 bhapi_interface_age;
+extern __attribute__((dllexport)) const b_uint16 bhapi_binary_age;
 
 
 }
@@ -44933,40 +44881,19 @@ typedef unsigned int GROUP;
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAProviderConfigChange(LPHANDLE lpNotificationHandle,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 # 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
-# 270 "../src/storage/./../support/SupportDefs.h" 2
-# 293 "../src/storage/./../support/SupportDefs.h"
+# 273 "../src/storage/./../support/SupportDefs.h" 2
+# 296 "../src/storage/./../support/SupportDefs.h"
 enum {
- E_SEEK_SET = 0,
- E_SEEK_CUR,
- E_SEEK_END,
+    B_SEEK_SET = 0,
+    B_SEEK_CUR,
+    B_SEEK_END,
 };
 
 
 # 1 "../src/storage/./../support/./../kernel/Debug.h" 1
 # 33 "../src/storage/./../support/./../kernel/Debug.h"
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
+# 1 "../src/storage/./../support/./../kernel/./../support/SupportDefs.h" 1
 # 34 "../src/storage/./../support/./../kernel/Debug.h" 2
-# 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
-# 13 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-extern "C" {
-# 24 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-  __attribute__ ((__dllimport__)) extern unsigned long __attribute__((__cdecl__)) __threadid(void);
-
-  __attribute__ ((__dllimport__)) extern uintptr_t __attribute__((__cdecl__)) __threadhandle(void);
-
-
-}
-# 423 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 3 4
-typedef struct {
-  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
-  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
-} max_align_t;
-# 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
-# 35 "../src/storage/./../support/./../kernel/Debug.h" 2
-
 
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/new" 1 3
@@ -45473,39 +45400,104 @@ inline void operator delete[](void*, void*) noexcept { }
 }
 
 #pragma GCC visibility pop
-# 39 "../src/storage/./../support/./../kernel/Debug.h" 2
-
-
-# 1 "../src/storage/./../support/./../kernel/./../support/SupportDefs.h" 1
-# 42 "../src/storage/./../support/./../kernel/Debug.h" 2
-# 57 "../src/storage/./../support/./../kernel/Debug.h"
+# 37 "../src/storage/./../support/./../kernel/Debug.h" 2
+# 54 "../src/storage/./../support/./../kernel/Debug.h"
 extern "C" {
 
 
-typedef enum etk_debug_level {
+typedef enum bhapi_debug_level {
  DEBUG_NORMAL,
  DEBUG_OUTPUT,
  DEBUG_WARNING,
  DEBUG_ERROR
-} etk_debug_level;
+} bhapi_debug_level;
 
-__attribute__((dllexport)) void etk_debug_log(etk_debug_level level, const char *format, va_list ap);
-# 83 "../src/storage/./../support/./../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_DEBUG(const char *format, ...);
-
-
-
-__attribute__((dllexport)) void ETK_OUTPUT(const char *format, ...);
-# 103 "../src/storage/./../support/./../kernel/Debug.h"
-__attribute__((dllexport)) void ETK_WARNING(const char *format, ...);
+__attribute__((dllexport)) void bhapi_debug_log(bhapi_debug_level level, const char *format, va_list ap);
+# 80 "../src/storage/./../support/./../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...);
 
 
 
-__attribute__((dllexport)) void ETK_ERROR(const char *format, ...);
-# 121 "../src/storage/./../support/./../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...);
+# 100 "../src/storage/./../support/./../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...);
+
+
+
+__attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...);
+# 118 "../src/storage/./../support/./../kernel/Debug.h"
 }
-# 301 "../src/storage/./../support/SupportDefs.h" 2
-# 36 "../src/storage/./../support/String.h" 2
+# 304 "../src/storage/./../support/SupportDefs.h" 2
+
+# 1 "../src/storage/./../support/Errors.h" 1
+# 32 "../src/storage/./../support/Errors.h"
+# 1 "../src/storage/./../support/SupportDefs.h" 1
+# 33 "../src/storage/./../support/Errors.h" 2
+# 41 "../src/storage/./../support/Errors.h"
+enum {
+    B_NO_MEMORY = (-2147483647 - 1),
+    B_IO_ERROR,
+    B_PERMISSION_DENIED,
+    B_BAD_INDEX,
+    B_BAD_TYPE,
+    B_BAD_VALUE,
+    B_MISMATCHED_VALUES,
+    B_NAME_NOT_FOUND,
+    B_NAME_IN_USE,
+    B_TIMED_OUT,
+    B_INTERRUPTED,
+    B_WOULD_BLOCK,
+    B_CANCELED,
+    B_NO_INIT,
+    B_BUSY,
+    B_NOT_ALLOWED,
+
+    B_ERROR = -1,
+    B_OK = 1,
+    B_NO_ERROR = 1
+};
+
+
+enum {
+    B_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
+    B_NO_MORE_SEMS,
+
+    B_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
+    B_NO_MORE_THREADS,
+    B_BAD_THREAD_STATE,
+    B_BAD_TEAM_ID,
+    B_NO_MORE_TEAMS,
+
+    B_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
+    B_NO_MORE_PORTS,
+
+    B_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
+    B_BAD_ADDRESS,
+    B_NOT_AN_EXECUTABLE,
+    B_MISSING_LIBRARY,
+    B_MISSING_SYMBOL,
+
+    B_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
+};
+
+
+enum {
+    B_BAD_REPLY = (-2147483647 - 1) + 0x2000,
+    B_DUPLICATE_REPLY,
+    B_MESSAGE_TO_SELF,
+    B_BAD_HANDLER,
+    B_ALREADY_RUNNING,
+};
+
+
+enum {
+    B_FILE_ERROR = (-2147483647 - 1) + 0x3000,
+    B_ENTRY_NOT_FOUND,
+    B_LINK_LIMIT,
+    B_NAME_TOO_LONG,
+};
+# 306 "../src/storage/./../support/SupportDefs.h" 2
+# 35 "../src/storage/./../support/StringMe.h" 2
 
 
 extern "C" {
@@ -45513,135 +45505,136 @@ extern "C" {
 
 
 
-__attribute__((dllexport)) char* e_strdup(const char *src);
-__attribute__((dllexport)) char* e_strndup(const char *src, eint32 length);
-__attribute__((dllexport)) char* e_strdup_vprintf(const char *format, va_list ap);
-__attribute__((dllexport)) char* e_strdup_printf(const char *format, ...);
+__attribute__((dllexport)) char* b_strdup(const char *src);
+__attribute__((dllexport)) char* b_strndup(const char *src, b_int32 length);
+__attribute__((dllexport)) char* b_strdup_vprintf(const char *format, va_list ap);
+__attribute__((dllexport)) char* b_strdup_printf(const char *format, ...);
 
-__attribute__((dllexport)) eunichar* e_utf8_convert_to_unicode(const char *str, eint32 length);
-__attribute__((dllexport)) eunichar32* e_utf8_convert_to_utf32(const char *str, eint32 length);
-__attribute__((dllexport)) char* e_unicode_convert_to_utf8(const eunichar *str, eint32 ulength);
-__attribute__((dllexport)) eunichar32* e_unicode_convert_to_utf32(const eunichar *str, eint32 ulength);
-__attribute__((dllexport)) char* e_utf32_convert_to_utf8(const eunichar32 *str, eint32 ulength);
-__attribute__((dllexport)) eunichar* e_utf32_convert_to_unicode(const eunichar32 *str, eint32 ulength);
+__attribute__((dllexport)) b_unichar* b_utf8_convert_to_unicode(const char *str, b_int32 length);
+__attribute__((dllexport)) b_unichar32* b_utf8_convert_to_utf32(const char *str, b_int32 length);
+__attribute__((dllexport)) char* b_unicode_convert_to_utf8(const b_unichar *str, b_int32 ulength);
+__attribute__((dllexport)) b_unichar32* b_unicode_convert_to_utf32(const b_unichar *str, b_int32 ulength);
+__attribute__((dllexport)) char* b_utf32_convert_to_utf8(const b_unichar32 *str, b_int32 ulength);
+__attribute__((dllexport)) b_unichar* b_utf32_convert_to_unicode(const b_unichar32 *str, b_int32 ulength);
 
-__attribute__((dllexport)) bool e_utf8_is_token(const char *str);
-__attribute__((dllexport)) eint32 e_utf8_strlen(const char *str);
-__attribute__((dllexport)) eint32 e_utf8_strlen_etc(const char *str, eint32 nbytes);
-__attribute__((dllexport)) eint32 e_utf8_strlen_fast(const char *str, eint32 nbytes);
-__attribute__((dllexport)) const char* e_utf8_at(const char *str, eint32 index, euint8 *nbytes);
-__attribute__((dllexport)) const char* e_utf8_next(const char *str, euint8 *length);
+__attribute__((dllexport)) bool b_utf8_is_token(const char *str);
+__attribute__((dllexport)) b_int32 b_utf8_strlen(const char *str);
+__attribute__((dllexport)) b_int32 b_utf8_strlen_etc(const char *str, b_int32 nbytes);
+__attribute__((dllexport)) b_int32 b_utf8_strlen_fast(const char *str, b_int32 nbytes);
+__attribute__((dllexport)) const char* b_utf8_at(const char *str, b_int32 index, b_uint8 *nbytes);
+__attribute__((dllexport)) const char* b_utf8_next(const char *str, b_uint8 *length);
 
-__attribute__((dllexport)) eint32 e_unicode_strlen(const eunichar *ustr);
-__attribute__((dllexport)) eint32 e_unicode_strlen_etc(const eunichar *ustr, eint32 nchars, bool utf16_style);
-__attribute__((dllexport)) const eunichar* e_unicode_at(const eunichar* ustr, eint32 index, bool *utf16);
-__attribute__((dllexport)) const eunichar* e_unicode_next(const eunichar* ustr, bool *utf16);
+__attribute__((dllexport)) b_int32 b_unicode_strlen(const b_unichar *ustr);
+__attribute__((dllexport)) b_int32 b_unicode_strlen_etc(const b_unichar *ustr, b_int32 nchars, bool utf16_style);
+__attribute__((dllexport)) const b_unichar* b_unicode_at(const b_unichar* ustr, b_int32 index, bool *utf16);
+__attribute__((dllexport)) const b_unichar* b_unicode_next(const b_unichar* ustr, bool *utf16);
 
-__attribute__((dllexport)) eint32 e_utf32_strlen(const eunichar32 *ustr);
-__attribute__((dllexport)) eint32 e_utf32_strlen_etc(const eunichar32 *ustr, eint32 nchars);
-__attribute__((dllexport)) const eunichar32* e_utf32_at(const eunichar32* ustr, eint32 index);
-__attribute__((dllexport)) const eunichar32* e_utf32_next(const eunichar32* ustr);
+__attribute__((dllexport)) b_int32 b_utf32_strlen(const b_unichar32 *ustr);
+__attribute__((dllexport)) b_int32 b_utf32_strlen_etc(const b_unichar32 *ustr, b_int32 nchars);
+__attribute__((dllexport)) const b_unichar32* b_utf32_at(const b_unichar32* ustr, b_int32 index);
+__attribute__((dllexport)) const b_unichar32* b_utf32_next(const b_unichar32* ustr);
 
 
 }
 
 
-__attribute__((dllexport)) char *EStrdup(const char* src, eint32 length = -1);
+
+__attribute__((dllexport)) char *b_strdup_dirty(const char* src, b_int32 length = -1);
 
 
-class EStringArray;
+class BStringArray;
 
 
-class __attribute__((dllexport)) EString {
+class __attribute__((dllexport)) BString {
 public:
- EString();
- EString(const char *str);
- EString(const EString &str);
- EString(const char *str, eint32 maxLength);
- ~EString();
+    BString();
+    BString(const char *str);
+    BString(const BString &str);
+    BString(const char *str, b_int32 maxLength);
+    ~BString();
 
- const char *String() const;
+    const char *String() const;
 
- eint32 Length() const;
- eint32 CountChars() const;
+    b_int32 Length() const;
+    b_int32 CountChars() const;
 
- char operator[](eint32 index) const;
- char ByteAt(eint32 index) const;
- const char* CharAt(eint32 index, euint8 *length = __null) const;
+    char operator[](b_int32 index) const;
+    char ByteAt(b_int32 index) const;
+    const char* CharAt(b_int32 index, b_uint8 *length = __null) const;
 
- EString &operator=(const EString &str);
- EString &operator=(const char *str);
- EString &operator=(char c);
+    BString &operator=(const BString &str);
+    BString &operator=(const char *str);
+    BString &operator=(char c);
 
- EString &SetTo(const EString &str);
- EString &SetTo(const EString &str, eint32 length);
- EString &SetTo(const char *str);
- EString &SetTo(const char *str, eint32 length);
- EString &SetTo(char c, eint32 count);
+    BString &SetTo(const BString &str);
+    BString &SetTo(const BString &str, b_int32 length);
+    BString &SetTo(const char *str);
+    BString &SetTo(const char *str, b_int32 length);
+    BString &SetTo(char c, b_int32 count);
 
- EString &Adopt(EString &from);
- EString &Adopt(EString &from, eint32 length);
+    BString &Adopt(BString &from);
+    BString &Adopt(BString &from, b_int32 length);
 
- EString &CopyInto(EString &into, eint32 fromOffset, eint32 length) const;
- void CopyInto(char *into, size_t into_size, eint32 fromOffset, eint32 length) const;
+    BString &CopyInto(BString &into, b_int32 fromOffset, b_int32 length) const;
+    void CopyInto(char *into, size_t into_size, b_int32 fromOffset, b_int32 length) const;
 
- EString &MoveInto(EString &into, eint32 from, eint32 length);
- void MoveInto(char *into, size_t into_size, eint32 from, eint32 length);
+    BString &MoveInto(BString &into, b_int32 from, b_int32 length);
+    void MoveInto(char *into, size_t into_size, b_int32 from, b_int32 length);
 
  void MakeEmpty();
 
- EString &operator+=(const EString &str);
- EString &operator+=(const char *str);
- EString &operator+=(char c);
+    BString &operator+=(const BString &str);
+    BString &operator+=(const char *str);
+    BString &operator+=(char c);
 
- EString &Append(const EString &str);
- EString &Append(const EString &str, eint32 length);
- EString &Append(const char *str);
- EString &Append(const char *str, eint32 length);
- EString &Append(char c, eint32 count);
- EString &AppendFormat(const char *format, ...);
+    BString &Append(const BString &str);
+    BString &Append(const BString &str, b_int32 length);
+    BString &Append(const char *str);
+    BString &Append(const char *str, b_int32 length);
+    BString &Append(char c, b_int32 count);
+    BString &AppendFormat(const char *format, ...);
 
- EString &Prepend(const EString &str);
- EString &Prepend(const EString &str, eint32 length);
- EString &Prepend(const char *str);
- EString &Prepend(const char *str, eint32 length);
- EString &Prepend(char c, eint32 count);
- EString &PrependFormat(const char *format, ...);
+    BString &Prepend(const BString &str);
+    BString &Prepend(const BString &str, b_int32 length);
+    BString &Prepend(const char *str);
+    BString &Prepend(const char *str, b_int32 length);
+    BString &Prepend(char c, b_int32 count);
+    BString &PrependFormat(const char *format, ...);
 
- EString &Insert(const EString &str, eint32 pos);
- EString &Insert(const EString &str, eint32 length, eint32 pos);
- EString &Insert(const EString &str, eint32 fromOffset, eint32 length, eint32 pos);
- EString &Insert(const char *str, eint32 pos);
- EString &Insert(const char *str, eint32 length, eint32 pos);
- EString &Insert(const char *str, eint32 fromOffset, eint32 length, eint32 pos);
- EString &Insert(char c, eint32 count, eint32 pos);
+    BString &Insert(const BString &str, b_int32 pos);
+    BString &Insert(const BString &str, b_int32 length, b_int32 pos);
+    BString &Insert(const BString &str, b_int32 fromOffset, b_int32 length, b_int32 pos);
+    BString &Insert(const char *str, b_int32 pos);
+    BString &Insert(const char *str, b_int32 length, b_int32 pos);
+    BString &Insert(const char *str, b_int32 fromOffset, b_int32 length, b_int32 pos);
+    BString &Insert(char c, b_int32 count, b_int32 pos);
 
- EString &Truncate(eint32 newLength);
+    BString &Truncate(b_int32 newLength);
 
- EString &Remove(eint32 from, eint32 length);
+    BString &Remove(b_int32 from, b_int32 length);
 
- EString &RemoveFirst(const EString &str);
- EString &RemoveLast(const EString &str);
- EString &RemoveAll(const EString &str);
- EString &RemoveFirst(const char *str);
- EString &RemoveLast(const char *str);
- EString &RemoveAll(const char *str);
- EString &RemoveSet(const char *setOfCharsToRemove);
+    BString &RemoveFirst(const BString &str);
+    BString &RemoveLast(const BString &str);
+    BString &RemoveAll(const BString &str);
+    BString &RemoveFirst(const char *str);
+    BString &RemoveLast(const char *str);
+    BString &RemoveAll(const char *str);
+    BString &RemoveSet(const char *setOfCharsToRemove);
 
- EString &IRemoveFirst(const EString &str);
- EString &IRemoveLast(const EString &str);
- EString &IRemoveAll(const EString &str);
- EString &IRemoveFirst(const char *str);
- EString &IRemoveLast(const char *str);
- EString &IRemoveAll(const char *str);
- EString &IRemoveSet(const char *setOfCharsToRemove);
+    BString &IRemoveFirst(const BString &str);
+    BString &IRemoveLast(const BString &str);
+    BString &IRemoveAll(const BString &str);
+    BString &IRemoveFirst(const char *str);
+    BString &IRemoveLast(const char *str);
+    BString &IRemoveAll(const char *str);
+    BString &IRemoveSet(const char *setOfCharsToRemove);
 
- bool operator<(const EString &str) const;
- bool operator<=(const EString &str) const;
- bool operator==(const EString &str) const;
- bool operator>=(const EString &str) const;
- bool operator>(const EString &str) const;
- bool operator!=(const EString &str) const;
+    bool operator<(const BString &str) const;
+    bool operator<=(const BString &str) const;
+    bool operator==(const BString &str) const;
+    bool operator>=(const BString &str) const;
+    bool operator>(const BString &str) const;
+    bool operator!=(const BString &str) const;
 
  bool operator<(const char *str) const;
  bool operator<=(const char *str) const;
@@ -45650,85 +45643,85 @@ public:
  bool operator>(const char *str) const;
  bool operator!=(const char *str) const;
 
- int Compare(const EString &str) const;
+    int Compare(const BString &str) const;
  int Compare(const char *str) const;
- int Compare(const EString &str, eint32 n) const;
- int Compare(const char *str, eint32 n) const;
- int ICompare(const EString &str) const;
+    int Compare(const BString &str, b_int32 n) const;
+    int Compare(const char *str, b_int32 n) const;
+    int ICompare(const BString &str) const;
  int ICompare(const char *str) const;
- int ICompare(const EString &str, eint32 n) const;
- int ICompare(const char *str, eint32 n) const;
+    int ICompare(const BString &str, b_int32 n) const;
+    int ICompare(const char *str, b_int32 n) const;
 
- eint32 FindFirst(const EString &string) const;
- eint32 FindFirst(const char *string) const;
- eint32 FindFirst(const EString &string, eint32 fromOffset) const;
- eint32 FindFirst(const char *string, eint32 fromOffset) const;
- eint32 FindFirst(char c) const;
- eint32 FindFirst(char c, eint32 fromOffset) const;
+    b_int32 FindFirst(const BString &string) const;
+    b_int32 FindFirst(const char *string) const;
+    b_int32 FindFirst(const BString &string, b_int32 fromOffset) const;
+    b_int32 FindFirst(const char *string, b_int32 fromOffset) const;
+    b_int32 FindFirst(char c) const;
+    b_int32 FindFirst(char c, b_int32 fromOffset) const;
 
- eint32 FindLast(const EString &string) const;
- eint32 FindLast(const char *string) const;
- eint32 FindLast(const EString &string, eint32 beforeOffset) const;
- eint32 FindLast(const char *string, eint32 beforeOffset) const;
- eint32 FindLast(char c) const;
- eint32 FindLast(char c, eint32 beforeOffset) const;
+    b_int32 FindLast(const BString &string) const;
+    b_int32 FindLast(const char *string) const;
+    b_int32 FindLast(const BString &string, b_int32 beforeOffset) const;
+    b_int32 FindLast(const char *string, b_int32 beforeOffset) const;
+    b_int32 FindLast(char c) const;
+    b_int32 FindLast(char c, b_int32 beforeOffset) const;
 
- eint32 IFindFirst(const EString &string) const;
- eint32 IFindFirst(const char *string) const;
- eint32 IFindFirst(const EString &string, eint32 fromOffset) const;
- eint32 IFindFirst(const char *string, eint32 fromOffset) const;
- eint32 IFindFirst(char c) const;
- eint32 IFindFirst(char c, eint32 fromOffset) const;
+    b_int32 IFindFirst(const BString &string) const;
+    b_int32 IFindFirst(const char *string) const;
+    b_int32 IFindFirst(const BString &string, b_int32 fromOffset) const;
+    b_int32 IFindFirst(const char *string, b_int32 fromOffset) const;
+    b_int32 IFindFirst(char c) const;
+    b_int32 IFindFirst(char c, b_int32 fromOffset) const;
 
- eint32 IFindLast(const EString &string) const;
- eint32 IFindLast(const char *string) const;
- eint32 IFindLast(const EString &string, eint32 beforeOffset) const;
- eint32 IFindLast(const char *string, eint32 beforeOffset) const;
- eint32 IFindLast(char c) const;
- eint32 IFindLast(char c, eint32 beforeOffset) const;
+    b_int32 IFindLast(const BString &string) const;
+    b_int32 IFindLast(const char *string) const;
+    b_int32 IFindLast(const BString &string, b_int32 beforeOffset) const;
+    b_int32 IFindLast(const char *string, b_int32 beforeOffset) const;
+    b_int32 IFindLast(char c) const;
+    b_int32 IFindLast(char c, b_int32 beforeOffset) const;
 
- EString &ReplaceFirst(char replaceThis, char withThis);
- EString &ReplaceLast(char replaceThis, char withThis);
- EString &ReplaceAll(char replaceThis, char withThis, eint32 fromOffset = 0);
- EString &Replace(char replaceThis, char withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &ReplaceFirst(const char *replaceThis, const char *withThis);
- EString &ReplaceLast(const char *replaceThis, const char *withThis);
- EString &ReplaceAll(const char *replaceThis, const char *withThis, eint32 fromOffset = 0);
- EString &Replace(const char *replaceThis, const char *withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &ReplaceSet(const char *setOfChars, char with);
- EString &ReplaceSet(const char *setOfChars, const char *with);
+    BString &ReplaceFirst(char replaceThis, char withThis);
+    BString &ReplaceLast(char replaceThis, char withThis);
+    BString &ReplaceAll(char replaceThis, char withThis, b_int32 fromOffset = 0);
+    BString &Replace(char replaceThis, char withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &ReplaceFirst(const char *replaceThis, const char *withThis);
+    BString &ReplaceLast(const char *replaceThis, const char *withThis);
+    BString &ReplaceAll(const char *replaceThis, const char *withThis, b_int32 fromOffset = 0);
+    BString &Replace(const char *replaceThis, const char *withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &ReplaceSet(const char *setOfChars, char with);
+    BString &ReplaceSet(const char *setOfChars, const char *with);
 
- EString &IReplaceFirst(char replaceThis, char withThis);
- EString &IReplaceLast(char replaceThis, char withThis);
- EString &IReplaceAll(char replaceThis, char withThis, eint32 fromOffset = 0);
- EString &IReplace(char replaceThis, char withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &IReplaceFirst(const char *replaceThis, const char *withThis);
- EString &IReplaceLast(const char *replaceThis, const char *withThis);
- EString &IReplaceAll(const char *replaceThis, const char *withThis, eint32 fromOffset = 0);
- EString &IReplace(const char *replaceThis, const char *withThis, eint32 maxReplaceCount, eint32 fromOffset = 0);
- EString &IReplaceSet(const char *setOfChars, char with);
- EString &IReplaceSet(const char *setOfChars, const char *with);
+    BString &IReplaceFirst(char replaceThis, char withThis);
+    BString &IReplaceLast(char replaceThis, char withThis);
+    BString &IReplaceAll(char replaceThis, char withThis, b_int32 fromOffset = 0);
+    BString &IReplace(char replaceThis, char withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &IReplaceFirst(const char *replaceThis, const char *withThis);
+    BString &IReplaceLast(const char *replaceThis, const char *withThis);
+    BString &IReplaceAll(const char *replaceThis, const char *withThis, b_int32 fromOffset = 0);
+    BString &IReplace(const char *replaceThis, const char *withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
+    BString &IReplaceSet(const char *setOfChars, char with);
+    BString &IReplaceSet(const char *setOfChars, const char *with);
 
- EString &ToLower();
- EString &ToUpper();
-
-
- EString &Capitalize();
+    BString &ToLower();
+    BString &ToUpper();
 
 
- EString &CapitalizeEachWord();
+    BString &Capitalize();
 
 
- EString &CharacterEscape(const char *original, const char *setOfCharsToEscape, char escapeWith);
+    BString &CapitalizeEachWord();
 
 
- EString &CharacterEscape(const char *setOfCharsToEscape, char escapeWith);
+    BString &CharacterEscape(const char *original, const char *setOfCharsToEscape, char escapeWith);
 
 
- EString &CharacterDeescape(const char *original, char escapeChar);
+    BString &CharacterEscape(const char *setOfCharsToEscape, char escapeWith);
 
 
- EString &CharacterDeescape(char escapeChar);
+    BString &CharacterDeescape(const char *original, char escapeChar);
+
+
+    BString &CharacterDeescape(char escapeChar);
 
 
  bool IsNumber() const;
@@ -45742,51 +45735,51 @@ public:
 
  bool GetDecimal(float *value) const;
  bool GetDecimal(double *value) const;
- bool GetInteger(eint8 *value) const;
- bool GetInteger(euint8 *value) const;
- bool GetInteger(eint16 *value) const;
- bool GetInteger(euint16 *value) const;
- bool GetInteger(eint32 *value) const;
- bool GetInteger(euint32 *value) const;
- bool GetInteger(eint64 *value) const;
- bool GetInteger(euint64 *value) const;
+    bool GetInteger(b_int8 *value) const;
+    bool GetInteger(b_uint8 *value) const;
+    bool GetInteger(b_int16 *value) const;
+    bool GetInteger(b_uint16 *value) const;
+    bool GetInteger(b_int32 *value) const;
+    bool GetInteger(b_uint32 *value) const;
+    bool GetInteger(b_int64 *value) const;
+    bool GetInteger(b_uint64 *value) const;
 
- EString &operator<<(const char *str);
- EString &operator<<(const EString &str);
- EString &operator<<(eint8 value);
- EString &operator<<(euint8 value);
- EString &operator<<(eint16 value);
- EString &operator<<(euint16 value);
- EString &operator<<(eint32 value);
- EString &operator<<(euint32 value);
- EString &operator<<(eint64 value);
- EString &operator<<(euint64 value);
- EString &operator<<(float value);
- EString &operator<<(double value);
-
-
-
-
- EStringArray *Split(const char *delimiter, euint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
- EStringArray *Split(const char delimiter, euint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
+    BString &operator<<(const char *str);
+    BString &operator<<(const BString &str);
+    BString &operator<<(b_int8 value);
+    BString &operator<<(b_uint8 value);
+    BString &operator<<(b_int16 value);
+    BString &operator<<(b_uint16 value);
+    BString &operator<<(b_int32 value);
+    BString &operator<<(b_uint32 value);
+    BString &operator<<(b_int64 value);
+    BString &operator<<(b_uint64 value);
+    BString &operator<<(float value);
+    BString &operator<<(double value);
 
 
 
- bool SetMinimumBufferSize(eint32 length);
- eint32 MinimumBufferSize() const;
+
+    BStringArray *Split(const char *delimiter, b_uint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
+    BStringArray *Split(const char delimiter, b_uint32 max_tokens = (2147483647 * 2U + 1U) - 1) const;
+
+
+
+    bool SetMinimumBufferSize(b_int32 length);
+    b_int32 MinimumBufferSize() const;
 
 private:
- eint32 fLen;
- eint32 fLenReal;
- eint32 fMinBufferSize;
+    b_int32 fLen;
+    b_int32 fLenReal;
+    b_int32 fMinBufferSize;
  char *fBuffer;
 
- bool _Resize(eint32 length);
+    bool _Resize(b_int32 length);
 };
 # 46 "../src/storage/File.cpp" 2
 
 
-extern "C" char* etk_win32_convert_utf8_to_active(const char *str, eint32 length);
+extern "C" char* bhapi_win32_convert_utf8_to_active(const char *str, b_int32 length);
 
 
 # 1 "../src/storage/Path.h" 1
@@ -45794,28 +45787,28 @@ extern "C" char* etk_win32_convert_utf8_to_active(const char *str, eint32 length
 # 1 "../src/storage/./../support/SupportDefs.h" 1
 # 34 "../src/storage/Path.h" 2
 # 45 "../src/storage/Path.h"
-class __attribute__((dllexport)) EPath {
+class __attribute__((dllexport)) BPath {
 public:
- EPath();
- EPath(const char *dir, const char *leaf = __null, bool normalize = false);
- EPath(const EPath &path);
- virtual ~EPath();
+ BPath();
+ BPath(const char *dir, const char *leaf = __null, bool normalize = false);
+ BPath(const BPath &path);
+ virtual ~BPath();
 
- e_status_t SetTo(const char *dir, const char *leaf = __null, bool normalize = false);
- e_status_t Append(const char *path, bool normalize = false);
+ b_status_t SetTo(const char *dir, const char *leaf = __null, bool normalize = false);
+ b_status_t Append(const char *path, bool normalize = false);
  void Unset();
 
  const char *Path() const;
  const char *Leaf() const;
 
- e_status_t GetParent(EPath *parent) const;
+ b_status_t GetParent(BPath *parent) const;
 
- bool operator==(const EPath &path) const;
+ bool operator==(const BPath &path) const;
  bool operator==(const char *path) const;
- bool operator!=(const EPath &path) const;
+ bool operator!=(const BPath &path) const;
  bool operator!=(const char *path) const;
- EPath& operator=(const EPath &path);
- EPath& operator=(const char *path);
+ BPath& operator=(const BPath &path);
+ BPath& operator=(const char *path);
 
 private:
  char *fPath;
@@ -45828,40 +45821,40 @@ private:
 # 1 "../src/storage/././../support/SupportDefs.h" 1
 # 34 "../src/storage/./StorageDefs.h" 2
 
-typedef eint32 e_dev_t;
+typedef b_int32 b_dev_t;
 
 
 enum {
- E_READ_ONLY = 0x00,
- E_WRITE_ONLY = 0x01,
- E_READ_WRITE = 0x02,
- E_FAIL_IF_EXISTS = 0x04,
- E_CREATE_FILE = 0x08,
- E_ERASE_FILE = 0x10,
- E_OPEN_AT_END = 0x20,
+    B_READ_ONLY = 0x00,
+    B_WRITE_ONLY = 0x01,
+    B_READ_WRITE = 0x02,
+    B_FAIL_IF_EXISTS = 0x04,
+    B_CREATE_FILE = 0x08,
+    B_ERASE_FILE = 0x10,
+    B_OPEN_AT_END = 0x20,
 };
 
 
 enum {
- E_USER_READ = 0x01,
- E_USER_WRITE = 0x02,
- E_USER_EXEC = 0x04,
- E_USER_ALL = 0x07,
- E_GROUP_READ = 0x08,
- E_GROUP_WRITE = 0x10,
- E_GROUP_EXEC = 0x20,
- E_GROUP_ALL = 0x38,
- E_OTHERS_READ = 0x40,
- E_OTHERS_WRITE = 0x80,
- E_OTHERS_EXEC = 0x0100,
- E_OTHERS_ALL = 0x01c0,
+    B_USER_READ = 0x01,
+    B_USER_WRITE = 0x02,
+    B_USER_EXEC = 0x04,
+    B_USER_ALL = 0x07,
+    B_GROUP_READ = 0x08,
+    B_GROUP_WRITE = 0x10,
+    B_GROUP_EXEC = 0x20,
+    B_GROUP_ALL = 0x38,
+    B_OTHERS_READ = 0x40,
+    B_OTHERS_WRITE = 0x80,
+    B_OTHERS_EXEC = 0x0100,
+    B_OTHERS_ALL = 0x01c0,
 };
 
 
 enum {
- E_FILE_NODE = 0x01,
- E_DIRECTORY_NODE = 0x02,
- E_ANY_NODE = 0xff,
+    B_FILE_NODE = 0x01,
+    B_DIRECTORY_NODE = 0x02,
+    B_ANY_NODE = 0xff,
 };
 # 34 "../src/storage/File.h" 2
 # 1 "../src/storage/./Directory.h" 1
@@ -45873,23 +45866,23 @@ enum {
 
 
 
-class EDirectory;
+class BDirectory;
 
-class __attribute__((dllexport)) EEntry {
+class __attribute__((dllexport)) BEntry {
 public:
- EEntry();
- EEntry(const char *dir, const char *leaf, bool traverse = false);
- EEntry(const EDirectory *dir, const char *leaf, bool traverse = false);
- EEntry(const char *path, bool traverse = false);
- EEntry(const EEntry &entry);
- virtual ~EEntry();
+    BEntry();
+    BEntry(const char *dir, const char *leaf, bool traverse = false);
+    BEntry(const BDirectory *dir, const char *leaf, bool traverse = false);
+    BEntry(const char *path, bool traverse = false);
+    BEntry(const BEntry &entry);
+    virtual ~BEntry();
 
- e_status_t SetTo(const char *dir, const char *leaf, bool traverse = false);
- e_status_t SetTo(const EDirectory *dir, const char *leaf, bool traverse = false);
- e_status_t SetTo(const char *path, bool traverse = false);
+ b_status_t SetTo(const char *dir, const char *leaf, bool traverse = false);
+ b_status_t SetTo(const BDirectory *dir, const char *leaf, bool traverse = false);
+ b_status_t SetTo(const char *path, bool traverse = false);
  void Unset();
 
- e_status_t InitCheck() const;
+ b_status_t InitCheck() const;
 
  bool Exists() const;
  bool IsHidden() const;
@@ -45898,27 +45891,27 @@ public:
  bool IsDirectory() const;
  bool IsSymLink() const;
 
- e_status_t GetSize(eint64 *file_size) const;
- e_status_t GetModificationTime(e_bigtime_t *time) const;
- e_status_t GetCreationTime(e_bigtime_t *time) const;
- e_status_t GetAccessTime(e_bigtime_t *time) const;
+    b_status_t GetSize(b_int64 *file_size) const;
+    b_status_t GetModificationTime(b_bigtime_t *time) const;
+    b_status_t GetCreationTime(b_bigtime_t *time) const;
+    b_status_t GetAccessTime(b_bigtime_t *time) const;
 
  const char *Name() const;
- e_status_t GetName(char *buffer, size_t bufferSize) const;
+ b_status_t GetName(char *buffer, size_t bufferSize) const;
 
  const char *Path() const;
- e_status_t GetPath(EPath *path) const;
+    b_status_t GetPath(BPath *path) const;
 
- e_status_t GetParent(EEntry *entry) const;
- e_status_t GetParent(EPath *path) const;
- e_status_t GetParent(EDirectory *dir) const;
+    b_status_t GetParent(BEntry *entry) const;
+    b_status_t GetParent(BPath *path) const;
+ b_status_t GetParent(BDirectory *dir) const;
 
- bool operator==(const EEntry &entry) const;
- bool operator!=(const EEntry &entry) const;
- EEntry& operator=(const EEntry &entry);
+    bool operator==(const BEntry &entry) const;
+    bool operator!=(const BEntry &entry) const;
+    BEntry& operator=(const BEntry &entry);
 
 private:
- friend class EDirectory;
+ friend class BDirectory;
 
  char *fName;
 };
@@ -45926,26 +45919,26 @@ private:
 
 
 
-class __attribute__((dllexport)) EDirectory {
+class __attribute__((dllexport)) BDirectory {
 public:
- EDirectory();
- EDirectory(const char *path);
- virtual ~EDirectory();
+    BDirectory();
+    BDirectory(const char *path);
+    virtual ~BDirectory();
 
- e_status_t InitCheck() const;
- e_status_t SetTo(const char *path);
+ b_status_t InitCheck() const;
+ b_status_t SetTo(const char *path);
  void Unset();
 
- e_status_t GetEntry(EEntry *entry) const;
- e_status_t GetNextEntry(EEntry *entry, bool traverse = false);
- e_status_t Rewind();
- eint32 CountEntries();
+    b_status_t GetEntry(BEntry *entry) const;
+    b_status_t GetNextEntry(BEntry *entry, bool traverse = false);
+ b_status_t Rewind();
+    b_int32 CountEntries();
 
  void DoForEach(bool (*func)(const char *path));
  void DoForEach(bool (*func)(const char *path, void *user_data), void *user_data);
 
 private:
- friend class EEntry;
+    friend class BEntry;
 
  void *fDir;
  char *fName;
@@ -45954,91 +45947,91 @@ private:
 
 
 
-class __attribute__((dllexport)) EFile {
+class __attribute__((dllexport)) BFile {
 public:
- EFile();
- EFile(const char *path, euint32 open_mode, euint32 access_mode = E_USER_READ | E_USER_WRITE);
- EFile(const EEntry *entry, euint32 open_mode, euint32 access_mode = E_USER_READ | E_USER_WRITE);
- EFile(const EDirectory *dir, const char *leaf, euint32 open_mode, euint32 access_mode = E_USER_READ | E_USER_WRITE);
- EFile(const EFile &from);
- virtual ~EFile();
+    BFile();
+    BFile(const char *path, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    BFile(const BEntry *entry, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    BFile(const BDirectory *dir, const char *leaf, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    BFile(const BFile &from);
+    virtual ~BFile();
 
- e_status_t InitCheck() const;
- e_status_t SetTo(const char *path, euint32 open_mode, euint32 access_mode = E_USER_READ | E_USER_WRITE);
- e_status_t SetTo(const EEntry *entry, euint32 open_mode, euint32 access_mode = E_USER_READ | E_USER_WRITE);
- e_status_t SetTo(const EDirectory *dir, const char *leaf, euint32 open_mode, euint32 access_mode = E_USER_READ | E_USER_WRITE);
+ b_status_t InitCheck() const;
+    b_status_t SetTo(const char *path, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    b_status_t SetTo(const BEntry *entry, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    b_status_t SetTo(const BDirectory *dir, const char *leaf, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
  void Unset();
 
  bool IsReadable() const;
  bool IsWritable() const;
 
  ssize_t Read(void *buffer, size_t size);
- ssize_t ReadAt(eint64 pos, void *buffer, size_t size);
+    ssize_t ReadAt(b_int64 pos, void *buffer, size_t size);
  ssize_t Write(const void *buffer, size_t size);
- ssize_t WriteAt(eint64 pos, const void *buffer, size_t size);
+    ssize_t WriteAt(b_int64 pos, const void *buffer, size_t size);
 
- eint64 Seek(eint64 position, euint32 seek_mode);
- eint64 Position() const;
- e_status_t SetSize(eint64 size);
+    b_int64 Seek(b_int64 position, b_uint32 seek_mode);
+    b_int64 Position() const;
+    b_status_t SetSize(b_int64 size);
 
- EFile& operator=(const EFile &from);
+    BFile& operator=(const BFile &from);
 
 private:
  void *fFD;
- euint32 fMode;
+    b_uint32 fMode;
 };
 # 53 "../src/storage/File.cpp" 2
 
-extern e_status_t etk_path_expound(EString &path, const char *dir, const char *leaf, bool *normalize);
+extern b_status_t bhapi_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);
 # 81 "../src/storage/File.cpp"
-inline DWORD etk_file_openmode_to_creation_disposition(euint32 open_mode)
+inline DWORD bhapi_file_openmode_to_creation_disposition(b_uint32 open_mode)
 {
- if(open_mode & E_CREATE_FILE)
+ if(open_mode & B_CREATE_FILE)
  {
-  if(open_mode & E_FAIL_IF_EXISTS) return 1;
-  if(open_mode & E_ERASE_FILE) return 2;
+  if(open_mode & B_FAIL_IF_EXISTS) return 1;
+  if(open_mode & B_ERASE_FILE) return 2;
   return 4;
  }
 
- if(open_mode & E_ERASE_FILE) return 5;
+ if(open_mode & B_ERASE_FILE) return 5;
  return 3;
 }
 # 118 "../src/storage/File.cpp"
-EFile::EFile()
+BFile::BFile()
  : fFD(__null), fMode(0)
 {
 }
 
 
-EFile::EFile(const char *path, euint32 open_mode, euint32 access_mode)
+BFile::BFile(const char *path, b_uint32 open_mode, b_uint32 access_mode)
  : fFD(__null), fMode(0)
 {
  SetTo(path, open_mode, access_mode);
 }
 
 
-EFile::EFile(const EEntry *entry, euint32 open_mode, euint32 access_mode)
+BFile::BFile(const BEntry *entry, b_uint32 open_mode, b_uint32 access_mode)
  : fFD(__null), fMode(0)
 {
  SetTo(entry, open_mode, access_mode);
 }
 
 
-EFile::EFile(const EDirectory *dir, const char *leaf, euint32 open_mode, euint32 access_mode)
+BFile::BFile(const BDirectory *dir, const char *leaf, b_uint32 open_mode, b_uint32 access_mode)
  : fFD(__null), fMode(0)
 {
  SetTo(dir, leaf, open_mode, access_mode);
 }
 
 
-EFile::EFile(const EFile &from)
+BFile::BFile(const BFile &from)
  : fFD(__null), fMode(0)
 {
  operator=(from);
 }
 
 
-EFile::~EFile()
+BFile::~BFile()
 {
  if(fFD != __null)
  {
@@ -46052,80 +46045,80 @@ EFile::~EFile()
 }
 
 
-e_status_t
-EFile::InitCheck() const
+b_status_t
+BFile::InitCheck() const
 {
- return(fFD == __null ? E_NO_INIT : E_OK);
+ return(fFD == __null ? B_NO_INIT : B_OK);
 }
 
 
-e_status_t
-EFile::SetTo(const char *path, euint32 open_mode, euint32 access_mode)
+b_status_t
+BFile::SetTo(const char *path, b_uint32 open_mode, b_uint32 access_mode)
 {
- if(path == __null || *path == 0) return E_BAD_VALUE;
+ if(path == __null || *path == 0) return B_BAD_VALUE;
 
- EString strPath;
- etk_path_expound(strPath, path, __null, __null);
- if(strPath.Length() <= 0) return E_BAD_VALUE;
+ BString strPath;
+ bhapi_path_expound(strPath, path, __null, __null);
+ if(strPath.Length() <= 0) return B_BAD_VALUE;
 # 196 "../src/storage/File.cpp"
  strPath.ReplaceAll("/", "\\");
- char *active_str = etk_win32_convert_utf8_to_active(strPath.String(), -1);
+ char *active_str = bhapi_win32_convert_utf8_to_active(strPath.String(), -1);
  if(active_str != __null)
  {
   strPath = active_str;
   free(active_str);
  }
     HANDLE newFD = CreateFileA(strPath.String(),
-      (open_mode & E_READ_WRITE) ? ((0x40000000l) | (0x80000000l)) :
-       (open_mode & E_WRITE_ONLY ? (0x40000000l) : (0x80000000l)),
+      (open_mode & B_READ_WRITE) ? ((0x40000000l) | (0x80000000l)) :
+       (open_mode & B_WRITE_ONLY ? (0x40000000l) : (0x80000000l)),
       0x00000001 | 0x00000002,
       __null,
-      etk_file_openmode_to_creation_disposition(open_mode),
+      bhapi_file_openmode_to_creation_disposition(open_mode),
       0x00000080,
       __null);
- if(newFD == ((HANDLE) (LONG_PTR)-1)) return E_FILE_ERROR;
+ if(newFD == ((HANDLE) (LONG_PTR)-1)) return B_FILE_ERROR;
  if(fFD != __null) CloseHandle((HANDLE)fFD);
  fFD = (void*)newFD;
- if(open_mode & E_OPEN_AT_END) SetFilePointer(newFD, 0, __null, 2);
+ if(open_mode & B_OPEN_AT_END) SetFilePointer(newFD, 0, __null, 2);
 
 
  fMode = open_mode;
 
- return E_OK;
+ return B_OK;
 }
 
 
-e_status_t
-EFile::SetTo(const EEntry *entry, euint32 open_mode, euint32 access_mode)
+b_status_t
+BFile::SetTo(const BEntry *entry, b_uint32 open_mode, b_uint32 access_mode)
 {
- if(entry == __null) return E_BAD_VALUE;
+ if(entry == __null) return B_BAD_VALUE;
 
- EPath path;
- if(entry->GetPath(&path) != E_OK) return E_BAD_VALUE;
+ BPath path;
+ if(entry->GetPath(&path) != B_OK) return B_BAD_VALUE;
 
  return SetTo(path.Path(), open_mode, access_mode);
 }
 
 
-e_status_t
-EFile::SetTo(const EDirectory *dir, const char *leaf, euint32 open_mode, euint32 access_mode)
+b_status_t
+BFile::SetTo(const BDirectory *dir, const char *leaf, b_uint32 open_mode, b_uint32 access_mode)
 {
- if(dir == __null || leaf == __null) return E_BAD_VALUE;
+ if(dir == __null || leaf == __null) return B_BAD_VALUE;
 
- EEntry entry;
- if(dir->GetEntry(&entry) != E_OK) return E_BAD_VALUE;
+ BEntry entry;
+ if(dir->GetEntry(&entry) != B_OK) return B_BAD_VALUE;
 
- EPath path;
- if(entry.GetPath(&path) != E_OK) return E_BAD_VALUE;
+ BPath path;
+ if(entry.GetPath(&path) != B_OK) return B_BAD_VALUE;
 
- if(path.Append(leaf, false) != E_OK) return E_BAD_VALUE;
+ if(path.Append(leaf, false) != B_OK) return B_BAD_VALUE;
 
  return SetTo(path.Path(), open_mode, access_mode);
 }
 
 
 void
-EFile::Unset()
+BFile::Unset()
 {
  if(fFD != __null)
  {
@@ -46142,22 +46135,22 @@ EFile::Unset()
 
 
 bool
-EFile::IsReadable() const
+BFile::IsReadable() const
 {
  return(fFD == __null ? false : true);
 }
 
 
 bool
-EFile::IsWritable() const
+BFile::IsWritable() const
 {
  if(fFD == __null) return false;
- return((fMode & (E_WRITE_ONLY | E_READ_WRITE)) ? true : false);
+ return((fMode & (B_WRITE_ONLY | B_READ_WRITE)) ? true : false);
 }
 
 
 ssize_t
-EFile::Read(void *buffer, size_t size)
+BFile::Read(void *buffer, size_t size)
 {
  if(!IsReadable() || buffer == __null) return -1;
 
@@ -46171,19 +46164,19 @@ EFile::Read(void *buffer, size_t size)
 
 
 ssize_t
-EFile::ReadAt(eint64 pos, void *buffer, size_t size)
+BFile::ReadAt(b_int64 pos, void *buffer, size_t size)
 {
  if(!IsReadable() || buffer == __null) return -1;
- eint64 savePosition = Position();
- if(Seek(pos, E_SEEK_SET) < (const long long)(0)) return -1;
+ b_int64 savePosition = Position();
+ if(Seek(pos, B_SEEK_SET) < (const long long)(0)) return -1;
  ssize_t retVal = Read(buffer, size);
- Seek(savePosition, E_SEEK_SET);
+ Seek(savePosition, B_SEEK_SET);
  return retVal;
 }
 
 
 ssize_t
-EFile::Write(const void *buffer, size_t size)
+BFile::Write(const void *buffer, size_t size)
 {
  if(!IsWritable() || buffer == __null) return -1;
 
@@ -46197,25 +46190,25 @@ EFile::Write(const void *buffer, size_t size)
 
 
 ssize_t
-EFile::WriteAt(eint64 pos, const void *buffer, size_t size)
+BFile::WriteAt(b_int64 pos, const void *buffer, size_t size)
 {
  if(!IsWritable() || buffer == __null) return -1;
- eint64 savePosition = Position();
- if(Seek(pos, E_SEEK_SET) < (const long long)(0)) return -1;
+ b_int64 savePosition = Position();
+ if(Seek(pos, B_SEEK_SET) < (const long long)(0)) return -1;
  ssize_t retVal = Write(buffer, size);
- Seek(savePosition, E_SEEK_SET);
+ Seek(savePosition, B_SEEK_SET);
  return retVal;
 }
 
 
-eint64
-EFile::Seek(eint64 position, euint32 seek_mode)
+b_int64
+BFile::Seek(b_int64 position, b_uint32 seek_mode)
 {
- if(fFD == __null || (seek_mode == E_SEEK_SET && position < (const long long)(0))) return (const long long)(-1);
+ if(fFD == __null || (seek_mode == B_SEEK_SET && position < (const long long)(0))) return (const long long)(-1);
 # 351 "../src/storage/File.cpp"
  DWORD whence = 0;
- if(seek_mode == E_SEEK_CUR) whence = 1;
- else if(seek_mode == E_SEEK_END) whence = 2;
+ if(seek_mode == B_SEEK_CUR) whence = 1;
+ else if(seek_mode == B_SEEK_END) whence = 2;
 
  LARGE_INTEGER li;
  li.QuadPart = position;
@@ -46226,8 +46219,8 @@ EFile::Seek(eint64 position, euint32 seek_mode)
 }
 
 
-eint64
-EFile::Position() const
+b_int64
+BFile::Position() const
 {
  if(fFD == __null) return (const long long)(-1);
 
@@ -46245,26 +46238,26 @@ EFile::Position() const
 }
 
 
-e_status_t
-EFile::SetSize(eint64 size)
+b_status_t
+BFile::SetSize(b_int64 size)
 {
- if(fFD == __null || size < (const long long)(0) || size == 9223372036854775807ll) return E_BAD_VALUE;
+ if(fFD == __null || size < (const long long)(0) || size == 9223372036854775807ll) return B_BAD_VALUE;
 # 395 "../src/storage/File.cpp"
- eint64 oldPos = Position();
- if(Seek(size, E_SEEK_SET) < (const long long)(0) || SetEndOfFile((HANDLE)fFD) == 0)
+ b_int64 oldPos = Position();
+ if(Seek(size, B_SEEK_SET) < (const long long)(0) || SetEndOfFile((HANDLE)fFD) == 0)
  {
-  Seek(oldPos, E_SEEK_SET);
-  return E_FILE_ERROR;
+  Seek(oldPos, B_SEEK_SET);
+  return B_FILE_ERROR;
  }
 
- Seek(0, E_SEEK_SET);
- return E_OK;
+ Seek(0, B_SEEK_SET);
+ return B_OK;
 
 }
 
 
-EFile&
-EFile::operator=(const EFile &from)
+BFile&
+BFile::operator=(const BFile &from)
 {
 # 439 "../src/storage/File.cpp"
  if(fFD != __null)

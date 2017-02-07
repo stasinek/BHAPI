@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -23,17 +23,17 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * File: StringView.cpp
+ * File: BStringView.cpp
  *
  * --------------------------------------------------------------------------*/
 
 #include "StringView.h"
 
-#define ETK_STRING_VIEW_LINE_SPACING	0.25f
+#define BHAPI_STRING_VIEW_LINE_SPACING	0.25f
 
 
-EStringView::EStringView(ERect frame, const char *name, const char *initial_text, euint32 resizeMode, euint32 flags)
-	: EView(frame, name, resizeMode, flags), fTextArray(NULL), fAlignment(E_ALIGN_LEFT), fVerticalAlignment(E_ALIGN_TOP)
+BStringView::BStringView(BRect frame, const char *name, const char *initial_text, b_uint32 resizeMode, b_uint32 flags)
+    : BView(frame, name, resizeMode, flags), fTextArray(NULL), fAlignment(B_ALIGN_LEFT), fVerticalAlignment(B_ALIGN_TOP)
 {
 	if(initial_text)
 	{
@@ -41,19 +41,19 @@ EStringView::EStringView(ERect frame, const char *name, const char *initial_text
 		if(fText.Length() > 0) fTextArray = fText.Split('\n');
 	}
 
-	SetHighColor(e_ui_color(E_PANEL_TEXT_COLOR));
+    SetHighColor(b_ui_color(B_PANEL_TEXT_COLOR));
 	SetLowColor(ViewColor());
 }
 
 
-EStringView::~EStringView()
+BStringView::~BStringView()
 {
 	if(fTextArray) delete fTextArray;
 }
 
 
 void
-EStringView::SetText(const char *text)
+BStringView::SetText(const char *text)
 {
 	if(fText != text)
 	{
@@ -67,14 +67,14 @@ EStringView::SetText(const char *text)
 
 
 const char*
-EStringView::Text() const
+BStringView::Text() const
 {
 	return fText.String();
 }
 
 
 void
-EStringView::SetAlignment(e_alignment alignment)
+BStringView::SetAlignment(b_alignment alignment)
 {
 	if(fAlignment != alignment)
 	{
@@ -84,15 +84,15 @@ EStringView::SetAlignment(e_alignment alignment)
 }
 
 
-e_alignment
-EStringView::Alignment() const
+b_alignment
+BStringView::Alignment() const
 {
 	return fAlignment;
 }
 
 
 void
-EStringView::SetVerticalAlignment(e_vertical_alignment alignment)
+BStringView::SetVerticalAlignment(b_vertical_alignment alignment)
 {
 	if(fVerticalAlignment != alignment)
 	{
@@ -102,53 +102,53 @@ EStringView::SetVerticalAlignment(e_vertical_alignment alignment)
 }
 
 
-e_vertical_alignment
-EStringView::VerticalAlignment() const
+b_vertical_alignment
+BStringView::VerticalAlignment() const
 {
 	return fVerticalAlignment;
 }
 
 
 void
-EStringView::Draw(ERect updateRect)
+BStringView::Draw(BRect updateRect)
 {
 	if(Window() == NULL || !fTextArray || fTextArray->CountItems() <= 0) return;
 
-	ERegion clipping;
+	BRegion clipping;
 	GetClippingRegion(&clipping);
 	if(clipping.CountRects() > 0) clipping &= updateRect;
 	else clipping = updateRect;
 	if(clipping.CountRects() <= 0) return;
 
-	e_rgb_color fgColor = HighColor();
+	b_rgb_color fgColor = HighColor();
 
 	if(!IsEnabled())
 	{
-		e_rgb_color color = ViewColor();
+		b_rgb_color color = ViewColor();
 		color.alpha = 127;
 		fgColor.mix(color);
 	}
 
-	EFont font;
-	e_font_height fontHeight;
+	BFont font;
+	b_font_height fontHeight;
 	GetFont(&font);
 	font.GetHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 
-	float allHeight = (float)(fTextArray->CountItems() - 1) * (float)ceil((double)(sHeight * ETK_STRING_VIEW_LINE_SPACING)) +
+	float allHeight = (float)(fTextArray->CountItems() - 1) * (float)ceil((double)(sHeight * BHAPI_STRING_VIEW_LINE_SPACING)) +
 			  (float)(fTextArray->CountItems()) * sHeight;
-	float lineHeight = sHeight + (float)ceil((double)(sHeight * ETK_STRING_VIEW_LINE_SPACING));
+	float lineHeight = sHeight + (float)ceil((double)(sHeight * BHAPI_STRING_VIEW_LINE_SPACING));
 
-	ERect bounds = Frame().OffsetToSelf(E_ORIGIN);
+    BRect bounds = Frame().OffsetToSelf(B_ORIGIN);
 
 	float yStart = 0;
 	switch(fVerticalAlignment)
 	{
-		case E_ALIGN_BOTTOM:
+		case B_ALIGN_BOTTOM:
 			yStart = bounds.bottom - allHeight;
 			break;
 
-		case E_ALIGN_MIDDLE:
+		case B_ALIGN_MIDDLE:
 			yStart = bounds.Center().y - allHeight / 2.f;
 			break;
 
@@ -159,30 +159,30 @@ EStringView::Draw(ERect updateRect)
 
 	PushState();
 	ConstrainClippingRegion(&clipping);
-	SetDrawingMode(E_OP_COPY);
+    SetDrawingMode(B_OP_COPY);
 	SetHighColor(fgColor);
 	SetLowColor(ViewColor());
-	for(eint32 i = 0; i < fTextArray->CountItems(); i++)
+	for(b_int32 i = 0; i < fTextArray->CountItems(); i++)
 	{
-		const EString *str = fTextArray->ItemAt(i);
+        const BString *str = fTextArray->ItemAt(i);
 		float strWidth = 0;
 		if(!(!str || str->Length() <= 0 || (strWidth = font.StringWidth(str->String())) <= 0))
 		{
 			float xStart = 0;
 			switch(fAlignment)
 			{
-				case E_ALIGN_RIGHT:
+				case B_ALIGN_RIGHT:
 					xStart = bounds.right - strWidth;
 					break;
 
-				case E_ALIGN_CENTER:
+				case B_ALIGN_CENTER:
 					xStart = bounds.Center().x - strWidth / 2.f;
 					break;
 
 				default:
 					break;
 			}
-			DrawString(str->String(), EPoint(xStart, yStart + fontHeight.ascent + 1));
+			DrawString(str->String(), BPoint(xStart, yStart + fontHeight.ascent + 1));
 		}
 		yStart += lineHeight;
 	}
@@ -191,12 +191,12 @@ EStringView::Draw(ERect updateRect)
 
 
 void
-EStringView::SetFont(const EFont *font, euint8 mask)
+BStringView::SetFont(const BFont *font, b_uint8 mask)
 {
-	EFont fontPrev;
-	EFont fontCurr;
+	BFont fontPrev;
+	BFont fontCurr;
 	GetFont(&fontPrev);
-	EView::SetFont(font, mask);
+	BView::SetFont(font, mask);
 	GetFont(&fontCurr);
 
 	if(fontPrev != fontCurr) Invalidate();
@@ -204,33 +204,33 @@ EStringView::SetFont(const EFont *font, euint8 mask)
 
 
 void
-EStringView::GetPreferredSize(float *width, float *height)
+BStringView::GetPreferredSize(float *width, float *height)
 {
 	if(!width && !height) return;
 
-	EFont font;
+	BFont font;
 	GetFont(&font);
 
 	if(width)
 	{
 		*width = 0;
-		if(fTextArray != NULL) for(eint32 i = 0; i < fTextArray->CountItems(); i++)
+		if(fTextArray != NULL) for(b_int32 i = 0; i < fTextArray->CountItems(); i++)
 		{
-			const EString *str = fTextArray->ItemAt(i);
+            const BString *str = fTextArray->ItemAt(i);
 			if(str) *width = max_c(*width, (float)ceil((double)font.StringWidth(str->String())));
 		}
 	}
 
 	if(height)
 	{
-		e_font_height fontHeight;
+		b_font_height fontHeight;
 		font.GetHeight(&fontHeight);
 		float sHeight = fontHeight.ascent + fontHeight.descent;
 
 		if(fTextArray == NULL || fTextArray->CountItems() <= 0)
 			*height = 0;
 		else
-			*height = (float)(fTextArray->CountItems() - 1) * (float)ceil((double)(sHeight * ETK_STRING_VIEW_LINE_SPACING)) +
+			*height = (float)(fTextArray->CountItems() - 1) * (float)ceil((double)(sHeight * BHAPI_STRING_VIEW_LINE_SPACING)) +
 				  (float)(fTextArray->CountItems()) * sHeight;
 	}
 }

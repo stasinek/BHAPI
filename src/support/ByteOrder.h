@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,98 +27,98 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_BYTE_ORDER_H__
-#define __ETK_BYTE_ORDER_H__
+#ifndef __BHAPI_BYTE_ORDER_H__
+#define __BHAPI_BYTE_ORDER_H__
 
-#include "SupportDefs.h"
+#include "./SupportDefs.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef enum e_swap_action {
-	E_SWAP_HOST_TO_LENDIAN,
-	E_SWAP_HOST_TO_BENDIAN,
-	E_SWAP_LENDIAN_TO_HOST,
-	E_SWAP_BENDIAN_TO_HOST,
-	E_SWAP_ALWAYS
-} e_swap_action;
+typedef enum b_swap_action {
+    B_SWAP_HOST_TO_LENDIAN,
+    B_SWAP_HOST_TO_BENDIAN,
+    B_SWAP_LENDIAN_TO_HOST,
+    B_SWAP_BENDIAN_TO_HOST,
+    B_SWAP_ALWAYS
+} b_swap_action;
 
-_IMPEXP_ETK e_status_t			e_swap_data(e_type_code type, void *data, size_t len, e_swap_action action);
-_IMPEXP_ETK bool			e_is_type_swapped(e_type_code type);
-_IMPEXP_ETK float			e_swap_float(float value);
-_IMPEXP_ETK double			e_swap_double(double value);
+_IMPEXP_BHAPI b_status_t	b_swap_data(b_type_code type, void *data, size_t len, b_swap_action action);
+_IMPEXP_BHAPI bool			b_is_type_swapped(b_type_code type);
+_IMPEXP_BHAPI float			b_swap_float(float value);
+_IMPEXP_BHAPI double		b_swap_double(double value);
 
-#define E_SWAP_INT16(v)			((((v) & 0xff) << 8) | (((v) >> 8) & 0xff))
-#define E_SWAP_INT32(v)			((E_SWAP_INT16((v) & 0xffff) << 16) | E_SWAP_INT16(((v) >> 16) & 0xffff))
-#define E_SWAP_INT64(v)			((E_SWAP_INT32((v) & 0xffffffff) << 32) | E_SWAP_INT32(((v) >> 32) & 0xffffffff))
-#define E_SWAP_FLOAT(v)			e_swap_float(v)
-#define E_SWAP_DOUBLE(v)		e_swap_double(v)
+#define B_SWAP_INT16(v)		((((v) & 0xff) << 8) | (((v) >> 8) & 0xff))
+#define B_SWAP_INT32(v)		((B_SWAP_INT16((v) & 0xffff) << 16) | B_SWAP_INT16(((v) >> 16) & 0xffff))
+#define B_SWAP_INT64(v)		((B_SWAP_INT32((v) & 0xffffffff) << 32) | B_SWAP_INT32(((v) >> 32) & 0xffffffff))
+#define B_SWAP_FLOAT(v)		b_swap_float(v)
+#define B_SWAP_DOUBLE(v)	b_swap_double(v)
 
-#ifdef ETK_LITTLE_ENDIAN
+#ifdef BHAPI_LITTLE_ENDIAN
 
-#define E_HOST_IS_LENDIAN		1
-#define E_HOST_IS_BENDIAN		0
+#define B_HOST_IS_LENDIAN		1
+#define B_HOST_IS_BENDIAN		0
 
-#define E_HOST_TO_LENDIAN_INT16(v)	((v) & 0xffff)
-#define E_HOST_TO_LENDIAN_INT32(v)	((v) & 0xffffffff)
-#define E_HOST_TO_LENDIAN_INT64(v)	(v)
-#define E_HOST_TO_LENDIAN_FLOAT(v)	(v)
-#define E_HOST_TO_LENDIAN_DOUBLE(v)	(v)
+#define B_HOST_TO_LENDIAN_INT16(v)	((v) & 0xffff)
+#define B_HOST_TO_LENDIAN_INT32(v)	((v) & 0xffffffff)
+#define B_HOST_TO_LENDIAN_INT64(v)	 (v)
+#define B_HOST_TO_LENDIAN_FLOAT(v) 	 (v)
+#define B_HOST_TO_LENDIAN_DOUBLE(v)  (v)
 
-#define E_HOST_TO_BENDIAN_INT16(v)	E_SWAP_INT16(v)
-#define E_HOST_TO_BENDIAN_INT32(v)	E_SWAP_INT32(v)
-#define E_HOST_TO_BENDIAN_INT64(v)	E_SWAP_INT64(v)
-#define E_HOST_TO_BENDIAN_FLOAT(v)	E_SWAP_FLOAT(v)
-#define E_HOST_TO_BENDIAN_DOUBLE(v)	E_SWAP_DOUBLE(v)
+#define B_HOST_TO_BENDIAN_INT16(v)    B_SWAP_INT16(v)
+#define B_HOST_TO_BENDIAN_INT32(v)    B_SWAP_INT32(v)
+#define B_HOST_TO_BENDIAN_INT64(v)    B_SWAP_INT64(v)
+#define B_HOST_TO_BENDIAN_FLOAT(v)    B_SWAP_FLOAT(v)
+#define B_HOST_TO_BENDIAN_DOUBLE(v)   B_SWAP_DOUBLE(v)
 
-#define E_LENDIAN_TO_HOST_INT16(v)	((v) & 0xffff)
-#define E_LENDIAN_TO_HOST_INT32(v)	((v) & 0xffffffff)
-#define E_LENDIAN_TO_HOST_INT64(v)	(v)
-#define E_LENDIAN_TO_HOST_FLOAT(v)	(v)
-#define E_LENDIAN_TO_HOST_DOUBLE(v)	(v)
+#define B_LENDIAN_TO_HOST_INT16(v)	((v) & 0xffff)
+#define B_LENDIAN_TO_HOST_INT32(v)	((v) & 0xffffffff)
+#define B_LENDIAN_TO_HOST_INT64(v)	 (v)
+#define B_LENDIAN_TO_HOST_FLOAT(v)	 (v)
+#define B_LENDIAN_TO_HOST_DOUBLE(v)	 (v)
 
-#define E_BENDIAN_TO_HOST_INT16(v)	E_SWAP_INT16(v)
-#define E_BENDIAN_TO_HOST_INT32(v)	E_SWAP_INT32(v)
-#define E_BENDIAN_TO_HOST_INT64(v)	E_SWAP_INT64(v)
-#define E_BENDIAN_TO_HOST_FLOAT(v)	E_SWAP_FLOAT(v)
-#define E_BENDIAN_TO_HOST_DOUBLE(v)	E_SWAP_DOUBLE(v)
+#define B_BENDIAN_TO_HOST_INT16(v)    B_SWAP_INT16(v)
+#define B_BENDIAN_TO_HOST_INT32(v)    B_SWAP_INT32(v)
+#define B_BENDIAN_TO_HOST_INT64(v)    B_SWAP_INT64(v)
+#define B_BENDIAN_TO_HOST_FLOAT(v)    B_SWAP_FLOAT(v)
+#define B_BENDIAN_TO_HOST_DOUBLE(v)   B_SWAP_DOUBLE(v)
 
-#else /* ETK_BIG_ENDIAN */
+#else /* BHAPI_BIG_ENDIAN */
 
-#define E_HOST_IS_LENDIAN		0
-#define E_HOST_IS_BENDIAN		1
+#define B_HOST_IS_LENDIAN		0
+#define B_HOST_IS_BENDIAN		1
 
-#define E_HOST_TO_LENDIAN_INT16(v)	E_SWAP_INT16(v)
-#define E_HOST_TO_LENDIAN_INT32(v)	E_SWAP_INT32(v)
-#define E_HOST_TO_LENDIAN_INT64(v)	E_SWAP_INT64(v)
-#define E_HOST_TO_LENDIAN_FLOAT(v)	E_SWAP_FLOAT(v)
-#define E_HOST_TO_LENDIAN_DOUBLE(v)	E_SWAP_DOUBLE(v)
+#define B_HOST_TO_LENDIAN_INT16(v)    B_SWAP_INT16(v)
+#define B_HOST_TO_LENDIAN_INT32(v)    B_SWAP_INT32(v)
+#define B_HOST_TO_LENDIAN_INT64(v)    B_SWAP_INT64(v)
+#define B_HOST_TO_LENDIAN_FLOAT(v)    B_SWAP_FLOAT(v)
+#define B_HOST_TO_LENDIAN_DOUBLE(v)   B_SWAP_DOUBLE(v)
 
-#define E_HOST_TO_BENDIAN_INT16(v)	((v) & 0xffff)
-#define E_HOST_TO_BENDIAN_INT32(v)	((v) & 0xffffffff)
-#define E_HOST_TO_BENDIAN_INT64(v)	(v)
-#define E_HOST_TO_BENDIAN_FLOAT(v)	(v)
-#define E_HOST_TO_BENDIAN_DOUBLE(v)	(v)
+#define B_HOST_TO_BENDIAN_INT16(v)	((v) & 0xffff)
+#define B_HOST_TO_BENDIAN_INT32(v)	((v) & 0xffffffff)
+#define B_HOST_TO_BENDIAN_INT64(v)	(v)
+#define B_HOST_TO_BENDIAN_FLOAT(v)	(v)
+#define B_HOST_TO_BENDIAN_DOUBLE(v)	(v)
 
-#define E_LENDIAN_TO_HOST_INT16(v)	E_SWAP_INT16(v)
-#define E_LENDIAN_TO_HOST_INT32(v)	E_SWAP_INT32(v)
-#define E_LENDIAN_TO_HOST_INT64(v)	E_SWAP_INT64(v)
-#define E_LENDIAN_TO_HOST_FLOAT(v)	E_SWAP_FLOAT(v)
-#define E_LENDIAN_TO_HOST_DOUBLE(v)	E_SWAP_DOUBLE(v)
+#define B_LENDIAN_TO_HOST_INT16(v)    B_SWAP_INT16(v)
+#define B_LENDIAN_TO_HOST_INT32(v)    B_SWAP_INT32(v)
+#define B_LENDIAN_TO_HOST_INT64(v)    B_SWAP_INT64(v)
+#define B_LENDIAN_TO_HOST_FLOAT(v)    B_SWAP_FLOAT(v)
+#define B_LENDIAN_TO_HOST_DOUBLE(v)    B_SWAP_DOUBLE(v)
 
-#define E_BENDIAN_TO_HOST_INT16(v)	((v) & 0xffff)
-#define E_BENDIAN_TO_HOST_INT32(v)	((v) & 0xffffffff)
-#define E_BENDIAN_TO_HOST_INT64(v)	(v)
-#define E_BENDIAN_TO_HOST_FLOAT(v)	(v)
-#define E_BENDIAN_TO_HOST_DOUBLE(v)	(v)
+#define B_BENDIAN_TO_HOST_INT16(v)	((v) & 0xffff)
+#define B_BENDIAN_TO_HOST_INT32(v)	((v) & 0xffffffff)
+#define B_BENDIAN_TO_HOST_INT64(v)	(v)
+#define B_BENDIAN_TO_HOST_FLOAT(v)	(v)
+#define B_BENDIAN_TO_HOST_DOUBLE(v)	(v)
 
-#endif /* ETK_LITTLE_ENDIAN */
+#endif /* BHAPI_LITTLE_ENDIAN */
 
 
 #ifdef __cplusplus
 } // extern "C"
 #endif
 
-#endif /* __ETK_BYTE_ORDER_H__ */
+#endif /* __BHAPI_BYTE_ORDER_H__ */
 

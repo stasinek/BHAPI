@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -39,15 +39,15 @@
 #include "etk-beos-graphics.h"
 
 #include "./../../support/Autolock.h"
-#include "./../../support/String.h"
+#include "./../../support/StringMe.h"
 #include "./../../kernel/Kernel.h"
 #include "./../../app/Application.h"
 #include "./../../app/Clipboard.h"
 
 
-static void etk_beos_clipboard_changed()
+static void bhapi_beos_clipboard_changed()
 {
-	EString str;
+	BString str;
 
 	if(be_clipboard->Lock())
 	{
@@ -57,66 +57,66 @@ static void etk_beos_clipboard_changed()
 			const char *text = NULL;
 			ssize_t textLen = 0;
 			beClipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
-			if(textLen > 0) str.SetTo(text, (eint32)textLen);
+			if(textLen > 0) str.SetTo(text, (b_int32)textLen);
 		}
 		be_clipboard->Unlock();
 	}
 
 	if(str.Length() > 0)
 	{
-		ETK_DEBUG("[GRAPHICS]: Clipboard message(\"%s\") sending...", str.String());
-		EMessage *clipMsg = NULL;
-		if(etk_clipboard.Lock())
+		BHAPI_DEBUG("[GRAPHICS]: Clipboard message(\"%s\") sending...", str.String());
+		BMessage *clipMsg = NULL;
+		if(bhapi_clipboard.Lock())
 		{
-			if((clipMsg = etk_clipboard.Data()) != NULL)
+			if((clipMsg = bhapi_clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
 				ssize_t textLen = 0;
-				if(clipMsg->FindData("text/plain", E_MIME_TYPE, (const void**)&text, &textLen) == false ||
-				   text == NULL || textLen != (ssize_t)str.Length() || str.Compare(text, (eint32)textLen) != 0)
+				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
+				   text == NULL || textLen != (ssize_t)str.Length() || str.Compare(text, (b_int32)textLen) != 0)
 				{
-					etk_clipboard.Clear();
+					bhapi_clipboard.Clear();
 					clipMsg->AddBool("etk:msg_from_gui", true);
-					clipMsg->AddData("text/plain", E_MIME_TYPE, str.String(), str.Length());
-					etk_clipboard.Commit();
+					clipMsg->AddData("text/plain", B_MIME_TYPE, str.String(), str.Length());
+					bhapi_clipboard.Commit();
 				}
 			}
-			etk_clipboard.Unlock();
+			bhapi_clipboard.Unlock();
 		}
 	}
 }
 
 
-static e_filter_result etk_beos_clipboard_filter(EMessage *message, EHandler **target, EMessageFilter *filter)
+static b_filter_result bhapi_beos_clipboard_filter(BMessage *message, BHandler **target, BMessageFilter *filter)
 {
-	if(message->what != E_CLIPBOARD_CHANGED) return E_DISPATCH_MESSAGE;
+	if(message->what != B_CLIPBOARD_CHANGED) return B_DISPATCH_MESSAGE;
 
 	do
 	{
 		const char *text = NULL;
 		ssize_t textLen = 0;
 
-		EString str;
-		EMessage *msg;
+		BString str;
+		BMessage *msg;
 
-		etk_clipboard.Lock();
-#if defined(ETK_ENABLE_DEBUG) && !defined(ETK_DISABLE_MORE_CHECKS)
-		if((msg = etk_clipboard.Data()) != NULL)
+		bhapi_clipboard.Lock();
+#if defined(BHAPI_ENABLE_DEBUG) && !defined(BHAPI_DISABLE_MORE_CHECKS)
+		if((msg = bhapi_clipboard.Data()) != NULL)
 		{
-			msg->FindData("text/plain", E_MIME_TYPE, (const void**)&text, &textLen);
+			msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 			if(msg->HasBool("etk:msg_from_gui"))
 			{
-				EString aStr(text, textLen);
-				ETK_DEBUG("[GRAPHICS]: Clipboard message(\"%s\") received.", aStr.String());
+				BString aStr(text, textLen);
+				BHAPI_DEBUG("[GRAPHICS]: Clipboard message(\"%s\") received.", aStr.String());
 				textLen = 0;
 			}
 		}
 #else
-		if(!((msg = etk_clipboard.Data()) == NULL || msg->HasBool("etk:msg_from_gui")))
-			msg->FindData("text/plain", E_MIME_TYPE, (const void**)&text, &textLen);
+		if(!((msg = bhapi_clipboard.Data()) == NULL || msg->HasBool("etk:msg_from_gui")))
+			msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 #endif
-		if(textLen > 0) str.SetTo(text, (eint32)textLen);
-		etk_clipboard.Unlock();
+		if(textLen > 0) str.SetTo(text, (b_int32)textLen);
+		bhapi_clipboard.Unlock();
 
 		if(str.Length() <= 0) break;
 
@@ -134,20 +134,20 @@ static e_filter_result etk_beos_clipboard_filter(EMessage *message, EHandler **t
 		}
 	} while(false);
 
-	return E_DISPATCH_MESSAGE;
+	return B_DISPATCH_MESSAGE;
 }
 
 
-#ifndef ETK_GRAPHICS_BEOS_BUILT_IN
+#ifndef BHAPI_GRAPHICS_BEOS_BUILT_IN
 extern "C" {
-_EXPORT EGraphicsEngine* instantiate_graphics_engine()
+_EXPORT BGraphicsEngine* instantiate_graphics_engine()
 #else
-_IMPEXP_ETK EGraphicsEngine* etk_get_built_in_graphics_engine()
+_IMPEXP_BHAPI BGraphicsEngine* bhapi_get_built_in_graphics_engine()
 #endif
 {
 	return(new EBeGraphicsEngine());
 }
-#ifndef ETK_GRAPHICS_BEOS_BUILT_IN
+#ifndef BHAPI_GRAPHICS_BEOS_BUILT_IN
 } // extern "C"
 #endif
 
@@ -168,7 +168,7 @@ private:
 
 
 EBePrivateApp::EBePrivateApp(EBeGraphicsEngine *engine)
-	: BApplication(etk_app->Signature())
+	: BApplication(bhapi_app->Signature())
 {
 	fEngine = engine;
 }
@@ -184,11 +184,11 @@ void
 EBePrivateApp::ReadyToRun()
 {
 	fEngine->Lock();
-	etk_release_sem_etc(fEngine->fRequestSem, 1, 0);
+	bhapi_release_sem_etc(fEngine->fRequestSem, 1, 0);
 	fEngine->Unlock();
 
 	be_clipboard->StartWatching(BMessenger(this));
-	etk_beos_clipboard_changed();
+	bhapi_beos_clipboard_changed();
 }
 
 
@@ -201,7 +201,7 @@ EBePrivateApp::QuitRequested()
 	if(fEngine->beDoQuit) retVal = true;
 	fEngine->Unlock();
 
-	if(!retVal) etk_app->PostMessage(E_QUIT_REQUESTED);
+	if(!retVal) bhapi_app->PostMessage(B_QUIT_REQUESTED);
 
 	return retVal;
 }
@@ -210,7 +210,7 @@ EBePrivateApp::QuitRequested()
 void
 EBePrivateApp::MessageReceived(BMessage *msg)
 {
-	if(msg->what == B_CLIPBOARD_CHANGED) etk_beos_clipboard_changed();
+	if(msg->what == B_CLIPBOARD_CHANGED) bhapi_beos_clipboard_changed();
 	BApplication::MessageReceived(msg);
 }
 
@@ -251,10 +251,10 @@ EBePrivateAppWin::Run()
 	if(retVal > 0)
 	{
 		fEngine->Lock();
-		etk_release_sem_etc(fEngine->fRequestSem, 1, 0);
+		bhapi_release_sem_etc(fEngine->fRequestSem, 1, 0);
 		fEngine->Unlock();
 
-		etk_beos_clipboard_changed();
+		bhapi_beos_clipboard_changed();
 		be_clipboard->StartWatching(BMessenger(this));
 	}
 
@@ -271,7 +271,7 @@ EBePrivateAppWin::QuitRequested()
 	if(fEngine->beDoQuit) retVal = true;
 	fEngine->Unlock();
 
-	if(!retVal) etk_app->PostMessage(E_QUIT_REQUESTED);
+	if(!retVal) bhapi_app->PostMessage(B_QUIT_REQUESTED);
 
 	return retVal;
 }
@@ -280,13 +280,13 @@ EBePrivateAppWin::QuitRequested()
 void
 EBePrivateAppWin::MessageReceived(BMessage *msg)
 {
-	if(msg->what == B_CLIPBOARD_CHANGED) etk_beos_clipboard_changed();
+	if(msg->what == B_CLIPBOARD_CHANGED) bhapi_beos_clipboard_changed();
 	BWindow::MessageReceived(msg);
 }
 
 
 EBeGraphicsEngine::EBeGraphicsEngine()
-	: EGraphicsEngine(), fRequestSem(NULL), beDoQuit(false), fBeThread(NULL), fClipboardFilter(NULL)
+	: BGraphicsEngine(), fRequestSem(NULL), beDoQuit(false), fBeThread(NULL), fClipboardFilter(NULL)
 {
 }
 
@@ -296,12 +296,12 @@ EBeGraphicsEngine::~EBeGraphicsEngine()
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsEngine::InitCheck()
 {
-	EAutolock <EBeGraphicsEngine> autolock(this);
-	if(autolock.IsLocked() == false || fBeThread == NULL || beDoQuit) return E_NO_INIT;
-	return E_OK;
+	BAutolock <EBeGraphicsEngine> autolock(this);
+	if(autolock.IsLocked() == false || fBeThread == NULL || beDoQuit) return B_NO_INIT;
+	return B_OK;
 }
 
 
@@ -319,7 +319,7 @@ EBeGraphicsEngine::Unlock()
 }
 
 
-static e_status_t etk_beos_graphics_task(void *arg)
+static b_status_t bhapi_beos_graphics_task(void *arg)
 {
 	EBeGraphicsEngine *engine = (EBeGraphicsEngine*)arg;
 
@@ -330,10 +330,10 @@ static e_status_t etk_beos_graphics_task(void *arg)
 			EBePrivateApp *privApp = new EBePrivateApp((EBeGraphicsEngine*)arg);
 			if(privApp != NULL)
 			{
-				ETK_DEBUG("[GRAPHICS]: %s --- BApplication task spawned.", __PRETTY_FUNCTION__);
+				BHAPI_DEBUG("[GRAPHICS]: %s --- BApplication task spawned.", __PRETTY_FUNCTION__);
 				privApp->Run();
 				delete privApp;
-				ETK_DEBUG("[GRAPHICS]: %s --- BApplication task quit.", __PRETTY_FUNCTION__);
+				BHAPI_DEBUG("[GRAPHICS]: %s --- BApplication task quit.", __PRETTY_FUNCTION__);
 			}
 		}
 		else
@@ -341,32 +341,32 @@ static e_status_t etk_beos_graphics_task(void *arg)
 			EBePrivateAppWin *privAppWin = new EBePrivateAppWin((EBeGraphicsEngine*)arg);
 			if(privAppWin != NULL)
 			{
-				ETK_WARNING("[GRAPHICS]: %s --- Another BApplication running!!! Spawned a BWindow task instead.", __PRETTY_FUNCTION__);
+				BHAPI_WARNING("[GRAPHICS]: %s --- Another BApplication running!!! Spawned a BWindow task instead.", __PRETTY_FUNCTION__);
 				privAppWin->Lock();
 				thread_id tid = privAppWin->Run();
 				privAppWin->Unlock();
 				status_t status;
 				wait_for_thread(tid, &status);
-				ETK_DEBUG("[GRAPHICS]: %s --- BWindow task quit.", __PRETTY_FUNCTION__);
+				BHAPI_DEBUG("[GRAPHICS]: %s --- BWindow task quit.", __PRETTY_FUNCTION__);
 			}
 		}
 
 		engine->Lock();
-		if(engine->fRequestSem != NULL) etk_release_sem_etc(engine->fRequestSem, 2, 0);
+		if(engine->fRequestSem != NULL) bhapi_release_sem_etc(engine->fRequestSem, 2, 0);
 		engine->Unlock();
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsEngine::Initalize()
 {
-	EMessageFilter *clipboardFilter = new EMessageFilter(E_CLIPBOARD_CHANGED, etk_beos_clipboard_filter);
-	etk_app->Lock();
-	etk_app->AddFilter(clipboardFilter);
-	etk_app->Unlock();
+	BMessageFilter *clipboardFilter = new BMessageFilter(B_CLIPBOARD_CHANGED, bhapi_beos_clipboard_filter);
+	bhapi_app->Lock();
+	bhapi_app->AddFilter(clipboardFilter);
+	bhapi_app->Unlock();
 
 	Lock();
 
@@ -374,101 +374,101 @@ EBeGraphicsEngine::Initalize()
 	{
 		Unlock();
 
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
-		return E_OK;
+		return B_OK;
 	}
 
-	fRequestSem = etk_create_sem(0, NULL);
+	fRequestSem = bhapi_create_sem(0, NULL);
 	if(fRequestSem == NULL)
 	{
 		Unlock();
 
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
-		return E_ERROR;
+		return B_ERROR;
 	}
 
-	if((fBeThread = etk_create_thread(etk_beos_graphics_task, E_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL ||
-	    etk_resume_thread(fBeThread) != E_OK)
+	if((fBeThread = bhapi_create_thread(bhapi_beos_graphics_task, B_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL ||
+	    bhapi_resume_thread(fBeThread) != B_OK)
 	{
-		ETK_WARNING("[GRAPHICS]: %s --- Unable to resume graphics thread!", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[GRAPHICS]: %s --- Unable to resume graphics thread!", __PRETTY_FUNCTION__);
 
-		if(fBeThread != NULL) etk_delete_thread(fBeThread);
+		if(fBeThread != NULL) bhapi_delete_thread(fBeThread);
 		fBeThread = NULL;
 
-		etk_delete_sem(fRequestSem);
+		bhapi_delete_sem(fRequestSem);
 		fRequestSem = NULL;
 
 		Unlock();
 
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
-		return E_ERROR;
+		return B_ERROR;
 	}
 
 	fClipboardFilter = clipboardFilter;
 
 	Unlock();
 
-	eint64 count = 0;
+	b_int64 count = 0;
 
-	e_status_t status = etk_acquire_sem(fRequestSem);
-	if(status == E_OK) status = etk_get_sem_count(fRequestSem, &count);
+	b_status_t status = bhapi_acquire_sem(fRequestSem);
+	if(status == B_OK) status = bhapi_get_sem_count(fRequestSem, &count);
 
-	if(status != E_OK || count > 0)
+	if(status != B_OK || count > 0)
 	{
-		ETK_WARNING("[GRAPHICS]: %s --- BApplication task run failed!", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[GRAPHICS]: %s --- BApplication task run failed!", __PRETTY_FUNCTION__);
 
-		etk_wait_for_thread(fBeThread, &status);
+		bhapi_wait_for_thread(fBeThread, &status);
 
 		Lock();
 
-		etk_delete_thread(fBeThread);
+		bhapi_delete_thread(fBeThread);
 		fBeThread = NULL;
 
-		etk_delete_sem(fRequestSem);
+		bhapi_delete_sem(fRequestSem);
 		fRequestSem = NULL;
 
 		fClipboardFilter = NULL;
 
 		Unlock();
 
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
-		return E_ERROR;
+		return B_ERROR;
 	}
 
 	Lock();
-	if(fRequestSem != NULL) etk_delete_sem(fRequestSem);
+	if(fRequestSem != NULL) bhapi_delete_sem(fRequestSem);
 	fRequestSem = NULL;
 	Unlock();
 
-	return E_OK;
+	return B_OK;
 }
 
 
 void
 EBeGraphicsEngine::Cancel()
 {
-	EMessageFilter *clipboardFilter = NULL;
+	BMessageFilter *clipboardFilter = NULL;
 
 	Lock();
 
 	if(fBeThread != NULL)
 	{
-		void *beThread = etk_open_thread(etk_get_thread_id(fBeThread));
+		void *beThread = bhapi_open_thread(bhapi_get_thread_id(fBeThread));
 		if(beThread == NULL)
 		{
-			ETK_DEBUG("[GRAPHICS]: %s --- Unable to duplicate thread handle.", __PRETTY_FUNCTION__);
+			BHAPI_DEBUG("[GRAPHICS]: %s --- Unable to duplicate thread handle.", __PRETTY_FUNCTION__);
 			Unlock();
 			return;
 		}
@@ -477,21 +477,21 @@ EBeGraphicsEngine::Cancel()
 
 		Unlock();
 
-		e_status_t status;
+		b_status_t status;
 		do
 		{
-			ETK_DEBUG("[GRAPHICS]: %s --- sending B_QUIT_REQUESTED", __PRETTY_FUNCTION__);
+			BHAPI_DEBUG("[GRAPHICS]: %s --- sending B_QUIT_REQUESTED", __PRETTY_FUNCTION__);
 			be_app_messenger.SendMessage(B_QUIT_REQUESTED);
-		}while(etk_wait_for_thread_etc(beThread, &status, E_TIMEOUT, 1000000) == E_TIMED_OUT);
+		}while(bhapi_wait_for_thread_etc(beThread, &status, B_TIMEOUT, 1000000) == B_TIMED_OUT);
 
 		Lock();
 
 		if(fBeThread != NULL)
 		{
-			etk_delete_thread(fBeThread);
+			bhapi_delete_thread(fBeThread);
 			fBeThread = NULL;
 
-			if(fRequestSem != NULL) etk_delete_sem(fRequestSem);
+			if(fRequestSem != NULL) bhapi_delete_sem(fRequestSem);
 			fRequestSem = NULL;
 		}
 
@@ -499,7 +499,7 @@ EBeGraphicsEngine::Cancel()
 		fClipboardFilter = NULL;
 
 		Unlock();
-		etk_delete_thread(beThread);
+		bhapi_delete_thread(beThread);
 		Lock();
 	}
 
@@ -507,54 +507,54 @@ EBeGraphicsEngine::Cancel()
 
 	if(clipboardFilter != NULL)
 	{
-		etk_app->Lock();
-		etk_app->RemoveFilter(clipboardFilter);
-		etk_app->Unlock();
+		bhapi_app->Lock();
+		bhapi_app->RemoveFilter(clipboardFilter);
+		bhapi_app->Unlock();
 		delete clipboardFilter;
 	}
 }
 
 
-EGraphicsContext*
+BGraphicsContext*
 EBeGraphicsEngine::CreateContext()
 {
-	return(new EGraphicsContext());
+	return(new BGraphicsContext());
 }
 
 
-EGraphicsDrawable*
-EBeGraphicsEngine::CreatePixmap(euint32 w, euint32 h)
+BGraphicsDrawable*
+EBeGraphicsEngine::CreatePixmap(b_uint32 w, b_uint32 h)
 {
 	return(new EBeGraphicsDrawable(this, w, h));
 }
 
 
-EGraphicsWindow*
-EBeGraphicsEngine::CreateWindow(eint32 x, eint32 y, euint32 w, euint32 h)
+BGraphicsWindow*
+EBeGraphicsEngine::CreateWindow(b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
 	return(new EBeGraphicsWindow(this, x, y, w, h));
 }
 
 
-e_status_t
-EBeGraphicsEngine::GetDesktopBounds(euint32 *w, euint32 *h)
+b_status_t
+EBeGraphicsEngine::GetDesktopBounds(b_uint32 *w, b_uint32 *h)
 {
 	BScreen screen(B_MAIN_SCREEN_ID);
-	if(w) *w = (euint32)screen.Frame().Width() + 1;
-	if(h) *h = (euint32)screen.Frame().Height() + 1;
-	return E_OK;
+	if(w) *w = (b_uint32)screen.Frame().Width() + 1;
+	if(h) *h = (b_uint32)screen.Frame().Height() + 1;
+	return B_OK;
 }
 
 
-e_status_t
-EBeGraphicsEngine::GetCurrentWorkspace(euint32 *workspace)
+b_status_t
+EBeGraphicsEngine::GetCurrentWorkspace(b_uint32 *workspace)
 {
-	if(workspace) *workspace = (euint32)current_workspace() + 1;
-	return E_OK;
+	if(workspace) *workspace = (b_uint32)current_workspace() + 1;
+	return B_OK;
 }
 
 
-e_status_t
+b_status_t
 EBeGraphicsEngine::SetCursor(const void *cursor_data)
 {
 	if(cursor_data)
@@ -567,16 +567,16 @@ EBeGraphicsEngine::SetCursor(const void *cursor_data)
 		be_app->HideCursor();
 	}
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EBeGraphicsEngine::GetDefaultCursor(ECursor *cursor)
+b_status_t
+EBeGraphicsEngine::GetDefaultCursor(BCursor *cursor)
 {
-	if(cursor == NULL) return E_ERROR;
-	*cursor = ECursor((const void*)B_HAND_CURSOR);
-	return E_OK;
+	if(cursor == NULL) return B_ERROR;
+	*cursor = BCursor((const void*)B_HAND_CURSOR);
+	return B_OK;
 }
 
 #endif /* BEOS */

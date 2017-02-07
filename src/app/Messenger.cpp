@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -39,57 +39,57 @@
 #include "Messenger.h"
 
 
-EMessenger::EMessenger()
-	: fHandlerToken(E_MAXUINT64), fLooperToken(E_MAXUINT64),
-	  fPort(NULL), fSem(NULL), fTargetTeam(E_INT64_CONSTANT(0))
+BMessenger::BMessenger()
+	: fHandlerToken(B_MAXUINT64), fLooperToken(B_MAXUINT64),
+	  fPort(NULL), fSem(NULL), fTargetTeam(B_INT64_CONSTANT(0))
 {
 }
 
 
-EMessenger::EMessenger(const char *signature, eint64 team, e_status_t *perr)
-	: fHandlerToken(E_MAXUINT64), fLooperToken(E_MAXUINT64),
-	  fPort(NULL), fSem(NULL), fTargetTeam(E_INT64_CONSTANT(0))
+BMessenger::BMessenger(const char *signature, b_int64 team, b_status_t *perr)
+	: fHandlerToken(B_MAXUINT64), fLooperToken(B_MAXUINT64),
+	  fPort(NULL), fSem(NULL), fTargetTeam(B_INT64_CONSTANT(0))
 {
 	// TODO
-	ETK_WARNING("[APP]: %s --- Remote target unsupported yet.", __PRETTY_FUNCTION__);
-	if(perr) *perr = E_ERROR;
+	BHAPI_WARNING("[APP]: %s --- Remote target unsupported yet.", __PRETTY_FUNCTION__);
+	if(perr) *perr = B_ERROR;
 }
 
 
-EMessenger::EMessenger(const EHandler *handler,
-		       const ELooper *looper,
-		       e_status_t *perr)
-	: fHandlerToken(E_MAXUINT64), fLooperToken(E_MAXUINT64),
-	  fPort(NULL), fSem(NULL), fTargetTeam(E_INT64_CONSTANT(0))
+BMessenger::BMessenger(const BHandler *handler,
+		       const BLooper *looper,
+		       b_status_t *perr)
+	: fHandlerToken(B_MAXUINT64), fLooperToken(B_MAXUINT64),
+	  fPort(NULL), fSem(NULL), fTargetTeam(B_INT64_CONSTANT(0))
 {
 	InitData(handler, looper, perr);
 }
 
 
-EMessenger::EMessenger(eint64 targetTeam, euint64 targetToken, e_bigtime_t timestamp, e_status_t *perr)
-	: fHandlerToken(E_MAXUINT64), fLooperToken(E_MAXUINT64),
-	  fPort(NULL), fSem(NULL), fTargetTeam(E_INT64_CONSTANT(0))
+BMessenger::BMessenger(b_int64 targetTeam, b_uint64 targetToken, b_bigtime_t timestamp, b_status_t *perr)
+	: fHandlerToken(B_MAXUINT64), fLooperToken(B_MAXUINT64),
+	  fPort(NULL), fSem(NULL), fTargetTeam(B_INT64_CONSTANT(0))
 {
-	if(targetTeam != etk_get_current_team_id())
+	if(targetTeam != bhapi_get_current_team_id())
 	{
-		ETK_WARNING("[APP]: %s --- Remote target unsupported yet.", __PRETTY_FUNCTION__);
-		if(perr) *perr = E_ERROR;
+		BHAPI_WARNING("[APP]: %s --- Remote target unsupported yet.", __PRETTY_FUNCTION__);
+		if(perr) *perr = B_ERROR;
 		return;
 	}
 
-	if(etk_ref_handler(targetToken) == false)
+	if(bhapi_ref_handler(targetToken) == false)
 	{
-		if(perr) *perr = E_ERROR;
+		if(perr) *perr = B_ERROR;
 		return;
 	}
 
-	euint64 looperToken = E_MAXUINT64;
+	b_uint64 looperToken = B_MAXUINT64;
 
-	if(etk_get_handler_create_time_stamp(targetToken) != timestamp ||
-	   (looperToken = etk_get_ref_looper_token(targetToken)) == E_MAXUINT64)
+	if(bhapi_get_handler_create_time_stamp(targetToken) != timestamp ||
+	   (looperToken = bhapi_get_ref_looper_token(targetToken)) == B_MAXUINT64)
 	{
-		etk_unref_handler(targetToken);
-		if(perr) *perr = E_ERROR;
+		bhapi_unref_handler(targetToken);
+		if(perr) *perr = B_ERROR;
 		return;
 	}
 
@@ -97,73 +97,73 @@ EMessenger::EMessenger(eint64 targetTeam, euint64 targetToken, e_bigtime_t times
 	fHandlerToken = targetToken;
 	fLooperToken = looperToken;
 
-	if(perr) *perr = E_OK;
+	if(perr) *perr = B_OK;
 }
 
 
 void
-EMessenger::InitData(const EHandler *handler, const ELooper *looper, e_status_t *perr)
+BMessenger::InitData(const BHandler *handler, const BLooper *looper, b_status_t *perr)
 {
-	if(fHandlerToken != E_MAXUINT64) etk_unref_handler(fHandlerToken);
-	if(fLooperToken != E_MAXUINT64) etk_unref_handler(fLooperToken);
+	if(fHandlerToken != B_MAXUINT64) bhapi_unref_handler(fHandlerToken);
+	if(fLooperToken != B_MAXUINT64) bhapi_unref_handler(fLooperToken);
 
-	fHandlerToken = E_MAXUINT64; fLooperToken = E_MAXUINT64;
+	fHandlerToken = B_MAXUINT64; fLooperToken = B_MAXUINT64;
 
-	if(fSem) etk_delete_sem(fSem);
-	if(fPort) etk_delete_port(fPort);
+	if(fSem) bhapi_delete_sem(fSem);
+	if(fPort) bhapi_delete_port(fPort);
 
-	fSem = NULL; fPort = NULL; fTargetTeam = E_INT64_CONSTANT(0);
+	fSem = NULL; fPort = NULL; fTargetTeam = B_INT64_CONSTANT(0);
 
-	if(perr) *perr = E_BAD_HANDLER;
+	if(perr) *perr = B_BAD_HANDLER;
 
 	if(handler)
 	{
-		euint64 handlerToken = etk_get_ref_handler_token(handler);
-		if(handlerToken == E_MAXUINT64) return;
+		b_uint64 handlerToken = bhapi_get_ref_handler_token(handler);
+		if(handlerToken == B_MAXUINT64) return;
 
-		euint64 looperToken = etk_get_ref_looper_token(handlerToken);
-		if(looperToken == E_MAXUINT64) {etk_unref_handler(handlerToken); return;}
+		b_uint64 looperToken = bhapi_get_ref_looper_token(handlerToken);
+		if(looperToken == B_MAXUINT64) {bhapi_unref_handler(handlerToken); return;}
 
-		fTargetTeam = etk_get_current_team_id();
+		fTargetTeam = bhapi_get_current_team_id();
 		fHandlerToken = handlerToken;
 		fLooperToken = looperToken;
 
-		if(perr) *perr = E_OK;
+		if(perr) *perr = B_OK;
 	}
 	else if(looper)
 	{
-		euint64 looperToken = etk_get_ref_handler_token(looper);
-		if(looperToken == E_MAXUINT64) return;
+		b_uint64 looperToken = bhapi_get_ref_handler_token(looper);
+		if(looperToken == B_MAXUINT64) return;
 
-		fTargetTeam = etk_get_current_team_id();
-		fHandlerToken = E_MAXUINT64;
+		fTargetTeam = bhapi_get_current_team_id();
+		fHandlerToken = B_MAXUINT64;
 		fLooperToken = looperToken;
 
-		if(perr) *perr = E_OK;
+		if(perr) *perr = B_OK;
 	}
 }
 
 
-EMessenger::EMessenger(const EMessenger &from)
-	: fHandlerToken(E_MAXUINT64), fLooperToken(E_MAXUINT64),
-	  fPort(NULL), fSem(NULL), fTargetTeam(E_INT64_CONSTANT(0))
+BMessenger::BMessenger(const BMessenger &from)
+	: fHandlerToken(B_MAXUINT64), fLooperToken(B_MAXUINT64),
+	  fPort(NULL), fSem(NULL), fTargetTeam(B_INT64_CONSTANT(0))
 {
 	*this = from;
 }
 
 
-EMessenger&
-EMessenger::operator=(const EMessenger &from)
+BMessenger&
+BMessenger::operator=(const BMessenger &from)
 {
-	if(fHandlerToken != E_MAXUINT64) etk_unref_handler(fHandlerToken);
-	if(fLooperToken != E_MAXUINT64) etk_unref_handler(fLooperToken);
+	if(fHandlerToken != B_MAXUINT64) bhapi_unref_handler(fHandlerToken);
+	if(fLooperToken != B_MAXUINT64) bhapi_unref_handler(fLooperToken);
 
-	fHandlerToken = E_MAXUINT64; fLooperToken = E_MAXUINT64;
+	fHandlerToken = B_MAXUINT64; fLooperToken = B_MAXUINT64;
 
-	if(fSem) etk_delete_sem(fSem);
-	if(fPort) etk_delete_port(fPort);
+	if(fSem) bhapi_delete_sem(fSem);
+	if(fPort) bhapi_delete_port(fPort);
 
-	fSem = NULL; fPort = NULL; fTargetTeam = E_INT64_CONSTANT(0);
+	fSem = NULL; fPort = NULL; fTargetTeam = B_INT64_CONSTANT(0);
 
 	if(!from.IsValid()) return *this;
 
@@ -173,15 +173,15 @@ EMessenger::operator=(const EMessenger &from)
 		return *this;
 	}
 
-	if(from.fHandlerToken != E_MAXUINT64) if(etk_ref_handler(from.fHandlerToken)) fHandlerToken = from.fHandlerToken;
-	if(from.fLooperToken != E_MAXUINT64) if(etk_ref_handler(from.fLooperToken)) fLooperToken = from.fLooperToken;
+	if(from.fHandlerToken != B_MAXUINT64) if(bhapi_ref_handler(from.fHandlerToken)) fHandlerToken = from.fHandlerToken;
+	if(from.fLooperToken != B_MAXUINT64) if(bhapi_ref_handler(from.fLooperToken)) fLooperToken = from.fLooperToken;
 
-	if(fLooperToken == E_MAXUINT64 || fHandlerToken != from.fHandlerToken)
+	if(fLooperToken == B_MAXUINT64 || fHandlerToken != from.fHandlerToken)
 	{
-		if(fHandlerToken != E_MAXUINT64) etk_unref_handler(fHandlerToken);
-		if(fLooperToken != E_MAXUINT64) etk_unref_handler(fLooperToken);
+		if(fHandlerToken != B_MAXUINT64) bhapi_unref_handler(fHandlerToken);
+		if(fLooperToken != B_MAXUINT64) bhapi_unref_handler(fLooperToken);
 
-		fHandlerToken = E_MAXUINT64; fLooperToken = E_MAXUINT64;
+		fHandlerToken = B_MAXUINT64; fLooperToken = B_MAXUINT64;
 
 		return *this;
 	}
@@ -193,7 +193,7 @@ EMessenger::operator=(const EMessenger &from)
 
 
 bool
-EMessenger::operator==(const EMessenger &other) const
+BMessenger::operator==(const BMessenger &other) const
 {
 	if(fTargetTeam != other.fTargetTeam) return false;
 	return(fHandlerToken == other.fHandlerToken && fLooperToken == other.fLooperToken);
@@ -201,100 +201,100 @@ EMessenger::operator==(const EMessenger &other) const
 
 
 bool
-EMessenger::operator!=(const EMessenger &other) const
+BMessenger::operator!=(const BMessenger &other) const
 {
 	if(fTargetTeam != other.fTargetTeam) return true;
 	return((fHandlerToken == other.fHandlerToken && fLooperToken == other.fLooperToken) ? false : true);
 }
 
 
-EMessenger::~EMessenger()
+BMessenger::~BMessenger()
 {
 	InitData(NULL, NULL, NULL);
 }
 
 
 bool
-EMessenger::IsTargetLocal() const
+BMessenger::IsTargetLocal() const
 {
-	return(fTargetTeam == etk_get_current_team_id());
+	return(fTargetTeam == bhapi_get_current_team_id());
 }
 
 
 bool
-EMessenger::IsAtTargetLooperThread() const
+BMessenger::IsAtTargetLooperThread() const
 {
-	if(fTargetTeam != etk_get_current_team_id()) return false;
-	return etk_is_current_at_looper_thread(fLooperToken);
+	if(fTargetTeam != bhapi_get_current_team_id()) return false;
+	return bhapi_is_current_at_looper_thread(fLooperToken);
 }
 
 
-EHandler*
-EMessenger::Target(ELooper **looper) const
+BHandler*
+BMessenger::Target(BLooper **looper) const
 {
 	if(looper) *looper = NULL;
 	if(!IsTargetLocal()) return NULL;
 
-	EHandler *handler = etk_get_handler(fHandlerToken);
-	if(looper) *looper = e_cast_as(etk_get_handler(fLooperToken), ELooper);
+	BHandler *handler = bhapi_get_handler(fHandlerToken);
+	if(looper) *looper = b_cast_as(bhapi_get_handler(fLooperToken), BLooper);
 	return handler;
 }
 
 
 bool
-EMessenger::LockTarget() const
+BMessenger::LockTarget() const
 {
-	return(LockTargetWithTimeout(E_INFINITE_TIMEOUT) == E_OK);
+	return(LockTargetWithTimeout(B_INFINITE_TIMEOUT) == B_OK);
 }
 
 
-e_status_t
-EMessenger::LockTargetWithTimeout(e_bigtime_t timeout) const
+b_status_t
+BMessenger::LockTargetWithTimeout(b_bigtime_t timeout) const
 {
-	if(!IsTargetLocal()) return E_ERROR;
+	if(!IsTargetLocal()) return B_ERROR;
 
-	ELocker *hLocker = etk_get_handler_operator_locker();
-	EAutolock <ELocker>autolock(hLocker);
-	ELooper *looper = etk_get_handler_looper(fLooperToken);
+	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BAutolock <BLocker>autolock(hLocker);
+	BLooper *looper = bhapi_get_handler_looper(fLooperToken);
 
-	return(looper ? looper->LockWithTimeout(timeout) : E_ERROR);
+	return(looper ? looper->LockWithTimeout(timeout) : B_ERROR);
 }
 
 
 bool
-EMessenger::IsValid() const
+BMessenger::IsValid() const
 {
-	if(IsTargetLocal()) return(fLooperToken != E_MAXUINT64);
+	if(IsTargetLocal()) return(fLooperToken != B_MAXUINT64);
 	else return(fPort != NULL && fSem != NULL);
 }
 
 
-e_status_t
-EMessenger::SendMessage(euint32 command, EHandler *reply_to) const
+b_status_t
+BMessenger::SendMessage(b_uint32 command, BHandler *reply_to) const
 {
-	EMessage msg(command);
-	return SendMessage(&msg, reply_to, E_INFINITE_TIMEOUT);
+	BMessage msg(command);
+	return SendMessage(&msg, reply_to, B_INFINITE_TIMEOUT);
 }
 
 
-e_status_t
-EMessenger::SendMessage(const EMessage *a_message,
-			EHandler *reply_to,
-			e_bigtime_t timeout) const
+b_status_t
+BMessenger::SendMessage(const BMessage *a_message,
+			BHandler *reply_to,
+			b_bigtime_t timeout) const
 {
 	if(a_message == NULL)
 	{
-		ETK_WARNING("[APP]: %s --- Can't post empty message.", __PRETTY_FUNCTION__);
-		return E_BAD_VALUE;
+		BHAPI_WARNING("[APP]: %s --- Can't post empty message.", __PRETTY_FUNCTION__);
+		return B_BAD_VALUE;
 	}
 
-	euint64 replyToken = etk_get_handler_token(reply_to);
+	b_uint64 replyToken = bhapi_get_handler_token(reply_to);
 
-	EMessage aMsg(*a_message);
+	BMessage aMsg(*a_message);
 	aMsg.fIsReply = false;
 	if(aMsg.fSource != NULL)
 	{
-		etk_delete_port(aMsg.fSource);
+		bhapi_delete_port(aMsg.fSource);
 		aMsg.fSource = NULL;
 	}
 
@@ -302,31 +302,31 @@ EMessenger::SendMessage(const EMessage *a_message,
 }
 
 
-e_status_t
-EMessenger::SendMessage(const EMessage *a_message, EMessage *reply_message, e_bigtime_t sendTimeout, e_bigtime_t replyTimeout) const
+b_status_t
+BMessenger::SendMessage(const BMessage *a_message, BMessage *reply_message, b_bigtime_t sendTimeout, b_bigtime_t replyTimeout) const
 {
 	if(a_message == NULL || reply_message == NULL)
 	{
-		ETK_WARNING("[APP]: %s --- Can't post empty message or \"reply_message\" assigned to be \"NULL\".", __PRETTY_FUNCTION__);
-		return E_BAD_VALUE;
+		BHAPI_WARNING("[APP]: %s --- Can't post empty message or \"reply_message\" assigned to be \"NULL\".", __PRETTY_FUNCTION__);
+		return B_BAD_VALUE;
 	}
 
-	void *port = etk_create_port(1, NULL, ETK_AREA_ACCESS_OWNER);
-	if(port == NULL) return E_NO_MORE_PORTS;
+	void *port = bhapi_create_port(1, NULL, BHAPI_AREA_ACCESS_OWNER);
+	if(port == NULL) return B_NO_MORE_PORTS;
 
-	EMessage *aMsg = new EMessage(*a_message);
-	if(aMsg->fSource != NULL) etk_delete_port(aMsg->fSource);
-	aMsg->fTeam = etk_get_current_team_id();
+	BMessage *aMsg = new BMessage(*a_message);
+	if(aMsg->fSource != NULL) bhapi_delete_port(aMsg->fSource);
+	aMsg->fTeam = bhapi_get_current_team_id();
 	aMsg->fIsReply = false;
-	aMsg->fReplyToken = E_MAXUINT64;
-	aMsg->fReplyTokenTimestamp = E_MAXINT64;
+	aMsg->fReplyToken = B_MAXUINT64;
+	aMsg->fReplyTokenTimestamp = B_MAXINT64;
 	aMsg->fNoticeSource = true; // auto close the port when deleted
 	aMsg->fSource = port; // auto delete the port when deleted
 
-	e_status_t status = _SendMessage(aMsg, E_MAXUINT64, sendTimeout);
-	if(status == E_OK)
+	b_status_t status = _SendMessage(aMsg, B_MAXUINT64, sendTimeout);
+	if(status == B_OK)
 	{
-		EMessage *reply = _GetMessageFromPort(port, E_TIMEOUT, replyTimeout, &status);
+		BMessage *reply = _GetMessageFromPort(port, B_TIMEOUT, replyTimeout, &status);
 		if(reply != NULL)
 		{
 			*reply_message = *reply;
@@ -334,7 +334,7 @@ EMessenger::SendMessage(const EMessage *a_message, EMessage *reply_message, e_bi
 		}
 		else
 		{
-			reply_message->what = E_NO_REPLY;
+			reply_message->what = B_NO_REPLY;
 		}
 	}
 
@@ -343,116 +343,116 @@ EMessenger::SendMessage(const EMessage *a_message, EMessage *reply_message, e_bi
 }
 
 
-e_status_t
-EMessenger::_SendMessage(const EMessage *a_message,
-			 euint64 replyToken,
-			 e_bigtime_t timeout) const
+b_status_t
+BMessenger::_SendMessage(const BMessage *a_message,
+			 b_uint64 replyToken,
+			 b_bigtime_t timeout) const
 {
-	if(a_message == NULL) return E_BAD_VALUE;
-	if(!IsValid()) return E_ERROR;
+	if(a_message == NULL) return B_BAD_VALUE;
+	if(!IsValid()) return B_ERROR;
 
 	if(!IsTargetLocal())
 	{
 		// TODO
-		return E_ERROR;
+		return B_ERROR;
 	}
 
-	e_status_t retVal = E_ERROR;
+	b_status_t retVal = B_ERROR;
 
-	ELocker *hLocker = etk_get_handler_operator_locker();
-	EAutolock <ELocker>autolock(hLocker);
+	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BAutolock <BLocker>autolock(hLocker);
 
-	ELooper *looper = e_cast_as(etk_get_handler(fLooperToken), ELooper);
+	BLooper *looper = b_cast_as(bhapi_get_handler(fLooperToken), BLooper);
 	if(looper) retVal = looper->_PostMessage(a_message, fHandlerToken, replyToken, timeout);
 
 	return retVal;
 }
 
 
-e_status_t
-EMessenger::_SendMessageToPort(void *port, const EMessage *msg, euint32 flags, e_bigtime_t timeout)
+b_status_t
+BMessenger::_SendMessageToPort(void *port, const BMessage *msg, b_uint32 flags, b_bigtime_t timeout)
 {
-	if(!port || !msg) return E_ERROR;
+	if(!port || !msg) return B_ERROR;
 
 	size_t flattenedSize = msg->FlattenedSize();
 	if(flattenedSize <= 0)
 	{
-		ETK_WARNING("[APP]: Faltten size little than 1. (%s:%d)", __FILE__, __LINE__);
-		return E_ERROR;
+		BHAPI_WARNING("[APP]: Faltten size little than 1. (%s:%d)", __FILE__, __LINE__);
+		return B_ERROR;
 	}
 
 	char *buffer = (char*)malloc(flattenedSize);
 	if(!buffer)
 	{
-		ETK_WARNING("[APP]: Buffer malloc failed. (%s:%d)", __FILE__, __LINE__);
-		return E_NO_MEMORY;
+		BHAPI_WARNING("[APP]: Buffer malloc failed. (%s:%d)", __FILE__, __LINE__);
+		return B_NO_MEMORY;
 	}
 
 	if(msg->Flatten(buffer, flattenedSize) == false)
 	{
 		free(buffer);
-		ETK_WARNING("[APP]: Flatten message failed. (%s:%d)", __FILE__, __LINE__);
-		return E_ERROR;
+		BHAPI_WARNING("[APP]: Flatten message failed. (%s:%d)", __FILE__, __LINE__);
+		return B_ERROR;
 	}
 
-	e_status_t status;
-	if((status = etk_write_port_etc(port, _EVENTS_PENDING_, buffer, flattenedSize, flags, timeout)) != E_OK)
+	b_status_t status;
+	if((status = bhapi_write_port_etc(port, _EVENTS_PENDING_, buffer, flattenedSize, flags, timeout)) != B_OK)
 	{
 		free(buffer);
-		ETK_WARNING("[APP]: write port %s. (%s:%d)", status == E_TIMEOUT ? "time out" : "failed", __FILE__, __LINE__);
+		BHAPI_WARNING("[APP]: write port %s. (%s:%d)", status == B_TIMEOUT ? "time out" : "failed", __FILE__, __LINE__);
 		return status;
 	}
 
 	free(buffer);
 
-	return E_OK;
+	return B_OK;
 }
 
 
-EMessage*
-EMessenger::_GetMessageFromPort(void *port, euint32 flags, e_bigtime_t timeout, e_status_t *err)
+BMessage*
+BMessenger::_GetMessageFromPort(void *port, b_uint32 flags, b_bigtime_t timeout, b_status_t *err)
 {
-	e_status_t retErr = E_OK;
-	EMessage* retMsg = NULL;
+	b_status_t retErr = B_OK;
+	BMessage* retMsg = NULL;
 
 	do{
-		ssize_t bufferSize = etk_port_buffer_size_etc(port, flags, timeout);
+		ssize_t bufferSize = bhapi_port_buffer_size_etc(port, flags, timeout);
 		if(bufferSize == 0)
 		{
-			eint32 code;
-			retErr = etk_read_port_etc(port, &code, NULL, 0, E_TIMEOUT, E_INT64_CONSTANT(0));
-//			if(retErr != E_OK) ETK_DEBUG("[APP]: Port read failed(0x%x). (%s:%d)", retErr, __FILE__, __LINE__);
+			b_int32 code;
+			retErr = bhapi_read_port_etc(port, &code, NULL, 0, B_TIMEOUT, B_INT64_CONSTANT(0));
+//			if(retErr != B_OK) BHAPI_DEBUG("[APP]: Port read failed(0x%x). (%s:%d)", retErr, __FILE__, __LINE__);
 			break;
 		}
 		else if(bufferSize < 0)
 		{
 			retErr = bufferSize;
-//			if(!(retErr == E_WOULD_BLOCK || retErr == E_TIMED_OUT))
-//				ETK_DEBUG("[APP]: Port read failed(0x%x). (%s:%d)", retErr, __FILE__, __LINE__);
+//			if(!(retErr == B_WOULD_BLOCK || retErr == B_TIMED_OUT))
+//				BHAPI_DEBUG("[APP]: Port read failed(0x%x). (%s:%d)", retErr, __FILE__, __LINE__);
 			break;
 		}
 
 		char *buffer = (char*)malloc((size_t)bufferSize);
 		if(!buffer)
 		{
-			retErr = E_NO_MEMORY;
-			ETK_WARNING("[APP]: Memory alloc failed. (%s:%d)", __FILE__, __LINE__);
+			retErr = B_NO_MEMORY;
+			BHAPI_WARNING("[APP]: Memory alloc failed. (%s:%d)", __FILE__, __LINE__);
 			break;
 		}
 		bzero(buffer, (size_t)bufferSize);
 
-		eint32 code;
-		if((retErr = etk_read_port_etc(port, &code, buffer, bufferSize, E_TIMEOUT, E_INT64_CONSTANT(0))) != E_OK)
+		b_int32 code;
+		if((retErr = bhapi_read_port_etc(port, &code, buffer, bufferSize, B_TIMEOUT, B_INT64_CONSTANT(0))) != B_OK)
 		{
-//			ETK_DEBUG("[APP]: Port read failed(0x%x). (%s:%d)", retErr, __FILE__, __LINE__);
+//			BHAPI_DEBUG("[APP]: Port read failed(0x%x). (%s:%d)", retErr, __FILE__, __LINE__);
 			free(buffer);
 			break;
 		}
 		if(code != _EVENTS_PENDING_ || (size_t)bufferSize < sizeof(size_t))
 		{
-			ETK_WARNING("[APP]: Message is invalid. (%s:%d)", __FILE__, __LINE__);
+			BHAPI_WARNING("[APP]: Message is invalid. (%s:%d)", __FILE__, __LINE__);
 			free(buffer);
-			retErr = E_ERROR;
+			retErr = B_ERROR;
 			break;
 		}
 
@@ -460,26 +460,26 @@ EMessenger::_GetMessageFromPort(void *port, euint32 flags, e_bigtime_t timeout, 
 		memcpy(&msgBufferSize, buffer, sizeof(size_t));
 		if(bufferSize != (ssize_t)msgBufferSize) /* the first "size_t" == FlattenedSize() */
 		{
-			ETK_WARNING("[APP]: Message length is invalid. (%s:%d)", __FILE__, __LINE__);
+			BHAPI_WARNING("[APP]: Message length is invalid. (%s:%d)", __FILE__, __LINE__);
 			free(buffer);
-			retErr = E_ERROR;
+			retErr = B_ERROR;
 			break;
 		}
 
-		if((retMsg = new EMessage()) == NULL)
+		if((retMsg = new BMessage()) == NULL)
 		{
-			ETK_WARNING("[APP]: Memory alloc failed. (%s:%d)", __FILE__, __LINE__);
+			BHAPI_WARNING("[APP]: Memory alloc failed. (%s:%d)", __FILE__, __LINE__);
 			free(buffer);
-			retErr = E_NO_MEMORY;
+			retErr = B_NO_MEMORY;
 			break;
 		}
 
 		if(retMsg->Unflatten(buffer, msgBufferSize) == false)
 		{
-			ETK_WARNING("[APP]: Message unflatten failed. (%s:%d)", __FILE__, __LINE__);
+			BHAPI_WARNING("[APP]: Message unflatten failed. (%s:%d)", __FILE__, __LINE__);
 			delete retMsg;
 			retMsg = NULL;
-			retErr = E_ERROR;
+			retErr = B_ERROR;
 		}
 
 		free(buffer);
@@ -491,80 +491,80 @@ EMessenger::_GetMessageFromPort(void *port, euint32 flags, e_bigtime_t timeout, 
 
 
 size_t
-EMessenger::FlattenedSize() const
+BMessenger::FlattenedSize() const
 {
-	return(2 * sizeof(euint64) + 2 * sizeof(e_bigtime_t) + sizeof(eint64));
+	return(2 * sizeof(b_uint64) + 2 * sizeof(b_bigtime_t) + sizeof(b_int64));
 }
 
 
 bool
-EMessenger::Flatten(char *buffer, size_t bufferSize) const
+BMessenger::Flatten(char *buffer, size_t bufferSize) const
 {
 	if(buffer == NULL || bufferSize < FlattenedSize()) return false;
 
-	e_bigtime_t handler_stamp = etk_get_handler_create_time_stamp(fHandlerToken);
-	e_bigtime_t looper_stamp = etk_get_handler_create_time_stamp(fLooperToken);
+	b_bigtime_t handler_stamp = bhapi_get_handler_create_time_stamp(fHandlerToken);
+	b_bigtime_t looper_stamp = bhapi_get_handler_create_time_stamp(fLooperToken);
 
-	memcpy(buffer, &fTargetTeam, sizeof(eint64)); buffer += sizeof(eint64);
-	memcpy(buffer, &fHandlerToken, sizeof(euint64)); buffer += sizeof(euint64);
-	memcpy(buffer, &handler_stamp, sizeof(e_bigtime_t)); buffer += sizeof(e_bigtime_t);
-	memcpy(buffer, &fLooperToken, sizeof(euint64)); buffer += sizeof(euint64);
-	memcpy(buffer, &looper_stamp, sizeof(e_bigtime_t));
+	memcpy(buffer, &fTargetTeam, sizeof(b_int64)); buffer += sizeof(b_int64);
+	memcpy(buffer, &fHandlerToken, sizeof(b_uint64)); buffer += sizeof(b_uint64);
+	memcpy(buffer, &handler_stamp, sizeof(b_bigtime_t)); buffer += sizeof(b_bigtime_t);
+	memcpy(buffer, &fLooperToken, sizeof(b_uint64)); buffer += sizeof(b_uint64);
+	memcpy(buffer, &looper_stamp, sizeof(b_bigtime_t));
 
 	return true;
 }
 
 
 bool
-EMessenger::Unflatten(const char *buffer, size_t bufferSize)
+BMessenger::Unflatten(const char *buffer, size_t bufferSize)
 {
 	if(buffer == NULL || bufferSize < FlattenedSize()) return false;
 
-	e_bigtime_t handler_stamp = E_MAXINT64;
-	e_bigtime_t looper_stamp = E_MAXINT64;
+	b_bigtime_t handler_stamp = B_MAXINT64;
+	b_bigtime_t looper_stamp = B_MAXINT64;
 
-	eint64 target_team = E_INT64_CONSTANT(0);
-	euint64 handler_token = E_MAXUINT64;
-	euint64 looper_token = E_MAXUINT64;
+	b_int64 target_team = B_INT64_CONSTANT(0);
+	b_uint64 handler_token = B_MAXUINT64;
+	b_uint64 looper_token = B_MAXUINT64;
 
-	memcpy(&target_team, buffer, sizeof(eint64)); buffer += sizeof(eint64);
-	memcpy(&handler_token, buffer, sizeof(euint64)); buffer += sizeof(euint64);
-	memcpy(&handler_stamp, buffer, sizeof(e_bigtime_t)); buffer += sizeof(e_bigtime_t);
-	memcpy(&looper_token, buffer, sizeof(euint64)); buffer += sizeof(euint64);
-	memcpy(&looper_stamp, buffer, sizeof(e_bigtime_t));
+	memcpy(&target_team, buffer, sizeof(b_int64)); buffer += sizeof(b_int64);
+	memcpy(&handler_token, buffer, sizeof(b_uint64)); buffer += sizeof(b_uint64);
+	memcpy(&handler_stamp, buffer, sizeof(b_bigtime_t)); buffer += sizeof(b_bigtime_t);
+	memcpy(&looper_token, buffer, sizeof(b_uint64)); buffer += sizeof(b_uint64);
+	memcpy(&looper_stamp, buffer, sizeof(b_bigtime_t));
 
-	if(fHandlerToken != E_MAXUINT64) etk_unref_handler(fHandlerToken);
-	if(fLooperToken != E_MAXUINT64) etk_unref_handler(fLooperToken);
+	if(fHandlerToken != B_MAXUINT64) bhapi_unref_handler(fHandlerToken);
+	if(fLooperToken != B_MAXUINT64) bhapi_unref_handler(fLooperToken);
 
-	fHandlerToken = E_MAXUINT64; fLooperToken = E_MAXUINT64;
+	fHandlerToken = B_MAXUINT64; fLooperToken = B_MAXUINT64;
 
-	if(fSem) etk_delete_sem(fSem);
-	if(fPort) etk_delete_port(fPort);
+	if(fSem) bhapi_delete_sem(fSem);
+	if(fPort) bhapi_delete_port(fPort);
 
-	fSem = NULL; fPort = NULL; fTargetTeam = E_INT64_CONSTANT(0);
+	fSem = NULL; fPort = NULL; fTargetTeam = B_INT64_CONSTANT(0);
 
 	do{
-		if(target_team != etk_get_current_team_id())
+		if(target_team != bhapi_get_current_team_id())
 		{
 			// TODO
-			ETK_DEBUG("[APP]: %s --- Remote target unsupported.", __PRETTY_FUNCTION__);
+			BHAPI_DEBUG("[APP]: %s --- Remote target unsupported.", __PRETTY_FUNCTION__);
 			break;
 		}
 
-		if(handler_token == E_MAXUINT64 && looper_token == E_MAXUINT64) break;
-		if(handler_stamp == E_MAXINT64 && looper_stamp == E_MAXINT64) break;
+		if(handler_token == B_MAXUINT64 && looper_token == B_MAXUINT64) break;
+		if(handler_stamp == B_MAXINT64 && looper_stamp == B_MAXINT64) break;
 
-		if(handler_token != E_MAXUINT64) if(etk_ref_handler(handler_token)) fHandlerToken = handler_token;
-		if(looper_token != E_MAXUINT64) if(etk_ref_handler(looper_token)) fLooperToken = looper_token;
+		if(handler_token != B_MAXUINT64) if(bhapi_ref_handler(handler_token)) fHandlerToken = handler_token;
+		if(looper_token != B_MAXUINT64) if(bhapi_ref_handler(looper_token)) fLooperToken = looper_token;
 
-		if(fLooperToken == E_MAXUINT64 || fHandlerToken != handler_token ||
-		   (fHandlerToken == E_MAXUINT64 ? false : etk_get_handler_create_time_stamp(fHandlerToken) != handler_stamp) ||
-		   (fLooperToken == E_MAXUINT64 ? false : etk_get_handler_create_time_stamp(fLooperToken) != looper_stamp))
+		if(fLooperToken == B_MAXUINT64 || fHandlerToken != handler_token ||
+		   (fHandlerToken == B_MAXUINT64 ? false : bhapi_get_handler_create_time_stamp(fHandlerToken) != handler_stamp) ||
+		   (fLooperToken == B_MAXUINT64 ? false : bhapi_get_handler_create_time_stamp(fLooperToken) != looper_stamp))
 		{
-			if(fHandlerToken != E_MAXUINT64) etk_unref_handler(fHandlerToken);
-			if(fLooperToken != E_MAXUINT64) etk_unref_handler(fLooperToken);
-			fHandlerToken = E_MAXUINT64; fLooperToken = E_MAXUINT64;
-			ETK_DEBUG("[APP]: %s --- Invalid target.", __PRETTY_FUNCTION__);
+			if(fHandlerToken != B_MAXUINT64) bhapi_unref_handler(fHandlerToken);
+			if(fLooperToken != B_MAXUINT64) bhapi_unref_handler(fLooperToken);
+			fHandlerToken = B_MAXUINT64; fLooperToken = B_MAXUINT64;
+			BHAPI_DEBUG("[APP]: %s --- Invalid target.", __PRETTY_FUNCTION__);
 			break;
 		}
 
@@ -576,23 +576,23 @@ EMessenger::Unflatten(const char *buffer, size_t bufferSize)
 
 
 void
-EMessenger::PrintToStream() const
+BMessenger::PrintToStream() const
 {
-	ETK_OUTPUT("******** EMessenger Debug Output **********\n");
+	BHAPI_OUTPUT("******** BMessenger Debug Output **********\n");
 
-	ETK_OUTPUT("\tTarget team: %I64i\n", fTargetTeam);
-	ETK_OUTPUT("\tToken of target handler: ");
+	BHAPI_OUTPUT("\tTarget team: %I64i\n", fTargetTeam);
+	BHAPI_OUTPUT("\tToken of target handler: ");
 
-	if(fHandlerToken == E_MAXUINT64) ETK_OUTPUT("E_MAXUINT64\n");
-	else ETK_OUTPUT("%I64u\n", fHandlerToken);
+	if(fHandlerToken == B_MAXUINT64) BHAPI_OUTPUT("E_MAXUINT64\n");
+	else BHAPI_OUTPUT("%I64u\n", fHandlerToken);
 
-	ETK_OUTPUT("\tToken of target looper: ");
-	if(fLooperToken == E_MAXUINT64) ETK_OUTPUT("E_MAXUINT64\n");
-	else ETK_OUTPUT("%I64u - %p\n", fLooperToken, etk_get_handler(fLooperToken));
+	BHAPI_OUTPUT("\tToken of target looper: ");
+	if(fLooperToken == B_MAXUINT64) BHAPI_OUTPUT("E_MAXUINT64\n");
+	else BHAPI_OUTPUT("%I64u - %p\n", fLooperToken, bhapi_get_handler(fLooperToken));
 
-	if(fPort == NULL) ETK_OUTPUT("\tPort invalid.\n");
-	if(fSem == NULL) ETK_OUTPUT("\tSemaphore invalid.\n");
+	if(fPort == NULL) BHAPI_OUTPUT("\tPort invalid.\n");
+	if(fSem == NULL) BHAPI_OUTPUT("\tSemaphore invalid.\n");
 
-	ETK_OUTPUT("*******************************************\n");
+	BHAPI_OUTPUT("*******************************************\n");
 }
 

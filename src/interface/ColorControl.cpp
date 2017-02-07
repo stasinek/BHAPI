@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,65 +24,65 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: ColorControl.cpp
- * Description: EColorControl --- Displays a palette of selectable colors
+ * Description: BColorControl --- Displays a palette of selectable colors
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 #include "./../render/Pixmap.h"
 
 #include "Bitmap.h"
 #include "ColorControl.h"
 
 
-EColorControl::EColorControl(EPoint leftTop, const char *name, EMessage *message, bool bufferedDrawing)
-	: EControl(ERect(leftTop, leftTop), name, NULL, message, E_FOLLOW_NONE, E_WILL_DRAW | E_UPDATE_WITH_REGION), fBitmap(NULL)
+BColorControl::BColorControl(BPoint leftTop, const char *name, BMessage *message, bool bufferedDrawing)
+	: BControl(BRect(leftTop, leftTop), name, NULL, message, B_FOLLOW_NONE, B_WILL_DRAW | B_UPDATE_WITH_REGION), fBitmap(NULL)
 {
 	SetValue(0);
 
 	float width = 0, height = 0;
-	EColorControl::GetPreferredSize(&width, &height);
+	BColorControl::GetPreferredSize(&width, &height);
 	ResizeTo(width, height);
 
 	if(bufferedDrawing)
 	{
-		ERect aRect;
-#if defined(ETK_OS_BEOS) || defined(ETK_BIG_ENDIAN)
-		EPixmap *pixmap = new EPixmap(256, 60, E_RGB24_BIG);
+		BRect aRect;
+#if defined(BHAPI_OS_BEOS) || defined(BHAPI_BIG_ENDIAN)
+		BPixmap *pixmap = new BPixmap(256, 60, B_RGB24_BIG);
 #else
-		EPixmap *pixmap = new EPixmap(256, 60, E_RGB24);
+		BPixmap *pixmap = new BPixmap(256, 60, B_RGB24);
 #endif
-		pixmap->SetDrawingMode(E_OP_COPY);
+		pixmap->SetDrawingMode(B_OP_COPY);
 
-		for(euint8 i = 0; i < 4; i++)
+		for(b_uint8 i = 0; i < 4; i++)
 		{
-			euint8 j = 0;
+			b_uint8 j = 0;
 			do
 			{
-				aRect.SetLeftTop(EPoint((float)j, 15.f * (float)i));
-				aRect.SetRightBottom(aRect.LeftTop() + EPoint(0.f, 14.f));
+				aRect.SetLeftTop(BPoint((float)j, 15.f * (float)i));
+				aRect.SetRightBottom(aRect.LeftTop() + BPoint(0.f, 14.f));
 
-				e_rgb_color color;
+				b_rgb_color color;
 				color.set_to(i <= 1 ? j : 0, (i == 0 || i == 2) ? j : 0, (i == 0 || i == 3) ? j : 0);
 				pixmap->SetHighColor(color);
 				pixmap->FillRect(aRect);
 			} while(j == 255 ? false : (j++, true));
 		}
 
-		fBitmap = new EBitmap(pixmap);
+		fBitmap = new BBitmap(pixmap);
 		delete pixmap;
 	}
 }
 
 
-EColorControl::~EColorControl()
+BColorControl::~BColorControl()
 {
 	if(fBitmap) delete fBitmap;
 }
 
 
 void
-EColorControl::Draw(ERect updateRect)
+BColorControl::Draw(BRect updateRect)
 {
 	if(IsFocusChanging()) return;
 	_DrawColors(updateRect);
@@ -91,16 +91,16 @@ EColorControl::Draw(ERect updateRect)
 
 
 void
-EColorControl::GetPreferredSize(float *width, float *height)
+BColorControl::GetPreferredSize(float *width, float *height)
 {
 	if(width == NULL && height == NULL) return;
 
-	EFont font;
+	BFont font;
 	GetFont(&font);
 
 	if(height)
 	{
-		e_font_height fontHeight;
+		b_font_height fontHeight;
 		font.GetHeight(&fontHeight);
 
 		*height = max_c(61.f, 3.f * (fontHeight.ascent + fontHeight.descent) + 17.f);
@@ -114,29 +114,29 @@ EColorControl::GetPreferredSize(float *width, float *height)
 }
 
 
-ERect
-EColorControl::_MarkFrame(ERect colorsFrame, euint8 channel)
+BRect
+BColorControl::_MarkFrame(BRect colorsFrame, b_uint8 channel)
 {
-	ERect r;
+	BRect r;
 
 	if(colorsFrame.IsValid())
 	{
-		e_rgb_color fColor = ValueAsColor();
+		b_rgb_color fColor = ValueAsColor();
 
 		if(channel == 0) /* red */
 		{
-			EPoint pt(colorsFrame.left + 1.f + (float)fColor.red, colorsFrame.top + 23.f);
-			r.SetLeftTop(pt - EPoint(3.f, 3.f)); r.SetRightBottom(pt + EPoint(3.f, 3.f));
+			BPoint pt(colorsFrame.left + 1.f + (float)fColor.red, colorsFrame.top + 23.f);
+			r.SetLeftTop(pt - BPoint(3.f, 3.f)); r.SetRightBottom(pt + BPoint(3.f, 3.f));
 		}
 		else if(channel == 1) /* green */
 		{
-			EPoint pt(colorsFrame.left + 1.f + (float)fColor.green, colorsFrame.top + 38.f);
-			r.SetLeftTop(pt - EPoint(3.f, 3.f)); r.SetRightBottom(pt + EPoint(3.f, 3.f));
+			BPoint pt(colorsFrame.left + 1.f + (float)fColor.green, colorsFrame.top + 38.f);
+			r.SetLeftTop(pt - BPoint(3.f, 3.f)); r.SetRightBottom(pt + BPoint(3.f, 3.f));
 		}
 		else if(channel == 2) /* blue */
 		{
-			EPoint pt(colorsFrame.left + 1.f + (float)fColor.blue, colorsFrame.top + 53.f);
-			r.SetLeftTop(pt - EPoint(3.f, 3.f)); r.SetRightBottom(pt + EPoint(3.f, 3.f));
+			BPoint pt(colorsFrame.left + 1.f + (float)fColor.blue, colorsFrame.top + 53.f);
+			r.SetLeftTop(pt - BPoint(3.f, 3.f)); r.SetRightBottom(pt + BPoint(3.f, 3.f));
 		}
 	}
 
@@ -144,14 +144,14 @@ EColorControl::_MarkFrame(ERect colorsFrame, euint8 channel)
 }
 
 
-ERect
-EColorControl::_ColorsFrame()
+BRect
+BColorControl::_ColorsFrame()
 {
-	ERect r = Frame().OffsetToSelf(E_ORIGIN);
+	BRect r = Frame().OffsetToSelf(B_ORIGIN);
 
 	if(r.IsValid())
 	{
-		e_font_height fontHeight;
+		b_font_height fontHeight;
 		GetFontHeight(&fontHeight);
 
 		r.bottom = r.top + max_c(61.f, 3.f * (fontHeight.ascent + fontHeight.descent) + 17.f);
@@ -163,15 +163,15 @@ EColorControl::_ColorsFrame()
 }
 
 
-ERect
-EColorControl::_DescriptionFrame()
+BRect
+BColorControl::_DescriptionFrame()
 {
-	ERect r = Frame().OffsetToSelf(E_ORIGIN);
+	BRect r = Frame().OffsetToSelf(B_ORIGIN);
 
 	if(r.IsValid())
 	{
-		EFont font;
-		e_font_height fontHeight;
+		BFont font;
+		b_font_height fontHeight;
 		GetFont(&font);
 		font.GetHeight(&fontHeight);
 
@@ -189,31 +189,31 @@ EColorControl::_DescriptionFrame()
 
 
 void
-EColorControl::_DrawColors(ERect r)
+BColorControl::_DrawColors(BRect r)
 {
-	ERect rect = _ColorsFrame();
+	BRect rect = _ColorsFrame();
 	r &= rect;
 	if(r.IsValid() == false) return;
 
 	PushState();
 
 	SetPenSize(0);
-	SetDrawingMode(E_OP_COPY);
+	SetDrawingMode(B_OP_COPY);
 	ConstrainClippingRegion(r);
 
 	if(fBitmap == NULL)
 	{
-		ERect aRect;
-		for(euint8 i = 0; i < 4; i++)
+		BRect aRect;
+		for(b_uint8 i = 0; i < 4; i++)
 		{
-			euint8 j = 0;
+			b_uint8 j = 0;
 			do
 			{
-				aRect.SetLeftTop(EPoint(1.f + (float)j, rect.top + 1.f + 15.f * (float)i));
-				aRect.SetRightBottom(aRect.LeftTop() + EPoint(0.f, 14.f));
+				aRect.SetLeftTop(BPoint(1.f + (float)j, rect.top + 1.f + 15.f * (float)i));
+				aRect.SetRightBottom(aRect.LeftTop() + BPoint(0.f, 14.f));
 				if(aRect.Intersects(r) == false) continue;
 
-				e_rgb_color color;
+				b_rgb_color color;
 				color.set_to(i <= 1 ? j : 0, (i == 0 || i == 2) ? j : 0, (i == 0 || i == 3) ? j : 0);
 				SetHighColor(color);
 				StrokeLine(aRect.LeftTop(), aRect.RightBottom());
@@ -222,13 +222,13 @@ EColorControl::_DrawColors(ERect r)
 	}
 	else
 	{
-		ERect aRect = rect.InsetByCopy(1.f, 1.f);
-		if(aRect.Intersects(r)) DrawBitmap(fBitmap, aRect.OffsetToCopy(E_ORIGIN), aRect);
+		BRect aRect = rect.InsetByCopy(1.f, 1.f);
+		if(aRect.Intersects(r)) DrawBitmap(fBitmap, aRect.OffsetToCopy(B_ORIGIN), aRect);
 	}
 
-	for(euint8 i = 0; i < 3; i++)
+	for(b_uint8 i = 0; i < 3; i++)
 	{
-		ERect markFrame = _MarkFrame(rect, i);
+		BRect markFrame = _MarkFrame(rect, i);
 		if(markFrame.Intersects(r) == false) continue;
 		SetHighColor(255, 255, 255);
 		StrokeEllipse(markFrame);
@@ -236,8 +236,8 @@ EColorControl::_DrawColors(ERect r)
 
 	if(rect.InsetByCopy(1.f, 1.f).Contains(r) == false)
 	{
-		e_rgb_color shineColor = e_ui_color(E_SHINE_COLOR);
-		e_rgb_color shadowColor = e_ui_color(E_SHADOW_COLOR);
+		b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
+		b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
 
 		if(!IsEnabled())
 		{
@@ -257,20 +257,20 @@ EColorControl::_DrawColors(ERect r)
 
 
 void
-EColorControl::_DrawDescription(ERect r)
+BColorControl::_DrawDescription(BRect r)
 {
-	ERect rect = _DescriptionFrame();
+	BRect rect = _DescriptionFrame();
 	r &= rect;
 	if(r.IsValid() == false) return;
 
-	e_font_height fontHeight;
+	b_font_height fontHeight;
 	GetFontHeight(&fontHeight);
 
 	PushState();
 
-	e_rgb_color shineColor = e_ui_color(E_SHINE_COLOR);
-	e_rgb_color shadowColor = e_ui_color(E_SHADOW_COLOR);
-	e_rgb_color textColor = e_ui_color(E_PANEL_TEXT_COLOR);
+	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
+	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
+	b_rgb_color textColor = b_ui_color(B_PANEL_TEXT_COLOR);
 
 	if(!IsEnabled())
 	{
@@ -280,7 +280,7 @@ EColorControl::_DrawDescription(ERect r)
 	}
 
 	SetPenSize(0);
-	SetDrawingMode(E_OP_COPY);
+	SetDrawingMode(B_OP_COPY);
 	ConstrainClippingRegion(r);
 	SetHighColor(textColor);
 
@@ -298,10 +298,10 @@ EColorControl::_DrawDescription(ERect r)
 	DrawString("B:");
 	x = max_c(PenLocation().x, x);
 
-	EString str;
+	BString str;
 	x += 9.f;
 
-	e_rgb_color fColor = ValueAsColor();
+	b_rgb_color fColor = ValueAsColor();
 
 	str << fColor.red;
 	MovePenTo(x, rect.top + fontHeight.ascent + 4.f);
@@ -315,12 +315,12 @@ EColorControl::_DrawDescription(ERect r)
 	MovePenTo(x, PenLocation().y + fontHeight.ascent + fontHeight.descent + 5.f);
 	DrawString(str.String());
 
-	ERect aRect;
+	BRect aRect;
 	x -= 4.f;
 
-	aRect.SetLeftTop(EPoint(x, rect.top));
-	aRect.SetRightBottom(EPoint(rect.right, rect.top + fontHeight.ascent + fontHeight.descent + 4.f));
-	for(eint8 i = 0; i < 3; i++)
+	aRect.SetLeftTop(BPoint(x, rect.top));
+	aRect.SetRightBottom(BPoint(rect.right, rect.top + fontHeight.ascent + fontHeight.descent + 4.f));
+	for(b_int8 i = 0; i < 3; i++)
 	{
 		if(aRect.Intersects(r))
 		{
@@ -339,57 +339,57 @@ EColorControl::_DrawDescription(ERect r)
 
 
 void
-EColorControl::SetValue(eint32 color)
+BColorControl::SetValue(b_int32 color)
 {
 	if(color != Value())
 	{
-		EControl::SetValueNoUpdate(color);
+		BControl::SetValueNoUpdate(color);
 		Invalidate();
 		if(Message() != NULL) Invoke();
 	}
 }
 
 
-void EColorControl::SetValue(e_rgb_color color)
+void BColorControl::SetValue(b_rgb_color color)
 {
-	eint32 c = ((eint32)color.red << 16) | ((eint32)color.green << 8) | ((eint32)color.blue);
+	b_int32 c = ((b_int32)color.red << 16) | ((b_int32)color.green << 8) | ((b_int32)color.blue);
 	SetValue(c);
 }
 
 
-e_rgb_color EColorControl::ValueAsColor()
+b_rgb_color BColorControl::ValueAsColor()
 {
-	eint32 c = Value();
-	return e_make_rgb_color((c >> 16) & 0xff, (c >> 8) & 0xff, c & 0xff);
+	b_int32 c = Value();
+	return b_makb_rgb_color((c >> 16) & 0xff, (c >> 8) & 0xff, c & 0xff);
 }
 
 
 void
-EColorControl::MouseDown(EPoint where)
+BColorControl::MouseDown(BPoint where)
 {
 	if(IsEnabled() == false) return;
 
-	ERect rect = _ColorsFrame();
+	BRect rect = _ColorsFrame();
 	rect.InsetBy(-5, -2);
 	if(rect.Contains(where) == false) return;
 	rect.InsetBy(6, 3);
 
-	EPoint ptOffset = where - rect.LeftTop();
+	BPoint ptOffset = where - rect.LeftTop();
 	if(ptOffset.x < 0) ptOffset.x = 0;
 	if(ptOffset.x > 255) ptOffset.x = 255;
 	if(ptOffset.y < 0) ptOffset.y = 0;
 	if(ptOffset.y >= 60) ptOffset.y = 59;
 
-	e_rgb_color color = ValueAsColor();
+	b_rgb_color color = ValueAsColor();
 
 	if(ptOffset.y < 15.f) /* gray */
-		color.red = color.green = color.blue = (euint8)ptOffset.x;
+		color.red = color.green = color.blue = (b_uint8)ptOffset.x;
 	else if(ptOffset.y < 30.f) /* red */
-		color.red = (euint8)ptOffset.x;
+		color.red = (b_uint8)ptOffset.x;
 	else if(ptOffset.y < 45.f) /* green */
-		color.green = (euint8)ptOffset.x;
+		color.green = (b_uint8)ptOffset.x;
 	else if(ptOffset.y < 60.f) /* blue */
-		color.blue = (euint8)ptOffset.x;
+		color.blue = (b_uint8)ptOffset.x;
 
 	SetValue(color);
 }

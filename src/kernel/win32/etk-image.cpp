@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -35,47 +35,47 @@
 
 #include "./../kernel/Kernel.h"
 #include "./../storage/Path.h"
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 
 
-_IMPEXP_ETK void*
-etk_load_addon(const char* path)
+_IMPEXP_BHAPI void*
+bhapi_load_addon(const char* path)
 {
-	EPath aPath(path, NULL, true);
-	EString filename = aPath.Path();
+	BPath aPath(path, NULL, true);
+	BString filename = aPath.Path();
 
 #ifdef __CYGWIN__
-	char buf[E_MAXPATH + 1];
-	bzero(buf, E_MAXPATH + 1);
+	char buf[B_MAXPATH + 1];
+	bzero(buf, B_MAXPATH + 1);
 	cygwin_conv_to_full_win32_path(filename.String(), buf);
 	filename.SetTo(buf);
 #endif
 	filename.ReplaceAll("/", "\\");
-	if(filename.Length() <= 0 || filename.Length() > E_MAXPATH) return NULL;
+	if(filename.Length() <= 0 || filename.Length() > B_MAXPATH) return NULL;
 
 	return((void*)LoadLibrary(filename.String()));
 }
 
 
-_IMPEXP_ETK e_status_t
-etk_unload_addon(void *data)
+_IMPEXP_BHAPI b_status_t
+bhapi_unload_addon(void *data)
 {
-	if(data == NULL) return E_ERROR;
-	if(FreeLibrary((HMODULE)data) == 0) return E_ERROR;
-	return E_OK;
+	if(data == NULL) return B_ERROR;
+	if(FreeLibrary((HMODULE)data) == 0) return B_ERROR;
+	return B_OK;
 }
 
 
-_IMPEXP_ETK e_status_t
-etk_get_image_symbol(void *data, const char *name, void **ptr)
+_IMPEXP_BHAPI b_status_t
+bhapi_get_image_symbol(void *data, const char *name, void **ptr)
 {
-	if(data == NULL || name == NULL || *name == 0 || ptr == NULL) return E_BAD_VALUE;
+	if(data == NULL || name == NULL || *name == 0 || ptr == NULL) return B_BAD_VALUE;
 
 	FARPROC aProc = GetProcAddress((HMODULE)data, name);
-	if(aProc == NULL) return E_ERROR;
+	if(aProc == NULL) return B_ERROR;
 
 	*ptr = (void*)aProc;
 
-	return E_OK;
+	return B_OK;
 }
 

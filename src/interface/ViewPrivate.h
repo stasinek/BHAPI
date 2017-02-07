@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,30 +27,30 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_VIEW_PRIVATE_H__
-#define __ETK_VIEW_PRIVATE_H__
+#ifndef __BHAPI_VIEW_PRIVATE_H__
+#define __BHAPI_VIEW_PRIVATE_H__
 
 #include "layout/Layout.h"
 #include "View.h"
 
 
-class _LOCAL EViewLayout : public ELayoutItem {
+class _LOCAL BViewLayout : public BLayoutItem {
 public:
-	EViewLayout(EView *view, ERect frame, euint32 resizingMode);
-	virtual ~EViewLayout();
+    BViewLayout(BView *view, BRect frame, b_uint32 resizingMode);
+	virtual ~BViewLayout();
 
 	void		SetEnabled(bool state);
 	bool		IsEnabled() const;
 
 	virtual void	GetPreferredSize(float *width, float *height);
 	virtual void	ResizeToPreferred();
-	virtual void	MoveTo(EPoint where);
+	virtual void	MoveTo(BPoint where);
 	virtual void	ResizeTo(float width, float height);
 
-	virtual void	Invalidate(ERect rect);
+	virtual void	Invalidate(BRect rect);
 	virtual void	UpdateVisibleRegion();
 
-	void		_GetVisibleRegion(ERegion **region);
+	void		_GetVisibleRegion(BRegion **region);
 
 private:
 	bool fEnabled;
@@ -58,89 +58,89 @@ private:
 
 
 inline
-EViewLayout::EViewLayout(EView *view, ERect frame, euint32 resizingMode)
-	: ELayoutItem(frame, resizingMode), fEnabled(true)
+BViewLayout::BViewLayout(BView *view, BRect frame, b_uint32 resizingMode)
+    : BLayoutItem(frame, resizingMode), fEnabled(true)
 {
 	SetPrivateData(view);
 }
 
 
 inline
-EViewLayout::~EViewLayout()
+BViewLayout::~BViewLayout()
 {
 }
 
 
 inline void
-EViewLayout::SetEnabled(bool state)
+BViewLayout::SetEnabled(bool state)
 {
 	fEnabled = state;
 }
 
 
 inline bool
-EViewLayout::IsEnabled() const
+BViewLayout::IsEnabled() const
 {
 	return fEnabled;
 }
 
 
 inline void
-EViewLayout::GetPreferredSize(float *width, float *height)
+BViewLayout::GetPreferredSize(float *width, float *height)
 {
-	((EView*)PrivateData())->GetPreferredSize(width, height);
+	((BView*)PrivateData())->GetPreferredSize(width, height);
 }
 
 
 inline void
-EViewLayout::ResizeToPreferred()
+BViewLayout::ResizeToPreferred()
 {
-	((EView*)PrivateData())->ResizeToPreferred();
+	((BView*)PrivateData())->ResizeToPreferred();
 }
 
 
 inline void
-EViewLayout::MoveTo(EPoint where)
+BViewLayout::MoveTo(BPoint where)
 {
-	ERect oldFrame = Frame();
-	ELayoutItem::MoveTo(where);
-	ERect newFrame = Frame();
-	((EView*)PrivateData())->_FrameChanged(oldFrame, newFrame);
+	BRect oldFrame = Frame();
+    BLayoutItem::MoveTo(where);
+	BRect newFrame = Frame();
+	((BView*)PrivateData())->_FrameChanged(oldFrame, newFrame);
 }
 
 
 inline void
-EViewLayout::ResizeTo(float width, float height)
+BViewLayout::ResizeTo(float width, float height)
 {
-	ERect oldFrame = Frame();
-	ELayoutItem::ResizeTo(width, height);
-	ERect newFrame = Frame();
-	((EView*)PrivateData())->_FrameChanged(oldFrame, newFrame);
+	BRect oldFrame = Frame();
+    BLayoutItem::ResizeTo(width, height);
+	BRect newFrame = Frame();
+	((BView*)PrivateData())->_FrameChanged(oldFrame, newFrame);
 }
 
 
 inline void
-EViewLayout::Invalidate(ERect rect)
+BViewLayout::Invalidate(BRect rect)
 {
-	if(((EView*)PrivateData())->Window() == NULL) return;
-	((EView*)PrivateData())->ConvertToWindow(&rect);
-	((EView*)PrivateData())->Window()->Invalidate(rect);
+	if(((BView*)PrivateData())->Window() == NULL) return;
+	((BView*)PrivateData())->ConvertToWindow(&rect);
+	((BView*)PrivateData())->Window()->Invalidate(rect);
 }
 
 
 inline void
-EViewLayout::UpdateVisibleRegion()
+BViewLayout::UpdateVisibleRegion()
 {
-	ELayoutItem::UpdateVisibleRegion();
-	((EView*)PrivateData())->_UpdateVisibleRegion();
+    BLayoutItem::UpdateVisibleRegion();
+	((BView*)PrivateData())->_UpdateVisibleRegion();
 }
 
 
 inline void
-EViewLayout::_GetVisibleRegion(ERegion **region)
+BViewLayout::_GetVisibleRegion(BRegion **region)
 {
 	GetVisibleRegion(region);
 }
 
-#endif /* __ETK_VIEW_PRIVATE_H__ */
+#endif /* __BHAPI_VIEW_PRIVATE_H__ */
 

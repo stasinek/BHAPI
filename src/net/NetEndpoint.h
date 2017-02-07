@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,68 +27,68 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_NET_ENDPOINT_H__
-#define __ETK_NET_ENDPOINT_H__
+#ifndef __BHAPI_NET_ENDPOINT_H__
+#define __BHAPI_NET_ENDPOINT_H__
 
 #include "./../net/NetAddress.h"
 #include "./../net/NetBuffer.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK ENetEndpoint : public EArchivable {
+class _IMPEXP_BHAPI BNetEndpoint : public BArchivable {
 public:
-	ENetEndpoint(int proto = SOCK_STREAM);
-	ENetEndpoint(const ENetEndpoint &from);
-	virtual ~ENetEndpoint();
+	BNetEndpoint(int proto = SOCK_STREAM);
+	BNetEndpoint(const BNetEndpoint &from);
+	virtual ~BNetEndpoint();
 
 	// Archiving
-	ENetEndpoint(const EMessage *from);
-	virtual e_status_t Archive(EMessage *into, bool deep = true) const;
-	static EArchivable *Instantiate(const EMessage *from);
+	BNetEndpoint(const BMessage *from);
+	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+	static BArchivable *Instantiate(const BMessage *from);
 
-	e_status_t		InitCheck() const;
+	b_status_t		InitCheck() const;
 
-	ENetEndpoint		&operator=(const ENetEndpoint &endpoint);
+	BNetEndpoint		&operator=(const BNetEndpoint &endpoint);
 
-	e_status_t		SetProtocol(int proto);
+	b_status_t		SetProtocol(int proto);
 
-	int			SetSocketOption(eint32 level, eint32 option, const void *data, size_t data_len);
-	int			GetSocketOption(eint32 level, eint32 option, void *data, size_t *data_len) const;
+    int			SetSocketOption(b_int32 level, b_int32 option, const void *data, size_t data_len);
+    int			GetSocketOption(b_int32 level, b_int32 option, void *data, size_t *data_len) const;
 
 	int			SetNonBlocking(bool state = true);
 	bool			IsNonBlocking() const;
 
 	int			SetReuseAddr(bool state = true);
 
-	const ENetAddress	&LocalAddr() const;
-	const ENetAddress	&RemoteAddr() const;
+	const BNetAddress	&LocalAddr() const;
+	const BNetAddress	&RemoteAddr() const;
 
 	virtual void		Close();
 
-	virtual e_status_t	Bind(const ENetAddress &addr);
-	virtual e_status_t	Bind(euint16 port = 0);
+	virtual b_status_t	Bind(const BNetAddress &addr);
+    virtual b_status_t	Bind(b_uint16 port = 0);
 
-	virtual e_status_t	Connect(const ENetAddress &addr);
-	virtual e_status_t	Connect(const char *address, euint16 port);
+	virtual b_status_t	Connect(const BNetAddress &addr);
+    virtual b_status_t	Connect(const char *address, b_uint16 port);
 
-	virtual e_status_t	Listen(int backlog = 5);
-	virtual ENetEndpoint	*Accept(eint32 timeout_msec = -1);
+	virtual b_status_t	Listen(int backlog = 5);
+    virtual BNetEndpoint	*Accept(b_int32 timeout_msec = -1);
 
 	int			Error() const;
 	const char		*ErrorStr() const;
 
-	virtual eint32		Send(const void *buf, size_t len, int flags = 0);
-	virtual eint32		Send(const ENetBuffer &buf, int flags = 0);
-	virtual eint32		SendTo(const void *buf, size_t len, const ENetAddress &to, int flags = 0);
-	virtual eint32		SendTo(const ENetBuffer &buf, const ENetAddress &to, int flags = 0);
+    virtual b_int32		Send(const void *buf, size_t len, int flags = 0);
+    virtual b_int32		Send(const BNetBuffer &buf, int flags = 0);
+    virtual b_int32		SendTo(const void *buf, size_t len, const BNetAddress &to, int flags = 0);
+    virtual b_int32		SendTo(const BNetBuffer &buf, const BNetAddress &to, int flags = 0);
 
-	void			SetTimeout(e_bigtime_t timeout);
-	virtual eint32		Receive(void *buf, size_t len, int flags = 0);
-	virtual eint32		Receive(ENetBuffer &buf, size_t len, int flags = 0);
-	virtual eint32		ReceiveFrom(void *buf, size_t len, const ENetAddress &from, int flags = 0);
-	virtual eint32		ReceiveFrom(ENetBuffer &buf, size_t len, const ENetAddress &from, int flags = 0);
+    void			SetTimeout(b_bigtime_t timeout);
+    virtual b_int32		Receive(void *buf, size_t len, int flags = 0);
+    virtual b_int32		Receive(BNetBuffer &buf, size_t len, int flags = 0);
+    virtual b_int32		ReceiveFrom(void *buf, size_t len, const BNetAddress &from, int flags = 0);
+    virtual b_int32		ReceiveFrom(BNetBuffer &buf, size_t len, const BNetAddress &from, int flags = 0);
 
-	virtual bool		IsDataPending(e_bigtime_t timeout = 0);
+    virtual bool		IsDataPending(b_bigtime_t timeout = 0);
 
 protected:
 	// Socket(): use it carefully please.
@@ -99,16 +99,16 @@ private:
 	int fProtocol;
 	bool fBind;
 	bool fNonBlocking;
-	e_bigtime_t fTimeout;
+	b_bigtime_t fTimeout;
 
-	ENetAddress fLocalAddr;
-	ENetAddress fRemoteAddr;
+	BNetAddress fLocalAddr;
+	BNetAddress fRemoteAddr;
 	void _Close();
 };
 
 
 inline int
-ENetEndpoint::SetReuseAddr(bool state)
+BNetEndpoint::SetReuseAddr(bool state)
 {
 	int opt = (int)state;
 	return SetSocketOption(SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
@@ -117,5 +117,5 @@ ENetEndpoint::SetReuseAddr(bool state)
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_NET_ENDPOINT_H__ */
+#endif /* __BHAPI_NET_ENDPOINT_H__ */
 

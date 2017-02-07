@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,61 +24,61 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: List.h
- * Description: EList --- ordered list of data pointers
+ * Description: BList --- ordered list of data pointers
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_LIST_H__
-#define __ETK_LIST_H__
+#ifndef __BHAPI_LIST_H__
+#define __BHAPI_LIST_H__
 
 #include "./SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EList {
+class _IMPEXP_BHAPI BList {
 public:
-	// EList(eint32), EList(eint32, eint32):
+    // BList(b_int32), BList(b_int32, b_int32):
 	// 	The argument "initialAllocSize" is the minimum count to hold in memory.
-	// 		Valid range: 1 ~ (E_MAXINT32 - 1)
+    // 		Valid range: 1 ~ (B_MAXINT32 - 1)
 	// 		When you pass invalid value to "initialAllocSize", the minimum count just equal to 0.
 	// 	The argument "nullItems" is the count to preallocate NULL items for ReplaceItem().
-	EList(eint32 initialAllocSize = 0);
-	EList(eint32 initialAllocSize, eint32 nullItems);
+    BList(b_int32 initialAllocSize = 0);
+    BList(b_int32 initialAllocSize, b_int32 nullItems);
 
-	// EList(const EList&),operator=(const EList&):
+    // BList(const BList&),operator=(const BList&):
 	// 	The minimum count to hold same as "list" when possible.
-	EList(const EList &list);
-	EList &operator=(const EList &from);
+    BList(const BList &list);
+    BList &operator=(const BList &from);
 
-	virtual ~EList();
+    virtual ~BList();
 
 	bool	AddItem(void *item);
-	bool	AddItem(void *item, eint32 atIndex);
-	bool	AddList(const EList *newItems);
-	bool	AddList(const EList *newItems, eint32 atIndex);
+    bool	AddItem(void *item, b_int32 atIndex);
+    bool	AddList(const BList *newItems);
+    bool	AddList(const BList *newItems, b_int32 atIndex);
 
 	// RemoveItem(),RemoveItems(): the item WOULD NOT be destructed yet.
 	bool	RemoveItem(void *item);
-	void	*RemoveItem(eint32 index);
-	bool	RemoveItems(eint32 index, eint32 count);
+    void	*RemoveItem(b_int32 index);
+    bool	RemoveItems(b_int32 index, b_int32 count);
 
 	// ReplaceItem(): the old item WOULD NOT be destructed yet.
-	bool	ReplaceItem(eint32 index, void *newItem, void **oldItem = NULL);
+    bool	ReplaceItem(b_int32 index, void *newItem, void **oldItem = NULL);
 
 	void	MakeEmpty();
 
-	bool	SwapItems(eint32 indexA, eint32 indexB);
-	bool	MoveItem(eint32 fromIndex, eint32 toIndex);
+    bool	SwapItems(b_int32 indexA, b_int32 indexB);
+    bool	MoveItem(b_int32 fromIndex, b_int32 toIndex);
 
 	void	SortItems(int (*cmp)(const void *a, const void *b));
 
-	void	*ItemAt(eint32 index) const;
+    void	*ItemAt(b_int32 index) const;
 	void	*FirstItem() const;
 	void	*LastItem() const;
 
 	bool	HasItem(void *item) const;
-	eint32	IndexOf(void *item) const;
-	eint32	CountItems() const;
+    b_int32	IndexOf(void *item) const;
+    b_int32	CountItems() const;
 	bool	IsEmpty() const;
 
 	void	DoForEach(bool (*func)(void *data));
@@ -90,14 +90,14 @@ public:
 private:
 	void **fObjects;
 
-	eint32 fItemCount;
-	eint32 fItemReal;
-	eint32 fMinimumCount;
+    b_int32 fItemCount;
+    b_int32 fItemReal;
+    b_int32 fMinimumCount;
 
-	bool _Resize(eint32 count);
+    bool _Resize(b_int32 count);
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_LIST_H__ */
+#endif /* __BHAPI_LIST_H__ */
 

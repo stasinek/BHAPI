@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  * 
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  * 
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,7 +24,7 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * File: Button.cpp
- * Description: EButton --- A view like button for control in window
+ * Description: BButton --- A view like button for control in window
  * 
  * --------------------------------------------------------------------------*/
 
@@ -41,16 +41,16 @@
 /* --------------------------------------------------------------------------
 <document lang="zh_CN.UTF-8">
 <section id="EBUTTON_DESCRIPTION">
-	<title>EButton类描述</title>
+	<title>BButton类描述</title>
 	<para>声明所在：<emphasis>&lt;etk/interface/Button.h&gt;</emphasis></para>
 	<para>链 接 库：<emphasis>libetkxx</emphasis></para>
-	<para>派生关系：<emphasis>EButton --- EControl --- EView --- EHandler --- EArchivable</emphasis></para>
-	<para>          <emphasis>                     |-- EInvoker</emphasis></para>
-	<para>EButton是一个按钮视图类，主要用于在窗口中显示按钮以便程序的交互操作。</para>
+	<para>派生关系：<emphasis>BButton --- BControl --- BView --- BHandler --- BArchivable</emphasis></para>
+	<para>          <emphasis>                     |-- BInvoker</emphasis></para>
+	<para>BButton是一个按钮视图类，主要用于在窗口中显示按钮以便程序的交互操作。</para>
 </section>
 
 <section id="EBUTTON_FUNCTIONS">
-	<title>EButton类成员函数</title>
+	<title>BButton类成员函数</title>
 	<xref linkend="EBUTTON_FUNCTION_CONSTRUCT" /><para></para>
 	<xref linkend="EBUTTON_FUNCTION_LABEL" /><para></para>
 	<xref linkend="EBUTTON_FUNCTION_CONTENT_FRAME" /><para></para>
@@ -70,13 +70,13 @@
 <section id="EBUTTON_FUNCTION_CONSTRUCT">
 	<title>构造函数</title>
 	<programlisting>
-EButton::EButton(ERect <emphasis>frame</emphasis>,
+BButton::BButton(BRect <emphasis>frame</emphasis>,
                  const char *<emphasis>name</emphasis>,
                  const char *<emphasis>label</emphasis>,
-                 EMessage *<emphasis>message</emphasis>,
-                 euint32 <emphasis>resizeMode = E_FOLLOW_LEFT | E_FOLLOW_TOP</emphasis>,
-                 euint32 <emphasis>flags = E_WILL_DRAW | E_NAVIGABLE</emphasis>)
-virtual EButton::~EButton()
+                 BMessage *<emphasis>message</emphasis>,
+                 b_uint32 <emphasis>resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP</emphasis>,
+                 b_uint32 <emphasis>flags = B_WILL_DRAW | B_NAVIGABLE</emphasis>)
+virtual BButton::~BButton()
 	</programlisting>
 	<itemizedlist>
 		<listitem><para><emphasis>frame</emphasis>是视图在父视图的轮廓定义矩形。
@@ -85,7 +85,7 @@ virtual EButton::~EButton()
 					那么视图才得以有可能显示。</para></footnote>
 		</para></listitem>
 		<listitem><para><emphasis>name</emphasis>是视图的名字。
-			<footnote><para>视图名字用于EView::FindView函数，可以指定为NULL。</para></footnote>
+			<footnote><para>视图名字用于BView::FindView函数，可以指定为NULL。</para></footnote>
 		</para></listitem>
 		<listitem><para><emphasis>label</emphasis>是按钮的标签文本。
 		</para></listitem>
@@ -93,24 +93,24 @@ virtual EButton::~EButton()
 			<footnote><para>此消息为视图解构时自动销毁，程序中不应在视图创建后对其进行销毁。</para></footnote>
 		</para></listitem>
 		<listitem><para><emphasis>resizeMode</emphasis>是当父视图变换大小时该视图的缩放模式。
-			<footnote><para>视图缩放模式详EView类。</para></footnote>
+			<footnote><para>视图缩放模式详BView类。</para></footnote>
 		</para></listitem>
 		<listitem><para><emphasis>flags</emphasis>是视图的事件选择标记。
-			<footnote><para>视图事件选择标记详EView类。</para></footnote>
+			<footnote><para>视图事件选择标记详BView类。</para></footnote>
 		</para></listitem>
 	</itemizedlist>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-EButton::EButton(ERect frame, const char *name, const char *label,
-		 EMessage *message, euint32 resizeMode, euint32 flags)
-	: EControl(frame, name, label, message, resizeMode, flags), fInsided(false),
+BButton::BButton(BRect frame, const char *name, const char *label,
+		 BMessage *message, b_uint32 resizeMode, b_uint32 flags)
+	: BControl(frame, name, label, message, resizeMode, flags), fInsided(false),
 	  fMousePushed(false), fFocusFlash(0), fRunner(NULL)
 {
 }
 
 
-EButton::~EButton()
+BButton::~BButton()
 {
 }
 
@@ -120,8 +120,8 @@ EButton::~EButton()
 <section id="EBUTTON_FUNCTION_LABEL">
 	<title>按钮标签</title>
 	<programlisting>
-virtual void EButton::SetLabel(const char *<emphasis>label</emphasis>)
-const char* EControl::Label() const
+virtual void BButton::SetLabel(const char *<emphasis>label</emphasis>)
+const char* BControl::Label() const
 	</programlisting>
 	<itemizedlist>
 		<listitem><para><emphasis>label</emphasis>是按钮的标签文本。
@@ -130,23 +130,23 @@ const char* EControl::Label() const
 					更新其内容。</para></footnote>
 		</para></listitem>
 	</itemizedlist>
-	<para>EButton::SetLabel()用于设置按钮的标签内容。</para>
-	<para>EControl::Label()函数返回按钮标签内容的字符串。</para>
+	<para>BButton::SetLabel()用于设置按钮的标签内容。</para>
+	<para>BControl::Label()函数返回按钮标签内容的字符串。</para>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
 void
-EButton::SetLabel(const char *label)
+BButton::SetLabel(const char *label)
 {
-	EControl::SetLabel(label);
+	BControl::SetLabel(label);
 	Invalidate();
 }
 
 
 void
-EButton::GetPreferredSize(float *width, float *height)
+BButton::GetPreferredSize(float *width, float *height)
 {
-	e_theme_engine *theme = etk_get_current_theme_engine();
+	b_theme_engine *theme = bhapi_get_current_theme_engine();
 	if(theme == NULL || theme->get_button_preferred_size == NULL) return;
 
 	theme->get_button_preferred_size(theme, this, width, height, Label());
@@ -158,20 +158,20 @@ EButton::GetPreferredSize(float *width, float *height)
 <section id="EBUTTON_FUNCTION_CONTENT_FRAME">
 	<title>可用包容区域</title>
 	<programlisting>
-ERect EButton::ContentFrame() const
+BRect BButton::ContentFrame() const
 	</programlisting>
-	<para>EButton::ContentFrame()返回按钮扣除边界后的可用包容区域。
+	<para>BButton::ContentFrame()返回按钮扣除边界后的可用包容区域。
 		<footnote><para>可以用于派生其它类时定位要绘画的图像、文字等起点。</para></footnote>
 	</para>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-ERect
-EButton::ContentFrame() const
+BRect
+BButton::ContentFrame() const
 {
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 
-	e_theme_engine *theme = etk_get_current_theme_engine();
+	b_theme_engine *theme = bhapi_get_current_theme_engine();
 	if(!(theme == NULL || theme->get_button_border_margins == NULL))
 	{
 		float l, t, r, b;
@@ -187,13 +187,13 @@ EButton::ContentFrame() const
 
 
 void
-EButton::Draw(ERect updateRect)
+BButton::Draw(BRect updateRect)
 {
-	e_theme_engine *theme = etk_get_current_theme_engine();
+	b_theme_engine *theme = bhapi_get_current_theme_engine();
 	if(theme == NULL) return;
 
-	bool fPushed = (IsEnabled() ? Value() == E_CONTROL_ON : false);
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	bool fPushed = (IsEnabled() ? Value() == B_CONTROL_ON : false);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 
 	PushState();
 
@@ -211,7 +211,7 @@ EButton::Draw(ERect updateRect)
 	if(theme->clear_button_content != NULL)
 		theme->clear_button_content(theme, this, rect, fPushed, fInsided, fFocusFlash);
 
-	ERect contentFrame = ContentFrame();
+	BRect contentFrame = ContentFrame();
 	ConstrainClippingRegion(contentFrame);
 	MovePenTo(contentFrame.LeftTop());
 	DrawContent();
@@ -225,20 +225,20 @@ EButton::Draw(ERect updateRect)
 <section id="EBUTTON_FUNCTION_DRAW_CONTENT">
 	<title>缺省绘制标签函数</title>
 	<programlisting>
-void EButton::DrawContent()
+void BButton::DrawContent()
 	</programlisting>
-	<para>EButton::DrawContent()用于绘制标签，派生类的继承函数可类似下面做法：</para>
+	<para>BButton::DrawContent()用于绘制标签，派生类的继承函数可类似下面做法：</para>
 	<programlisting>
 void MyButton::DrawContent()
 {
-        EPoint penLocation = ContentFrame().LeftBottom();
+        BPoint penLocation = ContentFrame().LeftBottom();
         penLocation.y -= 8;
 
         MovePenTo(penLocation);
         DrawString("PREFIX:");
 
         MovePenBy(10, 0);
-        EButton::DrawContent();
+        BButton::DrawContent();
 }
 	</programlisting>
 	<para>上述示例中最后一个MovePenBy调用后视图的笔位置将
@@ -247,65 +247,65 @@ void MyButton::DrawContent()
 </document>
 -----------------------------------------------------------------------------*/
 void
-EButton::DrawContent()
+BButton::DrawContent()
 {
 	if(Label() == NULL) return;
-	e_theme_engine *theme = etk_get_current_theme_engine();
+	b_theme_engine *theme = bhapi_get_current_theme_engine();
 	if(theme == NULL || theme->draw_button_label == NULL) return;
-	theme->draw_button_label(theme, this, Frame().OffsetToSelf(E_ORIGIN), Label(),
-				 (IsEnabled() ? Value() == E_CONTROL_ON : false), fInsided, 0);
+	theme->draw_button_label(theme, this, Frame().OffsetToSelf(B_ORIGIN), Label(),
+				 (IsEnabled() ? Value() == B_CONTROL_ON : false), fInsided, 0);
 }
 
 
 void
-EButton::DetachedFromWindow()
+BButton::DetachedFromWindow()
 {
 	fInsided = false;
 	fMousePushed = false;
-	EControl::DetachedFromWindow();
+	BControl::DetachedFromWindow();
 }
 
 
 void
-EButton::MouseDown(EPoint where)
+BButton::MouseDown(BPoint where)
 {
-	if(!IsEnabled() || !QueryCurrentMouse(true, E_PRIMARY_MOUSE_BUTTON)) return;
+	if(!IsEnabled() || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON)) return;
 
-	ERect rect = VisibleBounds();
+	BRect rect = VisibleBounds();
 	if(!rect.Contains(where)) return;
-	if(Value() == E_CONTROL_ON) return;
+	if(Value() == B_CONTROL_ON) return;
 
 	if(!fMousePushed) fMousePushed = true;
 
-	if(SetPrivateEventMask(E_POINTER_EVENTS, E_LOCK_WINDOW_FOCUS) != E_OK)
+	if(SetPrivateEventMask(B_POINTER_EVENTS, B_LOCK_WINDOW_FOCUS) != B_OK)
 	{
-		SetValueNoUpdate(E_CONTROL_ON);
+		SetValueNoUpdate(B_CONTROL_ON);
 		Invalidate();
 		Window()->UpdateIfNeeded();
-		e_snooze(50000);
+		b_snooze(50000);
 		fMousePushed = false;
-		SetValueNoUpdate(E_CONTROL_OFF);
+		SetValueNoUpdate(B_CONTROL_OFF);
 		Invalidate();
 		Invoke();
 	}
 	else
 	{
-		SetValueNoUpdate(E_CONTROL_ON);
+		SetValueNoUpdate(B_CONTROL_ON);
 		Invalidate();
 	}
 }
 
 
 void
-EButton::MouseUp(EPoint where)
+BButton::MouseUp(BPoint where)
 {
 	if(!fMousePushed) return;
 
 	fMousePushed = false;
 
-	if(Value() == E_CONTROL_ON)
+	if(Value() == B_CONTROL_ON)
 	{
-		SetValueNoUpdate(E_CONTROL_OFF);
+		SetValueNoUpdate(B_CONTROL_OFF);
 		Invalidate();
 
 		Invoke();
@@ -314,11 +314,11 @@ EButton::MouseUp(EPoint where)
 
 
 void
-EButton::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
+BButton::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 {
 	if(!IsEnabled()) return;
 
-	if(code == E_ENTERED_VIEW)
+	if(code == B_ENTERED_VIEW)
 	{
 		bool update = false;
 
@@ -328,16 +328,16 @@ EButton::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
 			update = true;
 		}
 
-		if(Value() != E_CONTROL_ON && fMousePushed)
+		if(Value() != B_CONTROL_ON && fMousePushed)
 		{
-			SetValueNoUpdate(E_CONTROL_ON);
+			SetValueNoUpdate(B_CONTROL_ON);
 			update = true;
 		}
 
 		if(update) Invalidate();
 
 	}
-	else if(code == E_EXITED_VIEW)
+	else if(code == B_EXITED_VIEW)
 	{
 		bool update = false;
 
@@ -347,9 +347,9 @@ EButton::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
 			update = true;
 		}
 
-		if(Value() == E_CONTROL_ON && fMousePushed)
+		if(Value() == B_CONTROL_ON && fMousePushed)
 		{
-			SetValueNoUpdate(E_CONTROL_OFF);
+			SetValueNoUpdate(B_CONTROL_OFF);
 			update = true;
 		}
 
@@ -359,40 +359,40 @@ EButton::MouseMoved(EPoint where, euint32 code, const EMessage *a_message)
 
 
 void
-EButton::KeyDown(const char *bytes, eint32 numBytes)
+BButton::KeyDown(const char *bytes, b_int32 numBytes)
 {
 	if(!IsEnabled() || !IsFocus() || numBytes != 1) return;
 
-	if(Value() == E_CONTROL_ON) return;
+	if(Value() == B_CONTROL_ON) return;
 
-	if(!(bytes[0] == E_ENTER || bytes[0] == E_SPACE)) return;
+	if(!(bytes[0] == B_ENTER || bytes[0] == B_SPACE)) return;
 
 	fMousePushed = false;
 
-	if(SetPrivateEventMask(E_KEYBOARD_EVENTS, E_LOCK_WINDOW_FOCUS) != E_OK)
+	if(SetPrivateEventMask(B_KEYBOARD_EVENTS, B_LOCK_WINDOW_FOCUS) != B_OK)
 	{
-		SetValueNoUpdate(E_CONTROL_ON);
+		SetValueNoUpdate(B_CONTROL_ON);
 		Invalidate();
 		Window()->UpdateIfNeeded();
-		e_snooze(50000);
-		SetValueNoUpdate(E_CONTROL_OFF);
+		b_snooze(50000);
+		SetValueNoUpdate(B_CONTROL_OFF);
 		Invalidate();
 		Invoke();
 	}
 	else
 	{
-		SetValueNoUpdate(E_CONTROL_ON);
+		SetValueNoUpdate(B_CONTROL_ON);
 		Invalidate();
 	}
 }
 
 
 void
-EButton::KeyUp(const char *bytes, eint32 numBytes)
+BButton::KeyUp(const char *bytes, b_int32 numBytes)
 {
-	if(Value() != E_CONTROL_ON || fMousePushed) return;
+	if(Value() != B_CONTROL_ON || fMousePushed) return;
 
-	SetValueNoUpdate(E_CONTROL_OFF);
+	SetValueNoUpdate(B_CONTROL_OFF);
 
 	Invalidate();
 
@@ -401,22 +401,22 @@ EButton::KeyUp(const char *bytes, eint32 numBytes)
 
 
 void
-EButton::SetFont(const EFont *font, euint8 mask)
+BButton::SetFont(const BFont *font, b_uint8 mask)
 {
-	EControl::SetFont(font, mask);
+	BControl::SetFont(font, mask);
 	Invalidate();
 }
 
 
 void
-EButton::WindowActivated(bool state)
+BButton::WindowActivated(bool state)
 {
-	if(fMousePushed || Value() == E_CONTROL_ON)
+	if(fMousePushed || Value() == B_CONTROL_ON)
 	{
 		fMousePushed = false;
-		if(Value() == E_CONTROL_ON)
+		if(Value() == B_CONTROL_ON)
 		{
-			SetValueNoUpdate(E_CONTROL_OFF);
+			SetValueNoUpdate(B_CONTROL_OFF);
 			Invalidate();
 		}
 	}
@@ -424,42 +424,42 @@ EButton::WindowActivated(bool state)
 #if 0
 	if(IsFocus() == false) return;
 
-	e_theme_engine *theme = etk_get_current_theme_engine();
+	b_theme_engine *theme = bhapi_get_current_theme_engine();
 	if(theme == NULL ||
 	   theme->should_button_do_focus_flash == NULL ||
 	   theme->should_button_do_focus_flash(theme, this) == 0)
 	{
-		EControl::SetFlags(Flags() & ~E_PULSE_NEEDED);
+		BControl::SetFlags(Flags() & ~B_PULSE_NEEDED);
 	}
 
 	if(state)
-		EControl::SetFlags(Flags() | E_PULSE_NEEDED);
+		BControl::SetFlags(Flags() | B_PULSE_NEEDED);
 	else
-		EControl::SetFlags(Flags() & ~E_PULSE_NEEDED);
+		BControl::SetFlags(Flags() & ~B_PULSE_NEEDED);
 #endif
 }
 
 
 void
-EButton::MakeFocus(bool focusState)
+BButton::MakeFocus(bool focusState)
 {
 	if(focusState != IsFocus())
 	{
-		EControl::MakeFocus(focusState);
+		BControl::MakeFocus(focusState);
 		fFocusFlash = 0;
 
 #if 0
 		if(IsFocus() && Window()->IsActivate())
 		{
-			e_theme_engine *theme = etk_get_current_theme_engine();
+			b_theme_engine *theme = bhapi_get_current_theme_engine();
 			if(theme == NULL || theme->should_button_do_focus_flash == NULL) return;
 			if(theme->should_button_do_focus_flash(theme, this) == 0) return;
 
-			EControl::SetFlags(Flags() | E_PULSE_NEEDED);
+			BControl::SetFlags(Flags() | B_PULSE_NEEDED);
 		}
 		else
 		{
-			EControl::SetFlags(Flags() & ~E_PULSE_NEEDED);
+			BControl::SetFlags(Flags() & ~B_PULSE_NEEDED);
 		}
 #endif
 	}
@@ -468,28 +468,28 @@ EButton::MakeFocus(bool focusState)
 
 #if 0
 void
-EButton::SetFlags(euint32 flags)
+BButton::SetFlags(b_uint32 flags)
 {
-	flags &= ~E_PULSE_NEEDED;
-	EControl::SetFlags(flags);
+	flags &= ~B_PULSE_NEEDED;
+	BControl::SetFlags(flags);
 }
 
 
 void
-EButton::Pulse()
+BButton::Pulse()
 {
 	if(Window() == NULL || IsFocus() == false) return;
 
-	e_theme_engine *theme = etk_get_current_theme_engine();
+	b_theme_engine *theme = bhapi_get_current_theme_engine();
 	if(theme == NULL || theme->should_button_do_focus_flash == NULL) return;
 
-	eint8 shouldFlash = theme->should_button_do_focus_flash(theme, this);
+	b_int8 shouldFlash = theme->should_button_do_focus_flash(theme, this);
 	if(shouldFlash == 0) return;
 
 	Window()->DisableUpdates();
 
-	bool fPushed = (IsEnabled() ? Value() == E_CONTROL_ON : false);
-	ERect rect = Frame().OffsetToSelf(E_ORIGIN);
+	bool fPushed = (IsEnabled() ? Value() == B_CONTROL_ON : false);
+	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 
 	fFocusFlash++;
 
@@ -497,14 +497,14 @@ EButton::Pulse()
 
 	ConstrainClippingRegion(rect);
 
-	if(theme->draw_button_border != NULL && (shouldFlash & E_THEME_FOCUS_FLASH_BORDER))
+	if(theme->draw_button_border != NULL && (shouldFlash & B_THEME_FOCUS_FLASH_BORDER))
 		theme->draw_button_border(theme, this, rect, fPushed, fInsided, fFocusFlash);
 
-	if(theme->clear_button_content != NULL && (shouldFlash & E_THEME_FOCUS_FLASH_CONTENT))
+	if(theme->clear_button_content != NULL && (shouldFlash & B_THEME_FOCUS_FLASH_CONTENT))
 	{
 		theme->clear_button_content(theme, this, rect, fPushed, fInsided, fFocusFlash);
 
-		ERect contentFrame = ContentFrame();
+		BRect contentFrame = ContentFrame();
 		ConstrainClippingRegion(contentFrame);
 		MovePenTo(contentFrame.LeftTop());
 		DrawContent();

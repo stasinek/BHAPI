@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,30 +27,30 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_ENTRY_H__
-#define __ETK_ENTRY_H__ 
+#ifndef __BHAPI_ENTRY_H__
+#define __BHAPI_ENTRY_H__ 
 
 #include "./Path.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class EDirectory;
+class BDirectory;
 
-class _IMPEXP_ETK EEntry {
+class _IMPEXP_BHAPI BEntry {
 public:
-	EEntry();
-	EEntry(const char *dir, const char *leaf, bool traverse = false);
-	EEntry(const EDirectory *dir, const char *leaf, bool traverse = false);
-	EEntry(const char *path, bool traverse = false);
-	EEntry(const EEntry &entry);
-	virtual ~EEntry();
+    BEntry();
+    BEntry(const char *dir, const char *leaf, bool traverse = false);
+    BEntry(const BDirectory *dir, const char *leaf, bool traverse = false);
+    BEntry(const char *path, bool traverse = false);
+    BEntry(const BEntry &entry);
+    virtual ~BEntry();
 
-	e_status_t	SetTo(const char *dir, const char *leaf, bool traverse = false);
-	e_status_t	SetTo(const EDirectory *dir, const char *leaf, bool traverse = false);
-	e_status_t	SetTo(const char *path, bool traverse = false);
+	b_status_t	SetTo(const char *dir, const char *leaf, bool traverse = false);
+	b_status_t	SetTo(const BDirectory *dir, const char *leaf, bool traverse = false);
+	b_status_t	SetTo(const char *path, bool traverse = false);
 	void		Unset();
 
-	e_status_t	InitCheck() const;
+	b_status_t	InitCheck() const;
 
 	bool		Exists() const;
 	bool		IsHidden() const;
@@ -59,32 +59,32 @@ public:
 	bool		IsDirectory() const;
 	bool		IsSymLink() const;
 
-	e_status_t	GetSize(eint64 *file_size) const;
-	e_status_t	GetModificationTime(e_bigtime_t *time) const;
-	e_status_t	GetCreationTime(e_bigtime_t *time) const;
-	e_status_t	GetAccessTime(e_bigtime_t *time) const;
+    b_status_t	GetSize(b_int64 *file_size) const;
+    b_status_t	GetModificationTime(b_bigtime_t *time) const;
+    b_status_t	GetCreationTime(b_bigtime_t *time) const;
+    b_status_t	GetAccessTime(b_bigtime_t *time) const;
 
 	const char	*Name() const;
-	e_status_t	GetName(char *buffer, size_t bufferSize) const;
+	b_status_t	GetName(char *buffer, size_t bufferSize) const;
 
 	const char	*Path() const;
-	e_status_t	GetPath(EPath *path) const;
+    b_status_t	GetPath(BPath *path) const;
 
-	e_status_t	GetParent(EEntry *entry) const;
-	e_status_t	GetParent(EPath *path) const;
-	e_status_t	GetParent(EDirectory *dir) const;
+    b_status_t	GetParent(BEntry *entry) const;
+    b_status_t	GetParent(BPath *path) const;
+	b_status_t	GetParent(BDirectory *dir) const;
 
-	bool		operator==(const EEntry &entry) const;
-	bool		operator!=(const EEntry &entry) const;
-	EEntry&		operator=(const EEntry &entry);
+    bool		operator==(const BEntry &entry) const;
+    bool		operator!=(const BEntry &entry) const;
+    BEntry&		operator=(const BEntry &entry);
 
 private:
-	friend class EDirectory;
+	friend class BDirectory;
 
 	char *fName;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_ENTRY_H__ */
+#endif /* __BHAPI_ENTRY_H__ */
 

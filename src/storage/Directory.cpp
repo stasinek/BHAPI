@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -44,11 +44,11 @@
 #undef HAVE_DIRENT_H
 #undef HAVE_UNISTD_H
 
-typedef struct etk_win32_dir_t {
+typedef struct bhapi_win32_dir_t {
 	bool first;
     WIN32_FIND_DATAA findData;
 	HANDLE findHandle;
-} etk_win32_dir_t;
+} bhapi_win32_dir_t;
 
 #endif // _WIN32
 
@@ -60,47 +60,47 @@ typedef struct etk_win32_dir_t {
 #include <dirent.h>
 #endif // HAVE_DIRENT_H
 
-#include "./../support/String.h"
+#include "./../support/StringMe.h"
 
 #include "Directory.h"
 #include "Path.h"
 
 
-EDirectory::EDirectory()
+BDirectory::BDirectory()
 	: fDir(NULL), fName(NULL)
 {
 }
 
 
-EDirectory::EDirectory(const char *path)
+BDirectory::BDirectory(const char *path)
 	: fDir(NULL), fName(NULL)
 {
 	SetTo(path);
 }
 
 
-EDirectory::~EDirectory()
+BDirectory::~BDirectory()
 {
 	Unset();
 }
 
 
-e_status_t
-EDirectory::SetTo(const char *path)
+b_status_t
+BDirectory::SetTo(const char *path)
 {
-	if(path == NULL) return E_BAD_VALUE;
+	if(path == NULL) return B_BAD_VALUE;
 
-	EPath aPath(path, NULL, true);
-	if(aPath.Path() == NULL) return E_ENTRY_NOT_FOUND;
+	BPath aPath(path, NULL, true);
+	if(aPath.Path() == NULL) return B_ENTRY_NOT_FOUND;
 
-	char *name = EStrdup(aPath.Path());
-	if(name == NULL) return E_NO_MEMORY;
+	char *name = b_strdup(aPath.Path());
+	if(name == NULL) return B_NO_MEMORY;
 
-	e_status_t retVal = E_FILE_ERROR;
+	b_status_t retVal = B_FILE_ERROR;
 
 	const char *dirname = aPath.Path();
 #ifdef _WIN32
-	EString str(dirname);
+	BString str(dirname);
 	str.ReplaceAll("/", "\\");
 	dirname = str.String();
 #endif // _WIN32
@@ -109,7 +109,7 @@ EDirectory::SetTo(const char *path)
 #ifdef HAVE_DIRENT_H
 		struct stat statBuf;
 		if(stat(dirname, &statBuf) != 0) break;
-		if(!S_ISDIR(statBuf.st_mode)) {retVal = E_ENTRY_NOT_FOUND; break;}
+		if(!S_ISDIR(statBuf.st_mode)) {retVal = B_ENTRY_NOT_FOUND; break;}
 
 		DIR *dir = opendir(dirname);
 		if(dir == NULL) break;
@@ -117,36 +117,36 @@ EDirectory::SetTo(const char *path)
 		if(fDir != NULL) closedir((DIR*)fDir);
 		fDir = dir;
 
-		retVal = E_OK;
+		retVal = B_OK;
 #else
 #ifdef _WIN32
         DWORD attr = GetFileAttributesA(dirname);
 		if(attr == (DWORD)-1/*INVALID_FILE_ATTRIBUTES*/) break;
-		if(!(attr & FILE_ATTRIBUTE_DIRECTORY)) {retVal = E_ENTRY_NOT_FOUND; break;}
+		if(!(attr & FILE_ATTRIBUTE_DIRECTORY)) {retVal = B_ENTRY_NOT_FOUND; break;}
 
 		if(fDir == NULL)
 		{
-			if((fDir = malloc(sizeof(etk_win32_dir_t))) == NULL) {retVal = E_NO_MEMORY; break;}
-			bzero(fDir, sizeof(etk_win32_dir_t));
+			if((fDir = malloc(sizeof(bhapi_win32_dir_t))) == NULL) {retVal = B_NO_MEMORY; break;}
+			bzero(fDir, sizeof(bhapi_win32_dir_t));
 		}
 		else
 		{
-			if(((etk_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((etk_win32_dir_t*)fDir)->findHandle);
+			if(((bhapi_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((bhapi_win32_dir_t*)fDir)->findHandle);
 		}
 
 		str.Append("\\*");
 		const char *searchName = str.String();
-		((etk_win32_dir_t*)fDir)->first = true;
-        ((etk_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((etk_win32_dir_t*)fDir)->findData));
+		((bhapi_win32_dir_t*)fDir)->first = true;
+        ((bhapi_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((bhapi_win32_dir_t*)fDir)->findData));
 
-		retVal = E_OK;
+		retVal = B_OK;
 #else
-		#warning "fixme: EDirectory::SetTo"
+		#warning "fixme: BDirectory::SetTo"
 #endif // _WIN32
 #endif // HAVE_DIRENT_H
 	} while(false);
 
-	if(retVal != E_OK)
+	if(retVal != B_OK)
 	{
 		delete[] name;
 		return retVal;
@@ -155,12 +155,12 @@ EDirectory::SetTo(const char *path)
 	if(fName != NULL) delete[] fName;
 	fName = name;
 
-	return E_OK;
+	return B_OK;
 }
 
 
 void
-EDirectory::Unset()
+BDirectory::Unset()
 {
 	if(fDir != NULL)
 	{
@@ -168,11 +168,11 @@ EDirectory::Unset()
 		closedir((DIR*)fDir);
 #else
 #ifdef _WIN32
-		if(((etk_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((etk_win32_dir_t*)fDir)->findHandle);
+		if(((bhapi_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((bhapi_win32_dir_t*)fDir)->findHandle);
 		free(fDir);
 #else
-		#warning "fixme: EDirectory::Unset"
-		ETK_ERROR("[STORAGE]: %s --- Should not reach here.", __PRETTY_FUNCTION__);
+		#warning "fixme: BDirectory::Unset"
+		BHAPI_ERROR("[STORAGE]: %s --- Should not reach here.", __PRETTY_FUNCTION__);
 #endif // _WIN32
 #endif // HAVE_DIRENT_H
 		fDir = NULL;
@@ -186,59 +186,59 @@ EDirectory::Unset()
 }
 
 
-e_status_t
-EDirectory::InitCheck() const
+b_status_t
+BDirectory::InitCheck() const
 {
-	if(fName == NULL || fDir == NULL) return E_NO_INIT;
-	return E_OK;
+	if(fName == NULL || fDir == NULL) return B_NO_INIT;
+	return B_OK;
 }
 
 
-e_status_t
-EDirectory::GetEntry(EEntry *entry) const
+b_status_t
+BDirectory::GetEntry(BEntry *entry) const
 {
-	if(entry == NULL) return E_BAD_VALUE;
-	if(fName == NULL || fDir == NULL) {entry->Unset(); return E_FILE_ERROR;}
+	if(entry == NULL) return B_BAD_VALUE;
+	if(fName == NULL || fDir == NULL) {entry->Unset(); return B_FILE_ERROR;}
 
-	char *name = EStrdup(fName);
-	if(name == NULL) {entry->Unset(); return E_NO_MEMORY;}
+	char *name = b_strdup(fName);
+	if(name == NULL) {entry->Unset(); return B_NO_MEMORY;}
 
 	if(entry->fName != NULL) delete[] entry->fName;
 	entry->fName = name;
 
-	return E_OK;
+	return B_OK;
 }
 
 
-e_status_t
-EDirectory::GetNextEntry(EEntry *entry, bool traverse)
+b_status_t
+BDirectory::GetNextEntry(BEntry *entry, bool traverse)
 {
-	if(entry == NULL) return E_BAD_VALUE;
+	if(entry == NULL) return B_BAD_VALUE;
 
-	if(fName == NULL || fDir == NULL) {entry->Unset(); return E_FILE_ERROR;}
+	if(fName == NULL || fDir == NULL) {entry->Unset(); return B_FILE_ERROR;}
 
-	e_status_t retVal = E_FILE_ERROR;
+	b_status_t retVal = B_FILE_ERROR;
 
 #ifdef HAVE_DIRENT_H
 	while(true)
 	{
 		struct dirent *dirEntry = readdir((DIR*)fDir);
-		if(dirEntry == NULL) {retVal = E_ENTRY_NOT_FOUND; break;}
+		if(dirEntry == NULL) {retVal = B_ENTRY_NOT_FOUND; break;}
 		if(strlen(dirEntry->d_name) == 1 && dirEntry->d_name[0] == '.') continue;
 		if(strlen(dirEntry->d_name) == 2 && strcmp(dirEntry->d_name, "..") == 0) continue;
 
-		EPath aPath(fName, dirEntry->d_name, true);
+		BPath aPath(fName, dirEntry->d_name, true);
 #if defined(S_ISLNK)
 		if(aPath.Path() != NULL && traverse)
 		{
 			struct stat statBuf;
 			if(lstat(aPath.Path(), &statBuf) == 0 && S_ISLNK(statBuf.st_mode))
 			{
-				char buf[E_MAXPATH + 1];
-				bzero(buf, E_MAXPATH + 1);
-				if(readlink(aPath.Path(), buf, E_MAXPATH) > 0)
+				char buf[B_MAXPATH + 1];
+				bzero(buf, B_MAXPATH + 1);
+				if(readlink(aPath.Path(), buf, B_MAXPATH) > 0)
 				{
-//					ETK_DEBUG("[STORAGE]: link is %s", buf);
+//					BHAPI_DEBUG("[STORAGE]: link is %s", buf);
 					if(buf[0] != '/')
 						aPath.SetTo(fName, buf, true);
 					else
@@ -246,9 +246,9 @@ EDirectory::GetNextEntry(EEntry *entry, bool traverse)
 				}
 				else
 				{
-//					ETK_DEBUG("[STORAGE]: CAN'T read link %s", aPath.Path());
+//					BHAPI_DEBUG("[STORAGE]: CAN'T read link %s", aPath.Path());
 					aPath.Unset();
-					retVal = E_LINK_LIMIT;
+					retVal = B_LINK_LIMIT;
 				}
 			}
 		}
@@ -257,93 +257,93 @@ EDirectory::GetNextEntry(EEntry *entry, bool traverse)
 #endif // S_ISLNK
 		if(aPath.Path() == NULL) continue;
 
-		char *name = EStrdup(aPath.Path());
-		if(name == NULL) {retVal = E_NO_MEMORY; break;}
+		char *name = b_strdup(aPath.Path());
+		if(name == NULL) {retVal = B_NO_MEMORY; break;}
 
 		if(entry->fName != NULL) delete[] entry->fName;
 		entry->fName = name;
 
-		retVal = E_OK;
+		retVal = B_OK;
 
 		break;
 	}
 #else
 #ifdef _WIN32
-	if(((etk_win32_dir_t*)fDir)->findHandle == INVALID_HANDLE_VALUE) retVal = E_ENTRY_NOT_FOUND;
+	if(((bhapi_win32_dir_t*)fDir)->findHandle == INVALID_HANDLE_VALUE) retVal = B_ENTRY_NOT_FOUND;
 	else while(true)
 	{
-		if(((etk_win32_dir_t*)fDir)->first)
+		if(((bhapi_win32_dir_t*)fDir)->first)
 		{
-			((etk_win32_dir_t*)fDir)->first = false;
+			((bhapi_win32_dir_t*)fDir)->first = false;
 		}
 		else
 		{
-            if(FindNextFileA(((etk_win32_dir_t*)fDir)->findHandle,
-					&(((etk_win32_dir_t*)fDir)->findData)) == 0) {retVal = E_ENTRY_NOT_FOUND; break;}
+            if(FindNextFileA(((bhapi_win32_dir_t*)fDir)->findHandle,
+					&(((bhapi_win32_dir_t*)fDir)->findData)) == 0) {retVal = B_ENTRY_NOT_FOUND; break;}
 		}
 
-		const char *filename = ((etk_win32_dir_t*)fDir)->findData.cFileName;
+		const char *filename = ((bhapi_win32_dir_t*)fDir)->findData.cFileName;
 		if(filename[0] == '.' && (filename[1] == 0 || (filename[1] == '.' && filename[2] == 0))) continue;
 
-		EPath aPath(fName, filename, true);
+		BPath aPath(fName, filename, true);
 		if(aPath.Path() == NULL) continue;
 
-		char *name = EStrdup(aPath.Path());
-		if(name == NULL) {retVal = E_NO_MEMORY; break;}
+		char *name = b_strdup(aPath.Path());
+		if(name == NULL) {retVal = B_NO_MEMORY; break;}
 
 		if(entry->fName != NULL) delete[] entry->fName;
 		entry->fName = name;
 
-		retVal = E_OK;
+		retVal = B_OK;
 
 		break;
 	};
 #else
-	#warning "fixme: EDirectory::GetNextEntry"
+	#warning "fixme: BDirectory::GetNextEntry"
 #endif // _WIN32
 #endif // HAVE_DIRENT_H
 
-	if(retVal != E_OK) entry->Unset();
+	if(retVal != B_OK) entry->Unset();
 	return retVal;
 }
 
 
-e_status_t
-EDirectory::Rewind()
+b_status_t
+BDirectory::Rewind()
 {
-	if(fName == NULL || fDir == NULL) return E_FILE_ERROR;
+	if(fName == NULL || fDir == NULL) return B_FILE_ERROR;
 
 #ifdef HAVE_DIRENT_H
 	rewinddir((DIR*)fDir);
-	return E_OK;
+	return B_OK;
 #else
 #ifdef _WIN32
-	EString str(fName);
+	BString str(fName);
 	str.ReplaceAll("/", "\\");
 	str.Append("\\*");
 	const char *searchName = str.String();
 
-	if(((etk_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((etk_win32_dir_t*)fDir)->findHandle);
-	((etk_win32_dir_t*)fDir)->first = true;
-    ((etk_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((etk_win32_dir_t*)fDir)->findData));
-	return E_OK;
+	if(((bhapi_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((bhapi_win32_dir_t*)fDir)->findHandle);
+	((bhapi_win32_dir_t*)fDir)->first = true;
+    ((bhapi_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((bhapi_win32_dir_t*)fDir)->findData));
+	return B_OK;
 #else
-	#warning "fixme: EDirectory::Rewind"
-	return E_ERROR;
+	#warning "fixme: BDirectory::Rewind"
+	return B_ERROR;
 #endif // _WIN32
 #endif // HAVE_DIRENT_H
 }
 
 
-eint32
-EDirectory::CountEntries()
+b_int32
+BDirectory::CountEntries()
 {
 	if(fName == NULL || fDir == NULL) return 0;
 
 #ifdef HAVE_DIRENT_H
 	rewinddir((DIR*)fDir);
 
-	eint32 count = 0;
+	b_int32 count = 0;
 	while(true)
 	{
 		struct dirent *dirEntry = readdir((DIR*)fDir);
@@ -358,31 +358,31 @@ EDirectory::CountEntries()
 	return count;
 #else
 #ifdef _WIN32
-	EString str(fName);
+	BString str(fName);
 	str.ReplaceAll("/", "\\");
 	str.Append("\\*");
 	const char *searchName = str.String();
 
-	if(((etk_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((etk_win32_dir_t*)fDir)->findHandle);
-	((etk_win32_dir_t*)fDir)->first = true;
-    ((etk_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((etk_win32_dir_t*)fDir)->findData));
-	if(((etk_win32_dir_t*)fDir)->findHandle == INVALID_HANDLE_VALUE) return 0;
+	if(((bhapi_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((bhapi_win32_dir_t*)fDir)->findHandle);
+	((bhapi_win32_dir_t*)fDir)->first = true;
+    ((bhapi_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((bhapi_win32_dir_t*)fDir)->findData));
+	if(((bhapi_win32_dir_t*)fDir)->findHandle == INVALID_HANDLE_VALUE) return 0;
 
-	eint32 count = 0;
+	b_int32 count = 0;
 	do {
-		const char *filename = ((etk_win32_dir_t*)fDir)->findData.cFileName;
+		const char *filename = ((bhapi_win32_dir_t*)fDir)->findData.cFileName;
 		if(strlen(filename) == 1 && filename[0] == '.') continue;
 		if(strlen(filename) == 2 && strcmp(filename, "..") == 0) continue;
 		count++;
-    }while(FindNextFileA(((etk_win32_dir_t*)fDir)->findHandle, &(((etk_win32_dir_t*)fDir)->findData)) != 0);
+    }while(FindNextFileA(((bhapi_win32_dir_t*)fDir)->findHandle, &(((bhapi_win32_dir_t*)fDir)->findData)) != 0);
 
-	FindClose(((etk_win32_dir_t*)fDir)->findHandle);
-	((etk_win32_dir_t*)fDir)->first = true;
-    ((etk_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((etk_win32_dir_t*)fDir)->findData));
+	FindClose(((bhapi_win32_dir_t*)fDir)->findHandle);
+	((bhapi_win32_dir_t*)fDir)->first = true;
+    ((bhapi_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((bhapi_win32_dir_t*)fDir)->findData));
 
 	return count;
 #else
-	#warning "fixme: EDirectory::CountEntries"
+	#warning "fixme: BDirectory::CountEntries"
 	return 0;
 #endif
 #endif // HAVE_DIRENT_H
@@ -390,18 +390,18 @@ EDirectory::CountEntries()
 
 
 void
-EDirectory::DoForEach(bool (*func)(const char *path))
+BDirectory::DoForEach(bool (*func)(const char *path))
 {
-	EEntry aEntry;
-	EPath aPath;
+	BEntry aEntry;
+	BPath aPath;
 
-	if(InitCheck() != E_OK || func == NULL) return;
+	if(InitCheck() != B_OK || func == NULL) return;
 
 	Rewind();
 
-	while(GetNextEntry(&aEntry, true) == E_OK)
+	while(GetNextEntry(&aEntry, true) == B_OK)
 	{
-		if(aEntry.GetPath(&aPath) != E_OK) continue;
+		if(aEntry.GetPath(&aPath) != B_OK) continue;
 
 		if((*func)(aPath.Path())) break;
 	}
@@ -411,18 +411,18 @@ EDirectory::DoForEach(bool (*func)(const char *path))
 
 
 void
-EDirectory::DoForEach(bool (*func)(const char *path, void *user_data), void *user_data)
+BDirectory::DoForEach(bool (*func)(const char *path, void *user_data), void *user_data)
 {
-	EEntry aEntry;
-	EPath aPath;
+	BEntry aEntry;
+	BPath aPath;
 
-	if(InitCheck() != E_OK || func == NULL) return;
+	if(InitCheck() != B_OK || func == NULL) return;
 
 	Rewind();
 
-	while(GetNextEntry(&aEntry, true) == E_OK)
+	while(GetNextEntry(&aEntry, true) == B_OK)
 	{
-		if(aEntry.GetPath(&aPath) != E_OK) continue;
+		if(aEntry.GetPath(&aPath) != B_OK) continue;
 
 		if((*func)(aPath.Path(), user_data)) break;
 	}

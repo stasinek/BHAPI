@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -40,53 +40,53 @@ EDataIO::~EDataIO()
 }
 
 
-EPositionIO::EPositionIO()
+BPositionIO::BPositionIO()
 	: EDataIO()
 {
 }
 
 
-EPositionIO::~EPositionIO()
+BPositionIO::~BPositionIO()
 {
 }
 
 
 ssize_t
-EPositionIO::Read(void *buffer, size_t size)
+BPositionIO::Read(void *buffer, size_t size)
 {
 	return ReadAt(0, buffer, size);
 }
 
 
 ssize_t
-EPositionIO::Write(const void *buffer, size_t size)
+BPositionIO::Write(const void *buffer, size_t size)
 {
 	return WriteAt(0, buffer, size);
 }
 
 
-EMallocIO::EMallocIO()
-	: EPositionIO(), fData(NULL), fBlockSize(256), fMallocSize(0), fLength(0), fPosition(0)
+BMallocIO::BMallocIO()
+	: BPositionIO(), fData(NULL), fBlockSize(256), fMallocSize(0), fLength(0), fPosition(0)
 {
 }
 
 
-EMallocIO::~EMallocIO()
+BMallocIO::~BMallocIO()
 {
 	if(fData != NULL) free(fData);
 }
 
 
 ssize_t
-EMallocIO::ReadAt(eint64 pos, void *buffer, size_t size)
+BMallocIO::ReadAt(b_int64 pos, void *buffer, size_t size)
 {
-	if(buffer == NULL) return E_BAD_VALUE;
+	if(buffer == NULL) return B_BAD_VALUE;
 
-	if(size == 0 || EMallocIO::Seek(pos, E_SEEK_CUR) < 0) return 0;
+	if(size == 0 || BMallocIO::Seek(pos, B_SEEK_CUR) < 0) return 0;
 	if(fPosition >= fLength) return 0;
 
 	size = min_c(size, fLength - fPosition);
-	if(memcpy(buffer, fData + fPosition, size) == NULL) return E_ERROR;
+	if(memcpy(buffer, fData + fPosition, size) == NULL) return B_ERROR;
 
 	fPosition += size;
 	return size;
@@ -94,52 +94,52 @@ EMallocIO::ReadAt(eint64 pos, void *buffer, size_t size)
 
 
 ssize_t
-EMallocIO::WriteAt(eint64 pos, const void *buffer, size_t size)
+BMallocIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
 {
-	if(buffer == NULL) return E_BAD_VALUE;
+	if(buffer == NULL) return B_BAD_VALUE;
 
-	if(size == 0 || EMallocIO::Seek(pos, E_SEEK_CUR) < 0) return 0;
+	if(size == 0 || BMallocIO::Seek(pos, B_SEEK_CUR) < 0) return 0;
 
 	if(fMallocSize >= fPosition + size ||
-	   EMallocIO::SetSize((eint64)(fPosition + size)) == E_OK ||
+	   BMallocIO::SetSize((b_int64)(fPosition + size)) == B_OK ||
 	   (fMallocSize >= fPosition ? (size = min_c(size, fMallocSize - fPosition)) > 0 : false))
 	{
-		if(memcpy(fData + fPosition, buffer, size) == NULL) return E_ERROR;
+		if(memcpy(fData + fPosition, buffer, size) == NULL) return B_ERROR;
 		fPosition += size;
 		if(fLength < fPosition) fLength = fPosition;
 		return size;
 	}
-	return E_NO_MEMORY;
+	return B_NO_MEMORY;
 }
 
 
-eint64
-EMallocIO::Seek(eint64 position, euint32 seek_mode)
+b_int64
+BMallocIO::Seek(b_int64 position, b_uint32 seek_mode)
 {
-	eint64 retVal = E_INT64_CONSTANT(-1);
+	b_int64 retVal = B_INT64_CONSTANT(-1);
 
 	switch(seek_mode)
 	{
-		case E_SEEK_SET:
-			if(!(position < 0 || position > (eint64)~((size_t)0)))
+		case B_SEEK_SET:
+			if(!(position < 0 || position > (b_int64)~((size_t)0)))
 				fPosition = (size_t)(retVal = position);
 			break;
 
-		case E_SEEK_CUR:
-			if(position < 0 ? (eint64)fPosition >= -position : position <= (eint64)(~((size_t)0) - fPosition))
+		case B_SEEK_CUR:
+			if(position < 0 ? (b_int64)fPosition >= -position : position <= (b_int64)(~((size_t)0) - fPosition))
 			{
 				if(position < 0) fPosition -= (size_t)(-position);
 				else fPosition += (size_t)position;
-				retVal = (eint64)fPosition;
+				retVal = (b_int64)fPosition;
 			}
 			break;
 
-		case E_SEEK_END:
-			if(position < 0 ? (eint64)fLength >= -position : position <= (eint64)(~((size_t)0) - fLength))
+		case B_SEEK_END:
+			if(position < 0 ? (b_int64)fLength >= -position : position <= (b_int64)(~((size_t)0) - fLength))
 			{
 				if(position < 0) fPosition = fLength - (size_t)(-position);
 				else fPosition = fLength + (size_t)position;
-				retVal = (eint64)fPosition;
+				retVal = (b_int64)fPosition;
 			}
 			break;
 
@@ -151,35 +151,35 @@ EMallocIO::Seek(eint64 position, euint32 seek_mode)
 }
 
 
-eint64
-EMallocIO::Position() const
+b_int64
+BMallocIO::Position() const
 {
-	return (eint64)fPosition;
+	return (b_int64)fPosition;
 }
 
 
-e_status_t
-EMallocIO::SetSize(eint64 size)
+b_status_t
+BMallocIO::SetSize(b_int64 size)
 {
-	if(size < 0) return E_BAD_VALUE;
+	if(size < 0) return B_BAD_VALUE;
 	if(size == 0)
 	{
 		if(fData) free(fData);
 		fData = NULL;
 		fPosition = fLength = fMallocSize = 0;
-		return E_OK;
+		return B_OK;
 	}
 
-	eint64 alloc_size = size >= E_MAXINT64 - fBlockSize ?
-				E_MAXINT64 : ((size + (eint64)fBlockSize - 1) & ~((eint64)fBlockSize - 1));
+	b_int64 alloc_size = size >= B_MAXINT64 - fBlockSize ?
+			    B_MAXINT64 : ((size + (b_int64)fBlockSize - 1) & ~((b_int64)fBlockSize - 1));
 
-	if(alloc_size > (eint64)~((size_t)0)) alloc_size = (eint64)~((size_t)0);
-	if(alloc_size != (eint64)fMallocSize)
+	if(alloc_size > (b_int64)~((size_t)0)) alloc_size = (b_int64)~((size_t)0);
+	if(alloc_size != (b_int64)fMallocSize)
 	{
 		char *data = (char*)realloc(fData, (size_t)alloc_size);
 		if(data == NULL)
 		{
-			if(size > (eint64)fMallocSize) return E_NO_MEMORY;
+			if(size > (b_int64)fMallocSize) return B_NO_MEMORY;
 		}
 		else
 		{
@@ -190,60 +190,60 @@ EMallocIO::SetSize(eint64 size)
 
 	fLength = (size_t)size;
 
-	return E_OK;
+	return B_OK;
 }
 
 
 void
-EMallocIO::SetBlockSize(size_t blocksize)
+BMallocIO::SetBlockSize(size_t blocksize)
 {
 	fBlockSize = blocksize;
 }
 
 
 const void*
-EMallocIO::Buffer() const
+BMallocIO::Buffer() const
 {
 	return((const void*)fData);
 }
 
 
 size_t
-EMallocIO::BufferLength()
+BMallocIO::BufferLength()
 {
 	return fLength;
 }
 
 
-EMemoryIO::EMemoryIO(void *ptr, size_t length)
-	: EPositionIO(), fReadOnly(false), fBuffer((char*)ptr), fLen(length), fRealLen(length), fPosition(0)
+BMemoryIO::BMemoryIO(void *ptr, size_t length)
+	: BPositionIO(), fReadOnly(false), fBuffer((char*)ptr), fLen(length), fRealLen(length), fPosition(0)
 {
 	if(fBuffer == NULL) fRealLen = fLen = 0;
 }
 
 
-EMemoryIO::EMemoryIO(const void *ptr, size_t length)
-	: EPositionIO(), fReadOnly(true), fBuffer((char*)ptr), fLen(length), fRealLen(length), fPosition(0)
+BMemoryIO::BMemoryIO(const void *ptr, size_t length)
+	: BPositionIO(), fReadOnly(true), fBuffer((char*)ptr), fLen(length), fRealLen(length), fPosition(0)
 {
 	if(fBuffer == NULL) fRealLen = fLen = 0;
 }
 
 
-EMemoryIO::~EMemoryIO()
+BMemoryIO::~BMemoryIO()
 {
 }
 
 
 ssize_t
-EMemoryIO::ReadAt(eint64 pos, void *buffer, size_t size)
+BMemoryIO::ReadAt(b_int64 pos, void *buffer, size_t size)
 {
-	if(buffer == NULL) return E_BAD_VALUE;
+	if(buffer == NULL) return B_BAD_VALUE;
 
-	if(size == 0 || EMemoryIO::Seek(pos, E_SEEK_CUR) < 0) return 0;
+	if(size == 0 || BMemoryIO::Seek(pos, B_SEEK_CUR) < 0) return 0;
 	if(fPosition >= fLen) return 0;
 
 	size = min_c(size, fLen - fPosition);
-	if(memcpy(buffer, fBuffer + fPosition, size) == NULL) return E_ERROR;
+	if(memcpy(buffer, fBuffer + fPosition, size) == NULL) return B_ERROR;
 
 	fPosition += size;
 	return size;
@@ -251,17 +251,17 @@ EMemoryIO::ReadAt(eint64 pos, void *buffer, size_t size)
 
 
 ssize_t
-EMemoryIO::WriteAt(eint64 pos, const void *buffer, size_t size)
+BMemoryIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
 {
-	if(fReadOnly) return E_NOT_ALLOWED;
-	if(buffer == NULL) return E_BAD_VALUE;
+	if(fReadOnly) return B_NOT_ALLOWED;
+	if(buffer == NULL) return B_BAD_VALUE;
 
-	if(size == 0 || EMemoryIO::Seek(pos, E_SEEK_CUR) < 0) return 0;
+	if(size == 0 || BMemoryIO::Seek(pos, B_SEEK_CUR) < 0) return 0;
 
 	if(fLen > fPosition)
 	{
 		size = min_c(size, fLen - fPosition);
-		if(memcpy(fBuffer + fPosition, buffer, size) == NULL) return E_ERROR;
+		if(memcpy(fBuffer + fPosition, buffer, size) == NULL) return B_ERROR;
 		fPosition += size;
 		return size;
 	}
@@ -270,33 +270,33 @@ EMemoryIO::WriteAt(eint64 pos, const void *buffer, size_t size)
 }
 
 
-eint64
-EMemoryIO::Seek(eint64 position, euint32 seek_mode)
+b_int64
+BMemoryIO::Seek(b_int64 position, b_uint32 seek_mode)
 {
-	eint64 retVal = E_INT64_CONSTANT(-1);
+	b_int64 retVal = B_INT64_CONSTANT(-1);
 
 	switch(seek_mode)
 	{
-		case E_SEEK_SET:
-			if(!(position < 0 || position > (eint64)fRealLen))
+		case B_SEEK_SET:
+			if(!(position < 0 || position > (b_int64)fRealLen))
 				fPosition = (size_t)(retVal = position);
 			break;
 
-		case E_SEEK_CUR:
-			if(position < 0 ? (eint64)fPosition >= -position : position <= (eint64)(fRealLen - fPosition))
+		case B_SEEK_CUR:
+			if(position < 0 ? (b_int64)fPosition >= -position : position <= (b_int64)(fRealLen - fPosition))
 			{
 				if(position < 0) fPosition -= (size_t)(-position);
 				else fPosition += (size_t)position;
-				retVal = (eint64)fPosition;
+				retVal = (b_int64)fPosition;
 			}
 			break;
 
-		case E_SEEK_END:
-			if(position < 0 ? (eint64)fLen >= -position : position <= (eint64)(fRealLen - fLen))
+		case B_SEEK_END:
+			if(position < 0 ? (b_int64)fLen >= -position : position <= (b_int64)(fRealLen - fLen))
 			{
 				if(position < 0) fPosition = fLen - (size_t)(-position);
 				else fPosition = fLen + (size_t)position;
-				retVal = (eint64)fPosition;
+				retVal = (b_int64)fPosition;
 			}
 			break;
 
@@ -308,18 +308,18 @@ EMemoryIO::Seek(eint64 position, euint32 seek_mode)
 }
 
 
-eint64
-EMemoryIO::Position() const
+b_int64
+BMemoryIO::Position() const
 {
-	return (eint64)fPosition;
+	return (b_int64)fPosition;
 }
 
 
-e_status_t
-EMemoryIO::SetSize(eint64 size)
+b_status_t
+BMemoryIO::SetSize(b_int64 size)
 {
-	if(size > (eint64)fRealLen) return E_NO_MEMORY;
+	if(size > (b_int64)fRealLen) return B_NO_MEMORY;
 	fLen = (size_t)size;
-	return E_OK;
+	return B_OK;
 }
 

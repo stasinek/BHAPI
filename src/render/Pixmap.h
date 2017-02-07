@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,60 +27,60 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_PIXMAP_H__
-#define __ETK_PIXMAP_H__
+#ifndef __BHAPI_PIXMAP_H__
+#define __BHAPI_PIXMAP_H__
 
 #include "./../interface/Region.h"
 #include "./../render/Render.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EPixmap : public ERender {
+class _IMPEXP_BHAPI BPixmap : public BRender {
 public:
-	EPixmap();
-	EPixmap(euint32 width, euint32 height, e_color_space space);
-	EPixmap(ERect bounds, e_color_space space);
-	virtual ~EPixmap();
+    BPixmap();
+    BPixmap(b_uint32 width, b_uint32 height, b_color_space space);
+    BPixmap(BRect bounds, b_color_space space);
+    virtual ~BPixmap();
 
 	void*		Bits() const;
-	euint32		BitsLength() const;
-	euint32		BytesPerRow() const;
-	e_color_space	ColorSpace() const;
-	ERect		Bounds() const;
+    b_uint32		BitsLength() const;
+    b_uint32		BytesPerRow() const;
+	b_color_space	ColorSpace() const;
+    BRect		Bounds() const;
 	void		MakeEmpty();
 
-	bool		ResizeTo(euint32 width, euint32 height, e_color_space space);
-	bool		ResizeTo(ERect bounds, e_color_space space);
+    bool		ResizeTo(b_uint32 width, b_uint32 height, b_color_space space);
+    bool		ResizeTo(BRect bounds, b_color_space space);
 
-	void		SetBits(const void *data, eint32 length, eint32 offset, e_color_space space);
+    void		SetBits(const void *data, b_int32 length, b_int32 offset, b_color_space space);
 
-	void		SetPixel(eint32 x, eint32 y, e_rgb_color color);
-	e_rgb_color	GetPixel(eint32 x, eint32 y) const;
+    void		SetPixel(b_int32 x, b_int32 y, b_rgb_color color);
+    b_rgb_color	GetPixel(b_int32 x, b_int32 y) const;
 
 	void		DrawXPM(const char **xpm_data,
-				eint32 destX, eint32 destY,
-				eint32 srcX, eint32 srcY,
-				eint32 srcW = -1, eint32 srcH = -1,
-				euint8 alpha = 255);
+                b_int32 destX, b_int32 destY,
+                b_int32 srcX, b_int32 srcY,
+                b_int32 srcW = -1, b_int32 srcH = -1,
+                b_uint8 alpha = 255);
 
 private:
 	void* fPtr;
-	e_color_space fColorSpace;
-	euint32 fRows;
-	euint32 fColumns;
-	euint32 fRowBytes;
+	b_color_space fColorSpace;
+    b_uint32 fRows;
+    b_uint32 fColumns;
+    b_uint32 fRowBytes;
 
 	virtual void *AllocData(size_t size);
 	virtual void FreeData(void *data);
 
-	virtual e_status_t InitCheck() const;
-	virtual void GetFrame(eint32 *originX, eint32 *originY, euint32 *width, euint32 *height) const;
-	virtual void GetPixel(eint32 x, eint32 y, e_rgb_color &color) const;
-	virtual void PutPixel(eint32 x, eint32 y, e_rgb_color color);
-	virtual void PutRect(eint32 x, eint32 y, euint32 width, euint32 height, e_rgb_color color);
+	virtual b_status_t InitCheck() const;
+    virtual void GetFrame(b_int32 *originX, b_int32 *originY, b_uint32 *width, b_uint32 *height) const;
+    virtual void GetPixel(b_int32 x, b_int32 y, b_rgb_color &color) const;
+    virtual void PutPixel(b_int32 x, b_int32 y, b_rgb_color color);
+    virtual void PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, b_rgb_color color);
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_PIXMAP_H__ */
+#endif /* __BHAPI_PIXMAP_H__ */
 

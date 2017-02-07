@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -27,44 +27,44 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __ETK_FILE_PANEL_H__
-#define __ETK_FILE_PANEL_H__
+#ifndef __BHAPI_FILE_PANEL_H__
+#define __BHAPI_FILE_PANEL_H__
 
 #include "./../interface/Window.h"
 #include "./../storage/Directory.h"
 
-typedef enum e_file_panel_mode {
-	E_OPEN_PANEL,
-	E_SAVE_PANEL
-} e_file_panel_mode;
+typedef enum b_file_panel_mode {
+    B_OPEN_PANEL,
+    B_SAVE_PANEL
+} b_file_panel_mode;
 
-typedef enum e_file_panel_button {
-	E_CANCEL_BUTTON,
-	E_DEFAULT_BUTTON
-} e_file_panel_button;
+typedef enum b_file_panel_button {
+    B_CANCEL_BUTTON,
+    B_DEFAULT_BUTTON
+} b_file_panel_button;
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_ETK EFilePanelFilter {
+class _IMPEXP_BHAPI BFilePanelFilter {
 public:
-	virtual ~EFilePanelFilter();
+	virtual ~BFilePanelFilter();
 
-	virtual bool		Filter(const EEntry *entry) = 0;
+	virtual bool		Filter(const BEntry *entry) = 0;
 };
 
 
-class _IMPEXP_ETK EFilePanel {
+class _IMPEXP_BHAPI BFilePanel {
 public:
-	EFilePanel(e_file_panel_mode mode = E_OPEN_PANEL,
-		   const EMessenger *target = NULL,
+    BFilePanel(b_file_panel_mode mode = B_OPEN_PANEL,
+           const BMessenger *target = NULL,
 		   const char *panel_directory = NULL,
-		   euint32 node_flavors = 0,
+           b_uint32 node_flavors = 0,
 		   bool allow_multiple_selection = true,
-		   const EMessage *message = NULL,
-		   EFilePanelFilter *filter = NULL,
+           const BMessage *message = NULL,
+		   BFilePanelFilter *filter = NULL,
 		   bool modal = false,
 		   bool hide_when_done = true);
-	virtual ~EFilePanel();
+	virtual ~BFilePanel();
 
 	void			Show();
 	void			Hide();
@@ -75,41 +75,41 @@ public:
 	virtual void		SelectionChanged();
 	// Empty functions END
 
-	virtual void		SendMessage(const EMessenger *msgr, EMessage *msg);
+    virtual void		SendMessage(const BMessenger *msgr, BMessage *msg);
 
-	EWindow			*Window() const;
-	EMessenger		*Target() const;
-	EFilePanelFilter	*Filter() const;
+    BWindow			*Window() const;
+    BMessenger		*Target() const;
+	BFilePanelFilter	*Filter() const;
 
-	e_file_panel_mode	PanelMode() const;
+	b_file_panel_mode	PanelMode() const;
 
-	void			SetTarget(const EMessenger *target);
-	void			SetMessage(const EMessage *msg);
+    void			SetTarget(const BMessenger *target);
+    void			SetMessage(const BMessage *msg);
 
-	void			SetFilter(EFilePanelFilter *filter);
+	void			SetFilter(BFilePanelFilter *filter);
 	void			SetSaveText(const char *text);
-	void			SetButtonLabel(e_file_panel_button btn, const char *label);
+    void			SetButtonLabel(b_file_panel_button btn, const char *label);
 
 	void			SetHideWhenDone(bool state);
 	bool			HidesWhenDone() const;
 
-	void			GetPanelDirectory(EEntry *entry) const;
-	void			GetPanelDirectory(EPath *path) const;
-	void			GetPanelDirectory(EDirectory *directory) const;
+	void			GetPanelDirectory(BEntry *entry) const;
+    void			GetPanelDirectory(BPath *path) const;
+	void			GetPanelDirectory(BDirectory *directory) const;
 
-	void			SetPanelDirectory(const EEntry *entry);
-	void			SetPanelDirectory(const EDirectory *directory);
+	void			SetPanelDirectory(const BEntry *entry);
+	void			SetPanelDirectory(const BDirectory *directory);
 	void			SetPanelDirectory(const char *directory);
 
 	void			Refresh();
 	void			Rewind();
-	e_status_t		GetNextSelected(EEntry *entry);
+	b_status_t		GetNextSelected(BEntry *entry);
 
 private:
-	EWindow *fWindow;
+    BWindow *fWindow;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __ETK_FILE_PANEL_H__ */
+#endif /* __BHAPI_FILE_PANEL_H__ */
 

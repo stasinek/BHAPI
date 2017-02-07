@@ -1,9 +1,9 @@
 /* --------------------------------------------------------------------------
  *
- * ETK++ --- The Easy Toolkit for C++ programing
+ * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
- * ETK++ library is a freeware; it may be used and distributed according to
+ * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -42,80 +42,80 @@
 #include "./../../support/Autolock.h"
 #include "./../../storage/Directory.h"
 
-#ifdef ETK_OS_BEOS
+#ifdef BHAPI_OS_BEOS
 #define FT_ENCODING_UNICODE		ft_encoding_unicode
 #define FT_ENCODING_NONE		ft_encoding_none
 #define FT_PIXEL_MODE_GRAY		ft_pixel_mode_grays
 #define FT_PIXEL_MODE_MONO		ft_pixel_mode_mono
 #endif
 
-static FT_Library _etk_ft2_library_;
-static bool _etk_ft2_initialized_ = false;
-static ELocker etk_ft2_font_locker;
+static FT_Library _bhapi_ft2_library_;
+static bool _bhapi_ft2_initialized_ = false;
+static BLocker bhapi_ft2_font_locker;
 
-_IMPEXP_ETK bool etk_font_freetype2_init(void)
+_IMPEXP_BHAPI bool bhapi_font_freetype2_init(void)
 {
-	EAutolock <ELocker> autolock(&etk_ft2_font_locker);
+	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
-	if(!_etk_ft2_initialized_)
+	if(!_bhapi_ft2_initialized_)
 	{
-		FT_Error error = FT_Init_FreeType(&_etk_ft2_library_);
+		FT_Error error = FT_Init_FreeType(&_bhapi_ft2_library_);
 		if(error)
 		{
-			ETK_WARNING("[FONT]: %s --- CAN NOT initialize freetype engine %d\n", __PRETTY_FUNCTION__, error);
+			BHAPI_WARNING("[FONT]: %s --- CAN NOT initialize freetype engine %d\n", __PRETTY_FUNCTION__, error);
 			return false;
 		}
-		_etk_ft2_initialized_ = true;
+		_bhapi_ft2_initialized_ = true;
 	}
 
 	return true;
 }
 
 
-_IMPEXP_ETK bool etk_font_freetype2_is_valid(void)
+_IMPEXP_BHAPI bool bhapi_font_freetype2_is_valid(void)
 {
-	EAutolock <ELocker> autolock(&etk_ft2_font_locker);
+	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
-	return _etk_ft2_initialized_;
+	return _bhapi_ft2_initialized_;
 }
 
 
-_IMPEXP_ETK void etk_font_freetype2_cancel(void)
+_IMPEXP_BHAPI void bhapi_font_freetype2_cancel(void)
 {
-	EAutolock <ELocker> autolock(&etk_ft2_font_locker);
+	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
-	if(_etk_ft2_initialized_)
+	if(_bhapi_ft2_initialized_)
 	{
-		FT_Done_FreeType(_etk_ft2_library_);
-		_etk_ft2_initialized_ = false;
+		FT_Done_FreeType(_bhapi_ft2_library_);
+		_bhapi_ft2_initialized_ = false;
 	}
 }
 
 
-class EFontFT2 : public EFontEngine {
+class BFontFT2 : public BFontEngine {
 public:
-	EFontFT2(const EEntry *entry, eint32 faceIndex);
-	virtual ~EFontFT2();
+	BFontFT2(const BEntry *entry, b_int32 faceIndex);
+	virtual ~BFontFT2();
 
-	eint32 CountFaces() const;
+	b_int32 CountFaces() const;
 
 	virtual bool IsValid() const;
 
 	virtual bool IsScalable() const;
 	virtual void ForceFontAliasing(bool enable);
 
-	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold, eint32 length) const;
-	virtual void GetHeight(e_font_height *height, float size, float shear, bool bold) const;
-	virtual euint8* RenderString(const char *string, eint32 *width, eint32 *height, bool *is_mono,
-				     float size, float spacing, float shear, bool bold, eint32 length);
+	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold, b_int32 length) const;
+	virtual void GetHeight(b_font_height *height, float size, float shear, bool bold) const;
+	virtual b_uint8* RenderString(const char *string, b_int32 *width, b_int32 *height, bool *is_mono,
+				     float size, float spacing, float shear, bool bold, b_int32 length);
 
-	virtual e_font_detach_callback* Attach(void (*callback)(void*), void *data);
-	virtual bool Detach(e_font_detach_callback *callback);
+	virtual b_font_detach_callback* Attach(void (*callback)(void*), void *data);
+	virtual bool Detach(b_font_detach_callback *callback);
 
 private:
 	char *fFilename;
-	eint32 fFaceIndex;
-	eint32 nFaces;
+	b_int32 fFaceIndex;
+	b_int32 nFaces;
 	FT_Face fFace;
 	bool fScalable;
 	bool fForceFontAliasing;
@@ -124,56 +124,56 @@ private:
 };
 
 
-EFontFT2::EFontFT2(const EEntry *entry, eint32 faceIndex)
-	: EFontEngine(), fFilename(NULL), fFaceIndex(-1), nFaces(-1), fFace(NULL), fScalable(false), fForceFontAliasing(false)
+BFontFT2::BFontFT2(const BEntry *entry, b_int32 faceIndex)
+	: BFontEngine(), fFilename(NULL), fFaceIndex(-1), nFaces(-1), fFace(NULL), fScalable(false), fForceFontAliasing(false)
 {
-	EPath aPath;
-	if(entry == NULL || entry->Exists() == false || entry->GetPath(&aPath) != E_OK) return;
-	EString filename = aPath.Path();
+	BPath aPath;
+	if(entry == NULL || entry->Exists() == false || entry->GetPath(&aPath) != B_OK) return;
+    BString filename = aPath.Path();
 #ifdef _WIN32
 	filename.ReplaceAll("/", "\\");
 #endif
 
-	SetRenderMode(E_FONT_RENDER_PIXMAP);
+	SetRenderMode(B_FONT_RENDER_PIXMAP);
 
-	EAutolock <ELocker> autolock(&etk_ft2_font_locker);
-	if(!_etk_ft2_initialized_) return;
+	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
+	if(!_bhapi_ft2_initialized_) return;
 
-	FT_Error error = FT_New_Face(_etk_ft2_library_, filename.String(), faceIndex, &fFace);
+	FT_Error error = FT_New_Face(_bhapi_ft2_library_, filename.String(), faceIndex, &fFace);
 	if(error || !fFace)
 	{
-		ETK_DEBUG("[FONT]: %s --- CAN NOT load face[%s:%d].", __PRETTY_FUNCTION__, aPath.Path(), faceIndex);
+		BHAPI_DEBUG("[FONT]: %s --- CAN NOT load face[%s:%d].", __PRETTY_FUNCTION__, aPath.Path(), faceIndex);
 		return;
 	}
 
 	if(FT_Select_Charmap(fFace, FT_ENCODING_UNICODE))
 	{
-//		ETK_DEBUG("[FONT]: %s --- font[%s] don't support ENCODING_UNICODE.", __PRETTY_FUNCTION__, aPath.Path());
+//		BHAPI_DEBUG("[FONT]: %s --- font[%s] don't support ENCODING_UNICODE.", __PRETTY_FUNCTION__, aPath.Path());
 
 		if(FT_Select_Charmap(fFace, FT_ENCODING_NONE))
 		{
-//			ETK_WARNING("[FONT]: %s --- font[%s] don't support unicode at all.", __PRETTY_FUNCTION__, aPath.Path());
+//			BHAPI_WARNING("[FONT]: %s --- font[%s] don't support unicode at all.", __PRETTY_FUNCTION__, aPath.Path());
 			FT_Done_Face(fFace);
 			fFace = NULL;
 			return;
 		}
 	}
 
-	fFilename = EStrdup(filename.String());
+	fFilename = b_strdup(filename.String());
 	fFaceIndex = faceIndex;
 	nFaces = fFace->num_faces;
 
-	EString family = fFace->family_name;
+    BString family = fFace->family_name;
 	if(family.Length() <= 0)
 	{
 		family = aPath.Leaf();
-		eint32 cFound;
+		b_int32 cFound;
 		if((cFound = family.FindFirst('.')) >= 0) family.Remove(cFound, -1);
 		if(family.Length() < 0) family = "Unknown";
 	}
 	SetFamily(family.String());
 
-	EString style = fFace->style_name;
+    BString style = fFace->style_name;
 	if(style.Length() <= 0)
 	{
 		if((fFace->style_flags & FT_STYLE_FLAG_BOLD) && (fFace->style_flags & FT_STYLE_FLAG_ITALIC))
@@ -193,7 +193,7 @@ EFontFT2::EFontFT2(const EEntry *entry, eint32 faceIndex)
 	{
 		float *sizes = new float[(int)fFace->num_fixed_sizes];
 		for(int i = 0; i < fFace->num_fixed_sizes; i++) sizes[i] = (float)(fFace->available_sizes[i].height);
-		SetFixedSize(sizes, (eint32)fFace->num_fixed_sizes);
+		SetFixedSize(sizes, (b_int32)fFace->num_fixed_sizes);
 		delete[] sizes;
 	}
 
@@ -202,31 +202,31 @@ EFontFT2::EFontFT2(const EEntry *entry, eint32 faceIndex)
 }
 
 
-EFontFT2::~EFontFT2()
+BFontFT2::~BFontFT2()
 {
 	if(fFilename) delete[] fFilename;
 
 	if(fFace)
 	{
-		EAutolock <ELocker> autolock(&etk_ft2_font_locker);
+		BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 		FT_Done_Face(fFace);
 	}
 }
 
 
-e_font_detach_callback*
-EFontFT2::Attach(void (*callback)(void*), void *data)
+b_font_detach_callback*
+BFontFT2::Attach(void (*callback)(void*), void *data)
 {
-	EAutolock <ELocker> autolock(&etk_ft2_font_locker);
+	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
-	e_font_detach_callback *eCallback = EFontEngine::Attach(callback, data);
+	b_font_detach_callback *eCallback = BFontEngine::Attach(callback, data);
 
 	if(eCallback && !fFace)
 	{
-		if(FT_New_Face(_etk_ft2_library_, fFilename, fFaceIndex, &fFace) || !fFace)
+		if(FT_New_Face(_bhapi_ft2_library_, fFilename, fFaceIndex, &fFace) || !fFace)
 		{
-			ETK_DEBUG("[FONT]: %s --- CAN NOT load face[%s:%d].", __PRETTY_FUNCTION__, fFilename, fFaceIndex);
-			EFontEngine::Detach(eCallback);
+			BHAPI_DEBUG("[FONT]: %s --- CAN NOT load face[%s:%d].", __PRETTY_FUNCTION__, fFilename, fFaceIndex);
+			BFontEngine::Detach(eCallback);
 			return NULL;
 		}
 
@@ -234,10 +234,10 @@ EFontFT2::Attach(void (*callback)(void*), void *data)
 		{
 			if(FT_Select_Charmap(fFace, FT_ENCODING_NONE))
 			{
-				ETK_WARNING("[FONT]: %s --- font[%s] don't support unicode at all.", __PRETTY_FUNCTION__, fFilename);
+				BHAPI_WARNING("[FONT]: %s --- font[%s] don't support unicode at all.", __PRETTY_FUNCTION__, fFilename);
 				FT_Done_Face(fFace);
 				fFace = NULL;
-				EFontEngine::Detach(eCallback);
+				BFontEngine::Detach(eCallback);
 				return NULL;
 			}
 		}
@@ -248,11 +248,11 @@ EFontFT2::Attach(void (*callback)(void*), void *data)
 
 
 bool
-EFontFT2::Detach(e_font_detach_callback *callback)
+BFontFT2::Detach(b_font_detach_callback *callback)
 {
-	EAutolock <ELocker> autolock(&etk_ft2_font_locker);
+	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
-	if(!EFontEngine::Detach(callback)) return false;
+	if(!BFontEngine::Detach(callback)) return false;
 
 	if(!IsAttached() && fFace)
 	{
@@ -264,29 +264,29 @@ EFontFT2::Detach(e_font_detach_callback *callback)
 }
 
 
-eint32
-EFontFT2::CountFaces() const
+b_int32
+BFontFT2::CountFaces() const
 {
 	return nFaces;
 }
 
 
 bool
-EFontFT2::IsValid() const
+BFontFT2::IsValid() const
 {
 	return(fFilename != NULL && fFaceIndex >= 0 && nFaces > 0 && Family() != NULL && Style() != NULL);
 }
 
 
 bool
-EFontFT2::IsScalable() const
+BFontFT2::IsScalable() const
 {
 	return fScalable;
 }
 
 
 void
-EFontFT2::ForceFontAliasing(bool enable)
+BFontFT2::ForceFontAliasing(bool enable)
 {
 	if(fForceFontAliasing != enable)
 	{
@@ -296,11 +296,11 @@ EFontFT2::ForceFontAliasing(bool enable)
 
 
 bool
-EFontFT2::IsFixedSize(float size) const
+BFontFT2::IsFixedSize(float size) const
 {
-	eint32 count = 0;
+	b_int32 count = 0;
 	if(size <= 0 || !HasFixedSize(&count) || count <= 0) return false;
-	for(eint32 i = 0; i < count; i++)
+	for(b_int32 i = 0; i < count; i++)
 	{
 		float nsize = 0;
 		if(!GetFixedSize(&nsize, i)) continue;
@@ -311,9 +311,9 @@ EFontFT2::IsFixedSize(float size) const
 
 
 float
-EFontFT2::StringWidth(const char *string, float size, float spacing, float shear, bool bold, eint32 length) const
+BFontFT2::StringWidth(const char *string, float size, float spacing, float shear, bool bold, b_int32 length) const
 {
-	EAutolock <ELocker> autolock(&etk_ft2_font_locker);
+	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
 	if(!IsAttached()) return 0;
 
@@ -324,22 +324,22 @@ EFontFT2::StringWidth(const char *string, float size, float spacing, float shear
 		     FT_Set_Char_Size(fFace, 0, (FT_F26Dot6)(size * 64.f), 0, 0)) return 0;
 //	if(FT_Set_Pixel_Sizes(fFace, 0, (FT_UInt)size)) return 0;
 
-	eunichar *unicode = e_utf8_convert_to_unicode(string, length);
+	b_unichar *unicode = b_utf8_convert_to_unicode(string, length);
 	if(!unicode) return 0;
 
 	float width = 0;
 
 	int minx = 0, maxx = 0;
 
-	const eunichar *ch;
+	const b_unichar *ch;
 	int x = 0;
 	int fontSpacing = (int)ceil((double)(spacing * size)) * 64;
-	for(ch = unicode; !(ch == NULL || *ch == 0); ch = e_unicode_next(ch, NULL))
+	for(ch = unicode; !(ch == NULL || *ch == 0); ch = b_unicode_next(ch, NULL))
 	{
 		FT_UInt glyph_index = FT_Get_Char_Index(fFace, *ch);
 		if(FT_Load_Glyph(fFace, glyph_index, FT_LOAD_DEFAULT))
 		{
-			ETK_DEBUG("[FONT]: %s --- FT_Load_Glyph failed.", __PRETTY_FUNCTION__);
+			BHAPI_DEBUG("[FONT]: %s --- FT_Load_Glyph failed.", __PRETTY_FUNCTION__);
 			continue;
 		}
 
@@ -361,13 +361,13 @@ EFontFT2::StringWidth(const char *string, float size, float spacing, float shear
 
 
 void
-EFontFT2::GetHeight(e_font_height *height, float size, float shear, bool bold) const
+BFontFT2::GetHeight(b_font_height *height, float size, float shear, bool bold) const
 {
 	if(!height) return;
 
-	bzero(height, sizeof(e_font_height));
+	bzero(height, sizeof(b_font_height));
 
-	EAutolock <ELocker> autolock(&etk_ft2_font_locker);
+	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
 	if(!IsAttached()) return;
 
@@ -397,13 +397,13 @@ EFontFT2::GetHeight(e_font_height *height, float size, float shear, bool bold) c
 }
 
 
-euint8*
-EFontFT2::RenderString(const char *string, eint32 *width, eint32 *height, bool *is_mono,
-		       float size, float spacing, float shear, bool bold, eint32 length)
+b_uint8*
+BFontFT2::RenderString(const char *string, b_int32 *width, b_int32 *height, bool *is_mono,
+		       float size, float spacing, float shear, bool bold, b_int32 length)
 {
 	if(string == NULL || *string == 0 || length == 0 || width == NULL || height == NULL || is_mono == NULL) return NULL;
 
-	EAutolock <ELocker> autolock(&etk_ft2_font_locker);
+	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
 	if(!IsAttached()) return NULL;
 
@@ -411,55 +411,55 @@ EFontFT2::RenderString(const char *string, eint32 *width, eint32 *height, bool *
 	if(!fScalable && !isfixed) return NULL;
 
 	float stringWidth;
-	e_font_height fontHeight;
+	b_font_height fontHeight;
 
 	if((stringWidth = StringWidth(string, size, spacing, shear, bold, length)) <= 0) return NULL;
 	GetHeight(&fontHeight, size, shear, bold);
 
-	eint32 w, h;
-	w = (eint32)ceil(stringWidth) + 1;
-	h = (eint32)ceil(fontHeight.ascent + fontHeight.descent) + 1;
+	b_int32 w, h;
+	w = (b_int32)ceil(stringWidth) + 1;
+	h = (b_int32)ceil(fontHeight.ascent + fontHeight.descent) + 1;
 
-	euint8 *bitmap = new euint8[w * h];
+	b_uint8 *bitmap = new b_uint8[w * h];
 	if(!bitmap)
 	{
-		ETK_WARNING("[FONT]: %s --- Unable to alloc memory for bitmap data.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[FONT]: %s --- Unable to alloc memory for bitmap data.", __PRETTY_FUNCTION__);
 		return NULL;
 	}
-	bzero(bitmap, sizeof(euint8) * (size_t)(w * h));
+	bzero(bitmap, sizeof(b_uint8) * (size_t)(w * h));
 
-	eunichar *unicode = e_utf8_convert_to_unicode(string, length);
+	b_unichar *unicode = b_utf8_convert_to_unicode(string, length);
 	if(!unicode)
 	{
 		delete[] bitmap;
 		return NULL;
 	}
 
-	const eunichar *ch;
-	euint32 x = 0;
-	euint32 y = (euint32)ceil(fontHeight.ascent);
+	const b_unichar *ch;
+	b_uint32 x = 0;
+	b_uint32 y = (b_uint32)ceil(fontHeight.ascent);
 	bool do_mono = fForceFontAliasing;
-	for(ch = unicode; !(ch == NULL || *ch == 0); ch = e_unicode_next(ch, NULL))
+	for(ch = unicode; !(ch == NULL || *ch == 0); ch = b_unicode_next(ch, NULL))
 	{
 		if(FT_Load_Char(fFace, *ch, (do_mono ? (FT_LOAD_RENDER | FT_LOAD_MONOCHROME) : FT_LOAD_RENDER)))
 		{
-			ETK_DEBUG("[FONT]: %s --- FT_Load_Char failed.", __PRETTY_FUNCTION__);
+			BHAPI_DEBUG("[FONT]: %s --- FT_Load_Char failed.", __PRETTY_FUNCTION__);
 			continue;
 		}
 
 		FT_Bitmap *ftbitmap = &(fFace->glyph->bitmap);
 
-		eint32 xx = x + (eint32)(fFace->glyph->bitmap_left);
-		eint32 yy = y - (eint32)(fFace->glyph->bitmap_top);
-		eint32 bitmapWidth = (eint32)(ftbitmap->width);
-		eint32 bitmapHeight = (eint32)(ftbitmap->rows);
-		eint32 lineBytes = (eint32)(ftbitmap->pitch > 0 ? ftbitmap->pitch : -(ftbitmap->pitch));
-		eint32 maxxx = min_c(w, xx + bitmapWidth);
-		eint32 maxyy = min_c(h, yy + bitmapHeight);
+		b_int32 xx = x + (b_int32)(fFace->glyph->bitmap_left);
+		b_int32 yy = y - (b_int32)(fFace->glyph->bitmap_top);
+		b_int32 bitmapWidth = (b_int32)(ftbitmap->width);
+		b_int32 bitmapHeight = (b_int32)(ftbitmap->rows);
+		b_int32 lineBytes = (b_int32)(ftbitmap->pitch > 0 ? ftbitmap->pitch : -(ftbitmap->pitch));
+		b_int32 maxxx = min_c(w, xx + bitmapWidth);
+		b_int32 maxyy = min_c(h, yy + bitmapHeight);
 
-		for(eint32 i = yy, p = 0; i < maxyy; i++, p++)
+		for(b_int32 i = yy, p = 0; i < maxyy; i++, p++)
 		{
-			euint8* dest = bitmap;
+			b_uint8* dest = bitmap;
 			dest += i * w + xx;
 			unsigned char* src = ftbitmap->buffer;
 			src += p * lineBytes;
@@ -467,27 +467,27 @@ EFontFT2::RenderString(const char *string, eint32 *width, eint32 *height, bool *
 			switch(ftbitmap->pixel_mode)
 			{
 				case FT_PIXEL_MODE_GRAY:
-					for(eint32 j = xx; j < maxxx; j++) *dest++ = (euint8)(*src++);
+					for(b_int32 j = xx; j < maxxx; j++) *dest++ = (b_uint8)(*src++);
 					break;
 
 				case FT_PIXEL_MODE_MONO:
-					for(eint32 j = xx; j < maxxx; )
+					for(b_int32 j = xx; j < maxxx; )
 					{
-						euint8 val = (euint8)(*src++);
-						eint32 left = maxxx - j >= 8 ? 8 : maxxx - j;
-						euint8 left_offset = 7;
+						b_uint8 val = (b_uint8)(*src++);
+						b_int32 left = maxxx - j >= 8 ? 8 : maxxx - j;
+						b_uint8 left_offset = 7;
 
-						for(eint32 k = 0; k < left; k++, left_offset--, j++)
+						for(b_int32 k = 0; k < left; k++, left_offset--, j++)
 							*dest++ = (val & (1 << left_offset)) ? 255 : 0;
 					}
 					break;
 
 				default:
-					ETK_DEBUG("[FONT]: %s --- The mode of freetype bitmap not supported.", __PRETTY_FUNCTION__);
+					BHAPI_DEBUG("[FONT]: %s --- The mode of freetype bitmap not supported.", __PRETTY_FUNCTION__);
 			}
 		}
 
-		x += (euint32)((float)(fFace->glyph->metrics.horiAdvance) / 64.f) + (euint32)ceil((double)(spacing * size)); // next x
+		x += (b_uint32)((float)(fFace->glyph->metrics.horiAdvance) / 64.f) + (b_uint32)ceil((double)(spacing * size)); // next x
 	}
 
 	free(unicode);
@@ -500,9 +500,9 @@ EFontFT2::RenderString(const char *string, eint32 *width, eint32 *height, bool *
 }
 
 
-_IMPEXP_ETK bool etk_update_freetype2_font_families(bool check_only)
+_IMPEXP_BHAPI bool bhapi_update_freetype2_font_families(bool check_only)
 {
-	EString fonts_dirs;
+    BString fonts_dirs;
 
 #ifdef _WIN32
 	const char dir_env_sep = ';';
@@ -510,70 +510,70 @@ _IMPEXP_ETK bool etk_update_freetype2_font_families(bool check_only)
 	const char dir_env_sep = ':';
 #endif
 
-	const char *dirs = getenv("FREETYPE_FONTS_DIR");
+    const char *dirs = getenv("FREETYPB_FONTS_DIR");
 	if(dirs) fonts_dirs += dirs;
 
 	if(fonts_dirs.Length() <= 0)
 	{
 #ifdef _WIN32
 		fonts_dirs = "C:\\Progra~1\\freetype";
-#elif defined(ETK_OS_BEOS)
+#elif defined(BHAPI_OS_BEOS)
 		fonts_dirs = "/boot/beos/etc/fonts/ttfonts";
-		ETK_WARNING("[FONT]: you can set the environment \"FREETYPE_FONTS_DIR\" to match the correct dirs.");
+        BHAPI_WARNING("[FONT]: you can set the environment \"FREETYPB_FONTS_DIR\" to match the correct dirs.");
 #else
 		fonts_dirs = "/usr/share/fonts/freetype";
 #endif
 	}
 
-	EAutolock <ELocker> autolock(&etk_ft2_font_locker);
+	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
 	if(check_only)
 	{
-		ETK_WARNING("[FONT]: %s --- check_only not implement yet.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[FONT]: %s --- check_only not implement yet.", __PRETTY_FUNCTION__);
 		return false;
 	}
 
-	if(!_etk_ft2_initialized_)
+	if(!_bhapi_ft2_initialized_)
 	{
-		ETK_WARNING("[FONT]: Freetype engine not initialize! REFUSE TO LOAD FONTS!!!");
+		BHAPI_WARNING("[FONT]: Freetype engine not initialize! REFUSE TO LOAD FONTS!!!");
 		return false;
 	}
 
-	EStringArray *fonts_dirs_array = fonts_dirs.Split(dir_env_sep);
+	BStringArray *fonts_dirs_array = fonts_dirs.Split(dir_env_sep);
 	if(!fonts_dirs_array)
 	{
-		ETK_WARNING("[FONT]: %s --- Couldn't find any font directory.", __PRETTY_FUNCTION__);
+		BHAPI_WARNING("[FONT]: %s --- Couldn't find any font directory.", __PRETTY_FUNCTION__);
 		return false;
 	}
 
-	ETK_DEBUG("[FONT]: Updating FreeType2 fonts ...");
-//	ETK_DEBUG("[FONT]: Fonts directory number: %d", fonts_dirs_array->CountItems());
+	BHAPI_DEBUG("[FONT]: Updating FreeType2 fonts ...");
+//	BHAPI_DEBUG("[FONT]: Fonts directory number: %d", fonts_dirs_array->CountItems());
 
-	const EString *_fonts_dir;
-	for(eint32 m = 0; (_fonts_dir = fonts_dirs_array->ItemAt(m)) != NULL; m++)
+	const BString *_fonts_dir;
+	for(b_int32 m = 0; (_fonts_dir = fonts_dirs_array->ItemAt(m)) != NULL; m++)
 	{
-		EDirectory directory(_fonts_dir->String());
-		if(directory.InitCheck() != E_OK)
+		BDirectory directory(_fonts_dir->String());
+		if(directory.InitCheck() != B_OK)
 		{
-			ETK_WARNING("[FONT]: CAN NOT open fonts directory - \"%s\"!", _fonts_dir->String());
+			BHAPI_WARNING("[FONT]: CAN NOT open fonts directory - \"%s\"!", _fonts_dir->String());
 			continue;
 		}
-//		ETK_DEBUG("[FONT]: Opening font directory \"%s\"...", _fonts_dir->String());
+//		BHAPI_DEBUG("[FONT]: Opening font directory \"%s\"...", _fonts_dir->String());
 
-		EEntry aEntry;
-		while(directory.GetNextEntry(&aEntry, true) == E_OK)
+		BEntry aEntry;
+		while(directory.GetNextEntry(&aEntry, true) == B_OK)
 		{
-			EPath aPath;
-			if(aEntry.GetPath(&aPath) != E_OK) continue;
-			EString filename = aPath.Leaf();
+			BPath aPath;
+			if(aEntry.GetPath(&aPath) != B_OK) continue;
+            BString filename = aPath.Leaf();
 
 			// Ignore not "*.ttf" etc...
 			if(filename.Length() < 5) continue;
 			const char *fontPattern[] = {".ttf", ".ttc", ".pcf", ".fon", ".pfa", ".pfb"};
 			bool isPatternMatched = false;
-			for(euint8 i = 0; i < 6; i++)
+			for(b_uint8 i = 0; i < 6; i++)
 			{
-				if(filename.IFindLast(fontPattern[i]) == filename.Length() - (eint32)strlen(fontPattern[i]))
+				if(filename.IFindLast(fontPattern[i]) == filename.Length() - (b_int32)strlen(fontPattern[i]))
 				{
 					isPatternMatched = true;
 					break;
@@ -581,11 +581,11 @@ _IMPEXP_ETK bool etk_update_freetype2_font_families(bool check_only)
 			}
 			if(!isPatternMatched) continue;
 
-//			ETK_DEBUG("[FONT]: Reading font file \"%s\" ...", aPath.Path());
+//			BHAPI_DEBUG("[FONT]: Reading font file \"%s\" ...", aPath.Path());
 
-			eint32 faceIndex = 0, nFaces = 0;
+			b_int32 faceIndex = 0, nFaces = 0;
 			do{
-				EFontFT2 *engine = new EFontFT2(&aEntry, faceIndex);
+				BFontFT2 *engine = new BFontFT2(&aEntry, faceIndex);
 				if(!engine || !engine->IsValid())
 				{
 					if(engine) delete engine;
@@ -602,13 +602,13 @@ _IMPEXP_ETK bool etk_update_freetype2_font_families(bool check_only)
 				if(faceIndex == 0)
 				{
 					nFaces = engine->CountFaces();
-//					ETK_DEBUG("\tFaces Number: %d", nFaces);
+//					BHAPI_DEBUG("\tFaces Number: %d", nFaces);
 				}
 
-//				ETK_DEBUG("\tFamily[%d]: %s", faceIndex, engine->Family());
-//				ETK_DEBUG("\t\tStyle: %s", engine->Style());
+//				BHAPI_DEBUG("\tFamily[%d]: %s", faceIndex, engine->Family());
+//				BHAPI_DEBUG("\t\tStyle: %s", engine->Style());
 
-				if(!etk_font_add(engine->Family(), engine->Style(), engine)) delete engine;
+				if(!bhapi_font_add(engine->Family(), engine->Style(), engine)) delete engine;
 
 				faceIndex++;
 			}while(faceIndex < nFaces);
@@ -617,7 +617,7 @@ _IMPEXP_ETK bool etk_update_freetype2_font_families(bool check_only)
 
 	if(fonts_dirs_array) delete fonts_dirs_array;
 
-	ETK_DEBUG("[FONT]: FreeType2 fonts updated.");
+	BHAPI_DEBUG("[FONT]: FreeType2 fonts updated.");
 
 	return true;
 }
