@@ -83,7 +83,7 @@ static void bhapi_unlock_locker_inter(bhapi_posix_locker_t *locker)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_create_locker(void)
+IMPEXP_BHAPI void* bhapi_create_locker(void)
 {
 	bhapi_posix_locker_t *locker = new bhapi_posix_locker_t();
 	if(!locker) return NULL;
@@ -110,7 +110,7 @@ _IMPEXP_BHAPI void* bhapi_create_locker(void)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_clone_locker(void *data)
+IMPEXP_BHAPI void* bhapi_clone_locker(void *data)
 {
 	bhapi_posix_locker_t *locker = (bhapi_posix_locker_t*)data;
 	if(!locker) return NULL;
@@ -131,7 +131,7 @@ _IMPEXP_BHAPI void* bhapi_clone_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_delete_locker(void *data)
+IMPEXP_BHAPI b_status_t bhapi_delete_locker(void *data)
 {
 	bhapi_posix_locker_t *locker = (bhapi_posix_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -174,7 +174,7 @@ _IMPEXP_BHAPI b_status_t bhapi_delete_locker(void *data)
 /* after you call "bhapi_close_locker":
  * 	1. the next "bhapi_lock_locker..." function call will be failed
  * */
-_IMPEXP_BHAPI b_status_t bhapi_close_locker(void *data)
+IMPEXP_BHAPI b_status_t bhapi_close_locker(void *data)
 {
 	bhapi_posix_locker_t *locker = (bhapi_posix_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -193,13 +193,13 @@ _IMPEXP_BHAPI b_status_t bhapi_close_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_lock_locker(void *data)
+IMPEXP_BHAPI b_status_t bhapi_lock_locker(void *data)
 {
 	return bhapi_lock_locker_etc(data, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_lock_locker_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
+IMPEXP_BHAPI b_status_t bhapi_lock_locker_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
 	bhapi_posix_locker_t *locker = (bhapi_posix_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -296,7 +296,7 @@ _IMPEXP_BHAPI b_status_t bhapi_lock_locker_etc(void *data, b_uint32 flags, b_big
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_unlock_locker(void *data)
+IMPEXP_BHAPI b_status_t bhapi_unlock_locker(void *data)
 {
 	bhapi_posix_locker_t *locker = (bhapi_posix_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -336,7 +336,7 @@ _IMPEXP_BHAPI b_status_t bhapi_unlock_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI b_int64 bhapi_count_locker_locks(void *data)
+IMPEXP_BHAPI b_int64 bhapi_count_locker_locks(void *data)
 {
 	b_int64 retVal = B_INT64_CONSTANT(0);
 
@@ -354,7 +354,7 @@ _IMPEXP_BHAPI b_int64 bhapi_count_locker_locks(void *data)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_create_simple_locker(void)
+IMPEXP_BHAPI void* bhapi_create_simple_locker(void)
 {
 	pthread_mutex_t *locker = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
 	if(!locker) return NULL;
@@ -369,7 +369,7 @@ _IMPEXP_BHAPI void* bhapi_create_simple_locker(void)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_delete_simple_locker(void* data)
+IMPEXP_BHAPI b_status_t bhapi_delete_simple_locker(void* data)
 {
 	pthread_mutex_t *locker = (pthread_mutex_t*)data;
 	if(!locker) return B_ERROR;
@@ -379,7 +379,7 @@ _IMPEXP_BHAPI b_status_t bhapi_delete_simple_locker(void* data)
 }
 
 
-_IMPEXP_BHAPI bool bhapi_lock_simple_locker(void *data)
+IMPEXP_BHAPI bool bhapi_lock_simple_locker(void *data)
 {
 	pthread_mutex_t *locker = (pthread_mutex_t*)data;
 	if(!locker) return false;
@@ -390,7 +390,7 @@ _IMPEXP_BHAPI bool bhapi_lock_simple_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI void bhapi_unlock_simple_locker(void *data)
+IMPEXP_BHAPI void bhapi_unlock_simple_locker(void *data)
 {
 	pthread_mutex_t *locker = (pthread_mutex_t*)data;
 	if(!locker) return;
@@ -403,14 +403,14 @@ _IMPEXP_BHAPI void bhapi_unlock_simple_locker(void *data)
 static pthread_mutex_t __bhapi_posix_memory_tracing_locker = PTHREAD_MUTEX_INITIALIZER;
 
 
-_IMPEXP_BHAPI bool bhapi_memory_tracing_lock(void)
+IMPEXP_BHAPI bool bhapi_memory_tracing_lock(void)
 {
 	if(pthread_mutex_lock(&__bhapi_posix_memory_tracing_locker) != 0) return false;
 	return true;
 }
 
 
-_IMPEXP_BHAPI void bhapi_memory_tracing_unlock(void)
+IMPEXP_BHAPI void bhapi_memory_tracing_unlock(void)
 {
 	pthread_mutex_unlock(&__bhapi_posix_memory_tracing_locker);
 }

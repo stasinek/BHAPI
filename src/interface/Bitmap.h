@@ -29,8 +29,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_BITMAP_H__
-#define __BHAPI_BITMAP_H__
+#ifndef BHAPI_BITMAP__H
+#define BHAPI_BITMAP__H
 
 #include "./../interface/View.h"
 
@@ -39,7 +39,7 @@
 class BGraphicsDrawable;
 class BPixmap;
 
-class _IMPEXP_BHAPI BBitmap : public BArchivable {
+class IMPEXP_BHAPI BBitmap : public BArchivable {
 public:
     BBitmap(BRect bounds, bool acceptsViews = false);
     BBitmap(const BBitmap *bitmap, bool acceptsViews = false);
@@ -74,5 +74,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_BITMAP_H__ */
+#endif /* BHAPI_BITMAP__H */
 

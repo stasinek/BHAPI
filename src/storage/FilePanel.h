@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_FILE_PANEL_H__
-#define __BHAPI_FILE_PANEL_H__
+#ifndef BHAPI_FILE_PANEL__H
+#define BHAPI_FILE_PANEL__H
 
 #include "./../interface/Window.h"
 #include "./../storage/Directory.h"
@@ -45,7 +45,7 @@ typedef enum b_file_panel_button {
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BFilePanelFilter {
+class IMPEXP_BHAPI BFilePanelFilter {
 public:
 	virtual ~BFilePanelFilter();
 
@@ -53,7 +53,7 @@ public:
 };
 
 
-class _IMPEXP_BHAPI BFilePanel {
+class IMPEXP_BHAPI BFilePanel {
 public:
     BFilePanel(b_file_panel_mode mode = B_OPEN_PANEL,
            const BMessenger *target = NULL,
@@ -111,5 +111,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_FILE_PANEL_H__ */
+#endif /* BHAPI_FILE_PANEL__H */
 

@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_NET_BUFFER_H__
-#define __BHAPI_NET_BUFFER_H__
-
+#ifndef BHAPI_NET_BUFFER__H
+#define BHAPI_NET_BUFFER__H
+#include "./../support/SupportDefs.h"
 #include "./../support/Archivable.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BNetBuffer : public BArchivable {
+class IMPEXP_BHAPI BNetBuffer : public BArchivable {
 public:
 	BNetBuffer(size_t size = 0);
 	BNetBuffer(const BNetBuffer &from);
@@ -89,5 +89,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_NET_BUFFER_H__ */
+#endif /* BHAPI_NET_BUFFER__H */
 

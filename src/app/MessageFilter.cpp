@@ -28,6 +28,7 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "Handler.h"
 #include "Looper.h"
 #include "MessageFilter.h"
 

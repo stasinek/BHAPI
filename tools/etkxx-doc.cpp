@@ -358,7 +358,7 @@ int main(int argc, char **argv)
 		xml_buffer.AppendFormat("<!-- convert from \"%s\" -->\n", readInPath.Leaf());
 		while(true)
 		{
-			ssize_t len = readIn.Read(buffer + nLeave, BUFFER_SIZE - nLeave);
+			b_size_t len = readIn.Read(buffer + nLeave, BUFFER_SIZE - nLeave);
 			if(len <= 0) break;
 			BString str;
 			str.SetTo(buffer, len + nLeave);

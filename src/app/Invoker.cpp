@@ -28,6 +28,7 @@
  * --------------------------------------------------------------------------*/
 
 #include "./../private/PrivateHandler.h"
+#include "./../app/Messenger.h"
 
 #include "Application.h"
 #include "Invoker.h"

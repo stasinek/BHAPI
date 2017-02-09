@@ -28,9 +28,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_FONT_ENGINE_H__
-#define __BHAPI_FONT_ENGINE_H__
-
+#ifndef BHAPI_FONT_ENGINE__H
+#define BHAPI_FONT_ENGINE__H
+#include "./../../support/SupportDefs.h"
 #include "./../../support/StringArray.h"
 #include "./../../interface/Point.h"
 #include "./../../interface/Font.h"
@@ -52,7 +52,7 @@ typedef struct b_font_detach_callback {
 } b_font_detach_callback;
 
 
-class _IMPEXP_BHAPI BFontEngine {
+class IMPEXP_BHAPI BFontEngine {
 public:
     BFontEngine();
     BFontEngine(const char *family, const char *style);
@@ -123,15 +123,15 @@ private:
 
 	b_font_render_mode fRenderMode;
 
-    friend _IMPEXP_BHAPI bool bhapi_font_add(const char *family, const char *style, BFontEngine *engine);
+    friend IMPEXP_BHAPI bool bhapi_font_add(const char *family, const char *style, BFontEngine *engine);
     BStringArray *fServing;
 };
 
-_IMPEXP_BHAPI bool		bhapi_font_add(const char *family, const char *style, BFontEngine *engine);
-_IMPEXP_BHAPI BFontEngine*	bhapi_get_font_engine(const char *family, const char *style);
-_IMPEXP_BHAPI BFontEngine*	bhapi_get_font_engine(b_int32 familyIndex, b_int32 styleIndex);
+IMPEXP_BHAPI bool		bhapi_font_add(const char *family, const char *style, BFontEngine *engine);
+IMPEXP_BHAPI BFontEngine*	bhapi_get_font_engine(const char *family, const char *style);
+IMPEXP_BHAPI BFontEngine*	bhapi_get_font_engine(b_int32 familyIndex, b_int32 styleIndex);
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_FONT_ENGINE_H__ */
+#endif /* BHAPI_FONT_ENGINE__H */
 

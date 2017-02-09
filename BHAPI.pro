@@ -93,18 +93,17 @@ SOURCES += bhapi.cpp \
     src/support/Archivable.cpp \
     src/support/DataIO.cpp \
     src/support/Flattenable.cpp \
-    src/support/List.cpp \
     src/support/Locker.cpp \
     src/support/SimpleLocker.cpp \
     src/support/StreamIO.cpp \
     src/support/StringArray.cpp \
     src/xml/SimpleXmlParser.cpp \
-    tools/etkxx-doc.cpp \
     src/support/ByteOrder.c \
     src/interface/layout/LayoutContainer.cpp \
     src/interface/layout/LayoutForm.cpp \
     src/interface/layout/LayoutItem.cpp \
-    src/support/StringMe.cpp
+    src/support/StringMe.cpp \
+    src/support/BList.cpp
 
 contains(QMAKE_COMPILER_DEFINES, BEOS) {
 SOURCES +=  src/interface/beos/etk-application.cpp \
@@ -176,7 +175,8 @@ HEADERS += src/interface/carbon/etk-carbon.h
 
 SOURCES += src/interface/wm/SimpleWM.cpp
 HEADERS += src/interface/wm/SimpleWM.h \
-    src/support/StringMe.h
+    src/support/StringMe.h \
+    src/support/BList.h
 
 HEADERS += bhapi.h\
     bhapi_global.h \
@@ -269,7 +269,6 @@ HEADERS += bhapi.h\
     src/support/DataIO.h \
     src/support/Errors.h \
     src/support/Flattenable.h \
-    src/support/List.h \
     src/support/Locker.h \
     src/support/SimpleLocker.h \
     src/support/StreamIO.h \
@@ -355,4 +354,4 @@ unix {
     INSTALLS += target
 }
 
-INCLUDEPATH += ../../freetype/include
+INCLUDEPATH += ../freetype/include

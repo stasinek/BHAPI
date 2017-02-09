@@ -28,9 +28,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_GRAPHICS_ENGINE_H__
-#define __BHAPI_GRAPHICS_ENGINE_H__
-
+#ifndef BHAPI_GRAPHICS_ENGINE__H
+#define BHAPI_GRAPHICS_ENGINE__H
+#include "./../../support/SupportDefs.h"
 #include "./../../interface/Window.h"
 #include "./../../interface/View.h"
 
@@ -41,7 +41,7 @@ class BCursor;
 class BPixmap;
 
 
-class _IMPEXP_BHAPI BGraphicsContext {
+class IMPEXP_BHAPI BGraphicsContext {
 public:
 	BGraphicsContext();
 	virtual ~BGraphicsContext();
@@ -76,7 +76,7 @@ private:
 };
 
 
-class _IMPEXP_BHAPI BGraphicsDrawable {
+class IMPEXP_BHAPI BGraphicsDrawable {
 public:
 	BGraphicsDrawable();
 	virtual ~BGraphicsDrawable();
@@ -134,7 +134,7 @@ private:
 };
 
 
-class _IMPEXP_BHAPI BGraphicsWindow : public BGraphicsDrawable {
+class IMPEXP_BHAPI BGraphicsWindow : public BGraphicsDrawable {
 public:
 	BGraphicsWindow();
 	virtual ~BGraphicsWindow();
@@ -171,7 +171,7 @@ public:
 // 2. Usually, addons were put into the directory located at "$E_ADDONS_DIRECTORY/etkxx/graphics" or
 //    "$E_USER_ADDONS_DIRECTORY/etkxx/graphics", such as "/usr/lib/add-ons/etkxx/graphics".
 // 3. When BHAPI++ find no graphics-engine addons, it try built-in graphics-engine when possible.
-class _IMPEXP_BHAPI BGraphicsEngine {
+class IMPEXP_BHAPI BGraphicsEngine {
 public:
 	BGraphicsEngine();
 	virtual ~BGraphicsEngine();
@@ -200,5 +200,5 @@ public:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_GRAPHICS_ENGINE_H__ */
+#endif /* BHAPI_GRAPHICS_ENGINE__H */
 

@@ -28,9 +28,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_APPLICATION_H__
-#define __BHAPI_APPLICATION_H__
-
+#ifndef BHAPI_APPLICATION__H
+#define BHAPI_APPLICATION__H
+#include "./../support/SupportDefs.h"
 #include "./../app/Looper.h"
 #include "./../app/MessageRunner.h"
 #include "./../app/Cursor.h"
@@ -42,7 +42,7 @@ class BClipboard;
 class BGraphicsEngine;
 
 
-class _IMPEXP_BHAPI BApplication : public BLooper {
+class IMPEXP_BHAPI BApplication : public BLooper {
 public:
 	BApplication(const char *signature, bool tryInterface = true);
 	virtual ~BApplication();
@@ -84,7 +84,7 @@ private:
     friend class BBitmap;
     friend class BScreen;
 
-    friend _IMPEXP_BHAPI bool bhapi_updatb_font_families(bool);
+    friend IMPEXP_BHAPI bool bhapi_updatb_font_families(bool);
 
 	bool fQuit;
 	char *fSignature;
@@ -120,9 +120,9 @@ inline void BApplication::SetCursor(const void *cursor)
 }
 
 
-extern _IMPEXP_BHAPI BApplication *bhapi_app;
-extern _IMPEXP_BHAPI BMessenger bhapi_app_messenger;
-extern _IMPEXP_BHAPI BClipboard bhapi_clipboard;
+extern IMPEXP_BHAPI BApplication *bhapi_app;
+extern IMPEXP_BHAPI BMessenger bhapi_app_messenger;
+extern IMPEXP_BHAPI BClipboard bhapi_clipboard;
 
 #endif /* __cplusplus */
 
@@ -136,5 +136,5 @@ extern _IMPEXP_BHAPI BClipboard bhapi_clipboard;
 #endif
 */
 
-#endif /* __BHAPI_APPLICATION_H__ */
+#endif /* BHAPI_APPLICATION__H */
 

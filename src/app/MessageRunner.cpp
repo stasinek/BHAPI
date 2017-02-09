@@ -27,14 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "MessageRunner.h"
 #include "./../kernel/Kernel.h"
 #include "./../support/Locker.h"
 #include "./../support/Autolock.h"
-
 #include "./../private/PrivateHandler.h"
-
 #include "Application.h"
-#include "MessageRunner.h"
+#include "./../app/Messenger.h"
 
 extern BLocker* bhapi_get_handler_operator_locker();
 

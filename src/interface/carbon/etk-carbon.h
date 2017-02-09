@@ -27,12 +27,12 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_CARBON_H__
-#define __BHAPI_CARBON_H__
+#ifndef BHAPI_CARBON__H
+#define BHAPI_CARBON__H
 
 #ifdef MACOS
 #include <Carbon/Carbon.h>
 #endif /* MACOS */
 
-#endif /* __BHAPI_CARBON_H__ */
+#endif /* BHAPI_CARBON__H */
 

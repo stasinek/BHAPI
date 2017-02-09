@@ -37,7 +37,7 @@
 
 
 // return the number of microseconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-_IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
+IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
 {
 	FILETIME CurrentTime;
 
@@ -55,7 +55,7 @@ _IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
 
 
 // return the number of seconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-_IMPEXP_BHAPI b_uint32 bhapi_real_time_clock(void)
+IMPEXP_BHAPI b_uint32 bhapi_real_time_clock(void)
 {
 	return((b_uint32)(bhapi_real_time_clock_usecs() / SECS_TO_US));
 }
@@ -65,7 +65,7 @@ static b_bigtime_t bhapi_windows_boot_time = B_INT64_CONSTANT(-1);
 static LONG bhapi_windows_boot_time_locker = 0;
 
 
-_IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
+IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
 {
 	b_bigtime_t retValue = B_INT64_CONSTANT(-1);
 
@@ -89,7 +89,7 @@ _IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
 }
 
 
-_IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void)
+IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void)
 {
 	LARGE_INTEGER counter, freq;
 	if(QueryPerformanceCounter(&counter) != 0 && QueryPerformanceFrequency(&freq) != 0)

@@ -66,7 +66,7 @@ extern "C" char* bhapi_win32_convert_utf8_to_active(const char *str, b_int32 len
 
 extern "C" {
 
-_IMPEXP_BHAPI void bhapi_debug_log(bhapi_debug_level level, const char *format, va_list ap)
+IMPEXP_BHAPI void bhapi_debug_log(bhapi_debug_level level, const char *format, va_list ap)
 {
 	char *buffer = NULL;
 	char *prefix = NULL;
@@ -202,7 +202,7 @@ _IMPEXP_BHAPI void bhapi_debug_log(bhapi_debug_level level, const char *format, 
 }
 
 
-_IMPEXP_BHAPI void BHAPI_DEBUG(const char *format, ...)
+IMPEXP_BHAPI void BHAPI_DEBUG(const char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
@@ -211,7 +211,7 @@ _IMPEXP_BHAPI void BHAPI_DEBUG(const char *format, ...)
 }
 
 
-_IMPEXP_BHAPI void BHAPI_OUTPUT(const char *format, ...)
+IMPEXP_BHAPI void BHAPI_OUTPUT(const char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
@@ -220,7 +220,7 @@ _IMPEXP_BHAPI void BHAPI_OUTPUT(const char *format, ...)
 }
 
 
-_IMPEXP_BHAPI void BHAPI_WARNING(const char *format, ...)
+IMPEXP_BHAPI void BHAPI_WARNING(const char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
@@ -229,7 +229,7 @@ _IMPEXP_BHAPI void BHAPI_WARNING(const char *format, ...)
 }
 
 
-_IMPEXP_BHAPI void BHAPI_ERROR(const char *format, ...)
+IMPEXP_BHAPI void BHAPI_ERROR(const char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
@@ -266,7 +266,7 @@ static b_uint64 __bhapi_cur_allocated_memory = B_INT64_CONSTANT(0);
 
 extern "C" {
 
-_IMPEXP_BHAPI void* bhapi_malloc(size_t size, const char *file, int line, const char *method)
+IMPEXP_BHAPI void* bhapi_malloc(size_t size, const char *file, int line, const char *method)
 {
 	struct __bhapi_mem_list_t *entry = (struct __bhapi_mem_list_t *)malloc(sizeof(struct __bhapi_mem_list_t) + size);
 	if(entry == NULL)
@@ -308,7 +308,7 @@ _IMPEXP_BHAPI void* bhapi_malloc(size_t size, const char *file, int line, const 
 }
 
 
-_IMPEXP_BHAPI void* bhapi_calloc(size_t nmemb, size_t size, const char *file, int line, const char *method)
+IMPEXP_BHAPI void* bhapi_calloc(size_t nmemb, size_t size, const char *file, int line, const char *method)
 {
 	struct __bhapi_mem_list_t *entry = (struct __bhapi_mem_list_t *)malloc(sizeof(struct __bhapi_mem_list_t) + (nmemb * size));
 	if(entry == NULL)
@@ -351,7 +351,7 @@ _IMPEXP_BHAPI void* bhapi_calloc(size_t nmemb, size_t size, const char *file, in
 }
 
 
-_IMPEXP_BHAPI void* bhapi_realloc(void *ptr, size_t size, const char *file, int line, const char *method)
+IMPEXP_BHAPI void* bhapi_realloc(void *ptr, size_t size, const char *file, int line, const char *method)
 {
 	if(ptr == NULL) return bhapi_malloc(size, file, line, method);
 	if(size == 0) {bhapi_free(ptr, file, line, method); return NULL;}
@@ -437,7 +437,7 @@ _IMPEXP_BHAPI void* bhapi_realloc(void *ptr, size_t size, const char *file, int 
 }
 
 
-_IMPEXP_BHAPI void bhapi_free(void *ptr, const char *file, int line, const char *method)
+IMPEXP_BHAPI void bhapi_free(void *ptr, const char *file, int line, const char *method)
 {
 	if(ptr == NULL) return;
 
@@ -485,7 +485,7 @@ _IMPEXP_BHAPI void bhapi_free(void *ptr, const char *file, int line, const char 
 } // extern "C"
 
 
-_IMPEXP_BHAPI void* operator new(size_t size, const char *file, int line, const char *method, struct bhapi_memory_flag_t *flag)
+IMPEXP_BHAPI void* operator new(size_t size, const char *file, int line, const char *method, struct bhapi_memory_flag_t *flag)
 {
 	if(file == NULL) file = "<Unknown>";
 	if(method == NULL) method = "new";
@@ -493,14 +493,14 @@ _IMPEXP_BHAPI void* operator new(size_t size, const char *file, int line, const 
 }
 
 
-_IMPEXP_BHAPI void* operator new[](size_t size, const char *file, int line, const char *method, struct bhapi_memory_flag_t *flag)
+IMPEXP_BHAPI void* operator new[](size_t size, const char *file, int line, const char *method, struct bhapi_memory_flag_t *flag)
 {
 	if(method == NULL) method = "new[]";
 	return operator new(size, file, line, method, flag);
 }
 
 
-_IMPEXP_BHAPI void operator delete(void *ptr, const char *file, int line, const char *method, struct bhapi_memory_flag_t *flag)
+IMPEXP_BHAPI void operator delete(void *ptr, const char *file, int line, const char *method, struct bhapi_memory_flag_t *flag)
 {
 	if(file == NULL) file = "<Unknown>";
 	if(method == NULL) method = "delete";
@@ -508,56 +508,56 @@ _IMPEXP_BHAPI void operator delete(void *ptr, const char *file, int line, const 
 }
 
 
-_IMPEXP_BHAPI void operator delete[](void *ptr, const char *file, int line, const char *method, struct bhapi_memory_flag_t *flag)
+IMPEXP_BHAPI void operator delete[](void *ptr, const char *file, int line, const char *method, struct bhapi_memory_flag_t *flag)
 {
 	if(method == NULL) method = "delete[]";
 	operator delete(ptr, file, line, method, flag);
 }
 
 
-_IMPEXP_BHAPI void* operator new(size_t size)
+IMPEXP_BHAPI void* operator new(size_t size)
 {
 	return operator new(size, NULL, 0, "new", (struct bhapi_memory_flag_t*)0);
 }
 
 
-_IMPEXP_BHAPI void* operator new[](size_t size)
+IMPEXP_BHAPI void* operator new[](size_t size)
 {
 	return operator new[](size, NULL, 0, "new[]", (struct bhapi_memory_flag_t*)0);
 }
 
 
-_IMPEXP_BHAPI void* operator new(size_t size, const std::nothrow_t&) throw()
+IMPEXP_BHAPI void* operator new(size_t size, const std::nothrow_t&) throw()
 {
 	return operator new(size, NULL, 0, "new(nothrow_t)", (struct bhapi_memory_flag_t*)0);
 }
 
 
-_IMPEXP_BHAPI void* operator new[](size_t size, const std::nothrow_t&) throw()
+IMPEXP_BHAPI void* operator new[](size_t size, const std::nothrow_t&) throw()
 {
 	return operator new[](size, NULL, 0, "new[](nothrow_t)", (struct bhapi_memory_flag_t*)0);
 }
 
 
-_IMPEXP_BHAPI void operator delete(void *ptr)
+IMPEXP_BHAPI void operator delete(void *ptr)
 {
 	operator delete(ptr, NULL, 0, "delete", (struct bhapi_memory_flag_t*)0);
 }
 
 
-_IMPEXP_BHAPI void operator delete[](void *ptr)
+IMPEXP_BHAPI void operator delete[](void *ptr)
 {
 	operator delete[](ptr, NULL, 0, "delete[]", (struct bhapi_memory_flag_t*)0);
 }
 
 
-_IMPEXP_BHAPI void operator delete(void* ptr, const std::nothrow_t&)
+IMPEXP_BHAPI void operator delete(void* ptr, const std::nothrow_t&)
 {
 	operator delete(ptr, NULL, 0, "delete(nothrow_t)", (struct bhapi_memory_flag_t*)0);
 }
 
 
-_IMPEXP_BHAPI void operator delete[](void* ptr, const std::nothrow_t&)
+IMPEXP_BHAPI void operator delete[](void* ptr, const std::nothrow_t&)
 {
 	operator delete[](ptr, NULL, 0, "delete[](nothrow_t)", (struct bhapi_memory_flag_t*)0);
 }

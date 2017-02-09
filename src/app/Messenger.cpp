@@ -27,16 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <stdlib.h>
-
+#include "Messenger.h"
+#include "./../app/Looper.h"
 #include "./../kernel/Kernel.h"
 #include "./../support/ClassInfo.h"
 #include "./../support/Locker.h"
 #include "./../support/Autolock.h"
-
 #include "./../private/PrivateHandler.h"
+#include <stdlib.h>
 
-#include "Messenger.h"
 
 
 BMessenger::BMessenger()
@@ -416,7 +415,7 @@ BMessenger::_GetMessageFromPort(void *port, b_uint32 flags, b_bigtime_t timeout,
 	BMessage* retMsg = NULL;
 
 	do{
-		ssize_t bufferSize = bhapi_port_buffer_size_etc(port, flags, timeout);
+		b_size_t bufferSize = bhapi_port_buffer_size_etc(port, flags, timeout);
 		if(bufferSize == 0)
 		{
 			b_int32 code;
@@ -458,7 +457,7 @@ BMessenger::_GetMessageFromPort(void *port, b_uint32 flags, b_bigtime_t timeout,
 
 		size_t msgBufferSize = 0;
 		memcpy(&msgBufferSize, buffer, sizeof(size_t));
-		if(bufferSize != (ssize_t)msgBufferSize) /* the first "size_t" == FlattenedSize() */
+		if(bufferSize != (b_size_t)msgBufferSize) /* the first "size_t" == FlattenedSize() */
 		{
 			BHAPI_WARNING("[APP]: Message length is invalid. (%s:%d)", __FILE__, __LINE__);
 			free(buffer);

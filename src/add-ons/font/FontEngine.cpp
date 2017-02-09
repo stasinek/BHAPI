@@ -36,11 +36,12 @@
 
 #include "FontEngine.h"
 
-#include "./../../support/SupportDefs.h"
 #include "./../../support/Locker.h"
 #include "./../../support/Autolock.h"
+#include "./../../support/Errors.h"
 #include "./../../app/Application.h"
 #include "./../../add-ons/graphics/GraphicsEngine.h"
+#include "./../../kernel/Debug.h"
 
 static BFont* _bhapi_plain_font = NULL;
 static BFont* _bhapi_bold_font = NULL;
@@ -59,7 +60,7 @@ extern bool bhapi_update_freetype2_font_families(bool check_only);
 #endif // HAVE_FT2
 
 
-_IMPEXP_BHAPI bool bhapi_font_add(const char *family, const char *style, BFontEngine *engine)
+IMPEXP_BHAPI bool bhapi_font_add(const char *family, const char *style, BFontEngine *engine)
 {
 	if(family == NULL || *family == 0 || style == NULL || *style == 0 || engine == NULL) return false;
 
@@ -403,7 +404,7 @@ BFontEngine::RenderString(const BString &str, b_int32 *width, b_int32 *height, b
 }
 
 
-_IMPEXP_BHAPI b_int32 bhapi_count_font_families(void)
+IMPEXP_BHAPI b_int32 bhapi_count_font_families(void)
 {
 	BAutolock <BLocker> autolock(&bhapi_font_locker);
 
@@ -411,7 +412,7 @@ _IMPEXP_BHAPI b_int32 bhapi_count_font_families(void)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_get_font_family(b_int32 index, const char **name)
+IMPEXP_BHAPI b_status_t bhapi_get_font_family(b_int32 index, const char **name)
 {
 	if(!name) return B_BAD_VALUE;
 
@@ -425,7 +426,7 @@ _IMPEXP_BHAPI b_status_t bhapi_get_font_family(b_int32 index, const char **name)
 }
 
 
-_IMPEXP_BHAPI b_int32 bhapi_get_font_family_index(const char *name)
+IMPEXP_BHAPI b_int32 bhapi_get_font_family_index(const char *name)
 {
 	if(!name) return -1;
 
@@ -436,7 +437,7 @@ _IMPEXP_BHAPI b_int32 bhapi_get_font_family_index(const char *name)
 }
 
 
-_IMPEXP_BHAPI b_int32 bhapi_get_font_style_index(const char *family, const char *name)
+IMPEXP_BHAPI b_int32 bhapi_get_font_style_index(const char *family, const char *name)
 {
 	if(!family || !name) return -1;
 
@@ -454,7 +455,7 @@ _IMPEXP_BHAPI b_int32 bhapi_get_font_style_index(const char *family, const char 
 }
 
 
-_IMPEXP_BHAPI b_int32 bhapi_count_font_styles(const char *name)
+IMPEXP_BHAPI b_int32 bhapi_count_font_styles(const char *name)
 {
 	BAutolock <BLocker> autolock(&bhapi_font_locker);
 
@@ -462,7 +463,7 @@ _IMPEXP_BHAPI b_int32 bhapi_count_font_styles(const char *name)
 }
 
 
-_IMPEXP_BHAPI b_int32 bhapi_count_font_styles(b_int32 index)
+IMPEXP_BHAPI b_int32 bhapi_count_font_styles(b_int32 index)
 {
 	if(index < 0) return -1;
 
@@ -475,7 +476,7 @@ _IMPEXP_BHAPI b_int32 bhapi_count_font_styles(b_int32 index)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_get_font_style(const char *family, b_int32 index, const char **name)
+IMPEXP_BHAPI b_status_t bhapi_get_font_style(const char *family, b_int32 index, const char **name)
 {
 	if(!family || !name) return B_BAD_VALUE;
 
@@ -496,7 +497,7 @@ _IMPEXP_BHAPI b_status_t bhapi_get_font_style(const char *family, b_int32 index,
 }
 
 
-_IMPEXP_BHAPI BFontEngine* bhapi_get_font_engine(const char *family, const char *style)
+IMPEXP_BHAPI BFontEngine* bhapi_get_font_engine(const char *family, const char *style)
 {
 	if(!family || !style) return NULL;
 
@@ -513,7 +514,7 @@ _IMPEXP_BHAPI BFontEngine* bhapi_get_font_engine(const char *family, const char 
 }
 
 
-_IMPEXP_BHAPI BFontEngine* bhapi_get_font_engine(b_int32 familyIndex, b_int32 styleIndex)
+IMPEXP_BHAPI BFontEngine* bhapi_get_font_engine(b_int32 familyIndex, b_int32 styleIndex)
 {
 	BAutolock <BLocker> autolock(&bhapi_font_locker);
 
@@ -548,7 +549,7 @@ static bool bhapi_update_other_font_families(bool check_only)
 }
 
 
-_IMPEXP_BHAPI bool bhapi_updatb_font_families(bool check_only)
+IMPEXP_BHAPI bool bhapi_updatb_font_families(bool check_only)
 {
 	BAutolock <BLocker> autolock(&bhapi_font_locker);
 

@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_RECT_H__
-#define __BHAPI_RECT_H__
+#ifndef BHAPI_RECT__H
+#define BHAPI_RECT__H
 
 #include <math.h>
 #include "./../interface/Point.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BRect {
+class IMPEXP_BHAPI BRect {
 public:
 	float left;
 	float top;
@@ -238,5 +238,5 @@ inline float BRect::Height() const
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_RECT_H__ */
+#endif /* BHAPI_RECT__H */
 

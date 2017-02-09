@@ -252,7 +252,7 @@ static void* bhapi_create_port_for_IPC(b_int32 queue_length, const char *name, b
 }
 
 
-_IMPEXP_BHAPI void* bhapi_open_port(const char *name)
+IMPEXP_BHAPI void* bhapi_open_port(const char *name)
 {
 	if(name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH - 1) return NULL;
 
@@ -322,7 +322,7 @@ _IMPEXP_BHAPI void* bhapi_open_port(const char *name)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_open_port_by_source(void *data)
+IMPEXP_BHAPI void* bhapi_open_port_by_source(void *data)
 {
 	bhapi_port_t *port = (bhapi_port_t*)data;
 	if(!port || !port->portInfo) return NULL;
@@ -396,7 +396,7 @@ static void* bhapi_create_port_for_local(b_int32 queue_length)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_create_port(b_int32 queue_length, const char *name, bhapi_area_access area_access)
+IMPEXP_BHAPI void* bhapi_create_port(b_int32 queue_length, const char *name, bhapi_area_access area_access)
 {
 	return((name == NULL || *name == 0) ?
 			bhapi_create_port_for_local(queue_length) :
@@ -404,7 +404,7 @@ _IMPEXP_BHAPI void* bhapi_create_port(b_int32 queue_length, const char *name, bh
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_delete_port(void *data)
+IMPEXP_BHAPI b_status_t bhapi_delete_port(void *data)
 {
 	bhapi_port_t *port = (bhapi_port_t*)data;
 	if(!port) return B_BAD_VALUE;
@@ -445,7 +445,7 @@ _IMPEXP_BHAPI b_status_t bhapi_delete_port(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_close_port(void *data)
+IMPEXP_BHAPI b_status_t bhapi_close_port(void *data)
 {
 	bhapi_port_t *port = (bhapi_port_t*)data;
 	if(!port) return B_BAD_VALUE;
@@ -465,7 +465,7 @@ _IMPEXP_BHAPI b_status_t bhapi_close_port(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_write_port_etc(void *data, b_int32 code, const void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t microseconds_timeout)
+IMPEXP_BHAPI b_status_t bhapi_write_port_etc(void *data, b_int32 code, const void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
 	bhapi_port_t *port = (bhapi_port_t*)data;
 	if(!port) return B_BAD_VALUE;
@@ -560,12 +560,12 @@ _IMPEXP_BHAPI b_status_t bhapi_write_port_etc(void *data, b_int32 code, const vo
 }
 
 
-_IMPEXP_BHAPI ssize_t bhapi_port_buffer_size_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
+IMPEXP_BHAPI b_size_t bhapi_port_buffer_size_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
 	bhapi_port_t *port = (bhapi_port_t*)data;
 	if(!port) return B_BAD_VALUE;
 
-    if(microseconds_timeout < B_INT64_CONSTANT(0)) return (ssize_t)B_BAD_VALUE;
+    if(microseconds_timeout < B_INT64_CONSTANT(0)) return (b_size_t)B_BAD_VALUE;
 
 	b_bigtime_t currentTime = bhapi_real_time_clock_usecs();
 	bool wait_forever = false;
@@ -589,7 +589,7 @@ _IMPEXP_BHAPI ssize_t bhapi_port_buffer_size_etc(void *data, b_uint32 flags, b_b
 		memcpy(&msgLen, buffer, sizeof(size_t));
 
 		bhapi_unlock_port_inter(port);
-		return (ssize_t)msgLen;
+		return (b_size_t)msgLen;
 	}
 	else if(port->portInfo->closed)
 	{
@@ -642,11 +642,11 @@ _IMPEXP_BHAPI ssize_t bhapi_port_buffer_size_etc(void *data, b_uint32 flags, b_b
 
 	bhapi_unlock_port_inter(port);
 
-	return (ssize_t)retval;
+	return (b_size_t)retval;
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_read_port_etc(void *data, b_int32 *code, void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t microseconds_timeout)
+IMPEXP_BHAPI b_status_t bhapi_read_port_etc(void *data, b_int32 *code, void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
 	bhapi_port_t *port = (bhapi_port_t*)data;
 	if(!port) return B_BAD_VALUE;
@@ -750,25 +750,25 @@ _IMPEXP_BHAPI b_status_t bhapi_read_port_etc(void *data, b_int32 *code, void *bu
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_write_port(void *data, b_int32 code, const void *buf, size_t buf_size)
+IMPEXP_BHAPI b_status_t bhapi_write_port(void *data, b_int32 code, const void *buf, size_t buf_size)
 {
 	return bhapi_write_port_etc(data, code, buf, buf_size, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-_IMPEXP_BHAPI ssize_t bhapi_port_buffer_size(void *data)
+IMPEXP_BHAPI b_size_t bhapi_port_buffer_size(void *data)
 {
 	return bhapi_port_buffer_size_etc(data, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_read_port(void *data, b_int32 *code, void *buf, size_t buf_size)
+IMPEXP_BHAPI b_status_t bhapi_read_port(void *data, b_int32 *code, void *buf, size_t buf_size)
 {
 	return bhapi_read_port_etc(data, code, buf, buf_size, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-_IMPEXP_BHAPI b_int32 bhapi_port_count(void *data)
+IMPEXP_BHAPI b_int32 bhapi_port_count(void *data)
 {
 	bhapi_port_t *port = (bhapi_port_t*)data;
 	if(!port) return B_BAD_VALUE;

@@ -27,9 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_OS_H__
-#define __BHAPI_OS_H__
-
+#ifndef BHAPI_OS__H
+#define BHAPI_OS__H
 #include "./../support/SupportDefs.h"
 
 typedef b_status_t				(*b_thread_func)(void*);
@@ -60,9 +59,9 @@ enum {
     B_ABSOLUTE_TIMEOUT	= 16	/* honor the (absolute) timeout parameter */
 };
 
-#ifndef __BHAPI_KERNEL_H__
+#ifndef BHAPI_KERNEL__H
 #include "Kernel.h"
-#endif /* __BHAPI_KERNEL_H__ */
+#endif /* BHAPI_KERNEL__H */
 
 /* time functions */
 #define b_snooze(microseconds)			bhapi_snooze(microseconds)
@@ -71,5 +70,5 @@ enum {
 #define b_real_time_clock_usecs()		bhapi_real_time_clock_usecs()
 #define b_system_time()				bhapi_system_time()
 
-#endif /* __BHAPI_OS_H__ */
+#endif /* BHAPI_OS__H */
 

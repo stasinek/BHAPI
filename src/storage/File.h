@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_FILE_H__
-#define __BHAPI_FILE_H__ 
+#ifndef BHAPI_FILE__H
+#define BHAPI_FILE__H
 
 #include "./StorageDefs.h"
 #include "./Directory.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BFile {
+class IMPEXP_BHAPI BFile {
 public:
     BFile();
     BFile(const char *path, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
@@ -53,10 +53,10 @@ public:
 	bool		IsReadable() const;
 	bool		IsWritable() const;
 
-	ssize_t		Read(void *buffer, size_t size);
-    ssize_t		ReadAt(b_int64 pos, void *buffer, size_t size);
-	ssize_t		Write(const void *buffer, size_t size);
-    ssize_t		WriteAt(b_int64 pos, const void *buffer, size_t size);
+	b_size_t		Read(void *buffer, size_t size);
+    b_size_t		ReadAt(b_int64 pos, void *buffer, size_t size);
+	b_size_t		Write(const void *buffer, size_t size);
+    b_size_t		WriteAt(b_int64 pos, const void *buffer, size_t size);
 
     b_int64		Seek(b_int64 position, b_uint32 seek_mode);
     b_int64		Position() const;
@@ -71,5 +71,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_FILE_H__ */
+#endif /* BHAPI_FILE__H */
 

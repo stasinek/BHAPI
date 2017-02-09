@@ -30,31 +30,31 @@
 #include "GraphicsDefs.h"
 #include "Point.h"
 
-extern _IMPEXP_BHAPI const BPoint B_ORIGIN(0, 0);
+extern IMPEXP_BHAPI const BPoint B_ORIGIN(0, 0);
 
 extern "C" {
 
-extern _IMPEXP_BHAPI const b_pattern B_SOLID_HIGH = b_makb_pattern(0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff);
-extern _IMPEXP_BHAPI const b_pattern B_MIXED_COLORS = b_makb_pattern(0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55);
-extern _IMPEXP_BHAPI const b_pattern B_SOLID_LOW = b_makb_pattern(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
+extern IMPEXP_BHAPI const b_pattern B_SOLID_HIGH = b_makb_pattern(0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff);
+extern IMPEXP_BHAPI const b_pattern B_MIXED_COLORS = b_makb_pattern(0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55);
+extern IMPEXP_BHAPI const b_pattern B_SOLID_LOW = b_makb_pattern(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
-extern _IMPEXP_BHAPI const b_rgb_color B_TRANSPARENT_COLOR = b_makb_rgb_color(233, 233, 233, 255);
+extern IMPEXP_BHAPI const b_rgb_color B_TRANSPARENT_COLOR = b_makb_rgb_color(233, 233, 233, 255);
 
 #ifdef BHAPI_BIG_ENDIAN
-extern _IMPEXP_BHAPI const b_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xE9E9E9FF;
+extern IMPEXP_BHAPI const b_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xE9E9E9FF;
 #else
-extern _IMPEXP_BHAPI const b_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xFFE9E9E9;
+extern IMPEXP_BHAPI const b_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xFFE9E9E9;
 #endif
 
 
-_IMPEXP_BHAPI b_uint8 bhapi_find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b)
+IMPEXP_BHAPI b_uint8 bhapi_find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b)
 {
 	// RGB: 3-3-2
 	return((r & 0xe0) | ((g >> 3) & 0x1c) | (b >> 6));
 }
 
 
-_IMPEXP_BHAPI b_rgb_color bhapi_find_color_for_index(b_uint8 index)
+IMPEXP_BHAPI b_rgb_color bhapi_find_color_for_index(b_uint8 index)
 {
 	// RGB: 3-3-2
 	b_uint8 r = index & 0xe0;

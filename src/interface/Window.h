@@ -27,10 +27,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_WINDOW_H__
-#define __BHAPI_WINDOW_H__
+#ifndef BHAPI_WINDOW__H
+#define BHAPI_WINDOW__H
 
-#include "./../support/List.h"
+#include "./../support/BList.h"
 #include "./GraphicsDefs.h"
 #include "./Region.h"
 #include "./../app/Looper.h"
@@ -96,7 +96,7 @@ class BGraphicsDrawable;
 class BGraphicsWindow;
 class BLayoutContainer;
 
-class _IMPEXP_BHAPI BWindow : public BLooper {
+class IMPEXP_BHAPI BWindow : public BLooper {
 public:
     BWindow(BRect frame,
 		const char *title,
@@ -272,5 +272,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_WINDOW_H__ */
+#endif /* BHAPI_WINDOW__H */
 

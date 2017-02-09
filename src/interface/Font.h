@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_FONT_H__
-#define __BHAPI_FONT_H__
+#ifndef BHAPI_FONT__H
+#define BHAPI_FONT__H
 
 #include "./../support/SupportDefs.h"
 #include "./../support/StringMe.h"
@@ -55,7 +55,7 @@ typedef struct _b_font_desc b_font_desc;
 class BView;
 class BFontEngine;
 
-class _IMPEXP_BHAPI BFont {
+class IMPEXP_BHAPI BFont {
 public:
 	BFont();
 	BFont(const BFont &font);
@@ -113,18 +113,18 @@ private:
 	BFontEngine *Engine() const;
 };
 
-extern _IMPEXP_BHAPI const BFont* bhapi_plain_font;
-extern _IMPEXP_BHAPI const BFont* bhapi_bold_font;
-extern _IMPEXP_BHAPI const BFont* bhapi_fixed_font;
+extern IMPEXP_BHAPI const BFont* bhapi_plain_font;
+extern IMPEXP_BHAPI const BFont* bhapi_bold_font;
+extern IMPEXP_BHAPI const BFont* bhapi_fixed_font;
 
-_IMPEXP_BHAPI b_int32	bhapi_count_font_families(void);
-_IMPEXP_BHAPI b_status_t	bhapi_get_font_family(b_int32 index, const char **name);
-_IMPEXP_BHAPI b_int32	bhapi_get_font_family_index(const char *name);
-_IMPEXP_BHAPI b_int32	bhapi_count_font_styles(const char *family);
-_IMPEXP_BHAPI b_int32	bhapi_count_font_styles(b_int32 index);
-_IMPEXP_BHAPI b_status_t	bhapi_get_font_style(const char *family, b_int32 index, const char **name);
-_IMPEXP_BHAPI b_int32	bhapi_get_font_style_index(const char *family, const char *name);
-_IMPEXP_BHAPI bool	bhapi_updatb_font_families(bool check_only);
+IMPEXP_BHAPI b_int32	bhapi_count_font_families(void);
+IMPEXP_BHAPI b_status_t	bhapi_get_font_family(b_int32 index, const char **name);
+IMPEXP_BHAPI b_int32	bhapi_get_font_family_index(const char *name);
+IMPEXP_BHAPI b_int32	bhapi_count_font_styles(const char *family);
+IMPEXP_BHAPI b_int32	bhapi_count_font_styles(b_int32 index);
+IMPEXP_BHAPI b_status_t	bhapi_get_font_style(const char *family, b_int32 index, const char **name);
+IMPEXP_BHAPI b_int32	bhapi_get_font_style_index(const char *family, const char *name);
+IMPEXP_BHAPI bool	bhapi_updatb_font_families(bool check_only);
 
 #endif /* __cplusplus */
 
@@ -179,5 +179,5 @@ struct _b_font_desc {
 };
 
 
-#endif /* __BHAPI_FONT_H__ */
+#endif /* BHAPI_FONT__H */
 

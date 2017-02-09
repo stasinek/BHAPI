@@ -27,12 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/SupportDefs.h"
-
 #include "ByteOrder.h"
 
-
-_IMPEXP_BHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, b_swap_action action)
+IMPEXP_BHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, b_swap_action action)
 {
 	b_status_t retVal = B_BAD_VALUE;
 
@@ -127,7 +124,7 @@ _IMPEXP_BHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, 
 }
 
 
-_IMPEXP_BHAPI bool b_is_type_swapped(b_type_code type)
+IMPEXP_BHAPI bool b_is_type_swapped(b_type_code type)
 {
 	switch(type)
 	{
@@ -144,7 +141,7 @@ _IMPEXP_BHAPI bool b_is_type_swapped(b_type_code type)
 		case B_MESSENGER_TYPE:
 		case B_POINTER_TYPE:
 		case B_SIZE_T_TYPE:
-		case B_SSIZE_T_TYPE:
+		case B_b_size_t_TYPE:
 		case B_STRING_TYPE:
 		case B_UINT64_TYPE:
 		case B_UINT32_TYPE:
@@ -162,7 +159,7 @@ _IMPEXP_BHAPI bool b_is_type_swapped(b_type_code type)
 }
 
 
-_IMPEXP_BHAPI float b_swap_float(float value)
+IMPEXP_BHAPI float b_swap_float(float value)
 {
 #if SIZEOF_FLOAT == 4
 	b_int32 v;
@@ -176,7 +173,7 @@ _IMPEXP_BHAPI float b_swap_float(float value)
 }
 
 
-_IMPEXP_BHAPI double b_swap_double(double value)
+IMPEXP_BHAPI double b_swap_double(double value)
 {
 #if SIZEOF_DOUBLE == 8
 	b_int64 v;

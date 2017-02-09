@@ -28,10 +28,12 @@
  * --------------------------------------------------------------------------*/
 
 #include "./../kernel/Kernel.h"
+#include "./../kernel/Debug.h"
 #include "./../support/StringMe.h"
-#include "./../support/List.h"
+#include "./../support/BList.h"
 #include "./../support/Locker.h"
 #include "./../support/Autolock.h"
+#include "./../support/BList.h"
 
 #include "./../private/PrivateApplication.h"
 #include "./../private/PrivateHandler.h"

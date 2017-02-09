@@ -28,14 +28,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_MESSAGE_RUNNER_H__
-#define __BHAPI_MESSAGE_RUNNER_H__
-
-#include "./../app/Messenger.h"
+#ifndef BHAPI_MESSAGE_RUNNER__H
+#define BHAPI_MESSAGE_RUNNER__H
+#include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
-class _IMPEXP_BHAPI BMessageRunner {
+class BMessenger;
+class IMPEXP_BHAPI BMessageRunner {
 public:
 	BMessageRunner(const BMessenger &target,
 		       const BMessage *msg,
@@ -76,5 +75,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_MESSAGE_RUNNER_H__ */
+#endif /* BHAPI_MESSAGE_RUNNER__H */
 

@@ -28,8 +28,8 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_COLOR_CONTROL_H__
-#define __BHAPI_COLOR_CONTROL_H__
+#ifndef BHAPI_COLOR_CONTROL__H
+#define BHAPI_COLOR_CONTROL__H
 
 #include "./../interface/Control.h"
 
@@ -37,7 +37,7 @@
 
 class BBitmap;
 
-class _IMPEXP_BHAPI BColorControl : public BControl {
+class IMPEXP_BHAPI BColorControl : public BControl {
 public:
     BColorControl(BPoint leftTop, const char *name, BMessage *message = NULL, bool bufferedDrawing = false);
     virtual ~BColorControl();
@@ -64,5 +64,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_COLOR_CONTROL_H__ */
+#endif /* BHAPI_COLOR_CONTROL__H */
 

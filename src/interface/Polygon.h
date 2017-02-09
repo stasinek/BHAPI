@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_POLYGON_H__
-#define __BHAPI_POLYGON_H__
+#ifndef BHAPI_POLYGON__H
+#define BHAPI_POLYGON__H
 
 #include "./../interface/Rect.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BPolygon {
+class IMPEXP_BHAPI BPolygon {
 public:
     BPolygon(const BPoint *pts, b_int32 nPts);
     BPolygon();
@@ -81,5 +81,5 @@ inline void BPolygon::RemovePoint(b_int32 index, bool updateFrame)
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_POLYGON_H__ */
+#endif /* BHAPI_POLYGON__H */
 

@@ -28,10 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../kernel/Kernel.h"
-
 #include "Locker.h"
-
+#include "./../kernel/Kernel.h"
 
 BLocker::BLocker()
 {

@@ -28,14 +28,14 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_STATUS_BAR_H__
-#define __BHAPI_STATUS_BAR_H__
+#ifndef BHAPI_STATUS_BAR__H
+#define BHAPI_STATUS_BAR__H
 
 #include "./../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BStatusBar : public BView {
+class IMPEXP_BHAPI BStatusBar : public BView {
 public:
     BStatusBar(BRect frame,
 		   const char *name,
@@ -76,5 +76,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_STATUS_BAR_H__ */
+#endif /* BHAPI_STATUS_BAR__H */
 

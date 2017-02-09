@@ -27,22 +27,19 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_STREAM_IO_H__
-#define __BHAPI_STREAM_IO_H__
-
-#include "DataIO.h"
-
+#ifndef BHAPI_STREAM_IO__H
+#define BHAPI_STREAM_IO__H
+#include "./SupportDefs.h"
+#include "./DataIO.h"
 #ifdef __cplusplus /* Just for C++ */
-
 class BString;
-
-class _IMPEXP_BHAPI BStreamIO : public EDataIO {
+class IMPEXP_BHAPI BStreamIO : public EDataIO {
 public:
     BStreamIO();
     virtual ~BStreamIO();
 
-	virtual ssize_t		Read(void *buffer, size_t size);
-	virtual ssize_t		Write(const void *buffer, size_t size);
+	virtual b_size_t		Read(void *buffer, size_t size);
+	virtual b_size_t		Write(const void *buffer, size_t size);
 
     BStreamIO 		&operator<<(b_int8 value);
     BStreamIO 		&operator<<(b_uint8 value);
@@ -63,14 +60,14 @@ public:
 	// TODO: operator>>()
 };
 
-extern _IMPEXP_BHAPI BStreamIO& endl;
-extern _IMPEXP_BHAPI BStreamIO& ends;
+extern IMPEXP_BHAPI BStreamIO& endl;
+extern IMPEXP_BHAPI BStreamIO& ends;
 
-extern _IMPEXP_BHAPI BStreamIO& EIn;
-extern _IMPEXP_BHAPI BStreamIO& EOut;
-extern _IMPEXP_BHAPI BStreamIO& EErr;
+extern IMPEXP_BHAPI BStreamIO& EIn;
+extern IMPEXP_BHAPI BStreamIO& EOut;
+extern IMPEXP_BHAPI BStreamIO& EErr;
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_STREAM_IO_H__ */
+#endif /* BHAPI_STREAM_IO__H */
 

@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_TEXT_VIEW_H__
-#define __BHAPI_TEXT_VIEW_H__
+#ifndef BHAPI_TEXT_VIEW__H
+#define BHAPI_TEXT_VIEW__H
 
 #include "./../support/StringMe.h"
 #include "./../interface/View.h"
@@ -64,7 +64,7 @@ class BFile;
 class BClipboard;
 
 
-class _IMPEXP_BHAPI BTextView : public BView {
+class IMPEXP_BHAPI BTextView : public BView {
 public:
 	BTextView(BRect frame,
 		  const char *name,
@@ -255,5 +255,5 @@ inline void BTextView::Clear()
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_TEXT_VIEW_H__ */
+#endif /* BHAPI_TEXT_VIEW__H */
 

@@ -46070,7 +46070,6 @@ private:
 # 35 ".././src/support/./../app/./../support/List.h" 2
 
 
-
 class __attribute__((dllexport)) BList {
 public:
 
@@ -46616,7 +46615,6 @@ private:
 # 1 ".././src/support/List.h" 1
 # 37 ".././src/support/StringArray.h" 2
 class BString;
-
 class __attribute__((dllexport)) BStringArray {
 public:
     BStringArray();
@@ -46670,7 +46668,7 @@ public:
     b_int32 IFindString(const BString &string, b_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
 
 private:
-    class BList list;
+    BList list;
 };
 # 41 ".././src/SupportKit.h" 2
 # 1 ".././src/support/DataIO.h" 1
@@ -47466,10 +47464,13 @@ private:
 # 36 ".././src/./storage/./../interface/Window.h" 2
 # 1 ".././src/./storage/./../interface/./../app/Looper.h" 1
 # 34 ".././src/./storage/./../interface/./../app/Looper.h"
-# 1 ".././src/./storage/./../interface/./../app/./../support/List.h" 1
+# 1 ".././src/./storage/./../interface/./../app/./../support/SupportDefs.h" 1
 # 35 ".././src/./storage/./../interface/./../app/Looper.h" 2
+
+# 1 ".././src/./storage/./../interface/./../app/./../support/List.h" 1
+# 37 ".././src/./storage/./../interface/./../app/Looper.h" 2
 # 1 ".././src/./storage/./../interface/./../app/./../kernel/OS.h" 1
-# 36 ".././src/./storage/./../interface/./../app/Looper.h" 2
+# 38 ".././src/./storage/./../interface/./../app/Looper.h" 2
 # 1 ".././src/./storage/./../interface/./../app/./../app/AppDefs.h" 1
 # 34 ".././src/./storage/./../interface/./../app/./../app/AppDefs.h"
 # 1 ".././src/./storage/./../interface/./../app/./../app/./../support/SupportDefs.h" 1
@@ -47540,7 +47541,7 @@ enum {
     B_GET_SUPPORTED_SUITES = 'SUIT',
     B_INPUT_METHOD_EVENT = 'IMEV'
 };
-# 37 ".././src/./storage/./../interface/./../app/Looper.h" 2
+# 39 ".././src/./storage/./../interface/./../app/Looper.h" 2
 # 1 ".././src/./storage/./../interface/./../app/./../app/Handler.h" 1
 # 34 ".././src/./storage/./../interface/./../app/./../app/Handler.h"
 # 1 ".././src/./storage/./../interface/./../app/./../app/./../support/Archivable.h" 1
@@ -47626,7 +47627,7 @@ private:
  void *fObserverList;
  BList *fFilters;
 };
-# 38 ".././src/./storage/./../interface/./../app/Looper.h" 2
+# 40 ".././src/./storage/./../interface/./../app/Looper.h" 2
 # 1 ".././src/./storage/./../interface/./../app/./../app/MessageQueue.h" 1
 # 34 ".././src/./storage/./../interface/./../app/./../app/MessageQueue.h"
 # 1 ".././src/./storage/./../interface/./../app/./../app/./../app/Message.h" 1
@@ -47664,7 +47665,7 @@ private:
  BList fMessagesList;
  void *fLocker;
 };
-# 39 ".././src/./storage/./../interface/./../app/Looper.h" 2
+# 41 ".././src/./storage/./../interface/./../app/Looper.h" 2
 # 1 ".././src/./storage/./../interface/./../app/./../app/MessageFilter.h" 1
 # 35 ".././src/./storage/./../interface/./../app/./../app/MessageFilter.h"
 # 1 ".././src/./storage/./../interface/./../app/./../app/./../app/Handler.h" 1
@@ -47730,7 +47731,7 @@ private:
 
  b_filter_result doFilter(BMessage *message, BHandler **target);
 };
-# 40 ".././src/./storage/./../interface/./../app/Looper.h" 2
+# 42 ".././src/./storage/./../interface/./../app/Looper.h" 2
 
 
 
@@ -47800,7 +47801,7 @@ public:
  static BLooper *LooperForThread(b_thread_id tid);
 
 protected:
-# 127 ".././src/./storage/./../interface/./../app/Looper.h"
+# 129 ".././src/./storage/./../interface/./../app/Looper.h"
  BMessage *NextLooperMessage(b_bigtime_t timeout = 9223372036854775807ll);
  void DispatchLooperMessage(BMessage *msg);
 

@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_MENU_ITEM_H__
-#define __BHAPI_MENU_ITEM_H__
+#ifndef BHAPI_MENU_ITEM__H
+#define BHAPI_MENU_ITEM__H
 
 #include "./../support/Archivable.h"
 #include "./../app/Invoker.h"
@@ -37,7 +37,7 @@
 
 class BMenu;
 
-class _IMPEXP_BHAPI BMenuItem : public BArchivable, public BInvoker {
+class IMPEXP_BHAPI BMenuItem : public BArchivable, public BInvoker {
 public:
     BMenuItem(const char *label, BMessage *message, char shortcut = 0, b_uint32 modifiers = 0);
 	BMenuItem(BMenu *menu, BMessage *message = NULL);
@@ -89,7 +89,7 @@ private:
 };
 
 
-class _IMPEXP_BHAPI BMenuSeparatorItem : public BMenuItem {
+class IMPEXP_BHAPI BMenuSeparatorItem : public BMenuItem {
 public:
 	BMenuSeparatorItem();
 	virtual ~BMenuSeparatorItem();
@@ -103,5 +103,5 @@ protected:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_MENU_ITEM_H__ */
+#endif /* BHAPI_MENU_ITEM__H */
 

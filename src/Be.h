@@ -28,6 +28,7 @@
  * --------------------------------------------------------------------------*/
 
 #include "./support/SupportDefs.h"
+
 #define BHAPI_MAJOR_VERSION 0
 #define BHAPI_MINOR_VERSION 0
 #define BHAPI_MICRO_VERSION 1
@@ -36,15 +37,14 @@
 
 extern "C" {
 
-extern _IMPEXP_BHAPI const b_uint8 bhapi_major_version = BHAPI_MAJOR_VERSION;
-extern _IMPEXP_BHAPI const b_uint8 bhapi_minor_version = BHAPI_MINOR_VERSION;
-extern _IMPEXP_BHAPI const b_uint8 bhapi_micro_version = BHAPI_MICRO_VERSION;
-extern _IMPEXP_BHAPI const b_uint8 bhapi_interface_age = BHAPI_INTERFACE_AGE;
-extern _IMPEXP_BHAPI const b_uint16 bhapi_binary_age = BHAPI_BINARY_AGE;
+extern IMPEXP_BHAPI const b_uint8 bhapi_major_version = BHAPI_MAJOR_VERSION;
+extern IMPEXP_BHAPI const b_uint8 bhapi_minor_version = BHAPI_MINOR_VERSION;
+extern IMPEXP_BHAPI const b_uint8 bhapi_micro_version = BHAPI_MICRO_VERSION;
+extern IMPEXP_BHAPI const b_uint8 bhapi_interface_age = BHAPI_INTERFACE_AGE;
+extern IMPEXP_BHAPI const b_uint16 bhapi_binary_age = BHAPI_BINARY_AGE;
 
 } // extern "C"
 
-#include "SupportKit.h"
 #include "KernelKit.h"
 #include "StorageKit.h"
 #include "AppKit.h"
@@ -52,4 +52,4 @@ extern _IMPEXP_BHAPI const b_uint16 bhapi_binary_age = BHAPI_BINARY_AGE;
 #include "InterfaceKit.h"
 #include "XmlKit.h"
 #include "NetKit.h"
-
+#include "SupportKit.h"

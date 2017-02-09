@@ -155,7 +155,7 @@ public:
 		{
 			int32 msgCode = 0;
 			char buf = 0;
-			ssize_t readBytes = read_port(iLocker, &msgCode, &buf, 1);
+			b_size_t readBytes = read_port(iLocker, &msgCode, &buf, 1);
 			if(readBytes < 1) continue;
 			if(readBytes != 1 || msgCode != 'bhapi_' || buf != 1)
 				BHAPI_ERROR("[KERNEL]: Unable to lock the locker for global semaphore.");
@@ -294,7 +294,7 @@ static void* bhapi_create_sem_for_IPC(b_int64 count, const char *name, bhapi_are
 }
 
 
-_IMPEXP_BHAPI void* bhapi_clone_sem(const char *name)
+IMPEXP_BHAPI void* bhapi_clone_sem(const char *name)
 {
 	if(name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH) return NULL;
 	if(strlen(name) > B_OS_NAME_LENGTH - 4) // because of length of area's name can't exceeds B_OS_NAME_LENGTH - 4
@@ -339,7 +339,7 @@ _IMPEXP_BHAPI void* bhapi_clone_sem(const char *name)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_clone_sem_by_source(void *data)
+IMPEXP_BHAPI void* bhapi_clone_sem_by_source(void *data)
 {
 	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
 	if(!sem || !sem->semInfo) return NULL;
@@ -392,7 +392,7 @@ static void* bhapi_create_sem_for_local(b_int64 count)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_create_sem(b_int64 count, const char *name, bhapi_area_access area_access)
+IMPEXP_BHAPI void* bhapi_create_sem(b_int64 count, const char *name, bhapi_area_access area_access)
 {
 	return((name == NULL || *name == 0) ?
 			bhapi_create_sem_for_local(count) :
@@ -400,7 +400,7 @@ _IMPEXP_BHAPI void* bhapi_create_sem(b_int64 count, const char *name, bhapi_area
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_get_sem_info(void *data, bhapi_sem_info *info)
+IMPEXP_BHAPI b_status_t bhapi_get_sem_info(void *data, bhapi_sem_info *info)
 {
 	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
 	if(!sem || !info) return B_BAD_VALUE;
@@ -421,7 +421,7 @@ _IMPEXP_BHAPI b_status_t bhapi_get_sem_info(void *data, bhapi_sem_info *info)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_delete_sem(void *data)
+IMPEXP_BHAPI b_status_t bhapi_delete_sem(void *data)
 {
 	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
 	if(!sem || !sem->semInfo) return B_BAD_VALUE;
@@ -478,7 +478,7 @@ _IMPEXP_BHAPI b_status_t bhapi_delete_sem(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_delete_sem_etc(void *data, bool no_clone)
+IMPEXP_BHAPI b_status_t bhapi_delete_sem_etc(void *data, bool no_clone)
 {
 	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
 	if(!sem || !sem->semInfo) return B_BAD_VALUE;
@@ -539,7 +539,7 @@ _IMPEXP_BHAPI b_status_t bhapi_delete_sem_etc(void *data, bool no_clone)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_close_sem(void *data)
+IMPEXP_BHAPI b_status_t bhapi_close_sem(void *data)
 {
 	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
 	if(!sem) return B_BAD_VALUE;
@@ -570,7 +570,7 @@ _IMPEXP_BHAPI b_status_t bhapi_close_sem(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint32 flags, b_bigtime_t microseconds_timeout)
+IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
 	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
 	if(!sem) return B_BAD_VALUE;
@@ -681,13 +681,13 @@ _IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_acquire_sem(void *data)
+IMPEXP_BHAPI b_status_t bhapi_acquire_sem(void *data)
 {
 	return bhapi_acquire_sem_etc(data, B_INT64_CONSTANT(1), B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_release_sem_etc(void *data, b_int64 count, b_uint32 flags)
+IMPEXP_BHAPI b_status_t bhapi_release_sem_etc(void *data, b_int64 count, b_uint32 flags)
 {
 	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
 	if(!sem || count < B_INT64_CONSTANT(0)) return B_BAD_VALUE;
@@ -718,13 +718,13 @@ _IMPEXP_BHAPI b_status_t bhapi_release_sem_etc(void *data, b_int64 count, b_uint
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_release_sem(void *data)
+IMPEXP_BHAPI b_status_t bhapi_release_sem(void *data)
 {
 	return bhapi_release_sem_etc(data, B_INT64_CONSTANT(1), 0);
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_get_sem_count(void *data, b_int64 *count)
+IMPEXP_BHAPI b_status_t bhapi_get_sem_count(void *data, b_int64 *count)
 {
 	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
 	if(!sem || !count) return B_BAD_VALUE;

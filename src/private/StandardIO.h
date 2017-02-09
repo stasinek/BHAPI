@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_PRIVATE_STANDARD_IO_H__
-#define __BHAPI_PRIVATE_STANDARD_IO_H__
-
+#ifndef BHAPI_PRIVATE_STANDARD_IO__H
+#define BHAPI_PRIVATE_STANDARD_IO__H
+#include "./../support/SupportDefs.h"
 #include "./../support/StreamIO.h"
 
 #ifdef __cplusplus /* Just for C++ */
@@ -39,8 +39,8 @@ public:
     BStandardIO(int fd);
     virtual ~BStandardIO();
 
-	virtual ssize_t		Read(void *buffer, size_t size);
-	virtual ssize_t		Write(const void *buffer, size_t size);
+	virtual b_size_t		Read(void *buffer, size_t size);
+	virtual b_size_t		Write(const void *buffer, size_t size);
 
 private:
 	int fFD;
@@ -48,5 +48,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_PRIVATE_STANDARD_IO_H__ */
+#endif /* BHAPI_PRIVATE_STANDARD_IO__H */
 

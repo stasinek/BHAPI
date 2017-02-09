@@ -80,7 +80,7 @@ static void bhapi_unlock_locker_inter(bhapi_beos_locker_t *locker)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_create_locker(void)
+IMPEXP_BHAPI void* bhapi_create_locker(void)
 {
 	bhapi_beos_locker_t *locker = new bhapi_beos_locker_t();
 	if(!locker) return NULL;
@@ -103,7 +103,7 @@ _IMPEXP_BHAPI void* bhapi_create_locker(void)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_clone_locker(void *data)
+IMPEXP_BHAPI void* bhapi_clone_locker(void *data)
 {
 	bhapi_beos_locker_t *locker = (bhapi_beos_locker_t*)data;
 	if(!locker) return NULL;
@@ -124,7 +124,7 @@ _IMPEXP_BHAPI void* bhapi_clone_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_delete_locker(void *data)
+IMPEXP_BHAPI b_status_t bhapi_delete_locker(void *data)
 {
 	bhapi_beos_locker_t *locker = (bhapi_beos_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -166,7 +166,7 @@ _IMPEXP_BHAPI b_status_t bhapi_delete_locker(void *data)
 /* after you call "bhapi_close_locker":
  * 	1. the next "bhapi_lock_locker..." function call will be failed
  * */
-_IMPEXP_BHAPI b_status_t bhapi_close_locker(void *data)
+IMPEXP_BHAPI b_status_t bhapi_close_locker(void *data)
 {
 	bhapi_beos_locker_t *locker = (bhapi_beos_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -191,13 +191,13 @@ _IMPEXP_BHAPI b_status_t bhapi_close_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_lock_locker(void *data)
+IMPEXP_BHAPI b_status_t bhapi_lock_locker(void *data)
 {
 	return bhapi_lock_locker_etc(data, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_lock_locker_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
+IMPEXP_BHAPI b_status_t bhapi_lock_locker_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
 	bhapi_beos_locker_t *locker = (bhapi_beos_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -273,7 +273,7 @@ _IMPEXP_BHAPI b_status_t bhapi_lock_locker_etc(void *data, b_uint32 flags, b_big
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_unlock_locker(void *data)
+IMPEXP_BHAPI b_status_t bhapi_unlock_locker(void *data)
 {
 	bhapi_beos_locker_t *locker = (bhapi_beos_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -312,7 +312,7 @@ _IMPEXP_BHAPI b_status_t bhapi_unlock_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI b_int64 bhapi_count_locker_locks(void *data)
+IMPEXP_BHAPI b_int64 bhapi_count_locker_locks(void *data)
 {
 	b_int64 retVal = B_INT64_CONSTANT(0);
 
@@ -330,7 +330,7 @@ _IMPEXP_BHAPI b_int64 bhapi_count_locker_locks(void *data)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_create_simple_locker(void)
+IMPEXP_BHAPI void* bhapi_create_simple_locker(void)
 {
 	sem_id *locker = (sem_id*)malloc(sizeof(sem_id));
 	if(!locker) return NULL;
@@ -345,7 +345,7 @@ _IMPEXP_BHAPI void* bhapi_create_simple_locker(void)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_delete_simple_locker(void* data)
+IMPEXP_BHAPI b_status_t bhapi_delete_simple_locker(void* data)
 {
 	sem_id *locker = (sem_id*)data;
 	if(!locker) return B_ERROR;
@@ -355,7 +355,7 @@ _IMPEXP_BHAPI b_status_t bhapi_delete_simple_locker(void* data)
 }
 
 
-_IMPEXP_BHAPI bool bhapi_lock_simple_locker(void *data)
+IMPEXP_BHAPI bool bhapi_lock_simple_locker(void *data)
 {
 	sem_id *locker = (sem_id*)data;
 	if(!locker) return false;
@@ -363,7 +363,7 @@ _IMPEXP_BHAPI bool bhapi_lock_simple_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI void bhapi_unlock_simple_locker(void *data)
+IMPEXP_BHAPI void bhapi_unlock_simple_locker(void *data)
 {
 	sem_id *locker = (sem_id*)data;
 	if(!locker) return;
@@ -376,7 +376,7 @@ static sem_id __bhapi_win32_memory_tracing_locker = -1;
 static vint32 __bhapi_beos_memory_tracing_locker_atom = 0;
 
 
-_IMPEXP_BHAPI bool bhapi_memory_tracing_lock(void)
+IMPEXP_BHAPI bool bhapi_memory_tracing_lock(void)
 {
 	while(atomic_or(&__bhapi_beos_memory_tracing_locker_atom, 0x1) & 0x1) {snooze(1);}
 	if(__bhapi_win32_memory_tracing_locker < 0)
@@ -393,7 +393,7 @@ _IMPEXP_BHAPI bool bhapi_memory_tracing_lock(void)
 }
 
 
-_IMPEXP_BHAPI void bhapi_memory_tracing_unlock(void)
+IMPEXP_BHAPI void bhapi_memory_tracing_unlock(void)
 {
 	release_sem(__bhapi_win32_memory_tracing_locker);
 }

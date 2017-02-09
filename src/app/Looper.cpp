@@ -28,11 +28,16 @@
  * --------------------------------------------------------------------------*/
 
 #include <stdlib.h>
-
+#include "./../kernel/Debug.h"
 #include "./../kernel/Kernel.h"
 #include "./../support/Locker.h"
 #include "./../support/Autolock.h"
 #include "./../support/ClassInfo.h"
+#include "./../kernel/OS.h"
+#include "./../app/AppDefs.h"
+#include "./../app/Handler.h"
+#include "./../app/MessageQueue.h"
+#include "./../app/MessageFilter.h"
 
 #include "./../private/Token.h"
 #include "./../private/PrivateHandler.h"
@@ -46,7 +51,7 @@
 BList BLooper::sLooperList;
 
 
-BLooper::BLooper(const char *name, b_int32 priority)
+BLooper::BLooper(const char *name = NULL, b_int32 priority = B_NORMAL_PRIORITY)
 	: BHandler(name), fDeconstructing(false), fProxy(NULL), fHandlersCount(1), fPreferredHandler(NULL), fLocker(NULL), fLocksCount(B_INT64_CONSTANT(0)), fThread(NULL), fSem(NULL), fMessageQueue(NULL), fCurrentMessage(NULL), fThreadExited(NULL)
 {
 	BLocker *hLocker = bhapi_get_handler_operator_locker();
@@ -710,7 +715,7 @@ BLooper::_taskLooper(BLooper *self, void *sem)
 
 
 BMessage*
-BLooper::NextLooperMessage(b_bigtime_t timeout)
+BLooper::NextLooperMessage(b_bigtime_t timeout =  = B_INFINITE_TIMEOUT)
 {
 	b_bigtime_t prevTime = bhapi_real_time_clock_usecs();
 

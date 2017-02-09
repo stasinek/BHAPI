@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "./../../../../../freetype/include/ft2build.h"
+#include "./../../../../freetype/include/ft2build.h"
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
 
@@ -41,6 +41,8 @@
 #include "./../../support/Locker.h"
 #include "./../../support/Autolock.h"
 #include "./../../storage/Directory.h"
+#include "./../../kernel/Debug.h"
+#include "./../../support/Errors.h"
 
 #ifdef BHAPI_OS_BEOS
 #define FT_ENCODING_UNICODE		ft_encoding_unicode
@@ -53,7 +55,7 @@ static FT_Library _bhapi_ft2_library_;
 static bool _bhapi_ft2_initialized_ = false;
 static BLocker bhapi_ft2_font_locker;
 
-_IMPEXP_BHAPI bool bhapi_font_freetype2_init(void)
+IMPEXP_BHAPI bool bhapi_font_freetype2_init(void)
 {
 	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
@@ -72,7 +74,7 @@ _IMPEXP_BHAPI bool bhapi_font_freetype2_init(void)
 }
 
 
-_IMPEXP_BHAPI bool bhapi_font_freetype2_is_valid(void)
+IMPEXP_BHAPI bool bhapi_font_freetype2_is_valid(void)
 {
 	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
@@ -80,7 +82,7 @@ _IMPEXP_BHAPI bool bhapi_font_freetype2_is_valid(void)
 }
 
 
-_IMPEXP_BHAPI void bhapi_font_freetype2_cancel(void)
+IMPEXP_BHAPI void bhapi_font_freetype2_cancel(void)
 {
 	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
@@ -500,7 +502,7 @@ BFontFT2::RenderString(const char *string, b_int32 *width, b_int32 *height, bool
 }
 
 
-_IMPEXP_BHAPI bool bhapi_update_freetype2_font_families(bool check_only)
+IMPEXP_BHAPI bool bhapi_update_freetype2_font_families(bool check_only)
 {
     BString fonts_dirs;
 

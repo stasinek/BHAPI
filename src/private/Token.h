@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_PRIVATE_TOKEN_H__
-#define __BHAPI_PRIVATE_TOKEN_H__
-
+#ifndef BHAPI_PRIVATE_TOKEN__H
+#define BHAPI_PRIVATE_TOKEN__H
+#include "./../support/SupportDefs.h"
 #include "./../support/Locker.h"
 
 #ifdef __cplusplus /* Just for C++ */
@@ -102,5 +102,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_PRIVATE_TOKEN_H__ */
+#endif /* BHAPI_PRIVATE_TOKEN__H */
 

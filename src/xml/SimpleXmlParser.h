@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_SIMPLE_XML_PARSER_H__
-#define __BHAPI_SIMPLE_XML_PARSER_H__
+#ifndef BHAPI_SIMPLE_XML_PARSER__H
+#define BHAPI_SIMPLE_XML_PARSER__H
 
-#include "./../support/List.h"
+#include "./../support/BList.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BSimpleXmlNode {
+class IMPEXP_BHAPI BSimpleXmlNode {
 public:
 	BSimpleXmlNode(const char *name, const char *content = NULL);
 	~BSimpleXmlNode();
@@ -71,10 +71,10 @@ private:
 };
 
 
-_IMPEXP_BHAPI b_status_t bhapi_parse_simple_xml(const char *simple_xml_buffer, BSimpleXmlNode *node);
+IMPEXP_BHAPI b_status_t bhapi_parse_simple_xml(const char *simple_xml_buffer, BSimpleXmlNode *node);
 
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_SIMPLE_XML_PARSER_H__ */
+#endif /* BHAPI_SIMPLE_XML_PARSER__H */
 

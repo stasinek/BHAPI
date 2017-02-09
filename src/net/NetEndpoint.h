@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_NET_ENDPOINT_H__
-#define __BHAPI_NET_ENDPOINT_H__
-
+#ifndef BHAPI_NET_ENDPOINT__H
+#define BHAPI_NET_ENDPOINT__H
+#include "./../support/SupportDefs.h"
 #include "./../net/NetAddress.h"
 #include "./../net/NetBuffer.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BNetEndpoint : public BArchivable {
+class IMPEXP_BHAPI BNetEndpoint : public BArchivable {
 public:
 	BNetEndpoint(int proto = SOCK_STREAM);
 	BNetEndpoint(const BNetEndpoint &from);
@@ -117,5 +117,5 @@ BNetEndpoint::SetReuseAddr(bool state)
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_NET_ENDPOINT_H__ */
+#endif /* BHAPI_NET_ENDPOINT__H */
 

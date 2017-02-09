@@ -28,15 +28,15 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_TEXT_EDITABLE_H__
-#define __BHAPI_TEXT_EDITABLE_H__
+#ifndef BHAPI_TEXT_EDITABLE__H
+#define BHAPI_TEXT_EDITABLE__H
 
 #include "./../interface/InterfaceDefs.h"
 #include "./../interface/Control.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BTextEditable : public BControl {
+class IMPEXP_BHAPI BTextEditable : public BControl {
 public:
 	BTextEditable(BRect frame,
 		      const char *name,
@@ -151,5 +151,5 @@ inline bool BTextEditable::IsSelected() const
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_TEXT_EDITABLE_H__ */
+#endif /* BHAPI_TEXT_EDITABLE__H */
 

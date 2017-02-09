@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_INTERFACE_DEFS_H__
-#define __BHAPI_INTERFACE_DEFS_H__
+#ifndef BHAPI_INTERFACE_DEFS__H
+#define BHAPI_INTERFACE_DEFS__H
 
 #include "./../interface/GraphicsDefs.h"
 
@@ -197,13 +197,13 @@ enum b_button_width {
 extern "C" {
 #endif
 
-_IMPEXP_BHAPI b_rgb_color b_ui_color(b_color_which which);
-_IMPEXP_BHAPI float b_ui_get_scrollbar_horizontal_height();
-_IMPEXP_BHAPI float b_ui_get_scrollbar_vertical_width();
+IMPEXP_BHAPI b_rgb_color b_ui_color(b_color_which which);
+IMPEXP_BHAPI float b_ui_get_scrollbar_horizontal_height();
+IMPEXP_BHAPI float b_ui_get_scrollbar_vertical_width();
 
 #ifdef __cplusplus /* Just for C++ */
 } /* extern "C" */
 #endif
 
-#endif /* __BHAPI_INTERFACE_DEFS_H__ */
+#endif /* BHAPI_INTERFACE_DEFS__H */
 

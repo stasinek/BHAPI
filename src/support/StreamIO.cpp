@@ -27,11 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "StreamIO.h"
 #include "./../support/StringMe.h"
 #include "./../private/StandardIO.h"
-
-#include "StreamIO.h"
-
 
 static BStreamIO _endl;
 static BStreamIO _ends;
@@ -39,11 +37,11 @@ static BStandardIO _EIn(0);
 static BStandardIO _EOut(1);
 static BStandardIO _EErr(2);
 
-_IMPEXP_BHAPI BStreamIO &endl = _endl;
-_IMPEXP_BHAPI BStreamIO &ends = _ends;
-_IMPEXP_BHAPI BStreamIO &EIn = _EIn;
-_IMPEXP_BHAPI BStreamIO &EOut = _EOut;
-_IMPEXP_BHAPI BStreamIO &EErr = _EErr;
+IMPEXP_BHAPI BStreamIO &endl = _endl;
+IMPEXP_BHAPI BStreamIO &ends = _ends;
+IMPEXP_BHAPI BStreamIO &EIn = _EIn;
+IMPEXP_BHAPI BStreamIO &EOut = _EOut;
+IMPEXP_BHAPI BStreamIO &EErr = _EErr;
 
 
 BStreamIO::BStreamIO()
@@ -57,14 +55,14 @@ BStreamIO::~BStreamIO()
 }
 
 
-ssize_t
+b_size_t
 BStreamIO::Read(void *buffer, size_t size)
 {
 	return B_ERROR;
 }
 
 
-ssize_t
+b_size_t
 BStreamIO::Write(const void *buffer, size_t size)
 {
 	return B_ERROR;
@@ -211,12 +209,12 @@ BStreamIO::operator<<(BStreamIO &stream)
 		return operator<<(&stream == &endl ? '\n' : ' ');
 
 	b_int8 buf[512];
-	ssize_t len;
+	b_size_t len;
 
 	bzero(buf, sizeof(buf));
 	if((len = stream.Read(&buf[0], sizeof(buf))) > 0)
 	{
-		ssize_t nWritten;
+		b_size_t nWritten;
 		while((nWritten = Write(&buf[0], (size_t)len)) > 0)
 		{
 			if(len - nWritten == 0 || (len -= nWritten) < 0) break;

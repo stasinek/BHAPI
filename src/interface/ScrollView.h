@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_SCROLL_VIEW_H__
-#define __BHAPI_SCROLL_VIEW_H__
+#ifndef BHAPI_SCROLL_VIEW__H
+#define BHAPI_SCROLL_VIEW__H
 
 #include "./../interface/ScrollBar.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BScrollView : public BView {
+class IMPEXP_BHAPI BScrollView : public BView {
 public:
 	BScrollView(BRect frame, const char *name, BView *target,
 		    b_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
@@ -82,5 +82,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_SCROLL_VIEW_H__ */
+#endif /* BHAPI_SCROLL_VIEW__H */
 

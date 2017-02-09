@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_POP_UP_MENU_H__
-#define __BHAPI_POP_UP_MENU_H__
+#ifndef BHAPI_POP_UP_MENU__H
+#define BHAPI_POP_UP_MENU__H
 
 #include "./../support/Locker.h"
 #include "./../interface/Menu.h"
@@ -36,7 +36,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BPopUpMenu : public BMenu {
+class IMPEXP_BHAPI BPopUpMenu : public BMenu {
 public:
     BPopUpMenu(const char *title,
 		   bool radioMode = true,
@@ -67,5 +67,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_POP_UP_MENU_H__ */
+#endif /* BHAPI_POP_UP_MENU__H */
 

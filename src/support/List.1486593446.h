@@ -34,7 +34,6 @@
 #include "./SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
 class _IMPEXP_BHAPI BList {
 public:
     // BList(b_int32), BList(b_int32, b_int32):
@@ -96,8 +95,6 @@ private:
 
     bool _Resize(b_int32 count);
 };
-
 #endif /* __cplusplus */
-
 #endif /* __BHAPI_LIST_H__ */
 

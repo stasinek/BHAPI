@@ -27,26 +27,21 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_STRING_ARRAY_H__
-#define __BHAPI_STRING_ARRAY_H__
-
+#ifndef BHAPI_STRING_ARRAY__H
+#define BHAPI_STRING_ARRAY__H
+#include "./SupportDefs.h"
+#include "./BList.h"
 #ifdef __cplusplus /* Just for C++ */
-
-#include "SupportDefs.h"
 class BString;
-#include "List.h"
-
-class _IMPEXP_BHAPI BStringArray {
+class IMPEXP_BHAPI BStringArray {
 public:
     BStringArray();
-
     BStringArray(const char *string, void *attach_data = NULL); // string: first item
     BStringArray(const BString &string, void *attach_data = NULL);
-
     BStringArray(const char **array); // array: NULL-terminated array of strings
     BStringArray(const BStringArray &array);
 
-    ~BStringArray();
+   ~BStringArray();
 
     BStringArray&	operator=(const char **array);
     BStringArray&	operator=(const BStringArray &array);
@@ -56,43 +51,41 @@ public:
     BStringArray&	operator+=(const char **array);
     BStringArray&	operator+=(const BStringArray &array);
 
-	bool		AddItem(const char *item, void *attach_data = NULL);
-    bool		AddItem(const char *item, b_int32 atIndex, void *attach_data = NULL);
-    bool		AddItem(const BString &item, void *attach_data = NULL);
-    bool		AddItem(const BString &item, b_int32 atIndex, void *attach_data = NULL);
-    bool		AddArray(const BStringArray &array);
-    bool		AddArray(const BStringArray &array, b_int32 atIndex);
+    bool            AddItem(const char *item, void *attach_data = NULL);
+    bool            AddItem(const char *item, b_int32 atIndex, void *attach_data = NULL);
+    bool            AddItem(const BString &item, void *attach_data = NULL);
+    bool            AddItem(const BString &item, b_int32 atIndex, void *attach_data = NULL);
+    bool            AddArray(const BStringArray &array);
+    bool            AddArray(const BStringArray &array, b_int32 atIndex);
 
-    bool		RemoveItem(b_int32 index);
-    bool		RemoveItems(b_int32 index, b_int32 count);
+    bool            RemoveItem(b_int32 index);
+    bool            RemoveItems(b_int32 index, b_int32 count);
 
-    bool		ReplaceItem(b_int32 index, const char *string, void *attach_data = NULL);
-    bool		ReplaceItem(b_int32 index, const BString &string, void *attach_data = NULL);
+    bool            ReplaceItem(b_int32 index, const char *string, void *attach_data = NULL);
+    bool            ReplaceItem(b_int32 index, const BString &string, void *attach_data = NULL);
 
     BStringArray&	SortItems(int (*cmp)(const BString**, const BString**));
-    bool		SwapItems(b_int32 indexA, b_int32 indexB);
-    bool		MoveItem(b_int32 fromIndex, b_int32 toIndex);
+    bool            SwapItems(b_int32 indexA, b_int32 indexB);
+    bool            MoveItem(b_int32 fromIndex, b_int32 toIndex);
 
-	bool		IsEmpty() const;
-	void		MakeEmpty();
+    bool            IsEmpty() const;
+    void            MakeEmpty();
 
     const BString*	ItemAt(b_int32 index, void **attach_data = NULL) const;
     const BString*	FirstItem(void **attach_data = NULL) const;
     const BString*	LastItem(void **attach_data = NULL) const;
 
-    b_int32		CountItems() const;
+    b_int32         CountItems() const;
 
 	// return value: string index if found, else return -1
-    b_int32		FindString(const char *string, b_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
-    b_int32		FindString(const BString &string, b_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
-    b_int32		IFindString(const char *string, b_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
-    b_int32		IFindString(const BString &string, b_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
+    b_int32         FindString(const char *string, b_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
+    b_int32         FindString(const BString &string, b_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
+    b_int32         IFindString(const char *string, b_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
+    b_int32         IFindString(const BString &string, b_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
 
 private:
     BList list;
 };
-
 #endif /* __cplusplus */
-
-#endif /* __BHAPI_STRING_ARRAY_H__ */
+#endif /* BHAPI_STRING_ARRAY__H */
 

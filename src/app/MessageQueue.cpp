@@ -27,13 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "MessageQueue.h"
+#include "Message.h"
 #include "./../kernel/Kernel.h"
 #include "./../support/Locker.h"
-#include "./../support/List.h"
-
+#include "./../support/BList.h"
 #include "./../private/PrivateHandler.h"
-
-#include "MessageQueue.h"
 
 
 BMessageQueue::BMessageQueue()

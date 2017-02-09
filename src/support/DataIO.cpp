@@ -29,7 +29,6 @@
 
 #include "DataIO.h"
 
-
 EDataIO::EDataIO()
 {
 }
@@ -51,14 +50,14 @@ BPositionIO::~BPositionIO()
 }
 
 
-ssize_t
+b_size_t
 BPositionIO::Read(void *buffer, size_t size)
 {
 	return ReadAt(0, buffer, size);
 }
 
 
-ssize_t
+b_size_t
 BPositionIO::Write(const void *buffer, size_t size)
 {
 	return WriteAt(0, buffer, size);
@@ -77,7 +76,7 @@ BMallocIO::~BMallocIO()
 }
 
 
-ssize_t
+b_size_t
 BMallocIO::ReadAt(b_int64 pos, void *buffer, size_t size)
 {
 	if(buffer == NULL) return B_BAD_VALUE;
@@ -93,7 +92,7 @@ BMallocIO::ReadAt(b_int64 pos, void *buffer, size_t size)
 }
 
 
-ssize_t
+b_size_t
 BMallocIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
 {
 	if(buffer == NULL) return B_BAD_VALUE;
@@ -234,7 +233,7 @@ BMemoryIO::~BMemoryIO()
 }
 
 
-ssize_t
+b_size_t
 BMemoryIO::ReadAt(b_int64 pos, void *buffer, size_t size)
 {
 	if(buffer == NULL) return B_BAD_VALUE;
@@ -250,7 +249,7 @@ BMemoryIO::ReadAt(b_int64 pos, void *buffer, size_t size)
 }
 
 
-ssize_t
+b_size_t
 BMemoryIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
 {
 	if(fReadOnly) return B_NOT_ALLOWED;

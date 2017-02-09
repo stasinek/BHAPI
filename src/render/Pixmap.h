@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_PIXMAP_H__
-#define __BHAPI_PIXMAP_H__
-
+#ifndef BHAPI_PIXMAP__H
+#define BHAPI_PIXMAP__H
+#include "./../support/SupportDefs.h"
 #include "./../interface/Region.h"
 #include "./../render/Render.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BPixmap : public BRender {
+class IMPEXP_BHAPI BPixmap : public BRender {
 public:
     BPixmap();
     BPixmap(b_uint32 width, b_uint32 height, b_color_space space);
@@ -82,5 +82,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_PIXMAP_H__ */
+#endif /* BHAPI_PIXMAP__H */
 

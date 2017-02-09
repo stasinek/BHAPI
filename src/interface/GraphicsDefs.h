@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_GRAPHICS_DEFS_H__
-#define __BHAPI_GRAPHICS_DEFS_H__
+#ifndef BHAPI_GRAPHICS_DEFS__H
+#define BHAPI_GRAPHICS_DEFS__H
 
 #include "./../support/SupportDefs.h"
 
@@ -70,9 +70,9 @@ inline b_pattern b_makb_pattern(b_uint8 d1, b_uint8 d2, b_uint8 d3, b_uint8 d4, 
 extern "C" {
 #endif /* __cplusplus */
 
-extern _IMPEXP_BHAPI const b_pattern B_SOLID_HIGH;
-extern _IMPEXP_BHAPI const b_pattern B_MIXED_COLORS;
-extern _IMPEXP_BHAPI const b_pattern B_SOLID_LOW;
+extern IMPEXP_BHAPI const b_pattern B_SOLID_HIGH;
+extern IMPEXP_BHAPI const b_pattern B_MIXED_COLORS;
+extern IMPEXP_BHAPI const b_pattern B_SOLID_LOW;
 
 #ifdef __cplusplus
 } /* extern "C" */
@@ -160,16 +160,16 @@ typedef enum b_color_space {
 extern "C" {
 #endif /* __cplusplus */
 
-extern _IMPEXP_BHAPI const b_rgb_color    B_TRANSPARENT_COLOR;
-extern _IMPEXP_BHAPI const b_uint32    B_TRANSPARENT_MAGIC_RGBA32;
+extern IMPEXP_BHAPI const b_rgb_color    B_TRANSPARENT_COLOR;
+extern IMPEXP_BHAPI const b_uint32    B_TRANSPARENT_MAGIC_RGBA32;
 
-_IMPEXP_BHAPI b_uint8 bhapi_find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b);
-_IMPEXP_BHAPI b_rgb_color bhapi_find_color_for_index(b_uint8 index);
+IMPEXP_BHAPI b_uint8 bhapi_find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b);
+IMPEXP_BHAPI b_rgb_color bhapi_find_color_for_index(b_uint8 index);
 
 #ifdef __cplusplus
 } /* extern "C" */
 #endif /* __cplusplus */
 
 
-#endif /* __BHAPI_GRAPHICS_DEFS_H__ */
+#endif /* BHAPI_GRAPHICS_DEFS__H */
 

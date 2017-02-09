@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_ALERT_H__
-#define __BHAPI_ALERT_H__
+#ifndef BHAPI_ALERT__H
+#define BHAPI_ALERT__H
 
 #include "./../support/SupportDefs.h"
 
@@ -50,7 +50,7 @@ class BInvoker;
 class BButton;
 class BTextView;
 
-class _IMPEXP_BHAPI BAlert : public BWindow {
+class IMPEXP_BHAPI BAlert : public BWindow {
 public:
     BAlert(const char *title,
 	       const char *text,
@@ -80,5 +80,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_ALERT_H__ */
+#endif /* BHAPI_ALERT__H */
 

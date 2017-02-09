@@ -232,7 +232,7 @@ BMessageBody::Flatten(char *buffer, size_t size) const
 
 
 bool
-BMessageBody::Flatten(EDataIO *stream, ssize_t *size) const
+BMessageBody::Flatten(EDataIO *stream, b_size_t *size) const
 {
 	// TODO
 	BHAPI_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);

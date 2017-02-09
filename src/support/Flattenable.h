@@ -27,14 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_FLATTENABLE_H__
-#define __BHAPI_FLATTENABLE_H__
+#ifndef BHAPI_FLATTENABLE__H
+#define BHAPI_FLATTENABLE__H
 
-#include "./../support/SupportDefs.h"
-
+#include "./SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BFlattenable {
+class IMPEXP_BHAPI BFlattenable {
 public:
     virtual ~BFlattenable();
 
@@ -43,12 +42,12 @@ public:
     virtual b_type_code	TypeCode() const = 0;
     virtual bool		AllowsTypeCode(b_type_code code) const;
 
-	virtual ssize_t		FlattenedSize() const = 0;
-    virtual b_status_t	Flatten(void *buffer, ssize_t numBytes) = 0;
-    virtual b_status_t	Unflatten(b_type_code, const void *buffer, ssize_t numBytes) = 0;
+	virtual b_size_t		FlattenedSize() const = 0;
+    virtual b_status_t	Flatten(void *buffer, b_size_t numBytes) = 0;
+    virtual b_status_t	Unflatten(b_type_code, const void *buffer, b_size_t numBytes) = 0;
 };
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_FLATTENABLE_H__ */
+#endif /* BHAPI_FLATTENABLE__H */
 

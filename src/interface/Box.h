@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_BOX_H__
-#define __BHAPI_BOX_H__
+#ifndef BHAPI_BOX__H
+#define BHAPI_BOX__H
 
 #include "./../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BBox : public BView {
+class IMPEXP_BHAPI BBox : public BView {
 public:
     BBox(BRect frame,
 	     const char *name = NULL,
@@ -75,5 +75,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_BOX_H__ */
+#endif /* BHAPI_BOX__H */
 

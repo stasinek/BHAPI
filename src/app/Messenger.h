@@ -28,14 +28,16 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_MESSENGER_H__
-#define __BHAPI_MESSENGER_H__
-
-#include "./../app/Looper.h"
+#ifndef BHAPI_MESSENGER__H
+#define BHAPI_MESSENGER__H
+#include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BMessenger {
+class BMessage;
+class BHandler;
+class BLooper;
+class IMPEXP_BHAPI BMessenger {
 public:
 	BMessenger();
     BMessenger(const char *signature, b_int64 team = 0, b_status_t *perr = NULL);
@@ -94,5 +96,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_MESSENGER_H__ */
+#endif /* BHAPI_MESSENGER__H */
 

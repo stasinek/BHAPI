@@ -95,7 +95,7 @@ static char* bhapi_area_ipc_name(const char *name, const char *domain)
 }
 
 
-_IMPEXP_BHAPI void*
+IMPEXP_BHAPI void*
 bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 protection, const char *domain, bhapi_area_access area_access)
 {
 	if(size <= 0) return NULL;
@@ -175,7 +175,7 @@ bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 pro
 }
 
 
-_IMPEXP_BHAPI void*
+IMPEXP_BHAPI void*
 bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char *domain)
 {
 	char *ipc_name = bhapi_area_ipc_name(name, domain);
@@ -242,7 +242,7 @@ bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const 
 }
 
 
-_IMPEXP_BHAPI void*
+IMPEXP_BHAPI void*
 bhapi_clone_area_by_source(void *source_data, void **dest_addr, b_uint32 protection)
 {
 	bhapi_posix_area_t *source_area = (bhapi_posix_area_t*)source_data;
@@ -252,7 +252,7 @@ bhapi_clone_area_by_source(void *source_data, void **dest_addr, b_uint32 protect
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_get_area_info(void *data, bhapi_area_info *info)
 {
 	bhapi_posix_area_t *area = (bhapi_posix_area_t*)data;
@@ -274,7 +274,7 @@ bhapi_get_area_info(void *data, bhapi_area_info *info)
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_delete_area(void *data)
 {
 	bhapi_posix_area_t *area = (bhapi_posix_area_t*)data;
@@ -298,7 +298,7 @@ bhapi_delete_area(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_delete_area_etc(void *data, bool no_clone)
 {
 	bhapi_posix_area_t *area = (bhapi_posix_area_t*)data;
@@ -324,7 +324,7 @@ bhapi_delete_area_etc(void *data, bool no_clone)
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_resize_area(void *data, void **start_addr, size_t new_size)
 {
 #ifdef HAVE_MREMAP
@@ -360,7 +360,7 @@ bhapi_resize_area(void *data, void **start_addr, size_t new_size)
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_set_area_protection(void *data, b_uint32 new_protection)
 {
 	bhapi_posix_area_t *area = (bhapi_posix_area_t*)data;
@@ -380,7 +380,7 @@ bhapi_set_area_protection(void *data, b_uint32 new_protection)
 
 #warning "FIXME: Your system seems don't support POSIX share memory."
 
-_IMPEXP_BHAPI void*
+IMPEXP_BHAPI void*
 bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 protection, const char *domain, bhapi_area_access area_access)
 {
 	BHAPI_WARNING("[KERNEL]: %s --- System don't support POSIX share memory!", __PRETTY_FUNCTION__);
@@ -388,49 +388,49 @@ bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 pro
 }
 
 
-_IMPEXP_BHAPI void*
+IMPEXP_BHAPI void*
 bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char *domain)
 {
 	return NULL;
 }
 
 
-_IMPEXP_BHAPI void*
+IMPEXP_BHAPI void*
 bhapi_clone_area_by_source(void *source_data, void **dest_addr, b_uint32 protection)
 {
 	return NULL;
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_get_area_info(void *data, bhapi_area_info *info)
 {
 	return B_ERROR;
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_delete_area(void *data)
 {
 	return B_ERROR;
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_delete_area_etc(void *data, bool no_clone)
 {
 	return B_ERROR;
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_resize_area(void *data, void **start_addr, size_t new_size)
 {
 	return B_ERROR;
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_set_area_protection(void *data, b_uint32 new_protection)
 {
 	return B_ERROR;

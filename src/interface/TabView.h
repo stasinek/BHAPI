@@ -27,10 +27,10 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_TAB_VIEW_H__
-#define __BHAPI_TAB_VIEW_H__
+#ifndef BHAPI_TAB_VIEW__H
+#define BHAPI_TAB_VIEW__H
 
-#include "./../support/List.h"
+#include "./../support/BList.h"
 #include "./../interface/View.h"
 
 typedef enum {
@@ -44,7 +44,7 @@ typedef enum {
 class BTabView;
 
 
-class _IMPEXP_BHAPI BTab : public BArchivable {
+class IMPEXP_BHAPI BTab : public BArchivable {
 public:
     BTab(BView *targetView = NULL);
     virtual ~BTab();
@@ -84,7 +84,7 @@ private:
 };
 
 
-class _IMPEXP_BHAPI BTabView : public BView {
+class IMPEXP_BHAPI BTabView : public BView {
 public:
     BTabView(BRect frame, const char *name,
 		 b_button_width tabWidth = B_WIDTH_AS_USUAL,
@@ -133,5 +133,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_TAB_VIEW_H__ */
+#endif /* BHAPI_TAB_VIEW__H */
 

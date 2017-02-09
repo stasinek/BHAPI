@@ -28,14 +28,14 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_CHECK_BOX_H__
-#define __BHAPI_CHECK_BOX_H__
+#ifndef BHAPI_CHECK_BOX__H
+#define BHAPI_CHECK_BOX__H
 
 #include "./../interface/Control.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BCheckBox : public BControl {
+class IMPEXP_BHAPI BCheckBox : public BControl {
 public:
     BCheckBox(BRect frame,
 		  const char *name,
@@ -58,5 +58,5 @@ public:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_CHECK_BOX_H__ */
+#endif /* BHAPI_CHECK_BOX__H */
 

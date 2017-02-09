@@ -28,9 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_APPDEFS_H__
-#define __BHAPI_APPDEFS_H__
-
+#ifndef BHAPI_APPDEFS__H
+#define BHAPI_APPDEFS__H
 #include "./../support/SupportDefs.h"
 
 /* System Message Codes */
@@ -99,5 +98,5 @@ enum {
     B_INPUT_METHOD_EVENT			= 'IMEV'
 };
 
-#endif /* __BHAPI_APPDEFS_H__ */
+#endif /* BHAPI_APPDEFS__H */
 

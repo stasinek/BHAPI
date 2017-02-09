@@ -30,8 +30,8 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./src/Be.h"
 #include "bhapi_global.h"
+#include "./src/Be.h"
 
 class BHAPI
 {

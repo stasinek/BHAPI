@@ -33,8 +33,8 @@
     #include <unistd.h>
 #else // _WIN32
     #include <io.h>
-	#define read(fd, buf, count)	((ssize_t)_read(fd, buf, count))
-	#define write(fd, buf, count)	((ssize_t)_write(fd, buf, count))
+	#define read(fd, buf, count)	((b_size_t)_read(fd, buf, count))
+	#define write(fd, buf, count)	((b_size_t)_write(fd, buf, count))
 #endif // !_WIN32
 
 #include "StandardIO.h"
@@ -51,14 +51,14 @@ BStandardIO::~BStandardIO()
 }
 
 
-ssize_t
+b_size_t
 BStandardIO::Read(void *buffer, size_t size)
 {
 	return read(fFD, buffer, size);
 }
 
 
-ssize_t
+b_size_t
 BStandardIO::Write(const void *buffer, size_t size)
 {
 	return write(fFD, buffer, size);

@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
- * 
+ *
  * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,10 +22,10 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: TextView.cpp
  * Description: BTextView --- a multi-lines editable field
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 // TODO: speed up
@@ -1120,7 +1120,7 @@ BTextView::SetText(BFile *file, b_int64 fileOffset, b_int32 length, const b_text
 	if(buffer == NULL) return;
 	bzero(buffer, (size_t)length + 1);
 
-	ssize_t nRead = file->ReadAt(fileOffset, buffer, (size_t)length);
+	b_size_t nRead = file->ReadAt(fileOffset, buffer, (size_t)length);
 	if(nRead > 0) Insert(0, buffer, (b_int32)nRead, runs, utf8);
 
 	free(buffer);
@@ -1517,7 +1517,7 @@ BTextView::Draw(BRect updateRect)
 				BView::SetHighColor(fgColor);
 				_DrawString(*bhapi_plain_font, str, penLocation, line->length);
 
-				if(cursorPos >= 0 && IsFocus()) 
+				if(cursorPos >= 0 && IsFocus())
 				{
 					b_rgb_color color = b_ui_color(B_DOCUMENT_CURSOR_COLOR);
 					if(!IsEnabled()) color.disable(ViewColor());
@@ -1973,10 +1973,10 @@ BTextView::Copy(BClipboard *clipboard) const
 		b_int32 runsBytes = 0;
 		b_text_run_array *runs = RunArray(fSelectStart, fSelectEnd, &runsBytes, false);
 		clipMsg->AddData("text/plain", B_MIME_TYPE,
-				 fText.String() + fSelectStart, (ssize_t)(fSelectEnd - fSelectStart));
+				 fText.String() + fSelectStart, (b_size_t)(fSelectEnd - fSelectStart));
 		if(runs != NULL)
 		{
-			clipMsg->AddData("text/runs", B_MIME_TYPE, runs, (ssize_t)runsBytes);
+			clipMsg->AddData("text/runs", B_MIME_TYPE, runs, (b_size_t)runsBytes);
 			free(runs);
 		}
 
@@ -2005,13 +2005,13 @@ BTextView::Paste(BClipboard *clipboard)
 	if((clipMsg = clipboard->Data()) != NULL)
 	{
 		const char *text = NULL;
-		ssize_t len = 0;
+		b_size_t len = 0;
 		if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &len)) str.SetTo(text, (b_int32)len);
 
 		void *tmp = NULL;
 		if(!(fStylable == false ||
 		     clipMsg->FindData("text/runs", B_MIME_TYPE, (const void**)&tmp, &len) == false ||
-		     len < (ssize_t)sizeof(b_text_run_array) ||
+		     len < (b_size_t)sizeof(b_text_run_array) ||
 		     ((size_t)len - sizeof(b_text_run_array)) % sizeof(b_text_run) != 0 ||
 		     (runs = (b_text_run_array*)malloc((size_t)len)) == NULL))
 		{

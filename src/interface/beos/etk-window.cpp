@@ -143,7 +143,7 @@ EBePrivateWin::QuitRequested()
 static bool bhapi_beos_get_byte(int32 modifiers, int32 key_code, char *result)
 {
 	if(result == NULL || key_code < 0 || key_code >= 128) return false;
-	
+
 	key_map *keys = NULL;
 	char *chars = NULL;
 
@@ -221,7 +221,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				{
 					fContactor = BMessenger();
 					const char *buffer = NULL;
-					ssize_t size = -1;
+					b_size_t size = -1;
 					if(bMsg->FindData("etk:messenger", B_ANY_TYPE, (const void**)&buffer, &size) != B_OK) break;
 					if(buffer == NULL || size <= 0) break;
 					fContactor.Unflatten(buffer, (size_t)size);
@@ -377,7 +377,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 					bMsg->FindRect("src", &srcRect);
 					bMsg->FindRect("dest", &destRect);
 					if(srcRect.IsValid() == false || destRect.IsValid() == false) break;
-					bMsg->FindPointer("clipping", (void**)&clipping); 
+					bMsg->FindPointer("clipping", (void**)&clipping);
 
 					BRegion beRegion;
 					__bhapi_convert_region(clipping, &beRegion, fTopView->Bounds());
@@ -724,7 +724,7 @@ EBeGraphicsWindow::ContactTo(const BMessenger *msgr)
 		char *buffer = (char*)malloc(size);
 		if(buffer == NULL) return B_NO_MEMORY;
 		if(msgr->Flatten(buffer, size) == false) {free(buffer); return B_ERROR;}
-		msg.AddData("etk:messenger", B_ANY_TYPE, buffer, (ssize_t)size, true, 1);
+		msg.AddData("etk:messenger", B_ANY_TYPE, buffer, (b_size_t)size, true, 1);
 		free(buffer);
 	}
 

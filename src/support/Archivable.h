@@ -27,15 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_ARCHIVABLE_H__
-#define __BHAPI_ARCHIVABLE_H__
-
+#ifndef BHAPI_ARCHIVABLE__H
+#define BHAPI_ARCHIVABLE__H
 #include "./SupportDefs.h"
-#include "./../app/Message.h"
-
 #ifdef __cplusplus /* Just for C++ */
-
-class _IMPEXP_BHAPI BArchivable {
+class BMessage;
+class IMPEXP_BHAPI BArchivable {
 public:
     BArchivable();
     BArchivable(const BMessage *from);
@@ -48,11 +45,11 @@ public:
 
 typedef BArchivable *(*b_instantiation_func)(const BMessage*);
 
-_IMPEXP_BHAPI bool			b_validatb_instantiation(const BMessage *from, const char *class_name);
-_IMPEXP_BHAPI b_instantiation_func	b_find_instantiation_func(const char *class_name);
-_IMPEXP_BHAPI b_instantiation_func	b_find_instantiation_func(const BMessage *archive_data);
+IMPEXP_BHAPI bool			b_validatb_instantiation(const BMessage *from, const char *class_name);
+IMPEXP_BHAPI b_instantiation_func	b_find_instantiation_func(const char *class_name);
+IMPEXP_BHAPI b_instantiation_func	b_find_instantiation_func(const BMessage *archive_data);
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_ARCHIVABLE_H__ */
+#endif /* BHAPI_ARCHIVABLE__H */
 

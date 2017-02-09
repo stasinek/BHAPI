@@ -27,25 +27,31 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "./../support/BList.h"
 #include "./../support/Locker.h"
 #include "./../support/Autolock.h"
 #include "./../kernel/Kernel.h"
+#include "./../kernel/Debug.h"
 #include "./../interface/Font.h"
 #include "./../add-ons/graphics/GraphicsEngine.h"
 #include "./../storage/FindDirectory.h"
 #include "./../storage/Directory.h"
-
 #include "./../private/PrivateHandler.h"
+#include "./../app/AppDefs.h"
+#include "./../app/Message.h"
+#include "./../app/MessageQueue.h"
+#include "./../app/Looper.h"
+#include "./../support/Errors.h"
 
-#include "Application.h"
-#include "Clipboard.h"
+#include "./Application.h"
+#include "./Clipboard.h"
 
 _LOCAL BCursor _B_CURSOR_SYSTEM_DEFAULT(NULL);
 
-_IMPEXP_BHAPI BApplication *bhapi_app = NULL;
-_IMPEXP_BHAPI BMessenger bhapi_app_messenger;
-_IMPEXP_BHAPI BClipboard bhapi_clipboard("system");
-_IMPEXP_BHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT = &_B_CURSOR_SYSTEM_DEFAULT;
+IMPEXP_BHAPI BApplication *bhapi_app = NULL;
+IMPEXP_BHAPI BMessenger bhapi_app_messenger;
+IMPEXP_BHAPI BClipboard bhapi_clipboard("system");
+IMPEXP_BHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT = &_B_CURSOR_SYSTEM_DEFAULT;
 
 BList BApplication::sRunnerList;
 b_bigtime_t BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(0);
@@ -283,7 +289,7 @@ BApplication::DispatchMessage(BMessage *msg, BHandler *target)
 	else if(msg->what == B_APP_CURSOR_REQUESTED && target == this)
 	{
 		const void *cursor_data = NULL;
-		ssize_t len;
+		b_size_t len;
 		bool show_cursor;
 
 		if(msg->FindData("etk:cursor_data", B_ANY_TYPE, &cursor_data, &len))

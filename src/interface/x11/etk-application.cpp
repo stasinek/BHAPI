@@ -54,9 +54,9 @@ static void bhapi_x11_clipboard_changed(const char *aStr)
 		if((clipMsg = bhapi_clipboard.Data()) != NULL)
 		{
 			const char *text = NULL;
-			ssize_t textLen = 0;
+			b_size_t textLen = 0;
 			if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
-			   text == NULL || textLen != (ssize_t)strlen(aStr) || strncmp(text, aStr, (size_t)textLen) != 0)
+			   text == NULL || textLen != (b_size_t)strlen(aStr) || strncmp(text, aStr, (size_t)textLen) != 0)
 			{
 				bhapi_clipboard.Clear();
 				clipMsg->AddBool("etk:msg_from_gui", true);
@@ -86,7 +86,7 @@ public:
 		do
 		{
 			const char *text = NULL;
-			ssize_t textLen = 0;
+			b_size_t textLen = 0;
 
 			BMessage *msg;
 
@@ -137,7 +137,7 @@ static int bhapi_x_error_handler(Display *display, XErrorEvent *event)
 extern "C" {
 _EXPORT BGraphicsEngine* instantiate_graphics_engine()
 #else
-_IMPEXP_BHAPI BGraphicsEngine* bhapi_get_built_in_graphics_engine()
+IMPEXP_BHAPI BGraphicsEngine* bhapi_get_built_in_graphics_engine()
 #endif
 {
 #if !(defined(BHAPI_GRAPHICS_X11_BUILT_IN) || defined(BHAPI_OS_UNIX) || defined(BHAPI_OS_CYGWIN))
@@ -300,7 +300,7 @@ static void bhapi_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 						if((clipMsg = bhapi_clipboard.Data()) != NULL)
 						{
 							const char *text = NULL;
-							ssize_t textLen = 0;
+							b_size_t textLen = 0;
 							clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 							if(textLen > 0) aStr.SetTo(text, (b_int32)textLen);
 						}

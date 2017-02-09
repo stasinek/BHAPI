@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
- * 
+ *
  * DirectFB Graphics Add-on for BHAPI++
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,9 +22,9 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: etk-application.cpp
- * 
+ *
  * --------------------------------------------------------------------------*/
 #ifdef LINUX
 #ifdef DIRECTFB
@@ -75,9 +75,9 @@ static void bhapi_dfb_clipboard_changed(EDFBGraphicsEngine *dfbEngine)
 		if((clipMsg = bhapi_clipboard.Data()) != NULL)
 		{
 			const char *text = NULL;
-			ssize_t textLen = 0;
+			b_size_t textLen = 0;
 			if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
-			   text == NULL || textLen != (ssize_t)aStr.Length() || aStr.Compare(text, (b_int32)textLen) != 0)
+			   text == NULL || textLen != (b_size_t)aStr.Length() || aStr.Compare(text, (b_int32)textLen) != 0)
 			{
 				bhapi_clipboard.Clear();
 				clipMsg->AddBool("etk:msg_from_gui", true);
@@ -107,7 +107,7 @@ public:
 		do
 		{
 			const char *text = NULL;
-			ssize_t textLen = 0;
+			b_size_t textLen = 0;
 			BString aStr;
 
 			BMessage *msg;
@@ -138,7 +138,7 @@ public:
 extern "C" {
 _EXPORT BGraphicsEngine* instantiate_graphics_engine()
 #else
-_IMPEXP_BHAPI BGraphicsEngine* bhapi_get_build_in_graphics_engine()
+IMPEXP_BHAPI BGraphicsEngine* bhapi_get_build_in_graphics_engine()
 #endif
 {
 #ifndef BHAPI_GRAPHICS_DIRECTFB_BUILT_IN

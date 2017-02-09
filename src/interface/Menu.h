@@ -27,10 +27,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_MENU_H__
-#define __BHAPI_MENU_H__
+#ifndef BHAPI_MENU__H
+#define BHAPI_MENU__H
 
-#include "./../support/List.h"
+#include "./../support/BList.h"
 #include "./../interface/View.h"
 #include "./../interface/MenuItem.h"
 
@@ -45,7 +45,7 @@ typedef enum b_menu_layout {
 class ESubmenuWindow;
 class BPopUpMenu;
 
-class _IMPEXP_BHAPI BMenu : public BView {
+class IMPEXP_BHAPI BMenu : public BView {
 public:
     BMenu(const char *title, b_menu_layout layout = B_ITEMS_IN_COLUMN);
     BMenu(const char *title, float width, float height);
@@ -146,5 +146,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_MENU_H__ */
+#endif /* BHAPI_MENU__H */
 

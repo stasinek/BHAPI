@@ -27,10 +27,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_PRIVATE_MESSAGE_BODY_H__
-#define __BHAPI_PRIVATE_MESSAGE_BODY_H__
-
-#include "./../support/List.h"
+#ifndef BHAPI_PRIVATE_MESSAGE_BODY__H
+#define BHAPI_PRIVATE_MESSAGE_BODY__H
+#include "./../support/SupportDefs.h"
+#include "./../support/BList.h"
 #include "./../support/StreamIO.h"
 
 #ifdef __cplusplus /* Just for C++ */
@@ -75,7 +75,7 @@ public:
 
 	size_t		FlattenedSize() const;
 	bool		Flatten(char *buffer, size_t size) const;
-	bool		Flatten(EDataIO *stream, ssize_t *size = NULL) const;
+	bool		Flatten(EDataIO *stream, b_size_t *size = NULL) const;
 	bool		Unflatten(const char *buffer, size_t size);
 	bool		Unflatten(EDataIO *stream, size_t size);
 
@@ -97,5 +97,5 @@ BMessageBody::PrintToStream() const
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_PRIVATE_MESSAGE_BODY_H__ */
+#endif /* BHAPI_PRIVATE_MESSAGE_BODY__H */
 

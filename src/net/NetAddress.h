@@ -27,8 +27,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_NET_ADDRESS_H__
-#define __BHAPI_NET_ADDRESS_H__
+#ifndef BHAPI_NET_ADDRESS__H
+#define BHAPI_NET_ADDRESS__H
+#include "./../support/SupportDefs.h"
+#include "./../support/Archivable.h"
 
 #ifndef _WIN32
 #include <sys/types.h>
@@ -38,11 +40,9 @@
 #include <winsock2.h>
 #endif
 
-#include "./../support/Archivable.h"
-
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BNetAddress : public BArchivable {
+class IMPEXP_BHAPI BNetAddress : public BArchivable {
 public:
     BNetAddress(const char *hostname = NULL, b_uint16 port = 0);
     BNetAddress(const char *hostname, const char *protocol, const char *service);
@@ -78,5 +78,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_NET_ADDRESS_H__ */
+#endif /* BHAPI_NET_ADDRESS__H */
 

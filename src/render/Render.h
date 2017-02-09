@@ -27,16 +27,16 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_RENDER_H__
-#define __BHAPI_RENDER_H__
-
+#ifndef BHAPI_RENDER__H
+#define BHAPI_RENDER__H
+#include "./../support/SupportDefs.h"
 #include "./../interface/GraphicsDefs.h"
 #include "./../interface/Rect.h"
 #include "./../interface/Polygon.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BRender {
+class IMPEXP_BHAPI BRender {
 public:
     BRender();
     virtual ~BRender();
@@ -123,5 +123,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_RENDER_H__ */
+#endif /* BHAPI_RENDER__H */
 

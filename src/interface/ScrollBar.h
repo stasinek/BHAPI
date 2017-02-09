@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_SCROLL_BAR_H__
-#define __BHAPI_SCROLL_BAR_H__
+#ifndef BHAPI_SCROLL_BAR__H
+#define BHAPI_SCROLL_BAR__H
 
 #include "./../app/MessageRunner.h"
 #include "./../interface/View.h"
@@ -38,7 +38,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BScrollBar : public BView {
+class IMPEXP_BHAPI BScrollBar : public BView {
 public:
     BScrollBar(BRect frame, const char *name,
 		   float value, float min, float max,
@@ -97,5 +97,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_SCROLL_BAR_H__ */
+#endif /* BHAPI_SCROLL_BAR__H */
 

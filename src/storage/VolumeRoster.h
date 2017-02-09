@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_VOLUME_ROSTER_H__
-#define __BHAPI_VOLUME_ROSTER_H__
+#ifndef BHAPI_VOLUME_ROSTER__H
+#define BHAPI_VOLUME_ROSTER__H
 
 #include "Volume.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BVolumeRoster {
+class IMPEXP_BHAPI BVolumeRoster {
 public:
 	BVolumeRoster();
 	virtual ~BVolumeRoster();
@@ -50,5 +50,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_VOLUME_ROSTER_H__ */
+#endif /* BHAPI_VOLUME_ROSTER__H */
 

@@ -117,7 +117,7 @@ void* bhapi_create_locker(void)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_clone_locker(void *data)
+IMPEXP_BHAPI void* bhapi_clone_locker(void *data)
 {
 	bhapi_win32_locker_t *locker = (bhapi_win32_locker_t*)data;
 	if(!locker) return NULL;
@@ -138,7 +138,7 @@ _IMPEXP_BHAPI void* bhapi_clone_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_delete_locker(void *data)
+IMPEXP_BHAPI b_status_t bhapi_delete_locker(void *data)
 {
 	bhapi_win32_locker_t *locker = (bhapi_win32_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -184,7 +184,7 @@ _IMPEXP_BHAPI b_status_t bhapi_delete_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_close_locker(void *data)
+IMPEXP_BHAPI b_status_t bhapi_close_locker(void *data)
 {
 	bhapi_win32_locker_t *locker = (bhapi_win32_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -203,7 +203,7 @@ _IMPEXP_BHAPI b_status_t bhapi_close_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_lock_locker(void *data)
+IMPEXP_BHAPI b_status_t bhapi_lock_locker(void *data)
 {
 	bhapi_win32_locker_t *locker = (bhapi_win32_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -256,7 +256,7 @@ _IMPEXP_BHAPI b_status_t bhapi_lock_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_lock_locker_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
+IMPEXP_BHAPI b_status_t bhapi_lock_locker_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
 	bhapi_win32_locker_t *locker = (bhapi_win32_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -355,7 +355,7 @@ _IMPEXP_BHAPI b_status_t bhapi_lock_locker_etc(void *data, b_uint32 flags, b_big
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_unlock_locker(void *data)
+IMPEXP_BHAPI b_status_t bhapi_unlock_locker(void *data)
 {
 	bhapi_win32_locker_t *locker = (bhapi_win32_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -394,7 +394,7 @@ _IMPEXP_BHAPI b_status_t bhapi_unlock_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI b_int64 bhapi_count_locker_locks(void *data)
+IMPEXP_BHAPI b_int64 bhapi_count_locker_locks(void *data)
 {
 	b_int64 retVal = B_INT64_CONSTANT(0);
 
@@ -412,7 +412,7 @@ _IMPEXP_BHAPI b_int64 bhapi_count_locker_locks(void *data)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_create_simple_locker(void)
+IMPEXP_BHAPI void* bhapi_create_simple_locker(void)
 {
 	CRITICAL_SECTION *locker = (CRITICAL_SECTION*)malloc(sizeof(CRITICAL_SECTION));
 	if(locker) InitializeCriticalSection(locker);
@@ -420,7 +420,7 @@ _IMPEXP_BHAPI void* bhapi_create_simple_locker(void)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_delete_simple_locker(void* data)
+IMPEXP_BHAPI b_status_t bhapi_delete_simple_locker(void* data)
 {
 	CRITICAL_SECTION *locker = (CRITICAL_SECTION*)data;
 	if(!locker) return B_ERROR;
@@ -430,7 +430,7 @@ _IMPEXP_BHAPI b_status_t bhapi_delete_simple_locker(void* data)
 }
 
 
-_IMPEXP_BHAPI bool bhapi_lock_simple_locker(void *data)
+IMPEXP_BHAPI bool bhapi_lock_simple_locker(void *data)
 {
 	CRITICAL_SECTION *locker = (CRITICAL_SECTION*)data;
 	if(!locker) return false;
@@ -441,7 +441,7 @@ _IMPEXP_BHAPI bool bhapi_lock_simple_locker(void *data)
 }
 
 
-_IMPEXP_BHAPI void bhapi_unlock_simple_locker(void *data)
+IMPEXP_BHAPI void bhapi_unlock_simple_locker(void *data)
 {
 	CRITICAL_SECTION *locker = (CRITICAL_SECTION*)data;
 	if(!locker) return;
@@ -467,7 +467,7 @@ void bhapi_win32_memory_tracing_locker_clean()
 }
 
 
-_IMPEXP_BHAPI bool bhapi_memory_tracing_lock(void)
+IMPEXP_BHAPI bool bhapi_memory_tracing_lock(void)
 {
 	while(InterlockedExchange(&__bhapi_win32_memory_tracing_locker_inuse, 1) == 1) Sleep(0);
 	if(__bhapi_win32_memory_tracing_locker == NULL)
@@ -491,7 +491,7 @@ _IMPEXP_BHAPI bool bhapi_memory_tracing_lock(void)
 }
 
 
-_IMPEXP_BHAPI void bhapi_memory_tracing_unlock(void)
+IMPEXP_BHAPI void bhapi_memory_tracing_unlock(void)
 {
 	LeaveCriticalSection(__bhapi_win32_memory_tracing_locker);
 }

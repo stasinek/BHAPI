@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_FIND_DIRECTORY_H__
-#define __BHAPI_FIND_DIRECTORY_H__ 
+#ifndef BHAPI_FIND_DIRECTORY__H
+#define BHAPI_FIND_DIRECTORY__H 
 
 #include "./Path.h"
 
@@ -51,9 +51,9 @@ typedef enum {
 
 #ifdef __cplusplus /* Just for C++ */
 
-_IMPEXP_BHAPI b_status_t b_find_directory(b_directory_which which, BPath *path);
+IMPEXP_BHAPI b_status_t b_find_directory(b_directory_which which, BPath *path);
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_FIND_DIRECTORY_H__ */
+#endif /* BHAPI_FIND_DIRECTORY__H */
 

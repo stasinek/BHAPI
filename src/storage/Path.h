@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_PATH_H__
-#define __BHAPI_PATH_H__ 
+#ifndef BHAPI_PATH__H
+#define BHAPI_PATH__H 
 
 #include "./../support/SupportDefs.h"
 
@@ -42,7 +42,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BPath {
+class IMPEXP_BHAPI BPath {
 public:
 	BPath();
 	BPath(const char *dir, const char *leaf = NULL, bool normalize = false);
@@ -71,5 +71,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_PATH_H__ */
+#endif /* BHAPI_PATH__H */
 

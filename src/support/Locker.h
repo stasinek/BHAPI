@@ -28,14 +28,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_LOCKER_H__
-#define __BHAPI_LOCKER_H__
+#ifndef BHAPI_LOCKER__H
+#define BHAPI_LOCKER__H
 
 #include "./SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BLocker {
+class IMPEXP_BHAPI BLocker {
 public:
     BLocker();
     virtual ~BLocker();
@@ -57,5 +57,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_LOCKER_H__ */
+#endif /* BHAPI_LOCKER__H */
 

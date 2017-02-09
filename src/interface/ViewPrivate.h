@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_VIEW_PRIVATE_H__
-#define __BHAPI_VIEW_PRIVATE_H__
+#ifndef BHAPI_VIEW_PRIVATE__H
+#define BHAPI_VIEW_PRIVATE__H
 
 #include "layout/Layout.h"
 #include "View.h"
@@ -142,5 +142,5 @@ BViewLayout::_GetVisibleRegion(BRegion **region)
 	GetVisibleRegion(region);
 }
 
-#endif /* __BHAPI_VIEW_PRIVATE_H__ */
+#endif /* BHAPI_VIEW_PRIVATE__H */
 

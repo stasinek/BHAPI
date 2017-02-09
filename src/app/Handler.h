@@ -28,92 +28,84 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_HANDLER_H__
-#define __BHAPI_HANDLER_H__
-
-#include "./../support/Archivable.h"
-#include "./../support/List.h"
+#ifndef BHAPI_HANDLER__H
+#define BHAPI_HANDLER__H
+#include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
+
+#define B_OBSERVE_WHAT_CHANGE		"etk:observe_change_what"
+#define B_OBSERVE_ORIGINAL_WHAT		"etk:observe_orig_what"
+#define B_OBSERVER_OBSERVE_ALL	    B_MAXUINT32
 
 class BLooper;
 class BMessage;
 class BMessageFilter;
 class BMessenger;
 class BToken;
-
-#define B_OBSERVE_WHAT_CHANGE		"etk:observe_change_what"
-#define B_OBSERVE_ORIGINAL_WHAT		"etk:observe_orig_what"
-#define B_OBSERVER_OBSERVE_ALL	    B_MAXUINT32
-
-class _IMPEXP_BHAPI BHandler : public BArchivable {
+class BList;
+#include "./../support/Archivable.h"
+class IMPEXP_BHAPI BHandler : public BArchivable {
 public:
-	BHandler(const char *name = NULL);
-	virtual ~BHandler();
-
+    BHandler(const char *name = NULL);
 	// Archiving
 	BHandler(const BMessage *from);
-	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    virtual ~BHandler();
+
+    virtual b_status_t  Archive(BMessage *into, bool deep = true) const;
 	static BArchivable *Instantiate(const BMessage *from);
 
-	void			SetName(const char *name);
-	const char		*Name() const;
+    void                SetName(const char *name);
+    const char         *Name() const;
 
 	virtual void		MessageReceived(BMessage *message);
 
-	BLooper			*Looper() const;
+    BLooper             *Looper() const;
 
 	virtual void		SetNextHandler(BHandler *handler);
-	BHandler		*NextHandler() const;
+    BHandler           *NextHandler() const;
 
-	bool			LockLooper();
-    b_status_t		LockLooperWithTimeout(b_bigtime_t microseconds_timeout);
-	void			UnlockLooper();
+    bool                LockLooper();
+    b_status_t          LockLooperWithTimeout(b_bigtime_t microseconds_timeout);
+    void                UnlockLooper();
 
 	// Observer calls
-    b_status_t		StartWatching(BMessenger msgr, b_uint32 what);
-    b_status_t		StartWatchingAll(BMessenger msgr);
-    b_status_t		StopWatching(BMessenger msgr, b_uint32 what);
-    b_status_t		StopWatchingAll(BMessenger msgr);
+    b_status_t          StartWatching(BMessenger msgr, b_uint32 what);
+    b_status_t          StartWatchingAll(BMessenger msgr);
+    b_status_t          StopWatching(BMessenger msgr, b_uint32 what);
+    b_status_t          StopWatchingAll(BMessenger msgr);
 
-    b_status_t		StartWatching(BHandler *handler, b_uint32 what);
-	b_status_t		StartWatchingAll(BHandler *handler);
-    b_status_t		StopWatching(BHandler *handler, b_uint32 what);
-	b_status_t		StopWatchingAll(BHandler *handler);
+    b_status_t          StartWatching(BHandler *handler, b_uint32 what);
+    b_status_t          StartWatchingAll(BHandler *handler);
+    b_status_t          StopWatching(BHandler *handler, b_uint32 what);
+    b_status_t          StopWatchingAll(BHandler *handler);
 
 	// Notifier calls
     virtual void		SendNotices(b_uint32 what, const BMessage *msg = NULL);
-    bool			IsWatched(b_uint32 what = B_OBSERVER_OBSERVE_ALL) const;
+    bool                IsWatched(b_uint32 what = B_OBSERVER_OBSERVE_ALL) const;
 
 	// Message Filtering
 	virtual bool		AddFilter(BMessageFilter *filter);
 	virtual bool		RemoveFilter(BMessageFilter *filter);
 	virtual bool		SetFilterList(const BList *filterList);
-	const BList		*FilterList() const;
+    const BList        *FilterList() const;
 
 	// Scripting
-    virtual BHandler	*ResolveSpecifier(BMessage *msg, b_int32 index, BMessage *specifier,
-                          b_int32 what, const char *property);
+    virtual BHandler   *ResolveSpecifier(BMessage *msg, b_int32 index, BMessage *specifier, b_int32 what, const char *property);
 	virtual b_status_t	GetSupportedSuites(BMessage *data);
 
 private:
 	friend class BLooper;
 	friend class BMessage;
-
     friend b_uint64 bhapi_get_handler_token(const BHandler *handler);
 
-	BToken *fToken;
+    BToken *fToken;
 	char *fName;
 	BLooper *fLooper;
-
 	BHandler *fPrevHandler;
 	BHandler *fNextHandler;
-
 	void *fObserverList;
 	BList *fFilters;
 };
-
 #endif /* __cplusplus */
-
-#endif /* __BHAPI_HANDLER_H__ */
-
+#endif /* BHAPI_HANDLER__H */

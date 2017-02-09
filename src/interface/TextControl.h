@@ -28,14 +28,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_TEXT_CONTROL_H__
-#define __BHAPI_TEXT_CONTROL_H__
+#ifndef BHAPI_TEXT_CONTROL__H
+#define BHAPI_TEXT_CONTROL__H
 
 #include "./../interface/TextEditable.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BTextControl : public BTextEditable {
+class IMPEXP_BHAPI BTextControl : public BTextEditable {
 public:
 	BTextControl(BRect frame,
 		     const char *name,
@@ -70,5 +70,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_TEXT_CONTROL_H__ */
+#endif /* BHAPI_TEXT_CONTROL__H */
 

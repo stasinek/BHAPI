@@ -28,6 +28,7 @@
  * --------------------------------------------------------------------------*/
 
 #include "Archivable.h"
+#include "./../app/Message.h"
 
 
 BArchivable::BArchivable()
@@ -62,7 +63,7 @@ BArchivable::Instantiate(const BMessage *from)
 }
 
 
-_IMPEXP_BHAPI bool b_validatb_instantiation(const BMessage *from, const char *class_name)
+IMPEXP_BHAPI bool b_validatb_instantiation(const BMessage *from, const char *class_name)
 {
 	if(from == NULL || class_name == NULL || *class_name == 0) return false;
 
@@ -81,14 +82,14 @@ _IMPEXP_BHAPI bool b_validatb_instantiation(const BMessage *from, const char *cl
 }
 
 
-_IMPEXP_BHAPI b_instantiation_func b_find_instantiation_func(const char *class_name)
+IMPEXP_BHAPI b_instantiation_func b_find_instantiation_func(const char *class_name)
 {
 	// TODO
 	return NULL;
 }
 
 
-_IMPEXP_BHAPI b_instantiation_func b_find_instantiation_func(const BMessage *archive_data)
+IMPEXP_BHAPI b_instantiation_func b_find_instantiation_func(const BMessage *archive_data)
 {
 	const char *class_name = NULL;
 	if(archive_data == NULL) return NULL;

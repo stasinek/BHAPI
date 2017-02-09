@@ -28,26 +28,28 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_LOOPER_H__
-#define __BHAPI_LOOPER_H__
-
-#include "./../support/List.h"
-#include "./../kernel/OS.h"
-#include "./../app/AppDefs.h"
-#include "./../app/Handler.h"
-#include "./../app/MessageQueue.h"
-#include "./../app/MessageFilter.h"
+#ifndef BHAPI_LOOPER__H
+#define BHAPI_LOOPER__H
+#include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
 class BApplication;
 class BMessenger;
-
-class _IMPEXP_BHAPI BLooper : public BHandler {
+class BMessage;
+class BMessageFilter;
+class BMessageQueue;
+class BLoooper;
+#include "./../support/BList.h"
+#include "Handler.h"
+class IMPEXP_BHAPI BLooper : public BHandler {
 public:
-	BLooper(const char *name = NULL,
-		b_int32 priority = B_NORMAL_PRIORITY);
-	virtual ~BLooper();
+//	BLooper(const char *name = NULL,
+//		b_int32 priority = B_NORMAL_PRIORITY);
+    BLooper(const char *name);
+    BLooper(const char *name,
+        b_int32 priority);
+    virtual ~BLooper();
 
 	// Archiving
 	BLooper(const BMessage *from);
@@ -124,8 +126,9 @@ protected:
 	//		}
 	//		...
 	//	}
-	BMessage	*NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT);
-	void		DispatchLooperMessage(BMessage *msg);
+//	BMessage	*NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT);
+    BMessage	*NextLooperMessage(b_bigtime_t timeout);
+    void		DispatchLooperMessage(BMessage *msg);
 
 private:
 	friend class BHandler;
@@ -174,5 +177,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_LOOPER_H__ */
+#endif /* BHAPI_LOOPER__H */
 

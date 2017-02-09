@@ -27,34 +27,33 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_DATA_IO_H__
-#define __BHAPI_DATA_IO_H__
+#ifndef BHAPI_DATA_IO__H
+#define BHAPI_DATA_IO__H
 
-#include "./SupportDefs.h"
-
+#include ".//SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 
 
-class _IMPEXP_BHAPI EDataIO {
+class IMPEXP_BHAPI EDataIO {
 public:
 	EDataIO();
 	virtual ~EDataIO();
 
-	virtual ssize_t		Read(void *buffer, size_t size) = 0;
-	virtual ssize_t		Write(const void *buffer, size_t size) = 0;
+	virtual b_size_t		Read(void *buffer, size_t size) = 0;
+	virtual b_size_t		Write(const void *buffer, size_t size) = 0;
 };
 
 
-class _IMPEXP_BHAPI BPositionIO : public EDataIO {
+class IMPEXP_BHAPI BPositionIO : public EDataIO {
 public:
     BPositionIO();
     virtual ~BPositionIO();
 
-	virtual ssize_t		Read(void *buffer, size_t size);
-	virtual ssize_t		Write(const void *buffer, size_t size);
+	virtual b_size_t		Read(void *buffer, size_t size);
+	virtual b_size_t		Write(const void *buffer, size_t size);
 
-    virtual ssize_t		ReadAt(b_int64 pos, void *buffer, size_t size) = 0;
-    virtual ssize_t		WriteAt(b_int64 pos, const void *buffer, size_t size) = 0;
+    virtual b_size_t		ReadAt(b_int64 pos, void *buffer, size_t size) = 0;
+    virtual b_size_t		WriteAt(b_int64 pos, const void *buffer, size_t size) = 0;
 
     virtual b_int64		Seek(b_int64 position, b_uint32 seek_mode) = 0;
     virtual b_int64		Position() const = 0;
@@ -62,13 +61,13 @@ public:
 };
 
 
-class _IMPEXP_BHAPI BMallocIO : public BPositionIO {
+class IMPEXP_BHAPI BMallocIO : public BPositionIO {
 public:
     BMallocIO();
     virtual ~BMallocIO();
 
-    virtual ssize_t		ReadAt(b_int64 pos, void *buffer, size_t size);
-    virtual ssize_t		WriteAt(b_int64 pos, const void *buffer, size_t size);
+    virtual b_size_t		ReadAt(b_int64 pos, void *buffer, size_t size);
+    virtual b_size_t		WriteAt(b_int64 pos, const void *buffer, size_t size);
 
     virtual b_int64		Seek(b_int64 position, b_uint32 seek_mode);
     virtual b_int64		Position() const;
@@ -87,14 +86,14 @@ private:
 };
 
 
-class _IMPEXP_BHAPI BMemoryIO : public BPositionIO {
+class IMPEXP_BHAPI BMemoryIO : public BPositionIO {
 public:
     BMemoryIO(void *ptr, size_t length);
     BMemoryIO(const void *ptr, size_t length);
     virtual ~BMemoryIO();
 
-    virtual ssize_t		ReadAt(b_int64 pos, void *buffer, size_t size);
-    virtual ssize_t		WriteAt(b_int64 pos, const void *buffer, size_t size);
+    virtual b_size_t		ReadAt(b_int64 pos, void *buffer, size_t size);
+    virtual b_size_t		WriteAt(b_int64 pos, const void *buffer, size_t size);
 
     virtual b_int64		Seek(b_int64 position, b_uint32 seek_mode);
     virtual b_int64		Position() const;
@@ -111,5 +110,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_DATA_IO_H__ */
+#endif /* BHAPI_DATA_IO__H */
 

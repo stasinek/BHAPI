@@ -28,10 +28,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_VIEW_H__
-#define __BHAPI_VIEW_H__
+#ifndef BHAPI_VIEW__H
+#define BHAPI_VIEW__H
 
-#include "./../support/List.h"
+#include "./../support/BList.h"
 #include "./../interface/InterfaceDefs.h"
 #include "./../interface/Region.h"
 #include "./../interface/Polygon.h"
@@ -85,7 +85,7 @@ class BCursor;
 class BLayoutItem;
 
 
-class _IMPEXP_BHAPI BView : public BHandler {
+class IMPEXP_BHAPI BView : public BHandler {
 public:
 	BView(BRect frame,
 	      const char *name,
@@ -364,5 +364,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_VIEW_H__ */
+#endif /* BHAPI_VIEW__H */
 

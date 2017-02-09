@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_ENTRY_H__
-#define __BHAPI_ENTRY_H__ 
+#ifndef BHAPI_ENTRY__H
+#define BHAPI_ENTRY__H 
 
 #include "./Path.h"
 
@@ -36,7 +36,7 @@
 
 class BDirectory;
 
-class _IMPEXP_BHAPI BEntry {
+class IMPEXP_BHAPI BEntry {
 public:
     BEntry();
     BEntry(const char *dir, const char *leaf, bool traverse = false);
@@ -86,5 +86,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_ENTRY_H__ */
+#endif /* BHAPI_ENTRY__H */
 

@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_PRIVATE_APPLICATION_H__
-#define __BHAPI_PRIVATE_APPLICATION_H__
-
+#ifndef BHAPI_PRIVATE_APPLICATION__H
+#define BHAPI_PRIVATE_APPLICATION__H
+#include "./../support/SupportDefs.h"
 #include "./../support/SimpleLocker.h"
 #include "./../private/Token.h"
 
@@ -62,5 +62,5 @@ extern BApplicationConnector *bhapi_app_connector;
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_PRIVATE_APPLICATION_H__ */
+#endif /* BHAPI_PRIVATE_APPLICATION__H */
 

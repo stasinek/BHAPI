@@ -28,14 +28,14 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_MENU_FIELD_H__
-#define __BHAPI_MENU_FIELD_H__
+#ifndef BHAPI_MENU_FIELD__H
+#define BHAPI_MENU_FIELD__H
 
 #include "./../interface/MenuBar.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BMenuField : public BView {
+class IMPEXP_BHAPI BMenuField : public BView {
 public:
 	BMenuField(BRect frame,
 		   const char *name,
@@ -90,5 +90,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_MENU_FIELD_H__ */
+#endif /* BHAPI_MENU_FIELD__H */
 

@@ -27,10 +27,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_LAYOUT_H__
-#define __BHAPI_LAYOUT_H__
+#ifndef BHAPI_LAYOUT__H
+#define BHAPI_LAYOUT__H
 
-#include "./../../support/List.h"
+#include "./../../support/BList.h"
 #include "./../../interface/InterfaceDefs.h"
 #include "./../../interface/Region.h"
 
@@ -40,7 +40,7 @@ class BLayoutItem;
 class BLayoutForm;
 
 
-class _IMPEXP_BHAPI BLayoutContainer {
+class IMPEXP_BHAPI BLayoutContainer {
 public:
 	BLayoutContainer();
 	virtual ~BLayoutContainer();
@@ -70,7 +70,7 @@ private:
 };
 
 
-class _IMPEXP_BHAPI BLayoutItem : public BLayoutContainer {
+class IMPEXP_BHAPI BLayoutItem : public BLayoutContainer {
 public:
 	BLayoutItem(BRect frame, b_uint32 resizingMode);
 	virtual ~BLayoutItem();
@@ -134,7 +134,7 @@ private:
 };
 
 
-class _IMPEXP_BHAPI BLayoutForm : public BLayoutItem {
+class IMPEXP_BHAPI BLayoutForm : public BLayoutItem {
 public:
 	BLayoutForm(BRect frame, b_uint32 resizingMode, b_int32 rows, b_int32 columns);
 	virtual ~BLayoutForm();
@@ -145,5 +145,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_LAYOUT_H__ */
+#endif /* BHAPI_LAYOUT__H */
 

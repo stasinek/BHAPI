@@ -55,7 +55,7 @@ static void bhapi_beos_clipboard_changed()
 		if(!((beClipMsg = be_clipboard->Data()) == NULL || beClipMsg->HasBool("etk:msg_from_gui")))
 		{
 			const char *text = NULL;
-			ssize_t textLen = 0;
+			b_size_t textLen = 0;
 			beClipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 			if(textLen > 0) str.SetTo(text, (b_int32)textLen);
 		}
@@ -71,9 +71,9 @@ static void bhapi_beos_clipboard_changed()
 			if((clipMsg = bhapi_clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
-				ssize_t textLen = 0;
+				b_size_t textLen = 0;
 				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
-				   text == NULL || textLen != (ssize_t)str.Length() || str.Compare(text, (b_int32)textLen) != 0)
+				   text == NULL || textLen != (b_size_t)str.Length() || str.Compare(text, (b_int32)textLen) != 0)
 				{
 					bhapi_clipboard.Clear();
 					clipMsg->AddBool("etk:msg_from_gui", true);
@@ -94,7 +94,7 @@ static b_filter_result bhapi_beos_clipboard_filter(BMessage *message, BHandler *
 	do
 	{
 		const char *text = NULL;
-		ssize_t textLen = 0;
+		b_size_t textLen = 0;
 
 		BString str;
 		BMessage *msg;
@@ -142,7 +142,7 @@ static b_filter_result bhapi_beos_clipboard_filter(BMessage *message, BHandler *
 extern "C" {
 _EXPORT BGraphicsEngine* instantiate_graphics_engine()
 #else
-_IMPEXP_BHAPI BGraphicsEngine* bhapi_get_built_in_graphics_engine()
+IMPEXP_BHAPI BGraphicsEngine* bhapi_get_built_in_graphics_engine()
 #endif
 {
 	return(new EBeGraphicsEngine());

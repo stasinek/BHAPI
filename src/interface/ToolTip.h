@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_TOOL_TIP_H__
-#define __BHAPI_TOOL_TIP_H__
+#ifndef BHAPI_TOOL_TIP__H
+#define BHAPI_TOOL_TIP__H
 
 #include "./../app/Messenger.h"
 #include "./../interface/GraphicsDefs.h"
@@ -37,7 +37,7 @@
 
 
 #if 0
-class _IMPEXP_BHAPI BToolTipInfo {
+class IMPEXP_BHAPI BToolTipInfo {
 public:
     BToolTipInfo();
     virtual ~BToolTipInfo();
@@ -69,7 +69,7 @@ private:
 };
 
 
-class _IMPEXP_BHAPI BToolTip {
+class IMPEXP_BHAPI BToolTip {
 public:
     BToolTip();
     virtual ~BToolTip();
@@ -93,5 +93,5 @@ private:
 #endif
 
 
-#endif /* __BHAPI_TOOL_TIP_H__ */
+#endif /* BHAPI_TOOL_TIP__H */
 

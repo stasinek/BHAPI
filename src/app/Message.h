@@ -28,9 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_MESSAGE_H__
-#define __BHAPI_MESSAGE_H__
-
+#ifndef BHAPI_MESSAGE__H
+#define BHAPI_MESSAGE__H
 #include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
@@ -40,11 +39,12 @@ class BHandler;
 class BStreamIO;
 class BString;
 
+#include "./../support/Errors.h"
 #include "./../kernel/OS.h"
 #include "./../interface/Point.h"
 #include "./../interface/Rect.h"
 
-class _IMPEXP_BHAPI BMessage {
+class IMPEXP_BHAPI BMessage {
 public:
     BMessage();
     BMessage(b_uint32 what);
@@ -80,7 +80,7 @@ public:
     // 			b_int32 count = msg->CountItems(i, k, &type);
     // 			for(b_int32 m = 0; m < count; m++)
 	// 			{
-	// 				ssize_t numBytes = 0;
+	// 				b_size_t numBytes = 0;
 	// 				const void *data = NULL;
 	// 				msg->FindData(i, k, m, &data, &numBytes);
 	// 				...
@@ -141,9 +141,9 @@ public:
     bool		FindMessage(const char *name, b_int32 index, BMessage *msg) const;
     bool		FindMessenger(const char *name, BMessenger *msgr) const;
     bool		FindMessenger(const char *name, b_int32 index, BMessenger *msgr) const;
-    bool		FindData(const char *name, b_type_code type, const void **data, ssize_t *numBytes) const;
-    bool		FindData(const char *name, b_type_code type, b_int32 index, const void **data, ssize_t *numBytes) const;
-    bool		FindData(b_int32 nameIndex, b_int32 typeIndex, b_int32 index, const void **data, ssize_t *numBytes) const;
+    bool		FindData(const char *name, b_type_code type, const void **data, b_size_t *numBytes) const;
+    bool		FindData(const char *name, b_type_code type, b_int32 index, const void **data, b_size_t *numBytes) const;
+    bool		FindData(b_int32 nameIndex, b_int32 typeIndex, b_int32 index, const void **data, b_size_t *numBytes) const;
 
     bool		HasString(const char *name, b_int32 index = 0) const;
     bool		HasInt8(const char *name, b_int32 index = 0) const;
@@ -231,15 +231,15 @@ public:
     b_status_t	BGetInfo(b_type_code type, b_int32 index,
                  char **nameFound, b_type_code *typeFound, b_int32 *countFound = NULL) const;
     b_status_t	BFindData(const char *name, b_type_code type, b_int32 index,
-				  const void **data, ssize_t *numBytes) const;
+				  const void **data, b_size_t *numBytes) const;
     b_status_t	BFindData(const char *name, b_type_code type,
-				  const void **data, ssize_t *numBytes) const;
+				  const void **data, b_size_t *numBytes) const;
 
 private:
     friend class BLooper;
     friend class BMessenger;
 
-#include "./../support/List.h"
+#include "./../support/BList.h"
 
     typedef struct list_data {
 		char 		*name;
@@ -304,7 +304,7 @@ BMessage::BGetInfo(b_type_code type, b_int32 index,
 
 inline b_status_t
 BMessage::BFindData(const char *name, b_type_code type, b_int32 index,
-		    const void **data, ssize_t *numBytes) const
+		    const void **data, b_size_t *numBytes) const
 {
     if(index < 0) return B_BAD_INDEX;
 
@@ -332,12 +332,12 @@ BMessage::BFindData(const char *name, b_type_code type, b_int32 index,
 
 inline b_status_t
 BMessage::BFindData(const char *name, b_type_code type,
-		    const void **data, ssize_t *numBytes) const
+		    const void **data, b_size_t *numBytes) const
 {
 	return BFindData(name, type, 0, data, numBytes);
 }
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_MESSAGE_H__ */
+#endif /* BHAPI_MESSAGE__H */
 

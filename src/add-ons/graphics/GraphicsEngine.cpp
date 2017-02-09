@@ -28,6 +28,7 @@
  * --------------------------------------------------------------------------*/
 
 #include "GraphicsEngine.h"
+#include "./../../support/Errors.h"
 
 BGraphicsContext::BGraphicsContext()
 {

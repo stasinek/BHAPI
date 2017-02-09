@@ -28,15 +28,15 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_STRING_VIEW_H__
-#define __BHAPI_STRING_VIEW_H__
+#ifndef BHAPI_STRING_VIEW__H
+#define BHAPI_STRING_VIEW__H
 
 #include "./../support/StringArray.h"
 #include "./../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BStringView : public BView {
+class IMPEXP_BHAPI BStringView : public BView {
 public:
     BStringView(BRect frame,
 		    const char *name,
@@ -75,5 +75,5 @@ inline void BStringView::SetText(const BString &text)
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_STRING_VIEW_H__ */
+#endif /* BHAPI_STRING_VIEW__H */
 

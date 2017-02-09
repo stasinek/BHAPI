@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_DIRECTORY_H__
-#define __BHAPI_DIRECTORY_H__ 
+#ifndef BHAPI_DIRECTORY__H
+#define BHAPI_DIRECTORY__H 
 
 #include "./Entry.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BDirectory {
+class IMPEXP_BHAPI BDirectory {
 public:
     BDirectory();
     BDirectory(const char *path);
@@ -61,5 +61,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_DIRECTORY_H__ */
+#endif /* BHAPI_DIRECTORY__H */
 

@@ -28,9 +28,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_THEME_ENGINE_H__
-#define __BHAPI_THEME_ENGINE_H__
-
+#ifndef BHAPI_THEME_ENGINE__H
+#define BHAPI_THEME_ENGINE__H
+#include "./../../support/SupportDefs.h"
 #include "./../../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
@@ -93,10 +93,10 @@ typedef struct b_theme_engine {
 } b_theme_engine;
 
 
-_IMPEXP_BHAPI b_theme_engine *bhapi_get_current_theme_engine(void);
+IMPEXP_BHAPI b_theme_engine *bhapi_get_current_theme_engine(void);
 
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_THEME_ENGINE_H__ */
+#endif /* BHAPI_THEME_ENGINE__H */
 

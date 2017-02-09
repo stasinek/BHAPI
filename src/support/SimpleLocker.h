@@ -28,14 +28,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_SIMPLE_LOCKER_H__
-#define __BHAPI_SIMPLE_LOCKER_H__
-
-#include "./../support/SupportDefs.h"
-
+#ifndef BHAPI_SIMPLE_LOCKER__H
+#define BHAPI_SIMPLE_LOCKER__H
+#include "./SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BSimpleLocker {
+class IMPEXP_BHAPI BSimpleLocker {
 public:
     BSimpleLocker(bool assert = false);
     virtual ~BSimpleLocker();
@@ -50,5 +48,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_SIMPLE_LOCKER_H__ */
+#endif /* BHAPI_SIMPLE_LOCKER__H */
 

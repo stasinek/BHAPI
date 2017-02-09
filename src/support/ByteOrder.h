@@ -27,12 +27,11 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_BYTE_ORDER_H__
-#define __BHAPI_BYTE_ORDER_H__
-
+#ifndef BHAPI_BYTE_ORDER__H
+#define BHAPI_BYTE_ORDER__H
 #include "./SupportDefs.h"
+#ifdef __cplusplus /* Just for C++ */
 
-#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -44,10 +43,10 @@ typedef enum b_swap_action {
     B_SWAP_ALWAYS
 } b_swap_action;
 
-_IMPEXP_BHAPI b_status_t	b_swap_data(b_type_code type, void *data, size_t len, b_swap_action action);
-_IMPEXP_BHAPI bool			b_is_type_swapped(b_type_code type);
-_IMPEXP_BHAPI float			b_swap_float(float value);
-_IMPEXP_BHAPI double		b_swap_double(double value);
+IMPEXP_BHAPI b_status_t	b_swap_data(b_type_code type, void *data, size_t len, b_swap_action action);
+IMPEXP_BHAPI bool			b_is_type_swapped(b_type_code type);
+IMPEXP_BHAPI float			b_swap_float(float value);
+IMPEXP_BHAPI double		b_swap_double(double value);
 
 #define B_SWAP_INT16(v)		((((v) & 0xff) << 8) | (((v) >> 8) & 0xff))
 #define B_SWAP_INT32(v)		((B_SWAP_INT16((v) & 0xffff) << 16) | B_SWAP_INT16(((v) >> 16) & 0xffff))
@@ -120,5 +119,5 @@ _IMPEXP_BHAPI double		b_swap_double(double value);
 } // extern "C"
 #endif
 
-#endif /* __BHAPI_BYTE_ORDER_H__ */
+#endif /* BHAPI_BYTE_ORDER__H */
 

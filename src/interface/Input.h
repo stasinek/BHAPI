@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_INPUT_H__
-#define __BHAPI_INPUT_H__
+#ifndef BHAPI_INPUT__H
+#define BHAPI_INPUT__H
 
 enum {
     B_INPUT_METHOD_STARTED = 0,
@@ -37,5 +37,5 @@ enum {
     B_INPUT_METHOD_LOCATION_REQUEST
 };
 
-#endif /* __BHAPI_INPUT_H__ */
+#endif /* BHAPI_INPUT__H */
 

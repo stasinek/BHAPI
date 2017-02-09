@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_POINT_H__
-#define __BHAPI_POINT_H__
+#ifndef BHAPI_POINT__H
+#define BHAPI_POINT__H
 
 #include "./../support/SupportDefs.h"
 
@@ -36,7 +36,7 @@
 
 class BRect;
 
-class _IMPEXP_BHAPI BPoint {
+class IMPEXP_BHAPI BPoint {
 public:
 	float x;
 	float y;
@@ -72,9 +72,9 @@ public:
 	void PrintToStream() const;
 };
 
-extern _IMPEXP_BHAPI const BPoint B_ORIGIN;
+extern IMPEXP_BHAPI const BPoint B_ORIGIN;
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_POINT_H__ */
+#endif /* BHAPI_POINT__H */
 

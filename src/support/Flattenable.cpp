@@ -29,7 +29,6 @@
 
 #include "Flattenable.h"
 
-
 BFlattenable::~BFlattenable()
 {
 }

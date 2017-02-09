@@ -28,10 +28,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_LIST_VIEW_H__
-#define __BHAPI_LIST_VIEW_H__
+#ifndef BHAPI_LIST_VIEW__H
+#define BHAPI_LIST_VIEW__H
 
-#include "./../support/List.h"
+#include "./../support/BList.h"
 #include "./../app/Invoker.h"
 #include "./../interface/ListItem.h"
 
@@ -43,7 +43,7 @@ typedef enum b_list_view_type {
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BListView : public BView, public BInvoker {
+class IMPEXP_BHAPI BListView : public BView, public BInvoker {
 public:
 	BListView(BRect frame,
 		  const char *name,
@@ -137,5 +137,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_LIST_VIEW_H__ */
+#endif /* BHAPI_LIST_VIEW__H */
 

@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
- * 
+ *
  * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,10 +22,10 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: TextControl.cpp
  * Description: BTextControl --- display a labeled field could deliver a message as modifying
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #include "./../app/Application.h"
@@ -261,9 +261,9 @@ BTextControl::KeyDown(const char *bytes, b_int32 numBytes)
 			if((selText = DuplicateText(startPos, endPos)) != NULL && (clipMsg = bhapi_clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
-				ssize_t textLen = 0;
+				b_size_t textLen = 0;
 				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
-				   text == NULL || textLen != (ssize_t)strlen(selText) || strncmp(text, selText, (size_t)textLen) != 0)
+				   text == NULL || textLen != (b_size_t)strlen(selText) || strncmp(text, selText, (size_t)textLen) != 0)
 				{
 					bhapi_clipboard.Clear();
 					clipMsg->AddData("text/plain", B_MIME_TYPE, selText, strlen(selText));
@@ -290,7 +290,7 @@ BTextControl::KeyDown(const char *bytes, b_int32 numBytes)
 			if((clipMsg = bhapi_clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
-				ssize_t len = 0;
+				b_size_t len = 0;
 				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &len)) str.SetTo(text, (b_int32)len);
 			}
 			bhapi_clipboard.Unlock();

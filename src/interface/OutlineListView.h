@@ -28,14 +28,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_OUTLINE_LIST_VIEW_H__
-#define __BHAPI_OUTLINE_LIST_VIEW_H__
+#ifndef BHAPI_OUTLINE_LIST_VIEW__H
+#define BHAPI_OUTLINE_LIST_VIEW__H
 
 #include "./../interface/ListView.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BOutlineListView : public BListView {
+class IMPEXP_BHAPI BOutlineListView : public BListView {
 public:
     BOutlineListView(BRect frame,
 			 const char *name,
@@ -94,5 +94,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_OUTLINE_LIST_VIEW_H__ */
+#endif /* BHAPI_OUTLINE_LIST_VIEW__H */
 

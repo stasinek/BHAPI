@@ -28,15 +28,17 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_INVOKER_H__
-#define __BHAPI_INVOKER_H__
-
-#include "./../app/Messenger.h"
-#include "./../support/List.h"
+#ifndef BHAPI_INVOKER__H
+#define BHAPI_INVOKER__H
+#include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
-class _IMPEXP_BHAPI BInvoker {
+#include "./../support/BList.h"
+class BMessage;
+class BLooper;
+class BMessenger;
+class BHandler;
+class IMPEXP_BHAPI BInvoker {
 public:
     BInvoker();
     BInvoker(BMessage *message,
@@ -94,5 +96,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_INVOKER_H__ */
+#endif /* BHAPI_INVOKER__H */
 

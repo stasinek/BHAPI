@@ -27,9 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_PRIVATE_OBJECT_H__
-#define __BHAPI_PRIVATE_OBJECT_H__
-
+#ifndef BHAPI_PRIVATE_OBJECT__H
+#define BHAPI_PRIVATE_OBJECT__H
 #include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
@@ -54,5 +53,5 @@ _LOCAL void bhapi_delete_object(void *object);
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_PRIVATE_OBJECT_H__ */
+#endif /* BHAPI_PRIVATE_OBJECT__H */
 

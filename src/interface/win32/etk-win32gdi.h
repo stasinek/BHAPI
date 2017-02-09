@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_WIN32GDI_H__
-#define __BHAPI_WIN32GDI_H__
+#ifndef BHAPI_WIN32GDI__H
+#define BHAPI_WIN32GDI__H
 
 #ifdef WIN32
 
@@ -405,5 +405,5 @@ typedef struct bhapi_win32_gdi_callback_t {
 #endif
 
 #endif /* WIN32 */
-#endif /* __BHAPI_WIN32GDI_H__ */
+#endif /* BHAPI_WIN32GDI__H */
 

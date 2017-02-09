@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_X11_H__
-#define __BHAPI_X11_H__
+#ifndef BHAPI_X11__H
+#define BHAPI_X11__H
 
 #ifdef LINUX
 
@@ -342,5 +342,5 @@ private:
 
 #endif /* LINUX */
 
-#endif /* __BHAPI_X11_H__ */
+#endif /* BHAPI_X11__H */
 

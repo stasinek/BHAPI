@@ -29,10 +29,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_MESSAGE_FILTER_H__
-#define __BHAPI_MESSAGE_FILTER_H__
-
-#include "./../app/Handler.h"
+#ifndef BHAPI_MESSAGE_FILTER__H
+#define BHAPI_MESSAGE_FILTER__H
+#include "./../support/SupportDefs.h"
 
 typedef enum b_filter_result {
     B_SKIP_MESSAGE,
@@ -55,11 +54,12 @@ typedef enum b_message_source {
 
 class BMessage;
 class BMessageFilter;
+class BHandler;
 
 typedef b_filter_result (*b_filter_hook)(BMessage *message, BHandler **target, BMessageFilter *filter);
 
 
-class _IMPEXP_BHAPI BMessageFilter {
+class IMPEXP_BHAPI BMessageFilter {
 public:
     BMessageFilter(b_message_delivery delivery, b_message_source source,
                b_uint32 command, b_filter_hook filter = NULL);
@@ -97,5 +97,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_MESSAGE_FILTER_H__ */
+#endif /* BHAPI_MESSAGE_FILTER__H */
 

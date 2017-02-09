@@ -28,8 +28,22 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_SUPPORT_DEFS_H__
-#define __BHAPI_SUPPORT_DEFS_H__
+#ifndef BHAPI_SUPPORT_DEFS__H
+#define BHAPI_SUPPORT_DEFS__H
+
+#define BHAPI_COMPILATION
+#define BHAPI_OS_WIN32
+
+#ifdef WIN32
+#define BHAPI_OS_WIN32
+#endif
+#ifdef LINUX
+#define BHAPI_OS_LINUX
+#endif
+#ifdef MACOS
+#define BHAPI_OS_MACOS
+#endif
+
 
 #include <stdarg.h>
 #include <stddef.h>
@@ -85,12 +99,6 @@
 /* Define to `unsigned' if <sys/types.h> does not define. */
 /* #undef size_t */
 
-#define BHAPI_COMPILATION
-
-#ifdef _WIN32
-#define BHAPI_OS_WIN32
-#endif
-
 #define B_INT64_CONSTANT(x) (const __int64)(x)
 
 #include <limits.h>
@@ -129,6 +137,7 @@ typedef b_uint32	b_perform_code;
 typedef b_int64	b_bigtime_t;
 typedef b_int64	b_thread_id;
 typedef size_t	b_address_t;
+typedef size_t	b_size_t;
 
 enum {
     B_ANY_TYPE                  = 'ANYT',
@@ -144,7 +153,7 @@ enum {
     B_MESSENGER_TYPE			= 'MSNG',
     B_POINTER_TYPE				= 'PNTR',
     B_SIZE_T_TYPE	 			= 'SIZT',
-    B_SSIZE_T_TYPE	 			= 'SSZT',
+    B_b_size_t_TYPE	 			= 'SSZT',
     B_STRING_TYPE 				= 'CSTR',
     B_UINT64_TYPE				= 'ULLG',
     B_UINT32_TYPE				= 'ULNG',
@@ -246,20 +255,20 @@ typedef	b_int8	bool;
 #endif /* _LOCAL */
 
 #ifdef BHAPI_COMPILATION
-    #define _IMPEXP_BHAPI _EXPORT
+    #define IMPEXP_BHAPI _EXPORT
 #else /* !BHAPI_COMPILATION */
-    #define _IMPEXP_BHAPI _IMPORT
+    #define IMPEXP_BHAPI _IMPORT
 #endif /* BHAPI_COMPILATION */
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
-extern _IMPEXP_BHAPI const b_uint8 bhapi_major_version;
-extern _IMPEXP_BHAPI const b_uint8 bhapi_minor_version;
-extern _IMPEXP_BHAPI const b_uint8 bhapi_micro_version;
-extern _IMPEXP_BHAPI const b_uint8 bhapi_interface_age;
-extern _IMPEXP_BHAPI const b_uint16 bhapi_binary_age;
+extern IMPEXP_BHAPI const b_uint8 bhapi_major_version;
+extern IMPEXP_BHAPI const b_uint8 bhapi_minor_version;
+extern IMPEXP_BHAPI const b_uint8 bhapi_micro_version;
+extern IMPEXP_BHAPI const b_uint8 bhapi_interface_age;
+extern IMPEXP_BHAPI const b_uint16 bhapi_binary_age;
 
 #ifdef __cplusplus
 } /* extern "C" */
@@ -299,9 +308,9 @@ enum {
     B_SEEK_END,
 };
 
-#ifndef __BHAPI_DEBUG_H__
+#ifndef BHAPI_DEBUG__H
 //#include "./../kernel/Debug.h"
 #endif
 
-#endif /* __BHAPI_SUPPORT_DEFS_H__ */
+#endif /* BHAPI_SUPPORT_DEFS__H */
 

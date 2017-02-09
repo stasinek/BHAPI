@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_SCREEN_H__
-#define __BHAPI_SCREEN_H__
+#ifndef BHAPI_SCREEN__H
+#define BHAPI_SCREEN__H
 
 #include "./../interface/Rect.h"
 
@@ -36,7 +36,7 @@
 
 class BWindow;
 
-class _IMPEXP_BHAPI BScreen {
+class IMPEXP_BHAPI BScreen {
 public:
     BScreen(b_uint32 id = 0);
     BScreen(BWindow *win);
@@ -54,5 +54,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_SCREEN_H__ */
+#endif /* BHAPI_SCREEN__H */
 

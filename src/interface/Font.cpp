@@ -36,9 +36,9 @@
 #include "Font.h"
 
 
-extern _IMPEXP_BHAPI const BFont* bhapi_plain_font = NULL;
-extern _IMPEXP_BHAPI const BFont* bhapi_bold_font = NULL;
-extern _IMPEXP_BHAPI const BFont* bhapi_fixed_font = NULL;
+extern IMPEXP_BHAPI const BFont* bhapi_plain_font = NULL;
+extern IMPEXP_BHAPI const BFont* bhapi_bold_font = NULL;
+extern IMPEXP_BHAPI const BFont* bhapi_fixed_font = NULL;
 
 static BLocker bhapi_font_info_locker;
 

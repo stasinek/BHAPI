@@ -1,18 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<FileVersion major="1" minor="0" />
+	<ActiveTarget name="default" />
+	<File name="src\interface\x11\etk-application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8601" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\app\Message.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="28790" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kernel\Kernel.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="9908" topLine="204" />
+		</Cursor>
+	</File>
+	<File name="src\private\MessageBody.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4743" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\support\DataIO.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3335" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\support\SupportDefs.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4737" topLine="126" />
+		</Cursor>
+	</File>
+	<File name="src\interface\win32\etk-application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3342" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\storage\File.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8085" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\support\Flattenable.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2107" topLine="19" />
+		</Cursor>
+	</File>
+	<File name="tools\etkxx-doc.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10101" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\interface\TextControl.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8391" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\interface\beos\etk-window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="19180" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\support\StreamIO.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1857" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\private\StandardIO.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2057" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\app\Message.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11617" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\private\MessageBody.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2594" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\interface\directfb\etk-application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3716" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\storage\File.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2762" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kernel\OS.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="21" />
+		</Cursor>
+	</File>
+	<File name="src\kernel\etk-port.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="19549" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\support\ByteOrder.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3881" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\private\StandardIO.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1883" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kernel\beos\etk-area.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3740" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\support\DataIO.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5861" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\app\Messenger.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12677" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\interface\TextView.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="53418" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\app\Application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8611" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\support\StreamIO.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4506" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\interface\beos\etk-application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3400" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kernel\thread\beos\etk-semaphore.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4332" topLine="0" />
+		</Cursor>
+	</File>
+</CodeBlocks_layout_file>
 [Editors]
-Order=2,1,0
-Focused=0
-[Editor_0]
-CursorCol=1
-CursorRow=1
-TopLine=1
+Order=21,14,23,10,6,13,24,0,2,15,5,18,4,9,12,17,20,7,19,22,25,8,26,11,1
+Focused=26
+[Editor_16]
+CursorCol=26
+CursorRow=33
+TopLine=25
 LeftChar=1
-[Editor_1]
+[Editor_21]
+CursorCol=1
+CursorRow=235
+TopLine=224
+LeftChar=1
+[Editor_14]
+CursorCol=24
+CursorRow=34
+TopLine=26
+LeftChar=1
+[Editor_0]
 CursorCol=1
 CursorRow=1
 TopLine=1
 LeftChar=1
 [Editor_2]
 CursorCol=1
+CursorRow=31
+TopLine=15
+LeftChar=1
+[Editor_4]
+CursorCol=1
+CursorRow=35
+TopLine=21
+LeftChar=1
+[Editor_5]
+CursorCol=1
+CursorRow=35
+TopLine=18
+LeftChar=1
+[Editor_6]
+CursorCol=32
+CursorRow=30
+TopLine=18
+LeftChar=1
+[Editor_7]
+CursorCol=1
+CursorRow=33
+TopLine=20
+LeftChar=1
+[Editor_9]
+CursorCol=1
+CursorRow=36
+TopLine=17
+LeftChar=1
+[Editor_10]
+CursorCol=1
+CursorRow=33
+TopLine=24
+LeftChar=1
+[Editor_12]
+CursorCol=1
 CursorRow=1
-TopLine=1
+TopLine=25
+LeftChar=1
+[Editor_13]
+CursorCol=1
+CursorRow=31
+TopLine=18
+LeftChar=1
+[Editor_15]
+CursorCol=1
+CursorRow=35
+TopLine=27
+LeftChar=1
+[Editor_17]
+CursorCol=1
+CursorRow=31
+TopLine=22
+LeftChar=1
+[Editor_18]
+CursorCol=1
+CursorRow=35
+TopLine=27
+LeftChar=1
+[Editor_19]
+CursorCol=1
+CursorRow=31
+TopLine=24
+LeftChar=1
+[Editor_20]
+CursorCol=20
+CursorRow=30
+TopLine=22
+LeftChar=1
+[Editor_22]
+CursorCol=1
+CursorRow=29
+TopLine=22
+LeftChar=1
+[Editor_23]
+CursorCol=1
+CursorRow=30
+TopLine=28
+LeftChar=1
+[Editor_24]
+CursorCol=1
+CursorRow=36
+TopLine=21
+LeftChar=1
+[Editor_25]
+CursorCol=1
+CursorRow=32
+TopLine=23
+LeftChar=1
+[Editor_8]
+CursorCol=24
+CursorRow=34
+TopLine=20
+LeftChar=1
+[Editor_11]
+CursorCol=1
+CursorRow=1
+TopLine=24
+LeftChar=1
+[Editor_1]
+CursorCol=1
+CursorRow=35
+TopLine=18
+LeftChar=1
+[Editor_26]
+CursorCol=1
+CursorRow=29
+TopLine=20
 LeftChar=1

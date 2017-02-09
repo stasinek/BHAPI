@@ -38,7 +38,7 @@
 
 
 // return the number of microseconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-_IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
+IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
 {
 	b_int64 current_time = B_INT64_CONSTANT(-1);
 #if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)
@@ -61,7 +61,7 @@ _IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
 
 
 // return the number of seconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-_IMPEXP_BHAPI b_uint32 bhapi_real_time_clock(void)
+IMPEXP_BHAPI b_uint32 bhapi_real_time_clock(void)
 {
 	b_uint32 current_time = 0;
 #if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)
@@ -83,7 +83,7 @@ static b_int64 bhapi_unix_boot_time = B_INT64_CONSTANT(-1);
 static BSimpleLocker bhapi_unix_boot_time_locker(true);
 
 
-_IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
+IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
 {
 	b_bigtime_t retValue = B_INT64_CONSTANT(-1);
 
@@ -115,7 +115,7 @@ _IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
 }
 
 
-_IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void)
+IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void)
 {
 	// FIXME
 	return(bhapi_real_time_clock_usecs() - bhapi_system_boot_time());

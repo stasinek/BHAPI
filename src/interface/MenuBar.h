@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_MENU_BAR_H__
-#define __BHAPI_MENU_BAR_H__
+#ifndef BHAPI_MENU_BAR__H
+#define BHAPI_MENU_BAR__H
 
 #include "./../interface/Menu.h"
 
@@ -41,7 +41,7 @@ typedef enum b_menu_bar_border {
     B_BORDER_EACH_ITEM
 } b_menu_bar_border;
 
-class _IMPEXP_BHAPI BMenuBar : public BMenu {
+class IMPEXP_BHAPI BMenuBar : public BMenu {
 public:
 	BMenuBar(BRect frame, const char *title,
 		 b_uint32 resizeMode = B_FOLLOW_LEFT_RIGHT | B_FOLLOW_TOP,
@@ -72,5 +72,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_MENU_BAR_H__ */
+#endif /* BHAPI_MENU_BAR__H */
 

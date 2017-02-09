@@ -28,10 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../kernel/Kernel.h"
-
 #include "SimpleLocker.h"
-
+#include "./../kernel/Kernel.h"
 
 BSimpleLocker::BSimpleLocker(bool assert)
 {

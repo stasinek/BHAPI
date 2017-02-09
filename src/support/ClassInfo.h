@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_CLASS_INFO_H__
-#define __BHAPI_CLASS_INFO_H__
-
+#ifndef BHAPI_CLASS_INFO__H
+#define BHAPI_CLASS_INFO__H
+#include "./SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 
 #if (defined(_MSC_VER) && !defined(_CPPRTTI))
@@ -45,5 +45,5 @@
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_CLASS_INFO_H__ */
+#endif /* BHAPI_CLASS_INFO__H */
 

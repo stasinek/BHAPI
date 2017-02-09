@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_CONTROL_H__
-#define __BHAPI_CONTROL_H__
+#ifndef BHAPI_CONTROL__H
+#define BHAPI_CONTROL__H
 
 #include "./../interface/View.h"
 #include "./../app/Invoker.h"
@@ -40,7 +40,7 @@ enum {
     B_CONTROL_ON = 1
 };
 
-class _IMPEXP_BHAPI BControl : public BView, public BInvoker {
+class IMPEXP_BHAPI BControl : public BView, public BInvoker {
 public:
 	BControl(BRect frame,
 		 const char *name,
@@ -75,5 +75,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_CONTROL_H__ */
+#endif /* BHAPI_CONTROL__H */
 

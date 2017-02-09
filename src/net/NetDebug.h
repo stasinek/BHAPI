@@ -27,14 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_NET_DEBUG_H__
-#define __BHAPI_NET_DEBUG_H__
-
+#ifndef BHAPI_NET_DEBUG__H
+#define BHAPI_NET_DEBUG__H
 #include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BNetDebug {
+class IMPEXP_BHAPI BNetDebug {
 public:
 	static void	Enable(bool state);
 	static bool	IsEnabled();
@@ -46,5 +45,5 @@ public:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_NET_DEBUG_H__ */
+#endif /* BHAPI_NET_DEBUG__H */
 

@@ -27,13 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_AUTOLOCK_H__
-#define __BHAPI_AUTOLOCK_H__
-
+#ifndef BHAPI_AUTOLOCK__H
+#define BHAPI_AUTOLOCK__H
+#include "./SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 
-template<class C>
-class BAutolock
+template<class C> class BAutolock
 {
 public:
     BAutolock(C *target)
@@ -70,5 +69,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_AUTOLOCK_H__ */
+#endif /* BHAPI_AUTOLOCK__H */
 

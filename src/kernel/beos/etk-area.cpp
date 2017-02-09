@@ -109,7 +109,7 @@ public:
 
 			int32 msgCode = 0;
 			char buf = 0;
-			ssize_t readBytes = read_port(iLocker, &msgCode, &buf, 1);
+			b_size_t readBytes = read_port(iLocker, &msgCode, &buf, 1);
 			if(readBytes < 1) continue;
 			if(readBytes != 1 || msgCode != 'bhapi_' || buf != 1)
 				BHAPI_ERROR("[KERNEL]: Unable to lock the locker for global area.");
@@ -148,7 +148,7 @@ typedef struct bhapi_beos_area_info_t {
 } bhapi_beos_area_info_t;
 
 
-_IMPEXP_BHAPI void*
+IMPEXP_BHAPI void*
 bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 protection, const char *domain, bhapi_area_access area_access)
 {
 	if(size <= 0) return NULL;
@@ -214,7 +214,7 @@ bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 pro
 }
 
 
-_IMPEXP_BHAPI void*
+IMPEXP_BHAPI void*
 bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char *domain)
 {
 	char *ipc_name = bhapi_area_ipc_name(name, domain);
@@ -272,7 +272,7 @@ bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const 
 }
 
 
-_IMPEXP_BHAPI void*
+IMPEXP_BHAPI void*
 bhapi_clone_area_by_source(void *source_data, void **dest_addr, b_uint32 protection)
 {
 	bhapi_beos_area_t *source_area = (bhapi_beos_area_t*)source_data;
@@ -282,7 +282,7 @@ bhapi_clone_area_by_source(void *source_data, void **dest_addr, b_uint32 protect
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_get_area_info(void *data, bhapi_area_info *info)
 {
 	bhapi_beos_area_t *area = (bhapi_beos_area_t*)data;
@@ -304,7 +304,7 @@ bhapi_get_area_info(void *data, bhapi_area_info *info)
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_delete_area(void *data)
 {
 	bhapi_beos_area_t *area = (bhapi_beos_area_t*)data;
@@ -343,7 +343,7 @@ bhapi_delete_area(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_delete_area_etc(void *data, bool no_clone)
 {
 	bhapi_beos_area_t *area = (bhapi_beos_area_t*)data;
@@ -382,7 +382,7 @@ bhapi_delete_area_etc(void *data, bool no_clone)
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_resize_area(void *data, void **start_addr, size_t new_size)
 {
 	bhapi_beos_area_t *area = (bhapi_beos_area_t*)data;
@@ -417,7 +417,7 @@ bhapi_resize_area(void *data, void **start_addr, size_t new_size)
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_set_area_protection(void *data, b_uint32 new_protection)
 {
 	bhapi_beos_area_t *area = (bhapi_beos_area_t*)data;

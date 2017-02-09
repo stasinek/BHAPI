@@ -481,7 +481,7 @@ inline bool parse_simple_xml(BString *buffer, b_int32 *offset, BSimpleXmlNode *n
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_parse_simple_xml(const char *buf, BSimpleXmlNode *node)
+IMPEXP_BHAPI b_status_t bhapi_parse_simple_xml(const char *buf, BSimpleXmlNode *node)
 {
 	if(buf == NULL || *buf == 0 || node == NULL) return B_BAD_VALUE;
 

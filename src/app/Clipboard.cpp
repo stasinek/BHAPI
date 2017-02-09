@@ -29,25 +29,26 @@
  * --------------------------------------------------------------------------*/
 
 #include "./../kernel/Kernel.h"
+#include "./../kernel/Debug.h"
 #include "./../support/StringMe.h"
-#include "./../support/List.h"
+#include "./../support/BList.h"
 #include "./../support/SimpleLocker.h"
+#include "./../support/Errors.h"
 
 #include "Clipboard.h"
 #include "Application.h"
 
-
-class _LOCAL _ESystemClipboard {
+class _LOCAL _BSystemClipboard {
 public:
 	BSimpleLocker fLocker;
 	BMessage fData;
 	BList fWatchingList;
 
-	_ESystemClipboard()
+    _BSystemClipboard()
 	{
 	}
 
-	~_ESystemClipboard()
+    ~_BSystemClipboard()
 	{
 		BMessenger *msgr;
 		while((msgr = (BMessenger*)fWatchingList.RemoveItem((b_int32)0)) != NULL) delete msgr;
@@ -129,7 +130,7 @@ public:
 	}
 };
 
-static _ESystemClipboard __bhapi_system_clipboard__;
+static _BSystemClipboard __bhapi_system_clipboard__;
 
 
 BClipboard::BClipboard(const char *name)

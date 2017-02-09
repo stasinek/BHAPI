@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_PRIVATE_MEMORY_H__
-#define __BHAPI_PRIVATE_MEMORY_H__
+#ifndef BHAPI_PRIVATE_MEMORY__H
+#define BHAPI_PRIVATE_MEMORY__H
 
 #include "./../support/SupportDefs.h"
 
@@ -43,5 +43,5 @@ public:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_PRIVATE_MEMORY_H__ */
+#endif /* BHAPI_PRIVATE_MEMORY__H */
 

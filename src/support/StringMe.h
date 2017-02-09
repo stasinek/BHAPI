@@ -28,58 +28,56 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_STRINGME_H__
-#define __BHAPI_STRINGME_H__
-
-#include "SupportDefs.h"
-
-#ifdef __cplusplus
+#ifndef BHAPI_STRINGME__H
+#define BHAPI_STRINGME__H
+#include "./SupportDefs.h"
+#ifdef __cplusplus /* Just for C++ */
 extern "C" {
 #endif /* __cplusplus */
 
 #define b_strncasecmp(a,b,c) strncasecmp(a,b,c)
 /* the result must be free by "free" */
-_IMPEXP_BHAPI char*		b_strdup(const char *src);
-_IMPEXP_BHAPI char*		b_strndup(const char *src, b_int32 length);
-_IMPEXP_BHAPI char*		b_strdup_vprintf(const char *format, va_list ap);
-_IMPEXP_BHAPI char*		b_strdup_printf(const char *format, ...);
+IMPEXP_BHAPI char*		b_strdup(const char *src);
+IMPEXP_BHAPI char*		b_strndup(const char *src, b_int32 length);
+IMPEXP_BHAPI char*		b_strdup_vprintf(const char *format, va_list ap);
+IMPEXP_BHAPI char*		b_strdup_printf(const char *format, ...);
 
-_IMPEXP_BHAPI b_unichar*		b_utf8_convert_to_unicode(const char *str, b_int32 length);
-_IMPEXP_BHAPI b_unichar32*		b_utf8_convert_to_utf32(const char *str, b_int32 length);
-_IMPEXP_BHAPI char*		b_unicode_convert_to_utf8(const b_unichar *str, b_int32 ulength);
-_IMPEXP_BHAPI b_unichar32*		b_unicode_convert_to_utf32(const b_unichar *str, b_int32 ulength);
-_IMPEXP_BHAPI char*		b_utf32_convert_to_utf8(const b_unichar32 *str, b_int32 ulength);
-_IMPEXP_BHAPI b_unichar*		b_utf32_convert_to_unicode(const b_unichar32 *str, b_int32 ulength);
+IMPEXP_BHAPI b_unichar*		b_utf8_convert_to_unicode(const char *str, b_int32 length);
+IMPEXP_BHAPI b_unichar32*		b_utf8_convert_to_utf32(const char *str, b_int32 length);
+IMPEXP_BHAPI char*		b_unicode_convert_to_utf8(const b_unichar *str, b_int32 ulength);
+IMPEXP_BHAPI b_unichar32*		b_unicode_convert_to_utf32(const b_unichar *str, b_int32 ulength);
+IMPEXP_BHAPI char*		b_utf32_convert_to_utf8(const b_unichar32 *str, b_int32 ulength);
+IMPEXP_BHAPI b_unichar*		b_utf32_convert_to_unicode(const b_unichar32 *str, b_int32 ulength);
 
-_IMPEXP_BHAPI bool		b_utf8_is_token(const char *str);
-_IMPEXP_BHAPI b_int32		b_utf8_strlen(const char *str);
-_IMPEXP_BHAPI b_int32		b_utf8_strlen_etc(const char *str, b_int32 nbytes);
-_IMPEXP_BHAPI b_int32		b_utf8_strlen_fast(const char *str, b_int32 nbytes); /* none checking */
-_IMPEXP_BHAPI const char*		b_utf8_at(const char *str, b_int32 index, b_uint8 *nbytes);
-_IMPEXP_BHAPI const char*		b_utf8_next(const char *str, b_uint8 *length);
+IMPEXP_BHAPI bool		b_utf8_is_token(const char *str);
+IMPEXP_BHAPI b_int32		b_utf8_strlen(const char *str);
+IMPEXP_BHAPI b_int32		b_utf8_strlen_etc(const char *str, b_int32 nbytes);
+IMPEXP_BHAPI b_int32		b_utf8_strlen_fast(const char *str, b_int32 nbytes); /* none checking */
+IMPEXP_BHAPI const char*		b_utf8_at(const char *str, b_int32 index, b_uint8 *nbytes);
+IMPEXP_BHAPI const char*		b_utf8_next(const char *str, b_uint8 *length);
 
-_IMPEXP_BHAPI b_int32		b_unicode_strlen(const b_unichar *ustr);
-_IMPEXP_BHAPI b_int32		b_unicode_strlen_etc(const b_unichar *ustr, b_int32 nchars, bool utf16_style);
-_IMPEXP_BHAPI const b_unichar*	b_unicode_at(const b_unichar* ustr, b_int32 index, bool *utf16);
-_IMPEXP_BHAPI const b_unichar*	b_unicode_next(const b_unichar* ustr, bool *utf16);
+IMPEXP_BHAPI b_int32		b_unicode_strlen(const b_unichar *ustr);
+IMPEXP_BHAPI b_int32		b_unicode_strlen_etc(const b_unichar *ustr, b_int32 nchars, bool utf16_style);
+IMPEXP_BHAPI const b_unichar*	b_unicode_at(const b_unichar* ustr, b_int32 index, bool *utf16);
+IMPEXP_BHAPI const b_unichar*	b_unicode_next(const b_unichar* ustr, bool *utf16);
 
-_IMPEXP_BHAPI b_int32		b_utf32_strlen(const b_unichar32 *ustr);
-_IMPEXP_BHAPI b_int32		b_utf32_strlen_etc(const b_unichar32 *ustr, b_int32 nchars);
-_IMPEXP_BHAPI const b_unichar32*	b_utf32_at(const b_unichar32* ustr, b_int32 index);
-_IMPEXP_BHAPI const b_unichar32*	b_utf32_next(const b_unichar32* ustr);
+IMPEXP_BHAPI b_int32		b_utf32_strlen(const b_unichar32 *ustr);
+IMPEXP_BHAPI b_int32		b_utf32_strlen_etc(const b_unichar32 *ustr, b_int32 nchars);
+IMPEXP_BHAPI const b_unichar32*	b_utf32_at(const b_unichar32* ustr, b_int32 index);
+IMPEXP_BHAPI const b_unichar32*	b_utf32_next(const b_unichar32* ustr);
 
 #ifdef __cplusplus /* Just for C++ */
 } // extern "C"
 
 
 // b_strdup_dirty(): like b_strdup(), but the result must be free by "delete[]"
-_IMPEXP_BHAPI char *b_strdup_dirty(const char* src, b_int32 length = -1);
+IMPEXP_BHAPI char *b_strdup_dirty(const char* src, b_int32 length = -1);
 
 
 class BStringArray;
 
 
-class _IMPEXP_BHAPI BString {
+class IMPEXP_BHAPI BString {
 public:
     BString();
     BString(const char *str);
@@ -313,5 +311,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_STRING_H__ */
+#endif /* BHAPI_STRING__H */
 

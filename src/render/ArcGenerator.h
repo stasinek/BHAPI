@@ -28,14 +28,14 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_ARC_GENERATOR_H__
-#define __BHAPI_ARC_GENERATOR_H__
-
+#ifndef BHAPI_ARC_GENERATOR__H
+#define BHAPI_ARC_GENERATOR__H
+#include "./../support/SupportDefs.h"
 #include "./../interface/Rect.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BArcGenerator {
+class IMPEXP_BHAPI BArcGenerator {
 public:
     BArcGenerator(BPoint center, float xRadius, float yRadius, BPoint start, BPoint end);
 
@@ -70,5 +70,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_ARC_GENERATOR_H__ */
+#endif /* BHAPI_ARC_GENERATOR__H */
 

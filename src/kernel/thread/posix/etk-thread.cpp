@@ -37,7 +37,7 @@
 
 #include "./../config.h"
 #include "./../kernel/Kernel.h"
-#include "./../support/List.h"
+#include "./../support/BList.h"
 #include "./../support/StringMe.h"
 
 typedef struct _threadCallback_ {
@@ -219,7 +219,7 @@ static EThreadsList __bhapi_thread_lists__;
 #define _BHAPI_OPEN_THREAD_(tid)	__bhapi_thread_lists__.OpenThread(tid)
 
 
-_IMPEXP_BHAPI b_int64 bhapi_get_current_thread_id(void)
+IMPEXP_BHAPI b_int64 bhapi_get_current_thread_id(void)
 {
 	return(bhapi_convert_pthread_id_to_etk(pthread_self()));
 }
@@ -320,7 +320,7 @@ static void* bhapi_spawn_thread_func(void *data)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_create_thread_by_current_thread(void)
+IMPEXP_BHAPI void* bhapi_create_thread_by_current_thread(void)
 {
 	bhapi_posix_thread_private_t *priThread = NULL;
 
@@ -354,7 +354,7 @@ _IMPEXP_BHAPI void* bhapi_create_thread_by_current_thread(void)
 }
 
 
-_IMPEXP_BHAPI void* bhapi_create_thread(b_thread_func threadFunction,
+IMPEXP_BHAPI void* bhapi_create_thread(b_thread_func threadFunction,
 				    b_int32 priority,
 				    void *arg,
 				    b_int64 *threadId)
@@ -427,7 +427,7 @@ _IMPEXP_BHAPI void* bhapi_create_thread(b_thread_func threadFunction,
 }
 
 
-_IMPEXP_BHAPI void* bhapi_open_thread(b_int64 threadId)
+IMPEXP_BHAPI void* bhapi_open_thread(b_int64 threadId)
 {
 	_BHAPI_LOCK_THREAD_();
 	bhapi_posix_thread_private_t *priThread = _BHAPI_OPEN_THREAD_(threadId);
@@ -437,7 +437,7 @@ _IMPEXP_BHAPI void* bhapi_open_thread(b_int64 threadId)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_delete_thread(void *data)
+IMPEXP_BHAPI b_status_t bhapi_delete_thread(void *data)
 {
 	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
 	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
@@ -519,7 +519,7 @@ _IMPEXP_BHAPI b_status_t bhapi_delete_thread(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_resume_thread(void *data)
+IMPEXP_BHAPI b_status_t bhapi_resume_thread(void *data)
 {
 	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
 	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
@@ -547,7 +547,7 @@ _IMPEXP_BHAPI b_status_t bhapi_resume_thread(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_suspend_thread(void *data)
+IMPEXP_BHAPI b_status_t bhapi_suspend_thread(void *data)
 {
 	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
 	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
@@ -578,7 +578,7 @@ _IMPEXP_BHAPI b_status_t bhapi_suspend_thread(void *data)
 }
 
 
-_IMPEXP_BHAPI b_int64 bhapi_get_thread_id(void *data)
+IMPEXP_BHAPI b_int64 bhapi_get_thread_id(void *data)
 {
 	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
 	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
@@ -592,7 +592,7 @@ _IMPEXP_BHAPI b_int64 bhapi_get_thread_id(void *data)
 }
 
 
-_IMPEXP_BHAPI b_uint32 bhapi_get_thread_run_state(void *data)
+IMPEXP_BHAPI b_uint32 bhapi_get_thread_run_state(void *data)
 {
 	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
 	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
@@ -631,7 +631,7 @@ _IMPEXP_BHAPI b_uint32 bhapi_get_thread_run_state(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_set_thread_priority(void *data, b_int32 new_priority)
+IMPEXP_BHAPI b_status_t bhapi_set_thread_priority(void *data, b_int32 new_priority)
 {
 	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
 	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
@@ -678,7 +678,7 @@ _IMPEXP_BHAPI b_status_t bhapi_set_thread_priority(void *data, b_int32 new_prior
 }
 
 
-_IMPEXP_BHAPI b_int32 bhapi_get_thread_priority(void *data)
+IMPEXP_BHAPI b_int32 bhapi_get_thread_priority(void *data)
 {
 	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
 	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
@@ -692,7 +692,7 @@ _IMPEXP_BHAPI b_int32 bhapi_get_thread_priority(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_on_exit_thread(void (*callback)(void *), void *user_data)
+IMPEXP_BHAPI b_status_t bhapi_on_exit_thread(void (*callback)(void *), void *user_data)
 {
 	if(!callback) return B_BAD_VALUE;
 
@@ -731,7 +731,7 @@ _IMPEXP_BHAPI b_status_t bhapi_on_exit_thread(void (*callback)(void *), void *us
 }
 
 
-_IMPEXP_BHAPI void bhapi_exit_thread(b_status_t status)
+IMPEXP_BHAPI void bhapi_exit_thread(b_status_t status)
 {
 	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)bhapi_open_thread(bhapi_get_current_thread_id());
 	if(priThread == NULL)
@@ -768,7 +768,7 @@ _IMPEXP_BHAPI void bhapi_exit_thread(b_status_t status)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_wait_for_thread_etc(void *data, b_status_t *thread_return_value, b_uint32 flags, b_bigtime_t microseconds_timeout)
+IMPEXP_BHAPI b_status_t bhapi_wait_for_thread_etc(void *data, b_status_t *thread_return_value, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
 	bhapi_posix_thread_private_t *priThread = (bhapi_posix_thread_private_t*)data;
 	bhapi_posix_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
@@ -857,13 +857,13 @@ _IMPEXP_BHAPI b_status_t bhapi_wait_for_thread_etc(void *data, b_status_t *threa
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_wait_for_thread(void *data, b_status_t *thread_return_value)
+IMPEXP_BHAPI b_status_t bhapi_wait_for_thread(void *data, b_status_t *thread_return_value)
 {
 	return bhapi_wait_for_thread_etc(data, thread_return_value, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_snooze(b_bigtime_t microseconds)
+IMPEXP_BHAPI b_status_t bhapi_snooze(b_bigtime_t microseconds)
 {
 	if(microseconds <= 0) return B_ERROR;
 
@@ -893,7 +893,7 @@ _IMPEXP_BHAPI b_status_t bhapi_snooze(b_bigtime_t microseconds)
 }
 
 
-_IMPEXP_BHAPI b_status_t bhapi_snooze_until(b_bigtime_t time, int timebase)
+IMPEXP_BHAPI b_status_t bhapi_snooze_until(b_bigtime_t time, int timebase)
 {
 	if(time < B_INT64_CONSTANT(0)) return B_ERROR;
 
@@ -973,7 +973,7 @@ static __bhapi_pid_impl__ __bhapi_team_id__;
 #endif // BHAPI_OS_LINUX
 
 
-_IMPEXP_BHAPI b_int64 bhapi_get_current_team_id(void)
+IMPEXP_BHAPI b_int64 bhapi_get_current_team_id(void)
 {
 #ifdef BHAPI_OS_LINUX
 	return __bhapi_team_id__.Team();

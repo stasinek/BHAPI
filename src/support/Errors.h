@@ -26,10 +26,9 @@
  * File: Errors.h
  *
  * --------------------------------------------------------------------------*/
-#ifndef __BHAPI_ERRORS_H__
-#define __BHAPI_ERRORS_H__
-
-#include "SupportDefs.h"
+#ifndef BHAPI_ERRORS__H
+#define BHAPI_ERRORS__H
+#include "./SupportDefs.h"
 
 /* Error baselines */
 #define B_GENERAL_ERROR_BASE	INT_MIN
@@ -101,5 +100,5 @@ enum {
     B_NAME_TOO_LONG,
 };
 
-#endif /* __BHAPI_ERRORS_H__ */
+#endif /* BHAPI_ERRORS__H */
 

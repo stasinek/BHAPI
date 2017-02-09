@@ -31,8 +31,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "./../kernel/Debug.h"
 #include "./../private/Token.h"
 #include "./../support/StreamIO.h"
+#include "./../support/StringMe.h"
 
 #include "Message.h"
 #include "Messenger.h"
@@ -344,7 +346,7 @@ BMessage::Unflatten(const char *buffer, size_t bufferSize)
 
 		// Object->data
 		void *data = NULL;
-		
+
 		if(bytes > 0)
 		{
 			if(!fixed_size)
@@ -365,7 +367,7 @@ BMessage::Unflatten(const char *buffer, size_t bufferSize)
 				if(bufferSize < bytes) {if(name) free(name); free(data); return false;}
 				memcpy(data, src, bytes);
 			}
-			
+
 			src += bytes; bufferSize -= bytes;
 		}
 
@@ -1075,14 +1077,14 @@ BMessage::AddMessenger(const char *name, const BMessenger &msgr)
 
 
 bool
-BMessage::FindData(const char *name, b_type_code type, const void **data, ssize_t *numBytes) const
+BMessage::FindData(const char *name, b_type_code type, const void **data, b_size_t *numBytes) const
 {
 	return FindData(name, type, 0, data, numBytes);
 }
 
 
 bool
-BMessage::FindData(const char *name, b_type_code type, b_int32 index, const void **data, ssize_t *numBytes) const
+BMessage::FindData(const char *name, b_type_code type, b_int32 index, const void **data, b_size_t *numBytes) const
 {
 	if(!name) return false;
 
@@ -1099,7 +1101,7 @@ BMessage::FindData(const char *name, b_type_code type, b_int32 index, const void
 	if(numBytes)
 	{
 		if(Object->fixed_size)
-			*numBytes = (ssize_t)Object->bytes;
+			*numBytes = (b_size_t)Object->bytes;
 		else
 			*numBytes = -1;
 	}
@@ -1109,7 +1111,7 @@ BMessage::FindData(const char *name, b_type_code type, b_int32 index, const void
 
 
 bool
-BMessage::FindData(b_int32 nameIndex, b_int32 typeIndex, b_int32 index, const void **data, ssize_t *numBytes) const
+BMessage::FindData(b_int32 nameIndex, b_int32 typeIndex, b_int32 index, const void **data, b_size_t *numBytes) const
 {
 	list_data *ldata = (list_data*)fObjectsList.ItemAt(nameIndex);
 	if(!ldata) return false;
@@ -1124,7 +1126,7 @@ BMessage::FindData(b_int32 nameIndex, b_int32 typeIndex, b_int32 index, const vo
 	if(numBytes)
 	{
 		if(Object->fixed_size)
-			*numBytes = (ssize_t)Object->bytes;
+			*numBytes = (b_size_t)Object->bytes;
 		else
 			*numBytes = -1;
 	}

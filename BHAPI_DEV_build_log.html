@@ -1,0 +1,165 @@
+<html>
+<head>
+<title>BHAPI build log</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body>
+<tt>
+Build started on: <u>08-02-2017 at 22:13.42</u><br />
+Build ended on: <u>08-02-2017 at 22:13.46</u><p />
+<b>-------------- Build: default in BHAPI (compiler: LLVM Clang Compiler)---------------</b><br />
+Compiling: bhapi.cpp<br />
+In file included from C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\bhapi.cpp:1:<br />
+In file included from ./bhapi.h:33:<br />
+In file included from ././src/Be.h:47:<br />
+In file included from ././src/SupportKit.h:34:<br />
+In file included from ././src/support/Archivable.h:34:<br />
+<font color="#ff0000">././src/./support/./../app/Message.h:228:45: error: use of undeclared identifier 'LLONG_MAX'</font><br />
+                  b_bigtime_t sendTimeout = B_INFINITE_TIMEOUT) const;<br />
+                                            ^<br />
+././src/./support/./../app/./../kernel/OS.h:41:33: note: expanded from macro 'B_INFINITE_TIMEOUT'<br />
+#define B_INFINITE_TIMEOUT                  B_MAXINT64<br />
+                                            ^<br />
+././src/./support/./../app/./../interface/./../support/SupportDefs.h:101:20: note: expanded from macro 'B_MAXINT64'<br />
+#define B_MAXINT64 LLONG_MAX<br />
+                   ^<br />
+In file included from C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\bhapi.cpp:1:<br />
+In file included from ./bhapi.h:33:<br />
+In file included from ././src/Be.h:47:<br />
+In file included from ././src/SupportKit.h:40:<br />
+<font color="#ff0000">././src/support/StringArray.h:89:5: error: unknown type name 'BList'</font><br />
+    BList list;<br />
+    ^<br />
+In file included from C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\bhapi.cpp:1:<br />
+In file included from ./bhapi.h:33:<br />
+In file included from ././src/Be.h:49:<br />
+In file included from ././src/StorageKit.h:38:<br />
+In file included from ././src/./storage/FilePanel.h:33:<br />
+In file included from ././src/./storage/./../interface/Window.h:35:<br />
+<font color="#ff0000">././src/./support/./../app/./../interface/./Region.h:97:2: error: unknown type name 'BList'</font><br />
+        BList fRects;<br />
+        ^<br />
+In file included from C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\bhapi.cpp:1:<br />
+In file included from ./bhapi.h:33:<br />
+In file included from ././src/Be.h:49:<br />
+In file included from ././src/StorageKit.h:38:<br />
+In file included from ././src/./storage/FilePanel.h:33:<br />
+In file included from ././src/./storage/./../interface/Window.h:36:<br />
+In file included from ././src/./support/./../app/./../interface/./../app/Looper.h:39:<br />
+<font color="#ff0000">././src/./support/./../app/./../app/Handler.h:91:36: error: unknown type name 'BList'</font><br />
+        virtual bool            SetFilterList(const BList *filterList);<br />
+                                                    ^<br />
+<font color="#ff0000">././src/./support/./../app/./../app/Handler.h:92:11: error: unknown type name 'BList'</font><br />
+    const BList        *FilterList() const;<br />
+          ^<br />
+<font color="#ff0000">././src/./support/./../app/./../app/Handler.h:109:2: error: unknown type name 'BList'</font><br />
+        BList *fFilters;<br />
+        ^<br />
+In file included from C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\bhapi.cpp:1:<br />
+In file included from ./bhapi.h:33:<br />
+In file included from ././src/Be.h:49:<br />
+In file included from ././src/StorageKit.h:38:<br />
+In file included from ././src/./storage/FilePanel.h:33:<br />
+In file included from ././src/./storage/./../interface/Window.h:36:<br />
+In file included from ././src/./support/./../app/./../interface/./../app/Looper.h:40:<br />
+<font color="#ff0000">././src/./support/./../app/./../app/MessageQueue.h:65:2: error: unknown type name 'BList'</font><br />
+        BList fMessagesList;<br />
+        ^<br />
+In file included from C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\bhapi.cpp:1:<br />
+In file included from ./bhapi.h:33:<br />
+In file included from ././src/Be.h:49:<br />
+In file included from ././src/StorageKit.h:38:<br />
+In file included from ././src/./storage/FilePanel.h:33:<br />
+In file included from ././src/./storage/./../interface/Window.h:36:<br />
+<font color="#ff0000">././src/./support/./../app/./../interface/./../app/Looper.h:105:41: error: unknown type name 'BList'</font><br />
+        virtual bool    SetCommonFilterList(const BList *filterList);<br />
+                                                  ^<br />
+<font color="#ff0000">././src/./support/./../app/./../interface/./../app/Looper.h:106:8: error: unknown type name 'BList'</font><br />
+        const BList     *CommonFilterList() const;<br />
+              ^<br />
+<font color="#ff0000">././src/./support/./../app/./../interface/./../app/Looper.h:140:2: error: unknown type name 'BList'</font><br />
+        BList fClients;<br />
+        ^<br />
+<font color="#ff0000">././src/./support/./../app/./../interface/./../app/Looper.h:160:9: error: unknown type name 'BList'</font><br />
+        static BList sLooperList;<br />
+               ^<br />
+<font color="#ff0000">././src/./support/./../app/./../interface/./../app/Looper.h:171:2: error: unknown type name 'BList'</font><br />
+        BList fCommonFilters;<br />
+        ^<br />
+<font color="#ff0000">././src/./support/./../app/./../interface/./../app/Looper.h:129:52: error: use of undeclared identifier 'LLONG_MAX'</font><br />
+        BMessage        *NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT);<br />
+                                                                 ^<br />
+././src/./kernel/OS.h:41:33: note: expanded from macro 'B_INFINITE_TIMEOUT'<br />
+#define B_INFINITE_TIMEOUT                  B_MAXINT64<br />
+                                            ^<br />
+././src/./storage/./../support/SupportDefs.h:101:20: note: expanded from macro 'B_MAXINT64'<br />
+#define B_MAXINT64 LLONG_MAX<br />
+                   ^<br />
+In file included from C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\bhapi.cpp:1:<br />
+In file included from ./bhapi.h:33:<br />
+In file included from ././src/Be.h:49:<br />
+In file included from ././src/StorageKit.h:38:<br />
+In file included from ././src/./storage/FilePanel.h:33:<br />
+In file included from ././src/./storage/./../interface/Window.h:37:<br />
+In file included from ././src/./support/./../app/./../interface/./../app/MessageRunner.h:34:<br />
+<font color="#ff0000">././src/./support/./../app/./../app/Messenger.h:56:31: error: use of undeclared identifier 'LLONG_MAX'</font><br />
+                                    b_bigtime_t timeout = B_INFINITE_TIMEOUT) const;<br />
+                                                          ^<br />
+././src/./kernel/OS.h:41:33: note: expanded from macro 'B_INFINITE_TIMEOUT'<br />
+#define B_INFINITE_TIMEOUT                  B_MAXINT64<br />
+                                            ^<br />
+././src/./storage/./../support/SupportDefs.h:101:20: note: expanded from macro 'B_MAXINT64'<br />
+#define B_MAXINT64 LLONG_MAX<br />
+                   ^<br />
+In file included from C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\bhapi.cpp:1:<br />
+In file included from ./bhapi.h:33:<br />
+In file included from ././src/Be.h:49:<br />
+In file included from ././src/StorageKit.h:38:<br />
+In file included from ././src/./storage/FilePanel.h:33:<br />
+In file included from ././src/./storage/./../interface/Window.h:37:<br />
+In file included from ././src/./support/./../app/./../interface/./../app/MessageRunner.h:34:<br />
+<font color="#ff0000">././src/./support/./../app/./../app/Messenger.h:58:35: error: use of undeclared identifier 'LLONG_MAX'</font><br />
+                                    b_bigtime_t sendTimeout = B_INFINITE_TIMEOUT,<br />
+                                                              ^<br />
+././src/./kernel/OS.h:41:33: note: expanded from macro 'B_INFINITE_TIMEOUT'<br />
+#define B_INFINITE_TIMEOUT                  B_MAXINT64<br />
+                                            ^<br />
+././src/./storage/./../support/SupportDefs.h:101:20: note: expanded from macro 'B_MAXINT64'<br />
+#define B_MAXINT64 LLONG_MAX<br />
+                   ^<br />
+In file included from C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\bhapi.cpp:1:<br />
+In file included from ./bhapi.h:33:<br />
+In file included from ././src/Be.h:49:<br />
+In file included from ././src/StorageKit.h:38:<br />
+In file included from ././src/./storage/FilePanel.h:33:<br />
+In file included from ././src/./storage/./../interface/Window.h:37:<br />
+In file included from ././src/./support/./../app/./../interface/./../app/MessageRunner.h:34:<br />
+<font color="#ff0000">././src/./support/./../app/./../app/Messenger.h:59:36: error: use of undeclared identifier 'LLONG_MAX'</font><br />
+                                    b_bigtime_t replyTimeout = B_INFINITE_TIMEOUT) const;<br />
+                                                               ^<br />
+././src/./kernel/OS.h:41:33: note: expanded from macro 'B_INFINITE_TIMEOUT'<br />
+#define B_INFINITE_TIMEOUT                  B_MAXINT64<br />
+                                            ^<br />
+././src/./storage/./../support/SupportDefs.h:101:20: note: expanded from macro 'B_MAXINT64'<br />
+#define B_MAXINT64 LLONG_MAX<br />
+                   ^<br />
+In file included from C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\bhapi.cpp:1:<br />
+In file included from ./bhapi.h:33:<br />
+In file included from ././src/Be.h:49:<br />
+In file included from ././src/StorageKit.h:38:<br />
+In file included from ././src/./storage/FilePanel.h:33:<br />
+<font color="#ff0000">././src/./storage/./../interface/Window.h:230:2: error: unknown type name 'BList'</font><br />
+        BList fMouseInterestedViews;<br />
+        ^<br />
+<font color="#ff0000">././src/./storage/./../interface/Window.h:231:2: error: unknown type name 'BList'</font><br />
+        BList fKeyboardInterestedViews;<br />
+        ^<br />
+<font color="#ff0000">././src/./storage/./../interface/Window.h:232:2: error: unknown type name 'BList'</font><br />
+        BList fMouseInsideViews;<br />
+        ^<br />
+<font color="#ff0000">fatal error: too many errors emitted, stopping now [-ferror-limit=]</font><br />
+20 errors generated.<br />
+<font color="#a00000">Process terminated with status 1 (0 minute(s), 3 second(s))</font><br />
+<font color="#a00000">1 error(s), 0 warning(s) (0 minute(s), 3 second(s))</font><br />
+</tt>
+</body>
+</html>

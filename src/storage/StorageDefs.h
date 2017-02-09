@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_STORAGE_DEFS_H__
-#define __BHAPI_STORAGE_DEFS_H__
+#ifndef BHAPI_STORAGE_DEFS__H
+#define BHAPI_STORAGE_DEFS__H
 
 #include "./../support/SupportDefs.h"
 
@@ -68,5 +68,5 @@ enum {
     B_ANY_NODE		=	0xff,
 };
 
-#endif /* __BHAPI_STORAGE_DEFS_H__ */
+#endif /* BHAPI_STORAGE_DEFS__H */
 

@@ -28,14 +28,13 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_CURSOR_H__
-#define __BHAPI_CURSOR_H__
-
+#ifndef BHAPI_CURSOR__H
+#define BHAPI_CURSOR__H
+#include "./../support/SupportDefs.h"
 #include "./../support/Archivable.h"
-
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BCursor : public BArchivable {
+class IMPEXP_BHAPI BCursor : public BArchivable {
 public:
     BCursor(const void *cursorData);
     BCursor(const BCursor &cursor);
@@ -76,13 +75,13 @@ inline b_uint8 BCursor::SpotY() const
 }
 
 
-extern _IMPEXP_BHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT;
-extern _IMPEXP_BHAPI const BCursor *B_CURSOR_HAND;
-extern _IMPEXP_BHAPI const BCursor *B_CURSOR_HAND_MOVE;
-extern _IMPEXP_BHAPI const BCursor *B_CURSOR_I_BEAM;
+extern IMPEXP_BHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT;
+extern IMPEXP_BHAPI const BCursor *B_CURSOR_HAND;
+extern IMPEXP_BHAPI const BCursor *B_CURSOR_HAND_MOVE;
+extern IMPEXP_BHAPI const BCursor *B_CURSOR_I_BEAM;
 
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_CURSOR_H__ */
+#endif /* BHAPI_CURSOR__H */
 

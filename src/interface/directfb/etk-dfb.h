@@ -27,8 +27,8 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_DIRECTFB_H__
-#define __BHAPI_DIRECTFB_H__
+#ifndef BHAPI_DIRECTFB__H
+#define BHAPI_DIRECTFB__H
 
 #ifdef LINUX
 #ifdef DIRECTFB
@@ -47,7 +47,7 @@
 
 #include "./../../add-ons/graphics/GraphicsEngine.h"
 #include "./../../support/Locker.h"
-#include "./../../support/List.h"
+#include "./../../support/BList.h"
 #include "./../../interface/Window.h"
 #include "./../../app/MessageFilter.h"
 
@@ -339,5 +339,5 @@ extern b_status_t bhapi_dfb_fill_round_rect(IDirectFBSurface *dfbSurface, BGraph
 #endif /* DIRECTFB */
 #endif /* LINUX */
 
-#endif /* __BHAPI_DIRECTFB_H__ */
+#endif /* BHAPI_DIRECTFB__H */
 

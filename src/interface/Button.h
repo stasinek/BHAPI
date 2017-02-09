@@ -28,15 +28,15 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_BUTTON_H__
-#define __BHAPI_BUTTON_H__
+#ifndef BHAPI_BUTTON__H
+#define BHAPI_BUTTON__H
 
 #include "./../app/MessageRunner.h"
 #include "./../interface/Control.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BButton : public BControl {
+class IMPEXP_BHAPI BButton : public BControl {
 public:
     BButton(BRect frame,
 		const char *name,
@@ -74,5 +74,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_BUTTON_H__ */
+#endif /* BHAPI_BUTTON__H */
 

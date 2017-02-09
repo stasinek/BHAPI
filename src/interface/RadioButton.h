@@ -28,14 +28,14 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_RADIO_BUTTON_H__
-#define __BHAPI_RADIO_BUTTON_H__
+#ifndef BHAPI_RADIO_BUTTON__H
+#define BHAPI_RADIO_BUTTON__H
 
 #include "./../interface/Control.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BRadioButton : public BControl {
+class IMPEXP_BHAPI BRadioButton : public BControl {
 public:
     BRadioButton(BRect frame,
 		     const char *name,
@@ -59,5 +59,5 @@ public:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_RADIO_BUTTON_H__ */
+#endif /* BHAPI_RADIO_BUTTON__H */
 

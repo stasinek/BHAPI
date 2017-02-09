@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_BEOS_GRAPHICS_H__
-#define __BHAPI_BEOS_GRAPHICS_H__
+#ifndef BHAPI_BEOS_GRAPHICS__H
+#define BHAPI_BEOS_GRAPHICS__H
 
 #ifdef BEOS
 
@@ -262,5 +262,5 @@ enum {
 #endif /* __cplusplus */
 #endif /* BEOS */
 
-#endif // __BHAPI_BEOS_GRAPHICS_H__
+#endif // BHAPI_BEOS_GRAPHICS__H
 

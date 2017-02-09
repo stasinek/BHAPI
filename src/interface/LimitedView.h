@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_LIMITED_VIEW_H__
-#define __BHAPI_LIMITED_VIEW_H__
+#ifndef BHAPI_LIMITED_VIEW__H
+#define BHAPI_LIMITED_VIEW__H
 
-#endif /* __BHAPI_LIMITED_VIEW_H__ */
+#endif /* BHAPI_LIMITED_VIEW__H */
 

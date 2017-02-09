@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_SIMPLE_WM_H__
-#define __BHAPI_SIMPLE_WM_H__
+#ifndef BHAPI_SIMPLE_WM__H
+#define BHAPI_SIMPLE_WM__H
 
 #include "./../../render/Render.h"
 
@@ -42,5 +42,5 @@ public:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_SIMPLE_WM_H__ */
+#endif /* BHAPI_SIMPLE_WM__H */
 

@@ -33,7 +33,7 @@
 extern b_theme_engine bhapi_default_theme_engine;
 
 
-_IMPEXP_BHAPI b_theme_engine* bhapi_get_current_theme_engine(void)
+IMPEXP_BHAPI b_theme_engine* bhapi_get_current_theme_engine(void)
 {
 	return &bhapi_default_theme_engine;
 }

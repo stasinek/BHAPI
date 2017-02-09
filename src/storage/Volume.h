@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_VOLUME_H__
-#define __BHAPI_VOLUME_H__
+#ifndef BHAPI_VOLUME__H
+#define BHAPI_VOLUME__H
 
 #include "./StorageDefs.h"
 #include "./Directory.h"
@@ -36,7 +36,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BVolume {
+class IMPEXP_BHAPI BVolume {
 public:
     BVolume();
     BVolume(b_dev_t dev);
@@ -66,5 +66,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_VOLUME_H__ */
+#endif /* BHAPI_VOLUME__H */
 

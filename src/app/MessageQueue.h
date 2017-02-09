@@ -28,14 +28,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_MESSAGE_QUEUE_H__
-#define __BHAPI_MESSAGE_QUEUE_H__
-
-#include "./../app/Message.h"
+#ifndef BHAPI_MESSAGE_QUEUE__H
+#define BHAPI_MESSAGE_QUEUE__H
+#include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BMessageQueue {
+#include "./../support/BList.h"
+class BMessage;
+class IMPEXP_BHAPI BMessageQueue {
 public:
 	BMessageQueue();
 	virtual ~BMessageQueue();
@@ -68,5 +69,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_MESSAGE_QUEUE_H__ */
+#endif /* BHAPI_MESSAGE_QUEUE__H */
 

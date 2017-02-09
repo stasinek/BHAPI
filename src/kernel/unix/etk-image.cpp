@@ -39,7 +39,7 @@
 #include "./../storage/Path.h"
 
 
-_IMPEXP_BHAPI void*
+IMPEXP_BHAPI void*
 bhapi_load_addon(const char* path)
 {
 	BPath aPath(path, NULL, true);
@@ -48,7 +48,7 @@ bhapi_load_addon(const char* path)
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_unload_addon(void *data)
 {
 	if(data == NULL) return B_ERROR;
@@ -57,7 +57,7 @@ bhapi_unload_addon(void *data)
 }
 
 
-_IMPEXP_BHAPI b_status_t
+IMPEXP_BHAPI b_status_t
 bhapi_get_image_symbol(void *data, const char *name, void **ptr)
 {
 	if(data == NULL || name == NULL || *name == 0 || ptr == NULL) return B_BAD_VALUE;

@@ -281,7 +281,7 @@ BFile::IsWritable() const
 }
 
 
-ssize_t
+b_size_t
 BFile::Read(void *buffer, size_t size)
 {
 	if(!IsReadable() || buffer == NULL) return -1;
@@ -290,24 +290,24 @@ BFile::Read(void *buffer, size_t size)
 #else
 	DWORD nRead = (DWORD)size;
 	if(ReadFile((HANDLE)fFD, buffer, nRead, &nRead, NULL) == 0) return -1;
-	return((ssize_t)nRead);
+	return((b_size_t)nRead);
 #endif
 }
 
 
-ssize_t
+b_size_t
 BFile::ReadAt(b_int64 pos, void *buffer, size_t size)
 {
 	if(!IsReadable() || buffer == NULL) return -1;
 	b_int64 savePosition = Position();
 	if(Seek(pos, B_SEEK_SET) < B_INT64_CONSTANT(0)) return -1;
-	ssize_t retVal = Read(buffer, size);
+	b_size_t retVal = Read(buffer, size);
 	Seek(savePosition, B_SEEK_SET);
 	return retVal;
 }
 
 
-ssize_t
+b_size_t
 BFile::Write(const void *buffer, size_t size)
 {
 	if(!IsWritable() || buffer == NULL) return -1;
@@ -316,18 +316,18 @@ BFile::Write(const void *buffer, size_t size)
 #else
 	DWORD nWrote = (DWORD)size;
 	if(WriteFile((HANDLE)fFD, buffer, nWrote, &nWrote, NULL) == 0) return -1;
-	return((ssize_t)nWrote);
+	return((b_size_t)nWrote);
 #endif
 }
 
 
-ssize_t
+b_size_t
 BFile::WriteAt(b_int64 pos, const void *buffer, size_t size)
 {
 	if(!IsWritable() || buffer == NULL) return -1;
 	b_int64 savePosition = Position();
 	if(Seek(pos, B_SEEK_SET) < B_INT64_CONSTANT(0)) return -1;
-	ssize_t retVal = Write(buffer, size);
+	b_size_t retVal = Write(buffer, size);
 	Seek(savePosition, B_SEEK_SET);
 	return retVal;
 }

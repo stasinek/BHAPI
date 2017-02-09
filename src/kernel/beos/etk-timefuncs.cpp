@@ -32,20 +32,20 @@
 #include "./../kernel/Kernel.h"
 
 // return the number of microseconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-_IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
+IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
 {
 	return (b_bigtime_t)real_time_clock_usecs();
 }
 
 
 // return the number of seconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-_IMPEXP_BHAPI b_uint32 bhapi_real_time_clock(void)
+IMPEXP_BHAPI b_uint32 bhapi_real_time_clock(void)
 {
 	return (b_uint32)real_time_clock();
 }
 
 
-_IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
+IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
 {
 	system_info sysInfo;
 	get_system_info(&sysInfo);
@@ -53,7 +53,7 @@ _IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
 }
 
 
-_IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void)
+IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void)
 {
 	return (b_bigtime_t)system_time();
 }

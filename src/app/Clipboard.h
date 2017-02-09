@@ -29,15 +29,15 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_CLIPBOARD_H__
-#define __BHAPI_CLIPBOARD_H__
-
+#ifndef BHAPI_CLIPBOARD__H
+#define BHAPI_CLIPBOARD__H
+#include "./../support/SupportDefs.h"
 #include "./../app/Messenger.h"
 #include "./../support/Locker.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _IMPEXP_BHAPI BClipboard {
+class IMPEXP_BHAPI BClipboard {
 public:
 	BClipboard(const char *name);
 	virtual ~BClipboard();
@@ -68,5 +68,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_CLIPBOARD_H__ */
+#endif /* BHAPI_CLIPBOARD__H */
 

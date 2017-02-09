@@ -28,11 +28,11 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef __BHAPI_LIST_ITEM_H__
-#define __BHAPI_LIST_ITEM_H__
+#ifndef BHAPI_LIST_ITEM__H
+#define BHAPI_LIST_ITEM__H
 
 #include "./../support/Archivable.h"
-#include "./../support/List.h"
+#include "./../support/BList.h"
 #include "./../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
@@ -40,7 +40,7 @@
 class BListView;
 class BOutlineListView;
 
-class _IMPEXP_BHAPI BListItem : public BArchivable {
+class IMPEXP_BHAPI BListItem : public BArchivable {
 public:
 	BListItem(b_uint32 outlineLevel = 0, bool expanded = true, b_uint32 flags = 0);
 	virtual ~BListItem();
@@ -106,7 +106,7 @@ private:
 };
 
 
-class _IMPEXP_BHAPI StringItem : public BListItem {
+class IMPEXP_BHAPI StringItem : public BListItem {
 public:
 	StringItem(const char *text, b_uint32 outlineLevel = 0, bool expanded = true);
 	virtual ~StringItem();
@@ -124,5 +124,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* __BHAPI_LIST_ITEM_H__ */
+#endif /* BHAPI_LIST_ITEM__H */
 
