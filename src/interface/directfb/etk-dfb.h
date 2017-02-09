@@ -47,7 +47,7 @@
 
 #include "./../../add-ons/graphics/GraphicsEngine.h"
 #include "./../../support/Locker.h"
-#include "./../../support/BList.h"
+#include "./../../support/List.h"
 #include "./../../interface/Window.h"
 #include "./../../app/MessageFilter.h"
 

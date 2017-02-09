@@ -27,6 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "Entry.h"
+#include "Directory.h"
+
+#include "./../support/StringMe.h"
+#include "./../support/Errors.h"
+#include "./../kernel/Debug.h"
+
 #ifndef _WIN32
 #define __USE_LARGEFILE64
 #define __USE_FILE_OFFSET64
@@ -38,12 +45,6 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-
-#include "./../support/SupportDefs.h"
-#include "./../support/StringMe.h"
-
-#include "Entry.h"
-#include "Directory.h"
 
 // implement in "Path.cpp"
 extern b_status_t bhapi_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);

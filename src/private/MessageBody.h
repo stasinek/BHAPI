@@ -30,7 +30,7 @@
 #ifndef BHAPI_PRIVATE_MESSAGE_BODY__H
 #define BHAPI_PRIVATE_MESSAGE_BODY__H
 #include "./../support/SupportDefs.h"
-#include "./../support/BList.h"
+#include "./../support/List.h"
 #include "./../support/StreamIO.h"
 
 #ifdef __cplusplus /* Just for C++ */

@@ -30,11 +30,7 @@
 #ifndef BHAPI_WINDOW__H
 #define BHAPI_WINDOW__H
 
-#include "./../support/BList.h"
 #include "./GraphicsDefs.h"
-#include "./Region.h"
-#include "./../app/Looper.h"
-#include "./../app/MessageRunner.h"
 
 typedef enum b_window_type {
     B_UNTYPED_WINDOW = 0,
@@ -95,7 +91,13 @@ class BGraphicsContext;
 class BGraphicsDrawable;
 class BGraphicsWindow;
 class BLayoutContainer;
-
+class BMessage;
+class BMessageRunner;
+class BRegion;
+class BPoint;
+#include "./../interface/Rect.h"
+#include "./../support/List.h"
+#include "./../app/Looper.h"
 class IMPEXP_BHAPI BWindow : public BLooper {
 public:
     BWindow(BRect frame,

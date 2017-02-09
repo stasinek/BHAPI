@@ -27,19 +27,21 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "Render.h"
+#include "LineGenerator.h"
+#include "ArcGenerator.h"
+
+#include "./../support/List.h"
+#include "./../support/Errors.h"
+#include "./../kernel/Debug.h"
+
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
 
 #ifndef M_PI
-	#define M_PI	3.14159265358979323846
+    #define M_PI	3.14159265358979323846
 #endif // M_PI
-
-#include "./../support/BList.h"
-
-#include "LineGenerator.h"
-#include "ArcGenerator.h"
-#include "Render.h"
 
 #ifdef _MSC_VER
 	#define isnan(a)	_isnan(a)

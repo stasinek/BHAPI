@@ -53,12 +53,21 @@ public:
 	bool		LockTarget() const;
     b_status_t	LockTargetWithTimeout(b_bigtime_t timeout) const;
 
-    b_status_t	SendMessage(b_uint32 command, BHandler *reply_to = NULL) const;
-	b_status_t	SendMessage(const BMessage *a_message, BHandler *reply_to = NULL,
-				    b_bigtime_t timeout = B_INFINITE_TIMEOUT) const;
-	b_status_t	SendMessage(const BMessage *a_message, BMessage *reply_message,
-				    b_bigtime_t sendTimeout = B_INFINITE_TIMEOUT,
-				    b_bigtime_t replyTimeout = B_INFINITE_TIMEOUT) const;
+//    b_status_t	SendMessage(b_uint32 command, BHandler *reply_to = NULL) const;
+    b_status_t	SendMessage(b_uint32 command) const;
+    b_status_t	SendMessage(b_uint32 command, BHandler *reply_to) const;
+//	b_status_t	SendMessage(const BMessage *a_message, BHandler *reply_to = NULL,
+//				    b_bigtime_t timeout = B_INFINITE_TIMEOUT) const;
+    b_status_t	SendMessage(const BMessage *a_message) const;
+    b_status_t	SendMessage(const BMessage *a_message, BHandler *reply_to,
+                    b_bigtime_t timeout) const;
+//	b_status_t	SendMessage(const BMessage *a_message, BMessage *reply_message,
+//				    b_bigtime_t sendTimeout = B_INFINITE_TIMEOUT,
+//				    b_bigtime_t replyTimeout = B_INFINITE_TIMEOUT) const;
+    b_status_t	SendMessage(const BMessage *a_message, BMessage *reply_message) const;
+    b_status_t	SendMessage(const BMessage *a_message, BMessage *reply_message,
+                    b_bigtime_t sendTimeout,
+                    b_bigtime_t replyTimeout) const;
 
 	bool		IsValid() const;
 

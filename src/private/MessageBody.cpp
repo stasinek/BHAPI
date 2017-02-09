@@ -27,11 +27,11 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/StringMe.h"
-
-#include "Memory.h"
 #include "MessageBody.h"
+#include "Memory.h"
 
+#include "./../support/StringMe.h"
+#include "./../kernel/Debug.h"
 
 class _LOCAL BMessageNode
 {

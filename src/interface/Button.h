@@ -31,11 +31,12 @@
 #ifndef BHAPI_BUTTON__H
 #define BHAPI_BUTTON__H
 
-#include "./../app/MessageRunner.h"
-#include "./../interface/Control.h"
-
 #ifdef __cplusplus /* Just for C++ */
 
+class BRect;
+class BMessage;
+class BMessageRunner;
+#include "./../interface/Control.h"
 class IMPEXP_BHAPI BButton : public BControl {
 public:
     BButton(BRect frame,

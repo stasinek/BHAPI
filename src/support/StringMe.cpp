@@ -29,6 +29,9 @@
  * --------------------------------------------------------------------------*/
 
 #include "StringMe.h"
+#include "StringArray.h"
+
+#include "./../kernel/Debug.h"
 
 #ifndef HAVE_VA_COPY
 	#ifdef HAVE___VA_COPY

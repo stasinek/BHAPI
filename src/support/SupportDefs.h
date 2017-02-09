@@ -50,6 +50,8 @@
 #include <stdlib.h>
 #include <string.h> /* for bzero */
 
+#include <math.h>
+
 /* The size of a `float', as computed by sizeof. */
 #define SIZEOF_FLOAT 4
 

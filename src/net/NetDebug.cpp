@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <stdarg.h>
-#include <stdio.h>
+#include "NetDebug.h"
 
 #include "./../support/Autolock.h"
 #include "./../support/SimpleLocker.h"
 #include "./../support/StringMe.h"
 
-#include "NetDebug.h"
+#include <stdarg.h>
+#include <stdio.h>
 
 static BSimpleLocker _e_net_locker(true);
 static bool _e_net_enabled = false;

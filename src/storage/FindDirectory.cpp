@@ -27,7 +27,16 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <stdlib.h>
+#include "FindDirectory.h"
+
+#include "./../support/StringMe.h"
+#include "./../support/Errors.h"
+
+#ifdef __BEOS__
+#include <be/storage/FindDirectory.h>
+#include <be/storage/Volume.h>
+#include <be/storage/Path.h>
+#endif // __BEOS__
 
 #ifdef _WIN32
 #include <windows.h>
@@ -37,16 +46,7 @@
 extern HINSTANCE bhapi_dll_hinstance;
 #endif
 
-#ifdef __BEOS__
-#include <be/storage/FindDirectory.h>
-#include <be/storage/Volume.h>
-#include <be/storage/Path.h>
-#endif // __BEOS__
-
-
-#include "./../support/SupportDefs.h"
-#include "./../support/StringMe.h"
-#include "FindDirectory.h"
+#include <stdlib.h>
 
 b_status_t b_find_directory(b_directory_which which, BPath *path)
 {

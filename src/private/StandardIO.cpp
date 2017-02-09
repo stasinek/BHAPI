@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/SupportDefs.h"
+#include "StandardIO.h"
 
 #ifndef _WIN32
     #include <unistd.h>
@@ -36,9 +36,6 @@
 	#define read(fd, buf, count)	((b_size_t)_read(fd, buf, count))
 	#define write(fd, buf, count)	((b_size_t)_write(fd, buf, count))
 #endif // !_WIN32
-
-#include "StandardIO.h"
-
 
 BStandardIO::BStandardIO(int fd)
 	: BStreamIO(), fFD(fd)

@@ -28,12 +28,11 @@
  * 
  * --------------------------------------------------------------------------*/
 
+#include "ColorControl.h"
+#include "Bitmap.h"
+
 #include "./../support/StringMe.h"
 #include "./../render/Pixmap.h"
-
-#include "Bitmap.h"
-#include "ColorControl.h"
-
 
 BColorControl::BColorControl(BPoint leftTop, const char *name, BMessage *message, bool bufferedDrawing)
 	: BControl(BRect(leftTop, leftTop), name, NULL, message, B_FOLLOW_NONE, B_WILL_DRAW | B_UPDATE_WITH_REGION), fBitmap(NULL)

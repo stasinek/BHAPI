@@ -30,6 +30,12 @@
 #ifndef BHAPI_WIN32GDI__H
 #define BHAPI_WIN32GDI__H
 
+#include "./../../support/SupportDefs.h"
+
+#include "./../../add-ons/graphics/GraphicsEngine.h"
+#include "./../../app/MessageFilter.h"
+#include "./../../support/Locker.h"
+
 #ifdef WIN32
 
 #ifndef _WIN32_WINNT
@@ -39,12 +45,6 @@
 #ifndef WINVER
 #define WINVER 0x0500
 #endif
-
-
-#include "./../../support/SupportDefs.h"
-#include "./../../support/Locker.h"
-#include "./../../add-ons/graphics/GraphicsEngine.h"
-#include "./../../app/MessageFilter.h"
 
 #define WM_BHAPI_MESSAGE_APP			0xa0
 #define WM_BHAPI_MESSAGE_WINDOW			0xa1

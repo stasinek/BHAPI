@@ -31,9 +31,13 @@
 #ifndef BHAPI_THEME_ENGINE__H
 #define BHAPI_THEME_ENGINE__H
 #include "./../../support/SupportDefs.h"
-#include "./../../interface/View.h"
+#include "./../../interface/InterfaceDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
+class BView;
+class BRect;
+class BRegion;
+class BPoint;
 
 enum {
     B_THEME_FOCUS_FLASH_BORDER = 1,

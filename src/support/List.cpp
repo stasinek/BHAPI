@@ -28,7 +28,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "BList.h"
+#include "List.h"
 #define MAX_LIST_COUNT	(B_MAXINT32 - 1)
 
 bool

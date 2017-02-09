@@ -31,15 +31,16 @@
 #ifndef BHAPI_LIST_ITEM__H
 #define BHAPI_LIST_ITEM__H
 
-#include "./../support/Archivable.h"
-#include "./../support/BList.h"
-#include "./../interface/View.h"
-
 #ifdef __cplusplus /* Just for C++ */
-
+class BList;
 class BListView;
 class BOutlineListView;
+class BView;
+class BRect;
+class BFont;
+class BPoint;
 
+#include "./../support/Archivable.h"
 class IMPEXP_BHAPI BListItem : public BArchivable {
 public:
 	BListItem(b_uint32 outlineLevel = 0, bool expanded = true, b_uint32 flags = 0);

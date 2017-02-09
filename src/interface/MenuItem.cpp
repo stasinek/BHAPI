@@ -27,16 +27,20 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <ctype.h>
-#include <string.h>
+#include "MenuItem.h"
+#include "Menu.h"
+#include "Rect.h"
+#include "Window.h"
 
 #include "./../support/StringMe.h"
 #include "./../support/ClassInfo.h"
+#include "./../support/Errors.h"
+#include "./../kernel/Debug.h"
+#include "./../app/Message.h"
+#include "./../app/AppDefs.h"
 
-#include "Window.h"
-#include "Menu.h"
-#include "MenuItem.h"
-
+#include <ctype.h>
+#include <string.h>
 
 BMenuItem::BMenuItem(const char *label, BMessage *message, char shortcut, b_uint32 modifiers)
 	: BArchivable(), BInvoker(message, NULL, NULL),

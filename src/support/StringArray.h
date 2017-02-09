@@ -30,7 +30,7 @@
 #ifndef BHAPI_STRING_ARRAY__H
 #define BHAPI_STRING_ARRAY__H
 #include "./SupportDefs.h"
-#include "./BList.h"
+#include "./List.h"
 #ifdef __cplusplus /* Just for C++ */
 class BString;
 class IMPEXP_BHAPI BStringArray {

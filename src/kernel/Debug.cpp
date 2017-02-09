@@ -27,6 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
+#define BHAPI_DEBUG
+#define BHAPI_WARNING
+#include "Debug.h"
+#undef BHAPI_DEBUG
+#undef BHAPI_WARNING
+#include "Kernel.h"
+#include "./../support/StringMe.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <new>
@@ -34,18 +42,6 @@
 #ifdef _WIN32
 #include <windows.h>
 #endif // _WIN32
-
-#include "./../support/SupportDefs.h"
-
-#define BHAPI_DEBUG
-#define BHAPI_WARNING
-#include "Debug.h"
-#undef BHAPI_DEBUG
-#undef BHAPI_WARNING
-
-#include "Kernel.h"
-
-#include "./../support/StringMe.h"
 
 #ifndef HAVE_VA_COPY
 	#ifdef HAVE___VA_COPY

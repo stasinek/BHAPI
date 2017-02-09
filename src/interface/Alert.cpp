@@ -28,17 +28,21 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../support/ClassInfo.h"
-#include "./../kernel/Kernel.h"
-#include "./../app/Invoker.h"
-#include "./../app/Application.h"
-#include "./../add-ons/graphics/GraphicsEngine.h"
-#include "./../render/Pixmap.h"
-
+#include "Alert.h"
 #include "Button.h"
 #include "TextView.h"
-#include "Alert.h"
 #include "Bitmap.h"
+
+#include "./../support/ClassInfo.h"
+#include "./../kernel/Kernel.h"
+#include "./../kernel/Debug.h"
+#include "./../app/Invoker.h"
+#include "./../app/Application.h"
+#include "./../app/Message.h"
+#include "./../app/AppDefs.h"
+#include "./../add-ons/graphics/GraphicsEngine.h"
+#include "./../render/Pixmap.h"
+#include "./../support/Errors.h"
 
 #define ICON_WIDTH	36
 #define ICON_HEIGHT	36

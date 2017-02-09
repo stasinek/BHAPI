@@ -27,7 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/SupportDefs.h"
+#include "Directory.h"
+#include "Path.h"
+
+#include "./../support/StringMe.h"
+#include "./../support/Errors.h"
+#include "./../kernel/Debug.h"
 
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
@@ -59,12 +64,6 @@ typedef struct bhapi_win32_dir_t {
 #ifdef HAVE_DIRENT_H
 #include <dirent.h>
 #endif // HAVE_DIRENT_H
-
-#include "./../support/StringMe.h"
-
-#include "Directory.h"
-#include "Path.h"
-
 
 BDirectory::BDirectory()
 	: fDir(NULL), fName(NULL)

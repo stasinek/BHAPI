@@ -27,11 +27,16 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "Invoker.h"
 #include "./../private/PrivateHandler.h"
 #include "./../app/Messenger.h"
+#include "./../app/Message.h"
 
+#include "./../kernel/OS.h"
+#include "./../kernel/Debug.h"
+#include "./../support/Errors.h"
 #include "Application.h"
-#include "Invoker.h"
+#include "AppDefs.h"
 
 
 typedef struct bhapi_invoker_notify_state {
@@ -178,7 +183,13 @@ BInvoker::Invoke(const BMessage *msg)
 
 
 b_status_t
-BInvoker::InvokeNotify(const BMessage *msg, b_uint32 kind)
+BInvoker::InvokeNotify(const BMessage *msg)
+{
+return BInvoker::InvokeNotify(msg,B_CONTROL_INVOKED);
+}
+
+b_status_t
+BInvoker::InvokeNotify(const BMessage *msg, b_uint32 kind = B_CONTROL_INVOKED)
 {
 	b_status_t status = B_BAD_VALUE;
 
@@ -201,6 +212,11 @@ BInvoker::InvokeKind(bool* notify)
 }
 
 
+void
+BInvoker::BeginInvokeNotify(void)
+{
+BInvoker::BeginInvokeNotify(B_CONTROL_INVOKED);
+}
 void
 BInvoker::BeginInvokeNotify(b_uint32 kind)
 {

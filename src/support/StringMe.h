@@ -34,7 +34,6 @@
 #ifdef __cplusplus /* Just for C++ */
 extern "C" {
 #endif /* __cplusplus */
-
 #define b_strncasecmp(a,b,c) strncasecmp(a,b,c)
 /* the result must be free by "free" */
 IMPEXP_BHAPI char*		b_strdup(const char *src);
@@ -66,17 +65,12 @@ IMPEXP_BHAPI b_int32		b_utf32_strlen_etc(const b_unichar32 *ustr, b_int32 nchars
 IMPEXP_BHAPI const b_unichar32*	b_utf32_at(const b_unichar32* ustr, b_int32 index);
 IMPEXP_BHAPI const b_unichar32*	b_utf32_next(const b_unichar32* ustr);
 
+
 #ifdef __cplusplus /* Just for C++ */
 } // extern "C"
-
-
 // b_strdup_dirty(): like b_strdup(), but the result must be free by "delete[]"
 IMPEXP_BHAPI char *b_strdup_dirty(const char* src, b_int32 length = -1);
-
-
 class BStringArray;
-
-
 class IMPEXP_BHAPI BString {
 public:
     BString();

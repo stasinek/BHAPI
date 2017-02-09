@@ -27,12 +27,16 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/ClassInfo.h"
-#include "./../kernel/Kernel.h"
-
-#include "Window.h"
-#include "PopUpMenu.h"
 #include "Menu.h"
+#include "PopUpMenu.h"
+#include "Window.h"
+
+#include "./../support/ClassInfo.h"
+#include "./../support/Errors.h"
+#include "./../kernel/Kernel.h"
+#include "./../kernel/Debug.h"
+#include "./../app/AppDefs.h"
+#include "./../app/Message.h"
 
 #define BHAPI_MENU_ROW_SPACING	5
 #define BHAPI_MENU_COLUMN_SPACING	2

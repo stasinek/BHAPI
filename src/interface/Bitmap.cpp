@@ -29,12 +29,14 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "Bitmap.h"
 
 #include "./../add-ons/graphics/GraphicsEngine.h"
 #include "./../app/Application.h"
+#include "./../kernel/Debug.h"
+#include "./../app/AppDefs.h"
 #include "./../render/Pixmap.h"
-
-#include "Bitmap.h"
+#include "./../support/Errors.h"
 
 class _LOCAL BBitmapWindow : public BWindow {
 public:

@@ -28,10 +28,15 @@
  * --------------------------------------------------------------------------*/
 
 #include "Messenger.h"
+#include "Message.h"
 #include "./../app/Looper.h"
+#include "./../app/AppDefs.h"
 #include "./../kernel/Kernel.h"
+#include "./../kernel/Debug.h"
+#include "./../kernel/OS.h"
 #include "./../support/ClassInfo.h"
 #include "./../support/Locker.h"
+#include "./../support/Errors.h"
 #include "./../support/Autolock.h"
 #include "./../private/PrivateHandler.h"
 #include <stdlib.h>
@@ -269,7 +274,14 @@ BMessenger::IsValid() const
 
 
 b_status_t
-BMessenger::SendMessage(b_uint32 command, BHandler *reply_to) const
+BMessenger::SendMessage(b_uint32 command) const
+{
+    BMessage msg(command);
+    return SendMessage(&msg, NULL, B_INFINITE_TIMEOUT);
+}
+
+b_status_t
+BMessenger::SendMessage(b_uint32 command, BHandler *reply_to = NULL) const
 {
 	BMessage msg(command);
 	return SendMessage(&msg, reply_to, B_INFINITE_TIMEOUT);
@@ -277,9 +289,16 @@ BMessenger::SendMessage(b_uint32 command, BHandler *reply_to) const
 
 
 b_status_t
+BMessenger::SendMessage(const BMessage *a_message) const
+{
+return BMessenger::SendMessage(a_message,NULL,B_INFINITE_TIMEOUT);
+
+}
+
+b_status_t
 BMessenger::SendMessage(const BMessage *a_message,
-			BHandler *reply_to,
-			b_bigtime_t timeout) const
+            BHandler *reply_to = NULL,
+            b_bigtime_t timeout = B_INFINITE_TIMEOUT) const
 {
 	if(a_message == NULL)
 	{
@@ -300,9 +319,14 @@ BMessenger::SendMessage(const BMessage *a_message,
 	return _SendMessage(&aMsg, replyToken, timeout);
 }
 
+b_status_t
+BMessenger::SendMessage(const BMessage *a_message, BMessage *reply_message) const
+{
+return BMessenger::SendMessage(a_message,reply_message,B_INFINITE_TIMEOUT,B_INFINITE_TIMEOUT);
+}
 
 b_status_t
-BMessenger::SendMessage(const BMessage *a_message, BMessage *reply_message, b_bigtime_t sendTimeout, b_bigtime_t replyTimeout) const
+BMessenger::SendMessage(const BMessage *a_message, BMessage *reply_message, b_bigtime_t sendTimeout = B_INFINITE_TIMEOUT, b_bigtime_t replyTimeout = B_INFINITE_TIMEOUT) const
 {
 	if(a_message == NULL || reply_message == NULL)
 	{

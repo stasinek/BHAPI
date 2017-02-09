@@ -27,6 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "NetAddress.h"
+
+#include "./../app/Message.h"
+#include "./../kernel/Debug.h"
+#include "./../support/Errors.h"
+#include "./../support/ByteOrder.h"
+
 #ifndef _WIN32
 #	include <netdb.h>
 #	include <netinet/in.h>
@@ -42,12 +49,6 @@
 #else
 #	include <winsock2.h>
 #endif
-
-#include "./../bhapi.h"
-#include "./../support/ByteOrder.h"
-
-#include "NetAddress.h"
-
 
 BNetAddress::BNetAddress(const char *hostname, b_uint16 port)
 	: BArchivable(), fStatus(B_NO_INIT)

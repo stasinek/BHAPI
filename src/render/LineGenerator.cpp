@@ -57,10 +57,10 @@
 </document>
 -----------------------------------------------------------------------------*/
 
+#include "LineGenerator.h"
+
 #include <math.h>
 #include <string.h>
-
-#include "LineGenerator.h"
 
 /* --------------------------------------------------------------------------
 <document lang="zh_CN.UTF-8">
@@ -78,6 +78,7 @@ BLineGenerator::BLineGenerator(BPoint <emphasis>start</emphasis>, BPoint <emphas
 </section>
 </document>
 -----------------------------------------------------------------------------*/
+
 BLineGenerator::BLineGenerator(BPoint start, BPoint end)
 	: fStep(0)
 {

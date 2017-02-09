@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/SupportDefs.h"
-
 #include "Rect.h"
+
+#include "./../kernel/Debug.h"
 
 #ifndef HAVE_ROUND
 inline double bhapi_round(double value)

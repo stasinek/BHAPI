@@ -30,17 +30,19 @@
 
 // TODO: speed up
 
-#include <stdlib.h>
+#include "TextView.h"
+#include "Window.h"
+#include "ScrollView.h"
 
 #include "./../support/ClassInfo.h"
+#include "./../support/Errors.h"
 #include "./../storage/File.h"
 #include "./../app/Application.h"
 #include "./../app/Clipboard.h"
+#include "./../app/AppDefs.h"
+#include "./../app/Message.h"
 
-#include "Window.h"
-#include "ScrollView.h"
-#include "TextView.h"
-
+#include <stdlib.h>
 
 typedef struct b_text_line {
 	b_int32 length;

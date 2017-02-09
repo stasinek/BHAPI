@@ -30,7 +30,7 @@
 #ifndef BHAPI_LAYOUT__H
 #define BHAPI_LAYOUT__H
 
-#include "./../../support/BList.h"
+#include "./../../support/List.h"
 #include "./../../interface/InterfaceDefs.h"
 #include "./../../interface/Region.h"
 

@@ -27,6 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "File.h"
+#include "Path.h"
+
+#include "./../support/StringMe.h"
+#include "./../support/Errors.h"
+#include "./../kernel/Debug.h"
+
 #ifndef _WIN32
 #define __USE_LARGEFILE64
 #define __USE_FILE_OFFSET64
@@ -42,14 +49,9 @@
 #include <windows.h>
 #endif // _WIN32
 
-#include "./../support/StringMe.h"
-
 #ifdef _WIN32
 extern "C" char* bhapi_win32_convert_utf8_to_active(const char *str, b_int32 length);
 #endif // _WIN32
-
-#include "Path.h"
-#include "File.h"
 
 extern b_status_t bhapi_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);
 

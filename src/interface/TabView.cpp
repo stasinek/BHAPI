@@ -27,9 +27,9 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../support/StringMe.h"
 #include "TabView.h"
 
+#include "./../support/StringMe.h"
 
 BTab::BTab(BView *targetView)
 	: fLabel(NULL), fEnabled(true), fFocus(false), fOwner(NULL)

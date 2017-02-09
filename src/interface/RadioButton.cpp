@@ -28,11 +28,10 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../support/ClassInfo.h"
-#include "./../interface/Window.h"
-
 #include "RadioButton.h"
 
+#include "./../support/ClassInfo.h"
+#include "./../interface/Window.h"
 
 BRadioButton::BRadioButton(BRect frame, const char *name, const char *label,
 			   BMessage *message, b_uint32 resizeMode, b_uint32 flags)

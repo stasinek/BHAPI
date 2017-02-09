@@ -28,8 +28,11 @@
  * --------------------------------------------------------------------------*/
 
 #include "StreamIO.h"
+
 #include "./../support/StringMe.h"
 #include "./../private/StandardIO.h"
+#include "./../kernel/Debug.h"
+#include "./../support/Errors.h"
 
 static BStreamIO _endl;
 static BStreamIO _ends;
@@ -42,7 +45,6 @@ IMPEXP_BHAPI BStreamIO &ends = _ends;
 IMPEXP_BHAPI BStreamIO &EIn = _EIn;
 IMPEXP_BHAPI BStreamIO &EOut = _EOut;
 IMPEXP_BHAPI BStreamIO &EErr = _EErr;
-
 
 BStreamIO::BStreamIO()
 	: EDataIO()

@@ -28,12 +28,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/ClassInfo.h"
-
 #include "ListView.h"
 #include "ScrollView.h"
 #include "Window.h"
 
+#include "./../support/ClassInfo.h"
+#include "./../support/Errors.h"
+#include "./../kernel/OS.h"
+#include "./../interface/ListItem.h"
+#include "./../app/Message.h"
 
 BListView::BListView(BRect frame,
 		     const char *name,

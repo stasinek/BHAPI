@@ -34,7 +34,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-#include "./../support/BList.h"
+#include "./../support/List.h"
 class BMessage;
 class IMPEXP_BHAPI BMessageQueue {
 public:

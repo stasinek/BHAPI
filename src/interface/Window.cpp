@@ -27,23 +27,28 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <math.h>
-
-#include "./../support/SupportDefs.h"
-#include "./../support/ClassInfo.h"
-#include "./../support/StringMe.h"
-#include "./../kernel/Kernel.h"
-#include "./../app/Application.h"
-#include "./../support/Autolock.h"
-#include "./../add-ons/graphics/GraphicsEngine.h"
-
+#include "Window.h"
+#include "Region.h"
 #include "InterfaceDefs.h"
 #include "View.h"
 #include "ScrollBar.h"
-#include "Window.h"
 #include "Screen.h"
 #include "layout/Layout.h"
 
+#include "./../support/ClassInfo.h"
+#include "./../support/StringMe.h"
+#include "./../support/Errors.h"
+#include "./../kernel/Kernel.h"
+#include "./../kernel/Debug.h"
+#include "./../app/Application.h"
+#include "./../app/AppDefs.h"
+#include "./../app/Message.h"
+#include "./../app/MessageQueue.h"
+#include "./../app/Messenger.h"
+#include "./../support/Autolock.h"
+#include "./../add-ons/graphics/GraphicsEngine.h"
+#include "./../app/Looper.h"
+#include "./../app/MessageRunner.h"
 
 class _LOCAL BWindowLayoutItem : public BLayoutItem {
 public:

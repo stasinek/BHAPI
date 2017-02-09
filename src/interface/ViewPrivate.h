@@ -30,10 +30,13 @@
 #ifndef BHAPI_VIEW_PRIVATE__H
 #define BHAPI_VIEW_PRIVATE__H
 
-#include "layout/Layout.h"
+#include "./../support/SupportDefs.h"
+
+#ifdef __cplusplus /* Just for C++ */
+#include "Rect.h"
 #include "View.h"
-
-
+#include "layout/Layout.h"
+#include "Window.h"
 class _LOCAL BViewLayout : public BLayoutItem {
 public:
     BViewLayout(BView *view, BRect frame, b_uint32 resizingMode);
@@ -142,5 +145,6 @@ BViewLayout::_GetVisibleRegion(BRegion **region)
 	GetVisibleRegion(region);
 }
 
+#endif /* __cplusplus */
 #endif /* BHAPI_VIEW_PRIVATE__H */
 

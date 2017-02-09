@@ -28,8 +28,10 @@
  * --------------------------------------------------------------------------*/
 
 #include "Archivable.h"
-#include "./../app/Message.h"
 
+#include "./../app/Message.h"
+#include "./../support/Errors.h"
+#include "./../kernel/Debug.h"
 
 BArchivable::BArchivable()
 {

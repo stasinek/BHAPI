@@ -27,10 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../interface/Window.h"
-
 #include "CheckBox.h"
 
+#include "./../interface/Window.h"
 
 BCheckBox::BCheckBox(BRect frame, const char *name, const char *label,
 		     BMessage *message, b_uint32 resizeMode, b_uint32 flags)

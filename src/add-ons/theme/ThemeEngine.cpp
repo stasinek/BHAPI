@@ -28,6 +28,10 @@
  * --------------------------------------------------------------------------*/
 
 #include "ThemeEngine.h"
+#include "./../../interface/View.h"
+#include "./../../interface/Rect.h"
+#include "./../../interface/Region.h"
+#include "./../../interface/Point.h"
 
 
 extern b_theme_engine bhapi_default_theme_engine;

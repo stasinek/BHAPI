@@ -30,13 +30,14 @@
 #ifndef BHAPI_MENU_ITEM__H
 #define BHAPI_MENU_ITEM__H
 
-#include "./../support/Archivable.h"
-#include "./../app/Invoker.h"
+#include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
 class BMenu;
-
+class BMessage;
+#include "./../support/Archivable.h"
+#include "./../interface/Rect.h"
+#include "./../app/Invoker.h"
 class IMPEXP_BHAPI BMenuItem : public BArchivable, public BInvoker {
 public:
     BMenuItem(const char *label, BMessage *message, char shortcut = 0, b_uint32 modifiers = 0);

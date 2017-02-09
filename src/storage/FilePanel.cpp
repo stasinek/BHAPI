@@ -27,25 +27,35 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <time.h>
+#include "FilePanel.h"
+#include "FindDirectory.h"
+#include "VolumeRoster.h"
 
-#include "./../support/supportDefs.h"
-#include "./../kernel/Kernel.h"
-#include "./../support/Autolock.h"
-#include "./../support/ClassInfo.h"
 #include "./../app/Application.h"
 #include "./../interface/Button.h"
 #include "./../interface/MenuField.h"
+#include "./../interface/MenuBar.h"
+#include "./../interface/Menu.h"
+#include "./../interface/MenuItem.h"
 #include "./../interface/ListView.h"
+#include "./../interface/ListItem.h"
 #include "./../interface/ScrollView.h"
 #include "./../interface/TextControl.h"
 #include "./../interface/StringView.h"
 #include "./../interface/Bitmap.h"
+#include "./../interface/Window.h"
+#include "./../kernel/Kernel.h"
 #include "./../render/Pixmap.h"
+#include "./../storage/Directory.h"
+#include "./../support/Autolock.h"
+#include "./../support/ClassInfo.h"
+#include "./../app/Message.h"
+#include "./../app/MessageFilter.h"
+#include "./../support/Errors.h"
+#include "./../app/AppDefs.h"
+#include "./../kernel/Debug.h"
 
-#include "VolumeRoster.h"
-#include "FindDirectory.h"
-#include "FilePanel.h"
+#include <time.h>
 
 #define ICON_WIDTH	16
 #define ICON_HEIGHT	16

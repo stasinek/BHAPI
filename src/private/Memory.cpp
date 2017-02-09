@@ -29,6 +29,7 @@
 
 #include "Memory.h"
 
+#include "./../kernel/Debug.h"
 
 struct _LOCAL bhapi_mem {
 	void (*destroy_func)(void*);

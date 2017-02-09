@@ -31,11 +31,13 @@
 #ifndef BHAPI_TEXT_EDITABLE__H
 #define BHAPI_TEXT_EDITABLE__H
 
+#include "./../support/SupportDefs.h"
 #include "./../interface/InterfaceDefs.h"
-#include "./../interface/Control.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
+class BRect;
+class BMessage;
+#include "./../interface/Control.h"
 class IMPEXP_BHAPI BTextEditable : public BControl {
 public:
 	BTextEditable(BRect frame,

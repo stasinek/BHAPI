@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../kernel/OS.h"
-#include "./../support/StringMe.h"
-
 #include "PrivateApplication.h"
 
+#include "./../kernel/OS.h"
+#include "./../support/StringMe.h"
+#include "./../kernel/Debug.h"
+#include "./../support/Errors.h"
 
 BApplicationConnector *bhapi_app_connector = NULL;
-
 
 BApplicationConnector::BApplicationConnector()
 	: fLocker(true), fPort(NULL), fThread(NULL)

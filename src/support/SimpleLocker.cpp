@@ -29,7 +29,9 @@
  * --------------------------------------------------------------------------*/
 
 #include "SimpleLocker.h"
+
 #include "./../kernel/Kernel.h"
+#include "./../kernel/Debug.h"
 
 BSimpleLocker::BSimpleLocker(bool assert)
 {

@@ -38,11 +38,10 @@ class BMessenger;
 class BHandler;
 class BStreamIO;
 class BString;
-
-#include "./../support/Errors.h"
+class BPoint;
+class BRect;
 #include "./../kernel/OS.h"
-#include "./../interface/Point.h"
-#include "./../interface/Rect.h"
+#include "./../support/List.h"
 
 class IMPEXP_BHAPI BMessage {
 public:
@@ -239,8 +238,6 @@ private:
     friend class BLooper;
     friend class BMessenger;
 
-#include "./../support/BList.h"
-
     typedef struct list_data {
 		char 		*name;
         BList		list;
@@ -275,8 +272,7 @@ private:
 	bool fIsReply;
 };
 
-
-inline b_status_t
+/*inline b_status_t
 BMessage::BGetInfo(b_type_code type, b_int32 index,
            char **nameFound, b_type_code *typeFound, b_int32 *countFound) const
 {
@@ -336,7 +332,7 @@ BMessage::BFindData(const char *name, b_type_code type,
 {
 	return BFindData(name, type, 0, data, numBytes);
 }
-
+*/
 #endif /* __cplusplus */
 
 #endif /* BHAPI_MESSAGE__H */

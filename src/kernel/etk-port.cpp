@@ -27,10 +27,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <stdlib.h>
-
 #include "./../kernel/Kernel.h"
+#include "./../kernel/Debug.h"
 #include "./../support/StringMe.h"
+#include "./../support/Errors.h"
 #include "./../support/SimpleLocker.h"
 
 typedef struct bhapi_port_info {

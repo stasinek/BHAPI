@@ -39,7 +39,7 @@
 
 #include "./../add-ons/font/FontEngine.h"
 #include "./../support/ClassInfo.h"
-#include "./../support/BList.h"
+#include "./../support/List.h"
 #include "./../support/Autolock.h"
 #include "./../interface/Window.h"
 #include "./../interface/View.h"

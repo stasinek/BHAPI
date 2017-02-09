@@ -29,8 +29,10 @@
 
 #include "ScrollView.h"
 
-BRect
-BScrollView::TargetValidFrame(bool ignore_scrollbar) const
+#include "./../kernel/Debug.h"
+#include "./../support/Errors.h"
+
+BRect BScrollView::TargetValidFrame(bool ignore_scrollbar) const
 {
 	// TODO: affect by border style
 

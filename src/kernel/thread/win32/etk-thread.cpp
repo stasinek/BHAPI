@@ -38,7 +38,7 @@
 
 #include "./../config.h"
 #include "./../kernel/Kernel.h"
-#include "./../support/BList.h"
+#include "./../support/List.h"
 #include "./../support/StringMe.h"
 #include "./../support/SimpleLocker.h"
 

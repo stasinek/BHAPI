@@ -31,6 +31,7 @@
 #define BHAPI_OS__H
 #include "./../support/SupportDefs.h"
 
+
 typedef b_status_t				(*b_thread_func)(void*);
 
 #define B_SYSTEM_TIMEBASE			0
@@ -39,24 +40,32 @@ typedef b_status_t				(*b_thread_func)(void*);
 #define B_OS_NAME_LENGTH			32
 #define B_INFINITE_TIMEOUT		    B_MAXINT64
 
-#define B_READ_AREA				1
-#define B_WRITE_AREA				2
+#define B_READ_AREA                     1
+#define B_WRITE_AREA                    2
 
-#define B_LOW_PRIORITY				5
-#define B_NORMAL_PRIORITY			10
-#define B_DISPLAY_PRIORITY			15
-#define    B_URGENT_DISPLAY_PRIORITY		20
-#define    B_REAL_TIME_DISPLAY_PRIORITY		100
-#define    B_URGENT_PRIORITY			110
-#define B_REAL_TIME_PRIORITY			120
+#define B_LOW_PRIORITY                  5
+#define B_NORMAL_PRIORITY               10
+#define B_DISPLAY_PRIORITY              15
+#define B_URGENT_DISPLAY_PRIORITY		20
+#define B_REAL_TIME_DISPLAY_PRIORITY	100
+#define B_URGENT_PRIORITY               110
+#define B_REAL_TIME_PRIORITY            120
 
-/* flags for semaphore control */
+#define B_PAGE_SIZE			4096
+
 enum {
     B_CAN_INTERRUPT		= 1,	/* semaphore can be interrupted by a signal */
     B_DO_NOT_RESCHEDULE	= 2,	/* release() without rescheduling */
-    B_TIMEOUT		= 8,	/* honor the (relative) timeout parameter */
-    B_RELATIVE_TIMEOUT	= 8,
-    B_ABSOLUTE_TIMEOUT	= 16	/* honor the (absolute) timeout parameter */
+    B_TIMEOUT						= 0x8,	/* relative timeout */
+    B_RELATIVE_TIMEOUT				= 0x8,	/* fails after a relative timeout
+                                                with B_TIMED_OUT */
+    B_ABSOLUTE_TIMEOUT				= 0x10,	/* fails after an absolute timeout
+                                                with B_TIMED_OUT */
+
+    /* experimental Haiku only API */
+    B_TIMEOUT_REAL_TIME_BASE		= 0x40,
+    B_ABSOLUTE_REAL_TIME_TIMEOUT	= B_ABSOLUTE_TIMEOUT
+                                        | B_TIMEOUT_REAL_TIME_BASE
 };
 
 #ifndef BHAPI_KERNEL__H

@@ -27,7 +27,16 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/supportDefs.h"
+#include "Volume.h"
+
+#include "./../support/Errors.h"
+
+#ifdef __BEOS__
+#include <be/storage/Entry.h>
+#include <be/storage/Directory.h>
+#include <be/storage/Path.h>
+#include <be/storage/VolumeRoster.h>
+#endif
 
 #ifdef _WIN32
 #include <windows.h>
@@ -38,16 +47,6 @@
 #include <stdio.h>
 #include <mntent.h>
 #endif
-
-#ifdef __BEOS__
-#include <be/storage/Entry.h>
-#include <be/storage/Directory.h>
-#include <be/storage/Path.h>
-#include <be/storage/VolumeRoster.h>
-#endif
-
-#include "Volume.h"
-
 
 typedef struct b_dev_data_t {
 	char *name;

@@ -31,9 +31,11 @@
 #include "./../kernel/Kernel.h"
 #include "./../kernel/Debug.h"
 #include "./../support/StringMe.h"
-#include "./../support/BList.h"
+#include "./../support/List.h"
 #include "./../support/SimpleLocker.h"
 #include "./../support/Errors.h"
+#include "./../app/Message.h"
+#include "./../app/AppDefs.h"
 
 #include "Clipboard.h"
 #include "Application.h"

@@ -29,6 +29,8 @@
 
 #include "GraphicsEngine.h"
 #include "./../../support/Errors.h"
+#include "./../../interface/Window.h"
+#include "./../../interface/View.h"
 
 BGraphicsContext::BGraphicsContext()
 {

@@ -63,6 +63,8 @@
 
 #include "Region.h"
 
+#include "./../kernel/Debug.h"
+
 /* --------------------------------------------------------------------------
 <document lang="zh_CN.UTF-8">
 <section id="EREGION_FUNCTION_CONSTRUCT">

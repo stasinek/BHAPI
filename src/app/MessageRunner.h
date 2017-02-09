@@ -34,6 +34,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 class BMessenger;
+class BMessage;
 class IMPEXP_BHAPI BMessageRunner {
 public:
 	BMessageRunner(const BMessenger &target,

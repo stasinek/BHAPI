@@ -27,14 +27,11 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <math.h>
-
-#include "./../support/SupportDefs.h"
-
-#include "GraphicsDefs.h"
 #include "Point.h"
+#include "GraphicsDefs.h"
 #include "Rect.h"
 
+#include "./../kernel/Debug.h"
 
 #ifndef HAVE_ROUND
 inline double bhapi_round(double value)

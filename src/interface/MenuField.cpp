@@ -28,12 +28,12 @@
  * 
  * --------------------------------------------------------------------------*/
 
+#include "MenuField.h"
+#include "Window.h"
+#include "MenuBar.h"
+
 #include "./../support/StringMe.h"
 #include "./../support/ClassInfo.h"
-
-#include "Window.h"
-#include "MenuField.h"
-
 
 BMenuField::BMenuField(BRect frame, const char *name,
 		       const char *label, BMenu *menu, bool fixedSize,

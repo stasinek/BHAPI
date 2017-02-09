@@ -29,6 +29,8 @@
 
 #include "ByteOrder.h"
 
+#include "./../support/Errors.h"
+
 IMPEXP_BHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, b_swap_action action)
 {
 	b_status_t retVal = B_BAD_VALUE;

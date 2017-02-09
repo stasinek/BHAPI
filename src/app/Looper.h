@@ -40,7 +40,7 @@ class BMessage;
 class BMessageFilter;
 class BMessageQueue;
 class BLoooper;
-#include "./../support/BList.h"
+#include "./../support/List.h"
 #include "Handler.h"
 class IMPEXP_BHAPI BLooper : public BHandler {
 public:

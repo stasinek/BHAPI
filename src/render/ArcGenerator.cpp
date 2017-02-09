@@ -28,11 +28,12 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include <math.h>
-#include <string.h>
-
 #include "ArcGenerator.h"
 
+#include "./../kernel/Debug.h"
+
+#include <math.h>
+#include <string.h>
 
 _LOCAL bool bhapi_get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext)
 {

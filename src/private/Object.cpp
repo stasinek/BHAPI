@@ -29,7 +29,6 @@
 
 #include "Object.h"
 
-
 BObject::BObject()
 	: fVitalities(0)
 {

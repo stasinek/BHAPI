@@ -29,6 +29,7 @@
 
 #include "./../support/StringMe.h"
 #include "./../app/AppDefs.h"
+#include "./../app/Message.h"
 
 #include "StatusBar.h"
 

@@ -27,10 +27,11 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../support/ByteOrder.h"
-
 #include "NetBuffer.h"
 
+#include "./../support/ByteOrder.h"
+#include "./../support/Errors.h"
+#include "./../app/Message.h"
 
 BNetBuffer::BNetBuffer(size_t size)
 	: BArchivable(), fData(NULL), fSize(size), fPos(0)

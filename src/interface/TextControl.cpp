@@ -28,12 +28,13 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "TextControl.h"
+#include "Window.h"
+
 #include "./../app/Application.h"
 #include "./../app/Clipboard.h"
-
-#include "Window.h"
-#include "TextControl.h"
-
+#include "./../app/Message.h"
+#include "./../app/AppDefs.h"
 
 BTextControl::BTextControl(BRect frame, const char *name,
 			   const char *label, const char *text, BMessage *message,

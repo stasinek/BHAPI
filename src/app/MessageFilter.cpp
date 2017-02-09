@@ -31,6 +31,7 @@
 #include "Handler.h"
 #include "Looper.h"
 #include "MessageFilter.h"
+#include "Message.h"
 
 
 BMessageFilter::BMessageFilter(b_message_delivery delivery, b_message_source source, b_uint32 command, b_filter_hook filter)

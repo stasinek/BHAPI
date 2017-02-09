@@ -31,16 +31,13 @@
 #ifndef BHAPI_GRAPHICS_ENGINE__H
 #define BHAPI_GRAPHICS_ENGINE__H
 #include "./../../support/SupportDefs.h"
-#include "./../../interface/Window.h"
-#include "./../../interface/View.h"
+#include "./../../interface/GraphicsDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
-
 class BCursor;
 class BPixmap;
-
-
+#include "./../../interface/Window.h"
+#include "./../../interface/Region.h"
 class IMPEXP_BHAPI BGraphicsContext {
 public:
 	BGraphicsContext();

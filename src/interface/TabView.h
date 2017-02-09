@@ -30,7 +30,7 @@
 #ifndef BHAPI_TAB_VIEW__H
 #define BHAPI_TAB_VIEW__H
 
-#include "./../support/BList.h"
+#include "./../support/List.h"
 #include "./../interface/View.h"
 
 typedef enum {

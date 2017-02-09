@@ -30,7 +30,7 @@
 #ifndef BHAPI_MENU__H
 #define BHAPI_MENU__H
 
-#include "./../support/BList.h"
+#include "./../support/List.h"
 #include "./../interface/View.h"
 #include "./../interface/MenuItem.h"
 

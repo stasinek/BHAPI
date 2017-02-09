@@ -29,7 +29,6 @@
 
 #include "InterfaceDefs.h"
 
-
 IMPEXP_BHAPI b_rgb_color b_ui_color(b_color_which which)
 {
 	b_rgb_color color;

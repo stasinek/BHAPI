@@ -31,6 +31,7 @@
 #include "./../kernel/Debug.h"
 #include "./../kernel/Kernel.h"
 #include "./../support/Locker.h"
+#include "./../support/Errors.h"
 #include "./../support/Autolock.h"
 #include "./../support/ClassInfo.h"
 #include "./../kernel/OS.h"
@@ -38,6 +39,7 @@
 #include "./../app/Handler.h"
 #include "./../app/MessageQueue.h"
 #include "./../app/MessageFilter.h"
+#include "./../app/Message.h"
 
 #include "./../private/Token.h"
 #include "./../private/PrivateHandler.h"
@@ -714,8 +716,7 @@ BLooper::_taskLooper(BLooper *self, void *sem)
 }
 
 
-BMessage*
-BLooper::NextLooperMessage(b_bigtime_t timeout =  = B_INFINITE_TIMEOUT)
+BMessage* BLooper::NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT)
 {
 	b_bigtime_t prevTime = bhapi_real_time_clock_usecs();
 

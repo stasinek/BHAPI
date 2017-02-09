@@ -5,10 +5,8 @@
 #-------------------------------------------------
 
 QT       -= core gui
-
 TARGET = BHAPI
 TEMPLATE = lib
-
 DEFINES += BHAPI_LIBRARY
 
 SOURCES += bhapi.cpp \
@@ -94,6 +92,8 @@ SOURCES += bhapi.cpp \
     src/support/DataIO.cpp \
     src/support/Flattenable.cpp \
     src/support/Locker.cpp \
+    src/support/StringMe.cpp \
+    src/support/List.cpp \
     src/support/SimpleLocker.cpp \
     src/support/StreamIO.cpp \
     src/support/StringArray.cpp \
@@ -101,82 +101,8 @@ SOURCES += bhapi.cpp \
     src/support/ByteOrder.c \
     src/interface/layout/LayoutContainer.cpp \
     src/interface/layout/LayoutForm.cpp \
-    src/interface/layout/LayoutItem.cpp \
-    src/support/StringMe.cpp \
-    src/support/BList.cpp
+    src/interface/layout/LayoutItem.cpp
 
-contains(QMAKE_COMPILER_DEFINES, BEOS) {
-SOURCES +=  src/interface/beos/etk-application.cpp \
-    src/interface/beos/etk-beos-font.cpp \
-    src/interface/beos/etk-drawing.cpp \
-    src/interface/beos/etk-pixmap.cpp \
-    src/interface/beos/etk-window.cpp \
-    src/kernel/beos/etk-area.cpp \
-    src/kernel/beos/etk-image.cpp \
-    src/kernel/beos/etk-os.cpp \
-    src/kernel/beos/etk-timefuncs.cpp \
-    src/kernel/thread/beos/etk-locker.cpp \
-    src/kernel/thread/beos/etk-semaphore.cpp \
-    src/kernel/thread/beos/etk-thread.cpp
-
-HEADERS += src/interface/beos/etk-beos-graphics.h
-}
-
-contains(QMAKE_COMPILER_DEFINES, WIN32) {
-SOURCES += src/interface/win32/etk-application.cpp \
-    src/interface/win32/etk-drawing.cpp \
-    src/interface/win32/etk-pixmap.cpp \
-    src/interface/win32/etk-win32-font.cpp \
-    src/interface/win32/etk-window.cpp \
-    src/kernel/thread/win32/etk-locker.cpp \
-    src/kernel/thread/win32/etk-semaphore.cpp \
-    src/kernel/thread/win32/etk-thread.cpp \
-    src/kernel/win32/etk-area.cpp \
-    src/kernel/win32/etk-image.cpp \
-    src/kernel/win32/etk-os.cpp \
-    src/kernel/win32/etk-timefuncs.cpp
-
-HEADERS += src/interface/win32/etk-win32gdi.h
-}
-
-contains(QMAKE_COMPILER_DEFINES, LINUX) {
-SOURCES += src/interface/x11/etk-application.cpp \
-    src/interface/x11/etk-drawing.cpp \
-    src/interface/x11/etk-pixmap.cpp \
-    src/interface/x11/etk-window.cpp \
-    src/interface/x11/etk-x11-font.cpp \
-    src/kernel/thread/posix/etk-locker.cpp \
-    src/kernel/thread/posix/etk-semaphore-mach.cpp \
-    src/kernel/thread/posix/etk-semaphore-umtx.cpp \
-    src/kernel/thread/posix/etk-semaphore.cpp \
-    src/kernel/thread/posix/etk-thread.cpp \
-    src/kernel/unix/etk-area.cpp \
-    src/kernel/unix/etk-image.cpp \
-    src/kernel/unix/etk-os.cpp \
-    src/kernel/unix/etk-timefuncs.cpp
-
-HEADERS +=     src/interface/x11/etk-x11.h
-}
-contains(QMAKE_COMPILER_DEFINES, DIRECTFB) {
-SOURCES +=    src/interface/directfb/etk-application.cpp \
-    src/interface/directfb/etk-dfb-font.cpp \
-    src/interface/directfb/etk-drawing.cpp \
-    src/interface/directfb/etk-pixmap.cpp \
-    src/interface/directfb/etk-window.cpp \
-    src/interface/directfb/etk-wm.cpp
-
-HEADERS += src/interface/directfb/etk-dfb.h
-}
-
-
-contains(QMAKE_COMPILER_DEFINES, MACOS) {
-HEADERS += src/interface/carbon/etk-carbon.h
-}
-
-SOURCES += src/interface/wm/SimpleWM.cpp
-HEADERS += src/interface/wm/SimpleWM.h \
-    src/support/StringMe.h \
-    src/support/BList.h
 
 HEADERS += bhapi.h\
     bhapi_global.h \
@@ -265,9 +191,11 @@ HEADERS += bhapi.h\
     src/support/Archivable.h \
     src/support/Autolock.h \
     src/support/ByteOrder.h \
+    src/support/List.h \
     src/support/ClassInfo.h \
     src/support/DataIO.h \
     src/support/Errors.h \
+    src/support/StringMe.h \
     src/support/Flattenable.h \
     src/support/Locker.h \
     src/support/SimpleLocker.h \
@@ -275,8 +203,8 @@ HEADERS += bhapi.h\
     src/support/StringArray.h \
     src/support/SupportDefs.h \
     src/xml/SimpleXmlParser.h \
-    src/AppKit.h \
     src/BE.h \
+    src/AppKit.h \
     src/InterfaceKit.h \
     src/KernelKit.h \
     src/NetKit.h \
@@ -284,6 +212,75 @@ HEADERS += bhapi.h\
     src/StorageKit.h \
     src/SupportKit.h \
     src/XmlKit.h
+
+
+contains(QMAKE_COMPILER_DEFINES, BEOS) {
+SOURCES +=  src/interface/beos/etk-application.cpp \
+    src/interface/beos/etk-beos-font.cpp \
+    src/interface/beos/etk-drawing.cpp \
+    src/interface/beos/etk-pixmap.cpp \
+    src/interface/beos/etk-window.cpp \
+    src/kernel/beos/etk-area.cpp \
+    src/kernel/beos/etk-image.cpp \
+    src/kernel/beos/etk-os.cpp \
+    src/kernel/beos/etk-timefuncs.cpp \
+    src/kernel/thread/beos/etk-locker.cpp \
+    src/kernel/thread/beos/etk-semaphore.cpp \
+    src/kernel/thread/beos/etk-thread.cpp
+
+HEADERS += src/interface/beos/etk-beos-graphics.h
+}
+
+contains(QMAKE_COMPILER_DEFINES, WIN32) {
+SOURCES += src/interface/win32/etk-application.cpp \
+    src/interface/win32/etk-drawing.cpp \
+    src/interface/win32/etk-pixmap.cpp \
+    src/interface/win32/etk-win32-font.cpp \
+    src/interface/win32/etk-window.cpp \
+    src/kernel/thread/win32/etk-locker.cpp \
+    src/kernel/thread/win32/etk-semaphore.cpp \
+    src/kernel/thread/win32/etk-thread.cpp \
+    src/kernel/win32/etk-area.cpp \
+    src/kernel/win32/etk-image.cpp \
+    src/kernel/win32/etk-os.cpp \
+    src/kernel/win32/etk-timefuncs.cpp
+
+HEADERS += src/interface/win32/etk-win32gdi.h
+}
+
+contains(QMAKE_COMPILER_DEFINES, LINUX) {
+SOURCES += src/interface/x11/etk-application.cpp \
+    src/interface/x11/etk-drawing.cpp \
+    src/interface/x11/etk-pixmap.cpp \
+    src/interface/x11/etk-window.cpp \
+    src/interface/x11/etk-x11-font.cpp \
+    src/kernel/thread/posix/etk-locker.cpp \
+    src/kernel/thread/posix/etk-semaphore-mach.cpp \
+    src/kernel/thread/posix/etk-semaphore-umtx.cpp \
+    src/kernel/thread/posix/etk-semaphore.cpp \
+    src/kernel/thread/posix/etk-thread.cpp \
+    src/kernel/unix/etk-area.cpp \
+    src/kernel/unix/etk-image.cpp \
+    src/kernel/unix/etk-os.cpp \
+    src/kernel/unix/etk-timefuncs.cpp
+
+HEADERS +=     src/interface/x11/etk-x11.h
+}
+
+contains(QMAKE_COMPILER_DEFINES, DIRECTFB) {
+SOURCES +=    src/interface/directfb/etk-application.cpp \
+    src/interface/directfb/etk-dfb-font.cpp \
+    src/interface/directfb/etk-drawing.cpp \
+    src/interface/directfb/etk-pixmap.cpp \
+    src/interface/directfb/etk-window.cpp \
+    src/interface/directfb/etk-wm.cpp
+
+HEADERS += src/interface/directfb/etk-dfb.h
+}
+
+contains(QMAKE_COMPILER_DEFINES, MACOS) {
+HEADERS += src/interface/carbon/etk-carbon.h
+}
 
 contains(QMAKE_COMPILER_DEFINES, __GNUC__) {
 QMAKE_CXXFLAGS -= -pipe
@@ -312,7 +309,6 @@ QMAKE_CXXFLAGS += -funroll-loops
 QMAKE_CXXFLAGS += -m32 -mfpmath=sse -flto #-O1
 QMAKE_CXXFLAGS += -mpreferred-stack-boundary=8
 QMAKE_CXXFLAGS += -mmmx -msse -msse2 #-msse3
-
 }
 
 contains(QMAKE_COMPILER_DEFINES, __clang__) {

@@ -30,16 +30,18 @@
 #ifndef BHAPI_CONTROL__H
 #define BHAPI_CONTROL__H
 
-#include "./../interface/View.h"
-#include "./../app/Invoker.h"
-
-#ifdef __cplusplus /* Just for C++ */
+#include "./../support/SupportDefs.h"
 
 enum {
     B_CONTROL_OFF = 0,
     B_CONTROL_ON = 1
 };
 
+#ifdef __cplusplus /* Just for C++ */
+class BRect;
+class BMessage;
+#include "./../interface/View.h"
+#include "./../app/Invoker.h"
 class IMPEXP_BHAPI BControl : public BView, public BInvoker {
 public:
 	BControl(BRect frame,

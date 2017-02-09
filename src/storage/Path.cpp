@@ -27,6 +27,11 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "Path.h"
+
+#include "./../support/StringMe.h"
+#include "./../support/Errors.h"
+
 #ifdef _WIN32
 #include <ctype.h>
 #include <io.h>
@@ -37,10 +42,6 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-
-#include "./../support/StringMe.h"
-
-#include "Path.h"
 
 inline void bhapi_path_prepend_current_directory(BString &path)
 {

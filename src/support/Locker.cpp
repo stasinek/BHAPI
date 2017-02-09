@@ -29,7 +29,10 @@
  * --------------------------------------------------------------------------*/
 
 #include "Locker.h"
+
 #include "./../kernel/Kernel.h"
+#include "./../kernel/Debug.h"
+#include "./../support/Errors.h"
 
 BLocker::BLocker()
 {

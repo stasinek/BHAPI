@@ -45,9 +45,9 @@ extern IMPEXP_BHAPI const b_uint16 bhapi_binary_age = BHAPI_BINARY_AGE;
 
 } // extern "C"
 
+#include "AppKit.h"
 #include "KernelKit.h"
 #include "StorageKit.h"
-#include "AppKit.h"
 #include "RenderKit.h"
 #include "InterfaceKit.h"
 #include "XmlKit.h"

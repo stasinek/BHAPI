@@ -28,6 +28,10 @@
  * --------------------------------------------------------------------------*/
 
 #include "./ThemeEngine.h"
+#include "./../../interface/Rect.h"
+#include "./../../interface/View.h"
+#include "./../../interface/Region.h"
+#include "./../../interface/Point.h"
 
 #define MIX_SHADOW_DARKER	80
 #define MIX_SHADOW_SHINER	20

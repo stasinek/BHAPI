@@ -59,11 +59,16 @@
 </document>
 -----------------------------------------------------------------------------*/
 
-#include "./../add-ons/theme/ThemeEngine.h"
-
-#include "Window.h"
 #include "Button.h"
+#include "Window.h"
+#include "Rect.h"
 
+#include "./../add-ons/theme/ThemeEngine.h"
+#include "./../support/Errors.h"
+#include "./../kernel/OS.h"
+#include "./../kernel/kernel.h"
+#include "./../app/MessageRunner.h"
+#include "./../app/Message.h"
 
 /* --------------------------------------------------------------------------
 <document lang="zh_CN.UTF-8">
@@ -113,7 +118,6 @@ BButton::BButton(BRect frame, const char *name, const char *label,
 BButton::~BButton()
 {
 }
-
 
 /* --------------------------------------------------------------------------
 <document lang="zh_CN.UTF-8">

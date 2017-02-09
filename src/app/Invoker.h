@@ -33,10 +33,10 @@
 #include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-#include "./../support/BList.h"
+#include "./../support/List.h"
 class BMessage;
 class BLooper;
-class BMessenger;
+#include "./../app/Messenger.h"
 class BHandler;
 class IMPEXP_BHAPI BInvoker {
 public:
@@ -63,7 +63,9 @@ public:
 	BHandler*		HandlerForReply() const;
 
 	virtual b_status_t	Invoke(const BMessage *msg = NULL);
-    b_status_t		InvokeNotify(const BMessage *msg, b_uint32 kind = B_CONTROL_INVOKED);
+    //    b_status_t		InvokeNotify(const BMessage *msg, b_uint32 kind = B_CONTROL_INVOKED);
+    b_status_t		InvokeNotify(const BMessage *msg);
+    b_status_t		InvokeNotify(const BMessage *msg, b_uint32 kind);
 
     b_status_t		SetTimeout(b_bigtime_t timeout);
 	b_bigtime_t		Timeout() const;
@@ -78,8 +80,10 @@ protected:
 	/* Start and end an InvokeNotify context around an Invoke() call.
 	   These are only needed for writing custom methods that
 	   emulate the standard InvokeNotify() call. */
-    void			BeginInvokeNotify(b_uint32 kind = B_CONTROL_INVOKED);
-	void			EndInvokeNotify();
+//    void			BeginInvokeNotify(b_uint32 kind = B_CONTROL_INVOKED);
+    void			BeginInvokeNotify(void);
+    void			BeginInvokeNotify(b_uint32 kind);
+    void			EndInvokeNotify();
 
 private:
 	BMessage *fMessage;

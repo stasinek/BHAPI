@@ -30,8 +30,7 @@
 #ifndef BHAPI_FILE_PANEL__H
 #define BHAPI_FILE_PANEL__H
 
-#include "./../interface/Window.h"
-#include "./../storage/Directory.h"
+#include "./../support/SupportDefs.h"
 
 typedef enum b_file_panel_mode {
     B_OPEN_PANEL,
@@ -45,6 +44,12 @@ typedef enum b_file_panel_button {
 
 #ifdef __cplusplus /* Just for C++ */
 
+class BPath;
+class BEntry;
+class BDirectory;
+class BWindow;
+class BMessenger;
+class BMessage;
 class IMPEXP_BHAPI BFilePanelFilter {
 public:
 	virtual ~BFilePanelFilter();

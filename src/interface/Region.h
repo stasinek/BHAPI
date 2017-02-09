@@ -31,11 +31,12 @@
 #ifndef BHAPI_REGION__H
 #define BHAPI_REGION__H
 
-#include "./../interface/Rect.h"
-#include "./../support/BList.h"
+#include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
+#include "./../interface/Point.h"
+#include "./../interface/Rect.h"
+#include "./../support/List.h"
 class IMPEXP_BHAPI BRegion {
 public:
 	BRegion();

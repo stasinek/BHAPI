@@ -28,6 +28,7 @@
  * --------------------------------------------------------------------------*/
 
 #include "StringArray.h"
+
 #include "StringMe.h"
 
 typedef struct __string_node__ {

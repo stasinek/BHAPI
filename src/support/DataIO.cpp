@@ -29,6 +29,8 @@
 
 #include "DataIO.h"
 
+#include "./../support/Errors.h"
+
 EDataIO::EDataIO()
 {
 }

@@ -28,12 +28,14 @@
  * 
  * --------------------------------------------------------------------------*/
 
+#include "TextEditable.h"
+#include "Window.h"
+
 #include "./../support/StringMe.h"
 #include "./../app/Application.h"
-
-#include "Window.h"
-#include "TextEditable.h"
-
+#include "./../app/AppDefs.h"
+#include "./../support/Errors.h"
+#include "./../app/Message.h"
 
 BTextEditable::BTextEditable(BRect frame,
 			     const char *name,

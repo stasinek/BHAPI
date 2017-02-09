@@ -31,18 +31,18 @@
 #ifndef BHAPI_LIST_VIEW__H
 #define BHAPI_LIST_VIEW__H
 
-#include "./../support/BList.h"
-#include "./../app/Invoker.h"
-#include "./../interface/ListItem.h"
+#include "./../support/SupportDefs.h"
 
 typedef enum b_list_view_type {
     B_SINGLE_SELECTION_LIST,
     B_MULTIPLE_SELECTION_LIST,
 } b_list_view_type;
 
-
 #ifdef __cplusplus /* Just for C++ */
-
+class BListItem;
+#include "./../support/List.h"
+#include "./../interface/View.h"
+#include "./../app/Invoker.h"
 class IMPEXP_BHAPI BListView : public BView, public BInvoker {
 public:
 	BListView(BRect frame,

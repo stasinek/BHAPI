@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <math.h>
-
 #include "Polygon.h"
+
+#include "./../kernel/Debug.h"
 
 BPolygon::BPolygon(const BPoint *pts, b_int32 nPts)
 	: fCount(0), fPts(NULL), fNeededToUpdateFrame(false)

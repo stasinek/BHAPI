@@ -35,10 +35,76 @@
 #include "./../private/Token.h"
 #include "./../support/StreamIO.h"
 #include "./../support/StringMe.h"
+#include "./../support/Errors.h"
+#include "./../kernel/OS.h"
+#include "./../interface/Point.h"
+#include "./../interface/Rect.h"
+
 
 #include "Message.h"
 #include "Messenger.h"
 #include "Handler.h"
+
+b_status_t
+BMessage::BGetInfo(b_type_code type, b_int32 index,
+           char **nameFound, b_type_code *typeFound, b_int32 *countFound) const
+{
+    if(index < 0) return B_BAD_INDEX;
+    b_int32 aIndex = index;
+
+    for(b_int32 i = 0; i < CountNames(B_ANY_TYPE, true); i++)
+    {
+        b_int32 typesCount = CountTypesByName(i);
+        for(b_int32 k = 0; k < typesCount; k++)
+        {
+            b_type_code aType;
+            b_int32 count = CountItems(i, k, &aType);
+            if(!(type == B_ANY_TYPE || aType == type) || (aIndex--) > 0) continue;
+            if(nameFound) *nameFound = (char*)NameAt(i);
+            if(typeFound) *typeFound = aType;
+            if(countFound) *countFound = count;
+            return B_OK;
+        }
+    }
+
+    return(aIndex == index ? B_BAD_TYPE : B_BAD_INDEX);
+}
+
+
+b_status_t
+BMessage::BFindData(const char *name, b_type_code type, b_int32 index,
+            const void **data, b_size_t *numBytes) const
+{
+    if(index < 0) return B_BAD_INDEX;
+
+    b_int32 nameIndex = FindName(name);
+    if(nameIndex < 0) return B_NAME_NOT_FOUND;
+
+    b_int32 typesCount = CountTypesByName(nameIndex);
+    b_int32 aIndex = index;
+
+    for(b_int32 k = 0; k < typesCount; k++)
+    {
+        b_type_code aType;
+        b_int32 count = CountItems(nameIndex, k, &aType);
+        if(!(type == B_ANY_TYPE || aType == type)) continue;
+
+        if(aIndex < count)
+            return(FindData(nameIndex, k, aIndex, data, numBytes) ? B_OK : B_ERROR);
+
+        aIndex -= count;
+    }
+
+    return(aIndex == index ? B_BAD_TYPE : B_BAD_INDEX);
+}
+
+
+b_status_t
+BMessage::BFindData(const char *name, b_type_code type,
+            const void **data, b_size_t *numBytes) const
+{
+    return BFindData(name, type, 0, data, numBytes);
+}
 
 BMessage::BMessage()
 	: what(0),

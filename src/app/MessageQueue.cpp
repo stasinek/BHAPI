@@ -30,8 +30,10 @@
 #include "MessageQueue.h"
 #include "Message.h"
 #include "./../kernel/Kernel.h"
+#include "./../kernel/Debug.h"
 #include "./../support/Locker.h"
-#include "./../support/BList.h"
+#include "./../support/Errors.h"
+#include "./../support/List.h"
 #include "./../private/PrivateHandler.h"
 
 

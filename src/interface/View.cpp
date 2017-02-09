@@ -28,21 +28,25 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <math.h>
-#include "./../support/SupportDefs.h"
-
-#include "./../support/ClassInfo.h"
-#include "./../add-ons/font/FontEngine.h"
-#include "./../support/BList.h"
-#include "./../add-ons/graphics/GraphicsEngine.h"
-#include "./../app/Application.h"
-
-#include "GraphicsDefs.h"
-#include "Window.h"
+#include "View.h"
+#include "ViewPrivate.h"
 #include "ScrollView.h"
+#include "Window.h"
 #include "Box.h"
 #include "Bitmap.h"
-#include "ViewPrivate.h"
+#include "GraphicsDefs.h"
+
+#include "./../support/ClassInfo.h"
+#include "./../support/Errors.h"
+#include "./../add-ons/font/FontEngine.h"
+#include "./../support/List.h"
+#include "./../add-ons/graphics/GraphicsEngine.h"
+#include "./../app/Application.h"
+#include "./../app/AppDefs.h"
+#include "./../app/Message.h"
+#include "./../kernel/Debug.h"
+
+#include <math.h>
 
 class _LOCAL BViewState {
 public:

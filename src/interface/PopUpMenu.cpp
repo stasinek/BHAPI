@@ -27,13 +27,16 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "PopUpMenu.h"
+#include "Window.h"
+
 #include "./../app/Application.h"
+#include "./../app/AppDefs.h"
+#include "./../support/Errors.h"
+#include "./../app/Message.h"
 #include "./../support/ClassInfo.h"
 #include "./../kernel/Kernel.h"
-
-#include "Window.h"
-#include "PopUpMenu.h"
-
+#include "./../kernel/Debug.h"
 
 class BPopUpMenuView;
 

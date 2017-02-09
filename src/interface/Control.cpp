@@ -27,13 +27,16 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "Control.h"
+#include "Window.h"
+
 #include "./../support/StringMe.h"
+#include "./../support/Errors.h"
 #include "./../kernel/OS.h"
 #include "./../app/Looper.h"
-
-#include "Window.h"
-#include "Control.h"
-
+#include "./../app/Message.h"
+#include "./../interface/Rect.h"
+#include "./../interface/View.h"
 
 BControl::BControl(BRect frame, const char *name, const char *label,
 		   BMessage *message, b_uint32 resizeMode, b_uint32 flags)

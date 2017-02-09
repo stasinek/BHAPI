@@ -27,11 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../add-ons/graphics/GraphicsEngine.h"
-#include "./../app/Application.h"
-
 #include "Screen.h"
 #include "Window.h"
+
+#include "./../add-ons/graphics/GraphicsEngine.h"
+#include "./../app/Application.h"
+#include "./../support/Errors.h"
 
 BScreen::BScreen(b_uint32 id)
 	: fID(id)

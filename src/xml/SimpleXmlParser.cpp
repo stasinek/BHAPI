@@ -27,13 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <stdlib.h>
+#include "SimpleXmlParser.h"
 
 #include "./../support/StringMe.h"
 #include "./../support/StringArray.h"
+#include "./../support/Errors.h"
+#include "./../kernel/Debug.h"
 
-#include "SimpleXmlParser.h"
-
+#include <stdlib.h>
 
 typedef struct bhapi_xml_attribute {
 	char *name;

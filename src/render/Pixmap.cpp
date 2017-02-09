@@ -27,13 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <string.h>
-#include <stdlib.h>
-
-#include "./../support/StringArray.h"
-
 #include "Pixmap.h"
 
+#include "./../support/StringArray.h"
+#include "./../support/Errors.h"
+#include "./../kernel/Debug.h"
+#include "./../support/StringMe.h"
+
+#include <string.h>
+#include <stdlib.h>
 
 BPixmap::BPixmap()
 	: BRender(), fPtr(NULL), fColorSpace((b_color_space)0), fRows(0), fColumns(0), fRowBytes(0)

@@ -31,12 +31,7 @@
 #ifndef BHAPI_VIEW__H
 #define BHAPI_VIEW__H
 
-#include "./../support/BList.h"
-#include "./../interface/InterfaceDefs.h"
-#include "./../interface/Region.h"
-#include "./../interface/Polygon.h"
-#include "./../interface/Font.h"
-#include "./../app/Handler.h"
+#include "./../support/SupportDefs.h"
 
 enum {
     B_ENTERED_VIEW = 0,
@@ -77,14 +72,21 @@ enum {
 
 #ifdef __cplusplus /* Just for C++ */
 
+#include "./../interface/InterfaceDefs.h"
 class BWindow;
 class BGraphicsContext;
 class BScrollView;
 class BBitmap;
 class BCursor;
 class BLayoutItem;
-
-
+class BMessage;
+class BView;
+#include "./../interface/Region.h"
+#include "./../interface/Polygon.h"
+#include "./../interface/Font.h"
+#include "./../interface/Point.h"
+#include "./../support/List.h"
+#include "./../app/Handler.h"
 class IMPEXP_BHAPI BView : public BHandler {
 public:
 	BView(BRect frame,

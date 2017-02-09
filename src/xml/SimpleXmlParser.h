@@ -30,7 +30,7 @@
 #ifndef BHAPI_SIMPLE_XML_PARSER__H
 #define BHAPI_SIMPLE_XML_PARSER__H
 
-#include "./../support/BList.h"
+#include "./../support/List.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

@@ -29,9 +29,14 @@
 
 // WARNING: MT-SAFE uncompleted yet !!!
 
+#include "NetEndpoint.h"
+
+#include "./../support/Errors.h"
+#include "./../app/Message.h"
+#include "./../kernel/Debug.h"
+
 #include <errno.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <signal.h>
 
@@ -60,9 +65,6 @@
 #	undef EINTR
 #	define EINTR WSAEINTR
 #endif
-
-#include "NetEndpoint.h"
-
 
 #ifdef SIGPIPE
 class _LOCAL BNetEndpointSignalIgnore {

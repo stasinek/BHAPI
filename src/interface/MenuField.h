@@ -31,10 +31,15 @@
 #ifndef BHAPI_MENU_FIELD__H
 #define BHAPI_MENU_FIELD__H
 
-#include "./../interface/MenuBar.h"
+#include "./../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
+class BRect;
+class BMenu;
+class BMenuItem;
+class BMenuBar;
+class BMessage;
+#include "./../interface/View.h"
 class IMPEXP_BHAPI BMenuField : public BView {
 public:
 	BMenuField(BRect frame,
