@@ -30,7 +30,7 @@
 
 #ifndef BHAPI_LOOPER__H
 #define BHAPI_LOOPER__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

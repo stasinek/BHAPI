@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_OS__H
 #define BHAPI_OS__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 
 typedef b_status_t				(*b_thread_func)(void*);

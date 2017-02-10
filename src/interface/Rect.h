@@ -30,7 +30,7 @@
 #ifndef BHAPI_RECT__H
 #define BHAPI_RECT__H
 
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 #ifdef __cplusplus /* Just for C++ */
 #include "./../interface/Point.h"

@@ -33,7 +33,9 @@
 
 #include <windows.h>
 
-#include "./../kernel/Kernel.h"
+#include "./../../../kernel/Kernel.h"
+#include "./../../../support/Errors.h"
+#include "./../../../kernel/Debug.h"
 
 #define SECS_BETWEEN_EPOCHS    B_INT64_CONSTANT(11644473600)
 #define SECS_TO_100NS	    B_INT64_CONSTANT(10000000)
@@ -95,7 +97,7 @@ void* bhapi_create_locker(void)
 
 	if(!locker) return NULL;
 
-	if((locker->Locker = CreateMutex(NULL, FALSE, NULL)) == NULL)
+    if((locker->Locker = CreateMutexA(NULL, FALSE, NULL)) == NULL)
 	{
 		delete locker;
 		return NULL;

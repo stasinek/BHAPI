@@ -30,7 +30,7 @@
 #ifndef BHAPI_MENU_ITEM__H
 #define BHAPI_MENU_ITEM__H
 
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 #ifdef __cplusplus /* Just for C++ */
 class BMenu;

@@ -27,12 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "./../../support/SupportDefs.h"
+#include "./../../kernel/Kernel.h"
+#include "./../../kernel/Debug.h"
+#include "./../../support/StringMe.h"
+#include "./../../support/Errors.h"
+
 #include <windows.h>
 //#include <sddl.h"
-
-#include "./../config.h"
-#include "./../kernel/Kernel.h"
-#include "./../support/StringMe.h"
 
 #define WIN32_AREA_INFO_MAGIC		0xABFC
 
@@ -52,8 +54,8 @@ public:
 	bhapi_win32_area_locker_t()
 	{
 		const char *lockerName = "_bhapi_area_global_";
-		if((iLocker = OpenMutex(MUTEX_ALL_ACCESS, FALSE, lockerName)) == NULL)
-			iLocker = CreateMutex(NULL, FALSE, lockerName);
+        if((iLocker = OpenMutexA(MUTEX_ALL_ACCESS, FALSE, lockerName)) == NULL)
+            iLocker = CreateMutexA(NULL, FALSE, lockerName);
 		if(iLocker == NULL) BHAPI_ERROR("[KERNEL]: Can't initialize global area!");
 	}
 
@@ -172,7 +174,7 @@ bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 pro
 	HANDLE handler;
 
 	_BHAPI_LOCK_AREA_();
-	if((handler = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE | SEC_COMMIT, 0, size + sizeof(bhapi_win32_area_info_t), ipc_name)) == NULL)
+    if((handler = CreateFileMappingA(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE | SEC_COMMIT, 0, size + sizeof(bhapi_win32_area_info_t), ipc_name)) == NULL)
 	{
 		_BHAPI_UNLOCK_AREA_();
 		BHAPI_DEBUG("[KERNEL]: %s --- Can't create area : CreateFileMapping failed.", __PRETTY_FUNCTION__);
@@ -235,7 +237,7 @@ bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const 
 	HANDLE handler;
 
 	_BHAPI_LOCK_AREA_();
-	if((handler = OpenFileMapping(prot, FALSE, ipc_name)) == NULL)
+    if((handler = OpenFileMappingA(prot, FALSE, ipc_name)) == NULL)
 	{
 //		BHAPI_DEBUG("[KERNEL]: %s --- Can't clone area : open file mapping failed."", __PRETTY_FUNCTION__);
 		_BHAPI_UNLOCK_AREA_();

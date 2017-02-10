@@ -35,9 +35,12 @@
 
 #include "etk-win32gdi.h"
 
+#include "./../../support/SupportDefs.h"
 #include "./../../support/ClassInfo.h"
 #include "./../../support/Autolock.h"
+#include "./../../support/Errors.h"
 #include "./../../render/Pixmap.h"
+#include "./../../kernel/Debug.h"
 
 
 b_status_t
@@ -1168,7 +1171,7 @@ LRESULT _bhapi_stroke_polygon(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_STROKE_POLYGON || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL ||
-	   callback->pts == NULL || callback->ptsCount < 3 || callback->ptsCount >= B_MAXINT) return FALSE;
+       callback->pts == NULL || callback->ptsCount < 3 || callback->ptsCount >= B_MAXINT32) return FALSE;
 
 	POINT *wPts = new POINT[callback->ptsCount + 1];
 	if(wPts == NULL) return FALSE;
@@ -1243,7 +1246,7 @@ LRESULT _bhapi_fill_polygon(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_c
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_FILL_POLYGON || callback->pixmap == NULL ||
 	   callback->pixmap->win32Pixmap == NULL || callback->pixmap->win32HDC == NULL || callback->dc == NULL ||
-	   callback->pts == NULL || callback->ptsCount < 2 || callback->ptsCount > B_MAXINT) return FALSE;
+       callback->pts == NULL || callback->ptsCount < 2 || callback->ptsCount > B_MAXINT32) return FALSE;
 
 	if(callback->ptsCount == 2)
 	{

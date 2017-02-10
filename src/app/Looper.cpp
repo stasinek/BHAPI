@@ -27,7 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <stdlib.h>
+#include "Looper.h"
+#include "AppDefs.h"
+#include "Application.h"
+#include "Messenger.h"
+
+#include "./../private/Token.h"
+#include "./../private/PrivateHandler.h"
 #include "./../kernel/Debug.h"
 #include "./../kernel/Kernel.h"
 #include "./../support/Locker.h"
@@ -41,14 +47,7 @@
 #include "./../app/MessageFilter.h"
 #include "./../app/Message.h"
 
-#include "./../private/Token.h"
-#include "./../private/PrivateHandler.h"
-
-#include "AppDefs.h"
-#include "Application.h"
-#include "Messenger.h"
-#include "Looper.h"
-
+#include <stdlib.h>
 
 BList BLooper::sLooperList;
 

@@ -27,14 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <windows.h>
+#include "./../../kernel/Kernel.h"
 
-#include "./../kernel/Kernel.h"
+#include <windows.h>
 
 #define SECS_BETWEEN_EPOCHS    B_INT64_CONSTANT(11644473600)
 #define SECS_TO_100NS		10000000
 #define SECS_TO_US		1000000
-
 
 // return the number of microseconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
 IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)

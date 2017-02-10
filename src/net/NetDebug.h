@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_NET_DEBUG__H
 #define BHAPI_NET_DEBUG__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

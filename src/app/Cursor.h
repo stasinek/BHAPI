@@ -30,7 +30,7 @@
 
 #ifndef BHAPI_CURSOR__H
 #define BHAPI_CURSOR__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 #include "./../support/Archivable.h"
 #ifdef __cplusplus /* Just for C++ */
 

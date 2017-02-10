@@ -31,7 +31,7 @@
 #ifndef BHAPI_TEXT_EDITABLE__H
 #define BHAPI_TEXT_EDITABLE__H
 
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 #include "./../interface/InterfaceDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */

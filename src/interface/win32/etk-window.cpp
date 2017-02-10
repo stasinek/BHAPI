@@ -31,7 +31,9 @@
 #include "etk-win32gdi.h"
 
 #include "./../../kernel/Kernel.h"
+#include "./../../kernel/Debug.h"
 #include "./../../support/Autolock.h"
+#include "./../../support/Errors.h"
 #include "./../../app/Application.h"
 #include "./../../support/StringMe.h"
 #include "./../../support/ClassInfo.h"
@@ -236,7 +238,7 @@ LRESULT _bhapi_create_window(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_
 
 	AdjustWindowRectEx(&r, style, FALSE, styleEx);
 
-	if((callback->win->win32Window = CreateWindowEx(styleEx, MAKEINTATOM(win32Engine->win32RegisterClass), "", style,
+    if((callback->win->win32Window = CreateWindowExW(styleEx, MAKEINTATOM(win32Engine->win32RegisterClass), TEXT(""), style,
 							r.left, r.top, r.right - r.left + 1, r.bottom - r.top + 1,
 							NULL, NULL, win32Engine->win32Hinstance, NULL)) == NULL) return FALSE;
 

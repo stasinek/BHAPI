@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_RENDER__H
 #define BHAPI_RENDER__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 #include "./../interface/GraphicsDefs.h"
 #include "./../interface/Rect.h"
 #include "./../interface/Polygon.h"

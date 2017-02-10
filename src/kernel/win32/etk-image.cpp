@@ -27,16 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "./../../kernel/Kernel.h"
+#include "./../../storage/Path.h"
+#include "./../../support/StringMe.h"
+#include "./../../support/Errors.h"
+
 #include <windows.h>
-
 #ifdef __CYGWIN__
-#include <sys/cygwin.h"
+#include <sys/cygwin.h>
 #endif
-
-#include "./../kernel/Kernel.h"
-#include "./../storage/Path.h"
-#include "./../support/StringMe.h"
-
 
 IMPEXP_BHAPI void*
 bhapi_load_addon(const char* path)
@@ -53,7 +52,7 @@ bhapi_load_addon(const char* path)
 	filename.ReplaceAll("/", "\\");
 	if(filename.Length() <= 0 || filename.Length() > B_MAXPATH) return NULL;
 
-	return((void*)LoadLibrary(filename.String()));
+    return((void*)LoadLibraryA(filename.String()));
 }
 
 

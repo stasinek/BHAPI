@@ -27,6 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "Handler.h"
+#include "Looper.h"
+#include "Messenger.h"
+#include "MessageFilter.h"
+#include "Message.h"
+#include "MessageQueue.h"
+#include "AppDefs.h"
+
 #include "./../kernel/Kernel.h"
 #include "./../kernel/Debug.h"
 #include "./../support/Errors.h"
@@ -35,17 +43,8 @@
 #include "./../support/Locker.h"
 #include "./../support/Autolock.h"
 #include "./../support/List.h"
-
 #include "./../private/PrivateApplication.h"
 #include "./../private/PrivateHandler.h"
-
-#include "Handler.h"
-#include "Looper.h"
-#include "Messenger.h"
-#include "MessageFilter.h"
-#include "Message.h"
-#include "MessageQueue.h"
-#include "AppDefs.h"
 
 
 class _LOCAL EObserverList {

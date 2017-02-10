@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_NET_ENDPOINT__H
 #define BHAPI_NET_ENDPOINT__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 #include "./../net/NetAddress.h"
 #include "./../net/NetBuffer.h"
 

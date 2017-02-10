@@ -31,7 +31,7 @@
 #ifndef BHAPI_VIEW__H
 #define BHAPI_VIEW__H
 
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 enum {
     B_ENTERED_VIEW = 0,

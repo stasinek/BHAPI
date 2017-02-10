@@ -31,7 +31,9 @@
 #include "etk-win32gdi.h"
 
 #include "./../../support/Autolock.h"
+#include "./../../support/Errors.h"
 #include "./../../support/ClassInfo.h"
+#include "./../../kernel/Debug.h"
 
 
 EWin32GraphicsDrawable::EWin32GraphicsDrawable(EWin32GraphicsEngine *win32Engine, b_uint32 w, b_uint32 h)

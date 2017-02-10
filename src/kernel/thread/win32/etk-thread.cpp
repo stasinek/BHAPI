@@ -27,20 +27,21 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <stdio.h"
+#include "./../../../kernel/Kernel.h"
+#include "./../../../kernel/Debug.h"
+#include "./../../../support/List.h"
+#include "./../../../support/StringMe.h"
+#include "./../../../support/Errors.h"
+#include "./../../../support/SimpleLocker.h"
+#include "./../../../support/SupportDefs.h"
 
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0500
 #endif
 
 #include <windows.h>
-#include <process.h"
-
-#include "./../config.h"
-#include "./../kernel/Kernel.h"
-#include "./../support/List.h"
-#include "./../support/StringMe.h"
-#include "./../support/SimpleLocker.h"
+#include <process.h>
+#include <stdio.h>
 
 #define SECS_BETWEEN_EPOCHS    B_INT64_CONSTANT(11644473600)
 #define SECS_TO_100NS	    B_INT64_CONSTANT(10000000)

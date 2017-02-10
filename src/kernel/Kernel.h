@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_KERNEL__H
 #define BHAPI_KERNEL__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 #include "OS.h"
 
 #ifdef __cplusplus

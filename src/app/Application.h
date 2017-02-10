@@ -30,7 +30,7 @@
 
 #ifndef BHAPI_APPLICATION__H
 #define BHAPI_APPLICATION__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 #include "./../app/Looper.h"
 #include "./../app/MessageRunner.h"
 #include "./../app/Cursor.h"

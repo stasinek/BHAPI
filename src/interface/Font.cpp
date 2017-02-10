@@ -29,7 +29,7 @@
 
 #include "Font.h"
 
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 #include "./../support/Errors.h"
 #include "./../add-ons/font/FontEngine.h"
 #include "./../support/Autolock.h"

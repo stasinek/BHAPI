@@ -30,7 +30,7 @@
 
 #ifndef BHAPI_INVOKER__H
 #define BHAPI_INVOKER__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 #ifdef __cplusplus /* Just for C++ */
 #include "./../support/List.h"

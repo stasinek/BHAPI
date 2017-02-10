@@ -265,13 +265,13 @@ typedef	b_int8	bool;
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
-
+/*
 extern IMPEXP_BHAPI const b_uint8 bhapi_major_version;
 extern IMPEXP_BHAPI const b_uint8 bhapi_minor_version;
 extern IMPEXP_BHAPI const b_uint8 bhapi_micro_version;
 extern IMPEXP_BHAPI const b_uint8 bhapi_interface_age;
 extern IMPEXP_BHAPI const b_uint16 bhapi_binary_age;
-
+*/
 #ifdef __cplusplus
 } /* extern "C" */
 #endif /* __cplusplus */

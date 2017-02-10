@@ -31,7 +31,7 @@
 #ifndef BHAPI_ALERT__H
 #define BHAPI_ALERT__H
 
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 #include "./../interface/InterfaceDefs.h"
 #include "./../interface/Window.h"

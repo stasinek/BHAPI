@@ -31,7 +31,7 @@
 #ifndef BHAPI_LIST_VIEW__H
 #define BHAPI_LIST_VIEW__H
 
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 typedef enum b_list_view_type {
     B_SINGLE_SELECTION_LIST,

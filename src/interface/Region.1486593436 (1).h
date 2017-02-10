@@ -28,16 +28,15 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_REGION__H
-#define BHAPI_REGION__H
+#ifndef __BHAPI_REGION_H__
+#define __BHAPI_REGION_H__
 
-#include <support/SupportDefs.h>
-
-#ifdef __cplusplus /* Just for C++ */
-#include "./../interface/Point.h"
 #include "./../interface/Rect.h"
 #include "./../support/List.h"
-class IMPEXP_BHAPI BRegion {
+
+#ifdef __cplusplus /* Just for C++ */
+
+class _IMPEXP_BHAPI BRegion {
 public:
 	BRegion();
 	BRegion(const BRegion &region);
@@ -101,5 +100,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_REGION__H */
+#endif /* __BHAPI_REGION_H__ */
 

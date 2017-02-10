@@ -28,6 +28,9 @@
  * --------------------------------------------------------------------------*/
 
 #include "MessageRunner.h"
+#include "Application.h"
+#include "AppDefs.h"
+
 #include "./../kernel/Kernel.h"
 #include "./../kernel/Debug.h"
 #include "./../kernel/OS.h"
@@ -35,8 +38,6 @@
 #include "./../support/Autolock.h"
 #include "./../support/Errors.h"
 #include "./../private/PrivateHandler.h"
-#include "Application.h"
-#include "AppDefs.h"
 #include "./../app/Messenger.h"
 #include "./../app/Message.h"
 

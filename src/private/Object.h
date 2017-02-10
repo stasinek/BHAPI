@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_PRIVATE_OBJECT__H
 #define BHAPI_PRIVATE_OBJECT__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

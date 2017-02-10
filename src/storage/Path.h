@@ -30,7 +30,7 @@
 #ifndef BHAPI_PATH__H
 #define BHAPI_PATH__H 
 
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 #ifdef WIN32
 #include <winsock2.h>

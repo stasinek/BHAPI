@@ -36,6 +36,8 @@
 #include "./../../support/StringArray.h"
 #include "./../../interface/Window.h"
 #include "./../../interface/View.h"
+#include "./../../support/Errors.h"
+#include "./../../kernel/Debug.h"
 
 
 BOOL CALLBACK _etkEnumHeightCallBack_(ENUMLOGFONTEX *lplfe, NEWTEXTMETRICEX *lpntme, DWORD FontType, LPARAM lParam)
@@ -47,12 +49,12 @@ BOOL CALLBACK _etkEnumHeightCallBack_(ENUMLOGFONTEX *lplfe, NEWTEXTMETRICEX *lpn
 	fontMsg->FindString("style", &queryStyle);
 	if(queryStyle.Length() <= 0) return FALSE;
 
-	const char *fontStyle = (FontType & TRUETYPB_FONTTYPE ? (const char*)lplfe->elfStyle : "Unknown");
+    const char *fontStyle = (FontType & TRUETYPE_FONTTYPE ? (const char*)lplfe->elfStyle : "Unknown");
 	if(queryStyle != fontStyle) return TRUE;
 
 	BOOL retVal = TRUE;
 
-	if(FontType & TRUETYPB_FONTTYPE)
+    if(FontType & TRUETYPE_FONTTYPE)
 	{
 		fontMsg->AddBool("scalable", true);
 		retVal = FALSE;
@@ -143,7 +145,7 @@ LRESULT _bhapi_create_font(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_ca
 	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
 	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
-	HFONT newFont = CreateFont((int)callback->h, 0, 0, 0, FW_DONTCARE,
+    HFONT newFont = CreateFontA((int)callback->h, 0, 0, 0, FW_DONTCARE,
 				   FALSE, FALSE, FALSE, DEFAULT_CHARSET,
 				   OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
 				   (callback->fontAliasing ? NONANTIALIASED_QUALITY : DEFAULT_QUALITY),
@@ -273,7 +275,7 @@ LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, bhapi_win32_
 			if(aStr != NULL)
 			{
 				SIZE sz;
-				if(GetTextExtentPoint32(*(callback->fontTmpDC), aStr, strlen(aStr), &sz)) cWidth = (b_int32)sz.cx;
+                if(GetTextExtentPoint32A(*(callback->fontTmpDC), aStr, strlen(aStr), &sz)) cWidth = (b_int32)sz.cx;
 				free(aStr);
 			}
 
@@ -461,11 +463,11 @@ LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, bhapi_win32
 			if(aStr != NULL)
 			{
 				SIZE sz;
-				if(GetTextExtentPoint32(callback->pixmap->win32HDC, aStr, strlen(aStr), &sz)) cWidth = (b_int32)sz.cx;
+                if(GetTextExtentPoint32A(callback->pixmap->win32HDC, aStr, strlen(aStr), &sz)) cWidth = (b_int32)sz.cx;
 			}
 
 			if(cWidth > 0 && aStr != NULL)
-				ExtTextOut(callback->pixmap->win32HDC, x, y, 0, NULL, aStr, strlen(aStr), NULL);
+                ExtTextOutA(callback->pixmap->win32HDC, x, y, 0, NULL, aStr, strlen(aStr), NULL);
 			else
 				Rectangle(callback->pixmap->win32HDC, x + 2, y + 2,
 					  x + 3 + (int)(max_c(height, 4) - 4), y + 3 + (int)(max_c(height, 4) - 4));
@@ -563,7 +565,7 @@ BFontWin32::BFontWin32(EWin32GraphicsEngine *win32Engine, const char *wFontname,
 	if(win32Engine == NULL || wFontname == NULL || *wFontname == 0 || strlen(wFontname) >= LF_FACESIZE ||
 	   wFontStyle == NULL || *wFontStyle == 0 || strlen(wFontStyle) >= LF_FACESIZE) return;
 
-	LOGFONT logFont;
+    LOGFONTA logFont;
 	logFont.lfCharSet = DEFAULT_CHARSET;
 	bzero(logFont.lfFaceName, LF_FACESIZE);
 	strncpy(logFont.lfFaceName, wFontname, LF_FACESIZE - 1);
@@ -574,7 +576,7 @@ BFontWin32::BFontWin32(EWin32GraphicsEngine *win32Engine, const char *wFontname,
 	fontMsg.AddString("style", wFontStyle);
 
 	win32Engine->Lock();
-	EnumFontFamiliesEx(win32Engine->win32ScreenHDC, &logFont, (FONTENUMPROC)_etkEnumHeightCallBack_, (LPARAM)&fontMsg, 0);
+    EnumFontFamiliesExA(win32Engine->win32ScreenHDC, &logFont, (FONTENUMPROCA)_etkEnumHeightCallBack_, (LPARAM)&fontMsg, 0);
 	win32Engine->Unlock();
 
 	if(fontMsg.HasBool("scalable"))
@@ -791,7 +793,7 @@ EWin32GraphicsEngine::DestroyFonts()
 }
 
 
-BOOL CALLBACK _etkEnumFamAndStyleCallBack_(ENUMLOGFONTEX *lplfe, NEWTEXTMETRICEX *lpntme, DWORD FontType, LPARAM lParam)
+BOOL CALLBACK _etkEnumFamAndStyleCallBack_(ENUMLOGFONTEXA *lplfe, NEWTEXTMETRICEX *lpntme, DWORD FontType, LPARAM lParam)
 {
 	BMessage *fontMsg = (BMessage*)lParam;
 	if(fontMsg == NULL || lplfe == NULL) return FALSE;
@@ -800,7 +802,7 @@ BOOL CALLBACK _etkEnumFamAndStyleCallBack_(ENUMLOGFONTEX *lplfe, NEWTEXTMETRICEX
 	if(*fontFamily == 0) return TRUE;
 
 	const char *fontStyle = NULL;
-	if(FontType & TRUETYPB_FONTTYPE) fontStyle = (const char*)lplfe->elfStyle;
+    if(FontType & TRUETYPE_FONTTYPE) fontStyle = (const char*)lplfe->elfStyle;
 	if(fontStyle == NULL || *fontStyle == 0) fontStyle = "Unknown";
 
 	BString str;
@@ -808,7 +810,7 @@ BOOL CALLBACK _etkEnumFamAndStyleCallBack_(ENUMLOGFONTEX *lplfe, NEWTEXTMETRICEX
 
 	if(fontMsg->HasString(str.String()) == false)
 	{
-		fontMsg->AddString(str.String(), (FontType & TRUETYPB_FONTTYPE ? "Scalable" : "Fixed"));
+        fontMsg->AddString(str.String(), (FontType & TRUETYPE_FONTTYPE ? "Scalable" : "Fixed"));
 		fontMsg->AddString("etk:font", str);
 	}
 

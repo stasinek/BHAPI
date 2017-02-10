@@ -28,11 +28,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Handler.h"
-#include "Looper.h"
 #include "MessageFilter.h"
 #include "Message.h"
-
+#include "Handler.h"
+#include "Looper.h"
 
 BMessageFilter::BMessageFilter(b_message_delivery delivery, b_message_source source, b_uint32 command, b_filter_hook filter)
 	: fFiltersAny(false), fHandler(NULL)
@@ -163,8 +162,7 @@ BMessageFilter::FiltersAnyCommand() const
 }
 
 
-BLooper*
-BMessageFilter::Looper() const
+BLooper* BMessageFilter::Looper() const
 {
 	if(fHandler == NULL) return NULL;
 	return fHandler->Looper();

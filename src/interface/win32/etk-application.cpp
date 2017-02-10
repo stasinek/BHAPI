@@ -31,12 +31,16 @@
 #include "etk-win32gdi.h"
 
 #include "./../../kernel/Kernel.h"
+#include "./../../kernel/Debug.h"
 #include "./../../support/Locker.h"
+#include "./../../support/Errors.h"
 #include "./../../support/Autolock.h"
 #include "./../../support/StringMe.h"
 #include "./../../interface/InterfaceDefs.h"
 #include "./../../app/Application.h"
+#include "./../../app/AppDefs.h"
 #include "./../../app/Clipboard.h"
+#include "./../../app/Message.h"
 
 static void bhapi_win32_clipboard_changed()
 {
@@ -1627,8 +1631,8 @@ static b_status_t bhapi_graphics_request_async_task(void *arg)
 	win32Engine->Lock();
 
 	if(win32Engine->win32Hinstance == NULL || win32Engine->win32RegisterClass == 0 ||
-	   (win32Engine->win32RequestAsyncWin = CreateWindowEx(0, MAKEINTATOM(win32Engine->win32RegisterClass),
-							       "bhapi_gdi32_request_async_win", WS_DISABLED, 0, 0, 1, 1,
+       (win32Engine->win32RequestAsyncWin = CreateWindowExW(0, MAKEINTATOM(win32Engine->win32RegisterClass),
+                                   TEXT("bhapi_gdi32_request_async_win"), WS_DISABLED, 0, 0, 1, 1,
 							       NULL, NULL, win32Engine->win32Hinstance, NULL)) == NULL)
 	{
 		if(win32Engine->win32RequestAsyncWin != NULL) DestroyWindow(win32Engine->win32RequestAsyncWin);
@@ -1700,7 +1704,7 @@ static b_status_t bhapi_graphics_request_task(void *arg)
 
 	win32Engine->win32ThreadID = GetCurrentThreadId();
 
-	WNDCLASSEX wcApp;
+    WNDCLASSEXA wcApp;
 	wcApp.lpszClassName = bhapi_app->Name();
 	wcApp.hInstance = win32Engine->win32Hinstance;
 	wcApp.lpfnWndProc = _win32_WndProc_;
@@ -1714,12 +1718,12 @@ static b_status_t bhapi_graphics_request_task(void *arg)
 	wcApp.cbWndExtra = 4;
 	wcApp.cbSize = sizeof(wcApp);
 
-	if((win32Engine->win32RegisterClass = RegisterClassEx(&wcApp)) == 0 ||
-	   (win32Engine->WM_BHAPI_MESSAGE = RegisterWindowMessage("WM_BHAPI_MESSAGE")) == 0 ||
-	   (win32Engine->win32RequestWin = CreateWindowEx(0, MAKEINTATOM(win32Engine->win32RegisterClass),
-							  "bhapi_gdi32_request_win", WS_DISABLED, 0, 0, 1, 1,
+    if((win32Engine->win32RegisterClass = RegisterClassExA(&wcApp)) == 0 ||
+       (win32Engine->WM_BHAPI_MESSAGE = RegisterWindowMessageA("WM_BHAPI_MESSAGE")) == 0 ||
+       (win32Engine->win32RequestWin = CreateWindowExW(0, MAKEINTATOM(win32Engine->win32RegisterClass),
+                              TEXT("bhapi_gdi32_request_win"), WS_DISABLED, 0, 0, 1, 1,
 							  NULL, NULL, win32Engine->win32Hinstance, NULL)) == NULL ||
-	   (win32Engine->win32ScreenHDC = CreateDC("DISPLAY", NULL, NULL, NULL)) == NULL)
+       (win32Engine->win32ScreenHDC = CreateDCA("DISPLAY", NULL, NULL, NULL)) == NULL)
 	{
 		BHAPI_WARNING("[GRAPHICS]: %s --- Unable to initalize the GDI32(\"%s\" failed, error code: %u).",
 			    __PRETTY_FUNCTION__,

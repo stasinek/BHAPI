@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_PIXMAP__H
 #define BHAPI_PIXMAP__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 #include "./../interface/Region.h"
 #include "./../render/Render.h"
 

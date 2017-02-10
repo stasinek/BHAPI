@@ -27,16 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "./../../kernel/Kernel.h"
+#include "./../../support/StringMe.h"
+#include "./../../private/PrivateApplication.h"
+
 #include <windows.h>
 
-#include "./../kernel/Kernel.h"
-#include "./../support/StringMe.h"
-
-#include "./../private/PrivateApplication.h"
-
-
 HINSTANCE bhapi_dll_hinstance = NULL;
-
 
 extern "C" {
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)

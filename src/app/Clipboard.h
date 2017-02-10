@@ -31,7 +31,7 @@
 
 #ifndef BHAPI_CLIPBOARD__H
 #define BHAPI_CLIPBOARD__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 #include "./../app/Messenger.h"
 #include "./../support/Locker.h"
 

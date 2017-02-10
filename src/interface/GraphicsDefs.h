@@ -30,7 +30,7 @@
 #ifndef BHAPI_GRAPHICS_DEFS__H
 #define BHAPI_GRAPHICS_DEFS__H
 
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 
 typedef struct b_pattern {

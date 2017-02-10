@@ -34,6 +34,8 @@
 
 #include "./../../add-ons/graphics/GraphicsEngine.h"
 #include "./../../app/MessageFilter.h"
+#include "./../../app/Message.h"
+#include "./../../app/Messenger.h"
 #include "./../../support/Locker.h"
 
 #ifdef WIN32

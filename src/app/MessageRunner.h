@@ -30,7 +30,7 @@
 
 #ifndef BHAPI_MESSAGE_RUNNER__H
 #define BHAPI_MESSAGE_RUNNER__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 #ifdef __cplusplus /* Just for C++ */
 class BMessenger;

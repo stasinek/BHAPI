@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "Message.h"
+#include "Messenger.h"
+#include "Handler.h"
 
 #include "./../kernel/Debug.h"
 #include "./../private/Token.h"
@@ -40,10 +40,9 @@
 #include "./../interface/Point.h"
 #include "./../interface/Rect.h"
 
-
-#include "Message.h"
-#include "Messenger.h"
-#include "Handler.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 b_status_t
 BMessage::BGetInfo(b_type_code type, b_int32 index,

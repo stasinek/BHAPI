@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_NET_ADDRESS__H
 #define BHAPI_NET_ADDRESS__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 #ifndef _WIN32
 #include <sys/types.h>

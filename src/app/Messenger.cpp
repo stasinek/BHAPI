@@ -29,6 +29,7 @@
 
 #include "Messenger.h"
 #include "Message.h"
+
 #include "./../app/Looper.h"
 #include "./../app/AppDefs.h"
 #include "./../kernel/Kernel.h"
@@ -39,9 +40,8 @@
 #include "./../support/Errors.h"
 #include "./../support/Autolock.h"
 #include "./../private/PrivateHandler.h"
+
 #include <stdlib.h>
-
-
 
 BMessenger::BMessenger()
 	: fHandlerToken(B_MAXUINT64), fLooperToken(B_MAXUINT64),

@@ -27,16 +27,16 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <stdio.h"
+#include "./../../../kernel/Kernel.h"
+#include "./../../../kernel/Debug.h"
+#include "./../../../support/StringMe.h"
+#include "./../../../support/Errors.h"
 
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0500
 #endif
-
 #include <windows.h>
-
-#include "./../kernel/Kernel.h"
-#include "./../support/StringMe.h"
+#include <stdio.h>
 
 #define SECS_BETWEEN_EPOCHS    B_INT64_CONSTANT(11644473600)
 #define SECS_TO_100NS	    B_INT64_CONSTANT(10000000)
@@ -124,8 +124,8 @@ public:
 	bhapi_win32_sem_locker_t()
 	{
 		const char *lockerName = "_bhapi_global_";
-		if((iLocker = OpenMutex(MUTEX_ALL_ACCESS, FALSE, lockerName)) == NULL)
-			iLocker = CreateMutex(NULL, FALSE, lockerName);
+        if((iLocker = OpenMutexA(MUTEX_ALL_ACCESS, FALSE, lockerName)) == NULL)
+            iLocker = CreateMutexA(NULL, FALSE, lockerName);
 		if(iLocker == NULL) BHAPI_ERROR("[KERNEL]: Can't initialize global semaphore!");
 	}
 
@@ -231,7 +231,7 @@ static void* bhapi_create_sem_for_IPC(b_int64 count, const char *name, bhapi_are
 	sem_info->InitData();
 	memcpy(sem_info->name, name, (size_t)strlen(name));
 
-	if((sem->Mutex = CreateMutex(NULL, FALSE, locker_ipc_name)) == NULL)
+    if((sem->Mutex = CreateMutexA(NULL, FALSE, locker_ipc_name)) == NULL)
 	{
 		bhapi_delete_area(sem->mapping);
 		_BHAPI_UNLOCK_SEMAPHORE_();
@@ -240,7 +240,7 @@ static void* bhapi_create_sem_for_IPC(b_int64 count, const char *name, bhapi_are
 		delete sem;
 		return NULL;
 	}
-	if((sem->Event = CreateEvent(NULL, FALSE, FALSE, event_ipc_name)) == NULL)
+    if((sem->Event = CreateEventA(NULL, FALSE, FALSE, event_ipc_name)) == NULL)
 	{
 		CloseHandle(sem->Mutex);
 		bhapi_delete_area(sem->mapping);
@@ -300,7 +300,7 @@ IMPEXP_BHAPI void* bhapi_clone_sem(const char *name)
 		return NULL;
 	}
 
-	if((sem->Mutex = OpenMutex(MUTEX_ALL_ACCESS, FALSE, locker_ipc_name)) == NULL)
+    if((sem->Mutex = OpenMutexA(MUTEX_ALL_ACCESS, FALSE, locker_ipc_name)) == NULL)
 	{
 		bhapi_delete_area(sem->mapping);
 		_BHAPI_UNLOCK_SEMAPHORE_();
@@ -309,7 +309,7 @@ IMPEXP_BHAPI void* bhapi_clone_sem(const char *name)
 		delete sem;
 		return NULL;
 	}
-	if((sem->Event = OpenEvent(EVENT_ALL_ACCESS, FALSE, event_ipc_name)) == NULL)
+    if((sem->Event = OpenEventA(EVENT_ALL_ACCESS, FALSE, event_ipc_name)) == NULL)
 	{
 		CloseHandle(sem->Mutex);
 		bhapi_delete_area(sem->mapping);
@@ -368,7 +368,7 @@ static void* bhapi_create_sem_for_local(b_int64 count)
 	if(!sem) return NULL;
 
 	if((sem->semInfo = new bhapi_win32_sem_info()) == NULL ||
-	   (sem->Mutex = CreateMutex(NULL, FALSE, NULL)) == NULL ||
+       (sem->Mutex = CreateMutexA(NULL, FALSE, NULL)) == NULL ||
 	   (sem->Event = CreateEvent(NULL, FALSE, FALSE, NULL)) == NULL)
 	{
 		if(sem->Event) CloseHandle(sem->Event);

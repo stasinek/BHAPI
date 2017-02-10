@@ -30,7 +30,7 @@
 
 #ifndef BHAPI_APPDEFS__H
 #define BHAPI_APPDEFS__H
-#include "./../support/SupportDefs.h"
+#include <support/SupportDefs.h>
 
 /* System Message Codes */
 enum {

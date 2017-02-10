@@ -28,15 +28,15 @@
  * --------------------------------------------------------------------------*/
 
 #include "Invoker.h"
+#include "Application.h"
+#include "AppDefs.h"
+
 #include "./../private/PrivateHandler.h"
 #include "./../app/Messenger.h"
 #include "./../app/Message.h"
-
 #include "./../kernel/OS.h"
 #include "./../kernel/Debug.h"
 #include "./../support/Errors.h"
-#include "Application.h"
-#include "AppDefs.h"
 
 
 typedef struct bhapi_invoker_notify_state {

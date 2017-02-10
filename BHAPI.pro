@@ -309,6 +309,7 @@ QMAKE_CXXFLAGS += -funroll-loops
 QMAKE_CXXFLAGS += -m32 -mfpmath=sse -flto #-O1
 QMAKE_CXXFLAGS += -mpreferred-stack-boundary=8
 QMAKE_CXXFLAGS += -mmmx -msse -msse2 #-msse3
+QMAKE_LFLAGS -= -mthreads -lgdi32
 }
 
 contains(QMAKE_COMPILER_DEFINES, __clang__) {
@@ -342,7 +343,7 @@ QMAKE_CXXFLAGS -= -fno-keep-inline-dllexport
 QMAKE_CXXFLAGS -= -finline-small-functions
 QMAKE_CXXFLAGS -= -pipe
 QMAKE_LFLAGS += -Qunused-arguments -Wno-error=unused-command-line-argument-hard-error-in-future
-QMAKE_LFLAGS -= -mthreads
+QMAKE_LFLAGS -= -mthreads -lgdi32 -lws2_32 -lwsock32 -lkernel32
 }
 
 unix {
@@ -351,3 +352,4 @@ unix {
 }
 
 INCLUDEPATH += ../freetype/include
+INCLUDEPATH += ../BHAPI/src

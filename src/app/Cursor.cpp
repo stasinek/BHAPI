@@ -28,10 +28,7 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "./../BE.h"
-
 #include "Cursor.h"
-
 
 static b_uint32 bhapi_get_cursor_data_bits_length(const b_uint8 *data)
 {
