@@ -30,10 +30,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "./../src/support/StringArray.h"
-#include "./../src/storage/Path.h"
-#include "./../src/storage/File.h"
-#include "./../src/xml/SimpleXmlParser.h"
+#include "./../src/kits/support/StringArray.h"
+#include "./../src/kits/storage/Path.h"
+#include "./../src/kits/storage/File.h"
+#include "./../src/kits/xml/SimpleXmlParser.h"
 
 #define BUFFER_SIZE	1024
 
