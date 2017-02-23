@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_STREAM_IO__H
 #define BHAPI_STREAM_IO__H
-#include "SupportDefs.h"
+#include "../support/SupportDefs.h"
 #include "DataIO.h"
 #ifdef __cplusplus /* Just for C++ */
 class BString;

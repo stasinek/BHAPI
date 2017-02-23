@@ -26,8 +26,9 @@
  * File: etk-image.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_BEOS
 
-#include <be/kernel/image.h"
+#include <be/kernel/image.h>
 
 #include "../kernel/Kernel.h"
 #include "../storage/Path.h"
@@ -75,4 +76,4 @@ bhapi_get_image_symbol(void *data, const char *name, void **ptr)
 
 	return B_OK;
 }
-
+#endif // BHAPI_OS_BEOS

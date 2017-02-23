@@ -30,7 +30,7 @@
 
 #ifndef BHAPI_LIST__H
 #define BHAPI_LIST__H
-#include "SupportDefs.h"
+#include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 class IMPEXP_BHAPI BList {
 public:

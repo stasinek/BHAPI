@@ -26,14 +26,15 @@
  * File: etk-os.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_LINUX
 
-#include "../config.h"
+#include "../support/SupportDefs.h"
 
-#include <stdio.h"
+#include <stdio.h>
 #include <stdlib.h>
 
-#include <unistd.h"
-#include <signal.h"
+#include <unistd.h>
+#include <signal.h>
 
 #include "../kernel/Kernel.h"
 #include "../support/StringArray.h"
@@ -193,5 +194,5 @@ bool bhapi_get_prog_argc_argv_linux(BString &progName, BStringArray &progArgv)
 
 	return retVal;
 }
+#endif
 #endif // BHAPI_OS_LINUX
-

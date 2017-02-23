@@ -31,7 +31,7 @@
 #ifndef BHAPI_MENU_FIELD__H
 #define BHAPI_MENU_FIELD__H
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 class BRect;

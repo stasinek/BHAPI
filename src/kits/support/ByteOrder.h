@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_BYTE_ORDER__H
 #define BHAPI_BYTE_ORDER__H
-#include "SupportDefs.h"
+#include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 
 extern "C" {

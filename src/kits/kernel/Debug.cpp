@@ -73,22 +73,22 @@ IMPEXP_BHAPI void bhapi_debug_log(bhapi_debug_level level, const char *format, v
 #endif // !BHAPI_ENABLE_DEBUG
 	{
 		va_list args;
-		va_copy(args, ap);
+		__va_copy(args, ap);
 		buffer = b_strdup_vprintf(format, args);
 		va_end(args);
 
 		switch(level)
 		{
 			case DEBUG_WARNING:
-				prefix = "Warning: ";
+				prefix = const_cast<char*>("Warning: ");
 				break;
 
 			case DEBUG_ERROR:
-				prefix = "Error: ";
+				prefix = const_cast<char*>("Error: ");
 				break;
 
 			default:
-				prefix = "";
+				prefix = const_cast<char*>("");
 				break;
 		}
 	}

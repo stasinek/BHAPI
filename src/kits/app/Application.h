@@ -30,18 +30,15 @@
 
 #ifndef BHAPI_APPLICATION__H
 #define BHAPI_APPLICATION__H
-#include <kits/support/SupportDefs.h>
+
+#include "../support/SupportDefs.h"
 #include "../app/Looper.h"
 #include "../app/MessageRunner.h"
 #include "../app/Cursor.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
-
 class BClipboard;
 class BGraphicsEngine;
-
-
 class IMPEXP_BHAPI BApplication : public BLooper {
 public:
 	BApplication(const char *signature, bool tryInterface = true);
@@ -112,21 +109,18 @@ private:
 	bool fCursorObscure;
 };
 
-
+#ifdef BHAPI_BUILD_LIBRARY
 inline void BApplication::SetCursor(const void *cursor)
 {
     BCursor theCursor(cursor);
 	SetCursor(&theCursor, true);
 }
-
-
+#endif // BHAPI_BUILD_LIBRARY
 extern IMPEXP_BHAPI BApplication *bhapi_app;
 extern IMPEXP_BHAPI BMessenger bhapi_app_messenger;
 extern IMPEXP_BHAPI BClipboard bhapi_clipboard;
-
 #endif /* __cplusplus */
-
-/*#ifdef WIN32
+/*#ifdef _WIN32
 #ifdef COPYOF_SendMessage
 #define SendMessage COPYOF_SendMessage
 #endif
@@ -135,6 +129,5 @@ extern IMPEXP_BHAPI BClipboard bhapi_clipboard;
 #endif
 #endif
 */
-
 #endif /* BHAPI_APPLICATION__H */
 

@@ -221,6 +221,7 @@ private:
 	void _DrawString(const BFont &font, const char *str, BPoint location, b_int32 length);
 };
 
+#ifdef BHAPI_BUILD_LIBRARY
 
 inline void BTextView::SelectAll()
 {
@@ -232,7 +233,6 @@ inline void BTextView::Deselect()
 {
 	Select(-1, 0, false);
 }
-
 
 inline bool BTextView::IsSelected() const
 {
@@ -251,8 +251,7 @@ inline void BTextView::Clear()
 {
 	Delete();
 }
-
-
+#endif
 #endif /* __cplusplus */
 
 #endif /* BHAPI_TEXT_VIEW__H */

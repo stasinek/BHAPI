@@ -27,8 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <be/kernel/OS.h"
+#ifdef BHAPI_OS_BEOS
 
+#include <be/kernel/OS.h>
 #include "../kernel/Kernel.h"
 
 // return the number of microseconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
@@ -57,4 +58,4 @@ IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void)
 {
 	return (b_bigtime_t)system_time();
 }
-
+#endif // BHAPI_OS_BEOS

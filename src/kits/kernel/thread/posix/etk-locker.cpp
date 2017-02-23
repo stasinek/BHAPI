@@ -26,8 +26,9 @@
  * File: etk-locker.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_LINUX
 
-#include <pthread.h"
+#include <pthread.h>
 #include <errno.h"
 
 #include "../kernel/Kernel.h"
@@ -415,4 +416,4 @@ IMPEXP_BHAPI void bhapi_memory_tracing_unlock(void)
 	pthread_mutex_unlock(&__bhapi_posix_memory_tracing_locker);
 }
 #endif // BHAPI_BUILD_WITH_MEMORY_TRACING
-
+#endif // BHAPI_OS_LINUX

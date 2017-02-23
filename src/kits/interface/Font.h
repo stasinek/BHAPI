@@ -30,7 +30,7 @@
 #ifndef BHAPI_FONT__H
 #define BHAPI_FONT__H
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 #include "../support/StringMe.h"
 
 #define B_FONT_FAMILY_LENGTH	127

@@ -26,8 +26,9 @@
  * File: etk-image.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_LINUX
 
-#include "../config.h"
+#include "../support/SupportDefs.h"
 
 #ifndef HAVE_DLFCN_H
 	#error "no posix dl found!"
@@ -69,4 +70,5 @@ bhapi_get_image_symbol(void *data, const char *name, void **ptr)
 
 	return B_OK;
 }
+#endif // BHAPI_OS_LINUX
 

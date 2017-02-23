@@ -30,11 +30,24 @@
 
 #ifndef BHAPI_STRINGME__H
 #define BHAPI_STRINGME__H
-#include "SupportDefs.h"
+#include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 extern "C" {
 #endif /* __cplusplus */
-#define b_strncasecmp(a,b,c) strncasecmp(a,b,c)
+#ifdef __STRICT_ANSI__
+#define __SA__
+#undef __STRICT_ANSI__
+#endif
+_CRTIMP int __cdecl __MINGW_NOTHROW	b_strncasecmp(const char *a, const char *b, size_t c)
+{
+    return strncmp(a,b,c);
+}
+//#define b_strncasecmp(a,b,c) _strnicmp(a,b,c)
+#ifdef __SA__
+#define __STRICT_ANSI__
+#undef __SA__
+#endif
+
 /* the result must be free by "free" */
 IMPEXP_BHAPI char*		b_strdup(const char *src);
 IMPEXP_BHAPI char*		b_strndup(const char *src, b_int32 length);
@@ -213,7 +226,8 @@ public:
     BString		&Replace(char replaceThis, char withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
     BString 	&ReplaceFirst(const char *replaceThis, const char *withThis);
     BString		&ReplaceLast(const char *replaceThis, const char *withThis);
-    BString		&ReplaceAll(const char *replaceThis, const char *withThis, b_int32 fromOffset = 0);
+    BString		&ReplaceAll(const char *replaceThis, const char *withThis);
+    BString		&ReplaceAll(const char *replaceThis, const char *withThis, b_int32 fromOffset);
     BString		&Replace(const char *replaceThis, const char *withThis, b_int32 maxReplaceCount, b_int32 fromOffset = 0);
     BString		&ReplaceSet(const char *setOfChars, char with);
     BString		&ReplaceSet(const char *setOfChars, const char *with);

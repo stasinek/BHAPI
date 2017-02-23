@@ -11,14 +11,67 @@ Build Log
 </h3>
 </pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
 Command Lines
-</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre></pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>This edition of Visual C++ does not support the optimizing compiler.
+This edition of Visual C++ does not support the optimizing compiler.
+Creating temporary file "c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\build\win32\Bhapi_vcc\Debug\RSP000001.rsp" with contents
+[
+/D "_WINDLL" /D "_UNICODE" /D "UNICODE" /FD /EHsc /GS /YX"stdafx.h" /Fp"Debug/BHAPI_VCC.pch" /Fo"Debug/" /Fd"Debug/vc70.pdb" /W4 /c /Wp64 /Z7 /TP
+"\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\src\kits\support\StringMe.cpp"
+"\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\src\kits\support\StringArray.cpp"
+"\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\src\kits\support\StreamIO.cpp"
+"\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\src\kits\support\SimpleLocker.cpp"
+"\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\src\kits\support\Locker.cpp"
+"\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\src\kits\support\List.cpp"
+"\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\src\kits\support\Flattenable.cpp"
+"\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\src\kits\support\DataIO.cpp"
+"\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\bhapi.cpp"
+"\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\src\kits\support\Archivable.cpp"
+]
+Creating command line "cl.exe @"c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\build\win32\Bhapi_vcc\Debug\RSP000001.rsp" /nologo"
+Creating temporary file "c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\build\win32\Bhapi_vcc\Debug\RSP000002.rsp" with contents
+[
+/D "_WINDLL" /D "_UNICODE" /D "UNICODE" /FD /EHsc /GS /YX"stdafx.h" /Fp"Debug/BHAPI_VCC.pch" /Fo"Debug/" /Fd"Debug/vc70.pdb" /W4 /c /Wp64 /Z7 /TC
+"\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\src\kits\support\ByteOrder.c"
+]
+Creating command line "cl.exe @"c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\build\win32\Bhapi_vcc\Debug\RSP000002.rsp" /nologo"
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
 Output Window
-</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>There is no build command line to execute.
-Performing Makefile project actions
-BHAPI_VCC : error PRJ0003 : Error spawning ''.
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Compiling...
+StringMe.cpp
+c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\StringMe.h(41) : error C2146: syntax error : missing ';' before identifier 'b_strncasecmp'
+c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\StringMe.h(41) : warning C4229: anachronism used : modifiers on data are ignored
+c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\../kernel\Debug.h(32) : fatal error C1083: Cannot open include file: 'kits/support/SupportDefs.h': No such file or directory
+StringArray.cpp
+c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\StringMe.h(41) : error C2146: syntax error : missing ';' before identifier 'b_strncasecmp'
+c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\StringMe.h(41) : warning C4229: anachronism used : modifiers on data are ignored
+StreamIO.cpp
+c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\../support\StringMe.h(41) : error C2146: syntax error : missing ';' before identifier 'b_strncasecmp'
+c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\../support\StringMe.h(41) : warning C4229: anachronism used : modifiers on data are ignored
+c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\../private\StandardIO.h(32) : fatal error C1083: Cannot open include file: 'kits/support/SupportDefs.h': No such file or directory
+SimpleLocker.cpp
+c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\../kernel\Kernel.h(32) : fatal error C1083: Cannot open include file: 'kits/support/SupportDefs.h': No such file or directory
+Locker.cpp
+c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\../kernel\Kernel.h(32) : fatal error C1083: Cannot open include file: 'kits/support/SupportDefs.h': No such file or directory
+List.cpp
+Flattenable.cpp
+DataIO.cpp
+\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\DataIO.cpp(84) : warning C4245: 'return' : conversion from '' to 'b_size_t', signed/unsigned mismatch
+\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\DataIO.cpp(90) : warning C4245: 'return' : conversion from '' to 'b_size_t', signed/unsigned mismatch
+\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\DataIO.cpp(100) : warning C4245: 'return' : conversion from '' to 'b_size_t', signed/unsigned mismatch
+\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\DataIO.cpp(108) : warning C4245: 'return' : conversion from '' to 'b_size_t', signed/unsigned mismatch
+\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\DataIO.cpp(113) : warning C4245: 'return' : conversion from '' to 'b_size_t', signed/unsigned mismatch
+\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\DataIO.cpp(241) : warning C4245: 'return' : conversion from '' to 'b_size_t', signed/unsigned mismatch
+\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\DataIO.cpp(247) : warning C4245: 'return' : conversion from '' to 'b_size_t', signed/unsigned mismatch
+\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\DataIO.cpp(257) : warning C4245: 'return' : conversion from '' to 'b_size_t', signed/unsigned mismatch
+\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\DataIO.cpp(258) : warning C4245: 'return' : conversion from '' to 'b_size_t', signed/unsigned mismatch
+\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\DataIO.cpp(265) : warning C4245: 'return' : conversion from '' to 'b_size_t', signed/unsigned mismatch
+bhapi.cpp
+c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\app\AppDefs.h(33) : fatal error C1083: Cannot open include file: 'kits/support/SupportDefs.h': No such file or directory
+Archivable.cpp
+c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\BHAPI\src\kits\support\../app\Message.h(33) : fatal error C1083: Cannot open include file: 'kits/support/SupportDefs.h': No such file or directory
 </pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
 Results
 </font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
 Build log was saved at "file://c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\Bhapi\build\win32\Bhapi_vcc\Debug\BuildLog.htm"
-BHAPI_VCC - 1 error(s), 0 warning(s)</pre></table><table   width=100% height=20 bgcolor=#CFCFE5><tr><td><font face=arial size=+2>
+BHAPI_VCC - 9 error(s), 13 warning(s)</pre></table><table   width=100% height=20 bgcolor=#CFCFE5><tr><td><font face=arial size=+2>
 </font></table></body></html>

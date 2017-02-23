@@ -26,7 +26,7 @@
  * File: etk-window.cpp
  *
  * --------------------------------------------------------------------------*/
-#ifdef BEOS
+#ifdef BHAPI_OS_BEOS
 
 #include <be/BeBuild.h>
 #include <be/app/AppDefs.h>

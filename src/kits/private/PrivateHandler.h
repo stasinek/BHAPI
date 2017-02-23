@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_PRIVATE_HANDLER__H
 #define BHAPI_PRIVATE_HANDLER__H
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 #include "../support/Locker.h"
 #include "../app/Looper.h"
 

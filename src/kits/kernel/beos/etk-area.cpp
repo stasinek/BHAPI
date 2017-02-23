@@ -26,8 +26,9 @@
  * File: etk-area.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_BEOS
 
-#include <be/kernel/OS.h"
+#include <be/kernel/OS.h>
 
 #include "../kernel/Kernel.h"
 #include "../support/StringMe.h"
@@ -432,3 +433,4 @@ bhapi_set_area_protection(void *data, b_uint32 new_protection)
 
 	return B_OK;
 }
+#endif // BEOS

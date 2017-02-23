@@ -26,8 +26,9 @@
  * File: etk-thread.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_BEOS
 
-#include <be/kernel/OS.h"
+#include <be/kernel/OS.h>
 
 #include "../kernel/Kernel.h"
 #include "../support/SimpleLocker.h"
@@ -819,4 +820,6 @@ IMPEXP_BHAPI b_int64 bhapi_get_current_team_id(void)
 	if(get_thread_info(find_thread(NULL), &threadInfo) != B_OK) return B_INT64_CONSTANT(0);
 	return (b_int64)threadInfo.team;
 }
+#endif
+
 

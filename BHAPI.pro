@@ -7,7 +7,11 @@
 TARGET = be
 TEMPLATE = lib
 DEFINES += BHAPI_LIBRARY
-CONFIG += windows shared dll
+DEFINES += BHAPI_BUILD_LIBRARY
+DEFINES += BHAPI_OS_WIN32
+DEFINES += BHAPI_GRAPHICS_WIN32_BUILT_IN
+
+CONFIG += windows shared
 CONFIG -= app_bundle
 CONFIG -= qt
 INCLUDEPATH += ..
@@ -319,8 +323,8 @@ QMAKE_CXXFLAGS += -m32 -mfpmath=sse -flto #-O1
 QMAKE_CXXFLAGS += -mpreferred-stack-boundary=8
 QMAKE_CXXFLAGS += -mmmx -msse -msse2 #-msse3
 
-QMAKE_CXXFLAGS += -fno-leading-underscore
-QMAKE_CFLAGS   += -fno-leading-underscore
+#QMAKE_CXXFLAGS += -fno-leading-underscore
+#QMAKE_CFLAGS   += -fno-leading-underscore
 }
 
 contains(QMAKE_COMPILER_DEFINES, __clang__) {

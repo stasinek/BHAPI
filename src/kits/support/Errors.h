@@ -28,7 +28,7 @@
  * --------------------------------------------------------------------------*/
 #ifndef BHAPI_ERRORS__H
 #define BHAPI_ERRORS__H
-#include "SupportDefs.h"
+#include "../support/SupportDefs.h"
 
 /* Error baselines */
 #define B_GENERAL_ERROR_BASE	INT_MIN

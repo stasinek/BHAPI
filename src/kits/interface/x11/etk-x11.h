@@ -32,7 +32,7 @@
 
 #ifdef LINUX
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>

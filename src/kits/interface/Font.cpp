@@ -29,15 +29,15 @@
 
 #include "Font.h"
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 #include "../support/Errors.h"
 #include "../add-ons/font/FontEngine.h"
 #include "../support/Autolock.h"
 #include "../kernel/Debug.h"
 
-extern IMPEXP_BHAPI const BFont* bhapi_plain_font = NULL;
-extern IMPEXP_BHAPI const BFont* bhapi_bold_font = NULL;
-extern IMPEXP_BHAPI const BFont* bhapi_fixed_font = NULL;
+EXP_BHAPI const BFont* bhapi_plain_font = NULL;
+EXP_BHAPI const BFont* bhapi_bold_font = NULL;
+EXP_BHAPI const BFont* bhapi_fixed_font = NULL;
 
 static BLocker bhapi_font_info_locker;
 

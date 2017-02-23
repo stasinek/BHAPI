@@ -274,8 +274,8 @@ BSimpleXmlNode::PrintToStream() const
 	}
 	for(b_int32 i = 0; i < fNodes.CountItems(); i++)
 	{
-		BSimpleXmlNode* node = (BSimpleXmlNode*)fNodes.ItemAt(i);
-		if(node) node->PrintToStream();
+        BSimpleXmlNode* t_node = (BSimpleXmlNode*)fNodes.ItemAt(i);
+        if(t_node) t_node->PrintToStream();
 	}
 	if(nSuperNode == 0) BHAPI_OUTPUT("==============================================================\n", this);
 }

@@ -26,14 +26,15 @@
  * File: etk-semaphore-mach.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_LINUX
 
-#include <pthread.h"
-#include <semaphore.h"
-#include <time.h"
-#include <errno.h"
+#include <pthread.h>
+#include <semaphore.h>
+#include <time.h>
+#include <errno.h>
 
-#include <mach/mach.h"
-#include <mach/semaphore.h"
+#include <mach/mach.h>
+#include <mach/semaphore.h>
 
 #include "../kernel/Kernel.h"
 #include "../support/StringMe.h"
@@ -721,4 +722,4 @@ IMPEXP_BHAPI b_status_t bhapi_get_sem_count(void *data, b_int64 *count)
 
 	return B_OK;
 }
-
+#endif // BHAPI_OS_LINUX

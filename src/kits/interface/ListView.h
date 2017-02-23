@@ -31,7 +31,7 @@
 #ifndef BHAPI_LIST_VIEW__H
 #define BHAPI_LIST_VIEW__H
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 typedef enum b_list_view_type {
     B_SINGLE_SELECTION_LIST,
@@ -74,6 +74,7 @@ public:
 	// Empty functions END
 
     void			Select(b_int32 index, bool extend = false);
+    void			Select(b_int32 start, b_int32 finish);
     void			Select(b_int32 start, b_int32 finish, bool extend = false);
     bool			IsItemSelected(b_int32 index) const;
     b_int32			CurrentSelection(b_int32 index = 0) const;

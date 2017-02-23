@@ -48,13 +48,15 @@
 
 _LOCAL BCursor _B_CURSOR_SYSTEM_DEFAULT(NULL);
 
-IMPEXP_BHAPI BApplication *bhapi_app = NULL;
-IMPEXP_BHAPI BMessenger bhapi_app_messenger;
-IMPEXP_BHAPI BClipboard bhapi_clipboard("system");
-IMPEXP_BHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT = &_B_CURSOR_SYSTEM_DEFAULT;
+EXP_BHAPI BApplication *bhapi_app = NULL;
+EXP_BHAPI BMessenger bhapi_app_messenger;
+EXP_BHAPI BClipboard bhapi_clipboard("system");
+EXP_BHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT = &_B_CURSOR_SYSTEM_DEFAULT;
 
-BList BApplication::sRunnerList;
-b_bigtime_t BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(0);
+#ifdef BHAPI_BUILD_LIBRARY
+EXP_BHAPI BList BApplication::sRunnerList;
+EXP_BHAPI b_bigtime_t BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(0);
+#endif // BHAPI_BUILD_LIBRARY
 
 extern bool bhapi_font_init(void);
 extern void bhapi_font_cancel(void);
@@ -312,6 +314,7 @@ BApplication::DispatchMessage(BMessage *msg, BHandler *target)
 	}
 	else
 	{
+
 		BLooper::DispatchMessage(msg, target);
 	}
 }

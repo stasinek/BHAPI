@@ -31,7 +31,7 @@
 #ifndef BHAPI_SIMPLE_LOCKER__H
 #define BHAPI_SIMPLE_LOCKER__H
 
-#include "SupportDefs.h"
+#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 class IMPEXP_BHAPI BSimpleLocker {

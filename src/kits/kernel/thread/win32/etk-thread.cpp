@@ -26,6 +26,7 @@
  * File: etk-thread.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_WIN32
 
 #include "../../../kernel/Kernel.h"
 #include "../../../kernel/Debug.h"
@@ -222,7 +223,7 @@ static void bhapi_unlock_thread_inter(bhapi_win32_thread_t *thread)
 }
 
 
-#ifndef BHAPI_OS_CYGWIN 
+#ifndef BHAPI_OS_CYGWIN
 unsigned _stdcall bhapi_spawn_thread_func(void *data)
 #else
 DWORD WINAPI bhapi_spawn_thread_func(void *data)
@@ -352,7 +353,7 @@ IMPEXP_BHAPI void* bhapi_create_thread(b_thread_func threadFunction,
 	thread->callback.func = threadFunction;
 	thread->callback.user_data = arg;
 
-#ifndef BHAPI_OS_CYGWIN 
+#ifndef BHAPI_OS_CYGWIN
 	unsigned winThreadId;
 	if((thread->handle = (HANDLE)_beginthreadex(NULL, 0x40000, bhapi_spawn_thread_func, (void*)thread,
 						    CREATE_SUSPENDED, &winThreadId)) == NULL)
@@ -701,7 +702,7 @@ IMPEXP_BHAPI void bhapi_exit_thread(b_status_t status)
 
 	bhapi_delete_thread(priThread);
 
-#ifndef BHAPI_OS_CYGWIN 
+#ifndef BHAPI_OS_CYGWIN
 	_endthreadex(0);
 #else
 	ExitThread(0);
@@ -889,4 +890,4 @@ IMPEXP_BHAPI b_int64 bhapi_get_current_team_id(void)
 {
 	return((b_int64)GetCurrentProcessId());
 }
-
+#endif // BHAPI_OS_WIN32

@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
- * 
+ *
  * BHAPI++ ---BeOS/Haiku API previously ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,16 +22,16 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: TextEditable.h
  * Description: BTextEditable --- a single-line editable field
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #ifndef BHAPI_TEXT_EDITABLE__H
 #define BHAPI_TEXT_EDITABLE__H
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 #include "../interface/InterfaceDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
@@ -125,7 +125,7 @@ private:
     float *_CharWidths(const BFont &font, const char *str, b_int32 *count) const;
 	void _DrawString(const char *str, BPoint location);
 };
-
+#ifdef BHAPI_BUILD_LIBRARY
 
 inline void BTextEditable::MakeEmpty()
 {
@@ -138,7 +138,6 @@ inline void BTextEditable::SelectAll()
 	Select(0, -1);
 }
 
-
 inline void BTextEditable::Deselect()
 {
 	Select(-1, 0);
@@ -150,7 +149,7 @@ inline bool BTextEditable::IsSelected() const
 	return GetSelection(NULL, NULL);
 }
 
-
+#endif // BHAPI_BUILD_LIBRARY
 #endif /* __cplusplus */
 
 #endif /* BHAPI_TEXT_EDITABLE__H */

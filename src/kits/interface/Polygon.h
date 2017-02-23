@@ -66,7 +66,7 @@ private:
 	bool fNeededToUpdateFrame;
 };
 
-
+#ifdef BHAPI_BUILD_LIBRARY
 inline bool BPolygon::AddPoint(const BPoint &aPt, bool updateFrame)
 {
 	return AddPoints(&aPt, 1, updateFrame);
@@ -77,7 +77,7 @@ inline void BPolygon::RemovePoint(b_int32 index, bool updateFrame)
 {
 	RemovePoints(index, index, updateFrame);
 }
-
+#endif // BHAPI_BUILD_LIBRARY
 
 #endif /* __cplusplus */
 

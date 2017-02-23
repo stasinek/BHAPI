@@ -142,7 +142,7 @@ BMessageQueue::RemoveMessage(BMessage *an_event)
 BMessage*
 BMessageQueue::NextMessage()
 {
-	return((BMessage*)fMessagesList.RemoveItem(0));
+	return((BMessage*)fMessagesList.RemoveItems(0,1));
 }
 
 

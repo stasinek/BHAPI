@@ -27,7 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifdef BEOS
+#ifdef BHAPI_OS_BEOS
+
 #include "etk-beos-graphics.h"
 #endif /* BEOS */
 

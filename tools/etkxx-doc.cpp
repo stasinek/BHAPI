@@ -33,6 +33,7 @@
 #include "./../src/kits/support/StringArray.h"
 #include "./../src/kits/storage/Path.h"
 #include "./../src/kits/storage/File.h"
+#include "./../src/kits/kernel/Debug.h"
 #include "./../src/kits/xml/SimpleXmlParser.h"
 
 #define BUFFER_SIZE	1024

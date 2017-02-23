@@ -59,7 +59,7 @@ static FT_Library _bhapi_ft2_library_;
 static bool _bhapi_ft2_initialized_ = false;
 static BLocker bhapi_ft2_font_locker;
 
-IMPEXP_BHAPI bool bhapi_font_freetype2_init(void)
+EXP_BHAPI bool bhapi_font_freetype2_init(void)
 {
 	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
@@ -78,7 +78,7 @@ IMPEXP_BHAPI bool bhapi_font_freetype2_init(void)
 }
 
 
-IMPEXP_BHAPI bool bhapi_font_freetype2_is_valid(void)
+EXP_BHAPI bool bhapi_font_freetype2_is_valid(void)
 {
 	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
@@ -86,7 +86,7 @@ IMPEXP_BHAPI bool bhapi_font_freetype2_is_valid(void)
 }
 
 
-IMPEXP_BHAPI void bhapi_font_freetype2_cancel(void)
+EXP_BHAPI void bhapi_font_freetype2_cancel(void)
 {
 	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
 
@@ -506,7 +506,7 @@ BFontFT2::RenderString(const char *string, b_int32 *width, b_int32 *height, bool
 }
 
 
-IMPEXP_BHAPI bool bhapi_update_freetype2_font_families(bool check_only)
+EXP_BHAPI bool bhapi_update_freetype2_font_families(bool check_only)
 {
     BString fonts_dirs;
 

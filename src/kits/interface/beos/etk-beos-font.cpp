@@ -26,7 +26,8 @@
  * File: etk-beos-font.cpp
  *
  * --------------------------------------------------------------------------*/
-#ifdef BEOS
+#ifdef BHAPI_OS_BEOS
+
 
 #include <be/app/AppDefs.h>
 #include <be/interface/Font.h>

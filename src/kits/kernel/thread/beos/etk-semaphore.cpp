@@ -26,8 +26,9 @@
  * File: etk-semaphore.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_BEOS
 
-#include <be/kernel/OS.h"
+#include <be/kernel/OS.h>
 
 #include "../kernel/Kernel.h"
 #include "../support/StringMe.h"
@@ -736,4 +737,5 @@ IMPEXP_BHAPI b_status_t bhapi_get_sem_count(void *data, b_int64 *count)
 
 	return B_OK;
 }
+#endif
 

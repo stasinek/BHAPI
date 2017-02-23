@@ -1,17 +1,17 @@
 # Project: BHAPI
 # Makefile created by Dev-C++ 5.11
 
-CPP      = g++.exe
-CC       = gcc.exe
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = bhapi.o src/support/Flattenable.o src/support/SimpleLocker.o src/support/Locker.o src/support/Archivable.o src/support/ByteOrder.o src/support/StreamIO.o src/support/DataIO.o src/support/StringArray.o src/support/List.o src/support/StringMe.o
-LINKOBJ  = bhapi.o src/support/Flattenable.o src/support/SimpleLocker.o src/support/Locker.o src/support/Archivable.o src/support/ByteOrder.o src/support/StreamIO.o src/support/DataIO.o src/support/StringArray.o src/support/List.o src/support/StringMe.o
-LIBS     = -L"C:/hubiC/IDE/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -lopengl32 -lglu32 -m32
+OBJ      = bhapi.o src/kits/support/Flattenable.o src/kits/support/SimpleLocker.o src/kits/support/Locker.o src/kits/support/Archivable.o src/kits/support/ByteOrder.o src/kits/support/StreamIO.o src/kits/support/DataIO.o src/kits/support/StringArray.o src/kits/support/List.o src/kits/support/StringMe.o src/kits/xml/SimpleXmlParser.o src/kits/storage/Node.o src/kits/storage/VolumeRoster.o src/kits/storage/Path.o src/kits/storage/Volume.o src/kits/storage/FindDirectory.o src/kits/storage/Entry.o src/kits/storage/Directory.o src/kits/storage/File.o src/kits/storage/FilePanel.o src/kits/render/ArcGenerator.o src/kits/render/Pixmap.o src/kits/render/LineGenerator.o src/kits/render/Render.o src/kits/net/NetDebug.o src/kits/net/NetAddress.o src/kits/net/NetBuffer.o src/kits/net/NetEndpoint.o src/kits/private/StandardIO.o src/kits/private/Object.o src/kits/private/Memory.o src/kits/private/PrivateApplication.o src/kits/private/MessageBody.o src/kits/private/PrivateHandler.o src/kits/private/Token.o src/kits/kernel/Debug.o src/kits/kernel/etk-port.o src/kits/kernel/win32/etk-image.o src/kits/kernel/win32/etk-timefuncs.o src/kits/kernel/win32/etk-os.o src/kits/kernel/win32/etk-area.o
+LINKOBJ  = bhapi.o src/kits/support/Flattenable.o src/kits/support/SimpleLocker.o src/kits/support/Locker.o src/kits/support/Archivable.o src/kits/support/ByteOrder.o src/kits/support/StreamIO.o src/kits/support/DataIO.o src/kits/support/StringArray.o src/kits/support/List.o src/kits/support/StringMe.o src/kits/xml/SimpleXmlParser.o src/kits/storage/Node.o src/kits/storage/VolumeRoster.o src/kits/storage/Path.o src/kits/storage/Volume.o src/kits/storage/FindDirectory.o src/kits/storage/Entry.o src/kits/storage/Directory.o src/kits/storage/File.o src/kits/storage/FilePanel.o src/kits/render/ArcGenerator.o src/kits/render/Pixmap.o src/kits/render/LineGenerator.o src/kits/render/Render.o src/kits/net/NetDebug.o src/kits/net/NetAddress.o src/kits/net/NetBuffer.o src/kits/net/NetEndpoint.o src/kits/private/StandardIO.o src/kits/private/Object.o src/kits/private/Memory.o src/kits/private/PrivateApplication.o src/kits/private/MessageBody.o src/kits/private/PrivateHandler.o src/kits/private/Token.o src/kits/kernel/Debug.o src/kits/kernel/etk-port.o src/kits/kernel/win32/etk-image.o src/kits/kernel/win32/etk-timefuncs.o src/kits/kernel/win32/etk-os.o src/kits/kernel/win32/etk-area.o
+LIBS     = -L"C:/hubiC/IDE/Dev-Cpp/MinGW64/lib32" -L"C:/hubiC/IDE/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -m32 -g3
 INCS     = -I"C:/hubiC/IDE/Dev-Cpp/MinGW64/include" -I"C:/hubiC/IDE/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/hubiC/IDE/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/hubiC/IDE/Dev-Cpp/MinGW64/include" -I"C:/hubiC/IDE/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/hubiC/IDE/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/hubiC/IDE/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
 BIN      = BHAPI_DEV.dll
-CXXFLAGS = $(CXXINCS) -m32 -DBUILDING_DLL=1
-CFLAGS   = $(INCS) -m32 -DBUILDING_DLL=1
+CXXFLAGS = $(CXXINCS) -march=pentium4 -msse -m32 -Wall -Wextra -g3 -DBUILDING_DLL=1 -Wall -Wno-write-strings -Wno-multichar -Wno-unused-variable  -Wno-unused-parameter  -Wno-unused-value  -Wno-unused-label -Wno-unused-but-set-variable -Wattributes  -Winline  -Wshadow  -Wunknown-pragmas
+CFLAGS   = $(INCS) -march=pentium4 -msse -m32 -Wall -Wextra -g3 -DBUILDING_DLL=1 -Wall -Wno-write-strings -Wno-multichar -Wno-unused-variable  -Wno-unused-parameter  -Wno-unused-value  -Wno-unused-label -Wno-unused-but-set-variable -Wattributes  -Winline  -Wshadow  -Wunknown-pragmas
 RM       = rm.exe -f
 DEF      = libBHAPI_DEV.def
 STATIC   = libBHAPI_DEV.a
@@ -29,32 +29,125 @@ $(BIN): $(LINKOBJ)
 bhapi.o: bhapi.cpp
 	$(CPP) -c bhapi.cpp -o bhapi.o $(CXXFLAGS)
 
-src/support/Flattenable.o: src/support/Flattenable.cpp
-	$(CPP) -c src/support/Flattenable.cpp -o src/support/Flattenable.o $(CXXFLAGS)
+src/kits/support/Flattenable.o: src/kits/support/Flattenable.cpp
+	$(CPP) -c src/kits/support/Flattenable.cpp -o src/kits/support/Flattenable.o $(CXXFLAGS)
 
-src/support/SimpleLocker.o: src/support/SimpleLocker.cpp
-	$(CPP) -c src/support/SimpleLocker.cpp -o src/support/SimpleLocker.o $(CXXFLAGS)
+src/kits/support/SimpleLocker.o: src/kits/support/SimpleLocker.cpp
+	$(CPP) -c src/kits/support/SimpleLocker.cpp -o src/kits/support/SimpleLocker.o $(CXXFLAGS)
 
-src/support/Locker.o: src/support/Locker.cpp
-	$(CPP) -c src/support/Locker.cpp -o src/support/Locker.o $(CXXFLAGS)
+src/kits/support/Locker.o: src/kits/support/Locker.cpp
+	$(CPP) -c src/kits/support/Locker.cpp -o src/kits/support/Locker.o $(CXXFLAGS)
 
-src/support/Archivable.o: src/support/Archivable.cpp
-	$(CPP) -c src/support/Archivable.cpp -o src/support/Archivable.o $(CXXFLAGS)
+src/kits/support/Archivable.o: src/kits/support/Archivable.cpp
+	$(CPP) -c src/kits/support/Archivable.cpp -o src/kits/support/Archivable.o $(CXXFLAGS)
 
-src/support/ByteOrder.o: src/support/ByteOrder.c
-	$(CPP) -c src/support/ByteOrder.c -o src/support/ByteOrder.o $(CXXFLAGS)
+src/kits/support/ByteOrder.o: src/kits/support/ByteOrder.c
+	$(CPP) -c src/kits/support/ByteOrder.c -o src/kits/support/ByteOrder.o $(CXXFLAGS)
 
-src/support/StreamIO.o: src/support/StreamIO.cpp
-	$(CPP) -c src/support/StreamIO.cpp -o src/support/StreamIO.o $(CXXFLAGS)
+src/kits/support/StreamIO.o: src/kits/support/StreamIO.cpp
+	$(CPP) -c src/kits/support/StreamIO.cpp -o src/kits/support/StreamIO.o $(CXXFLAGS)
 
-src/support/DataIO.o: src/support/DataIO.cpp
-	$(CPP) -c src/support/DataIO.cpp -o src/support/DataIO.o $(CXXFLAGS)
+src/kits/support/DataIO.o: src/kits/support/DataIO.cpp
+	$(CPP) -c src/kits/support/DataIO.cpp -o src/kits/support/DataIO.o $(CXXFLAGS)
 
-src/support/StringArray.o: src/support/StringArray.cpp
-	$(CPP) -c src/support/StringArray.cpp -o src/support/StringArray.o $(CXXFLAGS)
+src/kits/support/StringArray.o: src/kits/support/StringArray.cpp
+	$(CPP) -c src/kits/support/StringArray.cpp -o src/kits/support/StringArray.o $(CXXFLAGS)
 
-src/support/List.o: src/support/List.cpp
-	$(CPP) -c src/support/List.cpp -o src/support/List.o $(CXXFLAGS)
+src/kits/support/List.o: src/kits/support/List.cpp
+	$(CPP) -c src/kits/support/List.cpp -o src/kits/support/List.o $(CXXFLAGS)
 
-src/support/StringMe.o: src/support/StringMe.cpp
-	$(CPP) -c src/support/StringMe.cpp -o src/support/StringMe.o $(CXXFLAGS)
+src/kits/support/StringMe.o: src/kits/support/StringMe.cpp
+	$(CPP) -c src/kits/support/StringMe.cpp -o src/kits/support/StringMe.o $(CXXFLAGS)
+
+src/kits/xml/SimpleXmlParser.o: src/kits/xml/SimpleXmlParser.cpp
+	$(CPP) -c src/kits/xml/SimpleXmlParser.cpp -o src/kits/xml/SimpleXmlParser.o $(CXXFLAGS)
+
+src/kits/storage/Node.o: src/kits/storage/Node.cpp
+	$(CPP) -c src/kits/storage/Node.cpp -o src/kits/storage/Node.o $(CXXFLAGS)
+
+src/kits/storage/VolumeRoster.o: src/kits/storage/VolumeRoster.cpp
+	$(CPP) -c src/kits/storage/VolumeRoster.cpp -o src/kits/storage/VolumeRoster.o $(CXXFLAGS)
+
+src/kits/storage/Path.o: src/kits/storage/Path.cpp
+	$(CPP) -c src/kits/storage/Path.cpp -o src/kits/storage/Path.o $(CXXFLAGS)
+
+src/kits/storage/Volume.o: src/kits/storage/Volume.cpp
+	$(CPP) -c src/kits/storage/Volume.cpp -o src/kits/storage/Volume.o $(CXXFLAGS)
+
+src/kits/storage/FindDirectory.o: src/kits/storage/FindDirectory.cpp
+	$(CPP) -c src/kits/storage/FindDirectory.cpp -o src/kits/storage/FindDirectory.o $(CXXFLAGS)
+
+src/kits/storage/Entry.o: src/kits/storage/Entry.cpp
+	$(CPP) -c src/kits/storage/Entry.cpp -o src/kits/storage/Entry.o $(CXXFLAGS)
+
+src/kits/storage/Directory.o: src/kits/storage/Directory.cpp
+	$(CPP) -c src/kits/storage/Directory.cpp -o src/kits/storage/Directory.o $(CXXFLAGS)
+
+src/kits/storage/File.o: src/kits/storage/File.cpp
+	$(CPP) -c src/kits/storage/File.cpp -o src/kits/storage/File.o $(CXXFLAGS)
+
+src/kits/storage/FilePanel.o: src/kits/storage/FilePanel.cpp
+	$(CPP) -c src/kits/storage/FilePanel.cpp -o src/kits/storage/FilePanel.o $(CXXFLAGS)
+
+src/kits/render/ArcGenerator.o: src/kits/render/ArcGenerator.cpp
+	$(CPP) -c src/kits/render/ArcGenerator.cpp -o src/kits/render/ArcGenerator.o $(CXXFLAGS)
+
+src/kits/render/Pixmap.o: src/kits/render/Pixmap.cpp
+	$(CPP) -c src/kits/render/Pixmap.cpp -o src/kits/render/Pixmap.o $(CXXFLAGS)
+
+src/kits/render/LineGenerator.o: src/kits/render/LineGenerator.cpp
+	$(CPP) -c src/kits/render/LineGenerator.cpp -o src/kits/render/LineGenerator.o $(CXXFLAGS)
+
+src/kits/render/Render.o: src/kits/render/Render.cpp
+	$(CPP) -c src/kits/render/Render.cpp -o src/kits/render/Render.o $(CXXFLAGS)
+
+src/kits/net/NetDebug.o: src/kits/net/NetDebug.cpp
+	$(CPP) -c src/kits/net/NetDebug.cpp -o src/kits/net/NetDebug.o $(CXXFLAGS)
+
+src/kits/net/NetAddress.o: src/kits/net/NetAddress.cpp
+	$(CPP) -c src/kits/net/NetAddress.cpp -o src/kits/net/NetAddress.o $(CXXFLAGS)
+
+src/kits/net/NetBuffer.o: src/kits/net/NetBuffer.cpp
+	$(CPP) -c src/kits/net/NetBuffer.cpp -o src/kits/net/NetBuffer.o $(CXXFLAGS)
+
+src/kits/net/NetEndpoint.o: src/kits/net/NetEndpoint.cpp
+	$(CPP) -c src/kits/net/NetEndpoint.cpp -o src/kits/net/NetEndpoint.o $(CXXFLAGS)
+
+src/kits/private/StandardIO.o: src/kits/private/StandardIO.cpp
+	$(CPP) -c src/kits/private/StandardIO.cpp -o src/kits/private/StandardIO.o $(CXXFLAGS)
+
+src/kits/private/Object.o: src/kits/private/Object.cpp
+	$(CPP) -c src/kits/private/Object.cpp -o src/kits/private/Object.o $(CXXFLAGS)
+
+src/kits/private/Memory.o: src/kits/private/Memory.cpp
+	$(CPP) -c src/kits/private/Memory.cpp -o src/kits/private/Memory.o $(CXXFLAGS)
+
+src/kits/private/PrivateApplication.o: src/kits/private/PrivateApplication.cpp
+	$(CPP) -c src/kits/private/PrivateApplication.cpp -o src/kits/private/PrivateApplication.o $(CXXFLAGS)
+
+src/kits/private/MessageBody.o: src/kits/private/MessageBody.cpp
+	$(CPP) -c src/kits/private/MessageBody.cpp -o src/kits/private/MessageBody.o $(CXXFLAGS)
+
+src/kits/private/PrivateHandler.o: src/kits/private/PrivateHandler.cpp
+	$(CPP) -c src/kits/private/PrivateHandler.cpp -o src/kits/private/PrivateHandler.o $(CXXFLAGS)
+
+src/kits/private/Token.o: src/kits/private/Token.cpp
+	$(CPP) -c src/kits/private/Token.cpp -o src/kits/private/Token.o $(CXXFLAGS)
+
+src/kits/kernel/Debug.o: src/kits/kernel/Debug.cpp
+	$(CPP) -c src/kits/kernel/Debug.cpp -o src/kits/kernel/Debug.o $(CXXFLAGS)
+
+src/kits/kernel/etk-port.o: src/kits/kernel/etk-port.cpp
+	$(CPP) -c src/kits/kernel/etk-port.cpp -o src/kits/kernel/etk-port.o $(CXXFLAGS)
+
+src/kits/kernel/win32/etk-image.o: src/kits/kernel/win32/etk-image.cpp
+	$(CPP) -c src/kits/kernel/win32/etk-image.cpp -o src/kits/kernel/win32/etk-image.o $(CXXFLAGS)
+
+src/kits/kernel/win32/etk-timefuncs.o: src/kits/kernel/win32/etk-timefuncs.cpp
+	$(CPP) -c src/kits/kernel/win32/etk-timefuncs.cpp -o src/kits/kernel/win32/etk-timefuncs.o $(CXXFLAGS)
+
+src/kits/kernel/win32/etk-os.o: src/kits/kernel/win32/etk-os.cpp
+	$(CPP) -c src/kits/kernel/win32/etk-os.cpp -o src/kits/kernel/win32/etk-os.o $(CXXFLAGS)
+
+src/kits/kernel/win32/etk-area.o: src/kits/kernel/win32/etk-area.cpp
+	$(CPP) -c src/kits/kernel/win32/etk-area.cpp -o src/kits/kernel/win32/etk-area.o $(CXXFLAGS)

@@ -26,11 +26,12 @@
  * File: etk-timefuncs.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_LINUX
 
-#include <sys/time.h"
-#include <time.h"
+#include <sys/time.h>
+#include <time.h>
 
-#include "../config.h"
+#include "../support/SupportDefs.h"
 #include "../kernel/Kernel.h"
 #include "../support/SimpleLocker.h"
 
@@ -120,4 +121,5 @@ IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void)
 	// FIXME
 	return(bhapi_real_time_clock_usecs() - bhapi_system_boot_time());
 }
+#endif // BHAPI_OS_LINUX
 

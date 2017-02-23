@@ -1,0 +1,1755 @@
+# depslib dependency file v1.0
+1487411481 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\bhapi.cpp
+	"bhapi.h"
+
+1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\bhapi.h
+	"bhapi_global.h"
+	"src/kits/Be.h"
+
+1486305427 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\bhapi_global.h
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\be.h
+	"support/SupportDefs.h"
+	"AppKit.h"
+	"KernelKit.h"
+	"StorageKit.h"
+	"RenderKit.h"
+	"InterfaceKit.h"
+	"XmlKit.h"
+	"NetKit.h"
+	"SupportKit.h"
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\supportdefs.h
+	<stdarg.h>
+	<stddef.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<stdio.h>
+	<ctype.h>
+	<limits.h>
+	<float.h>
+	<winsock2.h>
+	<windows.h>
+
+1486891620 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\appkit.h
+	"app/AppDefs.h"
+	"app/Message.h"
+	"app/MessageQueue.h"
+	"app/Handler.h"
+	"app/Looper.h"
+	"app/Messenger.h"
+	"app/MessageRunner.h"
+	"app/MessageFilter.h"
+	"app/Invoker.h"
+	"app/Clipboard.h"
+	"app/Cursor.h"
+	"app/Application.h"
+
+1487827896 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\appdefs.h
+	"../support/SupportDefs.h"
+
+1487830488 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\message.h
+	"../support/SupportDefs.h"
+	"../kernel/OS.h"
+	"../support/List.h"
+
+1487830535 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\os.h
+	"../support/SupportDefs.h"
+	"Kernel.h"
+
+1487830845 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\kernel.h
+	"../support/SupportDefs.h"
+	"OS.h"
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\list.h
+	"../support/SupportDefs.h"
+
+1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\messagequeue.h
+	"../support/SupportDefs.h"
+	"../support/List.h"
+
+1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\handler.h
+	"../support/SupportDefs.h"
+	"../support/Archivable.h"
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\archivable.h
+	"../support/SupportDefs.h"
+
+1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\looper.h
+	"../support/SupportDefs.h"
+	"../support/List.h"
+	"Handler.h"
+
+1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\messenger.h
+	"../support/SupportDefs.h"
+
+1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\messagerunner.h
+	"../support/SupportDefs.h"
+
+1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\messagefilter.h
+	"../support/SupportDefs.h"
+
+1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\invoker.h
+	"../support/SupportDefs.h"
+	"../support/List.h"
+	"../app/Messenger.h"
+
+1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\clipboard.h
+	"../support/SupportDefs.h"
+	"../app/Messenger.h"
+	"../support/Locker.h"
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\locker.h
+	"../support/SupportDefs.h"
+
+1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\cursor.h
+	"../support/SupportDefs.h"
+	"../support/Archivable.h"
+
+1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\application.h
+	"../support/SupportDefs.h"
+	"../app/Looper.h"
+	"../app/MessageRunner.h"
+	"../app/Cursor.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernelkit.h
+	"kernel/Debug.h"
+	"kernel/OS.h"
+	"kernel/Kernel.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\debug.h
+	"../support/SupportDefs.h"
+	<new>
+
+1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storagekit.h
+	"storage/Path.h"
+	"storage/Entry.h"
+	"storage/Directory.h"
+	"storage/File.h"
+	"storage/FindDirectory.h"
+	"storage/Volume.h"
+	"storage/VolumeRoster.h"
+	"storage/FilePanel.h"
+
+1487830819 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\path.h
+	"../support/SupportDefs.h"
+	<winsock2.h>
+	<windows.h>
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\entry.h
+	"Path.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\directory.h
+	"Entry.h"
+
+1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\file.h
+	"StorageDefs.h"
+	"Directory.h"
+
+1487830819 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\storagedefs.h
+	"../support/SupportDefs.h"
+
+1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\finddirectory.h
+	"Path.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\volume.h
+	"StorageDefs.h"
+	"Directory.h"
+	"../support/StringMe.h"
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\stringme.h
+	"../support/SupportDefs.h"
+
+1486621367 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\volumeroster.h
+	"Volume.h"
+
+1487830819 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\filepanel.h
+	"../support/SupportDefs.h"
+
+1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\renderkit.h
+	"render/Render.h"
+	"render/LineGenerator.h"
+	"render/ArcGenerator.h"
+	"render/Pixmap.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\render.h
+	"../support/SupportDefs.h"
+	"../interface/GraphicsDefs.h"
+	"../interface/Rect.h"
+	"../interface/Polygon.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\graphicsdefs.h
+	"../support/SupportDefs.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\rect.h
+	"../support/SupportDefs.h"
+	"../interface/Point.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\point.h
+	"../support/SupportDefs.h"
+
+1487760739 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\polygon.h
+	"../interface/Rect.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\linegenerator.h
+	"../support/SupportDefs.h"
+	"../interface/Rect.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\arcgenerator.h
+	"../support/SupportDefs.h"
+	"../interface/Rect.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\pixmap.h
+	"../support/SupportDefs.h"
+	"../interface/Region.h"
+	"../render/Render.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\region.h
+	"../support/SupportDefs.h"
+	"../interface/Point.h"
+	"../interface/Rect.h"
+	"../support/List.h"
+
+1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interfacekit.h
+	"interface/GraphicsDefs.h"
+	"interface/InterfaceDefs.h"
+	"interface/Point.h"
+	"interface/Rect.h"
+	"interface/Polygon.h"
+	"interface/Region.h"
+	"interface/Font.h"
+	"interface/Screen.h"
+	"interface/Window.h"
+	"interface/View.h"
+	"interface/LimitedView.h"
+	"interface/ScrollBar.h"
+	"interface/ScrollView.h"
+	"interface/Control.h"
+	"interface/ColorControl.h"
+	"interface/Button.h"
+	"interface/Alert.h"
+	"interface/CheckBox.h"
+	"interface/RadioButton.h"
+	"interface/MenuItem.h"
+	"interface/Menu.h"
+	"interface/PopUpMenu.h"
+	"interface/MenuBar.h"
+	"interface/MenuField.h"
+	"interface/StringView.h"
+	"interface/Box.h"
+	"interface/StatusBar.h"
+	"interface/TextEditable.h"
+	"interface/TextControl.h"
+	"interface/ListItem.h"
+	"interface/ListView.h"
+	"interface/OutlineListView.h"
+	"interface/TabView.h"
+	"interface/TextView.h"
+	"interface/Bitmap.h"
+	"interface/ToolTip.h"
+	"interface/Input.h"
+
+1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\interfacedefs.h
+	"../interface/GraphicsDefs.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\font.h
+	"../support/SupportDefs.h"
+	"../support/StringMe.h"
+
+1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\screen.h
+	"../interface/Rect.h"
+
+1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\window.h
+	"GraphicsDefs.h"
+	"../interface/Rect.h"
+	"../support/List.h"
+	"../app/Looper.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\view.h
+	"../support/SupportDefs.h"
+	"../interface/InterfaceDefs.h"
+	"../interface/Region.h"
+	"../interface/Polygon.h"
+	"../interface/Font.h"
+	"../interface/Point.h"
+	"../support/List.h"
+	"../app/Handler.h"
+
+1486621367 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\limitedview.h
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\scrollbar.h
+	"../app/MessageRunner.h"
+	"../interface/View.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\scrollview.h
+	"../interface/ScrollBar.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\control.h
+	"../support/SupportDefs.h"
+	"../interface/View.h"
+	"../app/Invoker.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\colorcontrol.h
+	"../interface/Control.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\button.h
+	"../interface/Control.h"
+
+1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\alert.h
+	"../support/SupportDefs.h"
+	"../interface/InterfaceDefs.h"
+	"../interface/Window.h"
+
+1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\checkbox.h
+	"../interface/Control.h"
+
+1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\radiobutton.h
+	"../interface/Control.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\menuitem.h
+	"../support/SupportDefs.h"
+	"../support/Archivable.h"
+	"../interface/Rect.h"
+	"../app/Invoker.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\menu.h
+	"../support/List.h"
+	"../interface/View.h"
+	"../interface/MenuItem.h"
+
+1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\popupmenu.h
+	"../support/Locker.h"
+	"../interface/Menu.h"
+	"../interface/Window.h"
+
+1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\menubar.h
+	"../interface/Menu.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\menufield.h
+	"../support/SupportDefs.h"
+	"../interface/View.h"
+
+1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\stringview.h
+	"../support/StringArray.h"
+	"../interface/View.h"
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\stringarray.h
+	"../support/SupportDefs.h"
+	"List.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\box.h
+	"../interface/View.h"
+
+1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\statusbar.h
+	"../interface/View.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\texteditable.h
+	"../support/SupportDefs.h"
+	"../interface/InterfaceDefs.h"
+	"../interface/Control.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\textcontrol.h
+	"../support/SupportDefs.h"
+	"../interface/Rect.h"
+	"../interface/TextEditable.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\listitem.h
+	"../support/Archivable.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\listview.h
+	"../support/SupportDefs.h"
+	"../support/List.h"
+	"../interface/View.h"
+	"../app/Invoker.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\outlinelistview.h
+	"../interface/ListView.h"
+
+1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\tabview.h
+	"../support/List.h"
+	"../interface/View.h"
+
+1487760739 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\textview.h
+	"../support/StringMe.h"
+	"../interface/View.h"
+
+1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\bitmap.h
+	"../interface/View.h"
+
+1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\tooltip.h
+	"../app/Messenger.h"
+	"../interface/GraphicsDefs.h"
+	"../interface/Point.h"
+	"../interface/Font.h"
+
+1486621367 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\input.h
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\xmlkit.h
+	"xml/SimpleXmlParser.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\xml\simplexmlparser.h
+	"../support/List.h"
+
+1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\netkit.h
+	"net/NetAddress.h"
+	"net/NetBuffer.h"
+	"net/NetDebug.h"
+	"net/NetEndpoint.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netaddress.h
+	"../support/SupportDefs.h"
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<winsock2.h>
+	"../support/Archivable.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netbuffer.h
+	"../support/SupportDefs.h"
+	"../support/Archivable.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netdebug.h
+	"../support/SupportDefs.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netendpoint.h
+	"../support/SupportDefs.h"
+	"../net/NetAddress.h"
+	"../net/NetBuffer.h"
+
+1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\supportkit.h
+	"support/ByteOrder.h"
+	"support/ClassInfo.h"
+	"support/Errors.h"
+	"support/Archivable.h"
+	"support/Autolock.h"
+	"support/SimpleLocker.h"
+	"support/Locker.h"
+	"support/List.h"
+	"support/StringMe.h"
+	"support/StringArray.h"
+	"support/DataIO.h"
+	"support/StreamIO.h"
+	"support/Flattenable.h"
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\byteorder.h
+	"../support/SupportDefs.h"
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\classinfo.h
+	"../support/SupportDefs.h"
+	<typeinfo>
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\errors.h
+	"../support/SupportDefs.h"
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\autolock.h
+	"../support/SupportDefs.h"
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\simplelocker.h
+	"../support/SupportDefs.h"
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\dataio.h
+	"../support/SupportDefs.h"
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\streamio.h
+	"../support/SupportDefs.h"
+	"DataIO.h"
+
+1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\flattenable.h
+	"../support/SupportDefs.h"
+
+1487758248 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\font\fontengine.cpp
+	<string.h>
+	"../../app/AppDefs.h"
+	"../../interface/Font.h"
+	"FontEngine.h"
+	"../../support/Locker.h"
+	"../../support/Autolock.h"
+	"../../support/Errors.h"
+	"../../app/Application.h"
+	"../../add-ons/graphics/GraphicsEngine.h"
+	"../../kernel/Debug.h"
+
+1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\font\fontengine.h
+	"../../support/SupportDefs.h"
+	"../../support/StringArray.h"
+	"../../interface/Point.h"
+	"../../interface/Font.h"
+	"../../support/Locker.h"
+	"../../app/Handler.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\graphics\graphicsengine.h
+	"../../support/SupportDefs.h"
+	"../../interface/GraphicsDefs.h"
+	"../../interface/Window.h"
+	"../../interface/Region.h"
+
+1487758280 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\font\freetype2.cpp
+	"../../add-ons/font/FontEngine.h"
+	"../../kernel/Debug.h"
+	"../../support/StringArray.h"
+	"../../support/Locker.h"
+	"../../support/Autolock.h"
+	"../../storage/Directory.h"
+	"../../support/Errors.h"
+	"../../support/SupportDefs.h"
+	<freetype/include/ft2build.h>
+	<math.h>
+	<stdlib.h>
+	<string.h>
+	<freetype/include/freetype/freetype.h>
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\graphics\graphicsengine.cpp
+	"GraphicsEngine.h"
+	"../../support/Errors.h"
+	"../../interface/Window.h"
+	"../../interface/View.h"
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\theme\defaulttheme.cpp
+	"ThemeEngine.h"
+	"../../interface/Rect.h"
+	"../../interface/View.h"
+	"../../interface/Region.h"
+	"../../interface/Point.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\theme\themeengine.h
+	"../../support/SupportDefs.h"
+	"../../interface/InterfaceDefs.h"
+
+1487758541 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\theme\themeengine.cpp
+	"ThemeEngine.h"
+	"../../interface/View.h"
+	"../../interface/Rect.h"
+	"../../interface/Region.h"
+	"../../interface/Point.h"
+
+1487758944 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\application.cpp
+	"../support/List.h"
+	"../support/Locker.h"
+	"../support/Autolock.h"
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+	"../interface/Font.h"
+	"../add-ons/graphics/GraphicsEngine.h"
+	"../storage/FindDirectory.h"
+	"../storage/Directory.h"
+	"../private/PrivateHandler.h"
+	"../app/AppDefs.h"
+	"../app/Message.h"
+	"../app/MessageQueue.h"
+	"../app/Looper.h"
+	"../support/Errors.h"
+	"Application.h"
+	"Clipboard.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\privatehandler.h
+	"../support/SupportDefs.h"
+	"../support/Locker.h"
+	"../app/Looper.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\clipboard.cpp
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+	"../support/StringMe.h"
+	"../support/List.h"
+	"../support/SimpleLocker.h"
+	"../support/Errors.h"
+	"../app/Message.h"
+	"../app/AppDefs.h"
+	"Clipboard.h"
+	"Application.h"
+
+1487758969 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\cursor.cpp
+	"Cursor.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\handler.cpp
+	"Handler.h"
+	"Looper.h"
+	"Messenger.h"
+	"MessageFilter.h"
+	"Message.h"
+	"MessageQueue.h"
+	"AppDefs.h"
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+	"../support/Errors.h"
+	"../support/StringMe.h"
+	"../support/List.h"
+	"../support/Locker.h"
+	"../support/Autolock.h"
+	"../support/List.h"
+	"../private/PrivateApplication.h"
+	"../private/PrivateHandler.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\privateapplication.h
+	"../support/SupportDefs.h"
+	"../support/SimpleLocker.h"
+	"../private/Token.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\token.h
+	"../support/SupportDefs.h"
+	"../support/Locker.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\invoker.cpp
+	"Invoker.h"
+	"Application.h"
+	"AppDefs.h"
+	"../private/PrivateHandler.h"
+	"../app/Messenger.h"
+	"../app/Message.h"
+	"../kernel/OS.h"
+	"../kernel/Debug.h"
+	"../support/Errors.h"
+
+1487759011 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\looper.cpp
+	"Looper.h"
+	"AppDefs.h"
+	"Application.h"
+	"Messenger.h"
+	"../private/Token.h"
+	"../private/PrivateHandler.h"
+	"../kernel/Debug.h"
+	"../kernel/Kernel.h"
+	"../support/Locker.h"
+	"../support/Errors.h"
+	"../support/Autolock.h"
+	"../support/ClassInfo.h"
+	"../kernel/OS.h"
+	"../app/AppDefs.h"
+	"../app/Handler.h"
+	"../app/MessageQueue.h"
+	"../app/MessageFilter.h"
+	"../app/Message.h"
+	<stdlib.h>
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\message.cpp
+	"Message.h"
+	"Messenger.h"
+	"Handler.h"
+	"../kernel/Debug.h"
+	"../private/Token.h"
+	"../support/StreamIO.h"
+	"../support/StringMe.h"
+	"../support/Errors.h"
+	"../kernel/OS.h"
+	"../interface/Point.h"
+	"../interface/Rect.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1486712173 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\messagefilter.cpp
+	"MessageFilter.h"
+	"Message.h"
+	"Handler.h"
+	"Looper.h"
+
+1487753232 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\messagequeue.cpp
+	"MessageQueue.h"
+	"Message.h"
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+	"../support/Locker.h"
+	"../support/Errors.h"
+	"../support/List.h"
+	"../private/PrivateHandler.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\messagerunner.cpp
+	"MessageRunner.h"
+	"Application.h"
+	"AppDefs.h"
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+	"../kernel/OS.h"
+	"../support/Locker.h"
+	"../support/Autolock.h"
+	"../support/Errors.h"
+	"../private/PrivateHandler.h"
+	"../app/Messenger.h"
+	"../app/Message.h"
+
+1487411970 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\messenger.cpp
+	"Messenger.h"
+	"Message.h"
+	"../app/Looper.h"
+	"../app/AppDefs.h"
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+	"../kernel/OS.h"
+	"../support/ClassInfo.h"
+	"../support/Locker.h"
+	"../support/Errors.h"
+	"../support/Autolock.h"
+	"../private/PrivateHandler.h"
+	<stdlib.h>
+
+1487410020 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\alert.cpp
+	"Alert.h"
+	"Button.h"
+	"TextView.h"
+	"Bitmap.h"
+	"../support/ClassInfo.h"
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+	"../app/Invoker.h"
+	"../app/Application.h"
+	"../app/Message.h"
+	"../app/AppDefs.h"
+	"../add-ons/graphics/GraphicsEngine.h"
+	"../render/Pixmap.h"
+	"../support/Errors.h"
+	"icons/info.xpm"
+	"icons/idea.xpm"
+	"icons/warning.xpm"
+	"icons/stop.xpm"
+
+1376845640 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\icons\info.xpm
+
+1376845640 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\icons\idea.xpm
+
+1376845640 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\icons\warning.xpm
+
+1376845640 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\icons\stop.xpm
+
+1487753546 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\etk-application.cpp
+	<stdlib.h>
+	<be/app/AppDefs.h>
+	<be/app/Application.h>
+	<be/app/Clipboard.h>
+	<be/app/Cursor.h>
+	<be/interface/Screen.h>
+	"etk-beos-graphics.h"
+	"../../support/Autolock.h"
+	"../../support/StringMe.h"
+	"../../kernel/Kernel.h"
+	"../../app/Application.h"
+	"../../app/Clipboard.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\etk-beos-graphics.h
+	<be/app/Messenger.h>
+	<be/interface/View.h>
+	<be/interface/Window.h>
+	<be/interface/Bitmap.h>
+	"../../support/Locker.h"
+	"../../add-ons/graphics/GraphicsEngine.h"
+	"../../app/MessageFilter.h"
+
+1487753546 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\etk-beos-font.cpp
+	<be/app/AppDefs.h>
+	<be/interface/Font.h>
+	"etk-beos-graphics.h"
+	"../../add-ons/font/FontEngine.h"
+	"../../support/ClassInfo.h"
+	"../../support/Autolock.h"
+	"../../interface/Window.h"
+	"../../interface/View.h"
+
+1487753546 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\etk-drawing.cpp
+	"etk-beos-graphics.h"
+
+1487753547 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\etk-pixmap.cpp
+	<be/interface/View.h>
+	<be/interface/Region.h>
+	<be/interface/Bitmap.h>
+	"etk-beos-graphics.h"
+	"../../support/ClassInfo.h"
+	"../../support/Autolock.h"
+	"../../render/Pixmap.h"
+
+1487753547 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\etk-window.cpp
+	<be/BeBuild.h>
+	<be/app/AppDefs.h>
+	<be/interface/View.h>
+	<be/interface/Region.h>
+	"etk-beos-graphics.h"
+	"../../support/ClassInfo.h"
+	"../../app/Application.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\bitmap.cpp
+	"Bitmap.h"
+	"../add-ons/graphics/GraphicsEngine.h"
+	"../app/Application.h"
+	"../kernel/Debug.h"
+	"../app/AppDefs.h"
+	"../render/Pixmap.h"
+	"../support/Errors.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\box.cpp
+	"Box.h"
+	"../support/ClassInfo.h"
+	"../support/Errors.h"
+	"../interface/StringView.h"
+	"../add-ons/theme/ThemeEngine.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\button.cpp
+	"Button.h"
+	"Window.h"
+	"Rect.h"
+	"../add-ons/theme/ThemeEngine.h"
+	"../support/Errors.h"
+	"../kernel/OS.h"
+	"../kernel/kernel.h"
+	"../app/MessageRunner.h"
+	"../app/Message.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\checkbox.cpp
+	"CheckBox.h"
+	"../interface/Window.h"
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\colorcontrol.cpp
+	"ColorControl.h"
+	"Bitmap.h"
+	"../support/StringMe.h"
+	"../render/Pixmap.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\control.cpp
+	"Control.h"
+	"Window.h"
+	"../support/StringMe.h"
+	"../support/Errors.h"
+	"../kernel/OS.h"
+	"../app/Looper.h"
+	"../app/Message.h"
+	"../interface/Rect.h"
+	"../interface/View.h"
+
+1487409413 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-application.cpp
+	<string.h>
+	"etk-dfb.h"
+	"../../kernel/Kernel.h"
+	"../../support/Autolock.h"
+	"../../support/ClassInfo.h"
+	"../../support/StringArray.h"
+	"../../app/Clipboard.h"
+	"../../app/Application.h"
+
+1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-dfb.h
+	<directfb.h>
+	<directfb_version.h>
+	"../../add-ons/graphics/GraphicsEngine.h"
+	"../../support/Locker.h"
+	"../../support/List.h"
+	"../../interface/Window.h"
+	"../../app/MessageFilter.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-dfb-font.cpp
+	"etk-dfb.h"
+	"../../add-ons/font/FontEngine.h"
+	"../../support/ClassInfo.h"
+	"../../support/Autolock.h"
+	"../../interface/Window.h"
+	"../../interface/View.h"
+	"../../storage/Directory.h"
+	"../../storage/Path.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-drawing.cpp
+	"../../render/Render.h"
+	"../../render/Pixmap.h"
+	"etk-dfb.h"
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-pixmap.cpp
+	"../../support/Autolock.h"
+	"../../support/ClassInfo.h"
+	"etk-dfb.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-window.cpp
+	"../../support/Autolock.h"
+	"../../support/ClassInfo.h"
+	"etk-dfb.h"
+
+1486418551 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-wm.cpp
+	"etk-dfb.h"
+
+1487759105 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\font.cpp
+	"Font.h"
+	<kits/support/SupportDefs.h>
+	"../support/Errors.h"
+	"../add-ons/font/FontEngine.h"
+	"../support/Autolock.h"
+	"../kernel/Debug.h"
+
+1487759147 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\graphicsdefs.cpp
+	"GraphicsDefs.h"
+	"Point.h"
+
+1487756640 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\layout\layoutcontainer.cpp
+	"../../support/ClassInfo.h"
+	"Layout.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\layout\layout.h
+	"../../support/List.h"
+	"../../interface/InterfaceDefs.h"
+	"../../interface/Region.h"
+
+1486416093 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\layout\layoutform.cpp
+	"Layout.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\layout\layoutitem.cpp
+	"../../support/ClassInfo.h"
+	"Layout.h"
+
+1486416097 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\limitedview.cpp
+	"LimitedView.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\listitem.cpp
+	"ListItem.h"
+	"OutlineListView.h"
+	"ListView.h"
+	"InterfaceDefs.h"
+	"../app/Message.h"
+	"../interface/View.h"
+	"../support/Errors.h"
+	"../support/List.h"
+
+1487754417 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\listview.cpp
+	"ListView.h"
+	"ScrollView.h"
+	"Window.h"
+	"../support/ClassInfo.h"
+	"../support/Errors.h"
+	"../kernel/OS.h"
+	"../interface/ListItem.h"
+	"../app/Message.h"
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\menu.cpp
+	"Menu.h"
+	"PopUpMenu.h"
+	"Window.h"
+	"../support/ClassInfo.h"
+	"../support/Errors.h"
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+	"../app/AppDefs.h"
+	"../app/Message.h"
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\menubar.cpp
+	"MenuBar.h"
+	"MenuField.h"
+	"Window.h"
+	"../support/ClassInfo.h"
+	"../app/AppDefs.h"
+	"../app/Message.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\menufield.cpp
+	"MenuField.h"
+	"Window.h"
+	"MenuBar.h"
+	"../support/StringMe.h"
+	"../support/ClassInfo.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\menuitem.cpp
+	"MenuItem.h"
+	"Menu.h"
+	"Rect.h"
+	"Window.h"
+	"../support/StringMe.h"
+	"../support/ClassInfo.h"
+	"../support/Errors.h"
+	"../kernel/Debug.h"
+	"../app/Message.h"
+	"../app/AppDefs.h"
+	<ctype.h>
+	<string.h>
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\outlinelistview.cpp
+	"OutlineListView.h"
+	"ListItem.h"
+	"ListView.h"
+	"../kernel/Debug.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\point.cpp
+	"Point.h"
+	"GraphicsDefs.h"
+	"Rect.h"
+	"../kernel/Debug.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\polygon.cpp
+	"Polygon.h"
+	"../kernel/Debug.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\popupmenu.cpp
+	"PopUpMenu.h"
+	"Window.h"
+	"../app/Application.h"
+	"../app/AppDefs.h"
+	"../support/Errors.h"
+	"../app/Message.h"
+	"../support/ClassInfo.h"
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\radiobutton.cpp
+	"RadioButton.h"
+	"../support/ClassInfo.h"
+	"../interface/Window.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\rect.cpp
+	"Rect.h"
+	"../kernel/Debug.h"
+
+1487410089 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\region.cpp
+	"Region.h"
+	"../kernel/Debug.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\screen.cpp
+	"Screen.h"
+	"Window.h"
+	"../add-ons/graphics/GraphicsEngine.h"
+	"../app/Application.h"
+	"../support/Errors.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\scrollbar.cpp
+	"ScrollBar.h"
+	"../add-ons/theme/ThemeEngine.h"
+	"../kernel/OS.h"
+	"../kernel/Debug.h"
+	"../interface/Window.h"
+	"../support/Errors.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\scrollview.cpp
+	"ScrollView.h"
+	"../kernel/Debug.h"
+	"../support/Errors.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\statusbar.cpp
+	"../support/StringMe.h"
+	"../app/AppDefs.h"
+	"../app/Message.h"
+	"StatusBar.h"
+
+1486421285 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\stringview.cpp
+	"StringView.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\tabview.cpp
+	"TabView.h"
+	"../support/StringMe.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\textcontrol.cpp
+	"TextControl.h"
+	"Window.h"
+	"../app/Application.h"
+	"../app/Clipboard.h"
+	"../app/Message.h"
+	"../app/AppDefs.h"
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\texteditable.cpp
+	"TextEditable.h"
+	"Window.h"
+	"../support/StringMe.h"
+	"../app/Application.h"
+	"../app/AppDefs.h"
+	"../support/Errors.h"
+	"../app/Message.h"
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\textview.cpp
+	"TextView.h"
+	"Window.h"
+	"ScrollView.h"
+	"../support/ClassInfo.h"
+	"../support/Errors.h"
+	"../storage/File.h"
+	"../app/Application.h"
+	"../app/Clipboard.h"
+	"../app/AppDefs.h"
+	"../app/Message.h"
+	<stdlib.h>
+
+1487759522 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\theme.cpp
+	"InterfaceDefs.h"
+
+1486416096 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\tooltip.cpp
+	"ToolTip.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\view.cpp
+	"View.h"
+	"ViewPrivate.h"
+	"ScrollView.h"
+	"Window.h"
+	"Box.h"
+	"Bitmap.h"
+	"GraphicsDefs.h"
+	"../support/ClassInfo.h"
+	"../support/Errors.h"
+	"../add-ons/font/FontEngine.h"
+	"../support/List.h"
+	"../add-ons/graphics/GraphicsEngine.h"
+	"../app/Application.h"
+	"../app/AppDefs.h"
+	"../app/Message.h"
+	"../kernel/Debug.h"
+	<math.h>
+
+1486891693 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\viewprivate.h
+	<kits/support/SupportDefs.h>
+	"Rect.h"
+	"View.h"
+	"layout/Layout.h"
+	"Window.h"
+
+1487409413 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-application.cpp
+	"etk-win32gdi.h"
+	"../../kernel/Kernel.h"
+	"../../kernel/Debug.h"
+	"../../support/Locker.h"
+	"../../support/Errors.h"
+	"../../support/Autolock.h"
+	"../../support/StringMe.h"
+	"../../interface/InterfaceDefs.h"
+	"../../app/Application.h"
+	"../../app/AppDefs.h"
+	"../../app/Clipboard.h"
+	"../../app/Message.h"
+
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-win32gdi.h
+	"../../support/SupportDefs.h"
+	"../../add-ons/graphics/GraphicsEngine.h"
+	"../../app/MessageFilter.h"
+	"../../app/Message.h"
+	"../../app/Messenger.h"
+	"../../support/Locker.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-drawing.cpp
+	<math.h>
+	"etk-win32gdi.h"
+	"../../support/SupportDefs.h"
+	"../../support/ClassInfo.h"
+	"../../support/Autolock.h"
+	"../../support/Errors.h"
+	"../../render/Pixmap.h"
+	"../../kernel/Debug.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-pixmap.cpp
+	"etk-win32gdi.h"
+	"../../support/Autolock.h"
+	"../../support/Errors.h"
+	"../../support/ClassInfo.h"
+	"../../kernel/Debug.h"
+
+1487409397 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-win32-font.cpp
+	"etk-win32gdi.h"
+	"../../add-ons/font/FontEngine.h"
+	"../../support/ClassInfo.h"
+	"../../support/Autolock.h"
+	"../../support/StringArray.h"
+	"../../interface/Window.h"
+	"../../interface/View.h"
+	"../../support/Errors.h"
+	"../../kernel/Debug.h"
+
+1487409398 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-window.cpp
+	"etk-win32gdi.h"
+	"../../kernel/Kernel.h"
+	"../../kernel/Debug.h"
+	"../../support/Autolock.h"
+	"../../support/Errors.h"
+	"../../app/Application.h"
+	"../../support/StringMe.h"
+	"../../support/ClassInfo.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\window.cpp
+	"Window.h"
+	"Region.h"
+	"InterfaceDefs.h"
+	"View.h"
+	"ScrollBar.h"
+	"Screen.h"
+	"layout/Layout.h"
+	"../support/ClassInfo.h"
+	"../support/StringMe.h"
+	"../support/Errors.h"
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+	"../app/Application.h"
+	"../app/AppDefs.h"
+	"../app/Message.h"
+	"../app/MessageQueue.h"
+	"../app/Messenger.h"
+	"../support/Autolock.h"
+	"../add-ons/graphics/GraphicsEngine.h"
+	"../app/Looper.h"
+	"../app/MessageRunner.h"
+
+1486416095 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\wm\simplewm.cpp
+	"SimpleWM.h"
+
+1486621368 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\wm\simplewm.h
+	"./../../render/Render.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-application.cpp
+	<stdlib.h>
+	<locale.h>
+	"etk-x11.h"
+	"../../kernel/Kernel.h"
+	"../../support/StringMe.h"
+	"../../support/Locker.h"
+	"../../support/Autolock.h"
+	"../../app/Application.h"
+	"../../app/Clipboard.h"
+	"../../interface/InterfaceDefs.h"
+
+1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-x11.h
+	"../support/SupportDefs.h"
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xpoll.h>
+	<X11/keysym.h>
+	<X11/Xatom.h>
+	<X11/Xft/Xft.h>
+	"../../support/Locker.h"
+	"../../support/StringArray.h"
+	"../../add-ons/graphics/GraphicsEngine.h"
+	"../../app/MessageFilter.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-drawing.cpp
+	"../config.h"
+	<X11/extensions/Xrender.h"
+	"etk-x11.h"
+	"../support/Autolock.h"
+	"../support/ClassInfo.h"
+	"../render/Pixmap.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-pixmap.cpp
+	"etk-x11.h"
+	"../support/Autolock.h"
+	"../support/ClassInfo.h"
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-window.cpp
+	<stdlib.h>
+	"etk-x11.h"
+	"../support/Autolock.h"
+	"../support/StringMe.h"
+	"../support/ClassInfo.h"
+	"../app/Application.h"
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-x11-font.cpp
+	"etk-x11.h"
+	"etk-x11.h"
+	"../add-ons/font/FontEngine.h"
+	"../support/ClassInfo.h"
+	"../support/List.h"
+	"../support/Autolock.h"
+	"../interface/Window.h"
+	"../interface/View.h"
+
+1487753546 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\beos\etk-area.cpp
+	<be/kernel/OS.h>
+	"../kernel/Kernel.h"
+	"../support/StringMe.h"
+
+1487753566 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\beos\etk-image.cpp
+	<be/kernel/image.h>
+	"../kernel/Kernel.h"
+	"../storage/Path.h"
+
+1486416091 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\beos\etk-os.cpp
+
+1487753583 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\beos\etk-timefuncs.cpp
+	<be/kernel/OS.h>
+	"../kernel/Kernel.h"
+
+1487756173 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\debug.cpp
+	"Debug.h"
+	"Kernel.h"
+	"../support/StringMe.h"
+	<stdio.h>
+	<stdlib.h>
+	<new>
+	<winsock2.h>
+	<windows.h>
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\etk-port.cpp
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+	"../support/StringMe.h"
+	"../support/Errors.h"
+	"../support/SimpleLocker.h"
+
+1487753719 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\beos\etk-locker.cpp
+	<be/kernel/OS.h>
+	"../kernel/Kernel.h"
+
+1487753731 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\beos\etk-semaphore.cpp
+	<be/kernel/OS.h>
+	"../kernel/Kernel.h"
+	"../support/StringMe.h"
+
+1487753748 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\beos\etk-thread.cpp
+	<be/kernel/OS.h>
+	"../kernel/Kernel.h"
+	"../support/SimpleLocker.h"
+	"../support/List.h"
+	"../support/StringMe.h"
+
+1487753792 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-locker.cpp
+	<pthread.h>
+	<errno.h"
+	"../kernel/Kernel.h"
+	"../support/StringMe.h"
+
+1487753819 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-semaphore-mach.cpp
+	<pthread.h>
+	<semaphore.h>
+	<time.h>
+	<errno.h>
+	<mach/mach.h>
+	<mach/semaphore.h>
+	"../kernel/Kernel.h"
+	"../support/StringMe.h"
+
+1487753842 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-semaphore-umtx.cpp
+	<stdlib.h>
+	<fcntl.h>
+	<pthread.h>
+	<semaphore.h>
+	<sys/types.h>
+	<unistd.h>
+	<string.h>
+	<time.h>
+	<errno.h>
+	<machine/atomic.h"
+	<ucontext.h"
+	<sys/thr.h"
+	<sys/umtx.h"
+	<sys/stat.h"
+	<sys/mman.h"
+	"../kernel/Kernel.h"
+	"../support/StringMe.h"
+
+1487753863 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-semaphore.cpp
+	<stdlib.h>
+	<fcntl.h>
+	<pthread.h>
+	<semaphore.h>
+	<sys/types.h>
+	<unistd.h>
+	<string.h>
+	<time.h>
+	<errno.h>
+	"../config.h"
+	"../BHAPIBuild.h"
+	"../kernel/Kernel.h"
+	"../support/StringMe.h"
+
+1487753880 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-thread.cpp
+	<stdlib.h>
+	<stdio.h>
+	<sys/types.h>
+	<unistd.h>
+	<pthread.h>
+	<errno.h>
+	<signal.h>
+	"../config.h"
+	"../kernel/Kernel.h"
+	"../support/List.h"
+	"../support/StringMe.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\etk-locker.cpp
+	<winsock2.h>
+	<windows.h>
+	"../../../kernel/Kernel.h"
+	"../../../support/Errors.h"
+	"../../../kernel/Debug.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\etk-semaphore.cpp
+	"../../../kernel/Kernel.h"
+	"../../../kernel/Debug.h"
+	"../../../support/StringMe.h"
+	"../../../support/Errors.h"
+	<winsock2.h>
+	<windows.h>
+	<stdio.h>
+
+1487753925 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\etk-thread.cpp
+	"../../../kernel/Kernel.h"
+	"../../../kernel/Debug.h"
+	"../../../support/List.h"
+	"../../../support/StringMe.h"
+	"../../../support/Errors.h"
+	"../../../support/SimpleLocker.h"
+	"../../../support/SupportDefs.h"
+	<winsock2.h>
+	<windows.h>
+	<process.h>
+	<stdio.h>
+
+1487753949 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\unix\etk-area.cpp
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	<fcntl.h>
+	<errno.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<sys/mman.h>
+	"../config.h"
+	"../kernel/Kernel.h"
+	"../support/StringArray.h"
+	"../support/SimpleLocker.h"
+
+1487753986 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\unix\etk-image.cpp
+	"../support/SupportDefs.h"
+	<dlfcn.h"
+	"../kernel/Kernel.h"
+	"../storage/Path.h"
+
+1487754046 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\unix\etk-os.cpp
+	"../support/SupportDefs.h"
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<signal.h>
+	"../kernel/Kernel.h"
+	"../support/StringArray.h"
+	"../support/Locker.h"
+	"../app/Application.h"
+
+1487754076 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\unix\etk-timefuncs.cpp
+	<sys/time.h>
+	<time.h>
+	"../support/SupportDefs.h"
+	"../kernel/Kernel.h"
+	"../support/SimpleLocker.h"
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-area.cpp
+	"../../support/SupportDefs.h"
+	"../../kernel/Kernel.h"
+	"../../kernel/Debug.h"
+	"../../support/StringMe.h"
+	"../../support/Errors.h"
+	<winsock2.h>
+	<windows.h>
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-image.cpp
+	"../../kernel/Kernel.h"
+	"../../storage/Path.h"
+	"../../support/StringMe.h"
+	"../../support/Errors.h"
+	<winsock2.h>
+	<windows.h>
+	<sys/cygwin.h>
+
+1487409413 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-os.cpp
+	"../../kernel/Kernel.h"
+	"../../support/StringMe.h"
+	"../../private/PrivateApplication.h"
+	<winsock2.h>
+	<windows.h>
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-timefuncs.cpp
+	"../../kernel/Kernel.h"
+	<winsock2.h>
+	<windows.h>
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netaddress.cpp
+	"NetAddress.h"
+	"../app/Message.h"
+	"../kernel/Debug.h"
+	"../support/Errors.h"
+	"../support/ByteOrder.h"
+	<netdb.h>
+	<netinet/in.h>
+	<sys/socket.h>
+	<arpa/inet.h>
+	<arpa/inet.h>
+	<winsock2.h>
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netbuffer.cpp
+	"NetBuffer.h"
+	"../support/ByteOrder.h"
+	"../support/Errors.h"
+	"../app/Message.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netdebug.cpp
+	"NetDebug.h"
+	"../support/Autolock.h"
+	"../support/SimpleLocker.h"
+	"../support/StringMe.h"
+	<stdarg.h>
+	<stdio.h>
+
+1487412296 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netendpoint.cpp
+	"NetEndpoint.h"
+	"../support/Errors.h"
+	"../app/Message.h"
+	"../kernel/Debug.h"
+	<errno.h>
+	<string.h>
+	<sys/types.h>
+	<signal.h>
+	<sys/time.h>
+	<netdb.h>
+	<unistd.h>
+	<fcntl.h>
+	<sys/socket.h>
+	<arpa/inet.h>
+	<arpa/inet.h>
+	<winsock2.h>
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\memory.cpp
+	"Memory.h"
+	"../kernel/Debug.h"
+
+1486891693 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\memory.h
+	<kits/support/SupportDefs.h>
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\messagebody.cpp
+	"MessageBody.h"
+	"Memory.h"
+	"../support/StringMe.h"
+	"../kernel/Debug.h"
+
+1486891693 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\messagebody.h
+	<kits/support/SupportDefs.h>
+	"../support/List.h"
+	"../support/StreamIO.h"
+
+1486675977 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\object.cpp
+	"Object.h"
+
+1486891693 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\object.h
+	<kits/support/SupportDefs.h>
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\privateapplication.cpp
+	"PrivateApplication.h"
+	"../kernel/OS.h"
+	"../support/StringMe.h"
+	"../kernel/Debug.h"
+	"../support/Errors.h"
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\privatehandler.cpp
+	"PrivateHandler.h"
+	"PrivateApplication.h"
+	"../kernel/Kernel.h"
+	"../support/ClassInfo.h"
+	"../support/Autolock.h"
+	"../support/Errors.h"
+
+1486675694 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\standardio.cpp
+	"StandardIO.h"
+	<unistd.h>
+	<io.h>
+
+1486891693 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\standardio.h
+	<kits/support/SupportDefs.h>
+	"../support/StreamIO.h"
+
+1487754093 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\token.cpp
+	"Token.h"
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+	"../support/Locker.h"
+	"../support/List.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\arcgenerator.cpp
+	"ArcGenerator.h"
+	"../kernel/Debug.h"
+	<math.h>
+	<string.h>
+
+1486675977 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\linegenerator.cpp
+	"LineGenerator.h"
+	<math.h>
+	<string.h>
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\pixmap.cpp
+	"Pixmap.h"
+	"../support/StringArray.h"
+	"../support/Errors.h"
+	"../kernel/Debug.h"
+	"../support/StringMe.h"
+	<string.h>
+	<stdlib.h>
+
+1487409554 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\render.cpp
+	"Render.h"
+	"LineGenerator.h"
+	"ArcGenerator.h"
+	"../support/List.h"
+	"../support/Errors.h"
+	"../kernel/Debug.h"
+	<string.h>
+	<stdlib.h>
+	<math.h>
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\directory.cpp
+	"Directory.h"
+	"Path.h"
+	"../support/StringMe.h"
+	"../support/Errors.h"
+	"../kernel/Debug.h"
+	<sys/types.h>
+	<sys/stat.h>
+	<winsock2.h>
+	<windows.h>
+	<unistd.h>
+	<dirent.h>
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\entry.cpp
+	"Entry.h"
+	"Directory.h"
+	"../support/StringMe.h"
+	"../support/Errors.h"
+	"../kernel/Debug.h"
+	<unistd.h>
+	<io.h>
+	<winsock2.h>
+	<windows.h>
+	<sys/types.h>
+	<sys/stat.h>
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\file.cpp
+	"File.h"
+	"Path.h"
+	"../support/StringMe.h"
+	"../support/Errors.h"
+	"../kernel/Debug.h"
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<unistd.h>
+	<winsock2.h>
+	<windows.h>
+
+1487754491 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\filepanel.cpp
+	"FilePanel.h"
+	"FindDirectory.h"
+	"VolumeRoster.h"
+	"../app/Application.h"
+	"../interface/Button.h"
+	"../interface/MenuField.h"
+	"../interface/MenuBar.h"
+	"../interface/Menu.h"
+	"../interface/MenuItem.h"
+	"../interface/ListView.h"
+	"../interface/ListItem.h"
+	"../interface/ScrollView.h"
+	"../interface/TextControl.h"
+	"../interface/StringView.h"
+	"../interface/Bitmap.h"
+	"../interface/Window.h"
+	"../kernel/Kernel.h"
+	"../render/Pixmap.h"
+	"../storage/Directory.h"
+	"../support/Autolock.h"
+	"../support/ClassInfo.h"
+	"../app/Message.h"
+	"../app/MessageFilter.h"
+	"../support/Errors.h"
+	"../app/AppDefs.h"
+	"../kernel/Debug.h"
+	<time.h>
+	"icons/volume.xpm"
+	"icons/folder.xpm"
+	"icons/file.xpm"
+
+1376845640 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\icons\volume.xpm
+
+1376845640 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\icons\folder.xpm
+
+1376845640 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\icons\file.xpm
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\finddirectory.cpp
+	"FindDirectory.h"
+	"../support/StringMe.h"
+	"../support/Errors.h"
+	<be/storage/FindDirectory.h>
+	<be/storage/Volume.h>
+	<be/storage/Path.h>
+	<winsock2.h>
+	<windows.h>
+	<userenv.h>
+	<stdlib.h>
+
+1376845640 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\node.cpp
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\path.cpp
+	"Path.h"
+	"../support/StringMe.h"
+	"../support/Errors.h"
+	<ctype.h>
+	<io.h>
+	<direct.h>
+	<unistd.h>
+	<sys/types.h>
+	<sys/stat.h>
+
+1487409413 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\volume.cpp
+	"Volume.h"
+	"../support/Errors.h"
+	<be/storage/Entry.h>
+	<be/storage/Directory.h>
+	<be/storage/Path.h>
+	<be/storage/VolumeRoster.h>
+	<winsock2.h>
+	<windows.h>
+	<stdio.h>
+	<mntent.h>
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\volumeroster.cpp
+	"VolumeRoster.h"
+	"../support/Errors.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\archivable.cpp
+	"Archivable.h"
+	"../app/Message.h"
+	"../support/Errors.h"
+	"../kernel/Debug.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\byteorder.c
+	"ByteOrder.h"
+	"../support/Errors.h"
+
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\dataio.cpp
+	"DataIO.h"
+	"../support/Errors.h"
+
+1486590166 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\flattenable.cpp
+	"Flattenable.h"
+
+1486669361 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\list.cpp
+	"List.h"
+
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\locker.cpp
+	"Locker.h"
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+	"../support/Errors.h"
+
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\simplelocker.cpp
+	"SimpleLocker.h"
+	"../kernel/Kernel.h"
+	"../kernel/Debug.h"
+
+1487409853 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\streamio.cpp
+	"StreamIO.h"
+	"../support/StringMe.h"
+	"../private/StandardIO.h"
+	"../kernel/Debug.h"
+	"../support/Errors.h"
+
+1486675977 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\stringarray.cpp
+	"StringArray.h"
+	"StringMe.h"
+
+1486972216 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\freetype\include\ft2build.h
+	<freetype/config/ftheader.h>
+
+1487055571 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\freetype\include\freetype\freetype.h
+	<ft2build.h>
+
+1487757121 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\stringme.cpp
+	"StringMe.h"
+	"StringArray.h"
+	"../kernel/Debug.h"
+
+1487412042 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\xml\simplexmlparser.cpp
+	"SimpleXmlParser.h"
+	"../support/StringMe.h"
+	"../support/StringArray.h"
+	"../support/Errors.h"
+	"../kernel/Debug.h"
+	<stdlib.h>
+
+1487759069 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\be.cpp
+	"BE.h"
+

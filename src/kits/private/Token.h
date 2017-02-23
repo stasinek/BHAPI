@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_PRIVATE_TOKEN__H
 #define BHAPI_PRIVATE_TOKEN__H
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 #include "../support/Locker.h"
 
 #ifdef __cplusplus /* Just for C++ */

@@ -29,7 +29,7 @@
 
 #include "InterfaceDefs.h"
 
-IMPEXP_BHAPI b_rgb_color b_ui_color(b_color_which which)
+EXP_BHAPI b_rgb_color b_ui_color(b_color_which which)
 {
 	b_rgb_color color;
 
@@ -132,13 +132,13 @@ IMPEXP_BHAPI b_rgb_color b_ui_color(b_color_which which)
 }
 
 
-IMPEXP_BHAPI float b_ui_get_scrollbar_vertical_width()
+EXP_BHAPI float b_ui_get_scrollbar_vertical_width()
 {
 	return 16;
 }
 
 
-IMPEXP_BHAPI float b_ui_get_scrollbar_horizontal_height()
+EXP_BHAPI float b_ui_get_scrollbar_horizontal_height()
 {
 	return 16;
 }

@@ -31,7 +31,7 @@
 #ifndef BHAPI_REGION__H
 #define BHAPI_REGION__H
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 #include "../interface/Point.h"

@@ -30,7 +30,7 @@
 #ifndef BHAPI_CONTROL__H
 #define BHAPI_CONTROL__H
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 enum {
     B_CONTROL_OFF = 0,

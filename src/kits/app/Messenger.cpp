@@ -439,7 +439,7 @@ BMessenger::_GetMessageFromPort(void *port, b_uint32 flags, b_bigtime_t timeout,
 	BMessage* retMsg = NULL;
 
 	do{
-		b_size_t bufferSize = bhapi_port_buffer_size_etc(port, flags, timeout);
+        b_int64 bufferSize = bhapi_port_buffer_size_etc(port, flags, timeout);
 		if(bufferSize == 0)
 		{
 			b_int32 code;

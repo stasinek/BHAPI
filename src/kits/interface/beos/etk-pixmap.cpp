@@ -26,7 +26,8 @@
  * File: etk-pixmap.cpp
  *
  * --------------------------------------------------------------------------*/
-#ifdef BEOS
+#ifdef BHAPI_OS_BEOS
+
 
 #include <be/interface/View.h>
 #include <be/interface/Region.h>

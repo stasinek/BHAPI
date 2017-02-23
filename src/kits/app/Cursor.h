@@ -25,12 +25,12 @@
  *
  * File: Cursor.h
  * Description: mouse cursor for application
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #ifndef BHAPI_CURSOR__H
 #define BHAPI_CURSOR__H
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 #include "../support/Archivable.h"
 #ifdef __cplusplus /* Just for C++ */
 
@@ -62,6 +62,7 @@ private:
 	void *fData;
 };
 
+#ifdef BHAPI_BUILD_LIBRARY
 
 inline b_uint8 BCursor::SpotX() const
 {
@@ -73,7 +74,7 @@ inline b_uint8 BCursor::SpotY() const
 {
 	return(Spot() & 0xff);
 }
-
+#endif
 
 extern IMPEXP_BHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT;
 extern IMPEXP_BHAPI const BCursor *B_CURSOR_HAND;

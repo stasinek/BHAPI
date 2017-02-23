@@ -26,18 +26,19 @@
  * File: etk-semaphore-umtx.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_LINUX
 
 #include <stdlib.h>
-#include <fcntl.h"
+#include <fcntl.h>
 
-#include <pthread.h"
-#include <semaphore.h"
+#include <pthread.h>
+#include <semaphore.h>
 
 #include <sys/types.h>
-#include <unistd.h"
-#include <string.h"
-#include <time.h"
-#include <errno.h"
+#include <unistd.h>
+#include <string.h>
+#include <time.h>
+#include <errno.h>
 
 extern "C" {
 /* use umtx instead of pshared-semaphore */
@@ -725,4 +726,4 @@ IMPEXP_BHAPI b_status_t bhapi_get_sem_count(void *data, b_int64 *count)
 
 	return B_OK;
 }
-
+#endif

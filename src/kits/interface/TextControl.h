@@ -31,7 +31,7 @@
 #ifndef BHAPI_TEXT_CONTROL__H
 #define BHAPI_TEXT_CONTROL__H
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 class BMessage;

@@ -26,15 +26,16 @@
  * File: etk-area.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_LINUX
 
 #include <stdlib.h>
-#include <string.h"
-#include <unistd.h"
-#include <fcntl.h"
-#include <errno.h"
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
 #include <sys/types.h>
-#include <sys/stat.h"
-#include <sys/mman.h"
+#include <sys/stat.h>
+#include <sys/mman.h>
 
 #include "../config.h"
 #include "../kernel/Kernel.h"
@@ -437,4 +438,5 @@ bhapi_set_area_protection(void *data, b_uint32 new_protection)
 }
 
 #endif // HAVE_SHM_OPEN
+#endif // BHAPI_OS_LINUX
 

@@ -26,14 +26,15 @@
  * File: etk-thread.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_LINUX
 
 #include <stdlib.h>
-#include <stdio.h"
+#include <stdio.h>
 #include <sys/types.h>
-#include <unistd.h"
-#include <pthread.h"
-#include <errno.h"
-#include <signal.h"
+#include <unistd.h>
+#include <pthread.h>
+#include <errno.h>
+#include <signal.h>
 
 #include "../config.h"
 #include "../kernel/Kernel.h"
@@ -981,4 +982,5 @@ IMPEXP_BHAPI b_int64 bhapi_get_current_team_id(void)
 	return((b_int64)getpid());
 #endif
 }
+#endif // BHAPI_OS_LINUX
 

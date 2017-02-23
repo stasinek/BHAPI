@@ -27,21 +27,23 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <stdlib.h>
-#include <fcntl.h"
+#ifdef BHAPI_OS_LINUX
 
-#include <pthread.h"
-#include <semaphore.h"
+#include <stdlib.h>
+#include <fcntl.h>
+
+#include <pthread.h>
+#include <semaphore.h>
 #include <sys/types.h>
-#include <unistd.h"
-#include <string.h"
-#include <time.h"
-#include <errno.h"
+#include <unistd.h>
+#include <string.h>
+#include <time.h>
+#include <errno.h>
 
 #include "../config.h"
 #include "../BHAPIBuild.h"
 
-#ifdef BHAPI_OS_CYGWIN 
+#ifdef BHAPI_OS_CYGWIN
 	#warning "Posix IPC semaphore won't to be support at all."
 	#warning "It's recommended that you use the WIN32-Thread implemented."
 #endif
@@ -856,4 +858,4 @@ IMPEXP_BHAPI b_status_t bhapi_get_sem_count(void *data, b_int64 *count)
 
 	return B_OK;
 }
-
+#endif

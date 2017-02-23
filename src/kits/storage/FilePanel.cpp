@@ -712,7 +712,7 @@ BFilePanelView::BFilePanelView(BRect frame, bool allow_multiple_selection)
 BFilePanelView::~BFilePanelView()
 {
 	struct column_data *data;
-	while((data = (struct column_data*)fColumns.RemoveItem(0)) != NULL)
+	while((data = (struct column_data*)fColumns.RemoveItems(0,1)) != NULL)
 	{
 		if(data->name != NULL) delete[] data->name;
 		delete data;
@@ -1164,7 +1164,7 @@ BFilePanelWindow::MessageReceived(BMessage *msg)
 
 		case MSG_PANEL_SELECT_ALL:
 			listView = (BListView*)FindView("PoseView");
-			listView->Select(0, -1);
+			listView->Select(0, -1, false);
 			listView->Invalidate();
 			break;
 
@@ -1495,7 +1495,7 @@ BFilePanelWindow::RefreshDirMenu()
 		while((menuItem = fDirMenu->ItemAt(0)) != NULL)
 		{
 			if(b_is_instance_of(menuItem, BMenuSeparatorItem)) break;
-			fDirMenu->RemoveItem(0);
+			fDirMenu->RemoveItem((b_int32)0);
 			delete menuItem;
 		}
 	}

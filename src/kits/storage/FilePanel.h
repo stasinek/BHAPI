@@ -30,7 +30,7 @@
 #ifndef BHAPI_FILE_PANEL__H
 #define BHAPI_FILE_PANEL__H
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 typedef enum b_file_panel_mode {
     B_OPEN_PANEL,

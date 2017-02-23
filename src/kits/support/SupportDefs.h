@@ -31,26 +31,26 @@
 #ifndef BHAPI_SUPPORT_DEFS__H
 #define BHAPI_SUPPORT_DEFS__H
 
-#define BHAPI_COMPILATION
-#define BHAPI_OS_WIN32
-#define BHAPI_GRAPHICS_WIN32_BUILT_IN
-
-#ifdef WIN32
-#define BHAPI_OS_WIN32
+# ifdef BHAPI_OS_WIN32
+# undef WIN32
+#define WIN32
 #endif
-#ifdef LINUX
-#define BHAPI_OS_LINUX
+# ifdef BHAPI_OS_LINUX
+# undef LINUX
+#define LINUX
 #endif
-#ifdef MACOS
-#define BHAPI_OS_MACOS
+# ifdef BHAPI_OS_MACOS
+# undef MACOS
+#define MACOS
 #endif
-
 
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h> /* for bzero */
 #include <math.h>
+#include <stdio.h>
+#include <ctype.h>
 
 /* The size of a `float', as computed by sizeof. */
 #define SIZEOF_FLOAT 4
@@ -107,18 +107,34 @@
 #define B_MININT32 INT_MIN
 #define B_MAXUINT32 UINT_MAX
 #define B_MAXINT32 INT_MAX
-#define B_MAXUINT64 ULLONG_MAX
-#define B_MAXINT64 LLONG_MAX
+#ifdef _MSC_VER
+    #define B_MAXUINT64 ULLONG_MAX
+    #define B_MAXINT64   LLONG_MAX
+    #define B_MININT64   LLONG_MIN
+#endif
+#ifdef __GNUC__
+    #define B_MAXUINT64 __LONG_LONG_MAX__
+    #define B_MAXINT64  __LONG_LONG_MAX__
+    #define B_MININT64  __LONG_LONG_MIN__
+#else
+    #ifndef B_MAXINT64
+    #define B_MAXUINT64 ULLONG_MAX
+    #define B_MAXINT64   LLONG_MAX
+    #define B_MININT64   LLONG_MIN
+    #endif // B_MAXINT64
+#endif
+
+
 #include <float.h>
 #define B_MAXFLOAT FLT_MAX
 #define B_MINFLOAT FLT_MIN
 
 #ifndef SIZEOF_FLOAT
-#define SIZEOF_FLOAT 4
+    #define SIZEOF_FLOAT 4
 #endif
 
 #ifndef SIZEOF_DOUBLE
-#define SIZEOF_DOUBLE 8
+    #define SIZEOF_DOUBLE 8
 #endif
 
 typedef unsigned __int32 b_unichar32;
@@ -178,29 +194,29 @@ enum {
 typedef	b_int8	bool;
 
 #ifndef false
-#define false (0)
+    #define false (0)
 #endif
 
 #ifndef true
-#define true (!false)
+    #define true (!false)
 #endif
 
 #endif /* !__cplusplus */
 
 #ifndef FALSE
-#define FALSE (0)
+    #define FALSE (0)
 #endif
 
 #ifndef TRUE
-#define TRUE (!FALSE)
+    #define TRUE (!FALSE)
 #endif
 
 #ifndef min_c
-#define min_c(a, b)  ((a) > (b) ? (b) : (a))
+    #define min_c(a, b)  ((a) > (b) ? (b) : (a))
 #endif
 
 #ifndef max_c
-#define max_c(a, b)  ((a) > (b) ? (a) : (b))
+    #define max_c(a, b)  ((a) > (b) ? (a) : (b))
 #endif
 
 #ifndef __cplusplus
@@ -256,11 +272,12 @@ typedef	b_int8	bool;
 #  endif
 #endif /* _LOCAL */
 
-#ifdef BHAPI_COMPILATION
+#ifdef BHAPI_BUILD_LIBRARY
     #define IMPEXP_BHAPI _EXPORT
-#else /* !BHAPI_COMPILATION */
+#else /* !BHAPI_BUILD_LIBRARY */
     #define IMPEXP_BHAPI _IMPORT
-#endif /* BHAPI_COMPILATION */
+#endif /* BHAPI_BUILD_LIBRARY */
+#define EXP_BHAPI _EXPORT
 
 #ifdef __cplusplus
 extern "C" {
@@ -279,8 +296,8 @@ extern IMPEXP_BHAPI const b_uint16 bhapi_binary_age;
 #ifdef __cplusplus
 
 #ifdef BHAPI_OS_WIN32
-	#ifdef _WIN32
-#include <winsock2.h>
+    #ifdef _WIN32
+        #include <winsock2.h>
         #include <windows.h>
 	#endif
 	#ifdef PostMessage

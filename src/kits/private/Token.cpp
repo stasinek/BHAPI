@@ -62,7 +62,7 @@ BTokensDepotPrivateData::~BTokensDepotPrivateData()
 {
 	BList *list;
 
-	while((list = (BList*)RemoveItem(0)) != NULL)
+	while((list = (BList*)RemoveItems(0,1)) != NULL)
 	{
 		for(b_int32 i = 0; i < list->CountItems(); i++)
 		{

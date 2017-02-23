@@ -670,6 +670,11 @@ BListView::Select(b_int32 index, bool extend)
 	Select(index, index, extend);
 }
 
+void
+BListView::Select(b_int32 start, b_int32 finish)
+{
+	Select(start, finish, false);
+}
 
 void
 BListView::Select(b_int32 start, b_int32 finish, bool extend)

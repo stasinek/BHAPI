@@ -42,7 +42,7 @@ BLayoutContainer::BLayoutContainer()
 BLayoutContainer::~BLayoutContainer()
 {
 	BLayoutItem *item;
-	while((item = (BLayoutItem*)fItems.RemoveItem(0)) != NULL)
+	while((item = (BLayoutItem*)fItems.RemoveItems(0,1)) != NULL)
 	{
 		item->fContainer = NULL;
 		delete item;
@@ -80,7 +80,7 @@ BLayoutContainer::RemoveItem(BLayoutItem *item)
 	if(item == NULL || item->fContainer != this) return false;
 
 	b_int32 index = item->fIndex;
-	if(fItems.RemoveItem(index) == false) return false;
+	if(fItems.RemoveItem(index) == NULL) return false;
 
 	item->fContainer = NULL;
 	item->fIndex = -1;

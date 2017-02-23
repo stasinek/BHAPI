@@ -26,7 +26,8 @@
  * File: etk-application.cpp
  *
  * --------------------------------------------------------------------------*/
-#ifdef BEOS
+#ifdef BHAPI_OS_BEOS
+
 
 #include <stdlib.h>
 

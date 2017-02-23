@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_STRING_ARRAY__H
 #define BHAPI_STRING_ARRAY__H
-#include "SupportDefs.h"
+#include "../support/SupportDefs.h"
 #include "List.h"
 #ifdef __cplusplus /* Just for C++ */
 class BString;

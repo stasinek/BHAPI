@@ -26,8 +26,9 @@
  * File: etk-locker.cpp
  *
  * --------------------------------------------------------------------------*/
+#ifdef BHAPI_OS_BEOS
 
-#include <be/kernel/OS.h"
+#include <be/kernel/OS.h>
 
 #include "../kernel/Kernel.h"
 
@@ -398,4 +399,4 @@ IMPEXP_BHAPI void bhapi_memory_tracing_unlock(void)
 	release_sem(__bhapi_win32_memory_tracing_locker);
 }
 #endif // BHAPI_BUILD_WITH_MEMORY_TRACING
-
+#endif // BHAPI_OS_BEOS

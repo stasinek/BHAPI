@@ -30,7 +30,7 @@
 #ifndef BHAPI_RECT__H
 #define BHAPI_RECT__H
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 #include "../interface/Point.h"
@@ -122,6 +122,7 @@ public:
 	void PrintToStream() const;
 };
 
+#ifdef BHAPI_BUILD_LIBRARY
 
 inline BPoint BRect::LeftTop() const
 {
@@ -234,8 +235,7 @@ inline float BRect::Height() const
 {
 	return(bottom - top);
 }
-
+#endif // BHAPI_BUILD_LIBRARY
 #endif /* __cplusplus */
-
 #endif /* BHAPI_RECT__H */
 

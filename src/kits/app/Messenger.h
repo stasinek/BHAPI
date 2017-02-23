@@ -30,7 +30,7 @@
 
 #ifndef BHAPI_MESSENGER__H
 #define BHAPI_MESSENGER__H
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

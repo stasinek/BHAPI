@@ -32,7 +32,7 @@
 #ifndef BHAPI_MESSAGE_FILTER__H
 #define BHAPI_MESSAGE_FILTER__H
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 typedef enum b_filter_result {
     B_SKIP_MESSAGE,

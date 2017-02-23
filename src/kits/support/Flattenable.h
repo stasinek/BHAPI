@@ -30,7 +30,7 @@
 #ifndef BHAPI_FLATTENABLE__H
 #define BHAPI_FLATTENABLE__H
 
-#include "SupportDefs.h"
+#include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 
 class IMPEXP_BHAPI BFlattenable {

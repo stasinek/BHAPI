@@ -30,7 +30,7 @@
 
 #ifndef BHAPI_LINE_GENERATOR__H
 #define BHAPI_LINE_GENERATOR__H
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 #include "../interface/Rect.h"
 
 #ifdef __cplusplus /* Just for C++ */

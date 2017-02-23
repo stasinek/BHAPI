@@ -50,7 +50,7 @@
 	#else
 		#ifdef _MSC_VER
 			#define isfinite(a)	_finite(a)
-			#define HAVE_ISFINITE	1 
+			#define HAVE_ISFINITE	1
 		#endif // _MSC_VER
 	#endif
 #endif
@@ -1354,7 +1354,7 @@ BString::FindLast(const BString &string, b_int32 beforeOffset) const
 
     char *string_find = b_strndup(this->String(), beforeOffset + 1);
 	if(string_find == NULL) return -1;
-	
+
     const char *tmp = b_strrstr(string_find, string.String());
 
 	b_int32 ret = -1;
@@ -1405,7 +1405,7 @@ BString::FindLast(char c, b_int32 beforeOffset) const
 
     char *string_find = b_strndup(this->String(), beforeOffset + 1);
 	if(string_find == NULL) return -1;
-	
+
 	const char *tmp = strrchr(string_find, c);
 
 	b_int32 ret = -1;
@@ -1582,7 +1582,7 @@ BString::IFindLast(char c, b_int32 beforeOffset) const
 
     char *string_find = b_strndup(this->String(), beforeOffset + 1);
 	if(string_find == NULL) return -1;
-	
+
 	const char *tmp = b_strrcasechr(string_find, c);
 
 	b_int32 ret = -1;
@@ -1614,7 +1614,6 @@ BString::ReplaceLast(char replaceThis, char withThis)
 
 	return *this;
 }
-
 
 BString&
 BString::ReplaceAll(char replaceThis, char withThis, b_int32 fromOffset)
@@ -1670,6 +1669,12 @@ BString::ReplaceLast(const char *replaceThis, const char *withThis)
 	return *this;
 }
 
+
+BString&
+BString::ReplaceAll(const char *replaceThis, const char *withThis)
+{
+BString::ReplaceAll(replaceThis,withThis,0);
+}
 
 BString&
 BString::ReplaceAll(const char *replaceThis, const char *withThis, b_int32 fromOffset)
@@ -2124,7 +2129,7 @@ BString::CapitalizeEachWord()
 		if(fBuffer[0] != ' ') fBuffer[0] = toupper(fBuffer[0]);
 
 		char *src = fBuffer;
-		
+
 		while(true)
 		{
 			char *tmp = strchr(src, ' ');
@@ -2441,7 +2446,7 @@ BString::GetInteger(b_uint64 *value) const
 	return true;
 #else
 #if SIZEOF___INT64 == 8
-    *value = (b_uint64)_strtoui64(this->String(), NULL, 10);
+    *value = (b_uint64)strtoull(this->String(), NULL, 10);
 	return true;
 #else
 	return false;
@@ -3069,7 +3074,7 @@ IMPEXP_BHAPI char* b_strdup_vprintf(const char *format, va_list ap)
 
 							strWidth.Append(str[curOffset], 1);
 						}
-						strWidth.GetInteger(&precision_width);
+						strWidth.GetInteger((b_int32*)&precision_width);
 					}
 					break;
 
@@ -3104,7 +3109,7 @@ IMPEXP_BHAPI char* b_strdup_vprintf(const char *format, va_list ap)
 
 							strWidth.Append(str[curOffset], 1);
 						}
-						strWidth.GetInteger(&field_width);
+						strWidth.GetInteger((b_int32*)&field_width);
 					}
 					break;
 

@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_ARCHIVABLE__H
 #define BHAPI_ARCHIVABLE__H
-#include "SupportDefs.h"
+#include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 class BMessage;
 class IMPEXP_BHAPI BArchivable {

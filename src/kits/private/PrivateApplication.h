@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_PRIVATE_APPLICATION__H
 #define BHAPI_PRIVATE_APPLICATION__H
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 #include "../support/SimpleLocker.h"
 #include "../private/Token.h"
 

@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_PRIVATE_STANDARD_IO__H
 #define BHAPI_PRIVATE_STANDARD_IO__H
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 #include "../support/StreamIO.h"
 
 #ifdef __cplusplus /* Just for C++ */

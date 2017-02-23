@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_PRIVATE_MESSAGE_BODY__H
 #define BHAPI_PRIVATE_MESSAGE_BODY__H
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 #include "../support/List.h"
 #include "../support/StreamIO.h"
 

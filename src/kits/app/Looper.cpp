@@ -49,15 +49,29 @@
 
 #include <stdlib.h>
 
-BList BLooper::sLooperList;
+#ifdef BHAPI_BUILD_LIBRARY
+EXP_BHAPI BList BLooper::sLooperList;
+#endif // BHAPI_BUILD_LIBRARY
 
-BLooper::BLooper(const char *name = NULL)
-    : BLooper(name,B_NORMAL_PRIORITY)
+BLooper::BLooper(const char *name)
+	: BHandler(name), fDeconstructing(false), fProxy(NULL), fHandlersCount(1), fPreferredHandler(NULL), fLocker(NULL), fLocksCount(B_INT64_CONSTANT(0)), fThread(NULL), fSem(NULL), fMessageQueue(NULL), fCurrentMessage(NULL), fThreadExited(NULL)
 {
+	this->Init(name,B_NORMAL_PRIORITY);
 }
 
-BLooper::BLooper(const char *name = NULL, b_int32 priority = B_NORMAL_PRIORITY)
+BLooper::BLooper(b_int32 priority)
+	: BHandler(""), fDeconstructing(false), fProxy(NULL), fHandlersCount(1), fPreferredHandler(NULL), fLocker(NULL), fLocksCount(B_INT64_CONSTANT(0)), fThread(NULL), fSem(NULL), fMessageQueue(NULL), fCurrentMessage(NULL), fThreadExited(NULL)
+{
+	this->Init(NULL,priority);
+}
+
+BLooper::BLooper(const char *name, b_int32 priority)
 	: BHandler(name), fDeconstructing(false), fProxy(NULL), fHandlersCount(1), fPreferredHandler(NULL), fLocker(NULL), fLocksCount(B_INT64_CONSTANT(0)), fThread(NULL), fSem(NULL), fMessageQueue(NULL), fCurrentMessage(NULL), fThreadExited(NULL)
+{
+	this->Init(name,priority);
+}
+
+void BLooper::Init(const char *name, b_int32 priority)
 {
 	BLocker *hLocker = bhapi_get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
@@ -75,7 +89,6 @@ BLooper::BLooper(const char *name = NULL, b_int32 priority = B_NORMAL_PRIORITY)
 
 	sLooperList.AddItem(this);
 }
-
 
 BLooper::~BLooper()
 {

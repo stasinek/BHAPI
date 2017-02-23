@@ -60,9 +60,11 @@
 #else
 #	include <winsock2.h>
 #	define socklen_t int
-#	define EWOULDBLOCK WSAEWOULDBLOCK
+#    undef EWOULBLOCK
+#   define EWOULDBLOCK WSAEWOULDBLOCK
+#    undef ECONNABORTED
 #	define ECONNABORTED WSAECONNABORTED
-#	undef EINTR
+#	 undef EINTR
 #	define EINTR WSAEINTR
 #endif
 

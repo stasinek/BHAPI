@@ -30,7 +30,7 @@
 #ifndef BHAPI_VIEW_PRIVATE__H
 #define BHAPI_VIEW_PRIVATE__H
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 #include "Rect.h"

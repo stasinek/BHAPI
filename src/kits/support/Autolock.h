@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_AUTOLOCK__H
 #define BHAPI_AUTOLOCK__H
-#include "SupportDefs.h"
+#include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 
 template<class C> class BAutolock

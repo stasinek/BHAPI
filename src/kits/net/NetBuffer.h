@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_NET_BUFFER__H
 #define BHAPI_NET_BUFFER__H
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 #include "../support/Archivable.h"
 
 #ifdef __cplusplus /* Just for C++ */

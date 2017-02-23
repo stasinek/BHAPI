@@ -30,7 +30,7 @@
 #ifndef BHAPI_DATA_IO__H
 #define BHAPI_DATA_IO__H
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 
 

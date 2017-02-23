@@ -25,7 +25,7 @@
  *
  * File: Cursor.cpp
  * Description: mouse cursor for application
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #include "Cursor.h"
@@ -307,7 +307,7 @@ _LOCAL BCursor _B_CURSOR_HAND(cursor_hand);
 _LOCAL BCursor _B_CURSOR_HAND_MOVE(cursor_hand_move);
 _LOCAL BCursor _B_CURSOR_I_BEAM(cursor_i_beam);
 
-IMPEXP_BHAPI const BCursor *B_CURSOR_HAND = &_B_CURSOR_HAND;
-IMPEXP_BHAPI const BCursor *B_CURSOR_HAND_MOVE = &_B_CURSOR_HAND_MOVE;
-IMPEXP_BHAPI const BCursor *B_CURSOR_I_BEAM = &_B_CURSOR_I_BEAM;
+EXP_BHAPI const BCursor *B_CURSOR_HAND = &_B_CURSOR_HAND;
+EXP_BHAPI const BCursor *B_CURSOR_HAND_MOVE = &_B_CURSOR_HAND_MOVE;
+EXP_BHAPI const BCursor *B_CURSOR_I_BEAM = &_B_CURSOR_I_BEAM;
 

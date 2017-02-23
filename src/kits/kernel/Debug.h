@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_DEBUG__H
 #define BHAPI_DEBUG__H
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus
 #include <new>

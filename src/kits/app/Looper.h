@@ -30,7 +30,7 @@
 
 #ifndef BHAPI_LOOPER__H
 #define BHAPI_LOOPER__H
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
@@ -46,7 +46,9 @@ class IMPEXP_BHAPI BLooper : public BHandler {
 public:
 //	BLooper(const char *name = NULL,
 //		b_int32 priority = B_NORMAL_PRIORITY);
+	void Init(const char *name, b_int32 priority);
     BLooper(const char *name);
+    BLooper(b_int32 priority);
     BLooper(const char *name,
         b_int32 priority);
     virtual ~BLooper();

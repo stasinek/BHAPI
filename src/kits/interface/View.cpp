@@ -2803,9 +2803,7 @@ BView::DrawBitmap(const BBitmap *bitmap, BRect srcRect, BRect destRect)
 				   (b_uint32)destRect.Width(), (b_uint32)destRect.Height()) == B_OK) Window()->_Update(updateRect, false);
 }
 
-
-void
-BView::CopyBits(BRect srcRect, BRect destRect)
+void BView::CopyBits(BRect srcRect, BRect destRect)
 {
 	if(srcRect.IsValid() == false || destRect.IsValid() == false ||
 	   fLayout->VisibleRegion()->Intersects(destRect) == false) return;
@@ -2823,16 +2821,12 @@ BView::CopyBits(BRect srcRect, BRect destRect)
 				     (b_uint32)destRect.Width(), (b_uint32)destRect.Height()) == B_OK) Window()->_Update(updateRect, false);
 }
 
-
-void
-BView::Flush() const
+void BView::Flush() const
 {
 	// nothing yet
 }
 
-
-void
-BView::Sync() const
+void View::Sync() const
 {
 	// nothing yet
 }

@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_CLASS_INFO__H
 #define BHAPI_CLASS_INFO__H
-#include "SupportDefs.h"
+#include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 
 #if (defined(_MSC_VER) && !defined(_CPPRTTI))

@@ -30,7 +30,7 @@
 #ifndef BHAPI_STORAGE_DEFS__H
 #define BHAPI_STORAGE_DEFS__H
 
-#include <kits/support/SupportDefs.h>
+#include "../support/SupportDefs.h"
 
 typedef b_int32	b_dev_t;
 
