@@ -38,10 +38,7 @@ extern "C" {
 #define __SA__
 #undef __STRICT_ANSI__
 #endif
-_CRTIMP int __cdecl __MINGW_NOTHROW	b_strncasecmp(const char *a, const char *b, size_t c)
-{
-    return strncmp(a,b,c);
-}
+int __cdecl __MINGW_NOTHROW	b_strncasecmp(const char *a, const char *b, size_t c);
 //#define b_strncasecmp(a,b,c) _strnicmp(a,b,c)
 #ifdef __SA__
 #define __STRICT_ANSI__

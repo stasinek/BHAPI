@@ -2826,7 +2826,7 @@ void BView::Flush() const
 	// nothing yet
 }
 
-void View::Sync() const
+void BView::Sync() const
 {
 	// nothing yet
 }

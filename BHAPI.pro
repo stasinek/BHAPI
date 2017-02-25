@@ -11,7 +11,7 @@ DEFINES += BHAPI_BUILD_LIBRARY
 DEFINES += BHAPI_OS_WIN32
 DEFINES += BHAPI_GRAPHICS_WIN32_BUILT_IN
 
-CONFIG += windows shared
+CONFIG += windows shared staticlib
 CONFIG -= app_bundle
 CONFIG -= qt
 INCLUDEPATH += ..
@@ -223,7 +223,7 @@ HEADERS += bhapi.h\
     src/kits/XmlKit.h
 
 LIBS -= -lfreetype
-LIBS += -L"../freetype/lib/debug/libfreetype.a"
+LIBS += -L"../freetype/lib/debug" -libfreetype
 
 contains(QMAKE_COMPILER_DEFINES, BEOS) {
 SOURCES +=  src/kits/interface/beos/etk-application.cpp \

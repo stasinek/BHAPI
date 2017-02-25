@@ -1,11 +1,13 @@
-# 1 "../src/interface/Rect.cpp"
-# 1 "C:\\Documents and Settings\\stasiek.TC12\\My Documents\\prc++\\x86_libraries\\be\\BHAPI\\build-BHAPI-Desktop_Qt_5_5_0_MinGW_32bit-Debug//"
+# 1 "../src/kits/interface/Rect.cpp"
+# 1 "C:\\Documents and Settings\\stasiek.TC12\\My Documents\\prc++\\x86_libraries\\BHAPI\\build-BHAPI-Desktop_Qt_5_5_0_MinGW_32bit-Debug//"
 # 1 "<built-in>"
 # 1 "<command-line>"
-# 1 "../src/interface/Rect.cpp"
-# 30 "../src/interface/Rect.cpp"
-# 1 "../src/interface/./../support/SupportDefs.h" 1
-# 34 "../src/interface/./../support/SupportDefs.h"
+# 1 "../src/kits/interface/Rect.cpp"
+# 30 "../src/kits/interface/Rect.cpp"
+# 1 "../src/kits/interface/Rect.h" 1
+# 33 "../src/kits/interface/Rect.h"
+# 1 "../src/kits/interface/../support/SupportDefs.h" 1
+# 47 "../src/kits/interface/../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
 # 45 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 3 4
@@ -114,7 +116,7 @@ extern "C" {
 # 15 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_stdarg.h" 2 3 4
 # 141 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 2 3 4
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
-# 35 "../src/interface/./../support/SupportDefs.h" 2
+# 48 "../src/kits/interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
 
@@ -206,7 +208,7 @@ typedef struct {
   long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
 } max_align_t;
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
-# 36 "../src/interface/./../support/SupportDefs.h" 2
+# 49 "../src/kits/interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 1 3
 # 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
@@ -400,8 +402,8 @@ extern "C" {
 
   void __attribute__((__cdecl__)) _Exit(int) __attribute__ ((__noreturn__));
 
-  inline __attribute__ ((__noreturn__)) void __attribute__((__cdecl__)) _Exit(int status)
-  { _exit(status); }
+
+
 
 
 
@@ -670,7 +672,7 @@ extern "C" {
 
   __extension__ long long __attribute__((__cdecl__)) llabs(long long);
 
-  __extension__ inline long long __attribute__((__cdecl__)) llabs(long long _j) { return (_j >= 0 ? _j : -_j); }
+
 
 
   __extension__ long long __attribute__((__cdecl__)) strtoll(const char * __restrict__, char ** __restrict, int);
@@ -685,21 +687,7 @@ extern "C" {
   __extension__ char *__attribute__((__cdecl__)) ulltoa (unsigned long long , char *, int);
   __extension__ wchar_t *__attribute__((__cdecl__)) lltow (long long, wchar_t *, int);
   __extension__ wchar_t *__attribute__((__cdecl__)) ulltow (unsigned long long, wchar_t *, int);
-
-
-
-  __extension__ inline long long __attribute__((__cdecl__)) atoll (const char * _c) { return _atoi64 (_c); }
-  __extension__ inline char *__attribute__((__cdecl__)) lltoa (long long _n, char * _c, int _i) { return _i64toa (_n, _c, _i); }
-  __extension__ inline char *__attribute__((__cdecl__)) ulltoa (unsigned long long _n, char * _c, int _i) { return _ui64toa (_n, _c, _i); }
-  __extension__ inline long long __attribute__((__cdecl__)) wtoll (const wchar_t * _w) { return _wtoi64 (_w); }
-  __extension__ inline wchar_t *__attribute__((__cdecl__)) lltow (long long _n, wchar_t * _w, int _i) { return _i64tow (_n, _w, _i); }
-  __extension__ inline wchar_t *__attribute__((__cdecl__)) ulltow (unsigned long long _n, wchar_t * _w, int _i) { return _ui64tow (_n, _w, _i); }
-
-
-
-
-
-
+# 662 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
 }
 
 
@@ -849,7 +837,7 @@ void * __mingw_aligned_realloc (void *_Memory, size_t _Size, size_t _Offset);
 
 #pragma pack(pop)
 # 669 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 2 3
-# 37 "../src/interface/./../support/SupportDefs.h" 2
+# 50 "../src/kits/interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
 # 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
 extern "C" {
@@ -924,8 +912,8 @@ extern "C" {
   int __attribute__((__cdecl__)) strncasecmp (const char *, const char *, size_t);
   int __attribute__((__cdecl__)) strcasecmp (const char *, const char *);
 
-  inline int __attribute__((__cdecl__)) strncasecmp (const char *__sz1, const char *__sz2, size_t __sizeMaxCompare) { return _strnicmp (__sz1, __sz2, __sizeMaxCompare); }
-  inline int __attribute__((__cdecl__)) strcasecmp (const char *__sz1, const char *__sz2) { return _stricmp (__sz1, __sz2); }
+
+
 
 
 
@@ -1061,15 +1049,1275 @@ extern "C" {
 
 }
 # 181 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 2 3
-# 38 "../src/interface/./../support/SupportDefs.h" 2
-# 96 "../src/interface/./../support/SupportDefs.h"
+# 51 "../src/kits/interface/../support/SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 1 3
+# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+       
+# 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+
+
+
+
+struct _exception;
+
+#pragma pack(push,_CRT_PACKING)
+# 76 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+extern "C" {
+
+
+
+
+
+
+
+  typedef union __mingw_dbl_type_t {
+    double x;
+    unsigned long long val;
+    __extension__ struct {
+      unsigned int low, high;
+    } lh;
+  } __mingw_dbl_type_t;
+
+  typedef union __mingw_flt_type_t {
+    float x;
+    unsigned int val;
+  } __mingw_flt_type_t;
+
+  typedef union __mingw_ldbl_type_t
+  {
+    long double x;
+    __extension__ struct {
+      unsigned int low, high;
+      int sign_exponent : 16;
+      int res1 : 16;
+      int res0 : 32;
+    } lh;
+  } __mingw_ldbl_type_t;
+
+
+
+
+  extern double * _imp___HUGE;
+# 123 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  struct _exception {
+    int type;
+    const char *name;
+    double arg1;
+    double arg2;
+    double retval;
+  };
+
+  void __mingw_raise_matherr (int typ, const char *name, double a1, double a2,
+         double rslt);
+  void __mingw_setusermatherr (int (__attribute__((__cdecl__)) *)(struct _exception *));
+  __attribute__ ((__dllimport__)) void __setusermatherr(int (__attribute__((__cdecl__)) *)(struct _exception *));
+
+
+
+  double __attribute__((__cdecl__)) sin(double _X);
+  double __attribute__((__cdecl__)) cos(double _X);
+  double __attribute__((__cdecl__)) tan(double _X);
+  double __attribute__((__cdecl__)) sinh(double _X);
+  double __attribute__((__cdecl__)) cosh(double _X);
+  double __attribute__((__cdecl__)) tanh(double _X);
+  double __attribute__((__cdecl__)) asin(double _X);
+  double __attribute__((__cdecl__)) acos(double _X);
+  double __attribute__((__cdecl__)) atan(double _X);
+  double __attribute__((__cdecl__)) atan2(double _Y,double _X);
+  double __attribute__((__cdecl__)) exp(double _X);
+  double __attribute__((__cdecl__)) log(double _X);
+  double __attribute__((__cdecl__)) log10(double _X);
+  double __attribute__((__cdecl__)) pow(double _X,double _Y);
+  double __attribute__((__cdecl__)) sqrt(double _X);
+  double __attribute__((__cdecl__)) ceil(double _X);
+  double __attribute__((__cdecl__)) floor(double _X);
+
+
+  extern float __attribute__((__cdecl__)) fabsf (float x);
+  extern long double __attribute__((__cdecl__)) fabsl (long double);
+  extern double __attribute__((__cdecl__)) fabs (double _X);
+# 194 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  double __attribute__((__cdecl__)) ldexp(double _X,int _Y);
+  double __attribute__((__cdecl__)) frexp(double _X,int *_Y);
+  double __attribute__((__cdecl__)) modf(double _X,double *_Y);
+  double __attribute__((__cdecl__)) fmod(double _X,double _Y);
+
+  void __attribute__((__cdecl__)) sincos (double __x, double *p_sin, double *p_cos);
+  void __attribute__((__cdecl__)) sincosl (long double __x, long double *p_sin, long double *p_cos);
+  void __attribute__((__cdecl__)) sincosf (float __x, float *p_sin, float *p_cos);
+# 221 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  struct _complex {
+    double x;
+    double y;
+  };
+
+
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _cabs(struct _complex _ComplexA);
+  double __attribute__((__cdecl__)) _hypot(double _X,double _Y);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _j0(double _X);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _j1(double _X);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _jn(int _X,double _Y);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _y0(double _X);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _y1(double _X);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _yn(int _X,double _Y);
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _matherr (struct _exception *);
+# 248 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _chgsign (double _X);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _copysign (double _Number,double _Sign);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _logb (double);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _nextafter (double, double);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _scalb (double, long);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _finite (double);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fpclass (double);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isnan (double);
+
+
+
+
+
+
+__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) j0 (double) ;
+__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) j1 (double) ;
+__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) jn (int, double) ;
+__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) y0 (double) ;
+__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) y1 (double) ;
+__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) yn (int, double) ;
+
+__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) chgsign (double);
+# 278 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) finite (double);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) fpclass (double);
+# 295 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _set_SSE2_enable(int _Flag);
+# 323 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+typedef float float_t;
+typedef double double_t;
+# 358 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  extern int __attribute__((__cdecl__)) __fpclassifyl (long double);
+  extern int __attribute__((__cdecl__)) __fpclassifyf (float);
+  extern int __attribute__((__cdecl__)) __fpclassify (double);
+# 425 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  extern int __attribute__((__cdecl__)) __isnan (double);
+  extern int __attribute__((__cdecl__)) __isnanf (float);
+  extern int __attribute__((__cdecl__)) __isnanl (long double);
+# 488 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  extern int __attribute__((__cdecl__)) __signbit (double);
+  extern int __attribute__((__cdecl__)) __signbitf (float);
+  extern int __attribute__((__cdecl__)) __signbitl (long double);
+# 529 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  extern float __attribute__((__cdecl__)) sinf(float _X);
+  extern long double __attribute__((__cdecl__)) sinl(long double);
+
+  extern float __attribute__((__cdecl__)) cosf(float _X);
+  extern long double __attribute__((__cdecl__)) cosl(long double);
+
+  extern float __attribute__((__cdecl__)) tanf(float _X);
+  extern long double __attribute__((__cdecl__)) tanl(long double);
+  extern float __attribute__((__cdecl__)) asinf(float _X);
+  extern long double __attribute__((__cdecl__)) asinl(long double);
+
+  extern float __attribute__((__cdecl__)) acosf (float);
+  extern long double __attribute__((__cdecl__)) acosl (long double);
+
+  extern float __attribute__((__cdecl__)) atanf (float);
+  extern long double __attribute__((__cdecl__)) atanl (long double);
+
+  extern float __attribute__((__cdecl__)) atan2f (float, float);
+  extern long double __attribute__((__cdecl__)) atan2l (long double, long double);
+
+
+  extern float __attribute__((__cdecl__)) sinhf(float _X);
+
+
+
+  extern long double __attribute__((__cdecl__)) sinhl(long double);
+
+  extern float __attribute__((__cdecl__)) coshf(float _X);
+
+
+
+  extern long double __attribute__((__cdecl__)) coshl(long double);
+
+  extern float __attribute__((__cdecl__)) tanhf(float _X);
+
+
+
+  extern long double __attribute__((__cdecl__)) tanhl(long double);
+
+
+
+  extern double __attribute__((__cdecl__)) acosh (double);
+  extern float __attribute__((__cdecl__)) acoshf (float);
+  extern long double __attribute__((__cdecl__)) acoshl (long double);
+
+
+  extern double __attribute__((__cdecl__)) asinh (double);
+  extern float __attribute__((__cdecl__)) asinhf (float);
+  extern long double __attribute__((__cdecl__)) asinhl (long double);
+
+
+  extern double __attribute__((__cdecl__)) atanh (double);
+  extern float __attribute__((__cdecl__)) atanhf (float);
+  extern long double __attribute__((__cdecl__)) atanhl (long double);
+
+
+
+  extern float __attribute__((__cdecl__)) expf(float _X);
+
+
+
+  extern long double __attribute__((__cdecl__)) expl(long double);
+
+
+  extern double __attribute__((__cdecl__)) exp2(double);
+  extern float __attribute__((__cdecl__)) exp2f(float);
+  extern long double __attribute__((__cdecl__)) exp2l(long double);
+
+
+
+  extern double __attribute__((__cdecl__)) expm1(double);
+  extern float __attribute__((__cdecl__)) expm1f(float);
+  extern long double __attribute__((__cdecl__)) expm1l(long double);
+
+
+  extern float frexpf(float _X,int *_Y);
+
+
+
+  extern long double __attribute__((__cdecl__)) frexpl(long double,int *);
+
+
+
+
+  extern int __attribute__((__cdecl__)) ilogb (double);
+  extern int __attribute__((__cdecl__)) ilogbf (float);
+  extern int __attribute__((__cdecl__)) ilogbl (long double);
+
+
+  extern float __attribute__((__cdecl__)) ldexpf(float _X,int _Y);
+
+
+
+  extern long double __attribute__((__cdecl__)) ldexpl (long double, int);
+
+
+  extern float __attribute__((__cdecl__)) logf (float);
+  extern long double __attribute__((__cdecl__)) logl(long double);
+
+
+  extern float __attribute__((__cdecl__)) log10f (float);
+  extern long double __attribute__((__cdecl__)) log10l(long double);
+
+
+  extern double __attribute__((__cdecl__)) log1p(double);
+  extern float __attribute__((__cdecl__)) log1pf(float);
+  extern long double __attribute__((__cdecl__)) log1pl(long double);
+
+
+  extern double __attribute__((__cdecl__)) log2 (double);
+  extern float __attribute__((__cdecl__)) log2f (float);
+  extern long double __attribute__((__cdecl__)) log2l (long double);
+
+
+  extern double __attribute__((__cdecl__)) logb (double);
+  extern float __attribute__((__cdecl__)) logbf (float);
+  extern long double __attribute__((__cdecl__)) logbl (long double);
+# 709 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  extern float __attribute__((__cdecl__)) modff (float, float*);
+  extern long double __attribute__((__cdecl__)) modfl (long double, long double*);
+
+
+  extern double __attribute__((__cdecl__)) scalbn (double, int);
+  extern float __attribute__((__cdecl__)) scalbnf (float, int);
+  extern long double __attribute__((__cdecl__)) scalbnl (long double, int);
+
+  extern double __attribute__((__cdecl__)) scalbln (double, long);
+  extern float __attribute__((__cdecl__)) scalblnf (float, long);
+  extern long double __attribute__((__cdecl__)) scalblnl (long double, long);
+
+
+
+  extern double __attribute__((__cdecl__)) cbrt (double);
+  extern float __attribute__((__cdecl__)) cbrtf (float);
+  extern long double __attribute__((__cdecl__)) cbrtl (long double);
+
+
+  extern double __attribute__((__cdecl__)) hypot (double, double) ;
+  extern float __attribute__((__cdecl__)) hypotf (float x, float y);
+
+
+
+  extern long double __attribute__((__cdecl__)) hypotl (long double, long double);
+
+
+  extern float __attribute__((__cdecl__)) powf(float _X,float _Y);
+
+
+
+  extern long double __attribute__((__cdecl__)) powl (long double, long double);
+
+
+  extern float __attribute__((__cdecl__)) sqrtf (float);
+  extern long double sqrtl(long double);
+
+
+  extern double __attribute__((__cdecl__)) erf (double);
+  extern float __attribute__((__cdecl__)) erff (float);
+  extern long double __attribute__((__cdecl__)) erfl (long double);
+
+
+  extern double __attribute__((__cdecl__)) erfc (double);
+  extern float __attribute__((__cdecl__)) erfcf (float);
+  extern long double __attribute__((__cdecl__)) erfcl (long double);
+
+
+  extern double __attribute__((__cdecl__)) lgamma (double);
+  extern float __attribute__((__cdecl__)) lgammaf (float);
+  extern long double __attribute__((__cdecl__)) lgammal (long double);
+
+  extern int signgam;
+
+
+  extern double __attribute__((__cdecl__)) tgamma (double);
+  extern float __attribute__((__cdecl__)) tgammaf (float);
+  extern long double __attribute__((__cdecl__)) tgammal (long double);
+
+
+  extern float __attribute__((__cdecl__)) ceilf (float);
+  extern long double __attribute__((__cdecl__)) ceill (long double);
+
+
+  extern float __attribute__((__cdecl__)) floorf (float);
+  extern long double __attribute__((__cdecl__)) floorl (long double);
+
+
+  extern double __attribute__((__cdecl__)) nearbyint ( double);
+  extern float __attribute__((__cdecl__)) nearbyintf (float);
+  extern long double __attribute__((__cdecl__)) nearbyintl (long double);
+
+
+
+extern double __attribute__((__cdecl__)) rint (double);
+extern float __attribute__((__cdecl__)) rintf (float);
+extern long double __attribute__((__cdecl__)) rintl (long double);
+
+
+extern long __attribute__((__cdecl__)) lrint (double);
+extern long __attribute__((__cdecl__)) lrintf (float);
+extern long __attribute__((__cdecl__)) lrintl (long double);
+
+__extension__ long long __attribute__((__cdecl__)) llrint (double);
+__extension__ long long __attribute__((__cdecl__)) llrintf (float);
+__extension__ long long __attribute__((__cdecl__)) llrintl (long double);
+# 874 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  extern double __attribute__((__cdecl__)) round (double);
+  extern float __attribute__((__cdecl__)) roundf (float);
+  extern long double __attribute__((__cdecl__)) roundl (long double);
+
+
+  extern long __attribute__((__cdecl__)) lround (double);
+  extern long __attribute__((__cdecl__)) lroundf (float);
+  extern long __attribute__((__cdecl__)) lroundl (long double);
+  __extension__ long long __attribute__((__cdecl__)) llround (double);
+  __extension__ long long __attribute__((__cdecl__)) llroundf (float);
+  __extension__ long long __attribute__((__cdecl__)) llroundl (long double);
+
+
+
+  extern double __attribute__((__cdecl__)) trunc (double);
+  extern float __attribute__((__cdecl__)) truncf (float);
+  extern long double __attribute__((__cdecl__)) truncl (long double);
+
+
+  extern float __attribute__((__cdecl__)) fmodf (float, float);
+  extern long double __attribute__((__cdecl__)) fmodl (long double, long double);
+
+
+  extern double __attribute__((__cdecl__)) remainder (double, double);
+  extern float __attribute__((__cdecl__)) remainderf (float, float);
+  extern long double __attribute__((__cdecl__)) remainderl (long double, long double);
+
+
+  extern double __attribute__((__cdecl__)) remquo(double, double, int *);
+  extern float __attribute__((__cdecl__)) remquof(float, float, int *);
+  extern long double __attribute__((__cdecl__)) remquol(long double, long double, int *);
+
+
+  extern double __attribute__((__cdecl__)) copysign (double, double);
+  extern float __attribute__((__cdecl__)) copysignf (float, float);
+  extern long double __attribute__((__cdecl__)) copysignl (long double, long double);
+# 931 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  extern double __attribute__((__cdecl__)) nan(const char *tagp);
+  extern float __attribute__((__cdecl__)) nanf(const char *tagp);
+  extern long double __attribute__((__cdecl__)) nanl(const char *tagp);
+# 942 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  extern double __attribute__((__cdecl__)) nextafter (double, double);
+  extern float __attribute__((__cdecl__)) nextafterf (float, float);
+  extern long double __attribute__((__cdecl__)) nextafterl (long double, long double);
+
+
+  extern double __attribute__((__cdecl__)) nexttoward (double, long double);
+  extern float __attribute__((__cdecl__)) nexttowardf (float, long double);
+  extern long double __attribute__((__cdecl__)) nexttowardl (long double, long double);
+
+
+
+  extern double __attribute__((__cdecl__)) fdim (double x, double y);
+  extern float __attribute__((__cdecl__)) fdimf (float x, float y);
+  extern long double __attribute__((__cdecl__)) fdiml (long double x, long double y);
+
+
+
+
+
+
+
+  extern double __attribute__((__cdecl__)) fmax (double, double);
+  extern float __attribute__((__cdecl__)) fmaxf (float, float);
+  extern long double __attribute__((__cdecl__)) fmaxl (long double, long double);
+
+
+  extern double __attribute__((__cdecl__)) fmin (double, double);
+  extern float __attribute__((__cdecl__)) fminf (float, float);
+  extern long double __attribute__((__cdecl__)) fminl (long double, long double);
+
+
+
+  extern double __attribute__((__cdecl__)) fma (double, double, double);
+  extern float __attribute__((__cdecl__)) fmaf (float, float, float);
+  extern long double __attribute__((__cdecl__)) fmal (long double, long double, long double);
+# 1021 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+  __attribute__ ((__dllimport__)) float __attribute__((__cdecl__)) _hypotf(float _X,float _Y);
+
+
+
+   __attribute__ ((__dllimport__)) float __attribute__((__cdecl__)) _copysignf (float _Number,float _Sign);
+   __attribute__ ((__dllimport__)) float __attribute__((__cdecl__)) _chgsignf (float _X);
+   __attribute__ ((__dllimport__)) float __attribute__((__cdecl__)) _logbf(float _X);
+   __attribute__ ((__dllimport__)) float __attribute__((__cdecl__)) _nextafterf(float _X,float _Y);
+   __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _finitef(float _X);
+   __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isnanf(float _X);
+   __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fpclassf(float _X);
+
+
+
+   extern long double __attribute__((__cdecl__)) _chgsignl (long double);
+# 1047 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
+}
+
+
+
+
+#pragma pack(pop)
+# 52 "../src/kits/interface/../support/SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 1 3
+# 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_print_push.h" 1 3
+# 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 2 3
+
+#pragma pack(push,_CRT_PACKING)
+
+
+extern "C" {
+# 26 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+  struct _iobuf {
+    char *_ptr;
+    int _cnt;
+    char *_base;
+    int _flag;
+    int _file;
+    int _charbuf;
+    int _bufsiz;
+    char *_tmpfname;
+  };
+  typedef struct _iobuf FILE;
+# 80 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_off_t.h" 1 3
+
+
+
+
+  typedef long _off_t;
+
+  typedef long off32_t;
+
+
+
+
+
+  __extension__ typedef long long _off64_t;
+
+  __extension__ typedef long long off64_t;
+# 26 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_off_t.h" 3
+typedef off32_t off_t;
+# 81 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 2 3
+# 91 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+extern FILE (* _imp___iob)[];
+# 103 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+  __extension__ typedef long long fpos_t;
+# 139 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+extern
+  __attribute__((__format__ (gnu_scanf, 2, 3))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_sscanf(const char * __restrict__ _Src,const char * __restrict__ _Format,...);
+extern
+  __attribute__((__format__ (gnu_scanf, 2, 0))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vsscanf (const char * __restrict__ _Str,const char * __restrict__ Format,va_list argp);
+extern
+  __attribute__((__format__ (gnu_scanf, 1, 2))) __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_scanf(const char * __restrict__ _Format,...);
+extern
+  __attribute__((__format__ (gnu_scanf, 1, 0))) __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_vscanf(const char * __restrict__ Format, va_list argp);
+extern
+  __attribute__((__format__ (gnu_scanf, 2, 3))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_fscanf(FILE * __restrict__ _File,const char * __restrict__ _Format,...);
+extern
+  __attribute__((__format__ (gnu_scanf, 2, 0))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vfscanf (FILE * __restrict__ fp, const char * __restrict__ Format,va_list argp);
+
+extern
+  __attribute__((__format__ (gnu_printf, 3, 0))) __attribute__ ((__nonnull__ (3)))
+  int __attribute__((__cdecl__)) __mingw_vsnprintf(char * __restrict__ _DstBuf,size_t _MaxCount,const char * __restrict__ _Format,
+                               va_list _ArgList);
+extern
+  __attribute__((__format__ (gnu_printf, 3, 4))) __attribute__ ((__nonnull__ (3)))
+  int __attribute__((__cdecl__)) __mingw_snprintf(char * __restrict__ s, size_t n, const char * __restrict__ format, ...);
+extern
+  __attribute__((__format__ (gnu_printf, 1, 2))) __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_printf(const char * __restrict__ , ... ) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__ (gnu_printf, 1, 0))) __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_vprintf (const char * __restrict__ , va_list) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__ (gnu_printf, 2, 3))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_fprintf (FILE * __restrict__ , const char * __restrict__ , ...) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__ (gnu_printf, 2, 0))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vfprintf (FILE * __restrict__ , const char * __restrict__ , va_list) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__ (gnu_printf, 2, 3))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_sprintf (char * __restrict__ , const char * __restrict__ , ...) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__ (gnu_printf, 2, 0))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vsprintf (char * __restrict__ , const char * __restrict__ , va_list) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__ (gnu_printf, 2, 3))) __attribute__((nonnull (1,2)))
+  int __attribute__((__cdecl__)) __mingw_asprintf(char ** __restrict__ , const char * __restrict__ , ...) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__ (gnu_printf, 2, 0))) __attribute__((nonnull (1,2)))
+  int __attribute__((__cdecl__)) __mingw_vasprintf(char ** __restrict__ , const char * __restrict__ , va_list) __attribute__ ((__nothrow__));
+# 377 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+  int __attribute__((__cdecl__)) fprintf(FILE * __restrict__ _File,const char * __restrict__ _Format,...);
+  int __attribute__((__cdecl__)) printf(const char * __restrict__ _Format,...);
+  int __attribute__((__cdecl__)) sprintf(char * __restrict__ _Dest,const char * __restrict__ _Format,...) ;
+
+  int __attribute__((__cdecl__)) vfprintf(FILE * __restrict__ _File,const char * __restrict__ _Format,va_list _ArgList);
+  int __attribute__((__cdecl__)) vprintf(const char * __restrict__ _Format,va_list _ArgList);
+  int __attribute__((__cdecl__)) vsprintf(char * __restrict__ _Dest,const char * __restrict__ _Format,va_list _Args) ;
+
+  int __attribute__((__cdecl__)) fscanf(FILE * __restrict__ _File,const char * __restrict__ _Format,...) ;
+  int __attribute__((__cdecl__)) scanf(const char * __restrict__ _Format,...) ;
+  int __attribute__((__cdecl__)) sscanf(const char * __restrict__ _Src,const char * __restrict__ _Format,...) ;
+
+
+
+
+
+  int __attribute__((__cdecl__)) __ms_vscanf(const char * __restrict__ Format, va_list argp);
+  int __attribute__((__cdecl__)) __ms_vfscanf (FILE * __restrict__ fp, const char * __restrict__ Format,va_list argp);
+  int __attribute__((__cdecl__)) __ms_vsscanf (const char * __restrict__ _Str,const char * __restrict__ Format,va_list argp);
+
+  inline __attribute__((__cdecl__))
+  __attribute__ ((__nonnull__ (2)))
+  int vfscanf (FILE *__stream, const char *__format, __builtin_va_list __local_argv)
+  {
+    return __ms_vfscanf (__stream, __format, __local_argv);
+  }
+
+  inline __attribute__((__cdecl__))
+  __attribute__ ((__nonnull__ (2)))
+  int vsscanf (const char * __restrict__ __source, const char * __restrict__ __format, __builtin_va_list __local_argv)
+  {
+    return __ms_vsscanf( __source, __format, __local_argv );
+  }
+  inline __attribute__((__cdecl__))
+  __attribute__ ((__nonnull__ (1)))
+  int vscanf(const char *__format, __builtin_va_list __local_argv)
+  {
+    return __ms_vscanf (__format, __local_argv);
+  }
+
+
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _filbuf(FILE *_File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _flsbuf(int _Ch,FILE *_File);
+
+
+
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _fsopen(const char *_Filename,const char *_Mode,int _ShFlag);
+
+  void __attribute__((__cdecl__)) clearerr(FILE *_File);
+  int __attribute__((__cdecl__)) fclose(FILE *_File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fcloseall(void);
+
+
+
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _fdopen(int _FileHandle,const char *_Mode);
+
+  int __attribute__((__cdecl__)) feof(FILE *_File);
+  int __attribute__((__cdecl__)) ferror(FILE *_File);
+  int __attribute__((__cdecl__)) fflush(FILE *_File);
+  int __attribute__((__cdecl__)) fgetc(FILE *_File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fgetchar(void);
+  int __attribute__((__cdecl__)) fgetpos(FILE * __restrict__ _File ,fpos_t * __restrict__ _Pos);
+  int __attribute__((__cdecl__)) fgetpos64(FILE * __restrict__ _File ,fpos_t * __restrict__ _Pos);
+  char *__attribute__((__cdecl__)) fgets(char * __restrict__ _Buf,int _MaxCount,FILE * __restrict__ _File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fileno(FILE *_File);
+
+
+
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _tempnam(const char *_DirName,const char *_FilePrefix);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _flushall(void);
+  FILE *__attribute__((__cdecl__)) fopen(const char * __restrict__ _Filename,const char * __restrict__ _Mode) ;
+  FILE *fopen64(const char * __restrict__ filename,const char * __restrict__ mode);
+  int __attribute__((__cdecl__)) fputc(int _Ch,FILE *_File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fputchar(int _Ch);
+  int __attribute__((__cdecl__)) fputs(const char * __restrict__ _Str,FILE * __restrict__ _File);
+  size_t __attribute__((__cdecl__)) fread(void * __restrict__ _DstBuf,size_t _ElementSize,size_t _Count,FILE * __restrict__ _File);
+  FILE *__attribute__((__cdecl__)) freopen(const char * __restrict__ _Filename,const char * __restrict__ _Mode,FILE * __restrict__ _File) ;
+  int __attribute__((__cdecl__)) fsetpos(FILE *_File,const fpos_t *_Pos);
+  int __attribute__((__cdecl__)) fsetpos64(FILE *_File,const fpos_t *_Pos);
+  int __attribute__((__cdecl__)) fseek(FILE *_File,long _Offset,int _Origin);
+
+
+
+  int fseeko64(FILE* stream, _off64_t offset, int whence);
+  int fseeko(FILE* stream, _off_t offset, int whence);
+# 472 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+  long __attribute__((__cdecl__)) ftell(FILE *_File);
+
+  _off_t ftello(FILE * stream);
+  _off64_t ftello64(FILE * stream);
+# 484 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+  __extension__ int __attribute__((__cdecl__)) _fseeki64(FILE *_File,long long _Offset,int _Origin);
+  __extension__ long long __attribute__((__cdecl__)) _ftelli64(FILE *_File);
+  size_t __attribute__((__cdecl__)) fwrite(const void * __restrict__ _Str,size_t _Size,size_t _Count,FILE * __restrict__ _File);
+  int __attribute__((__cdecl__)) getc(FILE *_File);
+  int __attribute__((__cdecl__)) getchar(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _getmaxstdio(void);
+  char *__attribute__((__cdecl__)) gets(char *_Buffer) ;
+  int __attribute__((__cdecl__)) _getw(FILE *_File);
+
+
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _pclose(FILE *_File);
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _popen(const char *_Command,const char *_Mode);
+
+
+
+
+  int __attribute__((__cdecl__)) putc(int _Ch,FILE *_File);
+  int __attribute__((__cdecl__)) putchar(int _Ch);
+  int __attribute__((__cdecl__)) puts(const char *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _putw(int _Word,FILE *_File);
+
+
+  int __attribute__((__cdecl__)) remove(const char *_Filename);
+  int __attribute__((__cdecl__)) rename(const char *_OldFilename,const char *_NewFilename);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _unlink(const char *_Filename);
+
+  int __attribute__((__cdecl__)) unlink(const char *_Filename) ;
+
+
+  void __attribute__((__cdecl__)) rewind(FILE *_File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _rmtmp(void);
+  void __attribute__((__cdecl__)) setbuf(FILE * __restrict__ _File,char * __restrict__ _Buffer) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _setmaxstdio(int _Max);
+  __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) _set_output_format(unsigned int _Format);
+  __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) _get_output_format(void);
+  int __attribute__((__cdecl__)) setvbuf(FILE * __restrict__ _File,char * __restrict__ _Buf,int _Mode,size_t _Size);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scprintf(const char * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snscanf(const char * __restrict__ _Src,size_t _MaxCount,const char * __restrict__ _Format,...) ;
+  FILE *__attribute__((__cdecl__)) tmpfile(void) ;
+  char *__attribute__((__cdecl__)) tmpnam(char *_Buffer);
+  int __attribute__((__cdecl__)) ungetc(int _Ch,FILE *_File);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snprintf(char * __restrict__ _Dest,size_t _Count,const char * __restrict__ _Format,...) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnprintf(char * __restrict__ _Dest,size_t _Count,const char * __restrict__ _Format,va_list _Args) ;
+
+
+
+
+       
+       
+
+
+  int __attribute__((__cdecl__)) __ms_vsnprintf(char * __restrict__ d,size_t n,const char * __restrict__ format,va_list arg)
+    ;
+
+  inline __attribute__((__cdecl__))
+  __attribute__ ((__nonnull__ (3)))
+  int vsnprintf (char * __restrict__ __stream, size_t __n, const char * __restrict__ __format, va_list __local_argv)
+  {
+    return __ms_vsnprintf (__stream, __n, __format, __local_argv);
+  }
+
+  int __attribute__((__cdecl__)) __ms_snprintf(char * __restrict__ s, size_t n, const char * __restrict__ format, ...);
+
+
+inline __attribute__((__cdecl__))
+__attribute__ ((__nonnull__ (3)))
+int snprintf (char * __restrict__ __stream, size_t __n, const char * __restrict__ __format, ...)
+{
+  register int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __ms_vsnprintf (__stream, __n, __format, __local_argv);
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+
+       
+       
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscprintf(const char * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _set_printf_count_output(int _Value);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _get_printf_count_output(void);
+
+
+
+
+                                                     __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_swscanf(const wchar_t * __restrict__ _Src,const wchar_t * __restrict__ _Format,...);
+                                                     __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vswscanf (const wchar_t * __restrict__ _Str,const wchar_t * __restrict__ Format,va_list argp);
+                                                     __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_wscanf(const wchar_t * __restrict__ _Format,...);
+                                                     __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_vwscanf(const wchar_t * __restrict__ Format, va_list argp);
+                                                     __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_fwscanf(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,...);
+                                                     __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vfwscanf (FILE * __restrict__ fp, const wchar_t * __restrict__ Format,va_list argp);
+
+                                                      __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_fwprintf(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,...);
+                                                      __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_wprintf(const wchar_t * __restrict__ _Format,...);
+                                                     __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vfwprintf(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,va_list _ArgList);
+                                                     __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_vwprintf(const wchar_t * __restrict__ _Format,va_list _ArgList);
+                                                      __attribute__ ((__nonnull__ (3)))
+  int __attribute__((__cdecl__)) __mingw_snwprintf (wchar_t * __restrict__ s, size_t n, const wchar_t * __restrict__ format, ...);
+                                                      __attribute__ ((__nonnull__ (3)))
+  int __attribute__((__cdecl__)) __mingw_vsnwprintf (wchar_t * __restrict__ , size_t, const wchar_t * __restrict__ , va_list);
+                                                      __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_swprintf(wchar_t * __restrict__ , const wchar_t * __restrict__ , ...);
+                                                      __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vswprintf(wchar_t * __restrict__ , const wchar_t * __restrict__ ,va_list);
+# 725 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+  int __attribute__((__cdecl__)) fwscanf(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,...) ;
+  int __attribute__((__cdecl__)) swscanf(const wchar_t * __restrict__ _Src,const wchar_t * __restrict__ _Format,...) ;
+  int __attribute__((__cdecl__)) wscanf(const wchar_t * __restrict__ _Format,...) ;
+
+  int __attribute__((__cdecl__)) __ms_vwscanf (const wchar_t * __restrict__ , va_list);
+  int __attribute__((__cdecl__)) __ms_vfwscanf (FILE * __restrict__ ,const wchar_t * __restrict__ ,va_list);
+  int __attribute__((__cdecl__)) __ms_vswscanf (const wchar_t * __restrict__ ,const wchar_t * __restrict__ ,va_list);
+
+  inline __attribute__((__cdecl__))
+  __attribute__ ((__nonnull__ (2)))
+  int vfwscanf (FILE *__stream, const wchar_t *__format, __builtin_va_list __local_argv)
+  {
+    return __ms_vfwscanf (__stream, __format, __local_argv);
+  }
+
+  inline __attribute__((__cdecl__))
+  __attribute__ ((__nonnull__ (2)))
+  int vswscanf (const wchar_t * __restrict__ __source, const wchar_t * __restrict__ __format, __builtin_va_list __local_argv)
+  {
+    return __ms_vswscanf( __source, __format, __local_argv );
+  }
+  inline __attribute__((__cdecl__))
+  __attribute__ ((__nonnull__ (1)))
+  int vwscanf(const wchar_t *__format, __builtin_va_list __local_argv)
+  {
+    return __ms_vwscanf (__format, __local_argv);
+  }
+
+
+
+  int __attribute__((__cdecl__)) fwprintf(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,...);
+  int __attribute__((__cdecl__)) wprintf(const wchar_t * __restrict__ _Format,...);
+  int __attribute__((__cdecl__)) vfwprintf(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,va_list _ArgList);
+  int __attribute__((__cdecl__)) vwprintf(const wchar_t * __restrict__ _Format,va_list _ArgList);
+# 768 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _wfsopen(const wchar_t *_Filename,const wchar_t *_Mode,int _ShFlag);
+
+
+  wint_t __attribute__((__cdecl__)) fgetwc(FILE *_File);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _fgetwchar(void);
+  wint_t __attribute__((__cdecl__)) fputwc(wchar_t _Ch,FILE *_File);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _fputwchar(wchar_t _Ch);
+  wint_t __attribute__((__cdecl__)) getwc(FILE *_File);
+  wint_t __attribute__((__cdecl__)) getwchar(void);
+  wint_t __attribute__((__cdecl__)) putwc(wchar_t _Ch,FILE *_File);
+  wint_t __attribute__((__cdecl__)) putwchar(wchar_t _Ch);
+  wint_t __attribute__((__cdecl__)) ungetwc(wint_t _Ch,FILE *_File);
+  wchar_t *__attribute__((__cdecl__)) fgetws(wchar_t * __restrict__ _Dst,int _SizeInWords,FILE * __restrict__ _File);
+  int __attribute__((__cdecl__)) fputws(const wchar_t * __restrict__ _Str,FILE * __restrict__ _File);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _getws(wchar_t *_String) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _putws(const wchar_t *_Str);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scwprintf(const wchar_t * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swprintf_c(wchar_t * __restrict__ _DstBuf,size_t _SizeInWords,const wchar_t * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vswprintf_c(wchar_t * __restrict__ _DstBuf,size_t _SizeInWords,const wchar_t * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwprintf(wchar_t * __restrict__ _Dest,size_t _Count,const wchar_t * __restrict__ _Format,...) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnwprintf(wchar_t * __restrict__ _Dest,size_t _Count,const wchar_t * __restrict__ _Format,va_list _Args) ;
+
+
+
+
+       
+       
+
+
+  int __attribute__((__cdecl__)) __ms_snwprintf (wchar_t * __restrict__ s, size_t n, const wchar_t * __restrict__ format, ...);
+  int __attribute__((__cdecl__)) __ms_vsnwprintf (wchar_t * __restrict__ , size_t, const wchar_t * __restrict__ , va_list);
+  inline __attribute__((__cdecl__))
+  int snwprintf (wchar_t * __restrict__ s, size_t n, const wchar_t * __restrict__ format, ...)
+  {
+    int r;
+    va_list argp;
+    __builtin_va_start (argp, format);
+    r = _vsnwprintf (s, n, format, argp);
+    __builtin_va_end (argp);
+    return r;
+  }
+  inline __attribute__((__cdecl__))
+  int __attribute__((__cdecl__)) vsnwprintf (wchar_t * __restrict__ s, size_t n, const wchar_t * __restrict__ format, va_list arg)
+  {
+    return _vsnwprintf(s,n,format,arg);
+  }
+       
+       
+
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swprintf(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vswprintf(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Format,va_list _Args);
+
+
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/swprintf.inl" 1 3
+# 21 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/swprintf.inl" 3
+static __attribute__ ((__unused__)) __inline__ __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (3)))
+int vswprintf (wchar_t *__stream, size_t __count, const wchar_t *__format, __builtin_va_list __local_argv)
+{
+  return vsnwprintf( __stream, __count, __format, __local_argv );
+}
+
+static __attribute__ ((__unused__)) __inline__ __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (3)))
+int swprintf (wchar_t *__stream, size_t __count, const wchar_t *__format, ...)
+{
+  register int __retval;
+  __builtin_va_list __local_argv;
+
+  __builtin_va_start( __local_argv, __format );
+  __retval = vswprintf( __stream, __count, __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+
+
+extern "C++" {
+
+static __attribute__ ((__unused__)) __inline__ __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (2)))
+int vswprintf (wchar_t *__stream, const wchar_t *__format, __builtin_va_list __local_argv)
+{
+
+
+
+  return _vswprintf( __stream, __format, __local_argv );
+
+}
+
+static __attribute__ ((__unused__)) __inline__ __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (2)))
+int swprintf (wchar_t *__stream, const wchar_t *__format, ...)
+{
+  register int __retval;
+  __builtin_va_list __local_argv;
+
+  __builtin_va_start( __local_argv, __format );
+  __retval = vswprintf( __stream, __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+}
+# 825 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 2 3
+# 834 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wtempnam(const wchar_t *_Directory,const wchar_t *_FilePrefix);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscwprintf(const wchar_t * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwscanf(const wchar_t * __restrict__ _Src,size_t _MaxCount,const wchar_t * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _wfdopen(int _FileHandle ,const wchar_t *_Mode);
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _wfopen(const wchar_t * __restrict__ _Filename,const wchar_t *__restrict__ _Mode) ;
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _wfreopen(const wchar_t * __restrict__ _Filename,const wchar_t * __restrict__ _Mode,FILE * __restrict__ _OldFile) ;
+
+
+
+
+
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _wpopen(const wchar_t *_Command,const wchar_t *_Mode);
+
+
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wremove(const wchar_t *_Filename);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wtmpnam(wchar_t *_Buffer);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _fgetwc_nolock(FILE *_File);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _fputwc_nolock(wchar_t _Ch,FILE *_File);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _ungetwc_nolock(wint_t _Ch,FILE *_File);
+# 884 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _lock_file(FILE *_File);
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _unlock_file(FILE *_File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fclose_nolock(FILE *_File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fflush_nolock(FILE *_File);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _fread_nolock(void * __restrict__ _DstBuf,size_t _ElementSize,size_t _Count,FILE * __restrict__ _File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fseek_nolock(FILE *_File,long _Offset,int _Origin);
+  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _ftell_nolock(FILE *_File);
+  __extension__ __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fseeki64_nolock(FILE *_File,long long _Offset,int _Origin);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _ftelli64_nolock(FILE *_File);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _fwrite_nolock(const void * __restrict__ _DstBuf,size_t _Size,size_t _Count,FILE * __restrict__ _File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _ungetc_nolock(int _Ch,FILE *_File);
+
+
+
+
+
+  char *__attribute__((__cdecl__)) tempnam(const char *_Directory,const char *_FilePrefix) ;
+  int __attribute__((__cdecl__)) fcloseall(void) ;
+  FILE *__attribute__((__cdecl__)) fdopen(int _FileHandle,const char *_Format) ;
+  int __attribute__((__cdecl__)) fgetchar(void) ;
+  int __attribute__((__cdecl__)) fileno(FILE *_File) ;
+  int __attribute__((__cdecl__)) flushall(void) ;
+  int __attribute__((__cdecl__)) fputchar(int _Ch) ;
+  int __attribute__((__cdecl__)) getw(FILE *_File) ;
+  int __attribute__((__cdecl__)) putw(int _Ch,FILE *_File) ;
+  int __attribute__((__cdecl__)) rmtmp(void) ;
+# 926 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+int __attribute__((__cdecl__)) __mingw_str_wide_utf8 (const wchar_t * const wptr, char **mbptr, size_t * buflen);
+# 940 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+int __attribute__((__cdecl__)) __mingw_str_utf8_wide (const char *const mbptr, wchar_t ** wptr, size_t * buflen);
+# 949 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
+void __attribute__((__cdecl__)) __mingw_str_free(void *ptr);
+
+
+
+
+}
+
+
+#pragma pack(pop)
+
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/stdio_s.h" 1 3
+# 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/stdio_s.h" 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 1 3
+# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/stdio_s.h" 2 3
+
+
+
+
+extern "C" {
+
+
+
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) clearerr_s(FILE *_File);
+  int __attribute__((__cdecl__)) fprintf_s(FILE *_File,const char *_Format,...);
+  size_t __attribute__((__cdecl__)) fread_s(void *_DstBuf,size_t _DstSize,size_t _ElementSize,size_t _Count,FILE *_File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fscanf_s_l(FILE *_File,const char *_Format,_locale_t _Locale,...);
+  int __attribute__((__cdecl__)) printf_s(const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scanf_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scanf_s_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snprintf_c(char *_DstBuf,size_t _MaxCount,const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnprintf_c(char *_DstBuf,size_t _MaxCount,const char *_Format,va_list _ArgList);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fscanf_l(FILE *_File,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _sscanf_l(const char *_Src,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _sscanf_s_l(const char *_Src,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snscanf_s(const char *_Src,size_t _MaxCount,const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snscanf_l(const char *_Src,size_t _MaxCount,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snscanf_s_l(const char *_Src,size_t _MaxCount,const char *_Format,_locale_t _Locale,...);
+  int __attribute__((__cdecl__)) vfprintf_s(FILE *_File,const char *_Format,va_list _ArgList);
+  int __attribute__((__cdecl__)) vprintf_s(const char *_Format,va_list _ArgList);
+
+  int __attribute__((__cdecl__)) vsnprintf_s(char *_DstBuf,size_t _DstSize,size_t _MaxCount,const char *_Format,va_list _ArgList);
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) vsnprintf_s(char (&_DstBuf)[__size], size_t _MaxCount, const char* _Format, va_list _ArgList) { return vsnprintf_s(_DstBuf,__size,_MaxCount,_Format,_ArgList); } }
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnprintf_s(char *_DstBuf,size_t _DstSize,size_t _MaxCount,const char *_Format,va_list _ArgList);
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) _vsnprintf_s(char (&_DstBuf)[__size], size_t _MaxCount, const char* _Format, va_list _ArgList) { return _vsnprintf_s(_DstBuf,__size,_MaxCount,_Format,_ArgList); } }
+
+  int __attribute__((__cdecl__)) vsprintf_s(char *_DstBuf,size_t _Size,const char *_Format,va_list _ArgList);
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) vsprintf_s(char (&_DstBuf)[__size], const char* _Format, va_list _ArgList) { return vsprintf_s(_DstBuf,__size,_Format,_ArgList); } }
+
+  int __attribute__((__cdecl__)) sprintf_s(char *_DstBuf,size_t _DstSize,const char *_Format,...);
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) sprintf_s(char (&_DstBuf)[__size], const char* _Format, ...) { va_list __vaargs; __builtin_va_start(__vaargs,_Format); int __retval = vsprintf_s(_DstBuf,__size,_Format,__vaargs); __builtin_va_end(__vaargs); return __retval; } }
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snprintf_s(char *_DstBuf,size_t _DstSize,size_t _MaxCount,const char *_Format,...);
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) _snprintf_s(char (&_DstBuf)[__size], size_t _MaxCount, const char* _Format, ...) { va_list __vaargs; __builtin_va_start(__vaargs,_Format); int __retval = _vsnprintf_s(_DstBuf,__size,_MaxCount,_Format,__vaargs); __builtin_va_end(__vaargs); return __retval; } }
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fprintf_p(FILE *_File,const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _printf_p(const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _sprintf_p(char *_Dst,size_t _MaxCount,const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfprintf_p(FILE *_File,const char *_Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vprintf_p(const char *_Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsprintf_p(char *_Dst,size_t _MaxCount,const char *_Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scprintf_p(const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscprintf_p(const char *_Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _printf_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _printf_p_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vprintf_l(const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vprintf_p_l(const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fprintf_l(FILE *_File,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fprintf_p_l(FILE *_File,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfprintf_l(FILE *_File,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfprintf_p_l(FILE *_File,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _sprintf_l(char *_DstBuf,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _sprintf_p_l(char *_DstBuf,size_t _MaxCount,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsprintf_l(char *_DstBuf,const char *_Format,_locale_t,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsprintf_p_l(char *_DstBuf,size_t _MaxCount,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scprintf_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scprintf_p_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscprintf_l(const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscprintf_p_l(const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _printf_s_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vprintf_s_l(const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fprintf_s_l(FILE *_File,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfprintf_s_l(FILE *_File,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _sprintf_s_l(char *_DstBuf,size_t _DstSize,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsprintf_s_l(char *_DstBuf,size_t _DstSize,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snprintf_s_l(char *_DstBuf,size_t _DstSize,size_t _MaxCount,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnprintf_s_l(char *_DstBuf,size_t _DstSize,size_t _MaxCount,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snprintf_l(char *_DstBuf,size_t _MaxCount,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snprintf_c_l(char *_DstBuf,size_t _MaxCount,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnprintf_l(char *_DstBuf,size_t _MaxCount,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnprintf_c_l(char *_DstBuf,size_t _MaxCount,const char *,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) fopen_s(FILE **_File,const char *_Filename,const char *_Mode);
+
+  __attribute__ ((__dllimport__)) char* __attribute__((__cdecl__)) gets_s(char*,rsize_t);
+  extern "C++" { template <size_t __size> inline char* __attribute__((__cdecl__)) get_s(char (&_DstBuf)[__size]) { return get_s(_DstBuf,__size); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) tmpnam_s(char*,rsize_t);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) tmpnam_s(char (&_DstBuf)[__size]) { return tmpnam_s(_DstBuf,__size); } }
+
+
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _getws_s(wchar_t *_Str,size_t _SizeInWords);
+  extern "C++" { template <size_t __size> inline wchar_t* __attribute__((__cdecl__)) _getws_s(wchar_t (&_DstBuf)[__size]) { return _getws_s(_DstBuf,__size); } }
+
+  int __attribute__((__cdecl__)) fwprintf_s(FILE *_File,const wchar_t *_Format,...);
+  int __attribute__((__cdecl__)) wprintf_s(const wchar_t *_Format,...);
+  int __attribute__((__cdecl__)) vfwprintf_s(FILE *_File,const wchar_t *_Format,va_list _ArgList);
+  int __attribute__((__cdecl__)) vwprintf_s(const wchar_t *_Format,va_list _ArgList);
+
+  int __attribute__((__cdecl__)) vswprintf_s(wchar_t *_Dst,size_t _SizeInWords,const wchar_t *_Format,va_list _ArgList);
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) vswprintf_s(wchar_t (&_Dst)[__size], const wchar_t* _Format, va_list _ArgList) { return vswprintf_s(_Dst,__size,_Format,_ArgList); } }
+
+  int __attribute__((__cdecl__)) swprintf_s(wchar_t *_Dst,size_t _SizeInWords,const wchar_t *_Format,...);
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) swprintf_s(wchar_t (&_Dst)[__size], const wchar_t* _Format, ...) { va_list __vaargs; __builtin_va_start(__vaargs,_Format); int __retval = vswprintf_s(_Dst,__size,_Format,__vaargs); __builtin_va_end(__vaargs); return __retval; } }
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnwprintf_s(wchar_t *_DstBuf,size_t _DstSizeInWords,size_t _MaxCount,const wchar_t *_Format,va_list _ArgList);
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) _vsnwprintf_s(wchar_t (&_DstBuf)[__size], size_t _MaxCount, const wchar_t* _Format, va_list _ArgList) { return _vsnwprintf_s(_DstBuf,__size,_MaxCount,_Format,_ArgList); } }
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwprintf_s(wchar_t *_DstBuf,size_t _DstSizeInWords,size_t _MaxCount,const wchar_t *_Format,...);
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) _snwprintf_s(wchar_t (&_DstBuf)[__size], size_t _MaxCount, const char* _Format, ...) { va_list __vaargs; __builtin_va_start(__vaargs,_Format); int __retval = _vsnwprintf_s(_DstBuf,__size,_MaxCount,_Format,__vaargs); __builtin_va_end(__vaargs); return __retval; } }
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wprintf_s_l(const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vwprintf_s_l(const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fwprintf_s_l(FILE *_File,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfwprintf_s_l(FILE *_File,const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swprintf_s_l(wchar_t *_DstBuf,size_t _DstSize,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vswprintf_s_l(wchar_t *_DstBuf,size_t _DstSize,const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwprintf_s_l(wchar_t *_DstBuf,size_t _DstSize,size_t _MaxCount,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnwprintf_s_l(wchar_t *_DstBuf,size_t _DstSize,size_t _MaxCount,const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fwscanf_s_l(FILE *_File,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swscanf_s_l(const wchar_t *_Src,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwscanf_s(const wchar_t *_Src,size_t _MaxCount,const wchar_t *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwscanf_s_l(const wchar_t *_Src,size_t _MaxCount,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wscanf_s_l(const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wfopen_s(FILE **_File,const wchar_t *_Filename,const wchar_t *_Mode);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wfreopen_s(FILE **_File,const wchar_t *_Filename,const wchar_t *_Mode,FILE *_OldFile);
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wtmpnam_s(wchar_t *_DstBuf,size_t _SizeInWords);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wtmpnam_s(wchar_t (&_DstBuf)[__size]) { return _wtmpnam_s(_DstBuf,__size); } }
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fwprintf_p(FILE *_File,const wchar_t *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wprintf_p(const wchar_t *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfwprintf_p(FILE *_File,const wchar_t *_Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vwprintf_p(const wchar_t *_Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swprintf_p(wchar_t *_DstBuf,size_t _MaxCount,const wchar_t *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vswprintf_p(wchar_t *_DstBuf,size_t _MaxCount,const wchar_t *_Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scwprintf_p(const wchar_t *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscwprintf_p(const wchar_t *_Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wprintf_l(const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wprintf_p_l(const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vwprintf_l(const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vwprintf_p_l(const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fwprintf_l(FILE *_File,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fwprintf_p_l(FILE *_File,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfwprintf_l(FILE *_File,const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfwprintf_p_l(FILE *_File,const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swprintf_c_l(wchar_t *_DstBuf,size_t _MaxCount,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swprintf_p_l(wchar_t *_DstBuf,size_t _MaxCount,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vswprintf_c_l(wchar_t *_DstBuf,size_t _MaxCount,const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vswprintf_p_l(wchar_t *_DstBuf,size_t _MaxCount,const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scwprintf_l(const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scwprintf_p_l(const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscwprintf_p_l(const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwprintf_l(wchar_t *_DstBuf,size_t _MaxCount,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnwprintf_l(wchar_t *_DstBuf,size_t _MaxCount,const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __swprintf_l(wchar_t *_Dest,const wchar_t *_Format,_locale_t _Plocinfo,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __vswprintf_l(wchar_t *_Dest,const wchar_t *_Format,_locale_t _Plocinfo,va_list _Args);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscwprintf_l(const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fwscanf_l(FILE *_File,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swscanf_l(const wchar_t *_Src,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwscanf_l(const wchar_t *_Src,size_t _MaxCount,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wscanf_l(const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wfopen_s(FILE ** _File,const wchar_t *_Filename,const wchar_t *_Mode);
+
+
+
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _fread_nolock_s(void *_DstBuf,size_t _DstSize,size_t _ElementSize,size_t _Count,FILE *_File);
+
+
+}
+# 960 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 2 3
+
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_print_pop.h" 1 3
+# 962 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 2 3
+# 53 "../src/kits/interface/../support/SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 1 3
+# 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
+extern "C" {
+# 36 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
+  extern unsigned short ** _imp___pctype;
+# 51 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
+  extern unsigned short ** _imp___wctype;
+# 63 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
+  extern unsigned short ** _imp___pwctype;
+# 72 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
+  extern const unsigned char __newclmap[];
+  extern const unsigned char __newcumap[];
+  extern pthreadlocinfo __ptlocinfo;
+  extern pthreadmbcinfo __ptmbcinfo;
+  extern int __globallocalestatus;
+  extern int __locale_changed;
+  extern struct threadlocaleinfostruct __initiallocinfo;
+  extern _locale_tstruct __initiallocalestructinfo;
+  pthreadlocinfo __attribute__((__cdecl__)) __updatetlocinfo(void);
+  pthreadmbcinfo __attribute__((__cdecl__)) __updatetmbcinfo(void);
+# 100 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isctype(int _C,int _Type);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isctype_l(int _C,int _Type,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isalpha(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isalpha_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isupper(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isupper_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) islower(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _islower_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isdigit(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isdigit_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isxdigit(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isxdigit_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isspace(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isspace_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) ispunct(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _ispunct_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isalnum(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isalnum_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isprint(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isprint_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isgraph(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isgraph_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) iscntrl(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iscntrl_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) toupper(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) tolower(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _tolower(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _tolower_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _toupper(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _toupper_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __isascii(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __toascii(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iscsymf(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iscsym(int _C);
+
+
+int __attribute__((__cdecl__)) isblank(int _C);
+
+
+
+
+
+
+  int __attribute__((__cdecl__)) iswalpha(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswalpha_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswupper(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswupper_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswlower(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswlower_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswdigit(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswdigit_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswxdigit(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswxdigit_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswspace(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswspace_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswpunct(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswpunct_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswalnum(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswalnum_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswprint(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswprint_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswgraph(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswgraph_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswcntrl(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswcntrl_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswascii(wint_t _C);
+  int __attribute__((__cdecl__)) isleadbyte(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isleadbyte_l(int _C,_locale_t _Locale);
+  wint_t __attribute__((__cdecl__)) towupper(wint_t _C);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _towupper_l(wint_t _C,_locale_t _Locale);
+  wint_t __attribute__((__cdecl__)) towlower(wint_t _C);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _towlower_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswctype(wint_t _C,wctype_t _Type);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswctype_l(wint_t _C,wctype_t _Type,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iswcsymf(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswcsymf_l(wint_t _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iswcsym(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswcsym_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) is_wctype(wint_t _C,wctype_t _Type);
+
+
+int __attribute__((__cdecl__)) iswblank(wint_t _C);
+# 276 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
+}
+# 54 "../src/kits/interface/../support/SupportDefs.h" 2
+# 106 "../src/kits/interface/../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 97 "../src/interface/./../support/SupportDefs.h" 2
-
-
-
-
-
+# 107 "../src/kits/interface/../support/SupportDefs.h" 2
+# 128 "../src/kits/interface/../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 1 3 4
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/float.h" 1 3 4
@@ -1093,28 +2341,13 @@ void __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) fpreset (void);
 
 
 __attribute__ ((__dllimport__)) int * __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) __fpecode(void);
-# 278 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/float.h" 3 4
-__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _chgsign (double _X);
-__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _copysign (double _Number,double _Sign);
-__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _logb (double);
-__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _nextafter (double, double);
-__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _scalb (double, long);
-
-__attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _finite (double);
-__attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _fpclass (double);
-__attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _isnan (double);
-
-
-extern long double __attribute__((__cdecl__)) _chgsignl (long double);
-
-
-
+# 293 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/float.h" 3 4
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 103 "../src/interface/./../support/SupportDefs.h" 2
-# 114 "../src/interface/./../support/SupportDefs.h"
-typedef int b_unichar32;
-typedef short b_unichar;
+# 129 "../src/kits/interface/../support/SupportDefs.h" 2
+# 140 "../src/kits/interface/../support/SupportDefs.h"
+typedef unsigned int b_unichar32;
+typedef unsigned short b_unichar16;
 
 typedef char b_int8;
 typedef unsigned char b_uint8;
@@ -1131,6 +2364,7 @@ typedef b_uint32 b_perform_code;
 typedef b_int64 b_bigtime_t;
 typedef b_int64 b_thread_id;
 typedef size_t b_address_t;
+typedef size_t b_size_t;
 
 enum {
     B_ANY_TYPE = 'ANYT',
@@ -1146,7 +2380,7 @@ enum {
     B_MESSENGER_TYPE = 'MSNG',
     B_POINTER_TYPE = 'PNTR',
     B_SIZE_T_TYPE = 'SIZT',
-    B_SSIZE_T_TYPE = 'SSZT',
+    B_b_size_t_TYPE = 'SSZT',
     B_STRING_TYPE = 'CSTR',
     B_UINT64_TYPE = 'ULLG',
     B_UINT32_TYPE = 'ULNG',
@@ -1157,17 +2391,9 @@ enum {
     B_MIME_TYPE = 'MIME',
     B_UNKNOWN_TYPE = 'UNKN'
 };
-# 255 "../src/interface/./../support/SupportDefs.h"
+# 283 "../src/kits/interface/../support/SupportDefs.h"
 extern "C" {
-
-
-extern __attribute__((dllexport)) const b_uint8 bhapi_major_version;
-extern __attribute__((dllexport)) const b_uint8 bhapi_minor_version;
-extern __attribute__((dllexport)) const b_uint8 bhapi_micro_version;
-extern __attribute__((dllexport)) const b_uint8 bhapi_interface_age;
-extern __attribute__((dllexport)) const b_uint16 bhapi_binary_age;
-
-
+# 293 "../src/kits/interface/../support/SupportDefs.h"
 }
 
 
@@ -1337,112 +2563,7 @@ extern "C" {
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw.h" 1 3
 # 16 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winnt.h" 2 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 1 3
-# 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
-extern "C" {
-# 36 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
-  extern unsigned short ** _imp___pctype;
-# 51 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
-  extern unsigned short ** _imp___wctype;
-# 63 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
-  extern unsigned short ** _imp___pwctype;
-# 72 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
-  extern const unsigned char __newclmap[];
-  extern const unsigned char __newcumap[];
-  extern pthreadlocinfo __ptlocinfo;
-  extern pthreadmbcinfo __ptmbcinfo;
-  extern int __globallocalestatus;
-  extern int __locale_changed;
-  extern struct threadlocaleinfostruct __initiallocinfo;
-  extern _locale_tstruct __initiallocalestructinfo;
-  pthreadlocinfo __attribute__((__cdecl__)) __updatetlocinfo(void);
-  pthreadmbcinfo __attribute__((__cdecl__)) __updatetmbcinfo(void);
-# 100 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isctype(int _C,int _Type);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isctype_l(int _C,int _Type,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isalpha(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isalpha_l(int _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isupper(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isupper_l(int _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) islower(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _islower_l(int _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isdigit(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isdigit_l(int _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isxdigit(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isxdigit_l(int _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isspace(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isspace_l(int _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) ispunct(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _ispunct_l(int _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isalnum(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isalnum_l(int _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isprint(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isprint_l(int _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isgraph(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isgraph_l(int _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) iscntrl(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iscntrl_l(int _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) toupper(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) tolower(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _tolower(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _tolower_l(int _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _toupper(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _toupper_l(int _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __isascii(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __toascii(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iscsymf(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iscsym(int _C);
 
-
-int __attribute__((__cdecl__)) isblank(int _C);
-
-
-
-
-
-
-  int __attribute__((__cdecl__)) iswalpha(wint_t _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswalpha_l(wint_t _C,_locale_t _Locale);
-  int __attribute__((__cdecl__)) iswupper(wint_t _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswupper_l(wint_t _C,_locale_t _Locale);
-  int __attribute__((__cdecl__)) iswlower(wint_t _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswlower_l(wint_t _C,_locale_t _Locale);
-  int __attribute__((__cdecl__)) iswdigit(wint_t _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswdigit_l(wint_t _C,_locale_t _Locale);
-  int __attribute__((__cdecl__)) iswxdigit(wint_t _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswxdigit_l(wint_t _C,_locale_t _Locale);
-  int __attribute__((__cdecl__)) iswspace(wint_t _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswspace_l(wint_t _C,_locale_t _Locale);
-  int __attribute__((__cdecl__)) iswpunct(wint_t _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswpunct_l(wint_t _C,_locale_t _Locale);
-  int __attribute__((__cdecl__)) iswalnum(wint_t _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswalnum_l(wint_t _C,_locale_t _Locale);
-  int __attribute__((__cdecl__)) iswprint(wint_t _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswprint_l(wint_t _C,_locale_t _Locale);
-  int __attribute__((__cdecl__)) iswgraph(wint_t _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswgraph_l(wint_t _C,_locale_t _Locale);
-  int __attribute__((__cdecl__)) iswcntrl(wint_t _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswcntrl_l(wint_t _C,_locale_t _Locale);
-  int __attribute__((__cdecl__)) iswascii(wint_t _C);
-  int __attribute__((__cdecl__)) isleadbyte(int _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isleadbyte_l(int _C,_locale_t _Locale);
-  wint_t __attribute__((__cdecl__)) towupper(wint_t _C);
-  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _towupper_l(wint_t _C,_locale_t _Locale);
-  wint_t __attribute__((__cdecl__)) towlower(wint_t _C);
-  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _towlower_l(wint_t _C,_locale_t _Locale);
-  int __attribute__((__cdecl__)) iswctype(wint_t _C,wctype_t _Type);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswctype_l(wint_t _C,wctype_t _Type,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iswcsymf(wint_t _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswcsymf_l(wint_t _C,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iswcsym(wint_t _C);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswcsym_l(wint_t _C,_locale_t _Locale);
-  int __attribute__((__cdecl__)) is_wctype(wint_t _C,wctype_t _Type);
-
-
-int __attribute__((__cdecl__)) iswblank(wint_t _C);
-# 276 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
-}
-# 17 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winnt.h" 2 3
 
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/apiset.h" 1 3
@@ -5335,22 +6456,7 @@ typedef DWORD (__attribute__((__stdcall__)) *PRTL_RUN_ONCE_INIT_FN)(PRTL_RUN_ONC
   } RTL_BARRIER,*PRTL_BARRIER;
 # 7111 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winnt.h" 3
     PVOID __attribute__((__stdcall__)) RtlSecureZeroMemory(PVOID ptr,SIZE_T cnt);
-
-
-    inline PVOID __attribute__((__stdcall__)) RtlSecureZeroMemory(PVOID ptr,SIZE_T cnt) {
-      volatile char *vptr =(volatile char *)ptr;
-
-
-
-      while(cnt) {
- *vptr++ = 0;
- cnt--;
-      }
-
-      return ptr;
-    }
-
-
+# 7128 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winnt.h" 3
     typedef struct _MESSAGE_RESOURCE_ENTRY {
       WORD Length;
       WORD Flags;
@@ -43157,8 +44263,6 @@ extern "C" {
 extern "C" {
 # 35 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stralign.h" 3
   PUWSTR ua_wcscpy(PUWSTR Destination,PCUWSTR Source);
-
-  inline PUWSTR ua_wcscpy(PUWSTR Destination,PCUWSTR Source) { return wcscpy(Destination,Source); }
 # 202 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stralign.h" 3
 }
 
@@ -44312,19 +45416,269 @@ typedef unsigned int GROUP;
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAProviderConfigChange(LPHANDLE lpNotificationHandle,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 # 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
-# 273 "../src/interface/./../support/SupportDefs.h" 2
-# 296 "../src/interface/./../support/SupportDefs.h"
+# 301 "../src/kits/interface/../support/SupportDefs.h" 2
+# 324 "../src/kits/interface/../support/SupportDefs.h"
 enum {
     B_SEEK_SET = 0,
     B_SEEK_CUR,
     B_SEEK_END,
 };
+# 34 "../src/kits/interface/Rect.h" 2
 
 
-# 1 "../src/interface/./../support/./../kernel/Debug.h" 1
-# 33 "../src/interface/./../support/./../kernel/Debug.h"
-# 1 "../src/interface/./../support/./../kernel/./../support/SupportDefs.h" 1
-# 34 "../src/interface/./../support/./../kernel/Debug.h" 2
+# 1 "../src/kits/interface/../interface/Point.h" 1
+# 33 "../src/kits/interface/../interface/Point.h"
+# 1 "../src/kits/interface/../interface/../support/SupportDefs.h" 1
+# 34 "../src/kits/interface/../interface/Point.h" 2
+
+
+
+class BRect;
+class __attribute__((dllexport)) BPoint {
+public:
+ float x;
+ float y;
+
+ BPoint();
+ BPoint(float X, float Y);
+ BPoint(const BPoint &pt);
+
+ BPoint &operator=(const BPoint &from);
+ void Set(float X, float Y);
+
+ void ConstrainTo(BRect rect);
+
+ void Ceil();
+ void Floor();
+ void Round();
+
+ BPoint& FloorSelf();
+ BPoint FloorCopy() const;
+ BPoint& CeilSelf();
+ BPoint CeilCopy() const;
+ BPoint& RoundSelf();
+ BPoint RoundCopy() const;
+
+ BPoint operator+(const BPoint &plus) const;
+ BPoint operator-(const BPoint &minus) const;
+ BPoint& operator+=(const BPoint &plus);
+ BPoint& operator-=(const BPoint &minus);
+
+ bool operator!=(const BPoint &pt) const;
+ bool operator==(const BPoint &pt) const;
+
+ void PrintToStream() const;
+};
+
+extern __attribute__((dllexport)) const BPoint B_ORIGIN;
+# 37 "../src/kits/interface/Rect.h" 2
+class __attribute__((dllexport)) BRect {
+public:
+ float left;
+ float top;
+ float right;
+ float bottom;
+
+ BRect();
+ BRect(const BRect &r);
+ BRect(float l, float t, float r, float b);
+ BRect(BPoint leftTop, BPoint rightBottom);
+
+ BRect &operator=(const BRect &from);
+ void Set(float l, float t, float r, float b);
+
+ BPoint LeftTop() const;
+ BPoint RightBottom() const;
+ BPoint LeftBottom() const;
+ BPoint RightTop() const;
+ BPoint Center() const;
+
+ void SetLeftTop(const BPoint pt);
+ void SetRightBottom(const BPoint pt);
+ void SetLeftBottom(const BPoint pt);
+ void SetRightTop(const BPoint pt);
+
+ void SetLeftTop(float x, float y);
+ void SetRightBottom(float x, float y);
+ void SetLeftBottom(float x, float y);
+ void SetRightTop(float x, float y);
+
+ void InsetBy(BPoint pt);
+ void InsetBy(float dx, float dy);
+ void OffsetBy(BPoint pt);
+ void OffsetBy(float dx, float dy);
+ void OffsetTo(BPoint pt);
+ void OffsetTo(float x, float y);
+
+ void Floor();
+ void Ceil();
+ void Round();
+
+ BRect& InsetBySelf(BPoint pt);
+ BRect& InsetBySelf(float dx, float dy);
+ BRect InsetByCopy(BPoint pt) const;
+ BRect InsetByCopy(float dx, float dy) const;
+ BRect& OffsetBySelf(BPoint pt);
+ BRect& OffsetBySelf(float dx, float dy);
+ BRect OffsetByCopy(BPoint pt) const;
+ BRect OffsetByCopy(float dx, float dy) const;
+ BRect& OffsetToSelf(BPoint pt);
+ BRect& OffsetToSelf(float x, float y);
+ BRect OffsetToCopy(BPoint pt) const;
+ BRect OffsetToCopy(float x, float y) const;
+
+ BRect& FloorSelf();
+ BRect FloorCopy() const;
+ BRect& CeilSelf();
+ BRect CeilCopy() const;
+ BRect& RoundSelf();
+ BRect RoundCopy() const;
+
+ bool operator==(BRect r) const;
+ bool operator!=(BRect r) const;
+
+ BRect operator&(BRect r) const;
+ BRect operator|(BRect r) const;
+
+ BRect& operator&=(BRect r);
+ BRect& operator|=(BRect r);
+
+ bool IsValid() const;
+ float Width() const;
+    b_int32 IntegerWidth() const;
+ float Height() const;
+    b_int32 IntegerHeight() const;
+
+ bool Intersects(BRect r) const;
+ bool Intersects(float l, float t, float r, float b) const;
+
+ bool Contains(BPoint pt) const;
+ bool Contains(float x, float y) const;
+ bool Contains(BRect r) const;
+ bool Contains(float l, float t, float r, float b) const;
+
+ void PrintToStream() const;
+};
+
+
+
+inline BPoint BRect::LeftTop() const
+{
+ return(BPoint(left, top));
+}
+
+
+inline BPoint BRect::RightBottom() const
+{
+ return(BPoint(right, bottom));
+}
+
+
+inline BPoint BRect::LeftBottom() const
+{
+ return(BPoint(left, bottom));
+}
+
+
+inline BPoint BRect::RightTop() const
+{
+ return(BPoint(right, top));
+}
+
+
+inline BPoint BRect::Center() const
+{
+ return(BPoint(left + (right - left) / 2, top + (bottom - top) / 2));
+}
+
+
+inline BRect::BRect()
+{
+ top = left = 0;
+ bottom = right = -1;
+}
+
+
+inline BRect::BRect(float l, float t, float r, float b)
+{
+ left = l;
+ top = t;
+ right = r;
+ bottom = b;
+}
+
+
+inline BRect::BRect(const BRect &r)
+{
+ left = r.left;
+ top = r.top;
+ right = r.right;
+ bottom = r.bottom;
+}
+
+
+inline BRect::BRect(BPoint leftTop, BPoint rightBottom)
+{
+ left = leftTop.x;
+ top = leftTop.y;
+ right = rightBottom.x;
+ bottom = rightBottom.y;
+}
+
+
+inline BRect& BRect::operator=(const BRect& from)
+{
+ left = from.left;
+ top = from.top;
+ right = from.right;
+ bottom = from.bottom;
+ return *this;
+}
+
+
+inline void BRect::Set(float l, float t, float r, float b)
+{
+ left = l;
+ top = t;
+ right = r;
+ bottom = b;
+}
+
+
+inline bool BRect::IsValid() const
+{
+ return(left <= right && top <= bottom);
+}
+
+
+inline b_int32 BRect::IntegerWidth() const
+{
+    return((b_int32)ceil((double)(right - left)));
+}
+
+
+inline float BRect::Width() const
+{
+ return(right - left);
+}
+
+
+inline b_int32 BRect::IntegerHeight() const
+{
+    return((b_int32)ceil((double)(bottom - top)));
+}
+
+
+inline float BRect::Height() const
+{
+ return(bottom - top);
+}
+# 31 "../src/kits/interface/Rect.cpp" 2
+
+# 1 "../src/kits/interface/../kernel/Debug.h" 1
+# 32 "../src/kits/interface/../kernel/Debug.h"
+# 1 "../src/kits/interface/../kernel/../support/SupportDefs.h" 1
+# 33 "../src/kits/interface/../kernel/Debug.h" 2
 
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/new" 1 3
@@ -44831,8 +46185,8 @@ inline void operator delete[](void*, void*) noexcept { }
 }
 
 #pragma GCC visibility pop
-# 37 "../src/interface/./../support/./../kernel/Debug.h" 2
-# 54 "../src/interface/./../support/./../kernel/Debug.h"
+# 36 "../src/kits/interface/../kernel/Debug.h" 2
+# 53 "../src/kits/interface/../kernel/Debug.h"
 extern "C" {
 
 
@@ -44844,1049 +46198,21 @@ typedef enum bhapi_debug_level {
 } bhapi_debug_level;
 
 __attribute__((dllexport)) void bhapi_debug_log(bhapi_debug_level level, const char *format, va_list ap);
-# 80 "../src/interface/./../support/./../kernel/Debug.h"
+# 79 "../src/kits/interface/../kernel/Debug.h"
 __attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...);
 
 
 
 __attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...);
-# 100 "../src/interface/./../support/./../kernel/Debug.h"
+# 99 "../src/kits/interface/../kernel/Debug.h"
 __attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...);
 
 
 
 __attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...);
-# 118 "../src/interface/./../support/./../kernel/Debug.h"
+# 117 "../src/kits/interface/../kernel/Debug.h"
 }
-# 304 "../src/interface/./../support/SupportDefs.h" 2
-
-# 1 "../src/interface/./../support/Errors.h" 1
-# 32 "../src/interface/./../support/Errors.h"
-# 1 "../src/interface/./../support/SupportDefs.h" 1
-# 33 "../src/interface/./../support/Errors.h" 2
-# 41 "../src/interface/./../support/Errors.h"
-enum {
-    B_NO_MEMORY = (-2147483647 - 1),
-    B_IO_ERROR,
-    B_PERMISSION_DENIED,
-    B_BAD_INDEX,
-    B_BAD_TYPE,
-    B_BAD_VALUE,
-    B_MISMATCHED_VALUES,
-    B_NAME_NOT_FOUND,
-    B_NAME_IN_USE,
-    B_TIMED_OUT,
-    B_INTERRUPTED,
-    B_WOULD_BLOCK,
-    B_CANCELED,
-    B_NO_INIT,
-    B_BUSY,
-    B_NOT_ALLOWED,
-
-    B_ERROR = -1,
-    B_OK = 1,
-    B_NO_ERROR = 1
-};
-
-
-enum {
-    B_BAD_SEM_ID = (-2147483647 - 1) + 0x1000,
-    B_NO_MORE_SEMS,
-
-    B_BAD_THREAD_ID = (-2147483647 - 1) + 0x1000 + 0x100,
-    B_NO_MORE_THREADS,
-    B_BAD_THREAD_STATE,
-    B_BAD_TEAM_ID,
-    B_NO_MORE_TEAMS,
-
-    B_BAD_PORT_ID = (-2147483647 - 1) + 0x1000 + 0x200,
-    B_NO_MORE_PORTS,
-
-    B_BAD_IMAGE_ID = (-2147483647 - 1) + 0x1000 + 0x300,
-    B_BAD_ADDRESS,
-    B_NOT_AN_EXECUTABLE,
-    B_MISSING_LIBRARY,
-    B_MISSING_SYMBOL,
-
-    B_DEBUGGER_ALREADY_INSTALLED = (-2147483647 - 1) + 0x1000 + 0x400
-};
-
-
-enum {
-    B_BAD_REPLY = (-2147483647 - 1) + 0x2000,
-    B_DUPLICATE_REPLY,
-    B_MESSAGE_TO_SELF,
-    B_BAD_HANDLER,
-    B_ALREADY_RUNNING,
-};
-
-
-enum {
-    B_FILE_ERROR = (-2147483647 - 1) + 0x3000,
-    B_ENTRY_NOT_FOUND,
-    B_LINK_LIMIT,
-    B_NAME_TOO_LONG,
-};
-# 306 "../src/interface/./../support/SupportDefs.h" 2
-# 31 "../src/interface/Rect.cpp" 2
-
-# 1 "../src/interface/Rect.h" 1
-# 33 "../src/interface/Rect.h"
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 1 3
-# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-       
-# 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-
-
-
-
-struct _exception;
-
-#pragma pack(push,_CRT_PACKING)
-# 76 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-extern "C" {
-
-
-
-
-
-
-
-  typedef union __mingw_dbl_type_t {
-    double x;
-    unsigned long long val;
-    __extension__ struct {
-      unsigned int low, high;
-    } lh;
-  } __mingw_dbl_type_t;
-
-  typedef union __mingw_flt_type_t {
-    float x;
-    unsigned int val;
-  } __mingw_flt_type_t;
-
-  typedef union __mingw_ldbl_type_t
-  {
-    long double x;
-    __extension__ struct {
-      unsigned int low, high;
-      int sign_exponent : 16;
-      int res1 : 16;
-      int res0 : 32;
-    } lh;
-  } __mingw_ldbl_type_t;
-
-
-
-
-  extern double * _imp___HUGE;
-# 123 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-  struct _exception {
-    int type;
-    const char *name;
-    double arg1;
-    double arg2;
-    double retval;
-  };
-
-  void __mingw_raise_matherr (int typ, const char *name, double a1, double a2,
-         double rslt);
-  void __mingw_setusermatherr (int (__attribute__((__cdecl__)) *)(struct _exception *));
-  __attribute__ ((__dllimport__)) void __setusermatherr(int (__attribute__((__cdecl__)) *)(struct _exception *));
-
-
-
-  double __attribute__((__cdecl__)) sin(double _X);
-  double __attribute__((__cdecl__)) cos(double _X);
-  double __attribute__((__cdecl__)) tan(double _X);
-  double __attribute__((__cdecl__)) sinh(double _X);
-  double __attribute__((__cdecl__)) cosh(double _X);
-  double __attribute__((__cdecl__)) tanh(double _X);
-  double __attribute__((__cdecl__)) asin(double _X);
-  double __attribute__((__cdecl__)) acos(double _X);
-  double __attribute__((__cdecl__)) atan(double _X);
-  double __attribute__((__cdecl__)) atan2(double _Y,double _X);
-  double __attribute__((__cdecl__)) exp(double _X);
-  double __attribute__((__cdecl__)) log(double _X);
-  double __attribute__((__cdecl__)) log10(double _X);
-  double __attribute__((__cdecl__)) pow(double _X,double _Y);
-  double __attribute__((__cdecl__)) sqrt(double _X);
-  double __attribute__((__cdecl__)) ceil(double _X);
-  double __attribute__((__cdecl__)) floor(double _X);
-
-
-  extern float __attribute__((__cdecl__)) fabsf (float x);
-  extern long double __attribute__((__cdecl__)) fabsl (long double);
-  extern double __attribute__((__cdecl__)) fabs (double _X);
-
-
-
-  inline float __attribute__((__cdecl__)) fabsf (float x)
-  {
-
-
-
-    float res = 0.0F;
-    __asm__ __volatile__ ("fabs;" : "=t" (res) : "0" (x));
-    return res;
-
-  }
-
-  inline long double __attribute__((__cdecl__)) fabsl (long double x)
-  {
-    long double res = 0.0l;
-    __asm__ __volatile__ ("fabs;" : "=t" (res) : "0" (x));
-    return res;
-  }
-
-  inline double __attribute__((__cdecl__)) fabs (double x)
-  {
-
-
-
-    double res = 0.0;
-    __asm__ __volatile__ ("fabs;" : "=t" (res) : "0" (x));
-    return res;
-
-  }
-
-
-
-  double __attribute__((__cdecl__)) ldexp(double _X,int _Y);
-  double __attribute__((__cdecl__)) frexp(double _X,int *_Y);
-  double __attribute__((__cdecl__)) modf(double _X,double *_Y);
-  double __attribute__((__cdecl__)) fmod(double _X,double _Y);
-
-  void __attribute__((__cdecl__)) sincos (double __x, double *p_sin, double *p_cos);
-  void __attribute__((__cdecl__)) sincosl (long double __x, long double *p_sin, long double *p_cos);
-  void __attribute__((__cdecl__)) sincosf (float __x, float *p_sin, float *p_cos);
-# 221 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-  struct _complex {
-    double x;
-    double y;
-  };
-
-
-  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _cabs(struct _complex _ComplexA);
-  double __attribute__((__cdecl__)) _hypot(double _X,double _Y);
-  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _j0(double _X);
-  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _j1(double _X);
-  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _jn(int _X,double _Y);
-  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _y0(double _X);
-  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _y1(double _X);
-  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _yn(int _X,double _Y);
-
-
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _matherr (struct _exception *);
-# 262 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) j0 (double) ;
-__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) j1 (double) ;
-__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) jn (int, double) ;
-__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) y0 (double) ;
-__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) y1 (double) ;
-__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) yn (int, double) ;
-
-__attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) chgsign (double);
-# 278 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) finite (double);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) fpclass (double);
-# 295 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _set_SSE2_enable(int _Flag);
-# 323 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-typedef float float_t;
-typedef double double_t;
-# 358 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-  extern int __attribute__((__cdecl__)) __fpclassifyl (long double);
-  extern int __attribute__((__cdecl__)) __fpclassifyf (float);
-  extern int __attribute__((__cdecl__)) __fpclassify (double);
-
-
-  inline int __attribute__((__cdecl__)) __fpclassifyl (long double x) {
-    unsigned short sw;
-    __asm__ __volatile__ ("fxam; fstsw %%ax;" : "=a" (sw): "t" (x));
-    return sw & (0x0100 | 0x0400 | 0x4000 );
-  }
-  inline int __attribute__((__cdecl__)) __fpclassify (double x) {
-# 385 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-    unsigned short sw;
-    __asm__ __volatile__ ("fxam; fstsw %%ax;" : "=a" (sw): "t" (x));
-    return sw & (0x0100 | 0x0400 | 0x4000 );
-
-  }
-  inline int __attribute__((__cdecl__)) __fpclassifyf (float x) {
-# 404 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-    unsigned short sw;
-    __asm__ __volatile__ ("fxam; fstsw %%ax;" : "=a" (sw): "t" (x));
-    return sw & (0x0100 | 0x0400 | 0x4000 );
-
-  }
-# 425 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-  extern int __attribute__((__cdecl__)) __isnan (double);
-  extern int __attribute__((__cdecl__)) __isnanf (float);
-  extern int __attribute__((__cdecl__)) __isnanl (long double);
-
-
-  inline int __attribute__((__cdecl__)) __isnan (double _x)
-  {
-# 443 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-    unsigned short sw;
-    __asm__ __volatile__ ("fxam;"
-      "fstsw %%ax": "=a" (sw) : "t" (_x));
-    return (sw & (0x0100 | 0x0400 | (0x0100 | 0x0400) | 0x4000 | (0x0400 | 0x4000)))
-      == 0x0100;
-
-  }
-
-  inline int __attribute__((__cdecl__)) __isnanf (float _x)
-  {
-# 462 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-    unsigned short sw;
-    __asm__ __volatile__ ("fxam;"
-      "fstsw %%ax": "=a" (sw) : "t" (_x));
-    return (sw & (0x0100 | 0x0400 | (0x0100 | 0x0400) | 0x4000 | (0x0400 | 0x4000)))
-      == 0x0100;
-
-  }
-
-  inline int __attribute__((__cdecl__)) __isnanl (long double _x)
-  {
-    unsigned short sw;
-    __asm__ __volatile__ ("fxam;"
-      "fstsw %%ax": "=a" (sw) : "t" (_x));
-    return (sw & (0x0100 | 0x0400 | (0x0100 | 0x0400) | 0x4000 | (0x0400 | 0x4000)))
-      == 0x0100;
-  }
-# 488 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-  extern int __attribute__((__cdecl__)) __signbit (double);
-  extern int __attribute__((__cdecl__)) __signbitf (float);
-  extern int __attribute__((__cdecl__)) __signbitl (long double);
-
-  inline int __attribute__((__cdecl__)) __signbit (double x) {
-
-
-
-
-
-
-    unsigned short stw;
-    __asm__ __volatile__ ( "fxam; fstsw %%ax;": "=a" (stw) : "t" (x));
-    return stw & 0x0200;
-
-  }
-
-  inline int __attribute__((__cdecl__)) __signbitf (float x) {
-
-
-
-
-
-    unsigned short stw;
-    __asm__ __volatile__ ("fxam; fstsw %%ax;": "=a" (stw) : "t" (x));
-    return stw & 0x0200;
-
-  }
-
-  inline int __attribute__((__cdecl__)) __signbitl (long double x) {
-    unsigned short stw;
-    __asm__ __volatile__ ("fxam; fstsw %%ax;": "=a" (stw) : "t" (x));
-    return stw & 0x0200;
-  }
-
-
-
-
-
-
-
-  extern float __attribute__((__cdecl__)) sinf(float _X);
-  extern long double __attribute__((__cdecl__)) sinl(long double);
-
-  extern float __attribute__((__cdecl__)) cosf(float _X);
-  extern long double __attribute__((__cdecl__)) cosl(long double);
-
-  extern float __attribute__((__cdecl__)) tanf(float _X);
-  extern long double __attribute__((__cdecl__)) tanl(long double);
-  extern float __attribute__((__cdecl__)) asinf(float _X);
-  extern long double __attribute__((__cdecl__)) asinl(long double);
-
-  extern float __attribute__((__cdecl__)) acosf (float);
-  extern long double __attribute__((__cdecl__)) acosl (long double);
-
-  extern float __attribute__((__cdecl__)) atanf (float);
-  extern long double __attribute__((__cdecl__)) atanl (long double);
-
-  extern float __attribute__((__cdecl__)) atan2f (float, float);
-  extern long double __attribute__((__cdecl__)) atan2l (long double, long double);
-
-
-  extern float __attribute__((__cdecl__)) sinhf(float _X);
-
-  inline float sinhf(float _X) { return ((float)sinh((double)_X)); }
-
-  extern long double __attribute__((__cdecl__)) sinhl(long double);
-
-  extern float __attribute__((__cdecl__)) coshf(float _X);
-
-  inline float coshf(float _X) { return ((float)cosh((double)_X)); }
-
-  extern long double __attribute__((__cdecl__)) coshl(long double);
-
-  extern float __attribute__((__cdecl__)) tanhf(float _X);
-
-  inline float tanhf(float _X) { return ((float)tanh((double)_X)); }
-
-  extern long double __attribute__((__cdecl__)) tanhl(long double);
-
-
-
-  extern double __attribute__((__cdecl__)) acosh (double);
-  extern float __attribute__((__cdecl__)) acoshf (float);
-  extern long double __attribute__((__cdecl__)) acoshl (long double);
-
-
-  extern double __attribute__((__cdecl__)) asinh (double);
-  extern float __attribute__((__cdecl__)) asinhf (float);
-  extern long double __attribute__((__cdecl__)) asinhl (long double);
-
-
-  extern double __attribute__((__cdecl__)) atanh (double);
-  extern float __attribute__((__cdecl__)) atanhf (float);
-  extern long double __attribute__((__cdecl__)) atanhl (long double);
-
-
-
-  extern float __attribute__((__cdecl__)) expf(float _X);
-
-  inline float expf(float _X) { return ((float)exp((double)_X)); }
-
-  extern long double __attribute__((__cdecl__)) expl(long double);
-
-
-  extern double __attribute__((__cdecl__)) exp2(double);
-  extern float __attribute__((__cdecl__)) exp2f(float);
-  extern long double __attribute__((__cdecl__)) exp2l(long double);
-
-
-
-  extern double __attribute__((__cdecl__)) expm1(double);
-  extern float __attribute__((__cdecl__)) expm1f(float);
-  extern long double __attribute__((__cdecl__)) expm1l(long double);
-
-
-  extern float frexpf(float _X,int *_Y);
-
-  inline float frexpf(float _X,int *_Y) { return ((float)frexp((double)_X,_Y)); }
-
-  extern long double __attribute__((__cdecl__)) frexpl(long double,int *);
-
-
-
-
-  extern int __attribute__((__cdecl__)) ilogb (double);
-  extern int __attribute__((__cdecl__)) ilogbf (float);
-  extern int __attribute__((__cdecl__)) ilogbl (long double);
-
-
-  extern float __attribute__((__cdecl__)) ldexpf(float _X,int _Y);
-
-  inline float __attribute__((__cdecl__)) ldexpf (float x, int expn) { return (float) ldexp ((double)x, expn); }
-
-  extern long double __attribute__((__cdecl__)) ldexpl (long double, int);
-
-
-  extern float __attribute__((__cdecl__)) logf (float);
-  extern long double __attribute__((__cdecl__)) logl(long double);
-
-
-  extern float __attribute__((__cdecl__)) log10f (float);
-  extern long double __attribute__((__cdecl__)) log10l(long double);
-
-
-  extern double __attribute__((__cdecl__)) log1p(double);
-  extern float __attribute__((__cdecl__)) log1pf(float);
-  extern long double __attribute__((__cdecl__)) log1pl(long double);
-
-
-  extern double __attribute__((__cdecl__)) log2 (double);
-  extern float __attribute__((__cdecl__)) log2f (float);
-  extern long double __attribute__((__cdecl__)) log2l (long double);
-
-
-  extern double __attribute__((__cdecl__)) logb (double);
-  extern float __attribute__((__cdecl__)) logbf (float);
-  extern long double __attribute__((__cdecl__)) logbl (long double);
-
-
-
-
-
-  inline double __attribute__((__cdecl__)) logb (double x)
-  {
-# 668 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-    double res = 0.0;
-    __asm__ __volatile__ ("fxtract\n\t"
-      "fstp	%%st" : "=t" (res) : "0" (x));
-    return res;
-
-  }
-
-  inline float __attribute__((__cdecl__)) logbf (float x)
-  {
-# 691 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-    float res = 0.0F;
-    __asm__ __volatile__ ("fxtract\n\t"
-      "fstp	%%st" : "=t" (res) : "0" (x));
-    return res;
-
-  }
-
-  inline long double __attribute__((__cdecl__)) logbl (long double x)
-  {
-    long double res = 0.0l;
-    __asm__ __volatile__ ("fxtract\n\t"
-      "fstp	%%st" : "=t" (res) : "0" (x));
-    return res;
-  }
-
-
-
-
-  extern float __attribute__((__cdecl__)) modff (float, float*);
-  extern long double __attribute__((__cdecl__)) modfl (long double, long double*);
-
-
-  extern double __attribute__((__cdecl__)) scalbn (double, int);
-  extern float __attribute__((__cdecl__)) scalbnf (float, int);
-  extern long double __attribute__((__cdecl__)) scalbnl (long double, int);
-
-  extern double __attribute__((__cdecl__)) scalbln (double, long);
-  extern float __attribute__((__cdecl__)) scalblnf (float, long);
-  extern long double __attribute__((__cdecl__)) scalblnl (long double, long);
-
-
-
-  extern double __attribute__((__cdecl__)) cbrt (double);
-  extern float __attribute__((__cdecl__)) cbrtf (float);
-  extern long double __attribute__((__cdecl__)) cbrtl (long double);
-
-
-  extern double __attribute__((__cdecl__)) hypot (double, double) ;
-  extern float __attribute__((__cdecl__)) hypotf (float x, float y);
-
-  inline float __attribute__((__cdecl__)) hypotf (float x, float y) { return (float) hypot ((double)x, (double)y);}
-
-  extern long double __attribute__((__cdecl__)) hypotl (long double, long double);
-
-
-  extern float __attribute__((__cdecl__)) powf(float _X,float _Y);
-
-  inline float powf(float _X,float _Y) { return ((float)pow((double)_X,(double)_Y)); }
-
-  extern long double __attribute__((__cdecl__)) powl (long double, long double);
-
-
-  extern float __attribute__((__cdecl__)) sqrtf (float);
-  extern long double sqrtl(long double);
-
-
-  extern double __attribute__((__cdecl__)) erf (double);
-  extern float __attribute__((__cdecl__)) erff (float);
-  extern long double __attribute__((__cdecl__)) erfl (long double);
-
-
-  extern double __attribute__((__cdecl__)) erfc (double);
-  extern float __attribute__((__cdecl__)) erfcf (float);
-  extern long double __attribute__((__cdecl__)) erfcl (long double);
-
-
-  extern double __attribute__((__cdecl__)) lgamma (double);
-  extern float __attribute__((__cdecl__)) lgammaf (float);
-  extern long double __attribute__((__cdecl__)) lgammal (long double);
-
-  extern int signgam;
-
-
-  extern double __attribute__((__cdecl__)) tgamma (double);
-  extern float __attribute__((__cdecl__)) tgammaf (float);
-  extern long double __attribute__((__cdecl__)) tgammal (long double);
-
-
-  extern float __attribute__((__cdecl__)) ceilf (float);
-  extern long double __attribute__((__cdecl__)) ceill (long double);
-
-
-  extern float __attribute__((__cdecl__)) floorf (float);
-  extern long double __attribute__((__cdecl__)) floorl (long double);
-
-
-  extern double __attribute__((__cdecl__)) nearbyint ( double);
-  extern float __attribute__((__cdecl__)) nearbyintf (float);
-  extern long double __attribute__((__cdecl__)) nearbyintl (long double);
-
-
-
-extern double __attribute__((__cdecl__)) rint (double);
-extern float __attribute__((__cdecl__)) rintf (float);
-extern long double __attribute__((__cdecl__)) rintl (long double);
-
-
-extern long __attribute__((__cdecl__)) lrint (double);
-extern long __attribute__((__cdecl__)) lrintf (float);
-extern long __attribute__((__cdecl__)) lrintl (long double);
-
-__extension__ long long __attribute__((__cdecl__)) llrint (double);
-__extension__ long long __attribute__((__cdecl__)) llrintf (float);
-__extension__ long long __attribute__((__cdecl__)) llrintl (long double);
-
-
-
-
-
-
-  inline double __attribute__((__cdecl__)) rint (double x)
-  {
-    double retval = 0.0;
-    __asm__ __volatile__ ("frndint;": "=t" (retval) : "0" (x));
-    return retval;
-  }
-
-  inline float __attribute__((__cdecl__)) rintf (float x)
-  {
-    float retval = 0.0;
-    __asm__ __volatile__ ("frndint;" : "=t" (retval) : "0" (x) );
-    return retval;
-  }
-
-  inline long double __attribute__((__cdecl__)) rintl (long double x)
-  {
-    long double retval = 0.0l;
-    __asm__ __volatile__ ("frndint;" : "=t" (retval) : "0" (x) );
-    return retval;
-  }
-
-  inline long __attribute__((__cdecl__)) lrint (double x)
-  {
-    long retval = 0;
-    __asm__ __volatile__
-      ("fistpl %0" : "=m" (retval) : "t" (x) : "st");
-      return retval;
-  }
-
-  inline long __attribute__((__cdecl__)) lrintf (float x)
-  {
-    long retval = 0;
-    __asm__ __volatile__
-      ("fistpl %0" : "=m" (retval) : "t" (x) : "st");
-      return retval;
-  }
-
-  inline long __attribute__((__cdecl__)) lrintl (long double x)
-  {
-    long retval = 0;
-    __asm__ __volatile__
-      ("fistpl %0" : "=m" (retval) : "t" (x) : "st");
-      return retval;
-  }
-
-  __extension__ inline long long __attribute__((__cdecl__)) llrint (double x)
-  {
-    __extension__ long long retval = 0ll;
-    __asm__ __volatile__
-      ("fistpll %0" : "=m" (retval) : "t" (x) : "st");
-      return retval;
-  }
-
-  __extension__ inline long long __attribute__((__cdecl__)) llrintf (float x)
-  {
-    __extension__ long long retval = 0ll;
-    __asm__ __volatile__
-      ("fistpll %0" : "=m" (retval) : "t" (x) : "st");
-      return retval;
-  }
-
-  __extension__ inline long long __attribute__((__cdecl__)) llrintl (long double x)
-  {
-    __extension__ long long retval = 0ll;
-    __asm__ __volatile__
-      ("fistpll %0" : "=m" (retval) : "t" (x) : "st");
-      return retval;
-  }
-
-
-
-
-
-  extern double __attribute__((__cdecl__)) round (double);
-  extern float __attribute__((__cdecl__)) roundf (float);
-  extern long double __attribute__((__cdecl__)) roundl (long double);
-
-
-  extern long __attribute__((__cdecl__)) lround (double);
-  extern long __attribute__((__cdecl__)) lroundf (float);
-  extern long __attribute__((__cdecl__)) lroundl (long double);
-  __extension__ long long __attribute__((__cdecl__)) llround (double);
-  __extension__ long long __attribute__((__cdecl__)) llroundf (float);
-  __extension__ long long __attribute__((__cdecl__)) llroundl (long double);
-
-
-
-  extern double __attribute__((__cdecl__)) trunc (double);
-  extern float __attribute__((__cdecl__)) truncf (float);
-  extern long double __attribute__((__cdecl__)) truncl (long double);
-
-
-  extern float __attribute__((__cdecl__)) fmodf (float, float);
-  extern long double __attribute__((__cdecl__)) fmodl (long double, long double);
-
-
-  extern double __attribute__((__cdecl__)) remainder (double, double);
-  extern float __attribute__((__cdecl__)) remainderf (float, float);
-  extern long double __attribute__((__cdecl__)) remainderl (long double, long double);
-
-
-  extern double __attribute__((__cdecl__)) remquo(double, double, int *);
-  extern float __attribute__((__cdecl__)) remquof(float, float, int *);
-  extern long double __attribute__((__cdecl__)) remquol(long double, long double, int *);
-
-
-  extern double __attribute__((__cdecl__)) copysign (double, double);
-  extern float __attribute__((__cdecl__)) copysignf (float, float);
-  extern long double __attribute__((__cdecl__)) copysignl (long double, long double);
-
-
-
-  inline double __attribute__((__cdecl__)) copysign (double x, double y)
-  {
-    __mingw_dbl_type_t hx, hy;
-    hx.x = x; hy.x = y;
-    hx.lh.high = (hx.lh.high & 0x7fffffff) | (hy.lh.high & 0x80000000);
-    return hx.x;
-  }
-  inline float __attribute__((__cdecl__)) copysignf (float x, float y)
-  {
-    __mingw_flt_type_t hx, hy;
-    hx.x = x; hy.x = y;
-    hx.val = (hx.val & 0x7fffffff) | (hy.val & 0x80000000);
-    return hx.x;
-  }
-
-
-
-
-  extern double __attribute__((__cdecl__)) nan(const char *tagp);
-  extern float __attribute__((__cdecl__)) nanf(const char *tagp);
-  extern long double __attribute__((__cdecl__)) nanl(const char *tagp);
-# 942 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-  extern double __attribute__((__cdecl__)) nextafter (double, double);
-  extern float __attribute__((__cdecl__)) nextafterf (float, float);
-  extern long double __attribute__((__cdecl__)) nextafterl (long double, long double);
-
-
-  extern double __attribute__((__cdecl__)) nexttoward (double, long double);
-  extern float __attribute__((__cdecl__)) nexttowardf (float, long double);
-  extern long double __attribute__((__cdecl__)) nexttowardl (long double, long double);
-
-
-
-  extern double __attribute__((__cdecl__)) fdim (double x, double y);
-  extern float __attribute__((__cdecl__)) fdimf (float x, float y);
-  extern long double __attribute__((__cdecl__)) fdiml (long double x, long double y);
-
-
-
-
-
-
-
-  extern double __attribute__((__cdecl__)) fmax (double, double);
-  extern float __attribute__((__cdecl__)) fmaxf (float, float);
-  extern long double __attribute__((__cdecl__)) fmaxl (long double, long double);
-
-
-  extern double __attribute__((__cdecl__)) fmin (double, double);
-  extern float __attribute__((__cdecl__)) fminf (float, float);
-  extern long double __attribute__((__cdecl__)) fminl (long double, long double);
-
-
-
-  extern double __attribute__((__cdecl__)) fma (double, double, double);
-  extern float __attribute__((__cdecl__)) fmaf (float, float, float);
-  extern long double __attribute__((__cdecl__)) fmal (long double, long double, long double);
-# 1021 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-  __attribute__ ((__dllimport__)) float __attribute__((__cdecl__)) _hypotf(float _X,float _Y);
-
-
-
-   __attribute__ ((__dllimport__)) float __attribute__((__cdecl__)) _copysignf (float _Number,float _Sign);
-   __attribute__ ((__dllimport__)) float __attribute__((__cdecl__)) _chgsignf (float _X);
-   __attribute__ ((__dllimport__)) float __attribute__((__cdecl__)) _logbf(float _X);
-   __attribute__ ((__dllimport__)) float __attribute__((__cdecl__)) _nextafterf(float _X,float _Y);
-   __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _finitef(float _X);
-   __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isnanf(float _X);
-   __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fpclassf(float _X);
-
-
-
-   extern long double __attribute__((__cdecl__)) _chgsignl (long double);
-# 1047 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
-}
-
-
-
-
-#pragma pack(pop)
-# 34 "../src/interface/Rect.h" 2
-# 1 "../src/interface/./../interface/Point.h" 1
-# 33 "../src/interface/./../interface/Point.h"
-# 1 "../src/interface/./../interface/./../support/SupportDefs.h" 1
-# 34 "../src/interface/./../interface/Point.h" 2
-
-
-
-class BRect;
-
-class __attribute__((dllexport)) BPoint {
-public:
- float x;
- float y;
-
- BPoint();
- BPoint(float X, float Y);
- BPoint(const BPoint &pt);
-
- BPoint &operator=(const BPoint &from);
- void Set(float X, float Y);
-
- void ConstrainTo(BRect rect);
-
- void Ceil();
- void Floor();
- void Round();
-
- BPoint& FloorSelf();
- BPoint FloorCopy() const;
- BPoint& CeilSelf();
- BPoint CeilCopy() const;
- BPoint& RoundSelf();
- BPoint RoundCopy() const;
-
- BPoint operator+(const BPoint &plus) const;
- BPoint operator-(const BPoint &minus) const;
- BPoint& operator+=(const BPoint &plus);
- BPoint& operator-=(const BPoint &minus);
-
- bool operator!=(const BPoint &pt) const;
- bool operator==(const BPoint &pt) const;
-
- void PrintToStream() const;
-};
-
-extern __attribute__((dllexport)) const BPoint B_ORIGIN;
-# 35 "../src/interface/Rect.h" 2
-
-
-
-class __attribute__((dllexport)) BRect {
-public:
- float left;
- float top;
- float right;
- float bottom;
-
- BRect();
- BRect(const BRect &r);
- BRect(float l, float t, float r, float b);
- BRect(BPoint leftTop, BPoint rightBottom);
-
- BRect &operator=(const BRect &from);
- void Set(float l, float t, float r, float b);
-
- BPoint LeftTop() const;
- BPoint RightBottom() const;
- BPoint LeftBottom() const;
- BPoint RightTop() const;
- BPoint Center() const;
-
- void SetLeftTop(const BPoint pt);
- void SetRightBottom(const BPoint pt);
- void SetLeftBottom(const BPoint pt);
- void SetRightTop(const BPoint pt);
-
- void SetLeftTop(float x, float y);
- void SetRightBottom(float x, float y);
- void SetLeftBottom(float x, float y);
- void SetRightTop(float x, float y);
-
- void InsetBy(BPoint pt);
- void InsetBy(float dx, float dy);
- void OffsetBy(BPoint pt);
- void OffsetBy(float dx, float dy);
- void OffsetTo(BPoint pt);
- void OffsetTo(float x, float y);
-
- void Floor();
- void Ceil();
- void Round();
-
- BRect& InsetBySelf(BPoint pt);
- BRect& InsetBySelf(float dx, float dy);
- BRect InsetByCopy(BPoint pt) const;
- BRect InsetByCopy(float dx, float dy) const;
- BRect& OffsetBySelf(BPoint pt);
- BRect& OffsetBySelf(float dx, float dy);
- BRect OffsetByCopy(BPoint pt) const;
- BRect OffsetByCopy(float dx, float dy) const;
- BRect& OffsetToSelf(BPoint pt);
- BRect& OffsetToSelf(float x, float y);
- BRect OffsetToCopy(BPoint pt) const;
- BRect OffsetToCopy(float x, float y) const;
-
- BRect& FloorSelf();
- BRect FloorCopy() const;
- BRect& CeilSelf();
- BRect CeilCopy() const;
- BRect& RoundSelf();
- BRect RoundCopy() const;
-
- bool operator==(BRect r) const;
- bool operator!=(BRect r) const;
-
- BRect operator&(BRect r) const;
- BRect operator|(BRect r) const;
-
- BRect& operator&=(BRect r);
- BRect& operator|=(BRect r);
-
- bool IsValid() const;
- float Width() const;
-    b_int32 IntegerWidth() const;
- float Height() const;
-    b_int32 IntegerHeight() const;
-
- bool Intersects(BRect r) const;
- bool Intersects(float l, float t, float r, float b) const;
-
- bool Contains(BPoint pt) const;
- bool Contains(float x, float y) const;
- bool Contains(BRect r) const;
- bool Contains(float l, float t, float r, float b) const;
-
- void PrintToStream() const;
-};
-
-
-inline BPoint BRect::LeftTop() const
-{
- return(BPoint(left, top));
-}
-
-
-inline BPoint BRect::RightBottom() const
-{
- return(BPoint(right, bottom));
-}
-
-
-inline BPoint BRect::LeftBottom() const
-{
- return(BPoint(left, bottom));
-}
-
-
-inline BPoint BRect::RightTop() const
-{
- return(BPoint(right, top));
-}
-
-
-inline BPoint BRect::Center() const
-{
- return(BPoint(left + (right - left) / 2, top + (bottom - top) / 2));
-}
-
-
-inline BRect::BRect()
-{
- top = left = 0;
- bottom = right = -1;
-}
-
-
-inline BRect::BRect(float l, float t, float r, float b)
-{
- left = l;
- top = t;
- right = r;
- bottom = b;
-}
-
-
-inline BRect::BRect(const BRect &r)
-{
- left = r.left;
- top = r.top;
- right = r.right;
- bottom = r.bottom;
-}
-
-
-inline BRect::BRect(BPoint leftTop, BPoint rightBottom)
-{
- left = leftTop.x;
- top = leftTop.y;
- right = rightBottom.x;
- bottom = rightBottom.y;
-}
-
-
-inline BRect& BRect::operator=(const BRect& from)
-{
- left = from.left;
- top = from.top;
- right = from.right;
- bottom = from.bottom;
- return *this;
-}
-
-
-inline void BRect::Set(float l, float t, float r, float b)
-{
- left = l;
- top = t;
- right = r;
- bottom = b;
-}
-
-
-inline bool BRect::IsValid() const
-{
- return(left <= right && top <= bottom);
-}
-
-
-inline b_int32 BRect::IntegerWidth() const
-{
-    return((b_int32)ceil((double)(right - left)));
-}
-
-
-inline float BRect::Width() const
-{
- return(right - left);
-}
-
-
-inline b_int32 BRect::IntegerHeight() const
-{
-    return((b_int32)ceil((double)(bottom - top)));
-}
-
-
-inline float BRect::Height() const
-{
- return(bottom - top);
-}
-# 33 "../src/interface/Rect.cpp" 2
+# 33 "../src/kits/interface/Rect.cpp" 2
 
 
 inline double bhapi_round(double value)

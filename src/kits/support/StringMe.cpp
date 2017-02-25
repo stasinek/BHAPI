@@ -83,6 +83,10 @@
 	#define b_strncasecmp(a, b, c)	strncasecmp(a, b, c)
 #endif // HAVE_STRNCASECMP
 
+int __cdecl __MINGW_NOTHROW	b_strncasecmp(const char *a, const char *b, size_t c)
+{
+    return strncmp(a,b,c);
+}
 
 // long double
 #undef BHAPI_SUPPORT_LONG_DOUBLE
@@ -1670,10 +1674,9 @@ BString::ReplaceLast(const char *replaceThis, const char *withThis)
 }
 
 
-BString&
-BString::ReplaceAll(const char *replaceThis, const char *withThis)
+BString&   BString::ReplaceAll(const char *replaceThis, const char *withThis)
 {
-BString::ReplaceAll(replaceThis,withThis,0);
+    return BString::ReplaceAll(replaceThis,withThis,0);
 }
 
 BString&
