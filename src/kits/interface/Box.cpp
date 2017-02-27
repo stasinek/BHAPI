@@ -97,7 +97,7 @@ BBox::SetLabel(const char *label)
 		}
 
 		if((strView = new BStringView(BRect(0, 0, 1, 1), NULL, label, B_FOLLOW_NONE)) == NULL) return;
-		strView->SetFont(bhapi_bold_font);
+		strView->SetFont(b_bold_font);
 		strView->ResizeToPreferred();
 		if(SetLabel(strView) != B_OK) delete strView;
 	}
@@ -165,7 +165,7 @@ BBox::LabelView() const
 BRect
 BBox::ContentBounds() const
 {
-	b_theme_engine *theme = bhapi_get_current_theme_engine();
+	b_theme_engine *theme = b_get_current_theme_engine();
 
 	float l = 0, t = 0, r = 0, b = 0;
 	if(!(theme == NULL || theme->get_border_margins == NULL))
@@ -188,7 +188,7 @@ BBox::Draw(BRect updateRect)
 {
 	if(!IsVisible() || fBorder == B_NO_BORDER) return;
 
-	b_theme_engine *theme = bhapi_get_current_theme_engine();
+	b_theme_engine *theme = b_get_current_theme_engine();
 	if(theme == NULL || theme->get_border_margins == NULL || theme->draw_border == NULL) return;
 
 	float l = 0, t = 0, r = 0, b = 0;
@@ -233,7 +233,7 @@ BBox::GetPreferredSize(float *width, float *height)
 	float w = 0, h = 0;
 	if(fLabelView) fLabelView->GetPreferredSize(&w, &h);
 
-	b_theme_engine *theme = bhapi_get_current_theme_engine();
+	b_theme_engine *theme = b_get_current_theme_engine();
 
 	float l = 0, t = 0, r = 0, b = 0;
 	if(!(theme == NULL || theme->get_border_margins == NULL))

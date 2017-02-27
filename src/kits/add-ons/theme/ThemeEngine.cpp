@@ -33,10 +33,10 @@
 #include "../../interface/Region.h"
 #include "../../interface/Point.h"
 
-extern b_theme_engine bhapi_default_theme_engine;
+extern b_theme_engine b_default_theme_engine;
 
-EXP_BHAPI b_theme_engine* bhapi_get_current_theme_engine(void)
+EXPORT_BHAPI b_theme_engine* b_get_current_theme_engine(void)
 {
-	return &bhapi_default_theme_engine;
+	return &b_default_theme_engine;
 }
 

@@ -47,7 +47,7 @@
 #include "../private/PrivateHandler.h"
 
 
-class _LOCAL EObserverList {
+class LOCAL_BHAPI EObserverList {
 public:
 	EObserverList();
 	~EObserverList();
@@ -63,7 +63,7 @@ private:
 };
 
 
-class _LOCAL EWatchingInfo {
+class LOCAL_BHAPI EWatchingInfo {
 private:
 	BMessenger fMessenger;
 	BList fWhats;
@@ -339,7 +339,7 @@ BHandler::BHandler(const char *name)
 	  fObserverList(NULL), fFilters(NULL)
 {
 	fName = b_strdup(name);
-    fToken = bhapi_app_connector->HandlersDepot()->CreateToken(reinterpret_cast<void*>(this));
+    fToken = b_app_connector->HandlersDepot()->CreateToken(reinterpret_cast<void*>(this));
 }
 
 
@@ -366,7 +366,7 @@ BHandler::BHandler(const BMessage *from)
     if(from != NULL) from->FindString("_name", &name);
 
 	fName = b_strdup(name);
-    fToken = bhapi_app_connector->HandlersDepot()->CreateToken(reinterpret_cast<void*>(this));
+    fToken = b_app_connector->HandlersDepot()->CreateToken(reinterpret_cast<void*>(this));
 }
 
 
@@ -499,7 +499,7 @@ BHandler::LockLooper()
 b_status_t
 BHandler::LockLooperWithTimeout(b_bigtime_t microseconds_timeout)
 {
-	BAutolock <BLocker>autolock(bhapi_get_handler_operator_locker());
+	BAutolock <BLocker>autolock(b_get_handler_operator_locker());
 	return(fLooper == NULL ? B_BAD_VALUE : fLooper->LockWithTimeout(microseconds_timeout));
 }
 

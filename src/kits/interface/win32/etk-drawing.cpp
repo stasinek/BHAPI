@@ -49,7 +49,7 @@ EWin32GraphicsDrawable::StrokePoint(BGraphicsContext *dc,
 {
 	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_STROKE_POINT;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -68,7 +68,7 @@ EWin32GraphicsDrawable::StrokePoints(BGraphicsContext *dc,
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || count <= 0) return B_ERROR;
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_STROKE_POINTS;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -87,7 +87,7 @@ EWin32GraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || ptsArrayLists == NULL || arrayCount <= 0) return B_ERROR;
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_STROKE_POINTS_COLOR;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -107,7 +107,7 @@ EWin32GraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || alpha == NULL || count <= 0) return B_ERROR;
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_STROKE_POINTS_ALPHA;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -129,7 +129,7 @@ EWin32GraphicsDrawable::StrokeLine(BGraphicsContext *dc,
 
 	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_STROKE_LINE;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -155,7 +155,7 @@ EWin32GraphicsDrawable::StrokeRect(BGraphicsContext *dc,
 	else if(w == 0 || h == 0)
 		return StrokeLine(dc, x, y, x + (b_int32)w, y + (b_int32)h);
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_STROKE_RECT;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -176,7 +176,7 @@ EWin32GraphicsDrawable::StrokeRects(BGraphicsContext *dc,
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || rects == NULL || count <= 0) return B_ERROR;
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_STROKE_RECTS;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -195,7 +195,7 @@ EWin32GraphicsDrawable::FillRect(BGraphicsContext *dc,
 {
 	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_FILL_RECT;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -216,7 +216,7 @@ EWin32GraphicsDrawable::FillRects(BGraphicsContext *dc,
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || rects == NULL || count <= 0) return B_ERROR;
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_FILL_RECTS;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -241,7 +241,7 @@ EWin32GraphicsDrawable::FillRegion(BGraphicsContext *dc,
 		return FillRect(dc, (b_int32)r.left, (b_int32)r.top, (b_uint32)r.Width(), (b_uint32)r.Height());
 	}
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_FILL_REGION;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -270,7 +270,7 @@ EWin32GraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
 	else if(w == 0 || h == 0)
 		return StrokeLine(dc, x, y, x + (b_int32)w, y + (b_int32)h);
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_STROKE_ROUND_RECT;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -301,7 +301,7 @@ EWin32GraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
 
 	if(w == 0 || h == 0) return FillRect(dc, x, y, w, h);
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_FILL_ROUND_RECT;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -329,7 +329,7 @@ EWin32GraphicsDrawable::StrokeArc(BGraphicsContext *dc,
 	else if(w == 0 || h == 0)
 		return StrokeLine(dc, x, y, x + (b_int32)w, y + (b_int32)h);
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_STROKE_ARC;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -354,7 +354,7 @@ EWin32GraphicsDrawable::FillArc(BGraphicsContext *dc,
 
 	if(w == 0 || h == 0) return FillRect(dc, x, y, w, h);
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_FILL_ARC;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -382,7 +382,7 @@ EWin32GraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
 	else if(count == 2)
 		return StrokeLine(dc, pts[0], pts[1], pts[2], pts[3]);
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_STROKE_POLYGON;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -404,7 +404,7 @@ EWin32GraphicsDrawable::FillPolygon(BGraphicsContext *dc,
 
 	if(count == 1) return FillRect(dc, pts[0], pts[1], 0, 0);
 
-	bhapi_win32_gdi_callback_t callback;
+	b_win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_FILL_POLYGON;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -561,7 +561,7 @@ static bool _bhapi_dc_query_high_color(const b_pattern &pattern, b_int32 x, b_in
 }
 
 
-LRESULT _bhapi_stroke_point(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_point(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_STROKE_POINT || callback->pixmap == NULL ||
@@ -601,7 +601,7 @@ LRESULT _bhapi_stroke_point(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_c
 }
 
 
-LRESULT _bhapi_stroke_points(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_points(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_STROKE_POINTS || callback->pixmap == NULL ||
@@ -711,7 +711,7 @@ static bool _bhapi_pixmap_change_brush_high_color(EWin32GraphicsEngine *win32Eng
 }
 
 
-LRESULT _bhapi_stroke_points_color(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_points_color(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_STROKE_POINTS_COLOR || callback->pixmap == NULL ||
@@ -789,7 +789,7 @@ LRESULT _bhapi_stroke_points_color(EWin32GraphicsEngine *win32Engine, bhapi_win3
 }
 
 
-LRESULT _bhapi_stroke_points_alpha(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_points_alpha(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_STROKE_POINTS_ALPHA || callback->pixmap == NULL ||
@@ -836,7 +836,7 @@ LRESULT _bhapi_stroke_points_alpha(EWin32GraphicsEngine *win32Engine, bhapi_win3
 }
 
 
-LRESULT _bhapi_stroke_line(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_line(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_STROKE_LINE || callback->pixmap == NULL ||
@@ -872,7 +872,7 @@ LRESULT _bhapi_stroke_line(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_ca
 }
 
 
-LRESULT _bhapi_stroke_rect(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_rect(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_STROKE_RECT || callback->pixmap == NULL ||
@@ -890,7 +890,7 @@ LRESULT _bhapi_stroke_rect(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_ca
 }
 
 
-LRESULT _bhapi_stroke_rects(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_rects(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_STROKE_RECTS || callback->pixmap == NULL ||
@@ -913,7 +913,7 @@ LRESULT _bhapi_stroke_rects(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_c
 }
 
 
-LRESULT _bhapi_fill_rect(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_fill_rect(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_FILL_RECT || callback->pixmap == NULL ||
@@ -931,7 +931,7 @@ LRESULT _bhapi_fill_rect(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_call
 }
 
 
-LRESULT _bhapi_fill_rects(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_fill_rects(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_FILL_RECTS || callback->pixmap == NULL ||
@@ -954,7 +954,7 @@ LRESULT _bhapi_fill_rects(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_cal
 }
 
 
-LRESULT _bhapi_fill_region(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_fill_region(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_FILL_REGION || callback->region == NULL || callback->pixmap == NULL ||
@@ -992,7 +992,7 @@ LRESULT _bhapi_fill_region(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_ca
 }
 
 
-LRESULT _bhapi_stroke_round_rect(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_round_rect(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_STROKE_ROUND_RECT || callback->pixmap == NULL ||
@@ -1011,7 +1011,7 @@ LRESULT _bhapi_stroke_round_rect(EWin32GraphicsEngine *win32Engine, bhapi_win32_
 }
 
 
-LRESULT _bhapi_fill_round_rect(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_fill_round_rect(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_FILL_ROUND_RECT || callback->pixmap == NULL ||
@@ -1030,7 +1030,7 @@ LRESULT _bhapi_fill_round_rect(EWin32GraphicsEngine *win32Engine, bhapi_win32_gd
 }
 
 
-LRESULT _bhapi_stroke_arc(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_arc(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_STROKE_ARC || callback->pixmap == NULL ||
@@ -1098,7 +1098,7 @@ LRESULT _bhapi_stroke_arc(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_cal
 }
 
 
-LRESULT _bhapi_fill_arc(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_fill_arc(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_FILL_ARC || callback->pixmap == NULL ||
@@ -1166,7 +1166,7 @@ LRESULT _bhapi_fill_arc(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callb
 }
 
 
-LRESULT _bhapi_stroke_polygon(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_stroke_polygon(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_STROKE_POLYGON || callback->pixmap == NULL ||
@@ -1241,7 +1241,7 @@ LRESULT _bhapi_stroke_polygon(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi
 }
 
 
-LRESULT _bhapi_fill_polygon(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_fill_polygon(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_FILL_POLYGON || callback->pixmap == NULL ||
@@ -1302,7 +1302,7 @@ LRESULT _bhapi_fill_polygon(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_c
 }
 
 
-LRESULT _bhapi_draw_epixmap(EWin32GraphicsEngine *win32Engine, bhapi_win32_gdi_callback_t *callback)
+LRESULT _bhapi_draw_epixmap(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_DRAW_EPIXMAP || callback->data == NULL ||

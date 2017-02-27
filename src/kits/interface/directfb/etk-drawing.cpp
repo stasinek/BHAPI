@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
- * 
+ *
  * DirectFB Graphics Add-on for BHAPI++
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,9 +22,9 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: etk-drawing.cpp
- * 
+ *
  * --------------------------------------------------------------------------*/
 #ifdef LINUX
 #ifdef DIRECTFB
@@ -34,7 +34,7 @@
 
 #include "etk-dfb.h"
 
-class _LOCAL EDFBRender : public BRender {
+class LOCAL_BHAPI EDFBRender : public BRender {
 public:
 	EDFBRender();
 
@@ -295,47 +295,47 @@ EDFBRender::PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, b_rgb
 }
 
 
-static EDFBRender bhapi_dfb_render;
+static EDFBRender b_dfb_render;
 
 
-b_status_t bhapi_dfb_stroke_point(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_stroke_point(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				b_int32 x, b_int32 y, BRect *margins)
 {
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
 
-	bhapi_dfb_render.StrokePoint(x, y, dc->Pattern());
+	b_dfb_render.StrokePoint(x, y, dc->Pattern());
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return B_OK;
 }
 
 
-b_status_t bhapi_dfb_stroke_points(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_stroke_points(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				 const b_int32 *pts, b_int32 count, BRect *margins)
 {
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
 
 	for(b_int32 i = 0; i < count; i++)
 	{
 		b_int32 x = *pts++;
 		b_int32 y = *pts++;
-		bhapi_dfb_render.StrokePoint(x, y, dc->Pattern());
+		b_dfb_render.StrokePoint(x, y, dc->Pattern());
 	}
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return B_OK;
 }
 
 
-b_status_t bhapi_dfb_stroke_points_color(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_stroke_points_color(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				       const BList *ptsArrayLists, b_int32 arrayCount, const b_rgb_color *high_colors, BRect *margins)
 {
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
 
 	b_rgb_color oldColor = dc->HighColor();
 
@@ -348,7 +348,7 @@ b_status_t bhapi_dfb_stroke_points_color(IDirectFBSurface *dfbSurface, BGraphics
 		b_int32 count = ptsArrayLists->CountItems();
 		if(count <= 0) continue;
 
-		bhapi_dfb_render.SetHighColor(color);
+		b_dfb_render.SetHighColor(color);
 
 		for(b_int32 i = 0; i < count; i++)
 		{
@@ -357,22 +357,22 @@ b_status_t bhapi_dfb_stroke_points_color(IDirectFBSurface *dfbSurface, BGraphics
 
 			b_int32 x = *pt++;
 			b_int32 y = *pt++;
-			bhapi_dfb_render.StrokePoint(x, y, dc->Pattern());
+			b_dfb_render.StrokePoint(x, y, dc->Pattern());
 		}
 	}
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return B_OK;
 }
 
 
-b_status_t bhapi_dfb_stroke_points_alphas(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_stroke_points_alphas(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 					const b_int32 *pts, const b_uint8 *alpha, b_int32 count, BRect *margins)
 {
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
-	bhapi_dfb_render.SetDrawingMode(B_OP_ALPHA);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetDrawingMode(B_OP_ALPHA);
 
 	b_rgb_color c = dc->HighColor();
 
@@ -382,27 +382,27 @@ b_status_t bhapi_dfb_stroke_points_alphas(IDirectFBSurface *dfbSurface, BGraphic
 		b_int32 y = *pts++;
 		c.alpha = *alpha++;
 
-		bhapi_dfb_render.SetHighColor(c);
-		bhapi_dfb_render.StrokePoint(x, y, B_SOLID_HIGH);
+		b_dfb_render.SetHighColor(c);
+		b_dfb_render.StrokePoint(x, y, B_SOLID_HIGH);
 	}
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return B_OK;
 }
 
 
-b_status_t bhapi_dfb_stroke_line(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_stroke_line(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 			       b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, BRect *margins)
 {
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
 
 	b_status_t retVal = B_ERROR;
 
 	if(dc->PenSize() <= 1)
 	{
-		bhapi_dfb_render.StrokeLine(x0, y0, x1, y1, dc->Pattern());
+		b_dfb_render.StrokeLine(x0, y0, x1, y1, dc->Pattern());
 		retVal = B_OK;
 	}
 	else
@@ -410,28 +410,28 @@ b_status_t bhapi_dfb_stroke_line(IDirectFBSurface *dfbSurface, BGraphicsContext 
 		BHAPI_WARNING("[GRAPHICS]: %s --- Wide-line not supported yet.", __PRETTY_FUNCTION__);
 	}
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return retVal;
 }
 
 
-b_status_t bhapi_dfb_stroke_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_stroke_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 			       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, BRect *margins)
 {
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
 
 	b_status_t retVal = B_ERROR;
 
 	if(dc->PenSize() <= 1)
 	{
-		bhapi_dfb_render.StrokeLine(x, y, x + (b_int32)w, y, dc->Pattern());
-		if(h > 0) bhapi_dfb_render.StrokeLine(x, y + (b_int32)h, x + (b_int32)w, y + (b_int32)h, dc->Pattern());
+		b_dfb_render.StrokeLine(x, y, x + (b_int32)w, y, dc->Pattern());
+		if(h > 0) b_dfb_render.StrokeLine(x, y + (b_int32)h, x + (b_int32)w, y + (b_int32)h, dc->Pattern());
 		if(h > 1)
 		{
-			bhapi_dfb_render.StrokeLine(x, y + 1, x, y + (b_int32)h - 1, dc->Pattern());
-			bhapi_dfb_render.StrokeLine(x + (b_int32)w, y + 1, x + (b_int32)w, y + (b_int32)h - 1, dc->Pattern());
+			b_dfb_render.StrokeLine(x, y + 1, x, y + (b_int32)h - 1, dc->Pattern());
+			b_dfb_render.StrokeLine(x + (b_int32)w, y + 1, x + (b_int32)w, y + (b_int32)h - 1, dc->Pattern());
 		}
 		retVal = B_OK;
 	}
@@ -440,31 +440,31 @@ b_status_t bhapi_dfb_stroke_rect(IDirectFBSurface *dfbSurface, BGraphicsContext 
 		BHAPI_WARNING("[GRAPHICS]: %s --- Wide-line not supported yet.", __PRETTY_FUNCTION__);
 	}
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return retVal;
 }
 
 
-b_status_t bhapi_dfb_fill_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_fill_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 			     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, BRect *margins)
 {
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
 
-	bhapi_dfb_render.FillRect(x, y, w + 1, h + 1, dc->Pattern());
+	b_dfb_render.FillRect(x, y, w + 1, h + 1, dc->Pattern());
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return B_OK;
 }
 
 
-b_status_t bhapi_dfb_stroke_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_stroke_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				const b_int32 *rects, b_int32 count, BRect *margins)
 {
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
 
 	b_status_t retVal = B_ERROR;
 
@@ -474,12 +474,12 @@ b_status_t bhapi_dfb_stroke_rects(IDirectFBSurface *dfbSurface, BGraphicsContext
 		{
 			b_int32 x = *rects++; b_int32 y = *rects++; b_uint32 w = (b_uint32)(*rects++); b_uint32 h = (b_uint32)(*rects++);
 
-			bhapi_dfb_render.StrokeLine(x, y, x + (b_int32)w, y, dc->Pattern());
-			if(h > 0) bhapi_dfb_render.StrokeLine(x, y + (b_int32)h, x + (b_int32)w, y + (b_int32)h, dc->Pattern());
+			b_dfb_render.StrokeLine(x, y, x + (b_int32)w, y, dc->Pattern());
+			if(h > 0) b_dfb_render.StrokeLine(x, y + (b_int32)h, x + (b_int32)w, y + (b_int32)h, dc->Pattern());
 			if(h > 1)
 			{
-				bhapi_dfb_render.StrokeLine(x, y + 1, x, y + (b_int32)h - 1, dc->Pattern());
-				bhapi_dfb_render.StrokeLine(x + (b_int32)w, y + 1, x + (b_int32)w, y + (b_int32)h - 1, dc->Pattern());
+				b_dfb_render.StrokeLine(x, y + 1, x, y + (b_int32)h - 1, dc->Pattern());
+				b_dfb_render.StrokeLine(x + (b_int32)w, y + 1, x + (b_int32)w, y + (b_int32)h - 1, dc->Pattern());
 			}
 		}
 
@@ -490,31 +490,31 @@ b_status_t bhapi_dfb_stroke_rects(IDirectFBSurface *dfbSurface, BGraphicsContext
 		BHAPI_WARNING("[GRAPHICS]: %s --- Wide-line not supported yet.", __PRETTY_FUNCTION__);
 	}
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return retVal;
 }
 
 
-b_status_t bhapi_dfb_fill_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_fill_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 			      const b_int32 *rects, b_int32 count, BRect *margins)
 {
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
 
 	for(b_int32 i = 0; i < count; i++)
 	{
 		b_int32 x = *rects++; b_int32 y = *rects++; b_uint32 w = (b_uint32)(*rects++); b_uint32 h = (b_uint32)(*rects++);
-		bhapi_dfb_render.FillRect(x, y, w + 1, h + 1, dc->Pattern());
+		b_dfb_render.FillRect(x, y, w + 1, h + 1, dc->Pattern());
 	}
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return B_OK;
 }
 
 
-b_status_t bhapi_dfb_fill_region(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_fill_region(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 			       const BRegion &region, BRect *margins)
 {
 	BRegion aRegion;
@@ -523,33 +523,33 @@ b_status_t bhapi_dfb_fill_region(IDirectFBSurface *dfbSurface, BGraphicsContext 
 
 	if(aRegion.CountRects() <= 0) return B_ERROR;
 
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
-	bhapi_dfb_render.SetClipping(&aRegion);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetClipping(&aRegion);
 
 	BRect rect = aRegion.Frame().FloorCopy();
-	bhapi_dfb_render.FillRect(rect, dc->Pattern());
+	b_dfb_render.FillRect(rect, dc->Pattern());
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return B_OK;
 }
 
 
-b_status_t bhapi_dfb_stroke_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_stroke_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 			      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle, BRect *margins)
 {
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
 
 	b_status_t retVal = B_ERROR;
 
 	if(dc->PenSize() <= 1)
 	{
 		if(endAngle - startAngle >= 360.f)
-			bhapi_dfb_render.StrokeEllipse(x, y, w, h, dc->Pattern());
+			b_dfb_render.StrokeEllipse(x, y, w, h, dc->Pattern());
 		else
-			bhapi_dfb_render.StrokeArc(x, y, w, h, (b_int32)(startAngle * 64.f), (b_int32)(endAngle * 64.f), dc->Pattern());
+			b_dfb_render.StrokeArc(x, y, w, h, (b_int32)(startAngle * 64.f), (b_int32)(endAngle * 64.f), dc->Pattern());
 		retVal = B_OK;
 	}
 	else
@@ -557,23 +557,23 @@ b_status_t bhapi_dfb_stroke_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *
 		BHAPI_WARNING("[GRAPHICS]: %s --- Wide-line not supported yet.", __PRETTY_FUNCTION__);
 	}
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return retVal;
 }
 
 
-b_status_t bhapi_dfb_fill_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_fill_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 			    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle, BRect *margins)
 {
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
 
 	b_status_t retVal = B_ERROR;
 
 	if(endAngle - startAngle >= 360.f)
 	{
-		bhapi_dfb_render.FillEllipse(x, y, w, h, true, dc->Pattern());
+		b_dfb_render.FillEllipse(x, y, w, h, true, dc->Pattern());
 		retVal = B_OK;
 	}
 	else
@@ -581,13 +581,13 @@ b_status_t bhapi_dfb_fill_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc
 		BHAPI_WARNING("[GRAPHICS]: %s --- not supported yet.", __PRETTY_FUNCTION__);
 	}
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return retVal;
 }
 
 
-b_status_t bhapi_dfb_stroke_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_stroke_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				  const b_int32 *pts, b_int32 count, bool closed, BRect *margins)
 {
 	BPolygon aPolygon;
@@ -602,18 +602,18 @@ b_status_t bhapi_dfb_stroke_polygon(IDirectFBSurface *dfbSurface, BGraphicsConte
 
 	if(aPolygon.CountPoints() <= 0) return B_ERROR;
 
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
 
-	bhapi_dfb_render.StrokePolygon(aPolygon.Points(), aPolygon.CountPoints(), closed, dc->Pattern());
+	b_dfb_render.StrokePolygon(aPolygon.Points(), aPolygon.CountPoints(), closed, dc->Pattern());
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return B_OK;
 }
 
 
-b_status_t bhapi_dfb_fill_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_fill_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				const b_int32 *pts, b_int32 count, BRect *margins)
 {
 	BPolygon aPolygon;
@@ -628,18 +628,18 @@ b_status_t bhapi_dfb_fill_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext
 
 	if(aPolygon.CountPoints() <= 0) return B_ERROR;
 
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
 
-	bhapi_dfb_render.FillPolygon(aPolygon.Points(), aPolygon.CountPoints(), true, dc->Pattern());
+	b_dfb_render.FillPolygon(aPolygon.Points(), aPolygon.CountPoints(), true, dc->Pattern());
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return B_OK;
 }
 
 
-b_status_t bhapi_dfb_stroke_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_stroke_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius, BRect *margins)
 {
 	// TODO
@@ -647,7 +647,7 @@ b_status_t bhapi_dfb_stroke_round_rect(IDirectFBSurface *dfbSurface, BGraphicsCo
 }
 
 
-b_status_t bhapi_dfb_fill_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfb_fill_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius, BRect *margins)
 {
 	// TODO
@@ -655,7 +655,7 @@ b_status_t bhapi_dfb_fill_round_rect(IDirectFBSurface *dfbSurface, BGraphicsCont
 }
 
 
-b_status_t bhapi_dfb_draw_epixmap(IDirectFBSurface *dfbSurface, BGraphicsContext *dc, const BPixmap *pix,
+b_status_t b_dfb_draw_epixmap(IDirectFBSurface *dfbSurface, BGraphicsContext *dc, const BPixmap *pix,
 				b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
 				b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH, BRect *margins)
 {
@@ -673,9 +673,9 @@ b_status_t bhapi_dfb_draw_epixmap(IDirectFBSurface *dfbSurface, BGraphicsContext
 
 	if(dstX > maxX || dstY > maxY) return B_ERROR;
 
-	bhapi_dfb_render.SetSurface(dfbSurface, margins);
-	bhapi_dfb_render.PrepareForDrawing(dc);
-	bhapi_dfb_render.SetPenSize(0);
+	b_dfb_render.SetSurface(dfbSurface, margins);
+	b_dfb_render.PrepareForDrawing(dc);
+	b_dfb_render.SetPenSize(0);
 
 	for(b_int32 j = 0; j <= (b_int32)h; j++)
 	{
@@ -689,12 +689,12 @@ b_status_t bhapi_dfb_draw_epixmap(IDirectFBSurface *dfbSurface, BGraphicsContext
 			if(srcX < 0 || dstX + i < 0) continue;
 			if(srcX > (b_int32)pix->Bounds().Width() || dstX + i > maxX) break;
 
-			bhapi_dfb_render.SetHighColor(pix->GetPixel(x + i, y + j));
-			bhapi_dfb_render.StrokePoint(dstX + i, dstY + j, B_SOLID_HIGH);
+			b_dfb_render.SetHighColor(pix->GetPixel(x + i, y + j));
+			b_dfb_render.StrokePoint(dstX + i, dstY + j, B_SOLID_HIGH);
 		}
 	}
 
-	bhapi_dfb_render.SetSurface(NULL);
+	b_dfb_render.SetSurface(NULL);
 
 	return B_OK;
 }

@@ -50,7 +50,7 @@
 #include <stdlib.h>
 
 #ifdef BHAPI_BUILD_LIBRARY
-EXP_BHAPI BList BLooper::sLooperList;
+EXPORT_BHAPI BList BLooper::sLooperList;
 #endif // BHAPI_BUILD_LIBRARY
 
 BLooper::BLooper(const char *name)
@@ -73,17 +73,17 @@ BLooper::BLooper(const char *name, b_int32 priority)
 
 void BLooper::Init(const char *name, b_int32 priority)
 {
-	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BLocker *hLocker = b_get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
-	if((fLocker = bhapi_create_locker()) == NULL)
+	if((fLocker = b_create_locker()) == NULL)
 		BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
 
 	fPrevHandler = fNextHandler = this;
 	fLooper = this;
 
 	fMessageQueue = new BMessageQueue();
-	if(fMessageQueue) fSem = bhapi_create_sem(B_INT64_CONSTANT(0), NULL);
+	if(fMessageQueue) fSem = b_create_sem(B_INT64_CONSTANT(0), NULL);
 
 	fThreadPriority = priority;
 
@@ -110,13 +110,13 @@ BLooper::~BLooper()
 		delete filter;
 	}
 
-	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BLocker *hLocker = b_get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	if(fMessageQueue) delete fMessageQueue;
-	if(fSem) bhapi_delete_sem(fSem);
+	if(fSem) b_delete_sem(fSem);
 	if(fCurrentMessage) delete fCurrentMessage;
-	if(fThread) bhapi_delete_thread(fThread);
+	if(fThread) b_delete_thread(fThread);
 
 	sLooperList.RemoveItem(this);
 
@@ -124,8 +124,8 @@ BLooper::~BLooper()
 
 	if(fLocker)
 	{
-		bhapi_close_locker(fLocker);
-		bhapi_delete_locker(fLocker);
+		b_close_locker(fLocker);
+		b_delete_locker(fLocker);
 	}
 }
 
@@ -133,17 +133,17 @@ BLooper::~BLooper()
 BLooper::BLooper(const BMessage *from)
 	: BHandler(from), fDeconstructing(false), fProxy(NULL), fThreadPriority(B_NORMAL_PRIORITY), fHandlersCount(1), fPreferredHandler(NULL), fLocker(NULL), fLocksCount(B_INT64_CONSTANT(0)), fThread(NULL), fSem(NULL), fMessageQueue(NULL), fCurrentMessage(NULL), fThreadExited(NULL)
 {
-	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BLocker *hLocker = b_get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
-	if((fLocker = bhapi_create_locker()) == NULL)
+	if((fLocker = b_create_locker()) == NULL)
 		BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
 
 	fPrevHandler = fNextHandler = this;
 	fLooper = this;
 
 	fMessageQueue = new BMessageQueue();
-	if(fMessageQueue) fSem = bhapi_create_sem(B_INT64_CONSTANT(0), NULL);
+	if(fMessageQueue) fSem = b_create_sem(B_INT64_CONSTANT(0), NULL);
 
 	sLooperList.AddItem(this);
 }
@@ -275,7 +275,7 @@ BLooper::Unlock()
 	if(IsLockedByCurrentThread())
 	{
 		fLocksCount--;
-		bhapi_unlock_locker(fLocker);
+		b_unlock_locker(fLocker);
 	}
 	else
 	{
@@ -287,9 +287,9 @@ BLooper::Unlock()
 b_status_t
 BLooper::LockWithTimeout(b_bigtime_t microseconds_timeout)
 {
-	b_uint64 token = bhapi_get_handler_token(this);
+	b_uint64 token = b_get_handler_token(this);
 
-	b_status_t retVal = bhapi_lock_looper_of_handler(token, microseconds_timeout);
+	b_status_t retVal = b_lock_looper_of_handler(token, microseconds_timeout);
 
 	if(retVal == B_OK) fLocksCount++;
 
@@ -343,14 +343,14 @@ BLooper::PostMessage(const BMessage *_message, BHandler *handler, BHandler *repl
 		return B_BAD_VALUE;
 	}
 
-	b_uint64 handlerToken = bhapi_get_handler_token(handler);
-	b_uint64 replyToken = bhapi_get_handler_token(reply_to);
+	b_uint64 handlerToken = b_get_handler_token(handler);
+	b_uint64 replyToken = b_get_handler_token(reply_to);
 
 	BMessage aMsg(*_message);
 	aMsg.fIsReply = false;
 	if(aMsg.fSource != NULL)
 	{
-		bhapi_delete_port(aMsg.fSource);
+		b_delete_port(aMsg.fSource);
 		aMsg.fSource = NULL;
 	}
 
@@ -363,9 +363,9 @@ BLooper::_PostMessage(const BMessage *_message, b_uint64 handlerToken, b_uint64 
 {
 	if(fMessageQueue == NULL || _message == NULL) return B_ERROR;
 
-	b_uint64 selfToken = bhapi_get_handler_token(this);
-	b_bigtime_t handlerTokenTimestamp = bhapi_get_handler_create_time_stamp(handlerToken);
-	b_bigtime_t replyTokenTimestamp = bhapi_get_handler_create_time_stamp(replyToken);
+	b_uint64 selfToken = b_get_handler_token(this);
+	b_bigtime_t handlerTokenTimestamp = b_get_handler_create_time_stamp(handlerToken);
+	b_bigtime_t replyTokenTimestamp = b_get_handler_create_time_stamp(replyToken);
 
 	if(fMessageQueue->LockWithTimeout(timeout) != B_OK) return B_ERROR;
 
@@ -381,7 +381,7 @@ BLooper::_PostMessage(const BMessage *_message, b_uint64 handlerToken, b_uint64 
 		{
 			BMessage *message = new BMessage(*_message);
 
-			message->fTeam = bhapi_get_current_team_id();
+			message->fTeam = b_get_current_team_id();
 			message->fTargetToken = handlerToken;
 			message->fTargetTokenTimestamp = handlerTokenTimestamp;
 
@@ -391,7 +391,7 @@ BLooper::_PostMessage(const BMessage *_message, b_uint64 handlerToken, b_uint64 
 				message->fReplyTokenTimestamp = replyTokenTimestamp;
 				if(message->fSource)
 				{
-					bhapi_delete_port(message->fSource);
+					b_delete_port(message->fSource);
 					message->fSource = NULL;
 				}
 			}
@@ -403,7 +403,7 @@ BLooper::_PostMessage(const BMessage *_message, b_uint64 handlerToken, b_uint64 
 			}
 		}
 
-		bhapi_release_sem(fSem);
+		b_release_sem(fSem);
 	}
 
 	fMessageQueue->Unlock();
@@ -438,11 +438,11 @@ BLooper::MessageReceived(BMessage *msg)
 bool
 BLooper::IsRunning() const
 {
-	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BLocker *hLocker = b_get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	if(fProxy != NULL) return _Proxy()->IsRunning();
-	if(fThread == NULL || bhapi_get_thread_run_state(fThread) == BHAPI_THREAD_READY) return false;
+	if(fThread == NULL || b_get_thread_run_state(fThread) == BHAPI_THREAD_READY) return false;
 
 	return true;
 }
@@ -451,7 +451,7 @@ BLooper::IsRunning() const
 void*
 BLooper::Run()
 {
-	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BLocker *hLocker = b_get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	if(fProxy)
@@ -462,15 +462,15 @@ BLooper::Run()
 
 	if(!fThread)
 	{
-		if((fThread = bhapi_create_thread(_task, fThreadPriority, this, NULL)) == NULL)
+		if((fThread = b_create_thread(_task, fThreadPriority, this, NULL)) == NULL)
 			BHAPI_ERROR("[APP]: %s -- Unable to create thread!", __PRETTY_FUNCTION__);
 	}
-	else if(bhapi_get_thread_run_state(fThread) != BHAPI_THREAD_READY)
+	else if(b_get_thread_run_state(fThread) != BHAPI_THREAD_READY)
 	{
 		BHAPI_ERROR("[APP]: %s --- Thread must run only one time!", __PRETTY_FUNCTION__);
 	}
 
-	if(bhapi_resume_thread(fThread) == B_OK)
+	if(b_resume_thread(fThread) == B_OK)
 		return fThread;
 	else
 		return NULL;
@@ -492,9 +492,9 @@ BLooper::Quit()
 
 	if(fDeconstructing) return;
 
-	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BLocker *hLocker = b_get_handler_operator_locker();
 	hLocker->Lock();
-	if(bhapi_get_thread_id(fThread) == bhapi_get_current_thread_id() && Proxy() == this)
+	if(b_get_thread_id(fThread) == b_get_current_thread_id() && Proxy() == this)
 		BHAPI_ERROR("\n\
 **************************************************************************\n\
 *                           [APP]: BLooper                               *\n\
@@ -506,7 +506,7 @@ BLooper::Quit()
 	void *thread = NULL;
 	if(fThread)
 	{
-		if((thread = bhapi_open_thread(bhapi_get_thread_id(fThread))) == NULL)
+		if((thread = b_open_thread(b_get_thread_id(fThread))) == NULL)
 			BHAPI_ERROR("[APP]: %s --- Unable to duplicate the thread!", __PRETTY_FUNCTION__);
 	}
 	hLocker->Unlock();
@@ -517,16 +517,16 @@ BLooper::Quit()
 
 		if(PostMessage(_QUIT_) != B_OK)
 			BHAPI_ERROR("[APP]: %s --- Send \"_QUIT_\" to looper error!", __PRETTY_FUNCTION__);
-		b_uint64 token = bhapi_get_handler_token(this);
+		b_uint64 token = b_get_handler_token(this);
 		fLocksCount = B_INT64_CONSTANT(0);
-		b_int64 locksCount = bhapi_count_locker_locks(fLocker);
-		while((locksCount--) > B_INT64_CONSTANT(0)) bhapi_unlock_locker(fLocker);
+		b_int64 locksCount = b_count_locker_locks(fLocker);
+		while((locksCount--) > B_INT64_CONSTANT(0)) b_unlock_locker(fLocker);
 
 		b_status_t status;
-		bhapi_wait_for_thread(thread, &status);
-		if(bhapi_get_thread_run_state(thread) != BHAPI_THREAD_EXITED)
-			if(bhapi_lock_looper_of_handler(token, B_INFINITE_TIMEOUT) == B_OK) delete this;
-		bhapi_delete_thread(thread);
+		b_wait_for_thread(thread, &status);
+		if(b_get_thread_run_state(thread) != BHAPI_THREAD_EXITED)
+			if(b_lock_looper_of_handler(token, B_INFINITE_TIMEOUT) == B_OK) delete this;
+		b_delete_thread(thread);
 	}
 	else
 	{
@@ -548,7 +548,7 @@ BLooper::_taskError(void *data)
 *                           [APP]: BLooper                               *\n\
 *                                                                        *\n\
 *      Task must call \"PostMessage(B_QUIT_REQUESTED)\" instead of         *\n\
-*      \"bhapi_exit_thread\" within the looper!!!                            *\n\
+*      \"b_exit_thread\" within the looper!!!                            *\n\
 *                                                                        *\n\
 **************************************************************************\n\n");
 	}
@@ -558,13 +558,13 @@ BLooper::_taskError(void *data)
 BHandler*
 BLooper::_MessageTarget(const BMessage *msg, bool *preferred)
 {
-	if(msg == NULL || msg->fTeam != bhapi_get_current_team_id()) return NULL;
+	if(msg == NULL || msg->fTeam != b_get_current_team_id()) return NULL;
 	BHandler *handler = NULL;
-	if(bhapi_ref_handler(msg->fTargetToken))
+	if(b_ref_handler(msg->fTargetToken))
 	{
-		if(bhapi_get_handler_create_time_stamp(msg->fTargetToken) == msg->fTargetTokenTimestamp &&
-		   bhapi_get_handler_looper(msg->fTargetToken) == this) handler = bhapi_get_handler(msg->fTargetToken);
-		bhapi_unref_handler(msg->fTargetToken);
+		if(b_get_handler_create_time_stamp(msg->fTargetToken) == msg->fTargetTokenTimestamp &&
+		   b_get_handler_looper(msg->fTargetToken) == this) handler = b_get_handler(msg->fTargetToken);
+		b_unref_handler(msg->fTargetToken);
 	}
 	if(preferred) *preferred = (msg->fTargetToken == B_MAXUINT64);
 	return handler;
@@ -577,29 +577,29 @@ BLooper::_task(void *arg)
 	BLooper *self = (BLooper*)arg;
 	if(self == NULL) return B_ERROR;
 
-	void *sem = bhapi_clone_sem_by_source(self->fSem);
+	void *sem = b_clone_sem_by_source(self->fSem);
 	if(!sem) return B_ERROR;
 
 	bool *threadExited = new bool;
 	if(!threadExited)
 	{
-		bhapi_delete_sem(sem);
+		b_delete_sem(sem);
 		return B_NO_MEMORY;
 	}
 	*threadExited = false;
 
-	if(bhapi_on_exit_thread(_taskError, (void*)threadExited) != B_OK)
+	if(b_on_exit_thread(_taskError, (void*)threadExited) != B_OK)
 	{
 		delete threadExited;
-		bhapi_delete_sem(sem);
+		b_delete_sem(sem);
 		return B_ERROR;
 	}
 	self->fThreadExited = threadExited;
 
-	if(bhapi_on_exit_thread((void (*)(void*))bhapi_delete_sem, sem) != B_OK)
+	if(b_on_exit_thread((void (*)(void*))b_delete_sem, sem) != B_OK)
 	{
 		*threadExited = true;
-		bhapi_delete_sem(sem);
+		b_delete_sem(sem);
 		return B_ERROR;
 	}
 
@@ -640,11 +640,11 @@ BLooper::_GetNextClient(BLooper *client) const
 b_status_t
 BLooper::_taskLooper(BLooper *self, void *sem)
 {
-	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BLocker *hLocker = b_get_handler_operator_locker();
 
 	hLocker->Lock();
 
-	if(self == NULL || self->fThread == NULL || bhapi_get_thread_id(self->fThread) != bhapi_get_current_thread_id() || sem == NULL)
+	if(self == NULL || self->fThread == NULL || b_get_thread_id(self->fThread) != b_get_current_thread_id() || sem == NULL)
 	{
 		hLocker->Unlock();
 		return B_ERROR;
@@ -722,8 +722,8 @@ BLooper::_taskLooper(BLooper *self, void *sem)
 			continue;
 		}
 
-		bhapi_sem_info sem_info;
-		if(bhapi_acquire_sem(sem) != B_OK || bhapi_get_sem_info(sem, &sem_info) != B_OK) sem_info.closed = true;
+		b_sem_info sem_info;
+		if(b_acquire_sem(sem) != B_OK || b_get_sem_info(sem, &sem_info) != B_OK) sem_info.closed = true;
 
 		if(sem_info.closed) break;
 	}
@@ -734,17 +734,17 @@ BLooper::_taskLooper(BLooper *self, void *sem)
 
 BMessage* BLooper::NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT)
 {
-	b_bigtime_t prevTime = bhapi_real_time_clock_usecs();
+	b_bigtime_t prevTime = b_real_time_clock_usecs();
 
 	if(!IsLockedByCurrentThread())
 		BHAPI_ERROR("[APP]: %s --- Looper must LOCKED before this call!", __PRETTY_FUNCTION__);
 
-	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BLocker *hLocker = b_get_handler_operator_locker();
 	hLocker->Lock();
 	void *sem = NULL;
 	BLooper *proxy = _Proxy();
-	if(proxy == NULL || proxy->fThread == NULL || bhapi_get_thread_id(proxy->fThread) != bhapi_get_current_thread_id() ||
-	   (sem = bhapi_clone_sem_by_source(proxy->fSem)) == NULL)
+	if(proxy == NULL || proxy->fThread == NULL || b_get_thread_id(proxy->fThread) != b_get_current_thread_id() ||
+	   (sem = b_clone_sem_by_source(proxy->fSem)) == NULL)
 	{
 		hLocker->Unlock();
 		return NULL;
@@ -764,7 +764,7 @@ BMessage* BLooper::NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT)
 		queue = proxy->fMessageQueue;
 		while(looper != NULL && queue != NULL)
 		{
-			if(proxy == bhapi_app) BApplication::bhapi_dispatch_message_runners();
+			if(proxy == b_app) BApplication::b_dispatch_message_runners();
 
 			BMessage *aMsg = NULL;
 
@@ -840,7 +840,7 @@ BMessage* BLooper::NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT)
 		if(flags >= 2) break;
 		if(Proxy() != proxy)
 		{
-			bhapi_release_sem(sem); // to push back semaphore
+			b_release_sem(sem); // to push back semaphore
 			break;
 		}
 		if(flags == 1)
@@ -849,12 +849,12 @@ BMessage* BLooper::NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT)
 			continue;
 		}
 
-		bhapi_sem_info sem_info;
+		b_sem_info sem_info;
 		b_status_t status = B_ERROR;
 		b_bigtime_t waitTime = timeout;
 		if(timeout >= B_INT64_CONSTANT(0))
 		{
-			if(proxy == bhapi_app)
+			if(proxy == b_app)
 			{
 				hLocker->Lock();
 				waitTime = min_c(timeout, (BApplication::sRunnerMinimumInterval == B_INT64_CONSTANT(0) ?
@@ -863,21 +863,21 @@ BMessage* BLooper::NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT)
 				hLocker->Unlock();
 			}
 
-			status = bhapi_acquire_sem_etc(sem, B_INT64_CONSTANT(1), B_TIMEOUT, waitTime);
+			status = b_acquire_sem_etc(sem, B_INT64_CONSTANT(1), B_TIMEOUT, waitTime);
 		}
-		if(bhapi_get_sem_info(sem, &sem_info) != B_OK) sem_info.closed = true;
+		if(b_get_sem_info(sem, &sem_info) != B_OK) sem_info.closed = true;
 
 		if(sem_info.closed || !(status == B_OK || status == B_TIMED_OUT)) break;
 		if(status == B_TIMED_OUT && waitTime == timeout) break;
 		if(timeout != B_INFINITE_TIMEOUT)
 		{
-			b_bigtime_t curTime = bhapi_real_time_clock_usecs();
+			b_bigtime_t curTime = b_real_time_clock_usecs();
 			timeout -= (curTime - prevTime);
 			prevTime = curTime;
 		}
 	}
 
-	bhapi_delete_sem(sem);
+	b_delete_sem(sem);
 	return retVal;
 }
 
@@ -889,7 +889,7 @@ BLooper::DispatchLooperMessage(BMessage *msg)
 
 	if(!IsLockedByCurrentThread())
 		BHAPI_ERROR("[APP]: %s --- Looper must LOCKED before this call!", __PRETTY_FUNCTION__);
-	if(Thread() != bhapi_get_current_thread_id())
+	if(Thread() != b_get_current_thread_id())
 		BHAPI_ERROR("[APP]: %s --- Looper must call this within the task of looper!", __PRETTY_FUNCTION__);
 
 	bool preferred = false;
@@ -949,7 +949,7 @@ BMessage*
 BLooper::CurrentMessage() const
 {
 	if(!fCurrentMessage || !fMessageQueue) return NULL;
-	if(Thread() != bhapi_get_current_thread_id()) return NULL;
+	if(Thread() != b_get_current_thread_id()) return NULL;
 
 	return fCurrentMessage;
 }
@@ -959,7 +959,7 @@ BMessage*
 BLooper::DetachCurrentMessage()
 {
 	if(!fCurrentMessage || !fMessageQueue) return NULL;
-	if(Thread() != bhapi_get_current_thread_id()) return NULL;
+	if(Thread() != b_get_current_thread_id()) return NULL;
 
 	BMessage *msg = fCurrentMessage;
 	fCurrentMessage = NULL;
@@ -978,7 +978,7 @@ BLooper::MessageQueue() const
 b_int64
 BLooper::Thread() const
 {
-	return bhapi_get_thread_id(Proxy()->fThread);
+	return b_get_thread_id(Proxy()->fThread);
 }
 
 
@@ -993,7 +993,7 @@ BLooper::_Proxy() const
 BLooper*
 BLooper::Proxy() const
 {
-	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BLocker *hLocker = b_get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	return _Proxy();
@@ -1027,7 +1027,7 @@ BLooper::ProxyBy(BLooper *proxy)
 	if(IsLockedByCurrentThread() == false)
 		BHAPI_ERROR("[APP]: %s --- Looper must LOCKED before this call!", __PRETTY_FUNCTION__);
 
-	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BLocker *hLocker = b_get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	if(proxy == NULL ? (_Proxy() == this) : (_Proxy() == proxy->_Proxy())) return true;
@@ -1061,14 +1061,14 @@ BLooper::_ProxyBy(BLooper *proxy)
 		fProxy = NULL;
 
 		fMessageQueue->Lock();
-		if(fSem) bhapi_delete_sem(fSem);
-		fSem = bhapi_create_sem((b_int64)fMessageQueue->CountMessages(), NULL);
+		if(fSem) b_delete_sem(fSem);
+		fSem = b_create_sem((b_int64)fMessageQueue->CountMessages(), NULL);
 		fMessageQueue->Unlock();
 
 		void *newLocker = NULL;
-		if((newLocker = bhapi_create_locker()) == NULL)
+		if((newLocker = b_create_locker()) == NULL)
 			BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
-		for(b_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) bhapi_lock_locker(newLocker);
+		for(b_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) b_lock_locker(newLocker);
 		void *oldLocker = fLocker;
 		fLocker = newLocker;
 
@@ -1078,24 +1078,24 @@ BLooper::_ProxyBy(BLooper *proxy)
 			looper->_ProxyBy(this);
 		}
 
-		for(b_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) bhapi_unlock_locker(oldLocker);
-		bhapi_delete_locker(oldLocker);
+		for(b_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) b_unlock_locker(oldLocker);
+		b_delete_locker(oldLocker);
 	}
 	else
 	{
 		fProxy = proxy;
 
 		fMessageQueue->Lock();
-		if(fSem) bhapi_delete_sem(fSem);
-		fSem = bhapi_clone_sem_by_source(proxy->fSem);
+		if(fSem) b_delete_sem(fSem);
+		fSem = b_clone_sem_by_source(proxy->fSem);
 		if(fMessageQueue->CountMessages() > 0)
-			bhapi_release_sem_etc(fSem, (b_int64)fMessageQueue->CountMessages(), 0);
+			b_release_sem_etc(fSem, (b_int64)fMessageQueue->CountMessages(), 0);
 		fMessageQueue->Unlock();
 
 		void *newLocker = NULL;
-		if((newLocker = bhapi_clone_locker(proxy->fLocker)) == NULL)
+		if((newLocker = b_clone_locker(proxy->fLocker)) == NULL)
 			BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
-		for(b_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) bhapi_lock_locker(newLocker);
+		for(b_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) b_lock_locker(newLocker);
 		void *oldLocker = fLocker;
 		fLocker = newLocker;
 
@@ -1105,9 +1105,9 @@ BLooper::_ProxyBy(BLooper *proxy)
 			looper->_ProxyBy(this);
 		}
 
-		if(!oldProxy) bhapi_close_locker(oldLocker);
-		else for(b_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) bhapi_unlock_locker(oldLocker);
-		bhapi_delete_locker(oldLocker);
+		if(!oldProxy) b_close_locker(oldLocker);
+		else for(b_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) b_unlock_locker(oldLocker);
+		b_delete_locker(oldLocker);
 	}
 
 	return true;
@@ -1117,18 +1117,18 @@ BLooper::_ProxyBy(BLooper *proxy)
 BLooper*
 BLooper::LooperForThread(b_thread_id tid)
 {
-	void *thread = bhapi_open_thread(tid);
+	void *thread = b_open_thread(tid);
 	if(thread == NULL) return NULL; // invalid id
 
-	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BLocker *hLocker = b_get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
-	bhapi_delete_thread(thread);
+	b_delete_thread(thread);
 
 	for(b_int32 i = 0; i < sLooperList.CountItems(); i++)
 	{
 		BLooper *looper = (BLooper*)sLooperList.ItemAt(i);
-		if(bhapi_get_thread_id(looper->fThread) == tid) return looper;
+		if(b_get_thread_id(looper->fThread) == tid) return looper;
 	}
 
 	return NULL;

@@ -51,11 +51,11 @@ public:
 	virtual void ForceFontAliasing(bool enable);
 
 	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold, b_int32 length) const;
-	virtual void GetHeight(b_font_height *height, float size, float shear, bool bold) const;
+	virtual void GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const;
 	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold, b_int32 length);
 
-	virtual b_font_detach_callback* Attach(void (*callback)(void*), void *data);
-	virtual bool Detach(b_font_detach_callback *callback);
+	virtual bhapi::font_detach_callback* Attach(void (*callback)(void*), void *data);
+	virtual bool Detach(bhapi::font_detach_callback *callback);
 
 private:
 	bool fScalable;
@@ -121,7 +121,7 @@ BFontBe::~BFontBe()
 }
 
 
-b_font_detach_callback*
+bhapi::font_detach_callback*
 BFontBe::Attach(void (*callback)(void*), void *data)
 {
 	if(fBeEngine == NULL) return NULL;
@@ -132,7 +132,7 @@ BFontBe::Attach(void (*callback)(void*), void *data)
 
 
 bool
-BFontBe::Detach(b_font_detach_callback *callback)
+BFontBe::Detach(bhapi::font_detach_callback *callback)
 {
 	if(fBeEngine == NULL) return false;
 	BAutolock <EBeGraphicsEngine> autolock(fBeEngine);
@@ -206,11 +206,11 @@ BFontBe::StringWidth(const char *string, float size, float spacing, float shear,
 
 
 void
-BFontBe::GetHeight(b_font_height *height, float size, float shear, bool bold) const
+BFontBe::GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const
 {
 	if(fBeEngine == NULL || height == NULL) return;
 
-	bzero(height, sizeof(b_font_height));
+	bzero(height, sizeof(bhapi::font_height));
 
 	BAutolock <EBeGraphicsEngine> autolock(fBeEngine);
 	if(autolock.IsLocked() == false || fBeEngine->InitCheck() != B_OK) return;
@@ -356,7 +356,7 @@ EBeGraphicsEngine::UpdateFonts(bool check_only)
 				continue;
 			}
 
-			if(bhapi_font_add(engine->Family(), engine->Style(), engine))
+			if(bhapi::font_add(engine->Family(), engine->Style(), engine))
 				retVal = B_OK;
 			else
 				delete engine;

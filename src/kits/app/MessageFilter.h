@@ -46,7 +46,7 @@ typedef enum b_message_delivery {
 } b_message_delivery;
 
 typedef enum b_message_source {
-    B_LOCAL_SOURCE		=	0x1,
+    BLOCAL_BHAPI_SOURCE		=	0x1,
     B_REMOTE_SOURCE		=	0x2,
     B_ANY_SOURCE		=	0xff
 } b_message_source;

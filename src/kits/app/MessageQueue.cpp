@@ -39,7 +39,7 @@
 
 BMessageQueue::BMessageQueue()
 {
-	if((fLocker = bhapi_create_locker()) == NULL)
+	if((fLocker = b_create_locker()) == NULL)
 		BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
 }
 
@@ -49,8 +49,8 @@ BMessageQueue::~BMessageQueue()
 	for(b_int32 i = 0; i < fMessagesList.CountItems(); i++) delete (BMessage*)fMessagesList.ItemAt(i);
 	if(fLocker != NULL)
 	{
-		bhapi_close_locker(fLocker);
-		bhapi_delete_locker(fLocker);
+		b_close_locker(fLocker);
+		b_delete_locker(fLocker);
 	}
 }
 
@@ -58,11 +58,11 @@ BMessageQueue::~BMessageQueue()
 b_status_t
 BMessageQueue::LockWithTimeout(b_bigtime_t timeout)
 {
-	BLocker *handlers_locker = bhapi_get_handler_operator_locker();
+	BLocker *handlers_locker = b_get_handler_operator_locker();
 
 	handlers_locker->Lock();
 
-	void *locker = bhapi_clone_locker(fLocker);
+	void *locker = b_clone_locker(fLocker);
 	if(locker == NULL)
 	{
 		handlers_locker->Unlock();
@@ -72,8 +72,8 @@ BMessageQueue::LockWithTimeout(b_bigtime_t timeout)
 	b_int64 save_count = handlers_locker->CountLocks();
 	while(handlers_locker->CountLocks() > 0) handlers_locker->Unlock();
 
-	b_status_t retVal = bhapi_lock_locker_etc(fLocker, B_TIMEOUT, timeout);
-	bhapi_delete_locker(locker);
+	b_status_t retVal = b_lock_locker_etc(fLocker, B_TIMEOUT, timeout);
+	b_delete_locker(locker);
 
 	while(save_count-- > 1) handlers_locker->Lock();
 
@@ -91,13 +91,13 @@ BMessageQueue::Lock()
 void
 BMessageQueue::Unlock()
 {
-	if(bhapi_count_locker_locks(fLocker) <= 0)
+	if(b_count_locker_locks(fLocker) <= 0)
 	{
 		BHAPI_WARNING("[APP]: %s -- MessageQueue wasn't locked by current thread.", __PRETTY_FUNCTION__);
 		return;
 	}
 
-	bhapi_unlock_locker(fLocker);
+	b_unlock_locker(fLocker);
 }
 
 

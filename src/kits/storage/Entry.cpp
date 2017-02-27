@@ -48,8 +48,8 @@
 #include <sys/stat.h>
 
 // implement in "Path.cpp"
-extern b_status_t bhapi_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);
-extern b_status_t bhapi_path_get_parent(BString &parent, const char *path);
+extern b_status_t b_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);
+extern b_status_t b_path_get_parent(BString &parent, const char *path);
 
 
 BEntry::BEntry()
@@ -105,10 +105,10 @@ BEntry::SetTo(const char *dir, const char *leaf, bool traverse)
 	if(dir == NULL) return B_BAD_VALUE;
 
 	BString str;
-	if(bhapi_path_expound(str, dir, leaf, NULL) != B_OK) return B_BAD_VALUE;
+	if(b_path_expound(str, dir, leaf, NULL) != B_OK) return B_BAD_VALUE;
 
 	BString parent;
-	b_status_t status = bhapi_path_get_parent(parent, str.String());
+	b_status_t status = b_path_get_parent(parent, str.String());
 	if(status == B_ENTRY_NOT_FOUND) parent = str;
 	else if(status != B_OK) return B_BAD_VALUE;
 
@@ -428,7 +428,7 @@ BEntry::GetParent(BEntry *entry) const
 	if(fName == NULL) return B_NO_INIT;
 
 	BString str;
-	b_status_t status = bhapi_path_get_parent(str, fName);
+	b_status_t status = b_path_get_parent(str, fName);
 	if(status != B_OK) return status;
 
 	return entry->SetTo(str.String(), false);
@@ -442,7 +442,7 @@ BEntry::GetParent(BPath *path) const
 	if(fName == NULL) return B_NO_INIT;
 
 	BString str;
-	b_status_t status = bhapi_path_get_parent(str, fName);
+	b_status_t status = b_path_get_parent(str, fName);
 	if(status != B_OK) return status;
 
 	return path->SetTo(str.String(), NULL, false);
@@ -456,7 +456,7 @@ BEntry::GetParent(BDirectory *dir) const
 	if(fName == NULL) return B_NO_INIT;
 
 	BString str;
-	b_status_t status = bhapi_path_get_parent(str, fName);
+	b_status_t status = b_path_get_parent(str, fName);
 	if(status != B_OK) return status;
 
 	return dir->SetTo(str.String());

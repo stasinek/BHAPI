@@ -50,11 +50,11 @@
 #undef HAVE_DIRENT_H
 #undef HAVE_UNISTD_H
 
-typedef struct bhapi_win32_dir_t {
+typedef struct b_win32_dir_t {
 	bool first;
     WIN32_FIND_DATAA findData;
 	HANDLE findHandle;
-} bhapi_win32_dir_t;
+} b_win32_dir_t;
 
 #endif // _WIN32
 
@@ -126,18 +126,18 @@ BDirectory::SetTo(const char *path)
 
 		if(fDir == NULL)
 		{
-			if((fDir = malloc(sizeof(bhapi_win32_dir_t))) == NULL) {retVal = B_NO_MEMORY; break;}
-			bzero(fDir, sizeof(bhapi_win32_dir_t));
+			if((fDir = malloc(sizeof(b_win32_dir_t))) == NULL) {retVal = B_NO_MEMORY; break;}
+			bzero(fDir, sizeof(b_win32_dir_t));
 		}
 		else
 		{
-			if(((bhapi_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((bhapi_win32_dir_t*)fDir)->findHandle);
+			if(((b_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((b_win32_dir_t*)fDir)->findHandle);
 		}
 
 		str.Append("\\*");
 		const char *searchName = str.String();
-		((bhapi_win32_dir_t*)fDir)->first = true;
-        ((bhapi_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((bhapi_win32_dir_t*)fDir)->findData));
+		((b_win32_dir_t*)fDir)->first = true;
+        ((b_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((b_win32_dir_t*)fDir)->findData));
 
 		retVal = B_OK;
 #else
@@ -168,7 +168,7 @@ BDirectory::Unset()
 		closedir((DIR*)fDir);
 #else
 #ifdef _WIN32
-		if(((bhapi_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((bhapi_win32_dir_t*)fDir)->findHandle);
+		if(((b_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((b_win32_dir_t*)fDir)->findHandle);
 		free(fDir);
 #else
 		#warning "fixme: BDirectory::Unset"
@@ -269,20 +269,20 @@ BDirectory::GetNextEntry(BEntry *entry, bool traverse)
 	}
 #else
 #ifdef _WIN32
-	if(((bhapi_win32_dir_t*)fDir)->findHandle == INVALID_HANDLE_VALUE) retVal = B_ENTRY_NOT_FOUND;
+	if(((b_win32_dir_t*)fDir)->findHandle == INVALID_HANDLE_VALUE) retVal = B_ENTRY_NOT_FOUND;
 	else while(true)
 	{
-		if(((bhapi_win32_dir_t*)fDir)->first)
+		if(((b_win32_dir_t*)fDir)->first)
 		{
-			((bhapi_win32_dir_t*)fDir)->first = false;
+			((b_win32_dir_t*)fDir)->first = false;
 		}
 		else
 		{
-            if(FindNextFileA(((bhapi_win32_dir_t*)fDir)->findHandle,
-					&(((bhapi_win32_dir_t*)fDir)->findData)) == 0) {retVal = B_ENTRY_NOT_FOUND; break;}
+            if(FindNextFileA(((b_win32_dir_t*)fDir)->findHandle,
+					&(((b_win32_dir_t*)fDir)->findData)) == 0) {retVal = B_ENTRY_NOT_FOUND; break;}
 		}
 
-		const char *filename = ((bhapi_win32_dir_t*)fDir)->findData.cFileName;
+		const char *filename = ((b_win32_dir_t*)fDir)->findData.cFileName;
 		if(filename[0] == '.' && (filename[1] == 0 || (filename[1] == '.' && filename[2] == 0))) continue;
 
 		BPath aPath(fName, filename, true);
@@ -323,9 +323,9 @@ BDirectory::Rewind()
 	str.Append("\\*");
 	const char *searchName = str.String();
 
-	if(((bhapi_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((bhapi_win32_dir_t*)fDir)->findHandle);
-	((bhapi_win32_dir_t*)fDir)->first = true;
-    ((bhapi_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((bhapi_win32_dir_t*)fDir)->findData));
+	if(((b_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((b_win32_dir_t*)fDir)->findHandle);
+	((b_win32_dir_t*)fDir)->first = true;
+    ((b_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((b_win32_dir_t*)fDir)->findData));
 	return B_OK;
 #else
 	#warning "fixme: BDirectory::Rewind"
@@ -363,22 +363,22 @@ BDirectory::CountEntries()
 	str.Append("\\*");
 	const char *searchName = str.String();
 
-	if(((bhapi_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((bhapi_win32_dir_t*)fDir)->findHandle);
-	((bhapi_win32_dir_t*)fDir)->first = true;
-    ((bhapi_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((bhapi_win32_dir_t*)fDir)->findData));
-	if(((bhapi_win32_dir_t*)fDir)->findHandle == INVALID_HANDLE_VALUE) return 0;
+	if(((b_win32_dir_t*)fDir)->findHandle != INVALID_HANDLE_VALUE) FindClose(((b_win32_dir_t*)fDir)->findHandle);
+	((b_win32_dir_t*)fDir)->first = true;
+    ((b_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((b_win32_dir_t*)fDir)->findData));
+	if(((b_win32_dir_t*)fDir)->findHandle == INVALID_HANDLE_VALUE) return 0;
 
 	b_int32 count = 0;
 	do {
-		const char *filename = ((bhapi_win32_dir_t*)fDir)->findData.cFileName;
+		const char *filename = ((b_win32_dir_t*)fDir)->findData.cFileName;
 		if(strlen(filename) == 1 && filename[0] == '.') continue;
 		if(strlen(filename) == 2 && strcmp(filename, "..") == 0) continue;
 		count++;
-    }while(FindNextFileA(((bhapi_win32_dir_t*)fDir)->findHandle, &(((bhapi_win32_dir_t*)fDir)->findData)) != 0);
+    }while(FindNextFileA(((b_win32_dir_t*)fDir)->findHandle, &(((b_win32_dir_t*)fDir)->findData)) != 0);
 
-	FindClose(((bhapi_win32_dir_t*)fDir)->findHandle);
-	((bhapi_win32_dir_t*)fDir)->first = true;
-    ((bhapi_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((bhapi_win32_dir_t*)fDir)->findData));
+	FindClose(((b_win32_dir_t*)fDir)->findHandle);
+	((b_win32_dir_t*)fDir)->first = true;
+    ((b_win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((b_win32_dir_t*)fDir)->findData));
 
 	return count;
 #else

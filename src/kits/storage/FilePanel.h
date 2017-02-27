@@ -80,6 +80,7 @@ public:
 	virtual void		SelectionChanged();
 	// Empty functions END
 
+	#undef SendMessage
     virtual void		SendMessage(const BMessenger *msgr, BMessage *msg);
 
     BWindow			*Window() const;

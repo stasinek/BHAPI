@@ -50,7 +50,7 @@
 #include "../app/Looper.h"
 #include "../app/MessageRunner.h"
 
-class _LOCAL BWindowLayoutItem : public BLayoutItem {
+class LOCAL_BHAPI BWindowLayoutItem : public BLayoutItem {
 public:
 	BWindowLayoutItem(BRect frame);
 	virtual ~BWindowLayoutItem();
@@ -59,7 +59,7 @@ public:
 };
 
 
-class _LOCAL BWindowLayoutContainer : public BLayoutContainer {
+class LOCAL_BHAPI BWindowLayoutContainer : public BLayoutContainer {
 public:
 	BWindowLayoutContainer(BWindow *win, BRect frame);
 	virtual ~BWindowLayoutContainer();
@@ -156,26 +156,26 @@ BWindowLayoutContainer::Invalidate(BRect rect)
 void
 BWindow::InitSelf(BRect frame, const char *title, b_window_look look, b_window_feel feel, b_uint32 flags, b_uint32 workspace)
 {
-	if(bhapi_app == NULL || bhapi_app->fGraphicsEngine == NULL)
+	if(b_app == NULL || b_app->fGraphicsEngine == NULL)
 		BHAPI_ERROR("[INTERFACE]: Window must created within a application which has graphics-engine!");
 
 #ifdef BHAPI_ENABLE_DEBUG
 	BString winLooperName;
-	winLooperName << "Window " << bhapi_get_handler_token(this);
+	winLooperName << "Window " << b_get_handler_token(this);
 	SetName(winLooperName.String());
 #endif // BHAPI_ENABLE_DEBUG
 
 	fLayout = new BWindowLayoutContainer(this, frame);
 
 	frame.Floor();
-	if((fWindow = bhapi_app->fGraphicsEngine->CreateWindow((b_int32)frame.left, (b_int32)frame.top,
+	if((fWindow = b_app->fGraphicsEngine->CreateWindow((b_int32)frame.left, (b_int32)frame.top,
 							     (b_uint32)max_c(frame.Width(), 0),
 							     (b_uint32)max_c(frame.Height(), 0))) == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- Unable to create window!", __PRETTY_FUNCTION__);
-	else if((fPixmap = bhapi_app->fGraphicsEngine->CreatePixmap((b_uint32)max_c(frame.Width(), 0),
+	else if((fPixmap = b_app->fGraphicsEngine->CreatePixmap((b_uint32)max_c(frame.Width(), 0),
 								  (b_uint32)max_c(frame.Height(), 0))) == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- Unable to create pixmap!", __PRETTY_FUNCTION__);
-	else if((fDC = bhapi_app->fGraphicsEngine->CreateContext()) == NULL)
+	else if((fDC = b_app->fGraphicsEngine->CreateContext()) == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- Unable to create graphics context!", __PRETTY_FUNCTION__);
 
 	fDC->SetClipping(BRegion(frame.OffsetToCopy(B_ORIGIN)));
@@ -307,7 +307,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 
 	bool sendNotices = true;
 
-	msg->RemoveBool("etk:msg_from_gui");
+	msg->RemoveBool("BHAPI:msg_from_gui");
 	switch(msg->what)
 	{
 		case B_PULSE:
@@ -626,10 +626,10 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 				sendNotices = false;
 
 				BRect rect;
-				if(msg->FindRect("etk:frame", &rect))
+				if(msg->FindRect("BHAPI:frame", &rect))
 				{
 					bool expose = false;
-					msg->FindBool("etk:expose", &expose);
+					msg->FindBool("BHAPI:expose", &expose);
 
 					rect &= Bounds();
 					if(rect.IsValid())
@@ -689,7 +689,7 @@ BWindow::Quit()
 		fWindow->ContactTo(NULL);
 	}
 
-	if(fWindowFlags & B_QUIT_ON_WINDOW_CLOSE) bhapi_app->PostMessage(B_QUIT_REQUESTED);
+	if(fWindowFlags & B_QUIT_ON_WINDOW_CLOSE) b_app->PostMessage(B_QUIT_REQUESTED);
 
 	BLooper::Quit();
 }
@@ -713,7 +713,7 @@ BWindow::Show()
 	if(fWindowFeel == B_MODAL_APP_WINDOW_FEEL)
 	{
 		BMessenger msgrSelf(this);
-		bhapi_app->AddModalWindow(msgrSelf);
+		b_app->AddModalWindow(msgrSelf);
 	}
 }
 
@@ -728,7 +728,7 @@ BWindow::Hide()
 	if(fWindowFeel == B_MODAL_APP_WINDOW_FEEL)
 	{
 		BMessenger msgrSelf(this);
-		bhapi_app->RemoveModalWindow(msgrSelf);
+		b_app->RemoveModalWindow(msgrSelf);
 	}
 
 	if(fMouseGrabCount > 0)
@@ -1130,7 +1130,7 @@ BWindow::Invalidate(BRect invalRect, bool redraw)
 void
 BWindow::DisableUpdates()
 {
-	b_int64 currentThread = bhapi_get_current_thread_id();
+	b_int64 currentThread = b_get_current_thread_id();
 
 	if(fUpdateHolderThreadId != 0 && fUpdateHolderThreadId != currentThread)
 		BHAPI_ERROR("[INTERFACE]: %s --- Invalid \"DisableUpdates()\" and \"EnableUpdates()\" call!", __PRETTY_FUNCTION__);
@@ -1152,7 +1152,7 @@ BWindow::DisableUpdates()
 void
 BWindow::EnableUpdates()
 {
-	b_int64 currentThread = bhapi_get_current_thread_id();
+	b_int64 currentThread = b_get_current_thread_id();
 
 	if(fUpdateHolderThreadId != 0 && fUpdateHolderThreadId != currentThread)
 		BHAPI_ERROR("[INTERFACE]: %s --- Invalid \"DisableUpdates()\" and \"EnableUpdates()\" call!", __PRETTY_FUNCTION__);
@@ -1525,9 +1525,9 @@ BWindow::SetFeel(b_window_feel feel)
 		{
 			BMessenger msgrSelf(this);
 			if(oldFeel == B_MODAL_APP_WINDOW_FEEL)
-				bhapi_app->RemoveModalWindow(msgrSelf);
+				b_app->RemoveModalWindow(msgrSelf);
 			else
-				bhapi_app->AddModalWindow(msgrSelf);
+				b_app->AddModalWindow(msgrSelf);
 		}
 	}
 
@@ -1585,7 +1585,7 @@ BWindow::SetWorkspaces(b_uint32 workspace)
 {
 	if(workspace == 0)
 	{
-		if(bhapi_app->fGraphicsEngine->GetCurrentWorkspace(&workspace) != B_OK || workspace == 0) return;
+		if(b_app->fGraphicsEngine->GetCurrentWorkspace(&workspace) != B_OK || workspace == 0) return;
 	}
 
 	if(fWindow == NULL)

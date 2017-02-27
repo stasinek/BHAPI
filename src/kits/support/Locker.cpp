@@ -36,53 +36,53 @@
 
 BLocker::BLocker()
 {
-	fLocker = bhapi_create_locker();
+	fLocker = b_create_locker();
 }
 
 
 BLocker::~BLocker()
 {
-	if(fLocker != NULL) bhapi_delete_locker(fLocker);
+	if(fLocker != NULL) b_delete_locker(fLocker);
 }
 
 
 bool
 BLocker::Lock()
 {
-	return(bhapi_lock_locker(fLocker) == B_OK);
+	return(b_lock_locker(fLocker) == B_OK);
 }
 
 
 void
 BLocker::Unlock()
 {
-	if(bhapi_count_locker_locks(fLocker) <= 0)
+	if(b_count_locker_locks(fLocker) <= 0)
 	{
 		BHAPI_WARNING("[SUPPORT]: %s -- Locker didn't locked by current thread.", __PRETTY_FUNCTION__);
 		return;
 	}
 
-	bhapi_unlock_locker(fLocker);
+	b_unlock_locker(fLocker);
 }
 
 
 b_status_t
 BLocker::LockWithTimeout(b_bigtime_t microseconds)
 {
-	return bhapi_lock_locker_etc(fLocker, B_TIMEOUT, microseconds);
+	return b_lock_locker_etc(fLocker, B_TIMEOUT, microseconds);
 }
 
 
 b_int64
 BLocker::CountLocks() const
 {
-	return bhapi_count_locker_locks(fLocker);
+	return b_count_locker_locks(fLocker);
 }
 
 
 bool
 BLocker::IsLockedByCurrentThread() const
 {
-	return(bhapi_count_locker_locks(fLocker) > 0);
+	return(b_count_locker_locks(fLocker) > 0);
 }
 

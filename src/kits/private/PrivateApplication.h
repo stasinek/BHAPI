@@ -35,7 +35,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _LOCAL BApplicationConnector
+class LOCAL_BHAPI BApplicationConnector
 {
 public:
     BApplicationConnector();
@@ -58,7 +58,7 @@ private:
 	static b_status_t task(void*);
 };
 
-extern BApplicationConnector *bhapi_app_connector;
+extern BApplicationConnector *bhapi::app_connector;
 
 #endif /* __cplusplus */
 

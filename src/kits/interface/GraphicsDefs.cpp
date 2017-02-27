@@ -30,31 +30,31 @@
 #include "GraphicsDefs.h"
 #include "Point.h"
 
-extern EXP_BHAPI const BPoint B_ORIGIN(0, 0);
+extern EXPORT_BHAPI const BPoint B_ORIGIN(0, 0);
 
 extern "C" {
 
-extern EXP_BHAPI const b_pattern B_SOLID_HIGH = b_makb_pattern(0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff);
-extern EXP_BHAPI const b_pattern B_MIXED_COLORS = b_makb_pattern(0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55);
-extern EXP_BHAPI const b_pattern B_SOLID_LOW = b_makb_pattern(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
+extern EXPORT_BHAPI const b_pattern B_SOLID_HIGH = b_makb_pattern(0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff);
+extern EXPORT_BHAPI const b_pattern B_MIXED_COLORS = b_makb_pattern(0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55);
+extern EXPORT_BHAPI const b_pattern B_SOLID_LOW = b_makb_pattern(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
-extern EXP_BHAPI const b_rgb_color B_TRANSPARENT_COLOR = b_makb_rgb_color(233, 233, 233, 255);
+extern EXPORT_BHAPI const b_rgb_color B_TRANSPARENT_COLOR = b_makb_rgb_color(233, 233, 233, 255);
 
 #ifdef BHAPI_BIG_ENDIAN
-extern EXP_BHAPI const b_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xE9E9E9FF;
+extern EXPORT_BHAPI const b_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xE9E9E9FF;
 #else
-extern EXP_BHAPI const b_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xFFE9E9E9;
+extern EXPORT_BHAPI const b_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xFFE9E9E9;
 #endif
 
 
-EXP_BHAPI b_uint8 bhapi_find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b)
+EXPORT_BHAPI b_uint8 b_find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b)
 {
 	// RGB: 3-3-2
 	return((r & 0xe0) | ((g >> 3) & 0x1c) | (b >> 6));
 }
 
 
-EXP_BHAPI b_rgb_color bhapi_find_color_for_index(b_uint8 index)
+EXPORT_BHAPI b_rgb_color b_find_color_for_index(b_uint8 index)
 {
 	// RGB: 3-3-2
 	b_uint8 r = index & 0xe0;

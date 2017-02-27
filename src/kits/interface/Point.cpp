@@ -34,7 +34,7 @@
 #include "../kernel/Debug.h"
 
 #ifndef HAVE_ROUND
-inline double bhapi_round(double value)
+inline double b_round(double value)
 {
 	double iValue = 0;
 	double fValue = modf(value, &iValue);
@@ -45,7 +45,7 @@ inline double bhapi_round(double value)
 	return iValue;
 }
 #else
-#define bhapi_round(a) round(a)
+#define b_round(a) round(a)
 #endif // HAVE_ROUND
 
 
@@ -75,7 +75,7 @@ BPoint::operator=(const BPoint& from)
 {
 	x = from.x;
 	y = from.y;
-	
+
 	return *this;
 }
 
@@ -91,7 +91,7 @@ BPoint::Set(float X, float Y)
 BPoint
 BPoint::operator+(const BPoint &plus) const
 {
-	return(BPoint(this->x + plus.x, this->y + plus.y)); 
+	return(BPoint(this->x + plus.x, this->y + plus.y));
 }
 
 
@@ -221,16 +221,16 @@ BPoint::CeilCopy() const
 void
 BPoint::Round()
 {
-	x = (float)bhapi_round((double)x);
-	y = (float)bhapi_round((double)y);
+	x = (float)b_round((double)x);
+	y = (float)b_round((double)y);
 }
 
 
 BPoint&
 BPoint::RoundSelf()
 {
-	x = (float)bhapi_round((double)x);
-	y = (float)bhapi_round((double)y);
+	x = (float)b_round((double)x);
+	y = (float)b_round((double)y);
 	return *this;
 }
 
@@ -238,8 +238,8 @@ BPoint::RoundSelf()
 BPoint
 BPoint::RoundCopy() const
 {
-	float _x = (float)bhapi_round((double)x);
-	float _y = (float)bhapi_round((double)y);
+	float _x = (float)b_round((double)x);
+	float _y = (float)b_round((double)y);
 	return(BPoint(_x, _y));
 }
 

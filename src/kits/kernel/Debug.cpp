@@ -57,13 +57,13 @@
 
 #ifdef _WIN32
 // defined in etk-os.cpp
-extern "C" char* bhapi_win32_convert_utf8_to_active(const char *str, b_int32 length);
+extern "C" char* b_win32_convert_utf8_to_active(const char *str, b_int32 length);
 #endif
 
 
 extern "C" {
 
-IMPEXP_BHAPI void bhapi_debug_log(bhapi_debug_level level, const char *format, va_list ap)
+EXPORT_BHAPI void b_debug_log(b_debug_level level, const char *format, va_list ap)
 {
 	char *buffer = NULL;
 	char *prefix = NULL;
@@ -111,7 +111,7 @@ IMPEXP_BHAPI void bhapi_debug_log(bhapi_debug_level level, const char *format, v
 			}
 			else
 			{
-				char *aStr = bhapi_win32_convert_utf8_to_active(newLine, -1);
+				char *aStr = b_win32_convert_utf8_to_active(newLine, -1);
 				if(aStr != NULL)
 				{
 					MessageBoxA(NULL, aStr, NULL, MB_ICONERROR | MB_SETFOREGROUND);
@@ -171,7 +171,7 @@ IMPEXP_BHAPI void bhapi_debug_log(bhapi_debug_level level, const char *format, v
 			}
 			else // Windows 95/98
 			{
-				char *aStr = bhapi_win32_convert_utf8_to_active(newLine, -1);
+				char *aStr = b_win32_convert_utf8_to_active(newLine, -1);
 				if(aStr != NULL)
 				{
 					DWORD wrote = 0;
@@ -199,38 +199,38 @@ IMPEXP_BHAPI void bhapi_debug_log(bhapi_debug_level level, const char *format, v
 }
 
 
-IMPEXP_BHAPI void BHAPI_DEBUG(const char *format, ...)
+EXPORT_BHAPI void BHAPI_DEBUG(const char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
-	bhapi_debug_log(DEBUG_NORMAL, format, args);
+	b_debug_log(DEBUG_NORMAL, format, args);
 	va_end(args);
 }
 
 
-IMPEXP_BHAPI void BHAPI_OUTPUT(const char *format, ...)
+EXPORT_BHAPI void BHAPI_OUTPUT(const char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
-	bhapi_debug_log(DEBUG_OUTPUT, format, args);
+	b_debug_log(DEBUG_OUTPUT, format, args);
 	va_end(args);
 }
 
 
-IMPEXP_BHAPI void BHAPI_WARNING(const char *format, ...)
+EXPORT_BHAPI void BHAPI_WARNING(const char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
-	bhapi_debug_log(DEBUG_WARNING, format, args);
+	b_debug_log(DEBUG_WARNING, format, args);
 	va_end(args);
 }
 
 
-IMPEXP_BHAPI void BHAPI_ERROR(const char *format, ...)
+EXPORT_BHAPI void BHAPI_ERROR(const char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
-	bhapi_debug_log(DEBUG_ERROR, format, args);
+	b_debug_log(DEBUG_ERROR, format, args);
 	va_end(args);
 }
 
@@ -263,7 +263,7 @@ static b_uint64 __bhapi_cur_allocated_memory = B_INT64_CONSTANT(0);
 
 extern "C" {
 
-IMPEXP_BHAPI void* bhapi_malloc(size_t size, const char *file, int line, const char *method)
+IMPEXP_BHAPI void* b_malloc(size_t size, const char *file, int line, const char *method)
 {
 	struct __bhapi_mem_list_t *entry = (struct __bhapi_mem_list_t *)malloc(sizeof(struct __bhapi_mem_list_t) + size);
 	if(entry == NULL)
@@ -282,7 +282,7 @@ IMPEXP_BHAPI void* bhapi_malloc(size_t size, const char *file, int line, const c
 	entry->line = line;
 	entry->prev = NULL;
 
-	if(bhapi_memory_tracing_lock() == false)
+	if(b_memory_tracing_lock() == false)
 	{
 		fprintf(stdout, "\x1b[32m[KERNEL]: %s - system don't support global_static_locker!\x1b[0m\n", __PRETTY_FUNCTION__);
 		free(entry);
@@ -296,7 +296,7 @@ IMPEXP_BHAPI void* bhapi_malloc(size_t size, const char *file, int line, const c
 	__bhapi_cur_allocated_memory += (b_uint64)size;
 	if(__bhapi_cur_allocated_memory > __bhapi_max_allocated_memory) __bhapi_max_allocated_memory = __bhapi_cur_allocated_memory;
 
-	bhapi_memory_tracing_unlock();
+	b_memory_tracing_unlock();
 
 //	fprintf(stdout, "[KERNEL]: %s - %u bytes to %p on line (%s:%d)\n",
 //		(method == NULL ? "<Unknown>" : method), size, ptr, (file == NULL ? "<Unknown>" : file), line);
@@ -305,7 +305,7 @@ IMPEXP_BHAPI void* bhapi_malloc(size_t size, const char *file, int line, const c
 }
 
 
-IMPEXP_BHAPI void* bhapi_calloc(size_t nmemb, size_t size, const char *file, int line, const char *method)
+IMPEXP_BHAPI void* b_calloc(size_t nmemb, size_t size, const char *file, int line, const char *method)
 {
 	struct __bhapi_mem_list_t *entry = (struct __bhapi_mem_list_t *)malloc(sizeof(struct __bhapi_mem_list_t) + (nmemb * size));
 	if(entry == NULL)
@@ -325,7 +325,7 @@ IMPEXP_BHAPI void* bhapi_calloc(size_t nmemb, size_t size, const char *file, int
 	entry->line = line;
 	entry->prev = NULL;
 
-	if(bhapi_memory_tracing_lock() == false)
+	if(b_memory_tracing_lock() == false)
 	{
 		fprintf(stdout, "\x1b[32m[KERNEL]: %s - system don't support memory_tracing_locker!\x1b[0m\n", __PRETTY_FUNCTION__);
 		free(entry);
@@ -339,7 +339,7 @@ IMPEXP_BHAPI void* bhapi_calloc(size_t nmemb, size_t size, const char *file, int
 	__bhapi_cur_allocated_memory += (b_uint64)(nmemb * size);
 	if(__bhapi_cur_allocated_memory > __bhapi_max_allocated_memory) __bhapi_max_allocated_memory = __bhapi_cur_allocated_memory;
 
-	bhapi_memory_tracing_unlock();
+	b_memory_tracing_unlock();
 
 //	fprintf(stdout, "[KERNEL]: %s - %u per %u bytes to %p on line (%s:%d)\n",
 //		(method == NULL ? "<Unknown>" : method), nmemb, size, ptr, (file == NULL ? "<Unknown>" : file), line);
@@ -348,14 +348,14 @@ IMPEXP_BHAPI void* bhapi_calloc(size_t nmemb, size_t size, const char *file, int
 }
 
 
-IMPEXP_BHAPI void* bhapi_realloc(void *ptr, size_t size, const char *file, int line, const char *method)
+IMPEXP_BHAPI void* b_realloc(void *ptr, size_t size, const char *file, int line, const char *method)
 {
-	if(ptr == NULL) return bhapi_malloc(size, file, line, method);
-	if(size == 0) {bhapi_free(ptr, file, line, method); return NULL;}
+	if(ptr == NULL) return b_malloc(size, file, line, method);
+	if(size == 0) {b_free(ptr, file, line, method); return NULL;}
 
 	struct __bhapi_mem_list_t *entryFound = NULL;
 
-	if(bhapi_memory_tracing_lock() == false)
+	if(b_memory_tracing_lock() == false)
 	{
 		fprintf(stdout, "\x1b[32m[KERNEL]: %s - system don't support memory_tracing_locker!\x1b[0m\n", __PRETTY_FUNCTION__);
 		return NULL;
@@ -374,7 +374,7 @@ IMPEXP_BHAPI void* bhapi_realloc(void *ptr, size_t size, const char *file, int l
 		}
 	}
 
-	bhapi_memory_tracing_unlock();
+	b_memory_tracing_unlock();
 
 	if(entryFound == NULL)
 	{
@@ -411,7 +411,7 @@ IMPEXP_BHAPI void* bhapi_realloc(void *ptr, size_t size, const char *file, int l
 		entry = entryFound;
 	}
 
-	bhapi_memory_tracing_lock();
+	b_memory_tracing_lock();
 
 	entry->next = __bhapi_memory_list;
 	if(__bhapi_memory_list != NULL) __bhapi_memory_list->prev = entry;
@@ -424,7 +424,7 @@ IMPEXP_BHAPI void* bhapi_realloc(void *ptr, size_t size, const char *file, int l
 		if(__bhapi_cur_allocated_memory > __bhapi_max_allocated_memory) __bhapi_max_allocated_memory = __bhapi_cur_allocated_memory;
 	}
 
-	bhapi_memory_tracing_unlock();
+	b_memory_tracing_unlock();
 
 	if(retPtr == NULL)
 		fprintf(stdout, "\x1b[32m[KERNEL]: realloc(method %s, %s:%d) pointer %p failed.\x1b[0m\n",
@@ -434,13 +434,13 @@ IMPEXP_BHAPI void* bhapi_realloc(void *ptr, size_t size, const char *file, int l
 }
 
 
-IMPEXP_BHAPI void bhapi_free(void *ptr, const char *file, int line, const char *method)
+IMPEXP_BHAPI void b_free(void *ptr, const char *file, int line, const char *method)
 {
 	if(ptr == NULL) return;
 
 	struct __bhapi_mem_list_t *entryFound = NULL;
 
-	if(bhapi_memory_tracing_lock() == false)
+	if(b_memory_tracing_lock() == false)
 	{
 		fprintf(stdout, "\x1b[32m[KERNEL]: %s - system don't support memory_tracing_locker!\x1b[0m\n", __PRETTY_FUNCTION__);
 		return;
@@ -461,7 +461,7 @@ IMPEXP_BHAPI void bhapi_free(void *ptr, const char *file, int line, const char *
 
 	if(entryFound != NULL) __bhapi_cur_allocated_memory -= (b_uint64)(entryFound->size);
 
-	bhapi_memory_tracing_unlock();
+	b_memory_tracing_unlock();
 
 	if(entryFound != NULL)
 	{
@@ -482,30 +482,30 @@ IMPEXP_BHAPI void bhapi_free(void *ptr, const char *file, int line, const char *
 } // extern "C"
 
 
-IMPEXP_BHAPI void* operator new(size_t size, const char *file, int line, const char *method, struct bhapi_memory_flag_t *flag)
+IMPEXP_BHAPI void* operator new(size_t size, const char *file, int line, const char *method, struct b_memory_flag_t *flag)
 {
 	if(file == NULL) file = "<Unknown>";
 	if(method == NULL) method = "new";
-	return bhapi_malloc(size, file, line, method);
+	return b_malloc(size, file, line, method);
 }
 
 
-IMPEXP_BHAPI void* operator new[](size_t size, const char *file, int line, const char *method, struct bhapi_memory_flag_t *flag)
+IMPEXP_BHAPI void* operator new[](size_t size, const char *file, int line, const char *method, struct b_memory_flag_t *flag)
 {
 	if(method == NULL) method = "new[]";
 	return operator new(size, file, line, method, flag);
 }
 
 
-IMPEXP_BHAPI void operator delete(void *ptr, const char *file, int line, const char *method, struct bhapi_memory_flag_t *flag)
+IMPEXP_BHAPI void operator delete(void *ptr, const char *file, int line, const char *method, struct b_memory_flag_t *flag)
 {
 	if(file == NULL) file = "<Unknown>";
 	if(method == NULL) method = "delete";
-	bhapi_free(ptr, file, line, method);
+	b_free(ptr, file, line, method);
 }
 
 
-IMPEXP_BHAPI void operator delete[](void *ptr, const char *file, int line, const char *method, struct bhapi_memory_flag_t *flag)
+IMPEXP_BHAPI void operator delete[](void *ptr, const char *file, int line, const char *method, struct b_memory_flag_t *flag)
 {
 	if(method == NULL) method = "delete[]";
 	operator delete(ptr, file, line, method, flag);
@@ -514,55 +514,55 @@ IMPEXP_BHAPI void operator delete[](void *ptr, const char *file, int line, const
 
 IMPEXP_BHAPI void* operator new(size_t size)
 {
-	return operator new(size, NULL, 0, "new", (struct bhapi_memory_flag_t*)0);
+	return operator new(size, NULL, 0, "new", (struct b_memory_flag_t*)0);
 }
 
 
 IMPEXP_BHAPI void* operator new[](size_t size)
 {
-	return operator new[](size, NULL, 0, "new[]", (struct bhapi_memory_flag_t*)0);
+	return operator new[](size, NULL, 0, "new[]", (struct b_memory_flag_t*)0);
 }
 
 
 IMPEXP_BHAPI void* operator new(size_t size, const std::nothrow_t&) throw()
 {
-	return operator new(size, NULL, 0, "new(nothrow_t)", (struct bhapi_memory_flag_t*)0);
+	return operator new(size, NULL, 0, "new(nothrow_t)", (struct b_memory_flag_t*)0);
 }
 
 
 IMPEXP_BHAPI void* operator new[](size_t size, const std::nothrow_t&) throw()
 {
-	return operator new[](size, NULL, 0, "new[](nothrow_t)", (struct bhapi_memory_flag_t*)0);
+	return operator new[](size, NULL, 0, "new[](nothrow_t)", (struct b_memory_flag_t*)0);
 }
 
 
 IMPEXP_BHAPI void operator delete(void *ptr)
 {
-	operator delete(ptr, NULL, 0, "delete", (struct bhapi_memory_flag_t*)0);
+	operator delete(ptr, NULL, 0, "delete", (struct b_memory_flag_t*)0);
 }
 
 
 IMPEXP_BHAPI void operator delete[](void *ptr)
 {
-	operator delete[](ptr, NULL, 0, "delete[]", (struct bhapi_memory_flag_t*)0);
+	operator delete[](ptr, NULL, 0, "delete[]", (struct b_memory_flag_t*)0);
 }
 
 
 IMPEXP_BHAPI void operator delete(void* ptr, const std::nothrow_t&)
 {
-	operator delete(ptr, NULL, 0, "delete(nothrow_t)", (struct bhapi_memory_flag_t*)0);
+	operator delete(ptr, NULL, 0, "delete(nothrow_t)", (struct b_memory_flag_t*)0);
 }
 
 
 IMPEXP_BHAPI void operator delete[](void* ptr, const std::nothrow_t&)
 {
-	operator delete[](ptr, NULL, 0, "delete[](nothrow_t)", (struct bhapi_memory_flag_t*)0);
+	operator delete[](ptr, NULL, 0, "delete[](nothrow_t)", (struct b_memory_flag_t*)0);
 }
 
 
-inline void bhapi_memory_check_leak()
+inline void b_memory_check_leak()
 {
-	if(bhapi_memory_tracing_lock() == false) return;
+	if(b_memory_tracing_lock() == false) return;
 
 #ifdef _WIN32
 	AllocConsole();
@@ -611,7 +611,7 @@ inline void bhapi_memory_check_leak()
 	SetConsoleTextAttribute(hStdOut, FOREGROUND_BLUE|FOREGROUND_GREEN|FOREGROUND_RED);
 #endif
 
-	bhapi_memory_tracing_unlock();
+	b_memory_tracing_unlock();
 }
 
 
@@ -619,7 +619,7 @@ inline void bhapi_memory_check_leak()
 class __bhapi_memory_check_leak {
 public:
 	inline __bhapi_memory_check_leak() {};
-	inline ~__bhapi_memory_check_leak() {bhapi_memory_check_leak();};
+	inline ~__bhapi_memory_check_leak() {b_memory_check_leak();};
 };
 static __bhapi_memory_check_leak ___bhapi_memory_check_leak;
 #else
@@ -628,9 +628,9 @@ public:
 	inline __bhapi_memory_check_leak()
 	{
 #ifdef HAVE_ON_EXIT
-		on_exit((void (*)(int, void*))bhapi_memory_check_leak, NULL);
+		on_exit((void (*)(int, void*))b_memory_check_leak, NULL);
 #else
-		atexit((void (*)(void))bhapi_memory_check_leak);
+		atexit((void (*)(void))b_memory_check_leak);
 #endif
 	};
 };

@@ -38,17 +38,19 @@
 extern "C" {
 
 #ifndef BHAPI_BUILD_LIBRARY
-extern IMPEXP_BHAPI const b_uint8 bhapi_major_version;
-extern IMPEXP_BHAPI const b_uint8 bhapi_minor_version;
-extern IMPEXP_BHAPI const b_uint8 bhapi_micro_version;
-extern IMPEXP_BHAPI const b_uint8 bhapi_interface_age;
-extern IMPEXP_BHAPI const b_uint16 bhapi_binary_age;
+namespace bhapi {
+extern IMPEXP_BHAPI const b_uint8 major_version;
+extern IMPEXP_BHAPI const b_uint8 minor_version;
+extern IMPEXP_BHAPI const b_uint8 micro_version;
+extern IMPEXP_BHAPI const b_uint8 interface_age;
+extern IMPEXP_BHAPI const b_uint16 binary_age;
+}
 #else
-#define bhapi_major_version BHAPI_MAJOR_VERSION;
-#define bhapi_minor_version BHAPI_MINOR_VERSION;
-#define bhapi_micro_version BHAPI_MICRO_VERSION;
-#define bhapi_interface_age BHAPI_INTERFACE_AGE;
-#define bhapi_binary_age BHAPI_BINARY_AGE;
+#define major_version BHAPI_MAJOR_VERSION
+#define minor_version BHAPI_MINOR_VERSION
+#define micro_version BHAPI_MICRO_VERSION
+#define interface_age BHAPI_INTERFACE_AGE
+#define binary_age BHAPI_BINARY_AGE
 #endif
 
 } // extern "C"

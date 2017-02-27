@@ -38,7 +38,7 @@
 class BTokensDepot;
 
 
-class _LOCAL BToken {
+class LOCAL_BHAPI BToken {
 public:
     BToken();
     ~BToken();
@@ -70,7 +70,7 @@ private:
 };
 
 
-class _LOCAL BTokensDepot {
+class LOCAL_BHAPI BTokensDepot {
 public:
     BTokensDepot(BLocker *locker = NULL,
 		     bool deconstruct_locker = false);

@@ -36,11 +36,9 @@
 #include "../../support/Errors.h"
 #include "../../support/SupportDefs.h"
 
-#ifdef __FT2_BUILD_GENERIC_H__
-#error dupa
-#endif
 #include <freetype/include/ft2build.h>
 #include FT_FREETYPE_H
+#include <freetype/include/freetype/freetype.h>
 
 #include <math.h>
 #include <stdlib.h>
@@ -53,50 +51,49 @@
 #define FT_PIXEL_MODE_MONO		ft_pixel_mode_mono
 #endif
 
-#include <freetype/include/freetype/freetype.h>
+namespace bhapi {
+static FT_Library ft2_library;
+static bool ft2_initialized = false;
+static BLocker ft2_font_locker;
+}
 
-static FT_Library _bhapi_ft2_library_;
-static bool _bhapi_ft2_initialized_ = false;
-static BLocker bhapi_ft2_font_locker;
-
-EXP_BHAPI bool bhapi_font_freetype2_init(void)
+EXPORT_BHAPI bool bhapi::font_freetype2_init(void)
 {
-	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 
-	if(!_bhapi_ft2_initialized_)
+    if(!bhapi::ft2_initialized)
 	{
-		FT_Error error = FT_Init_FreeType(&_bhapi_ft2_library_);
+        FT_Error error = FT_Init_FreeType(&bhapi::ft2_library);
 		if(error)
 		{
 			BHAPI_WARNING("[FONT]: %s --- CAN NOT initialize freetype engine %d\n", __PRETTY_FUNCTION__, error);
 			return false;
 		}
-		_bhapi_ft2_initialized_ = true;
+        bhapi::ft2_initialized = true;
 	}
 
 	return true;
 }
 
 
-EXP_BHAPI bool bhapi_font_freetype2_is_valid(void)
+EXPORT_BHAPI bool bhapi::font_freetype2_is_valid(void)
 {
-	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 
-	return _bhapi_ft2_initialized_;
+    return bhapi::ft2_initialized;
 }
 
 
-EXP_BHAPI void bhapi_font_freetype2_cancel(void)
+EXPORT_BHAPI void bhapi::font_freetype2_cancel(void)
 {
-	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 
-	if(_bhapi_ft2_initialized_)
+    if(bhapi::ft2_initialized)
 	{
-		FT_Done_FreeType(_bhapi_ft2_library_);
-		_bhapi_ft2_initialized_ = false;
+        FT_Done_FreeType(bhapi::ft2_library);
+        bhapi::ft2_initialized = false;
 	}
 }
-
 
 class BFontFT2 : public BFontEngine {
 public:
@@ -111,12 +108,12 @@ public:
 	virtual void ForceFontAliasing(bool enable);
 
 	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold, b_int32 length) const;
-	virtual void GetHeight(b_font_height *height, float size, float shear, bool bold) const;
+	virtual void GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const;
 	virtual b_uint8* RenderString(const char *string, b_int32 *width, b_int32 *height, bool *is_mono,
 				     float size, float spacing, float shear, bool bold, b_int32 length);
 
-	virtual b_font_detach_callback* Attach(void (*callback)(void*), void *data);
-	virtual bool Detach(b_font_detach_callback *callback);
+	virtual bhapi::font_detach_callback* Attach(void (*callback)(void*), void *data);
+	virtual bool Detach(bhapi::font_detach_callback *callback);
 
 private:
 	char *fFilename;
@@ -142,10 +139,10 @@ BFontFT2::BFontFT2(const BEntry *entry, b_int32 faceIndex)
 
 	SetRenderMode(B_FONT_RENDER_PIXMAP);
 
-	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
-	if(!_bhapi_ft2_initialized_) return;
+    BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
+    if(!bhapi::ft2_initialized) return;
 
-	FT_Error error = FT_New_Face(_bhapi_ft2_library_, filename.String(), faceIndex, &fFace);
+    FT_Error error = FT_New_Face(bhapi::ft2_library, filename.String(), faceIndex, &fFace);
 	if(error || !fFace)
 	{
 		BHAPI_DEBUG("[FONT]: %s --- CAN NOT load face[%s:%d].", __PRETTY_FUNCTION__, aPath.Path(), faceIndex);
@@ -214,22 +211,22 @@ BFontFT2::~BFontFT2()
 
 	if(fFace)
 	{
-		BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
+        BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 		FT_Done_Face(fFace);
 	}
 }
 
 
-b_font_detach_callback*
+bhapi::font_detach_callback*
 BFontFT2::Attach(void (*callback)(void*), void *data)
 {
-	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 
-	b_font_detach_callback *eCallback = BFontEngine::Attach(callback, data);
+	bhapi::font_detach_callback *eCallback = BFontEngine::Attach(callback, data);
 
 	if(eCallback && !fFace)
 	{
-		if(FT_New_Face(_bhapi_ft2_library_, fFilename, fFaceIndex, &fFace) || !fFace)
+        if(FT_New_Face(bhapi::ft2_library, fFilename, fFaceIndex, &fFace) || !fFace)
 		{
 			BHAPI_DEBUG("[FONT]: %s --- CAN NOT load face[%s:%d].", __PRETTY_FUNCTION__, fFilename, fFaceIndex);
 			BFontEngine::Detach(eCallback);
@@ -254,9 +251,9 @@ BFontFT2::Attach(void (*callback)(void*), void *data)
 
 
 bool
-BFontFT2::Detach(b_font_detach_callback *callback)
+BFontFT2::Detach(bhapi::font_detach_callback *callback)
 {
-	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 
 	if(!BFontEngine::Detach(callback)) return false;
 
@@ -319,7 +316,7 @@ BFontFT2::IsFixedSize(float size) const
 float
 BFontFT2::StringWidth(const char *string, float size, float spacing, float shear, bool bold, b_int32 length) const
 {
-	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 
 	if(!IsAttached()) return 0;
 
@@ -367,13 +364,13 @@ BFontFT2::StringWidth(const char *string, float size, float spacing, float shear
 
 
 void
-BFontFT2::GetHeight(b_font_height *height, float size, float shear, bool bold) const
+BFontFT2::GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const
 {
 	if(!height) return;
 
-	bzero(height, sizeof(b_font_height));
+	bzero(height, sizeof(bhapi::font_height));
 
-	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 
 	if(!IsAttached()) return;
 
@@ -409,7 +406,7 @@ BFontFT2::RenderString(const char *string, b_int32 *width, b_int32 *height, bool
 {
 	if(string == NULL || *string == 0 || length == 0 || width == NULL || height == NULL || is_mono == NULL) return NULL;
 
-	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 
 	if(!IsAttached()) return NULL;
 
@@ -417,7 +414,7 @@ BFontFT2::RenderString(const char *string, b_int32 *width, b_int32 *height, bool
 	if(!fScalable && !isfixed) return NULL;
 
 	float stringWidth;
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 
 	if((stringWidth = StringWidth(string, size, spacing, shear, bold, length)) <= 0) return NULL;
 	GetHeight(&fontHeight, size, shear, bold);
@@ -506,7 +503,7 @@ BFontFT2::RenderString(const char *string, b_int32 *width, b_int32 *height, bool
 }
 
 
-EXP_BHAPI bool bhapi_update_freetype2_font_families(bool check_only)
+EXPORT_BHAPI bool b_update_freetype2_font_families(bool check_only)
 {
     BString fonts_dirs;
 
@@ -531,7 +528,7 @@ EXP_BHAPI bool bhapi_update_freetype2_font_families(bool check_only)
 #endif
 	}
 
-	BAutolock <BLocker> autolock(&bhapi_ft2_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 
 	if(check_only)
 	{
@@ -539,7 +536,7 @@ EXP_BHAPI bool bhapi_update_freetype2_font_families(bool check_only)
 		return false;
 	}
 
-	if(!_bhapi_ft2_initialized_)
+    if(!bhapi::ft2_initialized)
 	{
 		BHAPI_WARNING("[FONT]: Freetype engine not initialize! REFUSE TO LOAD FONTS!!!");
 		return false;
@@ -614,7 +611,7 @@ EXP_BHAPI bool bhapi_update_freetype2_font_families(bool check_only)
 //				BHAPI_DEBUG("\tFamily[%d]: %s", faceIndex, engine->Family());
 //				BHAPI_DEBUG("\t\tStyle: %s", engine->Style());
 
-				if(!bhapi_font_add(engine->Family(), engine->Style(), engine)) delete engine;
+				if(!bhapi::font_add(engine->Family(), engine->Style(), engine)) delete engine;
 
 				faceIndex++;
 			}while(faceIndex < nFaces);

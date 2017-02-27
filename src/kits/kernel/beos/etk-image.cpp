@@ -35,7 +35,7 @@
 
 
 IMPEXP_BHAPI void*
-bhapi_load_addon(const char* path)
+b_load_addon(const char* path)
 {
 	BPath aPath(path, NULL, true);
 	if(aPath.Path() == NULL || strlen(aPath.Path()) > B_MAXPATH) return NULL;
@@ -54,7 +54,7 @@ bhapi_load_addon(const char* path)
 
 
 IMPEXP_BHAPI b_status_t
-bhapi_unload_addon(void *data)
+b_unload_addon(void *data)
 {
 	if(data == NULL) return B_ERROR;
 	if(unload_add_on(*((image_id*)data)) != B_OK) return B_ERROR;
@@ -64,7 +64,7 @@ bhapi_unload_addon(void *data)
 
 
 IMPEXP_BHAPI b_status_t
-bhapi_get_image_symbol(void *data, const char *name, void **ptr)
+b_get_image_symbol(void *data, const char *name, void **ptr)
 {
 	if(data == NULL || name == NULL || *name == 0 || ptr == NULL) return B_BAD_VALUE;
 

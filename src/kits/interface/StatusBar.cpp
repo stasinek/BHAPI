@@ -222,7 +222,7 @@ BStatusBar::Draw(BRect updateRect)
 	b_rgb_color barColor = b_ui_color(B_STATUSBAR_COLOR);
 
 	BFont font;
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 
 	GetFont(&font);
 	font.GetHeight(&fontHeight);
@@ -344,7 +344,7 @@ BStatusBar::GetPreferredSize(float *width, float *height)
 
 	BFont font;
 	GetFont(&font);
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 	font.GetHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 

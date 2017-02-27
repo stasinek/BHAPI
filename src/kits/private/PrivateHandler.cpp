@@ -34,26 +34,28 @@
 #include "../support/ClassInfo.h"
 #include "../support/Autolock.h"
 #include "../support/Errors.h"
+#include "../support/Locker.h"
+#include "../app/Looper.h"
 
-BLocker* bhapi_get_handler_operator_locker()
+BLocker* bhapi::get_handler_operator_locker()
 {
-	return bhapi_app_connector->HandlersDepot()->Locker();
+	return bhapi::app_connector->HandlersDepot()->Locker();
 }
 
 
-b_uint64 bhapi_get_handler_token(const BHandler *handler)
+b_uint64 bhapi::get_handler_token(const BHandler *handler)
 {
 	return((handler == NULL || handler->fToken == NULL) ? B_MAXUINT64 : handler->fToken->Token());
 }
 
 
-b_uint64 bhapi_get_ref_handler_token(const BHandler *handler)
+b_uint64 bhapi::get_ref_handler_token(const BHandler *handler)
 {
 	b_uint64 retVal = B_MAXUINT64;
 
-	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi::app_connector->HandlersDepot());
 
-	BToken *aToken = bhapi_app_connector->HandlersDepot()->FetchToken(bhapi_get_handler_token(handler));
+	BToken *aToken = bhapi::app_connector->HandlersDepot()->FetchToken(bhapi::get_handler_token(handler));
 	if(aToken != NULL)
 	{
 		b_uint64 vitalities = aToken->Vitalities();
@@ -65,59 +67,59 @@ b_uint64 bhapi_get_ref_handler_token(const BHandler *handler)
 }
 
 
-BHandler* bhapi_get_handler(b_uint64 token)
+BHandler* bhapi::get_handler(b_uint64 token)
 {
 	BHandler *retVal = NULL;
 
-	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi::app_connector->HandlersDepot());
 
-	BToken *aToken = bhapi_app_connector->HandlersDepot()->FetchToken(token);
+	BToken *aToken = bhapi::app_connector->HandlersDepot()->FetchToken(token);
 	if(aToken != NULL) retVal = reinterpret_cast<BHandler*>(aToken->Data());
 
 	return retVal;
 }
 
 
-b_bigtime_t bhapi_get_handler_create_time_stamp(b_uint64 token)
+b_bigtime_t bhapi::get_handler_create_time_stamp(b_uint64 token)
 {
 	b_bigtime_t retVal = B_MAXINT64;
 
-	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi::app_connector->HandlersDepot());
 
-	BToken *aToken = bhapi_app_connector->HandlersDepot()->FetchToken(token);
+	BToken *aToken = bhapi::app_connector->HandlersDepot()->FetchToken(token);
 	if(aToken != NULL) retVal = aToken->TimeStamp();
 
 	return retVal;
 }
 
 
-BLooper* bhapi_get_handler_looper(b_uint64 token)
+BLooper* bhapi::get_handler_looper(b_uint64 token)
 {
-	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi::app_connector->HandlersDepot());
 
-	BHandler *handler = bhapi_get_handler(token);
+	BHandler *handler = bhapi::get_handler(token);
 	return(handler == NULL ? NULL : handler->Looper());
 }
 
 
-b_uint64 bhapi_get_ref_looper_token(b_uint64 token)
+b_uint64 bhapi::get_ref_looper_token(b_uint64 token)
 {
-	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi::app_connector->HandlersDepot());
 
-	BHandler *handler = bhapi_get_handler(token);
-	return(handler == NULL ? B_MAXUINT64 : bhapi_get_ref_handler_token(handler->Looper()));
+	BHandler *handler = bhapi::get_handler(token);
+	return(handler == NULL ? B_MAXUINT64 : bhapi::get_ref_handler_token(handler->Looper()));
 }
 
 
-b_status_t bhapi_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout)
+b_status_t b_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout)
 {
-	BLocker *handlers_locker = bhapi_get_handler_operator_locker();
+	BLocker *handlers_locker = bhapi::get_handler_operator_locker();
 
 	handlers_locker->Lock();
 
-	BLooper *looper = bhapi_get_handler_looper(token);
+	BLooper *looper = bhapi::get_handler_looper(token);
 	BLooper *looper_proxy = (looper != NULL ? looper->_Proxy() : NULL);
-	void *locker = ((looper == NULL || looper->fLocker == NULL) ? NULL : bhapi_clone_locker(looper->fLocker));
+	void *locker = ((looper == NULL || looper->fLocker == NULL) ? NULL : b_clone_locker(looper->fLocker));
 
 	if(locker == NULL)
 	{
@@ -128,15 +130,15 @@ b_status_t bhapi_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout)
 	b_int64 save_count = handlers_locker->CountLocks();
 	while(handlers_locker->CountLocks() > 0) handlers_locker->Unlock();
 
-	b_status_t retVal = bhapi_lock_locker_etc(locker, B_TIMEOUT, timeout);
+	b_status_t retVal = b_lock_locker_etc(locker, B_TIMEOUT, timeout);
 	if(retVal == B_OK)
 	{
 		handlers_locker->Lock();
-		if(looper != bhapi_get_handler_looper(token) || looper_proxy != looper->_Proxy()) retVal = B_MISMATCHED_VALUES;
+		if(looper != bhapi::get_handler_looper(token) || looper_proxy != looper->_Proxy()) retVal = B_MISMATCHED_VALUES;
 		if(save_count-- == 1) handlers_locker->Unlock();
-		if(retVal != B_OK) bhapi_unlock_locker(locker);
+		if(retVal != B_OK) b_unlock_locker(locker);
 	}
-	bhapi_delete_locker(locker);
+	b_delete_locker(locker);
 
 	while(save_count-- > 1) handlers_locker->Lock();
 
@@ -144,26 +146,26 @@ b_status_t bhapi_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout)
 }
 
 
-bool bhapi_is_current_at_looper_thread(b_uint64 token)
+bool b_is_current_at_looper_thread(b_uint64 token)
 {
-	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi::app_connector->HandlersDepot());
 
-	BLooper *looper = b_cast_as(bhapi_get_handler(token), BLooper);
+	BLooper *looper = bhapi::cast_as(bhapi::get_handler(token), BLooper);
 	if(looper == NULL) return false;
 
-	bool retVal = (looper->Thread() == bhapi_get_current_thread_id() ? true : false);
+	bool retVal = (looper->Thread() == bhapi::get_current_thread_id() ? true : false);
 
 	return retVal;
 }
 
 
-bool bhapi_ref_handler(b_uint64 token)
+bool bhapi::ref_handler(b_uint64 token)
 {
 	bool retVal = false;
 
-	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi::app_connector->HandlersDepot());
 
-	BToken *aToken = bhapi_app_connector->HandlersDepot()->FetchToken(token);
+	BToken *aToken = bhapi::app_connector->HandlersDepot()->FetchToken(token);
 	if(aToken != NULL)
 	{
 		b_uint64 vitalities = aToken->Vitalities();
@@ -175,11 +177,11 @@ bool bhapi_ref_handler(b_uint64 token)
 }
 
 
-void bhapi_unref_handler(b_uint64 token)
+void bhapi::unref_handler(b_uint64 token)
 {
-	BAutolock <BTokensDepot>autolock(bhapi_app_connector->HandlersDepot());
+	BAutolock <BTokensDepot>autolock(bhapi::app_connector->HandlersDepot());
 
-	BToken *aToken = bhapi_app_connector->HandlersDepot()->FetchToken(token);
+	BToken *aToken = bhapi::app_connector->HandlersDepot()->FetchToken(token);
 	if(aToken != NULL) aToken->operator--();
 }
 

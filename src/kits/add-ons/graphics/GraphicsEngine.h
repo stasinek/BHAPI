@@ -30,10 +30,11 @@
 
 #ifndef BHAPI_GRAPHICS_ENGINE__H
 #define BHAPI_GRAPHICS_ENGINE__H
+
 #include "../../support/SupportDefs.h"
-#include "../../interface/GraphicsDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
+#include "../../interface/GraphicsDefs.h"
 class BCursor;
 class BPixmap;
 #include "../../interface/Window.h"
@@ -178,6 +179,7 @@ public:
 
 	virtual BGraphicsContext*	CreateContext() = 0;
     virtual BGraphicsDrawable*	CreatePixmap(b_uint32 w, b_uint32 h) = 0;
+#undef CreateWindow
     virtual BGraphicsWindow*	CreateWindow(b_int32 x, b_int32 y, b_uint32 w, b_uint32 h) = 0;
 
 	virtual b_status_t		InitalizeFonts() = 0;

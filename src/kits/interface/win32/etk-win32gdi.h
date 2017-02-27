@@ -30,14 +30,6 @@
 #ifndef BHAPI_WIN32GDI__H
 #define BHAPI_WIN32GDI__H
 
-#include "../../support/SupportDefs.h"
-
-#include "../../add-ons/graphics/GraphicsEngine.h"
-#include "../../app/MessageFilter.h"
-#include "../../app/Message.h"
-#include "../../app/Messenger.h"
-#include "../../support/Locker.h"
-
 #ifdef WIN32
 
 #ifndef _WIN32_WINNT
@@ -47,6 +39,14 @@
 #ifndef WINVER
 #define WINVER 0x0500
 #endif
+
+#include "../../support/SupportDefs.h"
+
+#include "../../add-ons/graphics/GraphicsEngine.h"
+#include "../../app/MessageFilter.h"
+#include "../../app/Message.h"
+#include "../../app/Messenger.h"
+#include "../../support/Locker.h"
 
 #define WM_BHAPI_MESSAGE_APP			0xa0
 #define WM_BHAPI_MESSAGE_WINDOW			0xa1
@@ -120,14 +120,14 @@ class EWin32GraphicsEngine;
 class EWin32GraphicsDrawable;
 class EWin32GraphicsWindow;
 
-extern bool bhapi_win32_window_get_rect(HWND hWnd, RECT *r);
-extern bool bhapi_win32_window_convert_to_screen(HWND hWnd, int *x, int *y);
-extern bool bhapi_win32_window_convert_window_to_client(HWND hWnd, RECT *wr);
+extern bool bhapi::win32_window_get_rect(HWND hWnd, RECT *r);
+extern bool bhapi::win32_window_convert_to_screen(HWND hWnd, int *x, int *y);
+extern bool bhapi::win32_window_convert_window_to_client(HWND hWnd, RECT *wr);
 
 extern "C" {
 // free it by "free"
-extern char* bhapi_win32_convert_utf8_to_active(const char *str, b_int32 length);
-extern char* bhapi_win32_convert_active_to_utf8(const char *str, b_int32 length);
+extern char* bhapi::win32_convert_utf8_to_active(const char *str, b_int32 length);
+extern char* bhapi::win32_convert_active_to_utf8(const char *str, b_int32 length);
 }
 
 class EWin32GraphicsEngine : public BGraphicsEngine {
@@ -347,7 +347,7 @@ private:
 };
 
 
-typedef struct bhapi_win32_gdi_callback_t {
+typedef struct bhapi::win32_gdi_callback_t {
 	int command;
 
 	EWin32GraphicsWindow *win;
@@ -399,7 +399,7 @@ typedef struct bhapi_win32_gdi_callback_t {
 	HDC *fontTmpDC;
 
 	const void *data;
-} bhapi_win32_gdi_callback_t;
+} bhapi::win32_gdi_callback_t;
 
 
 #ifndef GET_WHEEL_DELTA_WPARAM

@@ -36,10 +36,10 @@
 
 #include <stdlib.h>
 
-typedef struct bhapi_xml_attribute {
+typedef struct b_xml_attribute {
 	char *name;
 	char *content;
-} bhapi_xml_attribute;
+} b_xml_attribute;
 
 
 BSimpleXmlNode::BSimpleXmlNode(const char *name, const char *content)
@@ -59,7 +59,7 @@ BSimpleXmlNode::~BSimpleXmlNode()
 
 	while(fAttributes.CountItems() > 0)
 	{
-		bhapi_xml_attribute* attr = (bhapi_xml_attribute*)fAttributes.RemoveItem((b_int32)0);
+		b_xml_attribute* attr = (b_xml_attribute*)fAttributes.RemoveItem((b_int32)0);
 		if(attr == NULL) continue;
 		if(attr->name) delete[] attr->name;
 		if(attr->content) delete [] attr->content;
@@ -92,7 +92,7 @@ BSimpleXmlNode::Content() const
 const char*
 BSimpleXmlNode::AttributeAt(b_int32 index, const char** attr_content) const
 {
-	bhapi_xml_attribute* attr = (bhapi_xml_attribute*)fAttributes.ItemAt(index);
+	b_xml_attribute* attr = (b_xml_attribute*)fAttributes.ItemAt(index);
 	if(attr == NULL) return NULL;
 	if(attr_content) *attr_content = attr->content;
 	return attr->name;
@@ -105,7 +105,7 @@ BSimpleXmlNode::FindAttribute(const char *name, b_int32 fromIndex) const
 	if(name == NULL || *name == 0 || fromIndex < 0 || fromIndex >= fAttributes.CountItems()) return -1;
 	for(b_int32 i = fromIndex; i < fAttributes.CountItems(); i++)
 	{
-		bhapi_xml_attribute* attr = (bhapi_xml_attribute*)fAttributes.ItemAt(i);
+		b_xml_attribute* attr = (b_xml_attribute*)fAttributes.ItemAt(i);
 		if(attr == NULL) continue;
 		if(attr->name == NULL) continue;
 		if(strlen(attr->name) != strlen(name)) continue;
@@ -162,13 +162,13 @@ BSimpleXmlNode::AddAttribute(const char *name, const char *content, bool replace
 	if(index >= 0)
 	{
 		if(replace_content == false) return false;
-		bhapi_xml_attribute* attr = (bhapi_xml_attribute*)fAttributes.ItemAt(index);
+		b_xml_attribute* attr = (b_xml_attribute*)fAttributes.ItemAt(index);
 		if(attr->content) delete[] attr->content;
 		attr->content = (content == NULL ? NULL : b_strdup(content));
 		return true;
 	}
 
-	bhapi_xml_attribute* attr = new bhapi_xml_attribute;
+	b_xml_attribute* attr = new b_xml_attribute;
 	if(attr == NULL) return false;
 
 	if(fAttributes.AddItem(attr) == false)
@@ -189,7 +189,7 @@ BSimpleXmlNode::RemoveAttribute(const char *name)
 {
 	b_int32 index = FindAttribute(name);
 	if(index < 0) return false;
-	bhapi_xml_attribute* attr = (bhapi_xml_attribute*)fAttributes.RemoveItem(index);
+	b_xml_attribute* attr = (b_xml_attribute*)fAttributes.RemoveItem(index);
 	if(attr == NULL) return false;
 
 	if(attr->name) delete[] attr->name;
@@ -266,7 +266,7 @@ BSimpleXmlNode::PrintToStream() const
 	BHAPI_OUTPUT("|-- Name: \"%s\", Content: \"%s\"\n", fName ? fName : "[NULL]", fContent ? fContent : "[NULL]");
 	for(b_int32 i = 0; i < fAttributes.CountItems(); i++)
 	{
-		bhapi_xml_attribute* attr = (bhapi_xml_attribute*)fAttributes.ItemAt(i);
+		b_xml_attribute* attr = (b_xml_attribute*)fAttributes.ItemAt(i);
 		if(attr == NULL) continue;
 		for(b_int32 j = 0; j < nSuperNode; j++) BHAPI_OUTPUT("  ");
 		BHAPI_OUTPUT("|--(Attribute %d) Name: \"%s\", Content: \"%s\"\n",
@@ -482,7 +482,7 @@ inline bool parse_simple_xml(BString *buffer, b_int32 *offset, BSimpleXmlNode *n
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_parse_simple_xml(const char *buf, BSimpleXmlNode *node)
+IMPEXP_BHAPI b_status_t b_parse_simple_xml(const char *buf, BSimpleXmlNode *node)
 {
 	if(buf == NULL || *buf == 0 || node == NULL) return B_BAD_VALUE;
 

@@ -31,7 +31,7 @@
 
 #include "../kernel/Debug.h"
 
-struct _LOCAL bhapi_mem {
+struct LOCAL_BHAPI b_mem {
 	void (*destroy_func)(void*);
 	void *data;
 };
@@ -40,13 +40,13 @@ struct _LOCAL bhapi_mem {
 void*
 BMemory::Malloc(size_t size, void (*destroy_func)(void*))
 {
-	bhapi_mem *mem = NULL;
+	b_mem *mem = NULL;
 
-	if(~((size_t)0) - sizeof(bhapi_mem) < size ||
-	   (mem = (bhapi_mem*)malloc(sizeof(bhapi_mem) + size)) == NULL) return NULL;
+	if(~((size_t)0) - sizeof(b_mem) < size ||
+	   (mem = (b_mem*)malloc(sizeof(b_mem) + size)) == NULL) return NULL;
 
 	mem->destroy_func = destroy_func;
-	mem->data = (unsigned char*)mem + sizeof(bhapi_mem);
+	mem->data = (unsigned char*)mem + sizeof(b_mem);
 
 	return(mem->data);
 }
@@ -55,11 +55,11 @@ BMemory::Malloc(size_t size, void (*destroy_func)(void*))
 void
 BMemory::Free(void *data)
 {
-	bhapi_mem *mem = NULL;
+	b_mem *mem = NULL;
 
 	if(data == NULL) return;
 
-	mem = (bhapi_mem*)((unsigned char*)data - sizeof(bhapi_mem));
+	mem = (b_mem*)((unsigned char*)data - sizeof(b_mem));
 	if(mem->data != data) BHAPI_ERROR("[PRIVATE]: %s --- Invalid pointer.", __PRETTY_FUNCTION__);
 	if(mem->destroy_func != NULL) mem->destroy_func(mem->data);
 	free(mem);

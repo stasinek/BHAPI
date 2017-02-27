@@ -32,7 +32,7 @@
 #include "../kernel/Debug.h"
 
 #ifndef HAVE_ROUND
-inline double bhapi_round(double value)
+inline double b_round(double value)
 {
 	double iValue = 0;
 	double fValue = modf(value, &iValue);
@@ -43,7 +43,7 @@ inline double bhapi_round(double value)
 	return iValue;
 }
 #else
-#define bhapi_round(a) round(a)
+#define b_round(a) round(a)
 #endif // HAVE_ROUND
 
 bool
@@ -454,10 +454,10 @@ BRect::CeilCopy() const
 void
 BRect::Round()
 {
-	left = (float)bhapi_round((double)left);
-	right = (float)bhapi_round((double)right);
-	top = (float)bhapi_round((double)top);
-	bottom = (float)bhapi_round((double)bottom);
+	left = (float)b_round((double)left);
+	right = (float)b_round((double)right);
+	top = (float)b_round((double)top);
+	bottom = (float)b_round((double)bottom);
 }
 
 
@@ -472,10 +472,10 @@ BRect::RoundSelf()
 BRect
 BRect::RoundCopy() const
 {
-	float _left = (float)bhapi_round((double)left);
-	float _right = (float)bhapi_round((double)right);
-	float _top = (float)bhapi_round((double)top);
-	float _bottom = (float)bhapi_round((double)bottom);
+	float _left = (float)b_round((double)left);
+	float _right = (float)b_round((double)right);
+	float _top = (float)b_round((double)top);
+	float _bottom = (float)b_round((double)bottom);
 
 	return(BRect(_left, _top, _right, _bottom));
 }

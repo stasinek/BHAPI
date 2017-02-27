@@ -48,7 +48,7 @@
 #endif
 
 
-extern bool bhapi_get_arc_12(BPoint &radius, BPoint &start, BPoint &end, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext);
+extern bool b_get_arc_12(BPoint &radius, BPoint &start, BPoint &end, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext);
 
 
 #define SWAP(CLASS, a, b)	\
@@ -59,7 +59,7 @@ extern bool bhapi_get_arc_12(BPoint &radius, BPoint &start, BPoint &end, b_int32
 	} while(false)
 
 
-class _LOCAL BRenderObject {
+class LOCAL_BHAPI BRenderObject {
 public:
 	BRenderObject();
 	virtual ~BRenderObject();
@@ -104,7 +104,7 @@ BRenderObject::cmp(const void *objectA, const void *objectB)
 }
 
 
-class _LOCAL BRenderLine : public BRenderObject {
+class LOCAL_BHAPI BRenderLine : public BRenderObject {
 public:
 	BRenderLine(BPoint start, BPoint end);
 
@@ -175,7 +175,7 @@ BRenderLine::Next()
 }
 
 
-class _LOCAL BRenderLine2 : public BRenderObject {
+class LOCAL_BHAPI BRenderLine2 : public BRenderObject {
 public:
 	BRenderLine2(BPoint pt0, BPoint pt1, BPoint pt2);
 
@@ -276,7 +276,7 @@ BRenderLine2::Next()
 }
 
 
-class _LOCAL BRenderTriangle : public BRenderLine2 {
+class LOCAL_BHAPI BRenderTriangle : public BRenderLine2 {
 public:
 	BRenderTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge);
 
@@ -971,7 +971,7 @@ BRender::StrokeEllipse(BRect rect, b_pattern pattern)
 		xCenter = (b_int32)center.x;
 		yCenter = (b_int32)center.y;
 
-		while(bhapi_get_arc_12(radius, start, end, x, y, radius2, deltaNext))
+		while(b_get_arc_12(radius, start, end, x, y, radius2, deltaNext))
 		{
 			if(x > 0) break;
 
@@ -1013,7 +1013,7 @@ BRender::FillEllipse(BRect rect, bool stroke_edge, b_pattern pattern)
 
 	while(true)
 	{
-		bool status = bhapi_get_arc_12(radius, start, end, x, y, radius2, deltaNext);
+		bool status = b_get_arc_12(radius, start, end, x, y, radius2, deltaNext);
 
 		if(first)
 		{
@@ -1168,7 +1168,7 @@ BRender::StrokeArc(BRect rect, BPoint start, BPoint end, b_pattern pattern)
 }
 
 
-static bool bhapi_get_line_intersection(BPoint line0_start, BPoint line0_end, BPoint line1_start, BPoint line1_end,
+static bool b_get_line_intersection(BPoint line0_start, BPoint line0_end, BPoint line1_start, BPoint line1_end,
 				      BPoint *pt, bool line0_extend = false, bool line1_extend = false)
 {
 	if(pt == NULL) return false;
@@ -1255,7 +1255,7 @@ static void include_region(b_int64 *region, b_int32 *count, b_int32 minX, b_int3
 #undef INTERSECTS
 
 
-static void bhapi_stroke_objects(BRender *render, BList *objects, b_pattern pattern)
+static void b_stroke_objects(BRender *render, BList *objects, b_pattern pattern)
 {
 	if(objects->CountItems() <= 0) return;
 
@@ -1356,7 +1356,7 @@ BRender::StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed, b_pat
 			if(lines.AddItem(aLine) == false) {delete aLine; break;}
 		}
 
-		bhapi_stroke_objects(this, &lines, pattern);
+		b_stroke_objects(this, &lines, pattern);
 	}
 }
 
@@ -1370,7 +1370,7 @@ BRender::FillPolygon(const BPolygon *aPolygon, bool stroke_edge, b_pattern patte
 
 
 #if 0
-static bool bhapi_triangle_contains(BPoint pt0, BPoint pt1, BPoint pt2, BPoint aPt, bool ignore_edge)
+static bool b_triangle_contains(BPoint pt0, BPoint pt1, BPoint pt2, BPoint aPt, bool ignore_edge)
 {
 	if(aPt == pt0 || aPt == pt1 || aPt == pt2) return(ignore_edge ? false : true);
 
@@ -1383,9 +1383,9 @@ static bool bhapi_triangle_contains(BPoint pt0, BPoint pt1, BPoint pt2, BPoint a
 	center.x = pt0.x / 3.f + pt1.x / 3.f + pt2.x / 3.f;
 	center.y = pt0.y / 3.f + pt1.y / 3.f + pt2.y / 3.f;
 
-	if(bhapi_get_line_intersection(aPt, center, pt0, pt1, &tmp)) return(ignore_edge ? false : tmp == aPt);
-	if(bhapi_get_line_intersection(aPt, center, pt0, pt2, &tmp)) return(ignore_edge ? false : tmp == aPt);
-	if(bhapi_get_line_intersection(aPt, center, pt1, pt2, &tmp)) return(ignore_edge ? false : tmp == aPt);
+	if(b_get_line_intersection(aPt, center, pt0, pt1, &tmp)) return(ignore_edge ? false : tmp == aPt);
+	if(b_get_line_intersection(aPt, center, pt0, pt2, &tmp)) return(ignore_edge ? false : tmp == aPt);
+	if(b_get_line_intersection(aPt, center, pt1, pt2, &tmp)) return(ignore_edge ? false : tmp == aPt);
 
 	return true;
 }
@@ -1446,7 +1446,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, b_
 			psPt = *((BPoint*)pts.ItemAt(k - 2));
 			pePt = *((BPoint*)pts.ItemAt(k - 1));
 
-			if(bhapi_get_line_intersection(psPt, pePt, sPt, ePt, &iPt) == false ||
+			if(b_get_line_intersection(psPt, pePt, sPt, ePt, &iPt) == false ||
 			   iPt == sPt || (iPt == ePt && i == pts.CountItems())) continue;
 
 			aPolygon = new BPolygon(&iPt, 1);
@@ -1553,7 +1553,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, b_
 
 	if(readyForDraw)
 	{
-		bhapi_stroke_objects(this, &objects, pattern);
+		b_stroke_objects(this, &objects, pattern);
 	}
 	else
 	{

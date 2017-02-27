@@ -40,7 +40,7 @@
 #define WIN32_AREA_INFO_MAGIC		0xABFC
 
 // return value must be free by "free()"
-static char* bhapi_area_ipc_name(const char *name, const char *domain)
+static char* b_area_ipc_name(const char *name, const char *domain)
 {
 	if(name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH || !domain || strlen(domain) != 4) return NULL;
 
@@ -50,9 +50,9 @@ static char* bhapi_area_ipc_name(const char *name, const char *domain)
 }
 
 
-class bhapi_win32_area_locker_t {
+class b_win32_area_locker_t {
 public:
-	bhapi_win32_area_locker_t()
+	b_win32_area_locker_t()
 	{
 		const char *lockerName = "_bhapi_area_global_";
         if((iLocker = OpenMutexA(MUTEX_ALL_ACCESS, FALSE, lockerName)) == NULL)
@@ -60,7 +60,7 @@ public:
 		if(iLocker == NULL) BHAPI_ERROR("[KERNEL]: Can't initialize global area!");
 	}
 
-	~bhapi_win32_area_locker_t()
+	~b_win32_area_locker_t()
 	{
 		if(iLocker) CloseHandle(iLocker);
 	}
@@ -71,7 +71,7 @@ public:
 	HANDLE iLocker;
 };
 
-static bhapi_win32_area_locker_t __bhapi_area_locker__;
+static b_win32_area_locker_t __bhapi_area_locker__;
 
 static void _BHAPI_LOCK_AREA_()
 {
@@ -84,25 +84,25 @@ static void _BHAPI_UNLOCK_AREA_()
 }
 
 
-typedef struct bhapi_win32_area_info_t {
+typedef struct b_win32_area_info_t {
 	b_int32		magic;
 	bool		closed;
 	size_t		length;
-} bhapi_win32_area_info_t;
+} b_win32_area_info_t;
 
 
-typedef struct bhapi_win32_area_t {
-	bhapi_win32_area_t()
+typedef struct b_win32_area_t {
+	b_win32_area_t()
 		: name(NULL), domain(NULL), ipc_name(NULL), prot(0), length(0), addr(NULL), mapping(NULL), openedIPC(false), created(false)
 	{
 	}
 
-	~bhapi_win32_area_t()
+	~b_win32_area_t()
 	{
 		if(created)
 		{
 			created = false;
-			bhapi_delete_area((void*)this);
+			b_delete_area((void*)this);
 		}
 	}
 
@@ -115,18 +115,18 @@ typedef struct bhapi_win32_area_t {
 	HANDLE		mapping;
 	bool		openedIPC;
 	bool		created;
-} bhapi_win32_area_t;
+} b_win32_area_t;
 
 
-IMPEXP_BHAPI void*
-bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 protection, const char *domain, bhapi_area_access area_access)
+EXPORT_BHAPI void*
+b_create_area(const char *name, void **start_addr, size_t size, b_uint32 protection, const char *domain, b_area_access area_access)
 {
 	if(size <= 0) return NULL;
 
-	char *ipc_name = bhapi_area_ipc_name(name, domain);
+	char *ipc_name = b_area_ipc_name(name, domain);
 	if(!ipc_name) return NULL;
 
-	bhapi_win32_area_t *area = new bhapi_win32_area_t();
+	b_win32_area_t *area = new b_win32_area_t();
 	if(!area)
 	{
 		free(ipc_name);
@@ -175,7 +175,7 @@ bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 pro
 	HANDLE handler;
 
 	_BHAPI_LOCK_AREA_();
-    if((handler = CreateFileMappingA(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE | SEC_COMMIT, 0, size + sizeof(bhapi_win32_area_info_t), ipc_name)) == NULL)
+    if((handler = CreateFileMappingA(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE | SEC_COMMIT, 0, size + sizeof(b_win32_area_info_t), ipc_name)) == NULL)
 	{
 		_BHAPI_UNLOCK_AREA_();
 		BHAPI_DEBUG("[KERNEL]: %s --- Can't create area : CreateFileMapping failed.", __PRETTY_FUNCTION__);
@@ -198,11 +198,11 @@ bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 pro
 		return NULL;
 	}
 
-	bhapi_win32_area_info_t area_info;
+	b_win32_area_info_t area_info;
 	area_info.magic = WIN32_AREA_INFO_MAGIC;
 	area_info.closed = false;
 	area_info.length = size;
-	memcpy(area->addr, &area_info, sizeof(bhapi_win32_area_info_t));
+	memcpy(area->addr, &area_info, sizeof(b_win32_area_info_t));
 
 	area->length = size;
 	area->mapping = handler;
@@ -213,18 +213,18 @@ bhapi_create_area(const char *name, void **start_addr, size_t size, b_uint32 pro
 
 	_BHAPI_UNLOCK_AREA_();
 
-	if(start_addr) *start_addr = (void*)((char*)area->addr + sizeof(bhapi_win32_area_info_t));
+	if(start_addr) *start_addr = (void*)((char*)area->addr + sizeof(b_win32_area_info_t));
 	return area;
 }
 
 
-IMPEXP_BHAPI void*
-bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char *domain)
+EXPORT_BHAPI void*
+b_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char *domain)
 {
-	char *ipc_name = bhapi_area_ipc_name(name, domain);
+	char *ipc_name = b_area_ipc_name(name, domain);
 	if(!ipc_name) return NULL;
 
-	bhapi_win32_area_t *area = new bhapi_win32_area_t();
+	b_win32_area_t *area = new b_win32_area_t();
 	if(!area)
 	{
 		free(ipc_name);
@@ -257,9 +257,9 @@ bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const 
 		return NULL;
 	}
 
-	bhapi_win32_area_info_t area_info;
-	bzero(&area_info, sizeof(bhapi_win32_area_info_t));
-	memcpy(&area_info, area->addr, sizeof(bhapi_win32_area_info_t));
+	b_win32_area_info_t area_info;
+	bzero(&area_info, sizeof(b_win32_area_info_t));
+	memcpy(&area_info, area->addr, sizeof(b_win32_area_info_t));
 	if(area_info.magic != WIN32_AREA_INFO_MAGIC || area_info.closed)
 	{
 		BHAPI_WARNING("[KERNEL]: %s --- FileMapping(%s) seem not created by BHAPI", __PRETTY_FUNCTION__, ipc_name);
@@ -281,25 +281,25 @@ bhapi_clone_area(const char *name, void **dest_addr, b_uint32 protection, const 
 
 	_BHAPI_UNLOCK_AREA_();
 
-	if(dest_addr) *dest_addr = (void*)((char*)area->addr + sizeof(bhapi_win32_area_info_t));
+	if(dest_addr) *dest_addr = (void*)((char*)area->addr + sizeof(b_win32_area_info_t));
 	return area;
 }
 
 
-IMPEXP_BHAPI void*
-bhapi_clone_area_by_source(void *source_data, void **dest_addr, b_uint32 protection)
+EXPORT_BHAPI void*
+b_clone_area_by_source(void *source_data, void **dest_addr, b_uint32 protection)
 {
-	bhapi_win32_area_t *source_area = (bhapi_win32_area_t*)source_data;
+	b_win32_area_t *source_area = (b_win32_area_t*)source_data;
 	if(!source_area) return NULL;
 
-	return bhapi_clone_area(source_area->name, dest_addr, protection, source_area->domain);
+	return b_clone_area(source_area->name, dest_addr, protection, source_area->domain);
 }
 
 
-IMPEXP_BHAPI b_status_t
-bhapi_get_area_info(void *data, bhapi_area_info *info)
+EXPORT_BHAPI b_status_t
+b_get_area_info(void *data, b_area_info *info)
 {
-	bhapi_win32_area_t *area = (bhapi_win32_area_t*)data;
+	b_win32_area_t *area = (b_win32_area_t*)data;
 	if(!area || !info) return B_BAD_VALUE;
 	if(!area->name || *(area->name) == 0 || strlen(area->name) > B_OS_NAME_LENGTH ||
 	   !area->domain || strlen(area->domain) != 4 ||
@@ -312,16 +312,16 @@ bhapi_get_area_info(void *data, bhapi_area_info *info)
 	strcpy(info->name, area->name);
 	strcpy(info->domain, area->domain);
 	info->protection = area->prot;
-	info->address = (void*)((char*)area->addr + sizeof(bhapi_win32_area_info_t));
+	info->address = (void*)((char*)area->addr + sizeof(b_win32_area_info_t));
 
 	return B_OK;
 }
 
 
-IMPEXP_BHAPI b_status_t
-bhapi_delete_area(void *data)
+EXPORT_BHAPI b_status_t
+b_delete_area(void *data)
 {
-	bhapi_win32_area_t *area = (bhapi_win32_area_t*)data;
+	b_win32_area_t *area = (b_win32_area_t*)data;
 	if(!area) return B_BAD_VALUE;
 
 	if(!area->openedIPC && area->mapping && area->addr)
@@ -335,13 +335,13 @@ bhapi_delete_area(void *data)
 		}
 
 		_BHAPI_LOCK_AREA_();
-		bhapi_win32_area_info_t area_info;
-		bzero(&area_info, sizeof(bhapi_win32_area_info_t));
-		memcpy(&area_info, area->addr, sizeof(bhapi_win32_area_info_t));
+		b_win32_area_info_t area_info;
+		bzero(&area_info, sizeof(b_win32_area_info_t));
+		memcpy(&area_info, area->addr, sizeof(b_win32_area_info_t));
 		if(area_info.magic == WIN32_AREA_INFO_MAGIC && !area_info.closed)
 		{
 			area_info.closed = true;
-			memcpy(area->addr, &area_info, sizeof(bhapi_win32_area_info_t));
+			memcpy(area->addr, &area_info, sizeof(b_win32_area_info_t));
 		}
 		_BHAPI_UNLOCK_AREA_();
 	}
@@ -364,10 +364,10 @@ bhapi_delete_area(void *data)
 }
 
 
-IMPEXP_BHAPI b_status_t
-bhapi_delete_area_etc(void *data, bool no_clone)
+EXPORT_BHAPI b_status_t
+b_delete_area_etc(void *data, bool no_clone)
 {
-	bhapi_win32_area_t *area = (bhapi_win32_area_t*)data;
+	b_win32_area_t *area = (b_win32_area_t*)data;
 	if(!area) return B_BAD_VALUE;
 
 	if(no_clone && (area->openedIPC ? (area->prot & B_WRITE_AREA) : true) && area->mapping && area->addr)
@@ -381,13 +381,13 @@ bhapi_delete_area_etc(void *data, bool no_clone)
 		}
 
 		_BHAPI_LOCK_AREA_();
-		bhapi_win32_area_info_t area_info;
-		bzero(&area_info, sizeof(bhapi_win32_area_info_t));
-		memcpy(&area_info, area->addr, sizeof(bhapi_win32_area_info_t));
+		b_win32_area_info_t area_info;
+		bzero(&area_info, sizeof(b_win32_area_info_t));
+		memcpy(&area_info, area->addr, sizeof(b_win32_area_info_t));
 		if(area_info.magic == WIN32_AREA_INFO_MAGIC && !area_info.closed)
 		{
 			area_info.closed = true;
-			memcpy(area->addr, &area_info, sizeof(bhapi_win32_area_info_t));
+			memcpy(area->addr, &area_info, sizeof(b_win32_area_info_t));
 		}
 		_BHAPI_UNLOCK_AREA_();
 	}
@@ -410,16 +410,16 @@ bhapi_delete_area_etc(void *data, bool no_clone)
 }
 
 
-IMPEXP_BHAPI b_status_t
-bhapi_resize_area(void *data, void **start_addr, size_t new_size)
+EXPORT_BHAPI b_status_t
+b_resize_area(void *data, void **start_addr, size_t new_size)
 {
 	BHAPI_WARNING("%s: Not supported.", __PRETTY_FUNCTION__);
 	return B_ERROR;
 }
 
 
-IMPEXP_BHAPI b_status_t
-bhapi_set_area_protection(void *data, b_uint32 new_protection)
+EXPORT_BHAPI b_status_t
+b_set_area_protection(void *data, b_uint32 new_protection)
 {
 	BHAPI_WARNING("%s: Not supported.", __PRETTY_FUNCTION__);
 	return B_ERROR;

@@ -99,7 +99,7 @@ BColorControl::GetPreferredSize(float *width, float *height)
 
 	if(height)
 	{
-		b_font_height fontHeight;
+		bhapi::font_height fontHeight;
 		font.GetHeight(&fontHeight);
 
 		*height = max_c(61.f, 3.f * (fontHeight.ascent + fontHeight.descent) + 17.f);
@@ -150,7 +150,7 @@ BColorControl::_ColorsFrame()
 
 	if(r.IsValid())
 	{
-		b_font_height fontHeight;
+		bhapi::font_height fontHeight;
 		GetFontHeight(&fontHeight);
 
 		r.bottom = r.top + max_c(61.f, 3.f * (fontHeight.ascent + fontHeight.descent) + 17.f);
@@ -170,7 +170,7 @@ BColorControl::_DescriptionFrame()
 	if(r.IsValid())
 	{
 		BFont font;
-		b_font_height fontHeight;
+		bhapi::font_height fontHeight;
 		GetFont(&font);
 		font.GetHeight(&fontHeight);
 
@@ -262,7 +262,7 @@ BColorControl::_DrawDescription(BRect r)
 	r &= rect;
 	if(r.IsValid() == false) return;
 
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 	GetFontHeight(&fontHeight);
 
 	PushState();

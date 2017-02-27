@@ -34,7 +34,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _LOCAL BSimpleWM {
+class LOCAL_BHAPI BSimpleWM {
 public:
 	BSimpleWM();
 	virtual ~BSimpleWM();

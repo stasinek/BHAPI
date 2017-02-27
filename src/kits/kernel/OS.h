@@ -73,11 +73,11 @@ enum {
 #endif /* BHAPI_KERNEL__H */
 
 /* time functions */
-#define b_snooze(microseconds)			bhapi_snooze(microseconds)
-#define b_snooze_until(time, timebase)		bhapi_snooze_until(time, timebase)
-#define b_real_time_clock()			bhapi_real_time_clock()
-#define b_real_time_clock_usecs()		bhapi_real_time_clock_usecs()
-#define b_system_time()				bhapi_system_time()
+#define b_snooze(microseconds)			bhapi::snooze(microseconds)
+#define b_snooze_until(time, timebase)		bhapi::snooze_until(time, timebase)
+#define b_real_time_clock()			bhapi::real_time_clock()
+#define b_real_time_clock_usecs()		bhapi::real_time_clock_usecs()
+#define b_system_time()				bhapi::system_time()
 
 #endif /* BHAPI_OS__H */
 

@@ -470,7 +470,7 @@ int main(int argc, char **argv)
 		}
 
 		BSimpleXmlNode node(NULL, NULL);
-		if(bhapi_parse_simple_xml(xml_buffer.String(), &node) != B_OK)
+		if(b_parse_simple_xml(xml_buffer.String(), &node) != B_OK)
 		{
 			BHAPI_OUTPUT("[%s] --- Unable to parse.\n", prog.Leaf());
 			exit(1);

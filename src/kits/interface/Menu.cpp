@@ -44,7 +44,7 @@
 
 class ESubmenuView;
 
-class _LOCAL ESubmenuWindow : public BWindow {
+class LOCAL_BHAPI ESubmenuWindow : public BWindow {
 public:
 	ESubmenuWindow(BPoint where, BMenu *menu);
 	virtual ~ESubmenuWindow();
@@ -358,7 +358,7 @@ BMenu::FindItem(b_uint32 command) const
 }
 
 
-inline bool bhapi_comapre_menuitem_name(const char *name1, const char *name2)
+inline bool b_comapre_menuitem_name(const char *name1, const char *name2)
 {
 	if(!name1 && !name2) return true;
 	if(!name1 || !name2) return false;
@@ -375,7 +375,7 @@ BMenu::FindItem(const char *name) const
 	{
 		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
-		if(bhapi_comapre_menuitem_name(item->Label(), name)) return item;
+		if(b_comapre_menuitem_name(item->Label(), name)) return item;
 		if(item->fSubmenu == NULL) continue;
 
 		BMenuItem *found = item->fSubmenu->FindItem(name);
@@ -570,7 +570,7 @@ BMenu::MessageReceived(BMessage *msg)
 				else
 				{
 					b_uint32 what;
-					if(msg->FindInt32("etk:menu_orig_what", (b_int32*)&what))
+					if(msg->FindInt32("BHAPI:menu_orig_what", (b_int32*)&what))
 					{
 						BMessage aMsg = *msg;
 						aMsg.what = what;
@@ -655,7 +655,7 @@ BMenu::MouseUp(BPoint where)
 					if(item->Message() != NULL)
 					{
 						msg = *(item->Message());
-						msg.AddInt32("etk:menu_orig_what", msg.what);
+						msg.AddInt32("BHAPI:menu_orig_what", msg.what);
 						msg.what = _MENU_EVENT_;
 					}
 					msg.AddInt64("when", b_real_time_clock_usecs());
@@ -672,7 +672,7 @@ BMenu::MouseUp(BPoint where)
 				if(item->Message() != NULL)
 				{
 					msg = *(item->Message());
-					msg.AddInt32("etk:menu_orig_what", msg.what);
+					msg.AddInt32("BHAPI:menu_orig_what", msg.what);
 					msg.what = _MENU_EVENT_;
 				}
 				msg.AddInt64("when", b_real_time_clock_usecs());
@@ -926,7 +926,7 @@ BMenu::KeyUp(const char *bytes, b_int32 numBytes)
 						if(selectedItem->Message() != NULL)
 						{
 							msg = *(selectedItem->Message());
-							msg.AddInt32("etk:menu_orig_what", msg.what);
+							msg.AddInt32("BHAPI:menu_orig_what", msg.what);
 							msg.what = _MENU_EVENT_;
 						}
 						msg.AddInt64("when", b_real_time_clock_usecs());
@@ -943,7 +943,7 @@ BMenu::KeyUp(const char *bytes, b_int32 numBytes)
 					if(selectedItem->Message() != NULL)
 					{
 						msg = *(selectedItem->Message());
-						msg.AddInt32("etk:menu_orig_what", msg.what);
+						msg.AddInt32("BHAPI:menu_orig_what", msg.what);
 						msg.what = _MENU_EVENT_;
 					}
 					msg.AddInt64("when", b_real_time_clock_usecs());
@@ -1640,7 +1640,7 @@ BMenu::ClosePopUp()
 
 		RemoveSelf();
 
-		if(win->Thread() == bhapi_get_current_thread_id())
+		if(win->Thread() == b_get_current_thread_id())
 		{
 			win->Lock();
 			win->Quit();

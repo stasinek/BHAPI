@@ -40,7 +40,7 @@ class BMessageBody;
 class BMessageNode;
 
 
-class _LOCAL BMessageItem
+class LOCAL_BHAPI BMessageItem
 {
 public:
     BMessageItem(void *data, size_t nBytes, bool fixedSize = true);
@@ -61,7 +61,7 @@ private:
 };
 
 
-class _LOCAL BMessageBody
+class LOCAL_BHAPI BMessageBody
 {
 public:
     BMessageBody();

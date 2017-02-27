@@ -31,6 +31,9 @@
 #include "StringMe.h"
 #include "StringArray.h"
 
+#undef __STRICT_ANSI__
+#include <string.h>
+
 #include "../kernel/Debug.h"
 
 #ifndef HAVE_VA_COPY
@@ -78,14 +81,20 @@
 #ifndef HAVE_STRNCASECMP
 	#ifdef _MSC_VER
 	#define b_strncasecmp(a, b, c)	_strnicmp(a, b, c)
+	#define b_strcasecmp(a, b)	_stricmp(a, b)
 	#endif
 #else
 	#define b_strncasecmp(a, b, c)	strncasecmp(a, b, c)
+	#define b_strcasecmp(a, b)	strcasecmp(a, b)
 #endif // HAVE_STRNCASECMP
 
 int __cdecl __MINGW_NOTHROW	b_strncasecmp(const char *a, const char *b, size_t c)
 {
-    return strncmp(a,b,c);
+   return _strnicmp(a,b,c);
+}
+int __cdecl __MINGW_NOTHROW	b_strcasecmp(const char *a, const char *b)
+{
+   return _stricmp(a,b);
 }
 
 // long double
@@ -134,7 +143,7 @@ static long double b_modfl(long double value, long double *iptr)
 #endif // BHAPI_SUPPORT_LONG_DOUBLE
 
 
-IMPEXP_BHAPI char* b_strdup_dirty(const char* src, b_int32 length)
+EXPORT_BHAPI char* b_strdup_dirty(const char* src, b_int32 length)
 {
 	if(src == NULL || *src == 0 || length == 0) return NULL;
 
@@ -2946,7 +2955,7 @@ b_int32 b_printf_double(BString &str, long double value, int precision_width, b_
 
 extern "C" {
 
-IMPEXP_BHAPI char* b_strndup(const char* src, b_int32 length)
+EXPORT_BHAPI char* b_strndup(const char* src, b_int32 length)
 {
 	char *dest;
 	b_int32 len = 0;
@@ -2969,13 +2978,13 @@ IMPEXP_BHAPI char* b_strndup(const char* src, b_int32 length)
 }
 
 
-IMPEXP_BHAPI char* b_strdup(const char* src)
+EXPORT_BHAPI char* b_strdup(const char* src)
 {
 	return b_strndup(src, -1);
 }
 
 
-IMPEXP_BHAPI char* b_strdup_vprintf(const char *format, va_list ap)
+EXPORT_BHAPI char* b_strdup_vprintf(const char *format, va_list ap)
 {
 	va_list args;
     BString str(format);
@@ -3551,7 +3560,7 @@ IMPEXP_BHAPI char* b_strdup_vprintf(const char *format, va_list ap)
 }
 
 
-IMPEXP_BHAPI char* b_strdup_printf(const char *format, ...)
+EXPORT_BHAPI char* b_strdup_printf(const char *format, ...)
 {
 	va_list args;
 	char *buffer = NULL;
@@ -3568,7 +3577,7 @@ IMPEXP_BHAPI char* b_strdup_printf(const char *format, ...)
 }
 
 
-IMPEXP_BHAPI bool b_utf8_is_token(const char *str)
+EXPORT_BHAPI bool b_utf8_is_token(const char *str)
 {
 	if(str == NULL) return true;
 
@@ -3578,13 +3587,13 @@ IMPEXP_BHAPI bool b_utf8_is_token(const char *str)
 
 
 
-IMPEXP_BHAPI b_int32 b_utf8_strlen(const char *str)
+EXPORT_BHAPI b_int32 b_utf8_strlen(const char *str)
 {
 	return b_utf8_strlen_etc(str, -1);
 }
 
 
-_LOCAL b_int32 _e_utf8_strlen_etc(const char *str, b_int32 nbytes, bool check)
+LOCAL_BHAPI b_int32 _e_utf8_strlen_etc(const char *str, b_int32 nbytes, bool check)
 {
 	if(str == NULL || *str == 0 || nbytes == 0) return 0;
 
@@ -3629,19 +3638,19 @@ _LOCAL b_int32 _e_utf8_strlen_etc(const char *str, b_int32 nbytes, bool check)
 }
 
 
-IMPEXP_BHAPI b_int32 b_utf8_strlen_etc(const char *str, b_int32 nbytes)
+EXPORT_BHAPI b_int32 b_utf8_strlen_etc(const char *str, b_int32 nbytes)
 {
 	return _e_utf8_strlen_etc(str, nbytes, true);
 }
 
 
-IMPEXP_BHAPI b_int32 b_utf8_strlen_fast(const char *str, b_int32 nbytes)
+EXPORT_BHAPI b_int32 b_utf8_strlen_fast(const char *str, b_int32 nbytes)
 {
 	return _e_utf8_strlen_etc(str, nbytes, false);
 }
 
 
-IMPEXP_BHAPI const char* b_utf8_at(const char *str, b_int32 index, b_uint8 *length)
+EXPORT_BHAPI const char* b_utf8_at(const char *str, b_int32 index, b_uint8 *length)
 {
 	if(length) *length = 0;
 	if(index < 0 || str == NULL || strlen(str) <= (size_t)index) return NULL;
@@ -3682,7 +3691,7 @@ IMPEXP_BHAPI const char* b_utf8_at(const char *str, b_int32 index, b_uint8 *leng
 }
 
 
-IMPEXP_BHAPI const char* b_utf8_next(const char *str, b_uint8 *length)
+EXPORT_BHAPI const char* b_utf8_next(const char *str, b_uint8 *length)
 {
 	if(length) *length = 0;
 	if(str == NULL || *str == 0) return NULL;
@@ -3725,7 +3734,7 @@ IMPEXP_BHAPI const char* b_utf8_next(const char *str, b_uint8 *length)
 }
 
 
-IMPEXP_BHAPI b_unichar16* b_utf8_convert_to_unicode(const char *str, b_int32 length)
+EXPORT_BHAPI b_unichar16* b_utf8_convert_to_unicode(const char *str, b_int32 length)
 {
 	if(str == NULL || *str == 0 || length == 0) return NULL;
 
@@ -3805,7 +3814,7 @@ IMPEXP_BHAPI b_unichar16* b_utf8_convert_to_unicode(const char *str, b_int32 len
 }
 
 
-IMPEXP_BHAPI b_unichar32* b_utf8_convert_to_utf32(const char *str, b_int32 length)
+EXPORT_BHAPI b_unichar32* b_utf8_convert_to_utf32(const char *str, b_int32 length)
 {
 	if(str == NULL || *str == 0 || length == 0) return NULL;
 
@@ -3875,13 +3884,13 @@ IMPEXP_BHAPI b_unichar32* b_utf8_convert_to_utf32(const char *str, b_int32 lengt
 }
 
 
-IMPEXP_BHAPI b_int32 b_unicode_strlen(const b_unichar16*ustr)
+EXPORT_BHAPI b_int32 b_unicode_strlen(const b_unichar16*ustr)
 {
 	return b_unicode_strlen_etc(ustr, -1, true);
 }
 
 
-IMPEXP_BHAPI b_int32 b_unicode_strlen_etc(const b_unichar16*ustr, b_int32 nchars, bool utf16_style)
+EXPORT_BHAPI b_int32 b_unicode_strlen_etc(const b_unichar16*ustr, b_int32 nchars, bool utf16_style)
 {
 	if(ustr == NULL || nchars == 0) return 0;
 
@@ -3912,7 +3921,7 @@ IMPEXP_BHAPI b_int32 b_unicode_strlen_etc(const b_unichar16*ustr, b_int32 nchars
 }
 
 
-IMPEXP_BHAPI const b_unichar16* b_unicode_at(const b_unichar16* ustr, b_int32 index, bool *utf16)
+EXPORT_BHAPI const b_unichar16* b_unicode_at(const b_unichar16* ustr, b_int32 index, bool *utf16)
 {
 	if(utf16) *utf16 = false;
 	if(ustr == NULL || index < 0) return NULL;
@@ -3947,7 +3956,7 @@ IMPEXP_BHAPI const b_unichar16* b_unicode_at(const b_unichar16* ustr, b_int32 in
 }
 
 
-IMPEXP_BHAPI const b_unichar16* b_unicode_next(const b_unichar16* ustr, bool *utf16)
+EXPORT_BHAPI const b_unichar16* b_unicode_next(const b_unichar16* ustr, bool *utf16)
 {
 	if(utf16) *utf16 = false;
 	if(ustr == NULL) return NULL;
@@ -3972,7 +3981,7 @@ IMPEXP_BHAPI const b_unichar16* b_unicode_next(const b_unichar16* ustr, bool *ut
 }
 
 
-IMPEXP_BHAPI char* b_unicode_convert_to_utf8(const b_unichar16*str, b_int32 ulength)
+EXPORT_BHAPI char* b_unicode_convert_to_utf8(const b_unichar16*str, b_int32 ulength)
 {
 	if(str == NULL || *str == 0 || ulength == 0) return NULL;
 
@@ -4045,7 +4054,7 @@ IMPEXP_BHAPI char* b_unicode_convert_to_utf8(const b_unichar16*str, b_int32 ulen
 }
 
 
-IMPEXP_BHAPI b_unichar32* b_unicode_convert_to_utf32(const b_unichar16*str, b_int32 ulength)
+EXPORT_BHAPI b_unichar32* b_unicode_convert_to_utf32(const b_unichar16*str, b_int32 ulength)
 {
 	if(str == NULL || *str == 0 || ulength == 0) return NULL;
 
@@ -4089,13 +4098,13 @@ IMPEXP_BHAPI b_unichar32* b_unicode_convert_to_utf32(const b_unichar16*str, b_in
 }
 
 
-IMPEXP_BHAPI b_int32 b_utf32_strlen(const b_unichar32 *ustr)
+EXPORT_BHAPI b_int32 b_utf32_strlen(const b_unichar32 *ustr)
 {
 	return b_utf32_strlen_etc(ustr, -1);
 }
 
 
-IMPEXP_BHAPI b_int32 b_utf32_strlen_etc(const b_unichar32 *ustr, b_int32 nchars)
+EXPORT_BHAPI b_int32 b_utf32_strlen_etc(const b_unichar32 *ustr, b_int32 nchars)
 {
 	if(ustr == NULL || nchars == 0) return 0;
 
@@ -4113,7 +4122,7 @@ IMPEXP_BHAPI b_int32 b_utf32_strlen_etc(const b_unichar32 *ustr, b_int32 nchars)
 }
 
 
-IMPEXP_BHAPI const b_unichar32* b_utf32_at(const b_unichar32* ustr, b_int32 index)
+EXPORT_BHAPI const b_unichar32* b_utf32_at(const b_unichar32* ustr, b_int32 index)
 {
 	if(ustr == NULL || index < 0) return NULL;
 
@@ -4134,7 +4143,7 @@ IMPEXP_BHAPI const b_unichar32* b_utf32_at(const b_unichar32* ustr, b_int32 inde
 }
 
 
-IMPEXP_BHAPI const b_unichar32* b_utf32_next(const b_unichar32* ustr)
+EXPORT_BHAPI const b_unichar32* b_utf32_next(const b_unichar32* ustr)
 {
 	if(ustr == NULL) return NULL;
 
@@ -4150,7 +4159,7 @@ IMPEXP_BHAPI const b_unichar32* b_utf32_next(const b_unichar32* ustr)
 }
 
 
-IMPEXP_BHAPI char* b_utf32_convert_to_utf8(const b_unichar32 *str, b_int32 ulength)
+EXPORT_BHAPI char* b_utf32_convert_to_utf8(const b_unichar32 *str, b_int32 ulength)
 {
 	if(str == NULL || *str == 0 || ulength == 0) return NULL;
 
@@ -4216,7 +4225,7 @@ IMPEXP_BHAPI char* b_utf32_convert_to_utf8(const b_unichar32 *str, b_int32 uleng
 }
 
 
-IMPEXP_BHAPI b_unichar16* b_utf32_convert_to_unicode(const b_unichar32 *str, b_int32 ulength)
+EXPORT_BHAPI b_unichar16* b_utf32_convert_to_unicode(const b_unichar32 *str, b_int32 ulength)
 {
 	if(str == NULL || *str == 0 || ulength == 0) return NULL;
 

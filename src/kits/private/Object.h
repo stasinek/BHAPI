@@ -33,7 +33,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _LOCAL BObject
+class LOCAL_BHAPI BObject
 {
 public:
     BObject();
@@ -49,7 +49,7 @@ private:
     b_uint64 fVitalities;
 };
 
-_LOCAL void bhapi_delete_object(void *object);
+LOCAL_BHAPI void bhapi::delete_object(void *object);
 
 #endif /* __cplusplus */
 

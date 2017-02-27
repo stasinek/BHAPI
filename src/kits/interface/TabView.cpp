@@ -182,7 +182,7 @@ BTab::DrawLabel(BView* owner, BRect frame)
 	if(!fEnabled) textColor.disable(owner->ViewColor());
 
 	BFont font;
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 	owner->GetFont(&font);
 	font.GetHeight(&fontHeight);
 
@@ -238,7 +238,7 @@ BTabView::BTabView(BRect frame, const char *name,
 {
 	fTabWidth = tabWidth;
 
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 	GetFontHeight(&fontHeight);
 	fTabHeight = fontHeight.ascent + fontHeight.descent + 2.f;
 

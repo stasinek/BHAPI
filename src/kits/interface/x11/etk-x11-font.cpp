@@ -62,11 +62,11 @@ public:
 #endif
 
 	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold, b_int32 length) const;
-	virtual void GetHeight(b_font_height *height, float size, float shear, bool bold) const;
+	virtual void GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const;
 	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold, b_int32 length);
 
-	virtual b_font_detach_callback* Attach(void (*callback)(void*), void *data);
-	virtual bool Detach(b_font_detach_callback *callback);
+	virtual bhapi::font_detach_callback* Attach(void (*callback)(void*), void *data);
+	virtual bool Detach(bhapi::font_detach_callback *callback);
 
 private:
 	typedef struct _font_data_ {
@@ -129,7 +129,7 @@ static bool _bhapi_add_x_font_engine(EXGraphicsEngine *x11Engine, BFontX11 *engi
 		if(!engine_list) return false;
 
 		if(engine_list->AddItem(engine) == false) return false;
-		if(bhapi_font_add(engine->Family(), engine->Style(), engine)) return true;
+		if(bhapi::font_add(engine->Family(), engine->Style(), engine)) return true;
 		engine_list->RemoveItem(engine_list->CountItems() - 1);
 		return false;
 	}
@@ -139,7 +139,7 @@ static bool _bhapi_add_x_font_engine(EXGraphicsEngine *x11Engine, BFontX11 *engi
 
 	if(x11Engine->xFontEngines.AddItem(engine->Family(), engine_list) == false ||
 	   engine_list->AddItem(engine) == false ||
-	   bhapi_font_add(engine->Family(), engine->Style(), engine) == false)
+	   bhapi::font_add(engine->Family(), engine->Style(), engine) == false)
 	{
 		if(engine_list->CountItems() > 0) x11Engine->xFontEngines.RemoveItem(x11Engine->xFontEngines.CountItems() - 1);
 		delete engine_list;
@@ -444,7 +444,7 @@ BFontX11::~BFontX11()
 }
 
 
-b_font_detach_callback*
+bhapi::font_detach_callback*
 BFontX11::Attach(void (*callback)(void*), void *data)
 {
 	if(fX11Engine == NULL) return NULL;
@@ -459,7 +459,7 @@ BFontX11::Attach(void (*callback)(void*), void *data)
 
 
 bool
-BFontX11::Detach(b_font_detach_callback *callback)
+BFontX11::Detach(bhapi::font_detach_callback *callback)
 {
 	if(fX11Engine == NULL) return false;
 
@@ -730,11 +730,11 @@ BFontX11::StringWidth(const char *string, float size, float spacing, float shear
 
 
 void
-BFontX11::GetHeight(b_font_height *height, float size, float shear, bool bold) const
+BFontX11::GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const
 {
 	if(fX11Engine == NULL || height == NULL) return;
 
-	bzero(height, sizeof(b_font_height));
+	bzero(height, sizeof(bhapi::font_height));
 
 	BAutolock <EXGraphicsEngine> autolock(fX11Engine);
 	if(autolock.IsLocked() == false || fX11Engine->InitCheck() != B_OK) return;

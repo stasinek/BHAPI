@@ -2,214 +2,54 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="default" />
-	<File name="src\kits\support\ClassInfo.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\storage\Entry.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2046" topLine="28" />
+			<Cursor1 position="1646" topLine="16" />
 		</Cursor>
 	</File>
-	<File name="src\kits\app\AppDefs.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\Alert.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1601" topLine="25" />
+			<Cursor1 position="10214" topLine="344" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\unix\etk-image.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\x11\etk-drawing.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2440" topLine="39" />
-		</Cursor>
-	</File>
-	<File name="tools\etkxx-doc.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2756" topLine="45" />
-		</Cursor>
-	</File>
-	<File name="src\kits\interface\win32\etk-win32gdi.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1425" topLine="24" />
-		</Cursor>
-	</File>
-	<File name="src\kits\kernel\thread\posix\etk-semaphore-mach.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="18465" topLine="690" />
-		</Cursor>
-	</File>
-	<File name="src\kits\support\StringMe.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="10558" topLine="217" />
-		</Cursor>
-	</File>
-	<File name="src\kits\interface\View.cpp" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="60818" topLine="2796" />
-		</Cursor>
-	</File>
-	<File name="src\kits\kernel\thread\posix\etk-locker.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="10749" topLine="384" />
-		</Cursor>
-	</File>
-	<File name="src\kits\interface\GraphicsDefs.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4456" topLine="124" />
-		</Cursor>
-	</File>
-	<File name="src\kits\interface\TextView.h" open="1" top="1" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2443" topLine="56" />
-		</Cursor>
-	</File>
-	<File name="src\kits\app\MessageQueue.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="38" />
-		</Cursor>
-	</File>
-	<File name="src\kits\kernel\thread\beos\etk-thread.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="21697" topLine="790" />
-		</Cursor>
-	</File>
-	<File name="src\kits\app\MessageQueue.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3806" topLine="137" />
-		</Cursor>
-	</File>
-	<File name="src\kits\interface\Polygon.h" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2570" topLine="64" />
-		</Cursor>
-	</File>
-	<File name="src\kits\support\Autolock.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1610" topLine="21" />
-		</Cursor>
-	</File>
-	<File name="src\kits\kernel\thread\beos\etk-semaphore.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="19519" topLine="706" />
-		</Cursor>
-	</File>
-	<File name="src\kits\interface\Font.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1829" topLine="27" />
-		</Cursor>
-	</File>
-	<File name="src\kits\support\List.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1559" topLine="26" />
-		</Cursor>
-	</File>
-	<File name="src\kits\storage\FilePanel.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="38783" topLine="1487" />
-		</Cursor>
-	</File>
-	<File name="src\kits\add-ons\font\FreeType2.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="14111" topLine="498" />
-		</Cursor>
-	</File>
-	<File name="src\kits\interface\ListView.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="14194" topLine="672" />
-		</Cursor>
-	</File>
-	<File name="src\kits\kernel\Debug.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2571" topLine="72" />
-		</Cursor>
-	</File>
-	<File name="src\kits\app\Looper.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2131" topLine="41" />
-		</Cursor>
-	</File>
-	<File name="src\kits\BE.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="337" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\kits\kernel\thread\posix\etk-semaphore.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="22011" topLine="826" />
-		</Cursor>
-	</File>
-	<File name="src\kits\add-ons\font\FontEngine.h" open="1" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4756" topLine="116" />
-		</Cursor>
-	</File>
-	<File name="src\kits\kernel\unix\etk-area.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="10810" topLine="407" />
-		</Cursor>
-	</File>
-	<File name="src\kits\app\Application.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3242" topLine="86" />
-		</Cursor>
-	</File>
-	<File name="src\kits\support\Errors.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1602" topLine="24" />
-		</Cursor>
-	</File>
-	<File name="src\kits\kernel\thread\posix\etk-thread.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="26401" topLine="951" />
-		</Cursor>
-	</File>
-	<File name="src\kits\add-ons\theme\ThemeEngine.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1709" topLine="21" />
-		</Cursor>
-	</File>
-	<File name="src\kits\kernel\thread\win32\etk-thread.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1560" topLine="10" />
-		</Cursor>
-	</File>
-	<File name="src\kits\support\ByteOrder.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1615" topLine="28" />
-		</Cursor>
-	</File>
-	<File name="src\kits\support\Flattenable.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1621" topLine="18" />
-		</Cursor>
-	</File>
-	<File name="src\kits\interface\beos\etk-beos-font.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1562" topLine="18" />
-		</Cursor>
-	</File>
-	<File name="src\kits\app\Message.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="11594" topLine="219" />
+			<Cursor1 position="55034" topLine="1718" />
 		</Cursor>
 	</File>
 	<File name="src\kits\private\Token.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2230" topLine="54" />
+			<Cursor1 position="1806" topLine="36" />
 		</Cursor>
 	</File>
-	<File name="src\kits\app\Looper.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\app\Looper.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2140" topLine="42" />
+			<Cursor1 position="1676" topLine="33" />
 		</Cursor>
 	</File>
-	<File name="src\kits\app\Cursor.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\win32\etk-application.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="8295" topLine="292" />
+			<Cursor1 position="82018" topLine="2143" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\beos\etk-timefuncs.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\thread\win32\etk-semaphore.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2293" topLine="26" />
+			<Cursor1 position="17003" topLine="660" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\TextEditable.h" open="1" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\etk-port.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5048" topLine="108" />
+			<Cursor1 position="19503" topLine="754" />
+		</Cursor>
+	</File>
+	<File name="src\kits\render\ArcGenerator.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8996" topLine="299" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\Kernel.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10044" topLine="224" />
 		</Cursor>
 	</File>
 	<File name="src\kits\support\List.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -217,24 +57,59 @@
 			<Cursor1 position="3475" topLine="74" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\thread\beos\etk-locker.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\directfb\etk-dfb.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="10067" topLine="367" />
+			<Cursor1 position="14371" topLine="309" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\View.h" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\GraphicsDefs.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2477" topLine="71" />
+			<Cursor1 position="1017" topLine="17" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\thread\posix\etk-semaphore-umtx.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\win32\etk-timefuncs.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="18043" topLine="694" />
+			<Cursor1 position="3597" topLine="79" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\layout\LayoutContainer.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\beos\etk-application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2828" topLine="72" />
+			<Cursor1 position="11924" topLine="490" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\thread\posix\etk-semaphore.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="21518" topLine="834" />
+		</Cursor>
+	</File>
+	<File name="src\kits\private\PrivateHandler.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2392" topLine="27" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\x11\etk-x11.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2719" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\thread\win32\etk-locker.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12164" topLine="474" />
+		</Cursor>
+	</File>
+	<File name="src\kits\xml\SimpleXmlParser.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2814" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\app\MessageQueue.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="38" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\Screen.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2260" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\kits\support\Locker.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -242,39 +117,49 @@
 			<Cursor1 position="1678" topLine="24" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\beos\etk-window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\app\MessageQueue.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1561" topLine="21" />
+			<Cursor1 position="3075" topLine="137" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\Theme.cpp" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\PopUpMenu.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3647" topLine="125" />
+			<Cursor1 position="9230" topLine="346" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\Font.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\win32\etk-win32gdi.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4554" topLine="116" />
+			<Cursor1 position="14156" topLine="379" />
 		</Cursor>
 	</File>
-	<File name="src\kits\app\Cursor.h" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\app\Invoker.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2579" topLine="67" />
+			<Cursor1 position="5664" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\support\StringMe.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\support\StringMe.cpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="32757" topLine="1667" />
+			<Cursor1 position="88619" topLine="4205" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\unix\etk-timefuncs.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\private\MessageBody.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1540" topLine="14" />
+			<Cursor1 position="1672" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\ListView.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\thread\posix\etk-thread.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3303" topLine="64" />
+			<Cursor1 position="25480" topLine="954" />
+		</Cursor>
+	</File>
+	<File name="src\kits\app\Message.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="49981" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\beos\etk-pixmap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6096" topLine="188" />
 		</Cursor>
 	</File>
 	<File name="src\kits\support\SimpleLocker.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -282,79 +167,24 @@
 			<Cursor1 position="1698" topLine="18" />
 		</Cursor>
 	</File>
-	<File name="src\kits\support\SupportDefs.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\app\MessageFilter.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="7227" topLine="258" />
+			<Cursor1 position="2039" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\Debug.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\support\SupportDefs.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2834" topLine="87" />
+			<Cursor1 position="7138" topLine="232" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\beos\etk-application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\x11\etk-application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1564" topLine="22" />
+			<Cursor1 position="41867" topLine="1401" />
 		</Cursor>
 	</File>
-	<File name="bhapi_global.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\unix\etk-timefuncs.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="209" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\kits\support\DataIO.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1622" topLine="21" />
-		</Cursor>
-	</File>
-	<File name="src\kits\support\StreamIO.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1612" topLine="25" />
-		</Cursor>
-	</File>
-	<File name="src\kits\kernel\beos\etk-image.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2629" topLine="44" />
-		</Cursor>
-	</File>
-	<File name="src\kits\support\Archivable.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1616" topLine="20" />
-		</Cursor>
-	</File>
-	<File name="src\kits\interface\beos\etk-pixmap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1559" topLine="21" />
-		</Cursor>
-	</File>
-	<File name="src\kits\add-ons\font\FontEngine.cpp" open="1" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4108" topLine="108" />
-		</Cursor>
-	</File>
-	<File name="src\kits\kernel\beos\etk-area.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1557" topLine="19" />
-		</Cursor>
-	</File>
-	<File name="src\kits\support\StringArray.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1621" topLine="30" />
-		</Cursor>
-	</File>
-	<File name="src\kits\interface\Rect.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5527" topLine="220" />
-		</Cursor>
-	</File>
-	<File name="src\kits\app\Application.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2446" topLine="45" />
-		</Cursor>
-	</File>
-	<File name="src\kits\interface\win32\etk-application.cpp" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="49676" topLine="1623" />
+			<Cursor1 position="4031" topLine="14" />
 		</Cursor>
 	</File>
 	<File name="src\kits\interface\beos\etk-drawing.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -362,9 +192,600 @@
 			<Cursor1 position="1562" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\unix\etk-os.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\BE.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6186" topLine="163" />
+			<Cursor1 position="349" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="src\kits\app\Handler.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12321" topLine="479" />
+		</Cursor>
+	</File>
+	<File name="src\kits\app\MessageRunner.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8898" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\TextEditable.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="15872" topLine="669" />
+		</Cursor>
+	</File>
+	<File name="src\kits\storage\FilePanel.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2766" topLine="73" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\Point.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4581" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\private\Object.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2146" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\TextControl.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8549" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\directfb\etk-dfb-font.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="13092" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\StreamIO.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1612" topLine="25" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\win32\etk-os.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3341" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\private\PrivateHandler.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5551" topLine="164" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\x11\etk-x11-font.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4944" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\beos\etk-timefuncs.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2192" topLine="26" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\thread\beos\etk-locker.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="9658" topLine="367" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\DataIO.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1622" topLine="21" />
+		</Cursor>
+	</File>
+	<File name="src\kits\private\PrivateApplication.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4187" topLine="121" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\thread\posix\etk-semaphore-umtx.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="17562" topLine="702" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\Font.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4693" topLine="127" />
+		</Cursor>
+	</File>
+	<File name="src\kits\app\AppDefs.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1601" topLine="25" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\win32\etk-win32-font.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="27473" topLine="850" />
+		</Cursor>
+	</File>
+	<File name="src\kits\add-ons\font\FreeType2.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="17031" topLine="594" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\View.cpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3541" topLine="90" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\Archivable.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1616" topLine="20" />
+		</Cursor>
+	</File>
+	<File name="src\kits\net\NetEndpoint.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2368" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\app\Clipboard.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5580" topLine="223" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\Debug.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4166" topLine="115" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\StringArray.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1621" topLine="30" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\directfb\etk-window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="26089" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\ListView.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3303" topLine="64" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\ViewPrivate.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1784" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\add-ons\font\FontEngine.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2206" topLine="38" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\TextView.h" open="0" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2443" topLine="56" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\wm\SimpleWM.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1689" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\storage\Entry.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="9883" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\app\Message.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11594" topLine="219" />
+		</Cursor>
+	</File>
+	<File name="src\kits\app\Cursor.h" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2579" topLine="67" />
+		</Cursor>
+	</File>
+	<File name="src\kits\storage\Volume.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7339" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="bhapi_global.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="50" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\ClassInfo.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2046" topLine="28" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\unix\etk-os.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4181" topLine="163" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\StringMe.h" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1554" topLine="74" />
+		</Cursor>
+	</File>
+	<File name="src\kits\storage\File.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5506" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\add-ons\theme\ThemeEngine.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4578" topLine="77" />
+		</Cursor>
+	</File>
+	<File name="src\kits\add-ons\theme\DefaultTheme.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="31606" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\unix\etk-image.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2149" topLine="39" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\directfb\etk-application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="28651" topLine="1008" />
+		</Cursor>
+	</File>
+	<File name="src\kits\private\Token.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2357" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\win32\etk-image.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2432" topLine="47" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\List.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1559" topLine="26" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\x11\etk-window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12964" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\xml\SimpleXmlParser.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="13069" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="tools\etkxx-doc.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="13065" topLine="45" />
+		</Cursor>
+	</File>
+	<File name="src\kits\private\Memory.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2134" topLine="39" />
+		</Cursor>
+	</File>
+	<File name="src\kits\app\Handler.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1528" topLine="36" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\win32\etk-pixmap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="13258" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\MenuItem.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8877" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\Locker.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2449" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\Rect.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5527" topLine="220" />
+		</Cursor>
+	</File>
+	<File name="src\kits\app\Cursor.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4385" topLine="144" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\Box.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5745" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\storage\FindDirectory.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2264" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\beos\etk-image.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2253" topLine="44" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\directfb\etk-pixmap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="13334" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\private\PrivateApplication.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2192" topLine="38" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\SimpleLocker.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2246" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\app\Application.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="19302" topLine="740" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\Menu.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="38683" topLine="1620" />
+		</Cursor>
+	</File>
+	<File name="src\kits\private\StandardIO.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1744" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\private\Memory.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1698" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\TextView.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="54723" topLine="2036" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\beos\etk-area.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11932" topLine="19" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\Button.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="13883" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\private\MessageBody.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2243" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\OS.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3308" topLine="57" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\Autolock.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1610" topLine="21" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\layout\LayoutContainer.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2828" topLine="72" />
+		</Cursor>
+	</File>
+	<File name="src\kits\render\Pixmap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8556" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\storage\FilePanel.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="43091" topLine="1701" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\win32\etk-area.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11838" topLine="399" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\beos\etk-beos-font.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10736" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="src\kits\app\Looper.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="28415" topLine="1108" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\thread\posix\etk-semaphore-mach.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="17970" topLine="698" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\GraphicsDefs.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2492" topLine="49" />
+		</Cursor>
+	</File>
+	<File name="src\kits\add-ons\theme\ThemeEngine.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1837" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\win32\etk-drawing.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="44266" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\private\Object.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2019" topLine="29" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\ScrollBar.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8141" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\render\Render.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="37903" topLine="1533" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\Archivable.cpp" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2813" topLine="71" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\directfb\etk-drawing.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="18934" topLine="674" />
+		</Cursor>
+	</File>
+	<File name="src\kits\add-ons\font\FontEngine.cpp" open="1" top="1" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2685" topLine="57" />
+		</Cursor>
+	</File>
+	<File name="src\kits\BE.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1758" topLine="32" />
+		</Cursor>
+	</File>
+	<File name="src\kits\storage\Directory.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="9845" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\thread\posix\etk-locker.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10317" topLine="384" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\Polygon.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2570" topLine="54" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\Debug.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="18883" topLine="610" />
+		</Cursor>
+	</File>
+	<File name="src\kits\app\Application.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4063" topLine="108" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\Errors.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1602" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\TextEditable.h" open="0" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5048" topLine="108" />
+		</Cursor>
+	</File>
+	<File name="src\kits\storage\Path.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6924" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="bhapi.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1566" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\Bitmap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3842" topLine="111" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\View.h" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2477" topLine="71" />
+		</Cursor>
+	</File>
+	<File name="src\kits\app\Messenger.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="17499" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\win32\etk-window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="30168" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\Rect.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8597" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\Font.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="16209" topLine="693" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\unix\etk-area.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10493" topLine="407" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\thread\beos\etk-thread.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="20815" topLine="794" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\Flattenable.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1621" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\ListView.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="14194" topLine="672" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\ByteOrder.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1615" topLine="28" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\beos\etk-window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="27851" topLine="1075" />
+		</Cursor>
+	</File>
+	<File name="src\kits\support\StreamIO.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2003" topLine="34" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\Window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="37282" topLine="1565" />
+		</Cursor>
+	</File>
+	<File name="src\kits\interface\Theme.cpp" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\thread\win32\etk-thread.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="22820" topLine="866" />
+		</Cursor>
+	</File>
+	<File name="src\kits\kernel\thread\beos\etk-semaphore.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="19107" topLine="713" />
+		</Cursor>
+	</File>
+	<EditorTabsLayout layout="07b6662058b2ccf6000032da00000002=0;BHAPI:src\kits\app\Handler.h,1;BHAPI:src\kits\private\PrivateHandler.h,2;BHAPI:src\kits\app\Looper.h,3;BHAPI:src\kits\private\PrivateHandler.cpp,4;BHAPI:src\kits\app\Application.h,5;BHAPI:src\kits\kernel\Debug.h,6;BHAPI:src\kits\interface\GraphicsDefs.h,7;BHAPI:src\kits\interface\Font.h,8;BHAPI:src\kits\add-ons\font\FontEngine.h,*9;BHAPI:src\kits\add-ons\font\FontEngine.cpp,10;BHAPI:src\kits\support\SupportDefs.h@layout2|name=dummy;caption=;state=2098174;dir=3;layer=0;row=0;pos=0;prop=100000;bestw=333;besth=160;minw=333;minh=160;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=07b6662058b2ccf6000032da00000002;caption=;state=2098172;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=200;besth=200;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(5,0,0)=16|" />
 </CodeBlocks_layout_file>

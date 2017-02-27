@@ -40,11 +40,11 @@ static BStandardIO _EIn(0);
 static BStandardIO _EOut(1);
 static BStandardIO _EErr(2);
 
-IMPEXP_BHAPI BStreamIO &endl = _endl;
-IMPEXP_BHAPI BStreamIO &ends = _ends;
-IMPEXP_BHAPI BStreamIO &EIn = _EIn;
-IMPEXP_BHAPI BStreamIO &EOut = _EOut;
-IMPEXP_BHAPI BStreamIO &EErr = _EErr;
+EXPORT_BHAPI BStreamIO &endl = _endl;
+EXPORT_BHAPI BStreamIO &ends = _ends;
+EXPORT_BHAPI BStreamIO &EIn = _EIn;
+EXPORT_BHAPI BStreamIO &EOut = _EOut;
+EXPORT_BHAPI BStreamIO &EErr = _EErr;
 
 BStreamIO::BStreamIO()
 	: EDataIO()

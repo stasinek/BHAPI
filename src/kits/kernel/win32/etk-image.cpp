@@ -38,8 +38,8 @@
 #include <sys/cygwin.h>
 #endif
 
-IMPEXP_BHAPI void*
-bhapi_load_addon(const char* path)
+EXPORT_BHAPI void*
+b_load_addon(const char* path)
 {
 	BPath aPath(path, NULL, true);
 	BString filename = aPath.Path();
@@ -57,8 +57,8 @@ bhapi_load_addon(const char* path)
 }
 
 
-IMPEXP_BHAPI b_status_t
-bhapi_unload_addon(void *data)
+EXPORT_BHAPI b_status_t
+b_unload_addon(void *data)
 {
 	if(data == NULL) return B_ERROR;
 	if(FreeLibrary((HMODULE)data) == 0) return B_ERROR;
@@ -66,8 +66,8 @@ bhapi_unload_addon(void *data)
 }
 
 
-IMPEXP_BHAPI b_status_t
-bhapi_get_image_symbol(void *data, const char *name, void **ptr)
+EXPORT_BHAPI b_status_t
+b_get_image_symbol(void *data, const char *name, void **ptr)
 {
 	if(data == NULL || name == NULL || *name == 0 || ptr == NULL) return B_BAD_VALUE;
 

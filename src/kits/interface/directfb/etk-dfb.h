@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
- * 
+ *
  * DirectFB Graphics Add-on for BHAPI++
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,9 +22,9 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: etk-dfb.h
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #ifndef BHAPI_DIRECTFB__H
@@ -105,7 +105,7 @@ private:
 	void *fDFBThread;
 	BMessageFilter *fClipboardFilter;
 
-	struct bhapi_dfb_data {
+	struct bhapi::dfb_data {
 		IDirectFBWindow *win;
 		void *data;
 	};
@@ -293,43 +293,43 @@ private:
 #define DUET_WINDOWREDRAWALL    B_MAXUINT
 
 
-extern b_status_t bhapi_dfb_stroke_point(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_stroke_point(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				       b_int32 x, b_int32 y, BRect *margins = NULL);
-extern b_status_t bhapi_dfb_stroke_points(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_stroke_points(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 					const b_int32 *pts, b_int32 count, BRect *margins = NULL);
-extern b_status_t bhapi_dfb_stroke_points_color(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_stroke_points_color(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				              const BList *ptsArrayLists, b_int32 arrayCount, const b_rgb_color *highColors,
 					      BRect *margins = NULL);
-extern b_status_t bhapi_dfb_stroke_line(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_stroke_line(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				      b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, BRect *margins = NULL);
-extern b_status_t bhapi_dfb_stroke_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_stroke_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, BRect *margins = NULL);
-extern b_status_t bhapi_dfb_fill_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_fill_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, BRect *margins = NULL);
-extern b_status_t bhapi_dfb_stroke_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_stroke_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				       const b_int32 *rects, b_int32 count, BRect *margins = NULL);
-extern b_status_t bhapi_dfb_fill_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_fill_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				     const b_int32 *rects, b_int32 count, BRect *margins = NULL);
-extern b_status_t bhapi_dfb_fill_region(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_fill_region(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				      const BRegion &region, BRect *margins = NULL);
-extern b_status_t bhapi_dfb_stroke_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_stroke_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle, BRect *margins = NULL);
-extern b_status_t bhapi_dfb_fill_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_fill_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle, BRect *margins = NULL);
-extern b_status_t bhapi_dfb_draw_epixmap(IDirectFBSurface *dfbSurface, BGraphicsContext *dc, const BPixmap *pix,
+extern b_status_t bhapi::dfb_draw_epixmap(IDirectFBSurface *dfbSurface, BGraphicsContext *dc, const BPixmap *pix,
 				       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
 				       b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH, BRect *margins = NULL);
 
-extern b_status_t bhapi_dfb_stroke_points_alphas(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_stroke_points_alphas(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 					       const b_int32 *pts, const b_uint8 *alpha, b_int32 count, BRect *margins = NULL);
-extern b_status_t bhapi_dfb_stroke_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_stroke_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 					 const b_int32 *pts, b_int32 count, bool closed, BRect *margins = NULL);
-extern b_status_t bhapi_dfb_fill_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_fill_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				       const b_int32 *pts, b_int32 count, BRect *margins = NULL);
-extern b_status_t bhapi_dfb_stroke_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_stroke_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 					    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius,
 					    BRect *margins = NULL);
-extern b_status_t bhapi_dfb_fill_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+extern b_status_t bhapi::dfb_fill_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 					  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius,
 					  BRect *margins = NULL);
 

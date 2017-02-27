@@ -34,7 +34,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _LOCAL BStandardIO : public BStreamIO {
+class LOCAL_BHAPI BStandardIO : public BStreamIO {
 public:
     BStandardIO(int fd);
     virtual ~BStandardIO();

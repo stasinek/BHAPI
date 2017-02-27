@@ -41,11 +41,11 @@
 #include "../../app/Application.h"
 
 #ifdef BHAPI_OS_LINUX
-extern bool bhapi_get_prog_argc_argv_linux(BString &progName, BStringArray &progArgv);
+extern bool b_get_prog_argc_argv_linux(BString &progName, BStringArray &progArgv);
 #endif // BHAPI_OS_LINUX
 
 
-static void bhapi_dfb_clipboard_changed(EDFBGraphicsEngine *dfbEngine)
+static void b_dfb_clipboard_changed(EDFBGraphicsEngine *dfbEngine)
 {
 	BString aStr;
 
@@ -70,27 +70,27 @@ static void bhapi_dfb_clipboard_changed(EDFBGraphicsEngine *dfbEngine)
 	free(data);
 
 	BMessage *clipMsg = NULL;
-	if(bhapi_clipboard.Lock())
+	if(b_clipboard.Lock())
 	{
-		if((clipMsg = bhapi_clipboard.Data()) != NULL)
+		if((clipMsg = b_clipboard.Data()) != NULL)
 		{
 			const char *text = NULL;
 			b_size_t textLen = 0;
 			if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
 			   text == NULL || textLen != (b_size_t)aStr.Length() || aStr.Compare(text, (b_int32)textLen) != 0)
 			{
-				bhapi_clipboard.Clear();
-				clipMsg->AddBool("etk:msg_from_gui", true);
+				b_clipboard.Clear();
+				clipMsg->AddBool("BHAPI:msg_from_gui", true);
 				clipMsg->AddData("text/plain", B_MIME_TYPE, aStr.String(), aStr.Length());
-				bhapi_clipboard.Commit();
+				b_clipboard.Commit();
 			}
 		}
-		bhapi_clipboard.Unlock();
+		b_clipboard.Unlock();
 	}
 }
 
 
-class _LOCAL EDFBClipboardMessageFilter : public BMessageFilter {
+class LOCAL_BHAPI EDFBClipboardMessageFilter : public BMessageFilter {
 public:
 	EDFBGraphicsEngine *fEngine;
 
@@ -112,13 +112,13 @@ public:
 
 			BMessage *msg;
 
-			bhapi_clipboard.Lock();
-			if(!((msg = bhapi_clipboard.Data()) == NULL || msg->HasBool("etk:msg_from_gui")))
+			b_clipboard.Lock();
+			if(!((msg = b_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
 			{
 				msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 				if(textLen > 0) aStr.Append(text, textLen);
 			}
-			bhapi_clipboard.Unlock();
+			b_clipboard.Unlock();
 
 			if(aStr.Length() <= 0) break;
 
@@ -138,7 +138,7 @@ public:
 extern "C" {
 _EXPORT BGraphicsEngine* instantiate_graphics_engine()
 #else
-IMPEXP_BHAPI BGraphicsEngine* bhapi_get_build_in_graphics_engine()
+IMPEXP_BHAPI BGraphicsEngine* b_get_build_in_graphics_engine()
 #endif
 {
 #ifndef BHAPI_GRAPHICS_DIRECTFB_BUILT_IN
@@ -189,7 +189,7 @@ EDFBGraphicsEngine::InitCheck()
 }
 
 
-static void bhapi_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
+static void b_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 {
 	if(dfbEngine == NULL || evt == NULL) return;
 
@@ -199,7 +199,7 @@ static void bhapi_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt
 	BMessenger etkWinMsgr;
 	BMessage message;
 
-	message.AddBool("etk:msg_from_gui", true);
+	message.AddBool("BHAPI:msg_from_gui", true);
 	message.AddInt64("when", currentTime);
 
 	if(evt->clazz == DFEC_WINDOW)
@@ -368,11 +368,11 @@ static void bhapi_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt
 					float delta_y = 0;
 					delta_y = (event->step < 0 ? -1.0f : 1.0f);
 
-					message.AddFloat("etk:wheel_delta_x", delta_x);
-					message.AddFloat("etk:wheel_delta_y", delta_y);
+					message.AddFloat("BHAPI:wheel_delta_x", delta_x);
+					message.AddFloat("BHAPI:wheel_delta_y", delta_y);
 
-					message.AddMessenger("etk:msg_for_target", etkWinMsgr);
-					etkWinMsgr = BMessenger(bhapi_app);
+					message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
+					etkWinMsgr = BMessenger(b_app);
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -409,8 +409,8 @@ static void bhapi_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt
 					message.AddPoint("screen_where", BPoint((float)event->cx, (float)event->cy));
 
 					// TODO: modifiers, clicks
-					message.AddMessenger("etk:msg_for_target", etkWinMsgr);
-					etkWinMsgr = BMessenger(bhapi_app);
+					message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
+					etkWinMsgr = BMessenger(b_app);
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -439,8 +439,8 @@ static void bhapi_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt
 									 (float)(event->cy - originY) - margins.top));
 					message.AddPoint("screen_where", BPoint((float)event->cx, (float)event->cy));
 
-					message.AddMessenger("etk:msg_for_target", etkWinMsgr);
-					etkWinMsgr = BMessenger(bhapi_app);
+					message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
+					etkWinMsgr = BMessenger(b_app);
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -454,7 +454,7 @@ static void bhapi_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt
 
 					message.AddInt32("key", (b_int32)(event->key_code));
 
-					// TODO: etk:key_repeat, modifiers, states, raw_char
+					// TODO: BHAPI:key_repeat, modifiers, states, raw_char
 					if(DFB_KEY_TYPE(event->key_symbol) == DIKT_UNICODE)
 					{
 						b_uint16 symbol = (b_uint16)event->key_symbol;
@@ -510,8 +510,8 @@ static void bhapi_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt
 
 					message.AddInt32("modifiers", modifiers);
 
-					message.AddMessenger("etk:msg_for_target", etkWinMsgr);
-					etkWinMsgr = BMessenger(bhapi_app);
+					message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
+					etkWinMsgr = BMessenger(b_app);
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -544,15 +544,15 @@ static void bhapi_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt
 
 		message.what = _UPDATE_;
 
-		message.AddRect("etk:frame", BRect(0, 0, (float)width - 1.f, (float)height - 1.f));
-		message.AddBool("etk:expose", true);
+		message.AddRect("BHAPI:frame", BRect(0, 0, (float)width - 1.f, (float)height - 1.f));
+		message.AddBool("BHAPI:expose", true);
 
 		etkWinMsgr.SendMessage(&message);
 	}
 }
 
 
-static b_status_t bhapi_dfb_task(void *arg)
+static b_status_t b_dfb_task(void *arg)
 {
 	EDFBGraphicsEngine *dfbEngine = (EDFBGraphicsEngine*)arg;
 
@@ -579,7 +579,7 @@ static b_status_t bhapi_dfb_task(void *arg)
 			if(dfbEngine->dfbEventBuffer->GetEvent(dfbEngine->dfbEventBuffer, &evt) != DFB_OK) break;
 
 			dfbEngine->Unlock();
-			bhapi_process_dfb_event(dfbEngine, &evt); // Process DFB Event
+			b_process_dfb_event(dfbEngine, &evt); // Process DFB Event
 			dfbEngine->Lock();
 			if(dfbEngine->dfbDoQuit) break;
 		}
@@ -590,7 +590,7 @@ static b_status_t bhapi_dfb_task(void *arg)
 		if(memcmp((void*)&dfbEngine->dfbClipboardTimeStamp, (void*)&timestamp, sizeof(struct timeval)) != 0)
 		{
 			dfbEngine->Unlock();
-			bhapi_dfb_clipboard_changed(dfbEngine);
+			b_dfb_clipboard_changed(dfbEngine);
 			dfbEngine->Lock();
 		}
 	}
@@ -621,9 +621,9 @@ b_status_t
 EDFBGraphicsEngine::Initalize()
 {
 	BMessageFilter *clipboardFilter = new EDFBClipboardMessageFilter(this);
-	bhapi_app->Lock();
-	bhapi_app->AddFilter(clipboardFilter);
-	bhapi_app->Unlock();
+	b_app->Lock();
+	b_app->AddFilter(clipboardFilter);
+	b_app->Unlock();
 
 	Lock();
 
@@ -631,9 +631,9 @@ EDFBGraphicsEngine::Initalize()
 	{
 		Unlock();
 
-		bhapi_app->Lock();
-		bhapi_app->RemoveFilter(clipboardFilter);
-		bhapi_app->Unlock();
+		b_app->Lock();
+		b_app->RemoveFilter(clipboardFilter);
+		b_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -649,7 +649,7 @@ EDFBGraphicsEngine::Initalize()
 	DFBDisplayLayerConfig layer_config;
 
 #ifdef BHAPI_OS_LINUX
-	argvGotFromSystem = (bhapi_get_prog_argc_argv_linux(progName, progArgv) ? progArgv.CountItems() > 0 : false);
+	argvGotFromSystem = (b_get_prog_argc_argv_linux(progName, progArgv) ? progArgv.CountItems() > 0 : false);
 #endif // BHAPI_OS_LINUX
 
 	if(!argvGotFromSystem || progArgv.CountItems() <= 1)
@@ -676,9 +676,9 @@ EDFBGraphicsEngine::Initalize()
 
 			Unlock();
 
-			bhapi_app->Lock();
-			bhapi_app->RemoveFilter(clipboardFilter);
-			bhapi_app->Unlock();
+			b_app->Lock();
+			b_app->RemoveFilter(clipboardFilter);
+			b_app->Unlock();
 			delete clipboardFilter;
 			return B_ERROR;
 		}
@@ -697,9 +697,9 @@ EDFBGraphicsEngine::Initalize()
 
 		Unlock();
 
-		bhapi_app->Lock();
-		bhapi_app->RemoveFilter(clipboardFilter);
-		bhapi_app->Unlock();
+		b_app->Lock();
+		b_app->RemoveFilter(clipboardFilter);
+		b_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -714,9 +714,9 @@ EDFBGraphicsEngine::Initalize()
 
 		Unlock();
 
-		bhapi_app->Lock();
-		bhapi_app->RemoveFilter(clipboardFilter);
-		bhapi_app->Unlock();
+		b_app->Lock();
+		b_app->RemoveFilter(clipboardFilter);
+		b_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -739,9 +739,9 @@ EDFBGraphicsEngine::Initalize()
 
 		Unlock();
 
-		bhapi_app->Lock();
-		bhapi_app->RemoveFilter(clipboardFilter);
-		bhapi_app->Unlock();
+		b_app->Lock();
+		b_app->RemoveFilter(clipboardFilter);
+		b_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -752,12 +752,12 @@ EDFBGraphicsEngine::Initalize()
 	bzero(&dfbClipboardTimeStamp, sizeof(struct timeval));
 	dfbDisplay->GetClipboardTimeStamp(dfbDisplay, &dfbClipboardTimeStamp);
 
-	if((fDFBThread = bhapi_create_thread(bhapi_dfb_task, B_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL ||
-	   bhapi_resume_thread(fDFBThread) != B_OK)
+	if((fDFBThread = b_create_thread(b_dfb_task, B_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL ||
+	   b_resume_thread(fDFBThread) != B_OK)
 	{
 		if(fDFBThread)
 		{
-			bhapi_delete_thread(fDFBThread);
+			b_delete_thread(fDFBThread);
 			fDFBThread = NULL;
 		}
 
@@ -771,9 +771,9 @@ EDFBGraphicsEngine::Initalize()
 
 		Unlock();
 
-		bhapi_app->Lock();
-		bhapi_app->RemoveFilter(clipboardFilter);
-		bhapi_app->Unlock();
+		b_app->Lock();
+		b_app->RemoveFilter(clipboardFilter);
+		b_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -782,7 +782,7 @@ EDFBGraphicsEngine::Initalize()
 
 	Unlock();
 
-	bhapi_dfb_clipboard_changed(this);
+	b_dfb_clipboard_changed(this);
 
 	return B_OK;
 }
@@ -797,7 +797,7 @@ EDFBGraphicsEngine::Cancel()
 
 	if(fDFBThread != NULL)
 	{
-		void *dfbThread = bhapi_open_thread(bhapi_get_thread_id(fDFBThread));
+		void *dfbThread = b_open_thread(b_get_thread_id(fDFBThread));
 		if(dfbThread == NULL)
 		{
 			Unlock();
@@ -817,20 +817,20 @@ EDFBGraphicsEngine::Cancel()
 		Unlock();
 
 		b_status_t status;
-		bhapi_wait_for_thread(dfbThread, &status);
+		b_wait_for_thread(dfbThread, &status);
 
 		Lock();
 
-		if(fDFBThread != NULL && bhapi_get_thread_id(fDFBThread) == bhapi_get_thread_id(dfbThread))
+		if(fDFBThread != NULL && b_get_thread_id(fDFBThread) == b_get_thread_id(dfbThread))
 		{
-			bhapi_delete_thread(fDFBThread);
+			b_delete_thread(fDFBThread);
 			fDFBThread = NULL;
 
-			struct bhapi_dfb_data *item;
-			while((item = (struct bhapi_dfb_data*)fDFBDataList.RemoveItem((b_int32)0)) != NULL) free(item);
+			struct b_dfb_data *item;
+			while((item = (struct b_dfb_data*)fDFBDataList.RemoveItem((b_int32)0)) != NULL) free(item);
 		}
 
-		bhapi_delete_thread(dfbThread);
+		b_delete_thread(dfbThread);
 
 		clipboardFilter = fClipboardFilter;
 		fClipboardFilter = NULL;
@@ -840,9 +840,9 @@ EDFBGraphicsEngine::Cancel()
 
 	if(clipboardFilter != NULL)
 	{
-		bhapi_app->Lock();
-		bhapi_app->RemoveFilter(clipboardFilter);
-		bhapi_app->Unlock();
+		b_app->Lock();
+		b_app->RemoveFilter(clipboardFilter);
+		b_app->Unlock();
 		delete clipboardFilter;
 	}
 }
@@ -963,7 +963,7 @@ EDFBGraphicsEngine::SetDFBWindowData(IDirectFBWindow *dfbWin, void *data, void *
 	bool found = false;
 	for(b_int32 i = 0; i < fDFBDataList.CountItems(); i++)
 	{
-		struct bhapi_dfb_data *item = (struct bhapi_dfb_data*)fDFBDataList.ItemAt(i);
+		struct b_dfb_data *item = (struct b_dfb_data*)fDFBDataList.ItemAt(i);
 		if(item->win == dfbWin)
 		{
 			if(old_data) *old_data = item->data;
@@ -985,7 +985,7 @@ EDFBGraphicsEngine::SetDFBWindowData(IDirectFBWindow *dfbWin, void *data, void *
 
 	if(!found && data)
 	{
-		struct bhapi_dfb_data *item = (struct bhapi_dfb_data*)malloc(sizeof(struct bhapi_dfb_data));
+		struct b_dfb_data *item = (struct b_dfb_data*)malloc(sizeof(struct b_dfb_data));
 		if(!(item == NULL || fDFBDataList.AddItem(item) == false))
 		{
 			item->win = dfbWin;
@@ -1010,7 +1010,7 @@ EDFBGraphicsEngine::GetDFBWindowData(IDirectFBWindow *dfbWin)
 
 	for(b_int32 i = 0; i < fDFBDataList.CountItems(); i++)
 	{
-		struct bhapi_dfb_data *item = (struct bhapi_dfb_data*)fDFBDataList.ItemAt(i);
+		struct b_dfb_data *item = (struct b_dfb_data*)fDFBDataList.ItemAt(i);
 		if(item->win == dfbWin) return item->data;
 	}
 
@@ -1028,7 +1028,7 @@ EDFBGraphicsEngine::GetDFBWindowData(DFBWindowID dfbWinID)
 
 	for(b_int32 i = 0; i < fDFBDataList.CountItems(); i++)
 	{
-		struct bhapi_dfb_data *item = (struct bhapi_dfb_data*)fDFBDataList.ItemAt(i);
+		struct b_dfb_data *item = (struct b_dfb_data*)fDFBDataList.ItemAt(i);
 		DFBWindowID id;
 		if(item->win->GetID(item->win, &id) != DFB_OK) continue;
 		if(id == dfbWinID) return item->data;

@@ -29,9 +29,7 @@
 
 #ifndef BHAPI_GRAPHICS_DEFS__H
 #define BHAPI_GRAPHICS_DEFS__H
-
 #include "../support/SupportDefs.h"
-
 
 typedef struct b_pattern {
     b_uint8		data[8];
@@ -40,14 +38,12 @@ typedef struct b_pattern {
 	{
         return (*((const b_uint64*)this)) == (*((const b_uint64*)&o));
 	}
-
 	inline bool operator!=(const b_pattern& o) const
 	{
         return (*((const b_uint64*)this)) != (*((const b_uint64*)&o));
 	}
 #endif /* __cplusplus */
 } b_pattern;
-
 
 #ifdef __cplusplus // just for C++
 inline b_pattern b_makb_pattern(b_uint8 d1, b_uint8 d2, b_uint8 d3, b_uint8 d4, b_uint8 d5, b_uint8 d6, b_uint8 d7, b_uint8 d8)
@@ -65,7 +61,6 @@ inline b_pattern b_makb_pattern(b_uint8 d1, b_uint8 d2, b_uint8 d3, b_uint8 d4, 
 }
 #endif /* __cplusplus */
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
@@ -77,7 +72,6 @@ extern IMPEXP_BHAPI const b_pattern B_SOLID_LOW;
 #ifdef __cplusplus
 } /* extern "C" */
 #endif /* __cplusplus */
-
 
 typedef struct b_rgb_color {
     b_uint8		red;
@@ -91,22 +85,18 @@ typedef struct b_rgb_color {
 		red = r; green = g; blue = b; alpha = a;
 		return *this;
 	}
-
 	inline b_rgb_color& set_to(const b_rgb_color& o)
 	{
 		return set_to(o.red, o.green, o.blue, o.alpha);
 	}
-
 	inline bool operator==(const b_rgb_color& o) const
 	{
         return(*((const b_uint32*)this)) == (*((const b_uint32*)&o));
 	}
-	
 	inline bool operator!=(const b_rgb_color& o) const
 	{
         return(*((const b_uint32*)this)) != (*((const b_uint32*)&o));
 	}
-
     b_rgb_color& mix(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
 	b_rgb_color& mix(const b_rgb_color &o);
     b_rgb_color& mix_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const;
@@ -119,7 +109,6 @@ typedef struct b_rgb_color {
 #endif /* __cplusplus */
 } b_rgb_color;
 
-
 #ifdef __cplusplus // just for C++
 inline b_rgb_color b_makb_rgb_color(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 0xff)
 {
@@ -128,7 +117,6 @@ inline b_rgb_color b_makb_rgb_color(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a =
 	return c;
 }
 #endif /* __cplusplus */
-
 
 typedef enum b_drawing_mode {
     B_OP_COPY,
@@ -146,7 +134,6 @@ typedef enum b_drawing_mode {
     B_OP_ALPHA,
 } b_drawing_mode;
 
-
 typedef enum b_color_space {
     B_CMAP8 = 0,		/* D(8) */
     B_RGB32 = 1,		/* BGRx(8:8:8:8) */
@@ -155,7 +142,6 @@ typedef enum b_color_space {
     B_RGB24_BIG = 4,	/* RGB(8:8:8) */
 } b_color_space;
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
@@ -163,13 +149,12 @@ extern "C" {
 extern IMPEXP_BHAPI const b_rgb_color    B_TRANSPARENT_COLOR;
 extern IMPEXP_BHAPI const b_uint32    B_TRANSPARENT_MAGIC_RGBA32;
 
-IMPEXP_BHAPI b_uint8 bhapi_find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b);
-IMPEXP_BHAPI b_rgb_color bhapi_find_color_for_index(b_uint8 index);
-
+namespace bhapi {
+IMPEXP_BHAPI b_uint8 find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b);
+IMPEXP_BHAPI b_rgb_color find_color_for_index(b_uint8 index);
+}
 #ifdef __cplusplus
 } /* extern "C" */
 #endif /* __cplusplus */
-
-
 #endif /* BHAPI_GRAPHICS_DEFS__H */
 

@@ -38,7 +38,7 @@
 #include "../render/Pixmap.h"
 #include "../support/Errors.h"
 
-class _LOCAL BBitmapWindow : public BWindow {
+class LOCAL_BHAPI BBitmapWindow : public BWindow {
 public:
 	BBitmapWindow(BRect frame);
 	virtual ~BBitmapWindow();
@@ -76,7 +76,7 @@ BBitmap::InitSelf(BRect bounds, bool acceptsViews)
 
 	if(bounds.IsValid() == false) return;
 
-	if(bhapi_app == NULL || bhapi_app->fGraphicsEngine == NULL)
+	if(b_app == NULL || b_app->fGraphicsEngine == NULL)
 	{
 		BHAPI_WARNING("[INTERFACE]: %s --- You should create BBitmap within graphics engine.", __PRETTY_FUNCTION__);
 		return;
@@ -87,7 +87,7 @@ BBitmap::InitSelf(BRect bounds, bool acceptsViews)
 
 	if(acceptsViews == false)
 	{
-		fPixmap = bhapi_app->fGraphicsEngine->CreatePixmap(fColumns - 1, fRows - 1);
+		fPixmap = b_app->fGraphicsEngine->CreatePixmap(fColumns - 1, fRows - 1);
 	}
 	else
 	{
@@ -115,7 +115,7 @@ BBitmap::BBitmap(const BBitmap *bitmap, bool acceptsViews)
 	InitSelf(bitmap == NULL ? BRect() : bitmap->Bounds(), acceptsViews);
 	if(bitmap->fPixmap != NULL)
 	{
-		BGraphicsContext *dc = bhapi_app->fGraphicsEngine->CreateContext();
+		BGraphicsContext *dc = b_app->fGraphicsEngine->CreateContext();
 		if(dc)
 		{
 			bitmap->fPixmap->CopyTo(dc, fPixmap, 0, 0, fColumns - 1, fRows - 1, 0, 0, fColumns - 1, fRows - 1);
@@ -131,7 +131,7 @@ BBitmap::BBitmap(const BPixmap *pixmap, bool acceptsViews)
 	InitSelf((pixmap == NULL || pixmap->IsValid() == false) ? BRect() : pixmap->Bounds(), acceptsViews);
 	if(fPixmap != NULL)
 	{
-		BGraphicsContext *dc = bhapi_app->fGraphicsEngine->CreateContext();
+		BGraphicsContext *dc = b_app->fGraphicsEngine->CreateContext();
 		if(dc)
 		{
 			dc->SetDrawingMode(B_OP_COPY);

@@ -36,19 +36,19 @@
 #include "../support/StringMe.h"
 
 
-typedef struct _threadCallback_ {
+typedef struct threadCallback {
 	b_thread_func func;
 	void* user_data;
-} _threadCallback_;
+} threadCallback;
 
 
-typedef struct bhapi_beos_thread_t {
+typedef struct b_beos_thread_t {
 	b_int32			priority;
 	b_int32			running;
 	bool			exited;
 	b_status_t		status;
 	b_int64			ID;
-	_threadCallback_	callback;
+	threadCallback	callback;
 	BList			exit_callbacks;
 
 	sem_id			locker;
@@ -57,18 +57,18 @@ typedef struct bhapi_beos_thread_t {
 	bool			existent;
 
 	BList			private_threads;
-} bhapi_beos_thread_t;
+} b_beos_thread_t;
 
 
-typedef struct bhapi_beos_thread_private_t {
-	bhapi_beos_thread_t *thread;
+typedef struct b_beos_thread_private_t {
+	b_beos_thread_t *thread;
 	bool copy;
-} bhapi_beos_thread_private_t;
+} b_beos_thread_private_t;
 
 
-static bhapi_beos_thread_t* __bhapi_create_thread__()
+static b_beos_thread_t* __bhapi_create_thread__()
 {
-	bhapi_beos_thread_t *thread = new bhapi_beos_thread_t;
+	b_beos_thread_t *thread = new b_beos_thread_t;
 	if(thread == NULL) return NULL;
 
 	thread->priority = -1;
@@ -94,15 +94,15 @@ static bhapi_beos_thread_t* __bhapi_create_thread__()
 }
 
 
-static void __bhapi_delete_thread__(bhapi_beos_thread_t *thread)
+static void b_delete_thread(b_beos_thread_t *thread)
 {
 	if(thread == NULL) return;
 
-	bhapi_beos_thread_private_t *priThread;
-	while((priThread = (bhapi_beos_thread_private_t*)thread->private_threads.RemoveItem(0)) != NULL) delete priThread;
+	b_beos_thread_private_t *priThread;
+	while((priThread = (b_beos_thread_private_t*)thread->private_threads.RemoveItem(0)) != NULL) delete priThread;
 
-	_threadCallback_ *exitCallback;
-	while((exitCallback = (_threadCallback_*)thread->exit_callbacks.RemoveItem(0)) != NULL) delete exitCallback;
+	threadCallback *exitCallback;
+	while((exitCallback = (threadCallback*)thread->exit_callbacks.RemoveItem(0)) != NULL) delete exitCallback;
 
 	delete_sem(thread->locker);
 	delete_sem(thread->cond);
@@ -112,8 +112,8 @@ static void __bhapi_delete_thread__(bhapi_beos_thread_t *thread)
 
 
 static BSimpleLocker __bhapi_thread_locker__;
-#define _BHAPI_LOCK_THREAD_()	__bhapi_thread_locker__.Lock()
-#define _BHAPI_UNLOCK_THREAD_()	__bhapi_thread_locker__.Unlock()
+#define BHAPI_LOCK_THREAD()	__bhapi_thread_locker__.Lock()
+#define BHAPI_UNLOCK_THREAD()	__bhapi_thread_locker__.Unlock()
 
 
 class EThreadsList {
@@ -126,18 +126,18 @@ public:
 
 	~EThreadsList()
 	{
-		bhapi_beos_thread_t *td;
-		while((td = (bhapi_beos_thread_t*)fList.RemoveItem(0)) != NULL)
+		b_beos_thread_t *td;
+		while((td = (b_beos_thread_t*)fList.RemoveItem(0)) != NULL)
 		{
 			BHAPI_WARNING("[KERNEL]: Thread %I64i leaked.", td->ID);
-			__bhapi_delete_thread__(td);
+			b_delete_thread(td);
 		}
 	}
 
-	bhapi_beos_thread_private_t* AddThread(bhapi_beos_thread_t *td)
+	b_beos_thread_private_t* AddThread(b_beos_thread_t *td)
 	{
 		if(td == NULL || td->private_threads.CountItems() != 0 || fList.AddItem((void*)td, 0) == false) return NULL;
-		bhapi_beos_thread_private_t *priThread = new bhapi_beos_thread_private_t;
+		b_beos_thread_private_t *priThread = new b_beos_thread_private_t;
 		if(priThread == NULL || td->private_threads.AddItem((void*)priThread, 0) == false)
 		{
 			fList.RemoveItem((void*)td);
@@ -149,10 +149,10 @@ public:
 		return priThread;
 	}
 
-	bhapi_beos_thread_private_t* RefThread(bhapi_beos_thread_t *td)
+	b_beos_thread_private_t* RefThread(b_beos_thread_t *td)
 	{
 		if(td == NULL || td->private_threads.CountItems() == 0 || fList.IndexOf((void*)td) < 0) return NULL;
-		bhapi_beos_thread_private_t *priThread = new bhapi_beos_thread_private_t;
+		b_beos_thread_private_t *priThread = new b_beos_thread_private_t;
 		if(priThread == NULL || td->private_threads.AddItem((void*)priThread, 0) == false)
 		{
 			if(priThread != NULL) delete priThread;
@@ -163,9 +163,9 @@ public:
 		return priThread;
 	}
 
-	b_int32 UnrefThread(bhapi_beos_thread_private_t *priThread)
+	b_int32 UnrefThread(b_beos_thread_private_t *priThread)
 	{
-		bhapi_beos_thread_t *td = (priThread == NULL ? NULL : priThread->thread);
+		b_beos_thread_t *td = (priThread == NULL ? NULL : priThread->thread);
 		if(td == NULL || td->private_threads.CountItems() == 0 || fList.IndexOf((void*)td) < 0) return -1;
 		if(td->private_threads.RemoveItem((void*)priThread) == false) return -1;
 		delete priThread;
@@ -174,12 +174,12 @@ public:
 		return count;
 	}
 
-	bhapi_beos_thread_private_t* OpenThread(b_int64 tid)
+	b_beos_thread_private_t* OpenThread(b_int64 tid)
 	{
 		if(tid == B_INT64_CONSTANT(0)) return NULL;
 		for(b_int32 i = 0; i < fList.CountItems(); i++)
 		{
-			bhapi_beos_thread_t* td = (bhapi_beos_thread_t*)fList.ItemAt(i);
+			b_beos_thread_t* td = (b_beos_thread_t*)fList.ItemAt(i);
 			if(td->ID == tid) return RefThread(td);
 		}
 		return NULL;
@@ -194,42 +194,42 @@ static EThreadsList __bhapi_thread_lists__;
 #define _BHAPI_OPEN_THREAD_(tid)	__bhapi_thread_lists__.OpenThread(tid)
 
 
-IMPEXP_BHAPI b_int64 bhapi_get_current_thread_id(void)
+IMPEXP_BHAPI b_int64 b_get_current_thread_id(void)
 {
 	return((b_int64)find_thread(NULL));
 }
 
 
-static void bhapi_lock_thread_inter(bhapi_beos_thread_t *thread)
+static void b_lock_thread_inter(b_beos_thread_t *thread)
 {
 	acquire_sem(thread->locker);
 }
 
 
-static void bhapi_unlock_thread_inter(bhapi_beos_thread_t *thread)
+static void b_unlock_thread_inter(b_beos_thread_t *thread)
 {
 	release_sem(thread->locker);
 }
 
 
-int32 bhapi_spawn_thread_func(void *data)
+int32 b_spawn_thread_func(void *data)
 {
-	bhapi_beos_thread_t *thread = (bhapi_beos_thread_t*)data;
-	bhapi_beos_thread_private_t *priThread = NULL;
+	b_beos_thread_t *thread = (b_beos_thread_t*)data;
+	b_beos_thread_private_t *priThread = NULL;
 
-	_BHAPI_LOCK_THREAD_();
+	BHAPI_LOCK_THREAD();
 	if((priThread = _BHAPI_REF_THREAD_(thread)) == NULL)
 	{
-		_BHAPI_UNLOCK_THREAD_();
+		BHAPI_UNLOCK_THREAD();
 		return 0;
 	}
-	_BHAPI_UNLOCK_THREAD_();
+	BHAPI_UNLOCK_THREAD();
 
-	if(bhapi_on_exit_thread((void (*)(void *))bhapi_delete_thread, priThread) != B_OK)
+	if(b_on_exit_thread((void (*)(void *))b_delete_thread, priThread) != B_OK)
 	{
 		BHAPI_WARNING("[KERNEL]: %s --- Unexpected error! Thread WON'T RUN!", __PRETTY_FUNCTION__);
 
-		bhapi_lock_thread_inter(thread);
+		b_lock_thread_inter(thread);
 
 		thread->running = 0;
 		thread->exited = true;
@@ -246,26 +246,26 @@ int32 bhapi_spawn_thread_func(void *data)
 		BList exitCallbackList(thread->exit_callbacks);
 		thread->exit_callbacks.MakeEmpty();
 
-		bhapi_unlock_thread_inter(thread);
+		b_unlock_thread_inter(thread);
 
-		_threadCallback_ *exitCallback;
-		while((exitCallback = (_threadCallback_*)exitCallbackList.RemoveItem(0)) != NULL) delete exitCallback;
+		threadCallback *exitCallback;
+		while((exitCallback = (threadCallback*)exitCallbackList.RemoveItem(0)) != NULL) delete exitCallback;
 
-		bhapi_delete_thread(priThread);
+		b_delete_thread(priThread);
 
 		return 0;
 	}
 
-	bhapi_lock_thread_inter(thread);
+	b_lock_thread_inter(thread);
 	b_thread_func threadFunc = thread->callback.func;
 	void *userData = thread->callback.user_data;
 	thread->callback.func = NULL;
 	thread->running = 1;
-	bhapi_unlock_thread_inter(thread);
+	b_unlock_thread_inter(thread);
 
 	b_status_t status = (threadFunc == NULL ? B_ERROR : (*threadFunc)(userData));
 
-	bhapi_lock_thread_inter(thread);
+	b_lock_thread_inter(thread);
 
 	thread->running = 0;
 	thread->exited = true;
@@ -282,10 +282,10 @@ int32 bhapi_spawn_thread_func(void *data)
 	BList exitCallbackList(thread->exit_callbacks);
 	thread->exit_callbacks.MakeEmpty();
 
-	bhapi_unlock_thread_inter(thread);
+	b_unlock_thread_inter(thread);
 
-	_threadCallback_ *exitCallback;
-	while((exitCallback = (_threadCallback_*)exitCallbackList.RemoveItem(0)) != NULL)
+	threadCallback *exitCallback;
+	while((exitCallback = (threadCallback*)exitCallbackList.RemoveItem(0)) != NULL)
 	{
 		if(exitCallback->func) (*(exitCallback->func))(exitCallback->user_data);
 		delete exitCallback;
@@ -295,68 +295,68 @@ int32 bhapi_spawn_thread_func(void *data)
 }
 
 
-IMPEXP_BHAPI void* bhapi_create_thread_by_current_thread(void)
+IMPEXP_BHAPI void* b_create_thread_by_current_thread(void)
 {
-	bhapi_beos_thread_private_t *priThread = NULL;
+	b_beos_thread_private_t *priThread = NULL;
 
-	_BHAPI_LOCK_THREAD_();
-	if((priThread = _BHAPI_OPEN_THREAD_(bhapi_get_current_thread_id())) != NULL)
+	BHAPI_LOCK_THREAD();
+	if((priThread = _BHAPI_OPEN_THREAD_(b_get_current_thread_id())) != NULL)
 	{
 		_BHAPI_UNREF_THREAD_(priThread);
-		_BHAPI_UNLOCK_THREAD_();
+		BHAPI_UNLOCK_THREAD();
 		return NULL;
 	}
 
-	bhapi_beos_thread_t *thread = __bhapi_create_thread__();
+	b_beos_thread_t *thread = __bhapi_create_thread__();
 	if(thread == NULL) return NULL;
 
 	if((priThread = _BHAPI_ADD_THREAD_(thread)) == NULL)
 	{
-		_BHAPI_UNLOCK_THREAD_();
-		__bhapi_delete_thread__(thread);
+		BHAPI_UNLOCK_THREAD();
+		b_delete_thread(thread);
 		return NULL;
 	}
 
 	thread->priority = 0;
 	thread->running = 1;
 	thread->exited = false;
-	thread->ID = bhapi_get_current_thread_id();
+	thread->ID = b_get_current_thread_id();
 	thread->existent = true;
 
-	_BHAPI_UNLOCK_THREAD_();
+	BHAPI_UNLOCK_THREAD();
 
 	return (void*)priThread;
 }
 
 
-IMPEXP_BHAPI void* bhapi_create_thread(b_thread_func threadFunction,
+IMPEXP_BHAPI void* b_create_thread(b_thread_func threadFunction,
 				    b_int32 priority,
 				    void *arg,
 				    b_int64 *threadId)
 {
 	if(threadFunction == NULL) return NULL;
 
-	bhapi_beos_thread_t *thread = __bhapi_create_thread__();
+	b_beos_thread_t *thread = __bhapi_create_thread__();
 	if(thread == NULL) return NULL;
 
 	thread->callback.func = threadFunction;
 	thread->callback.user_data = arg;
 
 	thread_id beThreadId;
-	if((beThreadId = spawn_thread(bhapi_spawn_thread_func, NULL, priority, (void*)thread)) < 0)
+	if((beThreadId = spawn_thread(b_spawn_thread_func, NULL, priority, (void*)thread)) < 0)
 	{
 		BHAPI_DEBUG("[KERNEL]: %s --- spawn_thread failed.", __PRETTY_FUNCTION__);
 
-		__bhapi_delete_thread__(thread);
+		b_delete_thread(thread);
 		return NULL;
 	}
 
-	bhapi_beos_thread_private_t *priThread = NULL;
+	b_beos_thread_private_t *priThread = NULL;
 
-	_BHAPI_LOCK_THREAD_();
+	BHAPI_LOCK_THREAD();
 	if((priThread = _BHAPI_ADD_THREAD_(thread)) == NULL)
 	{
-		_BHAPI_UNLOCK_THREAD_();
+		BHAPI_UNLOCK_THREAD();
 
 		BHAPI_WARNING("[KERNEL]: %s --- Unexpected error! Thread WON'T RUN!", __PRETTY_FUNCTION__);
 
@@ -365,7 +365,7 @@ IMPEXP_BHAPI void* bhapi_create_thread(b_thread_func threadFunction,
 		status_t beStatus;
 		wait_for_thread(beThreadId, &beStatus);
 
-		__bhapi_delete_thread__(thread);
+		b_delete_thread(thread);
 		return NULL;
 	}
 
@@ -375,36 +375,36 @@ IMPEXP_BHAPI void* bhapi_create_thread(b_thread_func threadFunction,
 	thread->ID = (b_int64)beThreadId;
 	thread->existent = false;
 
-	_BHAPI_UNLOCK_THREAD_();
+	BHAPI_UNLOCK_THREAD();
 
-	bhapi_set_thread_priority(priThread, priority);
+	b_set_thread_priority(priThread, priority);
 
 	if(threadId) *threadId = thread->ID;
 	return (void*)priThread;
 }
 
 
-IMPEXP_BHAPI void* bhapi_open_thread(b_int64 threadId)
+IMPEXP_BHAPI void* b_open_thread(b_int64 threadId)
 {
-	_BHAPI_LOCK_THREAD_();
-	bhapi_beos_thread_private_t *priThread = _BHAPI_OPEN_THREAD_(threadId);
-	_BHAPI_UNLOCK_THREAD_();
+	BHAPI_LOCK_THREAD();
+	b_beos_thread_private_t *priThread = _BHAPI_OPEN_THREAD_(threadId);
+	BHAPI_UNLOCK_THREAD();
 
 	return (void*)priThread;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_delete_thread(void *data)
+IMPEXP_BHAPI b_status_t b_delete_thread(void *data)
 {
-	bhapi_beos_thread_private_t *priThread = (bhapi_beos_thread_private_t*)data;
-	bhapi_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)data;
+	b_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(priThread == NULL || thread == NULL) return B_BAD_VALUE;
 
 	bool threadIsCopy = priThread->copy;
 
-	_BHAPI_LOCK_THREAD_();
+	BHAPI_LOCK_THREAD();
 	b_int32 count = _BHAPI_UNREF_THREAD_(priThread);
-	_BHAPI_UNLOCK_THREAD_();
+	BHAPI_UNLOCK_THREAD();
 
 	if(count < 0) return B_ERROR;
 
@@ -412,8 +412,8 @@ IMPEXP_BHAPI b_status_t bhapi_delete_thread(void *data)
 	{
 		BList exitCallbackList;
 
-		bhapi_lock_thread_inter(thread);
-		if(thread->ID == bhapi_get_current_thread_id())
+		b_lock_thread_inter(thread);
+		if(thread->ID == b_get_current_thread_id())
 		{
 			thread->running = 0;
 			thread->exited = true;
@@ -430,10 +430,10 @@ IMPEXP_BHAPI b_status_t bhapi_delete_thread(void *data)
 			exitCallbackList = thread->exit_callbacks;
 			thread->exit_callbacks.MakeEmpty();
 		}
-		bhapi_unlock_thread_inter(thread);
+		b_unlock_thread_inter(thread);
 
-		_threadCallback_ *exitCallback;
-		while((exitCallback = (_threadCallback_*)exitCallbackList.RemoveItem(0)) != NULL)
+		threadCallback *exitCallback;
+		while((exitCallback = (threadCallback*)exitCallbackList.RemoveItem(0)) != NULL)
 		{
 			if(exitCallback->func) (*(exitCallback->func))(exitCallback->user_data);
 			delete exitCallback;
@@ -442,7 +442,7 @@ IMPEXP_BHAPI b_status_t bhapi_delete_thread(void *data)
 
 	if(count > 0) return B_OK;
 
-	if(thread->ID != bhapi_get_current_thread_id() && thread->existent == false)
+	if(thread->ID != b_get_current_thread_id() && thread->existent == false)
 	{
 		if(thread->callback.func)
 		{
@@ -457,28 +457,28 @@ IMPEXP_BHAPI b_status_t bhapi_delete_thread(void *data)
 	BList exitCallbackList(thread->exit_callbacks);
 	thread->exit_callbacks.MakeEmpty();
 
-	_threadCallback_ *exitCallback;
-	while((exitCallback = (_threadCallback_*)exitCallbackList.RemoveItem(0)) != NULL)
+	threadCallback *exitCallback;
+	while((exitCallback = (threadCallback*)exitCallbackList.RemoveItem(0)) != NULL)
 	{
 		if(exitCallback->func) (*(exitCallback->func))(exitCallback->user_data);
 		delete exitCallback;
 	}
 
-	__bhapi_delete_thread__(thread);
+	b_delete_thread(thread);
 
 	return B_OK;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_resume_thread(void *data)
+IMPEXP_BHAPI b_status_t b_resume_thread(void *data)
 {
-	bhapi_beos_thread_private_t *priThread = (bhapi_beos_thread_private_t*)data;
-	bhapi_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)data;
+	b_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL) return B_BAD_VALUE;
 
 	b_status_t retVal = B_ERROR;
 
-	bhapi_lock_thread_inter(thread);
+	b_lock_thread_inter(thread);
 	if(((thread->callback.func != NULL && thread->running == 0) || thread->running == 2) &&
 	   thread->exited == false)
 	{
@@ -486,32 +486,32 @@ IMPEXP_BHAPI b_status_t bhapi_resume_thread(void *data)
 		thread->running = 1;
 		retVal = B_OK;
 	}
-	bhapi_unlock_thread_inter(thread);
+	b_unlock_thread_inter(thread);
 
 	return retVal;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_suspend_thread(void *data)
+IMPEXP_BHAPI b_status_t b_suspend_thread(void *data)
 {
-	bhapi_beos_thread_private_t *priThread = (bhapi_beos_thread_private_t*)data;
-	bhapi_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)data;
+	b_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL) return B_BAD_VALUE;
 
 	b_status_t retVal = B_ERROR;
 
-	bhapi_lock_thread_inter(thread);
-	bool suspend_cur_thread = (thread->ID == bhapi_get_current_thread_id());
+	b_lock_thread_inter(thread);
+	bool suspend_cur_thread = (thread->ID == b_get_current_thread_id());
 	if(thread->running == 1 && thread->exited == false)
 	{
 		if(suspend_cur_thread)
 		{
 			thread->running = 2;
-			bhapi_unlock_thread_inter(thread);
+			b_unlock_thread_inter(thread);
 
 			retVal = suspend_thread((thread_id)thread->ID) != B_OK ? B_ERROR : B_OK;
 
-			bhapi_lock_thread_inter(thread);
+			b_lock_thread_inter(thread);
 			thread->running = 1;
 		}
 		else if(suspend_thread((thread_id)thread->ID) == B_OK)
@@ -520,35 +520,35 @@ IMPEXP_BHAPI b_status_t bhapi_suspend_thread(void *data)
 			retVal = B_OK;
 		}
 	}
-	bhapi_unlock_thread_inter(thread);
+	b_unlock_thread_inter(thread);
 
 	return retVal;
 }
 
 
-IMPEXP_BHAPI b_int64 bhapi_get_thread_id(void *data)
+IMPEXP_BHAPI b_int64 b_get_thread_id(void *data)
 {
-	bhapi_beos_thread_private_t *priThread = (bhapi_beos_thread_private_t*)data;
-	bhapi_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)data;
+	b_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL) return B_INT64_CONSTANT(0);
 
-	bhapi_lock_thread_inter(thread);
+	b_lock_thread_inter(thread);
 	b_int64 thread_id = thread->ID;
-	bhapi_unlock_thread_inter(thread);
+	b_unlock_thread_inter(thread);
 
 	return thread_id;
 }
 
 
-IMPEXP_BHAPI b_uint32 bhapi_get_thread_run_state(void *data)
+IMPEXP_BHAPI b_uint32 b_get_thread_run_state(void *data)
 {
-	bhapi_beos_thread_private_t *priThread = (bhapi_beos_thread_private_t*)data;
-	bhapi_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)data;
+	b_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL) return BHAPI_THREAD_INVALID;
 
 	b_uint32 retVal = BHAPI_THREAD_INVALID;
 
-	bhapi_lock_thread_inter(thread);
+	b_lock_thread_inter(thread);
 
 	if(thread->exited)
 	{
@@ -573,64 +573,64 @@ IMPEXP_BHAPI b_uint32 bhapi_get_thread_run_state(void *data)
 			break;
 	}
 
-	bhapi_unlock_thread_inter(thread);
+	b_unlock_thread_inter(thread);
 
 	return retVal;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_set_thread_priority(void *data, b_int32 new_priority)
+IMPEXP_BHAPI b_status_t b_set_thread_priority(void *data, b_int32 new_priority)
 {
-	bhapi_beos_thread_private_t *priThread = (bhapi_beos_thread_private_t*)data;
-	bhapi_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)data;
+	b_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL) return -1;
 	if(new_priority < 0) new_priority = 15;
 
-	bhapi_lock_thread_inter(thread);
+	b_lock_thread_inter(thread);
 	if(set_thread_priority((thread_id)(thread->ID), new_priority) < 0)
 	{
-		bhapi_unlock_thread_inter(thread);
+		b_unlock_thread_inter(thread);
 		return B_ERROR;
 	}
 	b_int32 old_priority = thread->priority;
 	thread->priority = new_priority;
-	bhapi_unlock_thread_inter(thread);
+	b_unlock_thread_inter(thread);
 
 	return old_priority;
 }
 
 
-IMPEXP_BHAPI b_int32 bhapi_get_thread_priority(void *data)
+IMPEXP_BHAPI b_int32 b_get_thread_priority(void *data)
 {
-	bhapi_beos_thread_private_t *priThread = (bhapi_beos_thread_private_t*)data;
-	bhapi_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)data;
+	b_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL) return -1;
 
-	bhapi_lock_thread_inter(thread);
+	b_lock_thread_inter(thread);
 	b_int32 priority = thread->priority;
-	bhapi_unlock_thread_inter(thread);
+	b_unlock_thread_inter(thread);
 
 	return priority;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_on_exit_thread(void (*callback)(void *), void *user_data)
+IMPEXP_BHAPI b_status_t b_on_exit_thread(void (*callback)(void *), void *user_data)
 {
 	if(!callback) return B_BAD_VALUE;
 
-	bhapi_beos_thread_private_t *priThread = (bhapi_beos_thread_private_t*)bhapi_open_thread(bhapi_get_current_thread_id());
+	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)b_open_thread(b_get_current_thread_id());
 	if(priThread == NULL)
 	{
 		BHAPI_WARNING("[KERNEL]: %s --- Thread wasn't created by this toolkit!", __PRETTY_FUNCTION__);
 		return B_ERROR;
 	}
 
-	bhapi_beos_thread_t *thread = priThread->thread;
+	b_beos_thread_t *thread = priThread->thread;
 
-	_threadCallback_ *exitCallback = new _threadCallback_;
+	threadCallback *exitCallback = new threadCallback;
 	if(exitCallback == NULL)
 	{
-		bhapi_delete_thread(priThread);
+		b_delete_thread(priThread);
 		return B_NO_MEMORY;
 	}
 
@@ -639,32 +639,32 @@ IMPEXP_BHAPI b_status_t bhapi_on_exit_thread(void (*callback)(void *), void *use
 
 	b_status_t retVal = B_OK;
 
-	bhapi_lock_thread_inter(thread);
+	b_lock_thread_inter(thread);
 	if(thread->exited || thread->exit_callbacks.AddItem((void*)exitCallback, 0) == false)
 	{
 		delete exitCallback;
 		retVal = B_ERROR;
 	}
-	bhapi_unlock_thread_inter(thread);
+	b_unlock_thread_inter(thread);
 
-	bhapi_delete_thread(priThread);
+	b_delete_thread(priThread);
 
 	return retVal;
 }
 
 
-IMPEXP_BHAPI void bhapi_exit_thread(b_status_t status)
+IMPEXP_BHAPI void b_exit_thread(b_status_t status)
 {
-	bhapi_beos_thread_private_t *priThread = (bhapi_beos_thread_private_t*)bhapi_open_thread(bhapi_get_current_thread_id());
+	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)b_open_thread(b_get_current_thread_id());
 	if(priThread == NULL)
 	{
 		BHAPI_WARNING("[KERNEL]: %s --- thread wasn't created by this toolkit!", __PRETTY_FUNCTION__);
 		return;
 	}
 
-	bhapi_beos_thread_t *thread = priThread->thread;
+	b_beos_thread_t *thread = priThread->thread;
 
-	bhapi_lock_thread_inter(thread);
+	b_lock_thread_inter(thread);
 
 	thread->running = 0;
 	thread->exited = true;
@@ -681,28 +681,28 @@ IMPEXP_BHAPI void bhapi_exit_thread(b_status_t status)
 	BList exitCallbackList(thread->exit_callbacks);
 	thread->exit_callbacks.MakeEmpty();
 
-	bhapi_unlock_thread_inter(thread);
+	b_unlock_thread_inter(thread);
 
-	_threadCallback_ *exitCallback;
-	while((exitCallback = (_threadCallback_*)exitCallbackList.RemoveItem(0)) != NULL)
+	threadCallback *exitCallback;
+	while((exitCallback = (threadCallback*)exitCallbackList.RemoveItem(0)) != NULL)
 	{
 		if(exitCallback->func) (*(exitCallback->func))(exitCallback->user_data);
 		delete exitCallback;
 	}
 
-	bhapi_delete_thread(priThread);
+	b_delete_thread(priThread);
 
 	exit_thread(0);
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_wait_for_thread_etc(void *data, b_status_t *thread_return_value, b_uint32 flags, b_bigtime_t microseconds_timeout)
+IMPEXP_BHAPI b_status_t b_wait_for_thread_etc(void *data, b_status_t *thread_return_value, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
-	bhapi_beos_thread_private_t *priThread = (bhapi_beos_thread_private_t*)data;
-	bhapi_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
+	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)data;
+	b_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL || microseconds_timeout < B_INT64_CONSTANT(0) || thread_return_value == NULL) return B_BAD_VALUE;
 
-	b_bigtime_t currentTime = bhapi_real_time_clock_usecs();
+	b_bigtime_t currentTime = b_real_time_clock_usecs();
 	bool wait_forever = false;
 
 	if(flags != B_ABSOLUTE_TIMEOUT)
@@ -713,41 +713,41 @@ IMPEXP_BHAPI b_status_t bhapi_wait_for_thread_etc(void *data, b_status_t *thread
 			microseconds_timeout += currentTime;
 	}
 
-	bhapi_lock_thread_inter(thread);
+	b_lock_thread_inter(thread);
 
-	if(thread->ID == bhapi_get_current_thread_id())
+	if(thread->ID == b_get_current_thread_id())
 	{
 		BHAPI_WARNING("[KERNEL]: %s --- Can't wait self.", __PRETTY_FUNCTION__);
-		bhapi_unlock_thread_inter(thread);
+		b_unlock_thread_inter(thread);
 		return B_ERROR;
 	}
 	else if(thread->exited)
 	{
-		bhapi_unlock_thread_inter(thread);
+		b_unlock_thread_inter(thread);
 		return B_OK;
 	}
 	else if(microseconds_timeout == currentTime && !wait_forever)
 	{
-		bhapi_unlock_thread_inter(thread);
+		b_unlock_thread_inter(thread);
 		return B_WOULD_BLOCK;
 	}
 
 	if(thread->callback.func || thread->running == 2) resume_thread((thread_id)thread->ID);
 
-	bhapi_unlock_thread_inter(thread);
+	b_unlock_thread_inter(thread);
 
 	b_status_t retval = B_OK;
 
 	status_t status = (wait_forever ? acquire_sem(thread->cond) :
 					  acquire_sem_etc(thread->cond, 1,
 						  	  B_ABSOLUTE_TIMEOUT,
-							  (bigtime_t)(microseconds_timeout - bhapi_system_boot_time())));
+							  (bigtime_t)(microseconds_timeout - b_system_boot_time())));
 
-	bhapi_lock_thread_inter(thread);
+	b_lock_thread_inter(thread);
 
 	if(status != B_OK)
 	{
-		bhapi_unlock_thread_inter(thread);
+		b_unlock_thread_inter(thread);
 
 		if(status == B_WOULD_BLOCK) retval = B_WOULD_BLOCK;
 		else if(status == B_TIMED_OUT) retval = B_TIMED_OUT;
@@ -768,20 +768,20 @@ IMPEXP_BHAPI b_status_t bhapi_wait_for_thread_etc(void *data, b_status_t *thread
 		else
 			retval = B_ERROR;
 
-		bhapi_unlock_thread_inter(thread);
+		b_unlock_thread_inter(thread);
 	}
 
 	return retval;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_wait_for_thread(void *data, b_status_t *thread_return_value)
+IMPEXP_BHAPI b_status_t b_wait_for_thread(void *data, b_status_t *thread_return_value)
 {
-	return bhapi_wait_for_thread_etc(data, thread_return_value, B_TIMEOUT, B_INFINITE_TIMEOUT);
+	return b_wait_for_thread_etc(data, thread_return_value, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_snooze(b_bigtime_t microseconds)
+IMPEXP_BHAPI b_status_t b_snooze(b_bigtime_t microseconds)
 {
 	if(microseconds <= 0) return B_ERROR;
 
@@ -790,7 +790,7 @@ IMPEXP_BHAPI b_status_t bhapi_snooze(b_bigtime_t microseconds)
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_snooze_until(b_bigtime_t time, int timebase)
+IMPEXP_BHAPI b_status_t b_snooze_until(b_bigtime_t time, int timebase)
 {
 	if(time < B_INT64_CONSTANT(0)) return B_ERROR;
 
@@ -798,7 +798,7 @@ IMPEXP_BHAPI b_status_t bhapi_snooze_until(b_bigtime_t time, int timebase)
 	switch(timebase)
 	{
 		case B_SYSTEM_TIMEBASE:
-			time += bhapi_system_boot_time();
+			time += b_system_boot_time();
 			btimebase = B_SYSTEM_TIMEBASE;
 			break;
 
@@ -814,7 +814,7 @@ IMPEXP_BHAPI b_status_t bhapi_snooze_until(b_bigtime_t time, int timebase)
 }
 
 
-IMPEXP_BHAPI b_int64 bhapi_get_current_team_id(void)
+IMPEXP_BHAPI b_int64 b_get_current_team_id(void)
 {
 	thread_info threadInfo;
 	if(get_thread_info(find_thread(NULL), &threadInfo) != B_OK) return B_INT64_CONSTANT(0);

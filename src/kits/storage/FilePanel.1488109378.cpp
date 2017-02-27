@@ -49,8 +49,6 @@
 #include "../storage/Directory.h"
 #include "../support/Autolock.h"
 #include "../support/ClassInfo.h"
-#include "../support/SupportDefs.h"
-#include "../app/Messenger.h"
 #include "../app/Message.h"
 #include "../app/MessageFilter.h"
 #include "../support/Errors.h"
@@ -101,7 +99,7 @@
 
 #ifdef BHAPI_OS_WIN32
 extern "C" {
-extern char* b_win32_convert_active_to_utf8(const char *str, b_int32 length);
+extern char* bhapi_win32_convert_active_to_utf8(const char *str, b_int32 length);
 }
 #endif
 
@@ -109,7 +107,7 @@ class BFilePanelView;
 class BFilePanelWindow;
 
 
-class LOCAL_BHAPI BFilePanelLabel : public BStringView {
+class _LOCAL BFilePanelLabel : public BStringView {
 public:
 	BFilePanelLabel(BRect frame, const char *name, const char *text, b_uint32 resizeMode);
 
@@ -118,7 +116,7 @@ public:
 };
 
 
-class LOCAL_BHAPI BFilePanelListItem : public BListItem {
+class _LOCAL BFilePanelListItem : public BListItem {
 public:
 	BFilePanelListItem(const char *path, BFilePanelView *panel_view, b_dev_t dev = -1);
 	virtual ~BFilePanelListItem();
@@ -148,7 +146,7 @@ private:
 };
 
 
-class LOCAL_BHAPI BFilePanelListView : public BListView {
+class _LOCAL BFilePanelListView : public BListView {
 public:
 	BFilePanelListView(BRect frame, const char *name, b_list_view_type type);
 
@@ -161,7 +159,7 @@ public:
 };
 
 
-class LOCAL_BHAPI BFilePanelTitleView : public BView {
+class _LOCAL BFilePanelTitleView : public BView {
 public:
 	BFilePanelTitleView(BRect parent_bounds);
 
@@ -172,7 +170,7 @@ public:
 };
 
 
-class LOCAL_BHAPI BFilePanelView : public BView {
+class _LOCAL BFilePanelView : public BView {
 public:
 	BFilePanelView(BRect frame, bool allow_multiple_selection);
 	virtual ~BFilePanelView();
@@ -210,7 +208,7 @@ private:
 };
 
 
-class LOCAL_BHAPI BFilePanelWindow : public BWindow {
+class _LOCAL BFilePanelWindow : public BWindow {
 public:
 	BFilePanelWindow(BFilePanel *panel,
 			 b_file_panel_mode mode,
@@ -323,7 +321,7 @@ BFilePanelListItem::BFilePanelListItem(const char *path, BFilePanelView *panel_v
 #ifndef BHAPI_OS_WIN32
 		fLeaf = b_strdup(fPath.Leaf());
 #else
-		fLeaf = b_win32_convert_active_to_utf8(fPath.Leaf(), -1);
+		fLeaf = bhapi_win32_convert_active_to_utf8(fPath.Leaf(), -1);
 #endif
 
 		if(fFlags == 0) aEntry.GetSize(&fSize);
@@ -374,7 +372,7 @@ BFilePanelListItem::DrawItem(BView *owner, BRect itemRect, bool drawEverything)
 void
 BFilePanelListItem::Update(BView *owner, const BFont *font)
 {
-	bhapi::font_height fontHeight;
+	b_font_height fontHeight;
 	font->GetHeight(&fontHeight);
 	SetHeight(max_c(fontHeight.ascent + fontHeight.descent, ICON_HEIGHT) + 4);
 
@@ -546,7 +544,7 @@ static void column_namb_drawing_callback(BView *owner, BRect rect, BFilePanelLis
 
 	if(item->Leaf())
 	{
-		bhapi::font_height fontHeight;
+		b_font_height fontHeight;
 		owner->GetFontHeight(&fontHeight);
 
 		float sHeight = fontHeight.ascent + fontHeight.descent;
@@ -594,7 +592,7 @@ static void column_sizb_drawing_callback(BView *owner, BRect rect, BFilePanelLis
 	else str.AppendFormat("%I64i %s", item->Size(), TEXT_BYTES);
 
 	BFont font;
-	bhapi::font_height fontHeight;
+	b_font_height fontHeight;
 	owner->GetFont(&font);
 	font.GetHeight(&fontHeight);
 
@@ -638,7 +636,7 @@ static void column_modified_drawing_callback(BView *owner, BRect rect, BFilePane
 	time_t timer = (time_t)(item->ModifiedTime() / B_INT64_CONSTANT(1000000));
 	struct tm *tmTime = NULL;
 
-#ifndef HAVELOCAL_BHAPITIME_R
+#ifndef HAVE_LOCALTIME_R
 	tmTime = localtime(&timer);
 #else
 	struct tm _tmTime;
@@ -652,7 +650,7 @@ static void column_modified_drawing_callback(BView *owner, BRect rect, BFilePane
 			 1900 + tmTime->tm_year, 1 + tmTime->tm_mon, tmTime->tm_mday,
 			 tmTime->tm_hour, tmTime->tm_min);
 
-	bhapi::font_height fontHeight;
+	b_font_height fontHeight;
 	owner->GetFontHeight(&fontHeight);
 
 	float sHeight = fontHeight.ascent + fontHeight.descent;
@@ -854,7 +852,7 @@ BFilePanelView::FrameResized(float new_width, float new_height)
 BFilePanelTitleView::BFilePanelTitleView(BRect parent_bounds)
 	: BView(parent_bounds, "TitleView", B_FOLLOW_LEFT_RIGHT | B_FOLLOW_TOP, B_WILL_DRAW)
 {
-	bhapi::font_height fontHeight;
+	b_font_height fontHeight;
 	GetFontHeight(&fontHeight);
 
 	ResizeTo(parent_bounds.Width() - B_V_SCROLL_BAR_WIDTH - 1,
@@ -883,7 +881,7 @@ BFilePanelTitleView::Draw(BRect updateRect)
 	}
 
 	BFont font;
-	bhapi::font_height fontHeight;
+	b_font_height fontHeight;
 	GetFont(&font);
 	font.GetHeight(&fontHeight);
 
@@ -954,7 +952,7 @@ BFilePanelTitleView::GetPreferredSize(float *width, float *height)
 
 	if(height)
 	{
-		bhapi::font_height fontHeight;
+		b_font_height fontHeight;
 		GetFontHeight(&fontHeight);
 		*height = fontHeight.ascent + fontHeight.descent + 4;
 	}
@@ -1206,7 +1204,7 @@ BFilePanelWindow::MessageReceived(BMessage *msg)
 				}
 			}
 
-			msgr = (fTarget == NULL ? &b_app_messenger : fTarget);
+			msgr = (fTarget == NULL ? &bhapi_app_messenger : fTarget);
 			if(fMessage) aMsg = new BMessage(*fMessage);
             else aMsg = new BMessage(fMode == B_OPEN_PANEL ? (b_uint32)B_REFS_RECEIVED : (b_uint32)B_SAVE_REQUESTED);
 			aMsg->AddString("directory", fPath.Path());
@@ -1228,7 +1226,7 @@ BFilePanelWindow::MessageReceived(BMessage *msg)
 			break;
 
 		case B_CANCEL:
-			msgr = (fTarget == NULL ? &b_app_messenger : fTarget);
+			msgr = (fTarget == NULL ? &bhapi_app_messenger : fTarget);
 			if(fMessage)
 			{
 				aMsg = new BMessage(*fMessage);
@@ -1512,7 +1510,7 @@ BFilePanelWindow::RefreshDirMenu()
 		msg->AddString("PanelDirectory", aPath.Path());
 
 #ifdef BHAPI_OS_WIN32
-		char *path = b_win32_convert_active_to_utf8(aPath.Path(), -1);
+		char *path = bhapi_win32_convert_active_to_utf8(aPath.Path(), -1);
 		menuItem = new BMenuItem(path ? path : aPath.Path(), msg);
 		if(path) free(path);
 #else
@@ -1530,7 +1528,7 @@ BFilePanelWindow::RefreshDirMenu()
 	}
 
 #ifdef BHAPI_OS_WIN32
-	char *path = b_win32_convert_active_to_utf8(fPath.Path(), -1);
+	char *path = bhapi_win32_convert_active_to_utf8(fPath.Path(), -1);
 	fDirMenu->Superitem()->SetLabel(path ? path : (fPath.Path() == NULL ? TEXT_ALL_VOLUMES : fPath.Path()));
 	if(path) free(path);
 #else
@@ -1721,7 +1719,7 @@ BFilePanel::GetPanelDirectory(BEntry *entry) const
 {
 	if(entry == NULL) return;
 
-	if(fWindow->Thread() != b_get_current_thread_id())
+	if(fWindow->Thread() != bhapi_get_current_thread_id())
 	{
 		BMessenger msgr(fWindow, fWindow);
 		BMessage msg(MSG_PANEL_GET_DIR);

@@ -29,7 +29,7 @@
 
 #include "InterfaceDefs.h"
 
-EXP_BHAPI b_rgb_color b_ui_color(b_color_which which)
+EXPORT_BHAPI b_rgb_color b_ui_color(b_color_which which)
 {
 	b_rgb_color color;
 
@@ -127,18 +127,17 @@ EXP_BHAPI b_rgb_color b_ui_color(b_color_which which)
 		default:
 			color.set_to(0, 0, 0);
 	}
-
 	return color;
 }
 
 
-EXP_BHAPI float b_ui_get_scrollbar_vertical_width()
+EXPORT_BHAPI float b_ui_get_scrollbar_vertical_width()
 {
 	return 16;
 }
 
 
-EXP_BHAPI float b_ui_get_scrollbar_horizontal_height()
+EXPORT_BHAPI float b_ui_get_scrollbar_horizontal_height()
 {
 	return 16;
 }

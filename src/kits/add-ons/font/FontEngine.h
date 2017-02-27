@@ -39,19 +39,36 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-typedef enum b_font_render_mode {
+class BFontEngine;
+
+namespace bhapi {
+
+typedef enum font_render_mode {
     B_FONT_RENDER_UNKNOWN = 0,
     B_FONT_RENDER_DIRECTLY = 1,
     B_FONT_RENDER_PIXMAP = 1 << 1,
-} b_font_render_mode;
+} font_render_mode;
 
-
-typedef struct b_font_detach_callback {
+typedef struct font_detach_callback {
 	void (*callback)(void*);
 	void *data;
-} b_font_detach_callback;
+} font_detach_callback;
 
-
+IMPEXP_BHAPI BFontEngine*	get_font_engine(const char *family, const char *style);
+IMPEXP_BHAPI BFontEngine*	get_font_engine(b_int32 familyIndex, b_int32 styleIndex);
+LOCAL_BHAPI bool font_init(void);
+IMPEXP_BHAPI bool font_add(const char *family, const char *style, BFontEngine *engine);
+IMPEXP_BHAPI bool update_font_families(bool);
+LOCAL_BHAPI bool font_lock(void);
+LOCAL_BHAPI void font_unlock(void);
+LOCAL_BHAPI void font_cancel(void);
+LOCAL_BHAPI bool font_other_init();
+LOCAL_BHAPI bool update_other_font_families(bool check_only);
+LOCAL_BHAPI void font_other_cancel();
+IMPEXP_BHAPI bool font_freetype2_init(void);
+IMPEXP_BHAPI bool font_freetype2_is_valid(void);
+IMPEXP_BHAPI void font_freetype2_cancel(void);
+using namespace bhapi;
 class IMPEXP_BHAPI BFontEngine {
 public:
     BFontEngine();
@@ -72,9 +89,9 @@ public:
     float StringWidth(const BString &str, float size, float spacing = 0,
               float shear = 90, bool bold = false, b_int32 length = -1) const;
 
-    virtual void GetHeight(b_font_height *height, float size, float shear = 90, bool bold = false) const;
+    virtual void GetHeight(bhapi::font_height *height, float size, float shear = 90, bool bold = false) const;
 
-	b_font_render_mode RenderMode() const;
+    bhapi::font_render_mode RenderMode() const;
 
 	// ForceFontAliasing: just affected before calling "RenderString"
 	virtual void ForceFontAliasing(bool enable);
@@ -95,9 +112,9 @@ public:
 			     float size, float spacing = 0,
                  float shear = 90, bool bold = false, b_int32 length = -1);
 
-	virtual b_font_detach_callback* Attach(void (*callback)(void*), void *data);
+    virtual bhapi::font_detach_callback* Attach(void (*callback)(void*), void *data);
 	bool IsAttached() const;
-    virtual bool Detach(b_font_detach_callback *callback);
+    virtual bool Detach(bhapi::font_detach_callback *callback);
 
 	bool Lock();
 	void Unlock();
@@ -106,7 +123,7 @@ protected:
 	void SetFamily(const char *family);
 	void SetStyle(const char *style);
     void SetFixedSize(float *sizes, b_int32 count);
-    void SetRenderMode(b_font_render_mode rmode);
+    void SetRenderMode(bhapi::font_render_mode rmode);
 
 	bool InServing() const;
 	void OutOfServing();
@@ -121,16 +138,11 @@ private:
 	float *fFixedSize;
     b_int32 nFixedSize;
 
-	b_font_render_mode fRenderMode;
+    bhapi::font_render_mode fRenderMode;
 
-    friend IMPEXP_BHAPI bool bhapi_font_add(const char *family, const char *style, BFontEngine *engine);
+    friend IMPEXP_BHAPI bool bhapi::font_add(const char *family, const char *style, BFontEngine *engine);
     BStringArray *fServing;
 };
-
-IMPEXP_BHAPI bool		bhapi_font_add(const char *family, const char *style, BFontEngine *engine);
-IMPEXP_BHAPI BFontEngine*	bhapi_get_font_engine(const char *family, const char *style);
-IMPEXP_BHAPI BFontEngine*	bhapi_get_font_engine(b_int32 familyIndex, b_int32 styleIndex);
-
 #endif /* __cplusplus */
 
 #endif /* BHAPI_FONT_ENGINE__H */

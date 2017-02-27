@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
- * 
+ *
  * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,10 +22,10 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: Alert.cpp
  * Description: BAlert --- Display a modal window that notifies something
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #include "Alert.h"
@@ -197,7 +197,7 @@ BAlertButton::Invoke(const BMessage *msg)
 	else
 	{
 		alert_view->fState = (0x01 << fIndex);
-		if(alert_view->fSem) bhapi_release_sem_etc(alert_view->fSem, (b_int64)(fIndex + 1), 0);
+		if(alert_view->fSem) b_release_sem_etc(alert_view->fSem, (b_int64)(fIndex + 1), 0);
 	}
 
 	alert->PostMessage(B_QUIT_REQUESTED);
@@ -317,7 +317,7 @@ BAlert::Go(bool could_proxy)
 
 	if(could_proxy)
 	{
-		BLooper *looper = BLooper::LooperForThread(bhapi_get_current_thread_id());
+		BLooper *looper = BLooper::LooperForThread(b_get_current_thread_id());
 		if(looper)
 		{
 			looper->Lock();
@@ -352,19 +352,19 @@ BAlert::Go(bool could_proxy)
 	}
 	else
 	{
-		void *trackingSem = bhapi_create_sem(0, NULL);
+		void *trackingSem = b_create_sem(0, NULL);
 		alert_view->fSem = trackingSem;
 
 		Unlock();
 
 		b_int64 count = 0;
-		if(!(bhapi_acquire_sem(trackingSem) != B_OK ||
-		     bhapi_get_sem_count(trackingSem, &count) != B_OK ||
+		if(!(b_acquire_sem(trackingSem) != B_OK ||
+		     b_get_sem_count(trackingSem, &count) != B_OK ||
 		     count < 0 || count > 2))
 		{
 			retVal = (b_int32)count;
 		}
-		bhapi_delete_sem(trackingSem);
+		b_delete_sem(trackingSem);
 	}
 
 	return retVal;

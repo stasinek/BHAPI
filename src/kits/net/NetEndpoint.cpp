@@ -69,7 +69,7 @@
 #endif
 
 #ifdef SIGPIPE
-class _LOCAL BNetEndpointSignalIgnore {
+class LOCAL_BHAPI BNetEndpointSignalIgnore {
 public:
 	BNetEndpointSignalIgnore()
 	{

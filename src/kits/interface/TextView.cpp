@@ -66,7 +66,7 @@ BTextView::BTextView(BRect frame, const char *name, BRect textRect, b_uint32 res
 	{
 		fRunArray->count = 1;
 		fRunArray->runs[0].offset = 0;
-		fRunArray->runs[0].font = *bhapi_plain_font;
+		fRunArray->runs[0].font = *b_plain_font;
 		fRunArray->runs[0].color.set_to(0, 0, 0, 255);
 		fRunArray->runs[0].background.set_to(0, 0, 0, 0);
 		fRunArray->runs[0].underline = false;
@@ -89,7 +89,7 @@ BTextView::BTextView(BRect frame, const char *name, BRect textRect, const BFont 
 	{
 		fRunArray->count = 1;
 		fRunArray->runs[0].offset = 0;
-		fRunArray->runs[0].font = (font ? *font : *bhapi_plain_font);
+		fRunArray->runs[0].font = (font ? *font : *b_plain_font);
 		fRunArray->runs[0].color.set_to(0, 0, 0, 255);
 		if(color) fRunArray->runs[0].color = *color;
 		fRunArray->runs[0].background.set_to(0, 0, 0, 0);
@@ -203,13 +203,13 @@ BTextView::ReScanSize(b_int32 fromLine, b_int32 toLine)
 		line->max_ascent = 0;
 
 		const char *str = fText.String() + curLineOffset;
-		b_font_height fontHeight;
+		bhapi::font_height fontHeight;
 
 		if(line->array == NULL || line->array->count <= 0)
 		{
-			line->width = _StringWidth(*bhapi_plain_font, str, line->length);
+			line->width = _StringWidth(*b_plain_font, str, line->length);
 
-			bhapi_plain_font->GetHeight(&fontHeight);
+			b_plain_font->GetHeight(&fontHeight);
 			line->height = fontHeight.ascent + fontHeight.descent;
 			line->max_ascent = fontHeight.ascent;
 		}
@@ -432,7 +432,7 @@ BTextView::PointAt(b_int32 offset, float *height, bool max_height, bool utf8) co
 		{
 			const char *str = fText.String() + curLineOffset;
 			b_int32 __offset = offset - curLineOffset;
-			b_font_height fontHeight;
+			bhapi::font_height fontHeight;
 			BPoint pt(rect.left, yStart);
 			float h = 0;
 
@@ -441,10 +441,10 @@ BTextView::PointAt(b_int32 offset, float *height, bool max_height, bool utf8) co
 
 			if(line->array == NULL || line->array->count <= 0)
 			{
-				pt.x += _StringWidth(*bhapi_plain_font, str, __offset);
-				if(__offset != 0) pt.x += bhapi_plain_font->Spacing() * bhapi_plain_font->Size();
+				pt.x += _StringWidth(*b_plain_font, str, __offset);
+				if(__offset != 0) pt.x += b_plain_font->Spacing() * b_plain_font->Size();
 
-				bhapi_plain_font->GetHeight(&fontHeight);
+				b_plain_font->GetHeight(&fontHeight);
 				h = (max_height ? line->height : (fontHeight.ascent + fontHeight.descent));
 				if(!max_height) pt.y += line->max_ascent - fontHeight.ascent;
 			}
@@ -532,8 +532,8 @@ BTextView::OffsetAt(BPoint pt, bool visible, bool utf8) const
 			{
 				for(tmp = str; !(tmp == NULL || tmp - str > line->length); tmp = b_utf8_next(tmp, &nbytes))
 				{
-					if(tmp != str) xStart = xEnd + bhapi_plain_font->Spacing() * bhapi_plain_font->Size();
-					xEnd = xStart + _StringWidth(*bhapi_plain_font, tmp, (b_int32)nbytes);
+					if(tmp != str) xStart = xEnd + b_plain_font->Spacing() * b_plain_font->Size();
+					xEnd = xStart + _StringWidth(*b_plain_font, tmp, (b_int32)nbytes);
 					if(pt.x <= xEnd) break;
 				}
 			}
@@ -679,9 +679,9 @@ BTextView::GetTextRegion(b_int32 startPos, b_int32 endPos, BRegion *region, bool
 
 		if(line->array == NULL || line->array->count <= 0)
 		{
-			r.left += _StringWidth(*bhapi_plain_font, str, __offset);
-			if(__offset != 0) r.left += bhapi_plain_font->Spacing() * bhapi_plain_font->Size();
-			r.right = r.left + _StringWidth(*bhapi_plain_font, str + __offset,
+			r.left += _StringWidth(*b_plain_font, str, __offset);
+			if(__offset != 0) r.left += b_plain_font->Spacing() * b_plain_font->Size();
+			r.right = r.left + _StringWidth(*b_plain_font, str + __offset,
 							min_c(endPos - curLineOffset, line->length) - __offset);
 		}
 		else for(b_int32 k = 0; k < line->array->count; k++)
@@ -1183,7 +1183,7 @@ BTextView::DeleteText(b_int32 startPos, b_int32 endPos, bool utf8)
 		{
 			fRunArray->count = 1;
 			fRunArray->runs[0].offset = 0;
-			fRunArray->runs[0].font = *bhapi_plain_font;
+			fRunArray->runs[0].font = *b_plain_font;
 			fRunArray->runs[0].color.set_to(0, 0, 0, 255);
 			fRunArray->runs[0].background.set_to(0, 0, 0, 0);
 			fRunArray->runs[0].underline = false;
@@ -1517,7 +1517,7 @@ BTextView::Draw(BRect updateRect)
 				if(!IsEnabled()) fgColor.disable(ViewColor());
 
 				BView::SetHighColor(fgColor);
-				_DrawString(*bhapi_plain_font, str, penLocation, line->length);
+				_DrawString(*b_plain_font, str, penLocation, line->length);
 
 				if(cursorPos >= 0 && IsFocus())
 				{
@@ -1525,7 +1525,7 @@ BTextView::Draw(BRect updateRect)
 					if(!IsEnabled()) color.disable(ViewColor());
 					BView::SetHighColor(color);
 					BRect aRect;
-					aRect.left = r.left + _StringWidth(*bhapi_plain_font, str, cursorPos);
+					aRect.left = r.left + _StringWidth(*b_plain_font, str, cursorPos);
 					aRect.right = aRect.left;
 					aRect.top = r.top;
 					aRect.bottom = r.top + line->height;
@@ -1617,7 +1617,7 @@ BTextView::Draw(BRect updateRect)
 					if(!IsEnabled()) color.disable(ViewColor());
 					BView::SetHighColor(color);
 
-					b_font_height fontHeight;
+					bhapi::font_height fontHeight;
 					curFont.GetHeight(&fontHeight);
 
 					BRect aRect;
@@ -1641,8 +1641,8 @@ BTextView::Draw(BRect updateRect)
 
 	if(fLines.CountItems() <= 0 && fEditable && IsFocus())
 	{
-		BFont font(*bhapi_plain_font);
-		b_font_height fontHeight;
+		BFont font(*b_plain_font);
+		bhapi::font_height fontHeight;
 		if(!(fRunArray == NULL || fRunArray->count <= 0)) font = fRunArray->runs[0].font;
 		font.GetHeight(&fontHeight);
 
@@ -1884,7 +1884,7 @@ void
 BTextView::MouseUp(BPoint where)
 {
 	fSelectTracking = -1;
-	if(TextRect().Contains(where)) bhapi_app->ObscureCursor();
+	if(TextRect().Contains(where)) b_app->ObscureCursor();
 }
 
 
@@ -1893,11 +1893,11 @@ BTextView::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 {
 	if(TextRect().Contains(where) == false || code == B_EXITED_VIEW)
 	{
-		bhapi_app->SetCursor(B_CURSOR_SYSTEM_DEFAULT, false);
+		b_app->SetCursor(B_CURSOR_SYSTEM_DEFAULT, false);
 		return;
 	}
 
-	bhapi_app->SetCursor(B_CURSOR_I_BEAM, false);
+	b_app->SetCursor(B_CURSOR_I_BEAM, false);
 
 	if(!IsEnabled() || !IsSelectable() || fSelectTracking < 0) return;
 
@@ -2054,9 +2054,9 @@ BTextView::KeyDown(const char *bytes, b_int32 numBytes)
 
 	if(!(numBytes != 1 || msg->what != B_KEY_DOWN || !IsEnabled() || !IsEditable() || !(modifiers & B_CONTROL_KEY)))
 	{
-		if(*bytes == 'c' || *bytes == 'C') {Copy(&bhapi_clipboard); return;}
-		else if(*bytes == 'x' || *bytes == 'X') {Cut(&bhapi_clipboard); return;}
-		else if(*bytes == 'v' || *bytes == 'V') {Paste(&bhapi_clipboard); return;}
+		if(*bytes == 'c' || *bytes == 'C') {Copy(&b_clipboard); return;}
+		else if(*bytes == 'x' || *bytes == 'X') {Cut(&b_clipboard); return;}
+		else if(*bytes == 'v' || *bytes == 'V') {Paste(&b_clipboard); return;}
 	}
 
 	if((modifiers & B_CONTROL_KEY) || (modifiers & B_COMMAND_KEY) ||
@@ -2480,7 +2480,7 @@ BTextView::MessageReceived(BMessage *msg)
 	{
 		b_int32 modifiers = 0, old_modifiers = 0;
 		msg->FindInt32("modifiers", &modifiers);
-		msg->FindInt32("etk:old_modifiers", &old_modifiers);
+		msg->FindInt32("BHAPI:old_modifiers", &old_modifiers);
 		if((old_modifiers & B_SHIFT_KEY) && !(modifiers & B_SHIFT_KEY)) fSelectTracking = -1;
 	}
 	BView::MessageReceived(msg);

@@ -34,7 +34,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class _LOCAL BMemory
+class LOCAL_BHAPI BMemory
 {
 public:
 	static void	*Malloc(size_t size, void (*destroy_func)(void*) = NULL);

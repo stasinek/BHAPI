@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
- * 
+ *
  * DirectFB Graphics Add-on for BHAPI++
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,9 +22,9 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: etk-dfb-font.cpp
- * 
+ *
  * --------------------------------------------------------------------------*/
 #ifdef LINUX
 #ifdef DIRECTFB
@@ -52,11 +52,11 @@ public:
 	virtual void ForceFontAliasing(bool enable);
 
 	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold, b_int32 length) const;
-	virtual void GetHeight(b_font_height *height, float size, float shear, bool bold) const;
+	virtual void GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const;
 	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold, b_int32 length);
 
-	virtual b_font_detach_callback* Attach(void (*callback)(void*), void *data);
-	virtual bool Detach(b_font_detach_callback *callback);
+	virtual bhapi::font_detach_callback* Attach(void (*callback)(void*), void *data);
+	virtual bool Detach(bhapi::font_detach_callback *callback);
 
 private:
 	bool fScalable;
@@ -119,7 +119,7 @@ EDFBFont::~EDFBFont()
 }
 
 
-b_font_detach_callback*
+bhapi::font_detach_callback*
 EDFBFont::Attach(void (*callback)(void*), void *data)
 {
 	if(fEngine == NULL) return NULL;
@@ -130,7 +130,7 @@ EDFBFont::Attach(void (*callback)(void*), void *data)
 
 
 bool
-EDFBFont::Detach(b_font_detach_callback *callback)
+EDFBFont::Detach(bhapi::font_detach_callback *callback)
 {
 	if(fEngine == NULL) return false;
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
@@ -223,11 +223,11 @@ EDFBFont::StringWidth(const char *string, float size, float spacing, float shear
 
 
 void
-EDFBFont::GetHeight(b_font_height *height, float size, float shear, bool bold) const
+EDFBFont::GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const
 {
 	if(fEngine == NULL || height == NULL) return;
 
-	bzero(height, sizeof(b_font_height));
+	bzero(height, sizeof(bhapi::font_height));
 
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return;
@@ -404,7 +404,7 @@ EDFBGraphicsEngine::UpdateFonts(bool check_only)
 
 			EDFBFont *engine = new EDFBFont(this, aPath.Path());
 			if(engine == NULL || engine->IsValid() == false ||
-			   bhapi_font_add(engine->Family(), engine->Style(), engine) == false)
+			   bhapi::font_add(engine->Family(), engine->Style(), engine) == false)
 			{
 				if(engine) delete engine;
 				continue;
@@ -419,7 +419,7 @@ EDFBGraphicsEngine::UpdateFonts(bool check_only)
 	{
 		EDFBFont *engine = new EDFBFont(this, NULL);
 		if(engine == NULL || engine->IsValid() == false ||
-		   bhapi_font_add(engine->Family(), engine->Style(), engine) == false)
+		   bhapi::font_add(engine->Family(), engine->Style(), engine) == false)
 		{
 			if(engine) delete engine;
 		}

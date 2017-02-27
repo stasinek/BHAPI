@@ -40,7 +40,7 @@
 #include "Clipboard.h"
 #include "Application.h"
 
-class _LOCAL _BSystemClipboard {
+class LOCAL_BHAPI _BSystemClipboard {
 public:
 	BSimpleLocker fLocker;
 	BMessage fData;
@@ -243,7 +243,7 @@ BClipboard::DataSource() const
 	// TODO
 	if(fName == NULL) return BMessenger();
 
-	return bhapi_app_messenger;
+	return b_app_messenger;
 }
 
 

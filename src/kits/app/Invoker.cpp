@@ -39,16 +39,16 @@
 #include "../support/Errors.h"
 
 
-typedef struct bhapi_invoker_notify_state {
+typedef struct b_invoker_notify_state {
 	b_uint32 kind;
 	bool called;
-} bhapi_invoker_notify_state;
+} b_invoker_notify_state;
 
 
 BInvoker::BInvoker()
 	: fMessage(NULL), fReplyHandlerToken(B_MAXUINT64), fTimeout(B_INFINITE_TIMEOUT), fNotifyKind(B_CONTROL_INVOKED), fNotifyCalled(false)
 {
-	SetHandlerForReply(bhapi_app);
+	SetHandlerForReply(b_app);
 }
 
 
@@ -59,7 +59,7 @@ BInvoker::BInvoker(BMessage *message, const BHandler *handler, const BLooper *lo
 	BMessenger msgr(handler, looper, NULL);
 	fMessenger = msgr;
 
-	SetHandlerForReply(bhapi_app);
+	SetHandlerForReply(b_app);
 }
 
 
@@ -69,19 +69,19 @@ BInvoker::BInvoker(BMessage *message, BMessenger target)
 	fMessage = message;
 	fMessenger = target;
 
-	SetHandlerForReply(bhapi_app);
+	SetHandlerForReply(b_app);
 }
 
 
 BInvoker::~BInvoker()
 {
 	if(fMessage) delete fMessage;
-	if(fReplyHandlerToken != B_MAXUINT64) bhapi_unref_handler(fReplyHandlerToken);
+	if(fReplyHandlerToken != B_MAXUINT64) b_unref_handler(fReplyHandlerToken);
 	if(!fNotifyStatesList.IsEmpty())
 	{
 		for(b_int32 i = 0; i < fNotifyStatesList.CountItems(); i++)
 		{
-			bhapi_invoker_notify_state *state = (bhapi_invoker_notify_state*)fNotifyStatesList.ItemAt(i);
+			b_invoker_notify_state *state = (b_invoker_notify_state*)fNotifyStatesList.ItemAt(i);
 			if(state) delete state;
 		}
 		fNotifyStatesList.MakeEmpty();
@@ -157,9 +157,9 @@ BInvoker::Messenger() const
 b_status_t
 BInvoker::SetHandlerForReply(const BHandler *handler)
 {
-	if(fReplyHandlerToken != B_MAXUINT64) bhapi_unref_handler(fReplyHandlerToken);
+	if(fReplyHandlerToken != B_MAXUINT64) b_unref_handler(fReplyHandlerToken);
 
-	fReplyHandlerToken = bhapi_get_ref_handler_token(handler);
+	fReplyHandlerToken = b_get_ref_handler_token(handler);
 
 	return B_OK;
 }
@@ -168,7 +168,7 @@ BInvoker::SetHandlerForReply(const BHandler *handler)
 BHandler*
 BInvoker::HandlerForReply() const
 {
-	return(bhapi_get_handler(fReplyHandlerToken));
+	return(b_get_handler(fReplyHandlerToken));
 }
 
 
@@ -220,7 +220,7 @@ BInvoker::BeginInvokeNotify(B_CONTROL_INVOKED);
 void
 BInvoker::BeginInvokeNotify(b_uint32 kind)
 {
-	bhapi_invoker_notify_state *state = new bhapi_invoker_notify_state;
+	b_invoker_notify_state *state = new b_invoker_notify_state;
 	if(state)
 	{
 		state->kind = fNotifyKind;
@@ -239,7 +239,7 @@ BInvoker::EndInvokeNotify()
 	fNotifyKind = B_CONTROL_INVOKED;
 	fNotifyCalled = false;
 
-	bhapi_invoker_notify_state *state = (bhapi_invoker_notify_state*)fNotifyStatesList.RemoveItem(fNotifyStatesList.CountItems() - 1);
+	b_invoker_notify_state *state = (b_invoker_notify_state*)fNotifyStatesList.RemoveItem(fNotifyStatesList.CountItems() - 1);
 	if(state)
 	{
 		fNotifyKind = state->kind;

@@ -65,7 +65,7 @@ BCheckBox::Draw(BRect updateRect)
 
 	BFont font;
 	GetFont(&font);
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 	font.GetHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 
@@ -141,7 +141,7 @@ BCheckBox::MouseDown(BPoint where)
 	if(!IsEnabled() || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON)) return;
 
 #if 0
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 	GetFontHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 
@@ -187,7 +187,7 @@ BCheckBox::GetPreferredSize(float *width, float *height)
 
 	BFont font;
 	GetFont(&font);
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 	font.GetHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
 

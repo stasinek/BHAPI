@@ -309,7 +309,7 @@ BMenuItem::GetContentSize(float *width, float *height) const
 {
     if((!width && !height) || !fMenu) return;
 
-	BFont font(bhapi_plain_font);
+	BFont font(b_plain_font);
 
 	if(width)
 	{
@@ -319,7 +319,7 @@ BMenuItem::GetContentSize(float *width, float *height) const
 		{
 			if(fSubmenu)
 			{
-				b_font_height fontHeight;
+				bhapi::font_height fontHeight;
 				font.GetHeight(&fontHeight);
 				*width += (float)ceil((double)(fontHeight.ascent + fontHeight.descent) / 2.f) + 10;
 			}
@@ -336,7 +336,7 @@ BMenuItem::GetContentSize(float *width, float *height) const
 
 	if(height)
 	{
-		b_font_height fontHeight;
+		bhapi::font_height fontHeight;
 		font.GetHeight(&fontHeight);
 		*height = (float)ceil((double)(fontHeight.ascent + fontHeight.descent));
 		*height += 4;
@@ -351,8 +351,8 @@ BMenuItem::DrawContent()
 
 	fMenu->PushState();
 
-	BFont font(bhapi_plain_font);
-	b_font_height fontHeight;
+	BFont font(b_plain_font);
+	bhapi::font_height fontHeight;
 	font.GetHeight(&fontHeight);
 	fMenu->SetFont(&font, B_FONT_ALL);
 

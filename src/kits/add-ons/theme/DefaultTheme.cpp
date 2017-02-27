@@ -77,7 +77,7 @@ static void draw_button(struct b_theme_engine *engine,
 			const char *button_label,
 			bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash);
 
-b_theme_engine bhapi_default_theme_engine = {
+b_theme_engine b_default_theme_engine = {
 	NULL,					// custom data
 
 	get_border_margins,			// get_border_margins
@@ -124,7 +124,7 @@ static void get_border_margins(struct b_theme_engine *engine,
 			       const BView *view, float *left, float *top, float *right, float *bottom,
 			       b_border_style border, float border_width)
 {
-	if(engine != &bhapi_default_theme_engine || view == NULL ||
+	if(engine != &b_default_theme_engine || view == NULL ||
 	   left == NULL || top == NULL || right == NULL || bottom == NULL) return;
 
 	if(border == B_NO_BORDER)
@@ -147,7 +147,7 @@ static void draw_border(struct b_theme_engine *engine,
 			BView *view, BRect frame,
 			b_border_style border, float border_width)
 {
-	if(engine != &bhapi_default_theme_engine ||
+	if(engine != &b_default_theme_engine ||
 	   view == NULL || view->Window() == NULL || frame.IsValid() == false ||
 	   border == B_NO_BORDER) return;
 
@@ -197,7 +197,7 @@ static void get_scrollbar_preferred_size(struct b_theme_engine *engine,
 					 const BView *view, float *width, float *height,
 					 b_orientation direction)
 {
-	if(engine != &bhapi_default_theme_engine || view == NULL || (width == NULL && height == NULL)) return;
+	if(engine != &b_default_theme_engine || view == NULL || (width == NULL && height == NULL)) return;
 
 	if(direction == B_HORIZONTAL)
 	{
@@ -217,7 +217,7 @@ static void get_scrollbar_respondent_region(struct b_theme_engine *engine,
 					    b_orientation direction, float minValue, float maxValue, float curValue, float *ratio,
 					    BRegion *drag, BRegion *smallUp, BRegion *smallDown, BRegion *largeUp, BRegion *largeDown)
 {
-	if(engine != &bhapi_default_theme_engine || view == NULL || frame.IsValid() == false ||
+	if(engine != &b_default_theme_engine || view == NULL || frame.IsValid() == false ||
 	   minValue > maxValue || curValue < minValue || curValue > maxValue ||
 	   (ratio == NULL && drag == NULL && smallUp == NULL && smallDown == NULL && largeUp == NULL && largeDown == NULL)) return;
 
@@ -417,7 +417,7 @@ static void draw_scrollbar(struct b_theme_engine *engine,
 			   b_orientation direction, float minValue, float maxValue, float curValue,
 			   bool mouse_down, BPoint mouse_pos)
 {
-	if(engine != &bhapi_default_theme_engine || view == NULL || view->Window() == NULL || frame.IsValid() == false ||
+	if(engine != &b_default_theme_engine || view == NULL || view->Window() == NULL || frame.IsValid() == false ||
 	   minValue > maxValue || curValue < minValue || curValue > maxValue) return;
 
 /*
@@ -566,12 +566,12 @@ static void get_button_preferred_size(struct b_theme_engine *engine,
 				      const BView *view, float *width, float *height,
 				      const char *button_label)
 {
-	if(engine != &bhapi_default_theme_engine || view == NULL || (width == NULL && height == NULL)) return;
+	if(engine != &b_default_theme_engine || view == NULL || (width == NULL && height == NULL)) return;
 
 	BFont font;
 	view->GetFont(&font);
 
-	b_font_height fontHeight;
+    bhapi::font_height fontHeight;
 	font.GetHeight(&fontHeight);
 
 	if(width != NULL)
@@ -591,7 +591,7 @@ static void get_button_preferred_size(struct b_theme_engine *engine,
 
 static b_uint8 should_button_do_focus_flash(struct b_theme_engine *engine, const BView *view)
 {
-	if(engine != &bhapi_default_theme_engine || view == NULL) return 0;
+	if(engine != &b_default_theme_engine || view == NULL) return 0;
 	if(view->IsFocus() == false || view->IsEnabled() == false) return 0;
 	return B_THEME_FOCUS_FLASH_BORDER;
 }
@@ -600,7 +600,7 @@ static b_uint8 should_button_do_focus_flash(struct b_theme_engine *engine, const
 static void get_button_border_margins(struct b_theme_engine *engine,
 				      const BView *view, float *left, float *top, float *right, float *bottom)
 {
-	if(engine != &bhapi_default_theme_engine || view == NULL ||
+	if(engine != &b_default_theme_engine || view == NULL ||
 	   left == NULL || top == NULL || right == NULL || bottom == NULL) return;
 
 	*left = 3; *top = 3; *right = 5; *bottom = 5;
@@ -611,7 +611,7 @@ static void draw_button_border(struct b_theme_engine *engine,
 			       BView *view, BRect frame,
 			       bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash)
 {
-	if(engine != &bhapi_default_theme_engine || view == NULL || view->Window() == NULL || frame.IsValid() == false) return;
+	if(engine != &b_default_theme_engine || view == NULL || view->Window() == NULL || frame.IsValid() == false) return;
 
 	b_rgb_color viewColor = view->ViewColor();
 	b_rgb_color backgroundColor = b_ui_color(B_BUTTON_BACKGROUND_COLOR);
@@ -863,7 +863,7 @@ static void clear_button_content(struct b_theme_engine *engine,
 				 BView *view, BRect frame,
 				 bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash)
 {
-	if(engine != &bhapi_default_theme_engine || view == NULL || view->Window() == NULL || frame.IsValid() == false) return;
+	if(engine != &b_default_theme_engine || view == NULL || view->Window() == NULL || frame.IsValid() == false) return;
 
 	BRect contentFrame = get_button_content_frame(frame);
 	bool button_enabled = view->IsEnabled();
@@ -898,7 +898,7 @@ static void draw_button_label(struct b_theme_engine *engine,
 			      const char *button_label,
 			      bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash)
 {
-	if(engine != &bhapi_default_theme_engine || view == NULL || view->Window() == NULL ||
+	if(engine != &b_default_theme_engine || view == NULL || view->Window() == NULL ||
 	   frame.IsValid() == false || button_label == NULL || *button_label == 0) return;
 
 	bool button_enabled = view->IsEnabled();
@@ -908,7 +908,7 @@ static void draw_button_label(struct b_theme_engine *engine,
 	BFont font;
 	view->GetFont(&font);
 
-	b_font_height fontHeight;
+    bhapi::font_height fontHeight;
 	font.GetHeight(&fontHeight);
 
 	BRect rect = get_button_content_frame(frame);
@@ -968,7 +968,7 @@ static void draw_button(struct b_theme_engine *engine,
 			const char *button_label,
 			bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash)
 {
-	if(engine != &bhapi_default_theme_engine || view == NULL || view->Window() == NULL) return;
+	if(engine != &b_default_theme_engine || view == NULL || view->Window() == NULL) return;
 
 	BRegion clipping;
 	view->GetClippingRegion(&clipping);

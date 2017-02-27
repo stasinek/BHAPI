@@ -43,7 +43,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-inline void bhapi_path_prepend_current_directory(BString &path)
+inline void b_path_prepend_current_directory(BString &path)
 {
 	char buf[B_MAXPATH + 1];
 	bzero(buf, B_MAXPATH + 1);
@@ -70,7 +70,7 @@ inline void bhapi_path_prepend_current_directory(BString &path)
 }
 
 
-inline bool bhapi_path_do_normalization(BString &path)
+inline bool b_path_do_normalization(BString &path)
 {
 	if(path.Length() <= 0) return false;
 
@@ -81,7 +81,7 @@ inline bool bhapi_path_do_normalization(BString &path)
 	   !(((path[0] >= 'a' && path[0] <= 'z') || (path[0] >= 'A' && path[0] <= 'Z')) && path[1] == ':'))
 	{
 		retVal = true;
-		bhapi_path_prepend_current_directory(path);
+		b_path_prepend_current_directory(path);
 	}
 	if(path[0] >= 'a' && path[0] <= 'z')
 	{
@@ -93,7 +93,7 @@ inline bool bhapi_path_do_normalization(BString &path)
 	if(path[0] != '/')
 	{
 		retVal = true;
-		bhapi_path_prepend_current_directory(path);
+		b_path_prepend_current_directory(path);
 	}
 #endif
 
@@ -134,7 +134,7 @@ inline bool bhapi_path_do_normalization(BString &path)
 }
 
 
-b_status_t bhapi_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize)
+b_status_t b_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize)
 {
 	BString str(dir);
 	BString str_leaf(leaf);
@@ -162,7 +162,7 @@ b_status_t bhapi_path_expound(BString &path, const char *dir, const char *leaf, 
 		str.Append(str_leaf);
 	}
 
-	bool strNormalizeDone = bhapi_path_do_normalization(str);
+	bool strNormalizeDone = b_path_do_normalization(str);
 	if(str.Length() <= 0) return B_BAD_VALUE;
 #ifdef _WIN32
 	if(str.FindFirst(":", str.FindFirst(":") + 1) >= 0) return B_BAD_VALUE;
@@ -175,7 +175,7 @@ b_status_t bhapi_path_expound(BString &path, const char *dir, const char *leaf, 
 }
 
 
-b_status_t bhapi_path_get_parent(BString &parent, const char *path)
+b_status_t b_path_get_parent(BString &parent, const char *path)
 {
 	if(path == NULL || *path == 0) return B_BAD_VALUE;
 
@@ -229,7 +229,7 @@ b_status_t
 BPath::SetTo(const char *dir, const char *leaf, bool normalize)
 {
 	BString str;
-	b_status_t status = bhapi_path_expound(str, dir, leaf, &normalize);
+	b_status_t status = b_path_expound(str, dir, leaf, &normalize);
 	if(status != B_OK) return status;
 
 	if(normalize)
@@ -319,7 +319,7 @@ BPath::GetParent(BPath *parent) const
 	if(fPath == NULL) return B_NO_INIT;
 
 	BString str;
-	b_status_t status = bhapi_path_get_parent(str, fPath);
+	b_status_t status = b_path_get_parent(str, fPath);
 	if(status != B_OK) return status;
 
 	return parent->SetTo(str.String(), NULL, false);

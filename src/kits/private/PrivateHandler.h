@@ -30,24 +30,25 @@
 #ifndef BHAPI_PRIVATE_HANDLER__H
 #define BHAPI_PRIVATE_HANDLER__H
 #include "../support/SupportDefs.h"
-#include "../support/Locker.h"
-#include "../app/Looper.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
-_LOCAL BLocker* bhapi_get_handler_operator_locker();
-_LOCAL b_uint64 bhapi_get_handler_token(const BHandler *handler);
-_LOCAL b_uint64 bhapi_get_ref_handler_token(const BHandler *handler);
-_LOCAL BHandler* bhapi_get_handler(b_uint64 token);
-_LOCAL b_bigtime_t bhapi_get_handler_create_time_stamp(b_uint64 token);
-_LOCAL BLooper* bhapi_get_handler_looper(b_uint64 token);
-_LOCAL b_uint64 bhapi_get_ref_looper_token(b_uint64 token);
-_LOCAL b_status_t bhapi_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
-_LOCAL bool bhapi_is_current_at_looper_thread(b_uint64 token);
-_LOCAL bool bhapi_ref_handler(b_uint64 token);
-_LOCAL void bhapi_unref_handler(b_uint64 token);
+class BHandler;
+class BLocker;
+class BLooper;
+namespace bhapi {
+LOCAL_BHAPI BLocker* get_handler_operator_locker();
+LOCAL_BHAPI b_uint64 get_handler_token(const BHandler *handler);
+LOCAL_BHAPI b_uint64 get_ref_handler_token(const BHandler *handler);
+LOCAL_BHAPI BHandler* get_handler(b_uint64 token);
+LOCAL_BHAPI b_bigtime_t get_handler_create_time_stamp(b_uint64 token);
+LOCAL_BHAPI BLooper* get_handler_looper(b_uint64 token);
+LOCAL_BHAPI b_uint64 get_ref_looper_token(b_uint64 token);
+LOCAL_BHAPI b_status_t lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
+LOCAL_BHAPI bool is_current_at_looper_thread(b_uint64 token);
+LOCAL_BHAPI bool ref_handler(b_uint64 token);
+LOCAL_BHAPI void unref_handler(b_uint64 token);
+} /* namespace bhapi */
 
 #endif /* __cplusplus */
-
 #endif /* BHAPI_PRIVATE_HANDLER__H */
 

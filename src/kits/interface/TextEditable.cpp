@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
- * 
+ *
  * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,10 +22,10 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: TextEditable.cpp
  * Description: BTextEditable --- a single-line editable field
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #include "TextEditable.h"
@@ -411,7 +411,7 @@ BTextEditable::Draw(BRect updateRect)
 	}
 
 	BFont font;
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 	GetFont(&font);
 	font.GetHeight(&fontHeight);
 
@@ -489,7 +489,7 @@ BTextEditable::DrawSelectedBackground(BRect updateRect)
 	if(!rect.IsValid()) return;
 
 	BFont font;
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 	GetFont(&font);
 	font.GetHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
@@ -545,7 +545,7 @@ BTextEditable::DrawCursor()
 	if(!rect.IsValid()) return;
 
 	BFont font;
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 	GetFont(&font);
 	font.GetHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
@@ -670,7 +670,7 @@ BTextEditable::MouseUp(BPoint where)
 	rect.right -= fMargins.right;
 	rect.bottom -= fMargins.bottom;
 
-	if(rect.Contains(where)) bhapi_app->ObscureCursor();
+	if(rect.Contains(where)) b_app->ObscureCursor();
 }
 
 
@@ -685,11 +685,11 @@ BTextEditable::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message
 
 	if(rect.Contains(where) == false || code == B_EXITED_VIEW)
 	{
-		bhapi_app->SetCursor(B_CURSOR_SYSTEM_DEFAULT, false);
+		b_app->SetCursor(B_CURSOR_SYSTEM_DEFAULT, false);
 		return;
 	}
 
-	bhapi_app->SetCursor(B_CURSOR_I_BEAM, false);
+	b_app->SetCursor(B_CURSOR_I_BEAM, false);
 
 	if(!IsEnabled() || !IsSelectable() || fSelectTracking < 0) return;
 
@@ -1104,7 +1104,7 @@ BTextEditable::KeyUp(const char *bytes, b_int32 numBytes)
 	if(Message() != NULL && fCount >= 0 && fText != NULL)
 	{
 		BMessage msg(*Message());
-		msg.AddString("etk:texteditable-content", fText);
+		msg.AddString("BHAPI:texteditable-content", fText);
 		Invoke(&msg);
 	}
 	else
@@ -1121,7 +1121,7 @@ BTextEditable::MessageReceived(BMessage *msg)
 	{
 		b_int32 modifiers = 0, old_modifiers = 0;
 		msg->FindInt32("modifiers", &modifiers);
-		msg->FindInt32("etk:old_modifiers", &old_modifiers);
+		msg->FindInt32("BHAPI:old_modifiers", &old_modifiers);
 		if((old_modifiers & B_SHIFT_KEY) && !(modifiers & B_SHIFT_KEY)) fSelectTracking = -1;
 	}
 	BControl::MessageReceived(msg);
@@ -1144,7 +1144,7 @@ BTextEditable::GetPreferredSize(float *width, float *height)
 
 	if(height)
 	{
-		b_font_height fontHeight;
+		bhapi::font_height fontHeight;
 		font.GetHeight(&fontHeight);
 		*height = fText ? (float)ceil((double)(fontHeight.ascent + fontHeight.descent)) : 0;
 		*height += 4;
@@ -1168,7 +1168,7 @@ BTextEditable::GetCharLocation(b_int32 pos, float *x, float *y, BFont *tFont)
 	if(!rect.IsValid()) return false;
 
 	BFont font;
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 
 	if(tFont) font = *tFont;
 	else GetFont(&font);

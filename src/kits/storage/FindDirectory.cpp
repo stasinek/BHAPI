@@ -44,7 +44,7 @@
 #ifdef _WIN32_WINNT
 #include <userenv.h>
 #endif
-extern HINSTANCE bhapi_dll_hinstance;
+extern HINSTANCE b_dll_hinstance;
 #endif
 
 #include <stdlib.h>
@@ -60,7 +60,7 @@ b_status_t b_find_directory(b_directory_which which, BPath *path)
 
 	// here we find directory contains libetk.dll
 	bzero(buffer, sizeof(buffer));
-    if(GetModuleFileNameA((HMODULE)bhapi_dll_hinstance, buffer, B_MAXPATH) == 0) return B_ERROR;
+    if(GetModuleFileNameA((HMODULE)b_dll_hinstance, buffer, B_MAXPATH) == 0) return B_ERROR;
 	BPath prefixPath;
 	prefixPath.SetTo(buffer);
 	prefixPath.GetParent(&prefixPath);

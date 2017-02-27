@@ -35,8 +35,10 @@
 #include "../app/Looper.h"
 #include "../app/MessageRunner.h"
 #include "../app/Cursor.h"
+#include "../add-ons/font/FontEngine.h"
 
 #ifdef __cplusplus /* Just for C++ */
+using namespace bhapi;
 class BClipboard;
 class BGraphicsEngine;
 class IMPEXP_BHAPI BApplication : public BLooper {
@@ -81,7 +83,7 @@ private:
     friend class BBitmap;
     friend class BScreen;
 
-    friend IMPEXP_BHAPI bool bhapi_updatb_font_families(bool);
+    friend IMPEXP_BHAPI bool bhapi::update_font_families(bool);
 
 	bool fQuit;
 	char *fSignature;
@@ -90,9 +92,9 @@ private:
 
 	static BList sRunnerList;
 	static b_bigtime_t sRunnerMinimumInterval;
-	static void bhapi_dispatch_message_runners();
+	static void dispatch_message_runners();
 
-	bool bhapi_quit_all_loopers(bool force);
+	bool quit_all_loopers(bool force);
 
     BGraphicsEngine *fGraphicsEngine;
 	void *fGraphicsEngineAddon;
@@ -116,9 +118,11 @@ inline void BApplication::SetCursor(const void *cursor)
 	SetCursor(&theCursor, true);
 }
 #endif // BHAPI_BUILD_LIBRARY
-extern IMPEXP_BHAPI BApplication *bhapi_app;
-extern IMPEXP_BHAPI BMessenger bhapi_app_messenger;
-extern IMPEXP_BHAPI BClipboard bhapi_clipboard;
+namespace bhapi {
+extern IMPEXP_BHAPI BApplication *app;
+extern IMPEXP_BHAPI BMessenger app_messenger;
+extern IMPEXP_BHAPI BClipboard clipboard;
+}
 #endif /* __cplusplus */
 /*#ifdef _WIN32
 #ifdef COPYOF_SendMessage

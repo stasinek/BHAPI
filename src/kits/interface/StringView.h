@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
- * 
+ *
  * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,10 +22,10 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: BStringView.h
  * Description: BStringView --- A view just for display a string
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #ifndef BHAPI_STRING_VIEW__H
@@ -66,12 +66,13 @@ private:
 	b_vertical_alignment fVerticalAlignment;
 };
 
+#ifdef BHAPI_BUILD_LIBRARY
 
 inline void BStringView::SetText(const BString &text)
 {
 	SetText(text.String());
 }
-
+#endif // BHAPI_BUILD_LIBRARY
 
 #endif /* __cplusplus */
 

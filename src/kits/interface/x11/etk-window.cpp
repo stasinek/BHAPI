@@ -96,7 +96,7 @@ EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine, b_int32 x, b_int
 
 	XClassHint class_hint;
 	class_hint.res_name = NULL;
-	class_hint.res_class = (char*)bhapi_app->Signature();
+	class_hint.res_class = (char*)b_app->Signature();
 
 	XSetWMProperties(fEngine->xDisplay, xWindow, NULL, NULL, NULL, 0, &size_hints, &wm_hints, &class_hint);
 
@@ -106,7 +106,7 @@ EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine, b_int32 x, b_int
 
 	XSetWMProtocols(fEngine->xDisplay, xWindow, protocols, 2);
 
-	bhapi_x11_address_t self_address = reinterpret_cast<bhapi_x11_address_t>((void*)this);
+	b_x11_address_t self_address = reinterpret_cast<b_x11_address_t>((void*)this);
 	XChangeProperty(fEngine->xDisplay, xWindow,
 			XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_WINDOW_ADDRESS", False),
 			XInternAtom(fEngine->xDisplay, "ATOM_BHAPI_CAST_ADDRESS", False), BHAPI_X11_ADDRESS_T_FORMAT,
@@ -255,7 +255,7 @@ EXGraphicsWindow::SetFlags(b_uint32 flags)
 	}
 	if(!(flags & B_NOT_CLOSABLE)) {data[n] = XInternAtom(fEngine->xDisplay, "_NET_WM_ACTION_CLOSE", False); n++;}
 	data[n] = 0;
-  
+
 	XChangeProperty(fEngine->xDisplay, xWindow,
 			XInternAtom(fEngine->xDisplay, "_NET_WM_ALLOWED_ACTIONS", False), XA_ATOM, 32,
 			PropModeReplace, (const unsigned char*)data, n);
@@ -393,7 +393,7 @@ EXGraphicsWindow::SetTitle(const char *title)
 
 	XClassHint class_hint;
 	class_hint.res_name = (char*)title;
-	class_hint.res_class = (char*)bhapi_app->Signature();
+	class_hint.res_class = (char*)b_app->Signature();
 
 	XSetClassHint(fEngine->xDisplay, xWindow, &class_hint);
 

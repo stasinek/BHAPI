@@ -136,7 +136,7 @@ private:
 	friend class BHandler;
 	friend class BApplication;
 	friend class BMessenger;
-	friend b_status_t bhapi_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
+	friend b_status_t bhapi::lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
 
 	bool fDeconstructing;
 	BLooper *fProxy;

@@ -243,7 +243,7 @@ BPixmap::GetPixel(b_int32 x, b_int32 y, b_rgb_color &color) const
 	{
 		const b_uint8 *bits = (const b_uint8*)fPtr;
 		bits += (size_t)(fColumns * (b_uint32)y + (b_uint32)x);
-		color = bhapi_find_color_for_index(*bits);
+		color = b_find_color_for_index(*bits);
 	}
 }
 
@@ -292,7 +292,7 @@ BPixmap::PutPixel(b_int32 x, b_int32 y, b_rgb_color color)
 		b_uint8 *bits = (b_uint8*)fPtr;
 		bits += (size_t)(fColumns * (b_uint32)y + (b_uint32)x);
 
-		*bits = bhapi_find_index_for_color(color.red, color.green, color.blue);
+		*bits = b_find_index_for_color(color.red, color.green, color.blue);
 	}
 }
 
@@ -329,7 +329,7 @@ BPixmap::PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, b_rgb_co
 	}
 	else if(fColorSpace == B_CMAP8 && DrawingMode() == B_OP_COPY)
 	{
-		b_uint8 val = bhapi_find_index_for_color(color.red, color.green, color.blue);
+		b_uint8 val = b_find_index_for_color(color.red, color.green, color.blue);
 		for(b_uint32 k = 0; k < height; k++)
 		{
 			b_uint8 *bits = (b_uint8*)fPtr + (size_t)(fColumns * (b_uint32)(y + k) + (b_uint32)x);

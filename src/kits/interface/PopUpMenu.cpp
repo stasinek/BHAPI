@@ -122,7 +122,7 @@ BPopUpMenuWindow::BPopUpMenuWindow(BPoint where, BPopUpMenu *menu, bool delivers
 
 	if(async == false && could_proxy)
 	{
-		BLooper *looper = BLooper::LooperForThread(bhapi_get_current_thread_id());
+		BLooper *looper = BLooper::LooperForThread(b_get_current_thread_id());
 		if(looper)
 		{
 			looper->Lock();
@@ -246,7 +246,7 @@ BPopUpMenu::MessageReceived(BMessage *msg)
 				if(win->fDeliversMessage)
 				{
 					b_uint32 what;
-					if(msg->FindInt32("etk:menu_orig_what", (b_int32*)&what))
+					if(msg->FindInt32("BHAPI:menu_orig_what", (b_int32*)&what))
 					{
 						BMessage aMsg = *msg;
 						aMsg.what = what;
@@ -333,7 +333,7 @@ BPopUpMenu::Go(BPoint where, bool delivers_message, bool open_anyway, bool async
 	void *trackingThread = NULL;
 
 	if(win == NULL || win->IsRunning() == false || Window() != win ||
-	   (win->Proxy() == win ? ((trackingThread = bhapi_open_thread(win->Thread())) == NULL) : false))
+	   (win->Proxy() == win ? ((trackingThread = b_open_thread(win->Thread())) == NULL) : false))
 	{
 		BHAPI_WARNING("[INTERFACE]: %s --- Unable to create pop-up window.", __PRETTY_FUNCTION__);
 		if(win != NULL)
@@ -364,9 +364,9 @@ BPopUpMenu::Go(BPoint where, bool delivers_message, bool open_anyway, bool async
 			if(!async)
 			{
 				b_status_t status;
-				bhapi_wait_for_thread(trackingThread, &status);
+				b_wait_for_thread(trackingThread, &status);
 			}
-			bhapi_delete_thread(trackingThread);
+			b_delete_thread(trackingThread);
 		}
 	}
 

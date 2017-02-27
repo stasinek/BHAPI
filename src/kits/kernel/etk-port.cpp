@@ -33,8 +33,8 @@
 #include "../support/Errors.h"
 #include "../support/SimpleLocker.h"
 
-typedef struct bhapi_port_info {
-	bhapi_port_info()
+typedef struct b_port_info {
+	b_port_info()
 	{
 		InitData();
 	}
@@ -55,21 +55,21 @@ typedef struct bhapi_port_info {
 	b_int64			readerWaitCount;
 	b_int64			writerWaitCount;
 	bool			closed;
-} bhapi_port_info;
+} b_port_info;
 
-typedef struct bhapi_port_t {
-	bhapi_port_t()
+typedef struct b_port_t {
+	b_port_t()
 		: iLocker(NULL), readerSem(NULL), writerSem(NULL), mapping(NULL), queueBuffer(NULL),
 		  openedIPC(false), portInfo(NULL), created(false), refCount(0)
 	{
 	}
 
-	~bhapi_port_t()
+	~b_port_t()
 	{
 		if(created)
 		{
 			created = false;
-			bhapi_delete_port((void*)this);
+			b_delete_port((void*)this);
 		}
 	}
 
@@ -84,28 +84,28 @@ typedef struct bhapi_port_t {
 
 	bool			openedIPC;
 
-	bhapi_port_info*		portInfo;
+	b_port_info*		portInfo;
 
 	bool			created;
 	b_uint32			refCount;
-} bhapi_port_t;
+} b_port_t;
 
-class bhapi_port_locker_t {
+class b_port_locker_t {
 public:
 	void *fSem;
 	BSimpleLocker fLocker;
 
-	bhapi_port_locker_t()
+	b_port_locker_t()
 		: fSem(NULL)
 	{
 	}
 
-	~bhapi_port_locker_t()
+	~b_port_locker_t()
 	{
 		if(fSem != NULL)
 		{
-			// leave global semaphore, without "bhapi_delete_sem(fSem)"
-			bhapi_delete_sem_etc(fSem, false);
+			// leave global semaphore, without "b_delete_sem(fSem)"
+			b_delete_sem_etc(fSem, false);
 		}
 	}
 
@@ -113,8 +113,8 @@ public:
 	{
 		if(fSem != NULL) return;
 
-		if((fSem = bhapi_clone_sem("_port_global_")) == NULL)
-			fSem = bhapi_create_sem(1, "_port_global_", BHAPI_AREA_ACCESS_ALL);
+		if((fSem = b_clone_sem("_port_global_")) == NULL)
+			fSem = b_create_sem(1, "_port_global_", BHAPI_AREA_ACCESS_ALL);
 		if(fSem == NULL) BHAPI_ERROR("[KERNEL]: Can't initialize global port!");
 	}
 
@@ -133,49 +133,49 @@ public:
 		LockLocal();
 		Init();
 		UnlockLocal();
-		bhapi_acquire_sem(fSem);
+		b_acquire_sem(fSem);
 	}
 
 	void UnlockIPC()
 	{
-		bhapi_release_sem(fSem);
+		b_release_sem(fSem);
 	}
 };
 
-static bhapi_port_locker_t __bhapi_port_locker__;
+static b_port_locker_t __bhapi_port_locker__;
 #define _BHAPI_LOCK_IPC_PORT_()		__bhapi_port_locker__.LockIPC()
 #define _BHAPI_UNLOCK_IPC_PORT_()		__bhapi_port_locker__.UnlockIPC()
-#define _BHAPI_LOCK_LOCAL_PORT_()		__bhapi_port_locker__.LockLocal()
-#define _BHAPI_UNLOCK_LOCAL_PORT_()	__bhapi_port_locker__.UnlockLocal()
+#define _BHAPI_LOCKLOCAL_BHAPI_PORT_()		__bhapi_port_locker__.LockLocal()
+#define _BHAPI_UNLOCKLOCAL_BHAPI_PORT_()	__bhapi_port_locker__.UnlockLocal()
 
 
-static bool bhapi_is_port_for_IPC(const bhapi_port_t *port)
+static bool b_is_port_for_IPC(const b_port_t *port)
 {
 	if(!port) return false;
 	return(port->mapping != NULL);
 }
 
 
-static void bhapi_lock_port_inter(bhapi_port_t *port)
+static void b_lock_port_inter(b_port_t *port)
 {
-	if(bhapi_is_port_for_IPC(port))
-		bhapi_acquire_sem(port->iLocker);
+	if(b_is_port_for_IPC(port))
+		b_acquire_sem(port->iLocker);
 	else
-		bhapi_lock_locker(port->iLocker);
+		b_lock_locker(port->iLocker);
 }
 
 
-static void bhapi_unlock_port_inter(bhapi_port_t *port)
+static void b_unlock_port_inter(b_port_t *port)
 {
-	if(bhapi_is_port_for_IPC(port))
-		bhapi_release_sem(port->iLocker);
+	if(b_is_port_for_IPC(port))
+		b_release_sem(port->iLocker);
 	else
-		bhapi_unlock_locker(port->iLocker);
+		b_unlock_locker(port->iLocker);
 }
 
 #define BHAPI_PORT_PER_MESSAGE_LENGTH	(sizeof(b_int32) + sizeof(size_t) + BHAPI_MAX_PORT_BUFFER_SIZE)
 
-static void* bhapi_create_port_for_IPC(b_int32 queue_length, const char *name, bhapi_area_access area_access)
+static void* b_create_port_for_IPC(b_int32 queue_length, const char *name, b_area_access area_access)
 {
 	if(queue_length <= 0 || queue_length > BHAPI_VALID_MAX_PORT_QUEUE_LENGTH ||
 	   name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH - 1) return NULL;
@@ -183,7 +183,7 @@ static void* bhapi_create_port_for_IPC(b_int32 queue_length, const char *name, b
 	char *tmpSemName = b_strdup_printf("%s ", name);
 	if(!tmpSemName) return NULL;
 
-	bhapi_port_t *port = new bhapi_port_t();
+	b_port_t *port = new b_port_t();
 	if(!port)
 	{
 		free(tmpSemName);
@@ -191,47 +191,47 @@ static void* bhapi_create_port_for_IPC(b_int32 queue_length, const char *name, b
 	}
 
 	_BHAPI_LOCK_IPC_PORT_();
-	if((port->mapping = bhapi_create_area(name, (void**)&(port->portInfo),
-					    sizeof(bhapi_port_info) + (size_t)queue_length * BHAPI_PORT_PER_MESSAGE_LENGTH,
+	if((port->mapping = b_create_area(name, (void**)&(port->portInfo),
+					    sizeof(b_port_info) + (size_t)queue_length * BHAPI_PORT_PER_MESSAGE_LENGTH,
 					    B_READ_AREA | B_WRITE_AREA, BHAPI_AREA_SYSTEM_PORT_DOMAIN, area_access)) == NULL ||
 	   port->portInfo == NULL)
 	{
-		if(port->mapping) bhapi_delete_area(port->mapping);
+		if(port->mapping) b_delete_area(port->mapping);
 		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
 
-	bhapi_port_info *port_info = port->portInfo;
+	b_port_info *port_info = port->portInfo;
 	port_info->InitData();
 	memcpy(port_info->name, name, (size_t)strlen(name));
 	port_info->queue_length = queue_length;
 
-	if((port->iLocker = bhapi_create_sem(1, name, area_access)) == NULL)
+	if((port->iLocker = b_create_sem(1, name, area_access)) == NULL)
 	{
-		bhapi_delete_area(port->mapping);
+		b_delete_area(port->mapping);
 		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
 	tmpSemName[strlen(tmpSemName) - 1] = 'r';
-	if((port->readerSem = bhapi_create_sem(0, tmpSemName, area_access)) == NULL)
+	if((port->readerSem = b_create_sem(0, tmpSemName, area_access)) == NULL)
 	{
-		bhapi_delete_sem(port->iLocker);
-		bhapi_delete_area(port->mapping);
+		b_delete_sem(port->iLocker);
+		b_delete_area(port->mapping);
 		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
 	tmpSemName[strlen(tmpSemName) - 1] = 'w';
-	if((port->writerSem = bhapi_create_sem(0, tmpSemName, area_access)) == NULL)
+	if((port->writerSem = b_create_sem(0, tmpSemName, area_access)) == NULL)
 	{
-		bhapi_delete_sem(port->readerSem);
-		bhapi_delete_sem(port->iLocker);
-		bhapi_delete_area(port->mapping);
+		b_delete_sem(port->readerSem);
+		b_delete_sem(port->iLocker);
+		b_delete_area(port->mapping);
 		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
@@ -242,7 +242,7 @@ static void* bhapi_create_port_for_IPC(b_int32 queue_length, const char *name, b
 	free(tmpSemName);
 
 	char *buffer = (char*)(port->portInfo);
-	buffer += sizeof(bhapi_port_info);
+	buffer += sizeof(b_port_info);
 	port->queueBuffer = (void*)buffer;
 
 	port->openedIPC = false;
@@ -252,14 +252,14 @@ static void* bhapi_create_port_for_IPC(b_int32 queue_length, const char *name, b
 }
 
 
-IMPEXP_BHAPI void* bhapi_open_port(const char *name)
+EXPORT_BHAPI void* b_open_port(const char *name)
 {
 	if(name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH - 1) return NULL;
 
 	char *tmpSemName = b_strdup_printf("%s ", name);
 	if(!tmpSemName) return NULL;
 
-	bhapi_port_t *port = new bhapi_port_t();
+	b_port_t *port = new b_port_t();
 	if(!port)
 	{
 		free(tmpSemName);
@@ -267,41 +267,41 @@ IMPEXP_BHAPI void* bhapi_open_port(const char *name)
 	}
 
 	_BHAPI_LOCK_IPC_PORT_();
-	if((port->mapping = bhapi_clone_area(name, (void**)&(port->portInfo),
+	if((port->mapping = b_clone_area(name, (void**)&(port->portInfo),
 					  B_READ_AREA | B_WRITE_AREA, BHAPI_AREA_SYSTEM_PORT_DOMAIN)) == NULL ||
 	   port->portInfo == NULL)
 	{
-		if(port->mapping) bhapi_delete_area(port->mapping);
+		if(port->mapping) b_delete_area(port->mapping);
 		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
 
-	if((port->iLocker = bhapi_clone_sem(name)) == NULL)
+	if((port->iLocker = b_clone_sem(name)) == NULL)
 	{
-		bhapi_delete_area(port->mapping);
+		b_delete_area(port->mapping);
 		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
 	tmpSemName[strlen(tmpSemName) - 1] = 'r';
-	if((port->readerSem = bhapi_clone_sem(tmpSemName)) == NULL)
+	if((port->readerSem = b_clone_sem(tmpSemName)) == NULL)
 	{
-		bhapi_delete_sem(port->iLocker);
-		bhapi_delete_area(port->mapping);
+		b_delete_sem(port->iLocker);
+		b_delete_area(port->mapping);
 		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
 		return NULL;
 	}
 	tmpSemName[strlen(tmpSemName) - 1] = 'w';
-	if((port->writerSem = bhapi_clone_sem(tmpSemName)) == NULL)
+	if((port->writerSem = b_clone_sem(tmpSemName)) == NULL)
 	{
-		bhapi_delete_sem(port->readerSem);
-		bhapi_delete_sem(port->iLocker);
-		bhapi_delete_area(port->mapping);
+		b_delete_sem(port->readerSem);
+		b_delete_sem(port->iLocker);
+		b_delete_area(port->mapping);
 		_BHAPI_UNLOCK_IPC_PORT_();
 		delete port;
 		free(tmpSemName);
@@ -312,7 +312,7 @@ IMPEXP_BHAPI void* bhapi_open_port(const char *name)
 	free(tmpSemName);
 
 	char *buffer = (char*)(port->portInfo);
-	buffer += sizeof(bhapi_port_info);
+	buffer += sizeof(b_port_info);
 	port->queueBuffer = (void*)buffer;
 
 	port->openedIPC = true;
@@ -322,57 +322,57 @@ IMPEXP_BHAPI void* bhapi_open_port(const char *name)
 }
 
 
-IMPEXP_BHAPI void* bhapi_open_port_by_source(void *data)
+EXPORT_BHAPI void* b_open_port_by_source(void *data)
 {
-	bhapi_port_t *port = (bhapi_port_t*)data;
+	b_port_t *port = (b_port_t*)data;
 	if(!port || !port->portInfo) return NULL;
 
-	if(bhapi_is_port_for_IPC(port)) return bhapi_open_port(port->portInfo->name);
+	if(b_is_port_for_IPC(port)) return b_open_port(port->portInfo->name);
 
-	_BHAPI_LOCK_LOCAL_PORT_();
+	_BHAPI_LOCKLOCAL_BHAPI_PORT_();
 	if(port->refCount == B_MAXUINT32 || port->refCount == 0 || port->portInfo->closed)
 	{
-		_BHAPI_UNLOCK_LOCAL_PORT_();
+		_BHAPI_UNLOCKLOCAL_BHAPI_PORT_();
 		return NULL;
 	}
 	port->refCount += 1;
-	_BHAPI_UNLOCK_LOCAL_PORT_();
+	_BHAPI_UNLOCKLOCAL_BHAPI_PORT_();
 
 	return data;
 }
 
 
-static void* bhapi_create_port_for_local(b_int32 queue_length)
+static void* b_create_port_for_local(b_int32 queue_length)
 {
 	if(queue_length <= 0 || queue_length > BHAPI_VALID_MAX_PORT_QUEUE_LENGTH) return NULL;
 
-	bhapi_port_t *port = new bhapi_port_t();
+	b_port_t *port = new b_port_t();
 	if(!port) return NULL;
 
-	if((port->iLocker = bhapi_create_locker()) == NULL)
+	if((port->iLocker = b_create_locker()) == NULL)
 	{
 		delete port;
 		return NULL;
 	}
-	if((port->readerSem = bhapi_create_sem(0, NULL)) == NULL)
+	if((port->readerSem = b_create_sem(0, NULL)) == NULL)
 	{
-		bhapi_delete_locker(port->iLocker);
+		b_delete_locker(port->iLocker);
 		delete port;
 		return NULL;
 	}
-	if((port->writerSem = bhapi_create_sem(0, NULL)) == NULL)
+	if((port->writerSem = b_create_sem(0, NULL)) == NULL)
 	{
-		bhapi_delete_sem(port->readerSem);
-		bhapi_delete_locker(port->iLocker);
+		b_delete_sem(port->readerSem);
+		b_delete_locker(port->iLocker);
 		delete port;
 		return NULL;
 	}
 
-	if((port->portInfo = new bhapi_port_info()) == NULL)
+	if((port->portInfo = new b_port_info()) == NULL)
 	{
-		bhapi_delete_sem(port->writerSem);
-		bhapi_delete_sem(port->readerSem);
-		bhapi_delete_locker(port->iLocker);
+		b_delete_sem(port->writerSem);
+		b_delete_sem(port->readerSem);
+		b_delete_locker(port->iLocker);
 		delete port;
 		return NULL;
 	}
@@ -380,9 +380,9 @@ static void* bhapi_create_port_for_local(b_int32 queue_length)
 	if((port->queueBuffer = malloc((size_t)queue_length * BHAPI_PORT_PER_MESSAGE_LENGTH)) == NULL)
 	{
 		delete port->portInfo;
-		bhapi_delete_sem(port->writerSem);
-		bhapi_delete_sem(port->readerSem);
-		bhapi_delete_locker(port->iLocker);
+		b_delete_sem(port->writerSem);
+		b_delete_sem(port->readerSem);
+		b_delete_locker(port->iLocker);
 		delete port;
 		return NULL;
 	}
@@ -396,44 +396,44 @@ static void* bhapi_create_port_for_local(b_int32 queue_length)
 }
 
 
-IMPEXP_BHAPI void* bhapi_create_port(b_int32 queue_length, const char *name, bhapi_area_access area_access)
+EXPORT_BHAPI void* b_create_port(b_int32 queue_length, const char *name, b_area_access area_access)
 {
 	return((name == NULL || *name == 0) ?
-			bhapi_create_port_for_local(queue_length) :
-			bhapi_create_port_for_IPC(queue_length, name, area_access));
+			b_create_port_for_local(queue_length) :
+			b_create_port_for_IPC(queue_length, name, area_access));
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_delete_port(void *data)
+EXPORT_BHAPI b_status_t b_delete_port(void *data)
 {
-	bhapi_port_t *port = (bhapi_port_t*)data;
+	b_port_t *port = (b_port_t*)data;
 	if(!port) return B_BAD_VALUE;
 
-	if(bhapi_is_port_for_IPC(port))
+	if(b_is_port_for_IPC(port))
 	{
-		bhapi_delete_area(port->mapping);
-		bhapi_delete_sem(port->iLocker);
+		b_delete_area(port->mapping);
+		b_delete_sem(port->iLocker);
 	}
 	else
 	{
-		_BHAPI_LOCK_LOCAL_PORT_();
+		_BHAPI_LOCKLOCAL_BHAPI_PORT_();
 		if(port->refCount == 0)
 		{
-			_BHAPI_UNLOCK_LOCAL_PORT_();
+			_BHAPI_UNLOCKLOCAL_BHAPI_PORT_();
 			return B_ERROR;
 		}
 		b_uint32 count = --(port->refCount);
-		_BHAPI_UNLOCK_LOCAL_PORT_();
+		_BHAPI_UNLOCKLOCAL_BHAPI_PORT_();
 
 		if(count > 0) return B_OK;
 
 		free(port->queueBuffer);
 		delete port->portInfo;
-		bhapi_delete_locker(port->iLocker);
+		b_delete_locker(port->iLocker);
 	}
 
-	bhapi_delete_sem(port->writerSem);
-	bhapi_delete_sem(port->readerSem);
+	b_delete_sem(port->writerSem);
+	b_delete_sem(port->readerSem);
 
 	if(port->created)
 	{
@@ -445,34 +445,34 @@ IMPEXP_BHAPI b_status_t bhapi_delete_port(void *data)
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_close_port(void *data)
+EXPORT_BHAPI b_status_t b_close_port(void *data)
 {
-	bhapi_port_t *port = (bhapi_port_t*)data;
+	b_port_t *port = (b_port_t*)data;
 	if(!port) return B_BAD_VALUE;
 
-	bhapi_lock_port_inter(port);
+	b_lock_port_inter(port);
 	if(port->portInfo->closed)
 	{
-		bhapi_unlock_port_inter(port);
+		b_unlock_port_inter(port);
 		return B_ERROR;
 	}
 	port->portInfo->closed = true;
-	bhapi_release_sem_etc(port->readerSem, port->portInfo->writerWaitCount, 0);
-	bhapi_release_sem_etc(port->writerSem, port->portInfo->readerWaitCount, 0);
-	bhapi_unlock_port_inter(port);
+	b_release_sem_etc(port->readerSem, port->portInfo->writerWaitCount, 0);
+	b_release_sem_etc(port->writerSem, port->portInfo->readerWaitCount, 0);
+	b_unlock_port_inter(port);
 
 	return B_OK;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_write_port_etc(void *data, b_int32 code, const void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t microseconds_timeout)
+EXPORT_BHAPI b_status_t b_write_port_etc(void *data, b_int32 code, const void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
-	bhapi_port_t *port = (bhapi_port_t*)data;
+	b_port_t *port = (b_port_t*)data;
 	if(!port) return B_BAD_VALUE;
 
 	if((!buf && buf_size > 0) || buf_size > BHAPI_MAX_PORT_BUFFER_SIZE || microseconds_timeout < B_INT64_CONSTANT(0)) return B_BAD_VALUE;
 
-	b_bigtime_t currentTime = bhapi_real_time_clock_usecs();
+	b_bigtime_t currentTime = b_real_time_clock_usecs();
 	bool wait_forever = false;
 
 	if(flags != B_ABSOLUTE_TIMEOUT)
@@ -483,11 +483,11 @@ IMPEXP_BHAPI b_status_t bhapi_write_port_etc(void *data, b_int32 code, const voi
 			microseconds_timeout += currentTime;
 	}
 
-	bhapi_lock_port_inter(port);
+	b_lock_port_inter(port);
 
 	if(port->portInfo->closed)
 	{
-		bhapi_unlock_port_inter(port);
+		b_unlock_port_inter(port);
 		return B_ERROR;
 	}
 	else if(port->portInfo->queue_count < port->portInfo->queue_length)
@@ -501,14 +501,14 @@ IMPEXP_BHAPI b_status_t bhapi_write_port_etc(void *data, b_int32 code, const voi
 
 		port->portInfo->queue_count++;
 
-		bhapi_release_sem_etc(port->writerSem, port->portInfo->readerWaitCount, 0);
+		b_release_sem_etc(port->writerSem, port->portInfo->readerWaitCount, 0);
 
-		bhapi_unlock_port_inter(port);
+		b_unlock_port_inter(port);
 		return B_OK;
 	}
 	else if(microseconds_timeout == currentTime && !wait_forever)
 	{
-		bhapi_unlock_port_inter(port);
+		b_unlock_port_inter(port);
 		return B_WOULD_BLOCK;
 	}
 
@@ -518,11 +518,11 @@ IMPEXP_BHAPI b_status_t bhapi_write_port_etc(void *data, b_int32 code, const voi
 
 	while(true)
 	{
-		bhapi_unlock_port_inter(port);
+		b_unlock_port_inter(port);
 		b_status_t status = (wait_forever ?
-						bhapi_acquire_sem(port->readerSem) :
-						bhapi_acquire_sem_etc(port->readerSem, 1, B_ABSOLUTE_TIMEOUT, microseconds_timeout));
-		bhapi_lock_port_inter(port);
+						b_acquire_sem(port->readerSem) :
+						b_acquire_sem_etc(port->readerSem, 1, B_ABSOLUTE_TIMEOUT, microseconds_timeout));
+		b_lock_port_inter(port);
 
 		if(status != B_OK)
 		{
@@ -545,7 +545,7 @@ IMPEXP_BHAPI b_status_t bhapi_write_port_etc(void *data, b_int32 code, const voi
 			if(buf_size > 0) memcpy(buffer, buf, buf_size);
 
 			port->portInfo->queue_count++;
-			bhapi_release_sem_etc(port->writerSem, port->portInfo->readerWaitCount, 0);
+			b_release_sem_etc(port->writerSem, port->portInfo->readerWaitCount, 0);
 
 			retval = B_OK;
 			break;
@@ -554,20 +554,20 @@ IMPEXP_BHAPI b_status_t bhapi_write_port_etc(void *data, b_int32 code, const voi
 
 	port->portInfo->writerWaitCount -= B_INT64_CONSTANT(1);
 
-	bhapi_unlock_port_inter(port);
+	b_unlock_port_inter(port);
 
 	return retval;
 }
 
 
-IMPEXP_BHAPI b_size_t bhapi_port_buffer_size_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
+EXPORT_BHAPI b_size_t b_port_buffer_size_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
-	bhapi_port_t *port = (bhapi_port_t*)data;
+	b_port_t *port = (b_port_t*)data;
 	if(!port) return B_BAD_VALUE;
 
     if(microseconds_timeout < B_INT64_CONSTANT(0)) return (b_size_t)B_BAD_VALUE;
 
-	b_bigtime_t currentTime = bhapi_real_time_clock_usecs();
+	b_bigtime_t currentTime = b_real_time_clock_usecs();
 	bool wait_forever = false;
 
 	if(flags != B_ABSOLUTE_TIMEOUT)
@@ -578,7 +578,7 @@ IMPEXP_BHAPI b_size_t bhapi_port_buffer_size_etc(void *data, b_uint32 flags, b_b
 			microseconds_timeout += currentTime;
 	}
 
-	bhapi_lock_port_inter(port);
+	b_lock_port_inter(port);
 
 	if(port->portInfo->queue_count > 0)
 	{
@@ -588,17 +588,17 @@ IMPEXP_BHAPI b_size_t bhapi_port_buffer_size_etc(void *data, b_uint32 flags, b_b
 		buffer += sizeof(b_int32);
 		memcpy(&msgLen, buffer, sizeof(size_t));
 
-		bhapi_unlock_port_inter(port);
+		b_unlock_port_inter(port);
 		return (b_size_t)msgLen;
 	}
 	else if(port->portInfo->closed)
 	{
-		bhapi_unlock_port_inter(port);
+		b_unlock_port_inter(port);
 		return B_ERROR;
 	}
 	else if(microseconds_timeout == currentTime && !wait_forever)
 	{
-		bhapi_unlock_port_inter(port);
+		b_unlock_port_inter(port);
 		return B_WOULD_BLOCK;
 	}
 
@@ -608,11 +608,11 @@ IMPEXP_BHAPI b_size_t bhapi_port_buffer_size_etc(void *data, b_uint32 flags, b_b
 
 	while(true)
 	{
-		bhapi_unlock_port_inter(port);
+		b_unlock_port_inter(port);
 		b_status_t status = (wait_forever ?
-						bhapi_acquire_sem(port->writerSem) :
-						bhapi_acquire_sem_etc(port->writerSem, 1, B_ABSOLUTE_TIMEOUT, microseconds_timeout));
-		bhapi_lock_port_inter(port);
+						b_acquire_sem(port->writerSem) :
+						b_acquire_sem_etc(port->writerSem, 1, B_ABSOLUTE_TIMEOUT, microseconds_timeout));
+		b_lock_port_inter(port);
 
 		if(status != B_OK)
 		{
@@ -640,20 +640,20 @@ IMPEXP_BHAPI b_size_t bhapi_port_buffer_size_etc(void *data, b_uint32 flags, b_b
 
 	port->portInfo->readerWaitCount -= B_INT64_CONSTANT(1);
 
-	bhapi_unlock_port_inter(port);
+	b_unlock_port_inter(port);
 
 	return (b_size_t)retval;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_read_port_etc(void *data, b_int32 *code, void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t microseconds_timeout)
+EXPORT_BHAPI b_status_t b_read_port_etc(void *data, b_int32 *code, void *buf, size_t buf_size, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
-	bhapi_port_t *port = (bhapi_port_t*)data;
+	b_port_t *port = (b_port_t*)data;
 	if(!port) return B_BAD_VALUE;
 
 	if(!code || (!buf && buf_size > 0) || microseconds_timeout < B_INT64_CONSTANT(0)) return B_BAD_VALUE;
 
-	b_bigtime_t currentTime = bhapi_real_time_clock_usecs();
+	b_bigtime_t currentTime = b_real_time_clock_usecs();
 	bool wait_forever = false;
 
 	if(flags != B_ABSOLUTE_TIMEOUT)
@@ -664,7 +664,7 @@ IMPEXP_BHAPI b_status_t bhapi_read_port_etc(void *data, b_int32 *code, void *buf
 			microseconds_timeout += currentTime;
 	}
 
-	bhapi_lock_port_inter(port);
+	b_lock_port_inter(port);
 
 	if(port->portInfo->queue_count > 0)
 	{
@@ -681,19 +681,19 @@ IMPEXP_BHAPI b_status_t bhapi_read_port_etc(void *data, b_int32 *code, void *buf
 
 		port->portInfo->queue_count--;
 
-		bhapi_release_sem_etc(port->readerSem, port->portInfo->writerWaitCount, 0);
+		b_release_sem_etc(port->readerSem, port->portInfo->writerWaitCount, 0);
 
-		bhapi_unlock_port_inter(port);
+		b_unlock_port_inter(port);
 		return B_OK;
 	}
 	else if(port->portInfo->closed)
 	{
-		bhapi_unlock_port_inter(port);
+		b_unlock_port_inter(port);
 		return B_ERROR;
 	}
 	else if(microseconds_timeout == currentTime && !wait_forever)
 	{
-		bhapi_unlock_port_inter(port);
+		b_unlock_port_inter(port);
 		return B_WOULD_BLOCK;
 	}
 
@@ -703,11 +703,11 @@ IMPEXP_BHAPI b_status_t bhapi_read_port_etc(void *data, b_int32 *code, void *buf
 
 	while(true)
 	{
-		bhapi_unlock_port_inter(port);
+		b_unlock_port_inter(port);
 		b_status_t status = (wait_forever ?
-						bhapi_acquire_sem(port->writerSem) :
-						bhapi_acquire_sem_etc(port->writerSem, 1, B_ABSOLUTE_TIMEOUT, microseconds_timeout));
-		bhapi_lock_port_inter(port);
+						b_acquire_sem(port->writerSem) :
+						b_acquire_sem_etc(port->writerSem, 1, B_ABSOLUTE_TIMEOUT, microseconds_timeout));
+		b_lock_port_inter(port);
 
 		if(status != B_OK)
 		{
@@ -730,7 +730,7 @@ IMPEXP_BHAPI b_status_t bhapi_read_port_etc(void *data, b_int32 *code, void *buf
 
 			port->portInfo->queue_count--;
 
-			bhapi_release_sem_etc(port->readerSem, port->portInfo->writerWaitCount, 0);
+			b_release_sem_etc(port->readerSem, port->portInfo->writerWaitCount, 0);
 
 			retval = B_OK;
 			break;
@@ -744,38 +744,37 @@ IMPEXP_BHAPI b_status_t bhapi_read_port_etc(void *data, b_int32 *code, void *buf
 
 	port->portInfo->readerWaitCount -= B_INT64_CONSTANT(1);
 
-	bhapi_unlock_port_inter(port);
+	b_unlock_port_inter(port);
 
 	return retval;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_write_port(void *data, b_int32 code, const void *buf, size_t buf_size)
+EXPORT_BHAPI b_status_t b_write_port(void *data, b_int32 code, const void *buf, size_t buf_size)
 {
-	return bhapi_write_port_etc(data, code, buf, buf_size, B_TIMEOUT, B_INFINITE_TIMEOUT);
+	return b_write_port_etc(data, code, buf, buf_size, B_TIMEOUT, B_INFINITE_TIMEOUT);
+}
+
+EXPORT_BHAPI b_size_t b_port_buffer_size(void *data)
+{
+	return b_port_buffer_size_etc(data, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-IMPEXP_BHAPI b_size_t bhapi_port_buffer_size(void *data)
+EXPORT_BHAPI b_status_t b_read_port(void *data, b_int32 *code, void *buf, size_t buf_size)
 {
-	return bhapi_port_buffer_size_etc(data, B_TIMEOUT, B_INFINITE_TIMEOUT);
+	return b_read_port_etc(data, code, buf, buf_size, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_read_port(void *data, b_int32 *code, void *buf, size_t buf_size)
+EXPORT_BHAPI b_int32 b_port_count(void *data)
 {
-	return bhapi_read_port_etc(data, code, buf, buf_size, B_TIMEOUT, B_INFINITE_TIMEOUT);
-}
-
-
-IMPEXP_BHAPI b_int32 bhapi_port_count(void *data)
-{
-	bhapi_port_t *port = (bhapi_port_t*)data;
+	b_port_t *port = (b_port_t*)data;
 	if(!port) return B_BAD_VALUE;
 
-	bhapi_lock_port_inter(port);
+	b_lock_port_inter(port);
 	b_int32 retval = port->portInfo->queue_count;
-	bhapi_unlock_port_inter(port);
+	b_unlock_port_inter(port);
 
 	return retval;
 }

@@ -39,8 +39,8 @@
 #include "../kernel/Kernel.h"
 #include "../support/StringMe.h"
 
-typedef struct bhapi_mach_sem_info {
-	bhapi_mach_sem_info()
+typedef struct b_mach_sem_info {
+	b_mach_sem_info()
 	{
 		InitData();
 	}
@@ -69,12 +69,12 @@ typedef struct bhapi_mach_sem_info {
 
 	bool LatestHolderTeamIsCurrent(void)
 	{
-		return(latestHolderTeamId == bhapi_get_current_team_id());
+		return(latestHolderTeamId == b_get_current_team_id());
 	}
 
 	bool LatestHolderThreadIsCurrent(void)
 	{
-		return(latestHolderThreadId == bhapi_get_current_thread_id());
+		return(latestHolderThreadId == b_get_current_thread_id());
 	}
 
 	char			name[B_OS_NAME_LENGTH + 1];
@@ -89,29 +89,29 @@ typedef struct bhapi_mach_sem_info {
 	semaphore_t		sem;
 
 	b_uint32			refCount;
-} bhapi_mach_sem_info;
+} b_mach_sem_info;
 
 
-typedef struct bhapi_mach_sem_t {
-	bhapi_mach_sem_t()
+typedef struct b_mach_sem_t {
+	b_mach_sem_t()
 		: mapping(NULL), semInfo(NULL), iMutex(NULL), iCond(NULL),
 		  remoteiSem(NULL), remoteSem(NULL),
 		  created(false), no_clone(false)
 	{
 	}
 
-	~bhapi_mach_sem_t()
+	~b_mach_sem_t()
 	{
 		if(created)
 		{
 			created = false;
-			bhapi_delete_sem((void*)this);
+			b_delete_sem((void*)this);
 		}
 	}
 
 	// for IPC (name != NULL)
 	void*			mapping;
-	bhapi_mach_sem_info*	semInfo;
+	b_mach_sem_info*	semInfo;
 
 	// for local
 	pthread_mutex_t*	iMutex;
@@ -122,24 +122,24 @@ typedef struct bhapi_mach_sem_t {
 
 	bool			created;
 	bool			no_clone;
-} bhapi_mach_sem_t;
+} b_mach_sem_t;
 
 #ifndef SEM_FAILED
 #define SEM_FAILED	(-1)
 #endif
 
-class bhapi_mach_sem_locker_t {
+class b_mach_sem_locker_t {
 public:
 	sem_t *fSem;
 	pthread_mutex_t fLocker;
 
-	bhapi_mach_sem_locker_t()
+	b_mach_sem_locker_t()
 		: fSem((sem_t*)SEM_FAILED)
 	{
 		pthread_mutex_init(&fLocker, NULL);
 	}
 
-	~bhapi_mach_sem_locker_t()
+	~b_mach_sem_locker_t()
 	{
 		pthread_mutex_destroy(&fLocker);
 
@@ -188,24 +188,24 @@ public:
 	}
 };
 
-static bhapi_mach_sem_locker_t __bhapi_semaphore_locker__;
+static b_mach_sem_locker_t __bhapi_semaphore_locker__;
 
 #define _BHAPI_LOCK_IPC_SEMAPHORE_()		__bhapi_semaphore_locker__.LockIPC()
 #define _BHAPI_UNLOCK_IPC_SEMAPHORE_()		__bhapi_semaphore_locker__.UnlockIPC()
-#define _BHAPI_LOCK_LOCAL_SEMAPHORE_()		__bhapi_semaphore_locker__.LockLocal()
-#define _BHAPI_UNLOCK_LOCAL_SEMAPHORE_()		__bhapi_semaphore_locker__.UnlockLocal()
+#define _BHAPI_LOCKLOCAL_BHAPI_SEMAPHORE_()		__bhapi_semaphore_locker__.LockLocal()
+#define _BHAPI_UNLOCKLOCAL_BHAPI_SEMAPHORE_()		__bhapi_semaphore_locker__.UnlockLocal()
 
 
-static bool bhapi_is_sem_for_IPC(const bhapi_mach_sem_t *sem)
+static bool b_is_sem_for_IPC(const b_mach_sem_t *sem)
 {
 	if(!sem) return false;
 	return(sem->mapping != NULL);
 }
 
 
-static void bhapi_lock_sem_inter(bhapi_mach_sem_t *sem)
+static void b_lock_sem_inter(b_mach_sem_t *sem)
 {
-	if(bhapi_is_sem_for_IPC(sem))
+	if(b_is_sem_for_IPC(sem))
 	{
 		semaphore_wait(*(sem->remoteiSem));
 	}
@@ -216,9 +216,9 @@ static void bhapi_lock_sem_inter(bhapi_mach_sem_t *sem)
 }
 
 
-static void bhapi_unlock_sem_inter(bhapi_mach_sem_t *sem)
+static void b_unlock_sem_inter(b_mach_sem_t *sem)
 {
-	if(bhapi_is_sem_for_IPC(sem))
+	if(b_is_sem_for_IPC(sem))
 	{
 		semaphore_signal(*(sem->remoteiSem));
 	}
@@ -229,34 +229,34 @@ static void bhapi_unlock_sem_inter(bhapi_mach_sem_t *sem)
 }
 
 
-static void* bhapi_create_sem_for_IPC(b_int64 count, const char *name, bhapi_area_access area_access)
+static void* b_create_sem_for_IPC(b_int64 count, const char *name, b_area_access area_access)
 {
 	if(count < B_INT64_CONSTANT(0) || name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH) return NULL;
 
-	bhapi_mach_sem_t *sem = new bhapi_mach_sem_t();
+	b_mach_sem_t *sem = new b_mach_sem_t();
 	if(!sem) return NULL;
 
 	_BHAPI_LOCK_IPC_SEMAPHORE_();
 
-	if((sem->mapping = bhapi_create_area(name, (void**)&(sem->semInfo), sizeof(bhapi_mach_sem_info),
+	if((sem->mapping = b_create_area(name, (void**)&(sem->semInfo), sizeof(b_mach_sem_info),
 					   B_READ_AREA | B_WRITE_AREA, BHAPI_AREA_SYSTEM_SEMAPHORE_DOMAIN, area_access)) == NULL ||
 	   sem->semInfo == NULL)
 	{
 		BHAPI_DEBUG("[KERNEL]: %s --- Can't create sem : create area failed --- \"%s\"", __PRETTY_FUNCTION__, name);
-		if(sem->mapping) bhapi_delete_area(sem->mapping);
+		if(sem->mapping) b_delete_area(sem->mapping);
 		_BHAPI_UNLOCK_IPC_SEMAPHORE_();
 		delete sem;
 		return NULL;
 	}
 
-	bhapi_mach_sem_info *sem_info = sem->semInfo;
+	b_mach_sem_info *sem_info = sem->semInfo;
 	sem_info->InitData();
 	memcpy(sem_info->name, name, (size_t)strlen(name));
 
 	if(semaphore_create(current_task(), &(sem_info->isem), SYNC_POLICY_FIFO, 1) != KERN_SUCCESS)
 	{
 		BHAPI_DEBUG("[KERNEL]: %s --- Can't create sem : semaphore_create failed --- \"%s\"", __PRETTY_FUNCTION__, name);
-		bhapi_delete_area(sem->mapping);
+		b_delete_area(sem->mapping);
 		_BHAPI_UNLOCK_IPC_SEMAPHORE_();
 		delete sem;
 		return NULL;
@@ -266,7 +266,7 @@ static void* bhapi_create_sem_for_IPC(b_int64 count, const char *name, bhapi_are
 	{
 		BHAPI_DEBUG("[KERNEL]: %s --- Can't create sem : semaphore_create failed --- \"%s\"", __PRETTY_FUNCTION__, name);
 		semaphore_destroy(current_task(), sem_info->isem);
-		bhapi_delete_area(sem->mapping);
+		b_delete_area(sem->mapping);
 		_BHAPI_UNLOCK_IPC_SEMAPHORE_();
 		delete sem;
 		return NULL;
@@ -286,27 +286,27 @@ static void* bhapi_create_sem_for_IPC(b_int64 count, const char *name, bhapi_are
 }
 
 
-IMPEXP_BHAPI void* bhapi_clone_sem(const char *name)
+IMPEXP_BHAPI void* b_clone_sem(const char *name)
 {
 	if(name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH) return NULL;
 
-	bhapi_mach_sem_t *sem = new bhapi_mach_sem_t();
+	b_mach_sem_t *sem = new b_mach_sem_t();
 	if(!sem) return NULL;
 
 	_BHAPI_LOCK_IPC_SEMAPHORE_();
 
-	if((sem->mapping = bhapi_clone_area(name, (void**)&(sem->semInfo),
+	if((sem->mapping = b_clone_area(name, (void**)&(sem->semInfo),
 					  B_READ_AREA | B_WRITE_AREA, BHAPI_AREA_SYSTEM_SEMAPHORE_DOMAIN)) == NULL ||
 	   sem->semInfo == NULL || sem->semInfo->refCount >= B_MAXUINT32)
 	{
 //		BHAPI_DEBUG("[KERNEL]: %s --- Can't clone semaphore : clone area failed --- \"%s\"", __PRETTY_FUNCTION__, name);
-		if(sem->mapping) bhapi_delete_area(sem->mapping);
+		if(sem->mapping) b_delete_area(sem->mapping);
 		_BHAPI_UNLOCK_IPC_SEMAPHORE_();
 		delete sem;
 		return NULL;
 	}
 
-	bhapi_mach_sem_info *sem_info = sem->semInfo;
+	b_mach_sem_info *sem_info = sem->semInfo;
 
 	sem->remoteiSem = &(sem_info->isem);
 	sem->remoteSem = &(sem_info->sem);
@@ -321,34 +321,34 @@ IMPEXP_BHAPI void* bhapi_clone_sem(const char *name)
 }
 
 
-IMPEXP_BHAPI void* bhapi_clone_sem_by_source(void *data)
+IMPEXP_BHAPI void* b_clone_sem_by_source(void *data)
 {
-	bhapi_mach_sem_t *sem = (bhapi_mach_sem_t*)data;
+	b_mach_sem_t *sem = (b_mach_sem_t*)data;
 	if(!sem || !sem->semInfo) return NULL;
 
-	if(bhapi_is_sem_for_IPC(sem)) return bhapi_clone_sem(sem->semInfo->name);
+	if(b_is_sem_for_IPC(sem)) return b_clone_sem(sem->semInfo->name);
 
-	_BHAPI_LOCK_LOCAL_SEMAPHORE_();
+	_BHAPI_LOCKLOCAL_BHAPI_SEMAPHORE_();
 	if(sem->no_clone || sem->semInfo->refCount >= B_MAXUINT32 || sem->semInfo->refCount == 0)
 	{
-		_BHAPI_UNLOCK_LOCAL_SEMAPHORE_();
+		_BHAPI_UNLOCKLOCAL_BHAPI_SEMAPHORE_();
 		return NULL;
 	}
 	sem->semInfo->refCount += 1;
-	_BHAPI_UNLOCK_LOCAL_SEMAPHORE_();
+	_BHAPI_UNLOCKLOCAL_BHAPI_SEMAPHORE_();
 
 	return data;
 }
 
 
-static void* bhapi_create_sem_for_local(b_int64 count)
+static void* b_create_sem_for_local(b_int64 count)
 {
 	if(count < B_INT64_CONSTANT(0)) return NULL;
 
-	bhapi_mach_sem_t *sem = new bhapi_mach_sem_t();
+	b_mach_sem_t *sem = new b_mach_sem_t();
 	if(!sem) return NULL;
 
-	if((sem->semInfo = new bhapi_mach_sem_info()) == NULL ||
+	if((sem->semInfo = new b_mach_sem_info()) == NULL ||
 	   (sem->iMutex = new pthread_mutex_t) == NULL ||
 	   (sem->iCond = new pthread_cond_t) == NULL)
 	{
@@ -383,56 +383,56 @@ static void* bhapi_create_sem_for_local(b_int64 count)
 }
 
 
-IMPEXP_BHAPI void* bhapi_create_sem(b_int64 count, const char *name, bhapi_area_access area_access)
+IMPEXP_BHAPI void* b_create_sem(b_int64 count, const char *name, b_area_access area_access)
 {
 	return((name == NULL || *name == 0) ?
-			bhapi_create_sem_for_local(count) :
-			bhapi_create_sem_for_IPC(count, name, area_access));
+			b_create_sem_for_local(count) :
+			b_create_sem_for_IPC(count, name, area_access));
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_get_sem_info(void *data, bhapi_sem_info *info)
+IMPEXP_BHAPI b_status_t b_get_sem_info(void *data, b_sem_info *info)
 {
-	bhapi_mach_sem_t *sem = (bhapi_mach_sem_t*)data;
+	b_mach_sem_t *sem = (b_mach_sem_t*)data;
 	if(!sem || !info) return B_BAD_VALUE;
 
 	bzero(info->name, B_OS_NAME_LENGTH + 1);
 
-	bhapi_lock_sem_inter(sem);
+	b_lock_sem_inter(sem);
 
-	if(bhapi_is_sem_for_IPC(sem)) strcpy(info->name, sem->semInfo->name);
+	if(b_is_sem_for_IPC(sem)) strcpy(info->name, sem->semInfo->name);
 	info->latest_holder_team = sem->semInfo->latestHolderTeamId;
 	info->latest_holder_thread = sem->semInfo->latestHolderThreadId;
 	info->count = sem->semInfo->count - sem->semInfo->acquiringCount;
 	info->closed = sem->semInfo->closed;
 
-	bhapi_unlock_sem_inter(sem);
+	b_unlock_sem_inter(sem);
 
 	return B_OK;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_delete_sem(void *data)
+IMPEXP_BHAPI b_status_t b_delete_sem(void *data)
 {
-	bhapi_mach_sem_t *sem = (bhapi_mach_sem_t*)data;
+	b_mach_sem_t *sem = (b_mach_sem_t*)data;
 	if(!sem || !sem->semInfo) return B_BAD_VALUE;
 
-	if(bhapi_is_sem_for_IPC(sem)) _BHAPI_LOCK_IPC_SEMAPHORE_();
-	else _BHAPI_LOCK_LOCAL_SEMAPHORE_();
+	if(b_is_sem_for_IPC(sem)) _BHAPI_LOCK_IPC_SEMAPHORE_();
+	else _BHAPI_LOCKLOCAL_BHAPI_SEMAPHORE_();
 
 	b_uint32 count = --(sem->semInfo->refCount);
 
-	if(bhapi_is_sem_for_IPC(sem)) _BHAPI_UNLOCK_IPC_SEMAPHORE_();
-	else _BHAPI_UNLOCK_LOCAL_SEMAPHORE_();
+	if(b_is_sem_for_IPC(sem)) _BHAPI_UNLOCK_IPC_SEMAPHORE_();
+	else _BHAPI_UNLOCKLOCAL_BHAPI_SEMAPHORE_();
 
-	if(bhapi_is_sem_for_IPC(sem))
+	if(b_is_sem_for_IPC(sem))
 	{
 		if(count == 0)
 		{
 			semaphore_destroy(current_task(), *(sem->remoteiSem));
 			semaphore_destroy(current_task(), *(sem->remoteSem));
 		}
-		bhapi_delete_area(sem->mapping);
+		b_delete_area(sem->mapping);
 	}
 	else
 	{
@@ -455,28 +455,28 @@ IMPEXP_BHAPI b_status_t bhapi_delete_sem(void *data)
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_delete_sem_etc(void *data, bool no_clone)
+IMPEXP_BHAPI b_status_t b_delete_sem_etc(void *data, bool no_clone)
 {
-	bhapi_mach_sem_t *sem = (bhapi_mach_sem_t*)data;
+	b_mach_sem_t *sem = (b_mach_sem_t*)data;
 	if(!sem || !sem->semInfo) return B_BAD_VALUE;
 
-	if(bhapi_is_sem_for_IPC(sem)) _BHAPI_LOCK_IPC_SEMAPHORE_();
-	else _BHAPI_LOCK_LOCAL_SEMAPHORE_();
+	if(b_is_sem_for_IPC(sem)) _BHAPI_LOCK_IPC_SEMAPHORE_();
+	else _BHAPI_LOCKLOCAL_BHAPI_SEMAPHORE_();
 
-	if(!bhapi_is_sem_for_IPC(sem) && no_clone) sem->no_clone = true;
+	if(!b_is_sem_for_IPC(sem) && no_clone) sem->no_clone = true;
 	b_uint32 count = --(sem->semInfo->refCount);
 
-	if(bhapi_is_sem_for_IPC(sem)) _BHAPI_UNLOCK_IPC_SEMAPHORE_();
-	else _BHAPI_UNLOCK_LOCAL_SEMAPHORE_();
+	if(b_is_sem_for_IPC(sem)) _BHAPI_UNLOCK_IPC_SEMAPHORE_();
+	else _BHAPI_UNLOCKLOCAL_BHAPI_SEMAPHORE_();
 
-	if(bhapi_is_sem_for_IPC(sem))
+	if(b_is_sem_for_IPC(sem))
 	{
 		if(count == 0 && no_clone)
 		{
 			semaphore_destroy(current_task(), *(sem->remoteiSem));
 			semaphore_destroy(current_task(), *(sem->remoteSem));
 		}
-		bhapi_delete_area_etc(sem->mapping, no_clone);
+		b_delete_area_etc(sem->mapping, no_clone);
 	}
 	else
 	{
@@ -499,20 +499,20 @@ IMPEXP_BHAPI b_status_t bhapi_delete_sem_etc(void *data, bool no_clone)
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_close_sem(void *data)
+IMPEXP_BHAPI b_status_t b_close_sem(void *data)
 {
-	bhapi_mach_sem_t *sem = (bhapi_mach_sem_t*)data;
+	b_mach_sem_t *sem = (b_mach_sem_t*)data;
 	if(!sem) return B_BAD_VALUE;
 
-	bhapi_lock_sem_inter(sem);
+	b_lock_sem_inter(sem);
 	if(sem->semInfo->closed)
 	{
-		bhapi_unlock_sem_inter(sem);
+		b_unlock_sem_inter(sem);
 		return B_ERROR;
 	}
 	sem->semInfo->closed = true;
 
-	if(bhapi_is_sem_for_IPC(sem))
+	if(b_is_sem_for_IPC(sem))
 	{
 		if(sem->semInfo->acquiringCount > B_INT64_CONSTANT(0)) semaphore_signal(*(sem->remoteSem));
 	}
@@ -521,20 +521,20 @@ IMPEXP_BHAPI b_status_t bhapi_close_sem(void *data)
 		pthread_cond_broadcast(sem->iCond);
 	}
 
-	bhapi_unlock_sem_inter(sem);
+	b_unlock_sem_inter(sem);
 
 	return B_OK;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint32 flags, b_bigtime_t microseconds_timeout)
+IMPEXP_BHAPI b_status_t b_acquire_sem_etc(void *data, b_int64 count, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
-	bhapi_mach_sem_t *sem = (bhapi_mach_sem_t*)data;
+	b_mach_sem_t *sem = (b_mach_sem_t*)data;
 	if(!sem) return B_BAD_VALUE;
 
 	if(microseconds_timeout < B_INT64_CONSTANT(0) || count < B_INT64_CONSTANT(1)) return B_BAD_VALUE;
 
-	b_bigtime_t currentTime = bhapi_real_time_clock_usecs();
+	b_bigtime_t currentTime = b_real_time_clock_usecs();
 	bool wait_forever = false;
 
 	if(flags != B_ABSOLUTE_TIMEOUT)
@@ -545,35 +545,35 @@ IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint3
 			microseconds_timeout += currentTime;
 	}
 
-	bhapi_lock_sem_inter(sem);
+	b_lock_sem_inter(sem);
 
 	if(sem->semInfo->count - count >= B_INT64_CONSTANT(0))
 	{
 		sem->semInfo->count -= count;
-		sem->semInfo->SetLatestHolderTeamId(bhapi_get_current_team_id());
-		sem->semInfo->SetLatestHolderThreadId(bhapi_get_current_thread_id());
-		bhapi_unlock_sem_inter(sem);
+		sem->semInfo->SetLatestHolderTeamId(b_get_current_team_id());
+		sem->semInfo->SetLatestHolderThreadId(b_get_current_thread_id());
+		b_unlock_sem_inter(sem);
 		return B_OK;
 	}
 	else if(sem->semInfo->closed)
 	{
-		bhapi_unlock_sem_inter(sem);
+		b_unlock_sem_inter(sem);
 		return B_ERROR;
 	}
 	else if(microseconds_timeout == currentTime && !wait_forever)
 	{
-		bhapi_unlock_sem_inter(sem);
+		b_unlock_sem_inter(sem);
 		return B_WOULD_BLOCK;
 	}
 	if(count > B_MAXINT64 - sem->semInfo->acquiringCount)
 	{
-		bhapi_unlock_sem_inter(sem);
+		b_unlock_sem_inter(sem);
 		return B_ERROR;
 	}
 
 	sem->semInfo->acquiringCount += count;
 
-	if(bhapi_is_sem_for_IPC(sem))
+	if(b_is_sem_for_IPC(sem))
 	{
 		if(sem->semInfo->minAcquiringCount == B_INT64_CONSTANT(0) ||
 		   sem->semInfo->minAcquiringCount > count) sem->semInfo->minAcquiringCount = count;
@@ -588,9 +588,9 @@ IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint3
 
 	while(true)
 	{
-		if(bhapi_is_sem_for_IPC(sem))
+		if(b_is_sem_for_IPC(sem))
 		{
-			bhapi_unlock_sem_inter(sem);
+			b_unlock_sem_inter(sem);
 
 			kern_return_t ret;
 			if(wait_forever)
@@ -603,10 +603,10 @@ IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint3
 				mts.tv_sec = (long)(timeout / B_INT64_CONSTANT(1000000));
 				mts.tv_nsec = (long)(timeout % B_INT64_CONSTANT(1000000)) * 1000L;
 				ret = (timeout < 0 ? KERN_OPERATION_TIMED_OUT : semaphore_timedwait(*(sem->remoteSem), mts));
-				timeout = microseconds_timeout - bhapi_real_time_clock_usecs();
+				timeout = microseconds_timeout - b_real_time_clock_usecs();
 			}
 
-			bhapi_lock_sem_inter(sem);
+			b_lock_sem_inter(sem);
 
 			if(ret != KERN_SUCCESS)
 			{
@@ -624,7 +624,7 @@ IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint3
 				if(ret == ETIMEDOUT && !wait_forever)
 					retval = B_TIMED_OUT;
 				else
-					bhapi_lock_sem_inter(sem);
+					b_lock_sem_inter(sem);
 				break;
 			}
 		}
@@ -632,8 +632,8 @@ IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint3
 		if(sem->semInfo->count - count >= B_INT64_CONSTANT(0))
 		{
 			sem->semInfo->count -= count;
-			sem->semInfo->SetLatestHolderTeamId(bhapi_get_current_team_id());
-			sem->semInfo->SetLatestHolderThreadId(bhapi_get_current_thread_id());
+			sem->semInfo->SetLatestHolderTeamId(b_get_current_team_id());
+			sem->semInfo->SetLatestHolderThreadId(b_get_current_thread_id());
 			retval = B_OK;
 			break;
 		}
@@ -642,7 +642,7 @@ IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint3
 			break;
 		}
 
-		if(!bhapi_is_sem_for_IPC(sem)) continue;
+		if(!b_is_sem_for_IPC(sem)) continue;
 
 		if(sem->semInfo->minAcquiringCount > sem->semInfo->count) continue;
 		if(sem->semInfo->minAcquiringCount == B_INT64_CONSTANT(0) ||
@@ -652,30 +652,30 @@ IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint3
 	}
 
 	sem->semInfo->acquiringCount -= count;
-	if(bhapi_is_sem_for_IPC(sem))
+	if(b_is_sem_for_IPC(sem))
 	{
 		if(sem->semInfo->minAcquiringCount == count) sem->semInfo->minAcquiringCount = B_INT64_CONSTANT(0);
 		semaphore_signal(*(sem->remoteSem));
 	}
 
-	bhapi_unlock_sem_inter(sem);
+	b_unlock_sem_inter(sem);
 
 	return retval;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_acquire_sem(void *data)
+IMPEXP_BHAPI b_status_t b_acquire_sem(void *data)
 {
-	return bhapi_acquire_sem_etc(data, B_INT64_CONSTANT(1), B_TIMEOUT, B_INFINITE_TIMEOUT);
+	return b_acquire_sem_etc(data, B_INT64_CONSTANT(1), B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_release_sem_etc(void *data, b_int64 count, b_uint32 flags)
+IMPEXP_BHAPI b_status_t b_release_sem_etc(void *data, b_int64 count, b_uint32 flags)
 {
-	bhapi_mach_sem_t *sem = (bhapi_mach_sem_t*)data;
+	b_mach_sem_t *sem = (b_mach_sem_t*)data;
 	if(!sem || count < B_INT64_CONSTANT(0)) return B_BAD_VALUE;
 
-	bhapi_lock_sem_inter(sem);
+	b_lock_sem_inter(sem);
 
 	b_status_t retval = B_ERROR;
 
@@ -685,7 +685,7 @@ IMPEXP_BHAPI b_status_t bhapi_release_sem_etc(void *data, b_int64 count, b_uint3
 
 		if(flags != B_DO_NOT_RESCHEDULE)
 		{
-			if(bhapi_is_sem_for_IPC(sem))
+			if(b_is_sem_for_IPC(sem))
 			{
 				if(sem->semInfo->acquiringCount > B_INT64_CONSTANT(0)) semaphore_signal(*(sem->remoteSem));
 			}
@@ -698,27 +698,27 @@ IMPEXP_BHAPI b_status_t bhapi_release_sem_etc(void *data, b_int64 count, b_uint3
 		retval = B_OK;
 	}
 
-	bhapi_unlock_sem_inter(sem);
+	b_unlock_sem_inter(sem);
 
 	return retval;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_release_sem(void *data)
+IMPEXP_BHAPI b_status_t b_release_sem(void *data)
 {
-	return bhapi_release_sem_etc(data, B_INT64_CONSTANT(1), 0);
+	return b_release_sem_etc(data, B_INT64_CONSTANT(1), 0);
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_get_sem_count(void *data, b_int64 *count)
+IMPEXP_BHAPI b_status_t b_get_sem_count(void *data, b_int64 *count)
 {
-	bhapi_mach_sem_t *sem = (bhapi_mach_sem_t*)data;
+	b_mach_sem_t *sem = (b_mach_sem_t*)data;
 	if(!sem || !count) return B_BAD_VALUE;
 
-	bhapi_lock_sem_inter(sem);
+	b_lock_sem_inter(sem);
 	*count = (sem->semInfo->acquiringCount <= B_INT64_CONSTANT(0) ?
 			sem->semInfo->count : B_INT64_CONSTANT(-1) * (sem->semInfo->acquiringCount));
-	bhapi_unlock_sem_inter(sem);
+	b_unlock_sem_inter(sem);
 
 	return B_OK;
 }

@@ -328,7 +328,7 @@ StringItem::DrawItem(BView *owner, BRect itemRect, bool drawEverything)
 
 	if(fText)
 	{
-		b_font_height fontHeight;
+		bhapi::font_height fontHeight;
 		owner->GetFontHeight(&fontHeight);
 
 		float sHeight = fontHeight.ascent + fontHeight.descent;
@@ -346,7 +346,7 @@ StringItem::DrawItem(BView *owner, BRect itemRect, bool drawEverything)
 void
 StringItem::Update(BView *owner, const BFont *font)
 {
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 	font->GetHeight(&fontHeight);
 	SetHeight(fontHeight.ascent + fontHeight.descent);
 

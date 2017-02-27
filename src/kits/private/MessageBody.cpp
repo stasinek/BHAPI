@@ -33,7 +33,7 @@
 #include "../support/StringMe.h"
 #include "../kernel/Debug.h"
 
-class _LOCAL BMessageNode
+class LOCAL_BHAPI BMessageNode
 {
 public:
 	BMessageNode(const char *name);

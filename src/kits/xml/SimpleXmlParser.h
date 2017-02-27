@@ -71,7 +71,7 @@ private:
 };
 
 
-IMPEXP_BHAPI b_status_t bhapi_parse_simple_xml(const char *simple_xml_buffer, BSimpleXmlNode *node);
+IMPEXP_BHAPI b_status_t b_parse_simple_xml(const char *simple_xml_buffer, BSimpleXmlNode *node);
 
 
 #endif /* __cplusplus */

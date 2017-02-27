@@ -34,7 +34,7 @@
 #include <winsock2.h>
 #include <windows.h>
 
-HINSTANCE bhapi_dll_hinstance = NULL;
+HINSTANCE b_dll_hinstance = NULL;
 
 
 extern "C" {
@@ -44,9 +44,9 @@ extern "C" {
 
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
-	bhapi_dll_hinstance = hinstDLL;
+	b_dll_hinstance = hinstDLL;
 
-	switch(fdwReason) 
+	switch(fdwReason)
 	{
 		case DLL_PROCESS_ATTACH:
 		/* The DLL is being mapped into process's address space */
@@ -54,7 +54,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 		{
 			WSADATA wsaData;
 			WSAStartup(0x202, &wsaData);
-			bhapi_system_boot_time();
+			b_system_boot_time();
 			BApplicationConnector::Init();
 			break;
 		}
@@ -84,7 +84,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 }
 
 
-char* bhapi_win32_convert_active_to_utf8(const char *str, b_int32 length)
+char* b_win32_convert_active_to_utf8(const char *str, b_int32 length)
 {
 	if(str == NULL || *str == 0 || length == 0) return NULL;
 
@@ -103,7 +103,7 @@ char* bhapi_win32_convert_active_to_utf8(const char *str, b_int32 length)
 }
 
 
-char* bhapi_win32_convert_utf8_to_active(const char *str, b_int32 length)
+char* b_win32_convert_utf8_to_active(const char *str, b_int32 length)
 {
 	b_unichar16*wStr = b_utf8_convert_to_unicode(str, length);
 	if(wStr == NULL) return NULL;

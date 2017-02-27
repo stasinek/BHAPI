@@ -1,8 +1,8 @@
 /* --------------------------------------------------------------------------
- * 
+ *
  * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
- * 
+ *
  * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
@@ -25,7 +25,7 @@
  *
  * File: Button.cpp
  * Description: BButton --- A view like button for control in window
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 /* --------------------------------------------------------------------------
@@ -150,7 +150,7 @@ BButton::SetLabel(const char *label)
 void
 BButton::GetPreferredSize(float *width, float *height)
 {
-	b_theme_engine *theme = bhapi_get_current_theme_engine();
+	b_theme_engine *theme = b_get_current_theme_engine();
 	if(theme == NULL || theme->get_button_preferred_size == NULL) return;
 
 	theme->get_button_preferred_size(theme, this, width, height, Label());
@@ -175,7 +175,7 @@ BButton::ContentFrame() const
 {
 	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 
-	b_theme_engine *theme = bhapi_get_current_theme_engine();
+	b_theme_engine *theme = b_get_current_theme_engine();
 	if(!(theme == NULL || theme->get_button_border_margins == NULL))
 	{
 		float l, t, r, b;
@@ -193,7 +193,7 @@ BButton::ContentFrame() const
 void
 BButton::Draw(BRect updateRect)
 {
-	b_theme_engine *theme = bhapi_get_current_theme_engine();
+	b_theme_engine *theme = b_get_current_theme_engine();
 	if(theme == NULL) return;
 
 	bool fPushed = (IsEnabled() ? Value() == B_CONTROL_ON : false);
@@ -254,7 +254,7 @@ void
 BButton::DrawContent()
 {
 	if(Label() == NULL) return;
-	b_theme_engine *theme = bhapi_get_current_theme_engine();
+	b_theme_engine *theme = b_get_current_theme_engine();
 	if(theme == NULL || theme->draw_button_label == NULL) return;
 	theme->draw_button_label(theme, this, Frame().OffsetToSelf(B_ORIGIN), Label(),
 				 (IsEnabled() ? Value() == B_CONTROL_ON : false), fInsided, 0);
@@ -428,7 +428,7 @@ BButton::WindowActivated(bool state)
 #if 0
 	if(IsFocus() == false) return;
 
-	b_theme_engine *theme = bhapi_get_current_theme_engine();
+	b_theme_engine *theme = b_get_current_theme_engine();
 	if(theme == NULL ||
 	   theme->should_button_do_focus_flash == NULL ||
 	   theme->should_button_do_focus_flash(theme, this) == 0)
@@ -455,7 +455,7 @@ BButton::MakeFocus(bool focusState)
 #if 0
 		if(IsFocus() && Window()->IsActivate())
 		{
-			b_theme_engine *theme = bhapi_get_current_theme_engine();
+			b_theme_engine *theme = b_get_current_theme_engine();
 			if(theme == NULL || theme->should_button_do_focus_flash == NULL) return;
 			if(theme->should_button_do_focus_flash(theme, this) == 0) return;
 
@@ -484,7 +484,7 @@ BButton::Pulse()
 {
 	if(Window() == NULL || IsFocus() == false) return;
 
-	b_theme_engine *theme = bhapi_get_current_theme_engine();
+	b_theme_engine *theme = b_get_current_theme_engine();
 	if(theme == NULL || theme->should_button_do_focus_flash == NULL) return;
 
 	b_int8 shouldFlash = theme->should_button_do_focus_flash(theme, this);

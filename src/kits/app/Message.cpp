@@ -111,7 +111,7 @@ BMessage::BMessage()
 	  fReplyToken(B_MAXUINT64), fReplyTokenTimestamp(B_INT64_CONSTANT(0)),
 	  fNoticeSource(false), fSource(NULL), fIsReply(false)
 {
-	fTeam = bhapi_get_current_team_id();
+	fTeam = b_get_current_team_id();
 }
 
 
@@ -121,7 +121,7 @@ BMessage::BMessage(b_uint32 a_what)
 	  fNoticeSource(false), fSource(NULL), fIsReply(false)
 {
     BMessage::what = a_what;
-	fTeam = bhapi_get_current_team_id();
+	fTeam = b_get_current_team_id();
 }
 
 
@@ -164,8 +164,8 @@ BMessage::operator=(const BMessage &msg)
 
 	if(fSource != NULL)
 	{
-		if(fNoticeSource) bhapi_close_port(fSource);
-		bhapi_delete_port(fSource);
+		if(fNoticeSource) b_close_port(fSource);
+		b_delete_port(fSource);
 		fSource = NULL;
 	}
 
@@ -174,7 +174,7 @@ BMessage::operator=(const BMessage &msg)
 	fReplyToken = B_MAXUINT64;
 	fReplyTokenTimestamp = B_MAXINT64;
 
-	if(msg.fTeam == bhapi_get_current_team_id())
+	if(msg.fTeam == b_get_current_team_id())
 	{
 		fTargetToken = msg.fTargetToken;
 		fTargetTokenTimestamp = msg.fTargetTokenTimestamp;
@@ -185,9 +185,9 @@ BMessage::operator=(const BMessage &msg)
 		fReplyToken = msg.fReplyToken;
 		fReplyTokenTimestamp = msg.fReplyTokenTimestamp;
 	}
-	else if(msg.fTeam == bhapi_get_current_team_id())
+	else if(msg.fTeam == b_get_current_team_id())
 	{
-		fSource = bhapi_open_port_by_source(msg.fSource);
+		fSource = b_open_port_by_source(msg.fSource);
 	}
 
 	fTeam = msg.fTeam;
@@ -450,8 +450,8 @@ BMessage::Unflatten(const char *buffer, size_t bufferSize)
 
 	if(fSource != NULL)
 	{
-		if(fNoticeSource) bhapi_close_port(fSource);
-		bhapi_delete_port(fSource);
+		if(fNoticeSource) b_close_port(fSource);
+		b_delete_port(fSource);
 		fSource = NULL;
 	}
 
@@ -460,16 +460,16 @@ BMessage::Unflatten(const char *buffer, size_t bufferSize)
 	fReplyToken = B_MAXUINT64;
 	fReplyTokenTimestamp = B_MAXINT64;
 
-	if(msg.fTeam == bhapi_get_current_team_id())
+	if(msg.fTeam == b_get_current_team_id())
 	{
 		fTargetToken = msg.fTargetToken;
 		fTargetTokenTimestamp = msg.fTargetTokenTimestamp;
 	}
 
-    void *source = (msg.fTeam != bhapi_get_current_team_id() ? (void*)NULL : reinterpret_cast<void*>(sourcb_address));
+    void *source = (msg.fTeam != b_get_current_team_id() ? (void*)NULL : reinterpret_cast<void*>(sourcb_address));
 	if(source == NULL)
 	{
-		if(msg.fTeam == bhapi_get_current_team_id())
+		if(msg.fTeam == b_get_current_team_id())
 		{
 			fReplyToken = msg.fReplyToken;
 			fReplyTokenTimestamp = msg.fReplyTokenTimestamp;
@@ -479,7 +479,7 @@ BMessage::Unflatten(const char *buffer, size_t bufferSize)
 	{
 		// TODO: not safe
 #if 0
-		fSource = bhapi_open_port_by_source(source);
+		fSource = b_open_port_by_source(source);
 #endif
 	}
 
@@ -659,8 +659,8 @@ BMessage::~BMessage()
 
 	if(fSource != NULL)
 	{
-		if(fNoticeSource) bhapi_close_port(fSource);
-		bhapi_delete_port(fSource);
+		if(fNoticeSource) b_close_port(fSource);
+		b_delete_port(fSource);
 	}
 }
 
@@ -2118,9 +2118,9 @@ bool
 BMessage::IsSourceWaiting() const
 {
 	if(fSource == NULL) return false;
-	void *tmpPort = bhapi_open_port_by_source(fSource);
+	void *tmpPort = b_open_port_by_source(fSource);
 	if(tmpPort == NULL) return false;
-	bhapi_delete_port(tmpPort);
+	b_delete_port(tmpPort);
 	return true;
 }
 
@@ -2160,11 +2160,11 @@ BMessage::SendReply(const BMessage *message, BHandler *replyHandler, b_bigtime_t
 			msg.fReplyTokenTimestamp = replyTokenTimeStamp;
 			if(msg.fSource != NULL)
 			{
-				bhapi_delete_port(msg.fSource);
+				b_delete_port(msg.fSource);
 				msg.fSource = NULL;
 			}
 
-			retVal = (bhapi_port_count(fSource) > 0 ?
+			retVal = (b_port_count(fSource) > 0 ?
 				    B_DUPLICATE_REPLY : BMessenger::_SendMessageToPort(fSource, message, B_TIMEOUT, sendTimeout));
 		}
 		else

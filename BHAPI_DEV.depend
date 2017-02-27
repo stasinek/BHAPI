@@ -1,14 +1,14 @@
 # depslib dependency file v1.0
-1487411481 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\bhapi.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\bhapi.cpp
 	"bhapi.h"
 
-1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\bhapi.h
+1488120644 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\bhapi.h
 	"bhapi_global.h"
 	"src/kits/Be.h"
 
-1486305427 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\bhapi_global.h
+1488113117 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\bhapi_global.h
 
-1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\be.h
+1488120680 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\be.h
 	"support/SupportDefs.h"
 	"AppKit.h"
 	"KernelKit.h"
@@ -19,14 +19,14 @@
 	"NetKit.h"
 	"SupportKit.h"
 
-1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\supportdefs.h
+1488120592 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\supportdefs.h
 	<stdarg.h>
 	<stddef.h>
 	<stdlib.h>
 	<string.h>
-	<math.h>
 	<stdio.h>
 	<ctype.h>
+	<math.h>
 	<limits.h>
 	<float.h>
 	<winsock2.h>
@@ -54,11 +54,11 @@
 	"../kernel/OS.h"
 	"../support/List.h"
 
-1487830535 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\os.h
+1488120606 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\os.h
 	"../support/SupportDefs.h"
 	"Kernel.h"
 
-1487830845 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\kernel.h
+1488120988 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\kernel.h
 	"../support/SupportDefs.h"
 	"OS.h"
 
@@ -69,25 +69,26 @@
 	"../support/SupportDefs.h"
 	"../support/List.h"
 
-1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\handler.h
+1488122042 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\handler.h
 	"../support/SupportDefs.h"
+	"../private/PrivateHandler.h"
 	"../support/Archivable.h"
 
 1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\archivable.h
 	"../support/SupportDefs.h"
 
-1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\looper.h
+1488120590 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\looper.h
 	"../support/SupportDefs.h"
 	"../support/List.h"
 	"Handler.h"
 
-1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\messenger.h
+1488108539 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\messenger.h
 	"../support/SupportDefs.h"
 
 1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\messagerunner.h
 	"../support/SupportDefs.h"
 
-1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\messagefilter.h
+1488113786 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\messagefilter.h
 	"../support/SupportDefs.h"
 
 1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\invoker.h
@@ -107,7 +108,7 @@
 	"../support/SupportDefs.h"
 	"../support/Archivable.h"
 
-1487830817 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\application.h
+1488122147 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\application.h
 	"../support/SupportDefs.h"
 	"../app/Looper.h"
 	"../app/MessageRunner.h"
@@ -118,7 +119,7 @@
 	"kernel/OS.h"
 	"kernel/Kernel.h"
 
-1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\debug.h
+1488122288 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\debug.h
 	"../support/SupportDefs.h"
 	<new>
 
@@ -158,13 +159,13 @@
 	"Directory.h"
 	"../support/StringMe.h"
 
-1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\stringme.h
+1488082117 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\stringme.h
 	"../support/SupportDefs.h"
 
 1486621367 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\volumeroster.h
 	"Volume.h"
 
-1487830819 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\filepanel.h
+1488116105 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\filepanel.h
 	"../support/SupportDefs.h"
 
 1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\renderkit.h
@@ -179,7 +180,7 @@
 	"../interface/Rect.h"
 	"../interface/Polygon.h"
 
-1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\graphicsdefs.h
+1488122362 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\graphicsdefs.h
 	"../support/SupportDefs.h"
 
 1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\rect.h
@@ -253,7 +254,7 @@
 1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\interfacedefs.h
 	"../interface/GraphicsDefs.h"
 
-1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\font.h
+1488122404 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\font.h
 	"../support/SupportDefs.h"
 	"../support/StringMe.h"
 
@@ -330,7 +331,7 @@
 	"../support/SupportDefs.h"
 	"../interface/View.h"
 
-1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\stringview.h
+1488112010 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\stringview.h
 	"../support/StringArray.h"
 	"../interface/View.h"
 
@@ -388,7 +389,7 @@
 1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\xmlkit.h
 	"xml/SimpleXmlParser.h"
 
-1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\xml\simplexmlparser.h
+1488120592 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\xml\simplexmlparser.h
 	"../support/List.h"
 
 1486891616 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\netkit.h
@@ -412,7 +413,7 @@
 1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netdebug.h
 	"../support/SupportDefs.h"
 
-1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netendpoint.h
+1488112010 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netendpoint.h
 	"../support/SupportDefs.h"
 	"../net/NetAddress.h"
 	"../net/NetBuffer.h"
@@ -458,7 +459,7 @@
 1487830519 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\flattenable.h
 	"../support/SupportDefs.h"
 
-1487758248 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\font\fontengine.cpp
+1488114257 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\font\fontengine.cpp
 	<string.h>
 	"../../app/AppDefs.h"
 	"../../interface/Font.h"
@@ -478,13 +479,13 @@
 	"../../support/Locker.h"
 	"../../app/Handler.h"
 
-1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\graphics\graphicsengine.h
+1488112063 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\graphics\graphicsengine.h
 	"../../support/SupportDefs.h"
 	"../../interface/GraphicsDefs.h"
 	"../../interface/Window.h"
 	"../../interface/Region.h"
 
-1487758280 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\font\freetype2.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\font\freetype2.cpp
 	"../../add-ons/font/FontEngine.h"
 	"../../kernel/Debug.h"
 	"../../support/StringArray.h"
@@ -516,14 +517,14 @@
 	"../../support/SupportDefs.h"
 	"../../interface/InterfaceDefs.h"
 
-1487758541 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\theme\themeengine.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\add-ons\theme\themeengine.cpp
 	"ThemeEngine.h"
 	"../../interface/View.h"
 	"../../interface/Rect.h"
 	"../../interface/Region.h"
 	"../../interface/Point.h"
 
-1487758944 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\application.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\application.cpp
 	"../support/List.h"
 	"../support/Locker.h"
 	"../support/Autolock.h"
@@ -542,12 +543,10 @@
 	"Application.h"
 	"Clipboard.h"
 
-1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\privatehandler.h
+1488122077 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\privatehandler.h
 	"../support/SupportDefs.h"
-	"../support/Locker.h"
-	"../app/Looper.h"
 
-1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\clipboard.cpp
+1488113787 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\clipboard.cpp
 	"../kernel/Kernel.h"
 	"../kernel/Debug.h"
 	"../support/StringMe.h"
@@ -559,10 +558,10 @@
 	"Clipboard.h"
 	"Application.h"
 
-1487758969 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\cursor.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\cursor.cpp
 	"Cursor.h"
 
-1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\handler.cpp
+1488113786 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\handler.cpp
 	"Handler.h"
 	"Looper.h"
 	"Messenger.h"
@@ -581,12 +580,12 @@
 	"../private/PrivateApplication.h"
 	"../private/PrivateHandler.h"
 
-1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\privateapplication.h
+1488113788 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\privateapplication.h
 	"../support/SupportDefs.h"
 	"../support/SimpleLocker.h"
 	"../private/Token.h"
 
-1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\token.h
+1488113788 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\token.h
 	"../support/SupportDefs.h"
 	"../support/Locker.h"
 
@@ -601,7 +600,7 @@
 	"../kernel/Debug.h"
 	"../support/Errors.h"
 
-1487759011 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\looper.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\app\looper.cpp
 	"Looper.h"
 	"AppDefs.h"
 	"Application.h"
@@ -765,7 +764,7 @@
 	"../../support/ClassInfo.h"
 	"../../app/Application.h"
 
-1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\bitmap.cpp
+1488113792 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\bitmap.cpp
 	"Bitmap.h"
 	"../add-ons/graphics/GraphicsEngine.h"
 	"../app/Application.h"
@@ -813,7 +812,7 @@
 	"../interface/Rect.h"
 	"../interface/View.h"
 
-1487409413 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-application.cpp
+1488113788 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-application.cpp
 	<string.h>
 	"etk-dfb.h"
 	"../../kernel/Kernel.h"
@@ -823,7 +822,7 @@
 	"../../app/Clipboard.h"
 	"../../app/Application.h"
 
-1486891617 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-dfb.h
+1488120591 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-dfb.h
 	<directfb.h>
 	<directfb_version.h>
 	"../../add-ons/graphics/GraphicsEngine.h"
@@ -842,7 +841,7 @@
 	"../../storage/Directory.h"
 	"../../storage/Path.h"
 
-1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-drawing.cpp
+1488113792 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-drawing.cpp
 	"../../render/Render.h"
 	"../../render/Pixmap.h"
 	"etk-dfb.h"
@@ -860,15 +859,15 @@
 1486418551 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-wm.cpp
 	"etk-dfb.h"
 
-1487759105 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\font.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\font.cpp
 	"Font.h"
-	<kits/support/SupportDefs.h>
+	"../support/SupportDefs.h"
 	"../support/Errors.h"
 	"../add-ons/font/FontEngine.h"
 	"../support/Autolock.h"
 	"../kernel/Debug.h"
 
-1487759147 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\graphicsdefs.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\graphicsdefs.cpp
 	"GraphicsDefs.h"
 	"Point.h"
 
@@ -911,7 +910,7 @@
 	"../interface/ListItem.h"
 	"../app/Message.h"
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\menu.cpp
+1488113789 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\menu.cpp
 	"Menu.h"
 	"PopUpMenu.h"
 	"Window.h"
@@ -1054,13 +1053,13 @@
 	"../app/Message.h"
 	<stdlib.h>
 
-1487759522 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\theme.cpp
+1488114972 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\theme.cpp
 	"InterfaceDefs.h"
 
 1486416096 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\tooltip.cpp
 	"ToolTip.h"
 
-1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\view.cpp
+1488113787 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\view.cpp
 	"View.h"
 	"ViewPrivate.h"
 	"ScrollView.h"
@@ -1079,8 +1078,8 @@
 	"../kernel/Debug.h"
 	<math.h>
 
-1486891693 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\viewprivate.h
-	<kits/support/SupportDefs.h>
+1488113787 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\viewprivate.h
+	"../support/SupportDefs.h"
 	"Rect.h"
 	"View.h"
 	"layout/Layout.h"
@@ -1100,7 +1099,7 @@
 	"../../app/Clipboard.h"
 	"../../app/Message.h"
 
-1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-win32gdi.h
+1488115222 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-win32gdi.h
 	"../../support/SupportDefs.h"
 	"../../add-ons/graphics/GraphicsEngine.h"
 	"../../app/MessageFilter.h"
@@ -1172,7 +1171,7 @@
 1486416095 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\wm\simplewm.cpp
 	"SimpleWM.h"
 
-1486621368 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\wm\simplewm.h
+1488113788 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\wm\simplewm.h
 	"./../../render/Render.h"
 
 1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-application.cpp
@@ -1187,7 +1186,7 @@
 	"../../app/Clipboard.h"
 	"../../interface/InterfaceDefs.h"
 
-1487830818 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-x11.h
+1488120591 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-x11.h
 	"../support/SupportDefs.h"
 	<X11/Xlib.h>
 	<X11/Xutil.h>
@@ -1247,7 +1246,7 @@
 	<be/kernel/OS.h>
 	"../kernel/Kernel.h"
 
-1487756173 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\debug.cpp
+1488114257 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\debug.cpp
 	"Debug.h"
 	"Kernel.h"
 	"../support/StringMe.h"
@@ -1257,7 +1256,7 @@
 	<winsock2.h>
 	<windows.h>
 
-1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\etk-port.cpp
+1488114257 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\etk-port.cpp
 	"../kernel/Kernel.h"
 	"../kernel/Debug.h"
 	"../support/StringMe.h"
@@ -1286,7 +1285,7 @@
 	"../kernel/Kernel.h"
 	"../support/StringMe.h"
 
-1487753819 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-semaphore-mach.cpp
+1488113790 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-semaphore-mach.cpp
 	<pthread.h>
 	<semaphore.h>
 	<time.h>
@@ -1296,7 +1295,7 @@
 	"../kernel/Kernel.h"
 	"../support/StringMe.h"
 
-1487753842 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-semaphore-umtx.cpp
+1488113786 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-semaphore-umtx.cpp
 	<stdlib.h>
 	<fcntl.h>
 	<pthread.h>
@@ -1315,7 +1314,7 @@
 	"../kernel/Kernel.h"
 	"../support/StringMe.h"
 
-1487753863 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-semaphore.cpp
+1488113785 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-semaphore.cpp
 	<stdlib.h>
 	<fcntl.h>
 	<pthread.h>
@@ -1343,14 +1342,14 @@
 	"../support/List.h"
 	"../support/StringMe.h"
 
-1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\etk-locker.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\etk-locker.cpp
 	<winsock2.h>
 	<windows.h>
 	"../../../kernel/Kernel.h"
 	"../../../support/Errors.h"
 	"../../../kernel/Debug.h"
 
-1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\etk-semaphore.cpp
+1488080788 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\etk-semaphore.cpp
 	"../../../kernel/Kernel.h"
 	"../../../kernel/Debug.h"
 	"../../../support/StringMe.h"
@@ -1359,7 +1358,7 @@
 	<windows.h>
 	<stdio.h>
 
-1487753925 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\etk-thread.cpp
+1488080859 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\etk-thread.cpp
 	"../../../kernel/Kernel.h"
 	"../../../kernel/Debug.h"
 	"../../../support/List.h"
@@ -1410,7 +1409,7 @@
 	"../kernel/Kernel.h"
 	"../support/SimpleLocker.h"
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-area.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-area.cpp
 	"../../support/SupportDefs.h"
 	"../../kernel/Kernel.h"
 	"../../kernel/Debug.h"
@@ -1419,7 +1418,7 @@
 	<winsock2.h>
 	<windows.h>
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-image.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-image.cpp
 	"../../kernel/Kernel.h"
 	"../../storage/Path.h"
 	"../../support/StringMe.h"
@@ -1428,19 +1427,19 @@
 	<windows.h>
 	<sys/cygwin.h>
 
-1487409413 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-os.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-os.cpp
 	"../../kernel/Kernel.h"
 	"../../support/StringMe.h"
 	"../../private/PrivateApplication.h"
 	<winsock2.h>
 	<windows.h>
 
-1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-timefuncs.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-timefuncs.cpp
 	"../../kernel/Kernel.h"
 	<winsock2.h>
 	<windows.h>
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netaddress.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netaddress.cpp
 	"NetAddress.h"
 	"../app/Message.h"
 	"../kernel/Debug.h"
@@ -1453,13 +1452,13 @@
 	<arpa/inet.h>
 	<winsock2.h>
 
-1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netbuffer.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netbuffer.cpp
 	"NetBuffer.h"
 	"../support/ByteOrder.h"
 	"../support/Errors.h"
 	"../app/Message.h"
 
-1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netdebug.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netdebug.cpp
 	"NetDebug.h"
 	"../support/Autolock.h"
 	"../support/SimpleLocker.h"
@@ -1467,7 +1466,7 @@
 	<stdarg.h>
 	<stdio.h>
 
-1487412296 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netendpoint.cpp
+1488113787 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\net\netendpoint.cpp
 	"NetEndpoint.h"
 	"../support/Errors.h"
 	"../app/Message.h"
@@ -1485,38 +1484,38 @@
 	<arpa/inet.h>
 	<winsock2.h>
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\memory.cpp
+1488113788 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\memory.cpp
 	"Memory.h"
 	"../kernel/Debug.h"
 
-1486891693 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\memory.h
-	<kits/support/SupportDefs.h>
+1488113789 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\memory.h
+	"../support/SupportDefs.h"
 
-1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\messagebody.cpp
+1488113786 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\messagebody.cpp
 	"MessageBody.h"
 	"Memory.h"
 	"../support/StringMe.h"
 	"../kernel/Debug.h"
 
-1486891693 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\messagebody.h
-	<kits/support/SupportDefs.h>
+1488113789 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\messagebody.h
+	"../support/SupportDefs.h"
 	"../support/List.h"
 	"../support/StreamIO.h"
 
-1486675977 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\object.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\object.cpp
 	"Object.h"
 
-1486891693 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\object.h
-	<kits/support/SupportDefs.h>
+1488113790 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\object.h
+	"../support/SupportDefs.h"
 
-1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\privateapplication.cpp
+1488113786 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\privateapplication.cpp
 	"PrivateApplication.h"
 	"../kernel/OS.h"
 	"../support/StringMe.h"
 	"../kernel/Debug.h"
 	"../support/Errors.h"
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\privatehandler.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\privatehandler.cpp
 	"PrivateHandler.h"
 	"PrivateApplication.h"
 	"../kernel/Kernel.h"
@@ -1524,34 +1523,34 @@
 	"../support/Autolock.h"
 	"../support/Errors.h"
 
-1486675694 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\standardio.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\standardio.cpp
 	"StandardIO.h"
 	<unistd.h>
 	<io.h>
 
-1486891693 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\standardio.h
-	<kits/support/SupportDefs.h>
+1488113789 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\standardio.h
+	"../support/SupportDefs.h"
 	"../support/StreamIO.h"
 
-1487754093 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\token.cpp
+1488113785 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\private\token.cpp
 	"Token.h"
 	"../kernel/Kernel.h"
 	"../kernel/Debug.h"
 	"../support/Locker.h"
 	"../support/List.h"
 
-1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\arcgenerator.cpp
+1488113785 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\arcgenerator.cpp
 	"ArcGenerator.h"
 	"../kernel/Debug.h"
 	<math.h>
 	<string.h>
 
-1486675977 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\linegenerator.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\linegenerator.cpp
 	"LineGenerator.h"
 	<math.h>
 	<string.h>
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\pixmap.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\pixmap.cpp
 	"Pixmap.h"
 	"../support/StringArray.h"
 	"../support/Errors.h"
@@ -1560,7 +1559,7 @@
 	<string.h>
 	<stdlib.h>
 
-1487409554 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\render.cpp
+1488113791 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\render\render.cpp
 	"Render.h"
 	"LineGenerator.h"
 	"ArcGenerator.h"
@@ -1571,7 +1570,7 @@
 	<stdlib.h>
 	<math.h>
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\directory.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\directory.cpp
 	"Directory.h"
 	"Path.h"
 	"../support/StringMe.h"
@@ -1584,7 +1583,7 @@
 	<unistd.h>
 	<dirent.h>
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\entry.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\entry.cpp
 	"Entry.h"
 	"Directory.h"
 	"../support/StringMe.h"
@@ -1597,7 +1596,7 @@
 	<sys/types.h>
 	<sys/stat.h>
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\file.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\file.cpp
 	"File.h"
 	"Path.h"
 	"../support/StringMe.h"
@@ -1610,7 +1609,7 @@
 	<winsock2.h>
 	<windows.h>
 
-1487754491 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\filepanel.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\filepanel.cpp
 	"FilePanel.h"
 	"FindDirectory.h"
 	"VolumeRoster.h"
@@ -1648,7 +1647,7 @@
 
 1376845640 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\icons\file.xpm
 
-1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\finddirectory.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\finddirectory.cpp
 	"FindDirectory.h"
 	"../support/StringMe.h"
 	"../support/Errors.h"
@@ -1660,9 +1659,9 @@
 	<userenv.h>
 	<stdlib.h>
 
-1376845640 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\node.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\node.cpp
 
-1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\path.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\path.cpp
 	"Path.h"
 	"../support/StringMe.h"
 	"../support/Errors.h"
@@ -1673,7 +1672,7 @@
 	<sys/types.h>
 	<sys/stat.h>
 
-1487409413 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\volume.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\volume.cpp
 	"Volume.h"
 	"../support/Errors.h"
 	<be/storage/Entry.h>
@@ -1685,11 +1684,11 @@
 	<stdio.h>
 	<mntent.h>
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\volumeroster.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\storage\volumeroster.cpp
 	"VolumeRoster.h"
 	"../support/Errors.h"
 
-1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\archivable.cpp
+1488081008 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\archivable.cpp
 	"Archivable.h"
 	"../app/Message.h"
 	"../support/Errors.h"
@@ -1699,35 +1698,35 @@
 	"ByteOrder.h"
 	"../support/Errors.h"
 
-1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\dataio.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\dataio.cpp
 	"DataIO.h"
 	"../support/Errors.h"
 
-1486590166 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\flattenable.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\flattenable.cpp
 	"Flattenable.h"
 
-1486669361 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\list.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\list.cpp
 	"List.h"
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\locker.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\locker.cpp
 	"Locker.h"
 	"../kernel/Kernel.h"
 	"../kernel/Debug.h"
 	"../support/Errors.h"
 
-1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\simplelocker.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\simplelocker.cpp
 	"SimpleLocker.h"
 	"../kernel/Kernel.h"
 	"../kernel/Debug.h"
 
-1487409853 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\streamio.cpp
+1488081048 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\streamio.cpp
 	"StreamIO.h"
 	"../support/StringMe.h"
 	"../private/StandardIO.h"
 	"../kernel/Debug.h"
 	"../support/Errors.h"
 
-1486675977 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\stringarray.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\support\stringarray.cpp
 	"StringArray.h"
 	"StringMe.h"
 
@@ -1750,6 +1749,6 @@
 	"../kernel/Debug.h"
 	<stdlib.h>
 
-1487759069 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\be.cpp
+1488114257 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\be.cpp
 	"BE.h"
 

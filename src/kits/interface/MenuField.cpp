@@ -171,7 +171,7 @@ BMenuField::Draw(BRect updateRect)
 	{
 		BFont font;
 		GetFont(&font);
-		b_font_height fontHeight;
+		bhapi::font_height fontHeight;
 		font.GetHeight(&fontHeight);
 		float sHeight = fontHeight.ascent + fontHeight.descent;
 
@@ -232,7 +232,7 @@ BMenuField::GetPreferredSize(float *width, float *height)
 
 	if(height != NULL)
 	{
-		b_font_height fontHeight;
+		bhapi::font_height fontHeight;
 		GetFontHeight(&fontHeight);
 		float sHeight = fontHeight.ascent + fontHeight.descent;
 		if(sHeight + 10 > *height) *height = sHeight + 10;

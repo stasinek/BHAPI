@@ -106,14 +106,14 @@ private:
 	void _Close();
 };
 
+#ifdef BHAPI_BUILD_LIBRARY
 
-inline int
-BNetEndpoint::SetReuseAddr(bool state)
+inline int BNetEndpoint::SetReuseAddr(bool state)
 {
 	int opt = (int)state;
 	return SetSocketOption(SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 }
-
+#endif // BHAPI_BUILD_LIBRARY
 
 #endif /* __cplusplus */
 

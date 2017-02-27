@@ -39,7 +39,7 @@
 
 
 // return the number of microseconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
+IMPEXP_BHAPI b_bigtime_t b_real_time_clock_usecs(void)
 {
 	b_int64 current_time = B_INT64_CONSTANT(-1);
 #if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)
@@ -54,7 +54,7 @@ IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
 	if(gettimeofday(&tv, NULL) == 0)
 		current_time = (b_int64)tv.tv_sec * SECS_TO_US + (b_int64)tv.tv_usec;
 #else
-	#error "no time function implement bhapi_real_time_clock_usec!"
+	#error "no time function implement b_real_time_clock_usec!"
 #endif
 #endif
 	return current_time;
@@ -62,7 +62,7 @@ IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
 
 
 // return the number of seconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-IMPEXP_BHAPI b_uint32 bhapi_real_time_clock(void)
+IMPEXP_BHAPI b_uint32 b_real_time_clock(void)
 {
 	b_uint32 current_time = 0;
 #if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)
@@ -73,26 +73,26 @@ IMPEXP_BHAPI b_uint32 bhapi_real_time_clock(void)
 	struct timeval tv;
 	if(gettimeofday(&tv, NULL) == 0) current_time = (b_uint32)tv.tv_sec;
 #else
-	#error "no time function implement bhapi_real_time_clock!"
+	#error "no time function implement b_real_time_clock!"
 #endif
 #endif
 	return current_time;
 }
 
 
-static b_int64 bhapi_unix_boot_time = B_INT64_CONSTANT(-1);
-static BSimpleLocker bhapi_unix_boot_time_locker(true);
+static b_int64 b_unix_boot_time = B_INT64_CONSTANT(-1);
+static BSimpleLocker b_unix_boot_time_locker(true);
 
 
-IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
+IMPEXP_BHAPI b_bigtime_t b_system_boot_time(void)
 {
 	b_bigtime_t retValue = B_INT64_CONSTANT(-1);
 
-	bhapi_unix_boot_time_locker.Lock();
+	b_unix_boot_time_locker.Lock();
 
-	if(bhapi_unix_boot_time >= B_INT64_CONSTANT(0))
+	if(b_unix_boot_time >= B_INT64_CONSTANT(0))
 	{
-		retValue = bhapi_unix_boot_time;
+		retValue = b_unix_boot_time;
 	}
 	else
 	{
@@ -102,24 +102,24 @@ IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
 		if(clock_gettime(CLOCK_MONOTONIC, &ts) == 0)
 		{
 			b_bigtime_t up_time = (b_int64)ts.tv_sec * SECS_TO_US + (b_int64)(ts.tv_nsec + 500) / B_INT64_CONSTANT(1000);
-			retValue = bhapi_unix_boot_time = bhapi_real_time_clock_usecs() - up_time;
+			retValue = b_unix_boot_time = b_real_time_clock_usecs() - up_time;
 		}
 #else
-		#warning "fixme: no time function implement bhapi_system_boot_time!"
-		retValue = bhapi_unix_boot_time = B_INT64_CONSTANT(0);
+		#warning "fixme: no time function implement b_system_boot_time!"
+		retValue = b_unix_boot_time = B_INT64_CONSTANT(0);
 #endif
 	}
 
-	bhapi_unix_boot_time_locker.Unlock();
+	b_unix_boot_time_locker.Unlock();
 
 	return retValue;
 }
 
 
-IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void)
+IMPEXP_BHAPI b_bigtime_t b_system_time(void)
 {
 	// FIXME
-	return(bhapi_real_time_clock_usecs() - bhapi_system_boot_time());
+	return(b_real_time_clock_usecs() - b_system_boot_time());
 }
 #endif // BHAPI_OS_LINUX
 

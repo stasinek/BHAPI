@@ -41,8 +41,8 @@ inline team_id __bhapi_get_current_beos_team_id()
 }
 
 
-typedef struct bhapi_beos_sem_info {
-	bhapi_beos_sem_info()
+typedef struct bhapi::beos_sem_info {
+	bhapi::beos_sem_info()
 	{
 		InitData();
 	}
@@ -73,12 +73,12 @@ typedef struct bhapi_beos_sem_info {
 
 	bool LatestHolderTeamIsCurrent(void)
 	{
-		return(latestHolderTeamId == bhapi_get_current_team_id());
+		return(latestHolderTeamId == bhapi::get_current_team_id());
 	}
 
 	bool LatestHolderThreadIsCurrent(void)
 	{
-		return(latestHolderThreadId == bhapi_get_current_thread_id());
+		return(latestHolderThreadId == bhapi::get_current_thread_id());
 	}
 
 	char			name[B_OS_NAME_LENGTH + 1];
@@ -92,37 +92,37 @@ typedef struct bhapi_beos_sem_info {
 	b_uint32			refCount;
 	sem_id			Locker;
 	sem_id			Cond;
-} bhapi_beos_sem_info;
+} bhapi::beos_sem_info;
 
-typedef struct bhapi_beos_sem_t {
-	bhapi_beos_sem_t()
+typedef struct bhapi::beos_sem_t {
+	bhapi::beos_sem_t()
 		: mapping(NULL), semInfo(NULL), Locker(-1), Cond(-1),
 		  created(false), no_clone(false)
 	{
 	}
 
-	~bhapi_beos_sem_t()
+	~bhapi::beos_sem_t()
 	{
 		if(created)
 		{
 			created = false;
-			bhapi_delete_sem((void*)this);
+			bhapi::delete_sem((void*)this);
 		}
 	}
 
 	void			*mapping;
-	bhapi_beos_sem_info	*semInfo;
+	bhapi::beos_sem_info	*semInfo;
 
 	sem_id			Locker;
 	sem_id			Cond;
 
 	bool			created;
 	bool			no_clone;
-} bhapi_beos_sem_t;
+} bhapi::beos_sem_t;
 
-class bhapi_beos_sem_locker_t {
+class bhapi::beos_sem_locker_t {
 public:
-	bhapi_beos_sem_locker_t()
+	bhapi::beos_sem_locker_t()
 	{
 		const char *lockerName = "_bhapi_global_";
 
@@ -131,7 +131,7 @@ public:
 			if((iLocker = create_port(1, lockerName)) >= 0)
 			{
 				char buf = 1;
-				if(set_port_owner(iLocker, B_SYSTEM_TEAM) != B_OK || write_port(iLocker, 'bhapi_', &buf, 1) != B_OK)
+				if(set_port_owner(iLocker, B_SYSTEM_TEAM) != B_OK || write_port(iLocker, 'bhapi::', &buf, 1) != B_OK)
 				{
 					delete_port(iLocker);
 					iLocker = -1;
@@ -158,7 +158,7 @@ public:
 			char buf = 0;
 			b_size_t readBytes = read_port(iLocker, &msgCode, &buf, 1);
 			if(readBytes < 1) continue;
-			if(readBytes != 1 || msgCode != 'bhapi_' || buf != 1)
+			if(readBytes != 1 || msgCode != 'bhapi::' || buf != 1)
 				BHAPI_ERROR("[KERNEL]: Unable to lock the locker for global semaphore.");
 //			BHAPI_DEBUG("[KERNEL]: global semaphore locker locked.");
 			break;
@@ -168,46 +168,46 @@ public:
 	void Unlock()
 	{
 		char buf = 1;
-		if(write_port(iLocker, 'bhapi_', &buf, 1) != B_OK) BHAPI_ERROR("[KERNEL]: Unable to unlock the locker for global semaphore.");
+		if(write_port(iLocker, 'bhapi::', &buf, 1) != B_OK) BHAPI_ERROR("[KERNEL]: Unable to unlock the locker for global semaphore.");
 //		BHAPI_DEBUG("[KERNEL]: global semaphore locker unlocked.");
 	}
 
 	port_id iLocker;
 };
 
-static bhapi_beos_sem_locker_t __bhapi_semaphore_locker__;
+static bhapi::beos_sem_locker_t __bhapi_semaphore_locker__;
 
-static void _BHAPI_LOCK_SEMAPHORE_()
+static void BHAPI_LOCK_SEMAPHORE()
 {
 	__bhapi_semaphore_locker__.Lock();
 }
 
-static void _BHAPI_UNLOCK_SEMAPHORE_()
+static void BHAPI_UNLOCK_SEMAPHORE()
 {
 	__bhapi_semaphore_locker__.Unlock();
 }
 
 
-static bool bhapi_is_sem_for_IPC(const bhapi_beos_sem_t *sem)
+static bool bhapi::is_sem_for_IPC(const bhapi::beos_sem_t *sem)
 {
 	if(!sem) return false;
 	return(sem->mapping != NULL);
 }
 
 
-static void bhapi_lock_sem_inter(bhapi_beos_sem_t *sem)
+static void bhapi::lock_sem_inter(bhapi::beos_sem_t *sem)
 {
 	team_id curTeam = __bhapi_get_current_beos_team_id();
 	sem_info semInfo;
 
 	while(true)
 	{
-		if(bhapi_is_sem_for_IPC(sem))
+		if(bhapi::is_sem_for_IPC(sem))
 		{
-			_BHAPI_LOCK_SEMAPHORE_();
+			BHAPI_LOCK_SEMAPHORE();
 			get_sem_info(sem->Locker, &semInfo);
 			if(semInfo.team == B_SYSTEM_TEAM) set_sem_owner(sem->Locker, curTeam);
-			_BHAPI_UNLOCK_SEMAPHORE_();
+			BHAPI_UNLOCK_SEMAPHORE();
 		}
 
 		if(acquire_sem(sem->Locker) == B_OK) break;
@@ -215,16 +215,16 @@ static void bhapi_lock_sem_inter(bhapi_beos_sem_t *sem)
 }
 
 
-static void bhapi_unlock_sem_inter(bhapi_beos_sem_t *sem)
+static void bhapi::unlock_sem_inter(bhapi::beos_sem_t *sem)
 {
-	if(bhapi_is_sem_for_IPC(sem))
+	if(bhapi::is_sem_for_IPC(sem))
 	{
-		_BHAPI_LOCK_SEMAPHORE_();
+		BHAPI_LOCK_SEMAPHORE();
 		sem_info semInfo;
 		get_sem_info(sem->Locker, &semInfo);
 		if(semInfo.team == B_SYSTEM_TEAM) set_sem_owner(sem->Locker, __bhapi_get_current_beos_team_id());
 		release_sem(sem->Locker);
-		_BHAPI_UNLOCK_SEMAPHORE_();
+		BHAPI_UNLOCK_SEMAPHORE();
 	}
 	else
 	{
@@ -233,7 +233,7 @@ static void bhapi_unlock_sem_inter(bhapi_beos_sem_t *sem)
 }
 
 
-static void* bhapi_create_sem_for_IPC(b_int64 count, const char *name, bhapi_area_access area_access)
+static void* bhapi::create_sem_for_IPC(b_int64 count, const char *name, bhapi::area_access area_access)
 {
 	if(count < B_INT64_CONSTANT(0) || name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH) return NULL;
 	if(strlen(name) > B_OS_NAME_LENGTH - 4) // because of length of area's name can't exceeds B_OS_NAME_LENGTH - 4
@@ -242,31 +242,31 @@ static void* bhapi_create_sem_for_IPC(b_int64 count, const char *name, bhapi_are
 		return NULL;
 	}
 
-	bhapi_beos_sem_t *sem = new bhapi_beos_sem_t();
+	bhapi::beos_sem_t *sem = new bhapi::beos_sem_t();
 	if(!sem) return NULL;
 
-	_BHAPI_LOCK_SEMAPHORE_();
+	BHAPI_LOCK_SEMAPHORE();
 
-	if((sem->mapping = bhapi_create_area(name, (void**)&(sem->semInfo), sizeof(bhapi_beos_sem_info),
+	if((sem->mapping = bhapi::create_area(name, (void**)&(sem->semInfo), sizeof(bhapi::beos_sem_info),
 					   B_READ_AREA | B_WRITE_AREA, BHAPI_AREA_SYSTEM_SEMAPHORE_DOMAIN, area_access)) == NULL ||
 	   sem->semInfo == NULL)
 	{
 //		BHAPI_DEBUG("[KERNEL]: %s --- Can't create sem : create area failed.", __PRETTY_FUNCTION__, name);
-		if(sem->mapping) bhapi_delete_area(sem->mapping);
-		_BHAPI_UNLOCK_SEMAPHORE_();
+		if(sem->mapping) bhapi::delete_area(sem->mapping);
+		BHAPI_UNLOCK_SEMAPHORE();
 		delete sem;
 		return NULL;
 	}
 
-	bhapi_beos_sem_info *sem_info = sem->semInfo;
+	bhapi::beos_sem_info *sem_info = sem->semInfo;
 	sem_info->InitData();
 	memcpy(sem_info->name, name, (size_t)strlen(name));
 
 	if((sem->Locker = create_sem(1, NULL)) < 0)
 	{
 		if(sem->Locker >= 0) delete_sem(sem->Locker);
-		bhapi_delete_area(sem->mapping);
-		_BHAPI_UNLOCK_SEMAPHORE_();
+		bhapi::delete_area(sem->mapping);
+		BHAPI_UNLOCK_SEMAPHORE();
 		delete sem;
 		return NULL;
 	}
@@ -274,8 +274,8 @@ static void* bhapi_create_sem_for_IPC(b_int64 count, const char *name, bhapi_are
 	{
 		delete_sem(sem->Locker);
 		if(sem->Cond >= 0) delete_sem(sem->Cond);
-		bhapi_delete_area(sem->mapping);
-		_BHAPI_UNLOCK_SEMAPHORE_();
+		bhapi::delete_area(sem->mapping);
+		BHAPI_UNLOCK_SEMAPHORE();
 		delete sem;
 		return NULL;
 	}
@@ -285,7 +285,7 @@ static void* bhapi_create_sem_for_IPC(b_int64 count, const char *name, bhapi_are
 	sem->semInfo->Locker = sem->Locker;
 	sem->semInfo->Cond = sem->Cond;
 
-	_BHAPI_UNLOCK_SEMAPHORE_();
+	BHAPI_UNLOCK_SEMAPHORE();
 
 	sem->created = true;
 
@@ -295,7 +295,7 @@ static void* bhapi_create_sem_for_IPC(b_int64 count, const char *name, bhapi_are
 }
 
 
-IMPEXP_BHAPI void* bhapi_clone_sem(const char *name)
+IMPEXP_BHAPI void* bhapi::clone_sem(const char *name)
 {
 	if(name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH) return NULL;
 	if(strlen(name) > B_OS_NAME_LENGTH - 4) // because of length of area's name can't exceeds B_OS_NAME_LENGTH - 4
@@ -304,18 +304,18 @@ IMPEXP_BHAPI void* bhapi_clone_sem(const char *name)
 		return NULL;
 	}
 
-	bhapi_beos_sem_t *sem = new bhapi_beos_sem_t();
+	bhapi::beos_sem_t *sem = new bhapi::beos_sem_t();
 	if(!sem) return NULL;
 
-	_BHAPI_LOCK_SEMAPHORE_();
+	BHAPI_LOCK_SEMAPHORE();
 
-	if((sem->mapping = bhapi_clone_area(name, (void**)&(sem->semInfo),
+	if((sem->mapping = bhapi::clone_area(name, (void**)&(sem->semInfo),
 					  B_READ_AREA | B_WRITE_AREA, BHAPI_AREA_SYSTEM_SEMAPHORE_DOMAIN)) == NULL ||
 	   sem->semInfo == NULL || sem->semInfo->refCount >= B_MAXUINT32)
 	{
 //		BHAPI_DEBUG("[KERNEL]: %s --- Can't clone semaphore : clone area failed --- \"%s\"", __PRETTY_FUNCTION__, name);
-		if(sem->mapping) bhapi_delete_area(sem->mapping);
-		_BHAPI_UNLOCK_SEMAPHORE_();
+		if(sem->mapping) bhapi::delete_area(sem->mapping);
+		BHAPI_UNLOCK_SEMAPHORE();
 		delete sem;
 		return NULL;
 	}
@@ -332,7 +332,7 @@ IMPEXP_BHAPI void* bhapi_clone_sem(const char *name)
 	get_sem_info(sem->Cond, &semInfo);
 	if(semInfo.team == B_SYSTEM_TEAM) set_sem_owner(sem->Cond, curTeam);
 
-	_BHAPI_UNLOCK_SEMAPHORE_();
+	BHAPI_UNLOCK_SEMAPHORE();
 
 	sem->created = true;
 
@@ -340,41 +340,41 @@ IMPEXP_BHAPI void* bhapi_clone_sem(const char *name)
 }
 
 
-IMPEXP_BHAPI void* bhapi_clone_sem_by_source(void *data)
+IMPEXP_BHAPI void* bhapi::clone_sem_by_source(void *data)
 {
-	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
+	bhapi::beos_sem_t *sem = (bhapi::beos_sem_t*)data;
 	if(!sem || !sem->semInfo) return NULL;
 
-	_BHAPI_LOCK_SEMAPHORE_();
+	BHAPI_LOCK_SEMAPHORE();
 
-	if(bhapi_is_sem_for_IPC(sem))
+	if(bhapi::is_sem_for_IPC(sem))
 	{
-		_BHAPI_UNLOCK_SEMAPHORE_();
-		return bhapi_clone_sem(sem->semInfo->name);
+		BHAPI_UNLOCK_SEMAPHORE();
+		return bhapi::clone_sem(sem->semInfo->name);
 	}
 	else if(sem->no_clone || sem->semInfo->refCount >= B_MAXUINT32)
 	{
-		_BHAPI_UNLOCK_SEMAPHORE_();
+		BHAPI_UNLOCK_SEMAPHORE();
 		return NULL;
 	}
 
 	sem->semInfo->refCount += 1;
 
-	_BHAPI_UNLOCK_SEMAPHORE_();
+	BHAPI_UNLOCK_SEMAPHORE();
 
 	return data;
 }
 
 
-static void* bhapi_create_sem_for_local(b_int64 count)
+static void* bhapi::create_sem_for_local(b_int64 count)
 {
 	if(count < B_INT64_CONSTANT(0)) return NULL;
 
-	bhapi_beos_sem_t *sem = new bhapi_beos_sem_t();
+	bhapi::beos_sem_t *sem = new bhapi::beos_sem_t();
 
 	if(!sem) return NULL;
 
-	if((sem->semInfo = new bhapi_beos_sem_info()) == NULL ||
+	if((sem->semInfo = new bhapi::beos_sem_info()) == NULL ||
 	   (sem->Locker = create_sem(1, NULL)) < 0 ||
 	   (sem->Cond = create_sem(0, NULL)) < 0)
 	{
@@ -393,45 +393,45 @@ static void* bhapi_create_sem_for_local(b_int64 count)
 }
 
 
-IMPEXP_BHAPI void* bhapi_create_sem(b_int64 count, const char *name, bhapi_area_access area_access)
+IMPEXP_BHAPI void* bhapi::create_sem(b_int64 count, const char *name, bhapi::area_access area_access)
 {
 	return((name == NULL || *name == 0) ?
-			bhapi_create_sem_for_local(count) :
-			bhapi_create_sem_for_IPC(count, name, area_access));
+			bhapi::create_sem_for_local(count) :
+			bhapi::create_sem_for_IPC(count, name, area_access));
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_get_sem_info(void *data, bhapi_sem_info *info)
+IMPEXP_BHAPI b_status_t bhapi::get_sem_info(void *data, bhapi::sem_info *info)
 {
-	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
+	bhapi::beos_sem_t *sem = (bhapi::beos_sem_t*)data;
 	if(!sem || !info) return B_BAD_VALUE;
 
 	bzero(info->name, B_OS_NAME_LENGTH + 1);
 
-	bhapi_lock_sem_inter(sem);
+	bhapi::lock_sem_inter(sem);
 
-	if(bhapi_is_sem_for_IPC(sem)) strcpy(info->name, sem->semInfo->name);
+	if(bhapi::is_sem_for_IPC(sem)) strcpy(info->name, sem->semInfo->name);
 	info->latest_holder_team = sem->semInfo->latestHolderTeamId;
 	info->latest_holder_thread = sem->semInfo->latestHolderThreadId;
 	info->count = sem->semInfo->count - sem->semInfo->acquiringCount;
 	info->closed = sem->semInfo->closed;
 
-	bhapi_unlock_sem_inter(sem);
+	bhapi::unlock_sem_inter(sem);
 
 	return B_OK;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_delete_sem(void *data)
+IMPEXP_BHAPI b_status_t bhapi::delete_sem(void *data)
 {
-	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
+	bhapi::beos_sem_t *sem = (bhapi::beos_sem_t*)data;
 	if(!sem || !sem->semInfo) return B_BAD_VALUE;
 
-	_BHAPI_LOCK_SEMAPHORE_();
+	BHAPI_LOCK_SEMAPHORE();
 
 	if(sem->semInfo->refCount == 0)
 	{
-		_BHAPI_UNLOCK_SEMAPHORE_();
+		BHAPI_UNLOCK_SEMAPHORE();
 		return B_ERROR;
 	}
 
@@ -439,7 +439,7 @@ IMPEXP_BHAPI b_status_t bhapi_delete_sem(void *data)
 
 	team_id curTeam = __bhapi_get_current_beos_team_id();
 
-	if(bhapi_is_sem_for_IPC(sem))
+	if(bhapi::is_sem_for_IPC(sem))
 	{
 		if(count != 0)
 		{
@@ -455,12 +455,12 @@ IMPEXP_BHAPI b_status_t bhapi_delete_sem(void *data)
 			set_sem_owner(sem->Cond, curTeam); delete_sem(sem->Cond);
 		}
 
-		bhapi_delete_area(sem->mapping);
+		bhapi::delete_area(sem->mapping);
 	}
 
-	_BHAPI_UNLOCK_SEMAPHORE_();
+	BHAPI_UNLOCK_SEMAPHORE();
 
-	if(!bhapi_is_sem_for_IPC(sem))
+	if(!bhapi::is_sem_for_IPC(sem))
 	{
 		if(count > 0) return B_OK;
 
@@ -479,16 +479,16 @@ IMPEXP_BHAPI b_status_t bhapi_delete_sem(void *data)
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_delete_sem_etc(void *data, bool no_clone)
+IMPEXP_BHAPI b_status_t bhapi::delete_sem_etc(void *data, bool no_clone)
 {
-	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
+	bhapi::beos_sem_t *sem = (bhapi::beos_sem_t*)data;
 	if(!sem || !sem->semInfo) return B_BAD_VALUE;
 
-	_BHAPI_LOCK_SEMAPHORE_();
+	BHAPI_LOCK_SEMAPHORE();
 
 	if(sem->semInfo->refCount == 0)
 	{
-		_BHAPI_UNLOCK_SEMAPHORE_();
+		BHAPI_UNLOCK_SEMAPHORE();
 		return B_ERROR;
 	}
 
@@ -496,7 +496,7 @@ IMPEXP_BHAPI b_status_t bhapi_delete_sem_etc(void *data, bool no_clone)
 
 	team_id curTeam = __bhapi_get_current_beos_team_id();
 
-	if(bhapi_is_sem_for_IPC(sem))
+	if(bhapi::is_sem_for_IPC(sem))
 	{
 		if(count != 0)
 		{
@@ -512,16 +512,16 @@ IMPEXP_BHAPI b_status_t bhapi_delete_sem_etc(void *data, bool no_clone)
 			set_sem_owner(sem->Cond, curTeam); delete_sem(sem->Cond);
 		}
 
-		bhapi_delete_area_etc(sem->mapping, no_clone);
+		bhapi::delete_area_etc(sem->mapping, no_clone);
 	}
 	else if(no_clone)
 	{
 		sem->no_clone = true;
 	}
 
-	_BHAPI_UNLOCK_SEMAPHORE_();
+	BHAPI_UNLOCK_SEMAPHORE();
 
-	if(!bhapi_is_sem_for_IPC(sem))
+	if(!bhapi::is_sem_for_IPC(sem))
 	{
 		if(count > 0) return B_OK;
 
@@ -540,45 +540,45 @@ IMPEXP_BHAPI b_status_t bhapi_delete_sem_etc(void *data, bool no_clone)
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_close_sem(void *data)
+IMPEXP_BHAPI b_status_t bhapi::close_sem(void *data)
 {
-	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
+	bhapi::beos_sem_t *sem = (bhapi::beos_sem_t*)data;
 	if(!sem) return B_BAD_VALUE;
 
-	if(bhapi_is_sem_for_IPC(sem))
+	if(bhapi::is_sem_for_IPC(sem))
 	{
-		_BHAPI_LOCK_SEMAPHORE_();
+		BHAPI_LOCK_SEMAPHORE();
 		sem_info semInfo;
 		get_sem_info(sem->Cond, &semInfo);
 		if(semInfo.team == B_SYSTEM_TEAM) set_sem_owner(sem->Cond, __bhapi_get_current_beos_team_id());
-		_BHAPI_UNLOCK_SEMAPHORE_();
+		BHAPI_UNLOCK_SEMAPHORE();
 	}
 
-	bhapi_lock_sem_inter(sem);
+	bhapi::lock_sem_inter(sem);
 
 	if(sem->semInfo->closed)
 	{
-		bhapi_unlock_sem_inter(sem);
+		bhapi::unlock_sem_inter(sem);
 		return B_ERROR;
 	}
 	sem->semInfo->closed = true;
 
 	release_sem(sem->Cond);
 
-	bhapi_unlock_sem_inter(sem);
+	bhapi::unlock_sem_inter(sem);
 
 	return B_OK;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint32 flags, b_bigtime_t microseconds_timeout)
+IMPEXP_BHAPI b_status_t bhapi::acquire_sem_etc(void *data, b_int64 count, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
-	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
+	bhapi::beos_sem_t *sem = (bhapi::beos_sem_t*)data;
 	if(!sem) return B_BAD_VALUE;
 
 	if(microseconds_timeout < B_INT64_CONSTANT(0) || count < B_INT64_CONSTANT(1)) return B_BAD_VALUE;
 
-	b_bigtime_t currentTime = bhapi_real_time_clock_usecs();
+	b_bigtime_t currentTime = bhapi::real_time_clock_usecs();
 	bool wait_forever = false;
 
 	if(flags != B_ABSOLUTE_TIMEOUT)
@@ -589,38 +589,38 @@ IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint3
 			microseconds_timeout += currentTime;
 	}
 
-	if(bhapi_is_sem_for_IPC(sem))
+	if(bhapi::is_sem_for_IPC(sem))
 	{
-		_BHAPI_LOCK_SEMAPHORE_();
+		BHAPI_LOCK_SEMAPHORE();
 		sem_info semInfo;
 		get_sem_info(sem->Cond, &semInfo);
 		if(semInfo.team == B_SYSTEM_TEAM) set_sem_owner(sem->Cond, __bhapi_get_current_beos_team_id());
-		_BHAPI_UNLOCK_SEMAPHORE_();
+		BHAPI_UNLOCK_SEMAPHORE();
 	}
 
-	bhapi_lock_sem_inter(sem);
+	bhapi::lock_sem_inter(sem);
 
 	if(sem->semInfo->count - count >= B_INT64_CONSTANT(0))
 	{
 		sem->semInfo->count -= count;
-		sem->semInfo->SetLatestHolderTeamId(bhapi_get_current_team_id());
-		sem->semInfo->SetLatestHolderThreadId(bhapi_get_current_thread_id());
-		bhapi_unlock_sem_inter(sem);
+		sem->semInfo->SetLatestHolderTeamId(bhapi::get_current_team_id());
+		sem->semInfo->SetLatestHolderThreadId(bhapi::get_current_thread_id());
+		bhapi::unlock_sem_inter(sem);
 		return B_OK;
 	}
 	else if(sem->semInfo->closed)
 	{
-		bhapi_unlock_sem_inter(sem);
+		bhapi::unlock_sem_inter(sem);
 		return B_ERROR;
 	}
 	else if(microseconds_timeout == currentTime && !wait_forever)
 	{
-		bhapi_unlock_sem_inter(sem);
+		bhapi::unlock_sem_inter(sem);
 		return B_WOULD_BLOCK;
 	}
 	if(count > B_MAXINT64 - sem->semInfo->acquiringCount)
 	{
-		bhapi_unlock_sem_inter(sem);
+		bhapi::unlock_sem_inter(sem);
 		return B_ERROR;
 	}
 
@@ -632,14 +632,14 @@ IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint3
 
 	while(true)
 	{
-		bhapi_unlock_sem_inter(sem);
+		bhapi::unlock_sem_inter(sem);
 
 		status_t status = (wait_forever ? acquire_sem(sem->Cond) :
 						  acquire_sem_etc(sem->Cond, 1,
 							  	  B_ABSOLUTE_TIMEOUT,
-								  (bigtime_t)(microseconds_timeout - bhapi_system_boot_time())));
+								  (bigtime_t)(microseconds_timeout - bhapi::system_boot_time())));
 
-		bhapi_lock_sem_inter(sem);
+		bhapi::lock_sem_inter(sem);
 
 		if(status != B_OK)
 		{
@@ -657,8 +657,8 @@ IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint3
 		if(sem->semInfo->count - count >= B_INT64_CONSTANT(0))
 		{
 			sem->semInfo->count -= count;
-			sem->semInfo->SetLatestHolderTeamId(bhapi_get_current_team_id());
-			sem->semInfo->SetLatestHolderThreadId(bhapi_get_current_thread_id());
+			sem->semInfo->SetLatestHolderTeamId(bhapi::get_current_team_id());
+			sem->semInfo->SetLatestHolderThreadId(bhapi::get_current_thread_id());
 			retval = B_OK;
 			break;
 		}
@@ -676,33 +676,33 @@ IMPEXP_BHAPI b_status_t bhapi_acquire_sem_etc(void *data, b_int64 count, b_uint3
 	if(sem->semInfo->minAcquiringCount == count) sem->semInfo->minAcquiringCount = B_INT64_CONSTANT(0);
 	release_sem(sem->Cond);
 
-	bhapi_unlock_sem_inter(sem);
+	bhapi::unlock_sem_inter(sem);
 
 	return retval;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_acquire_sem(void *data)
+IMPEXP_BHAPI b_status_t bhapi::acquire_sem(void *data)
 {
-	return bhapi_acquire_sem_etc(data, B_INT64_CONSTANT(1), B_TIMEOUT, B_INFINITE_TIMEOUT);
+	return bhapi::acquire_sem_etc(data, B_INT64_CONSTANT(1), B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_release_sem_etc(void *data, b_int64 count, b_uint32 flags)
+IMPEXP_BHAPI b_status_t bhapi::release_sem_etc(void *data, b_int64 count, b_uint32 flags)
 {
-	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
+	bhapi::beos_sem_t *sem = (bhapi::beos_sem_t*)data;
 	if(!sem || count < B_INT64_CONSTANT(0)) return B_BAD_VALUE;
 
-	if(bhapi_is_sem_for_IPC(sem))
+	if(bhapi::is_sem_for_IPC(sem))
 	{
-		_BHAPI_LOCK_SEMAPHORE_();
+		BHAPI_LOCK_SEMAPHORE();
 		sem_info semInfo;
 		get_sem_info(sem->Cond, &semInfo);
 		if(semInfo.team == B_SYSTEM_TEAM) set_sem_owner(sem->Cond, __bhapi_get_current_beos_team_id());
-		_BHAPI_UNLOCK_SEMAPHORE_();
+		BHAPI_UNLOCK_SEMAPHORE();
 	}
 
-	bhapi_lock_sem_inter(sem);
+	bhapi::lock_sem_inter(sem);
 
 	b_status_t retval = B_ERROR;
 
@@ -713,27 +713,27 @@ IMPEXP_BHAPI b_status_t bhapi_release_sem_etc(void *data, b_int64 count, b_uint3
 		retval = B_OK;
 	}
 
-	bhapi_unlock_sem_inter(sem);
+	bhapi::unlock_sem_inter(sem);
 
 	return retval;
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_release_sem(void *data)
+IMPEXP_BHAPI b_status_t bhapi::release_sem(void *data)
 {
-	return bhapi_release_sem_etc(data, B_INT64_CONSTANT(1), 0);
+	return bhapi::release_sem_etc(data, B_INT64_CONSTANT(1), 0);
 }
 
 
-IMPEXP_BHAPI b_status_t bhapi_get_sem_count(void *data, b_int64 *count)
+IMPEXP_BHAPI b_status_t bhapi::get_sem_count(void *data, b_int64 *count)
 {
-	bhapi_beos_sem_t *sem = (bhapi_beos_sem_t*)data;
+	bhapi::beos_sem_t *sem = (bhapi::beos_sem_t*)data;
 	if(!sem || !count) return B_BAD_VALUE;
 
-	bhapi_lock_sem_inter(sem);
+	bhapi::lock_sem_inter(sem);
 	*count = (sem->semInfo->acquiringCount <= B_INT64_CONSTANT(0) ?
 			sem->semInfo->count : B_INT64_CONSTANT(-1) * (sem->semInfo->acquiringCount));
-	bhapi_unlock_sem_inter(sem);
+	bhapi::unlock_sem_inter(sem);
 
 	return B_OK;
 }

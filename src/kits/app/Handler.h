@@ -31,13 +31,15 @@
 #ifndef BHAPI_HANDLER__H
 #define BHAPI_HANDLER__H
 #include "../support/SupportDefs.h"
+#include "../private/PrivateHandler.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-#define B_OBSERVE_WHAT_CHANGE		"etk:observe_change_what"
-#define B_OBSERVE_ORIGINAL_WHAT		"etk:observe_orig_what"
+#define B_OBSERVE_WHAT_CHANGE		"BHAPI:observe_change_what"
+#define B_OBSERVE_ORIGINAL_WHAT		"BHAPI:observe_orig_what"
 #define B_OBSERVER_OBSERVE_ALL	    B_MAXUINT32
 
+using namespace bhapi;
 class BLooper;
 class BMessage;
 class BMessageFilter;
@@ -97,7 +99,7 @@ public:
 private:
 	friend class BLooper;
 	friend class BMessage;
-    friend b_uint64 bhapi_get_handler_token(const BHandler *handler);
+    friend b_uint64 get_handler_token(const BHandler *handler);
 
     BToken *fToken;
 	char *fName;

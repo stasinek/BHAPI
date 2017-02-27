@@ -43,32 +43,35 @@
 #include "../../add-ons/graphics/GraphicsEngine.h"
 #include "../../kernel/Debug.h"
 
-static BFont* _bhapi_plain_font = NULL;
-static BFont* _bhapi_bold_font = NULL;
-static BFont* _bhapi_fixed_font = NULL;
-
-static BLocker bhapi_font_locker;
-static bool _bhapi_font_initialized_ = false;
-static bool _bhapi_font_canceling_ = false;
-static BStringArray bhapi_font_families;
-
 #ifdef HAVE_FT2
-extern bool bhapi_font_freetype2_init(void);
-extern bool bhapi_font_freetype2_is_valid(void);
-extern void bhapi_font_freetype2_cancel(void);
-extern bool bhapi_update_freetype2_font_families(bool check_only);
+namespace bhapi {
+extern bool font_freetype2_init(void);
+extern bool font_freetype2_is_valid(void);
+extern void font_freetype2_cancel(void);
+extern bool update_freetype2_font_families(bool check_only);
+}
 #endif // HAVE_FT2
 
+static BFont* temp_plain_font = NULL;
+static BFont* temp_bold_font = NULL;
+static BFont* temp_fixed_font = NULL;
 
-EXP_BHAPI bool bhapi_font_add(const char *family, const char *style, BFontEngine *engine)
+namespace bhapi {
+BLocker font_locker;
+bool font_initialized = false;
+bool font_canceling = false;
+BStringArray font_families;
+}
+
+EXPORT_BHAPI bool bhapi::font_add(const char *family, const char *style, BFontEngine *engine)
 {
 	if(family == NULL || *family == 0 || style == NULL || *style == 0 || engine == NULL) return false;
 
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
-	if(!_bhapi_font_initialized_ || engine->fServing != NULL) return false;
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
+    if(!bhapi::font_initialized || engine->fServing != NULL) return false;
 
 	BStringArray *styles = NULL;
-    bhapi_font_families.ItemAt(bhapi_font_families.FindString(family), (void**)&styles);
+    bhapi::font_families.ItemAt(bhapi::font_families.FindString(family), (void**)&styles);
     if(styles ? styles->FindString(style) >= 0 : false)
 	{
 //		BHAPI_DEBUG("[FONT]: %s --- style[%s] of family[%s] already exists.", __PRETTY_FUNCTION__, style, family);
@@ -79,7 +82,7 @@ EXP_BHAPI bool bhapi_font_add(const char *family, const char *style, BFontEngine
 	{
 		styles = new BStringArray;
 		if(!styles || !styles->AddItem(style, (void*)engine) ||
-		   !bhapi_font_families.AddItem(family, (void*)styles))
+           !bhapi::font_families.AddItem(family, (void*)styles))
 		{
 			BHAPI_DEBUG("[FONT]: %s --- Add style[%s] of family[%s] failed.", __PRETTY_FUNCTION__, style, family);
 			if(styles) delete styles;
@@ -101,13 +104,13 @@ EXP_BHAPI bool bhapi_font_add(const char *family, const char *style, BFontEngine
 }
 
 
-IMPEXP_BHAPI BFontEngine::BFontEngine()
+EXPORT_BHAPI BFontEngine::BFontEngine()
 	: fFamily(NULL), fStyle(NULL), fFixedSize(NULL), nFixedSize(0), fRenderMode(B_FONT_RENDER_UNKNOWN), fServing(NULL)
 {
 }
 
 
-IMPEXP_BHAPI BFontEngine::BFontEngine(const char *family, const char *style)
+EXPORT_BHAPI BFontEngine::BFontEngine(const char *family, const char *style)
 	: fFamily(NULL), fStyle(NULL), fFixedSize(NULL), nFixedSize(0), fRenderMode(B_FONT_RENDER_UNKNOWN), fServing(NULL)
 {
 	SetFamily(family);
@@ -115,19 +118,17 @@ IMPEXP_BHAPI BFontEngine::BFontEngine(const char *family, const char *style)
 }
 
 
-bool
-BFontEngine::InServing() const
+bool BFontEngine::InServing() const
 {
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
 	return(fServing != NULL);
 }
 
 
-void
-BFontEngine::OutOfServing()
+void BFontEngine::OutOfServing()
 {
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
-	if(_bhapi_font_canceling_ || fServing == NULL) return;
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
+    if(bhapi::font_canceling || fServing == NULL) return;
 
 	BFontEngine *engine = NULL;
 	for(b_int32 i = 0; i < fServing->CountItems(); i++)
@@ -139,11 +140,11 @@ BFontEngine::OutOfServing()
 			if(fServing->CountItems() <= 0)
 			{
 				BStringArray *styles = NULL;
-				for(b_int32 j = 0; j < bhapi_font_families.CountItems(); j++)
+                for(b_int32 j = 0; j < bhapi::font_families.CountItems(); j++)
 				{
-					bhapi_font_families.ItemAt(j, (void**)&styles);
+                    bhapi::font_families.ItemAt(j, (void**)&styles);
 					if(styles != fServing) continue;
-					if(bhapi_font_families.RemoveItem(j)) delete fServing;
+                    if(bhapi::font_families.RemoveItem(j)) delete fServing;
 					break;
 				}
 			}
@@ -160,7 +161,7 @@ BFontEngine::~BFontEngine()
 
 	for(b_int32 i = 0; i < fAttached.CountItems(); i++)
 	{
-		b_font_detach_callback *eCallback = (b_font_detach_callback*)fAttached.ItemAt(i);
+        bhapi::font_detach_callback *eCallback = (bhapi::font_detach_callback*)fAttached.ItemAt(i);
 		if(!eCallback) continue;
 		if(eCallback->callback != NULL) eCallback->callback(eCallback->data);
 		delete eCallback;
@@ -173,10 +174,9 @@ BFontEngine::~BFontEngine()
 }
 
 
-b_font_detach_callback*
-BFontEngine::Attach(void (*callback)(void*), void *data)
+bhapi::font_detach_callback* BFontEngine::Attach(void (*callback)(void*), void *data)
 {
-	b_font_detach_callback *eCallback = new b_font_detach_callback;
+    bhapi::font_detach_callback *eCallback = new bhapi::font_detach_callback;
 	if(!eCallback) return NULL;
 
 	if(!fAttached.AddItem(eCallback))
@@ -200,12 +200,12 @@ BFontEngine::IsAttached() const
 
 
 bool
-BFontEngine::Detach(b_font_detach_callback *callback)
+BFontEngine::Detach(bhapi::font_detach_callback *callback)
 {
 	if(!callback) return false;
 	for(b_int32 i = fAttached.CountItems() - 1; i >= 0; i--)
 	{
-		b_font_detach_callback *eCallback = (b_font_detach_callback*)fAttached.ItemAt(i);
+        bhapi::font_detach_callback *eCallback = (bhapi::font_detach_callback*)fAttached.ItemAt(i);
 		if(eCallback != callback) continue;
 		if(fAttached.RemoveItem(i))
 		{
@@ -226,43 +226,37 @@ BFontEngine::Lock()
 }
 
 
-void
-BFontEngine::Unlock()
+EXPORT_BHAPI void BFontEngine::Unlock()
 {
 	fLocker.Unlock();
 }
 
 
-const char*
-BFontEngine::Family() const
+EXPORT_BHAPI const char* BFontEngine::Family() const
 {
 	return fFamily;
 }
 
 
-const char*
-BFontEngine::Style() const
+EXPORT_BHAPI const char* BFontEngine::Style() const
 {
 	return fStyle;
 }
 
 
-b_font_render_mode
-BFontEngine::RenderMode() const
+EXPORT_BHAPI bhapi::font_render_mode BFontEngine::RenderMode() const
 {
 	return fRenderMode;
 }
 
 
-void
-BFontEngine::SetRenderMode(b_font_render_mode rmode)
+EXPORT_BHAPI void BFontEngine::SetRenderMode(bhapi::font_render_mode rmode)
 {
 	fRenderMode = rmode;
 }
 
 
-bool
-BFontEngine::HasFixedSize(b_int32 *count) const
+EXPORT_BHAPI bool BFontEngine::HasFixedSize(b_int32 *count) const
 {
 	if(nFixedSize > 0 && fFixedSize != NULL)
 	{
@@ -274,8 +268,7 @@ BFontEngine::HasFixedSize(b_int32 *count) const
 }
 
 
-bool
-BFontEngine::GetFixedSize(float *size, b_int32 index) const
+EXPORT_BHAPI bool BFontEngine::GetFixedSize(float *size, b_int32 index) const
 {
 	if(size == NULL || index < 0) return false;
 
@@ -288,9 +281,7 @@ BFontEngine::GetFixedSize(float *size, b_int32 index) const
 	return false;
 }
 
-
-void
-BFontEngine::SetFamily(const char *family)
+EXPORT_BHAPI void BFontEngine::SetFamily(const char *family)
 {
 	if(fFamily) delete[] fFamily;
 	fFamily = NULL;
@@ -298,8 +289,7 @@ BFontEngine::SetFamily(const char *family)
 }
 
 
-void
-BFontEngine::SetStyle(const char *style)
+EXPORT_BHAPI void BFontEngine::SetStyle(const char *style)
 {
 	if(fStyle) delete[] fStyle;
 	fStyle = NULL;
@@ -307,8 +297,7 @@ BFontEngine::SetStyle(const char *style)
 }
 
 
-void
-BFontEngine::SetFixedSize(float *sizes, b_int32 count)
+EXPORT_BHAPI void BFontEngine::SetFixedSize(float *sizes, b_int32 count)
 {
 	if(fFixedSize)
 	{
@@ -355,9 +344,9 @@ BFontEngine::StringWidth(const char *string, float size, float spacing, float sh
 
 
 void
-BFontEngine::GetHeight(b_font_height *height, float size, float shear, bool bold) const
+BFontEngine::GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const
 {
-	if(height) bzero(height, sizeof(b_font_height));
+    if(height) bzero(height, sizeof(bhapi::font_height));
 }
 
 
@@ -404,21 +393,21 @@ BFontEngine::RenderString(const BString &str, b_int32 *width, b_int32 *height, b
 }
 
 
-EXP_BHAPI b_int32 bhapi_count_font_families(void)
+EXPORT_BHAPI b_int32 b_count_font_families(void)
 {
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
 
-	return bhapi_font_families.CountItems();
+    return bhapi::font_families.CountItems();
 }
 
 
-EXP_BHAPI b_status_t bhapi_get_font_family(b_int32 index, const char **name)
+EXPORT_BHAPI b_status_t b_get_font_family(b_int32 index, const char **name)
 {
 	if(!name) return B_BAD_VALUE;
 
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
 
-	const BString *str = bhapi_font_families.ItemAt(index);
+    const BString *str = bhapi::font_families.ItemAt(index);
 	if(!str) return B_ERROR;
 
 	*name = str->String();
@@ -426,28 +415,28 @@ EXP_BHAPI b_status_t bhapi_get_font_family(b_int32 index, const char **name)
 }
 
 
-EXP_BHAPI b_int32 bhapi_get_font_family_index(const char *name)
+EXPORT_BHAPI b_int32 b_get_font_family_index(const char *name)
 {
 	if(!name) return -1;
 
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
 
-    b_int32 fIndex = bhapi_font_families.FindString(name);
+    b_int32 fIndex = bhapi::font_families.FindString(name);
 	return fIndex;
 }
 
 
-EXP_BHAPI b_int32 bhapi_get_font_style_index(const char *family, const char *name)
+EXPORT_BHAPI b_int32 b_get_font_style_index(const char *family, const char *name)
 {
 	if(!family || !name) return -1;
 
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
 
-    b_int32 index = bhapi_font_families.FindString(family);
+    b_int32 index = bhapi::font_families.FindString(family);
 	if(index < 0) return -1;
 
 	BStringArray *styles = NULL;
-	bhapi_font_families.ItemAt(index, (void**)&styles);
+    bhapi::font_families.ItemAt(index, (void**)&styles);
 	if(!styles) return -1;
 
     index = styles->FindString(name);
@@ -455,38 +444,38 @@ EXP_BHAPI b_int32 bhapi_get_font_style_index(const char *family, const char *nam
 }
 
 
-EXP_BHAPI b_int32 bhapi_count_font_styles(const char *name)
+EXPORT_BHAPI b_int32 bhapi::count_font_styles(const char *name)
 {
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
 
-    return bhapi_count_font_styles(bhapi_font_families.FindString(name));
+    return bhapi::count_font_styles(bhapi::font_families.FindString(name));
 }
 
 
-EXP_BHAPI b_int32 bhapi_count_font_styles(b_int32 index)
+EXPORT_BHAPI b_int32 bhapi::count_font_styles(b_int32 index)
 {
 	if(index < 0) return -1;
 
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
 
 	BStringArray *styles = NULL;
-	bhapi_font_families.ItemAt(index, (void**)&styles);
+    bhapi::font_families.ItemAt(index, (void**)&styles);
 
 	return(styles ? styles->CountItems() : -1);
 }
 
 
-EXP_BHAPI b_status_t bhapi_get_font_style(const char *family, b_int32 index, const char **name)
+EXPORT_BHAPI b_status_t bhapi::get_font_style(const char *family, b_int32 index, const char **name)
 {
 	if(!family || !name) return B_BAD_VALUE;
 
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
 
-    b_int32 fIndex = bhapi_font_families.FindString(family);
+    b_int32 fIndex = bhapi::font_families.FindString(family);
 	if(fIndex < 0) return B_ERROR;
 
 	BStringArray *styles = NULL;
-	bhapi_font_families.ItemAt(fIndex, (void**)&styles);
+    bhapi::font_families.ItemAt(fIndex, (void**)&styles);
 	if(!styles) return B_ERROR;
 
 	const BString *str = styles->ItemAt(index);
@@ -497,14 +486,14 @@ EXP_BHAPI b_status_t bhapi_get_font_style(const char *family, b_int32 index, con
 }
 
 
-EXP_BHAPI BFontEngine* bhapi_get_font_engine(const char *family, const char *style)
+EXPORT_BHAPI BFontEngine* bhapi::get_font_engine(const char *family, const char *style)
 {
 	if(!family || !style) return NULL;
 
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
 
 	BStringArray *styles = NULL;
-    bhapi_font_families.ItemAt(bhapi_font_families.FindString(family), (void**)&styles);
+    bhapi::font_families.ItemAt(bhapi::font_families.FindString(family), (void**)&styles);
 	if(!styles) return NULL;
 
 	BFontEngine *engine = NULL;
@@ -514,12 +503,12 @@ EXP_BHAPI BFontEngine* bhapi_get_font_engine(const char *family, const char *sty
 }
 
 
-EXP_BHAPI BFontEngine* bhapi_get_font_engine(b_int32 familyIndex, b_int32 styleIndex)
+EXPORT_BHAPI BFontEngine* bhapi::get_font_engine(b_int32 familyIndex, b_int32 styleIndex)
 {
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
 
 	BStringArray *styles = NULL;
-	bhapi_font_families.ItemAt(familyIndex, (void**)&styles);
+    bhapi::font_families.ItemAt(familyIndex, (void**)&styles);
 	if(!styles) return NULL;
 
 	BFontEngine *engine = NULL;
@@ -528,40 +517,39 @@ EXP_BHAPI BFontEngine* bhapi_get_font_engine(b_int32 familyIndex, b_int32 styleI
 	return engine;
 }
 
-
-static bool bhapi_font_other_init()
+EXPORT_BHAPI bool bhapi::font_other_init()
 {
 	// TODO
 	return true;
 }
 
 
-static void bhapi_font_other_cancel()
+EXPORT_BHAPI void bhapi::font_other_cancel()
 {
 	// TODO
 }
 
 
-static bool bhapi_update_other_font_families(bool check_only)
+EXPORT_BHAPI bool bhapi::update_other_font_families(bool check_only)
 {
 	// TODO
 	return(check_only ? false : true);
 }
 
 
-EXP_BHAPI bool bhapi_updatb_font_families(bool check_only)
+EXPORT_BHAPI bool bhapi::update_font_families(bool check_only)
 {
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
 
-	if(!_bhapi_font_initialized_) return false;
+    if(!bhapi::font_initialized) return false;
 
 	if(!check_only)
 	{
 		BStringArray *styles;
-		for(b_int32 i = 0; i < bhapi_font_families.CountItems(); i++)
+        for(b_int32 i = 0; i < bhapi::font_families.CountItems(); i++)
 		{
 			styles = NULL;
-			bhapi_font_families.ItemAt(i, (void**)&styles);
+            bhapi::font_families.ItemAt(i, (void**)&styles);
 			if(styles)
 			{
 				BFontEngine *engine;
@@ -575,18 +563,18 @@ EXP_BHAPI bool bhapi_updatb_font_families(bool check_only)
 				delete styles;
 			}
 		}
-		bhapi_font_families.MakeEmpty();
+        bhapi::font_families.MakeEmpty();
 	}
 
 	bool updateFailed = false;
 
-	if(!(bhapi_app == NULL || bhapi_app->fGraphicsEngine == NULL)) bhapi_app->fGraphicsEngine->UpdateFonts(check_only);
+    if(!(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL)) bhapi::app->fGraphicsEngine->UpdateFonts(check_only);
 
 	// TODO: fix the return value style
 #ifdef HAVE_FT2
-	if(bhapi_font_freetype2_is_valid())
+    if(bhapi::font_freetype2_is_valid())
 	{
-		if(bhapi_update_freetype2_font_families(check_only))
+        if(bhapi::update_freetype2_font_families(check_only))
 		{
 			if(check_only) return true;
 		}
@@ -597,7 +585,7 @@ EXP_BHAPI bool bhapi_updatb_font_families(bool check_only)
 	}
 #endif
 
-	if(bhapi_update_other_font_families(check_only))
+    if(bhapi::update_other_font_families(check_only))
 	{
 		if(check_only) return true;
 	}
@@ -610,32 +598,32 @@ EXP_BHAPI bool bhapi_updatb_font_families(bool check_only)
 }
 
 
-_LOCAL bool bhapi_font_init(void)
+LOCAL_BHAPI bool bhapi::font_init(void)
 {
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
 
-	if(!_bhapi_font_initialized_)
+    if(!bhapi::font_initialized)
 	{
 		BHAPI_DEBUG("[FONT]: Initalizing fonts ...");
 
 #ifdef HAVE_FT2
-		bhapi_font_freetype2_init();
+        bhapi::font_freetype2_init();
 #endif
-		bhapi_font_other_init();
-		_bhapi_font_initialized_ = true;
-        bhapi_updatb_font_families(false);
+        bhapi::font_other_init();
+        bhapi::font_initialized = true;
+        bhapi::update_font_families(false);
 
 		// TODO
-		_bhapi_plain_font = new BFont();
-		if(_bhapi_plain_font)
+        temp_plain_font = new BFont();
+        if(temp_plain_font)
 		{
 #ifdef BHAPI_GRAPHICS_BEOS_BUILT_IN
 			font_family bFamily;
 			font_style bStyle;
-			be_plain_font->GetFamilyAndStyle(&bFamily, &bStyle);
-			if(_bhapi_plain_font->SetFamilyAndStyle(bFamily, bStyle) == B_OK)
+            be_plain_font->GetFamilyAndStyle(&bFamily, &bStyle);
+            if(bhapi::plain_font->SetFamilyAndStyle(bFamily, bStyle) == B_OK)
 			{
-				_bhapi_plain_font->SetSize(be_plain_font->Size());
+                bhapi::plain_font->SetSize(be_plain_font->Size());
 			}
 			else
 			{
@@ -644,46 +632,46 @@ _LOCAL bool bhapi_font_init(void)
 			const char *style = getenv("BHAPI_PLAIN_FONT_STYLE");
 			if(((family == NULL || *family == 0 || style == NULL || *style == 0) ?
                 (BHAPI_WARNING("[FONT]: $BHAPI_PLAIN_FONT_FAMILY = 0 || $BHAPI_PLAIN_FONT_STYLE = 0"), B_ERROR) :
-				_bhapi_plain_font->SetFamilyAndStyle(family, style)) != B_OK)
+                temp_plain_font->SetFamilyAndStyle(family, style)) != B_OK)
 #ifdef BHAPI_GRAPHICS_WIN32_BUILT_IN
-			if(_bhapi_plain_font->SetFamilyAndStyle("SimSun", "Regular") != B_OK)
-			if(_bhapi_plain_font->SetFamilyAndStyle("宋体", "Regular") != B_OK)
-			if(_bhapi_plain_font->SetFamilyAndStyle("SimHei", "Regular") != B_OK)
-			if(_bhapi_plain_font->SetFamilyAndStyle("黑体", "Regular") != B_OK)
-			if(_bhapi_plain_font->SetFamilyAndStyle("Tahoma", "Regular") != B_OK)
+            if(temp_plain_font->SetFamilyAndStyle("SimSun", "Regular") != B_OK)
+            if(temp_plain_font->SetFamilyAndStyle("宋体", "Regular") != B_OK)
+            if(temp_plain_font->SetFamilyAndStyle("SimHei", "Regular") != B_OK)
+            if(temp_plain_font->SetFamilyAndStyle("黑体", "Regular") != B_OK)
+            if(temp_plain_font->SetFamilyAndStyle("Tahoma", "Regular") != B_OK)
 #endif // BHAPI_GRAPHICS_WIN32_BUILT_IN
-			if(_bhapi_plain_font->SetFamilyAndStyle("helvetica", "medium") != B_OK) _bhapi_plain_font->SetFamilyAndStyle(0);
+            if(temp_plain_font->SetFamilyAndStyle("helvetica", "medium") != B_OK) temp_plain_font->SetFamilyAndStyle(0);
 
 			float fsize = 12;
 			const char *fontSize = getenv("BHAPI_PLAIN_FONT_SIZE");
 			if(!(fontSize == NULL || *fontSize == 0)) fsize = (float)atoi(fontSize);
 			else BHAPI_WARNING("[FONT]: $BHAPI_PLAIN_FONT_SIZE = 0");
 
-			if(_bhapi_plain_font->IsScalable() == false)
+            if(temp_plain_font->IsScalable() == false)
 			{
-				_bhapi_plain_font->GetFixedSize(&fsize);
-				_bhapi_plain_font->SetSize(fsize);
+                temp_plain_font->GetFixedSize(&fsize);
+                temp_plain_font->SetSize(fsize);
 			}
 			else
 			{
-				_bhapi_plain_font->SetSize(fsize);
+                temp_plain_font->SetSize(fsize);
 			}
 #ifdef BHAPI_GRAPHICS_BEOS_BUILT_IN
 			}
 #endif // BHAPI_GRAPHICS_BEOS_BUILT_IN
-			_bhapi_plain_font->SetSpacing(0.05f);
-			_bhapi_plain_font->SetShear(90);
+            temp_plain_font->SetSpacing(0.05f);
+            temp_plain_font->SetShear(90);
 		}
-		_bhapi_bold_font = new BFont();
-		if(_bhapi_bold_font)
+        temp_bold_font = new BFont();
+        if(temp_bold_font)
 		{
 #ifdef BHAPI_GRAPHICS_BEOS_BUILT_IN
 			font_family bFamily;
 			font_style bStyle;
 			be_bold_font->GetFamilyAndStyle(&bFamily, &bStyle);
-			if(_bhapi_bold_font->SetFamilyAndStyle(bFamily, bStyle) == B_OK)
+            if(temp_bold_font->SetFamilyAndStyle(bFamily, bStyle) == B_OK)
 			{
-				_bhapi_bold_font->SetSize(be_bold_font->Size());
+                temp_bold_font->SetSize(be_bold_font->Size());
 			}
 			else
 			{
@@ -692,44 +680,44 @@ _LOCAL bool bhapi_font_init(void)
 			const char *style = getenv("BHAPI_BOLD_FONT_STYLE");
 			if(((family == NULL || *family == 0 || style == NULL || *style == 0) ?
                 (BHAPI_WARNING("[FONT]: $BHAPI_BOLD_FONT_FAMILY = 0 || $BHAPI_BOLD_FONT_STYLE = 0"), B_ERROR) :
-				_bhapi_bold_font->SetFamilyAndStyle(family, style)) != B_OK)
+                temp_bold_font->SetFamilyAndStyle(family, style)) != B_OK)
 #ifdef BHAPI_GRAPHICS_WIN32_BUILT_IN
-			if(_bhapi_bold_font->SetFamilyAndStyle("SimHei", "Regular") != B_OK)
-			if(_bhapi_bold_font->SetFamilyAndStyle("黑体", "Regular") != B_OK)
-			if(_bhapi_bold_font->SetFamilyAndStyle("Tahoma", "Regular") != B_OK)
+            if(temp_bold_font->SetFamilyAndStyle("SimHei", "Regular") != B_OK)
+            if(temp_bold_font->SetFamilyAndStyle("黑体", "Regular") != B_OK)
+            if(temp_bold_font->SetFamilyAndStyle("Tahoma", "Regular") != B_OK)
 #endif // BHAPI_GRAPHICS_WIN32_BUILT_IN
-			if(_bhapi_bold_font->SetFamilyAndStyle("helvetica", "bold") != B_OK) _bhapi_bold_font->SetFamilyAndStyle(0);
+            if(temp_bold_font->SetFamilyAndStyle("helvetica", "bold") != B_OK) temp_bold_font->SetFamilyAndStyle(0);
 
 			float fsize = 12;
 			const char *fontSize = getenv("BHAPI_BOLD_FONT_SIZE");
 			if(!(fontSize == NULL || *fontSize == 0)) fsize = (float)atoi(fontSize);
 			else BHAPI_WARNING("[FONT]: $BHAPI_BOLD_FONT_SIZE = 0");
 
-			if(_bhapi_bold_font->IsScalable() == false)
+            if(temp_bold_font->IsScalable() == false)
 			{
-				_bhapi_bold_font->GetFixedSize(&fsize);
-				_bhapi_bold_font->SetSize(fsize);
+                temp_bold_font->GetFixedSize(&fsize);
+                temp_bold_font->SetSize(fsize);
 			}
 			else
 			{
-				_bhapi_bold_font->SetSize(fsize);
+                temp_bold_font->SetSize(fsize);
 			}
 #ifdef BHAPI_GRAPHICS_BEOS_BUILT_IN
 			}
 #endif // BHAPI_GRAPHICS_BEOS_BUILT_IN
-			_bhapi_bold_font->SetSpacing(0.05f);
-			_bhapi_bold_font->SetShear(90);
+            temp_bold_font->SetSpacing(0.05f);
+            temp_bold_font->SetShear(90);
 		}
-		_bhapi_fixed_font = new BFont();
-		if(_bhapi_fixed_font)
+        temp_fixed_font = new BFont();
+        if(temp_fixed_font)
 		{
 #ifdef BHAPI_GRAPHICS_BEOS_BUILT_IN
 			font_family bFamily;
 			font_style bStyle;
 			be_fixed_font->GetFamilyAndStyle(&bFamily, &bStyle);
-			if(_bhapi_fixed_font->SetFamilyAndStyle(bFamily, bStyle) == B_OK)
+            if(temp_fixed_font->SetFamilyAndStyle(bFamily, bStyle) == B_OK)
 			{
-				_bhapi_fixed_font->SetSize(be_fixed_font->Size());
+                temp_fixed_font->SetSize(be_fixed_font->Size());
 			}
 			else
 			{
@@ -738,71 +726,71 @@ _LOCAL bool bhapi_font_init(void)
 			const char *style = getenv("BHAPI_FIXED_FONT_STYLE");
 			if(((family == NULL || *family == 0 || style == NULL || *style == 0) ?
                 (BHAPI_WARNING("[FONT]: $BHAPI_FIXED_FONT_FAMILY = 0 || $BHAPI_FIXED_FONT_STYLE = 0"), B_ERROR) :
-				_bhapi_fixed_font->SetFamilyAndStyle(family, style)) != B_OK)
+                temp_fixed_font->SetFamilyAndStyle(family, style)) != B_OK)
 #ifdef BHAPI_GRAPHICS_WIN32_BUILT_IN
-			if(_bhapi_fixed_font->SetFamilyAndStyle("SimHei", "Regular") != B_OK)
-			if(_bhapi_fixed_font->SetFamilyAndStyle("黑体", "Regular") != B_OK)
-			if(_bhapi_fixed_font->SetFamilyAndStyle("Tahoma", "Regular") != B_OK)
+            if(temp_fixed_font->SetFamilyAndStyle("SimHei", "Regular") != B_OK)
+            if(temp_fixed_font->SetFamilyAndStyle("黑体", "Regular") != B_OK)
+            if(temp_fixed_font->SetFamilyAndStyle("Tahoma", "Regular") != B_OK)
 #endif // BHAPI_GRAPHICS_WIN32_BUILT_IN
-			if(_bhapi_fixed_font->SetFamilyAndStyle("times", "medium") != B_OK) _bhapi_fixed_font->SetFamilyAndStyle(0);
+            if(temp_fixed_font->SetFamilyAndStyle("times", "medium") != B_OK) temp_fixed_font->SetFamilyAndStyle(0);
 
 			float fsize = 10;
 			const char *fontSize = getenv("BHAPI_FIXED_FONT_SIZE");
 			if(!(fontSize == NULL || *fontSize == 0)) fsize = (float)atoi(fontSize);
 			else BHAPI_WARNING("[FONT]: $BHAPI_FIXED_FONT_SIZE = 0");
 
-			if(_bhapi_fixed_font->IsScalable() == false)
+            if(temp_fixed_font->IsScalable() == false)
 			{
-				_bhapi_fixed_font->GetFixedSize(&fsize);
-				_bhapi_fixed_font->SetSize(fsize);
+                temp_fixed_font->GetFixedSize(&fsize);
+                temp_fixed_font->SetSize(fsize);
 			}
 			else
 			{
-				_bhapi_fixed_font->SetSize(fsize);
+                temp_fixed_font->SetSize(fsize);
 			}
 #ifdef BHAPI_GRAPHICS_BEOS_BUILT_IN
 			}
 #endif // BHAPI_GRAPHICS_BEOS_BUILT_IN
-			_bhapi_fixed_font->SetSpacing(0.05f);
-			_bhapi_fixed_font->SetShear(70);
+            temp_fixed_font->SetSpacing(0.05f);
+            temp_fixed_font->SetShear(70);
 		}
 
-		bhapi_plain_font = _bhapi_plain_font;
-		bhapi_bold_font = _bhapi_bold_font;
-		bhapi_fixed_font = _bhapi_fixed_font;
+        temp_plain_font = new BFont(bhapi::plain_font);
+        temp_bold_font = new BFont(bhapi::bold_font);
+        temp_fixed_font = new BFont(bhapi::fixed_font);
 
 		BHAPI_DEBUG("[FONT]: Fonts initalized.");
 	}
 
-	return(bhapi_font_families.CountItems() > 0);
+    return(bhapi::font_families.CountItems() > 0);
 }
 
 
-_LOCAL void bhapi_font_cancel(void)
+LOCAL_BHAPI void bhapi::font_cancel(void)
 {
-	BAutolock <BLocker> autolock(&bhapi_font_locker);
+    BAutolock <BLocker> autolock(&bhapi::font_locker);
 
-	if(_bhapi_font_initialized_)
+    if(bhapi::font_initialized)
 	{
-		_bhapi_font_canceling_ = true;
+        bhapi::font_canceling = true;
 
-		if(_bhapi_plain_font) delete _bhapi_plain_font;
-		if(_bhapi_bold_font) delete _bhapi_bold_font;
-		if(_bhapi_fixed_font) delete _bhapi_fixed_font;
-		bhapi_plain_font = _bhapi_plain_font = NULL;
-		bhapi_bold_font = _bhapi_bold_font = NULL;
-		bhapi_fixed_font = _bhapi_fixed_font = NULL;
+        if(temp_plain_font) delete temp_plain_font;
+        temp_plain_font = NULL;
+        if(temp_bold_font) delete temp_bold_font;
+        temp_bold_font = NULL;
+        if(temp_fixed_font) delete temp_fixed_font;
+        temp_fixed_font = NULL;
 
 #ifdef HAVE_FT2
-		bhapi_font_freetype2_cancel();
+        bhapi::font_freetype2_cancel();
 #endif
-		bhapi_font_other_cancel();
+        bhapi::font_other_cancel();
 
 		BStringArray *styles;
-		for(b_int32 i = 0; i < bhapi_font_families.CountItems(); i++)
+        for(b_int32 i = 0; i < bhapi::font_families.CountItems(); i++)
 		{
 			styles = NULL;
-			bhapi_font_families.ItemAt(i, (void**)&styles);
+            bhapi::font_families.ItemAt(i, (void**)&styles);
 			if(styles)
 			{
 				BFontEngine *engine;
@@ -816,22 +804,22 @@ _LOCAL void bhapi_font_cancel(void)
 				delete styles;
 			}
 		}
-		bhapi_font_families.MakeEmpty();
+        bhapi::font_families.MakeEmpty();
 
-		_bhapi_font_canceling_ = false;
-		_bhapi_font_initialized_ = false;
+        bhapi::font_canceling = false;
+        bhapi::font_initialized = false;
 	}
 }
 
 
-_LOCAL bool bhapi_font_lock(void)
+LOCAL_BHAPI bool bhapi::font_lock(void)
 {
-	return bhapi_font_locker.Lock();
+    return bhapi::font_locker.Lock();
 }
 
 
-_LOCAL void bhapi_font_unlock(void)
+LOCAL_BHAPI void bhapi::font_unlock(void)
 {
-	bhapi_font_locker.Unlock();
+    bhapi::font_locker.Unlock();
 }
 

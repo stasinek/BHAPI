@@ -1,8 +1,8 @@
 /* --------------------------------------------------------------------------
- * 
+ *
  * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
- * 
+ *
  * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
@@ -25,7 +25,7 @@
  *
  * File: ArcGenerator.cpp
  * Description: BArcGenerator --- Pixel generator for zero-width-arc-drawing
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #include "ArcGenerator.h"
@@ -35,7 +35,7 @@
 #include <math.h>
 #include <string.h>
 
-_LOCAL bool bhapi_get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext)
+LOCAL_BHAPI bool b_get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext)
 {
 	if(radius.x <= 0 || radius.y <= 0 || pStart.x > pEnd.x || pStart.y > 0 || pEnd.y > 0) return false;
 
@@ -257,7 +257,7 @@ BArcGenerator::Start(b_int32 &x, b_int32 &y, b_int32 &step, b_int32 &pixels, boo
 	bool havePixels = false;
 	b_int32 oldX = 0, oldY = 0, lastY = 0;
 
-	while(bhapi_get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
+	while(b_get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
 	{
 		if(!havePixels) {oldX = _X; lastY = oldY = _Y; havePixels = true;}
 		else if(oldX != _X) break;
@@ -319,7 +319,7 @@ BArcGenerator::Next(b_int32 &next, b_int32 &pixels, bool &both)
 
 	b_int32 oldX = _X, oldY = _Y, lastY = _Y;
 
-	while(bhapi_get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
+	while(b_get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
 	{
 		if(oldX != _X) break;
 		else lastY = _Y;

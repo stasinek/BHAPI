@@ -130,7 +130,7 @@ BStringView::Draw(BRect updateRect)
 	}
 
 	BFont font;
-	b_font_height fontHeight;
+	bhapi::font_height fontHeight;
 	GetFont(&font);
 	font.GetHeight(&fontHeight);
 	float sHeight = fontHeight.ascent + fontHeight.descent;
@@ -223,7 +223,7 @@ BStringView::GetPreferredSize(float *width, float *height)
 
 	if(height)
 	{
-		b_font_height fontHeight;
+		bhapi::font_height fontHeight;
 		font.GetHeight(&fontHeight);
 		float sHeight = fontHeight.ascent + fontHeight.descent;
 

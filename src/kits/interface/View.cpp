@@ -48,7 +48,7 @@
 
 #include <math.h>
 
-class _LOCAL BViewState {
+class LOCAL_BHAPI BViewState {
 public:
 	b_drawing_mode		DrawingMode;
 	BPoint			PenLocation;
@@ -88,10 +88,10 @@ public:
 void
 BView::InitSelf(BRect frame, b_uint32 resizingMode, b_uint32 flags)
 {
-	if(bhapi_app == NULL || bhapi_app->fGraphicsEngine == NULL)
+	if(b_app == NULL || b_app->fGraphicsEngine == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- View must created within a application which has graphics-engine!", __PRETTY_FUNCTION__);
 
-	if((fDC = bhapi_app->fGraphicsEngine->CreateContext()) == NULL)
+	if((fDC = b_app->fGraphicsEngine->CreateContext()) == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- Unable to create draw context!", __PRETTY_FUNCTION__);
 
 	BViewState *viewState = new BViewState(NULL);
@@ -101,7 +101,7 @@ BView::InitSelf(BRect frame, b_uint32 resizingMode, b_uint32 flags)
 	viewState->PenSize = 0;
 	viewState->HighColor.set_to(0, 0, 0);
 	viewState->LowColor.set_to(255, 255, 255);
-	viewState->Font = *bhapi_plain_font;
+	viewState->Font = *b_plain_font;
 	viewState->Clipping = NULL;
 	viewState->SquarePointStyle = false;
 
@@ -2026,7 +2026,7 @@ BView::SetFont(const BFont *font, b_uint8 mask)
 
 
 void
-BView::SetFont(const b_font_desc *fontDesc, b_uint8 mask)
+BView::SetFont(const bhapi::font_desc *fontDesc, b_uint8 mask)
 {
 	if(fontDesc == NULL) return;
 	BFont font(*fontDesc);
@@ -2054,7 +2054,7 @@ BView::SetFontSize(float size)
 
 
 void
-BView::GetFontHeight(b_font_height *height) const
+BView::GetFontHeight(bhapi::font_height *height) const
 {
 	((BViewState*)fStates)->Font.GetHeight(height);
 }
@@ -2088,7 +2088,7 @@ BView::DrawString(const char *aString, BPoint location, b_int32 length, float ta
 	bool bold = ((BViewState*)fStates)->Font.IsBoldStyle();
 
 	engine->Lock();
-	b_font_render_mode renderMode = engine->RenderMode();
+	bhapi::font_render_mode renderMode = engine->RenderMode();
 	float spaceWidth = engine->StringWidth(" ", size, spacing, shear, bold, 1);
 	engine->Unlock();
 
@@ -2187,7 +2187,7 @@ BView::DrawStringInPixmapMode(const char *aString, BPoint location, b_int32 leng
 
 	engine->Lock();
 
-	b_font_height fheight;
+	bhapi::font_height fheight;
 	engine->GetHeight(&fheight, size);
 
 	BPoint startPoint = location;

@@ -51,13 +51,13 @@
 #endif // _WIN32
 
 #ifdef _WIN32
-extern "C" char* bhapi_win32_convert_utf8_to_active(const char *str, b_int32 length);
+extern "C" char* b_win32_convert_utf8_to_active(const char *str, b_int32 length);
 #endif // _WIN32
 
-extern b_status_t bhapi_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);
+extern b_status_t b_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);
 
 #ifndef _WIN32
-inline int bhapi_file_openmode_to_flags(b_uint32 open_mode)
+inline int b_file_openmode_to_flags(b_uint32 open_mode)
 {
 	int flags;
 
@@ -81,7 +81,7 @@ inline int bhapi_file_openmode_to_flags(b_uint32 open_mode)
 	return flags;
 }
 #else
-inline DWORD bhapi_file_openmode_to_creation_disposition(b_uint32 open_mode)
+inline DWORD b_file_openmode_to_creation_disposition(b_uint32 open_mode)
 {
 	if(open_mode & B_CREATE_FILE)
 	{
@@ -97,7 +97,7 @@ inline DWORD bhapi_file_openmode_to_creation_disposition(b_uint32 open_mode)
 
 
 #ifndef _WIN32
-inline mode_t bhapi_file_access_mode_to_mode_t(b_uint32 access_mode)
+inline mode_t b_file_access_mode_to_mode_t(b_uint32 access_mode)
 {
 	mode_t mode = 0;
 
@@ -179,11 +179,11 @@ BFile::SetTo(const char *path, b_uint32 open_mode, b_uint32 access_mode)
 	if(path == NULL || *path == 0) return B_BAD_VALUE;
 
 	BString strPath;
-	bhapi_path_expound(strPath, path, NULL, NULL);
+	b_path_expound(strPath, path, NULL, NULL);
 	if(strPath.Length() <= 0) return B_BAD_VALUE;
 
 #ifndef _WIN32
-	int newFD = open(strPath.String(), bhapi_file_openmode_to_flags(open_mode), bhapi_file_access_mode_to_mode_t(access_mode));
+	int newFD = open(strPath.String(), b_file_openmode_to_flags(open_mode), b_file_access_mode_to_mode_t(access_mode));
 	if(newFD == -1) return B_FILE_ERROR;
 	if(fFD != NULL)
 	{
@@ -197,7 +197,7 @@ BFile::SetTo(const char *path, b_uint32 open_mode, b_uint32 access_mode)
 	*((int*)fFD) = newFD;
 #else
 	strPath.ReplaceAll("/", "\\");
-	char *active_str = bhapi_win32_convert_utf8_to_active(strPath.String(), -1);
+	char *active_str = b_win32_convert_utf8_to_active(strPath.String(), -1);
 	if(active_str != NULL)
 	{
 		strPath = active_str;
@@ -208,7 +208,7 @@ BFile::SetTo(const char *path, b_uint32 open_mode, b_uint32 access_mode)
 				  	(open_mode & B_WRITE_ONLY ? GENERIC_WRITE : GENERIC_READ),
 				  FILE_SHARE_READ | FILE_SHARE_WRITE,
 				  NULL,
-				  bhapi_file_openmode_to_creation_disposition(open_mode),
+				  b_file_openmode_to_creation_disposition(open_mode),
 				  FILE_ATTRIBUTE_NORMAL,
 				  NULL);
 	if(newFD == INVALID_HANDLE_VALUE) return B_FILE_ERROR;

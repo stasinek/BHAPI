@@ -35,15 +35,15 @@
 #include "../support/Autolock.h"
 #include "../kernel/Debug.h"
 
-EXP_BHAPI const BFont* bhapi_plain_font = NULL;
-EXP_BHAPI const BFont* bhapi_bold_font = NULL;
-EXP_BHAPI const BFont* bhapi_fixed_font = NULL;
+EXPORT_BHAPI const BFont* b_plain_font = NULL;
+EXPORT_BHAPI const BFont* b_bold_font = NULL;
+EXPORT_BHAPI const BFont* b_fixed_font = NULL;
 
-static BLocker bhapi_font_info_locker;
+static BLocker bhapi::font_info_locker;
 
-typedef struct bhapi_font_info {
+typedef struct bhapi::font_info {
 	BFontEngine *engine;
-	b_font_detach_callback *detach_callback;
+	bhapi::font_detach_callback *detach_callback;
 	float size;
 	float spacing;
 	float shear;
@@ -51,7 +51,7 @@ typedef struct bhapi_font_info {
 	b_int32 family_index;
 	b_int32 style_index;
 
-	bhapi_font_info()
+	bhapi::font_info()
 	{
 		engine = NULL;
 		detach_callback = NULL;
@@ -63,18 +63,18 @@ typedef struct bhapi_font_info {
 		style_index = -1;
 	}
 
-	static void _detach_callback_(bhapi_font_info *info)
+	static void _detach_callback_(bhapi::font_info *info)
 	{
 		if(!info) return;
-		bhapi_font_info_locker.Lock();
+		bhapi::font_info_locker.Lock();
 		info->engine = NULL;
 		info->detach_callback = NULL;
-		bhapi_font_info_locker.Unlock();
+		bhapi::font_info_locker.Unlock();
 	}
 
-	bhapi_font_info& operator=(const bhapi_font_info &info)
+	bhapi::font_info& operator=(const bhapi::font_info &info)
 	{
-		bhapi_font_info_locker.Lock();
+		bhapi::font_info_locker.Lock();
 
 		BFontEngine *_engine_ = engine;
 		if(_engine_)
@@ -83,7 +83,7 @@ typedef struct bhapi_font_info {
 			if(_engine_->Detach(detach_callback) == false)
 			{
 				_engine_->Unlock();
-				bhapi_font_info_locker.Unlock();
+				bhapi::font_info_locker.Unlock();
 				return *this;
 			}
 			_engine_->Unlock();
@@ -97,7 +97,7 @@ typedef struct bhapi_font_info {
 			if((detach_callback = info.engine->Attach((void(*)(void*))_detach_callback_, this)) == NULL)
 			{
 				info.engine->Unlock();
-				bhapi_font_info_locker.Unlock();
+				bhapi::font_info_locker.Unlock();
 				return *this;
 			}
 			info.engine->Unlock();
@@ -111,26 +111,26 @@ typedef struct bhapi_font_info {
 		shear = info.shear;
 		bold = info.bold;
 
-		bhapi_font_info_locker.Unlock();
+		bhapi::font_info_locker.Unlock();
 
 		return *this;
 	}
 
-	bool operator==(const bhapi_font_info &info)
+	bool operator==(const bhapi::font_info &info)
 	{
-		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi::font_info_locker);
 		return(engine == info.engine && size == info.size && spacing == info.spacing && shear == info.shear && bold == info.bold ? true : false);
 	}
 
-	bool operator!=(const bhapi_font_info &info)
+	bool operator!=(const bhapi::font_info &info)
 	{
-		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi::font_info_locker);
 		return(engine == info.engine && size == info.size && spacing == info.spacing && shear == info.shear && bold == info.bold ? false : true);
 	}
 
 	bool SetEngine(BFontEngine *fengine)
 	{
-		bhapi_font_info_locker.Lock();
+		bhapi::font_info_locker.Lock();
 
 		BFontEngine *_engine_ = engine;
 		if(_engine_)
@@ -139,7 +139,7 @@ typedef struct bhapi_font_info {
 			if(_engine_->Detach(detach_callback) == false)
 			{
 				_engine_->Unlock();
-				bhapi_font_info_locker.Unlock();
+				bhapi::font_info_locker.Unlock();
 				return false;
 			}
 			_engine_->Unlock();
@@ -153,17 +153,17 @@ typedef struct bhapi_font_info {
 			if((detach_callback = fengine->Attach((void(*)(void*))_detach_callback_, this)) == NULL)
 			{
 				fengine->Unlock();
-				bhapi_font_info_locker.Unlock();
+				bhapi::font_info_locker.Unlock();
 				return false;
 			}
 			fengine->Unlock();
 		}
 
 		engine = fengine;
-		family_index = engine ? bhapi_get_font_family_index(engine->Family()) : -1;
-		style_index = engine ? bhapi_get_font_style_index(engine->Family(), engine->Style()) : -1;
+		family_index = engine ? b_get_font_family_index(engine->Family()) : -1;
+		style_index = engine ? b_get_font_style_index(engine->Family(), engine->Style()) : -1;
 
-		bhapi_font_info_locker.Unlock();
+		bhapi::font_info_locker.Unlock();
 
 		return true;
 	}
@@ -178,55 +178,55 @@ typedef struct bhapi_font_info {
 
 	BFontEngine* Engine() const
 	{
-		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi::font_info_locker);
 		return engine;
 	}
 
 	void SetSize(float fsize)
 	{
-		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi::font_info_locker);
 		size = fsize;
 	}
 
 	float Size() const
 	{
-		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi::font_info_locker);
 		return size;
 	}
 
 	void SetSpacing(float fspacing)
 	{
-		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi::font_info_locker);
 		spacing = fspacing;
 	}
 
 	float Spacing() const
 	{
-		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi::font_info_locker);
 		return spacing;
 	}
 
 	void SetShear(float fshear)
 	{
-		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi::font_info_locker);
 		shear = fshear;
 	}
 
 	float Shear() const
 	{
-		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi::font_info_locker);
 		return shear;
 	}
 
 	void SetBoldStyle(bool fbold)
 	{
-		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi::font_info_locker);
 		bold = fbold;
 	}
 
 	bool IsBoldStyle() const
 	{
-		BAutolock <BLocker> autolock(&bhapi_font_info_locker);
+		BAutolock <BLocker> autolock(&bhapi::font_info_locker);
 		return bold;
 	}
 
@@ -234,7 +234,7 @@ typedef struct bhapi_font_info {
 	{
 		if(string == NULL || *string == 0 || length == 0) return 0;
 
-		bhapi_font_info_locker.Lock();
+		bhapi::font_info_locker.Lock();
 
 		float width = 0;
 		if(engine)
@@ -276,7 +276,7 @@ typedef struct bhapi_font_info {
 			engine->Unlock();
 		}
 
-		bhapi_font_info_locker.Unlock();
+		bhapi::font_info_locker.Unlock();
 
 		return width;
 	}
@@ -291,7 +291,7 @@ typedef struct bhapi_font_info {
 		float *widths = new float[length];
 		if(widths == NULL) return NULL;
 
-		bhapi_font_info_locker.Lock();
+		bhapi::font_info_locker.Lock();
 
 		b_uint8 len = 0;
 		const char *ch = b_utf8_at(string, 0, &len);
@@ -330,18 +330,18 @@ typedef struct bhapi_font_info {
 		}
 		if(engine) engine->Unlock();
 
-		bhapi_font_info_locker.Unlock();
+		bhapi::font_info_locker.Unlock();
 
 		*nChars = count;
 
 		return widths;
 	}
 
-	void GetHeight(b_font_height *height) const
+	void GetHeight(bhapi::font_height *height) const
 	{
 		if(!height) return;
 
-		bhapi_font_info_locker.Lock();
+		bhapi::font_info_locker.Lock();
 
 		if(engine)
 		{
@@ -350,12 +350,12 @@ typedef struct bhapi_font_info {
 			engine->Unlock();
 		}
 
-		bhapi_font_info_locker.Unlock();
+		bhapi::font_info_locker.Unlock();
 	}
 
-	~bhapi_font_info()
+	~bhapi::font_info()
 	{
-		bhapi_font_info_locker.Lock();
+		bhapi::font_info_locker.Lock();
 		BFontEngine *_engine_ = engine;
 		if(_engine_)
 		{
@@ -366,15 +366,15 @@ typedef struct bhapi_font_info {
 		if(detach_callback) detach_callback->data = NULL;
 		engine = NULL;
 		detach_callback = NULL;
-		bhapi_font_info_locker.Unlock();
+		bhapi::font_info_locker.Unlock();
 	}
-} bhapi_font_info;
+} bhapi::font_info;
 
 
 BFont::BFont()
 	: fInfo(NULL)
 {
-	bhapi_font_info *fontInfo = new bhapi_font_info;
+	bhapi::font_info *fontInfo = new bhapi::font_info;
 	if(!fontInfo) return;
 
 	fInfo = (void*)fontInfo;
@@ -384,11 +384,11 @@ BFont::BFont()
 BFont::BFont(const BFont &font)
 	: fInfo(NULL)
 {
-	bhapi_font_info *fontInfo = new bhapi_font_info;
+	bhapi::font_info *fontInfo = new bhapi::font_info;
 	if(!fontInfo) return;
 
 	if(font.fInfo)
-		*fontInfo = *((bhapi_font_info*)(font.fInfo));
+		*fontInfo = *((bhapi::font_info*)(font.fInfo));
 
 	fInfo = (void*)fontInfo;
 }
@@ -397,22 +397,22 @@ BFont::BFont(const BFont &font)
 BFont::BFont(const BFont *font)
 	: fInfo(NULL)
 {
-	bhapi_font_info *fontInfo = new bhapi_font_info;
+	bhapi::font_info *fontInfo = new bhapi::font_info;
 	if(!fontInfo) return;
 
 	if(font)
 	{
-		if(font->fInfo) *fontInfo = *((bhapi_font_info*)(font->fInfo));
+		if(font->fInfo) *fontInfo = *((bhapi::font_info*)(font->fInfo));
 	}
 
 	fInfo = (void*)fontInfo;
 }
 
 
-BFont::BFont(const b_font_desc &fontDesc)
+BFont::BFont(const bhapi::font_desc &fontDesc)
 	: fInfo(NULL)
 {
-	bhapi_font_info *fontInfo = new bhapi_font_info;
+	bhapi::font_info *fontInfo = new bhapi::font_info;
 	if(!fontInfo) return;
 
 	fInfo = (void*)fontInfo;
@@ -423,7 +423,7 @@ BFont::BFont(const b_font_desc &fontDesc)
 
 BFont::~BFont()
 {
-	if(fInfo) delete (bhapi_font_info*)fInfo;
+	if(fInfo) delete (bhapi::font_info*)fInfo;
 }
 
 
@@ -432,22 +432,22 @@ BFont::operator=(const BFont &font)
 {
 	if(font.fInfo == NULL)
 	{
-		if(fInfo) delete (bhapi_font_info*)fInfo;
+		if(fInfo) delete (bhapi::font_info*)fInfo;
 		fInfo = NULL;
 		return *this;
 	}
 
 	if(fInfo == NULL)
 	{
-		bhapi_font_info *fontInfo = new bhapi_font_info;
+		bhapi::font_info *fontInfo = new bhapi::font_info;
 		if(!fontInfo) return *this;
-		*fontInfo = *((bhapi_font_info*)(font.fInfo));
+		*fontInfo = *((bhapi::font_info*)(font.fInfo));
 		fInfo = (void*)fontInfo;
 	}
 	else
 	{
-		bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
-		*fontInfo = *((bhapi_font_info*)(font.fInfo));
+		bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
+		*fontInfo = *((bhapi::font_info*)(font.fInfo));
 	}
 
 	return *this;
@@ -455,7 +455,7 @@ BFont::operator=(const BFont &font)
 
 
 BFont&
-BFont::operator=(const b_font_desc &fontDesc)
+BFont::operator=(const bhapi::font_desc &fontDesc)
 {
 	SetFamilyAndStyle(fontDesc.family, fontDesc.style);
 	SetSize(fontDesc.size);
@@ -471,8 +471,8 @@ BFont::operator==(const BFont &font)
 {
 	if(fInfo == NULL && font.fInfo == NULL) return true;
 	if(fInfo == NULL || font.fInfo == NULL) return false;
-	bhapi_font_info* fInfoA = (bhapi_font_info*)fInfo;
-	bhapi_font_info* fInfoB = (bhapi_font_info*)font.fInfo;
+	bhapi::font_info* fInfoA = (bhapi::font_info*)fInfo;
+	bhapi::font_info* fInfoB = (bhapi::font_info*)font.fInfo;
 	return(*fInfoA == *fInfoB);
 }
 
@@ -482,8 +482,8 @@ BFont::operator!=(const BFont &font)
 {
 	if(fInfo == NULL && font.fInfo == NULL) return false;
 	if(fInfo == NULL || font.fInfo == NULL) return true;
-	bhapi_font_info* fInfoA = (bhapi_font_info*)fInfo;
-	bhapi_font_info* fInfoB = (bhapi_font_info*)font.fInfo;
+	bhapi::font_info* fInfoA = (bhapi::font_info*)fInfo;
+	bhapi::font_info* fInfoB = (bhapi::font_info*)font.fInfo;
 	return(*fInfoA != *fInfoB);
 }
 
@@ -493,7 +493,7 @@ BFont::SetSize(float size)
 {
 	if(size <= 0) return;
 
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	if(fontInfo) fontInfo->SetSize(size);
 }
 
@@ -501,7 +501,7 @@ BFont::SetSize(float size)
 float
 BFont::Size() const
 {
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	return(fontInfo ? fontInfo->Size() : -1.f);
 }
 
@@ -509,7 +509,7 @@ BFont::Size() const
 void
 BFont::SetSpacing(float spacing)
 {
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	if(fontInfo) fontInfo->SetSpacing(spacing);
 }
 
@@ -517,7 +517,7 @@ BFont::SetSpacing(float spacing)
 float
 BFont::Spacing() const
 {
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	return(fontInfo ? fontInfo->Spacing() : 0.f);
 }
 
@@ -528,7 +528,7 @@ BFont::SetShear(float shear)
 	if(shear < 45.f) shear = 45.f;
 	else if(shear > 135.f) shear = 135.f;
 
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	if(fontInfo) fontInfo->SetShear(shear);
 }
 
@@ -536,7 +536,7 @@ BFont::SetShear(float shear)
 float
 BFont::Shear() const
 {
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	return(fontInfo ? fontInfo->Shear() : -1.f);
 }
 
@@ -544,7 +544,7 @@ BFont::Shear() const
 void
 BFont::SetBoldStyle(bool bold)
 {
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	if(fontInfo) fontInfo->SetBoldStyle(bold);
 }
 
@@ -552,7 +552,7 @@ BFont::SetBoldStyle(bool bold)
 bool
 BFont::IsBoldStyle() const
 {
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	return(fontInfo ? fontInfo->IsBoldStyle() : false);
 }
 
@@ -560,7 +560,7 @@ BFont::IsBoldStyle() const
 BFontEngine*
 BFont::Engine() const
 {
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	return(fontInfo ? fontInfo->Engine() : NULL);
 }
 
@@ -590,12 +590,12 @@ BFont::GetFixedSize(float *size, b_int32 index) const
 
 
 b_status_t
-BFont::SetFamilyAndStyle(const b_font_family family, const b_font_style style)
+BFont::SetFamilyAndStyle(const bhapi::font_family family, const bhapi::font_style style)
 {
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	if(!fontInfo) return B_ERROR;
 
-	BFontEngine *engine = bhapi_get_font_engine(family, style);
+	BFontEngine *engine = b_get_font_engine(family, style);
 	if(!engine) return B_ERROR;
 
 	return(fontInfo->SetEngine(engine) ? B_OK : B_ERROR);
@@ -607,13 +607,13 @@ BFont::SetFamilyAndStyle(b_uint32 code)
 {
 	if(code == B_MAXUINT32) return B_BAD_VALUE;
 
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	if(!fontInfo) return B_ERROR;
 
 	b_uint32 familyIndex = code >> 16;
 	b_uint32 styleIndex = code & 0xffff;
 
-	BFontEngine *engine = bhapi_get_font_engine((b_int32)familyIndex, (b_int32)styleIndex);
+	BFontEngine *engine = b_get_font_engine((b_int32)familyIndex, (b_int32)styleIndex);
 	if(!engine) return B_ERROR;
 
 	return(fontInfo->SetEngine(engine) ? B_OK : B_ERROR);
@@ -621,11 +621,11 @@ BFont::SetFamilyAndStyle(b_uint32 code)
 
 
 b_status_t
-BFont::GetFamilyAndStyle(b_font_family *family, b_font_style *style) const
+BFont::GetFamilyAndStyle(bhapi::font_family *family, bhapi::font_style *style) const
 {
 	if(!family || !style) return B_BAD_VALUE;
 
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	if(!fontInfo) return B_ERROR;
 
 	b_uint32 code = fontInfo->FamilyAndStyle();
@@ -636,13 +636,13 @@ BFont::GetFamilyAndStyle(b_font_family *family, b_font_style *style) const
 
 	const char *fFamily = NULL;
 	const char *fStyle = NULL;
-	bhapi_get_font_family((b_int32)familyIndex, &fFamily);
-	bhapi_get_font_style(fFamily, (b_int32)styleIndex, &fStyle);
+	b_get_font_family((b_int32)familyIndex, &fFamily);
+	b_get_font_style(fFamily, (b_int32)styleIndex, &fStyle);
 
 	if(!fFamily || !fStyle) return B_ERROR;
 
-	strncpy(*family, fFamily, sizeof(b_font_family));
-	strncpy(*style, fStyle, sizeof(b_font_style));
+	strncpy(*family, fFamily, sizeof(bhapi::font_family));
+	strncpy(*style, fStyle, sizeof(bhapi::font_style));
 
 	return B_OK;
 }
@@ -651,7 +651,7 @@ BFont::GetFamilyAndStyle(b_font_family *family, b_font_style *style) const
 b_uint32
 BFont::FamilyAndStyle() const
 {
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	if(!fontInfo) return B_MAXUINT32;
 
 	return fontInfo->FamilyAndStyle();
@@ -663,7 +663,7 @@ BFont::StringWidth(const char *string, b_int32 length, float tabWidth) const
 {
 	if(string == NULL || *string == 0 || length == 0) return 0;
 
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	if(!fontInfo) return 0;
 
 	return fontInfo->StringWidth(string, length, tabWidth);
@@ -678,11 +678,11 @@ BFont::StringWidth(const BString &str, b_int32 length, float tabWidth) const
 
 
 void
-BFont::GetHeight(b_font_height *height) const
+BFont::GetHeight(bhapi::font_height *height) const
 {
 	if(!height) return;
 
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	if(!fontInfo) return;
 
 	fontInfo->GetHeight(height);
@@ -694,7 +694,7 @@ BFont::CharWidths(const char *string, b_int32 *nChars, float tabWidth) const
 {
 	if(string == NULL || *string == 0 || nChars == NULL) return NULL;
 
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	if(!fontInfo) return NULL;
 
 	return fontInfo->CharWidths(string, -1, nChars, tabWidth);
@@ -713,7 +713,7 @@ BFont::CharWidths(const char *string, b_int32 length, b_int32 *nChars, float tab
 {
 	if(string == NULL || *string == 0 || length == 0 || nChars == NULL) return NULL;
 
-	bhapi_font_info *fontInfo = (bhapi_font_info*)fInfo;
+	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	if(!fontInfo) return NULL;
 
 	return fontInfo->CharWidths(string, length, nChars, tabWidth);
@@ -730,10 +730,10 @@ BFont::CharWidths(const BString &str, b_int32 length, b_int32 *nChars, float tab
 void
 BFont::PrintToStream() const
 {
-	b_font_family family;
-	b_font_style style;
-	bzero(family, sizeof(b_font_family));
-	bzero(style, sizeof(b_font_style));
+	bhapi::font_family family;
+	bhapi::font_style style;
+	bzero(family, sizeof(bhapi::font_family));
+	bzero(style, sizeof(bhapi::font_style));
 	GetFamilyAndStyle(&family, &style);
 	b_uint32 code = FamilyAndStyle();
 	b_uint32 familyIndex = code >> 16;

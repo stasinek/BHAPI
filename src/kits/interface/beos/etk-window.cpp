@@ -92,7 +92,7 @@ EBePrivateWinTopView::Draw(BRect updateRect)
 	{
 		BMessage message(_UPDATE_);
 
-		message.AddBool("etk:msg_from_gui", true);
+		message.AddBool("BHAPI:msg_from_gui", true);
 		message.AddInt64("when", b_real_time_clock_usecs());
 
 		BRect rect;
@@ -101,7 +101,7 @@ EBePrivateWinTopView::Draw(BRect updateRect)
 		rect.right = updateRect.right;
 		rect.bottom = updateRect.bottom;
 
-		message.AddRect("etk:frame", rect);
+		message.AddRect("BHAPI:frame", rect);
 		win->fContactor.SendMessage(&message);
 	}
 }
@@ -140,7 +140,7 @@ EBePrivateWin::QuitRequested()
 }
 
 
-static bool bhapi_beos_get_byte(int32 modifiers, int32 key_code, char *result)
+static bool b_beos_get_byte(int32 modifiers, int32 key_code, char *result)
 {
 	if(result == NULL || key_code < 0 || key_code >= 128) return false;
 
@@ -205,10 +205,10 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 {
 	bool handled = true;
 
-	if(bMsg->what == 'bhapi_')
+	if(bMsg->what == 'b_')
 	{
 		int32 what = 0;
-		bMsg->FindInt32("etk:what", &what);
+		bMsg->FindInt32("BHAPI:what", &what);
 
 		switch(what)
 		{
@@ -222,7 +222,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 					fContactor = BMessenger();
 					const char *buffer = NULL;
 					b_size_t size = -1;
-					if(bMsg->FindData("etk:messenger", B_ANY_TYPE, (const void**)&buffer, &size) != B_OK) break;
+					if(bMsg->FindData("BHAPI:messenger", B_ANY_TYPE, (const void**)&buffer, &size) != B_OK) break;
 					if(buffer == NULL || size <= 0) break;
 					fContactor.Unflatten(buffer, (size_t)size);
 				}
@@ -453,7 +453,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 				if(fContactor.IsValid() == false) break;
 				BMessage message(B_WINDOW_ACTIVATED);
-				message.AddBool("etk:msg_from_gui", true);
+				message.AddBool("BHAPI:msg_from_gui", true);
 				message.AddInt64("when", b_real_time_clock_usecs());
 				fContactor.SendMessage(&message);
 			}
@@ -494,7 +494,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				else if(bMsg->what == B_MOUSE_UP) message.what = B_MOUSE_UP;
 				else message.what = B_MOUSE_MOVED;
 
-				message.AddBool("etk:msg_from_gui", true);
+				message.AddBool("BHAPI:msg_from_gui", true);
 				message.AddInt64("when", b_real_time_clock_usecs());
 				if(bMsg->what != B_MOUSE_UP) message.AddInt32("buttons", buttons);
 				if(bMsg->what == B_MOUSE_DOWN) message.AddInt32("clicks", clicks);
@@ -504,9 +504,9 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 				// TODO: modifiers
 
-				message.AddMessenger("etk:msg_for_target", fContactor);
+				message.AddMessenger("BHAPI:msg_for_target", fContactor);
 
-				bhapi_app->PostMessage(&message);
+				b_app->PostMessage(&message);
 			}
 			break;
 
@@ -537,7 +537,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				}
 				else
 				{
-					bhapi_beos_get_byte(beModifiers, key, (char*)byte);
+					b_beos_get_byte(beModifiers, key, (char*)byte);
 				}
 
 				if(beModifiers & B_SHIFT_KEY) modifiers |= B_SHIFT_KEY;
@@ -550,18 +550,18 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				else if(bMsg->what == B_UNMAPPED_KEY_DOWN) message.what = B_UNMAPPED_KEY_DOWN;
 				else message.what = B_UNMAPPED_KEY_UP;
 
-				message.AddBool("etk:msg_from_gui", true);
+				message.AddBool("BHAPI:msg_from_gui", true);
 				message.AddInt64("when", b_real_time_clock_usecs());
 				message.AddInt32("key", key);
 				message.AddInt32("modifiers", modifiers);
 
 				if(bMsg->what == B_KEY_DOWN || bMsg->what == B_KEY_UP)
 				{
-					if(bMsg->what == B_KEY_DOWN) message.AddInt32("etk:key_repeat", key_repeat);
+					if(bMsg->what == B_KEY_DOWN) message.AddInt32("BHAPI:key_repeat", key_repeat);
 					for(int32 i = 0; i < 3; i++) message.AddInt8("byte", byte[i]);
 					if(!(numBytes != 1 || *bytes != byte[0]))
 					{
-						bhapi_beos_get_byte(beModifiers, key, (char*)byte);
+						b_beos_get_byte(beModifiers, key, (char*)byte);
 						message.AddString("bytes", (char*)byte);
 					}
 					else if(numBytes > 0)
@@ -575,9 +575,9 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 					message.AddString("bytes", (char*)byte);
 				}
 
-				message.AddMessenger("etk:msg_for_target", fContactor);
+				message.AddMessenger("BHAPI:msg_for_target", fContactor);
 
-				bhapi_app->PostMessage(&message);
+				b_app->PostMessage(&message);
 			}
 			break;
 
@@ -603,14 +603,14 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 				BMessage message(B_MODIFIERS_CHANGED);
 
-				message.AddBool("etk:msg_from_gui", true);
+				message.AddBool("BHAPI:msg_from_gui", true);
 				message.AddInt64("when", b_real_time_clock_usecs());
 				message.AddInt32("modifiers", modifiers);
-				message.AddInt32("etk:old_modifiers", old_modifiers);
+				message.AddInt32("BHAPI:old_modifiers", old_modifiers);
 
-				message.AddMessenger("etk:msg_for_target", fContactor);
+				message.AddMessenger("BHAPI:msg_for_target", fContactor);
 
-				bhapi_app->PostMessage(&message);
+				b_app->PostMessage(&message);
 			}
 			break;
 
@@ -631,7 +631,7 @@ EBePrivateWin::FrameMoved(BPoint new_position)
 	if(fContactor.IsValid())
 	{
 		BMessage message(B_WINDOW_MOVED);
-		message.AddBool("etk:msg_from_gui", true);
+		message.AddBool("BHAPI:msg_from_gui", true);
 		message.AddInt64("when", b_real_time_clock_usecs());
 		message.AddPoint("where", BPoint(new_position.x, new_position.y));
 		fContactor.SendMessage(&message);
@@ -647,7 +647,7 @@ EBePrivateWin::FrameResized(float new_width, float new_height)
 	if(fContactor.IsValid())
 	{
 		BMessage message(B_WINDOW_RESIZED);
-		message.AddBool("etk:msg_from_gui", true);
+		message.AddBool("BHAPI:msg_from_gui", true);
 		message.AddInt64("when", b_real_time_clock_usecs());
 		message.AddFloat("width", new_width);
 		message.AddFloat("height", new_height);
@@ -664,7 +664,7 @@ EBePrivateWin::WorkspacesChanged(uint32 old_ws, uint32 new_ws)
 	if(fContactor.IsValid())
 	{
 		BMessage message(B_WORKSPACES_CHANGED);
-		message.AddBool("etk:msg_from_gui", true);
+		message.AddBool("BHAPI:msg_from_gui", true);
 		message.AddInt64("when", b_real_time_clock_usecs());
 		message.AddInt32("new", (b_int32)new_ws);
 		fContactor.SendMessage(&message);
@@ -703,8 +703,8 @@ EBeGraphicsWindow::~EBeGraphicsWindow()
 {
 	if(beWinMsgr.IsValid())
 	{
-		BMessage msg('bhapi_');
-		msg.AddInt32("etk:what", BHAPI_BEOS_QUIT);
+		BMessage msg('b_');
+		msg.AddInt32("BHAPI:what", BHAPI_BEOS_QUIT);
 		beWinMsgr.SendMessage(&msg, &msg);
 	}
 }
@@ -715,8 +715,8 @@ EBeGraphicsWindow::ContactTo(const BMessenger *msgr)
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_CONTACT_TO);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_CONTACT_TO);
 	if(msgr != NULL)
 	{
 		size_t size = msgr->FlattenedSize();
@@ -724,7 +724,7 @@ EBeGraphicsWindow::ContactTo(const BMessenger *msgr)
 		char *buffer = (char*)malloc(size);
 		if(buffer == NULL) return B_NO_MEMORY;
 		if(msgr->Flatten(buffer, size) == false) {free(buffer); return B_ERROR;}
-		msg.AddData("etk:messenger", B_ANY_TYPE, buffer, (b_size_t)size, true, 1);
+		msg.AddData("BHAPI:messenger", B_ANY_TYPE, buffer, (b_size_t)size, true, 1);
 		free(buffer);
 	}
 
@@ -738,8 +738,8 @@ EBeGraphicsWindow::SetBackgroundColor(b_rgb_color bkColor)
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_SET_BACKGROUND);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_SET_BACKGROUND);
 	msg.AddInt32("background", *((int32*)&bkColor));
 
 	beWinMsgr.SendMessage(&msg, &msg);
@@ -765,8 +765,8 @@ EBeGraphicsWindow::SetLook(b_window_look look)
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_SET_LOOK);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_SET_LOOK);
 	msg.AddInt8("look", (int8)look);
 
 	beWinMsgr.SendMessage(&msg, &msg);
@@ -787,8 +787,8 @@ EBeGraphicsWindow::SetTitle(const char *title)
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_SET_TITLE);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_SET_TITLE);
 	msg.AddString("title", title ? title : "");
 
 	beWinMsgr.SendMessage(&msg, &msg);
@@ -801,8 +801,8 @@ EBeGraphicsWindow::SetWorkspaces(b_uint32 workspaces)
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_SET_WORKSPACES);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_SET_WORKSPACES);
 	msg.AddInt32("workspaces", *((b_int32*)&workspaces));
 
 	beWinMsgr.SendMessage(&msg, &msg);
@@ -815,8 +815,8 @@ EBeGraphicsWindow::GetWorkspaces(b_uint32 *workspaces)
 {
 	if(beWinMsgr.IsValid() == false || workspaces == NULL) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_GET_WORKSPACES);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_GET_WORKSPACES);
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	if(msg.IsReply() == false) return B_ERROR;
@@ -829,8 +829,8 @@ EBeGraphicsWindow::Iconify()
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_ICONIFY);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_ICONIFY);
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	return(msg.IsReply() ? B_OK : B_ERROR);
@@ -842,8 +842,8 @@ EBeGraphicsWindow::Show()
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_SHOW);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_SHOW);
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	return(msg.IsReply() ? B_OK : B_ERROR);
@@ -855,8 +855,8 @@ EBeGraphicsWindow::Hide()
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_HIDE);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_HIDE);
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	return(msg.IsReply() ? B_OK : B_ERROR);
@@ -868,8 +868,8 @@ EBeGraphicsWindow::Raise()
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_RAISE);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_RAISE);
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	return(msg.IsReply() ? B_OK : B_ERROR);
@@ -884,8 +884,8 @@ EBeGraphicsWindow::Lower(BGraphicsWindow *_frontWin)
 	EBeGraphicsWindow *frontWin = b_cast_as(_frontWin, EBeGraphicsWindow);
 	if(frontWin == NULL) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_LOWER);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_LOWER);
 	msg.AddPointer("front", (void*)frontWin->beWinMsgr.Target(NULL));
 
 	beWinMsgr.SendMessage(&msg, &msg);
@@ -898,8 +898,8 @@ EBeGraphicsWindow::Activate(bool state)
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_ACTIVATE);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_ACTIVATE);
 	msg.AddBool("state", state);
 
 	beWinMsgr.SendMessage(&msg, &msg);
@@ -912,8 +912,8 @@ EBeGraphicsWindow::GetActivatedState(bool *state) const
 {
 	if(beWinMsgr.IsValid() == false || state == NULL) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_GET_ACTIVATED_STATE);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_GET_ACTIVATED_STATE);
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	if(msg.IsReply() == false) return B_ERROR;
@@ -926,8 +926,8 @@ EBeGraphicsWindow::MoveTo(b_int32 x, b_int32 y)
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_MOVE_RESIZE);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_MOVE_RESIZE);
 	msg.AddPoint("where", BPoint(x, y));
 
 	beWinMsgr.SendMessage(&msg, &msg);
@@ -946,8 +946,8 @@ EBeGraphicsWindow::ResizeTo(b_uint32 w, b_uint32 h)
 
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_MOVE_RESIZE);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_MOVE_RESIZE);
 	msg.AddFloat("width", (float)w);
 	msg.AddFloat("height", (float)h);
 
@@ -967,8 +967,8 @@ EBeGraphicsWindow::MoveAndResizeTo(b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_MOVE_RESIZE);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_MOVE_RESIZE);
 	msg.AddPoint("where", BPoint(x, y));
 	msg.AddFloat("width", (float)w);
 	msg.AddFloat("height", (float)h);
@@ -983,8 +983,8 @@ EBeGraphicsWindow::SetSizeLimits(b_uint32 min_w, b_uint32 max_w, b_uint32 min_h,
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_SET_SIZE_LIMITS);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_SET_SIZE_LIMITS);
 	msg.AddRect("limits", BRect((float)min_w, (float)min_h, (float)max_w, (float)max_h));
 
 	beWinMsgr.SendMessage(&msg, &msg);
@@ -1004,8 +1004,8 @@ EBeGraphicsWindow::GetSizeLimits(b_uint32 *min_w, b_uint32 *max_w, b_uint32 *min
 	*min_h = B_MAXUINT32;
 	*max_h = B_MAXUINT32;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_GET_SIZE_LIMITS);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_GET_SIZE_LIMITS);
 
 	beWinMsgr.SendMessage(&msg, &msg);
 
@@ -1026,8 +1026,8 @@ EBeGraphicsWindow::GrabMouse()
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_GRAB_MOUSE);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_GRAB_MOUSE);
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	if(msg.IsReply() == false) return B_ERROR;
@@ -1043,8 +1043,8 @@ EBeGraphicsWindow::UngrabMouse()
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_UNGRAB_MOUSE);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_UNGRAB_MOUSE);
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	if(msg.IsReply() == false) return B_ERROR;
@@ -1060,8 +1060,8 @@ EBeGraphicsWindow::GrabKeyboard()
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_GRAB_KEYBOARD);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_GRAB_KEYBOARD);
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	if(msg.IsReply() == false) return B_ERROR;
@@ -1077,8 +1077,8 @@ EBeGraphicsWindow::UngrabKeyboard()
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_UNGRAB_KEYBOARD);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_UNGRAB_KEYBOARD);
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	if(msg.IsReply() == false) return B_ERROR;
@@ -1095,8 +1095,8 @@ EBeGraphicsWindow::QueryMouse(b_int32 *x, b_int32 *y, b_int32 *buttons)
 	if(x == NULL && y == NULL && buttons == NULL) return B_ERROR;
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	BMessage msg('bhapi_');
-	msg.AddInt32("etk:what", BHAPI_BEOS_QUERY_MOUSE);
+	BMessage msg('b_');
+	msg.AddInt32("BHAPI:what", BHAPI_BEOS_QUERY_MOUSE);
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	if(msg.IsReply() == false) return B_ERROR;

@@ -43,24 +43,24 @@
 
 
 #if 0
-extern BLocker* bhapi_get_handler_operator_locker();
+extern BLocker* b_get_handler_operator_locker();
 
-class bhapi_posix_sig_action {
+class b_posix_sig_action {
 public:
-	bhapi_posix_sig_action();
+	b_posix_sig_action();
 	void (*old_intr)(int);
 	void (*old_abrt)(int);
 	void (*old_term)(int);
 	void (*old_quit)(int);
 };
-static bhapi_posix_sig_action _bhapi_posix_sig_action_;
+static b_posix_sig_action _bhapi_posix_sig_action_;
 
-static void bhapi_posix_signal(int signumber)
+static void b_posix_signal(int signumber)
 {
-	BLocker *hLocker = bhapi_get_handler_operator_locker();
+	BLocker *hLocker = b_get_handler_operator_locker();
 
 	hLocker->Lock();
-	if(bhapi_app != NULL) bhapi_app->PostMessage(signumber == SIGINT ? B_QUIT_REQUESTED : _QUIT_);
+	if(b_app != NULL) b_app->PostMessage(signumber == SIGINT ? B_QUIT_REQUESTED : _QUIT_);
 	hLocker->Unlock();
 
 	void (*old_func)(int) = NULL;
@@ -77,7 +77,7 @@ static void bhapi_posix_signal(int signumber)
 //						   signumber == SIGABRT ? "SIGABRT" : (
 //						   signumber == SIGTERM ? "SIGTERM" : "SIGQUIT"))));
 
-	while(signumber != SIGINT && bhapi_app != NULL) b_snooze(1000);
+	while(signumber != SIGINT && b_app != NULL) b_snooze(1000);
 
 	if(old_func != NULL)
 	{
@@ -89,12 +89,12 @@ static void bhapi_posix_signal(int signumber)
 }
 
 
-bhapi_posix_sig_action::bhapi_posix_sig_action()
+b_posix_sig_action::b_posix_sig_action()
 	: old_intr(NULL), old_abrt(NULL), old_term(NULL), old_quit(NULL)
 {
 #ifdef HAVE_SIGACTION
 	struct sigaction act, oact;
-	act.sa_handler = bhapi_posix_signal;
+	act.sa_handler = b_posix_signal;
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = 0;
 	#ifdef SA_RESTART
@@ -116,7 +116,7 @@ bhapi_posix_sig_action::bhapi_posix_sig_action()
 
 
 #ifdef BHAPI_OS_LINUX
-bool bhapi_get_prog_argc_argv_linux(BString &progName, BStringArray &progArgv)
+bool b_get_prog_argc_argv_linux(BString &progName, BStringArray &progArgv)
 {
 	bool retVal = false;
 	long maxPath = pathconf("/", _PC_PATH_MAX);

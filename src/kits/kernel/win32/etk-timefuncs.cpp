@@ -37,7 +37,7 @@
 #define SECS_TO_US		1000000
 
 // return the number of microseconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
+EXPORT_BHAPI b_bigtime_t b_real_time_clock_usecs(void)
 {
 	FILETIME CurrentTime;
 
@@ -55,41 +55,41 @@ IMPEXP_BHAPI b_bigtime_t bhapi_real_time_clock_usecs(void)
 
 
 // return the number of seconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-IMPEXP_BHAPI b_uint32 bhapi_real_time_clock(void)
+EXPORT_BHAPI b_uint32 b_real_time_clock(void)
 {
-	return((b_uint32)(bhapi_real_time_clock_usecs() / SECS_TO_US));
+	return((b_uint32)(b_real_time_clock_usecs() / SECS_TO_US));
 }
 
 
-static b_bigtime_t bhapi_windows_boot_time = B_INT64_CONSTANT(-1);
-static LONG bhapi_windows_boot_time_locker = 0;
+static b_bigtime_t b_windows_boot_time = B_INT64_CONSTANT(-1);
+static LONG b_windows_boot_time_locker = 0;
 
 
-IMPEXP_BHAPI b_bigtime_t bhapi_system_boot_time(void)
+EXPORT_BHAPI b_bigtime_t b_system_boot_time(void)
 {
 	b_bigtime_t retValue = B_INT64_CONSTANT(-1);
 
-	while(InterlockedExchange(&bhapi_windows_boot_time_locker, 1) == 1) Sleep(0);
+	while(InterlockedExchange(&b_windows_boot_time_locker, 1) == 1) Sleep(0);
 
-	if(bhapi_windows_boot_time >= 0)
+	if(b_windows_boot_time >= 0)
 	{
-		retValue = bhapi_windows_boot_time;
+		retValue = b_windows_boot_time;
 	}
 	else
 	{
 		// TODO: GetTickCount 49.7 days period
-		b_bigtime_t CurrentTime = bhapi_real_time_clock_usecs(); // in microseconds
+		b_bigtime_t CurrentTime = b_real_time_clock_usecs(); // in microseconds
 		b_bigtime_t ElapsedTime = (b_bigtime_t)GetTickCount(); // in milliseconds
-		retValue = bhapi_windows_boot_time = CurrentTime - ElapsedTime * 1000;
+		retValue = b_windows_boot_time = CurrentTime - ElapsedTime * 1000;
 	}
 
-	InterlockedExchange(&bhapi_windows_boot_time_locker, 0);
+	InterlockedExchange(&b_windows_boot_time_locker, 0);
 
 	return retValue;
 }
 
 
-IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void)
+EXPORT_BHAPI b_bigtime_t b_system_time(void)
 {
 	LARGE_INTEGER counter, freq;
 	if(QueryPerformanceCounter(&counter) != 0 && QueryPerformanceFrequency(&freq) != 0)
@@ -99,7 +99,7 @@ IMPEXP_BHAPI b_bigtime_t bhapi_system_time(void)
 	else
 	{
 		// FIXME
-		return(bhapi_real_time_clock_usecs() - bhapi_system_boot_time());
+		return(b_real_time_clock_usecs() - b_system_boot_time());
 	}
 }
 

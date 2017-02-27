@@ -58,15 +58,15 @@
 #define StandardWidgetXEventMask	(KeyPressMask | KeyReleaseMask | ButtonPressMask | ButtonReleaseMask | EnterWindowMask | LeaveWindowMask | PointerMotionMask | ButtonMotionMask | ExposureMask | VisibilityChangeMask | StructureNotifyMask | FocusChangeMask | PropertyChangeMask)
 
 #if SIZEOF_VOID_P == 2
-	typedef b_uint16 bhapi_x11_address_t;
+	typedef b_uint16 b_x11_address_t;
 	#define BHAPI_X11_ADDRESS_T_FORMAT 16
 	#define BHAPI_X11_ADDRESS_T_NELEMENTS 1
 #elif SIZEOF_VOID_P == 4
-	typedef b_uint32 bhapi_x11_address_t;
+	typedef b_uint32 b_x11_address_t;
 	#define BHAPI_X11_ADDRESS_T_FORMAT 32
 	#define BHAPI_X11_ADDRESS_T_NELEMENTS 1
 #elif SIZEOF_VOID_P == 8
-	typedef b_uint64 bhapi_x11_address_t;
+	typedef b_uint64 b_x11_address_t;
 	#define BHAPI_X11_ADDRESS_T_FORMAT 32
 	#define BHAPI_X11_ADDRESS_T_NELEMENTS 2
 #else

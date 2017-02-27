@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
- * 
+ *
  * DirectFB Graphics Add-on for BHAPI++
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,9 +22,9 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: etk-pixmap.cpp
- * 
+ *
  * --------------------------------------------------------------------------*/
 #ifdef LINUX
 #ifdef DIRECTFB
@@ -222,7 +222,7 @@ EDFBGraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_draw_epixmap(dfbSurface, dc, pix, x, y, w, h, dstX, dstY, dstW, dstH);
+	return b_dfb_draw_epixmap(dfbSurface, dc, pix, x, y, w, h, dstX, dstY, dstW, dstH);
 }
 
 
@@ -235,7 +235,7 @@ EDFBGraphicsDrawable::StrokePoint(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_stroke_point(dfbSurface, dc, x, y);
+	return b_dfb_stroke_point(dfbSurface, dc, x, y);
 }
 
 
@@ -248,7 +248,7 @@ EDFBGraphicsDrawable::StrokePoints(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_stroke_points(dfbSurface, dc, pts, count);
+	return b_dfb_stroke_points(dfbSurface, dc, pts, count);
 }
 
 
@@ -262,7 +262,7 @@ EDFBGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_stroke_points_color(dfbSurface, dc, ptsArrayLists, arrayCount, highColors);
+	return b_dfb_stroke_points_color(dfbSurface, dc, ptsArrayLists, arrayCount, highColors);
 }
 
 
@@ -275,7 +275,7 @@ EDFBGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_stroke_points_alphas(dfbSurface, dc, pts, alpha, count);
+	return b_dfb_stroke_points_alphas(dfbSurface, dc, pts, alpha, count);
 }
 
 
@@ -288,7 +288,7 @@ EDFBGraphicsDrawable::StrokeLine(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_stroke_line(dfbSurface, dc, x0, y0, x1, y1);
+	return b_dfb_stroke_line(dfbSurface, dc, x0, y0, x1, y1);
 }
 
 
@@ -301,7 +301,7 @@ EDFBGraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_stroke_polygon(dfbSurface, dc, pts, count, closed);
+	return b_dfb_stroke_polygon(dfbSurface, dc, pts, count, closed);
 }
 
 
@@ -314,7 +314,7 @@ EDFBGraphicsDrawable::FillPolygon(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_fill_polygon(dfbSurface, dc, pts, count);
+	return b_dfb_fill_polygon(dfbSurface, dc, pts, count);
 }
 
 
@@ -327,7 +327,7 @@ EDFBGraphicsDrawable::StrokeRect(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_stroke_rect(dfbSurface, dc, x, y, w, h);
+	return b_dfb_stroke_rect(dfbSurface, dc, x, y, w, h);
 }
 
 
@@ -340,7 +340,7 @@ EDFBGraphicsDrawable::FillRect(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_fill_rect(dfbSurface, dc, x, y, w, h);
+	return b_dfb_fill_rect(dfbSurface, dc, x, y, w, h);
 }
 
 
@@ -353,7 +353,7 @@ EDFBGraphicsDrawable::StrokeRects(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_stroke_rects(dfbSurface, dc, rects, count);
+	return b_dfb_stroke_rects(dfbSurface, dc, rects, count);
 }
 
 
@@ -366,7 +366,7 @@ EDFBGraphicsDrawable::FillRects(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_fill_rects(dfbSurface, dc, rects, count);
+	return b_dfb_fill_rects(dfbSurface, dc, rects, count);
 }
 
 
@@ -379,7 +379,7 @@ EDFBGraphicsDrawable::FillRegion(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_fill_region(dfbSurface, dc, region);
+	return b_dfb_fill_region(dfbSurface, dc, region);
 }
 
 
@@ -392,7 +392,7 @@ EDFBGraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_stroke_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius);
+	return b_dfb_stroke_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius);
 }
 
 
@@ -405,7 +405,7 @@ EDFBGraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_fill_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius);
+	return b_dfb_fill_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius);
 }
 
 
@@ -418,7 +418,7 @@ EDFBGraphicsDrawable::StrokeArc(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_stroke_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle);
+	return b_dfb_stroke_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle);
 }
 
 
@@ -431,7 +431,7 @@ EDFBGraphicsDrawable::FillArc(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return bhapi_dfb_fill_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle);
+	return b_dfb_fill_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle);
 }
 
 #endif /* DIRECTFB */

@@ -208,8 +208,8 @@ EBeGraphicsDrawable::CopyTo(BGraphicsContext *dc,
 			beBitmap->fView->Sync();
 			beBitmap->Unlock();
 
-			BMessage msg('bhapi_');
-			msg.AddInt32("etk:what", BHAPI_BEOS_DRAW_BITMAP);
+			BMessage msg('b_');
+			msg.AddInt32("BHAPI:what", BHAPI_BEOS_DRAW_BITMAP);
 			msg.AddPointer("bitmap", beBitmap);
 			msg.AddRect("src", BRect(x, y, x + w, y + h));
 			msg.AddRect("dest", BRect(dstX, dstY, dstX + dstW, dstY + dstH));

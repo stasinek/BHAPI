@@ -34,28 +34,28 @@
 #include "../support/StringMe.h"
 #include "../interface/View.h"
 
-
-typedef struct b_text_run {
+namespace bhapi {
+typedef struct text_run {
 	b_int32			offset;		/* byte/character(utf8 mode) offset of first byte/character(utf8 mode) of run */
-	b_font_desc		font;		/* font of run */
+	bhapi::font_desc		font;		/* font of run */
 	b_rgb_color		color;		/* color of run */
 	b_rgb_color		background;	/* background of run */
 	bool			underline;	/* whether to draw underline */
 
 #ifdef __cplusplus /* Just for C++ */
-	inline b_text_run()
+    inline text_run()
 	{
-		bzero(this, sizeof(struct b_text_run));
+        bzero(this, sizeof(*this));
 	}
 #endif /* __cplusplus */
-} b_text_run;
+} text_run;
 
-
-typedef struct b_text_run_array {
+typedef struct text_run_array {
 	b_int32			count;		/* number of text runs */
-	b_text_run		runs[1];	/* array of count number of runs */
-} b_text_run_array;
+    text_run		runs[1];	/* array of count number of runs */
+} text_run_array;
 
+} /* namespace bhapi */
 
 #ifdef __cplusplus /* Just for C++ */
 
@@ -88,18 +88,18 @@ public:
 	void		GetText(b_int32 offset, b_int32 length, char *buffer) const; // ASCII
 	void		GetText(b_int32 offset, b_int32 length, char *buffer, b_int32 buffer_size_in_bytes, bool utf8) const;
 
-	void		SetText(const char *text, const b_text_run_array *runs = NULL, bool utf8 = false);
-	void		SetText(const char *text, b_int32 length, const b_text_run_array *runs = NULL, bool utf8 = false);
-	void		SetText(BFile *file, b_int64 fileOffset, b_int32 length, const b_text_run_array *runs = NULL, bool utf8 = false);
+    void		SetText(const char *text, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
+    void		SetText(const char *text, b_int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
+    void		SetText(BFile *file, b_int64 fileOffset, b_int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
 
-	void		SetRunArray(b_int32 startPos, b_int32 endPos, const b_text_run_array *runs, bool utf8 = false); // exclude endPos
+    void		SetRunArray(b_int32 startPos, b_int32 endPos, const bhapi::text_run_array *runs, bool utf8 = false); // exclude endPos
 
 	// RunArray(): return value must free by "free"
-	b_text_run_array *RunArray(b_int32 startPos, b_int32 endPos, b_int32 *length = NULL, bool utf8 = false) const; // exclude endPos
+    bhapi::text_run_array *RunArray(b_int32 startPos, b_int32 endPos, b_int32 *length = NULL, bool utf8 = false) const; // exclude endPos
 
-	void		Insert(const char *text, const b_text_run_array *runs = NULL, bool utf8 = false);
-	void		Insert(const char *text, b_int32 length, const b_text_run_array *runs = NULL, bool utf8 = false);
-	void		Insert(b_int32 offset, const char *text, b_int32 length, const b_text_run_array *runs = NULL, bool utf8 = false);
+    void		Insert(const char *text, const text_run_array *runs = NULL, bool utf8 = false);
+    void		Insert(const char *text, b_int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
+    void		Insert(b_int32 offset, const char *text, b_int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
 	void		Delete();
 	void		Delete(b_int32 startPos, b_int32 endPos, bool utf8 = false); // exclude endPos
 
@@ -184,13 +184,13 @@ public:
 	virtual void	GetPreferredSize(float *width, float *height);
 
 protected:
-	virtual void	InsertText(const char *text, b_int32 length, b_int32 offset, const b_text_run_array *runs, bool utf8);
+    virtual void	InsertText(const char *text, b_int32 length, b_int32 offset, const bhapi::text_run_array *runs, bool utf8);
 	virtual void	DeleteText(b_int32 startPos, b_int32 endPos, bool utf8);
 
 private:
 	BRect fMargins;
     BString fText;
-	b_text_run_array *fRunArray;
+    bhapi::text_run_array *fRunArray;
 
 	bool fEditable;
 	bool fSelectable;
