@@ -35,7 +35,6 @@
 #include <new>
 #endif /* __cplusplus */
 
-
 #if defined(__MWERKS__) || defined(_MSC_VER)
 /* for Metrowerks, etc. */
 #ifndef __FUNCTION__
@@ -53,8 +52,7 @@
 extern "C" {
 #endif /* __cplusplus */
 
-namespace bhapi
-{
+namespace bhapi {
 typedef enum debug_level {
 	DEBUG_NORMAL,
 	DEBUG_OUTPUT,
@@ -64,7 +62,6 @@ typedef enum debug_level {
 
 IMPEXP_BHAPI void debug_log(bhapi::debug_level level, const char *format, va_list ap);
 }
-
 #ifndef BHAPI_DEBUG
 #ifdef BHAPI_DISABLE_MORE_CHECKS
 #	if __GNUC__ >= 3 || defined(__INTEL_COMPILER)
@@ -116,7 +113,6 @@ IMPEXP_BHAPI void  free(void *ptr, const char *file, int line, const char *metho
 #define malloc(a)	bhapi::malloc(a, __FILE__, __LINE__, "malloc")
 #define realloc(a, b)	bhapi::realloc(a, b, __FILE__, __LINE__, "realloc")
 #define free(a)		bhapi::free(a, __FILE__, __LINE__, "free")
-
 #endif /* BHAPI_BUILD_WITH_MEMORY_TRACING */
 
 #ifdef __cplusplus
@@ -125,15 +121,12 @@ IMPEXP_BHAPI void  free(void *ptr, const char *file, int line, const char *metho
 #ifdef BHAPI_BUILD_WITH_MEMORY_TRACING
 namespace bhapi {
 struct memory_flag_t {};
+}
 IMPEXP_BHAPI void* operator new(size_t size, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
 IMPEXP_BHAPI void* operator new[](size_t size, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
 IMPEXP_BHAPI void operator delete(void *ptr, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
 IMPEXP_BHAPI void operator delete[](void *ptr, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
-}
 #define new new(__FILE__, __LINE__, NULL, (struct bhapi::memory_flag_t*)0)
 #endif /* BHAPI_BUILD_WITH_MEMORY_TRACING */
-
 #endif /* __cplusplus */
-
 #endif /* BHAPI_DEBUG__H */
-

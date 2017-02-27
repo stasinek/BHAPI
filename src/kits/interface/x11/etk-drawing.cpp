@@ -378,7 +378,7 @@ EXGraphicsContext::SetPenSize(b_uint32 penSize)
 }
 
 
-static b_status_t b_stroke_point(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+static b_status_t bhapi::stroke_point(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
 				   b_int32 x, b_int32 y)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
@@ -418,7 +418,7 @@ static b_status_t b_stroke_point(Drawable xDrawable, EXGraphicsEngine *engine, E
 }
 
 
-static b_status_t b_stroke_points(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+static b_status_t bhapi::stroke_points(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
 				    const b_int32 *pts, b_int32 count)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || count <= 0) return B_ERROR;
@@ -486,7 +486,7 @@ static b_status_t b_stroke_points(Drawable xDrawable, EXGraphicsEngine *engine, 
 }
 
 
-static b_status_t b_stroke_points_colors(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+static b_status_t bhapi::stroke_points_colors(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
 					   const BList *ptsArrayLists, b_int32 arrayCount,
 					   const b_rgb_color *high_colors)
 {
@@ -601,7 +601,7 @@ static b_status_t b_stroke_points_colors(Drawable xDrawable, EXGraphicsEngine *e
 }
 
 
-static b_status_t b_stroke_points_alphas(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+static b_status_t bhapi::stroke_points_alphas(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
 					  const b_int32 *pts, const b_uint8 *alpha, b_int32 count)
 {
 #ifdef HAVE_XRENDER
@@ -716,10 +716,10 @@ static b_status_t b_stroke_points_alphas(Drawable xDrawable, EXGraphicsEngine *e
 }
 
 
-static b_status_t b_stroke_line(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+static b_status_t bhapi::stroke_line(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
 				  b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1)
 {
-	if(x0 == x1 && y0 == y1) return b_stroke_point(xDrawable, engine, dc, x0, y0);
+	if(x0 == x1 && y0 == y1) return bhapi::stroke_point(xDrawable, engine, dc, x0, y0);
 
 	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
@@ -730,13 +730,13 @@ static b_status_t b_stroke_line(Drawable xDrawable, EXGraphicsEngine *engine, EX
 }
 
 
-static b_status_t b_stroke_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+static b_status_t bhapi::stroke_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
 				  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
 	if(w == 0 && h == 0)
-		return b_stroke_point(xDrawable, engine, dc, x, y);
+		return bhapi::stroke_point(xDrawable, engine, dc, x, y);
 	else if(w == 0 || h == 0)
-		return b_stroke_line(xDrawable, engine, dc, x, y, x + (b_int32)w, y + (b_int32)h);
+		return bhapi::stroke_line(xDrawable, engine, dc, x, y, x + (b_int32)w, y + (b_int32)h);
 
 	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
@@ -747,7 +747,7 @@ static b_status_t b_stroke_rect(Drawable xDrawable, EXGraphicsEngine *engine, EX
 }
 
 
-static b_status_t b_stroke_rects(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+static b_status_t bhapi::stroke_rects(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
 				   const b_int32 *rects, b_int32 count)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL || rects == NULL || count <= 0) return B_ERROR;
@@ -874,13 +874,13 @@ static b_status_t b_fill_region(Drawable xDrawable, EXGraphicsEngine *engine, EX
 }
 
 
-static b_status_t b_stroke_arc(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+static b_status_t bhapi::stroke_arc(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
 				 b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float start_angle, float end_angle)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
-	if(w == 0 && h == 0) return b_stroke_point(xDrawable, engine, dc, x, y);
-	else if(w == 0 || h == 0) return b_stroke_line(xDrawable, engine, dc, x, y, x + (b_int32)w, y + (b_int32)h);
+	if(w == 0 && h == 0) return bhapi::stroke_point(xDrawable, engine, dc, x, y);
+	else if(w == 0 || h == 0) return bhapi::stroke_line(xDrawable, engine, dc, x, y, x + (b_int32)w, y + (b_int32)h);
 
 	if(end_angle - start_angle >= 360 || end_angle - start_angle <= -360)
 	{
@@ -931,7 +931,7 @@ static b_status_t b_fill_arc(Drawable xDrawable, EXGraphicsEngine *engine, EXGra
 }
 
 
-static b_status_t b_stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+static b_status_t bhapi::stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
 					b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
@@ -939,13 +939,13 @@ static b_status_t b_stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *engi
 	bool xRadiusLarge = (2 * xRadius >= w ? true : false);
 	bool yRadiusLarge = (2 * yRadius >= h ? true : false);
 
-	if(xRadius == 0 || yRadius == 0) return b_stroke_rect(xDrawable, engine, dc, x, y, w, h);
-	else if(xRadiusLarge && yRadiusLarge) return b_stroke_arc(xDrawable, engine, dc, x, y, w, h, 0, 360);
+	if(xRadius == 0 || yRadius == 0) return bhapi::stroke_rect(xDrawable, engine, dc, x, y, w, h);
+	else if(xRadiusLarge && yRadiusLarge) return bhapi::stroke_arc(xDrawable, engine, dc, x, y, w, h, 0, 360);
 
 	if(w == 0 && h == 0)
-		return b_stroke_point(xDrawable, engine, dc, x, y);
+		return bhapi::stroke_point(xDrawable, engine, dc, x, y);
 	else if(w == 0 || h == 0)
-		return b_stroke_line(xDrawable, engine, dc, x, y, x + (b_int32)w, y + (b_int32)h);
+		return bhapi::stroke_line(xDrawable, engine, dc, x, y, x + (b_int32)w, y + (b_int32)h);
 
 	XArc xarcs[4];
 	XSegment xsegments[4];
@@ -1128,13 +1128,13 @@ static b_status_t b_fill_round_rect(Drawable xDrawable, EXGraphicsEngine *engine
 }
 
 
-static b_status_t b_stroke_polygon(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
+static b_status_t bhapi::stroke_polygon(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
 				     const b_int32 *pts, b_int32 count, bool closed)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || count <= 0 || count >= B_MAXINT) return B_ERROR;
 
-	if(count == 1) return b_stroke_point(xDrawable, engine, dc, pts[0], pts[1]);
-	else if(count == 2) return b_stroke_line(xDrawable, engine, dc, pts[0], pts[1], pts[2], pts[3]);
+	if(count == 1) return bhapi::stroke_point(xDrawable, engine, dc, pts[0], pts[1]);
+	else if(count == 2) return bhapi::stroke_line(xDrawable, engine, dc, pts[0], pts[1], pts[2], pts[3]);
 
 	XPoint *xPts = new XPoint[count + 1];
 	if(!xPts) return B_ERROR;
@@ -1273,7 +1273,7 @@ EXGraphicsDrawable::StrokePoint(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_point(xPixmap, fEngine, dc, x, y);
+	return bhapi::stroke_point(xPixmap, fEngine, dc, x, y);
 }
 
 
@@ -1287,7 +1287,7 @@ EXGraphicsDrawable::StrokePoints(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_points(xPixmap, fEngine, dc, pts, count);
+	return bhapi::stroke_points(xPixmap, fEngine, dc, pts, count);
 }
 
 
@@ -1302,7 +1302,7 @@ EXGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_points_colors(xPixmap, fEngine, dc, ptsArrayLists, arrayCount, highColors);
+	return bhapi::stroke_points_colors(xPixmap, fEngine, dc, ptsArrayLists, arrayCount, highColors);
 }
 
 
@@ -1316,7 +1316,7 @@ EXGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_points_alphas(xPixmap, fEngine, dc, pts, alpha, count);
+	return bhapi::stroke_points_alphas(xPixmap, fEngine, dc, pts, alpha, count);
 }
 
 
@@ -1330,7 +1330,7 @@ EXGraphicsDrawable::StrokeLine(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_line(xPixmap, fEngine, dc, x0, y0, x1, y1);
+	return bhapi::stroke_line(xPixmap, fEngine, dc, x0, y0, x1, y1);
 }
 
 
@@ -1344,7 +1344,7 @@ EXGraphicsDrawable::StrokePolygon(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_polygon(xPixmap, fEngine, dc, pts, count, closed);
+	return bhapi::stroke_polygon(xPixmap, fEngine, dc, pts, count, closed);
 }
 
 
@@ -1372,7 +1372,7 @@ EXGraphicsDrawable::StrokeRect(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_rect(xPixmap, fEngine, dc, x, y, w, h);
+	return bhapi::stroke_rect(xPixmap, fEngine, dc, x, y, w, h);
 }
 
 
@@ -1400,7 +1400,7 @@ EXGraphicsDrawable::StrokeRects(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_rects(xPixmap, fEngine, dc, rects, count);
+	return bhapi::stroke_rects(xPixmap, fEngine, dc, rects, count);
 }
 
 
@@ -1442,7 +1442,7 @@ EXGraphicsDrawable::StrokeRoundRect(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_round_rect(xPixmap, fEngine, dc, x, y, w, h, xRadius, yRadius);
+	return bhapi::stroke_round_rect(xPixmap, fEngine, dc, x, y, w, h, xRadius, yRadius);
 }
 
 
@@ -1470,7 +1470,7 @@ EXGraphicsDrawable::StrokeArc(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_arc(xPixmap, fEngine, dc, x, y, w, h, startAngle, endAngle);
+	return bhapi::stroke_arc(xPixmap, fEngine, dc, x, y, w, h, startAngle, endAngle);
 }
 
 
@@ -1512,7 +1512,7 @@ EXGraphicsWindow::StrokePoint(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_point(xWindow, fEngine, dc, x, y);
+	return bhapi::stroke_point(xWindow, fEngine, dc, x, y);
 }
 
 
@@ -1526,7 +1526,7 @@ EXGraphicsWindow::StrokePoints(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_points(xWindow, fEngine, dc, pts, count);
+	return bhapi::stroke_points(xWindow, fEngine, dc, pts, count);
 }
 
 
@@ -1541,7 +1541,7 @@ EXGraphicsWindow::StrokePoints_Colors(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_points_colors(xWindow, fEngine, dc, ptsArrayLists, arrayCount, highColors);
+	return bhapi::stroke_points_colors(xWindow, fEngine, dc, ptsArrayLists, arrayCount, highColors);
 }
 
 
@@ -1555,7 +1555,7 @@ EXGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_points_alphas(xWindow, fEngine, dc, pts, alpha, count);
+	return bhapi::stroke_points_alphas(xWindow, fEngine, dc, pts, alpha, count);
 }
 
 
@@ -1569,7 +1569,7 @@ EXGraphicsWindow::StrokeLine(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_line(xWindow, fEngine, dc, x0, y0, x1, y1);
+	return bhapi::stroke_line(xWindow, fEngine, dc, x0, y0, x1, y1);
 }
 
 
@@ -1583,7 +1583,7 @@ EXGraphicsWindow::StrokePolygon(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_polygon(xWindow, fEngine, dc, pts, count, closed);
+	return bhapi::stroke_polygon(xWindow, fEngine, dc, pts, count, closed);
 }
 
 
@@ -1611,7 +1611,7 @@ EXGraphicsWindow::StrokeRect(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_rect(xWindow, fEngine, dc, x, y, w, h);
+	return bhapi::stroke_rect(xWindow, fEngine, dc, x, y, w, h);
 }
 
 
@@ -1639,7 +1639,7 @@ EXGraphicsWindow::StrokeRects(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_rects(xWindow, fEngine, dc, rects, count);
+	return bhapi::stroke_rects(xWindow, fEngine, dc, rects, count);
 }
 
 
@@ -1681,7 +1681,7 @@ EXGraphicsWindow::StrokeRoundRect(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_round_rect(xWindow, fEngine, dc, x, y, w, h, xRadius, yRadius);
+	return bhapi::stroke_round_rect(xWindow, fEngine, dc, x, y, w, h, xRadius, yRadius);
 }
 
 
@@ -1709,7 +1709,7 @@ EXGraphicsWindow::StrokeArc(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_stroke_arc(xWindow, fEngine, dc, x, y, w, h, startAngle, endAngle);
+	return bhapi::stroke_arc(xWindow, fEngine, dc, x, y, w, h, startAngle, endAngle);
 }
 
 

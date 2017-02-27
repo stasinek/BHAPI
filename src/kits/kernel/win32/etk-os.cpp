@@ -28,7 +28,7 @@
  * --------------------------------------------------------------------------*/
 
 #include "../../kernel/Kernel.h"
-#include "../../support/StringMe.h"
+#include "../../support/String.h"
 #include "../../private/PrivateApplication.h"
 
 #include <winsock2.h>
@@ -96,7 +96,7 @@ char* b_win32_convert_active_to_utf8(const char *str, b_int32 length)
 	bzero(wStr, sizeof(WCHAR) * (size_t)(length + 1));
 	MultiByteToWideChar(CP_ACP, 0, str, length, wStr, length);
 
-	char *uStr = b_unicode_convert_to_utf8((const b_unichar16*)wStr, -1);
+	char *uStr = bhapi::unicode_convert_to_utf8((const b_unichar16*)wStr, -1);
 	free(wStr);
 
 	return uStr;
@@ -105,10 +105,10 @@ char* b_win32_convert_active_to_utf8(const char *str, b_int32 length)
 
 char* b_win32_convert_utf8_to_active(const char *str, b_int32 length)
 {
-	b_unichar16*wStr = b_utf8_convert_to_unicode(str, length);
+	b_unichar16*wStr = bhapi::utf8_convert_to_unicode(str, length);
 	if(wStr == NULL) return NULL;
 
-	b_int32 len = b_unicode_strlen(wStr);
+	b_int32 len = bhapi::unicode_strlen(wStr);
 	char *aStr = (char*)malloc((size_t)len * 3 + 1);
 	if(aStr == NULL)
 	{

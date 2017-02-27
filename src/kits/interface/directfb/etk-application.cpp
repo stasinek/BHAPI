@@ -459,7 +459,7 @@ static void b_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					{
 						b_uint16 symbol = (b_uint16)event->key_symbol;
 						if(symbol == DIKS_ENTER) symbol = B_ENTER;
-						char *keybuffer = b_unicode_convert_to_utf8((const b_unichar16*)&symbol, 1);
+						char *keybuffer = bhapi::unicode_convert_to_utf8((const b_unichar16*)&symbol, 1);
 						b_int32 keynum = (keybuffer ? (b_int32)strlen(keybuffer) : 0);
 
 						if(keybuffer)

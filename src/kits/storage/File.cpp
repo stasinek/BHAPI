@@ -30,7 +30,7 @@
 #include "File.h"
 #include "Path.h"
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"
 

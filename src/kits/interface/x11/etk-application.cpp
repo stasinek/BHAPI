@@ -34,7 +34,7 @@
 #include "etk-x11.h"
 
 #include "../../kernel/Kernel.h"
-#include "../../support/StringMe.h"
+#include "../../support/String.h"
 #include "../../support/Locker.h"
 #include "../../support/Autolock.h"
 #include "../../app/Application.h"
@@ -309,7 +309,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 
 					if(aStr.Length() > 0 && event->xselectionrequest.target == x11Engine->atomCompoundText)
 					{
-						b_unichar32 *wStr = b_utf8_convert_to_utf32(aStr.String(), -1);
+						b_unichar32 *wStr = bhapi::utf8_convert_to_utf32(aStr.String(), -1);
 						XTextProperty prop;
 						prop.value = NULL;
 						if(!(wStr == NULL ||
@@ -412,18 +412,18 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 								const wchar_t **tmp = (const wchar_t **)wStrList;
 								for(int i = 0; i < wCount && *tmp != NULL; i++, tmp++)
 								{
-									char *wStr = b_utf32_convert_to_utf8((const b_unichar32*)(*tmp), -1);
+									char *wStr = bhapi::utf32_convert_to_utf8((const b_unichar32*)(*tmp), -1);
 									if(wStr == NULL) continue;
 									tmpStr.Append(wStr);
 									free(wStr);
 								}
-								if(tmpStr.Length() > 0) aStr = b_strdup(tmpStr.String());
+								if(tmpStr.Length() > 0) aStr = bhapi::strdup(tmpStr.String());
 								XwcFreStringList(wStrList);
 							}
 						}
 						else if(event->xselection.target == XA_STRING)
 						{
-							aStr = b_strndup((const char*)prop, (b_int32)len);
+							aStr = bhapi::strndup((const char*)prop, (b_int32)len);
 						}
 					}
 				}
@@ -918,7 +918,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 						len = 0;
 					}
 					if(len > 0 && (len != 1 || *im_buf != 0x0000000d))
-						utf8_keybuffer = b_utf32_convert_to_utf8((const b_unichar32*)im_buf, len);
+						utf8_keybuffer = bhapi::utf32_convert_to_utf8((const b_unichar32*)im_buf, len);
 					free(im_buf);
 					break;
 				}

@@ -38,7 +38,7 @@
 #include "../kernel/Kernel.h"
 #include "../kernel/Debug.h"
 #include "../support/Errors.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/List.h"
 #include "../support/Locker.h"
 #include "../support/Autolock.h"
@@ -338,7 +338,7 @@ BHandler::BHandler(const char *name)
 	  fPrevHandler(NULL), fNextHandler(NULL),
 	  fObserverList(NULL), fFilters(NULL)
 {
-	fName = b_strdup(name);
+	fName = bhapi::strdup(name);
     fToken = b_app_connector->HandlersDepot()->CreateToken(reinterpret_cast<void*>(this));
 }
 
@@ -365,7 +365,7 @@ BHandler::BHandler(const BMessage *from)
 	const char *name = NULL;
     if(from != NULL) from->FindString("_name", &name);
 
-	fName = b_strdup(name);
+	fName = bhapi::strdup(name);
     fToken = b_app_connector->HandlersDepot()->CreateToken(reinterpret_cast<void*>(this));
 }
 
@@ -394,7 +394,7 @@ void
 BHandler::SetName(const char *name)
 {
 	if(fName != NULL) delete[] fName;
-	fName = b_strdup(name);
+	fName = bhapi::strdup(name);
 }
 
 

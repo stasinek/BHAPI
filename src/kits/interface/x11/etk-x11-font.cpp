@@ -665,7 +665,7 @@ BFontX11::StringWidth(const char *string, float size, float spacing, float shear
 		if(length < 0 || (size_t)length > strlen(string)) length = (b_int32)strlen(string);
 
 		b_uint8 len = 0;
-		const char *tmp = b_utf8_at(string, 0, &len);
+		const char *tmp = bhapi::utf8_at(string, 0, &len);
 		float height = (float)(xfs->ascent + xfs->descent);
 		float delta = (float)ceil((double)(spacing * size));
 		while(!(len == 0 || !tmp || *tmp == 0 || tmp - string > length - (b_int32)len))
@@ -674,7 +674,7 @@ BFontX11::StringWidth(const char *string, float size, float spacing, float shear
 			XftTextExtentsUtf8(fX11Engine->xDisplay, xfs, (XftChar8*)tmp, (int)len, &glyph);
 			int cWidth = (int)(glyph.xOff);
 			width += (float)(cWidth > 0 ? cWidth : height) + (tmp == string ? 0.f : delta);
-			tmp = b_utf8_next(tmp, &len);
+			tmp = bhapi::utf8_next(tmp, &len);
 		}
 
 		return width;
@@ -703,23 +703,23 @@ BFontX11::StringWidth(const char *string, float size, float spacing, float shear
 
 #ifdef X_HAVE_UTF8_STRING
 	b_uint8 len = 0;
-	const char *tmp = b_utf8_at(string, 0, &len);
+	const char *tmp = bhapi::utf8_at(string, 0, &len);
 	while(!(len == 0 || !tmp || *tmp == 0 || tmp - string > length - (b_int32)len))
 	{
 		int cWidth = Xutf8TextEscapement(xFontset, (char*)tmp, (int)len);
 		width += (float)(cWidth > 0 ? cWidth : (int)height) + (tmp == string ? 0.f : delta);
-		tmp = b_utf8_next(tmp, &len);
+		tmp = bhapi::utf8_next(tmp, &len);
 	}
 #else
-	b_unichar32 *utf32 = b_utf8_convert_to_utf32(string, length);
+	b_unichar32 *utf32 = bhapi::utf8_convert_to_utf32(string, length);
 	if(utf32)
 	{
-		const b_unichar32 *tmp = b_utf32_at(utf32, 0);
+		const b_unichar32 *tmp = bhapi::utf32_at(utf32, 0);
 		while(!(!tmp || *tmp == 0))
 		{
 			int cWidth = XwcTextEscapement(xFontset, (wchar_t*)tmp, 1);
 			width += (float)(cWidth > 0 ? cWidth : (int)height) + (tmp == (const b_unichar32*)utf32 ? 0.f : delta);
-			tmp = b_utf32_next(tmp);
+			tmp = bhapi::utf32_next(tmp);
 		}
 		free(utf32);
 	}
@@ -1024,7 +1024,7 @@ BFontX11::RenderString(BHandler *_view, const char *string, float size, float sp
 
 		BPoint pt = view->ConvertToWindow(view->PenLocation()).FloorSelf();
 		b_uint8 len = 0;
-		const char *tmp = b_utf8_at(string, 0, &len);
+		const char *tmp = bhapi::utf8_at(string, 0, &len);
 		int x = (int)pt.x;
 		int y = (int)pt.y;
 		float width = 0;
@@ -1057,7 +1057,7 @@ BFontX11::RenderString(BHandler *_view, const char *string, float size, float sp
 
 			x += (cWidth > 0 ? cWidth : (int)height) + delta;
 			width += (float)(cWidth > 0 ? cWidth : (int)height) + (float)(tmp == string ? 0 : delta);
-			tmp = b_utf8_next(tmp, &len);
+			tmp = bhapi::utf8_next(tmp, &len);
 		}
 
 //		XFlush(fX11Engine->xDisplay);
@@ -1100,7 +1100,7 @@ BFontX11::RenderString(BHandler *_view, const char *string, float size, float sp
 
 #ifdef X_HAVE_UTF8_STRING
 	b_uint8 len = 0;
-	const char *tmp = b_utf8_at(string, 0, &len);
+	const char *tmp = bhapi::utf8_at(string, 0, &len);
 	while(!(len == 0 || !tmp || *tmp == 0 || tmp - string > length - (b_int32)len))
 	{
 		int cWidth = Xutf8TextEscapement(xFontset, (char*)tmp, (int)len);
@@ -1112,13 +1112,13 @@ BFontX11::RenderString(BHandler *_view, const char *string, float size, float sp
 
 		x += (cWidth > 0 ? cWidth : (int)height) + delta;
 		width += (float)(cWidth > 0 ? cWidth : (int)height) + (float)(tmp == string ? 0 : delta);
-		tmp = b_utf8_next(tmp, &len);
+		tmp = bhapi::utf8_next(tmp, &len);
 	}
 #else
-	b_unichar32 *utf32 = b_utf8_convert_to_utf32(string, length);
+	b_unichar32 *utf32 = bhapi::utf8_convert_to_utf32(string, length);
 	if(utf32)
 	{
-		const b_unichar32 *tmp = b_utf32_at(utf32, 0);
+		const b_unichar32 *tmp = bhapi::utf32_at(utf32, 0);
 		while(!(!tmp || *tmp == 0))
 		{
 			int cWidth = XwcTextEscapement(xFontset, (wchar_t*)tmp, 1);
@@ -1130,7 +1130,7 @@ BFontX11::RenderString(BHandler *_view, const char *string, float size, float sp
 
 			x += (cWidth > 0 ? cWidth : (int)height) + delta;
 			width += (float)(cWidth > 0 ? cWidth : (int)height) + (float)(tmp == (const b_unichar32*)utf32 ? 0 : delta);
-			tmp = b_utf32_next(tmp);
+			tmp = bhapi::utf32_next(tmp);
 		}
 		free(utf32);
 	}

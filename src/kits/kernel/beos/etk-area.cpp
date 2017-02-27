@@ -31,7 +31,7 @@
 #include <be/kernel/OS.h>
 
 #include "../kernel/Kernel.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 
 #define BEOS_AREA_INFO_MAGIC		0xABFC
 
@@ -71,7 +71,7 @@ static char* b_area_ipc_name(const char *name, const char *domain)
 		BHAPI_WARNING("\n==================================================================\n[KERNEL]: %s --- Length of area's name exceeds %d.\n==================================================================\n", __PRETTY_FUNCTION__, B_OS_NAME_LENGTH - 4);
 		return NULL;
 	}
-	return b_strdup_printf("%s%s", domain, name);
+	return bhapi::strdup_printf("%s%s", domain, name);
 }
 
 class b_beos_area_locker_t {
@@ -200,8 +200,8 @@ b_create_area(const char *name, void **start_addr, size_t size, b_uint32 protect
 	memcpy(area->addr, &_area_info, sizeof(b_beos_area_info_t));
 
 	area->length = size;
-	area->name = b_strdup(name);
-	area->domain = b_strdup(domain);
+	area->name = bhapi::strdup(name);
+	area->domain = bhapi::strdup(domain);
 	area->ipc_name = ipc_name;
 	area->created = true;
 
@@ -260,8 +260,8 @@ b_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char
 	}
 
 	area->length = _area_info.length;
-	area->name = b_strdup(name);
-	area->domain = b_strdup(domain);
+	area->name = bhapi::strdup(name);
+	area->domain = bhapi::strdup(domain);
 	area->ipc_name = ipc_name;
 	area->openedIPC = true;
 	area->created = true;

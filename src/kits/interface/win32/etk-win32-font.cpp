@@ -238,8 +238,8 @@ LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, b_win32_gdi_
 
 	if(GetVersion() < 0x80000000) // Windows NT/2000/XP
 	{
-		b_unichar32 *utf32 = b_utf8_convert_to_utf32(callback->fontString, -1);
-		const b_unichar32 *tmp = b_utf32_at(utf32, 0);
+		b_unichar32 *utf32 = bhapi::utf8_convert_to_utf32(callback->fontString, -1);
+		const b_unichar32 *tmp = bhapi::utf32_at(utf32, 0);
 
 		while(!(!tmp || *tmp == 0))
 		{
@@ -256,7 +256,7 @@ LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, b_win32_gdi_
 			}
 
 			width += (cWidth > 0 ? (b_uint32)cWidth : height) + (tmp == (const b_unichar32*)utf32 ? 0 : delta);
-			tmp = b_utf32_next(tmp);
+			tmp = bhapi::utf32_next(tmp);
 		}
 
 		if(utf32 != NULL) free(utf32);
@@ -264,7 +264,7 @@ LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, b_win32_gdi_
 	else // Windows 95/98
 	{
 		b_uint8 uLen = 0;
-		const char *uStr = b_utf8_at(callback->fontString, 0, &uLen);
+		const char *uStr = bhapi::utf8_at(callback->fontString, 0, &uLen);
 		const char *tmp = uStr;
 
 		while(!(!tmp || *tmp == 0))
@@ -281,7 +281,7 @@ LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, b_win32_gdi_
 
 			width += (cWidth > 0 ? (b_uint32)cWidth : height) + (tmp == uStr ? 0 : delta);
 
-			tmp = b_utf8_next(tmp, &uLen);
+			tmp = bhapi::utf8_next(tmp, &uLen);
 		}
 	}
 
@@ -405,8 +405,8 @@ LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, b_win32_gdi
 
 	if(GetVersion() < 0x80000000) // Windows NT/2000/XP
 	{
-		b_unichar32 *utf32 = b_utf8_convert_to_utf32(callback->fontString, -1);
-		const b_unichar32 *tmp = b_utf32_at(utf32, 0);
+		b_unichar32 *utf32 = bhapi::utf8_convert_to_utf32(callback->fontString, -1);
+		const b_unichar32 *tmp = bhapi::utf32_at(utf32, 0);
 
 		while(!(!tmp || *tmp == 0))
 		{
@@ -424,11 +424,11 @@ LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, b_win32_gdi
 
 			if(cWidth > 0)
 			{
-				b_unichar16*unicode = b_utf32_convert_to_unicode(tmp, 1);
+				b_unichar16*unicode = bhapi::utf32_convert_to_unicode(tmp, 1);
 				if(unicode != NULL)
 				{
 					ExtTextOutW(callback->pixmap->win32HDC, x, y, 0, NULL,
-						    (WCHAR*)unicode, b_unicode_strlen_etc(unicode, -1, false), NULL);
+						    (WCHAR*)unicode, bhapi::unicode_strlen_etc(unicode, -1, false), NULL);
 					free(unicode);
 				}
 				else
@@ -444,7 +444,7 @@ LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, b_win32_gdi
 
 			x += (cWidth > 0 ? cWidth : (int)height) + (int)delta;
 			width += (cWidth > 0 ? (b_uint32)cWidth : height) + (tmp == (const b_unichar32*)utf32 ? 0 : delta);
-			tmp = b_utf32_next(tmp);
+			tmp = bhapi::utf32_next(tmp);
 		}
 
 		if(utf32 != NULL) free(utf32);
@@ -452,7 +452,7 @@ LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, b_win32_gdi
 	else // Windows 95/98
 	{
 		b_uint8 uLen = 0;
-		const char *uStr = b_utf8_at(callback->fontString, 0, &uLen);
+		const char *uStr = bhapi::utf8_at(callback->fontString, 0, &uLen);
 		const char *tmp = uStr;
 
 		while(!(!tmp || *tmp == 0))
@@ -477,7 +477,7 @@ LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, b_win32_gdi
 			x += (cWidth > 0 ? cWidth : (int)height) + (int)delta;
 			width += (cWidth > 0 ? (b_uint32)cWidth : height) + (tmp == uStr ? 0 : delta);
 
-			tmp = b_utf8_next(tmp, &uLen);
+			tmp = bhapi::utf8_next(tmp, &uLen);
 		}
 	}
 

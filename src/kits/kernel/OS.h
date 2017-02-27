@@ -26,23 +26,17 @@
  * File: OS.h
  *
  * --------------------------------------------------------------------------*/
-
 #ifndef BHAPI_OS__H
 #define BHAPI_OS__H
 #include "../support/SupportDefs.h"
 
-
 typedef b_status_t				(*b_thread_func)(void*);
-
-#define B_SYSTEM_TIMEBASE			0
+#define B_SYSTEM_TIMEBASE               0
 #define B_REAL_TIME_TIMEBASE			1
-
-#define B_OS_NAME_LENGTH			32
-#define B_INFINITE_TIMEOUT		    B_MAXINT64
-
+#define B_OS_NAME_LENGTH                32
+#define B_INFINITE_TIMEOUT              B_MAXINT64
 #define B_READ_AREA                     1
 #define B_WRITE_AREA                    2
-
 #define B_LOW_PRIORITY                  5
 #define B_NORMAL_PRIORITY               10
 #define B_DISPLAY_PRIORITY              15
@@ -50,18 +44,16 @@ typedef b_status_t				(*b_thread_func)(void*);
 #define B_REAL_TIME_DISPLAY_PRIORITY	100
 #define B_URGENT_PRIORITY               110
 #define B_REAL_TIME_PRIORITY            120
-
-#define B_PAGE_SIZE			4096
+#define B_PAGE_SIZE                     4096
 
 enum {
-    B_CAN_INTERRUPT		= 1,	/* semaphore can be interrupted by a signal */
-    B_DO_NOT_RESCHEDULE	= 2,	/* release() without rescheduling */
+    B_CAN_INTERRUPT                 = 1,	/* semaphore can be interrupted by a signal */
+    B_DO_NOT_RESCHEDULE             = 2,	/* release() without rescheduling */
     B_TIMEOUT						= 0x8,	/* relative timeout */
     B_RELATIVE_TIMEOUT				= 0x8,	/* fails after a relative timeout
                                                 with B_TIMED_OUT */
     B_ABSOLUTE_TIMEOUT				= 0x10,	/* fails after an absolute timeout
                                                 with B_TIMED_OUT */
-
     /* experimental Haiku only API */
     B_TIMEOUT_REAL_TIME_BASE		= 0x40,
     B_ABSOLUTE_REAL_TIME_TIMEOUT	= B_ABSOLUTE_TIMEOUT
@@ -71,13 +63,11 @@ enum {
 #ifndef BHAPI_KERNEL__H
 #include "Kernel.h"
 #endif /* BHAPI_KERNEL__H */
-
 /* time functions */
 #define b_snooze(microseconds)			bhapi::snooze(microseconds)
-#define b_snooze_until(time, timebase)		bhapi::snooze_until(time, timebase)
-#define b_real_time_clock()			bhapi::real_time_clock()
-#define b_real_time_clock_usecs()		bhapi::real_time_clock_usecs()
-#define b_system_time()				bhapi::system_time()
-
+#define b_snooze_until(time, timebase)	bhapi::snooze_until(time, timebase)
+#define b_real_time_clock()             bhapi::real_time_clock()
+#define b_real_time_clock_usecs()       bhapi::real_time_clock_usecs()
+#define b_system_time()                 bhapi::system_time()
 #endif /* BHAPI_OS__H */
 

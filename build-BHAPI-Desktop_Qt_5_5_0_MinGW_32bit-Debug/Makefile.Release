@@ -71,7 +71,6 @@ SOURCES       = ../bhapi.cpp \
 		../src/kits/support/DataIO.cpp \
 		../src/kits/support/Flattenable.cpp \
 		../src/kits/support/Locker.cpp \
-		../src/kits/support/StringMe.cpp \
 		../src/kits/support/List.cpp \
 		../src/kits/support/SimpleLocker.cpp \
 		../src/kits/support/StreamIO.cpp \
@@ -134,6 +133,23 @@ SOURCES       = ../bhapi.cpp \
 		../src/kits/interface/layout/LayoutContainer.cpp \
 		../src/kits/interface/layout/LayoutForm.cpp \
 		../src/kits/interface/layout/LayoutItem.cpp \
+		../src/kits/support/SupportDefs.cpp \
+		../src/kits/support/String.cpp \
+		../src/kits/support/Architecture.cpp \
+		../src/kits/support/Base64.cpp \
+		../src/kits/support/Beep.cpp \
+		../src/kits/support/BlockCache.cpp \
+		../src/kits/support/BufferedDataIO.cpp \
+		../src/kits/support/BufferIO.cpp \
+		../src/kits/support/CompressionAlgorithm.cpp \
+		../src/kits/support/DataPositionIOWrapper.cpp \
+		../src/kits/support/DateTime.cpp \
+		../src/kits/support/Job.cpp \
+		../src/kits/support/JobQueue.cpp \
+		../src/kits/support/Referenceable.cpp \
+		../src/kits/support/StopWatch.cpp \
+		../src/kits/support/Uuid.cpp \
+		../src/kits/support/ZlibCompressionAlgorithm.cpp \
 		../src/kits/interface/win32/etk-application.cpp \
 		../src/kits/interface/win32/etk-drawing.cpp \
 		../src/kits/interface/win32/etk-pixmap.cpp \
@@ -176,7 +192,6 @@ OBJECTS       = release/bhapi.o \
 		release/DataIO.o \
 		release/Flattenable.o \
 		release/Locker.o \
-		release/StringMe.o \
 		release/List.o \
 		release/SimpleLocker.o \
 		release/StreamIO.o \
@@ -239,6 +254,23 @@ OBJECTS       = release/bhapi.o \
 		release/LayoutContainer.o \
 		release/LayoutForm.o \
 		release/LayoutItem.o \
+		release/SupportDefs.o \
+		release/String.o \
+		release/Architecture.o \
+		release/Base64.o \
+		release/Beep.o \
+		release/BlockCache.o \
+		release/BufferedDataIO.o \
+		release/BufferIO.o \
+		release/CompressionAlgorithm.o \
+		release/DataPositionIOWrapper.o \
+		release/DateTime.o \
+		release/Job.o \
+		release/JobQueue.o \
+		release/Referenceable.o \
+		release/StopWatch.o \
+		release/Uuid.o \
+		release/ZlibCompressionAlgorithm.o \
 		release/etk-application.o \
 		release/etk-drawing.o \
 		release/etk-pixmap.o \
@@ -343,7 +375,6 @@ DIST          =  bhapi.h \
 		src/kits/support/ClassInfo.h \
 		src/kits/support/DataIO.h \
 		src/kits/support/Errors.h \
-		src/kits/support/StringMe.h \
 		src/kits/support/Flattenable.h \
 		src/kits/support/Locker.h \
 		src/kits/support/SimpleLocker.h \
@@ -360,6 +391,21 @@ DIST          =  bhapi.h \
 		src/kits/StorageKit.h \
 		src/kits/SupportKit.h \
 		src/kits/XmlKit.h \
+		src/kits/support/String.h \
+		src/kits/support/Beep.h \
+		src/kits/support/BlockCache.h \
+		src/kits/support/BufferedDataIO.h \
+		src/kits/support/BufferIO.h \
+		src/kits/support/DateTime.h \
+		src/kits/support/Job.h \
+		src/kits/support/ObjectList.h \
+		src/kits/support/Referenceable.h \
+		src/kits/support/StackOrHeapArray.h \
+		src/kits/support/StopWatch.h \
+		src/kits/support/TLS.h \
+		src/kits/support/TypeConstants.h \
+		src/kits/support/UTF8.h \
+		src/kits/support/Architecture.h \
 		src/kits/interface/win32/etk-win32gdi.h ../bhapi.cpp \
 		../src/kits/add-ons/font/FontEngine.cpp \
 		../src/kits/add-ons/font/FreeType2.cpp \
@@ -390,7 +436,6 @@ DIST          =  bhapi.h \
 		../src/kits/support/DataIO.cpp \
 		../src/kits/support/Flattenable.cpp \
 		../src/kits/support/Locker.cpp \
-		../src/kits/support/StringMe.cpp \
 		../src/kits/support/List.cpp \
 		../src/kits/support/SimpleLocker.cpp \
 		../src/kits/support/StreamIO.cpp \
@@ -453,6 +498,23 @@ DIST          =  bhapi.h \
 		../src/kits/interface/layout/LayoutContainer.cpp \
 		../src/kits/interface/layout/LayoutForm.cpp \
 		../src/kits/interface/layout/LayoutItem.cpp \
+		../src/kits/support/SupportDefs.cpp \
+		../src/kits/support/String.cpp \
+		../src/kits/support/Architecture.cpp \
+		../src/kits/support/Base64.cpp \
+		../src/kits/support/Beep.cpp \
+		../src/kits/support/BlockCache.cpp \
+		../src/kits/support/BufferedDataIO.cpp \
+		../src/kits/support/BufferIO.cpp \
+		../src/kits/support/CompressionAlgorithm.cpp \
+		../src/kits/support/DataPositionIOWrapper.cpp \
+		../src/kits/support/DateTime.cpp \
+		../src/kits/support/Job.cpp \
+		../src/kits/support/JobQueue.cpp \
+		../src/kits/support/Referenceable.cpp \
+		../src/kits/support/StopWatch.cpp \
+		../src/kits/support/Uuid.cpp \
+		../src/kits/support/ZlibCompressionAlgorithm.cpp \
 		../src/kits/interface/win32/etk-application.cpp \
 		../src/kits/interface/win32/etk-drawing.cpp \
 		../src/kits/interface/win32/etk-pixmap.cpp \
@@ -500,11 +562,11 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) be.zip $(SOURCES) $(DIST) ../../BHAPI.pro C:/Qt/5.5/mingw492_32/mkspecs/features/spec_pre.prf C:/Qt/5.5/mingw492_32/mkspecs/qdevice.pri C:/Qt/5.5/mingw492_32/mkspecs/features/device_config.prf C:/Qt/5.5/mingw492_32/mkspecs/qconfig.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_axbase.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_axbase_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_axcontainer.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_axcontainer_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_axserver.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_axserver_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_bluetooth.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_bluetooth_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_bootstrap_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_clucene_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_concurrent.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_concurrent_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_core.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_core_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_dbus.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_dbus_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_designer.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_designer_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_designercomponents_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_enginio.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_enginio_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_gui.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_gui_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_help.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_help_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_multimedia.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_multimedia_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_multimediawidgets.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_multimediawidgets_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_network.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_network_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_nfc.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_nfc_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_opengl.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_opengl_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_openglextensions.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_openglextensions_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_platformsupport_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_printsupport.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_printsupport_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_qml.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_qml_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_qmldevtools_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_qmltest.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_qmltest_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_quick.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_quick_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_quickparticles_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_quickwidgets.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_quickwidgets_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_sensors.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_sensors_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_serialport.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_serialport_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_sql.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_sql_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_svg.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_svg_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_testlib.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_testlib_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_uiplugin.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_uitools.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_uitools_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_webchannel.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_webchannel_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_webkit.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_webkit_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_webkitwidgets.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_webkitwidgets_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_websockets.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_websockets_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_widgets.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_widgets_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_winextras.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_winextras_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_xml.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_xml_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_xmlpatterns.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_xmlpatterns_private.pri C:/Qt/5.5/mingw492_32/mkspecs/features/qt_functions.prf C:/Qt/5.5/mingw492_32/mkspecs/features/qt_config.prf C:/Qt/5.5/mingw492_32/mkspecs/features/win32/qt_config.prf C:/Qt/5.5/mingw492_32/mkspecs/win32-g++/qmake.conf C:/Qt/5.5/mingw492_32/mkspecs/features/spec_post.prf C:/Qt/5.5/mingw492_32/mkspecs/features/exclusive_builds.prf C:/Qt/5.5/mingw492_32/mkspecs/features/default_pre.prf C:/Qt/5.5/mingw492_32/mkspecs/features/win32/default_pre.prf C:/Qt/5.5/mingw492_32/mkspecs/features/resolve_config.prf C:/Qt/5.5/mingw492_32/mkspecs/features/exclusive_builds_post.prf C:/Qt/5.5/mingw492_32/mkspecs/features/default_post.prf C:/Qt/5.5/mingw492_32/mkspecs/features/build_pass.prf C:/Qt/5.5/mingw492_32/mkspecs/features/win32/windows.prf C:/Qt/5.5/mingw492_32/mkspecs/features/win32/rtti.prf C:/Qt/5.5/mingw492_32/mkspecs/features/precompile_header.prf C:/Qt/5.5/mingw492_32/mkspecs/features/warn_on.prf C:/Qt/5.5/mingw492_32/mkspecs/features/testcase_targets.prf C:/Qt/5.5/mingw492_32/mkspecs/features/exceptions.prf C:/Qt/5.5/mingw492_32/mkspecs/features/yacc.prf C:/Qt/5.5/mingw492_32/mkspecs/features/lex.prf ../BHAPI.pro  NO_PCH_SOURCES YACCSOURCES YACCSOURCES LEXSOURCES 
+	$(ZIP) be.zip $(SOURCES) $(DIST) ../BHAPI.pro C:/Qt/5.5/mingw492_32/mkspecs/features/spec_pre.prf C:/Qt/5.5/mingw492_32/mkspecs/qdevice.pri C:/Qt/5.5/mingw492_32/mkspecs/features/device_config.prf C:/Qt/5.5/mingw492_32/mkspecs/qconfig.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_axbase.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_axbase_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_axcontainer.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_axcontainer_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_axserver.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_axserver_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_bluetooth.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_bluetooth_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_bootstrap_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_clucene_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_concurrent.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_concurrent_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_core.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_core_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_dbus.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_dbus_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_designer.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_designer_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_designercomponents_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_enginio.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_enginio_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_gui.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_gui_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_help.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_help_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_multimedia.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_multimedia_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_multimediawidgets.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_multimediawidgets_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_network.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_network_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_nfc.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_nfc_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_opengl.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_opengl_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_openglextensions.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_openglextensions_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_platformsupport_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_printsupport.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_printsupport_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_qml.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_qml_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_qmldevtools_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_qmltest.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_qmltest_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_quick.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_quick_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_quickparticles_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_quickwidgets.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_quickwidgets_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_sensors.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_sensors_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_serialport.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_serialport_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_sql.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_sql_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_svg.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_svg_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_testlib.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_testlib_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_uiplugin.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_uitools.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_uitools_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_webchannel.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_webchannel_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_webkit.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_webkit_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_webkitwidgets.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_webkitwidgets_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_websockets.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_websockets_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_widgets.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_widgets_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_winextras.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_winextras_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_xml.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_xml_private.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_xmlpatterns.pri C:/Qt/5.5/mingw492_32/mkspecs/modules/qt_lib_xmlpatterns_private.pri C:/Qt/5.5/mingw492_32/mkspecs/features/qt_functions.prf C:/Qt/5.5/mingw492_32/mkspecs/features/qt_config.prf C:/Qt/5.5/mingw492_32/mkspecs/features/win32/qt_config.prf C:/Qt/5.5/mingw492_32/mkspecs/win32-g++/qmake.conf C:/Qt/5.5/mingw492_32/mkspecs/features/spec_post.prf C:/Qt/5.5/mingw492_32/mkspecs/features/exclusive_builds.prf C:/Qt/5.5/mingw492_32/mkspecs/features/default_pre.prf C:/Qt/5.5/mingw492_32/mkspecs/features/win32/default_pre.prf C:/Qt/5.5/mingw492_32/mkspecs/features/resolve_config.prf C:/Qt/5.5/mingw492_32/mkspecs/features/exclusive_builds_post.prf C:/Qt/5.5/mingw492_32/mkspecs/features/default_post.prf C:/Qt/5.5/mingw492_32/mkspecs/features/build_pass.prf C:/Qt/5.5/mingw492_32/mkspecs/features/win32/windows.prf C:/Qt/5.5/mingw492_32/mkspecs/features/win32/rtti.prf C:/Qt/5.5/mingw492_32/mkspecs/features/precompile_header.prf C:/Qt/5.5/mingw492_32/mkspecs/features/warn_on.prf C:/Qt/5.5/mingw492_32/mkspecs/features/testcase_targets.prf C:/Qt/5.5/mingw492_32/mkspecs/features/exceptions.prf C:/Qt/5.5/mingw492_32/mkspecs/features/yacc.prf C:/Qt/5.5/mingw492_32/mkspecs/features/lex.prf ../BHAPI.pro  NO_PCH_SOURCES YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
-	-$(DEL_FILE) release/bhapi.o release/FontEngine.o release/FreeType2.o release/GraphicsEngine.o release/DefaultTheme.o release/ThemeEngine.o release/Memory.o release/MessageBody.o release/Object.o release/PrivateApplication.o release/PrivateHandler.o release/StandardIO.o release/Token.o release/ArcGenerator.o release/LineGenerator.o release/Pixmap.o release/Render.o release/Directory.o release/Entry.o release/File.o release/FilePanel.o release/FindDirectory.o release/Node.o release/Path.o release/Volume.o release/VolumeRoster.o release/Archivable.o release/DataIO.o release/Flattenable.o release/Locker.o release/StringMe.o release/List.o release/SimpleLocker.o release/StreamIO.o release/StringArray.o release/ByteOrder.o release/Application.o release/Clipboard.o release/Cursor.o release/Handler.o release/Invoker.o release/Looper.o release/Message.o release/MessageFilter.o release/MessageQueue.o release/MessageRunner.o release/Messenger.o release/Debug.o release/etk-port.o release/NetAddress.o release/NetBuffer.o release/NetDebug.o release/NetEndpoint.o release/SimpleXmlParser.o release/Alert.o release/Bitmap.o release/Box.o release/Button.o release/CheckBox.o release/ColorControl.o release/Control.o release/Font.o release/GraphicsDefs.o release/LimitedView.o release/ListItem.o release/ListView.o release/Menu.o release/MenuBar.o release/MenuField.o release/MenuItem.o release/OutlineListView.o release/Point.o release/Polygon.o release/PopUpMenu.o release/RadioButton.o release/Rect.o release/Region.o release/Screen.o release/ScrollBar.o release/ScrollView.o release/StatusBar.o release/StringView.o release/TabView.o release/TextControl.o release/TextEditable.o release/TextView.o release/Theme.o release/ToolTip.o release/View.o release/Window.o release/LayoutContainer.o release/LayoutForm.o release/LayoutItem.o release/etk-application.o release/etk-drawing.o release/etk-pixmap.o release/etk-win32-font.o release/etk-window.o release/etk-locker.o release/etk-semaphore.o release/etk-thread.o release/etk-area.o
-	-$(DEL_FILE) release/etk-image.o release/etk-os.o release/etk-timefuncs.o
+	-$(DEL_FILE) release/bhapi.o release/FontEngine.o release/FreeType2.o release/GraphicsEngine.o release/DefaultTheme.o release/ThemeEngine.o release/Memory.o release/MessageBody.o release/Object.o release/PrivateApplication.o release/PrivateHandler.o release/StandardIO.o release/Token.o release/ArcGenerator.o release/LineGenerator.o release/Pixmap.o release/Render.o release/Directory.o release/Entry.o release/File.o release/FilePanel.o release/FindDirectory.o release/Node.o release/Path.o release/Volume.o release/VolumeRoster.o release/Archivable.o release/DataIO.o release/Flattenable.o release/Locker.o release/List.o release/SimpleLocker.o release/StreamIO.o release/StringArray.o release/ByteOrder.o release/Application.o release/Clipboard.o release/Cursor.o release/Handler.o release/Invoker.o release/Looper.o release/Message.o release/MessageFilter.o release/MessageQueue.o release/MessageRunner.o release/Messenger.o release/Debug.o release/etk-port.o release/NetAddress.o release/NetBuffer.o release/NetDebug.o release/NetEndpoint.o release/SimpleXmlParser.o release/Alert.o release/Bitmap.o release/Box.o release/Button.o release/CheckBox.o release/ColorControl.o release/Control.o release/Font.o release/GraphicsDefs.o release/LimitedView.o release/ListItem.o release/ListView.o release/Menu.o release/MenuBar.o release/MenuField.o release/MenuItem.o release/OutlineListView.o release/Point.o release/Polygon.o release/PopUpMenu.o release/RadioButton.o release/Rect.o release/Region.o release/Screen.o release/ScrollBar.o release/ScrollView.o release/StatusBar.o release/StringView.o release/TabView.o release/TextControl.o release/TextEditable.o release/TextView.o release/Theme.o release/ToolTip.o release/View.o release/Window.o release/LayoutContainer.o release/LayoutForm.o release/LayoutItem.o release/SupportDefs.o release/String.o release/Architecture.o release/Base64.o release/Beep.o release/BlockCache.o release/BufferedDataIO.o release/BufferIO.o release/CompressionAlgorithm.o release/DataPositionIOWrapper.o
+	-$(DEL_FILE) release/DateTime.o release/Job.o release/JobQueue.o release/Referenceable.o release/StopWatch.o release/Uuid.o release/ZlibCompressionAlgorithm.o release/etk-application.o release/etk-drawing.o release/etk-pixmap.o release/etk-win32-font.o release/etk-window.o release/etk-locker.o release/etk-semaphore.o release/etk-thread.o release/etk-area.o release/etk-image.o release/etk-os.o release/etk-timefuncs.o
 
 distclean: clean 
 	-$(DEL_FILE) $(DESTDIR_TARGET)
@@ -538,6 +600,7 @@ release/bhapi.o: ../bhapi.cpp ../bhapi.h \
 		../src/kits/support/List.h \
 		../src/kits/app/MessageQueue.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Messenger.h \
@@ -548,6 +611,11 @@ release/bhapi.o: ../bhapi.cpp ../bhapi.h \
 		../src/kits/support/Locker.h \
 		../src/kits/app/Cursor.h \
 		../src/kits/app/Application.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/interface/Point.h \
+		../src/kits/interface/Font.h \
+		../src/kits/support/String.h \
 		../src/kits/KernelKit.h \
 		../src/kits/kernel/Debug.h \
 		../src/kits/StorageKit.h \
@@ -558,14 +626,12 @@ release/bhapi.o: ../bhapi.cpp ../bhapi.h \
 		../src/kits/storage/StorageDefs.h \
 		../src/kits/storage/FindDirectory.h \
 		../src/kits/storage/Volume.h \
-		../src/kits/support/StringMe.h \
 		../src/kits/storage/VolumeRoster.h \
 		../src/kits/storage/FilePanel.h \
 		../src/kits/RenderKit.h \
 		../src/kits/render/Render.h \
 		../src/kits/interface/GraphicsDefs.h \
 		../src/kits/interface/Rect.h \
-		../src/kits/interface/Point.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/render/LineGenerator.h \
 		../src/kits/render/ArcGenerator.h \
@@ -573,7 +639,6 @@ release/bhapi.o: ../bhapi.cpp ../bhapi.h \
 		../src/kits/interface/Region.h \
 		../src/kits/InterfaceKit.h \
 		../src/kits/interface/InterfaceDefs.h \
-		../src/kits/interface/Font.h \
 		../src/kits/interface/Screen.h \
 		../src/kits/interface/Window.h \
 		../src/kits/interface/View.h \
@@ -592,7 +657,6 @@ release/bhapi.o: ../bhapi.cpp ../bhapi.h \
 		../src/kits/interface/MenuBar.h \
 		../src/kits/interface/MenuField.h \
 		../src/kits/interface/StringView.h \
-		../src/kits/support/StringArray.h \
 		../src/kits/interface/Box.h \
 		../src/kits/interface/StatusBar.h \
 		../src/kits/interface/TextEditable.h \
@@ -626,13 +690,14 @@ release/bhapi.o: ../bhapi.cpp ../bhapi.h \
 release/FontEngine.o: ../src/kits/add-ons/font/FontEngine.cpp ../src/kits/app/AppDefs.h \
 		../src/kits/support/SupportDefs.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/add-ons/font/FontEngine.h \
 		../src/kits/support/StringArray.h \
 		../src/kits/support/List.h \
 		../src/kits/interface/Point.h \
 		../src/kits/support/Locker.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/support/Autolock.h \
 		../src/kits/support/Errors.h \
@@ -654,9 +719,10 @@ release/FreeType2.o: ../src/kits/add-ons/font/FreeType2.cpp ../src/kits/add-ons/
 		../src/kits/support/List.h \
 		../src/kits/interface/Point.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Locker.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/kernel/Debug.h \
 		../src/kits/support/Autolock.h \
@@ -678,6 +744,7 @@ release/GraphicsEngine.o: ../src/kits/add-ons/graphics/GraphicsEngine.cpp ../src
 		../src/kits/support/List.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/Region.h \
 		../src/kits/support/Errors.h \
@@ -685,7 +752,7 @@ release/GraphicsEngine.o: ../src/kits/add-ons/graphics/GraphicsEngine.cpp ../src
 		../src/kits/interface/InterfaceDefs.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h
+		../src/kits/support/String.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/GraphicsEngine.o ../src/kits/add-ons/graphics/GraphicsEngine.cpp
 
 release/DefaultTheme.o: ../src/kits/add-ons/theme/DefaultTheme.cpp ../src/kits/add-ons/theme/ThemeEngine.h \
@@ -699,8 +766,9 @@ release/DefaultTheme.o: ../src/kits/add-ons/theme/DefaultTheme.cpp ../src/kits/a
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/DefaultTheme.o ../src/kits/add-ons/theme/DefaultTheme.cpp
 
@@ -715,8 +783,9 @@ release/ThemeEngine.o: ../src/kits/add-ons/theme/ThemeEngine.cpp ../src/kits/add
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/ThemeEngine.o ../src/kits/add-ons/theme/ThemeEngine.cpp
 
@@ -731,7 +800,7 @@ release/MessageBody.o: ../src/kits/private/MessageBody.cpp ../src/kits/private/M
 		../src/kits/support/StreamIO.h \
 		../src/kits/support/DataIO.h \
 		../src/kits/private/Memory.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/kernel/Debug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/MessageBody.o ../src/kits/private/MessageBody.cpp
 
@@ -746,26 +815,26 @@ release/PrivateApplication.o: ../src/kits/private/PrivateApplication.cpp ../src/
 		../src/kits/support/Locker.h \
 		../src/kits/kernel/OS.h \
 		../src/kits/kernel/Kernel.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/kernel/Debug.h \
 		../src/kits/support/Errors.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/PrivateApplication.o ../src/kits/private/PrivateApplication.cpp
 
 release/PrivateHandler.o: ../src/kits/private/PrivateHandler.cpp ../src/kits/private/PrivateHandler.h \
 		../src/kits/support/SupportDefs.h \
-		../src/kits/support/Locker.h \
-		../src/kits/app/Looper.h \
-		../src/kits/support/List.h \
-		../src/kits/app/Handler.h \
-		../src/kits/support/Archivable.h \
 		../src/kits/private/PrivateApplication.h \
 		../src/kits/support/SimpleLocker.h \
 		../src/kits/private/Token.h \
+		../src/kits/support/Locker.h \
 		../src/kits/kernel/Kernel.h \
 		../src/kits/kernel/OS.h \
 		../src/kits/support/ClassInfo.h \
 		../src/kits/support/Autolock.h \
-		../src/kits/support/Errors.h
+		../src/kits/support/Errors.h \
+		../src/kits/app/Looper.h \
+		../src/kits/support/List.h \
+		../src/kits/app/Handler.h \
+		../src/kits/support/Archivable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/PrivateHandler.o ../src/kits/private/PrivateHandler.cpp
 
 release/StandardIO.o: ../src/kits/private/StandardIO.cpp ../src/kits/private/StandardIO.h \
@@ -808,7 +877,7 @@ release/Pixmap.o: ../src/kits/render/Pixmap.cpp ../src/kits/render/Pixmap.h \
 		../src/kits/support/StringArray.h \
 		../src/kits/support/Errors.h \
 		../src/kits/kernel/Debug.h \
-		../src/kits/support/StringMe.h
+		../src/kits/support/String.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Pixmap.o ../src/kits/render/Pixmap.cpp
 
 release/Render.o: ../src/kits/render/Render.cpp ../src/kits/render/Render.h \
@@ -828,7 +897,7 @@ release/Directory.o: ../src/kits/storage/Directory.cpp ../src/kits/storage/Direc
 		../src/kits/storage/Entry.h \
 		../src/kits/storage/Path.h \
 		../src/kits/support/SupportDefs.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h \
 		../src/kits/kernel/Debug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Directory.o ../src/kits/storage/Directory.cpp
@@ -837,7 +906,7 @@ release/Entry.o: ../src/kits/storage/Entry.cpp ../src/kits/storage/Entry.h \
 		../src/kits/storage/Path.h \
 		../src/kits/support/SupportDefs.h \
 		../src/kits/storage/Directory.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h \
 		../src/kits/kernel/Debug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Entry.o ../src/kits/storage/Entry.cpp
@@ -848,7 +917,7 @@ release/File.o: ../src/kits/storage/File.cpp ../src/kits/storage/File.h \
 		../src/kits/storage/Directory.h \
 		../src/kits/storage/Entry.h \
 		../src/kits/storage/Path.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h \
 		../src/kits/kernel/Debug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/File.o ../src/kits/storage/File.cpp
@@ -862,24 +931,28 @@ release/FilePanel.o: ../src/kits/storage/FilePanel.cpp ../src/kits/storage/FileP
 		../src/kits/storage/StorageDefs.h \
 		../src/kits/storage/Directory.h \
 		../src/kits/storage/Entry.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Application.h \
 		../src/kits/app/Looper.h \
 		../src/kits/support/List.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/MessageRunner.h \
 		../src/kits/app/Cursor.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/interface/Point.h \
+		../src/kits/interface/Font.h \
+		../src/kits/support/Locker.h \
 		../src/kits/interface/Button.h \
 		../src/kits/interface/Control.h \
 		../src/kits/interface/View.h \
 		../src/kits/interface/InterfaceDefs.h \
 		../src/kits/interface/GraphicsDefs.h \
 		../src/kits/interface/Region.h \
-		../src/kits/interface/Point.h \
 		../src/kits/interface/Rect.h \
 		../src/kits/interface/Polygon.h \
-		../src/kits/interface/Font.h \
 		../src/kits/app/Invoker.h \
 		../src/kits/app/Messenger.h \
 		../src/kits/interface/MenuField.h \
@@ -893,7 +966,6 @@ release/FilePanel.o: ../src/kits/storage/FilePanel.cpp ../src/kits/storage/FileP
 		../src/kits/interface/TextControl.h \
 		../src/kits/interface/TextEditable.h \
 		../src/kits/interface/StringView.h \
-		../src/kits/support/StringArray.h \
 		../src/kits/interface/Bitmap.h \
 		../src/kits/interface/Window.h \
 		../src/kits/kernel/Kernel.h \
@@ -915,7 +987,7 @@ release/FilePanel.o: ../src/kits/storage/FilePanel.cpp ../src/kits/storage/FileP
 release/FindDirectory.o: ../src/kits/storage/FindDirectory.cpp ../src/kits/storage/FindDirectory.h \
 		../src/kits/storage/Path.h \
 		../src/kits/support/SupportDefs.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/FindDirectory.o ../src/kits/storage/FindDirectory.cpp
 
@@ -924,7 +996,7 @@ release/Node.o: ../src/kits/storage/Node.cpp
 
 release/Path.o: ../src/kits/storage/Path.cpp ../src/kits/storage/Path.h \
 		../src/kits/support/SupportDefs.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Path.o ../src/kits/storage/Path.cpp
 
@@ -934,7 +1006,7 @@ release/Volume.o: ../src/kits/storage/Volume.cpp ../src/kits/storage/Volume.h \
 		../src/kits/storage/Directory.h \
 		../src/kits/storage/Entry.h \
 		../src/kits/storage/Path.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Volume.o ../src/kits/storage/Volume.cpp
 
@@ -945,7 +1017,7 @@ release/VolumeRoster.o: ../src/kits/storage/VolumeRoster.cpp ../src/kits/storage
 		../src/kits/storage/Directory.h \
 		../src/kits/storage/Entry.h \
 		../src/kits/storage/Path.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/VolumeRoster.o ../src/kits/storage/VolumeRoster.cpp
 
@@ -976,13 +1048,6 @@ release/Locker.o: ../src/kits/support/Locker.cpp ../src/kits/support/Locker.h \
 		../src/kits/support/Errors.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Locker.o ../src/kits/support/Locker.cpp
 
-release/StringMe.o: ../src/kits/support/StringMe.cpp ../src/kits/support/StringMe.h \
-		../src/kits/support/SupportDefs.h \
-		../src/kits/support/StringArray.h \
-		../src/kits/support/List.h \
-		../src/kits/kernel/Debug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/StringMe.o ../src/kits/support/StringMe.cpp
-
 release/List.o: ../src/kits/support/List.cpp ../src/kits/support/List.h \
 		../src/kits/support/SupportDefs.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/List.o ../src/kits/support/List.cpp
@@ -997,7 +1062,7 @@ release/SimpleLocker.o: ../src/kits/support/SimpleLocker.cpp ../src/kits/support
 release/StreamIO.o: ../src/kits/support/StreamIO.cpp ../src/kits/support/StreamIO.h \
 		../src/kits/support/SupportDefs.h \
 		../src/kits/support/DataIO.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/private/StandardIO.h \
 		../src/kits/kernel/Debug.h \
 		../src/kits/support/Errors.h
@@ -1006,7 +1071,7 @@ release/StreamIO.o: ../src/kits/support/StreamIO.cpp ../src/kits/support/StreamI
 release/StringArray.o: ../src/kits/support/StringArray.cpp ../src/kits/support/StringArray.h \
 		../src/kits/support/SupportDefs.h \
 		../src/kits/support/List.h \
-		../src/kits/support/StringMe.h
+		../src/kits/support/String.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/StringArray.o ../src/kits/support/StringArray.cpp
 
 release/ByteOrder.o: ../src/kits/support/ByteOrder.c ../src/kits/support/ByteOrder.h \
@@ -1022,7 +1087,7 @@ release/Application.o: ../src/kits/app/Application.cpp ../src/kits/support/List.
 		../src/kits/kernel/OS.h \
 		../src/kits/kernel/Debug.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/add-ons/graphics/GraphicsEngine.h \
 		../src/kits/interface/GraphicsDefs.h \
 		../src/kits/interface/Window.h \
@@ -1030,13 +1095,13 @@ release/Application.o: ../src/kits/app/Application.cpp ../src/kits/support/List.
 		../src/kits/interface/Point.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/Region.h \
 		../src/kits/storage/FindDirectory.h \
 		../src/kits/storage/Path.h \
 		../src/kits/storage/Directory.h \
 		../src/kits/storage/Entry.h \
-		../src/kits/private/PrivateHandler.h \
 		../src/kits/app/AppDefs.h \
 		../src/kits/app/Message.h \
 		../src/kits/app/MessageQueue.h \
@@ -1044,6 +1109,8 @@ release/Application.o: ../src/kits/app/Application.cpp ../src/kits/support/List.
 		../src/kits/app/Application.h \
 		../src/kits/app/MessageRunner.h \
 		../src/kits/app/Cursor.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
 		../src/kits/app/Clipboard.h \
 		../src/kits/app/Messenger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Application.o ../src/kits/app/Application.cpp
@@ -1052,7 +1119,7 @@ release/Clipboard.o: ../src/kits/app/Clipboard.cpp ../src/kits/kernel/Kernel.h \
 		../src/kits/support/SupportDefs.h \
 		../src/kits/kernel/OS.h \
 		../src/kits/kernel/Debug.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/List.h \
 		../src/kits/support/SimpleLocker.h \
 		../src/kits/support/Errors.h \
@@ -1064,9 +1131,14 @@ release/Clipboard.o: ../src/kits/app/Clipboard.cpp ../src/kits/kernel/Kernel.h \
 		../src/kits/app/Application.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/MessageRunner.h \
-		../src/kits/app/Cursor.h
+		../src/kits/app/Cursor.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/interface/Point.h \
+		../src/kits/interface/Font.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Clipboard.o ../src/kits/app/Clipboard.cpp
 
 release/Cursor.o: ../src/kits/app/Cursor.cpp ../src/kits/app/Cursor.h \
@@ -1076,6 +1148,7 @@ release/Cursor.o: ../src/kits/app/Cursor.cpp ../src/kits/app/Cursor.h \
 
 release/Handler.o: ../src/kits/app/Handler.cpp ../src/kits/app/Handler.h \
 		../src/kits/support/SupportDefs.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/Looper.h \
 		../src/kits/support/List.h \
@@ -1088,13 +1161,12 @@ release/Handler.o: ../src/kits/app/Handler.cpp ../src/kits/app/Handler.h \
 		../src/kits/app/AppDefs.h \
 		../src/kits/kernel/Debug.h \
 		../src/kits/support/Errors.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Locker.h \
 		../src/kits/support/Autolock.h \
 		../src/kits/private/PrivateApplication.h \
 		../src/kits/support/SimpleLocker.h \
-		../src/kits/private/Token.h \
-		../src/kits/private/PrivateHandler.h
+		../src/kits/private/Token.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Handler.o ../src/kits/app/Handler.cpp
 
 release/Invoker.o: ../src/kits/app/Invoker.cpp ../src/kits/app/Invoker.h \
@@ -1104,12 +1176,17 @@ release/Invoker.o: ../src/kits/app/Invoker.cpp ../src/kits/app/Invoker.h \
 		../src/kits/app/Application.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/MessageRunner.h \
 		../src/kits/app/Cursor.h \
-		../src/kits/app/AppDefs.h \
-		../src/kits/private/PrivateHandler.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/interface/Point.h \
+		../src/kits/interface/Font.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Locker.h \
+		../src/kits/app/AppDefs.h \
 		../src/kits/app/Message.h \
 		../src/kits/kernel/OS.h \
 		../src/kits/kernel/Kernel.h \
@@ -1121,15 +1198,20 @@ release/Looper.o: ../src/kits/app/Looper.cpp ../src/kits/app/Looper.h \
 		../src/kits/support/SupportDefs.h \
 		../src/kits/support/List.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/AppDefs.h \
 		../src/kits/app/Application.h \
 		../src/kits/app/MessageRunner.h \
 		../src/kits/app/Cursor.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/interface/Point.h \
+		../src/kits/interface/Font.h \
+		../src/kits/support/String.h \
+		../src/kits/support/Locker.h \
 		../src/kits/app/Messenger.h \
 		../src/kits/private/Token.h \
-		../src/kits/support/Locker.h \
-		../src/kits/private/PrivateHandler.h \
 		../src/kits/kernel/Debug.h \
 		../src/kits/kernel/Kernel.h \
 		../src/kits/kernel/OS.h \
@@ -1148,13 +1230,14 @@ release/Message.o: ../src/kits/app/Message.cpp ../src/kits/app/Message.h \
 		../src/kits/support/List.h \
 		../src/kits/app/Messenger.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/kernel/Debug.h \
 		../src/kits/private/Token.h \
 		../src/kits/support/Locker.h \
 		../src/kits/support/StreamIO.h \
 		../src/kits/support/DataIO.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h \
 		../src/kits/interface/Point.h \
 		../src/kits/interface/Rect.h
@@ -1167,6 +1250,7 @@ release/MessageFilter.o: ../src/kits/app/MessageFilter.cpp ../src/kits/app/Messa
 		../src/kits/kernel/Kernel.h \
 		../src/kits/support/List.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/Looper.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/MessageFilter.o ../src/kits/app/MessageFilter.cpp
@@ -1180,10 +1264,7 @@ release/MessageQueue.o: ../src/kits/app/MessageQueue.cpp ../src/kits/app/Message
 		../src/kits/kernel/Debug.h \
 		../src/kits/support/Locker.h \
 		../src/kits/support/Errors.h \
-		../src/kits/private/PrivateHandler.h \
-		../src/kits/app/Looper.h \
-		../src/kits/app/Handler.h \
-		../src/kits/support/Archivable.h
+		../src/kits/private/PrivateHandler.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/MessageQueue.o ../src/kits/app/MessageQueue.cpp
 
 release/MessageRunner.o: ../src/kits/app/MessageRunner.cpp ../src/kits/app/MessageRunner.h \
@@ -1192,16 +1273,21 @@ release/MessageRunner.o: ../src/kits/app/MessageRunner.cpp ../src/kits/app/Messa
 		../src/kits/app/Looper.h \
 		../src/kits/support/List.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/Cursor.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/interface/Point.h \
+		../src/kits/interface/Font.h \
+		../src/kits/support/String.h \
+		../src/kits/support/Locker.h \
 		../src/kits/app/AppDefs.h \
 		../src/kits/kernel/Kernel.h \
 		../src/kits/kernel/OS.h \
 		../src/kits/kernel/Debug.h \
-		../src/kits/support/Locker.h \
 		../src/kits/support/Autolock.h \
 		../src/kits/support/Errors.h \
-		../src/kits/private/PrivateHandler.h \
 		../src/kits/app/Messenger.h \
 		../src/kits/app/Message.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/MessageRunner.o ../src/kits/app/MessageRunner.cpp
@@ -1214,28 +1300,28 @@ release/Messenger.o: ../src/kits/app/Messenger.cpp ../src/kits/app/Messenger.h \
 		../src/kits/support/List.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/AppDefs.h \
 		../src/kits/kernel/Debug.h \
 		../src/kits/support/ClassInfo.h \
 		../src/kits/support/Locker.h \
 		../src/kits/support/Errors.h \
-		../src/kits/support/Autolock.h \
-		../src/kits/private/PrivateHandler.h
+		../src/kits/support/Autolock.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Messenger.o ../src/kits/app/Messenger.cpp
 
 release/Debug.o: ../src/kits/kernel/Debug.cpp ../src/kits/kernel/Debug.h \
 		../src/kits/support/SupportDefs.h \
 		../src/kits/kernel/Kernel.h \
 		../src/kits/kernel/OS.h \
-		../src/kits/support/StringMe.h
+		../src/kits/support/String.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Debug.o ../src/kits/kernel/Debug.cpp
 
 release/etk-port.o: ../src/kits/kernel/etk-port.cpp ../src/kits/kernel/Kernel.h \
 		../src/kits/support/SupportDefs.h \
 		../src/kits/kernel/OS.h \
 		../src/kits/kernel/Debug.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h \
 		../src/kits/support/SimpleLocker.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/etk-port.o ../src/kits/kernel/etk-port.cpp
@@ -1267,7 +1353,7 @@ release/NetDebug.o: ../src/kits/net/NetDebug.cpp ../src/kits/net/NetDebug.h \
 		../src/kits/support/SupportDefs.h \
 		../src/kits/support/Autolock.h \
 		../src/kits/support/SimpleLocker.h \
-		../src/kits/support/StringMe.h
+		../src/kits/support/String.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/NetDebug.o ../src/kits/net/NetDebug.cpp
 
 release/NetEndpoint.o: ../src/kits/net/NetEndpoint.cpp ../src/kits/net/NetEndpoint.h \
@@ -1286,7 +1372,7 @@ release/NetEndpoint.o: ../src/kits/net/NetEndpoint.cpp ../src/kits/net/NetEndpoi
 release/SimpleXmlParser.o: ../src/kits/xml/SimpleXmlParser.cpp ../src/kits/xml/SimpleXmlParser.h \
 		../src/kits/support/List.h \
 		../src/kits/support/SupportDefs.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/StringArray.h \
 		../src/kits/support/Errors.h \
 		../src/kits/kernel/Debug.h
@@ -1302,6 +1388,7 @@ release/Alert.o: ../src/kits/interface/Alert.cpp ../src/kits/interface/Alert.h \
 		../src/kits/support/List.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/Button.h \
 		../src/kits/interface/Control.h \
@@ -1309,7 +1396,7 @@ release/Alert.o: ../src/kits/interface/Alert.cpp ../src/kits/interface/Alert.h \
 		../src/kits/interface/Region.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Invoker.h \
 		../src/kits/app/Messenger.h \
 		../src/kits/interface/TextView.h \
@@ -1321,6 +1408,9 @@ release/Alert.o: ../src/kits/interface/Alert.cpp ../src/kits/interface/Alert.h \
 		../src/kits/app/Application.h \
 		../src/kits/app/MessageRunner.h \
 		../src/kits/app/Cursor.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/support/Locker.h \
 		../src/kits/app/Message.h \
 		../src/kits/app/AppDefs.h \
 		../src/kits/add-ons/graphics/GraphicsEngine.h \
@@ -1344,8 +1434,9 @@ release/Bitmap.o: ../src/kits/interface/Bitmap.cpp ../src/kits/interface/Bitmap.
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/add-ons/graphics/GraphicsEngine.h \
 		../src/kits/interface/Window.h \
@@ -1353,6 +1444,9 @@ release/Bitmap.o: ../src/kits/interface/Bitmap.cpp ../src/kits/interface/Bitmap.
 		../src/kits/app/Application.h \
 		../src/kits/app/MessageRunner.h \
 		../src/kits/app/Cursor.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/support/Locker.h \
 		../src/kits/kernel/Debug.h \
 		../src/kits/app/AppDefs.h \
 		../src/kits/render/Pixmap.h \
@@ -1371,8 +1465,9 @@ release/Box.o: ../src/kits/interface/Box.cpp ../src/kits/interface/Box.h \
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/support/ClassInfo.h \
 		../src/kits/support/Errors.h \
@@ -1393,8 +1488,9 @@ release/Button.o: ../src/kits/interface/Button.cpp ../src/kits/interface/Button.
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/Invoker.h \
 		../src/kits/app/Messenger.h \
@@ -1421,8 +1517,9 @@ release/CheckBox.o: ../src/kits/interface/CheckBox.cpp ../src/kits/interface/Che
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/Invoker.h \
 		../src/kits/app/Messenger.h \
@@ -1442,8 +1539,9 @@ release/ColorControl.o: ../src/kits/interface/ColorControl.cpp ../src/kits/inter
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/Invoker.h \
 		../src/kits/app/Messenger.h \
@@ -1463,8 +1561,9 @@ release/Control.o: ../src/kits/interface/Control.cpp ../src/kits/interface/Contr
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/Invoker.h \
 		../src/kits/app/Messenger.h \
@@ -1478,7 +1577,7 @@ release/Control.o: ../src/kits/interface/Control.cpp ../src/kits/interface/Contr
 
 release/Font.o: ../src/kits/interface/Font.cpp ../src/kits/interface/Font.h \
 		../src/kits/support/SupportDefs.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h \
 		../src/kits/add-ons/font/FontEngine.h \
 		../src/kits/support/StringArray.h \
@@ -1486,6 +1585,7 @@ release/Font.o: ../src/kits/interface/Font.cpp ../src/kits/interface/Font.h \
 		../src/kits/interface/Point.h \
 		../src/kits/support/Locker.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/support/Autolock.h \
 		../src/kits/kernel/Debug.h
@@ -1513,8 +1613,9 @@ release/ListItem.o: ../src/kits/interface/ListItem.cpp ../src/kits/interface/Lis
 		../src/kits/interface/Rect.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/app/Invoker.h \
 		../src/kits/app/Messenger.h \
 		../src/kits/app/Message.h \
@@ -1534,8 +1635,9 @@ release/ListView.o: ../src/kits/interface/ListView.cpp ../src/kits/interface/Lis
 		../src/kits/interface/Rect.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/Invoker.h \
 		../src/kits/app/Messenger.h \
@@ -1563,8 +1665,9 @@ release/Menu.o: ../src/kits/interface/Menu.cpp ../src/kits/interface/Menu.h \
 		../src/kits/interface/Rect.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/MenuItem.h \
 		../src/kits/app/Invoker.h \
@@ -1594,8 +1697,9 @@ release/MenuBar.o: ../src/kits/interface/MenuBar.cpp ../src/kits/interface/MenuB
 		../src/kits/interface/Rect.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/MenuItem.h \
 		../src/kits/app/Invoker.h \
@@ -1621,8 +1725,9 @@ release/MenuField.o: ../src/kits/interface/MenuField.cpp ../src/kits/interface/M
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/Window.h \
 		../src/kits/app/Looper.h \
@@ -1649,8 +1754,9 @@ release/MenuItem.o: ../src/kits/interface/MenuItem.cpp ../src/kits/interface/Men
 		../src/kits/interface/Region.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/interface/Window.h \
 		../src/kits/app/Looper.h \
 		../src/kits/support/ClassInfo.h \
@@ -1674,8 +1780,9 @@ release/OutlineListView.o: ../src/kits/interface/OutlineListView.cpp ../src/kits
 		../src/kits/interface/Rect.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/Invoker.h \
 		../src/kits/app/Messenger.h \
@@ -1710,8 +1817,9 @@ release/PopUpMenu.o: ../src/kits/interface/PopUpMenu.cpp ../src/kits/interface/P
 		../src/kits/interface/Rect.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/MenuItem.h \
 		../src/kits/app/Invoker.h \
@@ -1721,6 +1829,8 @@ release/PopUpMenu.o: ../src/kits/interface/PopUpMenu.cpp ../src/kits/interface/P
 		../src/kits/app/Application.h \
 		../src/kits/app/MessageRunner.h \
 		../src/kits/app/Cursor.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
 		../src/kits/app/AppDefs.h \
 		../src/kits/support/Errors.h \
 		../src/kits/app/Message.h \
@@ -1742,8 +1852,9 @@ release/RadioButton.o: ../src/kits/interface/RadioButton.cpp ../src/kits/interfa
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/Invoker.h \
 		../src/kits/app/Messenger.h \
@@ -1775,12 +1886,18 @@ release/Screen.o: ../src/kits/interface/Screen.cpp ../src/kits/interface/Screen.
 		../src/kits/support/List.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/add-ons/graphics/GraphicsEngine.h \
 		../src/kits/interface/Region.h \
 		../src/kits/app/Application.h \
 		../src/kits/app/MessageRunner.h \
 		../src/kits/app/Cursor.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/interface/Font.h \
+		../src/kits/support/String.h \
+		../src/kits/support/Locker.h \
 		../src/kits/support/Errors.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Screen.o ../src/kits/interface/Screen.cpp
 
@@ -1796,8 +1913,9 @@ release/ScrollBar.o: ../src/kits/interface/ScrollBar.cpp ../src/kits/interface/S
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/add-ons/theme/ThemeEngine.h \
 		../src/kits/kernel/OS.h \
@@ -1821,14 +1939,15 @@ release/ScrollView.o: ../src/kits/interface/ScrollView.cpp ../src/kits/interface
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/kernel/Debug.h \
 		../src/kits/support/Errors.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/ScrollView.o ../src/kits/interface/ScrollView.cpp
 
-release/StatusBar.o: ../src/kits/interface/StatusBar.cpp ../src/kits/support/StringMe.h \
+release/StatusBar.o: ../src/kits/interface/StatusBar.cpp ../src/kits/support/String.h \
 		../src/kits/support/SupportDefs.h \
 		../src/kits/app/AppDefs.h \
 		../src/kits/app/Message.h \
@@ -1845,6 +1964,7 @@ release/StatusBar.o: ../src/kits/interface/StatusBar.cpp ../src/kits/support/Str
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/StatusBar.o ../src/kits/interface/StatusBar.cpp
 
@@ -1860,8 +1980,9 @@ release/StringView.o: ../src/kits/interface/StringView.cpp ../src/kits/interface
 		../src/kits/interface/Rect.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/StringView.o ../src/kits/interface/StringView.cpp
 
@@ -1876,8 +1997,9 @@ release/TabView.o: ../src/kits/interface/TabView.cpp ../src/kits/interface/TabVi
 		../src/kits/interface/Rect.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/TabView.o ../src/kits/interface/TabView.cpp
 
@@ -1894,8 +2016,9 @@ release/TextControl.o: ../src/kits/interface/TextControl.cpp ../src/kits/interfa
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/Invoker.h \
 		../src/kits/app/Messenger.h \
@@ -1904,8 +2027,10 @@ release/TextControl.o: ../src/kits/interface/TextControl.cpp ../src/kits/interfa
 		../src/kits/app/Application.h \
 		../src/kits/app/MessageRunner.h \
 		../src/kits/app/Cursor.h \
-		../src/kits/app/Clipboard.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
 		../src/kits/support/Locker.h \
+		../src/kits/app/Clipboard.h \
 		../src/kits/app/Message.h \
 		../src/kits/kernel/OS.h \
 		../src/kits/kernel/Kernel.h \
@@ -1924,8 +2049,9 @@ release/TextEditable.o: ../src/kits/interface/TextEditable.cpp ../src/kits/inter
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/app/Invoker.h \
 		../src/kits/app/Messenger.h \
@@ -1934,6 +2060,9 @@ release/TextEditable.o: ../src/kits/interface/TextEditable.cpp ../src/kits/inter
 		../src/kits/app/Application.h \
 		../src/kits/app/MessageRunner.h \
 		../src/kits/app/Cursor.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/support/Locker.h \
 		../src/kits/app/AppDefs.h \
 		../src/kits/support/Errors.h \
 		../src/kits/app/Message.h \
@@ -1942,7 +2071,7 @@ release/TextEditable.o: ../src/kits/interface/TextEditable.cpp ../src/kits/inter
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/TextEditable.o ../src/kits/interface/TextEditable.cpp
 
 release/TextView.o: ../src/kits/interface/TextView.cpp ../src/kits/interface/TextView.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/SupportDefs.h \
 		../src/kits/interface/View.h \
 		../src/kits/interface/InterfaceDefs.h \
@@ -1954,6 +2083,7 @@ release/TextView.o: ../src/kits/interface/TextView.cpp ../src/kits/interface/Tex
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/Window.h \
 		../src/kits/app/Looper.h \
@@ -1969,9 +2099,11 @@ release/TextView.o: ../src/kits/interface/TextView.cpp ../src/kits/interface/Tex
 		../src/kits/storage/Path.h \
 		../src/kits/app/Application.h \
 		../src/kits/app/Cursor.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/support/Locker.h \
 		../src/kits/app/Clipboard.h \
 		../src/kits/app/Messenger.h \
-		../src/kits/support/Locker.h \
 		../src/kits/app/AppDefs.h \
 		../src/kits/app/Message.h \
 		../src/kits/kernel/OS.h \
@@ -1989,7 +2121,7 @@ release/ToolTip.o: ../src/kits/interface/ToolTip.cpp ../src/kits/interface/ToolT
 		../src/kits/interface/GraphicsDefs.h \
 		../src/kits/interface/Point.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h
+		../src/kits/support/String.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/ToolTip.o ../src/kits/interface/ToolTip.cpp
 
 release/View.o: ../src/kits/interface/View.cpp ../src/kits/interface/View.h \
@@ -2002,8 +2134,9 @@ release/View.o: ../src/kits/interface/View.cpp ../src/kits/interface/View.h \
 		../src/kits/support/List.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/ViewPrivate.h \
 		../src/kits/interface/layout/Layout.h \
@@ -2037,13 +2170,14 @@ release/Window.o: ../src/kits/interface/Window.cpp ../src/kits/interface/Window.
 		../src/kits/support/List.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/Region.h \
 		../src/kits/interface/InterfaceDefs.h \
 		../src/kits/interface/View.h \
 		../src/kits/interface/Polygon.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/interface/ScrollBar.h \
 		../src/kits/app/MessageRunner.h \
 		../src/kits/interface/Screen.h \
@@ -2055,6 +2189,9 @@ release/Window.o: ../src/kits/interface/Window.cpp ../src/kits/interface/Window.
 		../src/kits/kernel/Debug.h \
 		../src/kits/app/Application.h \
 		../src/kits/app/Cursor.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/support/Locker.h \
 		../src/kits/app/AppDefs.h \
 		../src/kits/app/Message.h \
 		../src/kits/app/MessageQueue.h \
@@ -2095,6 +2232,61 @@ release/LayoutItem.o: ../src/kits/interface/layout/LayoutItem.cpp ../src/kits/su
 		../src/kits/interface/Rect.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/LayoutItem.o ../src/kits/interface/layout/LayoutItem.cpp
 
+release/SupportDefs.o: ../src/kits/support/SupportDefs.cpp ../src/kits/support/SupportDefs.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/SupportDefs.o ../src/kits/support/SupportDefs.cpp
+
+release/String.o: ../src/kits/support/String.cpp ../src/kits/support/String.h \
+		../src/kits/support/SupportDefs.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/support/List.h \
+		../src/kits/kernel/Debug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/String.o ../src/kits/support/String.cpp
+
+release/Architecture.o: ../src/kits/support/Architecture.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Architecture.o ../src/kits/support/Architecture.cpp
+
+release/Base64.o: ../src/kits/support/Base64.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Base64.o ../src/kits/support/Base64.cpp
+
+release/Beep.o: ../src/kits/support/Beep.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Beep.o ../src/kits/support/Beep.cpp
+
+release/BlockCache.o: ../src/kits/support/BlockCache.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/BlockCache.o ../src/kits/support/BlockCache.cpp
+
+release/BufferedDataIO.o: ../src/kits/support/BufferedDataIO.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/BufferedDataIO.o ../src/kits/support/BufferedDataIO.cpp
+
+release/BufferIO.o: ../src/kits/support/BufferIO.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/BufferIO.o ../src/kits/support/BufferIO.cpp
+
+release/CompressionAlgorithm.o: ../src/kits/support/CompressionAlgorithm.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/CompressionAlgorithm.o ../src/kits/support/CompressionAlgorithm.cpp
+
+release/DataPositionIOWrapper.o: ../src/kits/support/DataPositionIOWrapper.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/DataPositionIOWrapper.o ../src/kits/support/DataPositionIOWrapper.cpp
+
+release/DateTime.o: ../src/kits/support/DateTime.cpp ../src/kits/support/DateTime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/DateTime.o ../src/kits/support/DateTime.cpp
+
+release/Job.o: ../src/kits/support/Job.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Job.o ../src/kits/support/Job.cpp
+
+release/JobQueue.o: ../src/kits/support/JobQueue.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/JobQueue.o ../src/kits/support/JobQueue.cpp
+
+release/Referenceable.o: ../src/kits/support/Referenceable.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Referenceable.o ../src/kits/support/Referenceable.cpp
+
+release/StopWatch.o: ../src/kits/support/StopWatch.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/StopWatch.o ../src/kits/support/StopWatch.cpp
+
+release/Uuid.o: ../src/kits/support/Uuid.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Uuid.o ../src/kits/support/Uuid.cpp
+
+release/ZlibCompressionAlgorithm.o: ../src/kits/support/ZlibCompressionAlgorithm.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/ZlibCompressionAlgorithm.o ../src/kits/support/ZlibCompressionAlgorithm.cpp
+
 release/etk-application.o: ../src/kits/interface/win32/etk-application.cpp ../src/kits/interface/win32/etk-win32gdi.h \
 		../src/kits/support/SupportDefs.h \
 		../src/kits/add-ons/graphics/GraphicsEngine.h \
@@ -2105,6 +2297,7 @@ release/etk-application.o: ../src/kits/interface/win32/etk-application.cpp ../sr
 		../src/kits/support/List.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/Region.h \
 		../src/kits/app/MessageFilter.h \
@@ -2116,11 +2309,14 @@ release/etk-application.o: ../src/kits/interface/win32/etk-application.cpp ../sr
 		../src/kits/kernel/Debug.h \
 		../src/kits/support/Errors.h \
 		../src/kits/support/Autolock.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/interface/InterfaceDefs.h \
 		../src/kits/app/Application.h \
 		../src/kits/app/MessageRunner.h \
 		../src/kits/app/Cursor.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/interface/Font.h \
 		../src/kits/app/AppDefs.h \
 		../src/kits/app/Clipboard.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/etk-application.o ../src/kits/interface/win32/etk-application.cpp
@@ -2135,6 +2331,7 @@ release/etk-drawing.o: ../src/kits/interface/win32/etk-drawing.cpp ../src/kits/i
 		../src/kits/support/List.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/Region.h \
 		../src/kits/app/MessageFilter.h \
@@ -2162,6 +2359,7 @@ release/etk-pixmap.o: ../src/kits/interface/win32/etk-pixmap.cpp ../src/kits/int
 		../src/kits/support/List.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/Region.h \
 		../src/kits/app/MessageFilter.h \
@@ -2186,6 +2384,7 @@ release/etk-win32-font.o: ../src/kits/interface/win32/etk-win32-font.cpp ../src/
 		../src/kits/support/List.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/Region.h \
 		../src/kits/app/MessageFilter.h \
@@ -2197,7 +2396,7 @@ release/etk-win32-font.o: ../src/kits/interface/win32/etk-win32-font.cpp ../src/
 		../src/kits/add-ons/font/FontEngine.h \
 		../src/kits/support/StringArray.h \
 		../src/kits/interface/Font.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/ClassInfo.h \
 		../src/kits/support/Autolock.h \
 		../src/kits/interface/View.h \
@@ -2217,6 +2416,7 @@ release/etk-window.o: ../src/kits/interface/win32/etk-window.cpp ../src/kits/int
 		../src/kits/support/List.h \
 		../src/kits/app/Looper.h \
 		../src/kits/app/Handler.h \
+		../src/kits/private/PrivateHandler.h \
 		../src/kits/support/Archivable.h \
 		../src/kits/interface/Region.h \
 		../src/kits/app/MessageFilter.h \
@@ -2231,7 +2431,10 @@ release/etk-window.o: ../src/kits/interface/win32/etk-window.cpp ../src/kits/int
 		../src/kits/app/Application.h \
 		../src/kits/app/MessageRunner.h \
 		../src/kits/app/Cursor.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/add-ons/font/FontEngine.h \
+		../src/kits/support/StringArray.h \
+		../src/kits/interface/Font.h \
+		../src/kits/support/String.h \
 		../src/kits/support/ClassInfo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/etk-window.o ../src/kits/interface/win32/etk-window.cpp
 
@@ -2246,7 +2449,7 @@ release/etk-semaphore.o: ../src/kits/kernel/thread/win32/etk-semaphore.cpp ../sr
 		../src/kits/support/SupportDefs.h \
 		../src/kits/kernel/OS.h \
 		../src/kits/kernel/Debug.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/etk-semaphore.o ../src/kits/kernel/thread/win32/etk-semaphore.cpp
 
@@ -2255,7 +2458,7 @@ release/etk-thread.o: ../src/kits/kernel/thread/win32/etk-thread.cpp ../src/kits
 		../src/kits/kernel/OS.h \
 		../src/kits/kernel/Debug.h \
 		../src/kits/support/List.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h \
 		../src/kits/support/SimpleLocker.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/etk-thread.o ../src/kits/kernel/thread/win32/etk-thread.cpp
@@ -2264,7 +2467,7 @@ release/etk-area.o: ../src/kits/kernel/win32/etk-area.cpp ../src/kits/support/Su
 		../src/kits/kernel/Kernel.h \
 		../src/kits/kernel/OS.h \
 		../src/kits/kernel/Debug.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/etk-area.o ../src/kits/kernel/win32/etk-area.cpp
 
@@ -2272,14 +2475,14 @@ release/etk-image.o: ../src/kits/kernel/win32/etk-image.cpp ../src/kits/kernel/K
 		../src/kits/support/SupportDefs.h \
 		../src/kits/kernel/OS.h \
 		../src/kits/storage/Path.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/support/Errors.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/etk-image.o ../src/kits/kernel/win32/etk-image.cpp
 
 release/etk-os.o: ../src/kits/kernel/win32/etk-os.cpp ../src/kits/kernel/Kernel.h \
 		../src/kits/support/SupportDefs.h \
 		../src/kits/kernel/OS.h \
-		../src/kits/support/StringMe.h \
+		../src/kits/support/String.h \
 		../src/kits/private/PrivateApplication.h \
 		../src/kits/support/SimpleLocker.h \
 		../src/kits/private/Token.h \

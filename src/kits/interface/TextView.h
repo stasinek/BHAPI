@@ -31,7 +31,7 @@
 #ifndef BHAPI_TEXT_VIEW__H
 #define BHAPI_TEXT_VIEW__H
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../interface/View.h"
 
 namespace bhapi {
@@ -97,7 +97,7 @@ public:
 	// RunArray(): return value must free by "free"
     bhapi::text_run_array *RunArray(b_int32 startPos, b_int32 endPos, b_int32 *length = NULL, bool utf8 = false) const; // exclude endPos
 
-    void		Insert(const char *text, const text_run_array *runs = NULL, bool utf8 = false);
+    void		Insert(const char *text, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
     void		Insert(const char *text, b_int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
     void		Insert(b_int32 offset, const char *text, b_int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
 	void		Delete();

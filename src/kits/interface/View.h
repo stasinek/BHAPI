@@ -72,6 +72,7 @@ enum {
 
 #ifdef __cplusplus /* Just for C++ */
 
+using namespace bhapi;
 #include "../interface/InterfaceDefs.h"
 class BWindow;
 class BGraphicsContext;
@@ -290,10 +291,10 @@ public:
     void		DrawString(const char *aString, b_int32 length, BPoint location, float tabWidth = 0);
 
     virtual void	SetFont(const BFont *font, b_uint8 mask = B_FONT_ALL);
-    void		SetFont(const bhapi::font_desc *fontDesc, b_uint8 mask = B_FONT_ALL);
+    void		SetFont(const font_desc *fontDesc, b_uint8 mask = B_FONT_ALL);
 	void		GetFont(BFont *font) const;
 	void		SetFontSize(float size);
-    void		GetFontHeight(bhapi::font_height *height) const;
+    void		GetFontHeight(font_height *height) const;
 	void		ForceFontAliasing(bool enable);
 
 	virtual void	GetPreferredSize(float *width, float *height);

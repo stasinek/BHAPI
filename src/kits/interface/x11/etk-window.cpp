@@ -34,7 +34,7 @@
 #include "etk-x11.h"
 
 #include "../support/Autolock.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/ClassInfo.h"
 #include "../app/Application.h"
 
@@ -368,7 +368,7 @@ EXGraphicsWindow::SetTitle(const char *title)
 	XTextProperty prop;
 	prop.value = NULL;
 
-	b_unichar32 *utf32_title = b_utf8_convert_to_utf32(title, -1);
+	b_unichar32 *utf32_title = bhapi::utf8_convert_to_utf32(title, -1);
 
 	if(!utf32_title || XwcTextListToTextProperty(fEngine->xDisplay, (wchar_t**)&utf32_title, 1, XCompoundTextStyle, &prop) != Success)
 	{

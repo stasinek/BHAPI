@@ -285,7 +285,7 @@ EXPORT_BHAPI void BFontEngine::SetFamily(const char *family)
 {
 	if(fFamily) delete[] fFamily;
 	fFamily = NULL;
-    if(family) fFamily = b_strdup_dirty(family);
+    if(family) fFamily = bhapi::strdup_dirty(family);
 }
 
 
@@ -293,7 +293,7 @@ EXPORT_BHAPI void BFontEngine::SetStyle(const char *style)
 {
 	if(fStyle) delete[] fStyle;
 	fStyle = NULL;
-    if(style) fStyle = b_strdup_dirty(style);
+    if(style) fStyle = bhapi::strdup_dirty(style);
 }
 
 

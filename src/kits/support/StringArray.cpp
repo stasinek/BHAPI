@@ -29,7 +29,7 @@
 
 #include "StringArray.h"
 
-#include "StringMe.h"
+#include "String.h"
 
 typedef struct __string_node__ {
     BString *str;

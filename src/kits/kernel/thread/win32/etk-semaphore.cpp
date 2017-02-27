@@ -29,7 +29,7 @@
 
 #include "../../../kernel/Kernel.h"
 #include "../../../kernel/Debug.h"
-#include "../../../support/StringMe.h"
+#include "../../../support/String.h"
 #include "../../../support/Errors.h"
 
 #ifndef _WIN32_WINNT
@@ -161,7 +161,7 @@ static char* b_sem_locker_ipc_name(const char *name)
 
 	const char *prefix = "__bhapi_";
 
-	return b_strdup_printf("%s%s%s", prefix, "_sem_l_", name);
+	return bhapi::strdup_printf("%s%s%s", prefix, "_sem_l_", name);
 }
 
 
@@ -172,7 +172,7 @@ static char* b_sem_event_ipc_name(const char *name)
 
 	const char *prefix = "__bhapi_";
 
-	return b_strdup_printf("%s%s%s", prefix, "_sem_e_", name);
+	return bhapi::strdup_printf("%s%s%s", prefix, "_sem_e_", name);
 }
 
 

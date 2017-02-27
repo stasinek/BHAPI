@@ -235,7 +235,7 @@ EDFBGraphicsDrawable::StrokePoint(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_dfb_stroke_point(dfbSurface, dc, x, y);
+	return b_dfbhapi::stroke_point(dfbSurface, dc, x, y);
 }
 
 
@@ -248,7 +248,7 @@ EDFBGraphicsDrawable::StrokePoints(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_dfb_stroke_points(dfbSurface, dc, pts, count);
+	return b_dfbhapi::stroke_points(dfbSurface, dc, pts, count);
 }
 
 
@@ -262,7 +262,7 @@ EDFBGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_dfb_stroke_points_color(dfbSurface, dc, ptsArrayLists, arrayCount, highColors);
+	return b_dfbhapi::stroke_points_color(dfbSurface, dc, ptsArrayLists, arrayCount, highColors);
 }
 
 
@@ -275,7 +275,7 @@ EDFBGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_dfb_stroke_points_alphas(dfbSurface, dc, pts, alpha, count);
+	return b_dfbhapi::stroke_points_alphas(dfbSurface, dc, pts, alpha, count);
 }
 
 
@@ -288,7 +288,7 @@ EDFBGraphicsDrawable::StrokeLine(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_dfb_stroke_line(dfbSurface, dc, x0, y0, x1, y1);
+	return b_dfbhapi::stroke_line(dfbSurface, dc, x0, y0, x1, y1);
 }
 
 
@@ -301,7 +301,7 @@ EDFBGraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_dfb_stroke_polygon(dfbSurface, dc, pts, count, closed);
+	return b_dfbhapi::stroke_polygon(dfbSurface, dc, pts, count, closed);
 }
 
 
@@ -327,7 +327,7 @@ EDFBGraphicsDrawable::StrokeRect(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_dfb_stroke_rect(dfbSurface, dc, x, y, w, h);
+	return b_dfbhapi::stroke_rect(dfbSurface, dc, x, y, w, h);
 }
 
 
@@ -353,7 +353,7 @@ EDFBGraphicsDrawable::StrokeRects(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_dfb_stroke_rects(dfbSurface, dc, rects, count);
+	return b_dfbhapi::stroke_rects(dfbSurface, dc, rects, count);
 }
 
 
@@ -392,7 +392,7 @@ EDFBGraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_dfb_stroke_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius);
+	return b_dfbhapi::stroke_round_rect(dfbSurface, dc, x, y, w, h, xRadius, yRadius);
 }
 
 
@@ -418,7 +418,7 @@ EDFBGraphicsDrawable::StrokeArc(BGraphicsContext *dc,
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	return b_dfb_stroke_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle);
+	return b_dfbhapi::stroke_arc(dfbSurface, dc, x, y, w, h, startAngle, endAngle);
 }
 
 

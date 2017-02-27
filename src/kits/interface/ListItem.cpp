@@ -292,7 +292,7 @@ BListItem::KeyUp(BView *owner, const char *bytes, b_int32 numBytes)
 StringItem::StringItem(const char *text, b_uint32 outlineLevel, bool expanded)
 	: BListItem(outlineLevel, expanded, 0), fText(NULL)
 {
-	if(text) fText = b_strdup(text);
+	if(text) fText = bhapi::strdup(text);
 }
 
 
@@ -361,7 +361,7 @@ void
 StringItem::SetText(const char *text)
 {
 	if(fText) delete[] fText;
-	fText = (text == NULL ? NULL : b_strdup(text));
+	fText = (text == NULL ? NULL : bhapi::strdup(text));
 }
 
 

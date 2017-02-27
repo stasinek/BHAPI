@@ -30,7 +30,7 @@
 #include "Directory.h"
 #include "Path.h"
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"
 
@@ -93,7 +93,7 @@ BDirectory::SetTo(const char *path)
 	BPath aPath(path, NULL, true);
 	if(aPath.Path() == NULL) return B_ENTRY_NOT_FOUND;
 
-	char *name = b_strdup(aPath.Path());
+	char *name = bhapi::strdup(aPath.Path());
 	if(name == NULL) return B_NO_MEMORY;
 
 	b_status_t retVal = B_FILE_ERROR;
@@ -200,7 +200,7 @@ BDirectory::GetEntry(BEntry *entry) const
 	if(entry == NULL) return B_BAD_VALUE;
 	if(fName == NULL || fDir == NULL) {entry->Unset(); return B_FILE_ERROR;}
 
-	char *name = b_strdup(fName);
+	char *name = bhapi::strdup(fName);
 	if(name == NULL) {entry->Unset(); return B_NO_MEMORY;}
 
 	if(entry->fName != NULL) delete[] entry->fName;
@@ -257,7 +257,7 @@ BDirectory::GetNextEntry(BEntry *entry, bool traverse)
 #endif // S_ISLNK
 		if(aPath.Path() == NULL) continue;
 
-		char *name = b_strdup(aPath.Path());
+		char *name = bhapi::strdup(aPath.Path());
 		if(name == NULL) {retVal = B_NO_MEMORY; break;}
 
 		if(entry->fName != NULL) delete[] entry->fName;
@@ -288,7 +288,7 @@ BDirectory::GetNextEntry(BEntry *entry, bool traverse)
 		BPath aPath(fName, filename, true);
 		if(aPath.Path() == NULL) continue;
 
-		char *name = b_strdup(aPath.Path());
+		char *name = bhapi::strdup(aPath.Path());
 		if(name == NULL) {retVal = B_NO_MEMORY; break;}
 
 		if(entry->fName != NULL) delete[] entry->fName;

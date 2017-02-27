@@ -35,7 +35,7 @@
 #include "../../support/Locker.h"
 #include "../../support/Errors.h"
 #include "../../support/Autolock.h"
-#include "../../support/StringMe.h"
+#include "../../support/String.h"
 #include "../../interface/InterfaceDefs.h"
 #include "../../app/Application.h"
 #include "../../app/AppDefs.h"
@@ -54,7 +54,7 @@ static void b_win32_clipboard_changed()
                                                CF_UNICODETEXT : CF_TEXT);
             if(clipText == NULL) break;
             if(GetVersion() < 0x80000000) // Windows NT/2000/XP
-                str = b_unicode_convert_to_utf8((b_unichar16*)clipText, -1);
+                str = bhapi::unicode_convert_to_utf8((b_unichar16*)clipText, -1);
             else // Windows 95/98
                 str = b_win32_convert_active_to_utf8((char*)clipText, -1);
         }
@@ -117,7 +117,7 @@ static b_filter_result b_win32_clipboard_filter(BMessage *message, BHandler **ta
 
         if(GetVersion() < 0x80000000) // Windows NT/2000/XP
         {
-            b_unichar16*wStr = b_utf8_convert_to_unicode(str.String(), -1);
+            b_unichar16*wStr = bhapi::utf8_convert_to_unicode(str.String(), -1);
             if(wStr)
             {
                 b_int32 len = 0;

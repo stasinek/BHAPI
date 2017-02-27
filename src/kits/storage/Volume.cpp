@@ -84,8 +84,8 @@ inline b_status_t b_set_dev_data(b_dev_data_t *data, const char *name, const cha
 #endif // _WIN32
 #endif // BHAPI_OS_UNIX
 
-	char *fname = (name == NULL ? NULL : b_strdup(name));
-	char *fdir = b_strdup(root_dir);
+	char *fname = (name == NULL ? NULL : bhapi::strdup(name));
+	char *fdir = bhapi::strdup(root_dir);
 
 	if((fname == NULL && !(name == NULL || *name == 0)) || fdir == NULL)
 	{
@@ -220,7 +220,7 @@ BVolume::SetTo(b_dev_t dev)
 			WCHAR wStr[301];
 			bzero(wStr, sizeof(WCHAR) * 301);
 			MultiByteToWideChar(CP_ACP, 0, nameBuf, -1, wStr, 300);
-			char *utf8Name = b_unicode_convert_to_utf8((const b_unichar16*)wStr, -1);
+			char *utf8Name = bhapi::unicode_convert_to_utf8((const b_unichar16*)wStr, -1);
 			if(utf8Name != NULL)
 			{
 				nameStr.SetTo(utf8Name);

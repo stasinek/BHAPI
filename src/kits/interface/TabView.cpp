@@ -29,7 +29,7 @@
 
 #include "TabView.h"
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 
 BTab::BTab(BView *targetView)
 	: fLabel(NULL), fEnabled(true), fFocus(false), fOwner(NULL)
@@ -55,7 +55,7 @@ void
 BTab::SetLabel(const char *label)
 {
 	if(fLabel) delete[] fLabel;
-	fLabel = (label == NULL ? NULL : b_strdup(label));
+	fLabel = (label == NULL ? NULL : bhapi::strdup(label));
 }
 
 

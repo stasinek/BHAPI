@@ -33,7 +33,7 @@
 #undef BHAPI_DEBUG
 #undef BHAPI_WARNING
 #include "Kernel.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -74,7 +74,7 @@ EXPORT_BHAPI void b_debug_log(b_debug_level level, const char *format, va_list a
 	{
 		va_list args;
 		__va_copy(args, ap);
-		buffer = b_strdup_vprintf(format, args);
+		buffer = bhapi::strdup_vprintf(format, args);
 		va_end(args);
 
 		switch(level)
@@ -96,12 +96,12 @@ EXPORT_BHAPI void b_debug_log(b_debug_level level, const char *format, va_list a
 	if(level == DEBUG_ERROR)
 	{
 #ifdef _WIN32
-		char *newLine = b_strdup_printf("%s%s\n", prefix, buffer);
+		char *newLine = bhapi::strdup_printf("%s%s\n", prefix, buffer);
 		if(newLine)
 		{
 			if(GetVersion() < 0x80000000) // Windows NT/2000/XP
 			{
-				b_unichar16*uStr = b_utf8_convert_to_unicode(newLine, -1);
+				b_unichar16*uStr = bhapi::utf8_convert_to_unicode(newLine, -1);
 				if(uStr != NULL)
 				{
 					MessageBoxW(NULL, (WCHAR*)uStr, NULL,
@@ -147,24 +147,24 @@ EXPORT_BHAPI void b_debug_log(b_debug_level level, const char *format, va_list a
 		HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 		while(hStdOut != NULL)
 		{
-			char *newLine = b_strdup_printf("%s%s%s", prefix, buffer, level == DEBUG_OUTPUT ? "" : "\n");
+			char *newLine = bhapi::strdup_printf("%s%s%s", prefix, buffer, level == DEBUG_OUTPUT ? "" : "\n");
 			if(newLine == NULL) break;
 
 			if(level == DEBUG_WARNING) SetConsoleTextAttribute(hStdOut, FOREGROUND_GREEN);
 			if(GetVersion() < 0x80000000) // Windows NT/2000/XP
 			{
-				b_unichar16*uStr = b_utf8_convert_to_unicode(newLine, -1);
+				b_unichar16*uStr = bhapi::utf8_convert_to_unicode(newLine, -1);
 				if(uStr != NULL)
 				{
 					DWORD wrote = 0;
-                    DWORD len = (DWORD)b_unicode_strlen(uStr);
+                    DWORD len = (DWORD)bhapi::unicode_strlen(uStr);
 					const b_unichar16*buf = uStr;
 					while(true)
 					{
 						if(WriteConsoleW(hStdOut, (const void*)buf, len, &wrote, NULL) == 0) break;
 						if(wrote >= len) break;
 						len -= wrote;
-						for(DWORD i = 0; i < wrote; i++) buf = b_unicode_next(buf, NULL);
+						for(DWORD i = 0; i < wrote; i++) buf = bhapi::unicode_next(buf, NULL);
 					}
 					free(uStr);
 				}

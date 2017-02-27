@@ -54,8 +54,12 @@
 #include <string.h> /* for bzero */
 #include <stdio.h>
 #include <ctype.h>
-
 #include <math.h>
+
+#define 	max_c(a, b)   ((a)>(b)?(a):(b))
+// 	Returns the maximum of values a and b. More...
+#define 	min_c(a, b)   ((a)>(b)?(b):(a))
+// 	Returns the minimum of the values a and b. More...
 /* The size of a `int', as computed by sizeof. */
 #define SIZEOF_INT 4
 /* The size of a `long', as computed by sizeof. */
@@ -128,6 +132,28 @@
 typedef unsigned __int32 b_unichar32;
 typedef unsigned __int16 b_unichar16;
 
+typedef __int64     b_thread_id;
+typedef size_t      b_address_t;
+typedef size_t      b_size_t;
+
+typedef	__int8 int8;
+typedef	unsigned __int8 uint8;
+typedef	__int16 int16;
+typedef	unsigned __int16 uint16;
+typedef	__int32 int32;
+typedef	unsigned __int32 uint32;
+typedef	__int64 int64;
+typedef	unsigned __int64 uint64;
+
+typedef	__int8 int8_t;
+typedef	unsigned __int8 uint8_t;
+typedef	__int16 int16_t;
+typedef	unsigned __int16 uint16_t;
+typedef	__int32 int32_t;
+typedef	unsigned __int32 uint32_t;
+typedef	__int64 int64_t;
+typedef	unsigned __int64 uint64_t;
+
 typedef	__int8 b_int8;
 typedef	unsigned __int8 b_uint8;
 typedef	__int16 b_int16;
@@ -137,13 +163,56 @@ typedef	unsigned __int32 b_uint32;
 typedef	__int64 b_int64;
 typedef	unsigned __int64 b_uint64;
 
-typedef b_int32	b_status_t;
-typedef b_uint32	b_type_code;
-typedef b_uint32	b_perform_code;
-typedef b_int64	b_bigtime_t;
-typedef b_int64	b_thread_id;
-typedef size_t	b_address_t;
-typedef size_t	b_size_t;
+typedef __int8      __haiku_int8;
+typedef unsigned __int8     __haiku_uint8;
+typedef __int16     __haiku_int16;
+typedef unsigned __int16    __haiku_uint16;
+typedef __int32     __haiku_int32;
+typedef unsigned __int32    __haiku_uint32;
+typedef __int64     __haiku_int64;
+typedef unsigned __int64    __haiku_uint64;
+
+typedef volatile int8_t 	vint8;
+typedef volatile uint8_t 	vuint8;
+typedef volatile int16_t 	vint16;
+typedef volatile uint16_t 	vuint16;
+typedef volatile int32_t 	vint32;
+typedef volatile uint32_t 	vuint32;
+typedef volatile int64_t 	vint64;
+typedef volatile uint64_t 	vuint64;
+
+typedef volatile long 	vlong;
+typedef volatile int 	vint;
+typedef volatile short 	vshort;
+typedef volatile char 	vchar;
+typedef volatile unsigned long 	vulong;
+typedef volatile unsigned int 	vuint;
+typedef volatile unsigned short 	vushort;
+typedef volatile unsigned char 	vuchar;
+
+typedef unsigned char 	uchar;
+typedef unsigned short 	unichar;
+
+typedef int32_t     __haiku_status_t;
+typedef int32_t     b_status_t;
+typedef int32_t 	status_t;
+// 	Represents one of the status codes defined in Error.h. More...
+typedef int64_t     __haiku_bigtime_t;
+typedef int64_t     b_bigtime_t;
+typedef int64_t 	bigtime_t;
+// 	Represents time. The unit depends on the context of the function. More...
+typedef int64_t 	__haiku_nanotime_t;
+typedef int64_t 	b_nanotime_t;
+typedef int64_t 	nanotime_t;
+// 	Represents time in nanoseconds.
+typedef uint32_t 	__haiku_type_code;
+typedef uint32_t 	b_type_code;
+typedef uint32_t 	type_code;
+// 	Represents a certain type of data. See TypeConstants.h for possible values. More...
+typedef uint32_t 	__haiku_perform_code;
+typedef uint32_t 	b_perform_code;
+typedef uint32_t 	perform_code;
+// 	Defined to support 'hidden' commands or extensions to classes. More..
 
 enum {
     B_ANY_TYPE                  = 'ANYT',
@@ -319,9 +388,106 @@ enum {
     B_SEEK_END,
 };
 
+#define 	B_PRId8   "d"
+#define 	B_PRIi8   "i"
+#define 	B_PRId16   "d"
+#define 	B_PRIi16   "i"
+#define 	B_PRId32   __HAIKU_PRI_PREFIX_32 "d"
+#define 	B_PRIi32   __HAIKU_PRI_PREFIX_32 "i"
+#define 	B_PRId64   __HAIKU_PRI_PREFIX_64 "d"
+#define 	B_PRIi64   __HAIKU_PRI_PREFIX_64 "i"
+#define 	B_PRIu8   "u"
+#define 	B_PRIo8   "o"
+#define 	B_PRIx8   "x"
+#define 	B_PRIX8   "X"
+#define 	B_PRIu16   "u"
+#define 	B_PRIo16   "o"
+#define 	B_PRIx16   "x"
+#define 	B_PRIX16   "X"
+#define 	B_PRIu32   __HAIKU_PRI_PREFIX_32 "u"
+#define 	B_PRIo32   __HAIKU_PRI_PREFIX_32 "o"
+#define 	B_PRIx32   __HAIKU_PRI_PREFIX_32 "x"
+#define 	B_PRIX32   __HAIKU_PRI_PREFIX_32 "X"
+#define 	B_PRIu64   __HAIKU_PRI_PREFIX_64 "u"
+#define 	B_PRIo64   __HAIKU_PRI_PREFIX_64 "o"
+#define 	B_PRIx64   __HAIKU_PRI_PREFIX_64 "x"
+#define 	B_PRIX64   __HAIKU_PRI_PREFIX_64 "X"
+#define 	B_SCNd8   "hhd"
+#define 	B_SCNi8   "hhi"
+#define 	B_SCNd16   "hd"
+#define 	B_SCNi16   "hi"
+#define 	B_SCNd32   __HAIKU_PRI_PREFIX_32 "d"
+#define 	B_SCNi32   __HAIKU_PRI_PREFIX_32 "i"
+#define 	B_SCNd64   __HAIKU_PRI_PREFIX_64 "d"
+#define 	B_SCNi64   __HAIKU_PRI_PREFIX_64 "i"
+#define 	B_SCNu8   "hhu"
+#define 	B_SCNo8   "hho"
+#define 	B_SCNx8   "hhx"
+#define 	B_SCNu16   "hu"
+#define 	B_SCNo16   "ho"
+#define 	B_SCNx16   "hx"
+#define 	B_SCNu32   __HAIKU_PRI_PREFIX_32 "u"
+#define 	B_SCNo32   __HAIKU_PRI_PREFIX_32 "o"
+#define 	B_SCNx32   __HAIKU_PRI_PREFIX_32 "x"
+#define 	B_SCNu64   __HAIKU_PRI_PREFIX_64 "u"
+#define 	B_SCNo64   __HAIKU_PRI_PREFIX_64 "o"
+#define 	B_SCNx64   __HAIKU_PRI_PREFIX_64 "x"
+//
+#define 	B_PRIuSIZE   __HAIKU_PRI_PREFIX_ADDR "u"
+#define 	B_PRIoSIZE   __HAIKU_PRI_PREFIX_ADDR "o"
+#define 	B_PRIxSIZE   __HAIKU_PRI_PREFIX_ADDR "x"
+#define 	B_PRIXSIZE   __HAIKU_PRI_PREFIX_ADDR "X"
+#define 	B_PRIdSSIZE   __HAIKU_PRI_PREFIX_ADDR "d"
+#define 	B_PRIiSSIZE   __HAIKU_PRI_PREFIX_ADDR "i"
+#define 	B_PRIuADDR   __HAIKU_PRI_PREFIX_ADDR "u"
+#define 	B_PRIoADDR   __HAIKU_PRI_PREFIX_ADDR "o"
+#define 	B_PRIxADDR   __HAIKU_PRI_PREFIX_ADDR "x"
+#define 	B_PRIXADDR   __HAIKU_PRI_PREFIX_ADDR "X"
+#define 	B_PRIdOFF       B_PRId64
+#define 	B_PRIiOFF       B_PRIi64
+#define 	B_PRIdDEV       B_PRId32
+#define 	B_PRIiDEV       B_PRIi32
+#define 	B_PRIdINO       B_PRId64
+#define 	B_PRIiINO       B_PRIi64
+#define 	B_PRIdTIME      B_PRId32
+#define 	B_PRIiTIME      B_PRIi32
+
 #ifndef BHAPI_DEBUG__H
 //#include "../kernel/Debug.h"
 #endif
+
+IMPEXP_BHAPI int32 	atomic_add (int32 *value, int32 addValue);
+// 	Atomically add the value of addValue to value. More...
+IMPEXP_BHAPI int64 	atomic_add64 (int64 *value, int64 addValue);
+// 	Atomically add the value of addValue to value. More...
+IMPEXP_BHAPI int32 	atomic_and (int32 *value, int32 andValue);
+// 	Atomically perform a bitwise AND operation of andValue to the variable andValue. More...
+IMPEXP_BHAPI int64 	atomic_and64 (int64 *value, int64 andValue);
+// 	Atomically perform a bitwise AND operation of andValue to the variable andValue. More...
+IMPEXP_BHAPI int32 	atomic_get (int32 *value);
+// 	Atomically return the value of value. More...
+IMPEXP_BHAPI int64 	atomic_get64 (int64 *value);
+// 	Atomically return the value of value. More...
+IMPEXP_BHAPI int32 	atomic_get_and_set (int32 *value, int32 newValue);
+// 	Atomically set the variable value to newvalue and return the old value. More...
+IMPEXP_BHAPI int64 	atomic_get_and_set64 (int64 *value, int64 newValue);
+// 	Atomically set the variable value to newvalue and return the old value. More...
+IMPEXP_BHAPI int32 	atomic_or (int32 *value, int32 orValue);
+// 	Atomically perform a bitwise OR operation of orValue to the variable andValue. More...
+IMPEXP_BHAPI int64 	atomic_or64 (int64 *value, int64 orValue);
+// 	Atomically perform a bitwise OR operation of orValue to the variable andValue. More...
+IMPEXP_BHAPI void 	atomic_set (int32 *value, int32 newValue);
+// 	Atomically set the variable value to newvalue. More...
+IMPEXP_BHAPI void 	atomic_set64 (int64 *value, int64 newValue);
+// 	Atomically set the variable value to newvalue. More...
+IMPEXP_BHAPI int32 	atomic_test_and_set (int32 *value, int32 newValue, int32 testAgainst);
+// 	Atomically set the variable value to newValue if the current value is testAgainst. More...
+IMPEXP_BHAPI int64 	atomic_test_and_set64 (int64 *value, int64 newValue, int64 testAgainst);
+// 	Atomically set the variable value to newValue if the current value is testAgainst. More...
+IMPEXP_BHAPI void * 	get_stack_frame (void);
+// 	Internal function.
+
+IMPEXP_BHAPI const char * B_EMPTY_STRING;
 
 #endif /* BHAPI_SUPPORT_DEFS__H */
 

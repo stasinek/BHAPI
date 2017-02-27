@@ -29,7 +29,7 @@
 
 #include "Path.h"
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/Errors.h"
 
 #ifdef _WIN32
@@ -215,7 +215,7 @@ BPath::BPath(const char *dir, const char *leaf, bool normalize)
 BPath::BPath(const BPath &path)
 	: fPath(NULL)
 {
-	if(path.fPath != NULL) fPath = b_strdup(path.fPath);
+	if(path.fPath != NULL) fPath = bhapi::strdup(path.fPath);
 }
 
 
@@ -248,7 +248,7 @@ BPath::SetTo(const char *dir, const char *leaf, bool normalize)
 
 	if(str.Length() <= 0) return B_BAD_VALUE;
 
-	char *aPath = b_strdup(str.String());
+	char *aPath = bhapi::strdup(str.String());
 	if(aPath == NULL) return B_NO_MEMORY;
 
 	if(fPath != NULL) delete[] fPath;
@@ -364,7 +364,7 @@ BPath::operator=(const BPath &path)
 {
 	if(fPath != NULL) delete[] fPath;
 	if(path.fPath != NULL)
-		fPath = b_strdup(path.fPath);
+		fPath = bhapi::strdup(path.fPath);
 	else
 		fPath = NULL;
 	return *this;

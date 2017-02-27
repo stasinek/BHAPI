@@ -30,7 +30,7 @@
 #include "PrivateApplication.h"
 
 #include "../kernel/OS.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../kernel/Debug.h"
 #include "../support/Errors.h"
 

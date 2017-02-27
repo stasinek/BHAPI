@@ -31,7 +31,7 @@
 #include "TextEditable.h"
 #include "Window.h"
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../app/Application.h"
 #include "../app/AppDefs.h"
 #include "../support/Errors.h"
@@ -50,7 +50,7 @@ BTextEditable::BTextEditable(BRect frame,
 	fMargins = BRect(0, 0, 0, 0);
 	if(initial_text)
 	{
-		fText = b_strdup(initial_text);
+		fText = bhapi::strdup(initial_text);
 		if(fText)
 		{
 			BFont font;
@@ -165,8 +165,8 @@ BTextEditable::SetText(const char *str)
 {
 	if(fText) delete[] fText;
 
-	const char *end = b_utf8_at(str, min_c(b_utf8_strlen(str), fMaxChars), NULL);
-    fText = (str ? b_strdup_dirty(str, end == NULL ? -1 : (end - str)) : NULL);
+	const char *end = bhapi::utf8_at(str, min_c(bhapi::utf8_strlen(str), fMaxChars), NULL);
+    fText = (str ? bhapi::strdup_dirty(str, end == NULL ? -1 : (end - str)) : NULL);
 
 	if(fCharWidths) delete[] fCharWidths;
 	fCount = 0; fCharWidths = NULL;
@@ -211,13 +211,13 @@ BTextEditable::DuplicateText(b_int32 startPos, b_int32 endPos)
 	if(endPos < 0 || endPos >= fCount) endPos = fCount - 1;
 	if(endPos < startPos) return NULL;
 
-	const char* start = b_utf8_at(fText, startPos, NULL);
+	const char* start = bhapi::utf8_at(fText, startPos, NULL);
 	b_uint8 endLen = 0;
-	const char* end = b_utf8_at(fText, endPos, &endLen);
+	const char* end = bhapi::utf8_at(fText, endPos, &endLen);
 
 	if(start == NULL || (end == NULL || endLen == 0)) return NULL;
 
-	return b_strndup(start, end - start + (b_int32)endLen);
+	return bhapi::strndup(start, end - start + (b_int32)endLen);
 }
 
 
@@ -231,7 +231,7 @@ BTextEditable::InsertText(const char *text, b_int32 nChars, b_int32 position)
 	b_int32 length = 0;
 	b_uint8 chLen = 0;
 	const char* str = NULL;
-	if(!(nChars < 0 || (str = b_utf8_at(text, nChars - 1, &chLen)) == NULL || chLen == 0)) length = (b_int32)chLen + (str - text);
+	if(!(nChars < 0 || (str = bhapi::utf8_at(text, nChars - 1, &chLen)) == NULL || chLen == 0)) length = (b_int32)chLen + (str - text);
 	else length = (b_int32)strlen(text);
 
 	if(length <= 0) return;
@@ -247,7 +247,7 @@ BTextEditable::InsertText(const char *text, b_int32 nChars, b_int32 position)
 		if(position < fCount)
 		{
 			b_uint8 len = 0;
-			str = b_utf8_at(fText, position, &len);
+			str = bhapi::utf8_at(fText, position, &len);
 			if(!(str == NULL || len == 0)) pos = (str - fText);
 		}
 
@@ -268,9 +268,9 @@ BTextEditable::RemoveText(b_int32 startPos, b_int32 endPos)
 	if(endPos < 0 || endPos >= fCount) endPos = fCount - 1;
 	if(endPos < startPos) return;
 
-	const char* start = b_utf8_at(fText, startPos, NULL);
+	const char* start = bhapi::utf8_at(fText, startPos, NULL);
 	b_uint8 endLen = 0;
-	const char* end = b_utf8_at(fText, endPos, &endLen);
+	const char* end = bhapi::utf8_at(fText, endPos, &endLen);
 
 	if(start == NULL || (end == NULL || endLen == 0)) return;
 
@@ -1071,7 +1071,7 @@ BTextEditable::KeyDown(const char *bytes, b_int32 numBytes)
 	{
 		if(IsEditable())
 		{
-			b_int32 len = b_utf8_strlen(bytes);
+			b_int32 len = bhapi::utf8_strlen(bytes);
 			if(len > 0)
 			{
 				if(IsSelectable() && IsSelected())
@@ -1194,7 +1194,7 @@ BTextEditable::GetCharLocation(b_int32 pos, float *x, float *y, BFont *tFont)
 
 		if(fPosition > 0 && fPosition < fCount)
 		{
-			const char *p = b_utf8_at((const char*)fText, fPosition, NULL);
+			const char *p = bhapi::utf8_at((const char*)fText, fPosition, NULL);
 			if(p != NULL)
 			{
 				BString str;
@@ -1217,7 +1217,7 @@ BTextEditable::GetCharLocation(b_int32 pos, float *x, float *y, BFont *tFont)
 
 	if(pos > 0 && pos < fCount)
 	{
-		const char *p = b_utf8_at((const char*)fText, pos, NULL);
+		const char *p = bhapi::utf8_at((const char*)fText, pos, NULL);
 		if(p != NULL)
 		{
 			BString str;
@@ -1296,7 +1296,7 @@ BTextEditable::_StringWidth(const BFont &font, const char *str) const
 	if(fTypingHidden == 0x00) return font.StringWidth(str);
 
 	BString aStr;
-	aStr.Append(*((char*)&fTypingHidden), b_utf8_strlen(str));
+	aStr.Append(*((char*)&fTypingHidden), bhapi::utf8_strlen(str));
 	return font.StringWidth(aStr);
 }
 
@@ -1308,7 +1308,7 @@ BTextEditable::_CharWidths(const BFont &font, const char *str, b_int32 *count) c
 	if(fTypingHidden == 0x00) return font.CharWidths(str, count);
 
 	BString aStr;
-	aStr.Append(*((char*)&fTypingHidden), b_utf8_strlen(str));
+	aStr.Append(*((char*)&fTypingHidden), bhapi::utf8_strlen(str));
 	return font.CharWidths(aStr.String(), count);
 }
 
@@ -1325,7 +1325,7 @@ BTextEditable::_DrawString(const char *str, BPoint location)
 	else
 	{
 		BString aStr;
-		aStr.Append(*((char*)&fTypingHidden), b_utf8_strlen(str));
+		aStr.Append(*((char*)&fTypingHidden), bhapi::utf8_strlen(str));
 		DrawString(aStr.String(), location);
 	}
 }

@@ -32,7 +32,7 @@
 #include "Window.h"
 #include "MenuBar.h"
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/ClassInfo.h"
 
 BMenuField::BMenuField(BRect frame, const char *name,
@@ -43,7 +43,7 @@ BMenuField::BMenuField(BRect frame, const char *name,
 	  fLabel(NULL), fMenu(NULL)
 {
 	fFixedSize = fixedSize;
-	if(label != NULL) fLabel = b_strdup(label);
+	if(label != NULL) fLabel = bhapi::strdup(label);
 	AddChild(fMenuBar = new BMenuBar(frame, NULL, B_FOLLOW_NONE, B_ITEMS_IN_ROW, !fFixedSize));
 	fMenuBar->SetEventMask(0);
 	fMenuBar->SetBorder(B_BORDER_FRAME);
@@ -69,7 +69,7 @@ void
 BMenuField::SetLabel(const char *label)
 {
 	if(fLabel != NULL) delete[] fLabel;
-	fLabel = (label == NULL ? NULL : b_strdup(label));
+	fLabel = (label == NULL ? NULL : bhapi::strdup(label));
 	Invalidate();
 }
 

@@ -29,7 +29,7 @@
 
 #include "StreamIO.h"
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../private/StandardIO.h"
 #include "../kernel/Debug.h"
 #include "../support/Errors.h"

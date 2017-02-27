@@ -313,7 +313,7 @@ BFilePanelListItem::BFilePanelListItem(const char *path, BFilePanelView *panel_v
 		BString name;
 		vol.GetName(&name);
 		fFlags = 2;
-		fLeaf = b_strdup(name.String());
+		fLeaf = bhapi::strdup(name.String());
 	}
 	else
 	{
@@ -321,7 +321,7 @@ BFilePanelListItem::BFilePanelListItem(const char *path, BFilePanelView *panel_v
 		fFlags = (aEntry.IsDirectory() ? 1 : 0);
 
 #ifndef BHAPI_OS_WIN32
-		fLeaf = b_strdup(fPath.Leaf());
+		fLeaf = bhapi::strdup(fPath.Leaf());
 #else
 		fLeaf = b_win32_convert_active_to_utf8(fPath.Leaf(), -1);
 #endif
@@ -729,7 +729,7 @@ BFilePanelView::AddColumn(const char *name, float width,
 {
 	struct column_data *data = new struct column_data;
 
-	data->name = b_strdup(name);
+	data->name = bhapi::strdup(name);
 	data->width = width;
 	data->draw_func = draw_func;
 	data->sort_func = sort_func;

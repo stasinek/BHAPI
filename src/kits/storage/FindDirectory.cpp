@@ -29,7 +29,7 @@
 
 #include "FindDirectory.h"
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/Errors.h"
 
 #ifdef __BEOS__

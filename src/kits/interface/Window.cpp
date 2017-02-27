@@ -36,7 +36,7 @@
 #include "layout/Layout.h"
 
 #include "../support/ClassInfo.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/Errors.h"
 #include "../kernel/Kernel.h"
 #include "../kernel/Debug.h"
@@ -187,7 +187,7 @@ BWindow::InitSelf(BRect frame, const char *title, b_window_look look, b_window_f
 	fWindowFlags = flags;
 	fWindowLook = look;
 	fWindowFeel = feel;
-	fWindowTitle = title ? b_strdup(title) : NULL;
+	fWindowTitle = title ? bhapi::strdup(title) : NULL;
 	fWindow->SetFlags(fWindowFlags);
 	fWindow->SetLook(fWindowLook);
 	fWindow->SetFeel(fWindowFeel);
@@ -1950,7 +1950,7 @@ BWindow::SetTitle(const char *title)
 	if(str != fWindowTitle)
 	{
 		if(fWindowTitle) delete[] fWindowTitle;
-		fWindowTitle = b_strdup(str.String());
+		fWindowTitle = bhapi::strdup(str.String());
 		if(fWindow) fWindow->SetTitle(fWindowTitle);
 	}
 }

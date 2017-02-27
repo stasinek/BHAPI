@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../app/AppDefs.h"
 #include "../app/Message.h"
 
@@ -38,8 +38,8 @@ BStatusBar::BStatusBar(BRect frame, const char *name, const char *label, const c
 	  fLabel(NULL), fTrailingLabel(NULL), fText(NULL), fTrailingText(NULL),
 	  fBarHeight(16), fMaxValue(100), fCurrentValue(0)
 {
-	if(label) fLabel = b_strdup(label);
-	if(trailing_label) fTrailingLabel = b_strdup(trailing_label);
+	if(label) fLabel = bhapi::strdup(label);
+	if(trailing_label) fTrailingLabel = bhapi::strdup(trailing_label);
 }
 
 
@@ -63,7 +63,7 @@ void
 BStatusBar::SetText(const char *str)
 {
 	if(fText) delete[] fText;
-	fText = (str == NULL ? NULL : b_strdup(str));
+	fText = (str == NULL ? NULL : bhapi::strdup(str));
 }
 
 
@@ -71,7 +71,7 @@ void
 BStatusBar::SetTrailingText(const char *str)
 {
 	if(fTrailingText) delete[] fTrailingText;
-	fTrailingText = (str == NULL ? NULL : b_strdup(str));
+	fTrailingText = (str == NULL ? NULL : bhapi::strdup(str));
 }
 
 
@@ -100,10 +100,10 @@ BStatusBar::Reset(const char *label, const char *trailing_label)
 	SetTo(0, "", "");
 
 	if(fLabel) delete[] fLabel;
-	fLabel = (label == NULL ? NULL : b_strdup(label));
+	fLabel = (label == NULL ? NULL : bhapi::strdup(label));
 
 	if(fTrailingLabel) delete[] fTrailingLabel;
-	fTrailingLabel = (trailing_label == NULL ? NULL : b_strdup(trailing_label));
+	fTrailingLabel = (trailing_label == NULL ? NULL : bhapi::strdup(trailing_label));
 }
 
 
@@ -117,13 +117,13 @@ BStatusBar::SetTo(float value, const char *text, const char *trailing_text)
 	if(text)
 	{
 		if(fText) delete[] fText;
-		fText = (strlen(text) > 0 ? b_strdup(text) : NULL);
+		fText = (strlen(text) > 0 ? bhapi::strdup(text) : NULL);
 	}
 
 	if(trailing_text)
 	{
 		if(fTrailingText) delete[] fTrailingText;
-		fTrailingText = (strlen(trailing_text) > 0 ? b_strdup(trailing_text) : NULL);
+		fTrailingText = (strlen(trailing_text) > 0 ? bhapi::strdup(trailing_text) : NULL);
 	}
 }
 

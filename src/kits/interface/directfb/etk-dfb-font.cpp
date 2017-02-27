@@ -91,7 +91,7 @@ EDFBFont::EDFBFont(EDFBGraphicsEngine *dfbEngine, const char *filename)
 	}
 
 	BPath aPath(filename);
-	if(aPath.Path() != NULL) fFilename = b_strdup(aPath.Path());
+	if(aPath.Path() != NULL) fFilename = bhapi::strdup(aPath.Path());
 	SetFamily(aPath.Leaf() ? aPath.Leaf() : "DFB-Default");
 	SetStyle("Regular");
 
@@ -205,7 +205,7 @@ EDFBFont::StringWidth(const char *string, float size, float spacing, float shear
 	float delta = (float)ceil((double)(spacing * size));
 
 	b_uint8 bytes = 0;
-	const char *str = b_utf8_at(string, 0, &bytes);
+	const char *str = bhapi::utf8_at(string, 0, &bytes);
 	const char *tmp = str;
 	while(!(tmp == NULL || bytes == 0 || (size_t)(tmp - string) > (size_t)length - (size_t)bytes))
 	{
@@ -215,7 +215,7 @@ EDFBFont::StringWidth(const char *string, float size, float spacing, float shear
 		fDFBFont->GetStringWidth(fDFBFont, aStr.String(), aStr.Length(), &bWidth);
 
 		width += (float)(bWidth > 0 ? bWidth : height) + (tmp == str ? 0.f : delta);
-		tmp = b_utf8_next(tmp, &bytes);
+		tmp = bhapi::utf8_next(tmp, &bytes);
 	}
 
 	return width;
@@ -290,7 +290,7 @@ EDFBFont::RenderString(BHandler *_view, const char *string, float size, float sp
 	pix->dfbSurface->SetFont(pix->dfbSurface, fDFBFont);
 
 	b_uint8 bytes = 0;
-	const char *str = b_utf8_at(string, 0, &bytes);
+	const char *str = bhapi::utf8_at(string, 0, &bytes);
 	const char *tmp = str;
 	while(!(tmp == NULL || bytes == 0 || (size_t)(tmp - string) > (size_t)length - (size_t)bytes))
 	{
@@ -321,7 +321,7 @@ EDFBFont::RenderString(BHandler *_view, const char *string, float size, float sp
 		pt.x += (float)(bWidth > 0 ? bWidth : height) + delta;
 		width += (float)(bWidth > 0 ? bWidth : height) + (tmp == str ? 0.f : delta);
 
-		tmp = b_utf8_next(tmp, &bytes);
+		tmp = bhapi::utf8_next(tmp, &bytes);
 	}
 
 	pix->dfbSurface->SetFont(pix->dfbSurface, NULL);

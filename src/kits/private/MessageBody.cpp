@@ -30,7 +30,7 @@
 #include "MessageBody.h"
 #include "Memory.h"
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../kernel/Debug.h"
 
 class LOCAL_BHAPI BMessageNode
@@ -58,7 +58,7 @@ private:
 
 
 BMessageNode::BMessageNode(const char *name)
-	: fName(b_strdup(name)), fType((b_type_code)0)
+	: fName(bhapi::strdup(name)), fType((b_type_code)0)
 {
 }
 

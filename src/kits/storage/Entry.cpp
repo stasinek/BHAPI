@@ -30,7 +30,7 @@
 #include "Entry.h"
 #include "Directory.h"
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"
 
@@ -128,7 +128,7 @@ BEntry::SetTo(const char *dir, const char *leaf, bool traverse)
 
 	// TODO: traverse
 
-	char *name = b_strdup(str.String());
+	char *name = bhapi::strdup(str.String());
 	if(name == NULL) return B_NO_MEMORY;
 
 	if(fName != NULL) delete[] fName;
@@ -486,7 +486,7 @@ BEntry&
 BEntry::operator=(const BEntry &entry)
 {
 	if(fName != NULL) delete[] fName;
-	fName = b_strdup(entry.fName);
+	fName = bhapi::strdup(entry.fName);
 	return *this;
 }
 

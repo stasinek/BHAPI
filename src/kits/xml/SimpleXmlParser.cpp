@@ -29,7 +29,7 @@
 
 #include "SimpleXmlParser.h"
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/StringArray.h"
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"
@@ -45,8 +45,8 @@ typedef struct b_xml_attribute {
 BSimpleXmlNode::BSimpleXmlNode(const char *name, const char *content)
 	: fName(NULL), fContent(NULL), fSuperNode(NULL)
 {
-	if(name) fName = b_strdup(name);
-	if(content) fContent = b_strdup(content);
+	if(name) fName = bhapi::strdup(name);
+	if(content) fContent = bhapi::strdup(content);
 }
 
 
@@ -142,7 +142,7 @@ void
 BSimpleXmlNode::SetName(const char *name)
 {
 	if(fName) delete[] fName;
-	fName = (name == NULL ? NULL : b_strdup(name));
+	fName = (name == NULL ? NULL : bhapi::strdup(name));
 }
 
 
@@ -150,7 +150,7 @@ void
 BSimpleXmlNode::SetContent(const char *content)
 {
 	if(fContent) delete[] fContent;
-	fContent = (content == NULL ? NULL : b_strdup(content));
+	fContent = (content == NULL ? NULL : bhapi::strdup(content));
 }
 
 
@@ -164,7 +164,7 @@ BSimpleXmlNode::AddAttribute(const char *name, const char *content, bool replace
 		if(replace_content == false) return false;
 		b_xml_attribute* attr = (b_xml_attribute*)fAttributes.ItemAt(index);
 		if(attr->content) delete[] attr->content;
-		attr->content = (content == NULL ? NULL : b_strdup(content));
+		attr->content = (content == NULL ? NULL : bhapi::strdup(content));
 		return true;
 	}
 
@@ -177,8 +177,8 @@ BSimpleXmlNode::AddAttribute(const char *name, const char *content, bool replace
 		return false;
 	}
 
-	attr->name = b_strdup(name);
-	attr->content = (content == NULL ? NULL : b_strdup(content));
+	attr->name = bhapi::strdup(name);
+	attr->content = (content == NULL ? NULL : bhapi::strdup(content));
 
 	return true;
 }

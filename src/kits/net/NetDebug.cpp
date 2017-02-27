@@ -31,7 +31,7 @@
 
 #include "../support/Autolock.h"
 #include "../support/SimpleLocker.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -68,7 +68,7 @@ BNetDebug::Debug(const char *format, ...)
 	char *buffer = NULL;
 
 	va_start(args, format);
-	buffer = b_strdup_vprintf(format, args);
+	buffer = bhapi::strdup_vprintf(format, args);
 	va_end(args);
 
 	if(buffer == NULL) return;

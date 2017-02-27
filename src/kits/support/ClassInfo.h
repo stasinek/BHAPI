@@ -38,10 +38,10 @@
 
 #include <typeinfo>
 
-#define b_class_name(ptr)		(ptr ? (typeid(*(ptr))).name() : (const char*)NULL)
-#define b_cast_as(ptr, class)		(ptr ? dynamic_cast<class*>(ptr) : (class*)NULL)
-#define b_is_kind_of(ptr, class)	(ptr ? b_cast_as(ptr, class) != NULL : false)
-#define b_is_instance_of(ptr, class)	(ptr ? typeid(*(ptr)) == typeid(class) : false)
+#define class_name(ptr)		(ptr ? (typeid(*(ptr))).name() : (const char*)NULL)
+#define cast_as(ptr, class)		(ptr ? dynamic_cast<class*>(ptr) : (class*)NULL)
+#define is_kind_of(ptr, class)	(ptr ? b_cast_as(ptr, class) != NULL : false)
+#define is_instance_of(ptr, class)	(ptr ? typeid(*(ptr)) == typeid(class) : false)
 
 #endif /* __cplusplus */
 

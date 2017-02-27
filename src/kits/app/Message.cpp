@@ -34,7 +34,7 @@
 #include "../kernel/Debug.h"
 #include "../private/Token.h"
 #include "../support/StreamIO.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/Errors.h"
 #include "../kernel/OS.h"
 #include "../interface/Point.h"
@@ -880,7 +880,7 @@ BMessage::Rename(const char *old_entry, const char *new_entry)
 	ldata = _find_list(&fObjectsList, old_entry);
 	if(!ldata) return false;
 
-	char *newName = b_strdup(new_entry);
+	char *newName = bhapi::strdup(new_entry);
 	if(!newName) return false;
 
 	delete[] ldata->name;
@@ -931,7 +931,7 @@ BMessage::AddData(const char *name, b_type_code type, const void *data, size_t n
 		type_list_data *tldata = NULL;
 
 		if((ldata = new list_data) != NULL)
-			if((ldata->name = b_strdup(name)) != NULL)
+			if((ldata->name = bhapi::strdup(name)) != NULL)
 				if((tldata = new type_list_data) != NULL)
 				{
 					tldata->type = type;

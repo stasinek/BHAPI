@@ -522,7 +522,7 @@ BTextView::OffsetAt(BPoint pt, bool visible, bool utf8) const
 		if(pt.x > start)
 		{
 			b_uint8 nbytes;
-			const char *str = b_utf8_at(fText.String() + curLineOffset, 0, &nbytes);
+			const char *str = bhapi::utf8_at(fText.String() + curLineOffset, 0, &nbytes);
 			const char *tmp = NULL;
 
 			float xStart, xEnd;
@@ -530,7 +530,7 @@ BTextView::OffsetAt(BPoint pt, bool visible, bool utf8) const
 
 			if(line->array == NULL || line->array->count <= 0)
 			{
-				for(tmp = str; !(tmp == NULL || tmp - str > line->length); tmp = b_utf8_next(tmp, &nbytes))
+				for(tmp = str; !(tmp == NULL || tmp - str > line->length); tmp = bhapi::utf8_next(tmp, &nbytes))
 				{
 					if(tmp != str) xStart = xEnd + b_plain_font->Spacing() * b_plain_font->Size();
 					xEnd = xStart + _StringWidth(*b_plain_font, tmp, (b_int32)nbytes);
@@ -545,11 +545,11 @@ BTextView::OffsetAt(BPoint pt, bool visible, bool utf8) const
 				BFont curFont(curRun->font);
 
 				bool found = false;
-				const char *aStr = b_utf8_at(str + curRun->offset, 0, &nbytes);
+				const char *aStr = bhapi::utf8_at(str + curRun->offset, 0, &nbytes);
 
 				for(tmp = aStr; !(tmp == NULL || tmp - str > line->length ||
 					(nextRun == NULL ? false : tmp - str >= nextRun->offset));
-				    tmp = b_utf8_next(tmp, &nbytes))
+				    tmp = bhapi::utf8_next(tmp, &nbytes))
 				{
 					if(tmp != aStr) xStart = xEnd + curFont.Spacing() * curFont.Size();
 					xEnd = xStart + _StringWidth(curFont, tmp, (b_int32)nbytes);
@@ -570,7 +570,7 @@ BTextView::OffsetAt(BPoint pt, bool visible, bool utf8) const
 			retVal += ((tmp == NULL || tmp - str > line->length) ? line->length : tmp - str);
 		}
 
-		return(utf8 ? b_utf8_strlen_etc(fText.String(), retVal) : retVal);
+		return(utf8 ? bhapi::utf8_strlen_etc(fText.String(), retVal) : retVal);
 	}
 
 	return -1;
@@ -589,7 +589,7 @@ BTextView::OffsetAt(b_int32 a_line, bool utf8) const
         lineOffset += lline->length + 1;
 	}
 
-	return(utf8 ? b_utf8_strlen_etc(fText.String(), lineOffset) : lineOffset);
+	return(utf8 ? bhapi::utf8_strlen_etc(fText.String(), lineOffset) : lineOffset);
 }
 
 
@@ -896,7 +896,7 @@ BTextView::SetRunArray(b_int32 startPos, b_int32 endPos, const b_text_run_array 
 		{
 			const b_text_run *run = &(runs->runs[k]);
 			b_int32 aOffset = run->offset;
-			if(aOffset > 0 && utf8) aOffset = b_utf8_at(start, aOffset, NULL) - start;
+			if(aOffset > 0 && utf8) aOffset = bhapi::utf8_at(start, aOffset, NULL) - start;
 			if(aOffset < 0 || (aOffset += startPos) >= endPos) continue;
 
 			b_int32 requestCount = (fRunArray ? fRunArray->count + 1 : 1);
@@ -979,7 +979,7 @@ BTextView::RunArray(b_int32 _startPos, b_int32 endPos, b_int32 *length, bool utf
 
 		b_text_run *destRun = &(retRuns->runs[retRuns->count++]);
 		memcpy(destRun, curRun, sizeof(b_text_run));
-		if(utf8) destRun->offset = b_utf8_strlen_etc(fText.String(), destRun->offset);
+		if(utf8) destRun->offset = bhapi::utf8_strlen_etc(fText.String(), destRun->offset);
 		destRun->offset = max_c(destRun->offset - _startPos, 0);
 	}
 
@@ -1001,7 +1001,7 @@ BTextView::RunArray(b_int32 _startPos, b_int32 endPos, b_int32 *length, bool utf
 void
 BTextView::Insert(const char *text, const b_text_run_array *runs, bool utf8)
 {
-	if(text != NULL) Insert(fSelectStart, text, (utf8 ? b_utf8_strlen(text) : strlen(text)), runs, utf8);
+	if(text != NULL) Insert(fSelectStart, text, (utf8 ? bhapi::utf8_strlen(text) : strlen(text)), runs, utf8);
 }
 
 
@@ -1034,7 +1034,7 @@ BTextView::InsertText(const char *start, b_int32 length, b_int32 offset, const b
 	if(offset < 0) offset = (utf8 ? fText.CountChars() : fText.Length());
 
 	const char *end = NULL;
-	if(length > 0) end = (utf8 ? b_utf8_at(start, length, NULL) : ((size_t)length >= strlen(start) ? NULL : start + length));
+	if(length > 0) end = (utf8 ? bhapi::utf8_at(start, length, NULL) : ((size_t)length >= strlen(start) ? NULL : start + length));
 	length = (end == NULL ? strlen(start) : (end - start));
 
 	if(utf8) offset = (offset < fText.CountChars() ? (fText.CharAt(offset, NULL) - fText.String()) : fText.Length());
@@ -1078,8 +1078,8 @@ BTextView::InsertText(const char *start, b_int32 length, b_int32 offset, const b
 	// TODO: not all lines
 	if(runs)
 	{
-		b_int32 aOffset = (utf8 ? b_utf8_strlen_etc(fText.String(), offset) : offset);
-		b_int32 aLen = (utf8 ? b_utf8_strlen_etc(fText.String() + offset, length) : length);
+		b_int32 aOffset = (utf8 ? bhapi::utf8_strlen_etc(fText.String(), offset) : offset);
+		b_int32 aLen = (utf8 ? bhapi::utf8_strlen_etc(fText.String() + offset, length) : length);
 		SetRunArray(aOffset, aOffset + aLen, runs, utf8);
 	}
 	else
@@ -1098,7 +1098,7 @@ void
 BTextView::SetText(const char *text, const b_text_run_array *runs, bool utf8)
 {
 	Delete(0, -1, false);
-	if(text != NULL) Insert(0, text, (utf8 ? b_utf8_strlen(text) : strlen(text)), runs, utf8);
+	if(text != NULL) Insert(0, text, (utf8 ? bhapi::utf8_strlen(text) : strlen(text)), runs, utf8);
 	Invalidate();
 }
 
@@ -1429,8 +1429,8 @@ BTextView::GetSelection(b_int32 *startPos, b_int32 *endPos, bool utf8) const
 
 	if(isSelected)
 	{
-		if(startPos) *startPos = (utf8 ? b_utf8_strlen_etc(fText.String(), fSelectStart) : fSelectStart);
-		if(endPos) *endPos = (utf8 ? b_utf8_strlen_etc(fText.String(), fSelectEnd) : fSelectEnd);
+		if(startPos) *startPos = (utf8 ? bhapi::utf8_strlen_etc(fText.String(), fSelectStart) : fSelectStart);
+		if(endPos) *endPos = (utf8 ? bhapi::utf8_strlen_etc(fText.String(), fSelectEnd) : fSelectEnd);
 	}
 	else
 	{
@@ -1744,7 +1744,7 @@ BTextView::FloorPosition(b_int32 *pos)
 	const char *tmp = fText.String() + (*pos);
 	while(*pos > 0)
 	{
-		if(b_utf8_is_token(tmp--)) break;
+		if(bhapi::utf8_is_token(tmp--)) break;
 		(*pos) -= 1;
 	}
 }
@@ -1765,7 +1765,7 @@ BTextView::CeilPosition(b_int32 *pos)
 	const char *tmp = fText.String() + (*pos);
 	while(*pos < fText.Length())
 	{
-		if(b_utf8_is_token(tmp++)) break;
+		if(bhapi::utf8_is_token(tmp++)) break;
 		(*pos) += 1;
 	}
 }
@@ -1801,7 +1801,7 @@ BTextView::SetPosition(b_int32 pos, bool response, bool utf8)
 			// TODO: speed up when utf8 mode
 			if(utf8)
 				currentCursor = fText.CharAt(pos, NULL) -
-						fText.CharAt(b_utf8_strlen_etc(fText.String(), lineOffset), NULL);
+						fText.CharAt(bhapi::utf8_strlen_etc(fText.String(), lineOffset), NULL);
 			else
 				currentCursor = pos - lineOffset;
 		}
@@ -1830,9 +1830,9 @@ BTextView::Position(bool utf8, b_int32 *lineOffset) const
 		b_text_line *line = (b_text_line*)fLines.ItemAt(i);
 		if(i == fCurrentLine)
 		{
-			if(lineOffset) *lineOffset = (utf8 ? b_utf8_strlen_etc(fText.String(), pos) : pos);
+			if(lineOffset) *lineOffset = (utf8 ? bhapi::utf8_strlen_etc(fText.String(), pos) : pos);
 			pos += min_c(line->length, fCursor);
-			return(utf8 ? b_utf8_strlen_etc(fText.String(), pos) : pos);
+			return(utf8 ? bhapi::utf8_strlen_etc(fText.String(), pos) : pos);
 		}
 		pos += line->length + 1;
 	}
@@ -2510,7 +2510,7 @@ BTextView::_StringWidth(const BFont &font, const char *str, b_int32 length) cons
 	if(fTypingHidden == 0x00) return font.StringWidth(str, length, fTabWidth);
 
 	BString aStr;
-	aStr.Append(*((char*)&fTypingHidden), b_utf8_strlen_etc(str, length));
+	aStr.Append(*((char*)&fTypingHidden), bhapi::utf8_strlen_etc(str, length));
 	return font.StringWidth(aStr.String(), aStr.Length(), 0);
 }
 
@@ -2529,7 +2529,7 @@ BTextView::_DrawString(const BFont &font, const char *str, BPoint location, b_in
 	else
 	{
 		BString aStr;
-		aStr.Append(*((char*)&fTypingHidden), b_utf8_strlen_etc(str, length));
+		aStr.Append(*((char*)&fTypingHidden), bhapi::utf8_strlen_etc(str, length));
 		DrawString(aStr.String(), location, aStr.Length(), 0);
 	}
 }

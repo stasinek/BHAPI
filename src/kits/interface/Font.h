@@ -31,7 +31,7 @@
 #define BHAPI_FONT__H
 
 #include "../support/SupportDefs.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 
 #define B_FONT_FAMILY_LENGTH	127
 #define B_FONT_STYLE_LENGTH	63

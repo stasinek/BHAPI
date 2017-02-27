@@ -48,7 +48,6 @@ SOURCES += bhapi.cpp \
     src/kits/support/DataIO.cpp \
     src/kits/support/Flattenable.cpp \
     src/kits/support/Locker.cpp \
-    src/kits/support/StringMe.cpp \
     src/kits/support/List.cpp \
     src/kits/support/SimpleLocker.cpp \
     src/kits/support/StreamIO.cpp \
@@ -110,7 +109,24 @@ SOURCES += bhapi.cpp \
     src/kits/interface/Window.cpp \
     src/kits/interface/layout/LayoutContainer.cpp \
     src/kits/interface/layout/LayoutForm.cpp \
-    src/kits/interface/layout/LayoutItem.cpp
+    src/kits/interface/layout/LayoutItem.cpp \
+    src/kits/support/SupportDefs.cpp \
+    src/kits/support/String.cpp \
+    src/kits/support/Architecture.cpp \
+    src/kits/support/Base64.cpp \
+    src/kits/support/Beep.cpp \
+    src/kits/support/BlockCache.cpp \
+    src/kits/support/BufferedDataIO.cpp \
+    src/kits/support/BufferIO.cpp \
+    src/kits/support/CompressionAlgorithm.cpp \
+    src/kits/support/DataPositionIOWrapper.cpp \
+    src/kits/support/DateTime.cpp \
+    src/kits/support/Job.cpp \
+    src/kits/support/JobQueue.cpp \
+    src/kits/support/Referenceable.cpp \
+    src/kits/support/StopWatch.cpp \
+    src/kits/support/Uuid.cpp \
+    src/kits/support/ZlibCompressionAlgorithm.cpp
 
 
 HEADERS += bhapi.h\
@@ -204,7 +220,6 @@ HEADERS += bhapi.h\
     src/kits/support/ClassInfo.h \
     src/kits/support/DataIO.h \
     src/kits/support/Errors.h \
-    src/kits/support/StringMe.h \
     src/kits/support/Flattenable.h \
     src/kits/support/Locker.h \
     src/kits/support/SimpleLocker.h \
@@ -220,7 +235,22 @@ HEADERS += bhapi.h\
     src/kits/RenderKit.h \
     src/kits/StorageKit.h \
     src/kits/SupportKit.h \
-    src/kits/XmlKit.h
+    src/kits/XmlKit.h \
+    src/kits/support/String.h \
+    src/kits/support/Beep.h \
+    src/kits/support/BlockCache.h \
+    src/kits/support/BufferedDataIO.h \
+    src/kits/support/BufferIO.h \
+    src/kits/support/DateTime.h \
+    src/kits/support/Job.h \
+    src/kits/support/ObjectList.h \
+    src/kits/support/Referenceable.h \
+    src/kits/support/StackOrHeapArray.h \
+    src/kits/support/StopWatch.h \
+    src/kits/support/TLS.h \
+    src/kits/support/TypeConstants.h \
+    src/kits/support/UTF8.h \
+    src/kits/support/Architecture.h
 
 LIBS -= -lfreetype
 LIBS += -L"../freetype/lib/debug" -libfreetype

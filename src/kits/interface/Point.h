@@ -33,7 +33,6 @@
 #include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-//#include "../interface/Rect.h"
 class BRect;
 class IMPEXP_BHAPI BPoint {
 public:

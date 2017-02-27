@@ -191,14 +191,14 @@ BFontBe::StringWidth(const char *string, float size, float spacing, float shear,
 	float delta = (float)ceil((double)(spacing * size));
 
 	b_uint8 bytes = 0;
-	const char *str = b_utf8_at(string, 0, &bytes);
+	const char *str = bhapi::utf8_at(string, 0, &bytes);
 	const char *tmp = str;
 	while(!(tmp == NULL || bytes == 0 || (size_t)(tmp - string) > (size_t)length - (size_t)bytes))
 	{
 		BString aStr(tmp, (b_int32)bytes);
 		float bWidth = aFont.StringWidth(aStr.String());
 		width += (bWidth > 0 ? bWidth : height) + (tmp == str ? 0.f : delta);
-		tmp = b_utf8_next(tmp, &bytes);
+		tmp = bhapi::utf8_next(tmp, &bytes);
 	}
 
 	return width;
@@ -279,7 +279,7 @@ BFontBe::RenderString(BHandler *_view, const char *string, float size, float spa
 	BPoint bPt(pt.x, pt.y);
 
 	b_uint8 bytes = 0;
-	const char *str = b_utf8_at(string, 0, &bytes);
+	const char *str = bhapi::utf8_at(string, 0, &bytes);
 	const char *tmp = str;
 	while(!(tmp == NULL || bytes == 0 || (size_t)(tmp - string) > (size_t)length - (size_t)bytes))
 	{
@@ -291,7 +291,7 @@ BFontBe::RenderString(BHandler *_view, const char *string, float size, float spa
 		bPt.x += (bWidth > 0 ? bWidth : height) + delta;
 		width += (bWidth > 0 ? bWidth : height) + (tmp == str ? 0.f : delta);
 
-		tmp = b_utf8_next(tmp, &bytes);
+		tmp = bhapi::utf8_next(tmp, &bytes);
 	}
 
 	BRect updateRect;

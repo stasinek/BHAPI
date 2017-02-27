@@ -294,7 +294,7 @@ typedef struct bhapi::font_info {
 		bhapi::font_info_locker.Lock();
 
 		b_uint8 len = 0;
-		const char *ch = b_utf8_at(string, 0, &len);
+		const char *ch = bhapi::utf8_at(string, 0, &len);
 		b_int32 count = 0;
 
 		if(engine)
@@ -326,7 +326,7 @@ typedef struct bhapi::font_info {
 			}
 
 			count++;
-			ch = b_utf8_next(ch, &len);
+			ch = bhapi::utf8_next(ch, &len);
 		}
 		if(engine) engine->Unlock();
 

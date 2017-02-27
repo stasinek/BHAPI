@@ -40,7 +40,7 @@
 #include "etk-beos-graphics.h"
 
 #include "../../support/Autolock.h"
-#include "../../support/StringMe.h"
+#include "../../support/String.h"
 #include "../../kernel/Kernel.h"
 #include "../../app/Application.h"
 #include "../../app/Clipboard.h"

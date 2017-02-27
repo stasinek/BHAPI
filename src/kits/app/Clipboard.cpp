@@ -30,7 +30,7 @@
 
 #include "../kernel/Kernel.h"
 #include "../kernel/Debug.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/List.h"
 #include "../support/SimpleLocker.h"
 #include "../support/Errors.h"
@@ -144,7 +144,7 @@ BClipboard::BClipboard(const char *name)
 		return;
 	}
 
-	fName = (name == NULL ? NULL : b_strdup(name));
+	fName = (name == NULL ? NULL : bhapi::strdup(name));
 	fData = new BMessage();
 }
 

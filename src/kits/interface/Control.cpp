@@ -30,7 +30,7 @@
 #include "Control.h"
 #include "Window.h"
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/Errors.h"
 #include "../kernel/OS.h"
 #include "../app/Looper.h"
@@ -43,7 +43,7 @@ BControl::BControl(BRect frame, const char *name, const char *label,
 	: BView(frame, name, resizeMode, flags), BInvoker(message, NULL, NULL),
 	  fLabel(NULL), fValue(B_CONTROL_OFF), fFocusChanging(false)
 {
-	if(label) fLabel = b_strdup(label);
+	if(label) fLabel = bhapi::strdup(label);
 }
 
 
@@ -58,7 +58,7 @@ BControl::SetLabel(const char *label)
 {
 	if(fLabel) delete[] fLabel;
 	if(label)
-		fLabel = b_strdup(label);
+		fLabel = bhapi::strdup(label);
 	else
 		fLabel = NULL;
 }

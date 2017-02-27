@@ -58,7 +58,7 @@
 #endif
 
 #include "../kernel/Kernel.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 
 typedef struct b_posix_sem_info {
 	b_posix_sem_info()
@@ -174,7 +174,7 @@ static char* b_global_sem_ipc_name()
 
 	slash = (prefix[strlen(prefix) - 1] == '/') ? "" : "/";
 
-	return b_strdup_printf("%s%s%s", prefix, slash, "_bhapi_global_");
+	return bhapi::strdup_printf("%s%s%s", prefix, slash, "_bhapi_global_");
 }
 
 #ifndef SEM_FAILED

@@ -92,7 +92,7 @@ static char* b_area_ipc_name(const char *name, const char *domain)
 
 	slash = (prefix[strlen(prefix) - 1] == '/') ? "" : "/";
 
-	return b_strdup_printf("%s%s%s%s%s%s", prefix, slash, "b_", domain, "_area_", name);
+	return bhapi::strdup_printf("%s%s%s%s%s%s", prefix, slash, "b_", domain, "_area_", name);
 }
 
 
@@ -163,8 +163,8 @@ b_create_area(const char *name, void **start_addr, size_t size, b_uint32 protect
 
 	area->length = size;
 	area->openedIPC = false;
-	area->name = b_strdup(name);
-	area->domain = b_strdup(domain);
+	area->name = bhapi::strdup(name);
+	area->domain = bhapi::strdup(domain);
 	area->ipc_name = ipc_name;
 	area->created = true;
 
@@ -233,8 +233,8 @@ b_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char
 
 	area->length = size;
 	area->openedIPC = true;
-	area->name = b_strdup(name);
-	area->domain = b_strdup(domain);
+	area->name = bhapi::strdup(name);
+	area->domain = bhapi::strdup(domain);
 	area->ipc_name = ipc_name;
 	area->created = true;
 

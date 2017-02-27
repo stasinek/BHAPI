@@ -32,7 +32,7 @@
 #include "../support/StringArray.h"
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 
 #include <string.h>
 #include <stdlib.h>

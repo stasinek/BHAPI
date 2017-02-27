@@ -32,7 +32,7 @@
 #include "Rect.h"
 #include "Window.h"
 
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/ClassInfo.h"
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"
@@ -48,7 +48,7 @@ BMenuItem::BMenuItem(const char *label, BMessage *message, char shortcut, b_uint
 	  fLabel(NULL), fShortcuts(NULL), fSubmenu(NULL), fMenu(NULL)
 {
 	SetShortcut(shortcut, modifiers);
-	if(label) fLabel = b_strdup(label);
+	if(label) fLabel = bhapi::strdup(label);
 }
 
 
@@ -62,7 +62,7 @@ BMenuItem::BMenuItem(BMenu *menu, BMessage *message)
 		if(menu->fSuperitem == NULL)
 		{
 			fSubmenu = menu;
-			if(menu->Name() != NULL) fLabel = b_strdup(menu->Name());
+			if(menu->Name() != NULL) fLabel = bhapi::strdup(menu->Name());
 			menu->fSuperitem = this;
 			if(menu->BView::IsEnabled() == false) fEnabled = false;
 		}
@@ -109,7 +109,7 @@ BMenuItem::SetLabel(const char *label)
 		fLabel = NULL;
 	}
 
-	if(label) fLabel = b_strdup(label);
+	if(label) fLabel = bhapi::strdup(label);
 
 	if(fMenu == NULL) return;
 
@@ -231,7 +231,7 @@ BMenuItem::SetShortcut(char ch, b_uint32 modifiers)
 				default: str.Append((char)toupper(fShortcut), 1);
 			}
 
-			if(str.Length() > 0) fShortcuts = b_strdup(str.String());
+			if(str.Length() > 0) fShortcuts = bhapi::strdup(str.String());
 		}
 
 		if(fMenu == NULL) return;

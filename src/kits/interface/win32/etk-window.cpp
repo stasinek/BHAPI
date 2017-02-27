@@ -35,7 +35,7 @@
 #include "../../support/Autolock.h"
 #include "../../support/Errors.h"
 #include "../../app/Application.h"
-#include "../../support/StringMe.h"
+#include "../../support/String.h"
 #include "../../support/ClassInfo.h"
 
 
@@ -407,7 +407,7 @@ EWin32GraphicsWindow::SetTitle(const char *title)
 	b_status_t status;
 	if(GetVersion() < 0x80000000) // Windows NT/2000/XP
 	{
-		b_unichar16*uTitle = b_utf8_convert_to_unicode(title, -1);
+		b_unichar16*uTitle = bhapi::utf8_convert_to_unicode(title, -1);
 		status = (SetWindowTextW(win32Window, (WCHAR*)uTitle) == 0 ? B_ERROR : B_OK);
 		if(uTitle) free(uTitle);
 	}

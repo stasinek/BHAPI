@@ -32,7 +32,7 @@
 #include <errno.h"
 
 #include "../kernel/Kernel.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 
 typedef struct b_posix_locker_t {
 	b_posix_locker_t()

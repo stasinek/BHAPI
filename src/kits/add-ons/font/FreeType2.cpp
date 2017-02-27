@@ -162,7 +162,7 @@ BFontFT2::BFontFT2(const BEntry *entry, b_int32 faceIndex)
 		}
 	}
 
-	fFilename = b_strdup(filename.String());
+    fFilename = bhapi::strdup(filename.String());
 	fFaceIndex = faceIndex;
 	nFaces = fFace->num_faces;
 
@@ -327,7 +327,7 @@ BFontFT2::StringWidth(const char *string, float size, float spacing, float shear
 		     FT_Set_Char_Size(fFace, 0, (FT_F26Dot6)(size * 64.f), 0, 0)) return 0;
 //	if(FT_Set_Pixel_Sizes(fFace, 0, (FT_UInt)size)) return 0;
 
-	b_unichar16*unicode = b_utf8_convert_to_unicode(string, length);
+    b_unichar16*unicode = bhapi::utf8_convert_to_unicode(string, length);
 	if(!unicode) return 0;
 
 	float width = 0;
@@ -337,7 +337,7 @@ BFontFT2::StringWidth(const char *string, float size, float spacing, float shear
 	const b_unichar16*ch;
 	int x = 0;
 	int fontSpacing = (int)ceil((double)(spacing * size)) * 64;
-	for(ch = unicode; !(ch == NULL || *ch == 0); ch = b_unicode_next(ch, NULL))
+    for(ch = unicode; !(ch == NULL || *ch == 0); ch = bhapi::unicode_next(ch, NULL))
 	{
 		FT_UInt glyph_index = FT_Get_Char_Index(fFace, *ch);
 		if(FT_Load_Glyph(fFace, glyph_index, FT_LOAD_DEFAULT))
@@ -431,7 +431,7 @@ BFontFT2::RenderString(const char *string, b_int32 *width, b_int32 *height, bool
 	}
 	bzero(bitmap, sizeof(b_uint8) * (size_t)(w * h));
 
-	b_unichar16*unicode = b_utf8_convert_to_unicode(string, length);
+    b_unichar16*unicode = bhapi::utf8_convert_to_unicode(string, length);
 	if(!unicode)
 	{
 		delete[] bitmap;
@@ -442,7 +442,7 @@ BFontFT2::RenderString(const char *string, b_int32 *width, b_int32 *height, bool
 	b_uint32 x = 0;
 	b_uint32 y = (b_uint32)ceil(fontHeight.ascent);
 	bool do_mono = fForceFontAliasing;
-	for(ch = unicode; !(ch == NULL || *ch == 0); ch = b_unicode_next(ch, NULL))
+    for(ch = unicode; !(ch == NULL || *ch == 0); ch = bhapi::unicode_next(ch, NULL))
 	{
 		if(FT_Load_Char(fFace, *ch, (do_mono ? (FT_LOAD_RENDER | FT_LOAD_MONOCHROME) : FT_LOAD_RENDER)))
 		{

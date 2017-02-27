@@ -73,7 +73,7 @@ BApplication::Init(const char *signature, bool tryInterface)
 	if(b_app != NULL)
 		BHAPI_ERROR("[APP]: %s --- Another application running!", __PRETTY_FUNCTION__);
 
-	if(signature) fSignature = b_strdup(signature);
+	if(signature) fSignature = bhapi::strdup(signature);
 
 	BMessenger msgr(this);
 	BMessage pulseMsg(B_PULSE);

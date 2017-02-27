@@ -298,7 +298,7 @@ EDFBRender::PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, b_rgb
 static EDFBRender b_dfb_render;
 
 
-b_status_t b_dfb_stroke_point(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfbhapi::stroke_point(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				b_int32 x, b_int32 y, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
@@ -312,7 +312,7 @@ b_status_t b_dfb_stroke_point(IDirectFBSurface *dfbSurface, BGraphicsContext *dc
 }
 
 
-b_status_t b_dfb_stroke_points(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfbhapi::stroke_points(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				 const b_int32 *pts, b_int32 count, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
@@ -331,7 +331,7 @@ b_status_t b_dfb_stroke_points(IDirectFBSurface *dfbSurface, BGraphicsContext *d
 }
 
 
-b_status_t b_dfb_stroke_points_color(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfbhapi::stroke_points_color(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				       const BList *ptsArrayLists, b_int32 arrayCount, const b_rgb_color *high_colors, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
@@ -367,7 +367,7 @@ b_status_t b_dfb_stroke_points_color(IDirectFBSurface *dfbSurface, BGraphicsCont
 }
 
 
-b_status_t b_dfb_stroke_points_alphas(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfbhapi::stroke_points_alphas(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 					const b_int32 *pts, const b_uint8 *alpha, b_int32 count, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
@@ -392,7 +392,7 @@ b_status_t b_dfb_stroke_points_alphas(IDirectFBSurface *dfbSurface, BGraphicsCon
 }
 
 
-b_status_t b_dfb_stroke_line(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfbhapi::stroke_line(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 			       b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
@@ -416,7 +416,7 @@ b_status_t b_dfb_stroke_line(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 }
 
 
-b_status_t b_dfb_stroke_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfbhapi::stroke_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 			       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
@@ -460,7 +460,7 @@ b_status_t b_dfb_fill_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 }
 
 
-b_status_t b_dfb_stroke_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfbhapi::stroke_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				const b_int32 *rects, b_int32 count, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
@@ -536,7 +536,7 @@ b_status_t b_dfb_fill_region(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 }
 
 
-b_status_t b_dfb_stroke_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfbhapi::stroke_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 			      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
@@ -587,7 +587,7 @@ b_status_t b_dfb_fill_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 }
 
 
-b_status_t b_dfb_stroke_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfbhapi::stroke_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				  const b_int32 *pts, b_int32 count, bool closed, BRect *margins)
 {
 	BPolygon aPolygon;
@@ -639,7 +639,7 @@ b_status_t b_dfb_fill_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc
 }
 
 
-b_status_t b_dfb_stroke_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
+b_status_t b_dfbhapi::stroke_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 				     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius, BRect *margins)
 {
 	// TODO

@@ -1255,7 +1255,7 @@ static void include_region(b_int64 *region, b_int32 *count, b_int32 minX, b_int3
 #undef INTERSECTS
 
 
-static void b_stroke_objects(BRender *render, BList *objects, b_pattern pattern)
+static void bhapi::stroke_objects(BRender *render, BList *objects, b_pattern pattern)
 {
 	if(objects->CountItems() <= 0) return;
 
@@ -1356,7 +1356,7 @@ BRender::StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed, b_pat
 			if(lines.AddItem(aLine) == false) {delete aLine; break;}
 		}
 
-		b_stroke_objects(this, &lines, pattern);
+		bhapi::stroke_objects(this, &lines, pattern);
 	}
 }
 
@@ -1553,7 +1553,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, b_
 
 	if(readyForDraw)
 	{
-		b_stroke_objects(this, &objects, pattern);
+		bhapi::stroke_objects(this, &objects, pattern);
 	}
 	else
 	{

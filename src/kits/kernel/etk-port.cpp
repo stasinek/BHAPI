@@ -29,7 +29,7 @@
 
 #include "../kernel/Kernel.h"
 #include "../kernel/Debug.h"
-#include "../support/StringMe.h"
+#include "../support/String.h"
 #include "../support/Errors.h"
 #include "../support/SimpleLocker.h"
 
@@ -180,7 +180,7 @@ static void* b_create_port_for_IPC(b_int32 queue_length, const char *name, b_are
 	if(queue_length <= 0 || queue_length > BHAPI_VALID_MAX_PORT_QUEUE_LENGTH ||
 	   name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH - 1) return NULL;
 
-	char *tmpSemName = b_strdup_printf("%s ", name);
+	char *tmpSemName = bhapi::strdup_printf("%s ", name);
 	if(!tmpSemName) return NULL;
 
 	b_port_t *port = new b_port_t();
@@ -256,7 +256,7 @@ EXPORT_BHAPI void* b_open_port(const char *name)
 {
 	if(name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH - 1) return NULL;
 
-	char *tmpSemName = b_strdup_printf("%s ", name);
+	char *tmpSemName = bhapi::strdup_printf("%s ", name);
 	if(!tmpSemName) return NULL;
 
 	b_port_t *port = new b_port_t();
