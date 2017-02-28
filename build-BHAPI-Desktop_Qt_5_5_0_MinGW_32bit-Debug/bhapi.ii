@@ -45487,6 +45487,7 @@ enum {
     B_SEEK_END,
 };
 # 459 "../src/kits/support/SupportDefs.h"
+namespace bhapi {
 __attribute__((dllexport)) int32 atomic_add (int32 *value, int32 addValue);
 
 __attribute__((dllexport)) int64 atomic_add64 (int64 *value, int64 addValue);
@@ -45517,6 +45518,7 @@ __attribute__((dllexport)) int64 atomic_test_and_set64 (int64 *value, int64 newV
 
 __attribute__((dllexport)) void * get_stack_frame (void);
 
+}
 
 __attribute__((dllexport)) const char * B_EMPTY_STRING;
 # 31 "../src/kits/Be.h" 2
@@ -48014,19 +48016,19 @@ typedef enum debug_level {
 
 __attribute__((dllexport)) void debug_log(bhapi::debug_level level, const char *format, va_list ap);
 }
-# 79 "../src/kits/kernel/Debug.h"
+# 80 "../src/kits/kernel/Debug.h"
 __attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...);
 
 
 
 __attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...);
-# 99 "../src/kits/kernel/Debug.h"
+# 100 "../src/kits/kernel/Debug.h"
 __attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...);
 
 
 
 __attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...);
-# 119 "../src/kits/kernel/Debug.h"
+# 118 "../src/kits/kernel/Debug.h"
 }
 # 31 "../src/kits/KernelKit.h" 2
 # 1 "../src/kits/kernel/OS.h" 1
@@ -51702,10 +51704,10 @@ inline int BNetEndpoint::SetReuseAddr(bool state)
 # 32 "../src/kits/support/ByteOrder.h"
 # 1 "../src/kits/support/../support/SupportDefs.h" 1
 # 33 "../src/kits/support/ByteOrder.h" 2
+namespace bhapi {
 
 extern "C" {
 
-namespace bhapi {
 typedef enum swap_action {
     B_SWAP_HOST_TO_LENDIAN,
     B_SWAP_HOST_TO_BENDIAN,
@@ -51718,8 +51720,9 @@ __attribute__((dllexport)) b_status_t swap_data(b_type_code type, void *data, si
 __attribute__((dllexport)) bool is_type_swapped(b_type_code type);
 __attribute__((dllexport)) float swap_float(float value);
 __attribute__((dllexport)) double swap_double(double value);
+# 116 "../src/kits/support/ByteOrder.h"
 }
-# 119 "../src/kits/support/ByteOrder.h"
+
 }
 # 31 "../src/kits/SupportKit.h" 2
 # 1 "../src/kits/support/ClassInfo.h" 1

@@ -61,7 +61,8 @@ typedef enum debug_level {
 } debug_level;
 
 IMPEXP_BHAPI void debug_log(bhapi::debug_level level, const char *format, va_list ap);
-}
+} /* namespace */
+
 #ifndef BHAPI_DEBUG
 #ifdef BHAPI_DISABLE_MORE_CHECKS
 #	if __GNUC__ >= 3 || defined(__INTEL_COMPILER)
@@ -103,12 +104,10 @@ IMPEXP_BHAPI void BHAPI_WARNING(const char *format, ...);
 IMPEXP_BHAPI void BHAPI_ERROR(const char *format, ...);
 
 #ifdef BHAPI_BUILD_WITH_MEMORY_TRACING
-namespace bhapi {
 IMPEXP_BHAPI void* calloc(size_t nmemb, size_t size, const char *file, int line, const char *method);
 IMPEXP_BHAPI void* malloc(size_t size, const char *file, int line, const char *method);
 IMPEXP_BHAPI void* realloc(void *ptr, size_t size, const char *file, int line, const char *method);
 IMPEXP_BHAPI void  free(void *ptr, const char *file, int line, const char *method);
-}
 #define calloc(a, b)	bhapi::calloc(a, b, __FILE__, __LINE__, "calloc")
 #define malloc(a)	bhapi::malloc(a, __FILE__, __LINE__, "malloc")
 #define realloc(a, b)	bhapi::realloc(a, b, __FILE__, __LINE__, "realloc")

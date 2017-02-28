@@ -45484,6 +45484,7 @@ enum {
     B_SEEK_END,
 };
 # 459 "../src/kits/add-ons/graphics/../../support/SupportDefs.h"
+namespace bhapi {
 __attribute__((dllexport)) int32 atomic_add (int32 *value, int32 addValue);
 
 __attribute__((dllexport)) int64 atomic_add64 (int64 *value, int64 addValue);
@@ -45514,6 +45515,7 @@ __attribute__((dllexport)) int64 atomic_test_and_set64 (int64 *value, int64 newV
 
 __attribute__((dllexport)) void * get_stack_frame (void);
 
+}
 
 __attribute__((dllexport)) const char * B_EMPTY_STRING;
 # 35 "../src/kits/add-ons/graphics/GraphicsEngine.h" 2
