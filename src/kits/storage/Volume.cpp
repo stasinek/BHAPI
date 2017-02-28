@@ -48,16 +48,16 @@
 #include <stdio.h>
 #include <mntent.h>
 #endif
-
-typedef struct b_dev_data_t {
+namespace bhapi {
+typedef struct dev_data_t {
 	char *name;
 	char *root_dir;
-} b_dev_data_t;
-
-
-inline b_dev_data_t* b_new_dev_data()
+} dev_data_t;
+}
+namespace bhapi {
+inline bhapi::dev_data_t* new_dev_data()
 {
-	b_dev_data_t* data = (b_dev_data_t*)malloc(sizeof(b_dev_data_t));
+    bhapi::dev_data_t* data = (bhapi::dev_data_t*)malloc(sizeof(bhapi::dev_data_t));
 	if(data == NULL) return NULL;
 	data->name = NULL;
 	data->root_dir = NULL;
@@ -65,7 +65,7 @@ inline b_dev_data_t* b_new_dev_data()
 }
 
 
-inline b_status_t b_set_dev_data(b_dev_data_t *data, const char *name, const char *root_dir)
+inline b_status_t set_dev_data(bhapi::dev_data_t *data, const char *name, const char *root_dir)
 {
 	if(data == NULL) return B_BAD_VALUE;
 	if(root_dir == NULL || *root_dir == 0) return B_BAD_VALUE;
@@ -103,15 +103,14 @@ inline b_status_t b_set_dev_data(b_dev_data_t *data, const char *name, const cha
 	return B_OK;
 }
 
-
-inline void b_delete_dev_data(b_dev_data_t *data)
+inline void delete_dev_data(bhapi::dev_data_t *data)
 {
 	if(data == NULL) return;
 	if(data->name) free(data->name);
 	if(data->root_dir) free(data->root_dir);
 	free(data);
 }
-
+} /* namespace */
 
 BVolume::BVolume()
 	: fDevice(0), fData(NULL)
@@ -181,7 +180,7 @@ BVolume::SetTo(b_dev_t dev)
 			}
 		}
 
-		b_status_t status = b_set_dev_data((b_dev_data_t*)fData, mnt->mnt_fsname, mnt->mnt_dir);
+        b_status_t status = b_set_dev_data((bhapi::dev_data_t*)fData, mnt->mnt_fsname, mnt->mnt_dir);
 		endmntent(ent);
 
 		if(status != B_OK) return status;
@@ -206,7 +205,7 @@ BVolume::SetTo(b_dev_t dev)
 
 		if(fData == NULL)
 		{
-			if((fData = b_new_dev_data()) == NULL) return B_NO_MEMORY;
+            if((fData = bhapi::new_dev_data()) == NULL) return B_NO_MEMORY;
 		}
 
 		char dirname[4] = "A:\\";
@@ -230,7 +229,7 @@ BVolume::SetTo(b_dev_t dev)
 		if(nameStr.Length() <= 0) nameStr.SetTo(nameBuf);
 		dirname[2] = '/';
 
-		b_status_t status = b_set_dev_data((b_dev_data_t*)fData, nameStr.String(), dirname);
+        b_status_t status = bhapi::set_dev_data((bhapi::dev_data_t*)fData, nameStr.String(), dirname);
 
 		if(status != B_OK) return status;
 
@@ -268,7 +267,7 @@ BVolume::SetTo(b_dev_t dev)
 			vol.GetName(volName);
 		}
 
-		b_status_t status = b_set_dev_data((b_dev_data_t*)fData, volName, bePath.Path());
+        b_status_t status = b_set_dev_data((bhapi::dev_data_t*)fData, volName, bePath.Path());
 		if(status != B_OK) return status;
 
 		fDevice = dev;
@@ -287,7 +286,7 @@ BVolume::SetTo(b_dev_t dev)
 		if(fData == NULL)
 			if((fData = b_new_dev_data()) == NULL) return B_NO_MEMORY;
 
-		b_status_t status = b_set_dev_data((b_dev_data_t*)fData, "root", "/");
+        b_status_t status = b_set_dev_data((bhapi::dev_data_t*)fData, "root", "/");
 		if(status != B_OK) return status;
 
 		fDevice = dev;
@@ -304,7 +303,7 @@ BVolume::SetTo(b_dev_t dev)
 void
 BVolume::Unset()
 {
-	if(fData != NULL) b_delete_dev_data((b_dev_data_t*)fData);
+    if(fData != NULL) bhapi::delete_dev_data((bhapi::dev_data_t*)fData);
 
 	fData = NULL;
 	fDevice = 0;
@@ -324,7 +323,7 @@ BVolume::GetName(BString *name) const
 	if(name == NULL) return B_BAD_VALUE;
 	if(fData == NULL) return B_NO_INIT;
 
-	*name = ((b_dev_data_t*)fData)->name;
+    *name = ((bhapi::dev_data_t*)fData)->name;
 	return B_OK;
 }
 
@@ -355,7 +354,7 @@ BVolume::GetRootDirectory(BDirectory *dir) const
 
 	dir->Unset();
 	if(fData == NULL) return B_NO_INIT;
-	return dir->SetTo(((b_dev_data_t*)fData)->root_dir);
+    return dir->SetTo(((bhapi::dev_data_t*)fData)->root_dir);
 }
 
 

@@ -68,6 +68,8 @@ LOCAL_BHAPI void font_other_cancel();
 IMPEXP_BHAPI bool font_freetype2_init(void);
 IMPEXP_BHAPI bool font_freetype2_is_valid(void);
 IMPEXP_BHAPI void font_freetype2_cancel(void);
+}
+
 using namespace bhapi;
 class IMPEXP_BHAPI BFontEngine {
 public:

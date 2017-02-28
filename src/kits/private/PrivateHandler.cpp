@@ -111,7 +111,7 @@ b_uint64 bhapi::get_ref_looper_token(b_uint64 token)
 }
 
 
-b_status_t b_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout)
+b_status_t bhapi::lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout)
 {
 	BLocker *handlers_locker = bhapi::get_handler_operator_locker();
 
@@ -119,7 +119,7 @@ b_status_t b_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout)
 
 	BLooper *looper = bhapi::get_handler_looper(token);
 	BLooper *looper_proxy = (looper != NULL ? looper->_Proxy() : NULL);
-	void *locker = ((looper == NULL || looper->fLocker == NULL) ? NULL : b_clone_locker(looper->fLocker));
+    void *locker = ((looper == NULL || looper->fLocker == NULL) ? NULL : bhapi::clone_locker(looper->fLocker));
 
 	if(locker == NULL)
 	{
@@ -130,15 +130,15 @@ b_status_t b_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout)
 	b_int64 save_count = handlers_locker->CountLocks();
 	while(handlers_locker->CountLocks() > 0) handlers_locker->Unlock();
 
-	b_status_t retVal = b_lock_locker_etc(locker, B_TIMEOUT, timeout);
+    b_status_t retVal = bhapi::lock_locker_etc(locker, B_TIMEOUT, timeout);
 	if(retVal == B_OK)
 	{
 		handlers_locker->Lock();
 		if(looper != bhapi::get_handler_looper(token) || looper_proxy != looper->_Proxy()) retVal = B_MISMATCHED_VALUES;
 		if(save_count-- == 1) handlers_locker->Unlock();
-		if(retVal != B_OK) b_unlock_locker(locker);
+        if(retVal != B_OK) bhapi::unlock_locker(locker);
 	}
-	b_delete_locker(locker);
+    bhapi::delete_locker(locker);
 
 	while(save_count-- > 1) handlers_locker->Lock();
 
@@ -146,11 +146,11 @@ b_status_t b_lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout)
 }
 
 
-bool b_is_current_at_looper_thread(b_uint64 token)
+bool bhapi::is_current_at_looper_thread(b_uint64 token)
 {
 	BAutolock <BTokensDepot>autolock(bhapi::app_connector->HandlersDepot());
 
-	BLooper *looper = bhapi::cast_as(bhapi::get_handler(token), BLooper);
+    BLooper *looper = cast_as(bhapi::get_handler(token), BLooper);
 	if(looper == NULL) return false;
 
 	bool retVal = (looper->Thread() == bhapi::get_current_thread_id() ? true : false);

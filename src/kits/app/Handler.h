@@ -39,7 +39,6 @@
 #define B_OBSERVE_ORIGINAL_WHAT		"BHAPI:observe_orig_what"
 #define B_OBSERVER_OBSERVE_ALL	    B_MAXUINT32
 
-using namespace bhapi;
 class BLooper;
 class BMessage;
 class BMessageFilter;
@@ -47,6 +46,7 @@ class BMessenger;
 class BToken;
 class BList;
 #include "../support/Archivable.h"
+using namespace bhapi;
 class IMPEXP_BHAPI BHandler : public BArchivable {
 public:
     BHandler(const char *name = NULL);
@@ -99,7 +99,7 @@ public:
 private:
 	friend class BLooper;
 	friend class BMessage;
-    friend b_uint64 get_handler_token(const BHandler *handler);
+    friend b_uint64 bhapi::get_handler_token(const BHandler *handler);
 
     BToken *fToken;
 	char *fName;

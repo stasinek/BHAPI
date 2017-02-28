@@ -745,7 +745,7 @@ BTextView::GetTextRegion(b_int32 startPos, b_int32 endPos, BRegion *region, bool
 void
 BTextView::ScrollToOffset(b_int32 offset, bool utf8)
 {
-	BScrollView *scrollView = b_cast_as(Parent(), BScrollView);
+	BScrollView *scrollView = cast_as(Parent(), BScrollView);
 	if(scrollView == NULL || scrollView->Target() != this) return;
 
 	float height = 0;
@@ -1884,7 +1884,7 @@ void
 BTextView::MouseUp(BPoint where)
 {
 	fSelectTracking = -1;
-	if(TextRect().Contains(where)) b_app->ObscureCursor();
+	if(TextRect().Contains(where)) bhapi::app->ObscureCursor();
 }
 
 
@@ -1893,11 +1893,11 @@ BTextView::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 {
 	if(TextRect().Contains(where) == false || code == B_EXITED_VIEW)
 	{
-		b_app->SetCursor(B_CURSOR_SYSTEM_DEFAULT, false);
+		bhapi::app->SetCursor(B_CURSOR_SYSTEM_DEFAULT, false);
 		return;
 	}
 
-	b_app->SetCursor(B_CURSOR_I_BEAM, false);
+	bhapi::app->SetCursor(B_CURSOR_I_BEAM, false);
 
 	if(!IsEnabled() || !IsSelectable() || fSelectTracking < 0) return;
 
@@ -2054,9 +2054,9 @@ BTextView::KeyDown(const char *bytes, b_int32 numBytes)
 
 	if(!(numBytes != 1 || msg->what != B_KEY_DOWN || !IsEnabled() || !IsEditable() || !(modifiers & B_CONTROL_KEY)))
 	{
-		if(*bytes == 'c' || *bytes == 'C') {Copy(&b_clipboard); return;}
-		else if(*bytes == 'x' || *bytes == 'X') {Cut(&b_clipboard); return;}
-		else if(*bytes == 'v' || *bytes == 'V') {Paste(&b_clipboard); return;}
+		if(*bytes == 'c' || *bytes == 'C') {Copy(&bhapi::clipboard); return;}
+		else if(*bytes == 'x' || *bytes == 'X') {Cut(&bhapi::clipboard); return;}
+		else if(*bytes == 'v' || *bytes == 'V') {Paste(&bhapi::clipboard); return;}
 	}
 
 	if((modifiers & B_CONTROL_KEY) || (modifiers & B_COMMAND_KEY) ||
@@ -2370,7 +2370,7 @@ BTextView::KeyDown(const char *bytes, b_int32 numBytes)
 			case B_PAGE_DOWN:
 			case B_PAGE_UP:
 				{
-					BScrollView *scrollView = b_cast_as(Parent(), BScrollView);
+					BScrollView *scrollView = cast_as(Parent(), BScrollView);
 					if(scrollView == NULL || scrollView->Target() != this) break;
 
 					BRect validRect = ConvertFromParent(scrollView->TargetFrame());

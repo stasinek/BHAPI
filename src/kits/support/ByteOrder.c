@@ -126,7 +126,7 @@ IMPEXP_BHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, b
 }
 
 
-IMPEXP_BHAPI bool b_is_type_swapped(b_type_code type)
+IMPEXP_BHAPI bool bhapi::is_type_swapped(b_type_code type)
 {
 	switch(type)
 	{

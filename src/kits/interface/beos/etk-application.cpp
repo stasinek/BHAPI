@@ -67,22 +67,22 @@ static void b_beos_clipboard_changed()
 	{
 		BHAPI_DEBUG("[GRAPHICS]: Clipboard message(\"%s\") sending...", str.String());
 		BMessage *clipMsg = NULL;
-		if(b_clipboard.Lock())
+		if(bhapi::clipboard.Lock())
 		{
-			if((clipMsg = b_clipboard.Data()) != NULL)
+			if((clipMsg = bhapi::clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
 				b_size_t textLen = 0;
 				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
 				   text == NULL || textLen != (b_size_t)str.Length() || str.Compare(text, (b_int32)textLen) != 0)
 				{
-					b_clipboard.Clear();
+					bhapi::clipboard.Clear();
 					clipMsg->AddBool("BHAPI:msg_from_gui", true);
 					clipMsg->AddData("text/plain", B_MIME_TYPE, str.String(), str.Length());
-					b_clipboard.Commit();
+					bhapi::clipboard.Commit();
 				}
 			}
-			b_clipboard.Unlock();
+			bhapi::clipboard.Unlock();
 		}
 	}
 }
@@ -100,9 +100,9 @@ static b_filter_result b_beos_clipboard_filter(BMessage *message, BHandler **tar
 		BString str;
 		BMessage *msg;
 
-		b_clipboard.Lock();
+		bhapi::clipboard.Lock();
 #if defined(BHAPI_ENABLE_DEBUG) && !defined(BHAPI_DISABLE_MORE_CHECKS)
-		if((msg = b_clipboard.Data()) != NULL)
+		if((msg = bhapi::clipboard.Data()) != NULL)
 		{
 			msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 			if(msg->HasBool("BHAPI:msg_from_gui"))
@@ -113,11 +113,11 @@ static b_filter_result b_beos_clipboard_filter(BMessage *message, BHandler **tar
 			}
 		}
 #else
-		if(!((msg = b_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
+		if(!((msg = bhapi::clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
 			msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 #endif
 		if(textLen > 0) str.SetTo(text, (b_int32)textLen);
-		b_clipboard.Unlock();
+		bhapi::clipboard.Unlock();
 
 		if(str.Length() <= 0) break;
 
@@ -141,13 +141,15 @@ static b_filter_result b_beos_clipboard_filter(BMessage *message, BHandler **tar
 
 #ifndef BHAPI_GRAPHICS_BEOS_BUILT_IN
 extern "C" {
-_EXPORT BGraphicsEngine* instantiate_graphics_engine()
+namespace bhapi {
+EXPORT BGraphicsEngine* instantiate_graphics_engine()
 #else
-IMPEXP_BHAPI BGraphicsEngine* b_get_built_in_graphics_engine()
+IMPEXP_BHAPI BGraphicsEngine* get_built_in_graphics_engine()
 #endif
 {
 	return(new EBeGraphicsEngine());
 }
+} /* namespace */
 #ifndef BHAPI_GRAPHICS_BEOS_BUILT_IN
 } // extern "C"
 #endif
@@ -169,7 +171,7 @@ private:
 
 
 EBePrivateApp::EBePrivateApp(EBeGraphicsEngine *engine)
-	: BApplication(b_app->Signature())
+	: BApplication(bhapi::app->Signature())
 {
 	fEngine = engine;
 }
@@ -185,7 +187,7 @@ void
 EBePrivateApp::ReadyToRun()
 {
 	fEngine->Lock();
-	b_release_sem_etc(fEngine->fRequestSem, 1, 0);
+    bhapi::release_sem_etc(fEngine->fRequestSem, 1, 0);
 	fEngine->Unlock();
 
 	be_clipboard->StartWatching(BMessenger(this));
@@ -202,7 +204,7 @@ EBePrivateApp::QuitRequested()
 	if(fEngine->beDoQuit) retVal = true;
 	fEngine->Unlock();
 
-	if(!retVal) b_app->PostMessage(B_QUIT_REQUESTED);
+	if(!retVal) bhapi::app->PostMessage(B_QUIT_REQUESTED);
 
 	return retVal;
 }
@@ -252,7 +254,7 @@ EBePrivateAppWin::Run()
 	if(retVal > 0)
 	{
 		fEngine->Lock();
-		b_release_sem_etc(fEngine->fRequestSem, 1, 0);
+        bhapi::release_sem_etc(fEngine->fRequestSem, 1, 0);
 		fEngine->Unlock();
 
 		b_beos_clipboard_changed();
@@ -272,7 +274,7 @@ EBePrivateAppWin::QuitRequested()
 	if(fEngine->beDoQuit) retVal = true;
 	fEngine->Unlock();
 
-	if(!retVal) b_app->PostMessage(B_QUIT_REQUESTED);
+	if(!retVal) bhapi::app->PostMessage(B_QUIT_REQUESTED);
 
 	return retVal;
 }
@@ -353,7 +355,7 @@ static b_status_t b_beos_graphics_task(void *arg)
 		}
 
 		engine->Lock();
-		if(engine->fRequestSem != NULL) b_release_sem_etc(engine->fRequestSem, 2, 0);
+        if(engine->fRequestSem != NULL) bhapi::release_sem_etc(engine->fRequestSem, 2, 0);
 		engine->Unlock();
 	}
 
@@ -365,9 +367,9 @@ b_status_t
 EBeGraphicsEngine::Initalize()
 {
 	BMessageFilter *clipboardFilter = new BMessageFilter(B_CLIPBOARD_CHANGED, b_beos_clipboard_filter);
-	b_app->Lock();
-	b_app->AddFilter(clipboardFilter);
-	b_app->Unlock();
+	bhapi::app->Lock();
+	bhapi::app->AddFilter(clipboardFilter);
+	bhapi::app->Unlock();
 
 	Lock();
 
@@ -375,41 +377,41 @@ EBeGraphicsEngine::Initalize()
 	{
 		Unlock();
 
-		b_app->Lock();
-		b_app->RemoveFilter(clipboardFilter);
-		b_app->Unlock();
+		bhapi::app->Lock();
+		bhapi::app->RemoveFilter(clipboardFilter);
+		bhapi::app->Unlock();
 		delete clipboardFilter;
 		return B_OK;
 	}
 
-	fRequestSem = b_create_sem(0, NULL);
+	fRequestSem = bhapi::create_sem(0, NULL);
 	if(fRequestSem == NULL)
 	{
 		Unlock();
 
-		b_app->Lock();
-		b_app->RemoveFilter(clipboardFilter);
-		b_app->Unlock();
+		bhapi::app->Lock();
+		bhapi::app->RemoveFilter(clipboardFilter);
+		bhapi::app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
 
-	if((fBeThread = b_create_thread(b_beos_graphics_task, B_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL ||
-	    b_resume_thread(fBeThread) != B_OK)
+	if((fBeThread = bhapi::create_thread(b_beos_graphics_task, B_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL ||
+        bhapi::resume_thread(fBeThread) != B_OK)
 	{
 		BHAPI_WARNING("[GRAPHICS]: %s --- Unable to resume graphics thread!", __PRETTY_FUNCTION__);
 
-		if(fBeThread != NULL) b_delete_thread(fBeThread);
+		if(fBeThread != NULL) bhapi::delete_thread(fBeThread);
 		fBeThread = NULL;
 
-		b_delete_sem(fRequestSem);
+		bhapi::delete_sem(fRequestSem);
 		fRequestSem = NULL;
 
 		Unlock();
 
-		b_app->Lock();
-		b_app->RemoveFilter(clipboardFilter);
-		b_app->Unlock();
+		bhapi::app->Lock();
+		bhapi::app->RemoveFilter(clipboardFilter);
+		bhapi::app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -420,36 +422,36 @@ EBeGraphicsEngine::Initalize()
 
 	b_int64 count = 0;
 
-	b_status_t status = b_acquire_sem(fRequestSem);
-	if(status == B_OK) status = b_get_sem_count(fRequestSem, &count);
+    b_status_t status = bhapi::acquire_sem(fRequestSem);
+	if(status == B_OK) status = bhapi::get_sem_count(fRequestSem, &count);
 
 	if(status != B_OK || count > 0)
 	{
 		BHAPI_WARNING("[GRAPHICS]: %s --- BApplication task run failed!", __PRETTY_FUNCTION__);
 
-		b_wait_for_thread(fBeThread, &status);
+        bhapi::wait_for_thread(fBeThread, &status);
 
 		Lock();
 
-		b_delete_thread(fBeThread);
+		bhapi::delete_thread(fBeThread);
 		fBeThread = NULL;
 
-		b_delete_sem(fRequestSem);
+		bhapi::delete_sem(fRequestSem);
 		fRequestSem = NULL;
 
 		fClipboardFilter = NULL;
 
 		Unlock();
 
-		b_app->Lock();
-		b_app->RemoveFilter(clipboardFilter);
-		b_app->Unlock();
+		bhapi::app->Lock();
+		bhapi::app->RemoveFilter(clipboardFilter);
+		bhapi::app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
 
 	Lock();
-	if(fRequestSem != NULL) b_delete_sem(fRequestSem);
+	if(fRequestSem != NULL) bhapi::delete_sem(fRequestSem);
 	fRequestSem = NULL;
 	Unlock();
 
@@ -466,7 +468,7 @@ EBeGraphicsEngine::Cancel()
 
 	if(fBeThread != NULL)
 	{
-		void *beThread = b_open_thread(b_get_thread_id(fBeThread));
+		void *beThread = bhapi::open_thread(bhapi::get_thread_id(fBeThread));
 		if(beThread == NULL)
 		{
 			BHAPI_DEBUG("[GRAPHICS]: %s --- Unable to duplicate thread handle.", __PRETTY_FUNCTION__);
@@ -483,16 +485,16 @@ EBeGraphicsEngine::Cancel()
 		{
 			BHAPI_DEBUG("[GRAPHICS]: %s --- sending B_QUIT_REQUESTED", __PRETTY_FUNCTION__);
 			be_app_messenger.SendMessage(B_QUIT_REQUESTED);
-		}while(b_wait_for_thread_etc(beThread, &status, B_TIMEOUT, 1000000) == B_TIMED_OUT);
+        }while(bhapi::wait_for_thread_etc(beThread, &status, B_TIMEOUT, 1000000) == B_TIMED_OUT);
 
 		Lock();
 
 		if(fBeThread != NULL)
 		{
-			b_delete_thread(fBeThread);
+			bhapi::delete_thread(fBeThread);
 			fBeThread = NULL;
 
-			if(fRequestSem != NULL) b_delete_sem(fRequestSem);
+			if(fRequestSem != NULL) bhapi::delete_sem(fRequestSem);
 			fRequestSem = NULL;
 		}
 
@@ -500,7 +502,7 @@ EBeGraphicsEngine::Cancel()
 		fClipboardFilter = NULL;
 
 		Unlock();
-		b_delete_thread(beThread);
+		bhapi::delete_thread(beThread);
 		Lock();
 	}
 
@@ -508,9 +510,9 @@ EBeGraphicsEngine::Cancel()
 
 	if(clipboardFilter != NULL)
 	{
-		b_app->Lock();
-		b_app->RemoveFilter(clipboardFilter);
-		b_app->Unlock();
+		bhapi::app->Lock();
+		bhapi::app->RemoveFilter(clipboardFilter);
+		bhapi::app->Unlock();
 		delete clipboardFilter;
 	}
 }

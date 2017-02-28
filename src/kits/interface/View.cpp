@@ -88,10 +88,10 @@ public:
 void
 BView::InitSelf(BRect frame, b_uint32 resizingMode, b_uint32 flags)
 {
-	if(b_app == NULL || b_app->fGraphicsEngine == NULL)
+	if(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- View must created within a application which has graphics-engine!", __PRETTY_FUNCTION__);
 
-	if((fDC = b_app->fGraphicsEngine->CreateContext()) == NULL)
+	if((fDC = bhapi::app->fGraphicsEngine->CreateContext()) == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- Unable to create draw context!", __PRETTY_FUNCTION__);
 
 	BViewState *viewState = new BViewState(NULL);
@@ -345,13 +345,13 @@ BView::Show()
 
 	fLayout->Show();
 
-    if(!b_is_kind_of(this, BScrollBar) ||
-       !b_is_kind_of(Parent(), BScrollView) ||
-	   b_cast_as(Parent(), BScrollView)->fTarget == NULL) return;
+    if(!is_kind_of(this, BScrollBar) ||
+       !is_kind_of(Parent(), BScrollView) ||
+	   cast_as(Parent(), BScrollView)->fTarget == NULL) return;
 
-	if(b_cast_as(Parent(), BScrollView)->fHSB == this ||
-	   b_cast_as(Parent(), BScrollView)->fVSB == this)
-		b_cast_as(Parent(), BScrollView)->fTarget->fLayout->UpdateVisibleRegion();
+	if(cast_as(Parent(), BScrollView)->fHSB == this ||
+	   cast_as(Parent(), BScrollView)->fVSB == this)
+		cast_as(Parent(), BScrollView)->fTarget->fLayout->UpdateVisibleRegion();
 }
 
 
@@ -364,13 +364,13 @@ BView::Hide()
 
 	fLayout->Hide();
 
-    if(!b_is_kind_of(this, BScrollBar) ||
-       !b_is_kind_of(Parent(), BScrollView) ||
-	   b_cast_as(Parent(), BScrollView)->fTarget == NULL) return;
+    if(!is_kind_of(this, BScrollBar) ||
+       !is_kind_of(Parent(), BScrollView) ||
+	   cast_as(Parent(), BScrollView)->fTarget == NULL) return;
 
-	if(b_cast_as(Parent(), BScrollView)->fHSB == this ||
-	   b_cast_as(Parent(), BScrollView)->fVSB == this)
-		b_cast_as(Parent(), BScrollView)->fTarget->fLayout->UpdateVisibleRegion();
+	if(cast_as(Parent(), BScrollView)->fHSB == this ||
+	   cast_as(Parent(), BScrollView)->fVSB == this)
+		cast_as(Parent(), BScrollView)->fTarget->fLayout->UpdateVisibleRegion();
 }
 
 
@@ -474,9 +474,9 @@ BView::RemoveChild(BView *child)
 		child->fScrollBar.MakeEmpty();
 	}
 
-	if(b_is_kind_of(child, BScrollBar))
+	if(is_kind_of(child, BScrollBar))
 	{
-		BScrollBar *scrollbar = b_cast_as(child, BScrollBar);
+		BScrollBar *scrollbar = cast_as(child, BScrollBar);
 		if(scrollbar->fTarget != NULL)
 		{
 			scrollbar->fTarget->fScrollBar.RemoveItem(scrollbar);
@@ -544,14 +544,14 @@ BView::PreviousSibling() const
 BWindow*
 BView::Window() const
 {
-	return b_cast_as(Looper(), BWindow);
+	return cast_as(Looper(), BWindow);
 }
 
 
 BView*
 BView::Parent() const
 {
-	return(b_is_kind_of(fLayout->Container(), BViewLayout) ? (BView*)fLayout->Container()->PrivateData() : NULL);
+	return(is_kind_of(fLayout->Container(), BViewLayout) ? (BView*)fLayout->Container()->PrivateData() : NULL);
 }
 
 
@@ -936,7 +936,7 @@ BView::ConvertToWindow(BPoint* pt) const
 
 	for(BLayoutItem *container = fLayout;
 	    container->Container() != win->fLayout;
-	    container = b_cast_as(container->Container(), BLayoutItem))
+	    container = cast_as(container->Container(), BLayoutItem))
 	{
 		container->ConvertToContainer(pt);
 	}
@@ -1119,10 +1119,10 @@ BView::_FrameChanged(BRect oldFrame, BRect newFrame)
 		}
 	}
 
-	if(!(b_is_kind_of(Parent(), BScrollView) == false || b_cast_as(Parent(), BScrollView)->fTarget != this))
+	if(!(is_kind_of(Parent(), BScrollView) == false || cast_as(Parent(), BScrollView)->fTarget != this))
 	{
 		BRect rect = Parent()->Frame();
-		b_cast_as(Parent(), BScrollView)->FrameResized(rect.Width(), rect.Height());
+		cast_as(Parent(), BScrollView)->FrameResized(rect.Width(), rect.Height());
 	}
 }
 
@@ -2659,11 +2659,11 @@ BView::QueryCurrentMouse(bool pushed, b_int32 buttons, bool btnsAlone, b_int32 *
 void
 BView::_UpdateVisibleRegion()
 {
-	if(!(b_is_kind_of(Parent(), BScrollView) == false || b_cast_as(Parent(), BScrollView)->fTarget != this))
+	if(!(is_kind_of(Parent(), BScrollView) == false || cast_as(Parent(), BScrollView)->fTarget != this))
 	{
 		BRegion *region;
-		b_cast_as(fLayout, BViewLayout)->_GetVisibleRegion(&region);
-		*region &= ConvertFromParent(b_cast_as(Parent(), BScrollView)->TargetValidFrame());
+		cast_as(fLayout, BViewLayout)->_GetVisibleRegion(&region);
+		*region &= ConvertFromParent(cast_as(Parent(), BScrollView)->TargetValidFrame());
 	}
 
 	BRegion clipping(*(fLayout->VisibleRegion()));
@@ -2692,9 +2692,9 @@ BView::UnitsPerPixel() const
 void
 BView::SetEnabled(bool state)
 {
-	if(b_cast_as(fLayout, BViewLayout)->IsEnabled() != state)
+	if(cast_as(fLayout, BViewLayout)->IsEnabled() != state)
 	{
-		b_cast_as(fLayout, BViewLayout)->SetEnabled(state);
+		cast_as(fLayout, BViewLayout)->SetEnabled(state);
 		if(Flags() & B_WILL_DRAW) Invalidate();
 	}
 }
@@ -2703,7 +2703,7 @@ BView::SetEnabled(bool state)
 bool
 BView::IsEnabled() const
 {
-	return b_cast_as(fLayout, BViewLayout)->IsEnabled();
+	return cast_as(fLayout, BViewLayout)->IsEnabled();
 }
 
 

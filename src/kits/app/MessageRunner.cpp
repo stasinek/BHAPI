@@ -41,7 +41,7 @@
 #include "../app/Messenger.h"
 #include "../app/Message.h"
 
-extern BLocker* b_get_handler_operator_locker();
+extern BLocker* bhapi::get_handler_operator_locker();
 
 BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, b_bigtime_t interval, b_int32 count)
 	: fToken(-1), fTarget(NULL), fReplyTo(NULL), fMessage(NULL), fPrevSendTime(B_INT64_CONSTANT(-1))
@@ -55,7 +55,7 @@ BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, b_
 	fInterval = interval;
 	fCount = count;
 
-	BLocker *hLocker = b_get_handler_operator_locker();
+	BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	b_int32 token = BApplication::sRunnerList.IndexOf(NULL);
@@ -71,10 +71,10 @@ BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, b_
 	}
 
 	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && b_app != NULL)
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::app != NULL)
 	{
 		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
-		b_app->PostMessage(_EVENTS_PENDING_, b_app);
+		bhapi::app->PostMessage(_EVENTS_PENDING_, bhapi::app);
 	}
 }
 
@@ -96,7 +96,7 @@ BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, b_
 	fInterval = interval;
 	fCount = count;
 
-	BLocker *hLocker = b_get_handler_operator_locker();
+	BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	b_int32 token = BApplication::sRunnerList.IndexOf(NULL);
@@ -112,17 +112,17 @@ BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, b_
 	}
 
 	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && b_app != NULL)
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::app != NULL)
 	{
 		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
-		b_app->PostMessage(_EVENTS_PENDING_, b_app);
+		bhapi::app->PostMessage(_EVENTS_PENDING_, bhapi::app);
 	}
 }
 
 
 BMessageRunner::~BMessageRunner()
 {
-	BLocker *hLocker = b_get_handler_operator_locker();
+	BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	if(fToken >= 0)
@@ -152,7 +152,7 @@ BMessageRunner::SetTarget(const BMessenger &target)
 {
 	if(fToken < 0) return B_ERROR;
 
-	BLocker *hLocker = b_get_handler_operator_locker();
+	BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	if(target.IsValid())
@@ -175,10 +175,10 @@ BMessageRunner::SetTarget(const BMessenger &target)
 	fPrevSendTime = B_INT64_CONSTANT(-1);
 
 	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && b_app != NULL)
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::app != NULL)
 	{
 		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
-		b_app->PostMessage(_EVENTS_PENDING_, b_app);
+		bhapi::app->PostMessage(_EVENTS_PENDING_, bhapi::app);
 	}
 
 	return B_OK;
@@ -190,7 +190,7 @@ BMessageRunner::SetReplyTo(const BMessenger &replyTo)
 {
 	if(fToken < 0) return B_ERROR;
 
-	BLocker *hLocker = b_get_handler_operator_locker();
+	BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	if(replyTo.IsValid())
@@ -222,7 +222,7 @@ BMessageRunner::SetMessage(const BMessage *msg)
 	BMessage *aMsg = NULL;
 	if(fToken < 0 || !(msg == NULL || (aMsg = new BMessage(*msg)) != NULL)) return B_ERROR;
 
-	BLocker *hLocker = b_get_handler_operator_locker();
+	BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	if(fMessage) delete fMessage;
@@ -231,10 +231,10 @@ BMessageRunner::SetMessage(const BMessage *msg)
 	fPrevSendTime = B_INT64_CONSTANT(-1);
 
 	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && b_app != NULL)
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::app != NULL)
 	{
 		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
-		b_app->PostMessage(_EVENTS_PENDING_, b_app);
+		bhapi::app->PostMessage(_EVENTS_PENDING_, bhapi::app);
 	}
 
 	return B_OK;
@@ -246,17 +246,17 @@ BMessageRunner::SetInterval(b_bigtime_t interval)
 {
 	if(fToken < 0) return B_ERROR;
 
-	BLocker *hLocker = b_get_handler_operator_locker();
+	BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	fInterval = interval;
 	fPrevSendTime = B_INT64_CONSTANT(-1);
 
 	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && b_app != NULL)
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::app != NULL)
 	{
 		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
-		b_app->PostMessage(_EVENTS_PENDING_, b_app);
+		bhapi::app->PostMessage(_EVENTS_PENDING_, bhapi::app);
 	}
 
 	return B_OK;
@@ -268,17 +268,17 @@ BMessageRunner::SetCount(b_int32 count)
 {
 	if(fToken < 0) return B_ERROR;
 
-	BLocker *hLocker = b_get_handler_operator_locker();
+	BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	fCount = count;
 	fPrevSendTime = B_INT64_CONSTANT(-1);
 
 	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && b_app != NULL)
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::app != NULL)
 	{
 		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
-		b_app->PostMessage(_EVENTS_PENDING_, b_app);
+		bhapi::app->PostMessage(_EVENTS_PENDING_, bhapi::app);
 	}
 
 	return B_OK;
@@ -290,7 +290,7 @@ BMessageRunner::GetInfo(b_bigtime_t *interval, b_int32 *count) const
 {
 	if(fToken < 0 || (!interval && !count)) return B_ERROR;
 
-	BLocker *hLocker = b_get_handler_operator_locker();
+	BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	if(interval) *interval = fInterval;
@@ -305,7 +305,7 @@ BMessageRunner::GetInfo(BMessenger *target, BMessage *msg, b_bigtime_t *interval
 {
 	if(fToken < 0 || (!target && !msg && interval && !count && !replyTo)) return B_ERROR;
 
-	BLocker *hLocker = b_get_handler_operator_locker();
+	BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	if(target) *target = (fTarget ? *fTarget : BMessenger());

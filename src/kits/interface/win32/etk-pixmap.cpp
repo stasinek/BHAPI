@@ -64,7 +64,7 @@ EWin32GraphicsDrawable::EWin32GraphicsDrawable(EWin32GraphicsEngine *win32Engine
 	b_rgb_color whiteColor = {255, 255, 255, 255};
 	BGraphicsDrawable::SetBackgroundColor(whiteColor);
 
-	b_win32_gdi_callback_t callback;
+	bhapi::win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_CREATE_PIXMAP;
 	callback.pixmap = this;
 	callback.w = w;
@@ -82,7 +82,7 @@ EWin32GraphicsDrawable::EWin32GraphicsDrawable(EWin32GraphicsEngine *win32Engine
 }
 
 
-LRESULT _bhapi_create_pixmap(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
+LRESULT _bhapi_create_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_CREATE_PIXMAP || callback->pixmap == NULL) return FALSE;
@@ -124,7 +124,7 @@ EWin32GraphicsDrawable::~EWin32GraphicsDrawable()
 {
 	if(fRequestAsyncWin != NULL)
 	{
-		b_win32_gdi_callback_t callback;
+		bhapi::win32_gdi_callback_t callback;
 		callback.command = WM_BHAPI_MESSAGE_DESTROY_PIXMAP;
 		callback.pixmap = this;
 
@@ -137,7 +137,7 @@ EWin32GraphicsDrawable::~EWin32GraphicsDrawable()
 }
 
 
-LRESULT _bhapi_destroy_pixmap(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
+LRESULT _bhapi_destroy_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_DESTROY_PIXMAP || callback->pixmap == NULL ||
@@ -186,7 +186,7 @@ EWin32GraphicsDrawable::ResizeTo(b_uint32 w, b_uint32 h)
 		return B_ERROR;
 	}
 
-	b_win32_gdi_callback_t callback;
+	bhapi::win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_RESIZE_PIXMAP;
 	callback.pixmap = this;
 	callback.w = w;
@@ -204,7 +204,7 @@ EWin32GraphicsDrawable::ResizeTo(b_uint32 w, b_uint32 h)
 }
 
 
-LRESULT _bhapi_resize_pixmap(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
+LRESULT _bhapi_resize_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_RESIZE_PIXMAP || callback->pixmap == NULL ||
@@ -270,7 +270,7 @@ EWin32GraphicsDrawable::CopyTo(BGraphicsContext *dc,
 		return B_ERROR;
 	}
 
-	b_win32_gdi_callback_t callback;
+	bhapi::win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_DRAW_PIXMAP;
 	callback.pixmap = this;
 	callback.dc = dc;
@@ -291,7 +291,7 @@ EWin32GraphicsDrawable::CopyTo(BGraphicsContext *dc,
 }
 
 
-LRESULT _bhapi_draw_pixmap(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
+LRESULT _bhapi_draw_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_DRAW_PIXMAP || callback->pixmap == NULL ||
@@ -301,8 +301,8 @@ LRESULT _bhapi_draw_pixmap(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callba
 	BAutolock <EWin32GraphicsEngine> autolock(win32Engine);
 	if(autolock.IsLocked() == false || win32Engine->InitCheck() != B_OK) return FALSE;
 
-	EWin32GraphicsWindow *win = b_cast_as(callback->dstDrawable, EWin32GraphicsWindow);
-	EWin32GraphicsDrawable *pix = b_cast_as(callback->dstDrawable, EWin32GraphicsDrawable);
+	EWin32GraphicsWindow *win = cast_as(callback->dstDrawable, EWin32GraphicsWindow);
+	EWin32GraphicsDrawable *pix = cast_as(callback->dstDrawable, EWin32GraphicsDrawable);
 	if(win == NULL && pix == NULL)
 	{
 		BHAPI_WARNING("[GRAPHICS]: %s --- Invalid drawable.", __PRETTY_FUNCTION__);
@@ -394,7 +394,7 @@ EWin32GraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
 		return B_ERROR;
 	}
 
-	b_win32_gdi_callback_t callback;
+	bhapi::win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_DRAW_EPIXMAP;
 	callback.dc = dc;
 	callback.dstDrawable = this;

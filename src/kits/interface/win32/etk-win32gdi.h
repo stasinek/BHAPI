@@ -120,15 +120,19 @@ class EWin32GraphicsEngine;
 class EWin32GraphicsDrawable;
 class EWin32GraphicsWindow;
 
-extern bool bhapi::win32_window_get_rect(HWND hWnd, RECT *r);
-extern bool bhapi::win32_window_convert_to_screen(HWND hWnd, int *x, int *y);
-extern bool bhapi::win32_window_convert_window_to_client(HWND hWnd, RECT *wr);
+namespace bhapi {
+extern bool win32_window_get_rect(HWND hWnd, RECT *r);
+extern bool win32_window_convert_to_screen(HWND hWnd, int *x, int *y);
+extern bool win32_window_convert_window_to_client(HWND hWnd, RECT *wr);
+} /* namespace */
 
 extern "C" {
 // free it by "free"
-extern char* bhapi::win32_convert_utf8_to_active(const char *str, b_int32 length);
-extern char* bhapi::win32_convert_active_to_utf8(const char *str, b_int32 length);
-}
+namespace bhapi {
+extern char* win32_convert_utf8_to_active(const char *str, b_int32 length);
+extern char* win32_convert_active_to_utf8(const char *str, b_int32 length);
+} /* namespace */
+} /* extern  C */
 
 class EWin32GraphicsEngine : public BGraphicsEngine {
 public:

@@ -232,7 +232,7 @@ BScrollBar::Draw(BRect updateRect)
 {
 	if(!IsVisible()) return;
 
-	b_theme_engine *theme = b_get_current_theme_engine();
+	b_theme_engine *theme = bhapi::get_current_theme_engine();
 	if(theme == NULL || theme->draw_scrollbar == NULL) return;
 
 	PushState();
@@ -262,7 +262,7 @@ BScrollBar::MouseDown(BPoint where)
 	if(!rect.Contains(where)) return;
 
 	if(fTrackingState != 0) return;
-	b_theme_engine *theme = b_get_current_theme_engine();
+	b_theme_engine *theme = bhapi::get_current_theme_engine();
 	if(theme == NULL || theme->get_scrollbar_respondent_region == NULL) return;
 	BRegion dragTo, smallUp, smallDown, largeUp, largeDown;
 	theme->get_scrollbar_respondent_region(theme, this, Frame().OffsetToSelf(B_ORIGIN),
@@ -325,7 +325,7 @@ BScrollBar::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 	{
 		while(fMousePosition != where)
 		{
-			b_theme_engine *theme = b_get_current_theme_engine();
+			b_theme_engine *theme = bhapi::get_current_theme_engine();
 			if(theme == NULL || theme->get_scrollbar_respondent_region == NULL) break;
 
 			float ratio = 0;

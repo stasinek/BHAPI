@@ -193,7 +193,7 @@ EXGraphicsDrawable::CopyTo(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 	if(dc->DrawingMode() != B_OP_COPY)
 	{
@@ -207,9 +207,9 @@ EXGraphicsDrawable::CopyTo(BGraphicsContext *_dc_,
 
 	b_status_t retVal = B_OK;
 
-	if((win = b_cast_as(dstDrawable, EXGraphicsWindow)) != NULL)
+	if((win = cast_as(dstDrawable, EXGraphicsWindow)) != NULL)
 		XCopyArea(fEngine->xDisplay, xPixmap, win->xWindow, xGC, x, y, w + 1, h + 1, dstX, dstY);
-	else if((pix = b_cast_as(dstDrawable, EXGraphicsDrawable)) != NULL)
+	else if((pix = cast_as(dstDrawable, EXGraphicsDrawable)) != NULL)
 		XCopyArea(fEngine->xDisplay, xPixmap, pix->xPixmap, xGC, x, y, w + 1, h + 1, dstX, dstY);
 	else
 		retVal = B_ERROR;

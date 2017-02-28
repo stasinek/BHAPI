@@ -478,14 +478,14 @@ BListView::KeyDown(const char *bytes, b_int32 numBytes)
 	{
 		BRect rect = ItemFrame(newPos);
 		if(rect.IsValid() == false ||
-		   b_is_kind_of(Parent(), BScrollView) == false || b_cast_as(Parent(), BScrollView)->Target() != this)
+		   is_kind_of(Parent(), BScrollView) == false || cast_as(Parent(), BScrollView)->Target() != this)
 		{
 			InvalidateItem(oldPos);
 			if(rect.IsValid()) Invalidate(rect);
 		}
 		else
 		{
-			BRect vRect = ConvertFromParent(b_cast_as(Parent(), BScrollView)->TargetFrame());
+			BRect vRect = ConvertFromParent(cast_as(Parent(), BScrollView)->TargetFrame());
 			if(vRect.top <= rect.top && vRect.bottom >= rect.bottom)
 			{
 				InvalidateItem(oldPos);
@@ -503,15 +503,15 @@ BListView::KeyDown(const char *bytes, b_int32 numBytes)
 	}
 
 	if(!(!(bytes[0] == B_LEFT_ARROW || bytes[0] == B_RIGHT_ARROW) ||
-	     b_is_kind_of(Parent(), BScrollView) == false ||
-	     b_cast_as(Parent(), BScrollView)->Target() != this))
+	     is_kind_of(Parent(), BScrollView) == false ||
+	     cast_as(Parent(), BScrollView)->Target() != this))
 	{
-		float visibleWidth = b_cast_as(Parent(), BScrollView)->TargetFrame().Width();
+		float visibleWidth = cast_as(Parent(), BScrollView)->TargetFrame().Width();
 		BRect frame = Frame();
 
 		if(visibleWidth >= frame.Width()) return;
 
-		BScrollBar *hsb = b_cast_as(Parent(), BScrollView)->ScrollBar(B_HORIZONTAL);
+		BScrollBar *hsb = cast_as(Parent(), BScrollView)->ScrollBar(B_HORIZONTAL);
 		if(hsb == NULL) return;
 
 		BPoint originOffset = frame.LeftTop() - ConvertToParent(BPoint(0, 0));
@@ -1045,7 +1045,7 @@ BListView::ScrollToItem(b_int32 index)
 void
 BListView::ScrollToSelection()
 {
-	BScrollView *scrollView = b_cast_as(Parent(), BScrollView);
+	BScrollView *scrollView = cast_as(Parent(), BScrollView);
 	if(scrollView == NULL || scrollView->Target() != this) return;
 
 	BRect rect = ItemFrame(fFirstSelected);

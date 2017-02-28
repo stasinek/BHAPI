@@ -208,12 +208,12 @@ BRadioButton::SetValue(b_int32 value)
 		{
 			for(BView *sibling = NextSibling(); sibling != NULL; sibling = sibling->NextSibling())
 			{
-				BRadioButton *rbtn = b_cast_as(sibling, BRadioButton);
+				BRadioButton *rbtn = cast_as(sibling, BRadioButton);
 				if(rbtn != NULL) rbtn->SetValue(B_CONTROL_OFF);
 			}
 			for(BView *sibling = PreviousSibling(); sibling != NULL; sibling = sibling->PreviousSibling())
 			{
-				BRadioButton *rbtn = b_cast_as(sibling, BRadioButton);
+				BRadioButton *rbtn = cast_as(sibling, BRadioButton);
 				if(rbtn != NULL) rbtn->SetValue(B_CONTROL_OFF);
 			}
 		}

@@ -238,7 +238,7 @@ BFontBe::RenderString(BHandler *_view, const char *string, float size, float spa
 {
 	if(fBeEngine == NULL || (int)size <= 0 || string == NULL || *string == 0 || length == 0) return BRect();
 
-	BView *view = b_cast_as(_view, BView);
+	BView *view = cast_as(_view, BView);
 	if(view == NULL || view->Window() == NULL || view->IsPrinting()) return BRect();
 
 	BRegion viewClipping;
@@ -248,7 +248,7 @@ BFontBe::RenderString(BHandler *_view, const char *string, float size, float spa
 	BAutolock <EBeGraphicsEngine> autolock(fBeEngine);
 	if(autolock.IsLocked() == false || fBeEngine->InitCheck() != B_OK) return BRect();
 
-	EBeGraphicsDrawable *pix = b_cast_as(BGraphicsEngine::GetPixmap(view->Window()), EBeGraphicsDrawable);
+	EBeGraphicsDrawable *pix = cast_as(BGraphicsEngine::GetPixmap(view->Window()), EBeGraphicsDrawable);
 	BGraphicsContext *dc = BGraphicsEngine::GetContext(view);
 	if(pix == NULL || pix->beBitmap == NULL || dc == NULL) return BRect();
 

@@ -96,7 +96,7 @@ EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine, b_int32 x, b_int
 
 	XClassHint class_hint;
 	class_hint.res_name = NULL;
-	class_hint.res_class = (char*)b_app->Signature();
+	class_hint.res_class = (char*)bhapi::app->Signature();
 
 	XSetWMProperties(fEngine->xDisplay, xWindow, NULL, NULL, NULL, 0, &size_hints, &wm_hints, &class_hint);
 
@@ -393,7 +393,7 @@ EXGraphicsWindow::SetTitle(const char *title)
 
 	XClassHint class_hint;
 	class_hint.res_name = (char*)title;
-	class_hint.res_class = (char*)b_app->Signature();
+	class_hint.res_class = (char*)bhapi::app->Signature();
 
 	XSetClassHint(fEngine->xDisplay, xWindow, &class_hint);
 
@@ -722,7 +722,7 @@ EXGraphicsWindow::Lower(BGraphicsWindow *frontW)
 	bool winShown = false;
 	bool frontShown = false;
 
-	EXGraphicsWindow *frontWin = b_cast_as(frontW, EXGraphicsWindow);
+	EXGraphicsWindow *frontWin = cast_as(frontW, EXGraphicsWindow);
 	if(!(frontWin == NULL || (fEngine == frontWin->fEngine && xWindow != frontWin->xWindow))) return B_ERROR;
 
 	XGetWindowProperty(fEngine->xDisplay, xWindow,
@@ -1056,7 +1056,7 @@ EXGraphicsWindow::CopyTo(BGraphicsContext *_dc_,
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 	if(dc->DrawingMode() != B_OP_COPY)
 	{
@@ -1070,10 +1070,10 @@ EXGraphicsWindow::CopyTo(BGraphicsContext *_dc_,
 
 	b_status_t retVal = B_OK;
 
-	if((win = b_cast_as(dstDrawable, EXGraphicsWindow)) != NULL)
+	if((win = cast_as(dstDrawable, EXGraphicsWindow)) != NULL)
 		XCopyArea(fEngine->xDisplay, xWindow, win->xWindow, DefaultGC(fEngine->xDisplay, fEngine->xScreen),
 			  x, y, w + 1, h + 1, dstX, dstY);
-	else if((pix = b_cast_as(dstDrawable, EXGraphicsDrawable)) != NULL)
+	else if((pix = cast_as(dstDrawable, EXGraphicsDrawable)) != NULL)
 		XCopyArea(fEngine->xDisplay, xWindow, pix->xPixmap, DefaultGC(fEngine->xDisplay, fEngine->xScreen),
 			  x, y, w + 1, h + 1, dstX, dstY);
 	else

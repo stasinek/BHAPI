@@ -372,7 +372,7 @@ EDFBGraphicsWindow::Lower(BGraphicsWindow *_frontWin)
 
 	if(fHidden) return B_ERROR;
 
-	EDFBGraphicsWindow *frontWin = b_cast_as(_frontWin, EDFBGraphicsWindow);
+	EDFBGraphicsWindow *frontWin = cast_as(_frontWin, EDFBGraphicsWindow);
 
 	if(frontWin == NULL)
 	{
@@ -659,8 +659,8 @@ EDFBGraphicsWindow::CopyTo(BGraphicsContext *dc,
 	IDirectFBSurface *destSurface = NULL;
 	BRect margins(0, 0, 0, 0);
 
-	if((win = b_cast_as(dstDrawable, EDFBGraphicsWindow)) != NULL) {destSurface = win->dfbSurface; margins = win->fMargins;}
-	else if((pix = b_cast_as(dstDrawable, EDFBGraphicsDrawable)) != NULL) destSurface = pix->dfbSurface;
+	if((win = cast_as(dstDrawable, EDFBGraphicsWindow)) != NULL) {destSurface = win->dfbSurface; margins = win->fMargins;}
+	else if((pix = cast_as(dstDrawable, EDFBGraphicsDrawable)) != NULL) destSurface = pix->dfbSurface;
 
 	if(destSurface == NULL) return B_ERROR;
 

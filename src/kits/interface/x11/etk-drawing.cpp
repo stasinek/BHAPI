@@ -1267,7 +1267,7 @@ b_status_t
 EXGraphicsDrawable::StrokePoint(BGraphicsContext *_dc_,
 				b_int32 x, b_int32 y)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1281,7 +1281,7 @@ b_status_t
 EXGraphicsDrawable::StrokePoints(BGraphicsContext *_dc_,
 				 const b_int32 *pts, b_int32 count)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1296,7 +1296,7 @@ EXGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *_dc_,
 					const BList *ptsArrayLists, b_int32 arrayCount,
 					const b_rgb_color *highColors)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1310,7 +1310,7 @@ b_status_t
 EXGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *_dc_,
 					const b_int32 *pts, const b_uint8 *alpha, b_int32 count)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1324,7 +1324,7 @@ b_status_t
 EXGraphicsDrawable::StrokeLine(BGraphicsContext *_dc_,
 			       b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1338,7 +1338,7 @@ b_status_t
 EXGraphicsDrawable::StrokePolygon(BGraphicsContext *_dc_,
 				  const b_int32 *pts, b_int32 count, bool closed)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1352,7 +1352,7 @@ b_status_t
 EXGraphicsDrawable::FillPolygon(BGraphicsContext *_dc_,
 				const b_int32 *pts, b_int32 count)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1366,7 +1366,7 @@ b_status_t
 EXGraphicsDrawable::StrokeRect(BGraphicsContext *_dc_,
 			       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1380,7 +1380,7 @@ b_status_t
 EXGraphicsDrawable::FillRect(BGraphicsContext *_dc_,
 			     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1394,7 +1394,7 @@ b_status_t
 EXGraphicsDrawable::StrokeRects(BGraphicsContext *_dc_,
 				const b_int32 *rects, b_int32 count)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1408,7 +1408,7 @@ b_status_t
 EXGraphicsDrawable::FillRects(BGraphicsContext *_dc_,
 			      const b_int32 *rects, b_int32 count)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1422,7 +1422,7 @@ b_status_t
 EXGraphicsDrawable::FillRegion(BGraphicsContext *_dc_,
 			       const BRegion &region)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1436,7 +1436,7 @@ b_status_t
 EXGraphicsDrawable::StrokeRoundRect(BGraphicsContext *_dc_,
 				    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1450,7 +1450,7 @@ b_status_t
 EXGraphicsDrawable::FillRoundRect(BGraphicsContext *_dc_,
 				  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1464,7 +1464,7 @@ b_status_t
 EXGraphicsDrawable::StrokeArc(BGraphicsContext *_dc_,
 			      b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1478,7 +1478,7 @@ b_status_t
 EXGraphicsDrawable::FillArc(BGraphicsContext *_dc_,
 			    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1493,7 +1493,7 @@ EXGraphicsDrawable::DrawPixmap(BGraphicsContext *_dc_, const BPixmap *pix,
 			       b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
 			       b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1506,7 +1506,7 @@ b_status_t
 EXGraphicsWindow::StrokePoint(BGraphicsContext *_dc_,
 			      b_int32 x, b_int32 y)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1520,7 +1520,7 @@ b_status_t
 EXGraphicsWindow::StrokePoints(BGraphicsContext *_dc_,
 			       const b_int32 *pts, b_int32 count)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1535,7 +1535,7 @@ EXGraphicsWindow::StrokePoints_Colors(BGraphicsContext *_dc_,
 				      const BList *ptsArrayLists, b_int32 arrayCount,
 				      const b_rgb_color *highColors)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1549,7 +1549,7 @@ b_status_t
 EXGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *_dc_,
 				      const b_int32 *pts, const b_uint8 *alpha, b_int32 count)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1563,7 +1563,7 @@ b_status_t
 EXGraphicsWindow::StrokeLine(BGraphicsContext *_dc_,
 			     b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1577,7 +1577,7 @@ b_status_t
 EXGraphicsWindow::StrokePolygon(BGraphicsContext *_dc_,
 				const b_int32 *pts, b_int32 count, bool closed)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1591,7 +1591,7 @@ b_status_t
 EXGraphicsWindow::FillPolygon(BGraphicsContext *_dc_,
 			      const b_int32 *pts, b_int32 count)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1605,7 +1605,7 @@ b_status_t
 EXGraphicsWindow::StrokeRect(BGraphicsContext *_dc_,
 			     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1619,7 +1619,7 @@ b_status_t
 EXGraphicsWindow::FillRect(BGraphicsContext *_dc_,
 			   b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1633,7 +1633,7 @@ b_status_t
 EXGraphicsWindow::StrokeRects(BGraphicsContext *_dc_,
 			      const b_int32 *rects, b_int32 count)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1647,7 +1647,7 @@ b_status_t
 EXGraphicsWindow::FillRects(BGraphicsContext *_dc_,
 			    const b_int32 *rects, b_int32 count)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1661,7 +1661,7 @@ b_status_t
 EXGraphicsWindow::FillRegion(BGraphicsContext *_dc_,
 			     const BRegion &region)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1675,7 +1675,7 @@ b_status_t
 EXGraphicsWindow::StrokeRoundRect(BGraphicsContext *_dc_,
 				  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1689,7 +1689,7 @@ b_status_t
 EXGraphicsWindow::FillRoundRect(BGraphicsContext *_dc_,
 				b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, b_uint32 xRadius, b_uint32 yRadius)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1703,7 +1703,7 @@ b_status_t
 EXGraphicsWindow::StrokeArc(BGraphicsContext *_dc_,
 			    b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1717,7 +1717,7 @@ b_status_t
 EXGraphicsWindow::FillArc(BGraphicsContext *_dc_,
 			  b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
@@ -1732,7 +1732,7 @@ EXGraphicsWindow::DrawPixmap(BGraphicsContext *_dc_, const BPixmap *pix,
 			     b_int32 x, b_int32 y, b_uint32 w, b_uint32 h,
 			     b_int32 dstX, b_int32 dstY, b_uint32 dstW, b_uint32 dstH)
 {
-	EXGraphicsContext *dc = b_cast_as(_dc_, EXGraphicsContext);
+	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
 
 	BAutolock <EXGraphicsEngine> autolock(fEngine);

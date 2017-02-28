@@ -339,7 +339,7 @@ BHandler::BHandler(const char *name)
 	  fObserverList(NULL), fFilters(NULL)
 {
 	fName = bhapi::strdup(name);
-    fToken = b_app_connector->HandlersDepot()->CreateToken(reinterpret_cast<void*>(this));
+    fToken = bhapi::app_connector->HandlersDepot()->CreateToken(reinterpret_cast<void*>(this));
 }
 
 
@@ -366,7 +366,7 @@ BHandler::BHandler(const BMessage *from)
     if(from != NULL) from->FindString("_name", &name);
 
 	fName = bhapi::strdup(name);
-    fToken = b_app_connector->HandlersDepot()->CreateToken(reinterpret_cast<void*>(this));
+    fToken = bhapi::app_connector->HandlersDepot()->CreateToken(reinterpret_cast<void*>(this));
 }
 
 
@@ -499,7 +499,7 @@ BHandler::LockLooper()
 b_status_t
 BHandler::LockLooperWithTimeout(b_bigtime_t microseconds_timeout)
 {
-	BAutolock <BLocker>autolock(b_get_handler_operator_locker());
+	BAutolock <BLocker>autolock(bhapi::get_handler_operator_locker());
 	return(fLooper == NULL ? B_BAD_VALUE : fLooper->LockWithTimeout(microseconds_timeout));
 }
 

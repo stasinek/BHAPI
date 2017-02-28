@@ -49,8 +49,9 @@ private:
     b_uint64 fVitalities;
 };
 
-LOCAL_BHAPI void bhapi::delete_object(void *object);
-
+namespace bhapi {
+LOCAL_BHAPI void delete_object(void *object);
+}
 #endif /* __cplusplus */
 
 #endif /* BHAPI_PRIVATE_OBJECT__H */

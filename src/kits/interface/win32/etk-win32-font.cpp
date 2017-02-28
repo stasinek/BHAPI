@@ -118,7 +118,7 @@ BFontWin32::_CreateFont(EWin32GraphicsEngine *win32Engine, const char *family, c
 	if(win32Engine == NULL || font == NULL ||
 	   family == NULL || *family == 0 || style == NULL || *style == 0) return B_ERROR;
 
-	b_win32_gdi_callback_t callback;
+    bhapi::win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_CREATB_FONT;
 	callback.fontFamily = family;
 	callback.fontString = style;
@@ -134,7 +134,7 @@ BFontWin32::_CreateFont(EWin32GraphicsEngine *win32Engine, const char *family, c
 }
 
 
-LRESULT _bhapi_create_font(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
+LRESULT _bhapi_create_font(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_CREATB_FONT ||
@@ -164,7 +164,7 @@ BFontWin32::_DestroyFont(EWin32GraphicsEngine *win32Engine, HFONT *font)
 {
 	if(win32Engine == NULL || font == NULL) return B_ERROR;
 
-	b_win32_gdi_callback_t callback;
+    bhapi::win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_DESTROY_FONT;
 	callback.font = font;
 
@@ -176,7 +176,7 @@ BFontWin32::_DestroyFont(EWin32GraphicsEngine *win32Engine, HFONT *font)
 }
 
 
-LRESULT _bhapi_destroy_font(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
+LRESULT _bhapi_destroy_font(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_DESTROY_FONT ||
@@ -198,7 +198,7 @@ BFontWin32::_StringWidth(EWin32GraphicsEngine *win32Engine, const char *string, 
 	if(win32Engine == NULL || string == NULL || *string == 0 || w == NULL ||
 	   hdc == NULL || *hdc == NULL || font == NULL || *font == NULL) return B_ERROR;
 
-	b_win32_gdi_callback_t callback;
+    bhapi::win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGB_FONT_STRING_WIDTH;
 	callback.fontTmpDC = hdc;
 	callback.font = font;
@@ -214,7 +214,7 @@ BFontWin32::_StringWidth(EWin32GraphicsEngine *win32Engine, const char *string, 
 }
 
 
-LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
+LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGB_FONT_STRING_WIDTH ||
@@ -271,7 +271,7 @@ LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, b_win32_gdi_
 		{
 			b_int32 cWidth = -1;
 
-			char *aStr = b_win32_convert_utf8_to_active(tmp, (b_int32)uLen);
+            char *aStr = bhapi::win32_convert_utf8_to_active(tmp, (b_int32)uLen);
 			if(aStr != NULL)
 			{
 				SIZE sz;
@@ -299,7 +299,7 @@ BFontWin32::_GetHeight(EWin32GraphicsEngine *win32Engine, b_uint32 *leading, b_u
 	if(win32Engine == NULL || leading == NULL || ascent == NULL || descent == NULL ||
 	   hdc == NULL || *hdc == NULL || font == NULL || *font == NULL) return B_ERROR;
 
-	b_win32_gdi_callback_t callback;
+    bhapi::win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGB_FONT_GET_HEIGHT;
 	callback.fontTmpDC = hdc;
 	callback.font = font;
@@ -315,7 +315,7 @@ BFontWin32::_GetHeight(EWin32GraphicsEngine *win32Engine, b_uint32 *leading, b_u
 }
 
 
-LRESULT _bhapi_font_get_height(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
+LRESULT _bhapi_font_get_height(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGB_FONT_GET_HEIGHT ||
@@ -352,7 +352,7 @@ BFontWin32::_RenderString(EWin32GraphicsEngine *win32Engine, EWin32GraphicsDrawa
 	   w == NULL || h == NULL || ascent == NULL ||
 	   font == NULL || *font == NULL) return B_ERROR;
 
-	b_win32_gdi_callback_t callback;
+    bhapi::win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGB_FONT_RENDER_STRING;
 	callback.font = font;
 	callback.pixmap = pixmap;
@@ -375,7 +375,7 @@ BFontWin32::_RenderString(EWin32GraphicsEngine *win32Engine, EWin32GraphicsDrawa
 }
 
 
-LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
+LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGB_FONT_RENDER_STRING ||
@@ -459,7 +459,7 @@ LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, b_win32_gdi
 		{
 			b_int32 cWidth = -1;
 
-			char *aStr = b_win32_convert_utf8_to_active(tmp, (b_int32)uLen);
+            char *aStr = bhapi::win32_convert_utf8_to_active(tmp, (b_int32)uLen);
 			if(aStr != NULL)
 			{
 				SIZE sz;
@@ -496,7 +496,7 @@ BFontWin32::_CreateTmpDC(EWin32GraphicsEngine *win32Engine, HDC *hdc)
 {
 	if(win32Engine == NULL || hdc == NULL) return B_ERROR;
 
-	b_win32_gdi_callback_t callback;
+    bhapi::win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_CREATB_FONT_TMP_DC;
 	callback.fontTmpDC = hdc;
 
@@ -508,7 +508,7 @@ BFontWin32::_CreateTmpDC(EWin32GraphicsEngine *win32Engine, HDC *hdc)
 }
 
 
-LRESULT _bhapi_creatbhapi::font_tmp_dc(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
+LRESULT _bhapi_creatbhapi::font_tmp_dc(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_CREATB_FONT_TMP_DC || callback->fontTmpDC == NULL) return FALSE;
@@ -531,7 +531,7 @@ BFontWin32::_DestroyTmpDC(EWin32GraphicsEngine *win32Engine, HDC *hdc)
 {
 	if(win32Engine == NULL || hdc == NULL) return B_ERROR;
 
-	b_win32_gdi_callback_t callback;
+    bhapi::win32_gdi_callback_t callback;
 	callback.command = WM_BHAPI_MESSAGE_DESTROY_FONT_TMP_DC;
 	callback.fontTmpDC = hdc;
 
@@ -543,7 +543,7 @@ BFontWin32::_DestroyTmpDC(EWin32GraphicsEngine *win32Engine, HDC *hdc)
 }
 
 
-LRESULT _bhapi_destroy_font_tmp_dc(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
+LRESULT _bhapi_destroy_font_tmp_dc(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback)
 {
 	if(win32Engine == NULL || callback == NULL ||
 	   callback->command != WM_BHAPI_MESSAGE_DESTROY_FONT_TMP_DC ||
@@ -606,8 +606,8 @@ BFontWin32::BFontWin32(EWin32GraphicsEngine *win32Engine, const char *wFontname,
 	fLocalFontFamily = wFontname;
 	fLocalFontStyle = wFontStyle;
 
-	char *sFontFamily = b_win32_convert_active_to_utf8(wFontname, -1);
-	char *sFontStyle = b_win32_convert_active_to_utf8(wFontStyle, -1);
+    char *sFontFamily = bhapi::win32_convert_active_to_utf8(wFontname, -1);
+    char *sFontStyle = bhapi::win32_convert_active_to_utf8(wFontStyle, -1);
 
 	SetFamily(sFontFamily == NULL ? wFontname : sFontFamily);
 	SetStyle(sFontStyle == NULL ? wFontStyle : sFontStyle);
@@ -728,14 +728,14 @@ BFontWin32::RenderString(BHandler *_view, const char *string, float size, float 
 {
 	if(fEngine == NULL || (int)size <= 0 || string == NULL || *string == 0 || length == 0 || !IsAttached()) return BRect();
 
-	BView *view = b_cast_as(_view, BView);
+	BView *view = cast_as(_view, BView);
 	if(view == NULL || view->Window() == NULL || view->IsPrinting()) return BRect();
 
 	BRegion viewClipping;
 	view->GetClippingRegion(&viewClipping);
 	if(viewClipping.CountRects() <= 0) return BRect();
 
-	EWin32GraphicsDrawable *pix = b_cast_as(fEngine->GetPixmap(view->Window()), EWin32GraphicsDrawable);
+	EWin32GraphicsDrawable *pix = cast_as(fEngine->GetPixmap(view->Window()), EWin32GraphicsDrawable);
 	BGraphicsContext *dc = fEngine->GetContext(view);
 	if(pix == NULL || dc == NULL) return BRect();
 

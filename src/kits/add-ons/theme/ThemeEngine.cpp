@@ -32,11 +32,11 @@
 #include "../../interface/Rect.h"
 #include "../../interface/Region.h"
 #include "../../interface/Point.h"
-
+namespace bhapi {
 extern b_theme_engine b_default_theme_engine;
-
-EXPORT_BHAPI b_theme_engine* b_get_current_theme_engine(void)
+EXPORT_BHAPI b_theme_engine* get_current_theme_engine(void)
 {
-	return &b_default_theme_engine;
+    return &b_default_theme_engine;
+}
 }
 

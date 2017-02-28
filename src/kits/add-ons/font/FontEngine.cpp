@@ -393,7 +393,7 @@ BFontEngine::RenderString(const BString &str, b_int32 *width, b_int32 *height, b
 }
 
 
-EXPORT_BHAPI b_int32 b_count_font_families(void)
+EXPORT_BHAPI b_int32 bhapi::count_font_families(void)
 {
     BAutolock <BLocker> autolock(&bhapi::font_locker);
 
@@ -401,7 +401,7 @@ EXPORT_BHAPI b_int32 b_count_font_families(void)
 }
 
 
-EXPORT_BHAPI b_status_t b_get_font_family(b_int32 index, const char **name)
+EXPORT_BHAPI b_status_t bhapi::get_font_family(b_int32 index, const char **name)
 {
 	if(!name) return B_BAD_VALUE;
 
@@ -415,7 +415,7 @@ EXPORT_BHAPI b_status_t b_get_font_family(b_int32 index, const char **name)
 }
 
 
-EXPORT_BHAPI b_int32 b_get_font_family_index(const char *name)
+EXPORT_BHAPI b_int32 bhapi::get_font_family_index(const char *name)
 {
 	if(!name) return -1;
 
@@ -426,7 +426,7 @@ EXPORT_BHAPI b_int32 b_get_font_family_index(const char *name)
 }
 
 
-EXPORT_BHAPI b_int32 b_get_font_style_index(const char *family, const char *name)
+EXPORT_BHAPI b_int32 bhapi::get_font_style_index(const char *family, const char *name)
 {
 	if(!family || !name) return -1;
 

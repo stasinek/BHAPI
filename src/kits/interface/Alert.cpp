@@ -175,8 +175,8 @@ BAlertButton::BAlertButton(BRect frame, const char *name, const char *label, BMe
 b_status_t
 BAlertButton::Invoke(const BMessage *msg)
 {
-    BAlert *alert = b_cast_as(Window(), BAlert);
-    BAlertTypeView *alert_view = b_cast_as(Window()->FindView("alert_type_view"), BAlertTypeView);
+    BAlert *alert = cast_as(Window(), BAlert);
+    BAlertTypeView *alert_view = cast_as(Window()->FindView("alert_type_view"), BAlertTypeView);
 
 	if(alert == NULL || alert_view == NULL)
 	{
@@ -197,7 +197,7 @@ BAlertButton::Invoke(const BMessage *msg)
 	else
 	{
 		alert_view->fState = (0x01 << fIndex);
-		if(alert_view->fSem) b_release_sem_etc(alert_view->fSem, (b_int64)(fIndex + 1), 0);
+		if(alert_view->fSem) bhapi::release_sem_etc(alert_view->fSem, (b_int64)(fIndex + 1), 0);
 	}
 
 	alert->PostMessage(B_QUIT_REQUESTED);
@@ -311,13 +311,13 @@ BAlert::Go(bool could_proxy)
 
 	Lock();
 
-    BAlertTypeView *alert_view = b_cast_as(FindView("alert_type_view"), BAlertTypeView);
+    BAlertTypeView *alert_view = cast_as(FindView("alert_type_view"), BAlertTypeView);
 	alert_view->fState = 0x40;
 	alert_view->fInvoker = NULL;
 
 	if(could_proxy)
 	{
-		BLooper *looper = BLooper::LooperForThread(b_get_current_thread_id());
+		BLooper *looper = BLooper::LooperForThread(bhapi::get_current_thread_id());
 		if(looper)
 		{
 			looper->Lock();
@@ -352,19 +352,19 @@ BAlert::Go(bool could_proxy)
 	}
 	else
 	{
-		void *trackingSem = b_create_sem(0, NULL);
+		void *trackingSem = bhapi::create_sem(0, NULL);
 		alert_view->fSem = trackingSem;
 
 		Unlock();
 
 		b_int64 count = 0;
-		if(!(b_acquire_sem(trackingSem) != B_OK ||
-		     b_get_sem_count(trackingSem, &count) != B_OK ||
+		if(!(bhapi::acquire_sem(trackingSem) != B_OK ||
+		     bhapi::get_sem_count(trackingSem, &count) != B_OK ||
 		     count < 0 || count > 2))
 		{
 			retVal = (b_int32)count;
 		}
-		b_delete_sem(trackingSem);
+		bhapi::delete_sem(trackingSem);
 	}
 
 	return retVal;
@@ -382,7 +382,7 @@ BAlert::Go(BInvoker *invoker)
 
 	Lock();
 
-    BAlertTypeView *alert_view = b_cast_as(FindView("alert_type_view"), BAlertTypeView);
+    BAlertTypeView *alert_view = cast_as(FindView("alert_type_view"), BAlertTypeView);
 	alert_view->fState = 0x80;
 	alert_view->fInvoker = invoker;
 

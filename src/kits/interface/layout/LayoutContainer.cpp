@@ -147,11 +147,11 @@ BLayoutContainer::SetUnitsPerPixel(float value, bool deep)
 		item = (BLayoutItem*)fItems.ItemAt(0);
 		while(item != NULL)
 		{
-			b_cast_as(item, BLayoutContainer)->fUnitsPerPixel = value;
+			cast_as(item, BLayoutContainer)->fUnitsPerPixel = value;
 
-			if(b_cast_as(item, BLayoutContainer)->fItems.CountItems() > 0)
+			if(cast_as(item, BLayoutContainer)->fItems.CountItems() > 0)
 			{
-                item = (BLayoutItem*)b_cast_as(item, BLayoutContainer)->fItems.ItemAt(0);
+                item = (BLayoutItem*)cast_as(item, BLayoutContainer)->fItems.ItemAt(0);
 			}
 			else if(item->fContainer == this)
 			{
@@ -165,12 +165,12 @@ BLayoutContainer::SetUnitsPerPixel(float value, bool deep)
 					continue;
 				}
 
-				while(b_cast_as(item->fContainer, BLayoutItem)->NextSibling() == NULL)
+				while(cast_as(item->fContainer, BLayoutItem)->NextSibling() == NULL)
 				{
-					item = b_cast_as(item->fContainer, BLayoutItem);
+					item = cast_as(item->fContainer, BLayoutItem);
 					if(item->fContainer == this) break;
 				}
-				item = b_cast_as(item->fContainer, BLayoutItem)->NextSibling();
+				item = cast_as(item->fContainer, BLayoutItem)->NextSibling();
 			}
 		}
 	}

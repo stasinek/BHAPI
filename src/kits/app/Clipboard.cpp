@@ -243,7 +243,7 @@ BClipboard::DataSource() const
 	// TODO
 	if(fName == NULL) return BMessenger();
 
-	return b_app_messenger;
+	return bhapi::app_messenger;
 }
 
 

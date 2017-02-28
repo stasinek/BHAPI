@@ -165,7 +165,7 @@ public:
 
 // NOTE:
 // 1. Addon must have C function like below and all the null virtual functions of class must be implemented.
-// 		extern "C" _EXPORT BGraphicsEngine* instantiate_graphics_engine();
+// 		extern "C" EXPORT_BHAPI BGraphicsEngine* instantiate_graphics_engine();
 // 2. Usually, addons were put into the directory located at "$E_ADDONS_DIRECTORY/etkxx/graphics" or
 //    "$E_USER_ADDONS_DIRECTORY/etkxx/graphics", such as "/usr/lib/add-ons/etkxx/graphics".
 // 3. When BHAPI++ find no graphics-engine addons, it try built-in graphics-engine when possible.

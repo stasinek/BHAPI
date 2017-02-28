@@ -200,7 +200,7 @@ EBeGraphicsDrawable::CopyTo(BGraphicsContext *dc,
 
 	b_status_t retVal = B_ERROR;
 
-	if((win = b_cast_as(dstDrawable, EBeGraphicsWindow)) != NULL)
+	if((win = cast_as(dstDrawable, EBeGraphicsWindow)) != NULL)
 	{
 		if(win->beWinMsgr.IsValid())
 		{
@@ -218,7 +218,7 @@ EBeGraphicsDrawable::CopyTo(BGraphicsContext *dc,
 			win->beWinMsgr.SendMessage(&msg, &msg);
 		}
 	}
-	else if((pix = b_cast_as(dstDrawable, EBeGraphicsDrawable)) != NULL)
+	else if((pix = cast_as(dstDrawable, EBeGraphicsDrawable)) != NULL)
 	{
 		if(pix->beBitmap != NULL)
 		{

@@ -156,26 +156,26 @@ BWindowLayoutContainer::Invalidate(BRect rect)
 void
 BWindow::InitSelf(BRect frame, const char *title, b_window_look look, b_window_feel feel, b_uint32 flags, b_uint32 workspace)
 {
-	if(b_app == NULL || b_app->fGraphicsEngine == NULL)
+	if(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL)
 		BHAPI_ERROR("[INTERFACE]: Window must created within a application which has graphics-engine!");
 
 #ifdef BHAPI_ENABLE_DEBUG
 	BString winLooperName;
-	winLooperName << "Window " << b_get_handler_token(this);
+	winLooperName << "Window " << bhapi::get_handler_token(this);
 	SetName(winLooperName.String());
 #endif // BHAPI_ENABLE_DEBUG
 
 	fLayout = new BWindowLayoutContainer(this, frame);
 
 	frame.Floor();
-	if((fWindow = b_app->fGraphicsEngine->CreateWindow((b_int32)frame.left, (b_int32)frame.top,
+	if((fWindow = bhapi::app->fGraphicsEngine->CreateWindow((b_int32)frame.left, (b_int32)frame.top,
 							     (b_uint32)max_c(frame.Width(), 0),
 							     (b_uint32)max_c(frame.Height(), 0))) == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- Unable to create window!", __PRETTY_FUNCTION__);
-	else if((fPixmap = b_app->fGraphicsEngine->CreatePixmap((b_uint32)max_c(frame.Width(), 0),
+	else if((fPixmap = bhapi::app->fGraphicsEngine->CreatePixmap((b_uint32)max_c(frame.Width(), 0),
 								  (b_uint32)max_c(frame.Height(), 0))) == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- Unable to create pixmap!", __PRETTY_FUNCTION__);
-	else if((fDC = b_app->fGraphicsEngine->CreateContext()) == NULL)
+	else if((fDC = bhapi::app->fGraphicsEngine->CreateContext()) == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- Unable to create graphics context!", __PRETTY_FUNCTION__);
 
 	fDC->SetClipping(BRegion(frame.OffsetToCopy(B_ORIGIN)));
@@ -516,7 +516,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 				if(doMoved)
 				{
 					fPositionChangedTimeStamp = when;
-					b_cast_as(fLayout, BWindowLayoutContainer)->MoveTo(where);
+					cast_as(fLayout, BWindowLayoutContainer)->MoveTo(where);
 				}
 
 				if(doResized)
@@ -537,7 +537,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 					// for disable update
 					bool saveInUpdate = fInUpdate;
 					fInUpdate = true;
-					b_cast_as(fLayout, BWindowLayoutContainer)->ResizeTo(w, h);
+					cast_as(fLayout, BWindowLayoutContainer)->ResizeTo(w, h);
 					fInUpdate = saveInUpdate;
 				}
 				else if(fBrokeOnExpose)
@@ -689,7 +689,7 @@ BWindow::Quit()
 		fWindow->ContactTo(NULL);
 	}
 
-	if(fWindowFlags & B_QUIT_ON_WINDOW_CLOSE) b_app->PostMessage(B_QUIT_REQUESTED);
+	if(fWindowFlags & B_QUIT_ON_WINDOW_CLOSE) bhapi::app->PostMessage(B_QUIT_REQUESTED);
 
 	BLooper::Quit();
 }
@@ -698,9 +698,9 @@ BWindow::Quit()
 void
 BWindow::Show()
 {
-	if(b_cast_as(fLayout, BWindowLayoutContainer)->TopItem()->IsHidden(false) == false) return;
+	if(cast_as(fLayout, BWindowLayoutContainer)->TopItem()->IsHidden(false) == false) return;
 
-	b_cast_as(fLayout, BWindowLayoutContainer)->TopItem()->Show();
+	cast_as(fLayout, BWindowLayoutContainer)->TopItem()->Show();
 
 	fMinimized = false;
 	if(fWindow) fWindow->Show();
@@ -713,7 +713,7 @@ BWindow::Show()
 	if(fWindowFeel == B_MODAL_APP_WINDOW_FEEL)
 	{
 		BMessenger msgrSelf(this);
-		b_app->AddModalWindow(msgrSelf);
+		bhapi::app->AddModalWindow(msgrSelf);
 	}
 }
 
@@ -721,14 +721,14 @@ BWindow::Show()
 void
 BWindow::Hide()
 {
-	if(b_cast_as(fLayout, BWindowLayoutContainer)->TopItem()->IsHidden(false)) return;
+	if(cast_as(fLayout, BWindowLayoutContainer)->TopItem()->IsHidden(false)) return;
 
 	if(fPulseRunner) fPulseRunner->SetCount(0);
 
 	if(fWindowFeel == B_MODAL_APP_WINDOW_FEEL)
 	{
 		BMessenger msgrSelf(this);
-		b_app->RemoveModalWindow(msgrSelf);
+		bhapi::app->RemoveModalWindow(msgrSelf);
 	}
 
 	if(fMouseGrabCount > 0)
@@ -768,14 +768,14 @@ BWindow::Hide()
 		SendNotices(B_MINIMIZED, &aMsg);
 	}
 
-	b_cast_as(fLayout, BWindowLayoutContainer)->TopItem()->Hide();
+	cast_as(fLayout, BWindowLayoutContainer)->TopItem()->Hide();
 }
 
 
 bool
 BWindow::IsHidden() const
 {
-	return b_cast_as(fLayout, BWindowLayoutContainer)->TopItem()->IsHidden();
+	return cast_as(fLayout, BWindowLayoutContainer)->TopItem()->IsHidden();
 }
 
 
@@ -845,7 +845,7 @@ BWindow::AddChild(BView *child, BView *nextSibling)
 		return;
 	}
 
-	BLayoutItem *topItem = b_cast_as(fLayout, BWindowLayoutContainer)->TopItem();
+	BLayoutItem *topItem = cast_as(fLayout, BWindowLayoutContainer)->TopItem();
 	if(topItem->AddItem(child->fLayout, nextSibling == NULL ? -1 : topItem->IndexOf(nextSibling->fLayout)) == false)
 	{
 		RemoveHandler(child);
@@ -876,9 +876,9 @@ BWindow::RemoveChild(BView *child)
 		child->fScrollBar.MakeEmpty();
 	}
 
-	if(b_is_kind_of(child, BScrollBar))
+	if(is_kind_of(child, BScrollBar))
 	{
-		BScrollBar *scrollbar = b_cast_as(child, BScrollBar);
+		BScrollBar *scrollbar = cast_as(child, BScrollBar);
 		if(scrollbar->fTarget != NULL)
 		{
 			scrollbar->fTarget->fScrollBar.RemoveItem(scrollbar);
@@ -894,7 +894,7 @@ BWindow::RemoveChild(BView *child)
 	child->DetachFromWindow();
 	RemoveHandler(child);
 
-	b_cast_as(fLayout, BWindowLayoutContainer)->TopItem()->RemoveItem(child->fLayout);
+	cast_as(fLayout, BWindowLayoutContainer)->TopItem()->RemoveItem(child->fLayout);
 
 	return true;
 }
@@ -903,14 +903,14 @@ BWindow::RemoveChild(BView *child)
 b_int32
 BWindow::CountChildren() const
 {
-	return b_cast_as(fLayout, BWindowLayoutContainer)->TopItem()->CountItems();
+	return cast_as(fLayout, BWindowLayoutContainer)->TopItem()->CountItems();
 }
 
 
 BView*
 BWindow::ChildAt(b_int32 index) const
 {
-	BLayoutItem *topItem = b_cast_as(fLayout, BWindowLayoutContainer)->TopItem();
+	BLayoutItem *topItem = cast_as(fLayout, BWindowLayoutContainer)->TopItem();
 	return(topItem->ItemAt(index) != NULL ? (BView*)topItem->ItemAt(index)->PrivateData() : NULL);
 }
 
@@ -919,7 +919,7 @@ void
 BWindow::ConvertToScreen(BPoint* pt) const
 {
 	if(!pt) return;
-	*pt += b_cast_as(fLayout, BWindowLayoutContainer)->Origin();
+	*pt += cast_as(fLayout, BWindowLayoutContainer)->Origin();
 }
 
 
@@ -936,7 +936,7 @@ void
 BWindow::ConvertFromScreen(BPoint* pt) const
 {
 	if(!pt) return;
-	*pt -= b_cast_as(fLayout, BWindowLayoutContainer)->Origin();
+	*pt -= cast_as(fLayout, BWindowLayoutContainer)->Origin();
 }
 
 
@@ -1091,15 +1091,15 @@ BWindow::Minimize(bool minimize)
 BRect
 BWindow::Bounds() const
 {
-	return b_cast_as(fLayout, BWindowLayoutContainer)->TopItem()->Bounds();
+	return cast_as(fLayout, BWindowLayoutContainer)->TopItem()->Bounds();
 }
 
 
 BRect
 BWindow::Frame() const
 {
-	BRect rect = b_cast_as(fLayout, BWindowLayoutContainer)->TopItem()->Frame();
-	rect.OffsetTo(b_cast_as(fLayout, BWindowLayoutContainer)->Origin());
+	BRect rect = cast_as(fLayout, BWindowLayoutContainer)->TopItem()->Frame();
+	rect.OffsetTo(cast_as(fLayout, BWindowLayoutContainer)->Origin());
 	return rect;
 }
 
@@ -1130,7 +1130,7 @@ BWindow::Invalidate(BRect invalRect, bool redraw)
 void
 BWindow::DisableUpdates()
 {
-	b_int64 currentThread = b_get_current_thread_id();
+	b_int64 currentThread = bhapi::get_current_thread_id();
 
 	if(fUpdateHolderThreadId != 0 && fUpdateHolderThreadId != currentThread)
 		BHAPI_ERROR("[INTERFACE]: %s --- Invalid \"DisableUpdates()\" and \"EnableUpdates()\" call!", __PRETTY_FUNCTION__);
@@ -1152,7 +1152,7 @@ BWindow::DisableUpdates()
 void
 BWindow::EnableUpdates()
 {
-	b_int64 currentThread = b_get_current_thread_id();
+	b_int64 currentThread = bhapi::get_current_thread_id();
 
 	if(fUpdateHolderThreadId != 0 && fUpdateHolderThreadId != currentThread)
 		BHAPI_ERROR("[INTERFACE]: %s --- Invalid \"DisableUpdates()\" and \"EnableUpdates()\" call!", __PRETTY_FUNCTION__);
@@ -1525,9 +1525,9 @@ BWindow::SetFeel(b_window_feel feel)
 		{
 			BMessenger msgrSelf(this);
 			if(oldFeel == B_MODAL_APP_WINDOW_FEEL)
-				b_app->RemoveModalWindow(msgrSelf);
+				bhapi::app->RemoveModalWindow(msgrSelf);
 			else
-				b_app->AddModalWindow(msgrSelf);
+				bhapi::app->AddModalWindow(msgrSelf);
 		}
 	}
 
@@ -1585,7 +1585,7 @@ BWindow::SetWorkspaces(b_uint32 workspace)
 {
 	if(workspace == 0)
 	{
-		if(b_app->fGraphicsEngine->GetCurrentWorkspace(&workspace) != B_OK || workspace == 0) return;
+		if(bhapi::app->fGraphicsEngine->GetCurrentWorkspace(&workspace) != B_OK || workspace == 0) return;
 	}
 
 	if(fWindow == NULL)
@@ -1643,7 +1643,7 @@ BWindow::MoveTo(BPoint where)
 		if(fWindow->MoveTo((b_int32)pt.x, (b_int32)pt.y) != B_OK) return;
 
 		fPositionChangedTimeStamp = b_real_time_clock_usecs();
-		b_cast_as(fLayout, BWindowLayoutContainer)->MoveTo(where);
+		cast_as(fLayout, BWindowLayoutContainer)->MoveTo(where);
 		FrameMoved(where);
 
 		if(IsWatched(B_WINDOW_MOVED))
@@ -1704,7 +1704,7 @@ BWindow::ResizeTo(float w, float h)
 		// for disable update
 		bool saveInUpdate = fInUpdate;
 		fInUpdate = true;
-		b_cast_as(fLayout, BWindowLayoutContainer)->ResizeTo(w, h);
+		cast_as(fLayout, BWindowLayoutContainer)->ResizeTo(w, h);
 		fInUpdate = saveInUpdate;
 
 		FrameResized(w, h);

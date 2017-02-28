@@ -46166,7 +46166,6 @@ namespace bhapi {
 
 
 
-using namespace bhapi;
 class BLooper;
 class BMessage;
 class BMessageFilter;
@@ -46192,7 +46191,8 @@ typedef BArchivable *(*b_instantiation_func)(const BMessage*);
 __attribute__((dllexport)) bool b_validatb_instantiation(const BMessage *from, const char *class_name);
 __attribute__((dllexport)) b_instantiation_func b_find_instantiation_func(const char *class_name);
 __attribute__((dllexport)) b_instantiation_func b_find_instantiation_func(const BMessage *archive_data);
-# 50 "../src/kits/app/Handler.h" 2
+# 49 "../src/kits/app/Handler.h" 2
+using namespace bhapi;
 class __attribute__((dllexport)) BHandler : public BArchivable {
 public:
     BHandler(const char *name = __null);
@@ -46245,7 +46245,7 @@ public:
 private:
  friend class BLooper;
  friend class BMessage;
-    friend b_uint64 get_handler_token(const BHandler *handler);
+    friend b_uint64 bhapi::get_handler_token(const BHandler *handler);
 
     BToken *fToken;
  char *fName;
@@ -47320,6 +47320,8 @@ __attribute__((dllexport)) bool update_font_families(bool);
 __attribute__((dllexport)) bool font_freetype2_init(void);
 __attribute__((dllexport)) bool font_freetype2_is_valid(void);
 __attribute__((dllexport)) void font_freetype2_cancel(void);
+}
+
 using namespace bhapi;
 class __attribute__((dllexport)) BFontEngine {
 public:
@@ -48315,15 +48317,17 @@ private:
 # 37 "../src/kits/StorageKit.h" 2
 # 1 "../src/kits/storage/FilePanel.h" 1
 # 35 "../src/kits/storage/FilePanel.h"
-typedef enum b_file_panel_mode {
+namespace bhapi {
+typedef enum file_panel_mode {
     B_OPEN_PANEL,
     B_SAVE_PANEL
-} b_file_panel_mode;
+} file_panel_mode;
 
-typedef enum b_file_panel_button {
+typedef enum file_panel_button {
     B_CANCEL_BUTTON,
     B_DEFAULT_BUTTON
-} b_file_panel_button;
+} file_panel_button;
+}
 
 
 
@@ -48343,7 +48347,7 @@ public:
 
 class __attribute__((dllexport)) BFilePanel {
 public:
-    BFilePanel(b_file_panel_mode mode = B_OPEN_PANEL,
+    BFilePanel(bhapi::file_panel_mode mode = bhapi::B_OPEN_PANEL,
            const BMessenger *target = __null,
      const char *panel_directory = __null,
            b_uint32 node_flavors = 0,
@@ -48370,14 +48374,14 @@ public:
     BMessenger *Target() const;
  BFilePanelFilter *Filter() const;
 
- b_file_panel_mode PanelMode() const;
+    bhapi::file_panel_mode PanelMode() const;
 
     void SetTarget(const BMessenger *target);
     void SetMessage(const BMessage *msg);
 
  void SetFilter(BFilePanelFilter *filter);
  void SetSaveText(const char *text);
-    void SetButtonLabel(b_file_panel_button btn, const char *label);
+    void SetButtonLabel(bhapi::file_panel_button btn, const char *label);
 
  void SetHideWhenDone(bool state);
  bool HidesWhenDone() const;
@@ -51699,22 +51703,22 @@ inline int BNetEndpoint::SetReuseAddr(bool state)
 # 1 "../src/kits/support/../support/SupportDefs.h" 1
 # 33 "../src/kits/support/ByteOrder.h" 2
 
-
 extern "C" {
 
-
-typedef enum b_swap_action {
+namespace bhapi {
+typedef enum swap_action {
     B_SWAP_HOST_TO_LENDIAN,
     B_SWAP_HOST_TO_BENDIAN,
     B_SWAP_LENDIAN_TO_HOST,
     B_SWAP_BENDIAN_TO_HOST,
     B_SWAP_ALWAYS
-} b_swap_action;
+} swap_action;
 
-__attribute__((dllexport)) b_status_t b_swap_data(b_type_code type, void *data, size_t len, b_swap_action action);
-__attribute__((dllexport)) bool b_is_type_swapped(b_type_code type);
-__attribute__((dllexport)) float b_swap_float(float value);
-__attribute__((dllexport)) double b_swap_double(double value);
+__attribute__((dllexport)) b_status_t swap_data(b_type_code type, void *data, size_t len, swap_action action);
+__attribute__((dllexport)) bool is_type_swapped(b_type_code type);
+__attribute__((dllexport)) float swap_float(float value);
+__attribute__((dllexport)) double swap_double(double value);
+}
 # 119 "../src/kits/support/ByteOrder.h"
 }
 # 31 "../src/kits/SupportKit.h" 2

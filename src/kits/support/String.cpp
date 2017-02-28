@@ -2253,7 +2253,7 @@ BString::IsDecimal() const
 
 
 template<class TYPE_INT>
-bool b_get_hex(const BString &str, TYPE_INT *value)
+bool bhapi::get_hex(const BString &str, TYPE_INT *value)
 {
 	if(value == NULL || str.Length() < 2 || str[0] != '0' || !(str[1] == 'x' || str[1] == 'X')) return false;
 
@@ -2283,7 +2283,7 @@ BString::GetDecimal(float *value) const
 	if(!value || !IsNumber()) return false;
 
 	b_uint64 tmp;
-    if(b_get_hex(*this, &tmp)) {*value = (float)tmp; return true;}
+    if(bhapi::get_hex(*this, &tmp)) {*value = (float)tmp; return true;}
 
 #ifdef HAVE_STRTOF
     *value = strtof(this->String(), NULL);
@@ -2308,7 +2308,7 @@ BString::GetDecimal(double *value) const
 	if(!value || !IsNumber()) return false;
 
 	b_uint64 tmp;
-    if(b_get_hex(*this, &tmp)) {*value = (double)tmp; return true;}
+    if(bhapi::get_hex(*this, &tmp)) {*value = (double)tmp; return true;}
 
     *value = strtod(this->String(), NULL);
 
@@ -2328,7 +2328,7 @@ BString::GetDecimal(long double *value) const
 	if(!value || !IsNumber()) return false;
 
 	b_uint64 tmp;
-    if(b_get_hex(*this, &tmp)) {*value = (long double)tmp; return true;}
+    if(bhapi::get_hex(*this, &tmp)) {*value = (long double)tmp; return true;}
 
     *value = strtold(this->String(), NULL);
 
@@ -2353,7 +2353,7 @@ BString::GetInteger(b_uint8 *value) const
 {
 	if(!value || !IsNumber()) return false;
 
-    if(b_get_hex(*this, value)) return true;
+    if(bhapi::get_hex(*this, value)) return true;
 
     *value = (b_uint8)strtoul(this->String(), NULL, 10);
 
@@ -2377,7 +2377,7 @@ BString::GetInteger(b_uint16 *value) const
 {
 	if(!value || !IsNumber()) return false;
 
-    if(b_get_hex(*this, value)) return true;
+    if(bhapi::get_hex(*this, value)) return true;
 
     *value = (b_uint16)strtoul(this->String(), NULL, 10);
 
@@ -2390,7 +2390,7 @@ BString::GetInteger(b_int32 *value) const
 {
 	if(!value || !IsNumber()) return false;
 
-    if(b_get_hex(*this, value)) return true;
+    if(bhapi::get_hex(*this, value)) return true;
 
     *value = (b_int32)strtol(this->String(), NULL, 10);
 
@@ -2403,7 +2403,7 @@ BString::GetInteger(b_uint32 *value) const
 {
 	if(!value || !IsNumber()) return false;
 
-    if(b_get_hex(*this, value)) return true;
+    if(bhapi::get_hex(*this, value)) return true;
 
     *value = (b_uint32)strtoul(this->String(), NULL, 10);
 
@@ -2416,7 +2416,7 @@ BString::GetInteger(b_int64 *value) const
 {
 	if(!value || !IsNumber()) return false;
 
-    if(b_get_hex(*this, value)) return true;
+    if(bhapi::get_hex(*this, value)) return true;
 
 #if SIZEOF_INT == 8 || SIZEOF_LONG == 8
     *value = (b_int64)strtol(this->String(), NULL, 10);
@@ -2447,7 +2447,7 @@ BString::GetInteger(b_uint64 *value) const
 #if !(defined(_MSC_VER) && _MSC_VER <= 0x4b0)
 	if(!value || !IsNumber()) return false;
 
-    if(b_get_hex(*this, value)) return true;
+    if(bhapi::get_hex(*this, value)) return true;
 
 #if SIZEOF_INT == 8 || SIZEOF_LONG == 8
     *value = (b_uint64)strtoul(this->String(), NULL, 10);

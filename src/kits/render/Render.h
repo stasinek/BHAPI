@@ -120,8 +120,6 @@ private:
 
     void drawPixel(b_int32 x, b_int32 y, b_pattern pattern);
 };
-
 #endif /* __cplusplus */
-
 #endif /* BHAPI_RENDER__H */
 

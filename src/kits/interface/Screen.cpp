@@ -60,7 +60,7 @@ BScreen::IsValid() const
 {
 	// TODO
 	if(fID != 0) return false;
-	return(!(b_app == NULL || b_app->fGraphicsEngine == NULL));
+	return(!(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL));
 }
 
 
@@ -76,10 +76,10 @@ BRect
 BScreen::Frame() const
 {
 	BRect r;
-	if(fID == 0 && !(b_app == NULL || b_app->fGraphicsEngine == NULL))
+	if(fID == 0 && !(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL))
 	{
 		b_uint32 scrW = 0, scrH = 0;
-		b_app->fGraphicsEngine->GetDesktopBounds(&scrW, &scrH);
+		bhapi::app->fGraphicsEngine->GetDesktopBounds(&scrW, &scrH);
 		if(scrW > 0 && scrH > 0) r.Set(0, 0, (float)(scrW - 1), (float)(scrH - 1));
 	}
 	return r;

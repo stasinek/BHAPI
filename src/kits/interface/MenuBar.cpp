@@ -51,7 +51,7 @@ BMenuBar::~BMenuBar()
 void
 BMenuBar::MakeFocus(bool state)
 {
-	BMenuField *parent = b_cast_as(Parent(), BMenuField);
+	BMenuField *parent = cast_as(Parent(), BMenuField);
 	if(!(state == false || parent == NULL || parent->MenuBar() != this)) return;
 
 	BMenu::MakeFocus(state);

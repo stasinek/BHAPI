@@ -43,7 +43,7 @@
 
 
 #if 0
-extern BLocker* b_get_handler_operator_locker();
+extern BLocker* bhapi::get_handler_operator_locker();
 
 class b_posix_sig_action {
 public:
@@ -57,10 +57,10 @@ static b_posix_sig_action _bhapi_posix_sig_action_;
 
 static void b_posix_signal(int signumber)
 {
-	BLocker *hLocker = b_get_handler_operator_locker();
+	BLocker *hLocker = bhapi::get_handler_operator_locker();
 
 	hLocker->Lock();
-	if(b_app != NULL) b_app->PostMessage(signumber == SIGINT ? B_QUIT_REQUESTED : _QUIT_);
+	if(bhapi::app != NULL) bhapi::app->PostMessage(signumber == SIGINT ? B_QUIT_REQUESTED : _QUIT_);
 	hLocker->Unlock();
 
 	void (*old_func)(int) = NULL;
@@ -77,7 +77,7 @@ static void b_posix_signal(int signumber)
 //						   signumber == SIGABRT ? "SIGABRT" : (
 //						   signumber == SIGTERM ? "SIGTERM" : "SIGQUIT"))));
 
-	while(signumber != SIGINT && b_app != NULL) b_snooze(1000);
+	while(signumber != SIGINT && bhapi::app != NULL) b_snooze(1000);
 
 	if(old_func != NULL)
 	{
@@ -116,7 +116,7 @@ b_posix_sig_action::b_posix_sig_action()
 
 
 #ifdef BHAPI_OS_LINUX
-bool b_get_prog_argc_argv_linux(BString &progName, BStringArray &progArgv)
+bool bhapi::get_prog_argc_argv_linux(BString &progName, BStringArray &progArgv)
 {
 	bool retVal = false;
 	long maxPath = pathconf("/", _PC_PATH_MAX);

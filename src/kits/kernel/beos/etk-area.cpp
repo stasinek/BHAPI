@@ -46,7 +46,7 @@ typedef struct b_beos_area_t {
 		if(created)
 		{
 			created = false;
-			b_delete_area((void*)this);
+			bhapi::delete_area((void*)this);
 		}
 	}
 
@@ -150,7 +150,7 @@ typedef struct b_beos_area_info_t {
 
 
 IMPEXP_BHAPI void*
-b_create_area(const char *name, void **start_addr, size_t size, b_uint32 protection, const char *domain, b_area_access area_access)
+bhapi::create_area(const char *name, void **start_addr, size_t size, b_uint32 protection, const char *domain, b_area_access area_access)
 {
 	if(size <= 0) return NULL;
 
@@ -216,7 +216,7 @@ b_create_area(const char *name, void **start_addr, size_t size, b_uint32 protect
 
 
 IMPEXP_BHAPI void*
-b_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char *domain)
+bhapi::clone_area(const char *name, void **dest_addr, b_uint32 protection, const char *domain)
 {
 	char *ipc_name = b_area_ipc_name(name, domain);
 	if(!ipc_name) return NULL;
@@ -274,17 +274,17 @@ b_clone_area(const char *name, void **dest_addr, b_uint32 protection, const char
 
 
 IMPEXP_BHAPI void*
-b_clone_area_by_source(void *source_data, void **dest_addr, b_uint32 protection)
+bhapi::clone_area_by_source(void *source_data, void **dest_addr, b_uint32 protection)
 {
 	b_beos_area_t *source_area = (b_beos_area_t*)source_data;
 	if(!source_area) return NULL;
 
-	return b_clone_area(source_area->name, dest_addr, protection, source_area->domain);
+	return bhapi::clone_area(source_area->name, dest_addr, protection, source_area->domain);
 }
 
 
 IMPEXP_BHAPI b_status_t
-b_get_area_info(void *data, b_area_info *info)
+bhapi::get_area_info(void *data, b_area_info *info)
 {
 	b_beos_area_t *area = (b_beos_area_t*)data;
 	if(!area || !info) return B_BAD_VALUE;
@@ -306,7 +306,7 @@ b_get_area_info(void *data, b_area_info *info)
 
 
 IMPEXP_BHAPI b_status_t
-b_delete_area(void *data)
+bhapi::delete_area(void *data)
 {
 	b_beos_area_t *area = (b_beos_area_t*)data;
 	if(!area) return B_BAD_VALUE;
@@ -345,7 +345,7 @@ b_delete_area(void *data)
 
 
 IMPEXP_BHAPI b_status_t
-b_delete_area_etc(void *data, bool no_clone)
+bhapi::delete_area_etc(void *data, bool no_clone)
 {
 	b_beos_area_t *area = (b_beos_area_t*)data;
 	if(!area) return B_BAD_VALUE;

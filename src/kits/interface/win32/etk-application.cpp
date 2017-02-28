@@ -42,7 +42,7 @@
 #include "../../app/Clipboard.h"
 #include "../../app/Message.h"
 
-static void b_win32_clipboard_changed()
+static void bhapi::win32_clipboard_changed()
 {
     char *str = NULL;
 
@@ -56,7 +56,7 @@ static void b_win32_clipboard_changed()
             if(GetVersion() < 0x80000000) // Windows NT/2000/XP
                 str = bhapi::unicode_convert_to_utf8((b_unichar16*)clipText, -1);
             else // Windows 95/98
-                str = b_win32_convert_active_to_utf8((char*)clipText, -1);
+                str = bhapi::win32_convert_active_to_utf8((char*)clipText, -1);
         }
         while(false);
 
@@ -70,28 +70,28 @@ static void b_win32_clipboard_changed()
         aStr.ReplaceAll("\r\n", "\n");
 
         BMessage *clipMsg = NULL;
-        if(b_clipboard.Lock())
+        if(bhapi::clipboard.Lock())
         {
-            if((clipMsg = b_clipboard.Data()) != NULL)
+            if((clipMsg = bhapi::clipboard.Data()) != NULL)
             {
                 const char *text = NULL;
                 b_size_t textLen = 0;
                 if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
                         text == NULL || textLen != (b_size_t)aStr.Length() || aStr.Compare(text, (b_int32)textLen) != 0)
                 {
-                    b_clipboard.Clear();
+                    bhapi::clipboard.Clear();
                     clipMsg->AddBool("BHAPI:msg_from_gui", true);
                     clipMsg->AddData("text/plain", B_MIME_TYPE, (void*)aStr.String(), (size_t)aStr.Length());
-                    b_clipboard.Commit();
+                    bhapi::clipboard.Commit();
                 }
             }
-            b_clipboard.Unlock();
+            bhapi::clipboard.Unlock();
         }
     }
 }
 
 
-static b_filter_result b_win32_clipboard_filter(BMessage *message, BHandler **target, BMessageFilter *filter)
+static b_filter_result bhapi::win32_clipboard_filter(BMessage *message, BHandler **target, BMessageFilter *filter)
 {
     if(message->what != B_CLIPBOARD_CHANGED) return B_DISPATCH_MESSAGE;
 
@@ -103,11 +103,11 @@ static b_filter_result b_win32_clipboard_filter(BMessage *message, BHandler **ta
         BString str;
         BMessage *msg;
 
-        b_clipboard.Lock();
-        if(!((msg = b_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
+        bhapi::clipboard.Lock();
+        if(!((msg = bhapi::clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
             msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
         if(textLen > 0) str.SetTo(text, (b_int32)textLen);
-        b_clipboard.Unlock();
+        bhapi::clipboard.Unlock();
 
         if(str.Length() <= 0) break;
         str.ReplaceAll("\n", "\r\n");
@@ -135,7 +135,7 @@ static b_filter_result b_win32_clipboard_filter(BMessage *message, BHandler **ta
         }
         else // Windows 95/98
         {
-            char *aStr = b_win32_convert_utf8_to_active(str.String(), -1);
+            char *aStr = bhapi::win32_convert_utf8_to_active(str.String(), -1);
             if(aStr)
             {
                 b_int32 len = strlen(aStr);
@@ -169,13 +169,15 @@ static b_filter_result b_win32_clipboard_filter(BMessage *message, BHandler **ta
 
 #ifndef BHAPI_GRAPHICS_WIN32_BUILT_IN
 extern "C" {
-    EXPORT_BHAPI BGraphicsEngine* instantiate_graphics_engine()
+namespace bhapi {
+EXPORT_BHAPI BGraphicsEngine* instantiate_graphics_engine()
 #else
-IMPEXP_BHAPI BGraphicsEngine* b_get_built_in_graphics_engine()
+IMPEXP_BHAPI BGraphicsEngine* bhapi::get_built_in_graphics_engine()
 #endif
     {
         return(new EWin32GraphicsEngine());
     }
+} /* namespace */
 #ifndef BHAPI_GRAPHICS_WIN32_BUILT_IN
 } // extern "C"
 #endif
@@ -242,7 +244,7 @@ EWin32GraphicsEngine::GetWin32Window(HWND hWnd)
 }
 
 
-LRESULT _bhapi_set_app_cursor(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback)
+LRESULT _bhapi_set_app_cursor(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback)
 {
     if(win32Engine == NULL || callback == NULL || callback->command != WM_BHAPI_MESSAGE_CHANGE_APP_CURSOR) return FALSE;
 
@@ -349,52 +351,52 @@ LRESULT _bhapi_set_app_cursor(EWin32GraphicsEngine *win32Engine, b_win32_gdi_cal
 }
 
 
-extern LRESULT _bhapi_create_window(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_destroy_window(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_iconify_window(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_show_window(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_hide_window(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_move_resize_window(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_set_window_look(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_activate_window(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_get_window_activate_state(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_raise_window(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_lower_window(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_set_window_background(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_set_window_usize(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_get_window_usize(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_grab_window(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_create_window(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_destroy_window(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_iconify_window(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_show_window(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_hide_window(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_move_resize_window(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_set_window_look(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_activate_window(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_get_window_activate_state(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_raise_window(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_lower_window(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_set_window_background(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_set_window_usize(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_get_window_usize(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_grab_window(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
 
-extern LRESULT _bhapi_create_pixmap(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_destroy_pixmap(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_resize_pixmap(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_draw_pixmap(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_draw_epixmap(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_create_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_destroy_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_resize_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_draw_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_draw_epixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
 
-extern LRESULT _bhapi_stroke_point(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_stroke_points(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_stroke_points_color(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_stroke_points_alpha(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_stroke_line(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_stroke_rect(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_stroke_rects(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_stroke_round_rect(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_stroke_arc(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_stroke_polygon(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_fill_rect(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_fill_rects(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_fill_round_rect(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_fill_arc(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_fill_polygon(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_fill_region(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_stroke_point(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_stroke_points(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_stroke_points_color(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_stroke_points_alpha(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_stroke_line(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_stroke_rect(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_stroke_rects(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_stroke_round_rect(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_stroke_arc(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_stroke_polygon(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_fill_rect(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_fill_rects(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_fill_round_rect(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_fill_arc(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_fill_polygon(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_fill_region(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
 
-extern LRESULT _bhapi_create_font(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_destroy_font(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_font_get_height(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_creatbhapi::font_tmp_dc(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
-extern LRESULT _bhapi_destroy_font_tmp_dc(EWin32GraphicsEngine *win32Engine, b_win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_create_font(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_destroy_font(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_font_get_height(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_creatbhapi::font_tmp_dc(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
+extern LRESULT _bhapi_destroy_font_tmp_dc(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_callback_t *callback);
 
 #ifndef GET_X_LPARAM
 #define GET_X_LPARAM(a) ((int)((short)LOWORD(a)))
@@ -425,7 +427,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
 
         LRESULT result = FALSE;
 
-        b_win32_gdi_callback_t *callback = (b_win32_gdi_callback_t*)winMsg->lParam;
+        bhapi::win32_gdi_callback_t *callback = (bhapi::win32_gdi_callback_t*)winMsg->lParam;
 
         if(!(callback == NULL || winMsg->wParam != WM_BHAPI_MESSAGE_APP))
         {
@@ -869,7 +871,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
     else
         if(winMsg->message == WM_QUIT)
         {
-            b_app->PostMessage(B_QUIT_REQUESTED);
+            bhapi::app->PostMessage(B_QUIT_REQUESTED);
         }
         else
             if(win32Engine->GetContactor(winMsg->hwnd, &etkWinMsgr) == false || etkWinMsgr.IsValid() == false)
@@ -907,7 +909,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     if(winMsg->hwnd != win32Engine->win32RequestAsyncWin) break;
 
                     handled = true;
-                    b_win32_clipboard_changed();
+                    bhapi::win32_clipboard_changed();
                 }
                 break;
 
@@ -1041,7 +1043,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
 
                                 win32Engine->Lock();
                                 GetWindowRect(winMsg->hwnd, &wr);
-                                b_win32_window_convert_to_screen(winMsg->hwnd, &left, &top);
+                                bhapi::win32_window_convert_to_screen(winMsg->hwnd, &left, &top);
                                 win32Engine->Unlock();
 
                                 left += r->left - wr.left;
@@ -1062,7 +1064,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                                     win32Engine->Lock();
                                     GetWindowRect(winMsg->hwnd, &wr);
                                     GetClientRect(winMsg->hwnd, &cr);
-                                    b_win32_window_convert_to_screen(winMsg->hwnd, &left, &top);
+                                    bhapi::win32_window_convert_to_screen(winMsg->hwnd, &left, &top);
                                     win32Engine->Unlock();
 
                                     width = cr.right;
@@ -1123,7 +1125,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     message.AddFloat("BHAPI:wheel_delta_y", zDelta > 0 ? -1.f : 1.f);
 
                     message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-                    etkWinMsgr = BMessenger(b_app);
+                    etkWinMsgr = BMessenger(bhapi::app);
                     etkWinMsgr.SendMessage(&message);
                 }
                 break;
@@ -1147,7 +1149,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     win32Engine->win32PrevMouseMovedWin = etkWinMsgr;
                     win32Engine->win32PrevMouseMovedX = xPos;
                     win32Engine->win32PrevMouseMovedY = yPos;
-                    b_win32_window_convert_to_screen(winMsg->hwnd, &xScreenPos, &yScreenPos);
+                    bhapi::win32_window_convert_to_screen(winMsg->hwnd, &xScreenPos, &yScreenPos);
                     win32Engine->Unlock();
 
                     b_int32 buttons = 0;
@@ -1161,7 +1163,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     message.AddPoint("screen_where", BPoint((float)xScreenPos, (float)yScreenPos));
 
                     message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-                    etkWinMsgr = BMessenger(b_app);
+                    etkWinMsgr = BMessenger(bhapi::app);
                     etkWinMsgr.SendMessage(&message);
                 }
                 break;
@@ -1187,7 +1189,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     else
                         clicks = win32Engine->win32PrevMouseDownCount = 1;
                     win32Engine->win32PrevMouseDownTime = currentTime;
-                    b_win32_window_convert_to_screen(winMsg->hwnd, &xScreenPos, &yScreenPos);
+                    bhapi::win32_window_convert_to_screen(winMsg->hwnd, &xScreenPos, &yScreenPos);
                     win32Engine->Unlock();
 
                     b_int32 button = 0;
@@ -1210,7 +1212,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     message.AddPoint("screen_where", BPoint((float)xScreenPos, (float)yScreenPos));
 
                     message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-                    etkWinMsgr = BMessenger(b_app);
+                    etkWinMsgr = BMessenger(bhapi::app);
                     etkWinMsgr.SendMessage(&message);
                 }
                 break;
@@ -1226,7 +1228,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     int yScreenPos = yPos;
 
                     win32Engine->Lock();
-                    b_win32_window_convert_to_screen(winMsg->hwnd, &xScreenPos, &yScreenPos);
+                    bhapi::win32_window_convert_to_screen(winMsg->hwnd, &xScreenPos, &yScreenPos);
                     win32Engine->Unlock();
 
                     b_int32 button = 0;
@@ -1248,7 +1250,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     message.AddPoint("screen_where", BPoint((float)xScreenPos, (float)yScreenPos));
 
                     message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-                    etkWinMsgr = BMessenger(b_app);
+                    etkWinMsgr = BMessenger(bhapi::app);
                     etkWinMsgr.SendMessage(&message);
                 }
                 break;
@@ -1444,7 +1446,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     }
 
                     message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-                    etkWinMsgr = BMessenger(b_app);
+                    etkWinMsgr = BMessenger(bhapi::app);
                     etkWinMsgr.SendMessage(&message);
 
                     bool dealed = true;
@@ -1565,7 +1567,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     {
                         bzero(str, nChars + 1);
                         ImmGetCompositionString(imc, GCS_RESULTSTR, str, nChars + 1);
-                        char *uStr = b_win32_convert_active_to_utf8(str, -1);
+                        char *uStr = bhapi::win32_convert_active_to_utf8(str, -1);
                         free(str);
                         str = uStr;
                     }
@@ -1581,7 +1583,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     message.what = B_KEY_DOWN;
                     message.AddString("bytes", str);
                     message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-                    etkWinMsgr = BMessenger(b_app);
+                    etkWinMsgr = BMessenger(bhapi::app);
                     etkWinMsgr.SendMessage(&message);
                     message.what = B_KEY_UP;
                     etkWinMsgr.SendMessage(&message);
@@ -1599,7 +1601,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     win32Engine->Lock();
                     if(!(!etkWinMsgr.IsValid() ||
                             !GetCursorPos(&pt) ||
-                            !b_win32_window_get_rect(winMsg->hwnd, &r) ||
+                            !bhapi::win32_window_get_rect(winMsg->hwnd, &r) ||
                             !PtInRect(&r, pt)))
                     {
                         if(retResult) *retResult = TRUE;
@@ -1661,7 +1663,7 @@ static b_status_t b_graphics_request_async_task(void *arg)
         if(win32Engine->win32RequestAsyncWin != NULL) DestroyWindow(win32Engine->win32RequestAsyncWin);
         win32Engine->win32RequestAsyncWin = NULL;
 
-        b_release_sem_etc(win32Engine->fRequestAsyncSem, 2, 0);
+        bhapi::release_sem_etc(win32Engine->fRequestAsyncSem, 2, 0);
 
         win32Engine->Unlock();
 
@@ -1671,7 +1673,7 @@ static b_status_t b_graphics_request_async_task(void *arg)
     SetWindowLong(win32Engine->win32RequestAsyncWin, 0, reinterpret_cast<long>(win32Engine));
     win32Engine->win32NextClipboardViewer = SetClipboardViewer(win32Engine->win32RequestAsyncWin);
 
-    b_release_sem(win32Engine->fRequestAsyncSem);
+    bhapi::release_sem(win32Engine->fRequestAsyncSem);
 
     win32Engine->Unlock();
 
@@ -1679,7 +1681,7 @@ static b_status_t b_graphics_request_async_task(void *arg)
 
     BHAPI_DEBUG("[GRAPHICS]: Enter Win32 GDI32 request-async task...");
 
-    b_win32_clipboard_changed();
+    bhapi::win32_clipboard_changed();
 
     while(true)
     {
@@ -1728,7 +1730,7 @@ static b_status_t b_graphics_request_task(void *arg)
     win32Engine->win32ThreadID = GetCurrentThreadId();
 
     WNDCLASSEXA wcApp;
-    wcApp.lpszClassName = b_app->Name();
+    wcApp.lpszClassName = bhapi::app->Name();
     wcApp.hInstance = win32Engine->win32Hinstance;
     wcApp.lpfnWndProc = _win32_WndProc_;
     wcApp.hCursor = LoadCursor(NULL, IDC_ARROW);
@@ -1761,7 +1763,7 @@ static b_status_t b_graphics_request_task(void *arg)
         win32Engine->win32RegisterClass = 0;
         win32Engine->win32ThreadID = 0;
 
-        b_release_sem_etc(win32Engine->fRequestSem, 2, 0);
+        bhapi::release_sem_etc(win32Engine->fRequestSem, 2, 0);
 
         win32Engine->Unlock();
 
@@ -1770,7 +1772,7 @@ static b_status_t b_graphics_request_task(void *arg)
 
     SetWindowLong(win32Engine->win32RequestWin, 0, reinterpret_cast<long>(win32Engine));
 
-    b_release_sem(win32Engine->fRequestSem);
+    bhapi::release_sem(win32Engine->fRequestSem);
 
     win32Engine->Unlock();
 
@@ -1861,10 +1863,10 @@ EWin32GraphicsEngine::~EWin32GraphicsEngine()
 b_status_t
 EWin32GraphicsEngine::Initalize()
 {
-    BMessageFilter *clipboardFilter = new BMessageFilter(B_CLIPBOARD_CHANGED, b_win32_clipboard_filter);
-    b_app->Lock();
-    b_app->AddFilter(clipboardFilter);
-    b_app->Unlock();
+    BMessageFilter *clipboardFilter = new BMessageFilter(B_CLIPBOARD_CHANGED, bhapi::win32_clipboard_filter);
+    bhapi::app->Lock();
+    bhapi::app->AddFilter(clipboardFilter);
+    bhapi::app->Unlock();
 
     Lock();
 
@@ -1873,9 +1875,9 @@ EWin32GraphicsEngine::Initalize()
         Unlock();
         BHAPI_WARNING("[GRAPHICS]: %s --- win32Hinstance == NULL", __PRETTY_FUNCTION__);
 
-        b_app->Lock();
-        b_app->RemoveFilter(clipboardFilter);
-        b_app->Unlock();
+        bhapi::app->Lock();
+        bhapi::app->RemoveFilter(clipboardFilter);
+        bhapi::app->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
@@ -1884,73 +1886,73 @@ EWin32GraphicsEngine::Initalize()
     {
         Unlock();
 
-        b_app->Lock();
-        b_app->RemoveFilter(clipboardFilter);
-        b_app->Unlock();
+        bhapi::app->Lock();
+        bhapi::app->RemoveFilter(clipboardFilter);
+        bhapi::app->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
 
-    if((fRequestSem = b_create_sem(0, NULL)) == NULL || (fRequestAsyncSem = b_create_sem(0, NULL)) == NULL)
+    if((fRequestSem = bhapi::create_sem(0, NULL)) == NULL || (fRequestAsyncSem = bhapi::create_sem(0, NULL)) == NULL)
     {
-        if(fRequestSem) b_delete_sem(fRequestSem);
-        if(fRequestAsyncSem) b_delete_sem(fRequestAsyncSem);
+        if(fRequestSem) bhapi::delete_sem(fRequestSem);
+        if(fRequestAsyncSem) bhapi::delete_sem(fRequestAsyncSem);
         fRequestSem = NULL;
         fRequestAsyncSem = NULL;
 
         Unlock();
 
-        b_app->Lock();
-        b_app->RemoveFilter(clipboardFilter);
-        b_app->Unlock();
+        bhapi::app->Lock();
+        bhapi::app->RemoveFilter(clipboardFilter);
+        bhapi::app->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
 
     win32DoQuit = false;
 
-    if((fRequestThread = b_create_thread(b_graphics_request_task, B_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL ||
-            (fRequestAsyncThread = b_create_thread(b_graphics_request_async_task, B_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL)
+    if((fRequestThread = bhapi::create_thread(b_graphics_request_task, B_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL ||
+            (fRequestAsyncThread = bhapi::create_thread(b_graphics_request_async_task, B_URGENT_DISPLAY_PRIORITY, this, NULL)) == NULL)
     {
         BHAPI_WARNING("[GRAPHICS]: %s --- Unable to create thread for GDI32.", __PRETTY_FUNCTION__);
 
-        b_delete_sem(fRequestSem);
-        b_delete_sem(fRequestAsyncSem);
+        bhapi::delete_sem(fRequestSem);
+        bhapi::delete_sem(fRequestAsyncSem);
         fRequestSem = NULL;
         fRequestAsyncSem = NULL;
 
-        if(fRequestThread) b_delete_thread(fRequestThread);
-        if(fRequestAsyncThread) b_delete_thread(fRequestAsyncThread);
+        if(fRequestThread) bhapi::delete_thread(fRequestThread);
+        if(fRequestAsyncThread) bhapi::delete_thread(fRequestAsyncThread);
         fRequestThread = NULL;
         fRequestAsyncThread = NULL;
 
         Unlock();
 
-        b_app->Lock();
-        b_app->RemoveFilter(clipboardFilter);
-        b_app->Unlock();
+        bhapi::app->Lock();
+        bhapi::app->RemoveFilter(clipboardFilter);
+        bhapi::app->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
 
-    if(b_resume_thread(fRequestThread) != B_OK)
+    if(bhapi::resume_thread(fRequestThread) != B_OK)
     {
         BHAPI_WARNING("[GRAPHICS]: %s --- Unable to resume GDI32 requst task.", __PRETTY_FUNCTION__);
-        b_delete_sem(fRequestSem);
-        b_delete_sem(fRequestAsyncSem);
+        bhapi::delete_sem(fRequestSem);
+        bhapi::delete_sem(fRequestAsyncSem);
         fRequestSem = NULL;
         fRequestAsyncSem = NULL;
 
-        b_delete_thread(fRequestThread);
-        b_delete_thread(fRequestAsyncThread);
+        bhapi::delete_thread(fRequestThread);
+        bhapi::delete_thread(fRequestAsyncThread);
         fRequestThread = NULL;
         fRequestAsyncThread = NULL;
 
         Unlock();
 
-        b_app->Lock();
-        b_app->RemoveFilter(clipboardFilter);
-        b_app->Unlock();
+        bhapi::app->Lock();
+        bhapi::app->RemoveFilter(clipboardFilter);
+        bhapi::app->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
@@ -1959,44 +1961,44 @@ EWin32GraphicsEngine::Initalize()
 
     b_int64 count = 0;
 
-    b_acquire_sem(fRequestSem);
-    if(b_get_sem_count(fRequestSem, &count) != B_OK || count > 0)
+    bhapi::acquire_sem(fRequestSem);
+    if(bhapi::get_sem_count(fRequestSem, &count) != B_OK || count > 0)
     {
         BHAPI_WARNING("[GRAPHICS]: %s --- GDI32 requst task return a error.", __PRETTY_FUNCTION__);
 
         Lock();
 
-        b_delete_sem(fRequestSem);
-        b_delete_sem(fRequestAsyncSem);
+        bhapi::delete_sem(fRequestSem);
+        bhapi::delete_sem(fRequestAsyncSem);
         fRequestSem = NULL;
         fRequestAsyncSem = NULL;
 
-        b_delete_thread(fRequestThread);
-        b_delete_thread(fRequestAsyncThread);
+        bhapi::delete_thread(fRequestThread);
+        bhapi::delete_thread(fRequestAsyncThread);
         fRequestThread = NULL;
         fRequestAsyncThread = NULL;
 
         Unlock();
 
-        b_app->Lock();
-        b_app->RemoveFilter(clipboardFilter);
-        b_app->Unlock();
+        bhapi::app->Lock();
+        bhapi::app->RemoveFilter(clipboardFilter);
+        bhapi::app->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
 
     Lock();
 
-    b_delete_sem(fRequestSem);
+    bhapi::delete_sem(fRequestSem);
     fRequestSem = NULL;
 
-    if(b_resume_thread(fRequestAsyncThread) != B_OK)
+    if(bhapi::resume_thread(fRequestAsyncThread) != B_OK)
     {
         BHAPI_WARNING("[GRAPHICS]: %s --- Unable to resume GDI32 requst-async task.", __PRETTY_FUNCTION__);
-        b_delete_sem(fRequestAsyncSem);
+        bhapi::delete_sem(fRequestAsyncSem);
         fRequestAsyncSem = NULL;
 
-        b_delete_thread(fRequestAsyncThread);
+        bhapi::delete_thread(fRequestAsyncThread);
         fRequestAsyncThread = NULL;
 
         PostMessageA(win32RequestWin, WM_QUIT, 0, 0);
@@ -2004,18 +2006,18 @@ EWin32GraphicsEngine::Initalize()
         Unlock();
 
         b_status_t status;
-        b_wait_for_thread(fRequestThread, &status);
+        bhapi::wait_for_thread(fRequestThread, &status);
 
         Lock();
 
-        b_delete_thread(fRequestThread);
+        bhapi::delete_thread(fRequestThread);
         fRequestThread = NULL;
 
         Unlock();
 
-        b_app->Lock();
-        b_app->RemoveFilter(clipboardFilter);
-        b_app->Unlock();
+        bhapi::app->Lock();
+        bhapi::app->RemoveFilter(clipboardFilter);
+        bhapi::app->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
@@ -2024,14 +2026,14 @@ EWin32GraphicsEngine::Initalize()
 
     Unlock();
 
-    b_acquire_sem(fRequestAsyncSem);
-    if(b_get_sem_count(fRequestAsyncSem, &count) != B_OK || count > 0)
+    bhapi::acquire_sem(fRequestAsyncSem);
+    if(bhapi::get_sem_count(fRequestAsyncSem, &count) != B_OK || count > 0)
     {
         BHAPI_WARNING("[GRAPHICS]: %s --- GDI32 requst-async task return a error.", __PRETTY_FUNCTION__);
 
         Lock();
 
-        b_delete_sem(fRequestAsyncSem);
+        bhapi::delete_sem(fRequestAsyncSem);
         fRequestAsyncSem = NULL;
 
         PostMessageA(win32RequestWin, WM_QUIT, 0, 0);
@@ -2041,26 +2043,26 @@ EWin32GraphicsEngine::Initalize()
         Unlock();
 
         b_status_t status;
-        b_wait_for_thread(fRequestThread, &status);
+        bhapi::wait_for_thread(fRequestThread, &status);
 
         Lock();
 
-        b_delete_thread(fRequestThread);
-        b_delete_thread(fRequestAsyncThread);
+        bhapi::delete_thread(fRequestThread);
+        bhapi::delete_thread(fRequestAsyncThread);
         fRequestThread = NULL;
         fRequestAsyncThread = NULL;
 
         Unlock();
 
-        b_app->Lock();
-        b_app->RemoveFilter(clipboardFilter);
-        b_app->Unlock();
+        bhapi::app->Lock();
+        bhapi::app->RemoveFilter(clipboardFilter);
+        bhapi::app->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
 
     Lock();
-    b_delete_sem(fRequestAsyncSem);
+    bhapi::delete_sem(fRequestAsyncSem);
     fRequestAsyncSem = NULL;
     Unlock();
 
@@ -2088,13 +2090,13 @@ EWin32GraphicsEngine::Cancel()
         Unlock();
 
         b_status_t status;
-        b_wait_for_thread(fRequestThread, &status);
-        b_wait_for_thread(fRequestAsyncThread, &status);
+        bhapi::wait_for_thread(fRequestThread, &status);
+        bhapi::wait_for_thread(fRequestAsyncThread, &status);
 
         Lock();
 
-        b_delete_thread(fRequestThread);
-        b_delete_thread(fRequestAsyncThread);
+        bhapi::delete_thread(fRequestThread);
+        bhapi::delete_thread(fRequestAsyncThread);
         fRequestThread = NULL;
         fRequestAsyncThread = NULL;
 
@@ -2106,9 +2108,9 @@ EWin32GraphicsEngine::Cancel()
 
     if(clipboardFilter != NULL)
     {
-        b_app->Lock();
-        b_app->RemoveFilter(clipboardFilter);
-        b_app->Unlock();
+        bhapi::app->Lock();
+        bhapi::app->RemoveFilter(clipboardFilter);
+        bhapi::app->Unlock();
         delete clipboardFilter;
     }
 }
@@ -2163,7 +2165,7 @@ EWin32GraphicsEngine::SetCursor(const void *cursor_data)
 {
     if(win32RequestWin == NULL) return B_ERROR;
 
-    b_win32_gdi_callback_t callback;
+    bhapi::win32_gdi_callback_t callback;
     callback.command = WM_BHAPI_MESSAGE_CHANGE_APP_CURSOR;
     callback.data = cursor_data;
 

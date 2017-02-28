@@ -39,7 +39,7 @@
 #endif
 
 EXPORT_BHAPI void*
-b_load_addon(const char* path)
+bhapi::load_addon(const char* path)
 {
 	BPath aPath(path, NULL, true);
 	BString filename = aPath.Path();
@@ -58,7 +58,7 @@ b_load_addon(const char* path)
 
 
 EXPORT_BHAPI b_status_t
-b_unload_addon(void *data)
+bhapi::unload_addon(void *data)
 {
 	if(data == NULL) return B_ERROR;
 	if(FreeLibrary((HMODULE)data) == 0) return B_ERROR;
@@ -67,7 +67,7 @@ b_unload_addon(void *data)
 
 
 EXPORT_BHAPI b_status_t
-b_get_image_symbol(void *data, const char *name, void **ptr)
+bhapi::get_image_symbol(void *data, const char *name, void **ptr)
 {
 	if(data == NULL || name == NULL || *name == 0 || ptr == NULL) return B_BAD_VALUE;
 

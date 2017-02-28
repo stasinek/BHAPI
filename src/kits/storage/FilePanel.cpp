@@ -101,7 +101,9 @@
 
 #ifdef BHAPI_OS_WIN32
 extern "C" {
-extern char* b_win32_convert_active_to_utf8(const char *str, b_int32 length);
+namespace bhapi {
+extern char* win32_convert_active_to_utf8(const char *str, b_int32 length);
+}
 }
 #endif
 
@@ -213,7 +215,7 @@ private:
 class LOCAL_BHAPI BFilePanelWindow : public BWindow {
 public:
 	BFilePanelWindow(BFilePanel *panel,
-			 b_file_panel_mode mode,
+             bhapi::file_panel_mode mode,
 			 b_uint32 node_flavors,
 			 bool modal,
 			 bool allow_multiple_selection);
@@ -225,7 +227,7 @@ public:
 	BFilePanel		*Panel() const;
 	BMessenger		*Target() const;
 
-	b_file_panel_mode	PanelMode() const;
+    bhapi::file_panel_mode	PanelMode() const;
 
 	void			SetTarget(const BMessenger *target);
 	void			SetMessage(const BMessage *msg);
@@ -236,7 +238,7 @@ public:
 
 	void			SetFilter(BFilePanelFilter *filter);
 	void			SetSaveText(const char *text);
-	void			SetButtonLabel(b_file_panel_button btn, const char *label);
+    void			SetButtonLabel(bhapi::file_panel_button btn, const char *label);
 	void			SetHideWhenDone(bool state);
 
 	void			Rewind();
@@ -252,7 +254,7 @@ private:
 
 	BPath fPath;
 
-	b_file_panel_mode fMode;
+    bhapi::file_panel_mode fMode;
 	b_uint32 fNodeFlavors;
 	BMessenger *fTarget;
 	BMessage *fMessage;
@@ -323,7 +325,7 @@ BFilePanelListItem::BFilePanelListItem(const char *path, BFilePanelView *panel_v
 #ifndef BHAPI_OS_WIN32
 		fLeaf = bhapi::strdup(fPath.Leaf());
 #else
-		fLeaf = b_win32_convert_active_to_utf8(fPath.Leaf(), -1);
+        fLeaf = bhapi::win32_convert_active_to_utf8(fPath.Leaf(), -1);
 #endif
 
 		if(fFlags == 0) aEntry.GetSize(&fSize);
@@ -1012,7 +1014,7 @@ static b_filter_result filter_key_down_hook(BMessage *message, BHandler **target
 
 
 BFilePanelWindow::BFilePanelWindow(BFilePanel *panel,
-				   b_file_panel_mode mode,
+                   bhapi::file_panel_mode mode,
 				   b_uint32 node_flavors,
 				   bool modal,
 				   bool allow_multiple_selection)
@@ -1206,7 +1208,7 @@ BFilePanelWindow::MessageReceived(BMessage *msg)
 				}
 			}
 
-			msgr = (fTarget == NULL ? &b_app_messenger : fTarget);
+            msgr = (fTarget == NULL ? &bhapi::app_messenger : fTarget);
 			if(fMessage) aMsg = new BMessage(*fMessage);
             else aMsg = new BMessage(fMode == B_OPEN_PANEL ? (b_uint32)B_REFS_RECEIVED : (b_uint32)B_SAVE_REQUESTED);
 			aMsg->AddString("directory", fPath.Path());
@@ -1228,7 +1230,7 @@ BFilePanelWindow::MessageReceived(BMessage *msg)
 			break;
 
 		case B_CANCEL:
-			msgr = (fTarget == NULL ? &b_app_messenger : fTarget);
+            msgr = (fTarget == NULL ? &bhapi::app_messenger : fTarget);
 			if(fMessage)
 			{
 				aMsg = new BMessage(*fMessage);
@@ -1267,7 +1269,7 @@ BFilePanelWindow::Target() const
 }
 
 
-b_file_panel_mode
+bhapi::file_panel_mode
 BFilePanelWindow::PanelMode() const
 {
 	return fMode;
@@ -1391,7 +1393,7 @@ BFilePanelWindow::SetSaveText(const char *text)
 
 
 void
-BFilePanelWindow::SetButtonLabel(b_file_panel_button btn, const char *label)
+BFilePanelWindow::SetButtonLabel(bhapi::file_panel_button btn, const char *label)
 {
 	BButton *button = (BButton*)FindView(btn == B_CANCEL_BUTTON ? "cancel button" : "default button");
 	if(button) button->SetLabel(label);
@@ -1496,7 +1498,7 @@ BFilePanelWindow::RefreshDirMenu()
 	{
 		while((menuItem = fDirMenu->ItemAt(0)) != NULL)
 		{
-			if(b_is_instance_of(menuItem, BMenuSeparatorItem)) break;
+            if (is_instance_of(menuItem, BMenuSeparatorItem)) break;
 			fDirMenu->RemoveItem((b_int32)0);
 			delete menuItem;
 		}
@@ -1512,7 +1514,7 @@ BFilePanelWindow::RefreshDirMenu()
 		msg->AddString("PanelDirectory", aPath.Path());
 
 #ifdef BHAPI_OS_WIN32
-		char *path = b_win32_convert_active_to_utf8(aPath.Path(), -1);
+        char *path = bhapi::win32_convert_active_to_utf8(aPath.Path(), -1);
 		menuItem = new BMenuItem(path ? path : aPath.Path(), msg);
 		if(path) free(path);
 #else
@@ -1530,7 +1532,7 @@ BFilePanelWindow::RefreshDirMenu()
 	}
 
 #ifdef BHAPI_OS_WIN32
-	char *path = b_win32_convert_active_to_utf8(fPath.Path(), -1);
+    char *path = bhapi::win32_convert_active_to_utf8(fPath.Path(), -1);
 	fDirMenu->Superitem()->SetLabel(path ? path : (fPath.Path() == NULL ? TEXT_ALL_VOLUMES : fPath.Path()));
 	if(path) free(path);
 #else
@@ -1544,7 +1546,7 @@ BFilePanelFilter::~BFilePanelFilter()
 }
 
 
-BFilePanel::BFilePanel(b_file_panel_mode mode,
+BFilePanel::BFilePanel(bhapi::file_panel_mode mode,
 		       const BMessenger *target,
 		       const char *panel_directory,
 		       b_uint32 node_flavors,
@@ -1641,7 +1643,7 @@ BFilePanel::Filter() const
 }
 
 
-b_file_panel_mode
+bhapi::file_panel_mode
 BFilePanel::PanelMode() const
 {
 	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
@@ -1690,7 +1692,7 @@ BFilePanel::SetSaveText(const char *text)
 
 
 void
-BFilePanel::SetButtonLabel(b_file_panel_button btn, const char *label)
+BFilePanel::SetButtonLabel(bhapi::file_panel_button btn, const char *label)
 {
 	BFilePanelWindow *win = (BFilePanelWindow*)fWindow;
 	BAutolock <BFilePanelWindow> autolock(win);
@@ -1721,7 +1723,7 @@ BFilePanel::GetPanelDirectory(BEntry *entry) const
 {
 	if(entry == NULL) return;
 
-	if(fWindow->Thread() != b_get_current_thread_id())
+    if(fWindow->Thread() != bhapi::get_current_thread_id())
 	{
 		BMessenger msgr(fWindow, fWindow);
 		BMessage msg(MSG_PANEL_GET_DIR);

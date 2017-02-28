@@ -87,7 +87,7 @@ BBox::SetLabel(const char *label)
 {
 	if(!(label == NULL || *label == 0))
 	{
-		BStringView *strView = b_cast_as(fLabelView, BStringView);
+		BStringView *strView = cast_as(fLabelView, BStringView);
 		if(strView != NULL)
 		{
 			strView->SetText(label);
@@ -148,7 +148,7 @@ BBox::Label() const
 {
 	if(fLabelView == NULL) return NULL;
 
-	BStringView *strView = b_cast_as(fLabelView, BStringView);
+	BStringView *strView = cast_as(fLabelView, BStringView);
 	if(strView == NULL) return NULL;
 
 	return strView->Text();
@@ -165,7 +165,7 @@ BBox::LabelView() const
 BRect
 BBox::ContentBounds() const
 {
-	b_theme_engine *theme = b_get_current_theme_engine();
+	b_theme_engine *theme = bhapi::get_current_theme_engine();
 
 	float l = 0, t = 0, r = 0, b = 0;
 	if(!(theme == NULL || theme->get_border_margins == NULL))
@@ -188,7 +188,7 @@ BBox::Draw(BRect updateRect)
 {
 	if(!IsVisible() || fBorder == B_NO_BORDER) return;
 
-	b_theme_engine *theme = b_get_current_theme_engine();
+	b_theme_engine *theme = bhapi::get_current_theme_engine();
 	if(theme == NULL || theme->get_border_margins == NULL || theme->draw_border == NULL) return;
 
 	float l = 0, t = 0, r = 0, b = 0;
@@ -233,7 +233,7 @@ BBox::GetPreferredSize(float *width, float *height)
 	float w = 0, h = 0;
 	if(fLabelView) fLabelView->GetPreferredSize(&w, &h);
 
-	b_theme_engine *theme = b_get_current_theme_engine();
+	b_theme_engine *theme = bhapi::get_current_theme_engine();
 
 	float l = 0, t = 0, r = 0, b = 0;
 	if(!(theme == NULL || theme->get_border_margins == NULL))

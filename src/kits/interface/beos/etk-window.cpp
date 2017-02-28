@@ -87,7 +87,7 @@ EBePrivateWinTopView::~EBePrivateWinTopView()
 void
 EBePrivateWinTopView::Draw(BRect updateRect)
 {
-	EBePrivateWin *win = b_cast_as(Window(), EBePrivateWin);
+	EBePrivateWin *win = cast_as(Window(), EBePrivateWin);
 	if(!(win == NULL || win->fContactor.IsValid() == false))
 	{
 		BMessage message(_UPDATE_);
@@ -329,7 +329,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				{
 					BHandler *_frontWin = NULL;
 					if(bMsg->FindPointer("front", (void**)&_frontWin) != B_OK) break;
-					BWindow *frontWin = b_cast_as(_frontWin, BWindow);
+					BWindow *frontWin = cast_as(_frontWin, BWindow);
 					if(frontWin == NULL) break;
 					SendBehind(frontWin);
 					bMsg->AddBool("done", true);
@@ -506,7 +506,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 				message.AddMessenger("BHAPI:msg_for_target", fContactor);
 
-				b_app->PostMessage(&message);
+				bhapi::app->PostMessage(&message);
 			}
 			break;
 
@@ -577,7 +577,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 				message.AddMessenger("BHAPI:msg_for_target", fContactor);
 
-				b_app->PostMessage(&message);
+				bhapi::app->PostMessage(&message);
 			}
 			break;
 
@@ -610,7 +610,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 				message.AddMessenger("BHAPI:msg_for_target", fContactor);
 
-				b_app->PostMessage(&message);
+				bhapi::app->PostMessage(&message);
 			}
 			break;
 
@@ -881,7 +881,7 @@ EBeGraphicsWindow::Lower(BGraphicsWindow *_frontWin)
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
-	EBeGraphicsWindow *frontWin = b_cast_as(_frontWin, EBeGraphicsWindow);
+	EBeGraphicsWindow *frontWin = cast_as(_frontWin, EBeGraphicsWindow);
 	if(frontWin == NULL) return B_ERROR;
 
 	BMessage msg('b_');

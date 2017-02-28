@@ -57,13 +57,21 @@
 
 #ifdef _WIN32
 // defined in etk-os.cpp
-extern "C" char* b_win32_convert_utf8_to_active(const char *str, b_int32 length);
+extern "C" {
+namespace bhapi {
+char* win32_convert_utf8_to_active(const char *str, b_int32 length);
+}
+}
 #endif
 
 
 extern "C" {
 
-EXPORT_BHAPI void b_debug_log(b_debug_level level, const char *format, va_list ap)
+namespace bhapi {
+EXPORT_BHAPI void debug_log(bhapi::debug_level level, const char *format, va_list ap);
+}
+
+EXPORT_BHAPI void bhapi::debug_log(bhapi::debug_level level, const char *format, va_list ap)
 {
 	char *buffer = NULL;
 	char *prefix = NULL;
@@ -111,7 +119,7 @@ EXPORT_BHAPI void b_debug_log(b_debug_level level, const char *format, va_list a
 			}
 			else
 			{
-				char *aStr = b_win32_convert_utf8_to_active(newLine, -1);
+                char *aStr = bhapi::win32_convert_utf8_to_active(newLine, -1);
 				if(aStr != NULL)
 				{
 					MessageBoxA(NULL, aStr, NULL, MB_ICONERROR | MB_SETFOREGROUND);
@@ -171,7 +179,7 @@ EXPORT_BHAPI void b_debug_log(b_debug_level level, const char *format, va_list a
 			}
 			else // Windows 95/98
 			{
-				char *aStr = b_win32_convert_utf8_to_active(newLine, -1);
+                char *aStr = bhapi::win32_convert_utf8_to_active(newLine, -1);
 				if(aStr != NULL)
 				{
 					DWORD wrote = 0;
@@ -203,7 +211,7 @@ EXPORT_BHAPI void BHAPI_DEBUG(const char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
-	b_debug_log(DEBUG_NORMAL, format, args);
+    bhapi::debug_log(bhapi::DEBUG_NORMAL, format, args);
 	va_end(args);
 }
 
@@ -212,7 +220,7 @@ EXPORT_BHAPI void BHAPI_OUTPUT(const char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
-	b_debug_log(DEBUG_OUTPUT, format, args);
+    bhapi::debug_log(bhapi::DEBUG_OUTPUT, format, args);
 	va_end(args);
 }
 
@@ -221,7 +229,7 @@ EXPORT_BHAPI void BHAPI_WARNING(const char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
-	b_debug_log(DEBUG_WARNING, format, args);
+    bhapi::debug_log(bhapi::DEBUG_WARNING, format, args);
 	va_end(args);
 }
 
@@ -230,7 +238,7 @@ EXPORT_BHAPI void BHAPI_ERROR(const char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
-	b_debug_log(DEBUG_ERROR, format, args);
+    bhapi::debug_log(bhapi::DEBUG_ERROR, format, args);
 	va_end(args);
 }
 

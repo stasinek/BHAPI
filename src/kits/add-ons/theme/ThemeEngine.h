@@ -39,6 +39,7 @@ class BRect;
 class BRegion;
 class BPoint;
 
+namespace bhapi {
 enum {
     B_THEME_FOCUS_FLASH_BORDER = 1,
     B_THEME_FOCUS_FLASH_CONTENT = 1 << 1,
@@ -96,11 +97,8 @@ typedef struct b_theme_engine {
 	void (*destroy)(struct b_theme_engine *engine);
 } b_theme_engine;
 
-
-IMPEXP_BHAPI b_theme_engine *bhapi::get_current_theme_engine(void);
-
-
+IMPEXP_BHAPI b_theme_engine *get_current_theme_engine(void);
+} /* namespace bhapi */
 #endif /* __cplusplus */
-
 #endif /* BHAPI_THEME_ENGINE__H */
 

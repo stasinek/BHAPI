@@ -80,7 +80,7 @@ BPopUpMenuView::Draw(BRect updateRect)
 		SetPenSize(1);
 		b_rgb_color borderColor = b_ui_color(B_MENU_BORDER_COLOR);
 
-		BPopUpMenuWindow *win = b_cast_as(Window(), BPopUpMenuWindow);
+		BPopUpMenuWindow *win = cast_as(Window(), BPopUpMenuWindow);
 		if(win->fMenu == NULL || win->fMenu->IsEnabled() == false) borderColor.mix(0, 0, 0, 20);
 
 		SetHighColor(borderColor);
@@ -122,7 +122,7 @@ BPopUpMenuWindow::BPopUpMenuWindow(BPoint where, BPopUpMenu *menu, bool delivers
 
 	if(async == false && could_proxy)
 	{
-		BLooper *looper = BLooper::LooperForThread(b_get_current_thread_id());
+		BLooper *looper = BLooper::LooperForThread(bhapi::get_current_thread_id());
 		if(looper)
 		{
 			looper->Lock();
@@ -202,7 +202,7 @@ BPopUpMenu::MessageReceived(BMessage *msg)
 	{
 		case B_MOUSE_MOVED:
 			{
-				BPopUpMenuWindow *win = b_cast_as(Window(), BPopUpMenuWindow);
+				BPopUpMenuWindow *win = cast_as(Window(), BPopUpMenuWindow);
 				if(win == NULL || win->fOpenAnyway == true) break;
 
 				b_int32 buttons;
@@ -236,12 +236,12 @@ BPopUpMenu::MessageReceived(BMessage *msg)
 
 		case _MENU_EVENT_:
 			{
-				if(Window() == NULL || !b_is_instance_of(Window(), BPopUpMenuWindow)) break;
+				if(Window() == NULL || !bhapi::is_instance_of(Window(), BPopUpMenuWindow)) break;
 
 				BMenuItem *item = NULL;
 				if(msg->FindPointer("source", (void**)&item) == false || item == NULL) break;
 
-				BPopUpMenuWindow *win = b_cast_as(Window(), BPopUpMenuWindow);
+				BPopUpMenuWindow *win = cast_as(Window(), BPopUpMenuWindow);
 				fSelectedItem = item;
 				if(win->fDeliversMessage)
 				{
@@ -271,7 +271,7 @@ BPopUpMenu::MessageReceived(BMessage *msg)
 void
 BPopUpMenu::MouseUp(BPoint where)
 {
-	BPopUpMenuWindow *win = b_cast_as(Window(), BPopUpMenuWindow);
+	BPopUpMenuWindow *win = cast_as(Window(), BPopUpMenuWindow);
 	BMessage *msg = Window()->CurrentMessage();
 
 	if(!(win == NULL || win->fOpenAnyway == true || msg == NULL || msg->what != B_MOUSE_UP))
@@ -333,7 +333,7 @@ BPopUpMenu::Go(BPoint where, bool delivers_message, bool open_anyway, bool async
 	void *trackingThread = NULL;
 
 	if(win == NULL || win->IsRunning() == false || Window() != win ||
-	   (win->Proxy() == win ? ((trackingThread = b_open_thread(win->Thread())) == NULL) : false))
+	   (win->Proxy() == win ? ((trackingThread = bhapi::open_thread(win->Thread())) == NULL) : false))
 	{
 		BHAPI_WARNING("[INTERFACE]: %s --- Unable to create pop-up window.", __PRETTY_FUNCTION__);
 		if(win != NULL)
@@ -364,9 +364,9 @@ BPopUpMenu::Go(BPoint where, bool delivers_message, bool open_anyway, bool async
 			if(!async)
 			{
 				b_status_t status;
-				b_wait_for_thread(trackingThread, &status);
+				bhapi::wait_for_thread(trackingThread, &status);
 			}
-			b_delete_thread(trackingThread);
+			bhapi::delete_thread(trackingThread);
 		}
 	}
 
@@ -391,6 +391,6 @@ BPopUpMenu::AsyncAutoDestruct() const
 bool
 BPopUpMenu::IsPopUpByGo() const
 {
-	return(b_is_instance_of(Window(), BPopUpMenuWindow) != 0);
+	return(bhapi::is_instance_of(Window(), BPopUpMenuWindow) != 0);
 }
 

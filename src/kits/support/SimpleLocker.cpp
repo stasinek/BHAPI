@@ -35,14 +35,14 @@
 
 BSimpleLocker::BSimpleLocker(bool assert)
 {
-	fLocker = b_create_simple_locker();
+	fLocker = bhapi::create_simple_locker();
 	if(fLocker == NULL && assert) BHAPI_ERROR("[SUPPORT]: %s --- Create simple locker failed!", __PRETTY_FUNCTION__);
 }
 
 
 BSimpleLocker::~BSimpleLocker()
 {
-	if(fLocker != NULL) b_delete_simple_locker(fLocker);
+	if(fLocker != NULL) bhapi::delete_simple_locker(fLocker);
 }
 
 
@@ -56,13 +56,13 @@ BSimpleLocker::IsValid() const
 bool
 BSimpleLocker::Lock()
 {
-	return(fLocker != NULL ? b_lock_simple_locker(fLocker) : false);
+	return(fLocker != NULL ? bhapi::lock_simple_locker(fLocker) : false);
 }
 
 
 void
 BSimpleLocker::Unlock()
 {
-	if(fLocker != NULL) b_unlock_simple_locker(fLocker);
+	if(fLocker != NULL) bhapi::unlock_simple_locker(fLocker);
 }
 

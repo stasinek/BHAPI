@@ -160,8 +160,8 @@ typedef struct bhapi::font_info {
 		}
 
 		engine = fengine;
-		family_index = engine ? b_get_font_family_index(engine->Family()) : -1;
-		style_index = engine ? b_get_font_style_index(engine->Family(), engine->Style()) : -1;
+		family_index = engine ? bhapi::get_font_family_index(engine->Family()) : -1;
+		style_index = engine ? bhapi::get_font_style_index(engine->Family(), engine->Style()) : -1;
 
 		bhapi::font_info_locker.Unlock();
 
@@ -595,7 +595,7 @@ BFont::SetFamilyAndStyle(const bhapi::font_family family, const bhapi::font_styl
 	bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
 	if(!fontInfo) return B_ERROR;
 
-	BFontEngine *engine = b_get_font_engine(family, style);
+	BFontEngine *engine = bhapi::get_font_engine(family, style);
 	if(!engine) return B_ERROR;
 
 	return(fontInfo->SetEngine(engine) ? B_OK : B_ERROR);
@@ -613,7 +613,7 @@ BFont::SetFamilyAndStyle(b_uint32 code)
 	b_uint32 familyIndex = code >> 16;
 	b_uint32 styleIndex = code & 0xffff;
 
-	BFontEngine *engine = b_get_font_engine((b_int32)familyIndex, (b_int32)styleIndex);
+	BFontEngine *engine = bhapi::get_font_engine((b_int32)familyIndex, (b_int32)styleIndex);
 	if(!engine) return B_ERROR;
 
 	return(fontInfo->SetEngine(engine) ? B_OK : B_ERROR);
@@ -636,8 +636,8 @@ BFont::GetFamilyAndStyle(bhapi::font_family *family, bhapi::font_style *style) c
 
 	const char *fFamily = NULL;
 	const char *fStyle = NULL;
-	b_get_font_family((b_int32)familyIndex, &fFamily);
-	b_get_font_style(fFamily, (b_int32)styleIndex, &fStyle);
+	bhapi::get_font_family((b_int32)familyIndex, &fFamily);
+	bhapi::get_font_style(fFamily, (b_int32)styleIndex, &fStyle);
 
 	if(!fFamily || !fStyle) return B_ERROR;
 

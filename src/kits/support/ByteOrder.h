@@ -31,28 +31,28 @@
 #define BHAPI_BYTE_ORDER__H
 #include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
-
 extern "C" {
 #endif
-
-typedef enum b_swap_action {
+namespace bhapi {
+typedef enum swap_action {
     B_SWAP_HOST_TO_LENDIAN,
     B_SWAP_HOST_TO_BENDIAN,
     B_SWAP_LENDIAN_TO_HOST,
     B_SWAP_BENDIAN_TO_HOST,
     B_SWAP_ALWAYS
-} b_swap_action;
+} swap_action;
 
-IMPEXP_BHAPI b_status_t	b_swap_data(b_type_code type, void *data, size_t len, b_swap_action action);
-IMPEXP_BHAPI bool			b_is_type_swapped(b_type_code type);
-IMPEXP_BHAPI float			b_swap_float(float value);
-IMPEXP_BHAPI double		b_swap_double(double value);
+IMPEXP_BHAPI b_status_t	swap_data(b_type_code type, void *data, size_t len, swap_action action);
+IMPEXP_BHAPI bool			is_type_swapped(b_type_code type);
+IMPEXP_BHAPI float			swap_float(float value);
+IMPEXP_BHAPI double		swap_double(double value);
+} /* namespace */
 
 #define B_SWAP_INT16(v)		((((v) & 0xff) << 8) | (((v) >> 8) & 0xff))
 #define B_SWAP_INT32(v)		((B_SWAP_INT16((v) & 0xffff) << 16) | B_SWAP_INT16(((v) >> 16) & 0xffff))
 #define B_SWAP_INT64(v)		((B_SWAP_INT32((v) & 0xffffffff) << 32) | B_SWAP_INT32(((v) >> 32) & 0xffffffff))
-#define B_SWAP_FLOAT(v)		b_swap_float(v)
-#define B_SWAP_DOUBLE(v)	b_swap_double(v)
+#define B_SWAP_FLOAT(v)		swap_float(v)
+#define B_SWAP_DOUBLE(v)	swap_double(v)
 
 #ifdef BHAPI_LITTLE_ENDIAN
 

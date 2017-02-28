@@ -77,7 +77,7 @@ BObject::Vitalities() const
 }
 
 
-void b_delete_object(void *object)
+void bhapi::delete_object(void *object)
 {
 	BObject *obj = reinterpret_cast<BObject*>(object);
 	if(obj != NULL) delete obj;

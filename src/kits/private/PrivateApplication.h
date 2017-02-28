@@ -58,8 +58,9 @@ private:
 	static b_status_t task(void*);
 };
 
-extern BApplicationConnector *bhapi::app_connector;
-
+namespace bhapi {
+extern BApplicationConnector *app_connector;
+}
 #endif /* __cplusplus */
 
 #endif /* BHAPI_PRIVATE_APPLICATION__H */

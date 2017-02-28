@@ -670,7 +670,7 @@ BTextEditable::MouseUp(BPoint where)
 	rect.right -= fMargins.right;
 	rect.bottom -= fMargins.bottom;
 
-	if(rect.Contains(where)) b_app->ObscureCursor();
+	if(rect.Contains(where)) bhapi::app->ObscureCursor();
 }
 
 
@@ -685,11 +685,11 @@ BTextEditable::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message
 
 	if(rect.Contains(where) == false || code == B_EXITED_VIEW)
 	{
-		b_app->SetCursor(B_CURSOR_SYSTEM_DEFAULT, false);
+		bhapi::app->SetCursor(B_CURSOR_SYSTEM_DEFAULT, false);
 		return;
 	}
 
-	b_app->SetCursor(B_CURSOR_I_BEAM, false);
+	bhapi::app->SetCursor(B_CURSOR_I_BEAM, false);
 
 	if(!IsEnabled() || !IsSelectable() || fSelectTracking < 0) return;
 

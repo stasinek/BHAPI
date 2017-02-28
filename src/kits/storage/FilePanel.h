@@ -32,15 +32,17 @@
 
 #include "../support/SupportDefs.h"
 
-typedef enum b_file_panel_mode {
+namespace bhapi {
+typedef enum file_panel_mode {
     B_OPEN_PANEL,
     B_SAVE_PANEL
-} b_file_panel_mode;
+} file_panel_mode;
 
-typedef enum b_file_panel_button {
+typedef enum file_panel_button {
     B_CANCEL_BUTTON,
     B_DEFAULT_BUTTON
-} b_file_panel_button;
+} file_panel_button;
+} /* namespace */
 
 #ifdef __cplusplus /* Just for C++ */
 
@@ -60,7 +62,7 @@ public:
 
 class IMPEXP_BHAPI BFilePanel {
 public:
-    BFilePanel(b_file_panel_mode mode = B_OPEN_PANEL,
+    BFilePanel(bhapi::file_panel_mode mode = bhapi::B_OPEN_PANEL,
            const BMessenger *target = NULL,
 		   const char *panel_directory = NULL,
            b_uint32 node_flavors = 0,
@@ -87,14 +89,14 @@ public:
     BMessenger		*Target() const;
 	BFilePanelFilter	*Filter() const;
 
-	b_file_panel_mode	PanelMode() const;
+    bhapi::file_panel_mode	PanelMode() const;
 
     void			SetTarget(const BMessenger *target);
     void			SetMessage(const BMessage *msg);
 
 	void			SetFilter(BFilePanelFilter *filter);
 	void			SetSaveText(const char *text);
-    void			SetButtonLabel(b_file_panel_button btn, const char *label);
+    void			SetButtonLabel(bhapi::file_panel_button btn, const char *label);
 
 	void			SetHideWhenDone(bool state);
 	bool			HidesWhenDone() const;

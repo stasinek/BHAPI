@@ -48,7 +48,7 @@ typedef struct b_invoker_notify_state {
 BInvoker::BInvoker()
 	: fMessage(NULL), fReplyHandlerToken(B_MAXUINT64), fTimeout(B_INFINITE_TIMEOUT), fNotifyKind(B_CONTROL_INVOKED), fNotifyCalled(false)
 {
-	SetHandlerForReply(b_app);
+	SetHandlerForReply(bhapi::app);
 }
 
 
@@ -59,7 +59,7 @@ BInvoker::BInvoker(BMessage *message, const BHandler *handler, const BLooper *lo
 	BMessenger msgr(handler, looper, NULL);
 	fMessenger = msgr;
 
-	SetHandlerForReply(b_app);
+	SetHandlerForReply(bhapi::app);
 }
 
 
@@ -69,14 +69,14 @@ BInvoker::BInvoker(BMessage *message, BMessenger target)
 	fMessage = message;
 	fMessenger = target;
 
-	SetHandlerForReply(b_app);
+	SetHandlerForReply(bhapi::app);
 }
 
 
 BInvoker::~BInvoker()
 {
 	if(fMessage) delete fMessage;
-	if(fReplyHandlerToken != B_MAXUINT64) b_unref_handler(fReplyHandlerToken);
+    if(fReplyHandlerToken != B_MAXUINT64) bhapi::unref_handler(fReplyHandlerToken);
 	if(!fNotifyStatesList.IsEmpty())
 	{
 		for(b_int32 i = 0; i < fNotifyStatesList.CountItems(); i++)
@@ -157,9 +157,9 @@ BInvoker::Messenger() const
 b_status_t
 BInvoker::SetHandlerForReply(const BHandler *handler)
 {
-	if(fReplyHandlerToken != B_MAXUINT64) b_unref_handler(fReplyHandlerToken);
+    if(fReplyHandlerToken != B_MAXUINT64) bhapi::unref_handler(fReplyHandlerToken);
 
-	fReplyHandlerToken = b_get_ref_handler_token(handler);
+	fReplyHandlerToken = bhapi::get_ref_handler_token(handler);
 
 	return B_OK;
 }
@@ -168,7 +168,7 @@ BInvoker::SetHandlerForReply(const BHandler *handler)
 BHandler*
 BInvoker::HandlerForReply() const
 {
-	return(b_get_handler(fReplyHandlerToken));
+	return(bhapi::get_handler(fReplyHandlerToken));
 }
 
 

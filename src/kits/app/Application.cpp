@@ -48,9 +48,9 @@
 
 LOCAL_BHAPI BCursor _B_CURSOR_SYSTEM_DEFAULT(NULL);
 
-EXPORT_BHAPI BApplication *b_app = NULL;
-EXPORT_BHAPI BMessenger b_app_messenger;
-EXPORT_BHAPI BClipboard b_clipboard("system");
+EXPORT_BHAPI BApplication *bhapi::app = NULL;
+EXPORT_BHAPI BMessenger bhapi::app_messenger;
+EXPORT_BHAPI BClipboard bhapi::clipboard("system");
 EXPORT_BHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT = &_B_CURSOR_SYSTEM_DEFAULT;
 
 #ifdef BHAPI_BUILD_LIBRARY
@@ -66,11 +66,11 @@ extern void bhapi::font_unlock(void);
 void
 BApplication::Init(const char *signature, bool tryInterface)
 {
-	BLocker *hLocker = b_get_handler_operator_locker();
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
 
 	hLocker->Lock();
 
-	if(b_app != NULL)
+    if(bhapi::app != NULL)
 		BHAPI_ERROR("[APP]: %s --- Another application running!", __PRETTY_FUNCTION__);
 
 	if(signature) fSignature = bhapi::strdup(signature);
@@ -80,12 +80,12 @@ BApplication::Init(const char *signature, bool tryInterface)
 	fPulseRunner = new BMessageRunner(msgr, &pulseMsg, fPulseRate, 0);
 	if(!(fPulseRunner == NULL || fPulseRunner->IsValid())) {delete fPulseRunner; fPulseRunner = NULL;}
 
-	b_app = this;
-	b_app_messenger = BMessenger(this);
+    bhapi::app = this;
+	bhapi::app_messenger = BMessenger(this);
 
 	hLocker->Unlock();
 
-	b_clipboard.StartWatching(b_app_messenger);
+    bhapi::clipboard.StartWatching(bhapi::app_messenger);
 
 	if(tryInterface) InitGraphicsEngine();
 }
@@ -103,14 +103,14 @@ BApplication::BApplication(const char *signature, bool tryInterface)
 
 BApplication::~BApplication()
 {
-	BLocker *hLocker = b_get_handler_operator_locker();
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
 
 	hLocker->Lock();
-	if(!(fThread == NULL || (b_get_current_thread_id() == b_get_thread_id(fThread) && fQuit == true)))
+    if(!(fThread == NULL || (bhapi::get_current_thread_id() == bhapi::get_thread_id(fThread) && fQuit == true)))
 		BHAPI_ERROR("[APP]: Task must call \"PostMessage(B_QUIT_REQUESTED)\" instead \"delete\" to quit the application!!!");
 	hLocker->Unlock();
 
-	b_quit_all_loopers(true);
+    this->quit_all_loopers(true);
 
 	if(fGraphicsEngine != NULL)
 	{
@@ -127,7 +127,7 @@ BApplication::~BApplication()
 		delete fGraphicsEngine;
 	}
 
-	if(fGraphicsEngineAddon != NULL) b_unload_addon(fGraphicsEngineAddon);
+    if(fGraphicsEngineAddon != NULL) bhapi::unload_addon(fGraphicsEngineAddon);
 
 	if(fPulseRunner) delete fPulseRunner;
 	if(fSignature) delete[] fSignature;
@@ -140,8 +140,8 @@ BApplication::~BApplication()
 	}
 	fModalWindows.MakeEmpty();
 
-	b_clipboard.StopWatching(b_app_messenger);
-	b_app_messenger = BMessenger();
+    bhapi::clipboard.StopWatching(bhapi::app_messenger);
+	bhapi::app_messenger = BMessenger();
 
 	hLocker->Unlock();
 }
@@ -184,15 +184,15 @@ BApplication::Instantiate(const BMessage *from)
 void*
 BApplication::Run()
 {
-	BLocker *hLocker = b_get_handler_operator_locker();
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
 
 	hLocker->Lock();
 
 	if(fThread)
 		BHAPI_ERROR("[APP]: %s --- Thread must run only one time!", __PRETTY_FUNCTION__);
 
-	if((fThread = b_open_thread(b_get_current_thread_id())) == NULL)
-		fThread = b_create_thread_by_current_thread();
+    if((fThread = bhapi::open_thread(bhapi::get_current_thread_id())) == NULL)
+		fThread = bhapi::create_thread_by_current_thread();
 
 	if(fThread == NULL)
 		BHAPI_ERROR("[APP]: %s --- Unable to create thread!", __PRETTY_FUNCTION__);
@@ -224,10 +224,9 @@ BApplication::Run()
 }
 
 
-void
-BApplication::b_dispatch_message_runners()
+void BApplication::dispatch_message_runners()
 {
-	BLocker *hLocker = b_get_handler_operator_locker();
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
 
 	hLocker->Lock();
 
@@ -272,7 +271,7 @@ BApplication::b_dispatch_message_runners()
 bool
 BApplication::QuitRequested()
 {
-	return(b_quit_all_loopers(false));
+    return(this->quit_all_loopers(false));
 }
 
 
@@ -327,7 +326,7 @@ BApplication::Quit()
 		BHAPI_ERROR("[APP]: %s --- Application must LOCKED before this call!", __PRETTY_FUNCTION__);
 	else if(fThread == NULL)
 		BHAPI_ERROR("[APP]: %s --- Application isn't running!", __PRETTY_FUNCTION__);
-	else if(b_get_thread_id(fThread) != b_get_current_thread_id())
+    else if(bhapi::get_thread_id(fThread) != bhapi::get_current_thread_id())
 		BHAPI_ERROR("\n\
 **************************************************************************\n\
 *                           [APP]: BApplication                          *\n\
@@ -336,7 +335,7 @@ BApplication::Quit()
 *      \"Quit()\" outside the looper!!!                                    *\n\
 **************************************************************************\n\n");
 
-	b_close_sem(fSem);
+    bhapi::close_sem(fSem);
 
 	fQuit = true;
 
@@ -408,7 +407,7 @@ BApplication::MessageReceived(BMessage *msg)
 				if(msg->FindMessenger("BHAPI:msg_for_target", &msgr))
 				{
 					// TODO: Floating window shouldt receive the MOUSE event
-					BLocker *hLocker = b_get_handler_operator_locker();
+                    BLocker *hLocker = bhapi::get_handler_operator_locker();
 					hLocker->Lock();
 					BMessenger *tMsgr = (BMessenger*)fModalWindows.ItemAt(0);
 					if(tMsgr != NULL) msgr = *tMsgr;
@@ -441,7 +440,7 @@ BApplication::MessageReceived(BMessage *msg)
 b_int32
 BApplication::CountLoopers()
 {
-	BLocker *hLocker = b_get_handler_operator_locker();
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	return BLooper::sLooperList.CountItems();
@@ -451,7 +450,7 @@ BApplication::CountLoopers()
 BLooper*
 BApplication::LooperAt(b_int32 index)
 {
-	BLocker *hLocker = b_get_handler_operator_locker();
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	return (BLooper*)(BLooper::sLooperList.ItemAt(index));
@@ -460,23 +459,23 @@ BApplication::LooperAt(b_int32 index)
 
 
 bool
-BApplication::b_quit_all_loopers(bool force)
+BApplication::quit_all_loopers(bool force)
 {
 	b_int32 index;
 	BLooper *looper = NULL;
-	BLocker *hLocker = b_get_handler_operator_locker();
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
 
 	while(true)
 	{
 		hLocker->Lock();
 
-		if(b_app != this) {hLocker->Unlock(); return false;}
+        if(bhapi::app != this) {hLocker->Unlock(); return false;}
 
 		looper = NULL;
 		for(index = 0; index < BLooper::sLooperList.CountItems(); index++)
 		{
 			looper = (BLooper*)(BLooper::sLooperList.ItemAt(index));
-			if(looper == b_app) looper = NULL; // ignore b_app
+            if(looper == bhapi::app) looper = NULL; // ignore bhapi::app
 			if(looper != NULL) break;
 		}
 
@@ -530,10 +529,11 @@ BApplication::Signature() const
 	return fSignature;
 }
 
-
+namespace bhapi {
 #ifndef BHAPI_GRAPHICS_NONE_BUILT_IN
-extern BGraphicsEngine* b_get_built_in_graphics_engine();
+extern BGraphicsEngine* get_built_in_graphics_engine();
 #endif
+} /* namespace */
 
 void
 BApplication::InitGraphicsEngine()
@@ -569,7 +569,7 @@ BApplication::InitGraphicsEngine()
 				while(directory.GetNextEntry(&aEntry, false) == B_OK)
 				{
 					if(aEntry.GetPath(&aPath) != B_OK) continue;
-					void *addon = b_load_addon(aPath.Path());
+                    void *addon = bhapi::load_addon(aPath.Path());
 					if(addon == NULL)
 					{
 						BHAPI_WARNING("[APP]: Unable to load addon(%s).", aPath.Path());
@@ -577,10 +577,10 @@ BApplication::InitGraphicsEngine()
 					}
 
 					BGraphicsEngine* (*instantiate_func)() = NULL;
-					if(b_get_image_symbol(addon, "instantiate_graphics_engine", (void**)&instantiate_func) != B_OK)
+                    if(bhapi::get_image_symbol(addon, "instantiate_graphics_engine", (void**)&instantiate_func) != B_OK)
 					{
 						BHAPI_WARNING("[APP]: Unable to get symbol of image(%s).", aPath.Path());
-						b_unload_addon(addon);
+                        bhapi::unload_addon(addon);
 						continue;
 					}
 
@@ -588,7 +588,7 @@ BApplication::InitGraphicsEngine()
 					if(engine == NULL || engine->Initalize() != B_OK)
 					{
 						BHAPI_DEBUG("[APP]: Unable to initalize engine(%s).", aPath.Path());
-						b_unload_addon(addon);
+                        bhapi::unload_addon(addon);
 						continue;
 					}
 
@@ -602,7 +602,7 @@ BApplication::InitGraphicsEngine()
 			else
 			{
 #ifndef BHAPI_GRAPHICS_NONE_BUILT_IN
-				BGraphicsEngine *engine = b_get_built_in_graphics_engine();
+                BGraphicsEngine *engine = bhapi::get_built_in_graphics_engine();
 				if(engine == NULL || engine->Initalize() != B_OK)
 				{
 					BHAPI_WARNING("[APP]: Unable to initalize built-in engine.");
@@ -651,7 +651,7 @@ BApplication::AddModalWindow(BMessenger &msgr)
 		return false;
 	}
 
-	BLocker *hLocker = b_get_handler_operator_locker();
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
 	hLocker->Lock();
 	for(b_int32 i = 0; i < fModalWindows.CountItems(); i++)
 	{
@@ -678,7 +678,7 @@ BApplication::AddModalWindow(BMessenger &msgr)
 bool
 BApplication::RemoveModalWindow(BMessenger &msgr)
 {
-	BLocker *hLocker = b_get_handler_operator_locker();
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
 	hLocker->Lock();
 	for(b_int32 i = 0; i < fModalWindows.CountItems(); i++)
 	{
@@ -702,12 +702,12 @@ BApplication::SetCursor(const BCursor *cursor, bool sync)
 {
 	if(cursor == NULL || cursor->DataLength() == 0) return;
 
-	if(b_get_current_thread_id() != Thread())
+	if(bhapi::get_current_thread_id() != Thread())
 	{
 		BMessage msg(B_APP_CURSOR_REQUESTED);
 		msg.AddData("BHAPI:cursor_data", B_ANY_TYPE, cursor->Data(), (size_t)cursor->DataLength(), true);
-        if(sync == false) b_app_messenger.SendMessage(&msg);
-        else b_app_messenger.SendMessage(&msg, &msg);
+        if(sync == false) bhapi::app_messenger.SendMessage(&msg);
+        else bhapi::app_messenger.SendMessage(&msg, &msg);
 	}
 	else if(fCursor != *cursor)
 	{
@@ -720,11 +720,11 @@ BApplication::SetCursor(const BCursor *cursor, bool sync)
 void
 BApplication::HideCursor()
 {
-	if(b_get_current_thread_id() != Thread())
+	if(bhapi::get_current_thread_id() != Thread())
 	{
 		BMessage msg(B_APP_CURSOR_REQUESTED);
 		msg.AddBool("BHAPI:show_cursor", false);
-		b_app_messenger.SendMessage(&msg);
+		bhapi::app_messenger.SendMessage(&msg);
 	}
 	else if(!fCursorHidden)
 	{
@@ -738,11 +738,11 @@ BApplication::HideCursor()
 void
 BApplication::ShowCursor()
 {
-	if(b_get_current_thread_id() != Thread())
+	if(bhapi::get_current_thread_id() != Thread())
 	{
 		BMessage msg(B_APP_CURSOR_REQUESTED);
 		msg.AddBool("BHAPI:show_cursor", true);
-        b_app_messenger.SendMessage(&msg);
+        bhapi::app_messenger.SendMessage(&msg);
 	}
 	else if(fCursorHidden || fCursorObscure)
 	{
@@ -756,11 +756,11 @@ BApplication::ShowCursor()
 void
 BApplication::ObscureCursor()
 {
-	if(b_get_current_thread_id() != Thread())
+	if(bhapi::get_current_thread_id() != Thread())
 	{
 		BMessage msg(B_APP_CURSOR_REQUESTED);
 		msg.AddBool("BHAPI:obscure_cursor", true);
-        b_app_messenger.SendMessage(&msg);
+        bhapi::app_messenger.SendMessage(&msg);
 	}
 	else if(!fCursorHidden && !fCursorObscure)
 	{

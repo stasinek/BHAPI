@@ -58,9 +58,9 @@ BLayoutItem::Container() const
 BLayoutContainer*
 BLayoutItem::Ancestor() const
 {
-	if(fContainer == NULL) return b_cast_as((BLayoutItem*)this, BLayoutContainer);
-	if(b_is_kind_of(fContainer, BLayoutItem) == false) return fContainer;
-	return b_cast_as(fContainer, BLayoutItem)->Ancestor();
+	if(fContainer == NULL) return cast_as((BLayoutItem*)this, BLayoutContainer);
+	if(is_kind_of(fContainer, BLayoutItem) == false) return fContainer;
+	return cast_as(fContainer, BLayoutItem)->Ancestor();
 }
 
 
@@ -131,8 +131,8 @@ BLayoutItem::IsHidden(bool check_containers) const
 {
 	if(check_containers == false) return fHidden;
 	if(fHidden || fContainer == NULL) return true;
-	if(b_is_kind_of(fContainer, BLayoutItem) == false) return false;
-	return b_cast_as(fContainer, BLayoutItem)->IsHidden(true);
+	if(is_kind_of(fContainer, BLayoutItem) == false) return false;
+	return cast_as(fContainer, BLayoutItem)->IsHidden(true);
 }
 
 
@@ -468,13 +468,13 @@ BLayoutItem::UpdateVisibleRegion()
 	}
 	else
 	{
-		if(b_is_kind_of(fContainer, BLayoutItem) == false)
+		if(is_kind_of(fContainer, BLayoutItem) == false)
 		{
 			fVisibleRegion = fFrame;
 		}
 		else
 		{
-			fVisibleRegion = b_cast_as(fContainer, BLayoutItem)->fVisibleRegion;
+			fVisibleRegion = cast_as(fContainer, BLayoutItem)->fVisibleRegion;
 			fVisibleRegion &= fFrame;
 		}
 

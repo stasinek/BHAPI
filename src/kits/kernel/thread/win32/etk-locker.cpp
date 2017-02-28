@@ -41,18 +41,18 @@
 #define SECS_BETWEEN_EPOCHS    B_INT64_CONSTANT(11644473600)
 #define SECS_TO_100NS	    B_INT64_CONSTANT(10000000)
 
-typedef struct b_win32_locker_t {
-	b_win32_locker_t()
+typedef struct bhapi::win32_locker_t {
+	bhapi::win32_locker_t()
 		: holderThreadId(B_INT64_CONSTANT(0)), lockCount(B_INT64_CONSTANT(0)), closed(false), Locker(NULL), created(false), refCount(0)
 	{
 	}
 
-	~b_win32_locker_t()
+	~bhapi::win32_locker_t()
 	{
 		if(created)
 		{
 			created = false;
-			b_delete_locker((void*)this);
+			bhapi::delete_locker((void*)this);
 		}
 	}
 
@@ -63,7 +63,7 @@ typedef struct b_win32_locker_t {
 
 	bool HolderThreadIsCurrent(void)
 	{
-		return(holderThreadId == b_get_current_thread_id());
+		return(holderThreadId == bhapi::get_current_thread_id());
 	}
 
 	b_int64			holderThreadId;
@@ -77,24 +77,24 @@ typedef struct b_win32_locker_t {
 	bool			created;
 
 	b_uint32			refCount;
-} b_win32_locker_t;
+} bhapi::win32_locker_t;
 
 
-static void b_lock_locker_inter(b_win32_locker_t *locker)
+static void bhapi::lock_locker_inter(bhapi::win32_locker_t *locker)
 {
 	EnterCriticalSection(&(locker->iLocker));
 }
 
 
-static void b_unlock_locker_inter(b_win32_locker_t *locker)
+static void bhapi::unlock_locker_inter(bhapi::win32_locker_t *locker)
 {
 	LeaveCriticalSection(&(locker->iLocker));
 }
 
 
-void* b_create_locker(void)
+void* bhapi::create_locker(void)
 {
-	b_win32_locker_t *locker = new b_win32_locker_t();
+	bhapi::win32_locker_t *locker = new bhapi::win32_locker_t();
 
 	if(!locker) return NULL;
 
@@ -120,49 +120,49 @@ void* b_create_locker(void)
 }
 
 
-EXPORT_BHAPI void* b_clone_locker(void *data)
+EXPORT_BHAPI void* bhapi::clone_locker(void *data)
 {
-	b_win32_locker_t *locker = (b_win32_locker_t*)data;
+	bhapi::win32_locker_t *locker = (bhapi::win32_locker_t*)data;
 	if(!locker) return NULL;
 
-	b_lock_locker_inter(locker);
+	bhapi::lock_locker_inter(locker);
 
 	if(locker->closed || locker->refCount >= B_MAXUINT32 || locker->refCount == 0)
 	{
-		b_unlock_locker_inter(locker);
+		bhapi::unlock_locker_inter(locker);
 		return NULL;
 	}
 
 	locker->refCount += 1;
 
-	b_unlock_locker_inter(locker);
+	bhapi::unlock_locker_inter(locker);
 
 	return data;
 }
 
 
-EXPORT_BHAPI b_status_t b_delete_locker(void *data)
+EXPORT_BHAPI b_status_t bhapi::delete_locker(void *data)
 {
-	b_win32_locker_t *locker = (b_win32_locker_t*)data;
+	bhapi::win32_locker_t *locker = (bhapi::win32_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
 
-	b_lock_locker_inter(locker);
+	bhapi::lock_locker_inter(locker);
 	if(locker->refCount == 0)
 	{
-		b_unlock_locker_inter(locker);
+		bhapi::unlock_locker_inter(locker);
 		return B_ERROR;
 	}
 	b_uint32 count = --(locker->refCount);
 #if 0
 	bool locked = locker->HolderThreadIsCurrent();
 #endif
-	b_unlock_locker_inter(locker);
+	bhapi::unlock_locker_inter(locker);
 
 #if 0
 	if(locked && count > 0)
 		BHAPI_DEBUG("\n\
 **************************************************************************\n\
-*                      [KERNEL]: b_delete_locker                       *\n\
+*                      [KERNEL]: bhapi::delete_locker                       *\n\
 *                                                                        *\n\
 *  Locker still locked by current thread, and some clone-copies existed  *\n\
 *  It's recommended that unlock the locker before you delete it.         *\n\
@@ -187,35 +187,35 @@ EXPORT_BHAPI b_status_t b_delete_locker(void *data)
 }
 
 
-EXPORT_BHAPI b_status_t b_close_locker(void *data)
+EXPORT_BHAPI b_status_t bhapi::close_locker(void *data)
 {
-	b_win32_locker_t *locker = (b_win32_locker_t*)data;
+	bhapi::win32_locker_t *locker = (bhapi::win32_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
 
-	b_lock_locker_inter(locker);
+	bhapi::lock_locker_inter(locker);
 	if(locker->closed)
 	{
-		b_unlock_locker_inter(locker);
+		bhapi::unlock_locker_inter(locker);
 		return B_ERROR;
 	}
 	locker->closed = true;
 	SetEvent(locker->Cond);
-	b_unlock_locker_inter(locker);
+	bhapi::unlock_locker_inter(locker);
 
 	return B_OK;
 }
 
 
-EXPORT_BHAPI b_status_t b_lock_locker(void *data)
+EXPORT_BHAPI b_status_t bhapi::lock_locker(void *data)
 {
-	b_win32_locker_t *locker = (b_win32_locker_t*)data;
+	bhapi::win32_locker_t *locker = (bhapi::win32_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
 
-	b_lock_locker_inter(locker);
+	bhapi::lock_locker_inter(locker);
 
 	if(locker->closed)
 	{
-		b_unlock_locker_inter(locker);
+		bhapi::unlock_locker_inter(locker);
 		return B_ERROR;
 	}
 
@@ -225,43 +225,43 @@ EXPORT_BHAPI b_status_t b_lock_locker(void *data)
 		handles[0] = locker->Locker;
 		handles[1] = locker->Cond;
 
-		b_unlock_locker_inter(locker);
+		bhapi::unlock_locker_inter(locker);
 
 		if(WaitForMultipleObjects(2, handles, FALSE, INFINITE) != WAIT_OBJECT_0) return B_ERROR;
 
-		b_lock_locker_inter(locker);
+		bhapi::lock_locker_inter(locker);
 
 		if(locker->closed)
 		{
 			ReleaseMutex(handles[0]);
-			b_unlock_locker_inter(locker);
+			bhapi::unlock_locker_inter(locker);
 			return B_ERROR;
 		}
 
-		locker->SetHolderThreadId(b_get_current_thread_id());
+		locker->SetHolderThreadId(bhapi::get_current_thread_id());
 		locker->lockCount = B_INT64_CONSTANT(1);
 
-		b_unlock_locker_inter(locker);
+		bhapi::unlock_locker_inter(locker);
 	}
 	else
 	{
 		if(B_MAXINT64 - locker->lockCount < B_INT64_CONSTANT(1))
 		{
-			b_unlock_locker_inter(locker);
+			bhapi::unlock_locker_inter(locker);
 			return B_ERROR;
 		}
 
 		locker->lockCount++;
-		b_unlock_locker_inter(locker);
+		bhapi::unlock_locker_inter(locker);
 	}
 
 	return B_OK;
 }
 
 
-EXPORT_BHAPI b_status_t b_lock_locker_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
+EXPORT_BHAPI b_status_t bhapi::lock_locker_etc(void *data, b_uint32 flags, b_bigtime_t microseconds_timeout)
 {
-	b_win32_locker_t *locker = (b_win32_locker_t*)data;
+	bhapi::win32_locker_t *locker = (bhapi::win32_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
 
 	if(microseconds_timeout < B_INT64_CONSTANT(0)) return B_BAD_VALUE;
@@ -270,16 +270,16 @@ EXPORT_BHAPI b_status_t b_lock_locker_etc(void *data, b_uint32 flags, b_bigtime_
 	if(flags != B_ABSOLUTE_TIMEOUT)
 	{
 		if(microseconds_timeout == B_INFINITE_TIMEOUT || microseconds_timeout > B_MAXINT64 - currentTime)
-			return b_lock_locker(data);
+			return bhapi::lock_locker(data);
 		else
 			microseconds_timeout += currentTime;
 	}
 
-	b_lock_locker_inter(locker);
+	bhapi::lock_locker_inter(locker);
 
 	if(locker->closed)
 	{
-		b_unlock_locker_inter(locker);
+		bhapi::unlock_locker_inter(locker);
 		return B_ERROR;
 	}
 
@@ -289,7 +289,7 @@ EXPORT_BHAPI b_status_t b_lock_locker_etc(void *data, b_uint32 flags, b_bigtime_
 
 		if(microseconds_timeout == currentTime)
 		{
-			b_unlock_locker_inter(locker);
+			bhapi::unlock_locker_inter(locker);
 
 			if(WaitForSingleObject(mutex, 0L) != WAIT_OBJECT_0) return B_WOULD_BLOCK;
 		}
@@ -301,13 +301,13 @@ EXPORT_BHAPI b_status_t b_lock_locker_etc(void *data, b_uint32 flags, b_bigtime_
 			timer = CreateWaitableTimer(NULL, TRUE, NULL);
 			if(timer == NULL)
 			{
-				b_unlock_locker_inter(locker);
+				bhapi::unlock_locker_inter(locker);
 				return B_ERROR;
 			}
 			if(SetWaitableTimer(timer, &due, 0, NULL, NULL, 0) == 0)
 			{
 				CloseHandle(timer);
-				b_unlock_locker_inter(locker);
+				bhapi::unlock_locker_inter(locker);
 				return B_ERROR;
 			}
 
@@ -316,7 +316,7 @@ EXPORT_BHAPI b_status_t b_lock_locker_etc(void *data, b_uint32 flags, b_bigtime_
 			handles[1] = timer;
 			handles[2] = locker->Cond;
 
-			b_unlock_locker_inter(locker);
+			bhapi::unlock_locker_inter(locker);
 
 			DWORD status = WaitForMultipleObjects(3, handles, FALSE, INFINITE);
 
@@ -328,46 +328,46 @@ EXPORT_BHAPI b_status_t b_lock_locker_etc(void *data, b_uint32 flags, b_bigtime_
 				return B_ERROR;
 		}
 
-		b_lock_locker_inter(locker);
+		bhapi::lock_locker_inter(locker);
 
 		if(locker->closed)
 		{
 			ReleaseMutex(mutex);
-			b_unlock_locker_inter(locker);
+			bhapi::unlock_locker_inter(locker);
 			return B_ERROR;
 		}
 
-		locker->SetHolderThreadId(b_get_current_thread_id());
+		locker->SetHolderThreadId(bhapi::get_current_thread_id());
 		locker->lockCount = B_INT64_CONSTANT(1);
 
-		b_unlock_locker_inter(locker);
+		bhapi::unlock_locker_inter(locker);
 	}
 	else
 	{
 		if(B_MAXINT64 - locker->lockCount < B_INT64_CONSTANT(1))
 		{
-			b_unlock_locker_inter(locker);
+			bhapi::unlock_locker_inter(locker);
 			return B_ERROR;
 		}
 
 		locker->lockCount++;
-		b_unlock_locker_inter(locker);
+		bhapi::unlock_locker_inter(locker);
 	}
 
 	return B_OK;
 }
 
 
-EXPORT_BHAPI b_status_t b_unlock_locker(void *data)
+EXPORT_BHAPI b_status_t bhapi::unlock_locker(void *data)
 {
-	b_win32_locker_t *locker = (b_win32_locker_t*)data;
+	bhapi::win32_locker_t *locker = (bhapi::win32_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
 
-	b_lock_locker_inter(locker);
+	bhapi::lock_locker_inter(locker);
 
 	if(locker->HolderThreadIsCurrent() == false)
 	{
-		b_unlock_locker_inter(locker);
+		bhapi::unlock_locker_inter(locker);
 		BHAPI_ERROR("[KERNEL]: %s --- Can't unlock when didn't hold it in current thread!", __PRETTY_FUNCTION__);
 		return B_ERROR;
 	}
@@ -377,7 +377,7 @@ EXPORT_BHAPI b_status_t b_unlock_locker(void *data)
 		{
 			if(ReleaseMutex(locker->Locker) == 0)
 			{
-				b_unlock_locker_inter(locker);
+				bhapi::unlock_locker_inter(locker);
 				return B_ERROR;
 			}
 		}
@@ -390,32 +390,32 @@ EXPORT_BHAPI b_status_t b_unlock_locker(void *data)
 			locker->lockCount = B_INT64_CONSTANT(0);
 		}
 
-		b_unlock_locker_inter(locker);
+		bhapi::unlock_locker_inter(locker);
 	}
 
 	return B_OK;
 }
 
 
-EXPORT_BHAPI b_int64 b_count_locker_locks(void *data)
+EXPORT_BHAPI b_int64 bhapi::count_locker_locks(void *data)
 {
 	b_int64 retVal = B_INT64_CONSTANT(0);
 
-	b_win32_locker_t *locker = (b_win32_locker_t*)data;
+	bhapi::win32_locker_t *locker = (bhapi::win32_locker_t*)data;
 
 	if(locker)
 	{
-		b_lock_locker_inter(locker);
+		bhapi::lock_locker_inter(locker);
 		if(locker->HolderThreadIsCurrent()) retVal = locker->lockCount;
 		else if(locker->lockCount > B_INT64_CONSTANT(0)) retVal = -(locker->lockCount);
-		b_unlock_locker_inter(locker);
+		bhapi::unlock_locker_inter(locker);
 	}
 
 	return retVal;
 }
 
 
-EXPORT_BHAPI void* b_create_simple_locker(void)
+EXPORT_BHAPI void* bhapi::create_simple_locker(void)
 {
 	CRITICAL_SECTION *locker = (CRITICAL_SECTION*)malloc(sizeof(CRITICAL_SECTION));
 	if(locker) InitializeCriticalSection(locker);
@@ -423,7 +423,7 @@ EXPORT_BHAPI void* b_create_simple_locker(void)
 }
 
 
-EXPORT_BHAPI b_status_t b_delete_simple_locker(void* data)
+EXPORT_BHAPI b_status_t bhapi::delete_simple_locker(void* data)
 {
 	CRITICAL_SECTION *locker = (CRITICAL_SECTION*)data;
 	if(!locker) return B_ERROR;
@@ -433,7 +433,7 @@ EXPORT_BHAPI b_status_t b_delete_simple_locker(void* data)
 }
 
 
-EXPORT_BHAPI bool b_lock_simple_locker(void *data)
+EXPORT_BHAPI bool bhapi::lock_simple_locker(void *data)
 {
 	CRITICAL_SECTION *locker = (CRITICAL_SECTION*)data;
 	if(!locker) return false;
@@ -444,7 +444,7 @@ EXPORT_BHAPI bool b_lock_simple_locker(void *data)
 }
 
 
-EXPORT_BHAPI void b_unlock_simple_locker(void *data)
+EXPORT_BHAPI void bhapi::unlock_simple_locker(void *data)
 {
 	CRITICAL_SECTION *locker = (CRITICAL_SECTION*)data;
 	if(!locker) return;
@@ -458,7 +458,7 @@ static CRITICAL_SECTION *__bhapi_win32_memory_tracing_locker = NULL;
 static LONG __bhapi_win32_memory_tracing_locker_inuse = 0;
 
 
-void b_win32_memory_tracing_locker_clean()
+void bhapi::win32_memory_tracing_locker_clean()
 {
 	while(InterlockedExchange(&__bhapi_win32_memory_tracing_locker_inuse, 1) == 1) Sleep(0);
 	if(__bhapi_win32_memory_tracing_locker != NULL)
@@ -484,7 +484,7 @@ EXPORT_BHAPI bool b_memory_tracing_lock(void)
 
 		InitializeCriticalSection(__bhapi_win32_memory_tracing_locker);
 
-		if(atexit(b_win32_memory_tracing_locker_clean) != 0) BHAPI_ERROR("[KERNEL]: %s - atexit failed.", __PRETTY_FUNCTION__);
+		if(atexit(bhapi::win32_memory_tracing_locker_clean) != 0) BHAPI_ERROR("[KERNEL]: %s - atexit failed.", __PRETTY_FUNCTION__);
 	}
 	InterlockedExchange(&__bhapi_win32_memory_tracing_locker_inuse, 0);
 

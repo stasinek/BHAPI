@@ -189,7 +189,7 @@ BFontX11::BFontX11(EXGraphicsEngine *x11Engine, const char *xFontname)
 
 	delete array;
 
-	BFontX11 *engine = b_cast_as(_bhapi_get_x_font_engine(fX11Engine, family, style), BFontX11);
+	BFontX11 *engine = cast_as(_bhapi_get_x_font_engine(fX11Engine, family, style), BFontX11);
 	if(engine)
 	{
 		if(pxlsz == 0 && engine->fScalable) return;
@@ -303,7 +303,7 @@ BFontX11::BFontX11(EXGraphicsEngine *x11Engine, const char *xftFontFamily, const
 		return;
 	}
 
-	BFontX11 *engine = b_cast_as(_bhapi_get_x_font_engine(fX11Engine, xftFontFamily, xftFontStyle), BFontX11);
+	BFontX11 *engine = cast_as(_bhapi_get_x_font_engine(fX11Engine, xftFontFamily, xftFontStyle), BFontX11);
 	if(engine)
 	{
 		for(int i = 0; i < fs->nfont; i++)
@@ -880,7 +880,7 @@ BFontX11::RenderString(BHandler *_view, const char *string, float size, float sp
 {
 	if(fX11Engine == NULL || (int)size <= 0 || string == NULL || *string == 0 || length == 0) return BRect();
 
-	BView *view = b_cast_as(_view, BView);
+	BView *view = cast_as(_view, BView);
 	if(view == NULL || view->Window() == NULL || view->IsPrinting()) return BRect();
 
 	BRegion viewClipping;
@@ -890,8 +890,8 @@ BFontX11::RenderString(BHandler *_view, const char *string, float size, float sp
 	BAutolock <EXGraphicsEngine> autolock(fX11Engine);
 	if(autolock.IsLocked() == false || fX11Engine->InitCheck() != B_OK) return BRect();
 
-	EXGraphicsDrawable *pix = b_cast_as(BGraphicsEngine::GetPixmap(view->Window()), EXGraphicsDrawable);
-	EXGraphicsContext *dc = b_cast_as(BGraphicsEngine::GetContext(view), EXGraphicsContext);
+	EXGraphicsDrawable *pix = cast_as(BGraphicsEngine::GetPixmap(view->Window()), EXGraphicsDrawable);
+	EXGraphicsContext *dc = cast_as(BGraphicsEngine::GetContext(view), EXGraphicsContext);
 	if(pix == NULL || dc == NULL) return BRect();
 
 	if(!IsAttached() || fFonts.CountItems() <= 0) return BRect();

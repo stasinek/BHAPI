@@ -35,7 +35,11 @@
 #include <math.h>
 #include <string.h>
 
-LOCAL_BHAPI bool b_get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext)
+namespace bhapi {
+LOCAL_BHAPI bool get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext);
+}
+
+LOCAL_BHAPI bool bhapi::get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext)
 {
 	if(radius.x <= 0 || radius.y <= 0 || pStart.x > pEnd.x || pStart.y > 0 || pEnd.y > 0) return false;
 
@@ -185,7 +189,6 @@ LOCAL_BHAPI bool b_get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd, b_in
 	return true;
 }
 
-
 BArcGenerator::BArcGenerator(BPoint center, float xRadius, float yRadius, BPoint start, BPoint end)
 	: fStep(0)
 {
@@ -257,7 +260,7 @@ BArcGenerator::Start(b_int32 &x, b_int32 &y, b_int32 &step, b_int32 &pixels, boo
 	bool havePixels = false;
 	b_int32 oldX = 0, oldY = 0, lastY = 0;
 
-	while(b_get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
+	while(bhapi::get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
 	{
 		if(!havePixels) {oldX = _X; lastY = oldY = _Y; havePixels = true;}
 		else if(oldX != _X) break;
@@ -319,7 +322,7 @@ BArcGenerator::Next(b_int32 &next, b_int32 &pixels, bool &both)
 
 	b_int32 oldX = _X, oldY = _Y, lastY = _Y;
 
-	while(b_get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
+	while(bhapi::get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
 	{
 		if(oldX != _X) break;
 		else lastY = _Y;
