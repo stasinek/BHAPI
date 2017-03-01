@@ -150,7 +150,7 @@ typedef struct b_beos_area_info_t {
 
 
 IMPEXP_BHAPI void*
-bhapi::create_area(const char *name, void **start_addr, size_t size, b_uint32 protection, const char *domain, b_area_access area_access)
+bhapi::create_area(const char *name, void **start_addr, size_t size, b_uint32 protection, const char *domain, bhapi::area_access area_access)
 {
 	if(size <= 0) return NULL;
 

@@ -319,7 +319,6 @@ private:
 
     bool _Resize(b_int32 length);
 };
-
 #endif /* __cplusplus */
 
 #endif /* BHAPI_STRING__H */

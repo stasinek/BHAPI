@@ -26,7 +26,7 @@ __END_DECLS
 /* C++ API */
 #ifdef __cplusplus
 
-#include <StringList.h>
+#include "StringArray.h"
 
 status_t	get_secondary_architectures(BStringList& _architectures);
 status_t	get_architectures(BStringList& _architectures);

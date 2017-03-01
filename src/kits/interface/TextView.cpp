@@ -44,14 +44,15 @@
 
 #include <stdlib.h>
 
-typedef struct b_text_line {
+namespace bhapi {
+typedef struct text_line {
 	b_int32 length;
 	float width;
 	float height;
 	float max_ascent;
-	b_text_run_array *array;
-} b_text_line;
-
+    bhapi::text_run_array *array;
+} text_line;
+}
 
 #define BHAPI_TEXT_VIEW_LINE_SPACING	0
 
@@ -62,11 +63,11 @@ BTextView::BTextView(BRect frame, const char *name, BRect textRect, b_uint32 res
 	  fTabWidth(-8.f), fAutoindent(false), fTypingHidden(0),
 	  fSelectTracking(-1), fSelectStart(-1), fSelectEnd(-1), fCurrentLine(0), fCursor(0)
 {
-	if((fRunArray = (b_text_run_array*)malloc(sizeof(b_text_run_array))) != NULL)
+    if((fRunArray = (bhapi::text_run_array*)malloc(sizeof(bhapi::text_run_array))) != NULL)
 	{
 		fRunArray->count = 1;
 		fRunArray->runs[0].offset = 0;
-		fRunArray->runs[0].font = *b_plain_font;
+		fRunArray->runs[0].font = *bhapi::plain_font;
 		fRunArray->runs[0].color.set_to(0, 0, 0, 255);
 		fRunArray->runs[0].background.set_to(0, 0, 0, 0);
 		fRunArray->runs[0].underline = false;
@@ -85,11 +86,11 @@ BTextView::BTextView(BRect frame, const char *name, BRect textRect, const BFont 
 	  fTabWidth(-8.f), fAutoindent(false), fTypingHidden(0),
 	  fSelectTracking(-1), fSelectStart(-1), fSelectEnd(-1), fCurrentLine(0), fCursor(0)
 {
-	if((fRunArray = (b_text_run_array*)malloc(sizeof(b_text_run_array))) != NULL)
+    if((fRunArray = (bhapi::text_run_array*)malloc(sizeof(bhapi::text_run_array))) != NULL)
 	{
 		fRunArray->count = 1;
 		fRunArray->runs[0].offset = 0;
-		fRunArray->runs[0].font = (font ? *font : *b_plain_font);
+		fRunArray->runs[0].font = (font ? *font : *bhapi::plain_font);
 		fRunArray->runs[0].color.set_to(0, 0, 0, 255);
 		if(color) fRunArray->runs[0].color = *color;
 		fRunArray->runs[0].background.set_to(0, 0, 0, 0);
@@ -106,8 +107,8 @@ BTextView::~BTextView()
 {
 	if(fRunArray) free(fRunArray);
 
-	b_text_line *line;
-	while((line = (b_text_line*)fLines.RemoveItem((b_int32)0)) != NULL)
+    bhapi::text_line *line;
+    while((line = (bhapi::text_line*)fLines.RemoveItem((b_int32)0)) != NULL)
 	{
 		if(line->array) free(line->array);
 		free(line);
@@ -126,14 +127,14 @@ BTextView::ReScanRunArray(b_int32 fromLine, b_int32 toLine)
 
 	for(b_int32 i = 0; i < fLines.CountItems(); i++)
 	{
-		b_text_line *line = (b_text_line*)fLines.ItemAt(i);
+        bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(i);
 
 		b_int32 curLineOffset = nextLineOffset;
 		nextLineOffset += line->length + 1;
 
 		for(; !(fRunArray == NULL || arrayOffset >= fRunArray->count - 1); arrayOffset++)
 		{
-			b_text_run *nextRun = &(fRunArray->runs[arrayOffset + 1]);
+            bhapi::text_run *nextRun = &(fRunArray->runs[arrayOffset + 1]);
 			if(nextRun->offset < curLineOffset) continue;
 			break;
 		}
@@ -143,12 +144,12 @@ BTextView::ReScanRunArray(b_int32 fromLine, b_int32 toLine)
 
 		b_int32 realCount = 1;
 		if(line->array) realCount = line->array->count;
-		else if((line->array = (b_text_run_array*)malloc(sizeof(b_text_run_array))) == NULL) continue;
+        else if((line->array = (bhapi::text_run_array*)malloc(sizeof(bhapi::text_run_array))) == NULL) continue;
 		line->array->count = 0;
 
 		for(b_int32 k = arrayOffset; !(fRunArray == NULL || k >= fRunArray->count); k++)
 		{
-			b_text_run *curRun = &(fRunArray->runs[k]);
+            bhapi::text_run *curRun = &(fRunArray->runs[k]);
 			if(curRun->offset >= nextLineOffset) break;
 
 			line->array->runs[line->array->count] = *curRun;
@@ -158,10 +159,10 @@ BTextView::ReScanRunArray(b_int32 fromLine, b_int32 toLine)
 
 			if(line->array->count < realCount || k == fRunArray->count - 1) continue;
 
-			void *newPtr = realloc(line->array, sizeof(b_text_run_array) + (size_t)line->array->count * sizeof(b_text_run));
+            void *newPtr = realloc(line->array, sizeof(bhapi::text_run_array) + (size_t)line->array->count * sizeof(bhapi::text_run));
 			if(newPtr == NULL) break;
 
-			line->array = (b_text_run_array*)newPtr;
+            line->array = (bhapi::text_run_array*)newPtr;
 			realCount = line->array->count + 1;
 		}
 
@@ -173,8 +174,8 @@ BTextView::ReScanRunArray(b_int32 fromLine, b_int32 toLine)
 		else if(realCount != line->array->count)
 		{
 			void *newPtr = realloc(line->array,
-					       sizeof(b_text_run_array) + (size_t)(line->array->count - 1) * sizeof(b_text_run));
-			if(newPtr != NULL) line->array = (b_text_run_array*)newPtr;
+                           sizeof(bhapi::text_run_array) + (size_t)(line->array->count - 1) * sizeof(bhapi::text_run));
+            if(newPtr != NULL) line->array = (bhapi::text_run_array*)newPtr;
 		}
 	}
 }
@@ -190,7 +191,7 @@ BTextView::ReScanSize(b_int32 fromLine, b_int32 toLine)
 
 	for(b_int32 i = 0; i < fLines.CountItems(); i++)
 	{
-		b_text_line *line = (b_text_line*)fLines.ItemAt(i);
+        bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(i);
 
 		b_int32 curLineOffset = nextLineOffset;
 		nextLineOffset += line->length + 1;
@@ -207,16 +208,16 @@ BTextView::ReScanSize(b_int32 fromLine, b_int32 toLine)
 
 		if(line->array == NULL || line->array->count <= 0)
 		{
-			line->width = _StringWidth(*b_plain_font, str, line->length);
+			line->width = _StringWidth(*bhapi::plain_font, str, line->length);
 
-			b_plain_font->GetHeight(&fontHeight);
+			bhapi::plain_font->GetHeight(&fontHeight);
 			line->height = fontHeight.ascent + fontHeight.descent;
 			line->max_ascent = fontHeight.ascent;
 		}
 		else for(b_int32 k = 0; k < line->array->count; k++)
 		{
-			b_text_run *curRun = &(line->array->runs[k]);
-			b_text_run *nextRun = (k < line->array->count - 1 ? &(line->array->runs[k + 1]) : NULL);
+            bhapi::text_run *curRun = &(line->array->runs[k]);
+            bhapi::text_run *nextRun = (k < line->array->count - 1 ? &(line->array->runs[k + 1]) : NULL);
 
 			BFont curFont(curRun->font);
 			line->width += _StringWidth(curFont, str + curRun->offset,
@@ -238,7 +239,7 @@ BTextView::ReScanSize(b_int32 fromLine, b_int32 toLine)
 void
 BTextView::ReScanLines()
 {
-	b_text_line *line;
+    bhapi::text_line *line;
 	b_int32 aOffset;
 	b_int32 found;
 
@@ -246,12 +247,12 @@ BTextView::ReScanLines()
 	{
 		if(memcmp((char*)&(fRunArray->runs[aOffset]) + sizeof(b_int32),
 			  (char*)&(fRunArray->runs[aOffset + 1]) + sizeof(b_int32),
-			  sizeof(b_text_run) - sizeof(b_int32)) == 0)
+              sizeof(bhapi::text_run) - sizeof(b_int32)) == 0)
 		{
 			if(aOffset < fRunArray->count - 2)
 				memmove(&(fRunArray->runs[aOffset + 1]),
 					&(fRunArray->runs[aOffset + 2]),
-					sizeof(b_text_run) * (fRunArray->count - aOffset - 2));
+                    sizeof(bhapi::text_run) * (fRunArray->count - aOffset - 2));
 			fRunArray->count -= 1;
 		}
 		else
@@ -260,13 +261,13 @@ BTextView::ReScanLines()
 		}
 	}
 
-	while((line = (b_text_line*)fLines.RemoveItem((b_int32)0)) != NULL)
+    while((line = (bhapi::text_line*)fLines.RemoveItem((b_int32)0)) != NULL)
 	{
 		if(line->array) free(line->array);
 		free(line);
 	}
 
-	if((line = (b_text_line*)malloc(sizeof(b_text_line))) == NULL) return;
+    if((line = (bhapi::text_line*)malloc(sizeof(bhapi::text_line))) == NULL) return;
 	if(fLines.AddItem(line) == false) {free(line); return;}
 
 	aOffset = 0;
@@ -276,7 +277,7 @@ BTextView::ReScanLines()
 		line->array = NULL;
 		aOffset = found + 1;
 
-		b_text_line *newLine = (b_text_line*)malloc(sizeof(b_text_line));
+        bhapi::text_line *newLine = (bhapi::text_line*)malloc(sizeof(bhapi::text_line));
 		if(newLine == NULL) break;
 		if(fLines.AddItem(newLine) == false) {free(newLine); break;}
 		line = newLine;
@@ -325,8 +326,8 @@ BTextView::GoToLine(b_int32 index)
 	{
 		b_int32 pos = OffsetAt(index, false);
 
-		b_text_line *oldLine = (b_text_line*)fLines.ItemAt(fCurrentLine);
-		b_text_line *newLine = (b_text_line*)fLines.ItemAt(index);
+        bhapi::text_line *oldLine = (bhapi::text_line*)fLines.ItemAt(fCurrentLine);
+        bhapi::text_line *newLine = (bhapi::text_line*)fLines.ItemAt(index);
 
 		if(fAlignment == B_ALIGN_RIGHT && oldLine)
 		{
@@ -360,7 +361,7 @@ BTextView::LineAt(b_int32 offset, bool utf8) const
 	b_int32 nextLineOffset = 0;
 	for(b_int32 i = 0; i < fLines.CountItems(); i++)
 	{
-		b_text_line *line = (b_text_line*)fLines.ItemAt(i);
+        bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(i);
 		nextLineOffset += line->length + 1;
 		if(offset < nextLineOffset) return i;
 	}
@@ -389,7 +390,7 @@ BTextView::LineAt(BPoint pt, bool visible) const
 
 	for(b_int32 i = 0; i < fLines.CountItems(); i++)
 	{
-		b_text_line *line = (b_text_line*)fLines.ItemAt(i);
+        bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(i);
 
 		if(i > 0) yStart = yEnd + BHAPI_TEXT_VIEW_LINE_SPACING + UnitsPerPixel();
 		yEnd = yStart + line->height;
@@ -418,7 +419,7 @@ BTextView::PointAt(b_int32 offset, float *height, bool max_height, bool utf8) co
 
 	for(b_int32 i = 0; i < fLines.CountItems(); i++)
 	{
-		b_text_line *line = (b_text_line*)fLines.ItemAt(i);
+        bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(i);
 
 		if(i > 0) yStart = yEnd + BHAPI_TEXT_VIEW_LINE_SPACING + UnitsPerPixel();
 		yEnd = yStart + line->height;
@@ -441,17 +442,17 @@ BTextView::PointAt(b_int32 offset, float *height, bool max_height, bool utf8) co
 
 			if(line->array == NULL || line->array->count <= 0)
 			{
-				pt.x += _StringWidth(*b_plain_font, str, __offset);
-				if(__offset != 0) pt.x += b_plain_font->Spacing() * b_plain_font->Size();
+				pt.x += _StringWidth(*bhapi::plain_font, str, __offset);
+				if(__offset != 0) pt.x += bhapi::plain_font->Spacing() * bhapi::plain_font->Size();
 
-				b_plain_font->GetHeight(&fontHeight);
+				bhapi::plain_font->GetHeight(&fontHeight);
 				h = (max_height ? line->height : (fontHeight.ascent + fontHeight.descent));
 				if(!max_height) pt.y += line->max_ascent - fontHeight.ascent;
 			}
 			else for(b_int32 k = 0; k < line->array->count; k++)
 			{
-				b_text_run *curRun = &(line->array->runs[k]);
-				b_text_run *nextRun = (k < line->array->count - 1 ? &(line->array->runs[k + 1]) : NULL);
+                bhapi::text_run *curRun = &(line->array->runs[k]);
+                bhapi::text_run *nextRun = (k < line->array->count - 1 ? &(line->array->runs[k + 1]) : NULL);
 
 				BFont curFont(curRun->font);
 
@@ -503,7 +504,7 @@ BTextView::OffsetAt(BPoint pt, bool visible, bool utf8) const
 
 	for(b_int32 i = 0; i <= index; i++)
 	{
-		b_text_line *line = (b_text_line*)fLines.ItemAt(i);
+        bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(i);
 
 		if(i > 0) yStart = yEnd + BHAPI_TEXT_VIEW_LINE_SPACING + UnitsPerPixel();
 		yEnd = yStart + line->height;
@@ -532,15 +533,15 @@ BTextView::OffsetAt(BPoint pt, bool visible, bool utf8) const
 			{
 				for(tmp = str; !(tmp == NULL || tmp - str > line->length); tmp = bhapi::utf8_next(tmp, &nbytes))
 				{
-					if(tmp != str) xStart = xEnd + b_plain_font->Spacing() * b_plain_font->Size();
-					xEnd = xStart + _StringWidth(*b_plain_font, tmp, (b_int32)nbytes);
+					if(tmp != str) xStart = xEnd + bhapi::plain_font->Spacing() * bhapi::plain_font->Size();
+					xEnd = xStart + _StringWidth(*bhapi::plain_font, tmp, (b_int32)nbytes);
 					if(pt.x <= xEnd) break;
 				}
 			}
 			else for(b_int32 k = 0; k < line->array->count; k++)
 			{
-				b_text_run *curRun = &(line->array->runs[k]);
-				b_text_run *nextRun = (k < line->array->count - 1 ? &(line->array->runs[k + 1]) : NULL);
+                bhapi::text_run *curRun = &(line->array->runs[k]);
+                bhapi::text_run *nextRun = (k < line->array->count - 1 ? &(line->array->runs[k + 1]) : NULL);
 
 				BFont curFont(curRun->font);
 
@@ -585,7 +586,7 @@ BTextView::OffsetAt(b_int32 a_line, bool utf8) const
 	b_int32 lineOffset = 0;
     for(b_int32 i = 0; i < a_line; i++)
 	{
-        b_text_line *lline = (b_text_line*)fLines.ItemAt(i);
+        bhapi::text_line *lline = (bhapi::text_line*)fLines.ItemAt(i);
         lineOffset += lline->length + 1;
 	}
 
@@ -596,7 +597,7 @@ BTextView::OffsetAt(b_int32 a_line, bool utf8) const
 float
 BTextView::LineWidth(b_int32 lineIndex) const
 {
-	b_text_line *line = (b_text_line*)fLines.ItemAt(lineIndex);
+    bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(lineIndex);
 	return(line ? line->width : 0.f);
 }
 
@@ -604,7 +605,7 @@ BTextView::LineWidth(b_int32 lineIndex) const
 float
 BTextView::LineHeight(b_int32 lineIndex) const
 {
-	b_text_line *line = (b_text_line*)fLines.ItemAt(lineIndex);
+    bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(lineIndex);
 	return(line ? line->height : 0.f);
 }
 
@@ -618,7 +619,7 @@ BTextView::TextHeight(b_int32 fromLineIndex, b_int32 toLineIndex) const
 	float height = 0;
 	for(b_int32 i = fromLineIndex; i <= toLineIndex; i++)
 	{
-		b_text_line *line = (b_text_line*)fLines.ItemAt(i);
+        bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(i);
 		height += line->height;
 		if(i != toLineIndex) height += BHAPI_TEXT_VIEW_LINE_SPACING + UnitsPerPixel();
 	}
@@ -654,7 +655,7 @@ BTextView::GetTextRegion(b_int32 startPos, b_int32 endPos, BRegion *region, bool
 
 	for(b_int32 i = 0; i < fLines.CountItems(); i++)
 	{
-		b_text_line *line = (b_text_line*)fLines.ItemAt(i);
+        bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(i);
 
 		if(i > 0) yStart = yEnd + BHAPI_TEXT_VIEW_LINE_SPACING + UnitsPerPixel();
 		yEnd = yStart + line->height;
@@ -679,15 +680,15 @@ BTextView::GetTextRegion(b_int32 startPos, b_int32 endPos, BRegion *region, bool
 
 		if(line->array == NULL || line->array->count <= 0)
 		{
-			r.left += _StringWidth(*b_plain_font, str, __offset);
-			if(__offset != 0) r.left += b_plain_font->Spacing() * b_plain_font->Size();
-			r.right = r.left + _StringWidth(*b_plain_font, str + __offset,
+			r.left += _StringWidth(*bhapi::plain_font, str, __offset);
+			if(__offset != 0) r.left += bhapi::plain_font->Spacing() * bhapi::plain_font->Size();
+			r.right = r.left + _StringWidth(*bhapi::plain_font, str + __offset,
 							min_c(endPos - curLineOffset, line->length) - __offset);
 		}
 		else for(b_int32 k = 0; k < line->array->count; k++)
 		{
-			b_text_run *curRun = &(line->array->runs[k]);
-			b_text_run *nextRun = (k < line->array->count - 1 ? &(line->array->runs[k + 1]) : NULL);
+            bhapi::text_run *curRun = &(line->array->runs[k]);
+            bhapi::text_run *nextRun = (k < line->array->count - 1 ? &(line->array->runs[k + 1]) : NULL);
 
 			BFont curFont(curRun->font);
 
@@ -857,7 +858,7 @@ BTextView::GetText(b_int32 offset, b_int32 length, char *buffer, b_int32 buffer_
 
 
 void
-BTextView::SetRunArray(b_int32 startPos, b_int32 endPos, const b_text_run_array *runs, bool utf8)
+BTextView::SetRunArray(b_int32 startPos, b_int32 endPos, const bhapi::text_run_array *runs, bool utf8)
 {
 	if(fStylable == false || fText.Length() <= 0)
 	{
@@ -871,9 +872,9 @@ BTextView::SetRunArray(b_int32 startPos, b_int32 endPos, const b_text_run_array 
 			if(fStylable && (runs->count != 1 || runs->runs[0].offset != 0)) return; // bad value
 
 			if(fRunArray == NULL)
-				if((fRunArray = (b_text_run_array*)malloc(sizeof(b_text_run_array))) == NULL) return;
+                if((fRunArray = (bhapi::text_run_array*)malloc(sizeof(bhapi::text_run_array))) == NULL) return;
 
-			memcpy(&(fRunArray->runs[0]), &(runs->runs[0]), sizeof(b_text_run));
+            memcpy(&(fRunArray->runs[0]), &(runs->runs[0]), sizeof(bhapi::text_run));
 			fRunArray->runs[0].offset = 0;
 			fRunArray->count = 1;
 		}
@@ -894,23 +895,23 @@ BTextView::SetRunArray(b_int32 startPos, b_int32 endPos, const b_text_run_array 
 
 		for(b_int32 k = 0; !(runs == NULL || k >= runs->count); k++)
 		{
-			const b_text_run *run = &(runs->runs[k]);
+            const bhapi::text_run *run = &(runs->runs[k]);
 			b_int32 aOffset = run->offset;
 			if(aOffset > 0 && utf8) aOffset = bhapi::utf8_at(start, aOffset, NULL) - start;
 			if(aOffset < 0 || (aOffset += startPos) >= endPos) continue;
 
 			b_int32 requestCount = (fRunArray ? fRunArray->count + 1 : 1);
 			void *newPtr = realloc(fRunArray,
-					       sizeof(b_text_run_array) + (size_t)(requestCount - 1) * sizeof(b_text_run));
+                           sizeof(bhapi::text_run_array) + (size_t)(requestCount - 1) * sizeof(bhapi::text_run));
 			if(newPtr == NULL) break;
 
-			fRunArray = (b_text_run_array*)newPtr;
+            fRunArray = (bhapi::text_run_array*)newPtr;
 			fRunArray->count = requestCount;
 
 			b_int32 i = (requestCount < 2 || fRunArray->runs[requestCount - 2].offset > aOffset) ? 0 : fRunArray->count - 1;
 			for(; i < fRunArray->count; i++)
 			{
-				b_text_run *curRun = &(fRunArray->runs[i]);
+                bhapi::text_run *curRun = &(fRunArray->runs[i]);
 
 				if(i == fRunArray->count - 1 || curRun->offset == aOffset)
 				{
@@ -920,8 +921,8 @@ BTextView::SetRunArray(b_int32 startPos, b_int32 endPos, const b_text_run_array 
 				}
 				else if(curRun->offset > aOffset)
 				{
-					b_text_run *nextRun = &(fRunArray->runs[i + 1]);
-					memmove(nextRun, curRun, (size_t)(fRunArray->count - i - 1) * sizeof(b_text_run));
+                    bhapi::text_run *nextRun = &(fRunArray->runs[i + 1]);
+                    memmove(nextRun, curRun, (size_t)(fRunArray->count - i - 1) * sizeof(bhapi::text_run));
 					*curRun = *run;
 					curRun->offset = aOffset;
 					break;
@@ -935,7 +936,7 @@ BTextView::SetRunArray(b_int32 startPos, b_int32 endPos, const b_text_run_array 
 
 
 // return value must free by "free"
-b_text_run_array*
+bhapi::text_run_array*
 BTextView::RunArray(b_int32 _startPos, b_int32 endPos, b_int32 *length, bool utf8) const
 {
 	if(length) *length = 0;
@@ -951,11 +952,11 @@ BTextView::RunArray(b_int32 _startPos, b_int32 endPos, b_int32 *length, bool utf
 
 	if(fText.Length() <= 0 && startPos == 0 && fRunArray->runs[0].offset == 0)
 	{
-		b_text_run_array *retRuns = (b_text_run_array*)malloc(sizeof(b_text_run_array));
+        bhapi::text_run_array *retRuns = (bhapi::text_run_array*)malloc(sizeof(bhapi::text_run_array));
 		if(retRuns)
 		{
-			memcpy(retRuns, fRunArray, sizeof(b_text_run_array));
-			if(length) *length = (b_int32)sizeof(b_text_run_array);
+            memcpy(retRuns, fRunArray, sizeof(bhapi::text_run_array));
+            if(length) *length = (b_int32)sizeof(bhapi::text_run_array);
 		}
 		return retRuns;
 	}
@@ -963,22 +964,22 @@ BTextView::RunArray(b_int32 _startPos, b_int32 endPos, b_int32 *length, bool utf
 	if(startPos >= fText.Length() || endPos <= startPos) return NULL;
 
 	// enough for it needs
-	b_text_run_array *retRuns = (b_text_run_array*)malloc(sizeof(b_text_run_array) +
-							      (size_t)(fRunArray->count - 1) * sizeof(b_text_run));
+    bhapi::text_run_array *retRuns = (bhapi::text_run_array*)malloc(sizeof(bhapi::text_run_array) +
+                                  (size_t)(fRunArray->count - 1) * sizeof(bhapi::text_run));
 	if(retRuns == NULL) return NULL;
 
 	retRuns->count = 0;
 
 	for(b_int32 i = 0; i < fRunArray->count; i++)
 	{
-		b_text_run *curRun = &(fRunArray->runs[i]);
+        bhapi::text_run *curRun = &(fRunArray->runs[i]);
 		if(curRun->offset >= endPos) break;
 
 		b_int32 nextOffset = (i < fRunArray->count - 1 ? fRunArray->runs[i + 1].offset : fText.Length());
 		if(nextOffset <= startPos) continue;
 
-		b_text_run *destRun = &(retRuns->runs[retRuns->count++]);
-		memcpy(destRun, curRun, sizeof(b_text_run));
+        bhapi::text_run *destRun = &(retRuns->runs[retRuns->count++]);
+        memcpy(destRun, curRun, sizeof(bhapi::text_run));
 		if(utf8) destRun->offset = bhapi::utf8_strlen_etc(fText.String(), destRun->offset);
 		destRun->offset = max_c(destRun->offset - _startPos, 0);
 	}
@@ -989,31 +990,31 @@ BTextView::RunArray(b_int32 _startPos, b_int32 endPos, b_int32 *length, bool utf
 		return NULL;
 	}
 
-	void *newPtr = realloc(retRuns, sizeof(b_text_run_array) + (size_t)(retRuns->count - 1) * sizeof(b_text_run));
-	if(newPtr != NULL) retRuns = (b_text_run_array*)newPtr;
+    void *newPtr = realloc(retRuns, sizeof(bhapi::text_run_array) + (size_t)(retRuns->count - 1) * sizeof(bhapi::text_run));
+    if(newPtr != NULL) retRuns = (bhapi::text_run_array*)newPtr;
 
-	if(length) *length = (b_int32)(sizeof(b_text_run_array) + (size_t)(retRuns->count - 1) * sizeof(b_text_run));
+    if(length) *length = (b_int32)(sizeof(bhapi::text_run_array) + (size_t)(retRuns->count - 1) * sizeof(bhapi::text_run));
 
 	return retRuns;
 }
 
 
 void
-BTextView::Insert(const char *text, const b_text_run_array *runs, bool utf8)
+BTextView::Insert(const char *text, const bhapi::text_run_array *runs, bool utf8)
 {
 	if(text != NULL) Insert(fSelectStart, text, (utf8 ? bhapi::utf8_strlen(text) : strlen(text)), runs, utf8);
 }
 
 
 void
-BTextView::Insert(const char *text, b_int32 length, const b_text_run_array *runs, bool utf8)
+BTextView::Insert(const char *text, b_int32 length, const bhapi::text_run_array *runs, bool utf8)
 {
 	Insert(fSelectStart, text, length, runs, utf8);
 }
 
 
 void
-BTextView::Insert(b_int32 offset, const char *text, b_int32 length, const b_text_run_array *runs, bool utf8)
+BTextView::Insert(b_int32 offset, const char *text, b_int32 length, const bhapi::text_run_array *runs, bool utf8)
 {
 	b_int32 oldStart = fSelectStart, oldEnd = fSelectEnd;
 
@@ -1028,7 +1029,7 @@ BTextView::Insert(b_int32 offset, const char *text, b_int32 length, const b_text
 
 
 void
-BTextView::InsertText(const char *start, b_int32 length, b_int32 offset, const b_text_run_array *runs, bool utf8)
+BTextView::InsertText(const char *start, b_int32 length, b_int32 offset, const bhapi::text_run_array *runs, bool utf8)
 {
 	if(start == NULL || *start == 0 || length == 0 || offset > (utf8 ? fText.CountChars() : fText.Length())) return;
 	if(offset < 0) offset = (utf8 ? fText.CountChars() : fText.Length());
@@ -1048,23 +1049,23 @@ BTextView::InsertText(const char *start, b_int32 length, b_int32 offset, const b
 	{
 		for(b_int32 i = 0; !(fRunArray == NULL || i >= fRunArray->count); i++)
 		{
-			b_text_run *curRun = &(fRunArray->runs[i]);
+            bhapi::text_run *curRun = &(fRunArray->runs[i]);
 			b_int32 nextOffset = (i < fRunArray->count - 1 ? fRunArray->runs[i + 1].offset : fText.Length());
 			if(curRun->offset <= offset)
 			{
 				if(runs == NULL || nextOffset <= offset) continue;
 
 				void *newPtr = realloc(fRunArray,
-						       sizeof(b_text_run_array) + (size_t)fRunArray->count * sizeof(b_text_run));
+                               sizeof(bhapi::text_run_array) + (size_t)fRunArray->count * sizeof(bhapi::text_run));
 				if(newPtr == NULL) continue;
 
-				fRunArray = (b_text_run_array*)newPtr;
+                fRunArray = (bhapi::text_run_array*)newPtr;
 				fRunArray->count += 1;
 				i += 1;
 
 				if(i != fRunArray->count - 1)
 					memmove(&(fRunArray->runs[i + 1]), &(fRunArray->runs[i]),
-						(size_t)(fRunArray->count - i - 1) * sizeof(b_text_run));
+                        (size_t)(fRunArray->count - i - 1) * sizeof(bhapi::text_run));
 				fRunArray->runs[i] = fRunArray->runs[i - 1];
 				fRunArray->runs[i].offset = offset + length;
 
@@ -1095,7 +1096,7 @@ BTextView::InsertText(const char *start, b_int32 length, b_int32 offset, const b
 
 
 void
-BTextView::SetText(const char *text, const b_text_run_array *runs, bool utf8)
+BTextView::SetText(const char *text, const bhapi::text_run_array *runs, bool utf8)
 {
 	Delete(0, -1, false);
 	if(text != NULL) Insert(0, text, (utf8 ? bhapi::utf8_strlen(text) : strlen(text)), runs, utf8);
@@ -1104,7 +1105,7 @@ BTextView::SetText(const char *text, const b_text_run_array *runs, bool utf8)
 
 
 void
-BTextView::SetText(const char *text, b_int32 length, const b_text_run_array *runs, bool utf8)
+BTextView::SetText(const char *text, b_int32 length, const bhapi::text_run_array *runs, bool utf8)
 {
 	Delete(0, -1, false);
 	Insert(0, text, length, runs, utf8);
@@ -1113,7 +1114,7 @@ BTextView::SetText(const char *text, b_int32 length, const b_text_run_array *run
 
 
 void
-BTextView::SetText(BFile *file, b_int64 fileOffset, b_int32 length, const b_text_run_array *runs, bool utf8)
+BTextView::SetText(BFile *file, b_int64 fileOffset, b_int32 length, const bhapi::text_run_array *runs, bool utf8)
 {
 	Delete(0, -1, false);
 	if(file == NULL || length <= 0) return;
@@ -1176,14 +1177,14 @@ BTextView::DeleteText(b_int32 startPos, b_int32 endPos, bool utf8)
 				fRunArray->count = 1;
 			}
 
-			void *newPtr = realloc(fRunArray, sizeof(b_text_run_array));
-			if(newPtr) fRunArray = (b_text_run_array*)newPtr;
+            void *newPtr = realloc(fRunArray, sizeof(bhapi::text_run_array));
+            if(newPtr) fRunArray = (bhapi::text_run_array*)newPtr;
 		}
-		else if((fRunArray = (b_text_run_array*)malloc(sizeof(b_text_run_array))) != NULL)
+        else if((fRunArray = (bhapi::text_run_array*)malloc(sizeof(bhapi::text_run_array))) != NULL)
 		{
 			fRunArray->count = 1;
 			fRunArray->runs[0].offset = 0;
-			fRunArray->runs[0].font = *b_plain_font;
+			fRunArray->runs[0].font = *bhapi::plain_font;
 			fRunArray->runs[0].color.set_to(0, 0, 0, 255);
 			fRunArray->runs[0].background.set_to(0, 0, 0, 0);
 			fRunArray->runs[0].underline = false;
@@ -1191,21 +1192,21 @@ BTextView::DeleteText(b_int32 startPos, b_int32 endPos, bool utf8)
 	}
 	else for(b_int32 i = 0; !(fRunArray == NULL || i >= fRunArray->count); i++)
 	{
-		b_text_run *curRun = &(fRunArray->runs[i]);
-		b_text_run *nextRun = (i < fRunArray->count - 1 ? &(fRunArray->runs[i + 1]) : NULL);
+        bhapi::text_run *curRun = &(fRunArray->runs[i]);
+        bhapi::text_run *nextRun = (i < fRunArray->count - 1 ? &(fRunArray->runs[i + 1]) : NULL);
 
 		if(curRun->offset < startPos) continue;
 		if(curRun->offset >= endPos) {curRun->offset -= length; continue;}
 
 		if(nextRun == NULL || nextRun->offset < endPos)
 		{
-			if(nextRun) memmove(curRun, nextRun, (size_t)(fRunArray->count - i - 1) * sizeof(b_text_run));
+            if(nextRun) memmove(curRun, nextRun, (size_t)(fRunArray->count - i - 1) * sizeof(bhapi::text_run));
 			if(fRunArray->count > 1)
 			{
 				fRunArray->count -= 1; i--;
 				void *newPtr = realloc(fRunArray,
-						       sizeof(b_text_run_array) + (size_t)(fRunArray->count - 1) * sizeof(b_text_run));
-				if(newPtr) fRunArray = (b_text_run_array*)newPtr;
+                               sizeof(bhapi::text_run_array) + (size_t)(fRunArray->count - 1) * sizeof(bhapi::text_run));
+                if(newPtr) fRunArray = (bhapi::text_run_array*)newPtr;
 			}
 		}
 		else
@@ -1282,8 +1283,8 @@ BTextView::SetStylable(bool stylable)
 			if(!(fRunArray == NULL || fRunArray->count <= 1))
 			{
 				fRunArray->count = 1;
-				void *newPtr = realloc(fRunArray, sizeof(b_text_run_array));
-				if(newPtr != NULL) fRunArray = (b_text_run_array*)newPtr;
+                void *newPtr = realloc(fRunArray, sizeof(bhapi::text_run_array));
+                if(newPtr != NULL) fRunArray = (bhapi::text_run_array*)newPtr;
 			}
 
 			if(fRunArray) fRunArray->runs[0].offset = 0;
@@ -1489,7 +1490,7 @@ BTextView::Draw(BRect updateRect)
 
 	for(b_int32 i = 0; i < fLines.CountItems(); i++)
 	{
-		b_text_line *line = (b_text_line*)fLines.ItemAt(i);
+        bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(i);
 
 		b_int32 curLineOffset = nextLineOffset;
 		const char *str = fText.String() + curLineOffset;
@@ -1517,7 +1518,7 @@ BTextView::Draw(BRect updateRect)
 				if(!IsEnabled()) fgColor.disable(ViewColor());
 
 				BView::SetHighColor(fgColor);
-				_DrawString(*b_plain_font, str, penLocation, line->length);
+				_DrawString(*bhapi::plain_font, str, penLocation, line->length);
 
 				if(cursorPos >= 0 && IsFocus())
 				{
@@ -1525,7 +1526,7 @@ BTextView::Draw(BRect updateRect)
 					if(!IsEnabled()) color.disable(ViewColor());
 					BView::SetHighColor(color);
 					BRect aRect;
-					aRect.left = r.left + _StringWidth(*b_plain_font, str, cursorPos);
+					aRect.left = r.left + _StringWidth(*bhapi::plain_font, str, cursorPos);
 					aRect.right = aRect.left;
 					aRect.top = r.top;
 					aRect.bottom = r.top + line->height;
@@ -1534,8 +1535,8 @@ BTextView::Draw(BRect updateRect)
 			}
 			else
 			{
-				b_text_run *curRun = &(line->array->runs[k]);
-				b_text_run *nextRun = (k < line->array->count - 1 ? &(line->array->runs[k + 1]) : NULL);
+                bhapi::text_run *curRun = &(line->array->runs[k]);
+                bhapi::text_run *nextRun = (k < line->array->count - 1 ? &(line->array->runs[k + 1]) : NULL);
 
 				BFont curFont(curRun->font);
 
@@ -1641,7 +1642,7 @@ BTextView::Draw(BRect updateRect)
 
 	if(fLines.CountItems() <= 0 && fEditable && IsFocus())
 	{
-		BFont font(*b_plain_font);
+		BFont font(*bhapi::plain_font);
 		bhapi::font_height fontHeight;
 		if(!(fRunArray == NULL || fRunArray->count <= 0)) font = fRunArray->runs[0].font;
 		font.GetHeight(&fontHeight);
@@ -1664,7 +1665,7 @@ BTextView::GetPreferredSize(float *width, float *height)
 		*width = 0;
 		for(b_int32 i = 0; i < fLines.CountItems(); i++)
 		{
-			b_text_line *line = (b_text_line*)fLines.ItemAt(i);
+            bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(i);
 			if(line->width > *width) *width = line->width;
 		}
 		*width += fMargins.left + fMargins.right + 2;
@@ -1785,7 +1786,7 @@ BTextView::SetPosition(b_int32 pos, bool response, bool utf8)
 		if(lineIndex < 0) break;
 
 		currentLine = lineIndex;
-		b_text_line *line = (b_text_line*)fLines.ItemAt(currentLine);
+        bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(currentLine);
 
 		if(pos == (utf8 ? fText.CountChars() : fText.Length()))
 		{
@@ -1827,7 +1828,7 @@ BTextView::Position(bool utf8, b_int32 *lineOffset) const
 
 	for(b_int32 i = 0; i <= fCurrentLine && i < fLines.CountItems(); i++)
 	{
-		b_text_line *line = (b_text_line*)fLines.ItemAt(i);
+        bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(i);
 		if(i == fCurrentLine)
 		{
 			if(lineOffset) *lineOffset = (utf8 ? bhapi::utf8_strlen_etc(fText.String(), pos) : pos);
@@ -1973,7 +1974,7 @@ BTextView::Copy(BClipboard *clipboard) const
 		clipboard->Clear();
 
 		b_int32 runsBytes = 0;
-		b_text_run_array *runs = RunArray(fSelectStart, fSelectEnd, &runsBytes, false);
+        bhapi::text_run_array *runs = RunArray(fSelectStart, fSelectEnd, &runsBytes, false);
 		clipMsg->AddData("text/plain", B_MIME_TYPE,
 				 fText.String() + fSelectStart, (b_size_t)(fSelectEnd - fSelectStart));
 		if(runs != NULL)
@@ -2001,7 +2002,7 @@ BTextView::Paste(BClipboard *clipboard)
 {
 	BString str;
 	BMessage *clipMsg = NULL;
-	b_text_run_array *runs = NULL;
+    bhapi::text_run_array *runs = NULL;
 
 	if(AcceptsPaste(clipboard) == false || clipboard == NULL || clipboard->Lock() == false) return;
 	if((clipMsg = clipboard->Data()) != NULL)
@@ -2013,9 +2014,9 @@ BTextView::Paste(BClipboard *clipboard)
 		void *tmp = NULL;
 		if(!(fStylable == false ||
 		     clipMsg->FindData("text/runs", B_MIME_TYPE, (const void**)&tmp, &len) == false ||
-		     len < (b_size_t)sizeof(b_text_run_array) ||
-		     ((size_t)len - sizeof(b_text_run_array)) % sizeof(b_text_run) != 0 ||
-		     (runs = (b_text_run_array*)malloc((size_t)len)) == NULL))
+             len < (b_size_t)sizeof(bhapi::text_run_array) ||
+             ((size_t)len - sizeof(bhapi::text_run_array)) % sizeof(bhapi::text_run) != 0 ||
+             (runs = (bhapi::text_run_array*)malloc((size_t)len)) == NULL))
 		{
 			memcpy((void*)runs, tmp, (size_t)len);
 		}
@@ -2072,7 +2073,7 @@ BTextView::KeyDown(const char *bytes, b_int32 numBytes)
 	if(numBytes == 1)
 	{
 		// TODO: region update
-		b_text_line *line = (b_text_line*)fLines.ItemAt(fCurrentLine);
+        bhapi::text_line *line = (bhapi::text_line*)fLines.ItemAt(fCurrentLine);
 		switch(bytes[0])
 		{
 			case B_ESCAPE:

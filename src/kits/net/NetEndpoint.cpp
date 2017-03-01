@@ -60,7 +60,7 @@
 #else
 #	include <winsock2.h>
 #	define socklen_t int
-#    undef EWOULBLOCK
+#    undef EWOULDBLOCK
 #   define EWOULDBLOCK WSAEWOULDBLOCK
 #    undef ECONNABORTED
 #	define ECONNABORTED WSAECONNABORTED
@@ -412,7 +412,7 @@ BNetEndpoint::Accept(b_int32 timeout_msec)
 }
 
 
-int
+b_int32
 BNetEndpoint::Error() const
 {
 #ifdef _WIN32
@@ -569,7 +569,7 @@ BNetEndpoint::IsDataPending(b_bigtime_t _timeout)
 
 	fd_set rset;
 	FD_ZERO(&rset);
-	FD_SET(fSocket, &rset);
+    FD_SET((u_int)fSocket, &rset);
 
 	int status = select(fSocket + 1, &rset, NULL, NULL,
 			    (fNonBlocking || _timeout != B_INFINITE_TIMEOUT) ? &timeout : NULL);

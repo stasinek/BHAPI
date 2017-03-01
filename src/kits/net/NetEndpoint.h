@@ -58,7 +58,7 @@ public:
 	int			SetNonBlocking(bool state = true);
 	bool			IsNonBlocking() const;
 
-	int			SetReuseAddr(bool state = true);
+                SetReuseAddr(bool state = true);
 
 	const BNetAddress	&LocalAddr() const;
 	const BNetAddress	&RemoteAddr() const;
@@ -74,7 +74,7 @@ public:
 	virtual b_status_t	Listen(int backlog = 5);
     virtual BNetEndpoint	*Accept(b_int32 timeout_msec = -1);
 
-	int			Error() const;
+    b_int32			Error() const;
 	const char		*ErrorStr() const;
 
     virtual b_int32		Send(const void *buf, size_t len, int flags = 0);
@@ -92,11 +92,11 @@ public:
 
 protected:
 	// Socket(): use it carefully please.
-	int			Socket() const;
+    b_int32			Socket() const;
 
 private:
-	int fSocket;
-	int fProtocol;
+    b_int32 fSocket;
+    b_int32 fProtocol;
 	bool fBind;
 	bool fNonBlocking;
 	b_bigtime_t fTimeout;

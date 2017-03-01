@@ -52,7 +52,9 @@
 extern "C" {
 #endif /* __cplusplus */
 
+#ifdef __cplusplus
 namespace bhapi {
+#endif /* __cplusplus */
 typedef enum debug_level {
 	DEBUG_NORMAL,
 	DEBUG_OUTPUT,
@@ -61,7 +63,9 @@ typedef enum debug_level {
 } debug_level;
 
 IMPEXP_BHAPI void debug_log(bhapi::debug_level level, const char *format, va_list ap);
+#ifdef __cplusplus
 } /* namespace */
+#endif /* __cplusplus */
 
 #ifndef BHAPI_DEBUG
 #ifdef BHAPI_DISABLE_MORE_CHECKS
@@ -118,9 +122,13 @@ IMPEXP_BHAPI void  free(void *ptr, const char *file, int line, const char *metho
 } /* extern "C" */
 
 #ifdef BHAPI_BUILD_WITH_MEMORY_TRACING
+#ifdef __cplusplus
 namespace bhapi {
+#endif /* __cplusplus */
 struct memory_flag_t {};
-}
+#ifdef __cplusplus
+} /* namespace */
+#endif /* __cplusplus */
 IMPEXP_BHAPI void* operator new(size_t size, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
 IMPEXP_BHAPI void* operator new[](size_t size, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
 IMPEXP_BHAPI void operator delete(void *ptr, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);

@@ -33,7 +33,6 @@ ADDMOD debug/List.o
 ADDMOD debug/SimpleLocker.o
 ADDMOD debug/StreamIO.o
 ADDMOD debug/StringArray.o
-ADDMOD debug/ByteOrder.o
 ADDMOD debug/Application.o
 ADDMOD debug/Clipboard.o
 ADDMOD debug/Cursor.o
@@ -108,6 +107,7 @@ ADDMOD debug/Referenceable.o
 ADDMOD debug/StopWatch.o
 ADDMOD debug/Uuid.o
 ADDMOD debug/ZlibCompressionAlgorithm.o
+ADDMOD debug/ByteOrder.o
 ADDMOD debug/etk-application.o
 ADDMOD debug/etk-drawing.o
 ADDMOD debug/etk-pixmap.o

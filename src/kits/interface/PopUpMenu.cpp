@@ -236,7 +236,7 @@ BPopUpMenu::MessageReceived(BMessage *msg)
 
 		case _MENU_EVENT_:
 			{
-				if(Window() == NULL || !bhapi::is_instance_of(Window(), BPopUpMenuWindow)) break;
+				if(Window() == NULL || !is_instance_of(Window(), BPopUpMenuWindow)) break;
 
 				BMenuItem *item = NULL;
 				if(msg->FindPointer("source", (void**)&item) == false || item == NULL) break;
@@ -391,6 +391,6 @@ BPopUpMenu::AsyncAutoDestruct() const
 bool
 BPopUpMenu::IsPopUpByGo() const
 {
-	return(bhapi::is_instance_of(Window(), BPopUpMenuWindow) != 0);
+	return(is_instance_of(Window(), BPopUpMenuWindow) != 0);
 }
 

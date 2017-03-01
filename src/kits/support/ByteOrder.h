@@ -30,9 +30,9 @@
 #ifndef BHAPI_BYTE_ORDER__H
 #define BHAPI_BYTE_ORDER__H
 #include "../support/SupportDefs.h"
-namespace bhapi {
 #ifdef __cplusplus /* Just for C++ */
 extern "C" {
+namespace bhapi {
 #endif
 typedef enum swap_action {
     B_SWAP_HOST_TO_LENDIAN,
@@ -113,9 +113,9 @@ IMPEXP_BHAPI double		swap_double(double value);
 
 #endif /* BHAPI_LITTLE_ENDIAN */
 #ifdef __cplusplus
+} /* namespace */
 } // extern "C"
 #endif
-} /* namespace */
 
 #endif /* BHAPI_BYTE_ORDER__H */
 

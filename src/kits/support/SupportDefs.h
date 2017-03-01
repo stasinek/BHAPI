@@ -456,7 +456,9 @@ enum {
 //#include "../kernel/Debug.h"
 #endif
 
+#ifdef __cplusplus
 namespace bhapi {
+#endif /* __cplusplus */
 IMPEXP_BHAPI int32 	atomic_add (int32 *value, int32 addValue);
 // 	Atomically add the value of addValue to value. More...
 IMPEXP_BHAPI int64 	atomic_add64 (int64 *value, int64 addValue);
@@ -487,9 +489,11 @@ IMPEXP_BHAPI int64 	atomic_test_and_set64 (int64 *value, int64 newValue, int64 t
 // 	Atomically set the variable value to newValue if the current value is testAgainst. More...
 IMPEXP_BHAPI void * 	get_stack_frame (void);
 // 	Internal function.
+#ifdef __cplusplus
 } /* namespace */
+#endif /* __cplusplus */
 
-IMPEXP_BHAPI const char * B_EMPTY_STRING;
+IMPEXP_BHAPI extern const char * B_EMPTY_STRING;
 
 #endif /* BHAPI_SUPPORT_DEFS__H */
 

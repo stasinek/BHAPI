@@ -154,6 +154,7 @@ static void lock_port_inter(bhapi::port_t *port);
 static void unlock_port_inter(bhapi::port_t *port);
 static void* create_port_for_IPC(b_int32 queue_length, const char *name, bhapi::area_access area_access);
 EXPORT_BHAPI void* open_port(const char *name);
+static void* create_port_for_local(b_int32 queue_length);
 } /* namespace */
 
 
@@ -184,7 +185,7 @@ static void bhapi::unlock_port_inter(bhapi::port_t *port)
 
 #define BHAPI_PORT_PER_MESSAGE_LENGTH	(sizeof(b_int32) + sizeof(size_t) + BHAPI_MAX_PORT_BUFFER_SIZE)
 
-static void* bhapi::create_port_for_IPC(b_int32 queue_length, const char *name, b_area_access area_access)
+static void* bhapi::create_port_for_IPC(b_int32 queue_length, const char *name, bhapi::area_access area_access)
 {
 	if(queue_length <= 0 || queue_length > BHAPI_VALID_MAX_PORT_QUEUE_LENGTH ||
 	   name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH - 1) return NULL;
@@ -405,7 +406,7 @@ static void* bhapi::create_port_for_local(b_int32 queue_length)
 }
 
 
-EXPORT_BHAPI void* bhapi::create_port(b_int32 queue_length, const char *name, b_area_access area_access)
+EXPORT_BHAPI void* bhapi::create_port(b_int32 queue_length, const char *name, bhapi::area_access area_access)
 {
 	return((name == NULL || *name == 0) ?
 			bhapi::create_port_for_local(queue_length) :

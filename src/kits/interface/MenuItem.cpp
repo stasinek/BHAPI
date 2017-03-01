@@ -309,7 +309,7 @@ BMenuItem::GetContentSize(float *width, float *height) const
 {
     if((!width && !height) || !fMenu) return;
 
-	BFont font(b_plain_font);
+    BFont font(bhapi::plain_font);
 
 	if(width)
 	{
@@ -351,7 +351,7 @@ BMenuItem::DrawContent()
 
 	fMenu->PushState();
 
-	BFont font(b_plain_font);
+    BFont font(bhapi::plain_font);
 	bhapi::font_height fontHeight;
 	font.GetHeight(&fontHeight);
 	fMenu->SetFont(&font, B_FONT_ALL);

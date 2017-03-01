@@ -195,7 +195,7 @@ static void bhapi::unlock_sem_inter(bhapi::win32_sem_t *sem)
 }
 
 
-static void* bhapi::create_sem_for_IPC(b_int64 count, const char *name, b_area_access area_access)
+static void* bhapi::create_sem_for_IPC(b_int64 count, const char *name, bhapi::area_access area_access)
 {
 	if(count < B_INT64_CONSTANT(0) || name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH) return NULL;
 
@@ -387,7 +387,7 @@ static void* bhapi::create_sem_for_local(b_int64 count)
 }
 
 
-EXPORT_BHAPI void* bhapi::create_sem(b_int64 count, const char *name, b_area_access area_access)
+EXPORT_BHAPI void* bhapi::create_sem(b_int64 count, const char *name, bhapi::area_access area_access)
 {
 	return((name == NULL || *name == 0) ?
 			bhapi::create_sem_for_local(count) :

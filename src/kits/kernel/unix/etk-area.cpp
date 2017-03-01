@@ -97,7 +97,7 @@ static char* b_area_ipc_name(const char *name, const char *domain)
 
 
 IMPEXP_BHAPI void*
-bhapi::create_area(const char *name, void **start_addr, size_t size, b_uint32 protection, const char *domain, b_area_access area_access)
+bhapi::create_area(const char *name, void **start_addr, size_t size, b_uint32 protection, const char *domain, bhapi::area_access area_access)
 {
 	if(size <= 0) return NULL;
 
@@ -382,7 +382,7 @@ b_set_area_protection(void *data, b_uint32 new_protection)
 #warning "FIXME: Your system seems don't support POSIX share memory."
 
 IMPEXP_BHAPI void*
-bhapi::create_area(const char *name, void **start_addr, size_t size, b_uint32 protection, const char *domain, b_area_access area_access)
+bhapi::create_area(const char *name, void **start_addr, size_t size, b_uint32 protection, const char *domain, bhapi::area_access area_access)
 {
 	BHAPI_WARNING("[KERNEL]: %s --- System don't support POSIX share memory!", __PRETTY_FUNCTION__);
 	return NULL;

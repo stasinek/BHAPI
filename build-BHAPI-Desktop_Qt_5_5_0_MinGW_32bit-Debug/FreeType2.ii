@@ -45483,8 +45483,9 @@ enum {
     B_SEEK_CUR,
     B_SEEK_END,
 };
-# 459 "../src/kits/add-ons/font/../../add-ons/font/../../support/SupportDefs.h"
+# 460 "../src/kits/add-ons/font/../../add-ons/font/../../support/SupportDefs.h"
 namespace bhapi {
+
 __attribute__((dllexport)) int32 atomic_add (int32 *value, int32 addValue);
 
 __attribute__((dllexport)) int64 atomic_add64 (int64 *value, int64 addValue);
@@ -45515,9 +45516,11 @@ __attribute__((dllexport)) int64 atomic_test_and_set64 (int64 *value, int64 newV
 
 __attribute__((dllexport)) void * get_stack_frame (void);
 
+
 }
 
-__attribute__((dllexport)) const char * B_EMPTY_STRING;
+
+__attribute__((dllexport)) extern const char * B_EMPTY_STRING;
 # 34 "../src/kits/add-ons/font/../../add-ons/font/FontEngine.h" 2
 # 1 "../src/kits/add-ons/font/../../add-ons/font/../../support/StringArray.h" 1
 # 32 "../src/kits/add-ons/font/../../add-ons/font/../../support/StringArray.h"
@@ -46905,7 +46908,9 @@ inline void operator delete[](void*, void*) noexcept { }
 extern "C" {
 
 
+
 namespace bhapi {
+
 typedef enum debug_level {
  DEBUG_NORMAL,
  DEBUG_OUTPUT,
@@ -46914,20 +46919,21 @@ typedef enum debug_level {
 } debug_level;
 
 __attribute__((dllexport)) void debug_log(bhapi::debug_level level, const char *format, va_list ap);
+
 }
-# 80 "../src/kits/add-ons/font/../../kernel/Debug.h"
+# 84 "../src/kits/add-ons/font/../../kernel/Debug.h"
 __attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...);
 
 
 
 __attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...);
-# 100 "../src/kits/add-ons/font/../../kernel/Debug.h"
+# 104 "../src/kits/add-ons/font/../../kernel/Debug.h"
 __attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...);
 
 
 
 __attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...);
-# 118 "../src/kits/add-ons/font/../../kernel/Debug.h"
+# 122 "../src/kits/add-ons/font/../../kernel/Debug.h"
 }
 # 32 "../src/kits/add-ons/font/FreeType2.cpp" 2
 # 1 "../src/kits/add-ons/font/../../support/StringArray.h" 1

@@ -35,13 +35,14 @@
 #include "../support/Autolock.h"
 #include "../kernel/Debug.h"
 
-EXPORT_BHAPI const BFont* b_plain_font = NULL;
-EXPORT_BHAPI const BFont* b_bold_font = NULL;
-EXPORT_BHAPI const BFont* b_fixed_font = NULL;
+namespace bhapi {
+EXPORT_BHAPI const BFont* plain_font = NULL;
+EXPORT_BHAPI const BFont* bold_font = NULL;
+EXPORT_BHAPI const BFont* fixed_font = NULL;
 
-static BLocker bhapi::font_info_locker;
+static BLocker font_info_locker;
 
-typedef struct bhapi::font_info {
+typedef struct font_info {
 	BFontEngine *engine;
 	bhapi::font_detach_callback *detach_callback;
 	float size;
@@ -51,7 +52,7 @@ typedef struct bhapi::font_info {
 	b_int32 family_index;
 	b_int32 style_index;
 
-	bhapi::font_info()
+    font_info()
 	{
 		engine = NULL;
 		detach_callback = NULL;
@@ -353,7 +354,7 @@ typedef struct bhapi::font_info {
 		bhapi::font_info_locker.Unlock();
 	}
 
-	~bhapi::font_info()
+    ~font_info()
 	{
 		bhapi::font_info_locker.Lock();
 		BFontEngine *_engine_ = engine;
@@ -368,8 +369,10 @@ typedef struct bhapi::font_info {
 		detach_callback = NULL;
 		bhapi::font_info_locker.Unlock();
 	}
-} bhapi::font_info;
+} font_info;
 
+}
+/* namespace */
 
 BFont::BFont()
 	: fInfo(NULL)

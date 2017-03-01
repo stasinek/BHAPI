@@ -52,7 +52,6 @@ SOURCES += bhapi.cpp \
     src/kits/support/SimpleLocker.cpp \
     src/kits/support/StreamIO.cpp \
     src/kits/support/StringArray.cpp \
-    src/kits/support/ByteOrder.c \
     src/kits/app/Application.cpp \
     src/kits/app/Clipboard.cpp \
     src/kits/app/Cursor.cpp \
@@ -126,7 +125,8 @@ SOURCES += bhapi.cpp \
     src/kits/support/Referenceable.cpp \
     src/kits/support/StopWatch.cpp \
     src/kits/support/Uuid.cpp \
-    src/kits/support/ZlibCompressionAlgorithm.cpp
+    src/kits/support/ZlibCompressionAlgorithm.cpp \
+    src/kits/support/ByteOrder.cpp
 
 
 HEADERS += bhapi.h\

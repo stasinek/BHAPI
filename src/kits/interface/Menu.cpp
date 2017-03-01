@@ -447,7 +447,7 @@ BMenu::SetEnabled(bool state)
 
 		if(!(fSuperitem  == NULL || fSuperitem->fEnabled == state)) fSuperitem->SetEnabled(state);
 
-		if(bhapi::is_instance_of(Window(), ESubmenuWindow)) Window()->SetBackgroundColor(vColor);
+        if(is_instance_of(Window(), ESubmenuWindow)) Window()->SetBackgroundColor(vColor);
 	}
 }
 
@@ -464,13 +464,13 @@ BMenu::IsEnabled() const
 void
 BMenu::AttachedToWindow()
 {
-	if(bhapi::is_instance_of(Window(), ESubmenuWindow)) SetEventMask(B_POINTER_EVENTS | B_KEYBOARD_EVENTS);
+    if(is_instance_of(Window(), ESubmenuWindow)) SetEventMask(B_POINTER_EVENTS | B_KEYBOARD_EVENTS);
 
 	Window()->DisableUpdates();
 	Refresh();
 	Window()->EnableUpdates();
 
-    if(!bhapi::is_instance_of(Window(), ESubmenuWindow))
+    if(!is_instance_of(Window(), ESubmenuWindow))
 	{
 		Window()->StartWatching(this, B_MINIMIZED);
 		Window()->StartWatching(this, B_WINDOW_ACTIVATED);
@@ -533,14 +533,14 @@ BMenu::MessageReceived(BMessage *msg)
 				BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
 				if(item == NULL || item->fSubmenu == NULL || item->fSubmenu->Window() == NULL) break;
 
-				if((bhapi::is_instance_of(Window(), ESubmenuWindow) == false &&
+                if((is_instance_of(Window(), ESubmenuWindow) == false &&
 				    Window()->IsActivate() == false &&
 				    item->fSubmenu->Window()->IsActivate() == false) ||
 				   Window()->IsHidden() || Window()->IsMinimized())
 				{
 					item->fSubmenu->ClosePopUp();
 				}
-				else if(bhapi::is_instance_of(item->fSubmenu->Window(), ESubmenuWindow))
+                else if(is_instance_of(item->fSubmenu->Window(), ESubmenuWindow))
 				{
 #if 0
 					// notice submenu to move
@@ -561,7 +561,7 @@ BMenu::MessageReceived(BMessage *msg)
 
 				processed = true;
 
-				if(bhapi::is_instance_of(Window(), ESubmenuWindow))
+                if(is_instance_of(Window(), ESubmenuWindow))
 				{
 					if(!(Supermenu() == NULL || Supermenu()->Window() == NULL))
 						Supermenu()->Window()->PostMessage(msg, Supermenu());
@@ -647,7 +647,7 @@ BMenu::MouseUp(BPoint where)
 		}
 		else
 		{
-			if(bhapi::is_instance_of(Window(), ESubmenuWindow))
+            if(is_instance_of(Window(), ESubmenuWindow))
 			{
 				if(!(Supermenu() == NULL || Supermenu()->Window() == NULL))
 				{
@@ -807,7 +807,7 @@ BMenu::KeyDown(const char *bytes, b_int32 numBytes)
 			break;
 
 		case B_ESCAPE:
-            if(!bhapi::is_instance_of(Window(), ESubmenuWindow)) fTrackingIndex = fSelectedIndex = -1;
+            if(!is_instance_of(Window(), ESubmenuWindow)) fTrackingIndex = fSelectedIndex = -1;
 			break;
 
 		case B_HOME:
@@ -918,7 +918,7 @@ BMenu::KeyUp(const char *bytes, b_int32 numBytes)
 					break;
 				}
 
-				if(bhapi::is_instance_of(Window(), ESubmenuWindow))
+                if(is_instance_of(Window(), ESubmenuWindow))
 				{
 					if(!(Supermenu() == NULL || Supermenu()->Window() == NULL))
 					{
@@ -965,7 +965,7 @@ BMenu::KeyUp(const char *bytes, b_int32 numBytes)
 			{
 				if(fLayout == B_ITEMS_IN_ROW)
 				{
-                    if(!bhapi::is_instance_of(Window(), ESubmenuWindow)) break;
+                    if(!is_instance_of(Window(), ESubmenuWindow)) break;
 					if(Supermenu()->Layout() != B_ITEMS_IN_ROW && Supermenu()->Window() != NULL)
 					{
 						BMessage aMsg = *(Window()->CurrentMessage());
@@ -995,7 +995,7 @@ BMenu::KeyUp(const char *bytes, b_int32 numBytes)
 				{
 					if(selectedItem)
 					{
-						if(bhapi::is_instance_of(Window(), ESubmenuWindow))
+                        if(is_instance_of(Window(), ESubmenuWindow))
 						{
 							if(Supermenu()->Layout() != B_ITEMS_IN_ROW && selectedItem->fSubmenu == NULL)
 							{
@@ -1028,7 +1028,7 @@ BMenu::KeyUp(const char *bytes, b_int32 numBytes)
 			{
 				if(fLayout == B_ITEMS_IN_COLUMN)
 				{
-                    if(!bhapi::is_instance_of(Window(), ESubmenuWindow)) break;
+                    if(!is_instance_of(Window(), ESubmenuWindow)) break;
 					if(Supermenu()->Layout() != B_ITEMS_IN_COLUMN && Supermenu()->Window() != NULL)
 					{
 						BMessage aMsg = *(Window()->CurrentMessage());
@@ -1058,7 +1058,7 @@ BMenu::KeyUp(const char *bytes, b_int32 numBytes)
 				{
 					if(selectedItem)
 					{
-						if(bhapi::is_instance_of(Window(), ESubmenuWindow))
+                        if(is_instance_of(Window(), ESubmenuWindow))
 						{
 							if(Supermenu()->Layout() != B_ITEMS_IN_COLUMN && selectedItem->fSubmenu == NULL)
 							{
@@ -1089,7 +1089,7 @@ BMenu::KeyUp(const char *bytes, b_int32 numBytes)
 
 		case B_ESCAPE:
 			{
-				if(bhapi::is_instance_of(Window(), ESubmenuWindow)) Window()->PostMessage(B_QUIT_REQUESTED);
+                if(is_instance_of(Window(), ESubmenuWindow)) Window()->PostMessage(B_QUIT_REQUESTED);
 				if(Supermenu()) Supermenu()->fShowSubmenuByKeyDown = false;
 			}
 			break;
@@ -1192,11 +1192,11 @@ BMenu::FindItem(BPoint where)
 void
 BMenu::Refresh()
 {
-	if(bhapi::is_instance_of(Window(), ESubmenuWindow) || fResizeToFit)
+    if(is_instance_of(Window(), ESubmenuWindow) || fResizeToFit)
 	{
 		BRect rect = Frame();
 		ResizeToPreferred();
-		if(rect != Frame() && bhapi::is_instance_of(Window(), ESubmenuWindow))
+        if(rect != Frame() && is_instance_of(Window(), ESubmenuWindow))
 		{
 			BMessage msg(_MENU_EVENT_);
 			msg.AddInt64("when", b_real_time_clock_usecs());
@@ -1668,7 +1668,7 @@ BMenu::GetPopUpWhere(BPoint *where)
 //		{
 //			TEMP_DEBUG(Supermenu()->Window()->IsHidden());
 //			TEMP_DEBUG(Supermenu()->Window()->IsMinimized());
-//			TEMP_DEBUG(!bhapi::is_instance_of(Supermenu()->Window(), ESubmenuWindow));
+//			TEMP_DEBUG(!is_instance_of(Supermenu()->Window(), ESubmenuWindow));
 //		}
 
 		return false;
@@ -1676,8 +1676,8 @@ BMenu::GetPopUpWhere(BPoint *where)
 
 	if(Supermenu()->Window()->IsActivate() == false)
 	{
-		if(!(bhapi::is_instance_of(Supermenu()->Window(), ESubmenuWindow) || bhapi::is_instance_of(Supermenu(), BPopUpMenu))) return false;
-		if(bhapi::is_instance_of(Supermenu(), BPopUpMenu))
+        if(!(is_instance_of(Supermenu()->Window(), ESubmenuWindow) || is_instance_of(Supermenu(), BPopUpMenu))) return false;
+        if(is_instance_of(Supermenu(), BPopUpMenu))
 		{
 			if(cast_as(Supermenu(), BPopUpMenu)->IsPopUpByGo() == false) return false;
 		}

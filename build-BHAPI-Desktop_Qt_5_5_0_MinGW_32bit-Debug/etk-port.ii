@@ -45483,7 +45483,9 @@ enum {
     B_SEEK_CUR,
     B_SEEK_END,
 };
-# 459 "../src/kits/kernel/../kernel/../support/SupportDefs.h"
+# 460 "../src/kits/kernel/../kernel/../support/SupportDefs.h"
+namespace bhapi {
+
 __attribute__((dllexport)) int32 atomic_add (int32 *value, int32 addValue);
 
 __attribute__((dllexport)) int64 atomic_add64 (int64 *value, int64 addValue);
@@ -45515,7 +45517,10 @@ __attribute__((dllexport)) int64 atomic_test_and_set64 (int64 *value, int64 newV
 __attribute__((dllexport)) void * get_stack_frame (void);
 
 
-__attribute__((dllexport)) const char * B_EMPTY_STRING;
+}
+
+
+__attribute__((dllexport)) extern const char * B_EMPTY_STRING;
 # 33 "../src/kits/kernel/../kernel/Kernel.h" 2
 # 1 "../src/kits/kernel/../kernel/OS.h" 1
 # 33 "../src/kits/kernel/../kernel/OS.h"
@@ -46231,7 +46236,9 @@ inline void operator delete[](void*, void*) noexcept { }
 extern "C" {
 
 
+
 namespace bhapi {
+
 typedef enum debug_level {
  DEBUG_NORMAL,
  DEBUG_OUTPUT,
@@ -46240,20 +46247,21 @@ typedef enum debug_level {
 } debug_level;
 
 __attribute__((dllexport)) void debug_log(bhapi::debug_level level, const char *format, va_list ap);
+
 }
-# 79 "../src/kits/kernel/../kernel/Debug.h"
+# 84 "../src/kits/kernel/../kernel/Debug.h"
 __attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...);
 
 
 
 __attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...);
-# 99 "../src/kits/kernel/../kernel/Debug.h"
+# 104 "../src/kits/kernel/../kernel/Debug.h"
 __attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...);
 
 
 
 __attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...);
-# 119 "../src/kits/kernel/../kernel/Debug.h"
+# 122 "../src/kits/kernel/../kernel/Debug.h"
 }
 # 32 "../src/kits/kernel/etk-port.cpp" 2
 # 1 "../src/kits/kernel/../support/String.h" 1
@@ -46751,6 +46759,7 @@ static void lock_port_inter(bhapi::port_t *port);
 static void unlock_port_inter(bhapi::port_t *port);
 static void* create_port_for_IPC(b_int32 queue_length, const char *name, bhapi::area_access area_access);
 __attribute__((dllexport)) void* open_port(const char *name);
+static void* create_port_for_local(b_int32 queue_length);
 }
 
 
@@ -46764,7 +46773,7 @@ static bool bhapi::is_port_for_IPC(const bhapi::port_t *port)
 
 static void bhapi::lock_port_inter(bhapi::port_t *port)
 {
- if(b_is_port_for_IPC(port))
+    if(bhapi::is_port_for_IPC(port))
   bhapi::acquire_sem(port->iLocker);
  else
   bhapi::lock_locker(port->iLocker);
@@ -46773,7 +46782,7 @@ static void bhapi::lock_port_inter(bhapi::port_t *port)
 
 static void bhapi::unlock_port_inter(bhapi::port_t *port)
 {
- if(b_is_port_for_IPC(port))
+    if(bhapi::is_port_for_IPC(port))
   bhapi::release_sem(port->iLocker);
  else
   bhapi::unlock_locker(port->iLocker);
@@ -46781,7 +46790,7 @@ static void bhapi::unlock_port_inter(bhapi::port_t *port)
 
 
 
-static void* bhapi::create_port_for_IPC(b_int32 queue_length, const char *name, b_area_access area_access)
+static void* bhapi::create_port_for_IPC(b_int32 queue_length, const char *name, bhapi::area_access area_access)
 {
  if(queue_length <= 0 || queue_length > ((b_int32)300) ||
     name == __null || *name == 0 || strlen(name) > 32 - 1) return __null;
@@ -46933,7 +46942,7 @@ __attribute__((dllexport)) void* bhapi::open_port_by_source(void *data)
  bhapi::port_t *port = (bhapi::port_t*)data;
  if(!port || !port->portInfo) return __null;
 
- if(b_is_port_for_IPC(port)) return bhapi::open_port(port->portInfo->name);
+    if(bhapi::is_port_for_IPC(port)) return bhapi::open_port(port->portInfo->name);
 
  __bhapi_port_locker__.LockLocal();
  if(port->refCount == (2147483647 * 2U + 1U) || port->refCount == 0 || port->portInfo->closed)
@@ -47002,7 +47011,7 @@ static void* bhapi::create_port_for_local(b_int32 queue_length)
 }
 
 
-__attribute__((dllexport)) void* bhapi::create_port(b_int32 queue_length, const char *name, b_area_access area_access)
+__attribute__((dllexport)) void* bhapi::create_port(b_int32 queue_length, const char *name, bhapi::area_access area_access)
 {
  return((name == __null || *name == 0) ?
    bhapi::create_port_for_local(queue_length) :
@@ -47015,7 +47024,7 @@ __attribute__((dllexport)) b_status_t bhapi::delete_port(void *data)
  bhapi::port_t *port = (bhapi::port_t*)data;
  if(!port) return B_BAD_VALUE;
 
- if(b_is_port_for_IPC(port))
+    if(bhapi::is_port_for_IPC(port))
  {
   bhapi::delete_area(port->mapping);
   bhapi::delete_sem(port->iLocker);

@@ -33,7 +33,6 @@ ADDMOD release/List.o
 ADDMOD release/SimpleLocker.o
 ADDMOD release/StreamIO.o
 ADDMOD release/StringArray.o
-ADDMOD release/ByteOrder.o
 ADDMOD release/Application.o
 ADDMOD release/Clipboard.o
 ADDMOD release/Cursor.o
@@ -108,6 +107,7 @@ ADDMOD release/Referenceable.o
 ADDMOD release/StopWatch.o
 ADDMOD release/Uuid.o
 ADDMOD release/ZlibCompressionAlgorithm.o
+ADDMOD release/ByteOrder.o
 ADDMOD release/etk-application.o
 ADDMOD release/etk-drawing.o
 ADDMOD release/etk-pixmap.o

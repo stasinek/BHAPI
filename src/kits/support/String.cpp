@@ -168,6 +168,14 @@ EXPORT_BHAPI char* bhapi::strdup_dirty(const char* src, b_int32 length)
 
 
 #ifndef HAVE_STRCASESTR
+namespace bhapi {
+static char* strcasestr(const char *haystack, const char *needle);
+static char* strrstr(const char *haystack, const char *needle);
+static char* strrcasestr(const char *haystack, const char *needle);
+static char* strcasechr(const char *s, int c);
+static char* strrcasechr(const char *s, int c);
+}
+
 static char* bhapi::strcasestr(const char *haystack, const char *needle)
 {
 	if(!haystack || !needle) return NULL;
@@ -2251,6 +2259,11 @@ BString::IsDecimal() const
 	return(!IsInteger());
 }
 
+
+namespace bhapi {
+template<class TYPE_INT>
+bool get_hex(const BString &str, TYPE_INT *value);
+}
 
 template<class TYPE_INT>
 bool bhapi::get_hex(const BString &str, TYPE_INT *value)

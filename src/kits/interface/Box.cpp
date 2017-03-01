@@ -97,7 +97,7 @@ BBox::SetLabel(const char *label)
 		}
 
 		if((strView = new BStringView(BRect(0, 0, 1, 1), NULL, label, B_FOLLOW_NONE)) == NULL) return;
-		strView->SetFont(b_bold_font);
+        strView->SetFont(bhapi::bold_font);
 		strView->ResizeToPreferred();
 		if(SetLabel(strView) != B_OK) delete strView;
 	}

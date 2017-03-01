@@ -101,7 +101,7 @@ BView::InitSelf(BRect frame, b_uint32 resizingMode, b_uint32 flags)
 	viewState->PenSize = 0;
 	viewState->HighColor.set_to(0, 0, 0);
 	viewState->LowColor.set_to(255, 255, 255);
-	viewState->Font = *b_plain_font;
+	viewState->Font = *bhapi::plain_font;
 	viewState->Clipping = NULL;
 	viewState->SquarePointStyle = false;
 
