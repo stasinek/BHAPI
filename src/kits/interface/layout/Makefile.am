@@ -7,7 +7,7 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 		-DETK_COMPILATION 			\
 		@ETK_DEBUG_FLAGS@
 
-noinst_LTLIBRARIES = libetk-interface-layout.la
+noinst_LTLIBRARIES = libBHAPI_wrapper_interface-layout.la
 
 libetk_interface_layout_la_SOURCES =				\
 					Layout.h		\

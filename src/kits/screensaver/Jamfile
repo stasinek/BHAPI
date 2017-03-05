@@ -1,0 +1,22 @@
+SubDir HAIKU_TOP src kits screensaver ;
+
+SetSubDirSupportedPlatformsBeOSCompatible ;
+
+UseHeaders [ FDirName $(HAIKU_TOP) headers os add-ons screen_saver ] ;
+	# we also need our headers when build for BeOS
+
+UsePrivateHeaders screen_saver ;
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup ] {
+	on $(architectureObject) {
+		SharedLibrary [ MultiArchDefaultGristFiles libscreensaver.so ] :
+			BuildScreenSaverDefaultSettingsView.cpp
+			ScreenSaver.cpp
+			ScreenSaverSettings.cpp
+			ScreenSaverRunner.cpp
+			:
+			be game [ TargetLibsupc++ ]
+			;
+	}
+}

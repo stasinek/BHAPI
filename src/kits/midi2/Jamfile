@@ -1,0 +1,27 @@
+SubDir HAIKU_TOP src kits midi2 ;
+
+SetSubDirSupportedPlatformsBeOSCompatible ;
+
+if $(TARGET_PLATFORM) != haiku {
+	UseHeaders [ FDirName $(HAIKU_TOP) headers os midi2 ] : true ;
+	UseHeaders [ FDirName $(HAIKU_TOP) headers posix ] : true ;
+}
+
+UsePrivateHeaders midi ;
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup ] {
+	on $(architectureObject) {
+		SharedLibrary [ MultiArchDefaultGristFiles libmidi2.so ] :
+			MidiConsumer.cpp
+			MidiEndpoint.cpp
+			MidiLocalConsumer.cpp
+			MidiLocalProducer.cpp
+			MidiProducer.cpp
+			MidiRoster.cpp
+			MidiRosterLooper.cpp
+			:
+			be [ TargetLibsupc++ ]
+			;
+	}
+}

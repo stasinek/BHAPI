@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -50,7 +50,7 @@
 #include <stdlib.h>
 
 #ifdef BHAPI_BUILD_LIBRARY
-EXPORT_BHAPI BList BLooper::sLooperList;
+EXPORTBHAPI BList BLooper::sLooperList;
 #endif // BHAPI_BUILD_LIBRARY
 
 BLooper::BLooper(const char *name)

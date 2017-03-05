@@ -4,17 +4,16 @@
  */
 
 
-#include <ZlibCompressionAlgorithm.h>
+#include "ZlibCompressionAlgorithm.h"
+#include "DataIO.h"
+#include <zlib.h>
 
 #include <errno.h>
 #include <string.h>
-
 #include <algorithm>
 #include <new>
 
-#include <zlib.h>
 
-#include <DataIO.h>
 
 
 // build compression support only for userland

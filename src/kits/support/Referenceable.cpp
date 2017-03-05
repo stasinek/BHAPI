@@ -3,30 +3,27 @@
  * Distributed under the terms of the MIT License.
  */
 
-
-#include <Referenceable.h>
+#include "Referenceable.h"
 
 #ifdef DEBUG
 #include <stdio.h>
 #endif
 
-#include <OS.h>
+#include "../kernel/OS.h"
 
 //#define TRACE_REFERENCEABLE
 #if defined(TRACE_REFERENCEABLE) && defined(_KERNEL_MODE)
 #	include <tracing.h>
 #	define TRACE(x, ...) ktrace_printf(x, __VA_ARGS__);
 #else
-#	define TRACE(x, ...)
+#	define TRACE(x, __VA_ARGS__)
 #endif
-
 
 BReferenceable::BReferenceable()
 	:
 	fReferenceCount(1)
 {
 }
-
 
 BReferenceable::~BReferenceable()
 {
@@ -67,9 +64,7 @@ BReferenceable::~BReferenceable()
 #endif
 }
 
-
-int32
-BReferenceable::AcquireReference()
+int32 BReferenceable::AcquireReference()
 {
 	int32 previousReferenceCount = atomic_add(&fReferenceCount, 1);
 	if (previousReferenceCount == 0)
@@ -80,9 +75,7 @@ BReferenceable::AcquireReference()
 	return previousReferenceCount;
 }
 
-
-int32
-BReferenceable::ReleaseReference()
+int32 BReferenceable::ReleaseReference()
 {
 	int32 previousReferenceCount = atomic_add(&fReferenceCount, -1);
 	TRACE("%p: release %ld\n", this, fReferenceCount);
@@ -91,15 +84,11 @@ BReferenceable::ReleaseReference()
 	return previousReferenceCount;
 }
 
-
-void
-BReferenceable::FirstReferenceAcquired()
+void BReferenceable::FirstReferenceAcquired()
 {
 }
 
-
-void
-BReferenceable::LastReferenceReleased()
+void BReferenceable::LastReferenceReleased()
 {
 	delete this;
 }

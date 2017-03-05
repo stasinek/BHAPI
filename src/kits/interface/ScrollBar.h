@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,22 +27,22 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_SCROLL_BAR__H
-#define BHAPI_SCROLL_BAR__H
+#ifndef BHAPI_SCROLL_BAR_H
+#define BHAPI_SCROLL_BAR_H
 
 #include "../app/MessageRunner.h"
 #include "../interface/View.h"
+#include "../interface/InterfaceDefs.h"
 
-#define B_V_SCROLL_BAR_WIDTH	b_ui_get_scrollbar_vertical_width()
-#define B_H_SCROLL_BAR_HEIGHT	b_ui_get_scrollbar_horizontal_height()
+#define B_V_SCROLL_BAR_WIDTH	bhapi::ui_get_scrollbar_vertical_width()
+#define B_H_SCROLL_BAR_HEIGHT	bhapi::ui_get_scrollbar_horizontal_height()
 
 #ifdef __cplusplus /* Just for C++ */
-
-class IMPEXP_BHAPI BScrollBar : public BView {
+class IMPEXPBHAPI BScrollBar : public BView {
 public:
     BScrollBar(BRect frame, const char *name,
 		   float value, float min, float max,
-		   b_orientation direction);
+           bhapi::orientation direction);
     virtual ~BScrollBar();
 
 	void		SetValue(float value);
@@ -64,7 +64,7 @@ public:
 	b_status_t	SetTarget(BView *target);
 	BView		*Target() const;
 
-	b_orientation	Orientation() const;
+    bhapi::orientation	Orientation() const;
 
 	virtual void	Draw(BRect updateRect);
 	virtual void	MouseDown(BPoint where);
@@ -76,7 +76,7 @@ private:
     friend class BWindow;
 	friend class BView;
 
-	b_orientation fOrientation;
+    bhapi::orientation fOrientation;
 	float fValue;
 	float fRangeMin;
 	float fRangeMax;
@@ -97,5 +97,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_SCROLL_BAR__H */
+#endif /* BHAPI_SCROLL_BAR_H */
 

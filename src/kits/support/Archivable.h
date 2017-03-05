@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,12 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_ARCHIVABLE__H
-#define BHAPI_ARCHIVABLE__H
+#ifndef BHAPI_ARCHIVABLE_H
+#define BHAPI_ARCHIVABLE_H
 #include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 class BMessage;
-class IMPEXP_BHAPI BArchivable {
+class IMPEXPBHAPI BArchivable {
 public:
     BArchivable();
     BArchivable(const BMessage *from);
@@ -45,11 +45,11 @@ public:
 
 typedef BArchivable *(*b_instantiation_func)(const BMessage*);
 
-IMPEXP_BHAPI bool			b_validatb_instantiation(const BMessage *from, const char *class_name);
-IMPEXP_BHAPI b_instantiation_func	b_find_instantiation_func(const char *class_name);
-IMPEXP_BHAPI b_instantiation_func	b_find_instantiation_func(const BMessage *archive_data);
+IMPEXPBHAPI bool			b_validatb_instantiation(const BMessage *from, const char *class_name);
+IMPEXPBHAPI b_instantiation_func	b_find_instantiation_func(const char *class_name);
+IMPEXPBHAPI b_instantiation_func	b_find_instantiation_func(const BMessage *archive_data);
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_ARCHIVABLE__H */
+#endif /* BHAPI_ARCHIVABLE_H */
 

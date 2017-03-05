@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_PRIVATE_MESSAGE_BODY__H
-#define BHAPI_PRIVATE_MESSAGE_BODY__H
+#ifndef BHAPI_PRIVATE_MESSAGE_BODY_H
+#define BHAPI_PRIVATE_MESSAGE_BODY_H
 #include "../support/SupportDefs.h"
 #include "../support/List.h"
 #include "../support/StreamIO.h"
@@ -40,7 +40,7 @@ class BMessageBody;
 class BMessageNode;
 
 
-class LOCAL_BHAPI BMessageItem
+class LOCALBHAPI BMessageItem
 {
 public:
     BMessageItem(void *data, size_t nBytes, bool fixedSize = true);
@@ -61,7 +61,7 @@ private:
 };
 
 
-class LOCAL_BHAPI BMessageBody
+class LOCALBHAPI BMessageBody
 {
 public:
     BMessageBody();
@@ -75,9 +75,9 @@ public:
 
 	size_t		FlattenedSize() const;
 	bool		Flatten(char *buffer, size_t size) const;
-	bool		Flatten(EDataIO *stream, b_size_t *size = NULL) const;
+	bool		Flatten(BDataIO *stream, b_size_t *size = NULL) const;
 	bool		Unflatten(const char *buffer, size_t size);
-	bool		Unflatten(EDataIO *stream, size_t size);
+	bool		Unflatten(BDataIO *stream, size_t size);
 
 	void		PrintToStream(BStreamIO &stream) const;
 	void		PrintToStream() const;
@@ -97,5 +97,5 @@ BMessageBody::PrintToStream() const
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_PRIVATE_MESSAGE_BODY__H */
+#endif /* BHAPI_PRIVATE_MESSAGE_BODY_H */
 

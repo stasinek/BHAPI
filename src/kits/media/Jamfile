@@ -1,0 +1,95 @@
+SubDir HAIKU_TOP src kits media ;
+
+SetSubDirSupportedPlatformsBeOSCompatible ;
+
+if $(TARGET_PLATFORM) != haiku {
+	UseHeaders [ FDirName $(HAIKU_TOP) headers os media ] : true ;
+		# We need the public media headers also when not compiling for Haiku.
+}
+
+UsePrivateHeaders app media shared ;
+
+if $(CHECK_MALLOC) {
+	SubDirC++Flags -D_NO_INLINE_ASM -fcheck-memory-usage ;
+}
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup ] {
+	on $(architectureObject) {
+
+		SEARCH_SOURCE += [ FDirName $(SUBDIR) legacy ] ;
+
+		SharedLibrary [ MultiArchDefaultGristFiles libmedia.so ] :
+			# Private Media Kit
+			!missing_symbols.cpp
+			MediaRecorder.cpp
+
+			# Public Media Kit
+			Buffer.cpp
+			BufferConsumer.cpp
+			BufferGroup.cpp
+			BufferProducer.cpp
+			Controllable.cpp
+			FileInterface.cpp
+			MediaAddOn.cpp
+			MediaDecoder.cpp
+			MediaDefs.cpp
+			MediaEncoder.cpp
+			MediaEventLooper.cpp
+			MediaFile.cpp
+			MediaFiles.cpp
+			MediaFormats.cpp
+			MediaNode.cpp
+			MediaRoster.cpp
+			MediaTheme.cpp
+			MediaTrack.cpp
+			ParameterWeb.cpp
+			PlaySound.cpp
+			RealtimeAlloc.cpp
+			Sound.cpp
+			SoundFile.cpp
+			SoundPlayer.cpp
+			TimeCode.cpp
+			TimedEventQueue.cpp
+			TimeSource.cpp
+
+			# Internal Functionality
+			AddOnManager.cpp
+			BufferCache.cpp
+			DataExchange.cpp
+			DefaultMediaTheme.cpp
+			DormantNodeManager.cpp
+			FormatManager.cpp
+			MediaRecorderNode.cpp
+			Notifications.cpp
+			request_data.cpp
+			SharedBufferList.cpp
+			TrackReader.cpp
+			TimedEventQueuePrivate.cpp
+			TimeSourceObject.cpp
+			TimeSourceObjectManager.cpp
+			SoundPlayNode.cpp
+
+			# Old (R3) Media Kit (built only for GCC2)
+			OldAudioModule.cpp
+			OldAudioStream.cpp
+			OldBufferStream.cpp
+			OldBufferStreamManager.cpp
+			OldMediaModule.cpp
+			OldSubscriber.cpp
+
+			# Codec Plugin API
+			ChunkCache.cpp
+			DecoderPlugin.cpp
+			EncoderPlugin.cpp
+			MediaExtractor.cpp
+			MediaPlugin.cpp
+			MediaWriter.cpp
+			PluginManager.cpp
+			ReaderPlugin.cpp
+			WriterPlugin.cpp
+			:
+			be localestub [ TargetLibsupc++ ] [ TargetLibstdc++ ]
+			;
+	}
+}

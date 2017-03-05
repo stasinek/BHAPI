@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -35,7 +35,7 @@
 #include "../interface/Window.h"
 #include "../support/Errors.h"
 
-BScrollBar::BScrollBar(BRect frame, const char *name, float value, float min, float max, b_orientation direction)
+BScrollBar::BScrollBar(BRect frame, const char *name, float value, float min, float max, bhapi::orientation direction)
 	: BView(frame, name, B_FOLLOW_NONE, B_WILL_DRAW),
 	  fStepSmall(1), fStepLarge(10), fTarget(NULL),
 	  fTracking(false), fTrackingState(0), fRunner(NULL)
@@ -220,7 +220,7 @@ BScrollBar::Target() const
 }
 
 
-b_orientation
+bhapi::orientation
 BScrollBar::Orientation() const
 {
 	return fOrientation;

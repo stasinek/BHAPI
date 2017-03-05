@@ -1,0 +1,71 @@
+SubDir HAIKU_TOP src kits locale ;
+
+AddSubDirSupportedPlatforms libbe_test ;
+
+UsePrivateHeaders locale shared ;
+UsePublicHeaders locale storage ;
+
+local sources =
+	cat.cpp
+	Catalog.cpp
+	CatalogData.cpp
+	Collator.cpp
+	Country.cpp
+	DefaultCatalog.cpp
+	EditableCatalog.cpp
+	FormattingConventions.cpp
+	HashMapCatalog.cpp
+	InitLocaleKit.cpp
+	Language.cpp
+	Locale.cpp
+	LocaleRoster.cpp
+	LocaleRosterData.cpp
+	MutableLocaleRoster.cpp
+	TimeZone.cpp
+
+	# in progress
+	DateFormat.cpp
+	DateTimeFormat.cpp
+	DurationFormat.cpp
+	MessageFormat.cpp
+	NumberFormat.cpp
+	TimeFormat.cpp
+	TimeUnitFormat.cpp
+	Format.cpp # Used by some of the above.
+	UnicodeChar.cpp # Already used in FirstBootPrompt.
+
+	# old, needs investigation
+	# Currency.cpp
+	# FloatFormat.cpp
+	# FloatFormatImpl.cpp
+	# FloatFormatParameters.cpp
+	# FormatImpl.cpp
+	# FormatParameters.cpp
+	# GenericNumberFormat.cpp
+	# IntegerFormat.cpp
+	# IntegerFormatImpl.cpp
+	# IntegerFormatParameters.cpp
+	# NumberFormatParameters.cpp
+	;
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup ] {
+	on $(architectureObject) {
+		local architecture = $(TARGET_PACKAGING_ARCH) ;
+
+		UseBuildFeatureHeaders icu ;
+
+		Includes [ FGristFiles $(sources) ]
+			: [ BuildFeatureAttribute icu : headers ] ;
+			# Dependency needed to trigger downloading/unzipping the package
+			# before compiling the files.
+
+		MergeObject <libbe!$(architecture)>locale_kit.o :
+			$(sources)
+			;
+
+		StaticLibrary <$(architecture)>liblocalestub.a
+			: CatalogStub.cpp
+			;
+	}
+}

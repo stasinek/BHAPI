@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -40,14 +40,14 @@ static BStandardIO _EIn(0);
 static BStandardIO _EOut(1);
 static BStandardIO _EErr(2);
 
-EXPORT_BHAPI BStreamIO &endl = _endl;
-EXPORT_BHAPI BStreamIO &ends = _ends;
-EXPORT_BHAPI BStreamIO &EIn = _EIn;
-EXPORT_BHAPI BStreamIO &EOut = _EOut;
-EXPORT_BHAPI BStreamIO &EErr = _EErr;
+EXPORTBHAPI BStreamIO &endl = _endl;
+EXPORTBHAPI BStreamIO &ends = _ends;
+EXPORTBHAPI BStreamIO &EIn = _EIn;
+EXPORTBHAPI BStreamIO &EOut = _EOut;
+EXPORTBHAPI BStreamIO &EErr = _EErr;
 
 BStreamIO::BStreamIO()
-	: EDataIO()
+	: BDataIO()
 {
 }
 
@@ -57,22 +57,19 @@ BStreamIO::~BStreamIO()
 }
 
 
-b_size_t
-BStreamIO::Read(void *buffer, size_t size)
+b_size_t BStreamIO::Read(void *a_buffer, size_t size)
 {
-	return B_ERROR;
+	return (b_size_t)B_ERROR;
 }
 
 
-b_size_t
-BStreamIO::Write(const void *buffer, size_t size)
+b_size_t BStreamIO::Write(const void *a_buffer, size_t size)
 {
-	return B_ERROR;
+	return (b_size_t)B_ERROR;
 }
 
 
-BStreamIO&
-BStreamIO::operator<<(b_int8 value)
+BStreamIO& BStreamIO::operator<<(b_int8 value)
 {
 	BString str;
 	str << value;

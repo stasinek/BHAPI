@@ -1,4 +1,31 @@
-//------------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
+ *
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku OS source-code, All Rights Reserved
+ *
+ * BHAPI++ library is a freeware; it may be used and distributed according to
+ * the terms of The MIT License.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+ * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * File: StopWatch.cpp
+ *
+ * --------------------------------------------------------------------------*/
+
 //	Copyright (c) 2001-2004, OpenBeOS
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a
@@ -28,11 +55,9 @@
 //
 //------------------------------------------------------------------------------
 
-#include <OS.h>		// for system_time()
-#include <StopWatch.h>
-
+#include "../kernel/OS.h"		// for system_time()
+#include "StopWatch.h"
 #include <stdio.h>
-
 
 BStopWatch::BStopWatch(const char *name, bool silent)
 	:
@@ -41,7 +66,6 @@ BStopWatch::BStopWatch(const char *name, bool silent)
 {
 	Reset();
 }
-
 
 BStopWatch::~BStopWatch()
 {
@@ -59,17 +83,13 @@ BStopWatch::~BStopWatch()
 	}
 }
 
-
-void
-BStopWatch::Suspend()
+void BStopWatch::Suspend()
 {
 	if (!fSuspendTime)
 		fSuspendTime = system_time();
 }
 
-
-void
-BStopWatch::Resume()
+void BStopWatch::Resume()
 {
 	if (fSuspendTime) {
 		fStart += system_time() - fSuspendTime;
@@ -77,9 +97,7 @@ BStopWatch::Resume()
 	}
 }
 
-
-bigtime_t
-BStopWatch::Lap()
+bigtime_t BStopWatch::Lap()
 {
 	if (!fSuspendTime){
 		if (fLap<9)
@@ -91,9 +109,7 @@ BStopWatch::Lap()
 		return 0;
 }
 
-
-bigtime_t
-BStopWatch::ElapsedTime() const
+bigtime_t BStopWatch::ElapsedTime() const
 {
 	if (fSuspendTime)
 		return fSuspendTime - fStart;
@@ -101,9 +117,7 @@ BStopWatch::ElapsedTime() const
 		return system_time() - fStart;
 }
 
-
-void
-BStopWatch::Reset()
+void BStopWatch::Reset()
 {
 	fStart = system_time();		// store current time
 	fSuspendTime = 0;
@@ -112,13 +126,10 @@ BStopWatch::Reset()
 		fLaps[i] = fStart;
 }
 
-
-const char *
-BStopWatch::Name() const
+const char *BStopWatch::Name() const
 {
 	return fName != NULL ? fName : "";
 }
-
 
 // just for future binary compatibility
 void BStopWatch::_ReservedStopWatch1()	{}

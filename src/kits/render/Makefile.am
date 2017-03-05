@@ -7,7 +7,7 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 		-DETK_COMPILATION 			\
 		@ETK_DEBUG_FLAGS@
 
-noinst_LTLIBRARIES = libetk-render.la
+noinst_LTLIBRARIES = libBHAPI_wrapper_render.la
 
 libetk_render_la_SOURCES =			\
 		LineGenerator.cpp		\

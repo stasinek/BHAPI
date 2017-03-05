@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,14 +28,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_LOCKER__H
-#define BHAPI_LOCKER__H
+#ifndef BHAPI_LOCKER_H
+#define BHAPI_LOCKER_H
 
 #include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
-class IMPEXP_BHAPI BLocker {
+class IMPEXPBHAPI BLocker {
 public:
     BLocker();
     virtual ~BLocker();
@@ -56,6 +55,5 @@ private:
 };
 
 #endif /* __cplusplus */
-
-#endif /* BHAPI_LOCKER__H */
+#endif /* BHAPI_LOCKER_H */
 

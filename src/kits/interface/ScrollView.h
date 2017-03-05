@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,21 +27,21 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_SCROLL_VIEW__H
-#define BHAPI_SCROLL_VIEW__H
+#ifndef BHAPI_SCROLL_VIEW_H
+#define BHAPI_SCROLL_VIEW_H
 
 #include "../interface/ScrollBar.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BScrollView : public BView {
+class IMPEXPBHAPI BScrollView : public BView {
 public:
 	BScrollView(BRect frame, const char *name, BView *target,
 		    b_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
 		    b_uint32 flags = 0,
 		    bool alwaysShowHorizontal = false,
 		    bool alwaysShowVertical = false,
-		    b_border_style border = B_FANCY_BORDER);
+            bhapi::border_style border = B_FANCY_BORDER);
 	virtual ~BScrollView();
 
 	// SetTarget: When it return B_OK, the oldTarget was removed and destroy automatically.
@@ -50,13 +50,13 @@ public:
 	BView		*Target() const;
 	BRect		TargetFrame() const;
 
-	virtual void	SetBorder(b_border_style border);
-	b_border_style	Border() const;
+    virtual void	SetBorder(bhapi::border_style border);
+    bhapi::border_style	Border() const;
 
 	void		SetScrollBarAutoState(bool alwaysShowHorizontal, bool alwaysShowVertical);
 	void		GetScrollBarAutoState(bool *alwaysShowHorizontal, bool *alwaysShowVertical) const;
 
-	BScrollBar	*ScrollBar(b_orientation direction) const;
+	BScrollBar	*ScrollBar(bhapi::orientation direction) const;
 
 	virtual void	SetFlags(b_uint32 flags); // auto-setting B_WILL_DRAW and B_FRAME_EVENTS
 	virtual void	Draw(BRect updateRect);
@@ -68,7 +68,7 @@ protected:
 private:
 	friend class BView;
 
-	b_border_style fBorder;
+    bhapi::border_style fBorder;
 	bool fAlwaysShowHorizontal;
 	bool fAlwaysShowVertical;
 
@@ -82,5 +82,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_SCROLL_VIEW__H */
+#endif /* BHAPI_SCROLL_VIEW_H */
 

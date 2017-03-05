@@ -1,0 +1,18 @@
+SubDir HAIKU_TOP src kits print ;
+
+SetSubDirSupportedPlatformsBeOSCompatible ;
+
+UsePrivateHeaders shared print ;
+
+StaticLibrary libprintutils.a :
+	BeUtils.cpp
+	BeUtilsTranslation.cpp
+	FolderWatcher.cpp
+	Jobs.cpp
+	PictureIterator.cpp
+	PicturePrinter.cpp
+	PrinterDriverAddOn.cpp
+	PrintTransport.cpp
+	PrintAddOnServer.cpp
+	PrintAddOnServerProtocol.cpp
+;

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_LIMITED_VIEW__H
-#define BHAPI_LIMITED_VIEW__H
+#ifndef BHAPI_LIMITED_VIEW_H
+#define BHAPI_LIMITED_VIEW_H
 
-#endif /* BHAPI_LIMITED_VIEW__H */
+#endif /* BHAPI_LIMITED_VIEW_H */
 

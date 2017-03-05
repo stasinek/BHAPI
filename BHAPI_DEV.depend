@@ -710,21 +710,21 @@
 
 1376845640 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\icons\stop.xpm
 
-1487753546 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\etk-application.cpp
+1487753546 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\BHAPI_wrapper_application.cpp
 	<stdlib.h>
 	<be/app/AppDefs.h>
 	<be/app/Application.h>
 	<be/app/Clipboard.h>
 	<be/app/Cursor.h>
 	<be/interface/Screen.h>
-	"etk-beos-graphics.h"
+	"BHAPI_wrapper_beos-graphics.h"
 	"../../support/Autolock.h"
 	"../../support/StringMe.h"
 	"../../kernel/Kernel.h"
 	"../../app/Application.h"
 	"../../app/Clipboard.h"
 
-1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\etk-beos-graphics.h
+1486891615 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\BHAPI_wrapper_beos-graphics.h
 	<be/app/Messenger.h>
 	<be/interface/View.h>
 	<be/interface/Window.h>
@@ -733,34 +733,34 @@
 	"../../add-ons/graphics/GraphicsEngine.h"
 	"../../app/MessageFilter.h"
 
-1487753546 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\etk-beos-font.cpp
+1487753546 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\BHAPI_wrapper_beos-font.cpp
 	<be/app/AppDefs.h>
 	<be/interface/Font.h>
-	"etk-beos-graphics.h"
+	"BHAPI_wrapper_beos-graphics.h"
 	"../../add-ons/font/FontEngine.h"
 	"../../support/ClassInfo.h"
 	"../../support/Autolock.h"
 	"../../interface/Window.h"
 	"../../interface/View.h"
 
-1487753546 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\etk-drawing.cpp
-	"etk-beos-graphics.h"
+1487753546 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\BHAPI_wrapper_drawing.cpp
+	"BHAPI_wrapper_beos-graphics.h"
 
-1487753547 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\etk-pixmap.cpp
+1487753547 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\BHAPI_wrapper_pixmap.cpp
 	<be/interface/View.h>
 	<be/interface/Region.h>
 	<be/interface/Bitmap.h>
-	"etk-beos-graphics.h"
+	"BHAPI_wrapper_beos-graphics.h"
 	"../../support/ClassInfo.h"
 	"../../support/Autolock.h"
 	"../../render/Pixmap.h"
 
-1487753547 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\etk-window.cpp
+1487753547 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\beos\BHAPI_wrapper_window.cpp
 	<be/BeBuild.h>
 	<be/app/AppDefs.h>
 	<be/interface/View.h>
 	<be/interface/Region.h>
-	"etk-beos-graphics.h"
+	"BHAPI_wrapper_beos-graphics.h"
 	"../../support/ClassInfo.h"
 	"../../app/Application.h"
 
@@ -812,9 +812,9 @@
 	"../interface/Rect.h"
 	"../interface/View.h"
 
-1488113788 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-application.cpp
+1488113788 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\BHAPI_wrapper_application.cpp
 	<string.h>
-	"etk-dfb.h"
+	"BHAPI_wrapper_dfb.h"
 	"../../kernel/Kernel.h"
 	"../../support/Autolock.h"
 	"../../support/ClassInfo.h"
@@ -822,7 +822,7 @@
 	"../../app/Clipboard.h"
 	"../../app/Application.h"
 
-1488120591 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-dfb.h
+1488120591 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\BHAPI_wrapper_dfb.h
 	<directfb.h>
 	<directfb_version.h>
 	"../../add-ons/graphics/GraphicsEngine.h"
@@ -831,8 +831,8 @@
 	"../../interface/Window.h"
 	"../../app/MessageFilter.h"
 
-1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-dfb-font.cpp
-	"etk-dfb.h"
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\BHAPI_wrapper_dfb-font.cpp
+	"BHAPI_wrapper_dfb.h"
 	"../../add-ons/font/FontEngine.h"
 	"../../support/ClassInfo.h"
 	"../../support/Autolock.h"
@@ -841,23 +841,23 @@
 	"../../storage/Directory.h"
 	"../../storage/Path.h"
 
-1488113792 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-drawing.cpp
+1488113792 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\BHAPI_wrapper_drawing.cpp
 	"../../render/Render.h"
 	"../../render/Pixmap.h"
-	"etk-dfb.h"
+	"BHAPI_wrapper_dfb.h"
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-pixmap.cpp
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\BHAPI_wrapper_pixmap.cpp
 	"../../support/Autolock.h"
 	"../../support/ClassInfo.h"
-	"etk-dfb.h"
+	"BHAPI_wrapper_dfb.h"
 
-1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-window.cpp
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\BHAPI_wrapper_window.cpp
 	"../../support/Autolock.h"
 	"../../support/ClassInfo.h"
-	"etk-dfb.h"
+	"BHAPI_wrapper_dfb.h"
 
-1486418551 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\etk-wm.cpp
-	"etk-dfb.h"
+1486418551 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\directfb\BHAPI_wrapper_wm.cpp
+	"BHAPI_wrapper_dfb.h"
 
 1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\font.cpp
 	"Font.h"
@@ -1085,8 +1085,8 @@
 	"layout/Layout.h"
 	"Window.h"
 
-1487409413 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-application.cpp
-	"etk-win32gdi.h"
+1487409413 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\BHAPI_wrapper_application.cpp
+	"BHAPI_wrapper_win32gdi.h"
 	"../../kernel/Kernel.h"
 	"../../kernel/Debug.h"
 	"../../support/Locker.h"
@@ -1099,7 +1099,7 @@
 	"../../app/Clipboard.h"
 	"../../app/Message.h"
 
-1488115222 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-win32gdi.h
+1488115222 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\BHAPI_wrapper_win32gdi.h
 	"../../support/SupportDefs.h"
 	"../../add-ons/graphics/GraphicsEngine.h"
 	"../../app/MessageFilter.h"
@@ -1107,9 +1107,9 @@
 	"../../app/Messenger.h"
 	"../../support/Locker.h"
 
-1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-drawing.cpp
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\BHAPI_wrapper_drawing.cpp
 	<math.h>
-	"etk-win32gdi.h"
+	"BHAPI_wrapper_win32gdi.h"
 	"../../support/SupportDefs.h"
 	"../../support/ClassInfo.h"
 	"../../support/Autolock.h"
@@ -1117,15 +1117,15 @@
 	"../../render/Pixmap.h"
 	"../../kernel/Debug.h"
 
-1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-pixmap.cpp
-	"etk-win32gdi.h"
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\BHAPI_wrapper_pixmap.cpp
+	"BHAPI_wrapper_win32gdi.h"
 	"../../support/Autolock.h"
 	"../../support/Errors.h"
 	"../../support/ClassInfo.h"
 	"../../kernel/Debug.h"
 
-1487409397 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-win32-font.cpp
-	"etk-win32gdi.h"
+1487409397 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\BHAPI_wrapper_win32-font.cpp
+	"BHAPI_wrapper_win32gdi.h"
 	"../../add-ons/font/FontEngine.h"
 	"../../support/ClassInfo.h"
 	"../../support/Autolock.h"
@@ -1135,8 +1135,8 @@
 	"../../support/Errors.h"
 	"../../kernel/Debug.h"
 
-1487409398 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\etk-window.cpp
-	"etk-win32gdi.h"
+1487409398 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\win32\BHAPI_wrapper_window.cpp
+	"BHAPI_wrapper_win32gdi.h"
 	"../../kernel/Kernel.h"
 	"../../kernel/Debug.h"
 	"../../support/Autolock.h"
@@ -1174,10 +1174,10 @@
 1488113788 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\wm\simplewm.h
 	"./../../render/Render.h"
 
-1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-application.cpp
+1486891617 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\BHAPI_wrapper_application.cpp
 	<stdlib.h>
 	<locale.h>
-	"etk-x11.h"
+	"BHAPI_wrapper_x11.h"
 	"../../kernel/Kernel.h"
 	"../../support/StringMe.h"
 	"../../support/Locker.h"
@@ -1186,7 +1186,7 @@
 	"../../app/Clipboard.h"
 	"../../interface/InterfaceDefs.h"
 
-1488120591 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-x11.h
+1488120591 c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\BHAPI_wrapper_x11.h
 	"../support/SupportDefs.h"
 	<X11/Xlib.h>
 	<X11/Xutil.h>
@@ -1199,30 +1199,30 @@
 	"../../add-ons/graphics/GraphicsEngine.h"
 	"../../app/MessageFilter.h"
 
-1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-drawing.cpp
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\BHAPI_wrapper_drawing.cpp
 	"../config.h"
 	<X11/extensions/Xrender.h"
-	"etk-x11.h"
+	"BHAPI_wrapper_x11.h"
 	"../support/Autolock.h"
 	"../support/ClassInfo.h"
 	"../render/Pixmap.h"
 
-1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-pixmap.cpp
-	"etk-x11.h"
+1486891616 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\BHAPI_wrapper_pixmap.cpp
+	"BHAPI_wrapper_x11.h"
 	"../support/Autolock.h"
 	"../support/ClassInfo.h"
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-window.cpp
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\BHAPI_wrapper_window.cpp
 	<stdlib.h>
-	"etk-x11.h"
+	"BHAPI_wrapper_x11.h"
 	"../support/Autolock.h"
 	"../support/StringMe.h"
 	"../support/ClassInfo.h"
 	"../app/Application.h"
 
-1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\etk-x11-font.cpp
-	"etk-x11.h"
-	"etk-x11.h"
+1486891615 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\interface\x11\BHAPI_wrapper_x11-font.cpp
+	"BHAPI_wrapper_x11.h"
+	"BHAPI_wrapper_x11.h"
 	"../add-ons/font/FontEngine.h"
 	"../support/ClassInfo.h"
 	"../support/List.h"
@@ -1230,19 +1230,19 @@
 	"../interface/Window.h"
 	"../interface/View.h"
 
-1487753546 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\beos\etk-area.cpp
+1487753546 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\beos\BHAPI_wrapper_area.cpp
 	<be/kernel/OS.h>
 	"../kernel/Kernel.h"
 	"../support/StringMe.h"
 
-1487753566 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\beos\etk-image.cpp
+1487753566 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\beos\BHAPI_wrapper_image.cpp
 	<be/kernel/image.h>
 	"../kernel/Kernel.h"
 	"../storage/Path.h"
 
-1486416091 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\beos\etk-os.cpp
+1486416091 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\beos\BHAPI_wrapper_os.cpp
 
-1487753583 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\beos\etk-timefuncs.cpp
+1487753583 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\beos\BHAPI_wrapper_timefuncs.cpp
 	<be/kernel/OS.h>
 	"../kernel/Kernel.h"
 
@@ -1256,36 +1256,36 @@
 	<winsock2.h>
 	<windows.h>
 
-1488114257 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\etk-port.cpp
+1488114257 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\BHAPI_wrapper_port.cpp
 	"../kernel/Kernel.h"
 	"../kernel/Debug.h"
 	"../support/StringMe.h"
 	"../support/Errors.h"
 	"../support/SimpleLocker.h"
 
-1487753719 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\beos\etk-locker.cpp
+1487753719 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\beos\BHAPI_wrapper_locker.cpp
 	<be/kernel/OS.h>
 	"../kernel/Kernel.h"
 
-1487753731 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\beos\etk-semaphore.cpp
+1487753731 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\beos\BHAPI_wrapper_semaphore.cpp
 	<be/kernel/OS.h>
 	"../kernel/Kernel.h"
 	"../support/StringMe.h"
 
-1487753748 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\beos\etk-thread.cpp
+1487753748 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\beos\BHAPI_wrapper_thread.cpp
 	<be/kernel/OS.h>
 	"../kernel/Kernel.h"
 	"../support/SimpleLocker.h"
 	"../support/List.h"
 	"../support/StringMe.h"
 
-1487753792 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-locker.cpp
+1487753792 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\BHAPI_wrapper_locker.cpp
 	<pthread.h>
 	<errno.h"
 	"../kernel/Kernel.h"
 	"../support/StringMe.h"
 
-1488113790 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-semaphore-mach.cpp
+1488113790 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\BHAPI_wrapper_semaphore-mach.cpp
 	<pthread.h>
 	<semaphore.h>
 	<time.h>
@@ -1295,7 +1295,7 @@
 	"../kernel/Kernel.h"
 	"../support/StringMe.h"
 
-1488113786 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-semaphore-umtx.cpp
+1488113786 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\BHAPI_wrapper_semaphore-umtx.cpp
 	<stdlib.h>
 	<fcntl.h>
 	<pthread.h>
@@ -1314,7 +1314,7 @@
 	"../kernel/Kernel.h"
 	"../support/StringMe.h"
 
-1488113785 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-semaphore.cpp
+1488113785 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\BHAPI_wrapper_semaphore.cpp
 	<stdlib.h>
 	<fcntl.h>
 	<pthread.h>
@@ -1329,7 +1329,7 @@
 	"../kernel/Kernel.h"
 	"../support/StringMe.h"
 
-1487753880 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\etk-thread.cpp
+1487753880 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\posix\BHAPI_wrapper_thread.cpp
 	<stdlib.h>
 	<stdio.h>
 	<sys/types.h>
@@ -1342,14 +1342,14 @@
 	"../support/List.h"
 	"../support/StringMe.h"
 
-1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\etk-locker.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\BHAPI_wrapper_locker.cpp
 	<winsock2.h>
 	<windows.h>
 	"../../../kernel/Kernel.h"
 	"../../../support/Errors.h"
 	"../../../kernel/Debug.h"
 
-1488080788 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\etk-semaphore.cpp
+1488080788 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\BHAPI_wrapper_semaphore.cpp
 	"../../../kernel/Kernel.h"
 	"../../../kernel/Debug.h"
 	"../../../support/StringMe.h"
@@ -1358,7 +1358,7 @@
 	<windows.h>
 	<stdio.h>
 
-1488080859 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\etk-thread.cpp
+1488080859 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\thread\win32\BHAPI_wrapper_thread.cpp
 	"../../../kernel/Kernel.h"
 	"../../../kernel/Debug.h"
 	"../../../support/List.h"
@@ -1371,7 +1371,7 @@
 	<process.h>
 	<stdio.h>
 
-1487753949 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\unix\etk-area.cpp
+1487753949 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\unix\BHAPI_wrapper_area.cpp
 	<stdlib.h>
 	<string.h>
 	<unistd.h>
@@ -1385,13 +1385,13 @@
 	"../support/StringArray.h"
 	"../support/SimpleLocker.h"
 
-1487753986 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\unix\etk-image.cpp
+1487753986 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\unix\BHAPI_wrapper_image.cpp
 	"../support/SupportDefs.h"
 	<dlfcn.h"
 	"../kernel/Kernel.h"
 	"../storage/Path.h"
 
-1487754046 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\unix\etk-os.cpp
+1487754046 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\unix\BHAPI_wrapper_os.cpp
 	"../support/SupportDefs.h"
 	<stdio.h>
 	<stdlib.h>
@@ -1402,14 +1402,14 @@
 	"../support/Locker.h"
 	"../app/Application.h"
 
-1487754076 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\unix\etk-timefuncs.cpp
+1487754076 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\unix\BHAPI_wrapper_timefuncs.cpp
 	<sys/time.h>
 	<time.h>
 	"../support/SupportDefs.h"
 	"../kernel/Kernel.h"
 	"../support/SimpleLocker.h"
 
-1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-area.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\BHAPI_wrapper_area.cpp
 	"../../support/SupportDefs.h"
 	"../../kernel/Kernel.h"
 	"../../kernel/Debug.h"
@@ -1418,7 +1418,7 @@
 	<winsock2.h>
 	<windows.h>
 
-1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-image.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\BHAPI_wrapper_image.cpp
 	"../../kernel/Kernel.h"
 	"../../storage/Path.h"
 	"../../support/StringMe.h"
@@ -1427,14 +1427,14 @@
 	<windows.h>
 	<sys/cygwin.h>
 
-1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-os.cpp
+1487830519 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\BHAPI_wrapper_os.cpp
 	"../../kernel/Kernel.h"
 	"../../support/StringMe.h"
 	"../../private/PrivateApplication.h"
 	<winsock2.h>
 	<windows.h>
 
-1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\etk-timefuncs.cpp
+1488114258 source:c:\documents and settings\stasiek.tc12\my documents\prc++\x86_libraries\bhapi\src\kits\kernel\win32\BHAPI_wrapper_timefuncs.cpp
 	"../../kernel/Kernel.h"
 	<winsock2.h>
 	<windows.h>

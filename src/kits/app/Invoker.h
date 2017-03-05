@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_INVOKER__H
-#define BHAPI_INVOKER__H
+#ifndef BHAPI_INVOKER_H
+#define BHAPI_INVOKER_H
 #include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
@@ -38,7 +38,7 @@ class BMessage;
 class BLooper;
 #include "../app/Messenger.h"
 class BHandler;
-class IMPEXP_BHAPI BInvoker {
+class IMPEXPBHAPI BInvoker {
 public:
     BInvoker();
     BInvoker(BMessage *message,
@@ -100,5 +100,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_INVOKER__H */
+#endif /* BHAPI_INVOKER_H */
 

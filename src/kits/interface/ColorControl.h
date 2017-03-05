@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,23 +28,21 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_COLOR_CONTROL__H
-#define BHAPI_COLOR_CONTROL__H
+#ifndef BHAPI_COLOR_CONTROL_H
+#define BHAPI_COLOR_CONTROL_H
 
 #include "../interface/Control.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
 class BBitmap;
-
-class IMPEXP_BHAPI BColorControl : public BControl {
+class IMPEXPBHAPI BColorControl : public BControl {
 public:
     BColorControl(BPoint leftTop, const char *name, BMessage *message = NULL, bool bufferedDrawing = false);
     virtual ~BColorControl();
 
     virtual void	SetValue(b_int32 color);
-    void		SetValue(b_rgb_color color);
-	b_rgb_color	ValueAsColor();
+    void		SetValue(bhapi::rgb_color color);
+	bhapi::rgb_color	ValueAsColor();
 
 	virtual void	Draw(BRect updateRect);
     virtual void	MouseDown(BPoint where);
@@ -61,8 +59,6 @@ private:
 	void _DrawDescription(BRect updateRect);
 };
 
-
 #endif /* __cplusplus */
-
-#endif /* BHAPI_COLOR_CONTROL__H */
+#endif /* BHAPI_COLOR_CONTROL_H */
 

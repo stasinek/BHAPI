@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_TEXT_EDITABLE__H
-#define BHAPI_TEXT_EDITABLE__H
+#ifndef BHAPI_TEXT_EDITABLE_H
+#define BHAPI_TEXT_EDITABLE_H
 
 #include "../support/SupportDefs.h"
 #include "../interface/InterfaceDefs.h"
@@ -38,7 +38,7 @@
 class BRect;
 class BMessage;
 #include "../interface/Control.h"
-class IMPEXP_BHAPI BTextEditable : public BControl {
+class IMPEXPBHAPI BTextEditable : public BControl {
 public:
 	BTextEditable(BRect frame,
 		      const char *name,
@@ -82,8 +82,8 @@ public:
 	void		Deselect();
 	bool		IsSelected() const;
 
-    void		SetTextAlignment(b_alignment alignment);
-	b_alignment	TextAlignment() const;
+    void		SetTextAlignment(bhapi::alignment alignment);
+	bhapi::alignment	TextAlignment() const;
 
 	virtual void	SetMargins(float left, float top, float right, float bottom);
 	void		GetMargins(float *left, float *top, float *right, float *bottom) const;
@@ -105,7 +105,7 @@ private:
 	char *fText;
 	bool fEditable;
 	bool fSelectable;
-	b_alignment fAlignment;
+	bhapi::alignment fAlignment;
     b_int32 fPosition;
     b_int32 fSelectStart;
     b_int32 fSelectEnd;
@@ -152,5 +152,5 @@ inline bool BTextEditable::IsSelected() const
 #endif // BHAPI_BUILD_LIBRARY
 #endif /* __cplusplus */
 
-#endif /* BHAPI_TEXT_EDITABLE__H */
+#endif /* BHAPI_TEXT_EDITABLE_H */
 

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -78,7 +78,7 @@ BPopUpMenuView::Draw(BRect updateRect)
 	{
 		SetDrawingMode(B_OP_COPY);
 		SetPenSize(1);
-		b_rgb_color borderColor = b_ui_color(B_MENU_BORDER_COLOR);
+		bhapi::rgb_color borderColor = bhapi::ui_color(B_MENU_BORDER_COLOR);
 
 		BPopUpMenuWindow *win = cast_as(Window(), BPopUpMenuWindow);
 		if(win->fMenu == NULL || win->fMenu->IsEnabled() == false) borderColor.mix(0, 0, 0, 20);
@@ -114,7 +114,7 @@ BPopUpMenuWindow::BPopUpMenuWindow(BPoint where, BPopUpMenu *menu, bool delivers
 	ResizeTo(fMenu->Frame().Width() + 4, fMenu->Frame().Height() + 4);
 	MoveTo(where);
 
-	b_rgb_color bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
+	bhapi::rgb_color bkColor = bhapi::ui_color(B_MENU_BACKGROUND_COLOR);
 	if(fMenu->IsEnabled() == false) bkColor.mix(0, 0, 0, 20);
 	SetBackgroundColor(bkColor);
 

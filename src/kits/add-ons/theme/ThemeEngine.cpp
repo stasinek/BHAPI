@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -34,7 +34,7 @@
 #include "../../interface/Point.h"
 namespace bhapi {
 extern b_theme_engine b_default_theme_engine;
-EXPORT_BHAPI b_theme_engine* get_current_theme_engine(void)
+EXPORTBHAPI b_theme_engine* get_current_theme_engine(void)
 {
     return &b_default_theme_engine;
 }

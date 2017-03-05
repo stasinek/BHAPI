@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -48,13 +48,13 @@
 
 #include <math.h>
 
-class LOCAL_BHAPI BViewState {
+class LOCALBHAPI BViewState {
 public:
-	b_drawing_mode		DrawingMode;
+	bhapi::drawing_mode		DrawingMode;
 	BPoint			PenLocation;
 	float			PenSize;
-	b_rgb_color		HighColor;
-	b_rgb_color		LowColor;
+	bhapi::rgb_color		HighColor;
+	bhapi::rgb_color		LowColor;
 	BFont			Font;
 	BRegion			*Clipping;
 	bool			SquarePointStyle;
@@ -108,7 +108,7 @@ BView::InitSelf(BRect frame, b_uint32 resizingMode, b_uint32 flags)
 	fStates = (void*)viewState;
 
 	fViewFlags = flags;
-	fViewColor = b_ui_color(B_PANEL_BACKGROUND_COLOR);
+	fViewColor = bhapi::ui_color(B_PANEL_BACKGROUND_COLOR);
 	fForceFontAliasing = false;
 	fMouseInside = false;
 	fScrollTimeStamp = 0;
@@ -1284,7 +1284,7 @@ BView::PenSize() const
 
 
 void
-BView::SetViewColor(b_rgb_color c)
+BView::SetViewColor(bhapi::rgb_color c)
 {
 	if(fViewColor != c)
 	{
@@ -1297,13 +1297,13 @@ BView::SetViewColor(b_rgb_color c)
 void
 BView::SetViewColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
 {
-	b_rgb_color c;
+	bhapi::rgb_color c;
 	c.set_to(r, g, b, a);
 	SetViewColor(c);
 }
 
 
-b_rgb_color
+bhapi::rgb_color
 BView::ViewColor() const
 {
 	return fViewColor;
@@ -1311,7 +1311,7 @@ BView::ViewColor() const
 
 
 void
-BView::SetHighColor(b_rgb_color c)
+BView::SetHighColor(bhapi::rgb_color c)
 {
 	((BViewState*)fStates)->HighColor = c;
 }
@@ -1320,13 +1320,13 @@ BView::SetHighColor(b_rgb_color c)
 void
 BView::SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
 {
-	b_rgb_color c;
+	bhapi::rgb_color c;
 	c.set_to(r, g, b, a);
 	SetHighColor(c);
 }
 
 
-b_rgb_color
+bhapi::rgb_color
 BView::HighColor() const
 {
 	return ((BViewState*)fStates)->HighColor;
@@ -1334,7 +1334,7 @@ BView::HighColor() const
 
 
 void
-BView::SetLowColor(b_rgb_color c)
+BView::SetLowColor(bhapi::rgb_color c)
 {
 	((BViewState*)fStates)->LowColor = c;
 }
@@ -1343,13 +1343,13 @@ BView::SetLowColor(b_rgb_color c)
 void
 BView::SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
 {
-	b_rgb_color c;
+	bhapi::rgb_color c;
 	c.set_to(r, g, b, a);
 	SetLowColor(c);
 }
 
 
-b_rgb_color
+bhapi::rgb_color
 BView::LowColor() const
 {
 	return ((BViewState*)fStates)->LowColor;
@@ -1357,7 +1357,7 @@ BView::LowColor() const
 
 
 void
-BView::StrokePoint(BPoint pt, b_pattern p)
+BView::StrokePoint(BPoint pt, bhapi::pattern p)
 {
 	MovePenTo(pt);
 
@@ -1378,7 +1378,7 @@ BView::StrokePoint(BPoint pt, b_pattern p)
 
 
 void
-BView::StrokePoints(const BPoint *_pts, b_int32 count, const b_uint8 *alpha, b_pattern p)
+BView::StrokePoints(const BPoint *_pts, b_int32 count, const b_uint8 *alpha, bhapi::pattern p)
 {
 	if(_pts == NULL || count <= 0) return;
 
@@ -1430,14 +1430,14 @@ BView::StrokePoints(const BPoint *_pts, b_int32 count, const b_uint8 *alpha, b_p
 
 
 void
-BView::StrokeLine(BPoint pt, b_pattern p)
+BView::StrokeLine(BPoint pt, bhapi::pattern p)
 {
 	StrokeLine(PenLocation(), pt, p);
 }
 
 
 void
-BView::StrokeLine(BPoint pt0, BPoint pt1, b_pattern p)
+BView::StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern p)
 {
 	MovePenTo(pt1);
 
@@ -1465,7 +1465,7 @@ BView::StrokeLine(BPoint pt0, BPoint pt1, b_pattern p)
 
 
 void
-BView::StrokeRect(BRect r, b_pattern p)
+BView::StrokeRect(BRect r, bhapi::pattern p)
 {
 	if(r.IsValid() == false || IsVisible() == false) return;
 
@@ -1484,7 +1484,7 @@ BView::StrokeRect(BRect r, b_pattern p)
 
 
 void
-BView::StrokePolygon(const BPolygon *aPolygon, bool closed, b_pattern p)
+BView::StrokePolygon(const BPolygon *aPolygon, bool closed, bhapi::pattern p)
 {
 	if(aPolygon == NULL || aPolygon->CountPoints() <= 0 || IsVisible() == false) return;
 
@@ -1515,7 +1515,7 @@ BView::StrokePolygon(const BPolygon *aPolygon, bool closed, b_pattern p)
 
 
 void
-BView::StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed, b_pattern p)
+BView::StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed, bhapi::pattern p)
 {
 	BPolygon aPolygon(ptArray, numPts);
 	if(aPolygon.CountPoints() <= 0) return;
@@ -1524,7 +1524,7 @@ BView::StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed, b_patte
 
 
 void
-BView::FillPolygon(const BPolygon *aPolygon, b_pattern p)
+BView::FillPolygon(const BPolygon *aPolygon, bhapi::pattern p)
 {
 	if(aPolygon == NULL || aPolygon->CountPoints() <= 0 || IsVisible() == false) return;
 
@@ -1555,7 +1555,7 @@ BView::FillPolygon(const BPolygon *aPolygon, b_pattern p)
 
 
 void
-BView::FillPolygon(const BPoint *ptArray, b_int32 numPts, b_pattern p)
+BView::FillPolygon(const BPoint *ptArray, b_int32 numPts, bhapi::pattern p)
 {
 	BPolygon aPolygon(ptArray, numPts);
 	if(aPolygon.CountPoints() <= 0) return;
@@ -1564,7 +1564,7 @@ BView::FillPolygon(const BPoint *ptArray, b_int32 numPts, b_pattern p)
 
 
 void
-BView::StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, b_pattern p)
+BView::StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p)
 {
 	BPoint pts[3] = {pt1, pt2, pt3};
 	StrokePolygon(pts, 3, true, p);
@@ -1572,7 +1572,7 @@ BView::StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, b_pattern p)
 
 
 void
-BView::FillTriangle(BPoint pt1, BPoint pt2, BPoint pt3, b_pattern p)
+BView::FillTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p)
 {
 	BPoint pts[3] = {pt1, pt2, pt3};
 	FillPolygon(pts, 3, p);
@@ -1580,7 +1580,7 @@ BView::FillTriangle(BPoint pt1, BPoint pt2, BPoint pt3, b_pattern p)
 
 
 void
-BView::StrokeRects(const BRect *rs, b_int32 count, b_pattern p)
+BView::StrokeRects(const BRect *rs, b_int32 count, bhapi::pattern p)
 {
 	if(rs == NULL || count <= 0 || IsVisible() == false) return;
 
@@ -1619,7 +1619,7 @@ BView::StrokeRects(const BRect *rs, b_int32 count, b_pattern p)
 
 
 void
-BView::FillRect(BRect r, b_pattern p)
+BView::FillRect(BRect r, bhapi::pattern p)
 {
 	if(r.IsValid() == false || IsVisible() == false) return;
 
@@ -1638,7 +1638,7 @@ BView::FillRect(BRect r, b_pattern p)
 
 
 void
-BView::FillRects(const BRect *rs, b_int32 count, b_pattern p)
+BView::FillRects(const BRect *rs, b_int32 count, bhapi::pattern p)
 {
 	if(rs == NULL || count <= 0 || IsVisible() == false) return;
 
@@ -1677,7 +1677,7 @@ BView::FillRects(const BRect *rs, b_int32 count, b_pattern p)
 
 
 void
-BView::FillRegion(const BRegion *region, b_pattern p)
+BView::FillRegion(const BRegion *region, bhapi::pattern p)
 {
 	if(region == NULL || IsVisible() == false) return;
 
@@ -1696,7 +1696,7 @@ BView::FillRegion(const BRegion *region, b_pattern p)
 
 
 void
-BView::StrokeRoundRect(BRect r, float xRadius, float yRadius, b_pattern p)
+BView::StrokeRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p)
 {
 	if(r.IsValid() == false || xRadius < 0 || yRadius < 0 || IsVisible() == false) return;
 	if(r.Width() == 0 || r.Height() == 0 || (xRadius == 0 && yRadius == 0))
@@ -1722,7 +1722,7 @@ BView::StrokeRoundRect(BRect r, float xRadius, float yRadius, b_pattern p)
 
 
 void
-BView::FillRoundRect(BRect r, float xRadius, float yRadius, b_pattern p)
+BView::FillRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p)
 {
 	if(r.IsValid() == false || xRadius < 0 || yRadius < 0 || IsVisible() == false) return;
 	if(r.Width() == 0 || r.Height() == 0 || (xRadius == 0 && yRadius == 0))
@@ -1748,7 +1748,7 @@ BView::FillRoundRect(BRect r, float xRadius, float yRadius, b_pattern p)
 
 
 void
-BView::StrokeArc(BPoint center, float xRadius, float yRadius, float start_angle, float arc_angle, b_pattern p)
+BView::StrokeArc(BPoint center, float xRadius, float yRadius, float start_angle, float arc_angle, bhapi::pattern p)
 {
 	if(xRadius <= 0 || yRadius <= 0) return;
 
@@ -1763,7 +1763,7 @@ BView::StrokeArc(BPoint center, float xRadius, float yRadius, float start_angle,
 
 
 void
-BView::StrokeArc(BRect r, float start_angle, float arc_angle, b_pattern p)
+BView::StrokeArc(BRect r, float start_angle, float arc_angle, bhapi::pattern p)
 {
 	if(r.IsValid() == false || IsVisible() == false) return;
 
@@ -1783,7 +1783,7 @@ BView::StrokeArc(BRect r, float start_angle, float arc_angle, b_pattern p)
 
 
 void
-BView::FillArc(BPoint center, float xRadius, float yRadius, float start_angle, float arc_angle, b_pattern p)
+BView::FillArc(BPoint center, float xRadius, float yRadius, float start_angle, float arc_angle, bhapi::pattern p)
 {
 	if(xRadius <= 0 || yRadius <= 0) return;
 
@@ -1798,7 +1798,7 @@ BView::FillArc(BPoint center, float xRadius, float yRadius, float start_angle, f
 
 
 void
-BView::FillArc(BRect r, float start_angle, float arc_angle, b_pattern p)
+BView::FillArc(BRect r, float start_angle, float arc_angle, bhapi::pattern p)
 {
 	if(r.IsValid() == false || IsVisible() == false) return;
 
@@ -1818,28 +1818,28 @@ BView::FillArc(BRect r, float start_angle, float arc_angle, b_pattern p)
 
 
 void
-BView::StrokeEllipse(BPoint center, float xRadius, float yRadius, b_pattern p)
+BView::StrokeEllipse(BPoint center, float xRadius, float yRadius, bhapi::pattern p)
 {
 	StrokeArc(center, xRadius, yRadius, 0, 360, p);
 }
 
 
 void
-BView::StrokeEllipse(BRect rect, b_pattern p)
+BView::StrokeEllipse(BRect rect, bhapi::pattern p)
 {
 	StrokeArc(rect, 0, 360, p);
 }
 
 
 void
-BView::FillEllipse(BPoint center, float xRadius, float yRadius, b_pattern p)
+BView::FillEllipse(BPoint center, float xRadius, float yRadius, bhapi::pattern p)
 {
 	FillArc(center, xRadius, yRadius, 0, 360, p);
 }
 
 
 void
-BView::FillEllipse(BRect rect, b_pattern p)
+BView::FillEllipse(BRect rect, bhapi::pattern p)
 {
 	FillArc(rect, 0, 360, p);
 }
@@ -1982,7 +1982,7 @@ BView::_Expose(BRegion region, b_bigtime_t when)
 
 
 void
-BView::SetDrawingMode(b_drawing_mode mode)
+BView::SetDrawingMode(bhapi::drawing_mode mode)
 {
 	if(((BViewState*)fStates)->DrawingMode != mode)
 	{
@@ -1992,7 +1992,7 @@ BView::SetDrawingMode(b_drawing_mode mode)
 }
 
 
-b_drawing_mode
+bhapi::drawing_mode
 BView::DrawingMode() const
 {
 	return ((BViewState*)fStates)->DrawingMode;
@@ -2285,8 +2285,8 @@ BView::DrawStringInPixmapMode(const char *aString, BPoint location, b_int32 leng
 					ptsLists[a / 16].AddItem((void*)&pts[i * 2]);
 				}
 
-				b_rgb_color ptColors[16];
-				b_rgb_color lcolor = LowColor();
+				bhapi::rgb_color ptColors[16];
+				bhapi::rgb_color lcolor = LowColor();
 				for(b_int32 i = 0; i < 16; i++)
 				{
 					ptColors[i].set_to(HighColor());

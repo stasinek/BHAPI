@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,22 +28,26 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_APPLICATION__H
-#define BHAPI_APPLICATION__H
+#ifndef BHAPI_APPLICATION_H
+#define BHAPI_APPLICATION_H
 
+//-----------------------------------------------------------------------------
 #include "../support/SupportDefs.h"
 #include "../app/Looper.h"
 #include "../app/MessageRunner.h"
 #include "../app/Cursor.h"
 #include "../add-ons/font/FontEngine.h"
-
+//-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 using namespace bhapi;
 class BClipboard;
 class BGraphicsEngine;
-class IMPEXP_BHAPI BApplication : public BLooper {
+//-----------------------------------------------------------------------------
+class IMPEXPBHAPI BApplication : public BLooper {
+//-----------------------------------------------------------------------------
 public:
-	BApplication(const char *signature, bool tryInterface = true);
+//-----------------------------------------------------------------------------
+    BApplication(const char *signature, bool tryInterface = true);
 	virtual ~BApplication();
 
 	// Archiving
@@ -74,16 +78,17 @@ public:
 	void			ShowCursor();
 	void			ObscureCursor();
 	bool			IsCursorHidden() const;
-
+//-----------------------------------------------------------------------------
 private:
-	friend class BLooper;
+ //-----------------------------------------------------------------------------
+    friend class BLooper;
 	friend class BMessageRunner;
     friend class BWindow;
     friend class BView;
     friend class BBitmap;
     friend class BScreen;
 
-    friend IMPEXP_BHAPI bool bhapi::update_font_families(bool);
+    friend IMPEXPBHAPI bool bhapi::update_font_families(bool);
 
 	bool fQuit;
 	char *fSignature;
@@ -109,20 +114,23 @@ private:
     BCursor fCursor;
 	bool fCursorHidden;
 	bool fCursorObscure;
+//-----------------------------------------------------------------------------
 };
+//-----------------------------------------------------------------------------
 
 #ifdef BHAPI_BUILD_LIBRARY
 inline void BApplication::SetCursor(const void *cursor)
 {
     BCursor theCursor(cursor);
-	SetCursor(&theCursor, true);
+    BApplication::SetCursor(&theCursor, true);
 }
 #endif // BHAPI_BUILD_LIBRARY
 namespace bhapi {
-extern IMPEXP_BHAPI BApplication *app;
-extern IMPEXP_BHAPI BMessenger app_messenger;
-extern IMPEXP_BHAPI BClipboard clipboard;
+extern IMPEXPBHAPI BApplication *app;
+extern IMPEXPBHAPI BMessenger app_messenger;
+extern IMPEXPBHAPI BClipboard clipboard;
 }
+//-----------------------------------------------------------------------------
 #endif /* __cplusplus */
 /*#ifdef _WIN32
 #ifdef COPYOF_SendMessage
@@ -133,5 +141,4 @@ extern IMPEXP_BHAPI BClipboard clipboard;
 #endif
 #endif
 */
-#endif /* BHAPI_APPLICATION__H */
-
+#endif /* BHAPI_APPLICATION_H */

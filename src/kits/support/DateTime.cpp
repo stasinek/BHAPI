@@ -8,13 +8,10 @@
  */
 
 #include "DateTime.h"
-
+#include "../app/Message.h"
 
 #include <time.h>
-#include <sys/time.h>
-
-#include <Message.h>
-
+// #include <sys/time.h>
 
 namespace BPrivate {
 
@@ -42,7 +39,6 @@ BTime::BTime()
 {
 }
 
-
 /*!
 	Constructs a new BTime object as a copy of \c other.
 */
@@ -51,7 +47,6 @@ BTime::BTime(const BTime& other)
 	fMicroseconds(other.fMicroseconds)
 {
 }
-
 
 /*!
 	Constructs a BTime object with \c hour \c minute, \c second, \c microsecond.
@@ -67,7 +62,6 @@ BTime::BTime(int32 hour, int32 minute, int32 second, int32 microsecond)
 	_SetTime(hour, minute, second, microsecond);
 }
 
-
 /*!
 	Constructs a new BTime object from the provided BMessage archive.
 */
@@ -80,14 +74,12 @@ BTime::BTime(const BMessage* archive)
 	archive->FindInt64("microseconds", &fMicroseconds);
 }
 
-
 /*!
 	Empty destructor.
 */
 BTime::~BTime()
 {
 }
-
 
 /*!
 	Archives the BTime object into the provided BMessage object.
@@ -96,8 +88,7 @@ BTime::~BTime()
 				\c other error codes, depending on failure to append
 				fields to the message.
 */
-status_t
-BTime::Archive(BMessage* into) const
+status_t BTime::Archive(BMessage* into) const
 {
 	if (into == NULL)
 		return B_BAD_VALUE;
@@ -109,8 +100,7 @@ BTime::Archive(BMessage* into) const
 	Returns true if the time is valid, otherwise false. A valid time can be
 	BTime(23, 59, 59, 999999) while BTime(24, 00, 01) would be invalid.
 */
-bool
-BTime::IsValid() const
+bool BTime::IsValid() const
 {
 	return fMicroseconds > -1 && fMicroseconds < kMicrosecondsPerDay;
 }
@@ -119,18 +109,17 @@ BTime::IsValid() const
 /*!
 	This is an overloaded member function, provided for convenience.
 */
-/*static*/ bool
-BTime::IsValid(const BTime& time)
+/*static*/
+bool BTime::IsValid(const BTime& time)
 {
 	return time.IsValid();
 }
 
-
 /*!
 	This is an overloaded member function, provided for convenience.
 */
-/*static*/ bool
-BTime::IsValid(int32 hour, int32 minute, int32 second, int32 microsecond)
+/*static*/
+bool BTime::IsValid(int32 hour, int32 minute, int32 second, int32 microsecond)
 {
 	return BTime(hour, minute, second, microsecond).IsValid();
 }
@@ -140,8 +129,7 @@ BTime::IsValid(int32 hour, int32 minute, int32 second, int32 microsecond)
 	Returns the current time as reported by the system depending on the given
 	time_type \c type.
 */
-BTime
-BTime::CurrentTime(time_type type)
+BTime BTime::CurrentTime(time_type type)
 {
 	struct timeval tv;
 	if (gettimeofday(&tv, NULL) != 0) {
@@ -164,12 +152,10 @@ BTime::CurrentTime(time_type type)
 		tv.tv_usec);
 }
 
-
 /*!
 	Returns a copy of the current BTime object.
 */
-BTime
-BTime::Time() const
+BTime BTime::Time() const
 {
 	return *this;
 }
@@ -179,13 +165,11 @@ BTime::Time() const
 	This is an overloaded member function, provided for convenience. Set the
 	current BTime object to the passed BTime \c time object.
 */
-bool
-BTime::SetTime(const BTime& time)
+bool BTime::SetTime(const BTime& time)
 {
 	fMicroseconds = time.fMicroseconds;
 	return IsValid();
 }
-
 
 /*!
 	Set the time to \c hour \c minute, \c second and \c microsecond.
@@ -195,43 +179,36 @@ BTime::SetTime(const BTime& time)
 	true if the time is valid; otherwise false. If the specified time is
 	invalid, the time is not set and the function returns false.
 */
-bool
-BTime::SetTime(int32 hour, int32 minute, int32 second, int32 microsecond)
+bool BTime::SetTime(int32 hour, int32 minute, int32 second, int32 microsecond)
 {
 	return _SetTime(hour, minute, second, microsecond);
 }
-
 
 /*!
 	Adds \c hours to the current time. If the passed value is negative it
 	will become earlier. Note: The time will wrap if it passes midnight.
 */
-BTime&
-BTime::AddHours(int32 hours)
+BTime& BTime::AddHours(int32 hours)
 {
 	return _AddMicroseconds(bigtime_t(hours % kHoursPerDay)
 		* kMicrosecondsPerHour);
 }
 
-
 /*!
 	Adds \c minutes to the current time. If the passed value is negative it
 	will become earlier. Note: The time will wrap if it passes midnight.
 */
-BTime&
-BTime::AddMinutes(int32 minutes)
+BTime& BTime::AddMinutes(int32 minutes)
 {
 	return _AddMicroseconds(bigtime_t(minutes % kMinutesPerDay)
 		* kMicrosecondsPerMinute);
 }
 
-
 /*!
 	Adds \c seconds to the current time. If the passed value is negative
 	it will become earlier. Note: The time will wrap if it passes midnight.
 */
-BTime&
-BTime::AddSeconds(int32 seconds)
+BTime& BTime::AddSeconds(int32 seconds)
 {
 	return _AddMicroseconds(bigtime_t(seconds % kSecondsPerDay)
 		* kMicrosecondsPerSecond);
@@ -242,83 +219,67 @@ BTime::AddSeconds(int32 seconds)
 	Adds \c milliseconds to the current time. If the passed value is negative
 	it will become earlier. Note: The time will wrap if it passes midnight.
 */
-BTime&
-BTime::AddMilliseconds(int32 milliseconds)
+BTime& BTime::AddMilliseconds(int32 milliseconds)
 {
 	return _AddMicroseconds(bigtime_t(milliseconds % kMillisecondsPerDay)
 		* 1000);
 }
 
-
 /*!
 	Adds \c microseconds to the current time. If the passed value is negative
 	it will become earlier. Note: The time will wrap if it passes midnight.
 */
-BTime&
-BTime::AddMicroseconds(int32 microseconds)
+BTime& BTime::AddMicroseconds(int32 microseconds)
 {
 	return _AddMicroseconds(microseconds);
 }
 
-
 /*!
 	Returns the hour fragment of the time.
 */
-int32
-BTime::Hour() const
+int32 BTime::Hour() const
 {
 	return int32(_Microseconds() / kMicrosecondsPerHour);
 }
 
-
 /*!
 	Returns the minute fragment of the time.
 */
-int32
-BTime::Minute() const
+int32 BTime::Minute() const
 {
 	return int32(((_Microseconds() % kMicrosecondsPerHour))
 		/ kMicrosecondsPerMinute);
 }
 
-
 /*!
 	Returns the second fragment of the time.
 */
-int32
-BTime::Second() const
+int32 BTime::Second() const
 {
 	return int32(_Microseconds() / kMicrosecondsPerSecond) % kSecondsPerMinute;
 }
 
-
 /*!
 	Returns the millisecond fragment of the time.
 */
-int32
-BTime::Millisecond() const
+int32 BTime::Millisecond() const
 {
 
 	return Microsecond() / 1000;
 }
 
-
 /*!
 	Returns the microsecond fragment of the time.
 */
-int32
-BTime::Microsecond() const
+int32 BTime::Microsecond() const
 {
 	return int32(_Microseconds() % kMicrosecondsPerSecond);
 }
 
-
-bigtime_t
-BTime::_Microseconds() const
+bigtime_t BTime::_Microseconds() const
 {
 	return fMicroseconds == -1 ? 0 : fMicroseconds;
 }
-
 
 /*!
 	Returns the difference between this time and the given BTime \c time based
@@ -329,8 +290,7 @@ BTime::_Microseconds() const
 	microseconds while its range will always be between -86400000000 and
 	86400000000 depending on diff_type \c type.
 */
-bigtime_t
-BTime::Difference(const BTime& time, diff_type type) const
+bigtime_t BTime::Difference(const BTime& time, diff_type type) const
 {
 	bigtime_t diff = time._Microseconds() - _Microseconds();
 	switch (type) {
@@ -353,69 +313,55 @@ BTime::Difference(const BTime& time, diff_type type) const
 	return diff;
 }
 
-
 /*!
 	Returns true if this time is different from \c time, otherwise false.
 */
-bool
-BTime::operator!=(const BTime& time) const
+bool BTime::operator!=(const BTime& time) const
 {
 	return fMicroseconds != time.fMicroseconds;
 }
 
-
 /*!
 	Returns true if this time is equal to \c time, otherwise false.
 */
-bool
-BTime::operator==(const BTime& time) const
+bool BTime::operator==(const BTime& time) const
 {
 	return fMicroseconds == time.fMicroseconds;
 }
 
-
 /*!
 	Returns true if this time is earlier than \c time, otherwise false.
 */
-bool
-BTime::operator<(const BTime& time) const
+boolB Time::operator<(const BTime& time) const
 {
 	return fMicroseconds < time.fMicroseconds;
 }
 
-
 /*!
 	Returns true if this time is earlier than or equal to \c time, otherwise false.
 */
-bool
-BTime::operator<=(const BTime& time) const
+bool BTime::operator<=(const BTime& time) const
 {
 	return fMicroseconds <= time.fMicroseconds;
 }
 
-
 /*!
 	Returns true if this time is later than \c time, otherwise false.
 */
-bool
-BTime::operator>(const BTime& time) const
+bool BTime::operator>(const BTime& time) const
 {
 	return fMicroseconds > time.fMicroseconds;
 }
 
-
 /*!
 	Returns true if this time is later than or equal to \c time, otherwise false.
 */
-bool
-BTime::operator>=(const BTime& time) const
+bool BTime::operator>=(const BTime& time) const
 {
 	return fMicroseconds >= time.fMicroseconds;
 }
 
-
-BTime&
-BTime::_AddMicroseconds(bigtime_t microseconds)
+BTime& BTime::_AddMicroseconds(bigtime_t microseconds)
 {
 	bigtime_t count = 0;
 	if (microseconds < 0) {
@@ -426,9 +372,7 @@ BTime::_AddMicroseconds(bigtime_t microseconds)
 	return *this;
 }
 
-
-bool
-BTime::_SetTime(bigtime_t hour, bigtime_t minute, bigtime_t second,
+bool BTime::_SetTime(bigtime_t hour, bigtime_t minute, bigtime_t second,
 	bigtime_t microsecond)
 {
 	fMicroseconds = hour * kMicrosecondsPerHour +
@@ -445,8 +389,6 @@ BTime::_SetTime(bigtime_t hour, bigtime_t minute, bigtime_t second,
 
 
 //	#pragma mark - BDate
-
-
 /*!
 	Constructs a new BDate object. IsValid() will return false.
 */
@@ -457,7 +399,6 @@ BDate::BDate()
 	fMonth(-1)
 {
 }
-
 
 /*!
 	Constructs a new BDate object as a copy of \c other.
@@ -535,8 +476,7 @@ BDate::~BDate()
 				\c other error codes, depending on failure to append
 				fields to the message.
 */
-status_t
-BDate::Archive(BMessage* into) const
+status_t BDate::Archive(BMessage* into) const
 {
 	if (into == NULL)
 		return B_BAD_VALUE;
@@ -548,15 +488,13 @@ BDate::Archive(BMessage* into) const
 	return ret;
 }
 
-
 /*!
 	Returns true if the date is valid, otherwise false.
 
 	Please note that a date before 1.1.4713 BC, a date with year 0 and a date
 	between 4.10.1582 and 15.10.1582 are considered invalid.
 */
-bool
-BDate::IsValid() const
+bool BDate::IsValid() const
 {
 	return IsValid(fYear, fMonth, fDay);
 }
@@ -565,8 +503,7 @@ BDate::IsValid() const
 /*!
 	This is an overloaded member function, provided for convenience.
 */
-/*static*/ bool
-BDate::IsValid(const BDate& date)
+/*static*/ bool BDate::IsValid(const BDate& date)
 {
 	return IsValid(date.fYear, date.fMonth, date.fDay);
 }
@@ -575,8 +512,7 @@ BDate::IsValid(const BDate& date)
 /*!
 	This is an overloaded member function, provided for convenience.
 */
-/*static*/ bool
-BDate::IsValid(int32 year, int32 month, int32 day)
+/*static*/ bool BDate::IsValid(int32 year, int32 month, int32 day)
 {
 	// no year 0 in Julian and nothing before 1.1.4713 BC
 	if (year == 0 || year < -4713)
@@ -595,23 +531,19 @@ BDate::IsValid(int32 year, int32 month, int32 day)
 	return true;
 }
 
-
 /*!
 	Returns the current date as reported by the system depending on the given
 	time_type \c type.
 */
-BDate
-BDate::CurrentDate(time_type type)
+BDate BDate::CurrentDate(time_type type)
 {
 	return BDate(time(NULL), type);
 }
 
-
 /*!
 	Returns a copy of the current BTime object.
 */
-BDate
-BDate::Date() const
+BDate BDate::Date() const
 {
 	return *this;
 }
@@ -620,12 +552,10 @@ BDate::Date() const
 /*!
 	This is an overloaded member function, provided for convenience.
 */
-bool
-BDate::SetDate(const BDate& date)
+bool BDate::SetDate(const BDate& date)
 {
 	return _SetDate(date.fYear, date.fMonth, date.fDay);
 }
-
 
 /*!
 	Set the date to \c year \c month and \c day.
@@ -633,12 +563,10 @@ BDate::SetDate(const BDate& date)
 	Returns true if the date is valid; otherwise false. If the specified date is
 	invalid, the date is not set and the function returns false.
 */
-bool
-BDate::SetDate(int32 year, int32 month, int32 day)
+bool BDate::SetDate(int32 year, int32 month, int32 day)
 {
 	return _SetDate(year, month, day);
 }
-
 
 /*!
 	This function sets the given \c year, \c month and \c day to the
@@ -646,8 +574,7 @@ BDate::SetDate(int32 year, int32 month, int32 day)
 	invalid, the values will be set to -1 for \c month and \c day, the \c year
 	will be set to 0.
 */
-void
-BDate::GetDate(int32* year, int32* month, int32* day) const
+void BDate::GetDate(int32* year, int32* month, int32* day) const
 {
 	if (year)
 		*year = fYear;
@@ -659,18 +586,15 @@ BDate::GetDate(int32* year, int32* month, int32* day) const
 		*day = fDay;
 }
 
-
 /*!
 	Adds \c days to the current date. If the passed value is negativ it will
 	become earlier. If the current date is invalid, the \c days are not added.
 */
-void
-BDate::AddDays(int32 days)
+void BDate::AddDays(int32 days)
 {
 	if (IsValid())
 		*this = JulianDayToDate(DateToJulianDay() + days);
 }
-
 
 /*!
 	Adds \c years to the current date. If the passed value is negativ it will
@@ -678,8 +602,7 @@ BDate::AddDays(int32 days)
 	The day/ month combination will be adjusted if it does not exist in the
 	resulting year, so this function will then return the latest valid date.
 */
-void
-BDate::AddYears(int32 years)
+void BDate::AddYears(int32 years)
 {
 	if (IsValid()) {
 		const int32 tmp = fYear;
@@ -692,15 +615,13 @@ BDate::AddYears(int32 years)
 	}
 }
 
-
 /*!
 	Adds \c months to the current date. If the passed value is negativ it will
 	become earlier. If the current date is invalid, the \c months are not added.
 	The day/ month combination will be adjusted if it does not exist in the
 	resulting year, so this function will then return the latest valid date.
 */
-void
-BDate::AddMonths(int32 months)
+void BDate::AddMonths(int32 months)
 {
 	if (IsValid()) {
 		const int32 tmp = fYear;
@@ -726,13 +647,11 @@ BDate::AddMonths(int32 months)
 	}
 }
 
-
 /*!
 	Returns the day fragment of the date. The return value will be in the range
 	of 1 to 31, in case the date is invalid it will be -1.
 */
-int32
-BDate::Day() const
+int32 BDate::Day() const
 {
 	return fDay;
 }
@@ -742,8 +661,7 @@ BDate::Day() const
 	Returns the year fragment of the date. If the date is invalid, the function
 	returns 0.
 */
-int32
-BDate::Year() const
+int32 BDate::Year() const
 {
 	return fYear;
 }
@@ -753,8 +671,7 @@ BDate::Year() const
 	Returns the month fragment of the date. The return value will be in the
 	range of 1 to 12, in case the date is invalid it will be -1.
 */
-int32
-BDate::Month() const
+int32 BDate::Month() const
 {
 	return fMonth;
 }
@@ -765,41 +682,32 @@ BDate::Month() const
 	If \c date is earlier the return value will be negativ. If the calculation
 	is done with an invalid date, the result is undefined.
 */
-int32
-BDate::Difference(const BDate& date) const
+int32 BDate::Difference(const BDate& date) const
 {
 	return date.DateToJulianDay() - DateToJulianDay();
 }
 
-
-void
-BDate::SetDay(int32 day)
+void BDate::SetDay(int32 day)
 {
 	fDay = day;
 }
 
-
-void
-BDate::SetMonth(int32 month)
+void BDate::SetMonth(int32 month)
 {
 	fMonth = month;
 }
 
-
-void
-BDate::SetYear(int32 year)
+void BDate::SetYear(int32 year)
 {
 	fYear = year;
 }
-
 
 /*!
 	Returns the week number of the date, if the date is invalid it will return
 	B_ERROR. Please note that this function does only work within the Gregorian
 	calendar, thus a date before 15.10.1582 will return B_ERROR.
 */
-int32
-BDate::WeekNumber() const
+int32 BDate::WeekNumber() const
 {
 	/*
 		This algorithm is taken from:

@@ -19,12 +19,12 @@ addonsdir = /boot/home/config/add-ons/etkxx/graphics
 noinst_LTLIBRARIES = libgraphics-beos.la
 
 libgraphics_beos_la_SOURCES =				\
-		etk-beos-graphics.h			\
-		etk-application.cpp			\
-		etk-drawing.cpp				\
-		etk-pixmap.cpp				\
-		etk-window.cpp				\
-		etk-beos-font.cpp
+		BHAPI_wrapper_beos-graphics.h			\
+		BHAPI_wrapper_application.cpp			\
+		BHAPI_wrapper_drawing.cpp				\
+		BHAPI_wrapper_pixmap.cpp				\
+		BHAPI_wrapper_window.cpp				\
+		BHAPI_wrapper_beos-font.cpp
 
 if ETK_GRAPHICS_BEOS_BUILT_IN
 else

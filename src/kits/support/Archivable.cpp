@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -65,7 +65,7 @@ BArchivable::Instantiate(const BMessage *from)
 }
 
 
-EXPORT_BHAPI bool b_validatb_instantiation(const BMessage *from, const char *class_name)
+EXPORTBHAPI bool b_validatb_instantiation(const BMessage *from, const char *class_name)
 {
 	if(from == NULL || class_name == NULL || *class_name == 0) return false;
 
@@ -84,14 +84,14 @@ EXPORT_BHAPI bool b_validatb_instantiation(const BMessage *from, const char *cla
 }
 
 
-EXPORT_BHAPI b_instantiation_func b_find_instantiation_func(const char *class_name)
+EXPORTBHAPI b_instantiation_func b_find_instantiation_func(const char *class_name)
 {
 	// TODO
 	return NULL;
 }
 
 
-EXPORT_BHAPI b_instantiation_func b_find_instantiation_func(const BMessage *archive_data)
+EXPORTBHAPI b_instantiation_func b_find_instantiation_func(const BMessage *archive_data)
 {
 	const char *class_name = NULL;
 	if(archive_data == NULL) return NULL;

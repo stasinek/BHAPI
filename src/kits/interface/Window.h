@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_WINDOW__H
-#define BHAPI_WINDOW__H
+#ifndef BHAPI_WINDOW_H
+#define BHAPI_WINDOW_H
 
 #include "GraphicsDefs.h"
 
@@ -98,7 +98,7 @@ class BPoint;
 #include "../interface/Rect.h"
 #include "../support/List.h"
 #include "../app/Looper.h"
-class IMPEXP_BHAPI BWindow : public BLooper {
+class IMPEXPBHAPI BWindow : public BLooper {
 public:
     BWindow(BRect frame,
 		const char *title,
@@ -175,9 +175,9 @@ public:
 	BView		*FindView(BPoint where) const;
 	BView		*CurrentFocus() const;
 
-    virtual void	SetBackgroundColor(b_rgb_color c);
+    virtual void	SetBackgroundColor(bhapi::rgb_color c);
     void		SetBackgroundColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
-	b_rgb_color	BackgroundColor() const;
+	bhapi::rgb_color	BackgroundColor() const;
 
 	void		SetTitle(const char *title);
 	const char*	Title() const;
@@ -274,5 +274,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_WINDOW__H */
+#endif /* BHAPI_WINDOW_H */
 

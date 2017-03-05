@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -156,12 +156,12 @@ BTextControl::Draw(BRect updateRect)
 
 		PushState();
 		ConstrainClippingRegion(rect);
-		SetHighColor(IsEnabled() ? b_ui_color(B_PANEL_TEXT_COLOR) : b_ui_color(B_SHINE_COLOR).disable(ViewColor()));
+		SetHighColor(IsEnabled() ? bhapi::ui_color(B_PANEL_TEXT_COLOR) : bhapi::ui_color(B_SHINE_COLOR).disable(ViewColor()));
 		SetLowColor(ViewColor());
 		DrawString(Label(), penLocation);
 		if(!IsEnabled())
 		{
-			SetHighColor(b_ui_color(B_SHADOW_COLOR).disable(ViewColor()));
+			SetHighColor(bhapi::ui_color(B_SHADOW_COLOR).disable(ViewColor()));
 			DrawString(Label(), penLocation - BPoint(1, 1));
 		}
 		PopState();
@@ -171,8 +171,8 @@ BTextControl::Draw(BRect updateRect)
 
 	if(IsFocusChanging()) return;
 
-	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
-	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
+	bhapi::rgb_color shineColor = bhapi::ui_color(B_SHINE_COLOR);
+	bhapi::rgb_color shadowColor = bhapi::ui_color(B_SHADOW_COLOR);
 
 	if(!IsEnabled())
 	{
@@ -223,7 +223,7 @@ BTextControl::GetPreferredSize(float *width, float *height)
 
 
 void
-BTextControl::SetAlignment(b_alignment forLabel, b_alignment forText)
+BTextControl::SetAlignment(bhapi::alignment forLabel, bhapi::alignment forText)
 {
 	if(forLabel == fLabelAlignment && TextAlignment() == forText) return;
 
@@ -235,7 +235,7 @@ BTextControl::SetAlignment(b_alignment forLabel, b_alignment forText)
 
 
 void
-BTextControl::GetAlignment(b_alignment *forLabel, b_alignment *forText) const
+BTextControl::GetAlignment(bhapi::alignment *forLabel, bhapi::alignment *forText) const
 {
 	if(forLabel) *forLabel = fLabelAlignment;
 	if(forText) *forText = TextAlignment();

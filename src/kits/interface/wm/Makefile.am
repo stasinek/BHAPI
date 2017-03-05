@@ -7,7 +7,7 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 		-DETK_COMPILATION 			\
 		@ETK_DEBUG_FLAGS@
 
-noinst_LTLIBRARIES = libetk-interface-wm.la
+noinst_LTLIBRARIES = libBHAPI_wrapper_interface-wm.la
 
 libetk_interface_wm_la_SOURCES =	\
 	SimpleWM.cpp			\

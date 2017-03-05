@@ -14,7 +14,7 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 		-DDATA_DIR=\"$(datadir)\"		\
 		@ETK_DEBUG_FLAGS@
 
-noinst_LTLIBRARIES = libetk-storage.la
+noinst_LTLIBRARIES = libBHAPI_wrapper_storage.la
 
 libetk_storage_la_SOURCES =		\
 		StorageDefs.h		\

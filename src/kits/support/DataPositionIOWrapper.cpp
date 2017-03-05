@@ -3,11 +3,8 @@
  * Distributed under the terms of the MIT License.
  */
 
-
-#include <DataPositionIOWrapper.h>
-
+#include "DataPositionIOWrapper.h"
 #include <stdio.h>
-
 
 BDataPositionIOWrapper::BDataPositionIOWrapper(BDataIO* io)
 	:
@@ -17,14 +14,11 @@ BDataPositionIOWrapper::BDataPositionIOWrapper(BDataIO* io)
 {
 }
 
-
 BDataPositionIOWrapper::~BDataPositionIOWrapper()
 {
 }
 
-
-ssize_t
-BDataPositionIOWrapper::Read(void* buffer, size_t size)
+ssize_t BDataPositionIOWrapper::Read(void* buffer, size_t size)
 {
 	ssize_t bytesRead = fIO->Read(buffer, size);
 	if (bytesRead > 0)
@@ -33,9 +27,7 @@ BDataPositionIOWrapper::Read(void* buffer, size_t size)
 	return bytesRead;
 }
 
-
-ssize_t
-BDataPositionIOWrapper::Write(const void* buffer, size_t size)
+ssize_t BDataPositionIOWrapper::Write(const void* buffer, size_t size)
 {
 	ssize_t bytesWritten = fIO->Write(buffer, size);
 	if (bytesWritten > 0)
@@ -44,9 +36,7 @@ BDataPositionIOWrapper::Write(const void* buffer, size_t size)
 	return bytesWritten;
 }
 
-
-ssize_t
-BDataPositionIOWrapper::ReadAt(off_t position, void* buffer, size_t size)
+ssize_t BDataPositionIOWrapper::ReadAt(off_t position, void* buffer, size_t size)
 {
 	if (position != fPosition)
 		return B_NOT_SUPPORTED;
@@ -54,9 +44,7 @@ BDataPositionIOWrapper::ReadAt(off_t position, void* buffer, size_t size)
 	return Read(buffer, size);
 }
 
-
-ssize_t
-BDataPositionIOWrapper::WriteAt(off_t position, const void* buffer,
+ssize_t BDataPositionIOWrapper::WriteAt(off_t position, const void* buffer,
 	size_t size)
 {
 	if (position != fPosition)
@@ -65,9 +53,7 @@ BDataPositionIOWrapper::WriteAt(off_t position, const void* buffer,
 	return Write(buffer, size);
 }
 
-
-off_t
-BDataPositionIOWrapper::Seek(off_t position, uint32 seekMode)
+off_t BDataPositionIOWrapper::Seek(off_t position, uint32 seekMode)
 {
 	switch (seekMode) {
 		case SEEK_CUR:
@@ -81,23 +67,17 @@ BDataPositionIOWrapper::Seek(off_t position, uint32 seekMode)
 	}
 }
 
-
-off_t
-BDataPositionIOWrapper::Position() const
+off_t BDataPositionIOWrapper::Position() const
 {
 	return fPosition;
 }
 
-
-status_t
-BDataPositionIOWrapper::SetSize(off_t size)
+status_t BDataPositionIOWrapper::SetSize(off_t size)
 {
 	return size == fPosition ? B_OK : B_NOT_SUPPORTED;
 }
 
-
-status_t
-BDataPositionIOWrapper::GetSize(off_t* size) const
+status_t BDataPositionIOWrapper::GetSize(off_t* size) const
 {
 	return B_NOT_SUPPORTED;
 }

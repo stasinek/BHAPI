@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,12 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_AUTOLOCK__H
-#define BHAPI_AUTOLOCK__H
+#ifndef BHAPI_AUTOLOCK_H
+#define BHAPI_AUTOLOCK_H
+
 #include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 
-template<class C> class BAutolock
+template<class C>
+class BAutolock
 {
 public:
     BAutolock(C *target)
@@ -69,5 +71,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_AUTOLOCK__H */
+#endif /* BHAPI_AUTOLOCK_H */
 

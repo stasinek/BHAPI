@@ -1,0 +1,48 @@
+SubDir HAIKU_TOP src kits support ;
+
+SetSubDirSupportedPlatforms haiku libbe_test ;
+
+UsePrivateHeaders app interface media shared support ;
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup ] {
+	on $(architectureObject) {
+		local architecture = $(TARGET_PACKAGING_ARCH) ;
+
+		UseBuildFeatureHeaders zlib ;
+
+		Includes [ FGristFiles ZlibCompressionAlgorithm.cpp ]
+			: [ BuildFeatureAttribute zlib : headers ] ;
+
+		MergeObject <libbe!$(architecture)>support_kit.o :
+			Architecture.cpp
+			Archivable.cpp
+			ArchivingManagers.cpp
+			Base64.cpp
+			Beep.cpp
+			BlockCache.cpp
+			BufferedDataIO.cpp
+			BufferIO.cpp
+			ByteOrder.cpp
+			CompressionAlgorithm.cpp
+			DataIO.cpp
+			DataPositionIOWrapper.cpp
+			DateTime.cpp
+			Flattenable.cpp
+			Job.cpp
+			JobQueue.cpp
+			List.cpp
+			Locker.cpp
+			PointerList.cpp
+			Referenceable.cpp
+			StopWatch.cpp
+			String.cpp
+			StringList.cpp
+			Uuid.cpp
+			ZlibCompressionAlgorithm.cpp
+			;
+
+		StaticLibrary [ MultiArchDefaultGristFiles libreferenceable.a ]
+			: : [ FGristFiles Referenceable.o ] ;
+	}
+}

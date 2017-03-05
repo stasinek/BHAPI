@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -232,8 +232,8 @@ BMenuBar::Draw(BRect updateRect)
 	BMenu::Draw(updateRect);
 	if(fBorder == B_BORDER_NONE) return;
 
-	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
-	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
+	bhapi::rgb_color shineColor = bhapi::ui_color(B_SHINE_COLOR);
+	bhapi::rgb_color shadowColor = bhapi::ui_color(B_SHADOW_COLOR);
 
 	if(!IsEnabled())
 	{

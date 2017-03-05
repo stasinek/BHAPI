@@ -12,10 +12,10 @@ top_builddir_full=`cd \$(top_builddir); pwd`
 noinst_LTLIBRARIES = libkernel-unix.la
 
 libkernel_unix_la_SOURCES =			\
-			etk-os.cpp		\
-			etk-timefuncs.cpp	\
-			etk-area.cpp		\
-			etk-image.cpp
+			BHAPI_wrapper_os.cpp		\
+			BHAPI_wrapper_timefuncs.cpp	\
+			BHAPI_wrapper_area.cpp		\
+			BHAPI_wrapper_image.cpp
 
 libkernel_unix_la_LIBADD =
 libkernel_unix_la_DEPENDENCIES =

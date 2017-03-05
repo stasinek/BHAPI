@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,58 +28,46 @@
  * --------------------------------------------------------------------------*/
 
 #include "DataIO.h"
-
 #include "../support/Errors.h"
 
-EDataIO::EDataIO()
+BDataIO::BDataIO()
 {
 }
 
-
-EDataIO::~EDataIO()
+BDataIO::~BDataIO()
 {
 }
-
 
 BPositionIO::BPositionIO()
-	: EDataIO()
+	: BDataIO()
 {
 }
-
 
 BPositionIO::~BPositionIO()
 {
 }
 
-
-b_size_t
-BPositionIO::Read(void *buffer, size_t size)
+b_size_t BPositionIO::Read(void *buffer, size_t size)
 {
 	return ReadAt(0, buffer, size);
 }
 
-
-b_size_t
-BPositionIO::Write(const void *buffer, size_t size)
+b_size_t BPositionIO::Write(const void *buffer, size_t size)
 {
 	return WriteAt(0, buffer, size);
 }
-
 
 BMallocIO::BMallocIO()
 	: BPositionIO(), fData(NULL), fBlockSize(256), fMallocSize(0), fLength(0), fPosition(0)
 {
 }
 
-
 BMallocIO::~BMallocIO()
 {
 	if(fData != NULL) free(fData);
 }
 
-
-b_size_t
-BMallocIO::ReadAt(b_int64 pos, void *buffer, size_t size)
+b_size_t BMallocIO::ReadAt(b_int64 pos, void *buffer, size_t size)
 {
 	if(buffer == NULL) return B_BAD_VALUE;
 
@@ -93,9 +81,7 @@ BMallocIO::ReadAt(b_int64 pos, void *buffer, size_t size)
 	return size;
 }
 
-
-b_size_t
-BMallocIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
+b_size_t BMallocIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
 {
 	if(buffer == NULL) return B_BAD_VALUE;
 
@@ -113,9 +99,7 @@ BMallocIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
 	return B_NO_MEMORY;
 }
 
-
-b_int64
-BMallocIO::Seek(b_int64 position, b_uint32 seek_mode)
+b_int64 BMallocIO::Seek(b_int64 position, b_uint32 seek_mode)
 {
 	b_int64 retVal = B_INT64_CONSTANT(-1);
 
@@ -151,16 +135,12 @@ BMallocIO::Seek(b_int64 position, b_uint32 seek_mode)
 	return retVal;
 }
 
-
-b_int64
-BMallocIO::Position() const
+b_int64 BMallocIO::Position() const
 {
 	return (b_int64)fPosition;
 }
 
-
-b_status_t
-BMallocIO::SetSize(b_int64 size)
+b_status_t BMallocIO::SetSize(b_int64 size)
 {
 	if(size < 0) return B_BAD_VALUE;
 	if(size == 0)
@@ -194,27 +174,20 @@ BMallocIO::SetSize(b_int64 size)
 	return B_OK;
 }
 
-
-void
-BMallocIO::SetBlockSize(size_t blocksize)
+void BMallocIO::SetBlockSize(size_t blocksize)
 {
 	fBlockSize = blocksize;
 }
 
-
-const void*
-BMallocIO::Buffer() const
+const void* BMallocIO::Buffer() const
 {
 	return((const void*)fData);
 }
 
-
-size_t
-BMallocIO::BufferLength()
+size_t BMallocIO::BufferLength()
 {
 	return fLength;
 }
-
 
 BMemoryIO::BMemoryIO(void *ptr, size_t length)
 	: BPositionIO(), fReadOnly(false), fBuffer((char*)ptr), fLen(length), fRealLen(length), fPosition(0)
@@ -222,21 +195,17 @@ BMemoryIO::BMemoryIO(void *ptr, size_t length)
 	if(fBuffer == NULL) fRealLen = fLen = 0;
 }
 
-
 BMemoryIO::BMemoryIO(const void *ptr, size_t length)
 	: BPositionIO(), fReadOnly(true), fBuffer((char*)ptr), fLen(length), fRealLen(length), fPosition(0)
 {
 	if(fBuffer == NULL) fRealLen = fLen = 0;
 }
 
-
 BMemoryIO::~BMemoryIO()
 {
 }
 
-
-b_size_t
-BMemoryIO::ReadAt(b_int64 pos, void *buffer, size_t size)
+b_size_t BMemoryIO::ReadAt(b_int64 pos, void *buffer, size_t size)
 {
 	if(buffer == NULL) return B_BAD_VALUE;
 
@@ -250,9 +219,7 @@ BMemoryIO::ReadAt(b_int64 pos, void *buffer, size_t size)
 	return size;
 }
 
-
-b_size_t
-BMemoryIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
+b_size_t BMemoryIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
 {
 	if(fReadOnly) return B_NOT_ALLOWED;
 	if(buffer == NULL) return B_BAD_VALUE;
@@ -270,9 +237,7 @@ BMemoryIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
 	return 0;
 }
 
-
-b_int64
-BMemoryIO::Seek(b_int64 position, b_uint32 seek_mode)
+b_int64 BMemoryIO::Seek(b_int64 position, b_uint32 seek_mode)
 {
 	b_int64 retVal = B_INT64_CONSTANT(-1);
 
@@ -308,19 +273,14 @@ BMemoryIO::Seek(b_int64 position, b_uint32 seek_mode)
 	return retVal;
 }
 
-
-b_int64
-BMemoryIO::Position() const
+b_int64 BMemoryIO::Position() const
 {
 	return (b_int64)fPosition;
 }
 
-
-b_status_t
-BMemoryIO::SetSize(b_int64 size)
+b_status_t BMemoryIO::SetSize(b_int64 size)
 {
 	if(size > (b_int64)fRealLen) return B_NO_MEMORY;
 	fLen = (size_t)size;
 	return B_OK;
 }
-

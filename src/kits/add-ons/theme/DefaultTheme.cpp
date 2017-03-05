@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -39,21 +39,21 @@
 
 static void get_border_margins(struct b_theme_engine *engine,
 			       const BView *view, float *left, float *top, float *right, float *bottom,
-			       b_border_style border, float border_width);
+			       bhapi::border_style border, float border_width);
 static void draw_border(struct b_theme_engine *engine,
 			BView *view, BRect frame,
-			b_border_style border, float border_width);
+			bhapi::border_style border, float border_width);
 
 static void get_scrollbar_preferred_size(struct b_theme_engine *engine,
 					 const BView *view, float *width, float *height,
-					 b_orientation direction);
+					 bhapi::orientation direction);
 static void get_scrollbar_respondent_region(struct b_theme_engine *engine,
 					    const BView *view, BRect frame,
-					    b_orientation direction, float minValue, float maxValue, float curValue, float *ratio,
+					    bhapi::orientation direction, float minValue, float maxValue, float curValue, float *ratio,
 					    BRegion *drag, BRegion *smallUp, BRegion *smallDown, BRegion *largeUp, BRegion *largeDown);
 static void draw_scrollbar(struct b_theme_engine *engine,
 			   BView *view, BRect frame,
-			   b_orientation direction, float minValue, float maxValue, float curValue,
+			   bhapi::orientation direction, float minValue, float maxValue, float curValue,
 			   bool mouse_down, BPoint mouse_pos);
 
 static void get_button_preferred_size(struct b_theme_engine *engine,
@@ -122,7 +122,7 @@ static BRect get_button_content_frame(BRect frame)
 
 static void get_border_margins(struct b_theme_engine *engine,
 			       const BView *view, float *left, float *top, float *right, float *bottom,
-			       b_border_style border, float border_width)
+			       bhapi::border_style border, float border_width)
 {
 	if(engine != &b_default_theme_engine || view == NULL ||
 	   left == NULL || top == NULL || right == NULL || bottom == NULL) return;
@@ -145,7 +145,7 @@ static void get_border_margins(struct b_theme_engine *engine,
 
 static void draw_border(struct b_theme_engine *engine,
 			BView *view, BRect frame,
-			b_border_style border, float border_width)
+			bhapi::border_style border, float border_width)
 {
 	if(engine != &b_default_theme_engine ||
 	   view == NULL || view->Window() == NULL || frame.IsValid() == false ||
@@ -167,8 +167,8 @@ static void draw_border(struct b_theme_engine *engine,
 	view->ConstrainClippingRegion(&clipping);
 	view->SetPenSize(penSize);
 
-	b_rgb_color lightColor = view->ViewColor().mix_copy(255, 255, 255, 200);
-	b_rgb_color shadowColor = view->ViewColor().mix_copy(0, 0, 0, 100);
+	bhapi::rgb_color lightColor = view->ViewColor().mix_copy(255, 255, 255, 200);
+	bhapi::rgb_color shadowColor = view->ViewColor().mix_copy(0, 0, 0, 100);
 
 	if(border == B_FANCY_BORDER)
 	{
@@ -195,18 +195,18 @@ static void draw_border(struct b_theme_engine *engine,
 
 static void get_scrollbar_preferred_size(struct b_theme_engine *engine,
 					 const BView *view, float *width, float *height,
-					 b_orientation direction)
+					 bhapi::orientation direction)
 {
 	if(engine != &b_default_theme_engine || view == NULL || (width == NULL && height == NULL)) return;
 
 	if(direction == B_HORIZONTAL)
 	{
 		if(width) *width = 100;
-		if(height) *height = b_ui_get_scrollbar_horizontal_height();
+        if(height) *height = bhapi::ui_get_scrollbar_horizontal_height();
 	}
 	else
 	{
-		if(width) *width = b_ui_get_scrollbar_vertical_width();
+        if(width) *width = bhapi::ui_get_scrollbar_vertical_width();
 		if(height) *height = 100;
 	}
 }
@@ -214,7 +214,7 @@ static void get_scrollbar_preferred_size(struct b_theme_engine *engine,
 
 static void get_scrollbar_respondent_region(struct b_theme_engine *engine,
 					    const BView *view, BRect frame,
-					    b_orientation direction, float minValue, float maxValue, float curValue, float *ratio,
+					    bhapi::orientation direction, float minValue, float maxValue, float curValue, float *ratio,
 					    BRegion *drag, BRegion *smallUp, BRegion *smallDown, BRegion *largeUp, BRegion *largeDown)
 {
 	if(engine != &b_default_theme_engine || view == NULL || frame.IsValid() == false ||
@@ -414,7 +414,7 @@ static void draw_vertical_triangle_inside(BView *view, BRect rect, bool top_to_b
 
 static void draw_scrollbar(struct b_theme_engine *engine,
 			   BView *view, BRect frame,
-			   b_orientation direction, float minValue, float maxValue, float curValue,
+			   bhapi::orientation direction, float minValue, float maxValue, float curValue,
 			   bool mouse_down, BPoint mouse_pos)
 {
 	if(engine != &b_default_theme_engine || view == NULL || view->Window() == NULL || frame.IsValid() == false ||
@@ -477,7 +477,7 @@ static void draw_scrollbar(struct b_theme_engine *engine,
 
 		if(view->IsEnabled())
 		{
-			view->SetHighColor(b_ui_color(B_BUTTON_TEXT_COLOR));
+            view->SetHighColor(bhapi::ui_color(B_BUTTON_TEXT_COLOR));
 			draw_horizontal_triangle_inside(view, iLeftR, false);
 			draw_horizontal_triangle_inside(view, iRightR, true);
 		}
@@ -543,7 +543,7 @@ static void draw_scrollbar(struct b_theme_engine *engine,
 
 		if(view->IsEnabled())
 		{
-			view->SetHighColor(b_ui_color(B_BUTTON_TEXT_COLOR));
+            view->SetHighColor(bhapi::ui_color(B_BUTTON_TEXT_COLOR));
 			draw_vertical_triangle_inside(view, iTopR, false);
 			draw_vertical_triangle_inside(view, iBottomR, true);
 		}
@@ -613,9 +613,9 @@ static void draw_button_border(struct b_theme_engine *engine,
 {
 	if(engine != &b_default_theme_engine || view == NULL || view->Window() == NULL || frame.IsValid() == false) return;
 
-	b_rgb_color viewColor = view->ViewColor();
-	b_rgb_color backgroundColor = b_ui_color(B_BUTTON_BACKGROUND_COLOR);
-	b_rgb_color borderColor = b_ui_color(B_BUTTON_BORDER_COLOR);
+	bhapi::rgb_color viewColor = view->ViewColor();
+    bhapi::rgb_color backgroundColor = bhapi::ui_color(B_BUTTON_BACKGROUND_COLOR);
+    bhapi::rgb_color borderColor = bhapi::ui_color(B_BUTTON_BORDER_COLOR);
 
 	bool button_enabled = view->IsEnabled();
 	bool button_is_focus = view->IsFocus();
@@ -631,7 +631,7 @@ static void draw_button_border(struct b_theme_engine *engine,
 		if(button_pushed)
 			backgroundColor.mix(0, 0, 0, MIX_BUTTON_PUSHED);
 		if(button_is_focus)
-			borderColor = b_ui_color((focus_flash % 2 == 0 ? B_NAVIGATION_BASE_COLOR : B_NAVIGATION_PULSE_COLOR));
+            borderColor = bhapi::ui_color((focus_flash % 2 == 0 ? B_NAVIGATION_BASE_COLOR : B_NAVIGATION_PULSE_COLOR));
 	}
 
 	view->PushState();
@@ -672,7 +672,7 @@ static void draw_button_border(struct b_theme_engine *engine,
 	// Draw shadow
 	if(button_enabled == true && button_pushed == false)
 	{
-		b_rgb_color color1, color2;
+		bhapi::rgb_color color1, color2;
 		color1 = color2 = viewColor;
 		color1.mix(0, 0, 0, MIX_SHADOW_DARKER);
 		color2.mix(0, 0, 0, MIX_SHADOW_SHINER);
@@ -718,7 +718,7 @@ static void draw_button_border(struct b_theme_engine *engine,
 	}
 	else if(button_enabled == false)
 	{
-		b_rgb_color color = borderColor.mix_copy(255, 255, 255, 127);
+		bhapi::rgb_color color = borderColor.mix_copy(255, 255, 255, 127);
 
 		view->SetHighColor(color);
 
@@ -776,7 +776,7 @@ static void draw_button_border(struct b_theme_engine *engine,
 	if(button_pushed == true)
 	{
 		// Draw push shadow
-		b_rgb_color color1, color2;
+		bhapi::rgb_color color1, color2;
 		color1 = color2 = backgroundColor;
 		color1.mix(0, 0, 0, MIX_SHADOW_DARKER);
 		color2.mix(0, 0, 0, MIX_SHADOW_SHINER);
@@ -870,7 +870,7 @@ static void clear_button_content(struct b_theme_engine *engine,
 
 	view->PushState();
 
-	b_rgb_color color = b_ui_color(B_BUTTON_BACKGROUND_COLOR);
+    bhapi::rgb_color color = bhapi::ui_color(B_BUTTON_BACKGROUND_COLOR);
 	if(button_enabled == false)
 	{
 		color = view->ViewColor();
@@ -929,10 +929,10 @@ static void draw_button_label(struct b_theme_engine *engine,
 
 	if(button_enabled == false)
 	{
-		b_rgb_color backgroundColor = view->ViewColor();
+		bhapi::rgb_color backgroundColor = view->ViewColor();
 		backgroundColor.mix(0, 0, 0, MIX_SHADOW_SHINER);
 
-		b_rgb_color textColor = view->ViewColor();
+		bhapi::rgb_color textColor = view->ViewColor();
 		textColor.mix(255, 255, 255, MIX_SHADOW_DARKER);
 
 		view->SetDrawingMode(B_OP_COPY);
@@ -950,8 +950,8 @@ static void draw_button_label(struct b_theme_engine *engine,
 	}
 	else
 	{
-		b_rgb_color backgroundColor = b_ui_color(B_BUTTON_BACKGROUND_COLOR);
-		b_rgb_color textColor = b_ui_color(B_BUTTON_TEXT_COLOR);
+        bhapi::rgb_color backgroundColor = bhapi::ui_color(B_BUTTON_BACKGROUND_COLOR);
+        bhapi::rgb_color textColor = bhapi::ui_color(B_BUTTON_TEXT_COLOR);
 
 		view->SetDrawingMode(B_OP_COPY);
 		view->SetHighColor(textColor);

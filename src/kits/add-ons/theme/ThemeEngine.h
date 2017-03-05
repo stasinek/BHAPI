@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_THEME_ENGINE__H
-#define BHAPI_THEME_ENGINE__H
+#ifndef BHAPI_THEME_ENGINE_H
+#define BHAPI_THEME_ENGINE_H
 #include "../../support/SupportDefs.h"
 #include "../../interface/InterfaceDefs.h"
 
@@ -52,22 +52,22 @@ typedef struct b_theme_engine {
 	// border
 	void (*get_border_margins)(struct b_theme_engine *engine,
                    const BView *view, float *left, float *top, float *right, float *bottom,
-				   b_border_style border, float border_width);
+				   bhapi::border_style border, float border_width);
 	void (*draw_border)(struct b_theme_engine *engine,
                 BView *view, BRect frame,
-			    b_border_style border, float border_width);
+			    bhapi::border_style border, float border_width);
 
 	// scrollbar
 	void (*get_scrollbar_preferred_size)(struct b_theme_engine *engine,
                          const BView *view, float *width, float *height,
-					     b_orientation direction);
+					     bhapi::orientation direction);
 	void (*get_scrollbar_respondent_region)(struct b_theme_engine *engine,
                         const BView *view, BRect frame,
-						b_orientation direction, float minValue, float maxValue, float curValue, float *ratio,
+						bhapi::orientation direction, float minValue, float maxValue, float curValue, float *ratio,
                         BRegion *drag, BRegion *smallUp, BRegion *smallDown, BRegion *largeUp, BRegion *largeDown);
 	void (*draw_scrollbar)(struct b_theme_engine *engine,
                    BView *view, BRect frame,
-			       b_orientation direction, float minValue, float maxValue, float curValue,
+			       bhapi::orientation direction, float minValue, float maxValue, float curValue,
                    bool mouse_down, BPoint mouse_pos);
 
 	// button
@@ -97,8 +97,8 @@ typedef struct b_theme_engine {
 	void (*destroy)(struct b_theme_engine *engine);
 } b_theme_engine;
 
-IMPEXP_BHAPI b_theme_engine *get_current_theme_engine(void);
+IMPEXPBHAPI b_theme_engine *get_current_theme_engine(void);
 } /* namespace bhapi */
 #endif /* __cplusplus */
-#endif /* BHAPI_THEME_ENGINE__H */
+#endif /* BHAPI_THEME_ENGINE_H */
 

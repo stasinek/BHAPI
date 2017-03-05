@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -56,6 +56,7 @@
 #include "../support/Errors.h"
 #include "../app/AppDefs.h"
 #include "../kernel/Debug.h"
+#include "../interface/InterfaceDefs.h"
 
 #include <time.h>
 
@@ -111,7 +112,7 @@ class BFilePanelView;
 class BFilePanelWindow;
 
 
-class LOCAL_BHAPI BFilePanelLabel : public BStringView {
+class LOCALBHAPI BFilePanelLabel : public BStringView {
 public:
 	BFilePanelLabel(BRect frame, const char *name, const char *text, b_uint32 resizeMode);
 
@@ -120,7 +121,7 @@ public:
 };
 
 
-class LOCAL_BHAPI BFilePanelListItem : public BListItem {
+class LOCALBHAPI BFilePanelListItem : public BListItem {
 public:
 	BFilePanelListItem(const char *path, BFilePanelView *panel_view, b_dev_t dev = -1);
 	virtual ~BFilePanelListItem();
@@ -150,7 +151,7 @@ private:
 };
 
 
-class LOCAL_BHAPI BFilePanelListView : public BListView {
+class LOCALBHAPI BFilePanelListView : public BListView {
 public:
 	BFilePanelListView(BRect frame, const char *name, b_list_view_type type);
 
@@ -163,7 +164,7 @@ public:
 };
 
 
-class LOCAL_BHAPI BFilePanelTitleView : public BView {
+class LOCALBHAPI BFilePanelTitleView : public BView {
 public:
 	BFilePanelTitleView(BRect parent_bounds);
 
@@ -174,7 +175,7 @@ public:
 };
 
 
-class LOCAL_BHAPI BFilePanelView : public BView {
+class LOCALBHAPI BFilePanelView : public BView {
 public:
 	BFilePanelView(BRect frame, bool allow_multiple_selection);
 	virtual ~BFilePanelView();
@@ -212,7 +213,7 @@ private:
 };
 
 
-class LOCAL_BHAPI BFilePanelWindow : public BWindow {
+class LOCALBHAPI BFilePanelWindow : public BWindow {
 public:
 	BFilePanelWindow(BFilePanel *panel,
              bhapi::file_panel_mode mode,
@@ -288,9 +289,9 @@ BFilePanelLabel::Draw(BRect updateRect)
 	PushState();
 	SetDrawingMode(B_OP_COPY);
 	SetPenSize(0);
-	SetHighColor(b_ui_color(B_SHINE_COLOR));
+    SetHighColor(bhapi::ui_color(B_SHINE_COLOR));
 	StrokeRect(Bounds());
-	SetHighColor(b_ui_color(B_SHADOW_COLOR));
+    SetHighColor(bhapi::ui_color(B_SHADOW_COLOR));
 	StrokeLine(Bounds().LeftBottom(), Bounds().RightBottom());
 	StrokeLine(Bounds().RightTop());
 	PopState();
@@ -343,8 +344,8 @@ BFilePanelListItem::~BFilePanelListItem()
 void
 BFilePanelListItem::DrawItem(BView *owner, BRect itemRect, bool drawEverything)
 {
-	b_rgb_color bkColor = (IsSelected() ? b_ui_color(B_DOCUMENT_HIGHLIGHT_COLOR): owner->ViewColor());
-	b_rgb_color fgColor = b_ui_color(B_DOCUMENT_TEXT_COLOR);
+    bhapi::rgb_color bkColor = (IsSelected() ? bhapi::ui_color(B_DOCUMENT_HIGHLIGHT_COLOR): owner->ViewColor());
+    bhapi::rgb_color fgColor = bhapi::ui_color(B_DOCUMENT_TEXT_COLOR);
 
 	if(!IsEnabled())
 	{
@@ -640,7 +641,7 @@ static void column_modified_drawing_callback(BView *owner, BRect rect, BFilePane
 	time_t timer = (time_t)(item->ModifiedTime() / B_INT64_CONSTANT(1000000));
 	struct tm *tmTime = NULL;
 
-#ifndef HAVELOCAL_BHAPITIME_R
+#ifndef HAVELOCALBHAPITIME_R
 	tmTime = localtime(&timer);
 #else
 	struct tm _tmTime;
@@ -874,9 +875,9 @@ BFilePanelTitleView::Draw(BRect updateRect)
 	if(parent == NULL) return;
 	parent->GetSortIndex(&sortIndex);
 
-	b_rgb_color textColor = b_ui_color(B_PANEL_TEXT_COLOR);
-	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
-	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
+    bhapi::rgb_color textColor = bhapi::ui_color(B_PANEL_TEXT_COLOR);
+    bhapi::rgb_color shineColor = bhapi::ui_color(B_SHINE_COLOR);
+    bhapi::rgb_color shadowColor = bhapi::ui_color(B_SHADOW_COLOR);
 	if(!IsEnabled())
 	{
 		textColor.disable(ViewColor());
@@ -1035,7 +1036,7 @@ BFilePanelWindow::BFilePanelWindow(BFilePanel *panel,
 	BRect rect = Bounds();
 
 	topView = new BView(rect, NULL, B_FOLLOW_ALL, 0);
-	topView->SetViewColor(b_ui_color(B_PANEL_BACKGROUND_COLOR));
+    topView->SetViewColor(bhapi::ui_color(B_PANEL_BACKGROUND_COLOR));
 	AddChild(topView);
 
 	menu = new BMenu(TEXT_FILE, B_ITEMS_IN_COLUMN);

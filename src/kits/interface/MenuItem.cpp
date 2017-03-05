@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,20 +27,22 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "MenuItem.h"
 #include "Menu.h"
-#include "Rect.h"
+#include "MenuItem.h"
 #include "Window.h"
+#include "Rect.h"
 
+#include "../app/Message.h"
+#include "../app/AppDefs.h"
 #include "../support/String.h"
 #include "../support/ClassInfo.h"
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"
-#include "../app/Message.h"
-#include "../app/AppDefs.h"
 
-#include <ctype.h>
+using namespace bhapi;
+
 #include <string.h>
+#include <ctype.h>
 
 BMenuItem::BMenuItem(const char *label, BMessage *message, char shortcut, b_uint32 modifiers)
 	: BArchivable(), BInvoker(message, NULL, NULL),
@@ -369,28 +371,28 @@ BMenuItem::DrawContent()
 	location.y = rect.Center().y - sHeight / 2.f;
 	location.y += fontHeight.ascent + 1;
 
-	b_rgb_color bkColor, textColor;
+	bhapi::rgb_color bkColor, textColor;
 
 	if(fEnabled && fMenu->IsEnabled())
 	{
 		if(IsSelected())
 		{
-			bkColor = b_ui_color(B_MENU_SELECTED_BACKGROUND_COLOR);
-			textColor = b_ui_color(B_MENU_SELECTED_ITEM_TEXT_COLOR);
+            bkColor = bhapi::ui_color(B_MENU_SELECTED_BACKGROUND_COLOR);
+            textColor = bhapi::ui_color(B_MENU_SELECTED_ITEM_TEXT_COLOR);
 		}
 		else
 		{
-			bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
-			textColor = b_ui_color(B_MENU_ITEM_TEXT_COLOR);
+            bkColor = bhapi::ui_color(B_MENU_BACKGROUND_COLOR);
+            textColor = bhapi::ui_color(B_MENU_ITEM_TEXT_COLOR);
 		}
 	}
 	else
 	{
-		bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
+        bkColor = bhapi::ui_color(B_MENU_BACKGROUND_COLOR);
 		if(fMenu->IsEnabled() == false) bkColor.mix(0, 0, 0, 20);
 
-		textColor = b_ui_color(B_MENU_ITEM_TEXT_COLOR);
-		b_rgb_color color = bkColor;
+        textColor = bhapi::ui_color(B_MENU_ITEM_TEXT_COLOR);
+		bhapi::rgb_color color = bkColor;
 		color.alpha = 127;
 		textColor.mix(color);
 	}
@@ -433,28 +435,28 @@ BMenuItem::Draw()
 	BRect frame = fMenu->ItemFrame(index);
 	if(index < 0 || frame.IsValid() == false) return;
 
-	b_rgb_color bkColor, textColor;
+	bhapi::rgb_color bkColor, textColor;
 
 	if(fEnabled && fMenu->IsEnabled())
 	{
 		if(IsSelected())
 		{
-			bkColor = b_ui_color(B_MENU_SELECTED_BACKGROUND_COLOR);
-			textColor = b_ui_color(B_MENU_SELECTED_ITEM_TEXT_COLOR);
+            bkColor = bhapi::ui_color(B_MENU_SELECTED_BACKGROUND_COLOR);
+            textColor = bhapi::ui_color(B_MENU_SELECTED_ITEM_TEXT_COLOR);
 		}
 		else
 		{
-			bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
-			textColor = b_ui_color(B_MENU_ITEM_TEXT_COLOR);
+            bkColor = bhapi::ui_color(B_MENU_BACKGROUND_COLOR);
+            textColor = bhapi::ui_color(B_MENU_ITEM_TEXT_COLOR);
 		}
 	}
 	else
 	{
-		bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
+        bkColor = bhapi::ui_color(B_MENU_BACKGROUND_COLOR);
 		if(fMenu->IsEnabled() == false) bkColor.mix(0, 0, 0, 20);
 
-		textColor = b_ui_color(B_MENU_ITEM_TEXT_COLOR);
-		b_rgb_color color = bkColor;
+        textColor = bhapi::ui_color(B_MENU_ITEM_TEXT_COLOR);
+		bhapi::rgb_color color = bkColor;
 		color.alpha = 127;
 		textColor.mix(color);
 	}
@@ -467,7 +469,7 @@ BMenuItem::Draw()
 
 	if(fEnabled && fMenu->IsEnabled() && IsSelected())
 	{
-		fMenu->SetHighColor(b_ui_color(B_MENU_SELECTED_BORDER_COLOR));
+        fMenu->SetHighColor(bhapi::ui_color(B_MENU_SELECTED_BORDER_COLOR));
 		fMenu->StrokeRect(frame);
 	}
 
@@ -610,15 +612,15 @@ BMenuSeparatorItem::Draw()
 	BRect frame = Frame();
 	if(Menu() == NULL || Menu()->Window() == NULL || !frame.IsValid()) return;
 
-	b_rgb_color bkColor;
+	bhapi::rgb_color bkColor;
 
 	if(IsEnabled() && Menu()->IsEnabled())
 	{
-		bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
+        bkColor = bhapi::ui_color(B_MENU_BACKGROUND_COLOR);
 	}
 	else
 	{
-		bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
+        bkColor = bhapi::ui_color(B_MENU_BACKGROUND_COLOR);
 		if(Menu()->IsEnabled() == false) bkColor.mix(0, 0, 0, 20);
 	}
 
@@ -629,8 +631,8 @@ BMenuSeparatorItem::Draw()
 	Menu()->SetHighColor(bkColor);
 	Menu()->FillRect(frame);
 
-	b_rgb_color shinerColor = Menu()->ViewColor();
-	b_rgb_color darkerColor = shinerColor;
+	bhapi::rgb_color shinerColor = Menu()->ViewColor();
+	bhapi::rgb_color darkerColor = shinerColor;
 	shinerColor.mix(255, 255, 255, 100);
 	darkerColor.mix(0, 0, 0, 100);
 

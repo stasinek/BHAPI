@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_POLYGON__H
-#define BHAPI_POLYGON__H
+#ifndef BHAPI_POLYGON_H
+#define BHAPI_POLYGON_H
 
 #include "../interface/Rect.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BPolygon {
+class IMPEXPBHAPI BPolygon {
 public:
     BPolygon(const BPoint *pts, b_int32 nPts);
     BPolygon();
@@ -81,5 +81,5 @@ inline void BPolygon::RemovePoint(b_int32 index, bool updateFrame)
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_POLYGON__H */
+#endif /* BHAPI_POLYGON_H */
 

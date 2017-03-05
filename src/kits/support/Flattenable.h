@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,13 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_FLATTENABLE__H
-#define BHAPI_FLATTENABLE__H
+#ifndef BHAPI_FLATTENABLE_H
+#define BHAPI_FLATTENABLE_H
 
 #include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BFlattenable {
+class IMPEXPBHAPI BFlattenable {
 public:
     virtual ~BFlattenable();
 
@@ -42,12 +42,12 @@ public:
     virtual b_type_code	TypeCode() const = 0;
     virtual bool		AllowsTypeCode(b_type_code code) const;
 
-	virtual b_size_t		FlattenedSize() const = 0;
+    virtual b_size_t		FlattenedSize() const = 0;
     virtual b_status_t	Flatten(void *buffer, b_size_t numBytes) = 0;
     virtual b_status_t	Unflatten(b_type_code, const void *buffer, b_size_t numBytes) = 0;
 };
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_FLATTENABLE__H */
+#endif /* BHAPI_FLATTENABLE_H */
 

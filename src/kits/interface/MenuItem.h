@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_MENU_ITEM__H
-#define BHAPI_MENU_ITEM__H
+#ifndef BHAPI_MENU_ITEM_H
+#define BHAPI_MENU_ITEM_H
 
 #include "../support/SupportDefs.h"
 
@@ -38,7 +38,7 @@ class BMessage;
 #include "../support/Archivable.h"
 #include "../interface/Rect.h"
 #include "../app/Invoker.h"
-class IMPEXP_BHAPI BMenuItem : public BArchivable, public BInvoker {
+class IMPEXPBHAPI BMenuItem : public BArchivable, public BInvoker {
 public:
     BMenuItem(const char *label, BMessage *message, char shortcut = 0, b_uint32 modifiers = 0);
 	BMenuItem(BMenu *menu, BMessage *message = NULL);
@@ -90,7 +90,7 @@ private:
 };
 
 
-class IMPEXP_BHAPI BMenuSeparatorItem : public BMenuItem {
+class IMPEXPBHAPI BMenuSeparatorItem : public BMenuItem {
 public:
 	BMenuSeparatorItem();
 	virtual ~BMenuSeparatorItem();
@@ -104,5 +104,5 @@ protected:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_MENU_ITEM__H */
+#endif /* BHAPI_MENU_ITEM_H */
 

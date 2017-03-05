@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_BYTE_ORDER__H
-#define BHAPI_BYTE_ORDER__H
+#ifndef BHAPI_BYTE_ORDER_H
+#define BHAPI_BYTE_ORDER_H
+
 #include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
 extern "C" {
@@ -42,10 +43,10 @@ typedef enum swap_action {
     B_SWAP_ALWAYS
 } swap_action;
 
-IMPEXP_BHAPI b_status_t	swap_data(b_type_code type, void *data, size_t len, swap_action action);
-IMPEXP_BHAPI bool			is_type_swapped(b_type_code type);
-IMPEXP_BHAPI float			swap_float(float value);
-IMPEXP_BHAPI double		swap_double(double value);
+IMPEXPBHAPI b_status_t	swap_data(b_type_code type, void *data, size_t len, swap_action action);
+IMPEXPBHAPI bool			is_type_swapped(b_type_code type);
+IMPEXPBHAPI float			swap_float(float value);
+IMPEXPBHAPI double			swap_double(double value);
 
 #define B_SWAP_INT16(v)		((((v) & 0xff) << 8) | (((v) >> 8) & 0xff))
 #define B_SWAP_INT32(v)		((B_SWAP_INT16((v) & 0xffff) << 16) | B_SWAP_INT16(((v) >> 16) & 0xffff))
@@ -117,5 +118,5 @@ IMPEXP_BHAPI double		swap_double(double value);
 } // extern "C"
 #endif
 
-#endif /* BHAPI_BYTE_ORDER__H */
+#endif /* BHAPI_BYTE_ORDER_H */
 

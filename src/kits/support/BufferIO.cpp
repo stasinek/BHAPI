@@ -1,3 +1,30 @@
+/* --------------------------------------------------------------------------
+ *
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku source-code, All Rights Reserved
+ *
+ * BHAPI++ library is a freeware; it may be used and distributed according to
+ * the terms of The MIT License.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+ * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * File: BufferIO.h
+ *
+ * --------------------------------------------------------------------------*/
 /*
  *	Copyright 2001-2008 Haiku, Inc. All rights reserved.
  *	Distributed under the terms of the MIT license
@@ -6,13 +33,11 @@
  *		Stefano Ceccherini, burton666@libero.it
  */
 
-
-#include <BufferIO.h>
+#include "BufferIO.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 
 BBufferIO::BBufferIO(BPositionIO* stream, size_t bufferSize, bool ownsStream)
 	:
@@ -34,7 +59,6 @@ BBufferIO::BBufferIO(BPositionIO* stream, size_t bufferSize, bool ownsStream)
 	fBuffer = (char*)malloc(fBufferSize);
 }
 
-
 BBufferIO::~BBufferIO()
 {
 	if (fBufferIsDirty) {
@@ -48,9 +72,7 @@ BBufferIO::~BBufferIO()
 		delete fStream;
 }
 
-
-ssize_t
-BBufferIO::ReadAt(off_t pos, void* buffer, size_t size)
+ssize_t BBufferIO::ReadAt(off_t pos, void* buffer, size_t size)
 {
 	// We refuse to crash, even if
 	// you were lazy and didn't give a valid
@@ -98,9 +120,7 @@ BBufferIO::ReadAt(off_t pos, void* buffer, size_t size)
 	return size;
 }
 
-
-ssize_t
-BBufferIO::WriteAt(off_t pos, const void* buffer, size_t size)
+ssize_t BBufferIO::WriteAt(off_t pos, const void* buffer, size_t size)
 {
 	if (fStream == NULL)
 		return B_NO_INIT;
@@ -144,9 +164,7 @@ BBufferIO::WriteAt(off_t pos, const void* buffer, size_t size)
 	return size;
 }
 
-
-off_t
-BBufferIO::Seek(off_t position, uint32 seekMode)
+off_t BBufferIO::Seek(off_t position, uint32 seekMode)
 {
 	if (fStream == NULL)
 		return B_NO_INIT;
@@ -179,16 +197,12 @@ BBufferIO::Seek(off_t position, uint32 seekMode)
 	return newPosition;
 }
 
-
-off_t
-BBufferIO::Position() const
+off_t BBufferIO::Position() const
 {
 	return fPosition;
 }
 
-
-status_t
-BBufferIO::SetSize(off_t size)
+status_t BBufferIO::SetSize(off_t size)
 {
 	if (fStream == NULL)
 		return B_NO_INIT;
@@ -196,9 +210,7 @@ BBufferIO::SetSize(off_t size)
 	return fStream->SetSize(size);
 }
 
-
-status_t
-BBufferIO::Flush()
+status_t BBufferIO::Flush()
 {
 	if (!fBufferIsDirty)
 		return B_OK;
@@ -211,37 +223,27 @@ BBufferIO::Flush()
 	return (bytesWritten < 0) ? bytesWritten : B_OK;
 }
 
-
-BPositionIO*
-BBufferIO::Stream() const
+BPositionIO* BBufferIO::Stream() const
 {
 	return fStream;
 }
 
-
-size_t
-BBufferIO::BufferSize() const
+size_t BBufferIO::BufferSize() const
 {
 	return fBufferSize;
 }
 
-
-bool
-BBufferIO::OwnsStream() const
+bool BBufferIO::OwnsStream() const
 {
 	return fOwnsStream;
 }
 
-
-void
-BBufferIO::SetOwnsStream(bool ownsStream)
+void BBufferIO::SetOwnsStream(bool ownsStream)
 {
 	fOwnsStream = ownsStream;
 }
 
-
-void
-BBufferIO::PrintToStream() const
+void BBufferIO::PrintToStream() const
 {
 	printf("stream %p\n", fStream);
 	printf("buffer %p\n", fBuffer);
@@ -252,10 +254,7 @@ BBufferIO::PrintToStream() const
 	printf("owns   %s\n", (fOwnsStream) ? "true" : "false");
 }
 
-
 //	#pragma mark - FBC padding
-
-
 // These functions are here to maintain future binary
 // compatibility.
 status_t BBufferIO::_Reserved_BufferIO_0(void*) { return B_ERROR; }

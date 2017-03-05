@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_POP_UP_MENU__H
-#define BHAPI_POP_UP_MENU__H
+#ifndef BHAPI_POP_UP_MENU_H
+#define BHAPI_POP_UP_MENU_H
 
 #include "../support/Locker.h"
 #include "../interface/Menu.h"
@@ -36,7 +36,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BPopUpMenu : public BMenu {
+class IMPEXPBHAPI BPopUpMenu : public BMenu {
 public:
     BPopUpMenu(const char *title,
 		   bool radioMode = true,
@@ -67,5 +67,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_POP_UP_MENU__H */
+#endif /* BHAPI_POP_UP_MENU_H */
 

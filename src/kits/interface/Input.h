@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_INPUT__H
-#define BHAPI_INPUT__H
+#ifndef BHAPI_INPUT_H
+#define BHAPI_INPUT_H
 
 enum {
     B_INPUT_METHOD_STARTED = 0,
@@ -37,5 +37,5 @@ enum {
     B_INPUT_METHOD_LOCATION_REQUEST
 };
 
-#endif /* BHAPI_INPUT__H */
+#endif /* BHAPI_INPUT_H */
 

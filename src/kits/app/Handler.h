@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_HANDLER__H
-#define BHAPI_HANDLER__H
+#ifndef BHAPI_HANDLER_H
+#define BHAPI_HANDLER_H
 #include "../support/SupportDefs.h"
 #include "../private/PrivateHandler.h"
 
@@ -47,7 +47,7 @@ class BToken;
 class BList;
 #include "../support/Archivable.h"
 using namespace bhapi;
-class IMPEXP_BHAPI BHandler : public BArchivable {
+class IMPEXPBHAPI BHandler : public BArchivable {
 public:
     BHandler(const char *name = NULL);
 	// Archiving
@@ -110,4 +110,4 @@ private:
 	BList *fFilters;
 };
 #endif /* __cplusplus */
-#endif /* BHAPI_HANDLER__H */
+#endif /* BHAPI_HANDLER_H */

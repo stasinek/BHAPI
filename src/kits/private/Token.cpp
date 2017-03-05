@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -34,14 +34,14 @@
 #include "../support/Locker.h"
 #include "../support/List.h"
 
-struct LOCAL_BHAPI _bhapi_token_t {
+struct LOCALBHAPI _bhapi_token_t {
 	b_uint64 vitalities;
 	b_bigtime_t time_stamp;
 	void *data;
 };
 
 
-class LOCAL_BHAPI BTokensDepotPrivateData : public BList {
+class LOCALBHAPI BTokensDepotPrivateData : public BList {
 public:
 	BTokensDepotPrivateData();
 	virtual ~BTokensDepotPrivateData();

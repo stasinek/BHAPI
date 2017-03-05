@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  * 
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_TAB_VIEW__H
-#define BHAPI_TAB_VIEW__H
+#ifndef BHAPI_TAB_VIEW_H
+#define BHAPI_TAB_VIEW_H
 
 #include "../support/List.h"
 #include "../interface/View.h"
@@ -44,7 +44,7 @@ typedef enum {
 class BTabView;
 
 
-class IMPEXP_BHAPI BTab : public BArchivable {
+class IMPEXPBHAPI BTab : public BArchivable {
 public:
     BTab(BView *targetView = NULL);
     virtual ~BTab();
@@ -84,10 +84,10 @@ private:
 };
 
 
-class IMPEXP_BHAPI BTabView : public BView {
+class IMPEXPBHAPI BTabView : public BView {
 public:
     BTabView(BRect frame, const char *name,
-		 b_button_width tabWidth = B_WIDTH_AS_USUAL,
+		 bhapi::button_width tabWidth = B_WIDTH_AS_USUAL,
          b_uint32 resizeMode = B_FOLLOW_ALL,
          b_uint32 flags = B_WILL_DRAW | B_NAVIGABLE_JUMP | B_FRAME_EVENTS | B_NAVIGABLE);
     virtual ~BTabView();
@@ -108,8 +108,8 @@ public:
 	virtual BRect		DrawTabs();
 	virtual void		DrawBox(BRect selTabRect);
 
-    virtual void		SetTabWidth(b_button_width tabWidth);
-	b_button_width		TabWidth() const;
+    virtual void		SetTabWidth(bhapi::button_width tabWidth);
+    bhapi::button_width		TabWidth() const;
 
 	virtual void		SetTabHeight(float tabHeight);
 	float			TabHeight() const;
@@ -124,7 +124,7 @@ private:
     friend class BTab;
 
 	BList fTabs;
-	b_button_width fTabWidth;
+    bhapi::button_width fTabWidth;
 	float fTabHeight;
     b_int32 fSelection;
 
@@ -133,5 +133,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_TAB_VIEW__H */
+#endif /* BHAPI_TAB_VIEW_H */
 

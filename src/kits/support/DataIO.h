@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,24 +27,22 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_DATA_IO__H
-#define BHAPI_DATA_IO__H
+#ifndef BHAPI_DATA_IO_H
+#define BHAPI_DATA_IO_H
 
 #include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
-
-
-class IMPEXP_BHAPI EDataIO {
+class IMPEXPBHAPI BDataIO {
 public:
-	EDataIO();
-	virtual ~EDataIO();
+    BDataIO();
+    virtual ~BDataIO();
 
 	virtual b_size_t		Read(void *buffer, size_t size) = 0;
 	virtual b_size_t		Write(const void *buffer, size_t size) = 0;
 };
 
 
-class IMPEXP_BHAPI BPositionIO : public EDataIO {
+class IMPEXPBHAPI BPositionIO : public BDataIO {
 public:
     BPositionIO();
     virtual ~BPositionIO();
@@ -61,7 +59,7 @@ public:
 };
 
 
-class IMPEXP_BHAPI BMallocIO : public BPositionIO {
+class IMPEXPBHAPI BMallocIO : public BPositionIO {
 public:
     BMallocIO();
     virtual ~BMallocIO();
@@ -85,8 +83,7 @@ private:
 	size_t fPosition;
 };
 
-
-class IMPEXP_BHAPI BMemoryIO : public BPositionIO {
+class IMPEXPBHAPI BMemoryIO : public BPositionIO {
 public:
     BMemoryIO(void *ptr, size_t length);
     BMemoryIO(const void *ptr, size_t length);
@@ -107,8 +104,6 @@ private:
 	size_t fPosition;
 };
 
-
 #endif /* __cplusplus */
-
-#endif /* BHAPI_DATA_IO__H */
+#endif /* BHAPI_DATA_IO_H */
 

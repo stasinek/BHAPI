@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,10 +28,9 @@
  * --------------------------------------------------------------------------*/
 
 #include "ByteOrder.h"
-
 #include "../support/Errors.h"
 
-IMPEXP_BHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, bhapi::swap_action action)
+IMPEXPBHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, bhapi::swap_action action)
 {
 	b_status_t retVal = B_BAD_VALUE;
 
@@ -126,7 +125,7 @@ IMPEXP_BHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, b
 }
 
 
-IMPEXP_BHAPI bool bhapi::is_type_swapped(b_type_code type)
+IMPEXPBHAPI bool bhapi::is_type_swapped(b_type_code type)
 {
 	switch(type)
 	{
@@ -161,7 +160,7 @@ IMPEXP_BHAPI bool bhapi::is_type_swapped(b_type_code type)
 }
 
 
-IMPEXP_BHAPI float b_swap_float(float value)
+IMPEXPBHAPI float b_swap_float(float value)
 {
 #if SIZEOF_FLOAT == 4
 	b_int32 v;
@@ -175,7 +174,7 @@ IMPEXP_BHAPI float b_swap_float(float value)
 }
 
 
-IMPEXP_BHAPI double b_swap_double(double value)
+IMPEXPBHAPI double b_swap_double(double value)
 {
 #if SIZEOF_DOUBLE == 8
 	b_int64 v;

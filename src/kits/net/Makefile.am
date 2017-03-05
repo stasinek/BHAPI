@@ -7,7 +7,7 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 		-DETK_COMPILATION 			\
 		@ETK_DEBUG_FLAGS@
 
-noinst_LTLIBRARIES = libetk-net.la
+noinst_LTLIBRARIES = libBHAPI_wrapper_net.la
 
 libetk_net_la_SOURCES =		\
 	NetAddress.cpp		\

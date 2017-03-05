@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -43,28 +43,31 @@
 #include "../app/Looper.h"
 #include "../support/Errors.h"
 
+//-----------------------------------------------------------------------------
 #include "Application.h"
 #include "Clipboard.h"
+//-----------------------------------------------------------------------------
 
-LOCAL_BHAPI BCursor _B_CURSOR_SYSTEM_DEFAULT(NULL);
+LOCALBHAPI BCursor _B_CURSOR_SYSTEM_DEFAULT(NULL);
 
-EXPORT_BHAPI BApplication *bhapi::app = NULL;
-EXPORT_BHAPI BMessenger bhapi::app_messenger;
-EXPORT_BHAPI BClipboard bhapi::clipboard("system");
-EXPORT_BHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT = &_B_CURSOR_SYSTEM_DEFAULT;
+EXPORTBHAPI BApplication *bhapi::app = NULL;
+EXPORTBHAPI BMessenger bhapi::app_messenger;
+EXPORTBHAPI BClipboard bhapi::clipboard("system");
+EXPORTBHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT = &_B_CURSOR_SYSTEM_DEFAULT;
 
 #ifdef BHAPI_BUILD_LIBRARY
-EXPORT_BHAPI BList BApplication::sRunnerList;
-EXPORT_BHAPI b_bigtime_t BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(0);
+EXPORTBHAPI BList BApplication::sRunnerList;
+EXPORTBHAPI b_bigtime_t BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(0);
 #endif // BHAPI_BUILD_LIBRARY
 
+//-----------------------------------------------------------------------------
 extern bool bhapi::font_init(void);
 extern void bhapi::font_cancel(void);
 extern bool bhapi::font_lock(void);
 extern void bhapi::font_unlock(void);
+//-----------------------------------------------------------------------------
 
-void
-BApplication::Init(const char *signature, bool tryInterface)
+void BApplication::Init(const char *signature, bool tryInterface)
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
 
@@ -89,7 +92,7 @@ BApplication::Init(const char *signature, bool tryInterface)
 
 	if(tryInterface) InitGraphicsEngine();
 }
-
+//-----------------------------------------------------------------------------
 
 BApplication::BApplication(const char *signature, bool tryInterface)
 	: BLooper(signature), fQuit(false), fSignature(NULL),
@@ -99,7 +102,7 @@ BApplication::BApplication(const char *signature, bool tryInterface)
 {
 	Init(signature, tryInterface);
 }
-
+//-----------------------------------------------------------------------------
 
 BApplication::~BApplication()
 {
@@ -145,7 +148,7 @@ BApplication::~BApplication()
 
 	hLocker->Unlock();
 }
-
+//-----------------------------------------------------------------------------
 
 BApplication::BApplication(const BMessage *from)
 	: BLooper(NULL, B_DISPLAY_PRIORITY), fQuit(false), fSignature(NULL),
@@ -156,10 +159,9 @@ BApplication::BApplication(const BMessage *from)
 	// TODO
 	Init(NULL, !(from == NULL || from->HasBool("BHAPI:has_gui") == false));
 }
+//-----------------------------------------------------------------------------
 
-
-b_status_t
-BApplication::Archive(BMessage *into, bool deep) const
+b_status_t BApplication::Archive(BMessage *into, bool deep) const
 {
 	if(!into) return B_ERROR;
 
@@ -170,19 +172,17 @@ BApplication::Archive(BMessage *into, bool deep) const
 
 	return B_OK;
 }
+//-----------------------------------------------------------------------------
 
-
-BArchivable*
-BApplication::Instantiate(const BMessage *from)
+BArchivable*BApplication::Instantiate(const BMessage *from)
 {
 	if(b_validatb_instantiation(from, "BApplication"))
 		return new BApplication(from);
 	return NULL;
 }
+//-----------------------------------------------------------------------------
 
-
-void*
-BApplication::Run()
+void *BApplication::Run()
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
 
@@ -222,7 +222,7 @@ BApplication::Run()
 
 	return NULL;
 }
-
+//-----------------------------------------------------------------------------
 
 void BApplication::dispatch_message_runners()
 {
@@ -266,17 +266,15 @@ void BApplication::dispatch_message_runners()
 
 	hLocker->Unlock();
 }
+//-----------------------------------------------------------------------------
 
-
-bool
-BApplication::QuitRequested()
+bool BApplication::QuitRequested()
 {
     return(this->quit_all_loopers(false));
 }
+//-----------------------------------------------------------------------------
 
-
-void
-BApplication::DispatchMessage(BMessage *msg, BHandler *target)
+void BApplication::DispatchMessage(BMessage *msg, BHandler *target)
 {
 	if(fQuit) return;
 
@@ -317,10 +315,9 @@ BApplication::DispatchMessage(BMessage *msg, BHandler *target)
 		BLooper::DispatchMessage(msg, target);
 	}
 }
+//-----------------------------------------------------------------------------
 
-
-void
-BApplication::Quit()
+void BApplication::Quit()
 {
 	if(!IsLockedByCurrentThread())
 		BHAPI_ERROR("[APP]: %s --- Application must LOCKED before this call!", __PRETTY_FUNCTION__);
@@ -341,22 +338,19 @@ BApplication::Quit()
 
 	BHAPI_DEBUG("[APP]: Application Quit.");
 }
+//-----------------------------------------------------------------------------
 
-
-void
-BApplication::ReadyToRun()
+void BApplication::ReadyToRun()
 {
 }
+//-----------------------------------------------------------------------------
 
-
-void
-BApplication::Pulse()
+void BApplication::Pulse()
 {
 }
+//-----------------------------------------------------------------------------
 
-
-void
-BApplication::SetPulseRate(b_bigtime_t rate)
+void BApplication::SetPulseRate(b_bigtime_t rate)
 {
 	if(fPulseRunner == NULL)
 	{
@@ -374,18 +368,16 @@ BApplication::SetPulseRate(b_bigtime_t rate)
 		BHAPI_DEBUG("[APP]: %s --- Unable to set pulse rate.", __PRETTY_FUNCTION__);
 	}
 }
+//-----------------------------------------------------------------------------
 
-
-b_bigtime_t
-BApplication::PulseRate() const
+b_bigtime_t BApplication::PulseRate() const
 {
 	if(fPulseRunner == NULL) return B_INT64_CONSTANT(-1);
 	return fPulseRate;
 }
+//-----------------------------------------------------------------------------
 
-
-void
-BApplication::MessageReceived(BMessage *msg)
+void BApplication::MessageReceived(BMessage *msg)
 {
 	switch(msg->what)
 	{
@@ -437,18 +429,18 @@ BApplication::MessageReceived(BMessage *msg)
 
 
 #if 0
-b_int32
-BApplication::CountLoopers()
+//-----------------------------------------------------------------------------
+
+b_int32 BApplication::CountLoopers()
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
 	return BLooper::sLooperList.CountItems();
 }
+//-----------------------------------------------------------------------------
 
-
-BLooper*
-BApplication::LooperAt(b_int32 index)
+BLooper* BApplication::LooperAt(b_int32 index)
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
@@ -457,9 +449,9 @@ BApplication::LooperAt(b_int32 index)
 }
 #endif
 
+//-----------------------------------------------------------------------------
 
-bool
-BApplication::quit_all_loopers(bool force)
+bool BApplication::quit_all_loopers(bool force)
 {
 	b_int32 index;
 	BLooper *looper = NULL;
@@ -521,22 +513,22 @@ BApplication::quit_all_loopers(bool force)
 
 	return true;
 }
+//-----------------------------------------------------------------------------
 
-
-const char*
-BApplication::Signature() const
+const char* BApplication::Signature() const
 {
 	return fSignature;
 }
 
+//-----------------------------------------------------------------------------
 namespace bhapi {
 #ifndef BHAPI_GRAPHICS_NONE_BUILT_IN
 extern BGraphicsEngine* get_built_in_graphics_engine();
 #endif
 } /* namespace */
+//-----------------------------------------------------------------------------
 
-void
-BApplication::InitGraphicsEngine()
+void BApplication::InitGraphicsEngine()
 {
 	bool hasEngine = false;
 
@@ -639,10 +631,9 @@ BApplication::InitGraphicsEngine()
 		BHAPI_WARNING("[APP]: No graphics engine found.");
 	}
 }
+//-----------------------------------------------------------------------------
 
-
-bool
-BApplication::AddModalWindow(BMessenger &msgr)
+bool BApplication::AddModalWindow(BMessenger &msgr)
 {
 	BMessenger *aMsgr = new BMessenger(msgr);
 	if(aMsgr == NULL || aMsgr->IsValid() == false)
@@ -673,10 +664,9 @@ BApplication::AddModalWindow(BMessenger &msgr)
 
 	return true;
 }
+//-----------------------------------------------------------------------------
 
-
-bool
-BApplication::RemoveModalWindow(BMessenger &msgr)
+bool BApplication::RemoveModalWindow(BMessenger &msgr)
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
 	hLocker->Lock();
@@ -695,10 +685,9 @@ BApplication::RemoveModalWindow(BMessenger &msgr)
 
 	return false;
 }
+//-----------------------------------------------------------------------------
 
-
-void
-BApplication::SetCursor(const BCursor *cursor, bool sync)
+void BApplication::SetCursor(const BCursor *cursor, bool sync)
 {
 	if(cursor == NULL || cursor->DataLength() == 0) return;
 
@@ -715,10 +704,9 @@ BApplication::SetCursor(const BCursor *cursor, bool sync)
 		if(fGraphicsEngine && !fCursorHidden) fGraphicsEngine->SetCursor(fCursor.Data());
 	}
 }
+//-----------------------------------------------------------------------------
 
-
-void
-BApplication::HideCursor()
+void BApplication::HideCursor()
 {
 	if(bhapi::get_current_thread_id() != Thread())
 	{
@@ -733,10 +721,9 @@ BApplication::HideCursor()
 		if(fGraphicsEngine) fGraphicsEngine->SetCursor(NULL);
 	}
 }
+//-----------------------------------------------------------------------------
 
-
-void
-BApplication::ShowCursor()
+void BApplication::ShowCursor()
 {
 	if(bhapi::get_current_thread_id() != Thread())
 	{
@@ -751,10 +738,9 @@ BApplication::ShowCursor()
 		if(fGraphicsEngine) fGraphicsEngine->SetCursor(fCursor.Data());
 	}
 }
+//-----------------------------------------------------------------------------
 
-
-void
-BApplication::ObscureCursor()
+void BApplication::ObscureCursor()
 {
 	if(bhapi::get_current_thread_id() != Thread())
 	{
@@ -768,11 +754,10 @@ BApplication::ObscureCursor()
 		if(fGraphicsEngine) fGraphicsEngine->SetCursor(NULL);
 	}
 }
+//-----------------------------------------------------------------------------
 
-
-bool
-BApplication::IsCursorHidden() const
+bool BApplication::IsCursorHidden() const
 {
 	return fCursorHidden;
 }
-
+//-----------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_LAYOUT__H
-#define BHAPI_LAYOUT__H
+#ifndef BHAPI_LAYOUT_H
+#define BHAPI_LAYOUT_H
 
 #include "../../support/List.h"
 #include "../../interface/InterfaceDefs.h"
@@ -40,7 +40,7 @@ class BLayoutItem;
 class BLayoutForm;
 
 
-class IMPEXP_BHAPI BLayoutContainer {
+class IMPEXPBHAPI BLayoutContainer {
 public:
 	BLayoutContainer();
 	virtual ~BLayoutContainer();
@@ -70,7 +70,7 @@ private:
 };
 
 
-class IMPEXP_BHAPI BLayoutItem : public BLayoutContainer {
+class IMPEXPBHAPI BLayoutItem : public BLayoutContainer {
 public:
 	BLayoutItem(BRect frame, b_uint32 resizingMode);
 	virtual ~BLayoutItem();
@@ -134,7 +134,7 @@ private:
 };
 
 
-class IMPEXP_BHAPI BLayoutForm : public BLayoutItem {
+class IMPEXPBHAPI BLayoutForm : public BLayoutItem {
 public:
 	BLayoutForm(BRect frame, b_uint32 resizingMode, b_int32 rows, b_int32 columns);
 	virtual ~BLayoutForm();
@@ -145,5 +145,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_LAYOUT__H */
+#endif /* BHAPI_LAYOUT_H */
 

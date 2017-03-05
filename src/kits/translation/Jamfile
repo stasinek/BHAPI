@@ -1,0 +1,32 @@
+SubDir HAIKU_TOP src kits translation ;
+
+SetSubDirSupportedPlatformsBeOSCompatible ;
+AddSubDirSupportedPlatforms libbe_test ;
+
+if $(TARGET_PLATFORM) != haiku {
+	UsePublicHeaders translation ;
+}
+
+UsePrivateHeaders translation textencoding ;
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup ] {
+	on $(architectureObject) {
+		UsePrivateSystemHeaders ;
+
+		SharedLibrary [ MultiArchDefaultGristFiles libtranslation.so ] :
+			BitmapStream.cpp
+			FuncTranslator.cpp
+			TranslationUtils.cpp
+			Translator.cpp
+			TranslatorRoster.cpp
+
+			: be textencoding [ TargetLibstdc++ ]
+			;
+	}
+}
+
+if $(TARGET_PLATFORM) = libbe_test {
+	HaikuInstall install-test-apps : $(HAIKU_APP_TEST_LIB_DIR)
+		: libtranslation.so : tests!apps ;
+}

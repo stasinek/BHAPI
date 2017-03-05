@@ -32,16 +32,16 @@ lib_LTLIBRARIES = libetkxx.la
 libetkxx_la_SOURCES = ETKBuild.h ETKBuild.cpp
 
 ETK_OBJECTS =					\
-	private/libetk-private.la		\
-	kernel/libetk-kernel.la			\
-	support/libetk-support.la		\
-	storage/libetk-storage.la		\
-	xml/libetk-xml.la			\
-	app/libetk-app.la			\
-	render/libetk-render.la			\
-	interface/libetk-interface.la		\
-	net/libetk-net.la			\
-	add-ons/libetk-add-ons.la
+	private/libBHAPI_wrapper_private.la		\
+	kernel/libBHAPI_wrapper_kernel.la			\
+	support/libBHAPI_wrapper_support.la		\
+	storage/libBHAPI_wrapper_storage.la		\
+	xml/libBHAPI_wrapper_xml.la			\
+	app/libBHAPI_wrapper_app.la			\
+	render/libBHAPI_wrapper_render.la			\
+	interface/libBHAPI_wrapper_interface.la		\
+	net/libBHAPI_wrapper_net.la			\
+	add-ons/libBHAPI_wrapper_add-ons.la
 
 etkxxincludedir=$(includedir)/etkxx/etk
 etkxxinclude_HEADERS =				\

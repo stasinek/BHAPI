@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  * 
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  * 
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,14 +28,14 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_ARC_GENERATOR__H
-#define BHAPI_ARC_GENERATOR__H
+#ifndef BHAPI_ARC_GENERATOR_H
+#define BHAPI_ARC_GENERATOR_H
 #include "../support/SupportDefs.h"
 #include "../interface/Rect.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BArcGenerator {
+class IMPEXPBHAPI BArcGenerator {
 public:
     BArcGenerator(BPoint center, float xRadius, float yRadius, BPoint start, BPoint end);
 
@@ -70,5 +70,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_ARC_GENERATOR__H */
+#endif /* BHAPI_ARC_GENERATOR_H */
 

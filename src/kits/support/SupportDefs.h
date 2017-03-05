@@ -1,6 +1,6 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_SUPPORT_DEFS__H
-#define BHAPI_SUPPORT_DEFS__H
+#ifndef BHAPI_SUPPORT_DEFS_H
+#define BHAPI_SUPPORT_DEFS_H
 
 #ifndef UNICODE
 #define UNICODE
@@ -48,6 +48,8 @@
 #define MACOS
 #endif
 
+#include "TypeConstants.h"
+
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -55,6 +57,11 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <math.h>
+#include <algorithm>
+#ifndef _MSC_VER
+#include <sys/cdefs.h>
+#include <sys/types.h>
+#endif
 
 #define 	max_c(a, b)   ((a)>(b)?(a):(b))
 // 	Returns the maximum of values a and b. More...
@@ -66,7 +73,7 @@
 #define SIZEOF_LONG 4
 /* The size of a `long long', as computed by sizeof. */
 #if _MSC_VER > 0x4b0
-	#define SIZEOF_LONG_LONG 8
+    #define SIZEOF_LONG_LONG 8
 #endif
 /* The size of a `short', as computed by sizeof. */
 #define SIZEOF_SHORT 2
@@ -78,9 +85,9 @@
 /* If using the C implementation of alloca, define if you know the
    direction of stack growth for your system; otherwise it will be
    automatically deduced at run-time.
-	STACK_DIRECTION > 0 => grows toward higher addresses
-	STACK_DIRECTION < 0 => grows toward lower addresses
-	STACK_DIRECTION = 0 => direction of growth unknown */
+    STACK_DIRECTION > 0 => grows toward higher addresses
+    STACK_DIRECTION < 0 => grows toward lower addresses
+    STACK_DIRECTION = 0 => direction of growth unknown */
 /* #undef STACK_DIRECTION */
 
 /* Define to 1 if you have the ANSI C header files. */
@@ -103,30 +110,43 @@
 #define B_MAXUINT32 UINT_MAX
 #define B_MAXINT32 INT_MAX
 #ifdef _MSC_VER
-    #define B_MAXUINT64 ULLONG_MAX
-    #define B_MAXINT64   LLONG_MAX
-    #define B_MININT64   LLONG_MIN
+#  define strcasecmp _stricmp
+#endif /* _MSC_VER */
+/* Long Long type and related issues */
+#ifdef _MSC_VER /* MSC compiler */
+#	ifndef LLONG_MAX
+#		define LLONG_MAX    9223372036854775807I64
+#	endif
+#	ifndef LLONG_MIN
+#		define LLONG_MIN    (-LLONG_MAX - 1I64)
+#	endif
+#	ifndef ULLONG_MAX
+#		define ULLONG_MAX LLONG_MAX
+#	endif
+#	define B_MAXUINT64 ULLONG_MAX
+#	define B_MAXINT64   LLONG_MAX
+#	define B_MININT64   LLONG_MIN
 #endif
 #ifdef __GNUC__
-    #define B_MAXUINT64 __LONG_LONG_MAX__
-    #define B_MAXINT64  __LONG_LONG_MAX__
-    #define B_MININT64  __LONG_LONG_MIN__
+#	define B_MAXUINT64 __LONG_LONG_MAX__
+#	define B_MAXINT64  __LONG_LONG_MAX__
+#	define B_MININT64  __LONG_LONG_MIN__
 #else
-    #ifndef B_MAXINT64
-    #define B_MAXUINT64 ULLONG_MAX
-    #define B_MAXINT64   LLONG_MAX
-    #define B_MININT64   LLONG_MIN
-    #endif // B_MAXINT64
+#	ifndef B_MAXINT64
+#	define B_MAXUINT64 ULLONG_MAX
+#	define B_MAXINT64   LLONG_MAX
+#	define B_MININT64   LLONG_MIN
+#	endif // B_MAXINT64
 #endif
 
 #include <float.h>
 #define B_MAXFLOAT FLT_MAX
 #define B_MINFLOAT FLT_MIN
 #ifndef SIZEOF_FLOAT
-    #define SIZEOF_FLOAT 4
+#	define SIZEOF_FLOAT 4
 #endif
 #ifndef SIZEOF_DOUBLE
-    #define SIZEOF_DOUBLE 8
+#	define SIZEOF_DOUBLE 8
 #endif
 
 typedef unsigned __int32 b_unichar32;
@@ -136,15 +156,7 @@ typedef __int64     b_thread_id;
 typedef size_t      b_address_t;
 typedef size_t      b_size_t;
 
-typedef	__int8 int8;
-typedef	unsigned __int8 uint8;
-typedef	__int16 int16;
-typedef	unsigned __int16 uint16;
-typedef	__int32 int32;
-typedef	unsigned __int32 uint32;
-typedef	__int64 int64;
-typedef	unsigned __int64 uint64;
-
+/*
 typedef	__int8 int8_t;
 typedef	unsigned __int8 uint8_t;
 typedef	__int16 int16_t;
@@ -153,6 +165,16 @@ typedef	__int32 int32_t;
 typedef	unsigned __int32 uint32_t;
 typedef	__int64 int64_t;
 typedef	unsigned __int64 uint64_t;
+*/
+
+typedef	__int8 int8;
+typedef	unsigned __int8 uint8;
+typedef	__int16 int16;
+typedef	unsigned __int16 uint16;
+typedef	__int32 int32;
+typedef	unsigned __int32 uint32;
+typedef	__int64 int64;
+typedef	unsigned __int64 uint64;
 
 typedef	__int8 b_int8;
 typedef	unsigned __int8 b_uint8;
@@ -172,14 +194,14 @@ typedef unsigned __int32    __haiku_uint32;
 typedef __int64     __haiku_int64;
 typedef unsigned __int64    __haiku_uint64;
 
-typedef volatile int8_t 	vint8;
-typedef volatile uint8_t 	vuint8;
-typedef volatile int16_t 	vint16;
-typedef volatile uint16_t 	vuint16;
-typedef volatile int32_t 	vint32;
-typedef volatile uint32_t 	vuint32;
-typedef volatile int64_t 	vint64;
-typedef volatile uint64_t 	vuint64;
+typedef volatile __int8 	vint8;
+typedef volatile unsigned __int8 	vuint8;
+typedef volatile __int16 	vint16;
+typedef volatile unsigned __int16 	vuint16;
+typedef volatile __int32 	vint32;
+typedef volatile unsigned __int32 	vuint32;
+typedef volatile __int64 	vint64;
+typedef volatile unsigned __int64 	vuint64;
 
 typedef volatile long 	vlong;
 typedef volatile int 	vint;
@@ -193,57 +215,46 @@ typedef volatile unsigned char 	vuchar;
 typedef unsigned char 	uchar;
 typedef unsigned short 	unichar;
 
-typedef int32_t     __haiku_status_t;
-typedef int32_t     b_status_t;
-typedef int32_t 	status_t;
+typedef __int32     __haiku_status_t;
+typedef __int32     b_status_t;
+typedef __int32 	status_t;
 // 	Represents one of the status codes defined in Error.h. More...
-typedef int64_t     __haiku_bigtime_t;
-typedef int64_t     b_bigtime_t;
-typedef int64_t 	bigtime_t;
+typedef __int64     __haiku_bigtime_t;
+typedef __int64     b_bigtime_t;
+typedef __int64 	bigtime_t;
 // 	Represents time. The unit depends on the context of the function. More...
-typedef int64_t 	__haiku_nanotime_t;
-typedef int64_t 	b_nanotime_t;
-typedef int64_t 	nanotime_t;
+typedef __int64 	__haiku_nanotime_t;
+typedef __int64 	b_nanotime_t;
+typedef __int64 	nanotime_t;
 // 	Represents time in nanoseconds.
-typedef uint32_t 	__haiku_type_code;
-typedef uint32_t 	b_type_code;
-typedef uint32_t 	type_code;
+typedef unsigned __int32 	__haiku_type_code;
+typedef unsigned __int32 	b_type_code;
+typedef unsigned __int32 	type_code;
 // 	Represents a certain type of data. See TypeConstants.h for possible values. More...
-typedef uint32_t 	__haiku_perform_code;
-typedef uint32_t 	b_perform_code;
-typedef uint32_t 	perform_code;
+typedef unsigned __int32 	__haiku_perform_code;
+typedef unsigned __int32 	b_perform_code;
+typedef unsigned __int32 	perform_code;
 // 	Defined to support 'hidden' commands or extensions to classes. More..
 
-enum {
-    B_ANY_TYPE                  = 'ANYT',
-    B_BOOL_TYPE 				= 'BOOL',
-    B_CHAR_TYPE 				= 'CHAR',
-    B_DOUBLE_TYPE 				= 'DBLE',
-    B_FLOAT_TYPE 				= 'FLOT',
-    B_INT64_TYPE 				= 'LLNG',
-    B_INT32_TYPE 				= 'LONG',
-    B_INT16_TYPE 				= 'SHRT',
-    B_INT8_TYPE 				= 'BYTE',
-    B_MESSAGE_TYPE				= 'MSGG',
-    B_MESSENGER_TYPE			= 'MSNG',
-    B_POINTER_TYPE				= 'PNTR',
-    B_SIZE_T_TYPE	 			= 'SIZT',
-    B_b_size_t_TYPE	 			= 'SSZT',
-    B_STRING_TYPE 				= 'CSTR',
-    B_UINT64_TYPE				= 'ULLG',
-    B_UINT32_TYPE				= 'ULNG',
-    B_UINT16_TYPE 				= 'USHT',
-    B_UINT8_TYPE 				= 'UBYT',
-    B_POINT_TYPE				= 'SPNT',
-    B_RECT_TYPE                 = 'RECT',
-    B_MIME_TYPE                 = 'MIME',
-    B_UNKNOWN_TYPE				= 'UNKN'
-};
+#ifndef _SSIZE_T_DEFINED
+typedef size_t ssize_t;
+#endif
+
+#ifdef _MSC_VER
+typedef __int8  int8_t;
+typedef unsigned __int8  uint8_t;
+typedef __int16  int16_t;
+typedef unsigned __int16  uint16_t;
+typedef __int32  int32_t;
+typedef unsigned __int32  uint32_t;
+typedef __int64  int64_t;
+typedef unsigned __int64  uint64_t;
+#endif
 
 #ifndef HAVE_BZERO
-	#ifndef bzero
-	#define bzero(ptr, len) memset(ptr, 0, len)
-	#endif
+    #ifndef bzero
+    #define bzero(ptr, len) memset(ptr, 0, len)
+    #endif
 #endif /* HAVE_BZERO */
 
 #ifndef __cplusplus
@@ -274,13 +285,13 @@ typedef	b_int8	bool;
 #endif
 
 #ifndef __cplusplus
-	#ifndef min
-	#define min(a, b) ((a) > (b) ? (b) : (a))
-	#endif
+    #ifndef min
+    #define min(a, b) ((a) > (b) ? (b) : (a))
+    #endif
 
-	#ifndef max
-	#define max(a, b) ((a) > (b) ? (a) : (b))
-	#endif
+    #ifndef max
+    #define max(a, b) ((a) > (b) ? (a) : (b))
+    #endif
 #endif /* !__cplusplus */
 
 #ifndef NULL
@@ -326,55 +337,58 @@ typedef	b_int8	bool;
 #  endif
 #endif /* __LOCAL */
 
-#ifndef LOCAL_BHAPI
-    #define LOCAL_BHAPI __LOCAL
+#ifndef LOCALBHAPI
+    #define LOCALBHAPI __LOCAL
+#define BHAPI_LOCAL __LOCAL
 #endif /* __LOCAL */
 
 #ifdef BHAPI_BUILD_LIBRARY
-    #define IMPEXP_BHAPI __EXPORT
+    #define IMPEXPBHAPI __EXPORT
 #else /* !BHAPI_BUILD_LIBRARY */
-    #define IMPEXP_BHAPI __IMPORT
+    #define IMPEXPBHAPI __IMPORT
 #endif /* BHAPI_BUILD_LIBRARY */
-#define EXPORT_BHAPI __EXPORT
-#define IMPORT_BHAPI __IMPORT
+#define EXPORTBHAPI __EXPORT
+#define IMPORTBHAPI __IMPORT
+#define BHAPI_EXPORT __EXPORT
+#define BHAPI_IMPORT __IMPORT
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 /*
-extern IMPEXP_BHAPI const b_uint8 bhapi::major_version;
-extern IMPEXP_BHAPI const b_uint8 bhapi::minor_version;
-extern IMPEXP_BHAPI const b_uint8 bhapi::micro_version;
-extern IMPEXP_BHAPI const b_uint8 bhapi::interface_age;
-extern IMPEXP_BHAPI const b_uint16 bhapi::binary_age;
+extern IMPEXPBHAPI const b_uint8 bhapi::major_version;
+extern IMPEXPBHAPI const b_uint8 bhapi::minor_version;
+extern IMPEXPBHAPI const b_uint8 bhapi::micro_version;
+extern IMPEXPBHAPI const b_uint8 bhapi::interface_age;
+extern IMPEXPBHAPI const b_uint16 bhapi::binary_age;
 */
 #ifdef __cplusplus
 } /* extern "C" */
 #endif /* __cplusplus */
 
 #if defined(__GNUC__) || defined(__clang__) || defined(__MINGW32__)
-	#ifdef PostMessage
-		#undef PostMessage
-	#endif
-	#ifdef SendMessage
-		#undef SendMessage
-	#endif
-	#ifdef DispatchMessage
-		#undef DispatchMessage
-	#endif
-	#ifdef CreateWindow
-		#undef CreateWindow
-	#endif
+    #ifdef PostMessage
+        #undef PostMessage
+    #endif
+    #ifdef SendMessage
+        #undef SendMessage
+    #endif
+    #ifdef DispatchMessage
+        #undef DispatchMessage
+    #endif
+    #ifdef CreateWindow
+        #undef CreateWindow
+    #endif
 #endif
 
 #ifdef BHAPI_OS_WIN32
     #ifdef _WIN32
         #include <winsock2.h>
         #include <windows.h>
-	#endif
-	#if defined(_MSC_VER) && _MSC_VER <= 0x4b0
-		#define for	if (0); else for
-	#endif
+    #endif
+    #if defined(_MSC_VER) && _MSC_VER <= 0x4b0
+        #define for	if (0); else for
+    #endif
 #endif /* BHAPI_OS_WIN32 */
 
 #ifdef __cplusplus
@@ -392,10 +406,10 @@ enum {
 #define 	B_PRIi8   "i"
 #define 	B_PRId16   "d"
 #define 	B_PRIi16   "i"
-#define 	B_PRId32   __HAIKU_PRI_PREFIX_32 "d"
-#define 	B_PRIi32   __HAIKU_PRI_PREFIX_32 "i"
-#define 	B_PRId64   __HAIKU_PRI_PREFIX_64 "d"
-#define 	B_PRIi64   __HAIKU_PRI_PREFIX_64 "i"
+#define 	B_PRId32   _HAIKU_PRI_PREFIX_32 "d"
+#define 	B_PRIi32   _HAIKU_PRI_PREFIX_32 "i"
+#define 	B_PRId64   _HAIKU_PRI_PREFIX_64 "d"
+#define 	B_PRIi64   _HAIKU_PRI_PREFIX_64 "i"
 #define 	B_PRIu8   "u"
 #define 	B_PRIo8   "o"
 #define 	B_PRIx8   "x"
@@ -404,45 +418,45 @@ enum {
 #define 	B_PRIo16   "o"
 #define 	B_PRIx16   "x"
 #define 	B_PRIX16   "X"
-#define 	B_PRIu32   __HAIKU_PRI_PREFIX_32 "u"
-#define 	B_PRIo32   __HAIKU_PRI_PREFIX_32 "o"
-#define 	B_PRIx32   __HAIKU_PRI_PREFIX_32 "x"
-#define 	B_PRIX32   __HAIKU_PRI_PREFIX_32 "X"
-#define 	B_PRIu64   __HAIKU_PRI_PREFIX_64 "u"
-#define 	B_PRIo64   __HAIKU_PRI_PREFIX_64 "o"
-#define 	B_PRIx64   __HAIKU_PRI_PREFIX_64 "x"
-#define 	B_PRIX64   __HAIKU_PRI_PREFIX_64 "X"
+#define 	B_PRIu32   _HAIKU_PRI_PREFIX_32 "u"
+#define 	B_PRIo32   _HAIKU_PRI_PREFIX_32 "o"
+#define 	B_PRIx32   _HAIKU_PRI_PREFIX_32 "x"
+#define 	B_PRIX32   _HAIKU_PRI_PREFIX_32 "X"
+#define 	B_PRIu64   _HAIKU_PRI_PREFIX_64 "u"
+#define 	B_PRIo64   _HAIKU_PRI_PREFIX_64 "o"
+#define 	B_PRIx64   _HAIKU_PRI_PREFIX_64 "x"
+#define 	B_PRIX64   _HAIKU_PRI_PREFIX_64 "X"
 #define 	B_SCNd8   "hhd"
 #define 	B_SCNi8   "hhi"
 #define 	B_SCNd16   "hd"
 #define 	B_SCNi16   "hi"
-#define 	B_SCNd32   __HAIKU_PRI_PREFIX_32 "d"
-#define 	B_SCNi32   __HAIKU_PRI_PREFIX_32 "i"
-#define 	B_SCNd64   __HAIKU_PRI_PREFIX_64 "d"
-#define 	B_SCNi64   __HAIKU_PRI_PREFIX_64 "i"
+#define 	B_SCNd32   _HAIKU_PRI_PREFIX_32 "d"
+#define 	B_SCNi32   _HAIKU_PRI_PREFIX_32 "i"
+#define 	B_SCNd64   _HAIKU_PRI_PREFIX_64 "d"
+#define 	B_SCNi64   _HAIKU_PRI_PREFIX_64 "i"
 #define 	B_SCNu8   "hhu"
 #define 	B_SCNo8   "hho"
 #define 	B_SCNx8   "hhx"
 #define 	B_SCNu16   "hu"
 #define 	B_SCNo16   "ho"
 #define 	B_SCNx16   "hx"
-#define 	B_SCNu32   __HAIKU_PRI_PREFIX_32 "u"
-#define 	B_SCNo32   __HAIKU_PRI_PREFIX_32 "o"
-#define 	B_SCNx32   __HAIKU_PRI_PREFIX_32 "x"
-#define 	B_SCNu64   __HAIKU_PRI_PREFIX_64 "u"
-#define 	B_SCNo64   __HAIKU_PRI_PREFIX_64 "o"
-#define 	B_SCNx64   __HAIKU_PRI_PREFIX_64 "x"
+#define 	B_SCNu32   _HAIKU_PRI_PREFIX_32 "u"
+#define 	B_SCNo32   _HAIKU_PRI_PREFIX_32 "o"
+#define 	B_SCNx32   _HAIKU_PRI_PREFIX_32 "x"
+#define 	B_SCNu64   _HAIKU_PRI_PREFIX_64 "u"
+#define 	B_SCNo64   _HAIKU_PRI_PREFIX_64 "o"
+#define 	B_SCNx64   _HAIKU_PRI_PREFIX_64 "x"
 //
-#define 	B_PRIuSIZE   __HAIKU_PRI_PREFIX_ADDR "u"
-#define 	B_PRIoSIZE   __HAIKU_PRI_PREFIX_ADDR "o"
-#define 	B_PRIxSIZE   __HAIKU_PRI_PREFIX_ADDR "x"
-#define 	B_PRIXSIZE   __HAIKU_PRI_PREFIX_ADDR "X"
-#define 	B_PRIdSSIZE   __HAIKU_PRI_PREFIX_ADDR "d"
-#define 	B_PRIiSSIZE   __HAIKU_PRI_PREFIX_ADDR "i"
-#define 	B_PRIuADDR   __HAIKU_PRI_PREFIX_ADDR "u"
-#define 	B_PRIoADDR   __HAIKU_PRI_PREFIX_ADDR "o"
-#define 	B_PRIxADDR   __HAIKU_PRI_PREFIX_ADDR "x"
-#define 	B_PRIXADDR   __HAIKU_PRI_PREFIX_ADDR "X"
+#define 	B_PRIuSIZE   _HAIKU_PRI_PREFIX_ADDR "u"
+#define 	B_PRIoSIZE   _HAIKU_PRI_PREFIX_ADDR "o"
+#define 	B_PRIxSIZE   _HAIKU_PRI_PREFIX_ADDR "x"
+#define 	B_PRIXSIZE   _HAIKU_PRI_PREFIX_ADDR "X"
+#define 	B_PRIdSSIZE   _HAIKU_PRI_PREFIX_ADDR "d"
+#define 	B_PRIiSSIZE   _HAIKU_PRI_PREFIX_ADDR "i"
+#define 	B_PRIuADDR   _HAIKU_PRI_PREFIX_ADDR "u"
+#define 	B_PRIoADDR   _HAIKU_PRI_PREFIX_ADDR "o"
+#define 	B_PRIxADDR   _HAIKU_PRI_PREFIX_ADDR "x"
+#define 	B_PRIXADDR   _HAIKU_PRI_PREFIX_ADDR "X"
 #define 	B_PRIdOFF       B_PRId64
 #define 	B_PRIiOFF       B_PRIi64
 #define 	B_PRIdDEV       B_PRId32
@@ -452,48 +466,46 @@ enum {
 #define 	B_PRIdTIME      B_PRId32
 #define 	B_PRIiTIME      B_PRIi32
 
-#ifndef BHAPI_DEBUG__H
+#ifndef BHAPI_DEBUG_H
 //#include "../kernel/Debug.h"
 #endif
 
 #ifdef __cplusplus
 namespace bhapi {
 #endif /* __cplusplus */
-IMPEXP_BHAPI int32 	atomic_add (int32 *value, int32 addValue);
+IMPEXPBHAPI int32 	atomic_add (int32 *value, int32 addValue);
 // 	Atomically add the value of addValue to value. More...
-IMPEXP_BHAPI int64 	atomic_add64 (int64 *value, int64 addValue);
+IMPEXPBHAPI int64 	atomic_add64 (int64 *value, int64 addValue);
 // 	Atomically add the value of addValue to value. More...
-IMPEXP_BHAPI int32 	atomic_and (int32 *value, int32 andValue);
+IMPEXPBHAPI int32 	atomic_and (int32 *value, int32 andValue);
 // 	Atomically perform a bitwise AND operation of andValue to the variable andValue. More...
-IMPEXP_BHAPI int64 	atomic_and64 (int64 *value, int64 andValue);
+IMPEXPBHAPI int64 	atomic_and64 (int64 *value, int64 andValue);
 // 	Atomically perform a bitwise AND operation of andValue to the variable andValue. More...
-IMPEXP_BHAPI int32 	atomic_get (int32 *value);
+IMPEXPBHAPI int32 	atomic_get (int32 *value);
 // 	Atomically return the value of value. More...
-IMPEXP_BHAPI int64 	atomic_get64 (int64 *value);
+IMPEXPBHAPI int64 	atomic_get64 (int64 *value);
 // 	Atomically return the value of value. More...
-IMPEXP_BHAPI int32 	atomic_get_and_set (int32 *value, int32 newValue);
+IMPEXPBHAPI int32 	atomic_get_and_set (int32 *value, int32 newValue);
 // 	Atomically set the variable value to newvalue and return the old value. More...
-IMPEXP_BHAPI int64 	atomic_get_and_set64 (int64 *value, int64 newValue);
+IMPEXPBHAPI int64 	atomic_get_and_set64 (int64 *value, int64 newValue);
 // 	Atomically set the variable value to newvalue and return the old value. More...
-IMPEXP_BHAPI int32 	atomic_or (int32 *value, int32 orValue);
+IMPEXPBHAPI int32 	atomic_or (int32 *value, int32 orValue);
 // 	Atomically perform a bitwise OR operation of orValue to the variable andValue. More...
-IMPEXP_BHAPI int64 	atomic_or64 (int64 *value, int64 orValue);
+IMPEXPBHAPI int64 	atomic_or64 (int64 *value, int64 orValue);
 // 	Atomically perform a bitwise OR operation of orValue to the variable andValue. More...
-IMPEXP_BHAPI void 	atomic_set (int32 *value, int32 newValue);
+IMPEXPBHAPI void 	atomic_set (int32 *value, int32 newValue);
 // 	Atomically set the variable value to newvalue. More...
-IMPEXP_BHAPI void 	atomic_set64 (int64 *value, int64 newValue);
+IMPEXPBHAPI void 	atomic_set64 (int64 *value, int64 newValue);
 // 	Atomically set the variable value to newvalue. More...
-IMPEXP_BHAPI int32 	atomic_test_and_set (int32 *value, int32 newValue, int32 testAgainst);
+IMPEXPBHAPI int32 	atomic_test_and_set (int32 *value, int32 newValue, int32 testAgainst);
 // 	Atomically set the variable value to newValue if the current value is testAgainst. More...
-IMPEXP_BHAPI int64 	atomic_test_and_set64 (int64 *value, int64 newValue, int64 testAgainst);
+IMPEXPBHAPI int64 	atomic_test_and_set64 (int64 *value, int64 newValue, int64 testAgainst);
 // 	Atomically set the variable value to newValue if the current value is testAgainst. More...
-IMPEXP_BHAPI void * 	get_stack_frame (void);
+IMPEXPBHAPI void * 	get_stack_frame (void);
 // 	Internal function.
 #ifdef __cplusplus
 } /* namespace */
 #endif /* __cplusplus */
-
-IMPEXP_BHAPI extern const char * B_EMPTY_STRING;
-
-#endif /* BHAPI_SUPPORT_DEFS__H */
+extern "C" const char* B_EMPTY_STRING;
+#endif /* BHAPI_SUPPORT_DEFS_H */
 

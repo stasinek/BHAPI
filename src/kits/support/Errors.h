@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -26,8 +26,9 @@
  * File: Errors.h
  *
  * --------------------------------------------------------------------------*/
-#ifndef BHAPI_ERRORS__H
-#define BHAPI_ERRORS__H
+#ifndef BHAPI_ERRORS_H
+#define BHAPI_ERRORS_H
+
 #include "../support/SupportDefs.h"
 
 /* Error baselines */
@@ -100,5 +101,5 @@ enum {
     B_NAME_TOO_LONG,
 };
 
-#endif /* BHAPI_ERRORS__H */
+#endif /* BHAPI_ERRORS_H */
 

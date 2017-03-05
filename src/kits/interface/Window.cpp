@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -50,7 +50,7 @@
 #include "../app/Looper.h"
 #include "../app/MessageRunner.h"
 
-class LOCAL_BHAPI BWindowLayoutItem : public BLayoutItem {
+class LOCALBHAPI BWindowLayoutItem : public BLayoutItem {
 public:
 	BWindowLayoutItem(BRect frame);
 	virtual ~BWindowLayoutItem();
@@ -59,7 +59,7 @@ public:
 };
 
 
-class LOCAL_BHAPI BWindowLayoutContainer : public BLayoutContainer {
+class LOCALBHAPI BWindowLayoutContainer : public BLayoutContainer {
 public:
 	BWindowLayoutContainer(BWindow *win, BRect frame);
 	virtual ~BWindowLayoutContainer();
@@ -181,7 +181,7 @@ BWindow::InitSelf(BRect frame, const char *title, b_window_look look, b_window_f
 	fDC->SetClipping(BRegion(frame.OffsetToCopy(B_ORIGIN)));
 	fDC->SetDrawingMode(B_OP_COPY);
 	fDC->SetPattern(B_SOLID_HIGH);
-	fDC->SetHighColor(b_ui_color(B_PANEL_BACKGROUND_COLOR));
+	fDC->SetHighColor(bhapi::ui_color(B_PANEL_BACKGROUND_COLOR));
 	fDC->SetPenSize(0);
 
 	fWindowFlags = flags;
@@ -1270,7 +1270,7 @@ BWindow::_Update(BRect rect, bool force_update)
 
 
 void
-BWindow::SetBackgroundColor(b_rgb_color c)
+BWindow::SetBackgroundColor(bhapi::rgb_color c)
 {
 	if(fDC->HighColor() != c)
 	{
@@ -1286,13 +1286,13 @@ BWindow::SetBackgroundColor(b_rgb_color c)
 void
 BWindow::SetBackgroundColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
 {
-	b_rgb_color c;
+	bhapi::rgb_color c;
 	c.set_to(r, g, b, a);
 	SetBackgroundColor(c);
 }
 
 
-b_rgb_color
+bhapi::rgb_color
 BWindow::BackgroundColor() const
 {
 	return fDC->HighColor();

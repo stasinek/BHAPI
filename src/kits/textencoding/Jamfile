@@ -1,0 +1,31 @@
+SubDir HAIKU_TOP src kits textencoding ;
+
+SetSubDirSupportedPlatformsBeOSCompatible ;
+AddSubDirSupportedPlatforms libbe_test ;
+
+AddResources libtextencoding.so : libtextencoding.rdef ;
+
+UsePrivateHeaders textencoding ;
+UseLibraryHeaders iconv ;
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup ] {
+	on $(architectureObject) {
+		SharedLibrary [ MultiArchDefaultGristFiles libtextencoding.so ] :
+			CharacterSet.cpp
+			CharacterSetRoster.cpp
+			character_sets.cpp
+			utf8_conversions.cpp
+			:
+			be
+			[ MultiArchDefaultGristFiles libiconv.a ]
+			[ TargetLibsupc++ ] localestub ;
+	}
+}
+
+DoCatalogs libtextencoding.so :
+	x-vnd.Haiku-libtextencoding
+	:
+	character_sets.cpp
+;
+

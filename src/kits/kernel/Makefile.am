@@ -29,14 +29,14 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 		-DETK_COMPILATION 			\
 		@ETK_DEBUG_FLAGS@
 
-noinst_LTLIBRARIES = libetk-kernel.la
+noinst_LTLIBRARIES = libBHAPI_wrapper_kernel.la
 
 libetk_kernel_la_SOURCES =			\
 			Kernel.h		\
 			Debug.cpp		\
 			Debug.h			\
 			OS.h			\
-			etk-port.cpp
+			BHAPI_wrapper_port.cpp
 
 etk_kernelincludedir = $(includedir)/etkxx/etk/kernel
 etk_kernelinclude_HEADERS =	\

@@ -19,12 +19,12 @@ addonsdir = $(libdir)/add-ons/etkxx/graphics
 noinst_LTLIBRARIES = libgraphics-win32.la
 
 libgraphics_win32_la_SOURCES =			\
-			etk-win32gdi.h		\
-			etk-application.cpp	\
-			etk-window.cpp		\
-			etk-pixmap.cpp		\
-			etk-drawing.cpp		\
-			etk-win32-font.cpp
+			BHAPI_wrapper_win32gdi.h		\
+			BHAPI_wrapper_application.cpp	\
+			BHAPI_wrapper_window.cpp		\
+			BHAPI_wrapper_pixmap.cpp		\
+			BHAPI_wrapper_drawing.cpp		\
+			BHAPI_wrapper_win32-font.cpp
 
 no_undefined = -no-undefined
 

@@ -19,7 +19,7 @@ addonsdir = $(libdir)/add-ons/etkxx/graphics
 noinst_LTLIBRARIES = libgraphics-carbon.la
 
 libgraphics_carbon_la_SOURCES =			\
-	etk-carbon.h
+	BHAPI_wrapper_carbon.h
 
 if ETK_GRAPHICS_CARBON_BUILT_IN
 else

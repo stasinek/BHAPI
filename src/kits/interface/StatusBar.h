@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  * 
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,14 +28,14 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_STATUS_BAR__H
-#define BHAPI_STATUS_BAR__H
+#ifndef BHAPI_STATUS_BAR_H
+#define BHAPI_STATUS_BAR_H
 
 #include "../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BStatusBar : public BView {
+class IMPEXPBHAPI BStatusBar : public BView {
 public:
     BStatusBar(BRect frame,
 		   const char *name,
@@ -76,5 +76,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_STATUS_BAR__H */
+#endif /* BHAPI_STATUS_BAR_H */
 

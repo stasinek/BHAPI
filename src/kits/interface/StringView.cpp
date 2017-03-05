@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -41,7 +41,7 @@ BStringView::BStringView(BRect frame, const char *name, const char *initial_text
 		if(fText.Length() > 0) fTextArray = fText.Split('\n');
 	}
 
-    SetHighColor(b_ui_color(B_PANEL_TEXT_COLOR));
+    SetHighColor(bhapi::ui_color(B_PANEL_TEXT_COLOR));
 	SetLowColor(ViewColor());
 }
 
@@ -74,7 +74,7 @@ BStringView::Text() const
 
 
 void
-BStringView::SetAlignment(b_alignment alignment)
+BStringView::SetAlignment(bhapi::alignment alignment)
 {
 	if(fAlignment != alignment)
 	{
@@ -84,7 +84,7 @@ BStringView::SetAlignment(b_alignment alignment)
 }
 
 
-b_alignment
+bhapi::alignment
 BStringView::Alignment() const
 {
 	return fAlignment;
@@ -92,7 +92,7 @@ BStringView::Alignment() const
 
 
 void
-BStringView::SetVerticalAlignment(b_vertical_alignment alignment)
+BStringView::SetVerticalAlignment(bhapi::vertical_alignment alignment)
 {
 	if(fVerticalAlignment != alignment)
 	{
@@ -102,7 +102,7 @@ BStringView::SetVerticalAlignment(b_vertical_alignment alignment)
 }
 
 
-b_vertical_alignment
+bhapi::vertical_alignment
 BStringView::VerticalAlignment() const
 {
 	return fVerticalAlignment;
@@ -120,11 +120,11 @@ BStringView::Draw(BRect updateRect)
 	else clipping = updateRect;
 	if(clipping.CountRects() <= 0) return;
 
-	b_rgb_color fgColor = HighColor();
+	bhapi::rgb_color fgColor = HighColor();
 
 	if(!IsEnabled())
 	{
-		b_rgb_color color = ViewColor();
+		bhapi::rgb_color color = ViewColor();
 		color.alpha = 127;
 		fgColor.mix(color);
 	}

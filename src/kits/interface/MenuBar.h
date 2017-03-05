@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_MENU_BAR__H
-#define BHAPI_MENU_BAR__H
+#ifndef BHAPI_MENU_BAR_H
+#define BHAPI_MENU_BAR_H
 
 #include "../interface/Menu.h"
 
@@ -41,7 +41,7 @@ typedef enum b_menu_bar_border {
     B_BORDER_EACH_ITEM
 } b_menu_bar_border;
 
-class IMPEXP_BHAPI BMenuBar : public BMenu {
+class IMPEXPBHAPI BMenuBar : public BMenu {
 public:
 	BMenuBar(BRect frame, const char *title,
 		 b_uint32 resizeMode = B_FOLLOW_LEFT_RIGHT | B_FOLLOW_TOP,
@@ -72,5 +72,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_MENU_BAR__H */
+#endif /* BHAPI_MENU_BAR_H */
 

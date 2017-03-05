@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_MESSAGE__H
-#define BHAPI_MESSAGE__H
+#ifndef BHAPI_MESSAGE_H
+#define BHAPI_MESSAGE_H
 #include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
@@ -43,7 +43,7 @@ class BRect;
 #include "../kernel/OS.h"
 #include "../support/List.h"
 
-class IMPEXP_BHAPI BMessage {
+class IMPEXPBHAPI BMessage {
 public:
     BMessage();
     BMessage(b_uint32 what);
@@ -335,5 +335,5 @@ BMessage::BFindData(const char *name, b_type_code type,
 */
 #endif /* __cplusplus */
 
-#endif /* BHAPI_MESSAGE__H */
+#endif /* BHAPI_MESSAGE_H */
 

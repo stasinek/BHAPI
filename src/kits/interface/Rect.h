@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_RECT__H
-#define BHAPI_RECT__H
+#ifndef BHAPI_RECT_H
+#define BHAPI_RECT_H
 
 #include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 #include "../interface/Point.h"
-class IMPEXP_BHAPI BRect {
+class IMPEXPBHAPI BRect {
 public:
 	float left;
 	float top;
@@ -237,5 +237,5 @@ inline float BRect::Height() const
 }
 #endif // BHAPI_BUILD_LIBRARY
 #endif /* __cplusplus */
-#endif /* BHAPI_RECT__H */
+#endif /* BHAPI_RECT_H */
 

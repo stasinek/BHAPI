@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -305,8 +305,8 @@ StringItem::~StringItem()
 void
 StringItem::DrawItem(BView *owner, BRect itemRect, bool drawEverything)
 {
-	b_rgb_color bkColor = (IsSelected() ? b_ui_color(B_DOCUMENT_HIGHLIGHT_COLOR): owner->ViewColor());
-	b_rgb_color fgColor = b_ui_color(B_DOCUMENT_TEXT_COLOR);
+	bhapi::rgb_color bkColor = (IsSelected() ? bhapi::ui_color(B_DOCUMENT_HIGHLIGHT_COLOR): owner->ViewColor());
+	bhapi::rgb_color fgColor = bhapi::ui_color(B_DOCUMENT_TEXT_COLOR);
 
 	if(!IsEnabled())
 	{

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,35 +27,36 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_PIXMAP__H
-#define BHAPI_PIXMAP__H
+#ifndef BHAPI_PIXMAP_H
+#define BHAPI_PIXMAP_H
 #include "../support/SupportDefs.h"
+#include "../interface/GraphicsDefs.h"
 #include "../interface/Region.h"
 #include "../render/Render.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BPixmap : public BRender {
+class IMPEXPBHAPI BPixmap : public BRender {
 public:
     BPixmap();
-    BPixmap(b_uint32 width, b_uint32 height, b_color_space space);
-    BPixmap(BRect bounds, b_color_space space);
+    BPixmap(b_uint32 width, b_uint32 height, bhapi::color_space space);
+    BPixmap(BRect bounds, bhapi::color_space space);
     virtual ~BPixmap();
 
 	void*		Bits() const;
     b_uint32		BitsLength() const;
     b_uint32		BytesPerRow() const;
-	b_color_space	ColorSpace() const;
+    bhapi::color_space	ColorSpace() const;
     BRect		Bounds() const;
 	void		MakeEmpty();
 
-    bool		ResizeTo(b_uint32 width, b_uint32 height, b_color_space space);
-    bool		ResizeTo(BRect bounds, b_color_space space);
+    bool		ResizeTo(b_uint32 width, b_uint32 height, bhapi::color_space space);
+    bool		ResizeTo(BRect bounds, bhapi::color_space space);
 
-    void		SetBits(const void *data, b_int32 length, b_int32 offset, b_color_space space);
+    void		SetBits(const void *data, b_int32 length, b_int32 offset, bhapi::color_space space);
 
-    void		SetPixel(b_int32 x, b_int32 y, b_rgb_color color);
-    b_rgb_color	GetPixel(b_int32 x, b_int32 y) const;
+    void		SetPixel(b_int32 x, b_int32 y, bhapi::rgb_color color);
+    bhapi::rgb_color	GetPixel(b_int32 x, b_int32 y) const;
 
 	void		DrawXPM(const char **xpm_data,
                 b_int32 destX, b_int32 destY,
@@ -65,7 +66,7 @@ public:
 
 private:
 	void* fPtr;
-	b_color_space fColorSpace;
+    bhapi::color_space fColorSpace;
     b_uint32 fRows;
     b_uint32 fColumns;
     b_uint32 fRowBytes;
@@ -75,12 +76,12 @@ private:
 
 	virtual b_status_t InitCheck() const;
     virtual void GetFrame(b_int32 *originX, b_int32 *originY, b_uint32 *width, b_uint32 *height) const;
-    virtual void GetPixel(b_int32 x, b_int32 y, b_rgb_color &color) const;
-    virtual void PutPixel(b_int32 x, b_int32 y, b_rgb_color color);
-    virtual void PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, b_rgb_color color);
+    virtual void GetPixel(b_int32 x, b_int32 y, bhapi::rgb_color &color) const;
+    virtual void PutPixel(b_int32 x, b_int32 y, bhapi::rgb_color color);
+    virtual void PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::rgb_color color);
 };
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_PIXMAP__H */
+#endif /* BHAPI_PIXMAP_H */
 

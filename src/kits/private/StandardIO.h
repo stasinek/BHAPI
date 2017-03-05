@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_PRIVATE_STANDARD_IO__H
-#define BHAPI_PRIVATE_STANDARD_IO__H
+#ifndef BHAPI_PRIVATE_STANDARD_IO_H
+#define BHAPI_PRIVATE_STANDARD_IO_H
 #include "../support/SupportDefs.h"
 #include "../support/StreamIO.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class LOCAL_BHAPI BStandardIO : public BStreamIO {
+class LOCALBHAPI BStandardIO : public BStreamIO {
 public:
     BStandardIO(int fd);
     virtual ~BStandardIO();
@@ -48,5 +48,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_PRIVATE_STANDARD_IO__H */
+#endif /* BHAPI_PRIVATE_STANDARD_IO_H */
 

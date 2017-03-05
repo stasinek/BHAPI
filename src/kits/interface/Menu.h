@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_MENU__H
-#define BHAPI_MENU__H
+#ifndef BHAPI_MENU_H
+#define BHAPI_MENU_H
 
 #include "../support/List.h"
 #include "../interface/View.h"
@@ -45,7 +45,7 @@ typedef enum b_menu_layout {
 class ESubmenuWindow;
 class BPopUpMenu;
 
-class IMPEXP_BHAPI BMenu : public BView {
+class IMPEXPBHAPI BMenu : public BView {
 public:
     BMenu(const char *title, b_menu_layout layout = B_ITEMS_IN_COLUMN);
     BMenu(const char *title, float width, float height);
@@ -146,5 +146,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_MENU__H */
+#endif /* BHAPI_MENU_H */
 

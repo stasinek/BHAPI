@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  * 
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_BUTTON__H
-#define BHAPI_BUTTON__H
+#ifndef BHAPI_BUTTON_H
+#define BHAPI_BUTTON_H
 
 #ifdef __cplusplus /* Just for C++ */
 
@@ -37,7 +37,7 @@ class BRect;
 class BMessage;
 class BMessageRunner;
 #include "../interface/Control.h"
-class IMPEXP_BHAPI BButton : public BControl {
+class IMPEXPBHAPI BButton : public BControl {
 public:
     BButton(BRect frame,
 		const char *name,
@@ -75,5 +75,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_BUTTON__H */
+#endif /* BHAPI_BUTTON_H */
 

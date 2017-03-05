@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  * 
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  * 
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_REGION__H
-#define BHAPI_REGION__H
+#ifndef BHAPI_REGION_H
+#define BHAPI_REGION_H
 
 #include "../support/SupportDefs.h"
 
@@ -37,7 +37,7 @@
 #include "../interface/Point.h"
 #include "../interface/Rect.h"
 #include "../support/List.h"
-class IMPEXP_BHAPI BRegion {
+class IMPEXPBHAPI BRegion {
 public:
 	BRegion();
 	BRegion(const BRegion &region);
@@ -101,5 +101,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_REGION__H */
+#endif /* BHAPI_REGION_H */
 

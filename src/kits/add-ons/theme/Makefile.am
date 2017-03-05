@@ -9,7 +9,7 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 		-DETK_COMPILATION 			\
 		@ETK_DEBUG_FLAGS@
 
-noinst_LTLIBRARIES = libetk-add-ons-theme.la
+noinst_LTLIBRARIES = libBHAPI_wrapper_add-ons-theme.la
 
 libetk_add_ons_theme_la_SOURCES =	\
 		ThemeEngine.cpp		\

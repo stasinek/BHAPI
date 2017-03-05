@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,23 +27,20 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_CLASS_INFO__H
-#define BHAPI_CLASS_INFO__H
+#ifndef BHAPI_CLASS_INFO_H
+#define BHAPI_CLASS_INFO_H
+
 #include "../support/SupportDefs.h"
 #ifdef __cplusplus /* Just for C++ */
-
 #if (defined(_MSC_VER) && !defined(_CPPRTTI))
 	#error "You must enable Run-Time Type Information"
 #endif
-
 #include <typeinfo>
-
 #define class_name(ptr)		(ptr ? (typeid(*(ptr))).name() : (const char*)NULL)
 #define cast_as(ptr, class)		(ptr ? dynamic_cast<class*>(ptr) : (class*)NULL)
 #define is_kind_of(ptr, class)	(ptr ? cast_as(ptr, class) != NULL : false)
 #define is_instance_of(ptr, class)	(ptr ? typeid(*(ptr)) == typeid(class) : false)
 
 #endif /* __cplusplus */
-
-#endif /* BHAPI_CLASS_INFO__H */
+#endif /* BHAPI_CLASS_INFO_H */
 

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_PRIVATE_HANDLER__H
-#define BHAPI_PRIVATE_HANDLER__H
+#ifndef BHAPI_PRIVATE_HANDLER_H
+#define BHAPI_PRIVATE_HANDLER_H
 #include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
@@ -36,19 +36,19 @@ class BHandler;
 class BLocker;
 class BLooper;
 namespace bhapi {
-LOCAL_BHAPI BLocker* get_handler_operator_locker();
-LOCAL_BHAPI b_uint64 get_handler_token(const BHandler *handler);
-LOCAL_BHAPI b_uint64 get_ref_handler_token(const BHandler *handler);
-LOCAL_BHAPI BHandler* get_handler(b_uint64 token);
-LOCAL_BHAPI b_bigtime_t get_handler_create_time_stamp(b_uint64 token);
-LOCAL_BHAPI BLooper* get_handler_looper(b_uint64 token);
-LOCAL_BHAPI b_uint64 get_ref_looper_token(b_uint64 token);
-LOCAL_BHAPI b_status_t lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
-LOCAL_BHAPI bool is_current_at_looper_thread(b_uint64 token);
-LOCAL_BHAPI bool ref_handler(b_uint64 token);
-LOCAL_BHAPI void unref_handler(b_uint64 token);
+LOCALBHAPI BLocker* get_handler_operator_locker();
+LOCALBHAPI b_uint64 get_handler_token(const BHandler *handler);
+LOCALBHAPI b_uint64 get_ref_handler_token(const BHandler *handler);
+LOCALBHAPI BHandler* get_handler(b_uint64 token);
+LOCALBHAPI b_bigtime_t get_handler_create_time_stamp(b_uint64 token);
+LOCALBHAPI BLooper* get_handler_looper(b_uint64 token);
+LOCALBHAPI b_uint64 get_ref_looper_token(b_uint64 token);
+LOCALBHAPI b_status_t lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
+LOCALBHAPI bool is_current_at_looper_thread(b_uint64 token);
+LOCALBHAPI bool ref_handler(b_uint64 token);
+LOCALBHAPI void unref_handler(b_uint64 token);
 } /* namespace bhapi */
 
 #endif /* __cplusplus */
-#endif /* BHAPI_PRIVATE_HANDLER__H */
+#endif /* BHAPI_PRIVATE_HANDLER_H */
 

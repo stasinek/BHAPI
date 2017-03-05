@@ -3,4 +3,7 @@
 BHAPI::BHAPI()
 {
 }
+BHAPI::~BHAPI()
+{
+}
 

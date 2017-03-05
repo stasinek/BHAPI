@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -26,8 +26,8 @@
  * File: OS.h
  *
  * --------------------------------------------------------------------------*/
-#ifndef BHAPI_OS__H
-#define BHAPI_OS__H
+#ifndef BHAPI_OS_H
+#define BHAPI_OS_H
 #include "../support/SupportDefs.h"
 
 typedef b_status_t				(*b_thread_func)(void*);
@@ -60,14 +60,14 @@ enum {
                                         | B_TIMEOUT_REAL_TIME_BASE
 };
 
-#ifndef BHAPI_KERNEL__H
+#ifndef BHAPI_KERNEL_H
 #include "Kernel.h"
-#endif /* BHAPI_KERNEL__H */
+#endif /* BHAPI_KERNEL_H */
 /* time functions */
 #define b_snooze(microseconds)			bhapi::snooze(microseconds)
 #define b_snooze_until(time, timebase)	bhapi::snooze_until(time, timebase)
 #define b_real_time_clock()             bhapi::real_time_clock()
 #define b_real_time_clock_usecs()       bhapi::real_time_clock_usecs()
 #define b_system_time()                 bhapi::system_time()
-#endif /* BHAPI_OS__H */
+#endif /* BHAPI_OS_H */
 

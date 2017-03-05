@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -33,7 +33,7 @@
 #include "../support/String.h"
 #include "../kernel/Debug.h"
 
-class LOCAL_BHAPI BMessageNode
+class LOCALBHAPI BMessageNode
 {
 public:
 	BMessageNode(const char *name);
@@ -232,7 +232,7 @@ BMessageBody::Flatten(char *buffer, size_t size) const
 
 
 bool
-BMessageBody::Flatten(EDataIO *stream, b_size_t *size) const
+BMessageBody::Flatten(BDataIO *stream, b_size_t *size) const
 {
 	// TODO
 	BHAPI_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
@@ -250,7 +250,7 @@ BMessageBody::Unflatten(const char *buffer, size_t size)
 
 
 bool
-BMessageBody::Unflatten(EDataIO *stream, size_t size)
+BMessageBody::Unflatten(BDataIO *stream, size_t size)
 {
 	// TODO
 	BHAPI_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,15 +28,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_MESSAGE_QUEUE__H
-#define BHAPI_MESSAGE_QUEUE__H
+#ifndef BHAPI_MESSAGE_QUEUE_H
+#define BHAPI_MESSAGE_QUEUE_H
 #include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
 #include "../support/List.h"
 class BMessage;
-class IMPEXP_BHAPI BMessageQueue {
+class IMPEXPBHAPI BMessageQueue {
 public:
 	BMessageQueue();
 	virtual ~BMessageQueue();
@@ -69,5 +69,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_MESSAGE_QUEUE__H */
+#endif /* BHAPI_MESSAGE_QUEUE_H */
 

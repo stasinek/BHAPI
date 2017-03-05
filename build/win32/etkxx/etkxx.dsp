@@ -98,23 +98,23 @@ LINK32=link.exe
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE="..\..\..\etk\interface\win32\etk-application.cpp"
+SOURCE="..\..\..\etk\interface\win32\BHAPI_wrapper_application.cpp"
 # End Source File
 # Begin Source File
 
-SOURCE="..\..\..\etk\interface\win32\etk-drawing.cpp"
+SOURCE="..\..\..\etk\interface\win32\BHAPI_wrapper_drawing.cpp"
 # End Source File
 # Begin Source File
 
-SOURCE="..\..\..\etk\interface\win32\etk-pixmap.cpp"
+SOURCE="..\..\..\etk\interface\win32\BHAPI_wrapper_pixmap.cpp"
 # End Source File
 # Begin Source File
 
-SOURCE="..\..\..\etk\interface\win32\etk-win32-font.cpp"
+SOURCE="..\..\..\etk\interface\win32\BHAPI_wrapper_win32-font.cpp"
 # End Source File
 # Begin Source File
 
-SOURCE="..\..\..\etk\interface\win32\etk-window.cpp"
+SOURCE="..\..\..\etk\interface\win32\BHAPI_wrapper_window.cpp"
 # End Source File
 # End Group
 # Begin Source File
@@ -359,35 +359,35 @@ SOURCE=..\..\..\etk\kernel\Debug.cpp
 # End Source File
 # Begin Source File
 
-SOURCE="..\..\..\etk\kernel\win32\etk-area.cpp"
+SOURCE="..\..\..\etk\kernel\win32\BHAPI_wrapper_area.cpp"
 # End Source File
 # Begin Source File
 
-SOURCE="..\..\..\etk\kernel\win32\etk-image.cpp"
+SOURCE="..\..\..\etk\kernel\win32\BHAPI_wrapper_image.cpp"
 # End Source File
 # Begin Source File
 
-SOURCE="..\..\..\etk\kernel\thread\win32\etk-locker.cpp"
+SOURCE="..\..\..\etk\kernel\thread\win32\BHAPI_wrapper_locker.cpp"
 # End Source File
 # Begin Source File
 
-SOURCE="..\..\..\etk\kernel\win32\etk-os.cpp"
+SOURCE="..\..\..\etk\kernel\win32\BHAPI_wrapper_os.cpp"
 # End Source File
 # Begin Source File
 
-SOURCE="..\..\..\etk\kernel\etk-port.cpp"
+SOURCE="..\..\..\etk\kernel\BHAPI_wrapper_port.cpp"
 # End Source File
 # Begin Source File
 
-SOURCE="..\..\..\etk\kernel\thread\win32\etk-semaphore.cpp"
+SOURCE="..\..\..\etk\kernel\thread\win32\BHAPI_wrapper_semaphore.cpp"
 # End Source File
 # Begin Source File
 
-SOURCE="..\..\..\etk\kernel\thread\win32\etk-thread.cpp"
+SOURCE="..\..\..\etk\kernel\thread\win32\BHAPI_wrapper_thread.cpp"
 # End Source File
 # Begin Source File
 
-SOURCE="..\..\..\etk\kernel\win32\etk-timefuncs.cpp"
+SOURCE="..\..\..\etk\kernel\win32\BHAPI_wrapper_timefuncs.cpp"
 # End Source File
 # End Group
 # Begin Group "render"
@@ -794,7 +794,7 @@ SOURCE=..\..\..\etk\xml\SimpleXmlParser.h
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE="..\..\..\etk\interface\win32\etk-win32gdi.h"
+SOURCE="..\..\..\etk\interface\win32\BHAPI_wrapper_win32gdi.h"
 # End Source File
 # Begin Source File
 

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -29,8 +29,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_MESSAGE_FILTER__H
-#define BHAPI_MESSAGE_FILTER__H
+#ifndef BHAPI_MESSAGE_FILTER_H
+#define BHAPI_MESSAGE_FILTER_H
 
 #include "../support/SupportDefs.h"
 
@@ -46,7 +46,7 @@ typedef enum b_message_delivery {
 } b_message_delivery;
 
 typedef enum b_message_source {
-    BLOCAL_BHAPI_SOURCE		=	0x1,
+    BLOCALBHAPI_SOURCE		=	0x1,
     B_REMOTE_SOURCE		=	0x2,
     B_ANY_SOURCE		=	0xff
 } b_message_source;
@@ -57,7 +57,7 @@ class BMessage;
 class BMessageFilter;
 class BHandler;
 typedef b_filter_result (*b_filter_hook)(BMessage *message, BHandler **target, BMessageFilter *filter);
-class IMPEXP_BHAPI BMessageFilter {
+class IMPEXPBHAPI BMessageFilter {
 public:
     BMessageFilter(b_message_delivery delivery, b_message_source source,
                b_uint32 command, b_filter_hook filter = NULL);
@@ -95,5 +95,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_MESSAGE_FILTER__H */
+#endif /* BHAPI_MESSAGE_FILTER_H */
 

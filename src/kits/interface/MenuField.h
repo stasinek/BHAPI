@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  * 
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_MENU_FIELD__H
-#define BHAPI_MENU_FIELD__H
+#ifndef BHAPI_MENU_FIELD_H
+#define BHAPI_MENU_FIELD_H
 
 #include "../support/SupportDefs.h"
 
@@ -40,7 +40,7 @@ class BMenuItem;
 class BMenuBar;
 class BMessage;
 #include "../interface/View.h"
-class IMPEXP_BHAPI BMenuField : public BView {
+class IMPEXPBHAPI BMenuField : public BView {
 public:
 	BMenuField(BRect frame,
 		   const char *name,
@@ -54,8 +54,8 @@ public:
 	virtual void	SetLabel(const char *label);
 	const char	*Label() const;
 
-	virtual void	SetAlignment(b_alignment alignment);
-	b_alignment	Alignment() const;
+    virtual void	SetAlignment(bhapi::alignment alignment);
+    bhapi::alignment	Alignment() const;
 
 	virtual void	SetDivider(float divider);
 	float		Divider() const;
@@ -85,7 +85,7 @@ protected:
 
 private:
 	bool fFixedSize;
-	b_alignment fAlignment;
+    bhapi::alignment fAlignment;
 	float fDivider;
 
 	char *fLabel;
@@ -95,5 +95,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_MENU_FIELD__H */
+#endif /* BHAPI_MENU_FIELD_H */
 

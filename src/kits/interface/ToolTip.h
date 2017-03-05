@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_TOOL_TIP__H
-#define BHAPI_TOOL_TIP__H
+#ifndef BHAPI_TOOL_TIP_H
+#define BHAPI_TOOL_TIP_H
 
 #include "../app/Messenger.h"
 #include "../interface/GraphicsDefs.h"
@@ -37,7 +37,7 @@
 
 
 #if 0
-class IMPEXP_BHAPI BToolTipInfo {
+class IMPEXPBHAPI BToolTipInfo {
 public:
     BToolTipInfo();
     virtual ~BToolTipInfo();
@@ -48,11 +48,11 @@ public:
 	void			SetFont(const BFont *font);
 	const BFont*		Font() const;
 
-    void			SetBackgroundColor(b_rgb_color color);
-	b_rgb_color		BackgroundColor() const;
+    void			SetBackgroundColor(bhapi::rgb_color color);
+	bhapi::rgb_color		BackgroundColor() const;
 
-    void			SetTextColor(b_rgb_color color);
-	b_rgb_color		TextColor() const;
+    void			SetTextColor(bhapi::rgb_color color);
+	bhapi::rgb_color		TextColor() const;
 
 	void			SetInline(bool state);
 	bool			IsInline() const;
@@ -63,13 +63,13 @@ public:
 private:
 	char *fText;
 	BFont fFont;
-	b_rgb_color fColor[2];
+	bhapi::rgb_color fColor[2];
 	bool fIsInline;
 	BPoint fTextOrigin;
 };
 
 
-class IMPEXP_BHAPI BToolTip {
+class IMPEXPBHAPI BToolTip {
 public:
     BToolTip();
     virtual ~BToolTip();
@@ -93,5 +93,5 @@ private:
 #endif
 
 
-#endif /* BHAPI_TOOL_TIP__H */
+#endif /* BHAPI_TOOL_TIP_H */
 

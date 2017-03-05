@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_VIEW__H
-#define BHAPI_VIEW__H
+#ifndef BHAPI_VIEW_H
+#define BHAPI_VIEW_H
 
 #include "../support/SupportDefs.h"
 
@@ -88,7 +88,7 @@ class BView;
 #include "../interface/Point.h"
 #include "../support/List.h"
 #include "../app/Handler.h"
-class IMPEXP_BHAPI BView : public BHandler {
+class IMPEXPBHAPI BView : public BHandler {
 public:
 	BView(BRect frame,
 	      const char *name,
@@ -220,8 +220,8 @@ public:
 	virtual void	MakeFocus(bool focusState = true);
 	bool		IsFocus() const;
 
-    virtual void	SetDrawingMode(b_drawing_mode mode);
-	b_drawing_mode	DrawingMode() const;
+    virtual void	SetDrawingMode(bhapi::drawing_mode mode);
+	bhapi::drawing_mode	DrawingMode() const;
 
 	void		MovePenTo(BPoint pt);
 	void		MovePenTo(float x, float y);
@@ -231,17 +231,17 @@ public:
 	virtual void	SetPenSize(float size);
 	float		PenSize() const;
 
-    virtual void	SetViewColor(b_rgb_color c);
+    virtual void	SetViewColor(bhapi::rgb_color c);
     void		SetViewColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
-	b_rgb_color	ViewColor() const;
+	bhapi::rgb_color	ViewColor() const;
 
-    virtual void	SetHighColor(b_rgb_color c);
+    virtual void	SetHighColor(bhapi::rgb_color c);
     void		SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
-	b_rgb_color	HighColor() const;
+	bhapi::rgb_color	HighColor() const;
 
-    virtual void	SetLowColor(b_rgb_color c);
+    virtual void	SetLowColor(bhapi::rgb_color c);
     void		SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
-	b_rgb_color	LowColor() const;
+	bhapi::rgb_color	LowColor() const;
 
 	void		PushState();
 	void		PopState();
@@ -252,39 +252,39 @@ public:
 	// Note: The "Fill*()" functions isn't affected by the "PenSize()", it won't draw out of the edge.
 	void		SetSquarePointStyle(bool state);
 	bool		IsSquarePointStyle() const;
-	void		StrokePoint(BPoint pt, b_pattern p = B_SOLID_HIGH);
-    void		StrokePoints(const BPoint *pts, b_int32 count, const b_uint8 *alpha = NULL, b_pattern p = B_SOLID_HIGH);
+	void		StrokePoint(BPoint pt, bhapi::pattern p = B_SOLID_HIGH);
+    void		StrokePoints(const BPoint *pts, b_int32 count, const b_uint8 *alpha = NULL, bhapi::pattern p = B_SOLID_HIGH);
 
-	void		StrokeLine(BPoint pt, b_pattern p = B_SOLID_HIGH);
-	void		StrokeLine(BPoint pt0, BPoint pt1, b_pattern p = B_SOLID_HIGH);
+	void		StrokeLine(BPoint pt, bhapi::pattern p = B_SOLID_HIGH);
+	void		StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern p = B_SOLID_HIGH);
 
-	void		StrokePolygon(const BPolygon *aPolygon, bool closed = true, b_pattern p = B_SOLID_HIGH);
-    void		StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed = true, b_pattern p = B_SOLID_HIGH);
-	void		FillPolygon(const BPolygon *aPolygon, b_pattern p = B_SOLID_HIGH);
-    void		FillPolygon(const BPoint *ptArray, b_int32 numPts, b_pattern p = B_SOLID_HIGH);
+	void		StrokePolygon(const BPolygon *aPolygon, bool closed = true, bhapi::pattern p = B_SOLID_HIGH);
+    void		StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed = true, bhapi::pattern p = B_SOLID_HIGH);
+	void		FillPolygon(const BPolygon *aPolygon, bhapi::pattern p = B_SOLID_HIGH);
+    void		FillPolygon(const BPoint *ptArray, b_int32 numPts, bhapi::pattern p = B_SOLID_HIGH);
 
-	void		StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, b_pattern p = B_SOLID_HIGH);
-	void		FillTriangle(BPoint pt1, BPoint pt2, BPoint pt3, b_pattern p = B_SOLID_HIGH);
+	void		StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p = B_SOLID_HIGH);
+	void		FillTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p = B_SOLID_HIGH);
 
-	void		StrokeRect(BRect r, b_pattern p = B_SOLID_HIGH);
-	void		FillRect(BRect r, b_pattern p = B_SOLID_HIGH);
+	void		StrokeRect(BRect r, bhapi::pattern p = B_SOLID_HIGH);
+	void		FillRect(BRect r, bhapi::pattern p = B_SOLID_HIGH);
 
-    void		StrokeRects(const BRect *rects, b_int32 count, b_pattern p = B_SOLID_HIGH);
-    void		FillRects(const BRect *rects, b_int32 count, b_pattern p = B_SOLID_HIGH);
-	void		FillRegion(const BRegion *region, b_pattern p = B_SOLID_HIGH);
+    void		StrokeRects(const BRect *rects, b_int32 count, bhapi::pattern p = B_SOLID_HIGH);
+    void		FillRects(const BRect *rects, b_int32 count, bhapi::pattern p = B_SOLID_HIGH);
+	void		FillRegion(const BRegion *region, bhapi::pattern p = B_SOLID_HIGH);
 
-	void		StrokeRoundRect(BRect r, float xRadius, float yRadius, b_pattern p = B_SOLID_HIGH);
-	void		FillRoundRect(BRect r, float xRadius, float yRadius, b_pattern p = B_SOLID_HIGH);
+	void		StrokeRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
+	void		FillRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
 
-	void		StrokeArc(BPoint ctPt, float xRadius, float yRadius, float startAngle, float arcAngle, b_pattern p = B_SOLID_HIGH);
-	void		StrokeArc(BRect r, float startAngle, float arcAngle, b_pattern p = B_SOLID_HIGH);
-	void		FillArc(BPoint ctPt, float xRadius, float yRadius, float startAngle, float arcAngle, b_pattern p = B_SOLID_HIGH);
-	void		FillArc(BRect r, float start_angle, float arc_angle, b_pattern p = B_SOLID_HIGH);
+	void		StrokeArc(BPoint ctPt, float xRadius, float yRadius, float startAngle, float arcAngle, bhapi::pattern p = B_SOLID_HIGH);
+	void		StrokeArc(BRect r, float startAngle, float arcAngle, bhapi::pattern p = B_SOLID_HIGH);
+	void		FillArc(BPoint ctPt, float xRadius, float yRadius, float startAngle, float arcAngle, bhapi::pattern p = B_SOLID_HIGH);
+	void		FillArc(BRect r, float start_angle, float arc_angle, bhapi::pattern p = B_SOLID_HIGH);
 
-	void		StrokeEllipse(BPoint ctPt, float xRadius, float yRadius, b_pattern p = B_SOLID_HIGH);
-	void		StrokeEllipse(BRect r, b_pattern p = B_SOLID_HIGH);
-	void		FillEllipse(BPoint ctPt, float xRadius, float yRadius, b_pattern p = B_SOLID_HIGH);
-	void		FillEllipse(BRect r, b_pattern p = B_SOLID_HIGH);
+	void		StrokeEllipse(BPoint ctPt, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
+	void		StrokeEllipse(BRect r, bhapi::pattern p = B_SOLID_HIGH);
+	void		FillEllipse(BPoint ctPt, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
+	void		FillEllipse(BRect r, bhapi::pattern p = B_SOLID_HIGH);
 
     void		DrawString(const char *aString, b_int32 length = -1, float tabWidth = 0);
     void		DrawString(const char *aString, BPoint location, b_int32 length = -1, float tabWidth = 0);
@@ -335,7 +335,7 @@ private:
 	void *fStates;
 
     b_uint32 fViewFlags;
-	b_rgb_color fViewColor;
+	bhapi::rgb_color fViewColor;
 	bool fForceFontAliasing;
 	BRegion fClippingTemp;
 	bool fMouseInside;
@@ -367,5 +367,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_VIEW__H */
+#endif /* BHAPI_VIEW_H */
 

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -30,7 +30,7 @@
 #include "../../support/ClassInfo.h"
 
 #include "Layout.h"
-
+using namespace bhapi;
 
 BLayoutItem::BLayoutItem(BRect frame, b_uint32 resizingMode)
 	: BLayoutContainer(), fContainer(NULL),

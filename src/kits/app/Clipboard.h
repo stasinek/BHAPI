@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -29,23 +29,23 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_CLIPBOARD__H
-#define BHAPI_CLIPBOARD__H
+#ifndef BHAPI_CLIPBOARD_H
+#define BHAPI_CLIPBOARD_H
+
 #include "../support/SupportDefs.h"
 #include "../app/Messenger.h"
 #include "../support/Locker.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
-class IMPEXP_BHAPI BClipboard {
+class IMPEXPBHAPI BClipboard {
 public:
 	BClipboard(const char *name);
 	virtual ~BClipboard();
 
 	const char	*Name() const;
 
-	b_uint32		LocalCount() const;
-	b_uint32		SystemCount() const;
+    b_uint32	LocalCount() const;
+    b_uint32	SystemCount() const;
 	b_status_t	StartWatching(const BMessenger &target);
 	b_status_t	StopWatching(const BMessenger &target);
 
@@ -67,6 +67,5 @@ private:
 };
 
 #endif /* __cplusplus */
-
-#endif /* BHAPI_CLIPBOARD__H */
+#endif /* BHAPI_CLIPBOARD_H */
 

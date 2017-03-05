@@ -2,7 +2,7 @@ AUTOMAKE_OPTIONS = 1.7
 
 SUBDIRS = layout icons wm
 EFENCE = 
-graphics_la = layout/libetk-interface-layout.la
+graphics_la = layout/libBHAPI_wrapper_interface-layout.la
 
 if ETK_GRAPHICS_X11_BUILT_IN
 SUBDIRS += $(EFENCE) x11
@@ -26,7 +26,7 @@ endif
 
 if ETK_GRAPHICS_LINUXFB_BUILT_IN
 SUBDIRS += $(EFENCE) linuxfb
-graphics_la += $(EFENCE) wm/libetk-interface-wm.la linuxfb/libgraphics-linuxfb.la
+graphics_la += $(EFENCE) wm/libBHAPI_wrapper_interface-wm.la linuxfb/libgraphics-linuxfb.la
 endif
 
 if ETK_GRAPHICS_CARBON_BUILT_IN
@@ -41,7 +41,7 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 		-DETK_COMPILATION 			\
 		@ETK_DEBUG_FLAGS@
 
-noinst_LTLIBRARIES = libetk-interface.la
+noinst_LTLIBRARIES = libBHAPI_wrapper_interface.la
 
 libetk_interface_la_SOURCES =		\
 		GraphicsDefs.cpp	\

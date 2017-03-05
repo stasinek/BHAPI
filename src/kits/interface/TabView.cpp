@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  * 
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -178,7 +178,7 @@ BTab::DrawLabel(BView* owner, BRect frame)
 {
 	if(fLabel == NULL) return;
 
-	b_rgb_color textColor = b_ui_color(B_PANEL_TEXT_COLOR);
+	bhapi::rgb_color textColor = bhapi::ui_color(B_PANEL_TEXT_COLOR);
 	if(!fEnabled) textColor.disable(owner->ViewColor());
 
 	BFont font;
@@ -198,12 +198,12 @@ BTab::DrawLabel(BView* owner, BRect frame)
 void
 BTab::DrawTab(BView* owner, BRect frame, b_tab_position position, bool full)
 {
-	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
-	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
+	bhapi::rgb_color shineColor = bhapi::ui_color(B_SHINE_COLOR);
+	bhapi::rgb_color shadowColor = bhapi::ui_color(B_SHADOW_COLOR);
 
 	owner->PushState();
 
-	b_rgb_color bgColor = owner->ViewColor();
+	bhapi::rgb_color bgColor = owner->ViewColor();
 	if(position == B_TAB_FRONT) bgColor.set_to(235, 220, 30);
 
 	if(!fEnabled)
@@ -233,7 +233,7 @@ BTab::DrawTab(BView* owner, BRect frame, b_tab_position position, bool full)
 
 
 BTabView::BTabView(BRect frame, const char *name,
-		   b_button_width tabWidth, b_uint32 resizeMode, b_uint32 flags)
+		   bhapi::button_width tabWidth, b_uint32 resizeMode, b_uint32 flags)
 	: BView(frame, name, resizeMode, flags), fSelection(-1)
 {
 	fTabWidth = tabWidth;
@@ -379,7 +379,7 @@ BTabView::ContainerView() const
 
 
 void
-BTabView::SetTabWidth(b_button_width tabWidth)
+BTabView::SetTabWidth(bhapi::button_width tabWidth)
 {
 	if(fTabWidth != tabWidth)
 	{
@@ -392,7 +392,7 @@ BTabView::SetTabWidth(b_button_width tabWidth)
 }
 
 
-b_button_width
+bhapi::button_width
 BTabView::TabWidth() const
 {
 	return fTabWidth;
@@ -512,8 +512,8 @@ BTabView::DrawBox(BRect selTabRect)
 	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	rect.top += fTabHeight;
 
-	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
-	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
+	bhapi::rgb_color shineColor = bhapi::ui_color(B_SHINE_COLOR);
+	bhapi::rgb_color shadowColor = bhapi::ui_color(B_SHADOW_COLOR);
 
 	if(!IsEnabled())
 	{

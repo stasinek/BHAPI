@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -51,7 +51,7 @@
 #		ifdef BONE_VERSION
 #			include <arpa/inet.h>
 #		endif
-#		ifndef __HAIKU__
+#		ifndef _HAIKU__
 #			define socklen_t int
 #		endif
 #	else
@@ -69,7 +69,7 @@
 #endif
 
 #ifdef SIGPIPE
-class LOCAL_BHAPI BNetEndpointSignalIgnore {
+class LOCALBHAPI BNetEndpointSignalIgnore {
 public:
 	BNetEndpointSignalIgnore()
 	{
@@ -269,7 +269,7 @@ BNetEndpoint::_Close()
 {
 	if(fSocket != -1)
 	{
-#if defined(_WIN32) || (defined(__BEOS__) && !(defined(BONE_VERSION) || defined(__HAIKU__)))
+#if defined(_WIN32) || (defined(__BEOS__) && !(defined(BONE_VERSION) || defined(_HAIKU__)))
 		closesocket(fSocket);
 #else
 		close(fSocket);

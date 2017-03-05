@@ -1,0 +1,28 @@
+SubDir HAIKU_TOP src kits device ;
+
+SetSubDirSupportedPlatformsBeOSCompatible ;
+
+UsePrivateHeaders device ;
+
+# for usb_raw.h that defines the ioctl protocol used by the USB classes
+UseHeaders [ FDirName $(HAIKU_TOP) src add-ons kernel drivers bus usb ] : true ;
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup ] {
+	on $(architectureObject) {
+		SharedLibrary [ MultiArchDefaultGristFiles libdevice.so ] :
+			A2D.cpp
+			D2A.cpp
+			DigitalPort.cpp
+			Joystick.cpp
+			JoystickTweaker.cpp
+			SerialPort.cpp
+			USBConfiguration.cpp
+			USBDevice.cpp
+			USBEndpoint.cpp
+			USBInterface.cpp
+			USBRoster.cpp
+			: be [ TargetLibsupc++ ]
+			;
+	}
+}

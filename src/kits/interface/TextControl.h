@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_TEXT_CONTROL__H
-#define BHAPI_TEXT_CONTROL__H
+#ifndef BHAPI_TEXT_CONTROL_H
+#define BHAPI_TEXT_CONTROL_H
 
 #include "../support/SupportDefs.h"
 
@@ -37,7 +37,7 @@
 class BMessage;
 #include "../interface/Rect.h"
 #include "../interface/TextEditable.h"
-class IMPEXP_BHAPI BTextControl : public BTextEditable {
+class IMPEXPBHAPI BTextControl : public BTextEditable {
 public:
 	BTextControl(BRect frame,
 		     const char *name,
@@ -53,8 +53,8 @@ public:
 	virtual void	SetDivider(float divider);
 	float		Divider() const;
 
-	virtual void	SetAlignment(b_alignment forLabel, b_alignment forText);
-	void		GetAlignment(b_alignment *forLabel, b_alignment *forText) const;
+	virtual void	SetAlignment(bhapi::alignment forLabel, bhapi::alignment forText);
+	void		GetAlignment(bhapi::alignment *forLabel, bhapi::alignment *forText) const;
 
 	virtual void	SetModificationMessage(BMessage *msg);
 	BMessage	*ModificationMessage() const;
@@ -65,12 +65,12 @@ public:
 	virtual void	KeyDown(const char *bytes, b_int32 numBytes);
 
 private:
-	b_alignment fLabelAlignment;
+	bhapi::alignment fLabelAlignment;
 	float fDivider;
 	BMessage *fModificationMessage;
 };
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_TEXT_CONTROL__H */
+#endif /* BHAPI_TEXT_CONTROL_H */
 

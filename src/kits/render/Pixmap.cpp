@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,7 +28,6 @@
  * --------------------------------------------------------------------------*/
 
 #include "Pixmap.h"
-
 #include "../support/StringArray.h"
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"
@@ -36,22 +35,23 @@
 
 #include <string.h>
 #include <stdlib.h>
+using namespace bhapi;
 
 BPixmap::BPixmap()
-	: BRender(), fPtr(NULL), fColorSpace((b_color_space)0), fRows(0), fColumns(0), fRowBytes(0)
+	: BRender(), fPtr(NULL), fColorSpace((bhapi::color_space)0), fRows(0), fColumns(0), fRowBytes(0)
 {
 }
 
 
-BPixmap::BPixmap(b_uint32 width, b_uint32 height, b_color_space space)
-	: BRender(), fPtr(NULL), fColorSpace((b_color_space)0), fRows(0), fColumns(0), fRowBytes(0)
+BPixmap::BPixmap(b_uint32 width, b_uint32 height, bhapi::color_space space)
+	: BRender(), fPtr(NULL), fColorSpace((bhapi::color_space)0), fRows(0), fColumns(0), fRowBytes(0)
 {
 	ResizeTo(width, height, space);
 }
 
 
-BPixmap::BPixmap(BRect bounds, b_color_space space)
-	: BRender(), fPtr(NULL), fColorSpace((b_color_space)0), fRows(0), fColumns(0), fRowBytes(0)
+BPixmap::BPixmap(BRect bounds, bhapi::color_space space)
+	: BRender(), fPtr(NULL), fColorSpace((bhapi::color_space)0), fRows(0), fColumns(0), fRowBytes(0)
 {
 	ResizeTo((b_uint32)(max_c(bounds.IntegerWidth() + 1, 0)), (b_uint32)(max_c(bounds.IntegerHeight() + 1, 0)), space);
 }
@@ -101,7 +101,7 @@ BPixmap::BytesPerRow() const
 }
 
 
-b_color_space
+bhapi::color_space
 BPixmap::ColorSpace() const
 {
 	return fColorSpace;
@@ -117,7 +117,7 @@ BPixmap::Bounds() const
 
 
 bool
-BPixmap::ResizeTo(b_uint32 width, b_uint32 height, b_color_space space)
+BPixmap::ResizeTo(b_uint32 width, b_uint32 height, bhapi::color_space space)
 {
 	if(width == 0 || height == 0)
 	{
@@ -129,7 +129,7 @@ BPixmap::ResizeTo(b_uint32 width, b_uint32 height, b_color_space space)
 
 	switch(space)
 	{
-		case B_CMAP8:
+        case B_CMAP8:
 			allocSize = (size_t)(width * height);
 			break;
 
@@ -170,7 +170,7 @@ BPixmap::ResizeTo(b_uint32 width, b_uint32 height, b_color_space space)
 
 
 bool
-BPixmap::ResizeTo(BRect bounds, b_color_space space)
+BPixmap::ResizeTo(BRect bounds, bhapi::color_space space)
 {
 	return ResizeTo((b_uint32)(max_c(bounds.IntegerWidth() + 1, 0)), (b_uint32)(max_c(bounds.IntegerHeight() + 1, 0)), space);
 }
@@ -201,7 +201,7 @@ BPixmap::GetFrame(b_int32 *originX, b_int32 *originY, b_uint32 *width, b_uint32 
 
 
 void
-BPixmap::GetPixel(b_int32 x, b_int32 y, b_rgb_color &color) const
+BPixmap::GetPixel(b_int32 x, b_int32 y, bhapi::rgb_color &color) const
 {
 	if(fPtr == NULL) return;
 
@@ -249,7 +249,7 @@ BPixmap::GetPixel(b_int32 x, b_int32 y, b_rgb_color &color) const
 
 
 void
-BPixmap::PutPixel(b_int32 x, b_int32 y, b_rgb_color color)
+BPixmap::PutPixel(b_int32 x, b_int32 y, bhapi::rgb_color color)
 {
 	if(fPtr == NULL) return;
 
@@ -298,7 +298,7 @@ BPixmap::PutPixel(b_int32 x, b_int32 y, b_rgb_color color)
 
 
 void
-BPixmap::PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, b_rgb_color color)
+BPixmap::PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::rgb_color color)
 {
 	if(fPtr == NULL) return;
 
@@ -345,7 +345,7 @@ BPixmap::PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, b_rgb_co
 
 
 void
-BPixmap::SetBits(const void *data, b_int32 length, b_int32 offset, b_color_space space)
+BPixmap::SetBits(const void *data, b_int32 length, b_int32 offset, bhapi::color_space space)
 {
 	if(data == NULL || length <= 0 || offset < 0 || !IsValid()) return;
 	if(BitsLength() - (b_uint32)length < (b_uint32)offset) length = BitsLength() - (b_uint32)offset;
@@ -364,16 +364,16 @@ BPixmap::SetBits(const void *data, b_int32 length, b_int32 offset, b_color_space
 
 
 void
-BPixmap::SetPixel(b_int32 x, b_int32 y, b_rgb_color color)
+BPixmap::SetPixel(b_int32 x, b_int32 y, bhapi::rgb_color color)
 {
 	PutPixel(x, y, color);
 }
 
 
-b_rgb_color
+bhapi::rgb_color
 BPixmap::GetPixel(b_int32 x, b_int32 y) const
 {
-	b_rgb_color color = b_makb_rgb_color(0, 0, 0, 0);
+    bhapi::rgb_color color = bhapi::make_rgb_color(0, 0, 0, 0);
 	GetPixel(x, y, color);
 	return color;
 }
@@ -473,7 +473,7 @@ BPixmap::DrawXPM(const char **xpm_data, b_int32 destX, b_int32 destY, b_int32 sr
 			if(colors.ItemAt(found, (void**)&color) == NULL) break;
 			if(color == NULL || *color == 0xE9E9E9) continue;
 
-			b_rgb_color c;
+			bhapi::rgb_color c;
 			if(alpha == 255)
 			{
 				c.set_to((*color >> 16) & 0xff, (*color >> 8) & 0xff, *color & 0xff);

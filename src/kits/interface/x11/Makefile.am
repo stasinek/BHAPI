@@ -23,12 +23,12 @@ endif
 noinst_LTLIBRARIES = libgraphics-x11.la
 
 libgraphics_x11_la_SOURCES =			\
-			etk-x11.h		\
-			etk-application.cpp	\
-			etk-window.cpp		\
-			etk-pixmap.cpp		\
-			etk-drawing.cpp		\
-			etk-x11-font.cpp
+			BHAPI_wrapper_x11.h		\
+			BHAPI_wrapper_application.cpp	\
+			BHAPI_wrapper_window.cpp		\
+			BHAPI_wrapper_pixmap.cpp		\
+			BHAPI_wrapper_drawing.cpp		\
+			BHAPI_wrapper_x11-font.cpp
 
 if ETK_OS_WIN32
 no_undefined = -no-undefined

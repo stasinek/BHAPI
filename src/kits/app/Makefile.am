@@ -7,7 +7,7 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 		-DETK_COMPILATION 			\
 		@ETK_DEBUG_FLAGS@
 
-noinst_LTLIBRARIES = libetk-app.la
+noinst_LTLIBRARIES = libBHAPI_wrapper_app.la
 
 libetk_app_la_SOURCES =			\
 		AppDefs.h		\

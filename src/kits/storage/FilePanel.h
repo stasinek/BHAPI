@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_FILE_PANEL__H
-#define BHAPI_FILE_PANEL__H
+#ifndef BHAPI_FILE_PANEL_H
+#define BHAPI_FILE_PANEL_H
 
 #include "../support/SupportDefs.h"
 
@@ -52,7 +52,7 @@ class BDirectory;
 class BWindow;
 class BMessenger;
 class BMessage;
-class IMPEXP_BHAPI BFilePanelFilter {
+class IMPEXPBHAPI BFilePanelFilter {
 public:
 	virtual ~BFilePanelFilter();
 
@@ -60,7 +60,7 @@ public:
 };
 
 
-class IMPEXP_BHAPI BFilePanel {
+class IMPEXPBHAPI BFilePanel {
 public:
     BFilePanel(bhapi::file_panel_mode mode = bhapi::B_OPEN_PANEL,
            const BMessenger *target = NULL,
@@ -119,5 +119,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_FILE_PANEL__H */
+#endif /* BHAPI_FILE_PANEL_H */
 

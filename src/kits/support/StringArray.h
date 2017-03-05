@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,13 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_STRING_ARRAY__H
-#define BHAPI_STRING_ARRAY__H
-#include "../support/SupportDefs.h"
+#ifndef BHAPI_STRING_ARRAY_H
+#define BHAPI_STRING_ARRAY_H
+
 #include "List.h"
+#include "../support/SupportDefs.h"
+
 #ifdef __cplusplus /* Just for C++ */
 class BString;
-class IMPEXP_BHAPI BStringArray {
+class IMPEXPBHAPI BStringArray {
 public:
     BStringArray();
     BStringArray(const char *string, void *attach_data = NULL); // string: first item
@@ -57,6 +59,7 @@ public:
     bool            AddItem(const BString &item, b_int32 atIndex, void *attach_data = NULL);
     bool            AddArray(const BStringArray &array);
     bool            AddArray(const BStringArray &array, b_int32 atIndex);
+    inline bool     Add(const char *item, void *attach_data = NULL) { return AddItem(item); }
 
     bool            RemoveItem(b_int32 index);
     bool            RemoveItems(b_int32 index, b_int32 count);
@@ -87,5 +90,5 @@ private:
     BList list;
 };
 #endif /* __cplusplus */
-#endif /* BHAPI_STRING_ARRAY__H */
+#endif /* BHAPI_STRING_ARRAY_H */
 

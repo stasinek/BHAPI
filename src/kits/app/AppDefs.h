@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_APPDEFS__H
-#define BHAPI_APPDEFS__H
+#ifndef BHAPI_APPDEFS_H
+#define BHAPI_APPDEFS_H
 #include "../support/SupportDefs.h"
 
 /* System Message Codes */
@@ -98,5 +98,5 @@ enum {
     B_INPUT_METHOD_EVENT			= 'IMEV'
 };
 
-#endif /* BHAPI_APPDEFS__H */
+#endif /* BHAPI_APPDEFS_H */
 

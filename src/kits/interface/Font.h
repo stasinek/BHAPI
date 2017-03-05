@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_FONT__H
-#define BHAPI_FONT__H
+#ifndef BHAPI_FONT_H
+#define BHAPI_FONT_H
 
 #include "../support/SupportDefs.h"
 #include "../support/String.h"
@@ -55,7 +55,7 @@ typedef struct font_desc font_desc;
 class BView;
 class BFontEngine;
 
-class IMPEXP_BHAPI BFont {
+class IMPEXPBHAPI BFont {
 public:
 	BFont();
 	BFont(const BFont &font);
@@ -114,17 +114,17 @@ private:
 };
 
 namespace bhapi {
-extern IMPEXP_BHAPI const BFont* plain_font;
-extern IMPEXP_BHAPI const BFont* bold_font;
-extern IMPEXP_BHAPI const BFont* fixed_font;
-IMPEXP_BHAPI b_int32	count_font_families(void);
-IMPEXP_BHAPI b_status_t	get_font_family(b_int32 index, const char **name);
-IMPEXP_BHAPI b_int32	get_font_family_index(const char *name);
-IMPEXP_BHAPI b_int32	count_font_styles(const char *family);
-IMPEXP_BHAPI b_int32	count_font_styles(b_int32 index);
-IMPEXP_BHAPI b_status_t	get_font_style(const char *family, b_int32 index, const char **name);
-IMPEXP_BHAPI b_int32	get_font_style_index(const char *family, const char *name);
-IMPEXP_BHAPI bool	update_font_families(bool check_only);
+extern IMPEXPBHAPI const BFont* plain_font;
+extern IMPEXPBHAPI const BFont* bold_font;
+extern IMPEXPBHAPI const BFont* fixed_font;
+IMPEXPBHAPI b_int32	count_font_families(void);
+IMPEXPBHAPI b_status_t	get_font_family(b_int32 index, const char **name);
+IMPEXPBHAPI b_int32	get_font_family_index(const char *name);
+IMPEXPBHAPI b_int32	count_font_styles(const char *family);
+IMPEXPBHAPI b_int32	count_font_styles(b_int32 index);
+IMPEXPBHAPI b_status_t	get_font_style(const char *family, b_int32 index, const char **name);
+IMPEXPBHAPI b_int32	get_font_style_index(const char *family, const char *name);
+IMPEXPBHAPI bool	update_font_families(bool check_only);
 }
 #endif /* __cplusplus */
 
@@ -179,5 +179,5 @@ struct font_desc {
 #endif /* __cplusplus */
 };
 } /* namespace bhapi */
-#endif /* BHAPI_FONT__H */
+#endif /* BHAPI_FONT_H */
 

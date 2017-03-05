@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -217,9 +217,9 @@ BStatusBar::MessageReceived(BMessage *msg)
 void
 BStatusBar::Draw(BRect updateRect)
 {
-	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
-	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
-	b_rgb_color barColor = b_ui_color(B_STATUSBAR_COLOR);
+	bhapi::rgb_color shineColor = bhapi::ui_color(B_SHINE_COLOR);
+	bhapi::rgb_color shadowColor = bhapi::ui_color(B_SHADOW_COLOR);
+	bhapi::rgb_color barColor = bhapi::ui_color(B_STATUSBAR_COLOR);
 
 	BFont font;
 	bhapi::font_height fontHeight;
@@ -245,13 +245,13 @@ BStatusBar::Draw(BRect updateRect)
 		if(!IsEnabled()) MovePenBy(1, 1);
 		penLocation = PenLocation();
 
-		SetHighColor(IsEnabled() ? b_ui_color(B_PANEL_TEXT_COLOR) : b_ui_color(B_SHINE_COLOR).disable(ViewColor()));
+		SetHighColor(IsEnabled() ? bhapi::ui_color(B_PANEL_TEXT_COLOR) : bhapi::ui_color(B_SHINE_COLOR).disable(ViewColor()));
 		SetLowColor(ViewColor());
 		DrawString(fLabel);
 
 		if(!IsEnabled())
 		{
-			SetHighColor(b_ui_color(B_SHADOW_COLOR).disable(ViewColor()));
+			SetHighColor(bhapi::ui_color(B_SHADOW_COLOR).disable(ViewColor()));
 			DrawString(fLabel, penLocation - BPoint(1, 1));
 		}
 
@@ -263,13 +263,13 @@ BStatusBar::Draw(BRect updateRect)
 		if(!IsEnabled()) MovePenBy(1, 1);
 		penLocation = PenLocation();
 
-		SetHighColor(IsEnabled() ? b_ui_color(B_PANEL_TEXT_COLOR) : b_ui_color(B_SHINE_COLOR).disable(ViewColor()));
+		SetHighColor(IsEnabled() ? bhapi::ui_color(B_PANEL_TEXT_COLOR) : bhapi::ui_color(B_SHINE_COLOR).disable(ViewColor()));
 		SetLowColor(ViewColor());
 		DrawString(fText);
 
 		if(!IsEnabled())
 		{
-			SetHighColor(b_ui_color(B_SHADOW_COLOR).disable(ViewColor()));
+			SetHighColor(bhapi::ui_color(B_SHADOW_COLOR).disable(ViewColor()));
 			DrawString(fText, penLocation - BPoint(1, 1));
 		}
 	}
@@ -283,13 +283,13 @@ BStatusBar::Draw(BRect updateRect)
 		if(!IsEnabled()) MovePenBy(1, 1);
 		penLocation = PenLocation();
 
-		SetHighColor(IsEnabled() ? b_ui_color(B_PANEL_TEXT_COLOR) : b_ui_color(B_SHINE_COLOR).disable(ViewColor()));
+		SetHighColor(IsEnabled() ? bhapi::ui_color(B_PANEL_TEXT_COLOR) : bhapi::ui_color(B_SHINE_COLOR).disable(ViewColor()));
 		SetLowColor(ViewColor());
 		DrawString(fTrailingLabel);
 
 		if(!IsEnabled())
 		{
-			SetHighColor(b_ui_color(B_SHADOW_COLOR).disable(ViewColor()));
+			SetHighColor(bhapi::ui_color(B_SHADOW_COLOR).disable(ViewColor()));
 			penLocation -= BPoint(1, 1);
 			DrawString(fTrailingLabel, penLocation);
 		}
@@ -303,13 +303,13 @@ BStatusBar::Draw(BRect updateRect)
 		if(!IsEnabled()) MovePenBy(1, 1);
 		penLocation = PenLocation();
 
-		SetHighColor(IsEnabled() ? b_ui_color(B_PANEL_TEXT_COLOR) : b_ui_color(B_SHINE_COLOR).disable(ViewColor()));
+		SetHighColor(IsEnabled() ? bhapi::ui_color(B_PANEL_TEXT_COLOR) : bhapi::ui_color(B_SHINE_COLOR).disable(ViewColor()));
 		SetLowColor(ViewColor());
 		DrawString(fTrailingText);
 
 		if(!IsEnabled())
 		{
-			SetHighColor(b_ui_color(B_SHADOW_COLOR).disable(ViewColor()));
+			SetHighColor(bhapi::ui_color(B_SHADOW_COLOR).disable(ViewColor()));
 			DrawString(fTrailingText, penLocation - BPoint(1, 1));
 		}
 	}

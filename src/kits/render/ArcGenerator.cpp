@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -36,10 +36,10 @@
 #include <string.h>
 
 namespace bhapi {
-LOCAL_BHAPI bool get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext);
+LOCALBHAPI bool get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext);
 }
 
-LOCAL_BHAPI bool bhapi::get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext)
+LOCALBHAPI bool bhapi::get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext)
 {
 	if(radius.x <= 0 || radius.y <= 0 || pStart.x > pEnd.x || pStart.y > 0 || pEnd.y > 0) return false;
 

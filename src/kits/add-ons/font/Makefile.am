@@ -10,7 +10,7 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 		-DETK_COMPILATION 			\
 		@ETK_DEBUG_FLAGS@
 
-noinst_LTLIBRARIES = libetk-add-ons-font.la
+noinst_LTLIBRARIES = libBHAPI_wrapper_add-ons-font.la
 
 libetk_add_ons_font_la_SOURCES =	\
 		FontEngine.cpp		\

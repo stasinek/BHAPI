@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_NET_ENDPOINT__H
-#define BHAPI_NET_ENDPOINT__H
+#ifndef BHAPI_NET_ENDPOINT_H
+#define BHAPI_NET_ENDPOINT_H
 #include "../support/SupportDefs.h"
 #include "../net/NetAddress.h"
 #include "../net/NetBuffer.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BNetEndpoint : public BArchivable {
+class IMPEXPBHAPI BNetEndpoint : public BArchivable {
 public:
 	BNetEndpoint(int proto = SOCK_STREAM);
 	BNetEndpoint(const BNetEndpoint &from);
@@ -117,5 +117,5 @@ inline int BNetEndpoint::SetReuseAddr(bool state)
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_NET_ENDPOINT__H */
+#endif /* BHAPI_NET_ENDPOINT_H */
 

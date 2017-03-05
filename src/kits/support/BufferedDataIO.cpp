@@ -3,14 +3,10 @@
  * Distributed under the terms of the MIT License.
  */
 
-
-#include <BufferedDataIO.h>
-
+#include "BufferedDataIO.h"
 #include <new>
-
 #include <stdio.h>
 #include <string.h>
-
 
 //#define TRACE_DATA_IO
 #ifdef TRACE_DATA_IO
@@ -18,7 +14,6 @@
 #else
 #	define TRACE(x...) ;
 #endif
-
 
 BBufferedDataIO::BBufferedDataIO(BDataIO& stream, size_t bufferSize,
 	bool ownsStream, bool partialReads)
@@ -34,7 +29,6 @@ BBufferedDataIO::BBufferedDataIO(BDataIO& stream, size_t bufferSize,
 	fBuffer = new(std::nothrow) uint8[fBufferSize];
 }
 
-
 BBufferedDataIO::~BBufferedDataIO()
 {
 	Flush();
@@ -44,44 +38,32 @@ BBufferedDataIO::~BBufferedDataIO()
 		delete &fStream;
 }
 
-
-status_t
-BBufferedDataIO::InitCheck() const
+status_t BBufferedDataIO::InitCheck() const
 {
 	return fBuffer == NULL ? B_NO_MEMORY : B_OK;
 }
 
-
-BDataIO*
-BBufferedDataIO::Stream() const
+BDataIO* BBufferedDataIO::Stream() const
 {
 	return &fStream;
 }
 
-
-size_t
-BBufferedDataIO::BufferSize() const
+size_t BBufferedDataIO::BufferSize() const
 {
 	return fBufferSize;
 }
 
-
-bool
-BBufferedDataIO::OwnsStream() const
+bool BBufferedDataIO::OwnsStream() const
 {
 	return fOwnsStream;
 }
 
-
-void
-BBufferedDataIO::SetOwnsStream(bool ownsStream)
+void BBufferedDataIO::SetOwnsStream(bool ownsStream)
 {
 	fOwnsStream = ownsStream;
 }
 
-
-status_t
-BBufferedDataIO::Flush()
+status_t BBufferedDataIO::Flush()
 {
 	if (!fDirty)
 		return B_OK;
@@ -101,9 +83,7 @@ BBufferedDataIO::Flush()
 	return bytesWritten;
 }
 
-
-ssize_t
-BBufferedDataIO::Read(void* buffer, size_t size)
+ssize_t BBufferedDataIO::Read(void* buffer, size_t size)
 {
 	if (buffer == NULL)
 		return B_BAD_VALUE;
@@ -163,9 +143,7 @@ BBufferedDataIO::Read(void* buffer, size_t size)
 	return bytesRead;
 }
 
-
-ssize_t
-BBufferedDataIO::Write(const void* buffer, size_t size)
+ssize_t BBufferedDataIO::Write(const void* buffer, size_t size)
 {
 	if (buffer == NULL)
 		return B_BAD_VALUE;
@@ -218,10 +196,7 @@ BBufferedDataIO::Write(const void* buffer, size_t size)
 	return bytesWritten;
 }
 
-
 //	#pragma mark - FBC
-
-
 status_t BBufferedDataIO::_Reserved0(void*) { return B_ERROR; }
 status_t BBufferedDataIO::_Reserved1(void*) { return B_ERROR; }
 status_t BBufferedDataIO::_Reserved2(void*) { return B_ERROR; }

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_SIMPLE_XML_PARSER__H
-#define BHAPI_SIMPLE_XML_PARSER__H
+#ifndef BHAPI_SIMPLE_XML_PARSER_H
+#define BHAPI_SIMPLE_XML_PARSER_H
 
 #include "../support/List.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BSimpleXmlNode {
+class IMPEXPBHAPI BSimpleXmlNode {
 public:
 	BSimpleXmlNode(const char *name, const char *content = NULL);
 	~BSimpleXmlNode();
@@ -71,10 +71,10 @@ private:
 };
 
 
-IMPEXP_BHAPI b_status_t b_parse_simple_xml(const char *simple_xml_buffer, BSimpleXmlNode *node);
+IMPEXPBHAPI b_status_t b_parse_simple_xml(const char *simple_xml_buffer, BSimpleXmlNode *node);
 
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_SIMPLE_XML_PARSER__H */
+#endif /* BHAPI_SIMPLE_XML_PARSER_H */
 

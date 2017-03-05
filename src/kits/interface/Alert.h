@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,37 +28,42 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_ALERT__H
-#define BHAPI_ALERT__H
+#ifndef BHAPI_ALERT_H
+#define BHAPI_ALERT_H
 
 #include "../support/SupportDefs.h"
 
 #include "../interface/InterfaceDefs.h"
 #include "../interface/Window.h"
 
-enum b_alert_type {
+#ifdef __cplusplus /* Just for C++ */
+namespace bhapi {
+#endif
+enum alert_type {
     B_EMPTY_ALERT = 0,
     B_INFO_ALERT,
     B_IDEA_ALERT,
     B_WARNING_ALERT,
     B_STOP_ALERT
 };
+#ifdef __cplusplus /* Just for C++ */
+} // namespace
+#endif
 
 #ifdef __cplusplus /* Just for C++ */
-
 class BInvoker;
 class BButton;
 class BTextView;
 
-class IMPEXP_BHAPI BAlert : public BWindow {
+class IMPEXPBHAPI BAlert : public BWindow {
 public:
     BAlert(const char *title,
 	       const char *text,
 	       const char *button1_label,
 	       const char *button2_label = NULL,
 	       const char *button3_label = NULL,
-	       b_button_width width = B_WIDTH_AS_USUAL,
-	       b_alert_type type = B_INFO_ALERT);
+           bhapi::button_width width = B_WIDTH_AS_USUAL,
+           bhapi::alert_type type = B_INFO_ALERT);
     virtual ~BAlert();
 
 	// run synchronously then auto-destruct when it return.
@@ -79,6 +84,5 @@ private:
 };
 
 #endif /* __cplusplus */
-
-#endif /* BHAPI_ALERT__H */
+#endif /* BHAPI_ALERT_H */
 

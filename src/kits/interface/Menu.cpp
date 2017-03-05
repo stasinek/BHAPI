@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -38,13 +38,15 @@
 #include "../app/AppDefs.h"
 #include "../app/Message.h"
 
+using namespace bhapi;
+
 #define BHAPI_MENU_ROW_SPACING	5
 #define BHAPI_MENU_COLUMN_SPACING	2
 
 
 class ESubmenuView;
 
-class LOCAL_BHAPI ESubmenuWindow : public BWindow {
+class LOCALBHAPI ESubmenuWindow : public BWindow {
 public:
 	ESubmenuWindow(BPoint where, BMenu *menu);
 	virtual ~ESubmenuWindow();
@@ -70,7 +72,7 @@ BMenu::BMenu(BRect frame, const char *title, b_uint32 resizeMode, b_uint32 flags
 {
 	fMargins = BRect(0, 0, 0, 0);
 
-	SetViewColor(b_ui_color(B_MENU_BACKGROUND_COLOR));
+    SetViewColor(bhapi::ui_color(B_MENU_BACKGROUND_COLOR));
 
 	SetFlags(flags | B_WILL_DRAW);
 
@@ -85,7 +87,7 @@ BMenu::BMenu(const char *title, b_menu_layout layout)
 {
 	fMargins = BRect(0, 0, 0, 0);
 
-	SetViewColor(b_ui_color(B_MENU_BACKGROUND_COLOR));
+    SetViewColor(bhapi::ui_color(B_MENU_BACKGROUND_COLOR));
 
 	SetLayout(layout, 10, 10, (layout != B_ITEMS_IN_MATRIX ? true : false));
 }
@@ -98,7 +100,7 @@ BMenu::BMenu(const char *title, float width, float height)
 {
 	fMargins = BRect(0, 0, 0, 0);
 
-	SetViewColor(b_ui_color(B_MENU_BACKGROUND_COLOR));
+    SetViewColor(bhapi::ui_color(B_MENU_BACKGROUND_COLOR));
 
 	SetLayout(B_ITEMS_IN_MATRIX, width, height, false);
 }
@@ -433,7 +435,7 @@ BMenu::SetEnabled(bool state)
 	{
 		BView::SetEnabled(state);
 
-		b_rgb_color vColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
+        bhapi::rgb_color vColor = bhapi::ui_color(B_MENU_BACKGROUND_COLOR);
 
 		if(!state)
 		{
@@ -1489,7 +1491,7 @@ ESubmenuView::Draw(BRect updateRect)
 	{
 		SetDrawingMode(B_OP_COPY);
 		SetPenSize(1);
-		b_rgb_color borderColor = b_ui_color(B_MENU_BORDER_COLOR);
+        bhapi::rgb_color borderColor = bhapi::ui_color(B_MENU_BORDER_COLOR);
 
 		ESubmenuWindow *win = cast_as(Window(), ESubmenuWindow);
 		if(win->fMenu == NULL || win->fMenu->IsEnabled() == false) borderColor.mix(0, 0, 0, 20);
@@ -1523,7 +1525,7 @@ ESubmenuWindow::ESubmenuWindow(BPoint where, BMenu *menu)
 			ResizeTo(fMenu->Frame().Width() + 4, fMenu->Frame().Height() + 4);
 			MoveTo(where);
 
-			b_rgb_color bkColor = b_ui_color(B_MENU_BACKGROUND_COLOR);
+            bhapi::rgb_color bkColor = bhapi::ui_color(B_MENU_BACKGROUND_COLOR);
 			if(fMenu->IsEnabled() == false) bkColor.mix(0, 0, 0, 20);
 			SetBackgroundColor(bkColor);
 

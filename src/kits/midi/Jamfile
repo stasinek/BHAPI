@@ -1,0 +1,37 @@
+SubDir HAIKU_TOP src kits midi ;
+
+SetSubDirSupportedPlatformsBeOSCompatible ;
+
+if $(TARGET_PLATFORM) != haiku {
+	UseHeaders [ FDirName $(HAIKU_TOP) headers os midi ] : true ;
+	UseHeaders [ FDirName $(HAIKU_TOP) headers os midi2 ] : true ;
+	UseHeaders [ FDirName $(HAIKU_TOP) headers os ] : true ;
+}
+
+UsePrivateHeaders midi ;
+UseLibraryHeaders fluidsynth ;
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup ] {
+	on $(architectureObject) {
+		SharedLibrary [ MultiArchDefaultGristFiles libmidi.so ] :
+			Midi.cpp
+			MidiGlue.cpp
+			MidiPort.cpp
+			MidiSettings.cpp
+			MidiStore.cpp
+			MidiSynth.cpp
+			MidiSynthFile.cpp
+			MidiText.cpp
+			Samples.cpp
+			SoftSynth.cpp
+			Synth.cpp
+			:
+			be
+			midi2
+			media
+			[ MultiArchDefaultGristFiles libfluidsynth.so ]
+			[ TargetLibsupc++ ]
+			;
+	}
+}

@@ -3,107 +3,80 @@
  * Distributed under the terms of the MIT License.
  */
 
-
-#include <CompressionAlgorithm.h>
+#include "CompressionAlgorithm.h"
+#include "Errors.h"
 
 #include <stdlib.h>
 #include <string.h>
-
-#include <Errors.h>
-
-
 // #pragma mark - BCompressionParameters
-
 
 BCompressionParameters::BCompressionParameters()
 {
 }
 
-
 BCompressionParameters::~BCompressionParameters()
 {
 }
 
-
 // #pragma mark - BDecompressionParameters
-
 
 BDecompressionParameters::BDecompressionParameters()
 {
 }
 
-
 BDecompressionParameters::~BDecompressionParameters()
 {
 }
 
-
 // #pragma mark - BCompressionAlgorithm
-
 
 BCompressionAlgorithm::BCompressionAlgorithm()
 {
 }
 
-
 BCompressionAlgorithm::~BCompressionAlgorithm()
 {
 }
 
-
-status_t
-BCompressionAlgorithm::CreateCompressingInputStream(BDataIO* input,
+status_t BCompressionAlgorithm::CreateCompressingInputStream(BDataIO* input,
 	const BCompressionParameters* parameters, BDataIO*& _stream)
 {
 	return B_NOT_SUPPORTED;
 }
 
-
-status_t
-BCompressionAlgorithm::CreateCompressingOutputStream(BDataIO* output,
+status_t BCompressionAlgorithm::CreateCompressingOutputStream(BDataIO* output,
 	const BCompressionParameters* parameters, BDataIO*& _stream)
 {
 	return B_NOT_SUPPORTED;
 }
 
-
-status_t
-BCompressionAlgorithm::CreateDecompressingInputStream(BDataIO* input,
+status_t BCompressionAlgorithm::CreateDecompressingInputStream(BDataIO* input,
 	const BDecompressionParameters* parameters, BDataIO*& _stream)
 {
 	return B_NOT_SUPPORTED;
 }
 
-
-status_t
-BCompressionAlgorithm::CreateDecompressingOutputStream(BDataIO* output,
+status_t BCompressionAlgorithm::CreateDecompressingOutputStream(BDataIO* output,
 	const BDecompressionParameters* parameters, BDataIO*& _stream)
 {
 	return B_NOT_SUPPORTED;
 }
 
-
-status_t
-BCompressionAlgorithm::CompressBuffer(const void* input, size_t inputSize,
+status_t BCompressionAlgorithm::CompressBuffer(const void* input, size_t inputSize,
 	void* output, size_t outputSize, size_t& _compressedSize,
 	const BCompressionParameters* parameters)
 {
 	return B_NOT_SUPPORTED;
 }
 
-
-status_t
-BCompressionAlgorithm::DecompressBuffer(const void* input,
+status_t BCompressionAlgorithm::DecompressBuffer(const void* input,
 	size_t inputSize, void* output, size_t outputSize,
 	size_t& _uncompressedSize, const BDecompressionParameters* parameters)
 {
 	return B_NOT_SUPPORTED;
 }
 
-
 // #pragma mark - BAbstractStream
-
-
 BCompressionAlgorithm::BAbstractStream::BAbstractStream()
 	:
 	BDataIO(),
@@ -114,15 +87,12 @@ BCompressionAlgorithm::BAbstractStream::BAbstractStream()
 {
 }
 
-
 BCompressionAlgorithm::BAbstractStream::~BAbstractStream()
 {
 	free(fBuffer);
 }
 
-
-status_t
-BCompressionAlgorithm::BAbstractStream::Init(size_t bufferSize)
+status_t BCompressionAlgorithm::BAbstractStream::Init(size_t bufferSize)
 {
 	fBuffer = (uint8*)malloc(bufferSize);
 	fBufferCapacity = bufferSize;
@@ -130,10 +100,7 @@ BCompressionAlgorithm::BAbstractStream::Init(size_t bufferSize)
 	return fBuffer != NULL ? B_OK : B_NO_MEMORY;
 }
 
-
 // #pragma mark - BAbstractInputStream
-
-
 BCompressionAlgorithm::BAbstractInputStream::BAbstractInputStream(
 		BDataIO* input)
 	:
@@ -144,14 +111,11 @@ BCompressionAlgorithm::BAbstractInputStream::BAbstractInputStream(
 {
 }
 
-
 BCompressionAlgorithm::BAbstractInputStream::~BAbstractInputStream()
 {
 }
 
-
-ssize_t
-BCompressionAlgorithm::BAbstractInputStream::Read(void* buffer, size_t size)
+ssize_t BCompressionAlgorithm::BAbstractInputStream::Read(void* buffer, size_t size)
 {
 	if (size == 0)
 		return 0;
@@ -228,8 +192,6 @@ BCompressionAlgorithm::BAbstractInputStream::Read(void* buffer, size_t size)
 
 
 // #pragma mark - BAbstractOutputStream
-
-
 BCompressionAlgorithm::BAbstractOutputStream::BAbstractOutputStream(
 		BDataIO* output)
 	:
@@ -238,14 +200,11 @@ BCompressionAlgorithm::BAbstractOutputStream::BAbstractOutputStream(
 {
 }
 
-
 BCompressionAlgorithm::BAbstractOutputStream::~BAbstractOutputStream()
 {
 }
 
-
-ssize_t
-BCompressionAlgorithm::BAbstractOutputStream::Write(const void* buffer,
+ssize_t BCompressionAlgorithm::BAbstractOutputStream::Write(const void* buffer,
 	size_t size)
 {
 	if (size == 0)
@@ -293,9 +252,7 @@ BCompressionAlgorithm::BAbstractOutputStream::Write(const void* buffer,
 	return size - bytesRemaining;
 }
 
-
-status_t
-BCompressionAlgorithm::BAbstractOutputStream::Flush()
+status_t BCompressionAlgorithm::BAbstractOutputStream::Flush()
 {
 	bool noMorePendingData = false;
 

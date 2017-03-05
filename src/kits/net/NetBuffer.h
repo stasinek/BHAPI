@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_NET_BUFFER__H
-#define BHAPI_NET_BUFFER__H
+#ifndef BHAPI_NET_BUFFER_H
+#define BHAPI_NET_BUFFER_H
 #include "../support/SupportDefs.h"
 #include "../support/Archivable.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BNetBuffer : public BArchivable {
+class IMPEXPBHAPI BNetBuffer : public BArchivable {
 public:
 	BNetBuffer(size_t size = 0);
 	BNetBuffer(const BNetBuffer &from);
@@ -89,5 +89,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_NET_BUFFER__H */
+#endif /* BHAPI_NET_BUFFER_H */
 

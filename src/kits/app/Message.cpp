@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -40,12 +40,11 @@
 #include "../interface/Point.h"
 #include "../interface/Rect.h"
 
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-b_status_t
-BMessage::BGetInfo(b_type_code type, b_int32 index,
+b_status_t BMessage::BGetInfo(b_type_code type, b_int32 index,
            char **nameFound, b_type_code *typeFound, b_int32 *countFound) const
 {
     if(index < 0) return B_BAD_INDEX;
@@ -70,8 +69,7 @@ BMessage::BGetInfo(b_type_code type, b_int32 index,
 }
 
 
-b_status_t
-BMessage::BFindData(const char *name, b_type_code type, b_int32 index,
+b_status_t BMessage::BFindData(const char *name, b_type_code type, b_int32 index,
             const void **data, b_size_t *numBytes) const
 {
     if(index < 0) return B_BAD_INDEX;
@@ -98,8 +96,7 @@ BMessage::BFindData(const char *name, b_type_code type, b_int32 index,
 }
 
 
-b_status_t
-BMessage::BFindData(const char *name, b_type_code type,
+b_status_t BMessage::BFindData(const char *name, b_type_code type,
             const void **data, b_size_t *numBytes) const
 {
     return BFindData(name, type, 0, data, numBytes);
@@ -135,8 +132,7 @@ BMessage::BMessage(const BMessage &msg)
 }
 
 
-BMessage&
-BMessage::operator=(const BMessage &msg)
+BMessage& BMessage::operator=(const BMessage &msg)
 {
 	what = msg.what;
 
@@ -198,8 +194,7 @@ BMessage::operator=(const BMessage &msg)
 }
 
 
-size_t
-BMessage::FlattenedSize() const
+size_t BMessage::FlattenedSize() const
 {
 	size_t size = sizeof(size_t) + sizeof(b_uint32) + sizeof(b_uint64); // FlattenSize + msg->what + recordCount
 
@@ -240,8 +235,7 @@ BMessage::FlattenedSize() const
 }
 
 
-bool
-BMessage::Flatten(char *buffer, size_t bufferSize) const
+bool BMessage::Flatten(char *buffer, size_t bufferSize) const
 {
 	if(buffer == NULL ||
 	   bufferSize < sizeof(size_t) + sizeof(b_uint32) + sizeof(b_uint64) +
@@ -336,8 +330,7 @@ BMessage::Flatten(char *buffer, size_t bufferSize) const
 }
 
 
-bool
-BMessage::Unflatten(const char *buffer, size_t bufferSize)
+bool BMessage::Unflatten(const char *buffer, size_t bufferSize)
 {
 	if(buffer == NULL ||
 	   bufferSize < sizeof(size_t) + sizeof(b_uint32) + sizeof(b_uint64) +

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -61,7 +61,7 @@ BColorControl::BColorControl(BPoint leftTop, const char *name, BMessage *message
 				aRect.SetLeftTop(BPoint((float)j, 15.f * (float)i));
 				aRect.SetRightBottom(aRect.LeftTop() + BPoint(0.f, 14.f));
 
-				b_rgb_color color;
+				bhapi::rgb_color color;
 				color.set_to(i <= 1 ? j : 0, (i == 0 || i == 2) ? j : 0, (i == 0 || i == 3) ? j : 0);
 				pixmap->SetHighColor(color);
 				pixmap->FillRect(aRect);
@@ -120,7 +120,7 @@ BColorControl::_MarkFrame(BRect colorsFrame, b_uint8 channel)
 
 	if(colorsFrame.IsValid())
 	{
-		b_rgb_color fColor = ValueAsColor();
+		bhapi::rgb_color fColor = ValueAsColor();
 
 		if(channel == 0) /* red */
 		{
@@ -212,7 +212,7 @@ BColorControl::_DrawColors(BRect r)
 				aRect.SetRightBottom(aRect.LeftTop() + BPoint(0.f, 14.f));
 				if(aRect.Intersects(r) == false) continue;
 
-				b_rgb_color color;
+				bhapi::rgb_color color;
 				color.set_to(i <= 1 ? j : 0, (i == 0 || i == 2) ? j : 0, (i == 0 || i == 3) ? j : 0);
 				SetHighColor(color);
 				StrokeLine(aRect.LeftTop(), aRect.RightBottom());
@@ -235,8 +235,8 @@ BColorControl::_DrawColors(BRect r)
 
 	if(rect.InsetByCopy(1.f, 1.f).Contains(r) == false)
 	{
-		b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
-		b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
+        bhapi::rgb_color shineColor = bhapi::ui_color(B_SHINE_COLOR);
+        bhapi::rgb_color shadowColor = bhapi::ui_color(B_SHADOW_COLOR);
 
 		if(!IsEnabled())
 		{
@@ -267,9 +267,9 @@ BColorControl::_DrawDescription(BRect r)
 
 	PushState();
 
-	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
-	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
-	b_rgb_color textColor = b_ui_color(B_PANEL_TEXT_COLOR);
+    bhapi::rgb_color shineColor = bhapi::ui_color(B_SHINE_COLOR);
+    bhapi::rgb_color shadowColor = bhapi::ui_color(B_SHADOW_COLOR);
+    bhapi::rgb_color textColor = bhapi::ui_color(B_PANEL_TEXT_COLOR);
 
 	if(!IsEnabled())
 	{
@@ -300,7 +300,7 @@ BColorControl::_DrawDescription(BRect r)
 	BString str;
 	x += 9.f;
 
-	b_rgb_color fColor = ValueAsColor();
+	bhapi::rgb_color fColor = ValueAsColor();
 
 	str << fColor.red;
 	MovePenTo(x, rect.top + fontHeight.ascent + 4.f);
@@ -349,17 +349,17 @@ BColorControl::SetValue(b_int32 color)
 }
 
 
-void BColorControl::SetValue(b_rgb_color color)
+void BColorControl::SetValue(bhapi::rgb_color color)
 {
 	b_int32 c = ((b_int32)color.red << 16) | ((b_int32)color.green << 8) | ((b_int32)color.blue);
 	SetValue(c);
 }
 
 
-b_rgb_color BColorControl::ValueAsColor()
+bhapi::rgb_color BColorControl::ValueAsColor()
 {
 	b_int32 c = Value();
-	return b_makb_rgb_color((c >> 16) & 0xff, (c >> 8) & 0xff, c & 0xff);
+    return bhapi::make_rgb_color((c >> 16) & 0xff, (c >> 8) & 0xff, c & 0xff);
 }
 
 
@@ -379,7 +379,7 @@ BColorControl::MouseDown(BPoint where)
 	if(ptOffset.y < 0) ptOffset.y = 0;
 	if(ptOffset.y >= 60) ptOffset.y = 59;
 
-	b_rgb_color color = ValueAsColor();
+	bhapi::rgb_color color = ValueAsColor();
 
 	if(ptOffset.y < 15.f) /* gray */
 		color.red = color.green = color.blue = (b_uint8)ptOffset.x;

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  * 
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -80,14 +80,14 @@ BRadioButton::Draw(BRect updateRect)
 		BPoint penLocation;
 		penLocation.Set(rect.left + rect.Height() + 5, rect.Center().y + sHeight / 2 + 1);
 
-		SetHighColor((IsFocus() && Window()->IsActivate()) ? b_ui_color(B_NAVIGATION_BASE_COLOR) : ViewColor());
+		SetHighColor((IsFocus() && Window()->IsActivate()) ? bhapi::ui_color(B_NAVIGATION_BASE_COLOR) : ViewColor());
 		StrokeLine(penLocation, penLocation + BPoint(font.StringWidth(Label()), 0));
 	}
 
 	if(IsFocusChanging()) return;
 
-	b_rgb_color shineColor = b_ui_color(B_SHINE_COLOR);
-	b_rgb_color shadowColor = b_ui_color(B_SHADOW_COLOR);
+	bhapi::rgb_color shineColor = bhapi::ui_color(B_SHINE_COLOR);
+	bhapi::rgb_color shadowColor = bhapi::ui_color(B_SHADOW_COLOR);
 
 	if(!IsEnabled())
 	{
@@ -117,13 +117,13 @@ BRadioButton::Draw(BRect updateRect)
 		penLocation.y = rect.Center().y - sHeight / 2.f;
 		penLocation.y += fontHeight.ascent + 1;
 
-		SetHighColor(IsEnabled() ? b_ui_color(B_PANEL_TEXT_COLOR) : b_ui_color(B_SHINE_COLOR).disable(ViewColor()));
+		SetHighColor(IsEnabled() ? bhapi::ui_color(B_PANEL_TEXT_COLOR) : bhapi::ui_color(B_SHINE_COLOR).disable(ViewColor()));
 		SetLowColor(ViewColor());
 
 		DrawString(Label(), penLocation);
 		if(!IsEnabled())
 		{
-			SetHighColor(b_ui_color(B_SHADOW_COLOR).disable(ViewColor()));
+			SetHighColor(bhapi::ui_color(B_SHADOW_COLOR).disable(ViewColor()));
 			DrawString(Label(), penLocation - BPoint(1, 1));
 		}
 	}

@@ -12,7 +12,7 @@
 			<Cursor1 position="10214" topLine="344" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\x11\etk-drawing.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\x11\BHAPI_wrapper_drawing.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="55034" topLine="1718" />
 		</Cursor>
@@ -27,17 +27,17 @@
 			<Cursor1 position="1676" topLine="33" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\win32\etk-application.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\win32\BHAPI_wrapper_application.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="82018" topLine="2143" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\thread\win32\etk-semaphore.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\thread\win32\BHAPI_wrapper_semaphore.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="17003" topLine="660" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\etk-port.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\BHAPI_wrapper_port.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="19503" topLine="754" />
 		</Cursor>
@@ -57,7 +57,7 @@
 			<Cursor1 position="3475" topLine="74" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\directfb\etk-dfb.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\directfb\BHAPI_wrapper_dfb.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="14371" topLine="309" />
 		</Cursor>
@@ -67,17 +67,17 @@
 			<Cursor1 position="1017" topLine="17" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\win32\etk-timefuncs.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\win32\BHAPI_wrapper_timefuncs.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="3597" topLine="79" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\beos\etk-application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\beos\BHAPI_wrapper_application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="11924" topLine="490" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\thread\posix\etk-semaphore.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\thread\posix\BHAPI_wrapper_semaphore.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="21518" topLine="834" />
 		</Cursor>
@@ -87,12 +87,12 @@
 			<Cursor1 position="2392" topLine="27" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\x11\etk-x11.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\x11\BHAPI_wrapper_x11.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2719" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\thread\win32\etk-locker.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\thread\win32\BHAPI_wrapper_locker.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="12164" topLine="474" />
 		</Cursor>
@@ -127,7 +127,7 @@
 			<Cursor1 position="9230" topLine="346" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\win32\etk-win32gdi.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\win32\BHAPI_wrapper_win32gdi.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="14156" topLine="379" />
 		</Cursor>
@@ -147,7 +147,7 @@
 			<Cursor1 position="1672" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\thread\posix\etk-thread.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\thread\posix\BHAPI_wrapper_thread.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="25480" topLine="954" />
 		</Cursor>
@@ -157,7 +157,7 @@
 			<Cursor1 position="49981" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\beos\etk-pixmap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\beos\BHAPI_wrapper_pixmap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="6096" topLine="188" />
 		</Cursor>
@@ -177,17 +177,17 @@
 			<Cursor1 position="7138" topLine="232" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\x11\etk-application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\x11\BHAPI_wrapper_application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="41867" topLine="1401" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\unix\etk-timefuncs.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\unix\BHAPI_wrapper_timefuncs.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="4031" topLine="14" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\beos\etk-drawing.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\beos\BHAPI_wrapper_drawing.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1562" topLine="0" />
 		</Cursor>
@@ -232,7 +232,7 @@
 			<Cursor1 position="8549" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\directfb\etk-dfb-font.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\directfb\BHAPI_wrapper_dfb-font.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="13092" topLine="0" />
 		</Cursor>
@@ -242,7 +242,7 @@
 			<Cursor1 position="1612" topLine="25" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\win32\etk-os.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\win32\BHAPI_wrapper_os.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="3341" topLine="0" />
 		</Cursor>
@@ -252,17 +252,17 @@
 			<Cursor1 position="5551" topLine="164" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\x11\etk-x11-font.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\x11\BHAPI_wrapper_x11-font.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="4944" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\beos\etk-timefuncs.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\beos\BHAPI_wrapper_timefuncs.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2192" topLine="26" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\thread\beos\etk-locker.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\thread\beos\BHAPI_wrapper_locker.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="9658" topLine="367" />
 		</Cursor>
@@ -277,7 +277,7 @@
 			<Cursor1 position="4187" topLine="121" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\thread\posix\etk-semaphore-umtx.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\thread\posix\BHAPI_wrapper_semaphore-umtx.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="17562" topLine="702" />
 		</Cursor>
@@ -292,7 +292,7 @@
 			<Cursor1 position="1601" topLine="25" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\win32\etk-win32-font.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\win32\BHAPI_wrapper_win32-font.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="27473" topLine="850" />
 		</Cursor>
@@ -332,7 +332,7 @@
 			<Cursor1 position="1621" topLine="30" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\directfb\etk-window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\directfb\BHAPI_wrapper_window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="26089" topLine="0" />
 		</Cursor>
@@ -392,7 +392,7 @@
 			<Cursor1 position="2046" topLine="28" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\unix\etk-os.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\unix\BHAPI_wrapper_os.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="4181" topLine="163" />
 		</Cursor>
@@ -417,12 +417,12 @@
 			<Cursor1 position="31606" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\unix\etk-image.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\unix\BHAPI_wrapper_image.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2149" topLine="39" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\directfb\etk-application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\directfb\BHAPI_wrapper_application.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="28651" topLine="1008" />
 		</Cursor>
@@ -432,7 +432,7 @@
 			<Cursor1 position="2357" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\win32\etk-image.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\win32\BHAPI_wrapper_image.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2432" topLine="47" />
 		</Cursor>
@@ -442,7 +442,7 @@
 			<Cursor1 position="1559" topLine="26" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\x11\etk-window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\x11\BHAPI_wrapper_window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="12964" topLine="0" />
 		</Cursor>
@@ -467,7 +467,7 @@
 			<Cursor1 position="1528" topLine="36" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\win32\etk-pixmap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\win32\BHAPI_wrapper_pixmap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="13258" topLine="0" />
 		</Cursor>
@@ -502,12 +502,12 @@
 			<Cursor1 position="2264" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\beos\etk-image.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\beos\BHAPI_wrapper_image.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2253" topLine="44" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\directfb\etk-pixmap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\directfb\BHAPI_wrapper_pixmap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="13334" topLine="0" />
 		</Cursor>
@@ -547,7 +547,7 @@
 			<Cursor1 position="54723" topLine="2036" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\beos\etk-area.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\beos\BHAPI_wrapper_area.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="11932" topLine="19" />
 		</Cursor>
@@ -587,12 +587,12 @@
 			<Cursor1 position="43091" topLine="1701" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\win32\etk-area.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\win32\BHAPI_wrapper_area.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="11838" topLine="399" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\beos\etk-beos-font.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\beos\BHAPI_wrapper_beos-font.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="10736" topLine="18" />
 		</Cursor>
@@ -602,7 +602,7 @@
 			<Cursor1 position="28415" topLine="1108" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\thread\posix\etk-semaphore-mach.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\thread\posix\BHAPI_wrapper_semaphore-mach.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="17970" topLine="698" />
 		</Cursor>
@@ -617,7 +617,7 @@
 			<Cursor1 position="1837" topLine="18" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\win32\etk-drawing.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\win32\BHAPI_wrapper_drawing.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="44266" topLine="0" />
 		</Cursor>
@@ -642,7 +642,7 @@
 			<Cursor1 position="2813" topLine="71" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\directfb\etk-drawing.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\directfb\BHAPI_wrapper_drawing.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="18934" topLine="674" />
 		</Cursor>
@@ -662,7 +662,7 @@
 			<Cursor1 position="9845" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\thread\posix\etk-locker.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\thread\posix\BHAPI_wrapper_locker.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="10317" topLine="384" />
 		</Cursor>
@@ -717,7 +717,7 @@
 			<Cursor1 position="17499" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\win32\etk-window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\win32\BHAPI_wrapper_window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="30168" topLine="0" />
 		</Cursor>
@@ -732,12 +732,12 @@
 			<Cursor1 position="16209" topLine="693" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\unix\etk-area.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\unix\BHAPI_wrapper_area.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="10493" topLine="407" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\thread\beos\etk-thread.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\thread\beos\BHAPI_wrapper_thread.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="20815" topLine="794" />
 		</Cursor>
@@ -757,7 +757,7 @@
 			<Cursor1 position="1615" topLine="28" />
 		</Cursor>
 	</File>
-	<File name="src\kits\interface\beos\etk-window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\interface\beos\BHAPI_wrapper_window.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="27851" topLine="1075" />
 		</Cursor>
@@ -777,12 +777,12 @@
 			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\thread\win32\etk-thread.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\thread\win32\BHAPI_wrapper_thread.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="22820" topLine="866" />
 		</Cursor>
 	</File>
-	<File name="src\kits\kernel\thread\beos\etk-semaphore.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kits\kernel\thread\beos\BHAPI_wrapper_semaphore.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="19107" topLine="713" />
 		</Cursor>

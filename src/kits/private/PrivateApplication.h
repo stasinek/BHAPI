@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_PRIVATE_APPLICATION__H
-#define BHAPI_PRIVATE_APPLICATION__H
+#ifndef BHAPI_PRIVATE_APPLICATION_H
+#define BHAPI_PRIVATE_APPLICATION_H
 #include "../support/SupportDefs.h"
 #include "../support/SimpleLocker.h"
 #include "../private/Token.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class LOCAL_BHAPI BApplicationConnector
+class LOCALBHAPI BApplicationConnector
 {
 public:
     BApplicationConnector();
@@ -63,5 +63,5 @@ extern BApplicationConnector *app_connector;
 }
 #endif /* __cplusplus */
 
-#endif /* BHAPI_PRIVATE_APPLICATION__H */
+#endif /* BHAPI_PRIVATE_APPLICATION_H */
 

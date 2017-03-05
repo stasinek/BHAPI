@@ -11,12 +11,46 @@ DEFINES += BHAPI_BUILD_LIBRARY
 DEFINES += BHAPI_OS_WIN32
 DEFINES += BHAPI_GRAPHICS_WIN32_BUILT_IN
 
-CONFIG += windows shared staticlib
+CONFIG += windows shared staticlib precompile_header
 CONFIG -= app_bundle
 CONFIG -= qt
 INCLUDEPATH += ..
-INCLUDEPATH += ../BHAPI/src ../freetype/include
+INCLUDEPATH += ../freetype/include
+INCLUDEPATH += ../BHAPI/src
+INCLUDEPATH += ../BHAPI/include
+INCLUDEPATH += ../BHAPI/include/os
+INCLUDEPATH += ../BHAPI/include/os/kits
+INCLUDEPATH += ../BHAPI/include/os/kits/app
+INCLUDEPATH += ../BHAPI/include/os/kits/arch
+INCLUDEPATH += ../BHAPI/include/os/kits/add-ons
+INCLUDEPATH += ../BHAPI/include/os/kits/be_apps
+INCLUDEPATH += ../BHAPI/include/os/kits/device
+INCLUDEPATH += ../BHAPI/include/os/kits/drivers
+INCLUDEPATH += ../BHAPI/include/os/kits/game
+INCLUDEPATH += ../BHAPI/include/os/kits/interface
+INCLUDEPATH += ../BHAPI/include/os/kits/kernel
+INCLUDEPATH += ../BHAPI/include/os/kits/locale
+INCLUDEPATH += ../BHAPI/include/os/kits/mail
+INCLUDEPATH += ../BHAPI/include/os/kits/media
+INCLUDEPATH += ../BHAPI/include/os/kits/midi
+INCLUDEPATH += ../BHAPI/include/os/kits/midi2
+INCLUDEPATH += ../BHAPI/include/os/kits/net
+INCLUDEPATH += ../BHAPI/include/os/kits/package
+INCLUDEPATH += ../BHAPI/include/os/kits/storage
+INCLUDEPATH += ../BHAPI/include/os/kits/support
+INCLUDEPATH += ../BHAPI/include/os/kits/translation
+INCLUDEPATH += ../BHAPI/include/libs
+
 QT -= core gui
+QMAKE_CXX = ccache g++
+
+#Use Precompiled headers PCH
+#PRECOMPILED_HEADER += src/kits/app/AppDefs.h
+#PRECOMPILED_HEADER += src/kits/interface/GraphicsDefs.h
+#PRECOMPILED_HEADER += src/kits/support/SupportDefs.h
+#PRECOMPILED_HEADER += src/kits/storage/StorageDefs.h
+#PRECOMPILED_HEADER += src/kits/interface/InterfaceDefs.h
+#PRECOMPILED_HEADER = bhapi.h
 
 SOURCES += bhapi.cpp \
     src/kits/add-ons/font/FontEngine.cpp \
@@ -51,7 +85,6 @@ SOURCES += bhapi.cpp \
     src/kits/support/List.cpp \
     src/kits/support/SimpleLocker.cpp \
     src/kits/support/StreamIO.cpp \
-    src/kits/support/StringArray.cpp \
     src/kits/app/Application.cpp \
     src/kits/app/Clipboard.cpp \
     src/kits/app/Cursor.cpp \
@@ -64,7 +97,7 @@ SOURCES += bhapi.cpp \
     src/kits/app/MessageRunner.cpp \
     src/kits/app/Messenger.cpp \
     src/kits/kernel/Debug.cpp \
-    src/kits/kernel/etk-port.cpp \
+    src/kits/kernel/BHAPI_wrapper_port.cpp \
     src/kits/net/NetAddress.cpp \
     src/kits/net/NetBuffer.cpp \
     src/kits/net/NetDebug.cpp \
@@ -126,7 +159,11 @@ SOURCES += bhapi.cpp \
     src/kits/support/StopWatch.cpp \
     src/kits/support/Uuid.cpp \
     src/kits/support/ZlibCompressionAlgorithm.cpp \
-    src/kits/support/ByteOrder.cpp
+    src/kits/support/ByteOrder.cpp \
+    src/kits/support/StringArray.cpp \
+    src/kits/support/StringList.cpp \
+    src/kits/support/StringPrivate.cpp \
+    src/kits/support/utf8.cpp
 
 
 HEADERS += bhapi.h\
@@ -224,7 +261,6 @@ HEADERS += bhapi.h\
     src/kits/support/Locker.h \
     src/kits/support/SimpleLocker.h \
     src/kits/support/StreamIO.h \
-    src/kits/support/StringArray.h \
     src/kits/support/SupportDefs.h \
     src/kits/xml/SimpleXmlParser.h \
     src/kits/BE.h \
@@ -250,80 +286,83 @@ HEADERS += bhapi.h\
     src/kits/support/TLS.h \
     src/kits/support/TypeConstants.h \
     src/kits/support/UTF8.h \
-    src/kits/support/Architecture.h
+    src/kits/support/Architecture.h \
+    src/kits/support/StringArray.h \
+    src/kits/support/StringList.h \
+    src/kits/support/StringPrivate.h
 
 LIBS -= -lfreetype
 LIBS += -L"../freetype/lib/debug" -libfreetype
 
 contains(QMAKE_COMPILER_DEFINES, BEOS) {
-SOURCES +=  src/kits/interface/beos/etk-application.cpp \
-    src/kits/interface/beos/etk-beos-font.cpp \
-    src/kits/interface/beos/etk-drawing.cpp \
-    src/kits/interface/beos/etk-pixmap.cpp \
-    src/kits/interface/beos/etk-window.cpp \
-    src/kits/kernel/beos/etk-area.cpp \
-    src/kits/kernel/beos/etk-image.cpp \
-    src/kits/kernel/beos/etk-os.cpp \
-    src/kits/kernel/beos/etk-timefuncs.cpp \
-    src/kits/kernel/thread/beos/etk-locker.cpp \
-    src/kits/kernel/thread/beos/etk-semaphore.cpp \
-    src/kits/kernel/thread/beos/etk-thread.cpp
+SOURCES +=  src/kits/interface/beos/BHAPI_wrapper_application.cpp \
+    src/kits/interface/beos/BHAPI_wrapper_beos-font.cpp \
+    src/kits/interface/beos/BHAPI_wrapper_drawing.cpp \
+    src/kits/interface/beos/BHAPI_wrapper_pixmap.cpp \
+    src/kits/interface/beos/BHAPI_wrapper_window.cpp \
+    src/kits/kernel/beos/BHAPI_wrapper_area.cpp \
+    src/kits/kernel/beos/BHAPI_wrapper_image.cpp \
+    src/kits/kernel/beos/BHAPI_wrapper_os.cpp \
+    src/kits/kernel/beos/BHAPI_wrapper_timefuncs.cpp \
+    src/kits/kernel/thread/beos/BHAPI_wrapper_locker.cpp \
+    src/kits/kernel/thread/beos/BHAPI_wrapper_semaphore.cpp \
+    src/kits/kernel/thread/beos/BHAPI_wrapper_thread.cpp
 
-HEADERS += src/kits/interface/beos/etk-beos-graphics.h
+HEADERS += src/kits/interface/beos/BHAPI_wrapper_beos-graphics.h
 }
 
 contains(QMAKE_COMPILER_DEFINES, WIN32) {
-SOURCES += src/kits/interface/win32/etk-application.cpp \
-    src/kits/interface/win32/etk-drawing.cpp \
-    src/kits/interface/win32/etk-pixmap.cpp \
-    src/kits/interface/win32/etk-win32-font.cpp \
-    src/kits/interface/win32/etk-window.cpp \
-    src/kits/kernel/thread/win32/etk-locker.cpp \
-    src/kits/kernel/thread/win32/etk-semaphore.cpp \
-    src/kits/kernel/thread/win32/etk-thread.cpp \
-    src/kits/kernel/win32/etk-area.cpp \
-    src/kits/kernel/win32/etk-image.cpp \
-    src/kits/kernel/win32/etk-os.cpp \
-    src/kits/kernel/win32/etk-timefuncs.cpp
+SOURCES += src/kits/interface/win32/BHAPI_wrapper_application.cpp \
+    src/kits/interface/win32/BHAPI_wrapper_drawing.cpp \
+    src/kits/interface/win32/BHAPI_wrapper_pixmap.cpp \
+    src/kits/interface/win32/BHAPI_wrapper_win32-font.cpp \
+    src/kits/interface/win32/BHAPI_wrapper_window.cpp \
+    src/kits/kernel/thread/win32/BHAPI_wrapper_locker.cpp \
+    src/kits/kernel/thread/win32/BHAPI_wrapper_semaphore.cpp \
+    src/kits/kernel/thread/win32/BHAPI_wrapper_thread.cpp \
+    src/kits/kernel/win32/BHAPI_wrapper_area.cpp \
+    src/kits/kernel/win32/BHAPI_wrapper_image.cpp \
+    src/kits/kernel/win32/BHAPI_wrapper_os.cpp \
+    src/kits/kernel/win32/BHAPI_wrapper_timefuncs.cpp
 
-HEADERS += src/kits/interface/win32/etk-win32gdi.h
+HEADERS += src/kits/interface/win32/BHAPI_wrapper_win32gdi.h
 
 LIBS += -lkernel32 -lgdi32 -lshell32 -luser32 -lcomctl32 -luserenv
 LIBS += -lws2_32 -lwsock32 -lwinmm -limm32 -lole32 -loleaut32
 }
 
 contains(QMAKE_COMPILER_DEFINES, LINUX) {
-SOURCES += src/kits/interface/x11/etk-application.cpp \
-    src/kits/interface/x11/etk-drawing.cpp \
-    src/kits/interface/x11/etk-pixmap.cpp \
-    src/kits/interface/x11/etk-window.cpp \
-    src/kits/interface/x11/etk-x11-font.cpp \
-    src/kits/kernel/thread/posix/etk-locker.cpp \
-    src/kits/kernel/thread/posix/etk-semaphore-mach.cpp \
-    src/kits/kernel/thread/posix/etk-semaphore-umtx.cpp \
-    src/kits/kernel/thread/posix/etk-semaphore.cpp \
-    src/kits/kernel/thread/posix/etk-thread.cpp \
-    src/kits/kernel/unix/etk-area.cpp \
-    src/kits/kernel/unix/etk-image.cpp \
-    src/kits/kernel/unix/etk-os.cpp \
-    src/kits/kernel/unix/etk-timefuncs.cpp
+SOURCES += src/kits/interface/x11/BHAPI_wrapper_application.cpp \
+    src/kits/interface/x11/BHAPI_wrapper_drawing.cpp \
+    src/kits/interface/x11/BHAPI_wrapper_pixmap.cpp \
+    src/kits/interface/x11/BHAPI_wrapper_window.cpp \
+    src/kits/interface/x11/BHAPI_wrapper_x11-font.cpp \
+    src/kits/kernel/thread/posix/BHAPI_wrapper_locker.cpp \
+    src/kits/kernel/thread/posix/BHAPI_wrapper_semaphore-mach.cpp \
+    src/kits/kernel/thread/posix/BHAPI_wrapper_semaphore-umtx.cpp \
+    src/kits/kernel/thread/posix/BHAPI_wrapper_semaphore.cpp \
+    src/kits/kernel/thread/posix/BHAPI_wrapper_thread.cpp \
+    src/kits/kernel/unix/BHAPI_wrapper_area.cpp \
+    src/kits/kernel/unix/BHAPI_wrapper_image.cpp \
+    src/kits/kernel/unix/BHAPI_wrapper_os.cpp \
+    src/kits/kernel/unix/BHAPI_wrapper_timefuncs.cpp
 
-HEADERS +=     src/kits/interface/x11/etk-x11.h
+HEADERS +=     src/kits/interface/x11/BHAPI_wrapper_x11.h
 }
 
 contains(QMAKE_COMPILER_DEFINES, DIRECTFB) {
-SOURCES +=    src/kits/interface/directfb/etk-application.cpp \
-    src/kits/interface/directfb/etk-dfb-font.cpp \
-    src/kits/interface/directfb/etk-drawing.cpp \
-    src/kits/interface/directfb/etk-pixmap.cpp \
-    src/kits/interface/directfb/etk-window.cpp \
-    src/kits/interface/directfb/etk-wm.cpp
+SOURCES +=    src/kits/interface/directfb/BHAPI_wrapper_application.cpp \
+    src/kits/interface/directfb/BHAPI_wrapper_dfb-font.cpp \
+    src/kits/interface/directfb/BHAPI_wrapper_drawing.cpp \
+    src/kits/interface/directfb/BHAPI_wrapper_pixmap.cpp \
+    src/kits/interface/directfb/BHAPI_wrapper_window.cpp \
+    src/kits/interface/directfb/BHAPI_wrapper_wm.cpp
 
-HEADERS += src/kits/interface/directfb/etk-dfb.h
+HEADERS += src/kits/interface/directfb/BHAPI_wrapper_dfb.h
 }
 
 contains(QMAKE_COMPILER_DEFINES, MACOS) {
-HEADERS += src/kits/interface/carbon/etk-carbon.h
+HEADERS += src/kits/interface/carbon/BHAPI_wrapper_carbon.h
 }
 
 contains(QMAKE_COMPILER_DEFINES, __GNUC__) {
@@ -339,7 +378,7 @@ QMAKE_CXXFLAGS += -Wunknown-pragmas
 QMAKE_CFLAGS   += -Wunknown-pragmas
 
 QMAKE_CXXFLAGS -= -pipe
-QMAKE_CXXFLAGS += -save-temps
+QMAKE_CXXFLAGS += -save-temps -Winvalid-pch
 QMAKE_CXXFLAGS += -fverbose-asm
 QMAKE_CXXFLAGS += -fstrict-aliasing
 QMAKE_CXXFLAGS += -dD

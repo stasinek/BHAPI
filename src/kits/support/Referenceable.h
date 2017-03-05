@@ -1,16 +1,41 @@
+/* --------------------------------------------------------------------------
+ *
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku OS source-code, All Rights Reserved
+ *
+ * BHAPI++ library is a freeware; it may be used and distributed according to
+ * the terms of The MIT License.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+ * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * File: Referencable.h
+ *
+ * --------------------------------------------------------------------------*/
+
 /*
  * Copyright 2004-2010, Ingo Weinhold, ingo_weinhold@gmx.de.
  * Distributed under the terms of the MIT License.
  */
-#ifndef _REFERENCEABLE_H
-#define _REFERENCEABLE_H
+#ifndef BHAPI_REFERENCEABLE_H
+#define BHAPI_REFERENCEABLE_H
 
-
-#include <SupportDefs.h>
-
+#include "SupportDefs.h"
 
 // #pragma mark - BReferenceable
-
 
 class BReferenceable {
 public:
@@ -37,8 +62,7 @@ protected:
 // #pragma mark - BReference
 
 
-template<typename Type = BReferenceable>
-class BReference {
+template<typename Type = BReferenceable> class BReference {
 public:
 	BReference()
 		:
@@ -165,8 +189,7 @@ private:
 // #pragma mark - BReference<const>
 
 
-template<typename Type>
-class BReference<const Type> {
+template<typename Type> class BReference<const Type> {
 public:
 	BReference(Type* object, bool alreadyHasReference = false)
 		:
@@ -262,5 +285,4 @@ private:
 	BReference<Type> fReference;
 };
 
-
-#endif	// _REFERENCEABLE_H
+#endif	// BHAPI_REFERENCEABLE_H

@@ -10,9 +10,9 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 noinst_LTLIBRARIES = libthread-beos.la
 
 libthread_beos_la_SOURCES =			\
-			etk-thread.cpp		\
-			etk-locker.cpp		\
-			etk-semaphore.cpp
+			BHAPI_wrapper_thread.cpp		\
+			BHAPI_wrapper_locker.cpp		\
+			BHAPI_wrapper_semaphore.cpp
 
 libthread_beos_la_LIBADD =
 libthread_beos_la_DEPENDENCIES =

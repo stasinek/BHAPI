@@ -10,9 +10,9 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 noinst_LTLIBRARIES = libthread-win32.la
 
 libthread_win32_la_SOURCES =			\
-			etk-thread.cpp		\
-			etk-locker.cpp		\
-			etk-semaphore.cpp
+			BHAPI_wrapper_thread.cpp		\
+			BHAPI_wrapper_locker.cpp		\
+			BHAPI_wrapper_semaphore.cpp
 
 libthread_win32_la_LIBADD =
 libthread_win32_la_DEPENDENCIES =

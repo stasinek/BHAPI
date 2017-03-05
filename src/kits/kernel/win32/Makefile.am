@@ -12,10 +12,10 @@ top_builddir_full=`cd \$(top_builddir); pwd`
 noinst_LTLIBRARIES = libkernel-win32.la
 
 libkernel_win32_la_SOURCES =			\
-			etk-os.cpp		\
-			etk-timefuncs.cpp	\
-			etk-area.cpp		\
-			etk-image.cpp
+			BHAPI_wrapper_os.cpp		\
+			BHAPI_wrapper_timefuncs.cpp	\
+			BHAPI_wrapper_area.cpp		\
+			BHAPI_wrapper_image.cpp
 
 libkernel_win32_la_LIBADD =
 libkernel_win32_la_DEPENDENCIES =

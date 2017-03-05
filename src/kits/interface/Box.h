@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,27 +27,27 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_BOX__H
-#define BHAPI_BOX__H
+#ifndef BHAPI_BOX_H
+#define BHAPI_BOX_H
 
 #include "../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BBox : public BView {
+class IMPEXPBHAPI BBox : public BView {
 public:
     BBox(BRect frame,
 	     const char *name = NULL,
          b_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
          b_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS | B_NAVIGABLE_JUMP,
-	     b_border_style border = B_FANCY_BORDER);
+	     bhapi::border_style border = B_FANCY_BORDER);
     virtual ~BBox();
 
-    virtual void	SetBorder(b_border_style border);
-	b_border_style	Border() const;
+    virtual void	SetBorder(bhapi::border_style border);
+	bhapi::border_style	Border() const;
 
-    void		SetLabelAlignment(b_alignment labelAlignment);
-	b_alignment	LabelAlignment() const;
+    void		SetLabelAlignment(bhapi::alignment labelAlignment);
+	bhapi::alignment	LabelAlignment() const;
 
 	void		SetLabel(const char *label);
 	b_status_t	SetLabel(BView *viewLabel);
@@ -67,13 +67,13 @@ protected:
 
 private:
 	BView *fLabelView;
-	b_border_style fBorder;
-	b_alignment fAlignment;
+	bhapi::border_style fBorder;
+	bhapi::alignment fAlignment;
 
 	void ReAdjustLabel();
 };
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_BOX__H */
+#endif /* BHAPI_BOX_H */
 

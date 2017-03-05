@@ -1,0 +1,77 @@
+SubDir HAIKU_TOP src kits mail ;
+
+UsePrivateHeaders mail shared ;
+UsePublicHeaders [ FDirName add-ons mail_daemon ] ;
+
+if $(CHECK_MALLOC) {
+	SubDirC++Flags -D_NO_INLINE_ASM -fcheck-memory-usage ;
+}
+
+SubDirC++Flags -D_BUILDING_mail=1 ;
+
+UsePrivateHeaders textencoding ;
+
+
+local sources =
+	b_mail_message.cpp
+	c_mail_api.cpp
+	crypt.cpp
+	des.c
+	FileConfigView.cpp
+	HaikuMailFormatFilter.cpp
+	mail_encoding.cpp
+	mail_util.cpp
+	MailAttachment.cpp
+	MailComponent.cpp
+	MailContainer.cpp
+	MailDaemon.cpp
+	MailFilter.cpp
+	MailMessage.cpp
+	MailProtocol.cpp
+	MailSettings.cpp
+	MailSettingsView.cpp
+	NodeMessage.cpp
+	numailkit.cpp
+	ProtocolConfigView.cpp
+;
+
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup ] {
+	on $(architectureObject) {
+		# use OpenSSL, if enabled
+		if [ FIsBuildFeatureEnabled openssl ] {
+			SubDirC++Flags -DUSE_SSL ;
+			UseBuildFeatureHeaders openssl ;
+			Includes [ FGristFiles $(sources) ]
+				: [ BuildFeatureAttribute openssl : headers ] ;
+				# Dependency needed to trigger downloading/unzipping the package before
+				# compiling the files.
+			SetupFeatureObjectsDir ssl ;
+		} else {
+			SetupFeatureObjectsDir no-ssl ;
+		}
+
+		local libmail = [ MultiArchDefaultGristFiles libmail.so ] ;
+		AddResources $(libmail) : libmail.rdef ;
+
+		SharedLibrary $(libmail) :
+			$(sources)
+			:
+			be bnetapi textencoding tracker
+			[ TargetLibstdc++ ]
+			$(TARGET_NETWORK_LIBS)
+			$(TARGET_SELECT_UNAME_ETC_LIB)
+			[ BuildFeatureAttribute openssl : libraries ]
+			localestub
+			;
+	}
+}
+
+
+DoCatalogs libmail.so :
+	x-vnd.Haiku-libmail
+	:
+	FileConfigView.cpp
+	ProtocolConfigView.cpp
+;

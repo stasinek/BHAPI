@@ -9,7 +9,7 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 		-DETK_COMPILATION 			\
 		@ETK_DEBUG_FLAGS@
 
-noinst_LTLIBRARIES = libetk-add-ons-graphics.la
+noinst_LTLIBRARIES = libBHAPI_wrapper_add-ons-graphics.la
 
 libetk_add_ons_graphics_la_SOURCES = GraphicsEngine.cpp	GraphicsEngine.h
 

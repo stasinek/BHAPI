@@ -7,7 +7,7 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 		-DETK_COMPILATION 			\
 		@ETK_DEBUG_FLAGS@
 
-noinst_LTLIBRARIES = libetk-xml.la
+noinst_LTLIBRARIES = libBHAPI_wrapper_xml.la
 
 libetk_xml_la_SOURCES = SimpleXmlParser.cpp SimpleXmlParser.h
 libetk_xml_la_LIBADD =

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,15 +28,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_STRING_VIEW__H
-#define BHAPI_STRING_VIEW__H
+#ifndef BHAPI_STRING_VIEW_H
+#define BHAPI_STRING_VIEW_H
 
 #include "../support/StringArray.h"
 #include "../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BStringView : public BView {
+class IMPEXPBHAPI BStringView : public BView {
 public:
     BStringView(BRect frame,
 		    const char *name,
@@ -49,11 +49,11 @@ public:
     void			SetText(const BString &text);
 	const char*		Text() const;
 
-    virtual void		SetAlignment(b_alignment alignment);
-	b_alignment		Alignment() const;
+    virtual void		SetAlignment(bhapi::alignment alignment);
+	bhapi::alignment		Alignment() const;
 
-    virtual void		SetVerticalAlignment(b_vertical_alignment alignment);
-	b_vertical_alignment	VerticalAlignment() const;
+    virtual void		SetVerticalAlignment(bhapi::vertical_alignment alignment);
+    bhapi::vertical_alignment	VerticalAlignment() const;
 
 	virtual void		Draw(BRect updateRect);
     virtual void		SetFont(const BFont *font, b_uint8 mask = B_FONT_ALL);
@@ -62,8 +62,8 @@ public:
 private:
     BString fText;
     BStringArray *fTextArray;
-	b_alignment fAlignment;
-	b_vertical_alignment fVerticalAlignment;
+	bhapi::alignment fAlignment;
+    bhapi::vertical_alignment fVerticalAlignment;
 };
 
 #ifdef BHAPI_BUILD_LIBRARY
@@ -75,6 +75,5 @@ inline void BStringView::SetText(const BString &text)
 #endif // BHAPI_BUILD_LIBRARY
 
 #endif /* __cplusplus */
-
-#endif /* BHAPI_STRING_VIEW__H */
+#endif /* BHAPI_STRING_VIEW_H */
 

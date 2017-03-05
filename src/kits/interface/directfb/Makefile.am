@@ -19,13 +19,13 @@ addonsdir = $(libdir)/add-ons/etkxx/graphics
 noinst_LTLIBRARIES = libgraphics-directfb.la
 
 libgraphics_directfb_la_SOURCES =		\
-			etk-dfb.h		\
-			etk-application.cpp	\
-			etk-window.cpp		\
-			etk-wm.cpp		\
-			etk-pixmap.cpp		\
-			etk-drawing.cpp		\
-			etk-dfb-font.cpp
+			BHAPI_wrapper_dfb.h		\
+			BHAPI_wrapper_application.cpp	\
+			BHAPI_wrapper_window.cpp		\
+			BHAPI_wrapper_wm.cpp		\
+			BHAPI_wrapper_pixmap.cpp		\
+			BHAPI_wrapper_drawing.cpp		\
+			BHAPI_wrapper_dfb-font.cpp
 
 if ETK_GRAPHICS_DIRECTFB_BUILT_IN
 else

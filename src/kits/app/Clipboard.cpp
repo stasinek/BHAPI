@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,6 +28,9 @@
  *
  * --------------------------------------------------------------------------*/
 
+#include "Clipboard.h"
+#include "Application.h"
+
 #include "../kernel/Kernel.h"
 #include "../kernel/Debug.h"
 #include "../support/String.h"
@@ -37,20 +40,17 @@
 #include "../app/Message.h"
 #include "../app/AppDefs.h"
 
-#include "Clipboard.h"
-#include "Application.h"
-
-class LOCAL_BHAPI _BSystemClipboard {
+class LOCALBHAPI BSystemClipboard {
 public:
 	BSimpleLocker fLocker;
 	BMessage fData;
 	BList fWatchingList;
 
-    _BSystemClipboard()
+    BSystemClipboard()
 	{
 	}
 
-    ~_BSystemClipboard()
+    ~BSystemClipboard()
 	{
 		BMessenger *msgr;
 		while((msgr = (BMessenger*)fWatchingList.RemoveItem((b_int32)0)) != NULL) delete msgr;
@@ -132,8 +132,7 @@ public:
 	}
 };
 
-static _BSystemClipboard __bhapi_system_clipboard__;
-
+static BSystemClipboard __bhapi_system_clipboard__;
 
 BClipboard::BClipboard(const char *name)
 	: fName(NULL), fData(NULL)
@@ -148,23 +147,18 @@ BClipboard::BClipboard(const char *name)
 	fData = new BMessage();
 }
 
-
 BClipboard::~BClipboard()
 {
 	if(fName) delete[] fName;
 	if(fData) delete fData;
 }
 
-
-const char*
-BClipboard::Name() const
+const char* BClipboard::Name() const
 {
 	return fName;
 }
 
-
-bool
-BClipboard::Lock()
+bool BClipboard::Lock()
 {
 	// TODO
 	if(fName == NULL) return fLocker.Lock();
@@ -181,32 +175,24 @@ BClipboard::Lock()
 	return true;
 }
 
-
-void
-BClipboard::Unlock()
+void BClipboard::Unlock()
 {
 	fLocker.Unlock();
 }
 
-
-b_int64
-BClipboard::CountLocks() const
+b_int64 BClipboard::CountLocks() const
 {
 	return fLocker.CountLocks();
 }
 
-
-b_status_t
-BClipboard::Clear()
+b_status_t BClipboard::Clear()
 {
 	if(fLocker.CountLocks() <= B_INT64_CONSTANT(0) || fData == NULL) return B_ERROR;
 	fData->MakeEmpty();
 	return B_OK;
 }
 
-
-b_status_t
-BClipboard::Commit()
+b_status_t BClipboard::Commit()
 {
 	// TODO
 	if(fName == NULL) return B_ERROR;
@@ -220,9 +206,7 @@ BClipboard::Commit()
 	return B_OK;
 }
 
-
-b_status_t
-BClipboard::Revert()
+b_status_t BClipboard::Revert()
 {
 	// TODO
 	if(fName == NULL) return B_ERROR;
@@ -236,9 +220,7 @@ BClipboard::Revert()
 	return B_OK;
 }
 
-
-BMessenger
-BClipboard::DataSource() const
+BMessenger BClipboard::DataSource() const
 {
 	// TODO
 	if(fName == NULL) return BMessenger();
@@ -246,24 +228,18 @@ BClipboard::DataSource() const
 	return bhapi::app_messenger;
 }
 
-
-BMessage*
-BClipboard::Data() const
+BMessage* BClipboard::Data() const
 {
 	return fData;
 }
 
-
-b_uint32
-BClipboard::LocalCount() const
+b_uint32 BClipboard::LocalCount() const
 {
 	// TODO
 	return SystemCount();
 }
 
-
-b_uint32
-BClipboard::SystemCount() const
+b_uint32 BClipboard::SystemCount() const
 {
 	// TODO
 	if(fName == NULL) return 0;
@@ -275,9 +251,7 @@ BClipboard::SystemCount() const
 	return retVal;
 }
 
-
-b_status_t
-BClipboard::StartWatching(const BMessenger &target)
+b_status_t BClipboard::StartWatching(const BMessenger &target)
 {
 	// TODO
 	if(fName == NULL) return B_ERROR;
@@ -290,9 +264,7 @@ BClipboard::StartWatching(const BMessenger &target)
 	return retVal;
 }
 
-
-b_status_t
-BClipboard::StopWatching(const BMessenger &target)
+b_status_t BClipboard::StopWatching(const BMessenger &target)
 {
 	// TODO
 	if(fName == NULL) return B_ERROR;

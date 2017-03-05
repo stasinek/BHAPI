@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_FILE__H
-#define BHAPI_FILE__H
+#ifndef BHAPI_FILE_H
+#define BHAPI_FILE_H
 
 #include "StorageDefs.h"
 #include "Directory.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BFile {
+class IMPEXPBHAPI BFile {
 public:
     BFile();
     BFile(const char *path, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
@@ -71,5 +71,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_FILE__H */
+#endif /* BHAPI_FILE_H */
 

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,22 +27,28 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_CONTROL__H
-#define BHAPI_CONTROL__H
+#ifndef BHAPI_CONTROL_H
+#define BHAPI_CONTROL_H
 
 #include "../support/SupportDefs.h"
 
+#ifdef __cplusplus /* Just for C++ */
+namespace bhapi {
+#endif
 enum {
     B_CONTROL_OFF = 0,
     B_CONTROL_ON = 1
 };
+#ifdef __cplusplus /* Just for C++ */
+} // namespace
+#endif
 
 #ifdef __cplusplus /* Just for C++ */
 class BRect;
 class BMessage;
 #include "../interface/View.h"
 #include "../app/Invoker.h"
-class IMPEXP_BHAPI BControl : public BView, public BInvoker {
+class IMPEXPBHAPI BControl : public BView, public BInvoker {
 public:
 	BControl(BRect frame,
 		 const char *name,
@@ -76,6 +82,5 @@ private:
 };
 
 #endif /* __cplusplus */
-
-#endif /* BHAPI_CONTROL__H */
+#endif /* BHAPI_CONTROL_H */
 

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -68,7 +68,7 @@ BListView::MakeFocus(bool focusState)
 		if(IsVisible() && (Flags() & B_WILL_DRAW))
 		{
 			PushState();
-			SetHighColor(IsFocus() ? b_ui_color(B_NAVIGATION_BASE_COLOR) : ViewColor());
+			SetHighColor(IsFocus() ? bhapi::ui_color(B_NAVIGATION_BASE_COLOR) : ViewColor());
 			StrokeRect(Bounds());
 			PopState();
 
@@ -84,7 +84,7 @@ BListView::WindowActivated(bool state)
 	InvalidateItem(fPos);
 	if(!(IsFocus() && (Flags() & B_WILL_DRAW))) return;
 	PushState();
-	SetHighColor(state ? b_ui_color(B_NAVIGATION_BASE_COLOR) : ViewColor());
+	SetHighColor(state ? bhapi::ui_color(B_NAVIGATION_BASE_COLOR) : ViewColor());
 	StrokeRect(Bounds());
 	PopState();
 }
@@ -348,7 +348,7 @@ BListView::Draw(BRect updateRect)
 		PushState();
 		SetPenSize(0);
 		SetDrawingMode(B_OP_COPY);
-		SetHighColor(b_ui_color(B_NAVIGATION_BASE_COLOR));
+		SetHighColor(bhapi::ui_color(B_NAVIGATION_BASE_COLOR));
 		StrokeRect(bounds);
 		PopState();
 	}

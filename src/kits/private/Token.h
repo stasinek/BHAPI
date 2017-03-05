@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_PRIVATE_TOKEN__H
-#define BHAPI_PRIVATE_TOKEN__H
+#ifndef BHAPI_PRIVATE_TOKEN_H
+#define BHAPI_PRIVATE_TOKEN_H
 #include "../support/SupportDefs.h"
 #include "../support/Locker.h"
 
@@ -38,7 +38,7 @@
 class BTokensDepot;
 
 
-class LOCAL_BHAPI BToken {
+class LOCALBHAPI BToken {
 public:
     BToken();
     ~BToken();
@@ -70,7 +70,7 @@ private:
 };
 
 
-class LOCAL_BHAPI BTokensDepot {
+class LOCALBHAPI BTokensDepot {
 public:
     BTokensDepot(BLocker *locker = NULL,
 		     bool deconstruct_locker = false);
@@ -102,5 +102,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_PRIVATE_TOKEN__H */
+#endif /* BHAPI_PRIVATE_TOKEN_H */
 

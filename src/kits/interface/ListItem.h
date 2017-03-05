@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_LIST_ITEM__H
-#define BHAPI_LIST_ITEM__H
+#ifndef BHAPI_LIST_ITEM_H
+#define BHAPI_LIST_ITEM_H
 
 #ifdef __cplusplus /* Just for C++ */
 class BList;
@@ -41,7 +41,7 @@ class BFont;
 class BPoint;
 
 #include "../support/Archivable.h"
-class IMPEXP_BHAPI BListItem : public BArchivable {
+class IMPEXPBHAPI BListItem : public BArchivable {
 public:
 	BListItem(b_uint32 outlineLevel = 0, bool expanded = true, b_uint32 flags = 0);
 	virtual ~BListItem();
@@ -107,7 +107,7 @@ private:
 };
 
 
-class IMPEXP_BHAPI StringItem : public BListItem {
+class IMPEXPBHAPI StringItem : public BListItem {
 public:
 	StringItem(const char *text, b_uint32 outlineLevel = 0, bool expanded = true);
 	virtual ~StringItem();
@@ -125,5 +125,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_LIST_ITEM__H */
+#endif /* BHAPI_LIST_ITEM_H */
 

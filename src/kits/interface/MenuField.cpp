@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  * 
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -82,7 +82,7 @@ BMenuField::Label() const
 
 
 void
-BMenuField::SetAlignment(b_alignment alignment)
+BMenuField::SetAlignment(bhapi::alignment alignment)
 {
 	if(alignment != fAlignment)
 	{
@@ -92,7 +92,7 @@ BMenuField::SetAlignment(b_alignment alignment)
 }
 
 
-b_alignment
+bhapi::alignment
 BMenuField::Alignment() const
 {
 	return fAlignment;
@@ -192,12 +192,12 @@ BMenuField::Draw(BRect updateRect)
 
 		PushState();
 		ConstrainClippingRegion(rect);
-		SetHighColor(IsEnabled() ? b_ui_color(B_PANEL_TEXT_COLOR) : b_ui_color(B_SHINE_COLOR).disable(ViewColor()));
+		SetHighColor(IsEnabled() ? bhapi::ui_color(B_PANEL_TEXT_COLOR) : bhapi::ui_color(B_SHINE_COLOR).disable(ViewColor()));
 		SetLowColor(ViewColor());
 		DrawString(Label(), penLocation);
 		if(!IsEnabled())
 		{
-			SetHighColor(b_ui_color(B_SHADOW_COLOR).disable(ViewColor()));
+			SetHighColor(bhapi::ui_color(B_SHADOW_COLOR).disable(ViewColor()));
 			DrawString(Label(), penLocation - BPoint(1, 1));
 		}
 		PopState();
@@ -207,7 +207,7 @@ BMenuField::Draw(BRect updateRect)
 	if(IsFocus() && Window()->IsActivate())
 	{
 		PushState();
-		SetHighColor(b_ui_color(B_NAVIGATION_BASE_COLOR));
+		SetHighColor(bhapi::ui_color(B_NAVIGATION_BASE_COLOR));
 		StrokeRect(Frame().OffsetToSelf(B_ORIGIN));
 		PopState();
 	}
@@ -271,7 +271,7 @@ BMenuField::WindowActivated(bool state)
 #if 0
 	if(!(IsFocus() && (Flags() & B_WILL_DRAW))) return;
 	PushState();
-	SetHighColor(state ? b_ui_color(B_NAVIGATION_BASE_COLOR) : ViewColor());
+	SetHighColor(state ? bhapi::ui_color(B_NAVIGATION_BASE_COLOR) : ViewColor());
 	StrokeRect(Frame().OffsetToSelf(B_ORIGIN));
 	PopState();
 #endif
@@ -289,7 +289,7 @@ BMenuField::MakeFocus(bool focusState)
 		if(IsVisible() && (Flags() & B_WILL_DRAW))
 		{
 			PushState();
-			SetHighColor(IsFocus() ? b_ui_color(B_NAVIGATION_BASE_COLOR) : ViewColor());
+			SetHighColor(IsFocus() ? bhapi::ui_color(B_NAVIGATION_BASE_COLOR) : ViewColor());
 			StrokeRect(Frame().OffsetToSelf(B_ORIGIN));
 			PopState();
 		}

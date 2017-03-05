@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_VIEW_PRIVATE__H
-#define BHAPI_VIEW_PRIVATE__H
+#ifndef BHAPI_VIEW_PRIVATE_H
+#define BHAPI_VIEW_PRIVATE_H
 
 #include "../support/SupportDefs.h"
 
@@ -37,7 +37,7 @@
 #include "View.h"
 #include "layout/Layout.h"
 #include "Window.h"
-class LOCAL_BHAPI BViewLayout : public BLayoutItem {
+class LOCALBHAPI BViewLayout : public BLayoutItem {
 public:
     BViewLayout(BView *view, BRect frame, b_uint32 resizingMode);
 	virtual ~BViewLayout();
@@ -146,5 +146,5 @@ BViewLayout::_GetVisibleRegion(BRegion **region)
 }
 
 #endif /* __cplusplus */
-#endif /* BHAPI_VIEW_PRIVATE__H */
+#endif /* BHAPI_VIEW_PRIVATE_H */
 

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -51,7 +51,7 @@ BRect BScrollView::TargetValidFrame(bool ignore_scrollbar) const
 
 
 BScrollView::BScrollView(BRect frame, const char *name, BView *target, b_uint32 resizingMode, b_uint32 flags,
-			 bool alwaysShowHorizontal, bool alwaysShowVertical, b_border_style border)
+			 bool alwaysShowHorizontal, bool alwaysShowVertical, bhapi::border_style border)
 	: BView(frame, name, resizingMode, 0), fTarget(NULL)
 {
 	fBorder = border;
@@ -153,7 +153,7 @@ BScrollView::Target() const
 
 
 void
-BScrollView::SetBorder(b_border_style border)
+BScrollView::SetBorder(bhapi::border_style border)
 {
 	if(fBorder != border)
 	{
@@ -169,7 +169,7 @@ BScrollView::SetBorder(b_border_style border)
 }
 
 
-b_border_style
+bhapi::border_style
 BScrollView::Border() const
 {
 	return fBorder;
@@ -177,7 +177,7 @@ BScrollView::Border() const
 
 
 BScrollBar*
-BScrollView::ScrollBar(b_orientation direction) const
+BScrollView::ScrollBar(bhapi::orientation direction) const
 {
 	return(direction == B_HORIZONTAL ? fHSB : fVSB);
 }

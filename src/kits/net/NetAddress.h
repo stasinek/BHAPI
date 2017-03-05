@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_NET_ADDRESS__H
-#define BHAPI_NET_ADDRESS__H
+#ifndef BHAPI_NET_ADDRESS_H
+#define BHAPI_NET_ADDRESS_H
 #include "../support/SupportDefs.h"
 
 #ifndef _WIN32
@@ -42,7 +42,7 @@
 #ifdef __cplusplus /* Just for C++ */
 
 #include "../support/Archivable.h"
-class IMPEXP_BHAPI BNetAddress : public BArchivable {
+class IMPEXPBHAPI BNetAddress : public BArchivable {
 public:
     BNetAddress(const char *hostname = NULL, b_uint16 port = 0);
     BNetAddress(const char *hostname, const char *protocol, const char *service);
@@ -78,5 +78,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_NET_ADDRESS__H */
+#endif /* BHAPI_NET_ADDRESS_H */
 

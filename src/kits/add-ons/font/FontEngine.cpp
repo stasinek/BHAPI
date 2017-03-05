@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -63,7 +63,7 @@ bool font_canceling = false;
 BStringArray font_families;
 }
 
-EXPORT_BHAPI bool bhapi::font_add(const char *family, const char *style, BFontEngine *engine)
+EXPORTBHAPI bool bhapi::font_add(const char *family, const char *style, BFontEngine *engine)
 {
 	if(family == NULL || *family == 0 || style == NULL || *style == 0 || engine == NULL) return false;
 
@@ -104,13 +104,13 @@ EXPORT_BHAPI bool bhapi::font_add(const char *family, const char *style, BFontEn
 }
 
 
-EXPORT_BHAPI BFontEngine::BFontEngine()
+EXPORTBHAPI BFontEngine::BFontEngine()
 	: fFamily(NULL), fStyle(NULL), fFixedSize(NULL), nFixedSize(0), fRenderMode(B_FONT_RENDER_UNKNOWN), fServing(NULL)
 {
 }
 
 
-EXPORT_BHAPI BFontEngine::BFontEngine(const char *family, const char *style)
+EXPORTBHAPI BFontEngine::BFontEngine(const char *family, const char *style)
 	: fFamily(NULL), fStyle(NULL), fFixedSize(NULL), nFixedSize(0), fRenderMode(B_FONT_RENDER_UNKNOWN), fServing(NULL)
 {
 	SetFamily(family);
@@ -226,37 +226,37 @@ BFontEngine::Lock()
 }
 
 
-EXPORT_BHAPI void BFontEngine::Unlock()
+EXPORTBHAPI void BFontEngine::Unlock()
 {
 	fLocker.Unlock();
 }
 
 
-EXPORT_BHAPI const char* BFontEngine::Family() const
+EXPORTBHAPI const char* BFontEngine::Family() const
 {
 	return fFamily;
 }
 
 
-EXPORT_BHAPI const char* BFontEngine::Style() const
+EXPORTBHAPI const char* BFontEngine::Style() const
 {
 	return fStyle;
 }
 
 
-EXPORT_BHAPI bhapi::font_render_mode BFontEngine::RenderMode() const
+EXPORTBHAPI bhapi::font_render_mode BFontEngine::RenderMode() const
 {
 	return fRenderMode;
 }
 
 
-EXPORT_BHAPI void BFontEngine::SetRenderMode(bhapi::font_render_mode rmode)
+EXPORTBHAPI void BFontEngine::SetRenderMode(bhapi::font_render_mode rmode)
 {
 	fRenderMode = rmode;
 }
 
 
-EXPORT_BHAPI bool BFontEngine::HasFixedSize(b_int32 *count) const
+EXPORTBHAPI bool BFontEngine::HasFixedSize(b_int32 *count) const
 {
 	if(nFixedSize > 0 && fFixedSize != NULL)
 	{
@@ -268,7 +268,7 @@ EXPORT_BHAPI bool BFontEngine::HasFixedSize(b_int32 *count) const
 }
 
 
-EXPORT_BHAPI bool BFontEngine::GetFixedSize(float *size, b_int32 index) const
+EXPORTBHAPI bool BFontEngine::GetFixedSize(float *size, b_int32 index) const
 {
 	if(size == NULL || index < 0) return false;
 
@@ -281,7 +281,7 @@ EXPORT_BHAPI bool BFontEngine::GetFixedSize(float *size, b_int32 index) const
 	return false;
 }
 
-EXPORT_BHAPI void BFontEngine::SetFamily(const char *family)
+EXPORTBHAPI void BFontEngine::SetFamily(const char *family)
 {
 	if(fFamily) delete[] fFamily;
 	fFamily = NULL;
@@ -289,7 +289,7 @@ EXPORT_BHAPI void BFontEngine::SetFamily(const char *family)
 }
 
 
-EXPORT_BHAPI void BFontEngine::SetStyle(const char *style)
+EXPORTBHAPI void BFontEngine::SetStyle(const char *style)
 {
 	if(fStyle) delete[] fStyle;
 	fStyle = NULL;
@@ -297,7 +297,7 @@ EXPORT_BHAPI void BFontEngine::SetStyle(const char *style)
 }
 
 
-EXPORT_BHAPI void BFontEngine::SetFixedSize(float *sizes, b_int32 count)
+EXPORTBHAPI void BFontEngine::SetFixedSize(float *sizes, b_int32 count)
 {
 	if(fFixedSize)
 	{
@@ -393,7 +393,7 @@ BFontEngine::RenderString(const BString &str, b_int32 *width, b_int32 *height, b
 }
 
 
-EXPORT_BHAPI b_int32 bhapi::count_font_families(void)
+EXPORTBHAPI b_int32 bhapi::count_font_families(void)
 {
     BAutolock <BLocker> autolock(&bhapi::font_locker);
 
@@ -401,7 +401,7 @@ EXPORT_BHAPI b_int32 bhapi::count_font_families(void)
 }
 
 
-EXPORT_BHAPI b_status_t bhapi::get_font_family(b_int32 index, const char **name)
+EXPORTBHAPI b_status_t bhapi::get_font_family(b_int32 index, const char **name)
 {
 	if(!name) return B_BAD_VALUE;
 
@@ -415,7 +415,7 @@ EXPORT_BHAPI b_status_t bhapi::get_font_family(b_int32 index, const char **name)
 }
 
 
-EXPORT_BHAPI b_int32 bhapi::get_font_family_index(const char *name)
+EXPORTBHAPI b_int32 bhapi::get_font_family_index(const char *name)
 {
 	if(!name) return -1;
 
@@ -426,7 +426,7 @@ EXPORT_BHAPI b_int32 bhapi::get_font_family_index(const char *name)
 }
 
 
-EXPORT_BHAPI b_int32 bhapi::get_font_style_index(const char *family, const char *name)
+EXPORTBHAPI b_int32 bhapi::get_font_style_index(const char *family, const char *name)
 {
 	if(!family || !name) return -1;
 
@@ -444,7 +444,7 @@ EXPORT_BHAPI b_int32 bhapi::get_font_style_index(const char *family, const char 
 }
 
 
-EXPORT_BHAPI b_int32 bhapi::count_font_styles(const char *name)
+EXPORTBHAPI b_int32 bhapi::count_font_styles(const char *name)
 {
     BAutolock <BLocker> autolock(&bhapi::font_locker);
 
@@ -452,7 +452,7 @@ EXPORT_BHAPI b_int32 bhapi::count_font_styles(const char *name)
 }
 
 
-EXPORT_BHAPI b_int32 bhapi::count_font_styles(b_int32 index)
+EXPORTBHAPI b_int32 bhapi::count_font_styles(b_int32 index)
 {
 	if(index < 0) return -1;
 
@@ -465,7 +465,7 @@ EXPORT_BHAPI b_int32 bhapi::count_font_styles(b_int32 index)
 }
 
 
-EXPORT_BHAPI b_status_t bhapi::get_font_style(const char *family, b_int32 index, const char **name)
+EXPORTBHAPI b_status_t bhapi::get_font_style(const char *family, b_int32 index, const char **name)
 {
 	if(!family || !name) return B_BAD_VALUE;
 
@@ -486,7 +486,7 @@ EXPORT_BHAPI b_status_t bhapi::get_font_style(const char *family, b_int32 index,
 }
 
 
-EXPORT_BHAPI BFontEngine* bhapi::get_font_engine(const char *family, const char *style)
+EXPORTBHAPI BFontEngine* bhapi::get_font_engine(const char *family, const char *style)
 {
 	if(!family || !style) return NULL;
 
@@ -503,7 +503,7 @@ EXPORT_BHAPI BFontEngine* bhapi::get_font_engine(const char *family, const char 
 }
 
 
-EXPORT_BHAPI BFontEngine* bhapi::get_font_engine(b_int32 familyIndex, b_int32 styleIndex)
+EXPORTBHAPI BFontEngine* bhapi::get_font_engine(b_int32 familyIndex, b_int32 styleIndex)
 {
     BAutolock <BLocker> autolock(&bhapi::font_locker);
 
@@ -517,27 +517,27 @@ EXPORT_BHAPI BFontEngine* bhapi::get_font_engine(b_int32 familyIndex, b_int32 st
 	return engine;
 }
 
-EXPORT_BHAPI bool bhapi::font_other_init()
+EXPORTBHAPI bool bhapi::font_other_init()
 {
 	// TODO
 	return true;
 }
 
 
-EXPORT_BHAPI void bhapi::font_other_cancel()
+EXPORTBHAPI void bhapi::font_other_cancel()
 {
 	// TODO
 }
 
 
-EXPORT_BHAPI bool bhapi::update_other_font_families(bool check_only)
+EXPORTBHAPI bool bhapi::update_other_font_families(bool check_only)
 {
 	// TODO
 	return(check_only ? false : true);
 }
 
 
-EXPORT_BHAPI bool bhapi::update_font_families(bool check_only)
+EXPORTBHAPI bool bhapi::update_font_families(bool check_only)
 {
     BAutolock <BLocker> autolock(&bhapi::font_locker);
 
@@ -598,7 +598,7 @@ EXPORT_BHAPI bool bhapi::update_font_families(bool check_only)
 }
 
 
-LOCAL_BHAPI bool bhapi::font_init(void)
+LOCALBHAPI bool bhapi::font_init(void)
 {
     BAutolock <BLocker> autolock(&bhapi::font_locker);
 
@@ -766,7 +766,7 @@ LOCAL_BHAPI bool bhapi::font_init(void)
 }
 
 
-LOCAL_BHAPI void bhapi::font_cancel(void)
+LOCALBHAPI void bhapi::font_cancel(void)
 {
     BAutolock <BLocker> autolock(&bhapi::font_locker);
 
@@ -812,13 +812,13 @@ LOCAL_BHAPI void bhapi::font_cancel(void)
 }
 
 
-LOCAL_BHAPI bool bhapi::font_lock(void)
+LOCALBHAPI bool bhapi::font_lock(void)
 {
     return bhapi::font_locker.Lock();
 }
 
 
-LOCAL_BHAPI void bhapi::font_unlock(void)
+LOCALBHAPI void bhapi::font_unlock(void)
 {
     bhapi::font_locker.Unlock();
 }

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -31,27 +31,27 @@
 
 #ifdef BHAPI_BUILD_LIBRARY
 namespace bhapi {
-extern EXPORT_BHAPI const b_uint8 major_version;
-extern EXPORT_BHAPI const b_uint8 minor_version;
-extern EXPORT_BHAPI const b_uint8 micro_version;
-extern EXPORT_BHAPI const b_uint8 interface_age;
-extern EXPORT_BHAPI const b_uint16 binary_age;
+extern EXPORTBHAPI const b_uint8 major_version;
+extern EXPORTBHAPI const b_uint8 minor_version;
+extern EXPORTBHAPI const b_uint8 micro_version;
+extern EXPORTBHAPI const b_uint8 interface_age;
+extern EXPORTBHAPI const b_uint16 binary_age;
 }
 #endif
 
-EXPORT_BHAPI int32 	atomic_add (int32 *value, int32 addValue) {}
-EXPORT_BHAPI int64 	atomic_add64 (int64 *value, int64 addValue) {}
-EXPORT_BHAPI int32 	atomic_and (int32 *value, int32 andValue) {}
-EXPORT_BHAPI int64 	atomic_and64 (int64 *value, int64 andValue) {}
-EXPORT_BHAPI int32 	atomic_get (int32 *value) {}
-EXPORT_BHAPI int64 	atomic_get64 (int64 *value) {}
-EXPORT_BHAPI int32 	atomic_get_and_set (int32 *value, int32 newValue) {}
-EXPORT_BHAPI int64 	atomic_get_and_set64 (int64 *value, int64 newValue) {}
-EXPORT_BHAPI int32 	atomic_or (int32 *value, int32 orValue) {}
-EXPORT_BHAPI int64 	atomic_or64 (int64 *value, int64 orValue) {}
-EXPORT_BHAPI void 	atomic_set (int32 *value, int32 newValue) {}
-EXPORT_BHAPI void 	atomic_set64 (int64 *value, int64 newValue) {}
-EXPORT_BHAPI int32 	atomic_test_and_set (int32 *value, int32 newValue, int32 testAgains) {}
-EXPORT_BHAPI int64 	atomic_test_and_set64 (int64 *value, int64 newValue, int64 testAgainst) {}
-EXPORT_BHAPI void * 	get_stack_frame (void) {}
-EXPORT_BHAPI const char* B_EMPTY_STRING = "";
+EXPORTBHAPI int32 	bhapi::atomic_add (int32 *value, int32 addValue) { return 0; }
+EXPORTBHAPI int64 	bhapi::atomic_add64 (int64 *value, int64 addValue) { return 0; }
+EXPORTBHAPI int32 	bhapi::atomic_and (int32 *value, int32 andValue) { return 0; }
+EXPORTBHAPI int64 	bhapi::atomic_and64 (int64 *value, int64 andValue) { return 0; }
+EXPORTBHAPI int32 	bhapi::atomic_get (int32 *value) { return 0; }
+EXPORTBHAPI int64 	bhapi::atomic_get64 (int64 *value) { return 0;}
+EXPORTBHAPI int32 	bhapi::atomic_get_and_set (int32 *value, int32 newValue) { return 0; }
+EXPORTBHAPI int64 	bhapi::atomic_get_and_set64 (int64 *value, int64 newValue) { return 0; }
+EXPORTBHAPI int32 	bhapi::atomic_or (int32 *value, int32 orValue) { return 0; }
+EXPORTBHAPI int64 	bhapi::atomic_or64 (int64 *value, int64 orValue) { return 0; }
+EXPORTBHAPI void 	bhapi::atomic_set (int32 *value, int32 newValue) {}
+EXPORTBHAPI void 	bhapi::atomic_set64 (int64 *value, int64 newValue) {}
+EXPORTBHAPI int32 	bhapi::atomic_test_and_set (int32 *value, int32 newValue, int32 testAgains) { return 0; }
+EXPORTBHAPI int64 	bhapi::atomic_test_and_set64 (int64 *value, int64 newValue, int64 testAgainst) { return 0; }
+EXPORTBHAPI void * 	bhapi::get_stack_frame (void) { return NULL; }
+EXPORTBHAPI const char* B_EMPTY_STRING = "";

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -55,16 +55,16 @@
 
 class BAlertTypeView : public BView {
 public:
-    BAlertTypeView(BRect frame, b_alert_type type);
+    BAlertTypeView(BRect frame, bhapi::alert_type type);
     virtual ~BAlertTypeView();
 
-	virtual void SetViewColor(b_rgb_color c);
+	virtual void SetViewColor(bhapi::rgb_color c);
 	virtual void Draw(BRect updateRect);
 
 	virtual void GetPreferredSize(float *width, float *height);
 	void InitBitmap();
 
-	b_alert_type fAlertType;
+    bhapi::alert_type fAlertType;
 	BBitmap *fBitmap;
 	b_uint8 fState;
 	BInvoker *fInvoker;
@@ -83,7 +83,7 @@ private:
 };
 
 
-BAlertTypeView::BAlertTypeView(BRect frame, b_alert_type type)
+BAlertTypeView::BAlertTypeView(BRect frame, bhapi::alert_type type)
 	: BView(frame, "alert_type_view", B_FOLLOW_LEFT | B_FOLLOW_TOP_BOTTOM, B_WILL_DRAW),
 	  fAlertType(type), fBitmap(NULL), fState(0), fInvoker(NULL), fSem(NULL)
 {
@@ -133,7 +133,7 @@ BAlertTypeView::InitBitmap()
 
 
 void
-BAlertTypeView::SetViewColor(b_rgb_color c)
+BAlertTypeView::SetViewColor(bhapi::rgb_color c)
 {
 	if(ViewColor() != c)
 	{
@@ -211,8 +211,8 @@ BAlert::BAlert(const char *title,
 	       const char *button1_label,
 	       const char *button2_label,
 	       const char *button3_label,
-	       b_button_width btnWidth,
-	       b_alert_type type)
+	       bhapi::button_width btnWidth,
+           bhapi::alert_type type)
 	: BWindow(BRect(-100, -100, -10, -10), title, B_MODAL_WINDOW, 0)
 {
 	BRect tmpR(0, 0, 1, 1);

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_FONT_ENGINE__H
-#define BHAPI_FONT_ENGINE__H
+#ifndef BHAPI_FONT_ENGINE_H
+#define BHAPI_FONT_ENGINE_H
 #include "../../support/SupportDefs.h"
 #include "../../support/StringArray.h"
 #include "../../interface/Point.h"
@@ -54,24 +54,24 @@ typedef struct font_detach_callback {
 	void *data;
 } font_detach_callback;
 
-IMPEXP_BHAPI BFontEngine*	get_font_engine(const char *family, const char *style);
-IMPEXP_BHAPI BFontEngine*	get_font_engine(b_int32 familyIndex, b_int32 styleIndex);
-LOCAL_BHAPI bool font_init(void);
-IMPEXP_BHAPI bool font_add(const char *family, const char *style, BFontEngine *engine);
-IMPEXP_BHAPI bool update_font_families(bool);
-LOCAL_BHAPI bool font_lock(void);
-LOCAL_BHAPI void font_unlock(void);
-LOCAL_BHAPI void font_cancel(void);
-LOCAL_BHAPI bool font_other_init();
-LOCAL_BHAPI bool update_other_font_families(bool check_only);
-LOCAL_BHAPI void font_other_cancel();
-IMPEXP_BHAPI bool font_freetype2_init(void);
-IMPEXP_BHAPI bool font_freetype2_is_valid(void);
-IMPEXP_BHAPI void font_freetype2_cancel(void);
+IMPEXPBHAPI BFontEngine*	get_font_engine(const char *family, const char *style);
+IMPEXPBHAPI BFontEngine*	get_font_engine(b_int32 familyIndex, b_int32 styleIndex);
+LOCALBHAPI bool font_init(void);
+IMPEXPBHAPI bool font_add(const char *family, const char *style, BFontEngine *engine);
+IMPEXPBHAPI bool update_font_families(bool);
+LOCALBHAPI bool font_lock(void);
+LOCALBHAPI void font_unlock(void);
+LOCALBHAPI void font_cancel(void);
+LOCALBHAPI bool font_other_init();
+LOCALBHAPI bool update_other_font_families(bool check_only);
+LOCALBHAPI void font_other_cancel();
+IMPEXPBHAPI bool font_freetype2_init(void);
+IMPEXPBHAPI bool font_freetype2_is_valid(void);
+IMPEXPBHAPI void font_freetype2_cancel(void);
 }
 
 using namespace bhapi;
-class IMPEXP_BHAPI BFontEngine {
+class IMPEXPBHAPI BFontEngine {
 public:
     BFontEngine();
     BFontEngine(const char *family, const char *style);
@@ -142,10 +142,10 @@ private:
 
     bhapi::font_render_mode fRenderMode;
 
-    friend IMPEXP_BHAPI bool bhapi::font_add(const char *family, const char *style, BFontEngine *engine);
+    friend IMPEXPBHAPI bool bhapi::font_add(const char *family, const char *style, BFontEngine *engine);
     BStringArray *fServing;
 };
 #endif /* __cplusplus */
 
-#endif /* BHAPI_FONT_ENGINE__H */
+#endif /* BHAPI_FONT_ENGINE_H */
 

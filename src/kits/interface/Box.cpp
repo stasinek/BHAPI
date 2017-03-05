@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -34,7 +34,7 @@
 #include "../interface/StringView.h"
 #include "../add-ons/theme/ThemeEngine.h"
 
-BBox::BBox(BRect frame, const char *name, b_uint32 resizingMode, b_uint32 flags, b_border_style border)
+BBox::BBox(BRect frame, const char *name, b_uint32 resizingMode, b_uint32 flags, bhapi::border_style border)
 	: BView(frame, name, resizingMode, flags), fLabelView(NULL), fBorder(B_NO_BORDER), fAlignment(B_ALIGN_LEFT)
 {
 	fBorder = border;
@@ -47,7 +47,7 @@ BBox::~BBox()
 
 
 void
-BBox::SetBorder(b_border_style border)
+BBox::SetBorder(bhapi::border_style border)
 {
 	if(fBorder != border)
 	{
@@ -57,7 +57,7 @@ BBox::SetBorder(b_border_style border)
 }
 
 
-b_border_style
+bhapi::border_style
 BBox::Border() const
 {
 	return fBorder;
@@ -65,7 +65,7 @@ BBox::Border() const
 
 
 void
-BBox::SetLabelAlignment(b_alignment labelAlignment)
+BBox::SetLabelAlignment(bhapi::alignment labelAlignment)
 {
 	if(fAlignment != labelAlignment)
 	{
@@ -75,7 +75,7 @@ BBox::SetLabelAlignment(b_alignment labelAlignment)
 }
 
 
-b_alignment
+bhapi::alignment
 BBox::LabelAlignment() const
 {
 	return fAlignment;

@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_VOLUME_ROSTER__H
-#define BHAPI_VOLUME_ROSTER__H
+#ifndef BHAPI_VOLUME_ROSTER_H
+#define BHAPI_VOLUME_ROSTER_H
 
 #include "Volume.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BVolumeRoster {
+class IMPEXPBHAPI BVolumeRoster {
 public:
 	BVolumeRoster();
 	virtual ~BVolumeRoster();
@@ -50,5 +50,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_VOLUME_ROSTER__H */
+#endif /* BHAPI_VOLUME_ROSTER_H */
 

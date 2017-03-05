@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  * 
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,14 +28,14 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_CHECK_BOX__H
-#define BHAPI_CHECK_BOX__H
+#ifndef BHAPI_CHECK_BOX_H
+#define BHAPI_CHECK_BOX_H
 
 #include "../interface/Control.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BCheckBox : public BControl {
+class IMPEXPBHAPI BCheckBox : public BControl {
 public:
     BCheckBox(BRect frame,
 		  const char *name,
@@ -58,5 +58,5 @@ public:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_CHECK_BOX__H */
+#endif /* BHAPI_CHECK_BOX_H */
 

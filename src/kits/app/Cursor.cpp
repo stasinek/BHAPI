@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -311,11 +311,11 @@ static b_uint8 cursor_i_beam[] = {
 };
 
 
-LOCAL_BHAPI BCursor _B_CURSOR_HAND(cursor_hand);
-LOCAL_BHAPI BCursor _B_CURSOR_HAND_MOVE(cursor_hand_move);
-LOCAL_BHAPI BCursor _B_CURSOR_I_BEAM(cursor_i_beam);
+LOCALBHAPI BCursor _B_CURSOR_HAND(cursor_hand);
+LOCALBHAPI BCursor _B_CURSOR_HAND_MOVE(cursor_hand_move);
+LOCALBHAPI BCursor _B_CURSOR_I_BEAM(cursor_i_beam);
 
-EXPORT_BHAPI const BCursor *B_CURSOR_HAND = &_B_CURSOR_HAND;
-EXPORT_BHAPI const BCursor *B_CURSOR_HAND_MOVE = &_B_CURSOR_HAND_MOVE;
-EXPORT_BHAPI const BCursor *B_CURSOR_I_BEAM = &_B_CURSOR_I_BEAM;
+EXPORTBHAPI const BCursor *B_CURSOR_HAND = &_B_CURSOR_HAND;
+EXPORTBHAPI const BCursor *B_CURSOR_HAND_MOVE = &_B_CURSOR_HAND_MOVE;
+EXPORTBHAPI const BCursor *B_CURSOR_I_BEAM = &_B_CURSOR_I_BEAM;
 

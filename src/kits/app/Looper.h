@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_LOOPER__H
-#define BHAPI_LOOPER__H
+#ifndef BHAPI_LOOPER_H
+#define BHAPI_LOOPER_H
 #include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
@@ -42,7 +42,7 @@ class BMessageQueue;
 class BLoooper;
 #include "../support/List.h"
 #include "Handler.h"
-class IMPEXP_BHAPI BLooper : public BHandler {
+class IMPEXPBHAPI BLooper : public BHandler {
 public:
 //	BLooper(const char *name = NULL,
 //		b_int32 priority = B_NORMAL_PRIORITY);
@@ -179,5 +179,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_LOOPER__H */
+#endif /* BHAPI_LOOPER_H */
 

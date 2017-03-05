@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_VOLUME__H
-#define BHAPI_VOLUME__H
+#ifndef BHAPI_VOLUME_H
+#define BHAPI_VOLUME_H
 
 #include "StorageDefs.h"
 #include "Directory.h"
@@ -36,7 +36,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BVolume {
+class IMPEXPBHAPI BVolume {
 public:
     BVolume();
     BVolume(b_dev_t dev);
@@ -66,5 +66,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_VOLUME__H */
+#endif /* BHAPI_VOLUME_H */
 

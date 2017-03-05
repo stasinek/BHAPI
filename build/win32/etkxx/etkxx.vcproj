@@ -306,35 +306,35 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\kernel\win32\etk-area.cpp"
+					RelativePath="..\..\..\etk\kernel\win32\BHAPI_wrapper_area.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\kernel\win32\etk-image.cpp"
+					RelativePath="..\..\..\etk\kernel\win32\BHAPI_wrapper_image.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\kernel\thread\win32\etk-locker.cpp"
+					RelativePath="..\..\..\etk\kernel\thread\win32\BHAPI_wrapper_locker.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\kernel\win32\etk-os.cpp"
+					RelativePath="..\..\..\etk\kernel\win32\BHAPI_wrapper_os.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\kernel\etk-port.cpp"
+					RelativePath="..\..\..\etk\kernel\BHAPI_wrapper_port.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\kernel\thread\win32\etk-semaphore.cpp"
+					RelativePath="..\..\..\etk\kernel\thread\win32\BHAPI_wrapper_semaphore.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\kernel\thread\win32\etk-thread.cpp"
+					RelativePath="..\..\..\etk\kernel\thread\win32\BHAPI_wrapper_thread.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\kernel\win32\etk-timefuncs.cpp"
+					RelativePath="..\..\..\etk\kernel\win32\BHAPI_wrapper_timefuncs.cpp"
 					>
 				</File>
 			</Filter>
@@ -370,23 +370,23 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\interface\win32\etk-application.cpp"
+					RelativePath="..\..\..\etk\interface\win32\BHAPI_wrapper_application.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\interface\win32\etk-drawing.cpp"
+					RelativePath="..\..\..\etk\interface\win32\BHAPI_wrapper_drawing.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\interface\win32\etk-pixmap.cpp"
+					RelativePath="..\..\..\etk\interface\win32\BHAPI_wrapper_pixmap.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\interface\win32\etk-win32-font.cpp"
+					RelativePath="..\..\..\etk\interface\win32\BHAPI_wrapper_win32-font.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\interface\win32\etk-window.cpp"
+					RelativePath="..\..\..\etk\interface\win32\BHAPI_wrapper_window.cpp"
 					>
 				</File>
 				<File
@@ -871,7 +871,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\etk\interface\win32\etk-win32gdi.h"
+					RelativePath="..\..\..\etk\interface\win32\BHAPI_wrapper_win32gdi.h"
 					>
 				</File>
 				<File

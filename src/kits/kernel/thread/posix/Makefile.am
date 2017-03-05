@@ -10,16 +10,16 @@ INCLUDES =	$(ETK_THREAD_CFLAGS) 			\
 noinst_LTLIBRARIES = libthread-posix.la
 
 libthread_posix_la_SOURCES =			\
-			etk-thread.cpp		\
-			etk-locker.cpp
+			BHAPI_wrapper_thread.cpp		\
+			BHAPI_wrapper_locker.cpp
 
 if ETK_OS_DARWIN
-libthread_posix_la_SOURCES += etk-semaphore-mach.cpp
+libthread_posix_la_SOURCES += BHAPI_wrapper_semaphore-mach.cpp
 else
 if ETK_OS_FREEBSD
-libthread_posix_la_SOURCES += etk-semaphore-umtx.cpp
+libthread_posix_la_SOURCES += BHAPI_wrapper_semaphore-umtx.cpp
 else
-libthread_posix_la_SOURCES += etk-semaphore.cpp
+libthread_posix_la_SOURCES += BHAPI_wrapper_semaphore.cpp
 endif
 endif
 

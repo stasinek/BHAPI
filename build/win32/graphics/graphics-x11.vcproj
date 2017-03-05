@@ -198,23 +198,23 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\etk\interface\x11\etk-application.cpp"
+				RelativePath="..\..\..\etk\interface\x11\BHAPI_wrapper_application.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\etk\interface\x11\etk-drawing.cpp"
+				RelativePath="..\..\..\etk\interface\x11\BHAPI_wrapper_drawing.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\etk\interface\x11\etk-pixmap.cpp"
+				RelativePath="..\..\..\etk\interface\x11\BHAPI_wrapper_pixmap.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\etk\interface\x11\etk-window.cpp"
+				RelativePath="..\..\..\etk\interface\x11\BHAPI_wrapper_window.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\etk\interface\x11\etk-x11-font.cpp"
+				RelativePath="..\..\..\etk\interface\x11\BHAPI_wrapper_x11-font.cpp"
 				>
 			</File>
 		</Filter>
@@ -224,7 +224,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\etk\interface\x11\etk-x11.h"
+				RelativePath="..\..\..\etk\interface\x11\BHAPI_wrapper_x11.h"
 				>
 			</File>
 		</Filter>

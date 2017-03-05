@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_ENTRY__H
-#define BHAPI_ENTRY__H 
+#ifndef BHAPI_ENTRY_H
+#define BHAPI_ENTRY_H 
 
 #include "Path.h"
 
@@ -36,7 +36,7 @@
 
 class BDirectory;
 
-class IMPEXP_BHAPI BEntry {
+class IMPEXPBHAPI BEntry {
 public:
     BEntry();
     BEntry(const char *dir, const char *leaf, bool traverse = false);
@@ -86,5 +86,5 @@ private:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_ENTRY__H */
+#endif /* BHAPI_ENTRY_H */
 

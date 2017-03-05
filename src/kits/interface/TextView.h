@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_TEXT_VIEW__H
-#define BHAPI_TEXT_VIEW__H
+#ifndef BHAPI_TEXT_VIEW_H
+#define BHAPI_TEXT_VIEW_H
 
 #include "../support/String.h"
 #include "../interface/View.h"
@@ -38,8 +38,8 @@ namespace bhapi {
 typedef struct text_run {
 	b_int32			offset;		/* byte/character(utf8 mode) offset of first byte/character(utf8 mode) of run */
 	bhapi::font_desc		font;		/* font of run */
-	b_rgb_color		color;		/* color of run */
-	b_rgb_color		background;	/* background of run */
+	bhapi::rgb_color		color;		/* color of run */
+	bhapi::rgb_color		background;	/* background of run */
 	bool			underline;	/* whether to draw underline */
 
 #ifdef __cplusplus /* Just for C++ */
@@ -64,7 +64,7 @@ class BFile;
 class BClipboard;
 
 
-class IMPEXP_BHAPI BTextView : public BView {
+class IMPEXPBHAPI BTextView : public BView {
 public:
 	BTextView(BRect frame,
 		  const char *name,
@@ -74,7 +74,7 @@ public:
 	BTextView(BRect frame,
 		  const char *name,
 		  BRect textRect,
-		  const BFont *font, const b_rgb_color *color,
+		  const BFont *font, const bhapi::rgb_color *color,
 		  b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
 		  b_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS);
 	virtual ~BTextView();
@@ -118,8 +118,8 @@ public:
 	void		SetAutoindent(bool flag);
 	bool		DoesAutoindent() const;
 
-	void		SetAlignment(b_alignment alignment);
-	b_alignment	Alignment() const;
+	void		SetAlignment(bhapi::alignment alignment);
+	bhapi::alignment	Alignment() const;
 
 	void		SetMaxBytes(b_int32 max);
 	b_int32		MaxBytes() const;
@@ -165,8 +165,8 @@ public:
 	virtual void	ScrollToOffset(b_int32 offset, bool utf8 = false);
 	void		ScrollToSelection();
 
-	void		SetTextBackground(b_rgb_color color);
-	b_rgb_color	TextBackground() const;
+	void		SetTextBackground(bhapi::rgb_color color);
+	bhapi::rgb_color	TextBackground() const;
 
 	void		SetPosition(b_int32 pos, bool response = true, bool utf8 = false);
 	b_int32		Position(bool utf8 = false, b_int32 *lineOffset = NULL) const;
@@ -195,7 +195,7 @@ private:
 	bool fEditable;
 	bool fSelectable;
 	bool fStylable;
-	b_alignment fAlignment;
+	bhapi::alignment fAlignment;
 	b_int32 fMaxBytes;
 	float fTabWidth;
 	bool fAutoindent;
@@ -209,7 +209,7 @@ private:
 	b_int32 fCurrentLine;
 	b_int32 fCursor;
 
-	b_rgb_color fTextBkColor;
+	bhapi::rgb_color fTextBkColor;
 
 	void ReScanRunArray(b_int32 fromLine, b_int32 toLine);
 	void ReScanSize(b_int32 fromLine, b_int32 toLine);
@@ -254,5 +254,5 @@ inline void BTextView::Clear()
 #endif
 #endif /* __cplusplus */
 
-#endif /* BHAPI_TEXT_VIEW__H */
+#endif /* BHAPI_TEXT_VIEW_H */
 

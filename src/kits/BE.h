@@ -35,16 +35,20 @@
 #define BHAPI_INTERFACE_AGE 1
 #define BHAPI_BINARY_AGE 1
 
-extern "C" {
-
 #ifndef BHAPI_BUILD_LIBRARY
+#ifdef __cplusplus
+extern "C" {
 namespace bhapi {
-extern IMPEXP_BHAPI const b_uint8 major_version;
-extern IMPEXP_BHAPI const b_uint8 minor_version;
-extern IMPEXP_BHAPI const b_uint8 micro_version;
-extern IMPEXP_BHAPI const b_uint8 interface_age;
-extern IMPEXP_BHAPI const b_uint16 binary_age;
+#endif // __cplusplus
+extern IMPEXPBHAPI const b_uint8 major_version;
+extern IMPEXPBHAPI const b_uint8 minor_version;
+extern IMPEXPBHAPI const b_uint8 micro_version;
+extern IMPEXPBHAPI const b_uint8 interface_age;
+extern IMPEXPBHAPI const b_uint16 binary_age;
+#ifdef __cplusplus
+} /* namespace */
 }
+#endif // __cplusplus
 #else
 #define major_version BHAPI_MAJOR_VERSION
 #define minor_version BHAPI_MINOR_VERSION
@@ -52,8 +56,6 @@ extern IMPEXP_BHAPI const b_uint16 binary_age;
 #define interface_age BHAPI_INTERFACE_AGE
 #define binary_age BHAPI_BINARY_AGE
 #endif
-
-} // extern "C"
 
 #include "AppKit.h"
 #include "KernelKit.h"

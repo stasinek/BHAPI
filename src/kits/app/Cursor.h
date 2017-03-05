@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,13 +28,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_CURSOR__H
-#define BHAPI_CURSOR__H
+#ifndef BHAPI_CURSOR_H
+#define BHAPI_CURSOR_H
 #include "../support/SupportDefs.h"
 #include "../support/Archivable.h"
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXP_BHAPI BCursor : public BArchivable {
+class IMPEXPBHAPI BCursor : public BArchivable {
 public:
     BCursor(const void *cursorData);
     BCursor(const BCursor &cursor);
@@ -76,13 +76,13 @@ inline b_uint8 BCursor::SpotY() const
 }
 #endif
 
-extern IMPEXP_BHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT;
-extern IMPEXP_BHAPI const BCursor *B_CURSOR_HAND;
-extern IMPEXP_BHAPI const BCursor *B_CURSOR_HAND_MOVE;
-extern IMPEXP_BHAPI const BCursor *B_CURSOR_I_BEAM;
+extern IMPEXPBHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT;
+extern IMPEXPBHAPI const BCursor *B_CURSOR_HAND;
+extern IMPEXPBHAPI const BCursor *B_CURSOR_HAND_MOVE;
+extern IMPEXPBHAPI const BCursor *B_CURSOR_I_BEAM;
 
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_CURSOR__H */
+#endif /* BHAPI_CURSOR_H */
 

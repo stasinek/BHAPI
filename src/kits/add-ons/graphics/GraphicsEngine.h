@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,8 +28,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_GRAPHICS_ENGINE__H
-#define BHAPI_GRAPHICS_ENGINE__H
+#ifndef BHAPI_GRAPHICS_ENGINE_H
+#define BHAPI_GRAPHICS_ENGINE_H
 
 #include "../../support/SupportDefs.h"
 
@@ -39,47 +39,47 @@ class BCursor;
 class BPixmap;
 #include "../../interface/Window.h"
 #include "../../interface/Region.h"
-class IMPEXP_BHAPI BGraphicsContext {
+class IMPEXPBHAPI BGraphicsContext {
 public:
 	BGraphicsContext();
 	virtual ~BGraphicsContext();
 
-    virtual b_status_t		SetDrawingMode(b_drawing_mode mode);
+    virtual b_status_t		SetDrawingMode(bhapi::drawing_mode mode);
     virtual b_status_t		SetClipping(const BRegion &clipping);
-    virtual b_status_t		SetHighColor(b_rgb_color highColor);
-    virtual b_status_t		SetLowColor(b_rgb_color lowColor);
-    virtual b_status_t		SetPattern(b_pattern pattern);
+    virtual b_status_t		SetHighColor(bhapi::rgb_color highColor);
+    virtual b_status_t		SetLowColor(bhapi::rgb_color lowColor);
+    virtual b_status_t		SetPattern(bhapi::pattern pattern);
     virtual b_status_t		SetPenSize(b_uint32 penSize);
 	virtual b_status_t		SetSquarePointStyle(bool state);
 
-	b_drawing_mode			DrawingMode() const;
+	bhapi::drawing_mode			DrawingMode() const;
     const BRegion			*Clipping() const;
-	b_pattern			Pattern() const;
+	bhapi::pattern			Pattern() const;
     b_uint32				PenSize() const;
 	bool				IsSquarePointStyle() const;
 
     b_status_t			SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
     b_status_t			SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
-	b_rgb_color			HighColor() const;
-	b_rgb_color			LowColor() const;
+	bhapi::rgb_color			HighColor() const;
+	bhapi::rgb_color			LowColor() const;
 
 private:
-	b_drawing_mode fDrawingMode;
+	bhapi::drawing_mode fDrawingMode;
     BRegion fClipping;
-	b_rgb_color fHighColor;
-	b_rgb_color fLowColor;
-	b_pattern fPattern;
+	bhapi::rgb_color fHighColor;
+	bhapi::rgb_color fLowColor;
+	bhapi::pattern fPattern;
     b_uint32 fPenSize;
 	bool fSquarePoint;
 };
 
 
-class IMPEXP_BHAPI BGraphicsDrawable {
+class IMPEXPBHAPI BGraphicsDrawable {
 public:
 	BGraphicsDrawable();
 	virtual ~BGraphicsDrawable();
 
-    virtual b_status_t		SetBackgroundColor(b_rgb_color bkColor);
+    virtual b_status_t		SetBackgroundColor(bhapi::rgb_color bkColor);
 
     virtual b_status_t		ResizeTo(b_uint32 w, b_uint32 h) = 0;
 	virtual b_status_t		CopyTo(BGraphicsContext *dc,
@@ -96,7 +96,7 @@ public:
                              const b_int32 *pts, b_int32 count) = 0;
 	virtual b_status_t		StrokePoints_Colors(BGraphicsContext *dc,
                                 const BList *ptsArrayLists, b_int32 arrayCount,
-							    const b_rgb_color *highColors) = 0;
+							    const bhapi::rgb_color *highColors) = 0;
 	virtual b_status_t		StrokePoints_Alphas(BGraphicsContext *dc,
                                 const b_int32 *pts, const b_uint8 *alpha, b_int32 count) = 0;
 	virtual b_status_t		StrokeLine(BGraphicsContext *dc,
@@ -125,14 +125,14 @@ public:
                         b_int32 x, b_int32 y, b_uint32 w, b_uint32 h, float startAngle, float endAngle) = 0;
 
     b_status_t			SetBackgroundColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
-	b_rgb_color			BackgroundColor() const;
+	bhapi::rgb_color			BackgroundColor() const;
 
 private:
-	b_rgb_color fBkColor;
+	bhapi::rgb_color fBkColor;
 };
 
 
-class IMPEXP_BHAPI BGraphicsWindow : public BGraphicsDrawable {
+class IMPEXPBHAPI BGraphicsWindow : public BGraphicsDrawable {
 public:
 	BGraphicsWindow();
 	virtual ~BGraphicsWindow();
@@ -165,11 +165,11 @@ public:
 
 // NOTE:
 // 1. Addon must have C function like below and all the null virtual functions of class must be implemented.
-// 		extern "C" EXPORT_BHAPI BGraphicsEngine* instantiate_graphics_engine();
+// 		extern "C" EXPORTBHAPI BGraphicsEngine* instantiate_graphics_engine();
 // 2. Usually, addons were put into the directory located at "$E_ADDONS_DIRECTORY/etkxx/graphics" or
 //    "$E_USER_ADDONS_DIRECTORY/etkxx/graphics", such as "/usr/lib/add-ons/etkxx/graphics".
 // 3. When BHAPI++ find no graphics-engine addons, it try built-in graphics-engine when possible.
-class IMPEXP_BHAPI BGraphicsEngine {
+class IMPEXPBHAPI BGraphicsEngine {
 public:
 	BGraphicsEngine();
 	virtual ~BGraphicsEngine();
@@ -199,5 +199,5 @@ public:
 
 #endif /* __cplusplus */
 
-#endif /* BHAPI_GRAPHICS_ENGINE__H */
+#endif /* BHAPI_GRAPHICS_ENGINE_H */
 

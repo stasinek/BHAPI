@@ -1,3 +1,33 @@
+/* --------------------------------------------------------------------------
+ *
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
+ * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
+ *
+ * BHAPI++ library is a freeware; it may be used and distributed according to
+ * the terms of The MIT License.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+ * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * File: ObjectList.h
+ *
+ *
+ * --------------------------------------------------------------------------*/
+
 /*
 Open Tracker License
 
@@ -31,24 +61,17 @@ of Be Incorporated in the United States and other countries. Other brand product
 names are registered trademarks or trademarks of their respective holders.
 All rights reserved.
 */
-#ifndef _OBJECT_LIST_H
-#define _OBJECT_LIST_H
+#ifndef BHAPI_OBJECT_LIST_H
+#define BHAPI_OBJECT_LIST_H
 
-
+#include "List.h"
+#include "SupportDefs.h"
 #include <new>
-
-#include <List.h>
-#include <SupportDefs.h>
-
-
 //
 // ObjectList is a wrapper around BList that adds type safety,
 // optional object ownership, search, insert operations, etc.
 //
-
 template<class T> class BObjectList;
-
-
 template<class T>
 struct UnaryPredicate {
 	virtual int operator()(const T *) const
@@ -66,18 +89,16 @@ private:
 
 
 template<class T>
-int
-UnaryPredicate<T>::_unary_predicate_glue(const void *item, void *context)
+int UnaryPredicate<T>::_unary_predicate_glue(const void *item, void *context)
 {
 	return ((UnaryPredicate<T> *)context)->operator()((const T *)item);
 }
-
 
 class _PointerList_ : public BList {
 public:
 	_PointerList_(const _PointerList_ &list);
 	_PointerList_(int32 itemsPerBlock = 20, bool owning = false);
-	~_PointerList_();
+	~_PointerList();
 
 	typedef void *(* GenericEachFunction)(void *, void *);
 	typedef int (* GenericCompareFunction)(const void *, const void *);
@@ -108,7 +129,6 @@ protected:
 	bool owning;
 
 };
-
 
 template<class T>
 class BObjectList : private _PointerList_ {
@@ -254,8 +274,7 @@ private:
 
 
 template<class Item, class Result, class Param1>
-Result
-WhileEachListItem(BObjectList<Item>* list, Result (Item::*func)(Param1),
+Result WhileEachListItem(BObjectList<Item>* list, Result (Item::*func)(Param1),
 	Param1 p1)
 {
 	Result result = 0;

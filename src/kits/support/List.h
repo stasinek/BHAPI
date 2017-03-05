@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ previously named ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -28,11 +28,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_LIST__H
-#define BHAPI_LIST__H
+#ifndef BHAPI_LIST_H
+#define BHAPI_LIST_H
+
 #include "../support/SupportDefs.h"
+
 #ifdef __cplusplus /* Just for C++ */
-class IMPEXP_BHAPI BList {
+class IMPEXPBHAPI BList {
 public:
     // BList(b_int32), BList(b_int32, b_int32):
 	// 	The argument "initialAllocSize" is the minimum count to hold in memory.
@@ -94,5 +96,5 @@ private:
     bool _Resize(b_int32 count);
 };
 #endif /* __cplusplus */
-#endif /* BHAPI_LIST__H */
+#endif /* BHAPI_LIST_H */
 
