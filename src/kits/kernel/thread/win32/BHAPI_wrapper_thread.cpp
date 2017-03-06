@@ -31,7 +31,7 @@
 #include "../../../kernel/Kernel.h"
 #include "../../../kernel/Debug.h"
 #include "../../../support/List.h"
-#include "../../../support/String.h"
+#include "../../../support/StringClass.h"
 #include "../../../support/Errors.h"
 #include "../../../support/SimpleLocker.h"
 #include "../../../support/SupportDefs.h"

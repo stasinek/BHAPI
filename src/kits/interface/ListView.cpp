@@ -40,7 +40,7 @@
 
 BListView::BListView(BRect frame,
 		     const char *name,
-		     b_list_view_type type,
+		     bhapi::list_view_type type,
 		     b_uint32 resizingMode,
 		     b_uint32 flags)
 	: BView(frame, name, resizingMode, flags), BInvoker(),
@@ -210,7 +210,7 @@ BListView::RemoveItems(b_int32 index, b_int32 count, bool auto_destruct_items)
 
 
 void
-BListView::SetListType(b_list_view_type type)
+BListView::SetListType(bhapi::list_view_type type)
 {
 	if(fListType != type)
 	{
@@ -220,7 +220,7 @@ BListView::SetListType(b_list_view_type type)
 }
 
 
-b_list_view_type
+bhapi::list_view_type
 BListView::ListType() const
 {
 	return fListType;

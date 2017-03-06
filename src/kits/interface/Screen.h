@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,20 +30,19 @@
 #ifndef BHAPI_SCREEN_H
 #define BHAPI_SCREEN_H
 
-#include "../interface/Rect.h"
-
 #ifdef __cplusplus /* Just for C++ */
 class BWindow;
+#include "../interface/Rect.h"
 class IMPEXPBHAPI BScreen {
 public:
     BScreen(b_uint32 id = 0);
     BScreen(BWindow *win);
     ~BScreen();
 
-	bool		IsValid() const;
-	b_status_t	SetToNext();
+    bool		IsValid() const;
+    b_status_t	SetToNext();
 
-	BRect		Frame() const;
+    BRect		Frame() const;
     b_uint32		ID() const;
 
 private:

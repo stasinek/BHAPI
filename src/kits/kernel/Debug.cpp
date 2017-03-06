@@ -33,7 +33,7 @@
 #undef BHAPI_DEBUG
 #undef BHAPI_WARNING
 #include "Kernel.h"
-#include "../support/String.h"
+#include "../support/StringClass.h"
 #include "../support/UTF8.h"
 
 #include <stdio.h>

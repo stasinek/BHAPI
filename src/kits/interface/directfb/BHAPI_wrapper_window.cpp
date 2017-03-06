@@ -54,7 +54,7 @@ EDFBGraphicsWindow::EDFBGraphicsWindow(EDFBGraphicsEngine *dfbEngine, b_int32 x,
 	fHidden = true;
 
 	fLook = B_TITLED_WINDOW_LOOK;
-	fFeel = (b_window_feel)0;
+	fFeel = (bhapi::window_feel)0;
 
 	fMargins.Set(0, 0, 0, 0);
 	fOriginX = x;
@@ -208,7 +208,7 @@ EDFBGraphicsWindow::SetFlags(b_uint32 flags)
 
 
 b_status_t
-EDFBGraphicsWindow::SetLook(b_window_look look)
+EDFBGraphicsWindow::SetLook(bhapi::window_look look)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -252,7 +252,7 @@ EDFBGraphicsWindow::SetLook(b_window_look look)
 
 
 b_status_t
-EDFBGraphicsWindow::SetFeel(b_window_feel feel)
+EDFBGraphicsWindow::SetFeel(bhapi::window_feel feel)
 {
 	return B_ERROR;
 }

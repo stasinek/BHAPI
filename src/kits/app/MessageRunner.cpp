@@ -37,7 +37,7 @@
 #include "../support/Locker.h"
 #include "../support/Autolock.h"
 #include "../support/Errors.h"
-#include "../private/PrivateHandler.h"
+#include "../../private/app/PrivateHandler.h"
 #include "../app/Messenger.h"
 #include "../app/Message.h"
 

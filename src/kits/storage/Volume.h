@@ -32,7 +32,7 @@
 
 #include "StorageDefs.h"
 #include "Directory.h"
-#include "../support/String.h"
+#include "../support/StringClass.h"
 
 #ifdef __cplusplus /* Just for C++ */
 

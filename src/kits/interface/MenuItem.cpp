@@ -34,14 +34,14 @@
 
 #include "../app/Message.h"
 #include "../app/AppDefs.h"
-#include "../support/String.h"
+#include "../support/StringClass.h"
 #include "../support/ClassInfo.h"
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"
 
 using namespace bhapi;
 
-#include <string.h>
+
 #include <ctype.h>
 
 BMenuItem::BMenuItem(const char *label, BMessage *message, char shortcut, b_uint32 modifiers)

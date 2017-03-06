@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -26,44 +26,44 @@
  * File: Clipboard.h
  * Description: an interface to a clipboard
  * Warning: unfinished, just for system clipboard
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #ifndef BHAPI_CLIPBOARD_H
 #define BHAPI_CLIPBOARD_H
 
-#include "../support/SupportDefs.h"
 #include "../app/Messenger.h"
 #include "../support/Locker.h"
+#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 class IMPEXPBHAPI BClipboard {
 public:
-	BClipboard(const char *name);
-	virtual ~BClipboard();
+    BClipboard(const char *name);
+    virtual ~BClipboard();
 
-	const char	*Name() const;
+    const char	*Name() const;
 
     b_uint32	LocalCount() const;
     b_uint32	SystemCount() const;
-	b_status_t	StartWatching(const BMessenger &target);
-	b_status_t	StopWatching(const BMessenger &target);
+    b_status_t	StartWatching(const BMessenger &target);
+    b_status_t	StopWatching(const BMessenger &target);
 
-	bool		Lock();
-	void		Unlock();
-	b_int64		CountLocks() const;
+    bool		Lock();
+    void		Unlock();
+    b_int64		CountLocks() const;
 
-	b_status_t	Clear();
-	b_status_t	Commit();
-	b_status_t	Revert();
+    b_status_t	Clear();
+    b_status_t	Commit();
+    b_status_t	Revert();
 
-	BMessenger	DataSource() const;
-	BMessage	*Data() const;
+    BMessenger	DataSource() const;
+    BMessage	*Data() const;
 
 private:
-	char *fName;
-	BLocker fLocker;
-	BMessage *fData;
+    char *fName;
+    BLocker fLocker;
+    BMessage *fData;
 };
 
 #endif /* __cplusplus */

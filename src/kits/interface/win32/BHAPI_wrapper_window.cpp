@@ -35,7 +35,7 @@
 #include "../../support/Autolock.h"
 #include "../../support/Errors.h"
 #include "../../app/Application.h"
-#include "../../support/String.h"
+#include "../../support/StringClass.h"
 #include "../../support/ClassInfo.h"
 
 
@@ -101,7 +101,7 @@ bool bhapi::win32_window_convert_window_to_client(HWND hWnd, RECT *wr)
 
 EWin32GraphicsWindow::EWin32GraphicsWindow(EWin32GraphicsEngine *win32Engine, b_int32 x, b_int32 y, b_uint32 w, b_uint32 h)
 	: BGraphicsWindow(), win32Window(NULL),
-	  fLook((b_window_look)0), fFeel((b_window_feel)0), fActivateWhenShown(false), hbrBackground(NULL),
+	  fLook((bhapi::window_look)0), fFeel((bhapi::window_feel)0), fActivateWhenShown(false), hbrBackground(NULL),
 	  fEngine(NULL), fRequestWin(NULL), fRequestAsyncWin(NULL), WMBHAPI_MESSAGE(0)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
@@ -156,7 +156,7 @@ EWin32GraphicsWindow::EWin32GraphicsWindow(EWin32GraphicsEngine *win32Engine, b_
 }
 
 
-inline LONG _bhapi_get_window_style_ex(b_window_look look)
+inline LONG _bhapi_get_window_style_ex(bhapi::window_look look)
 {
 	LONG style;
 
@@ -187,7 +187,7 @@ inline LONG _bhapi_get_window_style_ex(b_window_look look)
 }
 
 
-inline LONG _bhapi_get_window_style(b_window_look look)
+inline LONG _bhapi_get_window_style(bhapi::window_look look)
 {
 	LONG style;
 
@@ -350,7 +350,7 @@ LRESULT _bhapi_set_window_background(EWin32GraphicsEngine *win32Engine, bhapi::w
 
 
 b_status_t
-EWin32GraphicsWindow::SetLook(b_window_look look)
+EWin32GraphicsWindow::SetLook(bhapi::window_look look)
 {
 	if(fRequestWin == NULL) return B_ERROR;
 
@@ -921,7 +921,7 @@ EWin32GraphicsWindow::SetFlags(b_uint32 flags)
 
 
 b_status_t
-EWin32GraphicsWindow::SetFeel(b_window_feel feel)
+EWin32GraphicsWindow::SetFeel(bhapi::window_feel feel)
 {
 	// TODO
 	return B_OK;

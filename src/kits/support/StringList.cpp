@@ -34,7 +34,7 @@
  */
 #include "StringList.h"
 #include "List.h"
-#include "String.h"
+#include "StringClass.h"
 
 #include <algorithm>
 

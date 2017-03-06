@@ -41,7 +41,6 @@
 #include FT_FREETYPE_H
 #include <freetype/include/freetype/freetype.h>
 
-#include <string.h>
 #include <stdlib.h>
 #include <math.h>
 

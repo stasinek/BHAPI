@@ -241,7 +241,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				{
 					int8 look;
 					if(bMsg->FindInt8("look", &look) != B_OK) break;
-					switch((b_window_look)look)
+					switch((bhapi::window_look)look)
 					{
 						case B_BORDERED_WINDOW_LOOK:
 							SetLook(B_BORDERED_WINDOW_LOOK);
@@ -761,7 +761,7 @@ EBeGraphicsWindow::SetFlags(b_uint32 flags)
 
 
 b_status_t
-EBeGraphicsWindow::SetLook(b_window_look look)
+EBeGraphicsWindow::SetLook(bhapi::window_look look)
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
@@ -775,7 +775,7 @@ EBeGraphicsWindow::SetLook(b_window_look look)
 
 
 b_status_t
-EBeGraphicsWindow::SetFeel(b_window_feel feel)
+EBeGraphicsWindow::SetFeel(bhapi::window_feel feel)
 {
 	// TODO
 	return B_OK;

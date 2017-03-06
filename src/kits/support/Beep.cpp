@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku source-code, All Rights Reserved
  *
@@ -32,24 +32,28 @@
  */
 
 #include "Beep.h"
-#include <DataExchange.h>
-#include "../media/MediaSounds.h"
+#include "../app/Messenger.h"
+#include "../app/Message.h"
+#include "../support/Errors.h"
+
+//#include <DataExchange.h>
+#include "../../private/media/ServerInterface.h"
 
 status_t bhapi::system_beep(const char* eventName)
 {
-	BMessenger messenger("application/x-vnd.Be.addon-host");
-	if (!messenger.IsValid())
-		return B_ERROR;
+    BMessenger messenger("application/x-vnd.Be.addon-host");
+    if (!messenger.IsValid())
+        return B_ERROR;
 
-	BMessage msg(MEDIA_ADD_ON_SERVER_PLAY_MEDIA), reply;
-	msg.AddString(MEDIA_NAME_KEY, eventName ? eventName : MEDIA_SOUNDS_BEEP);
-	msg.AddString(MEDIA_TYPE_KEY, MEDIA_TYPE_SOUNDS);
+    BMessage msg(MEDIA_ADD_ON_SERVER_PLAY_MEDIA), reply;
+    msg.AddString(MEDIA_NAME_KEY, eventName ? eventName : MEDIA_SOUNDS_BEEP);
+    msg.AddString(MEDIA_TYPE_KEY, MEDIA_TYPE_SOUNDS);
 
-	status_t status = messenger.SendMessage(&msg, &reply);
-	if (status != B_OK || reply.FindInt32("error", &status) != B_OK)
-		status = B_BAD_REPLY;
+    status_t status = messenger.SendMessage(&msg, &reply);
+    if (status != B_OK || reply.FindInt32("error", &status) != B_OK)
+        status = B_BAD_REPLY;
 
-	return status;
+    return status;
 }
 
 
@@ -61,18 +65,18 @@ status_t bhapi::beep()
 
 status_t bhapi::add_system_beep_event(const char* name, uint32 flags)
 {
-	BMessenger messenger("application/x-vnd.Be.media-server");
-	if (!messenger.IsValid())
-		return B_ERROR;
+    BMessenger messenger("application/x-vnd.Be.media-server");
+    if (!messenger.IsValid())
+        return B_ERROR;
 
-	BMessage msg(MEDIA_SERVER_ADD_SYSTEM_BEEP_EVENT), reply;
-	msg.AddString(MEDIA_NAME_KEY, name);
-	msg.AddString(MEDIA_TYPE_KEY, MEDIA_TYPE_SOUNDS);
-	msg.AddInt32(MEDIA_FLAGS_KEY, flags);
+    BMessage msg(MEDIA_SERVER_ADD_SYSTEM_BEEP_EVENT), reply;
+    msg.AddString(MEDIA_NAME_KEY, name);
+    msg.AddString(MEDIA_TYPE_KEY, MEDIA_TYPE_SOUNDS);
+    msg.AddInt32(MEDIA_FLAGS_KEY, flags);
 
-	status_t status = messenger.SendMessage(&msg, &reply);
-	if (status != B_OK || reply.FindInt32("error", &status) != B_OK)
-		status = B_BAD_REPLY;
+    status_t status = messenger.SendMessage(&msg, &reply);
+    if (status != B_OK || reply.FindInt32("error", &status) != B_OK)
+        status = B_BAD_REPLY;
 
-	return status;
+    return status;
 }

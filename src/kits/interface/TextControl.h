@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -31,43 +31,42 @@
 #ifndef BHAPI_TEXT_CONTROL_H
 #define BHAPI_TEXT_CONTROL_H
 
-#include "../support/SupportDefs.h"
-
 #ifdef __cplusplus /* Just for C++ */
 class BMessage;
-#include "../interface/Rect.h"
 #include "../interface/TextEditable.h"
+#include "../interface/Rect.h"
+#include "../support/SupportDefs.h"
 class IMPEXPBHAPI BTextControl : public BTextEditable {
 public:
-	BTextControl(BRect frame,
-		     const char *name,
-		     const char *label,
-		     const char *text,
-		     BMessage *message,
-		     b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-		     b_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS | B_NAVIGABLE);
-	virtual ~BTextControl();
+    BTextControl(BRect frame,
+             const char *name,
+             const char *label,
+             const char *text,
+             BMessage *message,
+             b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+             b_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS | B_NAVIGABLE);
+    virtual ~BTextControl();
 
-	virtual void	SetText(const char *text);
+    virtual void	SetText(const char *text);
 
-	virtual void	SetDivider(float divider);
-	float		Divider() const;
+    virtual void	SetDivider(float divider);
+    float		Divider() const;
 
-	virtual void	SetAlignment(bhapi::alignment forLabel, bhapi::alignment forText);
-	void		GetAlignment(bhapi::alignment *forLabel, bhapi::alignment *forText) const;
+    virtual void	SetAlignment(bhapi::alignment forLabel, bhapi::alignment forText);
+    void		GetAlignment(bhapi::alignment *forLabel, bhapi::alignment *forText) const;
 
-	virtual void	SetModificationMessage(BMessage *msg);
-	BMessage	*ModificationMessage() const;
+    virtual void	SetModificationMessage(BMessage *msg);
+    BMessage	*ModificationMessage() const;
 
-	virtual void	SetLabel(const char *label);
-	virtual void	Draw(BRect updateRect);
-	virtual void	GetPreferredSize(float *width, float *height);
-	virtual void	KeyDown(const char *bytes, b_int32 numBytes);
+    virtual void	SetLabel(const char *label);
+    virtual void	Draw(BRect updateRect);
+    virtual void	GetPreferredSize(float *width, float *height);
+    virtual void	KeyDown(const char *bytes, b_int32 numBytes);
 
 private:
-	bhapi::alignment fLabelAlignment;
-	float fDivider;
-	BMessage *fModificationMessage;
+    bhapi::alignment fLabelAlignment;
+    float fDivider;
+    BMessage *fModificationMessage;
 };
 
 #endif /* __cplusplus */

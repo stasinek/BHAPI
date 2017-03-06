@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -32,11 +32,11 @@
 #define BHAPI_APPLICATION_H
 
 //-----------------------------------------------------------------------------
-#include "../support/SupportDefs.h"
-#include "../app/Looper.h"
 #include "../app/MessageRunner.h"
+#include "../app/Looper.h"
 #include "../app/Cursor.h"
 #include "../add-ons/font/FontEngine.h"
+#include "../support/SupportDefs.h"
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 using namespace bhapi;
@@ -48,41 +48,41 @@ class IMPEXPBHAPI BApplication : public BLooper {
 public:
 //-----------------------------------------------------------------------------
     BApplication(const char *signature, bool tryInterface = true);
-	virtual ~BApplication();
+    virtual ~BApplication();
 
-	// Archiving
-	BApplication(const BMessage *from);
-	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
-	static BArchivable *Instantiate(const BMessage *from);
+    // Archiving
+    BApplication(const BMessage *from);
+    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    static BArchivable *Instantiate(const BMessage *from);
 
-	const char		*Signature() const;
+    const char		*Signature() const;
 
-	virtual void		*Run();
-	virtual void		Quit();
-	virtual bool		QuitRequested();
+    virtual void		*Run();
+    virtual void		Quit();
+    virtual bool		QuitRequested();
 
-	// Empty functions BEGIN --- just for derivative class
-	virtual void		ReadyToRun();
-	virtual void		Pulse();
-	// Empty functions END
+    // Empty functions BEGIN --- just for derivative class
+    virtual void		ReadyToRun();
+    virtual void		Pulse();
+    // Empty functions END
 
     void			SetPulseRate(b_bigtime_t rate);
-	b_bigtime_t		PulseRate() const;
+    b_bigtime_t		PulseRate() const;
 
-	virtual void		MessageReceived(BMessage *msg);
-	virtual void		DispatchMessage(BMessage *msg, BHandler *target);
+    virtual void		MessageReceived(BMessage *msg);
+    virtual void		DispatchMessage(BMessage *msg, BHandler *target);
 
-	void			SetCursor(const void *cursor);
+    void			SetCursor(const void *cursor);
     void			SetCursor(const BCursor *cursor, bool sync = true);
-	void			HideCursor();
-	void			ShowCursor();
-	void			ObscureCursor();
-	bool			IsCursorHidden() const;
+    void			HideCursor();
+    void			ShowCursor();
+    void			ObscureCursor();
+    bool			IsCursorHidden() const;
 //-----------------------------------------------------------------------------
 private:
  //-----------------------------------------------------------------------------
     friend class BLooper;
-	friend class BMessageRunner;
+    friend class BMessageRunner;
     friend class BWindow;
     friend class BView;
     friend class BBitmap;
@@ -90,30 +90,30 @@ private:
 
     friend IMPEXPBHAPI bool bhapi::update_font_families(bool);
 
-	bool fQuit;
-	char *fSignature;
-	b_bigtime_t fPulseRate;
-	BMessageRunner *fPulseRunner;
+    bool fQuit;
+    char *fSignature;
+    b_bigtime_t fPulseRate;
+    BMessageRunner *fPulseRunner;
 
-	static BList sRunnerList;
-	static b_bigtime_t sRunnerMinimumInterval;
-	static void dispatch_message_runners();
+    static BList sRunnerList;
+    static b_bigtime_t sRunnerMinimumInterval;
+    static void dispatch_message_runners();
 
-	bool quit_all_loopers(bool force);
+    bool quit_all_loopers(bool force);
 
     BGraphicsEngine *fGraphicsEngine;
-	void *fGraphicsEngineAddon;
-	void InitGraphicsEngine();
+    void *fGraphicsEngineAddon;
+    void InitGraphicsEngine();
 
-	void Init(const char *signature, bool tryInterface);
+    void Init(const char *signature, bool tryInterface);
 
-	BList fModalWindows;
+    BList fModalWindows;
     bool AddModalWindow(BMessenger &msgr);
     bool RemoveModalWindow(BMessenger &msgr);
 
     BCursor fCursor;
-	bool fCursorHidden;
-	bool fCursorObscure;
+    bool fCursorHidden;
+    bool fCursorObscure;
 //-----------------------------------------------------------------------------
 };
 //-----------------------------------------------------------------------------

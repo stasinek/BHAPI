@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,10 +30,8 @@
 #ifndef BHAPI_POLYGON_H
 #define BHAPI_POLYGON_H
 
-#include "../interface/Rect.h"
-
 #ifdef __cplusplus /* Just for C++ */
-
+#include "../interface/Rect.h"
 class IMPEXPBHAPI BPolygon {
 public:
     BPolygon(const BPoint *pts, b_int32 nPts);
@@ -42,40 +40,40 @@ public:
     virtual ~BPolygon();
 
     BPolygon	&operator=(const BPolygon &poly);
-	BRect		Frame() const;
+    BRect		Frame() const;
 
     bool		AddPoints(const BPoint *pts, b_int32 nPts, bool updateFrame = true);
     void		RemovePoints(b_int32 fromIndex, b_int32 toIndex, bool updateFrame = true);
 
-	bool		AddPoint(const BPoint &aPt, bool updateFrame = true);
+    bool		AddPoint(const BPoint &aPt, bool updateFrame = true);
     void		RemovePoint(b_int32 index, bool updateFrame = true);
-	void		UpdateFrame();
+    void		UpdateFrame();
 
     const BPoint	&operator[](b_int32 index) const; // none checking
     b_int32		CountPoints() const;
 
-	bool		MapTo(BRect srcRect, BRect dstRect);
+    bool		MapTo(BRect srcRect, BRect dstRect);
 
-	const BPoint	*Points() const;
-	void		PrintToStream() const;
+    const BPoint	*Points() const;
+    void		PrintToStream() const;
 
 private:
-	BRect fFrame;
+    BRect fFrame;
     b_int32 fCount;
-	BPoint *fPts;
-	bool fNeededToUpdateFrame;
+    BPoint *fPts;
+    bool fNeededToUpdateFrame;
 };
 
 #ifdef BHAPI_BUILD_LIBRARY
 inline bool BPolygon::AddPoint(const BPoint &aPt, bool updateFrame)
 {
-	return AddPoints(&aPt, 1, updateFrame);
+    return AddPoints(&aPt, 1, updateFrame);
 }
 
 
 inline void BPolygon::RemovePoint(b_int32 index, bool updateFrame)
 {
-	RemovePoints(index, index, updateFrame);
+    RemovePoints(index, index, updateFrame);
 }
 #endif // BHAPI_BUILD_LIBRARY
 

@@ -153,7 +153,7 @@ private:
 
 class LOCALBHAPI BFilePanelListView : public BListView {
 public:
-	BFilePanelListView(BRect frame, const char *name, b_list_view_type type);
+	BFilePanelListView(BRect frame, const char *name, bhapi::list_view_type type);
 
 	void			SortItems(int (*sort_func)(const BFilePanelListItem**, const BFilePanelListItem**),
 					  bool clear_position);
@@ -437,7 +437,7 @@ BFilePanelListItem::PanelView() const
 }
 
 
-BFilePanelListView::BFilePanelListView(BRect frame, const char *name, b_list_view_type type)
+BFilePanelListView::BFilePanelListView(BRect frame, const char *name, bhapi::list_view_type type)
 	: BListView(frame, name, type, B_FOLLOW_ALL)
 {
 }
@@ -992,7 +992,7 @@ BFilePanelTitleView::MouseUp(BPoint where)
 }
 
 
-static b_filter_result filter_key_down_hook(BMessage *message, BHandler **target, BMessageFilter *filter)
+static bhapi::filter_result filter_key_down_hook(BMessage *message, BHandler **target, BMessageFilter *filter)
 {
 	b_int32 modifiers;
 	const char *bytes;

@@ -29,7 +29,7 @@
 #ifdef LINUX
 #ifdef DIRECTFB
 
-#include <string.h>
+
 
 #include "BHAPI_wrapper_dfb.h"
 
@@ -100,7 +100,7 @@ public:
 		fEngine = dfbEngine;
 	}
 
-	virtual b_filter_result Filter(BMessage *message, BHandler **target)
+	virtual bhapi::filter_result Filter(BMessage *message, BHandler **target)
 	{
 		if(fEngine == NULL || message->what != B_CLIPBOARD_CHANGED) return B_DISPATCH_MESSAGE;
 

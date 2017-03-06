@@ -30,7 +30,7 @@
 #include "Entry.h"
 #include "Directory.h"
 
-#include "../support/String.h"
+#include "../support/StringClass.h"
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"
 

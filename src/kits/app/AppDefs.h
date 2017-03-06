@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,6 +30,7 @@
 
 #ifndef BHAPI_APPDEFS_H
 #define BHAPI_APPDEFS_H
+
 #include "../support/SupportDefs.h"
 
 /* System Message Codes */
@@ -68,11 +69,11 @@ enum {
     B_WORKSPACE_ACTIVATED			= '_WAC',
     B_ZOOM					= '_WZM',
 #if !(defined(BHAPI_OS_BEOS) && defined(_APP_DEFS_H))
-	_QUIT_					= '_QIT',
-	_EVENTS_PENDING_			= '_EVP',
-	_UPDATE_				= '_UPD',
-	_UPDATE_IF_NEEDED_			= '_UPN',
-	_MENU_EVENT_				= '_MEV'
+    _QUIT_					= '_QIT',
+    _EVENTS_PENDING_			= '_EVP',
+    _UPDATE_				= '_UPD',
+    _UPDATE_IF_NEEDED_			= '_UPN',
+    _MENU_EVENT_				= '_MEV'
 #endif /* !(BHAPI_OS_BEOS && _APP_DEFS_H) */
 };
 

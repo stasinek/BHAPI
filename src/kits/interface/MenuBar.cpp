@@ -36,7 +36,7 @@
 #include "../app/Message.h"
 
 
-BMenuBar::BMenuBar(BRect frame, const char *title, b_uint32 resizeMode, b_menu_layout layout, bool resizeToFit)
+BMenuBar::BMenuBar(BRect frame, const char *title, b_uint32 resizeMode, bhapi::menu_layout layout, bool resizeToFit)
 	: BMenu(frame, title, resizeMode, B_WILL_DRAW, layout, resizeToFit), fBorder(B_BORDER_FRAME)
 {
 	SetEventMask(B_POINTER_EVENTS);
@@ -265,7 +265,7 @@ BMenuBar::Draw(BRect updateRect)
 
 
 void
-BMenuBar::SetBorder(b_menu_bar_border border)
+BMenuBar::SetBorder(bhapi::menu_bar_border border)
 {
 	if(fBorder != border)
 	{
@@ -275,7 +275,7 @@ BMenuBar::SetBorder(b_menu_bar_border border)
 }
 
 
-b_menu_bar_border
+bhapi::menu_bar_border
 BMenuBar::Border() const
 {
 	return fBorder;

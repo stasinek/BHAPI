@@ -30,11 +30,11 @@
  * Copyright 2001-2003 Dr. Zoidberg Enterprises. All rights reserved.
  */
 
-#include "mail_encoding.h"
+#include "../mail/mail_encoding.h"
 #include "../support/SupportDefs.h"
-#include <ctype.h>
-#include <string.h>
 
+
+#include <ctype.h>
 
 static const char kBase64Alphabet[64] = {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
@@ -46,9 +46,7 @@ static const char kBase64Alphabet[64] = {
     '/'
 };
 
-
-ssize_t
-encode_base64(char *out, const char *in, off_t length, int headerMode)
+ssize_t encode_base64(char *out, const char *in, off_t length, int headerMode)
 {
     uint32 concat;
     int i = 0;
@@ -93,9 +91,7 @@ encode_base64(char *out, const char *in, off_t length, int headerMode)
     return k;
 }
 
-
-ssize_t
-decode_base64(char *out, const char *in, off_t length)
+ssize_t decode_base64(char *out, const char *in, off_t length)
 {
     uint32 concat, value;
     int lastOutLine = 0;
@@ -152,7 +148,6 @@ decode_base64(char *out, const char *in, off_t length)
 
     return outIndex;
 }
-
 
 #if __GNUC__ <= 2
     // BeOS-ABI compatible wrappers.

@@ -50764,15 +50764,6 @@ typedef unsigned int b_uint32;
 typedef long long b_int64;
 typedef unsigned long long b_uint64;
 
-typedef char __haiku_int8;
-typedef unsigned char __haiku_uint8;
-typedef short __haiku_int16;
-typedef unsigned short __haiku_uint16;
-typedef int __haiku_int32;
-typedef unsigned int __haiku_uint32;
-typedef long long __haiku_int64;
-typedef unsigned long long __haiku_uint64;
-
 typedef volatile char vint8;
 typedef volatile unsigned char vuint8;
 typedef volatile short vint16;
@@ -50813,11 +50804,11 @@ typedef unsigned int type_code;
 typedef unsigned int __haiku_perform_code;
 typedef unsigned int b_perform_code;
 typedef unsigned int perform_code;
-# 356 "../src/kits/app/../support/SupportDefs.h"
+# 347 "../src/kits/app/../support/SupportDefs.h"
 extern "C" {
-# 366 "../src/kits/app/../support/SupportDefs.h"
+# 357 "../src/kits/app/../support/SupportDefs.h"
 }
-# 386 "../src/kits/app/../support/SupportDefs.h"
+# 377 "../src/kits/app/../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 1 3
 # 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_unicode.h" 1 3
@@ -93833,14 +93824,14 @@ typedef unsigned int GROUP;
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAProviderConfigChange(LPHANDLE lpNotificationHandle,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 # 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
-# 387 "../src/kits/app/../support/SupportDefs.h" 2
-# 399 "../src/kits/app/../support/SupportDefs.h"
+# 378 "../src/kits/app/../support/SupportDefs.h" 2
+# 390 "../src/kits/app/../support/SupportDefs.h"
 enum {
     B_SEEK_SET = 0,
     B_SEEK_CUR,
     B_SEEK_END,
 };
-# 474 "../src/kits/app/../support/SupportDefs.h"
+# 465 "../src/kits/app/../support/SupportDefs.h"
 namespace bhapi {
 
 __attribute__((dllexport)) int32 atomic_add (int32 *value, int32 addValue);
@@ -93876,71 +93867,124 @@ __attribute__((dllexport)) void * get_stack_frame (void);
 
 }
 
-
 extern "C" const char* B_EMPTY_STRING;
+
+
+
+
+
+
+typedef signed char __haiku_std_int8;
+typedef unsigned char __haiku_std_uint8;
+typedef signed short __haiku_std_int16;
+typedef unsigned short __haiku_std_uint16;
+typedef signed int __haiku_std_int32;
+typedef unsigned int __haiku_std_uint32;
+
+
+
+
+typedef signed long long __haiku_std_int64;
+typedef unsigned long long __haiku_std_uint64;
+
+
+typedef __haiku_std_int8 __haiku_int8;
+typedef __haiku_std_uint8 __haiku_uint8;
+typedef __haiku_std_int16 __haiku_int16;
+typedef __haiku_std_uint16 __haiku_uint16;
+
+
+
+
+typedef __haiku_std_int32 __haiku_int32;
+typedef __haiku_std_uint32 __haiku_uint32;
+
+typedef __haiku_std_int64 __haiku_int64;
+typedef __haiku_std_uint64 __haiku_uint64;
+
+
+typedef signed long int __haiku_saddr_t;
+typedef unsigned long int __haiku_addr_t;
+
+
+
+
+
+    typedef __haiku_int32 __haiku_phys_saddr_t;
+    typedef __haiku_uint32 __haiku_phys_addr_t;
+# 592 "../src/kits/app/../support/SupportDefs.h"
+    typedef __haiku_addr_t __haiku_generic_addr_t;
 # 36 "../src/kits/app/MessageFilter.h" 2
 
-typedef enum b_filter_result {
+
+namespace bhapi {
+
+typedef enum filter_result {
     B_SKIP_MESSAGE,
     B_DISPATCH_MESSAGE
-} b_filter_result;
+} filter_result;
 
-typedef enum b_message_delivery {
+typedef enum message_delivery {
     B_DROPPED_DELIVERY = 0x1,
     B_PROGRAMMED_DELIVERY = 0x2,
     B_ANY_DELIVERY = 0xff
-} b_message_delivery;
+} message_delivery;
 
-typedef enum b_message_source {
+typedef enum message_source {
     BLOCALBHAPI_SOURCE = 0x1,
     B_REMOTE_SOURCE = 0x2,
     B_ANY_SOURCE = 0xff
-} b_message_source;
+} message_source;
+
+}
+
 
 
 class BLooper;
 class BMessage;
 class BMessageFilter;
 class BHandler;
-typedef b_filter_result (*b_filter_hook)(BMessage *message, BHandler **target, BMessageFilter *filter);
+namespace bhapi {
+typedef filter_result (*filter_hook)(BMessage *message, BHandler **target, BMessageFilter *filter);
+}
 class __attribute__((dllexport)) BMessageFilter {
 public:
-    BMessageFilter(b_message_delivery delivery, b_message_source source,
-               b_uint32 command, b_filter_hook filter = __null);
-    BMessageFilter(b_message_delivery delivery, b_message_source source,
-         b_filter_hook filter = __null);
-    BMessageFilter(b_uint32 command, b_filter_hook filter = __null);
- BMessageFilter(const BMessageFilter &filter);
- BMessageFilter(const BMessageFilter *filter);
- virtual ~BMessageFilter();
+    BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,
+               b_uint32 command, bhapi::filter_hook filter = __null);
+    BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,
+               bhapi::filter_hook filter = __null);
+    BMessageFilter(b_uint32 command, bhapi::filter_hook filter = __null);
+    BMessageFilter(const BMessageFilter &filter);
+    BMessageFilter(const BMessageFilter *filter);
+    virtual ~BMessageFilter();
 
- BMessageFilter &operator=(const BMessageFilter &from);
+    BMessageFilter &operator=(const BMessageFilter &from);
 
- virtual b_filter_result Filter(BMessage *message, BHandler **target);
+    virtual bhapi::filter_result Filter(BMessage *message, BHandler **target);
 
- b_message_delivery MessageDelivery() const;
- b_message_source MessageSource() const;
+    bhapi::message_delivery MessageDelivery() const;
+    bhapi::message_source MessageSource() const;
     b_uint32 Command() const;
- bool FiltersAnyCommand() const;
- BLooper *Looper() const;
+    bool FiltersAnyCommand() const;
+    BLooper *Looper() const;
 
 private:
- friend class BLooper;
- friend class BHandler;
+    friend class BLooper;
+    friend class BHandler;
 
     b_uint32 fCommand;
- bool fFiltersAny;
- b_message_delivery fDelivery;
- b_message_source fSource;
- b_filter_hook fFilterHook;
+    bool fFiltersAny;
+    bhapi::message_delivery fDelivery;
+    bhapi::message_source fSource;
+    bhapi::filter_hook fFilterHook;
 
- BHandler *fHandler;
+    BHandler *fHandler;
 
- b_filter_result doFilter(BMessage *message, BHandler **target);
+    bhapi::filter_result doFilter(BMessage *message, BHandler **target);
 };
 # 32 "../src/kits/app/MessageFilter.cpp" 2
 # 1 "../src/kits/app/Message.h" 1
-# 37 "../src/kits/app/Message.h"
+# 35 "../src/kits/app/Message.h"
 class BMessenger;
 class BHandler;
 class BStreamIO;
@@ -94158,7 +94202,7 @@ __attribute__((dllexport)) b_status_t get_image_symbol(void *image, const char *
 
 }
 # 65 "../src/kits/app/../kernel/OS.h" 2
-# 44 "../src/kits/app/Message.h" 2
+# 42 "../src/kits/app/Message.h" 2
 # 1 "../src/kits/app/../support/List.h" 1
 # 34 "../src/kits/app/../support/List.h"
 # 1 "../src/kits/app/../support/../support/SupportDefs.h" 1
@@ -94226,7 +94270,7 @@ private:
 
     bool _Resize(b_int32 count);
 };
-# 45 "../src/kits/app/Message.h" 2
+# 43 "../src/kits/app/Message.h" 2
 
 class __attribute__((dllexport)) BMessage {
 public:
@@ -94249,15 +94293,15 @@ public:
 
     b_int32 CountItems(const char *name, b_type_code type) const;
     b_int32 CountItems(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type = __null) const;
-# 89 "../src/kits/app/Message.h"
+# 87 "../src/kits/app/Message.h"
     b_int32 CountNames(b_type_code type, bool count_all_names_when_any_type = true) const;
     b_int32 FindName(const char *name) const;
     const char *NameAt(b_int32 nameIndex) const;
 
- void MakeEmpty();
- bool IsEmpty() const;
+    void MakeEmpty();
+    bool IsEmpty() const;
 
- bool Rename(const char *old_entry, const char *new_entry);
+    bool Rename(const char *old_entry, const char *new_entry);
 
     bool AddString(const char *name, const char *aString);
     bool AddString(const char *name, const BString &aString);
@@ -94265,12 +94309,12 @@ public:
     bool AddInt16(const char *name, b_int16 val);
     bool AddInt32(const char *name, b_int32 val);
     bool AddInt64(const char *name, b_int64 val);
- bool AddBool(const char *name, bool aBoolean);
- bool AddFloat(const char *name, float aFloat);
- bool AddDouble(const char *name, double aDouble);
+    bool AddBool(const char *name, bool aBoolean);
+    bool AddFloat(const char *name, float aFloat);
+    bool AddDouble(const char *name, double aDouble);
     bool AddPoint(const char *name, BPoint pt);
     bool AddRect(const char *name, BRect r);
- bool AddPointer(const char *name, const void *ptr);
+    bool AddPointer(const char *name, const void *ptr);
     bool AddMessage(const char *name, const BMessage *msg);
     bool AddMessenger(const char *name, const BMessenger *msgr);
     bool AddMessenger(const char *name, const BMessenger &msgr);
@@ -94288,17 +94332,17 @@ public:
     bool FindInt32(const char *name, b_int32 index, b_int32 *val) const;
     bool FindInt64(const char *name, b_int64 *val) const;
     bool FindInt64(const char *name, b_int32 index, b_int64 *val) const;
- bool FindBool(const char *name, bool *aBoolean) const;
+    bool FindBool(const char *name, bool *aBoolean) const;
     bool FindBool(const char *name, b_int32 index, bool *aBoolean) const;
- bool FindFloat(const char *name, float *f) const;
+    bool FindFloat(const char *name, float *f) const;
     bool FindFloat(const char *name, b_int32 index, float *f) const;
- bool FindDouble(const char *name, double *d) const;
+    bool FindDouble(const char *name, double *d) const;
     bool FindDouble(const char *name, b_int32 index, double *d) const;
     bool FindPoint(const char *name, BPoint *pt) const;
     bool FindPoint(const char *name, b_int32 index, BPoint *pt) const;
     bool FindRect(const char *name, BRect *r) const;
     bool FindRect(const char *name, b_int32 index, BRect *r) const;
- bool FindPointer(const char *name, void **ptr) const;
+    bool FindPointer(const char *name, void **ptr) const;
     bool FindPointer(const char *name, b_int32 index, void **ptr) const;
     bool FindMessage(const char *name, BMessage *msg) const;
     bool FindMessage(const char *name, b_int32 index, BMessage *msg) const;
@@ -94338,7 +94382,7 @@ public:
     bool RemoveMessenger(const char *name, b_int32 index = 0);
     bool RemoveData(const char *name, b_type_code type, b_int32 index = 0);
     bool RemoveData(const char *name, b_type_code type);
- bool RemoveData(const char *name);
+    bool RemoveData(const char *name);
 
     bool ReplacString(const char *name, b_int32 index, const char *aString);
     bool ReplacString(const char *name, const char *aString);
@@ -94352,17 +94396,17 @@ public:
     bool ReplaceInt32(const char *name, b_int32 index, b_int32 val);
     bool ReplaceInt64(const char *name, b_int64 val);
     bool ReplaceInt64(const char *name, b_int32 index, b_int64 val);
- bool ReplaceBool(const char *name, bool aBoolean);
+    bool ReplaceBool(const char *name, bool aBoolean);
     bool ReplaceBool(const char *name, b_int32 index, bool aBoolean);
- bool ReplaceFloat(const char *name, float f);
+    bool ReplaceFloat(const char *name, float f);
     bool ReplaceFloat(const char *name, b_int32 index, float f);
- bool ReplaceDouble(const char *name, double d);
+    bool ReplaceDouble(const char *name, double d);
     bool ReplaceDouble(const char *name, b_int32 index, double d);
     bool ReplacePoint(const char *name, BPoint pt);
     bool ReplacePoint(const char *name, b_int32 index, BPoint pt);
     bool ReplaceRect(const char *name, BRect r);
     bool ReplaceRect(const char *name, b_int32 index, BRect r);
- bool ReplacePointer(const char *name, const void *ptr);
+    bool ReplacePointer(const char *name, const void *ptr);
     bool ReplacePointer(const char *name, b_int32 index, const void *ptr);
     bool ReplaceMessage(const char *name, const BMessage *msg);
     bool ReplaceMessage(const char *name, b_int32 index, const BMessage *msg);
@@ -94373,17 +94417,17 @@ public:
     bool ReplaceData(const char *name, b_type_code type, const void *data, size_t numBytes, bool is_fixed_size);
     bool ReplaceData(const char *name, b_type_code type, b_int32 index, const void *data, size_t numBytes, bool is_fixed_size);
 
- bool IsSystem() const;
+    bool IsSystem() const;
     void PrintToStream(BStreamIO &stream) const;
- void PrintToStream() const;
+    void PrintToStream() const;
 
- size_t FlattenedSize() const;
- bool Flatten(char *buffer, size_t bufferSize) const;
- bool Unflatten(const char *buffer, size_t bufferSize);
+    size_t FlattenedSize() const;
+    bool Flatten(char *buffer, size_t bufferSize) const;
+    bool Unflatten(const char *buffer, size_t bufferSize);
 
- bool WasDelivered() const;
- bool IsReply() const;
- bool IsSourceWaiting() const;
+    bool WasDelivered() const;
+    bool IsReply() const;
+    bool IsSourceWaiting() const;
 
     b_status_t SendReply(b_uint32 command, BHandler *replyHandler = __null) const;
     b_status_t SendReply(const BMessage *message,
@@ -94394,29 +94438,29 @@ public:
     b_status_t BGetInfo(b_type_code type, b_int32 index,
                  char **nameFound, b_type_code *typeFound, b_int32 *countFound = __null) const;
     b_status_t BFindData(const char *name, b_type_code type, b_int32 index,
-      const void **data, b_size_t *numBytes) const;
+                  const void **data, b_size_t *numBytes) const;
     b_status_t BFindData(const char *name, b_type_code type,
-      const void **data, b_size_t *numBytes) const;
+                  const void **data, b_size_t *numBytes) const;
 
 private:
     friend class BLooper;
     friend class BMessenger;
 
     typedef struct list_data {
-  char *name;
+        char *name;
         BList list;
- } list_data;
+    } list_data;
 
- typedef struct type_list_data {
+    typedef struct type_list_data {
         b_type_code type;
         BList list;
- } type_list_data;
+    } type_list_data;
 
- typedef struct _object_t {
-  size_t bytes;
-  bool fixed_size;
-  void *data;
- } _object_t;
+    typedef struct _object_t {
+        size_t bytes;
+        bool fixed_size;
+        void *data;
+    } _object_t;
 
     BList fObjectsList;
 
@@ -94430,23 +94474,21 @@ private:
     b_uint64 fReplyToken;
     b_bigtime_t fReplyTokenTimestamp;
 
- bool fNoticeSource;
- void *fSource;
+    bool fNoticeSource;
+    void *fSource;
 
- bool fIsReply;
+    bool fIsReply;
 };
 # 33 "../src/kits/app/MessageFilter.cpp" 2
 # 1 "../src/kits/app/Handler.h" 1
 # 34 "../src/kits/app/Handler.h"
-# 1 "../src/kits/app/../private/PrivateHandler.h" 1
-# 32 "../src/kits/app/../private/PrivateHandler.h"
-# 1 "../src/kits/app/../private/../support/SupportDefs.h" 1
-# 33 "../src/kits/app/../private/PrivateHandler.h" 2
-
-
+# 1 "../src/kits/app/../../private/app/PrivateHandler.h" 1
+# 34 "../src/kits/app/../../private/app/PrivateHandler.h"
 class BHandler;
 class BLocker;
 class BLooper;
+# 1 "../src/kits/app/../../private/app/../../kits/support/SupportDefs.h" 1
+# 38 "../src/kits/app/../../private/app/PrivateHandler.h" 2
 namespace bhapi {
  BLocker* get_handler_operator_locker();
  b_uint64 get_handler_token(const BHandler *handler);
@@ -94499,20 +94541,20 @@ class __attribute__((dllexport)) BHandler : public BArchivable {
 public:
     BHandler(const char *name = __null);
 
- BHandler(const BMessage *from);
+    BHandler(const BMessage *from);
     virtual ~BHandler();
 
     virtual b_status_t Archive(BMessage *into, bool deep = true) const;
- static BArchivable *Instantiate(const BMessage *from);
+    static BArchivable *Instantiate(const BMessage *from);
 
     void SetName(const char *name);
     const char *Name() const;
 
- virtual void MessageReceived(BMessage *message);
+    virtual void MessageReceived(BMessage *message);
 
     BLooper *Looper() const;
 
- virtual void SetNextHandler(BHandler *handler);
+    virtual void SetNextHandler(BHandler *handler);
     BHandler *NextHandler() const;
 
     bool LockLooper();
@@ -94535,31 +94577,31 @@ public:
     bool IsWatched(b_uint32 what = (2147483647 * 2U + 1U)) const;
 
 
- virtual bool AddFilter(BMessageFilter *filter);
- virtual bool RemoveFilter(BMessageFilter *filter);
- virtual bool SetFilterList(const BList *filterList);
+    virtual bool AddFilter(BMessageFilter *filter);
+    virtual bool RemoveFilter(BMessageFilter *filter);
+    virtual bool SetFilterList(const BList *filterList);
     const BList *FilterList() const;
 
 
     virtual BHandler *ResolveSpecifier(BMessage *msg, b_int32 index, BMessage *specifier, b_int32 what, const char *property);
- virtual b_status_t GetSupportedSuites(BMessage *data);
+    virtual b_status_t GetSupportedSuites(BMessage *data);
 
 private:
- friend class BLooper;
- friend class BMessage;
+    friend class BLooper;
+    friend class BMessage;
     friend b_uint64 bhapi::get_handler_token(const BHandler *handler);
 
     BToken *fToken;
- char *fName;
- BLooper *fLooper;
- BHandler *fPrevHandler;
- BHandler *fNextHandler;
- void *fObserverList;
- BList *fFilters;
+    char *fName;
+    BLooper *fLooper;
+    BHandler *fPrevHandler;
+    BHandler *fNextHandler;
+    void *fObserverList;
+    BList *fFilters;
 };
 # 34 "../src/kits/app/MessageFilter.cpp" 2
 # 1 "../src/kits/app/Looper.h" 1
-# 37 "../src/kits/app/Looper.h"
+# 35 "../src/kits/app/Looper.h"
 class BApplication;
 class BMessenger;
 class BMessage;
@@ -94568,11 +94610,12 @@ class BMessageQueue;
 class BLoooper;
 
 
+
 class __attribute__((dllexport)) BLooper : public BHandler {
 public:
 
 
- void Init(const char *name, b_int32 priority);
+    void Init(const char *name, b_int32 priority);
     BLooper(const char *name);
     BLooper(b_int32 priority);
     BLooper(const char *name,
@@ -94580,113 +94623,113 @@ public:
     virtual ~BLooper();
 
 
- BLooper(const BMessage *from);
- virtual b_status_t Archive(BMessage *into, bool deep = true) const;
- static BArchivable *Instantiate(const BMessage *from);
+    BLooper(const BMessage *from);
+    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    static BArchivable *Instantiate(const BMessage *from);
 
- void AddHandler(BHandler *handler);
- bool RemoveHandler(BHandler *handler);
- b_int32 CountHandlers() const;
- BHandler *HandlerAt(b_int32 index) const;
- b_int32 IndexOf(BHandler *handler) const;
+    void AddHandler(BHandler *handler);
+    bool RemoveHandler(BHandler *handler);
+    b_int32 CountHandlers() const;
+    BHandler *HandlerAt(b_int32 index) const;
+    b_int32 IndexOf(BHandler *handler) const;
 
- BHandler *PreferredHandler() const;
- void SetPreferredHandler(BHandler *handler);
+    BHandler *PreferredHandler() const;
+    void SetPreferredHandler(BHandler *handler);
 
- bool IsRunning() const;
- virtual void *Run();
- virtual void Quit();
- virtual bool QuitRequested();
- BLooper* Proxy() const;
- bool ProxyBy(BLooper *proxy);
+    bool IsRunning() const;
+    virtual void *Run();
+    virtual void Quit();
+    virtual bool QuitRequested();
+    BLooper* Proxy() const;
+    bool ProxyBy(BLooper *proxy);
 
- b_thread_id Thread() const;
+    b_thread_id Thread() const;
 
- bool Lock();
- void Unlock();
- b_status_t LockWithTimeout(b_bigtime_t microseconds_timeout);
+    bool Lock();
+    void Unlock();
+    b_status_t LockWithTimeout(b_bigtime_t microseconds_timeout);
 
- b_int64 CountLocks() const;
- bool IsLockedByCurrentThread() const;
+    b_int64 CountLocks() const;
+    bool IsLockedByCurrentThread() const;
 
- virtual void DispatchMessageW(BMessage *msg, BHandler *target);
-
-
- virtual void MessageReceived(BMessage *msg);
+    virtual void DispatchMessageW(BMessage *msg, BHandler *target);
 
 
- BMessage *CurrentMessage() const;
- BMessage *DetachCurrentMessage();
- BMessageQueue *MessageQueue() const;
+    virtual void MessageReceived(BMessage *msg);
 
- b_status_t PostMessageW(b_uint32 command);
- b_status_t PostMessageW(const BMessage *message);
- b_status_t PostMessageW(b_uint32 command,
-        BHandler *handler,
-        BHandler *reply_to = __null);
- b_status_t PostMessageW(const BMessage *message,
-        BHandler *handler,
-        BHandler *reply_to = __null);
 
- virtual bool AddCommonFilter(BMessageFilter *filter);
- virtual bool RemoveCommonFilter(BMessageFilter *filter);
- virtual bool SetCommonFilterList(const BList *filterList);
- const BList *CommonFilterList() const;
+    BMessage *CurrentMessage() const;
+    BMessage *DetachCurrentMessage();
+    BMessageQueue *MessageQueue() const;
 
- static BLooper *LooperForThread(b_thread_id tid);
+    b_status_t PostMessageW(b_uint32 command);
+    b_status_t PostMessageW(const BMessage *message);
+    b_status_t PostMessageW(b_uint32 command,
+                    BHandler *handler,
+                    BHandler *reply_to = __null);
+    b_status_t PostMessageW(const BMessage *message,
+                    BHandler *handler,
+                    BHandler *reply_to = __null);
+
+    virtual bool AddCommonFilter(BMessageFilter *filter);
+    virtual bool RemoveCommonFilter(BMessageFilter *filter);
+    virtual bool SetCommonFilterList(const BList *filterList);
+    const BList *CommonFilterList() const;
+
+    static BLooper *LooperForThread(b_thread_id tid);
 
 protected:
-# 132 "../src/kits/app/Looper.h"
+# 131 "../src/kits/app/Looper.h"
     BMessage *NextLooperMessage(b_bigtime_t timeout);
     void DispatchLooperMessage(BMessage *msg);
 
 private:
- friend class BHandler;
- friend class BApplication;
- friend class BMessenger;
- friend b_status_t bhapi::lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
+    friend class BHandler;
+    friend class BApplication;
+    friend class BMessenger;
+    friend b_status_t bhapi::lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
 
- bool fDeconstructing;
- BLooper *fProxy;
- BList fClients;
+    bool fDeconstructing;
+    BLooper *fProxy;
+    BList fClients;
 
- b_int32 fThreadPriority;
+    b_int32 fThreadPriority;
 
- b_int32 fHandlersCount;
- BHandler *fPreferredHandler;
+    b_int32 fHandlersCount;
+    BHandler *fPreferredHandler;
 
- void *fLocker;
- b_int64 fLocksCount;
+    void *fLocker;
+    b_int64 fLocksCount;
 
- void *fThread;
- void *fSem;
+    void *fThread;
+    void *fSem;
 
- BMessageQueue *fMessageQueue;
- BMessage *fCurrentMessage;
+    BMessageQueue *fMessageQueue;
+    BMessage *fCurrentMessage;
 
- static b_status_t _task(void*);
- static b_status_t _taskLooper(BLooper*, void*);
- static void _taskError(void*);
+    static b_status_t _task(void*);
+    static b_status_t _taskLooper(BLooper*, void*);
+    static void _taskError(void*);
 
- static BList sLooperList;
+    static BList sLooperList;
 
- BHandler *_MessageTarget(const BMessage *msg, bool *preferred);
- b_status_t _PostMessage(const BMessage *msg, b_uint64 handlerToken, b_uint64 replyToken, b_bigtime_t timeout);
+    BHandler *_MessageTarget(const BMessage *msg, bool *preferred);
+    b_status_t _PostMessage(const BMessage *msg, b_uint64 handlerToken, b_uint64 replyToken, b_bigtime_t timeout);
 
- BLooper *_Proxy() const;
- bool _ProxyBy(BLooper *proxy);
- BLooper *_GetNextClient(BLooper *client) const;
+    BLooper *_Proxy() const;
+    bool _ProxyBy(BLooper *proxy);
+    BLooper *_GetNextClient(BLooper *client) const;
 
- bool *fThreadExited;
+    bool *fThreadExited;
 
- BList fCommonFilters;
- void _FilterAndDispatchMessage(BMessage *msg, BHandler *target);
+    BList fCommonFilters;
+    void _FilterAndDispatchMessage(BMessage *msg, BHandler *target);
 
- virtual bool IsDependsOnOthersWhenQuitRequested() const;
+    virtual bool IsDependsOnOthersWhenQuitRequested() const;
 };
 # 35 "../src/kits/app/MessageFilter.cpp" 2
 
-BMessageFilter::BMessageFilter(b_message_delivery delivery, b_message_source source, b_uint32 command, b_filter_hook filter)
+BMessageFilter::BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source, b_uint32 command, bhapi::filter_hook filter)
  : fFiltersAny(false), fHandler(__null)
 {
  fDelivery = delivery;
@@ -94696,7 +94739,7 @@ BMessageFilter::BMessageFilter(b_message_delivery delivery, b_message_source sou
 }
 
 
-BMessageFilter::BMessageFilter(b_message_delivery delivery, b_message_source source, b_filter_hook filter)
+BMessageFilter::BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source, bhapi::filter_hook filter)
  : fCommand(0), fFiltersAny(true), fHandler(__null)
 {
  fDelivery = delivery;
@@ -94705,7 +94748,7 @@ BMessageFilter::BMessageFilter(b_message_delivery delivery, b_message_source sou
 }
 
 
-BMessageFilter::BMessageFilter(b_uint32 command, b_filter_hook filter)
+BMessageFilter::BMessageFilter(b_uint32 command, bhapi::filter_hook filter)
  : fFiltersAny(false), fDelivery(B_ANY_DELIVERY), fSource(B_ANY_SOURCE), fHandler(__null)
 {
  fCommand = command;
@@ -94762,19 +94805,19 @@ BMessageFilter::operator=(const BMessageFilter &filter)
 }
 
 
-b_filter_result
+bhapi::filter_result
 BMessageFilter::Filter(BMessage *message, BHandler **target)
 {
  return B_DISPATCH_MESSAGE;
 }
 
 
-b_filter_result
+bhapi::filter_result
 BMessageFilter::doFilter(BMessage *message, BHandler **target)
 {
  if(message == __null || target == __null || fHandler == __null) return B_SKIP_MESSAGE;
 
- b_filter_result retVal = B_DISPATCH_MESSAGE;
+ bhapi::filter_result retVal = B_DISPATCH_MESSAGE;
 
 
  if(fFiltersAny || message->what == fCommand)
@@ -94787,14 +94830,14 @@ BMessageFilter::doFilter(BMessage *message, BHandler **target)
 }
 
 
-b_message_delivery
+bhapi::message_delivery
 BMessageFilter::MessageDelivery() const
 {
  return fDelivery;
 }
 
 
-b_message_source
+bhapi::message_source
 BMessageFilter::MessageSource() const
 {
  return fSource;

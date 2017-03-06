@@ -30,7 +30,7 @@
  * Distributed under the terms of the MIT License.
  */
 #include "StringList.h"
-#include "String.h"
+#include "StringClass.h"
 #include "Errors.h"
 
 #include "Architecture.h"

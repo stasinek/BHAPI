@@ -5,11 +5,19 @@
 # 1 "../src/kits/app/Looper.cpp"
 # 30 "../src/kits/app/Looper.cpp"
 # 1 "../src/kits/app/Looper.h" 1
-# 33 "../src/kits/app/Looper.h"
-# 1 "../src/kits/app/../support/SupportDefs.h" 1
-# 51 "../src/kits/app/../support/SupportDefs.h"
-# 1 "../src/kits/app/../support/TypeConstants.h" 1
-# 38 "../src/kits/app/../support/TypeConstants.h"
+# 35 "../src/kits/app/Looper.h"
+class BApplication;
+class BMessenger;
+class BMessage;
+class BMessageFilter;
+class BMessageQueue;
+class BLoooper;
+# 1 "../src/kits/app/../support/List.h" 1
+# 34 "../src/kits/app/../support/List.h"
+# 1 "../src/kits/app/../support/../support/SupportDefs.h" 1
+# 51 "../src/kits/app/../support/../support/SupportDefs.h"
+# 1 "../src/kits/app/../support/../support/TypeConstants.h" 1
+# 38 "../src/kits/app/../support/../support/TypeConstants.h"
 enum {
  B_AFFINE_TRANSFORM_TYPE = 'AMTX',
  B_ALIGNMENT_TYPE = 'ALGN',
@@ -91,7 +99,7 @@ extern const char* B_URL_TN3270;
 extern const char* B_URL_WAIS;
 
 extern const char* B_URL_FILE;
-# 52 "../src/kits/app/../support/SupportDefs.h" 2
+# 52 "../src/kits/app/../support/../support/SupportDefs.h" 2
 
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
@@ -201,7 +209,7 @@ extern "C" {
 # 15 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_stdarg.h" 2 3 4
 # 141 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 2 3 4
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
-# 54 "../src/kits/app/../support/SupportDefs.h" 2
+# 54 "../src/kits/app/../support/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
 
@@ -293,7 +301,7 @@ typedef struct {
   long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
 } max_align_t;
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
-# 55 "../src/kits/app/../support/SupportDefs.h" 2
+# 55 "../src/kits/app/../support/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 1 3
 # 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
@@ -922,7 +930,7 @@ void * __mingw_aligned_realloc (void *_Memory, size_t _Size, size_t _Offset);
 
 #pragma pack(pop)
 # 669 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 2 3
-# 56 "../src/kits/app/../support/SupportDefs.h" 2
+# 56 "../src/kits/app/../support/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
 # 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
 extern "C" {
@@ -1134,7 +1142,7 @@ extern "C" {
 
 }
 # 181 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 2 3
-# 57 "../src/kits/app/../support/SupportDefs.h" 2
+# 57 "../src/kits/app/../support/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 1 3
 # 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_print_push.h" 1 3
@@ -1830,7 +1838,7 @@ extern "C" {
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_print_pop.h" 1 3
 # 962 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 2 3
-# 58 "../src/kits/app/../support/SupportDefs.h" 2
+# 58 "../src/kits/app/../support/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 1 3
 # 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
 extern "C" {
@@ -1936,7 +1944,7 @@ int __attribute__((__cdecl__)) isblank(int _C);
 int __attribute__((__cdecl__)) iswblank(wint_t _C);
 # 276 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
 }
-# 59 "../src/kits/app/../support/SupportDefs.h" 2
+# 59 "../src/kits/app/../support/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 1 3
 # 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
        
@@ -2398,7 +2406,7 @@ __extension__ long long __attribute__((__cdecl__)) llrintl (long double);
 
 
 #pragma pack(pop)
-# 60 "../src/kits/app/../support/SupportDefs.h" 2
+# 60 "../src/kits/app/../support/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/algorithm" 1 3
 # 58 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/algorithm" 3
        
@@ -50703,14 +50711,14 @@ namespace std
 
 }
 # 63 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/algorithm" 2 3
-# 61 "../src/kits/app/../support/SupportDefs.h" 2
+# 61 "../src/kits/app/../support/../support/SupportDefs.h" 2
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sys/cdefs.h" 1 3
-# 63 "../src/kits/app/../support/SupportDefs.h" 2
-# 108 "../src/kits/app/../support/SupportDefs.h"
+# 63 "../src/kits/app/../support/../support/SupportDefs.h" 2
+# 108 "../src/kits/app/../support/../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 109 "../src/kits/app/../support/SupportDefs.h" 2
-# 142 "../src/kits/app/../support/SupportDefs.h"
+# 109 "../src/kits/app/../support/../support/SupportDefs.h" 2
+# 142 "../src/kits/app/../support/../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 1 3 4
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/float.h" 1 3 4
@@ -50737,15 +50745,15 @@ __attribute__ ((__dllimport__)) int * __attribute__((__cdecl__)) __attribute__ (
 # 293 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/float.h" 3 4
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 143 "../src/kits/app/../support/SupportDefs.h" 2
-# 152 "../src/kits/app/../support/SupportDefs.h"
+# 143 "../src/kits/app/../support/../support/SupportDefs.h" 2
+# 152 "../src/kits/app/../support/../support/SupportDefs.h"
 typedef unsigned int b_unichar32;
 typedef unsigned short b_unichar16;
 
 typedef long long b_thread_id;
 typedef size_t b_address_t;
 typedef size_t b_size_t;
-# 170 "../src/kits/app/../support/SupportDefs.h"
+# 170 "../src/kits/app/../support/../support/SupportDefs.h"
 typedef char int8;
 typedef unsigned char uint8;
 typedef short int16;
@@ -50763,15 +50771,6 @@ typedef int b_int32;
 typedef unsigned int b_uint32;
 typedef long long b_int64;
 typedef unsigned long long b_uint64;
-
-typedef char __haiku_int8;
-typedef unsigned char __haiku_uint8;
-typedef short __haiku_int16;
-typedef unsigned short __haiku_uint16;
-typedef int __haiku_int32;
-typedef unsigned int __haiku_uint32;
-typedef long long __haiku_int64;
-typedef unsigned long long __haiku_uint64;
 
 typedef volatile char vint8;
 typedef volatile unsigned char vuint8;
@@ -50813,11 +50812,11 @@ typedef unsigned int type_code;
 typedef unsigned int __haiku_perform_code;
 typedef unsigned int b_perform_code;
 typedef unsigned int perform_code;
-# 356 "../src/kits/app/../support/SupportDefs.h"
+# 347 "../src/kits/app/../support/../support/SupportDefs.h"
 extern "C" {
-# 366 "../src/kits/app/../support/SupportDefs.h"
+# 357 "../src/kits/app/../support/../support/SupportDefs.h"
 }
-# 386 "../src/kits/app/../support/SupportDefs.h"
+# 377 "../src/kits/app/../support/../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 1 3
 # 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_unicode.h" 1 3
@@ -93833,14 +93832,14 @@ typedef unsigned int GROUP;
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAProviderConfigChange(LPHANDLE lpNotificationHandle,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 # 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
-# 387 "../src/kits/app/../support/SupportDefs.h" 2
-# 399 "../src/kits/app/../support/SupportDefs.h"
+# 378 "../src/kits/app/../support/../support/SupportDefs.h" 2
+# 390 "../src/kits/app/../support/../support/SupportDefs.h"
 enum {
     B_SEEK_SET = 0,
     B_SEEK_CUR,
     B_SEEK_END,
 };
-# 474 "../src/kits/app/../support/SupportDefs.h"
+# 465 "../src/kits/app/../support/../support/SupportDefs.h"
 namespace bhapi {
 
 __attribute__((dllexport)) int32 atomic_add (int32 *value, int32 addValue);
@@ -93876,21 +93875,53 @@ __attribute__((dllexport)) void * get_stack_frame (void);
 
 }
 
-
 extern "C" const char* B_EMPTY_STRING;
-# 34 "../src/kits/app/Looper.h" 2
 
 
 
-class BApplication;
-class BMessenger;
-class BMessage;
-class BMessageFilter;
-class BMessageQueue;
-class BLoooper;
-# 1 "../src/kits/app/../support/List.h" 1
-# 34 "../src/kits/app/../support/List.h"
-# 1 "../src/kits/app/../support/../support/SupportDefs.h" 1
+
+
+
+typedef signed char __haiku_std_int8;
+typedef unsigned char __haiku_std_uint8;
+typedef signed short __haiku_std_int16;
+typedef unsigned short __haiku_std_uint16;
+typedef signed int __haiku_std_int32;
+typedef unsigned int __haiku_std_uint32;
+
+
+
+
+typedef signed long long __haiku_std_int64;
+typedef unsigned long long __haiku_std_uint64;
+
+
+typedef __haiku_std_int8 __haiku_int8;
+typedef __haiku_std_uint8 __haiku_uint8;
+typedef __haiku_std_int16 __haiku_int16;
+typedef __haiku_std_uint16 __haiku_uint16;
+
+
+
+
+typedef __haiku_std_int32 __haiku_int32;
+typedef __haiku_std_uint32 __haiku_uint32;
+
+typedef __haiku_std_int64 __haiku_int64;
+typedef __haiku_std_uint64 __haiku_uint64;
+
+
+typedef signed long int __haiku_saddr_t;
+typedef unsigned long int __haiku_addr_t;
+
+
+
+
+
+    typedef __haiku_int32 __haiku_phys_saddr_t;
+    typedef __haiku_uint32 __haiku_phys_addr_t;
+# 592 "../src/kits/app/../support/../support/SupportDefs.h"
+    typedef __haiku_addr_t __haiku_generic_addr_t;
 # 35 "../src/kits/app/../support/List.h" 2
 
 
@@ -93955,18 +93986,16 @@ private:
 
     bool _Resize(b_int32 count);
 };
-# 44 "../src/kits/app/Looper.h" 2
+# 42 "../src/kits/app/Looper.h" 2
 # 1 "../src/kits/app/Handler.h" 1
 # 34 "../src/kits/app/Handler.h"
-# 1 "../src/kits/app/../private/PrivateHandler.h" 1
-# 32 "../src/kits/app/../private/PrivateHandler.h"
-# 1 "../src/kits/app/../private/../support/SupportDefs.h" 1
-# 33 "../src/kits/app/../private/PrivateHandler.h" 2
-
-
+# 1 "../src/kits/app/../../private/app/PrivateHandler.h" 1
+# 34 "../src/kits/app/../../private/app/PrivateHandler.h"
 class BHandler;
 class BLocker;
 class BLooper;
+# 1 "../src/kits/app/../../private/app/../../kits/support/SupportDefs.h" 1
+# 38 "../src/kits/app/../../private/app/PrivateHandler.h" 2
 namespace bhapi {
  BLocker* get_handler_operator_locker();
  b_uint64 get_handler_token(const BHandler *handler);
@@ -93981,7 +94010,8 @@ namespace bhapi {
  void unref_handler(b_uint64 token);
 }
 # 35 "../src/kits/app/Handler.h" 2
-
+# 1 "../src/kits/app/../support/SupportDefs.h" 1
+# 36 "../src/kits/app/Handler.h" 2
 
 
 
@@ -94019,20 +94049,20 @@ class __attribute__((dllexport)) BHandler : public BArchivable {
 public:
     BHandler(const char *name = __null);
 
- BHandler(const BMessage *from);
+    BHandler(const BMessage *from);
     virtual ~BHandler();
 
     virtual b_status_t Archive(BMessage *into, bool deep = true) const;
- static BArchivable *Instantiate(const BMessage *from);
+    static BArchivable *Instantiate(const BMessage *from);
 
     void SetName(const char *name);
     const char *Name() const;
 
- virtual void MessageReceived(BMessage *message);
+    virtual void MessageReceived(BMessage *message);
 
     BLooper *Looper() const;
 
- virtual void SetNextHandler(BHandler *handler);
+    virtual void SetNextHandler(BHandler *handler);
     BHandler *NextHandler() const;
 
     bool LockLooper();
@@ -94055,34 +94085,35 @@ public:
     bool IsWatched(b_uint32 what = (2147483647 * 2U + 1U)) const;
 
 
- virtual bool AddFilter(BMessageFilter *filter);
- virtual bool RemoveFilter(BMessageFilter *filter);
- virtual bool SetFilterList(const BList *filterList);
+    virtual bool AddFilter(BMessageFilter *filter);
+    virtual bool RemoveFilter(BMessageFilter *filter);
+    virtual bool SetFilterList(const BList *filterList);
     const BList *FilterList() const;
 
 
     virtual BHandler *ResolveSpecifier(BMessage *msg, b_int32 index, BMessage *specifier, b_int32 what, const char *property);
- virtual b_status_t GetSupportedSuites(BMessage *data);
+    virtual b_status_t GetSupportedSuites(BMessage *data);
 
 private:
- friend class BLooper;
- friend class BMessage;
+    friend class BLooper;
+    friend class BMessage;
     friend b_uint64 bhapi::get_handler_token(const BHandler *handler);
 
     BToken *fToken;
- char *fName;
- BLooper *fLooper;
- BHandler *fPrevHandler;
- BHandler *fNextHandler;
- void *fObserverList;
- BList *fFilters;
+    char *fName;
+    BLooper *fLooper;
+    BHandler *fPrevHandler;
+    BHandler *fNextHandler;
+    void *fObserverList;
+    BList *fFilters;
 };
-# 45 "../src/kits/app/Looper.h" 2
+# 43 "../src/kits/app/Looper.h" 2
+
 class __attribute__((dllexport)) BLooper : public BHandler {
 public:
 
 
- void Init(const char *name, b_int32 priority);
+    void Init(const char *name, b_int32 priority);
     BLooper(const char *name);
     BLooper(b_int32 priority);
     BLooper(const char *name,
@@ -94090,113 +94121,113 @@ public:
     virtual ~BLooper();
 
 
- BLooper(const BMessage *from);
- virtual b_status_t Archive(BMessage *into, bool deep = true) const;
- static BArchivable *Instantiate(const BMessage *from);
+    BLooper(const BMessage *from);
+    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    static BArchivable *Instantiate(const BMessage *from);
 
- void AddHandler(BHandler *handler);
- bool RemoveHandler(BHandler *handler);
- b_int32 CountHandlers() const;
- BHandler *HandlerAt(b_int32 index) const;
- b_int32 IndexOf(BHandler *handler) const;
+    void AddHandler(BHandler *handler);
+    bool RemoveHandler(BHandler *handler);
+    b_int32 CountHandlers() const;
+    BHandler *HandlerAt(b_int32 index) const;
+    b_int32 IndexOf(BHandler *handler) const;
 
- BHandler *PreferredHandler() const;
- void SetPreferredHandler(BHandler *handler);
+    BHandler *PreferredHandler() const;
+    void SetPreferredHandler(BHandler *handler);
 
- bool IsRunning() const;
- virtual void *Run();
- virtual void Quit();
- virtual bool QuitRequested();
- BLooper* Proxy() const;
- bool ProxyBy(BLooper *proxy);
+    bool IsRunning() const;
+    virtual void *Run();
+    virtual void Quit();
+    virtual bool QuitRequested();
+    BLooper* Proxy() const;
+    bool ProxyBy(BLooper *proxy);
 
- b_thread_id Thread() const;
+    b_thread_id Thread() const;
 
- bool Lock();
- void Unlock();
- b_status_t LockWithTimeout(b_bigtime_t microseconds_timeout);
+    bool Lock();
+    void Unlock();
+    b_status_t LockWithTimeout(b_bigtime_t microseconds_timeout);
 
- b_int64 CountLocks() const;
- bool IsLockedByCurrentThread() const;
+    b_int64 CountLocks() const;
+    bool IsLockedByCurrentThread() const;
 
- virtual void DispatchMessageW(BMessage *msg, BHandler *target);
-
-
- virtual void MessageReceived(BMessage *msg);
+    virtual void DispatchMessageW(BMessage *msg, BHandler *target);
 
 
- BMessage *CurrentMessage() const;
- BMessage *DetachCurrentMessage();
- BMessageQueue *MessageQueue() const;
+    virtual void MessageReceived(BMessage *msg);
 
- b_status_t PostMessageW(b_uint32 command);
- b_status_t PostMessageW(const BMessage *message);
- b_status_t PostMessageW(b_uint32 command,
-        BHandler *handler,
-        BHandler *reply_to = __null);
- b_status_t PostMessageW(const BMessage *message,
-        BHandler *handler,
-        BHandler *reply_to = __null);
 
- virtual bool AddCommonFilter(BMessageFilter *filter);
- virtual bool RemoveCommonFilter(BMessageFilter *filter);
- virtual bool SetCommonFilterList(const BList *filterList);
- const BList *CommonFilterList() const;
+    BMessage *CurrentMessage() const;
+    BMessage *DetachCurrentMessage();
+    BMessageQueue *MessageQueue() const;
 
- static BLooper *LooperForThread(b_thread_id tid);
+    b_status_t PostMessageW(b_uint32 command);
+    b_status_t PostMessageW(const BMessage *message);
+    b_status_t PostMessageW(b_uint32 command,
+                    BHandler *handler,
+                    BHandler *reply_to = __null);
+    b_status_t PostMessageW(const BMessage *message,
+                    BHandler *handler,
+                    BHandler *reply_to = __null);
+
+    virtual bool AddCommonFilter(BMessageFilter *filter);
+    virtual bool RemoveCommonFilter(BMessageFilter *filter);
+    virtual bool SetCommonFilterList(const BList *filterList);
+    const BList *CommonFilterList() const;
+
+    static BLooper *LooperForThread(b_thread_id tid);
 
 protected:
-# 132 "../src/kits/app/Looper.h"
+# 131 "../src/kits/app/Looper.h"
     BMessage *NextLooperMessage(b_bigtime_t timeout);
     void DispatchLooperMessage(BMessage *msg);
 
 private:
- friend class BHandler;
- friend class BApplication;
- friend class BMessenger;
- friend b_status_t bhapi::lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
+    friend class BHandler;
+    friend class BApplication;
+    friend class BMessenger;
+    friend b_status_t bhapi::lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
 
- bool fDeconstructing;
- BLooper *fProxy;
- BList fClients;
+    bool fDeconstructing;
+    BLooper *fProxy;
+    BList fClients;
 
- b_int32 fThreadPriority;
+    b_int32 fThreadPriority;
 
- b_int32 fHandlersCount;
- BHandler *fPreferredHandler;
+    b_int32 fHandlersCount;
+    BHandler *fPreferredHandler;
 
- void *fLocker;
- b_int64 fLocksCount;
+    void *fLocker;
+    b_int64 fLocksCount;
 
- void *fThread;
- void *fSem;
+    void *fThread;
+    void *fSem;
 
- BMessageQueue *fMessageQueue;
- BMessage *fCurrentMessage;
+    BMessageQueue *fMessageQueue;
+    BMessage *fCurrentMessage;
 
- static b_status_t _task(void*);
- static b_status_t _taskLooper(BLooper*, void*);
- static void _taskError(void*);
+    static b_status_t _task(void*);
+    static b_status_t _taskLooper(BLooper*, void*);
+    static void _taskError(void*);
 
- static BList sLooperList;
+    static BList sLooperList;
 
- BHandler *_MessageTarget(const BMessage *msg, bool *preferred);
- b_status_t _PostMessage(const BMessage *msg, b_uint64 handlerToken, b_uint64 replyToken, b_bigtime_t timeout);
+    BHandler *_MessageTarget(const BMessage *msg, bool *preferred);
+    b_status_t _PostMessage(const BMessage *msg, b_uint64 handlerToken, b_uint64 replyToken, b_bigtime_t timeout);
 
- BLooper *_Proxy() const;
- bool _ProxyBy(BLooper *proxy);
- BLooper *_GetNextClient(BLooper *client) const;
+    BLooper *_Proxy() const;
+    bool _ProxyBy(BLooper *proxy);
+    BLooper *_GetNextClient(BLooper *client) const;
 
- bool *fThreadExited;
+    bool *fThreadExited;
 
- BList fCommonFilters;
- void _FilterAndDispatchMessage(BMessage *msg, BHandler *target);
+    BList fCommonFilters;
+    void _FilterAndDispatchMessage(BMessage *msg, BHandler *target);
 
- virtual bool IsDependsOnOthersWhenQuitRequested() const;
+    virtual bool IsDependsOnOthersWhenQuitRequested() const;
 };
 # 31 "../src/kits/app/Looper.cpp" 2
 # 1 "../src/kits/app/AppDefs.h" 1
-# 36 "../src/kits/app/AppDefs.h"
+# 37 "../src/kits/app/AppDefs.h"
 enum {
     B_ABOUT_REQUESTED = '_ABR',
     B_WINDOW_ACTIVATED = '_ACT',
@@ -94232,11 +94263,11 @@ enum {
     B_WORKSPACE_ACTIVATED = '_WAC',
     B_ZOOM = '_WZM',
 
- _QUIT_ = '_QIT',
- _EVENTS_PENDING_ = '_EVP',
- _UPDATE_ = '_UPD',
- _UPDATE_IF_NEEDED_ = '_UPN',
- _MENU_EVENT_ = '_MEV'
+    _QUIT_ = '_QIT',
+    _EVENTS_PENDING_ = '_EVP',
+    _UPDATE_ = '_UPD',
+    _UPDATE_IF_NEEDED_ = '_UPN',
+    _MENU_EVENT_ = '_MEV'
 
 };
 
@@ -94263,60 +94294,59 @@ enum {
 };
 # 32 "../src/kits/app/Looper.cpp" 2
 # 1 "../src/kits/app/Application.h" 1
-# 36 "../src/kits/app/Application.h"
-# 1 "../src/kits/app/../app/Looper.h" 1
-# 37 "../src/kits/app/Application.h" 2
+# 35 "../src/kits/app/Application.h"
 # 1 "../src/kits/app/../app/MessageRunner.h" 1
-# 33 "../src/kits/app/../app/MessageRunner.h"
-# 1 "../src/kits/app/../app/../support/SupportDefs.h" 1
-# 34 "../src/kits/app/../app/MessageRunner.h" 2
-
-
+# 35 "../src/kits/app/../app/MessageRunner.h"
 class BMessenger;
 class BMessage;
+# 1 "../src/kits/app/../app/../support/SupportDefs.h" 1
+# 38 "../src/kits/app/../app/MessageRunner.h" 2
 class __attribute__((dllexport)) BMessageRunner {
 public:
- BMessageRunner(const BMessenger &target,
-         const BMessage *msg,
-         b_bigtime_t interval,
+    BMessageRunner(const BMessenger &target,
+               const BMessage *msg,
+               b_bigtime_t interval,
                b_int32 count = -1);
- BMessageRunner(const BMessenger &target,
-         const BMessage *msg,
-         b_bigtime_t interval,
+    BMessageRunner(const BMessenger &target,
+               const BMessage *msg,
+               b_bigtime_t interval,
                b_int32 count,
-         const BMessenger &replyTo);
- virtual ~BMessageRunner();
+               const BMessenger &replyTo);
+    virtual ~BMessageRunner();
 
- bool IsValid() const;
+    bool IsValid() const;
 
- b_status_t SetTarget(const BMessenger &target);
- b_status_t SetReplyTo(const BMessenger &replyTo);
- b_status_t SetMessage(const BMessage *msg);
+    b_status_t SetTarget(const BMessenger &target);
+    b_status_t SetReplyTo(const BMessenger &replyTo);
+    b_status_t SetMessage(const BMessage *msg);
     b_status_t SetInterval(b_bigtime_t interval);
     b_status_t SetCount(b_int32 count);
 
     b_status_t GetInfo(b_bigtime_t *interval, b_int32 *count) const;
- b_status_t GetInfo(BMessenger *target, BMessage *msg,
+    b_status_t GetInfo(BMessenger *target, BMessage *msg,
                 b_bigtime_t *interval, b_int32 *count,
-    BMessenger *replyTo = __null) const;
+                BMessenger *replyTo = __null) const;
 
 private:
- friend class BApplication;
+    friend class BApplication;
 
     b_int32 fToken;
 
- BMessenger *fTarget;
- BMessenger *fReplyTo;
- BMessage *fMessage;
- b_bigtime_t fInterval;
- b_bigtime_t fPrevSendTime;
+    BMessenger *fTarget;
+    BMessenger *fReplyTo;
+    BMessage *fMessage;
+    b_bigtime_t fInterval;
+    b_bigtime_t fPrevSendTime;
     b_int32 fCount;
 };
-# 38 "../src/kits/app/Application.h" 2
+# 36 "../src/kits/app/Application.h" 2
+# 1 "../src/kits/app/../app/Looper.h" 1
+# 37 "../src/kits/app/Application.h" 2
 # 1 "../src/kits/app/../app/Cursor.h" 1
 # 34 "../src/kits/app/../app/Cursor.h"
 # 1 "../src/kits/app/../app/../support/Archivable.h" 1
 # 35 "../src/kits/app/../app/Cursor.h" 2
+
 
 
 class __attribute__((dllexport)) BCursor : public BArchivable {
@@ -94329,7 +94359,7 @@ public:
     bool operator==(const BCursor &other) const;
     bool operator!=(const BCursor &other) const;
 
- const void *Data() const;
+    const void *Data() const;
     b_uint32 DataLength() const;
 
     b_uint8 ColorDepth() const;
@@ -94340,24 +94370,24 @@ public:
     b_uint8 SpotX() const;
     b_uint8 SpotY() const;
 
- const void *Bits() const;
- const void *Mask() const;
+    const void *Bits() const;
+    const void *Mask() const;
 
 private:
- void *fData;
+    void *fData;
 };
 
 
 
 inline b_uint8 BCursor::SpotX() const
 {
- return(Spot() >> 8);
+    return(Spot() >> 8);
 }
 
 
 inline b_uint8 BCursor::SpotY() const
 {
- return(Spot() & 0xff);
+    return(Spot() & 0xff);
 }
 
 
@@ -94365,7 +94395,7 @@ extern __attribute__((dllexport)) const BCursor *B_CURSOR_SYSTEM_DEFAULT;
 extern __attribute__((dllexport)) const BCursor *B_CURSOR_HAND;
 extern __attribute__((dllexport)) const BCursor *B_CURSOR_HAND_MOVE;
 extern __attribute__((dllexport)) const BCursor *B_CURSOR_I_BEAM;
-# 39 "../src/kits/app/Application.h" 2
+# 38 "../src/kits/app/Application.h" 2
 # 1 "../src/kits/app/../add-ons/font/FontEngine.h" 1
 # 33 "../src/kits/app/../add-ons/font/FontEngine.h"
 # 1 "../src/kits/app/../add-ons/font/../../support/SupportDefs.h" 1
@@ -94435,52 +94465,50 @@ private:
 };
 # 35 "../src/kits/app/../add-ons/font/FontEngine.h" 2
 # 1 "../src/kits/app/../add-ons/font/../../interface/Point.h" 1
-# 33 "../src/kits/app/../add-ons/font/../../interface/Point.h"
-# 1 "../src/kits/app/../add-ons/font/../../interface/../support/SupportDefs.h" 1
-# 34 "../src/kits/app/../add-ons/font/../../interface/Point.h" 2
-
-
+# 34 "../src/kits/app/../add-ons/font/../../interface/Point.h"
 class BRect;
+# 1 "../src/kits/app/../add-ons/font/../../interface/../support/SupportDefs.h" 1
+# 36 "../src/kits/app/../add-ons/font/../../interface/Point.h" 2
 class __attribute__((dllexport)) BPoint {
 public:
- float x;
- float y;
+    float x;
+    float y;
 
- BPoint();
- BPoint(float X, float Y);
- BPoint(const BPoint &pt);
+    BPoint();
+    BPoint(float X, float Y);
+    BPoint(const BPoint &pt);
 
- BPoint &operator=(const BPoint &from);
- void Set(float X, float Y);
+    BPoint &operator=(const BPoint &from);
+    void Set(float X, float Y);
 
- void ConstrainTo(BRect rect);
+    void ConstrainTo(BRect rect);
 
- void Ceil();
- void Floor();
- void Round();
+    void Ceil();
+    void Floor();
+    void Round();
 
- BPoint& FloorSelf();
- BPoint FloorCopy() const;
- BPoint& CeilSelf();
- BPoint CeilCopy() const;
- BPoint& RoundSelf();
- BPoint RoundCopy() const;
+    BPoint& FloorSelf();
+    BPoint FloorCopy() const;
+    BPoint& CeilSelf();
+    BPoint CeilCopy() const;
+    BPoint& RoundSelf();
+    BPoint RoundCopy() const;
 
- BPoint operator+(const BPoint &plus) const;
- BPoint operator-(const BPoint &minus) const;
- BPoint& operator+=(const BPoint &plus);
- BPoint& operator-=(const BPoint &minus);
+    BPoint operator+(const BPoint &plus) const;
+    BPoint operator-(const BPoint &minus) const;
+    BPoint& operator+=(const BPoint &plus);
+    BPoint& operator-=(const BPoint &minus);
 
- bool operator!=(const BPoint &pt) const;
- bool operator==(const BPoint &pt) const;
+    bool operator!=(const BPoint &pt) const;
+    bool operator==(const BPoint &pt) const;
 
- void PrintToStream() const;
+    void PrintToStream() const;
 };
 
 extern __attribute__((dllexport)) const BPoint B_ORIGIN;
 # 36 "../src/kits/app/../add-ons/font/FontEngine.h" 2
 # 1 "../src/kits/app/../add-ons/font/../../interface/Font.h" 1
-# 34 "../src/kits/app/../add-ons/font/../../interface/Font.h"
+# 33 "../src/kits/app/../add-ons/font/../../interface/Font.h"
 # 1 "../src/kits/app/../add-ons/font/../../interface/../support/String.h" 1
 # 34 "../src/kits/app/../add-ons/font/../../interface/../support/String.h"
 # 1 "../src/kits/app/../add-ons/font/../../interface/../support/../support/SupportDefs.h" 1
@@ -94825,7 +94853,8 @@ template<class TYPE_INT>
 __attribute__((dllexport)) void printf_int(BString &str, TYPE_INT value, b_uint8 _base, int precision_width, bool upper_style);
 __attribute__((dllexport)) b_int32 printf_double(BString &str, double value, int precision_width, b_int32 *exponent, bool g_style, bool upper_style);
 }
-# 35 "../src/kits/app/../add-ons/font/../../interface/Font.h" 2
+# 34 "../src/kits/app/../add-ons/font/../../interface/Font.h" 2
+
 
 
 
@@ -94836,26 +94865,24 @@ typedef char font_family[127 + 1];
 typedef char font_style[63 + 1];
 
 typedef struct font_height {
- float ascent;
- float descent;
- float leading;
+    float ascent;
+    float descent;
+    float leading;
 } font_height;
 
 typedef struct font_desc font_desc;
 }
 
 
-
 class BView;
 class BFontEngine;
-
 class __attribute__((dllexport)) BFont {
 public:
- BFont();
- BFont(const BFont &font);
- BFont(const BFont *font);
+    BFont();
+    BFont(const BFont &font);
+    BFont(const BFont *font);
     BFont(const bhapi::font_desc &fontDesc);
- virtual ~BFont();
+    virtual ~BFont();
 
     b_status_t SetFamilyAndStyle(const bhapi::font_family family, const bhapi::font_style style);
     b_status_t SetFamilyAndStyle(b_uint32 code);
@@ -94863,17 +94890,17 @@ public:
     b_status_t GetFamilyAndStyle(bhapi::font_family *family, bhapi::font_style *style) const;
     b_uint32 FamilyAndStyle() const;
 
- void SetSize(float size);
- void SetSpacing(float spacing);
- void SetShear(float shear);
- void SetBoldStyle(bool bold);
+    void SetSize(float size);
+    void SetSpacing(float spacing);
+    void SetShear(float shear);
+    void SetBoldStyle(bool bold);
 
- float Size() const;
- float Spacing() const;
- float Shear() const;
- bool IsBoldStyle() const;
+    float Size() const;
+    float Spacing() const;
+    float Shear() const;
+    bool IsBoldStyle() const;
 
- bool IsScalable() const;
+    bool IsScalable() const;
     bool HasFixedSize(b_int32 *count = __null) const;
     bool GetFixedSize(float *size, b_int32 index = 0) const;
 
@@ -94891,20 +94918,20 @@ public:
     float *CharWidths(const char *string, b_int32 length, b_int32 *nChars, float tabWidth = 0) const;
     float *CharWidths(const BString &str, b_int32 length, b_int32 *nChars, float tabWidth = 0) const;
 
- BFont &operator=(const BFont &font);
+    BFont &operator=(const BFont &font);
     BFont &operator=(const bhapi::font_desc &fontDesc);
 
- bool operator==(const BFont &font);
- bool operator!=(const BFont &font);
+    bool operator==(const BFont &font);
+    bool operator!=(const BFont &font);
 
- void PrintToStream() const;
+    void PrintToStream() const;
 
 private:
- friend class BView;
+    friend class BView;
 
- void *fInfo;
+    void *fInfo;
 
- BFontEngine *Engine() const;
+    BFontEngine *Engine() const;
 };
 
 namespace bhapi {
@@ -94927,49 +94954,49 @@ namespace bhapi {
 struct font_desc {
     bhapi::font_family family;
     bhapi::font_style style;
- float size;
- float spacing;
- float shear;
- bool bold;
+    float size;
+    float spacing;
+    float shear;
+    bool bold;
 
     inline font_desc()
- {
+    {
         memset(this, 0, sizeof(*this));
- }
+    }
 
     inline font_desc &operator=(const BFont &from)
- {
-  from.GetFamilyAndStyle(&family, &style);
-  size = from.Size();
-  spacing = from.Spacing();
-  shear = from.Shear();
-  bold = from.IsBoldStyle();
-  return *this;
- }
+    {
+        from.GetFamilyAndStyle(&family, &style);
+        size = from.Size();
+        spacing = from.Spacing();
+        shear = from.Shear();
+        bold = from.IsBoldStyle();
+        return *this;
+    }
 
     inline void SetFamilyAndStyle(const bhapi::font_family f, const bhapi::font_style s)
- {
+    {
         memset(family, 0, sizeof(bhapi::font_family));
         memset(style, 0, sizeof(bhapi::font_style));
         memcpy(family, f, ((127)>(strlen(f))?(strlen(f)):(127)));
         memcpy(style, s, ((63)>(strlen(s))?(strlen(s)):(63)));
- }
+    }
 
- inline void SetSize(float val) {size = val;}
- inline void SetSpacing(float val) {spacing = val;}
- inline void SetShear(float val) {shear = val;}
- inline void SetBoldStyle(bool val) {bold = val;}
+    inline void SetSize(float val) {size = val;}
+    inline void SetSpacing(float val) {spacing = val;}
+    inline void SetShear(float val) {shear = val;}
+    inline void SetBoldStyle(bool val) {bold = val;}
 
     inline void GetFamilyAndStyle(bhapi::font_family *f, bhapi::font_style *s)
- {
-  if(f) memcpy(*f, family, 127 + 1);
-  if(s) memcpy(*s, style, 63 + 1);
- }
+    {
+        if(f) memcpy(*f, family, 127 + 1);
+        if(s) memcpy(*s, style, 63 + 1);
+    }
 
- inline float Size() const {return size;}
- inline float Spacing() const {return spacing;}
- inline float Shear() const {return shear;}
- inline bool IsBoldStyle() const {return bold;}
+    inline float Size() const {return size;}
+    inline float Spacing() const {return spacing;}
+    inline float Shear() const {return shear;}
+    inline bool IsBoldStyle() const {return bold;}
 
 };
 }
@@ -95107,7 +95134,8 @@ private:
     friend __attribute__((dllexport)) bool bhapi::font_add(const char *family, const char *style, BFontEngine *engine);
     BStringArray *fServing;
 };
-# 40 "../src/kits/app/Application.h" 2
+# 39 "../src/kits/app/Application.h" 2
+
 
 
 using namespace bhapi;
@@ -95119,41 +95147,41 @@ class __attribute__((dllexport)) BApplication : public BLooper {
 public:
 
     BApplication(const char *signature, bool tryInterface = true);
- virtual ~BApplication();
+    virtual ~BApplication();
 
 
- BApplication(const BMessage *from);
- virtual b_status_t Archive(BMessage *into, bool deep = true) const;
- static BArchivable *Instantiate(const BMessage *from);
+    BApplication(const BMessage *from);
+    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    static BArchivable *Instantiate(const BMessage *from);
 
- const char *Signature() const;
+    const char *Signature() const;
 
- virtual void *Run();
- virtual void Quit();
- virtual bool QuitRequested();
+    virtual void *Run();
+    virtual void Quit();
+    virtual bool QuitRequested();
 
 
- virtual void ReadyToRun();
- virtual void Pulse();
+    virtual void ReadyToRun();
+    virtual void Pulse();
 
 
     void SetPulseRate(b_bigtime_t rate);
- b_bigtime_t PulseRate() const;
+    b_bigtime_t PulseRate() const;
 
- virtual void MessageReceived(BMessage *msg);
- virtual void DispatchMessageW(BMessage *msg, BHandler *target);
+    virtual void MessageReceived(BMessage *msg);
+    virtual void DispatchMessageW(BMessage *msg, BHandler *target);
 
- void SetCursor(const void *cursor);
+    void SetCursor(const void *cursor);
     void SetCursor(const BCursor *cursor, bool sync = true);
- void HideCursor();
- void ShowCursor();
- void ObscureCursor();
- bool IsCursorHidden() const;
+    void HideCursor();
+    void ShowCursor();
+    void ObscureCursor();
+    bool IsCursorHidden() const;
 
 private:
 
     friend class BLooper;
- friend class BMessageRunner;
+    friend class BMessageRunner;
     friend class BWindow;
     friend class BView;
     friend class BBitmap;
@@ -95161,30 +95189,30 @@ private:
 
     friend __attribute__((dllexport)) bool bhapi::update_font_families(bool);
 
- bool fQuit;
- char *fSignature;
- b_bigtime_t fPulseRate;
- BMessageRunner *fPulseRunner;
+    bool fQuit;
+    char *fSignature;
+    b_bigtime_t fPulseRate;
+    BMessageRunner *fPulseRunner;
 
- static BList sRunnerList;
- static b_bigtime_t sRunnerMinimumInterval;
- static void dispatch_message_runners();
+    static BList sRunnerList;
+    static b_bigtime_t sRunnerMinimumInterval;
+    static void dispatch_message_runners();
 
- bool quit_all_loopers(bool force);
+    bool quit_all_loopers(bool force);
 
     BGraphicsEngine *fGraphicsEngine;
- void *fGraphicsEngineAddon;
- void InitGraphicsEngine();
+    void *fGraphicsEngineAddon;
+    void InitGraphicsEngine();
 
- void Init(const char *signature, bool tryInterface);
+    void Init(const char *signature, bool tryInterface);
 
- BList fModalWindows;
+    BList fModalWindows;
     bool AddModalWindow(BMessenger &msgr);
     bool RemoveModalWindow(BMessenger &msgr);
 
     BCursor fCursor;
- bool fCursorHidden;
- bool fCursorObscure;
+    bool fCursorHidden;
+    bool fCursorObscure;
 
 };
 
@@ -95203,24 +95231,25 @@ extern __attribute__((dllexport)) BClipboard clipboard;
 }
 # 33 "../src/kits/app/Looper.cpp" 2
 # 1 "../src/kits/app/Messenger.h" 1
-# 37 "../src/kits/app/Messenger.h"
+# 35 "../src/kits/app/Messenger.h"
 class BMessage;
 class BHandler;
 class BLooper;
+
 class __attribute__((dllexport)) BMessenger {
 public:
- BMessenger();
+    BMessenger();
     BMessenger(const char *signature, b_int64 team = 0, b_status_t *perr = __null);
- BMessenger(const BHandler *handler, const BLooper *looper = __null, b_status_t *perr = __null);
+    BMessenger(const BHandler *handler, const BLooper *looper = __null, b_status_t *perr = __null);
 
- BMessenger(const BMessenger &msgr);
- ~BMessenger();
+    BMessenger(const BMessenger &msgr);
+    ~BMessenger();
 
- bool IsTargetLocal() const;
- bool IsAtTargetLooperThread() const;
- BHandler* Target(BLooper **looper) const;
+    bool IsTargetLocal() const;
+    bool IsAtTargetLooperThread() const;
+    BHandler* Target(BLooper **looper) const;
 
- bool LockTarget() const;
+    bool LockTarget() const;
     b_status_t LockTargetWithTimeout(b_bigtime_t timeout) const;
 
     b_status_t SendMessageW(b_uint32 command) const;
@@ -95230,33 +95259,33 @@ public:
     b_status_t SendMessageW(const BMessage *a_message, BMessage *reply_message) const;
     b_status_t SendMessageW(const BMessage *a_message, BMessage *reply_message, b_bigtime_t sendTimeout, b_bigtime_t replyTimeout) const;
 
- bool IsValid() const;
+    bool IsValid() const;
 
- BMessenger &operator=(const BMessenger &from);
- bool operator==(const BMessenger &other) const;
- bool operator!=(const BMessenger &other) const;
+    BMessenger &operator=(const BMessenger &from);
+    bool operator==(const BMessenger &other) const;
+    bool operator!=(const BMessenger &other) const;
 
- size_t FlattenedSize() const;
- bool Flatten(char *buffer, size_t bufferSize) const;
- bool Unflatten(const char *buffer, size_t bufferSize);
+    size_t FlattenedSize() const;
+    bool Flatten(char *buffer, size_t bufferSize) const;
+    bool Unflatten(const char *buffer, size_t bufferSize);
 
- void PrintToStream() const;
+    void PrintToStream() const;
 
 private:
- friend class BMessage;
- friend class BInvoker;
+    friend class BMessage;
+    friend class BInvoker;
 
     BMessenger(b_int64 targetTeam, b_uint64 targetToken, b_bigtime_t timestamp, b_status_t *perr);
 
     b_uint64 fHandlerToken;
     b_uint64 fLooperToken;
 
- void *fPort;
- void *fSem;
+    void *fPort;
+    void *fSem;
 
     b_int64 fTargetTeam;
 
- void InitData(const BHandler *handler, const BLooper *looper, b_status_t *perr);
+    void InitData(const BHandler *handler, const BLooper *looper, b_status_t *perr);
 
     static b_status_t _SendMessageToPort(void *port, const BMessage *msg, b_uint32 flags, b_bigtime_t timeout);
     static BMessage* _GetMessageFromPort(void *port, b_uint32 flags, b_bigtime_t timeout, b_status_t *err);
@@ -95265,124 +95294,121 @@ private:
 };
 # 34 "../src/kits/app/Looper.cpp" 2
 
-# 1 "../src/kits/app/../private/Token.h" 1
-# 33 "../src/kits/app/../private/Token.h"
-# 1 "../src/kits/app/../private/../support/Locker.h" 1
-# 34 "../src/kits/app/../private/Token.h" 2
-
-
-
-
-class BTokensDepot;
-
-
-class BToken {
+# 1 "../src/kits/app/MessageQueue.h" 1
+# 37 "../src/kits/app/MessageQueue.h"
+class BMessage;
+class __attribute__((dllexport)) BMessageQueue {
 public:
-    BToken();
-    ~BToken();
+    BMessageQueue();
+    virtual ~BMessageQueue();
 
- bool IsValid() const;
-    b_uint64 Token() const;
- b_bigtime_t TimeStamp() const;
 
-    BToken &operator+=(b_uint64 vitalities);
-    BToken &operator-=(b_uint64 vitalities);
-    BToken &operator++();
-    BToken &operator--();
-    b_uint64 Vitalities() const;
+    bool AddMessage(BMessage *an_event);
 
- void *Data() const;
- void SetData(void *data);
 
-    BTokensDepot *Depot() const;
- void MakeEmpty();
+    bool RemoveMessage(BMessage *an_event);
+
+
+    BMessage *NextMessage();
+
+    BMessage *FindMessage(b_int32 index) const;
+    BMessage *FindMessage(b_uint32 what, b_int32 fromIndex = 0) const;
+    BMessage *FindMessage(b_uint32 what, b_int32 fromIndex, b_int32 count) const;
+    b_int32 IndexOfMessage(BMessage *an_event) const;
+
+    b_int32 CountMessages() const;
+    bool IsEmpty() const;
+
+    bool Lock();
+    void Unlock();
+    b_status_t LockWithTimeout(b_bigtime_t microseconds_timeout);
 
 private:
-    friend class BTokensDepot;
-
- bool fOriginal;
-    b_uint64 fToken;
- b_bigtime_t fTimeStamp;
-
-    BTokensDepot *fDepot;
-};
-
-
-class BTokensDepot {
-public:
-    BTokensDepot(BLocker *locker = __null,
-       bool deconstruct_locker = false);
-    virtual ~BTokensDepot();
-
-
-    BToken *CreateToken(void *data = __null);
-
-    BToken *OpenToken(b_uint64 token, BToken *fetch_token = __null);
-
-    BToken *FetchToken(b_uint64 token);
-
- void SetLocker(BLocker *locker, bool deconstruct_locker);
- BLocker *Locker() const;
-
- bool Lock();
- void Unlock();
-
-private:
-    friend class BToken;
-
- BLocker *fLocker;
- bool fDeconstructLocker;
-    BToken fToken;
-
- void *fData;
+    BList fMessagesList;
+    void *fLocker;
 };
 # 36 "../src/kits/app/Looper.cpp" 2
-
-# 1 "../src/kits/app/../kernel/Debug.h" 1
-# 32 "../src/kits/app/../kernel/Debug.h"
-# 1 "../src/kits/app/../kernel/../support/SupportDefs.h" 1
-# 33 "../src/kits/app/../kernel/Debug.h" 2
-# 52 "../src/kits/app/../kernel/Debug.h"
-extern "C" {
-
-
-
+# 1 "../src/kits/app/MessageFilter.h" 1
+# 38 "../src/kits/app/MessageFilter.h"
 namespace bhapi {
 
-typedef enum debug_level {
-    DEBUG_NORMAL,
-    DEBUG_OUTPUT,
-    DEBUG_WARNING,
-    DEBUG_ERROR
-} debug_level;
+typedef enum filter_result {
+    B_SKIP_MESSAGE,
+    B_DISPATCH_MESSAGE
+} filter_result;
 
-__attribute__((dllexport)) void debug_log(bhapi::debug_level level, const char *format, va_list ap);
+typedef enum message_delivery {
+    B_DROPPED_DELIVERY = 0x1,
+    B_PROGRAMMED_DELIVERY = 0x2,
+    B_ANY_DELIVERY = 0xff
+} message_delivery;
 
-}
-# 84 "../src/kits/app/../kernel/Debug.h"
-__attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...);
-
-
-
-__attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...);
-# 104 "../src/kits/app/../kernel/Debug.h"
-__attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...);
-
-
-
-__attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...);
-# 122 "../src/kits/app/../kernel/Debug.h"
-}
-# 141 "../src/kits/app/../kernel/Debug.h"
-extern "C" {
-
+typedef enum message_source {
+    BLOCALBHAPI_SOURCE = 0x1,
+    B_REMOTE_SOURCE = 0x2,
+    B_ANY_SOURCE = 0xff
+} message_source;
 
 }
-# 38 "../src/kits/app/Looper.cpp" 2
-# 1 "../src/kits/app/../kernel/Kernel.h" 1
-# 33 "../src/kits/app/../kernel/Kernel.h"
+
+
+
+class BLooper;
+class BMessage;
+class BMessageFilter;
+class BHandler;
+namespace bhapi {
+typedef filter_result (*filter_hook)(BMessage *message, BHandler **target, BMessageFilter *filter);
+}
+class __attribute__((dllexport)) BMessageFilter {
+public:
+    BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,
+               b_uint32 command, bhapi::filter_hook filter = __null);
+    BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,
+               bhapi::filter_hook filter = __null);
+    BMessageFilter(b_uint32 command, bhapi::filter_hook filter = __null);
+    BMessageFilter(const BMessageFilter &filter);
+    BMessageFilter(const BMessageFilter *filter);
+    virtual ~BMessageFilter();
+
+    BMessageFilter &operator=(const BMessageFilter &from);
+
+    virtual bhapi::filter_result Filter(BMessage *message, BHandler **target);
+
+    bhapi::message_delivery MessageDelivery() const;
+    bhapi::message_source MessageSource() const;
+    b_uint32 Command() const;
+    bool FiltersAnyCommand() const;
+    BLooper *Looper() const;
+
+private:
+    friend class BLooper;
+    friend class BHandler;
+
+    b_uint32 fCommand;
+    bool fFiltersAny;
+    bhapi::message_delivery fDelivery;
+    bhapi::message_source fSource;
+    bhapi::filter_hook fFilterHook;
+
+    BHandler *fHandler;
+
+    bhapi::filter_result doFilter(BMessage *message, BHandler **target);
+};
+# 37 "../src/kits/app/Looper.cpp" 2
+# 1 "../src/kits/app/Message.h" 1
+# 35 "../src/kits/app/Message.h"
+class BMessenger;
+class BHandler;
+class BStreamIO;
+class BString;
+class BPoint;
+class BRect;
 # 1 "../src/kits/app/../kernel/OS.h" 1
-# 33 "../src/kits/app/../kernel/OS.h"
+# 31 "../src/kits/app/../kernel/OS.h"
+# 1 "../src/kits/app/../kernel/../support/SupportDefs.h" 1
+# 32 "../src/kits/app/../kernel/OS.h" 2
+
 typedef b_status_t (*b_thread_func)(void*);
 # 49 "../src/kits/app/../kernel/OS.h"
 enum {
@@ -95398,6 +95424,11 @@ enum {
     B_ABSOLUTE_REAL_TIME_TIMEOUT = B_ABSOLUTE_TIMEOUT
                                         | B_TIMEOUT_REAL_TIME_BASE
 };
+
+
+# 1 "../src/kits/app/../kernel/Kernel.h" 1
+# 33 "../src/kits/app/../kernel/Kernel.h"
+# 1 "../src/kits/app/../kernel/OS.h" 1
 # 34 "../src/kits/app/../kernel/Kernel.h" 2
 
 
@@ -95583,9 +95614,263 @@ __attribute__((dllexport)) b_status_t get_image_symbol(void *image, const char *
 
 
 }
-# 39 "../src/kits/app/Looper.cpp" 2
+# 65 "../src/kits/app/../kernel/OS.h" 2
+# 42 "../src/kits/app/Message.h" 2
+
+
+class __attribute__((dllexport)) BMessage {
+public:
+    BMessage();
+    BMessage(b_uint32 what);
+    BMessage(const BMessage &msg);
+    virtual ~BMessage();
+
+    b_uint32 what;
+
+    BMessage &operator=(const BMessage &msg);
+
+    b_int32 CountTypesByName(const char *name) const;
+    b_int32 CountTypesByName(b_int32 nameIndex) const;
+    bool TypeAt(const char *name, b_int32 typeIndex, b_type_code *type) const;
+    bool TypeAt(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type) const;
+
+
+
+
+    b_int32 CountItems(const char *name, b_type_code type) const;
+    b_int32 CountItems(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type = __null) const;
+# 87 "../src/kits/app/Message.h"
+    b_int32 CountNames(b_type_code type, bool count_all_names_when_any_type = true) const;
+    b_int32 FindName(const char *name) const;
+    const char *NameAt(b_int32 nameIndex) const;
+
+    void MakeEmpty();
+    bool IsEmpty() const;
+
+    bool Rename(const char *old_entry, const char *new_entry);
+
+    bool AddString(const char *name, const char *aString);
+    bool AddString(const char *name, const BString &aString);
+    bool AddInt8(const char *name, b_int8 val);
+    bool AddInt16(const char *name, b_int16 val);
+    bool AddInt32(const char *name, b_int32 val);
+    bool AddInt64(const char *name, b_int64 val);
+    bool AddBool(const char *name, bool aBoolean);
+    bool AddFloat(const char *name, float aFloat);
+    bool AddDouble(const char *name, double aDouble);
+    bool AddPoint(const char *name, BPoint pt);
+    bool AddRect(const char *name, BRect r);
+    bool AddPointer(const char *name, const void *ptr);
+    bool AddMessage(const char *name, const BMessage *msg);
+    bool AddMessenger(const char *name, const BMessenger *msgr);
+    bool AddMessenger(const char *name, const BMessenger &msgr);
+    bool AddData(const char *name, b_type_code type, const void *data, size_t numBytes, bool is_fixed_size = true);
+
+    bool FindString(const char *name, b_int32 index, const char **str) const;
+    bool FindString(const char *name, const char **str) const;
+    bool FindString(const char *name, b_int32 index, BString *str) const;
+    bool FindString(const char *name, BString *str) const;
+    bool FindInt8(const char *name, b_int8 *val) const;
+    bool FindInt8(const char *name, b_int32 index, b_int8 *val) const;
+    bool FindInt16(const char *name, b_int16 *val) const;
+    bool FindInt16(const char *name, b_int32 index, b_int16 *val) const;
+    bool FindInt32(const char *name, b_int32 *val) const;
+    bool FindInt32(const char *name, b_int32 index, b_int32 *val) const;
+    bool FindInt64(const char *name, b_int64 *val) const;
+    bool FindInt64(const char *name, b_int32 index, b_int64 *val) const;
+    bool FindBool(const char *name, bool *aBoolean) const;
+    bool FindBool(const char *name, b_int32 index, bool *aBoolean) const;
+    bool FindFloat(const char *name, float *f) const;
+    bool FindFloat(const char *name, b_int32 index, float *f) const;
+    bool FindDouble(const char *name, double *d) const;
+    bool FindDouble(const char *name, b_int32 index, double *d) const;
+    bool FindPoint(const char *name, BPoint *pt) const;
+    bool FindPoint(const char *name, b_int32 index, BPoint *pt) const;
+    bool FindRect(const char *name, BRect *r) const;
+    bool FindRect(const char *name, b_int32 index, BRect *r) const;
+    bool FindPointer(const char *name, void **ptr) const;
+    bool FindPointer(const char *name, b_int32 index, void **ptr) const;
+    bool FindMessage(const char *name, BMessage *msg) const;
+    bool FindMessage(const char *name, b_int32 index, BMessage *msg) const;
+    bool FindMessenger(const char *name, BMessenger *msgr) const;
+    bool FindMessenger(const char *name, b_int32 index, BMessenger *msgr) const;
+    bool FindData(const char *name, b_type_code type, const void **data, b_size_t *numBytes) const;
+    bool FindData(const char *name, b_type_code type, b_int32 index, const void **data, b_size_t *numBytes) const;
+    bool FindData(b_int32 nameIndex, b_int32 typeIndex, b_int32 index, const void **data, b_size_t *numBytes) const;
+
+    bool HasString(const char *name, b_int32 index = 0) const;
+    bool HasInt8(const char *name, b_int32 index = 0) const;
+    bool HasInt16(const char *name, b_int32 index = 0) const;
+    bool HasInt32(const char *name, b_int32 index = 0) const;
+    bool HasInt64(const char *name, b_int32 index = 0) const;
+    bool HasBool(const char *name, b_int32 index = 0) const;
+    bool HasFloat(const char *name, b_int32 index = 0) const;
+    bool HasDouble(const char *name, b_int32 index = 0) const;
+    bool HasPoint(const char *name, b_int32 index = 0) const;
+    bool HasRect(const char *name, b_int32 index = 0) const;
+    bool HasPointer(const char *name, b_int32 index = 0) const;
+    bool HasMessage(const char *name, b_int32 index = 0) const;
+    bool HasMessenger(const char *name, b_int32 index = 0) const;
+    bool HasData(const char *name, b_type_code type, b_int32 index = 0) const;
+
+    bool RemovString(const char *name, b_int32 index = 0);
+    bool RemoveInt8(const char *name, b_int32 index = 0);
+    bool RemoveInt16(const char *name, b_int32 index = 0);
+    bool RemoveInt32(const char *name, b_int32 index = 0);
+    bool RemoveInt64(const char *name, b_int32 index = 0);
+    bool RemoveBool(const char *name, b_int32 index = 0);
+    bool RemoveFloat(const char *name, b_int32 index = 0);
+    bool RemoveDouble(const char *name, b_int32 index = 0);
+    bool RemovePoint(const char *name, b_int32 index = 0);
+    bool RemoveRect(const char *name, b_int32 index = 0);
+    bool RemovePointer(const char *name, b_int32 index = 0);
+    bool RemoveMessage(const char *name, b_int32 index = 0);
+    bool RemoveMessenger(const char *name, b_int32 index = 0);
+    bool RemoveData(const char *name, b_type_code type, b_int32 index = 0);
+    bool RemoveData(const char *name, b_type_code type);
+    bool RemoveData(const char *name);
+
+    bool ReplacString(const char *name, b_int32 index, const char *aString);
+    bool ReplacString(const char *name, const char *aString);
+    bool ReplacString(const char *name, b_int32 index, const BString &aString);
+    bool ReplacString(const char *name, const BString &aString);
+    bool ReplaceInt8(const char *name, b_int8 val);
+    bool ReplaceInt8(const char *name, b_int32 index, b_int8 val);
+    bool ReplaceInt16(const char *name, b_int16 val);
+    bool ReplaceInt16(const char *name, b_int32 index, b_int16 val);
+    bool ReplaceInt32(const char *name, b_int32 val);
+    bool ReplaceInt32(const char *name, b_int32 index, b_int32 val);
+    bool ReplaceInt64(const char *name, b_int64 val);
+    bool ReplaceInt64(const char *name, b_int32 index, b_int64 val);
+    bool ReplaceBool(const char *name, bool aBoolean);
+    bool ReplaceBool(const char *name, b_int32 index, bool aBoolean);
+    bool ReplaceFloat(const char *name, float f);
+    bool ReplaceFloat(const char *name, b_int32 index, float f);
+    bool ReplaceDouble(const char *name, double d);
+    bool ReplaceDouble(const char *name, b_int32 index, double d);
+    bool ReplacePoint(const char *name, BPoint pt);
+    bool ReplacePoint(const char *name, b_int32 index, BPoint pt);
+    bool ReplaceRect(const char *name, BRect r);
+    bool ReplaceRect(const char *name, b_int32 index, BRect r);
+    bool ReplacePointer(const char *name, const void *ptr);
+    bool ReplacePointer(const char *name, b_int32 index, const void *ptr);
+    bool ReplaceMessage(const char *name, const BMessage *msg);
+    bool ReplaceMessage(const char *name, b_int32 index, const BMessage *msg);
+    bool ReplaceMessenger(const char *name, const BMessenger *msgr);
+    bool ReplaceMessenger(const char *name, b_int32 index, const BMessenger *msgr);
+    bool ReplaceMessenger(const char *name, const BMessenger &msgr);
+    bool ReplaceMessenger(const char *name, b_int32 index, const BMessenger &msgr);
+    bool ReplaceData(const char *name, b_type_code type, const void *data, size_t numBytes, bool is_fixed_size);
+    bool ReplaceData(const char *name, b_type_code type, b_int32 index, const void *data, size_t numBytes, bool is_fixed_size);
+
+    bool IsSystem() const;
+    void PrintToStream(BStreamIO &stream) const;
+    void PrintToStream() const;
+
+    size_t FlattenedSize() const;
+    bool Flatten(char *buffer, size_t bufferSize) const;
+    bool Unflatten(const char *buffer, size_t bufferSize);
+
+    bool WasDelivered() const;
+    bool IsReply() const;
+    bool IsSourceWaiting() const;
+
+    b_status_t SendReply(b_uint32 command, BHandler *replyHandler = __null) const;
+    b_status_t SendReply(const BMessage *message,
+                  BHandler *replyHandler = __null,
+                  b_bigtime_t sendTimeout = 9223372036854775807LL) const;
+
+
+    b_status_t BGetInfo(b_type_code type, b_int32 index,
+                 char **nameFound, b_type_code *typeFound, b_int32 *countFound = __null) const;
+    b_status_t BFindData(const char *name, b_type_code type, b_int32 index,
+                  const void **data, b_size_t *numBytes) const;
+    b_status_t BFindData(const char *name, b_type_code type,
+                  const void **data, b_size_t *numBytes) const;
+
+private:
+    friend class BLooper;
+    friend class BMessenger;
+
+    typedef struct list_data {
+        char *name;
+        BList list;
+    } list_data;
+
+    typedef struct type_list_data {
+        b_type_code type;
+        BList list;
+    } type_list_data;
+
+    typedef struct _object_t {
+        size_t bytes;
+        bool fixed_size;
+        void *data;
+    } _object_t;
+
+    BList fObjectsList;
+
+    static list_data *_find_list(const BList *list, const char *name, b_int32 *index = __null);
+    static type_list_data *_find_type_list(const BList *list, b_type_code type);
+
+    b_int64 fTeam;
+
+    b_uint64 fTargetToken;
+    b_bigtime_t fTargetTokenTimestamp;
+    b_uint64 fReplyToken;
+    b_bigtime_t fReplyTokenTimestamp;
+
+    bool fNoticeSource;
+    void *fSource;
+
+    bool fIsReply;
+};
+# 38 "../src/kits/app/Looper.cpp" 2
+
+
+# 1 "../src/kits/app/../kernel/Debug.h" 1
+# 52 "../src/kits/app/../kernel/Debug.h"
+extern "C" {
+
+
+
+namespace bhapi {
+
+typedef enum debug_level {
+    DEBUG_NORMAL,
+    DEBUG_OUTPUT,
+    DEBUG_WARNING,
+    DEBUG_ERROR
+} debug_level;
+
+__attribute__((dllexport)) void debug_log(bhapi::debug_level level, const char *format, va_list ap);
+
+}
+# 84 "../src/kits/app/../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_DEBUG(const char *format, ...);
+
+
+
+__attribute__((dllexport)) void BHAPI_OUTPUT(const char *format, ...);
+# 104 "../src/kits/app/../kernel/Debug.h"
+__attribute__((dllexport)) void BHAPI_WARNING(const char *format, ...);
+
+
+
+__attribute__((dllexport)) void BHAPI_ERROR(const char *format, ...);
+# 122 "../src/kits/app/../kernel/Debug.h"
+}
+# 141 "../src/kits/app/../kernel/Debug.h"
+extern "C" {
+
+
+}
+# 41 "../src/kits/app/Looper.cpp" 2
+# 1 "../src/kits/app/../kernel/Kernel.h" 1
+# 42 "../src/kits/app/Looper.cpp" 2
+
 # 1 "../src/kits/app/../support/Locker.h" 1
-# 40 "../src/kits/app/Looper.cpp" 2
+# 44 "../src/kits/app/Looper.cpp" 2
 # 1 "../src/kits/app/../support/Errors.h" 1
 # 41 "../src/kits/app/../support/Errors.h"
 enum {
@@ -95650,7 +95935,7 @@ enum {
     B_LINK_LIMIT,
     B_NAME_TOO_LONG,
 };
-# 41 "../src/kits/app/Looper.cpp" 2
+# 45 "../src/kits/app/Looper.cpp" 2
 # 1 "../src/kits/app/../support/Autolock.h" 1
 # 36 "../src/kits/app/../support/Autolock.h"
 template<class C>
@@ -95688,7 +95973,7 @@ private:
  bool fLocked;
  C* fLocker;
 };
-# 42 "../src/kits/app/Looper.cpp" 2
+# 46 "../src/kits/app/Looper.cpp" 2
 # 1 "../src/kits/app/../support/ClassInfo.h" 1
 # 38 "../src/kits/app/../support/ClassInfo.h"
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/typeinfo" 1 3
@@ -95825,330 +96110,79 @@ namespace std
 
 #pragma GCC visibility pop
 # 39 "../src/kits/app/../support/ClassInfo.h" 2
-# 43 "../src/kits/app/Looper.cpp" 2
-# 1 "../src/kits/app/../kernel/OS.h" 1
-# 44 "../src/kits/app/Looper.cpp" 2
-# 1 "../src/kits/app/../app/AppDefs.h" 1
-# 45 "../src/kits/app/Looper.cpp" 2
-# 1 "../src/kits/app/../app/Handler.h" 1
-# 46 "../src/kits/app/Looper.cpp" 2
-# 1 "../src/kits/app/../app/MessageQueue.h" 1
-# 37 "../src/kits/app/../app/MessageQueue.h"
-# 1 "../src/kits/app/../app/../support/List.h" 1
-# 38 "../src/kits/app/../app/MessageQueue.h" 2
-class BMessage;
-class __attribute__((dllexport)) BMessageQueue {
-public:
- BMessageQueue();
- virtual ~BMessageQueue();
-
-
- bool AddMessage(BMessage *an_event);
-
-
- bool RemoveMessage(BMessage *an_event);
-
-
- BMessage *NextMessage();
-
-    BMessage *FindMessage(b_int32 index) const;
-    BMessage *FindMessage(b_uint32 what, b_int32 fromIndex = 0) const;
-    BMessage *FindMessage(b_uint32 what, b_int32 fromIndex, b_int32 count) const;
-    b_int32 IndexOfMessage(BMessage *an_event) const;
-
-    b_int32 CountMessages() const;
- bool IsEmpty() const;
-
- bool Lock();
- void Unlock();
-    b_status_t LockWithTimeout(b_bigtime_t microseconds_timeout);
-
-private:
- BList fMessagesList;
- void *fLocker;
-};
 # 47 "../src/kits/app/Looper.cpp" 2
-# 1 "../src/kits/app/../app/MessageFilter.h" 1
-# 37 "../src/kits/app/../app/MessageFilter.h"
-typedef enum b_filter_result {
-    B_SKIP_MESSAGE,
-    B_DISPATCH_MESSAGE
-} b_filter_result;
-
-typedef enum b_message_delivery {
-    B_DROPPED_DELIVERY = 0x1,
-    B_PROGRAMMED_DELIVERY = 0x2,
-    B_ANY_DELIVERY = 0xff
-} b_message_delivery;
-
-typedef enum b_message_source {
-    BLOCALBHAPI_SOURCE = 0x1,
-    B_REMOTE_SOURCE = 0x2,
-    B_ANY_SOURCE = 0xff
-} b_message_source;
+# 1 "../src/kits/app/../../private/support/Token.h" 1
+# 32 "../src/kits/app/../../private/support/Token.h"
+# 1 "../src/kits/app/../../private/support/../../kits/support/SupportDefs.h" 1
+# 33 "../src/kits/app/../../private/support/Token.h" 2
+# 1 "../src/kits/app/../../private/support/../../kits/support/Locker.h" 1
+# 34 "../src/kits/app/../../private/support/Token.h" 2
 
 
-class BLooper;
-class BMessage;
-class BMessageFilter;
-class BHandler;
-typedef b_filter_result (*b_filter_hook)(BMessage *message, BHandler **target, BMessageFilter *filter);
-class __attribute__((dllexport)) BMessageFilter {
+class BTokensDepot;
+class BToken {
 public:
-    BMessageFilter(b_message_delivery delivery, b_message_source source,
-               b_uint32 command, b_filter_hook filter = __null);
-    BMessageFilter(b_message_delivery delivery, b_message_source source,
-         b_filter_hook filter = __null);
-    BMessageFilter(b_uint32 command, b_filter_hook filter = __null);
- BMessageFilter(const BMessageFilter &filter);
- BMessageFilter(const BMessageFilter *filter);
- virtual ~BMessageFilter();
+    BToken();
+    ~BToken();
 
- BMessageFilter &operator=(const BMessageFilter &from);
+    bool IsValid() const;
+    b_uint64 Token() const;
+    b_bigtime_t TimeStamp() const;
 
- virtual b_filter_result Filter(BMessage *message, BHandler **target);
+    BToken &operator+=(b_uint64 vitalities);
+    BToken &operator-=(b_uint64 vitalities);
+    BToken &operator++();
+    BToken &operator--();
+    b_uint64 Vitalities() const;
 
- b_message_delivery MessageDelivery() const;
- b_message_source MessageSource() const;
-    b_uint32 Command() const;
- bool FiltersAnyCommand() const;
- BLooper *Looper() const;
+    void *Data() const;
+    void SetData(void *data);
+
+    BTokensDepot *Depot() const;
+    void MakeEmpty();
 
 private:
- friend class BLooper;
- friend class BHandler;
+    friend class BTokensDepot;
 
-    b_uint32 fCommand;
- bool fFiltersAny;
- b_message_delivery fDelivery;
- b_message_source fSource;
- b_filter_hook fFilterHook;
+    bool fOriginal;
+    b_uint64 fToken;
+    b_bigtime_t fTimeStamp;
 
- BHandler *fHandler;
+    BTokensDepot *fDepot;
+};
 
- b_filter_result doFilter(BMessage *message, BHandler **target);
+
+class BTokensDepot {
+public:
+    BTokensDepot(BLocker *locker = __null,
+             bool deconstruct_locker = false);
+    virtual ~BTokensDepot();
+
+
+    BToken *CreateToken(void *data = __null);
+
+    BToken *OpenToken(b_uint64 token, BToken *fetch_token = __null);
+
+    BToken *FetchToken(b_uint64 token);
+
+    void SetLocker(BLocker *locker, bool deconstruct_locker);
+    BLocker *Locker() const;
+
+    bool Lock();
+    void Unlock();
+
+private:
+    friend class BToken;
+
+    BLocker *fLocker;
+    bool fDeconstructLocker;
+    BToken fToken;
+
+    void *fData;
 };
 # 48 "../src/kits/app/Looper.cpp" 2
-# 1 "../src/kits/app/../app/Message.h" 1
-# 37 "../src/kits/app/../app/Message.h"
-class BMessenger;
-class BHandler;
-class BStreamIO;
-class BString;
-class BPoint;
-class BRect;
-# 1 "../src/kits/app/../app/../kernel/OS.h" 1
-# 44 "../src/kits/app/../app/Message.h" 2
 
 
-class __attribute__((dllexport)) BMessage {
-public:
-    BMessage();
-    BMessage(b_uint32 what);
-    BMessage(const BMessage &msg);
-    virtual ~BMessage();
-
-    b_uint32 what;
-
-    BMessage &operator=(const BMessage &msg);
-
-    b_int32 CountTypesByName(const char *name) const;
-    b_int32 CountTypesByName(b_int32 nameIndex) const;
-    bool TypeAt(const char *name, b_int32 typeIndex, b_type_code *type) const;
-    bool TypeAt(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type) const;
-
-
-
-
-    b_int32 CountItems(const char *name, b_type_code type) const;
-    b_int32 CountItems(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type = __null) const;
-# 89 "../src/kits/app/../app/Message.h"
-    b_int32 CountNames(b_type_code type, bool count_all_names_when_any_type = true) const;
-    b_int32 FindName(const char *name) const;
-    const char *NameAt(b_int32 nameIndex) const;
-
- void MakeEmpty();
- bool IsEmpty() const;
-
- bool Rename(const char *old_entry, const char *new_entry);
-
-    bool AddString(const char *name, const char *aString);
-    bool AddString(const char *name, const BString &aString);
-    bool AddInt8(const char *name, b_int8 val);
-    bool AddInt16(const char *name, b_int16 val);
-    bool AddInt32(const char *name, b_int32 val);
-    bool AddInt64(const char *name, b_int64 val);
- bool AddBool(const char *name, bool aBoolean);
- bool AddFloat(const char *name, float aFloat);
- bool AddDouble(const char *name, double aDouble);
-    bool AddPoint(const char *name, BPoint pt);
-    bool AddRect(const char *name, BRect r);
- bool AddPointer(const char *name, const void *ptr);
-    bool AddMessage(const char *name, const BMessage *msg);
-    bool AddMessenger(const char *name, const BMessenger *msgr);
-    bool AddMessenger(const char *name, const BMessenger &msgr);
-    bool AddData(const char *name, b_type_code type, const void *data, size_t numBytes, bool is_fixed_size = true);
-
-    bool FindString(const char *name, b_int32 index, const char **str) const;
-    bool FindString(const char *name, const char **str) const;
-    bool FindString(const char *name, b_int32 index, BString *str) const;
-    bool FindString(const char *name, BString *str) const;
-    bool FindInt8(const char *name, b_int8 *val) const;
-    bool FindInt8(const char *name, b_int32 index, b_int8 *val) const;
-    bool FindInt16(const char *name, b_int16 *val) const;
-    bool FindInt16(const char *name, b_int32 index, b_int16 *val) const;
-    bool FindInt32(const char *name, b_int32 *val) const;
-    bool FindInt32(const char *name, b_int32 index, b_int32 *val) const;
-    bool FindInt64(const char *name, b_int64 *val) const;
-    bool FindInt64(const char *name, b_int32 index, b_int64 *val) const;
- bool FindBool(const char *name, bool *aBoolean) const;
-    bool FindBool(const char *name, b_int32 index, bool *aBoolean) const;
- bool FindFloat(const char *name, float *f) const;
-    bool FindFloat(const char *name, b_int32 index, float *f) const;
- bool FindDouble(const char *name, double *d) const;
-    bool FindDouble(const char *name, b_int32 index, double *d) const;
-    bool FindPoint(const char *name, BPoint *pt) const;
-    bool FindPoint(const char *name, b_int32 index, BPoint *pt) const;
-    bool FindRect(const char *name, BRect *r) const;
-    bool FindRect(const char *name, b_int32 index, BRect *r) const;
- bool FindPointer(const char *name, void **ptr) const;
-    bool FindPointer(const char *name, b_int32 index, void **ptr) const;
-    bool FindMessage(const char *name, BMessage *msg) const;
-    bool FindMessage(const char *name, b_int32 index, BMessage *msg) const;
-    bool FindMessenger(const char *name, BMessenger *msgr) const;
-    bool FindMessenger(const char *name, b_int32 index, BMessenger *msgr) const;
-    bool FindData(const char *name, b_type_code type, const void **data, b_size_t *numBytes) const;
-    bool FindData(const char *name, b_type_code type, b_int32 index, const void **data, b_size_t *numBytes) const;
-    bool FindData(b_int32 nameIndex, b_int32 typeIndex, b_int32 index, const void **data, b_size_t *numBytes) const;
-
-    bool HasString(const char *name, b_int32 index = 0) const;
-    bool HasInt8(const char *name, b_int32 index = 0) const;
-    bool HasInt16(const char *name, b_int32 index = 0) const;
-    bool HasInt32(const char *name, b_int32 index = 0) const;
-    bool HasInt64(const char *name, b_int32 index = 0) const;
-    bool HasBool(const char *name, b_int32 index = 0) const;
-    bool HasFloat(const char *name, b_int32 index = 0) const;
-    bool HasDouble(const char *name, b_int32 index = 0) const;
-    bool HasPoint(const char *name, b_int32 index = 0) const;
-    bool HasRect(const char *name, b_int32 index = 0) const;
-    bool HasPointer(const char *name, b_int32 index = 0) const;
-    bool HasMessage(const char *name, b_int32 index = 0) const;
-    bool HasMessenger(const char *name, b_int32 index = 0) const;
-    bool HasData(const char *name, b_type_code type, b_int32 index = 0) const;
-
-    bool RemovString(const char *name, b_int32 index = 0);
-    bool RemoveInt8(const char *name, b_int32 index = 0);
-    bool RemoveInt16(const char *name, b_int32 index = 0);
-    bool RemoveInt32(const char *name, b_int32 index = 0);
-    bool RemoveInt64(const char *name, b_int32 index = 0);
-    bool RemoveBool(const char *name, b_int32 index = 0);
-    bool RemoveFloat(const char *name, b_int32 index = 0);
-    bool RemoveDouble(const char *name, b_int32 index = 0);
-    bool RemovePoint(const char *name, b_int32 index = 0);
-    bool RemoveRect(const char *name, b_int32 index = 0);
-    bool RemovePointer(const char *name, b_int32 index = 0);
-    bool RemoveMessage(const char *name, b_int32 index = 0);
-    bool RemoveMessenger(const char *name, b_int32 index = 0);
-    bool RemoveData(const char *name, b_type_code type, b_int32 index = 0);
-    bool RemoveData(const char *name, b_type_code type);
- bool RemoveData(const char *name);
-
-    bool ReplacString(const char *name, b_int32 index, const char *aString);
-    bool ReplacString(const char *name, const char *aString);
-    bool ReplacString(const char *name, b_int32 index, const BString &aString);
-    bool ReplacString(const char *name, const BString &aString);
-    bool ReplaceInt8(const char *name, b_int8 val);
-    bool ReplaceInt8(const char *name, b_int32 index, b_int8 val);
-    bool ReplaceInt16(const char *name, b_int16 val);
-    bool ReplaceInt16(const char *name, b_int32 index, b_int16 val);
-    bool ReplaceInt32(const char *name, b_int32 val);
-    bool ReplaceInt32(const char *name, b_int32 index, b_int32 val);
-    bool ReplaceInt64(const char *name, b_int64 val);
-    bool ReplaceInt64(const char *name, b_int32 index, b_int64 val);
- bool ReplaceBool(const char *name, bool aBoolean);
-    bool ReplaceBool(const char *name, b_int32 index, bool aBoolean);
- bool ReplaceFloat(const char *name, float f);
-    bool ReplaceFloat(const char *name, b_int32 index, float f);
- bool ReplaceDouble(const char *name, double d);
-    bool ReplaceDouble(const char *name, b_int32 index, double d);
-    bool ReplacePoint(const char *name, BPoint pt);
-    bool ReplacePoint(const char *name, b_int32 index, BPoint pt);
-    bool ReplaceRect(const char *name, BRect r);
-    bool ReplaceRect(const char *name, b_int32 index, BRect r);
- bool ReplacePointer(const char *name, const void *ptr);
-    bool ReplacePointer(const char *name, b_int32 index, const void *ptr);
-    bool ReplaceMessage(const char *name, const BMessage *msg);
-    bool ReplaceMessage(const char *name, b_int32 index, const BMessage *msg);
-    bool ReplaceMessenger(const char *name, const BMessenger *msgr);
-    bool ReplaceMessenger(const char *name, b_int32 index, const BMessenger *msgr);
-    bool ReplaceMessenger(const char *name, const BMessenger &msgr);
-    bool ReplaceMessenger(const char *name, b_int32 index, const BMessenger &msgr);
-    bool ReplaceData(const char *name, b_type_code type, const void *data, size_t numBytes, bool is_fixed_size);
-    bool ReplaceData(const char *name, b_type_code type, b_int32 index, const void *data, size_t numBytes, bool is_fixed_size);
-
- bool IsSystem() const;
-    void PrintToStream(BStreamIO &stream) const;
- void PrintToStream() const;
-
- size_t FlattenedSize() const;
- bool Flatten(char *buffer, size_t bufferSize) const;
- bool Unflatten(const char *buffer, size_t bufferSize);
-
- bool WasDelivered() const;
- bool IsReply() const;
- bool IsSourceWaiting() const;
-
-    b_status_t SendReply(b_uint32 command, BHandler *replyHandler = __null) const;
-    b_status_t SendReply(const BMessage *message,
-                  BHandler *replyHandler = __null,
-                  b_bigtime_t sendTimeout = 9223372036854775807LL) const;
-
-
-    b_status_t BGetInfo(b_type_code type, b_int32 index,
-                 char **nameFound, b_type_code *typeFound, b_int32 *countFound = __null) const;
-    b_status_t BFindData(const char *name, b_type_code type, b_int32 index,
-      const void **data, b_size_t *numBytes) const;
-    b_status_t BFindData(const char *name, b_type_code type,
-      const void **data, b_size_t *numBytes) const;
-
-private:
-    friend class BLooper;
-    friend class BMessenger;
-
-    typedef struct list_data {
-  char *name;
-        BList list;
- } list_data;
-
- typedef struct type_list_data {
-        b_type_code type;
-        BList list;
- } type_list_data;
-
- typedef struct _object_t {
-  size_t bytes;
-  bool fixed_size;
-  void *data;
- } _object_t;
-
-    BList fObjectsList;
-
-    static list_data *_find_list(const BList *list, const char *name, b_int32 *index = __null);
-    static type_list_data *_find_type_list(const BList *list, b_type_code type);
-
-    b_int64 fTeam;
-
-    b_uint64 fTargetToken;
-    b_bigtime_t fTargetTokenTimestamp;
-    b_uint64 fReplyToken;
-    b_bigtime_t fReplyTokenTimestamp;
-
- bool fNoticeSource;
- void *fSource;
-
- bool fIsReply;
-};
-# 49 "../src/kits/app/Looper.cpp" 2
 
 
 
@@ -96157,378 +96191,378 @@ __attribute__((dllexport)) BList BLooper::sLooperList;
 
 
 BLooper::BLooper(const char *name)
- : BHandler(name), fDeconstructing(false), fProxy(__null), fHandlersCount(1), fPreferredHandler(__null), fLocker(__null), fLocksCount((const long long)(0)), fThread(__null), fSem(__null), fMessageQueue(__null), fCurrentMessage(__null), fThreadExited(__null)
+    : BHandler(name), fDeconstructing(false), fProxy(__null), fHandlersCount(1), fPreferredHandler(__null), fLocker(__null), fLocksCount((const long long)(0)), fThread(__null), fSem(__null), fMessageQueue(__null), fCurrentMessage(__null), fThreadExited(__null)
 {
- this->Init(name,10);
+    this->Init(name,10);
 }
 
 BLooper::BLooper(b_int32 priority)
- : BHandler(""), fDeconstructing(false), fProxy(__null), fHandlersCount(1), fPreferredHandler(__null), fLocker(__null), fLocksCount((const long long)(0)), fThread(__null), fSem(__null), fMessageQueue(__null), fCurrentMessage(__null), fThreadExited(__null)
+    : BHandler(""), fDeconstructing(false), fProxy(__null), fHandlersCount(1), fPreferredHandler(__null), fLocker(__null), fLocksCount((const long long)(0)), fThread(__null), fSem(__null), fMessageQueue(__null), fCurrentMessage(__null), fThreadExited(__null)
 {
- this->Init(__null,priority);
+    this->Init(__null,priority);
 }
 
 BLooper::BLooper(const char *name, b_int32 priority)
- : BHandler(name), fDeconstructing(false), fProxy(__null), fHandlersCount(1), fPreferredHandler(__null), fLocker(__null), fLocksCount((const long long)(0)), fThread(__null), fSem(__null), fMessageQueue(__null), fCurrentMessage(__null), fThreadExited(__null)
+    : BHandler(name), fDeconstructing(false), fProxy(__null), fHandlersCount(1), fPreferredHandler(__null), fLocker(__null), fLocksCount((const long long)(0)), fThread(__null), fSem(__null), fMessageQueue(__null), fCurrentMessage(__null), fThreadExited(__null)
 {
- this->Init(name,priority);
+    this->Init(name,priority);
 }
 
 void BLooper::Init(const char *name, b_int32 priority)
 {
- BLocker *hLocker = bhapi::get_handler_operator_locker();
- BAutolock <BLocker>autolock(hLocker);
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
+    BAutolock <BLocker>autolock(hLocker);
 
- if((fLocker = bhapi::create_locker()) == __null)
-  BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
+    if((fLocker = bhapi::create_locker()) == __null)
+        BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
 
- fPrevHandler = fNextHandler = this;
- fLooper = this;
+    fPrevHandler = fNextHandler = this;
+    fLooper = this;
 
- fMessageQueue = new BMessageQueue();
- if(fMessageQueue) fSem = bhapi::create_sem((const long long)(0), __null);
+    fMessageQueue = new BMessageQueue();
+    if(fMessageQueue) fSem = bhapi::create_sem((const long long)(0), __null);
 
- fThreadPriority = priority;
+    fThreadPriority = priority;
 
- sLooperList.AddItem(this);
+    sLooperList.AddItem(this);
 }
 
 BLooper::~BLooper()
 {
- for(BHandler *handler = HandlerAt(1); RemoveHandler(handler); handler = HandlerAt(1)) delete handler;
+    for(BHandler *handler = HandlerAt(1); RemoveHandler(handler); handler = HandlerAt(1)) delete handler;
 
- if(fProxy) ProxyBy(__null);
- while(fClients.CountItems() > 0)
- {
-  BLooper *client = (BLooper*)fClients.ItemAt(0);
-  client->Lock();
-  client->ProxyBy(__null);
-  client->Unlock();
- }
+    if(fProxy) ProxyBy(__null);
+    while(fClients.CountItems() > 0)
+    {
+        BLooper *client = (BLooper*)fClients.ItemAt(0);
+        client->Lock();
+        client->ProxyBy(__null);
+        client->Unlock();
+    }
 
- while(fCommonFilters.CountItems() > 0)
- {
-  BMessageFilter *filter = (BMessageFilter*)fCommonFilters.ItemAt(0);
-  BLooper::RemoveCommonFilter(filter);
-  delete filter;
- }
+    while(fCommonFilters.CountItems() > 0)
+    {
+        BMessageFilter *filter = (BMessageFilter*)fCommonFilters.ItemAt(0);
+        BLooper::RemoveCommonFilter(filter);
+        delete filter;
+    }
 
- BLocker *hLocker = bhapi::get_handler_operator_locker();
- BAutolock <BLocker>autolock(hLocker);
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
+    BAutolock <BLocker>autolock(hLocker);
 
- if(fMessageQueue) delete fMessageQueue;
- if(fSem) bhapi::delete_sem(fSem);
- if(fCurrentMessage) delete fCurrentMessage;
- if(fThread) bhapi::delete_thread(fThread);
+    if(fMessageQueue) delete fMessageQueue;
+    if(fSem) bhapi::delete_sem(fSem);
+    if(fCurrentMessage) delete fCurrentMessage;
+    if(fThread) bhapi::delete_thread(fThread);
 
- sLooperList.RemoveItem(this);
+    sLooperList.RemoveItem(this);
 
- if(BHandler::fToken != __null) BHandler::fToken->MakeEmpty();
+    if(BHandler::fToken != __null) BHandler::fToken->MakeEmpty();
 
- if(fLocker)
- {
-  bhapi::close_locker(fLocker);
-  bhapi::delete_locker(fLocker);
- }
+    if(fLocker)
+    {
+        bhapi::close_locker(fLocker);
+        bhapi::delete_locker(fLocker);
+    }
 }
 
 
 BLooper::BLooper(const BMessage *from)
- : BHandler(from), fDeconstructing(false), fProxy(__null), fThreadPriority(10), fHandlersCount(1), fPreferredHandler(__null), fLocker(__null), fLocksCount((const long long)(0)), fThread(__null), fSem(__null), fMessageQueue(__null), fCurrentMessage(__null), fThreadExited(__null)
+    : BHandler(from), fDeconstructing(false), fProxy(__null), fThreadPriority(10), fHandlersCount(1), fPreferredHandler(__null), fLocker(__null), fLocksCount((const long long)(0)), fThread(__null), fSem(__null), fMessageQueue(__null), fCurrentMessage(__null), fThreadExited(__null)
 {
- BLocker *hLocker = bhapi::get_handler_operator_locker();
- BAutolock <BLocker>autolock(hLocker);
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
+    BAutolock <BLocker>autolock(hLocker);
 
- if((fLocker = bhapi::create_locker()) == __null)
-  BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
+    if((fLocker = bhapi::create_locker()) == __null)
+        BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
 
- fPrevHandler = fNextHandler = this;
- fLooper = this;
+    fPrevHandler = fNextHandler = this;
+    fLooper = this;
 
- fMessageQueue = new BMessageQueue();
- if(fMessageQueue) fSem = bhapi::create_sem((const long long)(0), __null);
+    fMessageQueue = new BMessageQueue();
+    if(fMessageQueue) fSem = bhapi::create_sem((const long long)(0), __null);
 
- sLooperList.AddItem(this);
+    sLooperList.AddItem(this);
 }
 
 
 b_status_t
 BLooper::Archive(BMessage *into, bool deep) const
 {
- if(!into) return B_ERROR;
+    if(!into) return B_ERROR;
 
- BHandler::Archive(into, deep);
- into->AddString("class", "BLooper");
+    BHandler::Archive(into, deep);
+    into->AddString("class", "BLooper");
 
 
 
- return B_OK;
+    return B_OK;
 }
 
 
 BArchivable*
 BLooper::Instantiate(const BMessage *from)
 {
- if(b_validatb_instantiation(from, "BLooper"))
-  return new BLooper(from);
- return __null;
+    if(b_validatb_instantiation(from, "BLooper"))
+        return new BLooper(from);
+    return __null;
 }
 
 
 void
 BLooper::AddHandler(BHandler *handler)
 {
- if(handler == __null || handler->fLooper != __null || fHandlersCount == 2147483647) return;
+    if(handler == __null || handler->fLooper != __null || fHandlersCount == 2147483647) return;
 
- handler->fLooper = this;
+    handler->fLooper = this;
 
- fPrevHandler->fNextHandler = handler;
- handler->fPrevHandler = fPrevHandler;
- handler->fNextHandler = this;
+    fPrevHandler->fNextHandler = handler;
+    handler->fPrevHandler = fPrevHandler;
+    handler->fNextHandler = this;
 
- fHandlersCount += 1;
- handler->SetNextHandler(this);
+    fHandlersCount += 1;
+    handler->SetNextHandler(this);
 }
 
 
 bool
 BLooper::RemoveHandler(BHandler *handler)
 {
- if(handler == __null || handler == this) return false;
- if(handler->fLooper != this) return false;
+    if(handler == __null || handler == this) return false;
+    if(handler->fLooper != this) return false;
 
- handler->fPrevHandler->fNextHandler = handler->fNextHandler;
- handler->fNextHandler->fPrevHandler = handler->fPrevHandler;
- handler->fPrevHandler = handler->fNextHandler = __null;
+    handler->fPrevHandler->fNextHandler = handler->fNextHandler;
+    handler->fNextHandler->fPrevHandler = handler->fPrevHandler;
+    handler->fPrevHandler = handler->fNextHandler = __null;
 
- fHandlersCount -= 1;
+    fHandlersCount -= 1;
 
- handler->fLooper = __null;
- handler->SetNextHandler(__null);
+    handler->fLooper = __null;
+    handler->SetNextHandler(__null);
 
- return true;
+    return true;
 }
 
 
 b_int32
 BLooper::CountHandlers() const
 {
- return fHandlersCount;
+    return fHandlersCount;
 }
 
 
 BHandler*
 BLooper::HandlerAt(b_int32 index) const
 {
- if(index >= fHandlersCount) return __null;
+    if(index >= fHandlersCount) return __null;
 
     if(index == 0) return const_cast<BHandler*>((this ? dynamic_cast<const BHandler*>(this) : (const BHandler*)__null));
- if(index == 1) return fNextHandler;
- if(index == fHandlersCount - 1) return fPrevHandler;
+    if(index == 1) return fNextHandler;
+    if(index == fHandlersCount - 1) return fPrevHandler;
 
- BHandler *handler = fNextHandler;
- while(index-- > 1) handler = handler->fNextHandler;
- return handler;
+    BHandler *handler = fNextHandler;
+    while(index-- > 1) handler = handler->fNextHandler;
+    return handler;
 }
 
 
 b_int32
 BLooper::IndexOf(BHandler *handler) const
 {
- if(handler == __null || handler->fLooper != this) return -1;
+    if(handler == __null || handler->fLooper != this) return -1;
 
- b_int32 index = 0;
+    b_int32 index = 0;
 
- const BHandler *found = this;
- while(found != handler)
- {
-  found = found->fNextHandler;
-  index++;
- }
+    const BHandler *found = this;
+    while(found != handler)
+    {
+        found = found->fNextHandler;
+        index++;
+    }
 
- return index;
+    return index;
 }
 
 
 BHandler*
 BLooper::PreferredHandler() const
 {
- return fPreferredHandler;
+    return fPreferredHandler;
 }
 
 
 void
 BLooper::SetPreferredHandler(BHandler *handler)
 {
- if(handler) if(handler->Looper() != this) return;
- fPreferredHandler = handler;
+    if(handler) if(handler->Looper() != this) return;
+    fPreferredHandler = handler;
 }
 
 
 bool
 BLooper::Lock()
 {
- return(LockWithTimeout(9223372036854775807LL) == B_OK);
+    return(LockWithTimeout(9223372036854775807LL) == B_OK);
 }
 
 
 void
 BLooper::Unlock()
 {
- if(IsLockedByCurrentThread())
- {
-  fLocksCount--;
-  bhapi::unlock_locker(fLocker);
- }
- else
- {
-  BHAPI_WARNING("[APP]: %s -- Looper wasn't locked by current thread.", __PRETTY_FUNCTION__);
- }
+    if(IsLockedByCurrentThread())
+    {
+        fLocksCount--;
+        bhapi::unlock_locker(fLocker);
+    }
+    else
+    {
+        BHAPI_WARNING("[APP]: %s -- Looper wasn't locked by current thread.", __PRETTY_FUNCTION__);
+    }
 }
 
 
 b_status_t
 BLooper::LockWithTimeout(b_bigtime_t microseconds_timeout)
 {
- b_uint64 token = bhapi::get_handler_token(this);
+    b_uint64 token = bhapi::get_handler_token(this);
 
- b_status_t retVal = bhapi::lock_looper_of_handler(token, microseconds_timeout);
+    b_status_t retVal = bhapi::lock_looper_of_handler(token, microseconds_timeout);
 
- if(retVal == B_OK) fLocksCount++;
+    if(retVal == B_OK) fLocksCount++;
 
- return retVal;
+    return retVal;
 }
 
 
 b_int64
 BLooper::CountLocks() const
 {
- return fLocksCount;
+    return fLocksCount;
 }
 
 
 bool
 BLooper::IsLockedByCurrentThread() const
 {
- return(CountLocks() > (const long long)(0));
+    return(CountLocks() > (const long long)(0));
 }
 
 
 b_status_t
 BLooper::PostMessageW(b_uint32 command)
 {
- BMessage msg(command);
- return PostMessageW(&msg, this, __null);
+    BMessage msg(command);
+    return PostMessageW(&msg, this, __null);
 }
 
 
 b_status_t
 BLooper::PostMessageW(const BMessage *message)
 {
- return PostMessageW(message, this, __null);
+    return PostMessageW(message, this, __null);
 }
 
 
 b_status_t
 BLooper::PostMessageW(b_uint32 command, BHandler *handler, BHandler *reply_to)
 {
- BMessage msg(command);
- return PostMessageW(&msg, handler, reply_to);
+    BMessage msg(command);
+    return PostMessageW(&msg, handler, reply_to);
 }
 
 
 b_status_t
 BLooper::PostMessageW(const BMessage *_message, BHandler *handler, BHandler *reply_to)
 {
- if(_message == __null)
- {
-  BHAPI_WARNING("[APP]: %s --- Can't post empty message.", __PRETTY_FUNCTION__);
-  return B_BAD_VALUE;
- }
+    if(_message == __null)
+    {
+        BHAPI_WARNING("[APP]: %s --- Can't post empty message.", __PRETTY_FUNCTION__);
+        return B_BAD_VALUE;
+    }
 
- b_uint64 handlerToken = bhapi::get_handler_token(handler);
- b_uint64 replyToken = bhapi::get_handler_token(reply_to);
+    b_uint64 handlerToken = bhapi::get_handler_token(handler);
+    b_uint64 replyToken = bhapi::get_handler_token(reply_to);
 
- BMessage aMsg(*_message);
- aMsg.fIsReply = false;
- if(aMsg.fSource != __null)
- {
-  bhapi::delete_port(aMsg.fSource);
-  aMsg.fSource = __null;
- }
+    BMessage aMsg(*_message);
+    aMsg.fIsReply = false;
+    if(aMsg.fSource != __null)
+    {
+        bhapi::delete_port(aMsg.fSource);
+        aMsg.fSource = __null;
+    }
 
- return _PostMessage(&aMsg, handlerToken, replyToken, 9223372036854775807LL);
+    return _PostMessage(&aMsg, handlerToken, replyToken, 9223372036854775807LL);
 }
 
 
 b_status_t
 BLooper::_PostMessage(const BMessage *_message, b_uint64 handlerToken, b_uint64 replyToken, b_bigtime_t timeout)
 {
- if(fMessageQueue == __null || _message == __null) return B_ERROR;
+    if(fMessageQueue == __null || _message == __null) return B_ERROR;
 
- b_uint64 selfToken = bhapi::get_handler_token(this);
- b_bigtime_t handlerTokenTimestamp = bhapi::get_handler_create_time_stamp(handlerToken);
- b_bigtime_t replyTokenTimestamp = bhapi::get_handler_create_time_stamp(replyToken);
+    b_uint64 selfToken = bhapi::get_handler_token(this);
+    b_bigtime_t handlerTokenTimestamp = bhapi::get_handler_create_time_stamp(handlerToken);
+    b_bigtime_t replyTokenTimestamp = bhapi::get_handler_create_time_stamp(replyToken);
 
- if(fMessageQueue->LockWithTimeout(timeout) != B_OK) return B_ERROR;
+    if(fMessageQueue->LockWithTimeout(timeout) != B_OK) return B_ERROR;
 
- b_status_t retVal = B_ERROR;
+    b_status_t retVal = B_ERROR;
 
- if(fSem != __null)
- {
-  if(_message->what == _EVENTS_PENDING_ && handlerToken == selfToken)
-  {
-   retVal = (_message->fNoticeSource ? B_ERROR : B_OK);
-  }
-  else
-  {
-   BMessage *message = new BMessage(*_message);
-
-   message->fTeam = bhapi::get_current_team_id();
-   message->fTargetToken = handlerToken;
-   message->fTargetTokenTimestamp = handlerTokenTimestamp;
-
-   if(replyToken != 9223372036854775807LL)
-   {
-    message->fReplyToken = replyToken;
-    message->fReplyTokenTimestamp = replyTokenTimestamp;
-    if(message->fSource)
+    if(fSem != __null)
     {
-     bhapi::delete_port(message->fSource);
-     message->fSource = __null;
-    }
-   }
+        if(_message->what == _EVENTS_PENDING_ && handlerToken == selfToken)
+        {
+            retVal = (_message->fNoticeSource ? B_ERROR : B_OK);
+        }
+        else
+        {
+            BMessage *message = new BMessage(*_message);
 
-   if(fMessageQueue->AddMessage(message))
-   {
-    message->fNoticeSource = _message->fNoticeSource;
-    retVal = B_OK;
-   }
-  }
+            message->fTeam = bhapi::get_current_team_id();
+            message->fTargetToken = handlerToken;
+            message->fTargetTokenTimestamp = handlerTokenTimestamp;
+
+            if(replyToken != 9223372036854775807LL)
+            {
+                message->fReplyToken = replyToken;
+                message->fReplyTokenTimestamp = replyTokenTimestamp;
+                if(message->fSource)
+                {
+                    bhapi::delete_port(message->fSource);
+                    message->fSource = __null;
+                }
+            }
+
+            if(fMessageQueue->AddMessage(message))
+            {
+                message->fNoticeSource = _message->fNoticeSource;
+                retVal = B_OK;
+            }
+        }
 
         bhapi::release_sem(fSem);
- }
+    }
 
- fMessageQueue->Unlock();
+    fMessageQueue->Unlock();
 
- return retVal;
+    return retVal;
 }
 
 
 void
 BLooper::DispatchMessageW(BMessage *msg, BHandler *target)
 {
- if(target == __null) target = fPreferredHandler;
- if(!target || target->Looper() != this) return;
+    if(target == __null) target = fPreferredHandler;
+    if(!target || target->Looper() != this) return;
 
- if(msg->what == B_QUIT_REQUESTED && target == this)
- {
-  if(QuitRequested()) PostMessageW(_QUIT_);
- }
- else
- {
-  target->MessageReceived(msg);
- }
+    if(msg->what == B_QUIT_REQUESTED && target == this)
+    {
+        if(QuitRequested()) PostMessageW(_QUIT_);
+    }
+    else
+    {
+        target->MessageReceived(msg);
+    }
 }
 
 
@@ -96541,112 +96575,112 @@ BLooper::MessageReceived(BMessage *msg)
 bool
 BLooper::IsRunning() const
 {
- BLocker *hLocker = bhapi::get_handler_operator_locker();
- BAutolock <BLocker>autolock(hLocker);
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
+    BAutolock <BLocker>autolock(hLocker);
 
- if(fProxy != __null) return _Proxy()->IsRunning();
- if(fThread == __null || bhapi::get_thread_run_state(fThread) == BHAPI_THREAD_READY) return false;
+    if(fProxy != __null) return _Proxy()->IsRunning();
+    if(fThread == __null || bhapi::get_thread_run_state(fThread) == BHAPI_THREAD_READY) return false;
 
- return true;
+    return true;
 }
 
 
 void*
 BLooper::Run()
 {
- BLocker *hLocker = bhapi::get_handler_operator_locker();
- BAutolock <BLocker>autolock(hLocker);
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
+    BAutolock <BLocker>autolock(hLocker);
 
- if(fProxy)
- {
-  BHAPI_WARNING("[APP]: %s --- The Looper has proxy, run aborted.", __PRETTY_FUNCTION__);
-  return __null;
- }
+    if(fProxy)
+    {
+        BHAPI_WARNING("[APP]: %s --- The Looper has proxy, run aborted.", __PRETTY_FUNCTION__);
+        return __null;
+    }
 
- if(!fThread)
- {
-  if((fThread = bhapi::create_thread(_task, fThreadPriority, this, __null)) == __null)
-   BHAPI_ERROR("[APP]: %s -- Unable to create thread!", __PRETTY_FUNCTION__);
- }
- else if(bhapi::get_thread_run_state(fThread) != BHAPI_THREAD_READY)
- {
-  BHAPI_ERROR("[APP]: %s --- Thread must run only one time!", __PRETTY_FUNCTION__);
- }
+    if(!fThread)
+    {
+        if((fThread = bhapi::create_thread(_task, fThreadPriority, this, __null)) == __null)
+            BHAPI_ERROR("[APP]: %s -- Unable to create thread!", __PRETTY_FUNCTION__);
+    }
+    else if(bhapi::get_thread_run_state(fThread) != BHAPI_THREAD_READY)
+    {
+        BHAPI_ERROR("[APP]: %s --- Thread must run only one time!", __PRETTY_FUNCTION__);
+    }
 
     if(bhapi::resume_thread(fThread) == B_OK)
-  return fThread;
- else
-  return __null;
+        return fThread;
+    else
+        return __null;
 }
 
 
 bool
 BLooper::QuitRequested()
 {
- return true;
+    return true;
 }
 
 
 void
 BLooper::Quit()
 {
- if(!IsLockedByCurrentThread())
-  BHAPI_ERROR("[APP]: %s --- Looper must LOCKED before this call!", __PRETTY_FUNCTION__);
+    if(!IsLockedByCurrentThread())
+        BHAPI_ERROR("[APP]: %s --- Looper must LOCKED before this call!", __PRETTY_FUNCTION__);
 
- if(fDeconstructing) return;
+    if(fDeconstructing) return;
 
- BLocker *hLocker = bhapi::get_handler_operator_locker();
- hLocker->Lock();
- if(bhapi::get_thread_id(fThread) == bhapi::get_current_thread_id() && Proxy() == this)
-  BHAPI_ERROR("\n**************************************************************************\n*                           [APP]: BLooper                               *\n*                                                                        *\n*      Task must call \"PostMessage(B_QUIT_REQUESTED)\" instead of         *\n*      \"Quit()\" within the looper!!!                                     *\n*                                                                        *\n**************************************************************************\n\n");
-
-
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
+    hLocker->Lock();
+    if(bhapi::get_thread_id(fThread) == bhapi::get_current_thread_id() && Proxy() == this)
+        BHAPI_ERROR("\n**************************************************************************\n*                           [APP]: BLooper                               *\n*                                                                        *\n*      Task must call \"PostMessage(B_QUIT_REQUESTED)\" instead of         *\n*      \"Quit()\" within the looper!!!                                     *\n*                                                                        *\n**************************************************************************\n\n");
 
 
 
 
 
- void *thread = __null;
- if(fThread)
- {
-  if((thread = bhapi::open_thread(bhapi::get_thread_id(fThread))) == __null)
-   BHAPI_ERROR("[APP]: %s --- Unable to duplicate the thread!", __PRETTY_FUNCTION__);
- }
- hLocker->Unlock();
 
- if(thread)
- {
-  fDeconstructing = true;
 
-  if(PostMessageW(_QUIT_) != B_OK)
-   BHAPI_ERROR("[APP]: %s --- Send \"_QUIT_\" to looper error!", __PRETTY_FUNCTION__);
-  b_uint64 token = bhapi::get_handler_token(this);
-  fLocksCount = (const long long)(0);
-  b_int64 locksCount = bhapi::count_locker_locks(fLocker);
-  while((locksCount--) > (const long long)(0)) bhapi::unlock_locker(fLocker);
+    void *thread = __null;
+    if(fThread)
+    {
+        if((thread = bhapi::open_thread(bhapi::get_thread_id(fThread))) == __null)
+            BHAPI_ERROR("[APP]: %s --- Unable to duplicate the thread!", __PRETTY_FUNCTION__);
+    }
+    hLocker->Unlock();
 
-  b_status_t status;
+    if(thread)
+    {
+        fDeconstructing = true;
+
+        if(PostMessageW(_QUIT_) != B_OK)
+            BHAPI_ERROR("[APP]: %s --- Send \"_QUIT_\" to looper error!", __PRETTY_FUNCTION__);
+        b_uint64 token = bhapi::get_handler_token(this);
+        fLocksCount = (const long long)(0);
+        b_int64 locksCount = bhapi::count_locker_locks(fLocker);
+        while((locksCount--) > (const long long)(0)) bhapi::unlock_locker(fLocker);
+
+        b_status_t status;
         bhapi::wait_for_thread(thread, &status);
-  if(bhapi::get_thread_run_state(thread) != BHAPI_THREAD_EXITED)
-   if(bhapi::lock_looper_of_handler(token, 9223372036854775807LL) == B_OK) delete this;
-  bhapi::delete_thread(thread);
- }
- else
- {
-  delete this;
- }
+        if(bhapi::get_thread_run_state(thread) != BHAPI_THREAD_EXITED)
+            if(bhapi::lock_looper_of_handler(token, 9223372036854775807LL) == B_OK) delete this;
+        bhapi::delete_thread(thread);
+    }
+    else
+    {
+        delete this;
+    }
 }
 
 
 void
 BLooper::_taskError(void *data)
 {
- bool *exited = (bool*)data;
- bool showError = (!exited || *exited == false);
- if(exited) delete exited;
- if(showError)
- {
-  BHAPI_ERROR("\n**************************************************************************\n*                           [APP]: BLooper                               *\n*                                                                        *\n*      Task must call \"PostMessage(B_QUIT_REQUESTED)\" instead of         *\n*      \"b_exit_thread\" within the looper!!!                            *\n*                                                                        *\n**************************************************************************\n\n");
+    bool *exited = (bool*)data;
+    bool showError = (!exited || *exited == false);
+    if(exited) delete exited;
+    if(showError)
+    {
+        BHAPI_ERROR("\n**************************************************************************\n*                           [APP]: BLooper                               *\n*                                                                        *\n*      Task must call \"PostMessage(B_QUIT_REQUESTED)\" instead of         *\n*      \"b_exit_thread\" within the looper!!!                            *\n*                                                                        *\n**************************************************************************\n\n");
 
 
 
@@ -96654,620 +96688,620 @@ BLooper::_taskError(void *data)
 
 
 
- }
+    }
 }
 
 
 BHandler*
 BLooper::_MessageTarget(const BMessage *msg, bool *preferred)
 {
- if(msg == __null || msg->fTeam != bhapi::get_current_team_id()) return __null;
- BHandler *handler = __null;
+    if(msg == __null || msg->fTeam != bhapi::get_current_team_id()) return __null;
+    BHandler *handler = __null;
     if(bhapi::ref_handler(msg->fTargetToken))
- {
-  if(bhapi::get_handler_create_time_stamp(msg->fTargetToken) == msg->fTargetTokenTimestamp &&
-     bhapi::get_handler_looper(msg->fTargetToken) == this) handler = bhapi::get_handler(msg->fTargetToken);
-  bhapi::unref_handler(msg->fTargetToken);
- }
- if(preferred) *preferred = (msg->fTargetToken == 9223372036854775807LL);
- return handler;
+    {
+        if(bhapi::get_handler_create_time_stamp(msg->fTargetToken) == msg->fTargetTokenTimestamp &&
+           bhapi::get_handler_looper(msg->fTargetToken) == this) handler = bhapi::get_handler(msg->fTargetToken);
+        bhapi::unref_handler(msg->fTargetToken);
+    }
+    if(preferred) *preferred = (msg->fTargetToken == 9223372036854775807LL);
+    return handler;
 }
 
 
 b_status_t
 BLooper::_task(void *arg)
 {
- BLooper *self = (BLooper*)arg;
- if(self == __null) return B_ERROR;
+    BLooper *self = (BLooper*)arg;
+    if(self == __null) return B_ERROR;
 
     void *sem = bhapi::clone_sem_by_source(self->fSem);
- if(!sem) return B_ERROR;
+    if(!sem) return B_ERROR;
 
- bool *threadExited = new bool;
- if(!threadExited)
- {
-  bhapi::delete_sem(sem);
-  return B_NO_MEMORY;
- }
- *threadExited = false;
+    bool *threadExited = new bool;
+    if(!threadExited)
+    {
+        bhapi::delete_sem(sem);
+        return B_NO_MEMORY;
+    }
+    *threadExited = false;
 
     if(bhapi::on_exit_thread(_taskError, (void*)threadExited) != B_OK)
- {
-  delete threadExited;
-  bhapi::delete_sem(sem);
-  return B_ERROR;
- }
- self->fThreadExited = threadExited;
+    {
+        delete threadExited;
+        bhapi::delete_sem(sem);
+        return B_ERROR;
+    }
+    self->fThreadExited = threadExited;
 
     if(bhapi::on_exit_thread((void (*)(void*))bhapi::delete_sem, sem) != B_OK)
- {
-  *threadExited = true;
-  bhapi::delete_sem(sem);
-  return B_ERROR;
- }
+    {
+        *threadExited = true;
+        bhapi::delete_sem(sem);
+        return B_ERROR;
+    }
 
- b_status_t status = _taskLooper(self, sem);
+    b_status_t status = _taskLooper(self, sem);
 
- *threadExited = true;
+    *threadExited = true;
 
- return status;
+    return status;
 }
 
 
 BLooper*
 BLooper::_GetNextClient(BLooper *client) const
 {
- if(client == __null || _Proxy() != client->_Proxy()) return __null;
- if(client->fClients.CountItems() > 0) return (BLooper*)client->fClients.FirstItem();
- if(client->fProxy)
- {
-  if(client->fProxy->fClients.LastItem() == (void*)client)
-  {
-   BLooper *retVal = __null;
-   while(true)
-   {
-    client = client->fProxy;
-    if(client == __null || client->fProxy == __null) break;
-    retVal = (BLooper*)client->fProxy->fClients.ItemAt(client->fProxy->fClients.IndexOf(client) + 1);
-    if(retVal != __null) break;
-   }
-   return retVal;
-  }
-  return((BLooper*)client->fProxy->fClients.ItemAt(client->fProxy->fClients.IndexOf(client) + 1));
- }
+    if(client == __null || _Proxy() != client->_Proxy()) return __null;
+    if(client->fClients.CountItems() > 0) return (BLooper*)client->fClients.FirstItem();
+    if(client->fProxy)
+    {
+        if(client->fProxy->fClients.LastItem() == (void*)client)
+        {
+            BLooper *retVal = __null;
+            while(true)
+            {
+                client = client->fProxy;
+                if(client == __null || client->fProxy == __null) break;
+                retVal = (BLooper*)client->fProxy->fClients.ItemAt(client->fProxy->fClients.IndexOf(client) + 1);
+                if(retVal != __null) break;
+            }
+            return retVal;
+        }
+        return((BLooper*)client->fProxy->fClients.ItemAt(client->fProxy->fClients.IndexOf(client) + 1));
+    }
 
- return __null;
+    return __null;
 }
 
 
 b_status_t
 BLooper::_taskLooper(BLooper *self, void *sem)
 {
- BLocker *hLocker = bhapi::get_handler_operator_locker();
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
 
- hLocker->Lock();
+    hLocker->Lock();
 
- if(self == __null || self->fThread == __null || bhapi::get_thread_id(self->fThread) != bhapi::get_current_thread_id() || sem == __null)
- {
-  hLocker->Unlock();
-  return B_ERROR;
- }
-
- hLocker->Unlock();
-
- b_uint8 flags = 0;
- BLooper *looper = __null;
- BMessageQueue *queue = __null;
- while(flags < 2)
- {
-  looper = self;
-
-  self->Lock();
-  queue = self->fMessageQueue;
-  while(looper != __null && queue != __null)
-  {
-   BMessage *aMsg = __null;
-
-   queue->Lock();
-   if(queue->IsEmpty() == false)
-   {
-    aMsg = queue->FindMessage((b_int32)0);
-    if(aMsg->what == _QUIT_)
+    if(self == __null || self->fThread == __null || bhapi::get_thread_id(self->fThread) != bhapi::get_current_thread_id() || sem == __null)
     {
-     queue->Unlock();
-     flags = (looper == self ? 2 : 1);
-
-     looper->Lock();
-     if(looper->fDeconstructing == false)
-     {
-      looper->fDeconstructing = true;
-      looper->Quit();
-     }
-     delete looper;
-
-     break;
-    }
-    aMsg = queue->NextMessage();
-   }
-   queue->Unlock();
-
-   if(aMsg)
-   {
-    bool preferred = false;
-    BHandler *handler = looper->_MessageTarget(aMsg, &preferred);
-    if(handler == __null && !preferred)
-    {
-     delete aMsg;
-     continue;
+        hLocker->Unlock();
+        return B_ERROR;
     }
 
-    looper->Lock();
-    looper->_FilterAndDispatchMessage(aMsg, handler);
-    bool isClient = (looper->Proxy() == self ? true : false);
-    looper->Unlock();
+    hLocker->Unlock();
 
-    if(isClient) continue;
+    b_uint8 flags = 0;
+    BLooper *looper = __null;
+    BMessageQueue *queue = __null;
+    while(flags < 2)
+    {
+        looper = self;
 
-    flags = 1;
-    break;
-   }
+        self->Lock();
+        queue = self->fMessageQueue;
+        while(looper != __null && queue != __null)
+        {
+            BMessage *aMsg = __null;
 
-   looper = self->_GetNextClient(looper);
-   queue = (looper == __null ? __null : looper->fMessageQueue);
-  }
+            queue->Lock();
+            if(queue->IsEmpty() == false)
+            {
+                aMsg = queue->FindMessage((b_int32)0);
+                if(aMsg->what == _QUIT_)
+                {
+                    queue->Unlock();
+                    flags = (looper == self ? 2 : 1);
 
-  if(flags >= 2) break;
+                    looper->Lock();
+                    if(looper->fDeconstructing == false)
+                    {
+                        looper->fDeconstructing = true;
+                        looper->Quit();
+                    }
+                    delete looper;
 
-  self->Unlock();
-  if(flags > 0)
-  {
-   if(flags == 1) flags = 0;
-   continue;
-  }
+                    break;
+                }
+                aMsg = queue->NextMessage();
+            }
+            queue->Unlock();
+
+            if(aMsg)
+            {
+                bool preferred = false;
+                BHandler *handler = looper->_MessageTarget(aMsg, &preferred);
+                if(handler == __null && !preferred)
+                {
+                    delete aMsg;
+                    continue;
+                }
+
+                looper->Lock();
+                looper->_FilterAndDispatchMessage(aMsg, handler);
+                bool isClient = (looper->Proxy() == self ? true : false);
+                looper->Unlock();
+
+                if(isClient) continue;
+
+                flags = 1;
+                break;
+            }
+
+            looper = self->_GetNextClient(looper);
+            queue = (looper == __null ? __null : looper->fMessageQueue);
+        }
+
+        if(flags >= 2) break;
+
+        self->Unlock();
+        if(flags > 0)
+        {
+            if(flags == 1) flags = 0;
+            continue;
+        }
 
         bhapi::sem_info sem_info;
         if(bhapi::acquire_sem(sem) != B_OK || bhapi::get_sem_info(sem, &sem_info) != B_OK) sem_info.closed = true;
 
-  if(sem_info.closed) break;
- }
+        if(sem_info.closed) break;
+    }
 
- return B_OK;
+    return B_OK;
 }
 
 
 BMessage* BLooper::NextLooperMessage(b_bigtime_t timeout = 9223372036854775807LL)
 {
- b_bigtime_t prevTime = bhapi::real_time_clock_usecs();
+    b_bigtime_t prevTime = bhapi::real_time_clock_usecs();
 
- if(!IsLockedByCurrentThread())
-  BHAPI_ERROR("[APP]: %s --- Looper must LOCKED before this call!", __PRETTY_FUNCTION__);
+    if(!IsLockedByCurrentThread())
+        BHAPI_ERROR("[APP]: %s --- Looper must LOCKED before this call!", __PRETTY_FUNCTION__);
 
- BLocker *hLocker = bhapi::get_handler_operator_locker();
- hLocker->Lock();
- void *sem = __null;
- BLooper *proxy = _Proxy();
- if(proxy == __null || proxy->fThread == __null || bhapi::get_thread_id(proxy->fThread) != bhapi::get_current_thread_id() ||
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
+    hLocker->Lock();
+    void *sem = __null;
+    BLooper *proxy = _Proxy();
+    if(proxy == __null || proxy->fThread == __null || bhapi::get_thread_id(proxy->fThread) != bhapi::get_current_thread_id() ||
        (sem = bhapi::clone_sem_by_source(proxy->fSem)) == __null)
- {
-  hLocker->Unlock();
-  return __null;
- }
- hLocker->Unlock();
+    {
+        hLocker->Unlock();
+        return __null;
+    }
+    hLocker->Unlock();
 
- b_uint8 flags = 0;
- BLooper *looper = __null;
- BMessageQueue *queue = __null;
- BMessage *retVal = __null;
+    b_uint8 flags = 0;
+    BLooper *looper = __null;
+    BMessageQueue *queue = __null;
+    BMessage *retVal = __null;
 
- while(true)
- {
-  looper = proxy;
+    while(true)
+    {
+        looper = proxy;
 
-  proxy->Lock();
-  queue = proxy->fMessageQueue;
-  while(looper != __null && queue != __null)
-  {
+        proxy->Lock();
+        queue = proxy->fMessageQueue;
+        while(looper != __null && queue != __null)
+        {
             if(proxy == bhapi::app) BApplication::dispatch_message_runners();
 
-   BMessage *aMsg = __null;
+            BMessage *aMsg = __null;
 
-   queue->Lock();
-   if(queue->IsEmpty() == false)
-   {
-    aMsg = queue->FindMessage((b_int32)0);
-    if(aMsg->what == _QUIT_)
-    {
-     queue->Unlock();
-     flags = ((looper == proxy || looper == this) ? 2 : 1);
+            queue->Lock();
+            if(queue->IsEmpty() == false)
+            {
+                aMsg = queue->FindMessage((b_int32)0);
+                if(aMsg->what == _QUIT_)
+                {
+                    queue->Unlock();
+                    flags = ((looper == proxy || looper == this) ? 2 : 1);
 
-     if(flags == 1)
-     {
-      looper->Lock();
-      if(looper->fLocksCount == (const long long)(1))
-      {
-       if(looper->fDeconstructing == false)
-       {
-        looper->fDeconstructing = true;
-        looper->Quit();
-       }
-       delete looper;
-      }
-      else
-      {
-       looper->Unlock();
-       looper = proxy->_GetNextClient(looper);
-       queue = (looper == __null ? __null : looper->fMessageQueue);
-       continue;
-      }
-     }
+                    if(flags == 1)
+                    {
+                        looper->Lock();
+                        if(looper->fLocksCount == (const long long)(1))
+                        {
+                            if(looper->fDeconstructing == false)
+                            {
+                                looper->fDeconstructing = true;
+                                looper->Quit();
+                            }
+                            delete looper;
+                        }
+                        else
+                        {
+                            looper->Unlock();
+                            looper = proxy->_GetNextClient(looper);
+                            queue = (looper == __null ? __null : looper->fMessageQueue);
+                            continue;
+                        }
+                    }
 
-     break;
-    }
-    aMsg = queue->NextMessage();
-   }
-   queue->Unlock();
+                    break;
+                }
+                aMsg = queue->NextMessage();
+            }
+            queue->Unlock();
 
-   if(aMsg)
-   {
-    bool preferred = false;
-    BHandler *handler = looper->_MessageTarget(aMsg, &preferred);
-    if(handler == __null && !preferred)
-    {
-     delete aMsg;
-     continue;
-    }
+            if(aMsg)
+            {
+                bool preferred = false;
+                BHandler *handler = looper->_MessageTarget(aMsg, &preferred);
+                if(handler == __null && !preferred)
+                {
+                    delete aMsg;
+                    continue;
+                }
 
-    if(looper == this)
-    {
-     retVal = aMsg;
-     flags = 2;
-     break;
-    }
+                if(looper == this)
+                {
+                    retVal = aMsg;
+                    flags = 2;
+                    break;
+                }
 
-    looper->Lock();
-    looper->_FilterAndDispatchMessage(aMsg, handler);
-    bool isClient = (looper->Proxy() == proxy ? true : false);
-    looper->Unlock();
+                looper->Lock();
+                looper->_FilterAndDispatchMessage(aMsg, handler);
+                bool isClient = (looper->Proxy() == proxy ? true : false);
+                looper->Unlock();
 
-    if(isClient && Proxy() == proxy) continue;
+                if(isClient && Proxy() == proxy) continue;
 
-    flags = 1;
-    break;
-   }
+                flags = 1;
+                break;
+            }
 
-   looper = proxy->_GetNextClient(looper);
-   queue = (looper == __null ? __null : looper->fMessageQueue);
-  }
-  proxy->Unlock();
+            looper = proxy->_GetNextClient(looper);
+            queue = (looper == __null ? __null : looper->fMessageQueue);
+        }
+        proxy->Unlock();
 
-  if(flags >= 2) break;
-  if(Proxy() != proxy)
-  {
+        if(flags >= 2) break;
+        if(Proxy() != proxy)
+        {
             bhapi::release_sem(sem);
-   break;
-  }
-  if(flags == 1)
-  {
-   flags = 0;
-   continue;
-  }
+            break;
+        }
+        if(flags == 1)
+        {
+            flags = 0;
+            continue;
+        }
 
         bhapi::sem_info sem_info;
-  b_status_t status = B_ERROR;
-  b_bigtime_t waitTime = timeout;
-  if(timeout >= (const long long)(0))
-  {
-   if(proxy == bhapi::app)
-   {
-    hLocker->Lock();
-    waitTime = ((timeout)>((BApplication::sRunnerMinimumInterval == (const long long)(0) ? 9223372036854775807LL : ((BApplication::sRunnerMinimumInterval)>((const long long)(50000))?(BApplication::sRunnerMinimumInterval):((const long long)(50000)))))?((BApplication::sRunnerMinimumInterval == (const long long)(0) ? 9223372036854775807LL : ((BApplication::sRunnerMinimumInterval)>((const long long)(50000))?(BApplication::sRunnerMinimumInterval):((const long long)(50000))))):(timeout))
+        b_status_t status = B_ERROR;
+        b_bigtime_t waitTime = timeout;
+        if(timeout >= (const long long)(0))
+        {
+            if(proxy == bhapi::app)
+            {
+                hLocker->Lock();
+                waitTime = ((timeout)>((BApplication::sRunnerMinimumInterval == (const long long)(0) ? 9223372036854775807LL : ((BApplication::sRunnerMinimumInterval)>((const long long)(50000))?(BApplication::sRunnerMinimumInterval):((const long long)(50000)))))?((BApplication::sRunnerMinimumInterval == (const long long)(0) ? 9223372036854775807LL : ((BApplication::sRunnerMinimumInterval)>((const long long)(50000))?(BApplication::sRunnerMinimumInterval):((const long long)(50000))))):(timeout))
 
-                                                                              ;
-    hLocker->Unlock();
-   }
+                                                                                                      ;
+                hLocker->Unlock();
+            }
 
             status = bhapi::acquire_sem_etc(sem, (const long long)(1), B_TIMEOUT, waitTime);
-  }
-  if(bhapi::get_sem_info(sem, &sem_info) != B_OK) sem_info.closed = true;
+        }
+        if(bhapi::get_sem_info(sem, &sem_info) != B_OK) sem_info.closed = true;
 
-  if(sem_info.closed || !(status == B_OK || status == B_TIMED_OUT)) break;
-  if(status == B_TIMED_OUT && waitTime == timeout) break;
-  if(timeout != 9223372036854775807LL)
-  {
-   b_bigtime_t curTime = bhapi::real_time_clock_usecs();
-   timeout -= (curTime - prevTime);
-   prevTime = curTime;
-  }
- }
+        if(sem_info.closed || !(status == B_OK || status == B_TIMED_OUT)) break;
+        if(status == B_TIMED_OUT && waitTime == timeout) break;
+        if(timeout != 9223372036854775807LL)
+        {
+            b_bigtime_t curTime = bhapi::real_time_clock_usecs();
+            timeout -= (curTime - prevTime);
+            prevTime = curTime;
+        }
+    }
 
- bhapi::delete_sem(sem);
- return retVal;
+    bhapi::delete_sem(sem);
+    return retVal;
 }
 
 
 void
 BLooper::DispatchLooperMessage(BMessage *msg)
 {
- if(msg == __null) return;
+    if(msg == __null) return;
 
- if(!IsLockedByCurrentThread())
-  BHAPI_ERROR("[APP]: %s --- Looper must LOCKED before this call!", __PRETTY_FUNCTION__);
- if(Thread() != bhapi::get_current_thread_id())
-  BHAPI_ERROR("[APP]: %s --- Looper must call this within the task of looper!", __PRETTY_FUNCTION__);
+    if(!IsLockedByCurrentThread())
+        BHAPI_ERROR("[APP]: %s --- Looper must LOCKED before this call!", __PRETTY_FUNCTION__);
+    if(Thread() != bhapi::get_current_thread_id())
+        BHAPI_ERROR("[APP]: %s --- Looper must call this within the task of looper!", __PRETTY_FUNCTION__);
 
- bool preferred = false;
- BHandler *handler = _MessageTarget(msg, &preferred);
- if(handler == __null && !preferred)
- {
-  delete msg;
-  return;
- }
+    bool preferred = false;
+    BHandler *handler = _MessageTarget(msg, &preferred);
+    if(handler == __null && !preferred)
+    {
+        delete msg;
+        return;
+    }
 
- _FilterAndDispatchMessage(msg, handler);
+    _FilterAndDispatchMessage(msg, handler);
 }
 
 
 void
 BLooper::_FilterAndDispatchMessage(BMessage *msg, BHandler *_target)
 {
- if(msg == __null) return;
+    if(msg == __null) return;
 
- b_filter_result status = B_DISPATCH_MESSAGE;
- BHandler *handler = _target;
+    bhapi::filter_result status = B_DISPATCH_MESSAGE;
+    BHandler *handler = _target;
 
- if(msg->what != _QUIT_)
- {
-  for(b_int32 i = 0; i < fCommonFilters.CountItems(); i++)
-  {
-   BMessageFilter *filter = (BMessageFilter*)fCommonFilters.ItemAt(i);
-   if((status = filter->doFilter(msg, &handler)) == B_SKIP_MESSAGE) break;
-  }
+    if(msg->what != _QUIT_)
+    {
+        for(b_int32 i = 0; i < fCommonFilters.CountItems(); i++)
+        {
+            BMessageFilter *filter = (BMessageFilter*)fCommonFilters.ItemAt(i);
+            if((status = filter->doFilter(msg, &handler)) == B_SKIP_MESSAGE) break;
+        }
 
-  BHandler *target = (handler == __null ? fPreferredHandler : handler);
-  if(!(status == B_SKIP_MESSAGE || target == __null || target->fFilters == __null))
-  {
-   for(b_int32 i = 0; i < target->fFilters->CountItems(); i++)
-   {
-    BMessageFilter *filter = (BMessageFilter*)target->fFilters->ItemAt(i);
-    if((status = filter->doFilter(msg, &handler)) == B_SKIP_MESSAGE) break;
-   }
-  }
+        BHandler *target = (handler == __null ? fPreferredHandler : handler);
+        if(!(status == B_SKIP_MESSAGE || target == __null || target->fFilters == __null))
+        {
+            for(b_int32 i = 0; i < target->fFilters->CountItems(); i++)
+            {
+                BMessageFilter *filter = (BMessageFilter*)target->fFilters->ItemAt(i);
+                if((status = filter->doFilter(msg, &handler)) == B_SKIP_MESSAGE) break;
+            }
+        }
 
-  if(status == B_SKIP_MESSAGE)
-  {
-   delete msg;
-   return;
-  }
- }
+        if(status == B_SKIP_MESSAGE)
+        {
+            delete msg;
+            return;
+        }
+    }
 
- BMessage *oldMsg = fCurrentMessage;
- fCurrentMessage = msg;
- DispatchMessageW(msg, handler);
- if(fCurrentMessage != __null) delete fCurrentMessage;
- fCurrentMessage = oldMsg;
+    BMessage *oldMsg = fCurrentMessage;
+    fCurrentMessage = msg;
+    DispatchMessageW(msg, handler);
+    if(fCurrentMessage != __null) delete fCurrentMessage;
+    fCurrentMessage = oldMsg;
 }
 
 
 BMessage*
 BLooper::CurrentMessage() const
 {
- if(!fCurrentMessage || !fMessageQueue) return __null;
- if(Thread() != bhapi::get_current_thread_id()) return __null;
+    if(!fCurrentMessage || !fMessageQueue) return __null;
+    if(Thread() != bhapi::get_current_thread_id()) return __null;
 
- return fCurrentMessage;
+    return fCurrentMessage;
 }
 
 
 BMessage*
 BLooper::DetachCurrentMessage()
 {
- if(!fCurrentMessage || !fMessageQueue) return __null;
- if(Thread() != bhapi::get_current_thread_id()) return __null;
+    if(!fCurrentMessage || !fMessageQueue) return __null;
+    if(Thread() != bhapi::get_current_thread_id()) return __null;
 
- BMessage *msg = fCurrentMessage;
- fCurrentMessage = __null;
+    BMessage *msg = fCurrentMessage;
+    fCurrentMessage = __null;
 
- return msg;
+    return msg;
 }
 
 
 BMessageQueue*
 BLooper::MessageQueue() const
 {
- return fMessageQueue;
+    return fMessageQueue;
 }
 
 
 b_int64
 BLooper::Thread() const
 {
- return bhapi::get_thread_id(Proxy()->fThread);
+    return bhapi::get_thread_id(Proxy()->fThread);
 }
 
 
 BLooper*
 BLooper::_Proxy() const
 {
- if(fProxy == __null) return (BLooper*)this;
- return fProxy->_Proxy();
+    if(fProxy == __null) return (BLooper*)this;
+    return fProxy->_Proxy();
 }
 
 
 BLooper*
 BLooper::Proxy() const
 {
- BLocker *hLocker = bhapi::get_handler_operator_locker();
- BAutolock <BLocker>autolock(hLocker);
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
+    BAutolock <BLocker>autolock(hLocker);
 
- return _Proxy();
+    return _Proxy();
 }
-# 1018 "../src/kits/app/Looper.cpp"
+# 1019 "../src/kits/app/Looper.cpp"
 bool
 BLooper::ProxyBy(BLooper *proxy)
 {
     if((this ? (this ? dynamic_cast<BApplication*>(this) : (BApplication*)__null) != __null : false))
- {
-  BHAPI_WARNING("[APP]: %s --- Application can't proxy by other looper.", __PRETTY_FUNCTION__);
-  return(proxy ? false : true);
- }
+    {
+        BHAPI_WARNING("[APP]: %s --- Application can't proxy by other looper.", __PRETTY_FUNCTION__);
+        return(proxy ? false : true);
+    }
 
- if(IsLockedByCurrentThread() == false)
-  BHAPI_ERROR("[APP]: %s --- Looper must LOCKED before this call!", __PRETTY_FUNCTION__);
+    if(IsLockedByCurrentThread() == false)
+        BHAPI_ERROR("[APP]: %s --- Looper must LOCKED before this call!", __PRETTY_FUNCTION__);
 
- BLocker *hLocker = bhapi::get_handler_operator_locker();
- BAutolock <BLocker>autolock(hLocker);
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
+    BAutolock <BLocker>autolock(hLocker);
 
- if(proxy == __null ? (_Proxy() == this) : (_Proxy() == proxy->_Proxy())) return true;
+    if(proxy == __null ? (_Proxy() == this) : (_Proxy() == proxy->_Proxy())) return true;
 
- if(fThread)
- {
-  BHAPI_WARNING("[APP]: %s --- The looper already run, proxy aborted.", __PRETTY_FUNCTION__);
-  return false;
- }
- else if(!(proxy == __null || proxy->IsLockedByCurrentThread()))
- {
-  BHAPI_ERROR("[APP]: %s --- Proxy must LOCKED before this call!", __PRETTY_FUNCTION__);
- }
+    if(fThread)
+    {
+        BHAPI_WARNING("[APP]: %s --- The looper already run, proxy aborted.", __PRETTY_FUNCTION__);
+        return false;
+    }
+    else if(!(proxy == __null || proxy->IsLockedByCurrentThread()))
+    {
+        BHAPI_ERROR("[APP]: %s --- Proxy must LOCKED before this call!", __PRETTY_FUNCTION__);
+    }
 
- return _ProxyBy(proxy);
+    return _ProxyBy(proxy);
 }
 
 
 bool
 BLooper::_ProxyBy(BLooper *proxy)
 {
- if(proxy != fProxy)
- {
-  if(proxy) if(proxy->fClients.AddItem(this) == false) return false;
-  if(fProxy) fProxy->fClients.RemoveItem((void*)this);
- }
+    if(proxy != fProxy)
+    {
+        if(proxy) if(proxy->fClients.AddItem(this) == false) return false;
+        if(fProxy) fProxy->fClients.RemoveItem((void*)this);
+    }
 
- BLooper *oldProxy = fProxy;
- if(proxy == __null)
- {
-  fProxy = __null;
+    BLooper *oldProxy = fProxy;
+    if(proxy == __null)
+    {
+        fProxy = __null;
 
-  fMessageQueue->Lock();
-  if(fSem) bhapi::delete_sem(fSem);
-  fSem = bhapi::create_sem((b_int64)fMessageQueue->CountMessages(), __null);
-  fMessageQueue->Unlock();
+        fMessageQueue->Lock();
+        if(fSem) bhapi::delete_sem(fSem);
+        fSem = bhapi::create_sem((b_int64)fMessageQueue->CountMessages(), __null);
+        fMessageQueue->Unlock();
 
-  void *newLocker = __null;
-  if((newLocker = bhapi::create_locker()) == __null)
-   BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
-  for(b_int64 i = (const long long)(0); i < fLocksCount; i++) bhapi::lock_locker(newLocker);
-  void *oldLocker = fLocker;
-  fLocker = newLocker;
+        void *newLocker = __null;
+        if((newLocker = bhapi::create_locker()) == __null)
+            BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
+        for(b_int64 i = (const long long)(0); i < fLocksCount; i++) bhapi::lock_locker(newLocker);
+        void *oldLocker = fLocker;
+        fLocker = newLocker;
 
-  for(b_int32 i = 0; i < fClients.CountItems(); i++)
-  {
-   BLooper *looper = (BLooper*)fClients.ItemAt(i);
-   looper->_ProxyBy(this);
-  }
+        for(b_int32 i = 0; i < fClients.CountItems(); i++)
+        {
+            BLooper *looper = (BLooper*)fClients.ItemAt(i);
+            looper->_ProxyBy(this);
+        }
 
-  for(b_int64 i = (const long long)(0); i < fLocksCount; i++) bhapi::unlock_locker(oldLocker);
-  bhapi::delete_locker(oldLocker);
- }
- else
- {
-  fProxy = proxy;
+        for(b_int64 i = (const long long)(0); i < fLocksCount; i++) bhapi::unlock_locker(oldLocker);
+        bhapi::delete_locker(oldLocker);
+    }
+    else
+    {
+        fProxy = proxy;
 
-  fMessageQueue->Lock();
-  if(fSem) bhapi::delete_sem(fSem);
+        fMessageQueue->Lock();
+        if(fSem) bhapi::delete_sem(fSem);
         fSem = bhapi::clone_sem_by_source(proxy->fSem);
-  if(fMessageQueue->CountMessages() > 0)
+        if(fMessageQueue->CountMessages() > 0)
             bhapi::release_sem_etc(fSem, (b_int64)fMessageQueue->CountMessages(), 0);
-  fMessageQueue->Unlock();
+        fMessageQueue->Unlock();
 
-  void *newLocker = __null;
+        void *newLocker = __null;
         if((newLocker = bhapi::clone_locker(proxy->fLocker)) == __null)
-   BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
-  for(b_int64 i = (const long long)(0); i < fLocksCount; i++) bhapi::lock_locker(newLocker);
-  void *oldLocker = fLocker;
-  fLocker = newLocker;
+            BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
+        for(b_int64 i = (const long long)(0); i < fLocksCount; i++) bhapi::lock_locker(newLocker);
+        void *oldLocker = fLocker;
+        fLocker = newLocker;
 
-  for(b_int32 i = 0; i < fClients.CountItems(); i++)
-  {
-   BLooper *looper = (BLooper*)fClients.ItemAt(i);
-   looper->_ProxyBy(this);
-  }
+        for(b_int32 i = 0; i < fClients.CountItems(); i++)
+        {
+            BLooper *looper = (BLooper*)fClients.ItemAt(i);
+            looper->_ProxyBy(this);
+        }
 
-  if(!oldProxy) bhapi::close_locker(oldLocker);
-  else for(b_int64 i = (const long long)(0); i < fLocksCount; i++) bhapi::unlock_locker(oldLocker);
-  bhapi::delete_locker(oldLocker);
- }
+        if(!oldProxy) bhapi::close_locker(oldLocker);
+        else for(b_int64 i = (const long long)(0); i < fLocksCount; i++) bhapi::unlock_locker(oldLocker);
+        bhapi::delete_locker(oldLocker);
+    }
 
- return true;
+    return true;
 }
 
 
 BLooper*
 BLooper::LooperForThread(b_thread_id tid)
 {
- void *thread = bhapi::open_thread(tid);
- if(thread == __null) return __null;
+    void *thread = bhapi::open_thread(tid);
+    if(thread == __null) return __null;
 
- BLocker *hLocker = bhapi::get_handler_operator_locker();
- BAutolock <BLocker>autolock(hLocker);
+    BLocker *hLocker = bhapi::get_handler_operator_locker();
+    BAutolock <BLocker>autolock(hLocker);
 
- bhapi::delete_thread(thread);
+    bhapi::delete_thread(thread);
 
- for(b_int32 i = 0; i < sLooperList.CountItems(); i++)
- {
-  BLooper *looper = (BLooper*)sLooperList.ItemAt(i);
-  if(bhapi::get_thread_id(looper->fThread) == tid) return looper;
- }
+    for(b_int32 i = 0; i < sLooperList.CountItems(); i++)
+    {
+        BLooper *looper = (BLooper*)sLooperList.ItemAt(i);
+        if(bhapi::get_thread_id(looper->fThread) == tid) return looper;
+    }
 
- return __null;
+    return __null;
 }
 
 
 bool
 BLooper::AddCommonFilter(BMessageFilter *filter)
 {
- if(filter == __null || filter->fHandler != __null || fCommonFilters.AddItem(filter) == false) return false;
- filter->fHandler = this;
- return true;
+    if(filter == __null || filter->fHandler != __null || fCommonFilters.AddItem(filter) == false) return false;
+    filter->fHandler = this;
+    return true;
 }
 
 
 bool
 BLooper::RemoveCommonFilter(BMessageFilter *filter)
 {
- if(filter == __null || filter->fHandler != this || fCommonFilters.RemoveItem(filter) == false) return false;
- filter->fHandler = __null;
- return true;
+    if(filter == __null || filter->fHandler != this || fCommonFilters.RemoveItem(filter) == false) return false;
+    filter->fHandler = __null;
+    return true;
 }
 
 
 const BList*
 BLooper::CommonFilterList() const
 {
- return(&fCommonFilters);
+    return(&fCommonFilters);
 }
 
 
 bool
 BLooper::SetCommonFilterList(const BList *filterList)
 {
- while(fCommonFilters.CountItems() > 0)
- {
-  BMessageFilter *filter = (BMessageFilter*)fCommonFilters.ItemAt(0);
-  BLooper::RemoveCommonFilter(filter);
-  delete filter;
- }
+    while(fCommonFilters.CountItems() > 0)
+    {
+        BMessageFilter *filter = (BMessageFilter*)fCommonFilters.ItemAt(0);
+        BLooper::RemoveCommonFilter(filter);
+        delete filter;
+    }
 
- if(filterList != __null)
- {
-  for(b_int32 i = 0; i < filterList->CountItems(); i++) AddCommonFilter((BMessageFilter*)filterList->ItemAt(i));
- }
+    if(filterList != __null)
+    {
+        for(b_int32 i = 0; i < filterList->CountItems(); i++) AddCommonFilter((BMessageFilter*)filterList->ItemAt(i));
+    }
 
- return true;
+    return true;
 }
 
 
 bool
 BLooper::IsDependsOnOthersWhenQuitRequested() const
 {
- return false;
+    return false;
 }

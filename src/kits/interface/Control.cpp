@@ -30,7 +30,7 @@
 #include "Control.h"
 #include "Window.h"
 
-#include "../support/String.h"
+#include "../support/StringClass.h"
 #include "../support/Errors.h"
 #include "../kernel/OS.h"
 #include "../app/Looper.h"

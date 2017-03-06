@@ -65,7 +65,7 @@ private:
 };
 
 
-BMenu::BMenu(BRect frame, const char *title, b_uint32 resizeMode, b_uint32 flags, b_menu_layout layout, bool resizeToFit)
+BMenu::BMenu(BRect frame, const char *title, b_uint32 resizeMode, b_uint32 flags, bhapi::menu_layout layout, bool resizeToFit)
 	: BView(frame, title, resizeMode, flags), fSuperitem(NULL),
 	  fRadioMode(false), fLabelFromMarked(false),
 	  fSelectedIndex(-1), fTrackingIndex(-1), fMarkedIndex(-1), fShowSubmenuByKeyDown(false)
@@ -80,7 +80,7 @@ BMenu::BMenu(BRect frame, const char *title, b_uint32 resizeMode, b_uint32 flags
 }
 
 
-BMenu::BMenu(const char *title, b_menu_layout layout)
+BMenu::BMenu(const char *title, bhapi::menu_layout layout)
 	: BView(BRect(0, 0, 10, 10), title, B_FOLLOW_NONE, B_WILL_DRAW), fSuperitem(NULL),
 	  fRadioMode(false), fLabelFromMarked(false),
 	  fSelectedIndex(-1), fTrackingIndex(-1), fMarkedIndex(-1), fShowSubmenuByKeyDown(false)
@@ -1273,7 +1273,7 @@ BMenu::Draw(BRect updateRect)
 }
 
 
-b_menu_layout
+bhapi::menu_layout
 BMenu::Layout() const
 {
 	return fLayout;
@@ -1281,7 +1281,7 @@ BMenu::Layout() const
 
 
 void
-BMenu::SetLayout(b_menu_layout layout, float width, float height, bool resizeToFit)
+BMenu::SetLayout(bhapi::menu_layout layout, float width, float height, bool resizeToFit)
 {
 	fLayout = layout;
 	fResizeToFit = resizeToFit;

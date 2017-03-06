@@ -35,7 +35,7 @@
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"
 
-#include <string.h>
+
 #include <stdlib.h>
 #include <math.h>
 using namespace std;

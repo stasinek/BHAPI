@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -32,8 +32,6 @@
  */
 #ifndef BHAPI_BEEP_H
 #define BHAPI_BEEP_H
-
-#include "SupportDefs.h"
 
 #ifdef __cplusplus
 // These functions are only exported for C++

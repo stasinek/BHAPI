@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "../support/String.h"
+#include "../support/StringClass.h"
 #include "../app/AppDefs.h"
 #include "../app/Message.h"
 

@@ -33,7 +33,7 @@
 #include "../kernel/Debug.h"
 
 #include <math.h>
-#include <string.h>
+
 
 namespace bhapi {
 LOCALBHAPI bool get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext);

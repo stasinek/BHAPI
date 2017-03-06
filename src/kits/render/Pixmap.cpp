@@ -31,9 +31,9 @@
 #include "../support/StringArray.h"
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"
-#include "../support/String.h"
+#include "../support/StringClass.h"
 
-#include <string.h>
+
 #include <stdlib.h>
 using namespace bhapi;
 

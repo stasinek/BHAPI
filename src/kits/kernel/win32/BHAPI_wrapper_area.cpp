@@ -30,7 +30,7 @@
 #include "../../support/SupportDefs.h"
 #include "../../kernel/Kernel.h"
 #include "../../kernel/Debug.h"
-#include "../../support/String.h"
+#include "../../support/StringClass.h"
 #include "../../support/Errors.h"
 
 #include <winsock2.h>

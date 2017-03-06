@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,8 +30,6 @@
 #ifndef BHAPI_CONTROL_H
 #define BHAPI_CONTROL_H
 
-#include "../support/SupportDefs.h"
-
 #ifdef __cplusplus /* Just for C++ */
 namespace bhapi {
 #endif
@@ -48,37 +46,38 @@ class BRect;
 class BMessage;
 #include "../interface/View.h"
 #include "../app/Invoker.h"
+#include "../support/SupportDefs.h"
 class IMPEXPBHAPI BControl : public BView, public BInvoker {
 public:
-	BControl(BRect frame,
-		 const char *name,
-		 const char *label,
-		 BMessage *message,
+    BControl(BRect frame,
+         const char *name,
+         const char *label,
+         BMessage *message,
          b_uint32 resizeMode,
          b_uint32 flags);
-	virtual ~BControl();
+    virtual ~BControl();
 
-	virtual void SetLabel(const char *label);
-	const char* Label() const;
+    virtual void SetLabel(const char *label);
+    const char* Label() const;
 
     virtual void SetValue(b_int32 value);
     b_int32 Value() const;
 
-	virtual b_status_t Invoke(const BMessage *msg = NULL);
+    virtual b_status_t Invoke(const BMessage *msg = NULL);
 
-	virtual void AttachedToWindow();
-	virtual void DetachedFromWindow();
+    virtual void AttachedToWindow();
+    virtual void DetachedFromWindow();
 
-	virtual void MakeFocus(bool focusState = true);
+    virtual void MakeFocus(bool focusState = true);
 
 protected:
-	bool IsFocusChanging() const;
+    bool IsFocusChanging() const;
     void SetValueNoUpdate(b_int32 value);
 
 private:
-	char *fLabel;
+    char *fLabel;
     b_int32 fValue;
-	bool fFocusChanging;
+    bool fFocusChanging;
 };
 
 #endif /* __cplusplus */

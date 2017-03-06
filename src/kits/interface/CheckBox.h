@@ -1,5 +1,5 @@
-/* --------------------------------------------------------------------------
- * 
+﻿/* --------------------------------------------------------------------------
+ *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,38 +22,36 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: CheckBox.h
  * Description: BCheckBox --- A view could change it's state when click the box
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #ifndef BHAPI_CHECK_BOX_H
 #define BHAPI_CHECK_BOX_H
 
-#include "../interface/Control.h"
-
 #ifdef __cplusplus /* Just for C++ */
-
+#include "../interface/Control.h"
 class IMPEXPBHAPI BCheckBox : public BControl {
 public:
     BCheckBox(BRect frame,
-		  const char *name,
-		  const char *label,
-		  BMessage *message,
+          const char *name,
+          const char *label,
+          BMessage *message,
           b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
           b_uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
     virtual ~BCheckBox();
 
-	virtual void	SetLabel(const char *label);
+    virtual void	SetLabel(const char *label);
 
-	virtual void	Draw(BRect updateRect);
+    virtual void	Draw(BRect updateRect);
     virtual void	MouseDown(BPoint where);
     virtual void	KeyDown(const char *bytes, b_int32 numBytes);
     virtual void	SetFont(const BFont *font, b_uint8 mask = B_FONT_ALL);
-	virtual void	WindowActivated(bool state);
+    virtual void	WindowActivated(bool state);
 
-	virtual void	GetPreferredSize(float *width, float *height);
+    virtual void	GetPreferredSize(float *width, float *height);
 };
 
 #endif /* __cplusplus */

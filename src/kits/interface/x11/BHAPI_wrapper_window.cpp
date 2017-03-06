@@ -34,7 +34,7 @@
 #include "BHAPI_wrapper_x11.h"
 
 #include "../support/Autolock.h"
-#include "../support/String.h"
+#include "../support/StringClass.h"
 #include "../support/ClassInfo.h"
 #include "../app/Application.h"
 
@@ -58,8 +58,8 @@ EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine, b_int32 x, b_int
 	BGraphicsDrawable::SetBackgroundColor(whiteColor);
 	xBackground = fEngine->xWhitePixel;
 	xBackgroundAlloced = false;
-	fLook = (b_window_look)0;
-	fFeel = (b_window_feel)0;
+	fLook = (bhapi::window_look)0;
+	fFeel = (bhapi::window_feel)0;
 
 	XSetWindowAttributes xAttributes;
 
@@ -267,7 +267,7 @@ EXGraphicsWindow::SetFlags(b_uint32 flags)
 
 
 b_status_t
-EXGraphicsWindow::SetLook(b_window_look look)
+EXGraphicsWindow::SetLook(bhapi::window_look look)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -339,7 +339,7 @@ EXGraphicsWindow::SetLook(b_window_look look)
 
 
 b_status_t
-EXGraphicsWindow::SetFeel(b_window_feel feel)
+EXGraphicsWindow::SetFeel(bhapi::window_feel feel)
 {
 	if(fEngine == NULL) return B_ERROR;
 

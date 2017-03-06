@@ -1,5 +1,5 @@
-/* --------------------------------------------------------------------------
- * 
+﻿/* --------------------------------------------------------------------------
+ *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,64 +22,66 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: TabView.h
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #ifndef BHAPI_TAB_VIEW_H
 #define BHAPI_TAB_VIEW_H
 
-#include "../support/List.h"
-#include "../interface/View.h"
-
+#ifdef __cplusplus /* Just for C++ */
+namespace bhapi {
+#endif
 typedef enum {
     B_TAB_FIRST = 0,
     B_TAB_FRONT,
     B_TAB_ANY
-} b_tab_position;
+} tab_position;
+#ifdef __cplusplus /* Just for C++ */
+} // namespace
+#endif
 
 #ifdef __cplusplus /* Just for C++ */
-
 class BTabView;
-
-
+#include "../interface/View.h"
+#include "../support/List.h"
 class IMPEXPBHAPI BTab : public BArchivable {
 public:
     BTab(BView *targetView = NULL);
     virtual ~BTab();
 
-	virtual void		SetLabel(const char *label);
-	const char		*Label() const;
+    virtual void		SetLabel(const char *label);
+    const char		*Label() const;
 
-	virtual void		Select();
-	virtual void		Deselect();
-	bool			IsSelected() const;
+    virtual void		Select();
+    virtual void		Deselect();
+    bool			IsSelected() const;
 
-	virtual void		SetEnabled(bool state);
-	bool			IsEnabled() const;
+    virtual void		SetEnabled(bool state);
+    bool			IsEnabled() const;
 
-	virtual void		MakeFocus(bool state = true);
-	bool			IsFocus() const;
+    virtual void		MakeFocus(bool state = true);
+    bool			IsFocus() const;
 
-	// SetView: the old targetView will be destructed automatically if you assigned "oldTargetView" to be NULL.
-	virtual bool		SetView(BView *targetView, BView **oldTargetView = NULL);
-	BView			*View() const;
+    // SetView: the old targetView will be destructed automatically if you assigned "oldTargetView" to be NULL.
+    virtual bool		SetView(BView *targetView, BView **oldTargetView = NULL);
+    BView			*View() const;
 
     BTabView		*TabView() const;
 
-	virtual void		DrawFocusMark(BView* owner, BRect frame);
-	virtual void		DrawLabel(BView* owner, BRect frame);
-	virtual void		DrawTab(BView* owner, BRect frame, b_tab_position position, bool full = true);
+    virtual void		DrawFocusMark(BView* owner, BRect frame);
+    virtual void		DrawLabel(BView* owner, BRect frame);
+    virtual void		DrawTab(BView* owner, BRect frame, bhapi::tab_position position, bool full = true);
 
 private:
     friend class BTabView;
 
-	char *fLabel;
-	bool fEnabled;
-	bool fFocus;
+    char *fLabel;
+    bool fEnabled;
+    bool fFocus;
 
-	BView *fView;
+    BView *fView;
     BTabView *fOwner;
 };
 
@@ -87,7 +89,7 @@ private:
 class IMPEXPBHAPI BTabView : public BView {
 public:
     BTabView(BRect frame, const char *name,
-		 bhapi::button_width tabWidth = B_WIDTH_AS_USUAL,
+         bhapi::button_width tabWidth = B_WIDTH_AS_USUAL,
          b_uint32 resizeMode = B_FOLLOW_ALL,
          b_uint32 flags = B_WILL_DRAW | B_NAVIGABLE_JUMP | B_FRAME_EVENTS | B_NAVIGABLE);
     virtual ~BTabView();
@@ -102,33 +104,33 @@ public:
     BTab			*TabAt(b_int32 tabIndex) const;
     b_int32			TabIndexOf(const BTab *tab) const;
     BView			*ViewForTab(b_int32 tabIndex) const;
-	BView			*ContainerView() const;
+    BView			*ContainerView() const;
 
     virtual BRect		TabFrame(b_int32 tabIndex) const;
-	virtual BRect		DrawTabs();
-	virtual void		DrawBox(BRect selTabRect);
+    virtual BRect		DrawTabs();
+    virtual void		DrawBox(BRect selTabRect);
 
     virtual void		SetTabWidth(bhapi::button_width tabWidth);
     bhapi::button_width		TabWidth() const;
 
-	virtual void		SetTabHeight(float tabHeight);
-	float			TabHeight() const;
+    virtual void		SetTabHeight(float tabHeight);
+    float			TabHeight() const;
 
-	virtual void		Draw(BRect updateRect);
-	virtual void		MouseDown(BPoint where);
+    virtual void		Draw(BRect updateRect);
+    virtual void		MouseDown(BPoint where);
 
 protected:
-	virtual void		ChildRemoving(BView *child);
+    virtual void		ChildRemoving(BView *child);
 
 private:
     friend class BTab;
 
-	BList fTabs;
+    BList fTabs;
     bhapi::button_width fTabWidth;
-	float fTabHeight;
+    float fTabHeight;
     b_int32 fSelection;
 
-	BView *fContainer;
+    BView *fContainer;
 };
 
 #endif /* __cplusplus */

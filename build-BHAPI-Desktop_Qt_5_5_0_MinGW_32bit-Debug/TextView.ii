@@ -5,13 +5,70 @@
 # 1 "../src/kits/interface/TextView.cpp"
 # 33 "../src/kits/interface/TextView.cpp"
 # 1 "../src/kits/interface/TextView.h" 1
-# 34 "../src/kits/interface/TextView.h"
-# 1 "../src/kits/interface/../support/String.h" 1
-# 34 "../src/kits/interface/../support/String.h"
-# 1 "../src/kits/interface/../support/../support/SupportDefs.h" 1
-# 51 "../src/kits/interface/../support/../support/SupportDefs.h"
-# 1 "../src/kits/interface/../support/../support/TypeConstants.h" 1
-# 38 "../src/kits/interface/../support/../support/TypeConstants.h"
+# 35 "../src/kits/interface/TextView.h"
+class BFile;
+class BClipboard;
+
+
+# 1 "../src/kits/interface/../interface/View.h" 1
+# 34 "../src/kits/interface/../interface/View.h"
+enum {
+    B_ENTERED_VIEW = 0,
+    B_INSIDE_VIEW,
+    B_EXITED_VIEW,
+    B_OUTSIDE_VIEW
+};
+
+enum {
+    B_POINTER_EVENTS = 1,
+    B_KEYBOARD_EVENTS = 1 << 1
+};
+
+enum {
+    B_LOCK_WINDOW_FOCUS = 1,
+    B_SUSPEND_VIEW_FOCUS = 1 << 1,
+    B_NO_POINTER_HISTORY = 1 << 2
+};
+
+enum {
+    B_WILL_DRAW = 1,
+    B_PULSE_NEEDED = 1 << 1,
+    B_NAVIGABLE_JUMP = 1 << 2,
+    B_NAVIGABLE = 1 << 3,
+    B_FRAME_EVENTS = 1 << 4,
+    B_UPDATE_WITH_REGION = 1 << 5,
+    B_DRAW_ON_CHILDREN = 1 << 6,
+    B_INPUT_METHOD_AWARE = 1 << 7
+};
+
+enum {
+    B_FONT_FAMILY_AND_STYLE = 1,
+    B_FONT_SIZE = 1 << 1,
+    B_FONT_SHEAR = 1 << 2,
+    B_FONT_SPACING = 1 << 3,
+    B_FONT_ALL = 0xff
+};
+
+
+class BWindow;
+class BGraphicsContext;
+class BScrollView;
+class BBitmap;
+class BCursor;
+class BLayoutItem;
+class BMessage;
+class BView;
+# 1 "../src/kits/interface/../interface/../app/Handler.h" 1
+# 34 "../src/kits/interface/../interface/../app/Handler.h"
+# 1 "../src/kits/interface/../interface/../app/../../private/app/PrivateHandler.h" 1
+# 34 "../src/kits/interface/../interface/../app/../../private/app/PrivateHandler.h"
+class BHandler;
+class BLocker;
+class BLooper;
+# 1 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 1
+# 51 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h"
+# 1 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/TypeConstants.h" 1
+# 38 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/TypeConstants.h"
 enum {
  B_AFFINE_TRANSFORM_TYPE = 'AMTX',
  B_ALIGNMENT_TYPE = 'ALGN',
@@ -93,7 +150,7 @@ extern const char* B_URL_TN3270;
 extern const char* B_URL_WAIS;
 
 extern const char* B_URL_FILE;
-# 52 "../src/kits/interface/../support/../support/SupportDefs.h" 2
+# 52 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 2
 
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
@@ -203,7 +260,7 @@ extern "C" {
 # 15 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_stdarg.h" 2 3 4
 # 141 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 2 3 4
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
-# 54 "../src/kits/interface/../support/../support/SupportDefs.h" 2
+# 54 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
 
@@ -295,7 +352,7 @@ typedef struct {
   long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
 } max_align_t;
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
-# 55 "../src/kits/interface/../support/../support/SupportDefs.h" 2
+# 55 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 1 3
 # 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
@@ -924,7 +981,7 @@ void * __mingw_aligned_realloc (void *_Memory, size_t _Size, size_t _Offset);
 
 #pragma pack(pop)
 # 669 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 2 3
-# 56 "../src/kits/interface/../support/../support/SupportDefs.h" 2
+# 56 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
 # 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
 extern "C" {
@@ -1136,7 +1193,7 @@ extern "C" {
 
 }
 # 181 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 2 3
-# 57 "../src/kits/interface/../support/../support/SupportDefs.h" 2
+# 57 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 1 3
 # 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_print_push.h" 1 3
@@ -1832,7 +1889,7 @@ extern "C" {
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_print_pop.h" 1 3
 # 962 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 2 3
-# 58 "../src/kits/interface/../support/../support/SupportDefs.h" 2
+# 58 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 1 3
 # 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
 extern "C" {
@@ -1938,7 +1995,7 @@ int __attribute__((__cdecl__)) isblank(int _C);
 int __attribute__((__cdecl__)) iswblank(wint_t _C);
 # 276 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
 }
-# 59 "../src/kits/interface/../support/../support/SupportDefs.h" 2
+# 59 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 1 3
 # 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
        
@@ -2400,7 +2457,7 @@ __extension__ long long __attribute__((__cdecl__)) llrintl (long double);
 
 
 #pragma pack(pop)
-# 60 "../src/kits/interface/../support/../support/SupportDefs.h" 2
+# 60 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/algorithm" 1 3
 # 58 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/algorithm" 3
        
@@ -50705,14 +50762,14 @@ namespace std
 
 }
 # 63 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/algorithm" 2 3
-# 61 "../src/kits/interface/../support/../support/SupportDefs.h" 2
+# 61 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 2
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sys/cdefs.h" 1 3
-# 63 "../src/kits/interface/../support/../support/SupportDefs.h" 2
-# 108 "../src/kits/interface/../support/../support/SupportDefs.h"
+# 63 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 2
+# 108 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 109 "../src/kits/interface/../support/../support/SupportDefs.h" 2
-# 142 "../src/kits/interface/../support/../support/SupportDefs.h"
+# 109 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 2
+# 142 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 1 3 4
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/float.h" 1 3 4
@@ -50739,15 +50796,15 @@ __attribute__ ((__dllimport__)) int * __attribute__((__cdecl__)) __attribute__ (
 # 293 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/float.h" 3 4
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 143 "../src/kits/interface/../support/../support/SupportDefs.h" 2
-# 152 "../src/kits/interface/../support/../support/SupportDefs.h"
+# 143 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 2
+# 152 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h"
 typedef unsigned int b_unichar32;
 typedef unsigned short b_unichar16;
 
 typedef long long b_thread_id;
 typedef size_t b_address_t;
 typedef size_t b_size_t;
-# 170 "../src/kits/interface/../support/../support/SupportDefs.h"
+# 170 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h"
 typedef char int8;
 typedef unsigned char uint8;
 typedef short int16;
@@ -50765,15 +50822,6 @@ typedef int b_int32;
 typedef unsigned int b_uint32;
 typedef long long b_int64;
 typedef unsigned long long b_uint64;
-
-typedef char __haiku_int8;
-typedef unsigned char __haiku_uint8;
-typedef short __haiku_int16;
-typedef unsigned short __haiku_uint16;
-typedef int __haiku_int32;
-typedef unsigned int __haiku_uint32;
-typedef long long __haiku_int64;
-typedef unsigned long long __haiku_uint64;
 
 typedef volatile char vint8;
 typedef volatile unsigned char vuint8;
@@ -50815,11 +50863,11 @@ typedef unsigned int type_code;
 typedef unsigned int __haiku_perform_code;
 typedef unsigned int b_perform_code;
 typedef unsigned int perform_code;
-# 356 "../src/kits/interface/../support/../support/SupportDefs.h"
+# 347 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h"
 extern "C" {
-# 366 "../src/kits/interface/../support/../support/SupportDefs.h"
+# 357 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h"
 }
-# 386 "../src/kits/interface/../support/../support/SupportDefs.h"
+# 377 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 1 3
 # 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_unicode.h" 1 3
@@ -93835,14 +93883,14 @@ typedef unsigned int GROUP;
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAProviderConfigChange(LPHANDLE lpNotificationHandle,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 # 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
-# 387 "../src/kits/interface/../support/../support/SupportDefs.h" 2
-# 399 "../src/kits/interface/../support/../support/SupportDefs.h"
+# 378 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h" 2
+# 390 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h"
 enum {
     B_SEEK_SET = 0,
     B_SEEK_CUR,
     B_SEEK_END,
 };
-# 474 "../src/kits/interface/../support/../support/SupportDefs.h"
+# 465 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h"
 namespace bhapi {
 
 __attribute__((dllexport)) int32 atomic_add (int32 *value, int32 addValue);
@@ -93878,11 +93926,603 @@ __attribute__((dllexport)) void * get_stack_frame (void);
 
 }
 
-
 extern "C" const char* B_EMPTY_STRING;
-# 35 "../src/kits/interface/../support/String.h" 2
 
 
+
+
+
+
+typedef signed char __haiku_std_int8;
+typedef unsigned char __haiku_std_uint8;
+typedef signed short __haiku_std_int16;
+typedef unsigned short __haiku_std_uint16;
+typedef signed int __haiku_std_int32;
+typedef unsigned int __haiku_std_uint32;
+
+
+
+
+typedef signed long long __haiku_std_int64;
+typedef unsigned long long __haiku_std_uint64;
+
+
+typedef __haiku_std_int8 __haiku_int8;
+typedef __haiku_std_uint8 __haiku_uint8;
+typedef __haiku_std_int16 __haiku_int16;
+typedef __haiku_std_uint16 __haiku_uint16;
+
+
+
+
+typedef __haiku_std_int32 __haiku_int32;
+typedef __haiku_std_uint32 __haiku_uint32;
+
+typedef __haiku_std_int64 __haiku_int64;
+typedef __haiku_std_uint64 __haiku_uint64;
+
+
+typedef signed long int __haiku_saddr_t;
+typedef unsigned long int __haiku_addr_t;
+
+
+
+
+
+    typedef __haiku_int32 __haiku_phys_saddr_t;
+    typedef __haiku_uint32 __haiku_phys_addr_t;
+# 592 "../src/kits/interface/../interface/../app/../../private/app/../../kits/support/SupportDefs.h"
+    typedef __haiku_addr_t __haiku_generic_addr_t;
+# 38 "../src/kits/interface/../interface/../app/../../private/app/PrivateHandler.h" 2
+namespace bhapi {
+ BLocker* get_handler_operator_locker();
+ b_uint64 get_handler_token(const BHandler *handler);
+ b_uint64 get_ref_handler_token(const BHandler *handler);
+ BHandler* get_handler(b_uint64 token);
+ b_bigtime_t get_handler_create_time_stamp(b_uint64 token);
+ BLooper* get_handler_looper(b_uint64 token);
+ b_uint64 get_ref_looper_token(b_uint64 token);
+ b_status_t lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
+ bool is_current_at_looper_thread(b_uint64 token);
+ bool ref_handler(b_uint64 token);
+ void unref_handler(b_uint64 token);
+}
+# 35 "../src/kits/interface/../interface/../app/Handler.h" 2
+# 1 "../src/kits/interface/../interface/../app/../support/SupportDefs.h" 1
+# 36 "../src/kits/interface/../interface/../app/Handler.h" 2
+
+
+
+
+
+
+class BLooper;
+class BMessage;
+class BMessageFilter;
+class BMessenger;
+class BToken;
+class BList;
+# 1 "../src/kits/interface/../interface/../app/../support/Archivable.h" 1
+# 32 "../src/kits/interface/../interface/../app/../support/Archivable.h"
+# 1 "../src/kits/interface/../interface/../app/../support/../support/SupportDefs.h" 1
+# 33 "../src/kits/interface/../interface/../app/../support/Archivable.h" 2
+
+class BMessage;
+class __attribute__((dllexport)) BArchivable {
+public:
+    BArchivable();
+    BArchivable(const BMessage *from);
+    virtual ~BArchivable();
+
+    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    static BArchivable *Instantiate(const BMessage *from);
+};
+
+
+typedef BArchivable *(*b_instantiation_func)(const BMessage*);
+
+__attribute__((dllexport)) bool b_validatb_instantiation(const BMessage *from, const char *class_name);
+__attribute__((dllexport)) b_instantiation_func b_find_instantiation_func(const char *class_name);
+__attribute__((dllexport)) b_instantiation_func b_find_instantiation_func(const BMessage *archive_data);
+# 49 "../src/kits/interface/../interface/../app/Handler.h" 2
+using namespace bhapi;
+class __attribute__((dllexport)) BHandler : public BArchivable {
+public:
+    BHandler(const char *name = __null);
+
+    BHandler(const BMessage *from);
+    virtual ~BHandler();
+
+    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    static BArchivable *Instantiate(const BMessage *from);
+
+    void SetName(const char *name);
+    const char *Name() const;
+
+    virtual void MessageReceived(BMessage *message);
+
+    BLooper *Looper() const;
+
+    virtual void SetNextHandler(BHandler *handler);
+    BHandler *NextHandler() const;
+
+    bool LockLooper();
+    b_status_t LockLooperWithTimeout(b_bigtime_t microseconds_timeout);
+    void UnlockLooper();
+
+
+    b_status_t StartWatching(BMessenger msgr, b_uint32 what);
+    b_status_t StartWatchingAll(BMessenger msgr);
+    b_status_t StopWatching(BMessenger msgr, b_uint32 what);
+    b_status_t StopWatchingAll(BMessenger msgr);
+
+    b_status_t StartWatching(BHandler *handler, b_uint32 what);
+    b_status_t StartWatchingAll(BHandler *handler);
+    b_status_t StopWatching(BHandler *handler, b_uint32 what);
+    b_status_t StopWatchingAll(BHandler *handler);
+
+
+    virtual void SendNotices(b_uint32 what, const BMessage *msg = __null);
+    bool IsWatched(b_uint32 what = (2147483647 * 2U + 1U)) const;
+
+
+    virtual bool AddFilter(BMessageFilter *filter);
+    virtual bool RemoveFilter(BMessageFilter *filter);
+    virtual bool SetFilterList(const BList *filterList);
+    const BList *FilterList() const;
+
+
+    virtual BHandler *ResolveSpecifier(BMessage *msg, b_int32 index, BMessage *specifier, b_int32 what, const char *property);
+    virtual b_status_t GetSupportedSuites(BMessage *data);
+
+private:
+    friend class BLooper;
+    friend class BMessage;
+    friend b_uint64 bhapi::get_handler_token(const BHandler *handler);
+
+    BToken *fToken;
+    char *fName;
+    BLooper *fLooper;
+    BHandler *fPrevHandler;
+    BHandler *fNextHandler;
+    void *fObserverList;
+    BList *fFilters;
+};
+# 81 "../src/kits/interface/../interface/View.h" 2
+# 1 "../src/kits/interface/../interface/../interface/Region.h" 1
+# 35 "../src/kits/interface/../interface/../interface/Region.h"
+# 1 "../src/kits/interface/../interface/../interface/../interface/Point.h" 1
+# 34 "../src/kits/interface/../interface/../interface/../interface/Point.h"
+class BRect;
+# 1 "../src/kits/interface/../interface/../interface/../interface/../support/SupportDefs.h" 1
+# 36 "../src/kits/interface/../interface/../interface/../interface/Point.h" 2
+class __attribute__((dllexport)) BPoint {
+public:
+    float x;
+    float y;
+
+    BPoint();
+    BPoint(float X, float Y);
+    BPoint(const BPoint &pt);
+
+    BPoint &operator=(const BPoint &from);
+    void Set(float X, float Y);
+
+    void ConstrainTo(BRect rect);
+
+    void Ceil();
+    void Floor();
+    void Round();
+
+    BPoint& FloorSelf();
+    BPoint FloorCopy() const;
+    BPoint& CeilSelf();
+    BPoint CeilCopy() const;
+    BPoint& RoundSelf();
+    BPoint RoundCopy() const;
+
+    BPoint operator+(const BPoint &plus) const;
+    BPoint operator-(const BPoint &minus) const;
+    BPoint& operator+=(const BPoint &plus);
+    BPoint& operator-=(const BPoint &minus);
+
+    bool operator!=(const BPoint &pt) const;
+    bool operator==(const BPoint &pt) const;
+
+    void PrintToStream() const;
+};
+
+extern __attribute__((dllexport)) const BPoint B_ORIGIN;
+# 36 "../src/kits/interface/../interface/../interface/Region.h" 2
+# 1 "../src/kits/interface/../interface/../interface/../interface/Rect.h" 1
+# 34 "../src/kits/interface/../interface/../interface/../interface/Rect.h"
+# 1 "../src/kits/interface/../interface/../interface/../interface/../interface/Point.h" 1
+# 35 "../src/kits/interface/../interface/../interface/../interface/Rect.h" 2
+
+class __attribute__((dllexport)) BRect {
+public:
+    float left;
+    float top;
+    float right;
+    float bottom;
+
+    BRect();
+    BRect(const BRect &r);
+    BRect(float l, float t, float r, float b);
+    BRect(BPoint leftTop, BPoint rightBottom);
+
+    BRect &operator=(const BRect &from);
+    void Set(float l, float t, float r, float b);
+
+    BPoint LeftTop() const;
+    BPoint RightBottom() const;
+    BPoint LeftBottom() const;
+    BPoint RightTop() const;
+    BPoint Center() const;
+
+    void SetLeftTop(const BPoint pt);
+    void SetRightBottom(const BPoint pt);
+    void SetLeftBottom(const BPoint pt);
+    void SetRightTop(const BPoint pt);
+
+    void SetLeftTop(float x, float y);
+    void SetRightBottom(float x, float y);
+    void SetLeftBottom(float x, float y);
+    void SetRightTop(float x, float y);
+
+    void InsetBy(BPoint pt);
+    void InsetBy(float dx, float dy);
+    void OffsetBy(BPoint pt);
+    void OffsetBy(float dx, float dy);
+    void OffsetTo(BPoint pt);
+    void OffsetTo(float x, float y);
+
+    void Floor();
+    void Ceil();
+    void Round();
+
+    BRect& InsetBySelf(BPoint pt);
+    BRect& InsetBySelf(float dx, float dy);
+    BRect InsetByCopy(BPoint pt) const;
+    BRect InsetByCopy(float dx, float dy) const;
+    BRect& OffsetBySelf(BPoint pt);
+    BRect& OffsetBySelf(float dx, float dy);
+    BRect OffsetByCopy(BPoint pt) const;
+    BRect OffsetByCopy(float dx, float dy) const;
+    BRect& OffsetToSelf(BPoint pt);
+    BRect& OffsetToSelf(float x, float y);
+    BRect OffsetToCopy(BPoint pt) const;
+    BRect OffsetToCopy(float x, float y) const;
+
+    BRect& FloorSelf();
+    BRect FloorCopy() const;
+    BRect& CeilSelf();
+    BRect CeilCopy() const;
+    BRect& RoundSelf();
+    BRect RoundCopy() const;
+
+    bool operator==(BRect r) const;
+    bool operator!=(BRect r) const;
+
+    BRect operator&(BRect r) const;
+    BRect operator|(BRect r) const;
+
+    BRect& operator&=(BRect r);
+    BRect& operator|=(BRect r);
+
+    bool IsValid() const;
+    float Width() const;
+    b_int32 IntegerWidth() const;
+    float Height() const;
+    b_int32 IntegerHeight() const;
+
+    bool Intersects(BRect r) const;
+    bool Intersects(float l, float t, float r, float b) const;
+
+    bool Contains(BPoint pt) const;
+    bool Contains(float x, float y) const;
+    bool Contains(BRect r) const;
+    bool Contains(float l, float t, float r, float b) const;
+
+    void PrintToStream() const;
+};
+
+
+
+inline BPoint BRect::LeftTop() const
+{
+    return(BPoint(left, top));
+}
+
+
+inline BPoint BRect::RightBottom() const
+{
+    return(BPoint(right, bottom));
+}
+
+
+inline BPoint BRect::LeftBottom() const
+{
+    return(BPoint(left, bottom));
+}
+
+
+inline BPoint BRect::RightTop() const
+{
+    return(BPoint(right, top));
+}
+
+
+inline BPoint BRect::Center() const
+{
+    return(BPoint(left + (right - left) / 2, top + (bottom - top) / 2));
+}
+
+
+inline BRect::BRect()
+{
+    top = left = 0;
+    bottom = right = -1;
+}
+
+
+inline BRect::BRect(float l, float t, float r, float b)
+{
+    left = l;
+    top = t;
+    right = r;
+    bottom = b;
+}
+
+
+inline BRect::BRect(const BRect &r)
+{
+    left = r.left;
+    top = r.top;
+    right = r.right;
+    bottom = r.bottom;
+}
+
+
+inline BRect::BRect(BPoint leftTop, BPoint rightBottom)
+{
+    left = leftTop.x;
+    top = leftTop.y;
+    right = rightBottom.x;
+    bottom = rightBottom.y;
+}
+
+
+inline BRect& BRect::operator=(const BRect& from)
+{
+    left = from.left;
+    top = from.top;
+    right = from.right;
+    bottom = from.bottom;
+    return *this;
+}
+
+
+inline void BRect::Set(float l, float t, float r, float b)
+{
+    left = l;
+    top = t;
+    right = r;
+    bottom = b;
+}
+
+
+inline bool BRect::IsValid() const
+{
+    return(left <= right && top <= bottom);
+}
+
+
+inline b_int32 BRect::IntegerWidth() const
+{
+    return((b_int32)ceil((double)(right - left)));
+}
+
+
+inline float BRect::Width() const
+{
+    return(right - left);
+}
+
+
+inline b_int32 BRect::IntegerHeight() const
+{
+    return((b_int32)ceil((double)(bottom - top)));
+}
+
+
+inline float BRect::Height() const
+{
+    return(bottom - top);
+}
+# 37 "../src/kits/interface/../interface/../interface/Region.h" 2
+# 1 "../src/kits/interface/../interface/../interface/../support/List.h" 1
+# 34 "../src/kits/interface/../interface/../interface/../support/List.h"
+# 1 "../src/kits/interface/../interface/../interface/../support/../support/SupportDefs.h" 1
+# 35 "../src/kits/interface/../interface/../interface/../support/List.h" 2
+
+
+class __attribute__((dllexport)) BList {
+public:
+
+
+
+
+
+    BList(b_int32 initialAllocSize = 0);
+    BList(b_int32 initialAllocSize, b_int32 nullItems);
+
+
+
+    BList(const BList &list);
+    BList &operator=(const BList &from);
+
+    virtual ~BList();
+
+ bool AddItem(void *item);
+    bool AddItem(void *item, b_int32 atIndex);
+    bool AddList(const BList *newItems);
+    bool AddList(const BList *newItems, b_int32 atIndex);
+
+
+ bool RemoveItem(void *item);
+    void *RemoveItem(b_int32 index);
+    bool RemoveItems(b_int32 index, b_int32 count);
+
+
+    bool ReplaceItem(b_int32 index, void *newItem, void **oldItem = __null);
+
+ void MakeEmpty();
+
+    bool SwapItems(b_int32 indexA, b_int32 indexB);
+    bool MoveItem(b_int32 fromIndex, b_int32 toIndex);
+
+ void SortItems(int (*cmp)(const void *a, const void *b));
+
+    void *ItemAt(b_int32 index) const;
+ void *FirstItem() const;
+ void *LastItem() const;
+
+ bool HasItem(void *item) const;
+    b_int32 IndexOf(void *item) const;
+    b_int32 CountItems() const;
+ bool IsEmpty() const;
+
+ void DoForEach(bool (*func)(void *data));
+ void DoForEach(bool (*func)(void *data, void *user_data), void *user_data);
+
+
+ void **Items() const;
+
+private:
+ void **fObjects;
+
+    b_int32 fItemCount;
+    b_int32 fItemReal;
+    b_int32 fMinimumCount;
+
+    bool _Resize(b_int32 count);
+};
+# 38 "../src/kits/interface/../interface/../interface/Region.h" 2
+# 1 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 1
+# 39 "../src/kits/interface/../interface/../interface/Region.h" 2
+class __attribute__((dllexport)) BRegion {
+public:
+    BRegion();
+    BRegion(const BRegion &region);
+    BRegion(const BRect &rect);
+    virtual ~BRegion();
+
+    BRegion &operator=(const BRegion &from);
+
+    BRegion operator&(BRect r) const;
+    BRegion operator|(BRect r) const;
+
+    BRegion& operator&=(BRect r);
+    BRegion& operator|=(BRect r);
+
+    BRegion operator&(const BRegion &region) const;
+    BRegion operator|(const BRegion &region) const;
+
+    BRegion& operator&=(const BRegion &region);
+    BRegion& operator|=(const BRegion &region);
+
+    BRect Frame() const;
+    BRect RectAt(b_int32 index) const;
+    b_int32 CountRects() const;
+
+    void Set(BRect singleBound);
+    void MakeEmpty();
+
+    bool Include(BRect r);
+    bool Include(const BRegion *region);
+
+    bool Exclude(BRect r);
+    bool Exclude(const BRegion *region);
+
+    void OffsetBy(float dx, float dy);
+    void OffsetBy(BPoint pt);
+    BRegion& OffsetBySelf(float dx, float dy);
+    BRegion& OffsetBySelf(BPoint pt);
+    BRegion OffsetByCopy(float dx, float dy);
+    BRegion OffsetByCopy(BPoint pt);
+
+    void Scale(float scaling);
+    BRegion& ScaleSelf(float scaling);
+    BRegion ScaleCopy(float scaling);
+
+    bool Intersects(BRect r) const;
+    bool Intersects(float l, float t, float r, float b) const;
+    bool Intersects(const BRegion *region) const;
+
+    bool Contains(BPoint pt) const;
+    bool Contains(float x, float y) const;
+    bool Contains(BRect r) const;
+    bool Contains(float l, float t, float r, float b) const;
+    bool Contains(const BRegion *region) const;
+
+    void PrintToStream() const;
+
+private:
+    BList fRects;
+    BRect fFrame;
+};
+# 82 "../src/kits/interface/../interface/View.h" 2
+# 1 "../src/kits/interface/../interface/../interface/Polygon.h" 1
+# 35 "../src/kits/interface/../interface/../interface/Polygon.h"
+class __attribute__((dllexport)) BPolygon {
+public:
+    BPolygon(const BPoint *pts, b_int32 nPts);
+    BPolygon();
+    BPolygon(const BPolygon *poly);
+    virtual ~BPolygon();
+
+    BPolygon &operator=(const BPolygon &poly);
+    BRect Frame() const;
+
+    bool AddPoints(const BPoint *pts, b_int32 nPts, bool updateFrame = true);
+    void RemovePoints(b_int32 fromIndex, b_int32 toIndex, bool updateFrame = true);
+
+    bool AddPoint(const BPoint &aPt, bool updateFrame = true);
+    void RemovePoint(b_int32 index, bool updateFrame = true);
+    void UpdateFrame();
+
+    const BPoint &operator[](b_int32 index) const;
+    b_int32 CountPoints() const;
+
+    bool MapTo(BRect srcRect, BRect dstRect);
+
+    const BPoint *Points() const;
+    void PrintToStream() const;
+
+private:
+    BRect fFrame;
+    b_int32 fCount;
+    BPoint *fPts;
+    bool fNeededToUpdateFrame;
+};
+
+
+inline bool BPolygon::AddPoint(const BPoint &aPt, bool updateFrame)
+{
+    return AddPoints(&aPt, 1, updateFrame);
+}
+
+
+inline void BPolygon::RemovePoint(b_int32 index, bool updateFrame)
+{
+    RemovePoints(index, index, updateFrame);
+}
+# 83 "../src/kits/interface/../interface/View.h" 2
+# 1 "../src/kits/interface/../interface/../interface/Font.h" 1
+# 33 "../src/kits/interface/../interface/../interface/Font.h"
+# 1 "../src/kits/interface/../interface/../interface/../support/String.h" 1
+# 37 "../src/kits/interface/../interface/../interface/../support/String.h"
 extern "C" {
 
 
@@ -93964,7 +94604,7 @@ public:
     BString& SetToChars(const char* string, int32 charCount);
     BString& SetToChars(const BString& string, int32 charCount);
     BString& AdoptChars(BString& from, int32 charCount);
-# 130 "../src/kits/interface/../support/String.h"
+# 130 "../src/kits/interface/../interface/../interface/../support/String.h"
     BString &CopyInto(BString &into, b_int32 fromOffset, b_int32 length) const;
     void CopyInto(char *into, size_t into_size, b_int32 fromOffset, b_int32 length) const;
 
@@ -94221,60 +94861,160 @@ template<class TYPE_INT>
 __attribute__((dllexport)) void printf_int(BString &str, TYPE_INT value, b_uint8 _base, int precision_width, bool upper_style);
 __attribute__((dllexport)) b_int32 printf_double(BString &str, double value, int precision_width, b_int32 *exponent, bool g_style, bool upper_style);
 }
-# 35 "../src/kits/interface/TextView.h" 2
-# 1 "../src/kits/interface/../interface/View.h" 1
-# 34 "../src/kits/interface/../interface/View.h"
-# 1 "../src/kits/interface/../interface/../support/SupportDefs.h" 1
-# 35 "../src/kits/interface/../interface/View.h" 2
+# 34 "../src/kits/interface/../interface/../interface/Font.h" 2
 
-enum {
-    B_ENTERED_VIEW = 0,
-    B_INSIDE_VIEW,
-    B_EXITED_VIEW,
-    B_OUTSIDE_VIEW
+
+
+
+
+
+namespace bhapi {
+typedef char font_family[127 + 1];
+typedef char font_style[63 + 1];
+
+typedef struct font_height {
+    float ascent;
+    float descent;
+    float leading;
+} font_height;
+
+typedef struct font_desc font_desc;
+}
+
+
+class BView;
+class BFontEngine;
+class __attribute__((dllexport)) BFont {
+public:
+    BFont();
+    BFont(const BFont &font);
+    BFont(const BFont *font);
+    BFont(const bhapi::font_desc &fontDesc);
+    virtual ~BFont();
+
+    b_status_t SetFamilyAndStyle(const bhapi::font_family family, const bhapi::font_style style);
+    b_status_t SetFamilyAndStyle(b_uint32 code);
+
+    b_status_t GetFamilyAndStyle(bhapi::font_family *family, bhapi::font_style *style) const;
+    b_uint32 FamilyAndStyle() const;
+
+    void SetSize(float size);
+    void SetSpacing(float spacing);
+    void SetShear(float shear);
+    void SetBoldStyle(bool bold);
+
+    float Size() const;
+    float Spacing() const;
+    float Shear() const;
+    bool IsBoldStyle() const;
+
+    bool IsScalable() const;
+    bool HasFixedSize(b_int32 *count = __null) const;
+    bool GetFixedSize(float *size, b_int32 index = 0) const;
+
+
+
+
+
+    float StringWidth(const char *string, b_int32 length = -1, float tabWidth = 0) const;
+    float StringWidth(const BString &str, b_int32 length = -1, float tabWidth = 0) const;
+    void GetHeight(bhapi::font_height *height) const;
+
+
+    float *CharWidths(const char *string, b_int32 *nChars, float tabWidth = 0) const;
+    float *CharWidths(const BString &str, b_int32 *nChars, float tabWidth = 0) const;
+    float *CharWidths(const char *string, b_int32 length, b_int32 *nChars, float tabWidth = 0) const;
+    float *CharWidths(const BString &str, b_int32 length, b_int32 *nChars, float tabWidth = 0) const;
+
+    BFont &operator=(const BFont &font);
+    BFont &operator=(const bhapi::font_desc &fontDesc);
+
+    bool operator==(const BFont &font);
+    bool operator!=(const BFont &font);
+
+    void PrintToStream() const;
+
+private:
+    friend class BView;
+
+    void *fInfo;
+
+    BFontEngine *Engine() const;
 };
 
-enum {
-    B_POINTER_EVENTS = 1,
-    B_KEYBOARD_EVENTS = 1 << 1
+namespace bhapi {
+extern __attribute__((dllexport)) const BFont* plain_font;
+extern __attribute__((dllexport)) const BFont* bold_font;
+extern __attribute__((dllexport)) const BFont* fixed_font;
+__attribute__((dllexport)) b_int32 count_font_families(void);
+__attribute__((dllexport)) b_status_t get_font_family(b_int32 index, const char **name);
+__attribute__((dllexport)) b_int32 get_font_family_index(const char *name);
+__attribute__((dllexport)) b_int32 count_font_styles(const char *family);
+__attribute__((dllexport)) b_int32 count_font_styles(b_int32 index);
+__attribute__((dllexport)) b_status_t get_font_style(const char *family, b_int32 index, const char **name);
+__attribute__((dllexport)) b_int32 get_font_style_index(const char *family, const char *name);
+__attribute__((dllexport)) bool update_font_families(bool check_only);
+}
+
+
+namespace bhapi {
+
+struct font_desc {
+    bhapi::font_family family;
+    bhapi::font_style style;
+    float size;
+    float spacing;
+    float shear;
+    bool bold;
+
+    inline font_desc()
+    {
+        memset(this, 0, sizeof(*this));
+    }
+
+    inline font_desc &operator=(const BFont &from)
+    {
+        from.GetFamilyAndStyle(&family, &style);
+        size = from.Size();
+        spacing = from.Spacing();
+        shear = from.Shear();
+        bold = from.IsBoldStyle();
+        return *this;
+    }
+
+    inline void SetFamilyAndStyle(const bhapi::font_family f, const bhapi::font_style s)
+    {
+        memset(family, 0, sizeof(bhapi::font_family));
+        memset(style, 0, sizeof(bhapi::font_style));
+        memcpy(family, f, ((127)>(strlen(f))?(strlen(f)):(127)));
+        memcpy(style, s, ((63)>(strlen(s))?(strlen(s)):(63)));
+    }
+
+    inline void SetSize(float val) {size = val;}
+    inline void SetSpacing(float val) {spacing = val;}
+    inline void SetShear(float val) {shear = val;}
+    inline void SetBoldStyle(bool val) {bold = val;}
+
+    inline void GetFamilyAndStyle(bhapi::font_family *f, bhapi::font_style *s)
+    {
+        if(f) memcpy(*f, family, 127 + 1);
+        if(s) memcpy(*s, style, 63 + 1);
+    }
+
+    inline float Size() const {return size;}
+    inline float Spacing() const {return spacing;}
+    inline float Shear() const {return shear;}
+    inline bool IsBoldStyle() const {return bold;}
+
 };
-
-enum {
-    B_LOCK_WINDOW_FOCUS = 1,
-    B_SUSPEND_VIEW_FOCUS = 1 << 1,
-    B_NO_POINTER_HISTORY = 1 << 2
-};
-
-enum {
-    B_WILL_DRAW = 1,
-    B_PULSE_NEEDED = 1 << 1,
-    B_NAVIGABLE_JUMP = 1 << 2,
-    B_NAVIGABLE = 1 << 3,
-    B_FRAME_EVENTS = 1 << 4,
-    B_UPDATE_WITH_REGION = 1 << 5,
-    B_DRAW_ON_CHILDREN = 1 << 6,
-    B_INPUT_METHOD_AWARE = 1 << 7
-};
-
-enum {
-    B_FONT_FAMILY_AND_STYLE = 1,
-    B_FONT_SIZE = 1 << 1,
-    B_FONT_SHEAR = 1 << 2,
-    B_FONT_SPACING = 1 << 3,
-    B_FONT_ALL = 0xff
-};
-
-
-
-using namespace bhapi;
+}
+# 84 "../src/kits/interface/../interface/View.h" 2
+# 1 "../src/kits/interface/../interface/../interface/Point.h" 1
+# 85 "../src/kits/interface/../interface/View.h" 2
 # 1 "../src/kits/interface/../interface/../interface/InterfaceDefs.h" 1
 # 33 "../src/kits/interface/../interface/../interface/InterfaceDefs.h"
 # 1 "../src/kits/interface/../interface/../interface/../interface/GraphicsDefs.h" 1
-# 33 "../src/kits/interface/../interface/../interface/../interface/GraphicsDefs.h"
-# 1 "../src/kits/interface/../interface/../interface/../interface/../support/SupportDefs.h" 1
-# 34 "../src/kits/interface/../interface/../interface/../interface/GraphicsDefs.h" 2
-
-
+# 36 "../src/kits/interface/../interface/../interface/../interface/GraphicsDefs.h"
 namespace bhapi {
 
 
@@ -94555,21 +95295,21 @@ status_t get_pixel_size_for(color_space space, size_t* _pixelChunk, size_t* _row
 inline pattern make_pattern(b_uint8 d1, b_uint8 d2, b_uint8 d3, b_uint8 d4, b_uint8 d5, b_uint8 d6, b_uint8 d7, b_uint8 d8)
 {
     bhapi::pattern p;
- p.data[0] = d1;
- p.data[1] = d2;
- p.data[2] = d3;
- p.data[3] = d4;
- p.data[4] = d5;
- p.data[5] = d6;
- p.data[6] = d7;
- p.data[7] = d8;
- return p;
+    p.data[0] = d1;
+    p.data[1] = d2;
+    p.data[2] = d3;
+    p.data[3] = d4;
+    p.data[4] = d5;
+    p.data[5] = d6;
+    p.data[6] = d7;
+    p.data[7] = d8;
+    return p;
 }
 inline rgb_color make_rgb_color(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 0xff)
 {
     rgb_color c;
- c.set_to(r, g, b, a);
- return c;
+    c.set_to(r, g, b, a);
+    return c;
 }
 
 __attribute__((dllexport)) b_uint8 find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b);
@@ -95068,831 +95808,116 @@ __attribute__((dllexport)) float ui_get_scrollbar_vertical_width();
 
 }
 }
-# 77 "../src/kits/interface/../interface/View.h" 2
-class BWindow;
-class BGraphicsContext;
-class BScrollView;
-class BBitmap;
-class BCursor;
-class BLayoutItem;
-class BMessage;
-class BView;
-# 1 "../src/kits/interface/../interface/../interface/Region.h" 1
-# 34 "../src/kits/interface/../interface/../interface/Region.h"
-# 1 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 1
-# 35 "../src/kits/interface/../interface/../interface/Region.h" 2
-
-
-# 1 "../src/kits/interface/../interface/../interface/../interface/Point.h" 1
-# 36 "../src/kits/interface/../interface/../interface/../interface/Point.h"
-class BRect;
-class __attribute__((dllexport)) BPoint {
-public:
- float x;
- float y;
-
- BPoint();
- BPoint(float X, float Y);
- BPoint(const BPoint &pt);
-
- BPoint &operator=(const BPoint &from);
- void Set(float X, float Y);
-
- void ConstrainTo(BRect rect);
-
- void Ceil();
- void Floor();
- void Round();
-
- BPoint& FloorSelf();
- BPoint FloorCopy() const;
- BPoint& CeilSelf();
- BPoint CeilCopy() const;
- BPoint& RoundSelf();
- BPoint RoundCopy() const;
-
- BPoint operator+(const BPoint &plus) const;
- BPoint operator-(const BPoint &minus) const;
- BPoint& operator+=(const BPoint &plus);
- BPoint& operator-=(const BPoint &minus);
-
- bool operator!=(const BPoint &pt) const;
- bool operator==(const BPoint &pt) const;
-
- void PrintToStream() const;
-};
-
-extern __attribute__((dllexport)) const BPoint B_ORIGIN;
-# 38 "../src/kits/interface/../interface/../interface/Region.h" 2
-# 1 "../src/kits/interface/../interface/../interface/../interface/Rect.h" 1
-# 36 "../src/kits/interface/../interface/../interface/../interface/Rect.h"
-# 1 "../src/kits/interface/../interface/../interface/../interface/../interface/Point.h" 1
-# 37 "../src/kits/interface/../interface/../interface/../interface/Rect.h" 2
-class __attribute__((dllexport)) BRect {
-public:
- float left;
- float top;
- float right;
- float bottom;
-
- BRect();
- BRect(const BRect &r);
- BRect(float l, float t, float r, float b);
- BRect(BPoint leftTop, BPoint rightBottom);
-
- BRect &operator=(const BRect &from);
- void Set(float l, float t, float r, float b);
-
- BPoint LeftTop() const;
- BPoint RightBottom() const;
- BPoint LeftBottom() const;
- BPoint RightTop() const;
- BPoint Center() const;
-
- void SetLeftTop(const BPoint pt);
- void SetRightBottom(const BPoint pt);
- void SetLeftBottom(const BPoint pt);
- void SetRightTop(const BPoint pt);
-
- void SetLeftTop(float x, float y);
- void SetRightBottom(float x, float y);
- void SetLeftBottom(float x, float y);
- void SetRightTop(float x, float y);
-
- void InsetBy(BPoint pt);
- void InsetBy(float dx, float dy);
- void OffsetBy(BPoint pt);
- void OffsetBy(float dx, float dy);
- void OffsetTo(BPoint pt);
- void OffsetTo(float x, float y);
-
- void Floor();
- void Ceil();
- void Round();
-
- BRect& InsetBySelf(BPoint pt);
- BRect& InsetBySelf(float dx, float dy);
- BRect InsetByCopy(BPoint pt) const;
- BRect InsetByCopy(float dx, float dy) const;
- BRect& OffsetBySelf(BPoint pt);
- BRect& OffsetBySelf(float dx, float dy);
- BRect OffsetByCopy(BPoint pt) const;
- BRect OffsetByCopy(float dx, float dy) const;
- BRect& OffsetToSelf(BPoint pt);
- BRect& OffsetToSelf(float x, float y);
- BRect OffsetToCopy(BPoint pt) const;
- BRect OffsetToCopy(float x, float y) const;
-
- BRect& FloorSelf();
- BRect FloorCopy() const;
- BRect& CeilSelf();
- BRect CeilCopy() const;
- BRect& RoundSelf();
- BRect RoundCopy() const;
-
- bool operator==(BRect r) const;
- bool operator!=(BRect r) const;
-
- BRect operator&(BRect r) const;
- BRect operator|(BRect r) const;
-
- BRect& operator&=(BRect r);
- BRect& operator|=(BRect r);
-
- bool IsValid() const;
- float Width() const;
-    b_int32 IntegerWidth() const;
- float Height() const;
-    b_int32 IntegerHeight() const;
-
- bool Intersects(BRect r) const;
- bool Intersects(float l, float t, float r, float b) const;
-
- bool Contains(BPoint pt) const;
- bool Contains(float x, float y) const;
- bool Contains(BRect r) const;
- bool Contains(float l, float t, float r, float b) const;
-
- void PrintToStream() const;
-};
-
-
-
-inline BPoint BRect::LeftTop() const
-{
- return(BPoint(left, top));
-}
-
-
-inline BPoint BRect::RightBottom() const
-{
- return(BPoint(right, bottom));
-}
-
-
-inline BPoint BRect::LeftBottom() const
-{
- return(BPoint(left, bottom));
-}
-
-
-inline BPoint BRect::RightTop() const
-{
- return(BPoint(right, top));
-}
-
-
-inline BPoint BRect::Center() const
-{
- return(BPoint(left + (right - left) / 2, top + (bottom - top) / 2));
-}
-
-
-inline BRect::BRect()
-{
- top = left = 0;
- bottom = right = -1;
-}
-
-
-inline BRect::BRect(float l, float t, float r, float b)
-{
- left = l;
- top = t;
- right = r;
- bottom = b;
-}
-
-
-inline BRect::BRect(const BRect &r)
-{
- left = r.left;
- top = r.top;
- right = r.right;
- bottom = r.bottom;
-}
-
-
-inline BRect::BRect(BPoint leftTop, BPoint rightBottom)
-{
- left = leftTop.x;
- top = leftTop.y;
- right = rightBottom.x;
- bottom = rightBottom.y;
-}
-
-
-inline BRect& BRect::operator=(const BRect& from)
-{
- left = from.left;
- top = from.top;
- right = from.right;
- bottom = from.bottom;
- return *this;
-}
-
-
-inline void BRect::Set(float l, float t, float r, float b)
-{
- left = l;
- top = t;
- right = r;
- bottom = b;
-}
-
-
-inline bool BRect::IsValid() const
-{
- return(left <= right && top <= bottom);
-}
-
-
-inline b_int32 BRect::IntegerWidth() const
-{
-    return((b_int32)ceil((double)(right - left)));
-}
-
-
-inline float BRect::Width() const
-{
- return(right - left);
-}
-
-
-inline b_int32 BRect::IntegerHeight() const
-{
-    return((b_int32)ceil((double)(bottom - top)));
-}
-
-
-inline float BRect::Height() const
-{
- return(bottom - top);
-}
-# 39 "../src/kits/interface/../interface/../interface/Region.h" 2
-# 1 "../src/kits/interface/../interface/../interface/../support/List.h" 1
-# 34 "../src/kits/interface/../interface/../interface/../support/List.h"
-# 1 "../src/kits/interface/../interface/../interface/../support/../support/SupportDefs.h" 1
-# 35 "../src/kits/interface/../interface/../interface/../support/List.h" 2
-
-
-class __attribute__((dllexport)) BList {
-public:
-
-
-
-
-
-    BList(b_int32 initialAllocSize = 0);
-    BList(b_int32 initialAllocSize, b_int32 nullItems);
-
-
-
-    BList(const BList &list);
-    BList &operator=(const BList &from);
-
-    virtual ~BList();
-
- bool AddItem(void *item);
-    bool AddItem(void *item, b_int32 atIndex);
-    bool AddList(const BList *newItems);
-    bool AddList(const BList *newItems, b_int32 atIndex);
-
-
- bool RemoveItem(void *item);
-    void *RemoveItem(b_int32 index);
-    bool RemoveItems(b_int32 index, b_int32 count);
-
-
-    bool ReplaceItem(b_int32 index, void *newItem, void **oldItem = __null);
-
- void MakeEmpty();
-
-    bool SwapItems(b_int32 indexA, b_int32 indexB);
-    bool MoveItem(b_int32 fromIndex, b_int32 toIndex);
-
- void SortItems(int (*cmp)(const void *a, const void *b));
-
-    void *ItemAt(b_int32 index) const;
- void *FirstItem() const;
- void *LastItem() const;
-
- bool HasItem(void *item) const;
-    b_int32 IndexOf(void *item) const;
-    b_int32 CountItems() const;
- bool IsEmpty() const;
-
- void DoForEach(bool (*func)(void *data));
- void DoForEach(bool (*func)(void *data, void *user_data), void *user_data);
-
-
- void **Items() const;
-
-private:
- void **fObjects;
-
-    b_int32 fItemCount;
-    b_int32 fItemReal;
-    b_int32 fMinimumCount;
-
-    bool _Resize(b_int32 count);
-};
-# 40 "../src/kits/interface/../interface/../interface/Region.h" 2
-class __attribute__((dllexport)) BRegion {
-public:
- BRegion();
- BRegion(const BRegion &region);
- BRegion(const BRect &rect);
- virtual ~BRegion();
-
- BRegion &operator=(const BRegion &from);
-
- BRegion operator&(BRect r) const;
- BRegion operator|(BRect r) const;
-
- BRegion& operator&=(BRect r);
- BRegion& operator|=(BRect r);
-
- BRegion operator&(const BRegion &region) const;
- BRegion operator|(const BRegion &region) const;
-
- BRegion& operator&=(const BRegion &region);
- BRegion& operator|=(const BRegion &region);
-
- BRect Frame() const;
-    BRect RectAt(b_int32 index) const;
-    b_int32 CountRects() const;
-
- void Set(BRect singleBound);
- void MakeEmpty();
-
- bool Include(BRect r);
- bool Include(const BRegion *region);
-
- bool Exclude(BRect r);
- bool Exclude(const BRegion *region);
-
- void OffsetBy(float dx, float dy);
- void OffsetBy(BPoint pt);
- BRegion& OffsetBySelf(float dx, float dy);
- BRegion& OffsetBySelf(BPoint pt);
- BRegion OffsetByCopy(float dx, float dy);
- BRegion OffsetByCopy(BPoint pt);
-
- void Scale(float scaling);
- BRegion& ScaleSelf(float scaling);
- BRegion ScaleCopy(float scaling);
-
- bool Intersects(BRect r) const;
- bool Intersects(float l, float t, float r, float b) const;
- bool Intersects(const BRegion *region) const;
-
- bool Contains(BPoint pt) const;
- bool Contains(float x, float y) const;
- bool Contains(BRect r) const;
- bool Contains(float l, float t, float r, float b) const;
- bool Contains(const BRegion *region) const;
-
- void PrintToStream() const;
-
-private:
- BList fRects;
- BRect fFrame;
-};
 # 86 "../src/kits/interface/../interface/View.h" 2
-# 1 "../src/kits/interface/../interface/../interface/Polygon.h" 1
-# 37 "../src/kits/interface/../interface/../interface/Polygon.h"
-class __attribute__((dllexport)) BPolygon {
-public:
-    BPolygon(const BPoint *pts, b_int32 nPts);
-    BPolygon();
-    BPolygon(const BPolygon *poly);
-    virtual ~BPolygon();
-
-    BPolygon &operator=(const BPolygon &poly);
- BRect Frame() const;
-
-    bool AddPoints(const BPoint *pts, b_int32 nPts, bool updateFrame = true);
-    void RemovePoints(b_int32 fromIndex, b_int32 toIndex, bool updateFrame = true);
-
- bool AddPoint(const BPoint &aPt, bool updateFrame = true);
-    void RemovePoint(b_int32 index, bool updateFrame = true);
- void UpdateFrame();
-
-    const BPoint &operator[](b_int32 index) const;
-    b_int32 CountPoints() const;
-
- bool MapTo(BRect srcRect, BRect dstRect);
-
- const BPoint *Points() const;
- void PrintToStream() const;
-
-private:
- BRect fFrame;
-    b_int32 fCount;
- BPoint *fPts;
- bool fNeededToUpdateFrame;
-};
-
-
-inline bool BPolygon::AddPoint(const BPoint &aPt, bool updateFrame)
-{
- return AddPoints(&aPt, 1, updateFrame);
-}
-
-
-inline void BPolygon::RemovePoint(b_int32 index, bool updateFrame)
-{
- RemovePoints(index, index, updateFrame);
-}
-# 87 "../src/kits/interface/../interface/View.h" 2
-# 1 "../src/kits/interface/../interface/../interface/Font.h" 1
-# 34 "../src/kits/interface/../interface/../interface/Font.h"
-# 1 "../src/kits/interface/../interface/../interface/../support/String.h" 1
-# 35 "../src/kits/interface/../interface/../interface/Font.h" 2
-
-
-
-
-
-namespace bhapi {
-typedef char font_family[127 + 1];
-typedef char font_style[63 + 1];
-
-typedef struct font_height {
- float ascent;
- float descent;
- float leading;
-} font_height;
-
-typedef struct font_desc font_desc;
-}
-
-
-
-class BView;
-class BFontEngine;
-
-class __attribute__((dllexport)) BFont {
-public:
- BFont();
- BFont(const BFont &font);
- BFont(const BFont *font);
-    BFont(const bhapi::font_desc &fontDesc);
- virtual ~BFont();
-
-    b_status_t SetFamilyAndStyle(const bhapi::font_family family, const bhapi::font_style style);
-    b_status_t SetFamilyAndStyle(b_uint32 code);
-
-    b_status_t GetFamilyAndStyle(bhapi::font_family *family, bhapi::font_style *style) const;
-    b_uint32 FamilyAndStyle() const;
-
- void SetSize(float size);
- void SetSpacing(float spacing);
- void SetShear(float shear);
- void SetBoldStyle(bool bold);
-
- float Size() const;
- float Spacing() const;
- float Shear() const;
- bool IsBoldStyle() const;
-
- bool IsScalable() const;
-    bool HasFixedSize(b_int32 *count = __null) const;
-    bool GetFixedSize(float *size, b_int32 index = 0) const;
-
-
-
-
-
-    float StringWidth(const char *string, b_int32 length = -1, float tabWidth = 0) const;
-    float StringWidth(const BString &str, b_int32 length = -1, float tabWidth = 0) const;
-    void GetHeight(bhapi::font_height *height) const;
-
-
-    float *CharWidths(const char *string, b_int32 *nChars, float tabWidth = 0) const;
-    float *CharWidths(const BString &str, b_int32 *nChars, float tabWidth = 0) const;
-    float *CharWidths(const char *string, b_int32 length, b_int32 *nChars, float tabWidth = 0) const;
-    float *CharWidths(const BString &str, b_int32 length, b_int32 *nChars, float tabWidth = 0) const;
-
- BFont &operator=(const BFont &font);
-    BFont &operator=(const bhapi::font_desc &fontDesc);
-
- bool operator==(const BFont &font);
- bool operator!=(const BFont &font);
-
- void PrintToStream() const;
-
-private:
- friend class BView;
-
- void *fInfo;
-
- BFontEngine *Engine() const;
-};
-
-namespace bhapi {
-extern __attribute__((dllexport)) const BFont* plain_font;
-extern __attribute__((dllexport)) const BFont* bold_font;
-extern __attribute__((dllexport)) const BFont* fixed_font;
-__attribute__((dllexport)) b_int32 count_font_families(void);
-__attribute__((dllexport)) b_status_t get_font_family(b_int32 index, const char **name);
-__attribute__((dllexport)) b_int32 get_font_family_index(const char *name);
-__attribute__((dllexport)) b_int32 count_font_styles(const char *family);
-__attribute__((dllexport)) b_int32 count_font_styles(b_int32 index);
-__attribute__((dllexport)) b_status_t get_font_style(const char *family, b_int32 index, const char **name);
-__attribute__((dllexport)) b_int32 get_font_style_index(const char *family, const char *name);
-__attribute__((dllexport)) bool update_font_families(bool check_only);
-}
-
-
-namespace bhapi {
-
-struct font_desc {
-    bhapi::font_family family;
-    bhapi::font_style style;
- float size;
- float spacing;
- float shear;
- bool bold;
-
-    inline font_desc()
- {
-        memset(this, 0, sizeof(*this));
- }
-
-    inline font_desc &operator=(const BFont &from)
- {
-  from.GetFamilyAndStyle(&family, &style);
-  size = from.Size();
-  spacing = from.Spacing();
-  shear = from.Shear();
-  bold = from.IsBoldStyle();
-  return *this;
- }
-
-    inline void SetFamilyAndStyle(const bhapi::font_family f, const bhapi::font_style s)
- {
-        memset(family, 0, sizeof(bhapi::font_family));
-        memset(style, 0, sizeof(bhapi::font_style));
-        memcpy(family, f, ((127)>(strlen(f))?(strlen(f)):(127)));
-        memcpy(style, s, ((63)>(strlen(s))?(strlen(s)):(63)));
- }
-
- inline void SetSize(float val) {size = val;}
- inline void SetSpacing(float val) {spacing = val;}
- inline void SetShear(float val) {shear = val;}
- inline void SetBoldStyle(bool val) {bold = val;}
-
-    inline void GetFamilyAndStyle(bhapi::font_family *f, bhapi::font_style *s)
- {
-  if(f) memcpy(*f, family, 127 + 1);
-  if(s) memcpy(*s, style, 63 + 1);
- }
-
- inline float Size() const {return size;}
- inline float Spacing() const {return spacing;}
- inline float Shear() const {return shear;}
- inline bool IsBoldStyle() const {return bold;}
-
-};
-}
-# 88 "../src/kits/interface/../interface/View.h" 2
-# 1 "../src/kits/interface/../interface/../interface/Point.h" 1
-# 89 "../src/kits/interface/../interface/View.h" 2
 # 1 "../src/kits/interface/../interface/../support/List.h" 1
-# 90 "../src/kits/interface/../interface/View.h" 2
-# 1 "../src/kits/interface/../interface/../app/Handler.h" 1
-# 33 "../src/kits/interface/../interface/../app/Handler.h"
-# 1 "../src/kits/interface/../interface/../app/../support/SupportDefs.h" 1
-# 34 "../src/kits/interface/../interface/../app/Handler.h" 2
-# 1 "../src/kits/interface/../interface/../app/../private/PrivateHandler.h" 1
-# 32 "../src/kits/interface/../interface/../app/../private/PrivateHandler.h"
-# 1 "../src/kits/interface/../interface/../app/../private/../support/SupportDefs.h" 1
-# 33 "../src/kits/interface/../interface/../app/../private/PrivateHandler.h" 2
-
-
-class BHandler;
-class BLocker;
-class BLooper;
-namespace bhapi {
- BLocker* get_handler_operator_locker();
- b_uint64 get_handler_token(const BHandler *handler);
- b_uint64 get_ref_handler_token(const BHandler *handler);
- BHandler* get_handler(b_uint64 token);
- b_bigtime_t get_handler_create_time_stamp(b_uint64 token);
- BLooper* get_handler_looper(b_uint64 token);
- b_uint64 get_ref_looper_token(b_uint64 token);
- b_status_t lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
- bool is_current_at_looper_thread(b_uint64 token);
- bool ref_handler(b_uint64 token);
- void unref_handler(b_uint64 token);
-}
-# 35 "../src/kits/interface/../interface/../app/Handler.h" 2
-
-
-
-
-
-
-
-class BLooper;
-class BMessage;
-class BMessageFilter;
-class BMessenger;
-class BToken;
-class BList;
-# 1 "../src/kits/interface/../interface/../app/../support/Archivable.h" 1
-# 32 "../src/kits/interface/../interface/../app/../support/Archivable.h"
-# 1 "../src/kits/interface/../interface/../app/../support/../support/SupportDefs.h" 1
-# 33 "../src/kits/interface/../interface/../app/../support/Archivable.h" 2
-
-class BMessage;
-class __attribute__((dllexport)) BArchivable {
-public:
-    BArchivable();
-    BArchivable(const BMessage *from);
-    virtual ~BArchivable();
-
-    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
-    static BArchivable *Instantiate(const BMessage *from);
-};
-
-
-typedef BArchivable *(*b_instantiation_func)(const BMessage*);
-
-__attribute__((dllexport)) bool b_validatb_instantiation(const BMessage *from, const char *class_name);
-__attribute__((dllexport)) b_instantiation_func b_find_instantiation_func(const char *class_name);
-__attribute__((dllexport)) b_instantiation_func b_find_instantiation_func(const BMessage *archive_data);
-# 49 "../src/kits/interface/../interface/../app/Handler.h" 2
+# 87 "../src/kits/interface/../interface/View.h" 2
+# 1 "../src/kits/interface/../interface/../support/SupportDefs.h" 1
+# 88 "../src/kits/interface/../interface/View.h" 2
 using namespace bhapi;
-class __attribute__((dllexport)) BHandler : public BArchivable {
-public:
-    BHandler(const char *name = __null);
-
- BHandler(const BMessage *from);
-    virtual ~BHandler();
-
-    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
- static BArchivable *Instantiate(const BMessage *from);
-
-    void SetName(const char *name);
-    const char *Name() const;
-
- virtual void MessageReceived(BMessage *message);
-
-    BLooper *Looper() const;
-
- virtual void SetNextHandler(BHandler *handler);
-    BHandler *NextHandler() const;
-
-    bool LockLooper();
-    b_status_t LockLooperWithTimeout(b_bigtime_t microseconds_timeout);
-    void UnlockLooper();
-
-
-    b_status_t StartWatching(BMessenger msgr, b_uint32 what);
-    b_status_t StartWatchingAll(BMessenger msgr);
-    b_status_t StopWatching(BMessenger msgr, b_uint32 what);
-    b_status_t StopWatchingAll(BMessenger msgr);
-
-    b_status_t StartWatching(BHandler *handler, b_uint32 what);
-    b_status_t StartWatchingAll(BHandler *handler);
-    b_status_t StopWatching(BHandler *handler, b_uint32 what);
-    b_status_t StopWatchingAll(BHandler *handler);
-
-
-    virtual void SendNotices(b_uint32 what, const BMessage *msg = __null);
-    bool IsWatched(b_uint32 what = (2147483647 * 2U + 1U)) const;
-
-
- virtual bool AddFilter(BMessageFilter *filter);
- virtual bool RemoveFilter(BMessageFilter *filter);
- virtual bool SetFilterList(const BList *filterList);
-    const BList *FilterList() const;
-
-
-    virtual BHandler *ResolveSpecifier(BMessage *msg, b_int32 index, BMessage *specifier, b_int32 what, const char *property);
- virtual b_status_t GetSupportedSuites(BMessage *data);
-
-private:
- friend class BLooper;
- friend class BMessage;
-    friend b_uint64 bhapi::get_handler_token(const BHandler *handler);
-
-    BToken *fToken;
- char *fName;
- BLooper *fLooper;
- BHandler *fPrevHandler;
- BHandler *fNextHandler;
- void *fObserverList;
- BList *fFilters;
-};
-# 91 "../src/kits/interface/../interface/View.h" 2
 class __attribute__((dllexport)) BView : public BHandler {
 public:
- BView(BRect frame,
-       const char *name,
+    BView(BRect frame,
+          const char *name,
           b_uint32 resizingMode,
           b_uint32 flags);
- virtual ~BView();
+    virtual ~BView();
 
- virtual void MessageReceived(BMessage *msg);
+    virtual void MessageReceived(BMessage *msg);
 
- void AddChild(BView *child, BView *childNextSibling = __null);
- bool RemoveChild(BView *child);
- bool RemoveSelf();
+    void AddChild(BView *child, BView *childNextSibling = __null);
+    bool RemoveChild(BView *child);
+    bool RemoveSelf();
     b_int32 CountChildren() const;
     BView *ChildAt(b_int32 index) const;
 
- BView *NextSibling() const;
- BView *PreviousSibling() const;
- bool IsSibling(const BView *sibling) const;
+    BView *NextSibling() const;
+    BView *PreviousSibling() const;
+    bool IsSibling(const BView *sibling) const;
 
     BWindow *Window() const;
- BView *Parent() const;
- BView *Ancestor() const;
- BView *FindView(const char *name) const;
+    BView *Parent() const;
+    BView *Ancestor() const;
+    BView *FindView(const char *name) const;
 
- BRect Bounds() const;
- BRect Frame() const;
- BPoint LeftTop() const;
+    BRect Bounds() const;
+    BRect Frame() const;
+    BPoint LeftTop() const;
 
- bool IsVisible() const;
- BRect VisibleBounds() const;
- BRect VisibleFrame() const;
- BRegion VisibleBoundsRegion() const;
- BRegion VisibleFrameRegion() const;
+    bool IsVisible() const;
+    BRect VisibleBounds() const;
+    BRect VisibleFrame() const;
+    BRegion VisibleBoundsRegion() const;
+    BRegion VisibleFrameRegion() const;
 
 
- virtual void AttachedToWindow();
- virtual void AllAttached();
- virtual void DetachedFromWindow();
- virtual void AllDetached();
- virtual void Draw(BRect updateRect);
- virtual void DrawAfterChildren(BRect updateRect);
- virtual void MouseDown(BPoint where);
- virtual void MouseUp(BPoint where);
+    virtual void AttachedToWindow();
+    virtual void AllAttached();
+    virtual void DetachedFromWindow();
+    virtual void AllDetached();
+    virtual void Draw(BRect updateRect);
+    virtual void DrawAfterChildren(BRect updateRect);
+    virtual void MouseDown(BPoint where);
+    virtual void MouseUp(BPoint where);
     virtual void MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
- virtual void WindowActivated(bool state);
+    virtual void WindowActivated(bool state);
     virtual void KeyDown(const char *bytes, b_int32 numBytes);
     virtual void KeyUp(const char *bytes, b_int32 numBytes);
- virtual void Pulse();
- virtual void FrameMoved(BPoint new_position);
- virtual void FrameResized(float new_width, float new_height);
+    virtual void Pulse();
+    virtual void FrameMoved(BPoint new_position);
+    virtual void FrameResized(float new_width, float new_height);
 
 
- virtual void Show();
- virtual void Hide();
- bool IsHidden() const;
+    virtual void Show();
+    virtual void Hide();
+    bool IsHidden() const;
 
- virtual void SetEnabled(bool state);
- bool IsEnabled() const;
+    virtual void SetEnabled(bool state);
+    bool IsEnabled() const;
 
- void ConvertToScreen(BPoint* pt) const;
- BPoint ConvertToScreen(BPoint pt) const;
- void ConvertFromScreen(BPoint* pt) const;
- BPoint ConvertFromScreen(BPoint pt) const;
+    void ConvertToScreen(BPoint* pt) const;
+    BPoint ConvertToScreen(BPoint pt) const;
+    void ConvertFromScreen(BPoint* pt) const;
+    BPoint ConvertFromScreen(BPoint pt) const;
 
- void ConvertToScreen(BRect *r) const;
- BRect ConvertToScreen(BRect r) const;
- void ConvertFromScreen(BRect *r) const;
- BRect ConvertFromScreen(BRect r) const;
+    void ConvertToScreen(BRect *r) const;
+    BRect ConvertToScreen(BRect r) const;
+    void ConvertFromScreen(BRect *r) const;
+    BRect ConvertFromScreen(BRect r) const;
 
- void ConvertToScreen(BRegion *region) const;
- BRegion ConvertToScreen(const BRegion &region) const;
- void ConvertFromScreen(BRegion *region) const;
- BRegion ConvertFromScreen(const BRegion &region) const;
+    void ConvertToScreen(BRegion *region) const;
+    BRegion ConvertToScreen(const BRegion &region) const;
+    void ConvertFromScreen(BRegion *region) const;
+    BRegion ConvertFromScreen(const BRegion &region) const;
 
- void ConvertToParent(BPoint *pt) const;
- BPoint ConvertToParent(BPoint pt) const;
- void ConvertFromParent(BPoint *pt) const;
- BPoint ConvertFromParent(BPoint pt) const;
+    void ConvertToParent(BPoint *pt) const;
+    BPoint ConvertToParent(BPoint pt) const;
+    void ConvertFromParent(BPoint *pt) const;
+    BPoint ConvertFromParent(BPoint pt) const;
 
- void ConvertToParent(BRect *r) const;
- BRect ConvertToParent(BRect r) const;
- void ConvertFromParent(BRect *r) const;
- BRect ConvertFromParent(BRect r) const;
+    void ConvertToParent(BRect *r) const;
+    BRect ConvertToParent(BRect r) const;
+    void ConvertFromParent(BRect *r) const;
+    BRect ConvertFromParent(BRect r) const;
 
- void ConvertToParent(BRegion *region) const;
- BRegion ConvertToParent(const BRegion &region) const;
- void ConvertFromParent(BRegion *region) const;
- BRegion ConvertFromParent(const BRegion &region) const;
+    void ConvertToParent(BRegion *region) const;
+    BRegion ConvertToParent(const BRegion &region) const;
+    void ConvertFromParent(BRegion *region) const;
+    BRegion ConvertFromParent(const BRegion &region) const;
 
- void ConvertToWindow(BPoint *pt) const;
- BPoint ConvertToWindow(BPoint pt) const;
- void ConvertFromWindow(BPoint *pt) const;
- BPoint ConvertFromWindow(BPoint pt) const;
+    void ConvertToWindow(BPoint *pt) const;
+    BPoint ConvertToWindow(BPoint pt) const;
+    void ConvertFromWindow(BPoint *pt) const;
+    BPoint ConvertFromWindow(BPoint pt) const;
 
- void ConvertToWindow(BRect *r) const;
- BRect ConvertToWindow(BRect r) const;
- void ConvertFromWindow(BRect *r) const;
- BRect ConvertFromWindow(BRect r) const;
+    void ConvertToWindow(BRect *r) const;
+    BRect ConvertToWindow(BRect r) const;
+    void ConvertFromWindow(BRect *r) const;
+    BRect ConvertFromWindow(BRect r) const;
 
- void ConvertToWindow(BRegion *region) const;
- BRegion ConvertToWindow(const BRegion &region) const;
- void ConvertFromWindow(BRegion *region) const;
- BRegion ConvertFromWindow(const BRegion &region) const;
+    void ConvertToWindow(BRegion *region) const;
+    BRegion ConvertToWindow(const BRegion &region) const;
+    void ConvertFromWindow(BRegion *region) const;
+    BRegion ConvertFromWindow(const BRegion &region) const;
 
     b_status_t SetEventMask(b_uint32 mask, b_uint32 options = 0);
     b_uint32 EventMask() const;
@@ -95910,82 +95935,82 @@ public:
     b_uint32 Flags() const;
     virtual void SetResizingMode(b_uint32 mode);
     b_uint32 ResizingMode() const;
- void MoveBy(float dh, float dv);
- void MoveTo(BPoint where);
- void MoveTo(float x, float y);
- void ResizeBy(float dh, float dv);
- void ResizeTo(float width, float height);
- void ScrollBy(float dh, float dv);
- void ScrollTo(float x, float y);
- virtual void ScrollTo(BPoint where);
- virtual void MakeFocus(bool focusState = true);
- bool IsFocus() const;
+    void MoveBy(float dh, float dv);
+    void MoveTo(BPoint where);
+    void MoveTo(float x, float y);
+    void ResizeBy(float dh, float dv);
+    void ResizeTo(float width, float height);
+    void ScrollBy(float dh, float dv);
+    void ScrollTo(float x, float y);
+    virtual void ScrollTo(BPoint where);
+    virtual void MakeFocus(bool focusState = true);
+    bool IsFocus() const;
 
     virtual void SetDrawingMode(bhapi::drawing_mode mode);
- bhapi::drawing_mode DrawingMode() const;
+    bhapi::drawing_mode DrawingMode() const;
 
- void MovePenTo(BPoint pt);
- void MovePenTo(float x, float y);
- void MovePenBy(float dx, float dy);
- BPoint PenLocation() const;
+    void MovePenTo(BPoint pt);
+    void MovePenTo(float x, float y);
+    void MovePenBy(float dx, float dy);
+    BPoint PenLocation() const;
 
- virtual void SetPenSize(float size);
- float PenSize() const;
+    virtual void SetPenSize(float size);
+    float PenSize() const;
 
     virtual void SetViewColor(bhapi::rgb_color c);
     void SetViewColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
- bhapi::rgb_color ViewColor() const;
+    bhapi::rgb_color ViewColor() const;
 
     virtual void SetHighColor(bhapi::rgb_color c);
     void SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
- bhapi::rgb_color HighColor() const;
+    bhapi::rgb_color HighColor() const;
 
     virtual void SetLowColor(bhapi::rgb_color c);
     void SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
- bhapi::rgb_color LowColor() const;
+    bhapi::rgb_color LowColor() const;
 
- void PushState();
- void PopState();
+    void PushState();
+    void PopState();
 
- void Invalidate(BRect invalRect, bool redraw = true);
- void Invalidate(bool redraw = true);
+    void Invalidate(BRect invalRect, bool redraw = true);
+    void Invalidate(bool redraw = true);
 
 
- void SetSquarePointStyle(bool state);
- bool IsSquarePointStyle() const;
- void StrokePoint(BPoint pt, bhapi::pattern p = B_SOLID_HIGH);
+    void SetSquarePointStyle(bool state);
+    bool IsSquarePointStyle() const;
+    void StrokePoint(BPoint pt, bhapi::pattern p = B_SOLID_HIGH);
     void StrokePoints(const BPoint *pts, b_int32 count, const b_uint8 *alpha = __null, bhapi::pattern p = B_SOLID_HIGH);
 
- void StrokeLine(BPoint pt, bhapi::pattern p = B_SOLID_HIGH);
- void StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern p = B_SOLID_HIGH);
+    void StrokeLine(BPoint pt, bhapi::pattern p = B_SOLID_HIGH);
+    void StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern p = B_SOLID_HIGH);
 
- void StrokePolygon(const BPolygon *aPolygon, bool closed = true, bhapi::pattern p = B_SOLID_HIGH);
+    void StrokePolygon(const BPolygon *aPolygon, bool closed = true, bhapi::pattern p = B_SOLID_HIGH);
     void StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed = true, bhapi::pattern p = B_SOLID_HIGH);
- void FillPolygon(const BPolygon *aPolygon, bhapi::pattern p = B_SOLID_HIGH);
+    void FillPolygon(const BPolygon *aPolygon, bhapi::pattern p = B_SOLID_HIGH);
     void FillPolygon(const BPoint *ptArray, b_int32 numPts, bhapi::pattern p = B_SOLID_HIGH);
 
- void StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p = B_SOLID_HIGH);
- void FillTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p = B_SOLID_HIGH);
+    void StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p = B_SOLID_HIGH);
+    void FillTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p = B_SOLID_HIGH);
 
- void StrokeRect(BRect r, bhapi::pattern p = B_SOLID_HIGH);
- void FillRect(BRect r, bhapi::pattern p = B_SOLID_HIGH);
+    void StrokeRect(BRect r, bhapi::pattern p = B_SOLID_HIGH);
+    void FillRect(BRect r, bhapi::pattern p = B_SOLID_HIGH);
 
     void StrokeRects(const BRect *rects, b_int32 count, bhapi::pattern p = B_SOLID_HIGH);
     void FillRects(const BRect *rects, b_int32 count, bhapi::pattern p = B_SOLID_HIGH);
- void FillRegion(const BRegion *region, bhapi::pattern p = B_SOLID_HIGH);
+    void FillRegion(const BRegion *region, bhapi::pattern p = B_SOLID_HIGH);
 
- void StrokeRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
- void FillRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
+    void StrokeRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
+    void FillRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
 
- void StrokeArc(BPoint ctPt, float xRadius, float yRadius, float startAngle, float arcAngle, bhapi::pattern p = B_SOLID_HIGH);
- void StrokeArc(BRect r, float startAngle, float arcAngle, bhapi::pattern p = B_SOLID_HIGH);
- void FillArc(BPoint ctPt, float xRadius, float yRadius, float startAngle, float arcAngle, bhapi::pattern p = B_SOLID_HIGH);
- void FillArc(BRect r, float start_angle, float arc_angle, bhapi::pattern p = B_SOLID_HIGH);
+    void StrokeArc(BPoint ctPt, float xRadius, float yRadius, float startAngle, float arcAngle, bhapi::pattern p = B_SOLID_HIGH);
+    void StrokeArc(BRect r, float startAngle, float arcAngle, bhapi::pattern p = B_SOLID_HIGH);
+    void FillArc(BPoint ctPt, float xRadius, float yRadius, float startAngle, float arcAngle, bhapi::pattern p = B_SOLID_HIGH);
+    void FillArc(BRect r, float start_angle, float arc_angle, bhapi::pattern p = B_SOLID_HIGH);
 
- void StrokeEllipse(BPoint ctPt, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
- void StrokeEllipse(BRect r, bhapi::pattern p = B_SOLID_HIGH);
- void FillEllipse(BPoint ctPt, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
- void FillEllipse(BRect r, bhapi::pattern p = B_SOLID_HIGH);
+    void StrokeEllipse(BPoint ctPt, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
+    void StrokeEllipse(BRect r, bhapi::pattern p = B_SOLID_HIGH);
+    void FillEllipse(BPoint ctPt, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
+    void FillEllipse(BRect r, bhapi::pattern p = B_SOLID_HIGH);
 
     void DrawString(const char *aString, b_int32 length = -1, float tabWidth = 0);
     void DrawString(const char *aString, BPoint location, b_int32 length = -1, float tabWidth = 0);
@@ -95993,98 +96018,102 @@ public:
 
     virtual void SetFont(const BFont *font, b_uint8 mask = B_FONT_ALL);
     void SetFont(const font_desc *fontDesc, b_uint8 mask = B_FONT_ALL);
- void GetFont(BFont *font) const;
- void SetFontSize(float size);
+    void GetFont(BFont *font) const;
+    void SetFontSize(float size);
     void GetFontHeight(font_height *height) const;
- void ForceFontAliasing(bool enable);
+    void ForceFontAliasing(bool enable);
 
- virtual void GetPreferredSize(float *width, float *height);
- virtual void ResizeToPreferred();
+    virtual void GetPreferredSize(float *width, float *height);
+    virtual void ResizeToPreferred();
 
- void GetClippingRegion(BRegion *clipping) const;
- void ConstrainClippingRegion(const BRegion *clipping);
- void ConstrainClippingRegion(BRect clipping);
+    void GetClippingRegion(BRegion *clipping) const;
+    void ConstrainClippingRegion(const BRegion *clipping);
+    void ConstrainClippingRegion(BRect clipping);
 
- bool IsPrinting() const;
- float UnitsPerPixel() const;
+    bool IsPrinting() const;
+    float UnitsPerPixel() const;
 
- void DrawBitmap(const BBitmap *bitmap);
- void DrawBitmap(const BBitmap *bitmap, BPoint where);
- void DrawBitmap(const BBitmap *bitmap, BRect destRect);
- void DrawBitmap(const BBitmap *bitmap, BRect srcRect, BRect destRect);
- void CopyBits(BRect srcRect, BRect destRect);
+    void DrawBitmap(const BBitmap *bitmap);
+    void DrawBitmap(const BBitmap *bitmap, BPoint where);
+    void DrawBitmap(const BBitmap *bitmap, BRect destRect);
+    void DrawBitmap(const BBitmap *bitmap, BRect srcRect, BRect destRect);
+    void CopyBits(BRect srcRect, BRect destRect);
 
- void Flush() const;
- void Sync() const;
+    void Flush() const;
+    void Sync() const;
 
 protected:
 
- virtual void ChildRemoving(BView *child);
- virtual void TargetedByScrollView(BScrollView *scroll_view);
+    virtual void ChildRemoving(BView *child);
+    virtual void TargetedByScrollView(BScrollView *scroll_view);
 
 
 private:
     friend class BWindow;
- friend class BScrollBar;
- friend class BScrollView;
- friend class BGraphicsEngine;
- friend class BViewLayout;
+    friend class BScrollBar;
+    friend class BScrollView;
+    friend class BGraphicsEngine;
+    friend class BViewLayout;
 
- BGraphicsContext *fDC;
+    BGraphicsContext *fDC;
     BLayoutItem *fLayout;
 
- void *fStates;
+    void *fStates;
 
     b_uint32 fViewFlags;
- bhapi::rgb_color fViewColor;
- bool fForceFontAliasing;
- BRegion fClippingTemp;
- bool fMouseInside;
+    bhapi::rgb_color fViewColor;
+    bool fForceFontAliasing;
+    BRegion fClippingTemp;
+    bool fMouseInside;
 
- BList fScrollBar;
- b_bigtime_t fScrollTimeStamp;
+    BList fScrollBar;
+    b_bigtime_t fScrollTimeStamp;
 
- bool fMouseGrabbed;
- bool fKeyboardGrabbed;
- bool fEventStored;
+    bool fMouseGrabbed;
+    bool fKeyboardGrabbed;
+    bool fEventStored;
     b_uint32 fEventMaskStored;
     b_uint32 fEventOptionsStored;
     b_uint32 fEventMask;
     b_uint32 fEventOptions;
 
- void AttachToWindow();
- void DetachFromWindow();
+    void AttachToWindow();
+    void DetachFromWindow();
     void DrawStringInDirectlyMode(const char *aString, BPoint location, b_int32 length);
     void DrawStringInPixmapMode(const char *aString, BPoint location, b_int32 length);
 
     b_status_t _SetEventMask(b_uint32 mask, b_uint32 options);
- void _Expose(BRegion region, b_bigtime_t when);
+    void _Expose(BRegion region, b_bigtime_t when);
 
- void _UpdateVisibleRegion();
- void _FrameChanged(BRect oldFrame, BRect newFrame);
+    void _UpdateVisibleRegion();
+    void _FrameChanged(BRect oldFrame, BRect newFrame);
 
     void InitSelf(BRect, b_uint32, b_uint32);
 };
-# 36 "../src/kits/interface/TextView.h" 2
+# 40 "../src/kits/interface/TextView.h" 2
+# 1 "../src/kits/interface/../support/String.h" 1
+# 41 "../src/kits/interface/TextView.h" 2
+# 1 "../src/kits/interface/../support/SupportDefs.h" 1
+# 42 "../src/kits/interface/TextView.h" 2
+
 
 namespace bhapi {
-typedef struct text_run {
- b_int32 offset;
- bhapi::font_desc font;
- bhapi::rgb_color color;
- bhapi::rgb_color background;
- bool underline;
 
+typedef struct text_run {
+    b_int32 offset;
+    bhapi::font_desc font;
+    bhapi::rgb_color color;
+    bhapi::rgb_color background;
+    bool underline;
 
     inline text_run()
- {
+    {
         memset(this, 0, sizeof(*this));
- }
+    }
 
 } text_run;
-
 typedef struct text_run_array {
- b_int32 count;
+    b_int32 count;
     text_run runs[1];
 } text_run_array;
 
@@ -96092,34 +96121,29 @@ typedef struct text_run_array {
 
 
 
-
-class BFile;
-class BClipboard;
-
-
 class __attribute__((dllexport)) BTextView : public BView {
 public:
- BTextView(BRect frame,
-    const char *name,
-    BRect textRect,
-    b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-    b_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS);
- BTextView(BRect frame,
-    const char *name,
-    BRect textRect,
-    const BFont *font, const bhapi::rgb_color *color,
-    b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-    b_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS);
- virtual ~BTextView();
+    BTextView(BRect frame,
+          const char *name,
+          BRect textRect,
+          b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+          b_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS);
+    BTextView(BRect frame,
+          const char *name,
+          BRect textRect,
+          const BFont *font, const bhapi::rgb_color *color,
+          b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+          b_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS);
+    virtual ~BTextView();
 
- const char *Text() const;
- b_int32 TextLength() const;
- b_int32 TextChars() const;
+    const char *Text() const;
+    b_int32 TextLength() const;
+    b_int32 TextChars() const;
 
- char ByteAt(b_int32 index) const;
- const char *CharAt(b_int32 index, b_uint8 *length = __null) const;
- void GetText(b_int32 offset, b_int32 length, char *buffer) const;
- void GetText(b_int32 offset, b_int32 length, char *buffer, b_int32 buffer_size_in_bytes, bool utf8) const;
+    char ByteAt(b_int32 index) const;
+    const char *CharAt(b_int32 index, b_uint8 *length = __null) const;
+    void GetText(b_int32 offset, b_int32 length, char *buffer) const;
+    void GetText(b_int32 offset, b_int32 length, char *buffer, b_int32 buffer_size_in_bytes, bool utf8) const;
 
     void SetText(const char *text, const bhapi::text_run_array *runs = __null, bool utf8 = false);
     void SetText(const char *text, b_int32 length, const bhapi::text_run_array *runs = __null, bool utf8 = false);
@@ -96133,184 +96157,178 @@ public:
     void Insert(const char *text, const bhapi::text_run_array *runs = __null, bool utf8 = false);
     void Insert(const char *text, b_int32 length, const bhapi::text_run_array *runs = __null, bool utf8 = false);
     void Insert(b_int32 offset, const char *text, b_int32 length, const bhapi::text_run_array *runs = __null, bool utf8 = false);
- void Delete();
- void Delete(b_int32 startPos, b_int32 endPos, bool utf8 = false);
+    void Delete();
+    void Delete(b_int32 startPos, b_int32 endPos, bool utf8 = false);
 
- void MakeEditable(bool editable);
- bool IsEditable() const;
+    void MakeEditable(bool editable);
+    bool IsEditable() const;
 
- void MakeSelectable(bool selectable);
- bool IsSelectable() const;
+    void MakeSelectable(bool selectable);
+    bool IsSelectable() const;
 
- void SetStylable(bool stylable);
- bool IsStylable() const;
+    void SetStylable(bool stylable);
+    bool IsStylable() const;
 
- void SetTabWidth(float width);
- float TabWidth() const;
+    void SetTabWidth(float width);
+    float TabWidth() const;
 
- void SetAutoindent(bool flag);
- bool DoesAutoindent() const;
+    void SetAutoindent(bool flag);
+    bool DoesAutoindent() const;
 
- void SetAlignment(bhapi::alignment alignment);
- bhapi::alignment Alignment() const;
+    void SetAlignment(bhapi::alignment alignment);
+    bhapi::alignment Alignment() const;
 
- void SetMaxBytes(b_int32 max);
- b_int32 MaxBytes() const;
-
-
+    void SetMaxBytes(b_int32 max);
+    b_int32 MaxBytes() const;
 
 
 
- void HideTyping(b_uint8 flag = 0x2a);
- b_uint8 IsTypingHidden() const;
 
- void SetTextRect(BRect textRect);
- BRect TextRect() const;
 
- virtual void Select(b_int32 startPos, b_int32 endPos, bool utf8 = false);
- bool GetSelection(b_int32 *startPos, b_int32 *endPos, bool utf8 = false) const;
- void SelectAll();
- void Deselect();
- bool IsSelected() const;
+    void HideTyping(b_uint8 flag = 0x2a);
+    b_uint8 IsTypingHidden() const;
 
- b_int32 CountLines() const;
- b_int32 CurrentLine() const;
- void GoToLine(b_int32 index);
+    void SetTextRect(BRect textRect);
+    BRect TextRect() const;
 
- virtual bool AcceptsPaste(BClipboard *clipboard);
+    virtual void Select(b_int32 startPos, b_int32 endPos, bool utf8 = false);
+    bool GetSelection(b_int32 *startPos, b_int32 *endPos, bool utf8 = false) const;
+    void SelectAll();
+    void Deselect();
+    bool IsSelected() const;
 
- virtual void Cut(BClipboard *clipboard);
- virtual void Copy(BClipboard *clipboard) const;
- virtual void Paste(BClipboard *clipboard);
- void Clear();
+    b_int32 CountLines() const;
+    b_int32 CurrentLine() const;
+    void GoToLine(b_int32 index);
 
- b_int32 LineAt(b_int32 offset, bool utf8 = false) const;
- b_int32 LineAt(BPoint pt, bool visible = true) const;
- BPoint PointAt(b_int32 offset, float *height = __null, bool max_height = false, bool utf8 = false) const;
- b_int32 OffsetAt(BPoint pt, bool visible = true, bool utf8 = false) const;
- b_int32 OffsetAt(b_int32 line, bool utf8 = false) const;
+    virtual bool AcceptsPaste(BClipboard *clipboard);
 
- float LineWidth(b_int32 lineIndex = 0) const;
- float LineHeight(b_int32 lineIndex = 0) const;
- float TextHeight(b_int32 fromLineIndex, b_int32 toLineIndex) const;
+    virtual void Cut(BClipboard *clipboard);
+    virtual void Copy(BClipboard *clipboard) const;
+    virtual void Paste(BClipboard *clipboard);
+    void Clear();
 
- void GetTextRegion(b_int32 startPos, b_int32 endPos, BRegion *region, bool utf8 = false) const;
- virtual void ScrollToOffset(b_int32 offset, bool utf8 = false);
- void ScrollToSelection();
+    b_int32 LineAt(b_int32 offset, bool utf8 = false) const;
+    b_int32 LineAt(BPoint pt, bool visible = true) const;
+    BPoint PointAt(b_int32 offset, float *height = __null, bool max_height = false, bool utf8 = false) const;
+    b_int32 OffsetAt(BPoint pt, bool visible = true, bool utf8 = false) const;
+    b_int32 OffsetAt(b_int32 line, bool utf8 = false) const;
 
- void SetTextBackground(bhapi::rgb_color color);
- bhapi::rgb_color TextBackground() const;
+    float LineWidth(b_int32 lineIndex = 0) const;
+    float LineHeight(b_int32 lineIndex = 0) const;
+    float TextHeight(b_int32 fromLineIndex, b_int32 toLineIndex) const;
 
- void SetPosition(b_int32 pos, bool response = true, bool utf8 = false);
- b_int32 Position(bool utf8 = false, b_int32 *lineOffset = __null) const;
+    void GetTextRegion(b_int32 startPos, b_int32 endPos, BRegion *region, bool utf8 = false) const;
+    virtual void ScrollToOffset(b_int32 offset, bool utf8 = false);
+    void ScrollToSelection();
 
- virtual void Draw(BRect updateRect);
- virtual void FrameResized(float new_width, float new_height);
- virtual void MouseDown(BPoint where);
- virtual void MouseUp(BPoint where);
- virtual void MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
- virtual void KeyDown(const char *bytes, b_int32 numBytes);
- virtual void KeyUp(const char *bytes, b_int32 numBytes);
- virtual void WindowActivated(bool state);
- virtual void MakeFocus(bool focusState = true);
- virtual void MessageReceived(BMessage *msg);
- virtual void GetPreferredSize(float *width, float *height);
+    void SetTextBackground(bhapi::rgb_color color);
+    bhapi::rgb_color TextBackground() const;
+
+    void SetPosition(b_int32 pos, bool response = true, bool utf8 = false);
+    b_int32 Position(bool utf8 = false, b_int32 *lineOffset = __null) const;
+
+    virtual void Draw(BRect updateRect);
+    virtual void FrameResized(float new_width, float new_height);
+    virtual void MouseDown(BPoint where);
+    virtual void MouseUp(BPoint where);
+    virtual void MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
+    virtual void KeyDown(const char *bytes, b_int32 numBytes);
+    virtual void KeyUp(const char *bytes, b_int32 numBytes);
+    virtual void WindowActivated(bool state);
+    virtual void MakeFocus(bool focusState = true);
+    virtual void MessageReceived(BMessage *msg);
+    virtual void GetPreferredSize(float *width, float *height);
 
 protected:
     virtual void InsertText(const char *text, b_int32 length, b_int32 offset, const bhapi::text_run_array *runs, bool utf8);
- virtual void DeleteText(b_int32 startPos, b_int32 endPos, bool utf8);
+    virtual void DeleteText(b_int32 startPos, b_int32 endPos, bool utf8);
 
 private:
- BRect fMargins;
+    BRect fMargins;
     BString fText;
     bhapi::text_run_array *fRunArray;
 
- bool fEditable;
- bool fSelectable;
- bool fStylable;
- bhapi::alignment fAlignment;
- b_int32 fMaxBytes;
- float fTabWidth;
- bool fAutoindent;
- b_uint8 fTypingHidden;
+    bool fEditable;
+    bool fSelectable;
+    bool fStylable;
+    bhapi::alignment fAlignment;
+    b_int32 fMaxBytes;
+    float fTabWidth;
+    bool fAutoindent;
+    b_uint8 fTypingHidden;
 
- b_int32 fSelectTracking;
- b_int32 fSelectStart;
- b_int32 fSelectEnd;
+    b_int32 fSelectTracking;
+    b_int32 fSelectStart;
+    b_int32 fSelectEnd;
 
- BList fLines;
- b_int32 fCurrentLine;
- b_int32 fCursor;
+    BList fLines;
+    b_int32 fCurrentLine;
+    b_int32 fCursor;
 
- bhapi::rgb_color fTextBkColor;
+    bhapi::rgb_color fTextBkColor;
 
- void ReScanRunArray(b_int32 fromLine, b_int32 toLine);
- void ReScanSize(b_int32 fromLine, b_int32 toLine);
- void ReScanLines();
- void FloorPosition(b_int32 *pos);
- void CeilPosition(b_int32 *pos);
+    void ReScanRunArray(b_int32 fromLine, b_int32 toLine);
+    void ReScanSize(b_int32 fromLine, b_int32 toLine);
+    void ReScanLines();
+    void FloorPosition(b_int32 *pos);
+    void CeilPosition(b_int32 *pos);
 
- float _StringWidth(const BFont &font, const char *str, b_int32 length) const;
- void _DrawString(const BFont &font, const char *str, BPoint location, b_int32 length);
+    float _StringWidth(const BFont &font, const char *str, b_int32 length) const;
+    void _DrawString(const BFont &font, const char *str, BPoint location, b_int32 length);
 };
-
 
 
 inline void BTextView::SelectAll()
 {
- Select(0, -1, false);
+    Select(0, -1, false);
 }
-
 
 inline void BTextView::Deselect()
 {
- Select(-1, 0, false);
+    Select(-1, 0, false);
 }
 
 inline bool BTextView::IsSelected() const
 {
- return GetSelection(__null, __null, false);
+    return GetSelection(__null, __null, false);
 }
-
 
 inline void BTextView::Delete()
 {
- b_int32 startPos = 0, endPos = 0;
- if(GetSelection(&startPos, &endPos, false)) Delete(startPos, endPos, false);
+    b_int32 startPos = 0, endPos = 0;
+    if(GetSelection(&startPos, &endPos, false)) Delete(startPos, endPos, false);
 }
-
 
 inline void BTextView::Clear()
 {
- Delete();
+    Delete();
 }
 # 34 "../src/kits/interface/TextView.cpp" 2
 # 1 "../src/kits/interface/Window.h" 1
-# 33 "../src/kits/interface/Window.h"
-# 1 "../src/kits/interface/GraphicsDefs.h" 1
-# 34 "../src/kits/interface/Window.h" 2
+# 34 "../src/kits/interface/Window.h"
+namespace bhapi {
 
-typedef enum b_window_type {
+
+typedef enum window_type {
     B_UNTYPED_WINDOW = 0,
     B_TITLED_WINDOW,
     B_MODAL_WINDOW,
     B_DOCUMENT_WINDOW,
     B_BORDERED_WINDOW,
     B_FLOATING_WINDOW
-} b_window_type;
+} window_type;
 
-
-typedef enum b_window_look {
+typedef enum window_look {
     B_BORDERED_WINDOW_LOOK = 1,
     B_NO_BORDER_WINDOW_LOOK,
     B_TITLED_WINDOW_LOOK,
     B_DOCUMENT_WINDOW_LOOK,
     B_MODAL_WINDOW_LOOK,
     B_FLOATING_WINDOW_LOOK
-} b_window_look;
+} window_look;
 
-
-typedef enum b_window_feel {
+typedef enum window_feel {
     B_NORMAL_WINDOW_FEEL = 1,
     B_MODAL_SUBSET_WINDOW_FEEL,
     B_MODAL_APP_WINDOW_FEEL,
@@ -96318,8 +96336,7 @@ typedef enum b_window_feel {
     B_FLOATING_SUBSET_WINDOW_FEEL,
     B_FLOATING_APP_WINDOW_FEEL,
     B_FLOATING_ALL_WINDOW_FEEL
-} b_window_feel;
-
+} window_feel;
 
 enum {
     B_NOT_MOVABLE = 1,
@@ -96338,6 +96355,8 @@ enum {
     B_QUIT_ON_WINDOW_CLOSE = 1 << 13
 };
 
+}
+
 
 
 
@@ -96353,17 +96372,8 @@ class BMessage;
 class BMessageRunner;
 class BRegion;
 class BPoint;
-# 1 "../src/kits/interface/../interface/Rect.h" 1
-# 99 "../src/kits/interface/Window.h" 2
-# 1 "../src/kits/interface/../support/List.h" 1
-# 100 "../src/kits/interface/Window.h" 2
 # 1 "../src/kits/interface/../app/Looper.h" 1
-# 33 "../src/kits/interface/../app/Looper.h"
-# 1 "../src/kits/interface/../app/../support/SupportDefs.h" 1
-# 34 "../src/kits/interface/../app/Looper.h" 2
-
-
-
+# 35 "../src/kits/interface/../app/Looper.h"
 class BApplication;
 class BMessenger;
 class BMessage;
@@ -96371,14 +96381,16 @@ class BMessageFilter;
 class BMessageQueue;
 class BLoooper;
 # 1 "../src/kits/interface/../app/../support/List.h" 1
-# 44 "../src/kits/interface/../app/Looper.h" 2
+# 42 "../src/kits/interface/../app/Looper.h" 2
 # 1 "../src/kits/interface/../app/Handler.h" 1
-# 45 "../src/kits/interface/../app/Looper.h" 2
+# 43 "../src/kits/interface/../app/Looper.h" 2
+# 1 "../src/kits/interface/../app/../support/SupportDefs.h" 1
+# 44 "../src/kits/interface/../app/Looper.h" 2
 class __attribute__((dllexport)) BLooper : public BHandler {
 public:
 
 
- void Init(const char *name, b_int32 priority);
+    void Init(const char *name, b_int32 priority);
     BLooper(const char *name);
     BLooper(b_int32 priority);
     BLooper(const char *name,
@@ -96386,203 +96398,209 @@ public:
     virtual ~BLooper();
 
 
- BLooper(const BMessage *from);
- virtual b_status_t Archive(BMessage *into, bool deep = true) const;
- static BArchivable *Instantiate(const BMessage *from);
+    BLooper(const BMessage *from);
+    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    static BArchivable *Instantiate(const BMessage *from);
 
- void AddHandler(BHandler *handler);
- bool RemoveHandler(BHandler *handler);
- b_int32 CountHandlers() const;
- BHandler *HandlerAt(b_int32 index) const;
- b_int32 IndexOf(BHandler *handler) const;
+    void AddHandler(BHandler *handler);
+    bool RemoveHandler(BHandler *handler);
+    b_int32 CountHandlers() const;
+    BHandler *HandlerAt(b_int32 index) const;
+    b_int32 IndexOf(BHandler *handler) const;
 
- BHandler *PreferredHandler() const;
- void SetPreferredHandler(BHandler *handler);
+    BHandler *PreferredHandler() const;
+    void SetPreferredHandler(BHandler *handler);
 
- bool IsRunning() const;
- virtual void *Run();
- virtual void Quit();
- virtual bool QuitRequested();
- BLooper* Proxy() const;
- bool ProxyBy(BLooper *proxy);
+    bool IsRunning() const;
+    virtual void *Run();
+    virtual void Quit();
+    virtual bool QuitRequested();
+    BLooper* Proxy() const;
+    bool ProxyBy(BLooper *proxy);
 
- b_thread_id Thread() const;
+    b_thread_id Thread() const;
 
- bool Lock();
- void Unlock();
- b_status_t LockWithTimeout(b_bigtime_t microseconds_timeout);
+    bool Lock();
+    void Unlock();
+    b_status_t LockWithTimeout(b_bigtime_t microseconds_timeout);
 
- b_int64 CountLocks() const;
- bool IsLockedByCurrentThread() const;
+    b_int64 CountLocks() const;
+    bool IsLockedByCurrentThread() const;
 
- virtual void DispatchMessageW(BMessage *msg, BHandler *target);
-
-
- virtual void MessageReceived(BMessage *msg);
+    virtual void DispatchMessageW(BMessage *msg, BHandler *target);
 
 
- BMessage *CurrentMessage() const;
- BMessage *DetachCurrentMessage();
- BMessageQueue *MessageQueue() const;
+    virtual void MessageReceived(BMessage *msg);
 
- b_status_t PostMessageW(b_uint32 command);
- b_status_t PostMessageW(const BMessage *message);
- b_status_t PostMessageW(b_uint32 command,
-        BHandler *handler,
-        BHandler *reply_to = __null);
- b_status_t PostMessageW(const BMessage *message,
-        BHandler *handler,
-        BHandler *reply_to = __null);
 
- virtual bool AddCommonFilter(BMessageFilter *filter);
- virtual bool RemoveCommonFilter(BMessageFilter *filter);
- virtual bool SetCommonFilterList(const BList *filterList);
- const BList *CommonFilterList() const;
+    BMessage *CurrentMessage() const;
+    BMessage *DetachCurrentMessage();
+    BMessageQueue *MessageQueue() const;
 
- static BLooper *LooperForThread(b_thread_id tid);
+    b_status_t PostMessageW(b_uint32 command);
+    b_status_t PostMessageW(const BMessage *message);
+    b_status_t PostMessageW(b_uint32 command,
+                    BHandler *handler,
+                    BHandler *reply_to = __null);
+    b_status_t PostMessageW(const BMessage *message,
+                    BHandler *handler,
+                    BHandler *reply_to = __null);
+
+    virtual bool AddCommonFilter(BMessageFilter *filter);
+    virtual bool RemoveCommonFilter(BMessageFilter *filter);
+    virtual bool SetCommonFilterList(const BList *filterList);
+    const BList *CommonFilterList() const;
+
+    static BLooper *LooperForThread(b_thread_id tid);
 
 protected:
-# 132 "../src/kits/interface/../app/Looper.h"
+# 131 "../src/kits/interface/../app/Looper.h"
     BMessage *NextLooperMessage(b_bigtime_t timeout);
     void DispatchLooperMessage(BMessage *msg);
 
 private:
- friend class BHandler;
- friend class BApplication;
- friend class BMessenger;
- friend b_status_t bhapi::lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
+    friend class BHandler;
+    friend class BApplication;
+    friend class BMessenger;
+    friend b_status_t bhapi::lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
 
- bool fDeconstructing;
- BLooper *fProxy;
- BList fClients;
+    bool fDeconstructing;
+    BLooper *fProxy;
+    BList fClients;
 
- b_int32 fThreadPriority;
+    b_int32 fThreadPriority;
 
- b_int32 fHandlersCount;
- BHandler *fPreferredHandler;
+    b_int32 fHandlersCount;
+    BHandler *fPreferredHandler;
 
- void *fLocker;
- b_int64 fLocksCount;
+    void *fLocker;
+    b_int64 fLocksCount;
 
- void *fThread;
- void *fSem;
+    void *fThread;
+    void *fSem;
 
- BMessageQueue *fMessageQueue;
- BMessage *fCurrentMessage;
+    BMessageQueue *fMessageQueue;
+    BMessage *fCurrentMessage;
 
- static b_status_t _task(void*);
- static b_status_t _taskLooper(BLooper*, void*);
- static void _taskError(void*);
+    static b_status_t _task(void*);
+    static b_status_t _taskLooper(BLooper*, void*);
+    static void _taskError(void*);
 
- static BList sLooperList;
+    static BList sLooperList;
 
- BHandler *_MessageTarget(const BMessage *msg, bool *preferred);
- b_status_t _PostMessage(const BMessage *msg, b_uint64 handlerToken, b_uint64 replyToken, b_bigtime_t timeout);
+    BHandler *_MessageTarget(const BMessage *msg, bool *preferred);
+    b_status_t _PostMessage(const BMessage *msg, b_uint64 handlerToken, b_uint64 replyToken, b_bigtime_t timeout);
 
- BLooper *_Proxy() const;
- bool _ProxyBy(BLooper *proxy);
- BLooper *_GetNextClient(BLooper *client) const;
+    BLooper *_Proxy() const;
+    bool _ProxyBy(BLooper *proxy);
+    BLooper *_GetNextClient(BLooper *client) const;
 
- bool *fThreadExited;
+    bool *fThreadExited;
 
- BList fCommonFilters;
- void _FilterAndDispatchMessage(BMessage *msg, BHandler *target);
+    BList fCommonFilters;
+    void _FilterAndDispatchMessage(BMessage *msg, BHandler *target);
 
- virtual bool IsDependsOnOthersWhenQuitRequested() const;
+    virtual bool IsDependsOnOthersWhenQuitRequested() const;
 };
+# 100 "../src/kits/interface/Window.h" 2
+# 1 "../src/kits/interface/../interface/Rect.h" 1
 # 101 "../src/kits/interface/Window.h" 2
+# 1 "../src/kits/interface/../support/List.h" 1
+# 102 "../src/kits/interface/Window.h" 2
+# 1 "../src/kits/interface/GraphicsDefs.h" 1
+# 103 "../src/kits/interface/Window.h" 2
 class __attribute__((dllexport)) BWindow : public BLooper {
 public:
     BWindow(BRect frame,
-  const char *title,
-  b_window_type type,
+        const char *title,
+        bhapi::window_type type,
         b_uint32 flags,
         b_uint32 workspace = 0);
     BWindow(BRect frame,
-  const char *title,
-  b_window_look look,
-  b_window_feel feel,
+        const char *title,
+        bhapi::window_look look,
+        bhapi::window_feel feel,
         b_uint32 flags,
         b_uint32 workspace = 0);
     virtual ~BWindow();
 
- virtual void DispatchMessageW(BMessage *msg, BHandler *target);
+    virtual void DispatchMessageW(BMessage *msg, BHandler *target);
 
- virtual void Quit();
+    virtual void Quit();
 
- virtual void Show();
- virtual void Hide();
- virtual void Minimize(bool minimize);
- bool IsHidden() const;
- bool IsMinimized() const;
+    virtual void Show();
+    virtual void Hide();
+    virtual void Minimize(bool minimize);
+    bool IsHidden() const;
+    bool IsMinimized() const;
 
- void Activate(bool state = true);
- bool IsActivate() const;
+    void Activate(bool state = true);
+    bool IsActivate() const;
 
     b_status_t SendBehind(const BWindow *window);
 
- BRect Bounds() const;
- BRect Frame() const;
+    BRect Bounds() const;
+    BRect Frame() const;
 
- void AddChild(BView *child, BView *childNextSibling = __null);
- bool RemoveChild(BView *child);
+    void AddChild(BView *child, BView *childNextSibling = __null);
+    bool RemoveChild(BView *child);
     b_int32 CountChildren() const;
     BView *ChildAt(b_int32 index) const;
 
- void ConvertToScreen(BPoint* pt) const;
- BPoint ConvertToScreen(BPoint pt) const;
- void ConvertFromScreen(BPoint* pt) const;
- BPoint ConvertFromScreen(BPoint pt) const;
+    void ConvertToScreen(BPoint* pt) const;
+    BPoint ConvertToScreen(BPoint pt) const;
+    void ConvertFromScreen(BPoint* pt) const;
+    BPoint ConvertFromScreen(BPoint pt) const;
 
- void ConvertToScreen(BRect *r) const;
- BRect ConvertToScreen(BRect r) const;
- void ConvertFromScreen(BRect *r) const;
- BRect ConvertFromScreen(BRect r) const;
+    void ConvertToScreen(BRect *r) const;
+    BRect ConvertToScreen(BRect r) const;
+    void ConvertFromScreen(BRect *r) const;
+    BRect ConvertFromScreen(BRect r) const;
 
- void ConvertToScreen(BRegion *region) const;
- BRegion ConvertToScreen(const BRegion &region) const;
- void ConvertFromScreen(BRegion *region) const;
- BRegion ConvertFromScreen(const BRegion &region) const;
+    void ConvertToScreen(BRegion *region) const;
+    BRegion ConvertToScreen(const BRegion &region) const;
+    void ConvertFromScreen(BRegion *region) const;
+    BRegion ConvertFromScreen(const BRegion &region) const;
 
- void MoveBy(float dx, float dy);
- void MoveTo(BPoint leftTop);
- void MoveToCenter();
- void ResizeBy(float dx, float dy);
- void ResizeTo(float width, float height);
+    void MoveBy(float dx, float dy);
+    void MoveTo(BPoint leftTop);
+    void MoveToCenter();
+    void ResizeBy(float dx, float dy);
+    void ResizeTo(float width, float height);
 
 
- virtual void WindowActivated(bool state);
- virtual void FrameMoved(BPoint new_position);
- virtual void FrameResized(float new_width, float new_height);
+    virtual void WindowActivated(bool state);
+    virtual void FrameMoved(BPoint new_position);
+    virtual void FrameResized(float new_width, float new_height);
     virtual void WorkspacesChanged(b_uint32 old_ws, b_uint32 new_ws);
     virtual void WorkspaceActivated(b_int32 ws, bool state);
 
 
- void Invalidate(BRect invalRect, bool redraw = true);
- void DisableUpdates();
- void EnableUpdates();
+    void Invalidate(BRect invalRect, bool redraw = true);
+    void DisableUpdates();
+    void EnableUpdates();
 
- bool NeedsUpdate() const;
- void UpdateIfNeeded();
- BView *FindView(const char *name) const;
- BView *FindView(BPoint where) const;
- BView *CurrentFocus() const;
+    bool NeedsUpdate() const;
+    void UpdateIfNeeded();
+    BView *FindView(const char *name) const;
+    BView *FindView(BPoint where) const;
+    BView *CurrentFocus() const;
 
     virtual void SetBackgroundColor(bhapi::rgb_color c);
     void SetBackgroundColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
- bhapi::rgb_color BackgroundColor() const;
+    bhapi::rgb_color BackgroundColor() const;
 
- void SetTitle(const char *title);
- const char* Title() const;
+    void SetTitle(const char *title);
+    const char* Title() const;
 
-    b_status_t SetType(b_window_type type);
- b_window_type Type() const;
+    b_status_t SetType(bhapi::window_type type);
+    bhapi::window_type Type() const;
 
-    b_status_t SetLook(b_window_look look);
- b_window_look Look() const;
+    b_status_t SetLook(bhapi::window_look look);
+    bhapi::window_look Look() const;
 
-    b_status_t SetFeel(b_window_feel feel);
- b_window_feel Feel() const;
+    b_status_t SetFeel(bhapi::window_feel feel);
+    bhapi::window_feel Feel() const;
 
     b_status_t SetFlags(b_uint32 flags);
     b_uint32 Flags() const;
@@ -96590,253 +96608,246 @@ public:
     void SetWorkspaces(b_uint32 workspace);
     b_uint32 Workspaces() const;
 
- void SetSizeLimits(float min_h, float max_h, float min_v, float max_v);
- void GetSizeLimits(float *min_h, float *max_h, float *min_v, float *max_v) const;
+    void SetSizeLimits(float min_h, float max_h, float min_v, float max_v);
+    void GetSizeLimits(float *min_h, float *max_h, float *min_v, float *max_v) const;
 
     void SetPulseRate(b_bigtime_t rate);
- b_bigtime_t PulseRate() const;
+    b_bigtime_t PulseRate() const;
 
 protected:
- bool GrabMouse();
- bool IsMouseGrabbed() const;
- void UngrabMouse();
- bool GrabKeyboard();
- bool IsKeyboardGrabbed() const;
- void UngrabKeyboard();
+    bool GrabMouse();
+    bool IsMouseGrabbed() const;
+    void UngrabMouse();
+    bool GrabKeyboard();
+    bool IsKeyboardGrabbed() const;
+    void UngrabKeyboard();
 
 private:
- friend class BApplication;
- friend class BView;
- friend class BGraphicsEngine;
- friend class BBitmap;
+    friend class BApplication;
+    friend class BView;
+    friend class BGraphicsEngine;
+    friend class BBitmap;
 
- BGraphicsWindow *fWindow;
- BGraphicsDrawable *fPixmap;
- BGraphicsContext *fDC;
+    BGraphicsWindow *fWindow;
+    BGraphicsDrawable *fPixmap;
+    BGraphicsContext *fDC;
     BLayoutContainer *fLayout;
 
- char *fWindowTitle;
- b_window_look fWindowLook;
- b_window_feel fWindowFeel;
+    char *fWindowTitle;
+    bhapi::window_look fWindowLook;
+    bhapi::window_feel fWindowFeel;
     b_uint32 fWindowFlags;
     b_uint32 fWindowWorkspaces;
 
- BView *fFocus;
- BList fMouseInterestedViews;
- BList fKeyboardInterestedViews;
- BList fMouseInsideViews;
+    BView *fFocus;
+    BList fMouseInterestedViews;
+    BList fKeyboardInterestedViews;
+    BList fMouseInsideViews;
 
     static void AddViewChildrenToHandlersList(BWindow *win, BView *child);
     static void RemoveViewChildrenFromHandlersList(BWindow *win, BView *child);
 
     b_int64 fUpdateHolderThreadId;
     b_int64 fUpdateHolderCount;
- BRect fUpdateRect;
- BRect fExposeRect;
- bool fInUpdate;
+    BRect fUpdateRect;
+    BRect fExposeRect;
+    bool fInUpdate;
 
- void _Update(BRect rect, bool force_update);
- void _Expose(BRect rect, b_bigtime_t when);
+    void _Update(BRect rect, bool force_update);
+    void _Expose(BRect rect, b_bigtime_t when);
     void _UpdateIfNeeded(b_bigtime_t when);
- bool InUpdate() const;
+    bool InUpdate() const;
 
- bool _HasResizeMessage(bool setBrokeOnExpose);
+    bool _HasResizeMessage(bool setBrokeOnExpose);
 
- bool fMinimized;
- bool fActivated;
+    bool fMinimized;
+    bool fActivated;
 
- b_bigtime_t fActivatedTimeStamp;
- b_bigtime_t fPositionChangedTimeStamp;
- b_bigtime_t fSizeChangedTimeStamp;
+    b_bigtime_t fActivatedTimeStamp;
+    b_bigtime_t fPositionChangedTimeStamp;
+    b_bigtime_t fSizeChangedTimeStamp;
 
     b_uint32 fMouseGrabCount;
     b_uint32 fKeyboardGrabCount;
- bool _GrabMouse();
- bool _GrabKeyboard();
- void _UngrabMouse();
- void _UngrabKeyboard();
+    bool _GrabMouse();
+    bool _GrabKeyboard();
+    void _UngrabMouse();
+    void _UngrabKeyboard();
 
- bool fBrokeOnExpose;
+    bool fBrokeOnExpose;
 
- b_bigtime_t fPulseRate;
- BMessageRunner *fPulseRunner;
- BList fNeededToPulseViews;
+    b_bigtime_t fPulseRate;
+    BMessageRunner *fPulseRunner;
+    BList fNeededToPulseViews;
 
-    void InitSelf(BRect, const char*, b_window_look, b_window_feel, b_uint32, b_uint32);
+    void InitSelf(BRect, const char*, bhapi::window_look, bhapi::window_feel, b_uint32, b_uint32);
 };
 # 35 "../src/kits/interface/TextView.cpp" 2
 # 1 "../src/kits/interface/ScrollView.h" 1
-# 33 "../src/kits/interface/ScrollView.h"
+# 34 "../src/kits/interface/ScrollView.h"
 # 1 "../src/kits/interface/../interface/ScrollBar.h" 1
-# 33 "../src/kits/interface/../interface/ScrollBar.h"
+# 37 "../src/kits/interface/../interface/ScrollBar.h"
 # 1 "../src/kits/interface/../interface/../app/MessageRunner.h" 1
-# 36 "../src/kits/interface/../interface/../app/MessageRunner.h"
+# 35 "../src/kits/interface/../interface/../app/MessageRunner.h"
 class BMessenger;
 class BMessage;
+
 class __attribute__((dllexport)) BMessageRunner {
 public:
- BMessageRunner(const BMessenger &target,
-         const BMessage *msg,
-         b_bigtime_t interval,
+    BMessageRunner(const BMessenger &target,
+               const BMessage *msg,
+               b_bigtime_t interval,
                b_int32 count = -1);
- BMessageRunner(const BMessenger &target,
-         const BMessage *msg,
-         b_bigtime_t interval,
+    BMessageRunner(const BMessenger &target,
+               const BMessage *msg,
+               b_bigtime_t interval,
                b_int32 count,
-         const BMessenger &replyTo);
- virtual ~BMessageRunner();
+               const BMessenger &replyTo);
+    virtual ~BMessageRunner();
 
- bool IsValid() const;
+    bool IsValid() const;
 
- b_status_t SetTarget(const BMessenger &target);
- b_status_t SetReplyTo(const BMessenger &replyTo);
- b_status_t SetMessage(const BMessage *msg);
+    b_status_t SetTarget(const BMessenger &target);
+    b_status_t SetReplyTo(const BMessenger &replyTo);
+    b_status_t SetMessage(const BMessage *msg);
     b_status_t SetInterval(b_bigtime_t interval);
     b_status_t SetCount(b_int32 count);
 
     b_status_t GetInfo(b_bigtime_t *interval, b_int32 *count) const;
- b_status_t GetInfo(BMessenger *target, BMessage *msg,
+    b_status_t GetInfo(BMessenger *target, BMessage *msg,
                 b_bigtime_t *interval, b_int32 *count,
-    BMessenger *replyTo = __null) const;
+                BMessenger *replyTo = __null) const;
 
 private:
- friend class BApplication;
+    friend class BApplication;
 
     b_int32 fToken;
 
- BMessenger *fTarget;
- BMessenger *fReplyTo;
- BMessage *fMessage;
- b_bigtime_t fInterval;
- b_bigtime_t fPrevSendTime;
+    BMessenger *fTarget;
+    BMessenger *fReplyTo;
+    BMessage *fMessage;
+    b_bigtime_t fInterval;
+    b_bigtime_t fPrevSendTime;
     b_int32 fCount;
 };
-# 34 "../src/kits/interface/../interface/ScrollBar.h" 2
+# 38 "../src/kits/interface/../interface/ScrollBar.h" 2
 # 1 "../src/kits/interface/../interface/../interface/View.h" 1
-# 35 "../src/kits/interface/../interface/ScrollBar.h" 2
-
-
-
-
-
+# 39 "../src/kits/interface/../interface/ScrollBar.h" 2
 
 class __attribute__((dllexport)) BScrollBar : public BView {
 public:
     BScrollBar(BRect frame, const char *name,
-     float value, float min, float max,
+           float value, float min, float max,
            bhapi::orientation direction);
     virtual ~BScrollBar();
 
- void SetValue(float value);
- float Value() const;
- void SetProportion(float ratio);
- float Proportion() const;
+    void SetValue(float value);
+    float Value() const;
+    void SetProportion(float ratio);
+    float Proportion() const;
 
 
- virtual void ValueChanged(float value);
+    virtual void ValueChanged(float value);
 
 
- void SetRange(float min, float max);
- void GetRange(float *min, float *max) const;
- void SetSteps(float smallStep, float largeStep);
- void GetSteps(float *smallStep, float *largeStep) const;
+    void SetRange(float min, float max);
+    void GetRange(float *min, float *max) const;
+    void SetSteps(float smallStep, float largeStep);
+    void GetSteps(float *smallStep, float *largeStep) const;
 
 
 
- b_status_t SetTarget(BView *target);
- BView *Target() const;
+    b_status_t SetTarget(BView *target);
+    BView *Target() const;
 
     bhapi::orientation Orientation() const;
 
- virtual void Draw(BRect updateRect);
- virtual void MouseDown(BPoint where);
- virtual void MouseUp(BPoint where);
+    virtual void Draw(BRect updateRect);
+    virtual void MouseDown(BPoint where);
+    virtual void MouseUp(BPoint where);
     virtual void MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
- virtual void DetachedFromWindow();
+    virtual void DetachedFromWindow();
 
 private:
     friend class BWindow;
- friend class BView;
+    friend class BView;
 
     bhapi::orientation fOrientation;
- float fValue;
- float fRangeMin;
- float fRangeMax;
- float fStepSmall;
- float fStepLarge;
- BView *fTarget;
+    float fValue;
+    float fRangeMin;
+    float fRangeMax;
+    float fStepSmall;
+    float fStepLarge;
+    BView *fTarget;
 
- bool fTracking;
+    bool fTracking;
     b_int8 fTrackingState;
- BPoint fMousePosition;
- BRegion fTrackingRegion;
+    BPoint fMousePosition;
+    BRegion fTrackingRegion;
     void doScroll(b_int8 state);
- void _SetValue(float value, bool response);
+    void _SetValue(float value, bool response);
 
- BMessageRunner *fRunner;
+    BMessageRunner *fRunner;
 };
-# 34 "../src/kits/interface/ScrollView.h" 2
-
-
-
+# 35 "../src/kits/interface/ScrollView.h" 2
 class __attribute__((dllexport)) BScrollView : public BView {
 public:
- BScrollView(BRect frame, const char *name, BView *target,
-      b_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-      b_uint32 flags = 0,
-      bool alwaysShowHorizontal = false,
-      bool alwaysShowVertical = false,
+    BScrollView(BRect frame, const char *name, BView *target,
+            b_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+            b_uint32 flags = 0,
+            bool alwaysShowHorizontal = false,
+            bool alwaysShowVertical = false,
             bhapi::border_style border = B_FANCY_BORDER);
- virtual ~BScrollView();
+    virtual ~BScrollView();
 
 
 
- b_status_t SetTarget(BView *newTarget);
- BView *Target() const;
- BRect TargetFrame() const;
+    b_status_t SetTarget(BView *newTarget);
+    BView *Target() const;
+    BRect TargetFrame() const;
 
     virtual void SetBorder(bhapi::border_style border);
     bhapi::border_style Border() const;
 
- void SetScrollBarAutoState(bool alwaysShowHorizontal, bool alwaysShowVertical);
- void GetScrollBarAutoState(bool *alwaysShowHorizontal, bool *alwaysShowVertical) const;
+    void SetScrollBarAutoState(bool alwaysShowHorizontal, bool alwaysShowVertical);
+    void GetScrollBarAutoState(bool *alwaysShowHorizontal, bool *alwaysShowVertical) const;
 
- BScrollBar *ScrollBar(bhapi::orientation direction) const;
+    BScrollBar *ScrollBar(bhapi::orientation direction) const;
 
- virtual void SetFlags(b_uint32 flags);
- virtual void Draw(BRect updateRect);
- virtual void FrameResized(float new_width, float new_height);
+    virtual void SetFlags(b_uint32 flags);
+    virtual void Draw(BRect updateRect);
+    virtual void FrameResized(float new_width, float new_height);
 
 protected:
- virtual void ChildRemoving(BView *child);
+    virtual void ChildRemoving(BView *child);
 
 private:
- friend class BView;
+    friend class BView;
 
     bhapi::border_style fBorder;
- bool fAlwaysShowHorizontal;
- bool fAlwaysShowVertical;
+    bool fAlwaysShowHorizontal;
+    bool fAlwaysShowVertical;
 
- BScrollBar *fHSB;
- BScrollBar *fVSB;
- BView *fTarget;
+    BScrollBar *fHSB;
+    BScrollBar *fVSB;
+    BView *fTarget;
 
- BRect TargetValidFrame(bool ignore_scrollbar = false) const;
+    BRect TargetValidFrame(bool ignore_scrollbar = false) const;
 };
 # 36 "../src/kits/interface/TextView.cpp" 2
 
 # 1 "../src/kits/interface/../app/Application.h" 1
-# 36 "../src/kits/interface/../app/Application.h"
+# 35 "../src/kits/interface/../app/Application.h"
+# 1 "../src/kits/interface/../app/../app/MessageRunner.h" 1
+# 36 "../src/kits/interface/../app/Application.h" 2
 # 1 "../src/kits/interface/../app/../app/Looper.h" 1
 # 37 "../src/kits/interface/../app/Application.h" 2
-# 1 "../src/kits/interface/../app/../app/MessageRunner.h" 1
-# 38 "../src/kits/interface/../app/Application.h" 2
 # 1 "../src/kits/interface/../app/../app/Cursor.h" 1
-# 33 "../src/kits/interface/../app/../app/Cursor.h"
-# 1 "../src/kits/interface/../app/../app/../support/SupportDefs.h" 1
-# 34 "../src/kits/interface/../app/../app/Cursor.h" 2
+# 34 "../src/kits/interface/../app/../app/Cursor.h"
 # 1 "../src/kits/interface/../app/../app/../support/Archivable.h" 1
 # 35 "../src/kits/interface/../app/../app/Cursor.h" 2
+# 1 "../src/kits/interface/../app/../app/../support/SupportDefs.h" 1
+# 36 "../src/kits/interface/../app/../app/Cursor.h" 2
 
 
 class __attribute__((dllexport)) BCursor : public BArchivable {
@@ -96849,7 +96860,7 @@ public:
     bool operator==(const BCursor &other) const;
     bool operator!=(const BCursor &other) const;
 
- const void *Data() const;
+    const void *Data() const;
     b_uint32 DataLength() const;
 
     b_uint8 ColorDepth() const;
@@ -96860,24 +96871,24 @@ public:
     b_uint8 SpotX() const;
     b_uint8 SpotY() const;
 
- const void *Bits() const;
- const void *Mask() const;
+    const void *Bits() const;
+    const void *Mask() const;
 
 private:
- void *fData;
+    void *fData;
 };
 
 
 
 inline b_uint8 BCursor::SpotX() const
 {
- return(Spot() >> 8);
+    return(Spot() >> 8);
 }
 
 
 inline b_uint8 BCursor::SpotY() const
 {
- return(Spot() & 0xff);
+    return(Spot() & 0xff);
 }
 
 
@@ -96885,7 +96896,7 @@ extern __attribute__((dllexport)) const BCursor *B_CURSOR_SYSTEM_DEFAULT;
 extern __attribute__((dllexport)) const BCursor *B_CURSOR_HAND;
 extern __attribute__((dllexport)) const BCursor *B_CURSOR_HAND_MOVE;
 extern __attribute__((dllexport)) const BCursor *B_CURSOR_I_BEAM;
-# 39 "../src/kits/interface/../app/Application.h" 2
+# 38 "../src/kits/interface/../app/Application.h" 2
 # 1 "../src/kits/interface/../app/../add-ons/font/FontEngine.h" 1
 # 33 "../src/kits/interface/../app/../add-ons/font/FontEngine.h"
 # 1 "../src/kits/interface/../app/../add-ons/font/../../support/SupportDefs.h" 1
@@ -97091,7 +97102,8 @@ private:
     friend __attribute__((dllexport)) bool bhapi::font_add(const char *family, const char *style, BFontEngine *engine);
     BStringArray *fServing;
 };
-# 40 "../src/kits/interface/../app/Application.h" 2
+# 39 "../src/kits/interface/../app/Application.h" 2
+
 
 
 using namespace bhapi;
@@ -97103,41 +97115,41 @@ class __attribute__((dllexport)) BApplication : public BLooper {
 public:
 
     BApplication(const char *signature, bool tryInterface = true);
- virtual ~BApplication();
+    virtual ~BApplication();
 
 
- BApplication(const BMessage *from);
- virtual b_status_t Archive(BMessage *into, bool deep = true) const;
- static BArchivable *Instantiate(const BMessage *from);
+    BApplication(const BMessage *from);
+    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    static BArchivable *Instantiate(const BMessage *from);
 
- const char *Signature() const;
+    const char *Signature() const;
 
- virtual void *Run();
- virtual void Quit();
- virtual bool QuitRequested();
+    virtual void *Run();
+    virtual void Quit();
+    virtual bool QuitRequested();
 
 
- virtual void ReadyToRun();
- virtual void Pulse();
+    virtual void ReadyToRun();
+    virtual void Pulse();
 
 
     void SetPulseRate(b_bigtime_t rate);
- b_bigtime_t PulseRate() const;
+    b_bigtime_t PulseRate() const;
 
- virtual void MessageReceived(BMessage *msg);
- virtual void DispatchMessageW(BMessage *msg, BHandler *target);
+    virtual void MessageReceived(BMessage *msg);
+    virtual void DispatchMessageW(BMessage *msg, BHandler *target);
 
- void SetCursor(const void *cursor);
+    void SetCursor(const void *cursor);
     void SetCursor(const BCursor *cursor, bool sync = true);
- void HideCursor();
- void ShowCursor();
- void ObscureCursor();
- bool IsCursorHidden() const;
+    void HideCursor();
+    void ShowCursor();
+    void ObscureCursor();
+    bool IsCursorHidden() const;
 
 private:
 
     friend class BLooper;
- friend class BMessageRunner;
+    friend class BMessageRunner;
     friend class BWindow;
     friend class BView;
     friend class BBitmap;
@@ -97145,30 +97157,30 @@ private:
 
     friend __attribute__((dllexport)) bool bhapi::update_font_families(bool);
 
- bool fQuit;
- char *fSignature;
- b_bigtime_t fPulseRate;
- BMessageRunner *fPulseRunner;
+    bool fQuit;
+    char *fSignature;
+    b_bigtime_t fPulseRate;
+    BMessageRunner *fPulseRunner;
 
- static BList sRunnerList;
- static b_bigtime_t sRunnerMinimumInterval;
- static void dispatch_message_runners();
+    static BList sRunnerList;
+    static b_bigtime_t sRunnerMinimumInterval;
+    static void dispatch_message_runners();
 
- bool quit_all_loopers(bool force);
+    bool quit_all_loopers(bool force);
 
     BGraphicsEngine *fGraphicsEngine;
- void *fGraphicsEngineAddon;
- void InitGraphicsEngine();
+    void *fGraphicsEngineAddon;
+    void InitGraphicsEngine();
 
- void Init(const char *signature, bool tryInterface);
+    void Init(const char *signature, bool tryInterface);
 
- BList fModalWindows;
+    BList fModalWindows;
     bool AddModalWindow(BMessenger &msgr);
     bool RemoveModalWindow(BMessenger &msgr);
 
     BCursor fCursor;
- bool fCursorHidden;
- bool fCursorObscure;
+    bool fCursorHidden;
+    bool fCursorObscure;
 
 };
 
@@ -97187,26 +97199,27 @@ extern __attribute__((dllexport)) BClipboard clipboard;
 }
 # 38 "../src/kits/interface/TextView.cpp" 2
 # 1 "../src/kits/interface/../app/Clipboard.h" 1
-# 36 "../src/kits/interface/../app/Clipboard.h"
+# 35 "../src/kits/interface/../app/Clipboard.h"
 # 1 "../src/kits/interface/../app/../app/Messenger.h" 1
-# 37 "../src/kits/interface/../app/../app/Messenger.h"
+# 35 "../src/kits/interface/../app/../app/Messenger.h"
 class BMessage;
 class BHandler;
 class BLooper;
+
 class __attribute__((dllexport)) BMessenger {
 public:
- BMessenger();
+    BMessenger();
     BMessenger(const char *signature, b_int64 team = 0, b_status_t *perr = __null);
- BMessenger(const BHandler *handler, const BLooper *looper = __null, b_status_t *perr = __null);
+    BMessenger(const BHandler *handler, const BLooper *looper = __null, b_status_t *perr = __null);
 
- BMessenger(const BMessenger &msgr);
- ~BMessenger();
+    BMessenger(const BMessenger &msgr);
+    ~BMessenger();
 
- bool IsTargetLocal() const;
- bool IsAtTargetLooperThread() const;
- BHandler* Target(BLooper **looper) const;
+    bool IsTargetLocal() const;
+    bool IsAtTargetLooperThread() const;
+    BHandler* Target(BLooper **looper) const;
 
- bool LockTarget() const;
+    bool LockTarget() const;
     b_status_t LockTargetWithTimeout(b_bigtime_t timeout) const;
 
     b_status_t SendMessageW(b_uint32 command) const;
@@ -97216,75 +97229,76 @@ public:
     b_status_t SendMessageW(const BMessage *a_message, BMessage *reply_message) const;
     b_status_t SendMessageW(const BMessage *a_message, BMessage *reply_message, b_bigtime_t sendTimeout, b_bigtime_t replyTimeout) const;
 
- bool IsValid() const;
+    bool IsValid() const;
 
- BMessenger &operator=(const BMessenger &from);
- bool operator==(const BMessenger &other) const;
- bool operator!=(const BMessenger &other) const;
+    BMessenger &operator=(const BMessenger &from);
+    bool operator==(const BMessenger &other) const;
+    bool operator!=(const BMessenger &other) const;
 
- size_t FlattenedSize() const;
- bool Flatten(char *buffer, size_t bufferSize) const;
- bool Unflatten(const char *buffer, size_t bufferSize);
+    size_t FlattenedSize() const;
+    bool Flatten(char *buffer, size_t bufferSize) const;
+    bool Unflatten(const char *buffer, size_t bufferSize);
 
- void PrintToStream() const;
+    void PrintToStream() const;
 
 private:
- friend class BMessage;
- friend class BInvoker;
+    friend class BMessage;
+    friend class BInvoker;
 
     BMessenger(b_int64 targetTeam, b_uint64 targetToken, b_bigtime_t timestamp, b_status_t *perr);
 
     b_uint64 fHandlerToken;
     b_uint64 fLooperToken;
 
- void *fPort;
- void *fSem;
+    void *fPort;
+    void *fSem;
 
     b_int64 fTargetTeam;
 
- void InitData(const BHandler *handler, const BLooper *looper, b_status_t *perr);
+    void InitData(const BHandler *handler, const BLooper *looper, b_status_t *perr);
 
     static b_status_t _SendMessageToPort(void *port, const BMessage *msg, b_uint32 flags, b_bigtime_t timeout);
     static BMessage* _GetMessageFromPort(void *port, b_uint32 flags, b_bigtime_t timeout, b_status_t *err);
 
     b_status_t _SendMessage(const BMessage *a_message, b_uint64 replyToken, b_bigtime_t timeout) const;
 };
-# 37 "../src/kits/interface/../app/Clipboard.h" 2
+# 36 "../src/kits/interface/../app/Clipboard.h" 2
 # 1 "../src/kits/interface/../app/../support/Locker.h" 1
-# 38 "../src/kits/interface/../app/Clipboard.h" 2
+# 37 "../src/kits/interface/../app/Clipboard.h" 2
+
 
 
 class __attribute__((dllexport)) BClipboard {
 public:
- BClipboard(const char *name);
- virtual ~BClipboard();
+    BClipboard(const char *name);
+    virtual ~BClipboard();
 
- const char *Name() const;
+    const char *Name() const;
 
     b_uint32 LocalCount() const;
     b_uint32 SystemCount() const;
- b_status_t StartWatching(const BMessenger &target);
- b_status_t StopWatching(const BMessenger &target);
+    b_status_t StartWatching(const BMessenger &target);
+    b_status_t StopWatching(const BMessenger &target);
 
- bool Lock();
- void Unlock();
- b_int64 CountLocks() const;
+    bool Lock();
+    void Unlock();
+    b_int64 CountLocks() const;
 
- b_status_t Clear();
- b_status_t Commit();
- b_status_t Revert();
+    b_status_t Clear();
+    b_status_t Commit();
+    b_status_t Revert();
 
- BMessenger DataSource() const;
- BMessage *Data() const;
+    BMessenger DataSource() const;
+    BMessage *Data() const;
 
 private:
- char *fName;
- BLocker fLocker;
- BMessage *fData;
+    char *fName;
+    BLocker fLocker;
+    BMessage *fData;
 };
 # 39 "../src/kits/interface/TextView.cpp" 2
 # 1 "../src/kits/interface/../app/Message.h" 1
-# 37 "../src/kits/interface/../app/Message.h"
+# 35 "../src/kits/interface/../app/Message.h"
 class BMessenger;
 class BHandler;
 class BStreamIO;
@@ -97502,7 +97516,7 @@ __attribute__((dllexport)) b_status_t get_image_symbol(void *image, const char *
 
 }
 # 65 "../src/kits/interface/../app/../kernel/OS.h" 2
-# 44 "../src/kits/interface/../app/Message.h" 2
+# 42 "../src/kits/interface/../app/Message.h" 2
 
 
 class __attribute__((dllexport)) BMessage {
@@ -97526,15 +97540,15 @@ public:
 
     b_int32 CountItems(const char *name, b_type_code type) const;
     b_int32 CountItems(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type = __null) const;
-# 89 "../src/kits/interface/../app/Message.h"
+# 87 "../src/kits/interface/../app/Message.h"
     b_int32 CountNames(b_type_code type, bool count_all_names_when_any_type = true) const;
     b_int32 FindName(const char *name) const;
     const char *NameAt(b_int32 nameIndex) const;
 
- void MakeEmpty();
- bool IsEmpty() const;
+    void MakeEmpty();
+    bool IsEmpty() const;
 
- bool Rename(const char *old_entry, const char *new_entry);
+    bool Rename(const char *old_entry, const char *new_entry);
 
     bool AddString(const char *name, const char *aString);
     bool AddString(const char *name, const BString &aString);
@@ -97542,12 +97556,12 @@ public:
     bool AddInt16(const char *name, b_int16 val);
     bool AddInt32(const char *name, b_int32 val);
     bool AddInt64(const char *name, b_int64 val);
- bool AddBool(const char *name, bool aBoolean);
- bool AddFloat(const char *name, float aFloat);
- bool AddDouble(const char *name, double aDouble);
+    bool AddBool(const char *name, bool aBoolean);
+    bool AddFloat(const char *name, float aFloat);
+    bool AddDouble(const char *name, double aDouble);
     bool AddPoint(const char *name, BPoint pt);
     bool AddRect(const char *name, BRect r);
- bool AddPointer(const char *name, const void *ptr);
+    bool AddPointer(const char *name, const void *ptr);
     bool AddMessage(const char *name, const BMessage *msg);
     bool AddMessenger(const char *name, const BMessenger *msgr);
     bool AddMessenger(const char *name, const BMessenger &msgr);
@@ -97565,17 +97579,17 @@ public:
     bool FindInt32(const char *name, b_int32 index, b_int32 *val) const;
     bool FindInt64(const char *name, b_int64 *val) const;
     bool FindInt64(const char *name, b_int32 index, b_int64 *val) const;
- bool FindBool(const char *name, bool *aBoolean) const;
+    bool FindBool(const char *name, bool *aBoolean) const;
     bool FindBool(const char *name, b_int32 index, bool *aBoolean) const;
- bool FindFloat(const char *name, float *f) const;
+    bool FindFloat(const char *name, float *f) const;
     bool FindFloat(const char *name, b_int32 index, float *f) const;
- bool FindDouble(const char *name, double *d) const;
+    bool FindDouble(const char *name, double *d) const;
     bool FindDouble(const char *name, b_int32 index, double *d) const;
     bool FindPoint(const char *name, BPoint *pt) const;
     bool FindPoint(const char *name, b_int32 index, BPoint *pt) const;
     bool FindRect(const char *name, BRect *r) const;
     bool FindRect(const char *name, b_int32 index, BRect *r) const;
- bool FindPointer(const char *name, void **ptr) const;
+    bool FindPointer(const char *name, void **ptr) const;
     bool FindPointer(const char *name, b_int32 index, void **ptr) const;
     bool FindMessage(const char *name, BMessage *msg) const;
     bool FindMessage(const char *name, b_int32 index, BMessage *msg) const;
@@ -97615,7 +97629,7 @@ public:
     bool RemoveMessenger(const char *name, b_int32 index = 0);
     bool RemoveData(const char *name, b_type_code type, b_int32 index = 0);
     bool RemoveData(const char *name, b_type_code type);
- bool RemoveData(const char *name);
+    bool RemoveData(const char *name);
 
     bool ReplacString(const char *name, b_int32 index, const char *aString);
     bool ReplacString(const char *name, const char *aString);
@@ -97629,17 +97643,17 @@ public:
     bool ReplaceInt32(const char *name, b_int32 index, b_int32 val);
     bool ReplaceInt64(const char *name, b_int64 val);
     bool ReplaceInt64(const char *name, b_int32 index, b_int64 val);
- bool ReplaceBool(const char *name, bool aBoolean);
+    bool ReplaceBool(const char *name, bool aBoolean);
     bool ReplaceBool(const char *name, b_int32 index, bool aBoolean);
- bool ReplaceFloat(const char *name, float f);
+    bool ReplaceFloat(const char *name, float f);
     bool ReplaceFloat(const char *name, b_int32 index, float f);
- bool ReplaceDouble(const char *name, double d);
+    bool ReplaceDouble(const char *name, double d);
     bool ReplaceDouble(const char *name, b_int32 index, double d);
     bool ReplacePoint(const char *name, BPoint pt);
     bool ReplacePoint(const char *name, b_int32 index, BPoint pt);
     bool ReplaceRect(const char *name, BRect r);
     bool ReplaceRect(const char *name, b_int32 index, BRect r);
- bool ReplacePointer(const char *name, const void *ptr);
+    bool ReplacePointer(const char *name, const void *ptr);
     bool ReplacePointer(const char *name, b_int32 index, const void *ptr);
     bool ReplaceMessage(const char *name, const BMessage *msg);
     bool ReplaceMessage(const char *name, b_int32 index, const BMessage *msg);
@@ -97650,17 +97664,17 @@ public:
     bool ReplaceData(const char *name, b_type_code type, const void *data, size_t numBytes, bool is_fixed_size);
     bool ReplaceData(const char *name, b_type_code type, b_int32 index, const void *data, size_t numBytes, bool is_fixed_size);
 
- bool IsSystem() const;
+    bool IsSystem() const;
     void PrintToStream(BStreamIO &stream) const;
- void PrintToStream() const;
+    void PrintToStream() const;
 
- size_t FlattenedSize() const;
- bool Flatten(char *buffer, size_t bufferSize) const;
- bool Unflatten(const char *buffer, size_t bufferSize);
+    size_t FlattenedSize() const;
+    bool Flatten(char *buffer, size_t bufferSize) const;
+    bool Unflatten(const char *buffer, size_t bufferSize);
 
- bool WasDelivered() const;
- bool IsReply() const;
- bool IsSourceWaiting() const;
+    bool WasDelivered() const;
+    bool IsReply() const;
+    bool IsSourceWaiting() const;
 
     b_status_t SendReply(b_uint32 command, BHandler *replyHandler = __null) const;
     b_status_t SendReply(const BMessage *message,
@@ -97671,29 +97685,29 @@ public:
     b_status_t BGetInfo(b_type_code type, b_int32 index,
                  char **nameFound, b_type_code *typeFound, b_int32 *countFound = __null) const;
     b_status_t BFindData(const char *name, b_type_code type, b_int32 index,
-      const void **data, b_size_t *numBytes) const;
+                  const void **data, b_size_t *numBytes) const;
     b_status_t BFindData(const char *name, b_type_code type,
-      const void **data, b_size_t *numBytes) const;
+                  const void **data, b_size_t *numBytes) const;
 
 private:
     friend class BLooper;
     friend class BMessenger;
 
     typedef struct list_data {
-  char *name;
+        char *name;
         BList list;
- } list_data;
+    } list_data;
 
- typedef struct type_list_data {
+    typedef struct type_list_data {
         b_type_code type;
         BList list;
- } type_list_data;
+    } type_list_data;
 
- typedef struct _object_t {
-  size_t bytes;
-  bool fixed_size;
-  void *data;
- } _object_t;
+    typedef struct _object_t {
+        size_t bytes;
+        bool fixed_size;
+        void *data;
+    } _object_t;
 
     BList fObjectsList;
 
@@ -97707,14 +97721,14 @@ private:
     b_uint64 fReplyToken;
     b_bigtime_t fReplyTokenTimestamp;
 
- bool fNoticeSource;
- void *fSource;
+    bool fNoticeSource;
+    void *fSource;
 
- bool fIsReply;
+    bool fIsReply;
 };
 # 40 "../src/kits/interface/TextView.cpp" 2
 # 1 "../src/kits/interface/../app/AppDefs.h" 1
-# 36 "../src/kits/interface/../app/AppDefs.h"
+# 37 "../src/kits/interface/../app/AppDefs.h"
 enum {
     B_ABOUT_REQUESTED = '_ABR',
     B_WINDOW_ACTIVATED = '_ACT',
@@ -97750,11 +97764,11 @@ enum {
     B_WORKSPACE_ACTIVATED = '_WAC',
     B_ZOOM = '_WZM',
 
- _QUIT_ = '_QIT',
- _EVENTS_PENDING_ = '_EVP',
- _UPDATE_ = '_UPD',
- _UPDATE_IF_NEEDED_ = '_UPN',
- _MENU_EVENT_ = '_MEV'
+    _QUIT_ = '_QIT',
+    _EVENTS_PENDING_ = '_EVP',
+    _UPDATE_ = '_UPD',
+    _UPDATE_IF_NEEDED_ = '_UPN',
+    _MENU_EVENT_ = '_MEV'
 
 };
 
@@ -97781,7 +97795,13 @@ enum {
 };
 # 41 "../src/kits/interface/TextView.cpp" 2
 # 1 "../src/kits/interface/../support/ClassInfo.h" 1
-# 38 "../src/kits/interface/../support/ClassInfo.h"
+# 33 "../src/kits/interface/../support/ClassInfo.h"
+# 1 "../src/kits/interface/../support/../support/SupportDefs.h" 1
+# 34 "../src/kits/interface/../support/ClassInfo.h" 2
+
+
+
+
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/typeinfo" 1 3
 # 32 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/typeinfo" 3
        

@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,10 +30,11 @@
 
 #ifndef BHAPI_CURSOR_H
 #define BHAPI_CURSOR_H
-#include "../support/SupportDefs.h"
-#include "../support/Archivable.h"
-#ifdef __cplusplus /* Just for C++ */
 
+#include "../support/Archivable.h"
+#include "../support/SupportDefs.h"
+
+#ifdef __cplusplus /* Just for C++ */
 class IMPEXPBHAPI BCursor : public BArchivable {
 public:
     BCursor(const void *cursorData);
@@ -44,7 +45,7 @@ public:
     bool		operator==(const BCursor &other) const;
     bool		operator!=(const BCursor &other) const;
 
-	const void 	*Data() const;
+    const void 	*Data() const;
     b_uint32		DataLength() const;
 
     b_uint8		ColorDepth() const;
@@ -55,24 +56,24 @@ public:
     b_uint8		SpotX() const;
     b_uint8		SpotY() const;
 
-	const void	*Bits() const;
-	const void	*Mask() const;
+    const void	*Bits() const;
+    const void	*Mask() const;
 
 private:
-	void *fData;
+    void *fData;
 };
 
 #ifdef BHAPI_BUILD_LIBRARY
 
 inline b_uint8 BCursor::SpotX() const
 {
-	return(Spot() >> 8);
+    return(Spot() >> 8);
 }
 
 
 inline b_uint8 BCursor::SpotY() const
 {
-	return(Spot() & 0xff);
+    return(Spot() & 0xff);
 }
 #endif
 

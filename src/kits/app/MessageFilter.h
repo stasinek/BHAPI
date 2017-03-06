@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -34,63 +34,71 @@
 
 #include "../support/SupportDefs.h"
 
-typedef enum b_filter_result {
+#ifdef __cplusplus /* Just for C++ */
+namespace bhapi {
+#endif
+typedef enum filter_result {
     B_SKIP_MESSAGE,
     B_DISPATCH_MESSAGE
-} b_filter_result;
+} filter_result;
 
-typedef enum b_message_delivery {
+typedef enum message_delivery {
     B_DROPPED_DELIVERY	=	0x1,
     B_PROGRAMMED_DELIVERY	=	0x2,
     B_ANY_DELIVERY		=	0xff
-} b_message_delivery;
+} message_delivery;
 
-typedef enum b_message_source {
+typedef enum message_source {
     BLOCALBHAPI_SOURCE		=	0x1,
     B_REMOTE_SOURCE		=	0x2,
     B_ANY_SOURCE		=	0xff
-} b_message_source;
+} message_source;
+#ifdef __cplusplus /* Just for C++ */
+} // namespace
+#endif
 
 #ifdef __cplusplus /* Just for C++ */
 class BLooper;
 class BMessage;
 class BMessageFilter;
 class BHandler;
-typedef b_filter_result (*b_filter_hook)(BMessage *message, BHandler **target, BMessageFilter *filter);
+namespace bhapi {
+typedef filter_result (*filter_hook)(BMessage *message, BHandler **target, BMessageFilter *filter);
+}
 class IMPEXPBHAPI BMessageFilter {
 public:
-    BMessageFilter(b_message_delivery delivery, b_message_source source,
-               b_uint32 command, b_filter_hook filter = NULL);
-    BMessageFilter(b_message_delivery delivery, b_message_source source,
-		       b_filter_hook filter = NULL);
-    BMessageFilter(b_uint32 command, b_filter_hook filter = NULL);
-	BMessageFilter(const BMessageFilter &filter);
-	BMessageFilter(const BMessageFilter *filter);
-	virtual ~BMessageFilter();
+    BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,
+               b_uint32 command, bhapi::filter_hook filter = NULL);
+    BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,
+               bhapi::filter_hook filter = NULL);
+    BMessageFilter(b_uint32 command, bhapi::filter_hook filter = NULL);
+    BMessageFilter(const BMessageFilter &filter);
+    BMessageFilter(const BMessageFilter *filter);
+    virtual ~BMessageFilter();
 
-	BMessageFilter &operator=(const BMessageFilter &from);
+    BMessageFilter &operator=(const BMessageFilter &from);
 
-	virtual b_filter_result		Filter(BMessage *message, BHandler **target);
+    virtual bhapi::filter_result		Filter(BMessage *message, BHandler **target);
 
-	b_message_delivery		MessageDelivery() const;
-	b_message_source		MessageSource() const;
+    bhapi::message_delivery		MessageDelivery() const;
+    bhapi::message_source		MessageSource() const;
     b_uint32				Command() const;
-	bool				FiltersAnyCommand() const;
-	BLooper				*Looper() const;
+    bool				FiltersAnyCommand() const;
+    BLooper				*Looper() const;
 
 private:
-	friend class BLooper;
-	friend class BHandler;
+    friend class BLooper;
+    friend class BHandler;
 
     b_uint32 fCommand;
-	bool fFiltersAny;
-	b_message_delivery fDelivery;
-	b_message_source fSource;
-	b_filter_hook fFilterHook;
+    bool fFiltersAny;
+    bhapi::message_delivery fDelivery;
+    bhapi::message_source fSource;
+    bhapi::filter_hook fFilterHook;
 
-	BHandler *fHandler;
+    BHandler *fHandler;
 
-	b_filter_result doFilter(BMessage *message, BHandler **target);
+    bhapi::filter_result doFilter(BMessage *message, BHandler **target);
 };
 
 #endif /* __cplusplus */

@@ -32,7 +32,7 @@
 #include "Window.h"
 #include "MenuBar.h"
 
-#include "../support/String.h"
+#include "../support/StringClass.h"
 #include "../support/ClassInfo.h"
 
 BMenuField::BMenuField(BRect frame, const char *name,

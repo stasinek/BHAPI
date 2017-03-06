@@ -1,8 +1,8 @@
-/* --------------------------------------------------------------------------
- * 
+﻿/* --------------------------------------------------------------------------
+ *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
- * 
+ *
  * BHAPI++ library is a freeware; it may be used and distributed according to
  * the terms of The MIT License.
  *
@@ -25,78 +25,77 @@
  *
  * File: Region.h
  * Description: BRegion --- Combination of rectangles to describe region
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #ifndef BHAPI_REGION_H
 #define BHAPI_REGION_H
 
-#include "../support/SupportDefs.h"
-
 #ifdef __cplusplus /* Just for C++ */
 #include "../interface/Point.h"
 #include "../interface/Rect.h"
 #include "../support/List.h"
+#include "../support/SupportDefs.h"
 class IMPEXPBHAPI BRegion {
 public:
-	BRegion();
-	BRegion(const BRegion &region);
-	BRegion(const BRect &rect);
-	virtual ~BRegion();
+    BRegion();
+    BRegion(const BRegion &region);
+    BRegion(const BRect &rect);
+    virtual ~BRegion();
 
-	BRegion &operator=(const BRegion &from);
+    BRegion &operator=(const BRegion &from);
 
-	BRegion operator&(BRect r) const;
-	BRegion operator|(BRect r) const;
+    BRegion operator&(BRect r) const;
+    BRegion operator|(BRect r) const;
 
-	BRegion& operator&=(BRect r);
-	BRegion& operator|=(BRect r);
+    BRegion& operator&=(BRect r);
+    BRegion& operator|=(BRect r);
 
-	BRegion operator&(const BRegion &region) const;
-	BRegion operator|(const BRegion &region) const;
+    BRegion operator&(const BRegion &region) const;
+    BRegion operator|(const BRegion &region) const;
 
-	BRegion& operator&=(const BRegion &region);
-	BRegion& operator|=(const BRegion &region);
+    BRegion& operator&=(const BRegion &region);
+    BRegion& operator|=(const BRegion &region);
 
-	BRect Frame() const;
+    BRect Frame() const;
     BRect RectAt(b_int32 index) const;
     b_int32 CountRects() const;
 
-	void Set(BRect singleBound);
-	void MakeEmpty();
+    void Set(BRect singleBound);
+    void MakeEmpty();
 
-	bool Include(BRect r);
-	bool Include(const BRegion *region);
+    bool Include(BRect r);
+    bool Include(const BRegion *region);
 
-	bool Exclude(BRect r);
-	bool Exclude(const BRegion *region);
+    bool Exclude(BRect r);
+    bool Exclude(const BRegion *region);
 
-	void OffsetBy(float dx, float dy);
-	void OffsetBy(BPoint pt);
-	BRegion& OffsetBySelf(float dx, float dy);
-	BRegion& OffsetBySelf(BPoint pt);
-	BRegion OffsetByCopy(float dx, float dy);
-	BRegion OffsetByCopy(BPoint pt);
+    void OffsetBy(float dx, float dy);
+    void OffsetBy(BPoint pt);
+    BRegion& OffsetBySelf(float dx, float dy);
+    BRegion& OffsetBySelf(BPoint pt);
+    BRegion OffsetByCopy(float dx, float dy);
+    BRegion OffsetByCopy(BPoint pt);
 
-	void Scale(float scaling);
-	BRegion& ScaleSelf(float scaling);
-	BRegion ScaleCopy(float scaling);
+    void Scale(float scaling);
+    BRegion& ScaleSelf(float scaling);
+    BRegion ScaleCopy(float scaling);
 
-	bool Intersects(BRect r) const;
-	bool Intersects(float l, float t, float r, float b) const;
-	bool Intersects(const BRegion *region) const;
+    bool Intersects(BRect r) const;
+    bool Intersects(float l, float t, float r, float b) const;
+    bool Intersects(const BRegion *region) const;
 
-	bool Contains(BPoint pt) const;
-	bool Contains(float x, float y) const;
-	bool Contains(BRect r) const;
-	bool Contains(float l, float t, float r, float b) const;
-	bool Contains(const BRegion *region) const;
+    bool Contains(BPoint pt) const;
+    bool Contains(float x, float y) const;
+    bool Contains(BRect r) const;
+    bool Contains(float l, float t, float r, float b) const;
+    bool Contains(const BRegion *region) const;
 
-	void PrintToStream() const;
+    void PrintToStream() const;
 
 private:
-	BList fRects;
-	BRect fFrame;
+    BList fRects;
+    BRect fFrame;
 };
 
 #endif /* __cplusplus */

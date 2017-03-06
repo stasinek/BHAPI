@@ -1,5 +1,5 @@
 ﻿#include "UTF8.h"
-#include "String.h"
+#include "StringClass.h"
 
 EXPORTBHAPI bool bhapi::IsInsideGlyph(uchar ch)
 {

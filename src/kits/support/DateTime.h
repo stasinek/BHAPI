@@ -32,7 +32,7 @@
 #ifndef BHAPI_DATE_TIME_H
 #define BHAPI_DATE_TIME_H
 
-#include "String.h"
+#include "StringClass.h"
 
 class BMessage;
 namespace BPrivate {

@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,44 +30,43 @@
 #ifndef BHAPI_POINT_H
 #define BHAPI_POINT_H
 
-#include "../support/SupportDefs.h"
-
 #ifdef __cplusplus /* Just for C++ */
 class BRect;
+#include "../support/SupportDefs.h"
 class IMPEXPBHAPI BPoint {
 public:
-	float x;
-	float y;
+    float x;
+    float y;
 
-	BPoint();
-	BPoint(float X, float Y);
-	BPoint(const BPoint &pt);
-		
-	BPoint &operator=(const BPoint &from);
-	void Set(float X, float Y);
+    BPoint();
+    BPoint(float X, float Y);
+    BPoint(const BPoint &pt);
 
-	void ConstrainTo(BRect rect);
+    BPoint &operator=(const BPoint &from);
+    void Set(float X, float Y);
 
-	void Ceil();
-	void Floor();
-	void Round();
+    void ConstrainTo(BRect rect);
 
-	BPoint& FloorSelf();
-	BPoint FloorCopy() const;
-	BPoint& CeilSelf();
-	BPoint CeilCopy() const;
-	BPoint& RoundSelf();
-	BPoint RoundCopy() const;
+    void Ceil();
+    void Floor();
+    void Round();
 
-	BPoint operator+(const BPoint &plus) const;
-	BPoint operator-(const BPoint &minus) const;
-	BPoint& operator+=(const BPoint &plus);
-	BPoint& operator-=(const BPoint &minus);
+    BPoint& FloorSelf();
+    BPoint FloorCopy() const;
+    BPoint& CeilSelf();
+    BPoint CeilCopy() const;
+    BPoint& RoundSelf();
+    BPoint RoundCopy() const;
 
-	bool operator!=(const BPoint &pt) const;
-	bool operator==(const BPoint &pt) const;
+    BPoint operator+(const BPoint &plus) const;
+    BPoint operator-(const BPoint &minus) const;
+    BPoint& operator+=(const BPoint &plus);
+    BPoint& operator-=(const BPoint &minus);
 
-	void PrintToStream() const;
+    bool operator!=(const BPoint &pt) const;
+    bool operator==(const BPoint &pt) const;
+
+    void PrintToStream() const;
 };
 
 extern IMPEXPBHAPI const BPoint B_ORIGIN;

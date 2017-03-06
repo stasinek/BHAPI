@@ -35,7 +35,7 @@
 #include "../app/AppDefs.h"
 #include "../support/Errors.h"
 #include "../app/Message.h"
-#include "../support/String.h"
+#include "../support/StringClass.h"
 #include "../support/UTF8.h"
 
 

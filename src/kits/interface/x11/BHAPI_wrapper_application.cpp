@@ -34,7 +34,7 @@
 #include "BHAPI_wrapper_x11.h"
 
 #include "../../kernel/Kernel.h"
-#include "../../support/String.h"
+#include "../../support/StringClass.h"
 #include "../../support/Locker.h"
 #include "../../support/Autolock.h"
 #include "../../app/Application.h"
@@ -79,7 +79,7 @@ public:
 		fEngine = x11Engine;
 	}
 
-	virtual b_filter_result Filter(BMessage *message, BHandler **target)
+	virtual bhapi::filter_result Filter(BMessage *message, BHandler **target)
 	{
 		if(fEngine == NULL || message->what != B_CLIPBOARD_CHANGED) return B_DISPATCH_MESSAGE;
 

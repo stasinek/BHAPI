@@ -1,5 +1,5 @@
-/* --------------------------------------------------------------------------
- * 
+﻿/* --------------------------------------------------------------------------
+ *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,16 +22,14 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: MenuField.h
  * Description: BMenuField --- display a labeled pop-up menu
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #ifndef BHAPI_MENU_FIELD_H
 #define BHAPI_MENU_FIELD_H
-
-#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 class BRect;
@@ -40,57 +38,58 @@ class BMenuItem;
 class BMenuBar;
 class BMessage;
 #include "../interface/View.h"
+#include "../support/SupportDefs.h"
 class IMPEXPBHAPI BMenuField : public BView {
 public:
-	BMenuField(BRect frame,
-		   const char *name,
-		   const char *label,
-		   BMenu *menu,
-		   bool fixedSize = false,
-		   b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-		   b_uint32 flags = B_WILL_DRAW | B_NAVIGABLE | B_FRAME_EVENTS);
-	virtual ~BMenuField();
+    BMenuField(BRect frame,
+           const char *name,
+           const char *label,
+           BMenu *menu,
+           bool fixedSize = false,
+           b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+           b_uint32 flags = B_WILL_DRAW | B_NAVIGABLE | B_FRAME_EVENTS);
+    virtual ~BMenuField();
 
-	virtual void	SetLabel(const char *label);
-	const char	*Label() const;
+    virtual void	SetLabel(const char *label);
+    const char	*Label() const;
 
     virtual void	SetAlignment(bhapi::alignment alignment);
     bhapi::alignment	Alignment() const;
 
-	virtual void	SetDivider(float divider);
-	float		Divider() const;
+    virtual void	SetDivider(float divider);
+    float		Divider() const;
 
-	// SetMenu: the old menu will be destructed automatically.
-	virtual bool	SetMenu(BMenu *menu);
-	BMenu		*Menu() const;
+    // SetMenu: the old menu will be destructed automatically.
+    virtual bool	SetMenu(BMenu *menu);
+    BMenu		*Menu() const;
 
-	BMenuBar	*MenuBar() const;
-	BMenuItem	*MenuItem() const;
+    BMenuBar	*MenuBar() const;
+    BMenuItem	*MenuItem() const;
 
-	virtual void	Draw(BRect updateRect);
-	virtual void	GetPreferredSize(float *width, float *height);
-	virtual void	FrameMoved(BPoint new_position);
-	virtual void	FrameResized(float new_width, float new_height);
-	virtual void	WindowActivated(bool state);
-	virtual void	MakeFocus(bool focusState = true);
-	virtual void	SetFont(const BFont *font, b_uint8 mask = B_FONT_ALL);
-	virtual void	MouseDown(BPoint where);
-	virtual void	MouseUp(BPoint where);
-	virtual void	MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
-	virtual void	KeyDown(const char *bytes, b_int32 numBytes);
-	virtual void	KeyUp(const char *bytes, b_int32 numBytes);
+    virtual void	Draw(BRect updateRect);
+    virtual void	GetPreferredSize(float *width, float *height);
+    virtual void	FrameMoved(BPoint new_position);
+    virtual void	FrameResized(float new_width, float new_height);
+    virtual void	WindowActivated(bool state);
+    virtual void	MakeFocus(bool focusState = true);
+    virtual void	SetFont(const BFont *font, b_uint8 mask = B_FONT_ALL);
+    virtual void	MouseDown(BPoint where);
+    virtual void	MouseUp(BPoint where);
+    virtual void	MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
+    virtual void	KeyDown(const char *bytes, b_int32 numBytes);
+    virtual void	KeyUp(const char *bytes, b_int32 numBytes);
 
 protected:
-	virtual void	ChildRemoving(BView *child);
+    virtual void	ChildRemoving(BView *child);
 
 private:
-	bool fFixedSize;
+    bool fFixedSize;
     bhapi::alignment fAlignment;
-	float fDivider;
+    float fDivider;
 
-	char *fLabel;
-	BMenuBar *fMenuBar;
-	BMenu *fMenu;
+    char *fLabel;
+    BMenuBar *fMenuBar;
+    BMenu *fMenu;
 };
 
 #endif /* __cplusplus */

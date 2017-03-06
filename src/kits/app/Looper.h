@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -30,10 +30,8 @@
 
 #ifndef BHAPI_LOOPER_H
 #define BHAPI_LOOPER_H
-#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
 class BApplication;
 class BMessenger;
 class BMessage;
@@ -42,139 +40,140 @@ class BMessageQueue;
 class BLoooper;
 #include "../support/List.h"
 #include "Handler.h"
+#include "../support/SupportDefs.h"
 class IMPEXPBHAPI BLooper : public BHandler {
 public:
 //	BLooper(const char *name = NULL,
 //		b_int32 priority = B_NORMAL_PRIORITY);
-	void Init(const char *name, b_int32 priority);
+    void Init(const char *name, b_int32 priority);
     BLooper(const char *name);
     BLooper(b_int32 priority);
     BLooper(const char *name,
         b_int32 priority);
     virtual ~BLooper();
 
-	// Archiving
-	BLooper(const BMessage *from);
-	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
-	static BArchivable *Instantiate(const BMessage *from);
+    // Archiving
+    BLooper(const BMessage *from);
+    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    static BArchivable *Instantiate(const BMessage *from);
 
-	void		AddHandler(BHandler *handler);
-	bool		RemoveHandler(BHandler *handler);
-	b_int32		CountHandlers() const;
-	BHandler	*HandlerAt(b_int32 index) const;
-	b_int32		IndexOf(BHandler *handler) const;
+    void		AddHandler(BHandler *handler);
+    bool		RemoveHandler(BHandler *handler);
+    b_int32		CountHandlers() const;
+    BHandler	*HandlerAt(b_int32 index) const;
+    b_int32		IndexOf(BHandler *handler) const;
 
-	BHandler	*PreferredHandler() const;
-	void		SetPreferredHandler(BHandler *handler);
+    BHandler	*PreferredHandler() const;
+    void		SetPreferredHandler(BHandler *handler);
 
-	bool		IsRunning() const;
-	virtual void	*Run();
-	virtual void	Quit();
-	virtual bool	QuitRequested();
-	BLooper*	Proxy() const;
-	bool		ProxyBy(BLooper *proxy);
+    bool		IsRunning() const;
+    virtual void	*Run();
+    virtual void	Quit();
+    virtual bool	QuitRequested();
+    BLooper*	Proxy() const;
+    bool		ProxyBy(BLooper *proxy);
 
-	b_thread_id	Thread() const;
+    b_thread_id	Thread() const;
 
-	bool		Lock();
-	void		Unlock();
-	b_status_t	LockWithTimeout(b_bigtime_t microseconds_timeout);
+    bool		Lock();
+    void		Unlock();
+    b_status_t	LockWithTimeout(b_bigtime_t microseconds_timeout);
 
-	b_int64		CountLocks() const;
-	bool		IsLockedByCurrentThread() const;
+    b_int64		CountLocks() const;
+    bool		IsLockedByCurrentThread() const;
 
-	virtual void	DispatchMessage(BMessage *msg, BHandler *target);
+    virtual void	DispatchMessage(BMessage *msg, BHandler *target);
 
-	// Empty functions BEGIN --- just for derivative class
-	virtual void	MessageReceived(BMessage *msg);
-	// Empty functions END
+    // Empty functions BEGIN --- just for derivative class
+    virtual void	MessageReceived(BMessage *msg);
+    // Empty functions END
 
-	BMessage	*CurrentMessage() const;
-	BMessage	*DetachCurrentMessage();
-	BMessageQueue	*MessageQueue() const;
+    BMessage	*CurrentMessage() const;
+    BMessage	*DetachCurrentMessage();
+    BMessageQueue	*MessageQueue() const;
 
-	b_status_t	PostMessage(b_uint32 command);
-	b_status_t	PostMessage(const BMessage *message);
-	b_status_t	PostMessage(b_uint32 command,
-				    BHandler *handler,
-				    BHandler *reply_to = NULL);
-	b_status_t	PostMessage(const BMessage *message,
-				    BHandler *handler,
-				    BHandler *reply_to = NULL);
+    b_status_t	PostMessage(b_uint32 command);
+    b_status_t	PostMessage(const BMessage *message);
+    b_status_t	PostMessage(b_uint32 command,
+                    BHandler *handler,
+                    BHandler *reply_to = NULL);
+    b_status_t	PostMessage(const BMessage *message,
+                    BHandler *handler,
+                    BHandler *reply_to = NULL);
 
-	virtual bool	AddCommonFilter(BMessageFilter *filter);
-	virtual bool	RemoveCommonFilter(BMessageFilter *filter);
-	virtual bool	SetCommonFilterList(const BList *filterList);
-	const BList	*CommonFilterList() const;
+    virtual bool	AddCommonFilter(BMessageFilter *filter);
+    virtual bool	RemoveCommonFilter(BMessageFilter *filter);
+    virtual bool	SetCommonFilterList(const BList *filterList);
+    const BList	*CommonFilterList() const;
 
-	static BLooper	*LooperForThread(b_thread_id tid);
+    static BLooper	*LooperForThread(b_thread_id tid);
 
 protected:
-	// NextLooperMessage & DispatchLooperMessage: called from task of looper, like below
-	//	while(true)
-	//	{
-	//		...
-	//		BMessage *aMsg = NextLooperMessage(B_INFINITE_TIMEOUT);
-	//
-	//		if(aMsg == NULL) /* after "this->QuitRequested()" return "true" or proxy deconstructing. */
-	//		{
-	//			...
-	//			break;
-	//		}
-	//		else
-	//		{
-	//			/* leaked memory unless "DispatchLooperMessage" applied or "delete" instead */
-	//			DispatchLooperMessage(aMsg);
-	//		}
-	//		...
-	//	}
+    // NextLooperMessage & DispatchLooperMessage: called from task of looper, like below
+    //	while(true)
+    //	{
+    //		...
+    //		BMessage *aMsg = NextLooperMessage(B_INFINITE_TIMEOUT);
+    //
+    //		if(aMsg == NULL) /* after "this->QuitRequested()" return "true" or proxy deconstructing. */
+    //		{
+    //			...
+    //			break;
+    //		}
+    //		else
+    //		{
+    //			/* leaked memory unless "DispatchLooperMessage" applied or "delete" instead */
+    //			DispatchLooperMessage(aMsg);
+    //		}
+    //		...
+    //	}
 //	BMessage	*NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT);
     BMessage	*NextLooperMessage(b_bigtime_t timeout);
     void		DispatchLooperMessage(BMessage *msg);
 
 private:
-	friend class BHandler;
-	friend class BApplication;
-	friend class BMessenger;
-	friend b_status_t bhapi::lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
+    friend class BHandler;
+    friend class BApplication;
+    friend class BMessenger;
+    friend b_status_t bhapi::lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
 
-	bool fDeconstructing;
-	BLooper *fProxy;
-	BList fClients;
+    bool fDeconstructing;
+    BLooper *fProxy;
+    BList fClients;
 
-	b_int32 fThreadPriority;
+    b_int32 fThreadPriority;
 
-	b_int32 fHandlersCount;
-	BHandler *fPreferredHandler;
+    b_int32 fHandlersCount;
+    BHandler *fPreferredHandler;
 
-	void *fLocker;
-	b_int64 fLocksCount;
+    void *fLocker;
+    b_int64 fLocksCount;
 
-	void *fThread;
-	void *fSem;
+    void *fThread;
+    void *fSem;
 
-	BMessageQueue *fMessageQueue;
-	BMessage *fCurrentMessage;
+    BMessageQueue *fMessageQueue;
+    BMessage *fCurrentMessage;
 
-	static b_status_t _task(void*);
-	static b_status_t _taskLooper(BLooper*, void*);
-	static void _taskError(void*);
+    static b_status_t _task(void*);
+    static b_status_t _taskLooper(BLooper*, void*);
+    static void _taskError(void*);
 
-	static BList sLooperList;
+    static BList sLooperList;
 
-	BHandler *_MessageTarget(const BMessage *msg, bool *preferred);
-	b_status_t _PostMessage(const BMessage *msg, b_uint64 handlerToken, b_uint64 replyToken, b_bigtime_t timeout);
+    BHandler *_MessageTarget(const BMessage *msg, bool *preferred);
+    b_status_t _PostMessage(const BMessage *msg, b_uint64 handlerToken, b_uint64 replyToken, b_bigtime_t timeout);
 
-	BLooper *_Proxy() const;
-	bool _ProxyBy(BLooper *proxy);
-	BLooper *_GetNextClient(BLooper *client) const;
+    BLooper *_Proxy() const;
+    bool _ProxyBy(BLooper *proxy);
+    BLooper *_GetNextClient(BLooper *client) const;
 
-	bool *fThreadExited;
+    bool *fThreadExited;
 
-	BList fCommonFilters;
-	void _FilterAndDispatchMessage(BMessage *msg, BHandler *target);
+    BList fCommonFilters;
+    void _FilterAndDispatchMessage(BMessage *msg, BHandler *target);
 
-	virtual bool	IsDependsOnOthersWhenQuitRequested() const;
+    virtual bool	IsDependsOnOthersWhenQuitRequested() const;
 };
 
 #endif /* __cplusplus */

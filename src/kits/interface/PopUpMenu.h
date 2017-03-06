@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,39 +30,37 @@
 #ifndef BHAPI_POP_UP_MENU_H
 #define BHAPI_POP_UP_MENU_H
 
-#include "../support/Locker.h"
+#ifdef __cplusplus /* Just for C++ */
 #include "../interface/Menu.h"
 #include "../interface/Window.h"
-
-#ifdef __cplusplus /* Just for C++ */
-
+#include "../support/Locker.h"
 class IMPEXPBHAPI BPopUpMenu : public BMenu {
 public:
     BPopUpMenu(const char *title,
-		   bool radioMode = true,
-		   bool labelFromMarked = true,
-		   b_menu_layout layout = B_ITEMS_IN_COLUMN);
+           bool radioMode = true,
+           bool labelFromMarked = true,
+           bhapi::menu_layout layout = B_ITEMS_IN_COLUMN);
     virtual ~BPopUpMenu();
 
-	// "could_proxy_when_sync" must be "true" when it called synchronously from looper of BApplication!
-	BMenuItem*	Go(BPoint where,
-			   bool delivers_message_when_sync = false,
-			   bool open_anyway = false,
-			   bool asynchronous = false,
-			   bool could_proxy_when_sync = false);
+    // "could_proxy_when_sync" must be "true" when it called synchronously from looper of BApplication!
+    BMenuItem*	Go(BPoint where,
+               bool delivers_message_when_sync = false,
+               bool open_anyway = false,
+               bool asynchronous = false,
+               bool could_proxy_when_sync = false);
 
-	void		SetAsyncAutoDestruct(bool state);
-	bool		AsyncAutoDestruct() const;
+    void		SetAsyncAutoDestruct(bool state);
+    bool		AsyncAutoDestruct() const;
 
-	virtual void	MessageReceived(BMessage *msg);
-	virtual void	MouseUp(BPoint where);
+    virtual void	MessageReceived(BMessage *msg);
+    virtual void	MouseUp(BPoint where);
 
 private:
-	friend class BMenu;
+    friend class BMenu;
 
-	BMenuItem *fSelectedItem;
-	bool fAutoDestruct;
-	bool IsPopUpByGo() const;
+    BMenuItem *fSelectedItem;
+    bool fAutoDestruct;
+    bool IsPopUpByGo() const;
 };
 
 #endif /* __cplusplus */

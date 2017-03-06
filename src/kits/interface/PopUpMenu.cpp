@@ -181,7 +181,7 @@ BPopUpMenuWindow::WaitToClose()
 
 
 
-BPopUpMenu::BPopUpMenu(const char *title, bool radioMode, bool labelFromMarked, b_menu_layout layout)
+BPopUpMenu::BPopUpMenu(const char *title, bool radioMode, bool labelFromMarked, bhapi::menu_layout layout)
 	: BMenu(title, layout), fAutoDestruct(false)
 {
 	SetEventMask(B_POINTER_EVENTS);

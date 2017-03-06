@@ -34,7 +34,7 @@
 #include "ListView.h"
 #include "../kernel/Debug.h"
 
-BOutlineListView::BOutlineListView(BRect frame, const char *name, b_list_view_type type,
+BOutlineListView::BOutlineListView(BRect frame, const char *name, bhapi::list_view_type type,
 				   b_uint32 resizingMode, b_uint32 flags)
 	: BListView(frame, name, type, resizingMode, flags)
 {

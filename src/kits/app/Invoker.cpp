@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -29,128 +29,119 @@
 
 #include "Invoker.h"
 #include "Application.h"
+#include "Messenger.h"
+#include "Message.h"
 #include "AppDefs.h"
 
-#include "../private/PrivateHandler.h"
-#include "../app/Messenger.h"
-#include "../app/Message.h"
 #include "../kernel/OS.h"
 #include "../kernel/Debug.h"
 #include "../support/Errors.h"
-
-
-typedef struct b_invoker_notify_state {
-	b_uint32 kind;
-	bool called;
-} b_invoker_notify_state;
-
+#include "../../private/app/PrivateHandler.h"
 
 BInvoker::BInvoker()
-	: fMessage(NULL), fReplyHandlerToken(B_MAXUINT64), fTimeout(B_INFINITE_TIMEOUT), fNotifyKind(B_CONTROL_INVOKED), fNotifyCalled(false)
+    : fMessage(NULL), fReplyHandlerToken(B_MAXUINT64), fTimeout(B_INFINITE_TIMEOUT), fNotifyKind(B_CONTROL_INVOKED), fNotifyCalled(false)
 {
-	SetHandlerForReply(bhapi::app);
+    SetHandlerForReply(bhapi::app);
 }
 
-
 BInvoker::BInvoker(BMessage *message, const BHandler *handler, const BLooper *looper)
-	: fMessage(NULL), fReplyHandlerToken(B_MAXUINT64), fTimeout(B_INFINITE_TIMEOUT), fNotifyKind(B_CONTROL_INVOKED), fNotifyCalled(false)
+    : fMessage(NULL), fReplyHandlerToken(B_MAXUINT64), fTimeout(B_INFINITE_TIMEOUT), fNotifyKind(B_CONTROL_INVOKED), fNotifyCalled(false)
 {
-	fMessage = message;
-	BMessenger msgr(handler, looper, NULL);
-	fMessenger = msgr;
+    fMessage = message;
+    BMessenger msgr(handler, looper, NULL);
+    fMessenger = msgr;
 
-	SetHandlerForReply(bhapi::app);
+    SetHandlerForReply(bhapi::app);
 }
 
 
 BInvoker::BInvoker(BMessage *message, BMessenger target)
-	: fMessage(NULL), fReplyHandlerToken(B_MAXUINT64), fTimeout(B_INFINITE_TIMEOUT), fNotifyKind(B_CONTROL_INVOKED), fNotifyCalled(false)
+    : fMessage(NULL), fReplyHandlerToken(B_MAXUINT64), fTimeout(B_INFINITE_TIMEOUT), fNotifyKind(B_CONTROL_INVOKED), fNotifyCalled(false)
 {
-	fMessage = message;
-	fMessenger = target;
+    fMessage = message;
+    fMessenger = target;
 
-	SetHandlerForReply(bhapi::app);
+    SetHandlerForReply(bhapi::app);
 }
 
 
 BInvoker::~BInvoker()
 {
-	if(fMessage) delete fMessage;
+    if(fMessage) delete fMessage;
     if(fReplyHandlerToken != B_MAXUINT64) bhapi::unref_handler(fReplyHandlerToken);
-	if(!fNotifyStatesList.IsEmpty())
-	{
-		for(b_int32 i = 0; i < fNotifyStatesList.CountItems(); i++)
-		{
-			b_invoker_notify_state *state = (b_invoker_notify_state*)fNotifyStatesList.ItemAt(i);
-			if(state) delete state;
-		}
-		fNotifyStatesList.MakeEmpty();
-	}
+    if(!fNotifyStatesList.IsEmpty())
+    {
+        for(b_int32 i = 0; i < fNotifyStatesList.CountItems(); i++)
+        {
+            bhapi::invoker_notify_state *state = (bhapi::invoker_notify_state*)fNotifyStatesList.ItemAt(i);
+            if(state) delete state;
+        }
+        fNotifyStatesList.MakeEmpty();
+    }
 }
-
 
 b_status_t
 BInvoker::SetMessage(BMessage *message)
 {
-	if(fMessage) delete fMessage;
-	fMessage = message;
+    if(fMessage) delete fMessage;
+    fMessage = message;
 
-	return B_OK;
+    return B_OK;
 }
 
 
 BMessage*
 BInvoker::Message() const
 {
-	return fMessage;
+    return fMessage;
 }
 
 
 b_uint32
 BInvoker::Command() const
 {
-	return fMessage ? fMessage->what : 0;
+    return fMessage ? fMessage->what : 0;
 }
 
 
 b_status_t
 BInvoker::SetTarget(const BHandler *handler, const BLooper *looper)
 {
-	b_status_t status;
-	BMessenger msgr(handler, looper, &status);
-	if(status != B_OK && !(handler == NULL && looper == NULL)) return status;
+    b_status_t status;
+    BMessenger msgr(handler, looper, &status);
+    if(status != B_OK && !(handler == NULL && looper == NULL)) return status;
 
-	fMessenger = msgr;
-	return B_OK;
+    fMessenger = msgr;
+    return B_OK;
 }
 
 
 b_status_t
 BInvoker::SetTarget(BMessenger messenger)
 {
-	fMessenger = messenger;
-	return B_OK;
+    fMessenger = messenger;
+    return B_OK;
 }
 
 
 bool
 BInvoker::IsTargetLocal() const
 {
-	return fMessenger.IsTargetLocal();
+    return fMessenger.IsTargetLocal();
 }
 
 
 BHandler*
 BInvoker::Target(BLooper **looper) const
 {
-	return fMessenger.Target(looper);
+    return fMessenger.Target(looper);
 }
 
 
 BMessenger
 BInvoker::Messenger() const
 {
-	return BMessenger(fMessenger);
+    return BMessenger(fMessenger);
 }
 
 
@@ -159,26 +150,26 @@ BInvoker::SetHandlerForReply(const BHandler *handler)
 {
     if(fReplyHandlerToken != B_MAXUINT64) bhapi::unref_handler(fReplyHandlerToken);
 
-	fReplyHandlerToken = bhapi::get_ref_handler_token(handler);
+    fReplyHandlerToken = bhapi::get_ref_handler_token(handler);
 
-	return B_OK;
+    return B_OK;
 }
 
 
 BHandler*
 BInvoker::HandlerForReply() const
 {
-	return(bhapi::get_handler(fReplyHandlerToken));
+    return(bhapi::get_handler(fReplyHandlerToken));
 }
 
 
 b_status_t
 BInvoker::Invoke(const BMessage *msg)
 {
-	const BMessage *message = (msg ? msg : fMessage);
-	if(!message) return B_BAD_VALUE;
+    const BMessage *message = (msg ? msg : fMessage);
+    if(!message) return B_BAD_VALUE;
 
-	return fMessenger._SendMessage(message, fReplyHandlerToken, fTimeout);
+    return fMessenger._SendMessage(message, fReplyHandlerToken, fTimeout);
 }
 
 
@@ -191,24 +182,24 @@ return BInvoker::InvokeNotify(msg,B_CONTROL_INVOKED);
 b_status_t
 BInvoker::InvokeNotify(const BMessage *msg, b_uint32 kind = B_CONTROL_INVOKED)
 {
-	b_status_t status = B_BAD_VALUE;
+    b_status_t status = B_BAD_VALUE;
 
-	if(msg)
-	{
-		BeginInvokeNotify(kind);
-		status = Invoke(msg);
-		EndInvokeNotify();
-	}
+    if(msg)
+    {
+        BeginInvokeNotify(kind);
+        status = Invoke(msg);
+        EndInvokeNotify();
+    }
 
-	return status;
+    return status;
 }
 
 
 b_uint32
 BInvoker::InvokeKind(bool* notify)
 {
-	if(notify) *notify = fNotifyCalled;
-	return fNotifyKind;
+    if(notify) *notify = fNotifyCalled;
+    return fNotifyKind;
 }
 
 
@@ -220,46 +211,46 @@ BInvoker::BeginInvokeNotify(B_CONTROL_INVOKED);
 void
 BInvoker::BeginInvokeNotify(b_uint32 kind)
 {
-	b_invoker_notify_state *state = new b_invoker_notify_state;
-	if(state)
-	{
-		state->kind = fNotifyKind;
-		state->called = fNotifyCalled;
-		if(!fNotifyStatesList.AddItem((void*)state)) delete state;
-	}
+    bhapi::invoker_notify_state *state = new bhapi::invoker_notify_state;
+    if(state)
+    {
+        state->kind = fNotifyKind;
+        state->called = fNotifyCalled;
+        if(!fNotifyStatesList.AddItem((void*)state)) delete state;
+    }
 
-	fNotifyKind = kind;
-	fNotifyCalled = true;
+    fNotifyKind = kind;
+    fNotifyCalled = true;
 }
 
 
 void
 BInvoker::EndInvokeNotify()
 {
-	fNotifyKind = B_CONTROL_INVOKED;
-	fNotifyCalled = false;
+    fNotifyKind = B_CONTROL_INVOKED;
+    fNotifyCalled = false;
 
-	b_invoker_notify_state *state = (b_invoker_notify_state*)fNotifyStatesList.RemoveItem(fNotifyStatesList.CountItems() - 1);
-	if(state)
-	{
-		fNotifyKind = state->kind;
-		fNotifyCalled = state->called;
-		delete state;
-	}
+    bhapi::invoker_notify_state *state = (bhapi::invoker_notify_state*)fNotifyStatesList.RemoveItem(fNotifyStatesList.CountItems() - 1);
+    if(state)
+    {
+        fNotifyKind = state->kind;
+        fNotifyCalled = state->called;
+        delete state;
+    }
 }
 
 
 b_status_t
 BInvoker::SetTimeout(b_bigtime_t timeout)
 {
-	fTimeout = timeout;
-	return B_OK;
+    fTimeout = timeout;
+    return B_OK;
 }
 
 
 b_bigtime_t
 BInvoker::Timeout() const
 {
-	return fTimeout;
+    return fTimeout;
 }
 

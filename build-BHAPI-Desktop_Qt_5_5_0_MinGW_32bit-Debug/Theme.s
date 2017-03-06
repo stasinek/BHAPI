@@ -10,8 +10,8 @@
  # -Wno-unused-variable -Wno-unused-parameter -Wno-unused-value
  # -Wno-unused-label -Wno-unused-but-set-variable -Wattributes -Winline
  # -Wshadow -Wunknown-pragmas -Winvalid-pch -Wall -Wextra -std=gnu++11
- # -fno-keep-inline-dllexport -fverbose-asm -fstrict-aliasing -fwrapv
- # -funroll-loops -flto -frtti -fexceptions
+ # -fno-keep-inline-dllexport -fstrict-aliasing -fwrapv -flto -fverbose-asm
+ # -frtti -fexceptions
  # options enabled:  -faggressive-loop-optimizations
  # -fasynchronous-unwind-tables -fauto-inc-dec -fcommon
  # -fdelete-null-pointer-checks -fdwarf2-cfi-asm -fearly-inlining
@@ -20,7 +20,7 @@
  # -fira-share-save-slots -fira-share-spill-slots -fivopts
  # -fkeep-static-consts -fleading-underscore -fmath-errno
  # -fmerge-debug-strings -fomit-frame-pointer -fpeephole
- # -fprefetch-loop-arrays -freg-struct-return -frename-registers
+ # -fprefetch-loop-arrays -freg-struct-return
  # -fsched-critical-path-heuristic -fsched-dep-count-heuristic
  # -fsched-group-heuristic -fsched-interblock -fsched-last-insn-heuristic
  # -fsched-rank-heuristic -fsched-spec -fsched-spec-insn-heuristic
@@ -30,10 +30,10 @@
  # -ftree-coalesce-vars -ftree-cselim -ftree-forwprop
  # -ftree-loop-if-convert -ftree-loop-im -ftree-loop-ivcanon
  # -ftree-loop-optimize -ftree-parallelize-loops= -ftree-phiprop
- # -ftree-reassoc -ftree-scev-cprop -funit-at-a-time -funroll-loops
- # -funwind-tables -fverbose-asm -fweb -fwrapv -fzero-initialized-in-bss
- # -m32 -m80387 -m96bit-long-double -maccumulate-outgoing-args
- # -malign-double -malign-stringops -mavx256-split-unaligned-load
+ # -ftree-reassoc -ftree-scev-cprop -funit-at-a-time -funwind-tables
+ # -fverbose-asm -fwrapv -fzero-initialized-in-bss -m32 -m80387
+ # -m96bit-long-double -maccumulate-outgoing-args -malign-double
+ # -malign-stringops -mavx256-split-unaligned-load
  # -mavx256-split-unaligned-store -mfancy-math-387 -mfp-ret-in-387
  # -mieee-fp -mlong-double-80 -mmmx -mms-bitfields -mno-red-zone -mno-sse4
  # -momit-leaf-frame-pointer -mpush-args -msahf -msse -msse2
@@ -41,11 +41,11 @@
 
 	.text
 Ltext0:
-	.section	.gnu.lto_.inline.9f1d4114,"dr0"
+	.section	.gnu.lto_.inline.a096bb07,"dr0"
 	.ascii "x\234cf\300\16\346Bi\26\6\6v6\6\6&\256\7\261@6\23H\210\221\241\235\361\17#P\314\353\300nF\230 \33?u\11&\6f\240\271LL\13\344a60c\210"
 	.ascii "0\0\0oy\10F"
 	.text
-	.section	.gnu.lto__ZN5bhapi9rgb_color6set_toEhhhh.9f1d4114,"dr0"
+	.section	.gnu.lto__ZN5bhapi9rgb_color6set_toEhhhh.a096bb07,"dr0"
 	.ascii "x\234\225\222\357KSa\24\307\237\357\363\334]\207\372b\364R\202\202"
 	.ascii "1$\310\15\202\336D\204AP\377D/\346\230"
 	.ascii "9\202\210m\357\275[\223@\242\246\375 \260Ia\315\312\322\324"
@@ -63,7 +63,7 @@ Ltext0:
 	.ascii "9\354\216\26\354\216\312\222n\350i\322\26\365\34"
 	.ascii "1\227X\243\252\257\351 \354e\301\363\246\35\224\334\346\365\372\"\341\200\357`(\32\361\205\16E\203\341N\177 \350\243\354\337`o\330\177\270+\24\210\354\11vF\274]\302\210v\205\"\10\343\0:\340\377\3\0\353/;"
 	.text
-	.section	.gnu.lto_ui_color.9f1d4114,"dr0"
+	.section	.gnu.lto_ui_color.a096bb07,"dr0"
 	.ascii "x\234\205\227[L\24W\30\307\347\233\231\275\260"
 	.ascii "7\226K\373@\223\326\204"
 	.ascii "6\246}\200\266\17\246M[\333G\373\326\207>4M\37\332 \15\306Z\215\232^\36\210\263\260*1.X\324J15(\242\210\12\"xA\12\5\5\305r+W\1\271,\5T\300\12\312e]n\333\357|g\266\335):K\370N2g\316\357\374\377\337"
@@ -104,7 +104,7 @@ Ltext0:
 	.ascii "96Q\32"
 	.ascii "9;\227\233\311\\\257'\267\22\246\236\3(\327O\325\332?\320\376\224\327t?\326\215\"\262\276\254\203\313e|\177_\26\300%j\334Dk\334\10\334M~\226\356\276\246\211\372\373\232.>{_c\370\227wv\351\334OtW\262\177\0\350\243\273\17\256\367\30\250\347\2\375K\240\324\366\372\214\353\312\225\14\366\351/\200[\\G|\254\352\25\277#\234\302 ~\354\253s\320\307=\32C\373k\22\22\22wlOJ\334\274i\347\216\304M\337\356L\336\376\365WI\311\211\237\246$oINH\332\266M0|\237\262))\305Dm\302\233\206\244\255\337l\335\376\17\6\4\230\230"
 	.text
-	.section	.gnu.lto_ui_get_scrollbar_vertical_width.9f1d4114,"dr0"
+	.section	.gnu.lto_ui_get_scrollbar_vertical_width.a096bb07,"dr0"
 	.ascii "x\234ePAK\2Q\20\236\357=\221@\243\245:i\220\344\301\333\356?\350W\364\7b\331H\242\20\365\356K6\260nF\207\272\31QZBu-\20:\205\227\316FP,aP\267La\13\212m&\272"
 	.ascii "90\303\373f\276\357\233\341i\32\217"
 	.ascii "9N\13D\13\2b\4E\234\320\\5\270M\240\212\322\250\340M\15\24\256\316Gw\211W\365\245(C\14\257w\273\373q\201\210\11\354l\267w\222\271cc\314\373s\247\237l\356"
@@ -114,7 +114,7 @@ Ltext0:
 	.ascii "0\254\267\26\371x\22\"\365\305\224^\344\251\37P\375\270\374\256k\331\21*Y\21\204\217\341T\372\300\324Lm\226\210\257"
 	.ascii "0\23\242B\33\351?\25\177\200\276\307\246E#\326?\1\377J\22_\256\334\314\330\266S*\272\316Z\276\\r\362\33e\257\270\262\354z\316\322\252\267\356\331n\241@\277\235Af0"
 	.text
-	.section	.gnu.lto_ui_get_scrollbar_horizontal_height.9f1d4114,"dr0"
+	.section	.gnu.lto_ui_get_scrollbar_horizontal_height.a096bb07,"dr0"
 	.ascii "x\234eP\301JBQ\20\235s\257H\240\321\243Zi\220\344\302\335{\237\320O\364\3!/\222(D\335{\223\27\274\332\31-jgDi\11\326\266 \212\26\341\246\265\21\24oQ`;MAZ\344k&\332"
 	.ascii "90\303=3\347\234\31\256\246\311X\340\264@\264$ BP\304\11\315U\203\333\4*+\215"
 	.ascii "2>U_\341\272"
@@ -122,17 +122,17 @@ Ltext0:
 	.ascii "1\274\331o\37F\5\"\"\360v\267\271\27\317\234\32cz\17w\275x\375\240\306#E\3E8C\2u$\304\257\201\214\220\373\336O'\26\365\230l\11\203\7\347\210\362B\360\254R\353"
 	.ascii "4\246\323\307\306\370\301\370\344qn\247m\274 \14\27'\315$p\201\364\345\354\275\11\303\301\270\332]\346\343I\210\364.\246\364!O\375\202\312\327UX\325\262c\244dE0z\35\315$\217\214o\374y\"\276\302L\211\12M$\377T\374\1\372\31\333\26\15Y\377\6\374+I|\271r3e\333N\261\220u6r\245\242\223\333*\271\205\265\325\254\353\254\254\273\233\256\235\315\347\351\27\267\376fo"
 	.text
-	.section	.gnu.lto_.symbol_nodes.9f1d4114,"dr0"
+	.section	.gnu.lto_.symbol_nodes.a096bb07,"dr0"
 	.ascii "x\234U\316\273\16\201A\20\206\341\331]\313:5\212M\346r\304\205M1\11\11\11\242\320\22\225\22\267\240\366;\377(\365\256A\330a\22\246y\276\274\325"
 	.ascii "8\0h\31\370\234\235G\2\30f\0D0\236\6\260\213HFC\236\302"
 	.ascii "2\222\375\13\253H\356"
 	.ascii "7\370\33\302\314\222\363W4\342\5\255\230\243\23\317X\20O\350\305#\26\305\3\226\304=\6q\207eq\213\25"
 	.ascii "1\303\252\270\301\232\330\250'\334\373w\276?\233\311\365Wn?&A\202\16\356h\321\301]-:\270\247E\7\367\265\350\340\201\26\35<\322\222\6\274\0\17\244]\254"
 	.text
-	.section	.gnu.lto_.refs.9f1d4114,"dr0"
+	.section	.gnu.lto_.refs.a096bb07,"dr0"
 	.ascii "x\234cf```d\200\2\0\0=\0\5"
 	.text
-	.section	.gnu.lto_.decls.9f1d4114,"dr0"
+	.section	.gnu.lto_.decls.a096bb07,"dr0"
 	.ascii "x\234\225YyT\224W\226\257W\257\200\242@0M\214\16IGM\34:vLHLb'sr\246\3Z\255L\20\34(\272"
 	.ascii "39s\206Q$\302\14Q\7p\322g\376\231\17Q@\26w\5E\240\334\0AY\24\10\213B\11\212\10\"jD\331\304\2\"\262\270\340\202\21\27\230\373\226o\251*\342\231\256\303\243\276{\357\357\376~\367-\337\373\226\302*\225\352$R\251&\340c\377\266J\325\253U\251\354\300\347\257\222?\32h\215\320\266\2n'\264Th.`g\302\367\1h\331\320\362\240\25@+\206V\2\255\34"
 	.ascii "1^\23\264:h\347\240"
@@ -142,7 +142,7 @@ Ltext0:
 	.ascii "8I\337:\341\270\213\324\305\361j\236C\370^\203v\3\216\273\241\335\204f\206\326\3\255\27Z\37\264\237\241\335\202\326\17\355"
 	.ascii "6\264\1h\203\320\206\240\15C\273\3\355\256U=d\334\260\242\236/\271\37\361\30\371\276g\225\223\372\212\234T\236s\337*\347\201\32U\24<nv\32P#\27\335,bVnoH\263\7\323Y\247!fF\316\306\353\32\254F4T\375\242I\215\235c\4\12\354"
 	.ascii "3m\353s\232\227'\10B\202`\272\244\226\11\237>\317\31Ess\4\243"
-	.ascii "0R\365\270\373uA\320 \377"
+	.ascii "0Ru\245\373uA\320 \377"
 	.ascii "7\320\21\204Q\36\232\247T\276V\23\37\257\305\337P\356\230\354\252d\7\220}CGC\233\233\366\236\306\324\234 au\355\300\241*\214t\36\11\202\260^0o\23\360\14\25\232\347\216\346\272\253P\21\362\240Y\350\30rG\5\310]u\10J\32\251*k\232N\224\13\221\16\35\225\244)\220\253\347\366\347\244\353\360\277Q\365\234\234\223\202\23^A\217{\352/\374\204p\30=n\352}\372\310\231\216\315Tb\336\251i+U\343\357ih\317/\27\352]ih\6\230\216G\272\237\230\20\332\203T\36\36nn\357\300'\25\241*\344\246B\357\271\203\34-i8\266wY\354VoT\211\334P.\224D\302P\22\373\242 \243`\312\25\214_\321L\12\311Gs\345\271\332&\220\317z\341\253\377R\241l\350k\16\364\25\225C\357\11\32\220\250\2\216O\242w\320)h\325\320j\240A\234\210\374HJ\233\224\240\342o 0B\266yS_\334b!\355s:\262\305\254\33\342T\220\276\242\337\223\16\23\244"
 	.ascii "1\261\356]\216;>\11n\236\204K\222p'&\301\225 \11\230,\1K'\1\226Q LM\373\323\374\15.S\222HW\341\317\261\301\205B\305\36\253\220\11M\341k`o~\336\317j\347\304_E\236F\316\34\271\353\320\330\0\322\300*\247\362\337\322s\343`a\315e\265\344\253E\324Y\333\277i\10K\316:\346,\335\261{\314Ar\236a\316\206\333;F\34\251\23d\320Y\346\214K8\224\351<c7\231(s\214"
 	.ascii "0\25\221by/U\350\34\232\1\377\353\1IW\15\300\37W\27?Q\343lD\227dy\314\361\353:|\214\31\243\347\222\273\324\263"
@@ -246,13 +246,13 @@ Ltext0:
 	.ascii "59\256\214\210\10\375+\331\24gM\236i\10\13\375>\364\303\220\265kU3!g\25ldQ!\221k\"\"V,\217\14\376\357\320\310\350\360\220\345\21\301?\204\257\214\16{\307&\36\266&2\374\177\326\254\216\6DXh\370\252\260h\273\357\"\326,\217\206\256-\362\11\364\362\366\205uH\367\7\203\217\237a\266\264o\372\316\377h2\200\36V\204<5\212\341\"\301\367\24\331\177x\5N?MA\355\353\345MvRp\277\243H\377xR\204\36\206~\21\224\242\367\203\212\276\241\256\267\345\244\217\377`\23\325\273J\256O\251\343-\5\374"
 	.ascii "3\253\230\2\374\311+\300\237X\203\347\277\2<\337\32\374\361+\300,\246w\204\275\330\237\36N\223a_HN\375T\262\215\300\260J\31\277U\260-\260\16*\341\363_\5\347\245\376F\366\210\243"
 	.ascii "8S\221\360\271m\230N\247\376O^A\276\206\340\245\260\245\5\0\2\276\255\247\323\26\241\307Q\321+\247\255\15\17\15\11\375!<*\24\316\205\325Q\321\221\353B\340"
-	.ascii "2\255_\370\17\236\377\34\355iX\263&\"\312\363\373\360\325\253~\370\364\213\371\301\237\314\367\14_\360\371\202\17~X\360\351\7\324I\34\253C\"\326\255\14\365\14y\377}\317\25\344\254\211\212\216\10^\273<<\22N0\267I\270\335\203\277\15\214\366\375\370\213IB\377\7\5\12\267\331"
+	.ascii "2\255_\370\17\236\377\34\355iX\263&\"\312\363\373\360\325\253~\370\364\213\371\301\237\314\367\14_\360\371\202\17~X\360\351\7\324I\34\253C\"\326\255\14\365\14y\377}\317\25\344\254\211\212\216\10^\273<<\22N0\267I\270\335\203\277\15\214\366\375\370\213IB\377\7\346\240\267\267"
 	.text
-	.section	.gnu.lto_.symtab.9f1d4114,"dr0"
+	.section	.gnu.lto_.symtab.a096bb07,"dr0"
 	.ascii "__ZN5bhapi9rgb_color6set_toEhhhh\0_ZN5bhapi9rgb_color6set_toEhhhh\0\0\0\0\0\0\0\0\0\0\0\312\0\0\0_ui_color\0\0\0\0\0\0\0\0\0\0\0\0\220\1\0\0_ui_get_scrollbar_vertical_width\0\0\0\0\0\0\0\0\0\0\0\0\224\1\0\0_ui_get_scrollbar_horizontal_height\0\0\0\0\0\0\0\0\0\0\0\0\227\1\0\0"
 	.text
 	.section	.gnu.lto_.opts,"dr0"
-	.ascii "'-fno-trapv' '-fno-strict-overflow' '-dD' '-malign-double' '-momit-leaf-frame-pointer' '-m32' '-mfpmath=sse' '-mpreferred-stack-boundary=8' '-mmmx' '-msse' '-msse2' '-mthreads' '-mtune=generic' '-march=i686' '-g' '-g' '-fverbose-asm' '-fstrict-aliasing' '-fwrapv' '-funroll-loops' '-flto' '-fexceptions'\0"
+	.ascii "'-fno-trapv' '-fno-strict-overflow' '-dD' '-malign-double' '-momit-leaf-frame-pointer' '-m32' '-mfpmath=sse' '-mpreferred-stack-boundary=8' '-mmmx' '-msse' '-msse2' '-mthreads' '-mtune=generic' '-march=i686' '-g' '-g' '-fstrict-aliasing' '-fwrapv' '-flto' '-fverbose-asm' '-fexceptions'\0"
 	.text
 	.comm	___gnu_lto_v1, 1, 0
 	.comm	___gnu_lto_slim, 1, 0

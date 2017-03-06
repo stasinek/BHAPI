@@ -36,7 +36,7 @@
 #include "../kernel/Debug.h"
 
 #include <errno.h>
-#include <string.h>
+
 #include <sys/types.h>
 #include <signal.h>
 

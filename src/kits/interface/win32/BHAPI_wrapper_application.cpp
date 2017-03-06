@@ -35,7 +35,7 @@
 #include "../../support/Locker.h"
 #include "../../support/Errors.h"
 #include "../../support/Autolock.h"
-#include "../../support/String.h"
+#include "../../support/StringClass.h"
 #include "../../interface/InterfaceDefs.h"
 #include "../../app/Application.h"
 #include "../../app/AppDefs.h"
@@ -91,7 +91,7 @@ static void bhapi::win32_clipboard_changed()
 }
 
 
-static b_filter_result bhapi::win32_clipboard_filter(BMessage *message, BHandler **target, BMessageFilter *filter)
+static bhapi::filter_result bhapi::win32_clipboard_filter(BMessage *message, BHandler **target, BMessageFilter *filter)
 {
     if(message->what != B_CLIPBOARD_CHANGED) return B_DISPATCH_MESSAGE;
 

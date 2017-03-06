@@ -29,7 +29,7 @@
 
 #include "TabView.h"
 
-#include "../support/String.h"
+#include "../support/StringClass.h"
 
 BTab::BTab(BView *targetView)
 	: fLabel(NULL), fEnabled(true), fFocus(false), fOwner(NULL)
@@ -196,7 +196,7 @@ BTab::DrawLabel(BView* owner, BRect frame)
 
 
 void
-BTab::DrawTab(BView* owner, BRect frame, b_tab_position position, bool full)
+BTab::DrawTab(BView* owner, BRect frame, bhapi::tab_position position, bool full)
 {
 	bhapi::rgb_color shineColor = bhapi::ui_color(B_SHINE_COLOR);
 	bhapi::rgb_color shadowColor = bhapi::ui_color(B_SHADOW_COLOR);

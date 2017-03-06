@@ -36,7 +36,7 @@
 
 #include <sys/types.h>
 #include <unistd.h>
-#include <string.h>
+
 #include <time.h>
 #include <errno.h>
 
@@ -52,7 +52,7 @@ extern "C" {
 #include <sys/mman.h"
 
 #include "../kernel/Kernel.h"
-#include "../support/String.h"
+#include "../support/StringClass.h"
 
 typedef struct b_posix_sem_info {
 	b_posix_sem_info()

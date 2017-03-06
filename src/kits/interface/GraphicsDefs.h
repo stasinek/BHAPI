@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -322,21 +322,21 @@ status_t get_pixel_size_for(color_space space, size_t* _pixelChunk, size_t* _row
 inline pattern make_pattern(b_uint8 d1, b_uint8 d2, b_uint8 d3, b_uint8 d4, b_uint8 d5, b_uint8 d6, b_uint8 d7, b_uint8 d8)
 {
     bhapi::pattern p;
-	p.data[0] = d1;
-	p.data[1] = d2;
-	p.data[2] = d3;
-	p.data[3] = d4;
-	p.data[4] = d5;
-	p.data[5] = d6;
-	p.data[6] = d7;
-	p.data[7] = d8;
-	return p;
+    p.data[0] = d1;
+    p.data[1] = d2;
+    p.data[2] = d3;
+    p.data[3] = d4;
+    p.data[4] = d5;
+    p.data[5] = d6;
+    p.data[6] = d7;
+    p.data[7] = d8;
+    return p;
 }
 inline rgb_color make_rgb_color(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 0xff)
 {
     rgb_color c;
-	c.set_to(r, g, b, a);
-	return c;
+    c.set_to(r, g, b, a);
+    return c;
 }
 #endif /* __cplusplus */
 IMPEXPBHAPI b_uint8 find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b);

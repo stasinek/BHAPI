@@ -35,7 +35,7 @@
 #include "support/SimpleLocker.h"
 #include "support/Locker.h"
 #include "support/List.h"
-#include "support/String.h"
+#include "support/StringClass.h"
 #include "support/StringArray.h"
 #include "support/DataIO.h"
 #include "support/StreamIO.h"

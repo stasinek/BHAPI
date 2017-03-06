@@ -37,7 +37,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+
 
 BBufferIO::BBufferIO(BPositionIO* stream, size_t bufferSize, bool ownsStream)
 	:

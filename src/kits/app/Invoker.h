@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,72 +30,84 @@
 
 #ifndef BHAPI_INVOKER_H
 #define BHAPI_INVOKER_H
-#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../support/List.h"
 class BMessage;
 class BLooper;
-#include "../app/Messenger.h"
 class BHandler;
+#include "../support/List.h"
+#include "../app/Messenger.h"
+#endif
+#ifdef __cplusplus /* Just for C++ */
+namespace bhapi {
+#endif
+#include "../support/SupportDefs.h"
+typedef struct invoker_notify_state {
+    b_uint32 kind;
+    bool called;
+} invoker_notify_state;
+#ifdef __cplusplus /* Just for C++ */
+}
+#endif
+#ifdef __cplusplus /* Just for C++ */
 class IMPEXPBHAPI BInvoker {
 public:
     BInvoker();
     BInvoker(BMessage *message,
-		 const BHandler *handler,
-		 const BLooper *looper = NULL);
+         const BHandler *handler,
+         const BLooper *looper = NULL);
     BInvoker(BMessage *message, BMessenger target);
 
     virtual ~BInvoker();
 
-	virtual b_status_t	SetMessage(BMessage *message);
-	BMessage*		Message() const;
+    virtual b_status_t	SetMessage(BMessage *message);
+    BMessage*		Message() const;
     b_uint32			Command() const;
 
-	virtual b_status_t	SetTarget(const BHandler *handler, const BLooper *looper = NULL);
-	virtual b_status_t	SetTarget(BMessenger messenger);
+    virtual b_status_t	SetTarget(const BHandler *handler, const BLooper *looper = NULL);
+    virtual b_status_t	SetTarget(BMessenger messenger);
 
-	bool			IsTargetLocal() const;
-	BHandler*		Target(BLooper **looper = NULL) const;
-	BMessenger		Messenger() const;
+    bool			IsTargetLocal() const;
+    BHandler*		Target(BLooper **looper = NULL) const;
+    BMessenger		Messenger() const;
 
-	virtual b_status_t	SetHandlerForReply(const BHandler *handler);
-	BHandler*		HandlerForReply() const;
+    virtual b_status_t	SetHandlerForReply(const BHandler *handler);
+    BHandler*		HandlerForReply() const;
 
-	virtual b_status_t	Invoke(const BMessage *msg = NULL);
+    virtual b_status_t	Invoke(const BMessage *msg = NULL);
     //    b_status_t		InvokeNotify(const BMessage *msg, b_uint32 kind = B_CONTROL_INVOKED);
     b_status_t		InvokeNotify(const BMessage *msg);
     b_status_t		InvokeNotify(const BMessage *msg, b_uint32 kind);
 
     b_status_t		SetTimeout(b_bigtime_t timeout);
-	b_bigtime_t		Timeout() const;
+    b_bigtime_t		Timeout() const;
 
 protected:
-	/* Return the change code for a notification.  This is either
-	   B_CONTROL_INVOKED for raw Invoke() calls, or the kind
-	   supplied to InvokeNotify().  In addition, 'notify' will be
-	   set to true if this was an InvokeNotify() call, else false. */
+    /* Return the change code for a notification.  This is either
+       B_CONTROL_INVOKED for raw Invoke() calls, or the kind
+       supplied to InvokeNotify().  In addition, 'notify' will be
+       set to true if this was an InvokeNotify() call, else false. */
     b_uint32			InvokeKind(bool* notify = NULL);
 
-	/* Start and end an InvokeNotify context around an Invoke() call.
-	   These are only needed for writing custom methods that
-	   emulate the standard InvokeNotify() call. */
+    /* Start and end an InvokeNotify context around an Invoke() call.
+       These are only needed for writing custom methods that
+       emulate the standard InvokeNotify() call. */
 //    void			BeginInvokeNotify(b_uint32 kind = B_CONTROL_INVOKED);
     void			BeginInvokeNotify(void);
     void			BeginInvokeNotify(b_uint32 kind);
     void			EndInvokeNotify();
 
 private:
-	BMessage *fMessage;
-	BMessenger fMessenger;
+    BMessage *fMessage;
+    BMessenger fMessenger;
     b_uint64 fReplyHandlerToken;
 
-	b_bigtime_t fTimeout;
+    b_bigtime_t fTimeout;
 
     b_uint32 fNotifyKind;
-	bool fNotifyCalled;
+    bool fNotifyCalled;
 
-	BList fNotifyStatesList;
+    BList fNotifyStatesList;
 };
 
 #endif /* __cplusplus */

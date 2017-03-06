@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -31,38 +31,36 @@
 #ifndef BHAPI_STRING_VIEW_H
 #define BHAPI_STRING_VIEW_H
 
-#include "../support/StringArray.h"
-#include "../interface/View.h"
-
 #ifdef __cplusplus /* Just for C++ */
-
+#include "../interface/View.h"
+#include "../support/StringArray.h"
 class IMPEXPBHAPI BStringView : public BView {
 public:
     BStringView(BRect frame,
-		    const char *name,
-		    const char *initial_text,
+            const char *name,
+            const char *initial_text,
             b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
             b_uint32 flags = B_WILL_DRAW);
     virtual ~BStringView();
 
-	virtual void		SetText(const char *text);
+    virtual void		SetText(const char *text);
     void			SetText(const BString &text);
-	const char*		Text() const;
+    const char*		Text() const;
 
     virtual void		SetAlignment(bhapi::alignment alignment);
-	bhapi::alignment		Alignment() const;
+    bhapi::alignment		Alignment() const;
 
     virtual void		SetVerticalAlignment(bhapi::vertical_alignment alignment);
     bhapi::vertical_alignment	VerticalAlignment() const;
 
-	virtual void		Draw(BRect updateRect);
+    virtual void		Draw(BRect updateRect);
     virtual void		SetFont(const BFont *font, b_uint8 mask = B_FONT_ALL);
-	virtual void		GetPreferredSize(float *width, float *height);
+    virtual void		GetPreferredSize(float *width, float *height);
 
 private:
     BString fText;
     BStringArray *fTextArray;
-	bhapi::alignment fAlignment;
+    bhapi::alignment fAlignment;
     bhapi::vertical_alignment fVerticalAlignment;
 };
 
@@ -70,7 +68,7 @@ private:
 
 inline void BStringView::SetText(const BString &text)
 {
-	SetText(text.String());
+    SetText(text.String());
 }
 #endif // BHAPI_BUILD_LIBRARY
 

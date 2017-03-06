@@ -29,7 +29,7 @@
 
 #include "Path.h"
 
-#include "../support/String.h"
+#include "../support/StringClass.h"
 #include "../support/Errors.h"
 
 #ifdef _WIN32

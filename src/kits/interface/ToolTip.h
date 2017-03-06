@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -31,10 +31,9 @@
 #define BHAPI_TOOL_TIP_H
 
 #include "../app/Messenger.h"
-#include "../interface/GraphicsDefs.h"
 #include "../interface/Point.h"
 #include "../interface/Font.h"
-
+#include "../interface/GraphicsDefs.h"
 
 #if 0
 class IMPEXPBHAPI BToolTipInfo {
@@ -42,30 +41,30 @@ public:
     BToolTipInfo();
     virtual ~BToolTipInfo();
 
-	void			SetText(const char *text);
-	const char		*Text() const;
+    void			SetText(const char *text);
+    const char		*Text() const;
 
-	void			SetFont(const BFont *font);
-	const BFont*		Font() const;
+    void			SetFont(const BFont *font);
+    const BFont*		Font() const;
 
     void			SetBackgroundColor(bhapi::rgb_color color);
-	bhapi::rgb_color		BackgroundColor() const;
+    bhapi::rgb_color		BackgroundColor() const;
 
     void			SetTextColor(bhapi::rgb_color color);
-	bhapi::rgb_color		TextColor() const;
+    bhapi::rgb_color		TextColor() const;
 
-	void			SetInline(bool state);
-	bool			IsInline() const;
+    void			SetInline(bool state);
+    bool			IsInline() const;
 
-	void			SetTextOrigin(BPoint origin);
-	BPoint			TextOrigin() const;
+    void			SetTextOrigin(BPoint origin);
+    BPoint			TextOrigin() const;
 
 private:
-	char *fText;
-	BFont fFont;
-	bhapi::rgb_color fColor[2];
-	bool fIsInline;
-	BPoint fTextOrigin;
+    char *fText;
+    BFont fFont;
+    bhapi::rgb_color fColor[2];
+    bool fIsInline;
+    BPoint fTextOrigin;
 };
 
 
@@ -74,24 +73,23 @@ public:
     BToolTip();
     virtual ~BToolTip();
 
-	virtual b_status_t	ShowTip(const BMessenger &msgr);
-	virtual b_status_t	HideTip(const BMessenger &msgr);
-	virtual b_status_t	KillTip(const BMessenger &msgr);
-	virtual b_status_t	SetToolTipInfo(const BMessenger &msgr,
-					       BRect region,
+    virtual b_status_t	ShowTip(const BMessenger &msgr);
+    virtual b_status_t	HideTip(const BMessenger &msgr);
+    virtual b_status_t	KillTip(const BMessenger &msgr);
+    virtual b_status_t	SetToolTipInfo(const BMessenger &msgr,
+                           BRect region,
                            BToolTipInfo *info);
 
-	virtual b_status_t	CursorMoved(const BMessenger &msgr,
-					    BPoint where,
-					    BPoint delta);
+    virtual b_status_t	CursorMoved(const BMessenger &msgr,
+                        BPoint where,
+                        BPoint delta);
 
     static BToolTip		*Default();
 
 private:
-	void *fData;
+    void *fData;
 };
 #endif
-
 
 #endif /* BHAPI_TOOL_TIP_H */
 

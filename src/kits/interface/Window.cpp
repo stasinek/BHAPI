@@ -36,7 +36,7 @@
 #include "layout/Layout.h"
 
 #include "../support/ClassInfo.h"
-#include "../support/String.h"
+#include "../support/StringClass.h"
 #include "../support/Errors.h"
 #include "../kernel/Kernel.h"
 #include "../kernel/Debug.h"
@@ -154,7 +154,7 @@ BWindowLayoutContainer::Invalidate(BRect rect)
 
 
 void
-BWindow::InitSelf(BRect frame, const char *title, b_window_look look, b_window_feel feel, b_uint32 flags, b_uint32 workspace)
+BWindow::InitSelf(BRect frame, const char *title, bhapi::window_look look, bhapi::window_feel feel, b_uint32 flags, b_uint32 workspace)
 {
 	if(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL)
 		BHAPI_ERROR("[INTERFACE]: Window must created within a application which has graphics-engine!");
@@ -220,12 +220,12 @@ BWindow::InitSelf(BRect frame, const char *title, b_window_look look, b_window_f
 
 
 BWindow::BWindow(BRect frame, const char *title,
-		 b_window_type type,
+		 bhapi::window_type type,
 		 b_uint32 flags, b_uint32 workspace)
 	: BLooper(NULL, B_DISPLAY_PRIORITY)
 {
-	b_window_look look;
-	b_window_feel feel;
+	bhapi::window_look look;
+	bhapi::window_feel feel;
 
 	switch(type)
 	{
@@ -264,7 +264,7 @@ BWindow::BWindow(BRect frame, const char *title,
 
 
 BWindow::BWindow(BRect frame, const char *title,
-		 b_window_look look, b_window_feel feel,
+		 bhapi::window_look look, bhapi::window_feel feel,
 		 b_uint32 flags, b_uint32 workspace)
 	: BLooper(NULL, B_DISPLAY_PRIORITY)
 {
@@ -1427,10 +1427,10 @@ BWindow::CurrentFocus() const
 
 
 b_status_t
-BWindow::SetType(b_window_type type)
+BWindow::SetType(bhapi::window_type type)
 {
-	b_window_look look;
-	b_window_feel feel;
+	bhapi::window_look look;
+	bhapi::window_feel feel;
 
 	switch(type)
 	{
@@ -1460,7 +1460,7 @@ BWindow::SetType(b_window_type type)
 
 	b_status_t status;
 
-	b_window_look saveLook = fWindowLook;
+	bhapi::window_look saveLook = fWindowLook;
 	if((status = SetLook(look)) != B_OK) return status;
 	if((status = SetFeel(feel)) != B_OK)
 	{
@@ -1472,7 +1472,7 @@ BWindow::SetType(b_window_type type)
 }
 
 
-b_window_type
+bhapi::window_type
 BWindow::Type() const
 {
 	if(fWindowLook == B_TITLED_WINDOW_LOOK && fWindowFeel == B_NORMAL_WINDOW_FEEL)
@@ -1490,7 +1490,7 @@ BWindow::Type() const
 
 
 b_status_t
-BWindow::SetLook(b_window_look look)
+BWindow::SetLook(bhapi::window_look look)
 {
 	if(fWindowLook != look)
 	{
@@ -1503,7 +1503,7 @@ BWindow::SetLook(b_window_look look)
 }
 
 
-b_window_look
+bhapi::window_look
 BWindow::Look() const
 {
 	return fWindowLook;
@@ -1511,14 +1511,14 @@ BWindow::Look() const
 
 
 b_status_t
-BWindow::SetFeel(b_window_feel feel)
+BWindow::SetFeel(bhapi::window_feel feel)
 {
 	if(fWindowFeel != feel)
 	{
 		b_status_t status = fWindow == NULL ? B_OK : fWindow->SetFeel(feel);
 		if(status != B_OK) return status;
 
-		b_window_feel oldFeel = fWindowFeel;
+		bhapi::window_feel oldFeel = fWindowFeel;
 		fWindowFeel = feel;
 
 		if((oldFeel == B_MODAL_APP_WINDOW_FEEL || feel == B_MODAL_APP_WINDOW_FEEL) && !IsHidden())
@@ -1535,7 +1535,7 @@ BWindow::SetFeel(b_window_feel feel)
 }
 
 
-b_window_feel
+bhapi::window_feel
 BWindow::Feel() const
 {
 	return fWindowFeel;

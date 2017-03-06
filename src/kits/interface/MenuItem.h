@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,75 +30,74 @@
 #ifndef BHAPI_MENU_ITEM_H
 #define BHAPI_MENU_ITEM_H
 
-#include "../support/SupportDefs.h"
-
 #ifdef __cplusplus /* Just for C++ */
 class BMenu;
 class BMessage;
 #include "../support/Archivable.h"
 #include "../interface/Rect.h"
 #include "../app/Invoker.h"
+#include "../support/SupportDefs.h"
 class IMPEXPBHAPI BMenuItem : public BArchivable, public BInvoker {
 public:
     BMenuItem(const char *label, BMessage *message, char shortcut = 0, b_uint32 modifiers = 0);
-	BMenuItem(BMenu *menu, BMessage *message = NULL);
-	virtual ~BMenuItem();
+    BMenuItem(BMenu *menu, BMessage *message = NULL);
+    virtual ~BMenuItem();
 
-	virtual void		SetLabel(const char *label);
-	virtual void		SetEnabled(bool state);
-	virtual void		SetMarked(bool state);
+    virtual void		SetLabel(const char *label);
+    virtual void		SetEnabled(bool state);
+    virtual void		SetMarked(bool state);
     virtual void		SetShortcut(char ch, b_uint32 modifiers);
 
-	const char*		Label() const;
-	bool			IsEnabled() const;
-	bool			IsMarked() const;
+    const char*		Label() const;
+    bool			IsEnabled() const;
+    bool			IsMarked() const;
     char			Shortcut(b_uint32 *modifiers = NULL) const;
 
-	BMenu*			Submenu() const;
-	BMenu*			Menu() const;
-	BRect			Frame() const;
+    BMenu*			Submenu() const;
+    BMenu*			Menu() const;
+    BRect			Frame() const;
 
-	virtual b_status_t	Invoke(const BMessage *msg = NULL);
+    virtual b_status_t	Invoke(const BMessage *msg = NULL);
 
 protected:
-	friend class BMenu;
+    friend class BMenu;
 
-	bool		IsSelected() const;
-	virtual bool	SelectChanged();
+    bool		IsSelected() const;
+    virtual bool	SelectChanged();
 
-	virtual void	GetContentSize(float *width, float *height) const;
+    virtual void	GetContentSize(float *width, float *height) const;
 
-	virtual void	DrawContent();
-	virtual void	Draw();
-	virtual void	Highlight(bool on);
+    virtual void	DrawContent();
+    virtual void	Draw();
+    virtual void	Highlight(bool on);
 
 private:
-	char fShortcut;
+    char fShortcut;
     b_uint32 fModifiers;
 
-	BRect fFrame;
-	bool fMarked;
-	bool fEnabled;
+    BRect fFrame;
+    bool fMarked;
+    bool fEnabled;
 
-	char *fLabel;
-	char *fShortcuts;
+    char *fLabel;
+    char *fShortcuts;
 
-	BMenu *fSubmenu;
-	BMenu *fMenu;
+    BMenu *fSubmenu;
+    BMenu *fMenu;
 
-	void ShowSubmenu(bool selectFirstItem = true);
+    void ShowSubmenu(bool selectFirstItem = true);
 };
 
 
 class IMPEXPBHAPI BMenuSeparatorItem : public BMenuItem {
 public:
-	BMenuSeparatorItem();
-	virtual ~BMenuSeparatorItem();
+    BMenuSeparatorItem();
+    virtual ~BMenuSeparatorItem();
 
 protected:
-	virtual void	GetContentSize(float *width, float *height) const;
-	virtual void	Draw();
-	virtual bool	SelectChanged();
+    virtual void	GetContentSize(float *width, float *height) const;
+    virtual void	Draw();
+    virtual bool	SelectChanged();
 };
 
 

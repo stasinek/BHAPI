@@ -28,7 +28,7 @@
  * --------------------------------------------------------------------------*/
 
 #include "../../kernel/Kernel.h"
-#include "../../support/String.h"
+#include "../../support/StringClass.h"
 #include "../../private/PrivateApplication.h"
 
 #include <winsock2.h>

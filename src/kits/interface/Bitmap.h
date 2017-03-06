@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -35,10 +35,8 @@
 #include "../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
 class BGraphicsDrawable;
 class BPixmap;
-
 class IMPEXPBHAPI BBitmap : public BArchivable {
 public:
     BBitmap(BRect bounds, bool acceptsViews = false);
@@ -46,30 +44,30 @@ public:
     BBitmap(const BPixmap *pixmap, bool acceptsViews = false);
     virtual ~BBitmap();
 
-	b_status_t	InitCheck() const;
-	bool		IsValid() const;
+    b_status_t	InitCheck() const;
+    bool		IsValid() const;
 
-	BRect		Bounds() const;
+    BRect		Bounds() const;
 
-	virtual	void	AddChild(BView *view);
-	virtual	bool	RemoveChild(BView *view);
+    virtual	void	AddChild(BView *view);
+    virtual	bool	RemoveChild(BView *view);
     b_int32		CountChildren() const;
     BView		*ChildAt(b_int32 index) const;
-	BView		*FindView(const char *name) const;
+    BView		*FindView(const char *name) const;
     BView		*FindView(BPoint where) const;
-	bool		Lock();
-	void		Unlock();
+    bool		Lock();
+    void		Unlock();
 
 private:
-	friend class BView;
+    friend class BView;
 
     b_uint32 fRows;
     b_uint32 fColumns;
 
-	BGraphicsDrawable *fPixmap;
+    BGraphicsDrawable *fPixmap;
     BWindow *fWindow;
 
-	void InitSelf(BRect, bool);
+    void InitSelf(BRect, bool);
 };
 
 #endif /* __cplusplus */

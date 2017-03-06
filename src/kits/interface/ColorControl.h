@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -25,16 +25,15 @@
  *
  * File: ColorControl.h
  * Description: BColorControl --- Displays a palette of selectable colors
- * 
+ *
  * --------------------------------------------------------------------------*/
 
 #ifndef BHAPI_COLOR_CONTROL_H
 #define BHAPI_COLOR_CONTROL_H
 
-#include "../interface/Control.h"
-
 #ifdef __cplusplus /* Just for C++ */
 class BBitmap;
+#include "../interface/Control.h"
 class IMPEXPBHAPI BColorControl : public BControl {
 public:
     BColorControl(BPoint leftTop, const char *name, BMessage *message = NULL, bool bufferedDrawing = false);
@@ -42,21 +41,21 @@ public:
 
     virtual void	SetValue(b_int32 color);
     void		SetValue(bhapi::rgb_color color);
-	bhapi::rgb_color	ValueAsColor();
+    bhapi::rgb_color	ValueAsColor();
 
-	virtual void	Draw(BRect updateRect);
+    virtual void	Draw(BRect updateRect);
     virtual void	MouseDown(BPoint where);
-	virtual void	GetPreferredSize(float *width, float *height);
+    virtual void	GetPreferredSize(float *width, float *height);
 
 private:
-	BBitmap *fBitmap;
+    BBitmap *fBitmap;
 
     BRect _MarkFrame(BRect colorFrame, b_uint8 channel);
-	BRect _ColorsFrame();
-	BRect _DescriptionFrame();
+    BRect _ColorsFrame();
+    BRect _DescriptionFrame();
 
-	void _DrawColors(BRect updateRect);
-	void _DrawDescription(BRect updateRect);
+    void _DrawColors(BRect updateRect);
+    void _DrawDescription(BRect updateRect);
 };
 
 #endif /* __cplusplus */

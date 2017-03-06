@@ -14,32 +14,51 @@ DEFINES += BHAPI_GRAPHICS_WIN32_BUILT_IN
 CONFIG += windows shared staticlib precompile_header
 CONFIG -= app_bundle
 CONFIG -= qt
-INCLUDEPATH += ..
+
 INCLUDEPATH += ../freetype/include
 INCLUDEPATH += ../BHAPI/src
-INCLUDEPATH += ../BHAPI/include
-INCLUDEPATH += ../BHAPI/include/os
-INCLUDEPATH += ../BHAPI/include/os/kits
-INCLUDEPATH += ../BHAPI/include/os/kits/app
-INCLUDEPATH += ../BHAPI/include/os/kits/arch
-INCLUDEPATH += ../BHAPI/include/os/kits/add-ons
-INCLUDEPATH += ../BHAPI/include/os/kits/be_apps
-INCLUDEPATH += ../BHAPI/include/os/kits/device
-INCLUDEPATH += ../BHAPI/include/os/kits/drivers
-INCLUDEPATH += ../BHAPI/include/os/kits/game
-INCLUDEPATH += ../BHAPI/include/os/kits/interface
-INCLUDEPATH += ../BHAPI/include/os/kits/kernel
-INCLUDEPATH += ../BHAPI/include/os/kits/locale
-INCLUDEPATH += ../BHAPI/include/os/kits/mail
-INCLUDEPATH += ../BHAPI/include/os/kits/media
-INCLUDEPATH += ../BHAPI/include/os/kits/midi
-INCLUDEPATH += ../BHAPI/include/os/kits/midi2
-INCLUDEPATH += ../BHAPI/include/os/kits/net
-INCLUDEPATH += ../BHAPI/include/os/kits/package
-INCLUDEPATH += ../BHAPI/include/os/kits/storage
-INCLUDEPATH += ../BHAPI/include/os/kits/support
-INCLUDEPATH += ../BHAPI/include/os/kits/translation
-INCLUDEPATH += ../BHAPI/include/libs
+INCLUDEPATH += ../BHAPI/src
+INCLUDEPATH += ../BHAPI/src/kits
+INCLUDEPATH += ../BHAPI/src/kits/app
+INCLUDEPATH += ../BHAPI/src/kits/arch
+INCLUDEPATH += ../BHAPI/src/kits/add-ons
+INCLUDEPATH += ../BHAPI/src/kits/be_apps
+INCLUDEPATH += ../BHAPI/src/kits/device
+INCLUDEPATH += ../BHAPI/src/kits/drivers
+INCLUDEPATH += ../BHAPI/src/kits/game
+INCLUDEPATH += ../BHAPI/src/kits/interface
+INCLUDEPATH += ../BHAPI/src/kits/kernel
+INCLUDEPATH += ../BHAPI/src/kits/locale
+INCLUDEPATH += ../BHAPI/src/kits/mail
+INCLUDEPATH += ../BHAPI/src/kits/media
+INCLUDEPATH += ../BHAPI/src/kits/midi
+INCLUDEPATH += ../BHAPI/src/kits/midi2
+INCLUDEPATH += ../BHAPI/src/kits/net
+INCLUDEPATH += ../BHAPI/src/kits/package
+INCLUDEPATH += ../BHAPI/src/kits/storage
+INCLUDEPATH += ../BHAPI/src/kits/support
+INCLUDEPATH += ../BHAPI/src/kits/translation
+INCLUDEPATH += ../BHAPI/src/private
+INCLUDEPATH += ../BHAPI/src/private/app
+INCLUDEPATH += ../BHAPI/src/private/arch
+INCLUDEPATH += ../BHAPI/src/private/add-ons
+INCLUDEPATH += ../BHAPI/src/private/be_apps
+INCLUDEPATH += ../BHAPI/src/private/device
+INCLUDEPATH += ../BHAPI/src/private/drivers
+INCLUDEPATH += ../BHAPI/src/private/game
+INCLUDEPATH += ../BHAPI/src/private/interface
+INCLUDEPATH += ../BHAPI/src/private/kernel
+INCLUDEPATH += ../BHAPI/src/private/locale
+INCLUDEPATH += ../BHAPI/src/private/mail
+INCLUDEPATH += ../BHAPI/src/private/media
+INCLUDEPATH += ../BHAPI/src/private/midi
+INCLUDEPATH += ../BHAPI/src/private/midi2
+INCLUDEPATH += ../BHAPI/src/private/net
+INCLUDEPATH += ../BHAPI/src/private/package
+INCLUDEPATH += ../BHAPI/src/private/storage
+INCLUDEPATH += ../BHAPI/src/private/support
+INCLUDEPATH += ../BHAPI/src/private/translation
+INCLUDEPATH += ../BHAPI/src/libs
 
 QT -= core gui
 QMAKE_CXX = ccache g++
@@ -47,8 +66,8 @@ QMAKE_CXX = ccache g++
 #Use Precompiled headers PCH
 #PRECOMPILED_HEADER += src/kits/app/AppDefs.h
 #PRECOMPILED_HEADER += src/kits/interface/GraphicsDefs.h
-#PRECOMPILED_HEADER += src/kits/support/SupportDefs.h
-#PRECOMPILED_HEADER += src/kits/storage/StorageDefs.h
+##PRECOMPILED_HEADER += src/kits/support/SupportDefs.h
+##PRECOMPILED_HEADER += src/kits/storage/StorageDefs.h
 #PRECOMPILED_HEADER += src/kits/interface/InterfaceDefs.h
 #PRECOMPILED_HEADER = bhapi.h
 
@@ -58,13 +77,6 @@ SOURCES += bhapi.cpp \
     src/kits/add-ons/graphics/GraphicsEngine.cpp \
     src/kits/add-ons/theme/DefaultTheme.cpp \
     src/kits/add-ons/theme/ThemeEngine.cpp \
-    src/kits/private/Memory.cpp \
-    src/kits/private/MessageBody.cpp \
-    src/kits/private/Object.cpp \
-    src/kits/private/PrivateApplication.cpp \
-    src/kits/private/PrivateHandler.cpp \
-    src/kits/private/StandardIO.cpp \
-    src/kits/private/Token.cpp \
     src/kits/render/ArcGenerator.cpp \
     src/kits/render/LineGenerator.cpp \
     src/kits/render/Pixmap.cpp \
@@ -98,6 +110,7 @@ SOURCES += bhapi.cpp \
     src/kits/app/Messenger.cpp \
     src/kits/kernel/Debug.cpp \
     src/kits/kernel/BHAPI_wrapper_port.cpp \
+    src/kits/kernel/Memory.cpp \
     src/kits/net/NetAddress.cpp \
     src/kits/net/NetBuffer.cpp \
     src/kits/net/NetDebug.cpp \
@@ -143,31 +156,45 @@ SOURCES += bhapi.cpp \
     src/kits/interface/layout/LayoutForm.cpp \
     src/kits/interface/layout/LayoutItem.cpp \
     src/kits/support/SupportDefs.cpp \
-    src/kits/support/String.cpp \
     src/kits/support/Architecture.cpp \
     src/kits/support/Base64.cpp \
     src/kits/support/Beep.cpp \
     src/kits/support/BlockCache.cpp \
     src/kits/support/BufferedDataIO.cpp \
     src/kits/support/BufferIO.cpp \
-    src/kits/support/CompressionAlgorithm.cpp \
-    src/kits/support/DataPositionIOWrapper.cpp \
     src/kits/support/DateTime.cpp \
     src/kits/support/Job.cpp \
     src/kits/support/JobQueue.cpp \
     src/kits/support/Referenceable.cpp \
     src/kits/support/StopWatch.cpp \
-    src/kits/support/Uuid.cpp \
-    src/kits/support/ZlibCompressionAlgorithm.cpp \
     src/kits/support/ByteOrder.cpp \
     src/kits/support/StringArray.cpp \
     src/kits/support/StringList.cpp \
-    src/kits/support/StringPrivate.cpp \
-    src/kits/support/utf8.cpp
-
+    src/kits/support/StandardIO.cpp \
+    src/kits/support/UTF8.cpp \
+    src/private/app/MessageBody.cpp \
+    src/private/app/PrivateApplication.cpp \
+    src/private/app/PrivateHandler.cpp \
+    src/private/support/Object.cpp \
+    src/private/support/Token.cpp \
+    src/private/support/StringPrivate.cpp \
+    src/private/support/CompressionAlgorithm.cpp \
+    src/private/support/ZlibCompressionAlgorithm.cpp \
+    src/private/support/Uuid.cpp \
+    src/private/support/DataPositionIOWrapper.cpp \
+    src/kits/support/StringClass.cpp
 
 HEADERS += bhapi.h\
     bhapi_global.h \
+    src/kits/BE.h \
+    src/kits/AppKit.h \
+    src/kits/InterfaceKit.h \
+    src/kits/KernelKit.h \
+    src/kits/NetKit.h \
+    src/kits/RenderKit.h \
+    src/kits/StorageKit.h \
+    src/kits/SupportKit.h \
+    src/kits/XmlKit.h \
     src/kits/add-ons/font/FontEngine.h \
     src/kits/add-ons/graphics/GraphicsEngine.h \
     src/kits/add-ons/theme/ThemeEngine.h \
@@ -229,13 +256,6 @@ HEADERS += bhapi.h\
     src/kits/net/NetBuffer.h \
     src/kits/net/NetDebug.h \
     src/kits/net/NetEndpoint.h \
-    src/kits/private/Memory.h \
-    src/kits/private/MessageBody.h \
-    src/kits/private/Object.h \
-    src/kits/private/PrivateApplication.h \
-    src/kits/private/PrivateHandler.h \
-    src/kits/private/StandardIO.h \
-    src/kits/private/Token.h \
     src/kits/render/ArcGenerator.h \
     src/kits/render/LineGenerator.h \
     src/kits/render/Pixmap.h \
@@ -262,17 +282,6 @@ HEADERS += bhapi.h\
     src/kits/support/SimpleLocker.h \
     src/kits/support/StreamIO.h \
     src/kits/support/SupportDefs.h \
-    src/kits/xml/SimpleXmlParser.h \
-    src/kits/BE.h \
-    src/kits/AppKit.h \
-    src/kits/InterfaceKit.h \
-    src/kits/KernelKit.h \
-    src/kits/NetKit.h \
-    src/kits/RenderKit.h \
-    src/kits/StorageKit.h \
-    src/kits/SupportKit.h \
-    src/kits/XmlKit.h \
-    src/kits/support/String.h \
     src/kits/support/Beep.h \
     src/kits/support/BlockCache.h \
     src/kits/support/BufferedDataIO.h \
@@ -282,6 +291,7 @@ HEADERS += bhapi.h\
     src/kits/support/ObjectList.h \
     src/kits/support/Referenceable.h \
     src/kits/support/StackOrHeapArray.h \
+    src/kits/support/StandardIO.h \
     src/kits/support/StopWatch.h \
     src/kits/support/TLS.h \
     src/kits/support/TypeConstants.h \
@@ -289,7 +299,14 @@ HEADERS += bhapi.h\
     src/kits/support/Architecture.h \
     src/kits/support/StringArray.h \
     src/kits/support/StringList.h \
-    src/kits/support/StringPrivate.h
+    src/private/kernel/Memory.h \
+    src/private/app/MessageBody.h \
+    src/private/support/Object.h \
+    src/private/app/PrivateApplication.h \
+    src/private/app/PrivateHandler.h \
+    src/private/support/Token.h \
+    src/private/support/StringPrivate.h \
+    src/kits/support/StringClass.h
 
 LIBS -= -lfreetype
 LIBS += -L"../freetype/lib/debug" -libfreetype
@@ -366,6 +383,8 @@ HEADERS += src/kits/interface/carbon/BHAPI_wrapper_carbon.h
 }
 
 contains(QMAKE_COMPILER_DEFINES, __GNUC__) {
+QMAKE_CXXFLAGS -= -pipe
+
 QMAKE_CXXFLAGS += -Wno-write-strings -Wno-multichar
 QMAKE_CFLAGS   += -Wno-write-strings -Wno-multichar
 QMAKE_CXXFLAGS += -Wno-unused-variable -Wno-unused-parameter -Wno-unused-value -Wno-unused-label
@@ -377,26 +396,31 @@ QMAKE_CFLAGS   += -Wattributes -Winline -Wshadow -Wall
 QMAKE_CXXFLAGS += -Wunknown-pragmas
 QMAKE_CFLAGS   += -Wunknown-pragmas
 
-QMAKE_CXXFLAGS -= -pipe
 QMAKE_CXXFLAGS += -save-temps -Winvalid-pch
-QMAKE_CXXFLAGS += -fverbose-asm
 QMAKE_CXXFLAGS += -fstrict-aliasing
-QMAKE_CXXFLAGS += -dD
-QMAKE_CXXFLAGS += -g
 QMAKE_CXXFLAGS += -std=gnu++11 -pthread
 QMAKE_CXXFLAGS += -malign-double
 QMAKE_CXXFLAGS += -momit-leaf-frame-pointer
 QMAKE_CXXFLAGS += -fwrapv
-QMAKE_CXXFLAGS += -funroll-loops
-QMAKE_CXXFLAGS += -m32 -mfpmath=sse -flto #-O1
+QMAKE_CXXFLAGS += -m32 -mfpmath=sse -flto
 QMAKE_CXXFLAGS += -mpreferred-stack-boundary=8
-QMAKE_CXXFLAGS += -mmmx -msse -msse2 #-msse3
+QMAKE_CXXFLAGS += -mmmx -msse -msse2
 
-#QMAKE_CXXFLAGS += -fno-leading-underscore
-#QMAKE_CFLAGS   += -fno-leading-underscore
+    contains(CONFIG, debug) {
+    QMAKE_CXXFLAGS += -fverbose-asm
+    QMAKE_CXXFLAGS += -g -dD
+    }
+    contains(CONFIG, realese) {
+    QMAKE_CXXFLAGS += -O3
+    QMAKE_CXXFLAGS += -funroll-loops
+    }
 }
 
 contains(QMAKE_COMPILER_DEFINES, __clang__) {
+QMAKE_CXXFLAGS -= -fno-keep-inline-dllexport
+QMAKE_CXXFLAGS -= -finline-small-functions
+QMAKE_CXXFLAGS -= -pipe
+
 QMAKE_CXXFLAGS += -Wno-write-strings -Wno-multichar
 QMAKE_CFLAGS   += -Wno-write-strings -Wno-multichar
 QMAKE_CXXFLAGS += -Wno-unused-variable -Wno-unused-parameter -Wno-unused-value -Wno-unused-label
@@ -408,27 +432,34 @@ QMAKE_CFLAGS   += -Wattributes -Winline -Wshadow -Wall
 QMAKE_CXXFLAGS += -Wunknown-pragmas
 QMAKE_CFLAGS   += -Wunknown-pragmas
 
-QMAKE_CXXFLAGS += -save-temps
-QMAKE_CXXFLAGS += -fverbose-asm
 QMAKE_CXXFLAGS += -fstrict-aliasing
-QMAKE_CXXFLAGS += -dD
-QMAKE_CXXFLAGS += -g
 QMAKE_CXXFLAGS += -std=gnu++0x -pthread
 QMAKE_CXXFLAGS += -malign-double
 QMAKE_CXXFLAGS += -momit-leaf-frame-pointer
 QMAKE_CXXFLAGS += -fwrapv
-QMAKE_CXXFLAGS += -funroll-loops
-QMAKE_CXXFLAGS += -m32 --32 -mfpmath=sse -flto #-O1
+QMAKE_CXXFLAGS += -m32 --32 -mfpmath=sse -flto
 QMAKE_CXXFLAGS += -mpreferred-stack-boundary=8
-QMAKE_CXXFLAGS += -mmmx -msse -msse2 #-msse3
-QMAKE_CXXFLAGS += -Qunused-arguments -Wno-error=unused-command-line-argument-hard-error-in-future
-QMAKE_CXXFLAGS -= -fno-keep-inline-dllexport
-QMAKE_CXXFLAGS -= -finline-small-functions
-QMAKE_CXXFLAGS -= -pipe
+QMAKE_CXXFLAGS += -mmmx -msse -msse2
+QMAKE_CXXFLAGS += -Qunused-arguments
+QMAKE_CXXFLAGS += -Wno-error=unused-command-line-argument-hard-error-in-future
 
-QMAKE_LFLAGS += -Qunused-arguments -Wno-error=unused-command-line-argument-hard-error-in-future
 QMAKE_LFLAGS -= -mthreads
+
+QMAKE_LFLAGS += -Qunused-arguments
+QMAKE_LFLAGS += -Wno-error=unused-command-line-argument-hard-error-in-future
+
+    contains(CONFIG, debug) {
+    QMAKE_CXXFLAGS += -save-temps
+    QMAKE_CXXFLAGS += -fverbose-asm
+    QMAKE_CXXFLAGS += -g -dD
+    }
+    contains(CONFIG, realese) {
+    QMAKE_CXXFLAGS += -O3
+    QMAKE_CXXFLAGS += -funroll-loops
+    }
+
 }
+
 
 unix {
     target.path = /usr/lib

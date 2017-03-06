@@ -50764,15 +50764,6 @@ typedef unsigned int b_uint32;
 typedef long long b_int64;
 typedef unsigned long long b_uint64;
 
-typedef char __haiku_int8;
-typedef unsigned char __haiku_uint8;
-typedef short __haiku_int16;
-typedef unsigned short __haiku_uint16;
-typedef int __haiku_int32;
-typedef unsigned int __haiku_uint32;
-typedef long long __haiku_int64;
-typedef unsigned long long __haiku_uint64;
-
 typedef volatile char vint8;
 typedef volatile unsigned char vuint8;
 typedef volatile short vint16;
@@ -50813,11 +50804,11 @@ typedef unsigned int type_code;
 typedef unsigned int __haiku_perform_code;
 typedef unsigned int b_perform_code;
 typedef unsigned int perform_code;
-# 356 "../src/kits/net/../support/SupportDefs.h"
+# 347 "../src/kits/net/../support/SupportDefs.h"
 extern "C" {
-# 366 "../src/kits/net/../support/SupportDefs.h"
+# 357 "../src/kits/net/../support/SupportDefs.h"
 }
-# 386 "../src/kits/net/../support/SupportDefs.h"
+# 377 "../src/kits/net/../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 1 3
 # 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_unicode.h" 1 3
@@ -93833,14 +93824,14 @@ typedef unsigned int GROUP;
   __attribute__((dllimport)) INT __attribute__((__stdcall__)) WSAProviderConfigChange(LPHANDLE lpNotificationHandle,LPWSAOVERLAPPED lpOverlapped,LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 # 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
-# 387 "../src/kits/net/../support/SupportDefs.h" 2
-# 399 "../src/kits/net/../support/SupportDefs.h"
+# 378 "../src/kits/net/../support/SupportDefs.h" 2
+# 390 "../src/kits/net/../support/SupportDefs.h"
 enum {
     B_SEEK_SET = 0,
     B_SEEK_CUR,
     B_SEEK_END,
 };
-# 474 "../src/kits/net/../support/SupportDefs.h"
+# 465 "../src/kits/net/../support/SupportDefs.h"
 namespace bhapi {
 
 __attribute__((dllexport)) int32 atomic_add (int32 *value, int32 addValue);
@@ -93876,8 +93867,53 @@ __attribute__((dllexport)) void * get_stack_frame (void);
 
 }
 
-
 extern "C" const char* B_EMPTY_STRING;
+
+
+
+
+
+
+typedef signed char __haiku_std_int8;
+typedef unsigned char __haiku_std_uint8;
+typedef signed short __haiku_std_int16;
+typedef unsigned short __haiku_std_uint16;
+typedef signed int __haiku_std_int32;
+typedef unsigned int __haiku_std_uint32;
+
+
+
+
+typedef signed long long __haiku_std_int64;
+typedef unsigned long long __haiku_std_uint64;
+
+
+typedef __haiku_std_int8 __haiku_int8;
+typedef __haiku_std_uint8 __haiku_uint8;
+typedef __haiku_std_int16 __haiku_int16;
+typedef __haiku_std_uint16 __haiku_uint16;
+
+
+
+
+typedef __haiku_std_int32 __haiku_int32;
+typedef __haiku_std_uint32 __haiku_uint32;
+
+typedef __haiku_std_int64 __haiku_int64;
+typedef __haiku_std_uint64 __haiku_uint64;
+
+
+typedef signed long int __haiku_saddr_t;
+typedef unsigned long int __haiku_addr_t;
+
+
+
+
+
+    typedef __haiku_int32 __haiku_phys_saddr_t;
+    typedef __haiku_uint32 __haiku_phys_addr_t;
+# 592 "../src/kits/net/../support/SupportDefs.h"
+    typedef __haiku_addr_t __haiku_generic_addr_t;
 # 33 "../src/kits/net/NetDebug.h" 2
 
 

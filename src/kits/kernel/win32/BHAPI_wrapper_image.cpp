@@ -29,7 +29,7 @@
 
 #include "../../kernel/Kernel.h"
 #include "../../storage/Path.h"
-#include "../../support/String.h"
+#include "../../support/StringClass.h"
 #include "../../support/Errors.h"
 
 #include <winsock2.h>

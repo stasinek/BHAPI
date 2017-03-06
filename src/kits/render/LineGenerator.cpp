@@ -60,7 +60,7 @@
 #include "LineGenerator.h"
 
 #include <math.h>
-#include <string.h>
+
 
 /* --------------------------------------------------------------------------
 <document lang="zh_CN.UTF-8">

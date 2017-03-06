@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 #include "StringArray.h"
-#include "String.h"
+#include "StringClass.h"
 
 typedef struct __string_node__
 {

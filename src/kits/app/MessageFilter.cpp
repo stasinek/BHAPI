@@ -33,7 +33,7 @@
 #include "Handler.h"
 #include "Looper.h"
 
-BMessageFilter::BMessageFilter(b_message_delivery delivery, b_message_source source, b_uint32 command, b_filter_hook filter)
+BMessageFilter::BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source, b_uint32 command, bhapi::filter_hook filter)
 	: fFiltersAny(false), fHandler(NULL)
 {
 	fDelivery = delivery;
@@ -43,7 +43,7 @@ BMessageFilter::BMessageFilter(b_message_delivery delivery, b_message_source sou
 }
 
 
-BMessageFilter::BMessageFilter(b_message_delivery delivery, b_message_source source, b_filter_hook filter)
+BMessageFilter::BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source, bhapi::filter_hook filter)
 	: fCommand(0), fFiltersAny(true), fHandler(NULL)
 {
 	fDelivery = delivery;
@@ -52,7 +52,7 @@ BMessageFilter::BMessageFilter(b_message_delivery delivery, b_message_source sou
 }
 
 
-BMessageFilter::BMessageFilter(b_uint32 command, b_filter_hook filter)
+BMessageFilter::BMessageFilter(b_uint32 command, bhapi::filter_hook filter)
 	: fFiltersAny(false), fDelivery(B_ANY_DELIVERY), fSource(B_ANY_SOURCE), fHandler(NULL)
 {
 	fCommand = command;
@@ -109,19 +109,19 @@ BMessageFilter::operator=(const BMessageFilter &filter)
 }
 
 
-b_filter_result
+bhapi::filter_result
 BMessageFilter::Filter(BMessage *message, BHandler **target)
 {
 	return B_DISPATCH_MESSAGE;
 }
 
 
-b_filter_result
+bhapi::filter_result
 BMessageFilter::doFilter(BMessage *message, BHandler **target)
 {
 	if(message == NULL || target == NULL || fHandler == NULL) return B_SKIP_MESSAGE;
 
-	b_filter_result retVal = B_DISPATCH_MESSAGE;
+	bhapi::filter_result retVal = B_DISPATCH_MESSAGE;
 
 	// TODO: delivery & source
 	if(fFiltersAny || message->what == fCommand)
@@ -134,14 +134,14 @@ BMessageFilter::doFilter(BMessage *message, BHandler **target)
 }
 
 
-b_message_delivery
+bhapi::message_delivery
 BMessageFilter::MessageDelivery() const
 {
 	return fDelivery;
 }
 
 
-b_message_source
+bhapi::message_source
 BMessageFilter::MessageSource() const
 {
 	return fSource;

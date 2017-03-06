@@ -139,8 +139,8 @@ public:
 
 	virtual b_status_t		ContactTo(const BMessenger *msgr) = 0;
     virtual b_status_t		SetFlags(b_uint32 flags) = 0;
-    virtual b_status_t		SetLook(b_window_look look) = 0;
-    virtual b_status_t		SetFeel(b_window_feel feel) = 0;
+    virtual b_status_t		SetLook(bhapi::window_look look) = 0;
+    virtual b_status_t		SetFeel(bhapi::window_feel feel) = 0;
 	virtual b_status_t		SetTitle(const char *title) = 0;
     virtual b_status_t		SetWorkspaces(b_uint32 workspaces) = 0;
     virtual b_status_t		GetWorkspaces(b_uint32 *workspaces) = 0;

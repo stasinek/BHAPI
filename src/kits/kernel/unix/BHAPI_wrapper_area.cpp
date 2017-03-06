@@ -29,7 +29,7 @@
 #ifdef BHAPI_OS_LINUX
 
 #include <stdlib.h>
-#include <string.h>
+
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>

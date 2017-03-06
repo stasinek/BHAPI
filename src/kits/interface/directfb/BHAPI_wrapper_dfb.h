@@ -185,8 +185,8 @@ public:
 	virtual b_status_t		ContactTo(const BMessenger *msgr);
 	virtual b_status_t		SetBackgroundColor(bhapi::rgb_color bkColor);
 	virtual b_status_t		SetFlags(b_uint32 flags);
-	virtual b_status_t		SetLook(b_window_look look);
-	virtual b_status_t		SetFeel(b_window_feel feel);
+	virtual b_status_t		SetLook(bhapi::window_look look);
+	virtual b_status_t		SetFeel(bhapi::window_feel feel);
 	virtual b_status_t		SetTitle(const char *title);
 	virtual b_status_t		SetWorkspaces(b_uint32 workspaces);
 	virtual b_status_t		GetWorkspaces(b_uint32 *workspaces);
@@ -269,8 +269,8 @@ private:
 
 	BMessenger fMsgr;
 
-	b_window_look fLook;
-	b_window_feel fFeel;
+	bhapi::window_look fLook;
+	bhapi::window_feel fFeel;
 
 	char *fTitle;
 

@@ -6,7 +6,7 @@
 #include "BufferedDataIO.h"
 #include <new>
 #include <stdio.h>
-#include <string.h>
+
 
 //#define TRACE_DATA_IO
 #ifdef TRACE_DATA_IO

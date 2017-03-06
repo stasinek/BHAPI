@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -31,10 +31,9 @@
 #ifndef BHAPI_ALERT_H
 #define BHAPI_ALERT_H
 
-#include "../support/SupportDefs.h"
-
-#include "../interface/InterfaceDefs.h"
 #include "../interface/Window.h"
+#include "../interface/InterfaceDefs.h"
+#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 namespace bhapi {
@@ -58,25 +57,25 @@ class BTextView;
 class IMPEXPBHAPI BAlert : public BWindow {
 public:
     BAlert(const char *title,
-	       const char *text,
-	       const char *button1_label,
-	       const char *button2_label = NULL,
-	       const char *button3_label = NULL,
+           const char *text,
+           const char *button1_label,
+           const char *button2_label = NULL,
+           const char *button3_label = NULL,
            bhapi::button_width width = B_WIDTH_AS_USUAL,
            bhapi::alert_type type = B_INFO_ALERT);
     virtual ~BAlert();
 
-	// run synchronously then auto-destruct when it return.
-	// "could_proxy" must be "true" when it called from looper of BApplication!
+    // run synchronously then auto-destruct when it return.
+    // "could_proxy" must be "true" when it called from looper of BApplication!
     b_int32		Go(bool could_proxy = true);
 
-	// run asynchronously and auto-destruct after message send
-	b_status_t	Go(BInvoker *invoker);
+    // run asynchronously and auto-destruct after message send
+    b_status_t	Go(BInvoker *invoker);
 
     BButton		*ButtonAt(b_int32 index) const;
     BTextView	*TextView() const;
 
-	virtual bool	QuitRequested();
+    virtual bool	QuitRequested();
 
 private:
     BButton *fButtons[3];

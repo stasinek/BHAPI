@@ -93876,7 +93876,6 @@ __attribute__((dllexport)) void * get_stack_frame (void);
 
 }
 
-
 extern "C" const char* B_EMPTY_STRING;
 # 33 "../src/kits/private/PrivateApplication.h" 2
 # 1 "../src/kits/private/../support/SimpleLocker.h" 1

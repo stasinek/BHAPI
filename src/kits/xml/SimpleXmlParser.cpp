@@ -29,7 +29,7 @@
 
 #include "SimpleXmlParser.h"
 
-#include "../support/String.h"
+#include "../support/StringClass.h"
 #include "../support/StringArray.h"
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"

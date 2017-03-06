@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,27 +30,26 @@
 
 #ifndef BHAPI_MESSENGER_H
 #define BHAPI_MESSENGER_H
-#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
 class BMessage;
 class BHandler;
 class BLooper;
+#include "../support/SupportDefs.h"
 class IMPEXPBHAPI BMessenger {
 public:
-	BMessenger();
+    BMessenger();
     BMessenger(const char *signature, b_int64 team = 0, b_status_t *perr = NULL);
-	BMessenger(const BHandler *handler, const BLooper *looper = NULL, b_status_t *perr = NULL);
+    BMessenger(const BHandler *handler, const BLooper *looper = NULL, b_status_t *perr = NULL);
 
-	BMessenger(const BMessenger &msgr);
-	~BMessenger();
+    BMessenger(const BMessenger &msgr);
+    ~BMessenger();
 
-	bool		IsTargetLocal() const;
-	bool		IsAtTargetLooperThread() const;
-	BHandler*	Target(BLooper **looper) const;
+    bool		IsTargetLocal() const;
+    bool		IsAtTargetLooperThread() const;
+    BHandler*	Target(BLooper **looper) const;
 
-	bool		LockTarget() const;
+    bool		LockTarget() const;
     b_status_t	LockTargetWithTimeout(b_bigtime_t timeout) const;
 
     b_status_t	SendMessage(b_uint32 command) const;
@@ -60,33 +59,33 @@ public:
     b_status_t	SendMessage(const BMessage *a_message, BMessage *reply_message) const;
     b_status_t	SendMessage(const BMessage *a_message, BMessage *reply_message, b_bigtime_t sendTimeout, b_bigtime_t replyTimeout) const;
 
-	bool		IsValid() const;
+    bool		IsValid() const;
 
-	BMessenger	&operator=(const BMessenger &from);
-	bool		operator==(const BMessenger &other) const;
-	bool		operator!=(const BMessenger &other) const;
+    BMessenger	&operator=(const BMessenger &from);
+    bool		operator==(const BMessenger &other) const;
+    bool		operator!=(const BMessenger &other) const;
 
-	size_t		FlattenedSize() const;
-	bool		Flatten(char *buffer, size_t bufferSize) const;
-	bool		Unflatten(const char *buffer, size_t bufferSize);
+    size_t		FlattenedSize() const;
+    bool		Flatten(char *buffer, size_t bufferSize) const;
+    bool		Unflatten(const char *buffer, size_t bufferSize);
 
-	void		PrintToStream() const;
+    void		PrintToStream() const;
 
 private:
-	friend class BMessage;
-	friend class BInvoker;
+    friend class BMessage;
+    friend class BInvoker;
 
     BMessenger(b_int64 targetTeam, b_uint64 targetToken, b_bigtime_t timestamp, b_status_t *perr);
 
     b_uint64 fHandlerToken;
     b_uint64 fLooperToken;
 
-	void *fPort;
-	void *fSem;
+    void *fPort;
+    void *fSem;
 
     b_int64 fTargetTeam;
 
-	void InitData(const BHandler *handler, const BLooper *looper, b_status_t *perr);
+    void InitData(const BHandler *handler, const BLooper *looper, b_status_t *perr);
 
     static b_status_t _SendMessageToPort(void *port, const BMessage *msg, b_uint32 flags, b_bigtime_t timeout);
     static BMessage* _GetMessageFromPort(void *port, b_uint32 flags, b_bigtime_t timeout, b_status_t *err);

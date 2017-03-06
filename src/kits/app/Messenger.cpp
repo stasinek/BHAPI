@@ -39,7 +39,7 @@
 #include "../support/Locker.h"
 #include "../support/Errors.h"
 #include "../support/Autolock.h"
-#include "../private/PrivateHandler.h"
+#include "../../private/app/PrivateHandler.h"
 
 #include <stdlib.h>
 

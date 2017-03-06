@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,68 +30,67 @@
 #ifndef BHAPI_SCROLL_BAR_H
 #define BHAPI_SCROLL_BAR_H
 
-#include "../app/MessageRunner.h"
-#include "../interface/View.h"
-#include "../interface/InterfaceDefs.h"
-
 #define B_V_SCROLL_BAR_WIDTH	bhapi::ui_get_scrollbar_vertical_width()
 #define B_H_SCROLL_BAR_HEIGHT	bhapi::ui_get_scrollbar_horizontal_height()
 
 #ifdef __cplusplus /* Just for C++ */
+#include "../app/MessageRunner.h"
+#include "../interface/View.h"
+#include "../interface/InterfaceDefs.h"
 class IMPEXPBHAPI BScrollBar : public BView {
 public:
     BScrollBar(BRect frame, const char *name,
-		   float value, float min, float max,
+           float value, float min, float max,
            bhapi::orientation direction);
     virtual ~BScrollBar();
 
-	void		SetValue(float value);
-	float		Value() const;
-	void		SetProportion(float ratio);
-	float		Proportion() const;
+    void		SetValue(float value);
+    float		Value() const;
+    void		SetProportion(float ratio);
+    float		Proportion() const;
 
-	// Empty functions BEGIN --- just for derivative class
-	virtual void	ValueChanged(float value);
-	// Empty functions END
+    // Empty functions BEGIN --- just for derivative class
+    virtual void	ValueChanged(float value);
+    // Empty functions END
 
-	void		SetRange(float min, float max);
-	void		GetRange(float *min, float *max) const;
-	void		SetSteps(float smallStep, float largeStep);
-	void		GetSteps(float *smallStep, float *largeStep) const;
+    void		SetRange(float min, float max);
+    void		GetRange(float *min, float *max) const;
+    void		SetSteps(float smallStep, float largeStep);
+    void		GetSteps(float *smallStep, float *largeStep) const;
 
-	// SetTarget: If target isn't NULL, target->Ancestor() must equal to this->Ancestor().
-	//            AKA. The function just be successful doing when it added to any parent.
-	b_status_t	SetTarget(BView *target);
-	BView		*Target() const;
+    // SetTarget: If target isn't NULL, target->Ancestor() must equal to this->Ancestor().
+    //            AKA. The function just be successful doing when it added to any parent.
+    b_status_t	SetTarget(BView *target);
+    BView		*Target() const;
 
     bhapi::orientation	Orientation() const;
 
-	virtual void	Draw(BRect updateRect);
-	virtual void	MouseDown(BPoint where);
-	virtual void	MouseUp(BPoint where);
+    virtual void	Draw(BRect updateRect);
+    virtual void	MouseDown(BPoint where);
+    virtual void	MouseUp(BPoint where);
     virtual void	MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
-	virtual void	DetachedFromWindow();
+    virtual void	DetachedFromWindow();
 
 private:
     friend class BWindow;
-	friend class BView;
+    friend class BView;
 
     bhapi::orientation fOrientation;
-	float fValue;
-	float fRangeMin;
-	float fRangeMax;
-	float fStepSmall;
-	float fStepLarge;
-	BView *fTarget;
+    float fValue;
+    float fRangeMin;
+    float fRangeMax;
+    float fStepSmall;
+    float fStepLarge;
+    BView *fTarget;
 
-	bool fTracking;
+    bool fTracking;
     b_int8 fTrackingState;
-	BPoint fMousePosition;
-	BRegion fTrackingRegion;
+    BPoint fMousePosition;
+    BRegion fTrackingRegion;
     void doScroll(b_int8 state);
-	void _SetValue(float value, bool response);
+    void _SetValue(float value, bool response);
 
-	BMessageRunner *fRunner;
+    BMessageRunner *fRunner;
 };
 
 

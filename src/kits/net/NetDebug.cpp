@@ -31,7 +31,7 @@
 
 #include "../support/Autolock.h"
 #include "../support/SimpleLocker.h"
-#include "../support/String.h"
+#include "../support/StringClass.h"
 
 #include <stdarg.h>
 #include <stdio.h>

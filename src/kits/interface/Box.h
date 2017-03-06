@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -33,44 +33,43 @@
 #include "../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
 class IMPEXPBHAPI BBox : public BView {
 public:
     BBox(BRect frame,
-	     const char *name = NULL,
+         const char *name = NULL,
          b_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
          b_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS | B_NAVIGABLE_JUMP,
-	     bhapi::border_style border = B_FANCY_BORDER);
+         bhapi::border_style border = B_FANCY_BORDER);
     virtual ~BBox();
 
     virtual void	SetBorder(bhapi::border_style border);
-	bhapi::border_style	Border() const;
+    bhapi::border_style	Border() const;
 
     void		SetLabelAlignment(bhapi::alignment labelAlignment);
-	bhapi::alignment	LabelAlignment() const;
+    bhapi::alignment	LabelAlignment() const;
 
-	void		SetLabel(const char *label);
-	b_status_t	SetLabel(BView *viewLabel);
-	const char	*Label() const;
-	BView		*LabelView() const;
+    void		SetLabel(const char *label);
+    b_status_t	SetLabel(BView *viewLabel);
+    const char	*Label() const;
+    BView		*LabelView() const;
 
-	BRect		ContentBounds() const;
+    BRect		ContentBounds() const;
 
-	virtual void	Draw(BRect updateRect);
-	virtual void	FrameResized(float new_width, float new_height);
+    virtual void	Draw(BRect updateRect);
+    virtual void	FrameResized(float new_width, float new_height);
 
-	virtual void	ResizeToPreferred();
-	virtual void	GetPreferredSize(float *width, float *height);
+    virtual void	ResizeToPreferred();
+    virtual void	GetPreferredSize(float *width, float *height);
 
 protected:
-	virtual void	ChildRemoving(BView *child);
+    virtual void	ChildRemoving(BView *child);
 
 private:
-	BView *fLabelView;
-	bhapi::border_style fBorder;
-	bhapi::alignment fAlignment;
+    BView *fLabelView;
+    bhapi::border_style fBorder;
+    bhapi::alignment fAlignment;
 
-	void ReAdjustLabel();
+    void ReAdjustLabel();
 };
 
 #endif /* __cplusplus */

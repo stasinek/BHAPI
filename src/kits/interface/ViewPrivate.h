@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -30,121 +30,99 @@
 #ifndef BHAPI_VIEW_PRIVATE_H
 #define BHAPI_VIEW_PRIVATE_H
 
-#include "../support/SupportDefs.h"
-
 #ifdef __cplusplus /* Just for C++ */
 #include "Rect.h"
 #include "View.h"
-#include "layout/Layout.h"
 #include "Window.h"
+#include "layout/Layout.h"
+#include "../support/SupportDefs.h"
 class LOCALBHAPI BViewLayout : public BLayoutItem {
 public:
     BViewLayout(BView *view, BRect frame, b_uint32 resizingMode);
-	virtual ~BViewLayout();
+    virtual ~BViewLayout();
 
-	void		SetEnabled(bool state);
-	bool		IsEnabled() const;
+    void		SetEnabled(bool state);
+    bool		IsEnabled() const;
 
-	virtual void	GetPreferredSize(float *width, float *height);
-	virtual void	ResizeToPreferred();
-	virtual void	MoveTo(BPoint where);
-	virtual void	ResizeTo(float width, float height);
+    virtual void	GetPreferredSize(float *width, float *height);
+    virtual void	ResizeToPreferred();
+    virtual void	MoveTo(BPoint where);
+    virtual void	ResizeTo(float width, float height);
 
-	virtual void	Invalidate(BRect rect);
-	virtual void	UpdateVisibleRegion();
+    virtual void	Invalidate(BRect rect);
+    virtual void	UpdateVisibleRegion();
 
-	void		_GetVisibleRegion(BRegion **region);
+    void		_GetVisibleRegion(BRegion **region);
 
 private:
-	bool fEnabled;
+    bool fEnabled;
 };
 
+#ifdef BHAPI_BUILD_LIBRARY
 
-inline
-BViewLayout::BViewLayout(BView *view, BRect frame, b_uint32 resizingMode)
+inline BViewLayout::BViewLayout(BView *view, BRect frame, b_uint32 resizingMode)
     : BLayoutItem(frame, resizingMode), fEnabled(true)
 {
-	SetPrivateData(view);
+    SetPrivateData(view);
 }
 
-
-inline
-BViewLayout::~BViewLayout()
+inline BViewLayout::~BViewLayout()
 {
 }
 
-
-inline void
-BViewLayout::SetEnabled(bool state)
+inline void BViewLayout::SetEnabled(bool state)
 {
-	fEnabled = state;
+    fEnabled = state;
 }
 
-
-inline bool
-BViewLayout::IsEnabled() const
+inline bool BViewLayout::IsEnabled() const
 {
-	return fEnabled;
+    return fEnabled;
 }
 
-
-inline void
-BViewLayout::GetPreferredSize(float *width, float *height)
+inline void BViewLayout::GetPreferredSize(float *width, float *height)
 {
-	((BView*)PrivateData())->GetPreferredSize(width, height);
+    ((BView*)PrivateData())->GetPreferredSize(width, height);
 }
 
-
-inline void
-BViewLayout::ResizeToPreferred()
+inline void BViewLayout::ResizeToPreferred()
 {
-	((BView*)PrivateData())->ResizeToPreferred();
+    ((BView*)PrivateData())->ResizeToPreferred();
 }
 
-
-inline void
-BViewLayout::MoveTo(BPoint where)
+inline void BViewLayout::MoveTo(BPoint where)
 {
-	BRect oldFrame = Frame();
+    BRect oldFrame = Frame();
     BLayoutItem::MoveTo(where);
-	BRect newFrame = Frame();
-	((BView*)PrivateData())->_FrameChanged(oldFrame, newFrame);
+    BRect newFrame = Frame();
+    ((BView*)PrivateData())->_FrameChanged(oldFrame, newFrame);
 }
 
-
-inline void
-BViewLayout::ResizeTo(float width, float height)
+inline void BViewLayout::ResizeTo(float width, float height)
 {
-	BRect oldFrame = Frame();
+    BRect oldFrame = Frame();
     BLayoutItem::ResizeTo(width, height);
-	BRect newFrame = Frame();
-	((BView*)PrivateData())->_FrameChanged(oldFrame, newFrame);
+    BRect newFrame = Frame();
+    ((BView*)PrivateData())->_FrameChanged(oldFrame, newFrame);
 }
 
-
-inline void
-BViewLayout::Invalidate(BRect rect)
+inline void BViewLayout::Invalidate(BRect rect)
 {
-	if(((BView*)PrivateData())->Window() == NULL) return;
-	((BView*)PrivateData())->ConvertToWindow(&rect);
-	((BView*)PrivateData())->Window()->Invalidate(rect);
+    if(((BView*)PrivateData())->Window() == NULL) return;
+    ((BView*)PrivateData())->ConvertToWindow(&rect);
+    ((BView*)PrivateData())->Window()->Invalidate(rect);
 }
 
-
-inline void
-BViewLayout::UpdateVisibleRegion()
+inline void BViewLayout::UpdateVisibleRegion()
 {
     BLayoutItem::UpdateVisibleRegion();
-	((BView*)PrivateData())->_UpdateVisibleRegion();
+    ((BView*)PrivateData())->_UpdateVisibleRegion();
 }
 
-
-inline void
-BViewLayout::_GetVisibleRegion(BRegion **region)
+inline void BViewLayout::_GetVisibleRegion(BRegion **region)
 {
-	GetVisibleRegion(region);
+    GetVisibleRegion(region);
 }
-
+#endif
 #endif /* __cplusplus */
 #endif /* BHAPI_VIEW_PRIVATE_H */
-

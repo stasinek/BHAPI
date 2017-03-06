@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -30,25 +30,24 @@
 
 #ifndef BHAPI_MESSAGE_QUEUE_H
 #define BHAPI_MESSAGE_QUEUE_H
-#include "../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
 #include "../support/List.h"
+#include "../support/SupportDefs.h"
 class BMessage;
 class IMPEXPBHAPI BMessageQueue {
 public:
-	BMessageQueue();
-	virtual ~BMessageQueue();
+    BMessageQueue();
+    virtual ~BMessageQueue();
 
-	// add "an_event" to the queue and delete it automatically when FAILED
-	bool		AddMessage(BMessage *an_event);
+    // add "an_event" to the queue and delete it automatically when FAILED
+    bool		AddMessage(BMessage *an_event);
 
-	// remove "an_event" from the queue and delete it automatically when FOUNDED
-	bool		RemoveMessage(BMessage *an_event);
+    // remove "an_event" from the queue and delete it automatically when FOUNDED
+    bool		RemoveMessage(BMessage *an_event);
 
-	// return the FIRST message and detach from the queue, you should "delete" by yourself
-	BMessage	*NextMessage();
+    // return the FIRST message and detach from the queue, you should "delete" by yourself
+    BMessage	*NextMessage();
 
     BMessage	*FindMessage(b_int32 index) const;
     BMessage	*FindMessage(b_uint32 what, b_int32 fromIndex = 0) const;
@@ -56,15 +55,15 @@ public:
     b_int32		IndexOfMessage(BMessage *an_event) const;
 
     b_int32		CountMessages() const;
-	bool		IsEmpty() const;
+    bool		IsEmpty() const;
 
-	bool		Lock();
-	void		Unlock();
+    bool		Lock();
+    void		Unlock();
     b_status_t	LockWithTimeout(b_bigtime_t microseconds_timeout);
 
 private:
-	BList fMessagesList;
-	void *fLocker;
+    BList fMessagesList;
+    void *fLocker;
 };
 
 #endif /* __cplusplus */

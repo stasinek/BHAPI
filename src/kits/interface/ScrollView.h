@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,53 +30,51 @@
 #ifndef BHAPI_SCROLL_VIEW_H
 #define BHAPI_SCROLL_VIEW_H
 
-#include "../interface/ScrollBar.h"
-
 #ifdef __cplusplus /* Just for C++ */
-
+#include "../interface/ScrollBar.h"
 class IMPEXPBHAPI BScrollView : public BView {
 public:
-	BScrollView(BRect frame, const char *name, BView *target,
-		    b_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-		    b_uint32 flags = 0,
-		    bool alwaysShowHorizontal = false,
-		    bool alwaysShowVertical = false,
+    BScrollView(BRect frame, const char *name, BView *target,
+            b_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+            b_uint32 flags = 0,
+            bool alwaysShowHorizontal = false,
+            bool alwaysShowVertical = false,
             bhapi::border_style border = B_FANCY_BORDER);
-	virtual ~BScrollView();
+    virtual ~BScrollView();
 
-	// SetTarget: When it return B_OK, the oldTarget was removed and destroy automatically.
-	//            If you want to keep the oldTarget, try oldTarget->RemoveSelf() before.
-	b_status_t	SetTarget(BView *newTarget);
-	BView		*Target() const;
-	BRect		TargetFrame() const;
+    // SetTarget: When it return B_OK, the oldTarget was removed and destroy automatically.
+    //            If you want to keep the oldTarget, try oldTarget->RemoveSelf() before.
+    b_status_t	SetTarget(BView *newTarget);
+    BView		*Target() const;
+    BRect		TargetFrame() const;
 
     virtual void	SetBorder(bhapi::border_style border);
     bhapi::border_style	Border() const;
 
-	void		SetScrollBarAutoState(bool alwaysShowHorizontal, bool alwaysShowVertical);
-	void		GetScrollBarAutoState(bool *alwaysShowHorizontal, bool *alwaysShowVertical) const;
+    void		SetScrollBarAutoState(bool alwaysShowHorizontal, bool alwaysShowVertical);
+    void		GetScrollBarAutoState(bool *alwaysShowHorizontal, bool *alwaysShowVertical) const;
 
-	BScrollBar	*ScrollBar(bhapi::orientation direction) const;
+    BScrollBar	*ScrollBar(bhapi::orientation direction) const;
 
-	virtual void	SetFlags(b_uint32 flags); // auto-setting B_WILL_DRAW and B_FRAME_EVENTS
-	virtual void	Draw(BRect updateRect);
-	virtual void	FrameResized(float new_width, float new_height);
+    virtual void	SetFlags(b_uint32 flags); // auto-setting B_WILL_DRAW and B_FRAME_EVENTS
+    virtual void	Draw(BRect updateRect);
+    virtual void	FrameResized(float new_width, float new_height);
 
 protected:
-	virtual void	ChildRemoving(BView *child);
+    virtual void	ChildRemoving(BView *child);
 
 private:
-	friend class BView;
+    friend class BView;
 
     bhapi::border_style fBorder;
-	bool fAlwaysShowHorizontal;
-	bool fAlwaysShowVertical;
+    bool fAlwaysShowHorizontal;
+    bool fAlwaysShowVertical;
 
-	BScrollBar *fHSB;
-	BScrollBar *fVSB;
-	BView *fTarget;
+    BScrollBar *fHSB;
+    BScrollBar *fVSB;
+    BView *fTarget;
 
-	BRect TargetValidFrame(bool ignore_scrollbar = false) const;
+    BRect TargetValidFrame(bool ignore_scrollbar = false) const;
 };
 
 
