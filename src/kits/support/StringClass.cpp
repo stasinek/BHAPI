@@ -146,18 +146,18 @@ static long double modfl(long double value, long double *iptr)
 
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI char *bhapi::strdup_dirty(const char *src, b_int32 length)
+EXPORTBHAPI char *bhapi::strdup_dirty(const char *src,  __be_int32 length)
 {
     char    *dest;
 
-    b_int32 len = 0;
+     __be_int32 len = 0;
 
     if (src == NULL || *src == 0 || length == 0) return NULL;
 
     if (length < 0)
-        len = (b_int32) strlen(src);
+        len = (__be_int32) strlen(src);
     else
-        len = min_c(length, (b_int32) strlen(src));
+        len = min_c(length, (__be_int32) strlen(src));
 
     dest = new char[len + 1];
 
@@ -380,7 +380,7 @@ char* BStringRef::operator&()
 }
 //-----------------------------------------------------------------------------
 
-bool BString::SetMinimumBufferSize(b_int32 length)
+bool BString::SetMinimumBufferSize(__be_int32 length)
 {
     char    *newData = (char *)realloc(fBuffer, length);
     if (length > MAX_STRING_LENGTH + 1) return false;
@@ -403,16 +403,16 @@ bool BString::SetMinimumBufferSize(b_int32 length)
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::MinimumBufferSize(void) const
+be_int32 BString::MinimumBufferSize(void) const
 {
     return fMinBufferSize;
 }
 
 //-----------------------------------------------------------------------------
 
-bool BString::_ResizeBool(b_int32 length)
+bool BString::_ResizeBool(__be_int32 length)
 {
-    b_int32 length_to_alloc = max_c(length + 1, fMinBufferSize);
+     __be_int32 length_to_alloc = max_c(length + 1, fMinBufferSize);
     char    *newData = (char *)realloc(fBuffer, length_to_alloc);
     if (length <= 0)
     {
@@ -521,7 +521,7 @@ fBuffer(NULL)
 
 //-----------------------------------------------------------------------------
 
-BString::BString(const char *str, b_int32 maxLength) :
+BString::BString(const char *str,  __be_int32 maxLength) :
 fLen(0),
 fLenReal(0),
 fMinBufferSize(0),
@@ -571,7 +571,7 @@ BString &BString::SetTo(const BString &str)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::SetTo(const BString &str, b_int32 length)
+BString &BString::SetTo(const BString &str,  __be_int32 length)
 {
     MakeEmpty();
     return Append(str, length);
@@ -579,7 +579,7 @@ BString &BString::SetTo(const BString &str, b_int32 length)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::SetTo(const char *str, b_int32 length)
+BString &BString::SetTo(const char *str,  __be_int32 length)
 {
     MakeEmpty();
     return Append(str, length);
@@ -587,7 +587,7 @@ BString &BString::SetTo(const char *str, b_int32 length)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::SetTo(char c, b_int32 count)
+BString &BString::SetTo(char c,  __be_int32 count)
 {
     MakeEmpty();
     return Append(c, count);
@@ -605,7 +605,7 @@ BString &BString::Adopt(BString &from)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Adopt(BString &from, b_int32 length)
+BString &BString::Adopt(BString &from,  __be_int32 length)
 {
     Append(from, length);
     from.MakeEmpty();
@@ -636,7 +636,7 @@ BString &BString::AdoptChars(BString &string, int32 charCount)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::CopyInto(BString &into, b_int32 fromOffset, b_int32 length) const
+BString &BString::CopyInto(BString &into,  __be_int32 fromOffset,  __be_int32 length) const
 {
     if (this == &into)
     {
@@ -654,7 +654,7 @@ BString &BString::CopyInto(BString &into, b_int32 fromOffset, b_int32 length) co
 
 //-----------------------------------------------------------------------------
 
-void BString::CopyInto(char *into, size_t into_size, b_int32 fromOffset, b_int32 length) const
+void BString::CopyInto(char *into, size_t into_size,  __be_int32 fromOffset,  __be_int32 length) const
 {
     if (!into || into_size <= 0) return;
     if (fromOffset < 0 || fromOffset >= fLen) return;
@@ -668,7 +668,7 @@ void BString::CopyInto(char *into, size_t into_size, b_int32 fromOffset, b_int32
 
 //-----------------------------------------------------------------------------
 
-BString &BString::MoveInto(BString &into, b_int32 from, b_int32 length)
+BString &BString::MoveInto(BString &into,  __be_int32 from,  __be_int32 length)
 {
     if (this == &into)
     {
@@ -688,7 +688,7 @@ BString &BString::MoveInto(BString &into, b_int32 from, b_int32 length)
 
 //-----------------------------------------------------------------------------
 
-void BString::MoveInto(char *into, size_t into_size, b_int32 from, b_int32 length)
+void BString::MoveInto(char *into, size_t into_size,  __be_int32 from,  __be_int32 length)
 {
     if (!into || into_size <= 0) return;
     if (from < 0 || from >= fLen) return;
@@ -840,7 +840,7 @@ BString &BString::Append(const BString &str)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Append(const BString &str, b_int32 length)
+BString &BString::Append(const BString &str,  __be_int32 length)
 {
     if (str.Length() < 1 || length == 0) return *this;
     if (length < 0) length = str.Length();
@@ -859,9 +859,9 @@ BString &BString::Append(const char *str)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Append(const char *str, b_int32 length)
+BString &BString::Append(const char *str,  __be_int32 length)
 {
-    b_int32 strLen = (b_int32) strlen(str);
+     __be_int32 strLen = (__be_int32) strlen(str);
 
     if (str == NULL || *str == 0 || length == 0) return *this;
     if (length < 0 || length > strLen) length = strLen;
@@ -880,7 +880,7 @@ BString &BString::Append(const char *str, b_int32 length)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Append(char c, b_int32 count)
+BString &BString::Append(char c,  __be_int32 count)
 {
     if (c == 0 || MAX_STRING_LENGTH - fLen < count || count <= 0) return *this;
 
@@ -904,7 +904,7 @@ BString &BString::Prepend(const BString &str)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Prepend(const BString &str, b_int32 length)
+BString &BString::Prepend(const BString &str,  __be_int32 length)
 {
     if (str.Length() < 1 || length == 0) return *this;
     if (length < 0) length = str.Length();
@@ -923,42 +923,42 @@ BString &BString::Prepend(const char *str)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Prepend(const char *str, b_int32 length)
+BString &BString::Prepend(const char *str,  __be_int32 length)
 {
     return Insert(str, length, 0);
 }
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Prepend(char c, b_int32 count)
+BString &BString::Prepend(char c,  __be_int32 count)
 {
     return Insert(c, count, 0);
 }
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Insert(const BString &str, b_int32 pos)
+BString &BString::Insert(const BString &str,  __be_int32 pos)
 {
     return Insert(str, str.Length(), pos);
 }
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Insert(const BString &str, b_int32 length, b_int32 pos)
+BString &BString::Insert(const BString &str,  __be_int32 length,  __be_int32 pos)
 {
     return Insert(str, 0, length, pos);
 }
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Insert(const BString &str, b_int32 fromOffset, b_int32 length, b_int32 pos)
+BString &BString::Insert(const BString &str,  __be_int32 fromOffset,  __be_int32 length,  __be_int32 pos)
 {
     return Insert(str.String(), fromOffset, length, pos);
 }
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Insert(const char *str, b_int32 pos)
+BString &BString::Insert(const char *str,  __be_int32 pos)
 {
     if (str) Insert(str, -1, pos);
     return *this;
@@ -966,16 +966,16 @@ BString &BString::Insert(const char *str, b_int32 pos)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Insert(const char *str, b_int32 length, b_int32 pos)
+BString &BString::Insert(const char *str,  __be_int32 length,  __be_int32 pos)
 {
     return Insert(str, 0, length, pos);
 }
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Insert(const char *str, b_int32 fromOffset, b_int32 length, b_int32 pos)
+BString &BString::Insert(const char *str,  __be_int32 fromOffset,  __be_int32 length,  __be_int32 pos)
 {
-    b_int32 strLen = (b_int32) strlen(str);
+     __be_int32 strLen = (__be_int32) strlen(str);
     if (str == NULL || *str == 0 || length == 0 || fromOffset < 0) return *this;
     if (fromOffset >= strLen) return *this;
     if ((pos == 0 && fLen <= 0) || (pos > 0 && pos == fLen)) return Append(str + fromOffset, length);
@@ -999,7 +999,7 @@ BString &BString::Insert(const char *str, b_int32 fromOffset, b_int32 length, b_
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Insert(char c, b_int32 count, b_int32 pos)
+BString &BString::Insert(char c,  __be_int32 count,  __be_int32 pos)
 {
     if ((pos == 0 && fLen <= 0) || (pos > 0 && pos == fLen)) return Append(c, count);
     if (pos < 0 || pos >= fLen) return *this;
@@ -1021,7 +1021,7 @@ BString &BString::Insert(char c, b_int32 count, b_int32 pos)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Truncate(b_int32 newLength)
+BString &BString::Truncate(__be_int32 newLength)
 {
     if (!(newLength < 0 || newLength >= fLen)) _Resize(newLength);
 
@@ -1030,7 +1030,7 @@ BString &BString::Truncate(b_int32 newLength)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Remove(b_int32 from, b_int32 length)
+BString &BString::Remove(__be_int32 from,  __be_int32 length)
 {
     if (from < 0 || from >= fLen) return *this;
 
@@ -1084,8 +1084,8 @@ BString &BString::RemoveFirst(const char *str)
         const char  *tmp = strstr(s, str);
         if (tmp)
         {
-            b_int32 start = (b_int32) (tmp - s);
-            Remove(start, (b_int32) strlen(str));
+             __be_int32 start = (__be_int32) (tmp - s);
+            Remove(start, (__be_int32) strlen(str));
         }
     }
 
@@ -1104,8 +1104,8 @@ BString &BString::RemoveLast(const char *str)
         const char  *tmp = bhapi::strrstr(s, str);
         if (tmp)
         {
-            b_int32 start = (b_int32) (tmp - s);
-            Remove(start, (b_int32) strlen(str));
+             __be_int32 start = (__be_int32) (tmp - s);
+            Remove(start, (__be_int32) strlen(str));
         }
     }
 
@@ -1124,8 +1124,8 @@ BString &BString::RemoveAll(const char *str)
         const char  *tmp;
         while ((tmp = strstr(s, str)) != NULL)
         {
-            b_int32 start = (b_int32) (tmp - s);
-            Remove(start, (b_int32) strlen(str));
+             __be_int32 start = (__be_int32) (tmp - s);
+            Remove(start, (__be_int32) strlen(str));
             s = this->String();
 
             if (!s) break;
@@ -1139,14 +1139,14 @@ BString &BString::RemoveAll(const char *str)
 
 BString &BString::RemoveSet(const char *setOfCharsToRemove)
 {
-    b_int32 len = (b_int32) strlen(setOfCharsToRemove);
+     __be_int32 len = (__be_int32) strlen(setOfCharsToRemove);
 
     char    str[2];
     if (setOfCharsToRemove == NULL || *setOfCharsToRemove == 0) return *this;
 
     str[1] = '\0';
 
-    for (b_int32 i = 0; i < len; i++)
+    for (__be_int32 i = 0; i < len; i++)
     {
         str[0] = setOfCharsToRemove[i];
         RemoveAll(str);
@@ -1190,8 +1190,8 @@ BString &BString::IRemoveFirst(const char *str)
         const char  *tmp = bhapi::strcasestr(s, str);
         if (tmp)
         {
-            b_int32 start = (b_int32) (tmp - s);
-            Remove(start, (b_int32) strlen(str));
+             __be_int32 start = (__be_int32) (tmp - s);
+            Remove(start, (__be_int32) strlen(str));
         }
     }
 
@@ -1210,8 +1210,8 @@ BString &BString::IRemoveLast(const char *str)
         const char  *tmp = bhapi::strrcasestr(s, str);
         if (tmp)
         {
-            b_int32 start = (b_int32) (tmp - s);
-            Remove(start, (b_int32) strlen(str));
+             __be_int32 start = (__be_int32) (tmp - s);
+            Remove(start, (__be_int32) strlen(str));
         }
     }
 
@@ -1230,8 +1230,8 @@ BString &BString::IRemoveAll(const char *str)
         const char  *tmp;
         while ((tmp = bhapi::strcasestr(s, str)) != NULL)
         {
-            b_int32 start = (b_int32) (tmp - s);
-            Remove(start, (b_int32) strlen(str));
+             __be_int32 start = (__be_int32) (tmp - s);
+            Remove(start, (__be_int32) strlen(str));
             s = this->String();
 
             if (!s) break;
@@ -1245,14 +1245,14 @@ BString &BString::IRemoveAll(const char *str)
 
 BString &BString::IRemoveSet(const char *setOfCharsToRemove)
 {
-    b_int32 len = (b_int32) strlen(setOfCharsToRemove);
+     __be_int32 len = (__be_int32) strlen(setOfCharsToRemove);
 
     char    str[2];
     if (setOfCharsToRemove == NULL || *setOfCharsToRemove == 0) return *this;
 
     str[1] = 0;
 
-    for (b_int32 i = 0; i < len; i++)
+    for (__be_int32 i = 0; i < len; i++)
     {
         str[0] = setOfCharsToRemove[i];
         IRemoveAll(str);
@@ -1387,7 +1387,7 @@ int BString::Compare(const char *str) const
 
 //-----------------------------------------------------------------------------
 
-int BString::Compare(const BString &str, b_int32 n) const
+int BString::Compare(const BString &str,  __be_int32 n) const
 {
     const char  *a = "";
     const char  *b = "";
@@ -1400,7 +1400,7 @@ int BString::Compare(const BString &str, b_int32 n) const
 
 //-----------------------------------------------------------------------------
 
-int BString::Compare(const char *str, b_int32 n) const
+int BString::Compare(const char *str,  __be_int32 n) const
 {
     const char  *a = "";
     const char  *b = "";
@@ -1439,7 +1439,7 @@ int BString::ICompare(const char *str) const
 
 //-----------------------------------------------------------------------------
 
-int BString::ICompare(const BString &str, b_int32 n) const
+int BString::ICompare(const BString &str,  __be_int32 n) const
 {
     const char  *a = "";
     const char  *b = "";
@@ -1452,7 +1452,7 @@ int BString::ICompare(const BString &str, b_int32 n) const
 
 //-----------------------------------------------------------------------------
 
-int BString::ICompare(const char *str, b_int32 n) const
+int BString::ICompare(const char *str,  __be_int32 n) const
 {
     const char  *a = "";
     const char  *b = "";
@@ -1465,31 +1465,31 @@ int BString::ICompare(const char *str, b_int32 n) const
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::FindFirst(const BString &string) const
+be_int32 BString::FindFirst(const BString &string) const
 {
     const char  *tmp = strstr(this->String(), string.String());
 
     if (this->String() == NULL || string.String() == NULL) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::FindFirst(const char *string) const
+be_int32 BString::FindFirst(const char *string) const
 {
     const char  *tmp = strstr(this->String(), string);
 
     if (this->String() == NULL || string == NULL || *string == 0) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::FindFirst(const BString &string, b_int32 fromOffset) const
+be_int32 BString::FindFirst(const BString &string,  __be_int32 fromOffset) const
 {
     const char  *string_find = this->String() + fromOffset;
     const char  *tmp = strstr(string_find, string.String());
@@ -1497,12 +1497,12 @@ b_int32 BString::FindFirst(const BString &string, b_int32 fromOffset) const
     if (this->String() == NULL || string.String() == NULL || fromOffset < 0 || fromOffset >= Length()) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::FindFirst(const char *string, b_int32 fromOffset) const
+be_int32 BString::FindFirst(const char *string,  __be_int32 fromOffset) const
 {
     const char  *string_find = this->String() + fromOffset;
     const char  *tmp = strstr(string_find, string);
@@ -1512,24 +1512,24 @@ b_int32 BString::FindFirst(const char *string, b_int32 fromOffset) const
 
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::FindFirst(char c) const
+be_int32 BString::FindFirst(char c) const
 {
     const char  *tmp = strchr(this->String(), c);
 
     if (this->String() == NULL || c == 0) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::FindFirst(char c, b_int32 fromOffset) const
+be_int32 BString::FindFirst(char c,  __be_int32 fromOffset) const
 {
     const char  *string_find = this->String() + fromOffset;
     const char  *tmp = strchr(string_find, c);
@@ -1537,44 +1537,44 @@ b_int32 BString::FindFirst(char c, b_int32 fromOffset) const
     if (this->String() == NULL || c == 0 || fromOffset < 0 || fromOffset >= Length()) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::FindLast(const BString &string) const
+be_int32 BString::FindLast(const BString &string) const
 {
     const char  *tmp = bhapi::strrstr(this->String(), string.String());
 
     if (this->String() == NULL || string.String() == NULL) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::FindLast(const char *string) const
+be_int32 BString::FindLast(const char *string) const
 {
     const char  *tmp = bhapi::strrstr(this->String(), string);
 
     if (this->String() == NULL || string == NULL || *string == 0) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::FindLast(const BString &string, b_int32 beforeOffset) const
+be_int32 BString::FindLast(const BString &string,  __be_int32 beforeOffset) const
 {
     char *string_find = bhapi::strndup(this->String(), beforeOffset + 1);
     const char  *tmp = bhapi::strrstr(string_find, string.String());
-    b_int32     ret = -1;
+     __be_int32     ret = -1;
 
     if (this->String() == NULL || string.String() == NULL || beforeOffset < 0 || beforeOffset >= Length()) return -1;
     if (string_find == NULL) return -1;
-    if (tmp != NULL) ret = (b_int32) (tmp - string_find);
+    if (tmp != NULL) ret = (__be_int32) (tmp - string_find);
 
     free(string_find);
 
@@ -1583,17 +1583,17 @@ b_int32 BString::FindLast(const BString &string, b_int32 beforeOffset) const
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::FindLast(const char *string, b_int32 beforeOffset) const
+be_int32 BString::FindLast(const char *string,  __be_int32 beforeOffset) const
 {
     char *string_find = bhapi::strndup(this->String(), beforeOffset + 1);
-    b_int32     ret = -1;
+     __be_int32     ret = -1;
     const char  *tmp = bhapi::strrstr(string_find, string);
 
     if (this->String() == NULL || string == NULL || *string == 0 || beforeOffset < 0 || beforeOffset >= Length())
         return -1;
 
     if (string_find == NULL) return -1;
-    if (tmp != NULL) ret = (b_int32) (tmp - string_find);
+    if (tmp != NULL) ret = (__be_int32) (tmp - string_find);
 
     free(string_find);
 
@@ -1602,27 +1602,27 @@ b_int32 BString::FindLast(const char *string, b_int32 beforeOffset) const
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::FindLast(char c) const
+be_int32 BString::FindLast(char c) const
 {
     const char  *tmp = strrchr(this->String(), c);
 
     if (this->String() == 0 || c == 0) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::FindLast(char c, b_int32 beforeOffset) const
+be_int32 BString::FindLast(char c,  __be_int32 beforeOffset) const
 {
     char *string_find = bhapi::strndup(this->String(), beforeOffset + 1);
     const char  *tmp = strrchr(string_find, c);
-    b_int32     ret = -1;
+     __be_int32     ret = -1;
 
     if (this->String() == NULL || c == 0 || beforeOffset < 0 || beforeOffset >= Length()) return -1;
     if (string_find == NULL) return -1;
-    if (tmp != NULL) ret = (b_int32) (tmp - string_find);
+    if (tmp != NULL) ret = (__be_int32) (tmp - string_find);
 
     free(string_find);
     return ret;
@@ -1630,31 +1630,31 @@ b_int32 BString::FindLast(char c, b_int32 beforeOffset) const
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::IFindFirst(const BString &string) const
+be_int32 BString::IFindFirst(const BString &string) const
 {
     const char  *tmp = bhapi::strcasestr(this->String(), string.String());
 
     if (this->String() == NULL || string.String() == NULL) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::IFindFirst(const char *string) const
+be_int32 BString::IFindFirst(const char *string) const
 {
     const char  *tmp = bhapi::strcasestr(this->String(), string);
 
     if (this->String() == NULL || string == NULL || *string == 0) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::IFindFirst(const BString &string, b_int32 fromOffset) const
+be_int32 BString::IFindFirst(const BString &string,  __be_int32 fromOffset) const
 {
     const char  *string_find = this->String() + fromOffset;
     const char  *tmp = bhapi::strcasestr(string_find, string.String());
@@ -1662,12 +1662,12 @@ b_int32 BString::IFindFirst(const BString &string, b_int32 fromOffset) const
     if (this->String() == NULL || string.String() == NULL || fromOffset < 0 || fromOffset >= Length()) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::IFindFirst(const char *string, b_int32 fromOffset) const
+be_int32 BString::IFindFirst(const char *string,  __be_int32 fromOffset) const
 {
     const char  *string_find = this->String() + fromOffset;
     const char  *tmp = bhapi::strcasestr(string_find, string);
@@ -1677,24 +1677,24 @@ b_int32 BString::IFindFirst(const char *string, b_int32 fromOffset) const
 
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::IFindFirst(char c) const
+be_int32 BString::IFindFirst(char c) const
 {
     const char  *tmp = bhapi::strcasechr(this->String(), c);
 
     if (this->String() == NULL || c == 0) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::IFindFirst(char c, b_int32 fromOffset) const
+be_int32 BString::IFindFirst(char c,  __be_int32 fromOffset) const
 {
     const char  *string_find = this->String() + fromOffset;
     const char  *tmp = bhapi::strcasechr(string_find, c);
@@ -1702,43 +1702,43 @@ b_int32 BString::IFindFirst(char c, b_int32 fromOffset) const
     if (this->String() == NULL || c == 0 || fromOffset < 0 || fromOffset >= Length()) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::IFindLast(const BString &string) const
+be_int32 BString::IFindLast(const BString &string) const
 {
     const char  *tmp = bhapi::strrcasestr(this->String(), string.String());
 
     if (this->String() == NULL || string.String() == NULL) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::IFindLast(const char *string) const
+be_int32 BString::IFindLast(const char *string) const
 {
     const char  *tmp = bhapi::strrcasestr(this->String(), string);
 
     if (this->String() == NULL || string == NULL || *string == 0) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::IFindLast(const BString &string, b_int32 beforeOffset) const
+be_int32 BString::IFindLast(const BString &string,  __be_int32 beforeOffset) const
 {
     char *string_find = bhapi::strndup(this->String(), beforeOffset + 1);
     const char  *tmp = bhapi::strrcasestr(string_find, string.String());
-    b_int32     ret = -1;
+     __be_int32     ret = -1;
     if (this->String() == NULL || string.String() == NULL || beforeOffset < 0 || beforeOffset >= Length()) return -1;
     if (string_find == NULL) return -1;
-    if (tmp != NULL) ret = (b_int32) (tmp - string_find);
+    if (tmp != NULL) ret = (__be_int32) (tmp - string_find);
 
     free(string_find);
 
@@ -1747,16 +1747,16 @@ b_int32 BString::IFindLast(const BString &string, b_int32 beforeOffset) const
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::IFindLast(const char *string, b_int32 beforeOffset) const
+be_int32 BString::IFindLast(const char *string,  __be_int32 beforeOffset) const
 {
     char *string_find = bhapi::strndup(this->String(), beforeOffset + 1);
     const char  *tmp = bhapi::strrcasestr(string_find, string);
-    b_int32     ret = -1;
+     __be_int32     ret = -1;
     if (this->String() == NULL || string == NULL || *string == 0 || beforeOffset < 0 || beforeOffset >= Length())
         return -1;
 
     if (string_find == NULL) return -1;
-    if (tmp != NULL) ret = (b_int32) (tmp - string_find);
+    if (tmp != NULL) ret = (__be_int32) (tmp - string_find);
 
     free(string_find);
 
@@ -1765,26 +1765,26 @@ b_int32 BString::IFindLast(const char *string, b_int32 beforeOffset) const
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::IFindLast(char c) const
+be_int32 BString::IFindLast(char c) const
 {
     const char  *tmp = bhapi::strrcasechr(this->String(), c);
 
     if (this->String() == NULL || c == 0) return -1;
     if (tmp == NULL) return -1;
 
-    return((b_int32) (tmp - this->String()));
+    return((__be_int32) (tmp - this->String()));
 }
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::IFindLast(char c, b_int32 beforeOffset) const
+be_int32 BString::IFindLast(char c,  __be_int32 beforeOffset) const
 {
     char *string_find = bhapi::strndup(this->String(), beforeOffset + 1);
     const char  *tmp = bhapi::strrcasechr(string_find, c);
-    b_int32     ret = -1;
+     __be_int32     ret = -1;
     if (this->String() == NULL || c == 0 || beforeOffset < 0 || beforeOffset >= Length()) return -1;
     if (string_find == NULL) return -1;
-    if (tmp != NULL) ret = (b_int32) (tmp - string_find);
+    if (tmp != NULL) ret = (__be_int32) (tmp - string_find);
 
     free(string_find);
 
@@ -1795,7 +1795,7 @@ b_int32 BString::IFindLast(char c, b_int32 beforeOffset) const
 
 BString &BString::ReplaceFirst(char replaceThis, char withThis)
 {
-    b_int32 index = FindFirst(replaceThis);
+     __be_int32 index = FindFirst(replaceThis);
 
     if (index >= 0) fBuffer[index] = withThis;
 
@@ -1806,7 +1806,7 @@ BString &BString::ReplaceFirst(char replaceThis, char withThis)
 
 BString &BString::ReplaceLast(char replaceThis, char withThis)
 {
-    b_int32 index = FindLast(replaceThis);
+     __be_int32 index = FindLast(replaceThis);
 
     if (index >= 0) fBuffer[index] = withThis;
 
@@ -1815,13 +1815,13 @@ BString &BString::ReplaceLast(char replaceThis, char withThis)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::ReplaceAll(char replaceThis, char withThis, b_int32 fromOffset)
+BString &BString::ReplaceAll(char replaceThis, char withThis,  __be_int32 fromOffset)
 {
     if (fromOffset < 0 || fromOffset >= fLen) return *this;
 
     while (fromOffset < fLen)
     {
-        b_int32 index = FindFirst(replaceThis, fromOffset);
+         __be_int32 index = FindFirst(replaceThis, fromOffset);
 
         if (index >= 0)
         {
@@ -1839,13 +1839,13 @@ BString &BString::ReplaceAll(char replaceThis, char withThis, b_int32 fromOffset
 
 BString &BString::ReplaceFirst(const char *replaceThis, const char *withThis)
 {
-    b_int32 index = FindFirst(replaceThis);
+     __be_int32 index = FindFirst(replaceThis);
 
     if (replaceThis == NULL || *replaceThis == 0 || withThis == NULL || *withThis == 0) return *this;
 
     if (index >= 0)
     {
-        Remove(index, (b_int32) strlen(replaceThis));
+        Remove(index, (__be_int32) strlen(replaceThis));
         Insert(withThis, index);
     }
 
@@ -1856,13 +1856,13 @@ BString &BString::ReplaceFirst(const char *replaceThis, const char *withThis)
 
 BString &BString::ReplaceLast(const char *replaceThis, const char *withThis)
 {
-    b_int32 index = FindLast(replaceThis);
+     __be_int32 index = FindLast(replaceThis);
 
     if (replaceThis == NULL || *replaceThis == 0 || withThis == NULL || *withThis == 0) return *this;
 
     if (index >= 0)
     {
-        Remove(index, (b_int32) strlen(replaceThis));
+        Remove(index, (__be_int32) strlen(replaceThis));
         Insert(withThis, index);
     }
 
@@ -1878,17 +1878,17 @@ BString &BString::ReplaceAll(const char *replaceThis, const char *withThis)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::ReplaceAll(const char *replaceThis, const char *withThis, b_int32 fromOffset)
+BString &BString::ReplaceAll(const char *replaceThis, const char *withThis,  __be_int32 fromOffset)
 {
-    b_int32 strLenReplace = (b_int32) strlen(replaceThis);
-    b_int32 strLenWith = (b_int32) strlen(withThis);
+     __be_int32 strLenReplace = (__be_int32) strlen(replaceThis);
+     __be_int32 strLenWith = (__be_int32) strlen(withThis);
 
     if (fromOffset < 0 || fromOffset >= fLen) return *this;
     if (replaceThis == NULL || *replaceThis == 0 || withThis == NULL || *withThis == 0) return *this;
 
     while (fromOffset < fLen)
     {
-        b_int32 index = FindFirst(replaceThis, fromOffset);
+         __be_int32 index = FindFirst(replaceThis, fromOffset);
 
         if (index >= 0)
         {
@@ -1905,11 +1905,11 @@ BString &BString::ReplaceAll(const char *replaceThis, const char *withThis, b_in
 
 //-----------------------------------------------------------------------------
 
-BString &BString::Replace(const char *replaceThis, const char *withThis, b_int32 maxReplaceCount, b_int32 fromOffset)
+BString &BString::Replace(const char *replaceThis, const char *withThis,  __be_int32 maxReplaceCount,  __be_int32 fromOffset)
 {
     int     count = 0;
-    b_int32 strLenReplace = (b_int32) strlen(replaceThis);
-    b_int32 strLenWith = (b_int32) strlen(withThis);
+     __be_int32 strLenReplace = (__be_int32) strlen(replaceThis);
+     __be_int32 strLenWith = (__be_int32) strlen(withThis);
 
     if (fromOffset < 0 || fromOffset >= fLen) return *this;
     if (replaceThis == NULL || *replaceThis == 0 || withThis == NULL || *withThis == 0) return *this;
@@ -1918,7 +1918,7 @@ BString &BString::Replace(const char *replaceThis, const char *withThis, b_int32
 
     while (true)
     {
-        b_int32 index = FindFirst(replaceThis, fromOffset);
+         __be_int32 index = FindFirst(replaceThis, fromOffset);
 
         if (index >= 0)
         {
@@ -1940,7 +1940,7 @@ BString &BString::Replace(const char *replaceThis, const char *withThis, b_int32
 
 BString &BString::IReplaceFirst(char replaceThis, char withThis)
 {
-    b_int32 index = IFindFirst(replaceThis);
+     __be_int32 index = IFindFirst(replaceThis);
 
     if (index >= 0) fBuffer[index] = withThis;
 
@@ -1951,7 +1951,7 @@ BString &BString::IReplaceFirst(char replaceThis, char withThis)
 
 BString &BString::IReplaceLast(char replaceThis, char withThis)
 {
-    b_int32 index = IFindLast(replaceThis);
+     __be_int32 index = IFindLast(replaceThis);
 
     if (index >= 0) fBuffer[index] = withThis;
 
@@ -1960,13 +1960,13 @@ BString &BString::IReplaceLast(char replaceThis, char withThis)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::IReplaceAll(char replaceThis, char withThis, b_int32 fromOffset)
+BString &BString::IReplaceAll(char replaceThis, char withThis,  __be_int32 fromOffset)
 {
     if (fromOffset < 0 || fromOffset >= fLen) return *this;
 
     while (fromOffset < fLen)
     {
-        b_int32 index = IFindFirst(replaceThis, fromOffset);
+         __be_int32 index = IFindFirst(replaceThis, fromOffset);
 
         if (index >= 0)
         {
@@ -1984,13 +1984,13 @@ BString &BString::IReplaceAll(char replaceThis, char withThis, b_int32 fromOffse
 
 BString &BString::IReplaceFirst(const char *replaceThis, const char *withThis)
 {
-    b_int32 index = IFindFirst(replaceThis);
+     __be_int32 index = IFindFirst(replaceThis);
 
     if (replaceThis == NULL || *replaceThis == 0 || withThis == NULL || *withThis == 0) return *this;
 
     if (index >= 0)
     {
-        Remove(index, (b_int32) strlen(replaceThis));
+        Remove(index, (__be_int32) strlen(replaceThis));
         Insert(withThis, index);
     }
 
@@ -2001,13 +2001,13 @@ BString &BString::IReplaceFirst(const char *replaceThis, const char *withThis)
 
 BString &BString::IReplaceLast(const char *replaceThis, const char *withThis)
 {
-    b_int32 index = IFindLast(replaceThis);
+     __be_int32 index = IFindLast(replaceThis);
 
     if (replaceThis == NULL || *replaceThis == 0 || withThis == NULL || *withThis == 0) return *this;
 
     if (index >= 0)
     {
-        Remove(index, (b_int32) strlen(replaceThis));
+        Remove(index, (__be_int32) strlen(replaceThis));
         Insert(withThis, index);
     }
 
@@ -2016,17 +2016,17 @@ BString &BString::IReplaceLast(const char *replaceThis, const char *withThis)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::IReplaceAll(const char *replaceThis, const char *withThis, b_int32 fromOffset)
+BString &BString::IReplaceAll(const char *replaceThis, const char *withThis,  __be_int32 fromOffset)
 {
-    b_int32 strLenReplace = (b_int32) strlen(replaceThis);
-    b_int32 strLenWith = (b_int32) strlen(withThis);
+     __be_int32 strLenReplace = (__be_int32) strlen(replaceThis);
+     __be_int32 strLenWith = (__be_int32) strlen(withThis);
 
     if (fromOffset < 0 || fromOffset >= fLen) return *this;
     if (replaceThis == NULL || *replaceThis == 0 || withThis == NULL || *withThis == 0) return *this;
 
     while (fromOffset < fLen)
     {
-        b_int32 index = IFindFirst(replaceThis, fromOffset);
+         __be_int32 index = IFindFirst(replaceThis, fromOffset);
 
         if (index >= 0)
         {
@@ -2043,11 +2043,11 @@ BString &BString::IReplaceAll(const char *replaceThis, const char *withThis, b_i
 
 //-----------------------------------------------------------------------------
 
-BString &BString::IReplace(const char *replaceThis, const char *withThis, b_int32 maxReplaceCount, b_int32 fromOffset)
+BString &BString::IReplace(const char *replaceThis, const char *withThis,  __be_int32 maxReplaceCount,  __be_int32 fromOffset)
 {
     int     count = 0;
-    b_int32 strLenReplace = (b_int32) strlen(replaceThis);
-    b_int32 strLenWith = (b_int32) strlen(withThis);
+     __be_int32 strLenReplace = (__be_int32) strlen(replaceThis);
+     __be_int32 strLenWith = (__be_int32) strlen(withThis);
 
     if (fromOffset < 0 || fromOffset >= fLen) return *this;
     if (replaceThis == NULL || *replaceThis == 0 || withThis == NULL || *withThis == 0) return *this;
@@ -2056,7 +2056,7 @@ BString &BString::IReplace(const char *replaceThis, const char *withThis, b_int3
 
     while (true)
     {
-        b_int32 index = IFindFirst(replaceThis, fromOffset);
+         __be_int32 index = IFindFirst(replaceThis, fromOffset);
 
         if (index >= 0)
         {
@@ -2078,15 +2078,15 @@ BString &BString::IReplace(const char *replaceThis, const char *withThis, b_int3
 
 BString &BString::ReplaceSet(const char *set_to_replace, char with)
 {
-    b_int32 length = (b_int32) strlen(set_to_replace);
-    b_int32 offset = 0;
+     __be_int32 length = (__be_int32) strlen(set_to_replace);
+     __be_int32 offset = 0;
 
     if (set_to_replace == NULL || *set_to_replace == 0 || with == 0) return *this;
 
     while (true)
     {
-        b_int32 index = -1;
-        b_int32 i;
+         __be_int32 index = -1;
+         __be_int32 i;
 
         for (i = 0; i < length; i++)
         {
@@ -2111,16 +2111,16 @@ BString &BString::ReplaceSet(const char *set_to_replace, char with)
 
 BString &BString::ReplaceSet(const char *set_to_replace, const char *with)
 {
-    b_int32 length = (b_int32) strlen(set_to_replace);
-    b_int32 strLenWith = (b_int32) strlen(with);
-    b_int32 offset = 0;
+     __be_int32 length = (__be_int32) strlen(set_to_replace);
+     __be_int32 strLenWith = (__be_int32) strlen(with);
+     __be_int32 offset = 0;
 
     if (set_to_replace == NULL || *set_to_replace == 0 || with == NULL || *with == 0) return *this;
 
     while (true)
     {
-        b_int32 index = -1;
-        b_int32 i;
+         __be_int32 index = -1;
+         __be_int32 i;
 
         for (i = 0; i < length; i++)
         {
@@ -2145,15 +2145,15 @@ BString &BString::ReplaceSet(const char *set_to_replace, const char *with)
 
 BString &BString::IReplaceSet(const char *set_to_replace, char with)
 {
-    b_int32 length = (b_int32) strlen(set_to_replace);
-    b_int32 offset = 0;
+     __be_int32 length = (__be_int32) strlen(set_to_replace);
+     __be_int32 offset = 0;
 
     if (set_to_replace == NULL || *set_to_replace == 0 || with == 0) return *this;
 
     while (true)
     {
-        b_int32 index = -1;
-        b_int32 i;
+         __be_int32 index = -1;
+         __be_int32 i;
 
         for (i = 0; i < length; i++)
         {
@@ -2178,16 +2178,16 @@ BString &BString::IReplaceSet(const char *set_to_replace, char with)
 
 BString &BString::IReplaceSet(const char *set_to_replace, const char *with)
 {
-    b_int32 length = (b_int32) strlen(set_to_replace);
-    b_int32 strLenWith = (b_int32) strlen(with);
-    b_int32 offset = 0;
+     __be_int32 length = (__be_int32) strlen(set_to_replace);
+     __be_int32 strLenWith = (__be_int32) strlen(with);
+     __be_int32 offset = 0;
 
     if (set_to_replace == NULL || *set_to_replace == 0 || with == NULL || *with == 0) return *this;
 
     while (true)
     {
-        b_int32 index = -1;
-        b_int32 i;
+         __be_int32 index = -1;
+         __be_int32 i;
 
         for (i = 0; i < length; i++)
         {
@@ -2210,14 +2210,14 @@ BString &BString::IReplaceSet(const char *set_to_replace, const char *with)
 
 //-----------------------------------------------------------------------------
 
-char BString::operator[](b_int32 index) const
+char BString::operator[](__be_int32 index) const
 {
     return fBuffer[index];
 }
 
 //-----------------------------------------------------------------------------
 
-char BString::ByteAt(b_int32 index) const
+char BString::ByteAt(__be_int32 index) const
 {
     if (!fBuffer || index < 0 || index >= Length()) return 0;
     return fBuffer[index];
@@ -2227,7 +2227,7 @@ char BString::ByteAt(b_int32 index) const
 
 BString &BString::ToLower(void)
 {
-    for (b_int32 i = 0; i < fLen; i++) fBuffer[i] = tolower(fBuffer[i]);
+    for (__be_int32 i = 0; i < fLen; i++) fBuffer[i] = tolower(fBuffer[i]);
 
     return *this;
 }
@@ -2236,7 +2236,7 @@ BString &BString::ToLower(void)
 
 BString &BString::ToUpper(void)
 {
-    for (b_int32 i = 0; i < fLen; i++) fBuffer[i] = toupper(fBuffer[i]);
+    for (__be_int32 i = 0; i < fLen; i++) fBuffer[i] = toupper(fBuffer[i]);
 
     return *this;
 }
@@ -2253,15 +2253,15 @@ BString &BString::CharacterEscape(const char *original, const char *setOfCharsTo
 
 BString &BString::CharacterEscape(const char *setOfCharsToEscape, char escapeWith)
 {
-    b_int32 length = (b_int32) strlen(setOfCharsToEscape);
-    b_int32 offset = 0;
+     __be_int32 length = (__be_int32) strlen(setOfCharsToEscape);
+     __be_int32 offset = 0;
 
     if (Length() <= 0 || setOfCharsToEscape == NULL || *setOfCharsToEscape == 0 || escapeWith == 0) return *this;
 
     while (true)
     {
-        b_int32 index = -1;
-        b_int32 i;
+         __be_int32 index = -1;
+         __be_int32 i;
 
         for (i = 0; i < length; i++)
         {
@@ -2293,13 +2293,13 @@ BString &BString::CharacterDeescape(const char *original, char escapeChar)
 
 BString &BString::CharacterDeescape(char escapeChar)
 {
-    b_int32 offset = 0;
+     __be_int32 offset = 0;
 
     if (Length() <= 0 || escapeChar == 0) return *this;
 
     while (true)
     {
-        b_int32 index = -1;
+         __be_int32 index = -1;
 
         index = FindFirst(escapeChar, offset);
 
@@ -2330,7 +2330,7 @@ BString &BString::Capitalize(void)
 
 BString &BString::CapitalizeEachWord(void)
 {
-    b_int32 length = Length();
+     __be_int32 length = Length();
     ToLower();
 
     if (length > 0)
@@ -2367,7 +2367,7 @@ BString &BString::CapitalizeEachWord(void)
 bool BString::IsNumber(void) const
 {
     const char  *s = this->String();
-    b_int32     length = Length();
+     __be_int32     length = Length();
 
     const char  *tmp = strchr(s, '.');
     if (s == NULL) return false;
@@ -2375,7 +2375,7 @@ bool BString::IsNumber(void) const
 
     if (!(length < 2 || s[0] != '0' || !(s[1] == 'x' || s[1] == 'X')))
     {
-        b_int32 i;
+         __be_int32 i;
         for (i = 2; i < length; i++)
         {
             if (s[i] >= '0' && s[i] <= '9') continue;
@@ -2399,7 +2399,7 @@ bool BString::IsNumber(void) const
         if (strchr(tmp, '.') != NULL) return false; // double '.'
     }
 
-    for (b_int32 i = 0; i < length; i++)
+    for (__be_int32 i = 0; i < length; i++)
     {
         if (!(isdigit(s[i]) || s[i] == '-' || s[i] == '.' || s[i] == '+'))
         {
@@ -2424,11 +2424,11 @@ bool BString::IsInteger(void) const
 
     if (strchr(s, '.') != NULL)
     {
-        b_int32 length = (b_int32) strlen(s);
+         __be_int32 length = (__be_int32) strlen(s);
         s++;
         if (length > 0)
         {
-            for (b_int32 i = 0; i < length; i++)
+            for (__be_int32 i = 0; i < length; i++)
             {
                 if (s[i] != '0') return false;
             }
@@ -2457,14 +2457,14 @@ bool get_hex(const BString &str, TYPE_INT *value);
 template<class TYPE_INT>
 bool bhapi::get_hex(const BString &str, TYPE_INT *value)
 {
-    b_int32     maxLen = 2 + (b_int32) sizeof(TYPE_INT) * 2;
-    b_uint32    bitOffset = 0;
+     __be_int32     maxLen = 2 + (__be_int32) sizeof(TYPE_INT) * 2;
+     __be_uint32    bitOffset = 0;
 
     if (value == NULL || str.Length() < 2 || str[0] != '0' || !(str[1] == 'x' || str[1] == 'X')) return false;
 
     *value = (TYPE_INT) 0;
 
-    for (b_int32 i = min_c(str.Length(), maxLen) - 1; i >= 2; i--, bitOffset += 4)
+    for (__be_int32 i = min_c(str.Length(), maxLen) - 1; i >= 2; i--, bitOffset += 4)
     {
         int v = 0;
         if (str[i] >= '0' && str[i] <= '9')
@@ -2483,7 +2483,7 @@ bool bhapi::get_hex(const BString &str, TYPE_INT *value)
 
 bool BString::GetDecimal(float *value) const
 {
-    b_uint64    tmp;
+     __be_uint64    tmp;
     #if !(defined(_MSC_VER) && _MSC_VER <= 0x4b0)
     if (!value || !IsNumber()) return false;
 
@@ -2511,7 +2511,7 @@ bool BString::GetDecimal(float *value) const
 
 bool BString::GetDecimal(double *value) const
 {
-    b_uint64    tmp;
+     __be_uint64    tmp;
     #if !(defined(_MSC_VER) && _MSC_VER <= 0x4b0)
     if (!value || !IsNumber()) return false;
 
@@ -2538,7 +2538,7 @@ bool BString::GetDecimal(double *value) const
 
 bool BString::GetDecimal(long double *value) const
 {
-    b_uint64    tmp;
+     __be_uint64    tmp;
     if (!value || !IsNumber()) return false;
 
     if (bhapi::get_hex(*this, &tmp))
@@ -2555,94 +2555,94 @@ bool BString::GetDecimal(long double *value) const
 
 //-----------------------------------------------------------------------------
 
-bool BString::GetInteger(b_int8 *value) const
+bool BString::GetInteger(__be_int8 *value) const
 {
     if (!value || !IsNumber()) return false;
 
-    *value = (b_int8) strtol(this->String(), NULL, 10);
+    *value = (__be_int8) strtol(this->String(), NULL, 10);
 
     return true;
 }
 
 //-----------------------------------------------------------------------------
 
-bool BString::GetInteger(b_uint8 *value) const
-{
-    if (!value || !IsNumber()) return false;
-    if (bhapi::get_hex(*this, value)) return true;
-
-    *value = (b_uint8) strtoul(this->String(), NULL, 10);
-
-    return true;
-}
-
-//-----------------------------------------------------------------------------
-
-bool BString::GetInteger(b_int16 *value) const
-{
-    if (!value || !IsNumber()) return false;
-
-    *value = (b_int16) strtol(this->String(), NULL, 10);
-
-    return true;
-}
-
-//-----------------------------------------------------------------------------
-
-bool BString::GetInteger(b_uint16 *value) const
+bool BString::GetInteger(__be_uint8 *value) const
 {
     if (!value || !IsNumber()) return false;
     if (bhapi::get_hex(*this, value)) return true;
 
-    *value = (b_uint16) strtoul(this->String(), NULL, 10);
+    *value = (__be_uint8) strtoul(this->String(), NULL, 10);
 
     return true;
 }
 
 //-----------------------------------------------------------------------------
 
-bool BString::GetInteger(b_int32 *value) const
+bool BString::GetInteger(__be_int16 *value) const
+{
+    if (!value || !IsNumber()) return false;
+
+    *value = (__be_int16) strtol(this->String(), NULL, 10);
+
+    return true;
+}
+
+//-----------------------------------------------------------------------------
+
+bool BString::GetInteger(__be_uint16 *value) const
 {
     if (!value || !IsNumber()) return false;
     if (bhapi::get_hex(*this, value)) return true;
 
-    *value = (b_int32) strtol(this->String(), NULL, 10);
+    *value = (__be_uint16) strtoul(this->String(), NULL, 10);
 
     return true;
 }
 
 //-----------------------------------------------------------------------------
 
-bool BString::GetInteger(b_uint32 *value) const
+bool BString::GetInteger(__be_int32 *value) const
 {
     if (!value || !IsNumber()) return false;
     if (bhapi::get_hex(*this, value)) return true;
 
-    *value = (b_uint32) strtoul(this->String(), NULL, 10);
+    *value = (__be_int32) strtol(this->String(), NULL, 10);
 
     return true;
 }
 
 //-----------------------------------------------------------------------------
 
-bool BString::GetInteger(b_int64 *value) const
+bool BString::GetInteger(__be_uint32 *value) const
+{
+    if (!value || !IsNumber()) return false;
+    if (bhapi::get_hex(*this, value)) return true;
+
+    *value = (__be_uint32) strtoul(this->String(), NULL, 10);
+
+    return true;
+}
+
+//-----------------------------------------------------------------------------
+
+bool BString::GetInteger(__be_int64 *value) const
 {
     if (!value || !IsNumber()) return false;
     if (bhapi::get_hex(*this, value)) return true;
 
     #if SIZEOF_INT == 8 || SIZEOF_LONG == 8
-    * value = (b_int64) strtol(this->String(), NULL, 10);
+    * value = (__be_int64) strtol(this->String(), NULL, 10);
     return true;
     #else
         #if SIZEOF_LONG_LONG == 8 && !defined(_MSC_VER)
-    * value = (b_int64) strtoll(this->String(), NULL, 10);
+    * value = (__be_int64) strtoll(this->String(), NULL, 10);
     return true;
         #else
             #if SIZEOF___INT64 == 8
                 #if _MSC_VER <= 0x4b0
-    * value = (b_int64) _atoi64(this->String());
+    * value = (__be_int64) _atoi64(this->String());
                 #else
-    *value = (b_int64) _strtoi64(this->String(), NULL, 10);
+    *value = (__be_int64) _strtoi64(this->String(), NULL, 10);
                 #endif
     return true;
             #else
@@ -2654,22 +2654,22 @@ bool BString::GetInteger(b_int64 *value) const
 
 //-----------------------------------------------------------------------------
 
-bool BString::GetInteger(b_uint64 *value) const
+bool BString::GetInteger(__be_uint64 *value) const
 {
     #if !(defined(_MSC_VER) && _MSC_VER <= 0x4b0)
     if (!value || !IsNumber()) return false;
     if (bhapi::get_hex(*this, value)) return true;
 
         #if SIZEOF_INT == 8 || SIZEOF_LONG == 8
-    * value = (b_uint64) strtoul(this->String(), NULL, 10);
+    * value = (__be_uint64) strtoul(this->String(), NULL, 10);
     return true;
         #else
             #if SIZEOF_LONG_LONG == 8 && !defined(_MSC_VER)
-    * value = (b_uint64) strtoull(this->String(), NULL, 10);
+    * value = (__be_uint64) strtoull(this->String(), NULL, 10);
     return true;
             #else
                 #if SIZEOF___INT64 == 8
-    * value = (b_uint64) strtoull(this->String(), NULL, 10);
+    * value = (__be_uint64) strtoull(this->String(), NULL, 10);
     return true;
                 #else
     return false;
@@ -2699,56 +2699,56 @@ BString &BString::operator<<(const BString &str)
 
 //-----------------------------------------------------------------------------
 
-BString &BString::operator<<(b_int8 value)
+BString &BString::operator<<(__be_int8 value)
 {
     return AppendFormat("%I8i", value);
 }
 
 //-----------------------------------------------------------------------------
 
-BString &BString::operator<<(b_uint8 value)
+BString &BString::operator<<(__be_uint8 value)
 {
     return AppendFormat("%I8u", value);
 }
 
 //-----------------------------------------------------------------------------
 
-BString &BString::operator<<(b_int16 value)
+BString &BString::operator<<(__be_int16 value)
 {
     return AppendFormat("%I16i", value);
 }
 
 //-----------------------------------------------------------------------------
 
-BString &BString::operator<<(b_uint16 value)
+BString &BString::operator<<(__be_uint16 value)
 {
     return AppendFormat("%I16u", value);
 }
 
 //-----------------------------------------------------------------------------
 
-BString &BString::operator<<(b_int32 value)
+BString &BString::operator<<(__be_int32 value)
 {
     return AppendFormat("%I32i", value);
 }
 
 //-----------------------------------------------------------------------------
 
-BString &BString::operator<<(b_uint32 value)
+BString &BString::operator<<(__be_uint32 value)
 {
     return AppendFormat("%I32u", value);
 }
 
 //-----------------------------------------------------------------------------
 
-BString &BString::operator<<(b_int64 value)
+BString &BString::operator<<(__be_int64 value)
 {
     return AppendFormat("%I64i", value);
 }
 
 //-----------------------------------------------------------------------------
 
-BString &BString::operator<<(b_uint64 value)
+BString &BString::operator<<(__be_uint64 value)
 {
     return AppendFormat("%I64u", value);
 }
@@ -2827,13 +2827,13 @@ BString &BString::PrependFormat(const char *format, ...)
 
 //-----------------------------------------------------------------------------
 
-BStringArray *BString::Split(const char *delimiter, b_uint32 max_tokens) const
+BStringArray *BString::Split(const char *delimiter,  __be_uint32 max_tokens) const
 {
-    b_int32     offset = 0;
-    b_int32     found = 0;
-    b_uint32    i = 0;
+     __be_int32     offset = 0;
+     __be_int32     found = 0;
+     __be_uint32    i = 0;
 
-    b_int32 delimiter_len = (b_int32) strlen(delimiter);
+     __be_int32 delimiter_len = (__be_int32) strlen(delimiter);
 
     BStringArray *array = new BStringArray();
     if (delimiter == NULL || *delimiter == 0) return NULL;
@@ -2844,7 +2844,7 @@ BStringArray *BString::Split(const char *delimiter, b_uint32 max_tokens) const
     {
         BString line;
 
-        b_int32 length = found - offset;
+         __be_int32 length = found - offset;
 
         if (offset >= Length() || i >= max_tokens) break;
         if ((found = FindFirst(delimiter, offset)) < 0) found = Length();
@@ -2868,7 +2868,7 @@ BStringArray *BString::Split(const char *delimiter, b_uint32 max_tokens) const
 
 //-----------------------------------------------------------------------------
 
-BStringArray *BString::Split(const char delimiter, b_uint32 max_tokens) const
+BStringArray *BString::Split(const char delimiter,  __be_uint32 max_tokens) const
 {
     char    string[2];
     bzero(string, 2);
@@ -2878,7 +2878,7 @@ BStringArray *BString::Split(const char delimiter, b_uint32 max_tokens) const
 
 //-----------------------------------------------------------------------------
 
-b_int32 BString::CountChars(void) const
+be_int32 BString::CountChars(void) const
 {
     if (fLen <= 0) return fLen;
     return bhapi::utf8_strlen(fBuffer);
@@ -2886,7 +2886,7 @@ b_int32 BString::CountChars(void) const
 
 //-----------------------------------------------------------------------------
 
-const char *BString::CharAt(b_int32 index, b_uint8 *length) const
+const char *BString::CharAt(__be_int32 index,  __be_uint8 *length) const
 {
     if (length) *length = 0;
     if (fLen <= index) return NULL;
@@ -2896,7 +2896,7 @@ const char *BString::CharAt(b_int32 index, b_uint8 *length) const
 //-----------------------------------------------------------------------------
 
 template<class TYPE_INT>
-void bhapi::printf_int(BString &str, TYPE_INT value, b_uint8 _base, int precision_width, bool upper_style)
+void bhapi::printf_int(BString &str, TYPE_INT value,  __be_uint8 _base, int precision_width, bool upper_style)
 {
     TYPE_INT    base = (TYPE_INT) _base;
 
@@ -2923,11 +2923,11 @@ void bhapi::printf_int(BString &str, TYPE_INT value, b_uint8 _base, int precisio
 
 //-----------------------------------------------------------------------------
 
-b_int32 bhapi::printf_double(BString &str, double value, int precision_width, b_int32 *exponent, bool g_style, bool upper_style)
+be_int32 bhapi::printf_double(BString &str, double value, int precision_width,  __be_int32 *exponent, bool g_style, bool upper_style)
 {
     double n;
-    b_int32 exp = -1;
-    b_int32 digits = 0;
+     __be_int32 exp = -1;
+     __be_int32 digits = 0;
     double iValue = 0;
     double fValue = modf(value, &iValue);
     bool iValueZero = (iValue == 0);
@@ -3062,11 +3062,11 @@ b_int32 bhapi::printf_double(BString &str, double value, int precision_width, b_
 
 //-----------------------------------------------------------------------------
 
-b_int32 bhapi::printf_double(BString &str, long double value, int precision_width, b_int32 *exponent, bool g_style, bool upper_style)
+be_int32 bhapi::printf_double(BString &str, long double value, int precision_width,  __be_int32 *exponent, bool g_style, bool upper_style)
 {
-    b_int32 n;
-    b_int32 exp = -1;
-    b_int32 digits = 0;
+     __be_int32 n;
+     __be_int32 exp = -1;
+     __be_int32 digits = 0;
     long double iValue = 0;
     long double fValue = b_modfl(value, &iValue);
     bool iValueZero = (iValue == 0);
@@ -3201,17 +3201,17 @@ extern "C"
 {
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI char *bhapi::strndup(const char *src, b_int32 length)
+EXPORTBHAPI char *bhapi::strndup(const char *src,  __be_int32 length)
 {
     char    *dest;
-    b_int32 len = 0;
+     __be_int32 len = 0;
 
     if (src == NULL || *src == 0 || length == 0) return NULL;
 
     if (length < 0)
-        len = (b_int32) strlen(src);
+        len = (__be_int32) strlen(src);
     else
-        len = min_c(length, (b_int32) strlen(src));
+        len = min_c(length, (__be_int32) strlen(src));
 
     dest = (char *)malloc((size_t) (len + 1));
 
@@ -3236,7 +3236,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
     va_list args;
     BString str(format);
 
-    b_int32 offset = 0;
+     __be_int32 offset = 0;
     if (str.Length() <= 0) return NULL;
     str.SetMinimumBufferSize(1024);
 
@@ -3244,7 +3244,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
 
     while (!(offset < 0 || offset >= str.Length() || (offset = str.FindFirst("%", offset)) < 0))
     {
-        b_int32 curOffset = offset + 1;
+         __be_int32 curOffset = offset + 1;
 
         // flags
         bool    do_alternate_form = false;
@@ -3334,7 +3334,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                         strWidth.Append(str[curOffset], 1);
                     }
 
-                    strWidth.GetInteger((b_int32 *) &precision_width);
+                    strWidth.GetInteger((__be_int32 *) &precision_width);
                 }
                 break;
 
@@ -3371,7 +3371,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                         strWidth.Append(str[curOffset], 1);
                     }
 
-                    strWidth.GetInteger((b_int32 *) &field_width);
+                    strWidth.GetInteger((__be_int32 *) &field_width);
                 }
                 break;
 
@@ -3469,7 +3469,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                 {
                     bool    negative = false;
                     bool    has_signed;
-                    b_uint8 base;
+                     __be_uint8 base;
 
                     BString aStr;
                     if (str[curOffset] == 'o')
@@ -3579,7 +3579,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                     #endif // HAVE_LONG_LONG
                     else if (length_modifier == "I64")
                     {
-                        b_int64 value = va_arg(args, b_int64);
+                         __be_int64 value = va_arg(args,  __be_int64);
                         if (has_signed)
                         {
                             negative = (value < B_INT64_CONSTANT(0));
@@ -3597,7 +3597,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                             bhapi::printf_int
                             (
                                 aStr,
-                                (b_uint64) value,
+                                (__be_uint64) value,
                                 base,
                                 (has_precision_width ? max_c(precision_width, 0) : -1),
                                 str[curOffset] == 'X'
@@ -3606,7 +3606,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                     }
                     else if (length_modifier == "I32")
                     {
-                        b_int32 value = va_arg(args, b_int32);
+                         __be_int32 value = va_arg(args,  __be_int32);
                         if (has_signed)
                         {
                             negative = (value < 0);
@@ -3624,7 +3624,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                             bhapi::printf_int
                             (
                                 aStr,
-                                (b_uint32) value,
+                                (__be_uint32) value,
                                 base,
                                 (has_precision_width ? max_c(precision_width, 0) : -1),
                                 str[curOffset] == 'X'
@@ -3640,7 +3640,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                             bhapi::printf_int
                             (
                                 aStr,
-                                (b_int16) value,
+                                (__be_int16) value,
                                 base,
                                 (has_precision_width ? max_c(precision_width, 0) : -1),
                                 str[curOffset] == 'X'
@@ -3651,7 +3651,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                             bhapi::printf_int
                             (
                                 aStr,
-                                (b_uint16) value,
+                                (__be_uint16) value,
                                 base,
                                 (has_precision_width ? max_c(precision_width, 0) : -1),
                                 str[curOffset] == 'X'
@@ -3667,7 +3667,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                             bhapi::printf_int
                             (
                                 aStr,
-                                (b_int8) value,
+                                (__be_int8) value,
                                 base,
                                 (has_precision_width ? max_c(precision_width, 0) : -1),
                                 str[curOffset] == 'X'
@@ -3678,7 +3678,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                             bhapi::printf_int
                             (
                                 aStr,
-                                (b_uint8) value,
+                                (__be_uint8) value,
                                 base,
                                 (has_precision_width ? max_c(precision_width, 0) : -1),
                                 str[curOffset] == 'X'
@@ -3766,8 +3766,8 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                         if (!left_align)
                         {
                             char    cStr = zero_padded && !has_precision_width ? '0' : ' ';
-                            b_int32 cOffset = (cStr == '0' && (show_positive || negative) ? 1 : 0);
-                            b_int32 cCount = field_width - aStr.Length();
+                             __be_int32 cOffset = (cStr == '0' && (show_positive || negative) ? 1 : 0);
+                             __be_int32 cCount = field_width - aStr.Length();
                             if (cOffset != 0) cCount--;
                             aStr.Insert(cStr, cCount, cOffset);
                         }
@@ -3792,9 +3792,9 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
             case 'G':
                 {
                     bool    negative = false;
-                    b_int32 exponent = -1;
+                     __be_int32 exponent = -1;
                     bool    g_style = (str[curOffset] == 'g' || str[curOffset] == 'G');
-                    b_int32 digits = -1;
+                     __be_int32 digits = -1;
 
                     BString aStr;
 
@@ -3840,7 +3840,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                     {
                         if (exponent < 0 && digits < aStr.Length() && g_style)
                         {
-                            for (b_int32 i = aStr.Length() - 1; i > digits - 1; i--)
+                            for (__be_int32 i = aStr.Length() - 1; i > digits - 1; i--)
                             {
                                 if (aStr[i] != '0')
                                 {
@@ -3864,8 +3864,8 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
                         if (!left_align)
                         {
                             char    cStr = zero_padded && !has_precision_width ? '0' : ' ';
-                            b_int32 cOffset = (cStr == '0' && (show_positive || negative) ? 1 : 0);
-                            b_int32 cCount = field_width - aStr.Length();
+                             __be_int32 cOffset = (cStr == '0' && (show_positive || negative) ? 1 : 0);
+                             __be_int32 cCount = field_width - aStr.Length();
                             if (cOffset != 0) cCount--;
                             aStr.Insert(cStr, cCount, cOffset);
                         }

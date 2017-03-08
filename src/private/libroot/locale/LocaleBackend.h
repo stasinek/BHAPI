@@ -6,7 +6,7 @@
 #define _LOCALE_BACKEND_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <time.h>
 #include <wctype.h>

@@ -5,7 +5,7 @@
 #ifndef SOURCE_LANGUAGE_INFO_H
 #define SOURCE_LANGUAGE_INFO_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct SourceLanguageInfo {

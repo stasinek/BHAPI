@@ -6,7 +6,7 @@
 #define OPEN_FIRMWARE_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #define OF_FAILED	(-1)

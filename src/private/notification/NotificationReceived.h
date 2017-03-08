@@ -10,7 +10,7 @@
 
 #include <Flattenable.h>
 #include <Roster.h>
-#include <String.h>
+#include <StringClass.h>
 
 class NotificationReceived : public BFlattenable {
 public:

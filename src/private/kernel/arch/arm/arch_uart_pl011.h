@@ -11,7 +11,7 @@
 
 #include <sys/types.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <arch/generic/debug_uart.h>
 

@@ -7,7 +7,7 @@
 
 #include <sys/cdefs.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include "paranoia_config.h"
 

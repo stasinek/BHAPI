@@ -6,7 +6,7 @@
 #define _TRANSLATION_DEFS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <TranslationErrors.h>
 
 

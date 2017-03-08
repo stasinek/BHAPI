@@ -10,7 +10,7 @@
 
 #include <Font.h>
 #include <InterfaceDefs.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <TextView.h>
 
 #include "TextViewSupportBuffer.h"

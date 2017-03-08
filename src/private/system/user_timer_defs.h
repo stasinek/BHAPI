@@ -9,7 +9,7 @@
 #include <limits.h>
 #include <time.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #define CLOCK_PROCESS_USER_CPUTIME_ID	((clockid_t)-4)

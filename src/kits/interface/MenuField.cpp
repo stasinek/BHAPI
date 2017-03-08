@@ -37,7 +37,7 @@
 
 BMenuField::BMenuField(BRect frame, const char *name,
 		       const char *label, BMenu *menu, bool fixedSize,
-		       b_uint32 resizeMode, b_uint32 flags)
+		        __be_uint32 resizeMode,  __be_uint32 flags)
 	: BView(frame, name, resizeMode, flags),
 	  fAlignment(B_ALIGN_LEFT), fDivider(-1),
 	  fLabel(NULL), fMenu(NULL)
@@ -301,7 +301,7 @@ BMenuField::MakeFocus(bool focusState)
 
 
 void
-BMenuField::SetFont(const BFont *font, b_uint8 mask)
+BMenuField::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	BView::SetFont(font, mask);
 	BMenuField::FrameResized(Frame().Width(), Frame().Height());
@@ -339,7 +339,7 @@ BMenuField::MouseUp(BPoint where)
 
 
 void
-BMenuField::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
+BMenuField::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 	BMenuItem *item = NULL;
 	if(fMenuBar == NULL || (item = fMenuBar->ItemAt(0)) == NULL) return;
@@ -353,7 +353,7 @@ BMenuField::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 
 
 void
-BMenuField::KeyDown(const char *bytes, b_int32 numBytes)
+BMenuField::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	BMenuItem *item = NULL;
 	if(bytes == NULL || fMenuBar == NULL || (item = fMenuBar->ItemAt(0)) == NULL) return;
@@ -364,7 +364,7 @@ BMenuField::KeyDown(const char *bytes, b_int32 numBytes)
 
 
 void
-BMenuField::KeyUp(const char *bytes, b_int32 numBytes)
+BMenuField::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
 	BMenuItem *item = NULL;
 	if(bytes == NULL || fMenuBar == NULL || (item = fMenuBar->ItemAt(0)) == NULL) return;

@@ -9,7 +9,7 @@
 
 #include <signal.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <DPC.h>
 #include <thread.h>

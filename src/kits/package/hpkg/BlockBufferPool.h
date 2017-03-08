@@ -6,7 +6,7 @@
 #define _PACKAGE__HPKG__BLOCK_BUFFER_POOL_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <package/hpkg/BufferPool.h>
 

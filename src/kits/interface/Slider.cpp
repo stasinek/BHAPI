@@ -21,7 +21,7 @@
 #include <LayoutUtils.h>
 #include <Message.h>
 #include <Region.h>
-#include <String.h>
+#include <StringClass.h>
 #include <Window.h>
 
 #include <binary_compatibility/Interface.h>
@@ -210,8 +210,8 @@ BSlider::~BSlider()
 void
 BSlider::_InitBarColor()
 {
-	if (be_control_look != NULL) {
-		SetBarColor(be_control_look->SliderBarColor(
+	if (__be_control_look != NULL) {
+		SetBarColor(__be_control_look->SliderBarColor(
 			ui_color(B_PANEL_BACKGROUND_COLOR)));
 	} else {
 		SetBarColor(tint_color(ui_color(B_PANEL_BACKGROUND_COLOR),
@@ -870,12 +870,12 @@ BSlider::DrawBar()
 	BRect frame = BarFrame();
 	BView *view = OffscreenView();
 
-	if (be_control_look != NULL) {
-		uint32 flags = be_control_look->Flags(this);
+	if (__be_control_look != NULL) {
+		uint32 flags =  __be_control_look->Flags(this);
 		rgb_color base = ui_color(B_PANEL_BACKGROUND_COLOR);
 		rgb_color rightFillColor = fBarColor;
 		rgb_color leftFillColor = fUseFillColor ? fFillColor : fBarColor;
-		be_control_look->DrawSliderBar(view, frame, frame, base, leftFillColor,
+		__be_control_look->DrawSliderBar(view, frame, frame, base, leftFillColor,
 			rightFillColor, Position(), flags, fOrientation);
 		return;
 	}
@@ -1005,10 +1005,10 @@ BSlider::DrawHashMarks()
 	BRect frame = HashMarksFrame();
 	BView* view = OffscreenView();
 
-	if (be_control_look != NULL) {
+	if (__be_control_look != NULL) {
 		rgb_color base = ui_color(B_PANEL_BACKGROUND_COLOR);
-		uint32 flags = be_control_look->Flags(this);
-		be_control_look->DrawSliderHashMarks(view, frame, frame, base,
+		uint32 flags =  __be_control_look->Flags(this);
+		__be_control_look->DrawSliderHashMarks(view, frame, frame, base,
 			fHashMarkCount, fHashMarks, flags, fOrientation);
 		return;
 	}
@@ -1135,57 +1135,57 @@ BSlider::DrawText()
 
 	rgb_color base = LowColor();
 	uint32 flags = 0;
-	if (be_control_look == NULL) {
+	if (__be_control_look == NULL) {
 		if (IsEnabled()) {
 			view->SetHighColor(0, 0, 0);
 		} else {
 			view->SetHighColor(tint_color(LowColor(), B_DISABLED_LABEL_TINT));
 		}
 	} else
-		flags = be_control_look->Flags(this);
+		flags =  __be_control_look->Flags(this);
 
 	font_height fontHeight;
 	GetFontHeight(&fontHeight);
 	if (Orientation() == B_HORIZONTAL) {
 		if (Label()) {
-			if (be_control_look == NULL) {
+			if (__be_control_look == NULL) {
 				view->DrawString(Label(),
 					BPoint(0.0, ceilf(fontHeight.ascent)));
 			} else {
-				be_control_look->DrawLabel(view, Label(), base, flags,
+				__be_control_look->DrawLabel(view, Label(), base, flags,
 					BPoint(0.0, ceilf(fontHeight.ascent)));
 			}
 		}
 
 		// the update text is updated in SetValue() only
 		if (fUpdateText != NULL) {
-			if (be_control_look == NULL) {
+			if (__be_control_look == NULL) {
 				view->DrawString(fUpdateText, BPoint(bounds.right
 					- StringWidth(fUpdateText), ceilf(fontHeight.ascent)));
 			} else {
-				be_control_look->DrawLabel(view, fUpdateText, base, flags,
+				__be_control_look->DrawLabel(view, fUpdateText, base, flags,
 					BPoint(bounds.right - StringWidth(fUpdateText),
 						ceilf(fontHeight.ascent)));
 			}
 		}
 
 		if (fMinLimitLabel) {
-			if (be_control_look == NULL) {
+			if (__be_control_look == NULL) {
 				view->DrawString(fMinLimitLabel, BPoint(0.0, bounds.bottom
 					- fontHeight.descent));
 			} else {
-				be_control_look->DrawLabel(view, fMinLimitLabel, base, flags,
+				__be_control_look->DrawLabel(view, fMinLimitLabel, base, flags,
 					BPoint(0.0, bounds.bottom - fontHeight.descent));
 			}
 		}
 
 		if (fMaxLimitLabel) {
-			if (be_control_look == NULL) {
+			if (__be_control_look == NULL) {
 				view->DrawString(fMaxLimitLabel, BPoint(bounds.right
 					- StringWidth(fMaxLimitLabel), bounds.bottom
 					- fontHeight.descent));
 			} else {
-				be_control_look->DrawLabel(view, fMaxLimitLabel, base, flags,
+				__be_control_look->DrawLabel(view, fMaxLimitLabel, base, flags,
 					BPoint(bounds.right - StringWidth(fMaxLimitLabel),
 						bounds.bottom - fontHeight.descent));
 			}
@@ -1196,11 +1196,11 @@ BSlider::DrawText()
 		float baseLine = ceilf(fontHeight.ascent);
 
 		if (Label()) {
-			if (be_control_look == NULL) {
+			if (__be_control_look == NULL) {
 				view->DrawString(Label(), BPoint((bounds.Width()
 					- StringWidth(Label())) / 2.0, baseLine));
 			} else {
-				be_control_look->DrawLabel(view, Label(), base, flags,
+				__be_control_look->DrawLabel(view, Label(), base, flags,
 					BPoint((bounds.Width() - StringWidth(Label())) / 2.0,
 						baseLine));
 			}
@@ -1208,11 +1208,11 @@ BSlider::DrawText()
 		}
 
 		if (fMaxLimitLabel) {
-			if (be_control_look == NULL) {
+			if (__be_control_look == NULL) {
 				view->DrawString(fMaxLimitLabel, BPoint((bounds.Width()
 					- StringWidth(fMaxLimitLabel)) / 2.0, baseLine));
 			} else {
-				be_control_look->DrawLabel(view, fMaxLimitLabel, base, flags,
+				__be_control_look->DrawLabel(view, fMaxLimitLabel, base, flags,
 					BPoint((bounds.Width()
 						- StringWidth(fMaxLimitLabel)) / 2.0, baseLine));
 			}
@@ -1221,11 +1221,11 @@ BSlider::DrawText()
 		baseLine = bounds.bottom - ceilf(fontHeight.descent);
 
 		if (fMinLimitLabel) {
-			if (be_control_look == NULL) {
+			if (__be_control_look == NULL) {
 				view->DrawString(fMinLimitLabel, BPoint((bounds.Width()
 					- StringWidth(fMinLimitLabel)) / 2.0, baseLine));
 			} else {
-				be_control_look->DrawLabel(view, fMinLimitLabel, base, flags,
+				__be_control_look->DrawLabel(view, fMinLimitLabel, base, flags,
 					BPoint((bounds.Width()
 						- StringWidth(fMinLimitLabel)) / 2.0, baseLine));
 			}
@@ -1233,11 +1233,11 @@ BSlider::DrawText()
 		}
 
 		if (fUpdateText != NULL) {
-			if (be_control_look == NULL) {
+			if (__be_control_look == NULL) {
 				view->DrawString(fUpdateText, BPoint((bounds.Width()
 					- StringWidth(fUpdateText)) / 2.0, baseLine));
 			} else {
-				be_control_look->DrawLabel(view, fUpdateText, base, flags,
+				__be_control_look->DrawLabel(view, fUpdateText, base, flags,
 					BPoint((bounds.Width()
 						- StringWidth(fUpdateText)) / 2.0, baseLine));
 			}
@@ -1796,10 +1796,10 @@ BSlider::_DrawBlockThumb()
 	BRect frame = ThumbFrame();
 	BView *view = OffscreenView();
 
-	if (be_control_look != NULL) {
+	if (__be_control_look != NULL) {
 		rgb_color base = ui_color(B_PANEL_BACKGROUND_COLOR);
-		uint32 flags = be_control_look->Flags(this);
-		be_control_look->DrawSliderThumb(view, frame, frame, base, flags,
+		uint32 flags =  __be_control_look->Flags(this);
+		__be_control_look->DrawSliderThumb(view, frame, frame, base, flags,
 			fOrientation);
 		return;
 	}
@@ -1930,10 +1930,10 @@ BSlider::_DrawTriangleThumb()
 	BRect frame = ThumbFrame();
 	BView *view = OffscreenView();
 
-	if (be_control_look != NULL) {
+	if (__be_control_look != NULL) {
 		rgb_color base = ui_color(B_PANEL_BACKGROUND_COLOR);
-		uint32 flags = be_control_look->Flags(this);
-		be_control_look->DrawSliderTriangle(view, frame, frame, base, flags,
+		uint32 flags =  __be_control_look->Flags(this);
+		__be_control_look->DrawSliderTriangle(view, frame, frame, base, flags,
 			fOrientation);
 		return;
 	}

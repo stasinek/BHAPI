@@ -47,12 +47,12 @@ BPositionIO::~BPositionIO()
 {
 }
 
-b_size_t BPositionIO::Read(void *buffer, size_t size)
+be_size_t BPositionIO::Read(void *buffer, size_t size)
 {
 	return ReadAt(0, buffer, size);
 }
 
-b_size_t BPositionIO::Write(const void *buffer, size_t size)
+be_size_t BPositionIO::Write(const void *buffer, size_t size)
 {
 	return WriteAt(0, buffer, size);
 }
@@ -67,7 +67,7 @@ BMallocIO::~BMallocIO()
 	if(fData != NULL) free(fData);
 }
 
-b_size_t BMallocIO::ReadAt(b_int64 pos, void *buffer, size_t size)
+be_size_t BMallocIO::ReadAt(__be_int64 pos, void *buffer, size_t size)
 {
 	if(buffer == NULL) return B_BAD_VALUE;
 
@@ -81,14 +81,14 @@ b_size_t BMallocIO::ReadAt(b_int64 pos, void *buffer, size_t size)
 	return size;
 }
 
-b_size_t BMallocIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
+be_size_t BMallocIO::WriteAt(__be_int64 pos, const void *buffer, size_t size)
 {
 	if(buffer == NULL) return B_BAD_VALUE;
 
 	if(size == 0 || BMallocIO::Seek(pos, B_SEEK_CUR) < 0) return 0;
 
 	if(fMallocSize >= fPosition + size ||
-	   BMallocIO::SetSize((b_int64)(fPosition + size)) == B_OK ||
+	   BMallocIO::SetSize((__be_int64)(fPosition + size)) == B_OK ||
 	   (fMallocSize >= fPosition ? (size = min_c(size, fMallocSize - fPosition)) > 0 : false))
 	{
 		if(memcpy(fData + fPosition, buffer, size) == NULL) return B_ERROR;
@@ -99,32 +99,32 @@ b_size_t BMallocIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
 	return B_NO_MEMORY;
 }
 
-b_int64 BMallocIO::Seek(b_int64 position, b_uint32 seek_mode)
+be_int64 BMallocIO::Seek(__be_int64 position,  __be_uint32 seek_mode)
 {
-	b_int64 retVal = B_INT64_CONSTANT(-1);
+	__be_int64 retVal = B_INT64_CONSTANT(-1);
 
 	switch(seek_mode)
 	{
 		case B_SEEK_SET:
-			if(!(position < 0 || position > (b_int64)~((size_t)0)))
+			if(!(position < 0 || position > (__be_int64)~((size_t)0)))
 				fPosition = (size_t)(retVal = position);
 			break;
 
 		case B_SEEK_CUR:
-			if(position < 0 ? (b_int64)fPosition >= -position : position <= (b_int64)(~((size_t)0) - fPosition))
+			if(position < 0 ? (__be_int64)fPosition >= -position : position <= (__be_int64)(~((size_t)0) - fPosition))
 			{
 				if(position < 0) fPosition -= (size_t)(-position);
 				else fPosition += (size_t)position;
-				retVal = (b_int64)fPosition;
+				retVal = (__be_int64)fPosition;
 			}
 			break;
 
 		case B_SEEK_END:
-			if(position < 0 ? (b_int64)fLength >= -position : position <= (b_int64)(~((size_t)0) - fLength))
+			if(position < 0 ? (__be_int64)fLength >= -position : position <= (__be_int64)(~((size_t)0) - fLength))
 			{
 				if(position < 0) fPosition = fLength - (size_t)(-position);
 				else fPosition = fLength + (size_t)position;
-				retVal = (b_int64)fPosition;
+				retVal = (__be_int64)fPosition;
 			}
 			break;
 
@@ -135,12 +135,12 @@ b_int64 BMallocIO::Seek(b_int64 position, b_uint32 seek_mode)
 	return retVal;
 }
 
-b_int64 BMallocIO::Position() const
+be_int64 BMallocIO::Position() const
 {
-	return (b_int64)fPosition;
+	return (__be_int64)fPosition;
 }
 
-b_status_t BMallocIO::SetSize(b_int64 size)
+status_t BMallocIO::SetSize(__be_int64 size)
 {
 	if(size < 0) return B_BAD_VALUE;
 	if(size == 0)
@@ -151,16 +151,16 @@ b_status_t BMallocIO::SetSize(b_int64 size)
 		return B_OK;
 	}
 
-	b_int64 alloc_size = size >= B_MAXINT64 - fBlockSize ?
-			    B_MAXINT64 : ((size + (b_int64)fBlockSize - 1) & ~((b_int64)fBlockSize - 1));
+	__be_int64 alloc_size = size >= B_MAXINT64 - fBlockSize ?
+			    B_MAXINT64 : ((size + (__be_int64)fBlockSize - 1) & ~((__be_int64)fBlockSize - 1));
 
-	if(alloc_size > (b_int64)~((size_t)0)) alloc_size = (b_int64)~((size_t)0);
-	if(alloc_size != (b_int64)fMallocSize)
+	if(alloc_size > (__be_int64)~((size_t)0)) alloc_size = (__be_int64)~((size_t)0);
+	if(alloc_size != (__be_int64)fMallocSize)
 	{
 		char *data = (char*)realloc(fData, (size_t)alloc_size);
 		if(data == NULL)
 		{
-			if(size > (b_int64)fMallocSize) return B_NO_MEMORY;
+			if(size > (__be_int64)fMallocSize) return B_NO_MEMORY;
 		}
 		else
 		{
@@ -205,7 +205,7 @@ BMemoryIO::~BMemoryIO()
 {
 }
 
-b_size_t BMemoryIO::ReadAt(b_int64 pos, void *buffer, size_t size)
+be_size_t BMemoryIO::ReadAt(__be_int64 pos, void *buffer, size_t size)
 {
 	if(buffer == NULL) return B_BAD_VALUE;
 
@@ -219,7 +219,7 @@ b_size_t BMemoryIO::ReadAt(b_int64 pos, void *buffer, size_t size)
 	return size;
 }
 
-b_size_t BMemoryIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
+be_size_t BMemoryIO::WriteAt(__be_int64 pos, const void *buffer, size_t size)
 {
 	if(fReadOnly) return B_NOT_ALLOWED;
 	if(buffer == NULL) return B_BAD_VALUE;
@@ -237,32 +237,32 @@ b_size_t BMemoryIO::WriteAt(b_int64 pos, const void *buffer, size_t size)
 	return 0;
 }
 
-b_int64 BMemoryIO::Seek(b_int64 position, b_uint32 seek_mode)
+be_int64 BMemoryIO::Seek(__be_int64 position,  __be_uint32 seek_mode)
 {
-	b_int64 retVal = B_INT64_CONSTANT(-1);
+	__be_int64 retVal = B_INT64_CONSTANT(-1);
 
 	switch(seek_mode)
 	{
 		case B_SEEK_SET:
-			if(!(position < 0 || position > (b_int64)fRealLen))
+			if(!(position < 0 || position > (__be_int64)fRealLen))
 				fPosition = (size_t)(retVal = position);
 			break;
 
 		case B_SEEK_CUR:
-			if(position < 0 ? (b_int64)fPosition >= -position : position <= (b_int64)(fRealLen - fPosition))
+			if(position < 0 ? (__be_int64)fPosition >= -position : position <= (__be_int64)(fRealLen - fPosition))
 			{
 				if(position < 0) fPosition -= (size_t)(-position);
 				else fPosition += (size_t)position;
-				retVal = (b_int64)fPosition;
+				retVal = (__be_int64)fPosition;
 			}
 			break;
 
 		case B_SEEK_END:
-			if(position < 0 ? (b_int64)fLen >= -position : position <= (b_int64)(fRealLen - fLen))
+			if(position < 0 ? (__be_int64)fLen >= -position : position <= (__be_int64)(fRealLen - fLen))
 			{
 				if(position < 0) fPosition = fLen - (size_t)(-position);
 				else fPosition = fLen + (size_t)position;
-				retVal = (b_int64)fPosition;
+				retVal = (__be_int64)fPosition;
 			}
 			break;
 
@@ -273,14 +273,14 @@ b_int64 BMemoryIO::Seek(b_int64 position, b_uint32 seek_mode)
 	return retVal;
 }
 
-b_int64 BMemoryIO::Position() const
+be_int64 BMemoryIO::Position() const
 {
-	return (b_int64)fPosition;
+	return (__be_int64)fPosition;
 }
 
-b_status_t BMemoryIO::SetSize(b_int64 size)
+status_t BMemoryIO::SetSize(__be_int64 size)
 {
-	if(size > (b_int64)fRealLen) return B_NO_MEMORY;
+	if(size > (__be_int64)fRealLen) return B_NO_MEMORY;
 	fLen = (size_t)size;
 	return B_OK;
 }

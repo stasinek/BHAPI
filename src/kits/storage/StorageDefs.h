@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -31,12 +31,35 @@
 #define BHAPI_STORAGE_DEFS_H
 
 #include "../support/SupportDefs.h"
+#include <posix/fcntl.h>
+#include <posix/sys/param.h>
+#include <posix/limits.h>
 
-typedef b_int32	b_dev_t;
+// Limits
+#define B_DEV_NAME_LENGTH		128
+#define B_FILE_NAME_LENGTH		NAME_MAX
+#define B_PATH_NAME_LENGTH		MAXPATHLEN
+#define B_ATTR_NAME_LENGTH		(B_FILE_NAME_LENGTH - 1)
+#define B_MIME_TYPE_LENGTH		(B_ATTR_NAME_LENGTH - 15)
+#define B_MAX_SYMLINKS			SYMLOOP_MAX
+
+typedef  __be_int32	b_dev_t;
+
+#ifdef __cplusplus
+namespace bhapi {
+#endif
+
+// Node Flavors
+enum node_flavor {
+    B_FILE_NODE			= 0x01,
+    B_SYMLINK_NODE		= 0x02,
+    B_DIRECTORY_NODE	= 0x04,
+    B_ANY_NODE			= 0x07
+};
 
 /* open_mode */
 enum {
-    B_READ_ONLY		=	0x00,	/* read only */
+    B_READ_ONLY         =	0x00,	/* read only */
     B_WRITE_ONLY		=	0x01,	/* write only */
     B_READ_WRITE		=	0x02,	/* read and write */
     B_FAIL_IF_EXISTS	=	0x04,	/* exclusive create */
@@ -47,26 +70,23 @@ enum {
 
 /* access_mode */
 enum {
-    B_USER_READ		=	0x01,
+    B_USER_READ         =	0x01,
     B_USER_WRITE		=	0x02,
-    B_USER_EXEC		=	0x04,
-    B_USER_ALL		=	0x07,
+    B_USER_EXEC         =	0x04,
+    B_USER_ALL          =	0x07,
     B_GROUP_READ		=	0x08,
     B_GROUP_WRITE		=	0x10,
     B_GROUP_EXEC		=	0x20,
-    B_GROUP_ALL		=	0x38,
+    B_GROUP_ALL         =	0x38,
     B_OTHERS_READ		=	0x40,
     B_OTHERS_WRITE		=	0x80,
     B_OTHERS_EXEC		=	0x0100,
     B_OTHERS_ALL		=	0x01c0,
 };
 
-/* node flavor */
-enum {
-    B_FILE_NODE		=	0x01,
-    B_DIRECTORY_NODE	=	0x02,
-    B_ANY_NODE		=	0xff,
-};
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* BHAPI_STORAGE_DEFS_H */
 

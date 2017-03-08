@@ -14,8 +14,8 @@
 #include <Message.h>
 #include <Messenger.h>
 #include <Path.h>
-#include <String.h>
-#include <SupportDefs.h>
+#include <StringClass.h>
+#include <Haiku.h>
 
 
 class PrintAddOnServer

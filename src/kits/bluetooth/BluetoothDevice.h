@@ -11,7 +11,7 @@
 
 #include <Message.h>
 #include <Messenger.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 namespace Bluetooth {

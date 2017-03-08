@@ -10,7 +10,7 @@
 #define _MULTIMON_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BScreen;

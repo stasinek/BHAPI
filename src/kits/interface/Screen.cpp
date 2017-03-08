@@ -34,7 +34,7 @@
 #include "../app/Application.h"
 #include "../support/Errors.h"
 
-BScreen::BScreen(b_uint32 id)
+BScreen::BScreen(__be_uint32 id)
 	: fID(id)
 {
 	// TODO
@@ -64,7 +64,7 @@ BScreen::IsValid() const
 }
 
 
-b_status_t
+status_t
 BScreen::SetToNext()
 {
 	// TODO
@@ -78,7 +78,7 @@ BScreen::Frame() const
 	BRect r;
 	if(fID == 0 && !(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL))
 	{
-		b_uint32 scrW = 0, scrH = 0;
+		__be_uint32 scrW = 0, scrH = 0;
 		bhapi::app->fGraphicsEngine->GetDesktopBounds(&scrW, &scrH);
 		if(scrW > 0 && scrH > 0) r.Set(0, 0, (float)(scrW - 1), (float)(scrH - 1));
 	}
@@ -86,7 +86,7 @@ BScreen::Frame() const
 }
 
 
-b_uint32
+be_uint32
 BScreen::ID() const
 {
 	return fID;

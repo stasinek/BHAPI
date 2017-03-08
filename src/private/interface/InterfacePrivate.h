@@ -10,7 +10,7 @@
 
 
 #include <GraphicsDefs.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 void _init_global_fonts_();

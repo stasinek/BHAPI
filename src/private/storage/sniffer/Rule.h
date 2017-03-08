@@ -9,7 +9,7 @@
 #ifndef _SNIFFER_RULE_H
 #define _SNIFFER_RULE_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <sys/types.h>
 #include <vector>

@@ -5,7 +5,7 @@
 #ifndef LOCATABLE_ENTRY_H
 #define LOCATABLE_ENTRY_H
 
-#include <String.h>
+#include <StringClass.h>
 
 #include <Referenceable.h>
 #include <util/DoublyLinkedList.h>

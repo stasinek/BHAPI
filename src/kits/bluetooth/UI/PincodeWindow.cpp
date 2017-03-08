@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <malloc.h>
 
-#include <String.h>
+#include <StringClass.h>
 #include <Message.h>
 #include <Application.h>
 
@@ -80,7 +80,7 @@ PincodeWindow::InitUI()
 	SetLayout(new BGroupLayout(B_HORIZONTAL));
 
 	fMessage = new BStringView("Pincode", "Please enter the pincode ...");
-	fMessage->SetFont(be_bold_font);
+	fMessage->SetFont(__be_bold_font);
 
 	fRemoteInfo = new BStringView("bdaddr","BD_ADDR: ");
 
@@ -137,7 +137,7 @@ PincodeWindow::MessageReceived(BMessage *msg)
 				OCF_PIN_CODE_REPLY));
 
 			// we reside in the server
-			if (be_app_messenger.SendMessage(&request, &reply) == B_OK) {
+			if (__be_app_messenger.SendMessage(&request, &reply) == B_OK) {
 				if (reply.FindInt8("status", &bt_status ) == B_OK ) {
 					PostMessage(B_QUIT_REQUESTED);
 				}
@@ -165,7 +165,7 @@ PincodeWindow::MessageReceived(BMessage *msg)
 			request.AddInt16("opcodeExpected", PACK_OPCODE(OGF_LINK_CONTROL,
 				OCF_PIN_CODE_NEG_REPLY));
 
-			if (be_app_messenger.SendMessage(&request, &reply) == B_OK) {
+			if (__be_app_messenger.SendMessage(&request, &reply) == B_OK) {
 				if (reply.FindInt8("status", &bt_status ) == B_OK ) {
 					PostMessage(B_QUIT_REQUESTED);
 				}

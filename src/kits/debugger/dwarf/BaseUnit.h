@@ -7,7 +7,7 @@
 #define BASE_UNIT_H
 
 
-#include <String.h>
+#include <StringClass.h>
 
 #include <Array.h>
 

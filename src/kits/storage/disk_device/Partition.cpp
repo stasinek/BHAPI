@@ -21,7 +21,7 @@
 #include <Partition.h>
 #include <PartitioningInfo.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 #include <Volume.h>
 
 #include <AutoDeleter.h>

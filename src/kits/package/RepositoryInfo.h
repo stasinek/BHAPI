@@ -9,7 +9,7 @@
 #include <Archivable.h>
 #include <Entry.h>
 #include <StringList.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <package/PackageArchitecture.h>
 

@@ -27,7 +27,7 @@
 #include <FindDirectory.h>
 #include <NodeMonitor.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <driver_settings.h>
 #include <image.h>
@@ -169,9 +169,9 @@ BTranslatorRoster::Private::Private()
 	}
 
 	// we're sneaking us into the BApplication
-	if (be_app != NULL && be_app->Lock()) {
-		be_app->AddHandler(this);
-		be_app->Unlock();
+	if (__be_app != NULL &&  __be_app->Lock()) {
+		__be_app->AddHandler(this);
+		__be_app->Unlock();
 	}
 }
 

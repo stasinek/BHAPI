@@ -132,7 +132,7 @@ PrintAddOnServer::Launch(BMessenger& messenger)
 {
 	team_id team;
 	status_t result =
-		be_roster->Launch(kPrintAddOnServerApplicationSignature,
+		__be_roster->Launch(kPrintAddOnServerApplicationSignature,
 			(BMessage*)NULL, &team);
 	if (result != B_OK) {
 		return result;

@@ -213,24 +213,24 @@ EXPORTBHAPI bool bhapi::utf8_is_token(const char *str)
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI b_int32 bhapi::utf8_strlen(const char *str)
+EXPORTBHAPI  __be_int32 bhapi::utf8_strlen(const char *str)
 {
     return bhapi::utf8_strlen_etc(str, -1);
 }
 //-----------------------------------------------------------------------------
 
-LOCALBHAPI b_int32 _e_utf8_strlen_etc(const char *str, b_int32 nbytes, bool check)
+LOCALBHAPI  __be_int32 _e_utf8_strlen_etc(const char *str,  __be_int32 nbytes, bool check)
 {
     const unsigned char *p = (const unsigned char *)str;
-    b_int32             uLen = 0;
+     __be_int32             uLen = 0;
 
-    b_int32 strLen = (b_int32) strlen(str);
+     __be_int32 strLen = (__be_int32) strlen(str);
     if (str == NULL || *str == 0 || nbytes == 0) return 0;
     if (nbytes < 0 || nbytes > strLen) nbytes = strLen;
 
     while (*p)
     {
-        b_int8  len = 0;
+         __be_int8  len = 0;
 
         if (*p < 0x80) len = 1; // 0xxxxxxx : ASCII
         else if (*p < 0xc0 || *p >= 0xfe)
@@ -251,7 +251,7 @@ LOCALBHAPI b_int32 _e_utf8_strlen_etc(const char *str, b_int32 nbytes, bool chec
         }
         else
         {
-            for (b_int8 i = len; i >= 0; i--)
+            for (__be_int8 i = len; i >= 0; i--)
             {
                 p++;
                 if (i <= 1) break;
@@ -259,7 +259,7 @@ LOCALBHAPI b_int32 _e_utf8_strlen_etc(const char *str, b_int32 nbytes, bool chec
             }
         }
 
-        if ((b_int32) (p - (const unsigned char *)str) > nbytes) break;
+        if ((__be_int32) (p - (const unsigned char *)str) > nbytes) break;
         if (len > 0 && len <= 4) uLen++;
     }
 
@@ -267,23 +267,23 @@ LOCALBHAPI b_int32 _e_utf8_strlen_etc(const char *str, b_int32 nbytes, bool chec
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI b_int32 bhapi::utf8_strlen_etc(const char *str, b_int32 nbytes)
+EXPORTBHAPI  __be_int32 bhapi::utf8_strlen_etc(const char *str,  __be_int32 nbytes)
 {
     return _e_utf8_strlen_etc(str, nbytes, true);
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI b_int32 bhapi::utf8_strlen_fast(const char *str, b_int32 nbytes)
+EXPORTBHAPI  __be_int32 bhapi::utf8_strlen_fast(const char *str,  __be_int32 nbytes)
 {
     return _e_utf8_strlen_etc(str, nbytes, false);
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI const char *bhapi::utf8_at(const char *str, b_int32 index, b_uint8 *length)
+EXPORTBHAPI const char *bhapi::utf8_at(const char *str,  __be_int32 index,  __be_uint8 *length)
 {
     const unsigned char *p = (const unsigned char *)str;
-    b_int32             uLen = 0;
-    b_int8              len = 0;
+     __be_int32             uLen = 0;
+     __be_int8              len = 0;
 
     if (length) *length = 0;
     if (index < 0 || str == NULL || strlen(str) <= (size_t) index) return NULL;
@@ -303,7 +303,7 @@ EXPORTBHAPI const char *bhapi::utf8_at(const char *str, b_int32 index, b_uint8 *
             len = 5;            // 111110xx : 5 bytes, it's invalid UTF8 util this wrote
         else if (*p < 0xfe)
             len = 6;            // 1111110x : 6 bytes, it's invalid UTF8 util this wrote
-        for (b_int8 i = len; i >= 0; i--)
+        for (__be_int8 i = len; i >= 0; i--)
         {
             p++;
             if (i <= 1) break;
@@ -322,7 +322,7 @@ EXPORTBHAPI const char *bhapi::utf8_at(const char *str, b_int32 index, b_uint8 *
         }
         else
             p -= len;
-        if (length) *length = (b_uint8) len;
+        if (length) *length = (__be_uint8) len;
         return (const char *)p;
     }
 
@@ -330,7 +330,7 @@ EXPORTBHAPI const char *bhapi::utf8_at(const char *str, b_int32 index, b_uint8 *
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI const char *bhapi::utf8_next(const char *str, b_uint8 *length)
+EXPORTBHAPI const char *bhapi::utf8_next(const char *str,  __be_uint8 *length)
 {
     const unsigned char *p = (const unsigned char *)str;
     bool                first = true;
@@ -340,7 +340,7 @@ EXPORTBHAPI const char *bhapi::utf8_next(const char *str, b_uint8 *length)
 
     while (*p)
     {
-        b_int8  len = 0;
+         __be_int8  len = 0;
 
         if (*p < 0x80) len = 1; // 0xxxxxxx : ASCII
         else if (*p < 0xc0 || *p >= 0xfe)
@@ -355,7 +355,7 @@ EXPORTBHAPI const char *bhapi::utf8_next(const char *str, b_uint8 *length)
             len = 5;            // 111110xx : 5 bytes, it's invalid UTF8 util this wrote
         else if (*p < 0xfe)
             len = 6;            // 1111110x : 6 bytes, it's invalid UTF8 util this wrote
-        for (b_int8 i = len; i >= 0; i--)
+        for (__be_int8 i = len; i >= 0; i--)
         {
             p++;
             if (i <= 1) break;
@@ -378,12 +378,12 @@ EXPORTBHAPI const char *bhapi::utf8_next(const char *str, b_uint8 *length)
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI b_unichar16 *bhapi::utf8_convert_to_unicode(const char *str, b_int32 length)
+EXPORTBHAPI unichar16 *bhapi::utf8_convert_to_unicode(const char *str,  __be_int32 length)
 {
-    b_unichar16 *unicode = (b_unichar16 *)malloc(sizeof(b_unichar16) * (size_t) (length + 1));
+    unichar16 *unicode = (unichar16 *)malloc(sizeof(unichar16) * (size_t) (length + 1));
     const unsigned char *p = (const unsigned char *)str;
-    b_unichar16         *tmp = unicode;
-    b_int32 strLen = (b_int32) strlen(str);
+    unichar16         *tmp = unicode;
+     __be_int32 strLen = (__be_int32) strlen(str);
 
     if (str == NULL || *str == 0 || length == 0) return NULL;
     if (length < 0 || length > strLen) length = strLen;
@@ -391,7 +391,7 @@ EXPORTBHAPI b_unichar16 *bhapi::utf8_convert_to_unicode(const char *str, b_int32
 
     while (*p)
     {
-        b_int8  len = 0;
+         __be_int8  len = 0;
 
         if (*p < 0x80) len = 1; // 0xxxxxxx : ASCII
         else if (*p < 0xc0 || *p >= 0xfe)
@@ -406,39 +406,39 @@ EXPORTBHAPI b_unichar16 *bhapi::utf8_convert_to_unicode(const char *str, b_int32
             len = 5;            // 111110xx : 5 bytes, it's invalid UTF8 util this wrote
         else if (*p < 0xfe)
             len = 6;            // 1111110x : 6 bytes, it's invalid UTF8 util this wrote
-        for (b_int8 i = len; i >= 0; i--)
+        for (__be_int8 i = len; i >= 0; i--)
         {
             p++;
             if (i <= 1) break;
             if (*p < 0x80 || *p >= 0xc0) i = len = 0;   // 0xxxxxxx or 11xxxxxx : invalid UTF8
         }
 
-        if ((b_int32) ((const char *)p - str) > length) break;
+        if ((__be_int32) ((const char *)p - str) > length) break;
 
         if (len > 0)
         {
             p -= len;
             if (len == 1)
             {
-                *tmp = (b_unichar16) (*p++);
+                *tmp = (unichar16) (*p++);
             }
             else if (len == 2)
             {
-                *tmp = ((b_unichar16) (*p++) & 0x1f) << 6;
-                *tmp |= (b_unichar16) (*p++) & 0x3f;
+                *tmp = ((unichar16) (*p++) & 0x1f) << 6;
+                *tmp |= (unichar16) (*p++) & 0x3f;
             }
             else if (len == 3)
             {
-                *tmp = ((b_unichar16) (*p++) & 0x0f) << 12;
-                *tmp |= ((b_unichar16) (*p++) & 0x3f) << 6;
-                *tmp |= (b_unichar16) (*p++) & 0x3f;
+                *tmp = ((unichar16) (*p++) & 0x0f) << 12;
+                *tmp |= ((unichar16) (*p++) & 0x3f) << 6;
+                *tmp |= (unichar16) (*p++) & 0x3f;
             }
             else if (len == 4)
             {
-                b_unichar32 tmp32 = ((b_unichar32) (*p++) & 0x07) << 18;
-                tmp32 |= ((b_unichar32) (*p++) & 0x3f) << 12;
-                tmp32 |= ((b_unichar32) (*p++) & 0x3f) << 6;
-                tmp32 |= (b_unichar32) (*p++) & 0x3f;
+                unichar32 tmp32 = ((unichar32) (*p++) & 0x07) << 18;
+                tmp32 |= ((unichar32) (*p++) & 0x3f) << 12;
+                tmp32 |= ((unichar32) (*p++) & 0x3f) << 6;
+                tmp32 |= (unichar32) (*p++) & 0x3f;
 
                 if (tmp32 > 0xffff)
                 {
@@ -466,12 +466,12 @@ EXPORTBHAPI b_unichar16 *bhapi::utf8_convert_to_unicode(const char *str, b_int32
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI b_unichar32 *bhapi::utf8_convert_to_utf32(const char *str, b_int32 length)
+EXPORTBHAPI unichar32 *bhapi::utf8_convert_to_utf32(const char *str,  __be_int32 length)
 {
     const unsigned char *p = (const unsigned char *)str;
-    b_unichar32 *unicode = (b_unichar32 *)malloc(sizeof(b_unichar32) * (size_t) (length + 1));
-    b_unichar32         *tmp = unicode;
-    b_int32 strLen = (b_int32) strlen(str);
+    unichar32 *unicode = (unichar32 *)malloc(sizeof(unichar32) * (size_t) (length + 1));
+    unichar32         *tmp = unicode;
+     __be_int32 strLen = (__be_int32) strlen(str);
 
     if (str == NULL || *str == 0 || length == 0) return NULL;
     if (length < 0 || length > strLen) length = strLen;
@@ -479,7 +479,7 @@ EXPORTBHAPI b_unichar32 *bhapi::utf8_convert_to_utf32(const char *str, b_int32 l
 
     while (*p)
     {
-        b_int8  len = 0;
+         __be_int8  len = 0;
 
         if (*p < 0x80) len = 1; // 0xxxxxxx : ASCII
         else if (*p < 0xc0 || *p >= 0xfe)
@@ -494,39 +494,39 @@ EXPORTBHAPI b_unichar32 *bhapi::utf8_convert_to_utf32(const char *str, b_int32 l
             len = 5;            // 111110xx : 5 bytes, it's invalid UTF8 util this wrote
         else if (*p < 0xfe)
             len = 6;            // 1111110x : 6 bytes, it's invalid UTF8 util this wrote
-        for (b_int8 i = len; i >= 0; i--)
+        for (__be_int8 i = len; i >= 0; i--)
         {
             p++;
             if (i <= 1) break;
             if (*p < 0x80 || *p >= 0xc0) i = len = 0;   // 0xxxxxxx or 11xxxxxx : invalid UTF8
         }
 
-        if ((b_int32) ((const char *)p - str) > length) break;
+        if ((__be_int32) ((const char *)p - str) > length) break;
 
         if (len > 0)
         {
             p -= len;
             if (len == 1)
             {
-                *tmp = (b_unichar32) (*p++);
+                *tmp = (unichar32) (*p++);
             }
             else if (len == 2)
             {
-                *tmp = ((b_unichar32) (*p++) & 0x1f) << 6;
-                *tmp |= (b_unichar32) (*p++) & 0x3f;
+                *tmp = ((unichar32) (*p++) & 0x1f) << 6;
+                *tmp |= (unichar32) (*p++) & 0x3f;
             }
             else if (len == 3)
             {
-                *tmp = ((b_unichar32) (*p++) & 0x0f) << 12;
-                *tmp |= ((b_unichar32) (*p++) & 0x3f) << 6;
-                *tmp |= (b_unichar32) (*p++) & 0x3f;
+                *tmp = ((unichar32) (*p++) & 0x0f) << 12;
+                *tmp |= ((unichar32) (*p++) & 0x3f) << 6;
+                *tmp |= (unichar32) (*p++) & 0x3f;
             }
             else if (len == 4)
             {
-                *tmp = ((b_unichar32) (*p++) & 0x07) << 18;
-                *tmp |= ((b_unichar32) (*p++) & 0x3f) << 12;
-                *tmp |= ((b_unichar32) (*p++) & 0x3f) << 6;
-                *tmp |= (b_unichar32) (*p++) & 0x3f;
+                *tmp = ((unichar32) (*p++) & 0x07) << 18;
+                *tmp |= ((unichar32) (*p++) & 0x3f) << 12;
+                *tmp |= ((unichar32) (*p++) & 0x3f) << 6;
+                *tmp |= (unichar32) (*p++) & 0x3f;
             }
             else
             {
@@ -544,16 +544,16 @@ EXPORTBHAPI b_unichar32 *bhapi::utf8_convert_to_utf32(const char *str, b_int32 l
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI b_int32 bhapi::unicode_strlen(const b_unichar16 *ustr)
+EXPORTBHAPI  __be_int32 bhapi::unicode_strlen(const unichar16 *ustr)
 {
     return bhapi::unicode_strlen_etc(ustr, -1, true);
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI b_int32 bhapi::unicode_strlen_etc(const b_unichar16 *ustr, b_int32 nchars, bool utf16_style)
+EXPORTBHAPI  __be_int32 bhapi::unicode_strlen_etc(const unichar16 *ustr,  __be_int32 nchars, bool utf16_style)
 {
-    b_int32             len = 0;
-    const b_unichar16   *p = ustr;
+     __be_int32             len = 0;
+    const unichar16   *p = ustr;
 
     if (ustr == NULL || nchars == 0) return 0;
 
@@ -565,7 +565,7 @@ EXPORTBHAPI b_int32 bhapi::unicode_strlen_etc(const b_unichar16 *ustr, b_int32 n
             if (*p >= 0xdc00 && *p <= 0xdfff)
             {
                 if (nchars > 0)
-                    if ((b_int32) (p - ustr) > nchars - 1) break;
+                    if ((__be_int32) (p - ustr) > nchars - 1) break;
                 p++;
                 len++;
             }
@@ -573,7 +573,7 @@ EXPORTBHAPI b_int32 bhapi::unicode_strlen_etc(const b_unichar16 *ustr, b_int32 n
         else
         {
             if (nchars > 0)
-                if ((b_int32) (p - ustr) > nchars - 1) break;
+                if ((__be_int32) (p - ustr) > nchars - 1) break;
             p++;
             len++;
         }
@@ -583,10 +583,10 @@ EXPORTBHAPI b_int32 bhapi::unicode_strlen_etc(const b_unichar16 *ustr, b_int32 n
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI const b_unichar16 *bhapi::unicode_at(const b_unichar16 *ustr, b_int32 index, bool *utf16)
+EXPORTBHAPI const unichar16 *bhapi::unicode_at(const unichar16 *ustr,  __be_int32 index, bool *utf16)
 {
-    b_int32             len = 0;
-    const b_unichar16   *p = ustr;
+     __be_int32             len = 0;
+    const unichar16   *p = ustr;
 
     if (utf16) *utf16 = false;
     if (ustr == NULL || index < 0) return NULL;
@@ -624,9 +624,9 @@ EXPORTBHAPI const b_unichar16 *bhapi::unicode_at(const b_unichar16 *ustr, b_int3
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI const b_unichar16 *bhapi::unicode_next(const b_unichar16 *ustr, bool *utf16)
+EXPORTBHAPI const unichar16 *bhapi::unicode_next(const unichar16 *ustr, bool *utf16)
 {
-    const b_unichar16   *p = ustr;
+    const unichar16   *p = ustr;
     bool                first = true;
 
     if (utf16) *utf16 = false;
@@ -671,12 +671,12 @@ EXPORTBHAPI const b_unichar16 *bhapi::unicode_next(const b_unichar16 *ustr, bool
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI char *bhapi::unicode_convert_to_utf8(const b_unichar16 *str, b_int32 ulength)
+EXPORTBHAPI char *bhapi::unicode_convert_to_utf8(const unichar16 *str,  __be_int32 ulength)
 {
     BString             utf8;
 
-    b_int32             ulen = 0;
-    const b_unichar16   *p = str;
+     __be_int32             ulen = 0;
+    const unichar16   *p = str;
 
     if (str == NULL || *str == 0 || ulength == 0) return NULL;
 
@@ -687,20 +687,20 @@ EXPORTBHAPI char *bhapi::unicode_convert_to_utf8(const b_unichar16 *str, b_int32
             p++;
             if (*p >= 0xdc00 && *p <= 0xdfff)
             {
-                b_uint8 ustr[5];
-                b_uint32 tmp = (b_uint32) (*p++ &0x03ff) << 10;
+                 __be_uint8 ustr[5];
+                 __be_uint32 tmp = (__be_uint32) (*p++ &0x03ff) << 10;
                 p--;
 
                 // convert UTF-16 to UCS4
-                tmp |= (b_uint32) (*p++ &0x03ff);
+                tmp |= (__be_uint32) (*p++ &0x03ff);
                 tmp += 0x10000;
 
                 // convert UCS4 to UTF-8
                 bzero(ustr, sizeof(ustr));
-                ustr[3] = 0x80 | (b_uint8) (tmp & 0x3f);
-                ustr[2] = 0x80 | (b_uint8) ((tmp >> 6) & 0x3f);
-                ustr[1] = 0x80 | (b_uint8) ((tmp >> 12) & 0x3f);
-                ustr[0] = 0xf0 | (b_uint8) ((tmp >> 18) & 0x07);
+                ustr[3] = 0x80 | (__be_uint8) (tmp & 0x3f);
+                ustr[2] = 0x80 | (__be_uint8) ((tmp >> 6) & 0x3f);
+                ustr[1] = 0x80 | (__be_uint8) ((tmp >> 12) & 0x3f);
+                ustr[0] = 0xf0 | (__be_uint8) ((tmp >> 18) & 0x07);
                 utf8.Append((const char *)ustr);
 
                 ulen++;
@@ -708,10 +708,10 @@ EXPORTBHAPI char *bhapi::unicode_convert_to_utf8(const b_unichar16 *str, b_int32
         }
         else
         {
-            b_uint8     len;
-            b_uint16    tmp = *p++;
+             __be_uint8     len;
+             __be_uint16    tmp = *p++;
 
-            b_uint8     ustr[4];
+             __be_uint8     ustr[4];
             if (*p < 0x80)
                 len = 1;
             else if (*p < 0x0800)
@@ -723,18 +723,18 @@ EXPORTBHAPI char *bhapi::unicode_convert_to_utf8(const b_unichar16 *str, b_int32
 
             if (len == 1)
             {
-                ustr[0] = (b_uint8) tmp;
+                ustr[0] = (__be_uint8) tmp;
             }
             else if (len == 2)
             {
-                ustr[1] = 0x80 | (b_uint8) (tmp & 0x3f);
-                ustr[0] = 0xc0 | (b_uint8) ((tmp >> 6) & 0x1f);
+                ustr[1] = 0x80 | (__be_uint8) (tmp & 0x3f);
+                ustr[0] = 0xc0 | (__be_uint8) ((tmp >> 6) & 0x1f);
             }
             else    // len == 3
             {
-                ustr[2] = 0x80 | (b_uint8) (tmp & 0x3f);
-                ustr[1] = 0x80 | (b_uint8) ((tmp >> 6) & 0x3f);
-                ustr[0] = 0xe0 | (b_uint8) ((tmp >> 12) & 0x0f);
+                ustr[2] = 0x80 | (__be_uint8) (tmp & 0x3f);
+                ustr[1] = 0x80 | (__be_uint8) ((tmp >> 6) & 0x3f);
+                ustr[0] = 0xe0 | (__be_uint8) ((tmp >> 12) & 0x0f);
             }
 
             utf8.Append((const char *)ustr);
@@ -747,12 +747,12 @@ EXPORTBHAPI char *bhapi::unicode_convert_to_utf8(const b_unichar16 *str, b_int32
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI b_unichar32 *bhapi::unicode_convert_to_utf32(const b_unichar16 *str, b_int32 ulength)
+EXPORTBHAPI unichar32 *bhapi::unicode_convert_to_utf32(const unichar16 *str,  __be_int32 ulength)
 {
-    const b_unichar16   *p = str;
-    b_int32             ulen = 0;
-    b_int32 unicode_length = (ulength < 0 ? bhapi::unicode_strlen(str) : ulength);
-    b_unichar32 *utf32 = (b_unichar32 *)malloc(sizeof(b_unichar32) * (size_t) (unicode_length + 1));
+    const unichar16   *p = str;
+     __be_int32             ulen = 0;
+     __be_int32 unicode_length = (ulength < 0 ? bhapi::unicode_strlen(str) : ulength);
+    unichar32 *utf32 = (unichar32 *)malloc(sizeof(unichar32) * (size_t) (unicode_length + 1));
 
     if (str == NULL || *str == 0 || ulength == 0) return NULL;
     if (unicode_length <= 0) return NULL;
@@ -765,11 +765,11 @@ EXPORTBHAPI b_unichar32 *bhapi::unicode_convert_to_utf32(const b_unichar16 *str,
             p++;
             if (*p >= 0xdc00 && *p <= 0xdfff)
             {
-                b_uint32    tmp = ((b_uint32) (*p++ &0x03ff) << 10);
+                 __be_uint32    tmp = ((__be_uint32) (*p++ &0x03ff) << 10);
                 p--;
 
                 // convert UTF-16 to UCS4
-                tmp |= (b_uint32) (*p++ &0x03ff);
+                tmp |= (__be_uint32) (*p++ &0x03ff);
                 tmp += 0x10000;
 
                 utf32[ulen++] = tmp;
@@ -779,7 +779,7 @@ EXPORTBHAPI b_unichar32 *bhapi::unicode_convert_to_utf32(const b_unichar16 *str,
         }
         else
         {
-            utf32[ulen++] = (b_unichar32) (*p++);
+            utf32[ulen++] = (unichar32) (*p++);
         }
     }
 
@@ -789,23 +789,23 @@ EXPORTBHAPI b_unichar32 *bhapi::unicode_convert_to_utf32(const b_unichar16 *str,
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI b_int32 bhapi::utf32_strlen(const b_unichar32 *ustr)
+EXPORTBHAPI  __be_int32 bhapi::utf32_strlen(const unichar32 *ustr)
 {
     return bhapi::utf32_strlen_etc(ustr, -1);
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI b_int32 bhapi::utf32_strlen_etc(const b_unichar32 *ustr, b_int32 nchars)
+EXPORTBHAPI  __be_int32 bhapi::utf32_strlen_etc(const unichar32 *ustr,  __be_int32 nchars)
 {
-    b_int32             len = 0;
-    const b_unichar32   *p = ustr;
+     __be_int32             len = 0;
+    const unichar32   *p = ustr;
 
     if (ustr == NULL || nchars == 0) return 0;
 
     while (*p)
     {
         if (nchars > 0)
-            if ((b_int32) (p - ustr) > nchars - 1) break;
+            if ((__be_int32) (p - ustr) > nchars - 1) break;
         if (*p <= 0x10ffff) len++;
         p++;
     }
@@ -814,10 +814,10 @@ EXPORTBHAPI b_int32 bhapi::utf32_strlen_etc(const b_unichar32 *ustr, b_int32 nch
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI const b_unichar32 *bhapi::utf32_at(const b_unichar32 *ustr, b_int32 index)
+EXPORTBHAPI const unichar32 *bhapi::utf32_at(const unichar32 *ustr,  __be_int32 index)
 {
-    b_int32             len = 0;
-    const b_unichar32   *p = ustr;
+     __be_int32             len = 0;
+    const unichar32   *p = ustr;
 
     if (ustr == NULL || index < 0) return NULL;
 
@@ -838,9 +838,9 @@ EXPORTBHAPI const b_unichar32 *bhapi::utf32_at(const b_unichar32 *ustr, b_int32 
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI const b_unichar32 *bhapi::utf32_next(const b_unichar32 *ustr)
+EXPORTBHAPI const unichar32 *bhapi::utf32_next(const unichar32 *ustr)
 {
-    const b_unichar32   *p = ustr;
+    const unichar32   *p = ustr;
 
     if (ustr == NULL) return NULL;
 
@@ -854,11 +854,11 @@ EXPORTBHAPI const b_unichar32 *bhapi::utf32_next(const b_unichar32 *ustr)
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI char *bhapi::utf32_convert_to_utf8(const b_unichar32 *str, b_int32 ulength)
+EXPORTBHAPI char *bhapi::utf32_convert_to_utf8(const unichar32 *str,  __be_int32 ulength)
 {
     BString             utf8;
-    b_int32             ulen = 0;
-    const b_unichar32   *p = str;
+     __be_int32             ulen = 0;
+    const unichar32   *p = str;
 
     if (str == NULL || *str == 0 || ulength == 0) return NULL;
 
@@ -866,25 +866,25 @@ EXPORTBHAPI char *bhapi::utf32_convert_to_utf8(const b_unichar32 *str, b_int32 u
     {
         if (*p > 0xffff && *p <= 0x10ffff)
         {
-            b_uint32    tmp = *p;
+             __be_uint32    tmp = *p;
 
             // convert UCS4 to UTF-8
-            b_uint8     ustr[5];
+             __be_uint8     ustr[5];
             bzero(ustr, sizeof(ustr));
-            ustr[3] = 0x80 | (b_uint8) (tmp & 0x3f);
-            ustr[2] = 0x80 | (b_uint8) ((tmp >> 6) & 0x3f);
-            ustr[1] = 0x80 | (b_uint8) ((tmp >> 12) & 0x3f);
-            ustr[0] = 0xf0 | (b_uint8) ((tmp >> 18) & 0x07);
+            ustr[3] = 0x80 | (__be_uint8) (tmp & 0x3f);
+            ustr[2] = 0x80 | (__be_uint8) ((tmp >> 6) & 0x3f);
+            ustr[1] = 0x80 | (__be_uint8) ((tmp >> 12) & 0x3f);
+            ustr[0] = 0xf0 | (__be_uint8) ((tmp >> 18) & 0x07);
             utf8.Append((const char *)ustr);
 
             ulen++;
         }
         else if (*p <= 0xffff)
         {
-            b_uint8     len;
-            b_uint32    tmp = *p;
+             __be_uint8     len;
+             __be_uint32    tmp = *p;
 
-            b_uint8     ustr[4];
+             __be_uint8     ustr[4];
             if (*p < 0x80)
                 len = 1;
             else if (*p < 0x0800)
@@ -896,18 +896,18 @@ EXPORTBHAPI char *bhapi::utf32_convert_to_utf8(const b_unichar32 *str, b_int32 u
 
             if (len == 1)
             {
-                ustr[0] = (b_uint8) tmp;
+                ustr[0] = (__be_uint8) tmp;
             }
             else if (len == 2)
             {
-                ustr[1] = 0x80 | (b_uint8) (tmp & 0x3f);
-                ustr[0] = 0xc0 | (b_uint8) ((tmp >> 6) & 0x1f);
+                ustr[1] = 0x80 | (__be_uint8) (tmp & 0x3f);
+                ustr[0] = 0xc0 | (__be_uint8) ((tmp >> 6) & 0x1f);
             }
             else    // len == 3
             {
-                ustr[2] = 0x80 | (b_uint8) (tmp & 0x3f);
-                ustr[1] = 0x80 | (b_uint8) ((tmp >> 6) & 0x3f);
-                ustr[0] = 0xe0 | (b_uint8) ((tmp >> 12) & 0x0f);
+                ustr[2] = 0x80 | (__be_uint8) (tmp & 0x3f);
+                ustr[1] = 0x80 | (__be_uint8) ((tmp >> 6) & 0x3f);
+                ustr[0] = 0xe0 | (__be_uint8) ((tmp >> 12) & 0x0f);
             }
 
             utf8.Append((const char *)ustr);
@@ -922,13 +922,13 @@ EXPORTBHAPI char *bhapi::utf32_convert_to_utf8(const b_unichar32 *str, b_int32 u
 }
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI b_unichar16 *bhapi::utf32_convert_to_unicode(const b_unichar32 *str, b_int32 ulength)
+EXPORTBHAPI unichar16 *bhapi::utf32_convert_to_unicode(const unichar32 *str,  __be_int32 ulength)
 {
-    b_int32 utf32_length = (ulength < 0 ? bhapi::utf32_strlen(str) : ulength);
-    b_unichar16 *unicode = (b_unichar16 *)malloc(sizeof(b_unichar16) * (size_t) (2 * utf32_length + 1));
-    b_int32             ulen = 0;
-    const b_unichar32   *p = str;
-    b_unichar16         *tmp = unicode;
+     __be_int32 utf32_length = (ulength < 0 ? bhapi::utf32_strlen(str) : ulength);
+    unichar16 *unicode = (unichar16 *)malloc(sizeof(unichar16) * (size_t) (2 * utf32_length + 1));
+     __be_int32             ulen = 0;
+    const unichar32   *p = str;
+    unichar16         *tmp = unicode;
 
     if (str == NULL || *str == 0 || ulength == 0) return NULL;
     if (utf32_length <= 0) return NULL;
@@ -944,7 +944,7 @@ EXPORTBHAPI b_unichar16 *bhapi::utf32_convert_to_unicode(const b_unichar32 *str,
         }
         else if (*p <= 0xffff)
         {
-            *tmp++ = (b_unichar16) (*p);
+            *tmp++ = (unichar16) (*p);
             ulen++;
         }
 

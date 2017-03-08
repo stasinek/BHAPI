@@ -7,7 +7,7 @@
 
 
 #include <StorageDefs.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <arch_real_time_data.h>
 

@@ -8,7 +8,7 @@
 
 
 #include <image.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include "StackFrameDebugInfo.h"
 

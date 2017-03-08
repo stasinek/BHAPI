@@ -5,7 +5,7 @@
 #ifndef IMAGE_DEBUG_INFO_PROVIDER_H
 #define IMAGE_DEBUG_INFO_PROVIDER_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class Image;

@@ -21,11 +21,11 @@ using namespace BPrivate;
 
 BMidiSynth::BMidiSynth()
 {
-	if (be_synth == NULL) {
+	if (__be_synth == NULL) {
 		new BSynth();
 	}
 
-	be_synth->fClientCount++;
+	__be_synth->fClientCount++;
 
 	fInputEnabled = false;
 	fTranspose = 0;
@@ -35,10 +35,10 @@ BMidiSynth::BMidiSynth()
 
 BMidiSynth::~BMidiSynth()
 {
-	be_synth->fClientCount--;
-	if (be_synth->fClientCount == 0) {
-		delete be_synth;
-		be_synth = NULL;
+	__be_synth->fClientCount--;
+	if (__be_synth->fClientCount == 0) {
+		delete  __be_synth;
+		__be_synth = NULL;
 	}
 }
 
@@ -50,7 +50,7 @@ BMidiSynth::EnableInput(bool enable, bool loadInstruments)
 	fInputEnabled = enable;
 	
 	if (loadInstruments) {
-		err = be_synth->fSynth->LoadAllInstruments();
+		err =  __be_synth->fSynth->LoadAllInstruments();
 	}
 
 	return err;
@@ -67,14 +67,14 @@ BMidiSynth::IsInputEnabled() const
 void 
 BMidiSynth::SetVolume(double volume)
 {
-	be_synth->fSynth->SetVolume(volume);
+	__be_synth->fSynth->SetVolume(volume);
 }
 
 
 double 
 BMidiSynth::Volume() const
 {
-	return be_synth->fSynth->Volume();
+	return  __be_synth->fSynth->Volume();
 }
 
 
@@ -123,28 +123,28 @@ BMidiSynth::GetSoloMap(char* pChannels) const
 status_t 
 BMidiSynth::LoadInstrument(int16 instrument)
 {
-	return be_synth->fSynth->LoadInstrument(instrument);
+	return  __be_synth->fSynth->LoadInstrument(instrument);
 }
 
 
 status_t 
 BMidiSynth::UnloadInstrument(int16 instrument)
 {
-	return be_synth->fSynth->UnloadInstrument(instrument);
+	return  __be_synth->fSynth->UnloadInstrument(instrument);
 }
 
 
 status_t 
 BMidiSynth::RemapInstrument(int16 from, int16 to)
 {
-	return be_synth->fSynth->RemapInstrument(from, to);
+	return  __be_synth->fSynth->RemapInstrument(from, to);
 }
 
 
 void 
 BMidiSynth::FlushInstrumentCache(bool startStopCache)
 {
-	be_synth->fSynth->FlushInstrumentCache(startStopCache);
+	__be_synth->fSynth->FlushInstrumentCache(startStopCache);
 }
 
 
@@ -160,7 +160,7 @@ BMidiSynth::NoteOff(
 	uchar channel, uchar note, uchar velocity, uint32 time)
 {
 	if (fInputEnabled)
-		be_synth->fSynth->NoteOff(channel, note + fTranspose, velocity, time);
+		__be_synth->fSynth->NoteOff(channel, note + fTranspose, velocity, time);
 }
 
 
@@ -169,7 +169,7 @@ BMidiSynth::NoteOn(
 	uchar channel, uchar note, uchar velocity, uint32 time)
 {
 	if (fInputEnabled)
-		be_synth->fSynth->NoteOn(channel, note + fTranspose, velocity, time);
+		__be_synth->fSynth->NoteOn(channel, note + fTranspose, velocity, time);
 }
 
 
@@ -178,7 +178,7 @@ BMidiSynth::KeyPressure(
 	uchar channel, uchar note, uchar pressure, uint32 time)
 {
 	if (fInputEnabled)
-		be_synth->fSynth->KeyPressure(
+		__be_synth->fSynth->KeyPressure(
 			channel, note + fTranspose, pressure, time);
 }
 
@@ -188,7 +188,7 @@ BMidiSynth::ControlChange(
 	uchar channel, uchar controlNumber, uchar controlValue, uint32 time)
 {
 	if (fInputEnabled)
-		be_synth->fSynth->ControlChange(
+		__be_synth->fSynth->ControlChange(
 			channel, controlNumber, controlValue, time);
 }
 
@@ -198,7 +198,7 @@ BMidiSynth::ProgramChange(
 	uchar channel, uchar programNumber, uint32 time)
 {
 	if (fInputEnabled)
-		be_synth->fSynth->ProgramChange(channel, programNumber, time);
+		__be_synth->fSynth->ProgramChange(channel, programNumber, time);
 }
 
 
@@ -206,7 +206,7 @@ void
 BMidiSynth::ChannelPressure(uchar channel, uchar pressure, uint32 time)
 {
 	if (fInputEnabled)
-		be_synth->fSynth->ChannelPressure(channel, pressure, time);
+		__be_synth->fSynth->ChannelPressure(channel, pressure, time);
 }
 
 
@@ -214,7 +214,7 @@ void
 BMidiSynth::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
 {
 	if (fInputEnabled)
-		be_synth->fSynth->PitchBend(channel, lsb, msb, time);
+		__be_synth->fSynth->PitchBend(channel, lsb, msb, time);
 }
 
 
@@ -222,7 +222,7 @@ void
 BMidiSynth::AllNotesOff(bool justChannel, uint32 time)
 {
 	if (fInputEnabled)
-		be_synth->fSynth->AllNotesOff(justChannel, time);
+		__be_synth->fSynth->AllNotesOff(justChannel, time);
 }
 
 

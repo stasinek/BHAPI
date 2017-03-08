@@ -27,7 +27,7 @@
 #define __CLIPPING_H
 
 #include <Region.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 /*	Some methods to manipulate clipping_rects.

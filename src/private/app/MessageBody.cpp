@@ -37,33 +37,33 @@ class LOCALBHAPI BMessageNode
 {
 public:
 	BMessageNode(const char *name);
-	BMessageNode(b_type_code type);
+	BMessageNode(type_code type);
 	~BMessageNode();
 
 	const char	*Name() const;
-	b_type_code	TypeCode() const;
+	type_code	TypeCode() const;
 
 	bool		AddItem(BMessageItem *item);
 	void		RemoveItem(BMessageItem *item);
 
-	b_int32		CountItems() const;
-	b_int32		IndexOf(BMessageItem *item) const;
-	BMessageItem	*ItemAt(b_int32 index) const;
+	__be_int32		CountItems() const;
+	__be_int32		IndexOf(BMessageItem *item) const;
+	BMessageItem	*ItemAt(__be_int32 index) const;
 
 private:
 	char *fName;
-	b_type_code fType;
+	type_code fType;
 	BList fItems;
 };
 
 
 BMessageNode::BMessageNode(const char *name)
-	: fName(bhapi::strdup(name)), fType((b_type_code)0)
+	: fName(bhapi::strdup(name)), fType((type_code)0)
 {
 }
 
 
-BMessageNode::BMessageNode(b_type_code type)
+BMessageNode::BMessageNode(type_code type)
 	: fName(NULL), fType(type)
 {
 }
@@ -82,7 +82,7 @@ BMessageNode::Name() const
 }
 
 
-b_type_code
+type_code
 BMessageNode::TypeCode() const
 {
 	return fType;
@@ -104,14 +104,14 @@ BMessageNode::RemoveItem(BMessageItem *item)
 }
 
 
-b_int32
+be_int32
 BMessageNode::CountItems() const
 {
 	return fItems.CountItems();
 }
 
 
-b_int32
+be_int32
 BMessageNode::IndexOf(BMessageItem *item) const
 {
 	return fItems.IndexOf(item);
@@ -119,7 +119,7 @@ BMessageNode::IndexOf(BMessageItem *item) const
 
 
 BMessageItem*
-BMessageNode::ItemAt(b_int32 index) const
+BMessageNode::ItemAt(__be_int32 index) const
 {
 	return (BMessageItem*)fItems.ItemAt(index);
 }
@@ -183,7 +183,7 @@ BMessageBody::~BMessageBody()
 
 
 bool
-BMessageBody::AddItem(const char *name, b_type_code type, BMessageItem *item)
+BMessageBody::AddItem(const char *name, type_code type, BMessageItem *item)
 {
 	// TODO
 	BHAPI_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);
@@ -199,14 +199,14 @@ BMessageBody::RemoveItem(BMessageItem *item)
 }
 
 
-b_int32
+be_int32
 BMessageBody::CountNames() const
 {
 	return(fNames == NULL ? 0 : fNames->CountItems());
 }
 
 
-b_int32
+be_int32
 BMessageBody::CountTypes() const
 {
 	return(fTypes == NULL ? 0 : fTypes->CountItems());
@@ -232,7 +232,7 @@ BMessageBody::Flatten(char *buffer, size_t size) const
 
 
 bool
-BMessageBody::Flatten(BDataIO *stream, b_size_t *size) const
+BMessageBody::Flatten(BDataIO *stream,  __be_size_t *size) const
 {
 	// TODO
 	BHAPI_WARNING("[PRIVATE]: %s --- TODO", __PRETTY_FUNCTION__);

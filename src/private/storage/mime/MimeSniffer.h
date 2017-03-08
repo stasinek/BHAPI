@@ -9,7 +9,7 @@
 #define _MIME_MIME_SNIFFER_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BFile;

@@ -6,7 +6,7 @@
 #define JSON_H
 
 #include <Message.h>
-#include <String.h>
+#include <StringClass.h>
 
 namespace BPrivate {
 

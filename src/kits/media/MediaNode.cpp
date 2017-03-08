@@ -35,7 +35,7 @@
 #include <FileInterface.h>
 #include <MediaRoster.h>
 #include <MediaNode.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <TimeSource.h>
 
 #include <string.h>

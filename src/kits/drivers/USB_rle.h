@@ -6,7 +6,7 @@
 #define _USB_RLE_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct _usbd_param_hdr;

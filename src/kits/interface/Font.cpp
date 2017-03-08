@@ -50,8 +50,8 @@ typedef struct font_info {
     float spacing;
     float shear;
     bool bold;
-    b_int32 family_index;
-    b_int32 style_index;
+     __be_int32 family_index;
+     __be_int32 style_index;
 
     font_info()
     {
@@ -170,11 +170,11 @@ typedef struct font_info {
         return true;
     }
 
-    b_uint32 FamilyAndStyle() const
+     __be_uint32 FamilyAndStyle() const
     {
         if(family_index < 0 || style_index < 0) return B_MAXUINT32;
-        b_uint32 fIndex = (b_uint32)family_index;
-        b_uint32 sIndex = (b_uint32)style_index;
+         __be_uint32 fIndex = (__be_uint32)family_index;
+         __be_uint32 sIndex = (__be_uint32)style_index;
         return((fIndex << 16) | sIndex);
     }
 
@@ -232,7 +232,7 @@ typedef struct font_info {
         return bold;
     }
 
-    float StringWidth(const char *string, b_int32 length, float tabWidth) const
+    float StringWidth(const char *string,  __be_int32 length, float tabWidth) const
     {
         if(string == NULL || *string == 0 || length == 0) return 0;
 
@@ -260,9 +260,9 @@ typedef struct font_info {
                            (tabWidth - 1.f) * spacing_width;
                 }
 
-                for(b_int32 aOffset = 0; aOffset < aStr.Length(); aOffset++)
+                for(__be_int32 aOffset = 0; aOffset < aStr.Length(); aOffset++)
                 {
-                    b_int32 oldOffset = aOffset, len;
+                     __be_int32 oldOffset = aOffset, len;
                     aOffset = aStr.FindFirst("\t", aOffset);
 
                     len = (aOffset < 0 ? aStr.Length() : aOffset) - oldOffset;
@@ -283,11 +283,11 @@ typedef struct font_info {
         return width;
     }
 
-    float* CharWidths(const char *string, b_int32 length, b_int32 *nChars, float tabWidth) const
+    float* CharWidths(const char *string,  __be_int32 length,  __be_int32 *nChars, float tabWidth) const
     {
         if(string == NULL || *string == 0 || length == 0 || nChars == NULL) return NULL;
 
-        b_int32 strLen = (b_int32)strlen(string);
+         __be_int32 strLen = (__be_int32)strlen(string);
         if(length < 0 || length > strLen) length = strLen;
 
         float *widths = new float[length];
@@ -295,9 +295,9 @@ typedef struct font_info {
 
         bhapi::font_info_locker.Lock();
 
-        b_uint8 len = 0;
+         __be_uint8 len = 0;
         const char *ch = bhapi::utf8_at(string, 0, &len);
-        b_int32 count = 0;
+         __be_int32 count = 0;
 
         if(engine)
         {
@@ -320,7 +320,7 @@ typedef struct font_info {
             }
             else if(tabWidth == 0 || *ch != '\t')
             {
-                widths[count] = engine->StringWidth(ch, size, spacing, shear, bold, (b_int32)len);
+                widths[count] = engine->StringWidth(ch, size, spacing, shear, bold, (__be_int32)len);
             }
             else
             {
@@ -577,7 +577,7 @@ BFont::IsScalable() const
 
 
 bool
-BFont::HasFixedSize(b_int32 *count) const
+BFont::HasFixedSize(__be_int32 *count) const
 {
     BFontEngine *engine = Engine();
     return(engine ? engine->HasFixedSize(count) : false);
@@ -585,14 +585,14 @@ BFont::HasFixedSize(b_int32 *count) const
 
 
 bool
-BFont::GetFixedSize(float *size, b_int32 index) const
+BFont::GetFixedSize(float *size,  __be_int32 index) const
 {
     BFontEngine *engine = Engine();
     return(engine ? engine->GetFixedSize(size, index) : false);
 }
 
 
-b_status_t
+status_t
 BFont::SetFamilyAndStyle(const bhapi::font_family family, const bhapi::font_style style)
 {
     bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
@@ -605,25 +605,25 @@ BFont::SetFamilyAndStyle(const bhapi::font_family family, const bhapi::font_styl
 }
 
 
-b_status_t
-BFont::SetFamilyAndStyle(b_uint32 code)
+status_t
+BFont::SetFamilyAndStyle(__be_uint32 code)
 {
     if(code == B_MAXUINT32) return B_BAD_VALUE;
 
     bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
     if(!fontInfo) return B_ERROR;
 
-    b_uint32 familyIndex = code >> 16;
-    b_uint32 styleIndex = code & 0xffff;
+     __be_uint32 familyIndex = code >> 16;
+     __be_uint32 styleIndex = code & 0xffff;
 
-    BFontEngine *engine = bhapi::get_font_engine((b_int32)familyIndex, (b_int32)styleIndex);
+    BFontEngine *engine = bhapi::get_font_engine((__be_int32)familyIndex, (__be_int32)styleIndex);
     if(!engine) return B_ERROR;
 
     return(fontInfo->SetEngine(engine) ? B_OK : B_ERROR);
 }
 
 
-b_status_t
+status_t
 BFont::GetFamilyAndStyle(bhapi::font_family *family, bhapi::font_style *style) const
 {
     if(!family || !style) return B_BAD_VALUE;
@@ -631,16 +631,16 @@ BFont::GetFamilyAndStyle(bhapi::font_family *family, bhapi::font_style *style) c
     bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
     if(!fontInfo) return B_ERROR;
 
-    b_uint32 code = fontInfo->FamilyAndStyle();
+     __be_uint32 code = fontInfo->FamilyAndStyle();
     if(code == B_MAXUINT32) return B_ERROR;
 
-    b_uint32 familyIndex = code >> 16;
-    b_uint32 styleIndex = code & 0xffff;
+     __be_uint32 familyIndex = code >> 16;
+     __be_uint32 styleIndex = code & 0xffff;
 
     const char *fFamily = NULL;
     const char *fStyle = NULL;
-    bhapi::get_font_family((b_int32)familyIndex, &fFamily);
-    bhapi::get_font_style(fFamily, (b_int32)styleIndex, &fStyle);
+    bhapi::get_font_family((__be_int32)familyIndex, &fFamily);
+    bhapi::get_font_style(fFamily, (__be_int32)styleIndex, &fStyle);
 
     if(!fFamily || !fStyle) return B_ERROR;
 
@@ -651,7 +651,7 @@ BFont::GetFamilyAndStyle(bhapi::font_family *family, bhapi::font_style *style) c
 }
 
 
-b_uint32
+be_uint32
 BFont::FamilyAndStyle() const
 {
     bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
@@ -662,7 +662,7 @@ BFont::FamilyAndStyle() const
 
 
 float
-BFont::StringWidth(const char *string, b_int32 length, float tabWidth) const
+BFont::StringWidth(const char *string,  __be_int32 length, float tabWidth) const
 {
     if(string == NULL || *string == 0 || length == 0) return 0;
 
@@ -674,7 +674,7 @@ BFont::StringWidth(const char *string, b_int32 length, float tabWidth) const
 
 
 float
-BFont::StringWidth(const BString &str, b_int32 length, float tabWidth) const
+BFont::StringWidth(const BString &str,  __be_int32 length, float tabWidth) const
 {
     return StringWidth(str.String(), length, tabWidth);
 }
@@ -693,7 +693,7 @@ BFont::GetHeight(bhapi::font_height *height) const
 
 
 float*
-BFont::CharWidths(const char *string, b_int32 *nChars, float tabWidth) const
+BFont::CharWidths(const char *string,  __be_int32 *nChars, float tabWidth) const
 {
     if(string == NULL || *string == 0 || nChars == NULL) return NULL;
 
@@ -705,14 +705,14 @@ BFont::CharWidths(const char *string, b_int32 *nChars, float tabWidth) const
 
 
 float*
-BFont::CharWidths(const BString &str, b_int32 *nChars, float tabWidth) const
+BFont::CharWidths(const BString &str,  __be_int32 *nChars, float tabWidth) const
 {
     return CharWidths(str.String(), nChars, tabWidth);
 }
 
 
 float*
-BFont::CharWidths(const char *string, b_int32 length, b_int32 *nChars, float tabWidth) const
+BFont::CharWidths(const char *string,  __be_int32 length,  __be_int32 *nChars, float tabWidth) const
 {
     if(string == NULL || *string == 0 || length == 0 || nChars == NULL) return NULL;
 
@@ -724,7 +724,7 @@ BFont::CharWidths(const char *string, b_int32 length, b_int32 *nChars, float tab
 
 
 float*
-BFont::CharWidths(const BString &str, b_int32 length, b_int32 *nChars, float tabWidth) const
+BFont::CharWidths(const BString &str,  __be_int32 length,  __be_int32 *nChars, float tabWidth) const
 {
     return CharWidths(str.String(), length, nChars, tabWidth);
 }
@@ -738,9 +738,9 @@ BFont::PrintToStream() const
     bzero(family, sizeof(bhapi::font_family));
     bzero(style, sizeof(bhapi::font_style));
     GetFamilyAndStyle(&family, &style);
-    b_uint32 code = FamilyAndStyle();
-    b_uint32 familyIndex = code >> 16;
-    b_uint32 styleIndex = code & 0xffff;
+     __be_uint32 code = FamilyAndStyle();
+     __be_uint32 familyIndex = code >> 16;
+     __be_uint32 styleIndex = code & 0xffff;
     float size = Size();
     float spacing = Spacing();
     float shear = Shear();
@@ -751,11 +751,11 @@ BFont::PrintToStream() const
     BHAPI_OUTPUT("code = %I32u(%I32u,%I32u)\n", code, familyIndex, styleIndex);
     BHAPI_OUTPUT("size = %g\tspacing = %g\tshear = %g\n", size, spacing, shear);
 
-    b_int32 count;
+     __be_int32 count;
     if(HasFixedSize(&count))
     {
         BHAPI_OUTPUT("fixed size [%I32i] --- ", count);
-        for(b_int32 i = 0; i < count; i++)
+        for(__be_int32 i = 0; i < count; i++)
         {
             float fixedSize;
             if(GetFixedSize(&fixedSize, i)) BHAPI_OUTPUT("%g ", fixedSize);

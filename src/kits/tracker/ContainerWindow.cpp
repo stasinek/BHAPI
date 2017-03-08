@@ -47,7 +47,7 @@ All rights reserved.
 #include <GridView.h>
 #include <GroupLayout.h>
 #include <Keymap.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MenuItem.h>
 #include <MenuBar.h>
 #include <NodeMonitor.h>
@@ -438,9 +438,9 @@ DraggableContainerIcon::Draw(BRect updateRect)
 
 	BRect rect(Bounds());
 	rgb_color base = ui_color(B_MENU_BACKGROUND_COLOR);
-	be_control_look->DrawBorder(this, rect, updateRect, base, B_PLAIN_BORDER,
+	__be_control_look->DrawBorder(this, rect, updateRect, base, B_PLAIN_BORDER,
 		0, BControlLook::B_BOTTOM_BORDER);
-	be_control_look->DrawMenuBarBackground(this, rect, updateRect, base, 0,
+	__be_control_look->DrawMenuBarBackground(this, rect, updateRect, base, 0,
 		BControlLook::B_ALL_BORDERS & ~BControlLook::B_LEFT_BORDER);
 
 	// Draw the icon, straddling the border
@@ -539,7 +539,7 @@ BContainerWindow::BContainerWindow(LockingList<BWindow>* list,
 	Run();
 
 	// watch out for settings changes
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker != NULL && tracker->Lock()) {
 		tracker->StartWatching(this, kWindowsShowFullPathChanged);
 		tracker->StartWatching(this, kSingleWindowBrowseChanged);
@@ -560,7 +560,7 @@ BContainerWindow::~BContainerWindow()
 	ASSERT(IsLocked());
 
 	// stop the watchers
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker != NULL && tracker->Lock()) {
 		tracker->StopWatching(this, kWindowsShowFullPathChanged);
 		tracker->StopWatching(this, kSingleWindowBrowseChanged);
@@ -596,7 +596,7 @@ void
 BContainerWindow::Minimize(bool minimize)
 {
 	if (minimize && (modifiers() & B_OPTION_KEY) != 0)
-		do_minimize_team(BRect(0, 0, 0, 0), be_app->Team(), true);
+		do_minimize_team(BRect(0, 0, 0, 0),  __be_app->Team(), true);
 	else
 		_inherited::Minimize(minimize);
 }
@@ -611,7 +611,7 @@ BContainerWindow::QuitRequested()
 	// which is what we will do for the Tracker
 	if (CurrentMessage() != NULL
 		&& ((CurrentMessage()->FindInt32("modifiers") & B_CONTROL_KEY)) != 0) {
-		be_app->PostMessage(kCloseAllWindows);
+		__be_app->PostMessage(kCloseAllWindows);
 	}
 
 	Hide();
@@ -690,7 +690,7 @@ BContainerWindow::Quit()
 		SaveState();
 
 	if (fWindowList != NULL && windowCount == 0)
-		be_app->PostMessage(B_QUIT_REQUESTED);
+		__be_app->PostMessage(B_QUIT_REQUESTED);
 
 	_inherited::Quit();
 }
@@ -745,26 +745,26 @@ BContainerWindow::AddContextMenus()
 {
 	// create context sensitive menus
 	fFileContextMenu = new BPopUpMenu("FileContext", false, false);
-	fFileContextMenu->SetFont(be_plain_font);
+	fFileContextMenu->SetFont(__be_plain_font);
 	AddFileContextMenus(fFileContextMenu);
 
 	fVolumeContextMenu = new BPopUpMenu("VolumeContext", false, false);
-	fVolumeContextMenu->SetFont(be_plain_font);
+	fVolumeContextMenu->SetFont(__be_plain_font);
 	AddVolumeContextMenus(fVolumeContextMenu);
 
 	fWindowContextMenu = new BPopUpMenu("WindowContext", false, false);
-	fWindowContextMenu->SetFont(be_plain_font);
+	fWindowContextMenu->SetFont(__be_plain_font);
 	AddWindowContextMenus(fWindowContextMenu);
 
 	fDropContextMenu = new BPopUpMenu("DropContext", false, false);
-	fDropContextMenu->SetFont(be_plain_font);
+	fDropContextMenu->SetFont(__be_plain_font);
 	AddDropContextMenus(fDropContextMenu);
 
 	fDragContextMenu = new BSlowContextMenu("DragContext");
 		// will get added and built dynamically in ShowContextMenu
 
 	fTrashContextMenu = new BPopUpMenu("TrashContext", false, false);
-	fTrashContextMenu->SetFont(be_plain_font);
+	fTrashContextMenu->SetFont(__be_plain_font);
 	AddTrashContextMenus(fTrashContextMenu);
 }
 
@@ -800,12 +800,12 @@ BContainerWindow::RepopulateMenus()
 
 	delete fFileContextMenu;
 	fFileContextMenu = new BPopUpMenu("FileContext", false, false);
-	fFileContextMenu->SetFont(be_plain_font);
+	fFileContextMenu->SetFont(__be_plain_font);
 	AddFileContextMenus(fFileContextMenu);
 
 	delete fWindowContextMenu;
 	fWindowContextMenu = new BPopUpMenu("WindowContext", false, false);
-	fWindowContextMenu->SetFont(be_plain_font);
+	fWindowContextMenu->SetFont(__be_plain_font);
 	AddWindowContextMenus(fWindowContextMenu);
 
 	if (fMenuBar != NULL) {
@@ -1485,7 +1485,7 @@ BContainerWindow::MessageReceived(BMessage* message)
 		}
 
 		case kQuitTracker:
-			be_app->PostMessage(B_QUIT_REQUESTED);
+			__be_app->PostMessage(B_QUIT_REQUESTED);
 			break;
 
 		case kRestoreBackgroundImage:
@@ -1812,7 +1812,7 @@ BContainerWindow::SetCloseItem(BMenu* menu)
 	if (modifiers() & B_SHIFT_KEY) {
 		item->SetLabel(B_TRANSLATE("Close all"));
 		item->SetShortcut('W', B_COMMAND_KEY | B_SHIFT_KEY);
-		item->SetTarget(be_app);
+		item->SetTarget(__be_app);
 		item->SetMessage(new BMessage(kCloseAllWindows));
 	} else {
 		item->SetLabel(B_TRANSLATE("Close"));
@@ -1939,7 +1939,7 @@ BContainerWindow::AddFileMenu(BMenu* menu)
 				new BMessage(kIdentifyEntry)));
 		}
 		BMenu* addOnMenuItem = new BMenu(B_TRANSLATE("Add-ons"));
-		addOnMenuItem->SetFont(be_plain_font);
+		addOnMenuItem->SetFont(__be_plain_font);
 		menu->AddItem(addOnMenuItem);
 	}
 
@@ -2069,14 +2069,14 @@ BContainerWindow::AddWindowMenu(BMenu* menu)
 
 	item = new BMenuItem(B_TRANSLATE("Close all in workspace"),
 		new BMessage(kCloseAllInWorkspace), 'Q');
-	item->SetTarget(be_app);
+	item->SetTarget(__be_app);
 	menu->AddItem(item);
 
 	menu->AddSeparatorItem();
 
 	item = new BMenuItem(B_TRANSLATE("Preferences" B_UTF8_ELLIPSIS),
 		new BMessage(kShowSettingsWindow));
-	item->SetTarget(be_app);
+	item->SetTarget(__be_app);
 	menu->AddItem(item);
 }
 
@@ -2249,7 +2249,7 @@ BContainerWindow::SetupNavigationMenu(const entry_ref* ref, BMenu* parent)
 
 	if (fNavigationItem == NULL) {
 		fNavigationItem = new ModelMenuItem(&model,
-			new BNavMenu(model.Name(), B_REFS_RECEIVED, be_app, this));
+			new BNavMenu(model.Name(), B_REFS_RECEIVED,  __be_app, this));
 	}
 
 	// setup a navigation menu item which will dynamically load items
@@ -2265,7 +2265,7 @@ BContainerWindow::SetupNavigationMenu(const entry_ref* ref, BMenu* parent)
 	BMessage* message = new BMessage(B_REFS_RECEIVED);
 	message->AddRef("refs", ref);
 	fNavigationItem->SetMessage(message);
-	fNavigationItem->SetTarget(be_app);
+	fNavigationItem->SetTarget(__be_app);
 
 	if (!Dragging())
 		parent->SetTrackingHook(NULL, NULL);
@@ -2365,7 +2365,7 @@ BContainerWindow::SetupOpenWithMenu(BMenu* parent)
 	int32 index = item->Menu()->IndexOf(item);
 	fOpenWithItem = new BMenuItem(
 		new OpenWithMenu(B_TRANSLATE("Open with" B_UTF8_ELLIPSIS),
-			&message, this, be_app), new BMessage(kOpenSelectionWith));
+			&message, this,  __be_app), new BMessage(kOpenSelectionWith));
 	fOpenWithItem->SetTarget(PoseView());
 	fOpenWithItem->SetShortcut('O', B_COMMAND_KEY | B_CONTROL_KEY);
 
@@ -2631,7 +2631,7 @@ BContainerWindow::ShowContextMenu(BPoint loc, const entry_ref* ref, BView*)
 			// selected item was trash, show the trash context menu instead
 
 			EnableNamedMenuItem(fTrashContextMenu, kEmptyTrash,
-				static_cast<TTracker*>(be_app)->TrashFull());
+				static_cast<TTracker*>(__be_app)->TrashFull());
 
 			SetupNavigationMenu(ref, fTrashContextMenu);
 			fTrashContextMenu->Go(global, true, true, true);
@@ -2806,7 +2806,7 @@ BContainerWindow::AddFileContextMenus(BMenu* menu)
 	message->AddBool("force", false);
 	menu->AddItem(new BMenuItem(B_TRANSLATE("Identify"), message));
 	BMenu* addOnMenuItem = new BMenu(B_TRANSLATE("Add-ons"));
-	addOnMenuItem->SetFont(be_plain_font);
+	addOnMenuItem->SetFont(__be_plain_font);
 	menu->AddItem(addOnMenuItem);
 
 	// set targets as needed
@@ -2867,7 +2867,7 @@ BContainerWindow::AddWindowContextMenus(BMenu* menu)
 			B_TRANSLATE("New"));
 		menu->AddItem(templatesMenu);
 		templatesMenu->SetTargetForItems(PoseView());
-		templatesMenu->SetFont(be_plain_font);
+		templatesMenu->SetFont(__be_plain_font);
 	}
 
 	if (needSeparator)
@@ -2899,7 +2899,7 @@ BContainerWindow::AddWindowContextMenus(BMenu* menu)
 
 	menu->AddSeparatorItem();
 	BMenu* addOnMenuItem = new BMenu(B_TRANSLATE("Add-ons"));
-	addOnMenuItem->SetFont(be_plain_font);
+	addOnMenuItem->SetFont(__be_plain_font);
 	menu->AddItem(addOnMenuItem);
 
 #if DEBUG

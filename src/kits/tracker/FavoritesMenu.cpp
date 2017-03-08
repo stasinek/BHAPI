@@ -41,7 +41,7 @@ All rights reserved.
 #include <Catalog.h>
 #include <FindDirectory.h>
 #include <FilePanel.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <Message.h>
 #include <Path.h>
 #include <Query.h>
@@ -203,7 +203,7 @@ FavoritesMenu::AddNextItem()
 		fAddedSeparatorForSection = false;
 
 		app_info info;
-		be_app->GetAppInfo(&info);
+		__be_app->GetAppInfo(&info);
 		fItems.MakeEmpty();
 
 		int32 apps, docs, folders;
@@ -251,7 +251,7 @@ FavoritesMenu::AddNextItem()
 		fAddedSeparatorForSection = false;
 
 		app_info info;
-		be_app->GetAppInfo(&info);
+		__be_app->GetAppInfo(&info);
 		fItems.MakeEmpty();
 
 		int32 apps, docs, folders;

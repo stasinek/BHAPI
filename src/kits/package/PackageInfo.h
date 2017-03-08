@@ -8,7 +8,7 @@
 
 #include <Archivable.h>
 #include <ObjectList.h>
-#include <String.h>
+#include <StringClass.h>
 #include <StringList.h>
 
 #include <package/GlobalWritableFileInfo.h>

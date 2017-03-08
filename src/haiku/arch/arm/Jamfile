@@ -1,0 +1,28 @@
+SubDir HAIKU_TOP src system libroot os arch arm ;
+
+SubDirC++Flags -std=gnu++11 ;
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup arm ] {
+	on $(architectureObject) {
+		local architecture = $(TARGET_PACKAGING_ARCH) ;
+
+		UsePrivateKernelHeaders ;
+		UsePrivateSystemHeaders ;
+
+		SEARCH_SOURCE += [ FDirName $(SUBDIR) $(DOTDOT) generic ] ;
+
+		MergeObject <$(architecture)>os_arch_$(TARGET_ARCH).o :
+			byteorder.S
+			system_time.c
+			stack_frame.c
+			stdatomic.c
+			thread.c
+			time.c
+			tls.c
+
+			generic_atomic.cpp
+			generic_system_time_nsecs.cpp
+			;
+	}
+}

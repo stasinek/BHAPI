@@ -8,7 +8,7 @@
 #define _KERNEL_CORE_DUMP_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 status_t	core_dump_write_core_file(const char* path, bool killTeam);

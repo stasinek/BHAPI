@@ -62,8 +62,8 @@ All rights reserved.
 #include <PopUpMenu.h>
 #include <Region.h>
 #include <ScrollBar.h>
-#include <String.h>
-#include <SupportDefs.h>
+#include <StringClass.h>
+#include <Haiku.h>
 #include <Window.h>
 
 #include <ObjectListPrivate.h>
@@ -435,7 +435,7 @@ BRow::BRow()
 	fChildList(NULL),
 	fIsExpanded(false),
 	fHeight(std::max(kMinRowHeight,
-		ceilf(be_plain_font->Size() * kRowSpacing))),
+		ceilf(__be_plain_font->Size() * kRowSpacing))),
 	fNextSelected(NULL),
 	fPrevSelected(NULL),
 	fParent(NULL),
@@ -1823,7 +1823,7 @@ BColumnListView::Draw(BRect updateRect)
 			BPoint(rect.right, rect.top));
 	}
 
-	be_control_look->DrawScrollViewFrame(this, rect, updateRect,
+	__be_control_look->DrawScrollViewFrame(this, rect, updateRect,
 		verticalScrollBarFrame, horizontalScrollBarFrame,
 		base, fBorderStyle, flags);
 
@@ -1832,7 +1832,7 @@ BColumnListView::Draw(BRect updateRect)
 		BRegion region(rect & fStatusView->Frame().InsetByCopy(-2, -2));
 		ConstrainClippingRegion(&region);
 		rect.bottom = fStatusView->Frame().top - 1;
-		be_control_look->DrawScrollViewFrame(this, rect, updateRect,
+		__be_control_look->DrawScrollViewFrame(this, rect, updateRect,
 			BRect(), BRect(), base, fBorderStyle, flags);
 	}
 }
@@ -1924,7 +1924,7 @@ BColumnListView::MinSize()
 	BSize size;
 	size.width = 100;
 	size.height = std::max(kMinTitleHeight,
-		ceilf(be_plain_font->Size() * kTitleSpacing))
+		ceilf(__be_plain_font->Size() * kTitleSpacing))
 		+ 4 * B_H_SCROLL_BAR_HEIGHT;
 	if (!fHorizontalScrollBar->IsHidden())
 		size.height += fHorizontalScrollBar->Frame().Height() + 1;
@@ -1938,7 +1938,7 @@ BSize
 BColumnListView::PreferredSize()
 {
 	BSize size = MinSize();
-	size.height += ceilf(be_plain_font->Size()) * 20;
+	size.height += ceilf(__be_plain_font->Size()) * 20;
 
 	// return MinSize().width if there are no columns.
 	int32 count = CountColumns();
@@ -2108,7 +2108,7 @@ BColumnListView::_GetChildViewRects(const BRect& bounds, BRect& titleRect,
 {
 	titleRect = bounds;
 	titleRect.bottom = titleRect.top + std::max(kMinTitleHeight,
-		ceilf(be_plain_font->Size() * kTitleSpacing));
+		ceilf(__be_plain_font->Size() * kTitleSpacing));
 #if !LOWER_SCROLLBAR
 	titleRect.right -= B_V_SCROLL_BAR_WIDTH;
 #endif
@@ -2122,7 +2122,7 @@ BColumnListView::_GetChildViewRects(const BRect& bounds, BRect& titleRect,
 	vScrollBarRect = bounds;
 #if LOWER_SCROLLBAR
 	vScrollBarRect.top += std::max(kMinTitleHeight,
-		ceilf(be_plain_font->Size() * kTitleSpacing));
+		ceilf(__be_plain_font->Size() * kTitleSpacing));
 #endif
 
 	vScrollBarRect.left = vScrollBarRect.right - B_V_SCROLL_BAR_WIDTH;
@@ -2534,7 +2534,7 @@ TitleView::DrawTitle(BView* view, BRect rect, BColumn* column, bool depressed)
 	if (depressed)
 		base = tint_color(base, B_DARKEN_1_TINT);
 
-	be_control_look->DrawButtonBackground(view, bgRect, rect, base, 0,
+	__be_control_look->DrawButtonBackground(view, bgRect, rect, base, 0,
 		BControlLook::B_TOP_BORDER | BControlLook::B_BOTTOM_BORDER);
 
 	view->SetHighColor(tint_color(ui_color(B_PANEL_BACKGROUND_COLOR),

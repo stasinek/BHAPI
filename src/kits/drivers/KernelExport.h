@@ -6,7 +6,7 @@
 #define _KERNEL_EXPORT_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <OS.h>
 
 

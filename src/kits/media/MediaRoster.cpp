@@ -55,7 +55,7 @@ char __dont_remove_copyright_from_binary[] = "Copyright (c) 2002-2006 Marcus "
 #include <ParameterWeb.h>
 #include <Roster.h>
 #include <StopWatch.h>
-#include <String.h>
+#include <StringClass.h>
 #include <TimeSource.h>
 
 #include <AppMisc.h>
@@ -119,7 +119,7 @@ BMediaRosterEx::BMediaRosterEx(status_t* _error)
 
 	InitRosterDataExchange(BMessenger(this, this));
 
-	if (be_roster->StartWatching(BMessenger(this, this),
+	if (__be_roster->StartWatching(BMessenger(this, this),
 			B_REQUEST_LAUNCHED | B_REQUEST_QUIT) != B_OK) {
 		*_error = B_ERROR;
 	}
@@ -130,7 +130,7 @@ BMediaRosterEx::BMediaRosterEx(status_t* _error)
 void
 BMediaRosterEx::Quit()
 {
-	if (be_roster->StopWatching(BMessenger(this, this)) != B_OK)
+	if (__be_roster->StopWatching(BMessenger(this, this)) != B_OK)
 			TRACE("Can't unregister roster notifications");
 
 	if (sNotificationList.CountItems() != 0)
@@ -3279,8 +3279,8 @@ BMediaRoster::GetInstancesFor(media_addon_id addon, int32 flavor,
 bool
 BMediaRoster::IsRunning()
 {
-	return be_roster->IsRunning(B_MEDIA_SERVER_SIGNATURE)
-		&& be_roster->IsRunning(B_MEDIA_ADDON_SERVER_SIGNATURE);
+	return  __be_roster->IsRunning(B_MEDIA_SERVER_SIGNATURE)
+		&&  __be_roster->IsRunning(B_MEDIA_ADDON_SERVER_SIGNATURE);
 }
 
 

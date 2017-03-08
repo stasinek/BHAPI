@@ -13,7 +13,7 @@
 
 
 #include <Control.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 class BBitmap;

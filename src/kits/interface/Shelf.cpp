@@ -29,7 +29,7 @@
 #include <Point.h>
 #include <PropertyInfo.h>
 #include <Rect.h>
-#include <String.h>
+#include <StringClass.h>
 #include <View.h>
 
 #include <ViewPrivate.h>

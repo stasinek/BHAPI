@@ -7,7 +7,7 @@
 #include <bluetooth/debug.h>
 
 #include <Catalog.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 
 
 #undef B_TRANSLATION_CONTEXT

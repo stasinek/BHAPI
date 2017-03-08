@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -31,27 +31,26 @@
 #ifndef BHAPI_LOCKER_H
 #define BHAPI_LOCKER_H
 
-#include "../support/SupportDefs.h"
-
 #ifdef __cplusplus /* Just for C++ */
+#include "../support/SupportDefs.h"
 class IMPEXPBHAPI BLocker {
 public:
     BLocker();
     virtual ~BLocker();
 
-	bool		Lock();
-	void		Unlock();
-    b_status_t	LockWithTimeout(b_bigtime_t microseconds);
+    bool		Lock();
+    void		Unlock();
+    status_t	LockWithTimeout(bigtime_t microseconds);
 
-	// CountLocks():
-	// 	return positive number when locked by current thread,
-	// 	return negative number when locked by other thread or invalid,
-	// 	return 0 when it isn't locked or valid.
-    b_int64		CountLocks() const;
-	bool		IsLockedByCurrentThread() const;
+    // CountLocks():
+    // 	return positive number when locked by current thread,
+    // 	return negative number when locked by other thread or invalid,
+    // 	return 0 when it isn't locked or valid.
+     __be_int64		CountLocks() const;
+    bool		IsLockedByCurrentThread() const;
 
 private:
-	void		*fLocker;
+    void		*fLocker;
 };
 
 #endif /* __cplusplus */

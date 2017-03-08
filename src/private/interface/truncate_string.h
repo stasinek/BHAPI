@@ -5,7 +5,7 @@
 #ifndef TRUNCATE_STRING_H
 #define TRUNCATE_STRING_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 void truncate_string(BString& string, uint32 mode, float width,
 	const float* escapementArray, float fontSize, float ellipsisWidth,

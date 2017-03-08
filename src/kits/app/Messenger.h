@@ -39,8 +39,8 @@ class BLooper;
 class IMPEXPBHAPI BMessenger {
 public:
     BMessenger();
-    BMessenger(const char *signature, b_int64 team = 0, b_status_t *perr = NULL);
-    BMessenger(const BHandler *handler, const BLooper *looper = NULL, b_status_t *perr = NULL);
+    BMessenger(const char *signature,  __be_int64 team = 0, status_t *perr = NULL);
+    BMessenger(const BHandler *handler, const BLooper *looper = NULL, status_t *perr = NULL);
 
     BMessenger(const BMessenger &msgr);
     ~BMessenger();
@@ -50,14 +50,14 @@ public:
     BHandler*	Target(BLooper **looper) const;
 
     bool		LockTarget() const;
-    b_status_t	LockTargetWithTimeout(b_bigtime_t timeout) const;
+    status_t	LockTargetWithTimeout(bigtime_t timeout) const;
 
-    b_status_t	SendMessage(b_uint32 command) const;
-    b_status_t	SendMessage(b_uint32 command, BHandler *reply_to) const;
-    b_status_t	SendMessage(const BMessage *a_message) const;
-    b_status_t	SendMessage(const BMessage *a_message, BHandler *reply_to, b_bigtime_t timeout) const;
-    b_status_t	SendMessage(const BMessage *a_message, BMessage *reply_message) const;
-    b_status_t	SendMessage(const BMessage *a_message, BMessage *reply_message, b_bigtime_t sendTimeout, b_bigtime_t replyTimeout) const;
+    status_t	SendMessage(__be_uint32 command) const;
+    status_t	SendMessage(__be_uint32 command, BHandler *reply_to) const;
+    status_t	SendMessage(const BMessage *a_message) const;
+    status_t	SendMessage(const BMessage *a_message, BHandler *reply_to, bigtime_t timeout) const;
+    status_t	SendMessage(const BMessage *a_message, BMessage *reply_message) const;
+    status_t	SendMessage(const BMessage *a_message, BMessage *reply_message, bigtime_t sendTimeout, bigtime_t replyTimeout) const;
 
     bool		IsValid() const;
 
@@ -75,22 +75,22 @@ private:
     friend class BMessage;
     friend class BInvoker;
 
-    BMessenger(b_int64 targetTeam, b_uint64 targetToken, b_bigtime_t timestamp, b_status_t *perr);
+    BMessenger(__be_int64 targetTeam,  __be_uint64 targetToken, bigtime_t timestamp, status_t *perr);
 
-    b_uint64 fHandlerToken;
-    b_uint64 fLooperToken;
+     __be_uint64 fHandlerToken;
+     __be_uint64 fLooperToken;
 
     void *fPort;
     void *fSem;
 
-    b_int64 fTargetTeam;
+     __be_int64 fTargetTeam;
 
-    void InitData(const BHandler *handler, const BLooper *looper, b_status_t *perr);
+    void InitData(const BHandler *handler, const BLooper *looper, status_t *perr);
 
-    static b_status_t _SendMessageToPort(void *port, const BMessage *msg, b_uint32 flags, b_bigtime_t timeout);
-    static BMessage* _GetMessageFromPort(void *port, b_uint32 flags, b_bigtime_t timeout, b_status_t *err);
+    static status_t _SendMessageToPort(void *port, const BMessage *msg,  __be_uint32 flags, bigtime_t timeout);
+    static BMessage* _GetMessageFromPort(void *port,  __be_uint32 flags, bigtime_t timeout, status_t *err);
 
-    b_status_t _SendMessage(const BMessage *a_message, b_uint64 replyToken, b_bigtime_t timeout) const;
+    status_t _SendMessage(const BMessage *a_message,  __be_uint64 replyToken, bigtime_t timeout) const;
 };
 
 #endif /* __cplusplus */

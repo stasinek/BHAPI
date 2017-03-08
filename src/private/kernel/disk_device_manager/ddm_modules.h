@@ -9,7 +9,7 @@
 
 #include <disk_device_manager.h>
 #include <module.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 typedef struct partition_module_info {

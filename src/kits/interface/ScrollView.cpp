@@ -50,7 +50,7 @@ BRect BScrollView::TargetValidFrame(bool ignore_scrollbar) const
 }
 
 
-BScrollView::BScrollView(BRect frame, const char *name, BView *target, b_uint32 resizingMode, b_uint32 flags,
+BScrollView::BScrollView(BRect frame, const char *name, BView *target,  __be_uint32 resizingMode,  __be_uint32 flags,
 			 bool alwaysShowHorizontal, bool alwaysShowVertical, bhapi::border_style border)
 	: BView(frame, name, resizingMode, 0), fTarget(NULL)
 {
@@ -92,7 +92,7 @@ BScrollView::~BScrollView()
 }
 
 
-b_status_t
+status_t
 BScrollView::SetTarget(BView *newTarget)
 {
 	if(newTarget == fTarget || newTarget == this) return B_ERROR;
@@ -283,7 +283,7 @@ BScrollView::GetScrollBarAutoState(bool *alwaysShowHorizontal, bool *alwaysShowV
 
 
 void
-BScrollView::SetFlags(b_uint32 flags)
+BScrollView::SetFlags(__be_uint32 flags)
 {
 	flags |= B_FRAME_EVENTS;
 	if(fBorder != B_NO_BORDER)

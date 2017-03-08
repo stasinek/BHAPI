@@ -11,7 +11,7 @@
 #include <AboutMenuItem.h>
 #include <Application.h>
 #include <Roster.h>
-#include <String.h>
+#include <StringClass.h>
 #include <SystemCatalog.h>
 
 using BPrivate::gSystemCatalog;
@@ -27,7 +27,7 @@ BAboutMenuItem::BAboutMenuItem()
 {
 	app_info info;
 	const char* name = NULL;
-	if (be_app != NULL && be_app->GetAppInfo(&info) == B_OK)
+	if (__be_app != NULL &&  __be_app->GetAppInfo(&info) == B_OK)
 		name = B_TRANSLATE_NOCOLLECT_SYSTEM_NAME(info.ref.name);
 
 	const char* string = B_TRANSLATE_MARK("About %app%");

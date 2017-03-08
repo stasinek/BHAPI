@@ -11,7 +11,7 @@
 #define EXPRESSION_PARSER_H
 
 
-#include <String.h>
+#include <StringClass.h>
 
 
 class ParseException {

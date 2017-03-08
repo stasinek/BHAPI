@@ -8,7 +8,7 @@
 #define _KERNEL_ARCH_PLATFORM_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 struct kernel_args;
 

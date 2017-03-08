@@ -48,7 +48,7 @@ All rights reserved.
 #include <Catalog.h>
 #include <Debug.h>
 #include <FindDirectory.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MenuItem.h>
 #include <NodeInfo.h>
 #include <NodeMonitor.h>
@@ -82,7 +82,7 @@ All rights reserved.
 #include "Thread.h"
 #include "TrackerSettings.h"
 #include "TrackerSettingsWindow.h"
-#include "TrackerString.h"
+#include "TrackerStringClass.h"
 #include "TrashWatcher.h"
 #include "VirtualDirectoryWindow.h"
 
@@ -170,18 +170,18 @@ InitIconPreloader()
 	// only start the node preloader if its Tracker or the Deskbar itself,
 	// don't start it for file panels
 
-	bool preload = dynamic_cast<TTracker*>(be_app) != NULL;
+	bool preload = dynamic_cast<TTracker*>(__be_app) != NULL;
 	if (!preload) {
 		// check for deskbar
 		app_info info;
-		if (be_app->GetAppInfo(&info) == B_OK
+		if (__be_app->GetAppInfo(&info) == B_OK
 			&& !strcmp(info.signature, kDeskbarSignature))
 			preload = true;
 	}
 
 	if (preload) {
 		gPreloader = NodePreloader::InstallNodePreloader("NodePreloader",
-			be_app);
+			__be_app);
 	}
 
 	IconCache::sIconCache = new IconCache();
@@ -1742,7 +1742,7 @@ TTracker::WatchNode(const node_ref* node, uint32 flags, BMessenger target)
 	PRINT(("failed to start monitoring, trying to allocate more "
 		"node monitors\n"));
 
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL) {
 		// we are the file panel only, just fail
 		return result;

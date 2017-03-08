@@ -39,7 +39,7 @@ All rights reserved.
 
 #include <Catalog.h>
 #include <Debug.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <NodeMonitor.h>
 #include <Query.h>
 #include <Volume.h>
@@ -207,7 +207,7 @@ BQueryPoseView::ShouldShowPose(const Model* model, const PoseInfo* poseInfo)
 	// add_poses, etc. filter
 	ASSERT(TargetModel());
 
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (!fShowResultsFromTrash && tracker != NULL
 		&& tracker->InTrashNode(model->EntryRef())) {
 		return false;
@@ -352,7 +352,7 @@ BQueryPoseView::InitDirentIterator(const entry_ref* ref)
 		// bump up to microseconds
 		delta *= 1000000;
 
-		TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+		TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 		ThrowOnAssert(tracker != NULL);
 
 		tracker->MainTaskLoop()->RunLater(
@@ -388,7 +388,7 @@ BQueryPoseView::SearchForType() const
 				&buffer);
 		}
 
-		TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+		TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 		if (tracker != NULL && buffer.Length() > 0) {
 			const ShortMimeInfo* info = tracker->MimeTypes()->FindMimeType(
 				buffer.String());

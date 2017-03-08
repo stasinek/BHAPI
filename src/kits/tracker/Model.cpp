@@ -54,7 +54,7 @@ All rights reserved.
 #include <Directory.h>
 #include <Entry.h>
 #include <File.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <NodeInfo.h>
 #include <NodeMonitor.h>
 #include <Path.h>

@@ -38,7 +38,7 @@
 #include "../support/SupportDefs.h"
 class LOCALBHAPI BViewLayout : public BLayoutItem {
 public:
-    BViewLayout(BView *view, BRect frame, b_uint32 resizingMode);
+    BViewLayout(BView *view, BRect frame,  __be_uint32 resizingMode);
     virtual ~BViewLayout();
 
     void		SetEnabled(bool state);
@@ -60,7 +60,7 @@ private:
 
 #ifdef BHAPI_BUILD_LIBRARY
 
-inline BViewLayout::BViewLayout(BView *view, BRect frame, b_uint32 resizingMode)
+inline BViewLayout::BViewLayout(BView *view, BRect frame,  __be_uint32 resizingMode)
     : BLayoutItem(frame, resizingMode), fEnabled(true)
 {
     SetPrivateData(view);

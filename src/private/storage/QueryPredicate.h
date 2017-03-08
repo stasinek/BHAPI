@@ -13,7 +13,7 @@
 
 #include <List.h>
 #include <Query.h>
-#include <String.h>
+#include <StringClass.h>
 
 namespace BPrivate {
 namespace Storage {

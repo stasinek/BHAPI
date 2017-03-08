@@ -12,7 +12,7 @@
 #define C_LANGUAGE_TOKENIZER
 
 
-#include <String.h>
+#include <StringClass.h>
 
 #include <Variant.h>
 

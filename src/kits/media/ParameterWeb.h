@@ -9,7 +9,7 @@
 #include <Flattenable.h>
 #include <MediaDefs.h>
 #include <MediaNode.h>
-#include <TypeConstants.h>
+#include <HaikuConstants.h>
 
 
 // Parameter Kinds

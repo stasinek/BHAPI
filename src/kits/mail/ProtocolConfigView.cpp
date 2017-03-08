@@ -22,7 +22,7 @@
 #include <MenuItem.h>
 #include <Message.h>
 #include <PopUpMenu.h>
-#include <String.h>
+#include <StringClass.h>
 #include <TextControl.h>
 
 #include <crypt.h>
@@ -51,11 +51,11 @@ BodyDownloadConfigView::BodyDownloadConfigView()
 
 	fSizeControl = new BTextControl("size",
 		B_TRANSLATE_COMMENT("KB", "kilo byte"), "", NULL);
-	fSizeControl->SetExplicitMinSize(BSize(be_plain_font->StringWidth("0000"),
+	fSizeControl->SetExplicitMinSize(BSize(__be_plain_font->StringWidth("0000"),
 		B_SIZE_UNSET));
 
 	BLayoutBuilder::Group<>(this, B_HORIZONTAL,
-			be_control_look->DefaultLabelSpacing())
+			__be_control_look->DefaultLabelSpacing())
 		.Add(fPartialBox)
 		.Add(fSizeControl->CreateTextViewLayoutItem())
 		.Add(fSizeControl->CreateLabelLayoutItem());

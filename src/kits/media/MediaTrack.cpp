@@ -920,7 +920,7 @@ BMediaTrack::SetupWorkaround()
 	thread_info	tinfo;
 
 	get_thread_info(find_thread(0), &tinfo);
-	be_roster->GetRunningAppInfo(tinfo.team, &ainfo);
+	__be_roster->GetRunningAppInfo(tinfo.team, &ainfo);
 
 	if (strcmp(ainfo.signature, "application/x-vnd.marcone-soundplay") == 0) {
 		fWorkaroundFlags = FORCE_RAW_AUDIO | FORCE_RAW_AUDIO_INT16_FORMAT

@@ -10,7 +10,7 @@
 #define _KERNEL_NOTIFICATIONS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <lock.h>
 #include <messaging.h>

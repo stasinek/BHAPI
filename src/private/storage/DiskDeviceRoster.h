@@ -9,7 +9,7 @@
 
 #include <DiskDeviceDefs.h>
 #include <Messenger.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 class BDirectory;
 class BDiskDevice;

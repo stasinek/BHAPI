@@ -34,7 +34,7 @@
 #include "../interface/Point.h"
 #include "../interface/Rect.h"
 #include "../kernel/Debug.h"
-#include "../kernel/OS.h"
+#include "../kernel/KERNEL.h"
 #include "../support/StreamIO.h"
 #include "../support/StringClass.h"
 #include "../support/Errors.h"
@@ -44,19 +44,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-b_status_t BMessage::BGetInfo(b_type_code type, b_int32 index,
-           char **nameFound, b_type_code *typeFound, b_int32 *countFound) const
+status_t BMessage::BGetInfo(type_code type,  __be_int32 index,
+           char **nameFound, type_code *typeFound,  __be_int32 *countFound) const
 {
     if(index < 0) return B_BAD_INDEX;
-    b_int32 aIndex = index;
+     __be_int32 aIndex = index;
 
-    for(b_int32 i = 0; i < CountNames(B_ANY_TYPE, true); i++)
+    for(__be_int32 i = 0; i < CountNames(B_ANY_TYPE, true); i++)
     {
-        b_int32 typesCount = CountTypesByName(i);
-        for(b_int32 k = 0; k < typesCount; k++)
+         __be_int32 typesCount = CountTypesByName(i);
+        for(__be_int32 k = 0; k < typesCount; k++)
         {
-            b_type_code aType;
-            b_int32 count = CountItems(i, k, &aType);
+            type_code aType;
+             __be_int32 count = CountItems(i, k, &aType);
             if(!(type == B_ANY_TYPE || aType == type) || (aIndex--) > 0) continue;
             if(nameFound) *nameFound = (char*)NameAt(i);
             if(typeFound) *typeFound = aType;
@@ -69,21 +69,21 @@ b_status_t BMessage::BGetInfo(b_type_code type, b_int32 index,
 }
 
 
-b_status_t BMessage::BFindData(const char *name, b_type_code type, b_int32 index,
-            const void **data, b_size_t *numBytes) const
+status_t BMessage::BFindData(const char *name, type_code type,  __be_int32 index,
+            const void **data,  __be_size_t *numBytes) const
 {
     if(index < 0) return B_BAD_INDEX;
 
-    b_int32 nameIndex = FindName(name);
+     __be_int32 nameIndex = FindName(name);
     if(nameIndex < 0) return B_NAME_NOT_FOUND;
 
-    b_int32 typesCount = CountTypesByName(nameIndex);
-    b_int32 aIndex = index;
+     __be_int32 typesCount = CountTypesByName(nameIndex);
+     __be_int32 aIndex = index;
 
-    for(b_int32 k = 0; k < typesCount; k++)
+    for(__be_int32 k = 0; k < typesCount; k++)
     {
-        b_type_code aType;
-        b_int32 count = CountItems(nameIndex, k, &aType);
+        type_code aType;
+         __be_int32 count = CountItems(nameIndex, k, &aType);
         if(!(type == B_ANY_TYPE || aType == type)) continue;
 
         if(aIndex < count)
@@ -96,8 +96,8 @@ b_status_t BMessage::BFindData(const char *name, b_type_code type, b_int32 index
 }
 
 
-b_status_t BMessage::BFindData(const char *name, b_type_code type,
-            const void **data, b_size_t *numBytes) const
+status_t BMessage::BFindData(const char *name, type_code type,
+            const void **data,  __be_size_t *numBytes) const
 {
     return BFindData(name, type, 0, data, numBytes);
 }
@@ -112,7 +112,7 @@ BMessage::BMessage()
 }
 
 
-BMessage::BMessage(b_uint32 a_what)
+BMessage::BMessage(__be_uint32 a_what)
     : fTargetToken(B_MAXUINT64), fTargetTokenTimestamp(B_INT64_CONSTANT(0)),
       fReplyToken(B_MAXUINT64), fReplyTokenTimestamp(B_INT64_CONSTANT(0)),
       fNoticeSource(false), fSource(NULL), fIsReply(false)
@@ -138,17 +138,17 @@ BMessage& BMessage::operator=(const BMessage &msg)
 
     MakeEmpty();
 
-    for(b_int32 k = 0; k < msg.fObjectsList.CountItems(); k++)
+    for(__be_int32 k = 0; k < msg.fObjectsList.CountItems(); k++)
     {
         list_data *ldata = (list_data*)msg.fObjectsList.ItemAt(k);
         if(!ldata) continue;
 
-        for(b_int32 j = 0; j < ldata->list.CountItems(); j++)
+        for(__be_int32 j = 0; j < ldata->list.CountItems(); j++)
         {
             type_list_data *tldata = (type_list_data*)ldata->list.ItemAt(j);
             if(!tldata) continue;
 
-            for(b_int32 i = 0; i < tldata->list.CountItems(); i++)
+            for(__be_int32 i = 0; i < tldata->list.CountItems(); i++)
             {
                 _object_t *Object = (_object_t*)tldata->list.ItemAt(i);
                 if(!Object) continue;
@@ -196,34 +196,34 @@ BMessage& BMessage::operator=(const BMessage &msg)
 
 size_t BMessage::FlattenedSize() const
 {
-    size_t size = sizeof(size_t) + sizeof(b_uint32) + sizeof(b_uint64); // FlattenSize + msg->what + recordCount
+    size_t size = sizeof(size_t) + sizeof(__be_uint32) + sizeof(__be_uint64); // FlattenSize + msg->what + recordCount
 
-    size += sizeof(b_int64); // fTeam
-    size += sizeof(b_uint64) + sizeof(b_bigtime_t); // fTargetToken + fTargetTokenTimestamp
-    size += sizeof(b_uint64) + sizeof(b_bigtime_t); // fReplyToken + fReplyTokenTimestamp
-    size += sizeof(b_address_t); // fSource
+    size += sizeof(__be_int64); // fTeam
+    size += sizeof(__be_uint64) + sizeof(bigtime_t); // fTargetToken + fTargetTokenTimestamp
+    size += sizeof(__be_uint64) + sizeof(bigtime_t); // fReplyToken + fReplyTokenTimestamp
+    size += sizeof(__be_addr_t); // fSource
     size += sizeof(bool); // fIsReply
 
-    for(b_int32 k = 0; k < fObjectsList.CountItems(); k++)
+    for(__be_int32 k = 0; k < fObjectsList.CountItems(); k++)
     {
         list_data *ldata = (list_data*)fObjectsList.ItemAt(k);
         if(!ldata) continue;
 
         size_t nameLen = (size_t)(ldata->name ? strlen(ldata->name) : 0);
 
-        for(b_int32 j = 0; j < ldata->list.CountItems(); j++)
+        for(__be_int32 j = 0; j < ldata->list.CountItems(); j++)
         {
             type_list_data *tldata = (type_list_data*)ldata->list.ItemAt(j);
             if(!tldata) continue;
 
-            for(b_int32 i = 0; i < tldata->list.CountItems(); i++)
+            for(__be_int32 i = 0; i < tldata->list.CountItems(); i++)
             {
                 _object_t *Object = (_object_t*)tldata->list.ItemAt(i);
                 if(!Object) continue;
 
                 // msg->_object_t
-                size_t objectSize = sizeof(size_t) + nameLen + sizeof(b_type_code) + sizeof(bool) + sizeof(size_t);
-                size_t dataLen = Object->fixed_size ? Object->bytes : sizeof(b_address_t);
+                size_t objectSize = sizeof(size_t) + nameLen + sizeof(type_code) + sizeof(bool) + sizeof(size_t);
+                size_t dataLen = Object->fixed_size ? Object->bytes : sizeof(__be_addr_t);
                 objectSize += dataLen;
 
                 size += objectSize;
@@ -238,67 +238,67 @@ size_t BMessage::FlattenedSize() const
 bool BMessage::Flatten(char *buffer, size_t bufferSize) const
 {
     if(buffer == NULL ||
-       bufferSize < sizeof(size_t) + sizeof(b_uint32) + sizeof(b_uint64) +
-            sizeof(b_int64) + 2 * (sizeof(b_uint64) + sizeof(b_bigtime_t)) + sizeof(b_address_t) + sizeof(bool)) return false;
+       bufferSize < sizeof(size_t) + sizeof(__be_uint32) + sizeof(__be_uint64) +
+            sizeof(__be_int64) + 2 * (sizeof(__be_uint64) + sizeof(bigtime_t)) + sizeof(__be_addr_t) + sizeof(bool)) return false;
 
     size_t size = 0;
 
     // msg->what
-    size += sizeof(size_t) + sizeof(b_uint32) + sizeof(b_uint64) +
-        sizeof(b_int64) + 2 * (sizeof(b_uint64) + sizeof(b_bigtime_t)) + sizeof(b_address_t) + sizeof(bool);
+    size += sizeof(size_t) + sizeof(__be_uint32) + sizeof(__be_uint64) +
+        sizeof(__be_int64) + 2 * (sizeof(__be_uint64) + sizeof(bigtime_t)) + sizeof(__be_addr_t) + sizeof(bool);
     char *dst = buffer;
     dst += sizeof(size_t);
-    memcpy(dst, &what, sizeof(b_uint32)); dst += sizeof(b_uint32);
+    memcpy(dst, &what, sizeof(__be_uint32)); dst += sizeof(__be_uint32);
 
     // fTeam
-    memcpy(dst, &fTeam, sizeof(b_int64)); dst += sizeof(b_int64);
+    memcpy(dst, &fTeam, sizeof(__be_int64)); dst += sizeof(__be_int64);
 
     // fTargetToken + fTargetTokenTimestamp
-    memcpy(dst, &fTargetToken, sizeof(b_uint64)); dst += sizeof(b_uint64);
-    memcpy(dst, &fTargetTokenTimestamp, sizeof(b_bigtime_t)); dst += sizeof(b_bigtime_t);
+    memcpy(dst, &fTargetToken, sizeof(__be_uint64)); dst += sizeof(__be_uint64);
+    memcpy(dst, &fTargetTokenTimestamp, sizeof(bigtime_t)); dst += sizeof(bigtime_t);
 
     // fReplyToken + fReplyTokenTimestamp
-    memcpy(dst, &fReplyToken, sizeof(b_uint64)); dst += sizeof(b_uint64);
-    memcpy(dst, &fReplyTokenTimestamp, sizeof(b_bigtime_t)); dst += sizeof(b_bigtime_t);
+    memcpy(dst, &fReplyToken, sizeof(__be_uint64)); dst += sizeof(__be_uint64);
+    memcpy(dst, &fReplyTokenTimestamp, sizeof(bigtime_t)); dst += sizeof(bigtime_t);
 
     // fSource
-    b_address_t sourcb_address = reinterpret_cast<b_address_t>(fSource);
-    memcpy(dst, &sourcb_address, sizeof(b_address_t)); dst += sizeof(b_address_t);
+     __be_addr_t sourcb_address = reinterpret_cast<be_addr_t>(fSource);
+    memcpy(dst, &sourcb_address, sizeof(__be_addr_t)); dst += sizeof(__be_addr_t);
 
     // fIsReply
     memcpy(dst, &fIsReply, sizeof(bool)); dst += sizeof(bool);
 
     // recordCount
-    char *countDst = dst; dst += sizeof(b_uint64);
-    b_uint64 count = (b_uint64)B_INT64_CONSTANT(0);
+    char *countDst = dst; dst += sizeof(__be_uint64);
+     __be_uint64 count = (__be_uint64)B_INT64_CONSTANT(0);
 
-    for(b_int32 k = 0; k < fObjectsList.CountItems(); k++)
+    for(__be_int32 k = 0; k < fObjectsList.CountItems(); k++)
     {
         list_data *ldata = (list_data*)fObjectsList.ItemAt(k);
         if(!ldata) continue;
 
         size_t nameLen = (size_t)(ldata->name ? strlen(ldata->name) : 0);
 
-        for(b_int32 j = 0; j < ldata->list.CountItems(); j++)
+        for(__be_int32 j = 0; j < ldata->list.CountItems(); j++)
         {
             type_list_data *tldata = (type_list_data*)ldata->list.ItemAt(j);
             if(!tldata) continue;
 
-            for(b_int32 i = 0; i < tldata->list.CountItems(); i++)
+            for(__be_int32 i = 0; i < tldata->list.CountItems(); i++)
             {
                 _object_t *Object = (_object_t*)tldata->list.ItemAt(i);
                 if(!Object) continue;
 
                 // msg->_object_t
-                size_t dataLen = Object->fixed_size ? Object->bytes : sizeof(b_address_t);
-                size_t objectSize = sizeof(size_t) + nameLen + sizeof(b_type_code) + sizeof(bool) + sizeof(size_t) + dataLen;
+                size_t dataLen = Object->fixed_size ? Object->bytes : sizeof(__be_addr_t);
+                size_t objectSize = sizeof(size_t) + nameLen + sizeof(type_code) + sizeof(bool) + sizeof(size_t) + dataLen;
                 size += objectSize;
 
                 if(bufferSize < size) return false;
 
                 memcpy(dst, &nameLen, sizeof(size_t)); dst += sizeof(size_t);
                 if(nameLen > 0) {memcpy(dst, ldata->name, nameLen); dst += nameLen;}
-                memcpy(dst, &(tldata->type), sizeof(b_type_code)); dst += sizeof(b_type_code);
+                memcpy(dst, &(tldata->type), sizeof(type_code)); dst += sizeof(type_code);
                 memcpy(dst, &(Object->fixed_size), sizeof(bool)); dst += sizeof(bool);
                 memcpy(dst, &dataLen, sizeof(size_t)); dst += sizeof(size_t);
                 if(dataLen > 0)
@@ -309,7 +309,7 @@ bool BMessage::Flatten(char *buffer, size_t bufferSize) const
                     }
                     else
                     {
-                        b_address_t address = reinterpret_cast<b_address_t>(Object->data);
+                         __be_addr_t address = reinterpret_cast<be_addr_t>(Object->data);
                         memcpy(dst, &address, dataLen);
                     }
 
@@ -322,7 +322,7 @@ bool BMessage::Flatten(char *buffer, size_t bufferSize) const
     }
 
     // recordCount
-    memcpy(countDst, &count, sizeof(b_uint64));
+    memcpy(countDst, &count, sizeof(__be_uint64));
 
     memcpy(buffer, &size, sizeof(size_t));
 
@@ -333,12 +333,12 @@ bool BMessage::Flatten(char *buffer, size_t bufferSize) const
 bool BMessage::Unflatten(const char *buffer, size_t bufferSize)
 {
     if(buffer == NULL ||
-       bufferSize < sizeof(size_t) + sizeof(b_uint32) + sizeof(b_uint64) +
-            sizeof(b_int64) + 2 * (sizeof(b_uint64) + sizeof(b_bigtime_t)) + sizeof(b_address_t) + sizeof(bool)) return false;
+       bufferSize < sizeof(size_t) + sizeof(__be_uint32) + sizeof(__be_uint64) +
+            sizeof(__be_int64) + 2 * (sizeof(__be_uint64) + sizeof(bigtime_t)) + sizeof(__be_addr_t) + sizeof(bool)) return false;
 
     const char *src = buffer;
     BMessage msg;
-    b_uint64 recordCount = 0;
+     __be_uint64 recordCount = 0;
     size_t _bufferSize = 0;
 
     memcpy(&_bufferSize, src, sizeof(size_t));
@@ -346,30 +346,30 @@ bool BMessage::Unflatten(const char *buffer, size_t bufferSize)
     src += sizeof(size_t); bufferSize -= sizeof(size_t);
 
     // msg->what
-    memcpy(&msg.what, src, sizeof(b_uint32)); src += sizeof(b_uint32); bufferSize -= sizeof(b_uint32);
+    memcpy(&msg.what, src, sizeof(__be_uint32)); src += sizeof(__be_uint32); bufferSize -= sizeof(__be_uint32);
 
     // fTeam
-    memcpy(&msg.fTeam, src, sizeof(b_int64)); src += sizeof(b_int64); bufferSize -= sizeof(b_int64);
+    memcpy(&msg.fTeam, src, sizeof(__be_int64)); src += sizeof(__be_int64); bufferSize -= sizeof(__be_int64);
 
     // fTargetToken + fTargetTokenTimestamp
-    memcpy(&msg.fTargetToken, src, sizeof(b_uint64)); src += sizeof(b_uint64); bufferSize -= sizeof(b_uint64);
-    memcpy(&msg.fTargetTokenTimestamp, src, sizeof(b_bigtime_t)); src += sizeof(b_bigtime_t); bufferSize -= sizeof(b_bigtime_t);
+    memcpy(&msg.fTargetToken, src, sizeof(__be_uint64)); src += sizeof(__be_uint64); bufferSize -= sizeof(__be_uint64);
+    memcpy(&msg.fTargetTokenTimestamp, src, sizeof(bigtime_t)); src += sizeof(bigtime_t); bufferSize -= sizeof(bigtime_t);
 
     // fReplyToken + fReplyTokenTimestamp
-    memcpy(&msg.fReplyToken, src, sizeof(b_uint64)); src += sizeof(b_uint64); bufferSize -= sizeof(b_uint64);
-    memcpy(&msg.fReplyTokenTimestamp, src, sizeof(b_bigtime_t)); src += sizeof(b_bigtime_t); bufferSize -= sizeof(b_bigtime_t);
+    memcpy(&msg.fReplyToken, src, sizeof(__be_uint64)); src += sizeof(__be_uint64); bufferSize -= sizeof(__be_uint64);
+    memcpy(&msg.fReplyTokenTimestamp, src, sizeof(bigtime_t)); src += sizeof(bigtime_t); bufferSize -= sizeof(bigtime_t);
 
     // fSource
-    b_address_t sourcb_address;
-    memcpy(&sourcb_address, src, sizeof(b_address_t)); src += sizeof(b_address_t); bufferSize -= sizeof(b_address_t);
+     __be_addr_t sourcb_address;
+    memcpy(&sourcb_address, src, sizeof(__be_addr_t)); src += sizeof(__be_addr_t); bufferSize -= sizeof(__be_addr_t);
 
     // fIsReply
     memcpy(&msg.fIsReply, src, sizeof(bool)); src += sizeof(bool); bufferSize -= sizeof(bool);
 
     // recordCount
-    memcpy(&recordCount, src, sizeof(b_uint64)); src += sizeof(b_uint64); bufferSize -= sizeof(b_uint64);
+    memcpy(&recordCount, src, sizeof(__be_uint64)); src += sizeof(__be_uint64); bufferSize -= sizeof(__be_uint64);
 
-    for(b_uint64 i = (b_uint64)B_INT64_CONSTANT(0); i < recordCount; i++)
+    for(__be_uint64 i = (__be_uint64)B_INT64_CONSTANT(0); i < recordCount; i++)
     {
         // Object->name
         if(bufferSize < sizeof(size_t)) return false;
@@ -388,9 +388,9 @@ bool BMessage::Unflatten(const char *buffer, size_t bufferSize)
         }
 
         // Object->type
-        if(bufferSize < sizeof(b_type_code)) {if(name) free(name); return false;}
-        b_type_code type;
-        memcpy(&type, src, sizeof(b_type_code)); src += sizeof(b_type_code); bufferSize -= sizeof(b_type_code);
+        if(bufferSize < sizeof(type_code)) {if(name) free(name); return false;}
+        type_code type;
+        memcpy(&type, src, sizeof(type_code)); src += sizeof(type_code); bufferSize -= sizeof(type_code);
 
         // Object->fixed_size
         if(bufferSize < sizeof(bool)) {if(name) free(name); return false;}
@@ -409,10 +409,10 @@ bool BMessage::Unflatten(const char *buffer, size_t bufferSize)
         {
             if(!fixed_size)
             {
-                size_t dataLen = sizeof(b_address_t);
+                size_t dataLen = sizeof(__be_addr_t);
                 if(bytes != dataLen || bufferSize < dataLen) {if(name) free(name); return false;}
 
-                b_address_t address = 0;
+                 __be_addr_t address = 0;
                 memcpy(&address, src, dataLen);
                 data = reinterpret_cast<void*>(address);
             }
@@ -522,7 +522,7 @@ BMessage::PrintToStream() const
         BHAPI_OUTPUT("No Reply token\n");
     BHAPI_OUTPUT("%s\t\t%s\n", (fIsReply ? "Reply message" : "Not reply message"), (fSource ? "Has source" : "No source"));
 
-    for(b_int32 k = 0; k < fObjectsList.CountItems(); k++)
+    for(__be_int32 k = 0; k < fObjectsList.CountItems(); k++)
     {
         list_data *ldata = (list_data*)fObjectsList.ItemAt(k);
         if(!ldata)
@@ -532,9 +532,9 @@ BMessage::PrintToStream() const
         }
 
         const char *name = ldata->name ? (strlen(ldata->name) > 0 ? (const char*)ldata->name : "NULL") : "ERROR-NULL";
-        b_uint64 count = (b_uint64)B_INT64_CONSTANT(0);
+         __be_uint64 count = (__be_uint64)B_INT64_CONSTANT(0);
 
-        for(b_int32 j = 0; j < ldata->list.CountItems(); j++)
+        for(__be_int32 j = 0; j < ldata->list.CountItems(); j++)
         {
             type_list_data *tldata = (type_list_data*)ldata->list.ItemAt(j);
             if(!tldata)
@@ -543,7 +543,7 @@ BMessage::PrintToStream() const
                 continue;
             }
 
-            for(b_int32 i = 0; i < tldata->list.CountItems(); i++)
+            for(__be_int32 i = 0; i < tldata->list.CountItems(); i++)
             {
                 _object_t *Object = (_object_t*)tldata->list.ItemAt(i);
 
@@ -570,19 +570,19 @@ BMessage::PrintToStream() const
                                 break;
 
                             case B_INT8_TYPE:
-                                BHAPI_OUTPUT("\tINT8\t%I8i\n", *((b_int8*)Object->data));
+                                BHAPI_OUTPUT("\tINT8\t%I8i\n", *((__be_int8*)Object->data));
                                 break;
 
                             case B_INT16_TYPE:
-                                BHAPI_OUTPUT("\tINT16\t%I16i\n", *((b_int16*)Object->data));
+                                BHAPI_OUTPUT("\tINT16\t%I16i\n", *((__be_int16*)Object->data));
                                 break;
 
                             case B_INT32_TYPE:
-                                BHAPI_OUTPUT("\tINT32\t%I32i\n", *((b_int32*)Object->data));
+                                BHAPI_OUTPUT("\tINT32\t%I32i\n", *((__be_int32*)Object->data));
                                 break;
 
                             case B_INT64_TYPE:
-                                BHAPI_OUTPUT("\tINT64\t%I64i\n", *((b_int64*)Object->data));
+                                BHAPI_OUTPUT("\tINT64\t%I64i\n", *((__be_int64*)Object->data));
                                 break;
 
                             case B_BOOL_TYPE:
@@ -659,11 +659,11 @@ BMessage::~BMessage()
 
 
 BMessage::list_data*
-BMessage::_find_list(const BList *list, const char *name, b_int32 *index)
+BMessage::_find_list(const BList *list, const char *name,  __be_int32 *index)
 {
     if(!list || !name) return NULL;
 
-    for(b_int32 i = 0; i < list->CountItems(); i++)
+    for(__be_int32 i = 0; i < list->CountItems(); i++)
     {
         list_data *data = (list_data*)list->ItemAt(i);
         if(!data || !data->name) continue;
@@ -679,11 +679,11 @@ BMessage::_find_list(const BList *list, const char *name, b_int32 *index)
 
 
 BMessage::type_list_data*
-BMessage::_find_type_list(const BList *list, b_type_code type)
+BMessage::_find_type_list(const BList *list, type_code type)
 {
     if(!list) return NULL;
 
-    for(b_int32 i = 0; i < list->CountItems(); i++)
+    for(__be_int32 i = 0; i < list->CountItems(); i++)
     {
         type_list_data *data = (type_list_data*)list->ItemAt(i);
         if(!data) continue;
@@ -694,8 +694,8 @@ BMessage::_find_type_list(const BList *list, b_type_code type)
 }
 
 
-b_int32
-BMessage::CountItems(const char *name, b_type_code type) const
+be_int32
+BMessage::CountItems(const char *name, type_code type) const
 {
     if(!name) return -1;
 
@@ -709,8 +709,8 @@ BMessage::CountItems(const char *name, b_type_code type) const
 }
 
 
-b_int32
-BMessage::CountItems(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type) const
+be_int32
+BMessage::CountItems(__be_int32 nameIndex,  __be_int32 typeIndex, type_code *type) const
 {
     list_data *ldata = (list_data*)fObjectsList.ItemAt(nameIndex);
     if(!ldata) return -1;
@@ -724,7 +724,7 @@ BMessage::CountItems(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type) co
 
 
 bool
-BMessage::TypeAt(const char *name, b_int32 typeIndex, b_type_code *type) const
+BMessage::TypeAt(const char *name,  __be_int32 typeIndex, type_code *type) const
 {
     if(!name || !type) return false;
 
@@ -741,7 +741,7 @@ BMessage::TypeAt(const char *name, b_int32 typeIndex, b_type_code *type) const
 
 
 bool
-BMessage::TypeAt(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type) const
+BMessage::TypeAt(__be_int32 nameIndex,  __be_int32 typeIndex, type_code *type) const
 {
     if(!type) return false;
 
@@ -757,7 +757,7 @@ BMessage::TypeAt(b_int32 nameIndex, b_int32 typeIndex, b_type_code *type) const
 }
 
 
-b_int32
+be_int32
 BMessage::CountTypesByName(const char *name) const
 {
     if(!name) return -1;
@@ -769,8 +769,8 @@ BMessage::CountTypesByName(const char *name) const
 }
 
 
-b_int32
-BMessage::CountTypesByName(b_int32 nameIndex) const
+be_int32
+BMessage::CountTypesByName(__be_int32 nameIndex) const
 {
     list_data *ldata = (list_data*)fObjectsList.ItemAt(nameIndex);
     if(!ldata) return -1;
@@ -779,19 +779,19 @@ BMessage::CountTypesByName(b_int32 nameIndex) const
 }
 
 
-b_int32
-BMessage::CountNames(b_type_code type, bool count_all_names_when_any_type) const
+be_int32
+BMessage::CountNames(type_code type, bool count_all_names_when_any_type) const
 {
     if(type == B_ANY_TYPE && count_all_names_when_any_type) return fObjectsList.CountItems();
 
-    b_int32 retVal = 0;
+     __be_int32 retVal = 0;
 
-    for(b_int32 i = 0; i < fObjectsList.CountItems(); i++)
+    for(__be_int32 i = 0; i < fObjectsList.CountItems(); i++)
     {
         list_data *ldata = (list_data*)fObjectsList.ItemAt(i);
         if(ldata == NULL) continue;
 
-        for(b_int32 k = 0; k < ldata->list.CountItems(); k++)
+        for(__be_int32 k = 0; k < ldata->list.CountItems(); k++)
         {
             type_list_data *tldata = (type_list_data*)ldata->list.ItemAt(i);
             if(tldata == NULL) continue;
@@ -803,17 +803,17 @@ BMessage::CountNames(b_type_code type, bool count_all_names_when_any_type) const
 }
 
 
-b_int32
+be_int32
 BMessage::FindName(const char *name) const
 {
-    b_int32 index = -1;
+     __be_int32 index = -1;
     _find_list(&fObjectsList, name, &index);
     return index;
 }
 
 
 const char*
-BMessage::NameAt(b_int32 nameIndex) const
+BMessage::NameAt(__be_int32 nameIndex) const
 {
     list_data *data = (list_data*)fObjectsList.ItemAt(nameIndex);
     return(data ? data->name : NULL);
@@ -823,17 +823,17 @@ BMessage::NameAt(b_int32 nameIndex) const
 void
 BMessage::MakeEmpty()
 {
-    for(b_int32 k = 0; k < fObjectsList.CountItems(); k++)
+    for(__be_int32 k = 0; k < fObjectsList.CountItems(); k++)
     {
         list_data *ldata = (list_data*)fObjectsList.ItemAt(k);
         if(!ldata) continue;
 
-        for(b_int32 j = 0; j < ldata->list.CountItems(); j++)
+        for(__be_int32 j = 0; j < ldata->list.CountItems(); j++)
         {
             type_list_data *tldata = (type_list_data*)ldata->list.ItemAt(j);
             if(!tldata) continue;
 
-            for(b_int32 i = 0; i < tldata->list.CountItems(); i++)
+            for(__be_int32 i = 0; i < tldata->list.CountItems(); i++)
             {
                 _object_t *Object = (_object_t*)tldata->list.ItemAt(i);
                 if(!Object) continue;
@@ -884,7 +884,7 @@ BMessage::Rename(const char *old_entry, const char *new_entry)
 
 
 bool
-BMessage::AddData(const char *name, b_type_code type, const void *data, size_t numBytes, bool is_fixed_size)
+BMessage::AddData(const char *name, type_code type, const void *data, size_t numBytes, bool is_fixed_size)
 {
     if(!name) return false;
     if(!data && (!is_fixed_size || numBytes != 0)) return false;
@@ -975,34 +975,34 @@ BMessage::AddString(const char *name, const BString &aString)
 
 
 bool
-BMessage::AddInt8(const char *name, b_int8 val)
+BMessage::AddInt8(const char *name,  __be_int8 val)
 {
     if(!name) return false;
-    return AddData(name, B_INT8_TYPE, (const void*)&val, sizeof(b_int8), true);
+    return AddData(name, B_INT8_TYPE, (const void*)&val, sizeof(__be_int8), true);
 }
 
 
 bool
-BMessage::AddInt16(const char *name, b_int16 val)
+BMessage::AddInt16(const char *name,  __be_int16 val)
 {
     if(!name) return false;
-    return AddData(name, B_INT16_TYPE, (const void*)&val, sizeof(b_int16), true);
+    return AddData(name, B_INT16_TYPE, (const void*)&val, sizeof(__be_int16), true);
 }
 
 
 bool
-BMessage::AddInt32(const char *name, b_int32 val)
+BMessage::AddInt32(const char *name,  __be_int32 val)
 {
     if(!name) return false;
-    return AddData(name, B_INT32_TYPE, (const void*)&val, sizeof(b_int32), true);
+    return AddData(name, B_INT32_TYPE, (const void*)&val, sizeof(__be_int32), true);
 }
 
 
 bool
-BMessage::AddInt64(const char *name, b_int64 val)
+BMessage::AddInt64(const char *name,  __be_int64 val)
 {
     if(!name) return false;
-    return AddData(name, B_INT64_TYPE, (const void*)&val, sizeof(b_int64), true);
+    return AddData(name, B_INT64_TYPE, (const void*)&val, sizeof(__be_int64), true);
 }
 
 
@@ -1135,14 +1135,14 @@ BMessage::AddMessenger(const char *name, const BMessenger &msgr)
 
 
 bool
-BMessage::FindData(const char *name, b_type_code type, const void **data, b_size_t *numBytes) const
+BMessage::FindData(const char *name, type_code type, const void **data,  __be_size_t *numBytes) const
 {
     return FindData(name, type, 0, data, numBytes);
 }
 
 
 bool
-BMessage::FindData(const char *name, b_type_code type, b_int32 index, const void **data, b_size_t *numBytes) const
+BMessage::FindData(const char *name, type_code type,  __be_int32 index, const void **data,  __be_size_t *numBytes) const
 {
     if(!name) return false;
 
@@ -1159,7 +1159,7 @@ BMessage::FindData(const char *name, b_type_code type, b_int32 index, const void
     if(numBytes)
     {
         if(Object->fixed_size)
-            *numBytes = (b_size_t)Object->bytes;
+            *numBytes = (__be_size_t)Object->bytes;
         else
             *numBytes = -1;
     }
@@ -1169,7 +1169,7 @@ BMessage::FindData(const char *name, b_type_code type, b_int32 index, const void
 
 
 bool
-BMessage::FindData(b_int32 nameIndex, b_int32 typeIndex, b_int32 index, const void **data, b_size_t *numBytes) const
+BMessage::FindData(__be_int32 nameIndex,  __be_int32 typeIndex,  __be_int32 index, const void **data,  __be_size_t *numBytes) const
 {
     list_data *ldata = (list_data*)fObjectsList.ItemAt(nameIndex);
     if(!ldata) return false;
@@ -1184,7 +1184,7 @@ BMessage::FindData(b_int32 nameIndex, b_int32 typeIndex, b_int32 index, const vo
     if(numBytes)
     {
         if(Object->fixed_size)
-            *numBytes = (b_size_t)Object->bytes;
+            *numBytes = (__be_size_t)Object->bytes;
         else
             *numBytes = -1;
     }
@@ -1201,7 +1201,7 @@ BMessage::FindString(const char *name, const char **str) const
 
 
 bool
-BMessage::FindString(const char *name, b_int32 index, const char **str) const
+BMessage::FindString(const char *name,  __be_int32 index, const char **str) const
 {
     return FindData(name, B_STRING_TYPE, index, (const void**)str, NULL);
 }
@@ -1215,7 +1215,7 @@ BMessage::FindString(const char *name, BString *str) const
 
 
 bool
-BMessage::FindString(const char *name, b_int32 index, BString *str) const
+BMessage::FindString(const char *name,  __be_int32 index, BString *str) const
 {
     const char *string = NULL;
     if(!FindData(name, B_STRING_TYPE, index, (const void**)&string, NULL)) return false;
@@ -1225,16 +1225,16 @@ BMessage::FindString(const char *name, b_int32 index, BString *str) const
 
 
 bool
-BMessage::FindInt8(const char *name, b_int8 *val) const
+BMessage::FindInt8(const char *name,  __be_int8 *val) const
 {
     return FindInt8(name, 0, val);
 }
 
 
 bool
-BMessage::FindInt8(const char *name, b_int32 index, b_int8 *val) const
+BMessage::FindInt8(const char *name,  __be_int32 index,  __be_int8 *val) const
 {
-    const b_int8 *value = NULL;
+    const  __be_int8 *value = NULL;
     if(!FindData(name, B_INT8_TYPE, index, (const void**)&value, NULL)) return false;
     if(val) *val = *value;
     return true;
@@ -1242,16 +1242,16 @@ BMessage::FindInt8(const char *name, b_int32 index, b_int8 *val) const
 
 
 bool
-BMessage::FindInt16(const char *name, b_int16 *val) const
+BMessage::FindInt16(const char *name,  __be_int16 *val) const
 {
     return FindInt16(name, 0, val);
 }
 
 
 bool
-BMessage::FindInt16(const char *name, b_int32 index, b_int16 *val) const
+BMessage::FindInt16(const char *name,  __be_int32 index,  __be_int16 *val) const
 {
-    const b_int16 *value = NULL;
+    const  __be_int16 *value = NULL;
     if(!FindData(name, B_INT16_TYPE, index, (const void**)&value, NULL)) return false;
     if(val) *val = *value;
     return true;
@@ -1259,16 +1259,16 @@ BMessage::FindInt16(const char *name, b_int32 index, b_int16 *val) const
 
 
 bool
-BMessage::FindInt32(const char *name, b_int32 *val) const
+BMessage::FindInt32(const char *name,  __be_int32 *val) const
 {
     return FindInt32(name, 0, val);
 }
 
 
 bool
-BMessage::FindInt32(const char *name, b_int32 index, b_int32 *val) const
+BMessage::FindInt32(const char *name,  __be_int32 index,  __be_int32 *val) const
 {
-    const b_int32 *value = NULL;
+    const  __be_int32 *value = NULL;
     if(!FindData(name, B_INT32_TYPE, index, (const void**)&value, NULL)) return false;
     if(val) *val = *value;
     return true;
@@ -1276,16 +1276,16 @@ BMessage::FindInt32(const char *name, b_int32 index, b_int32 *val) const
 
 
 bool
-BMessage::FindInt64(const char *name, b_int64 *val) const
+BMessage::FindInt64(const char *name,  __be_int64 *val) const
 {
     return FindInt64(name, 0, val);
 }
 
 
 bool
-BMessage::FindInt64(const char *name, b_int32 index, b_int64 *val) const
+BMessage::FindInt64(const char *name,  __be_int32 index,  __be_int64 *val) const
 {
-    const b_int64 *value = NULL;
+    const  __be_int64 *value = NULL;
     if(!FindData(name, B_INT64_TYPE, index, (const void**)&value, NULL)) return false;
     if(val) *val = *value;
     return true;
@@ -1300,7 +1300,7 @@ BMessage::FindBool(const char *name, bool *aBoolean) const
 
 
 bool
-BMessage::FindBool(const char *name, b_int32 index, bool *aBoolean) const
+BMessage::FindBool(const char *name,  __be_int32 index, bool *aBoolean) const
 {
     const bool *value = NULL;
     if(!FindData(name, B_BOOL_TYPE, index, (const void**)&value, NULL)) return false;
@@ -1317,7 +1317,7 @@ BMessage::FindFloat(const char *name, float *f) const
 
 
 bool
-BMessage::FindFloat(const char *name, b_int32 index, float *f) const
+BMessage::FindFloat(const char *name,  __be_int32 index, float *f) const
 {
     const float *value = NULL;
     if(!FindData(name, B_FLOAT_TYPE, index, (const void**)&value, NULL)) return false;
@@ -1334,7 +1334,7 @@ BMessage::FindDouble(const char *name, double *d) const
 
 
 bool
-BMessage::FindDouble(const char *name, b_int32 index, double *d) const
+BMessage::FindDouble(const char *name,  __be_int32 index, double *d) const
 {
     const double *value = NULL;
     if(!FindData(name, B_DOUBLE_TYPE, index, (const void**)&value, NULL)) return false;
@@ -1351,7 +1351,7 @@ BMessage::FindPoint(const char *name, BPoint *pt) const
 
 
 bool
-BMessage::FindPoint(const char *name, b_int32 index, BPoint *pt) const
+BMessage::FindPoint(const char *name,  __be_int32 index, BPoint *pt) const
 {
     struct point_t {
         float x;
@@ -1374,7 +1374,7 @@ BMessage::FindRect(const char *name, BRect *r) const
 
 
 bool
-BMessage::FindRect(const char *name, b_int32 index, BRect *r) const
+BMessage::FindRect(const char *name,  __be_int32 index, BRect *r) const
 {
     struct rect_t {
         float left;
@@ -1399,7 +1399,7 @@ BMessage::FindPointer(const char *name, void **ptr) const
 
 
 bool
-BMessage::FindPointer(const char *name, b_int32 index, void **ptr) const
+BMessage::FindPointer(const char *name,  __be_int32 index, void **ptr) const
 {
     return FindData(name, B_POINTER_TYPE, index, (const void**)ptr, NULL);
 }
@@ -1413,7 +1413,7 @@ BMessage::FindMessage(const char *name, BMessage *msg) const
 
 
 bool
-BMessage::FindMessage(const char *name, b_int32 index, BMessage *msg) const
+BMessage::FindMessage(const char *name,  __be_int32 index, BMessage *msg) const
 {
     const char *buffer = NULL;
     if(!FindData(name, B_MESSAGE_TYPE, index, (const void**)&buffer, NULL)) return false;
@@ -1439,7 +1439,7 @@ BMessage::FindMessenger(const char *name, BMessenger *msgr) const
 
 
 bool
-BMessage::FindMessenger(const char *name, b_int32 index, BMessenger *msgr) const
+BMessage::FindMessenger(const char *name,  __be_int32 index, BMessenger *msgr) const
 {
     const char *buffer = NULL;
     if(!FindData(name, B_MESSENGER_TYPE, index, (const void**)&buffer, NULL)) return false;
@@ -1458,105 +1458,105 @@ BMessage::FindMessenger(const char *name, b_int32 index, BMessenger *msgr) const
 
 
 bool
-BMessage::HasData(const char *name, b_type_code type, b_int32 index) const
+BMessage::HasData(const char *name, type_code type,  __be_int32 index) const
 {
     return FindData(name, type, index, NULL, NULL);
 }
 
 
 bool
-BMessage::HasString(const char *name, b_int32 index) const
+BMessage::HasString(const char *name,  __be_int32 index) const
 {
     return FindString(name, index, (const char**)NULL);
 }
 
 
 bool
-BMessage::HasInt8(const char *name, b_int32 index) const
+BMessage::HasInt8(const char *name,  __be_int32 index) const
 {
     return FindInt8(name, index, NULL);
 }
 
 
 bool
-BMessage::HasInt16(const char *name, b_int32 index) const
+BMessage::HasInt16(const char *name,  __be_int32 index) const
 {
     return FindInt16(name, index, NULL);
 }
 
 
 bool
-BMessage::HasInt32(const char *name, b_int32 index) const
+BMessage::HasInt32(const char *name,  __be_int32 index) const
 {
     return FindInt32(name, index, NULL);
 }
 
 
 bool
-BMessage::HasInt64(const char *name, b_int32 index) const
+BMessage::HasInt64(const char *name,  __be_int32 index) const
 {
     return FindInt64(name, index, NULL);
 }
 
 
 bool
-BMessage::HasBool(const char *name, b_int32 index) const
+BMessage::HasBool(const char *name,  __be_int32 index) const
 {
     return FindBool(name, index, NULL);
 }
 
 
 bool
-BMessage::HasFloat(const char *name, b_int32 index) const
+BMessage::HasFloat(const char *name,  __be_int32 index) const
 {
     return FindFloat(name, index, NULL);
 }
 
 
 bool
-BMessage::HasDouble(const char *name, b_int32 index) const
+BMessage::HasDouble(const char *name,  __be_int32 index) const
 {
     return FindDouble(name, index, NULL);
 }
 
 
 bool
-BMessage::HasPoint(const char *name, b_int32 index) const
+BMessage::HasPoint(const char *name,  __be_int32 index) const
 {
     return FindPoint(name, index, NULL);
 }
 
 
 bool
-BMessage::HasRect(const char *name, b_int32 index) const
+BMessage::HasRect(const char *name,  __be_int32 index) const
 {
     return FindRect(name, index, NULL);
 }
 
 
 bool
-BMessage::HasPointer(const char *name, b_int32 index) const
+BMessage::HasPointer(const char *name,  __be_int32 index) const
 {
     return FindPointer(name, index, NULL);
 }
 
 
 bool
-BMessage::HasMessage(const char *name, b_int32 index) const
+BMessage::HasMessage(const char *name,  __be_int32 index) const
 {
     return FindMessage(name, index, NULL);
 }
 
 
 bool
-BMessage::HasMessenger(const char *name, b_int32 index) const
+BMessage::HasMessenger(const char *name,  __be_int32 index) const
 {
     return FindMessenger(name, index, NULL);
 }
 
 
 bool
-BMessage::RemoveData(const char *name, b_type_code type, b_int32 index)
+BMessage::RemoveData(const char *name, type_code type,  __be_int32 index)
 {
     if(!name) return false;
 
@@ -1590,7 +1590,7 @@ BMessage::RemoveData(const char *name, b_type_code type, b_int32 index)
 
 
 bool
-BMessage::RemoveData(const char *name, b_type_code type)
+BMessage::RemoveData(const char *name, type_code type)
 {
     if(!name) return false;
 
@@ -1600,7 +1600,7 @@ BMessage::RemoveData(const char *name, b_type_code type)
     type_list_data *tldata = _find_type_list(&(ldata->list), type);
     if(!tldata) return false;
 
-    for(b_int32 i = 0; i < tldata->list.CountItems(); i++)
+    for(__be_int32 i = 0; i < tldata->list.CountItems(); i++)
     {
         _object_t *Object = (_object_t*)tldata->list.ItemAt(i);
         if(!Object) continue;
@@ -1631,12 +1631,12 @@ BMessage::RemoveData(const char *name)
     list_data *ldata = _find_list(&fObjectsList, name);
     if(!ldata) return false;
 
-    for(b_int32 j = 0; j < ldata->list.CountItems(); j++)
+    for(__be_int32 j = 0; j < ldata->list.CountItems(); j++)
     {
         type_list_data *tldata = (type_list_data*)ldata->list.ItemAt(j);
         if(!tldata) continue;
 
-        for(b_int32 i = 0; i < tldata->list.CountItems(); i++)
+        for(__be_int32 i = 0; i < tldata->list.CountItems(); i++)
         {
             _object_t *Object = (_object_t*)tldata->list.ItemAt(i);
             if(!Object) continue;
@@ -1658,98 +1658,98 @@ BMessage::RemoveData(const char *name)
 
 
 bool
-BMessage::RemovString(const char *name, b_int32 index)
+BMessage::RemovString(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_STRING_TYPE, index);
 }
 
 
 bool
-BMessage::RemoveInt8(const char *name, b_int32 index)
+BMessage::RemoveInt8(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_INT8_TYPE, index);
 }
 
 
 bool
-BMessage::RemoveInt16(const char *name, b_int32 index)
+BMessage::RemoveInt16(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_INT16_TYPE, index);
 }
 
 
 bool
-BMessage::RemoveInt32(const char *name, b_int32 index)
+BMessage::RemoveInt32(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_INT32_TYPE, index);
 }
 
 
 bool
-BMessage::RemoveInt64(const char *name, b_int32 index)
+BMessage::RemoveInt64(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_INT64_TYPE, index);
 }
 
 
 bool
-BMessage::RemoveBool(const char *name, b_int32 index)
+BMessage::RemoveBool(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_BOOL_TYPE, index);
 }
 
 
 bool
-BMessage::RemoveFloat(const char *name, b_int32 index)
+BMessage::RemoveFloat(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_FLOAT_TYPE, index);
 }
 
 
 bool
-BMessage::RemoveDouble(const char *name, b_int32 index)
+BMessage::RemoveDouble(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_DOUBLE_TYPE, index);
 }
 
 
 bool
-BMessage::RemovePoint(const char *name, b_int32 index)
+BMessage::RemovePoint(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_POINT_TYPE, index);
 }
 
 
 bool
-BMessage::RemoveRect(const char *name, b_int32 index)
+BMessage::RemoveRect(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_RECT_TYPE, index);
 }
 
 
 bool
-BMessage::RemovePointer(const char *name, b_int32 index)
+BMessage::RemovePointer(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_POINTER_TYPE, index);
 }
 
 
 bool
-BMessage::RemoveMessage(const char *name, b_int32 index)
+BMessage::RemoveMessage(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_MESSAGE_TYPE, index);
 }
 
 
 bool
-BMessage::RemoveMessenger(const char *name, b_int32 index)
+BMessage::RemoveMessenger(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_MESSENGER_TYPE, index);
 }
 
 
 bool
-BMessage::ReplaceData(const char *name, b_type_code type, b_int32 index, const void *data, size_t numBytes, bool is_fixed_size)
+BMessage::ReplaceData(const char *name, type_code type,  __be_int32 index, const void *data, size_t numBytes, bool is_fixed_size)
 {
     if(!name) return false;
     if(!data && (!is_fixed_size || numBytes != 0)) return false;
@@ -1807,14 +1807,14 @@ BMessage::ReplaceData(const char *name, b_type_code type, b_int32 index, const v
 
 
 bool
-BMessage::ReplaceData(const char *name, b_type_code type, const void *data, size_t numBytes, bool is_fixed_size)
+BMessage::ReplaceData(const char *name, type_code type, const void *data, size_t numBytes, bool is_fixed_size)
 {
     return ReplaceData(name, type, 0, data, numBytes, is_fixed_size);
 }
 
 
 bool
-BMessage::ReplacString(const char *name, b_int32 index, const char *aString)
+BMessage::ReplacString(const char *name,  __be_int32 index, const char *aString)
 {
     if(!name || !aString) return false;
     return ReplaceData(name, B_STRING_TYPE, index, (const void*)aString, (size_t)(strlen(aString) + 1), true);
@@ -1829,7 +1829,7 @@ BMessage::ReplacString(const char *name, const char *aString)
 
 
 bool
-BMessage::ReplacString(const char *name, b_int32 index, const BString &aString)
+BMessage::ReplacString(const char *name,  __be_int32 index, const BString &aString)
 {
     return ReplacString(name, index, aString.String());
 }
@@ -1843,67 +1843,67 @@ BMessage::ReplacString(const char *name, const BString &aString)
 
 
 bool
-BMessage::ReplaceInt8(const char *name, b_int32 index, b_int8 val)
+BMessage::ReplaceInt8(const char *name,  __be_int32 index,  __be_int8 val)
 {
     if(!name) return false;
-    return ReplaceData(name, B_INT8_TYPE, index, (const void*)&val, sizeof(b_int8), true);
+    return ReplaceData(name, B_INT8_TYPE, index, (const void*)&val, sizeof(__be_int8), true);
 }
 
 
 bool
-BMessage::ReplaceInt8(const char *name, b_int8 val)
+BMessage::ReplaceInt8(const char *name,  __be_int8 val)
 {
     return ReplaceInt8(name, 0, val);
 }
 
 
 bool
-BMessage::ReplaceInt16(const char *name, b_int32 index, b_int16 val)
+BMessage::ReplaceInt16(const char *name,  __be_int32 index,  __be_int16 val)
 {
     if(!name) return false;
-    return ReplaceData(name, B_INT16_TYPE, index, (const void*)&val, sizeof(b_int16), true);
+    return ReplaceData(name, B_INT16_TYPE, index, (const void*)&val, sizeof(__be_int16), true);
 }
 
 
 bool
-BMessage::ReplaceInt16(const char *name, b_int16 val)
+BMessage::ReplaceInt16(const char *name,  __be_int16 val)
 {
     return ReplaceInt16(name, 0, val);
 }
 
 
 bool
-BMessage::ReplaceInt32(const char *name, b_int32 index, b_int32 val)
+BMessage::ReplaceInt32(const char *name,  __be_int32 index,  __be_int32 val)
 {
     if(!name) return false;
-    return ReplaceData(name, B_INT32_TYPE, index, (const void*)&val, sizeof(b_int32), true);
+    return ReplaceData(name, B_INT32_TYPE, index, (const void*)&val, sizeof(__be_int32), true);
 }
 
 
 bool
-BMessage::ReplaceInt32(const char *name, b_int32 val)
+BMessage::ReplaceInt32(const char *name,  __be_int32 val)
 {
     return ReplaceInt32(name, 0, val);
 }
 
 
 bool
-BMessage::ReplaceInt64(const char *name, b_int32 index, b_int64 val)
+BMessage::ReplaceInt64(const char *name,  __be_int32 index,  __be_int64 val)
 {
     if(!name) return false;
-    return ReplaceData(name, B_INT64_TYPE, index, (const void*)&val, sizeof(b_int64), true);
+    return ReplaceData(name, B_INT64_TYPE, index, (const void*)&val, sizeof(__be_int64), true);
 }
 
 
 bool
-BMessage::ReplaceInt64(const char *name, b_int64 val)
+BMessage::ReplaceInt64(const char *name,  __be_int64 val)
 {
     return ReplaceInt64(name, 0, val);
 }
 
 
 bool
-BMessage::ReplaceBool(const char *name, b_int32 index, bool aBoolean)
+BMessage::ReplaceBool(const char *name,  __be_int32 index, bool aBoolean)
 {
     if(!name) return false;
     return ReplaceData(name, B_BOOL_TYPE, index, (const void*)&aBoolean, sizeof(bool), true);
@@ -1918,7 +1918,7 @@ BMessage::ReplaceBool(const char *name, bool aBoolean)
 
 
 bool
-BMessage::ReplaceFloat(const char *name, b_int32 index, float f)
+BMessage::ReplaceFloat(const char *name,  __be_int32 index, float f)
 {
     if(!name) return false;
     return ReplaceData(name, B_FLOAT_TYPE, index, (const void*)&f, sizeof(float), true);
@@ -1933,7 +1933,7 @@ BMessage::ReplaceFloat(const char *name, float f)
 
 
 bool
-BMessage::ReplaceDouble(const char *name, b_int32 index, double d)
+BMessage::ReplaceDouble(const char *name,  __be_int32 index, double d)
 {
     if(!name) return false;
     return ReplaceData(name, B_DOUBLE_TYPE, index, (const void*)&d, sizeof(double), true);
@@ -1948,7 +1948,7 @@ BMessage::ReplaceDouble(const char *name, double d)
 
 
 bool
-BMessage::ReplacePoint(const char *name, b_int32 index, BPoint pt)
+BMessage::ReplacePoint(const char *name,  __be_int32 index, BPoint pt)
 {
     if(!name) return false;
 
@@ -1972,7 +1972,7 @@ BMessage::ReplacePoint(const char *name, BPoint pt)
 
 
 bool
-BMessage::ReplaceRect(const char *name, b_int32 index, BRect r)
+BMessage::ReplaceRect(const char *name,  __be_int32 index, BRect r)
 {
     if(!name) return false;
 
@@ -2000,7 +2000,7 @@ BMessage::ReplaceRect(const char *name, BRect r)
 
 
 bool
-BMessage::ReplacePointer(const char *name, b_int32 index, const void *ptr)
+BMessage::ReplacePointer(const char *name,  __be_int32 index, const void *ptr)
 {
     if(!name || !ptr) return false;
     return ReplaceData(name, B_POINTER_TYPE, index, ptr, 0, false);
@@ -2015,7 +2015,7 @@ BMessage::ReplacePointer(const char *name, const void *ptr)
 
 
 bool
-BMessage::ReplaceMessage(const char *name, b_int32 index, const BMessage *msg)
+BMessage::ReplaceMessage(const char *name,  __be_int32 index, const BMessage *msg)
 {
     if(!name || !msg) return false;
 
@@ -2047,7 +2047,7 @@ BMessage::ReplaceMessage(const char *name, const BMessage *msg)
 
 
 bool
-BMessage::ReplaceMessenger(const char *name, b_int32 index, const BMessenger *msgr)
+BMessage::ReplaceMessenger(const char *name,  __be_int32 index, const BMessenger *msgr)
 {
     if(!name || !msgr) return false;
 
@@ -2087,7 +2087,7 @@ BMessage::ReplaceMessenger(const char *name, const BMessenger &msgr)
 
 
 bool
-BMessage::ReplaceMessenger(const char *name, b_int32 index, const BMessenger &msgr)
+BMessage::ReplaceMessenger(const char *name,  __be_int32 index, const BMessenger &msgr)
 {
     return ReplaceMessenger(name, index, &msgr);
 }
@@ -2118,23 +2118,23 @@ BMessage::IsSourceWaiting() const
 }
 
 
-b_status_t
-BMessage::SendReply(b_uint32 command, BHandler *replyHandler) const
+status_t
+BMessage::SendReply(__be_uint32 command, BHandler *replyHandler) const
 {
     BMessage msg(command);
     return SendReply(&msg, replyHandler, B_INFINITE_TIMEOUT);
 }
 
 
-b_status_t
-BMessage::SendReply(const BMessage *message, BHandler *replyHandler, b_bigtime_t sendTimeout) const
+status_t
+BMessage::SendReply(const BMessage *message, BHandler *replyHandler, bigtime_t sendTimeout) const
 {
-    b_status_t retVal = B_BAD_VALUE;
+    status_t retVal = B_BAD_VALUE;
 
     if(message != NULL)
     {
-        b_uint64 replyToken = B_MAXUINT64;
-        b_bigtime_t replyTokenTimeStamp = B_MAXINT64;
+         __be_uint64 replyToken = B_MAXUINT64;
+        bigtime_t replyTokenTimeStamp = B_MAXINT64;
 
         if(!(replyHandler == NULL || replyHandler->fToken == NULL))
         {

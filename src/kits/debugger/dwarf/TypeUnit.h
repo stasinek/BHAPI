@@ -7,7 +7,7 @@
 
 
 #include <ObjectList.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include "BaseUnit.h"
 

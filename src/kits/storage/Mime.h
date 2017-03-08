@@ -8,9 +8,9 @@
 
 #include <sys/types.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <StorageDefs.h>
-#include <TypeConstants.h>
+#include <HaikuConstants.h>
 
 
 enum icon_size {

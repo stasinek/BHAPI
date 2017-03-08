@@ -11,7 +11,7 @@
 
 #include <regex.h>
 
-#include <String.h>
+#include <StringClass.h>
 
 #include <Referenceable.h>
 

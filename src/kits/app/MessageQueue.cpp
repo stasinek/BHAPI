@@ -46,7 +46,7 @@ BMessageQueue::BMessageQueue()
 
 BMessageQueue::~BMessageQueue()
 {
-    for(b_int32 i = 0; i < fMessagesList.CountItems(); i++) delete (BMessage*)fMessagesList.ItemAt(i);
+    for(__be_int32 i = 0; i < fMessagesList.CountItems(); i++) delete (BMessage*)fMessagesList.ItemAt(i);
     if(fLocker != NULL)
     {
         bhapi::close_locker(fLocker);
@@ -55,8 +55,8 @@ BMessageQueue::~BMessageQueue()
 }
 
 
-b_status_t
-BMessageQueue::LockWithTimeout(b_bigtime_t timeout)
+status_t
+BMessageQueue::LockWithTimeout(bigtime_t timeout)
 {
     BLocker *handlers_locker = bhapi::get_handler_operator_locker();
 
@@ -69,10 +69,10 @@ BMessageQueue::LockWithTimeout(b_bigtime_t timeout)
         return B_ERROR;
     }
 
-    b_int64 save_count = handlers_locker->CountLocks();
+     __be_int64 save_count = handlers_locker->CountLocks();
     while(handlers_locker->CountLocks() > 0) handlers_locker->Unlock();
 
-    b_status_t retVal = bhapi::lock_locker_etc(fLocker, B_TIMEOUT, timeout);
+    status_t retVal = bhapi::lock_locker_etc(fLocker, B_TIMEOUT, timeout);
     bhapi::delete_locker(locker);
 
     while(save_count-- > 1) handlers_locker->Lock();
@@ -101,7 +101,7 @@ BMessageQueue::Unlock()
 }
 
 
-b_int32
+be_int32
 BMessageQueue::CountMessages() const
 {
     return fMessagesList.CountItems();
@@ -147,16 +147,16 @@ BMessageQueue::NextMessage()
 
 
 BMessage*
-BMessageQueue::FindMessage(b_int32 index) const
+BMessageQueue::FindMessage(__be_int32 index) const
 {
     return((BMessage*)fMessagesList.ItemAt(index));
 }
 
 
 BMessage*
-BMessageQueue::FindMessage(b_uint32 what, b_int32 fromIndex) const
+BMessageQueue::FindMessage(__be_uint32 what,  __be_int32 fromIndex) const
 {
-    for(b_int32 i = fromIndex; i < fMessagesList.CountItems(); i++)
+    for(__be_int32 i = fromIndex; i < fMessagesList.CountItems(); i++)
     {
         BMessage *msg = (BMessage*)fMessagesList.ItemAt(i);
         if(msg->what == what) return msg;
@@ -167,9 +167,9 @@ BMessageQueue::FindMessage(b_uint32 what, b_int32 fromIndex) const
 
 
 BMessage*
-BMessageQueue::FindMessage(b_uint32 what, b_int32 fromIndex, b_int32 count) const
+BMessageQueue::FindMessage(__be_uint32 what,  __be_int32 fromIndex,  __be_int32 count) const
 {
-    for(b_int32 i = fromIndex, j = 0; i < fMessagesList.CountItems() && j < count; i++, j++)
+    for(__be_int32 i = fromIndex, j = 0; i < fMessagesList.CountItems() && j < count; i++, j++)
     {
         BMessage *msg = (BMessage*)fMessagesList.ItemAt(i);
         if(msg->what == what) return msg;
@@ -179,7 +179,7 @@ BMessageQueue::FindMessage(b_uint32 what, b_int32 fromIndex, b_int32 count) cons
 }
 
 
-b_int32
+be_int32
 BMessageQueue::IndexOfMessage(BMessage *an_event) const
 {
     return fMessagesList.IndexOf(an_event);

@@ -38,35 +38,35 @@
 class IMPEXPBHAPI BFile {
 public:
     BFile();
-    BFile(const char *path, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
-    BFile(const BEntry *entry, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
-    BFile(const BDirectory *dir, const char *leaf, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    BFile(const char *path,  __be_uint32 open_mode,  __be_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    BFile(const BEntry *entry,  __be_uint32 open_mode,  __be_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    BFile(const BDirectory *dir, const char *leaf,  __be_uint32 open_mode,  __be_uint32 access_mode = B_USER_READ | B_USER_WRITE);
     BFile(const BFile &from);
     virtual ~BFile();
 
-	b_status_t	InitCheck() const;
-    b_status_t	SetTo(const char *path, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
-    b_status_t	SetTo(const BEntry *entry, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
-    b_status_t	SetTo(const BDirectory *dir, const char *leaf, b_uint32 open_mode, b_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+	status_t	InitCheck() const;
+    status_t	SetTo(const char *path,  __be_uint32 open_mode,  __be_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    status_t	SetTo(const BEntry *entry,  __be_uint32 open_mode,  __be_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    status_t	SetTo(const BDirectory *dir, const char *leaf,  __be_uint32 open_mode,  __be_uint32 access_mode = B_USER_READ | B_USER_WRITE);
 	void		Unset();
 
 	bool		IsReadable() const;
 	bool		IsWritable() const;
 
-	b_size_t		Read(void *buffer, size_t size);
-    b_size_t		ReadAt(b_int64 pos, void *buffer, size_t size);
-	b_size_t		Write(const void *buffer, size_t size);
-    b_size_t		WriteAt(b_int64 pos, const void *buffer, size_t size);
+	__be_size_t		Read(void *buffer, size_t size);
+     __be_size_t		ReadAt(__be_int64 pos, void *buffer, size_t size);
+	__be_size_t		Write(const void *buffer, size_t size);
+     __be_size_t		WriteAt(__be_int64 pos, const void *buffer, size_t size);
 
-    b_int64		Seek(b_int64 position, b_uint32 seek_mode);
-    b_int64		Position() const;
-    b_status_t	SetSize(b_int64 size);
+     __be_int64		Seek(__be_int64 position,  __be_uint32 seek_mode);
+     __be_int64		Position() const;
+    status_t	SetSize(__be_int64 size);
 
     BFile&		operator=(const BFile &from);
 
 private:
 	void *fFD;
-    b_uint32 fMode;
+     __be_uint32 fMode;
 };
 
 #endif /* __cplusplus */

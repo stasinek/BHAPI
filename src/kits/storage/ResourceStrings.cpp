@@ -16,7 +16,7 @@
 #include <Entry.h>
 #include <File.h>
 #include <Resources.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <AppMisc.h>
 

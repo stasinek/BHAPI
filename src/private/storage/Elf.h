@@ -6,7 +6,7 @@
 #define _ELF_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 // types

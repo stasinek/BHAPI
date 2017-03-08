@@ -6,7 +6,7 @@
 #define _KERNEL_ARCH_ATOMIC_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <KernelExport.h>
 

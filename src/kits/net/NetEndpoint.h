@@ -43,17 +43,17 @@ public:
 
 	// Archiving
 	BNetEndpoint(const BMessage *from);
-	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+	virtual status_t Archive(BMessage *into, bool deep = true) const;
 	static BArchivable *Instantiate(const BMessage *from);
 
-	b_status_t		InitCheck() const;
+	status_t		InitCheck() const;
 
 	BNetEndpoint		&operator=(const BNetEndpoint &endpoint);
 
-	b_status_t		SetProtocol(int proto);
+	status_t		SetProtocol(int proto);
 
-    int			SetSocketOption(b_int32 level, b_int32 option, const void *data, size_t data_len);
-    int			GetSocketOption(b_int32 level, b_int32 option, void *data, size_t *data_len) const;
+    int			SetSocketOption(__be_int32 level,  __be_int32 option, const void *data, size_t data_len);
+    int			GetSocketOption(__be_int32 level,  __be_int32 option, void *data, size_t *data_len) const;
 
 	int			SetNonBlocking(bool state = true);
 	bool			IsNonBlocking() const;
@@ -65,41 +65,41 @@ public:
 
 	virtual void		Close();
 
-	virtual b_status_t	Bind(const BNetAddress &addr);
-    virtual b_status_t	Bind(b_uint16 port = 0);
+	virtual status_t	Bind(const BNetAddress &addr);
+    virtual status_t	Bind(__be_uint16 port = 0);
 
-	virtual b_status_t	Connect(const BNetAddress &addr);
-    virtual b_status_t	Connect(const char *address, b_uint16 port);
+	virtual status_t	Connect(const BNetAddress &addr);
+    virtual status_t	Connect(const char *address,  __be_uint16 port);
 
-	virtual b_status_t	Listen(int backlog = 5);
-    virtual BNetEndpoint	*Accept(b_int32 timeout_msec = -1);
+	virtual status_t	Listen(int backlog = 5);
+    virtual BNetEndpoint	*Accept(__be_int32 timeout_msec = -1);
 
-    b_int32			Error() const;
+     __be_int32			Error() const;
 	const char		*ErrorStr() const;
 
-    virtual b_int32		Send(const void *buf, size_t len, int flags = 0);
-    virtual b_int32		Send(const BNetBuffer &buf, int flags = 0);
-    virtual b_int32		SendTo(const void *buf, size_t len, const BNetAddress &to, int flags = 0);
-    virtual b_int32		SendTo(const BNetBuffer &buf, const BNetAddress &to, int flags = 0);
+    virtual  __be_int32		Send(const void *buf, size_t len, int flags = 0);
+    virtual  __be_int32		Send(const BNetBuffer &buf, int flags = 0);
+    virtual  __be_int32		SendTo(const void *buf, size_t len, const BNetAddress &to, int flags = 0);
+    virtual  __be_int32		SendTo(const BNetBuffer &buf, const BNetAddress &to, int flags = 0);
 
-    void			SetTimeout(b_bigtime_t timeout);
-    virtual b_int32		Receive(void *buf, size_t len, int flags = 0);
-    virtual b_int32		Receive(BNetBuffer &buf, size_t len, int flags = 0);
-    virtual b_int32		ReceiveFrom(void *buf, size_t len, const BNetAddress &from, int flags = 0);
-    virtual b_int32		ReceiveFrom(BNetBuffer &buf, size_t len, const BNetAddress &from, int flags = 0);
+    void			SetTimeout(bigtime_t timeout);
+    virtual  __be_int32		Receive(void *buf, size_t len, int flags = 0);
+    virtual  __be_int32		Receive(BNetBuffer &buf, size_t len, int flags = 0);
+    virtual  __be_int32		ReceiveFrom(void *buf, size_t len, const BNetAddress &from, int flags = 0);
+    virtual  __be_int32		ReceiveFrom(BNetBuffer &buf, size_t len, const BNetAddress &from, int flags = 0);
 
-    virtual bool		IsDataPending(b_bigtime_t timeout = 0);
+    virtual bool		IsDataPending(bigtime_t timeout = 0);
 
 protected:
 	// Socket(): use it carefully please.
-    b_int32			Socket() const;
+     __be_int32			Socket() const;
 
 private:
-    b_int32 fSocket;
-    b_int32 fProtocol;
+     __be_int32 fSocket;
+     __be_int32 fProtocol;
 	bool fBind;
 	bool fNonBlocking;
-	b_bigtime_t fTimeout;
+	bigtime_t fTimeout;
 
 	BNetAddress fLocalAddr;
 	BNetAddress fRemoteAddr;

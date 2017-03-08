@@ -22,12 +22,12 @@
 #include <FindDirectory.h>
 #include <FormattingConventions.h>
 #include <Language.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <Node.h>
 #include <Path.h>
 #include <PathFinder.h>
 #include <Roster.h>
-#include <String.h>
+#include <StringClass.h>
 #include <StringList.h>
 #include <TimeZone.h>
 
@@ -196,7 +196,7 @@ LocaleRosterData::SetDefaultFormattingConventions(
 		BMessage updateMessage(B_LOCALE_CHANGED);
 		status = _AddDefaultFormattingConventionsToMessage(&updateMessage);
 		if (status == B_OK)
-			status = be_roster->Broadcast(&updateMessage);
+			status =  __be_roster->Broadcast(&updateMessage);
 	}
 
 	return status;
@@ -221,7 +221,7 @@ LocaleRosterData::SetDefaultTimeZone(const BTimeZone& newZone)
 		BMessage updateMessage(B_LOCALE_CHANGED);
 		status = _AddDefaultTimeZoneToMessage(&updateMessage);
 		if (status == B_OK)
-			status = be_roster->Broadcast(&updateMessage);
+			status =  __be_roster->Broadcast(&updateMessage);
 	}
 
 	return status;
@@ -246,7 +246,7 @@ LocaleRosterData::SetPreferredLanguages(const BMessage* languages)
 		BMessage updateMessage(B_LOCALE_CHANGED);
 		status = _AddPreferredLanguagesToMessage(&updateMessage);
 		if (status == B_OK)
-			status = be_roster->Broadcast(&updateMessage);
+			status =  __be_roster->Broadcast(&updateMessage);
 	}
 
 	return status;
@@ -268,7 +268,7 @@ LocaleRosterData::SetFilesystemTranslationPreferred(bool preferred)
 		BMessage updateMessage(B_LOCALE_CHANGED);
 		status = _AddFilesystemTranslationPreferenceToMessage(&updateMessage);
 		if (status == B_OK)
-			status = be_roster->Broadcast(&updateMessage);
+			status =  __be_roster->Broadcast(&updateMessage);
 	}
 
 	return status;

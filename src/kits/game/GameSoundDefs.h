@@ -9,7 +9,7 @@
 #define _GAME_SOUND_DEFS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 typedef int32 gs_id;

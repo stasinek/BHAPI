@@ -373,29 +373,29 @@ SpinnerButton::Draw(BRect updateRect)
 		bgTint = 2.0f - bgTint;
 	}
 
-	uint32 borders = be_control_look->B_TOP_BORDER
-		| be_control_look->B_BOTTOM_BORDER;
+	uint32 borders =  __be_control_look->B_TOP_BORDER
+		|  __be_control_look->B_BOTTOM_BORDER;
 
 	if (fSpinnerDirection == SPINNER_INCREMENT)
-		borders |= be_control_look->B_RIGHT_BORDER;
+		borders |=  __be_control_look->B_RIGHT_BORDER;
 	else
-		borders |= be_control_look->B_LEFT_BORDER;
+		borders |=  __be_control_look->B_LEFT_BORDER;
 
 	// draw the button
-	be_control_look->DrawButtonFrame(this, rect, updateRect,
+	__be_control_look->DrawButtonFrame(this, rect, updateRect,
 		tint_color(bgColor, frameTint), bgColor, 0, borders);
-	be_control_look->DrawButtonBackground(this, rect, updateRect,
+	__be_control_look->DrawButtonBackground(this, rect, updateRect,
 		tint_color(bgColor, bgTint), 0, borders);
 
 	switch (fParent->ButtonStyle()) {
 		case SPINNER_BUTTON_HORIZONTAL_ARROWS:
 		{
 			int32 arrowDirection = fSpinnerDirection == SPINNER_INCREMENT
-				? be_control_look->B_RIGHT_ARROW
-				: be_control_look->B_LEFT_ARROW;
+				?  __be_control_look->B_RIGHT_ARROW
+				:  __be_control_look->B_LEFT_ARROW;
 
 			rect.InsetBy(0.0f, 1.0f);
-			be_control_look->DrawArrowShape(this, rect, updateRect, bgColor,
+			__be_control_look->DrawArrowShape(this, rect, updateRect, bgColor,
 				arrowDirection, 0, fgTint);
 			break;
 		}
@@ -403,11 +403,11 @@ SpinnerButton::Draw(BRect updateRect)
 		case SPINNER_BUTTON_VERTICAL_ARROWS:
 		{
 			int32 arrowDirection = fSpinnerDirection == SPINNER_INCREMENT
-				? be_control_look->B_UP_ARROW
-				: be_control_look->B_DOWN_ARROW;
+				?  __be_control_look->B_UP_ARROW
+				:  __be_control_look->B_DOWN_ARROW;
 
 			rect.InsetBy(0.0f, 1.0f);
-			be_control_look->DrawArrowShape(this, rect, updateRect, bgColor,
+			__be_control_look->DrawArrowShape(this, rect, updateRect, bgColor,
 				arrowDirection, 0, fgTint);
 			break;
 		}
@@ -709,7 +709,7 @@ BAbstractSpinner::LabelLayoutItem::BaseMinSize()
 		return BSize(-1.0f, -1.0f);
 
 	return BSize(fParent->fLayoutData->label_width
-			+ be_control_look->DefaultLabelSpacing(),
+			+  __be_control_look->DefaultLabelSpacing(),
 		fParent->fLayoutData->label_height);
 }
 
@@ -1088,7 +1088,7 @@ BAbstractSpinner::ResizeToPreferred()
 	const char* label = Label();
 	if (label != NULL) {
 		fDivider = ceilf(StringWidth(label))
-			+ be_control_look->DefaultLabelSpacing();
+			+  __be_control_look->DefaultLabelSpacing();
 	} else
 		fDivider = 0.0f;
 
@@ -1384,7 +1384,7 @@ BAbstractSpinner::DoLayout()
 			- fLayoutData->label_layout_item->Frame().left;
 	} else if (fLayoutData->label_width > 0) {
 		divider = fLayoutData->label_width
-			+ be_control_look->DefaultLabelSpacing();
+			+  __be_control_look->DefaultLabelSpacing();
 	}
 	fDivider = divider;
 
@@ -1452,7 +1452,7 @@ BAbstractSpinner::_DrawLabel(BRect updateRect)
 	if (!IsEnabled())
 		flags |= BControlLook::B_DISABLED;
 
-	be_control_look->DrawLabel(this, label, LowColor(), flags, BPoint(x, y));
+	__be_control_look->DrawLabel(this, label, LowColor(), flags, BPoint(x, y));
 }
 
 
@@ -1472,7 +1472,7 @@ BAbstractSpinner::_DrawTextView(BRect updateRect)
 	if (fTextView->IsFocus() && Window()->IsActive())
 		flags |= BControlLook::B_FOCUSED;
 
-	be_control_look->DrawTextControlBorder(this, rect, updateRect, base,
+	__be_control_look->DrawTextControlBorder(this, rect, updateRect, base,
 		flags);
 }
 
@@ -1489,7 +1489,7 @@ BAbstractSpinner::_InitObject()
 
 	if (Label() != NULL) {
 		fDivider = StringWidth(Label())
-			+ be_control_look->DefaultLabelSpacing();
+			+  __be_control_look->DefaultLabelSpacing();
 	} else
 		fDivider = 0.0f;
 
@@ -1641,7 +1641,7 @@ BAbstractSpinner::_ValidateLayoutData()
 	float divider = 0;
 	if (fLayoutData->label_width > 0) {
 		divider = ceilf(fLayoutData->label_width
-			+ be_control_look->DefaultLabelSpacing());
+			+  __be_control_look->DefaultLabelSpacing());
 	}
 
 	if ((Flags() & B_SUPPORTS_LAYOUT) == 0)

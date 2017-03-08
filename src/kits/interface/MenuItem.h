@@ -39,25 +39,25 @@ class BMessage;
 #include "../support/SupportDefs.h"
 class IMPEXPBHAPI BMenuItem : public BArchivable, public BInvoker {
 public:
-    BMenuItem(const char *label, BMessage *message, char shortcut = 0, b_uint32 modifiers = 0);
+    BMenuItem(const char *label, BMessage *message, char shortcut = 0,  __be_uint32 modifiers = 0);
     BMenuItem(BMenu *menu, BMessage *message = NULL);
     virtual ~BMenuItem();
 
     virtual void		SetLabel(const char *label);
     virtual void		SetEnabled(bool state);
     virtual void		SetMarked(bool state);
-    virtual void		SetShortcut(char ch, b_uint32 modifiers);
+    virtual void		SetShortcut(char ch,  __be_uint32 modifiers);
 
     const char*		Label() const;
     bool			IsEnabled() const;
     bool			IsMarked() const;
-    char			Shortcut(b_uint32 *modifiers = NULL) const;
+    char			Shortcut(__be_uint32 *modifiers = NULL) const;
 
     BMenu*			Submenu() const;
     BMenu*			Menu() const;
     BRect			Frame() const;
 
-    virtual b_status_t	Invoke(const BMessage *msg = NULL);
+    virtual status_t	Invoke(const BMessage *msg = NULL);
 
 protected:
     friend class BMenu;
@@ -73,7 +73,7 @@ protected:
 
 private:
     char fShortcut;
-    b_uint32 fModifiers;
+     __be_uint32 fModifiers;
 
     BRect fFrame;
     bool fMarked;

@@ -12,7 +12,7 @@
 #include <string.h>
 
 #include <StorageDefs.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <syscalls.h>
 

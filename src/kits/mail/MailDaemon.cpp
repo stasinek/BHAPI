@@ -135,7 +135,7 @@ BMailDaemon::Quit()
 status_t
 BMailDaemon::Launch()
 {
-	status_t status = be_roster->Launch(B_MAIL_DAEMON_SIGNATURE);
+	status_t status =  __be_roster->Launch(B_MAIL_DAEMON_SIGNATURE);
 	if (status == B_OK)
 		fDaemon = BMessenger(B_MAIL_DAEMON_SIGNATURE);
 

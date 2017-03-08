@@ -40,14 +40,14 @@ public:
     BDirectory(const char *path);
     virtual ~BDirectory();
 
-	b_status_t	InitCheck() const;
-	b_status_t	SetTo(const char *path);
+	status_t	InitCheck() const;
+	status_t	SetTo(const char *path);
 	void		Unset();
 
-    b_status_t	GetEntry(BEntry *entry) const;
-    b_status_t	GetNextEntry(BEntry *entry, bool traverse = false);
-	b_status_t	Rewind();
-    b_int32		CountEntries();
+    status_t	GetEntry(BEntry *entry) const;
+    status_t	GetNextEntry(BEntry *entry, bool traverse = false);
+	status_t	Rewind();
+     __be_int32		CountEntries();
 
 	void		DoForEach(bool (*func)(const char *path));
 	void		DoForEach(bool (*func)(const char *path, void *user_data), void *user_data);

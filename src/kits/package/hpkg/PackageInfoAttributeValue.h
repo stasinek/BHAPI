@@ -6,7 +6,7 @@
 #define _PACKAGE__HPKG__PACKAGE_INFO_ATTRIBUTE_VALUE_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <string.h>
 

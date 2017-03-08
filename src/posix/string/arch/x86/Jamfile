@@ -1,0 +1,14 @@
+SubDir HAIKU_TOP src system libroot posix string arch x86 ;
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup x86 x86_gcc2 ] {
+	on $(architectureObject) {
+		local architecture = $(TARGET_PACKAGING_ARCH) ;
+
+		UsePrivateSystemHeaders ;
+
+		MergeObject <$(architecture)>posix_string_arch_$(TARGET_ARCH).o :
+			arch_string.S
+			;
+	}
+}

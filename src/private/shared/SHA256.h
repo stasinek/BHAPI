@@ -6,7 +6,7 @@
 #define SHA_256_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #define SHA_DIGEST_LENGTH	32

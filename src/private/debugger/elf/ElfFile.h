@@ -8,7 +8,7 @@
 #include <sys/types.h>
 
 #include <ByteOrder.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <ObjectList.h>
 
 #include <elf_private.h>

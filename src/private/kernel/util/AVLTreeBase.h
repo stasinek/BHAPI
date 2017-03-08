@@ -6,7 +6,7 @@
 #define _KERNEL_UTIL_AVL_TREE_BASE_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class AVLTreeIterator;

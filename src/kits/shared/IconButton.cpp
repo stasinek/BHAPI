@@ -146,7 +146,7 @@ void
 BIconButton::DrawBorder(BRect& frame, const BRect& updateRect,
 	const rgb_color& backgroundColor, uint32 flags)
 {
-	be_control_look->DrawButtonFrame(this, frame, updateRect, backgroundColor,
+	__be_control_look->DrawButtonFrame(this, frame, updateRect, backgroundColor,
 		backgroundColor, flags);
 }
 
@@ -155,7 +155,7 @@ void
 BIconButton::DrawBackground(BRect& frame, const BRect& updateRect,
 	const rgb_color& backgroundColor, uint32 flags)
 {
-	be_control_look->DrawButtonBackground(this, frame, updateRect,
+	__be_control_look->DrawButtonBackground(this, frame, updateRect,
 		backgroundColor, flags);
 }
 
@@ -302,7 +302,7 @@ status_t
 BIconButton::SetIcon(int32 resourceID)
 {
 	app_info info;
-	status_t status = be_app->GetAppInfo(&info);
+	status_t status =  __be_app->GetAppInfo(&info);
 	if (status != B_OK)
 		return status;
 
@@ -342,7 +342,7 @@ BIconButton::SetIcon(const char* pathToBitmap)
 	BEntry entry(pathToBitmap, true);
 	if (!entry.Exists()) {
 		app_info info;
-		status = be_app->GetAppInfo(&info);
+		status =  __be_app->GetAppInfo(&info);
 		if (status == B_OK) {
 			BEntry app_entry(&info.ref, true);
 			BPath path;
@@ -367,7 +367,7 @@ BIconButton::SetIcon(const char* pathToBitmap)
 					"%s\n", strerror(status));
 			}
 		} else {
-			printf("BIconButton::SetIcon() - be_app->GetAppInfo() failed: "
+			printf("BIconButton::SetIcon() -  __be_app->GetAppInfo() failed: "
 				"%s\n", strerror(status));
 		}
 	} else

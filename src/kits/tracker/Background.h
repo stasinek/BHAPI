@@ -35,7 +35,7 @@ All rights reserved.
 #define _TRACKER_BACKGROUND_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 /*----------------------------------------------------------------*/
 /*-----  Tracker background attribute name  ----------------------*/

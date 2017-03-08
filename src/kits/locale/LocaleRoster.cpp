@@ -24,12 +24,12 @@
 #include <fs_attr.h>
 #include <IconUtils.h>
 #include <Language.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <LocaleRosterData.h>
 #include <MutableLocaleRoster.h>
 #include <Node.h>
 #include <Roster.h>
-#include <String.h>
+#include <StringClass.h>
 #include <TimeZone.h>
 
 #include <ICUWrapper.h>

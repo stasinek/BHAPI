@@ -57,13 +57,13 @@ respective holders. All rights reserved.
 #include <Directory.h>
 #include <Entry.h>
 #include <FindDirectory.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MessageFormat.h>
 #include <NodeInfo.h>
 #include <Path.h>
 #include <Roster.h>
 #include <Screen.h>
-#include <String.h>
+#include <StringClass.h>
 #include <SymLink.h>
 #include <Volume.h>
 #include <VolumeRoster.h>
@@ -1914,7 +1914,7 @@ MoveEntryToTrash(BEntry* entry, BPoint* loc, Undo &undo)
 			} else {
 				BMessage message(kUnmountVolume);
 				message.AddInt32("device_id", volume.Device());
-				be_app->PostMessage(&message);
+				__be_app->PostMessage(&message);
 			}
 			return B_OK;
 		}
@@ -1947,7 +1947,7 @@ MoveEntryToTrash(BEntry* entry, BPoint* loc, Undo &undo)
 		parentNode.device = statbuf.st_dev;
 		parentNode.node = statbuf.st_ino;
 		message.AddData("node_ref", B_RAW_TYPE, &parentNode, sizeof(node_ref));
-		be_app->PostMessage(&message);
+		__be_app->PostMessage(&message);
 	} else {
 		// get trash directory on same volume as item being moved
 		result = FSGetTrashDir(&trash_dir, nodeRef.device);
@@ -3266,12 +3266,12 @@ TrackerOpenWith(const BMessage* refs)
 {
 	BMessage clone(*refs);
 
-	ASSERT(dynamic_cast<TTracker*>(be_app) != NULL);
+	ASSERT(dynamic_cast<TTracker*>(__be_app) != NULL);
 	ASSERT(clone.what != 0);
 
 	clone.AddInt32("launchUsingSelector", 0);
 	// runs the Open With window
-	be_app->PostMessage(&clone);
+	__be_app->PostMessage(&clone);
 
 	return B_OK;
 }
@@ -3338,7 +3338,7 @@ _TrackerLaunchAppWithDocuments(const entry_ref* appRef, const BMessage* refs,
 	BString alertString;
 
 	for (int32 mimesetIt = 0; ; mimesetIt++) {
-		error = be_roster->Launch(appRef, refs, &team);
+		error =  __be_roster->Launch(appRef, refs, &team);
 		if (error == B_ALREADY_RUNNING)
 			// app already running, not really an error
 			error = B_OK;
@@ -3360,7 +3360,7 @@ _TrackerLaunchAppWithDocuments(const entry_ref* appRef, const BMessage* refs,
 		if (refs != NULL && refs->FindData("nodeRefsToClose", B_RAW_TYPE,
 				(const void**)&nodeToClose, &numBytes) == B_OK
 			&& nodeToClose != NULL) {
-			TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+			TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 			if (tracker != NULL)
 				tracker->CloseParent(*nodeToClose);
 		}
@@ -3511,7 +3511,7 @@ _TrackerLaunchDocuments(const entry_ref*, const BMessage* refs,
 
 	for (int32 mimesetIt = 0; ; mimesetIt++) {
 		alertString = "";
-		error = be_roster->FindApp(&documentRef, &app);
+		error =  __be_roster->FindApp(&documentRef, &app);
 
 		if (error != B_OK && mimesetIt == 0) {
 			SniffIfGeneric(&copyOfRefs);
@@ -3549,7 +3549,7 @@ _TrackerLaunchDocuments(const entry_ref*, const BMessage* refs,
 
 			refsToPass = CountRefs(&copyOfRefs) > 0 ? &copyOfRefs: 0;
 			team_id team;
-			error = be_roster->Launch(&app, refsToPass, &team);
+			error =  __be_roster->Launch(&app, refsToPass, &team);
 			if (error == B_ALREADY_RUNNING)
 				// app already running, not really an error
 				error = B_OK;
@@ -3741,7 +3741,7 @@ LaunchBrokenLink(const char* signature, const BMessage* refs)
 {
 	// This call is to support a hacky workaround for double-clicking
 	// broken refs for cifs
-	be_roster->Launch(signature, const_cast<BMessage*>(refs));
+	__be_roster->Launch(signature, const_cast<BMessage*>(refs));
 	return B_OK;
 }
 
@@ -3769,7 +3769,7 @@ FSOpenWith(BMessage* listOfRefs)
 	status_t result = B_ERROR;
 	listOfRefs->what = B_REFS_RECEIVED;
 
-	if (dynamic_cast<TTracker*>(be_app) != NULL)
+	if (dynamic_cast<TTracker*>(__be_app) != NULL)
 		result = TrackerOpenWith(listOfRefs);
 	else
 		ASSERT(!"not yet implemented");

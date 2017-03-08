@@ -17,7 +17,7 @@
 #include <image.h>
 #include <Message.h>
 #include <Messenger.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 BCommandPipe::BCommandPipe()

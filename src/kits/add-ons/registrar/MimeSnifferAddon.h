@@ -6,7 +6,7 @@
 #ifndef _MIME_SNIFFER_ADDON_H
 #define _MIME_SNIFFER_ADDON_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 class BFile;
 class BMimeType;

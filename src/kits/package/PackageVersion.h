@@ -6,7 +6,7 @@
 #define _PACKAGE__PACKAGE_VERSION_H_
 
 
-#include <String.h>
+#include <StringClass.h>
 
 
 namespace BPackageKit {

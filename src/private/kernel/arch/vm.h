@@ -11,7 +11,7 @@
 
 #include <arch_vm.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct kernel_args;

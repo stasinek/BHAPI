@@ -12,7 +12,7 @@
 #include <Directory.h>
 #include <Messenger.h>
 #include <Node.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 namespace BPrivate {

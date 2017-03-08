@@ -39,7 +39,7 @@ public:
     BArchivable(const BMessage *from);
     virtual ~BArchivable();
 
-    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    virtual status_t Archive(BMessage *into, bool deep = true) const;
     static BArchivable *Instantiate(const BMessage *from);
 };
 

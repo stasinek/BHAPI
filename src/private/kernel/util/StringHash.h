@@ -9,7 +9,7 @@
 #define _KERNEL_UTIL_STRING_HASH_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #ifdef __cplusplus

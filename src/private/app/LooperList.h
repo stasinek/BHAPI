@@ -13,7 +13,7 @@
 
 #include <Locker.h>
 #include <OS.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BList;

@@ -9,7 +9,7 @@
 #ifndef _SNIFFER_RANGE_H
 #define _SNIFFER_RANGE_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 namespace BPrivate {
 namespace Storage {

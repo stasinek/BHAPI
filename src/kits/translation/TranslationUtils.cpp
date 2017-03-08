@@ -209,7 +209,7 @@ BTranslationUtils::GetBitmapFile(const char *kName, BTranslatorRoster *roster)
 		// If kName is a relative path, use the path of the application's
 		// executable as the base for the relative path
 		app_info info;
-		if (be_app->GetAppInfo(&info) != B_OK)
+		if (__be_app->GetAppInfo(&info) != B_OK)
 			return NULL;
 		BEntry appRef(&info.ref);
 		if (path.SetTo(&appRef) != B_OK)

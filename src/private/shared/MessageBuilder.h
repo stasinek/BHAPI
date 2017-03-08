@@ -8,7 +8,7 @@
 
 #include <Message.h>
 #include <ObjectList.h>
-#include <String.h>
+#include <StringClass.h>
 
 namespace BPrivate {
 

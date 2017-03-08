@@ -43,12 +43,12 @@ class BPoint;
 #include "../support/Archivable.h"
 class IMPEXPBHAPI BListItem : public BArchivable {
 public:
-	BListItem(b_uint32 outlineLevel = 0, bool expanded = true, b_uint32 flags = 0);
+	BListItem(__be_uint32 outlineLevel = 0, bool expanded = true,  __be_uint32 flags = 0);
 	virtual ~BListItem();
 
 	// Archiving
 	BListItem(BMessage *from);
-	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+	virtual status_t Archive(BMessage *into, bool deep = true) const;
 
 	float		Height() const;
 	float		Width() const;
@@ -62,15 +62,15 @@ public:
 	void		SetHeight(float height);
 	void		SetWidth(float width);
 
-	virtual void	SetFlags(b_uint32 flags);
-	b_uint32		Flags() const;
+	virtual void	SetFlags(__be_uint32 flags);
+	__be_uint32		Flags() const;
 
 	void		Invalidate();
 
 	// for item of BOutlineListView
 	bool 		IsExpanded() const;
 	void 		SetExpanded(bool expanded);
-	b_uint32 	OutlineLevel() const;
+	__be_uint32 	OutlineLevel() const;
 	bool		IsVisible() const;
 	BListItem	*SuperItem() const;
 	bool		HasSubitems() const;
@@ -87,9 +87,9 @@ private:
 	BListView *fOwner;
 	BOutlineListView *fFullOwner;
 
-	b_uint32 	fLevel;
+	__be_uint32 	fLevel;
 	bool 		fExpanded;
-	b_uint32		fFlags;
+	__be_uint32		fFlags;
 
 	float		fWidth;
 	float		fHeight;
@@ -101,15 +101,15 @@ private:
 
 	virtual void	MouseDown(BView *owner, BPoint where);
 	virtual void	MouseUp(BView *owner, BPoint where);
-	virtual void	MouseMoved(BView *owner, BPoint where, b_uint32 code, const BMessage *a_message);
-	virtual void	KeyDown(BView *owner, const char *bytes, b_int32 numBytes);
-	virtual void	KeyUp(BView *owner, const char *bytes, b_int32 numBytes);
+	virtual void	MouseMoved(BView *owner, BPoint where,  __be_uint32 code, const BMessage *a_message);
+	virtual void	KeyDown(BView *owner, const char *bytes,  __be_int32 numBytes);
+	virtual void	KeyUp(BView *owner, const char *bytes,  __be_int32 numBytes);
 };
 
 
 class IMPEXPBHAPI StringItem : public BListItem {
 public:
-	StringItem(const char *text, b_uint32 outlineLevel = 0, bool expanded = true);
+	StringItem(const char *text,  __be_uint32 outlineLevel = 0, bool expanded = true);
 	virtual ~StringItem();
 
 	virtual void	SetText(const char *text);

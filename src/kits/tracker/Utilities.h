@@ -53,7 +53,7 @@ All rights reserved.
 #include <ObjectList.h>
 #include <Point.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 #include <StringView.h>
 
 

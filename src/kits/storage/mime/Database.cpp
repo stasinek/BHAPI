@@ -27,8 +27,8 @@
 #include <MimeType.h>
 #include <Node.h>
 #include <Path.h>
-#include <String.h>
-#include <TypeConstants.h>
+#include <StringClass.h>
+#include <HaikuConstants.h>
 
 #include <AutoLocker.h>
 #include <mime/database_support.h>

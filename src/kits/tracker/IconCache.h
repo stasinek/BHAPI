@@ -42,7 +42,7 @@ All rights reserved.
 #include <Bitmap.h>
 #include <ObjectList.h>
 #include <Mime.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include "AutoLock.h"
 #include "OpenHashTable.h"

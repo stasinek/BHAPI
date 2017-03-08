@@ -6,7 +6,7 @@
 #define TYPE_LOOKUP_CONSTRAINTS_H
 
 
-#include <String.h>
+#include <StringClass.h>
 
 #include "Type.h"
 

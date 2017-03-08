@@ -1,0 +1,63 @@
+SubDir HAIKU_TOP src system libroot posix string ;
+
+UsePrivateHeaders
+	[ FDirName libroot ]
+	[ FDirName libroot locale ]
+	;
+
+
+# Our versions of strdup and strndup check for NULL parameters (for BeOS
+# compatibility), but GCC optimizes this away as its builtins don't handle
+# it.
+C++FLAGS += -fno-builtin-strdup -fno-builtin-strndup ;
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup ] {
+	on $(architectureObject) {
+		local architecture = $(TARGET_PACKAGING_ARCH) ;
+
+		MergeObject <$(architecture)>posix_string.o :
+			bcmp.c
+			bcopy.c
+			bzero.c
+			ffs.cpp
+			memccpy.c
+			memchr.c
+			memcmp.c
+			memmove.c
+			stpcpy.c
+			strcasecmp.c
+			strcasestr.c
+			strcat.c
+			strchr.c
+			strchrnul.c
+			strcmp.c
+			strcoll.cpp
+			strcpy.c
+			strcspn.c
+			strdup.cpp
+			strerror.c
+			strlcat.c
+			strlcpy.c
+			strlen.cpp
+			strlwr.c
+			strncat.c
+			strncmp.c
+			strncpy.cpp
+			strndup.cpp
+			strnlen.cpp
+			strpbrk.c
+			strrchr.c
+			strspn.c
+			strstr.c
+			strtok.c
+			strupr.c
+			strxfrm.cpp
+			;
+	}
+}
+
+local arch ;
+for arch in $(TARGET_ARCHS) {
+	HaikuSubInclude arch $(arch) ;
+}

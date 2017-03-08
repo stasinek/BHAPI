@@ -10,7 +10,7 @@
 #define _KERNEL_ARCH_MIPSEL_INT_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #warning IMPLEMENT arch_int.h

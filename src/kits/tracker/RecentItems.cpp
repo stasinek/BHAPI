@@ -330,7 +330,7 @@ BRecentItemsList::GetNextMenuItem(const BMessage* fileOpenInvokeMessage,
 
 	// Truncate the name if necessary
 	BString truncatedString(model.Name());
-	be_plain_font->TruncateString(&truncatedString, B_TRUNCATE_END,
+	__be_plain_font->TruncateString(&truncatedString, B_TRUNCATE_END,
 		BNavMenu::GetMaxMenuWidth());
 
 	ModelMenuItem* item = NULL;

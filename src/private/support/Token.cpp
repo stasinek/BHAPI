@@ -35,8 +35,8 @@
 #include "../support/List.h"
 
 struct LOCALBHAPI _bhapi_token_t {
-	b_uint64 vitalities;
-	b_bigtime_t time_stamp;
+	__be_uint64 vitalities;
+	bigtime_t time_stamp;
 	void *data;
 };
 
@@ -46,9 +46,9 @@ public:
 	BTokensDepotPrivateData();
 	virtual ~BTokensDepotPrivateData();
 
-	b_uint64		AddToken(void *data);
-	void		RemoveToken(b_uint64 token);
-	_bhapi_token_t	*TokenAt(b_uint64 token) const;
+	__be_uint64		AddToken(void *data);
+	void		RemoveToken(__be_uint64 token);
+	_bhapi_token_t	*TokenAt(__be_uint64 token) const;
 };
 
 
@@ -64,7 +64,7 @@ BTokensDepotPrivateData::~BTokensDepotPrivateData()
 
 	while((list = (BList*)RemoveItems(0,1)) != NULL)
 	{
-		for(b_int32 i = 0; i < list->CountItems(); i++)
+		for(__be_int32 i = 0; i < list->CountItems(); i++)
 		{
 			_bhapi_token_t *aToken = (_bhapi_token_t*)list->ItemAt(i);
 			if(aToken != NULL) delete aToken;
@@ -74,14 +74,14 @@ BTokensDepotPrivateData::~BTokensDepotPrivateData()
 }
 
 
-b_uint64
+be_uint64
 BTokensDepotPrivateData::AddToken(void *data)
 {
-	b_uint64 token = B_MAXUINT64;
+	__be_uint64 token = B_MAXUINT64;
 	_bhapi_token_t *aToken = new _bhapi_token_t;
 
 	BList *list = NULL;
-	for(b_int32 i = 0; i < CountItems(); i++)
+	for(__be_int32 i = 0; i < CountItems(); i++)
 	{
 		list = (BList*)ItemAt(i);
 		if(list->CountItems() >= B_MAXINT32 - 1 || list->AddItem(aToken) == false)
@@ -89,7 +89,7 @@ BTokensDepotPrivateData::AddToken(void *data)
 			list = NULL;
 			continue;
 		}
-		token = ((b_uint64)i << 32) | (b_uint64)(list->CountItems() - 1);
+		token = ((__be_uint64)i << 32) | (__be_uint64)(list->CountItems() - 1);
 	}
 
 	if(token == B_MAXUINT64)
@@ -103,20 +103,20 @@ BTokensDepotPrivateData::AddToken(void *data)
 			}
 			else
 			{
-				token = ((b_uint64)(CountItems() - 1) << 32) | (b_uint64)(list->CountItems() - 1);
+				token = ((__be_uint64)(CountItems() - 1) << 32) | (__be_uint64)(list->CountItems() - 1);
 			}
 		}
-		else for(b_int32 i = 0; i < CountItems(); i++)
+		else for(__be_int32 i = 0; i < CountItems(); i++)
 		{
 			list = (BList*)ItemAt(i);
-			b_int32 index = list->IndexOf(NULL);
+			__be_int32 index = list->IndexOf(NULL);
 			if(index < 0)
 			{
 				list = NULL;
 				continue;
 			}
 			list->ReplaceItem(index, aToken);
-			token = ((b_uint64)i << 32) | (b_uint64)index;
+			token = ((__be_uint64)i << 32) | (__be_uint64)index;
 		}
 	}
 
@@ -140,16 +140,16 @@ BTokensDepotPrivateData::AddToken(void *data)
 
 
 void
-BTokensDepotPrivateData::RemoveToken(b_uint64 token)
+BTokensDepotPrivateData::RemoveToken(__be_uint64 token)
 {
-	b_uint64 index = token >> 32;
-	if(index > (b_uint64)B_MAXINT32 - 1) return;
+	__be_uint64 index = token >> 32;
+	if(index > (__be_uint64)B_MAXINT32 - 1) return;
 
-	BList *list = (BList*)ItemAt((b_int32)index);
+	BList *list = (BList*)ItemAt((__be_int32)index);
 	if(list == NULL) return;
 
 	index = token & 0xffffffff;
-	_bhapi_token_t *aToken = (_bhapi_token_t*)(list->ItemAt((b_int32)index));
+	_bhapi_token_t *aToken = (_bhapi_token_t*)(list->ItemAt((__be_int32)index));
 	if(aToken == NULL) return;
 
 	if(aToken->vitalities > 1)
@@ -159,13 +159,13 @@ BTokensDepotPrivateData::RemoveToken(b_uint64 token)
 	}
 	else
 	{
-		if(index < (b_uint64)list->CountItems() - 1)
+		if(index < (__be_uint64)list->CountItems() - 1)
 		{
-			list->ReplaceItem((b_int32)index, NULL);
+			list->ReplaceItem((__be_int32)index, NULL);
 		}
 		else
 		{
-			list->RemoveItem((b_int32)index);
+			list->RemoveItem((__be_int32)index);
 			while(list->LastItem() == NULL && list->IsEmpty() == false) list->RemoveItem(list->CountItems() - 1);
 			for(; !(list == NULL || LastItem() != (void*)list || list->IsEmpty() == false); list = (BList*)LastItem())
 			{
@@ -178,16 +178,16 @@ BTokensDepotPrivateData::RemoveToken(b_uint64 token)
 
 
 _bhapi_token_t*
-BTokensDepotPrivateData::TokenAt(b_uint64 token) const
+BTokensDepotPrivateData::TokenAt(__be_uint64 token) const
 {
-	b_uint64 index = token >> 32;
-	if(index > (b_uint64)B_MAXINT32 - 1) return NULL;
+	__be_uint64 index = token >> 32;
+	if(index > (__be_uint64)B_MAXINT32 - 1) return NULL;
 
-	BList *list = (BList*)ItemAt((b_int32)index);
+	BList *list = (BList*)ItemAt((__be_int32)index);
 	if(list == NULL) return NULL;
 
 	index = token & 0xffffffff;
-	return((_bhapi_token_t*)(list->ItemAt((b_int32)index)));
+	return((_bhapi_token_t*)(list->ItemAt((__be_int32)index)));
 }
 
 
@@ -214,7 +214,7 @@ BTokensDepot::CreateToken(void *data)
 	if(Lock())
 	{
 		BTokensDepotPrivateData *private_data = reinterpret_cast<BTokensDepotPrivateData*>(fData);
-		b_uint64 token = private_data->AddToken(data);
+		__be_uint64 token = private_data->AddToken(data);
 		_bhapi_token_t *_token = private_data->TokenAt(token);
 		if(_token != NULL)
 		{
@@ -232,7 +232,7 @@ BTokensDepot::CreateToken(void *data)
 
 
 BToken*
-BTokensDepot::OpenToken(b_uint64 token, BToken *fetch_token)
+BTokensDepot::OpenToken(__be_uint64 token, BToken *fetch_token)
 {
 	BToken *aToken = NULL;
 
@@ -263,7 +263,7 @@ BTokensDepot::OpenToken(b_uint64 token, BToken *fetch_token)
 
 
 BToken*
-BTokensDepot::FetchToken(b_uint64 token)
+BTokensDepot::FetchToken(__be_uint64 token)
 {
 	if(!(fLocker == NULL || fLocker->IsLockedByCurrentThread()))
 		BHAPI_ERROR("[PRIVATE]: %s --- Invalid operation", __PRETTY_FUNCTION__);
@@ -339,14 +339,14 @@ BToken::IsValid() const
 }
 
 
-b_uint64
+be_uint64
 BToken::Token() const
 {
 	return fToken;
 }
 
 
-b_bigtime_t
+bigtime_t
 BToken::TimeStamp() const
 {
 	return fTimeStamp;
@@ -354,7 +354,7 @@ BToken::TimeStamp() const
 
 
 BToken&
-BToken::operator+=(b_uint64 vitalities)
+BToken::operator+=(__be_uint64 vitalities)
 {
 	if(fToken == B_MAXUINT64 || fDepot == NULL) BHAPI_ERROR("[PRIVATE]: %s --- Invalid operation.", __PRETTY_FUNCTION__);
 	if(fDepot->Lock() == false) BHAPI_ERROR("[PRIVATE]: %s --- Unable to lock depot.", __PRETTY_FUNCTION__);
@@ -372,7 +372,7 @@ BToken::operator+=(b_uint64 vitalities)
 
 
 BToken&
-BToken::operator-=(b_uint64 vitalities)
+BToken::operator-=(__be_uint64 vitalities)
 {
 	if(fToken == B_MAXUINT64 || fDepot == NULL) BHAPI_ERROR("[PRIVATE]: %s --- Invalid operation.", __PRETTY_FUNCTION__);
 	if(fDepot->Lock() == false) BHAPI_ERROR("[PRIVATE]: %s --- Unable to lock depot.", __PRETTY_FUNCTION__);
@@ -413,10 +413,10 @@ BToken::operator--()
 }
 
 
-b_uint64
+be_uint64
 BToken::Vitalities() const
 {
-	b_uint64 retVal = 0;
+	__be_uint64 retVal = 0;
 
 	if(!(fToken == B_MAXUINT64 || fDepot == NULL || fDepot->Lock() == false))
 	{

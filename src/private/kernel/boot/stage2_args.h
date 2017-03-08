@@ -6,7 +6,7 @@
 #define KERNEL_BOOT_STAGE2_ARGS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <platform_stage2_args.h>
 
 

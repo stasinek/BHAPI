@@ -6,7 +6,7 @@
 #define GENERIC_VIDEO_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #ifdef __cplusplus
 extern "C" {

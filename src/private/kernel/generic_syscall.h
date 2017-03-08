@@ -6,7 +6,7 @@
 #define _KERNEL_GENERIC_SYSCALLS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <generic_syscall_defs.h>
 

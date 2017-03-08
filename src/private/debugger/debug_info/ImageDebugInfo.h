@@ -7,7 +7,7 @@
 #define IMAGE_DEBUG_INFO_H
 
 
-#include <String.h>
+#include <StringClass.h>
 
 #include <ObjectList.h>
 #include <Referenceable.h>

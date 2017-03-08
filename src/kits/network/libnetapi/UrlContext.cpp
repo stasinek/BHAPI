@@ -13,7 +13,7 @@
 #include <stdio.h>
 
 #include <HashMap.h>
-#include <HashString.h>
+#include <HashStringClass.h>
 
 
 BUrlContext::BUrlContext()

@@ -6,7 +6,7 @@
 #define	_D2A_H
 
 #include <BeBuild.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <stddef.h>
 

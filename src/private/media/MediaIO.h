@@ -7,7 +7,7 @@
 
 
 #include <DataIO.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 enum media_io_flags {

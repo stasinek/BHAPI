@@ -86,7 +86,7 @@ BDirectory::~BDirectory()
 }
 
 
-b_status_t
+status_t
 BDirectory::SetTo(const char *path)
 {
 	if(path == NULL) return B_BAD_VALUE;
@@ -97,7 +97,7 @@ BDirectory::SetTo(const char *path)
 	char *name = bhapi::strdup(aPath.Path());
 	if(name == NULL) return B_NO_MEMORY;
 
-	b_status_t retVal = B_FILE_ERROR;
+	status_t retVal = B_FILE_ERROR;
 
 	const char *dirname = aPath.Path();
 #ifdef _WIN32
@@ -187,7 +187,7 @@ BDirectory::Unset()
 }
 
 
-b_status_t
+status_t
 BDirectory::InitCheck() const
 {
 	if(fName == NULL || fDir == NULL) return B_NO_INIT;
@@ -195,7 +195,7 @@ BDirectory::InitCheck() const
 }
 
 
-b_status_t
+status_t
 BDirectory::GetEntry(BEntry *entry) const
 {
 	if(entry == NULL) return B_BAD_VALUE;
@@ -211,14 +211,14 @@ BDirectory::GetEntry(BEntry *entry) const
 }
 
 
-b_status_t
+status_t
 BDirectory::GetNextEntry(BEntry *entry, bool traverse)
 {
 	if(entry == NULL) return B_BAD_VALUE;
 
 	if(fName == NULL || fDir == NULL) {entry->Unset(); return B_FILE_ERROR;}
 
-	b_status_t retVal = B_FILE_ERROR;
+	status_t retVal = B_FILE_ERROR;
 
 #ifdef HAVE_DIRENT_H
 	while(true)
@@ -309,7 +309,7 @@ BDirectory::GetNextEntry(BEntry *entry, bool traverse)
 }
 
 
-b_status_t
+status_t
 BDirectory::Rewind()
 {
 	if(fName == NULL || fDir == NULL) return B_FILE_ERROR;
@@ -336,7 +336,7 @@ BDirectory::Rewind()
 }
 
 
-b_int32
+be_int32
 BDirectory::CountEntries()
 {
 	if(fName == NULL || fDir == NULL) return 0;
@@ -344,7 +344,7 @@ BDirectory::CountEntries()
 #ifdef HAVE_DIRENT_H
 	rewinddir((DIR*)fDir);
 
-	b_int32 count = 0;
+	__be_int32 count = 0;
 	while(true)
 	{
 		struct dirent *dirEntry = readdir((DIR*)fDir);
@@ -369,7 +369,7 @@ BDirectory::CountEntries()
     ((bhapi::win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((bhapi::win32_dir_t*)fDir)->findData));
 	if(((bhapi::win32_dir_t*)fDir)->findHandle == INVALID_HANDLE_VALUE) return 0;
 
-	b_int32 count = 0;
+	__be_int32 count = 0;
 	do {
 		const char *filename = ((bhapi::win32_dir_t*)fDir)->findData.cFileName;
 		if(strlen(filename) == 1 && filename[0] == '.') continue;

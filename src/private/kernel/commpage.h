@@ -6,7 +6,7 @@
 #define _KERNEL_COMMPAGE_H
 
 #include <image.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <commpage_defs.h>
 

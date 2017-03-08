@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -29,105 +29,103 @@
 
 #include "PrivateApplication.h"
 
-#include "../kernel/OS.h"
+#include "../kernel/KERNEL.h"
 #include "../support/StringClass.h"
 #include "../kernel/Debug.h"
 #include "../support/Errors.h"
 
 BApplicationConnector *bhapi::app_connector = NULL;
 
-BApplicationConnector::BApplicationConnector()
-	: fLocker(true), fPort(NULL), fThread(NULL)
+BApplicationConnector::BApplicationConnector() : fLocker(true), fPort(NULL), fThread(NULL)
 {
 #if 0
     if(bhapi::get_current_team_id() == 0)
-		BHAPI_ERROR("[PRIVATE]: %s --- Unsupported system.", __PRETTY_FUNCTION__);
+        BHAPI_ERROR("[PRIVATE]: %s --- Unsupported system.", __PRETTY_FUNCTION__);
 
-	BString port_name;
+    BString port_name;
     port_name << "e_app_" << bhapi::get_current_team_id();
 
     if((fPort = bhapi::create_port(10, port_name.String())) == NULL)
-		BHAPI_ERROR("[PRIVATE]: %s --- Unable to create port.", __PRETTY_FUNCTION__);
+        BHAPI_ERROR("[PRIVATE]: %s --- Unable to create port.", __PRETTY_FUNCTION__);
 
     if((fThread = bhapi::create_thread(this->task, B_NORMAL_PRIORITY, reinterpret_cast<void*>(this), NULL)) == NULL)
-		BHAPI_ERROR("[PRIVATE]: %s --- Unable to create thread.", __PRETTY_FUNCTION__);
+        BHAPI_ERROR("[PRIVATE]: %s --- Unable to create thread.", __PRETTY_FUNCTION__);
 #endif
 
-	fHandlersDepot = new BTokensDepot(new BLocker(), true);
+    fHandlersDepot = new BTokensDepot(new BLocker(), true);
 
 #if 0
     if(bhapi::resume_thread(fThread) != B_OK)
-		BHAPI_ERROR("[PRIVATE]: %s --- Unable to resume thread.", __PRETTY_FUNCTION__);
+        BHAPI_ERROR("[PRIVATE]: %s --- Unable to resume thread.", __PRETTY_FUNCTION__);
 #endif
 }
-
 
 BApplicationConnector::~BApplicationConnector()
 {
     bhapi::close_port(fPort);
 
 #if 0
-	// FIXME: objects deleted when thread quiting, then it blocks !!!
-	b_status_t err;
+    // FIXME: objects deleted when thread quiting, then it blocks !!!
+    status_t err;
     bhapi::wait_for_thread(fThread, &err);
     bhapi::delete_thread(fThread);
 #endif
 
     bhapi::delete_port(fPort);
 
-	delete fHandlersDepot;
+    delete fHandlersDepot;
 }
 
 
 bool
 BApplicationConnector::Lock()
 {
-	return fLocker.Lock();
+    return fLocker.Lock();
 }
 
 
 void
 BApplicationConnector::Unlock()
 {
-	fLocker.Unlock();
+    fLocker.Unlock();
 }
 
 
-b_status_t
+status_t
 BApplicationConnector::task(void *data)
 {
-	BApplicationConnector *self = reinterpret_cast<BApplicationConnector*>(data);
+    BApplicationConnector *self = reinterpret_cast<BApplicationConnector*>(data);
 
-	b_uint8 *buffer = (b_uint8*)malloc(BHAPI_MAX_PORT_BUFFER_SIZE + 1);
-	if(buffer == NULL)
-		BHAPI_ERROR("[PRIVATE]: %s --- Unable to allocate memory.", __PRETTY_FUNCTION__);
+     __be_uint8 *buffer = (__be_uint8*)malloc(BHAPI_MAX_PORT_BUFFER_SIZE + 1);
+    if(buffer == NULL)
+        BHAPI_ERROR("[PRIVATE]: %s --- Unable to allocate memory.", __PRETTY_FUNCTION__);
 
-	b_int32 code;
-	b_status_t err;
+     __be_int32 code;
+    status_t err;
 
-	for(code = 0;
+    for(code = 0;
         (err = bhapi::read_port_etc(self->fPort, &code, buffer, BHAPI_MAX_PORT_BUFFER_SIZE, B_TIMEOUT, 1000000)) != B_ERROR;
-	    code = 0)
-	{
-		BHAPI_DEBUG("[PRIVATE]: %s --- Hey(%I64i:%I64i), running(%I32i) ...",
+        code = 0)
+    {
+        BHAPI_DEBUG("[PRIVATE]: %s --- Hey(%I64i:%I64i), running(%I32i) ...",
               __PRETTY_FUNCTION__, bhapi::get_current_team_id(), bhapi::get_current_thread_id(), err - B_GENERAL_ERROR_BASE);
 
-		/* do something */
-	}
+        /* do something */
+    }
 
-	free(buffer);
+    free(buffer);
 
-	BHAPI_DEBUG("[PRIVATE]: %s --- Hey(%I64i:%I64i), quited.",
+    BHAPI_DEBUG("[PRIVATE]: %s --- Hey(%I64i:%I64i), quited.",
           __PRETTY_FUNCTION__, bhapi::get_current_team_id(), bhapi::get_current_thread_id());
 
-	return B_OK;
+    return B_OK;
 }
 
 
 BTokensDepot*
 BApplicationConnector::HandlersDepot() const
 {
-	return fHandlersDepot;
+    return fHandlersDepot;
 }
 
 
@@ -148,15 +146,15 @@ BApplicationConnector::Quit()
 #ifndef _WIN32
 class LOCALBHAPI BApplicationInitializer {
 public:
-	BApplicationInitializer()
-	{
-		BApplicationConnector::Init();
-	}
+    BApplicationInitializer()
+    {
+        BApplicationConnector::Init();
+    }
 
-	~BApplicationInitializer()
-	{
-		BApplicationConnector::Quit();
-	}
+    ~BApplicationInitializer()
+    {
+        BApplicationConnector::Quit();
+    }
 };
 
 namespace bhapi {

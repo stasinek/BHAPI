@@ -6,7 +6,7 @@
 #define _KERNEL_ARCH_M68K_030_MMU_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <string.h>
 
 #include <arch_mmu.h>

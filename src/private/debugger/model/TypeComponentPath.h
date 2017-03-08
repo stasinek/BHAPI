@@ -6,7 +6,7 @@
 #define TYPE_COMPONENT_PATH_H
 
 
-#include <String.h>
+#include <StringClass.h>
 
 #include <ObjectList.h>
 #include <Referenceable.h>

@@ -31,7 +31,7 @@ enum collator_strengths {
 // N.B.: This class is not multithread-safe, as Compare() and GetKey() change
 //       the ICUCollator (the strength). So if you want to use a BCollator from
 //       more than one thread, you need to protect it with a lock
-//#include <SupportDefs.h>
+//#include <Haiku.h>
 class BString;
 class BCollatorAddOn;
 class BCollator : public BArchivable {

@@ -9,7 +9,7 @@
 #define _WINDOW_INFO_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct window_info {

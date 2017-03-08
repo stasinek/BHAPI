@@ -10,7 +10,7 @@
 
 #include <unicode/ucnv.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 namespace BPrivate {

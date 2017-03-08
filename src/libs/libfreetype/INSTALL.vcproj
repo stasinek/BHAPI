@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding = "UTF-8"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="INSTALL"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="Debug"
+			IntermediateDirectory="INSTALL.dir\Debug"
+			ConfigurationType="10"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\builds\unix&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\base&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\truetype&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type1&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cff&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cid&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pfr&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type42&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\winfonts&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pcf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\bdf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\sfnt&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\autofit&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pshinter&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\raster&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\smooth&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cache&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\gzip&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\lzw&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psaux&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psnames&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\include&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype&quot;;"
+				AssemblerListingLocation="Debug/"
+				ExceptionHandling="FALSE"
+				PreprocessorDefinitions="&quot;FT_CONFIG_CONFIG_H=&lt;ftconfig.h&gt;&quot;;&quot;FT_CONFIG_MODULES_H=&lt;ftmodule.h&gt;&quot;;CMAKE_INTDIR=\&quot;Debug\&quot;"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\builds\unix&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\base&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\truetype&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type1&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cff&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cid&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pfr&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type42&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\winfonts&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pcf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\bdf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\sfnt&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\autofit&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pshinter&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\raster&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\smooth&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cache&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\gzip&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\lzw&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psaux&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psnames&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\include&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype&quot;;"
+				PreprocessorDefinitions="&quot;FT_CONFIG_CONFIG_H=&lt;ftconfig.h&gt;&quot;;&quot;FT_CONFIG_MODULES_H=&lt;ftmodule.h&gt;&quot;;CMAKE_INTDIR=\&quot;Debug\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\builds\unix&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\base&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\truetype&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type1&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cff&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cid&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pfr&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type42&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\winfonts&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pcf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\bdf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\sfnt&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\autofit&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pshinter&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\raster&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\smooth&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cache&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\gzip&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\lzw&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psaux&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psnames&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\include&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype&quot;;"
+				MkTypLibCompatible="false"
+				TargetEnvironment="1"
+				GenerateStublessProxies="true"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="C:\hubiC\CPP\CMake\bin\cmake.exe -DBUILD_TYPE=$(OutDir) -P cmake_install.cmake&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="Release"
+			IntermediateDirectory="INSTALL.dir\Release"
+			ConfigurationType="10"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\builds\unix&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\base&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\truetype&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type1&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cff&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cid&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pfr&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type42&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\winfonts&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pcf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\bdf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\sfnt&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\autofit&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pshinter&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\raster&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\smooth&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cache&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\gzip&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\lzw&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psaux&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psnames&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\include&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype&quot;;"
+				AssemblerListingLocation="Release/"
+				ExceptionHandling="FALSE"
+				PreprocessorDefinitions="&quot;FT_CONFIG_CONFIG_H=&lt;ftconfig.h&gt;&quot;;&quot;FT_CONFIG_MODULES_H=&lt;ftmodule.h&gt;&quot;;CMAKE_INTDIR=\&quot;Release\&quot;"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\builds\unix&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\base&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\truetype&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type1&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cff&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cid&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pfr&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type42&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\winfonts&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pcf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\bdf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\sfnt&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\autofit&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pshinter&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\raster&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\smooth&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cache&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\gzip&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\lzw&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psaux&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psnames&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\include&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype&quot;;"
+				PreprocessorDefinitions="&quot;FT_CONFIG_CONFIG_H=&lt;ftconfig.h&gt;&quot;;&quot;FT_CONFIG_MODULES_H=&lt;ftmodule.h&gt;&quot;;CMAKE_INTDIR=\&quot;Release\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\builds\unix&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\base&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\truetype&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type1&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cff&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cid&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pfr&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type42&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\winfonts&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pcf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\bdf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\sfnt&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\autofit&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pshinter&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\raster&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\smooth&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cache&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\gzip&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\lzw&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psaux&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psnames&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\include&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype&quot;;"
+				MkTypLibCompatible="false"
+				TargetEnvironment="1"
+				GenerateStublessProxies="true"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="C:\hubiC\CPP\CMake\bin\cmake.exe -DBUILD_TYPE=$(OutDir) -P cmake_install.cmake&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"/>
+		</Configuration>
+		<Configuration
+			Name="MinSizeRel|Win32"
+			OutputDirectory="MinSizeRel"
+			IntermediateDirectory="INSTALL.dir\MinSizeRel"
+			ConfigurationType="10"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\builds\unix&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\base&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\truetype&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type1&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cff&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cid&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pfr&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type42&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\winfonts&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pcf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\bdf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\sfnt&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\autofit&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pshinter&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\raster&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\smooth&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cache&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\gzip&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\lzw&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psaux&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psnames&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\include&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype&quot;;"
+				AssemblerListingLocation="MinSizeRel/"
+				ExceptionHandling="FALSE"
+				PreprocessorDefinitions="&quot;FT_CONFIG_CONFIG_H=&lt;ftconfig.h&gt;&quot;;&quot;FT_CONFIG_MODULES_H=&lt;ftmodule.h&gt;&quot;;CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\builds\unix&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\base&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\truetype&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type1&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cff&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cid&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pfr&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type42&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\winfonts&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pcf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\bdf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\sfnt&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\autofit&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pshinter&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\raster&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\smooth&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cache&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\gzip&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\lzw&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psaux&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psnames&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\include&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype&quot;;"
+				PreprocessorDefinitions="&quot;FT_CONFIG_CONFIG_H=&lt;ftconfig.h&gt;&quot;;&quot;FT_CONFIG_MODULES_H=&lt;ftmodule.h&gt;&quot;;CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\builds\unix&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\base&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\truetype&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type1&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cff&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cid&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pfr&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type42&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\winfonts&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pcf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\bdf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\sfnt&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\autofit&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pshinter&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\raster&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\smooth&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cache&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\gzip&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\lzw&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psaux&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psnames&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\include&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype&quot;;"
+				MkTypLibCompatible="false"
+				TargetEnvironment="1"
+				GenerateStublessProxies="true"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="C:\hubiC\CPP\CMake\bin\cmake.exe -DBUILD_TYPE=$(OutDir) -P cmake_install.cmake&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"/>
+		</Configuration>
+		<Configuration
+			Name="RelWithDebInfo|Win32"
+			OutputDirectory="RelWithDebInfo"
+			IntermediateDirectory="INSTALL.dir\RelWithDebInfo"
+			ConfigurationType="10"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\builds\unix&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\base&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\truetype&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type1&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cff&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cid&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pfr&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type42&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\winfonts&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pcf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\bdf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\sfnt&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\autofit&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pshinter&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\raster&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\smooth&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cache&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\gzip&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\lzw&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psaux&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psnames&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\include&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype&quot;;"
+				AssemblerListingLocation="RelWithDebInfo/"
+				ExceptionHandling="FALSE"
+				PreprocessorDefinitions="&quot;FT_CONFIG_CONFIG_H=&lt;ftconfig.h&gt;&quot;;&quot;FT_CONFIG_MODULES_H=&lt;ftmodule.h&gt;&quot;;CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\builds\unix&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\base&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\truetype&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type1&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cff&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cid&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pfr&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type42&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\winfonts&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pcf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\bdf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\sfnt&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\autofit&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pshinter&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\raster&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\smooth&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cache&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\gzip&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\lzw&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psaux&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psnames&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\include&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype&quot;;"
+				PreprocessorDefinitions="&quot;FT_CONFIG_CONFIG_H=&lt;ftconfig.h&gt;&quot;;&quot;FT_CONFIG_MODULES_H=&lt;ftmodule.h&gt;&quot;;CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\builds\unix&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\base&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\truetype&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type1&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cff&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cid&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pfr&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\type42&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\winfonts&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pcf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\bdf&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\sfnt&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\autofit&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\pshinter&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\raster&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\smooth&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\cache&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\gzip&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\lzw&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psaux&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\src\psnames&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\include&quot;;&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype&quot;;"
+				MkTypLibCompatible="false"
+				TargetEnvironment="1"
+				GenerateStublessProxies="true"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="C:\hubiC\CPP\CMake\bin\cmake.exe -DBUILD_TYPE=$(OutDir) -P cmake_install.cmake&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"/>
+		</Configuration>
+	</Configurations>
+	<Files>
+		<Filter
+			Name="CMake Rules"
+			Filter="">
+			<File
+				RelativePath="C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\CMakeFiles\INSTALL_force.rule">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description=" "
+					CommandLine="cd .&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\CMakeFiles\INSTALL_force.rule&quot;"
+					Outputs="C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\CMakeFiles\INSTALL_force"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description=" "
+					CommandLine="cd .&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\CMakeFiles\INSTALL_force.rule&quot;"
+					Outputs="C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\CMakeFiles\INSTALL_force"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MinSizeRel|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description=" "
+					CommandLine="cd .&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\CMakeFiles\INSTALL_force.rule&quot;"
+					Outputs="C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\CMakeFiles\INSTALL_force"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="RelWithDebInfo|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description=" "
+					CommandLine="cd .&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="&quot;C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\CMakeFiles\INSTALL_force.rule&quot;"
+					Outputs="C:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\CMakeFiles\INSTALL_force"/>
+				</FileConfiguration>
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

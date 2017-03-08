@@ -95,14 +95,14 @@ inline rgb_color& operator=(const rgb_color& other)
 {
     return set_to(other.red, other.green, other.blue, other.alpha);
 }
-rgb_color& mix(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
+rgb_color& mix(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a);
 rgb_color& mix(const rgb_color &o);
-rgb_color& mix_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const;
+rgb_color& mix_copy(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a) const;
 rgb_color& mix_copy(const rgb_color &o) const;
 
-rgb_color& disable(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
+rgb_color& disable(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a);
 rgb_color& disable(const rgb_color &background);
-rgb_color& disable_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const;
+rgb_color& disable_copy(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a) const;
 rgb_color& disable_copy(const rgb_color &background) const;
 #endif
 } rgb_color;
@@ -319,7 +319,7 @@ extern const screen_id B_MAIN_SCREEN_ID;
 bool bitmaps_support_space(color_space space, uint32* _supportFlags);
 status_t get_pixel_size_for(color_space space, size_t* _pixelChunk, size_t* _rowAlignment, size_t* _pixelsPerChunk);
 #ifdef __cplusplus // just for C++
-inline pattern make_pattern(b_uint8 d1, b_uint8 d2, b_uint8 d3, b_uint8 d4, b_uint8 d5, b_uint8 d6, b_uint8 d7, b_uint8 d8)
+inline pattern make_pattern(__be_uint8 d1,  __be_uint8 d2,  __be_uint8 d3,  __be_uint8 d4,  __be_uint8 d5,  __be_uint8 d6,  __be_uint8 d7,  __be_uint8 d8)
 {
     bhapi::pattern p;
     p.data[0] = d1;
@@ -332,15 +332,15 @@ inline pattern make_pattern(b_uint8 d1, b_uint8 d2, b_uint8 d3, b_uint8 d4, b_ui
     p.data[7] = d8;
     return p;
 }
-inline rgb_color make_rgb_color(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 0xff)
+inline rgb_color make_rgb_color(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a = 0xff)
 {
     rgb_color c;
     c.set_to(r, g, b, a);
     return c;
 }
 #endif /* __cplusplus */
-IMPEXPBHAPI b_uint8 find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b);
-IMPEXPBHAPI bhapi::rgb_color find_color_for_index(b_uint8 index);
+IMPEXPBHAPI  __be_uint8 find_index_for_color(__be_uint8 r,  __be_uint8 g,  __be_uint8 b);
+IMPEXPBHAPI bhapi::rgb_color find_color_for_index(__be_uint8 index);
 #ifdef __cplusplus
 } // extern "C"
 #endif /* __cplusplus */

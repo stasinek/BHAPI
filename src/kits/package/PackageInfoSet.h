@@ -6,7 +6,7 @@
 #define _PACKAGE_PACKAGE_INFO_SET_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 namespace BPackageKit {

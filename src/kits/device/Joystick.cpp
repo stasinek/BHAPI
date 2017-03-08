@@ -16,7 +16,7 @@
 #include <Directory.h>
 #include <List.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 #if DEBUG

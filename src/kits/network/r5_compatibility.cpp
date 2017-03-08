@@ -9,7 +9,7 @@
  */
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <TLS.h>
 
 #include <stdio.h>

@@ -19,7 +19,7 @@
 #include <MailSettingsView.h>
 #include <Message.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 #include <TextControl.h>
 
 

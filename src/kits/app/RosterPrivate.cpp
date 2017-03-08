@@ -93,23 +93,23 @@ BRoster::Private::IsMessengerValid(bool mime) const
 }
 
 
-/*!	\brief Initializes the global be_roster variable.
+/*!	\brief Initializes the global  __be_roster variable.
 
 	Called before the global constructors are invoked.
 */
 void
 BRoster::Private::InitBeRoster()
 {
-	be_roster = new BRoster;
+	__be_roster = new BRoster;
 }
 
 
-/*!	\brief Deletes the global be_roster.
+/*!	\brief Deletes the global  __be_roster.
 
 	Called after the global destructors are invoked.
 */
 void
 BRoster::Private::DeleteBeRoster()
 {
-	delete be_roster;
+	delete  __be_roster;
 }

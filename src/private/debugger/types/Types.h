@@ -5,7 +5,7 @@
 #ifndef ARCHITECTURE_TYPES_H
 #define ARCHITECTURE_TYPES_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 typedef uint64 target_addr_t;

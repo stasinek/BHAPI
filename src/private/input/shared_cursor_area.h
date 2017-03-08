@@ -9,7 +9,7 @@
 #define SHARED_CURSOR_AREA_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct shared_cursor {

@@ -35,7 +35,7 @@ All rights reserved.
 #define INFO_WINDOW_H
 
 
-#include <String.h>
+#include <StringClass.h>
 #include <Window.h>
 #include <MessageFilter.h>
 

@@ -5,7 +5,7 @@
 #ifndef STRING_UTILS_H
 #define STRING_UTILS_H
 
-#include <String.h>
+#include <StringClass.h>
 
 
 class StringUtils {

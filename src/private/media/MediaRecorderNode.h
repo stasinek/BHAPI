@@ -10,7 +10,7 @@
 
 #include <BufferConsumer.h>
 #include <MediaEventLooper.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 namespace BPrivate { namespace media {

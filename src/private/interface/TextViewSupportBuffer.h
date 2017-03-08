@@ -10,7 +10,7 @@
 #include <cstring>
 
 #include <OS.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 // _BTextViewSupportBuffer_ class ----------------------------------------------

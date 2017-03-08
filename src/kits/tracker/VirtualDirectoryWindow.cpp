@@ -44,7 +44,7 @@ All rights reserved.
 #include "VirtualDirectoryWindow.h"
 
 #include <Catalog.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 
 #include <AutoLocker.h>
 

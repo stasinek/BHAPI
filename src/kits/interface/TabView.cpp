@@ -71,7 +71,7 @@ BTab::Select()
 {
 	if(fOwner == NULL) return;
 
-	b_int32 index = fOwner->TabIndexOf(this);
+	__be_int32 index = fOwner->TabIndexOf(this);
 	if(index == fOwner->fSelection) return;
 
 	BTab *oldTab = fOwner->TabAt(fOwner->fSelection);
@@ -233,7 +233,7 @@ BTab::DrawTab(BView* owner, BRect frame, bhapi::tab_position position, bool full
 
 
 BTabView::BTabView(BRect frame, const char *name,
-		   bhapi::button_width tabWidth, b_uint32 resizeMode, b_uint32 flags)
+		   bhapi::button_width tabWidth,  __be_uint32 resizeMode,  __be_uint32 flags)
 	: BView(frame, name, resizeMode, flags), fSelection(-1)
 {
 	fTabWidth = tabWidth;
@@ -254,7 +254,7 @@ BTabView::BTabView(BRect frame, const char *name,
 BTabView::~BTabView()
 {
 	BTab *tab;
-	while((tab = (BTab*)fTabs.RemoveItem((b_int32)0)) != NULL)
+	while((tab = (BTab*)fTabs.RemoveItem((__be_int32)0)) != NULL)
 	{
 		tab->fOwner = NULL;
 		delete tab;
@@ -263,7 +263,7 @@ BTabView::~BTabView()
 
 
 void
-BTabView::Select(b_int32 tabIndex)
+BTabView::Select(__be_int32 tabIndex)
 {
 	if((tabIndex >= 0 ? tabIndex == fSelection : fSelection < 0) || tabIndex >= fTabs.CountItems()) return;
 
@@ -280,7 +280,7 @@ BTabView::Select(b_int32 tabIndex)
 }
 
 
-b_int32
+be_int32
 BTabView::Selection() const
 {
 	return fSelection;
@@ -328,7 +328,7 @@ BTabView::AddTab(BView *tabTargetView, BTab *tab)
 
 
 BTab*
-BTabView::RemoveTab(b_int32 tabIndex)
+BTabView::RemoveTab(__be_int32 tabIndex)
 {
 	BTab *tab = (BTab*)fTabs.RemoveItem(tabIndex);
 	if(tab == NULL) return NULL;
@@ -341,7 +341,7 @@ BTabView::RemoveTab(b_int32 tabIndex)
 }
 
 
-b_int32
+be_int32
 BTabView::CountTabs() const
 {
 	return fTabs.CountItems();
@@ -349,13 +349,13 @@ BTabView::CountTabs() const
 
 
 BTab*
-BTabView::TabAt(b_int32 tabIndex) const
+BTabView::TabAt(__be_int32 tabIndex) const
 {
 	return (BTab*)fTabs.ItemAt(tabIndex);
 }
 
 
-b_int32
+be_int32
 BTabView::TabIndexOf(const BTab *tab) const
 {
 	if(tab == NULL || tab->fOwner != this) return -1;
@@ -364,7 +364,7 @@ BTabView::TabIndexOf(const BTab *tab) const
 
 
 BView*
-BTabView::ViewForTab(b_int32 tabIndex) const
+BTabView::ViewForTab(__be_int32 tabIndex) const
 {
 	BTab *tab = (BTab*)fTabs.ItemAt(tabIndex);
 	return(tab == NULL ? NULL : tab->View());
@@ -444,7 +444,7 @@ BTabView::ChildRemoving(BView *child)
 
 
 BRect
-BTabView::TabFrame(b_int32 tabIndex) const
+BTabView::TabFrame(__be_int32 tabIndex) const
 {
 	if(tabIndex < 0 || tabIndex >= fTabs.CountItems()) return BRect();
 
@@ -455,7 +455,7 @@ BTabView::TabFrame(b_int32 tabIndex) const
 	r.bottom = r.top + fTabHeight;
 	r.right = r.left;
 
-	for(b_int32 i = 0; i < fTabs.CountItems(); i++)
+	for(__be_int32 i = 0; i < fTabs.CountItems(); i++)
 	{
 		BTab *tab = (BTab*)fTabs.ItemAt(i);
 		if(fTabWidth == B_WIDTH_FROM_LABEL)
@@ -486,7 +486,7 @@ BTabView::DrawTabs()
 {
 	BRect selTabRect;
 
-	for(b_int32 i = 0; i < fTabs.CountItems(); i++)
+	for(__be_int32 i = 0; i < fTabs.CountItems(); i++)
 	{
 		if(i == fSelection) continue;
 
@@ -550,13 +550,13 @@ BTabView::Draw(BRect updateRect)
 void
 BTabView::MouseDown(BPoint where)
 {
-	b_int32 btnClicks = 1;
+	__be_int32 btnClicks = 1;
 	if(where.y > fTabHeight + 1.f || !IsEnabled() ||
 	   !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON, true, &btnClicks) || btnClicks > 1) return;
 
 	// TODO
-	b_int32 index = -1;
-	for(b_int32 i = 0; i < fTabs.CountItems(); i++) {if(TabFrame(i).Contains(where)) index = i;}
+	__be_int32 index = -1;
+	for(__be_int32 i = 0; i < fTabs.CountItems(); i++) {if(TabFrame(i).Contains(where)) index = i;}
 
 	if(index < 0 || fSelection == index) return;
 

@@ -40,14 +40,14 @@ public:
     ~BToken();
 
     bool		IsValid() const;
-    b_uint64		Token() const;
-    b_bigtime_t	TimeStamp() const;
+     __be_uint64		Token() const;
+    bigtime_t	TimeStamp() const;
 
-    BToken		&operator+=(b_uint64 vitalities);
-    BToken		&operator-=(b_uint64 vitalities);
+    BToken		&operator+=(__be_uint64 vitalities);
+    BToken		&operator-=(__be_uint64 vitalities);
     BToken		&operator++();
     BToken		&operator--();
-    b_uint64		Vitalities() const;
+     __be_uint64		Vitalities() const;
 
     void		*Data() const;
     void		SetData(void *data);
@@ -59,8 +59,8 @@ private:
     friend class BTokensDepot;
 
     bool fOriginal;
-    b_uint64 fToken;
-    b_bigtime_t fTimeStamp;
+     __be_uint64 fToken;
+    bigtime_t fTimeStamp;
 
     BTokensDepot *fDepot;
 };
@@ -75,9 +75,9 @@ public:
     // CreateToken : return a new allocated object
     BToken		*CreateToken(void *data = NULL);
     // OpenToken : return an allocated object associated with "token" when "fetch_token = NULL"
-    BToken		*OpenToken(b_uint64 token, BToken *fetch_token = NULL);
+    BToken		*OpenToken(__be_uint64 token, BToken *fetch_token = NULL);
     // FetchToken : return the static object associated with "token", it should be called within Lock()/Unlock()
-    BToken		*FetchToken(b_uint64 token);
+    BToken		*FetchToken(__be_uint64 token);
 
     void		SetLocker(BLocker *locker, bool deconstruct_locker);
     BLocker		*Locker() const;

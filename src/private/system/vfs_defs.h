@@ -13,7 +13,7 @@
 #include <limits.h>
 #include <sys/stat.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct fd_info {

@@ -10,7 +10,7 @@
 
 
 #include <MessageFilter.h>
-#include <String.h>
+#include <StringClass.h>
 #include <Window.h>
 
 

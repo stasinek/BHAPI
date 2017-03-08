@@ -38,7 +38,7 @@
 
 BTextControl::BTextControl(BRect frame, const char *name,
 			   const char *label, const char *text, BMessage *message,
-			   b_uint32 resizeMode, b_uint32 flags)
+			    __be_uint32 resizeMode,  __be_uint32 flags)
 	: BTextEditable(frame, name, text, message, resizeMode, flags),
 	  fLabelAlignment(B_ALIGN_LEFT), fDivider(-1), fModificationMessage(NULL)
 {
@@ -243,18 +243,18 @@ BTextControl::GetAlignment(bhapi::alignment *forLabel, bhapi::alignment *forText
 
 
 void
-BTextControl::KeyDown(const char *bytes, b_int32 numBytes)
+BTextControl::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	BMessage *msg = (Window() == NULL ? NULL : Window()->CurrentMessage());
 
-	b_int32 modifiers = 0;
+	__be_int32 modifiers = 0;
 	if(msg != NULL) msg->FindInt32("modifiers", &modifiers);
 
 	if(!(numBytes != 1 || msg == NULL || msg->what != B_KEY_DOWN || !IsEnabled() || !IsEditable() || !(modifiers & B_CONTROL_KEY)))
 	{
 		if(*bytes == 'c' || *bytes == 'C' || *bytes == 'x' || *bytes == 'X')
 		{
-			b_int32 startPos, endPos;
+			__be_int32 startPos, endPos;
 			char *selText = NULL;
 			BMessage *clipMsg = NULL;
 
@@ -262,9 +262,9 @@ BTextControl::KeyDown(const char *bytes, b_int32 numBytes)
 			if((selText = DuplicateText(startPos, endPos)) != NULL && (clipMsg = bhapi::clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
-				b_size_t textLen = 0;
+				__be_size_t textLen = 0;
 				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
-				   text == NULL || textLen != (b_size_t)strlen(selText) || strncmp(text, selText, (size_t)textLen) != 0)
+				   text == NULL || textLen != (__be_size_t)strlen(selText) || strncmp(text, selText, (size_t)textLen) != 0)
 				{
 					bhapi::clipboard.Clear();
 					clipMsg->AddData("text/plain", B_MIME_TYPE, selText, strlen(selText));
@@ -291,15 +291,15 @@ BTextControl::KeyDown(const char *bytes, b_int32 numBytes)
 			if((clipMsg = bhapi::clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
-				b_size_t len = 0;
-				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &len)) str.SetTo(text, (b_int32)len);
+				__be_size_t len = 0;
+				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &len)) str.SetTo(text, (__be_int32)len);
 			}
 			bhapi::clipboard.Unlock();
 
 			if(str.Length() <= 0) return;
 
-			b_int32 curPos = Position();
-			b_int32 startPos, endPos;
+			__be_int32 curPos = Position();
+			__be_int32 startPos, endPos;
 			if(GetSelection(&startPos, &endPos)) {RemoveText(startPos, endPos); curPos = startPos;}
 			InsertText(str.String(), -1, curPos);
 			SetPosition(curPos + str.CountChars());

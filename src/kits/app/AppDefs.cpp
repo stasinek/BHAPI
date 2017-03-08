@@ -5,7 +5,7 @@
 
 
 #include <AppDefs.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 const uint8 B_HAND_CURSOR[] = {

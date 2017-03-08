@@ -10,7 +10,7 @@
 
 
 #include <smp.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #define MAX_FAST_RANDOM_VALUE		0x7fff

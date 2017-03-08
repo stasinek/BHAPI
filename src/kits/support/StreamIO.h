@@ -39,17 +39,17 @@ public:
     BStreamIO();
     virtual ~BStreamIO();
 
-	virtual b_size_t		Read(void *buffer, size_t size);
-	virtual b_size_t		Write(const void *buffer, size_t size);
+	virtual  __be_size_t		Read(void *buffer, size_t size);
+	virtual  __be_size_t		Write(const void *buffer, size_t size);
 
-    BStreamIO 		&operator<<(b_int8 value);
-    BStreamIO 		&operator<<(b_uint8 value);
-    BStreamIO 		&operator<<(b_int16 value);
-    BStreamIO 		&operator<<(b_uint16 value);
-    BStreamIO 		&operator<<(b_int32 value);
-    BStreamIO 		&operator<<(b_uint32 value);
-    BStreamIO 		&operator<<(b_int64 value);
-    BStreamIO 		&operator<<(b_uint64 value);
+    BStreamIO 		&operator<<(__be_int8 value);
+    BStreamIO 		&operator<<(__be_uint8 value);
+    BStreamIO 		&operator<<(__be_int16 value);
+    BStreamIO 		&operator<<(__be_uint16 value);
+    BStreamIO 		&operator<<(__be_int32 value);
+    BStreamIO 		&operator<<(__be_uint32 value);
+    BStreamIO 		&operator<<(__be_int64 value);
+    BStreamIO 		&operator<<(__be_uint64 value);
     BStreamIO 		&operator<<(float value);
     BStreamIO 		&operator<<(double value);
     BStreamIO 		&operator<<(const void *value);

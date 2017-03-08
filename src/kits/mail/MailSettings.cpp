@@ -24,7 +24,7 @@
 #include <Messenger.h>
 #include <Path.h>
 #include <PathFinder.h>
-#include <String.h>
+#include <StringClass.h>
 #include <Window.h>
 
 #include <MailPrivate.h>

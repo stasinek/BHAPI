@@ -15,7 +15,7 @@
 */
 
 #include <StorageDefs.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <dirent.h>
 #include <string>

@@ -41,7 +41,7 @@
 #include <Messenger.h>
 #include <Resources.h>
 #include <Roster.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include "BeUtils.h"
 
@@ -87,7 +87,7 @@ bool MimeTypeForSender(BMessage* sender, BString& mime) {
 	BMessenger msgr = sender->ReturnAddress();
 	team_id team = msgr.Team();
 	app_info info;
-	if (be_roster->GetRunningAppInfo(team, &info) == B_OK) {
+	if (__be_roster->GetRunningAppInfo(team, &info) == B_OK) {
 		mime = info.signature;
 		return true;
 	}

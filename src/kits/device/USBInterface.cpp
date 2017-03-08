@@ -116,7 +116,7 @@ BUSBInterface::InterfaceString() const
 }
 
 
-const usb_interface_descriptor *
+const usbe_interface_descriptor *
 BUSBInterface::Descriptor() const
 {
 	return &fDescriptor;

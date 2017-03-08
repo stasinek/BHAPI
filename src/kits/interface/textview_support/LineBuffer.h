@@ -9,7 +9,7 @@
 #define __LINE_BUFFER_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <TextView.h>
 
 #include "TextViewSupportBuffer.h"

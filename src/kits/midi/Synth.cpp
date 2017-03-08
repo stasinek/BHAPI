@@ -17,7 +17,7 @@
 #include <Synth.h>
 #include "SoftSynth.h"
 
-BSynth* be_synth = NULL;
+BSynth*  __be_synth = NULL;
 
 using namespace BPrivate;
 
@@ -38,7 +38,7 @@ BSynth::BSynth(synth_mode mode)
 BSynth::~BSynth()
 {
 	delete fSynth;
-	be_synth = NULL;
+	__be_synth = NULL;
 }
 
 
@@ -264,8 +264,8 @@ BSynth::SetControllerHook(int16 controller, synth_controller_hook cback)
 void 
 BSynth::_Init()
 {
-	delete be_synth;
-	be_synth = this;
+	delete  __be_synth;
+	__be_synth = this;
 	fSynthMode = B_NO_SYNTH;
 	fClientCount = 0;
 	fSynth = new BSoftSynth();

@@ -6,7 +6,7 @@
 #define _TIME_CODE_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 // Time code is always in the form HH:MM:SS:FF, it's the definition of "FF"

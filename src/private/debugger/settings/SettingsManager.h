@@ -7,7 +7,7 @@
 #define SETTINGS_MANAGER_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class TeamSettings;

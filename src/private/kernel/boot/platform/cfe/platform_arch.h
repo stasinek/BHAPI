@@ -6,7 +6,7 @@
 #define KERNEL_BOOT_PLATFORM_CFE_ARCH_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 struct kernel_args;
 

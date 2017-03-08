@@ -36,7 +36,7 @@ All rights reserved.
 
 
 #include <PopUpMenu.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 class MenuBar;

@@ -28,7 +28,7 @@
 #define COLOR_QUANTIZER_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 namespace BPrivate {

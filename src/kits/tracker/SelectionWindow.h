@@ -38,11 +38,11 @@ All rights reserved.
 #include <Button.h>
 #include <CheckBox.h>
 #include <MenuField.h>
-#include <String.h>
+#include <StringClass.h>
 #include <TextControl.h>
 #include <Window.h>
 
-#include "TrackerString.h"
+#include "TrackerStringClass.h"
 
 
 namespace BPrivate {

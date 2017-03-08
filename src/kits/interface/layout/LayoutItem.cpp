@@ -32,7 +32,7 @@
 #include "Layout.h"
 using namespace bhapi;
 
-BLayoutItem::BLayoutItem(BRect frame, b_uint32 resizingMode)
+BLayoutItem::BLayoutItem(BRect frame,  __be_uint32 resizingMode)
 	: BLayoutContainer(), fContainer(NULL),
 	  fIndex(-1),
 	  fLocalOrigin(B_ORIGIN),
@@ -87,13 +87,13 @@ BLayoutItem::RemoveSelf()
 
 
 void
-BLayoutItem::SetResizingMode(b_uint32 mode)
+BLayoutItem::SetResizingMode(__be_uint32 mode)
 {
 	fResizingMode = mode;
 }
 
 
-b_uint32
+be_uint32
 BLayoutItem::ResizingMode() const
 {
 	return fResizingMode;
@@ -141,15 +141,15 @@ BLayoutItem::SendBehind(BLayoutItem *item)
 {
 	if(fContainer == NULL || item == NULL || !(item->fContainer == fContainer && item->fIndex > fIndex)) return;
 
-	b_int32 index = (item == NULL ? 0 : item->fIndex);
+	__be_int32 index = (item == NULL ? 0 : item->fIndex);
 	if(fContainer->fItems.MoveItem(fIndex, index) == false) return;
 
-	for(b_int32 i = min_c(index, fIndex); i < fContainer->fItems.CountItems(); i++)
+	for(__be_int32 i = min_c(index, fIndex); i < fContainer->fItems.CountItems(); i++)
 		((BLayoutItem*)fContainer->fItems.ItemAt(i))->fIndex = i;
 
 	if(fUpdating || fHidden || fFrame.IsValid() == false) return;
 	BRect updateRect = fFrame | item->fFrame;
-	for(b_int32 i = min_c(index, fIndex); i < fContainer->fItems.CountItems(); i++)
+	for(__be_int32 i = min_c(index, fIndex); i < fContainer->fItems.CountItems(); i++)
 		((BLayoutItem*)fContainer->fItems.ItemAt(i))->UpdateVisibleRegion();
 	fContainer->Invalidate(updateRect);
 }
@@ -200,7 +200,7 @@ BLayoutItem::ResizeTo(float width, float height)
 
 	for(BLayoutItem *item = ItemAt(0); item != NULL; item = item->NextSibling())
 	{
-		b_uint32 iMode = item->fResizingMode;
+		__be_uint32 iMode = item->fResizingMode;
 		BRect iFrame = item->fFrame;
 
 		if(iMode == B_FOLLOW_NONE || iMode == (B_FOLLOW_LEFT | B_FOLLOW_TOP)) continue;
@@ -300,7 +300,7 @@ BLayoutItem::GetPreferredSize(float *width, float *height)
 		float iW = 0, iH = 0;
 		item->GetPreferredSize(&iW, &iH);
 
-		b_uint32 iMode = item->fResizingMode;
+		__be_uint32 iMode = item->fResizingMode;
 		if((iMode & B_FOLLOW_LEFT) || (iMode & B_FOLLOW_NONE)) iW += item->fFrame.left;
 		if(iMode & B_FOLLOW_RIGHT) iW += rect.right - item->fFrame.right;
 		if((iMode & B_FOLLOW_TOP) || (iMode & B_FOLLOW_NONE)) iH += item->fFrame.top;
@@ -325,7 +325,7 @@ BLayoutItem::ResizeToPreferred()
 	if(w == fFrame.Width() && h == fFrame.Height()) return;
 
 	BRect iFrame = fFrame;
-	b_uint32 iMode = fResizingMode;
+	__be_uint32 iMode = fResizingMode;
 
 	if((iMode & B_FOLLOW_H_CENTER) && (iMode & B_FOLLOW_LEFT_RIGHT) != B_FOLLOW_LEFT_RIGHT)
 	{

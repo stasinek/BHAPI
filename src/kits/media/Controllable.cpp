@@ -363,7 +363,7 @@ BControllable::StartControlPanel(BMessenger* _messenger)
 	snprintf(arg, sizeof(arg), "node=%d", (int)ID());
 
 	team_id team;
-	if (be_roster->Launch(&ref, 1, (const char* const*)&arg, &team) != B_OK) {
+	if (__be_roster->Launch(&ref, 1, (const char* const*)&arg, &team) != B_OK) {
 		ERROR("BControllable::StartControlPanel Error launching application\n");
 		return B_BAD_VALUE;
 	}

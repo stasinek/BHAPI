@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#include <String.h>
+#include <StringClass.h>
 
 #include "Value.h"
 

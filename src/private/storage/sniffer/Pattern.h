@@ -9,7 +9,7 @@
 #ifndef _SNIFFER_PATTERN_H
 #define _SNIFFER_PATTERN_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <string>
 #include <sniffer/Range.h>
 

@@ -44,7 +44,7 @@ All rights reserved.
 #include <Debug.h>
 #include <Directory.h>
 #include <FindDirectory.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MenuBar.h>
 #include <MenuField.h>
 #include <MenuItem.h>
@@ -55,7 +55,7 @@ All rights reserved.
 #include <Roster.h>
 #include <SymLink.h>
 #include <ScrollView.h>
-#include <String.h>
+#include <StringClass.h>
 #include <StopWatch.h>
 #include <TextControl.h>
 #include <TextView.h>
@@ -182,7 +182,7 @@ TFilePanel::TFilePanel(file_panel_mode mode, BMessenger* target,
 	if (target)
 		fTarget = *target;
 	else
-		fTarget = BMessenger(be_app);
+		fTarget = BMessenger(__be_app);
 
 	if (message)
 		SetMessage(message);
@@ -666,7 +666,7 @@ TFilePanel::Init(const BMessage*)
 	fDirMenu = new BDirMenu(0, this, kSwitchDirectory, "refs");
 
 	font_height ht;
-	be_plain_font->GetHeight(&ht);
+	__be_plain_font->GetHeight(&ht);
 	float f_height = ht.ascent + ht.descent + ht.leading;
 
 	BRect rect;
@@ -676,7 +676,7 @@ TFilePanel::Init(const BMessage*)
 	rect.bottom = rect.top + (f_height > 22 ? f_height : 22);
 
 	fDirMenuField = new BMenuField(rect, "DirMenuField", "", fDirMenu);
-	fDirMenuField->MenuBar()->SetFont(be_plain_font);
+	fDirMenuField->MenuBar()->SetFont(__be_plain_font);
 	fDirMenuField->SetDivider(0);
 	fDirMenuField->MenuBar()->SetMaxContentWidth(rect.Width() - 26.0f);
 		// Make room for the icon
@@ -778,7 +778,7 @@ TFilePanel::Init(const BMessage*)
 	rect.bottom -= 10;
 	rect.right -= 25;
 	float default_width
-		= be_plain_font->StringWidth(fButtonText.String()) + 20;
+		=  __be_plain_font->StringWidth(fButtonText.String()) + 20;
 	rect.left = default_width > 75
 		? rect.right - default_width : rect.right - 75;
 
@@ -789,7 +789,7 @@ TFilePanel::Init(const BMessage*)
 
 	rect.right = rect.left -= 10;
 	float cancel_width
-		= be_plain_font->StringWidth(B_TRANSLATE("Cancel")) + 20;
+		=  __be_plain_font->StringWidth(B_TRANSLATE("Cancel")) + 20;
 	rect.left = cancel_width > 75
 		? rect.right - cancel_width : rect.right - 75;
 
@@ -869,7 +869,7 @@ TFilePanel::Init(const BMessage*)
 
 	app_info info;
 	BString title;
-	if (be_app->GetAppInfo(&info) == B_OK) {
+	if (__be_app->GetAppInfo(&info) == B_OK) {
 		if (!gLocalizedNamePreferred
 			|| BLocaleRoster::Default()->GetLocalizedFileName(
 				title, info.ref, false) != B_OK)

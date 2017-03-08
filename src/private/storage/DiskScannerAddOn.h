@@ -5,7 +5,7 @@
 #ifndef _DISK_SCANNER_ADD_ON
 #define _DISK_SCANNER_ADD_ON
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 class BDiskScannerParameterEditor;
 class BPartition;

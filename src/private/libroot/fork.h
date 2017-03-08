@@ -6,7 +6,7 @@
 #define __FORK_H__
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #ifdef __cplusplus

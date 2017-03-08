@@ -79,7 +79,7 @@ SOFTWARE.
 
 using std::nothrow;
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #ifdef DEBUG

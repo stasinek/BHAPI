@@ -16,7 +16,7 @@
 #include <Directory.h>
 #include <Joystick.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 #include <UTF8.h>
 
 

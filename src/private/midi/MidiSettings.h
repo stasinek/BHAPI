@@ -7,7 +7,7 @@
 #define MIDI_SETTINGS_PRIVATE_H_
 
 #include <StorageDefs.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 namespace BPrivate {
 

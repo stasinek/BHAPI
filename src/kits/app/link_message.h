@@ -9,7 +9,7 @@
 #define _LINK_MESSAGE_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 static const int32 kLinkCode = '_PTL';

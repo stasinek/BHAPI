@@ -17,7 +17,7 @@
 #include <List.h>
 #include <Locker.h>
 #include <parsedate.h>
-#include <String.h>
+#include <StringClass.h>
 #include <UTF8.h>
 
 #include <mail_encoding.h>

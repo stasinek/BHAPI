@@ -6,7 +6,7 @@
 #define _STATABLE_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>

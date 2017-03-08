@@ -8,7 +8,7 @@
 #include <sys/utsname.h>
 
 #include <OS.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include "Types.h"
 

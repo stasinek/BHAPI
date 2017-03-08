@@ -36,7 +36,7 @@
 #include <string.h>
 
 #include <NetDebug.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 // Off by default cuz the BeBook sez so.

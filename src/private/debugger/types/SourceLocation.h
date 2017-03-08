@@ -5,7 +5,7 @@
 #ifndef SOURCE_LOCATION_H
 #define SOURCE_LOCATION_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class SourceLocation {

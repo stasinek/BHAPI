@@ -12,7 +12,7 @@
 # 34 "../src/kits/interface/../interface/../interface/Point.h"
 class BRect;
 # 1 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 1
-# 51 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
+# 50 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
 # 1 "../src/kits/interface/../interface/../interface/../support/TypeConstants.h" 1
 # 38 "../src/kits/interface/../interface/../interface/../support/TypeConstants.h"
 enum {
@@ -96,7 +96,7 @@ extern const char* B_URL_TN3270;
 extern const char* B_URL_WAIS;
 
 extern const char* B_URL_FILE;
-# 52 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
+# 51 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
 
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
@@ -206,7 +206,7 @@ extern "C" {
 # 15 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_stdarg.h" 2 3 4
 # 141 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 2 3 4
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
-# 54 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
+# 53 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
 
@@ -298,7 +298,7 @@ typedef struct {
   long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
 } max_align_t;
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
-# 55 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
+# 54 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 1 3
 # 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
@@ -927,219 +927,7 @@ void * __mingw_aligned_realloc (void *_Memory, size_t _Size, size_t _Offset);
 
 #pragma pack(pop)
 # 669 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 2 3
-# 56 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
-# 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
-extern "C" {
-# 36 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
-  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _memccpy(void *_Dst,const void *_Src,int _Val,size_t _MaxCount);
-  void *__attribute__((__cdecl__)) memchr(const void *_Buf ,int _Val,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _memicmp(const void *_Buf1,const void *_Buf2,size_t _Size);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _memicmp_l(const void *_Buf1,const void *_Buf2,size_t _Size,_locale_t _Locale);
-  int __attribute__((__cdecl__)) memcmp(const void *_Buf1,const void *_Buf2,size_t _Size);
-  void * __attribute__((__cdecl__)) memcpy(void * __restrict__ _Dst,const void * __restrict__ _Src,size_t _Size) ;
-  void * __attribute__((__cdecl__)) mempcpy (void *_Dst, const void *_Src, size_t _Size);
-  void * __attribute__((__cdecl__)) memset(void *_Dst,int _Val,size_t _Size);
-
-  void * __attribute__((__cdecl__)) memccpy(void *_Dst,const void *_Src,int _Val,size_t _Size) ;
-  int __attribute__((__cdecl__)) memicmp(const void *_Buf1,const void *_Buf2,size_t _Size) ;
-
-
-  char * __attribute__((__cdecl__)) _strset(char *_Str,int _Val) ;
-  char * __attribute__((__cdecl__)) _strset_l(char *_Str,int _Val,_locale_t _Locale) ;
-  char * __attribute__((__cdecl__)) strcpy(char * __restrict__ _Dest,const char * __restrict__ _Source);
-  char * __attribute__((__cdecl__)) strcat(char * __restrict__ _Dest,const char * __restrict__ _Source);
-  int __attribute__((__cdecl__)) strcmp(const char *_Str1,const char *_Str2);
-  size_t __attribute__((__cdecl__)) strlen(const char *_Str);
-  size_t __attribute__((__cdecl__)) strnlen(const char *_Str,size_t _MaxCount);
-  void *__attribute__((__cdecl__)) memmove(void *_Dst,const void *_Src,size_t _Size) ;
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strdup(const char *_Src);
-  char *__attribute__((__cdecl__)) strchr(const char *_Str,int _Val);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricmp(const char *_Str1,const char *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strcmpi(const char *_Str1,const char *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricmp_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
-  int __attribute__((__cdecl__)) strcoll(const char *_Str1,const char *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strcoll_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricoll(const char *_Str1,const char *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricoll_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strncoll (const char *_Str1,const char *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strncoll_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicoll (const char *_Str1,const char *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicoll_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
-  size_t __attribute__((__cdecl__)) strcspn(const char *_Str,const char *_Control);
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strerror(const char *_ErrMsg) ;
-  char *__attribute__((__cdecl__)) strerror(int) ;
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strlwr(char *_String) ;
-  char *strlwr_l(char *_String,_locale_t _Locale) ;
-  char *__attribute__((__cdecl__)) strncat(char * __restrict__ _Dest,const char * __restrict__ _Source,size_t _Count) ;
-  int __attribute__((__cdecl__)) strncmp(const char *_Str1,const char *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicmp(const char *_Str1,const char *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicmp_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
-  char *strncpy(char * __restrict__ _Dest,const char * __restrict__ _Source,size_t _Count) ;
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strnset(char *_Str,int _Val,size_t _MaxCount) ;
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strnset_l(char *str,int c,size_t count,_locale_t _Locale) ;
-  char *__attribute__((__cdecl__)) strpbrk(const char *_Str,const char *_Control);
-  char *__attribute__((__cdecl__)) strrchr(const char *_Str,int _Ch);
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strrev(char *_Str);
-  size_t __attribute__((__cdecl__)) strspn(const char *_Str,const char *_Control);
-  char *__attribute__((__cdecl__)) strstr(const char *_Str,const char *_SubStr);
-  char *__attribute__((__cdecl__)) strtok(char * __restrict__ _Str,const char * __restrict__ _Delim) ;
-       
-
-  char *strtok_r(char * __restrict__ _Str, const char * __restrict__ _Delim, char ** __restrict__ __last);
-       
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strupr(char *_String) ;
-  __attribute__ ((__dllimport__)) char *_strupr_l(char *_String,_locale_t _Locale) ;
-  size_t __attribute__((__cdecl__)) strxfrm(char * __restrict__ _Dst,const char * __restrict__ _Src,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _strxfrm_l(char * __restrict__ _Dst,const char * __restrict__ _Src,size_t _MaxCount,_locale_t _Locale);
-
-
-  char *__attribute__((__cdecl__)) strdup(const char *_Src) ;
-  int __attribute__((__cdecl__)) strcmpi(const char *_Str1,const char *_Str2) ;
-  int __attribute__((__cdecl__)) stricmp(const char *_Str1,const char *_Str2) ;
-  char *__attribute__((__cdecl__)) strlwr(char *_Str) ;
-  int __attribute__((__cdecl__)) strnicmp(const char *_Str1,const char *_Str,size_t _MaxCount) ;
-  int __attribute__((__cdecl__)) strncasecmp (const char *, const char *, size_t);
-  int __attribute__((__cdecl__)) strcasecmp (const char *, const char *);
-
-
-
-
-
-
-
-  char *__attribute__((__cdecl__)) strnset(char *_Str,int _Val,size_t _MaxCount) ;
-  char *__attribute__((__cdecl__)) strrev(char *_Str) ;
-  char *__attribute__((__cdecl__)) strset(char *_Str,int _Val) ;
-  char *__attribute__((__cdecl__)) strupr(char *_Str) ;
-
-
-
-
-
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsdup(const wchar_t *_Str);
-  wchar_t *__attribute__((__cdecl__)) wcscat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source) ;
-  wchar_t *__attribute__((__cdecl__)) wcschr(const wchar_t *_Str,wchar_t _Ch);
-  int __attribute__((__cdecl__)) wcscmp(const wchar_t *_Str1,const wchar_t *_Str2);
-  wchar_t *__attribute__((__cdecl__)) wcscpy(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source) ;
-  size_t __attribute__((__cdecl__)) wcscspn(const wchar_t *_Str,const wchar_t *_Control);
-  size_t __attribute__((__cdecl__)) wcslen(const wchar_t *_Str);
-  size_t __attribute__((__cdecl__)) wcsnlen(const wchar_t *_Src,size_t _MaxCount);
-  wchar_t *wcsncat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count) ;
-  int __attribute__((__cdecl__)) wcsncmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
-  wchar_t *wcsncpy(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count) ;
-  wchar_t *__attribute__((__cdecl__)) _wcsncpy_l(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count,_locale_t _Locale) ;
-  wchar_t *__attribute__((__cdecl__)) wcspbrk(const wchar_t *_Str,const wchar_t *_Control);
-  wchar_t *__attribute__((__cdecl__)) wcsrchr(const wchar_t *_Str,wchar_t _Ch);
-  size_t __attribute__((__cdecl__)) wcsspn(const wchar_t *_Str,const wchar_t *_Control);
-  wchar_t *__attribute__((__cdecl__)) wcsstr(const wchar_t *_Str,const wchar_t *_SubStr);
-  wchar_t *__attribute__((__cdecl__)) wcstok(wchar_t * __restrict__ _Str,const wchar_t * __restrict__ _Delim) ;
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcserror(int _ErrNum) ;
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) __wcserror(const wchar_t *_Str) ;
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicmp(const wchar_t *_Str1,const wchar_t *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicmp_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicmp_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsnset(wchar_t *_Str,wchar_t _Val,size_t _MaxCount) ;
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsrev(wchar_t *_Str);
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsset(wchar_t *_Str,wchar_t _Val) ;
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcslwr(wchar_t *_String) ;
-  __attribute__ ((__dllimport__)) wchar_t *_wcslwr_l(wchar_t *_String,_locale_t _Locale) ;
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsupr(wchar_t *_String) ;
-  __attribute__ ((__dllimport__)) wchar_t *_wcsupr_l(wchar_t *_String,_locale_t _Locale) ;
-  size_t __attribute__((__cdecl__)) wcsxfrm(wchar_t * __restrict__ _Dst,const wchar_t * __restrict__ _Src,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _wcsxfrm_l(wchar_t * __restrict__ _Dst,const wchar_t * __restrict__ _Src,size_t _MaxCount,_locale_t _Locale);
-  int __attribute__((__cdecl__)) wcscoll(const wchar_t *_Str1,const wchar_t *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcscoll_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicoll(const wchar_t *_Str1,const wchar_t *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicoll_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsncoll(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsncoll_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicoll(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicoll_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
-
-
-  wchar_t *__attribute__((__cdecl__)) wcsdup(const wchar_t *_Str) ;
-
-  int __attribute__((__cdecl__)) wcsicmp(const wchar_t *_Str1,const wchar_t *_Str2) ;
-  int __attribute__((__cdecl__)) wcsnicmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount) ;
-  wchar_t *__attribute__((__cdecl__)) wcsnset(wchar_t *_Str,wchar_t _Val,size_t _MaxCount) ;
-  wchar_t *__attribute__((__cdecl__)) wcsrev(wchar_t *_Str) ;
-  wchar_t *__attribute__((__cdecl__)) wcsset(wchar_t *_Str,wchar_t _Val) ;
-  wchar_t *__attribute__((__cdecl__)) wcslwr(wchar_t *_Str) ;
-  wchar_t *__attribute__((__cdecl__)) wcsupr(wchar_t *_Str) ;
-  int __attribute__((__cdecl__)) wcsicoll(const wchar_t *_Str1,const wchar_t *_Str2) ;
-
-
-
-
-}
-
-
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/string_s.h" 1 3
-# 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/string_s.h" 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
-# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/string_s.h" 2 3
-
-
-
-
-extern "C" {
-
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strset_s(char *_Dst,size_t _DstSize,int _Value);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strerror_s(char *_Buf,size_t _SizeInBytes,const char *_ErrMsg);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strerror_s(char *_Buf,size_t _SizeInBytes,int _ErrNum);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strlwr_s(char *_Str,size_t _Size);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strlwr_s_l(char *_Str,size_t _Size,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strnset_s(char *_Str,size_t _Size,int _Val,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strupr_s(char *_Str,size_t _Size);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strupr_s_l(char *_Str,size_t _Size,_locale_t _Locale);
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strncat_s(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strncat_s_l(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount,_locale_t _Locale);
-  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strcpy_s(char * _Dst, size_t _SizeInBytes, const char * _Src); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) strcpy_s( char (&_Dst)[__size], const char * (_Src)) { return ::strcpy_s(_Dst,__size,_Src); } }
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strncpy_s(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strncpy_s_l(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) strtok_s(char *_Str,const char *_Delim,char **_Context);
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strtok_s_l(char *_Str,const char *_Delim,char **_Context,_locale_t _Locale);
-  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strcat_s(char * strDestination, size_t numberOfElements, const char * strSource); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) strcat_s( char (&strDestination)[__size], const char * (strSource)) { return ::strcat_s(strDestination,__size,strSource); } }
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) memmove_s(void *_dest,size_t _numberOfElements,const void *_src,size_t _count);
-
-
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) wcstok_s(wchar_t *_Str,const wchar_t *_Delim,wchar_t **_Context);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcserror_s(wchar_t *_Buf,size_t _SizeInWords,int _ErrNum);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) __wcserror_s(wchar_t *_Buffer,size_t _SizeInWords,const wchar_t *_ErrMsg);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsnset_s(wchar_t *_Dst,size_t _DstSizeInWords,wchar_t _Val,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsset_s(wchar_t *_Str,size_t _SizeInWords,wchar_t _Val);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcslwr_s(wchar_t *_Str,size_t _SizeInWords);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcslwr_s_l(wchar_t *_Str,size_t _SizeInWords,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsupr_s(wchar_t *_Str,size_t _Size);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsupr_s_l(wchar_t *_Str,size_t _Size,_locale_t _Locale);
-
-  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcscpy_s(wchar_t * _Dst, size_t _nElem, const wchar_t * _Src); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcscpy_s( wchar_t (&_Dst)[__size], const wchar_t * (_Src)) { return ::wcscpy_s(_Dst,__size,_Src); } }
-  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcscat_s(wchar_t * _Dst, size_t _nElem, const wchar_t * _Src); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcscat_s( wchar_t (&_Dst)[__size], const wchar_t * (_Src)) { return ::wcscat_s(_Dst,__size,_Src); } }
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcsncat_s(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsncat_s_l(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcsncpy_s(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsncpy_s_l(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcstok_s_l(wchar_t *_Str,const wchar_t *_Delim,wchar_t **_Context,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsset_s_l(wchar_t *_Str,size_t _SizeInChars,unsigned int _Val,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsnset_s_l(wchar_t *_Str,size_t _SizeInChars,unsigned int _Val, size_t _Count,_locale_t _Locale);
-
-
-
-
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) memcpy_s (void *_dest,size_t _numberOfElements,const void *_src,size_t _count);
-
-
-
-}
-# 181 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 2 3
-# 57 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
+# 55 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 1 3
 # 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_print_push.h" 1 3
@@ -1835,7 +1623,219 @@ extern "C" {
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_print_pop.h" 1 3
 # 962 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 2 3
-# 58 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
+# 56 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
+# 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
+extern "C" {
+# 36 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _memccpy(void *_Dst,const void *_Src,int _Val,size_t _MaxCount);
+  void *__attribute__((__cdecl__)) memchr(const void *_Buf ,int _Val,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _memicmp(const void *_Buf1,const void *_Buf2,size_t _Size);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _memicmp_l(const void *_Buf1,const void *_Buf2,size_t _Size,_locale_t _Locale);
+  int __attribute__((__cdecl__)) memcmp(const void *_Buf1,const void *_Buf2,size_t _Size);
+  void * __attribute__((__cdecl__)) memcpy(void * __restrict__ _Dst,const void * __restrict__ _Src,size_t _Size) ;
+  void * __attribute__((__cdecl__)) mempcpy (void *_Dst, const void *_Src, size_t _Size);
+  void * __attribute__((__cdecl__)) memset(void *_Dst,int _Val,size_t _Size);
+
+  void * __attribute__((__cdecl__)) memccpy(void *_Dst,const void *_Src,int _Val,size_t _Size) ;
+  int __attribute__((__cdecl__)) memicmp(const void *_Buf1,const void *_Buf2,size_t _Size) ;
+
+
+  char * __attribute__((__cdecl__)) _strset(char *_Str,int _Val) ;
+  char * __attribute__((__cdecl__)) _strset_l(char *_Str,int _Val,_locale_t _Locale) ;
+  char * __attribute__((__cdecl__)) strcpy(char * __restrict__ _Dest,const char * __restrict__ _Source);
+  char * __attribute__((__cdecl__)) strcat(char * __restrict__ _Dest,const char * __restrict__ _Source);
+  int __attribute__((__cdecl__)) strcmp(const char *_Str1,const char *_Str2);
+  size_t __attribute__((__cdecl__)) strlen(const char *_Str);
+  size_t __attribute__((__cdecl__)) strnlen(const char *_Str,size_t _MaxCount);
+  void *__attribute__((__cdecl__)) memmove(void *_Dst,const void *_Src,size_t _Size) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strdup(const char *_Src);
+  char *__attribute__((__cdecl__)) strchr(const char *_Str,int _Val);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricmp(const char *_Str1,const char *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strcmpi(const char *_Str1,const char *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricmp_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
+  int __attribute__((__cdecl__)) strcoll(const char *_Str1,const char *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strcoll_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricoll(const char *_Str1,const char *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricoll_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strncoll (const char *_Str1,const char *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strncoll_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicoll (const char *_Str1,const char *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicoll_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
+  size_t __attribute__((__cdecl__)) strcspn(const char *_Str,const char *_Control);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strerror(const char *_ErrMsg) ;
+  char *__attribute__((__cdecl__)) strerror(int) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strlwr(char *_String) ;
+  char *strlwr_l(char *_String,_locale_t _Locale) ;
+  char *__attribute__((__cdecl__)) strncat(char * __restrict__ _Dest,const char * __restrict__ _Source,size_t _Count) ;
+  int __attribute__((__cdecl__)) strncmp(const char *_Str1,const char *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicmp(const char *_Str1,const char *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicmp_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
+  char *strncpy(char * __restrict__ _Dest,const char * __restrict__ _Source,size_t _Count) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strnset(char *_Str,int _Val,size_t _MaxCount) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strnset_l(char *str,int c,size_t count,_locale_t _Locale) ;
+  char *__attribute__((__cdecl__)) strpbrk(const char *_Str,const char *_Control);
+  char *__attribute__((__cdecl__)) strrchr(const char *_Str,int _Ch);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strrev(char *_Str);
+  size_t __attribute__((__cdecl__)) strspn(const char *_Str,const char *_Control);
+  char *__attribute__((__cdecl__)) strstr(const char *_Str,const char *_SubStr);
+  char *__attribute__((__cdecl__)) strtok(char * __restrict__ _Str,const char * __restrict__ _Delim) ;
+       
+
+  char *strtok_r(char * __restrict__ _Str, const char * __restrict__ _Delim, char ** __restrict__ __last);
+       
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strupr(char *_String) ;
+  __attribute__ ((__dllimport__)) char *_strupr_l(char *_String,_locale_t _Locale) ;
+  size_t __attribute__((__cdecl__)) strxfrm(char * __restrict__ _Dst,const char * __restrict__ _Src,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _strxfrm_l(char * __restrict__ _Dst,const char * __restrict__ _Src,size_t _MaxCount,_locale_t _Locale);
+
+
+  char *__attribute__((__cdecl__)) strdup(const char *_Src) ;
+  int __attribute__((__cdecl__)) strcmpi(const char *_Str1,const char *_Str2) ;
+  int __attribute__((__cdecl__)) stricmp(const char *_Str1,const char *_Str2) ;
+  char *__attribute__((__cdecl__)) strlwr(char *_Str) ;
+  int __attribute__((__cdecl__)) strnicmp(const char *_Str1,const char *_Str,size_t _MaxCount) ;
+  int __attribute__((__cdecl__)) strncasecmp (const char *, const char *, size_t);
+  int __attribute__((__cdecl__)) strcasecmp (const char *, const char *);
+
+
+
+
+
+
+
+  char *__attribute__((__cdecl__)) strnset(char *_Str,int _Val,size_t _MaxCount) ;
+  char *__attribute__((__cdecl__)) strrev(char *_Str) ;
+  char *__attribute__((__cdecl__)) strset(char *_Str,int _Val) ;
+  char *__attribute__((__cdecl__)) strupr(char *_Str) ;
+
+
+
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsdup(const wchar_t *_Str);
+  wchar_t *__attribute__((__cdecl__)) wcscat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source) ;
+  wchar_t *__attribute__((__cdecl__)) wcschr(const wchar_t *_Str,wchar_t _Ch);
+  int __attribute__((__cdecl__)) wcscmp(const wchar_t *_Str1,const wchar_t *_Str2);
+  wchar_t *__attribute__((__cdecl__)) wcscpy(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source) ;
+  size_t __attribute__((__cdecl__)) wcscspn(const wchar_t *_Str,const wchar_t *_Control);
+  size_t __attribute__((__cdecl__)) wcslen(const wchar_t *_Str);
+  size_t __attribute__((__cdecl__)) wcsnlen(const wchar_t *_Src,size_t _MaxCount);
+  wchar_t *wcsncat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count) ;
+  int __attribute__((__cdecl__)) wcsncmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
+  wchar_t *wcsncpy(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count) ;
+  wchar_t *__attribute__((__cdecl__)) _wcsncpy_l(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count,_locale_t _Locale) ;
+  wchar_t *__attribute__((__cdecl__)) wcspbrk(const wchar_t *_Str,const wchar_t *_Control);
+  wchar_t *__attribute__((__cdecl__)) wcsrchr(const wchar_t *_Str,wchar_t _Ch);
+  size_t __attribute__((__cdecl__)) wcsspn(const wchar_t *_Str,const wchar_t *_Control);
+  wchar_t *__attribute__((__cdecl__)) wcsstr(const wchar_t *_Str,const wchar_t *_SubStr);
+  wchar_t *__attribute__((__cdecl__)) wcstok(wchar_t * __restrict__ _Str,const wchar_t * __restrict__ _Delim) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcserror(int _ErrNum) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) __wcserror(const wchar_t *_Str) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicmp(const wchar_t *_Str1,const wchar_t *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicmp_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicmp_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsnset(wchar_t *_Str,wchar_t _Val,size_t _MaxCount) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsrev(wchar_t *_Str);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsset(wchar_t *_Str,wchar_t _Val) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcslwr(wchar_t *_String) ;
+  __attribute__ ((__dllimport__)) wchar_t *_wcslwr_l(wchar_t *_String,_locale_t _Locale) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsupr(wchar_t *_String) ;
+  __attribute__ ((__dllimport__)) wchar_t *_wcsupr_l(wchar_t *_String,_locale_t _Locale) ;
+  size_t __attribute__((__cdecl__)) wcsxfrm(wchar_t * __restrict__ _Dst,const wchar_t * __restrict__ _Src,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _wcsxfrm_l(wchar_t * __restrict__ _Dst,const wchar_t * __restrict__ _Src,size_t _MaxCount,_locale_t _Locale);
+  int __attribute__((__cdecl__)) wcscoll(const wchar_t *_Str1,const wchar_t *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcscoll_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicoll(const wchar_t *_Str1,const wchar_t *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicoll_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsncoll(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsncoll_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicoll(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicoll_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
+
+
+  wchar_t *__attribute__((__cdecl__)) wcsdup(const wchar_t *_Str) ;
+
+  int __attribute__((__cdecl__)) wcsicmp(const wchar_t *_Str1,const wchar_t *_Str2) ;
+  int __attribute__((__cdecl__)) wcsnicmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount) ;
+  wchar_t *__attribute__((__cdecl__)) wcsnset(wchar_t *_Str,wchar_t _Val,size_t _MaxCount) ;
+  wchar_t *__attribute__((__cdecl__)) wcsrev(wchar_t *_Str) ;
+  wchar_t *__attribute__((__cdecl__)) wcsset(wchar_t *_Str,wchar_t _Val) ;
+  wchar_t *__attribute__((__cdecl__)) wcslwr(wchar_t *_Str) ;
+  wchar_t *__attribute__((__cdecl__)) wcsupr(wchar_t *_Str) ;
+  int __attribute__((__cdecl__)) wcsicoll(const wchar_t *_Str1,const wchar_t *_Str2) ;
+
+
+
+
+}
+
+
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/string_s.h" 1 3
+# 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/string_s.h" 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
+# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/string_s.h" 2 3
+
+
+
+
+extern "C" {
+
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strset_s(char *_Dst,size_t _DstSize,int _Value);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strerror_s(char *_Buf,size_t _SizeInBytes,const char *_ErrMsg);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strerror_s(char *_Buf,size_t _SizeInBytes,int _ErrNum);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strlwr_s(char *_Str,size_t _Size);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strlwr_s_l(char *_Str,size_t _Size,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strnset_s(char *_Str,size_t _Size,int _Val,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strupr_s(char *_Str,size_t _Size);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strupr_s_l(char *_Str,size_t _Size,_locale_t _Locale);
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strncat_s(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strncat_s_l(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount,_locale_t _Locale);
+  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strcpy_s(char * _Dst, size_t _SizeInBytes, const char * _Src); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) strcpy_s( char (&_Dst)[__size], const char * (_Src)) { return ::strcpy_s(_Dst,__size,_Src); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strncpy_s(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strncpy_s_l(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) strtok_s(char *_Str,const char *_Delim,char **_Context);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strtok_s_l(char *_Str,const char *_Delim,char **_Context,_locale_t _Locale);
+  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strcat_s(char * strDestination, size_t numberOfElements, const char * strSource); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) strcat_s( char (&strDestination)[__size], const char * (strSource)) { return ::strcat_s(strDestination,__size,strSource); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) memmove_s(void *_dest,size_t _numberOfElements,const void *_src,size_t _count);
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) wcstok_s(wchar_t *_Str,const wchar_t *_Delim,wchar_t **_Context);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcserror_s(wchar_t *_Buf,size_t _SizeInWords,int _ErrNum);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) __wcserror_s(wchar_t *_Buffer,size_t _SizeInWords,const wchar_t *_ErrMsg);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsnset_s(wchar_t *_Dst,size_t _DstSizeInWords,wchar_t _Val,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsset_s(wchar_t *_Str,size_t _SizeInWords,wchar_t _Val);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcslwr_s(wchar_t *_Str,size_t _SizeInWords);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcslwr_s_l(wchar_t *_Str,size_t _SizeInWords,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsupr_s(wchar_t *_Str,size_t _Size);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsupr_s_l(wchar_t *_Str,size_t _Size,_locale_t _Locale);
+
+  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcscpy_s(wchar_t * _Dst, size_t _nElem, const wchar_t * _Src); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcscpy_s( wchar_t (&_Dst)[__size], const wchar_t * (_Src)) { return ::wcscpy_s(_Dst,__size,_Src); } }
+  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcscat_s(wchar_t * _Dst, size_t _nElem, const wchar_t * _Src); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcscat_s( wchar_t (&_Dst)[__size], const wchar_t * (_Src)) { return ::wcscat_s(_Dst,__size,_Src); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcsncat_s(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsncat_s_l(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcsncpy_s(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsncpy_s_l(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcstok_s_l(wchar_t *_Str,const wchar_t *_Delim,wchar_t **_Context,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsset_s_l(wchar_t *_Str,size_t _SizeInChars,unsigned int _Val,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsnset_s_l(wchar_t *_Str,size_t _SizeInChars,unsigned int _Val, size_t _Count,_locale_t _Locale);
+
+
+
+
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) memcpy_s (void *_dest,size_t _numberOfElements,const void *_src,size_t _count);
+
+
+
+}
+# 181 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 2 3
+# 57 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 1 3
 # 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
 extern "C" {
@@ -1941,7 +1941,7 @@ int __attribute__((__cdecl__)) isblank(int _C);
 int __attribute__((__cdecl__)) iswblank(wint_t _C);
 # 276 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
 }
-# 59 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
+# 58 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 1 3
 # 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
        
@@ -2403,7 +2403,7 @@ __extension__ long long __attribute__((__cdecl__)) llrintl (long double);
 
 
 #pragma pack(pop)
-# 60 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
+# 59 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/algorithm" 1 3
 # 58 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/algorithm" 3
        
@@ -50708,14 +50708,14 @@ namespace std
 
 }
 # 63 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/algorithm" 2 3
-# 61 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
+# 60 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sys/cdefs.h" 1 3
-# 63 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
-# 108 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
+# 62 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
+# 107 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 109 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
-# 142 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
+# 108 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
+# 141 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 1 3 4
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/float.h" 1 3 4
@@ -50742,15 +50742,12 @@ __attribute__ ((__dllimport__)) int * __attribute__((__cdecl__)) __attribute__ (
 # 293 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/float.h" 3 4
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 143 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
-# 152 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
-typedef unsigned int b_unichar32;
-typedef unsigned short b_unichar16;
-
-typedef long long b_thread_id;
-typedef size_t b_address_t;
-typedef size_t b_size_t;
-# 170 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
+# 142 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
+# 151 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
+typedef long long be_thread_id;
+typedef size_t be_addr_t;
+typedef size_t be_size_t;
+# 166 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
 typedef char int8;
 typedef unsigned char uint8;
 typedef short int16;
@@ -50760,14 +50757,14 @@ typedef unsigned int uint32;
 typedef long long int64;
 typedef unsigned long long uint64;
 
-typedef char b_int8;
-typedef unsigned char b_uint8;
-typedef short b_int16;
-typedef unsigned short b_uint16;
-typedef int b_int32;
-typedef unsigned int b_uint32;
-typedef long long b_int64;
-typedef unsigned long long b_uint64;
+typedef char be_int8;
+typedef unsigned char be_uint8;
+typedef short be_int16;
+typedef unsigned short be_uint16;
+typedef int be_int32;
+typedef unsigned int be_uint32;
+typedef long long be_int64;
+typedef unsigned long long be_uint64;
 
 typedef volatile char vint8;
 typedef volatile unsigned char vuint8;
@@ -50789,25 +50786,27 @@ typedef volatile unsigned char vuchar;
 
 typedef unsigned char uchar;
 typedef unsigned short unichar;
+typedef unsigned short unichar16;
+typedef unsigned int unichar32;
 
 typedef int __haiku_status_t;
-typedef int b_status_t;
+typedef int be_status_t;
 typedef int status_t;
 
 typedef long long __haiku_bigtime_t;
-typedef long long b_bigtime_t;
+typedef long long be_bigtime_t;
 typedef long long bigtime_t;
 
 typedef long long __haiku_nanotime_t;
-typedef long long b_nanotime_t;
+typedef long long be_nanotime_t;
 typedef long long nanotime_t;
 
 typedef unsigned int __haiku_type_code;
-typedef unsigned int b_type_code;
+typedef unsigned int be_type_code;
 typedef unsigned int type_code;
 
 typedef unsigned int __haiku_perform_code;
-typedef unsigned int b_perform_code;
+typedef unsigned int be_perform_code;
 typedef unsigned int perform_code;
 # 347 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
 extern "C" {
@@ -93830,13 +93829,13 @@ typedef unsigned int GROUP;
 # 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
 # 378 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h" 2
-# 390 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
+# 389 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
 enum {
     B_SEEK_SET = 0,
     B_SEEK_CUR,
     B_SEEK_END,
 };
-# 465 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
+# 464 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
 namespace bhapi {
 
 __attribute__((dllexport)) int32 atomic_add (int32 *value, int32 addValue);
@@ -93872,6 +93871,7 @@ __attribute__((dllexport)) void * get_stack_frame (void);
 
 }
 
+
 extern "C" const char* B_EMPTY_STRING;
 
 
@@ -93901,8 +93901,10 @@ typedef __haiku_std_uint16 __haiku_uint16;
 
 
 
+
 typedef __haiku_std_int32 __haiku_int32;
 typedef __haiku_std_uint32 __haiku_uint32;
+
 
 typedef __haiku_std_int64 __haiku_int64;
 typedef __haiku_std_uint64 __haiku_uint64;
@@ -93917,7 +93919,7 @@ typedef unsigned long int __haiku_addr_t;
 
     typedef __haiku_int32 __haiku_phys_saddr_t;
     typedef __haiku_uint32 __haiku_phys_addr_t;
-# 592 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
+# 595 "../src/kits/interface/../interface/../interface/../support/SupportDefs.h"
     typedef __haiku_addr_t __haiku_generic_addr_t;
 # 36 "../src/kits/interface/../interface/../interface/Point.h" 2
 class __attribute__((dllexport)) BPoint {
@@ -94033,9 +94035,9 @@ public:
 
     bool IsValid() const;
     float Width() const;
-    b_int32 IntegerWidth() const;
+    be_int32 IntegerWidth() const;
     float Height() const;
-    b_int32 IntegerHeight() const;
+    be_int32 IntegerHeight() const;
 
     bool Intersects(BRect r) const;
     bool Intersects(float l, float t, float r, float b) const;
@@ -94139,9 +94141,9 @@ inline bool BRect::IsValid() const
 }
 
 
-inline b_int32 BRect::IntegerWidth() const
+inline be_int32 BRect::IntegerWidth() const
 {
-    return((b_int32)ceil((double)(right - left)));
+    return((be_int32)ceil((double)(right - left)));
 }
 
 
@@ -94151,9 +94153,9 @@ inline float BRect::Width() const
 }
 
 
-inline b_int32 BRect::IntegerHeight() const
+inline be_int32 BRect::IntegerHeight() const
 {
-    return((b_int32)ceil((double)(bottom - top)));
+    return((be_int32)ceil((double)(bottom - top)));
 }
 
 
@@ -94164,7 +94166,7 @@ inline float BRect::Height() const
 # 35 "../src/kits/interface/Polygon.h" 2
 class __attribute__((dllexport)) BPolygon {
 public:
-    BPolygon(const BPoint *pts, b_int32 nPts);
+    BPolygon(const BPoint *pts, be_int32 nPts);
     BPolygon();
     BPolygon(const BPolygon *poly);
     virtual ~BPolygon();
@@ -94172,15 +94174,15 @@ public:
     BPolygon &operator=(const BPolygon &poly);
     BRect Frame() const;
 
-    bool AddPoints(const BPoint *pts, b_int32 nPts, bool updateFrame = true);
-    void RemovePoints(b_int32 fromIndex, b_int32 toIndex, bool updateFrame = true);
+    bool AddPoints(const BPoint *pts, be_int32 nPts, bool updateFrame = true);
+    void RemovePoints(be_int32 fromIndex, be_int32 toIndex, bool updateFrame = true);
 
     bool AddPoint(const BPoint &aPt, bool updateFrame = true);
-    void RemovePoint(b_int32 index, bool updateFrame = true);
+    void RemovePoint(be_int32 index, bool updateFrame = true);
     void UpdateFrame();
 
-    const BPoint &operator[](b_int32 index) const;
-    b_int32 CountPoints() const;
+    const BPoint &operator[](be_int32 index) const;
+    be_int32 CountPoints() const;
 
     bool MapTo(BRect srcRect, BRect dstRect);
 
@@ -94189,7 +94191,7 @@ public:
 
 private:
     BRect fFrame;
-    b_int32 fCount;
+    be_int32 fCount;
     BPoint *fPts;
     bool fNeededToUpdateFrame;
 };
@@ -94201,7 +94203,7 @@ inline bool BPolygon::AddPoint(const BPoint &aPt, bool updateFrame)
 }
 
 
-inline void BPolygon::RemovePoint(b_int32 index, bool updateFrame)
+inline void BPolygon::RemovePoint(be_int32 index, bool updateFrame)
 {
     RemovePoints(index, index, updateFrame);
 }
@@ -94249,7 +94251,7 @@ extern "C" {
 }
 # 33 "../src/kits/interface/Polygon.cpp" 2
 
-BPolygon::BPolygon(const BPoint *pts, b_int32 nPts)
+BPolygon::BPolygon(const BPoint *pts, be_int32 nPts)
  : fCount(0), fPts(__null), fNeededToUpdateFrame(false)
 {
  AddPoints(pts, nPts);
@@ -94302,7 +94304,7 @@ BPolygon::UpdateFrame()
  fFrame = BRect();
  BPoint *pts = fPts;
 
- for(b_int32 i = 0; i < fCount; i++, pts++)
+ for(be_int32 i = 0; i < fCount; i++, pts++)
  {
   if(i > 0)
   {
@@ -94321,7 +94323,7 @@ BPolygon::UpdateFrame()
 
 
 bool
-BPolygon::AddPoints(const BPoint *pts, b_int32 nPts, bool updateFrame)
+BPolygon::AddPoints(const BPoint *pts, be_int32 nPts, bool updateFrame)
 {
  if(pts == __null || nPts <= 0 || 2147483647 - nPts < fCount) return false;
 
@@ -94342,7 +94344,7 @@ BPolygon::AddPoints(const BPoint *pts, b_int32 nPts, bool updateFrame)
   UpdateFrame();
 
   BPoint *destPts = fPts + fCount;
-  b_int32 i = fCount;
+  be_int32 i = fCount;
   fCount += nPts;
 
   for(; i < fCount; i++, destPts++, pts++)
@@ -94368,7 +94370,7 @@ BPolygon::AddPoints(const BPoint *pts, b_int32 nPts, bool updateFrame)
 
 
 void
-BPolygon::RemovePoints(b_int32 fromIndex, b_int32 toIndex, bool updateFrame)
+BPolygon::RemovePoints(be_int32 fromIndex, be_int32 toIndex, bool updateFrame)
 {
  if(fPts == __null || fromIndex < 0 || fromIndex >= fCount || fromIndex > toIndex) return;
 
@@ -94383,13 +94385,13 @@ BPolygon::RemovePoints(b_int32 fromIndex, b_int32 toIndex, bool updateFrame)
 
 
 const BPoint&
-BPolygon::operator[](b_int32 index) const
+BPolygon::operator[](be_int32 index) const
 {
  return(*(fPts + index));
 }
 
 
-b_int32
+be_int32
 BPolygon::CountPoints() const
 {
  return fCount;
@@ -94410,7 +94412,7 @@ BPolygon::MapTo(BRect srcRect, BRect dstRect)
  fNeededToUpdateFrame = false;
 
  BPoint *pts = fPts;
- for(b_int32 i = 0; i < fCount; i++, pts++)
+ for(be_int32 i = 0; i < fCount; i++, pts++)
  {
   pts->x = dstRect.left + (pts->x - srcRect.left) * xScale;
   pts->y = dstRect.top + (pts->y - srcRect.top) * yScale;
@@ -94444,7 +94446,7 @@ void
 BPolygon::PrintToStream() const
 {
  const BPoint *pts = fPts;
- for(b_int32 i = 0; i < fCount; i++, pts++)
+ for(be_int32 i = 0; i < fCount; i++, pts++)
  {
   pts->PrintToStream();
   if(i < fCount - 1) BHAPI_OUTPUT(", ");

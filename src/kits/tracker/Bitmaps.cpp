@@ -41,8 +41,8 @@ All rights reserved.
 #include <DataIO.h>
 #include <File.h>
 #include <IconUtils.h>
-#include <String.h>
-#include <SupportDefs.h>
+#include <StringClass.h>
+#include <Haiku.h>
 
 
 //	#pragma mark - BImageResources

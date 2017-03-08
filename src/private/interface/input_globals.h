@@ -7,7 +7,7 @@
 
 
 #include <InterfaceDefs.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 class BMessage;
 

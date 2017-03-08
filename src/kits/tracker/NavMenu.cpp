@@ -48,7 +48,7 @@ their respective holders. All rights reserved.
 #include <Catalog.h>
 #include <Debug.h>
 #include <Directory.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <Path.h>
 #include <Query.h>
 #include <Screen.h>
@@ -279,7 +279,7 @@ BNavMenu::BNavMenu(const char* title, uint32 message, const BHandler* target,
 
 	InitIconPreloader();
 
-	SetFont(be_plain_font);
+	SetFont(__be_plain_font);
 
 	// add the parent window to the invocation message so that it
 	// can be closed if option modifier held down during invocation
@@ -314,7 +314,7 @@ BNavMenu::BNavMenu(const char* title, uint32 message,
 
 	InitIconPreloader();
 
-	SetFont(be_plain_font);
+	SetFont(__be_plain_font);
 
 	// add the parent window to the invocation message so that it
 	// can be closed if option modifier held down during invocation
@@ -647,7 +647,7 @@ BNavMenu::NewModelItem(Model* model, const BMessage* invokeMessage,
 
 	// truncate name if necessary
 	BString truncatedString(model->Name());
-	be_plain_font->TruncateString(&truncatedString, B_TRUNCATE_END,
+	__be_plain_font->TruncateString(&truncatedString, B_TRUNCATE_END,
 		GetMaxMenuWidth());
 
 	ModelMenuItem* item = NULL;

@@ -8,7 +8,7 @@
 
 #include "Type.h"
 
-#include <String.h>
+#include <StringClass.h>
 
 
 class SyntheticPrimitiveType : public PrimitiveType {

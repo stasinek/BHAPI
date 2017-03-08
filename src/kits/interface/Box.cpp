@@ -34,7 +34,7 @@
 #include "../interface/StringView.h"
 #include "../add-ons/theme/ThemeEngine.h"
 
-BBox::BBox(BRect frame, const char *name, b_uint32 resizingMode, b_uint32 flags, bhapi::border_style border)
+BBox::BBox(BRect frame, const char *name,  __be_uint32 resizingMode,  __be_uint32 flags, bhapi::border_style border)
 	: BView(frame, name, resizingMode, flags), fLabelView(NULL), fBorder(B_NO_BORDER), fAlignment(B_ALIGN_LEFT)
 {
 	fBorder = border;
@@ -112,7 +112,7 @@ BBox::SetLabel(const char *label)
 }
 
 
-b_status_t
+status_t
 BBox::SetLabel(BView *viewLabel)
 {
 	if(viewLabel != NULL)

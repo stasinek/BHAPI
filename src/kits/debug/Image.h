@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2005-2009, Ingo Weinhold, ingo_weinhold@gmx.de.
  * Distributed under the terms of the MIT License.
  */
@@ -8,8 +8,8 @@
 
 #include <stdio.h>
 
-#include <elf_private.h>
-#include <image.h>
+//#include <elf_private.h>
+//#include <image.h>
 #include <OS.h>
 
 #include <util/DoublyLinkedList.h>
@@ -25,102 +25,102 @@ namespace Debug {
 
 class Image : public DoublyLinkedListLinkImpl<Image> {
 public:
-								Image();
-	virtual						~Image();
+                                Image();
+    virtual						~Image();
 
-			const image_info&	Info() const		{ return fInfo; }
-			image_id			ID() const			{ return fInfo.id; }
-			const char*			Name() const		{ return fInfo.name; }
-			addr_t				TextAddress() const
-				{ return (addr_t)fInfo.text; }
-			size_t				TextSize() const	{ return fInfo.text_size; }
+            const image_info&	Info() const		{ return fInfo; }
+            image_id			ID() const			{ return fInfo.id; }
+            const char*			Name() const		{ return fInfo.name; }
+            addr_t				TextAddress() const
+                { return (addr_t)fInfo.text; }
+            size_t				TextSize() const	{ return fInfo.text_size; }
 
-	virtual	const elf_sym*		LookupSymbol(addr_t address,
-									addr_t* _baseAddress,
-									const char** _symbolName,
-									size_t *_symbolNameLen,
-									bool *_exactMatch) const = 0;
-	virtual	status_t			NextSymbol(int32& iterator,
-									const char** _symbolName,
-									size_t* _symbolNameLen,
-									addr_t* _symbolAddress, size_t* _symbolSize,
-									int32* _symbolType) const = 0;
+    virtual	const elf_sym*		LookupSymbol(addr_t address,
+                                    addr_t* _baseAddress,
+                                    const char** _symbolName,
+                                    size_t *_symbolNameLen,
+                                    bool *_exactMatch) const = 0;
+    virtual	status_t			NextSymbol(int32& iterator,
+                                    const char** _symbolName,
+                                    size_t* _symbolNameLen,
+                                    addr_t* _symbolAddress, size_t* _symbolSize,
+                                    int32* _symbolType) const = 0;
 
-	virtual	status_t			GetSymbol(const char* name, int32 symbolType,
-									void** _symbolLocation, size_t* _symbolSize,
-									int32* _symbolType) const;
+    virtual	status_t			GetSymbol(const char* name, int32 symbolType,
+                                    void** _symbolLocation, size_t* _symbolSize,
+                                    int32* _symbolType) const;
 
 protected:
-			image_info			fInfo;
+            image_info			fInfo;
 };
 
 
 class SymbolTableBasedImage : public Image {
 public:
-								SymbolTableBasedImage();
-	virtual						~SymbolTableBasedImage();
+                                SymbolTableBasedImage();
+    virtual						~SymbolTableBasedImage();
 
-	virtual	const elf_sym*		LookupSymbol(addr_t address,
-									addr_t* _baseAddress,
-									const char** _symbolName,
-									size_t *_symbolNameLen,
-									bool *_exactMatch) const;
-	virtual	status_t			NextSymbol(int32& iterator,
-									const char** _symbolName,
-									size_t* _symbolNameLen,
-									addr_t* _symbolAddress, size_t* _symbolSize,
-									int32* _symbolType) const;
-
-protected:
-			size_t				_SymbolNameLen(const char* symbolName) const;
+    virtual	const elf_sym*		LookupSymbol(addr_t address,
+                                    addr_t* _baseAddress,
+                                    const char** _symbolName,
+                                    size_t *_symbolNameLen,
+                                    bool *_exactMatch) const;
+    virtual	status_t			NextSymbol(int32& iterator,
+                                    const char** _symbolName,
+                                    size_t* _symbolNameLen,
+                                    addr_t* _symbolAddress, size_t* _symbolSize,
+                                    int32* _symbolType) const;
 
 protected:
-			addr_t				fLoadDelta;
-			elf_sym*			fSymbolTable;
-			char*				fStringTable;
-			int32				fSymbolCount;
-			size_t				fStringTableSize;
+            size_t				_SymbolNameLen(const char* symbolName) const;
+
+protected:
+            addr_t				fLoadDelta;
+            elf_sym*			fSymbolTable;
+            char*				fStringTable;
+            int32				fSymbolCount;
+            size_t				fStringTableSize;
 };
 
 
 class ImageFile : public SymbolTableBasedImage {
 public:
-								ImageFile();
-	virtual						~ImageFile();
+                                ImageFile();
+    virtual						~ImageFile();
 
-			status_t			Init(const image_info& info);
-			status_t			Init(const char* path);
-
-private:
-			status_t			_LoadFile(const char* path,
-									addr_t* _textAddress, size_t* _textSize,
-									addr_t* _dataAddress, size_t* _dataSize);
-
-			status_t			_FindTableInSection(elf_ehdr* elfHeader,
-									uint16 sectionType);
+            status_t			Init(const image_info& info);
+            status_t			Init(const char* path);
 
 private:
-			int					fFD;
-			off_t				fFileSize;
-			uint8*				fMappedFile;
+            status_t			_LoadFile(const char* path,
+                                    addr_t* _textAddress, size_t* _textSize,
+                                    addr_t* _dataAddress, size_t* _dataSize);
+
+            status_t			_FindTableInSection(elf_ehdr* elfHeader,
+                                    uint16 sectionType);
+
+private:
+            int					fFD;
+            off_t				fFileSize;
+            uint8*				fMappedFile;
 };
 
 
 class KernelImage : public SymbolTableBasedImage {
 public:
-								KernelImage();
-	virtual						~KernelImage();
+                                KernelImage();
+    virtual						~KernelImage();
 
-			status_t			Init(const image_info& info);
+            status_t			Init(const image_info& info);
 };
 
 
 class CommPageImage : public SymbolTableBasedImage {
 public:
-								CommPageImage();
-	virtual						~CommPageImage();
+                                CommPageImage();
+    virtual						~CommPageImage();
 
-			status_t			Init(const image_info& info);
+            status_t			Init(const image_info& info);
 };
 
 }	// namespace Debug

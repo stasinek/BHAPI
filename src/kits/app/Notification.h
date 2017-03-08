@@ -9,7 +9,7 @@
 #include <Archivable.h>
 #include <Entry.h>
 #include <List.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 // notification types

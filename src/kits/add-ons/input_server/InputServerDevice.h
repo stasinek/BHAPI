@@ -7,7 +7,7 @@
 
 
 #include <Input.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 // Register your actual devices using this one - you can subclass

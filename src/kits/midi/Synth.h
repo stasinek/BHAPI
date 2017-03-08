@@ -103,6 +103,6 @@ private:
 	uint32 _reserved[10];
 };
 
-extern BSynth* be_synth;
+extern BSynth*  __be_synth;
 
 #endif // _SYNTH_H

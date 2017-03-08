@@ -50,7 +50,7 @@
 #	include <winsock2.h>
 #endif
 
-BNetAddress::BNetAddress(const char *hostname, b_uint16 port)
+BNetAddress::BNetAddress(const char *hostname,  __be_uint16 port)
 	: BArchivable(), fStatus(B_NO_INIT)
 {
 	bzero(&fAddr, sizeof(struct sockaddr_in));
@@ -74,7 +74,7 @@ BNetAddress::BNetAddress(const struct sockaddr_in &sa)
 }
 
 
-BNetAddress::BNetAddress(const struct in_addr addr, b_uint16 port)
+BNetAddress::BNetAddress(const struct in_addr addr,  __be_uint16 port)
 	: BArchivable(), fStatus(B_NO_INIT)
 {
 	bzero(&fAddr, sizeof(struct sockaddr_in));
@@ -82,7 +82,7 @@ BNetAddress::BNetAddress(const struct in_addr addr, b_uint16 port)
 }
 
 
-BNetAddress::BNetAddress(b_uint32 addr, b_uint16 port)
+BNetAddress::BNetAddress(__be_uint32 addr,  __be_uint16 port)
 	: BArchivable(), fStatus(B_NO_INIT)
 {
 	bzero(&fAddr, sizeof(struct sockaddr_in));
@@ -111,7 +111,7 @@ BNetAddress::BNetAddress(const BMessage *from)
 }
 
 
-b_status_t
+status_t
 BNetAddress::Archive(BMessage *into, bool deep) const
 {
 	if(!into) return B_ERROR;
@@ -128,13 +128,13 @@ BNetAddress::Archive(BMessage *into, bool deep) const
 BArchivable*
 BNetAddress::Instantiate(const BMessage *from)
 {
-	if(b_validatb_instantiation(from, "BNetAddress"))
+	if(bhapi::validatb_instantiation(from, "BNetAddress"))
 		return new BNetAddress(from);
 	return NULL;
 }
 
 
-b_status_t
+status_t
 BNetAddress::InitCheck() const
 {
 	return fStatus;
@@ -150,8 +150,8 @@ BNetAddress::operator=(const BNetAddress &addr)
 }
 
 
-b_status_t
-BNetAddress::SetTo(const char *hostname, b_uint16 port)
+status_t
+BNetAddress::SetTo(const char *hostname,  __be_uint16 port)
 {
 	if(hostname == NULL) return B_ERROR;
 
@@ -179,12 +179,12 @@ BNetAddress::SetTo(const char *hostname, b_uint16 port)
 
 	if(ent == NULL) return B_ERROR;
 
-	b_status_t retVal = B_ERROR;
+	status_t retVal = B_ERROR;
 
 	switch(ent->h_addrtype)
 	{
 		case AF_INET:
-			fAddr.sin_addr.s_addr = *((b_uint32*)ent->h_addr);
+			fAddr.sin_addr.s_addr = *((__be_uint32*)ent->h_addr);
 			fAddr.sin_family = AF_INET;
 			fAddr.sin_port = htons(port);
 			retVal = fStatus = B_OK;
@@ -199,7 +199,7 @@ BNetAddress::SetTo(const char *hostname, b_uint16 port)
 }
 
 
-b_status_t
+status_t
 BNetAddress::SetTo(const char *hostname, const char *protocol, const char *service)
 {
 	if(hostname == NULL) return B_ERROR;
@@ -230,7 +230,7 @@ BNetAddress::SetTo(const char *hostname, const char *protocol, const char *servi
 }
 
 
-b_status_t
+status_t
 BNetAddress::SetTo(const struct sockaddr_in &sa)
 {
 	if(sa.sin_family != AF_INET)
@@ -244,8 +244,8 @@ BNetAddress::SetTo(const struct sockaddr_in &sa)
 }
 
 
-b_status_t
-BNetAddress::SetTo(const struct in_addr addr, b_uint16 port)
+status_t
+BNetAddress::SetTo(const struct in_addr addr,  __be_uint16 port)
 {
 	fAddr.sin_family = AF_INET;
 	fAddr.sin_port = htons(port);
@@ -254,8 +254,8 @@ BNetAddress::SetTo(const struct in_addr addr, b_uint16 port)
 }
 
 
-b_status_t
-BNetAddress::SetTo(b_uint32 addr, b_uint16 port)
+status_t
+BNetAddress::SetTo(__be_uint32 addr,  __be_uint16 port)
 {
 	fAddr.sin_family = AF_INET;
 	fAddr.sin_port = htons(port);
@@ -264,8 +264,8 @@ BNetAddress::SetTo(b_uint32 addr, b_uint16 port)
 }
 
 
-b_status_t
-BNetAddress::GetAddr(char *hostname, size_t hostname_len, b_uint16 *port) const
+status_t
+BNetAddress::GetAddr(char *hostname, size_t hostname_len,  __be_uint16 *port) const
 {
 	if(fStatus != B_OK) return B_ERROR;
 	if(!(hostname == NULL || hostname_len == 0))
@@ -309,7 +309,7 @@ BNetAddress::GetAddr(char *hostname, size_t hostname_len, b_uint16 *port) const
 }
 
 
-b_status_t
+status_t
 BNetAddress::GetAddr(struct sockaddr_in &sa) const
 {
 	if(fStatus != B_OK) return B_ERROR;
@@ -318,8 +318,8 @@ BNetAddress::GetAddr(struct sockaddr_in &sa) const
 }
 
 
-b_status_t
-BNetAddress::GetAddr(struct in_addr &addr, b_uint16 *port) const
+status_t
+BNetAddress::GetAddr(struct in_addr &addr,  __be_uint16 *port) const
 {
 	if(fStatus != B_OK) return B_ERROR;
 	addr = fAddr.sin_addr;

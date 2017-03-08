@@ -3,7 +3,7 @@
 #ifndef USERLAND_FS_REQUEST_HANDLER_H
 #define USERLAND_FS_REQUEST_HANDLER_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 namespace UserlandFSUtil {
 

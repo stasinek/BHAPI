@@ -39,8 +39,8 @@ public:
     BStandardIO(int fd);
     virtual ~BStandardIO();
 
-	virtual b_size_t		Read(void *buffer, size_t size);
-	virtual b_size_t		Write(const void *buffer, size_t size);
+	virtual  __be_size_t		Read(void *buffer, size_t size);
+	virtual  __be_size_t		Write(const void *buffer, size_t size);
 
 private:
 	int fFD;

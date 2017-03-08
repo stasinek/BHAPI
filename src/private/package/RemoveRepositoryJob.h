@@ -6,7 +6,7 @@
 #define _PACKAGE__PRIVATE__REMOVE_REPOSITORY_JOB_H_
 
 
-#include <String.h>
+#include <StringClass.h>
 
 #include <package/Job.h>
 

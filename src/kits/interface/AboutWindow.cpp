@@ -30,7 +30,7 @@
 #include <Screen.h>
 #include <ScrollView.h>
 #include <Size.h>
-#include <String.h>
+#include <StringClass.h>
 #include <StringView.h>
 #include <SystemCatalog.h>
 #include <TextView.h>
@@ -224,7 +224,7 @@ AboutView::_GetVersionFromSignature(const char* signature)
 		return NULL;
 
 	entry_ref ref;
-	if (be_roster->FindApp(signature, &ref) != B_OK)
+	if (__be_roster->FindApp(signature, &ref) != B_OK)
 		return NULL;
 
 	BFile file(&ref, B_READ_ONLY);
@@ -285,7 +285,7 @@ AboutView::_GetIconFromSignature(const char* signature)
 		return NULL;
 
 	entry_ref ref;
-	if (be_roster->FindApp(signature, &ref) != B_OK)
+	if (__be_roster->FindApp(signature, &ref) != B_OK)
 		return NULL;
 
 	BFile file(&ref, B_READ_ONLY);
@@ -574,7 +574,7 @@ BAboutWindow::AddText(const char* header, const char** contents)
 
 	if (contents != NULL && header != NULL) {
 		infoView->SetFontAndColor(textLength, textLength + strlen(header),
-			be_bold_font);
+			__be_bold_font);
 	}
 }
 

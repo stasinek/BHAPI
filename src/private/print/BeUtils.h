@@ -41,7 +41,7 @@
 
 #include <FindDirectory.h>
 #include <Path.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <Picture.h>
 #include <PictureButton.h>
 #include <TranslatorFormats.h>

@@ -13,7 +13,7 @@
 #include <stdlib.h>
 
 #include <PropertyInfo.h>
-#include <String.h>
+#include <StringClass.h>
 #include <TextView.h>
 
 

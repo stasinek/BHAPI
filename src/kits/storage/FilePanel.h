@@ -65,7 +65,7 @@ public:
     BFilePanel(bhapi::file_panel_mode mode = bhapi::B_OPEN_PANEL,
            const BMessenger *target = NULL,
 		   const char *panel_directory = NULL,
-           b_uint32 node_flavors = 0,
+            __be_uint32 node_flavors = 0,
 		   bool allow_multiple_selection = true,
            const BMessage *message = NULL,
 		   BFilePanelFilter *filter = NULL,
@@ -111,7 +111,7 @@ public:
 
 	void			Refresh();
 	void			Rewind();
-	b_status_t		GetNextSelected(BEntry *entry);
+	status_t		GetNextSelected(BEntry *entry);
 
 private:
     BWindow *fWindow;

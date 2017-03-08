@@ -5,7 +5,7 @@
 #ifndef _KERNEL_BOOT_PLATFORM_ROUTERBOARD_MIPSEL_ARCH_H
 #define _KERNEL_BOOT_PLATFORM_ROUTERBOARD_MIPSEL_ARCH_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #warning IMPLEMENT platform_arch.h
 

@@ -8,7 +8,7 @@
 
 #include <stdlib.h>
 
-#include <String.h>
+#include <StringClass.h>
 
 
 static const char kIndexSeparator = ';';

@@ -21,7 +21,7 @@
 #include <fs_attr.h>
 #include <Path.h>
 #include <SymLink.h>
-#include <TypeConstants.h>
+#include <HaikuConstants.h>
 
 
 namespace BPrivate {

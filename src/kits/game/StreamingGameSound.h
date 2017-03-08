@@ -9,7 +9,7 @@
 #define _STREAMINGGAMESOUND_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <GameSound.h>
 #include <Locker.h>
 

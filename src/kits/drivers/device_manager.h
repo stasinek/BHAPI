@@ -6,7 +6,7 @@
 #define _DEVICE_MANAGER_H
 
 
-#include <TypeConstants.h>
+#include <HaikuConstants.h>
 #include <Drivers.h>
 #include <module.h>
 

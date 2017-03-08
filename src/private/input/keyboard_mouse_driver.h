@@ -6,7 +6,7 @@
 #define _KEYBOARD_MOUSE_DRIVER_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <Drivers.h>
 
 

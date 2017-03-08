@@ -17,7 +17,7 @@
 
 #include <CatalogData.h>
 #include <HashMap.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 namespace BPrivate {

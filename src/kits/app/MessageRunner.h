@@ -39,39 +39,39 @@ class IMPEXPBHAPI BMessageRunner {
 public:
     BMessageRunner(const BMessenger &target,
                const BMessage *msg,
-               b_bigtime_t interval,
-               b_int32 count = -1);
+               bigtime_t interval,
+                __be_int32 count = -1);
     BMessageRunner(const BMessenger &target,
                const BMessage *msg,
-               b_bigtime_t interval,
-               b_int32 count,
+               bigtime_t interval,
+                __be_int32 count,
                const BMessenger &replyTo);
     virtual ~BMessageRunner();
 
     bool		IsValid() const;
 
-    b_status_t	SetTarget(const BMessenger &target);
-    b_status_t	SetReplyTo(const BMessenger &replyTo);
-    b_status_t	SetMessage(const BMessage *msg);
-    b_status_t	SetInterval(b_bigtime_t interval);
-    b_status_t	SetCount(b_int32 count);
+    status_t	SetTarget(const BMessenger &target);
+    status_t	SetReplyTo(const BMessenger &replyTo);
+    status_t	SetMessage(const BMessage *msg);
+    status_t	SetInterval(bigtime_t interval);
+    status_t	SetCount(__be_int32 count);
 
-    b_status_t	GetInfo(b_bigtime_t *interval, b_int32 *count) const;
-    b_status_t	GetInfo(BMessenger *target, BMessage *msg,
-                b_bigtime_t *interval, b_int32 *count,
+    status_t	GetInfo(bigtime_t *interval,  __be_int32 *count) const;
+    status_t	GetInfo(BMessenger *target, BMessage *msg,
+                bigtime_t *interval,  __be_int32 *count,
                 BMessenger *replyTo = NULL) const;
 
 private:
     friend class BApplication;
 
-    b_int32 fToken;
+     __be_int32 fToken;
 
     BMessenger *fTarget;
     BMessenger *fReplyTo;
     BMessage *fMessage;
-    b_bigtime_t fInterval;
-    b_bigtime_t fPrevSendTime;
-    b_int32 fCount;
+    bigtime_t fInterval;
+    bigtime_t fPrevSendTime;
+     __be_int32 fCount;
 };
 
 #endif /* __cplusplus */

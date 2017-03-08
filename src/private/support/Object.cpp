@@ -41,7 +41,7 @@ BObject::~BObject()
 
 
 BObject&
-BObject::operator+=(b_uint64 vitalities)
+BObject::operator+=(__be_uint64 vitalities)
 {
 	if(fVitalities <= B_MAXUINT64 - vitalities) fVitalities += vitalities;
 	return *this;
@@ -49,7 +49,7 @@ BObject::operator+=(b_uint64 vitalities)
 
 
 BObject&
-BObject::operator-=(b_uint64 vitalities)
+BObject::operator-=(__be_uint64 vitalities)
 {
 	fVitalities -= min_c(fVitalities, vitalities);
 	return *this;
@@ -70,7 +70,7 @@ BObject::operator--()
 }
 
 
-b_uint64
+be_uint64
 BObject::Vitalities() const
 {
 	return fVitalities;

@@ -6,7 +6,7 @@
 #ifndef _BOOT_NET_STACK_H
 #define _BOOT_NET_STACK_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 class EthernetInterface;
 class EthernetService;

@@ -5,7 +5,7 @@
 #ifndef _MEDIA_PLUGIN_H
 #define _MEDIA_PLUGIN_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 namespace BPrivate { namespace media {
 

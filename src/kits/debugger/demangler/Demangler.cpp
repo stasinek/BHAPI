@@ -5,7 +5,7 @@
 
 #include "Demangler.h"
 
-#include <TypeConstants.h>
+#include <HaikuConstants.h>
 
 #include "demangle.h"
 

@@ -29,7 +29,7 @@
 #include <sniffer/Rule.h>
 #include <StorageDefs.h>
 #include <storage_support.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 #define DBG(x) x

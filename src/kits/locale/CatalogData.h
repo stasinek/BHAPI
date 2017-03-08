@@ -6,8 +6,8 @@
 #define _CATALOG_DATA_H_
 
 
-#include <SupportDefs.h>
-#include <String.h>
+#include <Haiku.h>
+#include <StringClass.h>
 
 
 class BCatalog;

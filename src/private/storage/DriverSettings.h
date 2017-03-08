@@ -9,7 +9,7 @@
 #define _B_DRIVER_SETTINGS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct driver_parameter;

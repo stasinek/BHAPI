@@ -5,7 +5,7 @@
 #ifndef _MOUNT_SERVER_H
 #define _MOUNT_SERVER_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 const uint32 kMountVolume 			= 'mntv';

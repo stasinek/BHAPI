@@ -41,7 +41,7 @@ All rights reserved.
 #include <Catalog.h>
 #include <Directory.h>
 #include <InterfaceDefs.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <Message.h>
 #include <Node.h>
 #include <Path.h>

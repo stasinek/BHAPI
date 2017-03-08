@@ -37,7 +37,7 @@ All rights reserved.
 #include <ControlLook.h>
 #include <InterfaceDefs.h>
 #include <LayoutBuilder.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <ScrollView.h>
 
 #include "TrackerSettings.h"
@@ -96,7 +96,7 @@ TrackerSettingsWindow::TrackerSettingsWindow()
 
 	fSettingsContainerBox = new BBox("SettingsContainerBox");
 
-//	const float spacing = be_control_look->DefaultItemSpacing();
+//	const float spacing =  __be_control_look->DefaultItemSpacing();
 
 	BLayoutBuilder::Group<>(this)
 		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
@@ -337,9 +337,9 @@ SettingsItem::DrawItem(BView* owner, BRect rect, bool drawEverything)
 		}
 
 		if (isRevertable)
-			owner->SetFont(be_bold_font);
+			owner->SetFont(__be_bold_font);
 		else
-			owner->SetFont(be_plain_font);
+			owner->SetFont(__be_plain_font);
 
 		if (isSelected)
 			owner->SetHighColor(ui_color(B_LIST_SELECTED_ITEM_TEXT_COLOR));
@@ -350,7 +350,7 @@ SettingsItem::DrawItem(BView* owner, BRect rect, bool drawEverything)
 		owner->GetFontHeight(&fheight);
 
 		owner->DrawString(Text(),
-			BPoint(rect.left + be_control_look->DefaultLabelSpacing(),
+			BPoint(rect.left +  __be_control_look->DefaultLabelSpacing(),
 				rect.top + fheight.ascent + 2 + floorf(fheight.leading / 2)));
 
 		owner->SetHighColor(ui_color(B_LIST_ITEM_TEXT_COLOR));

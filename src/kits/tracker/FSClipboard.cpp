@@ -38,7 +38,7 @@ All rights reserved.
 #include <Clipboard.h>
 #include <Alert.h>
 #include <Catalog.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <NodeMonitor.h>
 
 #include "Commands.h"
@@ -121,8 +121,8 @@ FSClipboardHasRefs()
 {
 	bool result = false;
 
-	if (be_clipboard->Lock()) {
-		BMessage* clip = be_clipboard->Data();
+	if (__be_clipboard->Lock()) {
+		BMessage* clip =  __be_clipboard->Data();
 		if (clip != NULL) {
 #ifdef B_BEOS_VERSION_DANO
 			const
@@ -140,7 +140,7 @@ FSClipboardHasRefs()
 				result = CompareModeAndRefName(modeName, refName);
 			}
 		}
-		be_clipboard->Unlock();
+		__be_clipboard->Unlock();
 	}
 	return result;
 }
@@ -149,7 +149,7 @@ FSClipboardHasRefs()
 void
 FSClipboardStartWatch(BMessenger target)
 {
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker != NULL && tracker->ClipboardRefsWatcher() != NULL)
 		tracker->ClipboardRefsWatcher()->AddToNotifyList(target);
 	else {
@@ -168,7 +168,7 @@ FSClipboardStartWatch(BMessenger target)
 void
 FSClipboardStopWatch(BMessenger target)
 {
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker != NULL && tracker->ClipboardRefsWatcher() != NULL)
 		tracker->ClipboardRefsWatcher()->AddToNotifyList(target);
 	else {
@@ -190,9 +190,9 @@ FSClipboardClear()
 	if (!be_clipboard->Lock())
 		return;
 
-	be_clipboard->Clear();
-	be_clipboard->Commit();
-	be_clipboard->Unlock();
+	__be_clipboard->Clear();
+	__be_clipboard->Commit();
+	__be_clipboard->Unlock();
 }
 
 
@@ -222,9 +222,9 @@ FSClipboardAddPoses(const node_ref* directory, PoseList* list,
 	clipNode.moveMode = moveMode;
 
 	if (clearClipboard)
-		be_clipboard->Clear();
+		__be_clipboard->Clear();
 
-	BMessage* clip = be_clipboard->Data();
+	BMessage* clip =  __be_clipboard->Data();
 	if (clip != NULL) {
 		for (int32 index = 0; index < listCount; index++) {
 			char refName[64], modeName[64];
@@ -301,9 +301,9 @@ FSClipboardAddPoses(const node_ref* directory, PoseList* list,
 				}
 			}
 		}
-		be_clipboard->Commit();
+		__be_clipboard->Commit();
 	}
-	be_clipboard->Unlock();
+	__be_clipboard->Unlock();
 
 	BMessenger(kTrackerSignature).SendMessage(&updateMessage);
 		// Tracker will notify all listeners
@@ -329,7 +329,7 @@ FSClipboardRemovePoses(const node_ref* directory, PoseList* list)
 
 	uint32 refsRemoved = 0;
 
-	BMessage* clip = be_clipboard->Data();
+	BMessage* clip =  __be_clipboard->Data();
 	if (clip != NULL) {
 		int32 listCount = list->CountItems();
 
@@ -348,9 +348,9 @@ FSClipboardRemovePoses(const node_ref* directory, PoseList* list)
 				refsRemoved++;
 			}
 		}
-		be_clipboard->Commit();
+		__be_clipboard->Commit();
 	}
-	be_clipboard->Unlock();
+	__be_clipboard->Unlock();
 
 	BMessenger(kTrackerSignature).SendMessage(&updateMessage);
 		// Tracker will notify all listeners
@@ -376,8 +376,8 @@ FSClipboardPaste(Model* model, uint32 linksMode)
 	BObjectList<entry_ref>* moveList = new BObjectList<entry_ref>(0, true);
 	BObjectList<entry_ref>* copyList = new BObjectList<entry_ref>(0, true);
 
-	if ((be_clipboard->Lock())) {
-		BMessage* clip = be_clipboard->Data();
+	if ((__be_clipboard->Lock())) {
+		BMessage* clip =  __be_clipboard->Data();
 		if (clip != NULL) {
 			char modeName[64];
 			uint32 moveMode = 0;
@@ -465,7 +465,7 @@ FSClipboardPaste(Model* model, uint32 linksMode)
 						&clipNode, sizeof(TClipboardNodeRef), true);
 				}
 			}
-			be_clipboard->Commit();
+			__be_clipboard->Commit();
 
 			// send notification for the last directory
 			if (updateMessage != NULL) {
@@ -473,7 +473,7 @@ FSClipboardPaste(Model* model, uint32 linksMode)
 				delete updateMessage;
 			}
 		}
-		be_clipboard->Unlock();
+		__be_clipboard->Unlock();
 	}
 
 	bool okToMove = true;
@@ -539,7 +539,7 @@ FSClipboardFindNodeMode(Model* model, bool autoLock, bool updateRefIfNeeded)
 	bool remove = false;
 	bool change = false;
 
-	BMessage* clip = be_clipboard->Data();
+	BMessage* clip =  __be_clipboard->Data();
 	if (clip != NULL) {
 		const node_ref* node = model->NodeRef();
 		char modeName[64];
@@ -571,10 +571,10 @@ FSClipboardFindNodeMode(Model* model, bool autoLock, bool updateRefIfNeeded)
 		}
 	}
 	if (change)
-		be_clipboard->Commit();
+		__be_clipboard->Commit();
 
 	if (autoLock)
-		be_clipboard->Unlock();
+		__be_clipboard->Unlock();
 
 	if (remove)
 		FSClipboardRemove(model);
@@ -613,14 +613,14 @@ BClipboardRefsWatcher::BClipboardRefsWatcher()
 {
 	watch_node(NULL, B_WATCH_MOUNT, this);
 	fRefsInClipboard = FSClipboardHasRefs();
-	be_clipboard->StartWatching(this);
+	__be_clipboard->StartWatching(this);
 }
 
 
 BClipboardRefsWatcher::~BClipboardRefsWatcher()
 {
 	stop_watching(this);
-	be_clipboard->StopWatching(this);
+	__be_clipboard->StopWatching(this);
 }
 
 
@@ -682,8 +682,8 @@ BClipboardRefsWatcher::RemoveNode(node_ref* node, bool removeFromClipboard)
 	if (!removeFromClipboard)
 		return;
 
-	if (be_clipboard->Lock()) {
-		BMessage* clip = be_clipboard->Data();
+	if (__be_clipboard->Lock()) {
+		BMessage* clip =  __be_clipboard->Data();
 		if (clip != NULL) {
 			char name[64];
 			MakeRefName(name, node);
@@ -691,9 +691,9 @@ BClipboardRefsWatcher::RemoveNode(node_ref* node, bool removeFromClipboard)
 			MakeModeName(name);
 			clip->RemoveName(name);
 
-			be_clipboard->Commit();
+			__be_clipboard->Commit();
 		}
-		be_clipboard->Unlock();
+		__be_clipboard->Unlock();
 	}
 }
 
@@ -704,7 +704,7 @@ BClipboardRefsWatcher::RemoveNodesByDevice(dev_t device)
 	if (!be_clipboard->Lock())
 		return;
 
-	BMessage* clip = be_clipboard->Data();
+	BMessage* clip =  __be_clipboard->Data();
 	if (clip != NULL) {
 		char deviceName[6];
 		sprintf(deviceName, "r%" B_PRIdDEV "_", device);
@@ -729,9 +729,9 @@ BClipboardRefsWatcher::RemoveNodesByDevice(dev_t device)
 			}
 			index++;
 		}
-		be_clipboard->Commit();
+		__be_clipboard->Commit();
 	}
-	be_clipboard->Unlock();
+	__be_clipboard->Unlock();
 }
 
 
@@ -741,7 +741,7 @@ BClipboardRefsWatcher::UpdateNode(node_ref* node, entry_ref* ref)
 	if (!be_clipboard->Lock())
 		return;
 
-	BMessage* clip = be_clipboard->Data();
+	BMessage* clip =  __be_clipboard->Data();
 	if (clip != NULL) {
 		char name[64];
 		MakeRefName(name, node);
@@ -752,9 +752,9 @@ BClipboardRefsWatcher::UpdateNode(node_ref* node, entry_ref* ref)
 
 			RemoveNode(node);
 		}
-		be_clipboard->Commit();
+		__be_clipboard->Commit();
 	}
-	be_clipboard->Unlock();
+	__be_clipboard->Unlock();
 }
 
 

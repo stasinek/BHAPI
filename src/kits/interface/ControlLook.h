@@ -639,7 +639,7 @@ private:
 			uint32				_reserved[20];
 };
 
-extern BControlLook* be_control_look;
+extern BControlLook*  __be_control_look;
 
 
 } // namespace BPrivate

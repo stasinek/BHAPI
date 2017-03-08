@@ -4,7 +4,7 @@
 */
 
 
-#include <String.h>
+#include <StringClass.h>
 #include <List.h>
 #include <Mime.h>
 

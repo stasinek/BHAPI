@@ -58,7 +58,7 @@ All rights reserved.
 #include <GroupLayout.h>
 #include <InterfaceDefs.h>
 #include <LayoutBuilder.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MenuField.h>
 #include <MenuItem.h>
 #include <Mime.h>
@@ -541,7 +541,7 @@ FindWindow::Find()
 	if (!FindSaveCommon(true)) {
 		// have to wait for the node monitor to force old query to close
 		// to avoid a race condition
-		TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+		TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 		ASSERT(tracker != NULL);
 
 		for (int32 timeOut = 0; ; timeOut++) {
@@ -569,7 +569,7 @@ FindWindow::Find()
 	// tell the tracker about it
 	BMessage message(B_REFS_RECEIVED);
 	message.AddRef("refs", &fRef);
-	be_app->PostMessage(&message);
+	__be_app->PostMessage(&message);
 
 	// close the find panel
 	PostMessage(B_QUIT_REQUESTED);
@@ -998,7 +998,7 @@ FindPanel::ResizeMenuField(BMenuField* menuField)
 		}
 	}
 
-	float maxWidth = be_control_look->DefaultItemSpacing() * 20;
+	float maxWidth =  __be_control_look->DefaultItemSpacing() * 20;
 	size.width = std::min(width + padding, maxWidth);
 	menuField->SetExplicitSize(size);
 }
@@ -1846,7 +1846,7 @@ FindPanel::AddMimeTypesToMenu()
 
 	// add recent MIME types
 
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	ASSERT(tracker != NULL);
 
 	BList list;
@@ -1891,7 +1891,7 @@ FindPanel::AddMimeTypesToMenu()
 				superType, B_MINI_ICON));
 
 			// the MimeTypeMenu's font is not correct at this time
-			superMenu->SetFont(be_plain_font);
+			superMenu->SetFont(__be_plain_font);
 		}
 	}
 
@@ -2618,7 +2618,7 @@ FindPanel::AddAttributeControls(int32 gridRow)
 	// add NAME attribute to popup
 	BMenu* submenu = new BMenu(B_TRANSLATE("Name"));
 	submenu->SetRadioMode(true);
-	submenu->SetFont(be_plain_font);
+	submenu->SetFont(__be_plain_font);
 	BMessage* message = new BMessage(kAttributeItemMain);
 	message->AddString("name", "name");
 	message->AddInt32("type", B_STRING_TYPE);
@@ -2639,7 +2639,7 @@ FindPanel::AddAttributeControls(int32 gridRow)
 	// add SIZE attribute
 	submenu = new BMenu(B_TRANSLATE("Size"));
 	submenu->SetRadioMode(true);
-	submenu->SetFont(be_plain_font);
+	submenu->SetFont(__be_plain_font);
 	message = new BMessage(kAttributeItemMain);
 	message->AddString("name", "size");
 	message->AddInt32("type", B_OFF_T_TYPE);
@@ -2664,7 +2664,7 @@ FindPanel::AddAttributeControls(int32 gridRow)
 	// add "modified" field
 	submenu = new BMenu(B_TRANSLATE("Modified"));
 	submenu->SetRadioMode(true);
-	submenu->SetFont(be_plain_font);
+	submenu->SetFont(__be_plain_font);
 	message = new BMessage(kAttributeItemMain);
 	message->AddString("name", "last_modified");
 	message->AddInt32("type", B_TIME_TYPE);
@@ -2893,7 +2893,7 @@ FindPanel::AddAttributes(BMenu* menu, const BMimeType &mimeType)
 
 		BMenu* submenu = new BMenu(publicName);
 		submenu->SetRadioMode(true);
-		submenu->SetFont(be_plain_font);
+		submenu->SetFont(__be_plain_font);
 		BMessage* message = new BMessage(kAttributeItemMain);
 		message->AddString("name", attributeName);
 		message->AddInt32("type", type);
@@ -3136,7 +3136,7 @@ DeleteTransientQueriesTask::ProcessOneRef(Model* model)
 	if (!QueryOldEnough(model))
 		return false;
 
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	ASSERT(tracker != NULL);
 
 	// check that it is not showing
@@ -3177,7 +3177,7 @@ private:
 void
 DeleteTransientQueriesTask::StartUpTransientQueryCleaner()
 {
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	ASSERT(tracker != NULL);
 
 	if (tracker == NULL)

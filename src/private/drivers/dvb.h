@@ -71,13 +71,13 @@
  *
  * opcode                    | parameter               | description
  * --------------------------+-------------------------+-----------------------------------------
- * DVB_GET_INTERFACE_INFO    | dvb_interface_info_t    | get interface capabilites (memset to 0 first)
+ * DVB_GET_INTERFACE_INFO    | dvbe_interface_info_t    | get interface capabilites (memset to 0 first)
  * DVB_GET_FREQUENCY_INFO    | dvb_frequency_info_t    | get interface capabilites (memset to 0 first)
  * DVB_SET_TUNING_PARAMETERS | dvb_tuning_parameters_t | perform tuning information
  * DVB_GET_TUNING_PARAMETERS | dvb_tuning_parameters_t | get active parameters (after autotuning) (memset to 0 first)
  * DVB_START_CAPTURE         | (none)                  | start the capture
  * DVB_STOP_CAPTURE          | (none)                  | stop the capture
- * DVB_GET_STATUS            | dvb_status_t            | get current status
+ * DVB_GET_STATUS            | dvstatus_t            | get current status
  * DVB_GET_SS                | uint32                  | signal strength, range 0 to 1000
  * DVB_GET_BER               | uint32                  | block error rate, range 0 to 1000
  * DVB_GET_SNR               | uint32                  | signal noise ratio, range 0 to 1000
@@ -189,7 +189,7 @@ typedef enum {
 	DVB_STATUS_LOCK			= 0x0004,
 	DVB_STATUS_VITERBI		= 0x0008,
 	DVB_STATUS_SYNC			= 0x0010,
-} dvb_status_t;
+} dvstatus_t;
 
 
 typedef enum {
@@ -216,7 +216,7 @@ typedef struct {
 	char					name[100];
 	char					info[500];
 	uint32					_res2[16];
-} dvb_interface_info_t;
+} dvbe_interface_info_t;
 
 
 typedef struct {

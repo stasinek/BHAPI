@@ -89,7 +89,7 @@ BStringItem::DrawItem(BView* owner, BRect frame, bool complete)
 	} else
 		owner->SetLowColor(owner->ViewColor());
 
-	owner->MovePenTo(frame.left + be_control_look->DefaultLabelSpacing(),
+	owner->MovePenTo(frame.left +  __be_control_look->DefaultLabelSpacing(),
 		frame.top + fBaselineOffset);
 
 	owner->DrawString(fText);
@@ -121,7 +121,7 @@ BStringItem::Update(BView* owner, const BFont* font)
 {
 	if (fText != NULL) {
 		SetWidth(font->StringWidth(fText)
-			+ be_control_look->DefaultLabelSpacing());
+			+  __be_control_look->DefaultLabelSpacing());
 	}
 
 	font_height fheight;

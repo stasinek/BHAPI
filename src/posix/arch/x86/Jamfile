@@ -1,0 +1,26 @@
+SubDir HAIKU_TOP src system libroot posix arch x86 ;
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup x86 x86_gcc2 ] {
+	on $(architectureObject) {
+		local architecture = $(TARGET_PACKAGING_ARCH) ;
+
+		UsePrivateSystemHeaders ;
+
+		local genericSources =
+			setjmp_save_sigs.c
+			longjmp_return.c
+			;
+
+		MergeObject <$(architecture)>posix_arch_$(TARGET_ARCH).o :
+			fenv.c
+			sigsetjmp.S
+			siglongjmp.S
+
+			$(genericSources)
+			;
+
+		SEARCH on [ FGristFiles $(genericSources) ]
+			= [ FDirName $(SUBDIR) $(DOTDOT) generic ] ;
+	}
+}

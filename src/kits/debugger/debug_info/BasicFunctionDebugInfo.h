@@ -5,7 +5,7 @@
 #ifndef BASIC_FUNCTION_DEBUG_INFO_H
 #define BASIC_FUNCTION_DEBUG_INFO_H
 
-#include <String.h>
+#include <StringClass.h>
 
 #include "FunctionDebugInfo.h"
 

@@ -15,10 +15,10 @@
 #include <iostream>
 
 #include <Catalog.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <LocaleRoster.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 #include <FindDirectory.h>
 
 #include <ICUWrapper.h>

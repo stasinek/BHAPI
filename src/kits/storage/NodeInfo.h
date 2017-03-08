@@ -11,7 +11,7 @@
 #include <File.h>
 #include <Message.h>
 #include <Mime.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BBitmap;

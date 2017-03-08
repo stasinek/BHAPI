@@ -42,7 +42,7 @@
 #ifndef _KERNEL_OPEN_FIRMWARE_PCI_H
 #define	_KERNEL_OPEN_FIRMWARE_PCI_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 /*
  * PCI Bus Binding to:

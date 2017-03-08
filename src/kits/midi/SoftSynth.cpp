@@ -69,7 +69,7 @@ BSoftSynth::BSoftSynth()
 BSoftSynth::~BSoftSynth()
 {
 	// Note: it is possible that we don't get deleted. When BSynth is
-	// created, it is assigned to the global variable be_synth. While
+	// created, it is assigned to the global variable  __be_synth. While
 	// BSynth is alive, it keeps a copy of BSoftSynth around too. Not
 	// a big deal, but the Midi Kit will complain (on stdout) that we 
 	// didn't release our endpoints.

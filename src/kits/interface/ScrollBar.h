@@ -60,7 +60,7 @@ public:
 
     // SetTarget: If target isn't NULL, target->Ancestor() must equal to this->Ancestor().
     //            AKA. The function just be successful doing when it added to any parent.
-    b_status_t	SetTarget(BView *target);
+    status_t	SetTarget(BView *target);
     BView		*Target() const;
 
     bhapi::orientation	Orientation() const;
@@ -68,7 +68,7 @@ public:
     virtual void	Draw(BRect updateRect);
     virtual void	MouseDown(BPoint where);
     virtual void	MouseUp(BPoint where);
-    virtual void	MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
+    virtual void	MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message);
     virtual void	DetachedFromWindow();
 
 private:
@@ -84,10 +84,10 @@ private:
     BView *fTarget;
 
     bool fTracking;
-    b_int8 fTrackingState;
+     __be_int8 fTrackingState;
     BPoint fMousePosition;
     BRegion fTrackingRegion;
-    void doScroll(b_int8 state);
+    void doScroll(__be_int8 state);
     void _SetValue(float value, bool response);
 
     BMessageRunner *fRunner;

@@ -9,7 +9,7 @@
 #define _VIDEO_CONFIGURATION_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 // Video connector types

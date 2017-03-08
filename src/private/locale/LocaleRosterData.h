@@ -12,7 +12,7 @@
 #include <image.h>
 #include <Language.h>
 #include <List.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <Locker.h>
 #include <Message.h>
 #include <Resources.h>

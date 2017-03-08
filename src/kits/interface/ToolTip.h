@@ -73,14 +73,14 @@ public:
     BToolTip();
     virtual ~BToolTip();
 
-    virtual b_status_t	ShowTip(const BMessenger &msgr);
-    virtual b_status_t	HideTip(const BMessenger &msgr);
-    virtual b_status_t	KillTip(const BMessenger &msgr);
-    virtual b_status_t	SetToolTipInfo(const BMessenger &msgr,
+    virtual status_t	ShowTip(const BMessenger &msgr);
+    virtual status_t	HideTip(const BMessenger &msgr);
+    virtual status_t	KillTip(const BMessenger &msgr);
+    virtual status_t	SetToolTipInfo(const BMessenger &msgr,
                            BRect region,
                            BToolTipInfo *info);
 
-    virtual b_status_t	CursorMoved(const BMessenger &msgr,
+    virtual status_t	CursorMoved(const BMessenger &msgr,
                         BPoint where,
                         BPoint delta);
 

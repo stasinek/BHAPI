@@ -67,12 +67,12 @@ public:
 
     // run synchronously then auto-destruct when it return.
     // "could_proxy" must be "true" when it called from looper of BApplication!
-    b_int32		Go(bool could_proxy = true);
+     __be_int32		Go(bool could_proxy = true);
 
     // run asynchronously and auto-destruct after message send
-    b_status_t	Go(BInvoker *invoker);
+    status_t	Go(BInvoker *invoker);
 
-    BButton		*ButtonAt(b_int32 index) const;
+    BButton		*ButtonAt(__be_int32 index) const;
     BTextView	*TextView() const;
 
     virtual bool	QuitRequested();

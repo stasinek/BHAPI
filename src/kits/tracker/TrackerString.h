@@ -38,7 +38,7 @@ All rights reserved.
 #include <ctype.h>
 
 #include <OS.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include "RegExp.h"
 

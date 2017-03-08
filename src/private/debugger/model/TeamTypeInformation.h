@@ -6,7 +6,7 @@
 #define TEAM_TYPE_INFORMATION_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BString;

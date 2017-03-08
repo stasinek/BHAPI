@@ -10,7 +10,7 @@
 #include <image.h>
 #include <ListItem.h>
 #include <Resources.h>
-#include <String.h>
+#include <StringClass.h>
 #include <View.h>
 
 

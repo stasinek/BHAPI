@@ -6,7 +6,7 @@
 #ifndef SPECIFIC_TEAM_DEBUG_INFO_H
 #define SPECIFIC_TEAM_DEBUG_INFO_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class ImageDebugInfoLoadingState;

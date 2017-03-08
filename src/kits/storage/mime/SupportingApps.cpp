@@ -20,7 +20,7 @@
 #include <Message.h>
 #include <MimeType.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <mime/database_support.h>
 #include <mime/DatabaseDirectory.h>

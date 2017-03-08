@@ -32,7 +32,7 @@
 #include <netdb.h>
 #include <NodeInfo.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 #include <StringList.h>
 
 #include <MailPrivate.h>

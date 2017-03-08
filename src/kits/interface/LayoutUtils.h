@@ -9,7 +9,7 @@
 #include <Alignment.h>
 #include <Rect.h>
 #include <Size.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 class BLayoutItem;

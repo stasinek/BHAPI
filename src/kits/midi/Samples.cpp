@@ -28,7 +28,7 @@
 
 BSamples::BSamples()
 {
-	if (be_synth == NULL)
+	if (__be_synth == NULL)
 		new BSynth();
 }
 

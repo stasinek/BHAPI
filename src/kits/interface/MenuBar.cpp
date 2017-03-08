@@ -36,7 +36,7 @@
 #include "../app/Message.h"
 
 
-BMenuBar::BMenuBar(BRect frame, const char *title, b_uint32 resizeMode, bhapi::menu_layout layout, bool resizeToFit)
+BMenuBar::BMenuBar(BRect frame, const char *title,  __be_uint32 resizeMode, bhapi::menu_layout layout, bool resizeToFit)
 	: BMenu(frame, title, resizeMode, B_WILL_DRAW, layout, resizeToFit), fBorder(B_BORDER_FRAME)
 {
 	SetEventMask(B_POINTER_EVENTS);
@@ -92,7 +92,7 @@ BMenuBar::MouseDown(BPoint where)
 		else
 		{
 			bool found = false;
-			for(b_int32 i = 0; i < CountItems(); i++)
+			for(__be_int32 i = 0; i < CountItems(); i++)
 				if(ItemFrame(i).Contains(where)) found = true;
 			if(found == false)
 			{
@@ -139,7 +139,7 @@ BMenuBar::MouseUp(BPoint where)
 		else
 		{
 			bool found = false;
-			for(b_int32 i = 0; i < CountItems(); i++)
+			for(__be_int32 i = 0; i < CountItems(); i++)
 				if(ItemFrame(i).Contains(where)) found = true;
 			if(found == false)
 			{
@@ -163,7 +163,7 @@ BMenuBar::ItemInvoked(BMenuItem *item)
 
 
 void
-BMenuBar::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
+BMenuBar::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 	if(CurrentSelection() == NULL) return;
 	BMenu::MouseMoved(where, code, a_message);
@@ -171,7 +171,7 @@ BMenuBar::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 
 
 void
-BMenuBar::KeyDown(const char *bytes, b_int32 numBytes)
+BMenuBar::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	if(CurrentSelection() == NULL) return;
 	BMenu::KeyDown(bytes, numBytes);
@@ -179,7 +179,7 @@ BMenuBar::KeyDown(const char *bytes, b_int32 numBytes)
 
 
 void
-BMenuBar::KeyUp(const char *bytes, b_int32 numBytes)
+BMenuBar::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
 	if(CurrentSelection() == NULL) return;
 	BMenu::KeyUp(bytes, numBytes);
@@ -197,8 +197,8 @@ BMenuBar::MessageReceived(BMessage *msg)
 	{
 		case B_OBSERVER_NOTICE_CHANGE:
 			{
-				b_uint32 what;
-				if(msg->FindInt32(B_OBSERVE_ORIGINAL_WHAT, (b_int32*)&what) == false ||
+				__be_uint32 what;
+				if(msg->FindInt32(B_OBSERVE_ORIGINAL_WHAT, (__be_int32*)&what) == false ||
 				   !(what == B_MINIMIZED || what == B_WINDOW_ACTIVATED)) break;
 
 				if(Window()->IsActivate() == false || Window()->IsHidden() || Window()->IsMinimized())

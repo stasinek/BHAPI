@@ -9,7 +9,7 @@
 #include <algorithm>
 
 #include <OS.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 TeamMemory::~TeamMemory()

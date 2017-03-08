@@ -55,7 +55,7 @@
 //
 //------------------------------------------------------------------------------
 
-#include "../kernel/OS.h"		// for system_time()
+#include "../kernel/KERNEL.h"		// for system_time()
 #include "StopWatch.h"
 #include <stdio.h>
 

@@ -7,7 +7,7 @@
 
 
 #include <Entry.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <package/Context.h>
 #include <package/RepositoryConfig.h>

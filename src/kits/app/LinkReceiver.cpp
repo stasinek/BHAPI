@@ -20,7 +20,7 @@
 #include <new>
 
 #include <ServerProtocol.h>
-#include <String.h>
+#include <StringClass.h>
 #include <Region.h>
 #include <GradientLinear.h>
 #include <GradientRadial.h>

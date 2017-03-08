@@ -15,7 +15,7 @@
 #include <Message.h>
 #include <Node.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 namespace BPrivate {

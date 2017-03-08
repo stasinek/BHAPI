@@ -10,7 +10,7 @@
 #ifndef _MIME_SUPERTYPE_H
 #define _MIME_SUPERTYPE_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <string>
 #include <set>

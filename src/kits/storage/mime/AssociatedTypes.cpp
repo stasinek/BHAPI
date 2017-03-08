@@ -22,7 +22,7 @@
 #include <mime/MimeSniffer.h>
 #include <MimeType.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 #include <storage_support.h>
 
 

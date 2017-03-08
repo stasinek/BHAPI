@@ -33,15 +33,15 @@
 #define BOOTDIR_DIRECTORY       "SBBB/Directory"
 
 typedef struct {
-    char be_name[BOOTDIR_NAMELEN]; /* name of loaded object, zero terminated */
-    int  be_offset;   /* offset of object relative to the start of boot_dir  */
-    int  be_type;     /* object type designator                              */
-    int  be_size;     /* size of loaded object (pages)                       */
-    int  be_vsize;    /* size loaded object should occupy when mapped in     */
-    int  be_extra0;
-    int  be_extra1;
-    int  be_extra2;
-    int  be_extra3;
+    char  __be_name[BOOTDIR_NAMELEN]; /* name of loaded object, zero terminated */
+    int   __be_offset;   /* offset of object relative to the start of boot_dir  */
+    int   __be_type;     /* object type designator                              */
+    int   __be_size;     /* size of loaded object (pages)                       */
+    int   __be_vsize;    /* size loaded object should occupy when mapped in     */
+    int   __be_extra0;
+    int   __be_extra1;
+    int   __be_extra2;
+    int   __be_extra3;
 } boot_entry;
 
 typedef struct {
@@ -58,7 +58,7 @@ typedef struct {
 #define BE_TYPE_ELF32        5  /* 32bit ELF object                         */
 
 /* for BE_TYPE_CODE */
-#define be_code_vaddr be_extra0 /* virtual address (rel offset 0)           */
-#define be_code_ventr be_extra1 /* virtual entry point (rel offset 0)       */
+#define  __be_code_vaddr  __be_extra0 /* virtual address (rel offset 0)           */
+#define  __be_code_ventr  __be_extra1 /* virtual entry point (rel offset 0)       */
 
 #endif	/* KERNEL_BOOT_BOOTDIR_H */

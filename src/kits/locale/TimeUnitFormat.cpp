@@ -20,7 +20,7 @@
 #include <ICUWrapper.h>
 
 #include <Language.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <LocaleRoster.h>
 
 // maps our unit element to the corresponding ICU unit

@@ -54,7 +54,7 @@ public:
     BHandler(const BMessage *from);
     virtual ~BHandler();
 
-    virtual b_status_t  Archive(BMessage *into, bool deep = true) const;
+    virtual status_t  Archive(BMessage *into, bool deep = true) const;
     static BArchivable *Instantiate(const BMessage *from);
 
     void                SetName(const char *name);
@@ -68,23 +68,23 @@ public:
     BHandler           *NextHandler() const;
 
     bool                LockLooper();
-    b_status_t          LockLooperWithTimeout(b_bigtime_t microseconds_timeout);
+    status_t          LockLooperWithTimeout(bigtime_t microseconds_timeout);
     void                UnlockLooper();
 
     // Observer calls
-    b_status_t          StartWatching(BMessenger msgr, b_uint32 what);
-    b_status_t          StartWatchingAll(BMessenger msgr);
-    b_status_t          StopWatching(BMessenger msgr, b_uint32 what);
-    b_status_t          StopWatchingAll(BMessenger msgr);
+    status_t          StartWatching(BMessenger msgr,  __be_uint32 what);
+    status_t          StartWatchingAll(BMessenger msgr);
+    status_t          StopWatching(BMessenger msgr,  __be_uint32 what);
+    status_t          StopWatchingAll(BMessenger msgr);
 
-    b_status_t          StartWatching(BHandler *handler, b_uint32 what);
-    b_status_t          StartWatchingAll(BHandler *handler);
-    b_status_t          StopWatching(BHandler *handler, b_uint32 what);
-    b_status_t          StopWatchingAll(BHandler *handler);
+    status_t          StartWatching(BHandler *handler,  __be_uint32 what);
+    status_t          StartWatchingAll(BHandler *handler);
+    status_t          StopWatching(BHandler *handler,  __be_uint32 what);
+    status_t          StopWatchingAll(BHandler *handler);
 
     // Notifier calls
-    virtual void		SendNotices(b_uint32 what, const BMessage *msg = NULL);
-    bool                IsWatched(b_uint32 what = B_OBSERVER_OBSERVE_ALL) const;
+    virtual void		SendNotices(__be_uint32 what, const BMessage *msg = NULL);
+    bool                IsWatched(__be_uint32 what = B_OBSERVER_OBSERVE_ALL) const;
 
     // Message Filtering
     virtual bool		AddFilter(BMessageFilter *filter);
@@ -93,13 +93,13 @@ public:
     const BList        *FilterList() const;
 
     // Scripting
-    virtual BHandler   *ResolveSpecifier(BMessage *msg, b_int32 index, BMessage *specifier, b_int32 what, const char *property);
-    virtual b_status_t	GetSupportedSuites(BMessage *data);
+    virtual BHandler   *ResolveSpecifier(BMessage *msg,  __be_int32 index, BMessage *specifier,  __be_int32 what, const char *property);
+    virtual status_t	GetSupportedSuites(BMessage *data);
 
 private:
     friend class BLooper;
     friend class BMessage;
-    friend b_uint64 bhapi::get_handler_token(const BHandler *handler);
+    friend  __be_uint64 bhapi::get_handler_token(const BHandler *handler);
 
     BToken *fToken;
     char *fName;

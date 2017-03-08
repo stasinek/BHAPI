@@ -14,7 +14,7 @@
 #include <map>
 #include <string>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <mime/Supertype.h>
 

@@ -16,7 +16,7 @@
 #include <List.h>
 #include <Message.h>
 #include <ObjectList.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 class BPath;

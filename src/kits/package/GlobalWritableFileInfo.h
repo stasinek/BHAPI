@@ -7,7 +7,7 @@
 
 
 #include <package/WritableFileUpdateType.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 namespace BPackageKit {

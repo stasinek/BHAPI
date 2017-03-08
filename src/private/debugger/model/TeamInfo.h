@@ -6,7 +6,7 @@
 #define TEAM_INFO_H
 
 #include <OS.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include "Types.h"
 

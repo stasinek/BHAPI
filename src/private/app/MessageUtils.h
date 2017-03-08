@@ -5,7 +5,7 @@
 #include <DataIO.h>
 #include <Entry.h>
 #include <Message.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 namespace BPrivate {	// Only putting these here because Be did

@@ -34,7 +34,7 @@
 #include "../interface/Window.h"
 
 BRadioButton::BRadioButton(BRect frame, const char *name, const char *label,
-			   BMessage *message, b_uint32 resizeMode, b_uint32 flags)
+			   BMessage *message,  __be_uint32 resizeMode,  __be_uint32 flags)
 	: BControl(frame, name, label, message, resizeMode, flags)
 {
 }
@@ -158,7 +158,7 @@ BRadioButton::MouseDown(BPoint where)
 
 
 void
-BRadioButton::KeyDown(const char *bytes, b_int32 numBytes)
+BRadioButton::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	if(!IsEnabled() || !IsFocus() || numBytes != 1) return;
 	if(!(bytes[0] == B_ENTER || bytes[0] == B_SPACE)) return;
@@ -173,7 +173,7 @@ BRadioButton::KeyDown(const char *bytes, b_int32 numBytes)
 
 
 void
-BRadioButton::SetFont(const BFont *font, b_uint8 mask)
+BRadioButton::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	BControl::SetFont(font, mask);
 	Invalidate();
@@ -197,7 +197,7 @@ BRadioButton::GetPreferredSize(float *width, float *height)
 
 
 void
-BRadioButton::SetValue(b_int32 value)
+BRadioButton::SetValue(__be_int32 value)
 {
 	if(value != Value())
 	{

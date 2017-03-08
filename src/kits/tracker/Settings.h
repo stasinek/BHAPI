@@ -35,7 +35,7 @@ All rights reserved.
 #define _SETTINGS_H
 
 
-#include <String.h>
+#include <StringClass.h>
 #include "SettingsHandler.h"
 
 

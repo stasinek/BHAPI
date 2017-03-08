@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku source-code, All Rights Reserved
  *
@@ -29,11 +29,11 @@
  * Copyright 2013, Ingo Weinhold, ingo_weinhold@gmx.de.
  * Distributed under the terms of the MIT License.
  */
+#include "Architecture.h"
+
 #include "StringList.h"
 #include "StringClass.h"
 #include "Errors.h"
-
-#include "Architecture.h"
 
 namespace bhapi {
 static const size_t k_MaxArchitectureCount = 16;
@@ -48,18 +48,18 @@ static status_t bhapi::string_array_to_string_list(const char* const* o_architec
         BString architecture(o_architectures[i]);
         if (architecture.IsEmpty() || !a_architectures.Add(architecture)) {
             a_architectures.MakeEmpty();
-			return B_NO_MEMORY;
-		}
-	}
-	return B_OK;
+            return B_NO_MEMORY;
+        }
+    }
+    return B_OK;
 }
 
 status_t bhapi::get_secondary_architectures(BStringList& a_architectures)
 {
     const char* architectures[k_MaxArchitectureCount];
-	size_t count = get_secondary_architectures(architectures,
+    size_t count = get_secondary_architectures(architectures,
         k_MaxArchitectureCount);
-	return string_array_to_string_list(architectures,
+    return string_array_to_string_list(architectures,
         std::min(count, k_MaxArchitectureCount), a_architectures);
 }
 
@@ -67,6 +67,6 @@ status_t bhapi::get_architectures(BStringList& a_architectures)
 {
     const char* architectures[k_MaxArchitectureCount];
     size_t count = get_architectures(architectures, k_MaxArchitectureCount);
-	return string_array_to_string_list(architectures,
+    return string_array_to_string_list(architectures,
         std::min(count, k_MaxArchitectureCount), a_architectures);
 }

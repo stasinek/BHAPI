@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include "./../support/String.h>
+#include "./../support/StringClass.h>
 #include "./../kernel/OS.h>
 #include "./../kernel/Debug.h>
 

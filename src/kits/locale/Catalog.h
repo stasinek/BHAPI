@@ -8,8 +8,8 @@
 
 #include <LocaleRoster.h>
 #include <Locker.h>
-#include <SupportDefs.h>
-#include <String.h>
+#include <Haiku.h>
+#include <StringClass.h>
 
 
 class BCatalogData;

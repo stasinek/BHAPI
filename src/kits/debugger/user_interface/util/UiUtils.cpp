@@ -13,7 +13,7 @@
 #include <DateTime.h>
 #include <KernelExport.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 #include <Variant.h>
 
 #include <vm_defs.h>

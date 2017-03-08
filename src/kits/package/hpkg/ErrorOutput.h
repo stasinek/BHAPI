@@ -8,7 +8,7 @@
 
 #include <stdarg.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 namespace BPackageKit {

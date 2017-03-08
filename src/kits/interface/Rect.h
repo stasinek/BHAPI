@@ -106,9 +106,9 @@ public:
 
     bool IsValid() const;
     float Width() const;
-    b_int32 IntegerWidth() const;
+     __be_int32 IntegerWidth() const;
     float Height() const;
-    b_int32 IntegerHeight() const;
+     __be_int32 IntegerHeight() const;
 
     bool Intersects(BRect r) const;
     bool Intersects(float l, float t, float r, float b) const;
@@ -212,9 +212,9 @@ inline bool BRect::IsValid() const
 }
 
 
-inline b_int32 BRect::IntegerWidth() const
+inline  __be_int32 BRect::IntegerWidth() const
 {
-    return((b_int32)ceil((double)(right - left)));
+    return((__be_int32)ceil((double)(right - left)));
 }
 
 
@@ -224,9 +224,9 @@ inline float BRect::Width() const
 }
 
 
-inline b_int32 BRect::IntegerHeight() const
+inline  __be_int32 BRect::IntegerHeight() const
 {
-    return((b_int32)ceil((double)(bottom - top)));
+    return((__be_int32)ceil((double)(bottom - top)));
 }
 
 

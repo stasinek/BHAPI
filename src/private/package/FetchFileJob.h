@@ -10,7 +10,7 @@
 
 #include <Entry.h>
 #include <File.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <package/Job.h>
 

@@ -42,7 +42,7 @@ All rights reserved.
 #include <ColorControl.h>
 #include <ControlLook.h>
 #include <LayoutBuilder.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MenuField.h>
 #include <NodeMonitor.h>
 #include <Point.h>
@@ -73,7 +73,7 @@ static const rgb_color kDefaultWarningSpaceColor
 static void
 send_bool_notices(uint32 what, const char* name, bool value)
 {
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
 		return;
 
@@ -197,7 +197,7 @@ DesktopSettingsView::DesktopSettingsView()
 		B_TRANSLATE("Show shared volumes on Desktop"),
 		new BMessage(kVolumesOnDesktopChanged));
 
-	const float spacing = be_control_look->DefaultItemSpacing();
+	const float spacing =  __be_control_look->DefaultItemSpacing();
 
 	BLayoutBuilder::Group<>(this, B_VERTICAL, 0)
 		.Add(fShowDisksIconRadioButton)
@@ -223,7 +223,7 @@ DesktopSettingsView::AttachedToWindow()
 void
 DesktopSettingsView::MessageReceived(BMessage* message)
 {
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
 		return;
 
@@ -349,7 +349,7 @@ DesktopSettingsView::Revert()
 void
 DesktopSettingsView::_SendNotices()
 {
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
 		return;
 
@@ -456,7 +456,7 @@ WindowsSettingsView::WindowsSettingsView()
 		B_TRANSLATE("Enable type-ahead filtering"),
 		new BMessage(kTypeAheadFilteringChanged));
 
-	const float spacing = be_control_look->DefaultItemSpacing();
+	const float spacing =  __be_control_look->DefaultItemSpacing();
 
 	BLayoutBuilder::Group<>(this, B_VERTICAL, 0)
 		.AddGroup(B_VERTICAL, 0)
@@ -494,7 +494,7 @@ WindowsSettingsView::AttachedToWindow()
 void
 WindowsSettingsView::MessageReceived(BMessage* message)
 {
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
 		return;
 
@@ -592,7 +592,7 @@ WindowsSettingsView::MessageReceived(BMessage* message)
 void
 WindowsSettingsView::SetDefaults()
 {
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
 		return;
 
@@ -658,7 +658,7 @@ WindowsSettingsView::IsDefaultable() const
 void
 WindowsSettingsView::Revert()
 {
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
 		return;
 
@@ -767,7 +767,7 @@ SpaceBarSettingsView::SpaceBarSettingsView()
 		new BMessage(kUpdateVolumeSpaceBar));
 
 	BPopUpMenu* menu = new BPopUpMenu(B_EMPTY_STRING);
-	menu->SetFont(be_plain_font);
+	menu->SetFont(__be_plain_font);
 
 	BMenuItem* item;
 	menu->AddItem(item = new BMenuItem(
@@ -821,7 +821,7 @@ SpaceBarSettingsView::AttachedToWindow()
 void
 SpaceBarSettingsView::MessageReceived(BMessage* message)
 {
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
 		return;
 
@@ -895,7 +895,7 @@ SpaceBarSettingsView::MessageReceived(BMessage* message)
 void
 SpaceBarSettingsView::SetDefaults()
 {
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
 		return;
 
@@ -934,7 +934,7 @@ SpaceBarSettingsView::IsDefaultable() const
 void
 SpaceBarSettingsView::Revert()
 {
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
 		return;
 

@@ -22,7 +22,7 @@ BuildScreenSaverDefaultSettingsView(BView* view, const char* moduleName, const c
 {
 	BRect rect(15, 15, 20, 20);
 	BStringView* stringView = new BStringView(rect, "module", moduleName);
-	stringView->SetFont(be_bold_font);
+	stringView->SetFont(__be_bold_font);
 	stringView->ResizeToPreferred();
 	view->AddChild(stringView);
 

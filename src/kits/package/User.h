@@ -6,7 +6,7 @@
 #define _PACKAGE__USER_H_
 
 
-#include <String.h>
+#include <StringClass.h>
 #include <StringList.h>
 
 

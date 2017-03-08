@@ -14,7 +14,7 @@
 #include <Autolock.h>
 #include <FormattingConventionsPrivate.h>
 #include <LanguagePrivate.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <LocaleRoster.h>
 #include <TimeZone.h>
 

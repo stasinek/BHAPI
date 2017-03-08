@@ -10,7 +10,7 @@
 #include <unicode/locid.h>
 #include <unicode/unistr.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include "ICUThreadLocalStorageValue.h"
 

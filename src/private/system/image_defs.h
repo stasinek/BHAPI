@@ -5,7 +5,7 @@
 #ifndef _SYSTEM_IMAGE_DEFS_H
 #define _SYSTEM_IMAGE_DEFS_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #define B_SHARED_OBJECT_HAIKU_VERSION_VARIABLE		_gSharedObjectHaikuVersion

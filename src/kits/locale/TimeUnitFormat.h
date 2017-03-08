@@ -7,7 +7,7 @@
 
 
 #include <Format.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BString;

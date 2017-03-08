@@ -46,8 +46,8 @@ public:
            const char *label,
            BMenu *menu,
            bool fixedSize = false,
-           b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-           b_uint32 flags = B_WILL_DRAW | B_NAVIGABLE | B_FRAME_EVENTS);
+            __be_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+            __be_uint32 flags = B_WILL_DRAW | B_NAVIGABLE | B_FRAME_EVENTS);
     virtual ~BMenuField();
 
     virtual void	SetLabel(const char *label);
@@ -72,12 +72,12 @@ public:
     virtual void	FrameResized(float new_width, float new_height);
     virtual void	WindowActivated(bool state);
     virtual void	MakeFocus(bool focusState = true);
-    virtual void	SetFont(const BFont *font, b_uint8 mask = B_FONT_ALL);
+    virtual void	SetFont(const BFont *font,  __be_uint8 mask = B_FONT_ALL);
     virtual void	MouseDown(BPoint where);
     virtual void	MouseUp(BPoint where);
-    virtual void	MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
-    virtual void	KeyDown(const char *bytes, b_int32 numBytes);
-    virtual void	KeyUp(const char *bytes, b_int32 numBytes);
+    virtual void	MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message);
+    virtual void	KeyDown(const char *bytes,  __be_int32 numBytes);
+    virtual void	KeyUp(const char *bytes,  __be_int32 numBytes);
 
 protected:
     virtual void	ChildRemoving(BView *child);

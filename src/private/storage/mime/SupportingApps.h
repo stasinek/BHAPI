@@ -10,7 +10,7 @@
 #ifndef _MIME_SUPPORTING_APPS_H
 #define _MIME_SUPPORTING_APPS_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <map>
 #include <set>

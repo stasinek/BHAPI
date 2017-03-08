@@ -41,16 +41,16 @@ public:
     BArchivable(const BMessage *from);
     virtual ~BArchivable();
 
-    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    virtual status_t Archive(BMessage *into, bool deep = true) const;
     static BArchivable *Instantiate(const BMessage *from);
 };
 
 
-typedef BArchivable *(*b_instantiation_func)(const BMessage*);
+typedef BArchivable *(*bhapi::instantiation_func)(const BMessage*);
 
-_IMPEXP_BHAPI bool			b_validatb_instantiation(const BMessage *from, const char *class_name);
-_IMPEXP_BHAPI b_instantiation_func	b_find_instantiation_func(const char *class_name);
-_IMPEXP_BHAPI b_instantiation_func	b_find_instantiation_func(const BMessage *archive_data);
+_IMPEXP_BHAPI bool			bhapi::validatb_instantiation(const BMessage *from, const char *class_name);
+_IMPEXP_BHAPI bhapi::instantiation_func	bhapi::find_instantiation_func(const char *class_name);
+_IMPEXP_BHAPI bhapi::instantiation_func	bhapi::find_instantiation_func(const BMessage *archive_data);
 
 #endif /* __cplusplus */
 

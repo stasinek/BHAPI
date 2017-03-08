@@ -6,7 +6,7 @@
 #define _ARGUMENT_VECTOR_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 namespace BPrivate {

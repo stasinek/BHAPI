@@ -10,7 +10,7 @@
 #include <LaunchRoster.h>
 
 #include <Application.h>
-#include <String.h>
+#include <StringClass.h>
 #include <StringList.h>
 
 #include <launch.h>
@@ -82,10 +82,10 @@ BLaunchRoster::InitCheck() const
 status_t
 BLaunchRoster::GetData(BMessage& data)
 {
-	if (be_app == NULL)
+	if (__be_app == NULL)
 		return B_BAD_VALUE;
 
-	return GetData(be_app->Signature(), data);
+	return GetData(__be_app->Signature(), data);
 }
 
 
@@ -109,10 +109,10 @@ BLaunchRoster::GetData(const char* signature, BMessage& data)
 port_id
 BLaunchRoster::GetPort(const char* name)
 {
-	if (be_app == NULL)
+	if (__be_app == NULL)
 		return B_BAD_VALUE;
 
-	return GetPort(be_app->Signature(), name);
+	return GetPort(__be_app->Signature(), name);
 }
 
 
@@ -337,7 +337,7 @@ status_t
 BLaunchRoster::_UpdateEvent(uint32 what, const BMessenger& source,
 	const char* name, uint32 flags)
 {
-	if (be_app == NULL || name == NULL || name[0] == '\0')
+	if (__be_app == NULL || name == NULL || name[0] == '\0')
 		return B_BAD_VALUE;
 
 	BMessage request(what);
@@ -345,7 +345,7 @@ BLaunchRoster::_UpdateEvent(uint32 what, const BMessenger& source,
 	if (status == B_OK)
 		status = request.AddMessenger("source", source);
 	if (status == B_OK)
-		status = request.AddString("owner", be_app->Signature());
+		status = request.AddString("owner",  __be_app->Signature());
 	if (status == B_OK)
 		status = request.AddString("name", name);
 	if (status == B_OK && flags != 0)

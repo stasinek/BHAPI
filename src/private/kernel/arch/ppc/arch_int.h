@@ -9,7 +9,7 @@
 #ifndef _KERNEL_ARCH_PPC_INT_H
 #define _KERNEL_ARCH_PPC_INT_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #define NUM_IO_VECTORS	256
 

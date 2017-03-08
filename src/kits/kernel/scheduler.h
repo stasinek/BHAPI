@@ -27,7 +27,7 @@
 */
 
 /* bitmasks for suggest_thread_priority() */
-enum be_task_flags {
+enum  __be_task_flags {
 	B_DEFAULT_MEDIA_PRIORITY	= 0x000,
 	B_OFFLINE_PROCESSING		= 0x001,
 	B_STATUS_RENDERING			= 0x002,	/* can also use this for */

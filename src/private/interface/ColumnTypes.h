@@ -16,7 +16,7 @@
 
 #include "ColumnListView.h"
 
-#include <String.h>
+#include <StringClass.h>
 #include <Font.h>
 #include <Bitmap.h>
 

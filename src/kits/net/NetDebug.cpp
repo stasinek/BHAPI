@@ -104,7 +104,7 @@ BNetDebug::Dump(const char *data, size_t len, const char *title)
 	{
 		for(int i = 0; i < 16 && len > 0; i++, len--, data++)
 		{
-			fprintf(stderr, "%02x", (b_uint8)*data);
+			fprintf(stderr, "%02x", (__be_uint8)*data);
 			if(!(i == 15 || len == 1)) fputc(' ', stderr);
 		}
 		fputs("\n", stderr);

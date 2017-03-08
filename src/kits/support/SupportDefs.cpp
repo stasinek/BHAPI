@@ -31,11 +31,11 @@
 
 #ifdef BHAPI_BUILD_LIBRARY
 namespace bhapi {
-extern EXPORTBHAPI const b_uint8 major_version;
-extern EXPORTBHAPI const b_uint8 minor_version;
-extern EXPORTBHAPI const b_uint8 micro_version;
-extern EXPORTBHAPI const b_uint8 interface_age;
-extern EXPORTBHAPI const b_uint16 binary_age;
+extern EXPORTBHAPI const  __be_uint8 major_version;
+extern EXPORTBHAPI const  __be_uint8 minor_version;
+extern EXPORTBHAPI const  __be_uint8 micro_version;
+extern EXPORTBHAPI const  __be_uint8 interface_age;
+extern EXPORTBHAPI const  __be_uint16 binary_age;
 }
 #endif
 

@@ -14,7 +14,7 @@
 #include <stack>
 
 #include <Locker.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 // token types as specified in targets

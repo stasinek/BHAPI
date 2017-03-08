@@ -5,7 +5,7 @@
 #ifndef _KERNEL_BOOT_ITEM_H
 #define _KERNEL_BOOT_ITEM_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #ifdef __cplusplus

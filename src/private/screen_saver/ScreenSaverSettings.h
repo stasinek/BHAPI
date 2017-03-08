@@ -8,7 +8,7 @@
 
 #include <Message.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 enum screen_corner {

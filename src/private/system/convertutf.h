@@ -12,7 +12,7 @@
 #define CONVERT_UTF_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 ssize_t utf16le_to_utf8(const uint16* source, size_t sourceCodeUnitCount,

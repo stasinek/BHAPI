@@ -7,7 +7,7 @@
 #define _KERNEL_LOW_RESOURCE_MANAGER_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 /* warning levels for low resource handlers */

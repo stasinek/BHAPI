@@ -5,7 +5,7 @@
 #ifndef _USBKIT_H
 #define _USBKIT_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <USB3.h>
 #include <USB_spec.h>
 
@@ -233,7 +233,7 @@ public:
 		uint8						Protocol() const;
 		const char *				InterfaceString() const;
 
-		const usb_interface_descriptor *
+		const usbe_interface_descriptor *
 									Descriptor() const;
 
 		// Use OtherDescriptorAt() to get generic descriptors of an interface.
@@ -290,7 +290,7 @@ friend	class BUSBConfiguration;
 		uint32						fAlternate;
 		int							fRawFD;
 
-		usb_interface_descriptor	fDescriptor;
+		usbe_interface_descriptor	fDescriptor;
 		BUSBEndpoint **				fEndpoints;
 
 mutable	uint32						fAlternateCount;

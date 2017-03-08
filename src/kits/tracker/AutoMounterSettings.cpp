@@ -41,7 +41,7 @@ All rights reserved.
 #include <ControlLook.h>
 #include <Debug.h>
 #include <LayoutBuilder.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <Message.h>
 #include <RadioButton.h>
 #include <SeparatorView.h>
@@ -70,7 +70,7 @@ AutomountSettingsPanel::AutomountSettingsPanel()
 	SettingsView(""),
 	fTarget(kMountServerSignature)
 {
-	const float spacing = be_control_look->DefaultItemSpacing();
+	const float spacing =  __be_control_look->DefaultItemSpacing();
 
 	// "Automatic Disk Mounting" group
 

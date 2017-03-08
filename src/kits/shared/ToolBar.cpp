@@ -209,7 +209,7 @@ BToolBar::FrameResized(float width, float height)
 void
 BToolBar::_Init()
 {
-	float inset = ceilf(be_control_look->DefaultItemSpacing() / 2);
+	float inset = ceilf(__be_control_look->DefaultItemSpacing() / 2);
 	GroupLayout()->SetInsets(inset, 0, inset, 0);
 	GroupLayout()->SetSpacing(1);
 

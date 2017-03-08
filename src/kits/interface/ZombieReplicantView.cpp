@@ -9,7 +9,7 @@
 #include <Alert.h>
 #include <Message.h>
 #include <MimeType.h>
-#include <String.h>
+#include <StringClass.h>
 #include <SystemCatalog.h>
 
 #include "ZombieReplicantView.h"
@@ -34,7 +34,7 @@ _BZombieReplicantView_::_BZombieReplicantView_(BRect frame, status_t error)
 	BBox(frame, "<Zombie>", B_FOLLOW_NONE, B_WILL_DRAW),
 	fError(error)
 {
-	BFont font(be_bold_font);
+	BFont font(__be_bold_font);
 	font.SetSize(9.0f); // TODO
 	SetFont(&font);
 	SetViewColor(kZombieColor);

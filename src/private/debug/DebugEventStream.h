@@ -5,7 +5,7 @@
 #ifndef _DEBUG_EVENT_STREAM_H
 #define _DEBUG_EVENT_STREAM_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BDataIO;

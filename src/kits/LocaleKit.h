@@ -19,7 +19,7 @@
 #include <IntegerFormatImpl.h>
 #include <IntegerFormatParameters.h>
 #include <Language.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <NumberFormat.h>
 #include <NumberFormatParameters.h>
 #include <TimeFormat.h>

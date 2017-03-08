@@ -90,8 +90,8 @@ class IMPEXPBHAPI BView : public BHandler {
 public:
     BView(BRect frame,
           const char *name,
-          b_uint32 resizingMode,
-          b_uint32 flags);
+           __be_uint32 resizingMode,
+           __be_uint32 flags);
     virtual ~BView();
 
     virtual void	MessageReceived(BMessage *msg);
@@ -99,8 +99,8 @@ public:
     void		AddChild(BView *child, BView *childNextSibling = NULL);
     bool		RemoveChild(BView *child);
     bool		RemoveSelf();
-    b_int32		CountChildren() const;
-    BView		*ChildAt(b_int32 index) const;
+     __be_int32		CountChildren() const;
+    BView		*ChildAt(__be_int32 index) const;
 
     BView		*NextSibling() const;
     BView		*PreviousSibling() const;
@@ -130,10 +130,10 @@ public:
     virtual void	DrawAfterChildren(BRect updateRect);
     virtual void	MouseDown(BPoint where);
     virtual void	MouseUp(BPoint where);
-    virtual void	MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message);
+    virtual void	MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message);
     virtual void	WindowActivated(bool state);
-    virtual void	KeyDown(const char *bytes, b_int32 numBytes);
-    virtual void	KeyUp(const char *bytes, b_int32 numBytes);
+    virtual void	KeyDown(const char *bytes,  __be_int32 numBytes);
+    virtual void	KeyUp(const char *bytes,  __be_int32 numBytes);
     virtual void	Pulse();
     virtual void	FrameMoved(BPoint new_position);
     virtual void	FrameResized(float new_width, float new_height);
@@ -191,22 +191,22 @@ public:
     void		ConvertFromWindow(BRegion *region) const;
     BRegion		ConvertFromWindow(const BRegion &region) const;
 
-    b_status_t	SetEventMask(b_uint32 mask, b_uint32 options = 0);
-    b_uint32		EventMask() const;
-    b_status_t	GetMouse(BPoint *location, b_int32 *buttons, bool checkMessageQueue = true);
-    bool		QueryCurrentMouse(bool pushed, b_int32 buttons, bool btnsAlone = true, b_int32 *clicks = NULL) const;
+    status_t	SetEventMask(__be_uint32 mask,  __be_uint32 options = 0);
+     __be_uint32		EventMask() const;
+    status_t	GetMouse(BPoint *location,  __be_int32 *buttons, bool checkMessageQueue = true);
+    bool		QueryCurrentMouse(bool pushed,  __be_int32 buttons, bool btnsAlone = true,  __be_int32 *clicks = NULL) const;
 
     // Next KeyUp(B_KEYBOARD_EVENTS) or MouseUp(B_POINTER_EVENTS) will restore the previous general event_mask.
     // If the current message isn't B_KEY_DOWN(B_UNMAPPED_KEY_DOWN) or B_MOUSE_DOWN, B_ERROR is return.
     // That's means: you should use this funtion within "KeyDown" or "MouseDown" etc...
     // The argument "mask" should not be "0" or any union.
     // That's means: you should not pass "mask" with "E_KEYBOARD_EVENTS | B_POINTER_EVENTS".
-    b_status_t	SetPrivateEventMask(b_uint32 mask, b_uint32 options = 0);
+    status_t	SetPrivateEventMask(__be_uint32 mask,  __be_uint32 options = 0);
 
-    virtual void	SetFlags(b_uint32 flags);
-    b_uint32		Flags() const;
-    virtual void	SetResizingMode(b_uint32 mode);
-    b_uint32		ResizingMode() const;
+    virtual void	SetFlags(__be_uint32 flags);
+     __be_uint32		Flags() const;
+    virtual void	SetResizingMode(__be_uint32 mode);
+     __be_uint32		ResizingMode() const;
     void		MoveBy(float dh, float dv);
     void		MoveTo(BPoint where);
     void		MoveTo(float x, float y);
@@ -230,15 +230,15 @@ public:
     float		PenSize() const;
 
     virtual void	SetViewColor(bhapi::rgb_color c);
-    void		SetViewColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
+    void		SetViewColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a = 255);
     bhapi::rgb_color	ViewColor() const;
 
     virtual void	SetHighColor(bhapi::rgb_color c);
-    void		SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
+    void		SetHighColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a = 255);
     bhapi::rgb_color	HighColor() const;
 
     virtual void	SetLowColor(bhapi::rgb_color c);
-    void		SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
+    void		SetLowColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a = 255);
     bhapi::rgb_color	LowColor() const;
 
     void		PushState();
@@ -251,15 +251,15 @@ public:
     void		SetSquarePointStyle(bool state);
     bool		IsSquarePointStyle() const;
     void		StrokePoint(BPoint pt, bhapi::pattern p = B_SOLID_HIGH);
-    void		StrokePoints(const BPoint *pts, b_int32 count, const b_uint8 *alpha = NULL, bhapi::pattern p = B_SOLID_HIGH);
+    void		StrokePoints(const BPoint *pts,  __be_int32 count, const  __be_uint8 *alpha = NULL, bhapi::pattern p = B_SOLID_HIGH);
 
     void		StrokeLine(BPoint pt, bhapi::pattern p = B_SOLID_HIGH);
     void		StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern p = B_SOLID_HIGH);
 
     void		StrokePolygon(const BPolygon *aPolygon, bool closed = true, bhapi::pattern p = B_SOLID_HIGH);
-    void		StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed = true, bhapi::pattern p = B_SOLID_HIGH);
+    void		StrokePolygon(const BPoint *ptArray,  __be_int32 numPts, bool closed = true, bhapi::pattern p = B_SOLID_HIGH);
     void		FillPolygon(const BPolygon *aPolygon, bhapi::pattern p = B_SOLID_HIGH);
-    void		FillPolygon(const BPoint *ptArray, b_int32 numPts, bhapi::pattern p = B_SOLID_HIGH);
+    void		FillPolygon(const BPoint *ptArray,  __be_int32 numPts, bhapi::pattern p = B_SOLID_HIGH);
 
     void		StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p = B_SOLID_HIGH);
     void		FillTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p = B_SOLID_HIGH);
@@ -267,8 +267,8 @@ public:
     void		StrokeRect(BRect r, bhapi::pattern p = B_SOLID_HIGH);
     void		FillRect(BRect r, bhapi::pattern p = B_SOLID_HIGH);
 
-    void		StrokeRects(const BRect *rects, b_int32 count, bhapi::pattern p = B_SOLID_HIGH);
-    void		FillRects(const BRect *rects, b_int32 count, bhapi::pattern p = B_SOLID_HIGH);
+    void		StrokeRects(const BRect *rects,  __be_int32 count, bhapi::pattern p = B_SOLID_HIGH);
+    void		FillRects(const BRect *rects,  __be_int32 count, bhapi::pattern p = B_SOLID_HIGH);
     void		FillRegion(const BRegion *region, bhapi::pattern p = B_SOLID_HIGH);
 
     void		StrokeRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
@@ -284,12 +284,12 @@ public:
     void		FillEllipse(BPoint ctPt, float xRadius, float yRadius, bhapi::pattern p = B_SOLID_HIGH);
     void		FillEllipse(BRect r, bhapi::pattern p = B_SOLID_HIGH);
 
-    void		DrawString(const char *aString, b_int32 length = -1, float tabWidth = 0);
-    void		DrawString(const char *aString, BPoint location, b_int32 length = -1, float tabWidth = 0);
-    void		DrawString(const char *aString, b_int32 length, BPoint location, float tabWidth = 0);
+    void		DrawString(const char *aString,  __be_int32 length = -1, float tabWidth = 0);
+    void		DrawString(const char *aString, BPoint location,  __be_int32 length = -1, float tabWidth = 0);
+    void		DrawString(const char *aString,  __be_int32 length, BPoint location, float tabWidth = 0);
 
-    virtual void	SetFont(const BFont *font, b_uint8 mask = B_FONT_ALL);
-    void		SetFont(const font_desc *fontDesc, b_uint8 mask = B_FONT_ALL);
+    virtual void	SetFont(const BFont *font,  __be_uint8 mask = B_FONT_ALL);
+    void		SetFont(const font_desc *fontDesc,  __be_uint8 mask = B_FONT_ALL);
     void		GetFont(BFont *font) const;
     void		SetFontSize(float size);
     void		GetFontHeight(font_height *height) const;
@@ -332,35 +332,35 @@ private:
 
     void *fStates;
 
-    b_uint32 fViewFlags;
+     __be_uint32 fViewFlags;
     bhapi::rgb_color fViewColor;
     bool fForceFontAliasing;
     BRegion fClippingTemp;
     bool fMouseInside;
 
     BList fScrollBar;
-    b_bigtime_t fScrollTimeStamp;
+    bigtime_t fScrollTimeStamp;
 
     bool fMouseGrabbed;
     bool fKeyboardGrabbed;
     bool fEventStored;
-    b_uint32 fEventMaskStored;
-    b_uint32 fEventOptionsStored;
-    b_uint32 fEventMask;
-    b_uint32 fEventOptions;
+     __be_uint32 fEventMaskStored;
+     __be_uint32 fEventOptionsStored;
+     __be_uint32 fEventMask;
+     __be_uint32 fEventOptions;
 
     void AttachToWindow();
     void DetachFromWindow();
-    void DrawStringInDirectlyMode(const char *aString, BPoint location, b_int32 length);
-    void DrawStringInPixmapMode(const char *aString, BPoint location, b_int32 length);
+    void DrawStringInDirectlyMode(const char *aString, BPoint location,  __be_int32 length);
+    void DrawStringInPixmapMode(const char *aString, BPoint location,  __be_int32 length);
 
-    b_status_t _SetEventMask(b_uint32 mask, b_uint32 options);
-    void _Expose(BRegion region, b_bigtime_t when);
+    status_t _SetEventMask(__be_uint32 mask,  __be_uint32 options);
+    void _Expose(BRegion region, bigtime_t when);
 
     void _UpdateVisibleRegion();
     void _FrameChanged(BRect oldFrame, BRect newFrame);
 
-    void InitSelf(BRect, b_uint32, b_uint32);
+    void InitSelf(BRect,  __be_uint32,  __be_uint32);
 };
 
 #endif /* __cplusplus */

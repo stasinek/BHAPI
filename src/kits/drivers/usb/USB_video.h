@@ -11,7 +11,7 @@
 // Based on specification for UVC version 1.5.
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #define USB_VIDEO_DEVICE_CLASS 			0x0E

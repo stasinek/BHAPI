@@ -7,7 +7,7 @@
 
 
 #include <SecureSocket.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 class BCertificate {

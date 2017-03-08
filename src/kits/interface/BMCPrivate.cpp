@@ -198,7 +198,7 @@ _BMCMenuBar_::Draw(BRect updateRect)
 	if (IsFocus())
 		flags |= BControlLook::B_FOCUSED;
 
-	be_control_look->DrawMenuFieldBackground(this, rect,
+	__be_control_look->DrawMenuFieldBackground(this, rect,
 		updateRect, base, fShowPopUpMarker, flags);
 
 	_DrawItems(updateRect);
@@ -343,8 +343,8 @@ _BMCMenuBar_::_Init()
 	bottom--;
 #endif
 
-	if (be_control_look != NULL)
-		left = right = be_control_look->DefaultLabelSpacing();
+	if (__be_control_look != NULL)
+		left = right =  __be_control_look->DefaultLabelSpacing();
 
 	SetItemMargins(left, top,
 		right + fShowPopUpMarker ? kPopUpIndicatorWidth : 0, bottom);

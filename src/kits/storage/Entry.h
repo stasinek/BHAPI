@@ -45,12 +45,12 @@ public:
     BEntry(const BEntry &entry);
     virtual ~BEntry();
 
-	b_status_t	SetTo(const char *dir, const char *leaf, bool traverse = false);
-	b_status_t	SetTo(const BDirectory *dir, const char *leaf, bool traverse = false);
-	b_status_t	SetTo(const char *path, bool traverse = false);
+	status_t	SetTo(const char *dir, const char *leaf, bool traverse = false);
+	status_t	SetTo(const BDirectory *dir, const char *leaf, bool traverse = false);
+	status_t	SetTo(const char *path, bool traverse = false);
 	void		Unset();
 
-	b_status_t	InitCheck() const;
+	status_t	InitCheck() const;
 
 	bool		Exists() const;
 	bool		IsHidden() const;
@@ -59,20 +59,20 @@ public:
 	bool		IsDirectory() const;
 	bool		IsSymLink() const;
 
-    b_status_t	GetSize(b_int64 *file_size) const;
-    b_status_t	GetModificationTime(b_bigtime_t *time) const;
-    b_status_t	GetCreationTime(b_bigtime_t *time) const;
-    b_status_t	GetAccessTime(b_bigtime_t *time) const;
+    status_t	GetSize(__be_int64 *file_size) const;
+    status_t	GetModificationTime(bigtime_t *time) const;
+    status_t	GetCreationTime(bigtime_t *time) const;
+    status_t	GetAccessTime(bigtime_t *time) const;
 
 	const char	*Name() const;
-	b_status_t	GetName(char *buffer, size_t bufferSize) const;
+	status_t	GetName(char *buffer, size_t bufferSize) const;
 
 	const char	*Path() const;
-    b_status_t	GetPath(BPath *path) const;
+    status_t	GetPath(BPath *path) const;
 
-    b_status_t	GetParent(BEntry *entry) const;
-    b_status_t	GetParent(BPath *path) const;
-	b_status_t	GetParent(BDirectory *dir) const;
+    status_t	GetParent(BEntry *entry) const;
+    status_t	GetParent(BPath *path) const;
+	status_t	GetParent(BDirectory *dir) const;
 
     bool		operator==(const BEntry &entry) const;
     bool		operator!=(const BEntry &entry) const;

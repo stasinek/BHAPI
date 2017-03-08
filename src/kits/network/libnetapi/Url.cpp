@@ -701,7 +701,7 @@ BUrl::OpenWithPreferredApplication(bool onProblemAskUser) const
 		printf("HasPreferredApplication() == false\n");
 #endif
 
-	status_t status = be_roster->Launch(_UrlMimeType().String(), 1, argv+1);
+	status_t status =  __be_roster->Launch(_UrlMimeType().String(), 1, argv+1);
 	if (status != B_OK) {
 #if DEBUG
 		fprintf(stderr, "Opening URL failed: %s\n", strerror(status));

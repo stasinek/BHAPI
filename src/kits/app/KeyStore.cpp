@@ -419,7 +419,7 @@ BKeyStore::_SendKeyMessage(BMessage& message, BMessage* reply) const
 	BMessenger messenger(kKeyStoreServerSignature);
 	if (!messenger.IsValid()) {
 		// Try to start the keystore server.
-		status_t result = be_roster->Launch(kKeyStoreServerSignature);
+		status_t result =  __be_roster->Launch(kKeyStoreServerSignature);
 		if (result != B_OK && result != B_ALREADY_RUNNING)
 			return B_ERROR;
 

@@ -3,7 +3,7 @@
 
 #include <Archivable.h>
 #include <Message.h>
-#include <String.h>
+#include <StringClass.h>
 
 class BLocale;
 

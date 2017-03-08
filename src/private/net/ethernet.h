@@ -6,7 +6,7 @@
 #define ETHERNET_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #define ETHER_ADDRESS_LENGTH	6

@@ -7,7 +7,7 @@
 
 
 #include <Archivable.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include "ObjectID.h"
 

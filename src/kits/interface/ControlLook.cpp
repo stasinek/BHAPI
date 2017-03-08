@@ -18,7 +18,7 @@
 #include <LayoutUtils.h>
 #include <Region.h>
 #include <Shape.h>
-#include <String.h>
+#include <StringClass.h>
 #include <View.h>
 #include <Window.h>
 
@@ -57,14 +57,14 @@ BControlLook::DefaultLabelAlignment() const
 float
 BControlLook::DefaultLabelSpacing() const
 {
-	return ceilf(be_plain_font->Size() / 2.0);
+	return ceilf(__be_plain_font->Size() / 2.0);
 }
 
 
 float
 BControlLook::DefaultItemSpacing() const
 {
-	return ceilf(be_plain_font->Size() * 0.85);
+	return ceilf(__be_plain_font->Size() * 0.85);
 }
 
 
@@ -74,15 +74,15 @@ BControlLook::ComposeSpacing(float spacing)
 	switch ((int)spacing) {
 		case B_USE_DEFAULT_SPACING:
 		case B_USE_ITEM_SPACING:
-			return be_control_look->DefaultItemSpacing();
+			return  __be_control_look->DefaultItemSpacing();
 		case B_USE_HALF_ITEM_SPACING:
-			return ceilf(be_control_look->DefaultItemSpacing() * 0.5f);
+			return ceilf(__be_control_look->DefaultItemSpacing() * 0.5f);
 		case B_USE_WINDOW_SPACING:
-			return be_control_look->DefaultItemSpacing();
+			return  __be_control_look->DefaultItemSpacing();
 		case B_USE_SMALL_SPACING:
-			return ceilf(be_control_look->DefaultItemSpacing() * 0.7f);
+			return ceilf(__be_control_look->DefaultItemSpacing() * 0.7f);
 		case B_USE_BIG_SPACING:
-			return ceilf(be_control_look->DefaultItemSpacing() * 1.3f);
+			return ceilf(__be_control_look->DefaultItemSpacing() * 1.3f);
 	}
 
 	return spacing;
@@ -3537,7 +3537,7 @@ BControlLook::_RadioButtonAndCheckBoxMarkColor(const rgb_color& base,
 
 // NOTE: May come from a add-on in the future. Initialized in
 // InterfaceDefs.cpp
-BControlLook* be_control_look = NULL;
+BControlLook*  __be_control_look = NULL;
 
 
 } // namespace BPrivate

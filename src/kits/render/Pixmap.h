@@ -39,46 +39,46 @@
 class IMPEXPBHAPI BPixmap : public BRender {
 public:
     BPixmap();
-    BPixmap(b_uint32 width, b_uint32 height, bhapi::color_space space);
+    BPixmap(__be_uint32 width,  __be_uint32 height, bhapi::color_space space);
     BPixmap(BRect bounds, bhapi::color_space space);
     virtual ~BPixmap();
 
 	void*		Bits() const;
-    b_uint32		BitsLength() const;
-    b_uint32		BytesPerRow() const;
+     __be_uint32		BitsLength() const;
+     __be_uint32		BytesPerRow() const;
     bhapi::color_space	ColorSpace() const;
     BRect		Bounds() const;
 	void		MakeEmpty();
 
-    bool		ResizeTo(b_uint32 width, b_uint32 height, bhapi::color_space space);
+    bool		ResizeTo(__be_uint32 width,  __be_uint32 height, bhapi::color_space space);
     bool		ResizeTo(BRect bounds, bhapi::color_space space);
 
-    void		SetBits(const void *data, b_int32 length, b_int32 offset, bhapi::color_space space);
+    void		SetBits(const void *data,  __be_int32 length,  __be_int32 offset, bhapi::color_space space);
 
-    void		SetPixel(b_int32 x, b_int32 y, bhapi::rgb_color color);
-    bhapi::rgb_color	GetPixel(b_int32 x, b_int32 y) const;
+    void		SetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color);
+    bhapi::rgb_color	GetPixel(__be_int32 x,  __be_int32 y) const;
 
 	void		DrawXPM(const char **xpm_data,
-                b_int32 destX, b_int32 destY,
-                b_int32 srcX, b_int32 srcY,
-                b_int32 srcW = -1, b_int32 srcH = -1,
-                b_uint8 alpha = 255);
+                 __be_int32 destX,  __be_int32 destY,
+                 __be_int32 srcX,  __be_int32 srcY,
+                 __be_int32 srcW = -1,  __be_int32 srcH = -1,
+                 __be_uint8 alpha = 255);
 
 private:
 	void* fPtr;
     bhapi::color_space fColorSpace;
-    b_uint32 fRows;
-    b_uint32 fColumns;
-    b_uint32 fRowBytes;
+     __be_uint32 fRows;
+     __be_uint32 fColumns;
+     __be_uint32 fRowBytes;
 
 	virtual void *AllocData(size_t size);
 	virtual void FreeData(void *data);
 
-	virtual b_status_t InitCheck() const;
-    virtual void GetFrame(b_int32 *originX, b_int32 *originY, b_uint32 *width, b_uint32 *height) const;
-    virtual void GetPixel(b_int32 x, b_int32 y, bhapi::rgb_color &color) const;
-    virtual void PutPixel(b_int32 x, b_int32 y, bhapi::rgb_color color);
-    virtual void PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::rgb_color color);
+	virtual status_t InitCheck() const;
+    virtual void GetFrame(__be_int32 *originX,  __be_int32 *originY,  __be_uint32 *width,  __be_uint32 *height) const;
+    virtual void GetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color &color) const;
+    virtual void PutPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color);
+    virtual void PutRect(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bhapi::rgb_color color);
 };
 
 #endif /* __cplusplus */

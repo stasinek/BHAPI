@@ -3,7 +3,7 @@
 #include <new>
 
 #include <Autolock.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <LocaleRoster.h>
 
 

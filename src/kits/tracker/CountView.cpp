@@ -40,7 +40,7 @@ All rights reserved.
 #include <Application.h>
 #include <Catalog.h>
 #include <ControlLook.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MessageFormat.h>
 
 #include "AutoLock.h"
@@ -198,10 +198,10 @@ BCountView::Draw(BRect updateRect)
 {
 	BRect bounds(Bounds());
 
-	be_control_look->DrawBorder(this, bounds, updateRect, ViewColor(),
+	__be_control_look->DrawBorder(this, bounds, updateRect, ViewColor(),
 		B_PLAIN_BORDER, 0,
 		BControlLook::B_BOTTOM_BORDER | BControlLook::B_LEFT_BORDER);
-	be_control_look->DrawMenuBarBackground(this, bounds, updateRect,
+	__be_control_look->DrawMenuBarBackground(this, bounds, updateRect,
 		ViewColor());
 
 	BString itemString;
@@ -289,7 +289,7 @@ BCountView::MouseDown(BPoint)
 		return;
 
 	if (!window->TargetModel()->IsRoot()) {
-		BDirMenu* menu = new BDirMenu(NULL, be_app, B_REFS_RECEIVED);
+		BDirMenu* menu = new BDirMenu(NULL,  __be_app, B_REFS_RECEIVED);
 		BEntry entry;
 		if (entry.SetTo(window->TargetModel()->EntryRef()) == B_OK)
 			menu->Populate(&entry, Window(), false, false, true, false, true);
@@ -310,7 +310,7 @@ BCountView::MouseDown(BPoint)
 void
 BCountView::AttachedToWindow()
 {
-	SetFont(be_plain_font);
+	SetFont(__be_plain_font);
 	SetFontSize(9);
 
 	SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));

@@ -47,7 +47,7 @@ All rights reserved.
 #include <Catalog.h>
 #include <GroupView.h>
 #include <GridView.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <Mime.h>
 #include <NodeInfo.h>
 #include <Path.h>
@@ -626,7 +626,7 @@ AddOneRefSignatures(const entry_ref* ref, void* castToIterator)
 	// add preferred app for file, if any
 	if (model.PreferredAppSignature()[0]) {
 		// got one, mark it as preferred for this node
-		if (be_roster->FindApp(model.PreferredAppSignature(), &preferredRef)
+		if (__be_roster->FindApp(model.PreferredAppSignature(), &preferredRef)
 				== B_OK) {
 			queryIterator->PushUniqueSignature(model.PreferredAppSignature());
 			queryIterator->TrySettingPreferredAppForFile(&preferredRef);
@@ -643,7 +643,7 @@ AddOneRefSignatures(const entry_ref* ref, void* castToIterator)
 	AddSupportingAppForTypeToQuery(queryIterator, mimeType.String());
 
 	// find the preferred app for this type
-	if (be_roster->FindApp(mimeType.String(), &preferredRef) == B_OK)
+	if (__be_roster->FindApp(mimeType.String(), &preferredRef) == B_OK)
 		queryIterator->TrySettingPreferredApp(&preferredRef);
 
 	return NULL;
@@ -1041,7 +1041,7 @@ OpenWithMenu::OpenWithMenu(const char* label, const BMessage* entriesToOpen,
 {
 	InitIconPreloader();
 
-	SetFont(be_plain_font);
+	SetFont(__be_plain_font);
 
 	// too long to have triggers
 	SetTriggersEnabled(false);
@@ -1061,7 +1061,7 @@ OpenWithMenu::OpenWithMenu(const char* label, const BMessage* entriesToOpen,
 {
 	InitIconPreloader();
 
-	SetFont(be_plain_font);
+	SetFont(__be_plain_font);
 
 	// too long to have triggers
 	SetTriggersEnabled(false);
@@ -1613,7 +1613,7 @@ SearchForSignatureEntryList::CanOpenWithFilter(const Model* appModel,
 			PRINT(("filtering out %s, sig %s, active Tracker at %s, "
 				   "result %s, refName %s\n",
 				path1.Path(), signature, path2.Path(),
-				strerror(be_roster->GetActiveAppInfo(&trackerInfo)),
+				strerror(__be_roster->GetActiveAppInfo(&trackerInfo)),
 				trackerInfo.ref.name));
 #endif
 			return false;

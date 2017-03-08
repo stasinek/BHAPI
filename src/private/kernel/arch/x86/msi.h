@@ -1,7 +1,7 @@
 #ifndef _KERNEL_ARCH_x86_MSI_H
 #define _KERNEL_ARCH_x86_MSI_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 // address register
 #define MSI_ADDRESS_BASE				0xfee00000

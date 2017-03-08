@@ -6,7 +6,7 @@
 #define KERNEL_BOOT_ARCH_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <boot/elf.h>
 
 

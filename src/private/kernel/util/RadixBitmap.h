@@ -34,7 +34,7 @@
 #define _KERNEL_UTIL_RADIX_BITMAP_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 typedef uint32 radix_slot_t;

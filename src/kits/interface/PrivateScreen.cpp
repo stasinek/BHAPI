@@ -115,7 +115,7 @@ BPrivateScreen*
 BPrivateScreen::_Get(int32 id, bool check)
 {
 	// Nothing works without an app_server connection
-	if (be_app == NULL)
+	if (__be_app == NULL)
 		return NULL;
 
 	Screens* screens = Screens::Default();

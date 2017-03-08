@@ -1,7 +1,7 @@
 #ifndef CHARACTER_SET_ROSTER_H
 #define CHARACTER_SET_ROSTER_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <Messenger.h>
 
 namespace BPrivate {

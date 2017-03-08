@@ -14,7 +14,7 @@
 #include <Flattenable.h>
 #include <Notification.h>
 #include <Roster.h>
-#include <String.h>
+#include <StringClass.h>
 
 class BMessage;
 class NotificationReceived;

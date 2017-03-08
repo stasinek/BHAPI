@@ -6,7 +6,7 @@
 #include <Message.h>
 #include <Midi2Defs.h>
 #include <OS.h>
-#include <String.h>
+#include <StringClass.h>
 
 class BMidiProducer;
 class BMidiConsumer;

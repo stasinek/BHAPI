@@ -6,7 +6,7 @@
 #define BOOT_NET_ISCSITARGET_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <util/kernel_cpp.h>
 
 #include <boot/platform.h>

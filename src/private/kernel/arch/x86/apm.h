@@ -5,7 +5,7 @@
 #ifndef KERNEL_APM_H
 #define KERNEL_APM_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <arch/x86/apm_defs.h>
 

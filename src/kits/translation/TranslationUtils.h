@@ -7,7 +7,7 @@
 
 
 #include <GraphicsDefs.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <TranslationDefs.h>
 
 

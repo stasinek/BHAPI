@@ -23,11 +23,11 @@ BUrlProtocolAsynchronousListener::BUrlProtocolAsynchronousListener(
 	BUrlProtocolListener(),
 	fSynchronousListener(NULL)
 {
-	if (be_app->Lock()) {
-		be_app->AddHandler(this);
-		be_app->Unlock();
+	if (__be_app->Lock()) {
+		__be_app->AddHandler(this);
+		__be_app->Unlock();
 	} else
-		PRINT(("Cannot lock be_app\n"));
+		PRINT(("Cannot lock  __be_app\n"));
 
 	if (transparent) {
 		fSynchronousListener
@@ -38,9 +38,9 @@ BUrlProtocolAsynchronousListener::BUrlProtocolAsynchronousListener(
 
 BUrlProtocolAsynchronousListener::~BUrlProtocolAsynchronousListener()
 {
-	if (be_app->Lock()) {
-		be_app->RemoveHandler(this);
-		be_app->Unlock();
+	if (__be_app->Lock()) {
+		__be_app->RemoveHandler(this);
+		__be_app->Unlock();
 	}
 	delete fSynchronousListener;
 }

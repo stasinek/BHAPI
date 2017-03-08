@@ -15,7 +15,7 @@
 #include <unicode/gregocal.h>
 #include <unicode/utypes.h>
 
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <LocaleRoster.h>
 #include <TimeZone.h>
 

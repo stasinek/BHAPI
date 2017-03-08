@@ -34,7 +34,7 @@ THE SOFTWARE.
 #include <File.h>
 #include <FindDirectory.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 
 // implementation of class PrintTransport
 PrintTransport::PrintTransport()

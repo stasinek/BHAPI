@@ -6,7 +6,7 @@
 #define KERNEL_BOOT_DISK_IDENTIFIER_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 enum bus_types {

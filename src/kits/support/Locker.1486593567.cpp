@@ -65,14 +65,14 @@ BLocker::Unlock()
 }
 
 
-b_status_t
-BLocker::LockWithTimeout(b_bigtime_t microseconds)
+status_t
+BLocker::LockWithTimeout(bigtime_t microseconds)
 {
 	return bhapi_lock_locker_etc(fLocker, B_TIMEOUT, microseconds);
 }
 
 
-b_int64
+be_int64
 BLocker::CountLocks() const
 {
 	return bhapi_count_locker_locks(fLocker);

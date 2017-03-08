@@ -14,7 +14,7 @@
 #include <algorithm>
 
 #include <Errors.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <new>
 

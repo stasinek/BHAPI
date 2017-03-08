@@ -6,7 +6,7 @@
 #ifndef _KERNEL_OPEN_FIRMWARE_DEVICES_H
 #define _KERNEL_OPEN_FIRMWARE_DEVICES_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #ifdef __cplusplus
 extern "C" {

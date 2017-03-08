@@ -4,7 +4,7 @@
 #ifndef _TOUCHPAD_DRIVER_H
 #define _TOUCHPAD_DRIVER_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <Drivers.h>
 
 #ifdef __cplusplus

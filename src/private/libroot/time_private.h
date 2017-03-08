@@ -11,7 +11,7 @@
 #include <sys/time.h>
 #include <time.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <new>
 

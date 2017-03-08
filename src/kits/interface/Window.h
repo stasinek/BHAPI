@@ -105,14 +105,14 @@ public:
     BWindow(BRect frame,
         const char *title,
         bhapi::window_type type,
-        b_uint32 flags,
-        b_uint32 workspace = B_CURRENT_WORKSPACE);
+         __be_uint32 flags,
+         __be_uint32 workspace = B_CURRENT_WORKSPACE);
     BWindow(BRect frame,
         const char *title,
         bhapi::window_look look,
         bhapi::window_feel feel,
-        b_uint32 flags,
-        b_uint32 workspace = B_CURRENT_WORKSPACE);
+         __be_uint32 flags,
+         __be_uint32 workspace = B_CURRENT_WORKSPACE);
     virtual ~BWindow();
 
     virtual void	DispatchMessage(BMessage *msg, BHandler *target);
@@ -128,15 +128,15 @@ public:
     void		Activate(bool state = true);
     bool		IsActivate() const;
 
-    b_status_t	SendBehind(const BWindow *window);
+    status_t	SendBehind(const BWindow *window);
 
     BRect		Bounds() const;
     BRect		Frame() const;
 
     void		AddChild(BView *child, BView *childNextSibling = NULL);
     bool		RemoveChild(BView *child);
-    b_int32		CountChildren() const;
-    BView		*ChildAt(b_int32 index) const;
+     __be_int32		CountChildren() const;
+    BView		*ChildAt(__be_int32 index) const;
 
     void		ConvertToScreen(BPoint* pt) const;
     BPoint		ConvertToScreen(BPoint pt) const;
@@ -163,8 +163,8 @@ public:
     virtual void	WindowActivated(bool state);
     virtual void	FrameMoved(BPoint new_position);
     virtual void	FrameResized(float new_width, float new_height);
-    virtual void	WorkspacesChanged(b_uint32 old_ws, b_uint32 new_ws);
-    virtual void	WorkspaceActivated(b_int32 ws, bool state);
+    virtual void	WorkspacesChanged(__be_uint32 old_ws,  __be_uint32 new_ws);
+    virtual void	WorkspaceActivated(__be_int32 ws, bool state);
     // Empty functions END
 
     void		Invalidate(BRect invalRect, bool redraw = true);
@@ -178,32 +178,32 @@ public:
     BView		*CurrentFocus() const;
 
     virtual void	SetBackgroundColor(bhapi::rgb_color c);
-    void		SetBackgroundColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
+    void		SetBackgroundColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a = 255);
     bhapi::rgb_color	BackgroundColor() const;
 
     void		SetTitle(const char *title);
     const char*	Title() const;
 
-    b_status_t	SetType(bhapi::window_type type);
+    status_t	SetType(bhapi::window_type type);
     bhapi::window_type	Type() const;
 
-    b_status_t	SetLook(bhapi::window_look look);
+    status_t	SetLook(bhapi::window_look look);
     bhapi::window_look	Look() const;
 
-    b_status_t	SetFeel(bhapi::window_feel feel);
+    status_t	SetFeel(bhapi::window_feel feel);
     bhapi::window_feel	Feel() const;
 
-    b_status_t	SetFlags(b_uint32 flags);
-    b_uint32		Flags() const;
+    status_t	SetFlags(__be_uint32 flags);
+     __be_uint32		Flags() const;
 
-    void		SetWorkspaces(b_uint32 workspace);
-    b_uint32		Workspaces() const;
+    void		SetWorkspaces(__be_uint32 workspace);
+     __be_uint32		Workspaces() const;
 
     void		SetSizeLimits(float min_h, float max_h, float min_v, float max_v);
     void		GetSizeLimits(float *min_h, float *max_h, float *min_v, float *max_v) const;
 
-    void		SetPulseRate(b_bigtime_t rate);
-    b_bigtime_t	PulseRate() const;
+    void		SetPulseRate(bigtime_t rate);
+    bigtime_t	PulseRate() const;
 
 protected:
     bool GrabMouse();
@@ -227,8 +227,8 @@ private:
     char *fWindowTitle;
     bhapi::window_look fWindowLook;
     bhapi::window_feel fWindowFeel;
-    b_uint32 fWindowFlags;
-    b_uint32 fWindowWorkspaces;
+     __be_uint32 fWindowFlags;
+     __be_uint32 fWindowWorkspaces;
 
     BView *fFocus;
     BList fMouseInterestedViews;
@@ -238,15 +238,15 @@ private:
     static void AddViewChildrenToHandlersList(BWindow *win, BView *child);
     static void RemoveViewChildrenFromHandlersList(BWindow *win, BView *child);
 
-    b_int64 fUpdateHolderThreadId;
-    b_int64 fUpdateHolderCount;
+     __be_int64 fUpdateHolderThreadId;
+     __be_int64 fUpdateHolderCount;
     BRect fUpdateRect;
     BRect fExposeRect;
     bool fInUpdate;
 
     void _Update(BRect rect, bool force_update);
-    void _Expose(BRect rect, b_bigtime_t when);
-    void _UpdateIfNeeded(b_bigtime_t when);
+    void _Expose(BRect rect, bigtime_t when);
+    void _UpdateIfNeeded(bigtime_t when);
     bool InUpdate() const;
 
     bool _HasResizeMessage(bool setBrokeOnExpose);
@@ -254,12 +254,12 @@ private:
     bool fMinimized;
     bool fActivated;
 
-    b_bigtime_t fActivatedTimeStamp;
-    b_bigtime_t fPositionChangedTimeStamp;
-    b_bigtime_t fSizeChangedTimeStamp;
+    bigtime_t fActivatedTimeStamp;
+    bigtime_t fPositionChangedTimeStamp;
+    bigtime_t fSizeChangedTimeStamp;
 
-    b_uint32 fMouseGrabCount;
-    b_uint32 fKeyboardGrabCount;
+     __be_uint32 fMouseGrabCount;
+     __be_uint32 fKeyboardGrabCount;
     bool _GrabMouse();
     bool _GrabKeyboard();
     void _UngrabMouse();
@@ -267,11 +267,11 @@ private:
 
     bool fBrokeOnExpose;
 
-    b_bigtime_t fPulseRate;
+    bigtime_t fPulseRate;
     BMessageRunner *fPulseRunner;
     BList fNeededToPulseViews;
 
-    void InitSelf(BRect, const char*, bhapi::window_look, bhapi::window_feel, b_uint32, b_uint32);
+    void InitSelf(BRect, const char*, bhapi::window_look, bhapi::window_feel,  __be_uint32,  __be_uint32);
 };
 
 #endif /* __cplusplus */

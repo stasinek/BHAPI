@@ -30,9 +30,9 @@
 #include "ByteOrder.h"
 #include "../support/Errors.h"
 
-IMPEXPBHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, bhapi::swap_action action)
+IMPEXPBHAPI status_t b_swap_data(type_code type, void *_data, size_t len, bhapi::swap_action action)
 {
-	b_status_t retVal = B_BAD_VALUE;
+	status_t retVal = B_BAD_VALUE;
 
 	if(_data == NULL || len == 0) return B_BAD_VALUE;
 
@@ -66,7 +66,7 @@ IMPEXPBHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, bh
 		case B_UINT16_TYPE:
 			if(len % 2 == 0)
 			{
-				b_uint16 *data = (b_uint16*)_data;
+				__be_uint16 *data = (__be_uint16*)_data;
 				for(len = len / 2; len > 0; len--, data++) *data = B_SWAP_INT16(*data);
 				retVal = B_OK;
 			}
@@ -76,7 +76,7 @@ IMPEXPBHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, bh
 		case B_UINT32_TYPE:
 			if(len % 4 == 0)
 			{
-				b_uint32 *data = (b_uint32*)_data;
+				__be_uint32 *data = (__be_uint32*)_data;
 				for(len = len / 4; len > 0; len--, data++) *data = B_SWAP_INT32(*data);
 				retVal = B_OK;
 			}
@@ -86,7 +86,7 @@ IMPEXPBHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, bh
 		case B_UINT64_TYPE:
 			if(len % 8 == 0)
 			{
-				b_uint64 *data = (b_uint64*)_data;
+				__be_uint64 *data = (__be_uint64*)_data;
 				for(len = len / 8; len > 0; len--, data++) *data = B_SWAP_INT64(*data);
 				retVal = B_OK;
 			}
@@ -125,7 +125,7 @@ IMPEXPBHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, bh
 }
 
 
-IMPEXPBHAPI bool bhapi::is_type_swapped(b_type_code type)
+IMPEXPBHAPI bool bhapi::is_type_swapped(type_code type)
 {
 	switch(type)
 	{
@@ -142,7 +142,7 @@ IMPEXPBHAPI bool bhapi::is_type_swapped(b_type_code type)
 		case B_MESSENGER_TYPE:
 		case B_POINTER_TYPE:
 		case B_SIZE_T_TYPE:
-		case B_b_size_t_TYPE:
+		case B_be_size_t_TYPE:
 		case B_STRING_TYPE:
 		case B_UINT64_TYPE:
 		case B_UINT32_TYPE:
@@ -163,7 +163,7 @@ IMPEXPBHAPI bool bhapi::is_type_swapped(b_type_code type)
 IMPEXPBHAPI float b_swap_float(float value)
 {
 #if SIZEOF_FLOAT == 4
-	b_int32 v;
+	__be_int32 v;
 	memcpy(&v, &value, 4);
 	v = B_SWAP_INT32(v);
 	memcpy(&value, &v, 4);
@@ -177,7 +177,7 @@ IMPEXPBHAPI float b_swap_float(float value)
 IMPEXPBHAPI double b_swap_double(double value)
 {
 #if SIZEOF_DOUBLE == 8
-	b_int64 v;
+	__be_int64 v;
 	memcpy(&v, &value, 8);
 	v = B_SWAP_INT64(v);
 	memcpy(&value, &v, 8);

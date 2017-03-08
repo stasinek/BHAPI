@@ -5,7 +5,7 @@
 #ifndef _DISK_DEVICE_JOB_H
 #define _DISK_DEVICE_JOB_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 namespace BPrivate {

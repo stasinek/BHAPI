@@ -31,29 +31,29 @@
 #include "Cursor.h"
 
 namespace bhapi {
-static b_uint32 get_cursor_data_bits_length(const b_uint8 *data);
-static b_uint32 get_cursor_data_length(const b_uint8 *data);
-static void* duplicate_cursor_data(const b_uint8 *data);
+static  __be_uint32 get_cursor_data_bits_length(const  __be_uint8 *data);
+static  __be_uint32 get_cursor_data_length(const  __be_uint8 *data);
+static void* duplicate_cursor_data(const  __be_uint8 *data);
 } /* namespace */
 
 
 
-static b_uint32 bhapi::get_cursor_data_bits_length(const b_uint8 *data)
+static  __be_uint32 bhapi::get_cursor_data_bits_length(const  __be_uint8 *data)
 {
 	if(data == NULL || data[0] == 0 || data[1] > 32) return 0;
-	b_uint32 rowBytes = (((b_uint32)data[0] * (b_uint32)data[1] + 0x00000007) & 0xfffffff8) >> 3;
-	return((b_uint32)data[0] * (b_uint32)rowBytes);
+	__be_uint32 rowBytes = (((__be_uint32)data[0] * (__be_uint32)data[1] + 0x00000007) & 0xfffffff8) >> 3;
+	return((__be_uint32)data[0] * (__be_uint32)rowBytes);
 }
 
 
-static b_uint32 bhapi::get_cursor_data_length(const b_uint8 *data)
+static  __be_uint32 bhapi::get_cursor_data_length(const  __be_uint8 *data)
 {
-	b_uint32 bits_length = bhapi::get_cursor_data_bits_length(data);
+	__be_uint32 bits_length = bhapi::get_cursor_data_bits_length(data);
 	return(bits_length > 0 ? (4 + 2 * bits_length) : 0);
 }
 
 
-static void* bhapi::duplicate_cursor_data(const b_uint8 *data)
+static void* bhapi::duplicate_cursor_data(const  __be_uint8 *data)
 {
 	size_t len = (size_t)bhapi::get_cursor_data_length(data);
 
@@ -67,14 +67,14 @@ static void* bhapi::duplicate_cursor_data(const b_uint8 *data)
 BCursor::BCursor(const void *cursorData)
 	: BArchivable()
 {
-    fData = bhapi::duplicate_cursor_data((const b_uint8*)cursorData);
+    fData = bhapi::duplicate_cursor_data((const  __be_uint8*)cursorData);
 }
 
 
 BCursor::BCursor(const BCursor &cursor)
 	: BArchivable()
 {
-    fData = bhapi::duplicate_cursor_data((const b_uint8*)cursor.fData);
+    fData = bhapi::duplicate_cursor_data((const  __be_uint8*)cursor.fData);
 }
 
 
@@ -88,7 +88,7 @@ BCursor&
 BCursor::operator=(const BCursor &from)
 {
 	if(fData) free(fData);
-    fData = bhapi::duplicate_cursor_data((const b_uint8*)from.fData);
+    fData = bhapi::duplicate_cursor_data((const  __be_uint8*)from.fData);
 	return *this;
 }
 
@@ -118,44 +118,44 @@ BCursor::Data() const
 }
 
 
-b_uint32
+be_uint32
 BCursor::DataLength() const
 {
-	return(bhapi::get_cursor_data_length((const b_uint8*)fData));
+	return(bhapi::get_cursor_data_length((const  __be_uint8*)fData));
 }
 
 
-b_uint8
+be_uint8
 BCursor::Width() const
 {
-	return(fData ? *((const b_uint8*)fData) : 0);
+	return(fData ? *((const  __be_uint8*)fData) : 0);
 }
 
 
-b_uint8
+be_uint8
 BCursor::Height() const
 {
-	return(fData ? *((const b_uint8*)fData) : 0);
+	return(fData ? *((const  __be_uint8*)fData) : 0);
 }
 
 
-b_uint8
+be_uint8
 BCursor::ColorDepth() const
 {
-	return(fData ? *((const b_uint8*)fData + 1) : 0);
+	return(fData ? *((const  __be_uint8*)fData + 1) : 0);
 }
 
 
-b_uint16
+be_uint16
 BCursor::Spot() const
 {
 	if(fData == NULL) return 0;
 
 #ifdef BHAPI_LITTLE_ENDIAN
-	return(*((b_uint16*)fData + 1));
+	return(*((__be_uint16*)fData + 1));
 #else
-	const b_uint8 *tmp = (const b_uint8*)fData + 2;
-	return((b_uint16)tmp[0] | ((b_uint16)tmp[1] << 8));
+	const  __be_uint8 *tmp = (const  __be_uint8*)fData + 2;
+	return((__be_uint16)tmp[0] | ((__be_uint16)tmp[1] << 8));
 #endif
 }
 
@@ -164,7 +164,7 @@ const void*
 BCursor::Bits() const
 {
 	if(fData == NULL) return NULL;
-	return((const void*)((const b_uint32*)fData + 1));
+	return((const void*)((const  __be_uint32*)fData + 1));
 }
 
 
@@ -172,11 +172,11 @@ const void*
 BCursor::Mask() const
 {
 	if(fData == NULL) return NULL;
-	return((const void*)((const b_uint8*)fData + 4 + bhapi::get_cursor_data_bits_length((const b_uint8*)fData)));
+	return((const void*)((const  __be_uint8*)fData + 4 + bhapi::get_cursor_data_bits_length((const  __be_uint8*)fData)));
 }
 
 
-static b_uint8 cursor_hand[] = {
+static  __be_uint8 cursor_hand[] = {
 /* size, depth */
 16, 1,
 
@@ -221,7 +221,7 @@ static b_uint8 cursor_hand[] = {
 };
 
 
-static b_uint8 cursor_hand_move[] = {
+static  __be_uint8 cursor_hand_move[] = {
 /* size, depth */
 16, 1,
 
@@ -266,7 +266,7 @@ static b_uint8 cursor_hand_move[] = {
 };
 
 
-static b_uint8 cursor_i_beam[] = {
+static  __be_uint8 cursor_i_beam[] = {
 /* size, depth */
 16, 1,
 

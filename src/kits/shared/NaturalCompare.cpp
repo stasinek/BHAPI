@@ -14,7 +14,7 @@
 #include <strings.h>
 
 #include <StorageDefs.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 namespace BPrivate {

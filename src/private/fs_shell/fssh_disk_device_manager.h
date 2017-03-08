@@ -127,7 +127,7 @@ bool		fssh_update_disk_device_job_extra_progress(fssh_disk_job_id jobID,
 					const char *info);
 bool		fssh_set_disk_device_job_error_message(fssh_disk_job_id jobID,
 					const char *message);
-uint32_t	fssh_update_disk_device_job_interrupt_properties(
+uint32_t	fssh_update_disk_device_jobe_interrupt_properties(
 					fssh_disk_job_id jobID, uint32_t interruptProperties);
 	// returns one of B_DISK_DEVICE_JOB_{CONTINUE,CANCEL,REVERSE}
 

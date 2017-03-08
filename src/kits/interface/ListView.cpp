@@ -34,15 +34,15 @@
 
 #include "../support/ClassInfo.h"
 #include "../support/Errors.h"
-#include "../kernel/OS.h"
+#include "../kernel/KERNEL.h"
 #include "../interface/ListItem.h"
 #include "../app/Message.h"
 
 BListView::BListView(BRect frame,
 		     const char *name,
 		     bhapi::list_view_type type,
-		     b_uint32 resizingMode,
-		     b_uint32 flags)
+		      __be_uint32 resizingMode,
+		      __be_uint32 flags)
 	: BView(frame, name, resizingMode, flags), BInvoker(),
 	  fFirstSelected(-1), fLastSelected(-1), fPos(-1),
 	  fSelectionMessage(NULL)
@@ -98,7 +98,7 @@ BListView::AddItem(BListItem *item)
 
 
 bool
-BListView::AddItem(BListItem *item, b_int32 atIndex)
+BListView::AddItem(BListItem *item,  __be_int32 atIndex)
 {
 	if(item == NULL || item->fOwner != NULL) return false;
 	if(fItems.AddItem(item, atIndex) == false) return false;
@@ -133,7 +133,7 @@ BListView::RemoveItem(BListItem *item, bool auto_destruct_item)
 
 
 BListItem*
-BListView::RemoveItem(b_int32 index)
+BListView::RemoveItem(__be_int32 index)
 {
 	BListItem *item = (BListItem*)fItems.RemoveItem(index);
 	if(item == NULL) return NULL;
@@ -190,7 +190,7 @@ BListView::RemoveItem(b_int32 index)
 
 
 bool
-BListView::RemoveItems(b_int32 index, b_int32 count, bool auto_destruct_items)
+BListView::RemoveItems(__be_int32 index,  __be_int32 count, bool auto_destruct_items)
 {
 	if(index < 0 || index >= fItems.CountItems()) return false;
 
@@ -228,7 +228,7 @@ BListView::ListType() const
 
 
 BListItem*
-BListView::ItemAt(b_int32 index) const
+BListView::ItemAt(__be_int32 index) const
 {
 	return (BListItem*)fItems.ItemAt(index);
 }
@@ -248,7 +248,7 @@ BListView::LastItem() const
 }
 
 
-b_int32
+be_int32
 BListView::IndexOf(const BListItem *item) const
 {
 	if(item == NULL || item->fOwner != this) return -1;
@@ -256,7 +256,7 @@ BListView::IndexOf(const BListItem *item) const
 }
 
 
-b_int32
+be_int32
 BListView::IndexOf(BPoint where, bool mustVisible) const
 {
 	float boundsBottom = -1;
@@ -270,9 +270,9 @@ BListView::IndexOf(BPoint where, bool mustVisible) const
 
 	BRect rect(1, 1, Frame().Width() - 1, 1);
 
-	b_int32 retVal = -1;
+	__be_int32 retVal = -1;
 
-	for(b_int32 i = 0; i < fItems.CountItems(); i++)
+	for(__be_int32 i = 0; i < fItems.CountItems(); i++)
 	{
 		BListItem *item = (BListItem*)fItems.ItemAt(i);
 		if(item->Height() < 0) continue;
@@ -302,7 +302,7 @@ BListView::HasItem(const BListItem *item) const
 }
 
 
-b_int32
+be_int32
 BListView::CountItems() const
 {
 	return fItems.CountItems();
@@ -314,7 +314,7 @@ BListView::MakeEmpty()
 {
 	while(fItems.CountItems() > 0)
 	{
-		BListItem *item = (BListItem*)fItems.RemoveItem((b_int32)0);
+		BListItem *item = (BListItem*)fItems.RemoveItem((__be_int32)0);
 		item->fOwner = NULL;
 		delete item;
 	}
@@ -356,7 +356,7 @@ BListView::Draw(BRect updateRect)
 	bounds.InsetBy(1, 1);
 	BRect rect(1, 1, bounds.right - 1, 1);
 
-	for(b_int32 i = 0; i < fItems.CountItems(); i++)
+	for(__be_int32 i = 0; i < fItems.CountItems(); i++)
 	{
 		BListItem *item = (BListItem*)fItems.ItemAt(i);
 		if(item->Height() < 0) continue;
@@ -384,11 +384,11 @@ BListView::Draw(BRect updateRect)
 
 
 void
-BListView::KeyDown(const char *bytes, b_int32 numBytes)
+BListView::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	if(!IsEnabled() || !IsFocus() || numBytes != 1) return;
 
-	b_int32 oldPos = -1, newPos = -1;
+	__be_int32 oldPos = -1, newPos = -1;
 	bool doDown = false;
 
 	switch(bytes[0])
@@ -531,7 +531,7 @@ BListView::KeyDown(const char *bytes, b_int32 numBytes)
 
 
 void
-BListView::KeyUp(const char *bytes, b_int32 numBytes)
+BListView::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
 }
 
@@ -539,7 +539,7 @@ BListView::KeyUp(const char *bytes, b_int32 numBytes)
 void
 BListView::MouseDown(BPoint where)
 {
-	b_int32 btnClicks = 1;
+	__be_int32 btnClicks = 1;
 
 	if(!IsEnabled() || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON, true, &btnClicks) || btnClicks > 2) return;
 
@@ -551,7 +551,7 @@ BListView::MouseDown(BPoint where)
 		return;
 	}
 
-	b_int32 selectIndex = IndexOf(where, true);
+	__be_int32 selectIndex = IndexOf(where, true);
 	BListItem *item = ItemAt(selectIndex);
 	if(item == NULL || item->fEnabled == false) return;
 
@@ -572,13 +572,13 @@ BListView::MouseUp(BPoint where)
 
 
 void
-BListView::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
+BListView::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 }
 
 
 void
-BListView::SetFont(const BFont *font, b_uint8 mask)
+BListView::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	if(font == NULL) return;
 
@@ -586,7 +586,7 @@ BListView::SetFont(const BFont *font, b_uint8 mask)
 
 	BFont aFont;
 	GetFont(&aFont);
-	for(b_int32 i = 0; i < fItems.CountItems(); i++)
+	for(__be_int32 i = 0; i < fItems.CountItems(); i++)
 	{
 		BListItem *item = (BListItem*)fItems.ItemAt(i);
 		item->Update(this, &aFont);
@@ -617,7 +617,7 @@ BListView::SelectionMessage() const
 }
 
 
-b_uint32
+be_uint32
 BListView::SelectionCommand() const
 {
 	return(fSelectionMessage ? fSelectionMessage->what : 0);
@@ -631,14 +631,14 @@ BListView::InvocationMessage() const
 }
 
 
-b_uint32
+be_uint32
 BListView::InvocationCommand() const
 {
 	return Command();
 }
 
 
-b_status_t
+status_t
 BListView::Invoke(const BMessage *msg)
 {
 	if(fFirstSelected < 0)
@@ -652,7 +652,7 @@ BListView::Invoke(const BMessage *msg)
 
 		BMessage aMsg(*message);
 
-		for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
+		for(__be_int32 i = fFirstSelected; i <= fLastSelected; i++)
 		{
 			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item == NULL) continue;
@@ -665,23 +665,23 @@ BListView::Invoke(const BMessage *msg)
 
 
 void
-BListView::Select(b_int32 index, bool extend)
+BListView::Select(__be_int32 index, bool extend)
 {
 	Select(index, index, extend);
 }
 
 void
-BListView::Select(b_int32 start, b_int32 finish)
+BListView::Select(__be_int32 start,  __be_int32 finish)
 {
 	Select(start, finish, false);
 }
 
 void
-BListView::Select(b_int32 start, b_int32 finish, bool extend)
+BListView::Select(__be_int32 start,  __be_int32 finish, bool extend)
 {
 	if(extend == false)
 	{
-		for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
+		for(__be_int32 i = fFirstSelected; i <= fLastSelected; i++)
 		{
 			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item == NULL) continue;
@@ -696,7 +696,7 @@ BListView::Select(b_int32 start, b_int32 finish, bool extend)
 
 		if(finish < 0 || finish >= fItems.CountItems()) finish = fItems.CountItems() - 1;
 
-		for(b_int32 index = start; index <= finish; index++)
+		for(__be_int32 index = start; index <= finish; index++)
 		{
 			BListItem *item = (BListItem*)fItems.ItemAt(index);
 			if(item == NULL || item->fSelected == true) continue;
@@ -716,20 +716,20 @@ BListView::Select(b_int32 start, b_int32 finish, bool extend)
 
 
 bool
-BListView::IsItemSelected(b_int32 index) const
+BListView::IsItemSelected(__be_int32 index) const
 {
 	BListItem *item = (BListItem*)fItems.ItemAt(index);
 	return(item == NULL ? false : item->fSelected);
 }
 
 
-b_int32
-BListView::CurrentSelection(b_int32 index) const
+be_int32
+BListView::CurrentSelection(__be_int32 index) const
 {
 	if(fFirstSelected < 0 || index < 0) return -1;
 
 	// TODO: speed up
-	for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
+	for(__be_int32 i = fFirstSelected; i <= fLastSelected; i++)
 	{
 		BListItem *item = (BListItem*)fItems.ItemAt(i);
 		if(item == NULL) continue;
@@ -742,7 +742,7 @@ BListView::CurrentSelection(b_int32 index) const
 
 
 void
-BListView::Deselect(b_int32 index)
+BListView::Deselect(__be_int32 index)
 {
 	BListItem *item = (BListItem*)fItems.ItemAt(index);
 	if(item == NULL || item->fSelected == false) return;
@@ -783,7 +783,7 @@ BListView::DeselectAll()
 {
 	if(fFirstSelected < 0) return;
 
-	for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
+	for(__be_int32 i = fFirstSelected; i <= fLastSelected; i++)
 	{
 		BListItem *item = (BListItem*)fItems.ItemAt(i);
 		if(item == NULL) continue;
@@ -797,13 +797,13 @@ BListView::DeselectAll()
 
 
 void
-BListView::DeselectExcept(b_int32 start, b_int32 finish)
+BListView::DeselectExcept(__be_int32 start,  __be_int32 finish)
 {
 	if(fFirstSelected < 0) return;
 
 	if(start >= 0 && (finish < 0 || finish >= fItems.CountItems())) finish = fItems.CountItems() - 1;
 
-	for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
+	for(__be_int32 i = fFirstSelected; i <= fLastSelected; i++)
 	{
 		if(start >= 0 && start <= finish && i >= start && i <= finish) continue;
 
@@ -827,7 +827,7 @@ BListView::DeselectExcept(b_int32 start, b_int32 finish)
 
 
 bool
-BListView::SwapItems(b_int32 indexA, b_int32 indexB)
+BListView::SwapItems(__be_int32 indexA,  __be_int32 indexB)
 {
 	bool retVal = false;
 
@@ -839,7 +839,7 @@ BListView::SwapItems(b_int32 indexA, b_int32 indexB)
 		if(indexA >= fFirstSelected && indexA <= fLastSelected &&
 		   indexB >= fFirstSelected && indexB <= fLastSelected) break;
 
-		b_int32 newIn = -1;
+		__be_int32 newIn = -1;
 
 		if(indexA >= fFirstSelected && indexA <= fLastSelected) newIn = indexB;
 		else if(indexB >= fFirstSelected && indexB <= fLastSelected) newIn = indexA;
@@ -849,14 +849,14 @@ BListView::SwapItems(b_int32 indexA, b_int32 indexB)
 		fFirstSelected = min_c(fFirstSelected, newIn);
 		fLastSelected = max_c(fLastSelected, newIn);
 
-		for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
+		for(__be_int32 i = fFirstSelected; i <= fLastSelected; i++)
 		{
 			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item->fSelected == true) break;
 			fFirstSelected++;
 		}
 
-		for(b_int32 i = fLastSelected; i >= fFirstSelected; i--)
+		for(__be_int32 i = fLastSelected; i >= fFirstSelected; i--)
 		{
 			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item->fSelected == true) break;
@@ -873,7 +873,7 @@ BListView::SwapItems(b_int32 indexA, b_int32 indexB)
 
 
 bool
-BListView::MoveItem(b_int32 fromIndex, b_int32 toIndex)
+BListView::MoveItem(__be_int32 fromIndex,  __be_int32 toIndex)
 {
 	bool retVal = false;
 
@@ -887,7 +887,7 @@ BListView::MoveItem(b_int32 fromIndex, b_int32 toIndex)
 
 		// TODO: speed up
 		fFirstSelected = fLastSelected = -1;
-		for(b_int32 i = 0; i < fItems.CountItems(); i++)
+		for(__be_int32 i = 0; i < fItems.CountItems(); i++)
 		{
 			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item->fSelected == false) continue;
@@ -902,7 +902,7 @@ BListView::MoveItem(b_int32 fromIndex, b_int32 toIndex)
 
 
 bool
-BListView::ReplaceItem(b_int32 index, BListItem *newItem, BListItem **oldItem)
+BListView::ReplaceItem(__be_int32 index, BListItem *newItem, BListItem **oldItem)
 {
 	bool retVal = false;
 	BListItem *old_item = NULL;
@@ -921,14 +921,14 @@ BListView::ReplaceItem(b_int32 index, BListItem *newItem, BListItem **oldItem)
 
 		if(oldItemSelected == false || fFirstSelected < 0) break;
 
-		for(b_int32 i = fFirstSelected; i <= fLastSelected; i++)
+		for(__be_int32 i = fFirstSelected; i <= fLastSelected; i++)
 		{
 			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item->fSelected == true) break;
 			fFirstSelected++;
 		}
 
-		for(b_int32 i = fLastSelected; i >= fFirstSelected; i--)
+		for(__be_int32 i = fLastSelected; i >= fFirstSelected; i--)
 		{
 			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item->fSelected == true) break;
@@ -956,7 +956,7 @@ BListView::SortItems(int (*cmp)(const BListItem **a, const BListItem **b))
 	if(fFirstSelected > 0)
 	{
 		fFirstSelected = fLastSelected = -1;
-		for(b_int32 i = 0; i < fItems.CountItems(); i++)
+		for(__be_int32 i = 0; i < fItems.CountItems(); i++)
 		{
 			BListItem *item = (BListItem*)fItems.ItemAt(i);
 			if(item->fSelected == false) continue;
@@ -990,7 +990,7 @@ BListView::Items() const
 
 
 BRect
-BListView::ItemFrame(b_int32 index) const
+BListView::ItemFrame(__be_int32 index) const
 {
 	BRect r;
 
@@ -1001,7 +1001,7 @@ BListView::ItemFrame(b_int32 index) const
 		{
 			r.Set(1, 1, Frame().Width() - 1, 1);
 
-			for(b_int32 i = 0; i <= index; i++)
+			for(__be_int32 i = 0; i <= index; i++)
 			{
                 item = (BListItem*)fItems.ItemAt(i);
 				if(item->Height() < 0) continue;
@@ -1018,7 +1018,7 @@ BListView::ItemFrame(b_int32 index) const
 
 
 void
-BListView::InvalidateItem(b_int32 index)
+BListView::InvalidateItem(__be_int32 index)
 {
 	BRect r = ItemFrame(index);
 	if(r.IsValid()) Invalidate(r, true);
@@ -1026,7 +1026,7 @@ BListView::InvalidateItem(b_int32 index)
 
 
 void
-BListView::ScrollToItem(b_int32 index)
+BListView::ScrollToItem(__be_int32 index)
 {
 	BRect rect = ItemFrame(index);
 	if(rect.IsValid() == false) return;
@@ -1077,14 +1077,14 @@ BListView::DetachedFromWindow()
 
 
 void
-BListView::SetPosition(b_int32 pos)
+BListView::SetPosition(__be_int32 pos)
 {
 	if(pos >= fItems.CountItems()) pos = -1;
 	fPos = pos;
 }
 
 
-b_int32
+be_int32
 BListView::Position() const
 {
 	return fPos;

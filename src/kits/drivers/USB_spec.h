@@ -6,7 +6,7 @@
 #define _USB_SPEC_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 /* Request types (target/direction) for send_request() */
@@ -107,7 +107,7 @@ typedef struct usb_configuration_descriptor {
 	uint8	max_power;
 } _PACKED usb_configuration_descriptor;
 
-typedef struct usb_interface_descriptor {
+typedef struct usbe_interface_descriptor {
 	uint8	length;
 	uint8	descriptor_type;
 	uint8	interface_number;
@@ -117,7 +117,7 @@ typedef struct usb_interface_descriptor {
 	uint8	interface_subclass;
 	uint8	interface_protocol;
 	uint8	interface;
-} _PACKED usb_interface_descriptor;
+} _PACKED usbe_interface_descriptor;
 
 typedef struct usb_endpoint_descriptor {
 	uint8	length;
@@ -143,7 +143,7 @@ typedef struct usb_generic_descriptor {
 typedef union usb_descriptor {
 	usb_generic_descriptor			generic;
 	usb_device_descriptor			device;
-	usb_interface_descriptor		interface;
+	usbe_interface_descriptor		interface;
 	usb_endpoint_descriptor			endpoint;
 	usb_configuration_descriptor	configuration;
 	usb_string_descriptor			string;

@@ -7,7 +7,7 @@
 #define REGISTER_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 enum register_format {

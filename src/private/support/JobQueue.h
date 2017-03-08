@@ -7,7 +7,7 @@
 
 
 #include <Locker.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <Job.h>
 

@@ -14,7 +14,7 @@
 #include <image.h>
 #include <Message.h>
 #include <Path.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class PrinterDriverAddOn

@@ -35,18 +35,18 @@ class BWindow;
 #include "../interface/Rect.h"
 class IMPEXPBHAPI BScreen {
 public:
-    BScreen(b_uint32 id = 0);
+    BScreen(__be_uint32 id = 0);
     BScreen(BWindow *win);
     ~BScreen();
 
     bool		IsValid() const;
-    b_status_t	SetToNext();
+    status_t	SetToNext();
 
     BRect		Frame() const;
-    b_uint32		ID() const;
+     __be_uint32		ID() const;
 
 private:
-    b_uint32 fID;
+     __be_uint32 fID;
 };
 
 #endif /* __cplusplus */

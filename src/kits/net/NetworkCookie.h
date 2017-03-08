@@ -9,7 +9,7 @@
 #include <Archivable.h>
 #include <DateTime.h>
 #include <Message.h>
-#include <String.h>
+#include <StringClass.h>
 #include <Url.h>
 
 

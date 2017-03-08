@@ -12,7 +12,7 @@
 #include <stdio.h>
 
 #include <HashMap.h>
-#include <HashString.h>
+#include <HashStringClass.h>
 #include <Message.h>
 #include <NetworkCookieJar.h>
 

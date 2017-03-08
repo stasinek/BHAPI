@@ -6,7 +6,7 @@
 #define _KERNEL_ARCH_REAL_TIME_DATA_H
 
 #include <StorageDefs.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #warning ARM: fix system_time()
 

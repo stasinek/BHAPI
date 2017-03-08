@@ -6,7 +6,7 @@
 #define IMAGE_INFO_H
 
 #include <image.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include "Types.h"
 

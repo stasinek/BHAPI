@@ -1,0 +1,67 @@
+SubDir HAIKU_TOP src system libroot os ;
+
+UsePrivateHeaders kernel ;
+	# for util/KMessage.h
+UsePrivateHeaders app libroot runtime_loader shared ;
+
+local architectureObject ;
+for architectureObject in [ MultiArchSubDirSetup ] {
+	on $(architectureObject) {
+		local architecture = $(TARGET_PACKAGING_ARCH) ;
+
+		UsePrivateSystemHeaders ;
+
+		SEARCH_SOURCE += [ FDirName $(SUBDIR) locks ] ;
+
+		MergeObject <$(architecture)>os_main.o :
+			Architecture.cpp
+			area.c
+			atomic.c
+			debug.c
+			driver_settings.cpp
+			extended_system_info.cpp
+			find_directory.cpp
+			find_paths.cpp
+			fs_attr.cpp
+			fs_index.c
+			fs_info.c
+			fs_query.cpp
+			fs_volume.c
+			image.cpp
+			launch.cpp
+			memory.cpp
+			parsedate.cpp
+			port.c
+			scheduler.c
+			sem.c
+			system_info.cpp
+			system_revision.c
+			team.c
+			thread.c
+			time.cpp
+			syscalls.S
+			wait_for_objects.cpp
+
+			# locks
+			init_once.cpp
+			mutex.cpp
+			recursive_lock.cpp
+			rw_lock.cpp
+
+			KMessage.cpp
+			;
+
+		SEARCH on [ FGristFiles KMessage.cpp ]
+			= [ FDirName $(HAIKU_TOP) src system kernel messaging ] ;
+
+		# We need to specify the dependency on the generated syscalls file
+		# explicitly.
+		Depends [ FGristFiles syscalls.o ]
+			: <syscalls!$(architecture)>syscalls.S.inc ;
+	}
+}
+
+local arch ;
+for arch in $(TARGET_ARCHS) {
+	HaikuSubInclude arch $(arch) ;
+}

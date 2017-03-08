@@ -6,7 +6,7 @@
 #define VARIABLE_H
 
 
-#include <String.h>
+#include <StringClass.h>
 
 #include <Referenceable.h>
 

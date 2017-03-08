@@ -8,7 +8,7 @@
 #ifndef _BUFFER_MSGS_H
 #define _BUFFER_MSGS_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 /****************************************************************
 This file defines the messages sent between a Subscriber and a

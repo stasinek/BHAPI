@@ -5,7 +5,7 @@
 #ifndef _KERNEL_ARCH_x86_IOAPIC_H
 #define _KERNEL_ARCH_x86_IOAPIC_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 struct kernel_args;
 

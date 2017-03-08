@@ -8,7 +8,7 @@
 
 #include <limits.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <debug.h>
 

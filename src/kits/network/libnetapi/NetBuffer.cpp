@@ -9,7 +9,7 @@
 
 #include <ByteOrder.h>
 #include <Message.h>
-#include <TypeConstants.h>
+#include <HaikuConstants.h>
 
 #include "DynamicBuffer.h"
 #include "NetBuffer.h"
@@ -132,7 +132,7 @@ BNetBuffer::AppendUint8(uint8 data)
 status_t
 BNetBuffer::AppendInt16(int16 data)
 {
-	int16 be_data = B_HOST_TO_BENDIAN_INT16(data);
+	int16  __be_data = B_HOST_TO_BENDIAN_INT16(data);
 	return AppendData((const void*)&be_data, sizeof(int16));
 }
 
@@ -140,7 +140,7 @@ BNetBuffer::AppendInt16(int16 data)
 status_t
 BNetBuffer::AppendUint16(uint16 data)
 {
-	uint16 be_data = B_HOST_TO_BENDIAN_INT16(data);
+	uint16  __be_data = B_HOST_TO_BENDIAN_INT16(data);
 	return AppendData((const void*)&be_data, sizeof(uint16));
 }
 
@@ -148,7 +148,7 @@ BNetBuffer::AppendUint16(uint16 data)
 status_t
 BNetBuffer::AppendInt32(int32 data)
 {
-	int32 be_data = B_HOST_TO_BENDIAN_INT32(data);
+	int32  __be_data = B_HOST_TO_BENDIAN_INT32(data);
 	return AppendData((const void*)&be_data, sizeof(int32));
 }
 
@@ -156,7 +156,7 @@ BNetBuffer::AppendInt32(int32 data)
 status_t
 BNetBuffer::AppendUint32(uint32 data)
 {
-	uint32 be_data = B_HOST_TO_BENDIAN_INT32(data);
+	uint32  __be_data = B_HOST_TO_BENDIAN_INT32(data);
 	return AppendData((const void*)&be_data, sizeof(uint32));
 }
 
@@ -233,7 +233,7 @@ BNetBuffer::AppendMessage(const BMessage& data)
 status_t
 BNetBuffer::AppendInt64(int64 data)
 {
-	int64 be_data = B_HOST_TO_BENDIAN_INT64(data);
+	int64  __be_data = B_HOST_TO_BENDIAN_INT64(data);
 	return AppendData((const void*)&be_data, sizeof(int64));
 }
 
@@ -241,7 +241,7 @@ BNetBuffer::AppendInt64(int64 data)
 status_t
 BNetBuffer::AppendUint64(uint64 data)
 {
-	uint64 be_data = B_HOST_TO_BENDIAN_INT64(data);
+	uint64  __be_data = B_HOST_TO_BENDIAN_INT64(data);
 	return AppendData((const void*)&be_data, sizeof(uint64));
 }
 
@@ -263,12 +263,12 @@ BNetBuffer::RemoveUint8(uint8& data)
 status_t
 BNetBuffer::RemoveInt16(int16& data)
 {
-	int16 be_data;
+	int16  __be_data;
 	status_t result = RemoveData((void*)&be_data, sizeof(int16));
 	if (result != B_OK)
 		return result;
 
-	data = B_BENDIAN_TO_HOST_INT16(be_data);
+	data = B_BENDIAN_TO_HOST_INT16(__be_data);
 
 	return B_OK;
 }
@@ -277,12 +277,12 @@ BNetBuffer::RemoveInt16(int16& data)
 status_t
 BNetBuffer::RemoveUint16(uint16& data)
 {
-	uint16 be_data;
+	uint16  __be_data;
 	status_t result = RemoveData((void*)&be_data, sizeof(uint16));
 	if (result != B_OK)
 		return result;
 
-	data = B_BENDIAN_TO_HOST_INT16(be_data);
+	data = B_BENDIAN_TO_HOST_INT16(__be_data);
 
 	return B_OK;
 }
@@ -291,12 +291,12 @@ BNetBuffer::RemoveUint16(uint16& data)
 status_t
 BNetBuffer::RemoveInt32(int32& data)
 {
-	int32 be_data;
+	int32  __be_data;
 	status_t result = RemoveData((void*)&be_data, sizeof(int32));
 	if (result != B_OK)
 		return result;
 
-	data = B_BENDIAN_TO_HOST_INT32(be_data);
+	data = B_BENDIAN_TO_HOST_INT32(__be_data);
 
 	return B_OK;
 }
@@ -305,12 +305,12 @@ BNetBuffer::RemoveInt32(int32& data)
 status_t
 BNetBuffer::RemoveUint32(uint32& data)
 {
-	uint32 be_data;
+	uint32  __be_data;
 	status_t result = RemoveData((void*)&be_data, sizeof(uint32));
 	if (result != B_OK)
 		return result;
 
-	data = B_BENDIAN_TO_HOST_INT32(be_data);
+	data = B_BENDIAN_TO_HOST_INT32(__be_data);
 
 	return B_OK;
 }
@@ -383,12 +383,12 @@ BNetBuffer::RemoveMessage(BMessage& data)
 status_t
 BNetBuffer::RemoveInt64(int64& data)
 {
-	int64 be_data;
+	int64  __be_data;
 	status_t result = RemoveData((void*)&be_data, sizeof(int64));
 	if (result != B_OK)
 		return result;
 
-	data = B_BENDIAN_TO_HOST_INT64(be_data);
+	data = B_BENDIAN_TO_HOST_INT64(__be_data);
 
 	return B_OK;
 }
@@ -397,12 +397,12 @@ BNetBuffer::RemoveInt64(int64& data)
 status_t
 BNetBuffer::RemoveUint64(uint64& data)
 {
-	uint64 be_data;
+	uint64  __be_data;
 	status_t result = RemoveData((void*)&be_data, sizeof(uint64));
 	if (result != B_OK)
 		return result;
 
-	data = B_BENDIAN_TO_HOST_INT64(be_data);
+	data = B_BENDIAN_TO_HOST_INT64(__be_data);
 
 	return B_OK;
 }

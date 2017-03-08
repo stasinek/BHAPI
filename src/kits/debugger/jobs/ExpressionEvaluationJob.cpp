@@ -5,7 +5,7 @@
 
 #include "Jobs.h"
 
-#include <String.h>
+#include <StringClass.h>
 
 #include <AutoLocker.h>
 

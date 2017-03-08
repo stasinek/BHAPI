@@ -53,8 +53,8 @@ All rights reserved.
 #include <ObjectList.h>
 #include <Node.h>
 #include <Rect.h>
-#include <String.h>
-#include <TypeConstants.h>
+#include <StringClass.h>
+#include <HaikuConstants.h>
 
 #include <fs_attr.h>
 

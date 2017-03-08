@@ -5,7 +5,7 @@
 #ifndef _KERNEL_SELECT_SYNC_POOL_H
 #define _KERNEL_SELECT_SYNC_POOL_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 struct selectsync;
 typedef struct select_sync_pool select_sync_pool;

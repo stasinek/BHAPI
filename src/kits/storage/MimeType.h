@@ -6,7 +6,7 @@
 #define _MIME_TYPE_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <StorageDefs.h>
 
 #include <Messenger.h>

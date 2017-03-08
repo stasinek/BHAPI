@@ -9,7 +9,7 @@
 #define __TEXTGAPBUFFER_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <TextView.h>
 
 

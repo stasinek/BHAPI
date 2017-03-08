@@ -6,7 +6,7 @@
 
 #include <MediaDefs.h>
 #include <MediaRoster.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include "MediaDebug.h"
 

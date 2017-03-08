@@ -42,7 +42,7 @@ BTitledColumn::BTitledColumn(const char* title, float width, float minWidth,
 {
 	font_height fh;
 
-	be_plain_font->GetHeight(&fh);
+	__be_plain_font->GetHeight(&fh);
 	fFontHeight = fh.descent + fh.leading;
 }
 
@@ -572,7 +572,7 @@ GraphColumn::DrawField(BField* field, BRect rect, BView* parent)
 	char numberString[256];
 	sprintf(numberString, "%d%%", number);
 
-	float width = be_plain_font->StringWidth(numberString);
+	float width =  __be_plain_font->StringWidth(numberString);
 	parent->MovePenTo(rect.left + rect.Width() / 2 - width / 2, rect.bottom - FontHeight());
 	parent->DrawString(numberString);
 }

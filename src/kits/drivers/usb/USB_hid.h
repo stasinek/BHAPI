@@ -6,7 +6,7 @@
 #define _USB_HID_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <usb/USB_hid_page_alphanumeric_display.h>
 #include <usb/USB_hid_page_arcade.h>
 #include <usb/USB_hid_page_bar_code_scanner.h>

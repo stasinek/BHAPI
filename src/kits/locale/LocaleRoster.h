@@ -9,7 +9,7 @@
 #include <pthread.h>
 
 #include <Entry.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 class BBitmap;

@@ -38,7 +38,7 @@ All rights reserved.
 #include <FindDirectory.h>
 #include <Directory.h>
 #include <NodeInfo.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <Mime.h>
 #include <Message.h>
 #include <Path.h>
@@ -96,7 +96,7 @@ TemplatesMenu::SetTargetForItems(BHandler* target)
 {
 	status_t result = BMenu::SetTargetForItems(target);
 	if (fOpenItem)
-		fOpenItem->SetTarget(be_app_messenger);
+		fOpenItem->SetTarget(__be_app_messenger);
 
 	return result;
 }
@@ -107,7 +107,7 @@ TemplatesMenu::SetTargetForItems(BMessenger messenger)
 {
 	status_t result = BMenu::SetTargetForItems(messenger);
 	if (fOpenItem)
-		fOpenItem->SetTarget(be_app_messenger);
+		fOpenItem->SetTarget(__be_app_messenger);
 
 	return result;
 }

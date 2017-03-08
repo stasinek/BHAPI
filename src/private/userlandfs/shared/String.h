@@ -1,11 +1,11 @@
-// String.h
+// StringClass.h
 
 #ifndef STRING_H
 #define STRING_H
 
 #include <string.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 // string_hash

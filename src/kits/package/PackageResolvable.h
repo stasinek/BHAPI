@@ -6,7 +6,7 @@
 #define _PACKAGE__PACKAGE_RESOLVABLE_H_
 
 
-#include <String.h>
+#include <StringClass.h>
 
 #include <package/PackageVersion.h>
 

@@ -10,7 +10,7 @@
 
 #include <ObjectList.h>
 #include <Referenceable.h>
-#include <String.h>
+#include <StringClass.h>
 #include <util/DoublyLinkedList.h>
 #include <util/OpenHashTable.h>
 

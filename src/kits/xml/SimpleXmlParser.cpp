@@ -59,7 +59,7 @@ BSimpleXmlNode::~BSimpleXmlNode()
 
 	while(fAttributes.CountItems() > 0)
 	{
-		b_xml_attribute* attr = (b_xml_attribute*)fAttributes.RemoveItem((b_int32)0);
+		b_xml_attribute* attr = (b_xml_attribute*)fAttributes.RemoveItem((__be_int32)0);
 		if(attr == NULL) continue;
 		if(attr->name) delete[] attr->name;
 		if(attr->content) delete [] attr->content;
@@ -68,7 +68,7 @@ BSimpleXmlNode::~BSimpleXmlNode()
 
 	while(fNodes.CountItems() > 0)
 	{
-		BSimpleXmlNode* node = (BSimpleXmlNode*)fNodes.RemoveItem((b_int32)0);
+		BSimpleXmlNode* node = (BSimpleXmlNode*)fNodes.RemoveItem((__be_int32)0);
 		if(node == NULL) continue;
 		delete node;
 	}
@@ -90,7 +90,7 @@ BSimpleXmlNode::Content() const
 
 
 const char*
-BSimpleXmlNode::AttributeAt(b_int32 index, const char** attr_content) const
+BSimpleXmlNode::AttributeAt(__be_int32 index, const char** attr_content) const
 {
 	b_xml_attribute* attr = (b_xml_attribute*)fAttributes.ItemAt(index);
 	if(attr == NULL) return NULL;
@@ -99,11 +99,11 @@ BSimpleXmlNode::AttributeAt(b_int32 index, const char** attr_content) const
 }
 
 
-b_int32
-BSimpleXmlNode::FindAttribute(const char *name, b_int32 fromIndex) const
+be_int32
+BSimpleXmlNode::FindAttribute(const char *name,  __be_int32 fromIndex) const
 {
 	if(name == NULL || *name == 0 || fromIndex < 0 || fromIndex >= fAttributes.CountItems()) return -1;
-	for(b_int32 i = fromIndex; i < fAttributes.CountItems(); i++)
+	for(__be_int32 i = fromIndex; i < fAttributes.CountItems(); i++)
 	{
 		b_xml_attribute* attr = (b_xml_attribute*)fAttributes.ItemAt(i);
 		if(attr == NULL) continue;
@@ -116,17 +116,17 @@ BSimpleXmlNode::FindAttribute(const char *name, b_int32 fromIndex) const
 
 
 BSimpleXmlNode*
-BSimpleXmlNode::NodeAt(b_int32 index) const
+BSimpleXmlNode::NodeAt(__be_int32 index) const
 {
 	return((BSimpleXmlNode*)fNodes.ItemAt(index));
 }
 
 
-b_int32
-BSimpleXmlNode::FindNode(const char *name, b_int32 fromIndex) const
+be_int32
+BSimpleXmlNode::FindNode(const char *name,  __be_int32 fromIndex) const
 {
 	if(name == NULL || *name == 0 || fromIndex < 0 || fromIndex >= fNodes.CountItems()) return -1;
-	for(b_int32 i = fromIndex; i < fNodes.CountItems(); i++)
+	for(__be_int32 i = fromIndex; i < fNodes.CountItems(); i++)
 	{
 		BSimpleXmlNode* node = (BSimpleXmlNode*)fNodes.ItemAt(i);
 		if(node == NULL) continue;
@@ -158,7 +158,7 @@ bool
 BSimpleXmlNode::AddAttribute(const char *name, const char *content, bool replace_content)
 {
 	if(name == NULL || *name == 0) return false;
-	b_int32 index = FindAttribute(name);
+	__be_int32 index = FindAttribute(name);
 	if(index >= 0)
 	{
 		if(replace_content == false) return false;
@@ -187,7 +187,7 @@ BSimpleXmlNode::AddAttribute(const char *name, const char *content, bool replace
 bool
 BSimpleXmlNode::RemoveAttribute(const char *name)
 {
-	b_int32 index = FindAttribute(name);
+	__be_int32 index = FindAttribute(name);
 	if(index < 0) return false;
 	b_xml_attribute* attr = (b_xml_attribute*)fAttributes.RemoveItem(index);
 	if(attr == NULL) return false;
@@ -201,7 +201,7 @@ BSimpleXmlNode::RemoveAttribute(const char *name)
 
 
 bool
-BSimpleXmlNode::AddNode(BSimpleXmlNode *node, b_int32 atIndex)
+BSimpleXmlNode::AddNode(BSimpleXmlNode *node,  __be_int32 atIndex)
 {
 	if(node == NULL || node->fSuperNode != NULL) return false;
 
@@ -234,14 +234,14 @@ BSimpleXmlNode::RemoveSelf()
 }
 
 
-b_int32
+be_int32
 BSimpleXmlNode::CountAttributes() const
 {
 	return fAttributes.CountItems();
 }
 
 
-b_int32
+be_int32
 BSimpleXmlNode::CountNodes() const
 {
 	return fNodes.CountItems();
@@ -258,21 +258,21 @@ BSimpleXmlNode::SuperNode() const
 void
 BSimpleXmlNode::PrintToStream() const
 {
-	b_int32 nSuperNode = 0;
+	__be_int32 nSuperNode = 0;
 	const BSimpleXmlNode *node = fSuperNode;
 	if(node) {nSuperNode++; while((node = node->fSuperNode) != NULL) nSuperNode++;}
 	if(nSuperNode == 0) BHAPI_OUTPUT("======================= BSimpleXmlNode =======================\n");
-	for(b_int32 i = 0; i < nSuperNode; i++) BHAPI_OUTPUT("  ");
+	for(__be_int32 i = 0; i < nSuperNode; i++) BHAPI_OUTPUT("  ");
 	BHAPI_OUTPUT("|-- Name: \"%s\", Content: \"%s\"\n", fName ? fName : "[NULL]", fContent ? fContent : "[NULL]");
-	for(b_int32 i = 0; i < fAttributes.CountItems(); i++)
+	for(__be_int32 i = 0; i < fAttributes.CountItems(); i++)
 	{
 		b_xml_attribute* attr = (b_xml_attribute*)fAttributes.ItemAt(i);
 		if(attr == NULL) continue;
-		for(b_int32 j = 0; j < nSuperNode; j++) BHAPI_OUTPUT("  ");
+		for(__be_int32 j = 0; j < nSuperNode; j++) BHAPI_OUTPUT("  ");
 		BHAPI_OUTPUT("|--(Attribute %d) Name: \"%s\", Content: \"%s\"\n",
 			   i, attr->name ? attr->name : "[NULL]", attr->content ? attr->content : "[NULL]");
 	}
-	for(b_int32 i = 0; i < fNodes.CountItems(); i++)
+	for(__be_int32 i = 0; i < fNodes.CountItems(); i++)
 	{
         BSimpleXmlNode* t_node = (BSimpleXmlNode*)fNodes.ItemAt(i);
         if(t_node) t_node->PrintToStream();
@@ -283,7 +283,7 @@ BSimpleXmlNode::PrintToStream() const
 
 inline void remove_unwanted_characters(BString &str)
 {
-	b_int32 offset = 0;
+	__be_int32 offset = 0;
 	bool quote = false;
 	for(; offset < str.Length(); offset++)
 	{
@@ -341,15 +341,15 @@ inline void remove_unwanted_characters(BString &str)
 }
 
 
-inline bool parse_simple_xml(BString *buffer, b_int32 *offset, BSimpleXmlNode *node)
+inline bool parse_simple_xml(BString *buffer,  __be_int32 *offset, BSimpleXmlNode *node)
 {
 	if(buffer == NULL || offset == NULL || node == NULL || *offset < 0 || *offset >= buffer->Length()) return false;
 
-	b_int32 start = buffer->FindFirst("<", *offset) + 1;
+	__be_int32 start = buffer->FindFirst("<", *offset) + 1;
 	if(start <= 0) return false;
 	*offset = start;
 
-	b_int32 end = buffer->FindFirst(">", start) - 1;
+	__be_int32 end = buffer->FindFirst(">", start) - 1;
 	if(end < 0) return false;
 	*offset = end + 2;
 	if(end < start) return false;
@@ -395,11 +395,11 @@ inline bool parse_simple_xml(BString *buffer, b_int32 *offset, BSimpleXmlNode *n
 		if(array->ItemAt(0) == NULL || array->ItemAt(0)->FindFirst('/') >= 0) {delete array; break;}
 		BSimpleXmlNode *aNode = new BSimpleXmlNode(array->ItemAt(0)->String());
 		if(aNode == NULL) {delete array; break;}
-		for(b_int32 i = 1; i < array->CountItems(); i++)
+		for(__be_int32 i = 1; i < array->CountItems(); i++)
 		{
 			if(array->ItemAt(i) == NULL) continue;
 			if(array->ItemAt(i)->FindFirst('/') >= 0) continue;
-			b_int32 sepIndex = array->ItemAt(i)->FindFirst('=');
+			__be_int32 sepIndex = array->ItemAt(i)->FindFirst('=');
 			if(array->ItemAt(i)->FindLast('=') != sepIndex || sepIndex == 0) continue;
 			str.SetTo(array->ItemAt(i)->String(), sepIndex);
 
@@ -466,7 +466,7 @@ inline bool parse_simple_xml(BString *buffer, b_int32 *offset, BSimpleXmlNode *n
 
 			if(str.ByteAt(0) == '/' &&
 			   str.FindLast(aNode->Name()) == 1 &&
-			   str.Length() - (b_int32)strlen(aNode->Name()) == 1) break;
+			   str.Length() - (__be_int32)strlen(aNode->Name()) == 1) break;
 
 			*offset = start - 1;
 
@@ -482,14 +482,14 @@ inline bool parse_simple_xml(BString *buffer, b_int32 *offset, BSimpleXmlNode *n
 }
 
 
-IMPEXPBHAPI b_status_t b_parse_simple_xml(const char *buf, BSimpleXmlNode *node)
+IMPEXPBHAPI status_t b_parse_simple_xml(const char *buf, BSimpleXmlNode *node)
 {
 	if(buf == NULL || *buf == 0 || node == NULL) return B_BAD_VALUE;
 
 	BString buffer(buf);
 	if(buffer.Length() <= 0) return B_ERROR;
 
-	b_int32 offset = 0;
+	__be_int32 offset = 0;
 
 	while(offset < buffer.Length())
 	{

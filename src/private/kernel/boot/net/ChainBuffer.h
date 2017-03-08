@@ -6,7 +6,7 @@
 #ifndef _BOOT_NET_CHAIN_BUFFER_H
 #define _BOOT_NET_CHAIN_BUFFER_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 class ChainBuffer {
 public:

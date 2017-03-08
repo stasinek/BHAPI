@@ -40,7 +40,7 @@ All rights reserved.
 
 
 #include <ObjectList.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 class BNode;

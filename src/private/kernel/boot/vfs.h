@@ -8,7 +8,7 @@
 
 #include <dirent.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <util/DoublyLinkedList.h>
 #include <boot/stage2_args.h>

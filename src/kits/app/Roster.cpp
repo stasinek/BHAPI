@@ -34,7 +34,7 @@
 #include <Path.h>
 #include <Query.h>
 #include <RegistrarDefs.h>
-#include <String.h>
+#include <StringClass.h>
 #include <Volume.h>
 #include <VolumeRoster.h>
 
@@ -68,7 +68,7 @@ enum {
 };
 
 
-const BRoster* be_roster;
+const BRoster*  __be_roster;
 
 
 //	#pragma mark - Helper functions
@@ -800,7 +800,7 @@ BRoster::FindApp(entry_ref* ref, entry_ref* app) const
 status_t
 BRoster::Broadcast(BMessage* message) const
 {
-	return Broadcast(message, be_app_messenger);
+	return Broadcast(message,  __be_app_messenger);
 }
 
 
@@ -1213,7 +1213,7 @@ BRoster::AddToRecentDocuments(const entry_ref* document,
 	// the calling app
 	if (error == B_OK && signature == NULL) {
 		app_info info;
-		error = GetRunningAppInfo(be_app->Team(), &info);
+		error = GetRunningAppInfo(__be_app->Team(), &info);
 		if (error == B_OK)
 			callingApplicationSignature = info.signature;
 	}
@@ -1260,7 +1260,7 @@ BRoster::AddToRecentFolders(const entry_ref* folder,
 	// the calling app
 	if (error == B_OK && signature == NULL) {
 		app_info info;
-		error = GetRunningAppInfo(be_app->Team(), &info);
+		error = GetRunningAppInfo(__be_app->Team(), &info);
 		if (error == B_OK)
 			callingApplicationSignature = info.signature;
 	}

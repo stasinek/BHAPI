@@ -13,7 +13,7 @@
 #include <string.h>
 
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <libroot_private.h>
 #include <syscalls.h>

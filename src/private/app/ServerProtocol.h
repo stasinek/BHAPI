@@ -13,7 +13,7 @@
 #define APP_SERVER_PROTOCOL_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #ifdef HAIKU_TARGET_PLATFORM_LIBBE_TEST

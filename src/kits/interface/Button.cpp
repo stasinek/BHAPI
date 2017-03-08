@@ -65,7 +65,7 @@
 
 #include "../add-ons/theme/ThemeEngine.h"
 #include "../support/Errors.h"
-#include "../kernel/OS.h"
+#include "../kernel/KERNEL.h"
 #include "../kernel/kernel.h"
 #include "../app/MessageRunner.h"
 #include "../app/Message.h"
@@ -79,8 +79,8 @@ BButton::BButton(BRect <emphasis>frame</emphasis>,
                  const char *<emphasis>name</emphasis>,
                  const char *<emphasis>label</emphasis>,
                  BMessage *<emphasis>message</emphasis>,
-                 b_uint32 <emphasis>resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP</emphasis>,
-                 b_uint32 <emphasis>flags = B_WILL_DRAW | B_NAVIGABLE</emphasis>)
+                  __be_uint32 <emphasis>resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP</emphasis>,
+                  __be_uint32 <emphasis>flags = B_WILL_DRAW | B_NAVIGABLE</emphasis>)
 virtual BButton::~BButton()
 	</programlisting>
 	<itemizedlist>
@@ -108,7 +108,7 @@ virtual BButton::~BButton()
 </document>
 -----------------------------------------------------------------------------*/
 BButton::BButton(BRect frame, const char *name, const char *label,
-		 BMessage *message, b_uint32 resizeMode, b_uint32 flags)
+		 BMessage *message,  __be_uint32 resizeMode,  __be_uint32 flags)
 	: BControl(frame, name, label, message, resizeMode, flags), fInsided(false),
 	  fMousePushed(false), fFocusFlash(0), fRunner(NULL)
 {
@@ -318,7 +318,7 @@ BButton::MouseUp(BPoint where)
 
 
 void
-BButton::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
+BButton::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 	if(!IsEnabled()) return;
 
@@ -363,7 +363,7 @@ BButton::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 
 
 void
-BButton::KeyDown(const char *bytes, b_int32 numBytes)
+BButton::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	if(!IsEnabled() || !IsFocus() || numBytes != 1) return;
 
@@ -392,7 +392,7 @@ BButton::KeyDown(const char *bytes, b_int32 numBytes)
 
 
 void
-BButton::KeyUp(const char *bytes, b_int32 numBytes)
+BButton::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
 	if(Value() != B_CONTROL_ON || fMousePushed) return;
 
@@ -405,7 +405,7 @@ BButton::KeyUp(const char *bytes, b_int32 numBytes)
 
 
 void
-BButton::SetFont(const BFont *font, b_uint8 mask)
+BButton::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	BControl::SetFont(font, mask);
 	Invalidate();
@@ -472,7 +472,7 @@ BButton::MakeFocus(bool focusState)
 
 #if 0
 void
-BButton::SetFlags(b_uint32 flags)
+BButton::SetFlags(__be_uint32 flags)
 {
 	flags &= ~B_PULSE_NEEDED;
 	BControl::SetFlags(flags);
@@ -487,7 +487,7 @@ BButton::Pulse()
 	b_theme_engine *theme = bhapi::get_current_theme_engine();
 	if(theme == NULL || theme->should_button_do_focus_flash == NULL) return;
 
-	b_int8 shouldFlash = theme->should_button_do_focus_flash(theme, this);
+	__be_int8 shouldFlash = theme->should_button_do_focus_flash(theme, this);
 	if(shouldFlash == 0) return;
 
 	Window()->DisableUpdates();

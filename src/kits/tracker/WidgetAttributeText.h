@@ -36,7 +36,7 @@ All rights reserved.
 
 
 #include <DateFormat.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include "TrackerSettings.h"
 

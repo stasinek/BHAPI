@@ -43,10 +43,10 @@ All rights reserved.
 #include <ControlLook.h>
 #include <Debug.h>
 #include <DurationFormat.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MessageFilter.h>
 #include <StringView.h>
-#include <String.h>
+#include <StringClass.h>
 #include <TimeFormat.h>
 
 #include <string.h>
@@ -253,10 +253,10 @@ BStatusWindow::CreateStatusItem(thread_id thread, StatusWindowState type)
 	// when we are done
 	bool desktopActive = false;
 	{
-		AutoLock<BLooper> lock(be_app);
-		int32 count = be_app->CountWindows();
+		AutoLock<BLooper> lock(__be_app);
+		int32 count =  __be_app->CountWindows();
 		for (int32 index = 0; index < count; index++) {
-			BWindow* window = be_app->WindowAt(index);
+			BWindow* window =  __be_app->WindowAt(index);
 			if (dynamic_cast<BDeskWindow*>(window) != NULL
 				&& window->IsActive()) {
 				desktopActive = true;
@@ -336,11 +336,11 @@ BStatusWindow::RemoveStatusItem(thread_id thread)
 		if (--numItems == 0 && !IsHidden()) {
 			BDeskWindow* desktop = NULL;
 			if (fRetainDesktopFocus) {
-				AutoLock<BLooper> lock(be_app);
-				int32 count = be_app->CountWindows();
+				AutoLock<BLooper> lock(__be_app);
+				int32 count =  __be_app->CountWindows();
 				for (int32 index = 0; index < count; index++) {
 					desktop = dynamic_cast<BDeskWindow*>(
-						be_app->WindowAt(index));
+						__be_app->WindowAt(index));
 					if (desktop != NULL)
 						break;
 				}
@@ -643,7 +643,7 @@ BStatusView::Draw(BRect updateRect)
 	}
 
 	BRect bounds(Bounds());
-	be_control_look->DrawRaisedBorder(this, bounds, updateRect, ViewColor());
+	__be_control_look->DrawRaisedBorder(this, bounds, updateRect, ViewColor());
 
 	SetHighColor(0, 0, 0);
 
@@ -661,7 +661,7 @@ BStatusView::Draw(BRect updateRect)
 	float normalFontSize = font.Size();
 	float smallFontSize = max_c(normalFontSize * 0.8f, 8.0f);
 	float availableSpace = fStatusBar->Frame().Width();
-	availableSpace -= be_control_look->DefaultLabelSpacing();
+	availableSpace -=  __be_control_look->DefaultLabelSpacing();
 		// subtract to provide some room between our two strings
 
 	float destinationStringWidth = 0.f;

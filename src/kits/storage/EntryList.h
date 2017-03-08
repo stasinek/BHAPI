@@ -8,7 +8,7 @@
 
 #include <dirent.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BEntry;

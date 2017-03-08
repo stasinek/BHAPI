@@ -39,7 +39,7 @@ All rights reserved.
 
 #include <Catalog.h>
 #include <Debug.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MenuItem.h>
 #include <Mime.h>
 #include <InterfaceDefs.h>
@@ -168,7 +168,7 @@ AddMenuItemVisitor::Visit(BPartition* partition, int32 level)
 MountMenu::MountMenu(const char* name)
 	: BMenu(name)
 {
-	SetFont(be_plain_font);
+	SetFont(__be_plain_font);
 }
 
 
@@ -234,7 +234,7 @@ MountMenu::AddDynamicItem(add_state)
 		new BMessage(kRunAutomounterSettings));
 	AddItem(mountSettings);
 
-	SetTargetForItems(be_app);
+	SetTargetForItems(__be_app);
 
 	return false;
 }

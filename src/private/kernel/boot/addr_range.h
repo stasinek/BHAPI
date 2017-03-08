@@ -7,7 +7,7 @@
 #define KERNEL_BOOT_ADDR_RANGE_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 typedef struct addr_range {

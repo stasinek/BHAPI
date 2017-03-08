@@ -66,7 +66,7 @@ BSeparatorItem::GetContentSize(float* _width, float* _height)
 		*_width = 2.0;
 
 	if (_height != NULL) {
-		BFont font(be_plain_font);
+		BFont font(__be_plain_font);
 		if (Menu() != NULL)
 			Menu()->GetFont(&font);
 

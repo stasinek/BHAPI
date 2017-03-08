@@ -44,24 +44,24 @@ class BLoooper;
 class IMPEXPBHAPI BLooper : public BHandler {
 public:
 //	BLooper(const char *name = NULL,
-//		b_int32 priority = B_NORMAL_PRIORITY);
-    void Init(const char *name, b_int32 priority);
+//		__be_int32 priority = B_NORMAL_PRIORITY);
+    void Init(const char *name,  __be_int32 priority);
     BLooper(const char *name);
-    BLooper(b_int32 priority);
+    BLooper(__be_int32 priority);
     BLooper(const char *name,
-        b_int32 priority);
+         __be_int32 priority);
     virtual ~BLooper();
 
     // Archiving
     BLooper(const BMessage *from);
-    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    virtual status_t Archive(BMessage *into, bool deep = true) const;
     static BArchivable *Instantiate(const BMessage *from);
 
     void		AddHandler(BHandler *handler);
     bool		RemoveHandler(BHandler *handler);
-    b_int32		CountHandlers() const;
-    BHandler	*HandlerAt(b_int32 index) const;
-    b_int32		IndexOf(BHandler *handler) const;
+     __be_int32		CountHandlers() const;
+    BHandler	*HandlerAt(__be_int32 index) const;
+     __be_int32		IndexOf(BHandler *handler) const;
 
     BHandler	*PreferredHandler() const;
     void		SetPreferredHandler(BHandler *handler);
@@ -73,13 +73,13 @@ public:
     BLooper*	Proxy() const;
     bool		ProxyBy(BLooper *proxy);
 
-    b_thread_id	Thread() const;
+     __be_thread_id	Thread() const;
 
     bool		Lock();
     void		Unlock();
-    b_status_t	LockWithTimeout(b_bigtime_t microseconds_timeout);
+    status_t	LockWithTimeout(bigtime_t microseconds_timeout);
 
-    b_int64		CountLocks() const;
+     __be_int64		CountLocks() const;
     bool		IsLockedByCurrentThread() const;
 
     virtual void	DispatchMessage(BMessage *msg, BHandler *target);
@@ -92,12 +92,12 @@ public:
     BMessage	*DetachCurrentMessage();
     BMessageQueue	*MessageQueue() const;
 
-    b_status_t	PostMessage(b_uint32 command);
-    b_status_t	PostMessage(const BMessage *message);
-    b_status_t	PostMessage(b_uint32 command,
+    status_t	PostMessage(__be_uint32 command);
+    status_t	PostMessage(const BMessage *message);
+    status_t	PostMessage(__be_uint32 command,
                     BHandler *handler,
                     BHandler *reply_to = NULL);
-    b_status_t	PostMessage(const BMessage *message,
+    status_t	PostMessage(const BMessage *message,
                     BHandler *handler,
                     BHandler *reply_to = NULL);
 
@@ -106,7 +106,7 @@ public:
     virtual bool	SetCommonFilterList(const BList *filterList);
     const BList	*CommonFilterList() const;
 
-    static BLooper	*LooperForThread(b_thread_id tid);
+    static BLooper	*LooperForThread(__be_thread_id tid);
 
 protected:
     // NextLooperMessage & DispatchLooperMessage: called from task of looper, like below
@@ -127,27 +127,27 @@ protected:
     //		}
     //		...
     //	}
-//	BMessage	*NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT);
-    BMessage	*NextLooperMessage(b_bigtime_t timeout);
+//	BMessage	*NextLooperMessage(bigtime_t timeout = B_INFINITE_TIMEOUT);
+    BMessage	*NextLooperMessage(bigtime_t timeout);
     void		DispatchLooperMessage(BMessage *msg);
 
 private:
     friend class BHandler;
     friend class BApplication;
     friend class BMessenger;
-    friend b_status_t bhapi::lock_looper_of_handler(b_uint64 token, b_bigtime_t timeout);
+    friend status_t bhapi::lock_looper_of_handler(__be_uint64 token, bigtime_t timeout);
 
     bool fDeconstructing;
     BLooper *fProxy;
     BList fClients;
 
-    b_int32 fThreadPriority;
+     __be_int32 fThreadPriority;
 
-    b_int32 fHandlersCount;
+     __be_int32 fHandlersCount;
     BHandler *fPreferredHandler;
 
     void *fLocker;
-    b_int64 fLocksCount;
+     __be_int64 fLocksCount;
 
     void *fThread;
     void *fSem;
@@ -155,14 +155,14 @@ private:
     BMessageQueue *fMessageQueue;
     BMessage *fCurrentMessage;
 
-    static b_status_t _task(void*);
-    static b_status_t _taskLooper(BLooper*, void*);
+    static status_t _task(void*);
+    static status_t _taskLooper(BLooper*, void*);
     static void _taskError(void*);
 
     static BList sLooperList;
 
     BHandler *_MessageTarget(const BMessage *msg, bool *preferred);
-    b_status_t _PostMessage(const BMessage *msg, b_uint64 handlerToken, b_uint64 replyToken, b_bigtime_t timeout);
+    status_t _PostMessage(const BMessage *msg,  __be_uint64 handlerToken,  __be_uint64 replyToken, bigtime_t timeout);
 
     BLooper *_Proxy() const;
     bool _ProxyBy(BLooper *proxy);

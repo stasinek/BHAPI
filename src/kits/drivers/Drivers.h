@@ -11,7 +11,7 @@
 
 #include <BeBuild.h>
 #include <Select.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #ifdef __cplusplus

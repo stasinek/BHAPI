@@ -6,7 +6,7 @@
 #define _MIME_SNIFFER_RULES_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <list>
 #include <string>

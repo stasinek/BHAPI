@@ -9,7 +9,7 @@
 #include <Application.h>
 #include <Autolock.h>
 #include <CatalogData.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MutableLocaleRoster.h>
 #include <Node.h>
 #include <Roster.h>

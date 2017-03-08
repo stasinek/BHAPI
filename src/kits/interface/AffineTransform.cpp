@@ -23,7 +23,7 @@
 
 #include <AffineTransform.h>
 
-#include <TypeConstants.h>
+#include <HaikuConstants.h>
 
 
 const BAffineTransform B_AFFINE_IDENTITY_TRANSFORM;

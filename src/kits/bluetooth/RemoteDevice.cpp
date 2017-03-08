@@ -19,7 +19,7 @@
 
 #include <Catalog.h>
 #include <CommandManager.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <bluetoothserver_p.h>
 
 #include "KitSupport.h"

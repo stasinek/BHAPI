@@ -44,8 +44,8 @@ typedef enum b_swap_action {
     B_SWAP_ALWAYS
 } b_swap_action;
 
-_IMPEXP_BHAPI b_status_t	b_swap_data(b_type_code type, void *data, size_t len, b_swap_action action);
-_IMPEXP_BHAPI bool			b_is_type_swapped(b_type_code type);
+_IMPEXP_BHAPI status_t	b_swap_data(type_code type, void *data, size_t len, b_swap_action action);
+_IMPEXP_BHAPI bool			b_is_type_swapped(type_code type);
 _IMPEXP_BHAPI float			b_swap_float(float value);
 _IMPEXP_BHAPI double		b_swap_double(double value);
 

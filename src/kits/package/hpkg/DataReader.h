@@ -6,7 +6,7 @@
 #define _PACKAGE__HPKG__DATA_READER_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BDataIO;

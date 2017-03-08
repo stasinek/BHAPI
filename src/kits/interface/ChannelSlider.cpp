@@ -569,9 +569,9 @@ BChannelSlider::DrawGroove(BView* into, int32 channel, BPoint leftTop,
 	rect.right = floorf(rect.right);
 	rect.bottom = floorf(rect.bottom);
 	rgb_color base = ui_color(B_PANEL_BACKGROUND_COLOR);
-	rgb_color barColor = be_control_look->SliderBarColor(base);
+	rgb_color barColor =  __be_control_look->SliderBarColor(base);
 	uint32 flags = 0;
-	be_control_look->DrawSliderBar(into, rect, rect, base,
+	__be_control_look->DrawSliderBar(into, rect, rect, base,
 		barColor, flags, Orientation());
 }
 
@@ -598,7 +598,7 @@ BChannelSlider::DrawThumb(BView* into, int32 channel, BPoint where,
 	rect.bottom = ceilf(rect.bottom + 0.5);
 	rgb_color base = ui_color(B_PANEL_BACKGROUND_COLOR);
 	uint32 flags = 0;
-	be_control_look->DrawSliderThumb(into, rect, rect, base,
+	__be_control_look->DrawSliderThumb(into, rect, rect, base,
 		flags, Orientation());
 }
 

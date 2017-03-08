@@ -44,36 +44,36 @@
 #include "../support/Archivable.h"
 class IMPEXPBHAPI BNetAddress : public BArchivable {
 public:
-    BNetAddress(const char *hostname = NULL, b_uint16 port = 0);
+    BNetAddress(const char *hostname = NULL,  __be_uint16 port = 0);
     BNetAddress(const char *hostname, const char *protocol, const char *service);
     BNetAddress(const struct sockaddr_in &sa);
-    BNetAddress(const struct in_addr addr, b_uint16 port = 0);
-    BNetAddress(b_uint32 addr, b_uint16 port = 0);
+    BNetAddress(const struct in_addr addr,  __be_uint16 port = 0);
+    BNetAddress(__be_uint32 addr,  __be_uint16 port = 0);
     BNetAddress(const BNetAddress &from);
     virtual ~BNetAddress();
 
 	// Archiving
     BNetAddress(const BMessage *from);
-	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+	virtual status_t Archive(BMessage *into, bool deep = true) const;
 	static BArchivable *Instantiate(const BMessage *from);
 
-	b_status_t	InitCheck() const;
+	status_t	InitCheck() const;
 
     BNetAddress	&operator=(const BNetAddress &addr);
 
-    b_status_t	SetTo(const char *hostname, b_uint16 port = 0);
-	b_status_t	SetTo(const char *hostname, const char *protocol, const char *service);
-	b_status_t	SetTo(const struct sockaddr_in &sa);
-    b_status_t	SetTo(const struct in_addr addr, b_uint16 port = 0);
-    b_status_t	SetTo(b_uint32 addr = INADDR_ANY, b_uint16 port = 0);
+    status_t	SetTo(const char *hostname,  __be_uint16 port = 0);
+	status_t	SetTo(const char *hostname, const char *protocol, const char *service);
+	status_t	SetTo(const struct sockaddr_in &sa);
+    status_t	SetTo(const struct in_addr addr,  __be_uint16 port = 0);
+    status_t	SetTo(__be_uint32 addr = INADDR_ANY,  __be_uint16 port = 0);
 
-    b_status_t	GetAddr(char *hostname, size_t hostname_len, b_uint16 *port = NULL) const;
-	b_status_t	GetAddr(struct sockaddr_in &sa) const;
-    b_status_t	GetAddr(struct in_addr &addr, b_uint16 *port = NULL) const;
+    status_t	GetAddr(char *hostname, size_t hostname_len,  __be_uint16 *port = NULL) const;
+	status_t	GetAddr(struct sockaddr_in &sa) const;
+    status_t	GetAddr(struct in_addr &addr,  __be_uint16 *port = NULL) const;
 
 private:
 	struct sockaddr_in fAddr;
-	b_status_t fStatus;
+	status_t fStatus;
 };
 
 #endif /* __cplusplus */

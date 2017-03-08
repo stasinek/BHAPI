@@ -15,7 +15,7 @@
 #define _PCI_H
 
 //#include <BeBuild.h>
-//#include <SupportDefs.h>
+//#include <Haiku.h>
 #include <bus_manager.h>
 
 #ifdef __cplusplus

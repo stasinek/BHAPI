@@ -55,7 +55,7 @@ typedef struct font_detach_callback {
 } font_detach_callback;
 
 IMPEXPBHAPI BFontEngine*	get_font_engine(const char *family, const char *style);
-IMPEXPBHAPI BFontEngine*	get_font_engine(b_int32 familyIndex, b_int32 styleIndex);
+IMPEXPBHAPI BFontEngine*	get_font_engine(__be_int32 familyIndex,  __be_int32 styleIndex);
 LOCALBHAPI bool font_init(void);
 IMPEXPBHAPI bool font_add(const char *family, const char *style, BFontEngine *engine);
 IMPEXPBHAPI bool update_font_families(bool);
@@ -83,13 +83,13 @@ public:
 	virtual bool IsValid() const;
 
 	virtual bool IsScalable() const;
-    bool HasFixedSize(b_int32 *count = NULL) const;
-    bool GetFixedSize(float *size, b_int32 index = 0) const;
+    bool HasFixedSize(__be_int32 *count = NULL) const;
+    bool GetFixedSize(float *size,  __be_int32 index = 0) const;
 
 	virtual float StringWidth(const char *string, float size, float spacing = 0,
-                  float shear = 90, bool bold = false, b_int32 length = -1) const;
+                  float shear = 90, bool bold = false,  __be_int32 length = -1) const;
     float StringWidth(const BString &str, float size, float spacing = 0,
-              float shear = 90, bool bold = false, b_int32 length = -1) const;
+              float shear = 90, bool bold = false,  __be_int32 length = -1) const;
 
     virtual void GetHeight(bhapi::font_height *height, float size, float shear = 90, bool bold = false) const;
 
@@ -101,18 +101,18 @@ public:
 	// B_FONT_RENDER_DIRECTLY callback: return value is update rect with view coordinate
 	virtual BRect RenderString(BHandler *view, const char *string,
 				   float size, float spacing = 0,
-                   float shear = 90, bool bold = false, b_int32 length = -1);
+                   float shear = 90, bool bold = false,  __be_int32 length = -1);
 	// B_FONT_RENDER_PIXMAP callback: return value of "RenderString" must free by "delete[]"
-    virtual b_uint8* RenderString(const char *string, b_int32 *width, b_int32 *height, bool *is_mono,
+    virtual  __be_uint8* RenderString(const char *string,  __be_int32 *width,  __be_int32 *height, bool *is_mono,
 				     float size, float spacing = 0,
-                     float shear = 90, bool bold = false, b_int32 length = -1);
+                     float shear = 90, bool bold = false,  __be_int32 length = -1);
 
     BRect RenderString(BHandler *view, const BString &str,
 			   float size, float spacing = 0,
-               float shear = 90, bool bold = false, b_int32 length = -1);
-    b_uint8* RenderString(const BString &str, b_int32 *width, b_int32 *height, bool *is_mono,
+               float shear = 90, bool bold = false,  __be_int32 length = -1);
+     __be_uint8* RenderString(const BString &str,  __be_int32 *width,  __be_int32 *height, bool *is_mono,
 			     float size, float spacing = 0,
-                 float shear = 90, bool bold = false, b_int32 length = -1);
+                 float shear = 90, bool bold = false,  __be_int32 length = -1);
 
     virtual bhapi::font_detach_callback* Attach(void (*callback)(void*), void *data);
 	bool IsAttached() const;
@@ -124,7 +124,7 @@ public:
 protected:
 	void SetFamily(const char *family);
 	void SetStyle(const char *style);
-    void SetFixedSize(float *sizes, b_int32 count);
+    void SetFixedSize(float *sizes,  __be_int32 count);
     void SetRenderMode(bhapi::font_render_mode rmode);
 
 	bool InServing() const;
@@ -138,7 +138,7 @@ private:
 	char *fStyle;
 
 	float *fFixedSize;
-    b_int32 nFixedSize;
+     __be_int32 nFixedSize;
 
     bhapi::font_render_mode fRenderMode;
 

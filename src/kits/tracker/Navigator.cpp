@@ -128,7 +128,7 @@ BNavigator::Draw(BRect updateRect)
 	rgb_color base = LowColor();
 	uint32 flags = 0;
 
-	be_control_look->DrawBorder(this, rect, updateRect, base,
+	__be_control_look->DrawBorder(this, rect, updateRect, base,
 		B_PLAIN_BORDER, flags, BControlLook::B_BOTTOM_BORDER);
 
 	_inherited::Draw(rect & updateRect);
@@ -236,8 +236,8 @@ BNavigator::SendNavigationMessage(NavigationAction action, BEntry* entry,
 			nodeRef = NULL;
 
 		// if the option key was held down, open in new window (send message
-		// to be_app) otherwise send message to this window. TTracker
-		// (be_app) understands nodeRefToSlection, BContainerWindow doesn't,
+		// to  __be_app) otherwise send message to this window. TTracker
+		// (__be_app) understands nodeRefToSlection, BContainerWindow doesn't,
 		// so we have to select the item manually
 		if (option) {
 			message.what = B_REFS_RECEIVED;
@@ -245,7 +245,7 @@ BNavigator::SendNavigationMessage(NavigationAction action, BEntry* entry,
 				message.AddData("nodeRefToSelect", B_RAW_TYPE, nodeRef,
 					sizeof(node_ref));
 			}
-			be_app->PostMessage(&message);
+			__be_app->PostMessage(&message);
 		} else {
 			message.what = kSwitchDirectory;
 			Window()->PostMessage(&message);
@@ -263,7 +263,7 @@ BNavigator::SendNavigationMessage(NavigationAction action, BEntry* entry,
 				// StandAloneTaskLoop::Run() and subsequently called
 				// functions.
 			if (nodeRef != NULL) {
-				TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+				TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 				if (tracker != NULL)
 					tracker->SelectChildInParentSoon(&ref, nodeRef);
 			}

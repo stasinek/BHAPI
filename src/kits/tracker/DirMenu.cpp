@@ -39,7 +39,7 @@ All rights reserved.
 #include <Catalog.h>
 #include <Debug.h>
 #include <Directory.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MenuBar.h>
 #include <Path.h>
 #include <Volume.h>
@@ -70,7 +70,7 @@ BDirMenu::BDirMenu(BMenuBar* bar, BMessenger target, uint32 command,
 	fMenuBar(bar),
 	fCommand(command)
 {
-	SetFont(be_plain_font);
+	SetFont(__be_plain_font);
 	if (entryName)
 		fEntryName = entryName;
 	else

@@ -39,13 +39,13 @@ public:
 	BVolumeRoster();
 	virtual ~BVolumeRoster();
 
-	b_status_t	GetNextVolume(BVolume *vol);
+	status_t	GetNextVolume(BVolume *vol);
 	void		Rewind();
 
-	b_status_t	GetBootVolume(BVolume *vol);
+	status_t	GetBootVolume(BVolume *vol);
 
 private:
-    b_int32 fPos;
+     __be_int32 fPos;
 };
 
 #endif /* __cplusplus */

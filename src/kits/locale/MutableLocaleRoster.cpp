@@ -21,7 +21,7 @@
 #include <FormattingConventions.h>
 #include <Language.h>
 #include <LocaleRosterData.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 namespace BPrivate {

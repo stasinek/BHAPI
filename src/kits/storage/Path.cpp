@@ -59,7 +59,7 @@ inline void b_path_prepend_current_directory(BString &path)
 	str.CopyInto(buf, B_MAXPATH, 0, -1);
 #endif
 
-	b_int32 len = (b_int32)strlen(buf);
+	__be_int32 len = (__be_int32)strlen(buf);
 	if(buf[len - 1] != '/')
 	{
 		buf[len] = '/';
@@ -103,11 +103,11 @@ inline bool b_path_do_normalization(BString &path)
 		path.ReplaceAll("/./", "/");
 	}
 
-	b_int32 uponIndex;
+	__be_int32 uponIndex;
 	while((uponIndex = path.FindLast("/../")) >= 0)
 	{
 		retVal = true;
-		b_int32 tmp = path.FindLast("/", uponIndex - 1);
+		__be_int32 tmp = path.FindLast("/", uponIndex - 1);
 		if(tmp < 0)
 			path.MakeEmpty(); // invalid path
 		else
@@ -134,7 +134,7 @@ inline bool b_path_do_normalization(BString &path)
 }
 
 
-b_status_t b_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize)
+status_t b_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize)
 {
 	BString str(dir);
 	BString str_leaf(leaf);
@@ -175,7 +175,7 @@ b_status_t b_path_expound(BString &path, const char *dir, const char *leaf, bool
 }
 
 
-b_status_t b_path_get_parent(BString &parent, const char *path)
+status_t b_path_get_parent(BString &parent, const char *path)
 {
 	if(path == NULL || *path == 0) return B_BAD_VALUE;
 
@@ -186,7 +186,7 @@ b_status_t b_path_get_parent(BString &parent, const char *path)
 #endif
 
 	parent = path;
-	b_int32 slashIndex = parent.FindLast("/");
+	__be_int32 slashIndex = parent.FindLast("/");
 	parent.Remove(slashIndex, -1);
 #ifndef _WIN32
 	if(parent.Length() == 0) parent = "/";
@@ -225,11 +225,11 @@ BPath::~BPath()
 }
 
 
-b_status_t
+status_t
 BPath::SetTo(const char *dir, const char *leaf, bool normalize)
 {
 	BString str;
-	b_status_t status = b_path_expound(str, dir, leaf, &normalize);
+	status_t status = b_path_expound(str, dir, leaf, &normalize);
 	if(status != B_OK) return status;
 
 	if(normalize)
@@ -258,7 +258,7 @@ BPath::SetTo(const char *dir, const char *leaf, bool normalize)
 }
 
 
-b_status_t
+status_t
 BPath::Append(const char *path, bool normalize)
 {
 	if(fPath == NULL) return B_BAD_VALUE;
@@ -295,9 +295,9 @@ BPath::Leaf() const
 	if(strlen(fPath) <= 3) return NULL;
 #endif
 
-	b_int32 slashIndex = -1;
+	__be_int32 slashIndex = -1;
 
-	for(b_int32 i = (b_int32)strlen(fPath) - 1; i >= 0; i--)
+	for(__be_int32 i = (__be_int32)strlen(fPath) - 1; i >= 0; i--)
 	{
 		if(fPath[i] == '/')
 		{
@@ -306,20 +306,20 @@ BPath::Leaf() const
 		}
 	}
 
-	if(slashIndex < 0 || slashIndex == (b_int32)strlen(fPath) - 1) return NULL;
+	if(slashIndex < 0 || slashIndex == (__be_int32)strlen(fPath) - 1) return NULL;
 
 	return(fPath + (slashIndex + 1));
 }
 
 
-b_status_t
+status_t
 BPath::GetParent(BPath *parent) const
 {
 	if(parent == NULL) return B_BAD_VALUE;
 	if(fPath == NULL) return B_NO_INIT;
 
 	BString str;
-	b_status_t status = b_path_get_parent(str, fPath);
+	status_t status = b_path_get_parent(str, fPath);
 	if(status != B_OK) return status;
 
 	return parent->SetTo(str.String(), NULL, false);

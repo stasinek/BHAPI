@@ -48,28 +48,28 @@ BGraphicsContext::~BGraphicsContext()
 }
 
 
-b_status_t BGraphicsContext::SetDrawingMode(bhapi::drawing_mode mode)
+status_t BGraphicsContext::SetDrawingMode(bhapi::drawing_mode mode)
 {
 	fDrawingMode = mode;
 	return B_OK;
 }
 
 
-b_status_t BGraphicsContext::SetClipping(const BRegion &clipping)
+status_t BGraphicsContext::SetClipping(const BRegion &clipping)
 {
 	fClipping = clipping;
 	return B_OK;
 }
 
 
-b_status_t BGraphicsContext::SetHighColor(bhapi::rgb_color highColor)
+status_t BGraphicsContext::SetHighColor(bhapi::rgb_color highColor)
 {
 	fHighColor.set_to(highColor);
 	return B_OK;
 }
 
 
-b_status_t BGraphicsContext::SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
+status_t BGraphicsContext::SetHighColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color color;
 	color.set_to(r, g, b, a);
@@ -77,14 +77,14 @@ b_status_t BGraphicsContext::SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uin
 }
 
 
-b_status_t BGraphicsContext::SetLowColor(bhapi::rgb_color lowColor)
+status_t BGraphicsContext::SetLowColor(bhapi::rgb_color lowColor)
 {
 	fLowColor.set_to(lowColor);
 	return B_OK;
 }
 
 
-b_status_t BGraphicsContext::SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
+status_t BGraphicsContext::SetLowColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color color;
 	color.set_to(r, g, b, a);
@@ -92,21 +92,21 @@ b_status_t BGraphicsContext::SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint
 }
 
 
-b_status_t BGraphicsContext::SetPattern(bhapi::pattern pattern)
+status_t BGraphicsContext::SetPattern(bhapi::pattern pattern)
 {
 	fPattern = pattern;
 	return B_OK;
 }
 
 
-b_status_t BGraphicsContext::SetPenSize(b_uint32 penSize)
+status_t BGraphicsContext::SetPenSize(__be_uint32 penSize)
 {
 	fPenSize = penSize;
 	return B_OK;
 }
 
 
-b_status_t BGraphicsContext::SetSquarePointStyle(bool state)
+status_t BGraphicsContext::SetSquarePointStyle(bool state)
 {
 	fSquarePoint = state;
 	return B_OK;
@@ -140,7 +140,7 @@ bhapi::pattern BGraphicsContext::Pattern() const
 	return fPattern;
 }
 
-b_uint32 BGraphicsContext::PenSize() const
+be_uint32 BGraphicsContext::PenSize() const
 {
 	return fPenSize;
 }
@@ -159,13 +159,13 @@ BGraphicsDrawable::~BGraphicsDrawable()
 {
 }
 
-b_status_t BGraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
+status_t BGraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
 {
 	fBkColor.set_to(bkColor);
 	return B_OK;
 }
 
-b_status_t BGraphicsDrawable::SetBackgroundColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
+status_t BGraphicsDrawable::SetBackgroundColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color color;
 	color.set_to(r, g, b, a);

@@ -5,7 +5,7 @@
 #ifndef TOUCHPAD_SETTINGS_H
 #define TOUCHPAD_SETTINGS_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 typedef struct {

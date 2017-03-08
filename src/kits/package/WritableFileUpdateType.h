@@ -6,7 +6,7 @@
 #define _PACKAGE__WRITABLE_FILE_UPDATE_TYPE_H_
 
 
-#include <String.h>
+#include <StringClass.h>
 
 
 namespace BPackageKit {

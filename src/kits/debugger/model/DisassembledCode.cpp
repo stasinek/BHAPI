@@ -11,7 +11,7 @@
 
 #include <new>
 
-#include <String.h>
+#include <StringClass.h>
 
 #include "SourceLanguage.h"
 #include "Statement.h"

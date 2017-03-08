@@ -39,7 +39,7 @@
 
 #include "../kernel/Debug.h"
 #include "../kernel/Kernel.h"
-#include "../kernel/OS.h"
+#include "../kernel/KERNEL.h"
 #include "../support/Locker.h"
 #include "../support/Errors.h"
 #include "../support/Autolock.h"
@@ -60,19 +60,19 @@ BLooper::BLooper(const char *name)
     this->Init(name,B_NORMAL_PRIORITY);
 }
 
-BLooper::BLooper(b_int32 priority)
+BLooper::BLooper(__be_int32 priority)
     : BHandler(""), fDeconstructing(false), fProxy(NULL), fHandlersCount(1), fPreferredHandler(NULL), fLocker(NULL), fLocksCount(B_INT64_CONSTANT(0)), fThread(NULL), fSem(NULL), fMessageQueue(NULL), fCurrentMessage(NULL), fThreadExited(NULL)
 {
     this->Init(NULL,priority);
 }
 
-BLooper::BLooper(const char *name, b_int32 priority)
+BLooper::BLooper(const char *name,  __be_int32 priority)
     : BHandler(name), fDeconstructing(false), fProxy(NULL), fHandlersCount(1), fPreferredHandler(NULL), fLocker(NULL), fLocksCount(B_INT64_CONSTANT(0)), fThread(NULL), fSem(NULL), fMessageQueue(NULL), fCurrentMessage(NULL), fThreadExited(NULL)
 {
     this->Init(name,priority);
 }
 
-void BLooper::Init(const char *name, b_int32 priority)
+void BLooper::Init(const char *name,  __be_int32 priority)
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     BAutolock <BLocker>autolock(hLocker);
@@ -150,7 +150,7 @@ BLooper::BLooper(const BMessage *from)
 }
 
 
-b_status_t
+status_t
 BLooper::Archive(BMessage *into, bool deep) const
 {
     if(!into) return B_ERROR;
@@ -167,7 +167,7 @@ BLooper::Archive(BMessage *into, bool deep) const
 BArchivable*
 BLooper::Instantiate(const BMessage *from)
 {
-    if(b_validatb_instantiation(from, "BLooper"))
+    if(bhapi::validatb_instantiation(from, "BLooper"))
         return new BLooper(from);
     return NULL;
 }
@@ -208,7 +208,7 @@ BLooper::RemoveHandler(BHandler *handler)
 }
 
 
-b_int32
+be_int32
 BLooper::CountHandlers() const
 {
     return fHandlersCount;
@@ -216,7 +216,7 @@ BLooper::CountHandlers() const
 
 
 BHandler*
-BLooper::HandlerAt(b_int32 index) const
+BLooper::HandlerAt(__be_int32 index) const
 {
     if(index >= fHandlersCount) return NULL;
 
@@ -230,12 +230,12 @@ BLooper::HandlerAt(b_int32 index) const
 }
 
 
-b_int32
+be_int32
 BLooper::IndexOf(BHandler *handler) const
 {
     if(handler == NULL || handler->fLooper != this) return -1;
 
-    b_int32 index = 0;
+     __be_int32 index = 0;
 
     const BHandler *found = this;
     while(found != handler)
@@ -285,12 +285,12 @@ BLooper::Unlock()
 }
 
 
-b_status_t
-BLooper::LockWithTimeout(b_bigtime_t microseconds_timeout)
+status_t
+BLooper::LockWithTimeout(bigtime_t microseconds_timeout)
 {
-    b_uint64 token = bhapi::get_handler_token(this);
+     __be_uint64 token = bhapi::get_handler_token(this);
 
-    b_status_t retVal = bhapi::lock_looper_of_handler(token, microseconds_timeout);
+    status_t retVal = bhapi::lock_looper_of_handler(token, microseconds_timeout);
 
     if(retVal == B_OK) fLocksCount++;
 
@@ -298,7 +298,7 @@ BLooper::LockWithTimeout(b_bigtime_t microseconds_timeout)
 }
 
 
-b_int64
+be_int64
 BLooper::CountLocks() const
 {
     return fLocksCount;
@@ -312,30 +312,30 @@ BLooper::IsLockedByCurrentThread() const
 }
 
 
-b_status_t
-BLooper::PostMessage(b_uint32 command)
+status_t
+BLooper::PostMessage(__be_uint32 command)
 {
     BMessage msg(command);
     return PostMessage(&msg, this, NULL);
 }
 
 
-b_status_t
+status_t
 BLooper::PostMessage(const BMessage *message)
 {
     return PostMessage(message, this, NULL);
 }
 
 
-b_status_t
-BLooper::PostMessage(b_uint32 command, BHandler *handler, BHandler *reply_to)
+status_t
+BLooper::PostMessage(__be_uint32 command, BHandler *handler, BHandler *reply_to)
 {
     BMessage msg(command);
     return PostMessage(&msg, handler, reply_to);
 }
 
 
-b_status_t
+status_t
 BLooper::PostMessage(const BMessage *_message, BHandler *handler, BHandler *reply_to)
 {
     if(_message == NULL)
@@ -344,8 +344,8 @@ BLooper::PostMessage(const BMessage *_message, BHandler *handler, BHandler *repl
         return B_BAD_VALUE;
     }
 
-    b_uint64 handlerToken = bhapi::get_handler_token(handler);
-    b_uint64 replyToken = bhapi::get_handler_token(reply_to);
+     __be_uint64 handlerToken = bhapi::get_handler_token(handler);
+     __be_uint64 replyToken = bhapi::get_handler_token(reply_to);
 
     BMessage aMsg(*_message);
     aMsg.fIsReply = false;
@@ -359,18 +359,18 @@ BLooper::PostMessage(const BMessage *_message, BHandler *handler, BHandler *repl
 }
 
 
-b_status_t
-BLooper::_PostMessage(const BMessage *_message, b_uint64 handlerToken, b_uint64 replyToken, b_bigtime_t timeout)
+status_t
+BLooper::_PostMessage(const BMessage *_message,  __be_uint64 handlerToken,  __be_uint64 replyToken, bigtime_t timeout)
 {
     if(fMessageQueue == NULL || _message == NULL) return B_ERROR;
 
-    b_uint64 selfToken = bhapi::get_handler_token(this);
-    b_bigtime_t handlerTokenTimestamp = bhapi::get_handler_create_time_stamp(handlerToken);
-    b_bigtime_t replyTokenTimestamp = bhapi::get_handler_create_time_stamp(replyToken);
+     __be_uint64 selfToken = bhapi::get_handler_token(this);
+    bigtime_t handlerTokenTimestamp = bhapi::get_handler_create_time_stamp(handlerToken);
+    bigtime_t replyTokenTimestamp = bhapi::get_handler_create_time_stamp(replyToken);
 
     if(fMessageQueue->LockWithTimeout(timeout) != B_OK) return B_ERROR;
 
-    b_status_t retVal = B_ERROR;
+    status_t retVal = B_ERROR;
 
     if(fSem != NULL)
     {
@@ -518,12 +518,12 @@ BLooper::Quit()
 
         if(PostMessage(_QUIT_) != B_OK)
             BHAPI_ERROR("[APP]: %s --- Send \"_QUIT_\" to looper error!", __PRETTY_FUNCTION__);
-        b_uint64 token = bhapi::get_handler_token(this);
+         __be_uint64 token = bhapi::get_handler_token(this);
         fLocksCount = B_INT64_CONSTANT(0);
-        b_int64 locksCount = bhapi::count_locker_locks(fLocker);
+         __be_int64 locksCount = bhapi::count_locker_locks(fLocker);
         while((locksCount--) > B_INT64_CONSTANT(0)) bhapi::unlock_locker(fLocker);
 
-        b_status_t status;
+        status_t status;
         bhapi::wait_for_thread(thread, &status);
         if(bhapi::get_thread_run_state(thread) != BHAPI_THREAD_EXITED)
             if(bhapi::lock_looper_of_handler(token, B_INFINITE_TIMEOUT) == B_OK) delete this;
@@ -572,7 +572,7 @@ BLooper::_MessageTarget(const BMessage *msg, bool *preferred)
 }
 
 
-b_status_t
+status_t
 BLooper::_task(void *arg)
 {
     BLooper *self = (BLooper*)arg;
@@ -604,7 +604,7 @@ BLooper::_task(void *arg)
         return B_ERROR;
     }
 
-    b_status_t status = _taskLooper(self, sem);
+    status_t status = _taskLooper(self, sem);
 
     *threadExited = true;
 
@@ -638,7 +638,7 @@ BLooper::_GetNextClient(BLooper *client) const
 }
 
 
-b_status_t
+status_t
 BLooper::_taskLooper(BLooper *self, void *sem)
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
@@ -653,7 +653,7 @@ BLooper::_taskLooper(BLooper *self, void *sem)
 
     hLocker->Unlock();
 
-    b_uint8 flags = 0; // 0 --- normal, 1 --- continue, >= 2 --- break
+     __be_uint8 flags = 0; // 0 --- normal, 1 --- continue, >= 2 --- break
     BLooper *looper = NULL;
     BMessageQueue *queue = NULL;
     while(flags < 2)
@@ -669,7 +669,7 @@ BLooper::_taskLooper(BLooper *self, void *sem)
             queue->Lock();
             if(queue->IsEmpty() == false)
             {
-                aMsg = queue->FindMessage((b_int32)0);
+                aMsg = queue->FindMessage((__be_int32)0);
                 if(aMsg->what == _QUIT_)
                 {
                     queue->Unlock();
@@ -733,9 +733,9 @@ BLooper::_taskLooper(BLooper *self, void *sem)
 }
 
 
-BMessage* BLooper::NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT)
+BMessage* BLooper::NextLooperMessage(bigtime_t timeout = B_INFINITE_TIMEOUT)
 {
-    b_bigtime_t prevTime = b_real_time_clock_usecs();
+    bigtime_t prevTime = b_real_time_clock_usecs();
 
     if(!IsLockedByCurrentThread())
         BHAPI_ERROR("[APP]: %s --- Looper must LOCKED before this call!", __PRETTY_FUNCTION__);
@@ -752,7 +752,7 @@ BMessage* BLooper::NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT)
     }
     hLocker->Unlock();
 
-    b_uint8 flags = 0; // <= 0 --- normal, 1 --- continue, >= 2 --- break
+     __be_uint8 flags = 0; // <= 0 --- normal, 1 --- continue, >= 2 --- break
     BLooper *looper = NULL;
     BMessageQueue *queue = NULL;
     BMessage *retVal = NULL;
@@ -772,7 +772,7 @@ BMessage* BLooper::NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT)
             queue->Lock();
             if(queue->IsEmpty() == false)
             {
-                aMsg = queue->FindMessage((b_int32)0);
+                aMsg = queue->FindMessage((__be_int32)0);
                 if(aMsg->what == _QUIT_)
                 {
                     queue->Unlock();
@@ -851,8 +851,8 @@ BMessage* BLooper::NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT)
         }
 
         bhapi::sem_info sem_info;
-        b_status_t status = B_ERROR;
-        b_bigtime_t waitTime = timeout;
+        status_t status = B_ERROR;
+        bigtime_t waitTime = timeout;
         if(timeout >= B_INT64_CONSTANT(0))
         {
             if(proxy == bhapi::app)
@@ -872,7 +872,7 @@ BMessage* BLooper::NextLooperMessage(b_bigtime_t timeout = B_INFINITE_TIMEOUT)
         if(status == B_TIMED_OUT && waitTime == timeout) break;
         if(timeout != B_INFINITE_TIMEOUT)
         {
-            b_bigtime_t curTime = b_real_time_clock_usecs();
+            bigtime_t curTime = b_real_time_clock_usecs();
             timeout -= (curTime - prevTime);
             prevTime = curTime;
         }
@@ -915,7 +915,7 @@ BLooper::_FilterAndDispatchMessage(BMessage *msg, BHandler *_target)
 
     if(msg->what != _QUIT_) // (!(msg->what == B_QUIT_REQUESTED || msg->what == _QUIT_))
     {
-        for(b_int32 i = 0; i < fCommonFilters.CountItems(); i++)
+        for(__be_int32 i = 0; i < fCommonFilters.CountItems(); i++)
         {
             BMessageFilter *filter = (BMessageFilter*)fCommonFilters.ItemAt(i);
             if((status = filter->doFilter(msg, &handler)) == B_SKIP_MESSAGE) break;
@@ -924,7 +924,7 @@ BLooper::_FilterAndDispatchMessage(BMessage *msg, BHandler *_target)
         BHandler *target = (handler == NULL ? fPreferredHandler : handler);
         if(!(status == B_SKIP_MESSAGE || target == NULL || target->fFilters == NULL))
         {
-            for(b_int32 i = 0; i < target->fFilters->CountItems(); i++)
+            for(__be_int32 i = 0; i < target->fFilters->CountItems(); i++)
             {
                 BMessageFilter *filter = (BMessageFilter*)target->fFilters->ItemAt(i);
                 if((status = filter->doFilter(msg, &handler)) == B_SKIP_MESSAGE) break;
@@ -976,7 +976,7 @@ BLooper::MessageQueue() const
 }
 
 
-b_int64
+be_int64
 BLooper::Thread() const
 {
     return bhapi::get_thread_id(Proxy()->fThread);
@@ -1063,23 +1063,23 @@ BLooper::_ProxyBy(BLooper *proxy)
 
         fMessageQueue->Lock();
         if(fSem) bhapi::delete_sem(fSem);
-        fSem = bhapi::create_sem((b_int64)fMessageQueue->CountMessages(), NULL);
+        fSem = bhapi::create_sem((__be_int64)fMessageQueue->CountMessages(), NULL);
         fMessageQueue->Unlock();
 
         void *newLocker = NULL;
         if((newLocker = bhapi::create_locker()) == NULL)
             BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
-        for(b_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) bhapi::lock_locker(newLocker);
+        for(__be_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) bhapi::lock_locker(newLocker);
         void *oldLocker = fLocker;
         fLocker = newLocker;
 
-        for(b_int32 i = 0; i < fClients.CountItems(); i++)
+        for(__be_int32 i = 0; i < fClients.CountItems(); i++)
         {
             BLooper *looper = (BLooper*)fClients.ItemAt(i);
             looper->_ProxyBy(this);
         }
 
-        for(b_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) bhapi::unlock_locker(oldLocker);
+        for(__be_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) bhapi::unlock_locker(oldLocker);
         bhapi::delete_locker(oldLocker);
     }
     else
@@ -1090,24 +1090,24 @@ BLooper::_ProxyBy(BLooper *proxy)
         if(fSem) bhapi::delete_sem(fSem);
         fSem = bhapi::clone_sem_by_source(proxy->fSem);
         if(fMessageQueue->CountMessages() > 0)
-            bhapi::release_sem_etc(fSem, (b_int64)fMessageQueue->CountMessages(), 0);
+            bhapi::release_sem_etc(fSem, (__be_int64)fMessageQueue->CountMessages(), 0);
         fMessageQueue->Unlock();
 
         void *newLocker = NULL;
         if((newLocker = bhapi::clone_locker(proxy->fLocker)) == NULL)
             BHAPI_ERROR("[APP]: %s --- Unable to create locker for looper.", __PRETTY_FUNCTION__);
-        for(b_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) bhapi::lock_locker(newLocker);
+        for(__be_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) bhapi::lock_locker(newLocker);
         void *oldLocker = fLocker;
         fLocker = newLocker;
 
-        for(b_int32 i = 0; i < fClients.CountItems(); i++)
+        for(__be_int32 i = 0; i < fClients.CountItems(); i++)
         {
             BLooper *looper = (BLooper*)fClients.ItemAt(i);
             looper->_ProxyBy(this);
         }
 
         if(!oldProxy) bhapi::close_locker(oldLocker);
-        else for(b_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) bhapi::unlock_locker(oldLocker);
+        else for(__be_int64 i = B_INT64_CONSTANT(0); i < fLocksCount; i++) bhapi::unlock_locker(oldLocker);
         bhapi::delete_locker(oldLocker);
     }
 
@@ -1116,7 +1116,7 @@ BLooper::_ProxyBy(BLooper *proxy)
 
 
 BLooper*
-BLooper::LooperForThread(b_thread_id tid)
+BLooper::LooperForThread(__be_thread_id tid)
 {
     void *thread = bhapi::open_thread(tid);
     if(thread == NULL) return NULL; // invalid id
@@ -1126,7 +1126,7 @@ BLooper::LooperForThread(b_thread_id tid)
 
     bhapi::delete_thread(thread);
 
-    for(b_int32 i = 0; i < sLooperList.CountItems(); i++)
+    for(__be_int32 i = 0; i < sLooperList.CountItems(); i++)
     {
         BLooper *looper = (BLooper*)sLooperList.ItemAt(i);
         if(bhapi::get_thread_id(looper->fThread) == tid) return looper;
@@ -1173,7 +1173,7 @@ BLooper::SetCommonFilterList(const BList *filterList)
 
     if(filterList != NULL)
     {
-        for(b_int32 i = 0; i < filterList->CountItems(); i++) AddCommonFilter((BMessageFilter*)filterList->ItemAt(i));
+        for(__be_int32 i = 0; i < filterList->CountItems(); i++) AddCommonFilter((BMessageFilter*)filterList->ItemAt(i));
     }
 
     return true;

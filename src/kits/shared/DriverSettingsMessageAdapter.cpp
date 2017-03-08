@@ -15,7 +15,7 @@
 #include <strings.h>
 
 #include <File.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 DriverSettingsConverter::DriverSettingsConverter()

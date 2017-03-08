@@ -88,7 +88,7 @@ extern "C" {
 #include <FindDirectory.h>
 #include <fs_attr.h>
 #include <image.h>
-#include <TypeConstants.h>
+#include <HaikuConstants.h>
 
 
 #define IRS_SV_MAXALIASES	35

@@ -45,18 +45,18 @@ public:
 	const char		*Content() const;
 	void			SetContent(const char *content);
 
-    const char		*AttributeAt(b_int32 index, const char** attr_content = NULL) const;
+    const char		*AttributeAt(__be_int32 index, const char** attr_content = NULL) const;
 	bool			AddAttribute(const char *name, const char *content, bool replace_content = true);
 	bool			RemoveAttribute(const char *name);
-    b_int32			FindAttribute(const char *name, b_int32 fromIndex = 0) const;
-    b_int32			CountAttributes() const;
+     __be_int32			FindAttribute(const char *name,  __be_int32 fromIndex = 0) const;
+     __be_int32			CountAttributes() const;
 
-    BSimpleXmlNode		*NodeAt(b_int32 index) const;
-    bool			AddNode(BSimpleXmlNode *node, b_int32 atIndex = -1);
+    BSimpleXmlNode		*NodeAt(__be_int32 index) const;
+    bool			AddNode(BSimpleXmlNode *node,  __be_int32 atIndex = -1);
 	bool			RemoveNode(BSimpleXmlNode *node);
 	bool			RemoveSelf();
-    b_int32			FindNode(const char *name, b_int32 fromIndex = 0) const;
-    b_int32			CountNodes() const;
+     __be_int32			FindNode(const char *name,  __be_int32 fromIndex = 0) const;
+     __be_int32			CountNodes() const;
 	BSimpleXmlNode		*SuperNode() const;
 
 	void			PrintToStream() const;
@@ -71,7 +71,7 @@ private:
 };
 
 
-IMPEXPBHAPI b_status_t b_parse_simple_xml(const char *simple_xml_buffer, BSimpleXmlNode *node);
+IMPEXPBHAPI status_t b_parse_simple_xml(const char *simple_xml_buffer, BSimpleXmlNode *node);
 
 
 #endif /* __cplusplus */

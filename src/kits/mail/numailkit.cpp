@@ -16,7 +16,7 @@
 #include <Locker.h>
 #include <Messenger.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 #define timeout 5e5

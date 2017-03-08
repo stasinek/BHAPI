@@ -11,7 +11,7 @@
 #	include <KernelExport.h>
 #endif
 #include <OS.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 // define all macros we work with -- undefined macros are set to defaults
 #ifndef USER

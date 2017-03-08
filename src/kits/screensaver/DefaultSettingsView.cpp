@@ -24,7 +24,7 @@ BuildDefaultSettingsView(BView* view, const char* moduleName, const char* info)
 	view->SetViewUIColor(B_PANEL_BACKGROUND_COLOR);
 
 	BStringView* nameStringView = new BStringView("module", moduleName);
-	nameStringView->SetFont(be_bold_font);
+	nameStringView->SetFont(__be_bold_font);
 
 	BStringView* infoStringView = new BStringView("info", info);
 

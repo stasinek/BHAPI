@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <TypeConstants.h>
+#include <HaikuConstants.h>
 
 
 static integer_format

@@ -52,7 +52,7 @@ public:
 
     // Archiving
     BApplication(const BMessage *from);
-    virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+    virtual status_t Archive(BMessage *into, bool deep = true) const;
     static BArchivable *Instantiate(const BMessage *from);
 
     const char		*Signature() const;
@@ -66,8 +66,8 @@ public:
     virtual void		Pulse();
     // Empty functions END
 
-    void			SetPulseRate(b_bigtime_t rate);
-    b_bigtime_t		PulseRate() const;
+    void			SetPulseRate(bigtime_t rate);
+    bigtime_t		PulseRate() const;
 
     virtual void		MessageReceived(BMessage *msg);
     virtual void		DispatchMessage(BMessage *msg, BHandler *target);
@@ -92,11 +92,11 @@ private:
 
     bool fQuit;
     char *fSignature;
-    b_bigtime_t fPulseRate;
+    bigtime_t fPulseRate;
     BMessageRunner *fPulseRunner;
 
     static BList sRunnerList;
-    static b_bigtime_t sRunnerMinimumInterval;
+    static bigtime_t sRunnerMinimumInterval;
     static void dispatch_message_runners();
 
     bool quit_all_loopers(bool force);

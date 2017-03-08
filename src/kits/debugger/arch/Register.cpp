@@ -7,7 +7,7 @@
 
 #include "Register.h"
 
-#include <TypeConstants.h>
+#include <HaikuConstants.h>
 
 
 Register::Register(int32 index, const char* name, uint32 bitSize,

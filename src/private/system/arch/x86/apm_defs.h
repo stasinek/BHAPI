@@ -6,7 +6,7 @@
 #define SYSTEM_ARCH_X86_APM_DEFS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 // temporary generic syscall interface

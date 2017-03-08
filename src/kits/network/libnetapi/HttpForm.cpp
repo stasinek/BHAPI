@@ -15,7 +15,7 @@
 
 #include <File.h>
 #include <NodeInfo.h>
-#include <TypeConstants.h>
+#include <HaikuConstants.h>
 #include <Url.h>
 
 

@@ -20,7 +20,7 @@
 #include <Path.h>
 #include <Socket.h>
 #include <StackOrHeapArray.h>
-#include <String.h>
+#include <StringClass.h>
 #include <StringList.h>
 
 /*

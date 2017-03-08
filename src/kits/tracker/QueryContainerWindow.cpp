@@ -34,7 +34,7 @@ All rights reserved.
 
 
 #include <Catalog.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <Menu.h>
 #include <MenuItem.h>
 #include <Path.h>

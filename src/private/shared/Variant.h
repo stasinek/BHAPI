@@ -8,8 +8,8 @@
 
 
 #include <Rect.h>
-#include <SupportDefs.h>
-#include <TypeConstants.h>
+#include <Haiku.h>
+#include <HaikuConstants.h>
 
 #include <Referenceable.h>
 

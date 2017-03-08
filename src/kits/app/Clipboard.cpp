@@ -53,7 +53,7 @@ public:
     ~BSystemClipboard()
 	{
 		BMessenger *msgr;
-		while((msgr = (BMessenger*)fWatchingList.RemoveItem((b_int32)0)) != NULL) delete msgr;
+		while((msgr = (BMessenger*)fWatchingList.RemoveItem((__be_int32)0)) != NULL) delete msgr;
 	}
 
 	bool Lock()
@@ -71,16 +71,16 @@ public:
 		return fData;
 	}
 
-	b_uint32 Count()
+	__be_uint32 Count()
 	{
 		return(fData.IsEmpty() ? 0 : 1);
 	}
 
-	b_status_t AddWatching(const BMessenger &target)
+	status_t AddWatching(const BMessenger &target)
 	{
 		if(target.IsValid() == false) return B_ERROR;
 
-		for(b_int32 i = 0; i < fWatchingList.CountItems(); i++)
+		for(__be_int32 i = 0; i < fWatchingList.CountItems(); i++)
 		{
 			BMessenger *msgr = (BMessenger*)fWatchingList.ItemAt(i);
 			if(*msgr == target) return B_ERROR;
@@ -96,9 +96,9 @@ public:
 		return B_OK;
 	}
 
-	b_status_t RemoveWatching(const BMessenger &target)
+	status_t RemoveWatching(const BMessenger &target)
 	{
-		for(b_int32 i = 0; i < fWatchingList.CountItems(); i++)
+		for(__be_int32 i = 0; i < fWatchingList.CountItems(); i++)
 		{
 			BMessenger *msgr = (BMessenger*)fWatchingList.ItemAt(i);
 			if(*msgr == target)
@@ -112,7 +112,7 @@ public:
 		return B_ERROR;
 	}
 
-	b_status_t Commit(BMessage *msg)
+	status_t Commit(BMessage *msg)
 	{
 		if(msg == NULL || msg->IsEmpty()) return B_ERROR;
 
@@ -122,7 +122,7 @@ public:
 		aMsg.AddInt64("when", b_real_time_clock_usecs());
 		aMsg.AddString("name", "system");
 
-		for(b_int32 i = 0; i < fWatchingList.CountItems(); i++)
+		for(__be_int32 i = 0; i < fWatchingList.CountItems(); i++)
 		{
 			BMessenger *msgr = (BMessenger*)fWatchingList.ItemAt(i);
 			msgr->SendMessage(&aMsg);
@@ -180,19 +180,19 @@ void BClipboard::Unlock()
 	fLocker.Unlock();
 }
 
-b_int64 BClipboard::CountLocks() const
+be_int64 BClipboard::CountLocks() const
 {
 	return fLocker.CountLocks();
 }
 
-b_status_t BClipboard::Clear()
+status_t BClipboard::Clear()
 {
 	if(fLocker.CountLocks() <= B_INT64_CONSTANT(0) || fData == NULL) return B_ERROR;
 	fData->MakeEmpty();
 	return B_OK;
 }
 
-b_status_t BClipboard::Commit()
+status_t BClipboard::Commit()
 {
 	// TODO
 	if(fName == NULL) return B_ERROR;
@@ -206,7 +206,7 @@ b_status_t BClipboard::Commit()
 	return B_OK;
 }
 
-b_status_t BClipboard::Revert()
+status_t BClipboard::Revert()
 {
 	// TODO
 	if(fName == NULL) return B_ERROR;
@@ -233,44 +233,44 @@ BMessage* BClipboard::Data() const
 	return fData;
 }
 
-b_uint32 BClipboard::LocalCount() const
+be_uint32 BClipboard::LocalCount() const
 {
 	// TODO
 	return SystemCount();
 }
 
-b_uint32 BClipboard::SystemCount() const
+be_uint32 BClipboard::SystemCount() const
 {
 	// TODO
 	if(fName == NULL) return 0;
 
 	__bhapi_system_clipboard__.Lock();
-	b_uint32 retVal = __bhapi_system_clipboard__.Count();
+	__be_uint32 retVal = __bhapi_system_clipboard__.Count();
 	__bhapi_system_clipboard__.Unlock();
 
 	return retVal;
 }
 
-b_status_t BClipboard::StartWatching(const BMessenger &target)
+status_t BClipboard::StartWatching(const BMessenger &target)
 {
 	// TODO
 	if(fName == NULL) return B_ERROR;
 
 	if(target.IsValid() == false) return B_ERROR;
 	__bhapi_system_clipboard__.Lock();
-	b_status_t retVal = __bhapi_system_clipboard__.AddWatching(target);
+	status_t retVal = __bhapi_system_clipboard__.AddWatching(target);
 	__bhapi_system_clipboard__.Unlock();
 
 	return retVal;
 }
 
-b_status_t BClipboard::StopWatching(const BMessenger &target)
+status_t BClipboard::StopWatching(const BMessenger &target)
 {
 	// TODO
 	if(fName == NULL) return B_ERROR;
 
 	__bhapi_system_clipboard__.Lock();
-	b_status_t retVal = __bhapi_system_clipboard__.RemoveWatching(target);
+	status_t retVal = __bhapi_system_clipboard__.RemoveWatching(target);
 	__bhapi_system_clipboard__.Unlock();
 
 	return retVal;

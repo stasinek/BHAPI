@@ -14,7 +14,7 @@
 #include <Language.h>
 #include <LocaleRoster.h>
 #include <Resources.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <unicode/locid.h>
 #include <unicode/ulocdata.h>

@@ -6,7 +6,7 @@
 #define DECORATOR_PRIVATE_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BString;

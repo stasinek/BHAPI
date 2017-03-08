@@ -7,7 +7,7 @@
 #define BREAKPOINT_SETTING_H
 
 
-#include <String.h>
+#include <StringClass.h>
 
 #include <ObjectList.h>
 

@@ -24,7 +24,7 @@
 #include <package/hpkg/PackageInfoAttributeValue.h>
 #include <package/hpkg/PackageReader.h>
 #include <package/ChecksumAccessors.h>
-#include <package/HashableString.h>
+#include <package/HashableStringClass.h>
 #include <package/PackageInfoContentHandler.h>
 #include <package/RepositoryInfo.h>
 

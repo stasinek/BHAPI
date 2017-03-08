@@ -11,7 +11,7 @@
 
 #include <os/kernel/elf.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <arch_elf.h>
 

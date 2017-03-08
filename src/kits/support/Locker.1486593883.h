@@ -42,13 +42,13 @@ public:
 
 	bool		Lock();
 	void		Unlock();
-    b_status_t	LockWithTimeout(b_bigtime_t microseconds);
+    status_t	LockWithTimeout(bigtime_t microseconds);
 
 	// CountLocks():
 	// 	return positive number when locked by current thread,
 	// 	return negative number when locked by other thread or invalid,
 	// 	return 0 when it isn't locked or valid.
-    b_int64		CountLocks() const;
+     __be_int64		CountLocks() const;
 	bool		IsLockedByCurrentThread() const;
 
 private:

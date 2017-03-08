@@ -6,7 +6,7 @@
 #define _REALTIME_ALLOC_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #ifdef __cplusplus

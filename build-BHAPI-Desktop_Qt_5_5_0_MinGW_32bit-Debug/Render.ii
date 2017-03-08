@@ -14,7 +14,7 @@
 # 34 "../src/kits/render/../interface/../interface/../interface/Point.h"
 class BRect;
 # 1 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 1
-# 51 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
+# 50 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
 # 1 "../src/kits/render/../interface/../interface/../interface/../support/TypeConstants.h" 1
 # 38 "../src/kits/render/../interface/../interface/../interface/../support/TypeConstants.h"
 enum {
@@ -98,7 +98,7 @@ extern const char* B_URL_TN3270;
 extern const char* B_URL_WAIS;
 
 extern const char* B_URL_FILE;
-# 52 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
+# 51 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
 
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 1 3 4
@@ -208,7 +208,7 @@ extern "C" {
 # 15 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_stdarg.h" 2 3 4
 # 141 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdarg.h" 2 3 4
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdarg.h" 2 3 4
-# 54 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
+# 53 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 1 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stddef.h" 1 3 4
 
@@ -300,7 +300,7 @@ typedef struct {
   long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
 } max_align_t;
 # 2 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h" 2 3 4
-# 55 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
+# 54 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 1 3
 # 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
@@ -929,219 +929,7 @@ void * __mingw_aligned_realloc (void *_Memory, size_t _Size, size_t _Offset);
 
 #pragma pack(pop)
 # 669 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdlib.h" 2 3
-# 56 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
-# 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
-extern "C" {
-# 36 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
-  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _memccpy(void *_Dst,const void *_Src,int _Val,size_t _MaxCount);
-  void *__attribute__((__cdecl__)) memchr(const void *_Buf ,int _Val,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _memicmp(const void *_Buf1,const void *_Buf2,size_t _Size);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _memicmp_l(const void *_Buf1,const void *_Buf2,size_t _Size,_locale_t _Locale);
-  int __attribute__((__cdecl__)) memcmp(const void *_Buf1,const void *_Buf2,size_t _Size);
-  void * __attribute__((__cdecl__)) memcpy(void * __restrict__ _Dst,const void * __restrict__ _Src,size_t _Size) ;
-  void * __attribute__((__cdecl__)) mempcpy (void *_Dst, const void *_Src, size_t _Size);
-  void * __attribute__((__cdecl__)) memset(void *_Dst,int _Val,size_t _Size);
-
-  void * __attribute__((__cdecl__)) memccpy(void *_Dst,const void *_Src,int _Val,size_t _Size) ;
-  int __attribute__((__cdecl__)) memicmp(const void *_Buf1,const void *_Buf2,size_t _Size) ;
-
-
-  char * __attribute__((__cdecl__)) _strset(char *_Str,int _Val) ;
-  char * __attribute__((__cdecl__)) _strset_l(char *_Str,int _Val,_locale_t _Locale) ;
-  char * __attribute__((__cdecl__)) strcpy(char * __restrict__ _Dest,const char * __restrict__ _Source);
-  char * __attribute__((__cdecl__)) strcat(char * __restrict__ _Dest,const char * __restrict__ _Source);
-  int __attribute__((__cdecl__)) strcmp(const char *_Str1,const char *_Str2);
-  size_t __attribute__((__cdecl__)) strlen(const char *_Str);
-  size_t __attribute__((__cdecl__)) strnlen(const char *_Str,size_t _MaxCount);
-  void *__attribute__((__cdecl__)) memmove(void *_Dst,const void *_Src,size_t _Size) ;
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strdup(const char *_Src);
-  char *__attribute__((__cdecl__)) strchr(const char *_Str,int _Val);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricmp(const char *_Str1,const char *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strcmpi(const char *_Str1,const char *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricmp_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
-  int __attribute__((__cdecl__)) strcoll(const char *_Str1,const char *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strcoll_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricoll(const char *_Str1,const char *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricoll_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strncoll (const char *_Str1,const char *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strncoll_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicoll (const char *_Str1,const char *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicoll_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
-  size_t __attribute__((__cdecl__)) strcspn(const char *_Str,const char *_Control);
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strerror(const char *_ErrMsg) ;
-  char *__attribute__((__cdecl__)) strerror(int) ;
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strlwr(char *_String) ;
-  char *strlwr_l(char *_String,_locale_t _Locale) ;
-  char *__attribute__((__cdecl__)) strncat(char * __restrict__ _Dest,const char * __restrict__ _Source,size_t _Count) ;
-  int __attribute__((__cdecl__)) strncmp(const char *_Str1,const char *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicmp(const char *_Str1,const char *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicmp_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
-  char *strncpy(char * __restrict__ _Dest,const char * __restrict__ _Source,size_t _Count) ;
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strnset(char *_Str,int _Val,size_t _MaxCount) ;
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strnset_l(char *str,int c,size_t count,_locale_t _Locale) ;
-  char *__attribute__((__cdecl__)) strpbrk(const char *_Str,const char *_Control);
-  char *__attribute__((__cdecl__)) strrchr(const char *_Str,int _Ch);
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strrev(char *_Str);
-  size_t __attribute__((__cdecl__)) strspn(const char *_Str,const char *_Control);
-  char *__attribute__((__cdecl__)) strstr(const char *_Str,const char *_SubStr);
-  char *__attribute__((__cdecl__)) strtok(char * __restrict__ _Str,const char * __restrict__ _Delim) ;
-       
-
-  char *strtok_r(char * __restrict__ _Str, const char * __restrict__ _Delim, char ** __restrict__ __last);
-       
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strupr(char *_String) ;
-  __attribute__ ((__dllimport__)) char *_strupr_l(char *_String,_locale_t _Locale) ;
-  size_t __attribute__((__cdecl__)) strxfrm(char * __restrict__ _Dst,const char * __restrict__ _Src,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _strxfrm_l(char * __restrict__ _Dst,const char * __restrict__ _Src,size_t _MaxCount,_locale_t _Locale);
-
-
-  char *__attribute__((__cdecl__)) strdup(const char *_Src) ;
-  int __attribute__((__cdecl__)) strcmpi(const char *_Str1,const char *_Str2) ;
-  int __attribute__((__cdecl__)) stricmp(const char *_Str1,const char *_Str2) ;
-  char *__attribute__((__cdecl__)) strlwr(char *_Str) ;
-  int __attribute__((__cdecl__)) strnicmp(const char *_Str1,const char *_Str,size_t _MaxCount) ;
-  int __attribute__((__cdecl__)) strncasecmp (const char *, const char *, size_t);
-  int __attribute__((__cdecl__)) strcasecmp (const char *, const char *);
-
-
-
-
-
-
-
-  char *__attribute__((__cdecl__)) strnset(char *_Str,int _Val,size_t _MaxCount) ;
-  char *__attribute__((__cdecl__)) strrev(char *_Str) ;
-  char *__attribute__((__cdecl__)) strset(char *_Str,int _Val) ;
-  char *__attribute__((__cdecl__)) strupr(char *_Str) ;
-
-
-
-
-
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsdup(const wchar_t *_Str);
-  wchar_t *__attribute__((__cdecl__)) wcscat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source) ;
-  wchar_t *__attribute__((__cdecl__)) wcschr(const wchar_t *_Str,wchar_t _Ch);
-  int __attribute__((__cdecl__)) wcscmp(const wchar_t *_Str1,const wchar_t *_Str2);
-  wchar_t *__attribute__((__cdecl__)) wcscpy(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source) ;
-  size_t __attribute__((__cdecl__)) wcscspn(const wchar_t *_Str,const wchar_t *_Control);
-  size_t __attribute__((__cdecl__)) wcslen(const wchar_t *_Str);
-  size_t __attribute__((__cdecl__)) wcsnlen(const wchar_t *_Src,size_t _MaxCount);
-  wchar_t *wcsncat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count) ;
-  int __attribute__((__cdecl__)) wcsncmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
-  wchar_t *wcsncpy(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count) ;
-  wchar_t *__attribute__((__cdecl__)) _wcsncpy_l(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count,_locale_t _Locale) ;
-  wchar_t *__attribute__((__cdecl__)) wcspbrk(const wchar_t *_Str,const wchar_t *_Control);
-  wchar_t *__attribute__((__cdecl__)) wcsrchr(const wchar_t *_Str,wchar_t _Ch);
-  size_t __attribute__((__cdecl__)) wcsspn(const wchar_t *_Str,const wchar_t *_Control);
-  wchar_t *__attribute__((__cdecl__)) wcsstr(const wchar_t *_Str,const wchar_t *_SubStr);
-  wchar_t *__attribute__((__cdecl__)) wcstok(wchar_t * __restrict__ _Str,const wchar_t * __restrict__ _Delim) ;
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcserror(int _ErrNum) ;
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) __wcserror(const wchar_t *_Str) ;
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicmp(const wchar_t *_Str1,const wchar_t *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicmp_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicmp_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsnset(wchar_t *_Str,wchar_t _Val,size_t _MaxCount) ;
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsrev(wchar_t *_Str);
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsset(wchar_t *_Str,wchar_t _Val) ;
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcslwr(wchar_t *_String) ;
-  __attribute__ ((__dllimport__)) wchar_t *_wcslwr_l(wchar_t *_String,_locale_t _Locale) ;
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsupr(wchar_t *_String) ;
-  __attribute__ ((__dllimport__)) wchar_t *_wcsupr_l(wchar_t *_String,_locale_t _Locale) ;
-  size_t __attribute__((__cdecl__)) wcsxfrm(wchar_t * __restrict__ _Dst,const wchar_t * __restrict__ _Src,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _wcsxfrm_l(wchar_t * __restrict__ _Dst,const wchar_t * __restrict__ _Src,size_t _MaxCount,_locale_t _Locale);
-  int __attribute__((__cdecl__)) wcscoll(const wchar_t *_Str1,const wchar_t *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcscoll_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicoll(const wchar_t *_Str1,const wchar_t *_Str2);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicoll_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsncoll(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsncoll_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicoll(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicoll_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
-
-
-  wchar_t *__attribute__((__cdecl__)) wcsdup(const wchar_t *_Str) ;
-
-  int __attribute__((__cdecl__)) wcsicmp(const wchar_t *_Str1,const wchar_t *_Str2) ;
-  int __attribute__((__cdecl__)) wcsnicmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount) ;
-  wchar_t *__attribute__((__cdecl__)) wcsnset(wchar_t *_Str,wchar_t _Val,size_t _MaxCount) ;
-  wchar_t *__attribute__((__cdecl__)) wcsrev(wchar_t *_Str) ;
-  wchar_t *__attribute__((__cdecl__)) wcsset(wchar_t *_Str,wchar_t _Val) ;
-  wchar_t *__attribute__((__cdecl__)) wcslwr(wchar_t *_Str) ;
-  wchar_t *__attribute__((__cdecl__)) wcsupr(wchar_t *_Str) ;
-  int __attribute__((__cdecl__)) wcsicoll(const wchar_t *_Str1,const wchar_t *_Str2) ;
-
-
-
-
-}
-
-
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/string_s.h" 1 3
-# 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/string_s.h" 3
-# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
-# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/string_s.h" 2 3
-
-
-
-
-extern "C" {
-
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strset_s(char *_Dst,size_t _DstSize,int _Value);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strerror_s(char *_Buf,size_t _SizeInBytes,const char *_ErrMsg);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strerror_s(char *_Buf,size_t _SizeInBytes,int _ErrNum);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strlwr_s(char *_Str,size_t _Size);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strlwr_s_l(char *_Str,size_t _Size,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strnset_s(char *_Str,size_t _Size,int _Val,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strupr_s(char *_Str,size_t _Size);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strupr_s_l(char *_Str,size_t _Size,_locale_t _Locale);
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strncat_s(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strncat_s_l(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount,_locale_t _Locale);
-  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strcpy_s(char * _Dst, size_t _SizeInBytes, const char * _Src); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) strcpy_s( char (&_Dst)[__size], const char * (_Src)) { return ::strcpy_s(_Dst,__size,_Src); } }
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strncpy_s(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strncpy_s_l(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) strtok_s(char *_Str,const char *_Delim,char **_Context);
-  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strtok_s_l(char *_Str,const char *_Delim,char **_Context,_locale_t _Locale);
-  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strcat_s(char * strDestination, size_t numberOfElements, const char * strSource); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) strcat_s( char (&strDestination)[__size], const char * (strSource)) { return ::strcat_s(strDestination,__size,strSource); } }
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) memmove_s(void *_dest,size_t _numberOfElements,const void *_src,size_t _count);
-
-
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) wcstok_s(wchar_t *_Str,const wchar_t *_Delim,wchar_t **_Context);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcserror_s(wchar_t *_Buf,size_t _SizeInWords,int _ErrNum);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) __wcserror_s(wchar_t *_Buffer,size_t _SizeInWords,const wchar_t *_ErrMsg);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsnset_s(wchar_t *_Dst,size_t _DstSizeInWords,wchar_t _Val,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsset_s(wchar_t *_Str,size_t _SizeInWords,wchar_t _Val);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcslwr_s(wchar_t *_Str,size_t _SizeInWords);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcslwr_s_l(wchar_t *_Str,size_t _SizeInWords,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsupr_s(wchar_t *_Str,size_t _Size);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsupr_s_l(wchar_t *_Str,size_t _Size,_locale_t _Locale);
-
-  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcscpy_s(wchar_t * _Dst, size_t _nElem, const wchar_t * _Src); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcscpy_s( wchar_t (&_Dst)[__size], const wchar_t * (_Src)) { return ::wcscpy_s(_Dst,__size,_Src); } }
-  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcscat_s(wchar_t * _Dst, size_t _nElem, const wchar_t * _Src); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcscat_s( wchar_t (&_Dst)[__size], const wchar_t * (_Src)) { return ::wcscat_s(_Dst,__size,_Src); } }
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcsncat_s(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsncat_s_l(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcsncpy_s(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsncpy_s_l(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcstok_s_l(wchar_t *_Str,const wchar_t *_Delim,wchar_t **_Context,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsset_s_l(wchar_t *_Str,size_t _SizeInChars,unsigned int _Val,_locale_t _Locale);
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsnset_s_l(wchar_t *_Str,size_t _SizeInChars,unsigned int _Val, size_t _Count,_locale_t _Locale);
-
-
-
-
-
-  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) memcpy_s (void *_dest,size_t _numberOfElements,const void *_src,size_t _count);
-
-
-
-}
-# 181 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 2 3
-# 57 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
+# 55 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 1 3
 # 11 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 3
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_print_push.h" 1 3
@@ -1837,7 +1625,219 @@ extern "C" {
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/_mingw_print_pop.h" 1 3
 # 962 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/stdio.h" 2 3
-# 58 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
+# 56 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
+# 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
+extern "C" {
+# 36 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 3
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _memccpy(void *_Dst,const void *_Src,int _Val,size_t _MaxCount);
+  void *__attribute__((__cdecl__)) memchr(const void *_Buf ,int _Val,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _memicmp(const void *_Buf1,const void *_Buf2,size_t _Size);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _memicmp_l(const void *_Buf1,const void *_Buf2,size_t _Size,_locale_t _Locale);
+  int __attribute__((__cdecl__)) memcmp(const void *_Buf1,const void *_Buf2,size_t _Size);
+  void * __attribute__((__cdecl__)) memcpy(void * __restrict__ _Dst,const void * __restrict__ _Src,size_t _Size) ;
+  void * __attribute__((__cdecl__)) mempcpy (void *_Dst, const void *_Src, size_t _Size);
+  void * __attribute__((__cdecl__)) memset(void *_Dst,int _Val,size_t _Size);
+
+  void * __attribute__((__cdecl__)) memccpy(void *_Dst,const void *_Src,int _Val,size_t _Size) ;
+  int __attribute__((__cdecl__)) memicmp(const void *_Buf1,const void *_Buf2,size_t _Size) ;
+
+
+  char * __attribute__((__cdecl__)) _strset(char *_Str,int _Val) ;
+  char * __attribute__((__cdecl__)) _strset_l(char *_Str,int _Val,_locale_t _Locale) ;
+  char * __attribute__((__cdecl__)) strcpy(char * __restrict__ _Dest,const char * __restrict__ _Source);
+  char * __attribute__((__cdecl__)) strcat(char * __restrict__ _Dest,const char * __restrict__ _Source);
+  int __attribute__((__cdecl__)) strcmp(const char *_Str1,const char *_Str2);
+  size_t __attribute__((__cdecl__)) strlen(const char *_Str);
+  size_t __attribute__((__cdecl__)) strnlen(const char *_Str,size_t _MaxCount);
+  void *__attribute__((__cdecl__)) memmove(void *_Dst,const void *_Src,size_t _Size) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strdup(const char *_Src);
+  char *__attribute__((__cdecl__)) strchr(const char *_Str,int _Val);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricmp(const char *_Str1,const char *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strcmpi(const char *_Str1,const char *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricmp_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
+  int __attribute__((__cdecl__)) strcoll(const char *_Str1,const char *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strcoll_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricoll(const char *_Str1,const char *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricoll_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strncoll (const char *_Str1,const char *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strncoll_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicoll (const char *_Str1,const char *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicoll_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
+  size_t __attribute__((__cdecl__)) strcspn(const char *_Str,const char *_Control);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strerror(const char *_ErrMsg) ;
+  char *__attribute__((__cdecl__)) strerror(int) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strlwr(char *_String) ;
+  char *strlwr_l(char *_String,_locale_t _Locale) ;
+  char *__attribute__((__cdecl__)) strncat(char * __restrict__ _Dest,const char * __restrict__ _Source,size_t _Count) ;
+  int __attribute__((__cdecl__)) strncmp(const char *_Str1,const char *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicmp(const char *_Str1,const char *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicmp_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
+  char *strncpy(char * __restrict__ _Dest,const char * __restrict__ _Source,size_t _Count) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strnset(char *_Str,int _Val,size_t _MaxCount) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strnset_l(char *str,int c,size_t count,_locale_t _Locale) ;
+  char *__attribute__((__cdecl__)) strpbrk(const char *_Str,const char *_Control);
+  char *__attribute__((__cdecl__)) strrchr(const char *_Str,int _Ch);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strrev(char *_Str);
+  size_t __attribute__((__cdecl__)) strspn(const char *_Str,const char *_Control);
+  char *__attribute__((__cdecl__)) strstr(const char *_Str,const char *_SubStr);
+  char *__attribute__((__cdecl__)) strtok(char * __restrict__ _Str,const char * __restrict__ _Delim) ;
+       
+
+  char *strtok_r(char * __restrict__ _Str, const char * __restrict__ _Delim, char ** __restrict__ __last);
+       
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strupr(char *_String) ;
+  __attribute__ ((__dllimport__)) char *_strupr_l(char *_String,_locale_t _Locale) ;
+  size_t __attribute__((__cdecl__)) strxfrm(char * __restrict__ _Dst,const char * __restrict__ _Src,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _strxfrm_l(char * __restrict__ _Dst,const char * __restrict__ _Src,size_t _MaxCount,_locale_t _Locale);
+
+
+  char *__attribute__((__cdecl__)) strdup(const char *_Src) ;
+  int __attribute__((__cdecl__)) strcmpi(const char *_Str1,const char *_Str2) ;
+  int __attribute__((__cdecl__)) stricmp(const char *_Str1,const char *_Str2) ;
+  char *__attribute__((__cdecl__)) strlwr(char *_Str) ;
+  int __attribute__((__cdecl__)) strnicmp(const char *_Str1,const char *_Str,size_t _MaxCount) ;
+  int __attribute__((__cdecl__)) strncasecmp (const char *, const char *, size_t);
+  int __attribute__((__cdecl__)) strcasecmp (const char *, const char *);
+
+
+
+
+
+
+
+  char *__attribute__((__cdecl__)) strnset(char *_Str,int _Val,size_t _MaxCount) ;
+  char *__attribute__((__cdecl__)) strrev(char *_Str) ;
+  char *__attribute__((__cdecl__)) strset(char *_Str,int _Val) ;
+  char *__attribute__((__cdecl__)) strupr(char *_Str) ;
+
+
+
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsdup(const wchar_t *_Str);
+  wchar_t *__attribute__((__cdecl__)) wcscat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source) ;
+  wchar_t *__attribute__((__cdecl__)) wcschr(const wchar_t *_Str,wchar_t _Ch);
+  int __attribute__((__cdecl__)) wcscmp(const wchar_t *_Str1,const wchar_t *_Str2);
+  wchar_t *__attribute__((__cdecl__)) wcscpy(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source) ;
+  size_t __attribute__((__cdecl__)) wcscspn(const wchar_t *_Str,const wchar_t *_Control);
+  size_t __attribute__((__cdecl__)) wcslen(const wchar_t *_Str);
+  size_t __attribute__((__cdecl__)) wcsnlen(const wchar_t *_Src,size_t _MaxCount);
+  wchar_t *wcsncat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count) ;
+  int __attribute__((__cdecl__)) wcsncmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
+  wchar_t *wcsncpy(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count) ;
+  wchar_t *__attribute__((__cdecl__)) _wcsncpy_l(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count,_locale_t _Locale) ;
+  wchar_t *__attribute__((__cdecl__)) wcspbrk(const wchar_t *_Str,const wchar_t *_Control);
+  wchar_t *__attribute__((__cdecl__)) wcsrchr(const wchar_t *_Str,wchar_t _Ch);
+  size_t __attribute__((__cdecl__)) wcsspn(const wchar_t *_Str,const wchar_t *_Control);
+  wchar_t *__attribute__((__cdecl__)) wcsstr(const wchar_t *_Str,const wchar_t *_SubStr);
+  wchar_t *__attribute__((__cdecl__)) wcstok(wchar_t * __restrict__ _Str,const wchar_t * __restrict__ _Delim) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcserror(int _ErrNum) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) __wcserror(const wchar_t *_Str) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicmp(const wchar_t *_Str1,const wchar_t *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicmp_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicmp_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsnset(wchar_t *_Str,wchar_t _Val,size_t _MaxCount) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsrev(wchar_t *_Str);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsset(wchar_t *_Str,wchar_t _Val) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcslwr(wchar_t *_String) ;
+  __attribute__ ((__dllimport__)) wchar_t *_wcslwr_l(wchar_t *_String,_locale_t _Locale) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsupr(wchar_t *_String) ;
+  __attribute__ ((__dllimport__)) wchar_t *_wcsupr_l(wchar_t *_String,_locale_t _Locale) ;
+  size_t __attribute__((__cdecl__)) wcsxfrm(wchar_t * __restrict__ _Dst,const wchar_t * __restrict__ _Src,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _wcsxfrm_l(wchar_t * __restrict__ _Dst,const wchar_t * __restrict__ _Src,size_t _MaxCount,_locale_t _Locale);
+  int __attribute__((__cdecl__)) wcscoll(const wchar_t *_Str1,const wchar_t *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcscoll_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicoll(const wchar_t *_Str1,const wchar_t *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicoll_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsncoll(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsncoll_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicoll(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicoll_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
+
+
+  wchar_t *__attribute__((__cdecl__)) wcsdup(const wchar_t *_Str) ;
+
+  int __attribute__((__cdecl__)) wcsicmp(const wchar_t *_Str1,const wchar_t *_Str2) ;
+  int __attribute__((__cdecl__)) wcsnicmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount) ;
+  wchar_t *__attribute__((__cdecl__)) wcsnset(wchar_t *_Str,wchar_t _Val,size_t _MaxCount) ;
+  wchar_t *__attribute__((__cdecl__)) wcsrev(wchar_t *_Str) ;
+  wchar_t *__attribute__((__cdecl__)) wcsset(wchar_t *_Str,wchar_t _Val) ;
+  wchar_t *__attribute__((__cdecl__)) wcslwr(wchar_t *_Str) ;
+  wchar_t *__attribute__((__cdecl__)) wcsupr(wchar_t *_Str) ;
+  int __attribute__((__cdecl__)) wcsicoll(const wchar_t *_Str1,const wchar_t *_Str2) ;
+
+
+
+
+}
+
+
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/string_s.h" 1 3
+# 9 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/string_s.h" 3
+# 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 1 3
+# 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sec_api/string_s.h" 2 3
+
+
+
+
+extern "C" {
+
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strset_s(char *_Dst,size_t _DstSize,int _Value);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strerror_s(char *_Buf,size_t _SizeInBytes,const char *_ErrMsg);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strerror_s(char *_Buf,size_t _SizeInBytes,int _ErrNum);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strlwr_s(char *_Str,size_t _Size);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strlwr_s_l(char *_Str,size_t _Size,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strnset_s(char *_Str,size_t _Size,int _Val,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strupr_s(char *_Str,size_t _Size);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strupr_s_l(char *_Str,size_t _Size,_locale_t _Locale);
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strncat_s(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strncat_s_l(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount,_locale_t _Locale);
+  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strcpy_s(char * _Dst, size_t _SizeInBytes, const char * _Src); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) strcpy_s( char (&_Dst)[__size], const char * (_Src)) { return ::strcpy_s(_Dst,__size,_Src); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strncpy_s(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _strncpy_s_l(char *_Dst,size_t _DstSizeInChars,const char *_Src,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) strtok_s(char *_Str,const char *_Delim,char **_Context);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strtok_s_l(char *_Str,const char *_Delim,char **_Context,_locale_t _Locale);
+  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) strcat_s(char * strDestination, size_t numberOfElements, const char * strSource); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) strcat_s( char (&strDestination)[__size], const char * (strSource)) { return ::strcat_s(strDestination,__size,strSource); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) memmove_s(void *_dest,size_t _numberOfElements,const void *_src,size_t _count);
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) wcstok_s(wchar_t *_Str,const wchar_t *_Delim,wchar_t **_Context);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcserror_s(wchar_t *_Buf,size_t _SizeInWords,int _ErrNum);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) __wcserror_s(wchar_t *_Buffer,size_t _SizeInWords,const wchar_t *_ErrMsg);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsnset_s(wchar_t *_Dst,size_t _DstSizeInWords,wchar_t _Val,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsset_s(wchar_t *_Str,size_t _SizeInWords,wchar_t _Val);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcslwr_s(wchar_t *_Str,size_t _SizeInWords);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcslwr_s_l(wchar_t *_Str,size_t _SizeInWords,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsupr_s(wchar_t *_Str,size_t _Size);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsupr_s_l(wchar_t *_Str,size_t _Size,_locale_t _Locale);
+
+  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcscpy_s(wchar_t * _Dst, size_t _nElem, const wchar_t * _Src); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcscpy_s( wchar_t (&_Dst)[__size], const wchar_t * (_Src)) { return ::wcscpy_s(_Dst,__size,_Src); } }
+  extern "C" { __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcscat_s(wchar_t * _Dst, size_t _nElem, const wchar_t * _Src); } extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcscat_s( wchar_t (&_Dst)[__size], const wchar_t * (_Src)) { return ::wcscat_s(_Dst,__size,_Src); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcsncat_s(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsncat_s_l(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcsncpy_s(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsncpy_s_l(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcstok_s_l(wchar_t *_Str,const wchar_t *_Delim,wchar_t **_Context,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsset_s_l(wchar_t *_Str,size_t _SizeInChars,unsigned int _Val,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsnset_s_l(wchar_t *_Str,size_t _SizeInChars,unsigned int _Val, size_t _Count,_locale_t _Locale);
+
+
+
+
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) memcpy_s (void *_dest,size_t _numberOfElements,const void *_src,size_t _count);
+
+
+
+}
+# 181 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/string.h" 2 3
+# 57 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 1 3
 # 12 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
 extern "C" {
@@ -1943,7 +1943,7 @@ int __attribute__((__cdecl__)) isblank(int _C);
 int __attribute__((__cdecl__)) iswblank(wint_t _C);
 # 276 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/ctype.h" 3
 }
-# 59 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
+# 58 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 1 3
 # 10 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/math.h" 3
        
@@ -2405,7 +2405,7 @@ __extension__ long long __attribute__((__cdecl__)) llrintl (long double);
 
 
 #pragma pack(pop)
-# 60 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
+# 59 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/algorithm" 1 3
 # 58 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/algorithm" 3
        
@@ -50710,14 +50710,14 @@ namespace std
 
 }
 # 63 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/c++/algorithm" 2 3
-# 61 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
+# 60 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
 
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/sys/cdefs.h" 1 3
-# 63 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
-# 108 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
+# 62 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
+# 107 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h" 1 3 4
-# 109 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
-# 142 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
+# 108 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
+# 141 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
 # 1 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 1 3 4
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 3 4
 # 1 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/float.h" 1 3 4
@@ -50744,15 +50744,12 @@ __attribute__ ((__dllimport__)) int * __attribute__((__cdecl__)) __attribute__ (
 # 293 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/float.h" 3 4
 }
 # 278 "C:/Qt/Tools/mingw492_32/lib/gcc/i686-w64-mingw32/4.9.2/include/float.h" 2 3 4
-# 143 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
-# 152 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
-typedef unsigned int b_unichar32;
-typedef unsigned short b_unichar16;
-
-typedef long long b_thread_id;
-typedef size_t b_address_t;
-typedef size_t b_size_t;
-# 170 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
+# 142 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
+# 151 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
+typedef long long be_thread_id;
+typedef size_t be_addr_t;
+typedef size_t be_size_t;
+# 166 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
 typedef char int8;
 typedef unsigned char uint8;
 typedef short int16;
@@ -50762,14 +50759,14 @@ typedef unsigned int uint32;
 typedef long long int64;
 typedef unsigned long long uint64;
 
-typedef char b_int8;
-typedef unsigned char b_uint8;
-typedef short b_int16;
-typedef unsigned short b_uint16;
-typedef int b_int32;
-typedef unsigned int b_uint32;
-typedef long long b_int64;
-typedef unsigned long long b_uint64;
+typedef char be_int8;
+typedef unsigned char be_uint8;
+typedef short be_int16;
+typedef unsigned short be_uint16;
+typedef int be_int32;
+typedef unsigned int be_uint32;
+typedef long long be_int64;
+typedef unsigned long long be_uint64;
 
 typedef volatile char vint8;
 typedef volatile unsigned char vuint8;
@@ -50791,25 +50788,27 @@ typedef volatile unsigned char vuchar;
 
 typedef unsigned char uchar;
 typedef unsigned short unichar;
+typedef unsigned short unichar16;
+typedef unsigned int unichar32;
 
 typedef int __haiku_status_t;
-typedef int b_status_t;
+typedef int be_status_t;
 typedef int status_t;
 
 typedef long long __haiku_bigtime_t;
-typedef long long b_bigtime_t;
+typedef long long be_bigtime_t;
 typedef long long bigtime_t;
 
 typedef long long __haiku_nanotime_t;
-typedef long long b_nanotime_t;
+typedef long long be_nanotime_t;
 typedef long long nanotime_t;
 
 typedef unsigned int __haiku_type_code;
-typedef unsigned int b_type_code;
+typedef unsigned int be_type_code;
 typedef unsigned int type_code;
 
 typedef unsigned int __haiku_perform_code;
-typedef unsigned int b_perform_code;
+typedef unsigned int be_perform_code;
 typedef unsigned int perform_code;
 # 347 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
 extern "C" {
@@ -93832,13 +93831,13 @@ typedef unsigned int GROUP;
 # 1224 "C:/Qt/Tools/mingw492_32/i686-w64-mingw32/include/winsock2.h" 3
 }
 # 378 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h" 2
-# 390 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
+# 389 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
 enum {
     B_SEEK_SET = 0,
     B_SEEK_CUR,
     B_SEEK_END,
 };
-# 465 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
+# 464 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
 namespace bhapi {
 
 __attribute__((dllexport)) int32 atomic_add (int32 *value, int32 addValue);
@@ -93874,6 +93873,7 @@ __attribute__((dllexport)) void * get_stack_frame (void);
 
 }
 
+
 extern "C" const char* B_EMPTY_STRING;
 
 
@@ -93903,8 +93903,10 @@ typedef __haiku_std_uint16 __haiku_uint16;
 
 
 
+
 typedef __haiku_std_int32 __haiku_int32;
 typedef __haiku_std_uint32 __haiku_uint32;
+
 
 typedef __haiku_std_int64 __haiku_int64;
 typedef __haiku_std_uint64 __haiku_uint64;
@@ -93919,7 +93921,7 @@ typedef unsigned long int __haiku_addr_t;
 
     typedef __haiku_int32 __haiku_phys_saddr_t;
     typedef __haiku_uint32 __haiku_phys_addr_t;
-# 592 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
+# 595 "../src/kits/render/../interface/../interface/../interface/../support/SupportDefs.h"
     typedef __haiku_addr_t __haiku_generic_addr_t;
 # 36 "../src/kits/render/../interface/../interface/../interface/Point.h" 2
 class __attribute__((dllexport)) BPoint {
@@ -94035,9 +94037,9 @@ public:
 
     bool IsValid() const;
     float Width() const;
-    b_int32 IntegerWidth() const;
+    be_int32 IntegerWidth() const;
     float Height() const;
-    b_int32 IntegerHeight() const;
+    be_int32 IntegerHeight() const;
 
     bool Intersects(BRect r) const;
     bool Intersects(float l, float t, float r, float b) const;
@@ -94141,9 +94143,9 @@ inline bool BRect::IsValid() const
 }
 
 
-inline b_int32 BRect::IntegerWidth() const
+inline be_int32 BRect::IntegerWidth() const
 {
-    return((b_int32)ceil((double)(right - left)));
+    return((be_int32)ceil((double)(right - left)));
 }
 
 
@@ -94153,9 +94155,9 @@ inline float BRect::Width() const
 }
 
 
-inline b_int32 BRect::IntegerHeight() const
+inline be_int32 BRect::IntegerHeight() const
 {
-    return((b_int32)ceil((double)(bottom - top)));
+    return((be_int32)ceil((double)(bottom - top)));
 }
 
 
@@ -94166,7 +94168,7 @@ inline float BRect::Height() const
 # 35 "../src/kits/render/../interface/Polygon.h" 2
 class __attribute__((dllexport)) BPolygon {
 public:
-    BPolygon(const BPoint *pts, b_int32 nPts);
+    BPolygon(const BPoint *pts, be_int32 nPts);
     BPolygon();
     BPolygon(const BPolygon *poly);
     virtual ~BPolygon();
@@ -94174,15 +94176,15 @@ public:
     BPolygon &operator=(const BPolygon &poly);
     BRect Frame() const;
 
-    bool AddPoints(const BPoint *pts, b_int32 nPts, bool updateFrame = true);
-    void RemovePoints(b_int32 fromIndex, b_int32 toIndex, bool updateFrame = true);
+    bool AddPoints(const BPoint *pts, be_int32 nPts, bool updateFrame = true);
+    void RemovePoints(be_int32 fromIndex, be_int32 toIndex, bool updateFrame = true);
 
     bool AddPoint(const BPoint &aPt, bool updateFrame = true);
-    void RemovePoint(b_int32 index, bool updateFrame = true);
+    void RemovePoint(be_int32 index, bool updateFrame = true);
     void UpdateFrame();
 
-    const BPoint &operator[](b_int32 index) const;
-    b_int32 CountPoints() const;
+    const BPoint &operator[](be_int32 index) const;
+    be_int32 CountPoints() const;
 
     bool MapTo(BRect srcRect, BRect dstRect);
 
@@ -94191,7 +94193,7 @@ public:
 
 private:
     BRect fFrame;
-    b_int32 fCount;
+    be_int32 fCount;
     BPoint *fPts;
     bool fNeededToUpdateFrame;
 };
@@ -94203,7 +94205,7 @@ inline bool BPolygon::AddPoint(const BPoint &aPt, bool updateFrame)
 }
 
 
-inline void BPolygon::RemovePoint(b_int32 index, bool updateFrame)
+inline void BPolygon::RemovePoint(be_int32 index, bool updateFrame)
 {
     RemovePoints(index, index, updateFrame);
 }
@@ -94278,14 +94280,14 @@ inline rgb_color& operator=(const rgb_color& other)
 {
     return set_to(other.red, other.green, other.blue, other.alpha);
 }
-rgb_color& mix(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
+rgb_color& mix(be_uint8 r, be_uint8 g, be_uint8 b, be_uint8 a);
 rgb_color& mix(const rgb_color &o);
-rgb_color& mix_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const;
+rgb_color& mix_copy(be_uint8 r, be_uint8 g, be_uint8 b, be_uint8 a) const;
 rgb_color& mix_copy(const rgb_color &o) const;
 
-rgb_color& disable(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a);
+rgb_color& disable(be_uint8 r, be_uint8 g, be_uint8 b, be_uint8 a);
 rgb_color& disable(const rgb_color &background);
-rgb_color& disable_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const;
+rgb_color& disable_copy(be_uint8 r, be_uint8 g, be_uint8 b, be_uint8 a) const;
 rgb_color& disable_copy(const rgb_color &background) const;
 
 } rgb_color;
@@ -94493,7 +94495,7 @@ extern const screen_id B_MAIN_SCREEN_ID;
 bool bitmaps_support_space(color_space space, uint32* _supportFlags);
 status_t get_pixel_size_for(color_space space, size_t* _pixelChunk, size_t* _rowAlignment, size_t* _pixelsPerChunk);
 
-inline pattern make_pattern(b_uint8 d1, b_uint8 d2, b_uint8 d3, b_uint8 d4, b_uint8 d5, b_uint8 d6, b_uint8 d7, b_uint8 d8)
+inline pattern make_pattern(be_uint8 d1, be_uint8 d2, be_uint8 d3, be_uint8 d4, be_uint8 d5, be_uint8 d6, be_uint8 d7, be_uint8 d8)
 {
     bhapi::pattern p;
     p.data[0] = d1;
@@ -94506,15 +94508,15 @@ inline pattern make_pattern(b_uint8 d1, b_uint8 d2, b_uint8 d3, b_uint8 d4, b_ui
     p.data[7] = d8;
     return p;
 }
-inline rgb_color make_rgb_color(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 0xff)
+inline rgb_color make_rgb_color(be_uint8 r, be_uint8 g, be_uint8 b, be_uint8 a = 0xff)
 {
     rgb_color c;
     c.set_to(r, g, b, a);
     return c;
 }
 
-__attribute__((dllexport)) b_uint8 find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b);
-__attribute__((dllexport)) bhapi::rgb_color find_color_for_index(b_uint8 index);
+__attribute__((dllexport)) be_uint8 find_index_for_color(be_uint8 r, be_uint8 g, be_uint8 b);
+__attribute__((dllexport)) bhapi::rgb_color find_color_for_index(be_uint8 index);
 
 }
 
@@ -94537,11 +94539,11 @@ public:
     bhapi::drawing_mode DrawingMode() const;
 
     void SetHighColor(bhapi::rgb_color highColor);
-    void SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
+    void SetHighColor(be_uint8 r, be_uint8 g, be_uint8 b, be_uint8 a = 255);
     bhapi::rgb_color HighColor() const;
 
     void SetLowColor(bhapi::rgb_color lowColor);
-    void SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a = 255);
+    void SetLowColor(be_uint8 r, be_uint8 g, be_uint8 b, be_uint8 a = 255);
     bhapi::rgb_color LowColor() const;
 
  void SetPenSize(float pen_size);
@@ -94550,44 +94552,44 @@ public:
  void SetSquarePointStyle(bool state);
  bool IsSquarePointStyle() const;
 
-    void FillRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height,
+    void FillRect(be_int32 x, be_int32 y, be_uint32 width, be_uint32 height,
                  bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void FillRect(BRect rect, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
 
-    void StrokePoint(b_int32 x, b_int32 y, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
+    void StrokePoint(be_int32 x, be_int32 y, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void StrokePoint(BPoint pt, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
 
-    void StrokeLine(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1,
+    void StrokeLine(be_int32 x0, be_int32 y0, be_int32 x1, be_int32 y1,
                    bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
 
-    void StrokeTriangle(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, b_int32 x2, b_int32 y2, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
+    void StrokeTriangle(be_int32 x0, be_int32 y0, be_int32 x1, be_int32 y1, be_int32 x2, be_int32 y2, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void FillTriangle(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, b_int32 x2, b_int32 y2,
+    void FillTriangle(be_int32 x0, be_int32 y0, be_int32 x1, be_int32 y1, be_int32 x2, be_int32 y2,
                      bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void FillTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
 
     void StrokePolygon(const BPolygon *aPolygon, bool closed = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
+    void StrokePolygon(const BPoint *ptArray, be_int32 numPts, bool closed = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void FillPolygon(const BPolygon *aPolygon, bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
+    void FillPolygon(const BPoint *ptArray, be_int32 numPts, bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
 
-    void StrokeEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height,
+    void StrokeEllipse(be_int32 x, be_int32 y, be_uint32 width, be_uint32 height,
                       bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void StrokeEllipse(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius,
+    void StrokeEllipse(be_int32 xCenter, be_int32 yCenter, be_int32 xRadius, be_int32 yRadius,
                       bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void StrokeEllipse(BRect rect, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void FillEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height,
+    void FillEllipse(be_int32 x, be_int32 y, be_uint32 width, be_uint32 height,
                     bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void FillEllipse(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius,
+    void FillEllipse(be_int32 xCenter, be_int32 yCenter, be_int32 xRadius, be_int32 yRadius,
                     bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void FillEllipse(BRect rect, bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
 
-    void StrokeArc(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height,
-                  b_int32 startAngle, b_int32 endAngle,
+    void StrokeArc(be_int32 x, be_int32 y, be_uint32 width, be_uint32 height,
+                  be_int32 startAngle, be_int32 endAngle,
                   bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void StrokeArc(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius,
-                  b_int32 startAngle, b_int32 endAngle,
+    void StrokeArc(be_int32 xCenter, be_int32 yCenter, be_int32 xRadius, be_int32 yRadius,
+                  be_int32 startAngle, be_int32 endAngle,
                   bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void StrokeArc(BPoint ctPt, float xRadius, float yRadius,
       float startAngle, float arcAngle,
@@ -94602,13 +94604,13 @@ private:
  float fPenSize;
  bool fSquarePointStyle;
 
- virtual b_status_t InitCheck() const = 0;
-    virtual void GetFrame(b_int32 *originX, b_int32 *originY, b_uint32 *width, b_uint32 *height) const = 0;
-    virtual void GetPixel(b_int32 x, b_int32 y, bhapi::rgb_color &color) const = 0;
-    virtual void PutPixel(b_int32 x, b_int32 y, bhapi::rgb_color color) = 0;
-    virtual void PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::rgb_color color);
+ virtual status_t InitCheck() const = 0;
+    virtual void GetFrame(be_int32 *originX, be_int32 *originY, be_uint32 *width, be_uint32 *height) const = 0;
+    virtual void GetPixel(be_int32 x, be_int32 y, bhapi::rgb_color &color) const = 0;
+    virtual void PutPixel(be_int32 x, be_int32 y, bhapi::rgb_color color) = 0;
+    virtual void PutRect(be_int32 x, be_int32 y, be_uint32 width, be_uint32 height, bhapi::rgb_color color);
 
-    void drawPixel(b_int32 x, b_int32 y, bhapi::pattern pattern);
+    void drawPixel(be_int32 x, be_int32 y, bhapi::pattern pattern);
 };
 # 31 "../src/kits/render/Render.cpp" 2
 # 1 "../src/kits/render/LineGenerator.h" 1
@@ -94617,16 +94619,16 @@ class __attribute__((dllexport)) BLineGenerator {
 public:
     BLineGenerator(BPoint start, BPoint end);
 
-    bool Start(b_int32 &x, b_int32 &y, b_int32 &step, b_int32 &pixels, bool isLoopX = true, float pixel_size = 1);
-    bool Next(b_int32 &next, b_int32 &pixels);
+    bool Start(be_int32 &x, be_int32 &y, be_int32 &step, be_int32 &pixels, bool isLoopX = true, float pixel_size = 1);
+    bool Next(be_int32 &next, be_int32 &pixels);
 
 private:
     BPoint fStart;
     BPoint fEnd;
 
-    b_uint8 fDirection;
-    b_int32 fStep;
-    b_int32 fStepOther;
+    be_uint8 fDirection;
+    be_int32 fStep;
+    be_int32 fStepOther;
  bool fIsLoopX;
 
  float fEltaNext;
@@ -94642,8 +94644,8 @@ class __attribute__((dllexport)) BArcGenerator {
 public:
     BArcGenerator(BPoint center, float xRadius, float yRadius, BPoint start, BPoint end);
 
-    bool Start(b_int32 &x, b_int32 &y, b_int32 &step, b_int32 &pixels, bool &both, bool isLoopX = true, float pixel_size = 1);
-    bool Next(b_int32 &next, b_int32 &pixels, bool &both);
+    bool Start(be_int32 &x, be_int32 &y, be_int32 &step, be_int32 &pixels, bool &both, bool isLoopX = true, float pixel_size = 1);
+    bool Next(be_int32 &next, be_int32 &pixels, bool &both);
 
 private:
     BPoint fCenter;
@@ -94651,7 +94653,7 @@ private:
     BPoint fStart;
     BPoint fEnd;
 
-    b_int32 fStep;
+    be_int32 fStep;
  bool fIsLoopX;
 
     BPoint fRadius2;
@@ -94660,24 +94662,22 @@ private:
     BPoint _fEnd;
  float fDeltaNext;
 
-    b_int32 _fCenterX;
-    b_int32 _fCenterY;
-    b_int32 _fRadiusX;
-    b_int32 _fStartX;
-    b_int32 _fStartY;
-    b_int32 _fEndX;
-    b_int32 _fEndY;
-    b_int32 _X;
-    b_int32 _Y;
+    be_int32 _fCenterX;
+    be_int32 _fCenterY;
+    be_int32 _fRadiusX;
+    be_int32 _fStartX;
+    be_int32 _fStartY;
+    be_int32 _fEndX;
+    be_int32 _fEndY;
+    be_int32 _X;
+    be_int32 _Y;
 };
 # 33 "../src/kits/render/Render.cpp" 2
 
 # 1 "../src/kits/render/../support/List.h" 1
-# 34 "../src/kits/render/../support/List.h"
+# 35 "../src/kits/render/../support/List.h"
 # 1 "../src/kits/render/../support/../support/SupportDefs.h" 1
-# 35 "../src/kits/render/../support/List.h" 2
-
-
+# 36 "../src/kits/render/../support/List.h" 2
 class __attribute__((dllexport)) BList {
 public:
 
@@ -94685,8 +94685,8 @@ public:
 
 
 
-    BList(b_int32 initialAllocSize = 0);
-    BList(b_int32 initialAllocSize, b_int32 nullItems);
+    BList(be_int32 initialAllocSize = 0);
+    BList(be_int32 initialAllocSize, be_int32 nullItems);
 
 
 
@@ -94695,49 +94695,49 @@ public:
 
     virtual ~BList();
 
- bool AddItem(void *item);
-    bool AddItem(void *item, b_int32 atIndex);
+    bool AddItem(void *item);
+    bool AddItem(void *item, be_int32 atIndex);
     bool AddList(const BList *newItems);
-    bool AddList(const BList *newItems, b_int32 atIndex);
+    bool AddList(const BList *newItems, be_int32 atIndex);
 
 
- bool RemoveItem(void *item);
-    void *RemoveItem(b_int32 index);
-    bool RemoveItems(b_int32 index, b_int32 count);
+    bool RemoveItem(void *item);
+    void *RemoveItem(be_int32 index);
+    bool RemoveItems(be_int32 index, be_int32 count);
 
 
-    bool ReplaceItem(b_int32 index, void *newItem, void **oldItem = __null);
+    bool ReplaceItem(be_int32 index, void *newItem, void **oldItem = __null);
 
- void MakeEmpty();
+    void MakeEmpty();
 
-    bool SwapItems(b_int32 indexA, b_int32 indexB);
-    bool MoveItem(b_int32 fromIndex, b_int32 toIndex);
+    bool SwapItems(be_int32 indexA, be_int32 indexB);
+    bool MoveItem(be_int32 fromIndex, be_int32 toIndex);
 
- void SortItems(int (*cmp)(const void *a, const void *b));
+    void SortItems(int (*cmp)(const void *a, const void *b));
 
-    void *ItemAt(b_int32 index) const;
- void *FirstItem() const;
- void *LastItem() const;
+    void *ItemAt(be_int32 index) const;
+    void *FirstItem() const;
+    void *LastItem() const;
 
- bool HasItem(void *item) const;
-    b_int32 IndexOf(void *item) const;
-    b_int32 CountItems() const;
- bool IsEmpty() const;
+    bool HasItem(void *item) const;
+    be_int32 IndexOf(void *item) const;
+    be_int32 CountItems() const;
+    bool IsEmpty() const;
 
- void DoForEach(bool (*func)(void *data));
- void DoForEach(bool (*func)(void *data, void *user_data), void *user_data);
+    void DoForEach(bool (*func)(void *data));
+    void DoForEach(bool (*func)(void *data, void *user_data), void *user_data);
 
 
- void **Items() const;
+    void **Items() const;
 
 private:
- void **fObjects;
+    void **fObjects;
 
-    b_int32 fItemCount;
-    b_int32 fItemReal;
-    b_int32 fMinimumCount;
+    be_int32 fItemCount;
+    be_int32 fItemReal;
+    be_int32 fMinimumCount;
 
-    bool _Resize(b_int32 count);
+    bool _Resize(be_int32 count);
 };
 # 35 "../src/kits/render/Render.cpp" 2
 # 1 "../src/kits/render/../support/Errors.h" 1
@@ -94854,7 +94854,7 @@ using namespace std;
 using namespace bhapi;
 # 52 "../src/kits/render/Render.cpp"
 namespace bhapi {
-extern bool get_arc_12(BPoint &radius, BPoint &start, BPoint &end, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext);
+extern bool get_arc_12(BPoint &radius, BPoint &start, BPoint &end, be_int32 &x, be_int32 &y, BPoint &radius2, float &deltaNext);
 }
 # 64 "../src/kits/render/Render.cpp"
 class BRenderObject {
@@ -94863,7 +94863,7 @@ public:
  virtual ~BRenderObject();
 
  virtual bool IsValid() const = 0;
- virtual bool Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const = 0;
+ virtual bool Get(be_int32 *y, be_int32 *minX, be_int32 *maxX) const = 0;
  virtual bool Next() = 0;
 
  static int cmp(const void *objectA, const void *objectB);
@@ -94890,7 +94890,7 @@ BRenderObject::cmp(const void *objectA, const void *objectB)
  {
   if(A->IsValid() == false) return 0;
 
-  b_int32 yA, yB;
+  be_int32 yA, yB;
   A->Get(&yA, __null, __null);
   B->Get(&yB, __null, __null);
 
@@ -94907,15 +94907,15 @@ public:
  BRenderLine(BPoint start, BPoint end);
 
  virtual bool IsValid() const;
- virtual bool Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const;
+ virtual bool Get(be_int32 *y, be_int32 *minX, be_int32 *maxX) const;
  virtual bool Next();
 
 private:
  BLineGenerator fLine;
- b_int32 fMinX;
- b_int32 fMaxX;
- b_int32 fX;
- b_int32 fY;
+ be_int32 fMinX;
+ be_int32 fMaxX;
+ be_int32 fX;
+ be_int32 fY;
  bool fValid;
 };
 
@@ -94925,7 +94925,7 @@ BRenderLine::BRenderLine(BPoint start, BPoint end)
 {
  if(start.y > end.y) return;
 
- b_int32 step, pixels;
+ be_int32 step, pixels;
 
  if(fLine.Start(fX, fY, step, pixels, false, 1))
  {
@@ -94944,7 +94944,7 @@ BRenderLine::IsValid() const
 
 
 bool
-BRenderLine::Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const
+BRenderLine::Get(be_int32 *y, be_int32 *minX, be_int32 *maxX) const
 {
  if(fValid == false) return false;
 
@@ -94961,7 +94961,7 @@ BRenderLine::Next()
 {
  if(fValid == false) return false;
 
- b_int32 pixels;
+ be_int32 pixels;
 
  fY++;
  if(fLine.Next(fX, pixels) == false) {fValid = false; return false;}
@@ -94978,20 +94978,20 @@ public:
  BRenderLine2(BPoint pt0, BPoint pt1, BPoint pt2);
 
  virtual bool IsValid() const;
- virtual bool Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const;
+ virtual bool Get(be_int32 *y, be_int32 *minX, be_int32 *maxX) const;
  virtual bool Next();
 
 private:
  BLineGenerator fLine1;
  BLineGenerator fLine2;
 
- b_int32 fMinX;
- b_int32 fMaxX;
+ be_int32 fMinX;
+ be_int32 fMaxX;
 
- b_int32 fX1;
- b_int32 fX2;
- b_int32 fY1;
- b_int32 fY2;
+ be_int32 fX1;
+ be_int32 fX2;
+ be_int32 fY1;
+ be_int32 fY2;
 
  bool fValid;
 };
@@ -95002,7 +95002,7 @@ BRenderLine2::BRenderLine2(BPoint pt0, BPoint pt1, BPoint pt2)
 {
  if(pt0.y > pt1.y || pt1.y > pt2.y) return;
 
- b_int32 tmp, pixels1, pixels2;
+ be_int32 tmp, pixels1, pixels2;
 
  if(fLine1.Start(fX1, fY1, tmp, pixels1, false, 1) && fLine2.Start(fX2, fY2, tmp, pixels2, false, 1))
  {
@@ -95028,7 +95028,7 @@ BRenderLine2::IsValid() const
 
 
 bool
-BRenderLine2::Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const
+BRenderLine2::Get(be_int32 *y, be_int32 *minX, be_int32 *maxX) const
 {
  if(fValid == false) return false;
 
@@ -95045,7 +95045,7 @@ BRenderLine2::Next()
 {
  if(fValid == false) return false;
 
- b_int32 pixels1, pixels2;
+ be_int32 pixels1, pixels2;
  bool line1_has_next = false;
 
  fY1++;
@@ -95079,28 +95079,28 @@ public:
  BRenderTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge);
 
  virtual bool IsValid() const;
- virtual bool Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const;
+ virtual bool Get(be_int32 *y, be_int32 *minX, be_int32 *maxX) const;
  virtual bool Next();
 
 private:
  BLineGenerator fLine1;
- b_uint8 fFlags;
+ be_uint8 fFlags;
 
  bool fStrokeEdge;
 
- b_int32 fY;
- b_int32 fY0;
- b_int32 fY1;
+ be_int32 fY;
+ be_int32 fY0;
+ be_int32 fY1;
 
- b_int32 fX1;
- b_int32 fPixels1;
+ be_int32 fX1;
+ be_int32 fPixels1;
 };
 
 
 BRenderTriangle::BRenderTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge)
  : BRenderLine2(pt0, pt1, pt2), fLine1(pt0, pt2), fFlags(0x00), fStrokeEdge(stroke_edge)
 {
- b_int32 tmp;
+ be_int32 tmp;
 
  if(BRenderLine2::Get(&fY0, __null, __null) == false || fLine1.Start(fX1, fY1, tmp, fPixels1, false, 1) == false) return;
  fY = ((fY0)>(fY1)?(fY1):(fY0));
@@ -95117,7 +95117,7 @@ BRenderTriangle::IsValid() const
 
 
 bool
-BRenderTriangle::Get(b_int32 *y, b_int32 *_minX, b_int32 *_maxX) const
+BRenderTriangle::Get(be_int32 *y, be_int32 *_minX, be_int32 *_maxX) const
 {
  if(fFlags == 0x00) return false;
 
@@ -95125,7 +95125,7 @@ BRenderTriangle::Get(b_int32 *y, b_int32 *_minX, b_int32 *_maxX) const
 
  if(_minX || _maxX)
  {
-  b_int32 minX = 0, maxX = -1;
+  be_int32 minX = 0, maxX = -1;
 
   if(fFlags != 0x03)
   {
@@ -95144,7 +95144,7 @@ BRenderTriangle::Get(b_int32 *y, b_int32 *_minX, b_int32 *_maxX) const
   }
   else
   {
-   b_int32 minX0, maxX0;
+   be_int32 minX0, maxX0;
    BRenderLine2::Get(__null, &minX0, &maxX0);
 
    if(fY < ((fY0)>(fY1)?(fY0):(fY1)))
@@ -95246,7 +95246,7 @@ BRender::SetHighColor(bhapi::rgb_color highColor)
 
 
 void
-BRender::SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
+BRender::SetHighColor(be_uint8 r, be_uint8 g, be_uint8 b, be_uint8 a)
 {
  bhapi::rgb_color color;
  color.set_to(r, g, b, a);
@@ -95269,7 +95269,7 @@ BRender::SetLowColor(bhapi::rgb_color lowColor)
 
 
 void
-BRender::SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
+BRender::SetLowColor(be_uint8 r, be_uint8 g, be_uint8 b, be_uint8 a)
 {
  bhapi::rgb_color color;
  color.set_to(r, g, b, a);
@@ -95313,18 +95313,18 @@ BRender::IsSquarePointStyle() const
 
 
 void
-BRender::PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::rgb_color color)
+BRender::PutRect(be_int32 x, be_int32 y, be_uint32 width, be_uint32 height, bhapi::rgb_color color)
 {
  if(width == 0 || height == 0) return;
 
- for(b_uint32 i = 0; i < height; i++, y++)
+ for(be_uint32 i = 0; i < height; i++, y++)
  {
-  for(b_uint32 j = 0; j < width; j++) PutPixel(x + j, y, color);
+  for(be_uint32 j = 0; j < width; j++) PutPixel(x + j, y, color);
  }
 }
 
 
-inline bool _is_pixel_high_color(const bhapi::pattern &pattern, b_int32 x, b_int32 y)
+inline bool _is_pixel_high_color(const bhapi::pattern &pattern, be_int32 x, be_int32 y)
 {
  if(pattern == B_SOLID_HIGH) return true;
  else if(pattern == B_SOLID_LOW) return false;
@@ -95332,14 +95332,14 @@ inline bool _is_pixel_high_color(const bhapi::pattern &pattern, b_int32 x, b_int
  x %= 8;
  y %= 8;
 
- b_uint8 pat = pattern.data[y];
+ be_uint8 pat = pattern.data[y];
  if(pat & (1 << (7 - x))) return true;
 
  return false;
 }
 
 
-inline bool _is_line_mixed_color(const bhapi::pattern &pattern, b_int32 y, bool &isHighColor)
+inline bool _is_line_mixed_color(const bhapi::pattern &pattern, be_int32 y, bool &isHighColor)
 {
  if(pattern == B_SOLID_HIGH) {isHighColor = true; return false;}
  else if(pattern == B_SOLID_LOW) {isHighColor = false; return false;}
@@ -95357,19 +95357,19 @@ inline bool _is_line_mixed_color(const bhapi::pattern &pattern, b_int32 y, bool 
 
 
 void
-BRender::drawPixel(b_int32 x, b_int32 y, bhapi::pattern pattern)
+BRender::drawPixel(be_int32 x, be_int32 y, bhapi::pattern pattern)
 {
  if(!IsValid()) return;
 
- b_int32 originX = 0, originY = 0;
- b_uint32 w = 0, h = 0;
+ be_int32 originX = 0, originY = 0;
+ be_uint32 w = 0, h = 0;
  GetFrame(&originX, &originY, &w, &h);
 
- if(x < originX || y < originY || x > originX + (b_int32)w - 1 || y > originY + (b_int32)h - 1) return;
+ if(x < originX || y < originY || x > originX + (be_int32)w - 1 || y > originY + (be_int32)h - 1) return;
 
  bhapi::rgb_color src = {0, 0, 0, 255};
  if(fDrawingMode != B_OP_COPY) GetPixel(x, y, src);
- b_uint32 srcAlpha = src.alpha;
+ be_uint32 srcAlpha = src.alpha;
 
  bhapi::rgb_color color;
  color.set_to(_is_pixel_high_color(pattern, x, y) ? fHighColor : fLowColor);
@@ -95424,9 +95424,9 @@ BRender::drawPixel(b_int32 x, b_int32 y, bhapi::pattern pattern)
 
   case B_OP_BLEND:
    if(color == B_TRANSPARENT_COLOR || color == fLowColor) return;
-   src.red = (b_uint8)(((b_uint16)color.red + (b_uint16)src.red) / 2U);
-   src.green = (b_uint8)(((b_uint16)color.green + (b_uint16)src.green) / 2U);
-   src.blue = (b_uint8)(((b_uint16)color.blue + (b_uint16)src.blue) / 2U);
+   src.red = (be_uint8)(((be_uint16)color.red + (be_uint16)src.red) / 2U);
+   src.green = (be_uint8)(((be_uint16)color.green + (be_uint16)src.green) / 2U);
+   src.blue = (be_uint8)(((be_uint16)color.blue + (be_uint16)src.blue) / 2U);
    break;
 
   case B_OP_MIN:
@@ -95461,23 +95461,23 @@ BRender::drawPixel(b_int32 x, b_int32 y, bhapi::pattern pattern)
 
 
 void
-BRender::FillRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::pattern pattern)
+BRender::FillRect(be_int32 x, be_int32 y, be_uint32 width, be_uint32 height, bhapi::pattern pattern)
 {
  if(width == height && width == 1) {drawPixel(x, y, pattern); return;}
  if(!IsValid() || width == 0 || height == 0) return;
 
- b_int32 originX = 0, originY = 0;
- b_uint32 w = 0, h = 0;
+ be_int32 originX = 0, originY = 0;
+ be_uint32 w = 0, h = 0;
  GetFrame(&originX, &originY, &w, &h);
 
  BRect r((float)x, (float)y, (float)x + (float)width - 1, (float)y + (float)height - 1);
- r &= BRect((float)originX, (float)originY, (float)(originX + (b_int32)w - 1), (float)(originY + (b_int32)h - 1));
+ r &= BRect((float)originX, (float)originY, (float)(originX + (be_int32)w - 1), (float)(originY + (be_int32)h - 1));
  if(r.IsValid() == false) return;
 
- x = (b_int32)r.left;
- y = (b_int32)r.top;
- width = (b_uint32)r.Width() + 1;
- height = (b_uint32)r.Height() + 1;
+ x = (be_int32)r.left;
+ y = (be_int32)r.top;
+ width = (be_uint32)r.Width() + 1;
+ height = (be_uint32)r.Height() + 1;
 
  if((pattern == B_SOLID_HIGH || pattern == B_SOLID_LOW) && fDrawingMode == B_OP_COPY)
  {
@@ -95485,7 +95485,7 @@ BRender::FillRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::
   color.set_to(pattern == B_SOLID_HIGH ? fHighColor : fLowColor);
   PutRect(x, y, width, height, color);
  }
- else for(b_uint32 i = 0; i < height; i++, y++)
+ else for(be_uint32 i = 0; i < height; i++, y++)
  {
   if(fDrawingMode == B_OP_COPY)
   {
@@ -95500,7 +95500,7 @@ BRender::FillRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::
    }
   }
 
-  for(b_uint32 j = 0; j < width; j++) drawPixel(x + j, y, pattern);
+  for(be_uint32 j = 0; j < width; j++) drawPixel(x + j, y, pattern);
  }
 }
 
@@ -95513,22 +95513,22 @@ BRender::FillRect(BRect rect, bhapi::pattern pattern)
  rect.Floor();
  if(!rect.IsValid()) return;
 
- FillRect((b_int32)rect.left, (b_int32)rect.top, (b_uint32)rect.Width() + 1, (b_uint32)rect.Height() + 1, pattern);
+ FillRect((be_int32)rect.left, (be_int32)rect.top, (be_uint32)rect.Width() + 1, (be_uint32)rect.Height() + 1, pattern);
 }
 
 
 void
-BRender::StrokePoint(b_int32 x, b_int32 y, bhapi::pattern pattern)
+BRender::StrokePoint(be_int32 x, be_int32 y, bhapi::pattern pattern)
 {
  if(!IsValid()) return;
 
  if(fPenSize <= 1)
  {
-  b_int32 originX = 0, originY = 0;
-  b_uint32 w = 0, h = 0;
+  be_int32 originX = 0, originY = 0;
+  be_uint32 w = 0, h = 0;
   GetFrame(&originX, &originY, &w, &h);
 
-  if(x < originX || y < originY || x > originX + (b_int32)w - 1 || y > originY + (b_int32)h - 1) return;
+  if(x < originX || y < originY || x > originX + (be_int32)w - 1 || y > originY + (be_int32)h - 1) return;
 
   drawPixel(x, y, pattern);
  }
@@ -95553,16 +95553,16 @@ BRender::StrokePoint(BPoint pt, bhapi::pattern pattern)
 
  if(fPenSize <= 1)
  {
-  b_int32 x, y, originX = 0, originY = 0;
-  b_uint32 w = 0, h = 0;
+  be_int32 x, y, originX = 0, originY = 0;
+  be_uint32 w = 0, h = 0;
 
   GetFrame(&originX, &originY, &w, &h);
 
   pt.Floor();
-  x = (b_int32)pt.x;
-  y = (b_int32)pt.y;
+  x = (be_int32)pt.x;
+  y = (be_int32)pt.y;
 
-  if(x < originX || y < originY || x > originX + (b_int32)w - 1 || y > originY + (b_int32)h - 1) return;
+  if(x < originX || y < originY || x > originX + (be_int32)w - 1 || y > originY + (be_int32)h - 1) return;
 
   drawPixel(x, y, pattern);
  }
@@ -95581,7 +95581,7 @@ BRender::StrokePoint(BPoint pt, bhapi::pattern pattern)
 
 
 void
-BRender::StrokeLine(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, bhapi::pattern pattern)
+BRender::StrokeLine(be_int32 x0, be_int32 y0, be_int32 x1, be_int32 y1, bhapi::pattern pattern)
 {
  StrokeLine(BPoint((float)x0 + 0.5f, (float)y0 + 0.5f), BPoint((float)x1 + 0.5f, (float)y1 + 0.5f), pattern);
 }
@@ -95605,7 +95605,7 @@ BRender::StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern pattern)
   if(pt0.y > pt1.y) do { BPoint tmp__LINE = pt0; pt0 = pt1; pt1 = tmp__LINE; } while(false);
 
   BLineGenerator line(pt0, pt1);
-  b_int32 x, y, step, pixels;
+  be_int32 x, y, step, pixels;
 
   if(line.Start(x, y, step, pixels, false, 1) == false) return;
   do
@@ -95618,7 +95618,7 @@ BRender::StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern pattern)
 
 
 void
-BRender::StrokeTriangle(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, b_int32 x2, b_int32 y2, bhapi::pattern pattern)
+BRender::StrokeTriangle(be_int32 x0, be_int32 y0, be_int32 x1, be_int32 y1, be_int32 x2, be_int32 y2, bhapi::pattern pattern)
 {
  BPoint pts[3];
  pts[0].Set((float)x0 + 0.5f, (float)y0 + 0.5f);
@@ -95640,7 +95640,7 @@ BRender::StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern patte
 
 
 void
-BRender::FillTriangle(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, b_int32 x2, b_int32 y2, bool stroke_edge, bhapi::pattern pattern)
+BRender::FillTriangle(be_int32 x0, be_int32 y0, be_int32 x1, be_int32 y1, be_int32 x2, be_int32 y2, bool stroke_edge, bhapi::pattern pattern)
 {
  FillTriangle(BPoint((float)x0 + 0.5f, (float)y0 + 0.5f),
        BPoint((float)x1 + 0.5f, (float)y1 + 0.5f),
@@ -95664,7 +95664,7 @@ BRender::FillTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge, bhap
 
  do
  {
-  b_int32 y, minX, maxX;
+  be_int32 y, minX, maxX;
   if(triangle.Get(&y, &minX, &maxX) == false) break;
   if(minX <= maxX) FillRect(minX, y, maxX - minX + 1, 1, pattern);
  } while(triangle.Next());
@@ -95672,7 +95672,7 @@ BRender::FillTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge, bhap
 
 
 void
-BRender::StrokeEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::pattern pattern)
+BRender::StrokeEllipse(be_int32 x, be_int32 y, be_uint32 width, be_uint32 height, bhapi::pattern pattern)
 {
  if(!IsValid() || width == 0 || height == 0) return;
 
@@ -95685,7 +95685,7 @@ BRender::StrokeEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bh
 
 
 void
-BRender::FillEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bool stroke_edge, bhapi::pattern pattern)
+BRender::FillEllipse(be_int32 x, be_int32 y, be_uint32 width, be_uint32 height, bool stroke_edge, bhapi::pattern pattern)
 {
  if(!IsValid() || width == 0 || height == 0) return;
 
@@ -95698,7 +95698,7 @@ BRender::FillEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bool
 
 
 void
-BRender::StrokeEllipse(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius, bhapi::pattern pattern)
+BRender::StrokeEllipse(be_int32 xCenter, be_int32 yCenter, be_int32 xRadius, be_int32 yRadius, bhapi::pattern pattern)
 {
  if(!IsValid()) return;
 
@@ -95718,7 +95718,7 @@ BRender::StrokeEllipse(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int3
 
 
 void
-BRender::FillEllipse(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius, bool stroke_edge, bhapi::pattern pattern)
+BRender::FillEllipse(be_int32 xCenter, be_int32 yCenter, be_int32 xRadius, be_int32 yRadius, bool stroke_edge, bhapi::pattern pattern)
 {
  if(!IsValid()) return;
 
@@ -95761,13 +95761,13 @@ BRender::StrokeEllipse(BRect rect, bhapi::pattern pattern)
   end.Set(radius.x, 0);
   radius2.Set(-1, -1);
 
-  b_int32 x, y;
-  b_int32 xCenter, yCenter;
+  be_int32 x, y;
+  be_int32 xCenter, yCenter;
   float deltaNext;
 
   BPoint center = rect.Center().FloorSelf();
-  xCenter = (b_int32)center.x;
-  yCenter = (b_int32)center.y;
+  xCenter = (be_int32)center.x;
+  yCenter = (be_int32)center.y;
 
         while(bhapi::get_arc_12(radius, start, end, x, y, radius2, deltaNext))
   {
@@ -95800,14 +95800,14 @@ BRender::FillEllipse(BRect rect, bool stroke_edge, bhapi::pattern pattern)
  end.Set(radius.x, 0);
  radius2.Set(-1, -1);
 
- b_int32 x, y, old_x = 0, old_y = 0, last_y = 0;
- b_int32 xCenter, yCenter;
+ be_int32 x, y, old_x = 0, old_y = 0, last_y = 0;
+ be_int32 xCenter, yCenter;
  float deltaNext;
  bool first = true;
 
  BPoint center = rect.Center().FloorSelf();
- xCenter = (b_int32)center.x;
- yCenter = (b_int32)center.y;
+ xCenter = (be_int32)center.x;
+ yCenter = (be_int32)center.y;
 
  while(true)
  {
@@ -95844,8 +95844,8 @@ BRender::FillEllipse(BRect rect, bool stroke_edge, bhapi::pattern pattern)
 
 
 void
-BRender::StrokeArc(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height,
-     b_int32 startAngle, b_int32 endAngle, bhapi::pattern pattern)
+BRender::StrokeArc(be_int32 x, be_int32 y, be_uint32 width, be_uint32 height,
+     be_int32 startAngle, be_int32 endAngle, bhapi::pattern pattern)
 {
  if(!IsValid() || width == 0 || height == 0) return;
 
@@ -95858,8 +95858,8 @@ BRender::StrokeArc(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height,
 
 
 void
-BRender::StrokeArc(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius,
-     b_int32 startAngle, b_int32 endAngle, bhapi::pattern pattern)
+BRender::StrokeArc(be_int32 xCenter, be_int32 yCenter, be_int32 xRadius, be_int32 yRadius,
+     be_int32 startAngle, be_int32 endAngle, bhapi::pattern pattern)
 {
  if(!IsValid()) return;
 
@@ -95925,7 +95925,7 @@ BRender::StrokeArc(BRect rect, BPoint start, BPoint end, bhapi::pattern pattern)
  {
   BArcGenerator arc(rect.Center(), rect.Width() / 2.f, rect.Height() / 2.f, start, end);
 
-  b_int32 x, y, step, pixels, centerY = (b_int32)floor((double)rect.Center().y);
+  be_int32 x, y, step, pixels, centerY = (be_int32)floor((double)rect.Center().y);
   bool firstTime = true;
   bool both = false;
 
@@ -95946,7 +95946,7 @@ BRender::StrokeArc(BRect rect, BPoint start, BPoint end, bhapi::pattern pattern)
     FillRect(x, y, 1, 1 + pixels, pattern);
     if(both)
     {
-     b_int32 y1 = centerY - (y - centerY) - pixels;
+     be_int32 y1 = centerY - (y - centerY) - pixels;
      if(y1 == y + pixels) {y1--; pixels--;}
      if(pixels > 0) FillRect(x, y1, 1, 1 + pixels, pattern);
     }
@@ -95956,7 +95956,7 @@ BRender::StrokeArc(BRect rect, BPoint start, BPoint end, bhapi::pattern pattern)
     FillRect(x, y + pixels, 1, 1 - pixels, pattern);
     if(both)
     {
-     b_int32 y1 = centerY - (y - centerY);
+     be_int32 y1 = centerY - (y - centerY);
      if(y1 == y) {y1++; pixels++;}
      if(pixels < 0) FillRect(x, y1, 1, 1 - pixels, pattern);
     }
@@ -96032,25 +96032,25 @@ BRender::StrokePolygon(const BPolygon *aPolygon, bool closed, bhapi::pattern pat
 
 
 
-static void include_region(b_int64 *region, b_int32 *count, b_int32 minX, b_int32 maxX)
+static void include_region(be_int64 *region, be_int32 *count, be_int32 minX, be_int32 maxX)
 {
  if(minX > maxX) return;
 
- b_int32 i = 0;
+ be_int32 i = 0;
  while(i < *count)
  {
-  b_int64 v0 = *(region + i);
+  be_int64 v0 = *(region + i);
 
-  if(((((b_int32)(v0 >> 32))>(minX)?((b_int32)(v0 >> 32)):(minX)) <= (((b_int32)(v0 & 0xffffffff))>(maxX)?(maxX):((b_int32)(v0 & 0xffffffff))) ? ((v0 = (((b_int64)(((b_int32)(v0 >> 32))>(minX)?(minX):((b_int32)(v0 >> 32)))) << 32) | (b_int64)(((b_int32)(v0 & 0xffffffff))>(maxX)?((b_int32)(v0 & 0xffffffff)):(maxX))), true) : false) == false) {i++; continue;}
+  if(((((be_int32)(v0 >> 32))>(minX)?((be_int32)(v0 >> 32)):(minX)) <= (((be_int32)(v0 & 0xffffffff))>(maxX)?(maxX):((be_int32)(v0 & 0xffffffff))) ? ((v0 = (((be_int64)(((be_int32)(v0 >> 32))>(minX)?(minX):((be_int32)(v0 >> 32)))) << 32) | (be_int64)(((be_int32)(v0 & 0xffffffff))>(maxX)?((be_int32)(v0 & 0xffffffff)):(maxX))), true) : false) == false) {i++; continue;}
 
-  minX = (b_int32)(v0 >> 32);
-  maxX = (b_int32)(v0 & 0xffffffff);
+  minX = (be_int32)(v0 >> 32);
+  maxX = (be_int32)(v0 & 0xffffffff);
 
-  if(i < *count - 1) memmove(region + i, region + i + 1, (size_t)(*count - i - 1) * sizeof(b_int64));
+  if(i < *count - 1) memmove(region + i, region + i + 1, (size_t)(*count - i - 1) * sizeof(be_int64));
   (*count) -= 1;
  }
 
- *(region + ((*count)++)) = (((b_int64)minX) << 32) | (b_int64)maxX;
+ *(region + ((*count)++)) = (((be_int64)minX) << 32) | (be_int64)maxX;
 }
 
 
@@ -96063,29 +96063,29 @@ static void stroke_objects(BRender *render, BList *objects, bhapi::pattern a_pat
 
  objects->SortItems(BRenderObject::cmp);
 
- b_int64 *region = (b_int64*)malloc(sizeof(b_int64) * objects->CountItems());
+ be_int64 *region = (be_int64*)malloc(sizeof(be_int64) * objects->CountItems());
  if(region == __null)
  {
-  while((aObject = (BRenderObject*)objects->RemoveItem((b_int32)0)) != __null) delete aObject;
+  while((aObject = (BRenderObject*)objects->RemoveItem((be_int32)0)) != __null) delete aObject;
   return;
  }
 
  while(objects->CountItems() > 0)
  {
-  b_int32 curY, tmpY, minX, maxX;
-  b_int32 count = 0;
+  be_int32 curY, tmpY, minX, maxX;
+  be_int32 count = 0;
 
   aObject = (BRenderObject*)objects->FirstItem();
   if(aObject->Get(&curY, &minX, &maxX) == false)
   {
-   objects->RemoveItem((b_int32)0);
+   objects->RemoveItem((be_int32)0);
    delete aObject;
    continue;
   }
 
   include_region(region, &count, minX, maxX);
 
-  for(b_int32 i = 1; i < objects->CountItems(); i++)
+  for(be_int32 i = 1; i < objects->CountItems(); i++)
   {
    aObject = (BRenderObject*)objects->ItemAt(i);
 
@@ -96105,11 +96105,11 @@ static void stroke_objects(BRender *render, BList *objects, bhapi::pattern a_pat
 
   ((BRenderObject*)objects->FirstItem())->Next();
 
-  for(b_int32 i = 0; i < count; i++)
+  for(be_int32 i = 0; i < count; i++)
   {
-   b_int64 v = *(region + i);
-   minX = (b_int32)(v >> 32);
-   maxX = (b_int32)(v & 0xffffffff);
+   be_int64 v = *(region + i);
+   minX = (be_int32)(v >> 32);
+   maxX = (be_int32)(v & 0xffffffff);
 
             render->FillRect(minX, curY, maxX - minX + 1, 1, a_pattern);
   }
@@ -96119,7 +96119,7 @@ static void stroke_objects(BRender *render, BList *objects, bhapi::pattern a_pat
 }
 }
 
-void BRender::StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed, bhapi::pattern pattern)
+void BRender::StrokePolygon(const BPoint *ptArray, be_int32 numPts, bool closed, bhapi::pattern pattern)
 {
  if(!IsValid() || ptArray == __null || numPts <= 0) return;
 
@@ -96142,7 +96142,7 @@ void BRender::StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed, 
   BList lines;
   BPoint pt0, pt1;
 
-  for(b_int32 k = 0; k < numPts; k++)
+  for(be_int32 k = 0; k < numPts; k++)
   {
    if(k == numPts - 1 && (closed == false || *(ptArray + k) == *ptArray)) break;
 
@@ -96168,7 +96168,7 @@ BRender::FillPolygon(const BPolygon *aPolygon, bool stroke_edge, bhapi::pattern 
 }
 # 1398 "../src/kits/render/Render.cpp"
 void
-BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bhapi::pattern pattern)
+BRender::FillPolygon(const BPoint *ptArray, be_int32 numPts, bool stroke_edge, bhapi::pattern pattern)
 {
  BPoint *aPt = __null;
  BPolygon *aPolygon = __null;
@@ -96193,7 +96193,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
  BList pts(numPts);
  bool readyForDraw = true;
 
- for(b_int32 i = 0; i < numPts; i++)
+ for(be_int32 i = 0; i < numPts; i++)
  {
   if(!(i == 0 || ptArray[i] != ptArray[i - 1])) continue;
 
@@ -96209,14 +96209,14 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
  BList polygons;
  BPolygon tmp;
 
- for(b_int32 i = 2; readyForDraw && i <= pts.CountItems(); i++)
+ for(be_int32 i = 2; readyForDraw && i <= pts.CountItems(); i++)
  {
   if(i < 2) continue;
 
   sPt = *((BPoint*)pts.ItemAt(i - 1));
   ePt = (i < pts.CountItems() ? *((BPoint*)pts.ItemAt(i)) : *((BPoint*)pts.FirstItem()));
 
-  for(b_int32 k = i; readyForDraw && k >= 2; k--)
+  for(be_int32 k = i; readyForDraw && k >= 2; k--)
   {
    psPt = *((BPoint*)pts.ItemAt(k - 2));
    pePt = *((BPoint*)pts.ItemAt(k - 1));
@@ -96225,7 +96225,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
       iPt == sPt || (iPt == ePt && i == pts.CountItems())) continue;
 
    aPolygon = new BPolygon(&iPt, 1);
-   for(b_int32 m = k - 1; m < i; m++)
+   for(be_int32 m = k - 1; m < i; m++)
    {
     aPt = (BPoint*)pts.ItemAt(k - 1);
     if(aPt == __null || aPolygon->AddPoints(aPt, 1, false) == false) break;
@@ -96247,7 +96247,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
   }
  }
 
- while((aPt = (BPoint*)pts.RemoveItem((b_int32)0)) != __null)
+ while((aPt = (BPoint*)pts.RemoveItem((be_int32)0)) != __null)
  {
   if(readyForDraw) readyForDraw = tmp.AddPoints(aPt, 1, false);
   delete aPt;
@@ -96257,7 +96257,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
  BList objects;
 
  do {
-  if(stroke_edge) for(b_int32 i = 0; readyForDraw && i < aPolygon->CountPoints(); i++)
+  if(stroke_edge) for(be_int32 i = 0; readyForDraw && i < aPolygon->CountPoints(); i++)
   {
    sPt = (*aPolygon)[i];
    ePt = (*aPolygon)[(i < aPolygon->CountPoints() - 1) ? i + 1 : 0];
@@ -96271,8 +96271,8 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
   {
    BPolygon drawingPolygon;
 
-   b_int32 flags[2] = {0, 0};
-   for(b_int32 i = 0; i < aPolygon->CountPoints(); i++)
+   be_int32 flags[2] = {0, 0};
+   for(be_int32 i = 0; i < aPolygon->CountPoints(); i++)
    {
     sPt = (*aPolygon)[i == 0 ? aPolygon->CountPoints() - 1: i - 1];
     iPt = (*aPolygon)[i];
@@ -96324,7 +96324,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
   }
 
   if(aPolygon != (&tmp)) delete aPolygon;
- } while((aPolygon = (BPolygon*)polygons.RemoveItem((b_int32)0)) != __null);
+ } while((aPolygon = (BPolygon*)polygons.RemoveItem((be_int32)0)) != __null);
 
  if(readyForDraw)
  {
@@ -96333,6 +96333,6 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
  else
  {
   BRenderObject *aObject;
-  while((aObject = (BRenderObject*)objects.RemoveItem((b_int32)0)) != __null) delete aObject;
+  while((aObject = (BRenderObject*)objects.RemoveItem((be_int32)0)) != __null) delete aObject;
  }
 }

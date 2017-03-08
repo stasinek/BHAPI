@@ -43,8 +43,8 @@ typedef enum swap_action {
     B_SWAP_ALWAYS
 } swap_action;
 
-IMPEXPBHAPI b_status_t	swap_data(b_type_code type, void *data, size_t len, swap_action action);
-IMPEXPBHAPI bool			is_type_swapped(b_type_code type);
+IMPEXPBHAPI status_t	swap_data(type_code type, void *data, size_t len, swap_action action);
+IMPEXPBHAPI bool			is_type_swapped(type_code type);
 IMPEXPBHAPI float			swap_float(float value);
 IMPEXPBHAPI double			swap_double(double value);
 

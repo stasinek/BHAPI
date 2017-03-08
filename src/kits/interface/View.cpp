@@ -86,7 +86,7 @@ public:
 
 
 void
-BView::InitSelf(BRect frame, b_uint32 resizingMode, b_uint32 flags)
+BView::InitSelf(BRect frame,  __be_uint32 resizingMode,  __be_uint32 flags)
 {
 	if(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- View must created within a application which has graphics-engine!", __PRETTY_FUNCTION__);
@@ -125,7 +125,7 @@ BView::InitSelf(BRect frame, b_uint32 resizingMode, b_uint32 flags)
 }
 
 
-BView::BView(BRect frame, const char *name, b_uint32 resizingMode, b_uint32 flags)
+BView::BView(BRect frame, const char *name,  __be_uint32 resizingMode,  __be_uint32 flags)
 	: BHandler(name)
 {
 	InitSelf(frame, resizingMode, flags);
@@ -224,7 +224,7 @@ BView::MessageReceived(BMessage *msg)
 							fMouseGrabbed = false;
 						}
 
-                        b_uint32 eventMask = fEventMask & ~B_POINTER_EVENTS;
+                         __be_uint32 eventMask = fEventMask & ~B_POINTER_EVENTS;
 
 						if(eventMask == 0)
 						{
@@ -243,7 +243,7 @@ BView::MessageReceived(BMessage *msg)
 				else // B_MOUSE_MOVED
 				{
 					bool insided = fLayout->VisibleRegion()->Contains(where);
-					b_uint32 transit = (insided ? B_INSIDE_VIEW : B_OUTSIDE_VIEW);
+					__be_uint32 transit = (insided ? B_INSIDE_VIEW : B_OUTSIDE_VIEW);
 					if(fMouseInside != insided)
 					{
 						if(!insided)
@@ -283,7 +283,7 @@ BView::MessageReceived(BMessage *msg)
 							fKeyboardGrabbed = false;
 						}
 
-                        b_uint32 eventMask = fEventMask & ~B_KEYBOARD_EVENTS;
+                         __be_uint32 eventMask = fEventMask & ~B_KEYBOARD_EVENTS;
 
 						if(eventMask == 0)
 						{
@@ -307,9 +307,9 @@ BView::MessageReceived(BMessage *msg)
 					bytes = _bytes;
 					if((msg->what == B_KEY_DOWN || msg->what == B_KEY_UP))
 					{
-						for(b_int32 i = 0; i < 3; i++)
+						for(__be_int32 i = 0; i < 3; i++)
 						{
-							b_int8 val;
+							__be_int8 val;
 							if(!msg->FindInt8("byte", i, &val)) break;
 							_bytes[i] = val;
 						}
@@ -466,7 +466,7 @@ BView::RemoveChild(BView *child)
 
 	if(child->fScrollBar.IsEmpty() == false)
 	{
-		for(b_int32 i = 0; i < child->fScrollBar.CountItems(); i++)
+		for(__be_int32 i = 0; i < child->fScrollBar.CountItems(); i++)
 		{
 			BScrollBar *scrollbar = (BScrollBar*)child->fScrollBar.ItemAt(i);
 			scrollbar->fTarget = NULL;
@@ -513,7 +513,7 @@ BView::RemoveSelf()
 }
 
 
-b_int32
+be_int32
 BView::CountChildren() const
 {
 	return fLayout->CountItems();
@@ -521,7 +521,7 @@ BView::CountChildren() const
 
 
 BView*
-BView::ChildAt(b_int32 index) const
+BView::ChildAt(__be_int32 index) const
 {
 	return(fLayout->ItemAt(index) != NULL ? (BView*)fLayout->ItemAt(index)->PrivateData() : NULL);
 }
@@ -639,7 +639,7 @@ BView::MouseUp(BPoint where)
 
 
 void
-BView::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
+BView::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 }
 
@@ -670,13 +670,13 @@ BView::FindView(const char *name) const
 
 
 void
-BView::KeyDown(const char *bytes, b_int32 numBytes)
+BView::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 }
 
 
 void
-BView::KeyUp(const char *bytes, b_int32 numBytes)
+BView::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
 }
 
@@ -1039,13 +1039,13 @@ BView::ConvertFromWindow(const BRegion &region) const
 
 
 void
-BView::SetFlags(b_uint32 flags)
+BView::SetFlags(__be_uint32 flags)
 {
 	BWindow *win = Window();
 	if(win != NULL)
 	{
-		b_uint32 oldPulseNeeded = fViewFlags & B_PULSE_NEEDED;
-		b_uint32 newPulseNeeded = flags & B_PULSE_NEEDED;
+		__be_uint32 oldPulseNeeded = fViewFlags & B_PULSE_NEEDED;
+		__be_uint32 newPulseNeeded = flags & B_PULSE_NEEDED;
 
 		if(oldPulseNeeded != newPulseNeeded)
 		{
@@ -1065,7 +1065,7 @@ BView::SetFlags(b_uint32 flags)
 }
 
 
-b_uint32
+be_uint32
 BView::Flags() const
 {
 	return fViewFlags;
@@ -1073,13 +1073,13 @@ BView::Flags() const
 
 
 void
-BView::SetResizingMode(b_uint32 mode)
+BView::SetResizingMode(__be_uint32 mode)
 {
 	fLayout->SetResizingMode(mode);
 }
 
 
-b_uint32
+be_uint32
 BView::ResizingMode() const
 {
 	return fLayout->ResizingMode();
@@ -1271,7 +1271,7 @@ BView::SetPenSize(float size)
 	if(((BViewState*)fStates)->PenSize != size)
 	{
 		((BViewState*)fStates)->PenSize = size;
-		fDC->SetPenSize((b_uint32)ceil((double)size));
+		fDC->SetPenSize((__be_uint32)ceil((double)size));
 	}
 }
 
@@ -1295,7 +1295,7 @@ BView::SetViewColor(bhapi::rgb_color c)
 
 
 void
-BView::SetViewColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
+BView::SetViewColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color c;
 	c.set_to(r, g, b, a);
@@ -1318,7 +1318,7 @@ BView::SetHighColor(bhapi::rgb_color c)
 
 
 void
-BView::SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
+BView::SetHighColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color c;
 	c.set_to(r, g, b, a);
@@ -1341,7 +1341,7 @@ BView::SetLowColor(bhapi::rgb_color c)
 
 
 void
-BView::SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
+BView::SetLowColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color c;
 	c.set_to(r, g, b, a);
@@ -1373,12 +1373,12 @@ BView::StrokePoint(BPoint pt, bhapi::pattern p)
 	fDC->SetPattern(p);
 
 	pt.Floor();
-	if(Window()->fPixmap->StrokePoint(fDC, (b_int32)pt.x, (b_int32)pt.y) == B_OK) Window()->_Update(updateRect, false);
+	if(Window()->fPixmap->StrokePoint(fDC, (__be_int32)pt.x, (__be_int32)pt.y) == B_OK) Window()->_Update(updateRect, false);
 }
 
 
 void
-BView::StrokePoints(const BPoint *_pts, b_int32 count, const b_uint8 *alpha, bhapi::pattern p)
+BView::StrokePoints(const BPoint *_pts,  __be_int32 count, const  __be_uint8 *alpha, bhapi::pattern p)
 {
 	if(_pts == NULL || count <= 0) return;
 
@@ -1386,12 +1386,12 @@ BView::StrokePoints(const BPoint *_pts, b_int32 count, const b_uint8 *alpha, bha
 
 	if(IsVisible() == false) return;
 
-	b_int32 *pts = new b_int32[2 * count];
-	b_int32 *tmp = pts;
+	__be_int32 *pts = new  __be_int32[2 * count];
+	__be_int32 *tmp = pts;
 
 	BPoint pmin, pmax;
 
-	for(b_int32 i = 0; i < count; i++)
+	for(__be_int32 i = 0; i < count; i++)
 	{
 		BPoint pt = ConvertToWindow(_pts[i]);
 
@@ -1407,15 +1407,15 @@ BView::StrokePoints(const BPoint *_pts, b_int32 count, const b_uint8 *alpha, bha
 
 		pt.Floor();
 
-		*tmp++ = (b_int32)pt.x;
-		*tmp++ = (b_int32)pt.y;
+		*tmp++ = (__be_int32)pt.x;
+		*tmp++ = (__be_int32)pt.y;
 	}
 
 	fDC->SetHighColor(HighColor());
 	fDC->SetLowColor(LowColor());
 	fDC->SetPattern(p);
 
-	b_status_t status;
+	status_t status;
 	if(alpha) status = Window()->fPixmap->StrokePoints_Alphas(fDC, pts, alpha, count);
 	else status = Window()->fPixmap->StrokePoints(fDC, pts, count);
 
@@ -1459,8 +1459,8 @@ BView::StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern p)
 	pt0.Floor();
 	pt1.Floor();
 	if(Window()->fPixmap->StrokeLine(fDC,
-					 (b_int32)pt0.x, (b_int32)pt0.y,
-					 (b_int32)pt1.x, (b_int32)pt1.y) == B_OK) Window()->_Update(updateRect, false);
+					 (__be_int32)pt0.x, (__be_int32)pt0.y,
+					 (__be_int32)pt1.x, (__be_int32)pt1.y) == B_OK) Window()->_Update(updateRect, false);
 }
 
 
@@ -1478,8 +1478,8 @@ BView::StrokeRect(BRect r, bhapi::pattern p)
 
 	r.Floor();
 	if(Window()->fPixmap->StrokeRect(fDC,
-					 (b_int32)r.left, (b_int32)r.top,
-					 (b_uint32)r.Width(), (b_uint32)r.Height()) == B_OK) Window()->_Update(updateRect, false);
+					 (__be_int32)r.left, (__be_int32)r.top,
+					 (__be_uint32)r.Width(), (__be_uint32)r.Height()) == B_OK) Window()->_Update(updateRect, false);
 }
 
 
@@ -1488,15 +1488,15 @@ BView::StrokePolygon(const BPolygon *aPolygon, bool closed, bhapi::pattern p)
 {
 	if(aPolygon == NULL || aPolygon->CountPoints() <= 0 || IsVisible() == false) return;
 
-	b_int32 *pts = new b_int32[2 * aPolygon->CountPoints()];
-	b_int32 *tmp = pts;
+	__be_int32 *pts = new  __be_int32[2 * aPolygon->CountPoints()];
+	__be_int32 *tmp = pts;
 	const BPoint *polyPts = aPolygon->Points();
 
-	for(b_int32 i = 0; i < aPolygon->CountPoints(); i++)
+	for(__be_int32 i = 0; i < aPolygon->CountPoints(); i++)
 	{
 		BPoint pt = ConvertToWindow(*polyPts++).FloorSelf();
-		*tmp++ = (b_int32)pt.x;
-		*tmp++ = (b_int32)pt.y;
+		*tmp++ = (__be_int32)pt.x;
+		*tmp++ = (__be_int32)pt.y;
 	}
 
 	fDC->SetHighColor(HighColor());
@@ -1515,7 +1515,7 @@ BView::StrokePolygon(const BPolygon *aPolygon, bool closed, bhapi::pattern p)
 
 
 void
-BView::StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed, bhapi::pattern p)
+BView::StrokePolygon(const BPoint *ptArray,  __be_int32 numPts, bool closed, bhapi::pattern p)
 {
 	BPolygon aPolygon(ptArray, numPts);
 	if(aPolygon.CountPoints() <= 0) return;
@@ -1528,15 +1528,15 @@ BView::FillPolygon(const BPolygon *aPolygon, bhapi::pattern p)
 {
 	if(aPolygon == NULL || aPolygon->CountPoints() <= 0 || IsVisible() == false) return;
 
-	b_int32 *pts = new b_int32[2 * aPolygon->CountPoints()];
-	b_int32 *tmp = pts;
+	__be_int32 *pts = new  __be_int32[2 * aPolygon->CountPoints()];
+	__be_int32 *tmp = pts;
 	const BPoint *polyPts = aPolygon->Points();
 
-	for(b_int32 i = 0; i < aPolygon->CountPoints(); i++)
+	for(__be_int32 i = 0; i < aPolygon->CountPoints(); i++)
 	{
 		BPoint pt = ConvertToWindow(*polyPts++).FloorSelf();
-		*tmp++ = (b_int32)pt.x;
-		*tmp++ = (b_int32)pt.y;
+		*tmp++ = (__be_int32)pt.x;
+		*tmp++ = (__be_int32)pt.y;
 	}
 
 	fDC->SetHighColor(HighColor());
@@ -1555,7 +1555,7 @@ BView::FillPolygon(const BPolygon *aPolygon, bhapi::pattern p)
 
 
 void
-BView::FillPolygon(const BPoint *ptArray, b_int32 numPts, bhapi::pattern p)
+BView::FillPolygon(const BPoint *ptArray,  __be_int32 numPts, bhapi::pattern p)
 {
 	BPolygon aPolygon(ptArray, numPts);
 	if(aPolygon.CountPoints() <= 0) return;
@@ -1580,24 +1580,24 @@ BView::FillTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p)
 
 
 void
-BView::StrokeRects(const BRect *rs, b_int32 count, bhapi::pattern p)
+BView::StrokeRects(const BRect *rs,  __be_int32 count, bhapi::pattern p)
 {
 	if(rs == NULL || count <= 0 || IsVisible() == false) return;
 
-	b_int32 *rects = new b_int32[4 * count];
+	__be_int32 *rects = new  __be_int32[4 * count];
 
 	BRect updateRect;
-	b_int32 _count_ = 0;
+	__be_int32 _count_ = 0;
 
-	b_int32 *tRects = rects;
-	for(b_int32 i = 0; i < count; i++)
+	__be_int32 *tRects = rects;
+	for(__be_int32 i = 0; i < count; i++)
 	{
 		BRect r = *rs++;
 		ConvertToWindow(&r);
 		if(r.IsValid() == false) continue;
 		updateRect |= r;
 		r.Floor();
-		*tRects++ = (b_int32)r.left; *tRects++ = (b_int32)r.top; *tRects++ = (b_int32)r.Width(); *tRects++ = (b_int32)r.Height();
+		*tRects++ = (__be_int32)r.left; *tRects++ = (__be_int32)r.top; *tRects++ = (__be_int32)r.Width(); *tRects++ = (__be_int32)r.Height();
 		_count_++;
 	}
 
@@ -1632,30 +1632,30 @@ BView::FillRect(BRect r, bhapi::pattern p)
 
 	r.Floor();
 	if(Window()->fPixmap->FillRect(fDC,
-				       (b_int32)r.left, (b_int32)r.top,
-				       (b_uint32)r.Width(), (b_uint32)r.Height()) == B_OK) Window()->_Update(updateRect, false);
+				       (__be_int32)r.left, (__be_int32)r.top,
+				       (__be_uint32)r.Width(), (__be_uint32)r.Height()) == B_OK) Window()->_Update(updateRect, false);
 }
 
 
 void
-BView::FillRects(const BRect *rs, b_int32 count, bhapi::pattern p)
+BView::FillRects(const BRect *rs,  __be_int32 count, bhapi::pattern p)
 {
 	if(rs == NULL || count <= 0 || IsVisible() == false) return;
 
-	b_int32 *rects = new b_int32[4 * count];
+	__be_int32 *rects = new  __be_int32[4 * count];
 
 	BRect updateRect;
-	b_int32 _count_ = 0;
+	__be_int32 _count_ = 0;
 
-	b_int32 *tRects = rects;
-	for(b_int32 i = 0; i < count; i++)
+	__be_int32 *tRects = rects;
+	for(__be_int32 i = 0; i < count; i++)
 	{
 		BRect r = *rs++;
 		ConvertToWindow(&r);
 		if(r.IsValid() == false) continue;
 		updateRect |= r;
 		r.Floor();
-		*tRects++ = (b_int32)r.left; *tRects++ = (b_int32)r.top; *tRects++ = (b_int32)r.Width(); *tRects++ = (b_int32)r.Height();
+		*tRects++ = (__be_int32)r.left; *tRects++ = (__be_int32)r.top; *tRects++ = (__be_int32)r.Width(); *tRects++ = (__be_int32)r.Height();
 		_count_++;
 	}
 
@@ -1714,10 +1714,10 @@ BView::StrokeRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p)
 
 	r.Floor();
 	if(Window()->fPixmap->StrokeRoundRect(fDC,
-					      (b_int32)r.left, (b_int32)r.top,
-					      (b_uint32)r.Width(), (b_uint32)r.Height(),
-					      (b_uint32)ceil((double)xRadius),
-					      (b_uint32)ceil((double)yRadius)) == B_OK) Window()->_Update(updateRect, false);
+					      (__be_int32)r.left, (__be_int32)r.top,
+					      (__be_uint32)r.Width(), (__be_uint32)r.Height(),
+					      (__be_uint32)ceil((double)xRadius),
+					      (__be_uint32)ceil((double)yRadius)) == B_OK) Window()->_Update(updateRect, false);
 }
 
 
@@ -1740,10 +1740,10 @@ BView::FillRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p)
 
 	r.Floor();
 	if(Window()->fPixmap->FillRoundRect(fDC,
-					    (b_int32)r.left, (b_int32)r.top,
-					    (b_uint32)r.Width(), (b_uint32)r.Height(),
-					    (b_uint32)ceil((double)xRadius),
-					    (b_uint32)ceil((double)yRadius)) == B_OK) Window()->_Update(updateRect, false);
+					    (__be_int32)r.left, (__be_int32)r.top,
+					    (__be_uint32)r.Width(), (__be_uint32)r.Height(),
+					    (__be_uint32)ceil((double)xRadius),
+					    (__be_uint32)ceil((double)yRadius)) == B_OK) Window()->_Update(updateRect, false);
 }
 
 
@@ -1776,8 +1776,8 @@ BView::StrokeArc(BRect r, float start_angle, float arc_angle, bhapi::pattern p)
 
 	r.Floor();
 	if(Window()->fPixmap->StrokeArc(fDC,
-					(b_int32)r.left, (b_int32)r.top,
-					(b_uint32)r.Width(), (b_uint32)r.Height(),
+					(__be_int32)r.left, (__be_int32)r.top,
+					(__be_uint32)r.Width(), (__be_uint32)r.Height(),
 					start_angle, start_angle + arc_angle) == B_OK) Window()->_Update(updateRect, false);
 }
 
@@ -1811,8 +1811,8 @@ BView::FillArc(BRect r, float start_angle, float arc_angle, bhapi::pattern p)
 
 	r.Floor();
 	if(Window()->fPixmap->FillArc(fDC,
-				      (b_int32)r.left, (b_int32)r.top,
-				      (b_uint32)r.Width(), (b_uint32)r.Height(),
+				      (__be_int32)r.left, (__be_int32)r.top,
+				      (__be_uint32)r.Width(), (__be_uint32)r.Height(),
 				      start_angle, start_angle + arc_angle) == B_OK) Window()->_Update(updateRect, false);
 }
 
@@ -1871,7 +1871,7 @@ BView::PopState()
 
 	fDC->SetDrawingMode(((BViewState*)fStates)->DrawingMode);
 	fDC->SetSquarePointStyle(((BViewState*)fStates)->SquarePointStyle);
-	fDC->SetPenSize((b_uint32)ceil((double)((BViewState*)fStates)->PenSize));
+	fDC->SetPenSize((__be_uint32)ceil((double)((BViewState*)fStates)->PenSize));
 
 	BRegion clipping(*(fLayout->VisibleRegion()));
 	if(((BViewState*)fStates)->Clipping != NULL) clipping &= *(((BViewState*)fStates)->Clipping);
@@ -1898,7 +1898,7 @@ BView::Invalidate(bool redraw)
 
 
 void
-BView::_Expose(BRegion region, b_bigtime_t when)
+BView::_Expose(BRegion region, bigtime_t when)
 {
 	if(IsVisible() == false) return;
 
@@ -1932,7 +1932,7 @@ BView::_Expose(BRegion region, b_bigtime_t when)
 
 		BRect rect = ConvertToWindow(region.Frame());
 		rect.Floor();
-		win->fPixmap->FillRect(fDC, (b_int32)rect.left, (b_int32)rect.top, (b_uint32)rect.Width(), (b_uint32)rect.Height());
+		win->fPixmap->FillRect(fDC, (__be_int32)rect.left, (__be_int32)rect.top, (__be_uint32)rect.Width(), (__be_uint32)rect.Height());
 	}
 
 	if(((BViewState*)fStates)->Clipping != NULL) clipping &= *(((BViewState*)fStates)->Clipping);
@@ -1942,12 +1942,12 @@ BView::_Expose(BRegion region, b_bigtime_t when)
 	fDC->SetClipping(clipping);
 
 	fDC->SetDrawingMode(((BViewState*)fStates)->DrawingMode);
-	fDC->SetPenSize((b_uint32)ceil((double)((BViewState*)fStates)->PenSize));
+	fDC->SetPenSize((__be_uint32)ceil((double)((BViewState*)fStates)->PenSize));
 
 	if(fViewFlags & B_WILL_DRAW)
 	{
 		if(fViewFlags & B_UPDATE_WITH_REGION)
-			for(b_int32 i = 0; i < region.CountRects(); i++) Draw(region.RectAt(i));
+			for(__be_int32 i = 0; i < region.CountRects(); i++) Draw(region.RectAt(i));
 		else
 			Draw(region.Frame());
 	}
@@ -1967,7 +1967,7 @@ BView::_Expose(BRegion region, b_bigtime_t when)
 	if(!doQuit && (fViewFlags & B_DRAW_ON_CHILDREN))
 	{
 		if(fViewFlags & B_UPDATE_WITH_REGION)
-			for(b_int32 i = 0; i < region.CountRects(); i++) DrawAfterChildren(region.RectAt(i));
+			for(__be_int32 i = 0; i < region.CountRects(); i++) DrawAfterChildren(region.RectAt(i));
 		else
 			DrawAfterChildren(region.Frame());
 	}
@@ -2000,7 +2000,7 @@ BView::DrawingMode() const
 
 
 void
-BView::SetFont(const BFont *font, b_uint8 mask)
+BView::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	if(font == NULL) return;
 
@@ -2026,7 +2026,7 @@ BView::SetFont(const BFont *font, b_uint8 mask)
 
 
 void
-BView::SetFont(const bhapi::font_desc *fontDesc, b_uint8 mask)
+BView::SetFont(const bhapi::font_desc *fontDesc,  __be_uint8 mask)
 {
 	if(fontDesc == NULL) return;
 	BFont font(*fontDesc);
@@ -2068,14 +2068,14 @@ BView::ForceFontAliasing(bool enable)
 
 
 void
-BView::DrawString(const char *aString, b_int32 length, float tabWidth)
+BView::DrawString(const char *aString,  __be_int32 length, float tabWidth)
 {
 	DrawString(aString, PenLocation(), length, tabWidth);
 }
 
 
 void
-BView::DrawString(const char *aString, BPoint location, b_int32 length, float tabWidth)
+BView::DrawString(const char *aString, BPoint location,  __be_int32 length, float tabWidth)
 {
 	if(aString == NULL || *aString == 0 || length == 0 || IsVisible() == false) return;
 
@@ -2115,9 +2115,9 @@ BView::DrawString(const char *aString, BPoint location, b_int32 length, float ta
 
 		MovePenTo(location);
 
-		for(b_int32 aOffset = 0; aOffset < aStr.Length(); aOffset++)
+		for(__be_int32 aOffset = 0; aOffset < aStr.Length(); aOffset++)
 		{
-			b_int32 oldOffset = aOffset, len;
+			__be_int32 oldOffset = aOffset, len;
 			aOffset = aStr.FindFirst("\t", aOffset);
 
 			len = (aOffset < 0 ? aStr.Length() : aOffset) - oldOffset;
@@ -2138,7 +2138,7 @@ BView::DrawString(const char *aString, BPoint location, b_int32 length, float ta
 
 
 void
-BView::DrawStringInDirectlyMode(const char *aString, BPoint location, b_int32 length)
+BView::DrawStringInDirectlyMode(const char *aString, BPoint location,  __be_int32 length)
 {
 	BFontEngine *engine = ((BViewState*)fStates)->Font.Engine();
 
@@ -2172,7 +2172,7 @@ BView::DrawStringInDirectlyMode(const char *aString, BPoint location, b_int32 le
 
 
 void
-BView::DrawStringInPixmapMode(const char *aString, BPoint location, b_int32 length)
+BView::DrawStringInPixmapMode(const char *aString, BPoint location,  __be_int32 length)
 {
 	BRect rect = VisibleBounds();
 	BFontEngine *engine = ((BViewState*)fStates)->Font.Engine();
@@ -2183,7 +2183,7 @@ BView::DrawStringInPixmapMode(const char *aString, BPoint location, b_int32 leng
 	bool bold = ((BViewState*)fStates)->Font.IsBoldStyle();
 	bool is_mono = fForceFontAliasing;
 
-	b_int32 w = 0, h = 0;
+	__be_int32 w = 0, h = 0;
 
 	engine->Lock();
 
@@ -2196,7 +2196,7 @@ BView::DrawStringInPixmapMode(const char *aString, BPoint location, b_int32 leng
 	engine->ForceFontAliasing(is_mono);
 
 	float width = engine->StringWidth(aString, size, spacing, shear, bold, length);
-	b_uint8 *bitmap = engine->RenderString(aString, &w, &h, &is_mono, size, spacing, shear, bold, length);
+	__be_uint8 *bitmap = engine->RenderString(aString, &w, &h, &is_mono, size, spacing, shear, bold, length);
 
 	engine->Unlock();
 
@@ -2208,10 +2208,10 @@ BView::DrawStringInPixmapMode(const char *aString, BPoint location, b_int32 leng
 		return;
 	}
 
-	b_int32 _w_ = w;
-	b_int32 _h_ = h;
-	w = min_c(w, (b_int32)(ceil(rect.Width())));
-	h = min_c(h, (b_int32)(ceil(rect.Height())));
+	__be_int32 _w_ = w;
+	__be_int32 _h_ = h;
+	w = min_c(w, (__be_int32)(ceil(rect.Width())));
+	h = min_c(h, (__be_int32)(ceil(rect.Height())));
 
 	if(!bitmap || w <= 0 || h <= 0)
 	{
@@ -2219,22 +2219,22 @@ BView::DrawStringInPixmapMode(const char *aString, BPoint location, b_int32 leng
 		return;
 	}
 
-	b_int32 *pts = new b_int32[2 * w * h];
-	b_uint8 *alpha = is_mono ? NULL : new b_uint8[w * h];
-	b_int32 pointCount = 0;
+	__be_int32 *pts = new  __be_int32[2 * w * h];
+	__be_uint8 *alpha = is_mono ? NULL : new  __be_uint8[w * h];
+	__be_int32 pointCount = 0;
 
-	b_int32 i_start = max_c((b_int32)(ceil(rect.top) - ceil(startPoint.y)), 0);
-	b_int32 j_start = max_c((b_int32)(ceil(rect.left) - ceil(startPoint.x)), 0);
+	__be_int32 i_start = max_c((__be_int32)(ceil(rect.top) - ceil(startPoint.y)), 0);
+	__be_int32 j_start = max_c((__be_int32)(ceil(rect.left) - ceil(startPoint.x)), 0);
 
 	ConvertToWindow(&startPoint);
 	BPoint pmin, pmax;
 
-	b_int32 *tmp = pts;
-	for(b_int32 i = i_start; i < min_c(i_start + h, _h_); i++)
+	__be_int32 *tmp = pts;
+	for(__be_int32 i = i_start; i < min_c(i_start + h, _h_); i++)
 	{
-		for(b_int32 j = j_start; j < min_c(j_start + w, _w_); j++)
+		for(__be_int32 j = j_start; j < min_c(j_start + w, _w_); j++)
 		{
-			b_uint8 c = bitmap[i * _w_ + j];
+			__be_uint8 c = bitmap[i * _w_ + j];
 			if(c != 0)
 			{
 				BPoint pt = startPoint + BPoint((float)j, (float)i);
@@ -2252,15 +2252,15 @@ BView::DrawStringInPixmapMode(const char *aString, BPoint location, b_int32 leng
 
 				pt.Floor();
 
-				*tmp++ = (b_int32)pt.x;
-				*tmp++ = (b_int32)pt.y;
+				*tmp++ = (__be_int32)pt.x;
+				*tmp++ = (__be_int32)pt.y;
 
 				pointCount++;
 			}
 		}
 	}
 
-	b_status_t status = B_ERROR;
+	status_t status = B_ERROR;
 
 	if(pointCount > 0)
 	{
@@ -2277,20 +2277,20 @@ BView::DrawStringInPixmapMode(const char *aString, BPoint location, b_int32 leng
 			if(alpha)
 			{
 				// here we just generate 16 gray
-				const b_uint8 *_alpha_ = alpha;
+				const  __be_uint8 *_alpha_ = alpha;
 				BList ptsLists[16];
-				for(b_int32 i = 0; i < pointCount; i++)
+				for(__be_int32 i = 0; i < pointCount; i++)
 				{
-					b_int32 a = (b_int32)(*_alpha_++);
+					__be_int32 a = (__be_int32)(*_alpha_++);
 					ptsLists[a / 16].AddItem((void*)&pts[i * 2]);
 				}
 
 				bhapi::rgb_color ptColors[16];
 				bhapi::rgb_color lcolor = LowColor();
-				for(b_int32 i = 0; i < 16; i++)
+				for(__be_int32 i = 0; i < 16; i++)
 				{
 					ptColors[i].set_to(HighColor());
-					lcolor.alpha = 255 - (b_uint8)i * 17;
+					lcolor.alpha = 255 - (__be_uint8)i * 17;
 					ptColors[i].mix(lcolor);
 				}
 
@@ -2321,7 +2321,7 @@ BView::DrawStringInPixmapMode(const char *aString, BPoint location, b_int32 leng
 
 
 void
-BView::DrawString(const char *aString, b_int32 length, BPoint location, float tabWidth)
+BView::DrawString(const char *aString,  __be_int32 length, BPoint location, float tabWidth)
 {
 	DrawString(aString, location, length, tabWidth);
 }
@@ -2362,8 +2362,8 @@ BView::IsFocus() const
 }
 
 
-b_status_t
-BView::SetEventMask(b_uint32 mask, b_uint32 options)
+status_t
+BView::SetEventMask(__be_uint32 mask,  __be_uint32 options)
 {
 	if(fEventStored == false) return _SetEventMask(mask, options);
 
@@ -2374,8 +2374,8 @@ BView::SetEventMask(b_uint32 mask, b_uint32 options)
 }
 
 
-b_status_t
-BView::_SetEventMask(b_uint32 mask, b_uint32 options)
+status_t
+BView::_SetEventMask(__be_uint32 mask,  __be_uint32 options)
 {
 	BWindow *win = Window();
 
@@ -2387,8 +2387,8 @@ BView::_SetEventMask(b_uint32 mask, b_uint32 options)
 		}
 		else if(fEventMask != 0)
 		{
-			b_uint32 mask1 = fEventMask & ~mask;
-			b_uint32 mask2 = mask & ~fEventMask;
+			__be_uint32 mask1 = fEventMask & ~mask;
+			__be_uint32 mask2 = mask & ~fEventMask;
 
 			if(mask2 & B_POINTER_EVENTS)
 			{
@@ -2434,15 +2434,15 @@ BView::_SetEventMask(b_uint32 mask, b_uint32 options)
 }
 
 
-b_uint32
+be_uint32
 BView::EventMask() const
 {
 	return fEventMask;
 }
 
 
-b_status_t
-BView::SetPrivateEventMask(b_uint32 mask, b_uint32 options)
+status_t
+BView::SetPrivateEventMask(__be_uint32 mask,  __be_uint32 options)
 {
 	// TODO: suspend etc...
 	if(mask == 0) return B_ERROR;
@@ -2466,8 +2466,8 @@ BView::SetPrivateEventMask(b_uint32 mask, b_uint32 options)
 		return B_ERROR;
 	}
 
-	b_uint32 eventMask, eventNewMask;
-	b_uint32 eventOptions, eventNewOptions;
+	__be_uint32 eventMask, eventNewMask;
+	__be_uint32 eventOptions, eventNewOptions;
 
 	eventMask = eventNewMask = fEventMask;
 	eventOptions = eventNewOptions = fEventOptions;
@@ -2484,8 +2484,8 @@ BView::SetPrivateEventMask(b_uint32 mask, b_uint32 options)
 	}
 	else
 	{
-		b_uint32 _mask_ = mask & ~eventNewMask;
-		b_uint32 _options_ = options & ~eventNewOptions;
+		__be_uint32 _mask_ = mask & ~eventNewMask;
+		__be_uint32 _options_ = options & ~eventNewOptions;
 
 		if(_mask_ != 0)
 		{
@@ -2503,7 +2503,7 @@ BView::SetPrivateEventMask(b_uint32 mask, b_uint32 options)
 
 	if(eventMask != eventNewMask || eventOptions != eventNewOptions)
 	{
-		b_status_t status = _SetEventMask(eventNewMask, eventNewOptions);
+		status_t status = _SetEventMask(eventNewMask, eventNewOptions);
 		if(status != B_OK) return status;
 		fEventOptions = eventNewOptions;
 	}
@@ -2605,8 +2605,8 @@ BView::ConstrainClippingRegion(BRect clipping)
 }
 
 
-b_status_t
-BView::GetMouse(BPoint *location, b_int32 *buttons, bool checkMessageQueue)
+status_t
+BView::GetMouse(BPoint *location,  __be_int32 *buttons, bool checkMessageQueue)
 {
 	BWindow *win = Window();
 	if(win == NULL || location == NULL || buttons == NULL) return B_ERROR;
@@ -2623,7 +2623,7 @@ BView::GetMouse(BPoint *location, b_int32 *buttons, bool checkMessageQueue)
 		return B_ERROR;
 	}
 
-	b_int32 mx, my;
+	__be_int32 mx, my;
 	if(win->fWindow->QueryMouse(&mx, &my, buttons) != B_OK) return B_ERROR;
 	location->x = (float)mx;
 	location->y = (float)my;
@@ -2634,7 +2634,7 @@ BView::GetMouse(BPoint *location, b_int32 *buttons, bool checkMessageQueue)
 
 
 bool
-BView::QueryCurrentMouse(bool pushed, b_int32 buttons, bool btnsAlone, b_int32 *clicks) const
+BView::QueryCurrentMouse(bool pushed,  __be_int32 buttons, bool btnsAlone,  __be_int32 *clicks) const
 {
 	BWindow *win = Window();
 	if(win == NULL) return false;
@@ -2644,7 +2644,7 @@ BView::QueryCurrentMouse(bool pushed, b_int32 buttons, bool btnsAlone, b_int32 *
 	if(pushed && msg->what != B_MOUSE_DOWN) return false;
 	if(pushed == false && msg->what != B_MOUSE_UP) return false;
 
-	b_int32 btns;
+	__be_int32 btns;
 	if(msg->FindInt32("buttons", &btns) == false) return false;
 
 	if(clicks)
@@ -2731,7 +2731,7 @@ BView::ScrollTo(BPoint where)
 		fScrollTimeStamp = b_real_time_clock_usecs();
 		Invalidate(Bounds(), true);
 
-		for(b_int32 i = 0; i < fScrollBar.CountItems(); i++)
+		for(__be_int32 i = 0; i < fScrollBar.CountItems(); i++)
 		{
 			BScrollBar *scrollbar = (BScrollBar*)fScrollBar.ItemAt(i);
 			scrollbar->_SetValue(scrollbar->Orientation() == B_HORIZONTAL ? LeftTop().x : LeftTop().y, false);
@@ -2797,10 +2797,10 @@ BView::DrawBitmap(const BBitmap *bitmap, BRect srcRect, BRect destRect)
 	srcRect.Floor();
 	destRect.Floor();
 	if(bitmap->fPixmap->CopyTo(fDC, Window()->fPixmap,
-				   (b_int32)srcRect.left, (b_int32)srcRect.top,
-				   (b_uint32)srcRect.Width(), (b_uint32)srcRect.Height(),
-				   (b_int32)destRect.left, (b_int32)destRect.top,
-				   (b_uint32)destRect.Width(), (b_uint32)destRect.Height()) == B_OK) Window()->_Update(updateRect, false);
+				   (__be_int32)srcRect.left, (__be_int32)srcRect.top,
+				   (__be_uint32)srcRect.Width(), (__be_uint32)srcRect.Height(),
+				   (__be_int32)destRect.left, (__be_int32)destRect.top,
+				   (__be_uint32)destRect.Width(), (__be_uint32)destRect.Height()) == B_OK) Window()->_Update(updateRect, false);
 }
 
 void BView::CopyBits(BRect srcRect, BRect destRect)
@@ -2815,10 +2815,10 @@ void BView::CopyBits(BRect srcRect, BRect destRect)
 	srcRect.Floor();
 	destRect.Floor();
 	if(Window()->fPixmap->CopyTo(fDC, Window()->fPixmap,
-				     (b_int32)srcRect.left, (b_int32)srcRect.top,
-				     (b_uint32)srcRect.Width(), (b_uint32)srcRect.Height(),
-				     (b_int32)destRect.left, (b_int32)destRect.top,
-				     (b_uint32)destRect.Width(), (b_uint32)destRect.Height()) == B_OK) Window()->_Update(updateRect, false);
+				     (__be_int32)srcRect.left, (__be_int32)srcRect.top,
+				     (__be_uint32)srcRect.Width(), (__be_uint32)srcRect.Height(),
+				     (__be_int32)destRect.left, (__be_int32)destRect.top,
+				     (__be_uint32)destRect.Width(), (__be_uint32)destRect.Height()) == B_OK) Window()->_Update(updateRect, false);
 }
 
 void BView::Flush() const

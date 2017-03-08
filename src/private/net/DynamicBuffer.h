@@ -10,7 +10,7 @@
 #define _DYNAMIC_BUFFER_H
 
 #include <DataIO.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class DynamicBuffer : public BDataIO {

@@ -6,7 +6,7 @@
 #define _PACKAGE__REQUEST_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <package/Job.h>
 

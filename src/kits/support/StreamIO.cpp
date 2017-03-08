@@ -57,29 +57,19 @@ BStreamIO::~BStreamIO()
 }
 
 
-b_size_t BStreamIO::Read(void *a_buffer, size_t size)
+be_size_t BStreamIO::Read(void *a_buffer, size_t size)
 {
-    return (b_size_t)B_ERROR;
+    return (__be_size_t)B_ERROR;
 }
 
 
-b_size_t BStreamIO::Write(const void *a_buffer, size_t size)
+be_size_t BStreamIO::Write(const void *a_buffer, size_t size)
 {
-    return (b_size_t)B_ERROR;
+    return (__be_size_t)B_ERROR;
 }
 
 
-BStreamIO& BStreamIO::operator<<(b_int8 value)
-{
-    BString str;
-    str << value;
-    Write(str.String(), str.Length());
-    return *this;
-}
-
-
-BStreamIO&
-BStreamIO::operator<<(b_uint8 value)
+BStreamIO& BStreamIO::operator<<(__be_int8 value)
 {
     BString str;
     str << value;
@@ -89,7 +79,7 @@ BStreamIO::operator<<(b_uint8 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(b_int16 value)
+BStreamIO::operator<<(__be_uint8 value)
 {
     BString str;
     str << value;
@@ -99,7 +89,7 @@ BStreamIO::operator<<(b_int16 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(b_uint16 value)
+BStreamIO::operator<<(__be_int16 value)
 {
     BString str;
     str << value;
@@ -109,7 +99,7 @@ BStreamIO::operator<<(b_uint16 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(b_int32 value)
+BStreamIO::operator<<(__be_uint16 value)
 {
     BString str;
     str << value;
@@ -119,7 +109,7 @@ BStreamIO::operator<<(b_int32 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(b_uint32 value)
+BStreamIO::operator<<(__be_int32 value)
 {
     BString str;
     str << value;
@@ -129,7 +119,7 @@ BStreamIO::operator<<(b_uint32 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(b_int64 value)
+BStreamIO::operator<<(__be_uint32 value)
 {
     BString str;
     str << value;
@@ -139,7 +129,17 @@ BStreamIO::operator<<(b_int64 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(b_uint64 value)
+BStreamIO::operator<<(__be_int64 value)
+{
+    BString str;
+    str << value;
+    Write(str.String(), str.Length());
+    return *this;
+}
+
+
+BStreamIO&
+BStreamIO::operator<<(__be_uint64 value)
 {
     BString str;
     str << value;
@@ -207,13 +207,13 @@ BStreamIO::operator<<(BStreamIO &stream)
     if(&stream == &endl || &stream == &ends)
         return operator<<(&stream == &endl ? '\n' : ' ');
 
-    b_int8 buf[512];
-    b_size_t len;
+     __be_int8 buf[512];
+     __be_size_t len;
 
     bzero(buf, sizeof(buf));
     if((len = stream.Read(&buf[0], sizeof(buf))) > 0)
     {
-        b_size_t nWritten;
+         __be_size_t nWritten;
         while((nWritten = Write(&buf[0], (size_t)len)) > 0)
         {
             if  (len <= nWritten) break;

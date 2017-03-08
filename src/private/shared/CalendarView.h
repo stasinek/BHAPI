@@ -12,8 +12,8 @@
 #include <DateFormat.h>
 #include <Invoker.h>
 #include <List.h>
-#include <Locale.h>
-#include <String.h>
+#include <LocaleClass.h>
+#include <StringClass.h>
 #include <View.h>
 
 

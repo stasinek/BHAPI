@@ -21,7 +21,7 @@
 #include <Path.h>
 #include <Query.h>
 #include <Roster.h>
-#include <String.h>
+#include <StringClass.h>
 #include <StringList.h>
 #include <VolumeRoster.h>
 

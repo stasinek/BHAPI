@@ -50,7 +50,7 @@ All rights reserved.
 #include "PoseList.h"
 #include "Tracker.h"
 #include "TrackerSettings.h"
-#include "TrackerString.h"
+#include "TrackerStringClass.h"
 
 
 //	#pragma mark - DesktopPoseView
@@ -198,11 +198,11 @@ DesktopPoseView::ShowVolumes(bool visible, bool showShared)
 void
 DesktopPoseView::StartSettingsWatch()
 {
-	if (be_app->LockLooper()) {
-		be_app->StartWatching(this, kShowDisksIconChanged);
-		be_app->StartWatching(this, kVolumesOnDesktopChanged);
-		be_app->StartWatching(this, kDesktopIntegrationChanged);
-		be_app->UnlockLooper();
+	if (__be_app->LockLooper()) {
+		__be_app->StartWatching(this, kShowDisksIconChanged);
+		__be_app->StartWatching(this, kVolumesOnDesktopChanged);
+		__be_app->StartWatching(this, kDesktopIntegrationChanged);
+		__be_app->UnlockLooper();
 	}
 }
 
@@ -210,11 +210,11 @@ DesktopPoseView::StartSettingsWatch()
 void
 DesktopPoseView::StopSettingsWatch()
 {
-	if (be_app->LockLooper()) {
-		be_app->StopWatching(this, kShowDisksIconChanged);
-		be_app->StopWatching(this, kVolumesOnDesktopChanged);
-		be_app->StopWatching(this, kDesktopIntegrationChanged);
-		be_app->UnlockLooper();
+	if (__be_app->LockLooper()) {
+		__be_app->StopWatching(this, kShowDisksIconChanged);
+		__be_app->StopWatching(this, kVolumesOnDesktopChanged);
+		__be_app->StopWatching(this, kDesktopIntegrationChanged);
+		__be_app->UnlockLooper();
 	}
 }
 
@@ -222,7 +222,7 @@ DesktopPoseView::StopSettingsWatch()
 void
 DesktopPoseView::AdaptToVolumeChange(BMessage* message)
 {
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	ThrowOnAssert(tracker != NULL);
 
 	bool showDisksIcon = false;

@@ -7,7 +7,7 @@
 #define _PACKAGE__HPKG__PRIVATE__BLOCK_BUFFER_POOL_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <util/DoublyLinkedList.h>
 

@@ -6,7 +6,7 @@
 #define _PACKAGE__PACKAGE_RESOLVABLE_EXPRESSION_H_
 
 
-#include <String.h>
+#include <StringClass.h>
 
 #include <package/PackageResolvableOperator.h>
 #include <package/PackageVersion.h>

@@ -7,7 +7,7 @@
 #define _PACKAGE__HPKG__V1__PRIVATE__READER_IMPL_BASE_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <util/SinglyLinkedList.h>
 

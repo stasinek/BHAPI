@@ -121,11 +121,11 @@
 extern "C" {
 namespace bhapi {
 #endif // __cplusplus
-extern IMPEXPBHAPI const b_uint8 major_version;
-extern IMPEXPBHAPI const b_uint8 minor_version;
-extern IMPEXPBHAPI const b_uint8 micro_version;
-extern IMPEXPBHAPI const b_uint8 interface_age;
-extern IMPEXPBHAPI const b_uint16 binary_age;
+extern IMPEXPBHAPI const  __be_uint8 major_version;
+extern IMPEXPBHAPI const  __be_uint8 minor_version;
+extern IMPEXPBHAPI const  __be_uint8 micro_version;
+extern IMPEXPBHAPI const  __be_uint8 interface_age;
+extern IMPEXPBHAPI const  __be_uint16 binary_age;
 #ifdef __cplusplus
 } /* namespace */
 }

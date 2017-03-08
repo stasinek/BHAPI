@@ -11,7 +11,7 @@
 #include <string.h>
 #include <new>
 
-#include <String.h>
+#include <StringClass.h>
 #include <HttpHeaders.h>
 
 

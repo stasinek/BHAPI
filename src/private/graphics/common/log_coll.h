@@ -19,7 +19,7 @@
 #ifndef __LOG_COLL_H__
 #define __LOG_COLL_H__
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 // by undefining this flag, all logging functions
 // are resolved to empty space, so don't add

@@ -9,7 +9,7 @@
 #ifndef _R3_MEDIA_DEFS_H
 #define _R3_MEDIA_DEFS_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <Errors.h>
 #if defined(__cplusplus)
 #  include <MediaDefs.h>

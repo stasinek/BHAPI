@@ -559,7 +559,7 @@ default_catalog_get_available_languages(BMessage* availableLanguages,
 		return B_BAD_DATA;
 
 	app_info appInfo;
-	be_app->GetAppInfo(&appInfo);
+	__be_app->GetAppInfo(&appInfo);
 	node_ref nref;
 	nref.device = appInfo.ref.device;
 	nref.node = appInfo.ref.directory;

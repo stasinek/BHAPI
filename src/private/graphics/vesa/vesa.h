@@ -6,7 +6,7 @@
 #define VESA_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 /* VBE info block structure */

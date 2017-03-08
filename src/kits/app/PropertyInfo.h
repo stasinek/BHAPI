@@ -8,8 +8,8 @@
 
 #include <BeBuild.h>
 #include <Flattenable.h>
-#include <SupportDefs.h>
-#include <TypeConstants.h>
+#include <Haiku.h>
+#include <HaikuConstants.h>
 
 
 class BMessage;

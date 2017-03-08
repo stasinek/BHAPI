@@ -65,7 +65,7 @@ All rights reserved.
 // project (www.opentracker.org), Jul 11, 2000.
 
 
-#include <String.h>
+#include <StringClass.h>
 
 
 namespace BPrivate {

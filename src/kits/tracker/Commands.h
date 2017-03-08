@@ -36,7 +36,7 @@ All rights reserved.
 
 
 #include <MountServer.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <tracker_private.h>
 	// public commands moved here so they may be included by other apps

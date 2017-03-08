@@ -8,7 +8,7 @@
 
 #include <UTF8.h>
 #include <Message.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <mail_encoding.h>
 

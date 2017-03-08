@@ -16,7 +16,7 @@
 #ifndef _ASSEMBLER
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct kernel_args;

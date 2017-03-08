@@ -5,7 +5,7 @@
 #include <new>
 #include <string.h>
 
-#include "HashString.h"
+#include "HashStringClass.h"
 
 /*!
 	\class HashString

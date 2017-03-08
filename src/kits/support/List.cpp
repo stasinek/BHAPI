@@ -33,7 +33,7 @@
 //-----------------------------------------------------------------------------
 
 
-bool BList::_Resize(b_int32 count)
+bool BList::_Resize(__be_int32 count)
 {
     void    **newObjects = (void **)realloc(fObjects, (size_t) (count + 1) * sizeof(void *));
     if (count <= 0)
@@ -98,7 +98,7 @@ bool BList::_Resize(b_int32 count)
 
 //-----------------------------------------------------------------------------
 
-BList::BList(b_int32 initialAllocSize) :
+BList::BList(__be_int32 initialAllocSize) :
 fObjects(NULL),
 fItemCount(0),
 fItemReal(0),
@@ -116,7 +116,7 @@ fMinimumCount(0)
 
 //-----------------------------------------------------------------------------
 
-BList::BList(b_int32 initialAllocSize, b_int32 nullItems) :
+BList::BList(__be_int32 initialAllocSize,  __be_int32 nullItems) :
 fObjects(NULL),
 fItemCount(0),
 fItemReal(0),
@@ -189,7 +189,7 @@ bool BList::AddItem(void *item)
 
 //-----------------------------------------------------------------------------
 
-bool BList::AddItem(void *item, b_int32 atIndex)
+bool BList::AddItem(void *item,  __be_int32 atIndex)
 {
     if (atIndex < 0 || atIndex > fItemCount) return false;
     if (atIndex == fItemCount) return AddItem(item);
@@ -237,7 +237,7 @@ bool BList::AddList(const BList *newItems)
 
 //-----------------------------------------------------------------------------
 
-bool BList::AddList(const BList *newItems, b_int32 atIndex)
+bool BList::AddList(const BList *newItems,  __be_int32 atIndex)
 {
     void    **newObjects = (void **)malloc((fItemCount - atIndex + newItems->fItemCount) * sizeof(void *));
     if (fItemCount == 0 && atIndex == 0) return AddList(newItems);
@@ -289,7 +289,7 @@ bool BList::RemoveItem(void *item)
 
 //-----------------------------------------------------------------------------
 
-void *BList::RemoveItem(b_int32 index)
+void *BList::RemoveItem(__be_int32 index)
 {
     void    *data = fObjects[index];
 
@@ -312,7 +312,7 @@ void *BList::RemoveItem(b_int32 index)
 
 //-----------------------------------------------------------------------------
 
-bool BList::RemoveItems(b_int32 index, b_int32 count)
+bool BList::RemoveItems(__be_int32 index,  __be_int32 count)
 {
     if (index < 0 || index >= fItemCount) return false;
 
@@ -340,7 +340,7 @@ bool BList::RemoveItems(b_int32 index, b_int32 count)
 
 //-----------------------------------------------------------------------------
 
-bool BList::ReplaceItem(b_int32 index, void *newItem, void **oldItem)
+bool BList::ReplaceItem(__be_int32 index, void *newItem, void **oldItem)
 {
     if (index < 0 || index >= fItemCount) return false;
     if (oldItem) *oldItem = fObjects[index];
@@ -358,7 +358,7 @@ void BList::MakeEmpty(void)
 
 //-----------------------------------------------------------------------------
 
-bool BList::SwapItems(b_int32 indexA, b_int32 indexB)
+bool BList::SwapItems(__be_int32 indexA,  __be_int32 indexB)
 {
     void    *dataA = fObjects[indexA];
 
@@ -372,7 +372,7 @@ bool BList::SwapItems(b_int32 indexA, b_int32 indexB)
 
 //-----------------------------------------------------------------------------
 
-bool BList::MoveItem(b_int32 fromIndex, b_int32 toIndex)
+bool BList::MoveItem(__be_int32 fromIndex,  __be_int32 toIndex)
 {
     void    *fromData = fObjects[fromIndex];
 
@@ -404,7 +404,7 @@ void BList::SortItems(int (*cmp) (const void *, const void *))
 
 //-----------------------------------------------------------------------------
 
-void *BList::ItemAt(b_int32 index) const
+void *BList::ItemAt(__be_int32 index) const
 {
     if (index < 0 || index >= fItemCount) return NULL;
 
@@ -437,9 +437,9 @@ bool BList::HasItem(void *item) const
 
 //-----------------------------------------------------------------------------
 
-b_int32 BList::IndexOf(void *item) const
+be_int32 BList::IndexOf(void *item) const
 {
-    for (b_int32 i = 0; i < fItemCount; i++)
+    for (__be_int32 i = 0; i < fItemCount; i++)
     {
         if (fObjects[i] == item) return i;
     }
@@ -449,7 +449,7 @@ b_int32 BList::IndexOf(void *item) const
 
 //-----------------------------------------------------------------------------
 
-b_int32 BList::CountItems(void) const
+be_int32 BList::CountItems(void) const
 {
     return fItemCount;
 }
@@ -467,7 +467,7 @@ void BList::DoForEach(bool (*func) (void *))
 {
     if (!func) return;
 
-    for (b_int32 i = 0; i < fItemCount; i++)
+    for (__be_int32 i = 0; i < fItemCount; i++)
     {
         if ((*func) (fObjects[i])) break;
     }
@@ -479,7 +479,7 @@ void BList::DoForEach(bool (*func) (void *, void *), void *user_data)
 {
     if (!func) return;
 
-    for (b_int32 i = 0; i < fItemCount; i++)
+    for (__be_int32 i = 0; i < fItemCount; i++)
     {
         if ((*func) (fObjects[i], user_data)) break;
     }

@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <util/kernel_cpp.h>
 #include <Vector.h>

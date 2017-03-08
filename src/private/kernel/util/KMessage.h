@@ -9,7 +9,7 @@
 #include <string.h>
 
 #include <OS.h>
-#include <TypeConstants.h>
+#include <HaikuConstants.h>
 
 
 #ifdef __cplusplus

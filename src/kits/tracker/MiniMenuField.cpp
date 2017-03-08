@@ -48,7 +48,7 @@ MiniMenuField::MiniMenuField(BRect frame, const char* name, BPopUpMenu* menu,
 	BView(frame, name, resizeFlags, flags),
 	fMenu(menu)
 {
-	SetFont(be_plain_font, B_FONT_FAMILY_AND_STYLE | B_FONT_SIZE);
+	SetFont(__be_plain_font, B_FONT_FAMILY_AND_STYLE | B_FONT_SIZE);
 }
 
 
@@ -142,7 +142,7 @@ MiniMenuField::Draw(BRect)
 	float tint = Window()->IsActive() ? B_DARKEN_3_TINT : B_DARKEN_1_TINT;
 
 	SetDrawingMode(B_OP_COPY);
-	be_control_look->DrawArrowShape(this, rect, rect, arrowColor,
+	__be_control_look->DrawArrowShape(this, rect, rect, arrowColor,
 		BControlLook::B_RIGHT_ARROW, 0, tint);
 }
 

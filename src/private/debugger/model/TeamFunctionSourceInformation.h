@@ -6,7 +6,7 @@
 #define TEAM_FUNCTION_SOURCE_INFORMATION_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 class FunctionDebugInfo;
 class SourceCode;

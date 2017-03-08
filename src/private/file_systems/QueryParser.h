@@ -42,7 +42,7 @@
 
 #	include <fs_interface.h>
 #	include <fs_query.h>
-#	include <TypeConstants.h>
+#	include <HaikuConstants.h>
 
 #	include <util/SinglyLinkedList.h>
 #	include <util/Stack.h>

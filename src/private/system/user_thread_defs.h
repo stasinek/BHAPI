@@ -9,7 +9,7 @@
 #include <pthread.h>
 #include <signal.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct user_thread {

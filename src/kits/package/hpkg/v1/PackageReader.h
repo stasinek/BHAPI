@@ -6,7 +6,7 @@
 #define _PACKAGE__HPKG__V1__PACKAGE_READER_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 namespace BPackageKit {

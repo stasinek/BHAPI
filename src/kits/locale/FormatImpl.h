@@ -1,7 +1,7 @@
 #ifndef _B_FORMAT_IMPL_H_
 #define _B_FORMAT_IMPL_H_
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 class BFormatParameters;
 

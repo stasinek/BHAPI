@@ -1,0 +1,56 @@
+Determining if the include file unistd.h exists failed with the following output:
+Change Dir: C:/Documents and Settings/stasiek.TC12/My Documents/prc++/x86_libraries/freetype/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files/Microsoft Visual Studio .NET 2003/Common7/IDE/devenv.com" "CMAKE_TRY_COMPILE.sln" "/build" "Debug" "/project" "cmTryCompileExec114858251"
+
+Microsoft (R) Development Environment  Version 7.10.3077.
+Copyright (C) Microsoft Corp 1984-2001. All rights reserved.
+------ Build started: Project: cmTryCompileExec114858251, Configuration: Debug Win32 ------
+
+Compiling...
+Microsoft (R) 32-bit C/C++ Standard Compiler Version 13.10.3077 for 80x86
+Copyright (C) Microsoft Corporation 1984-2002. All rights reserved.
+cl /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "CMAKE_INTDIR=\"Debug\"" /D "_MBCS" /FD /RTCs /MDd /GS /Fo"cmTryCompileExec114858251.dir\Debug\\" /Fd"cmTryCompileExec114858251.dir\Debug/vc70.pdb" /W3 /c /Zi /TC
+   ".\CheckIncludeFile.c"
+CheckIncludeFile.c
+CheckIncludeFile.c(1) : fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+ 
+Build log was saved at "file://c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\CMakeFiles\CMakeTmp\cmTryCompileExec114858251.dir\Debug\BuildLog.htm" 
+cmTryCompileExec114858251 - 1 error(s), 0 warning(s) 
+
+
+---------------------- Done ----------------------
+
+    Build: 0 succeeded, 1 failed, 0 skipped
+ 
+
+
+
+Determining if the include file stdint.h exists failed with the following output:
+Change Dir: C:/Documents and Settings/stasiek.TC12/My Documents/prc++/x86_libraries/freetype/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files/Microsoft Visual Studio .NET 2003/Common7/IDE/devenv.com" "CMAKE_TRY_COMPILE.sln" "/build" "Debug" "/project" "cmTryCompileExec2890674382"
+
+Microsoft (R) Development Environment  Version 7.10.3077.
+Copyright (C) Microsoft Corp 1984-2001. All rights reserved.
+------ Build started: Project: cmTryCompileExec2890674382, Configuration: Debug Win32 ------
+
+Compiling...
+Microsoft (R) 32-bit C/C++ Standard Compiler Version 13.10.3077 for 80x86
+Copyright (C) Microsoft Corporation 1984-2002. All rights reserved.
+cl /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "CMAKE_INTDIR=\"Debug\"" /D "_MBCS" /FD /RTCs /MDd /GS /Fo"cmTryCompileExec2890674382.dir\Debug\\" /Fd"cmTryCompileExec2890674382.dir\Debug/vc70.pdb" /W3 /c /Zi /TC
+   ".\CheckIncludeFile.c"
+CheckIncludeFile.c
+CheckIncludeFile.c(1) : fatal error C1083: Cannot open include file: 'stdint.h': No such file or directory
+ 
+Build log was saved at "file://c:\Documents and Settings\stasiek.TC12\My Documents\prc++\x86_libraries\freetype\CMakeFiles\CMakeTmp\cmTryCompileExec2890674382.dir\Debug\BuildLog.htm" 
+cmTryCompileExec2890674382 - 1 error(s), 0 warning(s) 
+
+
+---------------------- Done ----------------------
+
+    Build: 0 succeeded, 1 failed, 0 skipped
+ 
+
+
+

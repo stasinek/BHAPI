@@ -6,7 +6,7 @@
 #define _NETWORK_NOTIFICATIONS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 // Flags for the start_watching_network() calls.

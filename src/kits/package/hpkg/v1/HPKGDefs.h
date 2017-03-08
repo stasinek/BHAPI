@@ -6,7 +6,7 @@
 #define _PACKAGE__HPKG__V1__HPKG_DEFS_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 namespace BPackageKit {

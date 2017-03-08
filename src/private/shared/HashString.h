@@ -5,7 +5,7 @@
 #ifndef HASH_STRING_H
 #define HASH_STRING_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 // string_hash
 //

@@ -6,7 +6,7 @@
 #define ARCH_x86_BIOS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #ifndef __x86_64__

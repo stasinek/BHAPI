@@ -53,9 +53,9 @@ BColorControl::BColorControl(BPoint leftTop, const char *name, BMessage *message
 #endif
 		pixmap->SetDrawingMode(B_OP_COPY);
 
-		for(b_uint8 i = 0; i < 4; i++)
+		for(__be_uint8 i = 0; i < 4; i++)
 		{
-			b_uint8 j = 0;
+			__be_uint8 j = 0;
 			do
 			{
 				aRect.SetLeftTop(BPoint((float)j, 15.f * (float)i));
@@ -114,7 +114,7 @@ BColorControl::GetPreferredSize(float *width, float *height)
 
 
 BRect
-BColorControl::_MarkFrame(BRect colorsFrame, b_uint8 channel)
+BColorControl::_MarkFrame(BRect colorsFrame,  __be_uint8 channel)
 {
 	BRect r;
 
@@ -203,9 +203,9 @@ BColorControl::_DrawColors(BRect r)
 	if(fBitmap == NULL)
 	{
 		BRect aRect;
-		for(b_uint8 i = 0; i < 4; i++)
+		for(__be_uint8 i = 0; i < 4; i++)
 		{
-			b_uint8 j = 0;
+			__be_uint8 j = 0;
 			do
 			{
 				aRect.SetLeftTop(BPoint(1.f + (float)j, rect.top + 1.f + 15.f * (float)i));
@@ -225,7 +225,7 @@ BColorControl::_DrawColors(BRect r)
 		if(aRect.Intersects(r)) DrawBitmap(fBitmap, aRect.OffsetToCopy(B_ORIGIN), aRect);
 	}
 
-	for(b_uint8 i = 0; i < 3; i++)
+	for(__be_uint8 i = 0; i < 3; i++)
 	{
 		BRect markFrame = _MarkFrame(rect, i);
 		if(markFrame.Intersects(r) == false) continue;
@@ -319,7 +319,7 @@ BColorControl::_DrawDescription(BRect r)
 
 	aRect.SetLeftTop(BPoint(x, rect.top));
 	aRect.SetRightBottom(BPoint(rect.right, rect.top + fontHeight.ascent + fontHeight.descent + 4.f));
-	for(b_int8 i = 0; i < 3; i++)
+	for(__be_int8 i = 0; i < 3; i++)
 	{
 		if(aRect.Intersects(r))
 		{
@@ -338,7 +338,7 @@ BColorControl::_DrawDescription(BRect r)
 
 
 void
-BColorControl::SetValue(b_int32 color)
+BColorControl::SetValue(__be_int32 color)
 {
 	if(color != Value())
 	{
@@ -351,14 +351,14 @@ BColorControl::SetValue(b_int32 color)
 
 void BColorControl::SetValue(bhapi::rgb_color color)
 {
-	b_int32 c = ((b_int32)color.red << 16) | ((b_int32)color.green << 8) | ((b_int32)color.blue);
+	__be_int32 c = ((__be_int32)color.red << 16) | ((__be_int32)color.green << 8) | ((__be_int32)color.blue);
 	SetValue(c);
 }
 
 
 bhapi::rgb_color BColorControl::ValueAsColor()
 {
-	b_int32 c = Value();
+	__be_int32 c = Value();
     return bhapi::make_rgb_color((c >> 16) & 0xff, (c >> 8) & 0xff, c & 0xff);
 }
 
@@ -382,13 +382,13 @@ BColorControl::MouseDown(BPoint where)
 	bhapi::rgb_color color = ValueAsColor();
 
 	if(ptOffset.y < 15.f) /* gray */
-		color.red = color.green = color.blue = (b_uint8)ptOffset.x;
+		color.red = color.green = color.blue = (__be_uint8)ptOffset.x;
 	else if(ptOffset.y < 30.f) /* red */
-		color.red = (b_uint8)ptOffset.x;
+		color.red = (__be_uint8)ptOffset.x;
 	else if(ptOffset.y < 45.f) /* green */
-		color.green = (b_uint8)ptOffset.x;
+		color.green = (__be_uint8)ptOffset.x;
 	else if(ptOffset.y < 60.f) /* blue */
-		color.blue = (b_uint8)ptOffset.x;
+		color.blue = (__be_uint8)ptOffset.x;
 
 	SetValue(color);
 }

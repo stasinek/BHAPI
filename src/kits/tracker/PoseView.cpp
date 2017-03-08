@@ -58,13 +58,13 @@ All rights reserved.
 #include <Screen.h>
 #include <Query.h>
 #include <List.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <LongAndDragTrackingFilter.h>
 #include <MenuItem.h>
 #include <NodeMonitor.h>
 #include <Path.h>
 #include <StopWatch.h>
-#include <String.h>
+#include <StringClass.h>
 #include <SymLink.h>
 #include <TextView.h>
 #include <VolumeRoster.h>
@@ -94,7 +94,7 @@ All rights reserved.
 #include "Tests.h"
 #include "Thread.h"
 #include "Tracker.h"
-#include "TrackerString.h"
+#include "TrackerStringClass.h"
 #include "WidgetAttributeText.h"
 #include "WidthBuffer.h"
 
@@ -243,7 +243,7 @@ BPoseView::BPoseView(Model* model, uint32 viewMode)
 	fIconPoseHeight(0.0f),
 	fDropTarget(NULL),
 	fAlreadySelectedDropTarget(NULL),
-	fSelectionHandler(be_app),
+	fSelectionHandler(__be_app),
 	fLastClickPoint(INT32_MAX, INT32_MAX),
 	fLastClickButtons(0),
 	fLastClickedPose(NULL),
@@ -881,7 +881,7 @@ BPoseView::DetachedFromWindow()
 	if (fTitleView && !fTitleView->Window())
 		delete fTitleView;
 
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker != NULL && tracker->Lock()) {
 		tracker->StopWatching(this, kShowSelectionWhenInactiveChanged);
 		tracker->StopWatching(this, kTransparentSelectionChanged);
@@ -970,7 +970,7 @@ BPoseView::AttachedToWindow()
 		kMsgMouseDragged));
 
 	fLastLeftTop = LeftTop();
-	BFont font(be_plain_font);
+	BFont font(__be_plain_font);
 	font.SetSpacing(B_BITMAP_SPACING);
 	SetFont(&font);
 	GetFont(&sCurrentFont);
@@ -982,7 +982,7 @@ BPoseView::AttachedToWindow()
 			+ sFontInfo.leading;
 	}
 
-	TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker != NULL && tracker->Lock()) {
 		tracker->StartWatching(this, kShowSelectionWhenInactiveChanged);
 		tracker->StartWatching(this, kTransparentSelectionChanged);
@@ -1855,7 +1855,7 @@ BPoseView::CreatePoses(Model** models, PoseInfo* poseInfoArray, int32 count,
 	else
 		viewBounds = Bounds();
 
-	bool clipboardLocked = be_clipboard->Lock();
+	bool clipboardLocked =  __be_clipboard->Lock();
 
 	int32 poseIndex = 0;
 	uint32 clipboardMode = 0;
@@ -1966,7 +1966,7 @@ BPoseView::CreatePoses(Model** models, PoseInfo* poseInfoArray, int32 count,
 	}
 
 	if (clipboardLocked)
-		be_clipboard->Unlock();
+		__be_clipboard->Unlock();
 
 	FinishPendingScroll(listViewScrollBy, viewBounds);
 
@@ -2399,7 +2399,7 @@ BPoseView::MessageReceived(BMessage* message)
 			break;
 
 		case kRunAutomounterSettings:
-			be_app->PostMessage(message);
+			__be_app->PostMessage(message);
 			break;
 
 		case kNewEntryFromTemplate:
@@ -2452,9 +2452,9 @@ BPoseView::MessageReceived(BMessage* message)
 			break;
 
 		case kCopyAttributes:
-			if (be_clipboard->Lock()) {
-				be_clipboard->Clear();
-				BMessage* data = be_clipboard->Data();
+			if (__be_clipboard->Lock()) {
+				__be_clipboard->Clear();
+				BMessage* data =  __be_clipboard->Data();
 				if (data != NULL) {
 					// copy attributes to the clipboard
 					BMessage state;
@@ -2465,16 +2465,16 @@ BPoseView::MessageReceived(BMessage* message)
 					if (state.Flatten(&stream, &size) == B_OK) {
 						data->AddData("application/tracker-columns",
 							B_MIME_TYPE, stream.Buffer(), size);
-						be_clipboard->Commit();
+						__be_clipboard->Commit();
 					}
 				}
-				be_clipboard->Unlock();
+				__be_clipboard->Unlock();
 			}
 			break;
 
 		case kPasteAttributes:
-			if (be_clipboard->Lock()) {
-				BMessage* data = be_clipboard->Data();
+			if (__be_clipboard->Lock()) {
+				BMessage* data =  __be_clipboard->Data();
 				if (data != NULL) {
 					// find the attributes in the clipboard
 					const void* buffer;
@@ -2518,7 +2518,7 @@ BPoseView::MessageReceived(BMessage* message)
 						}
 					}
 				}
-				be_clipboard->Unlock();
+				__be_clipboard->Unlock();
 			}
 			break;
 
@@ -2549,7 +2549,7 @@ BPoseView::MessageReceived(BMessage* message)
 			break;
 
 		case kAddPrinter:
-			be_app->PostMessage(message);
+			__be_app->PostMessage(message);
 			break;
 
 		case kMakeActivePrinter:
@@ -4357,7 +4357,7 @@ RunMimeTypeDestinationMenu(const char* actionText,
 		return 0;
 
 	BPopUpMenu* menu = new BPopUpMenu("create clipping");
-	menu->SetFont(be_plain_font);
+	menu->SetFont(__be_plain_font);
 
 	for (int32 index = 0; index < count; index++) {
 		const char* embedTypeAs = NULL;
@@ -6087,7 +6087,7 @@ BPoseView::MoveListToTrash(BObjectList<entry_ref>* list, bool selectNext,
 		int32 index = IndexOfPose(pose);
 		pointInPose.y += fListElemHeight * index;
 
-		TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+		TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 		if (tracker != NULL) {
 			ThrowOnAssert(TargetModel() != NULL);
 
@@ -6309,7 +6309,7 @@ BPoseView::Delete(BObjectList<entry_ref>* list, bool selectNext, bool askUser)
 		int32 index = IndexOfPose(pose);
 		pointInPose.y += fListElemHeight * index;
 
-		TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+		TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 		if (tracker != NULL) {
 			ThrowOnAssert(TargetModel() != NULL);
 
@@ -6352,7 +6352,7 @@ BPoseView::RestoreItemsFromTrash(BObjectList<entry_ref>* list, bool selectNext)
 		int32 index = IndexOfPose(pose);
 		pointInPose.y += fListElemHeight * index;
 
-		TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+		TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 		if (tracker != NULL) {
 			ThrowOnAssert(TargetModel() != NULL);
 
@@ -7460,7 +7460,7 @@ BPoseView::WasClickInPath(const BPose* pose, int32 index,
 	if (entry.GetRef(&ref) == B_OK) {
 		BMessage message(B_REFS_RECEIVED);
 		message.AddRef("refs", &ref);
-		be_app->PostMessage(&message);
+		__be_app->PostMessage(&message);
 		return true;
 	}
 
@@ -8236,7 +8236,7 @@ BPoseView::OpenSelectionCommon(BPose* clickedPose, int32* poseIndex,
 
 		// close parent window if option down and we're not the desktop
 		// and we're not in single window mode
-		if (dynamic_cast<TTracker*>(be_app) == NULL
+		if (dynamic_cast<TTracker*>(__be_app) == NULL
 			|| (modifiers() & B_OPTION_KEY) == 0
 			|| IsFilePanel()
 			|| IsDesktopWindow()
@@ -8312,13 +8312,13 @@ BPoseView::UnmountSelectedVolumes()
 		if (model->IsVolume()) {
 			BVolume volume(model->NodeRef()->device);
 			if (volume != boot) {
-				TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+				TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 				if (tracker != NULL)
 					tracker->SaveAllPoseLocations();
 
 				BMessage message(kUnmountVolume);
 				message.AddInt32("device_id", volume.Device());
-				be_app->PostMessage(&message);
+				__be_app->PostMessage(&message);
 			}
 		}
 	}
@@ -8602,7 +8602,7 @@ BPoseView::OpenParent()
 	BMessage message(B_REFS_RECEIVED);
 	message.AddRef("refs", &ref);
 
-	if (dynamic_cast<TTracker*>(be_app)) {
+	if (dynamic_cast<TTracker*>(__be_app)) {
 		// add information about the child, so that we can select it
 		// in the parent view
 		message.AddData("nodeRefToSelect", B_RAW_TYPE, TargetModel()->NodeRef(),
@@ -8620,7 +8620,7 @@ BPoseView::OpenParent()
 		msg.AddRef("refs", &ref);
 		Window()->PostMessage(&msg);
 	} else
-		be_app->PostMessage(&message);
+		__be_app->PostMessage(&message);
 }
 
 
@@ -10154,9 +10154,9 @@ BPoseView::StopWatchDateFormatChange()
 	if (IsFilePanel()) {
 		BMessenger trackerMessenger(kTrackerSignature);
 		BHandler::StopWatching(trackerMessenger, kDateFormatChanged);
-	} else if (be_app->LockLooper()) {
-		be_app->StopWatching(this, kDateFormatChanged);
-		be_app->UnlockLooper();
+	} else if (__be_app->LockLooper()) {
+		__be_app->StopWatching(this, kDateFormatChanged);
+		__be_app->UnlockLooper();
 	}
 
 	fIsWatchingDateFormatChange = false;

@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -28,10 +28,13 @@
  * --------------------------------------------------------------------------*/
 
 #ifndef BHAPI_FIND_DIRECTORY_H
-#define BHAPI_FIND_DIRECTORY_H 
+#define BHAPI_FIND_DIRECTORY_H
 
 #include "Path.h"
 
+#ifdef __cplusplus /* Just for C++ */
+namespace bhapi {
+#endif
 typedef enum {
     B_BOOT_DIRECTORY = 0,
     B_APPS_DIRECTORY,
@@ -47,12 +50,15 @@ typedef enum {
     B_USER_LIB_DIRECTORY,
     B_USER_ETC_DIRECTORY,
     B_USER_ADDONS_DIRECTORY,
-} b_directory_which;
+} directory_which;
+#ifdef __cplusplus /* Just for C++ */
+} // namespace
+#endif
 
 #ifdef __cplusplus /* Just for C++ */
-
-IMPEXPBHAPI b_status_t b_find_directory(b_directory_which which, BPath *path);
-
+namespace bhapi {
+IMPEXPBHAPI status_t find_directory(bhapi::directory_which which, BPath *path);
+}
 #endif /* __cplusplus */
 
 #endif /* BHAPI_FIND_DIRECTORY_H */

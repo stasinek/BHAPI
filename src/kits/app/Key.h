@@ -9,7 +9,7 @@
 #include <DataIO.h>
 #include <Message.h>
 #include <ObjectList.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 enum BKeyPurpose {

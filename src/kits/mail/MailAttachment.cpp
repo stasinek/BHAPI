@@ -17,7 +17,7 @@
 #include <File.h>
 #include <Mime.h>
 #include <NodeInfo.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <AutoDeleter.h>
 

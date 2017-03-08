@@ -42,7 +42,7 @@ BVolumeRoster::~BVolumeRoster()
 }
 
 
-b_status_t
+status_t
 BVolumeRoster::GetNextVolume(BVolume *vol)
 {
 	if(vol == NULL) return B_BAD_VALUE;
@@ -52,7 +52,7 @@ BVolumeRoster::GetNextVolume(BVolume *vol)
 	{
 		fPos++;
 
-		b_status_t status = aVol.SetTo((b_dev_t)fPos);
+		status_t status = aVol.SetTo((b_dev_t)fPos);
 		if(status == B_ENTRY_NOT_FOUND) return B_BAD_VALUE;
 		if(status == B_BAD_VALUE) continue;
 		if(status != B_OK) return status;
@@ -72,7 +72,7 @@ BVolumeRoster::Rewind()
 }
 
 
-b_status_t
+status_t
 BVolumeRoster::GetBootVolume(BVolume *vol)
 {
 	if(vol == NULL) return B_BAD_VALUE;
@@ -87,7 +87,7 @@ BVolumeRoster::GetBootVolume(BVolume *vol)
 	{
 		dev++;
 
-		b_status_t status = aVol.SetTo(dev);
+		status_t status = aVol.SetTo(dev);
 		if(status == B_ENTRY_NOT_FOUND) return B_BAD_VALUE;
 		if(status == B_BAD_VALUE) continue;
 		if(status != B_OK) return status;

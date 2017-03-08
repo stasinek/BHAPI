@@ -15,7 +15,7 @@
 
 #include <stdlib.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <Drivers.h>
 #include <module.h>
 

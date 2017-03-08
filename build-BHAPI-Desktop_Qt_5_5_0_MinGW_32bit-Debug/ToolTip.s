@@ -41,16 +41,16 @@
 
 	.text
 Ltext0:
-	.section	.gnu.lto_.inline.a096fab2,"dr0"
+	.section	.gnu.lto_.inline.a518b40b,"dr0"
 	.ascii "x\234cf\300\16\230\340,\0\0\234\0\6"
 	.text
-	.section	.gnu.lto_.symbol_nodes.a096fab2,"dr0"
+	.section	.gnu.lto_.symbol_nodes.a518b40b,"dr0"
 	.ascii "x\234cf``P`\200\2\326;\222\14K\231\352\31XoK2\202\351\243\262L\2@J\210y\21S=3\3\0\202\327\7\34"
 	.text
-	.section	.gnu.lto_.refs.a096fab2,"dr0"
+	.section	.gnu.lto_.refs.a518b40b,"dr0"
 	.ascii "x\234cf```g\200\0&F&&&\6\6\0\0\341\0\24"
 	.text
-	.section	.gnu.lto_.decls.a096fab2,"dr0"
+	.section	.gnu.lto_.decls.a518b40b,"dr0"
 	.ascii "x\234\215U}P\323e\34\177\276\373\15"
 	.ascii "6\306@sWz\273+8<w)\352\302\214\264\353\205\323\244\253\353\264N\363.\377h\302\230\271k\15\332~(\375\341\365\214"
 	.ascii "2\320\354\34$Hz\344\310\27\22\5_!\220\322\21\212\213T\206\242\371\202:%\23\255\4=I\15u}\237\347\267"
@@ -92,7 +92,7 @@ Ltext0:
 	.ascii "2\201\325h\311\317"
 	.ascii "1\351\215\251\251\372lf\322.\242_Yf\33\362k\242pk\15\363f\213o\246M\215\242\372\27\231\16\33\351"
 	.text
-	.section	.gnu.lto_.symtab.a096fab2,"dr0"
+	.section	.gnu.lto_.symtab.a518b40b,"dr0"
 	.ascii "__ZTS5BFont\0_ZTS5BFont\0\0\0\0\0\0\0\0\0\0\0\266\0\0\0__ZTI5BFont\0_ZTI5BFont\0\0\0\0\0\0\0\0\0\0\0\335\0\0\0__ZTVN10__cxxabiv117__class_type_infoE\0\0\2\0\0\0\0\0\0\0\0\0\326\0\0\0"
 	.text
 	.section	.gnu.lto_.opts,"dr0"

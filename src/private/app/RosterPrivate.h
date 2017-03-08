@@ -19,7 +19,7 @@ const int32 kMsgRestartAppServer = 'ReAS';
 
 class BRoster::Private {
 	public:
-		Private() : fRoster(const_cast<BRoster*>(be_roster)) {}
+		Private() : fRoster(const_cast<BRoster*>(__be_roster)) {}
 		Private(BRoster &roster) : fRoster(&roster) {}
 		Private(BRoster *roster) : fRoster(roster) {}
 

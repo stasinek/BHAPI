@@ -6,7 +6,7 @@
 #define _KERNEL_DRIVER_SETTINGS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 struct kernel_args;
 

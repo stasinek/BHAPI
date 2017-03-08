@@ -9,7 +9,7 @@
 #include <bluetooth/bluetooth_error.h>
 #include <bluetooth/BluetoothDevice.h>
 
-#include <String.h>
+#include <StringClass.h>
 
 #define B_BT_WAIT 0x00
 #define B_BT_SUCCEEDED 0x01

@@ -60,7 +60,7 @@
 // defined in BHAPI_wrapper_os.cpp
 extern "C" {
 namespace bhapi {
-char* win32_convert_utf8_to_active(const char *str, b_int32 length);
+char* win32_convert_utf8_to_active(const char *str,  __be_int32 length);
 }
 }
 #endif
@@ -110,7 +110,7 @@ EXPORTBHAPI void bhapi::debug_log(bhapi::debug_level level, const char *format, 
         {
             if(GetVersion() < 0x80000000) // Windows NT/2000/XP
             {
-                b_unichar16*uStr = bhapi::utf8_convert_to_unicode(newLine, -1);
+                unichar16*uStr = bhapi::utf8_convert_to_unicode(newLine, -1);
                 if(uStr != NULL)
                 {
                     MessageBoxW(NULL, (WCHAR*)uStr, NULL,
@@ -162,12 +162,12 @@ EXPORTBHAPI void bhapi::debug_log(bhapi::debug_level level, const char *format, 
             if(level == DEBUG_WARNING) SetConsoleTextAttribute(hStdOut, FOREGROUND_GREEN);
             if(GetVersion() < 0x80000000) // Windows NT/2000/XP
             {
-                b_unichar16*uStr = bhapi::utf8_convert_to_unicode(newLine, -1);
+                unichar16*uStr = bhapi::utf8_convert_to_unicode(newLine, -1);
                 if(uStr != NULL)
                 {
                     DWORD wrote = 0;
                     DWORD len = (DWORD)bhapi::unicode_strlen(uStr);
-                    const b_unichar16*buf = uStr;
+                    const unichar16*buf = uStr;
                     while(true)
                     {
                         if(WriteConsoleW(hStdOut, (const void*)buf, len, &wrote, NULL) == 0) break;
@@ -259,8 +259,8 @@ struct __bhapi_mem_list_t {
 };
 
 static struct __bhapi_mem_list_t *__bhapi_memory_list = NULL;
-static b_uint64 __bhapi_max_allocated_memory = B_INT64_CONSTANT(0);
-static b_uint64 __bhapi_cur_allocated_memory = B_INT64_CONSTANT(0);
+static  __be_uint64 __bhapi_max_allocated_memory = B_INT64_CONSTANT(0);
+static  __be_uint64 __bhapi_cur_allocated_memory = B_INT64_CONSTANT(0);
 
 #undef new
 #undef calloc
@@ -302,7 +302,7 @@ IMPEXPBHAPI void* b_malloc(size_t size, const char *file, int line, const char *
     if(__bhapi_memory_list != NULL) __bhapi_memory_list->prev = entry;
     __bhapi_memory_list = entry;
 
-    __bhapi_cur_allocated_memory += (b_uint64)size;
+    __bhapi_cur_allocated_memory += (__be_uint64)size;
     if(__bhapi_cur_allocated_memory > __bhapi_max_allocated_memory) __bhapi_max_allocated_memory = __bhapi_cur_allocated_memory;
 
     b_memory_tracing_unlock();
@@ -345,7 +345,7 @@ IMPEXPBHAPI void* b_calloc(size_t nmemb, size_t size, const char *file, int line
     if(__bhapi_memory_list != NULL) __bhapi_memory_list->prev = entry;
     __bhapi_memory_list = entry;
 
-    __bhapi_cur_allocated_memory += (b_uint64)(nmemb * size);
+    __bhapi_cur_allocated_memory += (__be_uint64)(nmemb * size);
     if(__bhapi_cur_allocated_memory > __bhapi_max_allocated_memory) __bhapi_max_allocated_memory = __bhapi_cur_allocated_memory;
 
     b_memory_tracing_unlock();
@@ -428,8 +428,8 @@ IMPEXPBHAPI void* b_realloc(void *ptr, size_t size, const char *file, int line, 
 
     if(retPtr != NULL)
     {
-        __bhapi_cur_allocated_memory -= (b_uint64)oldSize;
-        __bhapi_cur_allocated_memory += (b_uint64)size;
+        __bhapi_cur_allocated_memory -= (__be_uint64)oldSize;
+        __bhapi_cur_allocated_memory += (__be_uint64)size;
         if(__bhapi_cur_allocated_memory > __bhapi_max_allocated_memory) __bhapi_max_allocated_memory = __bhapi_cur_allocated_memory;
     }
 
@@ -468,7 +468,7 @@ IMPEXPBHAPI void b_free(void *ptr, const char *file, int line, const char *metho
         }
     }
 
-    if(entryFound != NULL) __bhapi_cur_allocated_memory -= (b_uint64)(entryFound->size);
+    if(entryFound != NULL) __bhapi_cur_allocated_memory -= (__be_uint64)(entryFound->size);
 
     b_memory_tracing_unlock();
 

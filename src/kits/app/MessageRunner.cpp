@@ -33,7 +33,7 @@
 
 #include "../kernel/Kernel.h"
 #include "../kernel/Debug.h"
-#include "../kernel/OS.h"
+#include "../kernel/KERNEL.h"
 #include "../support/Locker.h"
 #include "../support/Autolock.h"
 #include "../support/Errors.h"
@@ -43,7 +43,7 @@
 
 extern BLocker* bhapi::get_handler_operator_locker();
 
-BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, b_bigtime_t interval, b_int32 count)
+BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, bigtime_t interval,  __be_int32 count)
 	: fToken(-1), fTarget(NULL), fReplyTo(NULL), fMessage(NULL), fPrevSendTime(B_INT64_CONSTANT(-1))
 {
 	if(!(msg == NULL || (fMessage = new BMessage(*msg)) != NULL)) return;
@@ -58,7 +58,7 @@ BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, b_
 	BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
-	b_int32 token = BApplication::sRunnerList.IndexOf(NULL);
+	__be_int32 token = BApplication::sRunnerList.IndexOf(NULL);
 	if(token >= 0)
 	{
 		if(BApplication::sRunnerList.ReplaceItem(token, this) == false) return;
@@ -79,7 +79,7 @@ BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, b_
 }
 
 
-BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, b_bigtime_t interval, b_int32 count, const BMessenger &replyTo)
+BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, bigtime_t interval,  __be_int32 count, const BMessenger &replyTo)
 	: fToken(-1), fTarget(NULL), fReplyTo(NULL), fMessage(NULL), fPrevSendTime(B_INT64_CONSTANT(-1))
 {
 	if(!(msg == NULL || (fMessage = new BMessage(*msg)) != NULL)) return;
@@ -99,7 +99,7 @@ BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, b_
 	BLocker *hLocker = bhapi::get_handler_operator_locker();
 	BAutolock <BLocker>autolock(hLocker);
 
-	b_int32 token = BApplication::sRunnerList.IndexOf(NULL);
+	__be_int32 token = BApplication::sRunnerList.IndexOf(NULL);
 	if(token >= 0)
 	{
 		if(BApplication::sRunnerList.ReplaceItem(token, this) == false) return;
@@ -147,7 +147,7 @@ BMessageRunner::IsValid() const
 }
 
 
-b_status_t
+status_t
 BMessageRunner::SetTarget(const BMessenger &target)
 {
 	if(fToken < 0) return B_ERROR;
@@ -185,7 +185,7 @@ BMessageRunner::SetTarget(const BMessenger &target)
 }
 
 
-b_status_t
+status_t
 BMessageRunner::SetReplyTo(const BMessenger &replyTo)
 {
 	if(fToken < 0) return B_ERROR;
@@ -216,7 +216,7 @@ BMessageRunner::SetReplyTo(const BMessenger &replyTo)
 }
 
 
-b_status_t
+status_t
 BMessageRunner::SetMessage(const BMessage *msg)
 {
 	BMessage *aMsg = NULL;
@@ -241,8 +241,8 @@ BMessageRunner::SetMessage(const BMessage *msg)
 }
 
 
-b_status_t
-BMessageRunner::SetInterval(b_bigtime_t interval)
+status_t
+BMessageRunner::SetInterval(bigtime_t interval)
 {
 	if(fToken < 0) return B_ERROR;
 
@@ -263,8 +263,8 @@ BMessageRunner::SetInterval(b_bigtime_t interval)
 }
 
 
-b_status_t
-BMessageRunner::SetCount(b_int32 count)
+status_t
+BMessageRunner::SetCount(__be_int32 count)
 {
 	if(fToken < 0) return B_ERROR;
 
@@ -285,8 +285,8 @@ BMessageRunner::SetCount(b_int32 count)
 }
 
 
-b_status_t
-BMessageRunner::GetInfo(b_bigtime_t *interval, b_int32 *count) const
+status_t
+BMessageRunner::GetInfo(bigtime_t *interval,  __be_int32 *count) const
 {
 	if(fToken < 0 || (!interval && !count)) return B_ERROR;
 
@@ -300,8 +300,8 @@ BMessageRunner::GetInfo(b_bigtime_t *interval, b_int32 *count) const
 }
 
 
-b_status_t
-BMessageRunner::GetInfo(BMessenger *target, BMessage *msg, b_bigtime_t *interval, b_int32 *count, BMessenger *replyTo) const
+status_t
+BMessageRunner::GetInfo(BMessenger *target, BMessage *msg, bigtime_t *interval,  __be_int32 *count, BMessenger *replyTo) const
 {
 	if(fToken < 0 || (!target && !msg && interval && !count && !replyTo)) return B_ERROR;
 

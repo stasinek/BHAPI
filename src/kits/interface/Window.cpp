@@ -154,7 +154,7 @@ BWindowLayoutContainer::Invalidate(BRect rect)
 
 
 void
-BWindow::InitSelf(BRect frame, const char *title, bhapi::window_look look, bhapi::window_feel feel, b_uint32 flags, b_uint32 workspace)
+BWindow::InitSelf(BRect frame, const char *title, bhapi::window_look look, bhapi::window_feel feel,  __be_uint32 flags,  __be_uint32 workspace)
 {
 	if(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL)
 		BHAPI_ERROR("[INTERFACE]: Window must created within a application which has graphics-engine!");
@@ -168,12 +168,12 @@ BWindow::InitSelf(BRect frame, const char *title, bhapi::window_look look, bhapi
 	fLayout = new BWindowLayoutContainer(this, frame);
 
 	frame.Floor();
-	if((fWindow = bhapi::app->fGraphicsEngine->CreateWindow((b_int32)frame.left, (b_int32)frame.top,
-							     (b_uint32)max_c(frame.Width(), 0),
-							     (b_uint32)max_c(frame.Height(), 0))) == NULL)
+	if((fWindow = bhapi::app->fGraphicsEngine->CreateWindow((__be_int32)frame.left, (__be_int32)frame.top,
+							     (__be_uint32)max_c(frame.Width(), 0),
+							     (__be_uint32)max_c(frame.Height(), 0))) == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- Unable to create window!", __PRETTY_FUNCTION__);
-	else if((fPixmap = bhapi::app->fGraphicsEngine->CreatePixmap((b_uint32)max_c(frame.Width(), 0),
-								  (b_uint32)max_c(frame.Height(), 0))) == NULL)
+	else if((fPixmap = bhapi::app->fGraphicsEngine->CreatePixmap((__be_uint32)max_c(frame.Width(), 0),
+								  (__be_uint32)max_c(frame.Height(), 0))) == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- Unable to create pixmap!", __PRETTY_FUNCTION__);
 	else if((fDC = bhapi::app->fGraphicsEngine->CreateContext()) == NULL)
 		BHAPI_ERROR("[INTERFACE]: %s --- Unable to create graphics context!", __PRETTY_FUNCTION__);
@@ -221,7 +221,7 @@ BWindow::InitSelf(BRect frame, const char *title, bhapi::window_look look, bhapi
 
 BWindow::BWindow(BRect frame, const char *title,
 		 bhapi::window_type type,
-		 b_uint32 flags, b_uint32 workspace)
+		  __be_uint32 flags,  __be_uint32 workspace)
 	: BLooper(NULL, B_DISPLAY_PRIORITY)
 {
 	bhapi::window_look look;
@@ -265,7 +265,7 @@ BWindow::BWindow(BRect frame, const char *title,
 
 BWindow::BWindow(BRect frame, const char *title,
 		 bhapi::window_look look, bhapi::window_feel feel,
-		 b_uint32 flags, b_uint32 workspace)
+		  __be_uint32 flags,  __be_uint32 workspace)
 	: BLooper(NULL, B_DISPLAY_PRIORITY)
 {
 	InitSelf(frame, title, look, feel, flags, workspace);
@@ -312,7 +312,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 	{
 		case B_PULSE:
 			if(IsHidden()) break;
-			for(b_int32 i = 0; i < fNeededToPulseViews.CountItems(); i++)
+			for(__be_int32 i = 0; i < fNeededToPulseViews.CountItems(); i++)
 			{
 				BView *view = (BView*)fNeededToPulseViews.ItemAt(i);
 				if(view->IsHidden() == false) PostMessage(msg, view);
@@ -340,9 +340,9 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 
 				if(msg->what != B_MOUSE_WHEEL_CHANGED)
 				{
-					b_uint32 saveWhat = aMsg.what;
+					__be_uint32 saveWhat = aMsg.what;
 					aMsg.what = B_MOUSE_MOVED;
-					for(b_int32 i = 0; i < fMouseInsideViews.CountItems(); i++)
+					for(__be_int32 i = 0; i < fMouseInsideViews.CountItems(); i++)
 					{
 						BView *view = (BView*)fMouseInsideViews.ItemAt(i);
 
@@ -370,7 +370,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 					break; // just one child can receive the message
 				}
 
-				for(b_int32 i = 0; i < fMouseInterestedViews.CountItems(); i++)
+				for(__be_int32 i = 0; i < fMouseInterestedViews.CountItems(); i++)
 				{
 					BView *view = (BView*)fMouseInterestedViews.ItemAt(i);
 
@@ -387,7 +387,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 		case B_MODIFIERS_CHANGED:
 			{
 				// TODO: shortcuts
-				for(b_int32 i = -1; i < fKeyboardInterestedViews.CountItems(); i++)
+				for(__be_int32 i = -1; i < fKeyboardInterestedViews.CountItems(); i++)
 				{
 					BView *view = i < 0 ? CurrentFocus() : (BView*)fKeyboardInterestedViews.ItemAt(i);
 					if((i < 0 && view == NULL) || (i >= 0 && view == CurrentFocus())) continue;
@@ -398,12 +398,12 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 
 		case B_WORKSPACES_CHANGED:
 			{
-				b_uint32 curWorkspace;
+				__be_uint32 curWorkspace;
 
-				if(msg->FindInt32("new", (b_int32*)&curWorkspace) == false) break;
+				if(msg->FindInt32("new", (__be_int32*)&curWorkspace) == false) break;
 				if(curWorkspace != 0 && fWindowWorkspaces != curWorkspace)
 				{
-					b_uint32 oldWorkspace = fWindowWorkspaces;
+					__be_uint32 oldWorkspace = fWindowWorkspaces;
 					fWindowWorkspaces = curWorkspace;
 					if(oldWorkspace != 0) WorkspacesChanged(oldWorkspace, curWorkspace);
 				}
@@ -412,10 +412,10 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 
 		case B_WINDOW_ACTIVATED:
 			{
-				b_bigtime_t when;
+				bigtime_t when;
 				bool active = fActivated;
 
-				if(msg->FindInt64("when", (b_int64*)&when) == false) break;
+				if(msg->FindInt64("when", (__be_int64*)&when) == false) break;
 				if(!(fWindow == NULL || fWindow->GetActivatedState(&active) == B_OK)) break;
 
 				if(fActivated != active && fActivatedTimeStamp <= when)
@@ -435,7 +435,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 		case B_WINDOW_MOVED:
 		case B_WINDOW_RESIZED:
 			{
-				b_bigtime_t when;
+				bigtime_t when;
 				if(msg->FindInt64("when", &when) == false) break;
 				if(msg->what == B_WINDOW_MOVED && when < fPositionChangedTimeStamp) break;
 				if(msg->what == B_WINDOW_RESIZED && when < fSizeChangedTimeStamp) break;
@@ -463,7 +463,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 					MessageQueue()->Lock();
 					while(MessageQueue()->IsEmpty() == false)
 					{
-						BMessage *aMsg = MessageQueue()->FindMessage((b_int32)0);
+						BMessage *aMsg = MessageQueue()->FindMessage((__be_int32)0);
 						if(aMsg == NULL) break;
 
 						if(!(aMsg->what == B_WINDOW_RESIZED || aMsg->what == B_WINDOW_MOVED))
@@ -480,7 +480,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 						if(aMsg->what == B_WINDOW_RESIZED)
 						{
 							float w1, h1;
-							b_bigtime_t nextWhen;
+							bigtime_t nextWhen;
 							if(aMsg->FindFloat("width", &w1) == false ||
 							   aMsg->FindFloat("height", &h1) == false ||
 							   aMsg->FindInt64("when", &nextWhen) == false ||
@@ -494,7 +494,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 						}
 						else // B_WINDOW_MOVED
 						{
-							b_bigtime_t nextWhen;
+							bigtime_t nextWhen;
 							if(aMsg->FindInt64("when", &nextWhen) == false ||
 							   nextWhen < when ||
 							   aMsg->FindPoint("where", &where) == false)
@@ -527,7 +527,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 					rFrame.right = rFrame.left + w;
 					rFrame.bottom = rFrame.top + h;
 					rFrame.Floor();
-					fPixmap->ResizeTo((b_uint32)max_c(rFrame.Width(), 0), (b_uint32)max_c(rFrame.Height(), 0));
+					fPixmap->ResizeTo((__be_uint32)max_c(rFrame.Width(), 0), (__be_uint32)max_c(rFrame.Height(), 0));
 					fDC->SetClipping(BRegion(rFrame.OffsetToCopy(B_ORIGIN)));
 
 					fExposeRect = Bounds();
@@ -588,8 +588,8 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 			{
 				sendNotices = false;
 
-				b_bigtime_t when = b_real_time_clock_usecs();
-				msg->FindInt64("when", (b_int64*)&when);
+				bigtime_t when = b_real_time_clock_usecs();
+				msg->FindInt64("when", (__be_int64*)&when);
 
 				if(CurrentMessage() == msg)
 				{
@@ -597,7 +597,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 					BMessage *aMsg = NULL;
 
 					MessageQueue()->Lock();
-					if((aMsg = MessageQueue()->FindMessage((b_int32)0)) != NULL)
+					if((aMsg = MessageQueue()->FindMessage((__be_int32)0)) != NULL)
 					{
 						if(aMsg->what == _UPDATE_IF_NEEDED_)
 						{
@@ -644,7 +644,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 					bool noNeededToSendUpdate = false;
 					BMessage *aMsg = NULL;
 					MessageQueue()->Lock();
-					if((aMsg = MessageQueue()->FindMessage((b_int32)0)) != NULL)
+					if((aMsg = MessageQueue()->FindMessage((__be_int32)0)) != NULL)
 					{
 						if(aMsg->what == _UPDATE_IF_NEEDED_)
 						{
@@ -736,7 +736,7 @@ BWindow::Hide()
 		if(fWindow) fWindow->UngrabMouse();
 		fMouseGrabCount = 0;
 
-		for(b_int32 i = 0; i < fMouseInterestedViews.CountItems(); i++)
+		for(__be_int32 i = 0; i < fMouseInterestedViews.CountItems(); i++)
 		{
 			BView *view = (BView*)fMouseInterestedViews.ItemAt(i);
 			view->fMouseGrabbed = false;
@@ -748,7 +748,7 @@ BWindow::Hide()
 		if(fWindow) fWindow->UngrabKeyboard();
 		fKeyboardGrabCount = 0;
 
-		for(b_int32 i = 0; i < fKeyboardInterestedViews.CountItems(); i++)
+		for(__be_int32 i = 0; i < fKeyboardInterestedViews.CountItems(); i++)
 		{
 			BView *view = (BView*)fKeyboardInterestedViews.ItemAt(i);
 			view->fKeyboardGrabbed = false;
@@ -868,7 +868,7 @@ BWindow::RemoveChild(BView *child)
 
 	if(child->fScrollBar.IsEmpty() == false)
 	{
-		for(b_int32 i = 0; i < child->fScrollBar.CountItems(); i++)
+		for(__be_int32 i = 0; i < child->fScrollBar.CountItems(); i++)
 		{
 			BScrollBar *scrollbar = (BScrollBar*)child->fScrollBar.ItemAt(i);
 			scrollbar->fTarget = NULL;
@@ -900,7 +900,7 @@ BWindow::RemoveChild(BView *child)
 }
 
 
-b_int32
+be_int32
 BWindow::CountChildren() const
 {
 	return cast_as(fLayout, BWindowLayoutContainer)->TopItem()->CountItems();
@@ -908,7 +908,7 @@ BWindow::CountChildren() const
 
 
 BView*
-BWindow::ChildAt(b_int32 index) const
+BWindow::ChildAt(__be_int32 index) const
 {
 	BLayoutItem *topItem = cast_as(fLayout, BWindowLayoutContainer)->TopItem();
 	return(topItem->ItemAt(index) != NULL ? (BView*)topItem->ItemAt(index)->PrivateData() : NULL);
@@ -1028,13 +1028,13 @@ BWindow::FrameMoved(BPoint new_position)
 
 
 void
-BWindow::WorkspacesChanged(b_uint32 old_ws, b_uint32 new_ws)
+BWindow::WorkspacesChanged(__be_uint32 old_ws,  __be_uint32 new_ws)
 {
 }
 
 
 void
-BWindow::WorkspaceActivated(b_int32 ws, bool state)
+BWindow::WorkspaceActivated(__be_int32 ws, bool state)
 {
 }
 
@@ -1055,7 +1055,7 @@ BWindow::Minimize(bool minimize)
 			if(fWindow) fWindow->UngrabMouse();
 			fMouseGrabCount = 0;
 
-			for(b_int32 i = 0; i < fMouseInterestedViews.CountItems(); i++)
+			for(__be_int32 i = 0; i < fMouseInterestedViews.CountItems(); i++)
 			{
 				BView *view = (BView*)fMouseInterestedViews.ItemAt(i);
 				view->fMouseGrabbed = false;
@@ -1067,7 +1067,7 @@ BWindow::Minimize(bool minimize)
 			if(fWindow) fWindow->UngrabKeyboard();
 			fKeyboardGrabCount = 0;
 
-			for(b_int32 i = 0; i < fKeyboardInterestedViews.CountItems(); i++)
+			for(__be_int32 i = 0; i < fKeyboardInterestedViews.CountItems(); i++)
 			{
 				BView *view = (BView*)fKeyboardInterestedViews.ItemAt(i);
 				view->fKeyboardGrabbed = false;
@@ -1130,7 +1130,7 @@ BWindow::Invalidate(BRect invalRect, bool redraw)
 void
 BWindow::DisableUpdates()
 {
-	b_int64 currentThread = bhapi::get_current_thread_id();
+	__be_int64 currentThread = bhapi::get_current_thread_id();
 
 	if(fUpdateHolderThreadId != 0 && fUpdateHolderThreadId != currentThread)
 		BHAPI_ERROR("[INTERFACE]: %s --- Invalid \"DisableUpdates()\" and \"EnableUpdates()\" call!", __PRETTY_FUNCTION__);
@@ -1152,7 +1152,7 @@ BWindow::DisableUpdates()
 void
 BWindow::EnableUpdates()
 {
-	b_int64 currentThread = bhapi::get_current_thread_id();
+	__be_int64 currentThread = bhapi::get_current_thread_id();
 
 	if(fUpdateHolderThreadId != 0 && fUpdateHolderThreadId != currentThread)
 		BHAPI_ERROR("[INTERFACE]: %s --- Invalid \"DisableUpdates()\" and \"EnableUpdates()\" call!", __PRETTY_FUNCTION__);
@@ -1172,10 +1172,10 @@ BWindow::EnableUpdates()
 	{
 		fUpdateRect.Floor();
 		fPixmap->CopyTo(fDC, fWindow,
-				(b_int32)fUpdateRect.left, (b_int32)fUpdateRect.top,
-				(b_uint32)fUpdateRect.Width(), (b_uint32)fUpdateRect.Height(),
-				(b_int32)fUpdateRect.left, (b_int32)fUpdateRect.top,
-				(b_uint32)fUpdateRect.Width(), (b_uint32)fUpdateRect.Height());
+				(__be_int32)fUpdateRect.left, (__be_int32)fUpdateRect.top,
+				(__be_uint32)fUpdateRect.Width(), (__be_uint32)fUpdateRect.Height(),
+				(__be_int32)fUpdateRect.left, (__be_int32)fUpdateRect.top,
+				(__be_uint32)fUpdateRect.Width(), (__be_uint32)fUpdateRect.Height());
 	}
 
 	fUpdateRect = BRect();
@@ -1190,7 +1190,7 @@ BWindow::NeedsUpdate() const
 
 
 void
-BWindow::_UpdateIfNeeded(b_bigtime_t when)
+BWindow::_UpdateIfNeeded(bigtime_t when)
 {
 	if(_HasResizeMessage(false) || NeedsUpdate() == false) return;
 
@@ -1237,8 +1237,8 @@ BWindow::_UpdateIfNeeded(b_bigtime_t when)
 
 	r.Floor();
 	fPixmap->CopyTo(fDC, fWindow,
-			(b_int32)r.left, (b_int32)r.top, (b_uint32)r.Width(), (b_uint32)r.Height(),
-			(b_int32)r.left, (b_int32)r.top, (b_uint32)r.Width(), (b_uint32)r.Height());
+			(__be_int32)r.left, (__be_int32)r.top, (__be_uint32)r.Width(), (__be_uint32)r.Height(),
+			(__be_int32)r.left, (__be_int32)r.top, (__be_uint32)r.Width(), (__be_uint32)r.Height());
 }
 
 
@@ -1260,10 +1260,10 @@ BWindow::_Update(BRect rect, bool force_update)
 	{
 		fUpdateRect.Floor();
 		fPixmap->CopyTo(fDC, fWindow,
-				(b_int32)fUpdateRect.left, (b_int32)fUpdateRect.top,
-				(b_uint32)fUpdateRect.Width(), (b_uint32)fUpdateRect.Height(),
-				(b_int32)fUpdateRect.left, (b_int32)fUpdateRect.top,
-				(b_uint32)fUpdateRect.Width(), (b_uint32)fUpdateRect.Height());
+				(__be_int32)fUpdateRect.left, (__be_int32)fUpdateRect.top,
+				(__be_uint32)fUpdateRect.Width(), (__be_uint32)fUpdateRect.Height(),
+				(__be_int32)fUpdateRect.left, (__be_int32)fUpdateRect.top,
+				(__be_uint32)fUpdateRect.Width(), (__be_uint32)fUpdateRect.Height());
 	}
 	fUpdateRect = BRect();
 }
@@ -1284,7 +1284,7 @@ BWindow::SetBackgroundColor(bhapi::rgb_color c)
 
 
 void
-BWindow::SetBackgroundColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
+BWindow::SetBackgroundColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color c;
 	c.set_to(r, g, b, a);
@@ -1300,13 +1300,13 @@ BWindow::BackgroundColor() const
 
 
 void
-BWindow::_Expose(BRect rect, b_bigtime_t when)
+BWindow::_Expose(BRect rect, bigtime_t when)
 {
 	rect &= Bounds();
 	if(rect.IsValid() == false) return;
 
 	BRect r = rect.FloorCopy();
-	fPixmap->FillRect(fDC, (b_int32)r.left, (b_int32)r.top, (b_uint32)r.Width(), (b_uint32)r.Height());
+	fPixmap->FillRect(fDC, (__be_int32)r.left, (__be_int32)r.top, (__be_uint32)r.Width(), (__be_uint32)r.Height());
 
 	BRegion region(rect);
 
@@ -1334,7 +1334,7 @@ BWindow::_HasResizeMessage(bool setBrokeOnExpose)
 
 	MessageQueue()->Lock();
 	BMessage *msg;
-	b_int32 fromIndex = 0;
+	__be_int32 fromIndex = 0;
 	while(retVal == false && (msg = MessageQueue()->FindMessage(B_WINDOW_RESIZED, fromIndex, 20)) != NULL)
 	{
 		float w, h;
@@ -1426,7 +1426,7 @@ BWindow::CurrentFocus() const
 }
 
 
-b_status_t
+status_t
 BWindow::SetType(bhapi::window_type type)
 {
 	bhapi::window_look look;
@@ -1458,7 +1458,7 @@ BWindow::SetType(bhapi::window_type type)
 			return B_ERROR;
 	}
 
-	b_status_t status;
+	status_t status;
 
 	bhapi::window_look saveLook = fWindowLook;
 	if((status = SetLook(look)) != B_OK) return status;
@@ -1489,12 +1489,12 @@ BWindow::Type() const
 }
 
 
-b_status_t
+status_t
 BWindow::SetLook(bhapi::window_look look)
 {
 	if(fWindowLook != look)
 	{
-		b_status_t status = fWindow == NULL ? B_OK : fWindow->SetLook(look);
+		status_t status = fWindow == NULL ? B_OK : fWindow->SetLook(look);
 		if(status != B_OK) return status;
 		fWindowLook = look;
 	}
@@ -1510,12 +1510,12 @@ BWindow::Look() const
 }
 
 
-b_status_t
+status_t
 BWindow::SetFeel(bhapi::window_feel feel)
 {
 	if(fWindowFeel != feel)
 	{
-		b_status_t status = fWindow == NULL ? B_OK : fWindow->SetFeel(feel);
+		status_t status = fWindow == NULL ? B_OK : fWindow->SetFeel(feel);
 		if(status != B_OK) return status;
 
 		bhapi::window_feel oldFeel = fWindowFeel;
@@ -1542,12 +1542,12 @@ BWindow::Feel() const
 }
 
 
-b_status_t
-BWindow::SetFlags(b_uint32 flags)
+status_t
+BWindow::SetFlags(__be_uint32 flags)
 {
 	if(fWindowFlags != flags)
 	{
-		b_status_t status = fWindow == NULL ? B_OK : fWindow->SetFlags(flags);
+		status_t status = fWindow == NULL ? B_OK : fWindow->SetFlags(flags);
 		if(status != B_OK) return status;
 		fWindowFlags = flags;
 		if(flags & B_AVOID_FOCUS)
@@ -1573,7 +1573,7 @@ BWindow::SetFlags(b_uint32 flags)
 }
 
 
-b_uint32
+be_uint32
 BWindow::Flags() const
 {
 	return fWindowFlags;
@@ -1581,7 +1581,7 @@ BWindow::Flags() const
 
 
 void
-BWindow::SetWorkspaces(b_uint32 workspace)
+BWindow::SetWorkspaces(__be_uint32 workspace)
 {
 	if(workspace == 0)
 	{
@@ -1598,7 +1598,7 @@ BWindow::SetWorkspaces(b_uint32 workspace)
 	{
 		if(fWindow->SetWorkspaces(workspace) == B_OK)
 		{
-			b_uint32 oldWorkspace = fWindowWorkspaces;
+			__be_uint32 oldWorkspace = fWindowWorkspaces;
 			fWindowWorkspaces = workspace;
 			if(oldWorkspace != 0) WorkspacesChanged(oldWorkspace, workspace);
 		}
@@ -1606,7 +1606,7 @@ BWindow::SetWorkspaces(b_uint32 workspace)
 }
 
 
-b_uint32
+be_uint32
 BWindow::Workspaces() const
 {
 	return fWindowWorkspaces;
@@ -1640,7 +1640,7 @@ BWindow::MoveTo(BPoint where)
 	if(Frame().LeftTop() != where)
 	{
 		BPoint pt = where.FloorCopy();
-		if(fWindow->MoveTo((b_int32)pt.x, (b_int32)pt.y) != B_OK) return;
+		if(fWindow->MoveTo((__be_int32)pt.x, (__be_int32)pt.y) != B_OK) return;
 
 		fPositionChangedTimeStamp = b_real_time_clock_usecs();
 		cast_as(fLayout, BWindowLayoutContainer)->MoveTo(where);
@@ -1676,7 +1676,7 @@ BWindow::ResizeTo(float w, float h)
 		return;
 	}
 
-	b_uint32 min_h = B_MAXUINT32, max_h = B_MAXUINT32, min_v = B_MAXUINT32, max_v = B_MAXUINT32;
+	__be_uint32 min_h = B_MAXUINT32, max_h = B_MAXUINT32, min_v = B_MAXUINT32, max_v = B_MAXUINT32;
 	fWindow->GetSizeLimits(&min_h, &max_h, &min_v, &max_v);
 
 	if(w < (float)min_h && min_h != B_MAXUINT32) w = (float)min_h;
@@ -1690,10 +1690,10 @@ BWindow::ResizeTo(float w, float h)
 		frame.right = frame.left + w;
 		frame.bottom = frame.top + h;
 		frame.Floor();
-		if(fWindow->MoveAndResizeTo((b_int32)frame.left, (b_int32)frame.top,
-					    (b_uint32)max_c(frame.Width(), 0),
-					    (b_uint32)max_c(frame.Height(), 0)) != B_OK) return;
-		fPixmap->ResizeTo((b_uint32)max_c(frame.Width(), 0), (b_uint32)max_c(frame.Height(), 0));
+		if(fWindow->MoveAndResizeTo((__be_int32)frame.left, (__be_int32)frame.top,
+					    (__be_uint32)max_c(frame.Width(), 0),
+					    (__be_uint32)max_c(frame.Height(), 0)) != B_OK) return;
+		fPixmap->ResizeTo((__be_uint32)max_c(frame.Width(), 0), (__be_uint32)max_c(frame.Height(), 0));
 		fDC->SetClipping(BRegion(frame.OffsetToCopy(B_ORIGIN)));
 
 		fSizeChangedTimeStamp = b_real_time_clock_usecs();
@@ -1730,11 +1730,11 @@ BWindow::SetSizeLimits(float min_h, float max_h, float min_v, float max_v)
 		return;
 	}
 
-	b_uint32 minH = B_MAXUINT32, maxH = B_MAXUINT32, minV = B_MAXUINT32, maxV = B_MAXUINT32;
-	if(min_h >= 0) minH = (b_uint32)ceil((double)min_h);
-	if(max_h >= 0) maxH = (b_uint32)ceil((double)max_h);
-	if(min_v >= 0) minV = (b_uint32)ceil((double)min_v);
-	if(max_v >= 0) maxV = (b_uint32)ceil((double)max_v);
+	__be_uint32 minH = B_MAXUINT32, maxH = B_MAXUINT32, minV = B_MAXUINT32, maxV = B_MAXUINT32;
+	if(min_h >= 0) minH = (__be_uint32)ceil((double)min_h);
+	if(max_h >= 0) maxH = (__be_uint32)ceil((double)max_h);
+	if(min_v >= 0) minV = (__be_uint32)ceil((double)min_v);
+	if(max_v >= 0) maxV = (__be_uint32)ceil((double)max_v);
 
 	if(fWindow->SetSizeLimits(minH, maxH, minV, maxV) == B_OK)
 	{
@@ -1753,7 +1753,7 @@ BWindow::SetSizeLimits(float min_h, float max_h, float min_v, float max_v)
 void
 BWindow::GetSizeLimits(float *min_h, float *max_h, float *min_v, float *max_v) const
 {
-	b_uint32 minH = B_MAXUINT32, maxH = B_MAXUINT32, minV = B_MAXUINT32, maxV = B_MAXUINT32;
+	__be_uint32 minH = B_MAXUINT32, maxH = B_MAXUINT32, minV = B_MAXUINT32, maxV = B_MAXUINT32;
 	if(fWindow) fWindow->GetSizeLimits(&minH, &maxH, &minV, &maxV);
 
 	if(min_h) *min_h = minH != B_MAXUINT32 ? (float)minH : -1.f;
@@ -1763,7 +1763,7 @@ BWindow::GetSizeLimits(float *min_h, float *max_h, float *min_v, float *max_v) c
 }
 
 
-b_status_t
+status_t
 BWindow::SendBehind(const BWindow *win)
 {
 	if(fWindow == NULL)
@@ -1915,7 +1915,7 @@ BWindow::IsKeyboardGrabbed() const
 
 
 void
-BWindow::SetPulseRate(b_bigtime_t rate)
+BWindow::SetPulseRate(bigtime_t rate)
 {
 	if(fPulseRunner->SetInterval(rate) == B_OK)
 	{
@@ -1929,7 +1929,7 @@ BWindow::SetPulseRate(b_bigtime_t rate)
 }
 
 
-b_bigtime_t
+bigtime_t
 BWindow::PulseRate() const
 {
 	return fPulseRate;

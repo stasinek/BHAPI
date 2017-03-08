@@ -9,7 +9,7 @@
 #define _KERNEL_ARCH_x86_THREAD_TYPES_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #ifdef __x86_64__
 #	include <arch/x86/64/iframe.h>

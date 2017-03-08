@@ -240,7 +240,7 @@ private:
 };
 
 // global BRoster instance
-extern const BRoster* be_roster;
+extern const BRoster*  __be_roster;
 
 
 #endif	// _ROSTER_H

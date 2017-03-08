@@ -37,8 +37,8 @@ public:
     BDataIO();
     virtual ~BDataIO();
 
-	virtual b_size_t		Read(void *buffer, size_t size) = 0;
-	virtual b_size_t		Write(const void *buffer, size_t size) = 0;
+	virtual  __be_size_t		Read(void *buffer, size_t size) = 0;
+	virtual  __be_size_t		Write(const void *buffer, size_t size) = 0;
 };
 
 
@@ -47,15 +47,15 @@ public:
     BPositionIO();
     virtual ~BPositionIO();
 
-	virtual b_size_t		Read(void *buffer, size_t size);
-	virtual b_size_t		Write(const void *buffer, size_t size);
+	virtual  __be_size_t		Read(void *buffer, size_t size);
+	virtual  __be_size_t		Write(const void *buffer, size_t size);
 
-    virtual b_size_t		ReadAt(b_int64 pos, void *buffer, size_t size) = 0;
-    virtual b_size_t		WriteAt(b_int64 pos, const void *buffer, size_t size) = 0;
+    virtual  __be_size_t		ReadAt(__be_int64 pos, void *buffer, size_t size) = 0;
+    virtual  __be_size_t		WriteAt(__be_int64 pos, const void *buffer, size_t size) = 0;
 
-    virtual b_int64		Seek(b_int64 position, b_uint32 seek_mode) = 0;
-    virtual b_int64		Position() const = 0;
-    virtual b_status_t	SetSize(b_int64 size) = 0;
+    virtual  __be_int64		Seek(__be_int64 position,  __be_uint32 seek_mode) = 0;
+    virtual  __be_int64		Position() const = 0;
+    virtual status_t	SetSize(__be_int64 size) = 0;
 };
 
 
@@ -64,12 +64,12 @@ public:
     BMallocIO();
     virtual ~BMallocIO();
 
-    virtual b_size_t		ReadAt(b_int64 pos, void *buffer, size_t size);
-    virtual b_size_t		WriteAt(b_int64 pos, const void *buffer, size_t size);
+    virtual  __be_size_t		ReadAt(__be_int64 pos, void *buffer, size_t size);
+    virtual  __be_size_t		WriteAt(__be_int64 pos, const void *buffer, size_t size);
 
-    virtual b_int64		Seek(b_int64 position, b_uint32 seek_mode);
-    virtual b_int64		Position() const;
-    virtual b_status_t	SetSize(b_int64 size);
+    virtual  __be_int64		Seek(__be_int64 position,  __be_uint32 seek_mode);
+    virtual  __be_int64		Position() const;
+    virtual status_t	SetSize(__be_int64 size);
 
 	void			SetBlockSize(size_t blocksize);
 	const void		*Buffer() const;
@@ -89,12 +89,12 @@ public:
     BMemoryIO(const void *ptr, size_t length);
     virtual ~BMemoryIO();
 
-    virtual b_size_t		ReadAt(b_int64 pos, void *buffer, size_t size);
-    virtual b_size_t		WriteAt(b_int64 pos, const void *buffer, size_t size);
+    virtual  __be_size_t		ReadAt(__be_int64 pos, void *buffer, size_t size);
+    virtual  __be_size_t		WriteAt(__be_int64 pos, const void *buffer, size_t size);
 
-    virtual b_int64		Seek(b_int64 position, b_uint32 seek_mode);
-    virtual b_int64		Position() const;
-    virtual b_status_t	SetSize(b_int64 size);
+    virtual  __be_int64		Seek(__be_int64 position,  __be_uint32 seek_mode);
+    virtual  __be_int64		Position() const;
+    virtual status_t	SetSize(__be_int64 size);
 
 private:
 	bool fReadOnly;

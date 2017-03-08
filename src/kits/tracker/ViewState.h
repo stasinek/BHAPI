@@ -36,7 +36,7 @@ All rights reserved.
 
 
 #include <DataIO.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 namespace BPrivate {

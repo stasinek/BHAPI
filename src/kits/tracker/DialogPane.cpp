@@ -514,7 +514,7 @@ PaneSwitch::Track(BPoint point, uint32)
 void
 PaneSwitch::DrawInState(PaneSwitch::State state)
 {
-	BRect rect(0, 0, be_plain_font->Size(), be_plain_font->Size());
+	BRect rect(0, 0,  __be_plain_font->Size(),  __be_plain_font->Size());
 	rect.OffsetBy(1, 1);
 
 	rgb_color arrowColor = state == kPressed ? kHighlightColor : kNormalColor;
@@ -537,6 +537,6 @@ PaneSwitch::DrawInState(PaneSwitch::State state)
 	}
 
 	SetDrawingMode(B_OP_COPY);
-	be_control_look->DrawArrowShape(this, rect, rect, arrowColor,
+	__be_control_look->DrawArrowShape(this, rect, rect, arrowColor,
 		arrowDirection, 0, tint);
 }

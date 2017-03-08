@@ -5,7 +5,7 @@
 #ifndef DWARF_FUNCTION_DEBUG_INFO_H
 #define DWARF_FUNCTION_DEBUG_INFO_H
 
-#include <String.h>
+#include <StringClass.h>
 
 #include "FunctionDebugInfo.h"
 #include "SourceLocation.h"

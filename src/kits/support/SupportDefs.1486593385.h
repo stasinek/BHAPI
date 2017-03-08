@@ -111,25 +111,25 @@
 #define SIZEOF_DOUBLE 8
 #endif
 
-typedef __int32 b_unichar32;
+typedef __int32 unichar32;
 typedef __int16 b_unichar;
 
-typedef	__int8 b_int8;
-typedef	unsigned __int8 b_uint8;
-typedef	__int16 b_int16;
-typedef	unsigned __int16 b_uint16;
-typedef	__int32 b_int32;
-typedef	unsigned __int32 b_uint32;
-typedef	__int64 b_int64;
-typedef	unsigned __int64 b_uint64;
+typedef	__int8  __be_int8;
+typedef	unsigned __int8  __be_uint8;
+typedef	__int16  __be_int16;
+typedef	unsigned __int16  __be_uint16;
+typedef	__int32  __be_int32;
+typedef	unsigned __int32  __be_uint32;
+typedef	__int64  __be_int64;
+typedef	unsigned __int64  __be_uint64;
 
-typedef b_int32	b_status_t;
-typedef b_uint32	b_type_code;
-typedef b_uint32	b_perform_code;
-typedef b_int64	b_bigtime_t;
-typedef b_int64	b_thread_id;
-typedef size_t	b_address_t;
-typedef size_t	b_size_t;
+typedef  __be_int32	status_t;
+typedef  __be_uint32	type_code;
+typedef  __be_uint32	b_perform_code;
+typedef  __be_int64	bigtime_t;
+typedef  __be_int64	__be_thread_id;
+typedef size_t	__be_addr_t;
+typedef size_t	__be_size_t;
 
 enum {
     B_ANY_TYPE                  = 'ANYT',
@@ -145,7 +145,7 @@ enum {
     B_MESSENGER_TYPE			= 'MSNG',
     B_POINTER_TYPE				= 'PNTR',
     B_SIZE_T_TYPE	 			= 'SIZT',
-    B_b_size_t_TYPE	 			= 'SSZT',
+    B_be_size_t_TYPE	 			= 'SSZT',
     B_STRING_TYPE 				= 'CSTR',
     B_UINT64_TYPE				= 'ULLG',
     B_UINT32_TYPE				= 'ULNG',
@@ -165,7 +165,7 @@ enum {
 
 #ifndef __cplusplus
 
-typedef	b_int8	bool;
+typedef	__be_int8	bool;
 
 #ifndef false
 #define false (0)
@@ -256,11 +256,11 @@ typedef	b_int8	bool;
 extern "C" {
 #endif /* __cplusplus */
 
-extern _IMPEXP_BHAPI const b_uint8 bhapi_major_version;
-extern _IMPEXP_BHAPI const b_uint8 bhapi_minor_version;
-extern _IMPEXP_BHAPI const b_uint8 bhapi_micro_version;
-extern _IMPEXP_BHAPI const b_uint8 bhapi_interface_age;
-extern _IMPEXP_BHAPI const b_uint16 bhapi_binary_age;
+extern _IMPEXP_BHAPI const  __be_uint8 bhapi_major_version;
+extern _IMPEXP_BHAPI const  __be_uint8 bhapi_minor_version;
+extern _IMPEXP_BHAPI const  __be_uint8 bhapi_micro_version;
+extern _IMPEXP_BHAPI const  __be_uint8 bhapi_interface_age;
+extern _IMPEXP_BHAPI const  __be_uint16 bhapi_binary_age;
 
 #ifdef __cplusplus
 } /* extern "C" */

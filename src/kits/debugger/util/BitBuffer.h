@@ -6,7 +6,7 @@
 #define BIT_BUFFER_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <Array.h>
 

@@ -39,8 +39,8 @@ public:
     BStringView(BRect frame,
             const char *name,
             const char *initial_text,
-            b_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-            b_uint32 flags = B_WILL_DRAW);
+             __be_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+             __be_uint32 flags = B_WILL_DRAW);
     virtual ~BStringView();
 
     virtual void		SetText(const char *text);
@@ -54,7 +54,7 @@ public:
     bhapi::vertical_alignment	VerticalAlignment() const;
 
     virtual void		Draw(BRect updateRect);
-    virtual void		SetFont(const BFont *font, b_uint8 mask = B_FONT_ALL);
+    virtual void		SetFont(const BFont *font,  __be_uint8 mask = B_FONT_ALL);
     virtual void		GetPreferredSize(float *width, float *height);
 
 private:

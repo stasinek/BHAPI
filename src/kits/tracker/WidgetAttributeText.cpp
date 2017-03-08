@@ -48,7 +48,7 @@ All rights reserved.
 #include <DateFormat.h>
 #include <DateTimeFormat.h>
 #include <Debug.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MessageFormat.h>
 #include <NodeInfo.h>
 #include <Path.h>

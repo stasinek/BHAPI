@@ -57,6 +57,7 @@ typedef struct dev_data_t {
 } dev_data_t;
 }
 namespace bhapi {
+
 inline bhapi::dev_data_t* new_dev_data()
 {
     bhapi::dev_data_t* data = (bhapi::dev_data_t*)malloc(sizeof(bhapi::dev_data_t));
@@ -67,7 +68,7 @@ inline bhapi::dev_data_t* new_dev_data()
 }
 
 
-inline b_status_t set_dev_data(bhapi::dev_data_t *data, const char *name, const char *root_dir)
+inline status_t set_dev_data(bhapi::dev_data_t *data, const char *name, const char *root_dir)
 {
     if(data == NULL) return B_BAD_VALUE;
     if(root_dir == NULL || *root_dir == 0) return B_BAD_VALUE;
@@ -140,14 +141,14 @@ BVolume::~BVolume()
 }
 
 
-b_status_t
+status_t
 BVolume::InitCheck() const
 {
     return(fDevice == 0 || fData == NULL ? B_NO_INIT : B_OK);
 }
 
 
-b_status_t
+status_t
 BVolume::SetTo(b_dev_t dev)
 {
 #ifdef HAVE_MNTENT_H
@@ -182,7 +183,7 @@ BVolume::SetTo(b_dev_t dev)
             }
         }
 
-        b_status_t status = b_set_dev_data((bhapi::dev_data_t*)fData, mnt->mnt_fsname, mnt->mnt_dir);
+        status_t status = b_set_dev_data((bhapi::dev_data_t*)fData, mnt->mnt_fsname, mnt->mnt_dir);
         endmntent(ent);
 
         if(status != B_OK) return status;
@@ -221,7 +222,7 @@ BVolume::SetTo(b_dev_t dev)
             WCHAR wStr[301];
             bzero(wStr, sizeof(WCHAR) * 301);
             MultiByteToWideChar(CP_ACP, 0, nameBuf, -1, wStr, 300);
-            char *utf8Name = bhapi::unicode_convert_to_utf8((const b_unichar16*)wStr, -1);
+            char *utf8Name = bhapi::unicode_convert_to_utf8((const unichar16*)wStr, -1);
             if(utf8Name != NULL)
             {
                 nameStr.SetTo(utf8Name);
@@ -231,7 +232,7 @@ BVolume::SetTo(b_dev_t dev)
         if(nameStr.Length() <= 0) nameStr.SetTo(nameBuf);
         dirname[2] = '/';
 
-        b_status_t status = bhapi::set_dev_data((bhapi::dev_data_t*)fData, nameStr.String(), dirname);
+        status_t status = bhapi::set_dev_data((bhapi::dev_data_t*)fData, nameStr.String(), dirname);
 
         if(status != B_OK) return status;
 
@@ -269,7 +270,7 @@ BVolume::SetTo(b_dev_t dev)
             vol.GetName(volName);
         }
 
-        b_status_t status = b_set_dev_data((bhapi::dev_data_t*)fData, volName, bePath.Path());
+        status_t status = b_set_dev_data((bhapi::dev_data_t*)fData, volName, bePath.Path());
         if(status != B_OK) return status;
 
         fDevice = dev;
@@ -288,7 +289,7 @@ BVolume::SetTo(b_dev_t dev)
         if(fData == NULL)
             if((fData = b_new_dev_data()) == NULL) return B_NO_MEMORY;
 
-        b_status_t status = b_set_dev_data((bhapi::dev_data_t*)fData, "root", "/");
+        status_t status = b_set_dev_data((bhapi::dev_data_t*)fData, "root", "/");
         if(status != B_OK) return status;
 
         fDevice = dev;
@@ -319,7 +320,7 @@ BVolume::Device() const
 }
 
 
-b_status_t
+status_t
 BVolume::GetName(BString *name) const
 {
     if(name == NULL) return B_BAD_VALUE;
@@ -330,18 +331,18 @@ BVolume::GetName(BString *name) const
 }
 
 
-b_status_t BVolume::GetName(char *name, size_t nameSize) const
+status_t BVolume::GetName(char *name, size_t nameSize) const
 {
     BString str;
 
-    b_status_t status = GetName(&str);
+    status_t status = GetName(&str);
     if(status == B_OK) str.CopyInto(name, nameSize, 0, -1);
 
     return status;
 }
 
 
-b_status_t
+status_t
 BVolume::SetName(const char *name)
 {
     // TODO
@@ -349,7 +350,7 @@ BVolume::SetName(const char *name)
 }
 
 
-b_status_t
+status_t
 BVolume::GetRootDirectory(BDirectory *dir) const
 {
     if(dir == NULL) return B_BAD_VALUE;

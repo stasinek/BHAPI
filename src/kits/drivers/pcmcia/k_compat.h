@@ -24,7 +24,7 @@
 #include <PCI.h>
 #include <Drivers.h>
 #include <ByteOrder.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <config_manager.h>
 #include <stdio.h>
 #include <string.h>

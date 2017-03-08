@@ -6,7 +6,7 @@
 #define KERNEL_LIST_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 /* This header defines a doubly-linked list. It differentiates between a link

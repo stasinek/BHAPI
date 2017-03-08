@@ -6,7 +6,7 @@
 #define _PACKAGE__HPKG__REPOSITORY_CONTENT_HANDLER_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <package/hpkg/HPKGDefs.h>
 

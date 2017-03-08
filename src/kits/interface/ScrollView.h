@@ -35,8 +35,8 @@
 class IMPEXPBHAPI BScrollView : public BView {
 public:
     BScrollView(BRect frame, const char *name, BView *target,
-            b_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-            b_uint32 flags = 0,
+             __be_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+             __be_uint32 flags = 0,
             bool alwaysShowHorizontal = false,
             bool alwaysShowVertical = false,
             bhapi::border_style border = B_FANCY_BORDER);
@@ -44,7 +44,7 @@ public:
 
     // SetTarget: When it return B_OK, the oldTarget was removed and destroy automatically.
     //            If you want to keep the oldTarget, try oldTarget->RemoveSelf() before.
-    b_status_t	SetTarget(BView *newTarget);
+    status_t	SetTarget(BView *newTarget);
     BView		*Target() const;
     BRect		TargetFrame() const;
 
@@ -56,7 +56,7 @@ public:
 
     BScrollBar	*ScrollBar(bhapi::orientation direction) const;
 
-    virtual void	SetFlags(b_uint32 flags); // auto-setting B_WILL_DRAW and B_FRAME_EVENTS
+    virtual void	SetFlags(__be_uint32 flags); // auto-setting B_WILL_DRAW and B_FRAME_EVENTS
     virtual void	Draw(BRect updateRect);
     virtual void	FrameResized(float new_width, float new_height);
 

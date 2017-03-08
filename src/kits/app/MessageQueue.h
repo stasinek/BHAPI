@@ -49,17 +49,17 @@ public:
     // return the FIRST message and detach from the queue, you should "delete" by yourself
     BMessage	*NextMessage();
 
-    BMessage	*FindMessage(b_int32 index) const;
-    BMessage	*FindMessage(b_uint32 what, b_int32 fromIndex = 0) const;
-    BMessage	*FindMessage(b_uint32 what, b_int32 fromIndex, b_int32 count) const;
-    b_int32		IndexOfMessage(BMessage *an_event) const;
+    BMessage	*FindMessage(__be_int32 index) const;
+    BMessage	*FindMessage(__be_uint32 what,  __be_int32 fromIndex = 0) const;
+    BMessage	*FindMessage(__be_uint32 what,  __be_int32 fromIndex,  __be_int32 count) const;
+     __be_int32		IndexOfMessage(BMessage *an_event) const;
 
-    b_int32		CountMessages() const;
+     __be_int32		CountMessages() const;
     bool		IsEmpty() const;
 
     bool		Lock();
     void		Unlock();
-    b_status_t	LockWithTimeout(b_bigtime_t microseconds_timeout);
+    status_t	LockWithTimeout(bigtime_t microseconds_timeout);
 
 private:
     BList fMessagesList;

@@ -42,40 +42,40 @@ public:
 
 	// Archiving
 	BNetBuffer(const BMessage *from);
-	virtual b_status_t Archive(BMessage *into, bool deep = true) const;
+	virtual status_t Archive(BMessage *into, bool deep = true) const;
 	static BArchivable *Instantiate(const BMessage *from);
 
-	b_status_t	InitCheck() const;
+	status_t	InitCheck() const;
 
 	BNetBuffer	&operator=(const BNetBuffer &buf);
 
-	b_status_t	AppendData(const void *data, size_t len);
-    b_status_t	AppendInt8(b_int8 value);
-    b_status_t	AppendUint8(b_uint8 value);
-    b_status_t	AppendInt16(b_int16 value);
-    b_status_t	AppendUint16(b_uint16 value);
-    b_status_t	AppendInt32(b_int32 value);
-    b_status_t	AppendUint32(b_uint32 value);
-    b_status_t	AppendInt64(b_int64 value);
-    b_status_t	AppendUint64(b_uint64 value);
-	b_status_t	AppendFloat(float value);
-	b_status_t	AppendDouble(double value);
-    b_status_t	AppenString(const char *string, b_int32 len = -1);
-	b_status_t	AppendMessage(const BMessage &msg);
+	status_t	AppendData(const void *data, size_t len);
+    status_t	AppendInt8(__be_int8 value);
+    status_t	AppendUint8(__be_uint8 value);
+    status_t	AppendInt16(__be_int16 value);
+    status_t	AppendUint16(__be_uint16 value);
+    status_t	AppendInt32(__be_int32 value);
+    status_t	AppendUint32(__be_uint32 value);
+    status_t	AppendInt64(__be_int64 value);
+    status_t	AppendUint64(__be_uint64 value);
+	status_t	AppendFloat(float value);
+	status_t	AppendDouble(double value);
+    status_t	AppenString(const char *string,  __be_int32 len = -1);
+	status_t	AppendMessage(const BMessage &msg);
 
-	b_status_t	RemoveData(void *data, size_t len);
-    b_status_t	RemoveInt8(b_int8 &value);
-    b_status_t	RemoveUint8(b_uint8 &value);
-    b_status_t	RemoveInt16(b_int16 &value);
-    b_status_t	RemoveUint16(b_uint16 &value);
-    b_status_t	RemoveInt32(b_int32 &value);
-    b_status_t	RemoveUint32(b_uint32 &value);
-    b_status_t	RemoveInt64(b_int64 &value);
-    b_status_t	RemoveUint64(b_uint64 &value);
-	b_status_t	RemoveFloat(float &value);
-	b_status_t	RemoveDouble(double &value);
-    b_status_t	RemovString(char *string, size_t len);
-	b_status_t	RemoveMessage(BMessage &msg);
+	status_t	RemoveData(void *data, size_t len);
+    status_t	RemoveInt8(__be_int8 &value);
+    status_t	RemoveUint8(__be_uint8 &value);
+    status_t	RemoveInt16(__be_int16 &value);
+    status_t	RemoveUint16(__be_uint16 &value);
+    status_t	RemoveInt32(__be_int32 &value);
+    status_t	RemoveUint32(__be_uint32 &value);
+    status_t	RemoveInt64(__be_int64 &value);
+    status_t	RemoveUint64(__be_uint64 &value);
+	status_t	RemoveFloat(float &value);
+	status_t	RemoveDouble(double &value);
+    status_t	RemovString(char *string, size_t len);
+	status_t	RemoveMessage(BMessage &msg);
 
 	unsigned char	*Data() const;
 	size_t		Size() const;

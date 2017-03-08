@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #if DEBUG
 #	include <OS.h>

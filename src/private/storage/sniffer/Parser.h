@@ -9,7 +9,7 @@
 #ifndef _SNIFFER_PARSER_H
 #define _SNIFFER_PARSER_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <sniffer/CharStream.h>
 #include <sniffer/Err.h>
 #include <sniffer/Range.h>

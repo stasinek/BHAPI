@@ -6,7 +6,7 @@
 #define KERNEL_UTIL_FIXED_WIDTH_POINTER_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 /*!

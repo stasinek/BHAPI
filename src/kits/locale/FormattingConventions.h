@@ -10,7 +10,7 @@
 #include <List.h>
 #include <LocaleStrings.h>
 #include <StringClass.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BBitmap;

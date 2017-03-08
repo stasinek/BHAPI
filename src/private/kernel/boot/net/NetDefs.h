@@ -10,7 +10,7 @@
 #include <string.h>
 
 #include <ByteOrder.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <util/kernel_cpp.h>
 

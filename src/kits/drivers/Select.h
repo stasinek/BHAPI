@@ -6,7 +6,7 @@
 #define _DRIVERS_SELECT_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct selectsync;

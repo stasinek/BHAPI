@@ -30,7 +30,7 @@
 #include <Roster.h>
 #include <Screen.h>
 #include <ScrollBar.h>
-#include <String.h>
+#include <StringClass.h>
 #include <TextView.h>
 #include <Window.h>
 
@@ -842,11 +842,11 @@ idle_time()
 void
 run_select_printer_panel()
 {
-	if (be_roster == NULL)
+	if (__be_roster == NULL)
 		return;
 
 	// Launches the Printer prefs app via the Roster
-	be_roster->Launch(PRNT_SIGNATURE_TYPE);
+	__be_roster->Launch(PRNT_SIGNATURE_TYPE);
 }
 
 
@@ -865,8 +865,8 @@ run_add_printer_panel()
 void
 run_be_about()
 {
-	if (be_roster != NULL)
-		be_roster->Launch("application/x-vnd.Haiku-About");
+	if (__be_roster != NULL)
+		__be_roster->Launch("application/x-vnd.Haiku-About");
 }
 
 
@@ -1076,7 +1076,7 @@ ui_color(color_which which)
 		return make_color(0, 0, 0);
 	}
 
-	if (be_app != NULL) {
+	if (__be_app != NULL) {
 		server_read_only_memory* shared
 			= BApplication::Private::ServerReadOnlyMemory();
 		if (shared != NULL)
@@ -1148,11 +1148,11 @@ _init_interface_kit_()
 		return status;
 
 	// init global clipboard
-	if (be_clipboard == NULL)
-		be_clipboard = new BClipboard(NULL);
+	if (__be_clipboard == NULL)
+		__be_clipboard = new BClipboard(NULL);
 
 	// TODO: Could support different themes here in the future.
-	be_control_look = new BControlLook();
+	__be_control_look = new BControlLook();
 
 	_init_global_fonts_();
 
@@ -1187,8 +1187,8 @@ _fini_interface_kit_()
 	delete BPrivate::gWidthBuffer;
 	BPrivate::gWidthBuffer = NULL;
 
-	delete be_control_look;
-	be_control_look = NULL;
+	delete  __be_control_look;
+	__be_control_look = NULL;
 
 	// TODO: Anything else?
 

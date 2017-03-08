@@ -13,10 +13,10 @@
 #include <IconUtils.h>
 #include <List.h>
 #include <Language.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <LocaleRoster.h>
 #include <Resources.h>
-#include <String.h>
+#include <StringClass.h>
 #include <UnicodeChar.h>
 
 #include <unicode/datefmt.h>

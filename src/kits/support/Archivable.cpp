@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -48,54 +48,54 @@ BArchivable::~BArchivable()
 }
 
 
-b_status_t
+status_t
 BArchivable::Archive(BMessage *into, bool deep) const
 {
-	if(into == NULL) return B_ERROR;
-	into->AddString("class", "BArchivable");
-	return B_OK;
+    if(into == NULL) return B_ERROR;
+    into->AddString("class", "BArchivable");
+    return B_OK;
 }
 
 
 BArchivable*
 BArchivable::Instantiate(const BMessage *from)
 {
-	BHAPI_ERROR("[SUPPORT]: %s --- Can't instantiate a \"BArchivable\"", __PRETTY_FUNCTION__);
-	return NULL;
+    BHAPI_ERROR("[SUPPORT]: %s --- Can't instantiate a \"BArchivable\"", __PRETTY_FUNCTION__);
+    return NULL;
 }
 
 
-EXPORTBHAPI bool b_validatb_instantiation(const BMessage *from, const char *class_name)
+EXPORTBHAPI bool bhapi::validatb_instantiation(const BMessage *from, const char *class_name)
 {
-	if(from == NULL || class_name == NULL || *class_name == 0) return false;
+    if(from == NULL || class_name == NULL || *class_name == 0) return false;
 
-	b_int32 items = from->CountItems("class", B_STRING_TYPE);
-	for(b_int32 i = 0; i < items; i++)
-	{
-		const char *_class_name = NULL;
-		from->FindString("class", i, &_class_name);
-		if(_class_name == NULL) continue;
+     __be_int32 items = from->CountItems("class", B_STRING_TYPE);
+    for(__be_int32 i = 0; i < items; i++)
+    {
+        const char *_class_name = NULL;
+        from->FindString("class", i, &_class_name);
+        if(_class_name == NULL) continue;
 
-		if(strlen(_class_name) != strlen(class_name)) continue;
-		if(strcmp(_class_name, class_name) == 0) return true;
-	}
+        if(strlen(_class_name) != strlen(class_name)) continue;
+        if(strcmp(_class_name, class_name) == 0) return true;
+    }
 
-	return false;
+    return false;
 }
 
 
-EXPORTBHAPI b_instantiation_func b_find_instantiation_func(const char *class_name)
+EXPORTBHAPI bhapi::instantiation_func bhapi::find_instantiation_func(const char *class_name)
 {
-	// TODO
-	return NULL;
+    // TODO
+    return NULL;
 }
 
 
-EXPORTBHAPI b_instantiation_func b_find_instantiation_func(const BMessage *archive_data)
+EXPORTBHAPI bhapi::instantiation_func bhapi::find_instantiation_func(const BMessage *archive_data)
 {
-	const char *class_name = NULL;
-	if(archive_data == NULL) return NULL;
-	archive_data->FindString("class", archive_data->CountItems("class", B_STRING_TYPE) - 1, &class_name);
-	return b_find_instantiation_func(class_name);
+    const char *class_name = NULL;
+    if(archive_data == NULL) return NULL;
+    archive_data->FindString("class", archive_data->CountItems("class", B_STRING_TYPE) - 1, &class_name);
+    return bhapi::find_instantiation_func(class_name);
 }
 

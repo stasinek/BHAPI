@@ -46,7 +46,7 @@ BMidiSynthFile::LoadFile(const entry_ref* midi_entry_ref)
 	if (err == B_OK) {
 		for (int t = 0; t < 128; ++t) {
 			if (fStore->fInstruments[t]) {
-				be_synth->fSynth->LoadInstrument(t);
+				__be_synth->fSynth->LoadInstrument(t);
 			}
 		}
 	}

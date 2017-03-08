@@ -5,7 +5,7 @@
 // R1: Release 1.0 March 18, 1998
 // R2: Release 2.0 May 31, 2006
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #define USB_AUDIO_DEVICE_CLASS 			0x01
 #define USB_AUDIO_CLASS_VERSION			0x0100

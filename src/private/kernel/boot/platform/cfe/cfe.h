@@ -6,7 +6,7 @@
 #define KERNEL_BOOT_PLATFORM_CFE_CFE_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #ifdef __cplusplus
 extern "C" {

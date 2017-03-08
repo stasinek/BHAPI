@@ -12,7 +12,7 @@
 #include <Message.h>
 #include <NetworkCookie.h>
 #include <ObjectList.h>
-#include <String.h>
+#include <StringClass.h>
 #include <Url.h>
 
 

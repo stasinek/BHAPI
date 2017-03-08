@@ -5,7 +5,7 @@
 #ifndef _KERNEL_ARCH_x86_SMP_PRIV_H
 #define _KERNEL_ARCH_x86_SMP_PRIV_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 void arch_smp_ack_interrupt(void);
 status_t arch_smp_set_apic_timer(bigtime_t relativeTimeout);

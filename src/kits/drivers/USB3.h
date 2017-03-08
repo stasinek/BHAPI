@@ -22,12 +22,12 @@ typedef struct usb_module_info usb_module_info;
 
 typedef uint32 usb_id;
 typedef usb_id usb_device;
-typedef usb_id usb_interface;
+typedef usb_id usbe_interface;
 typedef usb_id usb_pipe;
 
 typedef struct usb_endpoint_info usb_endpoint_info;
-typedef struct usb_interface_info usb_interface_info;
-typedef struct usb_interface_list usb_interface_list;
+typedef struct usbe_interface_info usbe_interface_info;
+typedef struct usbe_interface_list usbe_interface_list;
 typedef struct usb_configuration_info usb_configuration_info;
 
 typedef struct usb_notify_hooks {
@@ -48,9 +48,9 @@ struct usb_endpoint_info {
 	usb_pipe					handle;			/* of this endpoint/pipe */
 };
 
-struct usb_interface_info {
-	usb_interface_descriptor	*descr;			/* descriptor and handle */
-	usb_interface				handle;			/* of this interface */
+struct usbe_interface_info {
+	usbe_interface_descriptor	*descr;			/* descriptor and handle */
+	usbe_interface				handle;			/* of this interface */
 
 	size_t						endpoint_count;	/* count and list of endpoints */
 	usb_endpoint_info			*endpoint;		/* in this interface */
@@ -59,18 +59,18 @@ struct usb_interface_info {
 	usb_descriptor				**generic;		/* this interface */
 };
 
-struct usb_interface_list {
+struct usbe_interface_list {
 	size_t						alt_count;		/* count and list of alternate */
-	usb_interface_info			*alt;			/* interfaces available */
+	usbe_interface_info			*alt;			/* interfaces available */
 
-	usb_interface_info			*active;		/* currently active alternate */
+	usbe_interface_info			*active;		/* currently active alternate */
 };
 
 struct usb_configuration_info {
 	usb_configuration_descriptor *descr;		/* descriptor of this config */
 
 	size_t						interface_count;/* interfaces in this config */
-	usb_interface_list			*interface;
+	usbe_interface_list			*interface;
 };
 
 typedef struct {
@@ -139,11 +139,11 @@ struct usb_module_info {
 										const usb_configuration_info *configuration);
 
 	status_t						(*set_alt_interface)(usb_device device,
-										const usb_interface_info *interface);
+										const usbe_interface_info *interface);
 
 	/*
 	 *	Standard device requests - convenience functions
-	 *	The provided handle may be a usb_device, usb_pipe or usb_interface
+	 *	The provided handle may be a usb_device, usb_pipe or usbe_interface
 	 */
 	status_t						(*set_feature)(usb_id handle, uint16 selector);
 	status_t						(*clear_feature)(usb_id handle, uint16 selector);

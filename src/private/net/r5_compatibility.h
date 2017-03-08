@@ -6,7 +6,7 @@
 #define NET_R5_COMPATIBILITY_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #define R5_SOCK_DGRAM	1

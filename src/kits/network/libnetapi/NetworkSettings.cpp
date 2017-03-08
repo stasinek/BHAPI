@@ -22,7 +22,7 @@
 #include <NetworkInterface.h>
 #include <Path.h>
 #include <PathMonitor.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <DriverSettingsMessageAdapter.h>
 #include <NetServer.h>

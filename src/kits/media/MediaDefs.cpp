@@ -14,7 +14,7 @@
 #include <Bitmap.h>
 #include <Catalog.h>
 #include <IconUtils.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MediaNode.h>
 #include <MediaRoster.h>
 #include <Node.h>
@@ -1243,7 +1243,7 @@ notify_system(float progress, const char* message)
 	notification.SetContent(message);
 
 	app_info info;
-	be_app->GetAppInfo(&info);
+	__be_app->GetAppInfo(&info);
 	BBitmap icon(BRect(0, 0, 32, 32), B_RGBA32);
 	BNode node(&info.ref);
 	BIconUtils::GetVectorIcon(&node, "BEOS:ICON", &icon);
@@ -1303,7 +1303,7 @@ shutdown_media_server(bigtime_t timeout,
 	if ((err = msg.AddBool("be:_user_request", true)) != B_OK)
 		return err;
 
-	if (be_roster->IsRunning(B_MEDIA_SERVER_SIGNATURE)) {
+	if (__be_roster->IsRunning(B_MEDIA_SERVER_SIGNATURE)) {
 		BMessenger messenger(B_MEDIA_SERVER_SIGNATURE);
 		progress_shutdown(10, progress, cookie);
 
@@ -1316,7 +1316,7 @@ shutdown_media_server(bigtime_t timeout,
 			return rv;
 	}
 
-	if (be_roster->IsRunning(B_MEDIA_ADDON_SERVER_SIGNATURE)) {
+	if (__be_roster->IsRunning(B_MEDIA_ADDON_SERVER_SIGNATURE)) {
 		BMessenger messenger(B_MEDIA_ADDON_SERVER_SIGNATURE);
 		progress_shutdown(20, progress, cookie);
 
@@ -1329,12 +1329,12 @@ shutdown_media_server(bigtime_t timeout,
 			return rv;
 	}
 
-	if (be_roster->IsRunning(B_MEDIA_SERVER_SIGNATURE)) {
+	if (__be_roster->IsRunning(B_MEDIA_SERVER_SIGNATURE)) {
 		progress_shutdown(40, progress, cookie);
 		snooze(200000);
 	}
 
-	if (be_roster->IsRunning(B_MEDIA_ADDON_SERVER_SIGNATURE)) {
+	if (__be_roster->IsRunning(B_MEDIA_ADDON_SERVER_SIGNATURE)) {
 		progress_shutdown(50, progress, cookie);
 		snooze(200000);
 	}
@@ -1342,12 +1342,12 @@ shutdown_media_server(bigtime_t timeout,
 	progress_shutdown(70, progress, cookie);
 	snooze(1000000);
 
-	if (be_roster->IsRunning(B_MEDIA_SERVER_SIGNATURE)) {
-		kill_team(be_roster->TeamFor(B_MEDIA_SERVER_SIGNATURE));
+	if (__be_roster->IsRunning(B_MEDIA_SERVER_SIGNATURE)) {
+		kill_team(__be_roster->TeamFor(B_MEDIA_SERVER_SIGNATURE));
 	}
 
-	if (be_roster->IsRunning(B_MEDIA_ADDON_SERVER_SIGNATURE)) {
-		kill_team(be_roster->TeamFor(B_MEDIA_ADDON_SERVER_SIGNATURE));
+	if (__be_roster->IsRunning(B_MEDIA_ADDON_SERVER_SIGNATURE)) {
+		kill_team(__be_roster->TeamFor(B_MEDIA_ADDON_SERVER_SIGNATURE));
 	}
 
 	progress_shutdown(100, progress, cookie);
@@ -1408,22 +1408,22 @@ launch_media_server(bigtime_t timeout,
 		return B_ALREADY_RUNNING;
 
 	// The media_server crashed
-	if (be_roster->IsRunning(B_MEDIA_ADDON_SERVER_SIGNATURE)) {
+	if (__be_roster->IsRunning(B_MEDIA_ADDON_SERVER_SIGNATURE)) {
 		progress_startup(10, progress, cookie);
-		kill_team(be_roster->TeamFor(B_MEDIA_ADDON_SERVER_SIGNATURE));
+		kill_team(__be_roster->TeamFor(B_MEDIA_ADDON_SERVER_SIGNATURE));
 		snooze(1000000);
 	}
 
 	// The media_addon_server crashed
-	if (be_roster->IsRunning(B_MEDIA_SERVER_SIGNATURE)) {
+	if (__be_roster->IsRunning(B_MEDIA_SERVER_SIGNATURE)) {
 		progress_startup(20, progress, cookie);
-		kill_team(be_roster->TeamFor(B_MEDIA_SERVER_SIGNATURE));
+		kill_team(__be_roster->TeamFor(B_MEDIA_SERVER_SIGNATURE));
 		snooze(1000000);
 	}
 
 	progress_startup(50, progress, cookie);
 
-	status_t err = be_roster->Launch(B_MEDIA_SERVER_SIGNATURE);
+	status_t err =  __be_roster->Launch(B_MEDIA_SERVER_SIGNATURE);
 	if (err != B_OK)
 		return err;
 

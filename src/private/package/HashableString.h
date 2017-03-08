@@ -6,9 +6,9 @@
 #define _PACKAGE__PRIVATE__HASHABLE_STRING_H_
 
 
-#include <String.h>
+#include <StringClass.h>
 
-#include <HashString.h>
+#include <HashStringClass.h>
 
 
 namespace BPackageKit {

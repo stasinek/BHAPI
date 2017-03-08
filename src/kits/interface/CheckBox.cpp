@@ -32,7 +32,7 @@
 #include "../interface/Window.h"
 
 BCheckBox::BCheckBox(BRect frame, const char *name, const char *label,
-		     BMessage *message, b_uint32 resizeMode, b_uint32 flags)
+		     BMessage *message,  __be_uint32 resizeMode,  __be_uint32 flags)
 	: BControl(frame, name, label, message, resizeMode, flags)
 {
 }
@@ -161,7 +161,7 @@ BCheckBox::MouseDown(BPoint where)
 
 
 void
-BCheckBox::KeyDown(const char *bytes, b_int32 numBytes)
+BCheckBox::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	if(!IsEnabled() || !IsFocus() || numBytes != 1) return;
 	if(!(bytes[0] == B_ENTER || bytes[0] == B_SPACE)) return;
@@ -173,7 +173,7 @@ BCheckBox::KeyDown(const char *bytes, b_int32 numBytes)
 
 
 void
-BCheckBox::SetFont(const BFont *font, b_uint8 mask)
+BCheckBox::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	BControl::SetFont(font, mask);
 	Invalidate();

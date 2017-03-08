@@ -55,7 +55,7 @@ private:
     void *fThread;
     BTokensDepot *fHandlersDepot;
 
-    static b_status_t task(void*);
+    static status_t task(void*);
 };
 
 namespace bhapi {

@@ -21,7 +21,7 @@
 #include <FindDirectory.h>
 #include <Path.h>
 #include <StorageDefs.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 ScreenSaverSettings::ScreenSaverSettings()

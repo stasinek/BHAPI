@@ -3,7 +3,7 @@
 #ifndef _PEF_H
 #define _PEF_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 typedef char	PefOSType[4];
 

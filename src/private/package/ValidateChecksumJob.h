@@ -8,7 +8,7 @@
 
 #include <Directory.h>
 #include <Entry.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <package/ChecksumAccessors.h>
 #include <package/Job.h>

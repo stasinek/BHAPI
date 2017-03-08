@@ -36,7 +36,7 @@
 #include <Entry.h>
 #include <Handler.h>
 #include <Looper.h>
-#include <String.h>
+#include <StringClass.h>
 #include <StorageDefs.h>
 
 

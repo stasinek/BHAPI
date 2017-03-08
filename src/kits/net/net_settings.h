@@ -6,7 +6,7 @@
 #define _NET_SETTINGS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #if __cplusplus
 	extern "C" {

@@ -40,7 +40,7 @@ All rights reserved.
 #include <Debug.h>
 #include <Locker.h>
 #include <Path.h>
-#include <String.h>
+#include <StringClass.h>
 #include <Window.h>
 
 #include <directories.h>

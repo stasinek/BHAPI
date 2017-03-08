@@ -5,7 +5,7 @@
 #ifndef KERNEL_BOOT_HEAP_H
 #define KERNEL_BOOT_HEAP_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <boot/stage2_args.h>
 
 #ifdef __cplusplus

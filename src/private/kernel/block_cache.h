@@ -6,7 +6,7 @@
 #define _KERNEL_BLOCK_CACHE_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #ifdef __cplusplus

@@ -76,28 +76,28 @@ status_t convert_to_utf8(uint32 sourceEncoding, const char* source, int32* sourc
 status_t convert_from_utf8(uint32 destEncoding, const char* source,
     int32* sourceLength, char* dest, int32* destLength, int32* state,
     char substitute = B_SUBSTITUTE);
-IMPEXPBHAPI b_unichar16*		utf8_convert_to_unicode(const char *str, b_int32 length);
-IMPEXPBHAPI b_unichar32*		utf8_convert_to_utf32(const char *str, b_int32 length);
+IMPEXPBHAPI unichar16*		utf8_convert_to_unicode(const char *str,  __be_int32 length);
+IMPEXPBHAPI unichar32*		utf8_convert_to_utf32(const char *str,  __be_int32 length);
 IMPEXPBHAPI bool                utf8_is_token(const char *str);
-IMPEXPBHAPI b_int32             utf8_strlen(const char *str);
-IMPEXPBHAPI b_int32             utf8_strlen_etc(const char *str, b_int32 nbytes);
-IMPEXPBHAPI b_int32             utf8_strlen_fast(const char *str, b_int32 nbytes); /* none checking */
-IMPEXPBHAPI const char*         utf8_at(const char *str, b_int32 index, b_uint8 *nbytes);
-IMPEXPBHAPI const char*         utf8_next(const char *str, b_uint8 *length);
+IMPEXPBHAPI  __be_int32             utf8_strlen(const char *str);
+IMPEXPBHAPI  __be_int32             utf8_strlen_etc(const char *str,  __be_int32 nbytes);
+IMPEXPBHAPI  __be_int32             utf8_strlen_fast(const char *str,  __be_int32 nbytes); /* none checking */
+IMPEXPBHAPI const char*         utf8_at(const char *str,  __be_int32 index,  __be_uint8 *nbytes);
+IMPEXPBHAPI const char*         utf8_next(const char *str,  __be_uint8 *length);
 
-IMPEXPBHAPI char*               utf32_convert_to_utf8(const b_unichar32 *str, b_int32 ulength);
-IMPEXPBHAPI b_unichar16*		utf32_convert_to_unicode(const b_unichar32 *str, b_int32 ulength);
-IMPEXPBHAPI b_int32             utf32_strlen(const b_unichar32 *ustr);
-IMPEXPBHAPI b_int32             utf32_strlen_etc(const b_unichar32 *ustr, b_int32 nchars);
-IMPEXPBHAPI const b_unichar32*	utf32_at(const b_unichar32* ustr, b_int32 index);
-IMPEXPBHAPI const b_unichar32*	utf32_next(const b_unichar32* ustr);
+IMPEXPBHAPI char*               utf32_convert_to_utf8(const unichar32 *str,  __be_int32 ulength);
+IMPEXPBHAPI unichar16*		utf32_convert_to_unicode(const unichar32 *str,  __be_int32 ulength);
+IMPEXPBHAPI  __be_int32             utf32_strlen(const unichar32 *ustr);
+IMPEXPBHAPI  __be_int32             utf32_strlen_etc(const unichar32 *ustr,  __be_int32 nchars);
+IMPEXPBHAPI const unichar32*	utf32_at(const unichar32* ustr,  __be_int32 index);
+IMPEXPBHAPI const unichar32*	utf32_next(const unichar32* ustr);
 
-IMPEXPBHAPI char*               unicode_convert_to_utf8(const b_unichar16*str, b_int32 ulength);
-IMPEXPBHAPI b_unichar32*		unicode_convert_to_utf32(const b_unichar16*str, b_int32 ulength);
-IMPEXPBHAPI b_int32             unicode_strlen(const b_unichar16*ustr);
-IMPEXPBHAPI b_int32             unicode_strlen_etc(const b_unichar16*ustr, b_int32 nchars, bool utf16_style);
-IMPEXPBHAPI const b_unichar16*	unicode_at(const b_unichar16* ustr, b_int32 index, bool *utf16);
-IMPEXPBHAPI const b_unichar16*	unicode_next(const b_unichar16* ustr, bool *utf16);
+IMPEXPBHAPI char*               unicode_convert_to_utf8(const unichar16*str,  __be_int32 ulength);
+IMPEXPBHAPI unichar32*		unicode_convert_to_utf32(const unichar16*str,  __be_int32 ulength);
+IMPEXPBHAPI  __be_int32             unicode_strlen(const unichar16*ustr);
+IMPEXPBHAPI  __be_int32             unicode_strlen_etc(const unichar16*ustr,  __be_int32 nchars, bool utf16_style);
+IMPEXPBHAPI const unichar16*	unicode_at(const unichar16* ustr,  __be_int32 index, bool *utf16);
+IMPEXPBHAPI const unichar16*	unicode_next(const unichar16* ustr, bool *utf16);
 
 IMPEXPBHAPI bool IsInsideGlyph(uchar ch);
 IMPEXPBHAPI uint32 UTF8NextCharLenUnsafe(const char *text);

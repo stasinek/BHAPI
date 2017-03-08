@@ -48,8 +48,8 @@
 #include <sys/stat.h>
 
 // implement in "Path.cpp"
-extern b_status_t b_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);
-extern b_status_t b_path_get_parent(BString &parent, const char *path);
+extern status_t b_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);
+extern status_t b_path_get_parent(BString &parent, const char *path);
 
 
 BEntry::BEntry()
@@ -92,14 +92,14 @@ BEntry::~BEntry()
 }
 
 
-b_status_t
+status_t
 BEntry::SetTo(const char *path, bool traverse)
 {
 	return SetTo(path, NULL, traverse);
 }
 
 
-b_status_t
+status_t
 BEntry::SetTo(const char *dir, const char *leaf, bool traverse)
 {
 	if(dir == NULL) return B_BAD_VALUE;
@@ -108,7 +108,7 @@ BEntry::SetTo(const char *dir, const char *leaf, bool traverse)
 	if(b_path_expound(str, dir, leaf, NULL) != B_OK) return B_BAD_VALUE;
 
 	BString parent;
-	b_status_t status = b_path_get_parent(parent, str.String());
+	status_t status = b_path_get_parent(parent, str.String());
 	if(status == B_ENTRY_NOT_FOUND) parent = str;
 	else if(status != B_OK) return B_BAD_VALUE;
 
@@ -138,7 +138,7 @@ BEntry::SetTo(const char *dir, const char *leaf, bool traverse)
 }
 
 
-b_status_t
+status_t
 BEntry::SetTo(const BDirectory *dir, const char *leaf, bool traverse)
 {
 	if(dir == NULL || dir->InitCheck() != B_OK) return B_BAD_VALUE;
@@ -154,7 +154,7 @@ BEntry::Unset()
 }
 
 
-b_status_t
+status_t
 BEntry::InitCheck() const
 {
 	if(fName == NULL) return B_NO_INIT;
@@ -264,8 +264,8 @@ BEntry::IsSymLink() const
 }
 
 
-b_status_t
-BEntry::GetSize(b_int64 *file_size) const
+status_t
+BEntry::GetSize(__be_int64 *file_size) const
 {
 	if(fName == NULL || file_size == NULL) return B_ERROR;
 
@@ -278,23 +278,23 @@ BEntry::GetSize(b_int64 *file_size) const
 
 	struct _stati64 stat;
 	if(_stati64(filename, &stat) != 0) return B_ERROR;
-	*file_size = (b_int64)stat.st_size;
+	*file_size = (__be_int64)stat.st_size;
 #elif defined(HAVE_STAT64)
 	struct stat64 stat;
 	if(stat64(filename, &stat) != 0) return B_ERROR;
-	*file_size = (b_int64)stat.st_size;
+	*file_size = (__be_int64)stat.st_size;
 #else
 	struct stat st;
 	if(stat(filename, &st) != 0) return B_ERROR;
-	*file_size = (b_int64)st.st_size;
+	*file_size = (__be_int64)st.st_size;
 #endif
 
 	return B_OK;
 }
 
 
-b_status_t
-BEntry::GetModificationTime(b_bigtime_t *time) const
+status_t
+BEntry::GetModificationTime(bigtime_t *time) const
 {
 	if(fName == NULL || time == NULL) return B_ERROR;
 
@@ -307,19 +307,19 @@ BEntry::GetModificationTime(b_bigtime_t *time) const
 
 	struct _stat stat;
 	if(_stat(filename, &stat) != 0) return B_ERROR;
-	*time = B_INT64_CONSTANT(1000000) * (b_bigtime_t)stat.st_mtime;
+	*time = B_INT64_CONSTANT(1000000) * (bigtime_t)stat.st_mtime;
 #else
 	struct stat st;
 	if(stat(filename, &st) != 0) return B_ERROR;
-	*time = B_INT64_CONSTANT(1000000) * (b_bigtime_t)st.st_mtime;
+	*time = B_INT64_CONSTANT(1000000) * (bigtime_t)st.st_mtime;
 #endif
 
 	return B_OK;
 }
 
 
-b_status_t
-BEntry::GetCreationTime(b_bigtime_t *time) const
+status_t
+BEntry::GetCreationTime(bigtime_t *time) const
 {
 	if(fName == NULL || time == NULL) return B_ERROR;
 
@@ -332,19 +332,19 @@ BEntry::GetCreationTime(b_bigtime_t *time) const
 
 	struct _stat stat;
 	if(_stat(filename, &stat) != 0) return B_ERROR;
-	*time = B_INT64_CONSTANT(1000000) * (b_bigtime_t)stat.st_ctime;
+	*time = B_INT64_CONSTANT(1000000) * (bigtime_t)stat.st_ctime;
 #else
 	struct stat st;
 	if(stat(filename, &st) != 0) return B_ERROR;
-	*time = B_INT64_CONSTANT(1000000) * (b_bigtime_t)st.st_ctime;
+	*time = B_INT64_CONSTANT(1000000) * (bigtime_t)st.st_ctime;
 #endif
 
 	return B_OK;
 }
 
 
-b_status_t
-BEntry::GetAccessTime(b_bigtime_t *time) const
+status_t
+BEntry::GetAccessTime(bigtime_t *time) const
 {
 	if(fName == NULL || time == NULL) return B_ERROR;
 
@@ -357,11 +357,11 @@ BEntry::GetAccessTime(b_bigtime_t *time) const
 
 	struct _stat stat;
 	if(_stat(filename, &stat) != 0) return B_ERROR;
-	*time = B_INT64_CONSTANT(1000000) * (b_bigtime_t)stat.st_atime;
+	*time = B_INT64_CONSTANT(1000000) * (bigtime_t)stat.st_atime;
 #else
 	struct stat st;
 	if(stat(filename, &st) != 0) return B_ERROR;
-	*time = B_INT64_CONSTANT(1000000) * (b_bigtime_t)st.st_atime;
+	*time = B_INT64_CONSTANT(1000000) * (bigtime_t)st.st_atime;
 #endif
 
 	return B_OK;
@@ -391,7 +391,7 @@ BEntry::Name() const
 }
 
 
-b_status_t
+status_t
 BEntry::GetName(char *buffer, size_t bufferSize) const
 {
 	const char *name = Name();
@@ -411,7 +411,7 @@ BEntry::Path() const
 }
 
 
-b_status_t
+status_t
 BEntry::GetPath(BPath *path) const
 {
 	if(path == NULL) return B_BAD_VALUE;
@@ -421,42 +421,42 @@ BEntry::GetPath(BPath *path) const
 }
 
 
-b_status_t
+status_t
 BEntry::GetParent(BEntry *entry) const
 {
 	if(entry == NULL) return B_BAD_VALUE;
 	if(fName == NULL) return B_NO_INIT;
 
 	BString str;
-	b_status_t status = b_path_get_parent(str, fName);
+	status_t status = b_path_get_parent(str, fName);
 	if(status != B_OK) return status;
 
 	return entry->SetTo(str.String(), false);
 }
 
 
-b_status_t
+status_t
 BEntry::GetParent(BPath *path) const
 {
 	if(path == NULL) return B_BAD_VALUE;
 	if(fName == NULL) return B_NO_INIT;
 
 	BString str;
-	b_status_t status = b_path_get_parent(str, fName);
+	status_t status = b_path_get_parent(str, fName);
 	if(status != B_OK) return status;
 
 	return path->SetTo(str.String(), NULL, false);
 }
 
 
-b_status_t
+status_t
 BEntry::GetParent(BDirectory *dir) const
 {
 	if(dir == NULL) return B_BAD_VALUE;
 	if(fName == NULL) return B_NO_INIT;
 
 	BString str;
-	b_status_t status = b_path_get_parent(str, fName);
+	status_t status = b_path_get_parent(str, fName);
 	if(status != B_OK) return status;
 
 	return dir->SetTo(str.String());

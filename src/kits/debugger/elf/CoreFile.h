@@ -8,7 +8,7 @@
 
 #include "ElfFile.h"
 
-#include <String.h>
+#include <StringClass.h>
 
 
 struct CoreFileTeamInfo {

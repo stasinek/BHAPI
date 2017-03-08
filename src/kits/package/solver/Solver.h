@@ -7,7 +7,7 @@
 
 
 #include <ObjectList.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 namespace BPackageKit {

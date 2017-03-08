@@ -46,15 +46,15 @@ public:
     bool		operator!=(const BCursor &other) const;
 
     const void 	*Data() const;
-    b_uint32		DataLength() const;
+     __be_uint32		DataLength() const;
 
-    b_uint8		ColorDepth() const;
-    b_uint8		Width() const;
-    b_uint8		Height() const;
+     __be_uint8		ColorDepth() const;
+     __be_uint8		Width() const;
+     __be_uint8		Height() const;
 
-    b_uint16		Spot() const;
-    b_uint8		SpotX() const;
-    b_uint8		SpotY() const;
+     __be_uint16		Spot() const;
+     __be_uint8		SpotX() const;
+     __be_uint8		SpotY() const;
 
     const void	*Bits() const;
     const void	*Mask() const;
@@ -65,13 +65,13 @@ private:
 
 #ifdef BHAPI_BUILD_LIBRARY
 
-inline b_uint8 BCursor::SpotX() const
+inline  __be_uint8 BCursor::SpotX() const
 {
     return(Spot() >> 8);
 }
 
 
-inline b_uint8 BCursor::SpotY() const
+inline  __be_uint8 BCursor::SpotY() const
 {
     return(Spot() & 0xff);
 }

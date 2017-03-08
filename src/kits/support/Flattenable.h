@@ -39,12 +39,12 @@ public:
 
 	virtual bool		IsFixedSize() const = 0;
 
-    virtual b_type_code	TypeCode() const = 0;
-    virtual bool		AllowsTypeCode(b_type_code code) const;
+    virtual type_code	TypeCode() const = 0;
+    virtual bool		AllowsTypeCode(type_code code) const;
 
-    virtual b_size_t		FlattenedSize() const = 0;
-    virtual b_status_t	Flatten(void *buffer, b_size_t numBytes) = 0;
-    virtual b_status_t	Unflatten(b_type_code, const void *buffer, b_size_t numBytes) = 0;
+    virtual  __be_size_t		FlattenedSize() const = 0;
+    virtual status_t	Flatten(void *buffer,  __be_size_t numBytes) = 0;
+    virtual status_t	Unflatten(type_code, const void *buffer,  __be_size_t numBytes) = 0;
 };
 
 #endif /* __cplusplus */

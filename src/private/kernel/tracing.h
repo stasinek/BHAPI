@@ -7,7 +7,7 @@
 #define KERNEL_TRACING_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <KernelExport.h>
 
 #include <stdarg.h>

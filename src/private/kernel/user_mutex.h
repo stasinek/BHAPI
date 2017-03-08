@@ -6,7 +6,7 @@
 #define _KERNEL_USER_MUTEX_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #ifdef __cplusplus

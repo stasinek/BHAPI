@@ -6,7 +6,7 @@
 #define _STAGE2_VESA_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct VBEInfoBlock {

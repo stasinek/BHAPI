@@ -1,7 +1,7 @@
 #ifndef CHARACTER_SET_H
 #define CHARACTER_SET_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 namespace BPrivate {
 

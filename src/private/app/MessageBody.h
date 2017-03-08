@@ -67,15 +67,15 @@ public:
     BMessageBody();
     ~BMessageBody();
 
-    bool		AddItem(const char *name, b_type_code type, BMessageItem *item);
+    bool		AddItem(const char *name, type_code type, BMessageItem *item);
     void		RemoveItem(BMessageItem *item);
 
-    b_int32		CountNames() const;
-    b_int32		CountTypes() const;
+     __be_int32		CountNames() const;
+     __be_int32		CountTypes() const;
 
 	size_t		FlattenedSize() const;
 	bool		Flatten(char *buffer, size_t size) const;
-	bool		Flatten(BDataIO *stream, b_size_t *size = NULL) const;
+	bool		Flatten(BDataIO *stream,  __be_size_t *size = NULL) const;
 	bool		Unflatten(const char *buffer, size_t size);
 	bool		Unflatten(BDataIO *stream, size_t size);
 

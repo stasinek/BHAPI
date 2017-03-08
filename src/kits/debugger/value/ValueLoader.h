@@ -7,7 +7,7 @@
 #define VALUE_LOADER_H
 
 
-#include <String.h>
+#include <StringClass.h>
 
 #include <Variant.h>
 

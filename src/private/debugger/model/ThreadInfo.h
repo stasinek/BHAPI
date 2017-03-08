@@ -6,7 +6,7 @@
 #define THREAD_INFO_H
 
 #include <OS.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 class ThreadInfo {

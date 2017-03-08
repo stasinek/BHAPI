@@ -1,6 +1,6 @@
 #include <string.h>
 #include <Catalog.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <CharacterSet.h>
 #include <Debug.h>
 #include "character_sets.h"

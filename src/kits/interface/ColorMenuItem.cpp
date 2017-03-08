@@ -196,14 +196,14 @@ BColorMenuItem::_LeftMargin()
 float
 BColorMenuItem::_Padding()
 {
-	return floorf(std::max(14.0f, be_plain_font->Size() + 2) / 2);
+	return floorf(std::max(14.0f,  __be_plain_font->Size() + 2) / 2);
 }
 
 
 float
 BColorMenuItem::_ColorRectWidth()
 {
-	return floorf(std::max(14.0f, be_plain_font->Size() + 2) * M_PHI);
+	return floorf(std::max(14.0f,  __be_plain_font->Size() + 2) * M_PHI);
 }
 
 

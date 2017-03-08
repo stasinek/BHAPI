@@ -10,7 +10,7 @@
 #define _KERNEL_ARCH_x86_APIC_H
 
 #include <boot/kernel_args.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #define APIC_ENABLE				0x100
 #define APIC_FOCUS				(~(1 << 9))

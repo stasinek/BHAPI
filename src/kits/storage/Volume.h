@@ -43,17 +43,17 @@ public:
     BVolume(const BVolume &from);
     virtual ~BVolume();
 
-	b_status_t	InitCheck() const;
-    b_status_t	SetTo(b_dev_t dev);
+	status_t	InitCheck() const;
+    status_t	SetTo(b_dev_t dev);
 	void		Unset();
 
 	b_dev_t		Device() const;
 
-	b_status_t	GetName(char *name, size_t nameSize) const;
-    b_status_t	GetName(BString *name) const;
-	b_status_t	SetName(const char *name);
+	status_t	GetName(char *name, size_t nameSize) const;
+    status_t	GetName(BString *name) const;
+	status_t	SetName(const char *name);
 
-	b_status_t	GetRootDirectory(BDirectory *dir) const;
+	status_t	GetRootDirectory(BDirectory *dir) const;
 
     bool		operator==(const BVolume &vol) const;
     bool		operator!=(const BVolume &vol) const;

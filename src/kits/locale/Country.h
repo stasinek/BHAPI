@@ -8,8 +8,8 @@
 
 #include <List.h>
 #include <LocaleStrings.h>
-#include <String.h>
-#include <SupportDefs.h>
+#include <StringClass.h>
+#include <Haiku.h>
 
 
 class BBitmap;

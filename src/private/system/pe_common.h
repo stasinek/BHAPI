@@ -9,7 +9,7 @@
 #define _PE_COMMON_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <ByteOrder.h>
 
 

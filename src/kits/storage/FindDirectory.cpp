@@ -49,11 +49,11 @@ extern HINSTANCE b_dll_hinstance;
 
 #include <stdlib.h>
 
-b_status_t b_find_directory(b_directory_which which, BPath *path)
+status_t bhapi::find_directory(bhapi::directory_which which, BPath *path)
 {
 	if(path == NULL) return B_ERROR;
 
-	b_status_t retVal = B_ERROR;
+	status_t retVal = B_ERROR;
 
 #ifdef _WIN32
 	char buffer[B_MAXPATH + 1];

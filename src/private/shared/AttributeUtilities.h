@@ -6,7 +6,7 @@
 #define ATTRIBUTE_UTILITIES_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BNode;

@@ -11,7 +11,7 @@
 #include <image.h>
 #include <Language.h>
 #include <List.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <Locker.h>
 #include <LocaleRoster.h>
 #include <Message.h>

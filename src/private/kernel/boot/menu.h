@@ -6,7 +6,7 @@
 #define KERNEL_BOOT_MENU_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <util/DoublyLinkedList.h>
 
 

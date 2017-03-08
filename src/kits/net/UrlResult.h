@@ -6,7 +6,7 @@
 #define _B_URL_RESULT_H_
 
 
-#include <String.h>
+#include <StringClass.h>
 
 
 class BUrlResult {

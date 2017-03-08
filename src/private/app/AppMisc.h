@@ -9,7 +9,7 @@
 #include <Handler.h>
 #include <Locker.h>
 #include <OS.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct entry_ref;

@@ -6,7 +6,7 @@
 #define TEAM_UI_SETTINGS_FACTORY_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BMessage;

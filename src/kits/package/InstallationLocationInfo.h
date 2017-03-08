@@ -7,7 +7,7 @@
 
 
 #include <Node.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <package/PackageDefs.h>
 #include <package/PackageInfoSet.h>

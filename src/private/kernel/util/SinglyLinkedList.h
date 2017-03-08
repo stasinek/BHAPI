@@ -8,7 +8,7 @@
 #define KERNEL_UTIL_SINGLY_LINKED_LIST_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #ifdef __cplusplus

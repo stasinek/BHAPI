@@ -44,15 +44,15 @@ public:
     BBitmap(const BPixmap *pixmap, bool acceptsViews = false);
     virtual ~BBitmap();
 
-    b_status_t	InitCheck() const;
+    status_t	InitCheck() const;
     bool		IsValid() const;
 
     BRect		Bounds() const;
 
     virtual	void	AddChild(BView *view);
     virtual	bool	RemoveChild(BView *view);
-    b_int32		CountChildren() const;
-    BView		*ChildAt(b_int32 index) const;
+     __be_int32		CountChildren() const;
+    BView		*ChildAt(__be_int32 index) const;
     BView		*FindView(const char *name) const;
     BView		*FindView(BPoint where) const;
     bool		Lock();
@@ -61,8 +61,8 @@ public:
 private:
     friend class BView;
 
-    b_uint32 fRows;
-    b_uint32 fColumns;
+     __be_uint32 fRows;
+     __be_uint32 fColumns;
 
     BGraphicsDrawable *fPixmap;
     BWindow *fWindow;

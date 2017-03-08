@@ -9,7 +9,7 @@
 #define _KERNEL_ARCH_DEBUG_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <arch_debug.h>
 #include <cpu.h>

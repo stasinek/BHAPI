@@ -1,7 +1,7 @@
 #ifndef _B_FORMAT_PARAMETERS_H_
 #define _B_FORMAT_PARAMETERS_H_
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 enum format_alignment {
 	B_ALIGN_FORMAT_LEFT,		// reuse B_ALIGN_LEFT/B_ALIGN_RIGHT?

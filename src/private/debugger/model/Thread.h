@@ -7,7 +7,7 @@
 #define THREAD_H
 
 #include <OS.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <Referenceable.h>
 #include <util/DoublyLinkedList.h>

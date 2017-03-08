@@ -36,7 +36,7 @@ All rights reserved.
 #include <Alert.h>
 #include <Box.h>
 #include <Catalog.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MenuItem.h>
 #include <MessageFilter.h>
 
@@ -141,7 +141,7 @@ SelectionWindow::SelectionWindow(BContainerWindow* window)
 #endif
 
 	font_height fh;
-	be_plain_font->GetHeight(&fh);
+	__be_plain_font->GetHeight(&fh);
 	// Center the checkboxes vertically to the button
 	float topMiddleButton =
 		(fSelectButton->Bounds().Height() / 2 -
@@ -154,7 +154,7 @@ SelectionWindow::SelectionWindow(BContainerWindow* window)
 	float bottomMinWidth = 32 + fSelectButton->Bounds().Width()
 		+ fInverseCheckBox->Bounds().Width()
 		+ fIgnoreCaseCheckBox->Bounds().Width();
-	float topMinWidth = be_plain_font->StringWidth(
+	float topMinWidth =  __be_plain_font->StringWidth(
 		B_TRANSLATE("Name matches wildcard expression:###"));
 	float minWidth = bottomMinWidth > topMinWidth
 		? bottomMinWidth : topMinWidth;

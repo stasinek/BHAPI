@@ -39,7 +39,7 @@ public:
     BColorControl(BPoint leftTop, const char *name, BMessage *message = NULL, bool bufferedDrawing = false);
     virtual ~BColorControl();
 
-    virtual void	SetValue(b_int32 color);
+    virtual void	SetValue(__be_int32 color);
     void		SetValue(bhapi::rgb_color color);
     bhapi::rgb_color	ValueAsColor();
 
@@ -50,7 +50,7 @@ public:
 private:
     BBitmap *fBitmap;
 
-    BRect _MarkFrame(BRect colorFrame, b_uint8 channel);
+    BRect _MarkFrame(BRect colorFrame,  __be_uint8 channel);
     BRect _ColorsFrame();
     BRect _DescriptionFrame();
 

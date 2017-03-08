@@ -21,7 +21,7 @@
 #include <RegistrarDefs.h>
 #include <Resources.h>
 #include <Roster.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 // debugging

@@ -38,7 +38,7 @@ All rights reserved.
 #include <Catalog.h>
 #include <Debug.h>
 #include <FindDirectory.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <Messenger.h>
 #include <NodeMonitor.h>
 #include <Path.h>
@@ -48,7 +48,7 @@ All rights reserved.
 #include <Resources.h>
 #include <Roster.h>
 #include <Screen.h>
-#include <String.h>
+#include <StringClass.h>
 #include <StringList.h>
 #include <Volume.h>
 #include <VolumeRoster.h>
@@ -452,7 +452,7 @@ BDeskWindow::AddWindowContextMenus(BMenu* menu)
 
 	menu->AddItem(tempateMenu);
 	tempateMenu->SetTargetForItems(PoseView());
-	tempateMenu->SetFont(be_plain_font);
+	tempateMenu->SetFont(__be_plain_font);
 
 	menu->AddSeparatorItem();
 

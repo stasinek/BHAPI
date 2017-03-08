@@ -45,7 +45,7 @@ All rights reserved.
 #include <Directory.h>
 #include <File.h>
 #include <Font.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <MenuField.h>
 #include <MessageFormat.h>
 #include <Mime.h>
@@ -243,7 +243,7 @@ OpenParentAndSelectOriginal(const entry_ref* ref)
 	message.AddRef("refs", &parentRef);
 	message.AddData("nodeRefToSelect", B_RAW_TYPE, &node, sizeof(node_ref));
 
-	be_app->PostMessage(&message);
+	__be_app->PostMessage(&message);
 }
 
 
@@ -252,12 +252,12 @@ OpenToolTipWindow(BScreen& screen, BRect rect, const char* name,
 	const char* string, BMessenger target, BMessage* message)
 {
 	font_height fontHeight;
-	be_plain_font->GetHeight(&fontHeight);
+	__be_plain_font->GetHeight(&fontHeight);
 	float height = ceilf(fontHeight.ascent + fontHeight.descent);
 	rect.top = floorf(rect.top + (rect.Height() - height) / 2.0f);
 	rect.bottom = rect.top + height;
 
-	rect.right = rect.left + ceilf(be_plain_font->StringWidth(string)) + 4;
+	rect.right = rect.left + ceilf(__be_plain_font->StringWidth(string)) + 4;
 	if (rect.left < 0)
 		rect.OffsetBy(-rect.left, 0);
 	else if (rect.right > screen.Frame().right)
@@ -434,7 +434,7 @@ BInfoWindow::MessageReceived(BMessage* message)
 			// add a messenger to the launch message that will be used to
 			// dispatch scripting calls from apps to the PoseView
 			refsMessage.AddMessenger("TrackerViewToken", BMessenger(this));
-			be_app->PostMessage(&refsMessage);
+			__be_app->PostMessage(&refsMessage);
 			break;
 		}
 
@@ -582,13 +582,13 @@ BInfoWindow::MessageReceived(BMessage* message)
 				BVolumeRoster().GetBootVolume(&boot);
 				BVolume volume(fModel->NodeRef()->device);
 				if (volume != boot) {
-					TTracker* tracker = dynamic_cast<TTracker*>(be_app);
+					TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 					if (tracker != NULL)
 						tracker->SaveAllPoseLocations();
 
 					BMessage unmountMessage(kUnmountVolume);
 					unmountMessage.AddInt32("device_id", volume.Device());
-					be_app->PostMessage(&unmountMessage);
+					__be_app->PostMessage(&unmountMessage);
 				}
 			}
 			break;
@@ -950,7 +950,7 @@ AttributeView::AttributeView(BRect rect, Model* model)
 				entry_ref entry;
 
 				if (signature && signature[0])
-					err = be_roster->FindApp(signature, &entry);
+					err =  __be_roster->FindApp(signature, &entry);
 
 				if (err != B_OK)
 					result = new BMenuItem(signature, itemMessage);
@@ -1067,7 +1067,7 @@ AttributeView::InitStrings(const Model* model)
 void
 AttributeView::AttachedToWindow()
 {
-	BFont font(be_plain_font);
+	BFont font(__be_plain_font);
 
 	font.SetSpacing(B_BITMAP_SPACING);
 	SetFont(&font);
@@ -1565,7 +1565,7 @@ AttributeView::MouseUp(BPoint where)
 			// add a messenger to the launch message that will be used to
 			// dispatch scripting calls from apps to the PoseView
 			message.AddMessenger("TrackerViewToken", BMessenger(this));
-			be_app->PostMessage(&message);
+			__be_app->PostMessage(&message);
 			fDoubleClick = false;
 		}
 	} else if (fTrackingState == size_track && fSizeRect.Contains(where)) {
@@ -1718,7 +1718,7 @@ AttributeView::Draw(BRect)
 	float lineBase = 0;
 	// Draw the main title if the user is not currently editing it
 	if (fTitleEditView == NULL) {
-		SetFont(be_bold_font);
+		SetFont(__be_bold_font);
 		SetFontSize(kTitleFontHeight);
 		GetFont(&currentFont);
 		currentFont.GetHeight(&fontMetrics);
@@ -1742,7 +1742,7 @@ AttributeView::Draw(BRect)
 	}
 
 	// Draw the attribute font stuff
-	SetFont(be_plain_font);
+	SetFont(__be_plain_font);
 	SetFontSize(kAttribFontHeight);
 	GetFontHeight(&fontMetrics);
 	lineHeight = CurrentFontHeight() + 5;
@@ -2097,7 +2097,7 @@ AttributeView::BuildContextMenu(BMenu* parent)
 	ModelMenuItem* navigationItem = NULL;
 	if (navigate) {
 		navigationItem = new ModelMenuItem(new Model(model),
-			new BNavMenu(model.Name(), B_REFS_RECEIVED, be_app, Window()));
+			new BNavMenu(model.Name(), B_REFS_RECEIVED,  __be_app, Window()));
 
 		// setup a navigation menu item which will dynamically load items
 		// as menu items are traversed
@@ -2114,7 +2114,7 @@ AttributeView::BuildContextMenu(BMenu* parent)
 		BMessage* message = new BMessage(B_REFS_RECEIVED);
 		message->AddRef("refs", &ref);
 		navigationItem->SetMessage(message);
-		navigationItem->SetTarget(be_app);
+		navigationItem->SetTarget(__be_app);
 	}
 
 	parent->AddItem(new BMenuItem(B_TRANSLATE("Open"),
@@ -2165,12 +2165,12 @@ AttributeView::BuildContextMenu(BMenu* parent)
 	parent->AddItem(new BMenuItem(B_TRANSLATE("Permissions"),
 		new BMessage(kPermissionsSelected), 'P'));
 
-	parent->SetFont(be_plain_font);
+	parent->SetFont(__be_plain_font);
 	parent->SetTargetForItems(this);
 
-	// Reset the nav menu to be_app
+	// Reset the nav menu to  __be_app
 	if (navigate)
-		navigationItem->SetTarget(be_app);
+		navigationItem->SetTarget(__be_app);
 	if (sizeItem)
 		sizeItem->SetTarget(Window());
 

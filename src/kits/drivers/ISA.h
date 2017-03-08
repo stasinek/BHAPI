@@ -11,7 +11,7 @@
 #ifndef _ISA_H
 #define _ISA_H
 
-//#include <SupportDefs.h>
+//#include <Haiku.h>
 #include <bus_manager.h>
 
 #ifdef __cplusplus

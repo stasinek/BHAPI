@@ -9,7 +9,7 @@
 #include <EntryList.h>
 #include <Query.h>
 #include <List.h>
-#include <String.h>
+#include <StringClass.h>
 
 
 class BQueryFile : public BEntryList {

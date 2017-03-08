@@ -8,7 +8,7 @@
 
 #include <MediaDefs.h>
 #include <List.h>
-#include <String.h>
+#include <StringClass.h>
 
 struct entry_ref;
 

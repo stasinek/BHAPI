@@ -40,7 +40,7 @@ All rights reserved.
 #include <Application.h>
 #include <Catalog.h>
 #include <Directory.h>
-#include <Locale.h>
+#include <LocaleClass.h>
 #include <Path.h>
 #include <Query.h>
 #include <StopWatch.h>
@@ -84,7 +84,7 @@ BSlowContextMenu::BSlowContextMenu(const char* title)
 {
 	InitIconPreloader();
 
-	SetFont(be_plain_font);
+	SetFont(__be_plain_font);
 	SetTriggersEnabled(false);
 }
 
@@ -423,7 +423,7 @@ BSlowContextMenu::NewModelItem(Model* model, const BMessage* invokeMessage,
 
 	// Truncate the name if necessary
 	BString truncatedString(model->Name());
-	be_plain_font->TruncateString(&truncatedString, B_TRUNCATE_END,
+	__be_plain_font->TruncateString(&truncatedString, B_TRUNCATE_END,
 		BNavMenu::GetMaxMenuWidth());
 
 	ModelMenuItem* item = NULL;

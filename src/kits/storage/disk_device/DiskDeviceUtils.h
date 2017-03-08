@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 namespace BPrivate {

@@ -7,7 +7,7 @@
 
 
 #include <Mime.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BBitmap;

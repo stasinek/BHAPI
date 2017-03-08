@@ -32,7 +32,7 @@
 #define BHAPI_STRING_VIEW_LINE_SPACING	0.25f
 
 
-BStringView::BStringView(BRect frame, const char *name, const char *initial_text, b_uint32 resizeMode, b_uint32 flags)
+BStringView::BStringView(BRect frame, const char *name, const char *initial_text,  __be_uint32 resizeMode,  __be_uint32 flags)
     : BView(frame, name, resizeMode, flags), fTextArray(NULL), fAlignment(B_ALIGN_LEFT), fVerticalAlignment(B_ALIGN_TOP)
 {
 	if(initial_text)
@@ -162,7 +162,7 @@ BStringView::Draw(BRect updateRect)
     SetDrawingMode(B_OP_COPY);
 	SetHighColor(fgColor);
 	SetLowColor(ViewColor());
-	for(b_int32 i = 0; i < fTextArray->CountItems(); i++)
+	for(__be_int32 i = 0; i < fTextArray->CountItems(); i++)
 	{
         const BString *str = fTextArray->ItemAt(i);
 		float strWidth = 0;
@@ -191,7 +191,7 @@ BStringView::Draw(BRect updateRect)
 
 
 void
-BStringView::SetFont(const BFont *font, b_uint8 mask)
+BStringView::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	BFont fontPrev;
 	BFont fontCurr;
@@ -214,7 +214,7 @@ BStringView::GetPreferredSize(float *width, float *height)
 	if(width)
 	{
 		*width = 0;
-		if(fTextArray != NULL) for(b_int32 i = 0; i < fTextArray->CountItems(); i++)
+		if(fTextArray != NULL) for(__be_int32 i = 0; i < fTextArray->CountItems(); i++)
 		{
             const BString *str = fTextArray->ItemAt(i);
 			if(str) *width = max_c(*width, (float)ceil((double)font.StringWidth(str->String())));

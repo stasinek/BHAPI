@@ -6,7 +6,7 @@
 #define _PACKAGE__HPKG__V1__PRIVATE__HAIKU_PACKAGE_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <package/hpkg/HPKGDefs.h>
 

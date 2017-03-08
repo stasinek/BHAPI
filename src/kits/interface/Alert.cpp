@@ -66,7 +66,7 @@ public:
 
     bhapi::alert_type fAlertType;
 	BBitmap *fBitmap;
-	b_uint8 fState;
+	__be_uint8 fState;
 	BInvoker *fInvoker;
 	void *fSem;
 };
@@ -75,11 +75,11 @@ public:
 class BAlertButton : public BButton {
 public:
     BAlertButton(BRect frame, const char *name, const char *label, BMessage *message,
-		     b_uint32 resizeMode, b_uint32 flags, b_uint8 index);
-	virtual b_status_t Invoke(const BMessage *msg);
+		      __be_uint32 resizeMode,  __be_uint32 flags,  __be_uint8 index);
+	virtual status_t Invoke(const BMessage *msg);
 
 private:
-	b_uint8 fIndex;
+	__be_uint8 fIndex;
 };
 
 
@@ -165,14 +165,14 @@ BAlertTypeView::GetPreferredSize(float *width, float *height)
 
 
 BAlertButton::BAlertButton(BRect frame, const char *name, const char *label, BMessage *message,
-			   b_uint32 resizeMode, b_uint32 flags, b_uint8 index)
+			    __be_uint32 resizeMode,  __be_uint32 flags,  __be_uint8 index)
 	: BButton(frame, name, label, message, resizeMode, flags)
 {
 	fIndex = index;
 }
 
 
-b_status_t
+status_t
 BAlertButton::Invoke(const BMessage *msg)
 {
     BAlert *alert = cast_as(Window(), BAlert);
@@ -190,14 +190,14 @@ BAlertButton::Invoke(const BMessage *msg)
 		if(!(alert_view->fInvoker == NULL || alert_view->fInvoker->Message() == NULL))
 		{
 			BMessage aMsg = *(alert_view->fInvoker->Message());
-			aMsg.AddInt32("which", (b_int32)fIndex);
+			aMsg.AddInt32("which", (__be_int32)fIndex);
 			alert_view->fInvoker->Invoke(&aMsg);
 		}
 	}
 	else
 	{
 		alert_view->fState = (0x01 << fIndex);
-		if(alert_view->fSem) bhapi::release_sem_etc(alert_view->fSem, (b_int64)(fIndex + 1), 0);
+		if(alert_view->fSem) bhapi::release_sem_etc(alert_view->fSem, (__be_int64)(fIndex + 1), 0);
 	}
 
 	alert->PostMessage(B_QUIT_REQUESTED);
@@ -231,7 +231,7 @@ BAlert::BAlert(const char *title,
 
 	float max_w = 0, max_h = 20, all_w = 0;
 
-    for(b_uint8 i = 0; i < 3; i++)
+    for(__be_uint8 i = 0; i < 3; i++)
 	{
 		if(fButtons[i] == NULL) continue;
 
@@ -244,7 +244,7 @@ BAlert::BAlert(const char *title,
 	btns_view->ResizeTo(max_c((btnWidth == B_WIDTH_AS_USUAL ? (3 * max_w + 20) : all_w), 200), max_h);
 	BRect btnR = btns_view->Bounds();
 
-    for(b_uint8 i = 2;;)
+    for(__be_uint8 i = 2;;)
 	{
 		if(fButtons[i] == NULL) continue;
 		btnR.left = btnR.right - (btnWidth == B_WIDTH_AS_USUAL ? max_w : fButtons[i]->Frame().Width());
@@ -300,7 +300,7 @@ BAlert::QuitRequested()
 }
 
 
-b_int32
+be_int32
 BAlert::Go(bool could_proxy)
 {
 	if(IsRunning() || Proxy() != this || IsLockedByCurrentThread())
@@ -330,7 +330,7 @@ BAlert::Go(bool could_proxy)
 	SendBehind(NULL);
 	Activate();
 
-	b_int32 retVal = -1;
+	__be_int32 retVal = -1;
 
 	if(Proxy() != this)
 	{
@@ -357,12 +357,12 @@ BAlert::Go(bool could_proxy)
 
 		Unlock();
 
-		b_int64 count = 0;
+		__be_int64 count = 0;
 		if(!(bhapi::acquire_sem(trackingSem) != B_OK ||
 		     bhapi::get_sem_count(trackingSem, &count) != B_OK ||
 		     count < 0 || count > 2))
 		{
-			retVal = (b_int32)count;
+			retVal = (__be_int32)count;
 		}
 		bhapi::delete_sem(trackingSem);
 	}
@@ -371,7 +371,7 @@ BAlert::Go(bool could_proxy)
 }
 
 
-b_status_t
+status_t
 BAlert::Go(BInvoker *invoker)
 {
 	if(IsRunning() || Proxy() != this || IsLockedByCurrentThread())
@@ -396,7 +396,7 @@ BAlert::Go(BInvoker *invoker)
 
 
 BButton*
-BAlert::ButtonAt(b_int32 index) const
+BAlert::ButtonAt(__be_int32 index) const
 {
 	if(index < 0 || index > 2) return NULL;
 	return fButtons[index];

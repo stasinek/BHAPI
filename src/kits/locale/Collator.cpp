@@ -15,7 +15,7 @@
 #include <typeinfo>
 
 #include <UnicodeChar.h>
-#include <String.h>
+#include <StringClass.h>
 #include <Message.h>
 
 #include <unicode/coll.h>

@@ -82,8 +82,8 @@ BBitmap::InitSelf(BRect bounds, bool acceptsViews)
 		return;
 	}
 
-	fColumns = (b_uint32)bounds.IntegerWidth() + 1;
-	fRows = (b_uint32)bounds.IntegerHeight() + 1;
+	fColumns = (__be_uint32)bounds.IntegerWidth() + 1;
+	fRows = (__be_uint32)bounds.IntegerHeight() + 1;
 
 	if(acceptsViews == false)
 	{
@@ -158,7 +158,7 @@ BBitmap::~BBitmap()
 }
 
 
-b_status_t
+status_t
 BBitmap::InitCheck() const
 {
 	return(fPixmap != NULL ? B_OK : B_ERROR);
@@ -194,7 +194,7 @@ BBitmap::RemoveChild(BView *view)
 }
 
 
-b_int32
+be_int32
 BBitmap::CountChildren() const
 {
 	return(fWindow != NULL ? fWindow->CountChildren() : 0);
@@ -202,7 +202,7 @@ BBitmap::CountChildren() const
 
 
 BView*
-BBitmap::ChildAt(b_int32 index) const
+BBitmap::ChildAt(__be_int32 index) const
 {
 	return(fWindow != NULL ? fWindow->ChildAt(index) : NULL);
 }

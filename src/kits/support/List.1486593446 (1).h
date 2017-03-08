@@ -36,13 +36,13 @@
 #ifdef __cplusplus /* Just for C++ */
 class _IMPEXP_BHAPI BList {
 public:
-    // BList(b_int32), BList(b_int32, b_int32):
+    // BList(__be_int32), BList(__be_int32,  __be_int32):
 	// 	The argument "initialAllocSize" is the minimum count to hold in memory.
     // 		Valid range: 1 ~ (B_MAXINT32 - 1)
 	// 		When you pass invalid value to "initialAllocSize", the minimum count just equal to 0.
 	// 	The argument "nullItems" is the count to preallocate NULL items for ReplaceItem().
-    BList(b_int32 initialAllocSize = 0);
-    BList(b_int32 initialAllocSize, b_int32 nullItems);
+    BList(__be_int32 initialAllocSize = 0);
+    BList(__be_int32 initialAllocSize,  __be_int32 nullItems);
 
     // BList(const BList&),operator=(const BList&):
 	// 	The minimum count to hold same as "list" when possible.
@@ -52,32 +52,32 @@ public:
     virtual ~BList();
 
 	bool	AddItem(void *item);
-    bool	AddItem(void *item, b_int32 atIndex);
+    bool	AddItem(void *item,  __be_int32 atIndex);
     bool	AddList(const BList *newItems);
-    bool	AddList(const BList *newItems, b_int32 atIndex);
+    bool	AddList(const BList *newItems,  __be_int32 atIndex);
 
 	// RemoveItem(),RemoveItems(): the item WOULD NOT be destructed yet.
 	bool	RemoveItem(void *item);
-    void	*RemoveItem(b_int32 index);
-    bool	RemoveItems(b_int32 index, b_int32 count);
+    void	*RemoveItem(__be_int32 index);
+    bool	RemoveItems(__be_int32 index,  __be_int32 count);
 
 	// ReplaceItem(): the old item WOULD NOT be destructed yet.
-    bool	ReplaceItem(b_int32 index, void *newItem, void **oldItem = NULL);
+    bool	ReplaceItem(__be_int32 index, void *newItem, void **oldItem = NULL);
 
 	void	MakeEmpty();
 
-    bool	SwapItems(b_int32 indexA, b_int32 indexB);
-    bool	MoveItem(b_int32 fromIndex, b_int32 toIndex);
+    bool	SwapItems(__be_int32 indexA,  __be_int32 indexB);
+    bool	MoveItem(__be_int32 fromIndex,  __be_int32 toIndex);
 
 	void	SortItems(int (*cmp)(const void *a, const void *b));
 
-    void	*ItemAt(b_int32 index) const;
+    void	*ItemAt(__be_int32 index) const;
 	void	*FirstItem() const;
 	void	*LastItem() const;
 
 	bool	HasItem(void *item) const;
-    b_int32	IndexOf(void *item) const;
-    b_int32	CountItems() const;
+     __be_int32	IndexOf(void *item) const;
+     __be_int32	CountItems() const;
 	bool	IsEmpty() const;
 
 	void	DoForEach(bool (*func)(void *data));
@@ -89,11 +89,11 @@ public:
 private:
 	void **fObjects;
 
-    b_int32 fItemCount;
-    b_int32 fItemReal;
-    b_int32 fMinimumCount;
+     __be_int32 fItemCount;
+     __be_int32 fItemReal;
+     __be_int32 fMinimumCount;
 
-    bool _Resize(b_int32 count);
+    bool _Resize(__be_int32 count);
 };
 #endif /* __cplusplus */
 #endif /* __BHAPI_LIST_H__ */

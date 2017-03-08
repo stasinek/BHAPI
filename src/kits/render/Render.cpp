@@ -50,7 +50,7 @@ using namespace bhapi;
 #endif
 
 namespace bhapi {
-extern bool get_arc_12(BPoint &radius, BPoint &start, BPoint &end, b_int32 &x, b_int32 &y, BPoint &radius2, float &deltaNext);
+extern bool get_arc_12(BPoint &radius, BPoint &start, BPoint &end,  __be_int32 &x,  __be_int32 &y, BPoint &radius2, float &deltaNext);
 }
 
 #define SWAP(CLASS, a, b)	\
@@ -67,7 +67,7 @@ public:
 	virtual ~BRenderObject();
 
 	virtual bool	IsValid() const = 0;
-	virtual bool	Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const = 0;
+	virtual bool	Get(__be_int32 *y,  __be_int32 *minX,  __be_int32 *maxX) const = 0;
 	virtual bool	Next() = 0;
 
 	static int	cmp(const void *objectA, const void *objectB);
@@ -94,7 +94,7 @@ BRenderObject::cmp(const void *objectA, const void *objectB)
 	{
 		if(A->IsValid() == false) return 0;
 
-		b_int32 yA, yB;
+		__be_int32 yA, yB;
 		A->Get(&yA, NULL, NULL);
 		B->Get(&yB, NULL, NULL);
 
@@ -111,15 +111,15 @@ public:
 	BRenderLine(BPoint start, BPoint end);
 
 	virtual bool	IsValid() const;
-	virtual bool	Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const;
+	virtual bool	Get(__be_int32 *y,  __be_int32 *minX,  __be_int32 *maxX) const;
 	virtual bool	Next();
 
 private:
 	BLineGenerator fLine;
-	b_int32 fMinX;
-	b_int32 fMaxX;
-	b_int32 fX;
-	b_int32 fY;
+	__be_int32 fMinX;
+	__be_int32 fMaxX;
+	__be_int32 fX;
+	__be_int32 fY;
 	bool fValid;
 };
 
@@ -129,7 +129,7 @@ BRenderLine::BRenderLine(BPoint start, BPoint end)
 {
 	if(start.y > end.y) return;
 
-	b_int32 step, pixels;
+	__be_int32 step, pixels;
 
 	if(fLine.Start(fX, fY, step, pixels, false, 1))
 	{
@@ -148,7 +148,7 @@ BRenderLine::IsValid() const
 
 
 bool
-BRenderLine::Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const
+BRenderLine::Get(__be_int32 *y,  __be_int32 *minX,  __be_int32 *maxX) const
 {
 	if(fValid == false) return false;
 
@@ -165,7 +165,7 @@ BRenderLine::Next()
 {
 	if(fValid == false) return false;
 
-	b_int32 pixels;
+	__be_int32 pixels;
 
 	fY++;
 	if(fLine.Next(fX, pixels) == false) {fValid = false; return false;}
@@ -182,20 +182,20 @@ public:
 	BRenderLine2(BPoint pt0, BPoint pt1, BPoint pt2);
 
 	virtual bool	IsValid() const;
-	virtual bool	Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const;
+	virtual bool	Get(__be_int32 *y,  __be_int32 *minX,  __be_int32 *maxX) const;
 	virtual bool	Next();
 
 private:
 	BLineGenerator fLine1;
 	BLineGenerator fLine2;
 
-	b_int32 fMinX;
-	b_int32 fMaxX;
+	__be_int32 fMinX;
+	__be_int32 fMaxX;
 
-	b_int32 fX1;
-	b_int32 fX2;
-	b_int32 fY1;
-	b_int32 fY2;
+	__be_int32 fX1;
+	__be_int32 fX2;
+	__be_int32 fY1;
+	__be_int32 fY2;
 
 	bool fValid;
 };
@@ -206,7 +206,7 @@ BRenderLine2::BRenderLine2(BPoint pt0, BPoint pt1, BPoint pt2)
 {
 	if(pt0.y > pt1.y || pt1.y > pt2.y) return;
 
-	b_int32 tmp, pixels1, pixels2;
+	__be_int32 tmp, pixels1, pixels2;
 
 	if(fLine1.Start(fX1, fY1, tmp, pixels1, false, 1) && fLine2.Start(fX2, fY2, tmp, pixels2, false, 1))
 	{
@@ -232,7 +232,7 @@ BRenderLine2::IsValid() const
 
 
 bool
-BRenderLine2::Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const
+BRenderLine2::Get(__be_int32 *y,  __be_int32 *minX,  __be_int32 *maxX) const
 {
 	if(fValid == false) return false;
 
@@ -249,7 +249,7 @@ BRenderLine2::Next()
 {
 	if(fValid == false) return false;
 
-	b_int32 pixels1, pixels2;
+	__be_int32 pixels1, pixels2;
 	bool line1_has_next = false;
 
 	fY1++;
@@ -283,28 +283,28 @@ public:
 	BRenderTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge);
 
 	virtual bool	IsValid() const;
-	virtual bool	Get(b_int32 *y, b_int32 *minX, b_int32 *maxX) const;
+	virtual bool	Get(__be_int32 *y,  __be_int32 *minX,  __be_int32 *maxX) const;
 	virtual bool	Next();
 
 private:
 	BLineGenerator fLine1;
-	b_uint8 fFlags;
+	__be_uint8 fFlags;
 
 	bool fStrokeEdge;
 
-	b_int32 fY;
-	b_int32 fY0;
-	b_int32 fY1;
+	__be_int32 fY;
+	__be_int32 fY0;
+	__be_int32 fY1;
 
-	b_int32 fX1;
-	b_int32 fPixels1;
+	__be_int32 fX1;
+	__be_int32 fPixels1;
 };
 
 
 BRenderTriangle::BRenderTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge)
 	: BRenderLine2(pt0, pt1, pt2), fLine1(pt0, pt2), fFlags(0x00), fStrokeEdge(stroke_edge)
 {
-	b_int32 tmp;
+	__be_int32 tmp;
 
 	if(BRenderLine2::Get(&fY0, NULL, NULL) == false || fLine1.Start(fX1, fY1, tmp, fPixels1, false, 1) == false) return;
 	fY = min_c(fY0, fY1);
@@ -321,7 +321,7 @@ BRenderTriangle::IsValid() const
 
 
 bool
-BRenderTriangle::Get(b_int32 *y, b_int32 *_minX, b_int32 *_maxX) const
+BRenderTriangle::Get(__be_int32 *y,  __be_int32 *_minX,  __be_int32 *_maxX) const
 {
 	if(fFlags == 0x00) return false;
 
@@ -329,7 +329,7 @@ BRenderTriangle::Get(b_int32 *y, b_int32 *_minX, b_int32 *_maxX) const
 
 	if(_minX || _maxX)
 	{
-		b_int32 minX = 0, maxX = -1;
+		__be_int32 minX = 0, maxX = -1;
 
 		if(fFlags != 0x03)
 		{
@@ -348,7 +348,7 @@ BRenderTriangle::Get(b_int32 *y, b_int32 *_minX, b_int32 *_maxX) const
 		}
 		else
 		{
-			b_int32 minX0, maxX0;
+			__be_int32 minX0, maxX0;
 			BRenderLine2::Get(NULL, &minX0, &maxX0);
 
 			if(fY < max_c(fY0, fY1))
@@ -450,7 +450,7 @@ BRender::SetHighColor(bhapi::rgb_color highColor)
 
 
 void
-BRender::SetHighColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
+BRender::SetHighColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color color;
 	color.set_to(r, g, b, a);
@@ -473,7 +473,7 @@ BRender::SetLowColor(bhapi::rgb_color lowColor)
 
 
 void
-BRender::SetLowColor(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
+BRender::SetLowColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color color;
 	color.set_to(r, g, b, a);
@@ -517,18 +517,18 @@ BRender::IsSquarePointStyle() const
 
 
 void
-BRender::PutRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::rgb_color color)
+BRender::PutRect(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bhapi::rgb_color color)
 {
 	if(width == 0 || height == 0) return;
 
-	for(b_uint32 i = 0; i < height; i++, y++)
+	for(__be_uint32 i = 0; i < height; i++, y++)
 	{
-		for(b_uint32 j = 0; j < width; j++) PutPixel(x + j, y, color);
+		for(__be_uint32 j = 0; j < width; j++) PutPixel(x + j, y, color);
 	}
 }
 
 
-inline bool _is_pixel_high_color(const bhapi::pattern &pattern, b_int32 x, b_int32 y)
+inline bool _is_pixel_high_color(const bhapi::pattern &pattern,  __be_int32 x,  __be_int32 y)
 {
 	if(pattern == B_SOLID_HIGH) return true;
 	else if(pattern == B_SOLID_LOW) return false;
@@ -536,14 +536,14 @@ inline bool _is_pixel_high_color(const bhapi::pattern &pattern, b_int32 x, b_int
 	x %= 8;
 	y %= 8;
 
-	b_uint8 pat = pattern.data[y];
+	__be_uint8 pat = pattern.data[y];
 	if(pat & (1 << (7 - x))) return true;
 
 	return false;
 }
 
 
-inline bool _is_line_mixed_color(const bhapi::pattern &pattern, b_int32 y, bool &isHighColor)
+inline bool _is_line_mixed_color(const bhapi::pattern &pattern,  __be_int32 y, bool &isHighColor)
 {
 	if(pattern == B_SOLID_HIGH) {isHighColor = true; return false;}
 	else if(pattern == B_SOLID_LOW) {isHighColor = false; return false;}
@@ -561,19 +561,19 @@ inline bool _is_line_mixed_color(const bhapi::pattern &pattern, b_int32 y, bool 
 
 
 void
-BRender::drawPixel(b_int32 x, b_int32 y, bhapi::pattern pattern)
+BRender::drawPixel(__be_int32 x,  __be_int32 y, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
 
-	b_int32 originX = 0, originY = 0;
-	b_uint32 w = 0, h = 0;
+	__be_int32 originX = 0, originY = 0;
+	__be_uint32 w = 0, h = 0;
 	GetFrame(&originX, &originY, &w, &h);
 
-	if(x < originX || y < originY || x > originX + (b_int32)w - 1 ||  y > originY + (b_int32)h - 1) return;
+	if(x < originX || y < originY || x > originX + (__be_int32)w - 1 ||  y > originY + (__be_int32)h - 1) return;
 
 	bhapi::rgb_color src = {0, 0, 0, 255};
 	if(fDrawingMode != B_OP_COPY) GetPixel(x, y, src);
-	b_uint32 srcAlpha = src.alpha;
+	__be_uint32 srcAlpha = src.alpha;
 
 	bhapi::rgb_color color;
 	color.set_to(_is_pixel_high_color(pattern, x, y) ? fHighColor : fLowColor);
@@ -628,9 +628,9 @@ BRender::drawPixel(b_int32 x, b_int32 y, bhapi::pattern pattern)
 
 		case B_OP_BLEND:
 			if(color == B_TRANSPARENT_COLOR || color == fLowColor) return;
-			src.red = (b_uint8)(((b_uint16)color.red + (b_uint16)src.red) / 2U);
-			src.green = (b_uint8)(((b_uint16)color.green + (b_uint16)src.green) / 2U);
-			src.blue = (b_uint8)(((b_uint16)color.blue + (b_uint16)src.blue) / 2U);
+			src.red = (__be_uint8)(((__be_uint16)color.red + (__be_uint16)src.red) / 2U);
+			src.green = (__be_uint8)(((__be_uint16)color.green + (__be_uint16)src.green) / 2U);
+			src.blue = (__be_uint8)(((__be_uint16)color.blue + (__be_uint16)src.blue) / 2U);
 			break;
 
 		case B_OP_MIN:
@@ -665,23 +665,23 @@ BRender::drawPixel(b_int32 x, b_int32 y, bhapi::pattern pattern)
 
 
 void
-BRender::FillRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::pattern pattern)
+BRender::FillRect(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bhapi::pattern pattern)
 {
 	if(width == height && width == 1) {drawPixel(x, y, pattern); return;}
 	if(!IsValid() || width == 0 || height == 0) return;
 
-	b_int32 originX = 0, originY = 0;
-	b_uint32 w = 0, h = 0;
+	__be_int32 originX = 0, originY = 0;
+	__be_uint32 w = 0, h = 0;
 	GetFrame(&originX, &originY, &w, &h);
 
 	BRect r((float)x, (float)y, (float)x + (float)width - 1, (float)y + (float)height - 1);
-	r &= BRect((float)originX, (float)originY, (float)(originX + (b_int32)w - 1), (float)(originY + (b_int32)h - 1));
+	r &= BRect((float)originX, (float)originY, (float)(originX + (__be_int32)w - 1), (float)(originY + (__be_int32)h - 1));
 	if(r.IsValid() == false) return;
 
-	x = (b_int32)r.left;
-	y = (b_int32)r.top;
-	width = (b_uint32)r.Width() + 1;
-	height = (b_uint32)r.Height() + 1;
+	x = (__be_int32)r.left;
+	y = (__be_int32)r.top;
+	width = (__be_uint32)r.Width() + 1;
+	height = (__be_uint32)r.Height() + 1;
 
 	if((pattern == B_SOLID_HIGH || pattern == B_SOLID_LOW) && fDrawingMode == B_OP_COPY)
 	{
@@ -689,7 +689,7 @@ BRender::FillRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::
 		color.set_to(pattern == B_SOLID_HIGH ? fHighColor : fLowColor);
 		PutRect(x, y, width, height, color);
 	}
-	else for(b_uint32 i = 0; i < height; i++, y++)
+	else for(__be_uint32 i = 0; i < height; i++, y++)
 	{
 		if(fDrawingMode == B_OP_COPY)
 		{
@@ -704,7 +704,7 @@ BRender::FillRect(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::
 			}
 		}
 
-		for(b_uint32 j = 0; j < width; j++) drawPixel(x + j, y, pattern);
+		for(__be_uint32 j = 0; j < width; j++) drawPixel(x + j, y, pattern);
 	}
 }
 
@@ -717,22 +717,22 @@ BRender::FillRect(BRect rect, bhapi::pattern pattern)
 	rect.Floor();
 	if(!rect.IsValid()) return;
 
-	FillRect((b_int32)rect.left, (b_int32)rect.top, (b_uint32)rect.Width() + 1, (b_uint32)rect.Height() + 1, pattern);
+	FillRect((__be_int32)rect.left, (__be_int32)rect.top, (__be_uint32)rect.Width() + 1, (__be_uint32)rect.Height() + 1, pattern);
 }
 
 
 void
-BRender::StrokePoint(b_int32 x, b_int32 y, bhapi::pattern pattern)
+BRender::StrokePoint(__be_int32 x,  __be_int32 y, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
 
 	if(fPenSize <= 1)
 	{
-		b_int32 originX = 0, originY = 0;
-		b_uint32 w = 0, h = 0;
+		__be_int32 originX = 0, originY = 0;
+		__be_uint32 w = 0, h = 0;
 		GetFrame(&originX, &originY, &w, &h);
 
-		if(x < originX || y < originY || x > originX + (b_int32)w - 1 ||  y > originY + (b_int32)h - 1) return;
+		if(x < originX || y < originY || x > originX + (__be_int32)w - 1 ||  y > originY + (__be_int32)h - 1) return;
 
 		drawPixel(x, y, pattern);
 	}
@@ -757,16 +757,16 @@ BRender::StrokePoint(BPoint pt, bhapi::pattern pattern)
 
 	if(fPenSize <= 1)
 	{
-		b_int32 x, y, originX = 0, originY = 0;
-		b_uint32 w = 0, h = 0;
+		__be_int32 x, y, originX = 0, originY = 0;
+		__be_uint32 w = 0, h = 0;
 
 		GetFrame(&originX, &originY, &w, &h);
 
 		pt.Floor();
-		x = (b_int32)pt.x;
-		y = (b_int32)pt.y;
+		x = (__be_int32)pt.x;
+		y = (__be_int32)pt.y;
 
-		if(x < originX || y < originY || x > originX + (b_int32)w - 1 ||  y > originY + (b_int32)h - 1) return;
+		if(x < originX || y < originY || x > originX + (__be_int32)w - 1 ||  y > originY + (__be_int32)h - 1) return;
 
 		drawPixel(x, y, pattern);
 	}
@@ -785,7 +785,7 @@ BRender::StrokePoint(BPoint pt, bhapi::pattern pattern)
 
 
 void
-BRender::StrokeLine(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, bhapi::pattern pattern)
+BRender::StrokeLine(__be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1, bhapi::pattern pattern)
 {
 	StrokeLine(BPoint((float)x0 + 0.5f, (float)y0 + 0.5f), BPoint((float)x1 + 0.5f, (float)y1 + 0.5f), pattern);
 }
@@ -809,7 +809,7 @@ BRender::StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern pattern)
 		if(pt0.y > pt1.y) SWAP(BPoint, pt0, pt1); // for compacting with FillTriangle()
 
 		BLineGenerator line(pt0, pt1);
-		b_int32 x, y, step, pixels;
+		__be_int32 x, y, step, pixels;
 
 		if(line.Start(x, y, step, pixels, false, 1) == false) return;
 		do
@@ -822,7 +822,7 @@ BRender::StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern pattern)
 
 
 void
-BRender::StrokeTriangle(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, b_int32 x2, b_int32 y2, bhapi::pattern pattern)
+BRender::StrokeTriangle(__be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1,  __be_int32 x2,  __be_int32 y2, bhapi::pattern pattern)
 {
 	BPoint pts[3];
 	pts[0].Set((float)x0 + 0.5f, (float)y0 + 0.5f);
@@ -844,7 +844,7 @@ BRender::StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern patte
 
 
 void
-BRender::FillTriangle(b_int32 x0, b_int32 y0, b_int32 x1, b_int32 y1, b_int32 x2, b_int32 y2, bool stroke_edge, bhapi::pattern pattern)
+BRender::FillTriangle(__be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1,  __be_int32 x2,  __be_int32 y2, bool stroke_edge, bhapi::pattern pattern)
 {
 	FillTriangle(BPoint((float)x0 + 0.5f, (float)y0 + 0.5f),
 		     BPoint((float)x1 + 0.5f, (float)y1 + 0.5f),
@@ -868,7 +868,7 @@ BRender::FillTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge, bhap
 
 	do
 	{
-		b_int32 y, minX, maxX;
+		__be_int32 y, minX, maxX;
 		if(triangle.Get(&y, &minX, &maxX) == false) break;
 		if(minX <= maxX) FillRect(minX, y, maxX - minX + 1, 1, pattern);
 	} while(triangle.Next());
@@ -876,7 +876,7 @@ BRender::FillTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge, bhap
 
 
 void
-BRender::StrokeEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bhapi::pattern pattern)
+BRender::StrokeEllipse(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bhapi::pattern pattern)
 {
 	if(!IsValid() || width == 0 || height == 0) return;
 
@@ -889,7 +889,7 @@ BRender::StrokeEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bh
 
 
 void
-BRender::FillEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bool stroke_edge, bhapi::pattern pattern)
+BRender::FillEllipse(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bool stroke_edge, bhapi::pattern pattern)
 {
 	if(!IsValid() || width == 0 || height == 0) return;
 
@@ -902,7 +902,7 @@ BRender::FillEllipse(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height, bool
 
 
 void
-BRender::StrokeEllipse(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius, bhapi::pattern pattern)
+BRender::StrokeEllipse(__be_int32 xCenter,  __be_int32 yCenter,  __be_int32 xRadius,  __be_int32 yRadius, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
 
@@ -922,7 +922,7 @@ BRender::StrokeEllipse(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int3
 
 
 void
-BRender::FillEllipse(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius, bool stroke_edge, bhapi::pattern pattern)
+BRender::FillEllipse(__be_int32 xCenter,  __be_int32 yCenter,  __be_int32 xRadius,  __be_int32 yRadius, bool stroke_edge, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
 
@@ -965,13 +965,13 @@ BRender::StrokeEllipse(BRect rect, bhapi::pattern pattern)
 		end.Set(radius.x, 0);
 		radius2.Set(-1, -1);
 
-		b_int32 x, y;
-		b_int32 xCenter, yCenter;
+		__be_int32 x, y;
+		__be_int32 xCenter, yCenter;
 		float deltaNext;
 
 		BPoint center = rect.Center().FloorSelf();
-		xCenter = (b_int32)center.x;
-		yCenter = (b_int32)center.y;
+		xCenter = (__be_int32)center.x;
+		yCenter = (__be_int32)center.y;
 
         while(bhapi::get_arc_12(radius, start, end, x, y, radius2, deltaNext))
 		{
@@ -1004,14 +1004,14 @@ BRender::FillEllipse(BRect rect, bool stroke_edge, bhapi::pattern pattern)
 	end.Set(radius.x, 0);
 	radius2.Set(-1, -1);
 
-	b_int32 x, y, old_x = 0, old_y = 0, last_y = 0;
-	b_int32 xCenter, yCenter;
+	__be_int32 x, y, old_x = 0, old_y = 0, last_y = 0;
+	__be_int32 xCenter, yCenter;
 	float deltaNext;
 	bool first = true;
 
 	BPoint center = rect.Center().FloorSelf();
-	xCenter = (b_int32)center.x;
-	yCenter = (b_int32)center.y;
+	xCenter = (__be_int32)center.x;
+	yCenter = (__be_int32)center.y;
 
 	while(true)
 	{
@@ -1048,8 +1048,8 @@ BRender::FillEllipse(BRect rect, bool stroke_edge, bhapi::pattern pattern)
 
 
 void
-BRender::StrokeArc(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height,
-		   b_int32 startAngle, b_int32 endAngle, bhapi::pattern pattern)
+BRender::StrokeArc(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height,
+		    __be_int32 startAngle,  __be_int32 endAngle, bhapi::pattern pattern)
 {
 	if(!IsValid() || width == 0 || height == 0) return;
 
@@ -1062,8 +1062,8 @@ BRender::StrokeArc(b_int32 x, b_int32 y, b_uint32 width, b_uint32 height,
 
 
 void
-BRender::StrokeArc(b_int32 xCenter, b_int32 yCenter, b_int32 xRadius, b_int32 yRadius,
-		   b_int32 startAngle, b_int32 endAngle, bhapi::pattern pattern)
+BRender::StrokeArc(__be_int32 xCenter,  __be_int32 yCenter,  __be_int32 xRadius,  __be_int32 yRadius,
+		    __be_int32 startAngle,  __be_int32 endAngle, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
 
@@ -1129,7 +1129,7 @@ BRender::StrokeArc(BRect rect, BPoint start, BPoint end, bhapi::pattern pattern)
 	{
 		BArcGenerator arc(rect.Center(), rect.Width() / 2.f, rect.Height() / 2.f, start, end);
 
-		b_int32 x, y, step, pixels, centerY = (b_int32)floor((double)rect.Center().y);
+		__be_int32 x, y, step, pixels, centerY = (__be_int32)floor((double)rect.Center().y);
 		bool firstTime = true;
 		bool both = false;
 
@@ -1150,7 +1150,7 @@ BRender::StrokeArc(BRect rect, BPoint start, BPoint end, bhapi::pattern pattern)
 				FillRect(x, y, 1, 1 + pixels, pattern);
 				if(both)
 				{
-					b_int32 y1 = centerY - (y - centerY) - pixels;
+					__be_int32 y1 = centerY - (y - centerY) - pixels;
 					if(y1 == y + pixels) {y1--; pixels--;}
 					if(pixels > 0) FillRect(x, y1, 1, 1 + pixels, pattern);
 				}
@@ -1160,7 +1160,7 @@ BRender::StrokeArc(BRect rect, BPoint start, BPoint end, bhapi::pattern pattern)
 				FillRect(x, y + pixels, 1, 1 - pixels, pattern);
 				if(both)
 				{
-					b_int32 y1 = centerY - (y - centerY);
+					__be_int32 y1 = centerY - (y - centerY);
 					if(y1 == y) {y1++; pixels++;}
 					if(pixels < 0) FillRect(x, y1, 1, 1 - pixels, pattern);
 				}
@@ -1235,26 +1235,26 @@ BRender::StrokePolygon(const BPolygon *aPolygon, bool closed, bhapi::pattern pat
 
 
 #define INTERSECTS(v, s1, e1, s2, e2)		\
-	(max_c(s1, s2) <= min_c(e1, e2) ? ((v = (((b_int64)min_c(s1, s2)) << 32) | (b_int64)max_c(e1, e2)), true) : false)
-static void include_region(b_int64 *region, b_int32 *count, b_int32 minX, b_int32 maxX)
+	(max_c(s1, s2) <= min_c(e1, e2) ? ((v = (((__be_int64)min_c(s1, s2)) << 32) | (__be_int64)max_c(e1, e2)), true) : false)
+static void include_region(__be_int64 *region,  __be_int32 *count,  __be_int32 minX,  __be_int32 maxX)
 {
 	if(minX > maxX) return;
 
-	b_int32 i = 0;
+	__be_int32 i = 0;
 	while(i < *count)
 	{
-		b_int64 v0 = *(region + i);
+		__be_int64 v0 = *(region + i);
 
-		if(INTERSECTS(v0, (b_int32)(v0 >> 32), (b_int32)(v0 & 0xffffffff), minX, maxX) == false) {i++; continue;}
+		if(INTERSECTS(v0, (__be_int32)(v0 >> 32), (__be_int32)(v0 & 0xffffffff), minX, maxX) == false) {i++; continue;}
 
-		minX = (b_int32)(v0 >> 32);
-		maxX = (b_int32)(v0 & 0xffffffff);
+		minX = (__be_int32)(v0 >> 32);
+		maxX = (__be_int32)(v0 & 0xffffffff);
 
-		if(i < *count - 1) memmove(region + i, region + i + 1, (size_t)(*count - i - 1) * sizeof(b_int64));
+		if(i < *count - 1) memmove(region + i, region + i + 1, (size_t)(*count - i - 1) * sizeof(__be_int64));
 		(*count) -= 1;
 	}
 
-	*(region + ((*count)++)) = (((b_int64)minX) << 32) | (b_int64)maxX;
+	*(region + ((*count)++)) = (((__be_int64)minX) << 32) | (__be_int64)maxX;
 }
 #undef INTERSECTS
 
@@ -1267,29 +1267,29 @@ static void stroke_objects(BRender *render, BList *objects, bhapi::pattern a_pat
 
 	objects->SortItems(BRenderObject::cmp);
 
-	b_int64 *region = (b_int64*)malloc(sizeof(b_int64) * objects->CountItems());
+	__be_int64 *region = (__be_int64*)malloc(sizeof(__be_int64) * objects->CountItems());
 	if(region == NULL)
 	{
-		while((aObject = (BRenderObject*)objects->RemoveItem((b_int32)0)) != NULL) delete aObject;
+		while((aObject = (BRenderObject*)objects->RemoveItem((__be_int32)0)) != NULL) delete aObject;
 		return;
 	}
 
 	while(objects->CountItems() > 0)
 	{
-		b_int32 curY, tmpY, minX, maxX;
-		b_int32 count = 0;
+		__be_int32 curY, tmpY, minX, maxX;
+		__be_int32 count = 0;
 
 		aObject = (BRenderObject*)objects->FirstItem();
 		if(aObject->Get(&curY, &minX, &maxX) == false)
 		{
-			objects->RemoveItem((b_int32)0);
+			objects->RemoveItem((__be_int32)0);
 			delete aObject;
 			continue;
 		}
 
 		include_region(region, &count, minX, maxX);
 
-		for(b_int32 i = 1; i < objects->CountItems(); i++)
+		for(__be_int32 i = 1; i < objects->CountItems(); i++)
 		{
 			aObject = (BRenderObject*)objects->ItemAt(i);
 
@@ -1309,11 +1309,11 @@ static void stroke_objects(BRender *render, BList *objects, bhapi::pattern a_pat
 
 		((BRenderObject*)objects->FirstItem())->Next();
 
-		for(b_int32 i = 0; i < count; i++)
+		for(__be_int32 i = 0; i < count; i++)
 		{
-			b_int64 v = *(region + i);
-			minX = (b_int32)(v >> 32);
-			maxX = (b_int32)(v & 0xffffffff);
+			__be_int64 v = *(region + i);
+			minX = (__be_int32)(v >> 32);
+			maxX = (__be_int32)(v & 0xffffffff);
 
             render->FillRect(minX, curY, maxX - minX + 1, 1, a_pattern);
 		}
@@ -1323,7 +1323,7 @@ static void stroke_objects(BRender *render, BList *objects, bhapi::pattern a_pat
 }
 }
 
-void BRender::StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed, bhapi::pattern pattern)
+void BRender::StrokePolygon(const BPoint *ptArray,  __be_int32 numPts, bool closed, bhapi::pattern pattern)
 {
 	if(!IsValid() || ptArray == NULL || numPts <= 0) return;
 
@@ -1346,7 +1346,7 @@ void BRender::StrokePolygon(const BPoint *ptArray, b_int32 numPts, bool closed, 
 		BList lines;
 		BPoint pt0, pt1;
 
-		for(b_int32 k = 0; k < numPts; k++)
+		for(__be_int32 k = 0; k < numPts; k++)
 		{
 			if(k == numPts - 1 && (closed == false || *(ptArray + k) == *ptArray)) break;
 
@@ -1396,7 +1396,7 @@ static bool b_triangle_contains(BPoint pt0, BPoint pt1, BPoint pt2, BPoint aPt, 
 
 
 void
-BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bhapi::pattern pattern)
+BRender::FillPolygon(const BPoint *ptArray,  __be_int32 numPts, bool stroke_edge, bhapi::pattern pattern)
 {
 	BPoint *aPt = NULL;
 	BPolygon *aPolygon = NULL;
@@ -1421,7 +1421,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
 	BList pts(numPts);
 	bool readyForDraw = true;
 
-	for(b_int32 i = 0; i < numPts; i++)
+	for(__be_int32 i = 0; i < numPts; i++)
 	{
 		if(!(i == 0 || ptArray[i] != ptArray[i - 1])) continue;
 
@@ -1437,14 +1437,14 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
 	BList polygons;
 	BPolygon tmp;
 
-	for(b_int32 i = 2; readyForDraw && i <= pts.CountItems(); i++) // split to polygons
+	for(__be_int32 i = 2; readyForDraw && i <= pts.CountItems(); i++) // split to polygons
 	{
 		if(i < 2) continue;
 
 		sPt = *((BPoint*)pts.ItemAt(i - 1));
 		ePt = (i < pts.CountItems() ? *((BPoint*)pts.ItemAt(i)) : *((BPoint*)pts.FirstItem()));
 
-		for(b_int32 k = i; readyForDraw && k >= 2; k--)
+		for(__be_int32 k = i; readyForDraw && k >= 2; k--)
 		{
 			psPt = *((BPoint*)pts.ItemAt(k - 2));
 			pePt = *((BPoint*)pts.ItemAt(k - 1));
@@ -1453,7 +1453,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
 			   iPt == sPt || (iPt == ePt && i == pts.CountItems())) continue;
 
 			aPolygon = new BPolygon(&iPt, 1);
-			for(b_int32 m = k - 1; m < i; m++)
+			for(__be_int32 m = k - 1; m < i; m++)
 			{
 				aPt = (BPoint*)pts.ItemAt(k - 1);
 				if(aPt == NULL || aPolygon->AddPoints(aPt, 1, false) == false) break;
@@ -1475,7 +1475,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
 		}
 	}
 
-	while((aPt = (BPoint*)pts.RemoveItem((b_int32)0)) != NULL)
+	while((aPt = (BPoint*)pts.RemoveItem((__be_int32)0)) != NULL)
 	{
 		if(readyForDraw) readyForDraw = tmp.AddPoints(aPt, 1, false);
 		delete aPt;
@@ -1485,7 +1485,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
 	BList objects;
 
 	do {
-		if(stroke_edge) for(b_int32 i = 0; readyForDraw && i < aPolygon->CountPoints(); i++)
+		if(stroke_edge) for(__be_int32 i = 0; readyForDraw && i < aPolygon->CountPoints(); i++)
 		{
 			sPt = (*aPolygon)[i];
 			ePt = (*aPolygon)[(i < aPolygon->CountPoints() - 1) ? i + 1 : 0];
@@ -1499,8 +1499,8 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
 		{
 			BPolygon drawingPolygon;
 
-			b_int32 flags[2] = {0, 0};
-			for(b_int32 i = 0; i < aPolygon->CountPoints(); i++)
+			__be_int32 flags[2] = {0, 0};
+			for(__be_int32 i = 0; i < aPolygon->CountPoints(); i++)
 			{
 				sPt = (*aPolygon)[i == 0 ? aPolygon->CountPoints() - 1: i - 1];
 				iPt = (*aPolygon)[i];
@@ -1552,7 +1552,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
 		}
 
 		if(aPolygon != (&tmp)) delete aPolygon;
-	} while((aPolygon = (BPolygon*)polygons.RemoveItem((b_int32)0)) != NULL);
+	} while((aPolygon = (BPolygon*)polygons.RemoveItem((__be_int32)0)) != NULL);
 
 	if(readyForDraw)
 	{
@@ -1561,7 +1561,7 @@ BRender::FillPolygon(const BPoint *ptArray, b_int32 numPts, bool stroke_edge, bh
 	else
 	{
 		BRenderObject *aObject;
-		while((aObject = (BRenderObject*)objects.RemoveItem((b_int32)0)) != NULL) delete aObject;
+		while((aObject = (BRenderObject*)objects.RemoveItem((__be_int32)0)) != NULL) delete aObject;
 	}
 }
 

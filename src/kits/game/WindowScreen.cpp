@@ -19,7 +19,7 @@
 
 #include <Application.h>
 #include <Screen.h>
-#include <String.h>
+#include <StringClass.h>
 
 #include <AppServerLink.h>
 #include <input_globals.h>
@@ -255,7 +255,7 @@ BWindowScreen::Disconnect()
 		_Deactivate();
 	}
 
-	be_app->ShowCursor();
+	__be_app->ShowCursor();
 }
 
 
@@ -704,7 +704,7 @@ BWindowScreen::_Activate()
 			return status;
 	}
 
-	be_app->HideCursor();
+	__be_app->HideCursor();
 
 	SetColorList(fPalette);
 	if (fDebugState && !fDebugFirst) {
@@ -742,7 +742,7 @@ BWindowScreen::_Deactivate()
 	_AssertDisplayMode(fOriginalDisplayMode);
 	_ResetAccelerantHooks();
 
-	be_app->ShowCursor();
+	__be_app->ShowCursor();
 
 	return B_OK;
 }

@@ -8,7 +8,7 @@
 #ifndef KERNEL_BOOT_PLATFORM_UBOOT_UIMAGE_H
 #define KERNEL_BOOT_PLATFORM_UBOOT_UIMAGE_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 /* same type and constant names as U-Boot */
 

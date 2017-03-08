@@ -8,7 +8,7 @@
 #ifndef _MEDIA_DEFS_H
 #define _MEDIA_DEFS_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <Errors.h>
 
 /* Buffer header for audio server */

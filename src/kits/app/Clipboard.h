@@ -44,18 +44,18 @@ public:
 
     const char	*Name() const;
 
-    b_uint32	LocalCount() const;
-    b_uint32	SystemCount() const;
-    b_status_t	StartWatching(const BMessenger &target);
-    b_status_t	StopWatching(const BMessenger &target);
+     __be_uint32	LocalCount() const;
+     __be_uint32	SystemCount() const;
+    status_t	StartWatching(const BMessenger &target);
+    status_t	StopWatching(const BMessenger &target);
 
     bool		Lock();
     void		Unlock();
-    b_int64		CountLocks() const;
+     __be_int64		CountLocks() const;
 
-    b_status_t	Clear();
-    b_status_t	Commit();
-    b_status_t	Revert();
+    status_t	Clear();
+    status_t	Commit();
+    status_t	Revert();
 
     BMessenger	DataSource() const;
     BMessage	*Data() const;

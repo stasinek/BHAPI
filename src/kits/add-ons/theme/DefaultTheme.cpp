@@ -59,23 +59,23 @@ static void draw_scrollbar(struct b_theme_engine *engine,
 static void get_button_preferred_size(struct b_theme_engine *engine,
 				      const BView *view, float *width, float *height,
 				      const char *button_label);
-static b_uint8 should_button_do_focus_flash(struct b_theme_engine *engine, const BView *view);
+static  __be_uint8 should_button_do_focus_flash(struct b_theme_engine *engine, const BView *view);
 static void get_button_border_margins(struct b_theme_engine *engine,
 				      const BView *view, float *left, float *top, float *right, float *bottom);
 static void draw_button_border(struct b_theme_engine *engine,
 			       BView *view, BRect frame,
-			       bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash);
+			       bool button_pushed, bool mouse_inside_button,  __be_uint8 focus_flash);
 static void clear_button_content(struct b_theme_engine *engine,
 				 BView *view, BRect frame,
-				 bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash);
+				 bool button_pushed, bool mouse_inside_button,  __be_uint8 focus_flash);
 static void draw_button_label(struct b_theme_engine *engine,
 			      BView *view, BRect frame,
 			      const char *button_label,
-			      bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash);
+			      bool button_pushed, bool mouse_inside_button,  __be_uint8 focus_flash);
 static void draw_button(struct b_theme_engine *engine,
 			BView *view, BRect frame,
 			const char *button_label,
-			bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash);
+			bool button_pushed, bool mouse_inside_button,  __be_uint8 focus_flash);
 
 b_theme_engine b_default_theme_engine = {
 	NULL,					// custom data
@@ -589,7 +589,7 @@ static void get_button_preferred_size(struct b_theme_engine *engine,
 }
 
 
-static b_uint8 should_button_do_focus_flash(struct b_theme_engine *engine, const BView *view)
+static  __be_uint8 should_button_do_focus_flash(struct b_theme_engine *engine, const BView *view)
 {
 	if(engine != &b_default_theme_engine || view == NULL) return 0;
 	if(view->IsFocus() == false || view->IsEnabled() == false) return 0;
@@ -609,7 +609,7 @@ static void get_button_border_margins(struct b_theme_engine *engine,
 
 static void draw_button_border(struct b_theme_engine *engine,
 			       BView *view, BRect frame,
-			       bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash)
+			       bool button_pushed, bool mouse_inside_button,  __be_uint8 focus_flash)
 {
 	if(engine != &b_default_theme_engine || view == NULL || view->Window() == NULL || frame.IsValid() == false) return;
 
@@ -861,7 +861,7 @@ static void draw_button_border(struct b_theme_engine *engine,
 
 static void clear_button_content(struct b_theme_engine *engine,
 				 BView *view, BRect frame,
-				 bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash)
+				 bool button_pushed, bool mouse_inside_button,  __be_uint8 focus_flash)
 {
 	if(engine != &b_default_theme_engine || view == NULL || view->Window() == NULL || frame.IsValid() == false) return;
 
@@ -896,7 +896,7 @@ static void clear_button_content(struct b_theme_engine *engine,
 static void draw_button_label(struct b_theme_engine *engine,
 			      BView *view, BRect frame,
 			      const char *button_label,
-			      bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash)
+			      bool button_pushed, bool mouse_inside_button,  __be_uint8 focus_flash)
 {
 	if(engine != &b_default_theme_engine || view == NULL || view->Window() == NULL ||
 	   frame.IsValid() == false || button_label == NULL || *button_label == 0) return;
@@ -966,7 +966,7 @@ static void draw_button_label(struct b_theme_engine *engine,
 static void draw_button(struct b_theme_engine *engine,
 			BView *view, BRect frame,
 			const char *button_label,
-			bool button_pushed, bool mouse_inside_button, b_uint8 focus_flash)
+			bool button_pushed, bool mouse_inside_button,  __be_uint8 focus_flash)
 {
 	if(engine != &b_default_theme_engine || view == NULL || view->Window() == NULL) return;
 

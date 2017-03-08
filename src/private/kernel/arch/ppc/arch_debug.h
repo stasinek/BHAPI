@@ -6,7 +6,7 @@
 #define _KERNEL_ARCH_PPC_DEBUG_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct arch_debug_registers {

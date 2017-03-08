@@ -30,7 +30,7 @@
 #include "ScrollBar.h"
 
 #include "../add-ons/theme/ThemeEngine.h"
-#include "../kernel/OS.h"
+#include "../kernel/KERNEL.h"
 #include "../kernel/Debug.h"
 #include "../interface/Window.h"
 #include "../support/Errors.h"
@@ -182,7 +182,7 @@ BScrollBar::GetSteps(float *smallStep, float *largeStep) const
 }
 
 
-b_status_t
+status_t
 BScrollBar::SetTarget(BView *target)
 {
 	if(target == this) return B_ERROR;
@@ -285,7 +285,7 @@ BScrollBar::MouseDown(BPoint where)
 		Window()->UpdateIfNeeded();
 		b_snooze(50000);
 		fTracking = false;
-		b_int8 state = fTrackingState;
+		__be_int8 state = fTrackingState;
 		fTrackingState = 0;
 		Invalidate();
 		doScroll(state);
@@ -305,7 +305,7 @@ BScrollBar::MouseUp(BPoint where)
 
 	if(fTrackingState != 0)
 	{
-		b_int8 state = fTrackingState;
+		__be_int8 state = fTrackingState;
 		fTrackingState = 0;
 		Invalidate();
 
@@ -315,7 +315,7 @@ BScrollBar::MouseUp(BPoint where)
 
 
 void
-BScrollBar::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
+BScrollBar::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 	if(fRangeMin == fRangeMax || IsEnabled() == false) return;
 
@@ -372,7 +372,7 @@ BScrollBar::MouseMoved(BPoint where, b_uint32 code, const BMessage *a_message)
 
 
 void
-BScrollBar::doScroll(b_int8 state)
+BScrollBar::doScroll(__be_int8 state)
 {
 	if(state <= 0 || state > 4) return;
 

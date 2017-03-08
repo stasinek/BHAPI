@@ -9,7 +9,7 @@
 #include <Accelerant.h>
 #include <GraphicsCard.h>
 #include <OS.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <Window.h>
 #include <kernel/image.h>
 

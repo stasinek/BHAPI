@@ -11,7 +11,7 @@
 
 #include <debug.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 template<typename Element, typename Key>

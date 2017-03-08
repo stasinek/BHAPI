@@ -371,7 +371,7 @@
 #define update_disk_device_job_progress				fssh_update_disk_device_job_progress
 #define update_disk_device_job_extra_progress		fssh_update_disk_device_job_extra_progress
 #define set_disk_device_job_error_message			fssh_set_disk_device_job_error_message
-#define update_disk_device_job_interrupt_properties	fssh_update_disk_device_job_interrupt_properties
+#define update_disk_device_jobe_interrupt_properties	fssh_update_disk_device_jobe_interrupt_properties
 
 
 ////////////////////////////////////////////////////////////////////////////////

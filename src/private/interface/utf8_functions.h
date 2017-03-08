@@ -6,7 +6,7 @@
 #define _UTF8_FUNCTIONS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 static inline bool

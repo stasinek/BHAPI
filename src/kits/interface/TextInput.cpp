@@ -18,7 +18,7 @@
 #include <InterfaceDefs.h>
 #include <LayoutUtils.h>
 #include <Message.h>
-#include <String.h>
+#include <StringClass.h>
 #include <TextControl.h>
 #include <TextView.h>
 #include <Window.h>
@@ -176,15 +176,15 @@ _BTextInput_::AlignTextRect()
 	float hInset = 2;
 	float textFontWidth = TextRect().right;
 
-	if (be_control_look != NULL)  {
+	if (__be_control_look != NULL)  {
 		switch (Alignment()) {
 			case B_ALIGN_LEFT:
-				hInset = be_control_look->DefaultLabelSpacing();
+				hInset =  __be_control_look->DefaultLabelSpacing();
 				break;
 
 			case B_ALIGN_RIGHT:
 				hInset  = textRect.right - textFontWidth;
-				hInset -= be_control_look->DefaultLabelSpacing();
+				hInset -=  __be_control_look->DefaultLabelSpacing();
 				break;
 
 			case B_ALIGN_CENTER:

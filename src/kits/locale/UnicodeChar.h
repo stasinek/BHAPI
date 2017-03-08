@@ -1,7 +1,7 @@
 #ifndef _UNICODE_CHAR_H_
 #define _UNICODE_CHAR_H_
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 enum unicode_char_category
 {

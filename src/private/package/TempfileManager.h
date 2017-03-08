@@ -8,8 +8,8 @@
 
 #include <Directory.h>
 #include <Entry.h>
-#include <String.h>
-#include <SupportDefs.h>
+#include <StringClass.h>
+#include <Haiku.h>
 
 
 namespace BPackageKit {

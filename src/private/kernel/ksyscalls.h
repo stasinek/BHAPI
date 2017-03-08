@@ -6,7 +6,7 @@
 #define _KERNEL_KSYSCALLS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 #define MAX_SYSCALL_PARAMETERS	16

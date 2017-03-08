@@ -5,7 +5,7 @@
 #ifndef KERNEL_ARCH_TIMER_H
 #define KERNEL_ARCH_TIMER_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 struct kernel_args;
 

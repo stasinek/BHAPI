@@ -12,7 +12,7 @@
 #define _AUDIO_DRIVER_H
 
 #if !defined(_SUPPORT_DEFS_H)
-#include <SupportDefs.h>
+#include <Haiku.h>
 #endif /* _SUPPORT_DEFS_H */
 #if !defined(_DRIVERS_H)
 #include <Drivers.h>

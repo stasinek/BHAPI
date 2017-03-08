@@ -57,7 +57,7 @@ EXPORTBHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT = &_B_CURSOR_SYSTEM_DEFAULT;
 
 #ifdef BHAPI_BUILD_LIBRARY
 EXPORTBHAPI BList BApplication::sRunnerList;
-EXPORTBHAPI b_bigtime_t BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(0);
+EXPORTBHAPI bigtime_t BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(0);
 #endif // BHAPI_BUILD_LIBRARY
 
 //-----------------------------------------------------------------------------
@@ -136,7 +136,7 @@ BApplication::~BApplication()
     if(fSignature) delete[] fSignature;
 
     hLocker->Lock();
-    for(b_int32 i = 0; i < fModalWindows.CountItems(); i++)
+    for(__be_int32 i = 0; i < fModalWindows.CountItems(); i++)
     {
         BMessenger *tMsgr = (BMessenger*)fModalWindows.ItemAt(i);
         delete tMsgr;
@@ -161,7 +161,7 @@ BApplication::BApplication(const BMessage *from)
 }
 //-----------------------------------------------------------------------------
 
-b_status_t BApplication::Archive(BMessage *into, bool deep) const
+status_t BApplication::Archive(BMessage *into, bool deep) const
 {
     if(!into) return B_ERROR;
 
@@ -176,7 +176,7 @@ b_status_t BApplication::Archive(BMessage *into, bool deep) const
 
 BArchivable*BApplication::Instantiate(const BMessage *from)
 {
-    if(b_validatb_instantiation(from, "BApplication"))
+    if(bhapi::validatb_instantiation(from, "BApplication"))
         return new BApplication(from);
     return NULL;
 }
@@ -210,7 +210,7 @@ void *BApplication::Run()
         if(!fQuit)
         {
             MessageQueue()->Lock();
-            aMsg = MessageQueue()->FindMessage((b_int32)0);
+            aMsg = MessageQueue()->FindMessage((__be_int32)0);
             if(!(aMsg == NULL || aMsg->what != _QUIT_)) fQuit = true;
             MessageQueue()->Unlock();
         }
@@ -237,8 +237,8 @@ void BApplication::dispatch_message_runners()
     }
 
     sRunnerMinimumInterval = B_INT64_CONSTANT(0);
-    b_bigtime_t curTime = b_real_time_clock_usecs();
-    for(b_int32 i = 0; i < sRunnerList.CountItems(); i++)
+    bigtime_t curTime = b_real_time_clock_usecs();
+    for(__be_int32 i = 0; i < sRunnerList.CountItems(); i++)
     {
         BMessageRunner *runner = (BMessageRunner*)sRunnerList.ItemAt(i);
         if(runner == NULL || runner->IsValid() == false || runner->fCount == 0 || runner->fInterval <= B_INT64_CONSTANT(0) ||
@@ -288,7 +288,7 @@ void BApplication::DispatchMessage(BMessage *msg, BHandler *target)
     else if(msg->what == B_APP_CURSOR_REQUESTED && target == this)
     {
         const void *cursor_data = NULL;
-        b_size_t len;
+         __be_size_t len;
         bool show_cursor;
 
         if(msg->FindData("BHAPI:cursor_data", B_ANY_TYPE, &cursor_data, &len))
@@ -350,7 +350,7 @@ void BApplication::Pulse()
 }
 //-----------------------------------------------------------------------------
 
-void BApplication::SetPulseRate(b_bigtime_t rate)
+void BApplication::SetPulseRate(bigtime_t rate)
 {
     if(fPulseRunner == NULL)
     {
@@ -370,7 +370,7 @@ void BApplication::SetPulseRate(b_bigtime_t rate)
 }
 //-----------------------------------------------------------------------------
 
-b_bigtime_t BApplication::PulseRate() const
+bigtime_t BApplication::PulseRate() const
 {
     if(fPulseRunner == NULL) return B_INT64_CONSTANT(-1);
     return fPulseRate;
@@ -431,7 +431,7 @@ void BApplication::MessageReceived(BMessage *msg)
 #if 0
 //-----------------------------------------------------------------------------
 
-b_int32 BApplication::CountLoopers()
+be_int32 BApplication::CountLoopers()
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     BAutolock <BLocker>autolock(hLocker);
@@ -440,7 +440,7 @@ b_int32 BApplication::CountLoopers()
 }
 //-----------------------------------------------------------------------------
 
-BLooper* BApplication::LooperAt(b_int32 index)
+BLooper* BApplication::LooperAt(__be_int32 index)
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     BAutolock <BLocker>autolock(hLocker);
@@ -453,7 +453,7 @@ BLooper* BApplication::LooperAt(b_int32 index)
 
 bool BApplication::quit_all_loopers(bool force)
 {
-    b_int32 index;
+     __be_int32 index;
     BLooper *looper = NULL;
     BLocker *hLocker = bhapi::get_handler_operator_locker();
 
@@ -539,11 +539,11 @@ void BApplication::InitGraphicsEngine()
 
         BPath aPath;
 
-        for(b_int8 i = 0; i < 3; i++)
+        for(__be_int8 i = 0; i < 3; i++)
         {
             if(i < 2)
             {
-                if(b_find_directory(i == 0 ? B_USER_ADDONS_DIRECTORY : B_ADDONS_DIRECTORY, &aPath) != B_OK)
+                if(bhapi::find_directory(i == 0 ? B_USER_ADDONS_DIRECTORY : B_ADDONS_DIRECTORY, &aPath) != B_OK)
                 {
                     BHAPI_DEBUG("[APP]: Unable to find %s.", i == 0 ? "E_USER_ADDONS_DIRECTORY" : "E_ADDONS_DIRECTORY");
                     continue;
@@ -644,7 +644,7 @@ bool BApplication::AddModalWindow(BMessenger &msgr)
 
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     hLocker->Lock();
-    for(b_int32 i = 0; i < fModalWindows.CountItems(); i++)
+    for(__be_int32 i = 0; i < fModalWindows.CountItems(); i++)
     {
         BMessenger *tMsgr = (BMessenger*)fModalWindows.ItemAt(i);
         if(*tMsgr == *aMsgr)
@@ -670,7 +670,7 @@ bool BApplication::RemoveModalWindow(BMessenger &msgr)
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     hLocker->Lock();
-    for(b_int32 i = 0; i < fModalWindows.CountItems(); i++)
+    for(__be_int32 i = 0; i < fModalWindows.CountItems(); i++)
     {
         BMessenger *tMsgr = (BMessenger*)fModalWindows.ItemAt(i);
         if(*tMsgr == msgr)

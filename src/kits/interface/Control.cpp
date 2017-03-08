@@ -32,14 +32,14 @@
 
 #include "../support/StringClass.h"
 #include "../support/Errors.h"
-#include "../kernel/OS.h"
+#include "../kernel/KERNEL.h"
 #include "../app/Looper.h"
 #include "../app/Message.h"
 #include "../interface/Rect.h"
 #include "../interface/View.h"
 
 BControl::BControl(BRect frame, const char *name, const char *label,
-		   BMessage *message, b_uint32 resizeMode, b_uint32 flags)
+		   BMessage *message,  __be_uint32 resizeMode,  __be_uint32 flags)
 	: BView(frame, name, resizeMode, flags), BInvoker(message, NULL, NULL),
 	  fLabel(NULL), fValue(B_CONTROL_OFF), fFocusChanging(false)
 {
@@ -72,7 +72,7 @@ BControl::Label() const
 
 
 void
-BControl::SetValue(b_int32 value)
+BControl::SetValue(__be_int32 value)
 {
 	if(fValue != value)
 	{
@@ -82,21 +82,21 @@ BControl::SetValue(b_int32 value)
 }
 
 
-b_int32
+be_int32
 BControl::Value() const
 {
 	return fValue;
 }
 
 
-b_status_t
+status_t
 BControl::Invoke(const BMessage *aMsg)
 {
 	bool IsNotify = false;
-	b_uint32 kind = InvokeKind(&IsNotify);
+	__be_uint32 kind = InvokeKind(&IsNotify);
       
 	BMessage msg(kind);
-	b_status_t status = B_BAD_VALUE;
+	status_t status = B_BAD_VALUE;
       
 	if(!aMsg && !IsNotify) aMsg = Message();
 
@@ -147,7 +147,7 @@ BControl::MakeFocus(bool focusState)
 
 			fFocusChanging = true;
 			if(Flags() & B_UPDATE_WITH_REGION)
-				for(b_int32 i = 0; i < aRegion.CountRects(); i++) Draw(aRegion.RectAt(i));
+				for(__be_int32 i = 0; i < aRegion.CountRects(); i++) Draw(aRegion.RectAt(i));
 			else
 				Draw(aRegion.Frame());
 			fFocusChanging = false;
@@ -164,7 +164,7 @@ BControl::IsFocusChanging() const
 
 
 void
-BControl::SetValueNoUpdate(b_int32 value)
+BControl::SetValueNoUpdate(__be_int32 value)
 {
 	fValue = value;
 }

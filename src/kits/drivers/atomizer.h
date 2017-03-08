@@ -5,7 +5,7 @@
 #ifndef _ATOMIZER_H
 #define _ATOMIZER_H
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 #include <module.h>
 
 

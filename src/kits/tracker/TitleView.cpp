@@ -123,8 +123,8 @@ BTitleView::BTitleView(BPoseView* view)
 	SetViewColor(B_TRANSPARENT_COLOR);
 #endif
 
-	BFont font(be_plain_font);
-	font.SetSize(floorf(be_plain_font->Size() * 0.75f));
+	BFont font(__be_plain_font);
+	font.SetSize(floorf(__be_plain_font->Size() * 0.75f));
 	SetFont(&font);
 
 	font_height height;
@@ -244,7 +244,7 @@ BTitleView::Draw(BRect /*updateRect*/, bool useOffscreen, bool updateOnly,
 	view->StrokeLine(bounds.LeftBottom(), bounds.RightBottom());
 	bounds.bottom--;
 
-	be_control_look->DrawButtonBackground(view, bounds, bounds, base, 0,
+	__be_control_look->DrawButtonBackground(view, bounds, bounds, base, 0,
 		BControlLook::B_TOP_BORDER | BControlLook::B_BOTTOM_BORDER);
 
 	int32 count = fTitleList.CountItems();
@@ -312,7 +312,7 @@ BTitleView::MouseDown(BPoint where)
 
 	if (SecondaryMouseButtonDown(modifiers(), buttons)) {
 		BPopUpMenu* menu = new BPopUpMenu("Attributes", false, false);
-		menu->SetFont(be_plain_font);
+		menu->SetFont(__be_plain_font);
 		window->NewAttributeMenu(menu);
 		window->AddMimeTypesToMenu(menu);
 		window->MarkAttributeMenu(menu);
@@ -493,7 +493,7 @@ BColumnTitle::Draw(BView* view, bool pressed)
 		rgb_color base = tint_color(ui_color(B_PANEL_BACKGROUND_COLOR),
 			B_DARKEN_1_TINT);
 
-		be_control_look->DrawButtonBackground(view, rect, rect, base, 0,
+		__be_control_look->DrawButtonBackground(view, rect, rect, base, 0,
 			BControlLook::B_TOP_BORDER | BControlLook::B_BOTTOM_BORDER);
 	}
 

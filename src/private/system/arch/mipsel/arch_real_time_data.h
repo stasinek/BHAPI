@@ -6,7 +6,7 @@
 #define _SYSTEM_ARCH_REAL_TIME_DATA_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 struct arch_real_time_data {

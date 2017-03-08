@@ -308,7 +308,7 @@ BPrintJob::CommitJob()
 
 	// set file attributes
 	app_info appInfo;
-	be_app->GetAppInfo(&appInfo);
+	__be_app->GetAppInfo(&appInfo);
 	const char* printerName = "";
 	fSetupMessage->FindString(PSRV_FIELD_CURRENT_PRINTER, &printerName);
 

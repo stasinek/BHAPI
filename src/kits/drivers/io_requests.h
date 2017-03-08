@@ -9,7 +9,7 @@
 /*! I/O request interface */
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 typedef struct IORequest io_request;

@@ -32,7 +32,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 template<typename Value> class VectorIterator;
 

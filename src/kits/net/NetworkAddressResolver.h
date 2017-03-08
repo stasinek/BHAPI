@@ -8,8 +8,8 @@
 
 #include <ObjectList.h>
 #include <Referenceable.h>
-#include <String.h>
-#include <SupportDefs.h>
+#include <StringClass.h>
+#include <Haiku.h>
 
 
 class BNetworkAddress;

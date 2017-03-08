@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku source-code, All Rights Reserved
  *
@@ -32,99 +32,99 @@
 #ifndef BHAPI_STRING_LIST_H
 #define BHAPI_STRING_LIST_H
 
-#include "../support/SupportDefs.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
+#ifdef __cplusplus
 class BString;
-#include "Flattenable.h"
 #include "List.h"
-IMPEXPBHAPI class BStringList : public BFlattenable {
+#include "Flattenable.h"
+#include "../support/SupportDefs.h"
+class IMPEXPBHAPI BStringList : public BFlattenable {
 public:
-								BStringList(int32 count = 20);
-								BStringList(const BStringList& other);
-	virtual						~BStringList();
+                                BStringList(int32 count = 20);
+                                BStringList(const BStringList& other);
+    virtual						~BStringList();
 
-	// Adding and removing items.
-			bool				Add(const BString& string, int32 index);
-			bool				Add(const BString& string);
-			bool				Add(const BStringList& list, int32 index);
-			bool				Add(const BStringList& list);
+    // Adding and removing items.
+            bool				Add(const BString& string, int32 index);
+            bool				Add(const BString& string);
+            bool				Add(const BStringList& list, int32 index);
+            bool				Add(const BStringList& list);
 
-			bool				Remove(const BString& string,
-									bool ignoreCase = false);
-			bool				Remove(const BStringList& list,
-									bool ignoreCase = false);
-			BString				Remove(int32 index);
-			bool				Remove(int32 index, int32 count);
-			bool				Replace(int32 index, const BString& string);
+            bool				Remove(const BString& string,
+                                    bool ignoreCase = false);
+            bool				Remove(const BStringList& list,
+                                    bool ignoreCase = false);
+            BString				Remove(int32 index);
+            bool				Remove(int32 index, int32 count);
+            bool				Replace(int32 index, const BString& string);
 
-			void				MakeEmpty();
+            void				MakeEmpty();
 
-	// Reorder items
-			void				Sort(bool ignoreCase = false);
-									// TODO: Sort() with custom sort function.
-			bool				Swap(int32 indexA, int32 indexB);
-			bool				Move(int32 fromIndex, int32 toIndex);
+    // Reorder items
+            void				Sort(bool ignoreCase = false);
+                                    // TODO: Sort() with custom sort function.
+            bool				Swap(int32 indexA, int32 indexB);
+            bool				Move(int32 fromIndex, int32 toIndex);
 
-	// Retrieve items
-			BString				StringAt(int32 index) const;
-			BString				First() const;
-			BString				Last() const;
+    // Retrieve items
+            BString				StringAt(int32 index) const;
+            BString				First() const;
+            BString				Last() const;
 
-	// Query
-			bool				HasString(const BString& string,
-									bool ignoreCase = false) const;
-			int32				IndexOf(const BString& string,
-									bool ignoreCase = false) const;
-			int32				CountStrings() const;
-			bool				IsEmpty() const;
+    // Query
+            bool				HasString(const BString& string,
+                                    bool ignoreCase = false) const;
+            int32				IndexOf(const BString& string,
+                                    bool ignoreCase = false) const;
+            int32				CountStrings() const;
+            bool				IsEmpty() const;
 
-			BString				Join(const char* separator, int32 length = -1)
-									const;
+            BString				Join(const char* separator, int32 length = -1)
+                                    const;
 
-	// Iteration
-			void				DoForEach(bool (*func)(const BString& string));
-			void				DoForEach(bool (*func)(const BString& string,
-									void* arg2), void* arg2);
+    // Iteration
+            void				DoForEach(bool (*func)(const BString& string));
+            void				DoForEach(bool (*func)(const BString& string,
+                                    void* arg2), void* arg2);
 
-			BStringList&		operator=(const BStringList& other);
-			bool				operator==(const BStringList& other) const;
-			bool				operator!=(const BStringList& other) const;
+            BStringList&		operator=(const BStringList& other);
+            bool				operator==(const BStringList& other) const;
+            bool				operator!=(const BStringList& other) const;
 
-	// BFlattenable
-	virtual	bool				IsFixedSize() const;
-	virtual	type_code			TypeCode() const;
-	virtual	bool				AllowsTypeCode(type_code code) const;
-    virtual	b_size_t				FlattenedSize() const;
-	virtual	status_t			Flatten(void* buffer, ssize_t size) const;
-	virtual	status_t			Unflatten(type_code code, const void* buffer,
-									ssize_t size);
-
-private:
-			void				_IncrementRefCounts() const;
-			void				_DecrementRefCounts() const;
-
-			BString				_Join(const char* separator, int32 length)
-									const;
+    // BFlattenable
+    virtual	bool				IsFixedSize() const;
+    virtual	type_code			TypeCode() const;
+    virtual	bool				AllowsTypeCode(type_code code) const;
+    virtual	__be_size_t				FlattenedSize() const;
+    virtual	status_t			Flatten(void* buffer, ssize_t size) const;
+    virtual	status_t			Unflatten(type_code code, const void* buffer,
+                                    ssize_t size);
 
 private:
-			BList				fStrings;
+            void				_IncrementRefCounts() const;
+            void				_DecrementRefCounts() const;
+
+            BString				_Join(const char* separator, int32 length)
+                                    const;
+
+private:
+            BList				fStrings;
 };
 
 
-inline bool
-BStringList::HasString(const BString& string, bool ignoreCase) const
+inline bool BStringList::HasString(const BString& string, bool ignoreCase) const
 {
-	return IndexOf(string, ignoreCase) >= 0;
+    return IndexOf(string, ignoreCase) >= 0;
 }
 
-
-inline bool
-BStringList::operator!=(const BStringList& other) const
+inline bool BStringList::operator!=(const BStringList& other) const
 {
-	return !(*this == other);
-};
+    return !(*this == other);
+}
+#endif
+
 #ifdef __cplusplus
 }
 #endif

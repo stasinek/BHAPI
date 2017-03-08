@@ -8,7 +8,7 @@
 
 #include <map>
 
-#include <String.h>
+#include <StringClass.h>
 #include <ObjectList.h>
 #include <MessagePrivate.h>
 

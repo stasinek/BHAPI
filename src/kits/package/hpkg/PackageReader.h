@@ -6,7 +6,7 @@
 #define _PACKAGE__HPKG__PACKAGE_READER_H_
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 class BPositionIO;

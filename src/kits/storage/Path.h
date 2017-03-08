@@ -49,14 +49,14 @@ public:
 	BPath(const BPath &path);
 	virtual ~BPath();
 
-	b_status_t	SetTo(const char *dir, const char *leaf = NULL, bool normalize = false);
-	b_status_t	Append(const char *path, bool normalize = false);
+	status_t	SetTo(const char *dir, const char *leaf = NULL, bool normalize = false);
+	status_t	Append(const char *path, bool normalize = false);
 	void		Unset();
 
 	const char	*Path() const;
 	const char	*Leaf() const;
 
-	b_status_t	GetParent(BPath *parent) const;
+	status_t	GetParent(BPath *parent) const;
 
 	bool		operator==(const BPath &path) const;
 	bool		operator==(const char *path) const;

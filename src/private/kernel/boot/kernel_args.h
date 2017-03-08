@@ -9,7 +9,7 @@
 #define KERNEL_BOOT_KERNEL_ARGS_H
 
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <boot/elf.h>
 #include <boot/disk_identifier.h>

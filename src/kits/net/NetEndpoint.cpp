@@ -108,7 +108,7 @@ BNetEndpoint::BNetEndpoint(const BMessage *from)
 }
 
 
-b_status_t
+status_t
 BNetEndpoint::Archive(BMessage *into, bool deep) const
 {
 	if(!into) return B_ERROR;
@@ -125,13 +125,13 @@ BNetEndpoint::Archive(BMessage *into, bool deep) const
 BArchivable*
 BNetEndpoint::Instantiate(const BMessage *from)
 {
-	if(b_validatb_instantiation(from, "BNetEndpoint"))
+	if(bhapi::validatb_instantiation(from, "BNetEndpoint"))
 		return new BNetEndpoint(from);
 	return NULL;
 }
 
 
-b_status_t
+status_t
 BNetEndpoint::InitCheck() const
 {
 	return(fSocket == -1 ? B_ERROR : B_OK);
@@ -154,7 +154,7 @@ BNetEndpoint::operator=(const BNetEndpoint &endpoint)
 }
 
 
-b_status_t
+status_t
 BNetEndpoint::SetProtocol(int proto)
 {
 	if(fProtocol != proto)
@@ -173,7 +173,7 @@ BNetEndpoint::SetProtocol(int proto)
 
 
 int
-BNetEndpoint::SetSocketOption(b_int32 level, b_int32 option, const void *data, size_t data_len)
+BNetEndpoint::SetSocketOption(__be_int32 level,  __be_int32 option, const void *data, size_t data_len)
 {
 	if(fSocket == -1) return -1;
 
@@ -183,7 +183,7 @@ BNetEndpoint::SetSocketOption(b_int32 level, b_int32 option, const void *data, s
 	if(retVal == 0 && option == SO_NONBLOCK)
 	{
 		fNonBlocking = false;
-		for(const b_uint8 *tmp = (const b_uint8*)data; data_len > 0; data_len--, tmp--)
+		for(const  __be_uint8 *tmp = (const  __be_uint8*)data; data_len > 0; data_len--, tmp--)
 		{
 			if(*tmp != 0)
 			{
@@ -199,7 +199,7 @@ BNetEndpoint::SetSocketOption(b_int32 level, b_int32 option, const void *data, s
 
 
 int
-BNetEndpoint::GetSocketOption(b_int32 level, b_int32 option, void *data, size_t *data_len) const
+BNetEndpoint::GetSocketOption(__be_int32 level,  __be_int32 option, void *data, size_t *data_len) const
 {
 	if(fSocket == -1) return -1;
 
@@ -207,7 +207,7 @@ BNetEndpoint::GetSocketOption(b_int32 level, b_int32 option, void *data, size_t 
 	if(level != SOL_SOCKET || option != SO_NONBLOCK ||
 	   data == NULL || data_len == NULL || *data_len == 0) return -1;
 	bzero(data, *data_len);
-	if(fNonBlocking) *((b_uint8*)data) = 1;
+	if(fNonBlocking) *((__be_uint8*)data) = 1;
 	return 0;
 #else
 	socklen_t len = (data_len ? (socklen_t)*data_len : 0);
@@ -293,7 +293,7 @@ BNetEndpoint::Close()
 }
 
 
-b_status_t
+status_t
 BNetEndpoint::Bind(const BNetAddress &addr)
 {
 	if(fSocket == -1) return B_ERROR;
@@ -316,15 +316,15 @@ BNetEndpoint::Bind(const BNetAddress &addr)
 }
 
 
-b_status_t
-BNetEndpoint::Bind(b_uint16 port)
+status_t
+BNetEndpoint::Bind(__be_uint16 port)
 {
 	BNetAddress addr(INADDR_LOOPBACK, port);
 	return Bind(addr);
 }
 
 
-b_status_t
+status_t
 BNetEndpoint::Connect(const BNetAddress &addr)
 {
 	if(fSocket == -1) return B_ERROR;
@@ -353,15 +353,15 @@ BNetEndpoint::Connect(const BNetAddress &addr)
 }
 
 
-b_status_t
-BNetEndpoint::Connect(const char *address, b_uint16 port)
+status_t
+BNetEndpoint::Connect(const char *address,  __be_uint16 port)
 {
 	BNetAddress addr(address, port);
 	return BNetEndpoint::Connect(addr);
 }
 
 
-b_status_t
+status_t
 BNetEndpoint::Listen(int backlog)
 {
 	if(fSocket == -1) return B_ERROR;
@@ -370,7 +370,7 @@ BNetEndpoint::Listen(int backlog)
 
 
 BNetEndpoint*
-BNetEndpoint::Accept(b_int32 timeout_msec)
+BNetEndpoint::Accept(__be_int32 timeout_msec)
 {
 	if(fSocket == -1) return NULL;
 
@@ -385,7 +385,7 @@ BNetEndpoint::Accept(b_int32 timeout_msec)
 	else
 	{
 		bool saveState = fNonBlocking;
-		b_bigtime_t saveTime = b_real_time_clock_usecs();
+		bigtime_t saveTime = b_real_time_clock_usecs();
 		SetNonBlocking(true);
 		do
 		{
@@ -412,7 +412,7 @@ BNetEndpoint::Accept(b_int32 timeout_msec)
 }
 
 
-b_int32
+be_int32
 BNetEndpoint::Error() const
 {
 #ifdef _WIN32
@@ -431,7 +431,7 @@ BNetEndpoint::ErrorStr() const
 }
 
 
-b_int32
+be_int32
 BNetEndpoint::Send(const void *buf, size_t len, int flags)
 {
 	if(fSocket == -1 || fLocalAddr.InitCheck() != B_OK) return -1;
@@ -449,14 +449,14 @@ BNetEndpoint::Send(const void *buf, size_t len, int flags)
 }
 
 
-b_int32
+be_int32
 BNetEndpoint::Send(const BNetBuffer &buf, int flags)
 {
 	return BNetEndpoint::Send(buf.Data(), buf.Size(), flags);
 }
 
 
-b_int32
+be_int32
 BNetEndpoint::SendTo(const void *buf, size_t len, const BNetAddress &to, int flags)
 {
 	if(fSocket == -1 || fLocalAddr.InitCheck() != B_OK) return -1;
@@ -468,7 +468,7 @@ BNetEndpoint::SendTo(const void *buf, size_t len, const BNetAddress &to, int fla
 }
 
 
-b_int32
+be_int32
 BNetEndpoint::SendTo(const BNetBuffer &buf, const BNetAddress &to, int flags)
 {
 	return BNetEndpoint::SendTo(buf.Data(), buf.Size(), to, flags);
@@ -476,14 +476,14 @@ BNetEndpoint::SendTo(const BNetBuffer &buf, const BNetAddress &to, int flags)
 
 
 void
-BNetEndpoint::SetTimeout(b_bigtime_t timeout)
+BNetEndpoint::SetTimeout(bigtime_t timeout)
 {
 	if(timeout < 0) timeout = 0;
 	fTimeout = timeout;
 }
 
 
-b_int32
+be_int32
 BNetEndpoint::Receive(void *buf, size_t len, int flags)
 {
 	if(fSocket == -1 || fLocalAddr.InitCheck() != B_OK) return -1;
@@ -492,13 +492,13 @@ BNetEndpoint::Receive(void *buf, size_t len, int flags)
 }
 
 
-b_int32
+be_int32
 BNetEndpoint::Receive(BNetBuffer &buf, size_t len, int flags)
 {
 	void *data = (len != 0 ? malloc(len) : NULL);
 	if(data == NULL) return -1;
 
-	b_int32 bytes = BNetEndpoint::Receive(data, len, flags);
+	__be_int32 bytes = BNetEndpoint::Receive(data, len, flags);
 	if(bytes < 0)
 	{
 		free(data);
@@ -513,7 +513,7 @@ BNetEndpoint::Receive(BNetBuffer &buf, size_t len, int flags)
 }
 
 
-b_int32
+be_int32
 BNetEndpoint::ReceiveFrom(void *buf, size_t len, const BNetAddress &from, int flags)
 {
 	if(fSocket == -1 || fLocalAddr.InitCheck() != B_OK) return -1;
@@ -529,13 +529,13 @@ BNetEndpoint::ReceiveFrom(void *buf, size_t len, const BNetAddress &from, int fl
 }
 
 
-b_int32
+be_int32
 BNetEndpoint::ReceiveFrom(BNetBuffer &buf, size_t len, const BNetAddress &from, int flags)
 {
 	void *data = (len != 0 ? malloc(len) : NULL);
 	if(data == NULL) return -1;
 
-	b_int32 bytes = BNetEndpoint::ReceiveFrom(data, len, from, flags);
+	__be_int32 bytes = BNetEndpoint::ReceiveFrom(data, len, from, flags);
 	if(bytes < 0)
 	{
 		free(data);
@@ -551,7 +551,7 @@ BNetEndpoint::ReceiveFrom(BNetBuffer &buf, size_t len, const BNetAddress &from, 
 
 
 bool
-BNetEndpoint::IsDataPending(b_bigtime_t _timeout)
+BNetEndpoint::IsDataPending(bigtime_t _timeout)
 {
 	if(fSocket == -1) return false;
 

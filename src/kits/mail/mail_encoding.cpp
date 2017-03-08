@@ -8,7 +8,7 @@
 #include <string.h>
 #include <strings.h>
 
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 #include <mail_encoding.h>
 

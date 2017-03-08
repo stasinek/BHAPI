@@ -9,7 +9,7 @@
 #include <FormattingConventions.h>
 #include <Locker.h>
 #include <Language.h>
-#include <SupportDefs.h>
+#include <Haiku.h>
 
 
 // types of fields contained in formatted strings

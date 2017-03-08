@@ -40,24 +40,24 @@ extern EXPORTBHAPI const bhapi::pattern B_SOLID_LOW = bhapi::make_pattern(0x00, 
 extern EXPORTBHAPI const bhapi::rgb_color B_TRANSPARENT_COLOR = bhapi::make_rgb_color(233, 233, 233, 255);
 
 #ifdef BHAPI_BIG_ENDIAN
-extern EXPORTBHAPI const b_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xE9E9E9FF;
+extern EXPORTBHAPI const  __be_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xE9E9E9FF;
 #else
-extern EXPORTBHAPI const b_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xFFE9E9E9;
+extern EXPORTBHAPI const  __be_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xFFE9E9E9;
 #endif
 
-EXPORTBHAPI b_uint8 bhapi::find_index_for_color(b_uint8 r, b_uint8 g, b_uint8 b)
+EXPORTBHAPI  __be_uint8 bhapi::find_index_for_color(__be_uint8 r,  __be_uint8 g,  __be_uint8 b)
 {
 	// RGB: 3-3-2
 	return((r & 0xe0) | ((g >> 3) & 0x1c) | (b >> 6));
 }
 
 
-EXPORTBHAPI bhapi::rgb_color b_find_color_for_index(b_uint8 index)
+EXPORTBHAPI bhapi::rgb_color bhapi::find_color_for_index(__be_uint8 index)
 {
 	// RGB: 3-3-2
-	b_uint8 r = index & 0xe0;
-	b_uint8 g = (index & 0x1c) << 3;
-	b_uint8 b = (index & 0x03) << 6;
+	__be_uint8 r = index & 0xe0;
+	__be_uint8 g = (index & 0x1c) << 3;
+	__be_uint8 b = (index & 0x03) << 6;
     return bhapi::make_rgb_color(r | (r >> 3) | (r >> 6),
 	       			g | (g >> 3) | (g >> 6),
 				b | (b >> 2) | (b >> 4) | (b >> 6),
@@ -68,7 +68,7 @@ EXPORTBHAPI bhapi::rgb_color b_find_color_for_index(b_uint8 index)
 } // extern "C"
 
 
-bhapi::rgb_color& bhapi::rgb_color::mix(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
+bhapi::rgb_color& bhapi::rgb_color::mix(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	if(a == 0xff)
 	{
@@ -76,9 +76,9 @@ bhapi::rgb_color& bhapi::rgb_color::mix(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8
 	}
 	else if(a != 0)
 	{
-		red = (b_uint8)(((b_uint16)red * ((b_uint16)0xff - (b_uint16)a) + (b_uint16)r * (b_uint16)a) / (b_uint16)0xff);
-		green = (b_uint8)(((b_uint16)green * ((b_uint16)0xff - (b_uint16)a) + (b_uint16)g * (b_uint16)a) / (b_uint16)0xff);
-		blue = (b_uint8)(((b_uint16)blue * ((b_uint16)0xff - (b_uint16)a) + (b_uint16)b * (b_uint16)a) / (b_uint16)0xff);
+		red = (__be_uint8)(((__be_uint16)red * ((__be_uint16)0xff - (__be_uint16)a) + (__be_uint16)r * (__be_uint16)a) / (__be_uint16)0xff);
+		green = (__be_uint8)(((__be_uint16)green * ((__be_uint16)0xff - (__be_uint16)a) + (__be_uint16)g * (__be_uint16)a) / (__be_uint16)0xff);
+		blue = (__be_uint8)(((__be_uint16)blue * ((__be_uint16)0xff - (__be_uint16)a) + (__be_uint16)b * (__be_uint16)a) / (__be_uint16)0xff);
 	}
 
 	return *this;
@@ -91,7 +91,7 @@ bhapi::rgb_color& bhapi::rgb_color::mix(const bhapi::rgb_color &o)
 }
 
 
-bhapi::rgb_color& bhapi::rgb_color::mix_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const
+bhapi::rgb_color& bhapi::rgb_color::mix_copy(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a) const
 {
 	bhapi::rgb_color color = *this;
 	return color.mix(r, g, b, a);
@@ -105,7 +105,7 @@ bhapi::rgb_color& bhapi::rgb_color::mix_copy(const bhapi::rgb_color &o) const
 }
 
 
-bhapi::rgb_color& bhapi::rgb_color::disable(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a)
+bhapi::rgb_color& bhapi::rgb_color::disable(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color color;
 	color.set_to(r, g, b, a);
@@ -120,7 +120,7 @@ bhapi::rgb_color& bhapi::rgb_color::disable(const bhapi::rgb_color &background)
 }
 
 
-bhapi::rgb_color& bhapi::rgb_color::disable_copy(b_uint8 r, b_uint8 g, b_uint8 b, b_uint8 a) const
+bhapi::rgb_color& bhapi::rgb_color::disable_copy(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a) const
 {
 	bhapi::rgb_color color = *this;
 	return color.disable(r, g, b, a);
