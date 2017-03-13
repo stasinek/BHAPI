@@ -57,7 +57,7 @@ typedef enum {
 
 #ifdef __cplusplus /* Just for C++ */
 namespace bhapi {
-IMPEXPBHAPI status_t find_directory(bhapi::directory_which which, BPath *path);
+BHAPI_IMPEXP status_t find_directory(bhapi::directory_which which, BPath *path);
 }
 #endif /* __cplusplus */
 

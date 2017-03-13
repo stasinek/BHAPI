@@ -1,71 +1,80 @@
-/*
+﻿/*
  * Copyright 2002-2010 Haiku, Inc. All rights reserved.
  * Distributed under the terms of the MIT License.
  */
-#ifndef _NODE_INFO_H
-#define _NODE_INFO_H
-
-
-#include <BeBuild.h>
+#ifndef BHAPI_NODE_INFO_H
+#define BHAPI_NODE_INFO_H
+//-----------------------------------------------------------------------------
 #include <Entry.h>
 #include <File.h>
 #include <Message.h>
 #include <Mime.h>
 #include <Haiku.h>
-
-
+//-----------------------------------------------------------------------------
+#ifndef BBITMAP_I
 class BBitmap;
+#define BBITMAP_I
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BRESOURCES_I
 class BResources;
-
-
+#define BRESOURCES_I
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BNODE_I
+class BNode;
+#define BNODE_I
+#endif
+//-----------------------------------------------------------------------------
 class BNodeInfo {
 public:
-								BNodeInfo();
-								BNodeInfo(BNode* node);
-	virtual						~BNodeInfo();
+                                BNodeInfo();
+                                BNodeInfo(BNode* node);
+    virtual						~BNodeInfo();
 
-			status_t			SetTo(BNode* node);
+            status_t			SetTo(BNode* node);
 
-			status_t			InitCheck() const;
+            status_t			InitCheck() const;
 
-	virtual status_t			GetType(char* type) const;
-	virtual status_t			SetType(const char* type);
-	virtual status_t			GetIcon(BBitmap* icon,
-									icon_size which = B_LARGE_ICON) const;
-	virtual status_t			SetIcon(const BBitmap* icon,
-									icon_size which = B_LARGE_ICON);
-			status_t			GetIcon(uint8** data, size_t* size,
-									type_code* type) const;
-			status_t			SetIcon(const uint8* data, size_t size);
+    virtual status_t			GetType(char* type) const;
+    virtual status_t			SetType(const char* type);
+    virtual status_t			GetIcon(BBitmap* icon,
+                                    icon_size which = B_LARGE_ICON) const;
+    virtual status_t			SetIcon(const BBitmap* icon,
+                                    icon_size which = B_LARGE_ICON);
+            status_t			GetIcon(uint8** data, size_t* size,
+                                    type_code* type) const;
+            status_t			SetIcon(const uint8* data, size_t size);
 
-			status_t			GetPreferredApp(char* signature,
-									app_verb verb = B_OPEN) const;
-			status_t			SetPreferredApp(const char* signature,
-									app_verb verb = B_OPEN);
-			status_t			GetAppHint(entry_ref* ref) const;
-			status_t			SetAppHint(const entry_ref* ref);
+            status_t			GetPreferredApp(char* signature,
+                                    app_verb verb = B_OPEN) const;
+            status_t			SetPreferredApp(const char* signature,
+                                    app_verb verb = B_OPEN);
+            status_t			GetAppHint(entry_ref* ref) const;
+            status_t			SetAppHint(const entry_ref* ref);
 
-			status_t			GetTrackerIcon(BBitmap* icon,
-									icon_size which = B_LARGE_ICON) const;
-	static	status_t			GetTrackerIcon(const entry_ref* ref,
-									BBitmap* icon,
-									icon_size which = B_LARGE_ICON);
+            status_t			GetTrackerIcon(BBitmap* icon,
+                                    icon_size which = B_LARGE_ICON) const;
+    static	status_t			GetTrackerIcon(const entry_ref* ref,
+                                    BBitmap* icon,
+                                    icon_size which = B_LARGE_ICON);
 private:
-			friend class BAppFileInfo;
-  
-	virtual void				_ReservedNodeInfo1();
-	virtual void				_ReservedNodeInfo2();
-	virtual void				_ReservedNodeInfo3();
+            friend class BAppFileInfo;
 
-								BNodeInfo &operator=(const BNodeInfo& other);
-								BNodeInfo(const BNodeInfo& other);
-									// not implemented
+    virtual void				_ReservedNodeInfo1();
+    virtual void				_ReservedNodeInfo2();
+    virtual void				_ReservedNodeInfo3();
+
+                                BNodeInfo &operator=(const BNodeInfo& other);
+                                BNodeInfo(const BNodeInfo& other);
+                                    // not implemented
 
 private:
-			BNode*				fNode;
-			uint32				_reserved[2];
-			status_t			fCStatus;
+            BNode*				fNode;
+            uint32				_reserved[2];
+            status_t			fCStatus;
 };
-
-
-#endif // _NODE_INFO_H
+//-----------------------------------------------------------------------------
+#define BNODEINFO_I
+#endif // BHAPI_NODE_INFO_H
+//-----------------------------------------------------------------------------

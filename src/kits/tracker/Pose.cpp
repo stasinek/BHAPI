@@ -90,7 +90,7 @@ BPose::BPose(Model* model, BPoseView* view, uint32 clipboardMode,
 
 	if (model->IsVolume()) {
 		fs_info info;
-		dev_t device = model->NodeRef()->device;
+		dev_t device = model->node_ref()->device;
 		BVolume* volume = new BVolume(device);
 		if (volume->InitCheck() == B_OK
 			&& fs_stat_dev(device, &info) == B_OK) {
@@ -383,7 +383,7 @@ BPose::UpdateWasBrokenSymlink(BPoint poseLoc, BPoseView* poseView)
 	if (fModel->LinkTo() != NULL) {
 		BEntry entry(fModel->EntryRef(), true);
 		if (entry.InitCheck() != B_OK) {
-			watch_node(fModel->LinkTo()->NodeRef(), B_STOP_WATCHING, poseView);
+			watch_node(fModel->LinkTo()->node_ref(), B_STOP_WATCHING, poseView);
 			fModel->SetLinkTo(NULL);
 			UpdateIcon(poseLoc, poseView);
 		}

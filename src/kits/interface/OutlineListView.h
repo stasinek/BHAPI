@@ -33,7 +33,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 #include "../interface/ListView.h"
-class IMPEXPBHAPI BOutlineListView : public BListView {
+class BHAPI_IMPEXP BOutlineListView : public BListView {
 public:
     BOutlineListView(BRect frame,
              const char *name,

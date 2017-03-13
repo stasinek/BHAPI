@@ -32,8 +32,8 @@
 
 #ifdef __cplusplus /* Just for C++ */
 class BMessage;
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BArchivable {
+#include <Haiku.h>
+class BHAPI_IMPEXP BArchivable {
 public:
     BArchivable();
     BArchivable(const BMessage *from);
@@ -47,9 +47,9 @@ public:
 namespace bhapi {
 #endif /* __cplusplus */
 typedef BArchivable *(*instantiation_func)(const BMessage*);
-IMPEXPBHAPI bool			validatb_instantiation(const BMessage *from, const char *class_name);
-IMPEXPBHAPI instantiation_func	find_instantiation_func(const char *class_name);
-IMPEXPBHAPI instantiation_func	find_instantiation_func(const BMessage *archive_data);
+BHAPI_IMPEXP bool			validatb_instantiation(const BMessage *from, const char *class_name);
+BHAPI_IMPEXP instantiation_func	find_instantiation_func(const char *class_name);
+BHAPI_IMPEXP instantiation_func	find_instantiation_func(const BMessage *archive_data);
 #ifdef __cplusplus /* Just for C++ */
 }
 #endif /* __cplusplus */

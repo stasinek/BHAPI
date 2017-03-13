@@ -1,3 +1,0 @@
-SubDir HAIKU_TOP src build libgnuregex ;
-
-BuildPlatformStaticLibrary libgnuregex_build.a : regex.c ;

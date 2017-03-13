@@ -30,29 +30,29 @@
 #include "GraphicsDefs.h"
 #include "Point.h"
 
-extern EXPORTBHAPI const BPoint B_ORIGIN(0, 0);
+extern BHAPI_EXPORT const BPoint B_ORIGIN(0, 0);
 
 extern "C" {
-extern EXPORTBHAPI const bhapi::pattern B_SOLID_HIGH = bhapi::make_pattern(0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff);
-extern EXPORTBHAPI const bhapi::pattern B_MIXED_COLORS = bhapi::make_pattern(0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55);
-extern EXPORTBHAPI const bhapi::pattern B_SOLID_LOW = bhapi::make_pattern(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
+extern BHAPI_EXPORT const bhapi::pattern B_SOLID_HIGH = bhapi::make_pattern(0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff);
+extern BHAPI_EXPORT const bhapi::pattern B_MIXED_COLORS = bhapi::make_pattern(0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55);
+extern BHAPI_EXPORT const bhapi::pattern B_SOLID_LOW = bhapi::make_pattern(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
-extern EXPORTBHAPI const bhapi::rgb_color B_TRANSPARENT_COLOR = bhapi::make_rgb_color(233, 233, 233, 255);
+extern BHAPI_EXPORT const bhapi::rgb_color B_TRANSPARENT_COLOR = bhapi::make_rgb_color(233, 233, 233, 255);
 
 #ifdef BHAPI_BIG_ENDIAN
-extern EXPORTBHAPI const  __be_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xE9E9E9FF;
+extern BHAPI_EXPORT const  __be_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xE9E9E9FF;
 #else
-extern EXPORTBHAPI const  __be_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xFFE9E9E9;
+extern BHAPI_EXPORT const  __be_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xFFE9E9E9;
 #endif
 
-EXPORTBHAPI  __be_uint8 bhapi::find_index_for_color(__be_uint8 r,  __be_uint8 g,  __be_uint8 b)
+BHAPI_EXPORT  __be_uint8 bhapi::find_index_for_color(__be_uint8 r,  __be_uint8 g,  __be_uint8 b)
 {
 	// RGB: 3-3-2
 	return((r & 0xe0) | ((g >> 3) & 0x1c) | (b >> 6));
 }
 
 
-EXPORTBHAPI bhapi::rgb_color bhapi::find_color_for_index(__be_uint8 index)
+BHAPI_EXPORT bhapi::rgb_color bhapi::find_color_for_index(__be_uint8 index)
 {
 	// RGB: 3-3-2
 	__be_uint8 r = index & 0xe0;

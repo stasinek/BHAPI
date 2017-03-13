@@ -48,14 +48,14 @@ BStandardIO::~BStandardIO()
 }
 
 
-be_size_t
+__be_size_t
 BStandardIO::Read(void *buffer, size_t size)
 {
 	return read(fFD, buffer, size);
 }
 
 
-be_size_t
+__be_size_t
 BStandardIO::Write(const void *buffer, size_t size)
 {
 	return write(fFD, buffer, size);

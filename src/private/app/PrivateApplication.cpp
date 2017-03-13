@@ -144,7 +144,7 @@ BApplicationConnector::Quit()
 
 
 #ifndef _WIN32
-class LOCALBHAPI BApplicationInitializer {
+class BHAPI_LOCAL BApplicationInitializer {
 public:
     BApplicationInitializer()
     {

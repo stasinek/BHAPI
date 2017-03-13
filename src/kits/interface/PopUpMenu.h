@@ -34,7 +34,7 @@
 #include "../interface/Menu.h"
 #include "../interface/Window.h"
 #include "../support/Locker.h"
-class IMPEXPBHAPI BPopUpMenu : public BMenu {
+class BHAPI_IMPEXP BPopUpMenu : public BMenu {
 public:
     BPopUpMenu(const char *title,
            bool radioMode = true,

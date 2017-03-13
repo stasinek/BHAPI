@@ -47,8 +47,8 @@ class BListItem;
 #include "../support/List.h"
 #include "../interface/View.h"
 #include "../app/Invoker.h"
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BListView : public BView, public BInvoker {
+#include <Haiku.h>
+class BHAPI_IMPEXP BListView : public BView, public BInvoker {
 public:
     BListView(BRect frame,
           const char *name,

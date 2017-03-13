@@ -97,7 +97,7 @@ BInvoker::Message() const
 }
 
 
-be_uint32
+__be_uint32
 BInvoker::Command() const
 {
     return fMessage ? fMessage->what : 0;
@@ -195,7 +195,7 @@ BInvoker::InvokeNotify(const BMessage *msg,  __be_uint32 kind = B_CONTROL_INVOKE
 }
 
 
-be_uint32
+__be_uint32
 BInvoker::InvokeKind(bool* notify)
 {
     if(notify) *notify = fNotifyCalled;

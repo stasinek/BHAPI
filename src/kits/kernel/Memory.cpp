@@ -31,7 +31,7 @@
 
 #include "../kernel/Debug.h"
 
-struct LOCALBHAPI b_mem {
+struct BHAPI_LOCAL b_mem {
 	void (*destroy_func)(void*);
 	void *data;
 };

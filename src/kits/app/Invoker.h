@@ -27,21 +27,36 @@
  * Description: Invoke message to any target
  *
  * --------------------------------------------------------------------------*/
-
 #ifndef BHAPI_INVOKER_H
 #define BHAPI_INVOKER_H
-
+//-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
+//-----------------------------------------------------------------------------
+#ifndef BMESSAGE_I
+#define BMESSAGE_I
 class BMessage;
-class BLooper;
-class BHandler;
-#include "../support/List.h"
-#include "../app/Messenger.h"
 #endif
+//-----------------------------------------------------------------------------
+#ifndef BLOOPER_I
+#define BLOOPER_I
+class BLooper;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BHANDLER_I
+#define BHANDLER_I
+class BHandler;
+#endif
+//-----------------------------------------------------------------------------
+#include "../app/Messenger.h"
+#include "../support/List.h"
+#include <Haiku.h>
+//-----------------------------------------------------------------------------
+#endif
+//-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 namespace bhapi {
 #endif
-#include "../support/SupportDefs.h"
+//-----------------------------------------------------------------------------
 typedef struct invoker_notify_state {
      __be_uint32 kind;
     bool called;
@@ -49,8 +64,10 @@ typedef struct invoker_notify_state {
 #ifdef __cplusplus /* Just for C++ */
 }
 #endif
+//-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
-class IMPEXPBHAPI BInvoker {
+//-----------------------------------------------------------------------------
+class BHAPI_IMPEXP BInvoker {
 public:
     BInvoker();
     BInvoker(BMessage *message,
@@ -109,8 +126,8 @@ private:
 
     BList fNotifyStatesList;
 };
-
+//-----------------------------------------------------------------------------
 #endif /* __cplusplus */
-
+//-----------------------------------------------------------------------------
 #endif /* BHAPI_INVOKER_H */
-
+//-----------------------------------------------------------------------------

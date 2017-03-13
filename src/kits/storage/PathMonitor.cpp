@@ -144,7 +144,7 @@ public:
 		return fEntryRef;
 	}
 
-	const node_ref& NodeRef() const
+	const node_ref& node_ref() const
 	{
 		return fNodeRef;
 	}
@@ -242,12 +242,12 @@ struct AncestorHashDefinition {
 
 	size_t Hash(Ancestor* value) const
 	{
-		return HashKey(value->NodeRef());
+		return HashKey(value->node_ref());
 	}
 
 	bool Compare(const node_ref& key, Ancestor* value) const
 	{
-		return key == value->NodeRef();
+		return key == value->node_ref();
 	}
 
 	Ancestor*& GetLink(Ancestor* value) const
@@ -367,7 +367,7 @@ public:
 		return NULL;
 	}
 
-	const node_ref& NodeRef() const
+	const node_ref& node_ref() const
 	{
 		return fNodeRef;
 	}
@@ -425,12 +425,12 @@ struct NodeHashDefinition {
 
 	size_t Hash(Node* value) const
 	{
-		return HashKey(value->NodeRef());
+		return HashKey(value->node_ref());
 	}
 
 	bool Compare(const node_ref& key, Node* value) const
 	{
-		return key == value->NodeRef();
+		return key == value->node_ref();
 	}
 
 	Node*& GetLink(Node* value) const
@@ -524,7 +524,7 @@ private:
 inline NotOwningEntryRef
 Entry::EntryRef() const
 {
-	return NotOwningEntryRef(fParent->NodeRef(), fName);
+	return NotOwningEntryRef(fParent->node_ref(), fName);
 }
 
 
@@ -991,14 +991,14 @@ PathHandler::_StartWatchingAncestors(Ancestor* startAncestor, bool notify)
 
 	if (notify) {
 		_NotifyEntryCreatedOrRemoved(fBaseAncestor->EntryRef(),
-			fBaseAncestor->NodeRef(), fPath, fBaseAncestor->IsDirectory(),
+			fBaseAncestor->node_ref(), fPath, fBaseAncestor->IsDirectory(),
 			B_ENTRY_CREATED);
 	}
 
 	if (!_WatchRecursively())
 		return B_OK;
 
-	status_t error = _AddNode(fBaseAncestor->NodeRef(),
+	status_t error = _AddNode(fBaseAncestor->node_ref(),
 		fBaseAncestor->IsDirectory(), notify && _WatchFilesOnly(), NULL,
 		&fBaseNode);
 	if (error != B_OK)
@@ -1021,7 +1021,7 @@ PathHandler::_StopWatchingAncestors(Ancestor* ancestor, bool notify)
 		&& (fBaseAncestor->IsDirectory()
 			? !_WatchFilesOnly() : !_WatchDirectoriesOnly())) {
 		_NotifyEntryCreatedOrRemoved(fBaseAncestor->EntryRef(),
-			fBaseAncestor->NodeRef(), fPath, fBaseAncestor->IsDirectory(),
+			fBaseAncestor->node_ref(), fPath, fBaseAncestor->IsDirectory(),
 			B_ENTRY_REMOVED);
 	}
 
@@ -1306,7 +1306,7 @@ PathHandler::_EntryMoved(BMessage* message)
 			_StopWatchingAncestors(fBaseAncestor, notifyFilesRecursively);
 		} else {
 			if (fBaseAncestor->Exists()) {
-				if (fBaseAncestor->NodeRef() == nodeRef
+				if (fBaseAncestor->node_ref() == nodeRef
 					&& isDirectory == fBaseAncestor->IsDirectory()) {
 					return;
 				}
@@ -1391,7 +1391,7 @@ PathHandler::_EntryCreated(const NotOwningEntryRef& entryRef,
 		struct stat ancestorStat;
 		if (BEntry(&ancestor->EntryRef()).GetStat(&ancestorStat) == B_OK
 			&& node_ref(ancestorStat.st_dev, ancestorStat.st_ino)
-				== ancestor->NodeRef()
+				== ancestor->node_ref()
 			&& S_ISDIR(ancestorStat.st_mode) == ancestor->IsDirectory()) {
 			// Our information for the ancestor is up-to-date, so ignore the
 			// notification.
@@ -1484,7 +1484,7 @@ PathHandler::_EntryCreated(const NotOwningEntryRef& entryRef,
 	// Check, if there's a colliding entry.
 	if (Entry* nodeEntry = directory->FindEntry(entryRef.name)) {
 		Node* entryNode = nodeEntry->Node();
-		if (entryNode != NULL && entryNode->NodeRef() == nodeRef)
+		if (entryNode != NULL && entryNode->node_ref() == nodeRef)
 			return true;
 
 		// We're out of sync with reality -- the new entry refers to a different
@@ -1526,7 +1526,7 @@ PathHandler::_EntryRemoved(const NotOwningEntryRef& entryRef,
 			}
 
 			if (node_ref(ancestorStat.st_dev, ancestorStat.st_ino)
-					!= ancestor->NodeRef()
+					!= ancestor->node_ref()
 				|| S_ISDIR(ancestorStat.st_mode) != ancestor->IsDirectory()) {
 				if (!dryRun) {
 					_StopWatchingAncestors(ancestor, true);
@@ -1674,7 +1674,7 @@ PathHandler::_AddNode(const node_ref& nodeRef, bool isDirectory, bool notify,
 
 	// start watching (don't do that for the base node, since we watch it
 	// already via fBaseAncestor)
-	if (nodeRef != fBaseAncestor->NodeRef()) {
+	if (nodeRef != fBaseAncestor->node_ref()) {
 		uint32 flags = (fFlags & WATCH_NODE_FLAG_MASK) | B_WATCH_DIRECTORY;
 		status_t error = sWatchingInterface->WatchNode(&nodeRef, flags, this);
 		if (error != B_OK)
@@ -1736,8 +1736,8 @@ PathHandler::_DeleteNode(Node* node, bool notify)
 		}
 	}
 
-	if (node->NodeRef() != fBaseAncestor->NodeRef())
-		sWatchingInterface->WatchNode(&node->NodeRef(), B_STOP_WATCHING, this);
+	if (node->node_ref() != fBaseAncestor->node_ref())
+		sWatchingInterface->WatchNode(&node->node_ref(), B_STOP_WATCHING, this);
 
 	fNodes.Remove(node);
 	delete node;
@@ -1758,8 +1758,8 @@ PathHandler::_AddEntryIfNeeded(Directory* directory, const char* name,
 {
 	TRACE("%p->PathHandler::_AddEntryIfNeeded(%" B_PRIdDEV ":%" B_PRIdINO
 		":\"%s\", %" B_PRIdDEV ":%" B_PRIdINO
-		", isDirectory: %d, notify: %d)\n", this, directory->NodeRef().device,
-		directory->NodeRef().node, name, nodeRef.device, nodeRef.node,
+		", isDirectory: %d, notify: %d)\n", this, directory->node_ref().device,
+		directory->node_ref().node, name, nodeRef.device, nodeRef.node,
 		isDirectory, notify);
 
 	if (!isDirectory && _WatchDirectoriesOnly()) {
@@ -1830,8 +1830,8 @@ PathHandler::_NotifyEntryCreatedOrRemoved(Entry* entry, int32 opcode) const
 {
 	Node* node = entry->Node();
 	_NotifyEntryCreatedOrRemoved(
-		NotOwningEntryRef(entry->Parent()->NodeRef(), entry->Name()),
-		node->NodeRef(), _EntryPath(entry), node->IsDirectory(), opcode);
+		NotOwningEntryRef(entry->Parent()->node_ref(), entry->Name()),
+		node->node_ref(), _EntryPath(entry), node->IsDirectory(), opcode);
 }
 
 

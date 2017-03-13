@@ -100,7 +100,7 @@ class BPoint;
 #include "../interface/Rect.h"
 #include "../support/List.h"
 #include "GraphicsDefs.h"
-class IMPEXPBHAPI BWindow : public BLooper {
+class BHAPI_IMPEXP BWindow : public BLooper {
 public:
     BWindow(BRect frame,
         const char *title,

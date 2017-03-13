@@ -46,7 +46,7 @@ using namespace bhapi;
 
 class ESubmenuView;
 
-class LOCALBHAPI ESubmenuWindow : public BWindow {
+class BHAPI_LOCAL ESubmenuWindow : public BWindow {
 public:
 	ESubmenuWindow(BPoint where, BMenu *menu);
 	virtual ~ESubmenuWindow();
@@ -319,14 +319,14 @@ BMenu::SubmenuAt(__be_int32 index) const
 }
 
 
-be_int32
+__be_int32
 BMenu::CountItems() const
 {
 	return fMenuItems.CountItems();
 }
 
 
-be_int32
+__be_int32
 BMenu::IndexOf(const BMenuItem *item) const
 {
 	if(!item || item->fMenu != this) return -1;
@@ -334,7 +334,7 @@ BMenu::IndexOf(const BMenuItem *item) const
 }
 
 
-be_int32
+__be_int32
 BMenu::IndexOf(const BMenu *menu) const
 {
 	if(!menu || menu->Superitem() == NULL) return -1;
@@ -1148,7 +1148,7 @@ BMenu::ItemFrame(__be_int32 index) const
 }
 
 
-be_int32
+__be_int32
 BMenu::FindItem(BPoint where)
 {
 	if(!VisibleBounds().Contains(where)) return false;

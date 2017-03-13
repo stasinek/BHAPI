@@ -1418,7 +1418,7 @@ BContainerWindow::MessageReceived(BMessage* message)
 			if (model.InitCheck() != B_OK)
 				break;
 
-			if (*model.NodeRef() == *TargetModel()->NodeRef())
+			if (*model.node_ref() == *TargetModel()->node_ref())
 				PoseView()->DuplicateSelection();
 			else
 				PoseView()->MoveSelectionInto(&model, this, true);
@@ -2169,7 +2169,7 @@ BContainerWindow::MenusBeginning()
 				= PoseView()->SelectionList()->ItemAt(index)->TargetModel();
 			if (model->IsVolume()) {
 				BVolume volume;
-				volume.SetTo(model->NodeRef()->device);
+				volume.SetTo(model->node_ref()->device);
 				if (volume != boot) {
 					ejectableVolumeSelected = true;
 					break;
@@ -2719,7 +2719,7 @@ BContainerWindow::ShowContextMenu(BPoint loc, const entry_ref* ref, BView*)
 						BVolume boot;
 						BVolumeRoster().GetBootVolume(&boot);
 						BVolume volume;
-						volume.SetTo(model.NodeRef()->device);
+						volume.SetTo(model.node_ref()->device);
 						if (volume != boot)
 							ejectableVolumeSelected = true;
 

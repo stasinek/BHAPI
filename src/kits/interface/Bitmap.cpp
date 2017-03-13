@@ -38,7 +38,7 @@
 #include "../render/Pixmap.h"
 #include "../support/Errors.h"
 
-class LOCALBHAPI BBitmapWindow : public BWindow {
+class BHAPI_LOCAL BBitmapWindow : public BWindow {
 public:
 	BBitmapWindow(BRect frame);
 	virtual ~BBitmapWindow();
@@ -194,7 +194,7 @@ BBitmap::RemoveChild(BView *view)
 }
 
 
-be_int32
+__be_int32
 BBitmap::CountChildren() const
 {
 	return(fWindow != NULL ? fWindow->CountChildren() : 0);

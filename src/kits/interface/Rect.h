@@ -32,8 +32,8 @@
 
 #ifdef __cplusplus /* Just for C++ */
 #include "../interface/Point.h"
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BRect {
+#include <Haiku.h>
+class BHAPI_IMPEXP BRect {
 public:
     float left;
     float top;

@@ -32,7 +32,7 @@
 #define BHAPI_SUPPORT_DEFS_H
 
 #include <Haiku.h>
-#include <posix/math.h>
+#include <math.h>
 #define 	max_c(a, b)   ((a)>(b)?(a):(b))
 // 	Returns the maximum of values a and b. More...
 #define 	min_c(a, b)   ((a)>(b)?(b):(a))
@@ -59,7 +59,7 @@
 #endif
 
 // 	Defined to support 'hidden' commands or extensions to classes. More..
-#include <posix/string.h> /* for bzero */
+#include <string.h> /* for bzero */
 #ifndef HAVE_BZERO
     #ifndef bzero
     #define bzero(ptr, len) memset(ptr, 0, len)

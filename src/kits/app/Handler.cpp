@@ -47,7 +47,7 @@
 #include "../../private/app/PrivateHandler.h"
 
 
-class LOCALBHAPI EObserverList {
+class BHAPI_LOCAL EObserverList {
 public:
     EObserverList();
     ~EObserverList();
@@ -63,7 +63,7 @@ private:
 };
 
 
-class LOCALBHAPI EWatchingInfo {
+class BHAPI_LOCAL EWatchingInfo {
 private:
     BMessenger fMessenger;
     BList fWhats;
@@ -107,7 +107,7 @@ public:
 
         for(__be_int32 i = 0; i < fWhats.CountItems(); i++)
         {
-            if(reinterpret_cast<be_uint32>(fWhats.ItemAt(i)) == what)
+            if(reinterpret_cast<__be_uint32>(fWhats.ItemAt(i)) == what)
             {
                 fWhats.RemoveItem(i);
                 break;
@@ -123,7 +123,7 @@ public:
 
         for(__be_int32 i = 0; i < fWhats.CountItems(); i++)
         {
-            if(reinterpret_cast<be_uint32>(fWhats.ItemAt(i)) == what) return true;
+            if(reinterpret_cast<__be_uint32>(fWhats.ItemAt(i)) == what) return true;
         }
         return false;
     }

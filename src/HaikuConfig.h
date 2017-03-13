@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2009-2010, Haiku, Inc. All Rights Reserved.
  * Distributed under the terms of the MIT License.
  */
@@ -12,11 +12,11 @@
    __HAIKU_ARCH_ABI				- name of ABI (as in package architecture)
    __HAIKU_ARCH_<arch>			- defined to 1 for the respective architecture
    __HAIKU_ARCH_BITS			- defined to 32/64 on 32/64 bit architectures
-   								  (defaults to 32)
+                                  (defaults to 32)
    __HAIKU_ARCH_PHYSICAL_BITS	- defined to 32/64 on architectures with 32/64
-   								  (defaults to __HAIKU_ARCH_BITS)
+                                  (defaults to __HAIKU_ARCH_BITS)
    __HAIKU_BIG_ENDIAN			- defined to 1 on big endian architectures
-   								  (defaults to undefined)
+                                  (defaults to undefined)
 */
 #ifdef __INTEL__
 #	define __HAIKU_ARCH					x86
@@ -26,7 +26,7 @@
 #		define __HAIKU_ARCH_ABI			"x86"
 #	endif
 #	define __HAIKU_ARCH_X86				1
-#	define __HAIKU_ARCH_PHYSICAL_BITS	64
+#	define __HAIKU_ARCH_PHYSICAL_BITS	32
 #elif __x86_64__
 #	define __HAIKU_ARCH					x86_64
 #	define __HAIKU_ARCH_ABI				"x86_64"
@@ -62,11 +62,11 @@
 
 /* implied properties:
    __HAIKU_ARCH_{32,64}_BIT		- defined to 1 on 32/64 bit architectures, i.e.
-   								  using 32/64 bit virtual addresses
+                                  using 32/64 bit virtual addresses
    __HAIKU_ARCH_PHYSICAL_BITS	- defined to 32/64 on architectures with 32/64
-   								  bit physical addresses
+                                  bit physical addresses
    __HAIKU_ARCH_PHYSICAL_{32,64}_BIT - defined to 1 on architectures using 64
-   								  bit physical addresses
+                                  bit physical addresses
    __HAIKU_BIG_ENDIAN			- defined to 1 on big endian architectures
 */
 
@@ -104,7 +104,7 @@
 /* architecture specific include macros */
 #define __HAIKU_ARCH_HEADER(header)					<arch/__HAIKU_ARCH/header>
 #define __HAIKU_SUBDIR_ARCH_HEADER(subdir, header)	\
-	<subdir/arch/__HAIKU_ARCH/header>
+    <subdir/arch/__HAIKU_ARCH/header>
 
 /* BeOS R5 binary compatibility (gcc 2 on x86) */
 #if defined(__HAIKU_ARCH_X86) && __GNUC__ == 2
@@ -114,10 +114,10 @@
 /* BeOS R5 compatible types */
 #ifndef __HAIKU_ARCH_64_BIT
 /*#ifdef __HAIKU_ARCH_X86*/
-	/* TODO: This should be "#ifdef __HAIKU_BEOS_COMPATIBLE", but this will
-	   break all gcc 4 C++ optional packages. I.e. switch that at a suitable
-	   time.
-	*/
+    /* TODO: This should be "#ifdef __HAIKU_BEOS_COMPATIBLE", but this will
+       break all gcc 4 C++ optional packages. I.e. switch that at a suitable
+       time.
+    */
 #	define __HAIKU_BEOS_COMPATIBLE_TYPES	1
 #endif
 

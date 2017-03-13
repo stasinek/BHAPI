@@ -32,7 +32,7 @@
  * Author:
  *		Erik Jaesler (erik@cgsoftware.com)
  */
-#ifndef BHAPI_HAIKU)CONSTANTS_H
+#ifndef BHAPI_HAIKU_CONSTANTS_H
 #define BHAPI_HAIKU_CONSTANTS_H
 
 #include "HaikuConfig.h"

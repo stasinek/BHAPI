@@ -531,9 +531,9 @@ extern "C" {
 namespace bhapi {
 #endif
 
-IMPEXPBHAPI bhapi::rgb_color ui_color(bhapi::color_which which);
-IMPEXPBHAPI float ui_get_scrollbar_horizontal_height();
-IMPEXPBHAPI float ui_get_scrollbar_vertical_width();
+BHAPI_IMPEXP bhapi::rgb_color ui_color(bhapi::color_which which);
+BHAPI_IMPEXP float ui_get_scrollbar_horizontal_height();
+BHAPI_IMPEXP float ui_get_scrollbar_vertical_width();
 
 #ifdef __cplusplus /* Just for C++ */
 } /* extern "C" */

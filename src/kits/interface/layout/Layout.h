@@ -40,7 +40,7 @@ class BLayoutItem;
 class BLayoutForm;
 
 
-class IMPEXPBHAPI BLayoutContainer {
+class BHAPI_IMPEXP BLayoutContainer {
 public:
 	BLayoutContainer();
 	virtual ~BLayoutContainer();
@@ -70,7 +70,7 @@ private:
 };
 
 
-class IMPEXPBHAPI BLayoutItem : public BLayoutContainer {
+class BHAPI_IMPEXP BLayoutItem : public BLayoutContainer {
 public:
 	BLayoutItem(BRect frame,  __be_uint32 resizingMode);
 	virtual ~BLayoutItem();
@@ -134,7 +134,7 @@ private:
 };
 
 
-class IMPEXPBHAPI BLayoutForm : public BLayoutItem {
+class BHAPI_IMPEXP BLayoutForm : public BLayoutItem {
 public:
 	BLayoutForm(BRect frame,  __be_uint32 resizingMode,  __be_int32 rows,  __be_int32 columns);
 	virtual ~BLayoutForm();

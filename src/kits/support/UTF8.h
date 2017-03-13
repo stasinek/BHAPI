@@ -33,7 +33,7 @@
 #define BHAPI_UTF8_H
 
 #include "../interface/InterfaceDefs.h"
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 /*  Conversion Flavors */
 enum {
@@ -76,45 +76,45 @@ status_t convert_to_utf8(uint32 sourceEncoding, const char* source, int32* sourc
 status_t convert_from_utf8(uint32 destEncoding, const char* source,
     int32* sourceLength, char* dest, int32* destLength, int32* state,
     char substitute = B_SUBSTITUTE);
-IMPEXPBHAPI unichar16*		utf8_convert_to_unicode(const char *str,  __be_int32 length);
-IMPEXPBHAPI unichar32*		utf8_convert_to_utf32(const char *str,  __be_int32 length);
-IMPEXPBHAPI bool                utf8_is_token(const char *str);
-IMPEXPBHAPI  __be_int32             utf8_strlen(const char *str);
-IMPEXPBHAPI  __be_int32             utf8_strlen_etc(const char *str,  __be_int32 nbytes);
-IMPEXPBHAPI  __be_int32             utf8_strlen_fast(const char *str,  __be_int32 nbytes); /* none checking */
-IMPEXPBHAPI const char*         utf8_at(const char *str,  __be_int32 index,  __be_uint8 *nbytes);
-IMPEXPBHAPI const char*         utf8_next(const char *str,  __be_uint8 *length);
+BHAPI_IMPEXP unichar16*		utf8_convert_to_unicode(const char *str,  __be_int32 length);
+BHAPI_IMPEXP unichar32*		utf8_convert_to_utf32(const char *str,  __be_int32 length);
+BHAPI_IMPEXP bool                utf8_is_token(const char *str);
+BHAPI_IMPEXP  __be_int32             utf8_strlen(const char *str);
+BHAPI_IMPEXP  __be_int32             utf8_strlen_etc(const char *str,  __be_int32 nbytes);
+BHAPI_IMPEXP  __be_int32             utf8_strlen_fast(const char *str,  __be_int32 nbytes); /* none checking */
+BHAPI_IMPEXP const char*         utf8_at(const char *str,  __be_int32 index,  __be_uint8 *nbytes);
+BHAPI_IMPEXP const char*         utf8_next(const char *str,  __be_uint8 *length);
 
-IMPEXPBHAPI char*               utf32_convert_to_utf8(const unichar32 *str,  __be_int32 ulength);
-IMPEXPBHAPI unichar16*		utf32_convert_to_unicode(const unichar32 *str,  __be_int32 ulength);
-IMPEXPBHAPI  __be_int32             utf32_strlen(const unichar32 *ustr);
-IMPEXPBHAPI  __be_int32             utf32_strlen_etc(const unichar32 *ustr,  __be_int32 nchars);
-IMPEXPBHAPI const unichar32*	utf32_at(const unichar32* ustr,  __be_int32 index);
-IMPEXPBHAPI const unichar32*	utf32_next(const unichar32* ustr);
+BHAPI_IMPEXP char*               utf32_convert_to_utf8(const unichar32 *str,  __be_int32 ulength);
+BHAPI_IMPEXP unichar16*		utf32_convert_to_unicode(const unichar32 *str,  __be_int32 ulength);
+BHAPI_IMPEXP  __be_int32             utf32_strlen(const unichar32 *ustr);
+BHAPI_IMPEXP  __be_int32             utf32_strlen_etc(const unichar32 *ustr,  __be_int32 nchars);
+BHAPI_IMPEXP const unichar32*	utf32_at(const unichar32* ustr,  __be_int32 index);
+BHAPI_IMPEXP const unichar32*	utf32_next(const unichar32* ustr);
 
-IMPEXPBHAPI char*               unicode_convert_to_utf8(const unichar16*str,  __be_int32 ulength);
-IMPEXPBHAPI unichar32*		unicode_convert_to_utf32(const unichar16*str,  __be_int32 ulength);
-IMPEXPBHAPI  __be_int32             unicode_strlen(const unichar16*ustr);
-IMPEXPBHAPI  __be_int32             unicode_strlen_etc(const unichar16*ustr,  __be_int32 nchars, bool utf16_style);
-IMPEXPBHAPI const unichar16*	unicode_at(const unichar16* ustr,  __be_int32 index, bool *utf16);
-IMPEXPBHAPI const unichar16*	unicode_next(const unichar16* ustr, bool *utf16);
+BHAPI_IMPEXP char*               unicode_convert_to_utf8(const unichar16*str,  __be_int32 ulength);
+BHAPI_IMPEXP unichar32*		unicode_convert_to_utf32(const unichar16*str,  __be_int32 ulength);
+BHAPI_IMPEXP  __be_int32             unicode_strlen(const unichar16*ustr);
+BHAPI_IMPEXP  __be_int32             unicode_strlen_etc(const unichar16*ustr,  __be_int32 nchars, bool utf16_style);
+BHAPI_IMPEXP const unichar16*	unicode_at(const unichar16* ustr,  __be_int32 index, bool *utf16);
+BHAPI_IMPEXP const unichar16*	unicode_next(const unichar16* ustr, bool *utf16);
 
-IMPEXPBHAPI bool IsInsideGlyph(uchar ch);
-IMPEXPBHAPI uint32 UTF8NextCharLenUnsafe(const char *text);
-IMPEXPBHAPI uint32 UTF8NextCharLen(const char *text);
-IMPEXPBHAPI uint32 UTF8NextCharLen(const char *bytes, size_t length);
-IMPEXPBHAPI uint32 UTF8PreviousCharLen(const char *text, const char *limit);
+BHAPI_IMPEXP bool IsInsideGlyph(uchar ch);
+BHAPI_IMPEXP uint32 UTF8NextCharLenUnsafe(const char *text);
+BHAPI_IMPEXP uint32 UTF8NextCharLen(const char *text);
+BHAPI_IMPEXP uint32 UTF8NextCharLen(const char *bytes, size_t length);
+BHAPI_IMPEXP uint32 UTF8PreviousCharLen(const char *text, const char *limit);
 
 /*!	UTF8CountBytes gets the length (in bytes) of a UTF8 string. Up to
     numChars characters are read. If numChars is a negative value it is ignored
     and the string is read up to the terminating 0.
 */
-IMPEXPBHAPI uint32 UTF8CountBytes(const char *bytes, int32 numChars);
+BHAPI_IMPEXP uint32 UTF8CountBytes(const char *bytes, int32 numChars);
 /*!	UTF8CountChars gets the length (in characters) of a UTF8 string. Up to
     numBytes bytes are read. If numBytes is a negative value it is ignored
     and the string is read up to the terminating 0.
 */
-IMPEXPBHAPI uint32 UTF8CountChars(const char *bytes, int32 numBytes);
+BHAPI_IMPEXP uint32 UTF8CountChars(const char *bytes, int32 numBytes);
 
 /*!	UTF8ToCharCode converts the input that includes potential multibyte chars
     to UTF-32 char codes that can be used by FreeType. The string pointer is
@@ -123,7 +123,7 @@ IMPEXPBHAPI uint32 UTF8CountChars(const char *bytes, int32 numBytes);
     returned. This makes it safe to overruns and enables streamed processing
     of UTF8 strings.
 */
-IMPEXPBHAPI uint32 UTF8ToCharCode(const char **bytes);
+BHAPI_IMPEXP uint32 UTF8ToCharCode(const char **bytes);
 }
 #endif	/* __cplusplus */
 #endif	/* BHAPI_UTF8_H */

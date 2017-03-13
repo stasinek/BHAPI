@@ -35,8 +35,8 @@
 class BMessage;
 #include "../interface/TextEditable.h"
 #include "../interface/Rect.h"
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BTextControl : public BTextEditable {
+#include <Haiku.h>
+class BHAPI_IMPEXP BTextControl : public BTextEditable {
 public:
     BTextControl(BRect frame,
              const char *name,

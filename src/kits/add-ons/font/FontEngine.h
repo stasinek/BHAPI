@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,12 +30,13 @@
 
 #ifndef BHAPI_FONT_ENGINE_H
 #define BHAPI_FONT_ENGINE_H
-#include "../../support/SupportDefs.h"
-#include "../../support/StringArray.h"
-#include "../../interface/Point.h"
+
 #include "../../interface/Font.h"
-#include "../../support/Locker.h"
+#include "../../interface/Point.h"
 #include "../../app/Handler.h"
+#include "../../support/Locker.h"
+#include "../../support/StringArray.h"
+#include "../../support/SupportDefs.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
@@ -50,43 +51,43 @@ typedef enum font_render_mode {
 } font_render_mode;
 
 typedef struct font_detach_callback {
-	void (*callback)(void*);
-	void *data;
+    void (*callback)(void*);
+    void *data;
 } font_detach_callback;
 
-IMPEXPBHAPI BFontEngine*	get_font_engine(const char *family, const char *style);
-IMPEXPBHAPI BFontEngine*	get_font_engine(__be_int32 familyIndex,  __be_int32 styleIndex);
-LOCALBHAPI bool font_init(void);
-IMPEXPBHAPI bool font_add(const char *family, const char *style, BFontEngine *engine);
-IMPEXPBHAPI bool update_font_families(bool);
-LOCALBHAPI bool font_lock(void);
-LOCALBHAPI void font_unlock(void);
-LOCALBHAPI void font_cancel(void);
-LOCALBHAPI bool font_other_init();
-LOCALBHAPI bool update_other_font_families(bool check_only);
-LOCALBHAPI void font_other_cancel();
-IMPEXPBHAPI bool font_freetype2_init(void);
-IMPEXPBHAPI bool font_freetype2_is_valid(void);
-IMPEXPBHAPI void font_freetype2_cancel(void);
+BHAPI_IMPEXP BFontEngine*	get_font_engine(const char *family, const char *style);
+BHAPI_IMPEXP BFontEngine*	get_font_engine(__be_int32 familyIndex,  __be_int32 styleIndex);
+BHAPI_LOCAL bool font_init(void);
+BHAPI_IMPEXP bool font_add(const char *family, const char *style, BFontEngine *engine);
+BHAPI_IMPEXP bool update_font_families(bool);
+BHAPI_LOCAL bool font_lock(void);
+BHAPI_LOCAL void font_unlock(void);
+BHAPI_LOCAL void font_cancel(void);
+BHAPI_LOCAL bool font_other_init();
+BHAPI_LOCAL bool update_other_font_families(bool check_only);
+BHAPI_LOCAL void font_other_cancel();
+BHAPI_IMPEXP bool font_freetype2_init(void);
+BHAPI_IMPEXP bool font_freetype2_is_valid(void);
+BHAPI_IMPEXP void font_freetype2_cancel(void);
 }
 
 using namespace bhapi;
-class IMPEXPBHAPI BFontEngine {
+class BHAPI_IMPEXP BFontEngine {
 public:
     BFontEngine();
     BFontEngine(const char *family, const char *style);
     virtual ~BFontEngine();
 
-	const char* Family() const;
-	const char* Style() const;
+    const char* Family() const;
+    const char* Style() const;
 
-	virtual bool IsValid() const;
+    virtual bool IsValid() const;
 
-	virtual bool IsScalable() const;
+    virtual bool IsScalable() const;
     bool HasFixedSize(__be_int32 *count = NULL) const;
     bool GetFixedSize(float *size,  __be_int32 index = 0) const;
 
-	virtual float StringWidth(const char *string, float size, float spacing = 0,
+    virtual float StringWidth(const char *string, float size, float spacing = 0,
                   float shear = 90, bool bold = false,  __be_int32 length = -1) const;
     float StringWidth(const BString &str, float size, float spacing = 0,
               float shear = 90, bool bold = false,  __be_int32 length = -1) const;
@@ -95,54 +96,54 @@ public:
 
     bhapi::font_render_mode RenderMode() const;
 
-	// ForceFontAliasing: just affected before calling "RenderString"
-	virtual void ForceFontAliasing(bool enable);
+    // ForceFontAliasing: just affected before calling "RenderString"
+    virtual void ForceFontAliasing(bool enable);
 
-	// B_FONT_RENDER_DIRECTLY callback: return value is update rect with view coordinate
-	virtual BRect RenderString(BHandler *view, const char *string,
-				   float size, float spacing = 0,
+    // B_FONT_RENDER_DIRECTLY callback: return value is update rect with view coordinate
+    virtual BRect RenderString(BHandler *view, const char *string,
+                   float size, float spacing = 0,
                    float shear = 90, bool bold = false,  __be_int32 length = -1);
-	// B_FONT_RENDER_PIXMAP callback: return value of "RenderString" must free by "delete[]"
+    // B_FONT_RENDER_PIXMAP callback: return value of "RenderString" must free by "delete[]"
     virtual  __be_uint8* RenderString(const char *string,  __be_int32 *width,  __be_int32 *height, bool *is_mono,
-				     float size, float spacing = 0,
+                     float size, float spacing = 0,
                      float shear = 90, bool bold = false,  __be_int32 length = -1);
 
     BRect RenderString(BHandler *view, const BString &str,
-			   float size, float spacing = 0,
+               float size, float spacing = 0,
                float shear = 90, bool bold = false,  __be_int32 length = -1);
      __be_uint8* RenderString(const BString &str,  __be_int32 *width,  __be_int32 *height, bool *is_mono,
-			     float size, float spacing = 0,
+                 float size, float spacing = 0,
                  float shear = 90, bool bold = false,  __be_int32 length = -1);
 
     virtual bhapi::font_detach_callback* Attach(void (*callback)(void*), void *data);
-	bool IsAttached() const;
+    bool IsAttached() const;
     virtual bool Detach(bhapi::font_detach_callback *callback);
 
-	bool Lock();
-	void Unlock();
+    bool Lock();
+    void Unlock();
 
 protected:
-	void SetFamily(const char *family);
-	void SetStyle(const char *style);
+    void SetFamily(const char *family);
+    void SetStyle(const char *style);
     void SetFixedSize(float *sizes,  __be_int32 count);
     void SetRenderMode(bhapi::font_render_mode rmode);
 
-	bool InServing() const;
-	void OutOfServing();
+    bool InServing() const;
+    void OutOfServing();
 
 private:
-	BList fAttached;
-	BLocker fLocker;
+    BList fAttached;
+    BLocker fLocker;
 
-	char *fFamily;
-	char *fStyle;
+    char *fFamily;
+    char *fStyle;
 
-	float *fFixedSize;
+    float *fFixedSize;
      __be_int32 nFixedSize;
 
     bhapi::font_render_mode fRenderMode;
 
-    friend IMPEXPBHAPI bool bhapi::font_add(const char *family, const char *style, BFontEngine *engine);
+    friend BHAPI_IMPEXP bool bhapi::font_add(const char *family, const char *style, BFontEngine *engine);
     BStringArray *fServing;
 };
 #endif /* __cplusplus */

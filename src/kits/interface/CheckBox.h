@@ -33,7 +33,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 #include "../interface/Control.h"
-class IMPEXPBHAPI BCheckBox : public BControl {
+class BHAPI_IMPEXP BCheckBox : public BControl {
 public:
     BCheckBox(BRect frame,
           const char *name,

@@ -118,28 +118,28 @@ BCursor::Data() const
 }
 
 
-be_uint32
+__be_uint32
 BCursor::DataLength() const
 {
 	return(bhapi::get_cursor_data_length((const  __be_uint8*)fData));
 }
 
 
-be_uint8
+__be_uint8
 BCursor::Width() const
 {
 	return(fData ? *((const  __be_uint8*)fData) : 0);
 }
 
 
-be_uint8
+__be_uint8
 BCursor::Height() const
 {
 	return(fData ? *((const  __be_uint8*)fData) : 0);
 }
 
 
-be_uint8
+__be_uint8
 BCursor::ColorDepth() const
 {
 	return(fData ? *((const  __be_uint8*)fData + 1) : 0);
@@ -311,11 +311,11 @@ static  __be_uint8 cursor_i_beam[] = {
 };
 
 
-LOCALBHAPI BCursor _B_CURSOR_HAND(cursor_hand);
-LOCALBHAPI BCursor _B_CURSOR_HAND_MOVE(cursor_hand_move);
-LOCALBHAPI BCursor _B_CURSOR_I_BEAM(cursor_i_beam);
+BHAPI_LOCAL BCursor _B_CURSOR_HAND(cursor_hand);
+BHAPI_LOCAL BCursor _B_CURSOR_HAND_MOVE(cursor_hand_move);
+BHAPI_LOCAL BCursor _B_CURSOR_I_BEAM(cursor_i_beam);
 
-EXPORTBHAPI const BCursor *B_CURSOR_HAND = &_B_CURSOR_HAND;
-EXPORTBHAPI const BCursor *B_CURSOR_HAND_MOVE = &_B_CURSOR_HAND_MOVE;
-EXPORTBHAPI const BCursor *B_CURSOR_I_BEAM = &_B_CURSOR_I_BEAM;
+BHAPI_EXPORT const BCursor *B_CURSOR_HAND = &_B_CURSOR_HAND;
+BHAPI_EXPORT const BCursor *B_CURSOR_HAND_MOVE = &_B_CURSOR_HAND_MOVE;
+BHAPI_EXPORT const BCursor *B_CURSOR_I_BEAM = &_B_CURSOR_I_BEAM;
 

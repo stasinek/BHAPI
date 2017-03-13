@@ -34,7 +34,7 @@
 #include "../../interface/Point.h"
 namespace bhapi {
 extern b_theme_engine b_default_theme_engine;
-EXPORTBHAPI b_theme_engine* get_current_theme_engine(void)
+BHAPI_EXPORT b_theme_engine* get_current_theme_engine(void)
 {
     return &b_default_theme_engine;
 }

@@ -30,11 +30,11 @@
 #ifndef BHAPI_PRIVATE_MEMORY_H
 #define BHAPI_PRIVATE_MEMORY_H
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */
 
-class LOCALBHAPI BMemory
+class BHAPI_LOCAL BMemory
 {
 public:
 	static void	*Malloc(size_t size, void (*destroy_func)(void*) = NULL);

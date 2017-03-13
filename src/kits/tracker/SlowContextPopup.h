@@ -1,4 +1,4 @@
-/*
+﻿/*
 Open Tracker License
 
 Terms and Conditions
@@ -36,77 +36,77 @@ All rights reserved.
 
 
 #include <PopUpMenu.h>
-#include "NavMenu.h"
+#include <NavMenu.h>
 
 
 namespace BPrivate {
 
 class BSlowContextMenu : public BPopUpMenu {
 public:
-				BSlowContextMenu(const char* title);
-	virtual		~BSlowContextMenu();
+                BSlowContextMenu(const char* title);
+    virtual		~BSlowContextMenu();
 
-	virtual	void AttachedToWindow();
-	virtual	void DetachedFromWindow();
+    virtual	void AttachedToWindow();
+    virtual	void DetachedFromWindow();
 
-	void SetNavDir(const entry_ref*);
+    void SetNavDir(const entry_ref*);
 
-	void ClearMenu();
+    void ClearMenu();
 
-	void ForceRebuild();
-	bool NeedsToRebuild() const;
-		// will cause menu to get rebuilt next time it is shown
+    void ForceRebuild();
+    bool NeedsToRebuild() const;
+        // will cause menu to get rebuilt next time it is shown
 
-	void SetTarget(const BMessenger &);
-	const BMessenger Target() const;
+    void SetTarget(const BMessenger &);
+    const BMessenger Target() const;
 
-	void SetTypesList(const BObjectList<BString>* list);
-	const BObjectList<BString>* TypesList() const;
+    void SetTypesList(const BObjectList<BString>* list);
+    const BObjectList<BString>* TypesList() const;
 
-	static ModelMenuItem* NewModelItem(Model*, const BMessage*,
-		const BMessenger&, bool suppressFolderHierarchy = false,
-		BContainerWindow* = NULL,
-		const BObjectList<BString>* typeslist = NULL,
-		TrackingHookData* hook = NULL);
+    static ModelMenuItem* NewModelItem(Model*, const BMessage*,
+        const BMessenger&, bool suppressFolderHierarchy = false,
+        BContainerWindow* = NULL,
+        const BObjectList<BString>* typeslist = NULL,
+        TrackingHookData* hook = NULL);
 
-	TrackingHookData* InitTrackingHook(bool (*)(BMenu*, void*),
-		const BMessenger* target, const BMessage* dragMessage);
+    TrackingHookData* InitTrackingHook(bool (*)(BMenu*, void*),
+        const BMessenger* target, const BMessage* dragMessage);
 
-	const bool IsShowing() const;
+    const bool IsShowing() const;
 
 protected:
-	virtual bool AddDynamicItem(add_state state);
-	virtual bool StartBuildingItemList();
-	virtual bool AddNextItem();
-	virtual void DoneBuildingItemList();
-	virtual void ClearMenuBuildingState();
+    virtual bool AddDynamicItem(add_state state);
+    virtual bool StartBuildingItemList();
+    virtual bool AddNextItem();
+    virtual void DoneBuildingItemList();
+    virtual void ClearMenuBuildingState();
 
-	void BuildVolumeMenu();
+    void BuildVolumeMenu();
 
-	void AddOneItem(Model*);
-	void AddRootItemsIfNeeded();
-	void AddTrashItem();
-	static void SetTrackingHookDeep(BMenu*, bool (*)(BMenu*, void*), void*);
+    void AddOneItem(Model*);
+    void AddRootItemsIfNeeded();
+    void AddTrashItem();
+    static void SetTrackingHookDeep(BMenu*, bool (*)(BMenu*, void*), void*);
 
-	bool fMenuBuilt;
+    bool fMenuBuilt;
 
 private:
-	entry_ref fNavDir;
-	BMessage fMessage;
-	BMessenger fMessenger;
-	BWindow* fParentWindow;
+    entry_ref fNavDir;
+    BMessage fMessage;
+    BMessenger fMessenger;
+    BWindow* fParentWindow;
 
-	// menu building state
-	bool fVolsOnly;
-	BObjectList<BMenuItem>* fItemList;
-	EntryListBase* fContainer;
-	bool fIteratingDesktop;
+    // menu building state
+    bool fVolsOnly;
+    BObjectList<BMenuItem>* fItemList;
+    EntryListBase* fContainer;
+    bool fIteratingDesktop;
 
-	const BObjectList<BString>* fTypesList;
+    const BObjectList<BString>* fTypesList;
 
-	TrackingHookData fTrackingHook;
-	bool fIsShowing;
-		// see note in AttachedToWindow
+    TrackingHookData fTrackingHook;
+    bool fIsShowing;
+        // see note in AttachedToWindow
 };
 
 
@@ -118,21 +118,21 @@ using namespace BPrivate;
 inline const BObjectList<BString>*
 BSlowContextMenu::TypesList() const
 {
-	return fTypesList;
+    return fTypesList;
 }
 
 
 inline const BMessenger
 BSlowContextMenu::Target() const
 {
-	return fMessenger;
+    return fMessenger;
 }
 
 
 inline const bool
 BSlowContextMenu::IsShowing() const
 {
-	return fIsShowing;
+    return fIsShowing;
 }
 
 

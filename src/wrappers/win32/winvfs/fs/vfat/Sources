@@ -1,0 +1,24 @@
+C_DEFINES=$(C_DEFINES) -D_KERNEL_ -D__KERNEL__
+
+TARGETNAME=vfat
+TARGETPATH=../../
+TARGETTYPE=DRIVER
+DRIVERTYPE=FS
+
+TARGETLIBS=..\..\i386\linux_fs.lib ..\..\i386\linux_mm.lib ..\..\i386\linux_lib.lib ..\..\i386\windows.lib 
+
+INCLUDES=..\..\include
+
+SOURCES=\
+		buffer.c \
+		cache.c \
+		cvf.c \
+		dir.c \
+		fatfs_syms.c \
+		file.c \
+		inode.c \
+		misc.c \
+		namei.c \
+		vfatfs_syms.c \
+		nls_base.c
+

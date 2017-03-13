@@ -36,7 +36,7 @@
 #include "../interface/GraphicsDefs.h"
 
 #if 0
-class IMPEXPBHAPI BToolTipInfo {
+class BHAPI_IMPEXP BToolTipInfo {
 public:
     BToolTipInfo();
     virtual ~BToolTipInfo();
@@ -68,7 +68,7 @@ private:
 };
 
 
-class IMPEXPBHAPI BToolTip {
+class BHAPI_IMPEXP BToolTip {
 public:
     BToolTip();
     virtual ~BToolTip();

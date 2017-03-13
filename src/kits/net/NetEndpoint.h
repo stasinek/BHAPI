@@ -29,13 +29,13 @@
 
 #ifndef BHAPI_NET_ENDPOINT_H
 #define BHAPI_NET_ENDPOINT_H
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 #include "../net/NetAddress.h"
 #include "../net/NetBuffer.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXPBHAPI BNetEndpoint : public BArchivable {
+class BHAPI_IMPEXP BNetEndpoint : public BArchivable {
 public:
 	BNetEndpoint(int proto = SOCK_STREAM);
 	BNetEndpoint(const BNetEndpoint &from);

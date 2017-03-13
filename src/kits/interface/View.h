@@ -84,9 +84,9 @@ class BView;
 #include "../interface/Point.h"
 #include "../interface/InterfaceDefs.h"
 #include "../support/List.h"
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 using namespace bhapi;
-class IMPEXPBHAPI BView : public BHandler {
+class BHAPI_IMPEXP BView : public BHandler {
 public:
     BView(BRect frame,
           const char *name,

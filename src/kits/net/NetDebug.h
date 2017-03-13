@@ -29,11 +29,11 @@
 
 #ifndef BHAPI_NET_DEBUG_H
 #define BHAPI_NET_DEBUG_H
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXPBHAPI BNetDebug {
+class BHAPI_IMPEXP BNetDebug {
 public:
 	static void	Enable(bool state);
 	static bool	IsEnabled();

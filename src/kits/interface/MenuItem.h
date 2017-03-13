@@ -36,8 +36,8 @@ class BMessage;
 #include "../support/Archivable.h"
 #include "../interface/Rect.h"
 #include "../app/Invoker.h"
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BMenuItem : public BArchivable, public BInvoker {
+#include <Haiku.h>
+class BHAPI_IMPEXP BMenuItem : public BArchivable, public BInvoker {
 public:
     BMenuItem(const char *label, BMessage *message, char shortcut = 0,  __be_uint32 modifiers = 0);
     BMenuItem(BMenu *menu, BMessage *message = NULL);
@@ -89,7 +89,7 @@ private:
 };
 
 
-class IMPEXPBHAPI BMenuSeparatorItem : public BMenuItem {
+class BHAPI_IMPEXP BMenuSeparatorItem : public BMenuItem {
 public:
     BMenuSeparatorItem();
     virtual ~BMenuSeparatorItem();

@@ -29,14 +29,14 @@
 
 #ifndef BHAPI_PIXMAP_H
 #define BHAPI_PIXMAP_H
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 #include "../interface/GraphicsDefs.h"
 #include "../interface/Region.h"
 #include "../render/Render.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXPBHAPI BPixmap : public BRender {
+class BHAPI_IMPEXP BPixmap : public BRender {
 public:
     BPixmap();
     BPixmap(__be_uint32 width,  __be_uint32 height, bhapi::color_space space);

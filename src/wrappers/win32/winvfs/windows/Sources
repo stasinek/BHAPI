@@ -1,0 +1,27 @@
+C_DEFINES=$(C_DEFINES) -D_KERNEL_ -D__KERNEL__
+
+TARGETNAME=windows
+TARGETPATH=../
+TARGETTYPE=DRIVER_LIBRARY
+DRIVERTYPE=FS
+
+INCLUDES=..\..\ntos\inc; ..\include
+
+SOURCES=aloc.c \
+		async.c \
+		char.c \
+		cleanup.c \
+		close.c \
+		cmcb.c \
+		create.c \
+		debug.c \
+		devctrl.c \
+		dirctrl.c \
+		diskio.c \
+		fsctrl.c \
+		init.c \
+		fileinfo.c \
+		read.c \
+		misc.c \
+		volinfo.c \
+		fastio.c

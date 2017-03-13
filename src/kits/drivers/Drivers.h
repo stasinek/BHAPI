@@ -9,7 +9,7 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 
-#include <BeBuild.h>
+#include <Haiku.h>
 #include <Select.h>
 #include <Haiku.h>
 

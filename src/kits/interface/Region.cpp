@@ -219,7 +219,7 @@ BRegion::RectAt(__be_int32 index) const
 <section id="EREGION_FUNCTION_COUNT_RECTS">
 	<title>区域描述的组成矩形数量</title>
 	<programlisting>
-be_int32 BRegion::CountRects() const
+__be_int32 BRegion::CountRects() const
 	</programlisting>
 	<para>返回值为该区域描述的组合矩形数量。
 		<footnote><para>一个区域范围描述由多个矩形成员组成，
@@ -229,7 +229,7 @@ be_int32 BRegion::CountRects() const
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-be_int32
+__be_int32
 BRegion::CountRects() const
 {
 	return fRects.CountItems();

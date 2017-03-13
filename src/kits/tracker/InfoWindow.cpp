@@ -302,7 +302,7 @@ BInfoWindow::BInfoWindow(Model* model, int32 group_index,
 	SetPulseRate(1000000);
 		// we use pulse to check freebytes on volume
 
-	TTracker::WatchNode(model->NodeRef(), B_WATCH_ALL | B_WATCH_MOUNT, this);
+	TTracker::WatchNode(model->node_ref(), B_WATCH_ALL | B_WATCH_MOUNT, this);
 
 	// window list is Locked by Tracker around this constructor
 	if (list != NULL)
@@ -355,7 +355,7 @@ BInfoWindow::Quit()
 bool
 BInfoWindow::IsShowing(const node_ref* node) const
 {
-	return *TargetModel()->NodeRef() == *node;
+	return *TargetModel()->node_ref() == *node;
 }
 
 
@@ -556,7 +556,7 @@ BInfoWindow::MessageReceived(BMessage* message)
 				newNode << memoryNode;
 
 				// Start watching this again
-				TTracker::WatchNode(TargetModel()->NodeRef(),
+				TTracker::WatchNode(TargetModel()->node_ref(),
 					B_WATCH_ALL | B_WATCH_MOUNT, this);
 
 				// Tell the attribute view about this new model
@@ -580,7 +580,7 @@ BInfoWindow::MessageReceived(BMessage* message)
 			if (fModel->IsVolume()) {
 				BVolume boot;
 				BVolumeRoster().GetBootVolume(&boot);
-				BVolume volume(fModel->NodeRef()->device);
+				BVolume volume(fModel->node_ref()->device);
 				if (volume != boot) {
 					TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 					if (tracker != NULL)
@@ -605,7 +605,7 @@ BInfoWindow::MessageReceived(BMessage* message)
 					message->FindInt32("device", &itemNode.device);
 					message->FindInt64("node", &itemNode.node);
 					// our window itself may be deleted
-					if (*TargetModel()->NodeRef() == itemNode)
+					if (*TargetModel()->node_ref() == itemNode)
 						Close();
 					break;
 				}
@@ -630,7 +630,7 @@ BInfoWindow::MessageReceived(BMessage* message)
 					node_ref itemNode;
 					// Only the device information is available
 					message->FindInt32("device", &itemNode.device);
-					if (TargetModel()->NodeRef()->device == itemNode.device)
+					if (TargetModel()->node_ref()->device == itemNode.device)
 						Close();
 					break;
 				}
@@ -1108,7 +1108,7 @@ AttributeView::ModelChanged(Model* model, BMessage* message)
 				return;
 
 			// ensure notification is for us
-			if (*model->NodeRef() == itemNode
+			if (*model->node_ref() == itemNode
 				// For volumes, the device ID is obviously not handled in a
 				// consistent way; the node monitor sends us the ID of the
 				// parent device, while the model is set to the device of the
@@ -1116,7 +1116,7 @@ AttributeView::ModelChanged(Model* model, BMessage* message)
 				// mounted in the root directory
 				|| (model->IsVolume()
 					&& itemNode.device == 1
-					&& itemNode.node == model->NodeRef()->node)) {
+					&& itemNode.node == model->node_ref()->node)) {
 				model->UpdateEntryRef(&dirNode, name);
 				BString title;
 				title << name << " info";
@@ -1589,7 +1589,7 @@ AttributeView::CheckAndSetSize()
 		off_t capacity = 0;
 
 		if (fModel->IsVolume()) {
-			BVolume volume(fModel->NodeRef()->device);
+			BVolume volume(fModel->node_ref()->device);
 			freeBytes = volume.FreeBytes();
 			capacity = volume.Capacity();
 		} else {
@@ -1986,7 +1986,7 @@ AttributeView::FinishEditingTitle(bool commit)
 				reopen = true;
 			} else {
 				if (fModel->IsVolume()) {
-					BVolume	volume(fModel->NodeRef()->device);
+					BVolume	volume(fModel->node_ref()->device);
 					if (volume.InitCheck() == B_OK)
 						volume.SetName(text);
 				} else
@@ -2134,7 +2134,7 @@ AttributeView::BuildContextMenu(BMenu* parent)
 			BVolume boot;
 			BVolumeRoster().GetBootVolume(&boot);
 			BVolume volume;
-			volume.SetTo(fModel->NodeRef()->device);
+			volume.SetTo(fModel->node_ref()->device);
 			if (volume == boot)
 				item->SetEnabled(false);
 		}

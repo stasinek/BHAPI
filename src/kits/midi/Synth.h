@@ -2,7 +2,7 @@
 #ifndef _SYNTH_H
 #define _SYNTH_H
 
-#include <BeBuild.h>
+#include <Haiku.h>
 #include <Entry.h>
 #include <MidiDefs.h>
 #include <OS.h>

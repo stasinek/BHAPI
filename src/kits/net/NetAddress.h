@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_NET_ADDRESS_H
 #define BHAPI_NET_ADDRESS_H
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #ifndef _WIN32
 #include <sys/types.h>
@@ -42,7 +42,7 @@
 #ifdef __cplusplus /* Just for C++ */
 
 #include "../support/Archivable.h"
-class IMPEXPBHAPI BNetAddress : public BArchivable {
+class BHAPI_IMPEXP BNetAddress : public BArchivable {
 public:
     BNetAddress(const char *hostname = NULL,  __be_uint16 port = 0);
     BNetAddress(const char *hostname, const char *protocol, const char *service);

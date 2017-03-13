@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2002-2011, Haiku Inc. All Rights Reserved.
  * Distributed under the terms of the MIT License.
  */
@@ -6,13 +6,13 @@
 #define	_FS_ATTR_H
 
 
-#include <OS.h>
+#include <Kernel.h>
 #include <dirent.h>
 
 
 typedef struct attr_info {
-	uint32	type;
-	off_t	size;
+    uint32	type;
+    off_t	size;
 } attr_info;
 
 
@@ -21,17 +21,17 @@ extern "C" {
 #endif
 
 extern ssize_t	fs_read_attr(int fd, const char *attribute, uint32 type,
-					off_t pos, void *buffer, size_t readBytes);
+                    off_t pos, void *buffer, size_t readBytes);
 extern ssize_t	fs_write_attr(int fd, const char *attribute, uint32 type,
-					off_t pos, const void *buffer, size_t readBytes);
+                    off_t pos, const void *buffer, size_t readBytes);
 extern int		fs_remove_attr(int fd, const char *attribute);
 extern int		fs_stat_attr(int fd, const char *attribute,
-					struct attr_info *attrInfo);
+                    struct attr_info *attrInfo);
 
 extern int		fs_open_attr(const char *path, const char *attribute,
-					uint32 type, int openMode);
+                    uint32 type, int openMode);
 extern int		fs_fopen_attr(int fd, const char *attribute, uint32 type,
-					int openMode);
+                    int openMode);
 extern int		fs_close_attr(int fd);
 
 extern DIR		*fs_open_attr_dir(const char *path);

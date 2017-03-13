@@ -6,11 +6,7 @@
 #define BHAPI_HAIKU_TYPES_H
 
 #include <HaikuConfig.h>
-
-#include <posix/ctype.h>
-#ifndef _MSC_VER
-#include <posix/sys/types.h>
-#endif
+#include <ctype.h>
 
 /* fixed-width types -- the __haiku_std_[u]int* types correspond to the POSIX
    [u]int*_t types, the _haiku_[u]int* types to the BeOS [u]int* types. If
@@ -76,7 +72,6 @@ typedef	unsigned long int	__haiku_addr_t;
 #endif
 #define __HAIKU_PHYS_SADDR_MIN		(-__HAIKU_SADDR_MAX-1)
 
-
 /* printf()/scanf() format prefixes */
 #define	__HAIKU_STD_PRI_PREFIX_32	""
 #ifdef __HAIKU_ARCH_64_BIT
@@ -100,7 +95,6 @@ typedef	unsigned long int	__haiku_addr_t;
 #	define __HAIKU_PRI_PREFIX_PHYS_ADDR	__HAIKU_PRI_PREFIX_32
 #endif
 
-
 /* a generic address type wide enough for virtual and physical addresses */
 #if __HAIKU_ARCH_BITS >= __HAIKU_ARCH_PHYSICAL_BITS
     typedef __haiku_addr_t					__haiku_generic_addr_t;
@@ -113,10 +107,6 @@ typedef	unsigned long int	__haiku_addr_t;
 #endif
 
 typedef __haiku_addr_t   __be_addr_t;
-typedef size_t      	 __be_size_t;
-#ifndef _SSIZE_T_DEFINED
-typedef size_t ssize_t;
-#endif
 
 #ifdef _MSC_VER
 typedef __int8   int8_t;
@@ -129,8 +119,7 @@ typedef __int64  int64_t;
 typedef unsigned __int64  uint64_t;
 #endif
 
-/*
-typedef	__int8 int8_t;
+/*typedef	__int8 int8_t;
 typedef	unsigned __int8 uint8_t;
 typedef	__int16 int16_t;
 typedef	unsigned __int16 uint16_t;
@@ -202,5 +191,18 @@ typedef unsigned __int32 	__be_perform_code;
 typedef unsigned __int32 	perform_code;
 
 typedef __int64  __be_thread_id;
+
+#include <pthread.h>
+#undef NO_OLDNAMES
+#ifndef _MSC_VER
+//#include <sys/types.h>
+#endif
+// POSIX
+#include <posix/sys/types.h>
+
+typedef size_t      	 __be_size_t;
+#ifndef _SSIZE_T_DEFINED
+typedef size_t ssize_t;
+#endif
 
 #endif	/* _CONFIG_TYPES_H */

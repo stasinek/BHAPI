@@ -21,7 +21,7 @@
 #include <directories.h>
 #include <syscalls.h>
 
-#include "PathBuffer.h"
+#include "fs_path_buffer.h"
 
 
 static size_t kHomeInstallationLocationIndex = 1;
@@ -437,7 +437,7 @@ process_path(const char* installationLocation, const char* architecture,
 	char* pathBuffer, size_t bufferSize)
 {
 	// copy the installation location
-	PathBuffer buffer(pathBuffer, bufferSize);
+	path_buffer buffer(pathBuffer, bufferSize);
 	buffer.Append(installationLocation);
 
 	// append the relative path, expanding the architecture placeholder

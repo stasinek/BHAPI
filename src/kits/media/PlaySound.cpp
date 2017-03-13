@@ -4,7 +4,7 @@
  *  DESCR: 
  ***********************************************************************/
 
-#include <BeBuild.h>
+#include <Haiku.h>
 #include <OS.h>
 #include <Entry.h>
 

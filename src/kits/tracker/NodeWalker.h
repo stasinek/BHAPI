@@ -36,7 +36,7 @@ All rights reserved.
 
 
 #ifndef _BE_BUILD_H
-#	include <BeBuild.h>
+#	include <Haiku.h>
 #endif
 #include <Directory.h>
 #include <Entry.h>

@@ -29,11 +29,11 @@
 
 #ifndef BHAPI_PRIVATE_OBJECT_H
 #define BHAPI_PRIVATE_OBJECT_H
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */
 
-class LOCALBHAPI BObject
+class BHAPI_LOCAL BObject
 {
 public:
     BObject();
@@ -50,7 +50,7 @@ private:
 };
 
 namespace bhapi {
-LOCALBHAPI void delete_object(void *object);
+BHAPI_LOCAL void delete_object(void *object);
 }
 #endif /* __cplusplus */
 

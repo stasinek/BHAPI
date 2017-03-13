@@ -6,7 +6,7 @@
 #define _SCREENSAVER_H
 
 
-#include <BeBuild.h>
+#include <Haiku.h>
 #include <DirectWindow.h>
 #include <image.h>
 #include <Message.h>

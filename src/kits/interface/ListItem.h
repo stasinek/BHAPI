@@ -41,7 +41,7 @@ class BFont;
 class BPoint;
 
 #include "../support/Archivable.h"
-class IMPEXPBHAPI BListItem : public BArchivable {
+class BHAPI_IMPEXP BListItem : public BArchivable {
 public:
 	BListItem(__be_uint32 outlineLevel = 0, bool expanded = true,  __be_uint32 flags = 0);
 	virtual ~BListItem();
@@ -107,7 +107,7 @@ private:
 };
 
 
-class IMPEXPBHAPI StringItem : public BListItem {
+class BHAPI_IMPEXP StringItem : public BListItem {
 public:
 	StringItem(const char *text,  __be_uint32 outlineLevel = 0, bool expanded = true);
 	virtual ~StringItem();

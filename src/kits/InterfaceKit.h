@@ -1,5 +1,5 @@
-/* --------------------------------------------------------------------------
- * 
+﻿/* --------------------------------------------------------------------------
+ *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,13 +22,11 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: InterfaceKit.h
- * 
+ *
  * --------------------------------------------------------------------------*/
 
-#include "interface/GraphicsDefs.h"
-#include "interface/InterfaceDefs.h"
 #include "interface/Point.h"
 #include "interface/Rect.h"
 #include "interface/Polygon.h"
@@ -51,16 +49,18 @@
 #include "interface/PopUpMenu.h"
 #include "interface/MenuBar.h"
 #include "interface/MenuField.h"
-#include "interface/StringView.h"
 #include "interface/Box.h"
 #include "interface/StatusBar.h"
 #include "interface/TextEditable.h"
 #include "interface/TextControl.h"
-#include "interface/ListItem.h"
-#include "interface/ListView.h"
 #include "interface/OutlineListView.h"
+#include "interface/ListView.h"
+#include "interface/ListItem.h"
+#include "interface/StringView.h"
 #include "interface/TabView.h"
 #include "interface/TextView.h"
 #include "interface/Bitmap.h"
 #include "interface/ToolTip.h"
 #include "interface/Input.h"
+#include "interface/GraphicsDefs.h"
+#include "interface/InterfaceDefs.h"

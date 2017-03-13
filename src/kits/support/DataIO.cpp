@@ -47,12 +47,12 @@ BPositionIO::~BPositionIO()
 {
 }
 
-be_size_t BPositionIO::Read(void *buffer, size_t size)
+__be_size_t BPositionIO::Read(void *buffer, size_t size)
 {
 	return ReadAt(0, buffer, size);
 }
 
-be_size_t BPositionIO::Write(const void *buffer, size_t size)
+__be_size_t BPositionIO::Write(const void *buffer, size_t size)
 {
 	return WriteAt(0, buffer, size);
 }
@@ -67,7 +67,7 @@ BMallocIO::~BMallocIO()
 	if(fData != NULL) free(fData);
 }
 
-be_size_t BMallocIO::ReadAt(__be_int64 pos, void *buffer, size_t size)
+__be_size_t BMallocIO::ReadAt(__be_int64 pos, void *buffer, size_t size)
 {
 	if(buffer == NULL) return B_BAD_VALUE;
 
@@ -81,7 +81,7 @@ be_size_t BMallocIO::ReadAt(__be_int64 pos, void *buffer, size_t size)
 	return size;
 }
 
-be_size_t BMallocIO::WriteAt(__be_int64 pos, const void *buffer, size_t size)
+__be_size_t BMallocIO::WriteAt(__be_int64 pos, const void *buffer, size_t size)
 {
 	if(buffer == NULL) return B_BAD_VALUE;
 
@@ -99,7 +99,7 @@ be_size_t BMallocIO::WriteAt(__be_int64 pos, const void *buffer, size_t size)
 	return B_NO_MEMORY;
 }
 
-be_int64 BMallocIO::Seek(__be_int64 position,  __be_uint32 seek_mode)
+__be_int64 BMallocIO::Seek(__be_int64 position,  __be_uint32 seek_mode)
 {
 	__be_int64 retVal = B_INT64_CONSTANT(-1);
 
@@ -135,7 +135,7 @@ be_int64 BMallocIO::Seek(__be_int64 position,  __be_uint32 seek_mode)
 	return retVal;
 }
 
-be_int64 BMallocIO::Position() const
+__be_int64 BMallocIO::Position() const
 {
 	return (__be_int64)fPosition;
 }
@@ -205,7 +205,7 @@ BMemoryIO::~BMemoryIO()
 {
 }
 
-be_size_t BMemoryIO::ReadAt(__be_int64 pos, void *buffer, size_t size)
+__be_size_t BMemoryIO::ReadAt(__be_int64 pos, void *buffer, size_t size)
 {
 	if(buffer == NULL) return B_BAD_VALUE;
 
@@ -219,7 +219,7 @@ be_size_t BMemoryIO::ReadAt(__be_int64 pos, void *buffer, size_t size)
 	return size;
 }
 
-be_size_t BMemoryIO::WriteAt(__be_int64 pos, const void *buffer, size_t size)
+__be_size_t BMemoryIO::WriteAt(__be_int64 pos, const void *buffer, size_t size)
 {
 	if(fReadOnly) return B_NOT_ALLOWED;
 	if(buffer == NULL) return B_BAD_VALUE;
@@ -237,7 +237,7 @@ be_size_t BMemoryIO::WriteAt(__be_int64 pos, const void *buffer, size_t size)
 	return 0;
 }
 
-be_int64 BMemoryIO::Seek(__be_int64 position,  __be_uint32 seek_mode)
+__be_int64 BMemoryIO::Seek(__be_int64 position,  __be_uint32 seek_mode)
 {
 	__be_int64 retVal = B_INT64_CONSTANT(-1);
 
@@ -273,7 +273,7 @@ be_int64 BMemoryIO::Seek(__be_int64 position,  __be_uint32 seek_mode)
 	return retVal;
 }
 
-be_int64 BMemoryIO::Position() const
+__be_int64 BMemoryIO::Position() const
 {
 	return (__be_int64)fPosition;
 }

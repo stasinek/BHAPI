@@ -40,11 +40,11 @@ static BStandardIO _EIn(0);
 static BStandardIO _EOut(1);
 static BStandardIO _EErr(2);
 
-EXPORTBHAPI BStreamIO &endl = _endl;
-EXPORTBHAPI BStreamIO &ends = _ends;
-EXPORTBHAPI BStreamIO &EIn = _EIn;
-EXPORTBHAPI BStreamIO &EOut = _EOut;
-EXPORTBHAPI BStreamIO &EErr = _EErr;
+BHAPI_EXPORT BStreamIO &endl = _endl;
+BHAPI_EXPORT BStreamIO &ends = _ends;
+BHAPI_EXPORT BStreamIO &EIn = _EIn;
+BHAPI_EXPORT BStreamIO &EOut = _EOut;
+BHAPI_EXPORT BStreamIO &EErr = _EErr;
 
 BStreamIO::BStreamIO()
     : BDataIO()
@@ -57,13 +57,13 @@ BStreamIO::~BStreamIO()
 }
 
 
-be_size_t BStreamIO::Read(void *a_buffer, size_t size)
+__be_size_t BStreamIO::Read(void *a_buffer, size_t size)
 {
     return (__be_size_t)B_ERROR;
 }
 
 
-be_size_t BStreamIO::Write(const void *a_buffer, size_t size)
+__be_size_t BStreamIO::Write(const void *a_buffer, size_t size)
 {
     return (__be_size_t)B_ERROR;
 }

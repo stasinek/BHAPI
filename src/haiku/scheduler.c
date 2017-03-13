@@ -8,7 +8,7 @@
  */
 
 
-#include <scheduler.h>
+#include <Scheduler.h>
 
 #include <syscalls.h>
 

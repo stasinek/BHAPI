@@ -30,10 +30,10 @@
 #ifndef BHAPI_FLATTENABLE_H
 #define BHAPI_FLATTENABLE_H
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXPBHAPI BFlattenable {
+class BHAPI_IMPEXP BFlattenable {
 public:
     virtual ~BFlattenable();
 

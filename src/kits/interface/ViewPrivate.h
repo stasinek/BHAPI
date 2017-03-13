@@ -35,8 +35,8 @@
 #include "View.h"
 #include "Window.h"
 #include "layout/Layout.h"
-#include "../support/SupportDefs.h"
-class LOCALBHAPI BViewLayout : public BLayoutItem {
+#include <Haiku.h>
+class BHAPI_LOCAL BViewLayout : public BLayoutItem {
 public:
     BViewLayout(BView *view, BRect frame,  __be_uint32 resizingMode);
     virtual ~BViewLayout();

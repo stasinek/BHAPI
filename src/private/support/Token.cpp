@@ -34,14 +34,14 @@
 #include "../support/Locker.h"
 #include "../support/List.h"
 
-struct LOCALBHAPI _bhapi_token_t {
+struct BHAPI_LOCAL _bhapi_token_t {
 	__be_uint64 vitalities;
 	bigtime_t time_stamp;
 	void *data;
 };
 
 
-class LOCALBHAPI BTokensDepotPrivateData : public BList {
+class BHAPI_LOCAL BTokensDepotPrivateData : public BList {
 public:
 	BTokensDepotPrivateData();
 	virtual ~BTokensDepotPrivateData();

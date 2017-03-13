@@ -35,7 +35,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class LOCALBHAPI BApplicationConnector
+class BHAPI_LOCAL BApplicationConnector
 {
 public:
     BApplicationConnector();

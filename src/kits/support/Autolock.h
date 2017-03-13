@@ -30,7 +30,7 @@
 #ifndef BHAPI_AUTOLOCK_H
 #define BHAPI_AUTOLOCK_H
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 #ifdef __cplusplus /* Just for C++ */
 
 template<class C>

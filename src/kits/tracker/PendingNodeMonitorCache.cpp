@@ -134,7 +134,7 @@ PendingNodeMonitorCache::PoseCreatedOrMoved(BPoseView* poseView,
 		if (item->TooOld(now)) {
 			PRINT(("removing old entry from pending node monitor cache\n"));
 			delete fList.RemoveItemAt(index);
-		} else if (item->Match(pose->TargetModel()->NodeRef())) {
+		} else if (item->Match(pose->TargetModel()->node_ref())) {
 			fList.RemoveItemAt(index);
 #if DEBUG
 			PRINT(("reapplying node monitor for model:\n"));

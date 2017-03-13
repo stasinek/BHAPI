@@ -32,7 +32,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 #include "../interface/Rect.h"
-class IMPEXPBHAPI BPolygon {
+class BHAPI_IMPEXP BPolygon {
 public:
     BPolygon(const BPoint *pts,  __be_int32 nPts);
     BPolygon();

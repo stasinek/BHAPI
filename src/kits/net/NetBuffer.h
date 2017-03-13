@@ -29,12 +29,12 @@
 
 #ifndef BHAPI_NET_BUFFER_H
 #define BHAPI_NET_BUFFER_H
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 #include "../support/Archivable.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXPBHAPI BNetBuffer : public BArchivable {
+class BHAPI_IMPEXP BNetBuffer : public BArchivable {
 public:
 	BNetBuffer(size_t size = 0);
 	BNetBuffer(const BNetBuffer &from);

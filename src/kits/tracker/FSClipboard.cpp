@@ -230,7 +230,7 @@ FSClipboardAddPoses(const node_ref* directory, PoseList* list,
 			char refName[64], modeName[64];
 			BPose* pose = (BPose*)list->ItemAt(index);
 			Model* model = pose->TargetModel();
-			const node_ref* node = model->NodeRef();
+			const node_ref* node = model->node_ref();
 
 			BEntry entry;
 			model->GetEntry(&entry);
@@ -337,7 +337,7 @@ FSClipboardRemovePoses(const node_ref* directory, PoseList* list)
 			char refName[64], modeName[64];
 			BPose* pose = (BPose*)list->ItemAt(index);
 
-			clipNode.node = *pose->TargetModel()->NodeRef();
+			clipNode.node = *pose->TargetModel()->node_ref();
 			MakeRefName(refName, &clipNode.node);
 			MakeModeName(modeName);
 
@@ -370,7 +370,7 @@ FSClipboardPaste(Model* model, uint32 linksMode)
 
 	BMessenger tracker(kTrackerSignature);
 
-	node_ref* destNodeRef = (node_ref*)model->NodeRef();
+	node_ref* destNodeRef = (node_ref*)model->node_ref();
 
 	// these will be passed to the asynchronous copy/move process
 	BObjectList<entry_ref>* moveList = new BObjectList<entry_ref>(0, true);
@@ -541,7 +541,7 @@ FSClipboardFindNodeMode(Model* model, bool autoLock, bool updateRefIfNeeded)
 
 	BMessage* clip =  __be_clipboard->Data();
 	if (clip != NULL) {
-		const node_ref* node = model->NodeRef();
+		const node_ref* node = model->node_ref();
 		char modeName[64];
 		MakeModeName(modeName, node);
 		if ((clip->FindInt32(modeName, &moveMode) == B_OK)) {
@@ -590,7 +590,7 @@ FSClipboardRemove(Model* model)
 	if (messenger.IsValid()) {
 		BMessage* report = new BMessage(kFSClipboardChanges);
 		TClipboardNodeRef tcnode;
-		tcnode.node = *model->NodeRef();
+		tcnode.node = *model->node_ref();
 		tcnode.moveMode = kDelete;
 		const entry_ref* ref = model->EntryRef();
 		report->AddInt32("device", ref->device);

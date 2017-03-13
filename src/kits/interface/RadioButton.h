@@ -33,7 +33,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 #include "../interface/Control.h"
-class IMPEXPBHAPI BRadioButton : public BControl {
+class BHAPI_IMPEXP BRadioButton : public BControl {
 public:
     BRadioButton(BRect frame,
              const char *name,

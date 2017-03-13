@@ -27,16 +27,29 @@
  * Description: Sending message
  *
  * --------------------------------------------------------------------------*/
-
 #ifndef BHAPI_MESSENGER_H
 #define BHAPI_MESSENGER_H
-
+//-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
+//-----------------------------------------------------------------------------
+#ifndef BMESSAGE_I
+#define BMESSAGE_I
 class BMessage;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BHANDLER_I
+#define BHANDLER_I
 class BHandler;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BLOOPER_I
+#define BLOOPER_I
 class BLooper;
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BMessenger {
+#endif
+//-----------------------------------------------------------------------------
+#include <Haiku.h>
+//-----------------------------------------------------------------------------
+class BHAPI_IMPEXP BMessenger {
 public:
     BMessenger();
     BMessenger(const char *signature,  __be_int64 team = 0, status_t *perr = NULL);
@@ -92,8 +105,10 @@ private:
 
     status_t _SendMessage(const BMessage *a_message,  __be_uint64 replyToken, bigtime_t timeout) const;
 };
-
+//-----------------------------------------------------------------------------
 #endif /* __cplusplus */
-
+//-----------------------------------------------------------------------------
+#define BMESSENGER_I
 #endif /* BHAPI_MESSENGER_H */
+//-----------------------------------------------------------------------------
 

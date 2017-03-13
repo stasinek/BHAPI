@@ -37,7 +37,7 @@ class BRect;
 class BMessage;
 class BMessageRunner;
 #include "../interface/Control.h"
-class IMPEXPBHAPI BButton : public BControl {
+class BHAPI_IMPEXP BButton : public BControl {
 public:
     BButton(BRect frame,
 		const char *name,

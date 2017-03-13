@@ -2,7 +2,7 @@
 #ifndef _MIDI_SYNTH_FILE_H
 #define _MIDI_SYNTH_FILE_H
 
-#include <BeBuild.h>
+#include <Haiku.h>
 #include <MidiSynth.h>
 #include <Entry.h>
 

@@ -46,8 +46,8 @@ class BRect;
 class BMessage;
 #include "../interface/View.h"
 #include "../app/Invoker.h"
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BControl : public BView, public BInvoker {
+#include <Haiku.h>
+class BHAPI_IMPEXP BControl : public BView, public BInvoker {
 public:
     BControl(BRect frame,
          const char *name,

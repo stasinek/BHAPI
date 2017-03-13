@@ -29,7 +29,7 @@
 #ifndef BHAPI_ERRORS_H
 #define BHAPI_ERRORS_H
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 /* Error baselines */
 #define B_GENERAL_ERROR_BASE	INT_MIN

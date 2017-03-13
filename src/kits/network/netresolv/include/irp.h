@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2004 by Internet Systems Consortium, Inc. ("ISC")
  * Copyright (c) 1999 by Internet Software Consortium.
  *
@@ -94,12 +94,12 @@ int	irs_irp_is_connected(struct irp_p *);
 int	irs_irp_connection_setup(struct irp_p *, int *);
 #ifdef __GNUC__
 int	irs_irp_send_command(struct irp_p *, const char *, ...)
-			     __attribute__((__format__(__printf__, 2, 3)));
+                 __attribute__((__format__(__printf__, 2, 3)));
 #else
 int	irs_irp_send_command(struct irp_p *, const char *, ...);
 #endif
 int	irs_irp_get_full_response(struct irp_p *, int *, char *, size_t,
-				  char **, size_t *);
+                  char **, size_t *);
 int	irs_irp_read_line(struct irp_p *, char *, int);
 
 #endif

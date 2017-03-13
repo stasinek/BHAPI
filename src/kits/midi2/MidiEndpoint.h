@@ -2,7 +2,7 @@
 #ifndef _MIDI_ENDPOINT_H
 #define _MIDI_ENDPOINT_H
 
-#include <BeBuild.h>
+#include <Haiku.h>
 #include <Message.h>
 #include <Midi2Defs.h>
 #include <OS.h>

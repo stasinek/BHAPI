@@ -11,7 +11,7 @@
 #include <OS.h>
 #include <Haiku.h>
 #include <Window.h>
-#include <kernel/image.h>
+#include <kernel/Image.h>
 
 
 void set_mouse_position(int32 x, int32 y);

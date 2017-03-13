@@ -378,7 +378,7 @@ TFilePanel::FSFilter(BMessage* message, BHandler**, BMessageFilter* filter)
 
 			// if current directory moved, update entry ref and menu
 			// but not wind title
-			if (*(panel->TargetModel()->NodeRef()) == itemNode) {
+			if (*(panel->TargetModel()->node_ref()) == itemNode) {
 				panel->TargetModel()->UpdateEntryRef(&dirNode, name);
 				panel->SetTo(panel->TargetModel()->EntryRef());
 				return B_SKIP_MESSAGE;
@@ -394,7 +394,7 @@ TFilePanel::FSFilter(BMessage* message, BHandler**, BMessageFilter* filter)
 
 			// if folder we're watching is deleted, switch to root
 			// or Desktop
-			if (*(panel->TargetModel()->NodeRef()) == itemNode) {
+			if (*(panel->TargetModel()->node_ref()) == itemNode) {
 				BVolumeRoster volumeRoster;
 				BVolume volume;
 				volumeRoster.GetBootVolume(&volume);
@@ -1420,7 +1420,7 @@ TFilePanel::OpenParent()
 		fTaskLoop->RunLater(NewMemberFunctionObjectWithResult
 			(&TFilePanel::SelectChildInParent, this,
 			const_cast<const entry_ref*>(&ref),
-			oldModel.NodeRef()), 100000, 200000, 5000000);
+			oldModel.node_ref()), 100000, 200000, 5000000);
 	}
 }
 
@@ -1439,7 +1439,7 @@ TFilePanel::CanOpenParent() const
 	node_ref rootRef;
 	root.GetNodeRef(&rootRef);
 
-	return rootRef != *TargetModel()->NodeRef();
+	return rootRef != *TargetModel()->node_ref();
 }
 
 
@@ -1851,8 +1851,8 @@ BFilePanelPoseView::AdaptToVolumeChange(BMessage* message)
 		else
 			monitorMsg.AddInt32("opcode", B_ENTRY_REMOVED);
 
-		monitorMsg.AddInt32("device", model.NodeRef()->device);
-		monitorMsg.AddInt64("node", model.NodeRef()->node);
+		monitorMsg.AddInt32("device", model.node_ref()->device);
+		monitorMsg.AddInt64("node", model.node_ref()->node);
 		monitorMsg.AddInt64("directory", model.EntryRef()->directory);
 		monitorMsg.AddString("name", model.EntryRef()->name);
 		TrackerSettings().SetShowDisksIcon(showDisksIcon);

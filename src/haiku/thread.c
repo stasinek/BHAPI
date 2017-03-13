@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2002-2009, Axel Dörfler, axeld@pinc-software.de.
  * Distributed under the terms of the MIT License.
  */
@@ -18,13 +18,13 @@
 
 
 #undef thread_entry
-	// thread_entry is still defined in OS.h for compatibility reasons
+    // thread_entry is still defined in OS.h for compatibility reasons
 
 
 typedef struct callback_node {
-	struct callback_node *next;
-	void (*function)(void *);
-	void *argument;
+    struct callback_node *next;
+    void (*function)(void *);
+    void *argument;
 } callback_node;
 
 
@@ -35,62 +35,62 @@ void _thread_do_exit_notification(void);
 static status_t
 thread_entry(void* _entry, void* _thread)
 {
-	thread_func entry = (thread_func)_entry;
-	pthread_thread* thread = (pthread_thread*)_thread;
-	status_t returnCode;
+    thread_func entry = (thread_func)_entry;
+    pthread_thread* thread = (pthread_thread*)_thread;
+    status_t returnCode;
 
-	returnCode = entry(thread->entry_argument);
+    returnCode = entry(thread->entry_argument);
 
-	_thread_do_exit_work();
+    _thread_do_exit_work();
 
-	return returnCode;
+    return returnCode;
 }
 
 
 void
 _thread_do_exit_notification(void)
 {
-	// empty stub for R5 compatibility
+    // empty stub for R5 compatibility
 }
 
 
 void
 _thread_do_exit_work(void)
 {
-	callback_node *node = tls_get(TLS_ON_EXIT_THREAD_SLOT);
-	callback_node *next;
+    callback_node *node = tls_get(TLS_ON_EXIT_THREAD_SLOT);
+    callback_node *next;
 
-	while (node != NULL) {
-		next = node->next;
+    while (node != NULL) {
+        next = node->next;
 
-		node->function(node->argument);
-		free(node);
+        node->function(node->argument);
+        free(node);
 
-		node = next;
-	}
+        node = next;
+    }
 
-	tls_set(TLS_ON_EXIT_THREAD_SLOT, NULL);
+    tls_set(TLS_ON_EXIT_THREAD_SLOT, NULL);
 
-	__gRuntimeLoader->destroy_thread_tls();
+    __gRuntimeLoader->destroy_thread_tls();
 
-	__pthread_destroy_thread();
+    __pthread_destroy_thread();
 }
 
 
 void
 __set_stack_protection(void)
 {
-	if (__gABIVersion < B_HAIKU_ABI_GCC_2_HAIKU) {
-		area_info info;
-		ssize_t cookie = 0;
+    if (__gABIVersion < B_HAIKU_ABI_GCC_2_HAIKU) {
+        area_info info;
+        ssize_t cookie = 0;
 
-		while (get_next_area_info(B_CURRENT_TEAM, &cookie, &info) == B_OK) {
-			if ((info.protection & B_STACK_AREA) != 0) {
-				_kern_set_area_protection(info.area,
-					B_READ_AREA | B_WRITE_AREA | B_EXECUTE_AREA | B_STACK_AREA);
-			}
-		}
-	}
+        while (get_next_area_info(B_CURRENT_TEAM, &cookie, &info) == B_OK) {
+            if ((info.protection & B_STACK_AREA) != 0) {
+                _kern_set_area_protection(info.area,
+                    B_READ_AREA | B_WRITE_AREA | B_EXECUTE_AREA | B_STACK_AREA);
+            }
+        }
+    }
 }
 
 
@@ -100,163 +100,212 @@ __set_stack_protection(void)
 thread_id
 spawn_thread(thread_func entry, const char *name, int32 priority, void *data)
 {
-	struct thread_creation_attributes attributes;
-	pthread_thread* thread;
-	thread_id id;
+    struct thread_creation_attributes attributes;
+    pthread_thread* thread;
+    thread_id id;
 
-	thread = __allocate_pthread(NULL, data);
-	if (thread == NULL)
-		return B_NO_MEMORY;
+    thread = __allocate_pthread(NULL, data);
+    if (thread == NULL)
+        return B_NO_MEMORY;
 
-	_single_threaded = false;
-		// used for I/O locking - BeOS compatibility issue
+    _single_threaded = false;
+        // used for I/O locking - BeOS compatibility issue
 
-	__pthread_init_creation_attributes(NULL, thread, &thread_entry, entry,
-		thread, name, &attributes);
-	thread->flags |= THREAD_DETACHED;
+    __pthread_init_creation_attributes(NULL, thread, &thread_entry, entry,
+        thread, name, &attributes);
+    thread->flags |= THREAD_DETACHED;
 
-	attributes.priority = priority;
+    attributes.priority = priority;
 
-	id = _kern_spawn_thread(&attributes);
-	if (id < 0)
-		free(thread);
-	else {
-		thread->id = id;
-		__set_stack_protection();
-	}
+    id = _kern_spawn_thread(&attributes);
+    if (id < 0)
+        free(thread);
+    else {
+        thread->id = id;
+        __set_stack_protection();
+    }
 
-	return id;
+    return id;
 }
 
 
 status_t
 kill_thread(thread_id thread)
 {
-	return _kern_kill_thread(thread);
+    return _kern_kill_thread(thread);
 }
 
 
 status_t
 resume_thread(thread_id thread)
 {
-	return _kern_resume_thread(thread);
+    return _kern_resume_thread(thread);
 }
 
 
 status_t
 suspend_thread(thread_id thread)
 {
-	return _kern_suspend_thread(thread);
+    return _kern_suspend_thread(thread);
 }
 
 
 status_t
 rename_thread(thread_id thread, const char *name)
 {
-	return _kern_rename_thread(thread, name);
+    return _kern_rename_thread(thread, name);
 }
 
 
 status_t
 set_thread_priority(thread_id thread, int32 priority)
 {
-	return _kern_set_thread_priority(thread, priority);
+    return _kern_set_thread_priority(thread, priority);
 }
 
 
 void
 exit_thread(status_t status)
 {
-	_thread_do_exit_work();
-	_kern_exit_thread(status);
+    _thread_do_exit_work();
+    _kern_exit_thread(status);
 }
 
 
 status_t
 wait_for_thread(thread_id thread, status_t *_returnCode)
 {
-	return _kern_wait_for_thread(thread, _returnCode);
+    return _kern_wait_for_thread(thread, _returnCode);
 }
 
 
 status_t
 on_exit_thread(void (*callback)(void *), void *data)
 {
-	callback_node **head = (callback_node **)tls_address(TLS_ON_EXIT_THREAD_SLOT);
+    callback_node **head = (callback_node **)tls_address(TLS_ON_EXIT_THREAD_SLOT);
 
-	callback_node *node = malloc(sizeof(callback_node));
-	if (node == NULL)
-		return B_NO_MEMORY;
+    callback_node *node = malloc(sizeof(callback_node));
+    if (node == NULL)
+        return B_NO_MEMORY;
 
-	node->function = callback;
-	node->argument = data;
+    node->function = callback;
+    node->argument = data;
 
-	// add this node to the list
-	node->next = *head;
-	*head = node;
+    // add this node to the list
+    node->next = *head;
+    *head = node;
 
-	return B_OK;
+    return B_OK;
 }
 
 
 status_t
 _get_thread_info(thread_id thread, thread_info *info, size_t size)
 {
-	if (info == NULL || size != sizeof(thread_info))
-		return B_BAD_VALUE;
+    if (info == NULL || size != sizeof(thread_info))
+        return B_BAD_VALUE;
 
-	return _kern_get_thread_info(thread, info);
+    return _kern_get_thread_info(thread, info);
 }
 
 
 status_t
 _get_next_thread_info(team_id team, int32 *cookie, thread_info *info, size_t size)
 {
-	if (info == NULL || size != sizeof(thread_info))
-		return B_BAD_VALUE;
+    if (info == NULL || size != sizeof(thread_info))
+        return B_BAD_VALUE;
 
-	return _kern_get_next_thread_info(team, cookie, info);
+    return _kern_get_next_thread_info(team, cookie, info);
 }
 
 
 status_t
 send_data(thread_id thread, int32 code, const void *buffer, size_t bufferSize)
 {
-	return _kern_send_data(thread, code, buffer, bufferSize);
+    return _kern_send_data(thread, code, buffer, bufferSize);
 }
 
 
 int32
 receive_data(thread_id *_sender, void *buffer, size_t bufferSize)
 {
-	return _kern_receive_data(_sender, buffer, bufferSize);
+    return _kern_receive_data(_sender, buffer, bufferSize);
 }
 
 
 bool
 has_data(thread_id thread)
 {
-	return _kern_has_data(thread);
+    return _kern_has_data(thread);
 }
 
 
 status_t
 snooze_etc(bigtime_t timeout, int timeBase, uint32 flags)
 {
-	return _kern_snooze_etc(timeout, timeBase, flags, NULL);
+    return _kern_snooze_etc(timeout, timeBase, flags, NULL);
 }
 
 
 status_t
 snooze(bigtime_t timeout)
 {
-	return _kern_snooze_etc(timeout, B_SYSTEM_TIMEBASE, B_RELATIVE_TIMEOUT,
-		NULL);
+    return _kern_snooze_etc(timeout, B_SYSTEM_TIMEBASE, B_RELATIVE_TIMEOUT,
+        NULL);
 }
 
 
 status_t
 snooze_until(bigtime_t timeout, int timeBase)
 {
-	return _kern_snooze_etc(timeout, timeBase, B_ABSOLUTE_TIMEOUT, NULL);
+    return _kern_snooze_etc(timeout, timeBase, B_ABSOLUTE_TIMEOUT, NULL);
 }
+
+static const thread_id kMainThreadID = 3;
+
+
+// kill_thread
+status_t
+kill_thread(thread_id thread)
+{
+    return B_BAD_VALUE;
+}
+
+// resume_thread
+status_t
+resume_thread(thread_id thread)
+{
+    return B_BAD_VALUE;
+}
+
+// suspend_thread
+status_t
+suspend_thread(thread_id thread)
+{
+    return B_BAD_VALUE;
+}
+
+// find_thread
+thread_id
+find_thread(const char *name)
+{
+    if (name != NULL)
+        return B_ENTRY_NOT_FOUND;
+
+    return kMainThreadID;
+}
+
+// _get_thread_info
+status_t
+_get_thread_info(thread_id id, thread_info* info, size_t size)
+{
+    return B_ERROR;
+}
+
+// _get_next_thread_info
+// status_t
+// _get_next_thread_info(team_id team, int32 *cookie, thread_info *info,
+// 	size_t size)
+// {
+// 	return B_ERROR;
+// }

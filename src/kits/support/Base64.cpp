@@ -31,7 +31,7 @@
  */
 
 #include "../mail/mail_encoding.h"
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 
 #include <ctype.h>

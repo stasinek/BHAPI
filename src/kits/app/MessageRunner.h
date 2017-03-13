@@ -27,15 +27,24 @@
  * Description: Sending messages at intervals
  *
  * --------------------------------------------------------------------------*/
-
 #ifndef BHAPI_MESSAGE_RUNNER_H
 #define BHAPI_MESSAGE_RUNNER_H
-
+//-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
+//-----------------------------------------------------------------------------
+#ifndef BMESSENGER_I
 class BMessenger;
+#define BMESSENGER_I
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BMESSAGE_I
 class BMessage;
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BMessageRunner {
+#define BMESSAGE_I
+#endif
+//-----------------------------------------------------------------------------
+#include <Haiku.h>
+//-----------------------------------------------------------------------------
+class BHAPI_IMPEXP BMessageRunner {
 public:
     BMessageRunner(const BMessenger &target,
                const BMessage *msg,
@@ -73,8 +82,10 @@ private:
     bigtime_t fPrevSendTime;
      __be_int32 fCount;
 };
-
+//-----------------------------------------------------------------------------
 #endif /* __cplusplus */
-
+//-----------------------------------------------------------------------------
+#define BMESSAGERUNNER_I
 #endif /* BHAPI_MESSAGE_RUNNER_H */
+//-----------------------------------------------------------------------------
 

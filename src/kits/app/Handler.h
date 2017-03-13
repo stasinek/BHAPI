@@ -27,27 +27,56 @@
  * Description: Basic object model for Application Kit
  *
  * --------------------------------------------------------------------------*/
-
 #ifndef BHAPI_HANDLER_H
 #define BHAPI_HANDLER_H
-
+//-----------------------------------------------------------------------------
 #include "../../private/app/PrivateHandler.h"
-#include "../support/SupportDefs.h"
-
+//-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
+//-----------------------------------------------------------------------------
 #define B_OBSERVE_WHAT_CHANGE		"BHAPI:observe_change_what"
 #define B_OBSERVE_ORIGINAL_WHAT		"BHAPI:observe_orig_what"
 #define B_OBSERVER_OBSERVE_ALL	    B_MAXUINT32
-
+//-----------------------------------------------------------------------------
+#ifndef BLOOPER_I
+#define BLOOPER_I
 class BLooper;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BMESSAGE_I
+#define BMESSAGE_I
 class BMessage;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BMESSAGEFILTER_I
+#define BMESSAGEFILTER_I
 class BMessageFilter;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BMESSANGER_I
+#define BMESSANGER_I
 class BMessenger;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BTOKEN_I
+#define BTOKEN_I
 class BToken;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BLIST_I
+#define BLIST_I
 class BList;
+#endif
+//-----------------------------------------------------------------------------
+#endif // __cplusplus
+//-----------------------------------------------------------------------------
 #include "../support/Archivable.h"
+#include <Haiku.h>
+//-----------------------------------------------------------------------------
+#ifdef __cplusplus /* Just for C++ */
+//-----------------------------------------------------------------------------
 using namespace bhapi;
-class IMPEXPBHAPI BHandler : public BArchivable {
+class BHAPI_IMPEXP BHandler : public BArchivable {
 public:
     BHandler(const char *name = NULL);
     // Archiving
@@ -109,5 +138,8 @@ private:
     void *fObserverList;
     BList *fFilters;
 };
+//-----------------------------------------------------------------------------
 #endif /* __cplusplus */
+//-----------------------------------------------------------------------------
 #endif /* BHAPI_HANDLER_H */
+//-----------------------------------------------------------------------------

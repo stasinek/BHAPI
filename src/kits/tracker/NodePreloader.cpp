@@ -98,7 +98,7 @@ NodePreloader::FindModel(node_ref itemNode) const
 {
 	for (int32 count = fModelList.CountItems() - 1; count >= 0; count--) {
 		Model* model = fModelList.ItemAt(count);
-		if (*model->NodeRef() == itemNode)
+		if (*model->node_ref() == itemNode)
 			return model;
 	}
 
@@ -187,7 +187,7 @@ NodePreloader::PreloadOne(const char* dirPath)
 
 		Model* model = new Model(&ref, true);
 		if (model->InitCheck() == B_OK && model->IconFrom() == kUnknownSource) {
-			TTracker::WatchNode(model->NodeRef(),
+			TTracker::WatchNode(model->node_ref(),
 				B_WATCH_STAT | B_WATCH_ATTR, this);
 			IconCache::sIconCache->Preload(model, kNormalIcon, B_MINI_ICON,
 				true);

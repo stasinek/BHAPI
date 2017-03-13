@@ -238,7 +238,7 @@ BQueryPoseView::AddPosesCompleted()
 		int32 count = oldPoseList->CountItems();
 		for (int32 index = count - 1; index >= 0; index--) {
 			BPose* pose = oldPoseList->ItemAt(index);
-			DeletePose(pose->TargetModel()->NodeRef());
+			DeletePose(pose->TargetModel()->node_ref());
 		}
 		fQueryListContainer->ClearOldPoseList();
 	}
@@ -283,7 +283,7 @@ BQueryPoseView::InitDirentIterator(const entry_ref* ref)
 
 	fShowResultsFromTrash = fQueryListContainer->ShowResultsFromTrash();
 
-	TTracker::WatchNode(sourceModel.NodeRef(), B_WATCH_NAME | B_WATCH_STAT
+	TTracker::WatchNode(sourceModel.node_ref(), B_WATCH_NAME | B_WATCH_STAT
 		| B_WATCH_ATTR, this);
 
 	fQueryList = fQueryListContainer->QueryList();

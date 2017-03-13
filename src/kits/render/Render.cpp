@@ -61,7 +61,7 @@ extern bool get_arc_12(BPoint &radius, BPoint &start, BPoint &end,  __be_int32 &
 	} while(false)
 
 
-class LOCALBHAPI BRenderObject {
+class BHAPI_LOCAL BRenderObject {
 public:
 	BRenderObject();
 	virtual ~BRenderObject();
@@ -106,7 +106,7 @@ BRenderObject::cmp(const void *objectA, const void *objectB)
 }
 
 
-class LOCALBHAPI BRenderLine : public BRenderObject {
+class BHAPI_LOCAL BRenderLine : public BRenderObject {
 public:
 	BRenderLine(BPoint start, BPoint end);
 
@@ -177,7 +177,7 @@ BRenderLine::Next()
 }
 
 
-class LOCALBHAPI BRenderLine2 : public BRenderObject {
+class BHAPI_LOCAL BRenderLine2 : public BRenderObject {
 public:
 	BRenderLine2(BPoint pt0, BPoint pt1, BPoint pt2);
 
@@ -278,7 +278,7 @@ BRenderLine2::Next()
 }
 
 
-class LOCALBHAPI BRenderTriangle : public BRenderLine2 {
+class BHAPI_LOCAL BRenderTriangle : public BRenderLine2 {
 public:
 	BRenderTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge);
 

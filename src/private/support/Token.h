@@ -34,7 +34,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 class BTokensDepot;
-class LOCALBHAPI BToken {
+class BHAPI_LOCAL BToken {
 public:
     BToken();
     ~BToken();
@@ -66,7 +66,7 @@ private:
 };
 
 
-class LOCALBHAPI BTokensDepot {
+class BHAPI_LOCAL BTokensDepot {
 public:
     BTokensDepot(BLocker *locker = NULL,
              bool deconstruct_locker = false);

@@ -304,14 +304,14 @@ BTextView::ReScanLines()
 }
 
 
-be_int32
+__be_int32
 BTextView::CountLines() const
 {
     return fLines.CountItems();
 }
 
 
-be_int32
+__be_int32
 BTextView::CurrentLine() const
 {
     return fCurrentLine;
@@ -350,7 +350,7 @@ BTextView::GoToLine(__be_int32 index)
 }
 
 
-be_int32
+__be_int32
 BTextView::LineAt(__be_int32 offset, bool utf8) const
 {
     if(offset < 0 || offset > (utf8 ? fText.CountChars() : fText.Length())) return -1;
@@ -372,7 +372,7 @@ BTextView::LineAt(__be_int32 offset, bool utf8) const
 }
 
 
-be_int32
+__be_int32
 BTextView::LineAt(BPoint pt, bool visible) const
 {
     BRect rect = TextRect();
@@ -491,7 +491,7 @@ BTextView::PointAt(__be_int32 offset, float *height, bool max_height, bool utf8)
 }
 
 
-be_int32
+__be_int32
 BTextView::OffsetAt(BPoint pt, bool visible, bool utf8) const
 {
     BRect rect = TextRect();
@@ -579,7 +579,7 @@ BTextView::OffsetAt(BPoint pt, bool visible, bool utf8) const
 }
 
 
-be_int32
+__be_int32
 BTextView::OffsetAt(__be_int32 a_line, bool utf8) const
 {
     if(a_line < 0 || a_line >= fLines.CountItems()) return -1;
@@ -796,14 +796,14 @@ BTextView::Text() const
 }
 
 
-be_int32
+__be_int32
 BTextView::TextLength() const
 {
     return fText.Length();
 }
 
 
-be_int32
+__be_int32
 BTextView::TextChars() const
 {
     return fText.CountChars();
@@ -1351,7 +1351,7 @@ BTextView::HideTyping(__be_uint8 flag)
 }
 
 
-be_uint8
+__be_uint8
 BTextView::IsTypingHidden() const
 {
     return fTypingHidden;
@@ -1392,7 +1392,7 @@ BTextView::SetMaxBytes(__be_int32 max)
 }
 
 
-be_int32
+__be_int32
 BTextView::MaxBytes() const
 {
     return fMaxBytes;
@@ -1821,7 +1821,7 @@ BTextView::SetPosition(__be_int32 pos, bool response, bool utf8)
 }
 
 
-be_int32
+__be_int32
 BTextView::Position(bool utf8,  __be_int32 *lineOffset) const
 {
      __be_int32 pos = 0;

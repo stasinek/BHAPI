@@ -148,7 +148,7 @@ BMessageFilter::MessageSource() const
 }
 
 
-be_uint32
+__be_uint32
 BMessageFilter::Command() const
 {
 	return fCommand;

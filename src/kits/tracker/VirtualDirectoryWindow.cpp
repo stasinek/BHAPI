@@ -100,13 +100,13 @@ VirtualDirectoryWindow::NewPoseView(Model* model, uint32 viewMode)
 		BStringList directoryPaths;
 		node_ref nodeRef;
 		entry_ref entryRef;
-		if (manager->ResolveDirectoryPaths(*model->NodeRef(),
+		if (manager->ResolveDirectoryPaths(*model->node_ref(),
 				*model->EntryRef(), directoryPaths, &nodeRef, &entryRef)
 				!= B_OK) {
 			return NULL;
 		}
 
-		if (nodeRef != *model->NodeRef()) {
+		if (nodeRef != *model->node_ref()) {
 			// Indeed a new file. Create a new model.
 			Model* newModel = new(std::nothrow) Model(&entryRef);
 			if (newModel == NULL || newModel->InitCheck() != B_OK) {

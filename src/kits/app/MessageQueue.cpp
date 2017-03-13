@@ -101,7 +101,7 @@ BMessageQueue::Unlock()
 }
 
 
-be_int32
+__be_int32
 BMessageQueue::CountMessages() const
 {
     return fMessagesList.CountItems();
@@ -179,7 +179,7 @@ BMessageQueue::FindMessage(__be_uint32 what,  __be_int32 fromIndex,  __be_int32 
 }
 
 
-be_int32
+__be_int32
 BMessageQueue::IndexOfMessage(BMessage *an_event) const
 {
     return fMessagesList.IndexOf(an_event);

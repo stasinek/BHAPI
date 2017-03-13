@@ -90,7 +90,7 @@ DesktopPoseView::InitDesktopDirentIterator(BPoseView* nodeMonitoringTarget,
 
 	result->AddItem(perDesktopIterator);
 	if (nodeMonitoringTarget != NULL) {
-		TTracker::WatchNode(sourceModel.NodeRef(),
+		TTracker::WatchNode(sourceModel.node_ref(),
 			B_WATCH_DIRECTORY | B_WATCH_NAME | B_WATCH_STAT | B_WATCH_ATTR,
 			nodeMonitoringTarget);
 	}
@@ -254,8 +254,8 @@ DesktopPoseView::AdaptToVolumeChange(BMessage* message)
 				}
 			}
 		}
-		entryMessage.AddInt32("device", model.NodeRef()->device);
-		entryMessage.AddInt64("node", model.NodeRef()->node);
+		entryMessage.AddInt32("device", model.node_ref()->device);
+		entryMessage.AddInt64("node", model.node_ref()->node);
 		entryMessage.AddInt64("directory", model.EntryRef()->directory);
 		entryMessage.AddString("name", model.EntryRef()->name);
 		BContainerWindow* deskWindow

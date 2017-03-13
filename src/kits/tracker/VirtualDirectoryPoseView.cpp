@@ -43,8 +43,8 @@ VirtualDirectoryPoseView::VirtualDirectoryPoseView(Model* model)
 	if (_UpdateDirectoryPaths() != B_OK)
 		return;
 
-	manager->GetRootDefinitionFile(*model->NodeRef(), fRootDefinitionFileRef);
-	fIsRoot = fRootDefinitionFileRef == *model->NodeRef();
+	manager->GetRootDefinitionFile(*model->node_ref(), fRootDefinitionFileRef);
+	fIsRoot = fRootDefinitionFileRef == *model->node_ref();
 }
 
 
@@ -124,7 +124,7 @@ VirtualDirectoryPoseView::InitDirentIterator(const entry_ref* ref)
 
 	VirtualDirectoryEntryList* entryList
 		= new(std::nothrow) VirtualDirectoryEntryList(
-			*TargetModel()->NodeRef(), fDirectoryPaths);
+			*TargetModel()->node_ref(), fDirectoryPaths);
 	if (entryList == NULL || entryList->InitCheck() != B_OK) {
 		delete entryList;
 		return NULL;
@@ -145,7 +145,7 @@ VirtualDirectoryPoseView::StartWatching()
 	}
 
 	// watch the definition file
-	TTracker::WatchNode(TargetModel()->NodeRef(),
+	TTracker::WatchNode(TargetModel()->node_ref(),
 		B_WATCH_NAME | B_WATCH_STAT | B_WATCH_ATTR, this);
 
 	// also watch the root definition file
@@ -240,7 +240,7 @@ VirtualDirectoryPoseView::_EntryCreated(const BMessage* message)
 		if (manager == NULL)
 			return true;
 
-		if (manager->TranslateDirectoryEntry(*TargetModel()->NodeRef(),
+		if (manager->TranslateDirectoryEntry(*TargetModel()->node_ref(),
 				entryRef, nodeRef) != B_OK) {
 			return true;
 		}
@@ -250,7 +250,7 @@ VirtualDirectoryPoseView::_EntryCreated(const BMessage* message)
 	// message for the old one first.
 	BPose* pose = fPoseList->FindPoseByFileName(entryRef.name);
 	if (pose != NULL) {
-		if (nodeRef == *pose->TargetModel()->NodeRef()) {
+		if (nodeRef == *pose->TargetModel()->node_ref()) {
 			// apparently not really a new entry -- can happen for
 			// subdirectories
 			return true;
@@ -258,13 +258,13 @@ VirtualDirectoryPoseView::_EntryCreated(const BMessage* message)
 
 		// It may be a directory, so tell the manager.
 		if (manager != NULL)
-			manager->DirectoryRemoved(*pose->TargetModel()->NodeRef());
+			manager->DirectoryRemoved(*pose->TargetModel()->node_ref());
 
 		managerLocker.Unlock();
 
 		BMessage removedMessage(B_NODE_MONITOR);
 		_DispatchEntryCreatedOrRemovedMessage(B_ENTRY_REMOVED,
-			*pose->TargetModel()->NodeRef(), *pose->TargetModel()->EntryRef());
+			*pose->TargetModel()->node_ref(), *pose->TargetModel()->EntryRef());
 	} else
 		managerLocker.Unlock();
 
@@ -291,7 +291,7 @@ VirtualDirectoryPoseView::_EntryRemoved(const BMessage* message)
 	entryRef.device = nodeRef.device;
 
 	// It might be our definition file.
-	if (nodeRef == *TargetModel()->NodeRef())
+	if (nodeRef == *TargetModel()->node_ref())
 		return _inherited::FSNotification(message);
 
 	// It might be one of our directories.
@@ -309,7 +309,7 @@ VirtualDirectoryPoseView::_EntryRemoved(const BMessage* message)
 
 		for (int32 i = 0; BPose* pose = poses.ItemAt(i); i++) {
 			_DispatchEntryCreatedOrRemovedMessage(B_ENTRY_REMOVED,
-				*pose->TargetModel()->NodeRef(),
+				*pose->TargetModel()->node_ref(),
 				*pose->TargetModel()->EntryRef(), NULL, false);
 		}
 
@@ -326,7 +326,7 @@ VirtualDirectoryPoseView::_EntryRemoved(const BMessage* message)
 	AutoLocker<VirtualDirectoryManager> managerLocker(manager);
 
 	if (manager != NULL
-		&& manager->GetSubDirectoryDefinitionFile(*TargetModel()->NodeRef(),
+		&& manager->GetSubDirectoryDefinitionFile(*TargetModel()->node_ref(),
 			entryRef.name, definitionEntryRef, definitionNodeRef)) {
 		actualEntryRef = &definitionEntryRef;
 		actualNodeRef = &definitionNodeRef;
@@ -335,7 +335,7 @@ VirtualDirectoryPoseView::_EntryRemoved(const BMessage* message)
 	// Check the pose. It might have been an entry that wasn't visible anyway.
 	// In that case we can just ignore the notification.
 	BPose* pose = fPoseList->FindPoseByFileName(actualEntryRef->name);
-	if (pose == NULL || *actualNodeRef != *pose->TargetModel()->NodeRef())
+	if (pose == NULL || *actualNodeRef != *pose->TargetModel()->node_ref())
 		return true;
 
 	// See, if another entry becomes visible, now.
@@ -347,7 +347,7 @@ VirtualDirectoryPoseView::_EntryRemoved(const BMessage* message)
 		visibleNodeRef = node_ref(st.st_dev, st.st_ino);
 		if (S_ISDIR(st.st_mode)) {
 			if (manager == NULL || manager->TranslateDirectoryEntry(
-					*TargetModel()->NodeRef(), visibleEntryRef, visibleNodeRef)
+					*TargetModel()->node_ref(), visibleEntryRef, visibleNodeRef)
 					!= B_OK) {
 				return true;
 			}
@@ -427,14 +427,14 @@ VirtualDirectoryPoseView::_NodeStatChanged(const BMessage* message)
 			if (manager != NULL) {
 				AutoLocker<VirtualDirectoryManager> managerLocker(manager);
 				if (!manager->DefinitionFileChanged(
-						*TargetModel()->NodeRef())) {
+						*TargetModel()->node_ref())) {
 					// The definition file no longer exists. Ignore the message
 					// -- we'll get a remove notification soon.
 					return true;
 				}
 
 				bigtime_t fileChangeTime;
-				manager->GetDefinitionFileChangeTime(*TargetModel()->NodeRef(),
+				manager->GetDefinitionFileChangeTime(*TargetModel()->node_ref(),
 					fileChangeTime);
 				if (fileChangeTime != fFileChangeTime) {
 					_UpdateDirectoryPaths();
@@ -490,12 +490,12 @@ VirtualDirectoryPoseView::_UpdateDirectoryPaths()
 {
 	VirtualDirectoryManager* manager = VirtualDirectoryManager::Instance();
 	Model* model = TargetModel();
-	status_t error = manager->ResolveDirectoryPaths(*model->NodeRef(),
+	status_t error = manager->ResolveDirectoryPaths(*model->node_ref(),
 		*model->EntryRef(), fDirectoryPaths);
 	if (error != B_OK)
 		return error;
 
-	manager->GetDefinitionFileChangeTime(*model->NodeRef(), fFileChangeTime);
+	manager->GetDefinitionFileChangeTime(*model->node_ref(), fFileChangeTime);
 	return B_OK;
 }
 

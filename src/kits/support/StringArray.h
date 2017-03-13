@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -31,11 +31,14 @@
 #define BHAPI_STRING_ARRAY_H
 
 #include "List.h"
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */
+#ifndef BSTRING_I
+#define BSTRING_I
 class BString;
-class IMPEXPBHAPI BStringArray {
+#endif
+class BHAPI_IMPEXP BStringArray {
 public:
     BStringArray();
     BStringArray(const char *string, void *attach_data = NULL); // string: first item
@@ -80,7 +83,7 @@ public:
 
      __be_int32         CountItems() const;
 
-	// return value: string index if found, else return -1
+    // return value: string index if found, else return -1
      __be_int32         FindString(const char *string,  __be_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
      __be_int32         FindString(const BString &string,  __be_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
      __be_int32         IFindString(const char *string,  __be_int32 startIndex = 0, bool all_equal = true, bool invert = false) const;
@@ -89,6 +92,7 @@ public:
 private:
     BList list;
 };
+#define BSTRINGARRAY_I
 #endif /* __cplusplus */
 #endif /* BHAPI_STRING_ARRAY_H */
 

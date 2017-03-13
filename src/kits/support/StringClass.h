@@ -31,7 +31,7 @@
 #ifndef BHAPI_STRING_H
 #define BHAPI_STRING_H
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */
 extern "C" {
@@ -58,17 +58,16 @@ int __cdecl strncasecmp(const char *a, const char *b, size_t c);
 namespace bhapi {
 #endif
 /* the result must be free by "free" */
-IMPEXPBHAPI char*		strdup(const char *src);
-IMPEXPBHAPI char*		strndup(const char *src,  __be_int32 length);
-IMPEXPBHAPI char*       strdup_dirty(const char* src,  __be_int32 length = -1);
-IMPEXPBHAPI char*		strdup_vprintf(const char *format, va_list ap);
-IMPEXPBHAPI char*		strdup_printf(const char *format, ...);
-
-IMPEXPBHAPI char *strcasestr(const char *haystack, const char *needle);
-IMPEXPBHAPI char *strrstr(const char *haystack, const char *needle);
-IMPEXPBHAPI char *strrcasestr(const char *haystack, const char *needle);
-IMPEXPBHAPI char *strcasechr(const char *s, int c);
-IMPEXPBHAPI char *strrcasechr(const char *s, int c);
+BHAPI_IMPEXP char* strdup(const char *src);
+BHAPI_IMPEXP char* strndup(const char *src,  __be_int32 length);
+BHAPI_IMPEXP char* strdup_dirty(const char* src,  __be_int32 length = -1);
+BHAPI_IMPEXP char* strdup_vprintf(const char *format, va_list ap);
+BHAPI_IMPEXP char* strdup_printf(const char *format, ...);
+BHAPI_IMPEXP char* strcasestr(const char *haystack, const char *needle);
+BHAPI_IMPEXP char* strrcasestr(const char *haystack, const char *needle);
+BHAPI_IMPEXP char* strrstr(const char *haystack, const char *needle);
+BHAPI_IMPEXP char* strcasechr(const char *s, int c);
+BHAPI_IMPEXP char* strrcasechr(const char *s, int c);
 
 #ifdef __cplusplus /* Just for C++ */
 } // namespace
@@ -79,8 +78,11 @@ IMPEXPBHAPI char *strrcasechr(const char *s, int c);
 // bhapi::strdup_dirty(): like bhapi::strdup(), but the result must be free by "delete[]"
 
 #ifdef __cplusplus /* Just for C++ */
+#ifndef BSTRINGARRAY_I
+#define BSTRINGARRAY_I
 class BStringArray;
-class IMPEXPBHAPI BString {
+#endif
+class BHAPI_IMPEXP BString {
 public:
     BString();
     BString(const char *str);
@@ -90,7 +92,7 @@ public:
     const char *String() const;
      __be_int32		Length() const; // ASCII
      __be_int32		CountChars() const; // UTF-8
-     __be_int32		CountBytes(__be_int32 fromCharOffset,be_int32 charCount) const;
+     __be_int32		CountBytes(__be_int32 fromCharOffset, __be_int32 charCount) const;
     bool		IsEmpty() const;
     uint32      HashValue() const;
     static	uint32			HashValue(const char* string);
@@ -380,8 +382,9 @@ private:
 };
 namespace bhapi {
 template<class TYPE_INT>
-IMPEXPBHAPI void printf_int(BString &str, TYPE_INT value,  __be_uint8 _base, int precision_width, bool upper_style);
-IMPEXPBHAPI  __be_int32 printf_double(BString &str, double value, int precision_width,  __be_int32 *exponent, bool g_style, bool upper_style);
+BHAPI_IMPEXP void printf_int(BString &str, TYPE_INT value,  __be_uint8 _base, int precision_width, bool upper_style);
+BHAPI_IMPEXP  __be_int32 printf_double(BString &str, double value, int precision_width,  __be_int32 *exponent, bool g_style, bool upper_style);
 }
 #endif /* __cplusplus */
+#define BSTRING_I
 #endif /* BHAPI_STRING_H */

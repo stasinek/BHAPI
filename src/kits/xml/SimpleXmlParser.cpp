@@ -99,7 +99,7 @@ BSimpleXmlNode::AttributeAt(__be_int32 index, const char** attr_content) const
 }
 
 
-be_int32
+__be_int32
 BSimpleXmlNode::FindAttribute(const char *name,  __be_int32 fromIndex) const
 {
 	if(name == NULL || *name == 0 || fromIndex < 0 || fromIndex >= fAttributes.CountItems()) return -1;
@@ -122,7 +122,7 @@ BSimpleXmlNode::NodeAt(__be_int32 index) const
 }
 
 
-be_int32
+__be_int32
 BSimpleXmlNode::FindNode(const char *name,  __be_int32 fromIndex) const
 {
 	if(name == NULL || *name == 0 || fromIndex < 0 || fromIndex >= fNodes.CountItems()) return -1;
@@ -234,14 +234,14 @@ BSimpleXmlNode::RemoveSelf()
 }
 
 
-be_int32
+__be_int32
 BSimpleXmlNode::CountAttributes() const
 {
 	return fAttributes.CountItems();
 }
 
 
-be_int32
+__be_int32
 BSimpleXmlNode::CountNodes() const
 {
 	return fNodes.CountItems();
@@ -482,7 +482,7 @@ inline bool parse_simple_xml(BString *buffer,  __be_int32 *offset, BSimpleXmlNod
 }
 
 
-IMPEXPBHAPI status_t b_parse_simple_xml(const char *buf, BSimpleXmlNode *node)
+BHAPI_IMPEXP status_t b_parse_simple_xml(const char *buf, BSimpleXmlNode *node)
 {
 	if(buf == NULL || *buf == 0 || node == NULL) return B_BAD_VALUE;
 

@@ -9,7 +9,7 @@
 #include "MediaRecorderNode.h"
 
 #include <Buffer.h>
-#include <scheduler.h>
+#include <Scheduler.h>
 #include <TimedEventQueue.h>
 #include <TimeSource.h>
 

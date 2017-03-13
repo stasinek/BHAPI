@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_DEBUG_H
 #define BHAPI_DEBUG_H
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #ifdef __cplusplus
 #include <new>
@@ -62,7 +62,7 @@ typedef enum debug_level {
     DEBUG_ERROR
 } debug_level;
 
-IMPEXPBHAPI void debug_log(bhapi::debug_level level, const char *format, va_list ap);
+BHAPI_IMPEXP void debug_log(bhapi::debug_level level, const char *format, va_list ap);
 #ifdef __cplusplus
 } /* namespace */
 #endif /* __cplusplus */
@@ -81,11 +81,11 @@ static void BHAPI_DEBUG(const char *format, ...)
 #		endif
 #	endif
 #else
-IMPEXPBHAPI void BHAPI_DEBUG(const char *format, ...);
+BHAPI_IMPEXP void BHAPI_DEBUG(const char *format, ...);
 #endif
 #endif
 
-IMPEXPBHAPI void BHAPI_OUTPUT(const char *format, ...);
+BHAPI_IMPEXP void BHAPI_OUTPUT(const char *format, ...);
 
 #ifndef BHAPI_WARNING
 #ifdef BHAPI_DISABLE_CHECKS
@@ -101,17 +101,17 @@ static void BHAPI_WARNING(const char *format, ...)
 #		endif
 #	endif
 #else
-IMPEXPBHAPI void BHAPI_WARNING(const char *format, ...);
+BHAPI_IMPEXP void BHAPI_WARNING(const char *format, ...);
 #endif
 #endif
 
-IMPEXPBHAPI void BHAPI_ERROR(const char *format, ...);
+BHAPI_IMPEXP void BHAPI_ERROR(const char *format, ...);
 
 #ifdef BHAPI_BUILD_WITH_MEMORY_TRACING
-IMPEXPBHAPI void* calloc(size_t nmemb, size_t size, const char *file, int line, const char *method);
-IMPEXPBHAPI void* malloc(size_t size, const char *file, int line, const char *method);
-IMPEXPBHAPI void* realloc(void *ptr, size_t size, const char *file, int line, const char *method);
-IMPEXPBHAPI void  free(void *ptr, const char *file, int line, const char *method);
+BHAPI_IMPEXP void* calloc(size_t nmemb, size_t size, const char *file, int line, const char *method);
+BHAPI_IMPEXP void* malloc(size_t size, const char *file, int line, const char *method);
+BHAPI_IMPEXP void* realloc(void *ptr, size_t size, const char *file, int line, const char *method);
+BHAPI_IMPEXP void  free(void *ptr, const char *file, int line, const char *method);
 #define calloc(a, b)	bhapi::calloc(a, b, __FILE__, __LINE__, "calloc")
 #define malloc(a)	bhapi::malloc(a, __FILE__, __LINE__, "malloc")
 #define realloc(a, b)	bhapi::realloc(a, b, __FILE__, __LINE__, "realloc")
@@ -129,10 +129,10 @@ struct memory_flag_t {};
 #ifdef __cplusplus
 } /* namespace */
 #endif /* __cplusplus */
-IMPEXPBHAPI void* operator new(size_t size, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
-IMPEXPBHAPI void* operator new[](size_t size, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
-IMPEXPBHAPI void operator delete(void *ptr, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
-IMPEXPBHAPI void operator delete[](void *ptr, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
+BHAPI_IMPEXP void* operator new(size_t size, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
+BHAPI_IMPEXP void* operator new[](size_t size, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
+BHAPI_IMPEXP void operator delete(void *ptr, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
+BHAPI_IMPEXP void operator delete[](void *ptr, const char *file, int line, const char *method, struct bhapi::memory_flag_t *flag);
 #define new new(__FILE__, __LINE__, NULL, (struct bhapi::memory_flag_t*)0)
 #endif /* BHAPI_BUILD_WITH_MEMORY_TRACING */
 

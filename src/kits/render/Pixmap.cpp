@@ -85,7 +85,7 @@ BPixmap::Bits() const
 }
 
 
-be_uint32
+__be_uint32
 BPixmap::BitsLength() const
 {
 	if(!fPtr) return 0;
@@ -93,7 +93,7 @@ BPixmap::BitsLength() const
 }
 
 
-be_uint32
+__be_uint32
 BPixmap::BytesPerRow() const
 {
 	if(!fPtr) return 0;

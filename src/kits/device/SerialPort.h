@@ -5,7 +5,7 @@
 #ifndef	_SERIAL_PORT_H
 #define	_SERIAL_PORT_H
 
-#include <BeBuild.h>
+#include <Haiku.h>
 #include <OS.h>
 #include <Haiku.h>
 

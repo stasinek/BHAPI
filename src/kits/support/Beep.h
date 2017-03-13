@@ -36,7 +36,7 @@
 #ifdef __cplusplus
 // These functions are only exported for C++
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 namespace bhapi {
 status_t beep();
 status_t system_beep(const char* eventName);

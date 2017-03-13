@@ -209,7 +209,7 @@ GetVolumeFlags(Model* model)
 		}
 		return B_FS_HAS_ATTR;
 	}
-	if (!fs_stat_dev(model->NodeRef()->device,&info))
+	if (!fs_stat_dev(model->node_ref()->device,&info))
 		return info.flags;
 
 	return B_FS_HAS_ATTR;
@@ -311,8 +311,8 @@ TTracker::TTracker()
 					BMessage message;
 					message.what = B_NODE_MONITOR;
 					message.AddInt32("opcode", B_ENTRY_CREATED);
-					message.AddInt32("device", model.NodeRef()->device);
-					message.AddInt64("node", model.NodeRef()->node);
+					message.AddInt32("device", model.node_ref()->device);
+					message.AddInt64("node", model.node_ref()->node);
 					message.AddInt64("directory",
 						model.EntryRef()->directory);
 					message.AddString("name", model.EntryRef()->name);
@@ -1054,7 +1054,7 @@ TTracker::OpenContainerWindow(Model* model, BMessage* originalRefsList,
 {
 	AutoLock<WindowList> lock(&fWindowList);
 	BContainerWindow* window = NULL;
-	const node_ref* modelNodeRef = model->NodeRef();
+	const node_ref* modelNodeRef = model->node_ref();
 	if (checkAlreadyOpen && openSelector != kRunOpenWithWindow) {
 		// find out if window already open
 		window = FindContainerWindow(modelNodeRef);
@@ -1074,7 +1074,7 @@ TTracker::OpenContainerWindow(Model* model, BMessage* originalRefsList,
 			window->Activate();
 			someWindowActivated = true;
 		}
-		window = FindContainerWindow(model->NodeRef(), ++windowCount);
+		window = FindContainerWindow(model->node_ref(), ++windowCount);
 	}
 
 	if (someWindowActivated) {
@@ -1170,7 +1170,7 @@ TTracker::OpenInfoWindows(BMessage* message)
 			}
 
 			AutoLock<WindowList> lock(&fWindowList);
-			BInfoWindow* wind = FindInfoWindow(model->NodeRef());
+			BInfoWindow* wind = FindInfoWindow(model->node_ref());
 
 			if (wind) {
 				wind->Activate();
@@ -1383,7 +1383,7 @@ TTracker::CloseWindowAndChildren(const node_ref* node)
 			BEntry wind_entry;
 			wind_entry.SetTo(window->TargetModel()->EntryRef());
 
-			if ((*window->TargetModel()->NodeRef() == *node)
+			if ((*window->TargetModel()->node_ref() == *node)
 				|| dir.Contains(&wind_entry)) {
 
 				// ToDo:

@@ -32,8 +32,8 @@
 #define BHAPI_LIST_H
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BList {
+#include <Haiku.h>
+class BHAPI_IMPEXP BList {
 public:
     // BList(__be_int32), BList(__be_int32,  __be_int32):
     // 	The argument "initialAllocSize" is the minimum count to hold in memory.

@@ -36,11 +36,14 @@
 extern "C" {
 #endif
 #ifdef __cplusplus
+#ifndef BSTRING_I
+#define BSTRING_I
 class BString;
+#endif
 #include "List.h"
 #include "Flattenable.h"
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BStringList : public BFlattenable {
+#include <Haiku.h>
+class BHAPI_IMPEXP BStringList : public BFlattenable {
 public:
                                 BStringList(int32 count = 20);
                                 BStringList(const BStringList& other);
@@ -128,4 +131,5 @@ inline bool BStringList::operator!=(const BStringList& other) const
 #ifdef __cplusplus
 }
 #endif
+#define BSTRINGLIST_I
 #endif	// BHAPI_STRING_LIST_H

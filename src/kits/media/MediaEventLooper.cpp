@@ -30,7 +30,7 @@
 
 #include <MediaEventLooper.h>
 #include <TimeSource.h>
-#include <scheduler.h>
+#include <Scheduler.h>
 #include <Buffer.h>
 #include <ServerInterface.h>
 #include "debug.h"

@@ -33,7 +33,7 @@
 
 #include "../interface/Window.h"
 #include "../interface/InterfaceDefs.h"
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */
 namespace bhapi {
@@ -54,7 +54,7 @@ class BInvoker;
 class BButton;
 class BTextView;
 
-class IMPEXPBHAPI BAlert : public BWindow {
+class BHAPI_IMPEXP BAlert : public BWindow {
 public:
     BAlert(const char *title,
            const char *text,

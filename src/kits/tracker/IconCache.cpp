@@ -566,7 +566,7 @@ IconCache::GetVolumeIcon(AutoLock<SimpleIconCache>*nodeCacheLocker,
 	IconCacheEntry* entry = 0;
 	if (source != kUnknownSource) {
 		// cached in the node cache
-		entry = fNodeCache.FindItem(model->NodeRef());
+		entry = fNodeCache.FindItem(model->node_ref());
 		if (entry != NULL) {
 			entry = IconCacheEntry::ResolveIfAlias(&fSharedCache, entry);
 
@@ -586,7 +586,7 @@ IconCache::GetVolumeIcon(AutoLock<SimpleIconCache>*nodeCacheLocker,
 	// try getting using the BVolume::GetIcon call; if miss,
 	// go for the default mime based icon
 	if (entry == NULL || !entry->HaveIconBitmap(NORMAL_ICON_ONLY, size)) {
-		BVolume volume(model->NodeRef()->device);
+		BVolume volume(model->node_ref()->device);
 
 		if (volume.IsShared()) {
 			// check if it's a network share and give it a special icon
@@ -596,7 +596,7 @@ IconCache::GetVolumeIcon(AutoLock<SimpleIconCache>*nodeCacheLocker,
 				PRINT_ADD_ITEM(
 					("File %s; Line %d # adding entry for model %s\n",
 					__FILE__, __LINE__, model->Name()));
-				entry = fNodeCache.AddItem(model->NodeRef());
+				entry = fNodeCache.AddItem(model->node_ref());
 			}
 			entry->SetIcon(lazyBitmap->Adopt(), kNormalIcon, size);
 		} else if (volume.GetIcon(lazyBitmap->Get(), size) == B_OK) {
@@ -607,7 +607,7 @@ IconCache::GetVolumeIcon(AutoLock<SimpleIconCache>*nodeCacheLocker,
 				PRINT_ADD_ITEM(
 					("File %s; Line %d # adding entry for model %s\n",
 					__FILE__, __LINE__, model->Name()));
-				entry = fNodeCache.AddItem(model->NodeRef());
+				entry = fNodeCache.AddItem(model->node_ref());
 			}
 			ASSERT(entry != NULL);
 			entry->SetIcon(bitmap, kNormalIcon, size);
@@ -655,7 +655,7 @@ IconCache::GetWellKnownIcon(AutoLock<SimpleIconCache>*,
 	LazyBitmapAllocator* lazyBitmap)
 {
 	const WellKnowEntryList::WellKnownEntry* wellKnownEntry
-		= WellKnowEntryList::MatchEntry(model->NodeRef());
+		= WellKnowEntryList::MatchEntry(model->node_ref());
 	if (wellKnownEntry == NULL)
 		return NULL;
 
@@ -772,7 +772,7 @@ IconCache::GetNodeIcon(ModelNodeLazyOpener* modelOpener,
 	*resultingOpenCache = nodeCacheLocker;
 	(*resultingOpenCache)->Lock();
 
-	entry = fNodeCache.FindItem(model->NodeRef());
+	entry = fNodeCache.FindItem(model->node_ref());
 	if (entry == NULL || !entry->HaveIconBitmap(NORMAL_ICON_ONLY, size)) {
 		modelOpener->OpenNode();
 
@@ -796,7 +796,7 @@ IconCache::GetNodeIcon(ModelNodeLazyOpener* modelOpener,
 			BBitmap* bitmap = lazyBitmap->Adopt();
 			PRINT_ADD_ITEM(("File %s; Line %d # adding entry for model %s\n",
 				__FILE__, __LINE__, model->Name()));
-			entry = fNodeCache.AddItem(model->NodeRef(), permanent);
+			entry = fNodeCache.AddItem(model->node_ref(), permanent);
 			ASSERT(entry != NULL);
 			entry->SetIcon(bitmap, kNormalIcon, size);
 			if (mode != kNormalIcon) {
@@ -1178,7 +1178,7 @@ IconCache::Deleting(const Model* model)
 	AutoLock<SimpleIconCache> lock(&fNodeCache);
 
 	if (model->IconFrom() == kNode)
-		fNodeCache.Deleting(model->NodeRef());
+		fNodeCache.Deleting(model->node_ref());
 
 	// don't care if the node uses the shared cache
 }
@@ -1190,7 +1190,7 @@ IconCache::Removing(const Model* model)
 	AutoLock<SimpleIconCache> lock(&fNodeCache);
 
 	if (model->IconFrom() == kNode)
-		fNodeCache.Removing(model->NodeRef());
+		fNodeCache.Removing(model->node_ref());
 }
 
 
@@ -1208,7 +1208,7 @@ IconCache::IconChanged(Model* model)
 	AutoLock<SimpleIconCache> lock(&fNodeCache);
 
 	if (model->IconFrom() == kNode || model->IconFrom() == kVolume)
-		fNodeCache.Deleting(model->NodeRef());
+		fNodeCache.Deleting(model->node_ref());
 
 	model->ResetIconFrom();
 }
@@ -1878,7 +1878,7 @@ NodeIconCache::Deleting(const BView*)
 void
 NodeIconCache::IconChanged(const Model* model)
 {
-	Deleting(model->NodeRef());
+	Deleting(model->node_ref());
 }
 
 

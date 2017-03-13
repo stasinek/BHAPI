@@ -30,7 +30,7 @@
 #ifndef BHAPI_FILE_PANEL_H
 #define BHAPI_FILE_PANEL_H
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 namespace bhapi {
 typedef enum file_panel_mode {
@@ -52,7 +52,7 @@ class BDirectory;
 class BWindow;
 class BMessenger;
 class BMessage;
-class IMPEXPBHAPI BFilePanelFilter {
+class BHAPI_IMPEXP BFilePanelFilter {
 public:
 	virtual ~BFilePanelFilter();
 
@@ -60,7 +60,7 @@ public:
 };
 
 
-class IMPEXPBHAPI BFilePanel {
+class BHAPI_IMPEXP BFilePanel {
 public:
     BFilePanel(bhapi::file_panel_mode mode = bhapi::B_OPEN_PANEL,
            const BMessenger *target = NULL,

@@ -204,7 +204,7 @@ BOutlineListView::FullListItemAt(__be_int32 fullListIndex) const
 }
 
 
-be_int32
+__be_int32
 BOutlineListView::FullListIndexOf(const BListItem *item) const
 {
 	if(item == NULL || item->fFullOwner != this) return -1;
@@ -233,14 +233,14 @@ BOutlineListView::FullListHasItem(const BListItem *item) const
 }
 
 
-be_int32
+__be_int32
 BOutlineListView::FullListCountItems() const
 {
 	return fFullItems.CountItems();
 }
 
 
-be_int32
+__be_int32
 BOutlineListView::FullListCurrentSelection(__be_int32 index) const
 {
 	__be_int32 tIndex = CurrentSelection(index);
@@ -313,7 +313,7 @@ BOutlineListView::HasSubitems(const BListItem *item) const
 }
 
 
-be_int32
+__be_int32
 BOutlineListView::CountItemsUnder(BListItem *item, bool oneLevelOnly) const
 {
 	if(item == NULL || item->fFullOwner != this) return 0;

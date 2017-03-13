@@ -33,7 +33,7 @@
 #include "../support/StringClass.h"
 #include "../kernel/Debug.h"
 
-class LOCALBHAPI BMessageNode
+class BHAPI_LOCAL BMessageNode
 {
 public:
 	BMessageNode(const char *name);
@@ -104,14 +104,14 @@ BMessageNode::RemoveItem(BMessageItem *item)
 }
 
 
-be_int32
+__be_int32
 BMessageNode::CountItems() const
 {
 	return fItems.CountItems();
 }
 
 
-be_int32
+__be_int32
 BMessageNode::IndexOf(BMessageItem *item) const
 {
 	return fItems.IndexOf(item);
@@ -199,14 +199,14 @@ BMessageBody::RemoveItem(BMessageItem *item)
 }
 
 
-be_int32
+__be_int32
 BMessageBody::CountNames() const
 {
 	return(fNames == NULL ? 0 : fNames->CountItems());
 }
 
 
-be_int32
+__be_int32
 BMessageBody::CountTypes() const
 {
 	return(fTypes == NULL ? 0 : fTypes->CountItems());

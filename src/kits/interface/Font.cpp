@@ -29,17 +29,18 @@
 
 #include "Font.h"
 
-#include "../support/Autolock.h"
-#include "../kernel/Debug.h"
 #include "../add-ons/font/FontEngine.h"
 #include "../support/UTF8.h"
-#include "../support/SupportDefs.h"
 #include "../support/Errors.h"
+#include "../support/Autolock.h"
+#include "../support/StringClass.h"
+#include "../kernel/Debug.h"
+#include <Haiku.h>
 
 namespace bhapi {
-EXPORTBHAPI const BFont* plain_font = NULL;
-EXPORTBHAPI const BFont* bold_font = NULL;
-EXPORTBHAPI const BFont* fixed_font = NULL;
+BHAPI_EXPORT const BFont* plain_font = NULL;
+BHAPI_EXPORT const BFont* bold_font = NULL;
+BHAPI_EXPORT const BFont* fixed_font = NULL;
 
 static BLocker font_info_locker;
 
@@ -651,7 +652,7 @@ BFont::GetFamilyAndStyle(bhapi::font_family *family, bhapi::font_style *style) c
 }
 
 
-be_uint32
+__be_uint32
 BFont::FamilyAndStyle() const
 {
     bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;

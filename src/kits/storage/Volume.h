@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,38 +30,34 @@
 #ifndef BHAPI_VOLUME_H
 #define BHAPI_VOLUME_H
 
-#include "StorageDefs.h"
-#include "Directory.h"
-#include "../support/StringClass.h"
-
 #ifdef __cplusplus /* Just for C++ */
-
-class IMPEXPBHAPI BVolume {
+class BString;
+class BHAPI_IMPEXP BVolume {
 public:
     BVolume();
     BVolume(b_dev_t dev);
     BVolume(const BVolume &from);
     virtual ~BVolume();
 
-	status_t	InitCheck() const;
+    status_t	InitCheck() const;
     status_t	SetTo(b_dev_t dev);
-	void		Unset();
+    void		Unset();
 
-	b_dev_t		Device() const;
+    b_dev_t		Device() const;
 
-	status_t	GetName(char *name, size_t nameSize) const;
+    status_t	GetName(char *name, size_t nameSize) const;
     status_t	GetName(BString *name) const;
-	status_t	SetName(const char *name);
+    status_t	SetName(const char *name);
 
-	status_t	GetRootDirectory(BDirectory *dir) const;
+    status_t	GetRootDirectory(BDirectory *dir) const;
 
     bool		operator==(const BVolume &vol) const;
     bool		operator!=(const BVolume &vol) const;
     BVolume&	operator=(const BVolume &vol);
 
 private:
-	b_dev_t fDevice;
-	void *fData;
+    b_dev_t fDevice;
+    void *fData;
 };
 
 #endif /* __cplusplus */

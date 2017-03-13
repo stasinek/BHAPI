@@ -1,4 +1,4 @@
-/* 
+﻿/*
 ** Copyright 2003, Marcus Overhagen. All rights reserved.
 ** Distributed under the terms of the Haiku License.
 */
@@ -14,49 +14,49 @@
 void
 atomic_set(int32 *value, int32 newValue)
 {
-	_kern_atomic_set(value, newValue);
+    _kern_atomic_set(value, newValue);
 }
 
 
 int32
 atomic_get_and_set(int32 *value, int32 newValue)
 {
-	return _kern_atomic_get_and_set(value, newValue);
+    return _kern_atomic_get_and_set(value, newValue);
 }
 
 
 int32
 atomic_test_and_set(int32 *value, int32 newValue, int32 testAgainst)
 {
-	return _kern_atomic_test_and_set(value, newValue, testAgainst);
+    return _kern_atomic_test_and_set(value, newValue, testAgainst);
 }
 
 
 int32
 atomic_add(int32 *value, int32 addValue)
 {
-	return _kern_atomic_add(value, addValue);
+    return _kern_atomic_add(value, addValue);
 }
 
 
 int32
 atomic_and(int32 *value, int32 andValue)
 {
-	return _kern_atomic_and(value, andValue);
+    return _kern_atomic_and(value, andValue);
 }
 
 
 int32
 atomic_or(int32 *value, int32 orValue)
 {
-	return _kern_atomic_or(value, orValue);
+    return _kern_atomic_or(value, orValue);
 }
 
 
 int32
 atomic_get(int32 *value)
 {
-	return _kern_atomic_get(value);
+    return _kern_atomic_get(value);
 }
 
 
@@ -67,42 +67,42 @@ atomic_get(int32 *value)
 void
 atomic_set64(int64 *value, int64 newValue)
 {
-	_kern_atomic_set64(value, newValue);
+    _kern_atomic_set64(value, newValue);
 }
 
 
 int64
 atomic_test_and_set64(int64 *value, int64 newValue, int64 testAgainst)
 {
-	return _kern_atomic_test_and_set64(value, newValue, testAgainst);
+    return _kern_atomic_test_and_set64(value, newValue, testAgainst);
 }
 
 
 int64
 atomic_add64(int64 *value, int64 addValue)
 {
-	return _kern_atomic_add64(value, addValue);
+    return _kern_atomic_add64(value, addValue);
 }
 
 
 int64
 atomic_and64(int64 *value, int64 andValue)
 {
-	return _kern_atomic_and64(value, andValue);
+    return _kern_atomic_and64(value, andValue);
 }
 
 
 int64
 atomic_or64(int64 *value, int64 orValue)
 {
-	return _kern_atomic_or64(value, orValue);
+    return _kern_atomic_or64(value, orValue);
 }
 
 
 int64
 atomic_get64(int64 *value)
 {
-	return _kern_atomic_get64(value);
+    return _kern_atomic_get64(value);
 }
 
 
@@ -118,7 +118,137 @@ extern int32_t __sync_fetch_and_add_4(int32_t *value, int32_t addValue);
 
 extern int32_t __sync_fetch_and_add_4(int32_t *value, int32_t addValue)
 {
-	return atomic_add((int32 *)value, addValue);
+    return atomic_add((int32 *)value, addValue);
 }
 
 #endif
+
+#include <BeOSBuildCompatibility.h>
+
+#include <string.h>
+
+#include <OS.h>
+#include <Haiku.h>
+
+
+#if (__GNUC__ < 4 || (__GNUC__ == 4 && __GNUC_MINOR__ < 7)) \
+    && !defined(__clang__)
+
+
+void
+atomic_set(int32 *value, int32 newValue)
+{
+    *value = newValue;
+}
+
+
+int32
+atomic_get_and_set(int32 *value, int32 newValue)
+{
+    int32 oldValue = *value;
+    *value = newValue;
+    return oldValue;
+}
+
+
+int32
+atomic_test_and_set(int32 *value, int32 newValue, int32 testAgainst)
+{
+    int32 oldValue = *value;
+    if (oldValue == testAgainst)
+        *value = newValue;
+    return oldValue;
+}
+
+
+int32
+atomic_add(int32 *value, int32 addValue)
+{
+    int32 oldValue = *value;
+    *value += addValue;
+    return oldValue;
+}
+
+
+int32
+atomic_and(int32 *value, int32 andValue)
+{
+    int32 oldValue = *value;
+    *value &= andValue;
+    return oldValue;
+}
+
+
+int32
+atomic_or(int32 *value, int32 orValue)
+{
+    int32 oldValue = *value;
+    *value |= orValue;
+    return oldValue;
+}
+
+
+int32
+atomic_get(int32 *value)
+{
+    return *value;
+}
+
+
+void
+atomic_set64(int64 *value, int64 newValue)
+{
+    *value = newValue;
+}
+
+
+int64
+atomic_get_and_set64(int64 *value, int64 newValue)
+{
+    int64 oldValue = *value;
+    *value = newValue;
+    return oldValue;
+}
+
+int64
+atomic_test_and_set64(int64 *value, int64 newValue, int64 testAgainst)
+{
+    int64 oldValue = *value;
+    if (oldValue == testAgainst)
+        *value = newValue;
+    return oldValue;
+}
+
+int64
+atomic_add64(int64 *value, int64 addValue)
+{
+    int64 oldValue = *value;
+    *value += addValue;
+    return oldValue;
+}
+
+int64
+atomic_and64(int64 *value, int64 andValue)
+{
+    int64 oldValue = *value;
+    *value &= andValue;
+    return oldValue;
+}
+
+int64
+atomic_or64(int64 *value, int64 orValue)
+{
+    int64 oldValue = *value;
+    *value |= orValue;
+    return oldValue;
+}
+
+int64
+atomic_get64(int64 *value)
+{
+    return *value;
+}
+
+
+#endif	// __GNUC__ < 4 || (__GNUC__ == 4 && __GNUC_MINOR__ < 7)
+

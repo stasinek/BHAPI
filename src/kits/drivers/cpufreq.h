@@ -8,7 +8,7 @@
 
 #include <module.h>
 
-#include <scheduler.h>
+#include <Scheduler.h>
 
 
 #define CPUFREQ_MODULES_PREFIX	"power/cpufreq"

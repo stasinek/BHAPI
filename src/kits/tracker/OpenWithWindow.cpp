@@ -1171,7 +1171,7 @@ OpenWithMenu::DoneBuildingItemList()
 			= dynamic_cast<BContainerWindow*>(fParentWindow);
 		if (window != NULL) {
 			message->AddData("nodeRefsToClose", B_RAW_TYPE,
-				window->TargetModel()->NodeRef(), sizeof(node_ref));
+				window->TargetModel()->node_ref(), sizeof(node_ref));
 		}
 
 		BString result;

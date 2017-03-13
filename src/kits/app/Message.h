@@ -27,21 +27,46 @@
  * Description: Message for communication between loopers/teams
  *
  * --------------------------------------------------------------------------*/
-
 #ifndef BHAPI_MESSAGE_H
 #define BHAPI_MESSAGE_H
-
+//-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
+//-----------------------------------------------------------------------------
+#ifndef BMESSENGER_I
+#define BMESSENGER_I
 class BMessenger;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BHANDLER_I
+#define BHANDLER_I
 class BHandler;
-class BStreamIO;
-class BString;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BPOINT_I
+#define BPOINT_I
 class BPoint;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BRECT_I
+#define BRECT_I
 class BRect;
-#include "../kernel/KERNEL.h"
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BSTRING_I
+#define BSTRING_I
+class BString;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BSTREAMIO_I
+#define BSTREAMIO_I
+class BStreamIO;
+#endif
+//-----------------------------------------------------------------------------
 #include "../support/List.h"
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BMessage {
+#include "../kernel/Kernel.h"
+#include <Haiku.h>
+//-----------------------------------------------------------------------------
+class BHAPI_IMPEXP BMessage {
 public:
     BMessage();
     BMessage(__be_uint32 what);
@@ -269,7 +294,7 @@ private:
 
     bool fIsReply;
 };
-
+//-----------------------------------------------------------------------------
 /*inline status_t
 BMessage::BGetInfo(type_code type,  __be_int32 index,
            char **nameFound, type_code *typeFound,  __be_int32 *countFound) const
@@ -331,7 +356,10 @@ BMessage::BFindData(const char *name, type_code type,
     return BFindData(name, type, 0, data, numBytes);
 }
 */
+//-----------------------------------------------------------------------------
 #endif /* __cplusplus */
-
+//-----------------------------------------------------------------------------
+#define BMESSAGE_I
 #endif /* BHAPI_MESSAGE_H */
+//-----------------------------------------------------------------------------
 

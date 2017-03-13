@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku OS source-code, All Rights Reserved
  *
@@ -33,31 +33,32 @@
 #ifndef BHAPI_STOP_WATCH_H
 #define BHAPI_STOP_WATCH_H
 
-#include "SupportDefs.h"
-
+#ifdef __cplusplus
+#include <Haiku.h>
 class BStopWatch {
-	public:
-		BStopWatch(const char* name, bool silent = false);
-		virtual ~BStopWatch();
+    public:
+        BStopWatch(const char* name, bool silent = false);
+        virtual ~BStopWatch();
 
-		void		Suspend();
-		void		Resume();
-		bigtime_t	Lap();
-		bigtime_t	ElapsedTime() const;
-		void		Reset();
-		const char*	Name() const;
+        void		Suspend();
+        void		Resume();
+        bigtime_t	Lap();
+        bigtime_t	ElapsedTime() const;
+        void		Reset();
+        const char*	Name() const;
 
-	private:
-		virtual	void _ReservedStopWatch1();
-		virtual	void _ReservedStopWatch2();
+    private:
+        virtual	void _ReservedStopWatch1();
+        virtual	void _ReservedStopWatch2();
 
-		bigtime_t	fStart;
-		bigtime_t	fSuspendTime;
-		bigtime_t	fLaps[10];
-		int32		fLap;
-		const char*	fName;
-		uint32		_reserved[2];
-		bool		fSilent;
+        bigtime_t	fStart;
+        bigtime_t	fSuspendTime;
+        bigtime_t	fLaps[10];
+        int32		fLap;
+        const char*	fName;
+        uint32		_reserved[2];
+        bool		fSilent;
 };
-
+#define BSTOPWATCH_I
+#endif // __cplusplus
 #endif // BHAPI_STOP_WATCH_H

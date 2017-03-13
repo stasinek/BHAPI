@@ -36,14 +36,19 @@
 #include "../app/Looper.h"
 #include "../app/Cursor.h"
 #include "../add-ons/font/FontEngine.h"
-#include "../support/SupportDefs.h"
+//-----------------------------------------------------------------------------
+#include <Haiku.h>
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 using namespace bhapi;
+#ifndef BCLIPBOARD_I
 class BClipboard;
+#endif
+#ifndef BGRAPHICSENGINE_I
 class BGraphicsEngine;
+#endif
 //-----------------------------------------------------------------------------
-class IMPEXPBHAPI BApplication : public BLooper {
+class BHAPI_IMPEXP BApplication : public BLooper {
 //-----------------------------------------------------------------------------
 public:
 //-----------------------------------------------------------------------------
@@ -88,7 +93,7 @@ private:
     friend class BBitmap;
     friend class BScreen;
 
-    friend IMPEXPBHAPI bool bhapi::update_font_families(bool);
+    friend BHAPI_IMPEXP bool bhapi::update_font_families(bool);
 
     bool fQuit;
     char *fSignature;
@@ -126,9 +131,9 @@ inline void BApplication::SetCursor(const void *cursor)
 }
 #endif // BHAPI_BUILD_LIBRARY
 namespace bhapi {
-extern IMPEXPBHAPI BApplication *app;
-extern IMPEXPBHAPI BMessenger app_messenger;
-extern IMPEXPBHAPI BClipboard clipboard;
+extern BHAPI_IMPEXP BApplication *app;
+extern BHAPI_IMPEXP BMessenger app_messenger;
+extern BHAPI_IMPEXP BClipboard clipboard;
 }
 //-----------------------------------------------------------------------------
 #endif /* __cplusplus */

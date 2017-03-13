@@ -300,7 +300,7 @@ BAlert::QuitRequested()
 }
 
 
-be_int32
+__be_int32
 BAlert::Go(bool could_proxy)
 {
 	if(IsRunning() || Proxy() != this || IsLockedByCurrentThread())

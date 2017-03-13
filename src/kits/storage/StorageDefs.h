@@ -30,9 +30,10 @@
 #ifndef BHAPI_STORAGE_DEFS_H
 #define BHAPI_STORAGE_DEFS_H
 
-#include "../support/SupportDefs.h"
-#include <posix/fcntl.h>
-#include <posix/sys/param.h>
+#include <Haiku.h>
+
+#include <fcntl.h>
+#include <sys/param.h>
 #include <posix/limits.h>
 
 // Limits

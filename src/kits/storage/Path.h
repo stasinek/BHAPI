@@ -30,7 +30,7 @@
 #ifndef BHAPI_PATH_H
 #define BHAPI_PATH_H 
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #ifdef WIN32
 #include <winsock2.h>
@@ -42,7 +42,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXPBHAPI BPath {
+class BHAPI_IMPEXP BPath {
 public:
 	BPath();
 	BPath(const char *dir, const char *leaf = NULL, bool normalize = false);

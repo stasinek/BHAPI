@@ -54,7 +54,7 @@ static status_t bhapi::string_array_to_string_list(const char* const* o_architec
     return B_OK;
 }
 
-status_t bhapi::get_secondary_architectures(BStringList& a_architectures)
+status_t bhapi::__get_secondary_architectures(BStringList& a_architectures)
 {
     const char* architectures[k_MaxArchitectureCount];
     size_t count = get_secondary_architectures(architectures,
@@ -63,7 +63,7 @@ status_t bhapi::get_secondary_architectures(BStringList& a_architectures)
         std::min(count, k_MaxArchitectureCount), a_architectures);
 }
 
-status_t bhapi::get_architectures(BStringList& a_architectures)
+status_t bhapi::__get_architectures(BStringList& a_architectures)
 {
     const char* architectures[k_MaxArchitectureCount];
     size_t count = get_architectures(architectures, k_MaxArchitectureCount);

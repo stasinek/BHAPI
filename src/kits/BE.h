@@ -27,7 +27,24 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "support/SupportDefs.h"
+#include "AppKit.h"
+#include "DeviceKit.h"
+#include "GameKit.h"
+#include "InterfaceKit.h"
+#include "KernelKit.h"
+#include "LocaleKit.h"
+#include "MailKit.h"
+#include "MediaKit.h"
+#include "MidiKit.h"
+#include "NetKit.h"
+#include "NetworkKit.h"
+#include "RenderKit.h"
+#include "TranslationKit.h"
+#include "XmlKit.h"
+#include "SupportKit.h"
+#include "StorageKit.h"
+
+#include <Haiku.h>
 
 #define B_BEOS_VERSION_4				0x0400
 #define B_BEOS_VERSION_4_5				0x0450
@@ -121,28 +138,19 @@
 extern "C" {
 namespace bhapi {
 #endif // __cplusplus
-extern IMPEXPBHAPI const  __be_uint8 major_version;
-extern IMPEXPBHAPI const  __be_uint8 minor_version;
-extern IMPEXPBHAPI const  __be_uint8 micro_version;
-extern IMPEXPBHAPI const  __be_uint8 interface_age;
-extern IMPEXPBHAPI const  __be_uint16 binary_age;
+extern BHAPI_IMPEXP const  __be_uint8 be_major_version;
+extern BHAPI_IMPEXP const  __be_uint8 be_minor_version;
+extern BHAPI_IMPEXP const  __be_uint8 be_micro_version;
+extern BHAPI_IMPEXP const  __be_uint8 be_interface_age;
+extern BHAPI_IMPEXP const  __be_uint16 be_binary_age;
 #ifdef __cplusplus
 } /* namespace */
 }
 #endif // __cplusplus
 #else
-#define major_version BHAPI_MAJOR_VERSION
-#define minor_version BHAPI_MINOR_VERSION
-#define micro_version BHAPI_MICRO_VERSION
-#define interface_age BHAPI_INTERFACE_AGE
-#define binary_age BHAPI_BINARY_AGE
+extern const  __be_uint8 be_major_version;
+extern const  __be_uint8 be_minor_version;
+extern const  __be_uint8 be_micro_version;
+extern const  __be_uint8 be_interface_age;
+extern const  __be_uint16 be_binary_age;
 #endif
-
-#include "AppKit.h"
-#include "KernelKit.h"
-#include "StorageKit.h"
-#include "RenderKit.h"
-#include "InterfaceKit.h"
-#include "XmlKit.h"
-#include "NetKit.h"
-#include "SupportKit.h"

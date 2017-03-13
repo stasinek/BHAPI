@@ -287,7 +287,7 @@ BNavMenu::BNavMenu(const char* title, uint32 message, const BHandler* target,
 		dynamic_cast<BContainerWindow*>(fParentWindow);
 	if (originatingWindow != NULL) {
 		fMessage.AddData("nodeRefsToClose", B_RAW_TYPE,
-			originatingWindow->TargetModel()->NodeRef(), sizeof(node_ref));
+			originatingWindow->TargetModel()->node_ref(), sizeof(node_ref));
 	}
 
 	// too long to have triggers
@@ -322,7 +322,7 @@ BNavMenu::BNavMenu(const char* title, uint32 message,
 		dynamic_cast<BContainerWindow*>(fParentWindow);
 	if (originatingWindow != NULL) {
 		fMessage.AddData("nodeRefsToClose", B_RAW_TYPE,
-			originatingWindow->TargetModel()->NodeRef(), sizeof (node_ref));
+			originatingWindow->TargetModel()->node_ref(), sizeof (node_ref));
 	}
 
 	// too long to have triggers

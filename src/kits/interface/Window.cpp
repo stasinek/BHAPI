@@ -50,7 +50,7 @@
 #include "../app/Looper.h"
 #include "../app/MessageRunner.h"
 
-class LOCALBHAPI BWindowLayoutItem : public BLayoutItem {
+class BHAPI_LOCAL BWindowLayoutItem : public BLayoutItem {
 public:
 	BWindowLayoutItem(BRect frame);
 	virtual ~BWindowLayoutItem();
@@ -59,7 +59,7 @@ public:
 };
 
 
-class LOCALBHAPI BWindowLayoutContainer : public BLayoutContainer {
+class BHAPI_LOCAL BWindowLayoutContainer : public BLayoutContainer {
 public:
 	BWindowLayoutContainer(BWindow *win, BRect frame);
 	virtual ~BWindowLayoutContainer();
@@ -900,7 +900,7 @@ BWindow::RemoveChild(BView *child)
 }
 
 
-be_int32
+__be_int32
 BWindow::CountChildren() const
 {
 	return cast_as(fLayout, BWindowLayoutContainer)->TopItem()->CountItems();
@@ -1573,7 +1573,7 @@ BWindow::SetFlags(__be_uint32 flags)
 }
 
 
-be_uint32
+__be_uint32
 BWindow::Flags() const
 {
 	return fWindowFlags;
@@ -1606,7 +1606,7 @@ BWindow::SetWorkspaces(__be_uint32 workspace)
 }
 
 
-be_uint32
+__be_uint32
 BWindow::Workspaces() const
 {
 	return fWindowWorkspaces;

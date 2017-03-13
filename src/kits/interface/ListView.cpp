@@ -248,7 +248,7 @@ BListView::LastItem() const
 }
 
 
-be_int32
+__be_int32
 BListView::IndexOf(const BListItem *item) const
 {
 	if(item == NULL || item->fOwner != this) return -1;
@@ -256,7 +256,7 @@ BListView::IndexOf(const BListItem *item) const
 }
 
 
-be_int32
+__be_int32
 BListView::IndexOf(BPoint where, bool mustVisible) const
 {
 	float boundsBottom = -1;
@@ -302,7 +302,7 @@ BListView::HasItem(const BListItem *item) const
 }
 
 
-be_int32
+__be_int32
 BListView::CountItems() const
 {
 	return fItems.CountItems();
@@ -617,7 +617,7 @@ BListView::SelectionMessage() const
 }
 
 
-be_uint32
+__be_uint32
 BListView::SelectionCommand() const
 {
 	return(fSelectionMessage ? fSelectionMessage->what : 0);
@@ -631,7 +631,7 @@ BListView::InvocationMessage() const
 }
 
 
-be_uint32
+__be_uint32
 BListView::InvocationCommand() const
 {
 	return Command();
@@ -723,7 +723,7 @@ BListView::IsItemSelected(__be_int32 index) const
 }
 
 
-be_int32
+__be_int32
 BListView::CurrentSelection(__be_int32 index) const
 {
 	if(fFirstSelected < 0 || index < 0) return -1;
@@ -1084,7 +1084,7 @@ BListView::SetPosition(__be_int32 pos)
 }
 
 
-be_int32
+__be_int32
 BListView::Position() const
 {
 	return fPos;

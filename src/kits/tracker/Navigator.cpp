@@ -231,7 +231,7 @@ BNavigator::SendNavigationMessage(NavigationAction action, BEntry* entry,
 		// get the node of this folder for selecting it in the new location
 		const node_ref* nodeRef;
 		if (Window() && Window()->TargetModel())
-			nodeRef = Window()->TargetModel()->NodeRef();
+			nodeRef = Window()->TargetModel()->node_ref();
 		else
 			nodeRef = NULL;
 

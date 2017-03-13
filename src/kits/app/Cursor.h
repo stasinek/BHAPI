@@ -27,15 +27,16 @@
  * Description: mouse cursor for application
  *
  * --------------------------------------------------------------------------*/
-
 #ifndef BHAPI_CURSOR_H
 #define BHAPI_CURSOR_H
-
+//-----------------------------------------------------------------------------
 #include "../support/Archivable.h"
-#include "../support/SupportDefs.h"
-
+//-----------------------------------------------------------------------------
+#include <Haiku.h>
+//-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
-class IMPEXPBHAPI BCursor : public BArchivable {
+//-----------------------------------------------------------------------------
+class BHAPI_IMPEXP BCursor : public BArchivable {
 public:
     BCursor(const void *cursorData);
     BCursor(const BCursor &cursor);
@@ -62,28 +63,26 @@ public:
 private:
     void *fData;
 };
-
+//-----------------------------------------------------------------------------
 #ifdef BHAPI_BUILD_LIBRARY
-
+//-----------------------------------------------------------------------------
 inline  __be_uint8 BCursor::SpotX() const
 {
     return(Spot() >> 8);
 }
-
-
+//-----------------------------------------------------------------------------
 inline  __be_uint8 BCursor::SpotY() const
 {
     return(Spot() & 0xff);
 }
 #endif
-
-extern IMPEXPBHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT;
-extern IMPEXPBHAPI const BCursor *B_CURSOR_HAND;
-extern IMPEXPBHAPI const BCursor *B_CURSOR_HAND_MOVE;
-extern IMPEXPBHAPI const BCursor *B_CURSOR_I_BEAM;
-
-
+//-----------------------------------------------------------------------------
+extern BHAPI_IMPEXP const BCursor *B_CURSOR_SYSTEM_DEFAULT;
+extern BHAPI_IMPEXP const BCursor *B_CURSOR_HAND;
+extern BHAPI_IMPEXP const BCursor *B_CURSOR_HAND_MOVE;
+extern BHAPI_IMPEXP const BCursor *B_CURSOR_I_BEAM;
+//-----------------------------------------------------------------------------
 #endif /* __cplusplus */
-
+//-----------------------------------------------------------------------------
 #endif /* BHAPI_CURSOR_H */
-
+//-----------------------------------------------------------------------------

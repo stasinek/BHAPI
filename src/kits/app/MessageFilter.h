@@ -31,9 +31,29 @@
 
 #ifndef BHAPI_MESSAGE_FILTER_H
 #define BHAPI_MESSAGE_FILTER_H
-
-#include "../support/SupportDefs.h"
-
+//-----------------------------------------------------------------------------
+#ifdef __cplusplus /* Just for C++ */
+//-----------------------------------------------------------------------------
+#ifndef BLOOPER_I
+#define BLOOPER_I
+class BLooper;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BMESSAGE_I
+#define BMESSAGE_I
+class BMessage;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BMESSAGEQUEUE_I
+#define BMESSAGEQUEUE_I
+class BMessageQueue;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BHANDLER_I
+#define BHANDLER_I
+class BHandler;
+#endif
+//-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 namespace bhapi {
 #endif
@@ -47,25 +67,22 @@ typedef enum message_delivery {
     B_PROGRAMMED_DELIVERY	=	0x2,
     B_ANY_DELIVERY		=	0xff
 } message_delivery;
-
 typedef enum message_source {
-    BLOCALBHAPI_SOURCE		=	0x1,
+    BBHAPI_LOCAL_SOURCE		=	0x1,
     B_REMOTE_SOURCE		=	0x2,
     B_ANY_SOURCE		=	0xff
 } message_source;
 #ifdef __cplusplus /* Just for C++ */
 } // namespace
 #endif
-
-#ifdef __cplusplus /* Just for C++ */
-class BLooper;
-class BMessage;
-class BMessageFilter;
-class BHandler;
+//-----------------------------------------------------------------------------
+#include <Haiku.h>
+//-----------------------------------------------------------------------------
 namespace bhapi {
 typedef filter_result (*filter_hook)(BMessage *message, BHandler **target, BMessageFilter *filter);
 }
-class IMPEXPBHAPI BMessageFilter {
+//-----------------------------------------------------------------------------
+class BHAPI_IMPEXP BMessageFilter {
 public:
     BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,
                 __be_uint32 command, bhapi::filter_hook filter = NULL);
@@ -100,8 +117,10 @@ private:
 
     bhapi::filter_result doFilter(BMessage *message, BHandler **target);
 };
-
+//-----------------------------------------------------------------------------
 #endif /* __cplusplus */
-
+//-----------------------------------------------------------------------------
+#define BMESSAGEFILTER_I
 #endif /* BHAPI_MESSAGE_FILTER_H */
+//-----------------------------------------------------------------------------
 

@@ -1,0 +1,14 @@
+C_DEFINES=$(C_DEFINES) -D_KERNEL_ -D__KERNEL__
+
+TARGETNAME=linux_mm
+TARGETPATH=../../
+TARGETTYPE=DRIVER_LIBRARY
+DRIVERTYPE=FS
+
+INCLUDES=..\..\ntos\inc; ..\..\include
+
+DIRS= linux linux/mm linux/lib pitix
+SOURCES=\
+		page_alloc.c \
+		kmem_cache.c \
+		filemap.c

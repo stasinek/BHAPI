@@ -48,7 +48,7 @@ class BPopUpMenu;
 #include "../support/List.h"
 #include "../interface/View.h"
 #include "../interface/MenuItem.h"
-class IMPEXPBHAPI BMenu : public BView {
+class BHAPI_IMPEXP BMenu : public BView {
 public:
     BMenu(const char *title, bhapi::menu_layout layout = B_ITEMS_IN_COLUMN);
     BMenu(const char *title, float width, float height);

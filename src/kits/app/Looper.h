@@ -30,18 +30,48 @@
 
 #ifndef BHAPI_LOOPER_H
 #define BHAPI_LOOPER_H
-
+//-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
+//-----------------------------------------------------------------------------
+#ifndef BAPPLICATION_I
+#define BAPPLICATION_I
 class BApplication;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BMESSENGER_I
+#define BMESSENGER_I
 class BMessenger;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BMESSAGE_I
+#define BMESSAGE_I
 class BMessage;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BMESSAGEFILTER_I
+#define BMESSAGEFILTER_I
 class BMessageFilter;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BMESSAGEQUEUE_I
+#define BMESSAGEQUEUE_I
 class BMessageQueue;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BMESSAGEQUEUE_I
+#define BMESSAGEQUEUE_I
 class BLoooper;
+#endif
+//-----------------------------------------------------------------------------
+#endif // __cplusplus
+//-----------------------------------------------------------------------------
 #include "../support/List.h"
 #include "Handler.h"
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BLooper : public BHandler {
+#include <Haiku.h>
+//-----------------------------------------------------------------------------
+#ifdef __cplusplus
+//-----------------------------------------------------------------------------
+class BHAPI_IMPEXP BLooper : public BHandler {
 public:
 //	BLooper(const char *name = NULL,
 //		__be_int32 priority = B_NORMAL_PRIORITY);
@@ -175,8 +205,9 @@ private:
 
     virtual bool	IsDependsOnOthersWhenQuitRequested() const;
 };
-
+//-----------------------------------------------------------------------------
 #endif /* __cplusplus */
-
+//-----------------------------------------------------------------------------
+#define BLOOPER_I
 #endif /* BHAPI_LOOPER_H */
-
+//-----------------------------------------------------------------------------

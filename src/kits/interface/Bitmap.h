@@ -37,7 +37,7 @@
 #ifdef __cplusplus /* Just for C++ */
 class BGraphicsDrawable;
 class BPixmap;
-class IMPEXPBHAPI BBitmap : public BArchivable {
+class BHAPI_IMPEXP BBitmap : public BArchivable {
 public:
     BBitmap(BRect bounds, bool acceptsViews = false);
     BBitmap(const BBitmap *bitmap, bool acceptsViews = false);

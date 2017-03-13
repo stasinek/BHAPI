@@ -82,7 +82,7 @@ BControl::SetValue(__be_int32 value)
 }
 
 
-be_int32
+__be_int32
 BControl::Value() const
 {
 	return fValue;

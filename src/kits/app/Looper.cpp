@@ -51,7 +51,7 @@
 #include <stdlib.h>
 
 #ifdef BHAPI_BUILD_LIBRARY
-EXPORTBHAPI BList BLooper::sLooperList;
+BHAPI_EXPORT BList BLooper::sLooperList;
 #endif // BHAPI_BUILD_LIBRARY
 
 BLooper::BLooper(const char *name)
@@ -208,7 +208,7 @@ BLooper::RemoveHandler(BHandler *handler)
 }
 
 
-be_int32
+__be_int32
 BLooper::CountHandlers() const
 {
     return fHandlersCount;
@@ -230,7 +230,7 @@ BLooper::HandlerAt(__be_int32 index) const
 }
 
 
-be_int32
+__be_int32
 BLooper::IndexOf(BHandler *handler) const
 {
     if(handler == NULL || handler->fLooper != this) return -1;
@@ -298,7 +298,7 @@ BLooper::LockWithTimeout(bigtime_t microseconds_timeout)
 }
 
 
-be_int64
+__be_int64
 BLooper::CountLocks() const
 {
     return fLocksCount;
@@ -976,7 +976,7 @@ BLooper::MessageQueue() const
 }
 
 
-be_int64
+__be_int64
 BLooper::Thread() const
 {
     return bhapi::get_thread_id(Proxy()->fThread);

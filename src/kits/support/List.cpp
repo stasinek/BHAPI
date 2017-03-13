@@ -437,7 +437,7 @@ bool BList::HasItem(void *item) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BList::IndexOf(void *item) const
+__be_int32 BList::IndexOf(void *item) const
 {
     for (__be_int32 i = 0; i < fItemCount; i++)
     {
@@ -449,7 +449,7 @@ be_int32 BList::IndexOf(void *item) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BList::CountItems(void) const
+__be_int32 BList::CountItems(void) const
 {
     return fItemCount;
 }

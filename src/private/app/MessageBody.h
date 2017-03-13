@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_PRIVATE_MESSAGE_BODY_H
 #define BHAPI_PRIVATE_MESSAGE_BODY_H
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 #include "../support/List.h"
 #include "../support/StreamIO.h"
 
@@ -40,7 +40,7 @@ class BMessageBody;
 class BMessageNode;
 
 
-class LOCALBHAPI BMessageItem
+class BHAPI_LOCAL BMessageItem
 {
 public:
     BMessageItem(void *data, size_t nBytes, bool fixedSize = true);
@@ -61,7 +61,7 @@ private:
 };
 
 
-class LOCALBHAPI BMessageBody
+class BHAPI_LOCAL BMessageBody
 {
 public:
     BMessageBody();

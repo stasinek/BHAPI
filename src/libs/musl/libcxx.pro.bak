@@ -1,0 +1,190 @@
+#-------------------------------------------------
+#
+# Project created by QtCreator 2017-02-05T15:33:45
+#
+#-------------------------------------------------
+
+TARGET = libcxx
+TEMPLATE = lib
+DEFINES += LIBC_BUILD_LIBRARY
+DEFINES += __INTEL__
+CONFIG += windows shared dll lib_bundle staticlib
+CONFIG -= app_bundle
+CONFIG -= qt
+QT -= core gui
+
+LIBS += -lkernel32 -lgdi32 -lshell32 -luser32 -lcomctl32 -luserenv
+LIBS += -lws2_32 -lwsock32 -lwinmm -limm32 -lole32 -loleaut32
+
+SOURCES += \
+    src/experimental/filesystem/directory_iterator.cpp \
+    src/experimental/filesystem/operations.cpp \
+    src/experimental/filesystem/path.cpp \
+    src/experimental/memory_resource.cpp \
+    src/support/solaris/xlocale.cpp \
+    src/support/win32/support.cpp \
+    src/algorithm.cpp \
+    src/any.cpp \
+    src/bind.cpp \
+    src/chrono.cpp \
+    src/condition_variable.cpp \
+    src/debug.cpp \
+    src/exception.cpp \
+    src/future.cpp \
+    src/hash.cpp \
+    src/ios.cpp \
+    src/iostream.cpp \
+    src/locale.cpp \
+    src/memory.cpp \
+    src/mutex.cpp \
+    src/new.cpp \
+    src/optional.cpp \
+    src/random.cpp \
+    src/regex.cpp \
+    src/shared_mutex.cpp \
+    src/stdexcept.cpp \
+    src/string.cpp \
+    src/strstream.cpp \
+    src/system_error.cpp \
+    src/thread.cpp \
+    src/typeinfo.cpp \
+    src/utility.cpp \
+    src/valarray.cpp \
+    src/variant.cpp
+
+HEADERS += \
+    include/support/android/locale_bionic.h \
+    include/support/ibm/limits.h \
+    include/support/ibm/locale_mgmt_aix.h \
+    include/support/ibm/support.h \
+    include/support/ibm/xlocale.h \
+    include/support/musl/xlocale.h \
+    include/support/newlib/xlocale.h \
+    include/support/solaris/floatingpoint.h \
+    include/support/solaris/wchar.h \
+    include/support/solaris/xlocale.h \
+    include/support/win32/limits_win32.h \
+    include/support/win32/locale_mgmt_win32.h \
+    include/support/win32/support.h \
+    include/support/xlocale/__nop_locale_mgmt.h \
+    include/support/xlocale/__posix_l_fallback.h \
+    include/support/xlocale/__strtonum_fallback.h \
+    include/support/xlocale/xlocale.h \
+    include/__bsd_locale_defaults.h \
+    include/__bsd_locale_fallbacks.h \
+    include/complex.h \
+    include/ctype.h \
+    include/errno.h \
+    include/float.h \
+    include/inttypes.h \
+    include/limits.h \
+    include/locale.h \
+    include/math.h \
+    include/setjmp.h \
+    include/stdbool.h \
+    include/stddef.h \
+    include/stdint.h \
+    include/stdio.h \
+    include/stdlib.h \
+    include/string.h \
+    include/tgmath.h \
+    include/wchar.h \
+    include/wctype.h \
+    src/include/atomic_support.h \
+    src/include/config_elast.h
+
+contains(QMAKE_COMPILER_DEFINES, BEOS) {
+SOURCES +=
+HEADERS +=
+}
+
+contains(QMAKE_COMPILER_DEFINES, WIN32) {
+SOURCES +=
+HEADERS +=
+}
+
+contains(QMAKE_COMPILER_DEFINES, LINUX) {
+SOURCES +=
+HEADERS +=
+}
+
+contains(QMAKE_COMPILER_DEFINES, MACOS) {
+SOURCES +=
+HEADERS +=
+}
+
+contains(QMAKE_COMPILER_DEFINES, __GNUC__) {
+QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CFLAGS   += -std=c++11
+
+QMAKE_CXXFLAGS += -Wno-write-strings -Wno-multichar
+QMAKE_CFLAGS   += -Wno-write-strings -Wno-multichar
+QMAKE_CXXFLAGS += -Wno-unused-variable -Wno-unused-parameter -Wno-unused-value -Wno-unused-label
+QMAKE_CFLAGS   += -Wno-unused-variable -Wno-unused-parameter -Wno-unused-value -Wno-unused-label
+QMAKE_CXXFLAGS += -Wno-unused-but-set-variable
+QMAKE_CFLAGS   += -Wno-unused-but-set-variable
+QMAKE_CXXFLAGS += -Wattributes -Winline -Wshadow -Wall
+QMAKE_CFLAGS   += -Wattributes -Winline -Wshadow -Wall
+QMAKE_CXXFLAGS += -Wunknown-pragmas
+QMAKE_CFLAGS   += -Wunknown-pragmas
+
+QMAKE_CXXFLAGS -= -pipe
+QMAKE_CXXFLAGS += -save-temps
+QMAKE_CXXFLAGS += -std=gnu++11 -pthread
+QMAKE_CXXFLAGS += -fverbose-asm
+QMAKE_CXXFLAGS += -fstrict-aliasing
+QMAKE_CXXFLAGS += -dD -DPIC
+QMAKE_CXXFLAGS += -g
+QMAKE_CXXFLAGS += -malign-double
+QMAKE_CXXFLAGS += -momit-leaf-frame-pointer
+QMAKE_CXXFLAGS += -fwrapv
+QMAKE_CXXFLAGS += -funroll-loops
+QMAKE_CXXFLAGS += -m32 -mfpmath=sse -flto
+QMAKE_CXXFLAGS += -mpreferred-stack-boundary=8
+QMAKE_CXXFLAGS += -mmmx -msse -msse2
+}
+
+contains(QMAKE_COMPILER_DEFINES, __clang__) {
+QMAKE_CXXFLAGS += -std=c++11 -std=gnu++11
+QMAKE_CFLAGS += -std=c++11 -std=gnu++11
+
+QMAKE_CXXFLAGS += -Wno-write-strings -Wno-multichar
+QMAKE_CFLAGS   += -Wno-write-strings -Wno-multichar
+QMAKE_CXXFLAGS += -Wno-unused-variable -Wno-unused-parameter -Wno-unused-value -Wno-unused-label
+QMAKE_CFLAGS   += -Wno-unused-variable -Wno-unused-parameter -Wno-unused-value -Wno-unused-label
+QMAKE_CXXFLAGS += -Wno-unused-but-set-variable
+QMAKE_CFLAGS   += -Wno-unused-but-set-variable
+QMAKE_CXXFLAGS += -Wattributes -Winline -Wshadow -Wall
+QMAKE_CFLAGS   += -Wattributes -Winline -Wshadow -Wall
+QMAKE_CXXFLAGS += -Wunknown-pragmas
+QMAKE_CFLAGS   += -Wunknown-pragmas
+QMAKE_CXXFLAGS += -Qunused-arguments -Wno-error=unused-command-line-argument-hard-error-in-future
+
+QMAKE_CXXFLAGS += -std=gnu++11 -pthread
+QMAKE_CXXFLAGS += -save-temps
+QMAKE_CXXFLAGS += -fverbose-asm
+QMAKE_CXXFLAGS += -fstrict-aliasing
+QMAKE_CXXFLAGS += -dD
+QMAKE_CXXFLAGS += -g
+QMAKE_CXXFLAGS += -malign-double
+QMAKE_CXXFLAGS += -momit-leaf-frame-pointer
+QMAKE_CXXFLAGS += -fwrapv
+QMAKE_CXXFLAGS += -funroll-loops
+QMAKE_CXXFLAGS += -m32 --32 -mfpmath=sse -flto
+QMAKE_CXXFLAGS += -mpreferred-stack-boundary=8
+QMAKE_CXXFLAGS += -mmmx -msse -msse2
+QMAKE_CXXFLAGS -= -fno-keep-inline-dllexport
+QMAKE_CXXFLAGS -= -finline-small-functions
+QMAKE_CXXFLAGS -= -pipe
+
+QMAKE_LFLAGS += -Qunused-arguments -Wno-error=unused-command-line-argument-hard-error-in-future
+QMAKE_LFLAGS   -= -mthreads
+}
+
+
+unix {
+    target.path = /usr/lib
+    INSTALLS += target
+}
+
+INCLUDEPATH +=  include

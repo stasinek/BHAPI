@@ -32,8 +32,8 @@
 #define BHAPI_LOCKER_H
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BLocker {
+#include <Haiku.h>
+class BHAPI_IMPEXP BLocker {
 public:
     BLocker();
     virtual ~BLocker();

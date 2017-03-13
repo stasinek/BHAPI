@@ -16,7 +16,7 @@
 #include <timer.h>
 #include <arch/cpu.h>
 
-#include <scheduler.h>
+#include <Scheduler.h>
 
 
 struct kernel_args;

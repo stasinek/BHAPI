@@ -222,7 +222,7 @@ BDirMenu::AddItemToDirMenu(const BEntry* entry, BWindow* originatingWindow,
 		dynamic_cast<BContainerWindow*>(originatingWindow) : 0;
 	if (window != NULL) {
 		message->AddData("nodeRefsToClose", B_RAW_TYPE,
-			window->TargetModel()->NodeRef(), sizeof (node_ref));
+			window->TargetModel()->node_ref(), sizeof (node_ref));
 	}
 	ModelMenuItem* item;
 	if (navMenuEntries) {

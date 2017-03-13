@@ -167,7 +167,7 @@ BListItem::SetExpanded(bool state)
 }
 
 
-be_uint32
+__be_uint32
 BListItem::OutlineLevel() const
 {
 	return fLevel;
@@ -252,7 +252,7 @@ BListItem::SetFlags(__be_uint32 flags)
 }
 
 
-be_uint32
+__be_uint32
 BListItem::Flags() const
 {
 	return fFlags;

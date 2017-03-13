@@ -131,8 +131,8 @@ Model::Model(const Model& other)
 	fHasLocalizedName(other.fHasLocalizedName),
 	fLocalizedNameIsCached(other.fLocalizedNameIsCached)
 {
-	fStatBuf.st_dev = other.NodeRef()->device;
-	fStatBuf.st_ino = other.NodeRef()->node;
+	fStatBuf.st_dev = other.node_ref()->device;
+	fStatBuf.st_ino = other.node_ref()->node;
 
 	if (other.IsSymLink() && other.LinkTo())
 		fLinkTo = new Model(*other.LinkTo());
@@ -141,8 +141,8 @@ Model::Model(const Model& other)
 	if (fStatus == B_OK) {
 		ASSERT(fNode);
 		fNode->GetStat(&fStatBuf);
-		ASSERT(fStatBuf.st_dev == other.NodeRef()->device);
-		ASSERT(fStatBuf.st_ino == other.NodeRef()->node);
+		ASSERT(fStatBuf.st_dev == other.node_ref()->device);
+		ASSERT(fStatBuf.st_ino == other.node_ref()->node);
 	}
 	if (!other.IsNodeOpen())
 		CloseNode();
@@ -666,7 +666,7 @@ Model::FinishSettingUpType()
 					fMimeType = mimeString;
 
 				if (fIconFrom == kUnknownNotFromNode
-					&& WellKnowEntryList::Match(NodeRef())
+					&& WellKnowEntryList::Match(node_ref())
 						> (directory_which)-1) {
 					// one of home, beos, system, boot, etc.
 					fIconFrom = kTrackerSupplied;
@@ -676,8 +676,8 @@ Model::FinishSettingUpType()
 
 		case kVolumeNode:
 		{
-			if (NodeRef()->node == fEntryRef.directory
-				&& NodeRef()->device == fEntryRef.device) {
+			if (node_ref()->node == fEntryRef.directory
+				&& node_ref()->device == fEntryRef.device) {
 				// promote from volume to file system root
 				fBaseType = kRootNode;
 				fMimeType = B_ROOT_MIMETYPE;
@@ -687,14 +687,14 @@ Model::FinishSettingUpType()
 			// volumes have to have a B_VOLUME_MIMETYPE type
 			fMimeType = B_VOLUME_MIMETYPE;
 			if (fIconFrom == kUnknownNotFromNode) {
-				if (WellKnowEntryList::Match(NodeRef()) > (directory_which)-1)
+				if (WellKnowEntryList::Match(node_ref()) > (directory_which)-1)
 					fIconFrom = kTrackerSupplied;
 				else
 					fIconFrom = kVolume;
 			}
 
 			char name[B_FILE_NAME_LENGTH];
-			BVolume volume(NodeRef()->device);
+			BVolume volume(node_ref()->device);
 			if (volume.InitCheck() == B_OK && volume.GetName(name) == B_OK) {
 				if (fVolumeName != NULL)
 					DeletePreferredAppVolumeNameLinkTo();
@@ -751,7 +751,7 @@ Model::ResetIconFrom()
 			|| fBaseType == kTrashNode || fBaseType == kDesktopNode)
 		&& !CheckNodeIconHint(fNode)) {
 		BDirectory* directory = dynamic_cast<BDirectory*>(fNode);
-		if (WellKnowEntryList::Match(NodeRef()) > (directory_which)-1) {
+		if (WellKnowEntryList::Match(node_ref()) > (directory_which)-1) {
 			fIconFrom = kTrackerSupplied;
 			return;
 		} else if (directory != NULL && directory->IsRootDirectory()) {
@@ -882,11 +882,11 @@ Model::WatchVolumeAndMountPoint(uint32 , BHandler* target)
 		BEntry mountPointEntry(bootMountPoint.String());
 		Model mountPointModel(&mountPointEntry);
 
-		TTracker::WatchNode(mountPointModel.NodeRef(),
+		TTracker::WatchNode(mountPointModel.node_ref(),
 			B_WATCH_NAME | B_WATCH_STAT | B_WATCH_ATTR, target);
 	}
 
-	return TTracker::WatchNode(NodeRef(),
+	return TTracker::WatchNode(node_ref(),
 		B_WATCH_NAME | B_WATCH_STAT | B_WATCH_ATTR, target);
 }
 
@@ -1312,8 +1312,8 @@ Model::PrintToStream(int32 level, bool deep)
 		B_PRIdDEV ", directory inode %" B_PRIdINO "\n",
 		Name() ? Name() : "**empty name**",
 		EntryRef()->name ? EntryRef()->name : "**empty ref name**",
-		NodeRef()->node,
-		NodeRef()->device,
+		node_ref()->node,
+		node_ref()->device,
 		EntryRef()->directory));
 	PRINT(("type %s \n", MimeType()));
 
@@ -1461,7 +1461,7 @@ Model::TrackIconSource(icon_size size)
 	}
 
 	if (fBaseType == kVolumeNode) {
-		BVolume volume(NodeRef()->device);
+		BVolume volume(node_ref()->device);
 		status_t result = volume.GetIcon(&bitmap, size);
 		PRINT(("getting icon from volume %s\n", strerror(result)));
 	} else {

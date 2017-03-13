@@ -48,16 +48,16 @@
 #include "Clipboard.h"
 //-----------------------------------------------------------------------------
 
-LOCALBHAPI BCursor _B_CURSOR_SYSTEM_DEFAULT(NULL);
+BHAPI_LOCAL BCursor _B_CURSOR_SYSTEM_DEFAULT(NULL);
 
-EXPORTBHAPI BApplication *bhapi::app = NULL;
-EXPORTBHAPI BMessenger bhapi::app_messenger;
-EXPORTBHAPI BClipboard bhapi::clipboard("system");
-EXPORTBHAPI const BCursor *B_CURSOR_SYSTEM_DEFAULT = &_B_CURSOR_SYSTEM_DEFAULT;
+BHAPI_EXPORT BApplication *bhapi::app = NULL;
+BHAPI_EXPORT BMessenger bhapi::app_messenger;
+BHAPI_EXPORT BClipboard bhapi::clipboard("system");
+BHAPI_EXPORT const BCursor *B_CURSOR_SYSTEM_DEFAULT = &_B_CURSOR_SYSTEM_DEFAULT;
 
 #ifdef BHAPI_BUILD_LIBRARY
-EXPORTBHAPI BList BApplication::sRunnerList;
-EXPORTBHAPI bigtime_t BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(0);
+BHAPI_EXPORT BList BApplication::sRunnerList;
+BHAPI_EXPORT bigtime_t BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(0);
 #endif // BHAPI_BUILD_LIBRARY
 
 //-----------------------------------------------------------------------------
@@ -431,7 +431,7 @@ void BApplication::MessageReceived(BMessage *msg)
 #if 0
 //-----------------------------------------------------------------------------
 
-be_int32 BApplication::CountLoopers()
+__be_int32 BApplication::CountLoopers()
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     BAutolock <BLocker>autolock(hLocker);

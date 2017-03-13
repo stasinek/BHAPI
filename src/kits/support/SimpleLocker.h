@@ -31,10 +31,10 @@
 #ifndef BHAPI_SIMPLE_LOCKER_H
 #define BHAPI_SIMPLE_LOCKER_H
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */
-class IMPEXPBHAPI BSimpleLocker {
+class BHAPI_IMPEXP BSimpleLocker {
 public:
     BSimpleLocker(bool assert = false);
     virtual ~BSimpleLocker();

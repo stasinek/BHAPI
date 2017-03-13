@@ -744,7 +744,7 @@ BPoseView::SavePoseLocations(BRect* frameIfDesktop)
 	Model* targetModel = TargetModel();
 	ThrowOnAssert(targetModel != NULL);
 
-	BVolume volume(TargetModel()->NodeRef()->device);
+	BVolume volume(TargetModel()->node_ref()->device);
 	if (volume.InitCheck() != B_OK)
 		return;
 
@@ -766,7 +766,7 @@ BPoseView::SavePoseLocations(BRect* frameIfDesktop)
 			poseInfo.fInvisible = false;
 
 			if (model->IsRoot())
-				poseInfo.fInitedDirectory = targetModel->NodeRef()->node;
+				poseInfo.fInitedDirectory = targetModel->node_ref()->node;
 			else
 				poseInfo.fInitedDirectory = model->EntryRef()->directory;
 
@@ -861,7 +861,7 @@ BPoseView::StartWatching()
 
 	Model* targetModel = TargetModel();
 	if (targetModel != NULL)
-		TTracker::WatchNode(targetModel->NodeRef(), B_WATCH_ATTR, this);
+		TTracker::WatchNode(targetModel->node_ref(), B_WATCH_ATTR, this);
 
 	BMimeType::StartWatching(BMessenger(this));
 }
@@ -1167,7 +1167,7 @@ BPoseView::InitDirentIterator(const entry_ref* ref)
 		return NULL;
 	}
 
-	TTracker::WatchNode(sourceModel.NodeRef(), B_WATCH_DIRECTORY
+	TTracker::WatchNode(sourceModel.node_ref(), B_WATCH_DIRECTORY
 		| B_WATCH_NAME | B_WATCH_STAT | B_WATCH_ATTR, this);
 
 	return entryList;
@@ -1549,8 +1549,8 @@ BPoseView::AddRootPoses(bool watchIndividually, bool mountShared)
 
 			monitorMsg.AddInt32("opcode", B_ENTRY_CREATED);
 
-			monitorMsg.AddInt32("device", model.NodeRef()->device);
-			monitorMsg.AddInt64("node", model.NodeRef()->node);
+			monitorMsg.AddInt32("device", model.node_ref()->device);
+			monitorMsg.AddInt64("node", model.node_ref()->node);
 			monitorMsg.AddInt64("directory", model.EntryRef()->directory);
 			monitorMsg.AddString("name", model.EntryRef()->name);
 			if (Window())
@@ -1585,7 +1585,7 @@ BPoseView::RemoveRootPoses()
 			Model* model = pose->TargetModel();
 			if (model != NULL) {
 				if (model->IsVolume()) {
-					DeletePose(model->NodeRef());
+					DeletePose(model->node_ref());
 					count--;
 				} else
 					index++;
@@ -1864,16 +1864,16 @@ BPoseView::CreatePoses(Model** models, PoseInfo* poseInfoArray, int32 count,
 		Model* model = models[modelIndex];
 
 		// pose adopts model and deletes it when done
-		if (fInsertedNodes.find(*(model->NodeRef())) != fInsertedNodes.end()
-			|| FindZombie(model->NodeRef())) {
-			watch_node(model->NodeRef(), B_STOP_WATCHING, this);
+		if (fInsertedNodes.find(*(model->node_ref())) != fInsertedNodes.end()
+			|| FindZombie(model->node_ref())) {
+			watch_node(model->node_ref(), B_STOP_WATCHING, this);
 			delete model;
 			if (resultingPoses)
 				resultingPoses[modelIndex] = NULL;
 
 			continue;
 		} else
-			fInsertedNodes.insert(*(model->NodeRef()));
+			fInsertedNodes.insert(*(model->node_ref()));
 
 		if ((clipboardMode = FSClipboardFindNodeMode(model, !clipboardLocked,
 				true)) != 0 && !HasPosesInClipboard()) {
@@ -2259,7 +2259,7 @@ BPoseView::MessageReceived(BMessage* message)
 		{
 			Model* targetModel = TargetModel();
 			if (targetModel != NULL) {
-				FSClipboardAddPoses(targetModel->NodeRef(), fSelectionList,
+				FSClipboardAddPoses(targetModel->node_ref(), fSelectionList,
 					kMoveSelectionTo, true);
 			}
 			break;
@@ -2269,7 +2269,7 @@ BPoseView::MessageReceived(BMessage* message)
 		{
 			Model* targetModel = TargetModel();
 			if (targetModel != NULL) {
-				FSClipboardAddPoses(targetModel->NodeRef(), fSelectionList,
+				FSClipboardAddPoses(targetModel->node_ref(), fSelectionList,
 					kMoveSelectionTo, false);
 			}
 			break;
@@ -2279,7 +2279,7 @@ BPoseView::MessageReceived(BMessage* message)
 		{
 			Model* targetModel = TargetModel();
 			if (targetModel != NULL) {
-				FSClipboardAddPoses(targetModel->NodeRef(), fSelectionList,
+				FSClipboardAddPoses(targetModel->node_ref(), fSelectionList,
 					kCopySelectionTo, true);
 			}
 			break;
@@ -2289,7 +2289,7 @@ BPoseView::MessageReceived(BMessage* message)
 		{
 			Model* targetModel = TargetModel();
 			if (targetModel != NULL) {
-				FSClipboardAddPoses(targetModel->NodeRef(), fSelectionList,
+				FSClipboardAddPoses(targetModel->node_ref(), fSelectionList,
 					kCopySelectionTo, false);
 			}
 			break;
@@ -2314,7 +2314,7 @@ BPoseView::MessageReceived(BMessage* message)
 		{
 			Model* targetModel = TargetModel();
 			if (targetModel != NULL) {
-				FSClipboardRemovePoses(targetModel->NodeRef(),
+				FSClipboardRemovePoses(targetModel->node_ref(),
 					fSelectionList != NULL && fSelectionList->CountItems() > 0
 						? fSelectionList : fPoseList);
 			}
@@ -2328,7 +2328,7 @@ BPoseView::MessageReceived(BMessage* message)
 			message->FindInt64("directory", &node.node);
 
 			Model* targetModel = TargetModel();
-			if (targetModel != NULL && *targetModel->NodeRef() == node)
+			if (targetModel != NULL && *targetModel->node_ref() == node)
 				UpdatePosesClipboardModeFromClipboard(message);
 			else if (message->FindBool("clearClipboard")
 				&& HasPosesInClipboard()) {
@@ -2968,7 +2968,7 @@ BPoseView::ReadPoseInfo(Model* model, PoseInfo* poseInfo)
 	} else if (TargetModel() == NULL
 		|| (poseInfo->fInitedDirectory != model->EntryRef()->directory
 			&& (poseInfo->fInitedDirectory
-				!= TargetModel()->NodeRef()->node))) {
+				!= TargetModel()->node_ref()->node))) {
 		// info was read properly but it's not for this directory
 		poseInfo->fInitedDirectory = -1LL;
 	} else if (poseInfo->fLocation.x < -kSanePoseLocation
@@ -3348,8 +3348,8 @@ BPoseView::PlaceFolder(const entry_ref* ref, const BMessage* message)
 
 	if (setPosition) {
 		Model* targetModel = TargetModel();
-		if (targetModel != NULL && targetModel->NodeRef() != NULL) {
-			FSSetPoseLocation(targetModel->NodeRef()->node, &node,
+		if (targetModel != NULL && targetModel->node_ref() != NULL) {
+			FSSetPoseLocation(targetModel->node_ref()->node, &node,
 				location);
 		}
 	}
@@ -3365,7 +3365,7 @@ BPoseView::NewFileFromTemplate(const BMessage* message)
 	entry_ref destEntryRef;
 	node_ref destNodeRef;
 
-	BDirectory destDir(targetModel->NodeRef());
+	BDirectory destDir(targetModel->node_ref());
 	if (destDir.InitCheck() != B_OK)
 		return;
 
@@ -3381,7 +3381,7 @@ BPoseView::NewFileFromTemplate(const BMessage* message)
 
 	if (dir.InitCheck() == B_OK) {
 		// special handling of directories
-		if (FSCreateNewFolderIn(targetModel->NodeRef(), &destEntryRef,
+		if (FSCreateNewFolderIn(targetModel->node_ref(), &destEntryRef,
 				&destNodeRef) == B_OK) {
 			BEntry destEntry(&destEntryRef);
 			destEntry.Rename(fileName);
@@ -3420,7 +3420,7 @@ BPoseView::NewFileFromTemplate(const BMessage* message)
 
 	// start renaming the entry
 	int32 index;
-	BPose* pose = EntryCreated(targetModel->NodeRef(), &destNodeRef,
+	BPose* pose = EntryCreated(targetModel->node_ref(), &destNodeRef,
 		destEntryRef.name, &index);
 
 	if (fFiltering) {
@@ -3433,7 +3433,7 @@ BPoseView::NewFileFromTemplate(const BMessage* message)
 	}
 
 	if (pose != NULL) {
-		WatchNewNode(pose->TargetModel()->NodeRef());
+		WatchNewNode(pose->TargetModel()->node_ref());
 		UpdateScrollRange();
 		CommitActivePose();
 		SelectPose(pose, index);
@@ -3451,13 +3451,13 @@ BPoseView::NewFolder(const BMessage* message)
 	entry_ref ref;
 	node_ref nodeRef;
 
-	if (FSCreateNewFolderIn(targetModel->NodeRef(), &ref, &nodeRef) == B_OK) {
+	if (FSCreateNewFolderIn(targetModel->node_ref(), &ref, &nodeRef) == B_OK) {
 		// try to place new folder at click point or under mouse if possible
 
 		PlaceFolder(&ref, message);
 
 		int32 index;
-		BPose* pose = EntryCreated(targetModel->NodeRef(), &nodeRef, ref.name,
+		BPose* pose = EntryCreated(targetModel->node_ref(), &nodeRef, ref.name,
 			&index);
 
 		if (fFiltering) {
@@ -4306,8 +4306,8 @@ BPoseView::TrySettingPoseLocation(BNode* node, BPoint point)
 	Model* targetModel = TargetModel();
 	ASSERT(targetModel != NULL);
 
-	if (targetModel != NULL && targetModel->NodeRef() != NULL
-		&& FSSetPoseLocation(targetModel->NodeRef()->node, node, point)
+	if (targetModel != NULL && targetModel->node_ref() != NULL
+		&& FSSetPoseLocation(targetModel->node_ref()->node, node, point)
 			== B_OK) {
 		// get rid of opposite endianness attribute
 		node->RemoveAttr(kAttrPoseInfoForeign);
@@ -4996,8 +4996,8 @@ BPoseView::MoveSelectionInto(Model* destFolder, BContainerWindow* srcWindow,
 
 	// make sure source and destination folders are different
 	if (!createLink && !createRelativeLink
-		&& (*srcWindow->PoseView()->TargetModel()->NodeRef()
-			== *destFolder->NodeRef())) {
+		&& (*srcWindow->PoseView()->TargetModel()->node_ref()
+			== *destFolder->node_ref())) {
 		BPoseView* targetView = srcWindow->PoseView();
 		if (forceCopy) {
 			targetView->DuplicateSelection(&clickPoint, &loc);
@@ -5197,11 +5197,11 @@ void
 BPoseView::PoseHandleDeviceUnmounted(BPose* pose, Model* model, int32 index,
 	BPoseView* poseView, dev_t device)
 {
-	if (model->NodeRef()->device == device)
-		poseView->DeletePose(model->NodeRef());
+	if (model->node_ref()->device == device)
+		poseView->DeletePose(model->node_ref());
 	else if (model->IsSymLink() && model->LinkTo() != NULL
-		&& model->LinkTo()->NodeRef()->device == device) {
-		poseView->DeleteSymLinkPoseTarget(model->LinkTo()->NodeRef(),
+		&& model->LinkTo()->node_ref()->device == device) {
+		poseView->DeleteSymLinkPoseTarget(model->LinkTo()->node_ref(),
 			pose, index);
 	}
 }
@@ -5354,7 +5354,7 @@ BPoseView::FSNotification(const BMessage* message)
 			// The Disks window can too
 			// So can the Desktop, as long as the integrate flag is on
 			TrackerSettings settings;
-			if (targetModel != NULL && dirNode != *targetModel->NodeRef()
+			if (targetModel != NULL && dirNode != *targetModel->node_ref()
 				&& !targetModel->IsQuery()
 				&& !targetModel->IsVirtualDirectory()
 				&& !targetModel->IsRoot()
@@ -5426,7 +5426,7 @@ BPoseView::FSNotification(const BMessage* message)
 			// file has been deleted so we close the window
 
 			if (message->what == B_NODE_MONITOR && targetModel != NULL
-				&& *(targetModel->NodeRef()) == itemNode) {
+				&& *(targetModel->node_ref()) == itemNode) {
 				if (!targetModel->IsRoot()) {
 					// it is impossible to watch for ENTRY_REMOVED in
 					// "/" because the notification is ambiguous - the vnode
@@ -5499,7 +5499,7 @@ BPoseView::FSNotification(const BMessage* message)
 		case B_DEVICE_UNMOUNTED:
 			if (message->FindInt32("device", &device) == B_OK) {
 				if (targetModel != NULL
-					&& targetModel->NodeRef()->device == device) {
+					&& targetModel->node_ref()->device == device) {
 					// close the window from a volume that is gone
 					DisableSaveLocation();
 					Window()->Close();
@@ -5532,7 +5532,7 @@ BPoseView::CreateSymlinkPoseTarget(Model* symlink)
 			entry_ref eref;
 			entry.GetNodeRef(&nref);
 			entry.GetRef(&eref);
-			if (eref.directory != TargetModel()->NodeRef()->node)
+			if (eref.directory != TargetModel()->node_ref()->node)
 				WatchNewNode(&nref, B_WATCH_STAT | B_WATCH_ATTR | B_WATCH_NAME
 					| B_WATCH_INTERIM_STAT, this);
 			newResolvedModel = new Model(&entry, true);
@@ -5575,7 +5575,7 @@ BPoseView::EntryCreated(const node_ref* dirNode, const node_ref* itemNode,
 	ReadPoseInfo(model, &poseInfo);
 
 	if (!PoseVisible(model, &poseInfo)) {
-		watch_node(model->NodeRef(), B_STOP_WATCHING, this);
+		watch_node(model->node_ref(), B_STOP_WATCHING, this);
 		delete model;
 		return NULL;
 	}
@@ -5583,7 +5583,7 @@ BPoseView::EntryCreated(const node_ref* dirNode, const node_ref* itemNode,
 	// model is a symlink, cache up the symlink target or scrap
 	// everything if target is invisible
 	if (model->IsSymLink() && !CreateSymlinkPoseTarget(model)) {
-		watch_node(model->NodeRef(), B_STOP_WATCHING, this);
+		watch_node(model->node_ref(), B_STOP_WATCHING, this);
 		delete model;
 		return NULL;
 	}
@@ -5638,7 +5638,7 @@ BPoseView::EntryMoved(const BMessage* message)
 
 		trashDir.GetNodeRef(&thisDirNode);
 	} else
-		thisDirNode = *targetModel->NodeRef();
+		thisDirNode = *targetModel->node_ref();
 
 	// see if we need to update window title (and folder itself)
 	if (thisDirNode == itemNode) {
@@ -5733,7 +5733,7 @@ BPoseView::WatchParentOf(const entry_ref* ref)
 	node_ref nref;
 	BNode(path.Path()).GetNodeRef(&nref);
 
-	if (nref != *TargetModel()->NodeRef())
+	if (nref != *TargetModel()->node_ref())
 		watch_node(&nref, B_WATCH_DIRECTORY, this);
 }
 
@@ -5762,7 +5762,7 @@ BPoseView::StopWatchingParentsOf(const entry_ref* ref)
 		dir.GetNodeRef(&dirNode);
 
 		// don't stop watching yourself.
-		if (dirNode == *TargetModel()->NodeRef())
+		if (dirNode == *TargetModel()->node_ref())
 			continue;
 
 		// make sure we don't have another broken links that still requires
@@ -5800,7 +5800,7 @@ BPoseView::AttributeChanged(const BMessage* message)
 		attrName = NULL;
 
 	Model* targetModel = TargetModel();
-	if (targetModel != NULL && *targetModel->NodeRef() == itemNode
+	if (targetModel != NULL && *targetModel->node_ref() == itemNode
 		&& targetModel->IsNodeOpen()
 		&& targetModel->AttrChanged(attrName)) {
 		// the icon of our target has changed, update drag icon
@@ -5822,7 +5822,7 @@ BPoseView::AttributeChanged(const BMessage* message)
 	for (int i = 0; i < posesCount; i++) {
 		BPose* pose = posesFound->ItemAt(i);
 		Model* poseModel = pose->TargetModel();
-		if (poseModel->IsSymLink() && *(poseModel->NodeRef()) != itemNode) {
+		if (poseModel->IsSymLink() && *(poseModel->node_ref()) != itemNode) {
 			// change happened on symlink's target
 			poseModel = poseModel->ResolveIfLink();
 		}
@@ -5845,13 +5845,13 @@ BPoseView::AttributeChanged(const BMessage* message)
 			continue;
 		}
 
-		bool visible = fPoseList->FindPose(poseModel->NodeRef(),
+		bool visible = fPoseList->FindPose(poseModel->node_ref(),
 			&index) != NULL;
 		int32 poseListIndex = index;
 
 		if (fFiltering) {
 			visible = fFilteredPoseList->FindPose(
-				poseModel->NodeRef(), &index) != NULL;
+				poseModel->node_ref(), &index) != NULL;
 		}
 
 		BPoint loc(0, index * fListElemHeight);
@@ -6096,7 +6096,7 @@ BPoseView::MoveListToTrash(BObjectList<entry_ref>* list, bool selectNext,
 			// deleted
 			taskList->AddItem(NewMemberFunctionObject(
 				&TTracker::SelectPoseAtLocationSoon, tracker,
-				*TargetModel()->NodeRef(), pointInPose));
+				*TargetModel()->node_ref(), pointInPose));
 		}
 	}
 	// execute the two tasks in order
@@ -6320,7 +6320,7 @@ BPoseView::Delete(BObjectList<entry_ref>* list, bool selectNext, bool askUser)
 			ASSERT(targetModel != NULL);
 			taskList->AddItem(NewMemberFunctionObject(
 				&TTracker::SelectPoseAtLocationSoon, tracker,
-				*targetModel->NodeRef(), pointInPose));
+				*targetModel->node_ref(), pointInPose));
 		}
 	}
 
@@ -6363,7 +6363,7 @@ BPoseView::RestoreItemsFromTrash(BObjectList<entry_ref>* list, bool selectNext)
 			ASSERT(targetModel != NULL);
 			taskList->AddItem(NewMemberFunctionObject(
 				&TTracker::SelectPoseAtLocationSoon, tracker,
-				*targetModel->NodeRef(), pointInPose));
+				*targetModel->node_ref(), pointInPose));
 		}
 	}
 
@@ -8020,7 +8020,7 @@ BPoseView::DeletePose(const node_ref* itemNode, BPose* pose, int32 index)
 			StopWatchingParentsOf(pose->TargetModel()->EntryRef());
 			Model* target = pose->TargetModel()->LinkTo();
 			if (target)
-				watch_node(target->NodeRef(), B_STOP_WATCHING, this);
+				watch_node(target->node_ref(), B_STOP_WATCHING, this);
 		}
 
 		ASSERT(TargetModel());
@@ -8111,7 +8111,7 @@ BPoseView::FindZombie(const node_ref* itemNode, int32* resultingIndex)
 	int32 count = fZombieList->CountItems();
 	for (int32 index = 0; index < count; index++) {
 		Model* zombie = fZombieList->ItemAt(index);
-		if (*zombie->NodeRef() == *itemNode) {
+		if (*zombie->node_ref() == *itemNode) {
 			if (resultingIndex)
 				*resultingIndex = index;
 			return zombie;
@@ -8245,7 +8245,7 @@ BPoseView::OpenSelectionCommon(BPose* clickedPose, int32* poseIndex,
 		}
 
 		ASSERT(TargetModel());
-		message.AddData("nodeRefsToClose", B_RAW_TYPE, TargetModel()->NodeRef(),
+		message.AddData("nodeRefsToClose", B_RAW_TYPE, TargetModel()->node_ref(),
 			sizeof (node_ref));
 	}
 
@@ -8310,7 +8310,7 @@ BPoseView::UnmountSelectedVolumes()
 
 		Model* model = pose->TargetModel();
 		if (model->IsVolume()) {
-			BVolume volume(model->NodeRef()->device);
+			BVolume volume(model->node_ref()->device);
 			if (volume != boot) {
 				TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 				if (tracker != NULL)
@@ -8605,13 +8605,13 @@ BPoseView::OpenParent()
 	if (dynamic_cast<TTracker*>(__be_app)) {
 		// add information about the child, so that we can select it
 		// in the parent view
-		message.AddData("nodeRefToSelect", B_RAW_TYPE, TargetModel()->NodeRef(),
+		message.AddData("nodeRefToSelect", B_RAW_TYPE, TargetModel()->node_ref(),
 			sizeof (node_ref));
 
 		if ((modifiers() & B_OPTION_KEY) != 0 && !IsFilePanel()) {
 			// if option down, add instructions to close the parent
 			message.AddData("nodeRefsToClose", B_RAW_TYPE,
-				TargetModel()->NodeRef(), sizeof (node_ref));
+				TargetModel()->node_ref(), sizeof (node_ref));
 		}
 	}
 
@@ -10097,7 +10097,7 @@ BPoseView::CalcPoseRectList(const BPose* pose, int32 index,
 bool
 BPoseView::Represents(const node_ref* node) const
 {
-	return *(fModel->NodeRef()) == *node;
+	return *(fModel->node_ref()) == *node;
 }
 
 

@@ -336,7 +336,7 @@ BDirectory::Rewind()
 }
 
 
-be_int32
+__be_int32
 BDirectory::CountEntries()
 {
 	if(fName == NULL || fDir == NULL) return 0;

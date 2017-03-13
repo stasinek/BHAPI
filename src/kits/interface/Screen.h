@@ -33,7 +33,7 @@
 #ifdef __cplusplus /* Just for C++ */
 class BWindow;
 #include "../interface/Rect.h"
-class IMPEXPBHAPI BScreen {
+class BHAPI_IMPEXP BScreen {
 public:
     BScreen(__be_uint32 id = 0);
     BScreen(BWindow *win);

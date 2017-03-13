@@ -36,10 +36,10 @@
 
 
 namespace bhapi {
-LOCALBHAPI bool get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd,  __be_int32 &x,  __be_int32 &y, BPoint &radius2, float &deltaNext);
+BHAPI_LOCAL bool get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd,  __be_int32 &x,  __be_int32 &y, BPoint &radius2, float &deltaNext);
 }
 
-LOCALBHAPI bool bhapi::get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd,  __be_int32 &x,  __be_int32 &y, BPoint &radius2, float &deltaNext)
+BHAPI_LOCAL bool bhapi::get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd,  __be_int32 &x,  __be_int32 &y, BPoint &radius2, float &deltaNext)
 {
 	if(radius.x <= 0 || radius.y <= 0 || pStart.x > pEnd.x || pStart.y > 0 || pEnd.y > 0) return false;
 

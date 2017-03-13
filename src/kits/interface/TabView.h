@@ -46,7 +46,7 @@ typedef enum {
 class BTabView;
 #include "../interface/View.h"
 #include "../support/List.h"
-class IMPEXPBHAPI BTab : public BArchivable {
+class BHAPI_IMPEXP BTab : public BArchivable {
 public:
     BTab(BView *targetView = NULL);
     virtual ~BTab();
@@ -86,7 +86,7 @@ private:
 };
 
 
-class IMPEXPBHAPI BTabView : public BView {
+class BHAPI_IMPEXP BTabView : public BView {
 public:
     BTabView(BRect frame, const char *name,
          bhapi::button_width tabWidth = B_WIDTH_AS_USUAL,

@@ -49,7 +49,7 @@
 #include "../storage/Directory.h"
 #include "../support/Autolock.h"
 #include "../support/ClassInfo.h"
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 #include "../app/Messenger.h"
 #include "../app/Message.h"
 #include "../app/MessageFilter.h"
@@ -112,7 +112,7 @@ class BFilePanelView;
 class BFilePanelWindow;
 
 
-class LOCALBHAPI BFilePanelLabel : public BStringView {
+class BHAPI_LOCAL BFilePanelLabel : public BStringView {
 public:
 	BFilePanelLabel(BRect frame, const char *name, const char *text,  __be_uint32 resizeMode);
 
@@ -121,7 +121,7 @@ public:
 };
 
 
-class LOCALBHAPI BFilePanelListItem : public BListItem {
+class BHAPI_LOCAL BFilePanelListItem : public BListItem {
 public:
 	BFilePanelListItem(const char *path, BFilePanelView *panel_view, b_dev_t dev = -1);
 	virtual ~BFilePanelListItem();
@@ -151,7 +151,7 @@ private:
 };
 
 
-class LOCALBHAPI BFilePanelListView : public BListView {
+class BHAPI_LOCAL BFilePanelListView : public BListView {
 public:
 	BFilePanelListView(BRect frame, const char *name, bhapi::list_view_type type);
 
@@ -164,7 +164,7 @@ public:
 };
 
 
-class LOCALBHAPI BFilePanelTitleView : public BView {
+class BHAPI_LOCAL BFilePanelTitleView : public BView {
 public:
 	BFilePanelTitleView(BRect parent_bounds);
 
@@ -175,7 +175,7 @@ public:
 };
 
 
-class LOCALBHAPI BFilePanelView : public BView {
+class BHAPI_LOCAL BFilePanelView : public BView {
 public:
 	BFilePanelView(BRect frame, bool allow_multiple_selection);
 	virtual ~BFilePanelView();
@@ -213,7 +213,7 @@ private:
 };
 
 
-class LOCALBHAPI BFilePanelWindow : public BWindow {
+class BHAPI_LOCAL BFilePanelWindow : public BWindow {
 public:
 	BFilePanelWindow(BFilePanel *panel,
              bhapi::file_panel_mode mode,
@@ -416,7 +416,7 @@ BFilePanelListItem::IsVolume() const
 }
 
 
-be_int64
+__be_int64
 BFilePanelListItem::Size() const
 {
 	return fSize;
@@ -641,7 +641,7 @@ static void column_modified_drawing_callback(BView *owner, BRect rect, BFilePane
 	time_t timer = (time_t)(item->ModifiedTime() / B_INT64_CONSTANT(1000000));
 	struct tm *tmTime = NULL;
 
-#ifndef HAVELOCALBHAPITIME_R
+#ifndef HAVEBHAPI_LOCALTIME_R
 	tmTime = localtime(&timer);
 #else
 	struct tm _tmTime;
@@ -769,7 +769,7 @@ BFilePanelView::SwapColumns(__be_int32 indexA,  __be_int32 indexB)
 }
 
 
-be_int32
+__be_int32
 BFilePanelView::CountColumns() const
 {
 	return fColumns.CountItems();

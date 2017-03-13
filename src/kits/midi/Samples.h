@@ -2,7 +2,7 @@
 #ifndef _SAMPLES_H
 #define _SAMPLES_H
 
-#include <BeBuild.h>
+#include <Haiku.h>
 #include <Entry.h>
 
 typedef void (*sample_exit_hook)(int32 arg);

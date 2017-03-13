@@ -33,11 +33,11 @@
 #include "../interface/Polygon.h"
 #include "../interface/Rect.h"
 #include "../interface/GraphicsDefs.h"
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXPBHAPI BRender {
+class BHAPI_IMPEXP BRender {
 public:
     BRender();
     virtual ~BRender();

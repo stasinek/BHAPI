@@ -35,8 +35,8 @@
 #include "../interface/Point.h"
 #include "../interface/Rect.h"
 #include "../support/List.h"
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BRegion {
+#include <Haiku.h>
+class BHAPI_IMPEXP BRegion {
 public:
     BRegion();
     BRegion(const BRegion &region);

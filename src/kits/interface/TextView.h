@@ -32,13 +32,19 @@
 #define BHAPI_TEXT_VIEW_H
 
 #ifdef __cplusplus /* Just for C++ */
+#ifndef BFILE_I
+#define BFILE_I
 class BFile;
+#endif
+#ifndef BCLIPBOARD_I
+#define BCLIPBOARD_I
 class BClipboard;
+#endif
 #endif
 
 #include "../interface/View.h"
 #include "../support/StringClass.h"
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */
 namespace bhapi {
@@ -65,7 +71,7 @@ typedef struct text_run_array {
 #endif
 
 #ifdef __cplusplus /* Just for C++ */
-class IMPEXPBHAPI BTextView : public BView {
+class BHAPI_IMPEXP BTextView : public BView {
 public:
     BTextView(BRect frame,
           const char *name,

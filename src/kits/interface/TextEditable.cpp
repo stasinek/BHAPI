@@ -155,7 +155,7 @@ BTextEditable::SetPosition(__be_int32 pos)
 }
 
 
-be_int32
+__be_int32
 BTextEditable::Position() const
 {
     return fPosition;
@@ -1260,7 +1260,7 @@ BTextEditable::SetMaxChars(__be_int32 max)
 }
 
 
-be_int32
+__be_int32
 BTextEditable::MaxChars() const
 {
     return fMaxChars;
@@ -1284,7 +1284,7 @@ BTextEditable::HideTyping(__be_uint8 flag)
 }
 
 
-be_uint8
+__be_uint8
 BTextEditable::IsTypingHidden() const
 {
     return fTypingHidden;

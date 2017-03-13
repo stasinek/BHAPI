@@ -34,7 +34,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXPBHAPI BSimpleXmlNode {
+class BHAPI_IMPEXP BSimpleXmlNode {
 public:
 	BSimpleXmlNode(const char *name, const char *content = NULL);
 	~BSimpleXmlNode();
@@ -71,7 +71,7 @@ private:
 };
 
 
-IMPEXPBHAPI status_t b_parse_simple_xml(const char *simple_xml_buffer, BSimpleXmlNode *node);
+BHAPI_IMPEXP status_t b_parse_simple_xml(const char *simple_xml_buffer, BSimpleXmlNode *node);
 
 
 #endif /* __cplusplus */

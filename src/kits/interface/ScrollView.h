@@ -32,7 +32,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 #include "../interface/ScrollBar.h"
-class IMPEXPBHAPI BScrollView : public BView {
+class BHAPI_IMPEXP BScrollView : public BView {
 public:
     BScrollView(BRect frame, const char *name, BView *target,
              __be_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,

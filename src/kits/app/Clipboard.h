@@ -28,16 +28,17 @@
  * Warning: unfinished, just for system clipboard
  *
  * --------------------------------------------------------------------------*/
-
 #ifndef BHAPI_CLIPBOARD_H
 #define BHAPI_CLIPBOARD_H
-
+//-----------------------------------------------------------------------------
 #include "../app/Messenger.h"
 #include "../support/Locker.h"
-#include "../support/SupportDefs.h"
-
+//-----------------------------------------------------------------------------
+#include <Haiku.h>
+//-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
-class IMPEXPBHAPI BClipboard {
+//-----------------------------------------------------------------------------
+class BHAPI_IMPEXP BClipboard {
 public:
     BClipboard(const char *name);
     virtual ~BClipboard();
@@ -65,7 +66,9 @@ private:
     BLocker fLocker;
     BMessage *fData;
 };
-
+//-----------------------------------------------------------------------------
 #endif /* __cplusplus */
+//-----------------------------------------------------------------------------
 #endif /* BHAPI_CLIPBOARD_H */
+//-----------------------------------------------------------------------------
 

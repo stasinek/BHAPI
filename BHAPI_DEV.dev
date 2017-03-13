@@ -9,8 +9,8 @@ Libs=
 PrivateResource=
 ResourceIncludes=
 MakeIncludes=
-Compiler=-DBUILDING_DLL=1_@@_-Wall_@@_-Wno-write-strings_@@_-Wno-multichar_@@_-Wno-unused-variable _@@_-Wno-unused-parameter _@@_-Wno-unused-value _@@_-Wno-unused-label_@@_-Wno-unused-but-set-variable_@@_-Wattributes _@@_-Winline _@@_-Wshadow _@@_-Wunknown-pragmas_@@_
-CppCompiler=-DBUILDING_DLL=1_@@_-Wall_@@_-Wno-write-strings_@@_-Wno-multichar_@@_-Wno-unused-variable _@@_-Wno-unused-parameter _@@_-Wno-unused-value _@@_-Wno-unused-label_@@_-Wno-unused-but-set-variable_@@_-Wattributes _@@_-Winline _@@_-Wshadow _@@_-Wunknown-pragmas_@@_
+Compiler=-DBUILDING_DLL=1_@@_-Wall_@@_-Wno-write-strings_@@_-Wno-multichar_@@_-Wno-unused-variable _@@_-Wno-unused-parameter _@@_-Wno-unused-value _@@_-Wno-unused-label_@@_-Wno-unused-but-set-variable_@@_-Wattributes _@@_-Winline _@@_-Wshadow _@@_-Wunknown-pragmas_@@_-D__INTEL___@@_-DBHAPI_BUILD_LIBRARY_@@_
+CppCompiler=-DBUILDING_DLL=1_@@_-Wall_@@_-Wno-write-strings_@@_-Wno-multichar_@@_-Wno-unused-variable _@@_-Wno-unused-parameter _@@_-Wno-unused-value _@@_-Wno-unused-label_@@_-Wno-unused-but-set-variable_@@_-Wattributes _@@_-Winline _@@_-Wshadow _@@_-Wunknown-pragmas_@@_-D__INTEL___@@_-DBHAPI_BUILD_LIBRARY_@@_
 Linker=
 IsCpp=1
 Icon=
@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=4
 CompilerSettings=000j0b0100110000001000000
-UnitCount=119
+UnitCount=109
 
 [VersionInfo]
 Major=1
@@ -221,16 +221,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit18]
-FileName=src\kits\support\ByteOrder.c
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit19]
 FileName=src\kits\support\ByteOrder.h
 CompileCpp=1
 Folder=
@@ -240,7 +230,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit20]
+[Unit19]
 FileName=src\kits\support\StreamIO.cpp
 CompileCpp=1
 Folder=
@@ -250,7 +240,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit21]
+[Unit20]
 FileName=src\kits\support\DataIO.cpp
 CompileCpp=1
 Folder=
@@ -260,7 +250,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit22]
+[Unit21]
 FileName=src\kits\support\SupportDefs.h
 CompileCpp=1
 Folder=
@@ -270,7 +260,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit23]
+[Unit22]
 FileName=src\kits\support\StringArray.cpp
 CompileCpp=1
 Folder=
@@ -280,7 +270,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit24]
+[Unit23]
 FileName=src\kits\support\List.cpp
 CompileCpp=1
 Folder=
@@ -290,27 +280,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit25]
-FileName=src\kits\support\StringMe.h
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit26]
-FileName=src\kits\support\StringMe.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit27]
+[Unit24]
 FileName=src\kits\Be.h
 CompileCpp=1
 Folder=
@@ -320,7 +290,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit28]
+[Unit25]
 FileName=src\kits\xml\SimpleXmlParser.cpp
 CompileCpp=1
 Folder=
@@ -330,7 +300,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit29]
+[Unit26]
 FileName=src\kits\storage\Node.cpp
 CompileCpp=1
 Folder=
@@ -340,7 +310,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit30]
+[Unit27]
 FileName=src\kits\storage\VolumeRoster.cpp
 CompileCpp=1
 Folder=
@@ -350,7 +320,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit31]
+[Unit28]
 FileName=src\kits\storage\Path.cpp
 CompileCpp=1
 Folder=
@@ -360,7 +330,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit32]
+[Unit29]
 FileName=src\kits\storage\Volume.cpp
 CompileCpp=1
 Folder=
@@ -370,7 +340,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit33]
+[Unit30]
 FileName=src\kits\storage\FindDirectory.cpp
 CompileCpp=1
 Folder=
@@ -380,7 +350,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit34]
+[Unit31]
 FileName=src\kits\storage\Entry.cpp
 CompileCpp=1
 Folder=
@@ -390,7 +360,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit35]
+[Unit32]
 FileName=src\kits\storage\Directory.cpp
 CompileCpp=1
 Folder=
@@ -400,7 +370,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit36]
+[Unit33]
 FileName=src\kits\storage\File.cpp
 CompileCpp=1
 Folder=
@@ -410,7 +380,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit37]
+[Unit34]
 FileName=src\kits\storage\FilePanel.cpp
 CompileCpp=1
 Folder=
@@ -420,7 +390,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit38]
+[Unit35]
 FileName=src\kits\render\ArcGenerator.cpp
 CompileCpp=1
 Folder=
@@ -430,7 +400,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit39]
+[Unit36]
 FileName=src\kits\render\Pixmap.cpp
 CompileCpp=1
 Folder=
@@ -440,7 +410,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit40]
+[Unit37]
 FileName=src\kits\render\LineGenerator.cpp
 CompileCpp=1
 Folder=
@@ -450,7 +420,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit41]
+[Unit38]
 FileName=src\kits\render\Render.cpp
 CompileCpp=1
 Folder=
@@ -460,7 +430,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit42]
+[Unit39]
 FileName=src\kits\net\NetDebug.cpp
 CompileCpp=1
 Folder=
@@ -470,7 +440,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit43]
+[Unit40]
 FileName=src\kits\net\NetAddress.cpp
 CompileCpp=1
 Folder=
@@ -480,7 +450,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit44]
+[Unit41]
 FileName=src\kits\net\NetBuffer.cpp
 CompileCpp=1
 Folder=
@@ -490,7 +460,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit45]
+[Unit42]
 FileName=src\kits\net\NetEndpoint.cpp
 CompileCpp=1
 Folder=
@@ -500,77 +470,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit46]
-FileName=src\kits\private\StandardIO.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit47]
-FileName=src\kits\private\Object.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit48]
-FileName=src\kits\private\Memory.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit49]
-FileName=src\kits\private\PrivateApplication.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit50]
-FileName=src\kits\private\MessageBody.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit51]
-FileName=src\kits\private\PrivateHandler.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit52]
-FileName=src\kits\private\Token.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit53]
+[Unit43]
 FileName=src\kits\kernel\Debug.cpp
 CompileCpp=1
 Folder=
@@ -580,57 +480,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit54]
-FileName=src\kits\kernel\BHAPI_wrapper_port.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit55]
-FileName=src\kits\kernel\win32\BHAPI_wrapper_image.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit56]
-FileName=src\kits\kernel\win32\BHAPI_wrapper_timefuncs.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit57]
-FileName=src\kits\kernel\win32\BHAPI_wrapper_os.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit58]
-FileName=src\kits\kernel\win32\BHAPI_wrapper_area.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit59]
+[Unit44]
 FileName=src\kits\interface\ToolTip.cpp
 CompileCpp=1
 Folder=
@@ -640,7 +490,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit60]
+[Unit45]
 FileName=src\kits\interface\LimitedView.cpp
 CompileCpp=1
 Folder=
@@ -650,7 +500,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit61]
+[Unit46]
 FileName=src\kits\interface\Screen.cpp
 CompileCpp=1
 Folder=
@@ -660,7 +510,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit62]
+[Unit47]
 FileName=src\kits\interface\Theme.cpp
 CompileCpp=1
 Folder=
@@ -670,7 +520,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit63]
+[Unit48]
 FileName=src\kits\interface\Control.cpp
 CompileCpp=1
 Folder=
@@ -680,7 +530,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit64]
+[Unit49]
 FileName=src\kits\interface\GraphicsDefs.cpp
 CompileCpp=1
 Folder=
@@ -690,7 +540,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit65]
+[Unit50]
 FileName=src\kits\interface\Point.cpp
 CompileCpp=1
 Folder=
@@ -700,7 +550,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit66]
+[Unit51]
 FileName=src\kits\interface\Bitmap.cpp
 CompileCpp=1
 Folder=
@@ -710,7 +560,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit67]
+[Unit52]
 FileName=src\kits\interface\CheckBox.cpp
 CompileCpp=1
 Folder=
@@ -720,7 +570,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit68]
+[Unit53]
 FileName=src\kits\interface\Polygon.cpp
 CompileCpp=1
 Folder=
@@ -730,7 +580,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit69]
+[Unit54]
 FileName=src\kits\interface\StringView.cpp
 CompileCpp=1
 Folder=
@@ -740,7 +590,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit70]
+[Unit55]
 FileName=src\kits\interface\RadioButton.cpp
 CompileCpp=1
 Folder=
@@ -750,7 +600,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit71]
+[Unit56]
 FileName=src\kits\interface\MenuBar.cpp
 CompileCpp=1
 Folder=
@@ -760,7 +610,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit72]
+[Unit57]
 FileName=src\kits\interface\Box.cpp
 CompileCpp=1
 Folder=
@@ -770,7 +620,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit73]
+[Unit58]
 FileName=src\kits\interface\ListItem.cpp
 CompileCpp=1
 Folder=
@@ -780,7 +630,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit74]
+[Unit59]
 FileName=src\kits\interface\ScrollView.cpp
 CompileCpp=1
 Folder=
@@ -790,7 +640,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit75]
+[Unit60]
 FileName=src\kits\interface\Rect.cpp
 CompileCpp=1
 Folder=
@@ -800,7 +650,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit76]
+[Unit61]
 FileName=src\kits\interface\StatusBar.cpp
 CompileCpp=1
 Folder=
@@ -810,7 +660,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit77]
+[Unit62]
 FileName=src\kits\interface\MenuField.cpp
 CompileCpp=1
 Folder=
@@ -820,7 +670,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit78]
+[Unit63]
 FileName=src\kits\interface\TextControl.cpp
 CompileCpp=1
 Folder=
@@ -830,7 +680,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit79]
+[Unit64]
 FileName=src\kits\interface\PopUpMenu.cpp
 CompileCpp=1
 Folder=
@@ -840,7 +690,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit80]
+[Unit65]
 FileName=src\kits\interface\ScrollBar.cpp
 CompileCpp=1
 Folder=
@@ -850,7 +700,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit81]
+[Unit66]
 FileName=src\kits\interface\ColorControl.cpp
 CompileCpp=1
 Folder=
@@ -860,7 +710,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit82]
+[Unit67]
 FileName=src\kits\interface\Alert.cpp
 CompileCpp=1
 Folder=
@@ -870,7 +720,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit83]
+[Unit68]
 FileName=src\kits\interface\TabView.cpp
 CompileCpp=1
 Folder=
@@ -880,7 +730,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit84]
+[Unit69]
 FileName=src\kits\interface\OutlineListView.cpp
 CompileCpp=1
 Folder=
@@ -890,7 +740,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit85]
+[Unit70]
 FileName=src\kits\interface\Button.cpp
 CompileCpp=1
 Folder=
@@ -900,7 +750,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit86]
+[Unit71]
 FileName=src\kits\interface\MenuItem.cpp
 CompileCpp=1
 Folder=
@@ -910,7 +760,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit87]
+[Unit72]
 FileName=src\kits\interface\Font.cpp
 CompileCpp=1
 Folder=
@@ -920,7 +770,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit88]
+[Unit73]
 FileName=src\kits\interface\ListView.cpp
 CompileCpp=1
 Folder=
@@ -930,7 +780,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit89]
+[Unit74]
 FileName=src\kits\interface\Region.cpp
 CompileCpp=1
 Folder=
@@ -940,7 +790,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit90]
+[Unit75]
 FileName=src\kits\interface\TextEditable.cpp
 CompileCpp=1
 Folder=
@@ -950,7 +800,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit91]
+[Unit76]
 FileName=src\kits\interface\Menu.cpp
 CompileCpp=1
 Folder=
@@ -960,7 +810,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit92]
+[Unit77]
 FileName=src\kits\interface\Window.cpp
 CompileCpp=1
 Folder=
@@ -970,7 +820,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit93]
+[Unit78]
 FileName=src\kits\interface\View.cpp
 CompileCpp=1
 Folder=
@@ -980,7 +830,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit94]
+[Unit79]
 FileName=src\kits\interface\TextView.cpp
 CompileCpp=1
 Folder=
@@ -990,7 +840,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit95]
+[Unit80]
 FileName=src\kits\app\MessageFilter.cpp
 CompileCpp=1
 Folder=
@@ -1000,7 +850,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit96]
+[Unit81]
 FileName=src\kits\app\MessageQueue.cpp
 CompileCpp=1
 Folder=
@@ -1010,7 +860,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit97]
+[Unit82]
 FileName=src\kits\app\Invoker.cpp
 CompileCpp=1
 Folder=
@@ -1020,7 +870,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit98]
+[Unit83]
 FileName=src\kits\app\Clipboard.cpp
 CompileCpp=1
 Folder=
@@ -1030,7 +880,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit99]
+[Unit84]
 FileName=src\kits\app\Cursor.cpp
 CompileCpp=1
 Folder=
@@ -1040,7 +890,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit100]
+[Unit85]
 FileName=src\kits\app\MessageRunner.cpp
 CompileCpp=1
 Folder=
@@ -1050,7 +900,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit101]
+[Unit86]
 FileName=src\kits\app\Handler.cpp
 CompileCpp=1
 Folder=
@@ -1060,7 +910,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit102]
+[Unit87]
 FileName=src\kits\app\Messenger.cpp
 CompileCpp=1
 Folder=
@@ -1070,7 +920,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit103]
+[Unit88]
 FileName=src\kits\app\Application.cpp
 CompileCpp=1
 Folder=
@@ -1080,7 +930,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit104]
+[Unit89]
 FileName=src\kits\app\Looper.cpp
 CompileCpp=1
 Folder=
@@ -1090,7 +940,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit105]
+[Unit90]
 FileName=src\kits\app\Message.cpp
 CompileCpp=1
 Folder=
@@ -1100,7 +950,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit106]
+[Unit91]
 FileName=src\kits\add-ons\font\FreeType2.cpp
 CompileCpp=1
 Folder=
@@ -1110,7 +960,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit107]
+[Unit92]
 FileName=src\kits\add-ons\font\FontEngine.cpp
 CompileCpp=1
 Folder=
@@ -1120,7 +970,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit108]
+[Unit93]
 FileName=src\kits\add-ons\graphics\GraphicsEngine.cpp
 CompileCpp=1
 Folder=
@@ -1130,8 +980,158 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit109]
+[Unit94]
 FileName=src\kits\add-ons\theme\DefaultTheme.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit95]
+FileName=src\kits\add-ons\theme\ThemeEngine.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit96]
+FileName=src\kits\BE.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit97]
+FileName=src\kits\InterfaceKit.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit98]
+FileName=src\kits\XmlKit.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit99]
+FileName=src\kits\KernelKit.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit100]
+FileName=src\kits\NetKit.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit101]
+FileName=src\kits\RenderKit.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit102]
+FileName=src\kits\StorageKit.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit103]
+FileName=src\kits\AppKit.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit104]
+FileName=src\kits\SupportKit.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit105]
+FileName=src\Haiku.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit106]
+FileName=src\HaikuConfig.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit107]
+FileName=src\HaikuConstants.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit108]
+FileName=src\HaikuDefs.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit109]
+FileName=src\HaikuTypes.h
 CompileCpp=1
 Folder=
 Compile=1

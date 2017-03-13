@@ -34,7 +34,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXPBHAPI BDirectory {
+class BHAPI_IMPEXP BDirectory {
 public:
     BDirectory();
     BDirectory(const char *path);

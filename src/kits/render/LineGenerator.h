@@ -30,12 +30,12 @@
 
 #ifndef BHAPI_LINE_GENERATOR_H
 #define BHAPI_LINE_GENERATOR_H
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 #include "../interface/Rect.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXPBHAPI BLineGenerator {
+class BHAPI_IMPEXP BLineGenerator {
 public:
     BLineGenerator(BPoint start, BPoint end);
 

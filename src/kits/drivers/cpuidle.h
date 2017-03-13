@@ -8,7 +8,7 @@
 
 #include <module.h>
 
-#include <scheduler.h>
+#include <Scheduler.h>
 
 
 #define CPUIDLE_MODULES_PREFIX	"power/cpuidle"

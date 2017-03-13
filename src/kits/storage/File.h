@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -30,32 +30,32 @@
 #ifndef BHAPI_FILE_H
 #define BHAPI_FILE_H
 
-#include "StorageDefs.h"
-#include "Directory.h"
 
 #ifdef __cplusplus /* Just for C++ */
-
-class IMPEXPBHAPI BFile {
+#include "Directory.h"
+#include "StorageDefs.h"
+#include <Haiku.h>
+class BHAPI_IMPEXP BFile {
 public:
     BFile();
-    BFile(const char *path,  __be_uint32 open_mode,  __be_uint32 access_mode = B_USER_READ | B_USER_WRITE);
-    BFile(const BEntry *entry,  __be_uint32 open_mode,  __be_uint32 access_mode = B_USER_READ | B_USER_WRITE);
-    BFile(const BDirectory *dir, const char *leaf,  __be_uint32 open_mode,  __be_uint32 access_mode = B_USER_READ | B_USER_WRITE);
+    BFile(const char *path,  __be_uint32 open_mode,  __be_uint32 access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
+    BFile(const BEntry *entry,  __be_uint32 open_mode,  __be_uint32 access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
+    BFile(const BDirectory *dir, const char *leaf,  __be_uint32 open_mode,  __be_uint32 access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
     BFile(const BFile &from);
     virtual ~BFile();
 
-	status_t	InitCheck() const;
-    status_t	SetTo(const char *path,  __be_uint32 open_mode,  __be_uint32 access_mode = B_USER_READ | B_USER_WRITE);
-    status_t	SetTo(const BEntry *entry,  __be_uint32 open_mode,  __be_uint32 access_mode = B_USER_READ | B_USER_WRITE);
-    status_t	SetTo(const BDirectory *dir, const char *leaf,  __be_uint32 open_mode,  __be_uint32 access_mode = B_USER_READ | B_USER_WRITE);
-	void		Unset();
+    status_t	InitCheck() const;
+    status_t	SetTo(const char *path,  __be_uint32 open_mode,  __be_uint32 access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
+    status_t	SetTo(const BEntry *entry,  __be_uint32 open_mode,  __be_uint32 access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
+    status_t	SetTo(const BDirectory *dir, const char *leaf,  __be_uint32 open_mode,  __be_uint32 access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
+    void		Unset();
 
-	bool		IsReadable() const;
-	bool		IsWritable() const;
+    bool		IsReadable() const;
+    bool		IsWritable() const;
 
-	__be_size_t		Read(void *buffer, size_t size);
+    __be_size_t		Read(void *buffer, size_t size);
      __be_size_t		ReadAt(__be_int64 pos, void *buffer, size_t size);
-	__be_size_t		Write(const void *buffer, size_t size);
+    __be_size_t		Write(const void *buffer, size_t size);
      __be_size_t		WriteAt(__be_int64 pos, const void *buffer, size_t size);
 
      __be_int64		Seek(__be_int64 position,  __be_uint32 seek_mode);
@@ -65,11 +65,10 @@ public:
     BFile&		operator=(const BFile &from);
 
 private:
-	void *fFD;
+    void *fFD;
      __be_uint32 fMode;
 };
-
 #endif /* __cplusplus */
-
+#define BFILE_I
 #endif /* BHAPI_FILE_H */
 

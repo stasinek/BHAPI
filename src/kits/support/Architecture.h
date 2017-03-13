@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -39,11 +39,11 @@ __BEGIN_DECLS
 #ifdef __cplusplus
 namespace bhapi {
 #endif	/* __cplusplus */
-const char*	get_architecture();
-const char*	get_primary_architecture();
-size_t		get_secondary_architectures(const char** a_architectures, size_t a_count);
-size_t		get_architectures(const char** a_architectures, size_t a_count);
-const char*	guess_architecture_for_path(const char* a_path);
+const char*	__get_architecture();
+const char*	__get_primary_architecture();
+size_t		__get_secondary_architectures(const char** a_architectures, size_t a_count);
+size_t		__get_architectures(const char** a_architectures, size_t a_count);
+const char*	__guess_architecture_for_path(const char* a_path);
 #ifdef __cplusplus
 }
 #endif	/* __cplusplus */
@@ -53,8 +53,8 @@ __END_DECLS
 class BString;
 class BStringList;
 namespace bhapi {
-status_t	get_secondary_architectures(BStringList& a_architectures);
-status_t	get_architectures(BStringList& a_architectures);
+status_t	__get_secondary_architectures(BStringList& a_architectures);
+status_t	__get_architectures(BStringList& a_architectures);
 }
 
 #endif	/* __cplusplus */

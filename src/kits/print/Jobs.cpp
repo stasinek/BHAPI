@@ -183,7 +183,7 @@ bool Folder::AddJob(BEntry& entry, bool notify) {
 Job* Folder::Find(node_ref* node) {
 	for (int i = 0; i < fJobs.CountItems(); i ++) {
 		Job* job = fJobs.ItemAt(i);
-		if (job->NodeRef() == *node) return job;
+		if (job->node_ref() == *node) return job;
 	}
 	return NULL;
 }

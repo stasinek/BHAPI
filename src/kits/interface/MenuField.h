@@ -38,8 +38,8 @@ class BMenuItem;
 class BMenuBar;
 class BMessage;
 #include "../interface/View.h"
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BMenuField : public BView {
+#include <Haiku.h>
+class BHAPI_IMPEXP BMenuField : public BView {
 public:
     BMenuField(BRect frame,
            const char *name,

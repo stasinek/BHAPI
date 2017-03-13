@@ -280,7 +280,7 @@ BTabView::Select(__be_int32 tabIndex)
 }
 
 
-be_int32
+__be_int32
 BTabView::Selection() const
 {
 	return fSelection;
@@ -341,7 +341,7 @@ BTabView::RemoveTab(__be_int32 tabIndex)
 }
 
 
-be_int32
+__be_int32
 BTabView::CountTabs() const
 {
 	return fTabs.CountItems();
@@ -355,7 +355,7 @@ BTabView::TabAt(__be_int32 tabIndex) const
 }
 
 
-be_int32
+__be_int32
 BTabView::TabIndexOf(const BTab *tab) const
 {
 	if(tab == NULL || tab->fOwner != this) return -1;

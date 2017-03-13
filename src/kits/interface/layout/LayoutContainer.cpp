@@ -113,14 +113,14 @@ BLayoutContainer::ItemAt(__be_int32 index) const
 }
 
 
-be_int32
+__be_int32
 BLayoutContainer::IndexOf(const BLayoutItem *item) const
 {
 	return((item == NULL || item->fContainer != this) ? -1 : item->fIndex);
 }
 
 
-be_int32
+__be_int32
 BLayoutContainer::CountItems() const
 {
 	return fItems.CountItems();

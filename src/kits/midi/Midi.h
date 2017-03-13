@@ -2,7 +2,7 @@
 #ifndef _MIDI_H
 #define _MIDI_H
 
-#include <BeBuild.h>
+#include <Haiku.h>
 #include <MidiDefs.h>
 #include <OS.h>
 

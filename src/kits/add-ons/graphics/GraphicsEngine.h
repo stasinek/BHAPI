@@ -39,7 +39,7 @@ class BCursor;
 class BPixmap;
 #include "../../interface/Window.h"
 #include "../../interface/Region.h"
-class IMPEXPBHAPI BGraphicsContext {
+class BHAPI_IMPEXP BGraphicsContext {
 public:
 	BGraphicsContext();
 	virtual ~BGraphicsContext();
@@ -74,7 +74,7 @@ private:
 };
 
 
-class IMPEXPBHAPI BGraphicsDrawable {
+class BHAPI_IMPEXP BGraphicsDrawable {
 public:
 	BGraphicsDrawable();
 	virtual ~BGraphicsDrawable();
@@ -132,7 +132,7 @@ private:
 };
 
 
-class IMPEXPBHAPI BGraphicsWindow : public BGraphicsDrawable {
+class BHAPI_IMPEXP BGraphicsWindow : public BGraphicsDrawable {
 public:
 	BGraphicsWindow();
 	virtual ~BGraphicsWindow();
@@ -165,11 +165,11 @@ public:
 
 // NOTE:
 // 1. Addon must have C function like below and all the null virtual functions of class must be implemented.
-// 		extern "C" EXPORTBHAPI BGraphicsEngine* instantiate_graphics_engine();
+// 		extern "C" BHAPI_EXPORT BGraphicsEngine* instantiate_graphics_engine();
 // 2. Usually, addons were put into the directory located at "$E_ADDONS_DIRECTORY/etkxx/graphics" or
 //    "$E_USER_ADDONS_DIRECTORY/etkxx/graphics", such as "/usr/lib/add-ons/etkxx/graphics".
 // 3. When BHAPI++ find no graphics-engine addons, it try built-in graphics-engine when possible.
-class IMPEXPBHAPI BGraphicsEngine {
+class BHAPI_IMPEXP BGraphicsEngine {
 public:
 	BGraphicsEngine();
 	virtual ~BGraphicsEngine();

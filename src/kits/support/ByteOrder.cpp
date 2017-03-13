@@ -30,7 +30,7 @@
 #include "ByteOrder.h"
 #include "../support/Errors.h"
 
-IMPEXPBHAPI status_t b_swap_data(type_code type, void *_data, size_t len, bhapi::swap_action action)
+BHAPI_IMPEXP status_t b_swap_data(type_code type, void *_data, size_t len, bhapi::swap_action action)
 {
 	status_t retVal = B_BAD_VALUE;
 
@@ -125,7 +125,7 @@ IMPEXPBHAPI status_t b_swap_data(type_code type, void *_data, size_t len, bhapi:
 }
 
 
-IMPEXPBHAPI bool bhapi::is_type_swapped(type_code type)
+BHAPI_IMPEXP bool bhapi::is_type_swapped(type_code type)
 {
 	switch(type)
 	{
@@ -160,7 +160,7 @@ IMPEXPBHAPI bool bhapi::is_type_swapped(type_code type)
 }
 
 
-IMPEXPBHAPI float b_swap_float(float value)
+BHAPI_IMPEXP float b_swap_float(float value)
 {
 #if SIZEOF_FLOAT == 4
 	__be_int32 v;
@@ -174,7 +174,7 @@ IMPEXPBHAPI float b_swap_float(float value)
 }
 
 
-IMPEXPBHAPI double b_swap_double(double value)
+BHAPI_IMPEXP double b_swap_double(double value)
 {
 #if SIZEOF_DOUBLE == 8
 	__be_int64 v;

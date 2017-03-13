@@ -37,7 +37,7 @@
 #include "../app/MessageRunner.h"
 #include "../interface/View.h"
 #include "../interface/InterfaceDefs.h"
-class IMPEXPBHAPI BScrollBar : public BView {
+class BHAPI_IMPEXP BScrollBar : public BView {
 public:
     BScrollBar(BRect frame, const char *name,
            float value, float min, float max,

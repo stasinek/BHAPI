@@ -30,12 +30,18 @@
 
 #ifndef BHAPI_MESSAGE_QUEUE_H
 #define BHAPI_MESSAGE_QUEUE_H
-
+//-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
-#include "../support/List.h"
-#include "../support/SupportDefs.h"
+//-----------------------------------------------------------------------------
+#ifndef BMESSAGE_I
+#define BMESSAGE_I
 class BMessage;
-class IMPEXPBHAPI BMessageQueue {
+#endif
+//-----------------------------------------------------------------------------
+#include "../support/List.h"
+#include <Haiku.h>
+//-----------------------------------------------------------------------------
+class BHAPI_IMPEXP BMessageQueue {
 public:
     BMessageQueue();
     virtual ~BMessageQueue();
@@ -65,8 +71,10 @@ private:
     BList fMessagesList;
     void *fLocker;
 };
-
+//-----------------------------------------------------------------------------
 #endif /* __cplusplus */
-
+//-----------------------------------------------------------------------------
+#define BMESSAGEQUEUE_I
 #endif /* BHAPI_MESSAGE_QUEUE_H */
+//-----------------------------------------------------------------------------
 

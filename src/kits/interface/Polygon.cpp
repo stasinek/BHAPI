@@ -171,7 +171,7 @@ BPolygon::operator[](__be_int32 index) const
 }
 
 
-be_int32
+__be_int32
 BPolygon::CountPoints() const
 {
 	return fCount;

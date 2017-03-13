@@ -33,7 +33,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 #include "../interface/View.h"
-class IMPEXPBHAPI BStatusBar : public BView {
+class BHAPI_IMPEXP BStatusBar : public BView {
 public:
     BStatusBar(BRect frame,
            const char *name,

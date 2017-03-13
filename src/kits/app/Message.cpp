@@ -694,7 +694,7 @@ BMessage::_find_type_list(const BList *list, type_code type)
 }
 
 
-be_int32
+__be_int32
 BMessage::CountItems(const char *name, type_code type) const
 {
     if(!name) return -1;
@@ -709,7 +709,7 @@ BMessage::CountItems(const char *name, type_code type) const
 }
 
 
-be_int32
+__be_int32
 BMessage::CountItems(__be_int32 nameIndex,  __be_int32 typeIndex, type_code *type) const
 {
     list_data *ldata = (list_data*)fObjectsList.ItemAt(nameIndex);
@@ -757,7 +757,7 @@ BMessage::TypeAt(__be_int32 nameIndex,  __be_int32 typeIndex, type_code *type) c
 }
 
 
-be_int32
+__be_int32
 BMessage::CountTypesByName(const char *name) const
 {
     if(!name) return -1;
@@ -769,7 +769,7 @@ BMessage::CountTypesByName(const char *name) const
 }
 
 
-be_int32
+__be_int32
 BMessage::CountTypesByName(__be_int32 nameIndex) const
 {
     list_data *ldata = (list_data*)fObjectsList.ItemAt(nameIndex);
@@ -779,7 +779,7 @@ BMessage::CountTypesByName(__be_int32 nameIndex) const
 }
 
 
-be_int32
+__be_int32
 BMessage::CountNames(type_code type, bool count_all_names_when_any_type) const
 {
     if(type == B_ANY_TYPE && count_all_names_when_any_type) return fObjectsList.CountItems();
@@ -803,7 +803,7 @@ BMessage::CountNames(type_code type, bool count_all_names_when_any_type) const
 }
 
 
-be_int32
+__be_int32
 BMessage::FindName(const char *name) const
 {
      __be_int32 index = -1;

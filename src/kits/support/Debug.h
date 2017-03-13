@@ -6,7 +6,7 @@
 #define _DEBUG_H
 
 
-#include <BeBuild.h>
+#include <Haiku.h>
 #include <OS.h>
 
 #include <stdarg.h>

@@ -113,7 +113,7 @@ public:
 	// basic getters
 	const char* Name() const;
 	const entry_ref* EntryRef() const;
-	const node_ref* NodeRef() const;
+	const node_ref* node_ref() const;
 	const StatStruct* StatBuf() const;
 
 	BNode* Node() const;
@@ -336,7 +336,7 @@ Model::EntryRef() const
 
 
 inline const node_ref*
-Model::NodeRef() const
+Model::node_ref() const
 {
 	// the stat structure begins with a node_ref
 	return (node_ref*)&fStatBuf;

@@ -33,7 +33,7 @@
 #include "../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
-class IMPEXPBHAPI BBox : public BView {
+class BHAPI_IMPEXP BBox : public BView {
 public:
     BBox(BRect frame,
          const char *name = NULL,

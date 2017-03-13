@@ -5,7 +5,7 @@
 #ifndef	_A2D_H
 #define	_A2D_H
 
-#include <BeBuild.h>
+#include <Haiku.h>
 #include <Haiku.h>
 
 #include <stddef.h>

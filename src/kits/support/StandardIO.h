@@ -29,12 +29,12 @@
 
 #ifndef BHAPI_PRIVATE_STANDARD_IO_H
 #define BHAPI_PRIVATE_STANDARD_IO_H
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 #include "../support/StreamIO.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
-class LOCALBHAPI BStandardIO : public BStreamIO {
+class BHAPI_LOCAL BStandardIO : public BStreamIO {
 public:
     BStandardIO(int fd);
     virtual ~BStandardIO();

@@ -146,7 +146,7 @@ static long double modfl(long double value, long double *iptr)
 
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI char *bhapi::strdup_dirty(const char *src,  __be_int32 length)
+BHAPI_EXPORT char *bhapi::strdup_dirty(const char *src,  __be_int32 length)
 {
     char    *dest;
 
@@ -403,7 +403,7 @@ bool BString::SetMinimumBufferSize(__be_int32 length)
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::MinimumBufferSize(void) const
+__be_int32 BString::MinimumBufferSize(void) const
 {
     return fMinBufferSize;
 }
@@ -1465,7 +1465,7 @@ int BString::ICompare(const char *str,  __be_int32 n) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::FindFirst(const BString &string) const
+__be_int32 BString::FindFirst(const BString &string) const
 {
     const char  *tmp = strstr(this->String(), string.String());
 
@@ -1477,7 +1477,7 @@ be_int32 BString::FindFirst(const BString &string) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::FindFirst(const char *string) const
+__be_int32 BString::FindFirst(const char *string) const
 {
     const char  *tmp = strstr(this->String(), string);
 
@@ -1489,7 +1489,7 @@ be_int32 BString::FindFirst(const char *string) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::FindFirst(const BString &string,  __be_int32 fromOffset) const
+__be_int32 BString::FindFirst(const BString &string,  __be_int32 fromOffset) const
 {
     const char  *string_find = this->String() + fromOffset;
     const char  *tmp = strstr(string_find, string.String());
@@ -1502,7 +1502,7 @@ be_int32 BString::FindFirst(const BString &string,  __be_int32 fromOffset) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::FindFirst(const char *string,  __be_int32 fromOffset) const
+__be_int32 BString::FindFirst(const char *string,  __be_int32 fromOffset) const
 {
     const char  *string_find = this->String() + fromOffset;
     const char  *tmp = strstr(string_find, string);
@@ -1517,7 +1517,7 @@ be_int32 BString::FindFirst(const char *string,  __be_int32 fromOffset) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::FindFirst(char c) const
+__be_int32 BString::FindFirst(char c) const
 {
     const char  *tmp = strchr(this->String(), c);
 
@@ -1529,7 +1529,7 @@ be_int32 BString::FindFirst(char c) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::FindFirst(char c,  __be_int32 fromOffset) const
+__be_int32 BString::FindFirst(char c,  __be_int32 fromOffset) const
 {
     const char  *string_find = this->String() + fromOffset;
     const char  *tmp = strchr(string_find, c);
@@ -1542,7 +1542,7 @@ be_int32 BString::FindFirst(char c,  __be_int32 fromOffset) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::FindLast(const BString &string) const
+__be_int32 BString::FindLast(const BString &string) const
 {
     const char  *tmp = bhapi::strrstr(this->String(), string.String());
 
@@ -1554,7 +1554,7 @@ be_int32 BString::FindLast(const BString &string) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::FindLast(const char *string) const
+__be_int32 BString::FindLast(const char *string) const
 {
     const char  *tmp = bhapi::strrstr(this->String(), string);
 
@@ -1566,7 +1566,7 @@ be_int32 BString::FindLast(const char *string) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::FindLast(const BString &string,  __be_int32 beforeOffset) const
+__be_int32 BString::FindLast(const BString &string,  __be_int32 beforeOffset) const
 {
     char *string_find = bhapi::strndup(this->String(), beforeOffset + 1);
     const char  *tmp = bhapi::strrstr(string_find, string.String());
@@ -1583,7 +1583,7 @@ be_int32 BString::FindLast(const BString &string,  __be_int32 beforeOffset) cons
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::FindLast(const char *string,  __be_int32 beforeOffset) const
+__be_int32 BString::FindLast(const char *string,  __be_int32 beforeOffset) const
 {
     char *string_find = bhapi::strndup(this->String(), beforeOffset + 1);
      __be_int32     ret = -1;
@@ -1602,7 +1602,7 @@ be_int32 BString::FindLast(const char *string,  __be_int32 beforeOffset) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::FindLast(char c) const
+__be_int32 BString::FindLast(char c) const
 {
     const char  *tmp = strrchr(this->String(), c);
 
@@ -1614,7 +1614,7 @@ be_int32 BString::FindLast(char c) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::FindLast(char c,  __be_int32 beforeOffset) const
+__be_int32 BString::FindLast(char c,  __be_int32 beforeOffset) const
 {
     char *string_find = bhapi::strndup(this->String(), beforeOffset + 1);
     const char  *tmp = strrchr(string_find, c);
@@ -1630,7 +1630,7 @@ be_int32 BString::FindLast(char c,  __be_int32 beforeOffset) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::IFindFirst(const BString &string) const
+__be_int32 BString::IFindFirst(const BString &string) const
 {
     const char  *tmp = bhapi::strcasestr(this->String(), string.String());
 
@@ -1642,7 +1642,7 @@ be_int32 BString::IFindFirst(const BString &string) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::IFindFirst(const char *string) const
+__be_int32 BString::IFindFirst(const char *string) const
 {
     const char  *tmp = bhapi::strcasestr(this->String(), string);
 
@@ -1654,7 +1654,7 @@ be_int32 BString::IFindFirst(const char *string) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::IFindFirst(const BString &string,  __be_int32 fromOffset) const
+__be_int32 BString::IFindFirst(const BString &string,  __be_int32 fromOffset) const
 {
     const char  *string_find = this->String() + fromOffset;
     const char  *tmp = bhapi::strcasestr(string_find, string.String());
@@ -1667,7 +1667,7 @@ be_int32 BString::IFindFirst(const BString &string,  __be_int32 fromOffset) cons
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::IFindFirst(const char *string,  __be_int32 fromOffset) const
+__be_int32 BString::IFindFirst(const char *string,  __be_int32 fromOffset) const
 {
     const char  *string_find = this->String() + fromOffset;
     const char  *tmp = bhapi::strcasestr(string_find, string);
@@ -1682,7 +1682,7 @@ be_int32 BString::IFindFirst(const char *string,  __be_int32 fromOffset) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::IFindFirst(char c) const
+__be_int32 BString::IFindFirst(char c) const
 {
     const char  *tmp = bhapi::strcasechr(this->String(), c);
 
@@ -1694,7 +1694,7 @@ be_int32 BString::IFindFirst(char c) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::IFindFirst(char c,  __be_int32 fromOffset) const
+__be_int32 BString::IFindFirst(char c,  __be_int32 fromOffset) const
 {
     const char  *string_find = this->String() + fromOffset;
     const char  *tmp = bhapi::strcasechr(string_find, c);
@@ -1707,7 +1707,7 @@ be_int32 BString::IFindFirst(char c,  __be_int32 fromOffset) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::IFindLast(const BString &string) const
+__be_int32 BString::IFindLast(const BString &string) const
 {
     const char  *tmp = bhapi::strrcasestr(this->String(), string.String());
 
@@ -1719,7 +1719,7 @@ be_int32 BString::IFindLast(const BString &string) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::IFindLast(const char *string) const
+__be_int32 BString::IFindLast(const char *string) const
 {
     const char  *tmp = bhapi::strrcasestr(this->String(), string);
 
@@ -1731,7 +1731,7 @@ be_int32 BString::IFindLast(const char *string) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::IFindLast(const BString &string,  __be_int32 beforeOffset) const
+__be_int32 BString::IFindLast(const BString &string,  __be_int32 beforeOffset) const
 {
     char *string_find = bhapi::strndup(this->String(), beforeOffset + 1);
     const char  *tmp = bhapi::strrcasestr(string_find, string.String());
@@ -1747,7 +1747,7 @@ be_int32 BString::IFindLast(const BString &string,  __be_int32 beforeOffset) con
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::IFindLast(const char *string,  __be_int32 beforeOffset) const
+__be_int32 BString::IFindLast(const char *string,  __be_int32 beforeOffset) const
 {
     char *string_find = bhapi::strndup(this->String(), beforeOffset + 1);
     const char  *tmp = bhapi::strrcasestr(string_find, string);
@@ -1765,7 +1765,7 @@ be_int32 BString::IFindLast(const char *string,  __be_int32 beforeOffset) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::IFindLast(char c) const
+__be_int32 BString::IFindLast(char c) const
 {
     const char  *tmp = bhapi::strrcasechr(this->String(), c);
 
@@ -1777,7 +1777,7 @@ be_int32 BString::IFindLast(char c) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::IFindLast(char c,  __be_int32 beforeOffset) const
+__be_int32 BString::IFindLast(char c,  __be_int32 beforeOffset) const
 {
     char *string_find = bhapi::strndup(this->String(), beforeOffset + 1);
     const char  *tmp = bhapi::strrcasechr(string_find, c);
@@ -2878,7 +2878,7 @@ BStringArray *BString::Split(const char delimiter,  __be_uint32 max_tokens) cons
 
 //-----------------------------------------------------------------------------
 
-be_int32 BString::CountChars(void) const
+__be_int32 BString::CountChars(void) const
 {
     if (fLen <= 0) return fLen;
     return bhapi::utf8_strlen(fBuffer);
@@ -2923,7 +2923,7 @@ void bhapi::printf_int(BString &str, TYPE_INT value,  __be_uint8 _base, int prec
 
 //-----------------------------------------------------------------------------
 
-be_int32 bhapi::printf_double(BString &str, double value, int precision_width,  __be_int32 *exponent, bool g_style, bool upper_style)
+__be_int32 bhapi::printf_double(BString &str, double value, int precision_width,  __be_int32 *exponent, bool g_style, bool upper_style)
 {
     double n;
      __be_int32 exp = -1;
@@ -3062,7 +3062,7 @@ be_int32 bhapi::printf_double(BString &str, double value, int precision_width,  
 
 //-----------------------------------------------------------------------------
 
-be_int32 bhapi::printf_double(BString &str, long double value, int precision_width,  __be_int32 *exponent, bool g_style, bool upper_style)
+__be_int32 bhapi::printf_double(BString &str, long double value, int precision_width,  __be_int32 *exponent, bool g_style, bool upper_style)
 {
      __be_int32 n;
      __be_int32 exp = -1;
@@ -3201,7 +3201,7 @@ extern "C"
 {
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI char *bhapi::strndup(const char *src,  __be_int32 length)
+BHAPI_EXPORT char *bhapi::strndup(const char *src,  __be_int32 length)
 {
     char    *dest;
      __be_int32 len = 0;
@@ -3224,14 +3224,14 @@ EXPORTBHAPI char *bhapi::strndup(const char *src,  __be_int32 length)
 
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI char *bhapi::strdup(const char *src)
+BHAPI_EXPORT char *bhapi::strdup(const char *src)
 {
     return bhapi::strndup(src, -1);
 }
 
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
+BHAPI_EXPORT char *bhapi::strdup_vprintf(const char *format, va_list ap)
 {
     va_list args;
     BString str(format);
@@ -3947,7 +3947,7 @@ EXPORTBHAPI char *bhapi::strdup_vprintf(const char *format, va_list ap)
 
 //-----------------------------------------------------------------------------
 
-EXPORTBHAPI char *bhapi::strdup_printf(const char *format, ...)
+BHAPI_EXPORT char *bhapi::strdup_printf(const char *format, ...)
 {
     va_list args;
     char    *buffer = NULL;

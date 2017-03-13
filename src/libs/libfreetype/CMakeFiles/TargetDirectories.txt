@@ -1,2 +1,0 @@
-C:/Documents and Settings/stasiek.TC12/My Documents/prc++/x86_libraries/freetype/CMakeFiles/ALL_BUILD.dir
-C:/Documents and Settings/stasiek.TC12/My Documents/prc++/x86_libraries/freetype/CMakeFiles/freetype.dir

@@ -30,9 +30,9 @@
 #ifndef BHAPI_DATA_IO_H
 #define BHAPI_DATA_IO_H
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 #ifdef __cplusplus /* Just for C++ */
-class IMPEXPBHAPI BDataIO {
+class BHAPI_IMPEXP BDataIO {
 public:
     BDataIO();
     virtual ~BDataIO();
@@ -42,7 +42,7 @@ public:
 };
 
 
-class IMPEXPBHAPI BPositionIO : public BDataIO {
+class BHAPI_IMPEXP BPositionIO : public BDataIO {
 public:
     BPositionIO();
     virtual ~BPositionIO();
@@ -59,7 +59,7 @@ public:
 };
 
 
-class IMPEXPBHAPI BMallocIO : public BPositionIO {
+class BHAPI_IMPEXP BMallocIO : public BPositionIO {
 public:
     BMallocIO();
     virtual ~BMallocIO();
@@ -83,7 +83,7 @@ private:
 	size_t fPosition;
 };
 
-class IMPEXPBHAPI BMemoryIO : public BPositionIO {
+class BHAPI_IMPEXP BMemoryIO : public BPositionIO {
 public:
     BMemoryIO(void *ptr, size_t length);
     BMemoryIO(const void *ptr, size_t length);

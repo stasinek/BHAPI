@@ -35,7 +35,7 @@ VirtualDirectoryEntryList::VirtualDirectoryEntryList(Model* model)
 
 	AutoLocker<VirtualDirectoryManager> managerLocker(manager);
 	BStringList directoryPaths;
-	fStatus = manager->ResolveDirectoryPaths(*model->NodeRef(),
+	fStatus = manager->ResolveDirectoryPaths(*model->node_ref(),
 		*model->EntryRef(), directoryPaths, &fDefinitionFileRef);
 	if (fStatus != B_OK)
 		return;

@@ -32,8 +32,8 @@
 
 #ifdef __cplusplus /* Just for C++ */
 class BRect;
-#include "../support/SupportDefs.h"
-class IMPEXPBHAPI BPoint {
+#include <Haiku.h>
+class BHAPI_IMPEXP BPoint {
 public:
     float x;
     float y;
@@ -69,7 +69,7 @@ public:
     void PrintToStream() const;
 };
 
-extern IMPEXPBHAPI const BPoint B_ORIGIN;
+extern BHAPI_IMPEXP const BPoint B_ORIGIN;
 
 #endif /* __cplusplus */
 

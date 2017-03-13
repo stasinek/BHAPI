@@ -29,9 +29,10 @@
 
 #include "../../add-ons/font/FontEngine.h"
 #include "../../storage/Directory.h"
-#include "../../support/StringArray.h"
 #include "../../support/Locker.h"
 #include "../../support/Autolock.h"
+#include "../../support/StringArray.h"
+#include "../../support/StringClass.h"
 #include "../../support/UTF8.h"
 #include "../../support/SupportDefs.h"
 #include "../../support/Errors.h"
@@ -57,7 +58,7 @@ static bool ft2_initialized = false;
 static BLocker ft2_font_locker;
 }
 
-EXPORTBHAPI bool bhapi::font_freetype2_init(void)
+BHAPI_EXPORT bool bhapi::font_freetype2_init(void)
 {
     BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 
@@ -76,7 +77,7 @@ EXPORTBHAPI bool bhapi::font_freetype2_init(void)
 }
 
 
-EXPORTBHAPI bool bhapi::font_freetype2_is_valid(void)
+BHAPI_EXPORT bool bhapi::font_freetype2_is_valid(void)
 {
     BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 
@@ -84,7 +85,7 @@ EXPORTBHAPI bool bhapi::font_freetype2_is_valid(void)
 }
 
 
-EXPORTBHAPI void bhapi::font_freetype2_cancel(void)
+BHAPI_EXPORT void bhapi::font_freetype2_cancel(void)
 {
     BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 
@@ -267,7 +268,7 @@ BFontFT2::Detach(bhapi::font_detach_callback *callback)
 }
 
 
-be_int32
+__be_int32
 BFontFT2::CountFaces() const
 {
     return nFaces;
@@ -400,7 +401,7 @@ BFontFT2::GetHeight(bhapi::font_height *height, float size, float shear, bool bo
 }
 
 
-be_uint8*
+__be_uint8*
 BFontFT2::RenderString(const char *string,  __be_int32 *width,  __be_int32 *height, bool *is_mono,
                float size, float spacing, float shear, bool bold,  __be_int32 length)
 {
@@ -503,7 +504,7 @@ BFontFT2::RenderString(const char *string,  __be_int32 *width,  __be_int32 *heig
 }
 
 
-EXPORTBHAPI bool b_update_freetype2_font_families(bool check_only)
+BHAPI_EXPORT bool b_update_freetype2_font_families(bool check_only)
 {
     BString fonts_dirs;
 

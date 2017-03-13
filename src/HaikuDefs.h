@@ -1,7 +1,8 @@
-#ifndef BHAPI_HAIKU_DEFS_H
+﻿#ifndef BHAPI_HAIKU_DEFS_H
 #define BHAPI_HAIKU_DEFS_H
 
 #include <HaikuConfig.h>
+
 #ifndef UNICODE
 #define UNICODE
 #endif
@@ -59,9 +60,9 @@
 #define BHAPI_IMPORT __IMPORT
 
 #ifdef BHAPI_BUILD_LIBRARY
-	#define BHAPI_IMPEXP __EXPORT
+    #define BHAPI_IMPEXP __EXPORT
 #else /* !BHAPI_BUILD_LIBRARY */
-	#define BHAPI_IMPEXP __IMPORT
+    #define BHAPI_IMPEXP __IMPORT
 #endif /* BHAPI_BUILD_LIBRARY */
 
 #ifndef __LOCAL
@@ -75,10 +76,6 @@
 #ifndef BHAPI_LOCAL
 #define BHAPI_LOCAL __LOCAL
 #endif /* __LOCAL */
-
-#ifndef _MSC_VER
-#include <posix/sys/cdefs.h>
-#endif
 
 #define SIZEOF_INT 4
 /* The size of a `long', as computed by sizeof. */
@@ -137,40 +134,50 @@
 #ifdef __cplusplus
 namespace bhapi {
 #endif /* __cplusplus */
-IMPEXPBHAPI int32 	atomic_add (int32 *value, int32 addValue);
+BHAPI_IMPEXP int32 	atomic_add (int32 *value, int32 addValue);
 // 	Atomically add the value of addValue to value. More...
-IMPEXPBHAPI int64 	atomic_add64 (int64 *value, int64 addValue);
+BHAPI_IMPEXP int64 	atomic_add64 (int64 *value, int64 addValue);
 // 	Atomically add the value of addValue to value. More...
-IMPEXPBHAPI int32 	atomic_and (int32 *value, int32 andValue);
+BHAPI_IMPEXP int32 	atomic_and (int32 *value, int32 andValue);
 // 	Atomically perform a bitwise AND operation of andValue to the variable andValue. More...
-IMPEXPBHAPI int64 	atomic_and64 (int64 *value, int64 andValue);
+BHAPI_IMPEXP int64 	atomic_and64 (int64 *value, int64 andValue);
 // 	Atomically perform a bitwise AND operation of andValue to the variable andValue. More...
-IMPEXPBHAPI int32 	atomic_get (int32 *value);
+BHAPI_IMPEXP int32 	atomic_get (int32 *value);
 // 	Atomically return the value of value. More...
-IMPEXPBHAPI int64 	atomic_get64 (int64 *value);
+BHAPI_IMPEXP int64 	atomic_get64 (int64 *value);
 // 	Atomically return the value of value. More...
-IMPEXPBHAPI int32 	atomic_get_and_set (int32 *value, int32 newValue);
+BHAPI_IMPEXP int32 	atomic_get_and_set (int32 *value, int32 newValue);
 // 	Atomically set the variable value to newvalue and return the old value. More...
-IMPEXPBHAPI int64 	atomic_get_and_set64 (int64 *value, int64 newValue);
+BHAPI_IMPEXP int64 	atomic_get_and_set64 (int64 *value, int64 newValue);
 // 	Atomically set the variable value to newvalue and return the old value. More...
-IMPEXPBHAPI int32 	atomic_or (int32 *value, int32 orValue);
+BHAPI_IMPEXP int32 	atomic_or (int32 *value, int32 orValue);
 // 	Atomically perform a bitwise OR operation of orValue to the variable andValue. More...
-IMPEXPBHAPI int64 	atomic_or64 (int64 *value, int64 orValue);
+BHAPI_IMPEXP int64 	atomic_or64 (int64 *value, int64 orValue);
 // 	Atomically perform a bitwise OR operation of orValue to the variable andValue. More...
-IMPEXPBHAPI void 	atomic_set (int32 *value, int32 newValue);
+BHAPI_IMPEXP void 	atomic_set (int32 *value, int32 newValue);
 // 	Atomically set the variable value to newvalue. More...
-IMPEXPBHAPI void 	atomic_set64 (int64 *value, int64 newValue);
+BHAPI_IMPEXP void 	atomic_set64 (int64 *value, int64 newValue);
 // 	Atomically set the variable value to newvalue. More...
-IMPEXPBHAPI int32 	atomic_test_and_set (int32 *value, int32 newValue, int32 testAgainst);
+BHAPI_IMPEXP int32 	atomic_test_and_set (int32 *value, int32 newValue, int32 testAgainst);
 // 	Atomically set the variable value to newValue if the current value is testAgainst. More...
-IMPEXPBHAPI int64 	atomic_test_and_set64 (int64 *value, int64 newValue, int64 testAgainst);
+BHAPI_IMPEXP int64 	atomic_test_and_set64 (int64 *value, int64 newValue, int64 testAgainst);
 // 	Atomically set the variable value to newValue if the current value is testAgainst. More...
-IMPEXPBHAPI void * 	get_stack_frame (void);
+BHAPI_IMPEXP void * 	get_stack_frame (void);
 // 	Internal function.
 #ifdef __cplusplus
 } /* namespace */
 #endif /* __cplusplus */
 
-#include <posix/stdlib.h>
-#include <posix/stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#ifndef _MSC_VER
+#include <sys/cdefs.h>
+#endif
+
+#include "kits/interface/InterfaceDefs.h"
+#include "kits/interface/GraphicsDefs.h"
+#include "kits/app/AppDefs.h"
+#include "kits/storage/StorageDefs.h"
+#include "kits/support/SupportDefs.h"
+
 #endif

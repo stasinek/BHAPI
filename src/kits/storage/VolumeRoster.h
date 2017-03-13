@@ -34,7 +34,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 
-class IMPEXPBHAPI BVolumeRoster {
+class BHAPI_IMPEXP BVolumeRoster {
 public:
 	BVolumeRoster();
 	virtual ~BVolumeRoster();

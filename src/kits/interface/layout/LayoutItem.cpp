@@ -93,7 +93,7 @@ BLayoutItem::SetResizingMode(__be_uint32 mode)
 }
 
 
-be_uint32
+__be_uint32
 BLayoutItem::ResizingMode() const
 {
 	return fResizingMode;

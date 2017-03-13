@@ -7,7 +7,7 @@
 
 #include <MediaClient.h>
 #include <MediaConnection.h>
-#include <scheduler.h>
+#include <Scheduler.h>
 #include <TimeSource.h>
 
 #include <string.h>

@@ -30,7 +30,7 @@
 #ifndef BHAPI_CLASS_INFO_H
 #define BHAPI_CLASS_INFO_H
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 #ifdef __cplusplus /* Just for C++ */
 #if (defined(_MSC_VER) && !defined(_CPPRTTI))
 	#error "You must enable Run-Time Type Information"

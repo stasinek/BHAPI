@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -30,17 +30,20 @@
 #ifndef BHAPI_STREAM_IO_H
 #define BHAPI_STREAM_IO_H
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 #include "DataIO.h"
 #ifdef __cplusplus /* Just for C++ */
+#ifndef BSTRING_I
+#define BSTRING_I
 class BString;
-class IMPEXPBHAPI BStreamIO : public BDataIO {
+#endif
+class BHAPI_IMPEXP BStreamIO : public BDataIO {
 public:
     BStreamIO();
     virtual ~BStreamIO();
 
-	virtual  __be_size_t		Read(void *buffer, size_t size);
-	virtual  __be_size_t		Write(const void *buffer, size_t size);
+    virtual  __be_size_t		Read(void *buffer, size_t size);
+    virtual  __be_size_t		Write(const void *buffer, size_t size);
 
     BStreamIO 		&operator<<(__be_int8 value);
     BStreamIO 		&operator<<(__be_uint8 value);
@@ -58,15 +61,15 @@ public:
     BStreamIO 		&operator<<(const BString &str);
     BStreamIO 		&operator<<(BStreamIO &stream);
 
-	// TODO: operator>>()
+    // TODO: operator>>()
 };
 
-extern IMPEXPBHAPI BStreamIO& endl;
-extern IMPEXPBHAPI BStreamIO& ends;
+extern BHAPI_IMPEXP BStreamIO& endl;
+extern BHAPI_IMPEXP BStreamIO& ends;
 
-extern IMPEXPBHAPI BStreamIO& EIn;
-extern IMPEXPBHAPI BStreamIO& EOut;
-extern IMPEXPBHAPI BStreamIO& EErr;
+extern BHAPI_IMPEXP BStreamIO& EIn;
+extern BHAPI_IMPEXP BStreamIO& EOut;
+extern BHAPI_IMPEXP BStreamIO& EErr;
 
 #endif /* __cplusplus */
 

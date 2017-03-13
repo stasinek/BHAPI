@@ -48,7 +48,7 @@
 
 #include <math.h>
 
-class LOCALBHAPI BViewState {
+class BHAPI_LOCAL BViewState {
 public:
 	bhapi::drawing_mode		DrawingMode;
 	BPoint			PenLocation;
@@ -513,7 +513,7 @@ BView::RemoveSelf()
 }
 
 
-be_int32
+__be_int32
 BView::CountChildren() const
 {
 	return fLayout->CountItems();
@@ -1065,7 +1065,7 @@ BView::SetFlags(__be_uint32 flags)
 }
 
 
-be_uint32
+__be_uint32
 BView::Flags() const
 {
 	return fViewFlags;
@@ -1079,7 +1079,7 @@ BView::SetResizingMode(__be_uint32 mode)
 }
 
 
-be_uint32
+__be_uint32
 BView::ResizingMode() const
 {
 	return fLayout->ResizingMode();
@@ -2434,7 +2434,7 @@ BView::_SetEventMask(__be_uint32 mask,  __be_uint32 options)
 }
 
 
-be_uint32
+__be_uint32
 BView::EventMask() const
 {
 	return fEventMask;

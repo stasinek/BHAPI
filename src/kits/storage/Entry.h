@@ -36,7 +36,7 @@
 
 class BDirectory;
 
-class IMPEXPBHAPI BEntry {
+class BHAPI_IMPEXP BEntry {
 public:
     BEntry();
     BEntry(const char *dir, const char *leaf, bool traverse = false);

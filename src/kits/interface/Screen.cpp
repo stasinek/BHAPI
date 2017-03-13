@@ -86,7 +86,7 @@ BScreen::Frame() const
 }
 
 
-be_uint32
+__be_uint32
 BScreen::ID() const
 {
 	return fID;

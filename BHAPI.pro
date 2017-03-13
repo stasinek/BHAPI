@@ -7,7 +7,6 @@
 TARGET = be
 TEMPLATE = lib
 DEFINES += __INTEL__
-DEFINES += BHAPI_LIBRARY
 DEFINES += BHAPI_BUILD_LIBRARY
 DEFINES += BHAPI_OS_WIN32
 DEFINES += BHAPI_GRAPHICS_WIN32_BUILT_IN
@@ -15,6 +14,15 @@ DEFINES += BHAPI_GRAPHICS_WIN32_BUILT_IN
 CONFIG += windows shared staticlib precompile_header
 CONFIG -= app_bundle
 CONFIG -= qt
+
+#Use Precompiled headers PCH
+#QMAKE_CXX = ccache g++
+#PRECOMPILED_HEADER += src/kits/app/AppDefs.h
+#PRECOMPILED_HEADER += src/kits/interface/GraphicsDefs.h
+#PRECOMPILED_HEADER += src/kits/support/SupportDefs.h
+#PRECOMPILED_HEADER += src/kits/storage/StorageDefs.h
+#PRECOMPILED_HEADER += src/kits/interface/InterfaceDefs.h
+#PRECOMPILED_HEADER  = bhapi.h
 
 INCLUDEPATH += ..
 INCLUDEPATH += ../BHAPI/src
@@ -65,42 +73,36 @@ INCLUDEPATH += ../BHAPI/src/private/midi
 INCLUDEPATH += ../BHAPI/src/private/midi2
 INCLUDEPATH += ../BHAPI/src/private/net
 INCLUDEPATH += ../BHAPI/src/private/package
+INCLUDEPATH += ../BHAPI/src/private/shared
 INCLUDEPATH += ../BHAPI/src/private/storage
 INCLUDEPATH += ../BHAPI/src/private/support
+INCLUDEPATH += ../BHAPI/src/private/tracker
 INCLUDEPATH += ../BHAPI/src/private/translation
 INCLUDEPATH += ../BHAPI/src/libs
+INCLUDEPATH += ../BHAPI/src/libs/libposix
+INCLUDEPATH += ../BHAPI/src/libs/muslibc
+INCLUDEPATH += ../BHAPI/src/libs/muslibc/include
 INCLUDEPATH += ../BHAPI/src/libs/glut
-INCLUDEPATH += ../BHAPI/src/libs/gnuexpat
 INCLUDEPATH += ../BHAPI/src/libs/json
-INCLUDEPATH += ../BHAPI/src/libs/stdlibc/include
 INCLUDEPATH += ../BHAPI/src/libs/lz4/include
-INCLUDEPATH += ../BHAPI/src/libs/gnuregex/include
-INCLUDEPATH += ../BHAPI/src/libs/libfreetype/include
+INCLUDEPATH += ../BHAPI/src/libs/freetype/include
 INCLUDEPATH += ../BHAPI/src/libs/zlib/include
-INCLUDEPATH += ../BHAPI/src/macos
-INCLUDEPATH += ../BHAPI/src/posix
-INCLUDEPATH += ../BHAPI/src/win32
-INCLUDEPATH += ../BHAPI/src/wrapper/macos
-INCLUDEPATH += ../BHAPI/src/wrapper/macos/carbon
-INCLUDEPATH += ../BHAPI/src/wrapper/win32
-INCLUDEPATH += ../BHAPI/src/wrapper/win32/GDI
-INCLUDEPATH += ../BHAPI/src/wrapper/win32/pthread
-INCLUDEPATH += ../BHAPI/src/wrapper/posix
-INCLUDEPATH += ../BHAPI/src/wrapper/posix/X11
-INCLUDEPATH += ../BHAPI/src/wrapper/posix/DIRECTFB
+INCLUDEPATH += ../BHAPI/src/wrappers/beos
+INCLUDEPATH += ../BHAPI/src/wrappers/beos/ui
+INCLUDEPATH += ../BHAPI/src/wrappers/macos
+INCLUDEPATH += ../BHAPI/src/wrappers/macos/carbon
+INCLUDEPATH += ../BHAPI/src/wrappers/win32
+INCLUDEPATH += ../BHAPI/src/wrappers/win32/GDI
+INCLUDEPATH += ../BHAPI/src/wrappers/win32/pthread
+INCLUDEPATH += ../BHAPI/src/wrappers/posix
+INCLUDEPATH += ../BHAPI/src/wrappers/posix/X11
+INCLUDEPATH += ../BHAPI/src/wrappers/posix/DIRECTFB
 
 QT -= core gui
-#QMAKE_CXX = ccache g++
 
-#Use Precompiled headers PCH
-#PRECOMPILED_HEADER += src/kits/app/AppDefs.h
-#PRECOMPILED_HEADER += src/kits/interface/GraphicsDefs.h
-##PRECOMPILED_HEADER += src/kits/support/SupportDefs.h
-##PRECOMPILED_HEADER += src/kits/storage/StorageDefs.h
-#PRECOMPILED_HEADER += src/kits/interface/InterfaceDefs.h
-#PRECOMPILED_HEADER = bhapi.h
-
-SOURCES += bhapi.cpp \
+SOURCES += \
+    bhapi.cpp \
+    src/kits/BE.cpp \
     src/kits/add-ons/font/FontEngine.cpp \
     src/kits/add-ons/font/FreeType2.cpp \
     src/kits/add-ons/graphics/GraphicsEngine.cpp \
@@ -138,7 +140,6 @@ SOURCES += bhapi.cpp \
     src/kits/app/MessageRunner.cpp \
     src/kits/app/Messenger.cpp \
     src/kits/kernel/Debug.cpp \
-    src/wrapper/BHAPI_wrapper_port.cpp \
     src/kits/kernel/Memory.cpp \
     src/kits/net/NetAddress.cpp \
     src/kits/net/NetBuffer.cpp \
@@ -247,12 +248,6 @@ SOURCES += bhapi.cpp \
     src/kits/bluetooth/KitSupport.cpp \
     src/kits/bluetooth/LocalDevice.cpp \
     src/kits/bluetooth/RemoteDevice.cpp \
-    src/kits/debug/arch/arm/arch_debug_support.cpp \
-    src/kits/debug/arch/m68k/arch_debug_support.cpp \
-    src/kits/debug/arch/mipsel/arch_debug_support.cpp \
-    src/kits/debug/arch/ppc/arch_debug_support.cpp \
-    src/kits/debug/arch/x86/arch_debug_support.cpp \
-    src/kits/debug/arch/x86_64/arch_debug_support.cpp \
     src/kits/debug/debug_support.cpp \
     src/kits/debug/DebugContext.cpp \
     src/kits/debug/DebugEventStream.cpp \
@@ -261,12 +256,6 @@ SOURCES += bhapi.cpp \
     src/kits/debug/Image.cpp \
     src/kits/debug/SymbolLookup.cpp \
     src/kits/debug/TeamDebugger.cpp \
-    src/kits/debugger/arch/x86/disasm/DisassemblerX86.cpp \
-    src/kits/debugger/arch/x86/ArchitectureX86.cpp \
-    src/kits/debugger/arch/x86/CpuStateX86.cpp \
-    src/kits/debugger/arch/x86_64/disasm/DisassemblerX8664.cpp \
-    src/kits/debugger/arch/x86_64/ArchitectureX8664.cpp \
-    src/kits/debugger/arch/x86_64/CpuStateX8664.cpp \
     src/kits/debugger/arch/Architecture.cpp \
     src/kits/debugger/arch/CpuState.cpp \
     src/kits/debugger/arch/InstructionInfo.cpp \
@@ -485,17 +474,6 @@ SOURCES += bhapi.cpp \
     src/kits/game/SimpleGameSound.cpp \
     src/kits/game/StreamingGameSound.cpp \
     src/kits/game/WindowScreen.cpp \
-    src/wrapper/beos/BHAPI_wrapper_application.cpp \
-    src/wrapper/beos/BHAPI_wrapper_beos-font.cpp \
-    src/wrapper/beos/BHAPI_wrapper_drawing.cpp \
-    src/wrapper/beos/BHAPI_wrapper_pixmap.cpp \
-    src/wrapper/beos/BHAPI_wrapper_window.cpp \
-    src/kits/interface/directfb/etk-application.cpp \
-    src/kits/interface/directfb/etk-dfb-font.cpp \
-    src/kits/interface/directfb/etk-drawing.cpp \
-    src/kits/interface/directfb/etk-pixmap.cpp \
-    src/kits/interface/directfb/etk-window.cpp \
-    src/kits/interface/directfb/etk-wm.cpp \
     src/kits/interface/layouter/CollapsingLayouter.cpp \
     src/kits/interface/layouter/ComplexLayouter.cpp \
     src/kits/interface/layouter/Layouter.cpp \
@@ -508,16 +486,6 @@ SOURCES += bhapi.cpp \
     src/kits/interface/textview_support/TextGapBuffer.cpp \
     src/kits/interface/textview_support/UndoBuffer.cpp \
     src/kits/interface/textview_support/WidthBuffer.cpp \
-    src/wrapper/win32/GDI/BHAPI_wrapper_application.cpp \
-    src/wrapper/win32/GDI/BHAPI_wrapper_drawing.cpp \
-    src/wrapper/win32/GDI/BHAPI_wrapper_pixmap.cpp \
-    src/wrapper/win32/GDI/BHAPI_wrapper_win32-font.cpp \
-    src/wrapper/win32/GDI/BHAPI_wrapper_window.cpp \
-    src/wrapper/posix/x11/BHAPI_wrapper_application.cpp \
-    src/wrapper/posix/BHAPI_wrapper_drawing.cpp \
-    src/wrapper/posix/BHAPI_wrapper_pixmap.cpp \
-    src/wrapper/posix/BHAPI_wrapper_window.cpp \
-    src/wrapper/posix/BHAPI_wrapper_x11-font.cpp \
     src/kits/interface/AboutWindow.cpp \
     src/kits/interface/AbstractLayout.cpp \
     src/kits/interface/AbstractLayoutItem.cpp \
@@ -1009,19 +977,8 @@ SOURCES += bhapi.cpp \
     src/kits/storage/Statable.cpp \
     src/kits/storage/storage_support.cpp \
     src/kits/storage/SymLink.cpp \
-    src/kits/support/Archivable.1486593671.cpp \
     src/kits/support/ArchivingManagers.cpp \
-    src/kits/support/DataIO.1486593697.cpp \
-    src/kits/support/Flattenable.1486593626.cpp \
-    src/kits/support/List.1486593556 (1).cpp \
-    src/kits/support/List.1486593556.cpp \
-    src/kits/support/Locker.1486593567.cpp \
     src/kits/support/PointerList.cpp \
-    src/kits/support/SimpleLocker.1486593713.cpp \
-    src/kits/support/StreamIO.1486593724.cpp \
-    src/kits/support/StringArray.1486593735 (1).cpp \
-    src/kits/support/StringArray.1486593735.cpp \
-    src/kits/support/StringMe.1486593742.cpp \
     src/kits/textencoding/character_sets.cpp \
     src/kits/textencoding/CharacterSet.cpp \
     src/kits/textencoding/CharacterSetRoster.cpp \
@@ -1100,7 +1057,6 @@ SOURCES += bhapi.cpp \
     src/kits/translation/TranslationUtils.cpp \
     src/kits/translation/Translator.cpp \
     src/kits/translation/TranslatorRoster.cpp \
-    src/kits/BE.cpp \
     src/kits/mail/des.c \
     src/kits/network/libnetapi/md5.c \
     src/kits/network/netresolv/dst/dst_api.c \
@@ -1177,1031 +1133,54 @@ SOURCES += bhapi.cpp \
     src/kits/network/netresolv/resolv/res_query.c \
     src/kits/network/netresolv/resolv/res_send.c \
     src/kits/network/netresolv/resolv/res_state.c \
-    src/kits/support/ByteOrder.1486593674 (1).c \
-    src/kits/support/ByteOrder.1486593674.c \
-    src/kits/support/ByteOrder.1487831473.c \
-    src/posix/locale/ctype.cpp \
-    src/posix/locale/LocaleBackend.cpp \
-    src/posix/locale/localeconv.cpp \
-    src/posix/locale/LocaleData.cpp \
-    src/posix/locale/LocaleDataBridge.cpp \
-    src/posix/locale/nl_langinfo.cpp \
-    src/posix/locale/setlocale.cpp \
-    src/posix/locale/wctype.cpp \
-    src/posix/malloc/arch-specific.cpp \
-    src/posix/malloc/heap.cpp \
-    src/posix/malloc/processheap.cpp \
-    src/posix/malloc/superblock.cpp \
-    src/posix/malloc/threadheap.cpp \
-    src/posix/malloc/wrapper.cpp \
-    src/posix/malloc_debug/guarded_heap.cpp \
-    src/posix/malloc_debug/heap.cpp \
-    src/posix/malloc_debug/malloc_debug_api.cpp \
-    src/posix/pthread/pthread.cpp \
-    src/posix/pthread/pthread_cancel.cpp \
-    src/posix/pthread/pthread_cleanup.cpp \
-    src/posix/pthread/pthread_cond.cpp \
-    src/posix/pthread/pthread_key.cpp \
-    src/posix/pthread/pthread_mutex.cpp \
-    src/posix/pthread/pthread_once.cpp \
-    src/posix/pthread/pthread_rwlock.cpp \
-    src/posix/signal/killpg.cpp \
-    src/posix/signal/psiginfo.cpp \
-    src/posix/signal/psignal.cpp \
-    src/posix/signal/set_signal_mask.cpp \
-    src/posix/signal/sigaction.cpp \
-    src/posix/signal/sighold.cpp \
-    src/posix/signal/sigignore.cpp \
-    src/posix/signal/siginterrupt.cpp \
-    src/posix/signal/signal.cpp \
-    src/posix/signal/signal_limits.cpp \
-    src/posix/signal/sigpause.cpp \
-    src/posix/signal/sigpending.cpp \
-    src/posix/signal/sigqueue.cpp \
-    src/posix/signal/sigrelse.cpp \
-    src/posix/signal/sigset.cpp \
-    src/posix/signal/sigset_accessors.cpp \
-    src/posix/signal/sigsuspend.cpp \
-    src/posix/signal/sigtimedwait.cpp \
-    src/posix/signal/sigwait.cpp \
-    src/posix/signal/sigwaitinfo.cpp \
-    src/posix/signal/strsignal.cpp \
-    src/posix/stdio/__freading.cpp \
-    src/posix/stdio/fpurge.cpp \
-    src/posix/stdlib/env.cpp \
-    src/posix/stdlib/exit.cpp \
-    src/posix/stdlib/getsubopt.cpp \
-    src/posix/stdlib/pty.cpp \
-    src/posix/stdlib/realpath.cpp \
-    src/posix/string/arch/x86_64/arch_string.cpp \
-    src/posix/string/ffs.cpp \
-    src/posix/string/strcoll.cpp \
-    src/posix/string/strdup.cpp \
-    src/posix/string/strlen.cpp \
-    src/posix/string/strncpy.cpp \
-    src/posix/string/strndup.cpp \
-    src/posix/string/strnlen.cpp \
-    src/posix/string/strxfrm.cpp \
-    src/posix/sys/itimer.cpp \
-    src/posix/sys/mman.cpp \
-    src/posix/sys/times.cpp \
-    src/posix/sys/wait.cpp \
-    src/posix/sys/xsi_msg_queue.cpp \
-    src/posix/sys/xsi_sem.cpp \
-    src/posix/time/asctime.cpp \
-    src/posix/time/clock.cpp \
-    src/posix/time/clock_support.cpp \
-    src/posix/time/localtime.cpp \
-    src/posix/time/timelocal.cpp \
-    src/posix/time/timer_support.cpp \
-    src/posix/unistd/chroot.cpp \
-    src/posix/unistd/conf.cpp \
-    src/posix/unistd/exec.cpp \
-    src/posix/unistd/hostname.cpp \
-    src/posix/unistd/lockf.cpp \
-    src/posix/unistd/system.cpp \
-    src/posix/unistd/usergroup.cpp \
-    src/posix/wchar/mbrtowc.cpp \
-    src/posix/wchar/mbsrtowcs.cpp \
-    src/posix/wchar/wcrtomb.cpp \
-    src/posix/wchar/wcscoll.cpp \
-    src/posix/wchar/wcsftime.cpp \
-    src/posix/wchar/wcsrtombs.cpp \
-    src/posix/wchar/wcsxfrm.cpp \
-    src/posix/fcntl.cpp \
-    src/posix/grp.cpp \
-    src/posix/libgen.cpp \
-    src/posix/pwd.cpp \
-    src/posix/scheduler.cpp \
-    src/posix/semaphore.cpp \
-    src/posix/shadow.cpp \
-    src/posix/syslog.cpp \
-    src/posix/tls.cpp \
-    src/posix/user_group_common.cpp \
-    src/posix/arch/arm/fenv.c \
-    src/posix/arch/generic/longjmp_return.c \
-    src/posix/arch/generic/setjmp_save_sigs.c \
-    src/posix/arch/ppc/fenv.c \
-    src/posix/arch/x86/fenv.c \
-    src/posix/arch/x86_64/fenv.c \
-    src/posix/crypt/crypt.c \
-    src/posix/crypt/crypt_util.c \
-    src/posix/glibc/arch/arm/e_log.c \
-    src/posix/glibc/arch/arm/e_sqrt.c \
-    src/posix/glibc/arch/arm/e_sqrtf.c \
-    src/posix/glibc/arch/generic/add_n.c \
-    src/posix/glibc/arch/generic/addmul_1.c \
-    src/posix/glibc/arch/generic/branred.c \
-    src/posix/glibc/arch/generic/cmp.c \
-    src/posix/glibc/arch/generic/dbl2mpn.c \
-    src/posix/glibc/arch/generic/divrem.c \
-    src/posix/glibc/arch/generic/doasin.c \
-    src/posix/glibc/arch/generic/dosincos.c \
-    src/posix/glibc/arch/generic/e_acos.c \
-    src/posix/glibc/arch/generic/e_acosf.c \
-    src/posix/glibc/arch/generic/e_acosh.c \
-    src/posix/glibc/arch/generic/e_acoshf.c \
-    src/posix/glibc/arch/generic/e_acoshl.c \
-    src/posix/glibc/arch/generic/e_asin.c \
-    src/posix/glibc/arch/generic/e_asinf.c \
-    src/posix/glibc/arch/generic/e_asinl.c \
-    src/posix/glibc/arch/generic/e_atan2.c \
-    src/posix/glibc/arch/generic/e_atan2f.c \
-    src/posix/glibc/arch/generic/e_atan2l.c \
-    src/posix/glibc/arch/generic/e_atanh.c \
-    src/posix/glibc/arch/generic/e_atanhf.c \
-    src/posix/glibc/arch/generic/e_atanhl.c \
-    src/posix/glibc/arch/generic/e_cosh.c \
-    src/posix/glibc/arch/generic/e_coshf.c \
-    src/posix/glibc/arch/generic/e_coshl.c \
-    src/posix/glibc/arch/generic/e_exp.c \
-    src/posix/glibc/arch/generic/e_exp10.c \
-    src/posix/glibc/arch/generic/e_exp10f.c \
-    src/posix/glibc/arch/generic/e_exp10l.c \
-    src/posix/glibc/arch/generic/e_exp2.c \
-    src/posix/glibc/arch/generic/e_exp2f.c \
-    src/posix/glibc/arch/generic/e_expf.c \
-    src/posix/glibc/arch/generic/e_fmod.c \
-    src/posix/glibc/arch/generic/e_fmodf.c \
-    src/posix/glibc/arch/generic/e_gamma_r.c \
-    src/posix/glibc/arch/generic/e_gammaf_r.c \
-    src/posix/glibc/arch/generic/e_gammal_r.c \
-    src/posix/glibc/arch/generic/e_hypot.c \
-    src/posix/glibc/arch/generic/e_hypotf.c \
-    src/posix/glibc/arch/generic/e_hypotl.c \
-    src/posix/glibc/arch/generic/e_ilogbl.c \
-    src/posix/glibc/arch/generic/e_j0.c \
-    src/posix/glibc/arch/generic/e_j0f.c \
-    src/posix/glibc/arch/generic/e_j0l.c \
-    src/posix/glibc/arch/generic/e_j1.c \
-    src/posix/glibc/arch/generic/e_j1f.c \
-    src/posix/glibc/arch/generic/e_j1l.c \
-    src/posix/glibc/arch/generic/e_jn.c \
-    src/posix/glibc/arch/generic/e_jnf.c \
-    src/posix/glibc/arch/generic/e_jnl.c \
-    src/posix/glibc/arch/generic/e_lgamma_r.c \
-    src/posix/glibc/arch/generic/e_lgammaf_r.c \
-    src/posix/glibc/arch/generic/e_lgammal_r.c \
-    src/posix/glibc/arch/generic/e_log.c \
-    src/posix/glibc/arch/generic/e_log10.c \
-    src/posix/glibc/arch/generic/e_log10f.c \
-    src/posix/glibc/arch/generic/e_log2.c \
-    src/posix/glibc/arch/generic/e_log2f.c \
-    src/posix/glibc/arch/generic/e_logf.c \
-    src/posix/glibc/arch/generic/e_logl.c \
-    src/posix/glibc/arch/generic/e_pow.c \
-    src/posix/glibc/arch/generic/e_powf.c \
-    src/posix/glibc/arch/generic/e_rem_pio2.c \
-    src/posix/glibc/arch/generic/e_rem_pio2f.c \
-    src/posix/glibc/arch/generic/e_remainder.c \
-    src/posix/glibc/arch/generic/e_remainderf.c \
-    src/posix/glibc/arch/generic/e_scalb.c \
-    src/posix/glibc/arch/generic/e_scalbf.c \
-    src/posix/glibc/arch/generic/e_sinh.c \
-    src/posix/glibc/arch/generic/e_sinhf.c \
-    src/posix/glibc/arch/generic/e_sinhl.c \
-    src/posix/glibc/arch/generic/e_sqrtl.c \
-    src/posix/glibc/arch/generic/fraiseexcpt.c \
-    src/posix/glibc/arch/generic/halfulp.c \
-    src/posix/glibc/arch/generic/k_cos.c \
-    src/posix/glibc/arch/generic/k_cosf.c \
-    src/posix/glibc/arch/generic/k_rem_pio2.c \
-    src/posix/glibc/arch/generic/k_rem_pio2f.c \
-    src/posix/glibc/arch/generic/k_sin.c \
-    src/posix/glibc/arch/generic/k_sinf.c \
-    src/posix/glibc/arch/generic/k_tan.c \
-    src/posix/glibc/arch/generic/k_tanf.c \
-    src/posix/glibc/arch/generic/ldbl2mpn.c \
-    src/posix/glibc/arch/generic/lshift.c \
-    src/posix/glibc/arch/generic/memrchr.c \
-    src/posix/glibc/arch/generic/mpa.c \
-    src/posix/glibc/arch/generic/mpatan.c \
-    src/posix/glibc/arch/generic/mpatan2.c \
-    src/posix/glibc/arch/generic/mpexp.c \
-    src/posix/glibc/arch/generic/mplog.c \
-    src/posix/glibc/arch/generic/mpn2dbl.c \
-    src/posix/glibc/arch/generic/mpn2flt.c \
-    src/posix/glibc/arch/generic/mpn2ldbl.c \
-    src/posix/glibc/arch/generic/mpsqrt.c \
-    src/posix/glibc/arch/generic/mptan.c \
-    src/posix/glibc/arch/generic/mul.c \
-    src/posix/glibc/arch/generic/mul_1.c \
-    src/posix/glibc/arch/generic/mul_n.c \
-    src/posix/glibc/arch/generic/rshift.c \
-    src/posix/glibc/arch/generic/s_asinh.c \
-    src/posix/glibc/arch/generic/s_asinhf.c \
-    src/posix/glibc/arch/generic/s_asinhl.c \
-    src/posix/glibc/arch/generic/s_atan.c \
-    src/posix/glibc/arch/generic/s_atanf.c \
-    src/posix/glibc/arch/generic/s_atanl.c \
-    src/posix/glibc/arch/generic/s_cacos.c \
-    src/posix/glibc/arch/generic/s_cacosf.c \
-    src/posix/glibc/arch/generic/s_cacosh.c \
-    src/posix/glibc/arch/generic/s_cacoshf.c \
-    src/posix/glibc/arch/generic/s_cacoshl.c \
-    src/posix/glibc/arch/generic/s_cacosl.c \
-    src/posix/glibc/arch/generic/s_casin.c \
-    src/posix/glibc/arch/generic/s_casinf.c \
-    src/posix/glibc/arch/generic/s_casinh.c \
-    src/posix/glibc/arch/generic/s_casinhf.c \
-    src/posix/glibc/arch/generic/s_casinhl.c \
-    src/posix/glibc/arch/generic/s_casinl.c \
-    src/posix/glibc/arch/generic/s_catan.c \
-    src/posix/glibc/arch/generic/s_catanf.c \
-    src/posix/glibc/arch/generic/s_catanh.c \
-    src/posix/glibc/arch/generic/s_catanhf.c \
-    src/posix/glibc/arch/generic/s_catanhl.c \
-    src/posix/glibc/arch/generic/s_catanl.c \
-    src/posix/glibc/arch/generic/s_cbrt.c \
-    src/posix/glibc/arch/generic/s_cbrtf.c \
-    src/posix/glibc/arch/generic/s_cbrtl.c \
-    src/posix/glibc/arch/generic/s_ccos.c \
-    src/posix/glibc/arch/generic/s_ccosf.c \
-    src/posix/glibc/arch/generic/s_ccosh.c \
-    src/posix/glibc/arch/generic/s_ccoshf.c \
-    src/posix/glibc/arch/generic/s_ccoshl.c \
-    src/posix/glibc/arch/generic/s_ccosl.c \
-    src/posix/glibc/arch/generic/s_ceil.c \
-    src/posix/glibc/arch/generic/s_ceilf.c \
-    src/posix/glibc/arch/generic/s_cexp.c \
-    src/posix/glibc/arch/generic/s_cexpf.c \
-    src/posix/glibc/arch/generic/s_cexpl.c \
-    src/posix/glibc/arch/generic/s_clog.c \
-    src/posix/glibc/arch/generic/s_clog10.c \
-    src/posix/glibc/arch/generic/s_clog10f.c \
-    src/posix/glibc/arch/generic/s_clog10l.c \
-    src/posix/glibc/arch/generic/s_clogf.c \
-    src/posix/glibc/arch/generic/s_clogl.c \
-    src/posix/glibc/arch/generic/s_copysign.c \
-    src/posix/glibc/arch/generic/s_copysignf.c \
-    src/posix/glibc/arch/generic/s_copysignl.c \
-    src/posix/glibc/arch/generic/s_cos.c \
-    src/posix/glibc/arch/generic/s_cosf.c \
-    src/posix/glibc/arch/generic/s_cpow.c \
-    src/posix/glibc/arch/generic/s_cpowf.c \
-    src/posix/glibc/arch/generic/s_cpowl.c \
-    src/posix/glibc/arch/generic/s_cproj.c \
-    src/posix/glibc/arch/generic/s_cprojf.c \
-    src/posix/glibc/arch/generic/s_cprojl.c \
-    src/posix/glibc/arch/generic/s_csin.c \
-    src/posix/glibc/arch/generic/s_csinf.c \
-    src/posix/glibc/arch/generic/s_csinh.c \
-    src/posix/glibc/arch/generic/s_csinhf.c \
-    src/posix/glibc/arch/generic/s_csinhl.c \
-    src/posix/glibc/arch/generic/s_csinl.c \
-    src/posix/glibc/arch/generic/s_csqrt.c \
-    src/posix/glibc/arch/generic/s_csqrtf.c \
-    src/posix/glibc/arch/generic/s_csqrtl.c \
-    src/posix/glibc/arch/generic/s_ctan.c \
-    src/posix/glibc/arch/generic/s_ctanf.c \
-    src/posix/glibc/arch/generic/s_ctanh.c \
-    src/posix/glibc/arch/generic/s_ctanhf.c \
-    src/posix/glibc/arch/generic/s_ctanhl.c \
-    src/posix/glibc/arch/generic/s_ctanl.c \
-    src/posix/glibc/arch/generic/s_erf.c \
-    src/posix/glibc/arch/generic/s_erff.c \
-    src/posix/glibc/arch/generic/s_erfl.c \
-    src/posix/glibc/arch/generic/s_expm1.c \
-    src/posix/glibc/arch/generic/s_expm1f.c \
-    src/posix/glibc/arch/generic/s_fabs.c \
-    src/posix/glibc/arch/generic/s_fabsf.c \
-    src/posix/glibc/arch/generic/s_fdim.c \
-    src/posix/glibc/arch/generic/s_fdimf.c \
-    src/posix/glibc/arch/generic/s_finite.c \
-    src/posix/glibc/arch/generic/s_finitef.c \
-    src/posix/glibc/arch/generic/s_floor.c \
-    src/posix/glibc/arch/generic/s_floorf.c \
-    src/posix/glibc/arch/generic/s_fma.c \
-    src/posix/glibc/arch/generic/s_fmaf.c \
-    src/posix/glibc/arch/generic/s_fmal.c \
-    src/posix/glibc/arch/generic/s_fmax.c \
-    src/posix/glibc/arch/generic/s_fmaxf.c \
-    src/posix/glibc/arch/generic/s_fmaxl.c \
-    src/posix/glibc/arch/generic/s_fmin.c \
-    src/posix/glibc/arch/generic/s_fminf.c \
-    src/posix/glibc/arch/generic/s_fminl.c \
-    src/posix/glibc/arch/generic/s_fpclassify.c \
-    src/posix/glibc/arch/generic/s_fpclassifyf.c \
-    src/posix/glibc/arch/generic/s_frexp.c \
-    src/posix/glibc/arch/generic/s_frexpf.c \
-    src/posix/glibc/arch/generic/s_frexpl.c \
-    src/posix/glibc/arch/generic/s_ilogb.c \
-    src/posix/glibc/arch/generic/s_ilogbf.c \
-    src/posix/glibc/arch/generic/s_isinf.c \
-    src/posix/glibc/arch/generic/s_isinff.c \
-    src/posix/glibc/arch/generic/s_isnan.c \
-    src/posix/glibc/arch/generic/s_isnanf.c \
-    src/posix/glibc/arch/generic/s_ldexp.c \
-    src/posix/glibc/arch/generic/s_ldexpf.c \
-    src/posix/glibc/arch/generic/s_ldexpl.c \
-    src/posix/glibc/arch/generic/s_llrint.c \
-    src/posix/glibc/arch/generic/s_llrintf.c \
-    src/posix/glibc/arch/generic/s_llrintl.c \
-    src/posix/glibc/arch/generic/s_llround.c \
-    src/posix/glibc/arch/generic/s_llroundf.c \
-    src/posix/glibc/arch/generic/s_llroundl.c \
-    src/posix/glibc/arch/generic/s_log1p.c \
-    src/posix/glibc/arch/generic/s_log1pf.c \
-    src/posix/glibc/arch/generic/s_log1pl.c \
-    src/posix/glibc/arch/generic/s_logb.c \
-    src/posix/glibc/arch/generic/s_logbf.c \
-    src/posix/glibc/arch/generic/s_lrint.c \
-    src/posix/glibc/arch/generic/s_lrintf.c \
-    src/posix/glibc/arch/generic/s_lrintl.c \
-    src/posix/glibc/arch/generic/s_lround.c \
-    src/posix/glibc/arch/generic/s_lroundf.c \
-    src/posix/glibc/arch/generic/s_lroundl.c \
-    src/posix/glibc/arch/generic/s_matherr.c \
-    src/posix/glibc/arch/generic/s_modf.c \
-    src/posix/glibc/arch/generic/s_modff.c \
-    src/posix/glibc/arch/generic/s_modfl.c \
-    src/posix/glibc/arch/generic/s_nan.c \
-    src/posix/glibc/arch/generic/s_nanf.c \
-    src/posix/glibc/arch/generic/s_nanl.c \
-    src/posix/glibc/arch/generic/s_nearbyint.c \
-    src/posix/glibc/arch/generic/s_nearbyintf.c \
-    src/posix/glibc/arch/generic/s_nextafter.c \
-    src/posix/glibc/arch/generic/s_nextafterf.c \
-    src/posix/glibc/arch/generic/s_nexttoward.c \
-    src/posix/glibc/arch/generic/s_nexttowardf.c \
-    src/posix/glibc/arch/generic/s_nexttowardl.c \
-    src/posix/glibc/arch/generic/s_remquo.c \
-    src/posix/glibc/arch/generic/s_remquof.c \
-    src/posix/glibc/arch/generic/s_remquol.c \
-    src/posix/glibc/arch/generic/s_rint.c \
-    src/posix/glibc/arch/generic/s_rintf.c \
-    src/posix/glibc/arch/generic/s_round.c \
-    src/posix/glibc/arch/generic/s_roundf.c \
-    src/posix/glibc/arch/generic/s_roundl.c \
-    src/posix/glibc/arch/generic/s_scalbln.c \
-    src/posix/glibc/arch/generic/s_scalblnf.c \
-    src/posix/glibc/arch/generic/s_scalblnl.c \
-    src/posix/glibc/arch/generic/s_scalbn.c \
-    src/posix/glibc/arch/generic/s_scalbnf.c \
-    src/posix/glibc/arch/generic/s_signbit.c \
-    src/posix/glibc/arch/generic/s_signbitf.c \
-    src/posix/glibc/arch/generic/s_signbitl.c \
-    src/posix/glibc/arch/generic/s_signgam.c \
-    src/posix/glibc/arch/generic/s_significand.c \
-    src/posix/glibc/arch/generic/s_significandf.c \
-    src/posix/glibc/arch/generic/s_sin.c \
-    src/posix/glibc/arch/generic/s_sincos.c \
-    src/posix/glibc/arch/generic/s_sincosf.c \
-    src/posix/glibc/arch/generic/s_sinf.c \
-    src/posix/glibc/arch/generic/s_tan.c \
-    src/posix/glibc/arch/generic/s_tanf.c \
-    src/posix/glibc/arch/generic/s_tanh.c \
-    src/posix/glibc/arch/generic/s_tanhf.c \
-    src/posix/glibc/arch/generic/s_tanhl.c \
-    src/posix/glibc/arch/generic/s_trunc.c \
-    src/posix/glibc/arch/generic/s_truncf.c \
-    src/posix/glibc/arch/generic/sincos32.c \
-    src/posix/glibc/arch/generic/slowexp.c \
-    src/posix/glibc/arch/generic/slowpow.c \
-    src/posix/glibc/arch/generic/strlen.c \
-    src/posix/glibc/arch/generic/sub_n.c \
-    src/posix/glibc/arch/generic/submul_1.c \
-    src/posix/glibc/arch/generic/t_exp.c \
-    src/posix/glibc/arch/generic/w_acos.c \
-    src/posix/glibc/arch/generic/w_acosf.c \
-    src/posix/glibc/arch/generic/w_acosh.c \
-    src/posix/glibc/arch/generic/w_acoshf.c \
-    src/posix/glibc/arch/generic/w_acoshl.c \
-    src/posix/glibc/arch/generic/w_acosl.c \
-    src/posix/glibc/arch/generic/w_asin.c \
-    src/posix/glibc/arch/generic/w_asinf.c \
-    src/posix/glibc/arch/generic/w_asinl.c \
-    src/posix/glibc/arch/generic/w_atan2.c \
-    src/posix/glibc/arch/generic/w_atan2f.c \
-    src/posix/glibc/arch/generic/w_atan2l.c \
-    src/posix/glibc/arch/generic/w_atanh.c \
-    src/posix/glibc/arch/generic/w_atanhf.c \
-    src/posix/glibc/arch/generic/w_atanhl.c \
-    src/posix/glibc/arch/generic/w_cosh.c \
-    src/posix/glibc/arch/generic/w_coshf.c \
-    src/posix/glibc/arch/generic/w_coshl.c \
-    src/posix/glibc/arch/generic/w_drem.c \
-    src/posix/glibc/arch/generic/w_dremf.c \
-    src/posix/glibc/arch/generic/w_dreml.c \
-    src/posix/glibc/arch/generic/w_exp.c \
-    src/posix/glibc/arch/generic/w_exp10.c \
-    src/posix/glibc/arch/generic/w_exp10f.c \
-    src/posix/glibc/arch/generic/w_exp10l.c \
-    src/posix/glibc/arch/generic/w_exp2.c \
-    src/posix/glibc/arch/generic/w_exp2f.c \
-    src/posix/glibc/arch/generic/w_exp2l.c \
-    src/posix/glibc/arch/generic/w_expf.c \
-    src/posix/glibc/arch/generic/w_expl.c \
-    src/posix/glibc/arch/generic/w_fmod.c \
-    src/posix/glibc/arch/generic/w_fmodf.c \
-    src/posix/glibc/arch/generic/w_fmodl.c \
-    src/posix/glibc/arch/generic/w_hypot.c \
-    src/posix/glibc/arch/generic/w_hypotf.c \
-    src/posix/glibc/arch/generic/w_hypotl.c \
-    src/posix/glibc/arch/generic/w_ilogbl.c \
-    src/posix/glibc/arch/generic/w_j0.c \
-    src/posix/glibc/arch/generic/w_j0f.c \
-    src/posix/glibc/arch/generic/w_j0l.c \
-    src/posix/glibc/arch/generic/w_j1.c \
-    src/posix/glibc/arch/generic/w_j1f.c \
-    src/posix/glibc/arch/generic/w_j1l.c \
-    src/posix/glibc/arch/generic/w_jn.c \
-    src/posix/glibc/arch/generic/w_jnf.c \
-    src/posix/glibc/arch/generic/w_jnl.c \
-    src/posix/glibc/arch/generic/w_lgamma.c \
-    src/posix/glibc/arch/generic/w_lgamma_r.c \
-    src/posix/glibc/arch/generic/w_lgammaf.c \
-    src/posix/glibc/arch/generic/w_lgammaf_r.c \
-    src/posix/glibc/arch/generic/w_lgammal.c \
-    src/posix/glibc/arch/generic/w_lgammal_r.c \
-    src/posix/glibc/arch/generic/w_log.c \
-    src/posix/glibc/arch/generic/w_log10.c \
-    src/posix/glibc/arch/generic/w_log10f.c \
-    src/posix/glibc/arch/generic/w_log10l.c \
-    src/posix/glibc/arch/generic/w_log2.c \
-    src/posix/glibc/arch/generic/w_log2f.c \
-    src/posix/glibc/arch/generic/w_log2l.c \
-    src/posix/glibc/arch/generic/w_logf.c \
-    src/posix/glibc/arch/generic/w_logl.c \
-    src/posix/glibc/arch/generic/w_pow.c \
-    src/posix/glibc/arch/generic/w_powf.c \
-    src/posix/glibc/arch/generic/w_powl.c \
-    src/posix/glibc/arch/generic/w_remainder.c \
-    src/posix/glibc/arch/generic/w_remainderf.c \
-    src/posix/glibc/arch/generic/w_remainderl.c \
-    src/posix/glibc/arch/generic/w_scalb.c \
-    src/posix/glibc/arch/generic/w_scalbf.c \
-    src/posix/glibc/arch/generic/w_scalbl.c \
-    src/posix/glibc/arch/generic/w_sinh.c \
-    src/posix/glibc/arch/generic/w_sinhf.c \
-    src/posix/glibc/arch/generic/w_sinhl.c \
-    src/posix/glibc/arch/generic/w_sqrt.c \
-    src/posix/glibc/arch/generic/w_sqrtf.c \
-    src/posix/glibc/arch/generic/w_sqrtl.c \
-    src/posix/glibc/arch/generic/w_tgamma.c \
-    src/posix/glibc/arch/generic/w_tgammaf.c \
-    src/posix/glibc/arch/generic/w_tgammal.c \
-    src/posix/glibc/arch/m68k/doasin.c \
-    src/posix/glibc/arch/m68k/e_acos.c \
-    src/posix/glibc/arch/m68k/e_acosf.c \
-    src/posix/glibc/arch/m68k/e_acosl.c \
-    src/posix/glibc/arch/m68k/e_asin.c \
-    src/posix/glibc/arch/m68k/e_asinf.c \
-    src/posix/glibc/arch/m68k/e_asinl.c \
-    src/posix/glibc/arch/m68k/e_sqrt.c \
-    src/posix/glibc/arch/m68k/e_sqrtf.c \
-    src/posix/glibc/arch/m68k/e_sqrtl.c \
-    src/posix/glibc/arch/m68k/feholdexcpt.c \
-    src/posix/glibc/arch/m68k/fesetenv.c \
-    src/posix/glibc/arch/m68k/fesetround.c \
-    src/posix/glibc/arch/m68k/fraiseexcpt.c \
-    src/posix/glibc/arch/m68k/ftestexcept.c \
-    src/posix/glibc/arch/m68k/s_atan.c \
-    src/posix/glibc/arch/m68k/s_atanf.c \
-    src/posix/glibc/arch/m68k/s_atanl.c \
-    src/posix/glibc/arch/m68k/s_fabs.c \
-    src/posix/glibc/arch/m68k/s_fabsf.c \
-    src/posix/glibc/arch/m68k/s_fabsl.c \
-    src/posix/glibc/arch/m68k/s_fpclassifyl.c \
-    src/posix/glibc/arch/m68k/s_nearbyint.c \
-    src/posix/glibc/arch/m68k/s_nearbyintf.c \
-    src/posix/glibc/arch/m68k/s_nearbyintl.c \
-    src/posix/glibc/arch/m68k/s_nextafterl.c \
-    src/posix/glibc/arch/m68k/s_remquo.c \
-    src/posix/glibc/arch/m68k/s_remquof.c \
-    src/posix/glibc/arch/m68k/s_remquol.c \
-    src/posix/glibc/arch/m68k/s_rint.c \
-    src/posix/glibc/arch/m68k/s_rintf.c \
-    src/posix/glibc/arch/m68k/s_scalbln.c \
-    src/posix/glibc/arch/m68k/s_scalblnf.c \
-    src/posix/glibc/arch/m68k/s_scalblnl.c \
-    src/posix/glibc/arch/ppc/e_sqrt.c \
-    src/posix/glibc/arch/ppc/e_sqrtf.c \
-    src/posix/glibc/arch/ppc/feholdexcpt.c \
-    src/posix/glibc/arch/ppc/fesetenv.c \
-    src/posix/glibc/arch/ppc/fesetround.c \
-    src/posix/glibc/arch/ppc/fraiseexcpt.c \
-    src/posix/glibc/arch/ppc/ftestexcept.c \
-    src/posix/glibc/arch/ppc/ldbl2mpn.c \
-    src/posix/glibc/arch/ppc/mul.c \
-    src/posix/glibc/arch/ppc/s_fdim.c \
-    src/posix/glibc/arch/ppc/s_fdimf.c \
-    src/posix/glibc/arch/ppc/s_isnan.c \
-    src/posix/glibc/arch/ppc/s_nearbyint.c \
-    src/posix/glibc/arch/ppc/s_nearbyintf.c \
-    src/posix/glibc/arch/ppc/s_rint.c \
-    src/posix/glibc/arch/ppc/s_rintf.c \
-    src/posix/glibc/arch/ppc/t_sqrt.c \
-    src/posix/glibc/arch/ppc/w_sqrt.c \
-    src/posix/glibc/arch/ppc/w_sqrtf.c \
-    src/posix/glibc/arch/x86/e_acosl.c \
-    src/posix/glibc/arch/x86/e_atan2l.c \
-    src/posix/glibc/arch/x86/e_expl.c \
-    src/posix/glibc/arch/x86/e_fmodl.c \
-    src/posix/glibc/arch/x86/e_sqrtl.c \
-    src/posix/glibc/arch/x86/fegetround.c \
-    src/posix/glibc/arch/x86/fesetround.c \
-    src/posix/glibc/arch/x86/fraiseexcpt.c \
-    src/posix/glibc/arch/x86/ldbl2mpn.c \
-    src/posix/glibc/arch/x86/mpa.c \
-    src/posix/glibc/arch/x86/mpatan.c \
-    src/posix/glibc/arch/x86/mpatan2.c \
-    src/posix/glibc/arch/x86/mplog.c \
-    src/posix/glibc/arch/x86/mptan.c \
-    src/posix/glibc/arch/x86/s_atanl.c \
-    src/posix/glibc/arch/x86/s_fpclassifyl.c \
-    src/posix/glibc/arch/x86/s_isinfl.c \
-    src/posix/glibc/arch/x86/s_isnanl.c \
-    src/posix/glibc/arch/x86/s_logbl.c \
-    src/posix/glibc/arch/x86/s_nextafterl.c \
-    src/posix/glibc/arch/x86/s_nexttoward.c \
-    src/posix/glibc/arch/x86/s_nexttowardf.c \
-    src/posix/glibc/arch/x86/s_rintl.c \
-    src/posix/glibc/arch/x86/s_scalbln.c \
-    src/posix/glibc/arch/x86/s_scalblnf.c \
-    src/posix/glibc/arch/x86/s_scalblnl.c \
-    src/posix/glibc/arch/x86_64/e_acosl.c \
-    src/posix/glibc/arch/x86_64/e_atan2l.c \
-    src/posix/glibc/arch/x86_64/e_expl.c \
-    src/posix/glibc/arch/x86_64/e_rem_pio2l.c \
-    src/posix/glibc/arch/x86_64/e_sqrt.c \
-    src/posix/glibc/arch/x86_64/e_sqrtf.c \
-    src/posix/glibc/arch/x86_64/e_sqrtl.c \
-    src/posix/glibc/arch/x86_64/fegetround.c \
-    src/posix/glibc/arch/x86_64/fesetenv.c \
-    src/posix/glibc/arch/x86_64/fesetround.c \
-    src/posix/glibc/arch/x86_64/k_cosl.c \
-    src/posix/glibc/arch/x86_64/k_rem_pio2l.c \
-    src/posix/glibc/arch/x86_64/k_sinl.c \
-    src/posix/glibc/arch/x86_64/k_tanl.c \
-    src/posix/glibc/arch/x86_64/ldbl2mpn.c \
-    src/posix/glibc/arch/x86_64/s_atanl.c \
-    src/posix/glibc/arch/x86_64/s_fabs.c \
-    src/posix/glibc/arch/x86_64/s_fabsf.c \
-    src/posix/glibc/arch/x86_64/s_fpclassifyl.c \
-    src/posix/glibc/arch/x86_64/s_isinfl.c \
-    src/posix/glibc/arch/x86_64/s_isnanl.c \
-    src/posix/glibc/arch/x86_64/s_logbl.c \
-    src/posix/glibc/arch/x86_64/s_nextafterl.c \
-    src/posix/glibc/arch/x86_64/s_nexttoward.c \
-    src/posix/glibc/arch/x86_64/s_nexttowardf.c \
-    src/posix/glibc/arch/x86_64/s_rintl.c \
-    src/posix/glibc/arch/x86_64/s_significandl.c \
-    src/posix/glibc/ctype/ctype-info.c \
-    src/posix/glibc/extensions/getopt.c \
-    src/posix/glibc/extensions/getopt1.c \
-    src/posix/glibc/extensions/getopt_init.c \
-    src/posix/glibc/extensions/obstack.c \
-    src/posix/glibc/iconv/gconv_builtin.c \
-    src/posix/glibc/iconv/gconv_simple.c \
-    src/posix/glibc/iconv/loop.c \
-    src/posix/glibc/iconv/skeleton.c \
-    src/posix/glibc/libio/__fsetlocking.c \
-    src/posix/glibc/libio/clearerr.c \
-    src/posix/glibc/libio/clearerr_u.c \
-    src/posix/glibc/libio/fcloseall.c \
-    src/posix/glibc/libio/feof.c \
-    src/posix/glibc/libio/feof_u.c \
-    src/posix/glibc/libio/ferror.c \
-    src/posix/glibc/libio/ferror_u.c \
-    src/posix/glibc/libio/filedoalloc.c \
-    src/posix/glibc/libio/fileno.c \
-    src/posix/glibc/libio/fileops.c \
-    src/posix/glibc/libio/flockfile.c \
-    src/posix/glibc/libio/fmemopen.c \
-    src/posix/glibc/libio/fputc.c \
-    src/posix/glibc/libio/fputc_u.c \
-    src/posix/glibc/libio/fputwc.c \
-    src/posix/glibc/libio/fputwc_u.c \
-    src/posix/glibc/libio/freopen.c \
-    src/posix/glibc/libio/freopen64.c \
-    src/posix/glibc/libio/fseek.c \
-    src/posix/glibc/libio/fseeko.c \
-    src/posix/glibc/libio/fseeko64.c \
-    src/posix/glibc/libio/ftello.c \
-    src/posix/glibc/libio/ftello64.c \
-    src/posix/glibc/libio/fwide.c \
-    src/posix/glibc/libio/fwprintf.c \
-    src/posix/glibc/libio/fwscanf.c \
-    src/posix/glibc/libio/genops.c \
-    src/posix/glibc/libio/getc.c \
-    src/posix/glibc/libio/getc_u.c \
-    src/posix/glibc/libio/getchar.c \
-    src/posix/glibc/libio/getchar_u.c \
-    src/posix/glibc/libio/getwc.c \
-    src/posix/glibc/libio/getwc_u.c \
-    src/posix/glibc/libio/getwchar.c \
-    src/posix/glibc/libio/getwchar_u.c \
-    src/posix/glibc/libio/iofclose.c \
-    src/posix/glibc/libio/iofdopen.c \
-    src/posix/glibc/libio/iofflush.c \
-    src/posix/glibc/libio/iofflush_u.c \
-    src/posix/glibc/libio/iofgetpos.c \
-    src/posix/glibc/libio/iofgetpos64.c \
-    src/posix/glibc/libio/iofgets.c \
-    src/posix/glibc/libio/iofgets_u.c \
-    src/posix/glibc/libio/iofgetws.c \
-    src/posix/glibc/libio/iofgetws_u.c \
-    src/posix/glibc/libio/iofopen.c \
-    src/posix/glibc/libio/iofopen64.c \
-    src/posix/glibc/libio/iofopncook.c \
-    src/posix/glibc/libio/iofputs.c \
-    src/posix/glibc/libio/iofputs_u.c \
-    src/posix/glibc/libio/iofputws.c \
-    src/posix/glibc/libio/iofputws_u.c \
-    src/posix/glibc/libio/iofread.c \
-    src/posix/glibc/libio/iofread_u.c \
-    src/posix/glibc/libio/iofsetpos.c \
-    src/posix/glibc/libio/iofsetpos64.c \
-    src/posix/glibc/libio/ioftell.c \
-    src/posix/glibc/libio/iofwide.c \
-    src/posix/glibc/libio/iofwrite.c \
-    src/posix/glibc/libio/iofwrite_u.c \
-    src/posix/glibc/libio/iogetdelim.c \
-    src/posix/glibc/libio/iogetline.c \
-    src/posix/glibc/libio/iogets.c \
-    src/posix/glibc/libio/iogetwline.c \
-    src/posix/glibc/libio/iopadn.c \
-    src/posix/glibc/libio/iopopen.c \
-    src/posix/glibc/libio/ioputs.c \
-    src/posix/glibc/libio/ioseekoff.c \
-    src/posix/glibc/libio/ioseekpos.c \
-    src/posix/glibc/libio/iosetbuffer.c \
-    src/posix/glibc/libio/iosetvbuf.c \
-    src/posix/glibc/libio/ioungetc.c \
-    src/posix/glibc/libio/ioungetwc.c \
-    src/posix/glibc/libio/iovdprintf.c \
-    src/posix/glibc/libio/iovsprintf.c \
-    src/posix/glibc/libio/iovsscanf.c \
-    src/posix/glibc/libio/iovswscanf.c \
-    src/posix/glibc/libio/iowpadn.c \
-    src/posix/glibc/libio/memstream.c \
-    src/posix/glibc/libio/obprintf.c \
-    src/posix/glibc/libio/pclose.c \
-    src/posix/glibc/libio/peekc.c \
-    src/posix/glibc/libio/putc.c \
-    src/posix/glibc/libio/putc_u.c \
-    src/posix/glibc/libio/putchar.c \
-    src/posix/glibc/libio/putchar_u.c \
-    src/posix/glibc/libio/putwc.c \
-    src/posix/glibc/libio/putwc_u.c \
-    src/posix/glibc/libio/putwchar.c \
-    src/posix/glibc/libio/putwchar_u.c \
-    src/posix/glibc/libio/rewind.c \
-    src/posix/glibc/libio/setbuf.c \
-    src/posix/glibc/libio/setlinebuf.c \
-    src/posix/glibc/libio/stdfiles.c \
-    src/posix/glibc/libio/stdio.c \
-    src/posix/glibc/libio/strops.c \
-    src/posix/glibc/libio/swprintf.c \
-    src/posix/glibc/libio/swscanf.c \
-    src/posix/glibc/libio/vasprintf.c \
-    src/posix/glibc/libio/vscanf.c \
-    src/posix/glibc/libio/vsnprintf.c \
-    src/posix/glibc/libio/vswprintf.c \
-    src/posix/glibc/libio/vwprintf.c \
-    src/posix/glibc/libio/vwscanf.c \
-    src/posix/glibc/libio/wfiledoalloc.c \
-    src/posix/glibc/libio/wfileops.c \
-    src/posix/glibc/libio/wgenops.c \
-    src/posix/glibc/libio/wprintf.c \
-    src/posix/glibc/libio/wscanf.c \
-    src/posix/glibc/libio/wstrops.c \
-    src/posix/glibc/locale/C-collate.c \
-    src/posix/glibc/locale/C-ctype.c \
-    src/posix/glibc/locale/C-messages.c \
-    src/posix/glibc/locale/C-monetary.c \
-    src/posix/glibc/locale/C-numeric.c \
-    src/posix/glibc/locale/C-time.c \
-    src/posix/glibc/locale/C_name.c \
-    src/posix/glibc/locale/coll-lookup.c \
-    src/posix/glibc/locale/lc-collate.c \
-    src/posix/glibc/locale/lc-ctype.c \
-    src/posix/glibc/locale/lc-messages.c \
-    src/posix/glibc/locale/lc-monetary.c \
-    src/posix/glibc/locale/lc-numeric.c \
-    src/posix/glibc/locale/xlocale.c \
-    src/posix/glibc/math/cabs.c \
-    src/posix/glibc/math/cabsf.c \
-    src/posix/glibc/math/cabsl.c \
-    src/posix/glibc/math/carg.c \
-    src/posix/glibc/math/cargf.c \
-    src/posix/glibc/math/cargl.c \
-    src/posix/glibc/math/cimag.c \
-    src/posix/glibc/math/cimagf.c \
-    src/posix/glibc/math/cimagl.c \
-    src/posix/glibc/math/conj.c \
-    src/posix/glibc/math/conjf.c \
-    src/posix/glibc/math/conjl.c \
-    src/posix/glibc/math/creal.c \
-    src/posix/glibc/math/crealf.c \
-    src/posix/glibc/math/creall.c \
-    src/posix/glibc/math/k_casinh.c \
-    src/posix/glibc/math/k_casinhf.c \
-    src/posix/glibc/math/k_casinhl.c \
-    src/posix/glibc/misc/efgcvt.c \
-    src/posix/glibc/misc/efgcvt_r.c \
-    src/posix/glibc/misc/hsearch.c \
-    src/posix/glibc/misc/hsearch_r.c \
-    src/posix/glibc/misc/insremque.c \
-    src/posix/glibc/misc/lsearch.c \
-    src/posix/glibc/misc/tsearch.c \
-    src/posix/glibc/regex/regcomp.c \
-    src/posix/glibc/regex/regex.c \
-    src/posix/glibc/regex/regex_internal.c \
-    src/posix/glibc/regex/regexec.c \
-    src/posix/glibc/stdio-common/_itoa.c \
-    src/posix/glibc/stdio-common/_itowa.c \
-    src/posix/glibc/stdio-common/asprintf.c \
-    src/posix/glibc/stdio-common/dprintf.c \
-    src/posix/glibc/stdio-common/fprintf.c \
-    src/posix/glibc/stdio-common/fscanf.c \
-    src/posix/glibc/stdio-common/getline.c \
-    src/posix/glibc/stdio-common/getw.c \
-    src/posix/glibc/stdio-common/itoa-digits.c \
-    src/posix/glibc/stdio-common/itoa-udigits.c \
-    src/posix/glibc/stdio-common/itowa-digits.c \
-    src/posix/glibc/stdio-common/perror.c \
-    src/posix/glibc/stdio-common/printf-parse.c \
-    src/posix/glibc/stdio-common/printf-prs.c \
-    src/posix/glibc/stdio-common/printf.c \
-    src/posix/glibc/stdio-common/printf_fp.c \
-    src/posix/glibc/stdio-common/printf_fphex.c \
-    src/posix/glibc/stdio-common/printf_size.c \
-    src/posix/glibc/stdio-common/psignal.c \
-    src/posix/glibc/stdio-common/putw.c \
-    src/posix/glibc/stdio-common/reg-printf.c \
-    src/posix/glibc/stdio-common/scanf.c \
-    src/posix/glibc/stdio-common/snprintf.c \
-    src/posix/glibc/stdio-common/sprintf.c \
-    src/posix/glibc/stdio-common/sscanf.c \
-    src/posix/glibc/stdio-common/tempnam.c \
-    src/posix/glibc/stdio-common/tempname.c \
-    src/posix/glibc/stdio-common/tmpfile.c \
-    src/posix/glibc/stdio-common/tmpnam.c \
-    src/posix/glibc/stdio-common/tmpnam_r.c \
-    src/posix/glibc/stdio-common/vfprintf.c \
-    src/posix/glibc/stdio-common/vfscanf.c \
-    src/posix/glibc/stdio-common/vfwprintf.c \
-    src/posix/glibc/stdio-common/vfwscanf.c \
-    src/posix/glibc/stdio-common/vprintf.c \
-    src/posix/glibc/stdlib/a64l.c \
-    src/posix/glibc/stdlib/drand48-iter.c \
-    src/posix/glibc/stdlib/drand48.c \
-    src/posix/glibc/stdlib/drand48_r.c \
-    src/posix/glibc/stdlib/erand48.c \
-    src/posix/glibc/stdlib/erand48_r.c \
-    src/posix/glibc/stdlib/fpioconst.c \
-    src/posix/glibc/stdlib/inlines.c \
-    src/posix/glibc/stdlib/jrand48.c \
-    src/posix/glibc/stdlib/jrand48_r.c \
-    src/posix/glibc/stdlib/l64a.c \
-    src/posix/glibc/stdlib/lcong48.c \
-    src/posix/glibc/stdlib/lcong48_r.c \
-    src/posix/glibc/stdlib/lrand48.c \
-    src/posix/glibc/stdlib/lrand48_r.c \
-    src/posix/glibc/stdlib/mrand48.c \
-    src/posix/glibc/stdlib/mrand48_r.c \
-    src/posix/glibc/stdlib/nrand48.c \
-    src/posix/glibc/stdlib/nrand48_r.c \
-    src/posix/glibc/stdlib/random.c \
-    src/posix/glibc/stdlib/random_r.c \
-    src/posix/glibc/stdlib/seed48.c \
-    src/posix/glibc/stdlib/seed48_r.c \
-    src/posix/glibc/stdlib/srand48.c \
-    src/posix/glibc/stdlib/srand48_r.c \
-    src/posix/glibc/stdlib/strtod.c \
-    src/posix/glibc/stdlib/strtof.c \
-    src/posix/glibc/stdlib/strtol.c \
-    src/posix/glibc/stdlib/strtold.c \
-    src/posix/glibc/string/swab.c \
-    src/posix/glibc/wcsmbs/wcsmbsload.c \
-    src/posix/glibc/wcsmbs/wcstod.c \
-    src/posix/glibc/wcsmbs/wcstof.c \
-    src/posix/glibc/wcsmbs/wcstol.c \
-    src/posix/glibc/wcsmbs/wcstold.c \
-    src/posix/glibc/wcsmbs/wcstoll.c \
-    src/posix/glibc/wcsmbs/wcstoul.c \
-    src/posix/glibc/wcsmbs/wcstoull.c \
-    src/posix/pthread/pthread_atfork.c \
-    src/posix/pthread/pthread_attr.c \
-    src/posix/pthread/pthread_condattr.c \
-    src/posix/pthread/pthread_mutexattr.c \
-    src/posix/pthread/pthread_spinlock.c \
-    src/posix/signal/kill.c \
-    src/posix/signal/raise.c \
-    src/posix/signal/send_signal.c \
-    src/posix/signal/set_signal_stack.c \
-    src/posix/signal/sigaltstack.c \
-    src/posix/stdio/_fseek.c \
-    src/posix/stdio/fclose.c \
-    src/posix/stdio/feof.c \
-    src/posix/stdio/fflush.c \
-    src/posix/stdio/fgetc.c \
-    src/posix/stdio/fgetln.c \
-    src/posix/stdio/fgetpos.c \
-    src/posix/stdio/fgets.c \
-    src/posix/stdio/findfp.c \
-    src/posix/stdio/flags.c \
-    src/posix/stdio/flockfile.c \
-    src/posix/stdio/fopen.c \
-    src/posix/stdio/fprintf.c \
-    src/posix/stdio/fputc.c \
-    src/posix/stdio/fputs.c \
-    src/posix/stdio/fread.c \
-    src/posix/stdio/fseek.c \
-    src/posix/stdio/fvwrite.c \
-    src/posix/stdio/fwalk.c \
-    src/posix/stdio/fwrite.c \
-    src/posix/stdio/getc.c \
-    src/posix/stdio/getchar.c \
-    src/posix/stdio/gets.c \
-    src/posix/stdio/getw.c \
-    src/posix/stdio/makebuf.c \
-    src/posix/stdio/printf.c \
-    src/posix/stdio/putc.c \
-    src/posix/stdio/putchar.c \
-    src/posix/stdio/puts.c \
-    src/posix/stdio/putw.c \
-    src/posix/stdio/refill.c \
-    src/posix/stdio/remove.c \
-    src/posix/stdio/rename.c \
-    src/posix/stdio/rewind.c \
-    src/posix/stdio/rget.c \
-    src/posix/stdio/scanf.c \
-    src/posix/stdio/snprintf.c \
-    src/posix/stdio/sprintf.c \
-    src/posix/stdio/sscanf.c \
-    src/posix/stdio/stdio.c \
-    src/posix/stdio/ungetc.c \
-    src/posix/stdio/vfprintf.c \
-    src/posix/stdio/vfscanf.c \
-    src/posix/stdio/vscanf.c \
-    src/posix/stdio/vsnprintf.c \
-    src/posix/stdio/vsprintf.c \
-    src/posix/stdio/wbuf.c \
-    src/posix/stdio/wsetup.c \
-    src/posix/stdlib/abs.c \
-    src/posix/stdlib/atfork.c \
-    src/posix/stdlib/atof.c \
-    src/posix/stdlib/atoi.c \
-    src/posix/stdlib/bsearch.c \
-    src/posix/stdlib/div.c \
-    src/posix/stdlib/heapsort.c \
-    src/posix/stdlib/merge.c \
-    src/posix/stdlib/mktemp.c \
-    src/posix/stdlib/qsort.c \
-    src/posix/stdlib/radixsort.c \
-    src/posix/stdlib/rand.c \
-    src/posix/stdlib/random.c \
-    src/posix/stdlib/strfmon.c \
-    src/posix/stdlib/strtod.c \
-    src/posix/stdlib/strtol.c \
-    src/posix/stdlib/strtoll.c \
-    src/posix/stdlib/strtoq.c \
-    src/posix/stdlib/strtoul.c \
-    src/posix/stdlib/strtoull.c \
-    src/posix/stdlib/strtouq.c \
-    src/posix/string/arch/generic/memcpy.c \
-    src/posix/string/arch/generic/memset.c \
-    src/posix/string/bcmp.c \
-    src/posix/string/bcopy.c \
-    src/posix/string/bzero.c \
-    src/posix/string/memccpy.c \
-    src/posix/string/memchr.c \
-    src/posix/string/memcmp.c \
-    src/posix/string/memmove.c \
-    src/posix/string/stpcpy.c \
-    src/posix/string/strcasecmp.c \
-    src/posix/string/strcasestr.c \
-    src/posix/string/strcat.c \
-    src/posix/string/strchr.c \
-    src/posix/string/strchrnul.c \
-    src/posix/string/strcmp.c \
-    src/posix/string/strcpy.c \
-    src/posix/string/strcspn.c \
-    src/posix/string/strerror.c \
-    src/posix/string/strlcat.c \
-    src/posix/string/strlcpy.c \
-    src/posix/string/strlwr.c \
-    src/posix/string/strncat.c \
-    src/posix/string/strncmp.c \
-    src/posix/string/strpbrk.c \
-    src/posix/string/strrchr.c \
-    src/posix/string/strspn.c \
-    src/posix/string/strstr.c \
-    src/posix/string/strtok.c \
-    src/posix/string/strupr.c \
-    src/posix/sys/chmod.c \
-    src/posix/sys/flock.c \
-    src/posix/sys/ftime.c \
-    src/posix/sys/ftok.c \
-    src/posix/sys/getrusage.c \
-    src/posix/sys/gettimeofday.c \
-    src/posix/sys/mkdir.c \
-    src/posix/sys/mkfifo.c \
-    src/posix/sys/mknod.c \
-    src/posix/sys/rlimit.c \
-    src/posix/sys/select.c \
-    src/posix/sys/stat.c \
-    src/posix/sys/statvfs.c \
-    src/posix/sys/uio.c \
-    src/posix/sys/umask.c \
-    src/posix/sys/uname.c \
-    src/posix/sys/utimes.c \
-    src/posix/time/ctime.c \
-    src/posix/time/difftime.c \
-    src/posix/time/localtime_fading_out.c \
-    src/posix/time/nanosleep.c \
-    src/posix/time/stime.c \
-    src/posix/time/strftime.c \
-    src/posix/time/strptime.c \
-    src/posix/time/time.c \
-    src/posix/time/wcsftime.c \
-    src/posix/unistd/_exit.c \
-    src/posix/unistd/access.c \
-    src/posix/unistd/alarm.c \
-    src/posix/unistd/brk.c \
-    src/posix/unistd/chown.c \
-    src/posix/unistd/close.c \
-    src/posix/unistd/directory.c \
-    src/posix/unistd/dup.c \
-    src/posix/unistd/fork.c \
-    src/posix/unistd/getlogin.c \
-    src/posix/unistd/getpagesize.c \
-    src/posix/unistd/ioctl.c \
-    src/posix/unistd/link.c \
-    src/posix/unistd/lseek.c \
-    src/posix/unistd/mount.c \
-    src/posix/unistd/pause.c \
-    src/posix/unistd/pipe.c \
-    src/posix/unistd/process.c \
-    src/posix/unistd/read.c \
-    src/posix/unistd/sbrk.c \
-    src/posix/unistd/sleep.c \
-    src/posix/unistd/sync.c \
-    src/posix/unistd/terminal.c \
-    src/posix/unistd/truncate.c \
-    src/posix/unistd/ttyname.c \
-    src/posix/unistd/ualarm.c \
-    src/posix/unistd/usleep.c \
-    src/posix/unistd/write.c \
-    src/posix/wchar/btowc.c \
-    src/posix/wchar/mblen.c \
-    src/posix/wchar/mbrlen.c \
-    src/posix/wchar/mbsinit.c \
-    src/posix/wchar/mbstowcs.c \
-    src/posix/wchar/mbtowc.c \
-    src/posix/wchar/wcpcpy.c \
-    src/posix/wchar/wcpncpy.c \
-    src/posix/wchar/wcscasecmp.c \
-    src/posix/wchar/wcscat.c \
-    src/posix/wchar/wcschr.c \
-    src/posix/wchar/wcschrnul.c \
-    src/posix/wchar/wcscmp.c \
-    src/posix/wchar/wcscpy.c \
-    src/posix/wchar/wcscspn.c \
-    src/posix/wchar/wcsdup.c \
-    src/posix/wchar/wcslcat.c \
-    src/posix/wchar/wcslcpy.c \
-    src/posix/wchar/wcslen.c \
-    src/posix/wchar/wcsncasecmp.c \
-    src/posix/wchar/wcsncat.c \
-    src/posix/wchar/wcsncmp.c \
-    src/posix/wchar/wcsncpy.c \
-    src/posix/wchar/wcsnlen.c \
-    src/posix/wchar/wcspbrk.c \
-    src/posix/wchar/wcsrchr.c \
-    src/posix/wchar/wcsspn.c \
-    src/posix/wchar/wcsstr.c \
-    src/posix/wchar/wcstok.c \
-    src/posix/wchar/wcstombs.c \
-    src/posix/wchar/wcswidth.c \
-    src/posix/wchar/wctob.c \
-    src/posix/wchar/wctomb.c \
-    src/posix/wchar/wcwidth.c \
-    src/posix/wchar/wmemchr.c \
-    src/posix/wchar/wmemcmp.c \
-    src/posix/wchar/wmemcpy.c \
-    src/posix/wchar/wmemmove.c \
-    src/posix/wchar/wmempcpy.c \
-    src/posix/wchar/wmemset.c \
-    src/posix/assert.c \
-    src/posix/dirent.c \
-    src/posix/dlfcn.c \
-    src/posix/errno.c \
-    src/posix/fnmatch.c \
-    src/posix/fts.c \
-    src/posix/ftw.c \
-    src/posix/glob.c \
-    src/posix/inttypes.c \
-    src/posix/nftw.c \
-    src/posix/poll.c \
-    src/posix/pwd_query.c \
-    src/posix/termios.c \
-    src/posix/utime.c
+    src/haiku/arch/generic/generic_atomic.cpp \
+    src/haiku/arch/generic/generic_system_time_nsecs.cpp \
+    src/haiku/locks/init_once.cpp \
+    src/haiku/locks/mutex.cpp \
+    src/haiku/locks/recursive_lock.cpp \
+    src/haiku/locks/rw_lock.cpp \
+    src/haiku/Architecture.cpp \
+    src/haiku/byteorder.cpp \
+    src/haiku/disk_scanner.cpp \
+    src/haiku/driver_settings.cpp \
+    src/haiku/errors.cpp \
+    src/haiku/extended_system_info.cpp \
+    src/haiku/find_directory.cpp \
+    src/haiku/find_paths.cpp \
+    src/haiku/fs.cpp \
+    src/haiku/fs_attr.cpp \
+    src/haiku/fs_attr_generic.cpp \
+    src/haiku/fs_attr_untyped.cpp \
+    src/haiku/fs_darwin.cpp \
+    src/haiku/fs_descriptors.cpp \
+    src/haiku/fs_freebsd.cpp \
+    src/haiku/fs_query.cpp \
+    src/haiku/function_remapper.cpp \
+    src/haiku/image.cpp \
+    src/haiku/launch.cpp \
+    src/haiku/memory.cpp \
+    src/haiku/misc.cpp \
+    src/haiku/parsedate.cpp \
+    src/haiku/syscalls.cpp \
+    src/haiku/system_info.cpp \
+    src/haiku/time.cpp \
+    src/haiku/wait_for_objects.cpp \
+    src/haiku/area.c \
+    src/haiku/atomic.c \
+    src/haiku/debug.c \
+    src/haiku/fs_index.c \
+    src/haiku/fs_info.c \
+    src/haiku/fs_volume.c \
+    src/haiku/port.c \
+    src/haiku/scheduler.c \
+    src/haiku/sem.c \
+    src/haiku/system_revision.c \
+    src/haiku/team.c \
+    src/haiku/thread.c \
+    src/wrappers/BHAPI_wrapper_port.cpp
 
-HEADERS += bhapi.h\
+HEADERS +=  \
+    bhapi.h \
     bhapi_global.h \
     src/kits/BE.h \
     src/kits/AppKit.h \
@@ -2310,9 +1289,6 @@ HEADERS += bhapi.h\
     src/kits/support/StandardIO.h \
     src/kits/support/StopWatch.h \
     src/kits/support/TLS.h \
-    src/HaikuConstants.h \
-    src/HaikuTypes.h \
-    src/Haiku.h \
     src/kits/support/UTF8.h \
     src/kits/support/Architecture.h \
     src/kits/support/StringArray.h \
@@ -2325,8 +1301,6 @@ HEADERS += bhapi.h\
     src/private/support/Token.h \
     src/private/support/StringPrivate.h \
     src/kits/support/StringClass.h \
-    src/HaikuDefs.h \
-    src/HaikuConfig.h \
     src/kits/add-ons/graphics/Accelerant.h \
     src/kits/add-ons/graphics/GraphicsCard.h \
     src/kits/add-ons/input_server/InputServerDevice.h \
@@ -2347,17 +1321,6 @@ HEADERS += bhapi.h\
     src/kits/app/Notification.h \
     src/kits/app/PropertyInfo.h \
     src/kits/app/Roster.h \
-    src/kits/arch/arm/arch_debugger.h \
-    src/kits/arch/m68k/arch_debugger.h \
-    src/kits/arch/mipsel/arch_debugger.h \
-    src/kits/arch/ppc/arch_debugger.h \
-    src/kits/arch/x86/arch_debugger.h \
-    src/kits/arch/x86_64/arch_debugger.h \
-    src/kits/be_apps/Deskbar/Deskbar.h \
-    src/kits/be_apps/NetPositive/NetPositive.h \
-    src/kits/be_apps/ServicesDaemon/ServicesDaemon.h \
-    src/kits/be_apps/Tracker/Background.h \
-    src/kits/be_apps/Tracker/RecentItems.h \
     src/kits/bluetooth/HCI/btHCI.h \
     src/kits/bluetooth/HCI/btHCI_acl.h \
     src/kits/bluetooth/HCI/btHCI_command.h \
@@ -2380,12 +1343,6 @@ HEADERS += bhapi.h\
     src/kits/debug/arch/arch_debug_support.h \
     src/kits/debug/image.h \
     src/kits/debug/SymbolLookup.h \
-    src/kits/debugger/arch/x86/disasm/DisassemblerX86.h \
-    src/kits/debugger/arch/x86/ArchitectureX86.h \
-    src/kits/debugger/arch/x86/CpuStateX86.h \
-    src/kits/debugger/arch/x86_64/disasm/DisassemblerX8664.h \
-    src/kits/debugger/arch/x86_64/ArchitectureX8664.h \
-    src/kits/debugger/arch/x86_64/CpuStateX8664.h \
     src/kits/debugger/arch/InstructionInfo.h \
     src/kits/debugger/arch/RegisterMap.h \
     src/kits/debugger/controllers/DebugReportGenerator.h \
@@ -2568,9 +1525,7 @@ HEADERS += bhapi.h\
     src/kits/game/SimpleGameSound.h \
     src/kits/game/StreamingGameSound.h \
     src/kits/game/WindowScreen.h \
-    src/kits/interface/beos/etk-beos-graphics.h \
     src/kits/interface/carbon/etk-carbon.h \
-    src/kits/interface/directfb/etk-dfb.h \
     src/kits/interface/layouter/CollapsingLayouter.h \
     src/kits/interface/layouter/ComplexLayouter.h \
     src/kits/interface/layouter/Layouter.h \
@@ -2582,9 +1537,6 @@ HEADERS += bhapi.h\
     src/kits/interface/textview_support/StyleBuffer.h \
     src/kits/interface/textview_support/TextGapBuffer.h \
     src/kits/interface/textview_support/UndoBuffer.h \
-    src/kits/interface/win32/etk-win32gdi.h \
-    src/kits/interface/wm/SimpleWM.h \
-    src/kits/interface/x11/etk-x11.h \
     src/kits/interface/AbstractLayout.h \
     src/kits/interface/AbstractLayoutItem.h \
     src/kits/interface/AffineTransform.h \
@@ -2620,8 +1572,6 @@ HEADERS += bhapi.h\
     src/kits/interface/Picture.h \
     src/kits/interface/PictureButton.h \
     src/kits/interface/PrintJob.h \
-    src/kits/interface/Region.1486593436 (1).h \
-    src/kits/interface/Region.1486593436.h \
     src/kits/interface/SeparatorItem.h \
     src/kits/interface/SeparatorView.h \
     src/kits/interface/Shape.h \
@@ -2644,9 +1594,7 @@ HEADERS += bhapi.h\
     src/kits/kernel/fs_info.h \
     src/kits/kernel/fs_query.h \
     src/kits/kernel/fs_volume.h \
-    src/kits/kernel/image.h \
     src/kits/kernel/Memory.h \
-    src/kits/kernel/scheduler.h \
     src/kits/locale/tools/CollectingCatalog.h \
     src/kits/locale/Catalog.h \
     src/kits/locale/CatalogData.h \
@@ -2923,24 +1871,9 @@ HEADERS += bhapi.h\
     src/kits/storage/ResourceStrings.h \
     src/kits/storage/Statable.h \
     src/kits/storage/SymLink.h \
-    src/kits/support/Archivable.1486593659.h \
     src/kits/support/ArchivingManagers.h \
-    src/kits/support/Autolock.1486593652.h \
-    src/kits/support/ByteOrder.1486593643.h \
-    src/kits/support/ClassInfo.1486593636.h \
-    src/kits/support/DataIO.1486593627.h \
     src/kits/support/Debug.h \
-    src/kits/support/Errors.1486593589.h \
-    src/kits/support/Flattenable.1486593579.h \
-    src/kits/support/List.1486593446 (1).h \
-    src/kits/support/List.1486593446.h \
-    src/kits/support/Locker.1486593883.h \
     src/kits/support/parsedate.h \
-    src/kits/support/StreamIO.1486593894.h \
-    src/kits/support/StringArray.1486593336.h \
-    src/kits/support/StringMe.1486593610.h \
-    src/kits/support/SupportDefs.1486593385.h \
-    src/kits/support/SupportDefs.1488110412.h \
     src/kits/textencoding/character_sets.h \
     src/kits/tracker/Attributes.h \
     src/kits/tracker/AttributeStream.h \
@@ -3029,426 +1962,178 @@ HEADERS += bhapi.h\
     src/kits/MidiKit.h \
     src/kits/NetworkKit.h \
     src/kits/TranslationKit.h \
-    src/posix/arch/arm/arch_setjmp.h \
-    src/posix/arch/arm/fenv.h \
-    src/posix/arch/arm/signal.h \
-    src/posix/arch/m68k/arch_setjmp.h \
-    src/posix/arch/m68k/signal.h \
-    src/posix/arch/mipsel/arch_setjmp.h \
-    src/posix/arch/mipsel/signal.h \
-    src/posix/arch/ppc/arch_setjmp.h \
-    src/posix/arch/ppc/fenv.h \
-    src/posix/arch/ppc/signal.h \
-    src/posix/arch/x86/arch_setjmp.h \
-    src/posix/arch/x86/fenv.h \
-    src/posix/arch/x86/npx.h \
-    src/posix/arch/x86/signal.h \
-    src/posix/arch/x86_64/arch_setjmp.h \
-    src/posix/arch/x86_64/fenv.h \
-    src/posix/arch/x86_64/fpu.h \
-    src/posix/arch/x86_64/signal.h \
-    src/posix/arpa/inet.h \
-    src/posix/arpa/nameser.h \
-    src/posix/arpa/nameser_compat.h \
-    src/posix/compat/sys/stat.h \
-    src/posix/net/if.h \
-    src/posix/net/if_dl.h \
-    src/posix/net/if_media.h \
-    src/posix/net/if_types.h \
-    src/posix/net/route.h \
-    src/posix/netinet/icmp6.h \
-    src/posix/netinet/in.h \
-    src/posix/netinet/ip.h \
-    src/posix/netinet/ip6.h \
-    src/posix/netinet/ip_icmp.h \
-    src/posix/netinet/ip_var.h \
-    src/posix/netinet/tcp.h \
-    src/posix/netinet/udp.h \
-    src/posix/netinet6/in6.h \
-    src/posix/sys/cdefs.h \
-    src/posix/sys/file.h \
-    src/posix/sys/ioctl.h \
-    src/posix/sys/ipc.h \
-    src/posix/sys/mman.h \
-    src/posix/sys/msg.h \
-    src/posix/sys/param.h \
-    src/posix/sys/poll.h \
-    src/posix/sys/resource.h \
-    src/posix/sys/select.h \
-    src/posix/sys/sem.h \
-    src/posix/sys/socket.h \
-    src/posix/sys/sockio.h \
-    src/posix/sys/stat.h \
-    src/posix/sys/statvfs.h \
-    src/posix/sys/time.h \
-    src/posix/sys/timeb.h \
-    src/posix/sys/times.h \
-    src/posix/sys/types.h \
-    src/posix/sys/uio.h \
-    src/posix/sys/un.h \
-    src/posix/sys/utsname.h \
-    src/posix/sys/wait.h \
-    src/posix/alloca.h \
-    src/posix/assert.h \
-    src/posix/bsd_mem.h \
-    src/posix/complex.h \
-    src/posix/ctype.h \
-    src/posix/dirent.h \
-    src/posix/div_t.h \
-    src/posix/dlfcn.h \
-    src/posix/endian.h \
-    src/posix/errno.h \
-    src/posix/fcntl.h \
-    src/posix/fenv.h \
-    src/posix/fnmatch.h \
-    src/posix/fts.h \
-    src/posix/ftw.h \
-    src/posix/getopt.h \
-    src/posix/glob.h \
-    src/posix/grp.h \
-    src/posix/inttypes.h \
-    src/posix/iovec.h \
-    src/posix/langinfo.h \
-    src/posix/libgen.h \
-    src/posix/libio.h \
-    src/posix/limits.h \
-    src/posix/locale.h \
-    src/posix/malloc.h \
-    src/posix/malloc_debug.h \
-    src/posix/math.h \
-    src/posix/memory.h \
-    src/posix/monetary.h \
-    src/posix/netdb.h \
-    src/posix/nl_types.h \
-    src/posix/null.h \
-    src/posix/poll.h \
-    src/posix/pthread.h \
-    src/posix/pwd.h \
-    src/posix/regex.h \
-    src/posix/resolv.h \
-    src/posix/sched.h \
-    src/posix/search.h \
-    src/posix/semaphore.h \
-    src/posix/setjmp.h \
-    src/posix/shadow.h \
-    src/posix/signal.h \
-    src/posix/size_t.h \
-    src/posix/stdint.h \
-    src/posix/stdio.h \
-    src/posix/stdio_ext.h \
-    src/posix/stdio_post.h \
-    src/posix/stdio_pre.h \
-    src/posix/stdlib.h \
-    src/posix/string.h \
-    src/posix/strings.h \
-    src/posix/syslog.h \
-    src/posix/tar.h \
-    src/posix/termios.h \
-    src/posix/time.h \
-    src/posix/unistd.h \
-    src/posix/utime.h \
-    src/posix/wchar.h \
-    src/posix/wchar_t.h \
-    src/posix/wctype.h \
-    src/posix/arch/m68k/setjmp_internal.h \
-    src/posix/arch/ppc/setjmp_internal.h \
-    src/posix/arch/x86/setjmp_internal.h \
-    src/posix/arch/x86_64/setjmp_internal.h \
-    src/posix/crypt/patchlevel.h \
-    src/posix/crypt/ufc-crypt.h \
-    src/posix/glibc/arch/arm/uroot.h \
-    src/posix/glibc/arch/generic/atnat.h \
-    src/posix/glibc/arch/generic/atnat2.h \
-    src/posix/glibc/arch/generic/branred.h \
-    src/posix/glibc/arch/generic/dla.h \
-    src/posix/glibc/arch/generic/doasin.h \
-    src/posix/glibc/arch/generic/dosincos.h \
-    src/posix/glibc/arch/generic/MathLib.h \
-    src/posix/glibc/arch/generic/mpa.h \
-    src/posix/glibc/arch/generic/mpa2.h \
-    src/posix/glibc/arch/generic/mpatan.h \
-    src/posix/glibc/arch/generic/mpexp.h \
-    src/posix/glibc/arch/generic/mplog.h \
-    src/posix/glibc/arch/generic/mpsqrt.h \
-    src/posix/glibc/arch/generic/mydefs.h \
-    src/posix/glibc/arch/generic/sincos32.h \
-    src/posix/glibc/arch/generic/t_exp2.h \
-    src/posix/glibc/arch/generic/t_exp2f.h \
-    src/posix/glibc/arch/generic/uasncs.h \
-    src/posix/glibc/arch/generic/uexp.h \
-    src/posix/glibc/arch/generic/ulog.h \
-    src/posix/glibc/arch/generic/upow.h \
-    src/posix/glibc/arch/generic/urem.h \
-    src/posix/glibc/arch/generic/usncs.h \
-    src/posix/glibc/arch/generic/utan.h \
-    src/posix/glibc/arch/x86_64/math_private.h \
-    src/posix/glibc/catgets/nl_types.h \
-    src/posix/glibc/ctype/ctype.h \
-    src/posix/glibc/extensions/getopt.h \
-    src/posix/glibc/extensions/obstack.h \
-    src/posix/glibc/iconv/gconv.h \
-    src/posix/glibc/iconv/gconv_builtin.h \
-    src/posix/glibc/iconv/gconv_int.h \
-    src/posix/glibc/include/arch/arm/bits/endian.h \
-    src/posix/glibc/include/arch/arm/bits/fenv.h \
-    src/posix/glibc/include/arch/arm/bits/fenvinline.h \
-    src/posix/glibc/include/arch/arm/bits/huge_val.h \
-    src/posix/glibc/include/arch/arm/bits/mathdef.h \
-    src/posix/glibc/include/arch/arm/bits/mathinline.h \
-    src/posix/glibc/include/arch/arm/bits/nan.h \
-    src/posix/glibc/include/arch/arm/bits/wordsize.h \
-    src/posix/glibc/include/arch/arm/config.h \
-    src/posix/glibc/include/arch/arm/math_ldbl.h \
-    src/posix/glibc/include/arch/arm/stackinfo.h \
-    src/posix/glibc/include/arch/generic/bits/byteswap.h \
-    src/posix/glibc/include/arch/generic/gmp-mparam.h \
-    src/posix/glibc/include/arch/generic/memcopy.h \
-    src/posix/glibc/include/arch/m68k/bits/byteswap.h \
-    src/posix/glibc/include/arch/m68k/bits/endian.h \
-    src/posix/glibc/include/arch/m68k/bits/fenv.h \
-    src/posix/glibc/include/arch/m68k/bits/fenvinline.h \
-    src/posix/glibc/include/arch/m68k/bits/huge_val.h \
-    src/posix/glibc/include/arch/m68k/bits/mathdef.h \
-    src/posix/glibc/include/arch/m68k/bits/mathinline.h \
-    src/posix/glibc/include/arch/m68k/bits/nan.h \
-    src/posix/glibc/include/arch/m68k/bits/wordsize.h \
-    src/posix/glibc/include/arch/m68k/asm-syntax.h \
-    src/posix/glibc/include/arch/m68k/config.h \
-    src/posix/glibc/include/arch/m68k/math_ldbl.h \
-    src/posix/glibc/include/arch/m68k/mathimpl.h \
-    src/posix/glibc/include/arch/m68k/stackinfo.h \
-    src/posix/glibc/include/arch/m68k/sysdep.h \
-    src/posix/glibc/include/arch/ppc/bits/byteswap.h \
-    src/posix/glibc/include/arch/ppc/bits/endian.h \
-    src/posix/glibc/include/arch/ppc/bits/fenv.h \
-    src/posix/glibc/include/arch/ppc/bits/fenvinline.h \
-    src/posix/glibc/include/arch/ppc/bits/huge_val.h \
-    src/posix/glibc/include/arch/ppc/bits/mathdef.h \
-    src/posix/glibc/include/arch/ppc/bits/mathinline.h \
-    src/posix/glibc/include/arch/ppc/bits/nan.h \
-    src/posix/glibc/include/arch/ppc/bits/wordsize.h \
-    src/posix/glibc/include/arch/ppc/asm-syntax.h \
-    src/posix/glibc/include/arch/ppc/bp-asm.h \
-    src/posix/glibc/include/arch/ppc/config.h \
-    src/posix/glibc/include/arch/ppc/fenv_libc.h \
-    src/posix/glibc/include/arch/ppc/math_ldbl.h \
-    src/posix/glibc/include/arch/ppc/stackinfo.h \
-    src/posix/glibc/include/arch/ppc/sysdep.h \
-    src/posix/glibc/include/arch/x86/bits/byteswap.h \
-    src/posix/glibc/include/arch/x86/bits/endian.h \
-    src/posix/glibc/include/arch/x86/bits/fenv.h \
-    src/posix/glibc/include/arch/x86/bits/fenvinline.h \
-    src/posix/glibc/include/arch/x86/bits/huge_val.h \
-    src/posix/glibc/include/arch/x86/bits/mathdef.h \
-    src/posix/glibc/include/arch/x86/bits/mathinline.h \
-    src/posix/glibc/include/arch/x86/bits/nan.h \
-    src/posix/glibc/include/arch/x86/bits/string.h \
-    src/posix/glibc/include/arch/x86/bits/wordsize.h \
-    src/posix/glibc/include/arch/x86/asm-syntax.h \
-    src/posix/glibc/include/arch/x86/bp-asm.h \
-    src/posix/glibc/include/arch/x86/config.h \
-    src/posix/glibc/include/arch/x86/gmp-mparam.h \
-    src/posix/glibc/include/arch/x86/math_ldbl.h \
-    src/posix/glibc/include/arch/x86/stackinfo.h \
-    src/posix/glibc/include/arch/x86/sysdep.h \
-    src/posix/glibc/include/arch/x86_64/bits/byteswap.h \
-    src/posix/glibc/include/arch/x86_64/bits/endian.h \
-    src/posix/glibc/include/arch/x86_64/bits/fenv.h \
-    src/posix/glibc/include/arch/x86_64/bits/fenvinline.h \
-    src/posix/glibc/include/arch/x86_64/bits/huge_val.h \
-    src/posix/glibc/include/arch/x86_64/bits/mathdef.h \
-    src/posix/glibc/include/arch/x86_64/bits/mathinline.h \
-    src/posix/glibc/include/arch/x86_64/bits/nan.h \
-    src/posix/glibc/include/arch/x86_64/bits/wordsize.h \
-    src/posix/glibc/include/arch/x86_64/asm-syntax.h \
-    src/posix/glibc/include/arch/x86_64/bp-asm.h \
-    src/posix/glibc/include/arch/x86_64/config.h \
-    src/posix/glibc/include/arch/x86_64/math_ldbl.h \
-    src/posix/glibc/include/arch/x86_64/stackinfo.h \
-    src/posix/glibc/include/arch/x86_64/sysdep.h \
-    src/posix/glibc/include/bits/errno.h \
-    src/posix/glibc/include/bits/libc-lock.h \
-    src/posix/glibc/include/bits/libc-tsd.h \
-    src/posix/glibc/include/bits/mathcalls.h \
-    src/posix/glibc/include/bits/stat.h \
-    src/posix/glibc/include/bits/stdio-lock.h \
-    src/posix/glibc/include/bits/stdio.h \
-    src/posix/glibc/include/bits/stdio_lim.h \
-    src/posix/glibc/include/bits/sys_errlist.h \
-    src/posix/glibc/include/bits/types.h \
-    src/posix/glibc/include/bits/typesizes.h \
-    src/posix/glibc/include/bits/waitflags.h \
-    src/posix/glibc/include/bits/waitstatus.h \
-    src/posix/glibc/include/bits/wchar.h \
-    src/posix/glibc/include/gnu/stubs.h \
-    src/posix/glibc/include/misc/sys/cdefs.h \
-    src/posix/glibc/include/sys/cdefs.h \
-    src/posix/glibc/include/sys/stat.h \
-    src/posix/glibc/include/alloca.h \
-    src/posix/glibc/include/allocalim.h \
-    src/posix/glibc/include/argz.h \
-    src/posix/glibc/include/bp-sym.h \
-    src/posix/glibc/include/byteswap.h \
-    src/posix/glibc/include/device-nrs.h \
-    src/posix/glibc/include/dlfcn.h \
-    src/posix/glibc/include/endian.h \
-    src/posix/glibc/include/errno.h \
-    src/posix/glibc/include/fcntl.h \
-    src/posix/glibc/include/features.h \
-    src/posix/glibc/include/gconv.h \
-    src/posix/glibc/include/gmp.h \
-    src/posix/glibc/include/ieee754.h \
-    src/posix/glibc/include/langinfo.h \
-    src/posix/glibc/include/libc-symbols.h \
-    src/posix/glibc/include/libio.h \
-    src/posix/glibc/include/locale.h \
-    src/posix/glibc/include/math.h \
-    src/posix/glibc/include/nl_types.h \
-    src/posix/glibc/include/obstack.h \
-    src/posix/glibc/include/search.h \
-    src/posix/glibc/include/shlib-compat.h \
-    src/posix/glibc/include/stdio_ext.h \
-    src/posix/glibc/include/stdio_private.h \
-    src/posix/glibc/include/stdlib.h \
-    src/posix/glibc/include/string.h \
-    src/posix/glibc/include/sysdep.h \
-    src/posix/glibc/include/unistd.h \
-    src/posix/glibc/include/wchar.h \
-    src/posix/glibc/include/wctype.h \
-    src/posix/glibc/include/xlocale.h \
-    src/posix/glibc/intl/hash-string.h \
-    src/posix/glibc/intl/loadinfo.h \
-    src/posix/glibc/libio/_G_config.h \
-    src/posix/glibc/libio/iolibio.h \
-    src/posix/glibc/libio/libio.h \
-    src/posix/glibc/libio/libioP.h \
-    src/posix/glibc/libio/stdio.h \
-    src/posix/glibc/libio/strfile.h \
-    src/posix/glibc/locale/bits/locale.h \
-    src/posix/glibc/locale/C-translit.h \
-    src/posix/glibc/locale/coll-lookup.h \
-    src/posix/glibc/locale/elem-hash.h \
-    src/posix/glibc/locale/langinfo.h \
-    src/posix/glibc/locale/locale.h \
-    src/posix/glibc/locale/localeinfo.h \
-    src/posix/glibc/locale/outdigits.h \
-    src/posix/glibc/locale/outdigitswc.h \
-    src/posix/glibc/locale/weight.h \
-    src/posix/glibc/locale/weightwc.h \
-    src/posix/glibc/locale/xlocale.h \
-    src/posix/glibc/math/bits/cmathcalls.h \
-    src/posix/glibc/math/bits/mathcalls.h \
-    src/posix/glibc/math/machine/asm.h \
-    src/posix/glibc/math/complex.h \
-    src/posix/glibc/math/fenv.h \
-    src/posix/glibc/math/math.h \
-    src/posix/glibc/math/math_private.h \
-    src/posix/glibc/misc/search.h \
-    src/posix/glibc/regex/regex_internal.h \
-    src/posix/glibc/stdio-common/_i18n_number.h \
-    src/posix/glibc/stdio-common/_itoa.h \
-    src/posix/glibc/stdio-common/_itowa.h \
-    src/posix/glibc/stdio-common/printf-parse.h \
-    src/posix/glibc/stdio-common/printf.h \
-    src/posix/glibc/stdio-common/stdio_ext.h \
-    src/posix/glibc/stdlib/sys/errno.h \
-    src/posix/glibc/stdlib/alloca.h \
-    src/posix/glibc/stdlib/fpioconst.h \
-    src/posix/glibc/stdlib/gmp-impl.h \
-    src/posix/glibc/stdlib/gmp.h \
-    src/posix/glibc/stdlib/grouping.h \
-    src/posix/glibc/stdlib/longlong.h \
-    src/posix/glibc/stdlib/monetary.h \
-    src/posix/glibc/stdlib/stdlib.h \
-    src/posix/glibc/stdlib/ucontext.h \
-    src/posix/glibc/string/bits/string2.h \
-    src/posix/glibc/string/byteswap.h \
-    src/posix/glibc/string/endian.h \
-    src/posix/glibc/wcsmbs/wchar.h \
-    src/posix/glibc/wcsmbs/wcsmbsload.h \
-    src/posix/glibc/wctype/wchar-lookup.h \
-    src/posix/glibc/wctype/wctype.h \
-    src/posix/malloc/arch-specific.h \
-    src/posix/malloc/block.h \
-    src/posix/malloc/config.h \
-    src/posix/malloc/heap.h \
-    src/posix/malloc/heapstats.h \
-    src/posix/malloc/processheap.h \
-    src/posix/malloc/superblock.h \
-    src/posix/malloc/threadheap.h \
-    src/posix/malloc_debug/malloc_debug_api.h \
-    src/posix/stdio/fvwrite.h \
-    src/posix/stdio/glue.h \
-    src/posix/stdio/local.h
+    src/HaikuConstants.h \
+    src/HaikuTypes.h \
+    src/Haiku.h \
+    src/HaikuDefs.h \
+    src/HaikuConfig.h \
+    src/haiku/fs_attr_bsdxattr.h \
+    src/haiku/fs_attr_extattr.h \
+    src/haiku/fs_attr_xattr.h \
+    src/haiku/fs_descriptors.h \
+    src/haiku/fs_freebsd.h \
+    src/haiku/fs_impl.h \
+    src/haiku/remapped_functions.h \
+    src/haiku/fs_node_ref.h \
+    src/haiku/fs_path_buffer.h \
+    src/kits/kernel/OS.h \
+    src/kits/kernel/Scheduler.h \
+    src/kits/kernel/Image.h
 
 LIBS -= -lfreetype
 LIBS += -L"../freetype/lib/debug" -libfreetype
 
-contains(QMAKE_COMPILER_DEFINES, BEOS) {
-SOURCES +=  src/kits/interface/beos/BHAPI_wrapper_application.cpp \
-    src/kits/interface/beos/BHAPI_wrapper_beos-font.cpp \
-    src/kits/interface/beos/BHAPI_wrapper_drawing.cpp \
-    src/kits/interface/beos/BHAPI_wrapper_pixmap.cpp \
-    src/kits/interface/beos/BHAPI_wrapper_window.cpp \
-    src/kits/kernel/beos/BHAPI_wrapper_area.cpp \
-    src/kits/kernel/beos/BHAPI_wrapper_image.cpp \
-    src/kits/kernel/beos/BHAPI_wrapper_os.cpp \
-    src/kits/kernel/beos/BHAPI_wrapper_timefuncs.cpp \
-    src/kits/kernel/thread/beos/BHAPI_wrapper_locker.cpp \
-    src/kits/kernel/thread/beos/BHAPI_wrapper_semaphore.cpp \
-    src/kits/kernel/thread/beos/BHAPI_wrapper_thread.cpp
 
-HEADERS += src/kits/interface/beos/BHAPI_wrapper_beos-graphics.h
+contains(QMAKE_COMPILER_DEFINES, __INTEL__) {
+SOURCES += \
+    src/kits/debug/arch/x86/arch_debug_support.cpp \
+    src/kits/debugger/arch/x86/disasm/DisassemblerX86.cpp \
+    src/kits/debugger/arch/x86/ArchitectureX86.cpp \
+    src/kits/debugger/arch/x86/CpuStateX86.cpp \
+    src/haiku/arch/x86/time.cpp \
+    src/haiku/arch/x86_common/stack_trace.cpp \
+    src/haiku/arch/x86/compatibility.c \
+    src/haiku/arch/x86/system_info.c \
+    src/haiku/arch/x86/system_time.c \
+    src/haiku/arch/x86/thread.c \
+    src/haiku/arch/x86/tls.c
+HEADERS += \
+    src/kits/arch/x86/arch_debugger.h \
+    src/kits/debugger/arch/x86/disasm/DisassemblerX86.h \
+    src/kits/debugger/arch/x86/ArchitectureX86.h \
+    src/kits/debugger/arch/x86/CpuStateX86.h
+INCLUDEPATH += src/kits/arch/x86
+INCLUDEPATH += src/kits/debugger/arch/x86
+INCLUDEPATH += src/libs/musl/include
+INCLUDEPATH += src/libs/musl/arch/x86
+}
+contains(QMAKE_COMPILER_DEFINES, __x86_64__) {
+SOURCES += \
+    src/kits/debug/arch/x86_64/arch_debug_support.cpp \
+    src/kits/debugger/arch/x86_64/disasm/DisassemblerX8664.cpp \
+    src/kits/debugger/arch/x86_64/ArchitectureX8664.cpp \
+    src/kits/debugger/arch/x86_64/CpuStateX8664.cpp \
+    src/haiku/arch/x86_64/system_info.cpp \
+    src/haiku/arch/x86_64/system_time.cpp \
+    src/haiku/arch/x86_64/thread.cpp \
+    src/haiku/arch/x86_64/time.cpp \
+    src/haiku/arch/x86_64/tls.cpp
+HEADERS += \
+    src/kits/arch/x86_64/arch_debugger.h \
+    src/kits/debugger/arch/x86_64/disasm/DisassemblerX8664.h \
+    src/kits/debugger/arch/x86_64/ArchitectureX8664.h \
+    src/kits/debugger/arch/x86_64/CpuStateX8664.h
+}
+contains(QMAKE_COMPILER_DEFINES, __MIPSEL__) {
+SOURCES += \
+    src/kits/debug/arch/mipsel/arch_debug_support.cpp
+HEADERS += \
+    src/kits/arch/mipsel/arch_debugger.h
+}
+contains(QMAKE_COMPILER_DEFINES, __POWERPC__) {
+SOURCES += \
+    src/kits/debug/arch/ppc/arch_debug_support.cpp \
+    src/haiku/arch/ppc/compatibility.c \
+    src/haiku/arch/ppc/stack_frame.c \
+    src/haiku/arch/ppc/system_time.c \
+    src/haiku/arch/ppc/thread.c \
+    src/haiku/arch/ppc/time.c \
+    src/haiku/arch/ppc/tls.c
+HEADERS += \
+    src/kits/arch/ppc/arch_debugger.h
+}
+
+contains(QMAKE_COMPILER_DEFINES, __M68K__) {
+SOURCES += \
+    src/kits/debug/arch/m68k/arch_debug_support.cpp \
+    src/haiku/arch/m68k/compatibility.c \
+    src/haiku/arch/m68k/stack_frame.c \
+    src/haiku/arch/m68k/system_time.c \
+    src/haiku/arch/m68k/thread.c \
+    src/haiku/arch/m68k/time.c \
+    src/haiku/arch/m68k/tls.c
+HEADERS += \
+    src/kits/arch/m68k/arch_debugger.h
+}
+
+contains(QMAKE_COMPILER_DEFINES, __ARM__) {
+SOURCES += \
+    src/kits/debug/arch/arm/arch_debug_support.cpp \
+    src/haiku/arch/arm/stack_frame.c \
+    src/haiku/arch/arm/stdatomic.c \
+    src/haiku/arch/arm/system_time.c \
+    src/haiku/arch/arm/thread.c \
+    src/haiku/arch/arm/time.c \
+    src/haiku/arch/arm/tls.c
+HEADERS += \
+    src/kits/arch/arm/arch_debugger.h
+}
+
+contains(QMAKE_COMPILER_DEFINES, BEOS) {
+SOURCES +=  src/wrappers/beos/BHAPI_wrapper_application.cpp \
+    src/wrappers/beos/BHAPI_wrapper_area.cpp \
+    src/wrappers/beos/BHAPI_wrapper_image.cpp \
+    src/wrappers/beos/BHAPI_wrapper_os.cpp \
+    src/wrappers/beos/BHAPI_wrapper_timefuncs.cpp \
+    src/wrappers/beos/BHAPI_wrapper_locker.cpp \
+    src/wrappers/beos/BHAPI_wrapper_semaphore.cpp \
+    src/wrappers/beos/BHAPI_wrapper_thread.cpp \
+    src/wrappers/beos/ui/BHAPI_wrapper_beos-font.cpp \
+    src/wrappers/beos/ui/BHAPI_wrapper_drawing.cpp \
+    src/wrappers/beos/ui/BHAPI_wrapper_pixmap.cpp \
+    src/wrappers/beos/ui/BHAPI_wrapper_window.cpp
+
+HEADERS += src/wrappers/beos/ui/BHAPI_wrapper_beos-graphics.h
 }
 
 contains(QMAKE_COMPILER_DEFINES, WIN32) {
-SOURCES += src/kits/interface/win32/BHAPI_wrapper_application.cpp \
-    src/kits/interface/win32/BHAPI_wrapper_drawing.cpp \
-    src/kits/interface/win32/BHAPI_wrapper_pixmap.cpp \
-    src/kits/interface/win32/BHAPI_wrapper_win32-font.cpp \
-    src/kits/interface/win32/BHAPI_wrapper_window.cpp \
-    src/kits/kernel/thread/win32/BHAPI_wrapper_locker.cpp \
-    src/kits/kernel/thread/win32/BHAPI_wrapper_semaphore.cpp \
-    src/kits/kernel/thread/win32/BHAPI_wrapper_thread.cpp \
-    src/kits/kernel/win32/BHAPI_wrapper_area.cpp \
-    src/kits/kernel/win32/BHAPI_wrapper_image.cpp \
-    src/kits/kernel/win32/BHAPI_wrapper_os.cpp \
-    src/kits/kernel/win32/BHAPI_wrapper_timefuncs.cpp
+SOURCES += src/wrappers/win32/GDI/BHAPI_wrapper_application.cpp \
+    src/wrappers/win32/GDI/BHAPI_wrapper_drawing.cpp \
+    src/wrappers/win32/GDI/BHAPI_wrapper_pixmap.cpp \
+    src/wrappers/win32/GDI/BHAPI_wrapper_win32-font.cpp \
+    src/wrappers/win32/GDI/BHAPI_wrapper_window.cpp \
+    src/wrappers/win32/BHAPI_wrapper_locker.cpp \
+    src/wrappers/win32/BHAPI_wrapper_semaphore.cpp \
+    src/wrappers/win32/BHAPI_wrapper_thread.cpp \
+    src/wrappers/win32/BHAPI_wrapper_area.cpp \
+    src/wrappers/win32/BHAPI_wrapper_image.cpp \
+    src/wrappers/win32/BHAPI_wrapper_os.cpp \
+    src/wrappers/win32/BHAPI_wrapper_timefuncs.cpp
 
-HEADERS += src/kits/interface/win32/BHAPI_wrapper_win32gdi.h
+HEADERS += src/wrappers/win32/GDI/BHAPI_wrapper_win32gdi.h
 
 LIBS += -lkernel32 -lgdi32 -lshell32 -luser32 -lcomctl32 -luserenv
 LIBS += -lws2_32 -lwsock32 -lwinmm -limm32 -lole32 -loleaut32
 }
 
 contains(QMAKE_COMPILER_DEFINES, LINUX) {
-SOURCES += src/kits/interface/x11/BHAPI_wrapper_application.cpp \
-    src/kits/interface/x11/BHAPI_wrapper_drawing.cpp \
-    src/kits/interface/x11/BHAPI_wrapper_pixmap.cpp \
-    src/kits/interface/x11/BHAPI_wrapper_window.cpp \
-    src/kits/interface/x11/BHAPI_wrapper_x11-font.cpp \
-    src/kits/kernel/thread/posix/BHAPI_wrapper_locker.cpp \
-    src/kits/kernel/thread/posix/BHAPI_wrapper_semaphore-mach.cpp \
-    src/kits/kernel/thread/posix/BHAPI_wrapper_semaphore-umtx.cpp \
-    src/kits/kernel/thread/posix/BHAPI_wrapper_semaphore.cpp \
-    src/kits/kernel/thread/posix/BHAPI_wrapper_thread.cpp \
-    src/kits/kernel/unix/BHAPI_wrapper_area.cpp \
-    src/kits/kernel/unix/BHAPI_wrapper_image.cpp \
-    src/kits/kernel/unix/BHAPI_wrapper_os.cpp \
-    src/kits/kernel/unix/BHAPI_wrapper_timefuncs.cpp
+SOURCES += src/wrappers/posix/X11/BHAPI_wrapper_application.cpp \
+    src/wrappers/posix/X11/BHAPI_wrapper_drawing.cpp \
+    src/wrappers/posix/X11/BHAPI_wrapper_pixmap.cpp \
+    src/wrappers/posix/X11/BHAPI_wrapper_window.cpp \
+    src/wrappers/posix/X11/BHAPI_wrapper_x11-font.cpp \
+    src/wrappers/posix/BHAPI_wrapper_locker.cpp \
+    src/wrappers/posix/BHAPI_wrapper_semaphore-mach.cpp \
+    src/wrappers/posix/BHAPI_wrapper_semaphore-umtx.cpp \
+    src/wrappers/posix/BHAPI_wrapper_semaphore.cpp \
+    src/wrappers/posix/BHAPI_wrapper_thread.cpp \
+    src/wrappers/posix/BHAPI_wrapper_area.cpp \
+    src/wrappers/posix/BHAPI_wrapper_image.cpp \
+    src/wrappers/posix/BHAPI_wrapper_os.cpp \
+    src/wrappers/posix/BHAPI_wrapper_timefuncs.cpp
 
-HEADERS +=     src/kits/interface/x11/BHAPI_wrapper_x11.h
+HEADERS +=     src/wrappers/posix/X11/BHAPI_wrapper_x11.h
 }
 
 contains(QMAKE_COMPILER_DEFINES, DIRECTFB) {
-SOURCES +=    src/kits/interface/directfb/BHAPI_wrapper_application.cpp \
-    src/kits/interface/directfb/BHAPI_wrapper_dfb-font.cpp \
-    src/kits/interface/directfb/BHAPI_wrapper_drawing.cpp \
-    src/kits/interface/directfb/BHAPI_wrapper_pixmap.cpp \
-    src/kits/interface/directfb/BHAPI_wrapper_window.cpp \
-    src/kits/interface/directfb/BHAPI_wrapper_wm.cpp
+SOURCES +=    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_application.cpp \
+    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_dfb-font.cpp \
+    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_drawing.cpp \
+    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_pixmap.cpp \
+    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_window.cpp \
+    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_wm.cpp
 
-HEADERS += src/kits/interface/directfb/BHAPI_wrapper_dfb.h
+HEADERS += src/wrappers/posix/DIRECTFB/BHAPI_wrapper_dfb.h
 }
 
 contains(QMAKE_COMPILER_DEFINES, MACOS) {

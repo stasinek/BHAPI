@@ -16,7 +16,7 @@
 #include <FileGameSound.h>
 #include <MediaFile.h>
 #include <MediaTrack.h>
-#include <scheduler.h>
+#include <Scheduler.h>
 
 #include "GameSoundDevice.h"
 #include "GSUtility.h"

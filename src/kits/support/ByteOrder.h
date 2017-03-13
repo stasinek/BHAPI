@@ -30,7 +30,7 @@
 #ifndef BHAPI_BYTE_ORDER_H
 #define BHAPI_BYTE_ORDER_H
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 #ifdef __cplusplus /* Just for C++ */
 extern "C" {
 namespace bhapi {
@@ -43,10 +43,10 @@ typedef enum swap_action {
     B_SWAP_ALWAYS
 } swap_action;
 
-IMPEXPBHAPI status_t	swap_data(type_code type, void *data, size_t len, swap_action action);
-IMPEXPBHAPI bool			is_type_swapped(type_code type);
-IMPEXPBHAPI float			swap_float(float value);
-IMPEXPBHAPI double			swap_double(double value);
+BHAPI_IMPEXP status_t	swap_data(type_code type, void *data, size_t len, swap_action action);
+BHAPI_IMPEXP bool			is_type_swapped(type_code type);
+BHAPI_IMPEXP float			swap_float(float value);
+BHAPI_IMPEXP double			swap_double(double value);
 
 #define B_SWAP_INT16(v)		((((v) & 0xff) << 8) | (((v) >> 8) & 0xff))
 #define B_SWAP_INT32(v)		((B_SWAP_INT16((v) & 0xffff) << 16) | B_SWAP_INT16(((v) >> 16) & 0xffff))

@@ -31,7 +31,7 @@
 
 using namespace bhapi;
 
-EXPORTBHAPI bhapi::rgb_color bhapi::ui_color(bhapi::color_which which)
+BHAPI_EXPORT bhapi::rgb_color bhapi::ui_color(bhapi::color_which which)
 {
 	bhapi::rgb_color color;
 
@@ -115,13 +115,13 @@ EXPORTBHAPI bhapi::rgb_color bhapi::ui_color(bhapi::color_which which)
 }
 
 
-EXPORTBHAPI float bhapi::ui_get_scrollbar_vertical_width()
+BHAPI_EXPORT float bhapi::ui_get_scrollbar_vertical_width()
 {
 	return 16;
 }
 
 
-EXPORTBHAPI float bhapi::ui_get_scrollbar_horizontal_height()
+BHAPI_EXPORT float bhapi::ui_get_scrollbar_horizontal_height()
 {
 	return 16;
 }

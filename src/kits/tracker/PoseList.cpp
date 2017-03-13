@@ -47,7 +47,7 @@ PoseList::FindPose(const node_ref* node, int32* resultingIndex) const
 	for (int32 index = 0; index < count; index++) {
 		BPose* pose = ItemAt(index);
 		ASSERT(pose->TargetModel());
-		if (*pose->TargetModel()->NodeRef() == *node) {
+		if (*pose->TargetModel()->node_ref() == *node) {
 			if (resultingIndex != NULL)
 				*resultingIndex = index;
 
@@ -80,7 +80,7 @@ PoseList::FindPose(const entry_ref* entry, int32* resultingIndex) const
 BPose*
 PoseList::FindPose(const Model* model, int32* resultingIndex) const
 {
-	return FindPose(model->NodeRef(), resultingIndex);
+	return FindPose(model->node_ref(), resultingIndex);
 }
 
 
@@ -91,7 +91,7 @@ PoseList::DeepFindPose(const node_ref* node, int32* resultingIndex) const
 	for (int32 index = 0; index < count; index++) {
 		BPose* pose = ItemAt(index);
 		Model* model = pose->TargetModel();
-		if (*model->NodeRef() == *node) {
+		if (*model->node_ref() == *node) {
 			if (resultingIndex != NULL)
 				*resultingIndex = index;
 
@@ -101,7 +101,7 @@ PoseList::DeepFindPose(const node_ref* node, int32* resultingIndex) const
 		// of the link
 		if (model->IsSymLink()) {
 			model = model->LinkTo();
-			if (model != NULL && *model->NodeRef() == *node) {
+			if (model != NULL && *model->node_ref() == *node) {
 				if (resultingIndex != NULL)
 					*resultingIndex = index;
 
@@ -122,7 +122,7 @@ PoseList::FindAllPoses(const node_ref* node) const
 	for (int32 index = 0; index < count; index++) {
 		BPose *pose = ItemAt(index);
 		Model *model = pose->TargetModel();
-		if (*model->NodeRef() == *node) {
+		if (*model->node_ref() == *node) {
 			result->AddItem(pose, 0);
 			continue;
 		}
@@ -131,14 +131,14 @@ PoseList::FindAllPoses(const node_ref* node) const
 			continue;
 
 		model = model->LinkTo();
-		if (model != NULL && *model->NodeRef() == *node) {
+		if (model != NULL && *model->node_ref() == *node) {
 			result->AddItem(pose);
 			continue;
 		}
 
 		if (model == NULL) {
 			Model model(pose->TargetModel()->EntryRef(), true);
-			if (*model.NodeRef() == *node)
+			if (*model.node_ref() == *node)
 				result->AddItem(pose);
 		}
 	}

@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -34,12 +34,12 @@
 
 BGraphicsContext::BGraphicsContext()
 {
-	fDrawingMode = B_OP_COPY;
-	fHighColor.set_to(0, 0, 0, 255);
-	fLowColor.set_to(255, 255, 255, 255);
-	fPattern = B_SOLID_HIGH;
-	fPenSize = 0;
-	fSquarePoint = false;
+    fDrawingMode = B_OP_COPY;
+    fHighColor.set_to(0, 0, 0, 255);
+    fLowColor.set_to(255, 255, 255, 255);
+    fPattern = B_SOLID_HIGH;
+    fPenSize = 0;
+    fSquarePoint = false;
 }
 
 
@@ -50,109 +50,109 @@ BGraphicsContext::~BGraphicsContext()
 
 status_t BGraphicsContext::SetDrawingMode(bhapi::drawing_mode mode)
 {
-	fDrawingMode = mode;
-	return B_OK;
+    fDrawingMode = mode;
+    return B_OK;
 }
 
 
 status_t BGraphicsContext::SetClipping(const BRegion &clipping)
 {
-	fClipping = clipping;
-	return B_OK;
+    fClipping = clipping;
+    return B_OK;
 }
 
 
 status_t BGraphicsContext::SetHighColor(bhapi::rgb_color highColor)
 {
-	fHighColor.set_to(highColor);
-	return B_OK;
+    fHighColor.set_to(highColor);
+    return B_OK;
 }
 
 
 status_t BGraphicsContext::SetHighColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
-	bhapi::rgb_color color;
-	color.set_to(r, g, b, a);
-	return SetHighColor(color);
+    bhapi::rgb_color color;
+    color.set_to(r, g, b, a);
+    return SetHighColor(color);
 }
 
 
 status_t BGraphicsContext::SetLowColor(bhapi::rgb_color lowColor)
 {
-	fLowColor.set_to(lowColor);
-	return B_OK;
+    fLowColor.set_to(lowColor);
+    return B_OK;
 }
 
 
 status_t BGraphicsContext::SetLowColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
-	bhapi::rgb_color color;
-	color.set_to(r, g, b, a);
-	return SetLowColor(color);
+    bhapi::rgb_color color;
+    color.set_to(r, g, b, a);
+    return SetLowColor(color);
 }
 
 
 status_t BGraphicsContext::SetPattern(bhapi::pattern pattern)
 {
-	fPattern = pattern;
-	return B_OK;
+    fPattern = pattern;
+    return B_OK;
 }
 
 
 status_t BGraphicsContext::SetPenSize(__be_uint32 penSize)
 {
-	fPenSize = penSize;
-	return B_OK;
+    fPenSize = penSize;
+    return B_OK;
 }
 
 
 status_t BGraphicsContext::SetSquarePointStyle(bool state)
 {
-	fSquarePoint = state;
-	return B_OK;
+    fSquarePoint = state;
+    return B_OK;
 }
 
 
 bhapi::drawing_mode BGraphicsContext::DrawingMode() const
 {
-	return fDrawingMode;
+    return fDrawingMode;
 }
 
 
 const BRegion* BGraphicsContext::Clipping() const
 {
-	return &fClipping;
+    return &fClipping;
 }
 
 
 bhapi::rgb_color BGraphicsContext::HighColor() const
 {
-	return fHighColor;
+    return fHighColor;
 }
 
 bhapi::rgb_color BGraphicsContext::LowColor() const
 {
-	return fLowColor;
+    return fLowColor;
 }
 
 bhapi::pattern BGraphicsContext::Pattern() const
 {
-	return fPattern;
+    return fPattern;
 }
 
-be_uint32 BGraphicsContext::PenSize() const
+__be_uint32 BGraphicsContext::PenSize() const
 {
-	return fPenSize;
+    return fPenSize;
 }
 
 bool BGraphicsContext::IsSquarePointStyle() const
 {
-	return fSquarePoint;
+    return fSquarePoint;
 }
 
 BGraphicsDrawable::BGraphicsDrawable()
 {
-	fBkColor.set_to(255, 255, 255, 255);
+    fBkColor.set_to(255, 255, 255, 255);
 }
 
 BGraphicsDrawable::~BGraphicsDrawable()
@@ -161,24 +161,24 @@ BGraphicsDrawable::~BGraphicsDrawable()
 
 status_t BGraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
 {
-	fBkColor.set_to(bkColor);
-	return B_OK;
+    fBkColor.set_to(bkColor);
+    return B_OK;
 }
 
 status_t BGraphicsDrawable::SetBackgroundColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
-	bhapi::rgb_color color;
-	color.set_to(r, g, b, a);
-	return SetBackgroundColor(color);
+    bhapi::rgb_color color;
+    color.set_to(r, g, b, a);
+    return SetBackgroundColor(color);
 }
 
 bhapi::rgb_color BGraphicsDrawable::BackgroundColor() const
 {
-	return fBkColor;
+    return fBkColor;
 }
 
 BGraphicsWindow::BGraphicsWindow()
-	: BGraphicsDrawable()
+    : BGraphicsDrawable()
 {
 }
 
@@ -196,15 +196,15 @@ BGraphicsEngine::~BGraphicsEngine()
 
 BGraphicsWindow* BGraphicsEngine::GetWindow(BWindow *win)
 {
-	return(win == NULL ? NULL : win->fWindow);
+    return(win == NULL ? NULL : win->fWindow);
 }
 
 BGraphicsDrawable* BGraphicsEngine::GetPixmap(BWindow *win)
 {
-	return(win == NULL ? NULL : win->fPixmap);
+    return(win == NULL ? NULL : win->fPixmap);
 }
 
 BGraphicsContext* BGraphicsEngine::GetContext(BView *view)
 {
-	return(view == NULL ? NULL : view->fDC);
+    return(view == NULL ? NULL : view->fDC);
 }

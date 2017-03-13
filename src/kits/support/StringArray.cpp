@@ -107,7 +107,7 @@ bool BStringArray::IsEmpty(void) const
 
 //-----------------------------------------------------------------------------
 
-be_int32 BStringArray::CountItems(void) const
+__be_int32 BStringArray::CountItems(void) const
 {
     return list.CountItems();
 }
@@ -420,7 +420,7 @@ bool BStringArray::MoveItem(__be_int32 fromIndex,  __be_int32 toIndex)
 
 //-----------------------------------------------------------------------------
 
-be_int32 BStringArray::FindString(const char *string,  __be_int32 startIndex, bool all_equal, bool invert) const
+__be_int32 BStringArray::FindString(const char *string,  __be_int32 startIndex, bool all_equal, bool invert) const
 {
      __be_int32 i = startIndex;
 
@@ -458,14 +458,14 @@ be_int32 BStringArray::FindString(const char *string,  __be_int32 startIndex, bo
 
 //-----------------------------------------------------------------------------
 
-be_int32 BStringArray::FindString(const BString &string,  __be_int32 startIndex, bool all_equal, bool invert) const
+__be_int32 BStringArray::FindString(const BString &string,  __be_int32 startIndex, bool all_equal, bool invert) const
 {
     return FindString(string.String(), startIndex, all_equal, invert);
 }
 
 //-----------------------------------------------------------------------------
 
-be_int32 BStringArray::IFindString(const char *string,  __be_int32 startIndex, bool all_equal, bool invert) const
+__be_int32 BStringArray::IFindString(const char *string,  __be_int32 startIndex, bool all_equal, bool invert) const
 {
      __be_int32 i = startIndex;
 
@@ -503,7 +503,7 @@ be_int32 BStringArray::IFindString(const char *string,  __be_int32 startIndex, b
 
 //-----------------------------------------------------------------------------
 
-be_int32 BStringArray::IFindString(const BString &string,  __be_int32 startIndex, bool all_equal, bool invert) const
+__be_int32 BStringArray::IFindString(const BString &string,  __be_int32 startIndex, bool all_equal, bool invert) const
 {
     return IFindString(string.String(), startIndex, all_equal, invert);
 }

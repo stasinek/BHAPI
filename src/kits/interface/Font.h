@@ -30,30 +30,39 @@
 #ifndef BHAPI_FONT_H
 #define BHAPI_FONT_H
 
-#include "../support/StringClass.h"
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #define B_FONT_FAMILY_LENGTH	127
 #define B_FONT_STYLE_LENGTH	63
 #define B_FONT_MIN_TAB_WIDTH	(-16.f)
 
+#ifdef __cplusplus /* Just for C++ */
 namespace bhapi {
 typedef char font_family[B_FONT_FAMILY_LENGTH + 1];
 typedef char font_style[B_FONT_STYLE_LENGTH + 1];
-
 typedef struct font_height {
     float ascent;
     float descent;
     float leading;
 } font_height;
-
 typedef struct font_desc font_desc;
 }
+#endif // __cplusplus
 
 #ifdef __cplusplus /* Just for C++ */
+#ifndef BVIEW_I
+#define BVIEW_I
 class BView;
+#endif
+#ifndef BFONTENGINE_I
+#define BFONTENGINE_I
 class BFontEngine;
-class IMPEXPBHAPI BFont {
+#endif
+#ifndef BSTRING_I
+#define BSTRING_I
+class BString;
+#endif
+class BHAPI_IMPEXP BFont {
 public:
     BFont();
     BFont(const BFont &font);
@@ -61,73 +70,71 @@ public:
     BFont(const bhapi::font_desc &fontDesc);
     virtual ~BFont();
 
-    status_t	SetFamilyAndStyle(const bhapi::font_family family, const bhapi::font_style style);
-    status_t	SetFamilyAndStyle(__be_uint32 code);
+    status_t        SetFamilyAndStyle(const bhapi::font_family family, const bhapi::font_style style);
+    status_t        SetFamilyAndStyle(__be_uint32 code);
 
-    status_t	GetFamilyAndStyle(bhapi::font_family *family, bhapi::font_style *style) const;
-     __be_uint32		FamilyAndStyle() const;
+    status_t        GetFamilyAndStyle(bhapi::font_family *family, bhapi::font_style *style) const;
+     __be_uint32	FamilyAndStyle() const;
 
-    void		SetSize(float size);
-    void		SetSpacing(float spacing);
-    void		SetShear(float shear);
-    void		SetBoldStyle(bool bold);
+    void            SetSize(float size);
+    void            SetSpacing(float spacing);
+    void            SetShear(float shear);
+    void            SetBoldStyle(bool bold);
 
-    float		Size() const;
-    float		Spacing() const;
-    float		Shear() const;
-    bool		IsBoldStyle() const;
+    float           Size() const;
+    float           Spacing() const;
+    float           Shear() const;
+    bool            IsBoldStyle() const;
 
-    bool		IsScalable() const;
-    bool		HasFixedSize(__be_int32 *count = NULL) const;
-    bool		GetFixedSize(float *size,  __be_int32 index = 0) const;
+    bool            IsScalable() const;
+    bool            HasFixedSize(__be_int32 *count = NULL) const;
+    bool            GetFixedSize(float *size,  __be_int32 index = 0) const;
 
     // tabWidth:
     // 	positive --- fixed size
     // 	0        --- decided on the font
     // 	negative --- multiple of space
-    float		StringWidth(const char *string,  __be_int32 length = -1, float tabWidth = 0) const;
-    float		StringWidth(const BString &str,  __be_int32 length = -1, float tabWidth = 0) const;
-    void		GetHeight(bhapi::font_height *height) const;
+    float           StringWidth(const char *string,  __be_int32 length = -1, float tabWidth = 0) const;
+    float           StringWidth(const BString &str,  __be_int32 length = -1, float tabWidth = 0) const;
+    void            GetHeight(bhapi::font_height *height) const;
 
     // CharWidths(): return value must free by "delete[]"
-    float		*CharWidths(const char *string,  __be_int32 *nChars, float tabWidth = 0) const;
-    float		*CharWidths(const BString &str,  __be_int32 *nChars, float tabWidth = 0) const;
-    float		*CharWidths(const char *string,  __be_int32 length,  __be_int32 *nChars, float tabWidth = 0) const;
-    float		*CharWidths(const BString &str,  __be_int32 length,  __be_int32 *nChars, float tabWidth = 0) const;
+    float*          CharWidths(const char *string,  __be_int32 *nChars, float tabWidth = 0) const;
+    float*          CharWidths(const BString &str,  __be_int32 *nChars, float tabWidth = 0) const;
+    float*          CharWidths(const char *string,  __be_int32 length,  __be_int32 *nChars, float tabWidth = 0) const;
+    float*          CharWidths(const BString &str,  __be_int32 length,  __be_int32 *nChars, float tabWidth = 0) const;
 
-    BFont		&operator=(const BFont &font);
-    BFont		&operator=(const bhapi::font_desc &fontDesc);
+    BFont&          operator=(const BFont &font);
+    BFont&          operator=(const bhapi::font_desc &fontDesc);
 
-    bool		operator==(const BFont &font);
-    bool		operator!=(const BFont &font);
+    bool            operator==(const BFont &font);
+    bool            operator!=(const BFont &font);
 
-    void		PrintToStream() const;
+    void            PrintToStream() const;
 
 private:
     friend class BView;
-
     void *fInfo;
-
-    BFontEngine *Engine() const;
+    BFontEngine*    Engine() const;
 };
-
 namespace bhapi {
-extern IMPEXPBHAPI const BFont* plain_font;
-extern IMPEXPBHAPI const BFont* bold_font;
-extern IMPEXPBHAPI const BFont* fixed_font;
-IMPEXPBHAPI  __be_int32	count_font_families(void);
-IMPEXPBHAPI status_t	get_font_family(__be_int32 index, const char **name);
-IMPEXPBHAPI  __be_int32	get_font_family_index(const char *name);
-IMPEXPBHAPI  __be_int32	count_font_styles(const char *family);
-IMPEXPBHAPI  __be_int32	count_font_styles(__be_int32 index);
-IMPEXPBHAPI status_t	get_font_style(const char *family,  __be_int32 index, const char **name);
-IMPEXPBHAPI  __be_int32	get_font_style_index(const char *family, const char *name);
-IMPEXPBHAPI bool	update_font_families(bool check_only);
+extern BHAPI_IMPEXP const BFont* plain_font;
+extern BHAPI_IMPEXP const BFont* bold_font;
+extern BHAPI_IMPEXP const BFont* fixed_font;
+BHAPI_IMPEXP  __be_int32	count_font_families(void);
+BHAPI_IMPEXP status_t       get_font_family(__be_int32 index, const char **name);
+BHAPI_IMPEXP  __be_int32	get_font_family_index(const char *name);
+BHAPI_IMPEXP  __be_int32	count_font_styles(const char *family);
+BHAPI_IMPEXP  __be_int32	count_font_styles(__be_int32 index);
+BHAPI_IMPEXP status_t       get_font_style(const char *family,  __be_int32 index, const char **name);
+BHAPI_IMPEXP  __be_int32	get_font_style_index(const char *family, const char *name);
+BHAPI_IMPEXP bool           update_font_families(bool check_only);
 }
 #endif /* __cplusplus */
 
+#ifdef __cplusplus /* Just for C++ */
 namespace bhapi {
-
+#endif
 struct font_desc {
     bhapi::font_family	family;
     bhapi::font_style	style;
@@ -136,13 +143,10 @@ struct font_desc {
     float		shear;
     bool		bold;
 #ifdef __cplusplus
-    inline font_desc()
-    {
+    inline font_desc()    {
         bzero(this, sizeof(*this));
     }
-
-    inline font_desc &operator=(const BFont &from)
-    {
+    inline font_desc &operator=(const BFont &from)    {
         from.GetFamilyAndStyle(&family, &style);
         size = from.Size();
         spacing = from.Spacing();
@@ -150,32 +154,28 @@ struct font_desc {
         bold = from.IsBoldStyle();
         return *this;
     }
-
-    inline void SetFamilyAndStyle(const bhapi::font_family f, const bhapi::font_style s)
-    {
+    inline void SetFamilyAndStyle(const bhapi::font_family f, const bhapi::font_style s)    {
         bzero(family, sizeof(bhapi::font_family));
         bzero(style, sizeof(bhapi::font_style));
         memcpy(family, f, min_c(B_FONT_FAMILY_LENGTH, strlen(f)));
         memcpy(style, s, min_c(B_FONT_STYLE_LENGTH, strlen(s)));
     }
-
     inline void SetSize(float val) {size = val;}
     inline void SetSpacing(float val) {spacing = val;}
     inline void SetShear(float val) {shear = val;}
     inline void SetBoldStyle(bool val) {bold = val;}
-
-    inline void GetFamilyAndStyle(bhapi::font_family *f, bhapi::font_style *s)
-    {
+    inline void GetFamilyAndStyle(bhapi::font_family *f, bhapi::font_style *s)    {
         if(f) memcpy(*f, family, B_FONT_FAMILY_LENGTH + 1);
         if(s) memcpy(*s, style, B_FONT_STYLE_LENGTH + 1);
     }
-
     inline float Size() const {return size;}
     inline float Spacing() const {return spacing;}
     inline float Shear() const {return shear;}
     inline bool IsBoldStyle() const {return bold;}
 #endif /* __cplusplus */
 };
+#ifdef __cplusplus /* Just for C++ */
 } /* namespace bhapi */
-#endif /* BHAPI_FONT_H */
+#endif /* __cplusplus */
 
+#endif /* BHAPI_FONT_H */

@@ -5,7 +5,7 @@
 #ifndef	_D2A_H
 #define	_D2A_H
 
-#include <BeBuild.h>
+#include <Haiku.h>
 #include <Haiku.h>
 
 #include <stddef.h>

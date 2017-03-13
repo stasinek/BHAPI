@@ -40,7 +40,7 @@
 #include "../app/Message.h"
 #include "../app/AppDefs.h"
 
-class LOCALBHAPI BSystemClipboard {
+class BHAPI_LOCAL BSystemClipboard {
 public:
 	BSimpleLocker fLocker;
 	BMessage fData;
@@ -180,7 +180,7 @@ void BClipboard::Unlock()
 	fLocker.Unlock();
 }
 
-be_int64 BClipboard::CountLocks() const
+__be_int64 BClipboard::CountLocks() const
 {
 	return fLocker.CountLocks();
 }
@@ -233,13 +233,13 @@ BMessage* BClipboard::Data() const
 	return fData;
 }
 
-be_uint32 BClipboard::LocalCount() const
+__be_uint32 BClipboard::LocalCount() const
 {
 	// TODO
 	return SystemCount();
 }
 
-be_uint32 BClipboard::SystemCount() const
+__be_uint32 BClipboard::SystemCount() const
 {
 	// TODO
 	if(fName == NULL) return 0;

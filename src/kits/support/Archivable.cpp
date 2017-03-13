@@ -65,7 +65,7 @@ BArchivable::Instantiate(const BMessage *from)
 }
 
 
-EXPORTBHAPI bool bhapi::validatb_instantiation(const BMessage *from, const char *class_name)
+BHAPI_EXPORT bool bhapi::validatb_instantiation(const BMessage *from, const char *class_name)
 {
     if(from == NULL || class_name == NULL || *class_name == 0) return false;
 
@@ -84,14 +84,14 @@ EXPORTBHAPI bool bhapi::validatb_instantiation(const BMessage *from, const char 
 }
 
 
-EXPORTBHAPI bhapi::instantiation_func bhapi::find_instantiation_func(const char *class_name)
+BHAPI_EXPORT bhapi::instantiation_func bhapi::find_instantiation_func(const char *class_name)
 {
     // TODO
     return NULL;
 }
 
 
-EXPORTBHAPI bhapi::instantiation_func bhapi::find_instantiation_func(const BMessage *archive_data)
+BHAPI_EXPORT bhapi::instantiation_func bhapi::find_instantiation_func(const BMessage *archive_data)
 {
     const char *class_name = NULL;
     if(archive_data == NULL) return NULL;

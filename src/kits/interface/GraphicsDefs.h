@@ -30,7 +30,7 @@
 #ifndef BHAPI_GRAPHICS_DEFS_H
 #define BHAPI_GRAPHICS_DEFS_H
 
-#include "../support/SupportDefs.h"
+#include <Haiku.h>
 
 #ifdef __cplusplus
 namespace bhapi {
@@ -339,8 +339,8 @@ inline rgb_color make_rgb_color(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __b
     return c;
 }
 #endif /* __cplusplus */
-IMPEXPBHAPI  __be_uint8 find_index_for_color(__be_uint8 r,  __be_uint8 g,  __be_uint8 b);
-IMPEXPBHAPI bhapi::rgb_color find_color_for_index(__be_uint8 index);
+BHAPI_IMPEXP  __be_uint8 find_index_for_color(__be_uint8 r,  __be_uint8 g,  __be_uint8 b);
+BHAPI_IMPEXP bhapi::rgb_color find_color_for_index(__be_uint8 index);
 #ifdef __cplusplus
 } // extern "C"
 #endif /* __cplusplus */

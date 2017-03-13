@@ -34,7 +34,9 @@
 #ifdef __cplusplus /* Just for C++ */
 #include "../interface/View.h"
 #include "../support/StringArray.h"
-class IMPEXPBHAPI BStringView : public BView {
+#include "../support/StringClass.h"
+#include <Haiku.h>
+class BHAPI_IMPEXP BStringView : public BView {
 public:
     BStringView(BRect frame,
             const char *name,
@@ -71,7 +73,7 @@ inline void BStringView::SetText(const BString &text)
     SetText(text.String());
 }
 #endif // BHAPI_BUILD_LIBRARY
-
 #endif /* __cplusplus */
+#define BSTRINGVIEW_I
 #endif /* BHAPI_STRING_VIEW_H */
 

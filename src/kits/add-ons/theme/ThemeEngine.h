@@ -97,7 +97,7 @@ typedef struct b_theme_engine {
 	void (*destroy)(struct b_theme_engine *engine);
 } b_theme_engine;
 
-IMPEXPBHAPI b_theme_engine *get_current_theme_engine(void);
+BHAPI_IMPEXP b_theme_engine *get_current_theme_engine(void);
 } /* namespace bhapi */
 #endif /* __cplusplus */
 #endif /* BHAPI_THEME_ENGINE_H */
