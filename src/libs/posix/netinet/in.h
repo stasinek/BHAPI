@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2002-2012 Haiku, Inc. All Rights Reserved.
  * Distributed under the terms of the MIT License.
  */
@@ -12,7 +12,7 @@
 #include <sys/types.h>
 
 /* RFC 2553 states that these must be available through <netinet/in.h> */
-#include <netinet6/in6.h>
+#include <posix/netinet6/in6.h>
 
 
 #ifdef __cplusplus
@@ -27,11 +27,11 @@ typedef uint32_t in_addr_t;
  */
 #ifndef htonl
 #	ifdef __HAIKU_BEOS_COMPATIBLE_TYPES
-		extern unsigned long __swap_int32(unsigned long);	/* private */
+        extern unsigned long __swap_int32(unsigned long);	/* private */
 #	else
-		extern unsigned int __swap_int32(unsigned int);	/* private */
+        extern unsigned int __swap_int32(unsigned int);	/* private */
 #	endif
-	extern uint16_t __swap_int16(uint16_t);	/* private */
+    extern uint16_t __swap_int16(uint16_t);	/* private */
 #	if BYTE_ORDER == LITTLE_ENDIAN
 #		define htonl(x) ((uint32_t)__swap_int32(x))
 #		define ntohl(x) ((uint32_t)__swap_int32(x))
@@ -72,49 +72,49 @@ typedef uint32_t in_addr_t;
 /* Port numbers */
 
 #define IPPORT_RESERVED			1024
-	/* < IPPORT_RESERVED are privileged and should be accessible only by root */
+    /* < IPPORT_RESERVED are privileged and should be accessible only by root */
 #define IPPORT_USERRESERVED		49151
-	/* > IPPORT_USERRESERVED are reserved for servers, though not requiring
-	 * privileged status
-	 */
+    /* > IPPORT_USERRESERVED are reserved for servers, though not requiring
+     * privileged status
+     */
 
 /* IP Version 4 address */
 struct in_addr {
-	in_addr_t s_addr;
+    in_addr_t s_addr;
 };
 
 /* IP Version 4 socket address */
 struct sockaddr_in {
-	uint8_t		sin_len;
-	uint8_t		sin_family;
-	uint16_t	sin_port;
-	struct in_addr 	sin_addr;
-	int8_t		sin_zero[24];
+    uint8_t		sin_len;
+    uint8_t		sin_family;
+    uint16_t	sin_port;
+    struct in_addr 	sin_addr;
+    int8_t		sin_zero[24];
 };
 
 
 /* RFC 3678 - Socket Interface Extensions for Multicast Source Filters */
 
 struct ip_mreq {
-	struct in_addr imr_multiaddr; /* IP address of group */
-	struct in_addr imr_interface; /* IP address of interface */
+    struct in_addr imr_multiaddr; /* IP address of group */
+    struct in_addr imr_interface; /* IP address of interface */
 };
 
 struct ip_mreq_source {
-	struct in_addr imr_multiaddr;	/* IP address of group */
-	struct in_addr imr_sourceaddr;	/* IP address of source */
-	struct in_addr imr_interface;	/* IP address of interface */
+    struct in_addr imr_multiaddr;	/* IP address of group */
+    struct in_addr imr_sourceaddr;	/* IP address of source */
+    struct in_addr imr_interface;	/* IP address of interface */
 };
 
 struct group_req {
-	uint32_t                gr_interface; /* interface index */
-	struct sockaddr_storage gr_group;     /* group address */
+    uint32_t                gr_interface; /* interface index */
+    struct sockaddr_storage gr_group;     /* group address */
 };
 
 struct group_source_req {
-	uint32_t                gsr_interface; /* interface index */
-	struct sockaddr_storage gsr_group;     /* group address */
-	struct sockaddr_storage gsr_source;    /* source address */
+    uint32_t                gsr_interface; /* interface index */
+    struct sockaddr_storage gsr_group;     /* group address */
+    struct sockaddr_storage gsr_source;    /* source address */
 };
 
 /*
@@ -124,7 +124,7 @@ struct group_source_req {
 #define IP_OPTIONS					1	/* buf/ip_opts; set/get IP options */
 #define IP_HDRINCL					2	/* int; header is included with data */
 #define IP_TOS						3
-	/* int; IP type of service and preced. */
+    /* int; IP type of service and preced. */
 #define IP_TTL						4	/* int; IP time to live */
 #define IP_RECVOPTS					5	/* bool; receive all IP opts w/dgram */
 #define IP_RECVRETOPTS				6	/* bool; receive IP opts for response */
@@ -133,11 +133,11 @@ struct group_source_req {
 #define IP_MULTICAST_IF				9	/* in_addr; set/get IP multicast i/f  */
 #define IP_MULTICAST_TTL			10	/* u_char; set/get IP multicast ttl */
 #define IP_MULTICAST_LOOP			11
-	/* u_char; set/get IP multicast loopback */
+    /* u_char; set/get IP multicast loopback */
 #define IP_ADD_MEMBERSHIP			12
-	/* ip_mreq; add an IP group membership */
+    /* ip_mreq; add an IP group membership */
 #define IP_DROP_MEMBERSHIP			13
-	/* ip_mreq; drop an IP group membership */
+    /* ip_mreq; drop an IP group membership */
 #define IP_BLOCK_SOURCE				14	/* ip_mreq_source */
 #define IP_UNBLOCK_SOURCE			15	/* ip_mreq_source */
 #define IP_ADD_SOURCE_MEMBERSHIP	16	/* ip_mreq_source */

@@ -95,4 +95,4 @@ inline bool BCollator::GreaterOrEqual(const char *s1, const char *s2, int8 stren
     return Compare(s1, s2, strength) >= 0;
 }
 
-endif	/* BHAPI_COLLATOR_H */
+#endif	/* BHAPI_COLLATOR_H */

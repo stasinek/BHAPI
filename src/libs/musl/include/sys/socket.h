@@ -1,4 +1,4 @@
-#ifndef	_SYS_SOCKET_H
+﻿#ifndef	_SYS_SOCKET_H
 #define	_SYS_SOCKET_H
 #ifdef __cplusplus
 extern "C" {
@@ -16,19 +16,18 @@ extern "C" {
 #define __NEED_struct_iovec
 
 #include <bits/alltypes.h>
-
 #include <bits/socket.h>
 
 #ifdef _GNU_SOURCE
 struct ucred {
-	pid_t pid;
-	uid_t uid;
-	gid_t gid;
+    pid_t pid;
+    uid_t uid;
+    gid_t gid;
 };
 
 struct mmsghdr {
-	struct msghdr msg_hdr;
-	unsigned int  msg_len;
+    struct msghdr msg_hdr;
+    unsigned int  msg_len;
 };
 
 struct timespec;
@@ -38,8 +37,8 @@ int recvmmsg (int, struct mmsghdr *, unsigned int, unsigned int, struct timespec
 #endif
 
 struct linger {
-	int l_onoff;
-	int l_linger;
+    int l_onoff;
+    int l_linger;
 };
 
 #define SHUT_RD 0
@@ -285,8 +284,8 @@ struct linger {
 
 #define CMSG_DATA(cmsg) ((unsigned char *) (((struct cmsghdr *)(cmsg)) + 1))
 #define CMSG_NXTHDR(mhdr, cmsg) ((cmsg)->cmsg_len < sizeof (struct cmsghdr) || \
-	__CMSG_LEN(cmsg) + sizeof(struct cmsghdr) >= __MHDR_END(mhdr) - (unsigned char *)(cmsg) \
-	? 0 : (struct cmsghdr *)__CMSG_NEXT(cmsg))
+    __CMSG_LEN(cmsg) + sizeof(struct cmsghdr) >= __MHDR_END(mhdr) - (unsigned char *)(cmsg) \
+    ? 0 : (struct cmsghdr *)__CMSG_NEXT(cmsg))
 #define CMSG_FIRSTHDR(mhdr) ((size_t) (mhdr)->msg_controllen >= sizeof (struct cmsghdr) ? (struct cmsghdr *) (mhdr)->msg_control : (struct cmsghdr *) 0)
 
 #define CMSG_ALIGN(len) (((len) + sizeof (size_t) - 1) & (size_t) ~(sizeof (size_t) - 1))
@@ -297,14 +296,14 @@ struct linger {
 #define SCM_CREDENTIALS 0x02
 
 struct sockaddr {
-	sa_family_t sa_family;
-	char sa_data[14];
+    sa_family_t sa_family;
+    char sa_data[14];
 };
 
 struct sockaddr_storage {
-	sa_family_t ss_family;
-	char __ss_padding[128-sizeof(long)-sizeof(sa_family_t)];
-	unsigned long __ss_align;
+    sa_family_t ss_family;
+    char __ss_padding[128-sizeof(long)-sizeof(sa_family_t)];
+    unsigned long __ss_align;
 };
 
 int socket (int, int, int);

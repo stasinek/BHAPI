@@ -27,7 +27,7 @@
 #	endif /* __GNUC__ */
 #endif /* BHAPI_OS_WIN32 */
 
-#ifdef BHAPI_OS_WIN32
+/*#ifdef BHAPI_OS_WIN32
     #ifdef _WIN32
         #include <winsock2.h>
         #include <windows.h>
@@ -35,7 +35,8 @@
     #if defined(_MSC_VER) && _MSC_VER <= 0x4b0
         #define for	if (0); else for
     #endif
-#endif /* BHAPI_OS_WIN32 */
+#endif // BHAPI_OS_WIN32
+*/
 
 /* We prefix variable declarations so they can
  * properly get exported in windows dlls or Metrowerks'.
@@ -99,7 +100,7 @@
     STACK_DIRECTION = 0 => direction of growth unknown */
 /* #undef STACK_DIRECTION */
 
-#include <limits.h>
+#include <posix/limits.h>
 
 #ifdef _MSC_VER /* MSC compiler */
 #	ifndef LLONG_MAX
@@ -168,10 +169,10 @@ BHAPI_IMPEXP void * 	get_stack_frame (void);
 } /* namespace */
 #endif /* __cplusplus */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <posix/stdlib.h>
+#include <posix/stdio.h>
 #ifndef _MSC_VER
-#include <sys/cdefs.h>
+#   include <posix/sys/cdefs.h>
 #endif
 
 #include "kits/interface/InterfaceDefs.h"
@@ -179,5 +180,4 @@ BHAPI_IMPEXP void * 	get_stack_frame (void);
 #include "kits/app/AppDefs.h"
 #include "kits/storage/StorageDefs.h"
 #include "kits/support/SupportDefs.h"
-
 #endif
