@@ -9,7 +9,7 @@
 #include <DecorInfo.h>
 
 #include <new>
-#include <stdio.h>
+
 
 #include <Autolock.h>
 #include <FindDirectory.h>

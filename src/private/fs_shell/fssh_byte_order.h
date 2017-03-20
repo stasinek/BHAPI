@@ -1,24 +1,23 @@
-/*
+﻿/*
  * Copyright 2007, Haiku, Inc. All Rights Reserved.
  * Distributed under the terms of the MIT License.
  */
 #ifndef _FSSH_BYTEORDER_H
 #define _FSSH_BYTEORDER_H
 
-#include <endian.h>
-	// platform endian.h
-
+//#include <endian.h>
+// platform endian.h
 
 #include "fssh_defs.h"
 
 
 // swap directions
 typedef enum {
-	FSSH_B_SWAP_HOST_TO_LENDIAN,
-	FSSH_B_SWAP_HOST_TO_BENDIAN,
-	FSSH_B_SWAP_LENDIAN_TO_HOST,
-	FSSH_B_SWAP_BENDIAN_TO_HOST,
-	FSSH_B_SWAP_ALWAYS
+    FSSH_B_SWAP_HOST_TO_LENDIAN,
+    FSSH_B_SWAP_HOST_TO_BENDIAN,
+    FSSH_B_SWAP_LENDIAN_TO_HOST,
+    FSSH_B_SWAP_BENDIAN_TO_HOST,
+    FSSH_B_SWAP_ALWAYS
 } fssh_swap_action;
 
 
@@ -110,10 +109,10 @@ typedef enum {
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 extern fssh_status_t fssh_swap_data(fssh_type_code type, void *data,
-	fssh_size_t length, fssh_swap_action action);
+    fssh_size_t length, fssh_swap_action action);
 extern bool fssh_is_type_swapped(fssh_type_code type);
 
 

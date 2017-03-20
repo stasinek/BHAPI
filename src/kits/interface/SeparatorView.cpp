@@ -10,7 +10,7 @@
 #include <new>
 
 #include <math.h>
-#include <stdio.h>
+
 
 #include <ControlLook.h>
 #include <LayoutUtils.h>

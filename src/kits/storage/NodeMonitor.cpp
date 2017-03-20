@@ -14,7 +14,7 @@
 
 #include <MessengerPrivate.h>
 
-#include <syscalls.h>
+#include <../include/syscalls.h>
 
 #include "node_monitor_private.h"
 

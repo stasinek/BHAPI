@@ -221,7 +221,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				{
 					fContactor = BMessenger();
 					const char *buffer = NULL;
-					__be_size_t size = -1;
+					ssize_t size = -1;
 					if(bMsg->FindData("BHAPI:messenger", B_ANY_TYPE, (const void**)&buffer, &size) != B_OK) break;
 					if(buffer == NULL || size <= 0) break;
 					fContactor.Unflatten(buffer, (size_t)size);
@@ -506,7 +506,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 				message.AddMessenger("BHAPI:msg_for_target", fContactor);
 
-				bhapi::app->PostMessage(&message);
+				bhapi::be_app->PostMessage(&message);
 			}
 			break;
 
@@ -577,7 +577,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 				message.AddMessenger("BHAPI:msg_for_target", fContactor);
 
-				bhapi::app->PostMessage(&message);
+				bhapi::be_app->PostMessage(&message);
 			}
 			break;
 
@@ -610,7 +610,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 				message.AddMessenger("BHAPI:msg_for_target", fContactor);
 
-				bhapi::app->PostMessage(&message);
+				bhapi::be_app->PostMessage(&message);
 			}
 			break;
 
@@ -724,7 +724,7 @@ EBeGraphicsWindow::ContactTo(const BMessenger *msgr)
 		char *buffer = (char*)malloc(size);
 		if(buffer == NULL) return B_NO_MEMORY;
 		if(msgr->Flatten(buffer, size) == false) {free(buffer); return B_ERROR;}
-		msg.AddData("BHAPI:messenger", B_ANY_TYPE, buffer, (__be_size_t)size, true, 1);
+		msg.AddData("BHAPI:messenger", B_ANY_TYPE, buffer, (ssize_t)size, true, 1);
 		free(buffer);
 	}
 

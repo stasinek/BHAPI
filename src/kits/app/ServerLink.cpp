@@ -13,8 +13,8 @@
 
 #include <ServerLink.h>
 
-#include <stdlib.h>
-#include <string.h>
+
+
 #include <new>
 
 #include <Gradient.h>

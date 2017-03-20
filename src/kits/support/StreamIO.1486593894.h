@@ -41,8 +41,8 @@ public:
     BStreamIO();
     virtual ~BStreamIO();
 
-	virtual  __be_size_t		Read(void *buffer, size_t size);
-	virtual  __be_size_t		Write(const void *buffer, size_t size);
+	virtual  ssize_t		Read(void *buffer, size_t size);
+	virtual  ssize_t		Write(const void *buffer, size_t size);
 
     BStreamIO 		&operator<<(__be_int8 value);
     BStreamIO 		&operator<<(__be_uint8 value);

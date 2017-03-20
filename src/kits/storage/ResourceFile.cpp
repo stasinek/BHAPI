@@ -14,7 +14,7 @@
 
 #include <algorithm>
 #include <new>
-#include <stdio.h>
+
 
 #include <AutoDeleter.h>
 

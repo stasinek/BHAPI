@@ -211,12 +211,12 @@ BStreamIO::operator<<(BStreamIO &stream)
 		return operator<<(&stream == &endl ? '\n' : ' ');
 
 	__be_int8 buf[512];
-	__be_size_t len;
+	ssize_t len;
 
 	bzero(buf, sizeof(buf));
 	if((len = stream.Read(&buf[0], sizeof(buf))) > 0)
 	{
-		__be_size_t nWritten;
+		ssize_t nWritten;
 		while((nWritten = Write(&buf[0], (size_t)len)) > 0)
 		{
 			if(len - nWritten == 0 || (len -= nWritten) < 0) break;

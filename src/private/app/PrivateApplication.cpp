@@ -34,7 +34,7 @@
 #include "../kernel/Debug.h"
 #include "../support/Errors.h"
 
-BApplicationConnector *bhapi::app_connector = NULL;
+BApplicationConnector *bhapi::be_app_connector = NULL;
 
 BApplicationConnector::BApplicationConnector() : fLocker(true), fPort(NULL), fThread(NULL)
 {
@@ -132,14 +132,14 @@ BApplicationConnector::HandlersDepot() const
 void
 BApplicationConnector::Init()
 {
-    bhapi::app_connector = new BApplicationConnector();
+    bhapi::be_app_connector = new BApplicationConnector();
 }
 
 
 void
 BApplicationConnector::Quit()
 {
-    delete bhapi::app_connector;
+    delete bhapi::be_app_connector;
 }
 
 

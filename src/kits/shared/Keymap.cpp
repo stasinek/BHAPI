@@ -13,9 +13,9 @@
 
 #include <new>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
+
+
 
 #include <ByteOrder.h>
 #include <File.h>

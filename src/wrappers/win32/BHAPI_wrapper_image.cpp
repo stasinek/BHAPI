@@ -35,7 +35,7 @@
 #include <winsock2.h>
 #include <windows.h>
 #ifdef __CYGWIN__
-#include <sys/cygwin.h>
+#include <../include/sys/cygwin.h>
 #endif
 
 BHAPI_EXPORT void*

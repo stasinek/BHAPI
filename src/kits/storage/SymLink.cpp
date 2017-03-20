@@ -9,14 +9,14 @@
 
 
 #include <new>
-#include <string.h>
+
 
 #include <SymLink.h>
 #include <Directory.h>
 #include <Entry.h>
 #include <Path.h>
 
-#include <syscalls.h>
+#include <../include/syscalls.h>
 
 #include "storage_support.h"
 

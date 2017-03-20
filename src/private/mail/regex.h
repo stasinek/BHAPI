@@ -22,7 +22,7 @@
 
 /* BeOS PPC has no regex in libroot */
 #if !(defined(__BEOS__) && __POWERPC__)
-#	include <posix/regex.h>
+#	include <musl/regex.h>
 #else
 
 #ifndef _REGEX_H

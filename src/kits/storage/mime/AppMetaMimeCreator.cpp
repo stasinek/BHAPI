@@ -11,7 +11,7 @@
 
 #include <mime/AppMetaMimeCreator.h>
 
-#include <stdlib.h>
+
 
 #include <AppFileInfo.h>
 #include <Bitmap.h>

@@ -17,12 +17,12 @@
  * NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
  * WITH THE USE OR PERFORMANCE OF THE SOFTWARE.
  */
-#include <limits.h>
-#include <sys/param.h>
+#include <../include/limits.h>
+#include <../include/sys/param.h>
 #if (!defined(BSD)) || (BSD < 199306)
-# include <sys/bitypes.h>
+# include <../include/sys/bitypes.h>
 #else
-# include <sys/types.h>
+# include <../include/sys/types.h>
 #endif
 
 #ifndef PATH_MAX

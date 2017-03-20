@@ -9,9 +9,9 @@
 #include <Haiku.h>
 #include <OS.h>
 
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <../include/stdarg.h>
+
+
 
 
 /* Private */

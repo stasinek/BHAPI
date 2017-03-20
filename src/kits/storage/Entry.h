@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -28,13 +28,16 @@
  * --------------------------------------------------------------------------*/
 
 #ifndef BHAPI_ENTRY_H
-#define BHAPI_ENTRY_H 
+#define BHAPI_ENTRY_H
 
 #include "Path.h"
 
 #ifdef __cplusplus /* Just for C++ */
 
+class AllocationInfo;
 class BDirectory;
+class EntryIterator;
+class Node;
 
 class BHAPI_IMPEXP BEntry {
 public:
@@ -45,43 +48,43 @@ public:
     BEntry(const BEntry &entry);
     virtual ~BEntry();
 
-	status_t	SetTo(const char *dir, const char *leaf, bool traverse = false);
-	status_t	SetTo(const BDirectory *dir, const char *leaf, bool traverse = false);
-	status_t	SetTo(const char *path, bool traverse = false);
-	void		Unset();
+    status_t	SetTo(const char *dir, const char *leaf, bool traverse = false);
+    status_t	SetTo(const BDirectory *dir, const char *leaf, bool traverse = false);
+    status_t	SetTo(const char *path, bool traverse = false);
+    void		Unset();
 
-	status_t	InitCheck() const;
+    status_t	InitCheck() const;
 
-	bool		Exists() const;
-	bool		IsHidden() const;
+    bool		Exists() const;
+    bool		IsHidden() const;
 
-	bool		IsFile() const;
-	bool		IsDirectory() const;
-	bool		IsSymLink() const;
+    bool		IsFile() const;
+    bool		IsDirectory() const;
+    bool		IsSymLink() const;
 
     status_t	GetSize(__be_int64 *file_size) const;
     status_t	GetModificationTime(bigtime_t *time) const;
     status_t	GetCreationTime(bigtime_t *time) const;
     status_t	GetAccessTime(bigtime_t *time) const;
 
-	const char	*Name() const;
-	status_t	GetName(char *buffer, size_t bufferSize) const;
+    const char	*Name() const;
+    status_t	GetName(char *buffer, size_t bufferSize) const;
 
-	const char	*Path() const;
+    const char	*Path() const;
     status_t	GetPath(BPath *path) const;
 
     status_t	GetParent(BEntry *entry) const;
     status_t	GetParent(BPath *path) const;
-	status_t	GetParent(BDirectory *dir) const;
+    status_t	GetParent(BDirectory *dir) const;
 
     bool		operator==(const BEntry &entry) const;
     bool		operator!=(const BEntry &entry) const;
     BEntry&		operator=(const BEntry &entry);
 
 private:
-	friend class BDirectory;
+    friend class BDirectory;
 
-	char *fName;
+    char *fName;
 };
 
 #endif /* __cplusplus */

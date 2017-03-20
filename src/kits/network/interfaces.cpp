@@ -9,10 +9,10 @@
 
 #include <errno.h>
 #include <net/if.h>
-#include <sys/socket.h>
-#include <sys/sockio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <../include/sys/socket.h>
+#include <../include/sys/sockio.h>
+
+
 #include <unistd.h>
 
 #include <AutoDeleter.h>

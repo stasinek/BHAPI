@@ -6,7 +6,7 @@
 #define BHAPI_HAIKU_TYPES_H
 
 #include <HaikuConfig.h>
-#include <ctype.h>
+#include <../include/ctype.h>
 
 /* fixed-width types -- the __haiku_std_[u]int* types correspond to the POSIX
    [u]int*_t types, the _haiku_[u]int* types to the BeOS [u]int* types. If
@@ -106,7 +106,8 @@ typedef	unsigned long int	__haiku_addr_t;
 #	define __HAIKU_PRI_PREFIX_GENERIC_ADDR	__HAIKU_PRI_PREFIX_PHYS_ADDR
 #endif
 
-typedef __haiku_addr_t   __be_addr_t;
+typedef __haiku_addr_t   ptr_t;
+typedef __haiku_addr_t   addr_t;
 
 #ifdef _MSC_VER
 typedef __int8   int8_t;
@@ -190,19 +191,23 @@ typedef unsigned __int32 	__haiku_perform_code;
 typedef unsigned __int32 	__be_perform_code;
 typedef unsigned __int32 	perform_code;
 
-typedef __int64  __be_thread_id;
+typedef __haiku_phys_addr_t  gid_t;
+typedef __haiku_phys_addr_t  uid_t;
+typedef __haiku_phys_addr_t  uint;
+typedef unsigned short ushort;
 
 #include <pthread.h>
+
 #undef NO_OLDNAMES
 #ifndef _MSC_VER
-//#include <sys/types.h>
+//#include <../include/sys/types.h>
 #endif
 // POSIX
-#include <posix/sys/types.h>
+#include <../include/sys/types.h>
 
-typedef size_t      	 __be_size_t;
+typedef size_t __be_size_t;
 #ifndef _SSIZE_T_DEFINED
 typedef size_t ssize_t;
 #endif
 
-#endif	/* _CONFIG_TYPES_H */
+#endif	/* BHAPI_HAIKU_TYPES_H */

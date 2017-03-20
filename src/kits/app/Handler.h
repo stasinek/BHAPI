@@ -38,40 +38,40 @@
 #define B_OBSERVE_ORIGINAL_WHAT		"BHAPI:observe_orig_what"
 #define B_OBSERVER_OBSERVE_ALL	    B_MAXUINT32
 //-----------------------------------------------------------------------------
-#ifndef BLOOPER_I
-#define BLOOPER_I
+#ifndef BLOOPER_DEF
+#define BLOOPER_DEF
 class BLooper;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BMESSAGE_I
-#define BMESSAGE_I
+#ifndef BMESSAGE_DEF
+#define BMESSAGE_DEF
 class BMessage;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BMESSAGEFILTER_I
-#define BMESSAGEFILTER_I
+#ifndef BMESSAGEFILTER_DEF
+#define BMESSAGEFILTER_DEF
 class BMessageFilter;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BMESSANGER_I
-#define BMESSANGER_I
+#ifndef BMESSANGER_DEF
+#define BMESSANGER_DEF
 class BMessenger;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BTOKEN_I
-#define BTOKEN_I
+#ifndef BTOKEN_DEF
+#define BTOKEN_DEF
 class BToken;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BLIST_I
-#define BLIST_I
+#ifndef BLIST_DEF
+#define BLIST_DEF
 class BList;
 #endif
 //-----------------------------------------------------------------------------
 #endif // __cplusplus
 //-----------------------------------------------------------------------------
 #include "../support/Archivable.h"
-#include <Haiku.h>
+#include <OS.h>
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 //-----------------------------------------------------------------------------

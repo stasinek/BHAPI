@@ -32,9 +32,9 @@
 #ifndef _NSSWITCH_H
 #define _NSSWITCH_H	1
 
-#include <sys/types.h>
-#include <stdarg.h>
-#include <stdint.h>
+#include <../include/sys/types.h>
+#include <../include/stdarg.h>
+#include <../include/stdint.h>
 
 #define	NSS_MODULE_INTERFACE_VERSION	0
 
@@ -212,7 +212,7 @@ typedef struct {
 #endif /* _NS_PRIVATE */
 
 
-#include <sys/cdefs.h>
+#include <../include/sys/cdefs.h>
 
 __BEGIN_DECLS
 int	nsdispatch(void *, const ns_dtab [], const char *,

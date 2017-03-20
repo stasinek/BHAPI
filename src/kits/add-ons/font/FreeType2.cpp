@@ -42,7 +42,7 @@
 #include FT_FREETYPE_H
 #include <freetype/include/freetype/freetype.h>
 
-#include <stdlib.h>
+
 #include <math.h>
 
 #ifdef BHAPI_OS_BEOS

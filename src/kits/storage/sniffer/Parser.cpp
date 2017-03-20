@@ -16,9 +16,9 @@
 #include <sniffer/Rule.h>
 
 #include <new>
-#include <stdio.h>
-#include <stdlib.h>	// For atol(), atof()
-#include <string.h>
+
+	// For atol(), atof()
+
 #include <StringClass.h>	// BString
 
 using namespace BPrivate::Storage::Sniffer;

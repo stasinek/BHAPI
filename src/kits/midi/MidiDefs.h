@@ -1,9 +1,13 @@
+﻿//------------------------------------------------------------------------------
 
-#ifndef _MIDI_DEFS_H
-#define _MIDI_DEFS_H
+#ifndef BHAPI_MIDI_DEFS_H
+#define BHAPI_MIDI_DEFS_H
 
-#include <OS.h>
+//------------------------------------------------------------------------------
+
+//#include <private/fs_shell/fssh_api_wrapper.h>
 #include <Errors.h>
+#include <OS.h>
 
 //------------------------------------------------------------------------------
 
@@ -20,28 +24,29 @@
 #define B_BIG_SYNTH_FILE     "synth/big_synth.sy"
 #define B_LITTLE_SYNTH_FILE  "synth/little_synth.sy"
 
-typedef enum synth_mode 
+typedef enum synth_mode
 {
-	B_NO_SYNTH,
-	B_BIG_SYNTH,
-	B_LITTLE_SYNTH,
-	B_DEFAULT_SYNTH,
-	B_SAMPLES_ONLY
-} 
+    B_NO_SYNTH,
+    B_BIG_SYNTH,
+    B_LITTLE_SYNTH,
+    B_DEFAULT_SYNTH,
+    B_SAMPLES_ONLY
+}
 synth_mode;
 
 //------------------------------------------------------------------------------
 
 /* Need to move these into Errors.h */
+#define B_MIDI_ERROR_BASE INT_MIN + 0x5000
 
 enum
 {
-	B_BAD_INSTRUMENT = B_MIDI_ERROR_BASE + 0x100,
-	B_BAD_MIDI_DATA,
-	B_ALREADY_PAUSED,
-	B_ALREADY_RESUMED,
-	B_NO_SONG_PLAYING,
-	B_TOO_MANY_SONGS_PLAYING
+    B_BAD_INSTRUMENT = B_MIDI_ERROR_BASE + 0x100,
+    B_BAD_MIDI_DATA,
+    B_ALREADY_PAUSED,
+    B_ALREADY_RESUMED,
+    B_NO_SONG_PLAYING,
+    B_TOO_MANY_SONGS_PLAYING
 };
 
 //------------------------------------------------------------------------------
@@ -50,8 +55,8 @@ enum
 typedef unsigned char uchar;
 #endif
 
-#ifndef _MIDI_CONSTANTS_
-#define _MIDI_CONSTANTS_
+#ifndef BHAPI_MIDI_CONSTANTS
+#define BHAPI_MIDI_CONSTANTS
 
 /* Channel Message Masks*/
 const uchar B_NOTE_OFF          = 0x80;
@@ -114,191 +119,191 @@ const uchar B_OMNI_MODE_OFF         = 0x7c;
 const uchar B_OMNI_MODE_ON          = 0x7d;
 const uchar B_MONO_MODE_ON          = 0x7e;
 const uchar B_POLY_MODE_ON          = 0x7f;
- 
+
 const uchar B_TEMPO_CHANGE          = 0x51;
 
-#endif // _MIDI_CONSTANTS_
+#endif // BHAPI_MIDI_CONSTANTS
 
 //------------------------------------------------------------------------------
 
-typedef enum midi_axe 
+typedef enum midi_axe
 {
-	/* Pianos */
-	B_ACOUSTIC_GRAND=0,
-	B_BRIGHT_GRAND,
-	B_ELECTRIC_GRAND,
-	B_HONKY_TONK,
-	B_ELECTRIC_PIANO_1,
-	B_ELECTRIC_PIANO_2,
-	B_HARPSICHORD,
-	B_CLAVICHORD,
+    /* Pianos */
+    B_ACOUSTIC_GRAND=0,
+    B_BRIGHT_GRAND,
+    B_ELECTRIC_GRAND,
+    B_HONKY_TONK,
+    B_ELECTRIC_PIANO_1,
+    B_ELECTRIC_PIANO_2,
+    B_HARPSICHORD,
+    B_CLAVICHORD,
 
-	/* Tuned Idiophones */
-	B_CELESTA,
-	B_GLOCKENSPIEL,
-	B_MUSIC_BOX,
-	B_VIBRAPHONE,
-	B_MARIMBA,
-	B_XYLOPHONE,
-	B_TUBULAR_BELLS,
-	B_DULCIMER,
+    /* Tuned Idiophones */
+    B_CELESTA,
+    B_GLOCKENSPIEL,
+    B_MUSIC_BOX,
+    B_VIBRAPHONE,
+    B_MARIMBA,
+    B_XYLOPHONE,
+    B_TUBULAR_BELLS,
+    B_DULCIMER,
 
-	/* Organs */
-	B_DRAWBAR_ORGAN,
-	B_PERCUSSIVE_ORGAN,
-	B_ROCK_ORGAN,
-	B_CHURCH_ORGAN,
-	B_REED_ORGAN,
-	B_ACCORDION,
-	B_HARMONICA,
-	B_TANGO_ACCORDION,
+    /* Organs */
+    B_DRAWBAR_ORGAN,
+    B_PERCUSSIVE_ORGAN,
+    B_ROCK_ORGAN,
+    B_CHURCH_ORGAN,
+    B_REED_ORGAN,
+    B_ACCORDION,
+    B_HARMONICA,
+    B_TANGO_ACCORDION,
 
-	/* Guitars */
-	B_ACOUSTIC_GUITAR_NYLON,
-	B_ACOUSTIC_GUITAR_STEEL,
-	B_ELECTRIC_GUITAR_JAZZ,
-	B_ELECTRIC_GUITAR_CLEAN,
-	B_ELECTRIC_GUITAR_MUTED,
-	B_OVERDRIVEN_GUITAR,
-	B_DISTORTION_GUITAR,
-	B_GUITAR_HARMONICS,
+    /* Guitars */
+    B_ACOUSTIC_GUITAR_NYLON,
+    B_ACOUSTIC_GUITAR_STEEL,
+    B_ELECTRIC_GUITAR_JAZZ,
+    B_ELECTRIC_GUITAR_CLEAN,
+    B_ELECTRIC_GUITAR_MUTED,
+    B_OVERDRIVEN_GUITAR,
+    B_DISTORTION_GUITAR,
+    B_GUITAR_HARMONICS,
 
-	/* Basses */
-	B_ACOUSTIC_BASS,
-	B_ELECTRIC_BASS_FINGER,
-	B_ELECTRIC_BASS_PICK,
-	B_FRETLESS_BASS,
-	B_SLAP_BASS_1,
-	B_SLAP_BASS_2,
-	B_SYNTH_BASS_1,
-	B_SYNTH_BASS_2,
+    /* Basses */
+    B_ACOUSTIC_BASS,
+    B_ELECTRIC_BASS_FINGER,
+    B_ELECTRIC_BASS_PICK,
+    B_FRETLESS_BASS,
+    B_SLAP_BASS_1,
+    B_SLAP_BASS_2,
+    B_SYNTH_BASS_1,
+    B_SYNTH_BASS_2,
 
-	/* Strings */
-	B_VIOLIN,
-	B_VIOLA,
-	B_CELLO,
-	B_CONTRABASS,
-	B_TREMOLO_STRINGS,
-	B_PIZZICATO_STRINGS,
-	B_ORCHESTRAL_STRINGS,
-	B_TIMPANI,
+    /* Strings */
+    B_VIOLIN,
+    B_VIOLA,
+    B_CELLO,
+    B_CONTRABASS,
+    B_TREMOLO_STRINGS,
+    B_PIZZICATO_STRINGS,
+    B_ORCHESTRAL_STRINGS,
+    B_TIMPANI,
 
-	/* Ensemble strings and voices */
-	B_STRING_ENSEMBLE_1,
-	B_STRING_ENSEMBLE_2,
-	B_SYNTH_STRINGS_1,
-	B_SYNTH_STRINGS_2,
-	B_VOICE_AAH,
-	B_VOICE_OOH,
-	B_SYNTH_VOICE,
-	B_ORCHESTRA_HIT,
+    /* Ensemble strings and voices */
+    B_STRING_ENSEMBLE_1,
+    B_STRING_ENSEMBLE_2,
+    B_SYNTH_STRINGS_1,
+    B_SYNTH_STRINGS_2,
+    B_VOICE_AAH,
+    B_VOICE_OOH,
+    B_SYNTH_VOICE,
+    B_ORCHESTRA_HIT,
 
-	/* Brass */
-	B_TRUMPET,
-	B_TROMBONE,
-	B_TUBA,
-	B_MUTED_TRUMPET,
-	B_FRENCH_HORN,
-	B_BRASS_SECTION,
-	B_SYNTH_BRASS_1,
-	B_SYNTH_BRASS_2,
+    /* Brass */
+    B_TRUMPET,
+    B_TROMBONE,
+    B_TUBA,
+    B_MUTED_TRUMPET,
+    B_FRENCH_HORN,
+    B_BRASS_SECTION,
+    B_SYNTH_BRASS_1,
+    B_SYNTH_BRASS_2,
 
-	/* Reeds */
-	B_SOPRANO_SAX,
-	B_ALTO_SAX,
-	B_TENOR_SAX,
-	B_BARITONE_SAX,
-	B_OBOE,
-	B_ENGLISH_HORN,
-	B_BASSOON,
-	B_CLARINET,
+    /* Reeds */
+    B_SOPRANO_SAX,
+    B_ALTO_SAX,
+    B_TENOR_SAX,
+    B_BARITONE_SAX,
+    B_OBOE,
+    B_ENGLISH_HORN,
+    B_BASSOON,
+    B_CLARINET,
 
-	/* Pipes */
-	B_PICCOLO,
-	B_FLUTE,
-	B_RECORDER,
-	B_PAN_FLUTE,
-	B_BLOWN_BOTTLE,
-	B_SHAKUHACHI,
-	B_WHISTLE,
-	B_OCARINA,
+    /* Pipes */
+    B_PICCOLO,
+    B_FLUTE,
+    B_RECORDER,
+    B_PAN_FLUTE,
+    B_BLOWN_BOTTLE,
+    B_SHAKUHACHI,
+    B_WHISTLE,
+    B_OCARINA,
 
-	/* Synth Leads*/
-	B_LEAD_1,
-	B_SQUARE_WAVE = B_LEAD_1,
-	B_LEAD_2,
-	B_SAWTOOTH_WAVE = B_LEAD_2,
-	B_LEAD_3,
-	B_CALLIOPE = B_LEAD_3,
-	B_LEAD_4,
-	B_CHIFF = B_LEAD_4,
-	B_LEAD_5,
-	B_CHARANG = B_LEAD_5,
-	B_LEAD_6,
-	B_VOICE = B_LEAD_6,
-	B_LEAD_7,
-	B_FIFTHS = B_LEAD_7,
-	B_LEAD_8,
-	B_BASS_LEAD = B_LEAD_8,
+    /* Synth Leads*/
+    B_LEAD_1,
+    B_SQUARE_WAVE = B_LEAD_1,
+    B_LEAD_2,
+    B_SAWTOOTH_WAVE = B_LEAD_2,
+    B_LEAD_3,
+    B_CALLIOPE = B_LEAD_3,
+    B_LEAD_4,
+    B_CHIFF = B_LEAD_4,
+    B_LEAD_5,
+    B_CHARANG = B_LEAD_5,
+    B_LEAD_6,
+    B_VOICE = B_LEAD_6,
+    B_LEAD_7,
+    B_FIFTHS = B_LEAD_7,
+    B_LEAD_8,
+    B_BASS_LEAD = B_LEAD_8,
 
-	/* Synth Pads */
-	B_PAD_1,
-	B_NEW_AGE = B_PAD_1,
-	B_PAD_2,
-	B_WARM = B_PAD_2,
-	B_PAD_3,
-	B_POLYSYNTH = B_PAD_3,
-	B_PAD_4,
-	B_CHOIR = B_PAD_4,
-	B_PAD_5,
-	B_BOWED = B_PAD_5,
-	B_PAD_6,
-	B_METALLIC = B_PAD_6,
-	B_PAD_7,
-	B_HALO = B_PAD_7,
-	B_PAD_8,  
-	B_SWEEP = B_PAD_8,
+    /* Synth Pads */
+    B_PAD_1,
+    B_NEW_AGE = B_PAD_1,
+    B_PAD_2,
+    B_WARM = B_PAD_2,
+    B_PAD_3,
+    B_POLYSYNTH = B_PAD_3,
+    B_PAD_4,
+    B_CHOIR = B_PAD_4,
+    B_PAD_5,
+    B_BOWED = B_PAD_5,
+    B_PAD_6,
+    B_METALLIC = B_PAD_6,
+    B_PAD_7,
+    B_HALO = B_PAD_7,
+    B_PAD_8,
+    B_SWEEP = B_PAD_8,
 
-	/* Effects */
-	B_FX_1,
-	B_FX_2,
-	B_FX_3,
-	B_FX_4,
-	B_FX_5,
-	B_FX_6,
-	B_FX_7,
-	B_FX_8,
+    /* Effects */
+    B_FX_1,
+    B_FX_2,
+    B_FX_3,
+    B_FX_4,
+    B_FX_5,
+    B_FX_6,
+    B_FX_7,
+    B_FX_8,
 
-	/* Ethnic */
-	B_SITAR,
-	B_BANJO,
-	B_SHAMISEN,
-	B_KOTO,
-	B_KALIMBA,
-	B_BAGPIPE,
-	B_FIDDLE,
-	B_SHANAI,
+    /* Ethnic */
+    B_SITAR,
+    B_BANJO,
+    B_SHAMISEN,
+    B_KOTO,
+    B_KALIMBA,
+    B_BAGPIPE,
+    B_FIDDLE,
+    B_SHANAI,
 
-	/* Percussion */
-	B_TINKLE_BELL,
-	B_AGOGO,
-	B_STEEL_DRUMS,
-	B_WOODBLOCK,
-	B_TAIKO_DRUMS,
-	B_MELODIC_TOM,
-	B_SYNTH_DRUM,
-	B_REVERSE_CYMBAL,
+    /* Percussion */
+    B_TINKLE_BELL,
+    B_AGOGO,
+    B_STEEL_DRUMS,
+    B_WOODBLOCK,
+    B_TAIKO_DRUMS,
+    B_MELODIC_TOM,
+    B_SYNTH_DRUM,
+    B_REVERSE_CYMBAL,
 
-	/* Sound Effects */
-	B_FRET_NOISE,
-	B_BREATH_NOISE,
-	B_SEASHORE,
-	B_BIRD_TWEET,
-	B_TELEPHONE,
-	B_HELICOPTER,
-	B_APPLAUSE,
-	B_GUNSHOT
-} 
+    /* Sound Effects */
+    B_FRET_NOISE,
+    B_BREATH_NOISE,
+    B_SEASHORE,
+    B_BIRD_TWEET,
+    B_TELEPHONE,
+    B_HELICOPTER,
+    B_APPLAUSE,
+    B_GUNSHOT
+}
 midi_axe;
 
-#endif // _MIDI_DEFS_H
+#endif // BHAPI_MIDI_DEFS_H

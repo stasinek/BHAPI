@@ -49,7 +49,7 @@
 #endif // _WIN32
 
 #ifdef HAVE_MNTENT_H
-#include <stdio.h>
+
 #include <mntent.h>
 #endif
 namespace bhapi {

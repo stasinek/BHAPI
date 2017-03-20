@@ -71,10 +71,10 @@ BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, bi
 	}
 
 	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::app != NULL)
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::be_app != NULL)
 	{
 		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
-		bhapi::app->PostMessage(_EVENTS_PENDING_, bhapi::app);
+		bhapi::be_app->PostMessage(_EVENTS_PENDING_, bhapi::be_app);
 	}
 }
 
@@ -112,10 +112,10 @@ BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, bi
 	}
 
 	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::app != NULL)
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::be_app != NULL)
 	{
 		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
-		bhapi::app->PostMessage(_EVENTS_PENDING_, bhapi::app);
+		bhapi::be_app->PostMessage(_EVENTS_PENDING_, bhapi::be_app);
 	}
 }
 
@@ -175,10 +175,10 @@ BMessageRunner::SetTarget(const BMessenger &target)
 	fPrevSendTime = B_INT64_CONSTANT(-1);
 
 	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::app != NULL)
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::be_app != NULL)
 	{
 		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
-		bhapi::app->PostMessage(_EVENTS_PENDING_, bhapi::app);
+		bhapi::be_app->PostMessage(_EVENTS_PENDING_, bhapi::be_app);
 	}
 
 	return B_OK;
@@ -231,10 +231,10 @@ BMessageRunner::SetMessage(const BMessage *msg)
 	fPrevSendTime = B_INT64_CONSTANT(-1);
 
 	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::app != NULL)
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::be_app != NULL)
 	{
 		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
-		bhapi::app->PostMessage(_EVENTS_PENDING_, bhapi::app);
+		bhapi::be_app->PostMessage(_EVENTS_PENDING_, bhapi::be_app);
 	}
 
 	return B_OK;
@@ -253,10 +253,10 @@ BMessageRunner::SetInterval(bigtime_t interval)
 	fPrevSendTime = B_INT64_CONSTANT(-1);
 
 	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::app != NULL)
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::be_app != NULL)
 	{
 		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
-		bhapi::app->PostMessage(_EVENTS_PENDING_, bhapi::app);
+		bhapi::be_app->PostMessage(_EVENTS_PENDING_, bhapi::be_app);
 	}
 
 	return B_OK;
@@ -275,10 +275,10 @@ BMessageRunner::SetCount(__be_int32 count)
 	fPrevSendTime = B_INT64_CONSTANT(-1);
 
 	if(fCount != 0 && fInterval > B_INT64_CONSTANT(0) &&
-	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::app != NULL)
+	   !(fTarget == NULL || fTarget->IsValid() == false) && fMessage != NULL && bhapi::be_app != NULL)
 	{
 		BApplication::sRunnerMinimumInterval = B_INT64_CONSTANT(-1);
-		bhapi::app->PostMessage(_EVENTS_PENDING_, bhapi::app);
+		bhapi::be_app->PostMessage(_EVENTS_PENDING_, bhapi::be_app);
 	}
 
 	return B_OK;

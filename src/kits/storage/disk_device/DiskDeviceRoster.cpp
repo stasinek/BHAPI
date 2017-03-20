@@ -24,7 +24,7 @@
 
 #include <MessengerPrivate.h>
 
-#include <syscalls.h>
+#include <../include/syscalls.h>
 #include <ddm_userland_interface_defs.h>
 
 

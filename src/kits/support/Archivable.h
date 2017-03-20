@@ -47,7 +47,7 @@ public:
 namespace bhapi {
 #endif /* __cplusplus */
 typedef BArchivable *(*instantiation_func)(const BMessage*);
-BHAPI_IMPEXP bool			validatb_instantiation(const BMessage *from, const char *class_name);
+BHAPI_IMPEXP bool			validate_instantiation(const BMessage *from, const char *class_name);
 BHAPI_IMPEXP instantiation_func	find_instantiation_func(const char *class_name);
 BHAPI_IMPEXP instantiation_func	find_instantiation_func(const BMessage *archive_data);
 #ifdef __cplusplus /* Just for C++ */

@@ -26,7 +26,7 @@
 #endif
 
 #ifdef __HAIKU__
-#	include <sys/sockio.h>
+#	include <../include/sys/sockio.h>
 #	define ETOOMANYREFS EBADF
 
 // inet_*() are just weak symbols
@@ -54,9 +54,9 @@ struct timeval;         /* silence warning */
 struct timezone;        /* silence warning */
 
 #ifdef HAVE_SYS_TIMERS_H
-#include <sys/timers.h>
+#include <../include/sys/timers.h>
 #endif
-#include <limits.h>
+#include <../include/limits.h>
 
 #ifdef ISC_PLATFORM_NEEDTIMESPEC
 #include <time.h>		/* For time_t */
@@ -207,7 +207,7 @@ struct timespec {
 
 /* Pull in host order macros when _XOPEN_SOURCE_EXTENDED is defined. */
 #if defined(__hpux) && defined(_XOPEN_SOURCE_EXTENDED)
-#include <sys/byteorder.h>
+#include <../include/sys/byteorder.h>
 #endif
 
 #endif

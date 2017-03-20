@@ -1,8 +1,9 @@
-#include "bhapi.h"
+﻿#include "bhapi.h"
 
 BHAPI::BHAPI()
 {
 }
+
 BHAPI::~BHAPI()
 {
 }

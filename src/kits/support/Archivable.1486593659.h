@@ -48,7 +48,7 @@ public:
 
 typedef BArchivable *(*bhapi::instantiation_func)(const BMessage*);
 
-_IMPEXP_BHAPI bool			bhapi::validatb_instantiation(const BMessage *from, const char *class_name);
+_IMPEXP_BHAPI bool			bhapi::validate_instantiation(const BMessage *from, const char *class_name);
 _IMPEXP_BHAPI bhapi::instantiation_func	bhapi::find_instantiation_func(const char *class_name);
 _IMPEXP_BHAPI bhapi::instantiation_func	bhapi::find_instantiation_func(const BMessage *archive_data);
 

@@ -20,7 +20,7 @@
 #include <new>
 
 #ifndef HAIKU_TARGET_PLATFORM_LIBBE_TEST
-#	include <syscalls.h>
+#	include <../include/syscalls.h>
 #endif
 
 

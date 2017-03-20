@@ -8,7 +8,7 @@
 
 
 #include <ctype.h>
-#include <string.h>
+
 #include <new>
 
 #include <StringClass.h>

@@ -7,8 +7,8 @@
 #include <errno.h>
 #include <new>
 #include <unistd.h>
-#include <stdio.h>
-#include <sys/stat.h>
+
+#include <../include/sys/stat.h>
 
 #include <Directory.h>
 #include <DiskDevice.h>
@@ -27,7 +27,7 @@
 #include <AutoDeleter.h>
 
 #include <ddm_userland_interface_defs.h>
-#include <syscalls.h>
+#include <../include/syscalls.h>
 
 #include "PartitionDelegate.h"
 

@@ -12,9 +12,9 @@
 #include <Message.h>
 #include <PropertyInfo.h>
 
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+
+
+
 
 
 BPropertyInfo::BPropertyInfo(property_info* propertyInfo, value_info* valueInfo,

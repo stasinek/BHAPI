@@ -7,14 +7,11 @@
 
 /*! Basic data types and defines for the Media Kit. */
 
-
-#include <OS.h>
-#include <ByteOrder.h>
-
 #if defined(__cplusplus)
-#	include <GraphicsDefs.h>
-#	include <Looper.h>
+//#	include <GraphicsDefs.h>
+//#	include <Looper.h>
 #endif
+#include <OS.h>
 using namespace bhapi;
 
 struct media_node;
@@ -806,7 +803,6 @@ status_t shutdown_media_server(bigtime_t timeout = B_INFINITE_TIMEOUT,
 // If there are not enough system resources to enable real-time performance,
 // B_MEDIA_REALTIME_UNAVAILABLE is returned.
 status_t media_realtime_init_image(image_id image, uint32 flags);
-
 
 // Given a thread ID, and an optional indication of what the thread is
 // doing in "flags", prepare the thread for real-time media performance.

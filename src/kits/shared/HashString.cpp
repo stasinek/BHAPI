@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 #include <new>
-#include <string.h>
+
 
 #include "HashStringClass.h"
 

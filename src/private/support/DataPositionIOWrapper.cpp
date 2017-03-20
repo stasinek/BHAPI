@@ -4,7 +4,7 @@
  */
 
 #include "DataPositionIOWrapper.h"
-#include <stdio.h>
+
 
 BDataPositionIOWrapper::BDataPositionIOWrapper(BDataIO* io)
 	:

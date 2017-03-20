@@ -24,7 +24,7 @@
 
 /*! \file */
 
-#include <sys/types.h>
+#include <../include/sys/types.h>
 
 #include <arpa/nameser.h>
 

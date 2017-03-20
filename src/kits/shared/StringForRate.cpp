@@ -5,7 +5,7 @@
 
 #include "StringForRate.h"
 
-#include <stdio.h>
+
 
 #include <SystemCatalog.h>
 

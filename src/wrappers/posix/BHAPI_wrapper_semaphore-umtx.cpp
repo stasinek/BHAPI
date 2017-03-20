@@ -28,13 +28,13 @@
  * --------------------------------------------------------------------------*/
 #ifdef BHAPI_OS_LINUX
 
-#include <stdlib.h>
+
 #include <fcntl.h>
 
 #include <pthread.h>
 #include <semaphore.h>
 
-#include <sys/types.h>
+#include <../include/sys/types.h>
 #include <unistd.h>
 
 #include <time.h>
@@ -44,12 +44,12 @@ extern "C" {
 /* use umtx instead of pshared-semaphore */
 #include <machine/atomic.h"
 #include <ucontext.h"
-#include <sys/thr.h"
-#include <sys/umtx.h"
+#include <../include/sys/thr.h"
+#include <../include/sys/umtx.h"
 } // extern "C"
 
-#include <sys/stat.h"
-#include <sys/mman.h"
+#include <../include/sys/stat.h"
+#include <../include/sys/mman.h"
 
 #include "../kernel/Kernel.h"
 #include "../support/StringClass.h"

@@ -78,8 +78,8 @@ BHAPI_IMPEXP char* strrcasechr(const char *s, int c);
 // bhapi::strdup_dirty(): like bhapi::strdup(), but the result must be free by "delete[]"
 
 #ifdef __cplusplus /* Just for C++ */
-#ifndef BSTRINGARRAY_I
-#define BSTRINGARRAY_I
+#ifndef BSTRINGARRAY_DEF
+#define BSTRINGARRAY_DEF
 class BStringArray;
 #endif
 class BHAPI_IMPEXP BString {
@@ -386,5 +386,5 @@ BHAPI_IMPEXP void printf_int(BString &str, TYPE_INT value,  __be_uint8 _base, in
 BHAPI_IMPEXP  __be_int32 printf_double(BString &str, double value, int precision_width,  __be_int32 *exponent, bool g_style, bool upper_style);
 }
 #endif /* __cplusplus */
-#define BSTRING_I
+#define BSTRING_DEF
 #endif /* BHAPI_STRING_H */

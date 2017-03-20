@@ -13,9 +13,9 @@
 #include <Picture.h>
 
 #include <new>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
+
+
 
 //#define DEBUG 1
 #include <ByteOrder.h>

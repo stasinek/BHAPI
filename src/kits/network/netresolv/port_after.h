@@ -22,22 +22,22 @@
 
 #ifdef __HAIKU__
 	#ifdef _STRING_H_
-		#include <strings.h>
+		#include <../include/strings.h>
 	#endif
 #endif
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <sys/param.h>
-#include <sys/time.h>
+
+#include <../include/sys/types.h>
+#include <../include/sys/socket.h>
+#include <../include/sys/param.h>
+#include <../include/sys/time.h>
 #if (!defined(BSD)) || (BSD < 199306)
-#include <sys/bitypes.h>
+#include <../include/sys/bitypes.h>
 #endif
 #ifdef HAVE_INTTYPES_H
 #include <inttypes.h>
 #endif
 #ifdef HAVE_SYS_SELECT_H
-#include <sys/select.h>
+#include <../include/sys/select.h>
 #endif /* HAVE_SYS_SELECT_H */
 
 #ifdef REENABLE_SEND
@@ -461,7 +461,7 @@ unsigned long strtoul(const char *, char **, int);
 #endif
 
 #ifdef NEED_SUN4PROTOS
-#include <stdarg.h>
+#include <../include/stdarg.h>
 #ifndef __SIZE_TYPE__
 #define __SIZE_TYPE__ int
 #endif

@@ -33,8 +33,8 @@
 #include "../support/SimpleLocker.h"
 #include "../support/StringClass.h"
 
-#include <stdarg.h>
-#include <stdio.h>
+#include <../include/stdarg.h>
+
 
 static BSimpleLocker _e_net_locker(true);
 static bool _e_net_enabled = false;

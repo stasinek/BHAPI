@@ -29,7 +29,7 @@
 
 #ifdef LINUX
 
-#include <stdlib.h>
+
 
 #include "BHAPI_wrapper_x11.h"
 
@@ -96,7 +96,7 @@ EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine,  __be_int32 x,  
 
 	XClassHint class_hint;
 	class_hint.res_name = NULL;
-	class_hint.res_class = (char*)bhapi::app->Signature();
+	class_hint.res_class = (char*)bhapi::be_app->Signature();
 
 	XSetWMProperties(fEngine->xDisplay, xWindow, NULL, NULL, NULL, 0, &size_hints, &wm_hints, &class_hint);
 
@@ -393,7 +393,7 @@ EXGraphicsWindow::SetTitle(const char *title)
 
 	XClassHint class_hint;
 	class_hint.res_name = (char*)title;
-	class_hint.res_class = (char*)bhapi::app->Signature();
+	class_hint.res_class = (char*)bhapi::be_app->Signature();
 
 	XSetClassHint(fEngine->xDisplay, xWindow, &class_hint);
 

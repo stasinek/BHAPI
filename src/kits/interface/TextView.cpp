@@ -43,7 +43,7 @@
 #include "../support/UTF8.h"
 #include "../storage/File.h"
 
-#include <stdlib.h>
+
 
 namespace bhapi {
 typedef struct text_line {
@@ -1124,7 +1124,7 @@ BTextView::SetText(BFile *file,  __be_int64 fileOffset,  __be_int32 length, cons
     if(buffer == NULL) return;
     bzero(buffer, (size_t)length + 1);
 
-     __be_size_t nRead = file->ReadAt(fileOffset, buffer, (size_t)length);
+     ssize_t nRead = file->ReadAt(fileOffset, buffer, (size_t)length);
     if(nRead > 0) Insert(0, buffer, (__be_int32)nRead, runs, utf8);
 
     free(buffer);
@@ -1977,10 +1977,10 @@ BTextView::Copy(BClipboard *clipboard) const
          __be_int32 runsBytes = 0;
         bhapi::text_run_array *runs = RunArray(fSelectStart, fSelectEnd, &runsBytes, false);
         clipMsg->AddData("text/plain", B_MIME_TYPE,
-                 fText.String() + fSelectStart, (__be_size_t)(fSelectEnd - fSelectStart));
+                 fText.String() + fSelectStart, (ssize_t)(fSelectEnd - fSelectStart));
         if(runs != NULL)
         {
-            clipMsg->AddData("text/runs", B_MIME_TYPE, runs, (__be_size_t)runsBytes);
+            clipMsg->AddData("text/runs", B_MIME_TYPE, runs, (ssize_t)runsBytes);
             free(runs);
         }
 
@@ -2009,13 +2009,13 @@ BTextView::Paste(BClipboard *clipboard)
     if((clipMsg = clipboard->Data()) != NULL)
     {
         const char *text = NULL;
-         __be_size_t len = 0;
+         ssize_t len = 0;
         if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &len)) str.SetTo(text, (__be_int32)len);
 
         void *tmp = NULL;
         if(!(fStylable == false ||
              clipMsg->FindData("text/runs", B_MIME_TYPE, (const void**)&tmp, &len) == false ||
-             len < (__be_size_t)sizeof(bhapi::text_run_array) ||
+             len < (ssize_t)sizeof(bhapi::text_run_array) ||
              ((size_t)len - sizeof(bhapi::text_run_array)) % sizeof(bhapi::text_run) != 0 ||
              (runs = (bhapi::text_run_array*)malloc((size_t)len)) == NULL))
         {
@@ -2056,9 +2056,9 @@ BTextView::KeyDown(const char *bytes,  __be_int32 numBytes)
 
     if(!(numBytes != 1 || msg->what != B_KEY_DOWN || !IsEnabled() || !IsEditable() || !(modifiers & B_CONTROL_KEY)))
     {
-        if(*bytes == 'c' || *bytes == 'C') {Copy(&bhapi::clipboard); return;}
-        else if(*bytes == 'x' || *bytes == 'X') {Cut(&bhapi::clipboard); return;}
-        else if(*bytes == 'v' || *bytes == 'V') {Paste(&bhapi::clipboard); return;}
+        if(*bytes == 'c' || *bytes == 'C') {Copy(&bhapi::be_clipboard); return;}
+        else if(*bytes == 'x' || *bytes == 'X') {Cut(&bhapi::be_clipboard); return;}
+        else if(*bytes == 'v' || *bytes == 'V') {Paste(&bhapi::be_clipboard); return;}
     }
 
     if((modifiers & B_CONTROL_KEY) || (modifiers & B_COMMAND_KEY) ||

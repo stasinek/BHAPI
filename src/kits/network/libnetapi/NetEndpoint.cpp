@@ -11,10 +11,10 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <new>
-#include <string.h>
-#include <sys/socket.h>
-#include <sys/time.h>
-#include <sys/types.h>
+
+#include <../include/sys/socket.h>
+#include <../include/sys/time.h>
+#include <../include/sys/types.h>
 #include <unistd.h>
 
 

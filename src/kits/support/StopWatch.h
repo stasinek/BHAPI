@@ -59,6 +59,6 @@ class BStopWatch {
         uint32		_reserved[2];
         bool		fSilent;
 };
-#define BSTOPWATCH_I
+#define BSTOPWATCH_DEF
 #endif // __cplusplus
 #endif // BHAPI_STOP_WATCH_H

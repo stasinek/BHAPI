@@ -33,8 +33,8 @@
 #include <Haiku.h>
 #include "DataIO.h"
 #ifdef __cplusplus /* Just for C++ */
-#ifndef BSTRING_I
-#define BSTRING_I
+#ifndef BSTRING_DEF
+#define BSTRING_DEF
 class BString;
 #endif
 class BHAPI_IMPEXP BStreamIO : public BDataIO {
@@ -42,8 +42,8 @@ public:
     BStreamIO();
     virtual ~BStreamIO();
 
-    virtual  __be_size_t		Read(void *buffer, size_t size);
-    virtual  __be_size_t		Write(const void *buffer, size_t size);
+    virtual  ssize_t		Read(void *buffer, size_t size);
+    virtual  ssize_t		Write(const void *buffer, size_t size);
 
     BStreamIO 		&operator<<(__be_int8 value);
     BStreamIO 		&operator<<(__be_uint8 value);

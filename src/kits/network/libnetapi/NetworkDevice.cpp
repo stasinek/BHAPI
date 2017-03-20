@@ -9,8 +9,8 @@
 #include <errno.h>
 #include <net/if.h>
 #include <net/if_media.h>
-#include <stdio.h>
-#include <sys/sockio.h>
+
+#include <../include/sys/sockio.h>
 
 #include <Messenger.h>
 

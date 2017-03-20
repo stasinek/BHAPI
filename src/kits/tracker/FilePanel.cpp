@@ -43,7 +43,7 @@ All rights reserved.
 #include <Window.h>
 #include <Looper.h>
 #include <Debug.h>
-#include <posix/sys/resource.h>
+#include <musl/sys/resource.h>
 
 
 // prototypes for some private kernel calls that will some day be public

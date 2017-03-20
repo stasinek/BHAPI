@@ -128,8 +128,8 @@ typedef  __be_uint32	type_code;
 typedef  __be_uint32	b_perform_code;
 typedef  __be_int64	bigtime_t;
 typedef  __be_int64	__be_thread_id;
-typedef size_t	__be_addr_t;
-typedef size_t	__be_size_t;
+typedef size_t	ptr_t;
+typedef size_t	ssize_t;
 
 enum {
     B_ANY_TYPE                  = 'ANYT',

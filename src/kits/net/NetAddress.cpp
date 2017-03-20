@@ -39,7 +39,7 @@
 #	include <netinet/in.h>
 
 #	ifdef __BEOS__
-#		include <sys/socket.h>
+#		include <../include/sys/socket.h>
 #		ifdef BONE_VERSION
 #			include <arpa/inet.h>
 #		endif
@@ -128,7 +128,7 @@ BNetAddress::Archive(BMessage *into, bool deep) const
 BArchivable*
 BNetAddress::Instantiate(const BMessage *from)
 {
-	if(bhapi::validatb_instantiation(from, "BNetAddress"))
+	if(bhapi::validate_instantiation(from, "BNetAddress"))
 		return new BNetAddress(from);
 	return NULL;
 }

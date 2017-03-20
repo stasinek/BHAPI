@@ -34,7 +34,7 @@
 #include "../support/StringClass.h"
 
 
-#include <stdlib.h>
+
 using namespace bhapi;
 
 BPixmap::BPixmap()

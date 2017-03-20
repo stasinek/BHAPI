@@ -28,7 +28,7 @@
  * --------------------------------------------------------------------------*/
 #ifdef LINUX
 
-#include <stdlib.h>
+
 #include <locale.h>
 
 #include "BHAPI_wrapper_x11.h"
@@ -49,22 +49,22 @@ static void b_x11_clipboard_changed(const char *aStr)
 	if(aStr == NULL || *aStr == 0) return;
 
 	BMessage *clipMsg = NULL;
-	if(bhapi::clipboard.Lock())
+	if(bhapi::be_clipboard.Lock())
 	{
-		if((clipMsg = bhapi::clipboard.Data()) != NULL)
+		if((clipMsg = bhapi::be_clipboard.Data()) != NULL)
 		{
 			const char *text = NULL;
-			__be_size_t textLen = 0;
+			ssize_t textLen = 0;
 			if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
-			   text == NULL || textLen != (__be_size_t)strlen(aStr) || strncmp(text, aStr, (size_t)textLen) != 0)
+			   text == NULL || textLen != (ssize_t)strlen(aStr) || strncmp(text, aStr, (size_t)textLen) != 0)
 			{
-				bhapi::clipboard.Clear();
+				bhapi::be_clipboard.Clear();
 				clipMsg->AddBool("BHAPI:msg_from_gui", true);
 				clipMsg->AddData("text/plain", B_MIME_TYPE, aStr, strlen(aStr));
-				bhapi::clipboard.Commit();
+				bhapi::be_clipboard.Commit();
 			}
 		}
-		bhapi::clipboard.Unlock();
+		bhapi::be_clipboard.Unlock();
 	}
 }
 
@@ -86,14 +86,14 @@ public:
 		do
 		{
 			const char *text = NULL;
-			__be_size_t textLen = 0;
+			ssize_t textLen = 0;
 
 			BMessage *msg;
 
-			bhapi::clipboard.Lock();
-			if(!((msg = bhapi::clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
+			bhapi::be_clipboard.Lock();
+			if(!((msg = bhapi::be_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
 				msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
-			bhapi::clipboard.Unlock();
+			bhapi::be_clipboard.Unlock();
 
 			if(textLen <= 0) break;
 
@@ -296,18 +296,18 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				{
 					BString aStr;
 
-					if(bhapi::clipboard.Lock())
+					if(bhapi::be_clipboard.Lock())
 					{
 						BMessage *clipMsg = NULL;
-						if((clipMsg = bhapi::clipboard.Data()) != NULL)
+						if((clipMsg = bhapi::be_clipboard.Data()) != NULL)
 						{
 							const char *text = NULL;
-							__be_size_t textLen = 0;
+							ssize_t textLen = 0;
 							clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 							if(textLen > 0) aStr.SetTo(text, (__be_int32)textLen);
 						}
 					}
-					bhapi::clipboard.Unlock();
+					bhapi::be_clipboard.Unlock();
 
 					if(aStr.Length() > 0 && event->xselectionrequest.target == x11Engine->atomCompoundText)
 					{
@@ -720,7 +720,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				// TODO: modifiers, clicks
 
 				message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-				etkWinMsgr = BMessenger(bhapi::app);
+				etkWinMsgr = BMessenger(bhapi::be_app);
 				etkWinMsgr.SendMessage(&message);
 			}
 			break;
@@ -751,7 +751,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				// TODO: modifiers
 
 				message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-				etkWinMsgr = BMessenger(bhapi::app);
+				etkWinMsgr = BMessenger(bhapi::be_app);
 				etkWinMsgr.SendMessage(&message);
 			}
 			break;
@@ -775,7 +775,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				message.AddInt32("buttons", buttons);
 
 				message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-				etkWinMsgr = BMessenger(bhapi::app);
+				etkWinMsgr = BMessenger(bhapi::be_app);
 				etkWinMsgr.SendMessage(&message);
 			}
 			break;
@@ -1039,7 +1039,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				}
 
 				message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-				etkWinMsgr = BMessenger(bhapi::app);
+				etkWinMsgr = BMessenger(bhapi::be_app);
 				etkWinMsgr.SendMessage(&message);
 
 				bool dealed = true;
@@ -1223,18 +1223,18 @@ status_t
 EXGraphicsEngine::Initalize()
 {
 	BMessageFilter *clipboardFilter = new EX11ClipboardMessageFilter(this);
-	bhapi::app->Lock();
-	bhapi::app->AddFilter(clipboardFilter);
-	bhapi::app->Unlock();
+	bhapi::be_app->Lock();
+	bhapi::be_app->AddFilter(clipboardFilter);
+	bhapi::be_app->Unlock();
 
 	Lock();
 	if(fX11Thread != NULL)
 	{
 		Unlock();
 
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -1251,9 +1251,9 @@ EXGraphicsEngine::Initalize()
 		Unlock();
 		BHAPI_WARNING("[GRAPHICS]: %s --- Unable to open X11 display!", __PRETTY_FUNCTION__);
 
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -1348,9 +1348,9 @@ EXGraphicsEngine::Initalize()
 
 		BHAPI_WARNING("[GRAPHICS]: %s --- Unable to spawn graphics thread!", __PRETTY_FUNCTION__);
 
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -1421,9 +1421,9 @@ EXGraphicsEngine::Cancel()
 
 	if(clipboardFilter != NULL)
 	{
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 	}
 }

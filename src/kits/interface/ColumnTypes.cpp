@@ -14,7 +14,7 @@
 #include <View.h>
 
 #include <parsedate.h>
-#include <stdio.h>
+
 
 
 #define kTEXT_MARGIN	8

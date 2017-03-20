@@ -32,17 +32,17 @@
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 //-----------------------------------------------------------------------------
-#ifndef BMESSENGER_I
+#ifndef BMESSENGER_DEF
 class BMessenger;
-#define BMESSENGER_I
+#define BMESSENGER_DEF
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BMESSAGE_I
+#ifndef BMESSAGE_DEF
 class BMessage;
-#define BMESSAGE_I
+#define BMESSAGE_DEF
 #endif
 //-----------------------------------------------------------------------------
-#include <Haiku.h>
+#include <OS.h>
 //-----------------------------------------------------------------------------
 class BHAPI_IMPEXP BMessageRunner {
 public:
@@ -85,7 +85,7 @@ private:
 //-----------------------------------------------------------------------------
 #endif /* __cplusplus */
 //-----------------------------------------------------------------------------
-#define BMESSAGERUNNER_I
+#define BMESSAGERUNNER_DEF
 #endif /* BHAPI_MESSAGE_RUNNER_H */
 //-----------------------------------------------------------------------------
 

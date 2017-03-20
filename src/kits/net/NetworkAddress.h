@@ -2,19 +2,21 @@
  * Copyright 2010-2011, Haiku, Inc. All Rights Reserved.
  * Distributed under the terms of the MIT License.
  */
-#ifndef _NETWORK_ADDRESS_H
-#define _NETWORK_ADDRESS_H
+#ifndef BHAPI_NETWORK_ADDRESS_H
+#define BHAPI_NETWORK_ADDRESS_H
 
-
+#ifndef BHAPI_OS_WIN32
 #include <posix/net/if_dl.h>
 #include <posix/netinet/in.h>
 #include <posix/netinet6/in6.h>
 #include <posix/sys/socket.h>
+#else
+#include <winsock2.h>
+#endif
 
 #include <Archivable.h>
 #include <NetworkAddressResolver.h>
 #include <StringClass.h>
-
 
 class BNetworkAddress : public BFlattenable {
 public:

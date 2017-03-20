@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -31,6 +31,7 @@
 #define BHAPI_BYTE_ORDER_H
 
 #include <Haiku.h>
+
 #ifdef __cplusplus /* Just for C++ */
 extern "C" {
 namespace bhapi {
@@ -43,7 +44,7 @@ typedef enum swap_action {
     B_SWAP_ALWAYS
 } swap_action;
 
-BHAPI_IMPEXP status_t	swap_data(type_code type, void *data, size_t len, swap_action action);
+BHAPI_IMPEXP status_t       swap_data(type_code type, void *data, size_t len, swap_action action);
 BHAPI_IMPEXP bool			is_type_swapped(type_code type);
 BHAPI_IMPEXP float			swap_float(float value);
 BHAPI_IMPEXP double			swap_double(double value);

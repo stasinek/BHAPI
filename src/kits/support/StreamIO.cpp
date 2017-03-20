@@ -57,15 +57,15 @@ BStreamIO::~BStreamIO()
 }
 
 
-__be_size_t BStreamIO::Read(void *a_buffer, size_t size)
+ssize_t BStreamIO::Read(void *a_buffer, size_t size)
 {
-    return (__be_size_t)B_ERROR;
+    return (ssize_t)B_ERROR;
 }
 
 
-__be_size_t BStreamIO::Write(const void *a_buffer, size_t size)
+ssize_t BStreamIO::Write(const void *a_buffer, size_t size)
 {
-    return (__be_size_t)B_ERROR;
+    return (ssize_t)B_ERROR;
 }
 
 
@@ -208,12 +208,12 @@ BStreamIO::operator<<(BStreamIO &stream)
         return operator<<(&stream == &endl ? '\n' : ' ');
 
      __be_int8 buf[512];
-     __be_size_t len;
+     ssize_t len;
 
     bzero(buf, sizeof(buf));
     if((len = stream.Read(&buf[0], sizeof(buf))) > 0)
     {
-         __be_size_t nWritten;
+         ssize_t nWritten;
         while((nWritten = Write(&buf[0], (size_t)len)) > 0)
         {
             if  (len <= nWritten) break;

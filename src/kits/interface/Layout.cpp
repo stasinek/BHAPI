@@ -9,7 +9,7 @@
 
 #include <algorithm>
 #include <new>
-#include <syslog.h>
+#include <../include/syslog.h>
 
 #include <AutoDeleter.h>
 #include <LayoutContext.h>

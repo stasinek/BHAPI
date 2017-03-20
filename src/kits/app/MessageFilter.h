@@ -34,23 +34,28 @@
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 //-----------------------------------------------------------------------------
-#ifndef BLOOPER_I
-#define BLOOPER_I
+#ifndef BLOOPER_DEF
+#define BLOOPER_DEF
 class BLooper;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BMESSAGE_I
-#define BMESSAGE_I
+#ifndef BMESSAGE_DEF
+#define BMESSAGE_DEF
 class BMessage;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BMESSAGEQUEUE_I
-#define BMESSAGEQUEUE_I
+#ifndef BMESSAGEQUEUE_DEF
+#define BMESSAGEQUEUE_DEF
 class BMessageQueue;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BHANDLER_I
-#define BHANDLER_I
+#ifndef BMESSAGEFILTER_DEF
+#define BMESSAGEFILTER_DEF
+class BMessageFilter;
+#endif
+//-----------------------------------------------------------------------------
+#ifndef BHANDLER_DEF
+#define BHANDLER_DEF
 class BHandler;
 #endif
 //-----------------------------------------------------------------------------
@@ -120,7 +125,7 @@ private:
 //-----------------------------------------------------------------------------
 #endif /* __cplusplus */
 //-----------------------------------------------------------------------------
-#define BMESSAGEFILTER_I
+#define BMESSAGEFILTER_DEF
 #endif /* BHAPI_MESSAGE_FILTER_H */
 //-----------------------------------------------------------------------------
 

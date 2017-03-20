@@ -7,8 +7,8 @@
 
 #include <Variant.h>
 
-#include <stdlib.h>
-#include <string.h>
+
+
 
 #include <ByteOrder.h>
 #include <Message.h>

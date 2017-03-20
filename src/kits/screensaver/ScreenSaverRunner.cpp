@@ -12,7 +12,7 @@
 
 #include "ScreenSaverRunner.h"
 
-#include <stdio.h>
+
 
 #include <DirectWindow.h>
 #include <FindDirectory.h>

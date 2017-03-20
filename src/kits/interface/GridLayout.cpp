@@ -10,7 +10,7 @@
 
 #include <algorithm>
 #include <new>
-#include <string.h>
+
 
 #include <ControlLook.h>
 #include <LayoutItem.h>

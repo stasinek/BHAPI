@@ -13,7 +13,7 @@
 #include <mime/database_support.h>
 
 #include <new>
-#include <stdio.h>
+
 
 #define DBG(x) x
 //#define DBG(x)

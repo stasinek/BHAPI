@@ -27,7 +27,7 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <new>
-#include <string.h>
+
 
 
 BNetAddress::BNetAddress(const char* hostname, unsigned short port)

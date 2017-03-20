@@ -6,10 +6,10 @@
 
 #include <ArgumentVector.h>
 
-#include <stdlib.h>
-#include <string.h>
 
-#include <string>
+
+
+#include <../include/string>
 #include <vector>
 
 

@@ -1209,7 +1209,7 @@ BFilePanelWindow::MessageReceived(BMessage *msg)
 				}
 			}
 
-            msgr = (fTarget == NULL ? &bhapi::app_messenger : fTarget);
+            msgr = (fTarget == NULL ? &bhapi::be_app_messenger : fTarget);
 			if(fMessage) aMsg = new BMessage(*fMessage);
             else aMsg = new BMessage(fMode == B_OPEN_PANEL ? (__be_uint32)B_REFS_RECEIVED : (__be_uint32)B_SAVE_REQUESTED);
 			aMsg->AddString("directory", fPath.Path());
@@ -1231,7 +1231,7 @@ BFilePanelWindow::MessageReceived(BMessage *msg)
 			break;
 
 		case B_CANCEL:
-            msgr = (fTarget == NULL ? &bhapi::app_messenger : fTarget);
+            msgr = (fTarget == NULL ? &bhapi::be_app_messenger : fTarget);
 			if(fMessage)
 			{
 				aMsg = new BMessage(*fMessage);

@@ -41,8 +41,8 @@
 #include "../../private/support/Token.h"
 
 
-#include <stdio.h>
-#include <stdlib.h>
+
+
 
 status_t BMessage::BGetInfo(type_code type,  __be_int32 index,
            char **nameFound, type_code *typeFound,  __be_int32 *countFound) const
@@ -70,7 +70,7 @@ status_t BMessage::BGetInfo(type_code type,  __be_int32 index,
 
 
 status_t BMessage::BFindData(const char *name, type_code type,  __be_int32 index,
-            const void **data,  __be_size_t *numBytes) const
+            const void **data,  ssize_t *numBytes) const
 {
     if(index < 0) return B_BAD_INDEX;
 
@@ -97,7 +97,7 @@ status_t BMessage::BFindData(const char *name, type_code type,  __be_int32 index
 
 
 status_t BMessage::BFindData(const char *name, type_code type,
-            const void **data,  __be_size_t *numBytes) const
+            const void **data,  ssize_t *numBytes) const
 {
     return BFindData(name, type, 0, data, numBytes);
 }
@@ -183,7 +183,7 @@ BMessage& BMessage::operator=(const BMessage &msg)
     }
     else if(msg.fTeam == bhapi::get_current_team_id())
     {
-        fSource = bhapi::open_port_by_source(msg.fSource);
+        fSource = (port_id)bhapi::open_port_by_source((void*)(msg.fSource));
     }
 
     fTeam = msg.fTeam;
@@ -201,7 +201,7 @@ size_t BMessage::FlattenedSize() const
     size += sizeof(__be_int64); // fTeam
     size += sizeof(__be_uint64) + sizeof(bigtime_t); // fTargetToken + fTargetTokenTimestamp
     size += sizeof(__be_uint64) + sizeof(bigtime_t); // fReplyToken + fReplyTokenTimestamp
-    size += sizeof(__be_addr_t); // fSource
+    size += sizeof(void*); // fSource
     size += sizeof(bool); // fIsReply
 
     for(__be_int32 k = 0; k < fObjectsList.CountItems(); k++)
@@ -223,7 +223,7 @@ size_t BMessage::FlattenedSize() const
 
                 // msg->_object_t
                 size_t objectSize = sizeof(size_t) + nameLen + sizeof(type_code) + sizeof(bool) + sizeof(size_t);
-                size_t dataLen = Object->fixed_size ? Object->bytes : sizeof(__be_addr_t);
+                size_t dataLen = Object->fixed_size ? Object->bytes : sizeof(void*);
                 objectSize += dataLen;
 
                 size += objectSize;
@@ -239,13 +239,13 @@ bool BMessage::Flatten(char *buffer, size_t bufferSize) const
 {
     if(buffer == NULL ||
        bufferSize < sizeof(size_t) + sizeof(__be_uint32) + sizeof(__be_uint64) +
-            sizeof(__be_int64) + 2 * (sizeof(__be_uint64) + sizeof(bigtime_t)) + sizeof(__be_addr_t) + sizeof(bool)) return false;
+            sizeof(__be_int64) + 2 * (sizeof(__be_uint64) + sizeof(bigtime_t)) + sizeof(void*) + sizeof(bool)) return false;
 
     size_t size = 0;
 
     // msg->what
     size += sizeof(size_t) + sizeof(__be_uint32) + sizeof(__be_uint64) +
-        sizeof(__be_int64) + 2 * (sizeof(__be_uint64) + sizeof(bigtime_t)) + sizeof(__be_addr_t) + sizeof(bool);
+        sizeof(__be_int64) + 2 * (sizeof(__be_uint64) + sizeof(bigtime_t)) + sizeof(void*) + sizeof(bool);
     char *dst = buffer;
     dst += sizeof(size_t);
     memcpy(dst, &what, sizeof(__be_uint32)); dst += sizeof(__be_uint32);
@@ -262,8 +262,8 @@ bool BMessage::Flatten(char *buffer, size_t bufferSize) const
     memcpy(dst, &fReplyTokenTimestamp, sizeof(bigtime_t)); dst += sizeof(bigtime_t);
 
     // fSource
-     __be_addr_t sourcb_address = reinterpret_cast<be_addr_t>(fSource);
-    memcpy(dst, &sourcb_address, sizeof(__be_addr_t)); dst += sizeof(__be_addr_t);
+     void* sourcb_address = reinterpret_cast<void*>(fSource);
+    memcpy(dst, &sourcb_address, sizeof(void*)); dst += sizeof(void*);
 
     // fIsReply
     memcpy(dst, &fIsReply, sizeof(bool)); dst += sizeof(bool);
@@ -290,7 +290,7 @@ bool BMessage::Flatten(char *buffer, size_t bufferSize) const
                 if(!Object) continue;
 
                 // msg->_object_t
-                size_t dataLen = Object->fixed_size ? Object->bytes : sizeof(__be_addr_t);
+                size_t dataLen = Object->fixed_size ? Object->bytes : sizeof(void*);
                 size_t objectSize = sizeof(size_t) + nameLen + sizeof(type_code) + sizeof(bool) + sizeof(size_t) + dataLen;
                 size += objectSize;
 
@@ -309,7 +309,7 @@ bool BMessage::Flatten(char *buffer, size_t bufferSize) const
                     }
                     else
                     {
-                         __be_addr_t address = reinterpret_cast<be_addr_t>(Object->data);
+                         void* address = reinterpret_cast<void*>(Object->data);
                         memcpy(dst, &address, dataLen);
                     }
 
@@ -334,7 +334,7 @@ bool BMessage::Unflatten(const char *buffer, size_t bufferSize)
 {
     if(buffer == NULL ||
        bufferSize < sizeof(size_t) + sizeof(__be_uint32) + sizeof(__be_uint64) +
-            sizeof(__be_int64) + 2 * (sizeof(__be_uint64) + sizeof(bigtime_t)) + sizeof(__be_addr_t) + sizeof(bool)) return false;
+            sizeof(__be_int64) + 2 * (sizeof(__be_uint64) + sizeof(bigtime_t)) + sizeof(void*) + sizeof(bool)) return false;
 
     const char *src = buffer;
     BMessage msg;
@@ -360,8 +360,8 @@ bool BMessage::Unflatten(const char *buffer, size_t bufferSize)
     memcpy(&msg.fReplyTokenTimestamp, src, sizeof(bigtime_t)); src += sizeof(bigtime_t); bufferSize -= sizeof(bigtime_t);
 
     // fSource
-     __be_addr_t sourcb_address;
-    memcpy(&sourcb_address, src, sizeof(__be_addr_t)); src += sizeof(__be_addr_t); bufferSize -= sizeof(__be_addr_t);
+     void* sourcb_address;
+    memcpy(&sourcb_address, src, sizeof(void*)); src += sizeof(void*); bufferSize -= sizeof(void*);
 
     // fIsReply
     memcpy(&msg.fIsReply, src, sizeof(bool)); src += sizeof(bool); bufferSize -= sizeof(bool);
@@ -409,10 +409,10 @@ bool BMessage::Unflatten(const char *buffer, size_t bufferSize)
         {
             if(!fixed_size)
             {
-                size_t dataLen = sizeof(__be_addr_t);
+                size_t dataLen = sizeof(void*);
                 if(bytes != dataLen || bufferSize < dataLen) {if(name) free(name); return false;}
 
-                 __be_addr_t address = 0;
+                 void* address = 0;
                 memcpy(&address, src, dataLen);
                 data = reinterpret_cast<void*>(address);
             }
@@ -1135,14 +1135,14 @@ BMessage::AddMessenger(const char *name, const BMessenger &msgr)
 
 
 bool
-BMessage::FindData(const char *name, type_code type, const void **data,  __be_size_t *numBytes) const
+BMessage::FindData(const char *name, type_code type, const void **data,  ssize_t *numBytes) const
 {
     return FindData(name, type, 0, data, numBytes);
 }
 
 
 bool
-BMessage::FindData(const char *name, type_code type,  __be_int32 index, const void **data,  __be_size_t *numBytes) const
+BMessage::FindData(const char *name, type_code type,  __be_int32 index, const void **data,  ssize_t *numBytes) const
 {
     if(!name) return false;
 
@@ -1159,7 +1159,7 @@ BMessage::FindData(const char *name, type_code type,  __be_int32 index, const vo
     if(numBytes)
     {
         if(Object->fixed_size)
-            *numBytes = (__be_size_t)Object->bytes;
+            *numBytes = (ssize_t)Object->bytes;
         else
             *numBytes = -1;
     }
@@ -1169,7 +1169,7 @@ BMessage::FindData(const char *name, type_code type,  __be_int32 index, const vo
 
 
 bool
-BMessage::FindData(__be_int32 nameIndex,  __be_int32 typeIndex,  __be_int32 index, const void **data,  __be_size_t *numBytes) const
+BMessage::FindData(__be_int32 nameIndex,  __be_int32 typeIndex,  __be_int32 index, const void **data,  ssize_t *numBytes) const
 {
     list_data *ldata = (list_data*)fObjectsList.ItemAt(nameIndex);
     if(!ldata) return false;
@@ -1184,7 +1184,7 @@ BMessage::FindData(__be_int32 nameIndex,  __be_int32 typeIndex,  __be_int32 inde
     if(numBytes)
     {
         if(Object->fixed_size)
-            *numBytes = (__be_size_t)Object->bytes;
+            *numBytes = (ssize_t)Object->bytes;
         else
             *numBytes = -1;
     }
@@ -2111,9 +2111,9 @@ bool
 BMessage::IsSourceWaiting() const
 {
     if(fSource == NULL) return false;
-    void *tmpPort = bhapi::open_port_by_source(fSource);
+    void *tmpPort = bhapi::open_port_by_source((void*)fSource);
     if(tmpPort == NULL) return false;
-    bhapi::delete_port(tmpPort);
+    bhapi::delete_port((port_id)tmpPort);
     return true;
 }
 
@@ -2158,7 +2158,7 @@ BMessage::SendReply(const BMessage *message, BHandler *replyHandler, bigtime_t s
             }
 
             retVal = (bhapi::port_count(fSource) > 0 ?
-                    B_DUPLICATE_REPLY : BMessenger::_SendMessageToPort(fSource, message, B_TIMEOUT, sendTimeout));
+                    B_DUPLICATE_REPLY : BMessenger::_SendMessageToPort((void*)fSource, message, B_TIMEOUT, sendTimeout));
         }
         else
         {

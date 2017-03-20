@@ -74,6 +74,6 @@ inline void BStringView::SetText(const BString &text)
 }
 #endif // BHAPI_BUILD_LIBRARY
 #endif /* __cplusplus */
-#define BSTRINGVIEW_I
+#define BSTRINGVIEW_DEF
 #endif /* BHAPI_STRING_VIEW_H */
 

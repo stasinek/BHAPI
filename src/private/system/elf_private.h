@@ -1,20 +1,16 @@
-/*
+﻿/*
  * Copyright 2002-2015 Haiku, Inc. All rights reserved.
  * Distributed under the terms of the MIT License.
  *
  * Copyright 2001 Travis Geiselbrecht. All rights reserved.
  * Distributed under the terms of the NewOS License.
  */
-#ifndef _ELF_PRIVATE_H
-#define _ELF_PRIVATE_H
+#ifndef BHAPI_ELF_PRIVATE_H
+#define BHAPI_ELF_PRIVATE_H
 
-
-#include <os/kernel/elf.h>
-
-#include <Haiku.h>
-
+#include <kernel/elf.h>
 #include <arch_elf.h>
-
+#include <Haiku.h>
 
 // Determine the correct ELF types to use for the architecture
 
@@ -24,7 +20,7 @@
 #	define _ELF_TYPE(type)	Elf32_##type
 #endif
 #define DEFINE_ELF_TYPE(type, name) \
-	typedef _ELF_TYPE(type) name
+    typedef _ELF_TYPE(type) name
 
 DEFINE_ELF_TYPE(Ehdr, elf_ehdr);
 DEFINE_ELF_TYPE(Phdr, elf_phdr);
@@ -48,6 +44,5 @@ typedef uint16 elf_versym;
 #else
 #	define ELF_CLASS	ELFCLASS32
 #endif
-
 
 #endif	/* _ELF_PRIVATE_H_ */

@@ -48,8 +48,8 @@ All rights reserved.
 #include <typeinfo>
 
 #include <algorithm>
-#include <stdio.h>
-#include <stdlib.h>
+
+
 
 #include <Application.h>
 #include <Bitmap.h>

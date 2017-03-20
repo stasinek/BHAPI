@@ -11,7 +11,7 @@
 #include <sniffer/DisjList.h>
 #include <sniffer/Rule.h>
 #include <DataIO.h>
-#include <stdio.h>
+
 
 using namespace BPrivate::Storage::Sniffer;
 

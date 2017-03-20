@@ -39,8 +39,8 @@
 #define __USE_FILE_OFFSET64
 #endif
 
-#include <sys/types.h>
-#include <sys/stat.h>
+#include <../include/sys/types.h>
+#include <../include/sys/stat.h>
 #include <fcntl.h>
 
 #ifndef _WIN32
@@ -290,7 +290,7 @@ BFile::IsWritable() const
 }
 
 
-__be_size_t
+ssize_t
 BFile::Read(void *buffer, size_t size)
 {
     if(!IsReadable() || buffer == NULL) return -1;
@@ -299,24 +299,24 @@ BFile::Read(void *buffer, size_t size)
 #else
     DWORD nRead = (DWORD)size;
     if(ReadFile((HANDLE)fFD, buffer, nRead, &nRead, NULL) == 0) return -1;
-    return((__be_size_t)nRead);
+    return((ssize_t)nRead);
 #endif
 }
 
 
-__be_size_t
+ssize_t
 BFile::ReadAt(__be_int64 pos, void *buffer, size_t size)
 {
     if(!IsReadable() || buffer == NULL) return -1;
     __be_int64 savePosition = Position();
     if(Seek(pos, B_SEEK_SET) < B_INT64_CONSTANT(0)) return -1;
-    __be_size_t retVal = Read(buffer, size);
+    ssize_t retVal = Read(buffer, size);
     Seek(savePosition, B_SEEK_SET);
     return retVal;
 }
 
 
-__be_size_t
+ssize_t
 BFile::Write(const void *buffer, size_t size)
 {
     if(!IsWritable() || buffer == NULL) return -1;
@@ -325,18 +325,18 @@ BFile::Write(const void *buffer, size_t size)
 #else
     DWORD nWrote = (DWORD)size;
     if(WriteFile((HANDLE)fFD, buffer, nWrote, &nWrote, NULL) == 0) return -1;
-    return((__be_size_t)nWrote);
+    return((ssize_t)nWrote);
 #endif
 }
 
 
-__be_size_t
+ssize_t
 BFile::WriteAt(__be_int64 pos, const void *buffer, size_t size)
 {
     if(!IsWritable() || buffer == NULL) return -1;
     __be_int64 savePosition = Position();
     if(Seek(pos, B_SEEK_SET) < B_INT64_CONSTANT(0)) return -1;
-    __be_size_t retVal = Write(buffer, size);
+    ssize_t retVal = Write(buffer, size);
     Seek(savePosition, B_SEEK_SET);
     return retVal;
 }

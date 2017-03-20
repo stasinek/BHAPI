@@ -11,7 +11,7 @@
 
 #include <OS.h>
 
-#include <posix/realtime_sem_defs.h>
+#include <musl/realtime_sem_defs.h>
 
 
 struct realtime_sem_context;

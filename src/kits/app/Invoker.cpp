@@ -41,7 +41,7 @@
 BInvoker::BInvoker()
     : fMessage(NULL), fReplyHandlerToken(B_MAXUINT64), fTimeout(B_INFINITE_TIMEOUT), fNotifyKind(B_CONTROL_INVOKED), fNotifyCalled(false)
 {
-    SetHandlerForReply(bhapi::app);
+    SetHandlerForReply(bhapi::be_app);
 }
 
 BInvoker::BInvoker(BMessage *message, const BHandler *handler, const BLooper *looper)
@@ -51,7 +51,7 @@ BInvoker::BInvoker(BMessage *message, const BHandler *handler, const BLooper *lo
     BMessenger msgr(handler, looper, NULL);
     fMessenger = msgr;
 
-    SetHandlerForReply(bhapi::app);
+    SetHandlerForReply(bhapi::be_app);
 }
 
 
@@ -61,7 +61,7 @@ BInvoker::BInvoker(BMessage *message, BMessenger target)
     fMessage = message;
     fMessenger = target;
 
-    SetHandlerForReply(bhapi::app);
+    SetHandlerForReply(bhapi::be_app);
 }
 
 

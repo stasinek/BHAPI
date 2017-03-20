@@ -5,7 +5,7 @@
 
 #include "BufferedDataIO.h"
 #include <new>
-#include <stdio.h>
+
 
 
 //#define TRACE_DATA_IO

@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdio.h>
+
 
 struct protoent_data {
 	FILE *fp;

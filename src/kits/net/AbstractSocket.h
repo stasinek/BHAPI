@@ -8,7 +8,8 @@
 #ifdef __cplusplus // C++
 #include <NetworkAddress.h>
 #include <DataIO.h>
-#include <sys/socket.h>
+//#include <../include/sys/socket.h>
+
 class BHAPI_IMPEXP BAbstractSocket : public BDataIO {
 public:
                                 BAbstractSocket();

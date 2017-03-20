@@ -22,8 +22,8 @@
 
 #include <ctype.h>
 #include <new>
-#include <stdio.h>
-#include <strings.h>
+
+#include <../include/strings.h>
 
 
 using namespace BPrivate;

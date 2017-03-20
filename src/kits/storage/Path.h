@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -28,48 +28,39 @@
  * --------------------------------------------------------------------------*/
 
 #ifndef BHAPI_PATH_H
-#define BHAPI_PATH_H 
+#define BHAPI_PATH_H
 
 #include <Haiku.h>
-
-#ifdef WIN32
-#include <winsock2.h>
-#include <windows.h>
-#define B_MAXPATH MAX_PATH
-#else
 #define B_MAXPATH 255
-#endif
 
 #ifdef __cplusplus /* Just for C++ */
 
 class BHAPI_IMPEXP BPath {
 public:
-	BPath();
-	BPath(const char *dir, const char *leaf = NULL, bool normalize = false);
-	BPath(const BPath &path);
-	virtual ~BPath();
+    BPath();
+    BPath(const char *dir, const char *leaf = NULL, bool normalize = false);
+    BPath(const BPath &path);
+    virtual ~BPath();
 
-	status_t	SetTo(const char *dir, const char *leaf = NULL, bool normalize = false);
-	status_t	Append(const char *path, bool normalize = false);
-	void		Unset();
+    status_t	SetTo(const char *dir, const char *leaf = NULL, bool normalize = false);
+    status_t	Append(const char *path, bool normalize = false);
+    void		Unset();
 
-	const char	*Path() const;
-	const char	*Leaf() const;
+    const char	*Path() const;
+    const char	*Leaf() const;
 
-	status_t	GetParent(BPath *parent) const;
+    status_t	GetParent(BPath *parent) const;
 
-	bool		operator==(const BPath &path) const;
-	bool		operator==(const char *path) const;
-	bool		operator!=(const BPath &path) const;
-	bool		operator!=(const char *path) const;
-	BPath&		operator=(const BPath &path);
-	BPath&		operator=(const char *path);
+    bool		operator==(const BPath &path) const;
+    bool		operator==(const char *path) const;
+    bool		operator!=(const BPath &path) const;
+    bool		operator!=(const char *path) const;
+    BPath&		operator=(const BPath &path);
+    BPath&		operator=(const char *path);
 
 private:
-	char *fPath;
+    char *fPath;
 };
-
 #endif /* __cplusplus */
-
 #endif /* BHAPI_PATH_H */
 

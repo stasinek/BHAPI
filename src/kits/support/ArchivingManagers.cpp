@@ -9,7 +9,7 @@
 
 #include "ArchivingManagers.h"
 
-#include <syslog.h>
+#include <../include/syslog.h>
 #include <typeinfo>
 
 #include <StackOrHeapArray.h>

@@ -62,7 +62,7 @@ BArchivable::Instantiate(const BMessage *from)
 }
 
 
-_IMPEXP_BHAPI bool bhapi::validatb_instantiation(const BMessage *from, const char *class_name)
+_IMPEXP_BHAPI bool bhapi::validate_instantiation(const BMessage *from, const char *class_name)
 {
 	if(from == NULL || class_name == NULL || *class_name == 0) return false;
 

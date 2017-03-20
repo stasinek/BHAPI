@@ -10,8 +10,8 @@
 #include <NaturalCompare.h>
 
 #include <ctype.h>
-#include <string.h>
-#include <strings.h>
+
+#include <../include/strings.h>
 
 #include <StorageDefs.h>
 #include <Haiku.h>

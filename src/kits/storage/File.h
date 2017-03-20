@@ -53,10 +53,10 @@ public:
     bool		IsReadable() const;
     bool		IsWritable() const;
 
-    __be_size_t		Read(void *buffer, size_t size);
-     __be_size_t		ReadAt(__be_int64 pos, void *buffer, size_t size);
-    __be_size_t		Write(const void *buffer, size_t size);
-     __be_size_t		WriteAt(__be_int64 pos, const void *buffer, size_t size);
+    ssize_t		Read(void *buffer, size_t size);
+     ssize_t		ReadAt(__be_int64 pos, void *buffer, size_t size);
+    ssize_t		Write(const void *buffer, size_t size);
+     ssize_t		WriteAt(__be_int64 pos, const void *buffer, size_t size);
 
      __be_int64		Seek(__be_int64 position,  __be_uint32 seek_mode);
      __be_int64		Position() const;
@@ -69,6 +69,6 @@ private:
      __be_uint32 fMode;
 };
 #endif /* __cplusplus */
-#define BFILE_I
+#define BFILE_DEF
 #endif /* BHAPI_FILE_H */
 

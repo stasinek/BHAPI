@@ -11,7 +11,7 @@
 
 #include <HttpAuthentication.h>
 #include <mail_encoding.h>
-#include <stdio.h>
+
 
 
 BDataRequest::BDataRequest(const BUrl& url, BUrlProtocolListener* listener,

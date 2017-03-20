@@ -44,8 +44,8 @@
 #include <windows.h>
 #endif
 
-#include <sys/types.h>
-#include <sys/stat.h>
+#include <../include/sys/types.h>
+#include <../include/sys/stat.h>
 
 // implement in "Path.cpp"
 extern status_t b_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);

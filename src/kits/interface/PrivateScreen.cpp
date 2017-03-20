@@ -17,7 +17,7 @@
 
 #include <new>
 #include <pthread.h>
-#include <stdlib.h>
+
 
 #include <Application.h>
 #include <Autolock.h>

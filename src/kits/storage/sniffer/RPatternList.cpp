@@ -11,7 +11,7 @@
 #include <sniffer/RPattern.h>
 #include <sniffer/RPatternList.h>
 #include <DataIO.h>
-#include <stdio.h>
+
 
 using namespace BPrivate::Storage::Sniffer;
 

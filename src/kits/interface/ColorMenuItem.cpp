@@ -10,8 +10,8 @@
 #include "ColorMenuItem.h"
 
 #include <math.h>
-#include <string.h>
-#include <syslog.h>
+
+#include <../include/syslog.h>
 
 #include <algorithm>
 

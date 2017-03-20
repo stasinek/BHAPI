@@ -59,7 +59,7 @@
 #endif
 
 // 	Defined to support 'hidden' commands or extensions to classes. More..
-#include <string.h> /* for bzero */
+ /* for bzero */
 #ifndef HAVE_BZERO
     #ifndef bzero
     #define bzero(ptr, len) memset(ptr, 0, len)

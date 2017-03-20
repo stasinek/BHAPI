@@ -258,21 +258,21 @@ BTextControl::KeyDown(const char *bytes,  __be_int32 numBytes)
 			char *selText = NULL;
 			BMessage *clipMsg = NULL;
 
-			if(GetSelection(&startPos, &endPos) == false || bhapi::clipboard.Lock() == false) return;
-			if((selText = DuplicateText(startPos, endPos)) != NULL && (clipMsg = bhapi::clipboard.Data()) != NULL)
+			if(GetSelection(&startPos, &endPos) == false || bhapi::be_clipboard.Lock() == false) return;
+			if((selText = DuplicateText(startPos, endPos)) != NULL && (clipMsg = bhapi::be_clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
-				__be_size_t textLen = 0;
+				ssize_t textLen = 0;
 				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
-				   text == NULL || textLen != (__be_size_t)strlen(selText) || strncmp(text, selText, (size_t)textLen) != 0)
+				   text == NULL || textLen != (ssize_t)strlen(selText) || strncmp(text, selText, (size_t)textLen) != 0)
 				{
-					bhapi::clipboard.Clear();
+					bhapi::be_clipboard.Clear();
 					clipMsg->AddData("text/plain", B_MIME_TYPE, selText, strlen(selText));
-					bhapi::clipboard.Commit();
+					bhapi::be_clipboard.Commit();
 				}
 			}
 			if(selText) free(selText);
-			bhapi::clipboard.Unlock();
+			bhapi::be_clipboard.Unlock();
 
 			if(*bytes == 'x' || *bytes == 'X')
 			{
@@ -287,14 +287,14 @@ BTextControl::KeyDown(const char *bytes,  __be_int32 numBytes)
 			BString str;
 			BMessage *clipMsg = NULL;
 
-			if(bhapi::clipboard.Lock() == false) return;
-			if((clipMsg = bhapi::clipboard.Data()) != NULL)
+			if(bhapi::be_clipboard.Lock() == false) return;
+			if((clipMsg = bhapi::be_clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
-				__be_size_t len = 0;
+				ssize_t len = 0;
 				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &len)) str.SetTo(text, (__be_int32)len);
 			}
-			bhapi::clipboard.Unlock();
+			bhapi::be_clipboard.Unlock();
 
 			if(str.Length() <= 0) return;
 

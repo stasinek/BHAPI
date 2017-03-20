@@ -7,7 +7,7 @@
 	ResourcesContainer implementation.
 */
 
-#include <stdio.h>
+
 
 #include "ResourcesContainer.h"
 

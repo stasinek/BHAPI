@@ -1,4 +1,4 @@
-#ifndef BHAPI_H
+﻿#ifndef BHAPI_H
 #define BHAPI_H
 
 /* --------------------------------------------------------------------------
@@ -26,7 +26,7 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * File: etkxx.h
+ * File: bhapi.h
  *
  * --------------------------------------------------------------------------*/
 

@@ -30,7 +30,7 @@
 #ifndef BHAPI_FONT_H
 #define BHAPI_FONT_H
 
-#include <Haiku.h>
+#include <OS.h>
 
 #define B_FONT_FAMILY_LENGTH	127
 #define B_FONT_STYLE_LENGTH	63
@@ -50,16 +50,16 @@ typedef struct font_desc font_desc;
 #endif // __cplusplus
 
 #ifdef __cplusplus /* Just for C++ */
-#ifndef BVIEW_I
-#define BVIEW_I
+#ifndef BVIEW_DEF
+#define BVIEW_DEF
 class BView;
 #endif
-#ifndef BFONTENGINE_I
-#define BFONTENGINE_I
+#ifndef BFONTENGINE_DEF
+#define BFONTENGINE_DEF
 class BFontEngine;
 #endif
-#ifndef BSTRING_I
-#define BSTRING_I
+#ifndef BSTRING_DEF
+#define BSTRING_DEF
 class BString;
 #endif
 class BHAPI_IMPEXP BFont {

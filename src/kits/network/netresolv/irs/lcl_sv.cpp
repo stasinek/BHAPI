@@ -70,8 +70,8 @@ extern "C" {
 
 }
 
-#include <sys/types.h>
-#include <sys/socket.h>
+#include <../include/sys/types.h>
+#include <../include/sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/nameser.h>
 #include <resolv.h>
@@ -80,10 +80,10 @@ extern "C" {
 
 #include <errno.h>
 #include <fcntl.h>
-#include <limits.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include <../include/limits.h>
+
+
+
 
 #include <FindDirectory.h>
 #include <fs_attr.h>

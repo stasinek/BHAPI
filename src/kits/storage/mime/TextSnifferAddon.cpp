@@ -117,11 +117,11 @@ TextSnifferAddon::GuessMimeType(BFile* file, const void* buffer, int32 length,
  * international characters, now subsumed into this file.
  */
 
-#include <stdio.h>
-#include <string.h>
+
+
 #include <memory.h>
 #include <ctype.h>
-#include <stdlib.h>
+
 #include <unistd.h>
 #include "names.h"
 

@@ -9,11 +9,11 @@
 
 #include <MergedDirectory.h>
 
-#include <string.h>
+
 
 #include <new>
 #include <set>
-#include <string>
+#include <../include/string>
 
 #include <Directory.h>
 #include <Entry.h>

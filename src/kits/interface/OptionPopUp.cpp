@@ -12,7 +12,7 @@
 #include <OptionPopUp.h>
 #include <PopUpMenu.h>
 
-#include <stdio.h>
+
 
 
 const float kLabelSpace = 8.0;

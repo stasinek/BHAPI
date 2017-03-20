@@ -120,4 +120,6 @@ extern const char* B_URL_WAIS;
 extern const char* B_URL_FILE;
     /*  application/x-vnd.Be.URL.file */
 
+#include <Errors.h>
+
 #endif	/* _TYPE_CONSTANTS_H */

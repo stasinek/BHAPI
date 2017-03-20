@@ -18,7 +18,7 @@
 #include <Font.h>
 #include <Locker.h>
 
-#include <stdio.h>
+
 
 
 //! NetPositive binary compatibility support

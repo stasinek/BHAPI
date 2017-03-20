@@ -9,8 +9,8 @@
 
 #include <DecimalSpinner.h>
 
-#include <stdio.h>
-#include <stdlib.h>
+
+
 
 #include <PropertyInfo.h>
 #include <TextView.h>

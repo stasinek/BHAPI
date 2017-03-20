@@ -18,7 +18,7 @@
 #ifndef MEMCLUSTER_H
 #define MEMCLUSTER_H
 
-#include <stdio.h>
+
 
 #define meminit		__meminit
 #ifdef MEMCLUSTER_DEBUG

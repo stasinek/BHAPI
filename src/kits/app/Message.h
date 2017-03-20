@@ -32,39 +32,38 @@
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 //-----------------------------------------------------------------------------
-#ifndef BMESSENGER_I
-#define BMESSENGER_I
+#ifndef BMESSENGER_DEF
+#define BMESSENGER_DEF
 class BMessenger;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BHANDLER_I
-#define BHANDLER_I
+#ifndef BHANDLER_DEF
+#define BHANDLER_DEF
 class BHandler;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BPOINT_I
-#define BPOINT_I
+#ifndef BPOINT_DEF
+#define BPOINT_DEF
 class BPoint;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BRECT_I
-#define BRECT_I
+#ifndef BRECT_DEF
+#define BRECT_DEF
 class BRect;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BSTRING_I
-#define BSTRING_I
+#ifndef BSTRING_DEF
+#define BSTRING_DEF
 class BString;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BSTREAMIO_I
-#define BSTREAMIO_I
+#ifndef BSTREAMIO_DEF
+#define BSTREAMIO_DEF
 class BStreamIO;
 #endif
 //-----------------------------------------------------------------------------
 #include "../support/List.h"
-#include "../kernel/Kernel.h"
-#include <Haiku.h>
+#include <OS.h>
 //-----------------------------------------------------------------------------
 class BHAPI_IMPEXP BMessage {
 public:
@@ -102,7 +101,7 @@ public:
     // 			__be_int32 count = msg->CountItems(i, k, &type);
     // 			for(__be_int32 m = 0; m < count; m++)
     // 			{
-    // 				__be_size_t numBytes = 0;
+    // 				ssize_t numBytes = 0;
     // 				const void *data = NULL;
     // 				msg->FindData(i, k, m, &data, &numBytes);
     // 				...
@@ -163,9 +162,9 @@ public:
     bool		FindMessage(const char *name,  __be_int32 index, BMessage *msg) const;
     bool		FindMessenger(const char *name, BMessenger *msgr) const;
     bool		FindMessenger(const char *name,  __be_int32 index, BMessenger *msgr) const;
-    bool		FindData(const char *name, type_code type, const void **data,  __be_size_t *numBytes) const;
-    bool		FindData(const char *name, type_code type,  __be_int32 index, const void **data,  __be_size_t *numBytes) const;
-    bool		FindData(__be_int32 nameIndex,  __be_int32 typeIndex,  __be_int32 index, const void **data,  __be_size_t *numBytes) const;
+    bool		FindData(const char *name, type_code type, const void **data,  ssize_t *numBytes) const;
+    bool		FindData(const char *name, type_code type,  __be_int32 index, const void **data,  ssize_t *numBytes) const;
+    bool		FindData(__be_int32 nameIndex,  __be_int32 typeIndex,  __be_int32 index, const void **data,  ssize_t *numBytes) const;
 
     bool		HasString(const char *name,  __be_int32 index = 0) const;
     bool		HasInt8(const char *name,  __be_int32 index = 0) const;
@@ -253,9 +252,9 @@ public:
     status_t	BGetInfo(type_code type,  __be_int32 index,
                  char **nameFound, type_code *typeFound,  __be_int32 *countFound = NULL) const;
     status_t	BFindData(const char *name, type_code type,  __be_int32 index,
-                  const void **data,  __be_size_t *numBytes) const;
+                  const void **data,  ssize_t *numBytes) const;
     status_t	BFindData(const char *name, type_code type,
-                  const void **data,  __be_size_t *numBytes) const;
+                  const void **data,  ssize_t *numBytes) const;
 
 private:
     friend class BLooper;
@@ -290,7 +289,7 @@ private:
     bigtime_t fReplyTokenTimestamp;
 
     bool fNoticeSource;
-    void *fSource;
+    bhapi::port_id fSource;
 
     bool fIsReply;
 };
@@ -323,7 +322,7 @@ BMessage::BGetInfo(type_code type,  __be_int32 index,
 
 inline status_t
 BMessage::BFindData(const char *name, type_code type,  __be_int32 index,
-            const void **data,  __be_size_t *numBytes) const
+            const void **data,  ssize_t *numBytes) const
 {
     if(index < 0) return B_BAD_INDEX;
 
@@ -351,7 +350,7 @@ BMessage::BFindData(const char *name, type_code type,  __be_int32 index,
 
 inline status_t
 BMessage::BFindData(const char *name, type_code type,
-            const void **data,  __be_size_t *numBytes) const
+            const void **data,  ssize_t *numBytes) const
 {
     return BFindData(name, type, 0, data, numBytes);
 }
@@ -359,7 +358,7 @@ BMessage::BFindData(const char *name, type_code type,
 //-----------------------------------------------------------------------------
 #endif /* __cplusplus */
 //-----------------------------------------------------------------------------
-#define BMESSAGE_I
+#define BMESSAGE_DEF
 #endif /* BHAPI_MESSAGE_H */
 //-----------------------------------------------------------------------------
 

@@ -31,7 +31,15 @@
 #define BHAPI_VOLUME_H
 
 #ifdef __cplusplus /* Just for C++ */
+#ifndef BSTRING_DEF
+#define BSTRING_DEF
 class BString;
+#endif
+#ifndef BDIRECTORY_DEF
+#define BDIRECTORY_DEF
+class BDirectory;
+#endif
+#include <Haiku.h>
 class BHAPI_IMPEXP BVolume {
 public:
     BVolume();
@@ -59,8 +67,7 @@ private:
     b_dev_t fDevice;
     void *fData;
 };
-
+#define BVOLUME_DEF
 #endif /* __cplusplus */
-
 #endif /* BHAPI_VOLUME_H */
 

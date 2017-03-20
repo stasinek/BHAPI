@@ -567,7 +567,7 @@ BHAPI_EXPORT bool bhapi::update_font_families(bool check_only)
 
     bool updateFailed = false;
 
-    if(!(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL)) bhapi::app->fGraphicsEngine->UpdateFonts(check_only);
+    if(!(bhapi::be_app == NULL || bhapi::be_app->fGraphicsEngine == NULL)) bhapi::be_app->fGraphicsEngine->UpdateFonts(check_only);
 
     // TODO: fix the return value style
 #ifdef HAVE_FT2

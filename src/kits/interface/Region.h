@@ -36,6 +36,21 @@
 #include "../interface/Rect.h"
 #include "../support/List.h"
 #include <Haiku.h>
+
+namespace BPrivate {
+    class ServerLink;
+    class LinkReceiver;
+};
+
+/* Integer rect used to define a clipping rectangle. All bounds are inclusive. */
+/* Moved from DirectWindow.h */
+typedef struct {
+    int32	left;
+    int32	top;
+    int32	right;
+    int32	bottom;
+} clipping_rect;
+
 class BHAPI_IMPEXP BRegion {
 public:
     BRegion();
@@ -94,6 +109,12 @@ public:
     void PrintToStream() const;
 
 private:
+    friend class BDirectWindow;
+    friend class BPrivate::ServerLink;
+    friend class BPrivate::LinkReceiver;
+
+    class Support;
+    friend class Support;
     BList fRects;
     BRect fFrame;
 };

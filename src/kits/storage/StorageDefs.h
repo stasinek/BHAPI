@@ -30,21 +30,24 @@
 #ifndef BHAPI_STORAGE_DEFS_H
 #define BHAPI_STORAGE_DEFS_H
 
-#include <Haiku.h>
-
-#include <fcntl.h>
-#include <sys/param.h>
-#include <posix/limits.h>
+#include <../include/fcntl.h>
+#include <../include/sys/param.h>
+#include <../include/limits.h>
 
 // Limits
 #define B_DEV_NAME_LENGTH		128
-#define B_FILE_NAME_LENGTH		NAME_MAX
+#define B_FILE_NAME_LENGTH		PATH_MAX
 #define B_PATH_NAME_LENGTH		MAXPATHLEN
 #define B_ATTR_NAME_LENGTH		(B_FILE_NAME_LENGTH - 1)
 #define B_MIME_TYPE_LENGTH		(B_ATTR_NAME_LENGTH - 15)
-#define B_MAX_SYMLINKS			SYMLOOP_MAX
 
-typedef  __be_int32	b_dev_t;
+#ifdef  BHAPI_OS_WIN32
+#define B_MAX_SYMLINKS			PATH_MAX
+#else
+#define B_MAX_SYMLINKS			LINK_MAX
+#endif
+
+typedef __int32	b_dev_t;
 
 #ifdef __cplusplus
 namespace bhapi {

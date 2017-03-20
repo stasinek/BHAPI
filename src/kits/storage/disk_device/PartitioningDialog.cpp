@@ -5,8 +5,8 @@
 
 #include <algobase.h>
 #include <new.h>
-#include <stdio.h>
-#include <string.h>
+
+
 
 #include <Button.h>
 #include <DiskScannerAddOn.h>

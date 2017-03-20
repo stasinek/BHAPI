@@ -11,7 +11,7 @@
 #include <OS.h>
 
 #include <kernel.h>
-#include <posix/xsi_semaphore_defs.h>
+#include <musl/xsi_semaphore_defs.h>
 
 
 namespace BKernel {

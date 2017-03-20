@@ -56,8 +56,8 @@
  * [including the GNU Public Licence.]
  */
 
-#include <stdlib.h>
-#include <string.h>
+
+
 #include "md5.h"
 
 #define ULONG	unsigned long

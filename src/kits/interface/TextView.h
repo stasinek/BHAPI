@@ -32,12 +32,12 @@
 #define BHAPI_TEXT_VIEW_H
 
 #ifdef __cplusplus /* Just for C++ */
-#ifndef BFILE_I
-#define BFILE_I
+#ifndef BFILE_DEF
+#define BFILE_DEF
 class BFile;
 #endif
-#ifndef BCLIPBOARD_I
-#define BCLIPBOARD_I
+#ifndef BCLIPBOARD_DEF
+#define BCLIPBOARD_DEF
 class BClipboard;
 #endif
 #endif

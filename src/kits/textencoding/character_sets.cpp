@@ -1,4 +1,4 @@
-#include <string.h>
+
 #include <Catalog.h>
 #include <LocaleClass.h>
 #include <CharacterSet.h>

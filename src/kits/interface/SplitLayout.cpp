@@ -8,7 +8,7 @@
 #include "SplitLayout.h"
 
 #include <new>
-#include <stdio.h>
+
 
 #include <ControlLook.h>
 #include <LayoutItem.h>

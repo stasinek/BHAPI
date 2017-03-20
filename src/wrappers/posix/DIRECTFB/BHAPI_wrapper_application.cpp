@@ -45,7 +45,7 @@ extern bool bhapi::get_prog_argc_argv_linux(BString &progName, BStringArray &pro
 #endif // BHAPI_OS_LINUX
 
 
-static void b_dfbhapi::clipboard_changed(EDFBGraphicsEngine *dfbEngine)
+static void b_dfbhapi::be_clipboard_changed(EDFBGraphicsEngine *dfbEngine)
 {
 	BString aStr;
 
@@ -70,22 +70,22 @@ static void b_dfbhapi::clipboard_changed(EDFBGraphicsEngine *dfbEngine)
 	free(data);
 
 	BMessage *clipMsg = NULL;
-	if(bhapi::clipboard.Lock())
+	if(bhapi::be_clipboard.Lock())
 	{
-		if((clipMsg = bhapi::clipboard.Data()) != NULL)
+		if((clipMsg = bhapi::be_clipboard.Data()) != NULL)
 		{
 			const char *text = NULL;
-			__be_size_t textLen = 0;
+			ssize_t textLen = 0;
 			if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
-			   text == NULL || textLen != (__be_size_t)aStr.Length() || aStr.Compare(text, (__be_int32)textLen) != 0)
+			   text == NULL || textLen != (ssize_t)aStr.Length() || aStr.Compare(text, (__be_int32)textLen) != 0)
 			{
-				bhapi::clipboard.Clear();
+				bhapi::be_clipboard.Clear();
 				clipMsg->AddBool("BHAPI:msg_from_gui", true);
 				clipMsg->AddData("text/plain", B_MIME_TYPE, aStr.String(), aStr.Length());
-				bhapi::clipboard.Commit();
+				bhapi::be_clipboard.Commit();
 			}
 		}
-		bhapi::clipboard.Unlock();
+		bhapi::be_clipboard.Unlock();
 	}
 }
 
@@ -107,18 +107,18 @@ public:
 		do
 		{
 			const char *text = NULL;
-			__be_size_t textLen = 0;
+			ssize_t textLen = 0;
 			BString aStr;
 
 			BMessage *msg;
 
-			bhapi::clipboard.Lock();
-			if(!((msg = bhapi::clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
+			bhapi::be_clipboard.Lock();
+			if(!((msg = bhapi::be_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
 			{
 				msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 				if(textLen > 0) aStr.Append(text, textLen);
 			}
-			bhapi::clipboard.Unlock();
+			bhapi::be_clipboard.Unlock();
 
 			if(aStr.Length() <= 0) break;
 
@@ -372,7 +372,7 @@ static void b_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					message.AddFloat("BHAPI:wheel_delta_y", delta_y);
 
 					message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-					etkWinMsgr = BMessenger(bhapi::app);
+					etkWinMsgr = BMessenger(bhapi::be_app);
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -410,7 +410,7 @@ static void b_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 
 					// TODO: modifiers, clicks
 					message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-					etkWinMsgr = BMessenger(bhapi::app);
+					etkWinMsgr = BMessenger(bhapi::be_app);
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -440,7 +440,7 @@ static void b_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					message.AddPoint("screen_where", BPoint((float)event->cx, (float)event->cy));
 
 					message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-					etkWinMsgr = BMessenger(bhapi::app);
+					etkWinMsgr = BMessenger(bhapi::be_app);
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -511,7 +511,7 @@ static void b_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					message.AddInt32("modifiers", modifiers);
 
 					message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-					etkWinMsgr = BMessenger(bhapi::app);
+					etkWinMsgr = BMessenger(bhapi::be_app);
 					etkWinMsgr.SendMessage(&message);
 
 					dfbEngine->Lock();
@@ -590,7 +590,7 @@ static status_t b_dfb_task(void *arg)
 		if(memcmp((void*)&dfbEngine->dfbClipboardTimeStamp, (void*)&timestamp, sizeof(struct timeval)) != 0)
 		{
 			dfbEngine->Unlock();
-			b_dfbhapi::clipboard_changed(dfbEngine);
+			b_dfbhapi::be_clipboard_changed(dfbEngine);
 			dfbEngine->Lock();
 		}
 	}
@@ -621,9 +621,9 @@ status_t
 EDFBGraphicsEngine::Initalize()
 {
 	BMessageFilter *clipboardFilter = new EDFBClipboardMessageFilter(this);
-	bhapi::app->Lock();
-	bhapi::app->AddFilter(clipboardFilter);
-	bhapi::app->Unlock();
+	bhapi::be_app->Lock();
+	bhapi::be_app->AddFilter(clipboardFilter);
+	bhapi::be_app->Unlock();
 
 	Lock();
 
@@ -631,9 +631,9 @@ EDFBGraphicsEngine::Initalize()
 	{
 		Unlock();
 
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -654,7 +654,7 @@ EDFBGraphicsEngine::Initalize()
 
 	if(!argvGotFromSystem || progArgv.CountItems() <= 1)
 	{
-		if(progName.Length() <= 0) progName.SetTo("dfbhapi::app");
+		if(progName.Length() <= 0) progName.SetTo("dfbhapi::be_app");
 		if(progArgv.CountItems() <= 0) progArgv.AddItem(progName);
 
 		char *options = getenv("DFBARGS");
@@ -676,9 +676,9 @@ EDFBGraphicsEngine::Initalize()
 
 			Unlock();
 
-			bhapi::app->Lock();
-			bhapi::app->RemoveFilter(clipboardFilter);
-			bhapi::app->Unlock();
+			bhapi::be_app->Lock();
+			bhapi::be_app->RemoveFilter(clipboardFilter);
+			bhapi::be_app->Unlock();
 			delete clipboardFilter;
 			return B_ERROR;
 		}
@@ -697,9 +697,9 @@ EDFBGraphicsEngine::Initalize()
 
 		Unlock();
 
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -714,9 +714,9 @@ EDFBGraphicsEngine::Initalize()
 
 		Unlock();
 
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -739,9 +739,9 @@ EDFBGraphicsEngine::Initalize()
 
 		Unlock();
 
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -771,9 +771,9 @@ EDFBGraphicsEngine::Initalize()
 
 		Unlock();
 
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -782,7 +782,7 @@ EDFBGraphicsEngine::Initalize()
 
 	Unlock();
 
-	b_dfbhapi::clipboard_changed(this);
+	b_dfbhapi::be_clipboard_changed(this);
 
 	return B_OK;
 }
@@ -840,9 +840,9 @@ EDFBGraphicsEngine::Cancel()
 
 	if(clipboardFilter != NULL)
 	{
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 	}
 }

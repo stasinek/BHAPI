@@ -27,6 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
+#ifndef B_INTERFACE_KIT_H
+#define B_INTERFACE_KIT_H
+
 #include "interface/Point.h"
 #include "interface/Rect.h"
 #include "interface/Polygon.h"
@@ -64,3 +67,5 @@
 #include "interface/Input.h"
 #include "interface/GraphicsDefs.h"
 #include "interface/InterfaceDefs.h"
+
+#endif

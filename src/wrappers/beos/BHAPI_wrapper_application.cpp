@@ -29,7 +29,7 @@
 #ifdef BHAPI_OS_BEOS
 
 
-#include <stdlib.h>
+
 
 #include <be/app/AppDefs.h>
 #include <be/app/Application.h>
@@ -56,7 +56,7 @@ static void b_beos_clipboard_changed()
 		if(!((beClipMsg =  __be_clipboard->Data()) == NULL || beClipMsg->HasBool("BHAPI:msg_from_gui")))
 		{
 			const char *text = NULL;
-			__be_size_t textLen = 0;
+			ssize_t textLen = 0;
 			beClipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 			if(textLen > 0) str.SetTo(text, (__be_int32)textLen);
 		}
@@ -67,22 +67,22 @@ static void b_beos_clipboard_changed()
 	{
 		BHAPI_DEBUG("[GRAPHICS]: Clipboard message(\"%s\") sending...", str.String());
 		BMessage *clipMsg = NULL;
-		if(bhapi::clipboard.Lock())
+		if(bhapi::be_clipboard.Lock())
 		{
-			if((clipMsg = bhapi::clipboard.Data()) != NULL)
+			if((clipMsg = bhapi::be_clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
-				__be_size_t textLen = 0;
+				ssize_t textLen = 0;
 				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
-				   text == NULL || textLen != (__be_size_t)str.Length() || str.Compare(text, (__be_int32)textLen) != 0)
+				   text == NULL || textLen != (ssize_t)str.Length() || str.Compare(text, (__be_int32)textLen) != 0)
 				{
-					bhapi::clipboard.Clear();
+					bhapi::be_clipboard.Clear();
 					clipMsg->AddBool("BHAPI:msg_from_gui", true);
 					clipMsg->AddData("text/plain", B_MIME_TYPE, str.String(), str.Length());
-					bhapi::clipboard.Commit();
+					bhapi::be_clipboard.Commit();
 				}
 			}
-			bhapi::clipboard.Unlock();
+			bhapi::be_clipboard.Unlock();
 		}
 	}
 }
@@ -95,14 +95,14 @@ static bhapi::filter_result b_beos_clipboard_filter(BMessage *message, BHandler 
 	do
 	{
 		const char *text = NULL;
-		__be_size_t textLen = 0;
+		ssize_t textLen = 0;
 
 		BString str;
 		BMessage *msg;
 
-		bhapi::clipboard.Lock();
+		bhapi::be_clipboard.Lock();
 #if defined(BHAPI_ENABLE_DEBUG) && !defined(BHAPI_DISABLE_MORE_CHECKS)
-		if((msg = bhapi::clipboard.Data()) != NULL)
+		if((msg = bhapi::be_clipboard.Data()) != NULL)
 		{
 			msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 			if(msg->HasBool("BHAPI:msg_from_gui"))
@@ -113,11 +113,11 @@ static bhapi::filter_result b_beos_clipboard_filter(BMessage *message, BHandler 
 			}
 		}
 #else
-		if(!((msg = bhapi::clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
+		if(!((msg = bhapi::be_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
 			msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 #endif
 		if(textLen > 0) str.SetTo(text, (__be_int32)textLen);
-		bhapi::clipboard.Unlock();
+		bhapi::be_clipboard.Unlock();
 
 		if(str.Length() <= 0) break;
 
@@ -171,7 +171,7 @@ private:
 
 
 EBePrivateApp::EBePrivateApp(EBeGraphicsEngine *engine)
-	: BApplication(bhapi::app->Signature())
+	: BApplication(bhapi::be_app->Signature())
 {
 	fEngine = engine;
 }
@@ -204,7 +204,7 @@ EBePrivateApp::QuitRequested()
 	if(fEngine->beDoQuit) retVal = true;
 	fEngine->Unlock();
 
-	if(!retVal) bhapi::app->PostMessage(B_QUIT_REQUESTED);
+	if(!retVal) bhapi::be_app->PostMessage(B_QUIT_REQUESTED);
 
 	return retVal;
 }
@@ -274,7 +274,7 @@ EBePrivateAppWin::QuitRequested()
 	if(fEngine->beDoQuit) retVal = true;
 	fEngine->Unlock();
 
-	if(!retVal) bhapi::app->PostMessage(B_QUIT_REQUESTED);
+	if(!retVal) bhapi::be_app->PostMessage(B_QUIT_REQUESTED);
 
 	return retVal;
 }
@@ -367,9 +367,9 @@ status_t
 EBeGraphicsEngine::Initalize()
 {
 	BMessageFilter *clipboardFilter = new BMessageFilter(B_CLIPBOARD_CHANGED, b_beos_clipboard_filter);
-	bhapi::app->Lock();
-	bhapi::app->AddFilter(clipboardFilter);
-	bhapi::app->Unlock();
+	bhapi::be_app->Lock();
+	bhapi::be_app->AddFilter(clipboardFilter);
+	bhapi::be_app->Unlock();
 
 	Lock();
 
@@ -377,9 +377,9 @@ EBeGraphicsEngine::Initalize()
 	{
 		Unlock();
 
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 		return B_OK;
 	}
@@ -389,9 +389,9 @@ EBeGraphicsEngine::Initalize()
 	{
 		Unlock();
 
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -409,9 +409,9 @@ EBeGraphicsEngine::Initalize()
 
 		Unlock();
 
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -443,9 +443,9 @@ EBeGraphicsEngine::Initalize()
 
 		Unlock();
 
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -510,9 +510,9 @@ EBeGraphicsEngine::Cancel()
 
 	if(clipboardFilter != NULL)
 	{
-		bhapi::app->Lock();
-		bhapi::app->RemoveFilter(clipboardFilter);
-		bhapi::app->Unlock();
+		bhapi::be_app->Lock();
+		bhapi::be_app->RemoveFilter(clipboardFilter);
+		bhapi::be_app->Unlock();
 		delete clipboardFilter;
 	}
 }

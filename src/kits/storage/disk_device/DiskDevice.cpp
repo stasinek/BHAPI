@@ -9,9 +9,9 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <new>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
+
+
 #include <unistd.h>
 
 #include <DiskDevice.h>
@@ -20,7 +20,7 @@
 #include <Message.h>
 #include <Path.h>
 
-#include <syscalls.h>
+#include <../include/syscalls.h>
 #include <ddm_userland_interface_defs.h>
 
 #include "DiskDeviceJob.h"

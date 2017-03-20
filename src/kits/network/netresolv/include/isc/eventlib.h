@@ -24,10 +24,10 @@
 #ifndef _EVENTLIB_H
 #define _EVENTLIB_H
 
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <sys/time.h>
-#include <stdio.h>
+#include <../include/sys/types.h>
+#include <../include/sys/uio.h>
+#include <../include/sys/time.h>
+
 
 #include <isc/platform.h>
 

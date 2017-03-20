@@ -31,6 +31,7 @@
 #define BHAPI_KERNEL_H
 
 #include <Haiku.h>
+
 #ifdef __cplusplus
 extern "C" {
 namespace bhapi {
@@ -49,7 +50,6 @@ typedef int32 port_id;
 typedef int32 sem_id;
 typedef int32 team_id;
 typedef int32 thread_id;
-
 
 /* Areas */
 
@@ -186,6 +186,7 @@ typedef struct sem_info {
     char		name[B_OS_NAME_LENGTH];
     int32		count;
     thread_id	latest_holder;
+    bool closed;
 } sem_info;
 
 /* semaphore flags */
@@ -331,25 +332,19 @@ typedef struct {
 typedef status_t (*thread_func)(void *);
 #define thread_entry thread_func
     /* thread_entry is for backward compatibility only! Use thread_func */
-
-extern thread_id	spawn_thread(thread_func, const char *name, int32 priority,
-                        void *data);
+extern thread_id	spawn_thread(thread_func, const char *name, int32 priority,void *data);
 extern status_t		kill_thread(thread_id thread);
-extern status_t		resume_thread(thread_id thread);
 extern status_t		suspend_thread(thread_id thread);
-
+extern status_t		resume_thread(thread_id thread);
 extern status_t		rename_thread(thread_id thread, const char *newName);
 extern status_t		set_thread_priority(thread_id thread, int32 newPriority);
 extern void			exit_thread(status_t status);
+extern thread_id 	find_thread(const char *name);
 extern status_t		wait_for_thread(thread_id thread, status_t *returnValue);
 extern status_t		on_exit_thread(void (*callback)(void *), void *data);
 
-extern thread_id 	find_thread(const char *name);
-
-extern status_t		send_data(thread_id thread, int32 code, const void *buffer,
-                        size_t bufferSize);
-extern int32		receive_data(thread_id *sender, void *buffer,
-                        size_t bufferSize);
+extern status_t		send_data(thread_id thread, int32 code, const void *buffer,size_t bufferSize);
+extern int32		receive_data(thread_id *sender, void *buffer,size_t bufferSize);
 extern bool			has_data(thread_id thread);
 
 extern status_t		snooze(bigtime_t amount);
@@ -358,15 +353,11 @@ extern status_t		snooze_until(bigtime_t time, int timeBase);
 
 /* system private, use macros instead */
 extern status_t		_get_thread_info(thread_id id, thread_info *info, size_t size);
-extern status_t		_get_next_thread_info(team_id team, int32 *cookie,
-                        thread_info *info, size_t size);
-
+extern status_t		_get_next_thread_info(team_id team, int32 *cookie,thread_info *info, size_t size);
 #define get_thread_info(id, info) \
     _get_thread_info((id), (info), sizeof(*(info)))
-
 #define get_next_thread_info(team, cookie, info) \
     _get_next_thread_info((team), (cookie), (info), sizeof(*(info)))
-
 /* bridge to the pthread API */
 extern thread_id	get_pthread_thread_id(pthread_t thread);
 /* TODO: Would be nice to have, but we use TLS to associate a thread with its
@@ -374,9 +365,7 @@ extern thread_id	get_pthread_thread_id(pthread_t thread);
 extern status_t		convert_to_pthread(thread_id thread, pthread_t *_thread);
 */
 
-
 /* Time */
-
 extern uint32		real_time_clock(void);
 extern void			set_real_time_clock(uint32 secsSinceJan1st1970);
 extern bigtime_t	real_time_clock_usecs(void);
@@ -384,8 +373,7 @@ extern bigtime_t	system_time(void);
                         /* time since booting in microseconds */
 extern nanotime_t	system_time_nsecs(void);
                         /* time since booting in nanoseconds */
-
-                    // deprecated (is no-op)
+// deprecated (is no-op)
 extern status_t		set_timezone(const char *timezone);
 
 /* Alarm */
@@ -395,14 +383,10 @@ enum {
     B_ONE_SHOT_RELATIVE_ALARM,
     B_PERIODIC_ALARM			/* "when" specifies the period */
 };
-
 extern bigtime_t	set_alarm(bigtime_t when, uint32 flags);
 
-
 /* Debugger */
-
 extern void			debugger(const char *message);
-
 /*
    calling this function with a non-zero value will cause your thread
    to receive signals for any exceptional conditions that occur (i.e.
@@ -412,18 +396,13 @@ extern void			debugger(const char *message);
    to re-enable the default debugger pass a zero.
 */
 extern int			disable_debugger(int state);
-
 /* TODO: Remove. Temporary debug helper. */
-extern void			debug_printf(const char *format, ...)
-                        __attribute__ ((format (__printf__, 1, 2)));
+extern void			debug_printf(const char *format, ...)  __attribute__ ((format (__printf__, 1, 2)));
 extern void			debug_vprintf(const char *format, va_list args);
-extern void			ktrace_printf(const char *format, ...)
-                        __attribute__ ((format (__printf__, 1, 2)));
+extern void			ktrace_printf(const char *format, ...) __attribute__ ((format (__printf__, 1, 2)));
 extern void			ktrace_vprintf(const char *format, va_list args);
 
-
 /* System information */
-
 typedef struct {
     bigtime_t	active_time;	/* usec of doing useful work since boot */
     bool		enabled;
@@ -533,10 +512,8 @@ typedef struct {
 
 
 extern status_t		get_system_info(system_info* info);
-extern status_t		get_cpu_info(uint32 firstCPU, uint32 cpuCount,
-                        cpu_info* info);
-extern status_t		get_cpu_topology_info(cpu_topology_node_info* topologyInfos,
-                        uint32* topologyInfoCount);
+extern status_t		get_cpu_info(uint32 firstCPU, uint32 cpuCount, cpu_info* info);
+extern status_t		get_cpu_topology_info(cpu_topology_node_info* topologyInfos, uint32* topologyInfoCount);
 
 #if defined(__INTEL__) || defined(__x86_64__)
 typedef union {
@@ -584,23 +561,17 @@ typedef union {
         uint32	ecx;
     } regs;
 } cpuid_info;
-
-extern status_t		get_cpuid(cpuid_info *info, uint32 eaxRegister,
-                        uint32 cpuNum);
+extern status_t		get_cpuid(cpuid_info *info, uint32 eaxRegister, uint32 cpuNum);
 #endif
-
 
 extern int32		is_computer_on(void);
 extern double		is_computer_on_fire(void);
-
 
 /* signal related functions */
 int		send_signal(thread_id threadID, unsigned int signal);
 void	set_signal_stack(void* base, size_t size);
 
-
 /* WARNING: Experimental API! */
-
 enum {
     B_OBJECT_TYPE_FD		= 0,
     B_OBJECT_TYPE_SEMAPHORE	= 1,
@@ -640,15 +611,12 @@ typedef struct object_wait_info {
    reported, when they occur. */
 
 extern ssize_t		wait_for_objects(object_wait_info* infos, int numInfos);
-extern ssize_t		wait_for_objects_etc(object_wait_info* infos, int numInfos,
-                        uint32 flags, bigtime_t timeout);
-
+extern ssize_t		wait_for_objects_etc(object_wait_info* infos, int numInfos,uint32 flags, bigtime_t timeout);
 
 #ifdef __cplusplus
 } // namespace bhapi
 } // extern C
 #endif
-
 
 typedef status_t				(*b_thread_func)(void*);
 #define B_SYSTEM_TIMEBASE               0
@@ -679,9 +647,6 @@ enum {
                                         | B_TIMEOUT_REAL_TIME_BASE
 };
 
-#ifndef BHAPI_KERNEL_H
-#include "Kernel.h"
-#endif /* BHAPI_KERNEL_H */
 /* time functions */
 #define b_snooze(microseconds)			bhapi::snooze(microseconds)
 #define b_snooze_until(time, timebase)	bhapi::snooze_until(time, timebase)
@@ -801,7 +766,7 @@ BHAPI_IMPEXP void*	clone_sem_by_source(void *sem);
  * 	1. the next "bhapi::release_sem..." function call will be failed
  * 	2. the next "bhapi::acquire_sem..." function call will be failed when the sem's count <= 0
  * */
-BHAPI_IMPEXP status_t	close_sem(void* sem);
+//BHAPI_IMPEXP status_t	close_sem(void* sem);
 //BHAPI_IMPEXP status_t	acquire_sem(void *sem);
 //BHAPI_IMPEXP status_t	release_sem(void *sem);
 //BHAPI_IMPEXP status_t	acquire_sem_etc(void *sem,  __be_int64 count,  __be_uint32 flags, bigtime_t timeout);
@@ -865,11 +830,11 @@ BHAPI_IMPEXP void*	open_port_by_source(void *port);
 //BHAPI_IMPEXP status_t	close_port(void *port);
 
 //BHAPI_IMPEXP status_t	write_port(void *port,  __be_int32 code, const void *buf, size_t buf_size);
-//BHAPI_IMPEXP  __be_size_t	port_buffer_size(void *port);
+//BHAPI_IMPEXP  ssize_t	port_buffer_size(void *port);
 //BHAPI_IMPEXP status_t	read_port(void *port,  __be_int32 *code, void *buf, size_t buf_size);
 
 //BHAPI_IMPEXP status_t	write_port_etc(void *port,  __be_int32 code, const void *buf, size_t buf_size,  __be_uint32 flags, bigtime_t timeout);
-//BHAPI_IMPEXP  __be_size_t	port_buffer_size_etc(void *port,  __be_uint32 flags, bigtime_t timeout);
+//BHAPI_IMPEXP  ssize_t	port_buffer_size_etc(void *port,  __be_uint32 flags, bigtime_t timeout);
 //BHAPI_IMPEXP status_t	read_port_etc(void *port,  __be_int32 *code, void *buf, size_t buf_size,  __be_uint32 flags, bigtime_t timeout);
 
 //BHAPI_IMPEXP  __be_int32	port_count(void *port);
@@ -879,7 +844,7 @@ BHAPI_IMPEXP void*	open_port_by_source(void *port);
 
 BHAPI_IMPEXP void*	load_addon(const char* path);
 BHAPI_IMPEXP status_t	unload_addon(void *image);
-BHAPI_IMPEXP status_t	get_image_symbol(void *image, const char *name, void **ptr);
+//BHAPI_IMPEXP status_t	get_image_symbol(void *image, const char *name, void **ptr);
 
 } /* namespace bhapi */
 

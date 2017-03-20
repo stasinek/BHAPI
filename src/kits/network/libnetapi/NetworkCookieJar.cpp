@@ -9,7 +9,7 @@
 
 
 #include <new>
-#include <stdio.h>
+
 
 #include <HashMap.h>
 #include <HashStringClass.h>

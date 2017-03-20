@@ -6,4 +6,6 @@
 #include "HaikuConstants.h"
 #include "HaikuDefs.h"
 
+#include <ByteOrder.h>
+
 #endif

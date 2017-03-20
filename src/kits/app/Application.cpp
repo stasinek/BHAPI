@@ -42,6 +42,7 @@
 #include "../app/MessageQueue.h"
 #include "../app/Looper.h"
 #include "../support/Errors.h"
+#include "../support/StringClass.h"
 
 //-----------------------------------------------------------------------------
 #include "Application.h"
@@ -50,9 +51,9 @@
 
 BHAPI_LOCAL BCursor _B_CURSOR_SYSTEM_DEFAULT(NULL);
 
-BHAPI_EXPORT BApplication *bhapi::app = NULL;
-BHAPI_EXPORT BMessenger bhapi::app_messenger;
-BHAPI_EXPORT BClipboard bhapi::clipboard("system");
+BHAPI_EXPORT BApplication *bhapi::be_app = NULL;
+BHAPI_EXPORT BMessenger bhapi::be_app_messenger;
+BHAPI_EXPORT BClipboard bhapi::be_clipboard("system");
 BHAPI_EXPORT const BCursor *B_CURSOR_SYSTEM_DEFAULT = &_B_CURSOR_SYSTEM_DEFAULT;
 
 #ifdef BHAPI_BUILD_LIBRARY
@@ -73,7 +74,7 @@ void BApplication::Init(const char *signature, bool tryInterface)
 
     hLocker->Lock();
 
-    if(bhapi::app != NULL)
+    if(bhapi::be_app != NULL)
         BHAPI_ERROR("[APP]: %s --- Another application running!", __PRETTY_FUNCTION__);
 
     if(signature) fSignature = bhapi::strdup(signature);
@@ -83,12 +84,12 @@ void BApplication::Init(const char *signature, bool tryInterface)
     fPulseRunner = new BMessageRunner(msgr, &pulseMsg, fPulseRate, 0);
     if(!(fPulseRunner == NULL || fPulseRunner->IsValid())) {delete fPulseRunner; fPulseRunner = NULL;}
 
-    bhapi::app = this;
-    bhapi::app_messenger = BMessenger(this);
+    bhapi::be_app = this;
+    bhapi::be_app_messenger = BMessenger(this);
 
     hLocker->Unlock();
 
-    bhapi::clipboard.StartWatching(bhapi::app_messenger);
+    bhapi::be_clipboard.StartWatching(bhapi::be_app_messenger);
 
     if(tryInterface) InitGraphicsEngine();
 }
@@ -143,8 +144,8 @@ BApplication::~BApplication()
     }
     fModalWindows.MakeEmpty();
 
-    bhapi::clipboard.StopWatching(bhapi::app_messenger);
-    bhapi::app_messenger = BMessenger();
+    bhapi::be_clipboard.StopWatching(bhapi::be_app_messenger);
+    bhapi::be_app_messenger = BMessenger();
 
     hLocker->Unlock();
 }
@@ -176,7 +177,7 @@ status_t BApplication::Archive(BMessage *into, bool deep) const
 
 BArchivable*BApplication::Instantiate(const BMessage *from)
 {
-    if(bhapi::validatb_instantiation(from, "BApplication"))
+    if(bhapi::validate_instantiation(from, "BApplication"))
         return new BApplication(from);
     return NULL;
 }
@@ -288,7 +289,7 @@ void BApplication::DispatchMessage(BMessage *msg, BHandler *target)
     else if(msg->what == B_APP_CURSOR_REQUESTED && target == this)
     {
         const void *cursor_data = NULL;
-         __be_size_t len;
+         ssize_t len;
         bool show_cursor;
 
         if(msg->FindData("BHAPI:cursor_data", B_ANY_TYPE, &cursor_data, &len))
@@ -328,14 +329,12 @@ void BApplication::Quit()
 **************************************************************************\n\
 *                           [APP]: BApplication                          *\n\
 *                                                                        *\n\
-*      Task must call \"PostMessage(B_QUIT_REQUESTED)\" instead of         *\n\
-*      \"Quit()\" outside the looper!!!                                    *\n\
+*      Task must call \"PostMessage(B_QUIT_REQUESTED)\" instead of       *\n\
+*      \"Quit()\" outside the looper!!!                                  *\n\
 **************************************************************************\n\n");
 
-    bhapi::close_sem(fSem);
-
+    bhapi::delete_sem(fSem);
     fQuit = true;
-
     BHAPI_DEBUG("[APP]: Application Quit.");
 }
 //-----------------------------------------------------------------------------
@@ -461,13 +460,13 @@ bool BApplication::quit_all_loopers(bool force)
     {
         hLocker->Lock();
 
-        if(bhapi::app != this) {hLocker->Unlock(); return false;}
+        if(bhapi::be_app != this) {hLocker->Unlock(); return false;}
 
         looper = NULL;
         for(index = 0; index < BLooper::sLooperList.CountItems(); index++)
         {
             looper = (BLooper*)(BLooper::sLooperList.ItemAt(index));
-            if(looper == bhapi::app) looper = NULL; // ignore bhapi::app
+            if(looper == bhapi::be_app) looper = NULL; // ignore bhapi::be_app
             if(looper != NULL) break;
         }
 
@@ -569,7 +568,7 @@ void BApplication::InitGraphicsEngine()
                     }
 
                     BGraphicsEngine* (*instantiate_func)() = NULL;
-                    if(bhapi::get_image_symbol(addon, "instantiate_graphics_engine", (void**)&instantiate_func) != B_OK)
+                    if(bhapi::get_image_symbol(*(bhapi::image_id*)addon, "instantiate_graphics_engine",B_SYMBOL_TYPE_DATA,(void**)&instantiate_func) != B_OK)
                     {
                         BHAPI_WARNING("[APP]: Unable to get symbol of image(%s).", aPath.Path());
                         bhapi::unload_addon(addon);
@@ -695,8 +694,8 @@ void BApplication::SetCursor(const BCursor *cursor, bool sync)
     {
         BMessage msg(B_APP_CURSOR_REQUESTED);
         msg.AddData("BHAPI:cursor_data", B_ANY_TYPE, cursor->Data(), (size_t)cursor->DataLength(), true);
-        if(sync == false) bhapi::app_messenger.SendMessage(&msg);
-        else bhapi::app_messenger.SendMessage(&msg, &msg);
+        if(sync == false) bhapi::be_app_messenger.SendMessage(&msg);
+        else bhapi::be_app_messenger.SendMessage(&msg, &msg);
     }
     else if(fCursor != *cursor)
     {
@@ -712,7 +711,7 @@ void BApplication::HideCursor()
     {
         BMessage msg(B_APP_CURSOR_REQUESTED);
         msg.AddBool("BHAPI:show_cursor", false);
-        bhapi::app_messenger.SendMessage(&msg);
+        bhapi::be_app_messenger.SendMessage(&msg);
     }
     else if(!fCursorHidden)
     {
@@ -729,7 +728,7 @@ void BApplication::ShowCursor()
     {
         BMessage msg(B_APP_CURSOR_REQUESTED);
         msg.AddBool("BHAPI:show_cursor", true);
-        bhapi::app_messenger.SendMessage(&msg);
+        bhapi::be_app_messenger.SendMessage(&msg);
     }
     else if(fCursorHidden || fCursorObscure)
     {
@@ -746,7 +745,7 @@ void BApplication::ObscureCursor()
     {
         BMessage msg(B_APP_CURSOR_REQUESTED);
         msg.AddBool("BHAPI:obscure_cursor", true);
-        bhapi::app_messenger.SendMessage(&msg);
+        bhapi::be_app_messenger.SendMessage(&msg);
     }
     else if(!fCursorHidden && !fCursorObscure)
     {

@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -36,126 +36,102 @@ static  __be_uint32 get_cursor_data_length(const  __be_uint8 *data);
 static void* duplicate_cursor_data(const  __be_uint8 *data);
 } /* namespace */
 
-
-
 static  __be_uint32 bhapi::get_cursor_data_bits_length(const  __be_uint8 *data)
 {
-	if(data == NULL || data[0] == 0 || data[1] > 32) return 0;
-	__be_uint32 rowBytes = (((__be_uint32)data[0] * (__be_uint32)data[1] + 0x00000007) & 0xfffffff8) >> 3;
-	return((__be_uint32)data[0] * (__be_uint32)rowBytes);
+    if(data == NULL || data[0] == 0 || data[1] > 32) return 0;
+    __be_uint32 rowBytes = (((__be_uint32)data[0] * (__be_uint32)data[1] + 0x00000007) & 0xfffffff8) >> 3;
+    return((__be_uint32)data[0] * (__be_uint32)rowBytes);
 }
-
 
 static  __be_uint32 bhapi::get_cursor_data_length(const  __be_uint8 *data)
 {
-	__be_uint32 bits_length = bhapi::get_cursor_data_bits_length(data);
-	return(bits_length > 0 ? (4 + 2 * bits_length) : 0);
+    __be_uint32 bits_length = bhapi::get_cursor_data_bits_length(data);
+    return(bits_length > 0 ? (4 + 2 * bits_length) : 0);
 }
-
 
 static void* bhapi::duplicate_cursor_data(const  __be_uint8 *data)
 {
-	size_t len = (size_t)bhapi::get_cursor_data_length(data);
+    size_t len = (size_t)bhapi::get_cursor_data_length(data);
 
-	void *cursor_data = (len > 0 ? malloc(len) : NULL);
-	if(cursor_data) memcpy(cursor_data, data, len);
+    void *cursor_data = (len > 0 ? malloc(len) : NULL);
+    if(cursor_data) memcpy(cursor_data, data, len);
 
-	return cursor_data;
+    return cursor_data;
 }
 
-
 BCursor::BCursor(const void *cursorData)
-	: BArchivable()
+    : BArchivable()
 {
     fData = bhapi::duplicate_cursor_data((const  __be_uint8*)cursorData);
 }
 
-
 BCursor::BCursor(const BCursor &cursor)
-	: BArchivable()
+    : BArchivable()
 {
     fData = bhapi::duplicate_cursor_data((const  __be_uint8*)cursor.fData);
 }
 
-
 BCursor::~BCursor()
 {
-	if(fData) free(fData);
+    if(fData) free(fData);
 }
 
-
-BCursor&
-BCursor::operator=(const BCursor &from)
+BCursor& BCursor::operator=(const BCursor &from)
 {
-	if(fData) free(fData);
+    if(fData) free(fData);
     fData = bhapi::duplicate_cursor_data((const  __be_uint8*)from.fData);
-	return *this;
+    return *this;
+}
+
+bool BCursor::operator==(const BCursor &other) const
+{
+    if(DataLength() == 0 && other.DataLength() == 0) return true;
+    if(DataLength() == 0 || other.DataLength() == 0 || DataLength() != other.DataLength()) return false;
+    return(memcmp(Data(), other.Data(), (size_t)DataLength()) == 0);
+}
+
+bool BCursor::operator!=(const BCursor &other) const
+{
+    if(DataLength() == 0 && other.DataLength() == 0) return false;
+    if(DataLength() == 0 || other.DataLength() == 0 || DataLength() != other.DataLength()) return true;
+    return(memcmp(Data(), other.Data(), (size_t)DataLength()) != 0);
+}
+
+const void* BCursor::Data() const
+{
+    return fData;
+}
+
+__be_uint32 BCursor::DataLength() const
+{
+    return(bhapi::get_cursor_data_length((const  __be_uint8*)fData));
+}
+
+__be_uint8 BCursor::Width() const
+{
+    return(fData ? *((const  __be_uint8*)fData) : 0);
+}
+
+__be_uint8 BCursor::Height() const
+{
+    return(fData ? *((const  __be_uint8*)fData) : 0);
 }
 
 
-bool
-BCursor::operator==(const BCursor &other) const
+__be_uint8 BCursor::ColorDepth() const
 {
-	if(DataLength() == 0 && other.DataLength() == 0) return true;
-	if(DataLength() == 0 || other.DataLength() == 0 || DataLength() != other.DataLength()) return false;
-	return(memcmp(Data(), other.Data(), (size_t)DataLength()) == 0);
+    return(fData ? *((const  __be_uint8*)fData + 1) : 0);
 }
 
-
-bool
-BCursor::operator!=(const BCursor &other) const
+__be_uint16 BCursor::Spot() const
 {
-	if(DataLength() == 0 && other.DataLength() == 0) return false;
-	if(DataLength() == 0 || other.DataLength() == 0 || DataLength() != other.DataLength()) return true;
-	return(memcmp(Data(), other.Data(), (size_t)DataLength()) != 0);
-}
-
-
-const void*
-BCursor::Data() const
-{
-	return fData;
-}
-
-
-__be_uint32
-BCursor::DataLength() const
-{
-	return(bhapi::get_cursor_data_length((const  __be_uint8*)fData));
-}
-
-
-__be_uint8
-BCursor::Width() const
-{
-	return(fData ? *((const  __be_uint8*)fData) : 0);
-}
-
-
-__be_uint8
-BCursor::Height() const
-{
-	return(fData ? *((const  __be_uint8*)fData) : 0);
-}
-
-
-__be_uint8
-BCursor::ColorDepth() const
-{
-	return(fData ? *((const  __be_uint8*)fData + 1) : 0);
-}
-
-
-be_uint16
-BCursor::Spot() const
-{
-	if(fData == NULL) return 0;
+    if(fData == NULL) return 0;
 
 #ifdef BHAPI_LITTLE_ENDIAN
-	return(*((__be_uint16*)fData + 1));
+    return(*((__be_uint16*)fData + 1));
 #else
-	const  __be_uint8 *tmp = (const  __be_uint8*)fData + 2;
-	return((__be_uint16)tmp[0] | ((__be_uint16)tmp[1] << 8));
+    const  __be_uint8 *tmp = (const  __be_uint8*)fData + 2;
+    return((__be_uint16)tmp[0] | ((__be_uint16)tmp[1] << 8));
 #endif
 }
 
@@ -163,16 +139,16 @@ BCursor::Spot() const
 const void*
 BCursor::Bits() const
 {
-	if(fData == NULL) return NULL;
-	return((const void*)((const  __be_uint32*)fData + 1));
+    if(fData == NULL) return NULL;
+    return((const void*)((const  __be_uint32*)fData + 1));
 }
 
 
 const void*
 BCursor::Mask() const
 {
-	if(fData == NULL) return NULL;
-	return((const void*)((const  __be_uint8*)fData + 4 + bhapi::get_cursor_data_bits_length((const  __be_uint8*)fData)));
+    if(fData == NULL) return NULL;
+    return((const void*)((const  __be_uint8*)fData + 4 + bhapi::get_cursor_data_bits_length((const  __be_uint8*)fData)));
 }
 
 

@@ -29,12 +29,12 @@
 
 #ifdef BHAPI_OS_LINUX
 
-#include <stdlib.h>
+
 #include <fcntl.h>
 
 #include <pthread.h>
 #include <semaphore.h>
-#include <sys/types.h>
+#include <../include/sys/types.h>
 #include <unistd.h>
 
 #include <time.h>

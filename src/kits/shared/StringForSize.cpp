@@ -5,7 +5,7 @@
 
 #include "StringForSize.h"
 
-#include <stdio.h>
+
 
 #include <MessageFormat.h>
 #include <SystemCatalog.h>

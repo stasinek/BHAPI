@@ -1,5 +1,5 @@
-/* --------------------------------------------------------------------------
- * 
+﻿/* --------------------------------------------------------------------------
+ *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,13 +22,17 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: RenderKit.h
- * 
+ *
  * --------------------------------------------------------------------------*/
+
+#ifndef B_RENDER_KIT_H
+#define B_RENDER_KIT_H
 
 #include "render/Render.h"
 #include "render/LineGenerator.h"
 #include "render/ArcGenerator.h"
 #include "render/Pixmap.h"
 
+#endif

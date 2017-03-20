@@ -28,7 +28,7 @@
  * --------------------------------------------------------------------------*/
 #ifdef BHAPI_OS_LINUX
 
-#include <sys/time.h>
+#include <../include/sys/time.h>
 #include <time.h>
 
 #include <Haiku.h>

@@ -12,8 +12,8 @@
 #include <Resources.h>
 
 #include <new>
-#include <stdio.h>
-#include <stdlib.h>
+
+
 
 #include "ResourceFile.h"
 #include "ResourceItem.h"

@@ -13,14 +13,14 @@
 #include <errno.h>
 #include <netinet/in.h>
 #include <pthread.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/ioctl.h>
+
+
+#include <../include/sys/ioctl.h>
 #include <unistd.h>
 
-#include <syscall_utils.h>
+#include <../include/syscall_utils.h>
 
-#include <syscalls.h>
+#include <../include/syscalls.h>
 
 
 static void

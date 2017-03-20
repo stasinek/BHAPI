@@ -10,8 +10,8 @@
 #include <ResourceStrings.h>
 
 #include <new>
-#include <stdlib.h>
-#include <string.h>
+
+
 
 #include <Entry.h>
 #include <File.h>

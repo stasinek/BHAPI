@@ -47,7 +47,7 @@
 extern HINSTANCE b_dll_hinstance;
 #endif
 
-#include <stdlib.h>
+
 
 status_t bhapi::find_directory(bhapi::directory_which which, BPath *path)
 {

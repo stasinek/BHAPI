@@ -14,7 +14,7 @@
 
 #include "ScreenSaverSettings.h"
 
-#include <string.h>
+
 
 #include <Debug.h>
 #include <File.h>

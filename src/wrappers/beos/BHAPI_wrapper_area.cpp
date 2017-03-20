@@ -110,7 +110,7 @@ public:
 
 			int32 msgCode = 0;
 			char buf = 0;
-			__be_size_t readBytes = read_port(iLocker, &msgCode, &buf, 1);
+			ssize_t readBytes = read_port(iLocker, &msgCode, &buf, 1);
 			if(readBytes < 1) continue;
 			if(readBytes != 1 || msgCode != 'b_' || buf != 1)
 				BHAPI_ERROR("[KERNEL]: Unable to lock the locker for global area.");

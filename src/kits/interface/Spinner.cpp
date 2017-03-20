@@ -9,8 +9,8 @@
 
 #include <Spinner.h>
 
-#include <stdint.h>
-#include <stdlib.h>
+#include <../include/stdint.h>
+
 
 #include <PropertyInfo.h>
 #include <StringClass.h>

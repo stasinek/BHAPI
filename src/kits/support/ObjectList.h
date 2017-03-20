@@ -99,7 +99,7 @@ class _PointerList_ : public BList {
 public:
     _PointerList_(const _PointerList_ &list);
     _PointerList_(int32 itemsPerBlock = 20, bool owning = false);
-    ~_PointerList();
+    ~_PointerList_(void);
 
     typedef void *(* GenericEachFunction)(void *, void *);
     typedef int (* GenericCompareFunction)(const void *, const void *);

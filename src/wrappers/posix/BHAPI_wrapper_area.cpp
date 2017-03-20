@@ -28,14 +28,14 @@
  * --------------------------------------------------------------------------*/
 #ifdef BHAPI_OS_LINUX
 
-#include <stdlib.h>
+
 
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
+#include <../include/sys/types.h>
+#include <../include/sys/stat.h>
+#include <../include/sys/mman.h>
 
 #include "../config.h"
 #include "../kernel/Kernel.h"

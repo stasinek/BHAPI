@@ -26,9 +26,9 @@
  */
 #include "ColorQuantizer.h"
 
-#include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
+#include <../include/stddef.h>
+
+
 
 
 static inline uint8

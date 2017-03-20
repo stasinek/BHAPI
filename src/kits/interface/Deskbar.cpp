@@ -17,7 +17,7 @@
 #include <InterfaceDefs.h>
 #include <Node.h>
 
-#include <string.h>
+
 
 // ToDo: in case the BDeskbar methods are called from a Deskbar add-on,
 //	they will currently deadlock most of the time (only those that do

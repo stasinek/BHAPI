@@ -34,7 +34,7 @@
 #include "../support/Errors.h"
 #include "../kernel/Debug.h"
 
-#include <stdlib.h>
+
 
 typedef struct b_xml_attribute {
 	char *name;

@@ -20,7 +20,7 @@
 #include <Palette.h>
 
 #include <new>
-#include <string.h>
+
 
 
 using std::nothrow;

@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -29,18 +29,17 @@
 
 #ifndef BHAPI_NET_ADDRESS_H
 #define BHAPI_NET_ADDRESS_H
-#include <Haiku.h>
 
-#ifndef _WIN32
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
+#ifndef BHAPI_OS_WIN32
+#include <posix/sys/types.h>
+#include <posix/sys/socket.h>
+#include <posix/netinet/in.h>
 #else
 #include <winsock2.h>
 #endif
+#include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */
-
 #include "../support/Archivable.h"
 class BHAPI_IMPEXP BNetAddress : public BArchivable {
 public:
@@ -52,28 +51,28 @@ public:
     BNetAddress(const BNetAddress &from);
     virtual ~BNetAddress();
 
-	// Archiving
+    // Archiving
     BNetAddress(const BMessage *from);
-	virtual status_t Archive(BMessage *into, bool deep = true) const;
-	static BArchivable *Instantiate(const BMessage *from);
+    virtual status_t Archive(BMessage *into, bool deep = true) const;
+    static BArchivable *Instantiate(const BMessage *from);
 
-	status_t	InitCheck() const;
+    status_t	InitCheck() const;
 
     BNetAddress	&operator=(const BNetAddress &addr);
 
     status_t	SetTo(const char *hostname,  __be_uint16 port = 0);
-	status_t	SetTo(const char *hostname, const char *protocol, const char *service);
-	status_t	SetTo(const struct sockaddr_in &sa);
+    status_t	SetTo(const char *hostname, const char *protocol, const char *service);
+    status_t	SetTo(const struct sockaddr_in &sa);
     status_t	SetTo(const struct in_addr addr,  __be_uint16 port = 0);
     status_t	SetTo(__be_uint32 addr = INADDR_ANY,  __be_uint16 port = 0);
 
     status_t	GetAddr(char *hostname, size_t hostname_len,  __be_uint16 *port = NULL) const;
-	status_t	GetAddr(struct sockaddr_in &sa) const;
+    status_t	GetAddr(struct sockaddr_in &sa) const;
     status_t	GetAddr(struct in_addr &addr,  __be_uint16 *port = NULL) const;
 
 private:
-	struct sockaddr_in fAddr;
-	status_t fStatus;
+    struct sockaddr_in fAddr;
+    status_t fStatus;
 };
 
 #endif /* __cplusplus */

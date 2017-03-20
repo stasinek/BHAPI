@@ -48,7 +48,7 @@
 #include "../../private/app/PrivateHandler.h"
 
 
-#include <stdlib.h>
+
 
 #ifdef BHAPI_BUILD_LIBRARY
 BHAPI_EXPORT BList BLooper::sLooperList;
@@ -167,7 +167,7 @@ BLooper::Archive(BMessage *into, bool deep) const
 BArchivable*
 BLooper::Instantiate(const BMessage *from)
 {
-    if(bhapi::validatb_instantiation(from, "BLooper"))
+    if(bhapi::validate_instantiation(from, "BLooper"))
         return new BLooper(from);
     return NULL;
 }
@@ -471,7 +471,7 @@ BLooper::Run()
         BHAPI_ERROR("[APP]: %s --- Thread must run only one time!", __PRETTY_FUNCTION__);
     }
 
-    if(bhapi::resume_thread(fThread) == B_OK)
+    if(bhapi::resume_thread(bhapi::get_thread_id(fThread)) == B_OK)
         return fThread;
     else
         return NULL;
@@ -524,7 +524,7 @@ BLooper::Quit()
         while((locksCount--) > B_INT64_CONSTANT(0)) bhapi::unlock_locker(fLocker);
 
         status_t status;
-        bhapi::wait_for_thread(thread, &status);
+        bhapi::wait_for_thread(bhapi::get_thread_id(thread), &status);
         if(bhapi::get_thread_run_state(thread) != BHAPI_THREAD_EXITED)
             if(bhapi::lock_looper_of_handler(token, B_INFINITE_TIMEOUT) == B_OK) delete this;
         bhapi::delete_thread(thread);
@@ -578,13 +578,13 @@ BLooper::_task(void *arg)
     BLooper *self = (BLooper*)arg;
     if(self == NULL) return B_ERROR;
 
-    void *sem = bhapi::clone_sem_by_source(self->fSem);
+    void *sem = bhapi::clone_sem_by_source((void*)self->fSem);
     if(!sem) return B_ERROR;
 
     bool *threadExited = new bool;
     if(!threadExited)
     {
-        bhapi::delete_sem(sem);
+        bhapi::delete_sem((bhapi::sem_id)sem);
         return B_NO_MEMORY;
     }
     *threadExited = false;
@@ -592,7 +592,7 @@ BLooper::_task(void *arg)
     if(bhapi::on_exit_thread(_taskError, (void*)threadExited) != B_OK)
     {
         delete threadExited;
-        bhapi::delete_sem(sem);
+        bhapi::delete_sem((bhapi::sem_id)sem);
         return B_ERROR;
     }
     self->fThreadExited = threadExited;
@@ -600,7 +600,7 @@ BLooper::_task(void *arg)
     if(bhapi::on_exit_thread((void (*)(void*))bhapi::delete_sem, sem) != B_OK)
     {
         *threadExited = true;
-        bhapi::delete_sem(sem);
+        bhapi::delete_sem((bhapi::sem_id)sem);
         return B_ERROR;
     }
 
@@ -724,7 +724,7 @@ BLooper::_taskLooper(BLooper *self, void *sem)
         }
 
         bhapi::sem_info sem_info;
-        if(bhapi::acquire_sem(sem) != B_OK || bhapi::get_sem_info(sem, &sem_info) != B_OK) sem_info.closed = true;
+        if(bhapi::acquire_sem((bhapi::sem_id)sem) != B_OK || bhapi::get_sem_info((bhapi::sem_id)sem, &sem_info) != B_OK) sem_info.closed = true;
 
         if(sem_info.closed) break;
     }
@@ -745,7 +745,7 @@ BMessage* BLooper::NextLooperMessage(bigtime_t timeout = B_INFINITE_TIMEOUT)
     void *sem = NULL;
     BLooper *proxy = _Proxy();
     if(proxy == NULL || proxy->fThread == NULL || bhapi::get_thread_id(proxy->fThread) != bhapi::get_current_thread_id() ||
-       (sem = bhapi::clone_sem_by_source(proxy->fSem)) == NULL)
+       (sem = bhapi::clone_sem_by_source((void*)proxy->fSem)) == NULL)
     {
         hLocker->Unlock();
         return NULL;
@@ -765,7 +765,7 @@ BMessage* BLooper::NextLooperMessage(bigtime_t timeout = B_INFINITE_TIMEOUT)
         queue = proxy->fMessageQueue;
         while(looper != NULL && queue != NULL)
         {
-            if(proxy == bhapi::app) BApplication::dispatch_message_runners();
+            if(proxy == bhapi::be_app) BApplication::dispatch_message_runners();
 
             BMessage *aMsg = NULL;
 
@@ -841,7 +841,7 @@ BMessage* BLooper::NextLooperMessage(bigtime_t timeout = B_INFINITE_TIMEOUT)
         if(flags >= 2) break;
         if(Proxy() != proxy)
         {
-            bhapi::release_sem(sem); // to push back semaphore
+            bhapi::release_sem((bhapi::sem_id)sem); // to push back semaphore
             break;
         }
         if(flags == 1)
@@ -855,7 +855,7 @@ BMessage* BLooper::NextLooperMessage(bigtime_t timeout = B_INFINITE_TIMEOUT)
         bigtime_t waitTime = timeout;
         if(timeout >= B_INT64_CONSTANT(0))
         {
-            if(proxy == bhapi::app)
+            if(proxy == bhapi::be_app)
             {
                 hLocker->Lock();
                 waitTime = min_c(timeout, (BApplication::sRunnerMinimumInterval == B_INT64_CONSTANT(0) ?
@@ -864,9 +864,9 @@ BMessage* BLooper::NextLooperMessage(bigtime_t timeout = B_INFINITE_TIMEOUT)
                 hLocker->Unlock();
             }
 
-            status = bhapi::acquire_sem_etc(sem, B_INT64_CONSTANT(1), B_TIMEOUT, waitTime);
+            status = bhapi::acquire_sem_etc((bhapi::sem_id)sem, B_INT64_CONSTANT(1), B_TIMEOUT, waitTime);
         }
-        if(bhapi::get_sem_info(sem, &sem_info) != B_OK) sem_info.closed = true;
+        if(bhapi::get_sem_info((bhapi::sem_id)sem, &sem_info) != B_OK) sem_info.closed = true;
 
         if(sem_info.closed || !(status == B_OK || status == B_TIMED_OUT)) break;
         if(status == B_TIMED_OUT && waitTime == timeout) break;
@@ -878,7 +878,7 @@ BMessage* BLooper::NextLooperMessage(bigtime_t timeout = B_INFINITE_TIMEOUT)
         }
     }
 
-    bhapi::delete_sem(sem);
+    bhapi::delete_sem((bhapi::sem_id)sem);
     return retVal;
 }
 
@@ -969,30 +969,26 @@ BLooper::DetachCurrentMessage()
 }
 
 
-BMessageQueue*
-BLooper::MessageQueue() const
+BMessageQueue* BLooper::MessageQueue() const
 {
     return fMessageQueue;
 }
 
 
-__be_int64
-BLooper::Thread() const
+thread_id BLooper::Thread() const
 {
     return bhapi::get_thread_id(Proxy()->fThread);
 }
 
 
-BLooper*
-BLooper::_Proxy() const
+BLooper* BLooper::_Proxy() const
 {
     if(fProxy == NULL) return (BLooper*)this;
     return fProxy->_Proxy();
 }
 
 
-BLooper*
-BLooper::Proxy() const
+BLooper* BLooper::Proxy() const
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     BAutolock <BLocker>autolock(hLocker);
@@ -1088,7 +1084,7 @@ BLooper::_ProxyBy(BLooper *proxy)
 
         fMessageQueue->Lock();
         if(fSem) bhapi::delete_sem(fSem);
-        fSem = bhapi::clone_sem_by_source(proxy->fSem);
+        fSem = (bhapi::sem_id)bhapi::clone_sem_by_source((void*)(proxy->fSem));
         if(fMessageQueue->CountMessages() > 0)
             bhapi::release_sem_etc(fSem, (__be_int64)fMessageQueue->CountMessages(), 0);
         fMessageQueue->Unlock();
@@ -1116,7 +1112,7 @@ BLooper::_ProxyBy(BLooper *proxy)
 
 
 BLooper*
-BLooper::LooperForThread(__be_thread_id tid)
+BLooper::LooperForThread(thread_id tid)
 {
     void *thread = bhapi::open_thread(tid);
     if(thread == NULL) return NULL; // invalid id

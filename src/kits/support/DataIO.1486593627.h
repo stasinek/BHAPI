@@ -40,8 +40,8 @@ public:
 	EDataIO();
 	virtual ~EDataIO();
 
-	virtual  __be_size_t		Read(void *buffer, size_t size) = 0;
-	virtual  __be_size_t		Write(const void *buffer, size_t size) = 0;
+	virtual  ssize_t		Read(void *buffer, size_t size) = 0;
+	virtual  ssize_t		Write(const void *buffer, size_t size) = 0;
 };
 
 
@@ -50,11 +50,11 @@ public:
     BPositionIO();
     virtual ~BPositionIO();
 
-	virtual  __be_size_t		Read(void *buffer, size_t size);
-	virtual  __be_size_t		Write(const void *buffer, size_t size);
+	virtual  ssize_t		Read(void *buffer, size_t size);
+	virtual  ssize_t		Write(const void *buffer, size_t size);
 
-    virtual  __be_size_t		ReadAt(__be_int64 pos, void *buffer, size_t size) = 0;
-    virtual  __be_size_t		WriteAt(__be_int64 pos, const void *buffer, size_t size) = 0;
+    virtual  ssize_t		ReadAt(__be_int64 pos, void *buffer, size_t size) = 0;
+    virtual  ssize_t		WriteAt(__be_int64 pos, const void *buffer, size_t size) = 0;
 
     virtual  __be_int64		Seek(__be_int64 position,  __be_uint32 seek_mode) = 0;
     virtual  __be_int64		Position() const = 0;
@@ -67,8 +67,8 @@ public:
     BMallocIO();
     virtual ~BMallocIO();
 
-    virtual  __be_size_t		ReadAt(__be_int64 pos, void *buffer, size_t size);
-    virtual  __be_size_t		WriteAt(__be_int64 pos, const void *buffer, size_t size);
+    virtual  ssize_t		ReadAt(__be_int64 pos, void *buffer, size_t size);
+    virtual  ssize_t		WriteAt(__be_int64 pos, const void *buffer, size_t size);
 
     virtual  __be_int64		Seek(__be_int64 position,  __be_uint32 seek_mode);
     virtual  __be_int64		Position() const;
@@ -93,8 +93,8 @@ public:
     BMemoryIO(const void *ptr, size_t length);
     virtual ~BMemoryIO();
 
-    virtual  __be_size_t		ReadAt(__be_int64 pos, void *buffer, size_t size);
-    virtual  __be_size_t		WriteAt(__be_int64 pos, const void *buffer, size_t size);
+    virtual  ssize_t		ReadAt(__be_int64 pos, void *buffer, size_t size);
+    virtual  ssize_t		WriteAt(__be_int64 pos, const void *buffer, size_t size);
 
     virtual  __be_int64		Seek(__be_int64 position,  __be_uint32 seek_mode);
     virtual  __be_int64		Position() const;

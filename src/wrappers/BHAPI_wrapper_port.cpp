@@ -572,12 +572,12 @@ BHAPI_EXPORT status_t bhapi::write_port_etc(void *data,  __be_int32 code, const 
 }
 
 
-BHAPI_EXPORT  __be_size_t bhapi::port_buffer_size_etc(void *data,  __be_uint32 flags, bigtime_t microseconds_timeout)
+BHAPI_EXPORT  ssize_t bhapi::port_buffer_size_etc(void *data,  __be_uint32 flags, bigtime_t microseconds_timeout)
 {
 	bhapi::port_t *port = (bhapi::port_t*)data;
 	if(!port) return B_BAD_VALUE;
 
-    if(microseconds_timeout < B_INT64_CONSTANT(0)) return (__be_size_t)B_BAD_VALUE;
+    if(microseconds_timeout < B_INT64_CONSTANT(0)) return (ssize_t)B_BAD_VALUE;
 
 	bigtime_t currentTime = b_real_time_clock_usecs();
 	bool wait_forever = false;
@@ -601,7 +601,7 @@ BHAPI_EXPORT  __be_size_t bhapi::port_buffer_size_etc(void *data,  __be_uint32 f
 		memcpy(&msgLen, buffer, sizeof(size_t));
 
 		bhapi::unlock_port_inter(port);
-		return (__be_size_t)msgLen;
+		return (ssize_t)msgLen;
 	}
 	else if(port->portInfo->closed)
 	{
@@ -654,7 +654,7 @@ BHAPI_EXPORT  __be_size_t bhapi::port_buffer_size_etc(void *data,  __be_uint32 f
 
 	bhapi::unlock_port_inter(port);
 
-	return (__be_size_t)retval;
+	return (ssize_t)retval;
 }
 
 
@@ -767,7 +767,7 @@ BHAPI_EXPORT status_t bhapi::write_port(void *data,  __be_int32 code, const void
 	return bhapi::write_port_etc(data, code, buf, buf_size, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
-BHAPI_EXPORT  __be_size_t bhapi::port_buffer_size(void *data)
+BHAPI_EXPORT  ssize_t bhapi::port_buffer_size(void *data)
 {
 	return bhapi::port_buffer_size_etc(data, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }

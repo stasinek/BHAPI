@@ -5,7 +5,7 @@
 
 #include <SplitView.h>
 
-#include <stdio.h>
+
 
 #include <Archivable.h>
 #include <ControlLook.h>

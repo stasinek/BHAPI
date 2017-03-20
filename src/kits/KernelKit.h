@@ -26,8 +26,11 @@
  * File: KernelKit.h
  *
  * --------------------------------------------------------------------------*/
+#ifndef B_KERNEL_KIT_H
+#define B_KERNEL_KIT_H
 
 #include "kernel/Debug.h"
 #include "kernel/Kernel.h"
 #include "kernel/Memory.h"
 
+#endif

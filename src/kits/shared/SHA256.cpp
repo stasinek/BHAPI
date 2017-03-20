@@ -6,8 +6,8 @@
 
 #include "SHA256.h"
 
-#include <stdio.h>
-#include <string.h>
+
+
 
 #include <ByteOrder.h>
 

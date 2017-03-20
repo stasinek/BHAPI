@@ -50,7 +50,7 @@
 #include "BlockCache.h"
 #include "../kernel/Debug.h"
 
-#include <stdlib.h>
+
 #include <new>
 
 #define MAGIC1		0x9183f4d9

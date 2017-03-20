@@ -6,7 +6,7 @@
 
 #include <ProxySecureSocket.h>
 
-#include <stdio.h>
+
 
 
 BProxySecureSocket::BProxySecureSocket(const BNetworkAddress& proxy)

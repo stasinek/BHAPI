@@ -34,8 +34,8 @@
 #include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */
-#ifndef BSTRING_I
-#define BSTRING_I
+#ifndef BSTRING_DEF
+#define BSTRING_DEF
 class BString;
 #endif
 class BHAPI_IMPEXP BStringArray {
@@ -92,7 +92,7 @@ public:
 private:
     BList list;
 };
-#define BSTRINGARRAY_I
+#define BSTRINGARRAY_DEF
 #endif /* __cplusplus */
 #endif /* BHAPI_STRING_ARRAY_H */
 

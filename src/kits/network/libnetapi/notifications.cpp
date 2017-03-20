@@ -11,7 +11,7 @@
 
 #include <MessengerPrivate.h>
 #include <generic_syscall_defs.h>
-#include <syscalls.h>
+#include <../include/syscalls.h>
 
 
 static status_t

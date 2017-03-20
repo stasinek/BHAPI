@@ -19,8 +19,8 @@
 #include <ShapePrivate.h>
 
 #include <new>
-#include <stdlib.h>
-#include <string.h>
+
+
 
 
 //	#pragma mark - BShapeIterator

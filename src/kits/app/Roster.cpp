@@ -12,9 +12,9 @@
 
 #include <ctype.h>
 #include <new>
-#include <stdio.h>
-#include <stdlib.h>
-#include <strings.h>
+
+
+#include <../include/strings.h>
 #include <unistd.h>
 
 #include <AppFileInfo.h>

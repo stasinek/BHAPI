@@ -10,7 +10,7 @@
 
 #include <Icon.h>
 
-#include <string.h>
+
 
 #include <new>
 

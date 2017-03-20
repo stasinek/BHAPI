@@ -9,7 +9,7 @@
 
 #include "CalendarView.h"
 
-#include <stdlib.h>
+
 
 #include <LayoutUtils.h>
 #include <Window.h>

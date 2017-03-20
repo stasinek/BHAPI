@@ -11,19 +11,19 @@
 #include <Mime.h>
 #include <Haiku.h>
 //-----------------------------------------------------------------------------
-#ifndef BBITMAP_I
+#ifndef BBITMAP_DEF
 class BBitmap;
-#define BBITMAP_I
+#define BBITMAP_DEF
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BRESOURCES_I
+#ifndef BRESOURCES_DEF
 class BResources;
-#define BRESOURCES_I
+#define BRESOURCES_DEF
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BNODE_I
+#ifndef BNODE_DEF
 class BNode;
-#define BNODE_I
+#define BNODE_DEF
 #endif
 //-----------------------------------------------------------------------------
 class BNodeInfo {
@@ -75,6 +75,6 @@ private:
             status_t			fCStatus;
 };
 //-----------------------------------------------------------------------------
-#define BNODEINFO_I
+#define BNODEINFO_DEF
 #endif // BHAPI_NODE_INFO_H
 //-----------------------------------------------------------------------------

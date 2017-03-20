@@ -7,7 +7,7 @@
 
 #include <AutoLocker.h>
 
-#include <syscalls.h>
+#include <../include/syscalls.h>
 #include <user_thread.h>
 
 

@@ -6,7 +6,7 @@
  *		Axel Dörfler, axeld@pinc-software.de
  */
 
-#include <string.h>
+
 
 #include <image.h>
 #include <OS.h>

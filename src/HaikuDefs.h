@@ -6,9 +6,12 @@
 #ifndef UNICODE
 #define UNICODE
 #endif
+
 # ifdef BHAPI_OS_WIN32
-# undef WIN32
-#define WIN32
+# undef  WIN32
+#define  WIN32
+# undef _WIN32
+#define _WIN32
 #endif
 # ifdef BHAPI_OS_LINUX
 # undef LINUX
@@ -100,7 +103,7 @@
     STACK_DIRECTION = 0 => direction of growth unknown */
 /* #undef STACK_DIRECTION */
 
-#include <posix/limits.h>
+#include <../include/limits.h>
 
 #ifdef _MSC_VER /* MSC compiler */
 #	ifndef LLONG_MAX
@@ -169,15 +172,14 @@ BHAPI_IMPEXP void * 	get_stack_frame (void);
 } /* namespace */
 #endif /* __cplusplus */
 
-#include <posix/stdlib.h>
-#include <posix/stdio.h>
 #ifndef _MSC_VER
-#   include <posix/sys/cdefs.h>
+#   include <../include/sys/cdefs.h>
 #endif
+#include <../include/stdlib.h>
+#include <../include/stdio.h>
+#include <../include/string.h>
 
-#include "kits/interface/InterfaceDefs.h"
-#include "kits/interface/GraphicsDefs.h"
-#include "kits/app/AppDefs.h"
-#include "kits/storage/StorageDefs.h"
-#include "kits/support/SupportDefs.h"
+#include <SupportDefs.h>
+#include <StorageDefs.h>
+
 #endif

@@ -10,9 +10,9 @@
 
 #include "TextInput.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
+
+
 
 #include <ControlLook.h>
 #include <InterfaceDefs.h>

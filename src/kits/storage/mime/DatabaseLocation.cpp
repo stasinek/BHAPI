@@ -11,8 +11,8 @@
 
 #include <mime/DatabaseLocation.h>
 
-#include <stdlib.h>
-#include <syslog.h>
+
+#include <../include/syslog.h>
 
 #include <new>
 

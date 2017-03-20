@@ -33,33 +33,33 @@
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 //-----------------------------------------------------------------------------
-#ifndef BAPPLICATION_I
-#define BAPPLICATION_I
+#ifndef BAPPLICATION_DEF
+#define BAPPLICATION_DEF
 class BApplication;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BMESSENGER_I
-#define BMESSENGER_I
+#ifndef BMESSENGER_DEF
+#define BMESSENGER_DEF
 class BMessenger;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BMESSAGE_I
-#define BMESSAGE_I
+#ifndef BMESSAGE_DEF
+#define BMESSAGE_DEF
 class BMessage;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BMESSAGEFILTER_I
-#define BMESSAGEFILTER_I
+#ifndef BMESSAGEFILTER_DEF
+#define BMESSAGEFILTER_DEF
 class BMessageFilter;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BMESSAGEQUEUE_I
-#define BMESSAGEQUEUE_I
+#ifndef BMESSAGEQUEUE_DEF
+#define BMESSAGEQUEUE_DEF
 class BMessageQueue;
 #endif
 //-----------------------------------------------------------------------------
-#ifndef BMESSAGEQUEUE_I
-#define BMESSAGEQUEUE_I
+#ifndef BMESSAGEQUEUE_DEF
+#define BMESSAGEQUEUE_DEF
 class BLoooper;
 #endif
 //-----------------------------------------------------------------------------
@@ -67,7 +67,7 @@ class BLoooper;
 //-----------------------------------------------------------------------------
 #include "../support/List.h"
 #include "Handler.h"
-#include <Haiku.h>
+#include <OS.h>
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus
 //-----------------------------------------------------------------------------
@@ -103,7 +103,7 @@ public:
     BLooper*	Proxy() const;
     bool		ProxyBy(BLooper *proxy);
 
-     __be_thread_id	Thread() const;
+    thread_id	Thread() const;
 
     bool		Lock();
     void		Unlock();
@@ -136,7 +136,7 @@ public:
     virtual bool	SetCommonFilterList(const BList *filterList);
     const BList	*CommonFilterList() const;
 
-    static BLooper	*LooperForThread(__be_thread_id tid);
+    static BLooper	*LooperForThread(thread_id tid);
 
 protected:
     // NextLooperMessage & DispatchLooperMessage: called from task of looper, like below
@@ -180,7 +180,7 @@ private:
      __be_int64 fLocksCount;
 
     void *fThread;
-    void *fSem;
+    sem_id fSem;
 
     BMessageQueue *fMessageQueue;
     BMessage *fCurrentMessage;
@@ -208,6 +208,6 @@ private:
 //-----------------------------------------------------------------------------
 #endif /* __cplusplus */
 //-----------------------------------------------------------------------------
-#define BLOOPER_I
+#define BLOOPER_DEF
 #endif /* BHAPI_LOOPER_H */
 //-----------------------------------------------------------------------------

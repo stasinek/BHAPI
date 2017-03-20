@@ -75,7 +75,7 @@ public:
 
 	size_t		FlattenedSize() const;
 	bool		Flatten(char *buffer, size_t size) const;
-	bool		Flatten(BDataIO *stream,  __be_size_t *size = NULL) const;
+	bool		Flatten(BDataIO *stream,  ssize_t *size = NULL) const;
 	bool		Unflatten(const char *buffer, size_t size);
 	bool		Unflatten(BDataIO *stream, size_t size);
 

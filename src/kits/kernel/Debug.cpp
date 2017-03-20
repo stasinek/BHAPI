@@ -36,8 +36,8 @@
 #include "../support/StringClass.h"
 #include "../support/UTF8.h"
 
-#include <stdio.h>
-#include <stdlib.h>
+
+
 #include <new>
 
 #ifdef _WIN32

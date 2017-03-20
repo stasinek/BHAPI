@@ -10,9 +10,9 @@
 
 #include "DriverSettingsMessageAdapter.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <strings.h>
+
+
+#include <../include/strings.h>
 
 #include <File.h>
 #include <StringClass.h>

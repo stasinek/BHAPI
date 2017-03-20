@@ -7,7 +7,7 @@
 #include <FileIO.h>
 
 #include <errno.h>
-#include <stdio.h>
+
 
 
 BFileIO::BFileIO(FILE* file, bool takeOverOwnership)

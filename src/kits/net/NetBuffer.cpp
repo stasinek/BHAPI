@@ -77,7 +77,7 @@ BNetBuffer::Archive(BMessage *into, bool deep) const
 BArchivable*
 BNetBuffer::Instantiate(const BMessage *from)
 {
-	if(bhapi::validatb_instantiation(from, "BNetBuffer"))
+	if(bhapi::validate_instantiation(from, "BNetBuffer"))
 		return new BNetBuffer(from);
 	return NULL;
 }

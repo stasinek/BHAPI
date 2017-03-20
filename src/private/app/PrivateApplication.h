@@ -59,7 +59,7 @@ private:
 };
 
 namespace bhapi {
-extern BApplicationConnector *app_connector;
+extern BApplicationConnector *be_app_connector;
 }
 #endif /* __cplusplus */
 

@@ -1,5 +1,5 @@
-/* --------------------------------------------------------------------------
- * 
+﻿/* --------------------------------------------------------------------------
+ *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
  *
@@ -22,10 +22,13 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * File: StorageKit.h
- * 
+ *
  * --------------------------------------------------------------------------*/
+
+#ifndef B_STORAGE_KIT_H
+#define B_STORAGE_KIT_H
 
 #include "storage/Path.h"
 #include "storage/Entry.h"
@@ -36,3 +39,6 @@
 #include "storage/VolumeRoster.h"
 #include "storage/FilePanel.h"
 
+#include "storage/StorageDefs.h"
+
+#endif

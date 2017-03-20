@@ -1,7 +1,11 @@
-/*
+﻿/*
  * Master include file for the Media Kit.
  *
  */
+
+#ifndef B_MEDIA_KIT_H
+#define B_MEDIA_KIT_H
+
 #include <Buffer.h>
 #include <BufferConsumer.h>
 #include <BufferGroup.h>
@@ -9,7 +13,6 @@
 #include <Controllable.h>
 #include <FileInterface.h>
 #include <MediaAddOn.h>
-#include <MediaDefs.h>
 #include <MediaEventLooper.h>
 #include <MediaFile.h>
 #include <MediaFiles.h>
@@ -27,3 +30,7 @@
 #include <TimeCode.h>
 #include <TimeSource.h>
 #include <TimedEventQueue.h>
+
+#include <MediaDefs.h>
+
+#endif

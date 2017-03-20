@@ -9,7 +9,7 @@
 
 #include <mime/AssociatedTypes.h>
 
-#include <stdio.h>
+
 
 #include <new>
 
@@ -23,7 +23,7 @@
 #include <MimeType.h>
 #include <Path.h>
 #include <StringClass.h>
-#include <storage_support.h>
+#include <../include/storage_support.h>
 
 
 #define DBG(x) x

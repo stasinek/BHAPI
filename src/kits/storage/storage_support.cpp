@@ -9,12 +9,12 @@
 
 #include <new>
 #include <ctype.h>
-#include <string.h>
+
 
 #include <StorageDefs.h>
 #include <Haiku.h>
 
-#include <syscalls.h>
+#include <../include/syscalls.h>
 
 #include "storage_support.h"
 

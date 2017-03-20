@@ -7,7 +7,7 @@
 #ifndef SYMBOL_LOOKUP_H
 #define SYMBOL_LOOKUP_H
 
-#include <stdio.h>
+
 
 #include <image.h>
 #include <OS.h>

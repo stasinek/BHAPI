@@ -10,7 +10,7 @@
 
 #include <Statable.h>
 
-#include <sys/stat.h>
+#include <../include/sys/stat.h>
 
 #include <compat/sys/stat.h>
 

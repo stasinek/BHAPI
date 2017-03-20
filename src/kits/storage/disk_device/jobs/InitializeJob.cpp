@@ -6,7 +6,7 @@
 
 #include "InitializeJob.h"
 
-#include <syscalls.h>
+#include <../include/syscalls.h>
 
 #include "DiskDeviceUtils.h"
 #include "PartitionReference.h"

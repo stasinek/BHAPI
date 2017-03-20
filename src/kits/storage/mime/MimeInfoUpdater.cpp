@@ -13,7 +13,7 @@
 
 #include <mime/MimeInfoUpdater.h>
 
-#include <stdlib.h>
+
 
 #include <AppFileInfo.h>
 #include <Bitmap.h>

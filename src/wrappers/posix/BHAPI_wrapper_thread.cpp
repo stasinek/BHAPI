@@ -28,9 +28,9 @@
  * --------------------------------------------------------------------------*/
 #ifdef BHAPI_OS_LINUX
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/types.h>
+
+
+#include <../include/sys/types.h>
 #include <unistd.h>
 #include <pthread.h>
 #include <errno.h>

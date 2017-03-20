@@ -9,7 +9,7 @@
 
 #include <UrlRequest.h>
 #include <Debug.h>
-#include <stdio.h>
+
 
 
 static BReference<BUrlContext> gDefaultContext = new(std::nothrow) BUrlContext();

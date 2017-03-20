@@ -11,7 +11,7 @@
 //  (stdout/stderr) of other programs into memory.
 #include "CommandPipe.h"
 
-#include <stdlib.h>
+
 #include <unistd.h>
 
 #include <image.h>

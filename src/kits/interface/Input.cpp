@@ -8,8 +8,8 @@
 
 //!	Functions and class to manage input devices.
 
-#include <stdlib.h>
-#include <string.h>
+
+
 #include <new>
 
 #include <Input.h>

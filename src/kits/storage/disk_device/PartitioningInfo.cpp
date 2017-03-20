@@ -3,15 +3,15 @@
 //  by the OpenBeOS license.
 //---------------------------------------------------------------------
 
-#include <stdio.h>
-#include <string.h>
+
+
 
 #include <new>
 
 #include <disk_device_manager.h>
 #include <PartitioningInfo.h>
 
-#include <syscalls.h>
+#include <../include/syscalls.h>
 #include <ddm_userland_interface_defs.h>
 
 

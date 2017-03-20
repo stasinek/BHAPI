@@ -5,8 +5,8 @@
 
 #include "LayoutOptimizer.h"
 
-#include <stdio.h>
-#include <string.h>
+
+
 
 #include <new>
 

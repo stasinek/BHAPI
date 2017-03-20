@@ -1,8 +1,11 @@
-/*
+﻿/*
  * Master include file for the Locale Kit.
  *
  * CatalogInAddOn.h not included, as it's only required when building an add-on.
  */
+#ifndef B_LOCALE_KIT_H
+#define B_LOCALE_KIT_H
+
 #include <Catalog.h>
 #include <Collator.h>
 #include <Country.h>
@@ -24,3 +27,5 @@
 #include <NumberFormatParameters.h>
 #include <TimeFormat.h>
 #include <UnicodeChar.h>
+
+#endif

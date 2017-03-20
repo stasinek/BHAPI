@@ -13,7 +13,7 @@
 #include <OS.h>
 #include <image.h>
 
-#include <string.h>
+
 
 
 bool __gR5Compatibility = false;

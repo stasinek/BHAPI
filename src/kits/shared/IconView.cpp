@@ -5,8 +5,8 @@
 #include "IconView.h"
 
 #include <new>
-#include <stdio.h>
-#include <string.h>
+
+
 
 #include <Entry.h>
 #include <Node.h>

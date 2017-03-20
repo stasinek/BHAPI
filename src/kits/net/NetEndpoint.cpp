@@ -37,17 +37,17 @@
 
 #include <errno.h>
 
-#include <sys/types.h>
+#include <../include/sys/types.h>
 #include <signal.h>
 
 #ifndef _WIN32
-#	include <sys/time.h>
+#	include <../include/sys/time.h>
 #	include <netdb.h>
 #	include <unistd.h>
 #	include <fcntl.h>
 
 #	ifdef __BEOS__
-#		include <sys/socket.h>
+#		include <../include/sys/socket.h>
 #		ifdef BONE_VERSION
 #			include <arpa/inet.h>
 #		endif
@@ -125,7 +125,7 @@ BNetEndpoint::Archive(BMessage *into, bool deep) const
 BArchivable*
 BNetEndpoint::Instantiate(const BMessage *from)
 {
-    if(bhapi::validatb_instantiation(from, "BNetEndpoint"))
+    if(bhapi::validate_instantiation(from, "BNetEndpoint"))
         return new BNetEndpoint(from);
     return NULL;
 }

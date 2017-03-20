@@ -12,7 +12,7 @@
 #include <HttpRequest.h>
 
 #include <arpa/inet.h>
-#include <stdio.h>
+
 
 #include <cstdlib>
 #include <deque>

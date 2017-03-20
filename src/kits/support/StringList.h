@@ -36,8 +36,8 @@
 extern "C" {
 #endif
 #ifdef __cplusplus
-#ifndef BSTRING_I
-#define BSTRING_I
+#ifndef BSTRING_DEF
+#define BSTRING_DEF
 class BString;
 #endif
 #include "List.h"
@@ -100,7 +100,7 @@ public:
     virtual	bool				IsFixedSize() const;
     virtual	type_code			TypeCode() const;
     virtual	bool				AllowsTypeCode(type_code code) const;
-    virtual	__be_size_t				FlattenedSize() const;
+    virtual	ssize_t				FlattenedSize() const;
     virtual	status_t			Flatten(void* buffer, ssize_t size) const;
     virtual	status_t			Unflatten(type_code code, const void* buffer,
                                     ssize_t size);
@@ -131,5 +131,5 @@ inline bool BStringList::operator!=(const BStringList& other) const
 #ifdef __cplusplus
 }
 #endif
-#define BSTRINGLIST_I
+#define BSTRINGLIST_DEF
 #endif	// BHAPI_STRING_LIST_H

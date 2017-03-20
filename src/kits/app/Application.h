@@ -27,24 +27,24 @@
  * Description: Application model to support Looper/Message
  *
  * --------------------------------------------------------------------------*/
-
 #ifndef BHAPI_APPLICATION_H
 #define BHAPI_APPLICATION_H
-
 //-----------------------------------------------------------------------------
 #include "../app/MessageRunner.h"
 #include "../app/Looper.h"
 #include "../app/Cursor.h"
 #include "../add-ons/font/FontEngine.h"
 //-----------------------------------------------------------------------------
-#include <Haiku.h>
+#include <OS.h>
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 using namespace bhapi;
-#ifndef BCLIPBOARD_I
+#ifndef BCLIPBOARD_DEF
+#define BCLIPBOARD_DEF
 class BClipboard;
 #endif
-#ifndef BGRAPHICSENGINE_I
+#ifndef BGRAPHICSENGINE_DEF
+#define BGRAPHICSENGINE_DEF
 class BGraphicsEngine;
 #endif
 //-----------------------------------------------------------------------------
@@ -122,7 +122,6 @@ private:
 //-----------------------------------------------------------------------------
 };
 //-----------------------------------------------------------------------------
-
 #ifdef BHAPI_BUILD_LIBRARY
 inline void BApplication::SetCursor(const void *cursor)
 {
@@ -131,9 +130,9 @@ inline void BApplication::SetCursor(const void *cursor)
 }
 #endif // BHAPI_BUILD_LIBRARY
 namespace bhapi {
-extern BHAPI_IMPEXP BApplication *app;
-extern BHAPI_IMPEXP BMessenger app_messenger;
-extern BHAPI_IMPEXP BClipboard clipboard;
+extern BHAPI_IMPEXP BApplication *be_app;
+extern BHAPI_IMPEXP BMessenger be_app_messenger;
+extern BHAPI_IMPEXP BClipboard be_clipboard;
 }
 //-----------------------------------------------------------------------------
 #endif /* __cplusplus */
@@ -146,4 +145,5 @@ extern BHAPI_IMPEXP BClipboard clipboard;
 #endif
 #endif
 */
+#define BAPPLICATION_DEF
 #endif /* BHAPI_APPLICATION_H */

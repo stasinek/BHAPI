@@ -5,8 +5,8 @@
 #ifndef _DISK_DEVICE_UTILS_H
 #define _DISK_DEVICE_UTILS_H
 
-#include <stdlib.h>
-#include <string.h>
+
+
 
 #include <Haiku.h>
 
