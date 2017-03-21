@@ -15,8 +15,7 @@ namespace BPrivate {
 
 
 // set_string
-static inline status_t
-set_string(char*& location, const char* newString)
+static inline status_t set_string(char*& location, const char* newString)
 {
 	char* string = NULL;
 	if (newString) {

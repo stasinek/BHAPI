@@ -864,15 +864,13 @@ PathHandler::~PathHandler()
 }
 
 
-status_t
-PathHandler::InitCheck() const
+status_t PathHandler::InitCheck() const
 {
 	return fStatus;
 }
 
 
-void
-PathHandler::Quit()
+void PathHandler::Quit()
 {
 	TRACE("%p->PathHandler::Quit()\n", this);
 	sWatchingInterface->StopWatching(this);
@@ -881,8 +879,7 @@ PathHandler::Quit()
 }
 
 
-void
-PathHandler::MessageReceived(BMessage* message)
+void PathHandler::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case B_NODE_MONITOR:
@@ -920,8 +917,7 @@ PathHandler::MessageReceived(BMessage* message)
 }
 
 
-status_t
-PathHandler::_CreateAncestors()
+status_t PathHandler::_CreateAncestors()
 {
 	TRACE("%p->PathHandler::_CreateAncestors()\n", this);
 
@@ -961,8 +957,7 @@ PathHandler::_CreateAncestors()
 }
 
 
-status_t
-PathHandler::_StartWatchingAncestors(Ancestor* startAncestor, bool notify)
+status_t PathHandler::_StartWatchingAncestors(Ancestor* startAncestor, bool notify)
 {
 	TRACE("%p->PathHandler::_StartWatchingAncestors(%p, %d)\n", this,
 		startAncestor, notify);
@@ -1008,8 +1003,7 @@ PathHandler::_StartWatchingAncestors(Ancestor* startAncestor, bool notify)
 }
 
 
-void
-PathHandler::_StopWatchingAncestors(Ancestor* ancestor, bool notify)
+void PathHandler::_StopWatchingAncestors(Ancestor* ancestor, bool notify)
 {
 	// stop watching the tree below path
 	if (fBaseNode != NULL) {
@@ -1034,8 +1028,7 @@ PathHandler::_StopWatchingAncestors(Ancestor* ancestor, bool notify)
 }
 
 
-void
-PathHandler::_EntryCreated(BMessage* message)
+void PathHandler::_EntryCreated(BMessage* message)
 {
 	// TODO: Unless we're watching files only, we might want to forward (some
 	// of) the messages that don't agree with our model, since our client
@@ -1086,8 +1079,7 @@ PathHandler::_EntryCreated(BMessage* message)
 }
 
 
-void
-PathHandler::_EntryRemoved(BMessage* message)
+void PathHandler::_EntryRemoved(BMessage* message)
 {
 	NotOwningEntryRef entryRef;
 	node_ref nodeRef;
@@ -1111,8 +1103,7 @@ PathHandler::_EntryRemoved(BMessage* message)
 }
 
 
-void
-PathHandler::_EntryMoved(BMessage* message)
+void PathHandler::_EntryMoved(BMessage* message)
 {
 	NotOwningEntryRef fromEntryRef;
 	NotOwningEntryRef toEntryRef;
@@ -1334,8 +1325,7 @@ PathHandler::_EntryMoved(BMessage* message)
 }
 
 
-void
-PathHandler::_NodeChanged(BMessage* message)
+void PathHandler::_NodeChanged(BMessage* message)
 {
 	node_ref nodeRef;
 
@@ -1371,8 +1361,7 @@ PathHandler::_NodeChanged(BMessage* message)
 }
 
 
-bool
-PathHandler::_EntryCreated(const NotOwningEntryRef& entryRef,
+bool PathHandler::_EntryCreated(const NotOwningEntryRef& entryRef,
 	const node_ref& nodeRef, bool isDirectory, bool dryRun, bool notify,
 	Entry** _entry)
 {
@@ -1501,8 +1490,7 @@ PathHandler::_EntryCreated(const NotOwningEntryRef& entryRef,
 }
 
 
-bool
-PathHandler::_EntryRemoved(const NotOwningEntryRef& entryRef,
+bool PathHandler::_EntryRemoved(const NotOwningEntryRef& entryRef,
 	const node_ref& nodeRef, bool dryRun, bool notify, Entry** _keepEntry)
 {
 	if (_keepEntry != NULL)
@@ -1600,8 +1588,7 @@ PathHandler::_EntryRemoved(const NotOwningEntryRef& entryRef,
 }
 
 
-bool
-PathHandler::_CheckDuplicateEntryNotification(int32 opcode,
+bool PathHandler::_CheckDuplicateEntryNotification(int32 opcode,
 	const entry_ref& toEntryRef, const node_ref& nodeRef,
 	const entry_ref* fromEntryRef)
 {
@@ -1622,8 +1609,7 @@ PathHandler::_CheckDuplicateEntryNotification(int32 opcode,
 }
 
 
-void
-PathHandler::_UnsetDuplicateEntryNotification()
+void PathHandler::_UnsetDuplicateEntryNotification()
 {
 	fDuplicateEntryNotificationOpcode = B_STAT_CHANGED;
 	fDuplicateEntryNotificationNodeRef = node_ref();
@@ -1639,8 +1625,7 @@ PathHandler::_GetAncestor(const node_ref& nodeRef) const
 }
 
 
-status_t
-PathHandler::_AddNode(const node_ref& nodeRef, bool isDirectory, bool notify,
+status_t PathHandler::_AddNode(const node_ref& nodeRef, bool isDirectory, bool notify,
 	Entry* entry, Node** _node)
 {
 	TRACE("%p->PathHandler::_AddNode(%" B_PRIdDEV ":%" B_PRIdINO
@@ -1724,8 +1709,7 @@ PathHandler::_AddNode(const node_ref& nodeRef, bool isDirectory, bool notify,
 }
 
 
-void
-PathHandler::_DeleteNode(Node* node, bool notify)
+void PathHandler::_DeleteNode(Node* node, bool notify)
 {
 	if (Directory* directory = node->ToDirectory()) {
 		Entry* entry = directory->RemoveAllEntries();
@@ -1751,8 +1735,7 @@ PathHandler::_GetNode(const node_ref& nodeRef) const
 }
 
 
-status_t
-PathHandler::_AddEntryIfNeeded(Directory* directory, const char* name,
+status_t PathHandler::_AddEntryIfNeeded(Directory* directory, const char* name,
 	const node_ref& nodeRef, bool isDirectory, bool notify,
 	Entry** _entry)
 {
@@ -1789,16 +1772,14 @@ PathHandler::_AddEntryIfNeeded(Directory* directory, const char* name,
 }
 
 
-void
-PathHandler::_DeleteEntry(Entry* entry, bool notify)
+void PathHandler::_DeleteEntry(Entry* entry, bool notify)
 {
 	entry->Parent()->RemoveEntry(entry);
 	_DeleteEntryAlreadyRemovedFromParent(entry, notify);
 }
 
 
-void
-PathHandler::_DeleteEntryAlreadyRemovedFromParent(Entry* entry, bool notify)
+void PathHandler::_DeleteEntryAlreadyRemovedFromParent(Entry* entry, bool notify)
 {
 	if (notify)
 		_NotifyEntryCreatedOrRemoved(entry, B_ENTRY_REMOVED);
@@ -1811,8 +1792,7 @@ PathHandler::_DeleteEntryAlreadyRemovedFromParent(Entry* entry, bool notify)
 }
 
 
-void
-PathHandler::_NotifyFilesCreatedOrRemoved(Entry* entry, int32 opcode) const
+void PathHandler::_NotifyFilesCreatedOrRemoved(Entry* entry, int32 opcode) const
 {
 	Directory* directory = entry->Node()->ToDirectory();
 	if (directory == NULL) {
@@ -1825,8 +1805,7 @@ PathHandler::_NotifyFilesCreatedOrRemoved(Entry* entry, int32 opcode) const
 }
 
 
-void
-PathHandler::_NotifyEntryCreatedOrRemoved(Entry* entry, int32 opcode) const
+void PathHandler::_NotifyEntryCreatedOrRemoved(Entry* entry, int32 opcode) const
 {
 	Node* node = entry->Node();
 	_NotifyEntryCreatedOrRemoved(
@@ -1835,8 +1814,7 @@ PathHandler::_NotifyEntryCreatedOrRemoved(Entry* entry, int32 opcode) const
 }
 
 
-void
-PathHandler::_NotifyEntryCreatedOrRemoved(const entry_ref& entryRef,
+void PathHandler::_NotifyEntryCreatedOrRemoved(const entry_ref& entryRef,
 	const node_ref& nodeRef, const char* path, bool isDirectory, int32 opcode)
 	const
 {
@@ -1867,8 +1845,7 @@ PathHandler::_NotifyEntryCreatedOrRemoved(const entry_ref& entryRef,
 }
 
 
-void
-PathHandler::_NotifyEntryMoved(const entry_ref& fromEntryRef,
+void PathHandler::_NotifyEntryMoved(const entry_ref& fromEntryRef,
 	const entry_ref& toEntryRef, const node_ref& nodeRef, const char* fromPath,
 	const char* path, bool isDirectory, bool wasAdded, bool wasRemoved) const
 {
@@ -1905,8 +1882,7 @@ PathHandler::_NotifyEntryMoved(const entry_ref& fromEntryRef,
 }
 
 
-void
-PathHandler::_NotifyTarget(BMessage& message, const char* path) const
+void PathHandler::_NotifyTarget(BMessage& message, const char* path) const
 {
 	message.what = B_PATH_MONITOR;
 	if (path != NULL && path[0] != '\0')
@@ -1933,22 +1909,19 @@ PathHandler::_EntryPath(const Entry* entry) const
 }
 
 
-bool
-PathHandler::_WatchRecursively() const
+bool PathHandler::_WatchRecursively() const
 {
 	return (fFlags & B_WATCH_RECURSIVELY) != 0;
 }
 
 
-bool
-PathHandler::_WatchFilesOnly() const
+bool PathHandler::_WatchFilesOnly() const
 {
 	return (fFlags & B_WATCH_FILES_ONLY) != 0;
 }
 
 
-bool
-PathHandler::_WatchDirectoriesOnly() const
+bool PathHandler::_WatchDirectoriesOnly() const
 {
 	return (fFlags & B_WATCH_DIRECTORIES_ONLY) != 0;
 }
@@ -1973,8 +1946,7 @@ BPathMonitor::~BPathMonitor()
 }
 
 
-/*static*/ status_t
-BPathMonitor::StartWatching(const char* path, uint32 flags,
+/*static*/ status_t BPathMonitor::StartWatching(const char* path, uint32 flags,
 	const BMessenger& target)
 {
 	TRACE("BPathMonitor::StartWatching(%s, %" B_PRIx32 ")\n", path, flags);
@@ -2039,8 +2011,7 @@ BPathMonitor::StartWatching(const char* path, uint32 flags,
 }
 
 
-/*static*/ status_t
-BPathMonitor::StopWatching(const char* path, const BMessenger& target)
+/*static*/ status_t BPathMonitor::StopWatching(const char* path, const BMessenger& target)
 {
 	if (sLooper == NULL)
 		return B_BAD_VALUE;
@@ -2069,8 +2040,7 @@ BPathMonitor::StopWatching(const char* path, const BMessenger& target)
 }
 
 
-/*static*/ status_t
-BPathMonitor::StopWatching(const BMessenger& target)
+/*static*/ status_t BPathMonitor::StopWatching(const BMessenger& target)
 {
 	if (sLooper == NULL)
 		return B_BAD_VALUE;
@@ -2096,24 +2066,21 @@ BPathMonitor::StopWatching(const BMessenger& target)
 }
 
 
-/*static*/ void
-BPathMonitor::SetWatchingInterface(BWatchingInterface* watchingInterface)
+/*static*/ void BPathMonitor::SetWatchingInterface(BWatchingInterface* watchingInterface)
 {
 	sWatchingInterface = watchingInterface != NULL
 		? watchingInterface : sDefaultWatchingInterface;
 }
 
 
-/*static*/ status_t
-BPathMonitor::_InitIfNeeded()
+/*static*/ status_t BPathMonitor::_InitIfNeeded()
 {
 	pthread_once(&sInitOnce, &BPathMonitor::_Init);
 	return sLooper != NULL ? B_OK : B_NO_MEMORY;
 }
 
 
-/*static*/ void
-BPathMonitor::_Init()
+/*static*/ void BPathMonitor::_Init()
 {
 	sDefaultWatchingInterface = new(std::nothrow) BWatchingInterface;
 	if (sDefaultWatchingInterface == NULL)
@@ -2153,31 +2120,27 @@ BPathMonitor::BWatchingInterface::~BWatchingInterface()
 }
 
 
-status_t
-BPathMonitor::BWatchingInterface::WatchNode(const node_ref* node, uint32 flags,
+status_t BPathMonitor::BWatchingInterface::WatchNode(const node_ref* node, uint32 flags,
 	const BMessenger& target)
 {
 	return watch_node(node, flags, target);
 }
 
 
-status_t
-BPathMonitor::BWatchingInterface::WatchNode(const node_ref* node, uint32 flags,
+status_t BPathMonitor::BWatchingInterface::WatchNode(const node_ref* node, uint32 flags,
 	const BHandler* handler, const BLooper* looper)
 {
 	return watch_node(node, flags, handler, looper);
 }
 
 
-status_t
-BPathMonitor::BWatchingInterface::StopWatching(const BMessenger& target)
+status_t BPathMonitor::BWatchingInterface::StopWatching(const BMessenger& target)
 {
 	return stop_watching(target);
 }
 
 
-status_t
-BPathMonitor::BWatchingInterface::StopWatching(const BHandler* handler,
+status_t BPathMonitor::BWatchingInterface::StopWatching(const BHandler* handler,
 	const BLooper* looper)
 {
 	return stop_watching(handler, looper);

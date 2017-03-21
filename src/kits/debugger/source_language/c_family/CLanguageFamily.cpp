@@ -40,8 +40,7 @@ CLanguageFamily::GetSyntaxHighlighter() const
 }
 
 
-status_t
-CLanguageFamily::EvaluateExpression(const BString& expression,
+status_t CLanguageFamily::EvaluateExpression(const BString& expression,
 	ValueNodeManager* manager, TeamTypeInformation* info,
 	ExpressionResult*& _output, ValueNode*& _neededNode)
 {

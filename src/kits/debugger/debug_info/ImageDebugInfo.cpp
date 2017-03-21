@@ -30,15 +30,13 @@ ImageDebugInfo::~ImageDebugInfo()
 }
 
 
-bool
-ImageDebugInfo::AddSpecificInfo(SpecificImageDebugInfo* info)
+bool ImageDebugInfo::AddSpecificInfo(SpecificImageDebugInfo* info)
 {
 	return fSpecificInfos.AddItem(info);
 }
 
 
-status_t
-ImageDebugInfo::FinishInit(DebuggerInterface* interface)
+status_t ImageDebugInfo::FinishInit(DebuggerInterface* interface)
 {
 	BObjectList<SymbolInfo> symbols(50, true);
 	status_t error = interface->GetSymbolInfos(fImageInfo.TeamID(),
@@ -89,8 +87,7 @@ ImageDebugInfo::FinishInit(DebuggerInterface* interface)
 }
 
 
-status_t
-ImageDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
+status_t ImageDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
 	const TypeLookupConstraints& constraints, Type*& _type)
 {
 	for (int32 i = 0; SpecificImageDebugInfo* specificInfo
@@ -105,8 +102,7 @@ ImageDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
 }
 
 
-bool
-ImageDebugInfo::HasType(const BString& name,
+bool ImageDebugInfo::HasType(const BString& name,
 	const TypeLookupConstraints& constraints) const
 {
 	for (int32 i = 0; SpecificImageDebugInfo* specificInfo
@@ -134,8 +130,7 @@ ImageDebugInfo::GetAddressSectionType(target_addr_t address) const
 }
 
 
-int32
-ImageDebugInfo::CountFunctions() const
+int32 ImageDebugInfo::CountFunctions() const
 {
 	return fFunctions.CountItems();
 }
@@ -168,8 +163,7 @@ ImageDebugInfo::FunctionByName(const char* name) const
 }
 
 
-status_t
-ImageDebugInfo::AddSourceCodeInfo(LocatableFile* file,
+status_t ImageDebugInfo::AddSourceCodeInfo(LocatableFile* file,
 	FileSourceCode* sourceCode) const
 {
 	bool addedAny = false;

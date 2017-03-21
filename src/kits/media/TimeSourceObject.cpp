@@ -15,7 +15,7 @@
 #include <string.h>
 
 #include <MediaRoster.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <MediaMisc.h>
 #include <debug.h>
@@ -62,8 +62,7 @@ TimeSourceObject::TimeSourceObject(const media_node& node)
 }
 
 
-status_t
-TimeSourceObject::TimeSourceOp(const time_source_op_info& op, void* _reserved)
+status_t TimeSourceObject::TimeSourceOp(const time_source_op_info& op, void* _reserved)
 {
 	// we don't get anything here
 	return B_OK;
@@ -80,8 +79,7 @@ TimeSourceObject::AddOn(int32* _id) const
 }
 
 
-status_t
-TimeSourceObject::DeleteHook(BMediaNode* node)
+status_t TimeSourceObject::DeleteHook(BMediaNode* node)
 {
 //	if (fIsRealtime) {
 //		ERROR("TimeSourceObject::DeleteHook: system time source clone delete hook called\n");

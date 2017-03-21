@@ -9,13 +9,12 @@
 
 
 #include <image.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <r5_compatibility.h>
 
 
-static void
-find_own_image()
+static void find_own_image()
 {
 	int32 cookie = 0;
 	image_info info;
@@ -32,8 +31,7 @@ find_own_image()
 }
 
 
-extern "C" void
-initialize_before()
+extern "C" void initialize_before()
 {
 	// If in compatibility mode get our code address range.
 	if (__gR5Compatibility)

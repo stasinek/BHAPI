@@ -36,8 +36,7 @@ ActivateRepositoryCacheJob::~ActivateRepositoryCacheJob()
 }
 
 
-status_t
-ActivateRepositoryCacheJob::Execute()
+status_t ActivateRepositoryCacheJob::Execute()
 {
 	status_t result = fFetchedRepoCacheEntry.MoveTo(&fTargetDirectory,
 		fRepositoryName.String(), true);

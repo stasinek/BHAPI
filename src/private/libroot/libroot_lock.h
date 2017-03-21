@@ -8,7 +8,7 @@
 #ifndef _LIBROOT_LOCK_H
 #define _LIBROOT_LOCK_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 // TODO: Copied from the kernel private lock.h/lock.c. We should somehow make
@@ -24,8 +24,7 @@ typedef struct benaphore {
 } benaphore;
 
 
-static inline status_t
-benaphore_init(benaphore *ben, const char *name)
+static inline status_t benaphore_init(benaphore *ben, const char *name)
 {
 	if (ben == NULL || name == NULL)
 		return B_BAD_VALUE;
@@ -39,8 +38,7 @@ benaphore_init(benaphore *ben, const char *name)
 }
 
 
-static inline status_t
-benaphore_lock_etc(benaphore *ben, uint32 flags, bigtime_t timeout)
+static inline status_t benaphore_lock_etc(benaphore *ben, uint32 flags, bigtime_t timeout)
 {
 // TODO: This function really shouldn't be used, since timeouts screw the
 // benaphore behavior.
@@ -51,8 +49,7 @@ benaphore_lock_etc(benaphore *ben, uint32 flags, bigtime_t timeout)
 }
 
 
-static inline status_t
-benaphore_lock(benaphore *ben)
+static inline status_t benaphore_lock(benaphore *ben)
 {
 	if (atomic_add(&ben->count, -1) <= 0) {
 		status_t error;
@@ -67,8 +64,7 @@ benaphore_lock(benaphore *ben)
 }
 
 
-static inline status_t
-benaphore_unlock(benaphore *ben)
+static inline status_t benaphore_unlock(benaphore *ben)
 {
 	if (atomic_add(&ben->count, 1) < 0)
 		return release_sem(ben->sem);

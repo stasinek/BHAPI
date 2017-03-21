@@ -111,22 +111,19 @@ MenuPrivate::Layout() const
 }
 
 
-void
-MenuPrivate::SetLayout(menu_layout layout)
+void MenuPrivate::SetLayout(menu_layout layout)
 {
 	fMenu->fLayout = layout;
 }
 
 
-void
-MenuPrivate::ItemMarked(BMenuItem *item)
+void MenuPrivate::ItemMarked(BMenuItem *item)
 {
 	fMenu->_ItemMarked(item);
 }
 
 
-void
-MenuPrivate::CacheFontInfo()
+void MenuPrivate::CacheFontInfo()
 {
 	fMenu->_CacheFontInfo();
 }
@@ -153,8 +150,7 @@ MenuPrivate::Padding() const
 }
 
 
-void
-MenuPrivate::GetItemMargins(float* left, float* top, float* right,
+void MenuPrivate::GetItemMargins(float* left, float* top, float* right,
 	float* bottom) const
 {
 	fMenu->GetItemMargins(left, top, right, bottom);
@@ -168,51 +164,44 @@ MenuPrivate::State(BMenuItem** item) const
 }
 
 
-void
-MenuPrivate::Install(BWindow* window)
+void MenuPrivate::Install(BWindow* window)
 {
 	fMenu->_Install(window);
 }
 
 
-void
-MenuPrivate::Uninstall()
+void MenuPrivate::Uninstall()
 {
 	fMenu->_Uninstall();
 }
 
 
-void
-MenuPrivate::SetSuper(BMenu* menu)
+void MenuPrivate::SetSuper(BMenu* menu)
 {
 	fMenu->fSuper = menu;
 }
 
 
-void
-MenuPrivate::SetSuperItem(BMenuItem* item)
+void MenuPrivate::SetSuperItem(BMenuItem* item)
 {
 	fMenu->fSuperitem = item;
 }
 
 
-void
-MenuPrivate::InvokeItem(BMenuItem* item, bool now)
+void MenuPrivate::InvokeItem(BMenuItem* item, bool now)
 {
 	fMenu->_InvokeItem(item, now);
 }
 
 
-void
-MenuPrivate::QuitTracking(bool thisMenuOnly)
+void MenuPrivate::QuitTracking(bool thisMenuOnly)
 {
 	fMenu->_QuitTracking(thisMenuOnly);
 }
 
 
 /* static */
-status_t
-MenuPrivate::CreateBitmaps()
+status_t MenuPrivate::CreateBitmaps()
 {
 	BRect smallRect(0, 0, 16, 10);
 
@@ -242,8 +231,7 @@ MenuPrivate::CreateBitmaps()
 
 
 /* static */
-void
-MenuPrivate::DeleteBitmaps()
+void MenuPrivate::DeleteBitmaps()
 {
 	delete sMenuItemShift;
 	delete sMenuItemControl;

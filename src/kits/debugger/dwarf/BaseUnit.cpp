@@ -32,15 +32,13 @@ BaseUnit::~BaseUnit()
 }
 
 
-void
-BaseUnit::SetAbbreviationTable(AbbreviationTable* abbreviationTable)
+void BaseUnit::SetAbbreviationTable(AbbreviationTable* abbreviationTable)
 {
 	fAbbreviationTable = abbreviationTable;
 }
 
 
-status_t
-BaseUnit::AddDebugInfoEntry(DebugInfoEntry* entry, off_t offset)
+status_t BaseUnit::AddDebugInfoEntry(DebugInfoEntry* entry, off_t offset)
 {
 	if (!fEntries.Add(entry))
 		return B_NO_MEMORY;
@@ -53,15 +51,13 @@ BaseUnit::AddDebugInfoEntry(DebugInfoEntry* entry, off_t offset)
 }
 
 
-bool
-BaseUnit::ContainsAbsoluteOffset(off_t offset) const
+bool BaseUnit::ContainsAbsoluteOffset(off_t offset) const
 {
 	return fHeaderOffset <= offset && fHeaderOffset + fTotalSize > offset;
 }
 
 
-void
-BaseUnit::SetSourceLanguage(const SourceLanguageInfo* language)
+void BaseUnit::SetSourceLanguage(const SourceLanguageInfo* language)
 {
 	fSourceLanguage = language;
 }
@@ -74,8 +70,7 @@ BaseUnit::CountEntries() const
 }
 
 
-void
-BaseUnit::GetEntryAt(int index, DebugInfoEntry*& entry,
+void BaseUnit::GetEntryAt(int index, DebugInfoEntry*& entry,
 	off_t& offset) const
 {
 	entry = fEntries[index];

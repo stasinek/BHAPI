@@ -28,8 +28,7 @@ extern void __initialize_locale_kit();
 #define OUT	printf
 
 
-static void
-initialize_forked_child()
+static void initialize_forked_child()
 {
 	DBG(OUT("initialize_forked_child()\n"));
 
@@ -42,8 +41,7 @@ initialize_forked_child()
 }
 
 
-extern "C" void
-initialize_before()
+extern "C" void initialize_before()
 {
 	DBG(OUT("initialize_before()\n"));
 
@@ -56,8 +54,7 @@ initialize_before()
 }
 
 
-extern "C" void
-initialize_after()
+extern "C" void initialize_after()
 {
 	DBG(OUT("initialize_after()\n"));
 
@@ -67,8 +64,7 @@ initialize_after()
 }
 
 
-extern "C" void
-terminate_after()
+extern "C" void terminate_after()
 {
 	DBG(OUT("terminate_after()\n"));
 

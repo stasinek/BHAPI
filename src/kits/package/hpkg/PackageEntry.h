@@ -72,15 +72,13 @@ private:
 };
 
 
-inline void
-BPackageEntry::SetType(uint32 type)
+inline void BPackageEntry::SetType(uint32 type)
 {
 	fMode = (fMode & ~(uint32)S_IFMT) | (type & S_IFMT);
 }
 
 
-inline void
-BPackageEntry::SetPermissions(uint32 permissions)
+inline void BPackageEntry::SetPermissions(uint32 permissions)
 {
 	fMode = (fMode & ~(uint32)ALLPERMS) | (permissions & ALLPERMS);
 }

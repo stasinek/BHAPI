@@ -39,8 +39,7 @@ BGenericNumberFormat::Symbol::~Symbol()
 }
 
 // SetTo
-status_t
-BGenericNumberFormat::Symbol::SetTo(const char *symbol)
+status_t BGenericNumberFormat::Symbol::SetTo(const char *symbol)
 {
 	// unset old
 	if (this->symbol) {
@@ -1022,8 +1021,7 @@ BGenericNumberFormat::~BGenericNumberFormat()
 }
 
 // FormatInteger
-status_t
-BGenericNumberFormat::FormatInteger(
+status_t BGenericNumberFormat::FormatInteger(
 	const BIntegerFormatParameters *parameters, int64 number, BString *buffer,
 	format_field_position *positions, int32 positionCount, int32 *fieldCount,
 	bool allFieldPositions) const
@@ -1042,8 +1040,7 @@ BGenericNumberFormat::FormatInteger(
 }
 
 // FormatInteger
-status_t
-BGenericNumberFormat::FormatInteger(
+status_t BGenericNumberFormat::FormatInteger(
 	const BIntegerFormatParameters *parameters, uint64 number, BString *buffer,
 	format_field_position *positions, int32 positionCount, int32 *fieldCount,
 	bool allFieldPositions) const
@@ -1062,8 +1059,7 @@ BGenericNumberFormat::FormatInteger(
 }
 
 // FormatInteger
-status_t
-BGenericNumberFormat::FormatInteger(
+status_t BGenericNumberFormat::FormatInteger(
 	const BIntegerFormatParameters *parameters, int64 number, char *buffer,
 	size_t bufferSize, format_field_position *positions, int32 positionCount,
 	int32 *fieldCount, bool allFieldPositions) const
@@ -1074,8 +1070,7 @@ BGenericNumberFormat::FormatInteger(
 }
 
 // FormatInteger
-status_t
-BGenericNumberFormat::FormatInteger(
+status_t BGenericNumberFormat::FormatInteger(
 	const BIntegerFormatParameters *parameters, uint64 number, char *buffer,
 	size_t bufferSize, format_field_position *positions, int32 positionCount,
 	int32 *fieldCount, bool allFieldPositions) const
@@ -1086,8 +1081,7 @@ BGenericNumberFormat::FormatInteger(
 }
 
 // FormatFloat
-status_t
-BGenericNumberFormat::FormatFloat(const BFloatFormatParameters *parameters,
+status_t BGenericNumberFormat::FormatFloat(const BFloatFormatParameters *parameters,
 	double number, BString *buffer, format_field_position *positions,
 	int32 positionCount, int32 *fieldCount, bool allFieldPositions) const
 {
@@ -1106,8 +1100,7 @@ BGenericNumberFormat::FormatFloat(const BFloatFormatParameters *parameters,
 }
 
 // FormatFloat
-status_t
-BGenericNumberFormat::FormatFloat(const BFloatFormatParameters *parameters,
+status_t BGenericNumberFormat::FormatFloat(const BFloatFormatParameters *parameters,
 	double number, char *buffer, size_t bufferSize,
 	format_field_position *positions, int32 positionCount, int32 *fieldCount,
 	bool allFieldPositions) const
@@ -1163,8 +1156,7 @@ BGenericNumberFormat::FormatFloat(const BFloatFormatParameters *parameters,
 }
 
 // SetDefaultIntegerFormatParameters
-status_t
-BGenericNumberFormat::SetDefaultIntegerFormatParameters(
+status_t BGenericNumberFormat::SetDefaultIntegerFormatParameters(
 	const BIntegerFormatParameters *parameters)
 {
 	if (!parameters)
@@ -1188,8 +1180,7 @@ BGenericNumberFormat::DefaultIntegerFormatParameters() const
 }
 
 // SetDefaultFloatFormatParameters
-status_t
-BGenericNumberFormat::SetDefaultFloatFormatParameters(
+status_t BGenericNumberFormat::SetDefaultFloatFormatParameters(
 	const BFloatFormatParameters *parameters)
 {
 	if (!parameters)
@@ -1213,8 +1204,7 @@ BGenericNumberFormat::DefaultFloatFormatParameters() const
 }
 
 // SetDigitSymbols
-status_t
-BGenericNumberFormat::SetDigitSymbols(const char **digits)
+status_t BGenericNumberFormat::SetDigitSymbols(const char **digits)
 {
 	// check parameters
 	if (digits) {
@@ -1245,15 +1235,13 @@ BGenericNumberFormat::SetDigitSymbols(const char **digits)
 }
 
 // SetFractionSeparator
-status_t
-BGenericNumberFormat::SetFractionSeparator(const char *decimalSeparator)
+status_t BGenericNumberFormat::SetFractionSeparator(const char *decimalSeparator)
 {
 	return _SetSymbol(&fFractionSeparator, decimalSeparator);
 }
 
 // SetGroupingInfo
-status_t
-BGenericNumberFormat::SetGroupingInfo(const char **groupingSeparators,
+status_t BGenericNumberFormat::SetGroupingInfo(const char **groupingSeparators,
 	size_t separatorCount, size_t *groupingSizes, size_t sizeCount)
 {
 	// check parameters
@@ -1287,8 +1275,7 @@ BGenericNumberFormat::SetGroupingInfo(const char **groupingSeparators,
 }
 
 // SetExponentSymbol
-status_t
-BGenericNumberFormat::SetExponentSymbol(const char *exponentSymbol,
+status_t BGenericNumberFormat::SetExponentSymbol(const char *exponentSymbol,
 	const char *upperCaseExponentSymbol)
 {
 	status_t error = _SetSymbol(&fExponentSymbol, exponentSymbol);
@@ -1300,8 +1287,7 @@ BGenericNumberFormat::SetExponentSymbol(const char *exponentSymbol,
 }
 
 // SetSpecialNumberSymbols
-status_t
-BGenericNumberFormat::SetSpecialNumberSymbols(const char *nan,
+status_t BGenericNumberFormat::SetSpecialNumberSymbols(const char *nan,
 	const char *infinity, const char *negativeInfinity,
 	const char *upperCaseNaN, const char *upperCaseInfinity,
 	const char *upperCaseNegativeInfinity)
@@ -1325,8 +1311,7 @@ BGenericNumberFormat::SetSpecialNumberSymbols(const char *nan,
 }
 
 // SetSignSymbols
-status_t
-BGenericNumberFormat::SetSignSymbols(const char *plusPrefix,
+status_t BGenericNumberFormat::SetSignSymbols(const char *plusPrefix,
 	const char *minusPrefix, const char *padPlusPrefix,
 	const char *noForcePlusPrefix, const char *plusSuffix,
 	const char *minusSuffix, const char *padPlusSuffix,
@@ -1343,8 +1328,7 @@ BGenericNumberFormat::SetSignSymbols(const char *plusPrefix,
 }
 
 // SetMantissaSignSymbols
-status_t
-BGenericNumberFormat::SetMantissaSignSymbols(const char *plusPrefix,
+status_t BGenericNumberFormat::SetMantissaSignSymbols(const char *plusPrefix,
 	const char *minusPrefix, const char *padPlusPrefix,
 	const char *noForcePlusPrefix, const char *plusSuffix,
 	const char *minusSuffix, const char *padPlusSuffix,
@@ -1361,8 +1345,7 @@ BGenericNumberFormat::SetMantissaSignSymbols(const char *plusPrefix,
 }
 
 // SetExponentSignSymbols
-status_t
-BGenericNumberFormat::SetExponentSignSymbols(const char *plusPrefix,
+status_t BGenericNumberFormat::SetExponentSignSymbols(const char *plusPrefix,
 	const char *minusPrefix, const char *plusSuffix, const char *minusSuffix)
 {
 	if (!fExponentSignSymbols) {
@@ -1375,8 +1358,7 @@ BGenericNumberFormat::SetExponentSignSymbols(const char *plusPrefix,
 }
 
 // FormatInteger
-status_t
-BGenericNumberFormat::FormatInteger(
+status_t BGenericNumberFormat::FormatInteger(
 	const BIntegerFormatParameters *parameters, const Integer &integer,
 	char *buffer, size_t bufferSize, format_field_position *positions,
 	int32 positionCount, int32 *fieldCount, bool allFieldPositions) const
@@ -1488,8 +1470,7 @@ BGenericNumberFormat::NegativeInfinitySymbol(bool upperCase) const
 }
 
 // GetSpecialNumberSymbols
-void
-BGenericNumberFormat::GetSpecialNumberSymbols(bool upperCase,
+void BGenericNumberFormat::GetSpecialNumberSymbols(bool upperCase,
 	SpecialNumberSymbols *symbols) const
 {
 	symbols->nan = NaNSymbol(upperCase);
@@ -1521,8 +1502,7 @@ BGenericNumberFormat::ExponentSignSymbols() const
 }
 
 // _SetSymbol
-status_t
-BGenericNumberFormat::_SetSymbol(Symbol **symbol, const char *str)
+status_t BGenericNumberFormat::_SetSymbol(Symbol **symbol, const char *str)
 {
 	if (!str) {
 		// no symbol -- unset old

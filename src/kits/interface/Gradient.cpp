@@ -61,8 +61,7 @@ BGradient::ColorStop::ColorStop()
 
 
 // operator!=
-bool
-BGradient::ColorStop::operator!=(const ColorStop& other) const
+bool BGradient::ColorStop::operator!=(const ColorStop& other) const
 {
 	return color.red != other.color.red ||
 	color.green != other.color.green ||
@@ -72,8 +71,7 @@ BGradient::ColorStop::operator!=(const ColorStop& other) const
 }
 
 
-static bool
-sort_color_stops_by_offset(const BGradient::ColorStop* left,
+static bool sort_color_stops_by_offset(const BGradient::ColorStop* left,
 	const BGradient::ColorStop* right)
 {
 	return left->offset < right->offset;
@@ -166,8 +164,7 @@ BGradient::~BGradient()
 
 
 // Archive
-status_t
-BGradient::Archive(BMessage* into, bool deep) const
+status_t BGradient::Archive(BMessage* into, bool deep) const
 {
 	status_t ret = BArchivable::Archive(into, deep);
 
@@ -249,24 +246,21 @@ BGradient::operator=(const BGradient& other)
 
 
 // operator==
-bool
-BGradient::operator==(const BGradient& other) const
+bool BGradient::operator==(const BGradient& other) const
 {
 	return ((other.GetType() == GetType()) && ColorStopsAreEqual(other));
 }
 
 
 // operator!=
-bool
-BGradient::operator!=(const BGradient& other) const
+bool BGradient::operator!=(const BGradient& other) const
 {
 	return !(*this == other);
 }
 
 
 // ColorStopsAreEqual
-bool
-BGradient::ColorStopsAreEqual(const BGradient& other) const
+bool BGradient::ColorStopsAreEqual(const BGradient& other) const
 {
 	int32 count = CountColorStops();
 	if (count == other.CountColorStops() &&
@@ -288,8 +282,7 @@ BGradient::ColorStopsAreEqual(const BGradient& other) const
 
 
 // SetColorStops
-void
-BGradient::SetColorStops(const BGradient& other)
+void BGradient::SetColorStops(const BGradient& other)
 {
 	MakeEmpty();
 	for (int32 i = 0; ColorStop* stop = other.ColorStopAt(i); i++)
@@ -298,8 +291,7 @@ BGradient::SetColorStops(const BGradient& other)
 
 
 // AddColor
-int32
-BGradient::AddColor(const rgb_color& color, float offset)
+int32 BGradient::AddColor(const rgb_color& color, float offset)
 {
 	// Out of bounds stops would crash the app_server
 	if (offset < 0.f || offset > 255.f)
@@ -323,8 +315,7 @@ BGradient::AddColor(const rgb_color& color, float offset)
 
 
 // AddColorStop
-bool
-BGradient::AddColorStop(const ColorStop& colorStop, int32 index)
+bool BGradient::AddColorStop(const ColorStop& colorStop, int32 index)
 {
 	ColorStop* stop = new ColorStop(colorStop);
 	if (!fColorStops.AddItem((void*)stop, index)) {
@@ -336,8 +327,7 @@ BGradient::AddColorStop(const ColorStop& colorStop, int32 index)
 
 
 // RemoveColor
-bool
-BGradient::RemoveColor(int32 index)
+bool BGradient::RemoveColor(int32 index)
 {
 	ColorStop* stop = (ColorStop*)fColorStops.RemoveItem(index);
 	if (!stop) {
@@ -349,8 +339,7 @@ BGradient::RemoveColor(int32 index)
 
 
 // SetColorStop
-bool
-BGradient::SetColorStop(int32 index, const ColorStop& color)
+bool BGradient::SetColorStop(int32 index, const ColorStop& color)
 {
 	if (ColorStop* stop = ColorStopAt(index)) {
 		if (*stop != color) {
@@ -364,8 +353,7 @@ BGradient::SetColorStop(int32 index, const ColorStop& color)
 
 
 // SetColor
-bool
-BGradient::SetColor(int32 index, const rgb_color& color)
+bool BGradient::SetColor(int32 index, const rgb_color& color)
 {
 	ColorStop* stop = ColorStopAt(index);
 	if (stop && stop->color != color) {
@@ -377,8 +365,7 @@ BGradient::SetColor(int32 index, const rgb_color& color)
 
 
 // SetOffset
-bool
-BGradient::SetOffset(int32 index, float offset)
+bool BGradient::SetOffset(int32 index, float offset)
 {
 	ColorStop* stop = ColorStopAt(index);
 	if (stop && stop->offset != offset) {
@@ -390,8 +377,7 @@ BGradient::SetOffset(int32 index, float offset)
 
 
 // CountColorStops
-int32
-BGradient::CountColorStops() const
+int32 BGradient::CountColorStops() const
 {
 	return fColorStops.CountItems();
 }
@@ -425,8 +411,7 @@ BGradient::ColorStops() const
 
 
 // SortColorStopsByOffset
-void
-BGradient::SortColorStopsByOffset()
+void BGradient::SortColorStopsByOffset()
 {
 	// Use stable sort: stops with the same offset will retain their original
 	// order. This can be used to have sharp color changes in the gradient.
@@ -439,8 +424,7 @@ BGradient::SortColorStopsByOffset()
 
 
 // MakeEmpty
-void
-BGradient::MakeEmpty()
+void BGradient::MakeEmpty()
 {
 	int32 count = CountColorStops();
 	for (int32 i = 0; i < count; i++)

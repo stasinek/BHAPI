@@ -51,8 +51,7 @@ BSlowMenu::BSlowMenu(const char* title, menu_layout layout)
 }
 
 
-bool
-BSlowMenu::AddDynamicItem(add_state state)
+bool BSlowMenu::AddDynamicItem(add_state state)
 {
 	if (fMenuBuilt)
 		return false;
@@ -88,15 +87,13 @@ BSlowMenu::AddDynamicItem(add_state state)
 }
 
 
-bool
-BSlowMenu::StartBuildingItemList()
+bool BSlowMenu::StartBuildingItemList()
 {
 	return true;
 }
 
 
-bool
-BSlowMenu::AddNextItem()
+bool BSlowMenu::AddNextItem()
 {
 	TRESPASS();
 		// pure virtual, shouldn't be here
@@ -104,16 +101,14 @@ BSlowMenu::AddNextItem()
 }
 
 
-void
-BSlowMenu::DoneBuildingItemList()
+void BSlowMenu::DoneBuildingItemList()
 {
 	TRESPASS();
 		// pure virtual, shouldn't be here
 }
 
 
-void
-BSlowMenu::ClearMenuBuildingState()
+void BSlowMenu::ClearMenuBuildingState()
 {
 	TRESPASS();
 		// pure virtual, shouldn't be here

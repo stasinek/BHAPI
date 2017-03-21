@@ -70,7 +70,7 @@ BTextEditable::~BTextEditable()
 }
 
 
-void
+void 
 BTextEditable::MakeEditable(bool editable)
 {
     if(fEditable != editable)
@@ -86,14 +86,14 @@ BTextEditable::MakeEditable(bool editable)
 }
 
 
-bool
+bool 
 BTextEditable::IsEditable() const
 {
     return fEditable;
 }
 
 
-void
+void 
 BTextEditable::MakeSelectable(bool selectable)
 {
     if(fSelectable != selectable)
@@ -110,14 +110,14 @@ BTextEditable::MakeSelectable(bool selectable)
 }
 
 
-bool
+bool 
 BTextEditable::IsSelectable() const
 {
     return fSelectable;
 }
 
 
-void
+void 
 BTextEditable::SetTextAlignment(bhapi::alignment alignment)
 {
     if(fAlignment != alignment)
@@ -136,7 +136,7 @@ BTextEditable::TextAlignment() const
 }
 
 
-void
+void 
 BTextEditable::SetPosition(__be_int32 pos)
 {
     if(pos < 0 || pos > fCount) pos = fCount;
@@ -162,7 +162,7 @@ BTextEditable::Position() const
 }
 
 
-void
+void 
 BTextEditable::SetText(const char *str)
 {
     if(fText) delete[] fText;
@@ -192,7 +192,7 @@ BTextEditable::SetText(const char *str)
 }
 
 
-void
+void 
 BTextEditable::SetText(const BString &text)
 {
     SetText(text.String());
@@ -224,7 +224,7 @@ BTextEditable::DuplicateText(__be_int32 startPos,  __be_int32 endPos)
 
 
 
-void
+void 
 BTextEditable::InsertText(const char *text,  __be_int32 nChars,  __be_int32 position)
 {
     if(text == NULL || *text == 0 || nChars == 0) return;
@@ -263,7 +263,7 @@ BTextEditable::InsertText(const char *text,  __be_int32 nChars,  __be_int32 posi
 }
 
 
-void
+void 
 BTextEditable::RemoveText(__be_int32 startPos,  __be_int32 endPos)
 {
     if(!fText || fCount <= 0 || startPos < 0) return;
@@ -282,7 +282,7 @@ BTextEditable::RemoveText(__be_int32 startPos,  __be_int32 endPos)
 }
 
 
-void
+void 
 BTextEditable::Select(__be_int32 startPos,  __be_int32 endPos)
 {
     if((startPos == fSelectStart && endPos == fSelectEnd) || fText == NULL || fCount <= 0) return;
@@ -306,7 +306,7 @@ BTextEditable::Select(__be_int32 startPos,  __be_int32 endPos)
 }
 
 
-bool
+bool 
 BTextEditable::GetSelection(__be_int32 *startPos,  __be_int32 *endPos) const
 {
     if(fSelectStart < 0 || fSelectEnd < 0 || fSelectEnd < fSelectStart || fSelectEnd >= fCount) return false;
@@ -319,7 +319,7 @@ BTextEditable::GetSelection(__be_int32 *startPos,  __be_int32 *endPos) const
 }
 
 
-void
+void 
 BTextEditable::SetMargins(float left, float top, float right, float bottom)
 {
     if(left < 0) left = 0;
@@ -336,7 +336,7 @@ BTextEditable::SetMargins(float left, float top, float right, float bottom)
 }
 
 
-void
+void 
 BTextEditable::GetMargins(float *left, float *top, float *right, float *bottom) const
 {
     if(left) *left = fMargins.left;
@@ -346,7 +346,7 @@ BTextEditable::GetMargins(float *left, float *top, float *right, float *bottom) 
 }
 
 
-void
+void 
 BTextEditable::SetFont(const BFont *font,  __be_uint8 mask)
 {
     BFont fontPrev;
@@ -365,7 +365,7 @@ BTextEditable::SetFont(const BFont *font,  __be_uint8 mask)
 }
 
 
-void
+void 
 BTextEditable::FrameResized(float new_width, float new_height)
 {
     locationOffset = 0;
@@ -373,7 +373,7 @@ BTextEditable::FrameResized(float new_width, float new_height)
 }
 
 
-void
+void 
 BTextEditable::Draw(BRect updateRect)
 {
     if(!IsVisible()) return;
@@ -476,7 +476,7 @@ BTextEditable::Draw(BRect updateRect)
 }
 
 
-void
+void 
 BTextEditable::DrawSelectedBackground(BRect updateRect)
 {
     if(fCount <= 0 || !IsEnabled()) return;
@@ -531,7 +531,7 @@ BTextEditable::DrawSelectedBackground(BRect updateRect)
 }
 
 
-void
+void 
 BTextEditable::DrawCursor()
 {
     if(!IsEnabled() || !IsEditable() || fPosition < 0 || fPosition > fCount || (fCount > 0 && fCharWidths == NULL)) return;
@@ -585,7 +585,7 @@ BTextEditable::DrawCursor()
 }
 
 
-void
+void 
 BTextEditable::MouseDown(BPoint where)
 {
     BRect rect = Frame().OffsetToSelf(B_ORIGIN);
@@ -661,7 +661,7 @@ BTextEditable::MouseDown(BPoint where)
 }
 
 
-void
+void 
 BTextEditable::MouseUp(BPoint where)
 {
     fSelectTracking = -1;
@@ -676,7 +676,7 @@ BTextEditable::MouseUp(BPoint where)
 }
 
 
-void
+void 
 BTextEditable::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
     BRect rect = Frame().OffsetToSelf(B_ORIGIN);
@@ -772,7 +772,7 @@ BTextEditable::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_mes
 }
 
 
-void
+void 
 BTextEditable::WindowActivated(bool state)
 {
     fSelectTracking = -1;
@@ -780,7 +780,7 @@ BTextEditable::WindowActivated(bool state)
 }
 
 
-void
+void 
 BTextEditable::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
     if(!IsEnabled() || !(IsEditable() || IsSelectable()) || !IsFocus() || numBytes < 1) return;
@@ -1098,7 +1098,7 @@ BTextEditable::KeyDown(const char *bytes,  __be_int32 numBytes)
 }
 
 
-void
+void 
 BTextEditable::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
     if(!IsEnabled() || !IsEditable() || !IsFocus() || numBytes != 1 || bytes[0] != B_ENTER) return;
@@ -1116,7 +1116,7 @@ BTextEditable::KeyUp(const char *bytes,  __be_int32 numBytes)
 }
 
 
-void
+void 
 BTextEditable::MessageReceived(BMessage *msg)
 {
     if(msg->what == B_MODIFIERS_CHANGED)
@@ -1130,7 +1130,7 @@ BTextEditable::MessageReceived(BMessage *msg)
 }
 
 
-void
+void 
 BTextEditable::GetPreferredSize(float *width, float *height)
 {
     if(!width && !height) return;
@@ -1154,7 +1154,7 @@ BTextEditable::GetPreferredSize(float *width, float *height)
 }
 
 
-bool
+bool 
 BTextEditable::GetCharLocation(__be_int32 pos, float *x, float *y, BFont *tFont)
 {
     if(!x) return false;
@@ -1236,7 +1236,7 @@ BTextEditable::GetCharLocation(__be_int32 pos, float *x, float *y, BFont *tFont)
 }
 
 
-void
+void 
 BTextEditable::MakeFocus(bool focusState)
 {
     if(!focusState) fSelectTracking = -1;
@@ -1244,7 +1244,7 @@ BTextEditable::MakeFocus(bool focusState)
 }
 
 
-void
+void 
 BTextEditable::SetMaxChars(__be_int32 max)
 {
     if(max < 0) max = B_MAXINT32;
@@ -1267,7 +1267,7 @@ BTextEditable::MaxChars() const
 }
 
 
-void
+void 
 BTextEditable::HideTyping(__be_uint8 flag)
 {
     if((flag != 0x00 && flag < 0x20) || flag > 0x7e) flag = 0x01;
@@ -1315,7 +1315,7 @@ BTextEditable::_CharWidths(const BFont &font, const char *str,  __be_int32 *coun
 }
 
 
-void
+void 
 BTextEditable::_DrawString(const char *str, BPoint location)
 {
     if(fTypingHidden == 0x01 || str == NULL || *str == 0) return;

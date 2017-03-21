@@ -149,8 +149,7 @@ typedef gz_header FAR *gz_headerp;
    the symbol MAXSEG_64K is defined (see zconf.h).  WARNING: On MSDOS, pointers
    returned by zalloc for objects of exactly 65536 bytes *must* have their
    offset normalized to zero.  The default allocation function provided by this
-   library ensures this (see zutil.c).  To reduce memory requirements and avoid
-   any allocation of 64K objects, at the expense of compression ratio, compile
+   library ensures this (see zutil.c).  To reduce memory requirements and avoid    any allocation of 64K objects, at the expense of compression ratio, compile
    the library with -DMAX_WBITS=14 (see zconf.h).
 
      The fields total_in and total_out can be used for statistics or progress
@@ -1272,8 +1271,7 @@ ZEXTERN gzFile ZEXPORT gzdopen OF((int fd, const char *mode));
    fd.  If you want to keep fd open, use fd = dup(fd_keep); gz = gzdopen(fd,
    mode);.  The duplicated descriptor should be saved to avoid a leak, since
    gzdopen does not close fd if it fails.  If you are using fileno() to get the
-   file descriptor from a FILE *, then you will have to use dup() to avoid
-   double-close()ing the file descriptor.  Both gzclose() and fclose() will
+   file descriptor from a FILE *, then you will have to use dup() to avoid    double-close()ing the file descriptor.  Both gzclose() and fclose() will
    close the associated file descriptor, so they need to have different file
    descriptors.
 

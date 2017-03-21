@@ -82,8 +82,7 @@ TypeHandlerRoster::Default()
 }
 
 
-/*static*/ status_t
-TypeHandlerRoster::CreateDefault()
+/*static*/ status_t TypeHandlerRoster::CreateDefault()
 {
 	if (sDefaultInstance != NULL)
 		return B_OK;
@@ -106,8 +105,7 @@ TypeHandlerRoster::CreateDefault()
 }
 
 
-/*static*/ void
-TypeHandlerRoster::DeleteDefault()
+/*static*/ void TypeHandlerRoster::DeleteDefault()
 {
 	TypeHandlerRoster* roster = sDefaultInstance;
 	sDefaultInstance = NULL;
@@ -115,15 +113,13 @@ TypeHandlerRoster::DeleteDefault()
 }
 
 
-status_t
-TypeHandlerRoster::Init()
+status_t TypeHandlerRoster::Init()
 {
 	return fLock.InitCheck();
 }
 
 
-status_t
-TypeHandlerRoster::RegisterDefaultHandlers()
+status_t TypeHandlerRoster::RegisterDefaultHandlers()
 {
 	TypeHandler* handler;
 	BReference<TypeHandler> handlerReference;
@@ -159,8 +155,7 @@ TypeHandlerRoster::RegisterDefaultHandlers()
 }
 
 
-status_t
-TypeHandlerRoster::FindTypeHandler(ValueNodeChild* nodeChild, Type* type,
+status_t TypeHandlerRoster::FindTypeHandler(ValueNodeChild* nodeChild, Type* type,
 	TypeHandler*& _handler)
 {
 	// find the best-supporting handler
@@ -186,8 +181,7 @@ TypeHandlerRoster::FindTypeHandler(ValueNodeChild* nodeChild, Type* type,
 }
 
 
-status_t
-TypeHandlerRoster::CreateValueNode(ValueNodeChild* nodeChild, Type* type,
+status_t TypeHandlerRoster::CreateValueNode(ValueNodeChild* nodeChild, Type* type,
 	ValueNode*& _node)
 {
 	// find the best-supporting handler
@@ -210,8 +204,7 @@ TypeHandlerRoster::CreateValueNode(ValueNodeChild* nodeChild, Type* type,
 }
 
 
-bool
-TypeHandlerRoster::RegisterHandler(TypeHandler* handler)
+bool TypeHandlerRoster::RegisterHandler(TypeHandler* handler)
 {
 	if (!fTypeHandlers.AddItem(handler))
 		return false;
@@ -221,8 +214,7 @@ TypeHandlerRoster::RegisterHandler(TypeHandler* handler)
 }
 
 
-void
-TypeHandlerRoster::UnregisterHandler(TypeHandler* handler)
+void TypeHandlerRoster::UnregisterHandler(TypeHandler* handler)
 {
 	if (fTypeHandlers.RemoveItem(handler))
 		handler->ReleaseReference();

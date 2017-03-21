@@ -70,8 +70,7 @@ static const rgb_color kDefaultWarningSpaceColor
 	= { 203, 0, 0, kSpaceBarAlpha };
 
 
-static void
-send_bool_notices(uint32 what, const char* name, bool value)
+static void send_bool_notices(uint32 what, const char* name, bool value)
 {
 	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
@@ -107,8 +106,7 @@ SettingsView::~SettingsView()
 	and update the UI gadgets. The latter can by done by
 	calling ShowCurrentSettings().
 */
-void
-SettingsView::SetDefaults()
+void SettingsView::SetDefaults()
 {
 }
 
@@ -119,8 +117,7 @@ SettingsView::SetDefaults()
 	shows the default settings, this function should
 	return true.
 */
-bool
-SettingsView::IsDefaultable() const
+bool SettingsView::IsDefaultable() const
 {
 	return true;
 }
@@ -132,8 +129,7 @@ SettingsView::IsDefaultable() const
 	update the UI widgets accordingly, preferrable by calling
 	ShowCurrentSettings().
 */
-void
-SettingsView::Revert()
+void SettingsView::Revert()
 {
 }
 
@@ -142,8 +138,7 @@ SettingsView::Revert()
 	This function is called when the window is shown to let
 	the settings views record the state to revert to.
 */
-void
-SettingsView::RecordRevertSettings()
+void SettingsView::RecordRevertSettings()
 {
 }
 
@@ -152,8 +147,7 @@ SettingsView::RecordRevertSettings()
 	This function is used by the window to tell the view
 	to display the current settings in the tracker.
 */
-void
-SettingsView::ShowCurrentSettings()
+void SettingsView::ShowCurrentSettings()
 {
 }
 
@@ -163,8 +157,7 @@ SettingsView::ShowCurrentSettings()
 	it can ghost the revert button or not. It it shows the
 	reverted settings, this function should return true.
 */
-bool
-SettingsView::IsRevertable() const
+bool SettingsView::IsRevertable() const
 {
 	return true;
 }
@@ -211,8 +204,7 @@ DesktopSettingsView::DesktopSettingsView()
 }
 
 
-void
-DesktopSettingsView::AttachedToWindow()
+void DesktopSettingsView::AttachedToWindow()
 {
 	fShowDisksIconRadioButton->SetTarget(this);
 	fMountVolumesOntoDesktopRadioButton->SetTarget(this);
@@ -220,8 +212,7 @@ DesktopSettingsView::AttachedToWindow()
 }
 
 
-void
-DesktopSettingsView::MessageReceived(BMessage* message)
+void DesktopSettingsView::MessageReceived(BMessage* message)
 {
 	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
@@ -303,8 +294,7 @@ DesktopSettingsView::MessageReceived(BMessage* message)
 }
 
 
-void
-DesktopSettingsView::SetDefaults()
+void DesktopSettingsView::SetDefaults()
 {
 	// ToDo: Avoid the duplication of the default values.
 	TrackerSettings settings;
@@ -319,8 +309,7 @@ DesktopSettingsView::SetDefaults()
 }
 
 
-bool
-DesktopSettingsView::IsDefaultable() const
+bool DesktopSettingsView::IsDefaultable() const
 {
 	TrackerSettings settings;
 
@@ -331,8 +320,7 @@ DesktopSettingsView::IsDefaultable() const
 }
 
 
-void
-DesktopSettingsView::Revert()
+void DesktopSettingsView::Revert()
 {
 	TrackerSettings settings;
 
@@ -346,8 +334,7 @@ DesktopSettingsView::Revert()
 }
 
 
-void
-DesktopSettingsView::_SendNotices()
+void DesktopSettingsView::_SendNotices()
 {
 	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
@@ -368,8 +355,7 @@ DesktopSettingsView::_SendNotices()
 }
 
 
-void
-DesktopSettingsView::ShowCurrentSettings()
+void DesktopSettingsView::ShowCurrentSettings()
 {
 	TrackerSettings settings;
 
@@ -384,8 +370,7 @@ DesktopSettingsView::ShowCurrentSettings()
 }
 
 
-void
-DesktopSettingsView::RecordRevertSettings()
+void DesktopSettingsView::RecordRevertSettings()
 {
 	TrackerSettings settings;
 
@@ -396,8 +381,7 @@ DesktopSettingsView::RecordRevertSettings()
 }
 
 
-bool
-DesktopSettingsView::IsRevertable() const
+bool DesktopSettingsView::IsRevertable() const
 {
 	return fShowDisksIcon != (fShowDisksIconRadioButton->Value() > 0)
 		|| fMountVolumesOntoDesktop !=
@@ -478,8 +462,7 @@ WindowsSettingsView::WindowsSettingsView()
 }
 
 
-void
-WindowsSettingsView::AttachedToWindow()
+void WindowsSettingsView::AttachedToWindow()
 {
 	fSingleWindowBrowseCheckBox->SetTarget(this);
 	fShowNavigatorCheckBox->SetTarget(this);
@@ -491,8 +474,7 @@ WindowsSettingsView::AttachedToWindow()
 }
 
 
-void
-WindowsSettingsView::MessageReceived(BMessage* message)
+void WindowsSettingsView::MessageReceived(BMessage* message)
 {
 	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
@@ -589,8 +571,7 @@ WindowsSettingsView::MessageReceived(BMessage* message)
 }
 
 
-void
-WindowsSettingsView::SetDefaults()
+void WindowsSettingsView::SetDefaults()
 {
 	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
@@ -641,8 +622,7 @@ WindowsSettingsView::SetDefaults()
 }
 
 
-bool
-WindowsSettingsView::IsDefaultable() const
+bool WindowsSettingsView::IsDefaultable() const
 {
 	TrackerSettings settings;
 
@@ -655,8 +635,7 @@ WindowsSettingsView::IsDefaultable() const
 }
 
 
-void
-WindowsSettingsView::Revert()
+void WindowsSettingsView::Revert()
 {
 	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
@@ -707,8 +686,7 @@ WindowsSettingsView::Revert()
 }
 
 
-void
-WindowsSettingsView::ShowCurrentSettings()
+void WindowsSettingsView::ShowCurrentSettings()
 {
 	TrackerSettings settings;
 
@@ -725,8 +703,7 @@ WindowsSettingsView::ShowCurrentSettings()
 }
 
 
-void
-WindowsSettingsView::RecordRevertSettings()
+void WindowsSettingsView::RecordRevertSettings()
 {
 	TrackerSettings settings;
 
@@ -740,8 +717,7 @@ WindowsSettingsView::RecordRevertSettings()
 }
 
 
-bool
-WindowsSettingsView::IsRevertable() const
+bool WindowsSettingsView::IsRevertable() const
 {
 	TrackerSettings settings;
 
@@ -809,8 +785,7 @@ SpaceBarSettingsView::~SpaceBarSettingsView()
 }
 
 
-void
-SpaceBarSettingsView::AttachedToWindow()
+void SpaceBarSettingsView::AttachedToWindow()
 {
 	fSpaceBarShowCheckBox->SetTarget(this);
 	fColorControl->SetTarget(this);
@@ -818,8 +793,7 @@ SpaceBarSettingsView::AttachedToWindow()
 }
 
 
-void
-SpaceBarSettingsView::MessageReceived(BMessage* message)
+void SpaceBarSettingsView::MessageReceived(BMessage* message)
 {
 	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
@@ -892,8 +866,7 @@ SpaceBarSettingsView::MessageReceived(BMessage* message)
 }
 
 
-void
-SpaceBarSettingsView::SetDefaults()
+void SpaceBarSettingsView::SetDefaults()
 {
 	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
@@ -919,8 +892,7 @@ SpaceBarSettingsView::SetDefaults()
 }
 
 
-bool
-SpaceBarSettingsView::IsDefaultable() const
+bool SpaceBarSettingsView::IsDefaultable() const
 {
 	TrackerSettings settings;
 
@@ -931,8 +903,7 @@ SpaceBarSettingsView::IsDefaultable() const
 }
 
 
-void
-SpaceBarSettingsView::Revert()
+void SpaceBarSettingsView::Revert()
 {
 	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)
@@ -959,8 +930,7 @@ SpaceBarSettingsView::Revert()
 }
 
 
-void
-SpaceBarSettingsView::ShowCurrentSettings()
+void SpaceBarSettingsView::ShowCurrentSettings()
 {
 	TrackerSettings settings;
 
@@ -980,8 +950,7 @@ SpaceBarSettingsView::ShowCurrentSettings()
 }
 
 
-void
-SpaceBarSettingsView::RecordRevertSettings()
+void SpaceBarSettingsView::RecordRevertSettings()
 {
 	TrackerSettings settings;
 
@@ -992,8 +961,7 @@ SpaceBarSettingsView::RecordRevertSettings()
 }
 
 
-bool
-SpaceBarSettingsView::IsRevertable() const
+bool SpaceBarSettingsView::IsRevertable() const
 {
 	TrackerSettings settings;
 

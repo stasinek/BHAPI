@@ -264,8 +264,7 @@ _AVL_TREE_MAP_CLASS_NAME::~AVLTreeMap()
 
 // MakeEmpty
 _AVL_TREE_MAP_TEMPLATE_LIST
-inline void
-_AVL_TREE_MAP_CLASS_NAME::MakeEmpty()
+inline void _AVL_TREE_MAP_CLASS_NAME::MakeEmpty()
 {
 	AVLTreeNode* root = fTree.Root();
 	_FreeTree(root);
@@ -370,8 +369,7 @@ _AVL_TREE_MAP_CLASS_NAME::FindClose(const Key& key, bool less)
 
 // Insert
 _AVL_TREE_MAP_TEMPLATE_LIST
-status_t
-_AVL_TREE_MAP_CLASS_NAME::Insert(const Key& key, const Value& value,
+status_t _AVL_TREE_MAP_CLASS_NAME::Insert(const Key& key, const Value& value,
 	Iterator* iterator)
 {
 	// allocate a node
@@ -396,8 +394,7 @@ _AVL_TREE_MAP_CLASS_NAME::Insert(const Key& key, const Value& value,
 
 // Insert
 _AVL_TREE_MAP_TEMPLATE_LIST
-status_t
-_AVL_TREE_MAP_CLASS_NAME::Insert(const Key& key, const Value& value,
+status_t _AVL_TREE_MAP_CLASS_NAME::Insert(const Key& key, const Value& value,
 	Node** _node)
 {
 	// allocate a node
@@ -422,8 +419,7 @@ _AVL_TREE_MAP_CLASS_NAME::Insert(const Key& key, const Value& value,
 
 // Remove
 _AVL_TREE_MAP_TEMPLATE_LIST
-status_t
-_AVL_TREE_MAP_CLASS_NAME::Remove(const Key& key)
+status_t _AVL_TREE_MAP_CLASS_NAME::Remove(const Key& key)
 {
 	AVLTreeNode* node = fTree.Remove(&key);
 	if (!node)
@@ -436,8 +432,7 @@ _AVL_TREE_MAP_CLASS_NAME::Remove(const Key& key)
 
 // Remove
 _AVL_TREE_MAP_TEMPLATE_LIST
-status_t
-_AVL_TREE_MAP_CLASS_NAME::Remove(Node* node)
+status_t _AVL_TREE_MAP_CLASS_NAME::Remove(Node* node)
 {
 	if (!fTree.Remove(node))
 		return B_ENTRY_NOT_FOUND;
@@ -478,8 +473,7 @@ _AVL_TREE_MAP_CLASS_NAME::_Allocate(const Key& key, const Value& value)
 
 // _Free
 _AVL_TREE_MAP_TEMPLATE_LIST
-inline void
-_AVL_TREE_MAP_CLASS_NAME::_Free(Node* node)
+inline void _AVL_TREE_MAP_CLASS_NAME::_Free(Node* node)
 {
 	fStrategy.Free(node);
 }
@@ -541,8 +535,7 @@ _AVL_TREE_MAP_CLASS_NAME::_CompareNodes(const Node* a, const Node* b)
 
 // _FreeTree
 _AVL_TREE_MAP_TEMPLATE_LIST
-void
-_AVL_TREE_MAP_CLASS_NAME::_FreeTree(AVLTreeNode* node)
+void _AVL_TREE_MAP_CLASS_NAME::_FreeTree(AVLTreeNode* node)
 {
 	if (node) {
 		_FreeTree(node->left);

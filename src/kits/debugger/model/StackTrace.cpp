@@ -18,8 +18,7 @@ StackTrace::~StackTrace()
 }
 
 
-bool
-StackTrace::AddFrame(StackFrame* frame)
+bool StackTrace::AddFrame(StackFrame* frame)
 {
 	if (fStackFrames.AddItem(frame))
 		return true;
@@ -29,8 +28,7 @@ StackTrace::AddFrame(StackFrame* frame)
 }
 
 
-int32
-StackTrace::CountFrames() const
+int32 StackTrace::CountFrames() const
 {
 	return fStackFrames.CountItems();
 }

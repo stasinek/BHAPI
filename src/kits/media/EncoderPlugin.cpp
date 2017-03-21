@@ -29,8 +29,7 @@ Encoder::~Encoder()
 // #pragma mark - Convenience stubs
 
 
-status_t
-Encoder::AddTrackInfo(uint32 code, const void* data, size_t size, uint32 flags)
+status_t Encoder::AddTrackInfo(uint32 code, const void* data, size_t size, uint32 flags)
 {
 	return B_NOT_SUPPORTED;
 }
@@ -50,29 +49,25 @@ Encoder::ParameterWeb()
 }
 
 
-status_t
-Encoder::GetParameterValue(int32 id, void* value, size_t* size) const
+status_t Encoder::GetParameterValue(int32 id, void* value, size_t* size) const
 {
 	return B_NOT_SUPPORTED;
 }
 
 
-status_t
-Encoder::SetParameterValue(int32 id, const void* value, size_t size)
+status_t Encoder::SetParameterValue(int32 id, const void* value, size_t size)
 {
 	return B_NOT_SUPPORTED;
 }
 
 
-status_t
-Encoder::GetEncodeParameters(encode_parameters* parameters) const
+status_t Encoder::GetEncodeParameters(encode_parameters* parameters) const
 {
 	return B_NOT_SUPPORTED;
 }
 
 
-status_t
-Encoder::SetEncodeParameters(encode_parameters* parameters)
+status_t Encoder::SetEncodeParameters(encode_parameters* parameters)
 {
 	return B_NOT_SUPPORTED;
 }
@@ -81,16 +76,14 @@ Encoder::SetEncodeParameters(encode_parameters* parameters)
 // #pragma mark -
 
 
-status_t
-Encoder::WriteChunk(const void* chunkBuffer, size_t chunkSize,
+status_t Encoder::WriteChunk(const void* chunkBuffer, size_t chunkSize,
 	media_encode_info* encodeInfo)
 {
 	return fChunkWriter->WriteChunk(chunkBuffer, chunkSize, encodeInfo);
 }
 
 
-void
-Encoder::SetChunkWriter(ChunkWriter* writer)
+void Encoder::SetChunkWriter(ChunkWriter* writer)
 {
 	delete fChunkWriter;
 	fChunkWriter = writer;
@@ -100,8 +93,7 @@ Encoder::SetChunkWriter(ChunkWriter* writer)
 // #pragma mark - FBC padding
 
 
-status_t
-Encoder::Perform(perform_code code, void* data)
+status_t Encoder::Perform(perform_code code, void* data)
 {
 	return B_OK;
 }

@@ -30,8 +30,7 @@
 static const char *kAppFlagsAttribute = "BEOS:APP_FLAGS";
 
 
-static status_t
-update_icon(BAppFileInfo &appFileInfoRead, BAppFileInfo &appFileInfoWrite,
+static status_t update_icon(BAppFileInfo &appFileInfoRead, BAppFileInfo &appFileInfoWrite,
 	const char *type, BBitmap &icon, icon_size iconSize)
 {
 	status_t err = appFileInfoRead.GetIconForType(type, &icon, iconSize);
@@ -43,8 +42,7 @@ update_icon(BAppFileInfo &appFileInfoRead, BAppFileInfo &appFileInfoWrite,
 }
 
 
-static status_t
-update_icon(BAppFileInfo &appFileInfoRead, BAppFileInfo &appFileInfoWrite,
+static status_t update_icon(BAppFileInfo &appFileInfoRead, BAppFileInfo &appFileInfoWrite,
 	const char *type)
 {
 	uint8* data = NULL;
@@ -62,8 +60,7 @@ update_icon(BAppFileInfo &appFileInfoRead, BAppFileInfo &appFileInfoWrite,
 }
 
 
-static bool
-is_shared_object_mime_type(const BString &type)
+static bool is_shared_object_mime_type(const BString &type)
 {
 	return type.ICompare(B_APP_MIME_TYPE) == 0;
 }
@@ -87,8 +84,7 @@ MimeInfoUpdater::~MimeInfoUpdater()
 }
 
 
-status_t
-MimeInfoUpdater::Do(const entry_ref& entry, bool* _entryIsDir)
+status_t MimeInfoUpdater::Do(const entry_ref& entry, bool* _entryIsDir)
 {
 	bool updateType = false;
 	bool updateAppInfo = false;

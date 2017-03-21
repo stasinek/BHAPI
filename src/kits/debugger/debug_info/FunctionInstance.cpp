@@ -50,8 +50,7 @@ FunctionInstance::GetFunctionID() const
 }
 
 
-void
-FunctionInstance::SetFunction(Function* function)
+void FunctionInstance::SetFunction(Function* function)
 {
 	if (fFunction != NULL)
 		fFunction->ReleaseReference();
@@ -63,8 +62,7 @@ FunctionInstance::SetFunction(Function* function)
 }
 
 
-void
-FunctionInstance::SetSourceCode(DisassembledCode* source,
+void FunctionInstance::SetSourceCode(DisassembledCode* source,
 	function_source_state state)
 {
 	if (source == fSourceCode && state == fSourceCodeState)

@@ -65,8 +65,7 @@ BActivationTransaction::~BActivationTransaction()
 }
 
 
-status_t
-BActivationTransaction::InitCheck() const
+status_t BActivationTransaction::InitCheck() const
 {
 	if (fLocation < 0 || fLocation >= B_PACKAGE_INSTALLATION_LOCATION_ENUM_COUNT
 		|| fTransactionDirectoryName.IsEmpty()
@@ -77,8 +76,7 @@ BActivationTransaction::InitCheck() const
 }
 
 
-status_t
-BActivationTransaction::SetTo(BPackageInstallationLocation location,
+status_t BActivationTransaction::SetTo(BPackageInstallationLocation location,
 	int64 changeCount, const BString& directoryName)
 {
 	if (location < 0 || location >= B_PACKAGE_INSTALLATION_LOCATION_ENUM_COUNT
@@ -103,22 +101,19 @@ BActivationTransaction::Location() const
 }
 
 
-void
-BActivationTransaction::SetLocation(BPackageInstallationLocation location)
+void BActivationTransaction::SetLocation(BPackageInstallationLocation location)
 {
 	fLocation = location;
 }
 
 
-int64
-BActivationTransaction::ChangeCount() const
+int64 BActivationTransaction::ChangeCount() const
 {
 	return fChangeCount;
 }
 
 
-void
-BActivationTransaction::SetChangeCount(int64 changeCount)
+void BActivationTransaction::SetChangeCount(int64 changeCount)
 {
 	fChangeCount = changeCount;
 }
@@ -131,8 +126,7 @@ BActivationTransaction::TransactionDirectoryName() const
 }
 
 
-void
-BActivationTransaction::SetTransactionDirectoryName(
+void BActivationTransaction::SetTransactionDirectoryName(
 	const BString& directoryName)
 {
 	fTransactionDirectoryName = directoryName;
@@ -146,16 +140,14 @@ BActivationTransaction::PackagesToActivate() const
 }
 
 
-bool
-BActivationTransaction::SetPackagesToActivate(const BStringList& packages)
+bool BActivationTransaction::SetPackagesToActivate(const BStringList& packages)
 {
 	fPackagesToActivate = packages;
 	return fPackagesToActivate.CountStrings() == packages.CountStrings();
 }
 
 
-bool
-BActivationTransaction::AddPackageToActivate(const BString& package)
+bool BActivationTransaction::AddPackageToActivate(const BString& package)
 {
 	return fPackagesToActivate.Add(package);
 }
@@ -168,23 +160,20 @@ BActivationTransaction::PackagesToDeactivate() const
 }
 
 
-bool
-BActivationTransaction::SetPackagesToDeactivate(const BStringList& packages)
+bool BActivationTransaction::SetPackagesToDeactivate(const BStringList& packages)
 {
 	fPackagesToDeactivate = packages;
 	return fPackagesToDeactivate.CountStrings() == packages.CountStrings();
 }
 
 
-bool
-BActivationTransaction::AddPackageToDeactivate(const BString& package)
+bool BActivationTransaction::AddPackageToDeactivate(const BString& package)
 {
 	return fPackagesToDeactivate.Add(package);
 }
 
 
-status_t
-BActivationTransaction::Archive(BMessage* archive, bool deep) const
+status_t BActivationTransaction::Archive(BMessage* archive, bool deep) const
 {
 	status_t error = BArchivable::Archive(archive, deep);
 	if (error != B_OK)
@@ -214,8 +203,7 @@ BActivationTransaction::Instantiate(BMessage* archive)
 }
 
 
-/*static*/ status_t
-BActivationTransaction::_ExtractStringList(BMessage* archive, const char* field,
+/*static*/ status_t BActivationTransaction::_ExtractStringList(BMessage* archive, const char* field,
 	BStringList& _list)
 {
 	status_t error = archive->FindStrings(field, &_list);

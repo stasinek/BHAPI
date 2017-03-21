@@ -103,62 +103,54 @@ CPUSet::CPUSet()
 }
 
 
-inline void
-CPUSet::ClearAll()
+inline void CPUSet::ClearAll()
 {
 	memset(fBitmap, 0, sizeof(fBitmap));
 }
 
 
-inline void
-CPUSet::SetAll()
+inline void CPUSet::SetAll()
 {
 	memset(fBitmap, ~uint8(0), sizeof(fBitmap));
 }
 
 
-inline void
-CPUSet::SetBit(int32 cpu)
+inline void CPUSet::SetBit(int32 cpu)
 {
 	int32* element = (int32*)&fBitmap[cpu % kArraySize];
 	*element |= 1u << (cpu / kArraySize);
 }
 
 
-inline void
-CPUSet::ClearBit(int32 cpu)
+inline void CPUSet::ClearBit(int32 cpu)
 {
 	int32* element = (int32*)&fBitmap[cpu % kArraySize];
 	*element &= ~uint32(1u << (cpu / kArraySize));
 }
 
 
-inline void
-CPUSet::SetBitAtomic(int32 cpu)
+inline void CPUSet::SetBitAtomic(int32 cpu)
 {
 	int32* element = (int32*)&fBitmap[cpu % kArraySize];
 	atomic_or(element, 1u << (cpu / kArraySize));
 }
 
 
-inline void
-CPUSet::ClearBitAtomic(int32 cpu)
+inline void CPUSet::ClearBitAtomic(int32 cpu)
 {
 	int32* element = (int32*)&fBitmap[cpu % kArraySize];
 	atomic_and(element, ~uint32(1u << (cpu / kArraySize)));
 }
 
 
-inline bool
-CPUSet::GetBit(int32 cpu) const
+inline bool CPUSet::GetBit(int32 cpu) const
 {
 	int32* element = (int32*)&fBitmap[cpu % kArraySize];
 	return ((uint32)atomic_get(element) & (1u << (cpu / kArraySize))) != 0;
 }
 
 
-inline bool
-CPUSet::IsEmpty() const
+inline bool CPUSet::IsEmpty() const
 {
 	for (int i = 0; i < kArraySize; i++) {
 		if (fBitmap[i] != 0)
@@ -174,15 +166,13 @@ CPUSet::IsEmpty() const
 #if !DEBUG_SPINLOCKS && !B_DEBUG_SPINLOCK_CONTENTION
 
 
-static inline bool
-try_acquire_spinlock_inline(spinlock* lock)
+static inline bool try_acquire_spinlock_inline(spinlock* lock)
 {
 	return atomic_get_and_set((int32*)lock, 1) == 0;
 }
 
 
-static inline void
-acquire_spinlock_inline(spinlock* lock)
+static inline void acquire_spinlock_inline(spinlock* lock)
 {
 	if (try_acquire_spinlock_inline(lock))
 		return;
@@ -190,8 +180,7 @@ acquire_spinlock_inline(spinlock* lock)
 }
 
 
-static inline void
-release_spinlock_inline(spinlock* lock)
+static inline void release_spinlock_inline(spinlock* lock)
 {
 	atomic_set((int32*)lock, 0);
 }
@@ -202,15 +191,13 @@ release_spinlock_inline(spinlock* lock)
 #define release_spinlock(lock)		release_spinlock_inline(lock)
 
 
-static inline bool
-try_acquire_write_spinlock_inline(rw_spinlock* lock)
+static inline bool try_acquire_write_spinlock_inline(rw_spinlock* lock)
 {
 	return atomic_test_and_set(&lock->lock, 1u << 31, 0) == 0;
 }
 
 
-static inline void
-acquire_write_spinlock_inline(rw_spinlock* lock)
+static inline void acquire_write_spinlock_inline(rw_spinlock* lock)
 {
 	if (try_acquire_write_spinlock(lock))
 		return;
@@ -218,23 +205,20 @@ acquire_write_spinlock_inline(rw_spinlock* lock)
 }
 
 
-static inline void
-release_write_spinlock_inline(rw_spinlock* lock)
+static inline void release_write_spinlock_inline(rw_spinlock* lock)
 {
 	atomic_set(&lock->lock, 0);
 }
 
 
-static inline bool
-try_acquire_read_spinlock_inline(rw_spinlock* lock)
+static inline bool try_acquire_read_spinlock_inline(rw_spinlock* lock)
 {
 	uint32 previous = atomic_add(&lock->lock, 1);
 	return (previous & (1u << 31)) == 0;
 }
 
 
-static inline void
-acquire_read_spinlock_inline(rw_spinlock* lock)
+static inline void acquire_read_spinlock_inline(rw_spinlock* lock)
 {
 	if (try_acquire_read_spinlock(lock))
 		return;
@@ -242,8 +226,7 @@ acquire_read_spinlock_inline(rw_spinlock* lock)
 }
 
 
-static inline void
-release_read_spinlock_inline(rw_spinlock* lock)
+static inline void release_read_spinlock_inline(rw_spinlock* lock)
 {
 	atomic_add(&lock->lock, -1);
 }
@@ -258,8 +241,7 @@ release_read_spinlock_inline(rw_spinlock* lock)
 #define release_write_spinlock(lock)	release_write_spinlock_inline(lock)
 
 
-static inline bool
-try_acquire_write_seqlock_inline(seqlock* lock) {
+static inline bool try_acquire_write_seqlock_inline(seqlock* lock) {
 	bool succeed = try_acquire_spinlock(&lock->lock);
 	if (succeed)
 		atomic_add((int32*)&lock->count, 1);
@@ -267,28 +249,24 @@ try_acquire_write_seqlock_inline(seqlock* lock) {
 }
 
 
-static inline void
-acquire_write_seqlock_inline(seqlock* lock) {
+static inline void acquire_write_seqlock_inline(seqlock* lock) {
 	acquire_spinlock(&lock->lock);
 	atomic_add((int32*)&lock->count, 1);
 }
 
 
-static inline void
-release_write_seqlock_inline(seqlock* lock) {
+static inline void release_write_seqlock_inline(seqlock* lock) {
 	atomic_add((int32*)&lock->count, 1);
 	release_spinlock(&lock->lock);
 }
 
 
-static inline uint32
-acquire_read_seqlock_inline(seqlock* lock) {
+static inline uint32 acquire_read_seqlock_inline(seqlock* lock) {
 	return atomic_get((int32*)&lock->count);
 }
 
 
-static inline bool
-release_read_seqlock_inline(seqlock* lock, uint32 count) {
+static inline bool release_read_seqlock_inline(seqlock* lock, uint32 count) {
 	uint32 current = atomic_get((int32*)&lock->count);
 
 	return count % 2 == 0 && current == count;

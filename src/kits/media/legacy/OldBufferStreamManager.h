@@ -9,7 +9,7 @@
 #define _BUFFER_STREAM_MANAGER_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <Haiku.h>
 #include <Locker.h>
 

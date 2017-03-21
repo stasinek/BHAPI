@@ -82,16 +82,14 @@ ToolTipView::~ToolTipView()
 }
 
 
-void
-ToolTipView::AttachedToWindow()
+void ToolTipView::AttachedToWindow()
 {
 	SetEventMask(B_POINTER_EVENTS | B_KEYBOARD_EVENTS, 0);
 	fToolTip->AttachedToWindow();
 }
 
 
-void
-ToolTipView::DetachedFromWindow()
+void ToolTipView::DetachedFromWindow()
 {
 	BToolTipManager* manager = BToolTipManager::Manager();
 	manager->Lock();
@@ -104,15 +102,13 @@ ToolTipView::DetachedFromWindow()
 }
 
 
-void
-ToolTipView::FrameResized(float width, float height)
+void ToolTipView::FrameResized(float width, float height)
 {
 	ResetWindowFrame();
 }
 
 
-void
-ToolTipView::MouseMoved(BPoint where, uint32 transit,
+void ToolTipView::MouseMoved(BPoint where, uint32 transit,
 	const BMessage* dragMessage)
 {
 	if (fToolTip->IsSticky()) {
@@ -127,16 +123,14 @@ ToolTipView::MouseMoved(BPoint where, uint32 transit,
 }
 
 
-void
-ToolTipView::KeyDown(const char* bytes, int32 numBytes)
+void ToolTipView::KeyDown(const char* bytes, int32 numBytes)
 {
 	if (!fToolTip->IsSticky())
 		HideTip();
 }
 
 
-void
-ToolTipView::HideTip()
+void ToolTipView::HideTip()
 {
 	if (fHidden)
 		return;
@@ -148,15 +142,13 @@ ToolTipView::HideTip()
 }
 
 
-void
-ToolTipView::ShowTip()
+void ToolTipView::ShowTip()
 {
 	fHidden = false;
 }
 
 
-void
-ToolTipView::ResetWindowFrame()
+void ToolTipView::ResetWindowFrame()
 {
 	BPoint where;
 	GetMouse(&where, NULL, false);
@@ -170,8 +162,7 @@ ToolTipView::ResetWindowFrame()
 	Makes sure the tool tip can be shown on screen in its entirety, ie. it will
 	resize the window if necessary.
 */
-void
-ToolTipView::ResetWindowFrame(BPoint where)
+void ToolTipView::ResetWindowFrame(BPoint where)
 {
 	if (Window() == NULL)
 		return;
@@ -326,8 +317,7 @@ ToolTipWindow::ToolTipWindow(BToolTip* tip, BPoint where, void* owner)
 }
 
 
-void
-ToolTipWindow::MessageReceived(BMessage* message)
+void ToolTipWindow::MessageReceived(BMessage* message)
 {
 	ToolTipView* view = static_cast<ToolTipView*>(ChildAt(0));
 
@@ -383,8 +373,7 @@ BToolTipManager::Manager()
 }
 
 
-void
-BToolTipManager::ShowTip(BToolTip* tip, BPoint where, void* owner)
+void BToolTipManager::ShowTip(BToolTip* tip, BPoint where, void* owner)
 {
 	BToolTip* current = NULL;
 	void* currentOwner = NULL;
@@ -414,15 +403,13 @@ BToolTipManager::ShowTip(BToolTip* tip, BPoint where, void* owner)
 }
 
 
-void
-BToolTipManager::HideTip()
+void BToolTipManager::HideTip()
 {
 	fWindow.SendMessage(kMsgHideToolTip);
 }
 
 
-void
-BToolTipManager::SetShowDelay(bigtime_t time)
+void BToolTipManager::SetShowDelay(bigtime_t time)
 {
 	// between 10ms and 3s
 	if (time < 10000)
@@ -441,8 +428,7 @@ BToolTipManager::ShowDelay() const
 }
 
 
-void
-BToolTipManager::SetHideDelay(bigtime_t time)
+void BToolTipManager::SetHideDelay(bigtime_t time)
 {
 	// between 0 and 0.5s
 	if (time < 0)
@@ -475,8 +461,7 @@ BToolTipManager::~BToolTipManager()
 }
 
 
-/*static*/ void
-BToolTipManager::_InitSingleton()
+/*static*/ void BToolTipManager::_InitSingleton()
 {
 	sDefaultInstance = new BToolTipManager();
 }

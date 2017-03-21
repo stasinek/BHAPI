@@ -71,24 +71,21 @@ BUrlRequest::Run()
 }
 
 
-status_t
-BUrlRequest::Pause()
+status_t BUrlRequest::Pause()
 {
 	// TODO
 	return B_ERROR;
 }
 
 
-status_t
-BUrlRequest::Resume()
+status_t BUrlRequest::Resume()
 {
 	// TODO
 	return B_ERROR;
 }
 
 
-status_t
-BUrlRequest::Stop()
+status_t BUrlRequest::Stop()
 {
 	if (!fRunning)
 		return B_ERROR;
@@ -101,8 +98,7 @@ BUrlRequest::Stop()
 // #pragma mark URL protocol parameters modification
 
 
-status_t
-BUrlRequest::SetUrl(const BUrl& url)
+status_t BUrlRequest::SetUrl(const BUrl& url)
 {
 	// We should avoid to change URL while the thread is running ...
 	if (IsRunning())
@@ -113,8 +109,7 @@ BUrlRequest::SetUrl(const BUrl& url)
 }
 
 
-status_t
-BUrlRequest::SetContext(BUrlContext* context)
+status_t BUrlRequest::SetContext(BUrlContext* context)
 {
 	if (IsRunning())
 		return B_ERROR;
@@ -124,8 +119,7 @@ BUrlRequest::SetContext(BUrlContext* context)
 }
 
 
-status_t
-BUrlRequest::SetListener(BUrlProtocolListener* listener)
+status_t BUrlRequest::SetListener(BUrlProtocolListener* listener)
 {
 	if (IsRunning())
 		return B_ERROR;
@@ -169,15 +163,13 @@ BUrlRequest::Protocol() const
 // #pragma mark URL protocol informations
 
 
-bool
-BUrlRequest::IsRunning() const
+bool BUrlRequest::IsRunning() const
 {
 	return fRunning;
 }
 
 
-status_t
-BUrlRequest::Status() const
+status_t BUrlRequest::Status() const
 {
 	return fThreadStatus;
 }
@@ -186,8 +178,7 @@ BUrlRequest::Status() const
 // #pragma mark Thread management
 
 
-/*static*/ int32
-BUrlRequest::_ThreadEntry(void* arg)
+/*static*/ int32 BUrlRequest::_ThreadEntry(void* arg)
 {
 	BUrlRequest* request = reinterpret_cast<BUrlRequest*>(arg);
 	request->fThreadStatus = B_BUSY;
@@ -207,8 +198,7 @@ BUrlRequest::_ThreadEntry(void* arg)
 }
 
 
-void
-BUrlRequest::_EmitDebug(BUrlProtocolDebugMessage type,
+void BUrlRequest::_EmitDebug(BUrlProtocolDebugMessage type,
 	const char* format, ...)
 {
 	if (fListener == NULL)

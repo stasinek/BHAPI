@@ -71,8 +71,7 @@ BColorMenuItem::Instantiate(BMessage* data)
 }
 
 
-status_t
-BColorMenuItem::Archive(BMessage* data, bool deep) const
+status_t BColorMenuItem::Archive(BMessage* data, bool deep) const
 {
 	status_t result = BMenuItem::Archive(data, deep);
 
@@ -83,8 +82,7 @@ BColorMenuItem::Archive(BMessage* data, bool deep) const
 }
 
 
-void
-BColorMenuItem::DrawContent()
+void BColorMenuItem::DrawContent()
 {
 	float leftMargin = _LeftMargin();
 	float padding = _Padding();
@@ -113,8 +111,7 @@ BColorMenuItem::DrawContent()
 }
 
 
-void
-BColorMenuItem::GetContentSize(float* _width, float* _height)
+void BColorMenuItem::GetContentSize(float* _width, float* _height)
 {
 	float labelWidth;
 	float height;
@@ -128,8 +125,7 @@ BColorMenuItem::GetContentSize(float* _width, float* _height)
 }
 
 
-void
-BColorMenuItem::SetMarked(bool mark)
+void BColorMenuItem::SetMarked(bool mark)
 {
 	BMenuItem::SetMarked(mark);
 

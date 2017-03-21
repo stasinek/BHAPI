@@ -45,8 +45,7 @@ ScreenSaverRunner::~ScreenSaverRunner()
 }
 
 
-status_t
-ScreenSaverRunner::Run()
+status_t ScreenSaverRunner::Run()
 {
 	fThread = spawn_thread(&_ThreadFunc, "ScreenSaverRenderer", B_LOW_PRIORITY,
 		this);
@@ -56,8 +55,7 @@ ScreenSaverRunner::Run()
 }
 
 
-void
-ScreenSaverRunner::Quit()
+void ScreenSaverRunner::Quit()
 {
 	fQuitting = true;
 	Resume();
@@ -69,22 +67,19 @@ ScreenSaverRunner::Quit()
 }
 
 
-status_t
-ScreenSaverRunner::Suspend()
+status_t ScreenSaverRunner::Suspend()
 {
 	return suspend_thread(fThread);
 }
 
 
-status_t
-ScreenSaverRunner::Resume()
+status_t ScreenSaverRunner::Resume()
 {
 	return resume_thread(fThread);
 }
 
 
-void
-ScreenSaverRunner::_LoadAddOn()
+void ScreenSaverRunner::_LoadAddOn()
 {
 	// This is a new set of preferences. Free up what we did have
 	// TODO: this is currently not meant to be used after creation
@@ -153,8 +148,7 @@ ScreenSaverRunner::_LoadAddOn()
 }
 
 
-void
-ScreenSaverRunner::_CleanUp()
+void ScreenSaverRunner::_CleanUp()
 {
 	delete fSaver;
 	fSaver = NULL;
@@ -170,8 +164,7 @@ ScreenSaverRunner::_CleanUp()
 }
 
 
-status_t
-ScreenSaverRunner::_Run()
+status_t ScreenSaverRunner::_Run()
 {
 	static const uint32 kInitialTickRate = 50000;
 
@@ -241,8 +234,7 @@ ScreenSaverRunner::_Run()
 }
 
 
-status_t
-ScreenSaverRunner::_ThreadFunc(void* data)
+status_t ScreenSaverRunner::_ThreadFunc(void* data)
 {
 	ScreenSaverRunner* runner = (ScreenSaverRunner*)data;
 	return runner->_Run();

@@ -68,8 +68,7 @@ buffer_clone_info::~buffer_clone_info()
 //	#pragma mark - public BBuffer
 
 
-void*
-BBuffer::Data()
+void*   BBuffer::Data()
 {
 	CALLED();
 	return fData;
@@ -92,24 +91,21 @@ BBuffer::SizeUsed()
 }
 
 
-void
-BBuffer::SetSizeUsed(size_t size_used)
+void BBuffer::SetSizeUsed(size_t size_used)
 {
 	CALLED();
 	fMediaHeader.size_used = min_c(size_used, fSize);
 }
 
 
-uint32
-BBuffer::Flags()
+uint32 BBuffer::Flags()
 {
 	CALLED();
 	return fFlags;
 }
 
 
-void
-BBuffer::Recycle()
+void BBuffer::Recycle()
 {
 	CALLED();
 	if (fBufferList == NULL)
@@ -281,8 +277,7 @@ BBuffer::~BBuffer()
 }
 
 
-void
-BBuffer::SetHeader(const media_header* header)
+void BBuffer::SetHeader(const media_header* header)
 {
 	CALLED();
 	ASSERT(header->buffer == fMediaHeader.buffer);

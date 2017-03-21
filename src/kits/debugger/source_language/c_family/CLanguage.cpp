@@ -18,8 +18,7 @@ CLanguage::~CLanguage()
 }
 
 
-const char*
-CLanguage::Name() const
+const char*  CLanguage::Name() const
 {
 	return "C";
 }

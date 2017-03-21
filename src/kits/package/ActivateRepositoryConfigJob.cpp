@@ -37,8 +37,7 @@ ActivateRepositoryConfigJob::~ActivateRepositoryConfigJob()
 }
 
 
-status_t
-ActivateRepositoryConfigJob::Execute()
+status_t ActivateRepositoryConfigJob::Execute()
 {
 	BRepositoryInfo repoInfo(fArchivedRepoInfoEntry);
 	status_t result = repoInfo.InitCheck();
@@ -74,8 +73,7 @@ ActivateRepositoryConfigJob::Execute()
 }
 
 
-void
-ActivateRepositoryConfigJob::Cleanup(status_t jobResult)
+void ActivateRepositoryConfigJob::Cleanup(status_t jobResult)
 {
 	if (jobResult != B_OK && State() != BSupportKit::B_JOB_STATE_ABORTED
 		&& fTargetEntry.InitCheck() == B_OK)

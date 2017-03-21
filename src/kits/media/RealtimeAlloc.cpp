@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <locks.h>
 #include <kernel/util/DoublyLinkedList.h>
@@ -79,8 +79,7 @@ static mutex sPoolsLock = MUTEX_INITIALIZER("rtm pools");
 static PoolList sPools;
 
 
-void
-FreeChunk::SetTo(size_t size, FreeChunk* next)
+void FreeChunk::SetTo(size_t size, FreeChunk* next)
 {
 	fSize = size;
 	fNext = next;
@@ -90,8 +89,7 @@ FreeChunk::SetTo(size_t size, FreeChunk* next)
 /*!	Returns the amount of bytes that can be allocated
 	in this chunk.
 */
-uint32
-FreeChunk::Size() const
+uint32 FreeChunk::Size() const
 {
 	return fSize - FreeChunk::NextOffset();
 }
@@ -119,8 +117,7 @@ FreeChunk::Split(uint32 splitSize)
 /*!	Checks if the specified chunk touches this chunk, so
 	that they could be joined.
 */
-bool
-FreeChunk::IsTouching(FreeChunk* chunk)
+bool FreeChunk::IsTouching(FreeChunk* chunk)
 {
 	return chunk
 		&& (((uint8*)this + fSize == (uint8*)chunk)
@@ -152,8 +149,7 @@ FreeChunk::Join(FreeChunk* chunk)
 }
 
 
-void
-FreeChunk::Remove(rtm_pool* pool, FreeChunk* previous)
+void FreeChunk::Remove(rtm_pool* pool, FreeChunk* previous)
 {
 	if (previous == NULL) {
 		// find the previous chunk in the list
@@ -173,8 +169,7 @@ FreeChunk::Remove(rtm_pool* pool, FreeChunk* previous)
 }
 
 
-void
-FreeChunk::Enqueue(rtm_pool* pool)
+void FreeChunk::Enqueue(rtm_pool* pool)
 {
 	FreeChunk* chunk = pool->free_anchor.fNext;
 	FreeChunk* last = &pool->free_anchor;
@@ -188,8 +183,7 @@ FreeChunk::Enqueue(rtm_pool* pool)
 }
 
 
-void*
-FreeChunk::AllocatedAddress() const
+void*   FreeChunk::AllocatedAddress() const
 {
 	return (void*)&fNext;
 }
@@ -205,16 +199,14 @@ FreeChunk::SetToAllocated(void* allocated)
 // #pragma mark - rtm_pool
 
 
-bool
-rtm_pool::Contains(void* buffer) const
+bool rtm_pool::Contains(void* buffer) const
 {
 	return (addr_t)heap_base <= (addr_t)buffer
 		&& (addr_t)heap_base - 1 + max_size >= (addr_t)buffer;
 }
 
 
-void
-rtm_pool::Free(void* allocated)
+void rtm_pool::Free(void* allocated)
 {
 	FreeChunk* freedChunk = FreeChunk::SetToAllocated(allocated);
 	available += freedChunk->CompleteSize();
@@ -273,8 +265,7 @@ pool_for(void* buffer)
 // #pragma mark - public API
 
 
-status_t
-rtm_create_pool(rtm_pool** _pool, size_t totalSize, const char* name)
+status_t rtm_create_pool(rtm_pool** _pool, size_t totalSize, const char* name)
 {
 	rtm_pool* pool = (rtm_pool*)malloc(sizeof(rtm_pool));
 	if (pool == NULL)
@@ -316,8 +307,7 @@ rtm_create_pool(rtm_pool** _pool, size_t totalSize, const char* name)
 }
 
 
-status_t
-rtm_delete_pool(rtm_pool* pool)
+status_t rtm_delete_pool(rtm_pool* pool)
 {
 	if (pool == NULL)
 		return B_BAD_VALUE;
@@ -337,8 +327,7 @@ rtm_delete_pool(rtm_pool* pool)
 }
 
 
-void*
-rtm_alloc(rtm_pool* pool, size_t size)
+void*   rtm_alloc(rtm_pool* pool, size_t size)
 {
 	if (pool == NULL)
 		return malloc(size);
@@ -393,8 +382,7 @@ rtm_alloc(rtm_pool* pool, size_t size)
 }
 
 
-status_t
-rtm_free(void* allocated)
+status_t rtm_free(void* allocated)
 {
 	if (allocated == NULL)
 		return B_OK;
@@ -414,8 +402,7 @@ rtm_free(void* allocated)
 }
 
 
-status_t
-rtm_realloc(void** _buffer, size_t newSize)
+status_t rtm_realloc(void** _buffer, size_t newSize)
 {
 	if (_buffer == NULL)
 		return B_BAD_VALUE;
@@ -474,8 +461,7 @@ rtm_realloc(void** _buffer, size_t newSize)
 }
 
 
-status_t
-rtm_size_for(void* buffer)
+status_t rtm_size_for(void* buffer)
 {
 	if (buffer == NULL)
 		return 0;
@@ -487,8 +473,7 @@ rtm_size_for(void* buffer)
 }
 
 
-status_t
-rtm_phys_size_for(void* buffer)
+status_t rtm_phys_size_for(void* buffer)
 {
 	if (buffer == NULL)
 		return 0;

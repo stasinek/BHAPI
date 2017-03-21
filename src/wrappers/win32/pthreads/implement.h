@@ -639,7 +639,7 @@ extern "C"
 #if ! (defined (__MINGW64__) || defined(__MINGW32__)) || (defined(__MSVCRT__) && ! defined(__DMC__))
   unsigned __stdcall
 #else
-  void
+  void 
 #endif
     ptw32_threadStart (void *vthreadParms);
 

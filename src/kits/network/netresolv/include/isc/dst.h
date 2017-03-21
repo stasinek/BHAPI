@@ -38,11 +38,9 @@ typedef struct dst_key {
 #define	dst_s_filename_length	__dst_s_filename_length
 #define	dst_s_fopen		__dst_s_fopen
 #define	dst_s_get_int16		__dst_s_get_int16
-#define	dst_s_get_int32		__dst_s_get_int32
-#define	dst_s_id_calc		__dst_s_id_calc
+#define	dst_s_get_int32		__dst_s_get_int32 #define	dst_s_id_calc		__dst_s_id_calc
 #define	dst_s_put_int16		__dst_s_put_int16
-#define	dst_s_put_int32		__dst_s_put_int32
-#define	dst_s_quick_random	__dst_s_quick_random
+#define	dst_s_put_int32		__dst_s_put_int32 #define	dst_s_quick_random	__dst_s_quick_random
 #define	dst_s_quick_random_set	__dst_s_quick_random_set
 #define	dst_s_random		__dst_s_random
 #define	dst_s_semi_random	__dst_s_semi_random

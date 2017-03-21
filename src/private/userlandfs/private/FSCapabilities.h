@@ -168,8 +168,7 @@ struct FSCapabilitiesBase {
 
 // ClearAll
 template<const int CapabilityCount>
-inline void
-FSCapabilitiesBase<CapabilityCount>::ClearAll()
+inline void FSCapabilitiesBase<CapabilityCount>::ClearAll()
 {
 	memset(capabilities, 0, sizeof(capabilities));
 }
@@ -177,8 +176,7 @@ FSCapabilitiesBase<CapabilityCount>::ClearAll()
 
 // Set
 template<const int CapabilityCount>
-inline void
-FSCapabilitiesBase<CapabilityCount>::Set(uint32 capability, bool set)
+inline void FSCapabilitiesBase<CapabilityCount>::Set(uint32 capability, bool set)
 {
 	if (capability >= CapabilityCount)
 		return;
@@ -193,8 +191,7 @@ FSCapabilitiesBase<CapabilityCount>::Set(uint32 capability, bool set)
 
 // Clear
 template<const int CapabilityCount>
-inline void
-FSCapabilitiesBase<CapabilityCount>::Clear(uint32 capability)
+inline void FSCapabilitiesBase<CapabilityCount>::Clear(uint32 capability)
 {
 	Set(capability, false);
 }
@@ -202,8 +199,7 @@ FSCapabilitiesBase<CapabilityCount>::Clear(uint32 capability)
 
 // Get
 template<const int CapabilityCount>
-inline bool
-FSCapabilitiesBase<CapabilityCount>::Get(uint32 capability) const
+inline bool FSCapabilitiesBase<CapabilityCount>::Get(uint32 capability) const
 {
 	if (capability >= CapabilityCount)
 		return false;
@@ -215,8 +211,7 @@ FSCapabilitiesBase<CapabilityCount>::Get(uint32 capability) const
 
 // GetHashCode
 template<const int CapabilityCount>
-inline uint32
-FSCapabilitiesBase<CapabilityCount>::GetHashCode() const
+inline uint32 FSCapabilitiesBase<CapabilityCount>::GetHashCode() const
 {
 	uint32 hashCode = 0;
 	int byteCount = sizeof(capabilities);
@@ -229,8 +224,7 @@ FSCapabilitiesBase<CapabilityCount>::GetHashCode() const
 
 // ==
 template<const int CapabilityCount>
-inline bool
-FSCapabilitiesBase<CapabilityCount>::operator==(
+inline bool FSCapabilitiesBase<CapabilityCount>::operator==(
 	const FSCapabilitiesBase<CapabilityCount>& other) const
 {
 	int byteCount = sizeof(capabilities);
@@ -245,8 +239,7 @@ FSCapabilitiesBase<CapabilityCount>::operator==(
 
 // Dump
 template<const int CapabilityCount>
-inline void
-FSCapabilitiesBase<CapabilityCount>::Dump() const
+inline void FSCapabilitiesBase<CapabilityCount>::Dump() const
 {
 	D(
 		char buffer[128];

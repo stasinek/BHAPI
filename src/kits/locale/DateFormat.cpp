@@ -51,16 +51,14 @@ BDateFormat::~BDateFormat()
 }
 
 
-status_t
-BDateFormat::GetDateFormat(BDateFormatStyle style,
+status_t BDateFormat::GetDateFormat(BDateFormatStyle style,
 	BString& outFormat) const
 {
 	return fConventions.GetDateFormat(style, outFormat);
 }
 
 
-void
-BDateFormat::SetDateFormat(BDateFormatStyle style,
+void BDateFormat::SetDateFormat(BDateFormatStyle style,
 	const BString& format)
 {
 	fConventions.SetExplicitDateFormat(style, format);
@@ -88,8 +86,7 @@ BDateFormat::Format(char* string, const size_t maxSize, const time_t time,
 }
 
 
-status_t
-BDateFormat::Format(BString& string, const time_t time,
+status_t BDateFormat::Format(BString& string, const time_t time,
 	const BDateFormatStyle style, const BTimeZone* timeZone) const
 {
 	ObjectDeleter<DateFormat> dateFormatter(_CreateDateFormatter(style));
@@ -115,8 +112,7 @@ BDateFormat::Format(BString& string, const time_t time,
 }
 
 
-status_t
-BDateFormat::Format(BString& string, const BDate& time,
+status_t BDateFormat::Format(BString& string, const BDate& time,
 	const BDateFormatStyle style, const BTimeZone* timeZone) const
 {
 	if (!time.IsValid())
@@ -156,8 +152,7 @@ BDateFormat::Format(BString& string, const BDate& time,
 }
 
 
-status_t
-BDateFormat::Format(BString& string, int*& fieldPositions, int& fieldCount,
+status_t BDateFormat::Format(BString& string, int*& fieldPositions, int& fieldCount,
 	const time_t time, const BDateFormatStyle style) const
 {
 	ObjectDeleter<DateFormat> dateFormatter(_CreateDateFormatter(style));
@@ -197,8 +192,7 @@ BDateFormat::Format(BString& string, int*& fieldPositions, int& fieldCount,
 }
 
 
-status_t
-BDateFormat::GetFields(BDateElement*& fields, int& fieldCount,
+status_t BDateFormat::GetFields(BDateElement*& fields, int& fieldCount,
 	BDateFormatStyle style) const
 {
 	ObjectDeleter<DateFormat> dateFormatter(_CreateDateFormatter(style));
@@ -247,8 +241,7 @@ BDateFormat::GetFields(BDateElement*& fields, int& fieldCount,
 }
 
 
-status_t
-BDateFormat::GetStartOfWeek(BWeekday* startOfWeek) const
+status_t BDateFormat::GetStartOfWeek(BWeekday* startOfWeek) const
 {
 	if (startOfWeek == NULL)
 		return B_BAD_VALUE;
@@ -294,8 +287,7 @@ BDateFormat::GetStartOfWeek(BWeekday* startOfWeek) const
 }
 
 
-status_t
-BDateFormat::GetMonthName(int month, BString& outName)
+status_t BDateFormat::GetMonthName(int month, BString& outName)
 {
 	DateFormat* format = _CreateDateFormatter(B_LONG_DATE_FORMAT);
 
@@ -323,8 +315,7 @@ BDateFormat::GetMonthName(int month, BString& outName)
 }
 
 
-status_t
-BDateFormat::Parse(BString source, BDateFormatStyle style, BDate& output)
+status_t BDateFormat::Parse(BString source, BDateFormatStyle style, BDate& output)
 {
 	// FIXME currently this parses a date in any timezone (or the local one if
 	// none is specified) to a BDate in UTC. This may not be a good idea, we

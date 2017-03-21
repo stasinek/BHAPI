@@ -68,37 +68,32 @@ StringValueSetting::~StringValueSetting()
 }
 
 
-void
-StringValueSetting::ValueChanged(const char* newValue)
+void StringValueSetting::ValueChanged(const char* newValue)
 {
 	fValue = newValue;
 }
 
 
-const char*
-StringValueSetting::Value() const
+const char*  StringValueSetting::Value() const
 {
 	return fValue.String();
 }
 
 
-void
-StringValueSetting::SaveSettingValue(Settings* settings)
+void StringValueSetting::SaveSettingValue(Settings* settings)
 {
 	settings->Write("\"%s\"", fValue.String());
 }
 
 
-bool
-StringValueSetting::NeedsSaving() const
+bool StringValueSetting::NeedsSaving() const
 {
 	// needs saving if different than default
 	return fValue != fDefaultValue;
 }
 
 
-const char*
-StringValueSetting::Handle(const char* const* argv)
+const char*  StringValueSetting::Handle(const char* const* argv)
 {
 	if (!*++argv)
 		return fValueExpectedErrorString;
@@ -122,8 +117,7 @@ EnumeratedStringValueSetting::EnumeratedStringValueSetting(const char* name,
 }
 
 
-void
-EnumeratedStringValueSetting::ValueChanged(const char* newValue)
+void EnumeratedStringValueSetting::ValueChanged(const char* newValue)
 {
 #if DEBUG
 	// must be one of the enumerated values
@@ -144,8 +138,7 @@ EnumeratedStringValueSetting::ValueChanged(const char* newValue)
 }
 
 
-const char*
-EnumeratedStringValueSetting::Handle(const char* const* argv)
+const char*  EnumeratedStringValueSetting::Handle(const char* const* argv)
 {
 	if (!*++argv)
 		return fValueExpectedErrorString;
@@ -188,8 +181,7 @@ ScalarValueSetting::ScalarValueSetting(const char* name, int32 defaultValue,
 }
 
 
-void
-ScalarValueSetting::ValueChanged(int32 newValue)
+void ScalarValueSetting::ValueChanged(int32 newValue)
 {
 	ASSERT(newValue > fMin);
 	ASSERT(newValue < fMax);
@@ -197,22 +189,19 @@ ScalarValueSetting::ValueChanged(int32 newValue)
 }
 
 
-int32
-ScalarValueSetting::Value() const
+int32 ScalarValueSetting::Value() const
 {
 	return fValue;
 }
 
 
-void
-ScalarValueSetting::GetValueAsString(char* buffer) const
+void ScalarValueSetting::GetValueAsString(char* buffer) const
 {
 	sprintf(buffer, "%" B_PRId32, fValue);
 }
 
 
-const char*
-ScalarValueSetting::Handle(const char* const* argv)
+const char*  ScalarValueSetting::Handle(const char* const* argv)
 {
 	if (!*++argv)
 		return fValueExpectedErrorString;
@@ -231,15 +220,13 @@ ScalarValueSetting::Handle(const char* const* argv)
 }
 
 
-void
-ScalarValueSetting::SaveSettingValue(Settings* settings)
+void ScalarValueSetting::SaveSettingValue(Settings* settings)
 {
 	settings->Write("%ld", fValue);
 }
 
 
-bool
-ScalarValueSetting::NeedsSaving() const
+bool ScalarValueSetting::NeedsSaving() const
 {
 	return fValue != fDefaultValue;
 }
@@ -258,15 +245,13 @@ HexScalarValueSetting::HexScalarValueSetting(const char* name,
 }
 
 
-void
-HexScalarValueSetting::GetValueAsString(char* buffer) const
+void HexScalarValueSetting::GetValueAsString(char* buffer) const
 {
 	sprintf(buffer, "0x%08" B_PRIx32, fValue);
 }
 
 
-void
-HexScalarValueSetting::SaveSettingValue(Settings* settings)
+void HexScalarValueSetting::SaveSettingValue(Settings* settings)
 {
 	settings->Write("0x%08" B_PRIx32, fValue);
 }
@@ -281,22 +266,19 @@ BooleanValueSetting::BooleanValueSetting(const char* name, bool defaultValue)
 }
 
 
-bool
-BooleanValueSetting::Value() const
+bool BooleanValueSetting::Value() const
 {
 	return fValue != 0;
 }
 
 
-void
-BooleanValueSetting::SetValue(bool value)
+void BooleanValueSetting::SetValue(bool value)
 {
 	fValue = value;
 }
 
 
-const char*
-BooleanValueSetting::Handle(const char* const* argv)
+const char*  BooleanValueSetting::Handle(const char* const* argv)
 {
 	if (!*++argv)
 		return "on or off expected";
@@ -312,8 +294,7 @@ BooleanValueSetting::Handle(const char* const* argv)
 }
 
 
-void
-BooleanValueSetting::SaveSettingValue(Settings* settings)
+void BooleanValueSetting::SaveSettingValue(Settings* settings)
 {
 	settings->Write(fValue ? "on" : "off");
 }

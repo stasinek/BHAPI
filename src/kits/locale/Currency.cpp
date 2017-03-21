@@ -45,15 +45,13 @@ BCurrency::~BCurrency()
 }
 
 // InitCheck
-status_t
-BCurrency::InitCheck() const
+status_t BCurrency::InitCheck() const
 {
 	return (fDefaultFractionDigits < 0 ? fDefaultFractionDigits : B_OK);
 }
 
 // Archive
-status_t
-BCurrency::Archive(BMessage *archive, bool deep) const
+status_t BCurrency::Archive(BMessage *archive, bool deep) const
 {
 	status_t error = BArchivable::Archive(archive, deep);
 	if (error == B_OK) {
@@ -95,15 +93,13 @@ BCurrency::DefaultSymbol() const
 }
 
 // DefaultFractionDigits
-int32
-BCurrency::DefaultFractionDigits() const
+int32 BCurrency::DefaultFractionDigits() const
 {
 	return (InitCheck() == B_OK ? fDefaultFractionDigits : 0);
 }
 
 // GetSymbol
-status_t
-BCurrency::GetSymbol(char *symbol, size_t maxSize, BLocale *locale)
+status_t BCurrency::GetSymbol(char *symbol, size_t maxSize, BLocale *locale)
 {
 	// check initialization and parameters
 	if (InitCheck() != B_OK)
@@ -119,8 +115,7 @@ BCurrency::GetSymbol(char *symbol, size_t maxSize, BLocale *locale)
 }
 
 // GetSymbol
-status_t
-BCurrency::GetSymbol(BString *symbol, BLocale *locale)
+status_t BCurrency::GetSymbol(BString *symbol, BLocale *locale)
 {
 	// check initialization and parameters
 	if (InitCheck() != B_OK)
@@ -151,8 +146,7 @@ BCurrency::operator=(const BCurrency &other)
 }
 
 // ==
-bool
-BCurrency::operator==(const BCurrency &other) const
+bool BCurrency::operator==(const BCurrency &other) const
 {
 	if (InitCheck() != B_OK || other.InitCheck() != B_OK)
 		return false;
@@ -160,8 +154,7 @@ BCurrency::operator==(const BCurrency &other) const
 }
 
 // !=
-bool
-BCurrency::operator!=(const BCurrency &other) const
+bool BCurrency::operator!=(const BCurrency &other) const
 {
 	return !(*this == other);
 }
@@ -173,8 +166,7 @@ BCurrency::BCurrency()
 }
 
 // _CheckData
-bool
-BCurrency::_CheckData() const
+bool BCurrency::_CheckData() const
 {
 	return (fDefaultFractionDigits >= 0
 		&& fCurrencyCode.Length() > 0
@@ -182,8 +174,7 @@ BCurrency::_CheckData() const
 }
 
 // _Unset
-void
-BCurrency::_Unset(status_t error)
+void BCurrency::_Unset(status_t error)
 {
 	fCurrencyCode.Truncate(0);
 	fDefaultSymbol.Truncate(0);

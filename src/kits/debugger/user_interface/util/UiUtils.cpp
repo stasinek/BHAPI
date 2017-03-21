@@ -31,8 +31,7 @@
 #include "ValueNode.h"
 
 
-/*static*/ const char*
-UiUtils::ThreadStateToString(int state, int stoppedReason)
+/*static*/ const char*  UiUtils::ThreadStateToString(int state, int stoppedReason)
 {
 	switch (state) {
 		case THREAD_STATE_RUNNING:
@@ -61,8 +60,7 @@ UiUtils::ThreadStateToString(int state, int stoppedReason)
 }
 
 
-/*static*/ const char*
-UiUtils::VariantToString(const BVariant& value, char* buffer,
+/*static*/ const char*  UiUtils::VariantToString(const BVariant& value, char* buffer,
 	size_t bufferSize)
 {
 	if (!value.IsNumber())
@@ -98,8 +96,7 @@ UiUtils::VariantToString(const BVariant& value, char* buffer,
 }
 
 
-/*static*/ const char*
-UiUtils::FunctionNameForFrame(StackFrame* frame, char* buffer,
+/*static*/ const char*  UiUtils::FunctionNameForFrame(StackFrame* frame, char* buffer,
 	size_t bufferSize)
 {
 	Image* image = frame->GetImage();
@@ -126,8 +123,7 @@ UiUtils::FunctionNameForFrame(StackFrame* frame, char* buffer,
 }
 
 
-/*static*/ const char*
-UiUtils::ImageTypeToString(image_type type, char* buffer, size_t bufferSize)
+/*static*/ const char*  UiUtils::ImageTypeToString(image_type type, char* buffer, size_t bufferSize)
 {
 	switch (type) {
 		case B_APP_IMAGE:
@@ -151,8 +147,7 @@ UiUtils::ImageTypeToString(image_type type, char* buffer, size_t bufferSize)
 }
 
 
-/*static*/ const char*
-UiUtils::AreaLockingFlagsToString(uint32 flags, char* buffer,
+/*static*/ const char*  UiUtils::AreaLockingFlagsToString(uint32 flags, char* buffer,
 	size_t bufferSize)
 {
 	switch (flags) {
@@ -243,8 +238,7 @@ UiUtils::AreaProtectionFlagsToString(uint32 protection, BString& _output)
 }
 
 
-/*static*/ const char*
-UiUtils::ReportNameForTeam(::Team* team, char* buffer, size_t bufferSize)
+/*static*/ const char*  UiUtils::ReportNameForTeam(::Team* team, char* buffer, size_t bufferSize)
 {
 	BPath teamPath(team->Name());
 	BDateTime currentTime;
@@ -260,8 +254,7 @@ UiUtils::ReportNameForTeam(::Team* team, char* buffer, size_t bufferSize)
 }
 
 
-/*static*/ const char*
-UiUtils::CoreFileNameForTeam(::Team* team, char* buffer, size_t bufferSize)
+/*static*/ const char*  UiUtils::CoreFileNameForTeam(::Team* team, char* buffer, size_t bufferSize)
 {
 	BPath teamPath(team->Name());
 	BDateTime currentTime;
@@ -278,8 +271,7 @@ UiUtils::CoreFileNameForTeam(::Team* team, char* buffer, size_t bufferSize)
 }
 
 
-/*static*/ void
-UiUtils::PrintValueNodeGraph(BString& _output, ValueNodeChild* child,
+/*static*/ void UiUtils::PrintValueNodeGraph(BString& _output, ValueNodeChild* child,
 	int32 indentLevel, int32 maxDepth)
 {
 	_output.Append('\t', indentLevel);
@@ -345,8 +337,7 @@ UiUtils::PrintValueNodeGraph(BString& _output, ValueNodeChild* child,
 }
 
 
-/*static*/ void
-UiUtils::DumpMemory(BString& _output, int32 indentLevel,
+/*static*/ void UiUtils::DumpMemory(BString& _output, int32 indentLevel,
 	TeamMemoryBlock* block, target_addr_t address, int32 itemSize,
 	int32 displayWidth, int32 count)
 {
@@ -429,8 +420,7 @@ static status_t ParseRangeString(BString& rangeString, int32& lowerBound,
 }
 
 
-/*static*/ status_t
-UiUtils::ParseRangeExpression(const BString& rangeExpression, int32 lowerBound,
+/*static*/ status_t UiUtils::ParseRangeExpression(const BString& rangeExpression, int32 lowerBound,
 	int32 upperBound, bool fixedRange, RangeList& _output)
 {
 	if (rangeExpression.IsEmpty())
@@ -475,8 +465,7 @@ UiUtils::ParseRangeExpression(const BString& rangeExpression, int32 lowerBound,
 }
 
 
-/*static*/ const char*
-UiUtils::TypeCodeToString(type_code type)
+/*static*/ const char*  UiUtils::TypeCodeToString(type_code type)
 {
 	switch (type) {
 		case B_INT8_TYPE:
@@ -581,8 +570,7 @@ UiUtils::FormatSIMDValue(const BVariant& value, uint32 bitSize,
 }
 
 
-const char*
-UiUtils::SignalNameToString(int32 signal, BString& _output)
+const char*  UiUtils::SignalNameToString(int32 signal, BString& _output)
 {
 	#undef DEFINE_SIGNAL_STRING
 	#define DEFINE_SIGNAL_STRING(x)										\
@@ -636,8 +624,7 @@ UiUtils::SignalNameToString(int32 signal, BString& _output)
 }
 
 
-const char*
-UiUtils::SignalDispositionToString(int disposition)
+const char*  UiUtils::SignalDispositionToString(int disposition)
 {
 	switch (disposition) {
 		case SIGNAL_DISPOSITION_IGNORE:

@@ -33,8 +33,7 @@ InitializeJob::~InitializeJob()
 
 
 // Init
-status_t
-InitializeJob::Init(const char* diskSystem, const char* name,
+status_t InitializeJob::Init(const char* diskSystem, const char* name,
 	const char* parameters)
 {
 	SET_STRING_RETURN_ON_ERROR(fDiskSystem, diskSystem);
@@ -46,8 +45,7 @@ InitializeJob::Init(const char* diskSystem, const char* name,
 
 
 // Do
-status_t
-InitializeJob::Do()
+status_t InitializeJob::Do()
 {
 	int32 changeCounter = fPartition->ChangeCounter();
 

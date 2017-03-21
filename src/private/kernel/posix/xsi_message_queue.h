@@ -8,7 +8,7 @@
 #include <sys/msg.h>
 #include <sys/cdefs.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <kernel.h>
 

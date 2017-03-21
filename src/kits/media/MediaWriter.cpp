@@ -75,8 +75,7 @@ MediaWriter::~MediaWriter()
 }
 
 
-status_t
-MediaWriter::InitCheck()
+status_t MediaWriter::InitCheck()
 {
 	CALLED();
 
@@ -84,8 +83,7 @@ MediaWriter::InitCheck()
 }
 
 
-void
-MediaWriter::GetFileFormatInfo(media_file_format* _fileFormat) const
+void MediaWriter::GetFileFormatInfo(media_file_format* _fileFormat) const
 {
 	CALLED();
 
@@ -94,8 +92,7 @@ MediaWriter::GetFileFormatInfo(media_file_format* _fileFormat) const
 }
 
 
-status_t
-MediaWriter::CreateEncoder(Encoder** _encoder,
+status_t MediaWriter::CreateEncoder(Encoder** _encoder,
 	const media_codec_info* codecInfo, media_format* format, uint32 flags)
 {
 	CALLED();
@@ -145,8 +142,7 @@ MediaWriter::CreateEncoder(Encoder** _encoder,
 }
 
 
-status_t
-MediaWriter::SetCopyright(const char* copyright)
+status_t MediaWriter::SetCopyright(const char* copyright)
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -155,8 +151,7 @@ MediaWriter::SetCopyright(const char* copyright)
 }
 
 
-status_t
-MediaWriter::SetCopyright(int32 streamIndex, const char* copyright)
+status_t MediaWriter::SetCopyright(int32 streamIndex, const char* copyright)
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -169,8 +164,7 @@ MediaWriter::SetCopyright(int32 streamIndex, const char* copyright)
 }
 
 
-status_t
-MediaWriter::CommitHeader()
+status_t MediaWriter::CommitHeader()
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -179,8 +173,7 @@ MediaWriter::CommitHeader()
 }
 
 
-status_t
-MediaWriter::Flush()
+status_t MediaWriter::Flush()
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -189,8 +182,7 @@ MediaWriter::Flush()
 }
 
 
-status_t
-MediaWriter::Close()
+status_t MediaWriter::Close()
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -199,8 +191,7 @@ MediaWriter::Close()
 }
 
 
-status_t
-MediaWriter::AddTrackInfo(int32 streamIndex, uint32 code,
+status_t MediaWriter::AddTrackInfo(int32 streamIndex, uint32 code,
 	const void* data, size_t size, uint32 flags)
 {
 	if (fWriter == NULL)
@@ -214,8 +205,7 @@ MediaWriter::AddTrackInfo(int32 streamIndex, uint32 code,
 }
 
 
-status_t
-MediaWriter::WriteChunk(int32 streamIndex, const void* chunkBuffer,
+status_t MediaWriter::WriteChunk(int32 streamIndex, const void* chunkBuffer,
 	size_t chunkSize, media_encode_info* encodeInfo)
 {
 	if (fWriter == NULL)

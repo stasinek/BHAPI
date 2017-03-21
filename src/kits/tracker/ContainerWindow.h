@@ -411,29 +411,25 @@ BContainerWindow::PoseView() const
 }
 
 
-inline bool
-BContainerWindow::IsTrash() const
+inline bool BContainerWindow::IsTrash() const
 {
 	return fIsTrash;
 }
 
 
-inline bool
-BContainerWindow::InTrash() const
+inline bool BContainerWindow::InTrash() const
 {
 	return fInTrash;
 }
 
 
-inline bool
-BContainerWindow::IsPrintersDir() const
+inline bool BContainerWindow::IsPrintersDir() const
 {
 	return fIsPrinters;
 }
 
 
-inline void
-BContainerWindow::SetUpDiskMenu(BMenu*)
+inline void BContainerWindow::SetUpDiskMenu(BMenu*)
 {
 	// nothing at this level
 }
@@ -446,36 +442,31 @@ BContainerWindow::ContextMenu()
 }
 
 
-inline bool
-BContainerWindow::Dragging() const
+inline bool BContainerWindow::Dragging() const
 {
 	return fDragMessage && fCachedTypesList;
 }
 
 
-inline BMessage*
-BContainerWindow::DragMessage() const
+inline BMessage*  BContainerWindow::DragMessage() const
 {
 	return fDragMessage;
 }
 
 
-inline bool
-BContainerWindow::SaveStateIsEnabled() const
+inline bool BContainerWindow::SaveStateIsEnabled() const
 {
 	return fSaveStateIsEnabled;
 }
 
 
-inline void
-BContainerWindow::SetSaveStateEnabled(bool value)
+inline void BContainerWindow::SetSaveStateEnabled(bool value)
 {
 	fSaveStateIsEnabled = value;
 }
 
 
-inline bool
-BContainerWindow::IsPathWatchingEnabled() const
+inline bool BContainerWindow::IsPathWatchingEnabled() const
 {
 	return fIsWatchingPath;
 }

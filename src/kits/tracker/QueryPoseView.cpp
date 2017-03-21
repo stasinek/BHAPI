@@ -94,8 +94,7 @@ BQueryPoseView::~BQueryPoseView()
 }
 
 
-void
-BQueryPoseView::MessageReceived(BMessage* message)
+void BQueryPoseView::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case kFSClipboardChanges:
@@ -112,8 +111,7 @@ BQueryPoseView::MessageReceived(BMessage* message)
 }
 
 
-void
-BQueryPoseView::EditQueries()
+void BQueryPoseView::EditQueries()
 {
 	BMessage message(kEditQuery);
 	message.AddRef("refs", TargetModel()->EntryRef());
@@ -121,8 +119,7 @@ BQueryPoseView::EditQueries()
 }
 
 
-void
-BQueryPoseView::SetUpDefaultColumnsIfNeeded()
+void BQueryPoseView::SetUpDefaultColumnsIfNeeded()
 {
 	// in case there were errors getting some columns
 	if (fColumnList->CountItems() != 0)
@@ -139,8 +136,7 @@ BQueryPoseView::SetUpDefaultColumnsIfNeeded()
 }
 
 
-void
-BQueryPoseView::AttachedToWindow()
+void BQueryPoseView::AttachedToWindow()
 {
 	_inherited::AttachedToWindow();
 	SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
@@ -148,42 +144,36 @@ BQueryPoseView::AttachedToWindow()
 }
 
 
-void
-BQueryPoseView::RestoreState(AttributeStreamNode* node)
+void BQueryPoseView::RestoreState(AttributeStreamNode* node)
 {
 	_inherited::RestoreState(node);
 	fViewState->SetViewMode(kListMode);
 }
 
 
-void
-BQueryPoseView::RestoreState(const BMessage &message)
+void BQueryPoseView::RestoreState(const BMessage &message)
 {
 	_inherited::RestoreState(message);
 	fViewState->SetViewMode(kListMode);
 }
 
 
-void
-BQueryPoseView::SavePoseLocations(BRect*)
+void BQueryPoseView::SavePoseLocations(BRect*)
 {
 }
 
 
-void
-BQueryPoseView::SetViewMode(uint32)
+void BQueryPoseView::SetViewMode(uint32)
 {
 }
 
 
-void
-BQueryPoseView::OpenParent()
+void BQueryPoseView::OpenParent()
 {
 }
 
 
-void
-BQueryPoseView::Refresh()
+void BQueryPoseView::Refresh()
 {
 	PRINT(("refreshing dynamic date query\n"));
 
@@ -201,8 +191,7 @@ BQueryPoseView::Refresh()
 }
 
 
-bool
-BQueryPoseView::ShouldShowPose(const Model* model, const PoseInfo* poseInfo)
+bool BQueryPoseView::ShouldShowPose(const Model* model, const PoseInfo* poseInfo)
 {
 	// add_poses, etc. filter
 	ASSERT(TargetModel());
@@ -228,8 +217,7 @@ BQueryPoseView::ShouldShowPose(const Model* model, const PoseInfo* poseInfo)
 }
 
 
-void
-BQueryPoseView::AddPosesCompleted()
+void BQueryPoseView::AddPosesCompleted()
 {
 	ASSERT(Window()->IsLocked());
 
@@ -364,15 +352,13 @@ BQueryPoseView::InitDirentIterator(const entry_ref* ref)
 }
 
 
-uint32
-BQueryPoseView::WatchNewNodeMask()
+uint32 BQueryPoseView::WatchNewNodeMask()
 {
 	return B_WATCH_NAME | B_WATCH_STAT | B_WATCH_ATTR;
 }
 
 
-const char*
-BQueryPoseView::SearchForType() const
+const char*  BQueryPoseView::SearchForType() const
 {
 	if (!fSearchForMimeType.Length()) {
 		BModelOpener opener(TargetModel());
@@ -404,8 +390,7 @@ BQueryPoseView::SearchForType() const
 }
 
 
-bool
-BQueryPoseView::ActiveOnDevice(dev_t device) const
+bool BQueryPoseView::ActiveOnDevice(dev_t device) const
 {
 	int32 count = fQueryList->CountItems();
 	for (int32 index = 0; index < count; index++) {
@@ -549,8 +534,7 @@ QueryEntryListCollection::QueryEntryListCollection(Model* model,
 }
 
 
-status_t
-QueryEntryListCollection::FetchOneQuery(const BQuery* copyThis,
+status_t QueryEntryListCollection::FetchOneQuery(const BQuery* copyThis,
 	BHandler* target, BObjectList<BQuery>* list, BVolume* volume)
 {
 	BQuery* query = new (nothrow) BQuery;
@@ -607,16 +591,14 @@ QueryEntryListCollection::QueryEntryListCollection(
 }
 
 
-void
-QueryEntryListCollection::ClearOldPoseList()
+void QueryEntryListCollection::ClearOldPoseList()
 {
 	delete fQueryListRep->fOldPoseList;
 	fQueryListRep->fOldPoseList = NULL;
 }
 
 
-status_t
-QueryEntryListCollection::GetNextEntry(BEntry* entry, bool traverse)
+status_t QueryEntryListCollection::GetNextEntry(BEntry* entry, bool traverse)
 {
 	status_t result = B_ERROR;
 
@@ -634,8 +616,7 @@ QueryEntryListCollection::GetNextEntry(BEntry* entry, bool traverse)
 }
 
 
-int32
-QueryEntryListCollection::GetNextDirents(struct dirent* buffer, size_t length,
+int32 QueryEntryListCollection::GetNextDirents(struct dirent* buffer, size_t length,
 	int32 count)
 {
 	int32 result = 0;
@@ -654,8 +635,7 @@ QueryEntryListCollection::GetNextDirents(struct dirent* buffer, size_t length,
 }
 
 
-status_t
-QueryEntryListCollection::GetNextRef(entry_ref* ref)
+status_t QueryEntryListCollection::GetNextRef(entry_ref* ref)
 {
 	status_t result = B_ERROR;
 
@@ -673,8 +653,7 @@ QueryEntryListCollection::GetNextRef(entry_ref* ref)
 }
 
 
-status_t
-QueryEntryListCollection::Rewind()
+status_t QueryEntryListCollection::Rewind()
 {
 	fQueryListRep->fQueryListIndex = 0;
 
@@ -682,36 +661,31 @@ QueryEntryListCollection::Rewind()
 }
 
 
-int32
-QueryEntryListCollection::CountEntries()
+int32 QueryEntryListCollection::CountEntries()
 {
 	return 0;
 }
 
 
-bool
-QueryEntryListCollection::ShowResultsFromTrash() const
+bool QueryEntryListCollection::ShowResultsFromTrash() const
 {
 	return fQueryListRep->fShowResultsFromTrash;
 }
 
 
-bool
-QueryEntryListCollection::DynamicDateQuery() const
+bool QueryEntryListCollection::DynamicDateQuery() const
 {
 	return fQueryListRep->fDynamicDateQuery;
 }
 
 
-bool
-QueryEntryListCollection::DynamicDateRefreshEveryHour() const
+bool QueryEntryListCollection::DynamicDateRefreshEveryHour() const
 {
 	return fQueryListRep->fRefreshEveryHour;
 }
 
 
-bool
-QueryEntryListCollection::DynamicDateRefreshEveryMinute() const
+bool QueryEntryListCollection::DynamicDateRefreshEveryMinute() const
 {
 	return fQueryListRep->fRefreshEveryMinute;
 }

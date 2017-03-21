@@ -24,8 +24,7 @@
 
 
 #if DEBUG
-inline void
-LOG(const char *fmt, ...)
+inline void LOG(const char *fmt, ...)
 {
 	char buf[1024];
 	va_list ap;
@@ -71,16 +70,14 @@ _BJoystickTweaker::~_BJoystickTweaker()
 }
 
 
-status_t
-_BJoystickTweaker::save_config(const entry_ref *ref)
+status_t _BJoystickTweaker::save_config(const entry_ref *ref)
 {
 	CALLED();
 	return B_ERROR;
 }
 
 
-status_t
-_BJoystickTweaker::_ScanIncludingDisabled(const char *rootPath, BList *list,
+status_t _BJoystickTweaker::_ScanIncludingDisabled(const char *rootPath, BList *list,
 	BEntry *rootEntry)
 {
 	BDirectory root;
@@ -124,8 +121,7 @@ _BJoystickTweaker::_ScanIncludingDisabled(const char *rootPath, BList *list,
 }
 
 
-void
-_BJoystickTweaker::scan_including_disabled()
+void _BJoystickTweaker::scan_including_disabled()
 {
 	CALLED();
 	_EmpyList(fJoystick->fDevices);
@@ -133,8 +129,7 @@ _BJoystickTweaker::scan_including_disabled()
 }
 
 
-void
-_BJoystickTweaker::_EmpyList(BList *list)
+void _BJoystickTweaker::_EmpyList(BList *list)
 {
 	for (int32 i = 0; i < list->CountItems(); i++)
 		delete (BString *)list->ItemAt(i);
@@ -143,16 +138,14 @@ _BJoystickTweaker::_EmpyList(BList *list)
 }
 
 
-status_t
-_BJoystickTweaker::get_info()
+status_t _BJoystickTweaker::get_info()
 {
 	CALLED();
 	return B_ERROR;
 }
 
 
-status_t
-_BJoystickTweaker::GetInfo(_joystick_info *info, const char *ref)
+status_t _BJoystickTweaker::GetInfo(_joystick_info *info, const char *ref)
 {
 	CALLED();
 	BString configFilePath(JOYSTICK_CONFIG_BASE_PATH);
@@ -176,8 +169,7 @@ _BJoystickTweaker::GetInfo(_joystick_info *info, const char *ref)
 }
 
 
-void
-_BJoystickTweaker::_BuildFromJoystickDesc(char *string, _joystick_info *info)
+void _BJoystickTweaker::_BuildFromJoystickDesc(char *string, _joystick_info *info)
 {
 	BString str(string);
 	str.RemoveAll("\"");
@@ -208,8 +200,7 @@ _BJoystickTweaker::_BuildFromJoystickDesc(char *string, _joystick_info *info)
 }
 
 
-status_t
-_BJoystickTweaker::SendIOCT(uint32 op)
+status_t _BJoystickTweaker::SendIOCT(uint32 op)
 {
 	switch (op) {
 		case B_JOYSTICK_SET_DEVICE_MODULE:

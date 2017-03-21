@@ -48,27 +48,23 @@ Err::operator=(const Err &ref) {
 	return *this;
 }
 
-status_t
-Err::SetTo(const char *msg, const ssize_t pos) {
+status_t Err::SetTo(const char *msg, const ssize_t pos) {
 	SetMsg(msg);
 	SetPos(pos);
 	return B_OK;
 }
 
-status_t
-Err::SetTo(const std::string &msg, const ssize_t pos) {
+status_t Err::SetTo(const std::string &msg, const ssize_t pos) {
 	return SetTo(msg.c_str(), pos);
 }
 
-void
-Err::Unset() {
+void Err::Unset() {
 	delete fMsg;
 	fMsg = NULL;
 	fPos = -1;
 }
 
-const char*
-Err::Msg() const {
+const char*  Err::Msg() const {
 	return fMsg;
 }
 
@@ -77,8 +73,7 @@ Err::Pos() const {
 	return fPos;
 }
 
-void
-Err::SetMsg(const char *msg) {
+void Err::SetMsg(const char *msg) {
 	if (fMsg) {
 		delete fMsg;
 		fMsg = NULL;
@@ -90,8 +85,7 @@ Err::SetMsg(const char *msg) {
 	}
 }
 
-void
-Err::SetPos(ssize_t pos) {
+void Err::SetPos(ssize_t pos) {
 	fPos = pos;
 }
 

@@ -145,8 +145,7 @@ BDebugLooper::~BDebugLooper()
 }
 
 
-status_t
-BDebugLooper::Init()
+status_t BDebugLooper::Init()
 {
 	status_t error = fLock.InitCheck();
 	if (error != B_OK)
@@ -203,8 +202,7 @@ BDebugLooper::Run(bool spawnThread)
 }
 
 
-void
-BDebugLooper::Quit()
+void BDebugLooper::Quit()
 {
 	AutoLocker<BLocker> locker(fLock);
 
@@ -213,8 +211,7 @@ BDebugLooper::Quit()
 }
 
 
-status_t
-BDebugLooper::AddTeamDebugger(BTeamDebugger* debugger,
+status_t BDebugLooper::AddTeamDebugger(BTeamDebugger* debugger,
 	BDebugMessageHandler* handler)
 {
 	if (debugger == NULL || handler == NULL)
@@ -225,8 +222,7 @@ BDebugLooper::AddTeamDebugger(BTeamDebugger* debugger,
 }
 
 
-bool
-BDebugLooper::RemoveTeamDebugger(BTeamDebugger* debugger)
+bool BDebugLooper::RemoveTeamDebugger(BTeamDebugger* debugger)
 {
 	if (debugger == NULL)
 		return false;
@@ -236,8 +232,7 @@ BDebugLooper::RemoveTeamDebugger(BTeamDebugger* debugger)
 }
 
 
-bool
-BDebugLooper::RemoveTeamDebugger(team_id team)
+bool BDebugLooper::RemoveTeamDebugger(team_id team)
 {
 	if (team < 0)
 		return false;
@@ -247,15 +242,13 @@ BDebugLooper::RemoveTeamDebugger(team_id team)
 }
 
 
-/*static*/ status_t
-BDebugLooper::_MessageLoopEntry(void* data)
+/*static*/ status_t BDebugLooper::_MessageLoopEntry(void* data)
 {
 	return ((BDebugLooper*)data)->_MessageLoop();
 }
 
 
-status_t
-BDebugLooper::_MessageLoop()
+status_t BDebugLooper::_MessageLoop()
 {
 	while (true) {
 		// prepare the wait info array
@@ -330,8 +323,7 @@ BDebugLooper::_MessageLoop()
 }
 
 
-status_t
-BDebugLooper::_DoJob(Job* job)
+status_t BDebugLooper::_DoJob(Job* job)
 {
 	AutoLocker<BLocker> locker(fLock);
 
@@ -347,8 +339,7 @@ BDebugLooper::_DoJob(Job* job)
 }
 
 
-void
-BDebugLooper::_Notify()
+void BDebugLooper::_Notify()
 {
 	if (fNotified)
 		return;

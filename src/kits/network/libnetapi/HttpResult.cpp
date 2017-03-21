@@ -41,8 +41,7 @@ BHttpResult::~BHttpResult()
 // #pragma mark Result parameters modifications
 
 
-void
-BHttpResult::SetUrl(const BUrl& url)
+void BHttpResult::SetUrl(const BUrl& url)
 {
 	fUrl = url;
 }
@@ -82,8 +81,7 @@ BHttpResult::Headers() const
 }
 
 
-int32
-BHttpResult::StatusCode() const
+int32 BHttpResult::StatusCode() const
 {
 	return fStatusCode;
 }
@@ -99,8 +97,7 @@ BHttpResult::StatusText() const
 // #pragma mark Result tests
 
 
-bool
-BHttpResult::HasHeaders() const
+bool BHttpResult::HasHeaders() const
 {
 	return fHeaders.CountHeaders() > 0;
 }

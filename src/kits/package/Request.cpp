@@ -36,8 +36,7 @@ BRequest::~BRequest()
 }
 
 
-status_t
-BRequest::InitCheck() const
+status_t BRequest::InitCheck() const
 {
 	return fInitStatus;
 }
@@ -53,8 +52,7 @@ BRequest::PopRunnableJob()
 }
 
 
-status_t
-BRequest::Process(bool failIfCanceledOnly)
+status_t BRequest::Process(bool failIfCanceledOnly)
 {
 	status_t error = InitCheck();
 	if (error != B_OK)
@@ -77,8 +75,7 @@ BRequest::Process(bool failIfCanceledOnly)
 }
 
 
-status_t
-BRequest::QueueJob(BSupportKit::BJob* job)
+status_t BRequest::QueueJob(BSupportKit::BJob* job)
 {
 	if (fJobQueue == NULL)
 		return B_NO_INIT;

@@ -33,21 +33,43 @@
 #ifdef __cplusplus /* Just for C++ */
 namespace bhapi {
 #endif
-typedef enum menu_layout {
+enum menu_layout {
     B_ITEMS_IN_ROW = 0,
     B_ITEMS_IN_COLUMN,
     B_ITEMS_IN_MATRIX
-} menu_layout;
+};
+struct menu_info {
+    float		font_size;
+    font_family	f_family;
+    font_style	f_style;
+    rgb_color	background_color;
+    int32		separator;
+    bool		click_to_open;
+    bool		triggers_always_shown;
+};
+status_t get_menu_info(menu_info* info);
+status_t set_menu_info(menu_info* info);
+
 #ifdef __cplusplus /* Just for C++ */
 } // namespace
 #endif
 
 #ifdef __cplusplus /* Just for C++ */
+namespace BPrivate {
+    class BMenuWindow;
+    class ExtraMenuData;
+    class TriggerList;
+    class MenuPrivate;
+}
+class BMenu;
+class BMenuBar;
+class BMenuItem;
 class BSubmenuWindow;
 class BPopUpMenu;
 #include "../support/List.h"
 #include "../interface/View.h"
 #include "../interface/MenuItem.h"
+typedef bool (*menu_tracking_hook)(BMenu* menu, void* state);
 class BHAPI_IMPEXP BMenu : public BView {
 public:
     BMenu(const char *title, bhapi::menu_layout layout = B_ITEMS_IN_COLUMN);

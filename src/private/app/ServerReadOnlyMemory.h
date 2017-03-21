@@ -25,8 +25,7 @@ struct server_read_only_memory {
 };
 
 
-static inline int32
-color_which_to_index(color_which which)
+static inline int32 color_which_to_index(color_which which)
 {
 	if (which <= kColorWhichCount - 3)
 		return which - 1;

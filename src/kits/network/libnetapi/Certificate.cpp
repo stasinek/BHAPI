@@ -91,15 +91,13 @@ BCertificate::ExpirationDate() const
 }
 
 
-bool
-BCertificate::IsValidAuthority() const
+bool BCertificate::IsValidAuthority() const
 {
 	return X509_check_ca(fPrivate->fX509) > 0;
 }
 
 
-bool
-BCertificate::IsSelfSigned() const
+bool BCertificate::IsSelfSigned() const
 {
 	return X509_check_issued(fPrivate->fX509, fPrivate->fX509) == X509_V_OK;
 }
@@ -150,8 +148,7 @@ BCertificate::String() const
 }
 
 
-bool
-BCertificate::operator==(const BCertificate& other) const
+bool BCertificate::operator==(const BCertificate& other) const
 {
 	return X509_cmp(fPrivate->fX509, other.fPrivate->fX509) == 0;
 }
@@ -204,8 +201,7 @@ BCertificate::ExpirationDate() const
 }
 
 
-bool
-BCertificate::IsValidAuthority() const
+bool BCertificate::IsValidAuthority() const
 {
 	return false;
 }
@@ -246,8 +242,7 @@ BCertificate::String() const
 }
 
 
-bool
-BCertificate::operator==(const BCertificate& other) const
+bool BCertificate::operator==(const BCertificate& other) const
 {
 	return false;
 }

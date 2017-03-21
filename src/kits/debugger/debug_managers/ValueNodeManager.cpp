@@ -34,8 +34,7 @@ ValueNodeManager::~ValueNodeManager()
 }
 
 
-status_t
-ValueNodeManager::SetStackFrame(Thread* thread,
+status_t ValueNodeManager::SetStackFrame(Thread* thread,
 	StackFrame* stackFrame)
 {
 	if (fContainer != NULL) {
@@ -83,22 +82,19 @@ ValueNodeManager::SetStackFrame(Thread* thread,
 }
 
 
-bool
-ValueNodeManager::AddListener(ValueNodeContainer::Listener* listener)
+bool ValueNodeManager::AddListener(ValueNodeContainer::Listener* listener)
 {
 	return fListeners.AddItem(listener);
 }
 
 
-void
-ValueNodeManager::RemoveListener(ValueNodeContainer::Listener* listener)
+void ValueNodeManager::RemoveListener(ValueNodeContainer::Listener* listener)
 {
 	fListeners.RemoveItem(listener);
 }
 
 
-void
-ValueNodeManager::ValueNodeChanged(ValueNodeChild* nodeChild,
+void ValueNodeManager::ValueNodeChanged(ValueNodeChild* nodeChild,
 	ValueNode* oldNode, ValueNode* newNode)
 {
 	if (fContainer == NULL)
@@ -115,8 +111,7 @@ ValueNodeManager::ValueNodeChanged(ValueNodeChild* nodeChild,
 }
 
 
-void
-ValueNodeManager::ValueNodeChildrenCreated(ValueNode* node)
+void ValueNodeManager::ValueNodeChildrenCreated(ValueNode* node)
 {
 	if (fContainer == NULL)
 		return;
@@ -126,8 +121,7 @@ ValueNodeManager::ValueNodeChildrenCreated(ValueNode* node)
 }
 
 
-void
-ValueNodeManager::ValueNodeChildrenDeleted(ValueNode* node)
+void ValueNodeManager::ValueNodeChildrenDeleted(ValueNode* node)
 {
 	if (fContainer == NULL)
 		return;
@@ -137,8 +131,7 @@ ValueNodeManager::ValueNodeChildrenDeleted(ValueNode* node)
 }
 
 
-void
-ValueNodeManager::ValueNodeValueChanged(ValueNode* valueNode)
+void ValueNodeManager::ValueNodeValueChanged(ValueNode* valueNode)
 {
 	if (fContainer == NULL)
 		return;
@@ -168,8 +161,7 @@ ValueNodeManager::ValueNodeValueChanged(ValueNode* valueNode)
 }
 
 
-void
-ValueNodeManager::_AddNode(Variable* variable)
+void ValueNodeManager::_AddNode(Variable* variable)
 {
 	// create the node child for the variable
 	ValueNodeChild* nodeChild = new (std::nothrow) VariableValueNodeChild(
@@ -185,8 +177,7 @@ ValueNodeManager::_AddNode(Variable* variable)
 }
 
 
-status_t
-ValueNodeManager::_CreateValueNode(ValueNodeChild* nodeChild)
+status_t ValueNodeManager::_CreateValueNode(ValueNodeChild* nodeChild)
 {
 	if (nodeChild->Node() != NULL)
 		return B_OK;
@@ -211,8 +202,7 @@ ValueNodeManager::_CreateValueNode(ValueNodeChild* nodeChild)
 }
 
 
-status_t
-ValueNodeManager::AddChildNodes(ValueNodeChild* nodeChild)
+status_t ValueNodeManager::AddChildNodes(ValueNodeChild* nodeChild)
 {
 	AutoLocker<ValueNodeContainer> containerLocker(fContainer);
 

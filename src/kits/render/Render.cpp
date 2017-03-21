@@ -140,14 +140,14 @@ BRenderLine::BRenderLine(BPoint start, BPoint end)
 }
 
 
-bool
+bool 
 BRenderLine::IsValid() const
 {
 	return fValid;
 }
 
 
-bool
+bool 
 BRenderLine::Get(__be_int32 *y,  __be_int32 *minX,  __be_int32 *maxX) const
 {
 	if(fValid == false) return false;
@@ -160,7 +160,7 @@ BRenderLine::Get(__be_int32 *y,  __be_int32 *minX,  __be_int32 *maxX) const
 }
 
 
-bool
+bool 
 BRenderLine::Next()
 {
 	if(fValid == false) return false;
@@ -224,14 +224,14 @@ BRenderLine2::BRenderLine2(BPoint pt0, BPoint pt1, BPoint pt2)
 }
 
 
-bool
+bool 
 BRenderLine2::IsValid() const
 {
 	return fValid;
 }
 
 
-bool
+bool 
 BRenderLine2::Get(__be_int32 *y,  __be_int32 *minX,  __be_int32 *maxX) const
 {
 	if(fValid == false) return false;
@@ -244,7 +244,7 @@ BRenderLine2::Get(__be_int32 *y,  __be_int32 *minX,  __be_int32 *maxX) const
 }
 
 
-bool
+bool 
 BRenderLine2::Next()
 {
 	if(fValid == false) return false;
@@ -313,14 +313,14 @@ BRenderTriangle::BRenderTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke
 }
 
 
-bool
+bool 
 BRenderTriangle::IsValid() const
 {
 	return(fFlags != 0x00);
 }
 
 
-bool
+bool 
 BRenderTriangle::Get(__be_int32 *y,  __be_int32 *_minX,  __be_int32 *_maxX) const
 {
 	if(fFlags == 0x00) return false;
@@ -387,7 +387,7 @@ BRenderTriangle::Get(__be_int32 *y,  __be_int32 *_minX,  __be_int32 *_maxX) cons
 }
 
 
-bool
+bool 
 BRenderTriangle::Next()
 {
 	if(fFlags == 0x00) return false;
@@ -421,14 +421,14 @@ BRender::~BRender()
 }
 
 
-bool
+bool 
 BRender::IsValid() const
 {
 	return(InitCheck() == B_OK);
 }
 
 
-void
+void 
 BRender::SetDrawingMode(bhapi::drawing_mode drawing_mode)
 {
 	fDrawingMode = drawing_mode;
@@ -442,14 +442,14 @@ BRender::DrawingMode() const
 }
 
 
-void
+void 
 BRender::SetHighColor(bhapi::rgb_color highColor)
 {
 	fHighColor.set_to(highColor);
 }
 
 
-void
+void 
 BRender::SetHighColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color color;
@@ -465,14 +465,14 @@ BRender::HighColor() const
 }
 
 
-void
+void 
 BRender::SetLowColor(bhapi::rgb_color lowColor)
 {
 	fLowColor.set_to(lowColor);
 }
 
 
-void
+void 
 BRender::SetLowColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color color;
@@ -488,7 +488,7 @@ BRender::LowColor() const
 }
 
 
-void
+void 
 BRender::SetPenSize(float pen_size)
 {
 	fPenSize = pen_size;
@@ -502,21 +502,21 @@ BRender::PenSize() const
 }
 
 
-void
+void 
 BRender::SetSquarePointStyle(bool state)
 {
 	fSquarePointStyle = state;
 }
 
 
-bool
+bool 
 BRender::IsSquarePointStyle() const
 {
 	return fSquarePointStyle;
 }
 
 
-void
+void 
 BRender::PutRect(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bhapi::rgb_color color)
 {
 	if(width == 0 || height == 0) return;
@@ -560,7 +560,7 @@ inline bool _is_line_mixed_color(const bhapi::pattern &pattern,  __be_int32 y, b
 }
 
 
-void
+void 
 BRender::drawPixel(__be_int32 x,  __be_int32 y, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
@@ -664,7 +664,7 @@ BRender::drawPixel(__be_int32 x,  __be_int32 y, bhapi::pattern pattern)
 }
 
 
-void
+void 
 BRender::FillRect(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bhapi::pattern pattern)
 {
 	if(width == height && width == 1) {drawPixel(x, y, pattern); return;}
@@ -709,7 +709,7 @@ BRender::FillRect(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 
 }
 
 
-void
+void 
 BRender::FillRect(BRect rect, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
@@ -721,7 +721,7 @@ BRender::FillRect(BRect rect, bhapi::pattern pattern)
 }
 
 
-void
+void 
 BRender::StrokePoint(__be_int32 x,  __be_int32 y, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
@@ -750,7 +750,7 @@ BRender::StrokePoint(__be_int32 x,  __be_int32 y, bhapi::pattern pattern)
 }
 
 
-void
+void 
 BRender::StrokePoint(BPoint pt, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
@@ -784,14 +784,14 @@ BRender::StrokePoint(BPoint pt, bhapi::pattern pattern)
 }
 
 
-void
+void 
 BRender::StrokeLine(__be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1, bhapi::pattern pattern)
 {
 	StrokeLine(BPoint((float)x0 + 0.5f, (float)y0 + 0.5f), BPoint((float)x1 + 0.5f, (float)y1 + 0.5f), pattern);
 }
 
 
-void
+void 
 BRender::StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
@@ -821,7 +821,7 @@ BRender::StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern pattern)
 }
 
 
-void
+void 
 BRender::StrokeTriangle(__be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1,  __be_int32 x2,  __be_int32 y2, bhapi::pattern pattern)
 {
 	BPoint pts[3];
@@ -832,7 +832,7 @@ BRender::StrokeTriangle(__be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int
 }
 
 
-void
+void 
 BRender::StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern pattern)
 {
 	BPoint pts[3];
@@ -843,7 +843,7 @@ BRender::StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern patte
 }
 
 
-void
+void 
 BRender::FillTriangle(__be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1,  __be_int32 x2,  __be_int32 y2, bool stroke_edge, bhapi::pattern pattern)
 {
 	FillTriangle(BPoint((float)x0 + 0.5f, (float)y0 + 0.5f),
@@ -853,7 +853,7 @@ BRender::FillTriangle(__be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32
 }
 
 
-void
+void 
 BRender::FillTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
@@ -875,7 +875,7 @@ BRender::FillTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge, bhap
 }
 
 
-void
+void 
 BRender::StrokeEllipse(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bhapi::pattern pattern)
 {
 	if(!IsValid() || width == 0 || height == 0) return;
@@ -888,7 +888,7 @@ BRender::StrokeEllipse(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_ui
 }
 
 
-void
+void 
 BRender::FillEllipse(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bool stroke_edge, bhapi::pattern pattern)
 {
 	if(!IsValid() || width == 0 || height == 0) return;
@@ -901,7 +901,7 @@ BRender::FillEllipse(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint
 }
 
 
-void
+void 
 BRender::StrokeEllipse(__be_int32 xCenter,  __be_int32 yCenter,  __be_int32 xRadius,  __be_int32 yRadius, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
@@ -921,7 +921,7 @@ BRender::StrokeEllipse(__be_int32 xCenter,  __be_int32 yCenter,  __be_int32 xRad
 }
 
 
-void
+void 
 BRender::FillEllipse(__be_int32 xCenter,  __be_int32 yCenter,  __be_int32 xRadius,  __be_int32 yRadius, bool stroke_edge, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
@@ -941,7 +941,7 @@ BRender::FillEllipse(__be_int32 xCenter,  __be_int32 yCenter,  __be_int32 xRadiu
 }
 
 
-void
+void 
 BRender::StrokeEllipse(BRect rect, bhapi::pattern pattern)
 {
 	if(!IsValid() || !rect.IsValid()) return;
@@ -988,7 +988,7 @@ BRender::StrokeEllipse(BRect rect, bhapi::pattern pattern)
 }
 
 
-void
+void 
 BRender::FillEllipse(BRect rect, bool stroke_edge, bhapi::pattern pattern)
 {
 	if(!IsValid() || !rect.IsValid()) return;
@@ -1047,7 +1047,7 @@ BRender::FillEllipse(BRect rect, bool stroke_edge, bhapi::pattern pattern)
 }
 
 
-void
+void 
 BRender::StrokeArc(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height,
 		    __be_int32 startAngle,  __be_int32 endAngle, bhapi::pattern pattern)
 {
@@ -1061,7 +1061,7 @@ BRender::StrokeArc(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32
 }
 
 
-void
+void 
 BRender::StrokeArc(__be_int32 xCenter,  __be_int32 yCenter,  __be_int32 xRadius,  __be_int32 yRadius,
 		    __be_int32 startAngle,  __be_int32 endAngle, bhapi::pattern pattern)
 {
@@ -1073,7 +1073,7 @@ BRender::StrokeArc(__be_int32 xCenter,  __be_int32 yCenter,  __be_int32 xRadius,
 }
 
 
-void
+void 
 BRender::StrokeArc(BPoint ctPt, float xRadius, float yRadius, float startAngle, float arcAngle, bhapi::pattern pattern)
 {
 	if(!IsValid()) return;
@@ -1089,7 +1089,7 @@ BRender::StrokeArc(BPoint ctPt, float xRadius, float yRadius, float startAngle, 
 }
 
 
-void
+void 
 BRender::StrokeArc(BRect rect, float startAngle, float arcAngle, bhapi::pattern pattern)
 {
 	if(!IsValid() || !rect.IsValid()) return;
@@ -1112,7 +1112,7 @@ BRender::StrokeArc(BRect rect, float startAngle, float arcAngle, bhapi::pattern 
 }
 
 
-void
+void 
 BRender::StrokeArc(BRect rect, BPoint start, BPoint end, bhapi::pattern pattern)
 {
 	if(!IsValid() || !rect.IsValid()) return;
@@ -1226,7 +1226,7 @@ static bool bhapi::get_line_intersection(BPoint line0_start, BPoint line0_end, B
 }
 
 
-void
+void 
 BRender::StrokePolygon(const BPolygon *aPolygon, bool closed, bhapi::pattern pattern)
 {
 	if(!IsValid() || aPolygon == NULL) return;
@@ -1364,7 +1364,7 @@ void BRender::StrokePolygon(const BPoint *ptArray,  __be_int32 numPts, bool clos
 }
 
 
-void
+void 
 BRender::FillPolygon(const BPolygon *aPolygon, bool stroke_edge, bhapi::pattern pattern)
 {
 	if(!IsValid() || aPolygon == NULL) return;
@@ -1395,7 +1395,7 @@ static bool b_triangle_contains(BPoint pt0, BPoint pt1, BPoint pt2, BPoint aPt, 
 #endif
 
 
-void
+void 
 BRender::FillPolygon(const BPoint *ptArray,  __be_int32 numPts, bool stroke_edge, bhapi::pattern pattern)
 {
 	BPoint *aPt = NULL;

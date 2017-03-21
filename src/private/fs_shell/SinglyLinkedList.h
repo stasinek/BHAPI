@@ -176,8 +176,7 @@ class SinglyLinkedList {
 
 // Add
 SINGLY_LINKED_LIST_TEMPLATE_LIST
-void
-SINGLY_LINKED_LIST_CLASS_NAME::Add(Element* element)
+void SINGLY_LINKED_LIST_CLASS_NAME::Add(Element* element)
 {
 	if (element != NULL) {
 		sGetLink(element)->next = fFirst;
@@ -187,8 +186,7 @@ SINGLY_LINKED_LIST_CLASS_NAME::Add(Element* element)
 
 // Remove
 SINGLY_LINKED_LIST_TEMPLATE_LIST
-void
-SINGLY_LINKED_LIST_CLASS_NAME::Remove(Element* element)
+void SINGLY_LINKED_LIST_CLASS_NAME::Remove(Element* element)
 {
 	if (element == NULL)
 		return;
@@ -211,8 +209,7 @@ SINGLY_LINKED_LIST_CLASS_NAME::Remove(Element* element)
 
 // RemoveAll
 SINGLY_LINKED_LIST_TEMPLATE_LIST
-void
-SINGLY_LINKED_LIST_CLASS_NAME::RemoveAll()
+void SINGLY_LINKED_LIST_CLASS_NAME::RemoveAll()
 {
 	Element* element = fFirst;
 	while (element) {

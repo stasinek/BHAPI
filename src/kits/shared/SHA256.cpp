@@ -30,8 +30,7 @@ static const uint32 kHash[8] = {
 };
 
 
-static inline uint32
-rotate_right(uint32 value, int bits)
+static inline uint32 rotate_right(uint32 value, int bits)
 {
 	return (value >> bits) | (value << (32 - bits));
 }
@@ -51,8 +50,7 @@ SHA256::~SHA256()
 }
 
 
-void
-SHA256::Init()
+void SHA256::Init()
 {
 	memcpy(fHash, kHash, sizeof(kHash));
 
@@ -62,8 +60,7 @@ SHA256::Init()
 }
 
 
-void
-SHA256::Update(const void* _buffer, size_t size)
+void SHA256::Update(const void* _buffer, size_t size)
 {
 	const uint8* buffer = (const uint8*)_buffer;
 	fMessageSize += size;
@@ -130,8 +127,7 @@ SHA256::Digest()
 }
 
 
-void
-SHA256::_ProcessChunk()
+void SHA256::_ProcessChunk()
 {
 	// convert endianess -- the data are supposed to be a stream of
 	// 32 bit big-endian integers

@@ -67,8 +67,7 @@ _event_queue_imp::~_event_queue_imp()
 }
 
 
-status_t
-_event_queue_imp::AddEvent(const media_timed_event &event)
+status_t _event_queue_imp::AddEvent(const media_timed_event &event)
 {
 	BAutolock lock(fLock);
 
@@ -134,8 +133,7 @@ _event_queue_imp::AddEvent(const media_timed_event &event)
 }
 
 
-status_t
-_event_queue_imp::RemoveEvent(const media_timed_event *event)
+status_t _event_queue_imp::RemoveEvent(const media_timed_event *event)
 {
 	BAutolock lock(fLock);
 
@@ -151,8 +149,7 @@ _event_queue_imp::RemoveEvent(const media_timed_event *event)
 }
 
 
-status_t
-_event_queue_imp::RemoveFirstEvent(media_timed_event * outEvent)
+status_t _event_queue_imp::RemoveFirstEvent(media_timed_event * outEvent)
 {
 	BAutolock lock(fLock);
 
@@ -172,15 +169,13 @@ _event_queue_imp::RemoveFirstEvent(media_timed_event * outEvent)
 }
 
 
-bool
-_event_queue_imp::HasEvents() const
+bool _event_queue_imp::HasEvents() const
 {
 	return fEventCount != 0;
 }
 
 
-int32
-_event_queue_imp::EventCount() const
+int32 _event_queue_imp::EventCount() const
 {
 	#if DEBUG > 1
 		Dump();
@@ -275,8 +270,7 @@ _event_queue_imp::FindFirstMatch(bigtime_t eventTime,
 }
 
 
-status_t
-_event_queue_imp::DoForEach(BTimedEventQueue::for_each_hook hook,
+status_t _event_queue_imp::DoForEach(BTimedEventQueue::for_each_hook hook,
 							void *context,
 							bigtime_t eventTime,
 							BTimedEventQueue::time_direction direction,
@@ -410,8 +404,7 @@ _event_queue_imp::DoForEach(BTimedEventQueue::for_each_hook hook,
 }
 
 
-status_t
-_event_queue_imp::FlushEvents(bigtime_t eventTime,
+status_t _event_queue_imp::FlushEvents(bigtime_t eventTime,
 							  BTimedEventQueue::time_direction direction,
 							  bool inclusive,
 							  int32 eventType)
@@ -494,8 +487,7 @@ _event_queue_imp::FlushEvents(bigtime_t eventTime,
 }
 
 
-void
-_event_queue_imp::SetCleanupHook(BTimedEventQueue::cleanup_hook hook, void *context)
+void _event_queue_imp::SetCleanupHook(BTimedEventQueue::cleanup_hook hook, void *context)
 {
 	BAutolock lock(fLock);
 	fCleanupHookContext = context;
@@ -503,8 +495,7 @@ _event_queue_imp::SetCleanupHook(BTimedEventQueue::cleanup_hook hook, void *cont
 }
 
 
-void
-_event_queue_imp::RemoveEntry(event_queue_entry *entry)
+void _event_queue_imp::RemoveEntry(event_queue_entry *entry)
 {
 	//remove the entry from double-linked list
 	//and delete it
@@ -529,8 +520,7 @@ _event_queue_imp::RemoveEntry(event_queue_entry *entry)
 }
 
 
-void
-_event_queue_imp::CleanupEvent(media_timed_event *event)
+void _event_queue_imp::CleanupEvent(media_timed_event *event)
 {
 	//perform the cleanup action required
 	//when deleting an event from the queue
@@ -614,8 +604,7 @@ _event_queue_imp::GetStart_AfterTime(bigtime_t eventTime, bool inclusive)
 
 
 #if DEBUG > 1
-void
-_event_queue_imp::Dump() const
+void _event_queue_imp::Dump() const
 {
 	TRACE("fEventCount = 0x%x\n",(int)fEventCount);
 	TRACE("fFirstEntry = 0x%x\n",(int)fFirstEntry);

@@ -14,7 +14,7 @@
 
 #include <Directory.h>
 #include <FindDirectory.h>
-#include <OS.h>
+#include <kernel/OS.h>
 #include <Path.h>
 
 
@@ -29,8 +29,7 @@ BDecisionProvider::~BDecisionProvider()
 }
 
 
-bool
-BDecisionProvider::YesNoDecisionNeeded(const BString& description,
+bool BDecisionProvider::YesNoDecisionNeeded(const BString& description,
 	const BString& question, const BString& yes, const BString& no,
 	const BString& defaultChoice)
 {
@@ -55,15 +54,13 @@ BContext::~BContext()
 }
 
 
-status_t
-BContext::InitCheck() const
+status_t BContext::InitCheck() const
 {
 	return fInitStatus;
 }
 
 
-status_t
-BContext::GetNewTempfile(const BString& baseName, BEntry* entry) const
+status_t BContext::GetNewTempfile(const BString& baseName, BEntry* entry) const
 {
 	if (entry == NULL)
 		return B_BAD_VALUE;
@@ -88,8 +85,7 @@ BContext::DecisionProvider() const
 }
 
 
-status_t
-BContext::_Initialize()
+status_t BContext::_Initialize()
 {
 	fTempfileManager = new (std::nothrow) TempfileManager();
 	if (fTempfileManager == NULL)

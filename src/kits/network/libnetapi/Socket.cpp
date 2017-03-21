@@ -38,15 +38,13 @@ BSocket::~BSocket()
 }
 
 
-status_t
-BSocket::Bind(const BNetworkAddress& local)
+status_t BSocket::Bind(const BNetworkAddress& local)
 {
 	return BAbstractSocket::Bind(local, SOCK_STREAM);
 }
 
 
-status_t
-BSocket::Connect(const BNetworkAddress& peer, bigtime_t timeout)
+status_t BSocket::Connect(const BNetworkAddress& peer, bigtime_t timeout)
 {
 	return BAbstractSocket::Connect(peer, SOCK_STREAM, timeout);
 }
@@ -84,8 +82,7 @@ BSocket::Write(const void* buffer, size_t size)
 //	#pragma mark - private
 
 
-void
-BSocket::_SetTo(int fd, const BNetworkAddress& local,
+void BSocket::_SetTo(int fd, const BNetworkAddress& local,
 	const BNetworkAddress& peer)
 {
 	Disconnect();

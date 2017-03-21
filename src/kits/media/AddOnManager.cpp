@@ -86,8 +86,7 @@ AddOnManager::GetInstance()
 }
 
 
-status_t
-AddOnManager::GetDecoderForFormat(entry_ref* _decoderRef,
+status_t AddOnManager::GetDecoderForFormat(entry_ref* _decoderRef,
 	const media_format& format)
 {
 	if ((format.type == B_MEDIA_ENCODED_VIDEO
@@ -130,8 +129,7 @@ AddOnManager::GetDecoderForFormat(entry_ref* _decoderRef,
 }
 
 
-status_t
-AddOnManager::GetReaders(entry_ref* outRefs, int32* outCount,
+status_t AddOnManager::GetReaders(entry_ref* outRefs, int32* outCount,
 	int32 maxCount)
 {
 	BAutolock locker(fLock);
@@ -163,8 +161,7 @@ AddOnManager::GetReaders(entry_ref* outRefs, int32* outCount,
 }
 
 
-status_t
-AddOnManager::GetEncoder(entry_ref* _encoderRef, int32 id)
+status_t AddOnManager::GetEncoder(entry_ref* _encoderRef, int32 id)
 {
 	BAutolock locker(fLock);
 	RegisterAddOns();
@@ -182,8 +179,7 @@ AddOnManager::GetEncoder(entry_ref* _encoderRef, int32 id)
 }
 
 
-status_t
-AddOnManager::GetWriter(entry_ref* _ref, uint32 internalID)
+status_t AddOnManager::GetWriter(entry_ref* _ref, uint32 internalID)
 {
 	BAutolock locker(fLock);
 	RegisterAddOns();
@@ -200,8 +196,7 @@ AddOnManager::GetWriter(entry_ref* _ref, uint32 internalID)
 }
 
 
-status_t
-AddOnManager::GetFileFormat(media_file_format* _fileFormat, int32 cookie)
+status_t AddOnManager::GetFileFormat(media_file_format* _fileFormat, int32 cookie)
 {
 	BAutolock locker(fLock);
 	RegisterAddOns();
@@ -216,8 +211,7 @@ AddOnManager::GetFileFormat(media_file_format* _fileFormat, int32 cookie)
 }
 
 
-status_t
-AddOnManager::GetCodecInfo(media_codec_info* _codecInfo,
+status_t AddOnManager::GetCodecInfo(media_codec_info* _codecInfo,
 	media_format_family* _formatFamily,
 	media_format* _inputFormat, media_format* _outputFormat, int32 cookie)
 {
@@ -240,8 +234,7 @@ AddOnManager::GetCodecInfo(media_codec_info* _codecInfo,
 // #pragma mark -
 
 
-void
-AddOnManager::RegisterAddOns()
+void AddOnManager::RegisterAddOns()
 {
 	// Check if add-ons are already registered.
 	if (!fReaderList.IsEmpty() || !fWriterList.IsEmpty()
@@ -272,8 +265,7 @@ AddOnManager::RegisterAddOns()
 }
 
 
-status_t
-AddOnManager::_RegisterAddOn(const entry_ref& ref)
+status_t AddOnManager::_RegisterAddOn(const entry_ref& ref)
 {
 	BPath path(&ref);
 
@@ -320,8 +312,7 @@ AddOnManager::_RegisterAddOn(const entry_ref& ref)
 }
 
 
-status_t
-AddOnManager::_UnregisterAddOn(const entry_ref& ref)
+status_t AddOnManager::_UnregisterAddOn(const entry_ref& ref)
 {
 	BAutolock locker(fLock);
 
@@ -376,8 +367,7 @@ AddOnManager::_UnregisterAddOn(const entry_ref& ref)
 }
 
 
-void
-AddOnManager::_RegisterReader(ReaderPlugin* reader, const entry_ref& ref)
+void AddOnManager::_RegisterReader(ReaderPlugin* reader, const entry_ref& ref)
 {
 	BAutolock locker(fLock);
 
@@ -396,8 +386,7 @@ AddOnManager::_RegisterReader(ReaderPlugin* reader, const entry_ref& ref)
 }
 
 
-void
-AddOnManager::_RegisterDecoder(DecoderPlugin* plugin, const entry_ref& ref)
+void AddOnManager::_RegisterDecoder(DecoderPlugin* plugin, const entry_ref& ref)
 {
 	BAutolock locker(fLock);
 
@@ -426,8 +415,7 @@ AddOnManager::_RegisterDecoder(DecoderPlugin* plugin, const entry_ref& ref)
 }
 
 
-void
-AddOnManager::_RegisterWriter(WriterPlugin* writer, const entry_ref& ref)
+void AddOnManager::_RegisterWriter(WriterPlugin* writer, const entry_ref& ref)
 {
 	BAutolock locker(fLock);
 
@@ -466,8 +454,7 @@ AddOnManager::_RegisterWriter(WriterPlugin* writer, const entry_ref& ref)
 }
 
 
-void
-AddOnManager::_RegisterEncoder(EncoderPlugin* plugin, const entry_ref& ref)
+void AddOnManager::_RegisterEncoder(EncoderPlugin* plugin, const entry_ref& ref)
 {
 	BAutolock locker(fLock);
 
@@ -509,8 +496,7 @@ AddOnManager::_RegisterEncoder(EncoderPlugin* plugin, const entry_ref& ref)
 }
 
 
-bool
-AddOnManager::_FindDecoder(const media_format& format, const BPath& path,
+bool AddOnManager::_FindDecoder(const media_format& format, const BPath& path,
 	entry_ref* _decoderRef)
 {
 	node_ref nref;
@@ -539,8 +525,7 @@ AddOnManager::_FindDecoder(const media_format& format, const BPath& path,
 }
 
 
-void
-AddOnManager::_GetReaders(const BPath& path, entry_ref* outRefs,
+void AddOnManager::_GetReaders(const BPath& path, entry_ref* outRefs,
 	int32* outCount, int32 maxCount)
 {
 	node_ref nref;

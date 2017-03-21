@@ -559,8 +559,7 @@ FileManager::~FileManager()
 }
 
 
-status_t
-FileManager::Init(bool targetIsLocal)
+status_t FileManager::Init(bool targetIsLocal)
 {
 	status_t error = fLock.InitCheck();
 	if (error != B_OK)
@@ -614,8 +613,7 @@ FileManager::GetTargetFile(const BString& path)
 }
 
 
-void
-FileManager::TargetEntryLocated(const BString& path,
+void FileManager::TargetEntryLocated(const BString& path,
 	const BString& locatedPath)
 {
 	AutoLocker<FileManager> locker(this);
@@ -644,8 +642,7 @@ FileManager::GetSourceFile(const BString& path)
 }
 
 
-status_t
-FileManager::SourceEntryLocated(const BString& path,
+status_t FileManager::SourceEntryLocated(const BString& path,
 	const BString& locatedPath)
 {
 	AutoLocker<FileManager> locker(this);
@@ -669,8 +666,7 @@ FileManager::SourceEntryLocated(const BString& path,
 }
 
 
-status_t
-FileManager::LoadSourceFile(LocatableFile* file, SourceFile*& _sourceFile)
+status_t FileManager::LoadSourceFile(LocatableFile* file, SourceFile*& _sourceFile)
 {
 	AutoLocker<FileManager> locker(this);
 
@@ -720,8 +716,7 @@ FileManager::LoadSourceFile(LocatableFile* file, SourceFile*& _sourceFile)
 }
 
 
-status_t
-FileManager::LoadLocationMappings(TeamFileManagerSettings* settings)
+status_t FileManager::LoadLocationMappings(TeamFileManagerSettings* settings)
 {
 	AutoLocker<FileManager> locker(this);
 	for (int32 i = 0; i < settings->CountSourceMappings(); i++) {
@@ -742,8 +737,7 @@ FileManager::LoadLocationMappings(TeamFileManagerSettings* settings)
 }
 
 
-status_t
-FileManager::SaveLocationMappings(TeamFileManagerSettings* settings)
+status_t FileManager::SaveLocationMappings(TeamFileManagerSettings* settings)
 {
 	AutoLocker<FileManager> locker(this);
 
@@ -775,8 +769,7 @@ FileManager::_LookupSourceFile(const BString& path)
 }
 
 
-void
-FileManager::_SourceFileUnused(SourceFileEntry* entry)
+void FileManager::_SourceFileUnused(SourceFileEntry* entry)
 {
 	AutoLocker<FileManager> locker(this);
 
@@ -786,8 +779,7 @@ FileManager::_SourceFileUnused(SourceFileEntry* entry)
 }
 
 
-bool
-FileManager::_LocateFileIfMapped(const BString& sourcePath,
+bool FileManager::_LocateFileIfMapped(const BString& sourcePath,
 	LocatableFile* file)
 {
 	// called with lock held

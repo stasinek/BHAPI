@@ -147,8 +147,7 @@ ArchitectureX86::~ArchitectureX86()
 }
 
 
-status_t
-ArchitectureX86::Init()
+status_t ArchitectureX86::Init()
 {
 	fAssemblyLanguage = new(std::nothrow) X86AssemblyLanguage;
 	if (fAssemblyLanguage == NULL)
@@ -259,15 +258,13 @@ ArchitectureX86::Init()
 }
 
 
-int32
-ArchitectureX86::StackGrowthDirection() const
+int32 ArchitectureX86::StackGrowthDirection() const
 {
 	return STACK_GROWTH_DIRECTION_NEGATIVE;
 }
 
 
-int32
-ArchitectureX86::CountRegisters() const
+int32 ArchitectureX86::CountRegisters() const
 {
 	return fRegisters.Count();
 }
@@ -281,8 +278,7 @@ ArchitectureX86::Registers() const
 
 
 
-status_t
-ArchitectureX86::InitRegisterRules(CfaContext& context) const
+status_t ArchitectureX86::InitRegisterRules(CfaContext& context) const
 {
 	status_t error = Architecture::InitRegisterRules(context);
 	if (error != B_OK)
@@ -296,8 +292,7 @@ ArchitectureX86::InitRegisterRules(CfaContext& context) const
 }
 
 
-status_t
-ArchitectureX86::GetDwarfRegisterMaps(RegisterMap** _toDwarf,
+status_t ArchitectureX86::GetDwarfRegisterMaps(RegisterMap** _toDwarf,
 	RegisterMap** _fromDwarf) const
 {
 	if (_toDwarf != NULL) {
@@ -314,8 +309,7 @@ ArchitectureX86::GetDwarfRegisterMaps(RegisterMap** _toDwarf,
 }
 
 
-status_t
-ArchitectureX86::GetCpuFeatures(uint32& flags)
+status_t ArchitectureX86::GetCpuFeatures(uint32& flags)
 {
 	flags = fFeatureFlags;
 
@@ -323,8 +317,7 @@ ArchitectureX86::GetCpuFeatures(uint32& flags)
 }
 
 
-status_t
-ArchitectureX86::CreateCpuState(CpuState*& _state)
+status_t ArchitectureX86::CreateCpuState(CpuState*& _state)
 {
 	CpuStateX86* state = new(std::nothrow) CpuStateX86;
 	if (state == NULL)
@@ -335,8 +328,7 @@ ArchitectureX86::CreateCpuState(CpuState*& _state)
 }
 
 
-status_t
-ArchitectureX86::CreateCpuState(const void* cpuStateData, size_t size,
+status_t ArchitectureX86::CreateCpuState(const void* cpuStateData, size_t size,
 	CpuState*& _state)
 {
 	if (size != sizeof(x86_debug_cpu_state))
@@ -352,8 +344,7 @@ ArchitectureX86::CreateCpuState(const void* cpuStateData, size_t size,
 }
 
 
-status_t
-ArchitectureX86::CreateStackFrame(Image* image, FunctionDebugInfo* function,
+status_t ArchitectureX86::CreateStackFrame(Image* image, FunctionDebugInfo* function,
 	CpuState* _cpuState, bool isTopFrame, StackFrame*& _frame,
 	CpuState*& _previousCpuState)
 {
@@ -494,8 +485,7 @@ ArchitectureX86::CreateStackFrame(Image* image, FunctionDebugInfo* function,
 }
 
 
-void
-ArchitectureX86::UpdateStackFrameCpuState(const StackFrame* frame,
+void ArchitectureX86::UpdateStackFrameCpuState(const StackFrame* frame,
 	Image* previousImage, FunctionDebugInfo* previousFunction,
 	CpuState* previousCpuState)
 {
@@ -535,8 +525,7 @@ ArchitectureX86::UpdateStackFrameCpuState(const StackFrame* frame,
 }
 
 
-status_t
-ArchitectureX86::ReadValueFromMemory(target_addr_t address, uint32 valueType,
+status_t ArchitectureX86::ReadValueFromMemory(target_addr_t address, uint32 valueType,
 	BVariant& _value) const
 {
 	uint8 buffer[64];
@@ -591,8 +580,7 @@ ArchitectureX86::ReadValueFromMemory(target_addr_t address, uint32 valueType,
 }
 
 
-status_t
-ArchitectureX86::ReadValueFromMemory(target_addr_t addressSpace,
+status_t ArchitectureX86::ReadValueFromMemory(target_addr_t addressSpace,
 	target_addr_t address, uint32 valueType, BVariant& _value) const
 {
 	// n/a on this architecture
@@ -600,8 +588,7 @@ ArchitectureX86::ReadValueFromMemory(target_addr_t addressSpace,
 }
 
 
-status_t
-ArchitectureX86::DisassembleCode(FunctionDebugInfo* function,
+status_t ArchitectureX86::DisassembleCode(FunctionDebugInfo* function,
 	const void* buffer, size_t bufferSize, DisassembledCode*& _sourceCode)
 {
 	DisassembledCode* source = new(std::nothrow) DisassembledCode(
@@ -640,8 +627,7 @@ ArchitectureX86::DisassembleCode(FunctionDebugInfo* function,
 }
 
 
-status_t
-ArchitectureX86::GetStatement(FunctionDebugInfo* function,
+status_t ArchitectureX86::GetStatement(FunctionDebugInfo* function,
 	target_addr_t address, Statement*& _statement)
 {
 // TODO: This is not architecture dependent anymore!
@@ -662,8 +648,7 @@ ArchitectureX86::GetStatement(FunctionDebugInfo* function,
 }
 
 
-status_t
-ArchitectureX86::GetInstructionInfo(target_addr_t address,
+status_t ArchitectureX86::GetInstructionInfo(target_addr_t address,
 	InstructionInfo& _info, CpuState* state)
 {
 	// read the code - maximum x86{-64} instruction size = 15 bytes
@@ -683,8 +668,7 @@ ArchitectureX86::GetInstructionInfo(target_addr_t address,
 }
 
 
-status_t
-ArchitectureX86::ResolvePICFunctionAddress(target_addr_t instructionAddress,
+status_t ArchitectureX86::ResolvePICFunctionAddress(target_addr_t instructionAddress,
 	CpuState* state, target_addr_t& _targetAddress)
 {
 	// if the function in question is position-independent, the call
@@ -708,8 +692,7 @@ ArchitectureX86::ResolvePICFunctionAddress(target_addr_t instructionAddress,
 }
 
 
-status_t
-ArchitectureX86::GetWatchpointDebugCapabilities(int32& _maxRegisterCount,
+status_t ArchitectureX86::GetWatchpointDebugCapabilities(int32& _maxRegisterCount,
 	int32& _maxBytesPerRegister, uint8& _watchpointCapabilityFlags)
 {
 	// while x86 technically has 4 hardware debug registers, one is reserved by
@@ -726,8 +709,7 @@ ArchitectureX86::GetWatchpointDebugCapabilities(int32& _maxRegisterCount,
 }
 
 
-status_t
-ArchitectureX86::GetReturnAddressLocation(StackFrame* frame,
+status_t ArchitectureX86::GetReturnAddressLocation(StackFrame* frame,
 	target_size_t valueSize, ValueLocation*& _location)
 {
 	// for the calling conventions currently in use on Haiku,
@@ -773,8 +755,7 @@ ArchitectureX86::GetReturnAddressLocation(StackFrame* frame,
 }
 
 
-void
-ArchitectureX86::_AddRegister(int32 index, const char* name,
+void ArchitectureX86::_AddRegister(int32 index, const char* name,
 	uint32 bitSize, uint32 valueType, register_type type, bool calleePreserved)
 {
 	if (!fRegisters.Add(Register(index, name, bitSize, valueType, type,
@@ -784,8 +765,7 @@ ArchitectureX86::_AddRegister(int32 index, const char* name,
 }
 
 
-void
-ArchitectureX86::_AddIntegerRegister(int32 index, const char* name,
+void ArchitectureX86::_AddIntegerRegister(int32 index, const char* name,
 	uint32 valueType, register_type type, bool calleePreserved)
 {
 	_AddRegister(index, name, 8 * BVariant::SizeOfType(valueType), valueType,
@@ -793,16 +773,14 @@ ArchitectureX86::_AddIntegerRegister(int32 index, const char* name,
 }
 
 
-void
-ArchitectureX86::_AddFPRegister(int32 index, const char* name)
+void ArchitectureX86::_AddFPRegister(int32 index, const char* name)
 {
 	_AddRegister(index, name, 8 * BVariant::SizeOfType(B_DOUBLE_TYPE),
 		B_DOUBLE_TYPE, REGISTER_TYPE_GENERAL_PURPOSE, true);
 }
 
 
-void
-ArchitectureX86::_AddSIMDRegister(int32 index, const char* name,
+void ArchitectureX86::_AddSIMDRegister(int32 index, const char* name,
 	uint32 byteSize)
 {
 	_AddRegister(index, name, byteSize * 8, B_RAW_TYPE,
@@ -810,8 +788,7 @@ ArchitectureX86::_AddSIMDRegister(int32 index, const char* name,
 }
 
 
-bool
-ArchitectureX86::_HasFunctionPrologue(FunctionDebugInfo* function) const
+bool ArchitectureX86::_HasFunctionPrologue(FunctionDebugInfo* function) const
 {
 	if (function == NULL)
 		return false;

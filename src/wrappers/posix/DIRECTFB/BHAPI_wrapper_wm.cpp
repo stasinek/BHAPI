@@ -47,8 +47,7 @@
 #define WINDOW_TITLE_TEXT_COLOR		255, 255, 255, 255
 
 
-void
-EDFBGraphicsWindow::AdjustFrameByDecoration()
+void EDFBGraphicsWindow::AdjustFrameByDecoration()
 {
 	fWidth -= (__be_uint32)(fMargins.left + fMargins.right);
 	fHeight -= (__be_uint32)(fMargins.top + fMargins.bottom);
@@ -89,8 +88,7 @@ EDFBGraphicsWindow::AdjustFrameByDecoration()
 }
 
 
-void
-EDFBGraphicsWindow::RenderDecoration()
+void EDFBGraphicsWindow::RenderDecoration()
 {
 	if(dfbSurface == NULL) return;
 
@@ -248,8 +246,7 @@ EDFBGraphicsWindow::RenderDecoration()
 }
 
 
-bool
-EDFBGraphicsWindow::HandleMouseEvent(DFBWindowEvent *event)
+bool EDFBGraphicsWindow::HandleMouseEvent(DFBWindowEvent *event)
 {
 	if(dfbWindow == NULL || fHidden) return false;
 	if(!(event->type == DWET_BUTTONDOWN || event->type == DWET_BUTTONUP || event->type == DWET_MOTION)) return false;

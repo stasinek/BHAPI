@@ -27,8 +27,7 @@ DebugEvent::~DebugEvent()
 }
 
 
-void
-DebugEvent::SetThreadStopped(bool stopped)
+void DebugEvent::SetThreadStopped(bool stopped)
 {
 	fThreadStopped = stopped;
 }

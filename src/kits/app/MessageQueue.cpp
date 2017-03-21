@@ -55,7 +55,7 @@ BMessageQueue::~BMessageQueue()
 }
 
 
-status_t
+status_t 
 BMessageQueue::LockWithTimeout(bigtime_t timeout)
 {
     BLocker *handlers_locker = bhapi::get_handler_operator_locker();
@@ -81,14 +81,14 @@ BMessageQueue::LockWithTimeout(bigtime_t timeout)
 }
 
 
-bool
+bool 
 BMessageQueue::Lock()
 {
     return(LockWithTimeout(B_INFINITE_TIMEOUT) == B_OK);
 }
 
 
-void
+void 
 BMessageQueue::Unlock()
 {
     if(bhapi::count_locker_locks(fLocker) <= 0)
@@ -108,14 +108,14 @@ BMessageQueue::CountMessages() const
 }
 
 
-bool
+bool 
 BMessageQueue::IsEmpty() const
 {
     return fMessagesList.IsEmpty();
 }
 
 
-bool
+bool 
 BMessageQueue::AddMessage(BMessage *an_event)
 {
     if(an_event == NULL) return false;
@@ -127,7 +127,7 @@ BMessageQueue::AddMessage(BMessage *an_event)
 }
 
 
-bool
+bool 
 BMessageQueue::RemoveMessage(BMessage *an_event)
 {
     if(an_event == NULL) return false;

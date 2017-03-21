@@ -19,8 +19,7 @@ PluginManager gPluginManager;
 // #pragma mark - Readers/Decoders
 
 
-status_t
-PluginManager::CreateReader(Reader** reader, int32* streamCount,
+status_t PluginManager::CreateReader(Reader** reader, int32* streamCount,
 	media_file_format* mff, BDataIO* source)
 {
 	TRACE("PluginManager::CreateReader enter\n");
@@ -87,8 +86,7 @@ PluginManager::CreateReader(Reader** reader, int32* streamCount,
 }
 
 
-void
-PluginManager::DestroyReader(Reader* reader)
+void PluginManager::DestroyReader(Reader* reader)
 {
 	if (reader != NULL) {
 		TRACE("PluginManager::DestroyReader(%p (plugin: %p))\n", reader,
@@ -103,8 +101,7 @@ PluginManager::DestroyReader(Reader* reader)
 }
 
 
-status_t
-PluginManager::CreateDecoder(Decoder** _decoder, const media_format& format)
+status_t PluginManager::CreateDecoder(Decoder** _decoder, const media_format& format)
 {
 	TRACE("PluginManager::CreateDecoder enter\n");
 
@@ -148,8 +145,7 @@ PluginManager::CreateDecoder(Decoder** _decoder, const media_format& format)
 }
 
 
-status_t
-PluginManager::CreateDecoder(Decoder** decoder, const media_codec_info& mci)
+status_t PluginManager::CreateDecoder(Decoder** decoder, const media_codec_info& mci)
 {
 	// TODO
 	debugger("not implemented");
@@ -157,8 +153,7 @@ PluginManager::CreateDecoder(Decoder** decoder, const media_codec_info& mci)
 }
 
 
-status_t
-PluginManager::GetDecoderInfo(Decoder* decoder, media_codec_info* _info) const
+status_t PluginManager::GetDecoderInfo(Decoder* decoder, media_codec_info* _info) const
 {
 	if (decoder == NULL)
 		return B_BAD_VALUE;
@@ -171,8 +166,7 @@ PluginManager::GetDecoderInfo(Decoder* decoder, media_codec_info* _info) const
 }
 
 
-void
-PluginManager::DestroyDecoder(Decoder* decoder)
+void PluginManager::DestroyDecoder(Decoder* decoder)
 {
 	if (decoder != NULL) {
 		TRACE("PluginManager::DestroyDecoder(%p, plugin: %p)\n", decoder,
@@ -190,8 +184,7 @@ PluginManager::DestroyDecoder(Decoder* decoder)
 // #pragma mark - Writers/Encoders
 
 
-status_t
-PluginManager::CreateWriter(Writer** writer, const media_file_format& mff,
+status_t PluginManager::CreateWriter(Writer** writer, const media_file_format& mff,
 	BDataIO* target)
 {
 	TRACE("PluginManager::CreateWriter enter\n");
@@ -234,8 +227,7 @@ PluginManager::CreateWriter(Writer** writer, const media_file_format& mff,
 }
 
 
-void
-PluginManager::DestroyWriter(Writer* writer)
+void PluginManager::DestroyWriter(Writer* writer)
 {
 	if (writer != NULL) {
 		TRACE("PluginManager::DestroyWriter(%p (plugin: %p))\n", writer,
@@ -250,8 +242,7 @@ PluginManager::DestroyWriter(Writer* writer)
 }
 
 
-status_t
-PluginManager::CreateEncoder(Encoder** _encoder,
+status_t PluginManager::CreateEncoder(Encoder** _encoder,
 	const media_codec_info* codecInfo, uint32 flags)
 {
 	TRACE("PluginManager::CreateEncoder enter\n");
@@ -294,8 +285,7 @@ PluginManager::CreateEncoder(Encoder** _encoder,
 }
 
 
-void
-PluginManager::DestroyEncoder(Encoder* encoder)
+void PluginManager::DestroyEncoder(Encoder* encoder)
 {
 	if (encoder != NULL) {
 		TRACE("PluginManager::DestroyEncoder(%p, plugin: %p)\n", encoder,
@@ -376,8 +366,7 @@ PluginManager::GetPlugin(const entry_ref& ref)
 }
 
 
-void
-PluginManager::PutPlugin(MediaPlugin* plugin)
+void PluginManager::PutPlugin(MediaPlugin* plugin)
 {
 	TRACE("PluginManager::PutPlugin()\n");
 	fLocker.Lock();
@@ -405,8 +394,7 @@ PluginManager::PutPlugin(MediaPlugin* plugin)
 }
 
 
-status_t
-PluginManager::_LoadPlugin(const entry_ref& ref, MediaPlugin** plugin,
+status_t PluginManager::_LoadPlugin(const entry_ref& ref, MediaPlugin** plugin,
 	image_id* image)
 {
 	BPath p(&ref);

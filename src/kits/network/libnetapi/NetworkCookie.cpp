@@ -101,8 +101,7 @@ BNetworkCookie::~BNetworkCookie()
 // #pragma mark String to cookie fields
 
 
-status_t
-BNetworkCookie::ParseCookieString(const BString& string, const BUrl& url)
+status_t BNetworkCookie::ParseCookieString(const BString& string, const BUrl& url)
 {
 	_Reset();
 
@@ -226,8 +225,7 @@ BNetworkCookie::SetValue(const BString& value)
 }
 
 
-status_t
-BNetworkCookie::SetPath(const BString& to)
+status_t BNetworkCookie::SetPath(const BString& to)
 {
 	fPath.Truncate(0);
 	fRawFullCookieValid = false;
@@ -247,8 +245,7 @@ BNetworkCookie::SetPath(const BString& to)
 }
 
 
-status_t
-BNetworkCookie::SetDomain(const BString& domain)
+status_t BNetworkCookie::SetDomain(const BString& domain)
 {
 	// TODO: canonicalize the domain
 	BString newDomain = domain;
@@ -382,15 +379,13 @@ BNetworkCookie::ExpirationString() const
 }
 
 
-bool
-BNetworkCookie::Secure() const
+bool BNetworkCookie::Secure() const
 {
 	return fSecure;
 }
 
 
-bool
-BNetworkCookie::HttpOnly() const
+bool BNetworkCookie::HttpOnly() const
 {
 	return fHttpOnly;
 }
@@ -433,29 +428,25 @@ BNetworkCookie::RawCookie(bool full) const
 // #pragma mark Cookie test
 
 
-bool
-BNetworkCookie::IsHostOnly() const
+bool BNetworkCookie::IsHostOnly() const
 {
 	return fHostOnly;
 }
 
 
-bool
-BNetworkCookie::IsSessionCookie() const
+bool BNetworkCookie::IsSessionCookie() const
 {
 	return fSessionCookie;
 }
 
 
-bool
-BNetworkCookie::IsValid() const
+bool BNetworkCookie::IsValid() const
 {
 	return fInitStatus == B_OK && HasName() && HasDomain();
 }
 
 
-bool
-BNetworkCookie::IsValidForUrl(const BUrl& url) const
+bool BNetworkCookie::IsValidForUrl(const BUrl& url) const
 {
 	if (Secure() && url.Protocol() != "https")
 		return false;
@@ -467,8 +458,7 @@ BNetworkCookie::IsValidForUrl(const BUrl& url) const
 }
 
 
-bool
-BNetworkCookie::IsValidForDomain(const BString& domain) const
+bool BNetworkCookie::IsValidForDomain(const BString& domain) const
 {
 	// TODO: canonicalize both domains
 	const BString& cookieDomain = Domain();
@@ -493,8 +483,7 @@ BNetworkCookie::IsValidForDomain(const BString& domain) const
 }
 
 
-bool
-BNetworkCookie::IsValidForPath(const BString& path) const
+bool BNetworkCookie::IsValidForPath(const BString& path) const
 {
 	const BString& cookiePath = Path();
 	BString normalizedPath = path;
@@ -510,8 +499,7 @@ BNetworkCookie::IsValidForPath(const BString& path) const
 }
 
 
-bool
-BNetworkCookie::_CanBeSetFromUrl(const BUrl& url) const
+bool BNetworkCookie::_CanBeSetFromUrl(const BUrl& url) const
 {
 	if (url.Protocol() == "file")
 		return Domain() == "localhost" && _CanBeSetFromPath(url.Path());
@@ -520,8 +508,7 @@ BNetworkCookie::_CanBeSetFromUrl(const BUrl& url) const
 }
 
 
-bool
-BNetworkCookie::_CanBeSetFromDomain(const BString& domain) const
+bool BNetworkCookie::_CanBeSetFromDomain(const BString& domain) const
 {
 	// TODO: canonicalize both domains
 	const BString& cookieDomain = Domain();
@@ -553,8 +540,7 @@ BNetworkCookie::_CanBeSetFromDomain(const BString& domain) const
 }
 
 
-bool
-BNetworkCookie::_CanBeSetFromPath(const BString& path) const
+bool BNetworkCookie::_CanBeSetFromPath(const BString& path) const
 {
 	BString normalizedPath = path;
 	int slashPos = normalizedPath.FindLast('/');
@@ -571,36 +557,31 @@ BNetworkCookie::_CanBeSetFromPath(const BString& path) const
 // #pragma mark Cookie fields existence tests
 
 
-bool
-BNetworkCookie::HasName() const
+bool BNetworkCookie::HasName() const
 {
 	return fName.Length() > 0;
 }
 
 
-bool
-BNetworkCookie::HasValue() const
+bool BNetworkCookie::HasValue() const
 {
 	return fValue.Length() > 0;
 }
 
 
-bool
-BNetworkCookie::HasDomain() const
+bool BNetworkCookie::HasDomain() const
 {
 	return fDomain.Length() > 0;
 }
 
 
-bool
-BNetworkCookie::HasPath() const
+bool BNetworkCookie::HasPath() const
 {
 	return fPath.Length() > 0;
 }
 
 
-bool
-BNetworkCookie::HasExpirationDate() const
+bool BNetworkCookie::HasExpirationDate() const
 {
 	return !IsSessionCookie();
 }
@@ -609,15 +590,13 @@ BNetworkCookie::HasExpirationDate() const
 // #pragma mark Cookie delete test
 
 
-bool
-BNetworkCookie::ShouldDeleteAtExit() const
+bool BNetworkCookie::ShouldDeleteAtExit() const
 {
 	return IsSessionCookie() || ShouldDeleteNow();
 }
 
 
-bool
-BNetworkCookie::ShouldDeleteNow() const
+bool BNetworkCookie::ShouldDeleteNow() const
 {
 	if (HasExpirationDate())
 		return (BDateTime::CurrentDateTime(B_GMT_TIME) > fExpiration);
@@ -629,8 +608,7 @@ BNetworkCookie::ShouldDeleteNow() const
 // #pragma mark BArchivable members
 
 
-status_t
-BNetworkCookie::Archive(BMessage* into, bool deep) const
+status_t BNetworkCookie::Archive(BMessage* into, bool deep) const
 {
 	status_t error = BArchivable::Archive(into, deep);
 
@@ -702,23 +680,20 @@ BNetworkCookie::Instantiate(BMessage* archive)
 // #pragma mark Overloaded operators
 
 
-bool
-BNetworkCookie::operator==(const BNetworkCookie& other)
+bool BNetworkCookie::operator==(const BNetworkCookie& other)
 {
 	// Equality : name and values equals
 	return fName == other.fName && fValue == other.fValue;
 }
 
 
-bool
-BNetworkCookie::operator!=(const BNetworkCookie& other)
+bool BNetworkCookie::operator!=(const BNetworkCookie& other)
 {
 	return !(*this == other);
 }
 
 
-void
-BNetworkCookie::_Reset()
+void BNetworkCookie::_Reset()
 {
 	fInitStatus = false;
 
@@ -739,8 +714,7 @@ BNetworkCookie::_Reset()
 }
 
 
-int32
-skip_whitespace_forward(const BString& string, int32 index)
+int32 skip_whitespace_forward(const BString& string, int32 index)
 {
 	while (index < string.Length() && (string[index] == ' '
 			|| string[index] == '\t'))
@@ -749,8 +723,7 @@ skip_whitespace_forward(const BString& string, int32 index)
 }
 
 
-int32
-skip_whitespace_backward(const BString& string, int32 index)
+int32 skip_whitespace_backward(const BString& string, int32 index)
 {
 	while (index >= 0 && (string[index] == ' ' || string[index] == '\t'))
 		index--;
@@ -758,8 +731,7 @@ skip_whitespace_backward(const BString& string, int32 index)
 }
 
 
-int32
-BNetworkCookie::_ExtractNameValuePair(const BString& cookieString,
+int32 BNetworkCookie::_ExtractNameValuePair(const BString& cookieString,
 	BString& name, BString& value, int32 index)
 {
 	// Find our name-value-pair and the delimiter.
@@ -795,8 +767,7 @@ BNetworkCookie::_ExtractNameValuePair(const BString& cookieString,
 }
 
 
-int32
-BNetworkCookie::_ExtractAttributeValuePair(const BString& cookieString,
+int32 BNetworkCookie::_ExtractAttributeValuePair(const BString& cookieString,
 	BString& attribute, BString& value, int32 index)
 {
 	// Find the end of our cookie-av.

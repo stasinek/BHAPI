@@ -47,8 +47,7 @@ public:
  		return fContent;
 	}
 
-	void*
-	Data() const
+	void*   	Data() const
 	{
 		return (void*)fBuffer;
 	}
@@ -65,13 +64,11 @@ private:
 };
 
 
-status_t
-NonParameterCommandRequest(uint8 ofg, uint8 ocf, int32* result, hci_id hId,
+status_t NonParameterCommandRequest(uint8 ofg, uint8 ocf, int32* result, hci_id hId,
 	BMessenger* messenger);
 
 template<typename PARAMETERCONTAINER, typename PARAMETERTYPE>
-status_t
-SingleParameterCommandRequest(uint8 ofg, uint8 ocf, PARAMETERTYPE parameter,
+status_t SingleParameterCommandRequest(uint8 ofg, uint8 ocf, PARAMETERTYPE parameter,
 	int32* result, hci_id hId, BMessenger* messenger)
 {
 	int8 bt_status = BT_ERROR;

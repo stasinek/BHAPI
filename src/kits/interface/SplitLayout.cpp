@@ -265,8 +265,7 @@ BSplitLayout::~BSplitLayout()
 }
 
 
-void
-BSplitLayout::SetInsets(float left, float top, float right, float bottom)
+void BSplitLayout::SetInsets(float left, float top, float right, float bottom)
 {
 	fLeftInset = left;
 	fTopInset = top;
@@ -277,8 +276,7 @@ BSplitLayout::SetInsets(float left, float top, float right, float bottom)
 }
 
 
-void
-BSplitLayout::GetInsets(float* left, float* top, float* right,
+void BSplitLayout::GetInsets(float* left, float* top, float* right,
 	float* bottom) const
 {
 	if (left)
@@ -299,8 +297,7 @@ BSplitLayout::Spacing() const
 }
 
 
-void
-BSplitLayout::SetSpacing(float spacing)
+void BSplitLayout::SetSpacing(float spacing)
 {
 	spacing = BControlLook::ComposeSpacing(spacing);
 	if (spacing != fSpacing) {
@@ -318,8 +315,7 @@ BSplitLayout::Orientation() const
 }
 
 
-void
-BSplitLayout::SetOrientation(orientation orientation)
+void BSplitLayout::SetOrientation(orientation orientation)
 {
 	if (orientation != fOrientation) {
 		fOrientation = orientation;
@@ -336,8 +332,7 @@ BSplitLayout::SplitterSize() const
 }
 
 
-void
-BSplitLayout::SetSplitterSize(float size)
+void BSplitLayout::SetSplitterSize(float size)
 {
 	if (size != fSplitterSize) {
 		fSplitterSize = size;
@@ -379,29 +374,25 @@ BSplitLayout::AddView(int32 index, BView* child, float weight)
 }
 
 
-bool
-BSplitLayout::AddItem(BLayoutItem* item)
+bool BSplitLayout::AddItem(BLayoutItem* item)
 {
 	return BAbstractLayout::AddItem(item);
 }
 
 
-bool
-BSplitLayout::AddItem(int32 index, BLayoutItem* item)
+bool BSplitLayout::AddItem(int32 index, BLayoutItem* item)
 {
 	return BAbstractLayout::AddItem(index, item);
 }
 
 
-bool
-BSplitLayout::AddItem(BLayoutItem* item, float weight)
+bool BSplitLayout::AddItem(BLayoutItem* item, float weight)
 {
 	return AddItem(-1, item, weight);
 }
 
 
-bool
-BSplitLayout::AddItem(int32 index, BLayoutItem* item, float weight)
+bool BSplitLayout::AddItem(int32 index, BLayoutItem* item, float weight)
 {
 	bool success = AddItem(index, item);
 	if (success)
@@ -430,8 +421,7 @@ BSplitLayout::ItemWeight(BLayoutItem* item) const
 }
 
 
-void
-BSplitLayout::SetItemWeight(int32 index, float weight, bool invalidateLayout)
+void BSplitLayout::SetItemWeight(int32 index, float weight, bool invalidateLayout)
 {
 	if (index < 0 || index >= CountItems())
 		return;
@@ -454,52 +444,45 @@ BSplitLayout::SetItemWeight(int32 index, float weight, bool invalidateLayout)
 }
 
 
-void
-BSplitLayout::SetItemWeight(BLayoutItem* item, float weight)
+void BSplitLayout::SetItemWeight(BLayoutItem* item, float weight)
 {
 	if (ItemLayoutInfo* info = _ItemLayoutInfo(item))
 		info->weight = weight;
 }
 
 
-bool
-BSplitLayout::IsCollapsible(int32 index) const
+bool BSplitLayout::IsCollapsible(int32 index) const
 {
 	return _ItemLayoutInfo(ItemAt(index))->isCollapsible;
 }
 
 
-void
-BSplitLayout::SetCollapsible(bool collapsible)
+void BSplitLayout::SetCollapsible(bool collapsible)
 {
 	SetCollapsible(0, CountItems() - 1, collapsible);
 }
 
 
-void
-BSplitLayout::SetCollapsible(int32 index, bool collapsible)
+void BSplitLayout::SetCollapsible(int32 index, bool collapsible)
 {
 	SetCollapsible(index, index, collapsible);
 }
 
 
-void
-BSplitLayout::SetCollapsible(int32 first, int32 last, bool collapsible)
+void BSplitLayout::SetCollapsible(int32 first, int32 last, bool collapsible)
 {
 	for (int32 i = first; i <= last; i++)
 		_ItemLayoutInfo(ItemAt(i))->isCollapsible = collapsible;
 }
 
 
-bool
-BSplitLayout::IsItemCollapsed(int32 index) const
+bool BSplitLayout::IsItemCollapsed(int32 index) const
 {
 	return !_ItemLayoutInfo(ItemAt(index))->isVisible;
 }
 
 
-void
-BSplitLayout::SetItemCollapsed(int32 index, bool collapsed)
+void BSplitLayout::SetItemCollapsed(int32 index, bool collapsed)
 {
 	ItemAt(index)->SetVisible(!collapsed);
 
@@ -541,8 +524,7 @@ BSplitLayout::BaseAlignment()
 }
 
 
-bool
-BSplitLayout::HasHeightForWidth()
+bool BSplitLayout::HasHeightForWidth()
 {
 	_ValidateMinMax();
 
@@ -550,8 +532,7 @@ BSplitLayout::HasHeightForWidth()
 }
 
 
-void
-BSplitLayout::GetHeightForWidth(float width, float* min, float* max,
+void BSplitLayout::GetHeightForWidth(float width, float* min, float* max,
 	float* preferred)
 {
 	if (!HasHeightForWidth())
@@ -563,8 +544,7 @@ BSplitLayout::GetHeightForWidth(float width, float* min, float* max,
 }
 
 
-void
-BSplitLayout::LayoutInvalidated(bool children)
+void BSplitLayout::LayoutInvalidated(bool children)
 {
 	delete fHorizontalLayouter;
 	delete fVerticalLayouter;
@@ -582,8 +562,7 @@ BSplitLayout::LayoutInvalidated(bool children)
 }
 
 
-void
-BSplitLayout::DoLayout()
+void BSplitLayout::DoLayout()
 {
 	_ValidateMinMax();
 
@@ -670,15 +649,13 @@ BSplitLayout::SplitterItemFrame(int32 index) const
 }
 
 
-bool
-BSplitLayout::IsAboveSplitter(const BPoint& point) const
+bool BSplitLayout::IsAboveSplitter(const BPoint& point) const
 {
 	return _SplitterItemAt(point) != NULL;
 }
 
 
-bool
-BSplitLayout::StartDraggingSplitter(BPoint point)
+bool BSplitLayout::StartDraggingSplitter(BPoint point)
 {
 	StopDraggingSplitter();
 
@@ -707,8 +684,7 @@ BSplitLayout::StartDraggingSplitter(BPoint point)
 }
 
 
-bool
-BSplitLayout::DragSplitter(BPoint point)
+bool BSplitLayout::DragSplitter(BPoint point)
 {
 	if (fDraggingSplitterIndex < 0)
 		return false;
@@ -726,8 +702,7 @@ BSplitLayout::DragSplitter(BPoint point)
 }
 
 
-bool
-BSplitLayout::StopDraggingSplitter()
+bool BSplitLayout::StopDraggingSplitter()
 {
 	if (fDraggingSplitterIndex < 0)
 		return false;
@@ -741,15 +716,13 @@ BSplitLayout::StopDraggingSplitter()
 }
 
 
-int32
-BSplitLayout::DraggedSplitter() const
+int32 BSplitLayout::DraggedSplitter() const
 {
 	return fDraggingSplitterIndex;
 }
 
 
-status_t
-BSplitLayout::Archive(BMessage* into, bool deep) const
+status_t BSplitLayout::Archive(BMessage* into, bool deep) const
 {
 	BArchiver archiver(into);
 	status_t err = BAbstractLayout::Archive(into, deep);
@@ -781,8 +754,7 @@ BSplitLayout::Instantiate(BMessage* from)
 }
 
 
-status_t
-BSplitLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32 index) const
+status_t BSplitLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32 index) const
 {
 	ItemLayoutInfo* info = _ItemLayoutInfo(item);
 
@@ -794,8 +766,7 @@ BSplitLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32 index) const
 }
 
 
-status_t
-BSplitLayout::ItemUnarchived(const BMessage* from,
+status_t BSplitLayout::ItemUnarchived(const BMessage* from,
 	BLayoutItem* item, int32 index)
 {
 	ItemLayoutInfo* info = _ItemLayoutInfo(item);
@@ -809,8 +780,7 @@ BSplitLayout::ItemUnarchived(const BMessage* from,
 }
 
 
-bool
-BSplitLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
+bool BSplitLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
 {
 	ItemLayoutInfo* itemInfo = new(nothrow) ItemLayoutInfo();
 	if (!itemInfo)
@@ -835,8 +805,7 @@ BSplitLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
 }
 
 
-void
-BSplitLayout::ItemRemoved(BLayoutItem* item, int32 atIndex)
+void BSplitLayout::ItemRemoved(BLayoutItem* item, int32 atIndex)
 {
 	if (fSplitterItems.CountItems() > 0) {
 		SplitterItem* splitterItem = (SplitterItem*)fSplitterItems.RemoveItem(
@@ -850,8 +819,7 @@ BSplitLayout::ItemRemoved(BLayoutItem* item, int32 atIndex)
 }
 
 
-void
-BSplitLayout::_InvalidateCachedHeightForWidth()
+void BSplitLayout::_InvalidateCachedHeightForWidth()
 {
 	delete fHeightForWidthVerticalLayouter;
 	delete fHeightForWidthHorizontalLayoutInfo;
@@ -888,8 +856,7 @@ BSplitLayout::_SplitterItemAt(int32 index) const
 }
 
 
-void
-BSplitLayout::_GetSplitterValueRange(int32 index, ValueRange& range)
+void BSplitLayout::_GetSplitterValueRange(int32 index, ValueRange& range)
 {
 	ItemLayoutInfo* previousInfo = _ItemLayoutInfo(ItemAt(index));
 	ItemLayoutInfo* nextInfo = _ItemLayoutInfo(ItemAt(index + 1));
@@ -917,8 +884,7 @@ BSplitLayout::_GetSplitterValueRange(int32 index, ValueRange& range)
 }
 
 
-int32
-BSplitLayout::_SplitterValue(int32 index) const
+int32 BSplitLayout::_SplitterValue(int32 index) const
 {
 	ItemLayoutInfo* info = _ItemLayoutInfo(ItemAt(index));
 	if (info && info->isVisible) {
@@ -931,8 +897,7 @@ BSplitLayout::_SplitterValue(int32 index) const
 }
 
 
-void
-BSplitLayout::_LayoutItem(BLayoutItem* item, BRect frame, bool visible)
+void BSplitLayout::_LayoutItem(BLayoutItem* item, BRect frame, bool visible)
 {
 	// update the layout frame
 	ItemLayoutInfo* info = _ItemLayoutInfo(item);
@@ -960,8 +925,7 @@ BSplitLayout::_LayoutItem(BLayoutItem* item, BRect frame, bool visible)
 }
 
 
-void
-BSplitLayout::_LayoutItem(BLayoutItem* item, ItemLayoutInfo* info)
+void BSplitLayout::_LayoutItem(BLayoutItem* item, ItemLayoutInfo* info)
 {
 	// update the visibility of the item
 	bool isVisible = item->IsVisible();
@@ -983,8 +947,7 @@ BSplitLayout::_LayoutItem(BLayoutItem* item, ItemLayoutInfo* info)
 }
 
 
-bool
-BSplitLayout::_SetSplitterValue(int32 index, int32 value)
+bool BSplitLayout::_SetSplitterValue(int32 index, int32 value)
 {
 	// if both items are collapsed, nothing can be dragged
 	BLayoutItem* previousItem = ItemAt(index);
@@ -1219,8 +1182,7 @@ BSplitLayout::_ItemLayoutInfo(BLayoutItem* item) const
 }
 
 
-void
-BSplitLayout::_UpdateSplitterWeights()
+void BSplitLayout::_UpdateSplitterWeights()
 {
 	int32 count = CountItems();
 	for (int32 i = 0; i < count; i++) {
@@ -1242,8 +1204,7 @@ BSplitLayout::_UpdateSplitterWeights()
 }
 
 
-void
-BSplitLayout::_ValidateMinMax()
+void BSplitLayout::_ValidateMinMax()
 {
 	if (fHorizontalLayouter != NULL)
 		return;
@@ -1315,8 +1276,7 @@ BSplitLayout::_ValidateMinMax()
 }
 
 
-void
-BSplitLayout::_InternalGetHeightForWidth(float width, bool realLayout,
+void BSplitLayout::_InternalGetHeightForWidth(float width, bool realLayout,
 	float* minHeight, float* maxHeight, float* preferredHeight)
 {
 	if ((realLayout && fHeightForWidthVerticalLayouterWidth != width)
@@ -1416,8 +1376,7 @@ BSplitLayout::_AddInsets(BSize size)
 }
 
 
-void
-BSplitLayout::_AddInsets(float* minHeight, float* maxHeight,
+void BSplitLayout::_AddInsets(float* minHeight, float* maxHeight,
 	float* preferredHeight)
 {
 	float insets = fTopInset + fBottomInset - 1;

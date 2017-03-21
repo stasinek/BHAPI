@@ -32,30 +32,26 @@ BPackageInfoContentHandler::~BPackageInfoContentHandler()
 }
 
 
-status_t
-BPackageInfoContentHandler::HandleEntry(BPackageEntry* entry)
+status_t BPackageInfoContentHandler::HandleEntry(BPackageEntry* entry)
 {
 	return B_OK;
 }
 
 
-status_t
-BPackageInfoContentHandler::HandleEntryAttribute(BPackageEntry* entry,
+status_t BPackageInfoContentHandler::HandleEntryAttribute(BPackageEntry* entry,
 	BPackageEntryAttribute* attribute)
 {
 	return B_OK;
 }
 
 
-status_t
-BPackageInfoContentHandler::HandleEntryDone(BPackageEntry* entry)
+status_t BPackageInfoContentHandler::HandleEntryDone(BPackageEntry* entry)
 {
 	return B_OK;
 }
 
 
-status_t
-BPackageInfoContentHandler::HandlePackageAttribute(
+status_t BPackageInfoContentHandler::HandlePackageAttribute(
 	const BPackageInfoAttributeValue& value)
 {
 	switch (value.attributeID) {
@@ -153,8 +149,7 @@ BPackageInfoContentHandler::HandlePackageAttribute(
 }
 
 
-void
-BPackageInfoContentHandler::HandleErrorOccurred()
+void BPackageInfoContentHandler::HandleErrorOccurred()
 {
 }
 

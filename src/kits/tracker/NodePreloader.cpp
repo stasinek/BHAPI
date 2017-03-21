@@ -85,8 +85,7 @@ NodePreloader::~NodePreloader()
 }
 
 
-void
-NodePreloader::Run()
+void NodePreloader::Run()
 {
 	fLock.Lock();
 	Thread::Launch(NewMemberFunctionObject(&NodePreloader::Preload, this));
@@ -106,8 +105,7 @@ NodePreloader::FindModel(node_ref itemNode) const
 }
 
 
-void
-NodePreloader::MessageReceived(BMessage* message)
+void NodePreloader::MessageReceived(BMessage* message)
 {
 	// respond to node monitor notifications
 
@@ -160,8 +158,7 @@ NodePreloader::MessageReceived(BMessage* message)
 }
 
 
-void
-NodePreloader::PreloadOne(const char* dirPath)
+void NodePreloader::PreloadOne(const char* dirPath)
 {
 	//PRINT(("preloading directory %s\n", dirPath));
 	BDirectory dir(dirPath);
@@ -199,8 +196,7 @@ NodePreloader::PreloadOne(const char* dirPath)
 }
 
 
-void
-NodePreloader::Preload()
+void NodePreloader::Preload()
 {
 	for (int32 count = 100; count >= 0; count--) {
 		// wait for a little bit before going ahead to reduce disk access

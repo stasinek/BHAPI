@@ -91,8 +91,7 @@ BLineGenerator::BLineGenerator(BPoint start, BPoint end)
 
 // 初始化直线方向
 // fDirection: 0 - 7 (0为水平递增方向,相应逆时针方向递增)
-void
-BLineGenerator::InitDirection()
+void BLineGenerator::InitDirection()
 {
 	if(fEnd.y == fStart.y)
 		fDirection = (fEnd.x >= fStart.x ? 0 : 4);
@@ -137,8 +136,7 @@ bool BLineGenerator::Start(__be_int32 &<emphasis>x</emphasis>,
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-bool
-BLineGenerator::Start(__be_int32 &x,  __be_int32 &y,  __be_int32 &step,  __be_int32 &pixels, bool isLoopX, float pixel_size)
+bool BLineGenerator::Start(__be_int32 &x,  __be_int32 &y,  __be_int32 &step,  __be_int32 &pixels, bool isLoopX, float pixel_size)
 {
 	if(pixel_size <= 0) return false;
 
@@ -316,8 +314,7 @@ bool BLineGenerator::Next(__be_int32 &<emphasis>next</emphasis>,  __be_int32 &<e
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-bool
-BLineGenerator::Next(__be_int32 &next,  __be_int32 &pixels)
+bool BLineGenerator::Next(__be_int32 &next,  __be_int32 &pixels)
 {
 	if(fStep == 0) return false;
 

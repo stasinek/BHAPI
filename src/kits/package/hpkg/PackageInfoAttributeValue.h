@@ -103,16 +103,14 @@ BPackageInfoAttributeValue::BPackageInfoAttributeValue()
 }
 
 
-inline void
-BPackageInfoAttributeValue::SetTo(BPackageInfoAttributeID id, uint8 value)
+inline void BPackageInfoAttributeValue::SetTo(BPackageInfoAttributeID id, uint8 value)
 {
 	attributeID = id;
 	unsignedInt = value;
 }
 
 
-inline void
-BPackageInfoAttributeValue::SetTo(BPackageInfoAttributeID id,
+inline void BPackageInfoAttributeValue::SetTo(BPackageInfoAttributeID id,
 	const char* value)
 {
 	attributeID = id;
@@ -120,8 +118,7 @@ BPackageInfoAttributeValue::SetTo(BPackageInfoAttributeID id,
 }
 
 
-inline void
-BPackageInfoAttributeValue::Clear()
+inline void BPackageInfoAttributeValue::Clear()
 {
 	memset(this, 0, sizeof(BPackageInfoAttributeValue));
 	attributeID = B_PACKAGE_INFO_ENUM_COUNT;

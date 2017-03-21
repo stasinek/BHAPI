@@ -266,8 +266,7 @@ BPackageInfo::~BPackageInfo()
 }
 
 
-status_t
-BPackageInfo::ReadFromConfigFile(const BEntry& packageInfoEntry,
+status_t BPackageInfo::ReadFromConfigFile(const BEntry& packageInfoEntry,
 	ParseErrorListener* listener)
 {
 	status_t result = packageInfoEntry.InitCheck();
@@ -282,8 +281,7 @@ BPackageInfo::ReadFromConfigFile(const BEntry& packageInfoEntry,
 }
 
 
-status_t
-BPackageInfo::ReadFromConfigFile(BFile& packageInfoFile,
+status_t BPackageInfo::ReadFromConfigFile(BFile& packageInfoFile,
 	ParseErrorListener* listener)
 {
 	off_t size;
@@ -308,8 +306,7 @@ BPackageInfo::ReadFromConfigFile(BFile& packageInfoFile,
 }
 
 
-status_t
-BPackageInfo::ReadFromConfigString(const BString& packageInfoString,
+status_t BPackageInfo::ReadFromConfigString(const BString& packageInfoString,
 	ParseErrorListener* listener)
 {
 	Clear();
@@ -319,22 +316,19 @@ BPackageInfo::ReadFromConfigString(const BString& packageInfoString,
 }
 
 
-status_t
-BPackageInfo::ReadFromPackageFile(const char* path)
+status_t BPackageInfo::ReadFromPackageFile(const char* path)
 {
 	return _ReadFromPackageFile(PackageFileLocation(path));
 }
 
 
-status_t
-BPackageInfo::ReadFromPackageFile(int fd)
+status_t BPackageInfo::ReadFromPackageFile(int fd)
 {
 	return _ReadFromPackageFile(PackageFileLocation(fd));
 }
 
 
-status_t
-BPackageInfo::InitCheck() const
+status_t BPackageInfo::InitCheck() const
 {
 	if (fName.Length() == 0 || fSummary.Length() == 0
 		|| fDescription.Length() == 0 || fVendor.Length() == 0
@@ -456,8 +450,7 @@ BPackageInfo::FileName() const
 }
 
 
-uint32
-BPackageInfo::Flags() const
+uint32 BPackageInfo::Flags() const
 {
 	return fFlags;
 }
@@ -470,8 +463,7 @@ BPackageInfo::Architecture() const
 }
 
 
-const char*
-BPackageInfo::ArchitectureName() const
+const char*  BPackageInfo::ArchitectureName() const
 {
 	if ((int)fArchitecture < 0
 		|| fArchitecture >= B_PACKAGE_ARCHITECTURE_ENUM_COUNT) {
@@ -604,8 +596,7 @@ BPackageInfo::CanonicalFileName() const
 }
 
 
-bool
-BPackageInfo::Matches(const BPackageResolvableExpression& expression) const
+bool BPackageInfo::Matches(const BPackageResolvableExpression& expression) const
 {
 	// check for an explicit match on the package
 	if (expression.Name().StartsWith("pkg:")) {
@@ -625,156 +616,134 @@ BPackageInfo::Matches(const BPackageResolvableExpression& expression) const
 }
 
 
-void
-BPackageInfo::SetName(const BString& name)
+void BPackageInfo::SetName(const BString& name)
 {
 	fName = name;
 	fName.ToLower();
 }
 
 
-void
-BPackageInfo::SetSummary(const BString& summary)
+void BPackageInfo::SetSummary(const BString& summary)
 {
 	fSummary = summary;
 }
 
 
-void
-BPackageInfo::SetDescription(const BString& description)
+void BPackageInfo::SetDescription(const BString& description)
 {
 	fDescription = description;
 }
 
 
-void
-BPackageInfo::SetVendor(const BString& vendor)
+void BPackageInfo::SetVendor(const BString& vendor)
 {
 	fVendor = vendor;
 }
 
 
-void
-BPackageInfo::SetPackager(const BString& packager)
+void BPackageInfo::SetPackager(const BString& packager)
 {
 	fPackager = packager;
 }
 
 
-void
-BPackageInfo::SetBasePackage(const BString& basePackage)
+void BPackageInfo::SetBasePackage(const BString& basePackage)
 {
 	fBasePackage = basePackage;
 }
 
 
-void
-BPackageInfo::SetChecksum(const BString& checksum)
+void BPackageInfo::SetChecksum(const BString& checksum)
 {
 	fChecksum = checksum;
 }
 
 
-void
-BPackageInfo::SetInstallPath(const BString& installPath)
+void BPackageInfo::SetInstallPath(const BString& installPath)
 {
 	fInstallPath = installPath;
 }
 
 
-void
-BPackageInfo::SetFileName(const BString& fileName)
+void BPackageInfo::SetFileName(const BString& fileName)
 {
 	fFileName = fileName;
 }
 
 
-void
-BPackageInfo::SetVersion(const BPackageVersion& version)
+void BPackageInfo::SetVersion(const BPackageVersion& version)
 {
 	fVersion = version;
 }
 
 
-void
-BPackageInfo::SetFlags(uint32 flags)
+void BPackageInfo::SetFlags(uint32 flags)
 {
 	fFlags = flags;
 }
 
 
-void
-BPackageInfo::SetArchitecture(BPackageArchitecture architecture)
+void BPackageInfo::SetArchitecture(BPackageArchitecture architecture)
 {
 	fArchitecture = architecture;
 }
 
 
-void
-BPackageInfo::ClearCopyrightList()
+void BPackageInfo::ClearCopyrightList()
 {
 	fCopyrightList.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddCopyright(const BString& copyright)
+status_t BPackageInfo::AddCopyright(const BString& copyright)
 {
 	return fCopyrightList.Add(copyright) ? B_OK : B_ERROR;
 }
 
 
-void
-BPackageInfo::ClearLicenseList()
+void BPackageInfo::ClearLicenseList()
 {
 	fLicenseList.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddLicense(const BString& license)
+status_t BPackageInfo::AddLicense(const BString& license)
 {
 	return fLicenseList.Add(license) ? B_OK : B_ERROR;
 }
 
 
-void
-BPackageInfo::ClearURLList()
+void BPackageInfo::ClearURLList()
 {
 	fURLList.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddURL(const BString& url)
+status_t BPackageInfo::AddURL(const BString& url)
 {
 	return fURLList.Add(url) ? B_OK : B_NO_MEMORY;
 }
 
 
-void
-BPackageInfo::ClearSourceURLList()
+void BPackageInfo::ClearSourceURLList()
 {
 	fSourceURLList.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddSourceURL(const BString& url)
+status_t BPackageInfo::AddSourceURL(const BString& url)
 {
 	return fSourceURLList.Add(url) ? B_OK : B_NO_MEMORY;
 }
 
 
-void
-BPackageInfo::ClearGlobalWritableFileInfos()
+void BPackageInfo::ClearGlobalWritableFileInfos()
 {
 	fGlobalWritableFileInfos.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddGlobalWritableFileInfo(const BGlobalWritableFileInfo& info)
+status_t BPackageInfo::AddGlobalWritableFileInfo(const BGlobalWritableFileInfo& info)
 {
 	BGlobalWritableFileInfo* newInfo
 		= new (std::nothrow) BGlobalWritableFileInfo(info);
@@ -787,15 +756,13 @@ BPackageInfo::AddGlobalWritableFileInfo(const BGlobalWritableFileInfo& info)
 }
 
 
-void
-BPackageInfo::ClearUserSettingsFileInfos()
+void BPackageInfo::ClearUserSettingsFileInfos()
 {
 	fUserSettingsFileInfos.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddUserSettingsFileInfo(const BUserSettingsFileInfo& info)
+status_t BPackageInfo::AddUserSettingsFileInfo(const BUserSettingsFileInfo& info)
 {
 	BUserSettingsFileInfo* newInfo
 		= new (std::nothrow) BUserSettingsFileInfo(info);
@@ -808,15 +775,13 @@ BPackageInfo::AddUserSettingsFileInfo(const BUserSettingsFileInfo& info)
 }
 
 
-void
-BPackageInfo::ClearUsers()
+void BPackageInfo::ClearUsers()
 {
 	fUsers.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddUser(const BUser& user)
+status_t BPackageInfo::AddUser(const BUser& user)
 {
 	BUser* newUser = new (std::nothrow) BUser(user);
 	if (newUser == NULL || !fUsers.AddItem(newUser)) {
@@ -828,43 +793,37 @@ BPackageInfo::AddUser(const BUser& user)
 }
 
 
-void
-BPackageInfo::ClearGroups()
+void BPackageInfo::ClearGroups()
 {
 	fGroups.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddGroup(const BString& group)
+status_t BPackageInfo::AddGroup(const BString& group)
 {
 	return fGroups.Add(group) ? B_OK : B_NO_MEMORY;
 }
 
 
-void
-BPackageInfo::ClearPostInstallScripts()
+void BPackageInfo::ClearPostInstallScripts()
 {
 	fPostInstallScripts.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddPostInstallScript(const BString& path)
+status_t BPackageInfo::AddPostInstallScript(const BString& path)
 {
 	return fPostInstallScripts.Add(path) ? B_OK : B_NO_MEMORY;
 }
 
 
-void
-BPackageInfo::ClearProvidesList()
+void BPackageInfo::ClearProvidesList()
 {
 	fProvidesList.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddProvides(const BPackageResolvable& provides)
+status_t BPackageInfo::AddProvides(const BPackageResolvable& provides)
 {
 	BPackageResolvable* newProvides
 		= new (std::nothrow) BPackageResolvable(provides);
@@ -875,15 +834,13 @@ BPackageInfo::AddProvides(const BPackageResolvable& provides)
 }
 
 
-void
-BPackageInfo::ClearRequiresList()
+void BPackageInfo::ClearRequiresList()
 {
 	fRequiresList.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddRequires(const BPackageResolvableExpression& requires)
+status_t BPackageInfo::AddRequires(const BPackageResolvableExpression& requires)
 {
 	BPackageResolvableExpression* newRequires
 		= new (std::nothrow) BPackageResolvableExpression(requires);
@@ -894,15 +851,13 @@ BPackageInfo::AddRequires(const BPackageResolvableExpression& requires)
 }
 
 
-void
-BPackageInfo::ClearSupplementsList()
+void BPackageInfo::ClearSupplementsList()
 {
 	fSupplementsList.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddSupplements(const BPackageResolvableExpression& supplements)
+status_t BPackageInfo::AddSupplements(const BPackageResolvableExpression& supplements)
 {
 	BPackageResolvableExpression* newSupplements
 		= new (std::nothrow) BPackageResolvableExpression(supplements);
@@ -913,15 +868,13 @@ BPackageInfo::AddSupplements(const BPackageResolvableExpression& supplements)
 }
 
 
-void
-BPackageInfo::ClearConflictsList()
+void BPackageInfo::ClearConflictsList()
 {
 	fConflictsList.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddConflicts(const BPackageResolvableExpression& conflicts)
+status_t BPackageInfo::AddConflicts(const BPackageResolvableExpression& conflicts)
 {
 	BPackageResolvableExpression* newConflicts
 		= new (std::nothrow) BPackageResolvableExpression(conflicts);
@@ -932,15 +885,13 @@ BPackageInfo::AddConflicts(const BPackageResolvableExpression& conflicts)
 }
 
 
-void
-BPackageInfo::ClearFreshensList()
+void BPackageInfo::ClearFreshensList()
 {
 	fFreshensList.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddFreshens(const BPackageResolvableExpression& freshens)
+status_t BPackageInfo::AddFreshens(const BPackageResolvableExpression& freshens)
 {
 	BPackageResolvableExpression* newFreshens
 		= new (std::nothrow) BPackageResolvableExpression(freshens);
@@ -951,22 +902,19 @@ BPackageInfo::AddFreshens(const BPackageResolvableExpression& freshens)
 }
 
 
-void
-BPackageInfo::ClearReplacesList()
+void BPackageInfo::ClearReplacesList()
 {
 	fReplacesList.MakeEmpty();
 }
 
 
-status_t
-BPackageInfo::AddReplaces(const BString& replaces)
+status_t BPackageInfo::AddReplaces(const BString& replaces)
 {
 	return fReplacesList.Add(BString(replaces).ToLower()) ? B_OK : B_ERROR;
 }
 
 
-void
-BPackageInfo::Clear()
+void BPackageInfo::Clear()
 {
 	fName.Truncate(0);
 	fSummary.Truncate(0);
@@ -998,8 +946,7 @@ BPackageInfo::Clear()
 }
 
 
-status_t
-BPackageInfo::Archive(BMessage* archive, bool deep) const
+status_t BPackageInfo::Archive(BMessage* archive, bool deep) const
 {
 	status_t error = BArchivable::Archive(archive, deep);
 	if (error != B_OK)
@@ -1057,8 +1004,7 @@ BPackageInfo::Instantiate(BMessage* archive)
 }
 
 
-status_t
-BPackageInfo::GetConfigString(BString& _string) const
+status_t BPackageInfo::GetConfigString(BString& _string) const
 {
 	return StringBuilder()
 		.Write("name", fName)
@@ -1101,8 +1047,7 @@ BPackageInfo::ToString() const
 }
 
 
-/*static*/ status_t
-BPackageInfo::GetArchitectureByName(const BString& name,
+/*static*/ status_t BPackageInfo::GetArchitectureByName(const BString& name,
 	BPackageArchitecture& _architecture)
 {
 	for (int i = 0; i < B_PACKAGE_ARCHITECTURE_ENUM_COUNT; ++i) {
@@ -1115,24 +1060,21 @@ BPackageInfo::GetArchitectureByName(const BString& name,
 }
 
 
-/*static*/ status_t
-BPackageInfo::ParseVersionString(const BString& string, bool revisionIsOptional,
+/*static*/ status_t BPackageInfo::ParseVersionString(const BString& string, bool revisionIsOptional,
 	BPackageVersion& _version, ParseErrorListener* listener)
 {
 	return Parser(listener).ParseVersion(string, revisionIsOptional, _version);
 }
 
 
-/*static*/ status_t
-BPackageInfo::ParseResolvableExpressionString(const BString& string,
+/*static*/ status_t BPackageInfo::ParseResolvableExpressionString(const BString& string,
 	BPackageResolvableExpression& _expression, ParseErrorListener* listener)
 {
 	return Parser(listener).ParseResolvableExpression(string, _expression);
 }
 
 
-status_t
-BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocation)
+status_t BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocation)
 {
 	BHPKG::BNoErrorOutput errorOutput;
 
@@ -1164,8 +1106,7 @@ BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocation)
 }
 
 
-/*static*/ status_t
-BPackageInfo::_AddVersion(BMessage* archive, const char* field,
+/*static*/ status_t BPackageInfo::_AddVersion(BMessage* archive, const char* field,
 	const BPackageVersion& version)
 {
 	// Storing BPackageVersion::ToString() would be nice, but the corresponding
@@ -1214,8 +1155,7 @@ BPackageInfo::_AddVersion(BMessage* archive, const char* field,
 }
 
 
-/*static*/ status_t
-BPackageInfo::_AddResolvables(BMessage* archive, const char* field,
+/*static*/ status_t BPackageInfo::_AddResolvables(BMessage* archive, const char* field,
 	const ResolvableList& resolvables)
 {
 	// construct the field names we need
@@ -1247,8 +1187,7 @@ BPackageInfo::_AddResolvables(BMessage* archive, const char* field,
 }
 
 
-/*static*/ status_t
-BPackageInfo::_AddResolvableExpressions(BMessage* archive, const char* field,
+/*static*/ status_t BPackageInfo::_AddResolvableExpressions(BMessage* archive, const char* field,
 	const ResolvableExpressionList& expressions)
 {
 	// construct the field names we need
@@ -1279,8 +1218,7 @@ BPackageInfo::_AddResolvableExpressions(BMessage* archive, const char* field,
 }
 
 
-/*static*/ status_t
-BPackageInfo::_AddGlobalWritableFileInfos(BMessage* archive, const char* field,
+/*static*/ status_t BPackageInfo::_AddGlobalWritableFileInfos(BMessage* archive, const char* field,
 	const GlobalWritableFileInfoList& infos)
 {
 	// construct the field names we need
@@ -1311,8 +1249,7 @@ BPackageInfo::_AddGlobalWritableFileInfos(BMessage* archive, const char* field,
 }
 
 
-/*static*/ status_t
-BPackageInfo::_AddUserSettingsFileInfos(BMessage* archive, const char* field,
+/*static*/ status_t BPackageInfo::_AddUserSettingsFileInfos(BMessage* archive, const char* field,
 	const UserSettingsFileInfoList& infos)
 {
 	// construct the field names we need
@@ -1343,8 +1280,7 @@ BPackageInfo::_AddUserSettingsFileInfos(BMessage* archive, const char* field,
 }
 
 
-/*static*/ status_t
-BPackageInfo::_AddUsers(BMessage* archive, const char* field,
+/*static*/ status_t BPackageInfo::_AddUsers(BMessage* archive, const char* field,
 	const UserList& users)
 {
 	// construct the field names we need
@@ -1381,8 +1317,7 @@ BPackageInfo::_AddUsers(BMessage* archive, const char* field,
 }
 
 
-/*static*/ status_t
-BPackageInfo::_ExtractVersion(BMessage* archive, const char* field, int32 index,
+/*static*/ status_t BPackageInfo::_ExtractVersion(BMessage* archive, const char* field, int32 index,
 	BPackageVersion& _version)
 {
 	// major
@@ -1437,8 +1372,7 @@ BPackageInfo::_ExtractVersion(BMessage* archive, const char* field, int32 index,
 }
 
 
-/*static*/ status_t
-BPackageInfo::_ExtractStringList(BMessage* archive, const char* field,
+/*static*/ status_t BPackageInfo::_ExtractStringList(BMessage* archive, const char* field,
 	BStringList& _list)
 {
 	status_t error = archive->FindStrings(field, &_list);
@@ -1447,8 +1381,7 @@ BPackageInfo::_ExtractStringList(BMessage* archive, const char* field,
 }
 
 
-/*static*/ status_t
-BPackageInfo::_ExtractResolvables(BMessage* archive, const char* field,
+/*static*/ status_t BPackageInfo::_ExtractResolvables(BMessage* archive, const char* field,
 	ResolvableList& _resolvables)
 {
 	// construct the field names we need
@@ -1500,8 +1433,7 @@ BPackageInfo::_ExtractResolvables(BMessage* archive, const char* field,
 }
 
 
-/*static*/ status_t
-BPackageInfo::_ExtractResolvableExpressions(BMessage* archive,
+/*static*/ status_t BPackageInfo::_ExtractResolvableExpressions(BMessage* archive,
 	const char* field, ResolvableExpressionList& _expressions)
 {
 	// construct the field names we need
@@ -1556,8 +1488,7 @@ BPackageInfo::_ExtractResolvableExpressions(BMessage* archive,
 }
 
 
-/*static*/ status_t
-BPackageInfo::_ExtractGlobalWritableFileInfos(BMessage* archive,
+/*static*/ status_t BPackageInfo::_ExtractGlobalWritableFileInfos(BMessage* archive,
 	const char* field, GlobalWritableFileInfoList& _infos)
 {
 	// construct the field names we need
@@ -1612,8 +1543,7 @@ BPackageInfo::_ExtractGlobalWritableFileInfos(BMessage* archive,
 }
 
 
-/*static*/ status_t
-BPackageInfo::_ExtractUserSettingsFileInfos(BMessage* archive,
+/*static*/ status_t BPackageInfo::_ExtractUserSettingsFileInfos(BMessage* archive,
 	const char* field, UserSettingsFileInfoList& _infos)
 {
 	// construct the field names we need
@@ -1664,8 +1594,7 @@ BPackageInfo::_ExtractUserSettingsFileInfos(BMessage* archive,
 }
 
 
-/*static*/ status_t
-BPackageInfo::_ExtractUsers(BMessage* archive, const char* field,
+/*static*/ status_t BPackageInfo::_ExtractUsers(BMessage* archive, const char* field,
 	UserList& _users)
 {
 	// construct the field names we need

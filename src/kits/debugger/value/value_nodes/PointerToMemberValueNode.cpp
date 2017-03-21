@@ -39,8 +39,7 @@ PointerToMemberValueNode::GetType() const
 }
 
 
-status_t
-PointerToMemberValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
+status_t PointerToMemberValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 	ValueLocation*& _location, Value*& _value)
 {
 	// get the location

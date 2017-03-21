@@ -29,8 +29,7 @@ BPartitionParameterEditor::~BPartitionParameterEditor()
 	For \c B_CREATE_PARAMETER_EDITOR editors, this will be the parent
 	partition.
 */
-void
-BPartitionParameterEditor::SetTo(BPartition* partition)
+void BPartitionParameterEditor::SetTo(BPartition* partition)
 {
 }
 
@@ -43,8 +42,7 @@ BPartitionParameterEditor::SetTo(BPartition* partition)
 	The message may contain a string field "parameter" with the value set
 	to the name of the changed parameter.
 */
-void
-BPartitionParameterEditor::SetModificationMessage(BMessage* message)
+void BPartitionParameterEditor::SetModificationMessage(BMessage* message)
 {
 	delete fModificationMessage;
 	fModificationMessage = message;
@@ -53,8 +51,7 @@ BPartitionParameterEditor::SetModificationMessage(BMessage* message)
 
 /*!	\brief The currently set modification message, if any.
 */
-BMessage*
-BPartitionParameterEditor::ModificationMessage() const
+BMessage*  BPartitionParameterEditor::ModificationMessage() const
 {
 	return fModificationMessage;
 }
@@ -91,8 +88,7 @@ BPartitionParameterEditor::View()
 
 	\return \c true, if the current parameters are valid, \c false otherwise.
 */
-bool
-BPartitionParameterEditor::ValidateParameters() const
+bool BPartitionParameterEditor::ValidateParameters() const
 {
 	return true;
 }
@@ -112,8 +108,7 @@ BPartitionParameterEditor::ValidateParameters() const
 	\param variant The new value of the parameter.
 	\return \c B_OK, if everything went fine, another error code otherwise.
 */
-status_t
-BPartitionParameterEditor::ParameterChanged(const char* name,
+status_t BPartitionParameterEditor::ParameterChanged(const char* name,
 	const BVariant& variant)
 {
 	return B_NOT_SUPPORTED;
@@ -129,8 +124,7 @@ BPartitionParameterEditor::ParameterChanged(const char* name,
 
 	\return \c B_OK, if everything went fine, another error code otherwise.
 */
-status_t
-BPartitionParameterEditor::GetParameters(BString& parameters)
+status_t BPartitionParameterEditor::GetParameters(BString& parameters)
 {
 	parameters.SetTo("");
 	return B_OK;

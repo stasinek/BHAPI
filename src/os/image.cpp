@@ -256,15 +256,13 @@ load_add_on(char const *name)
 }
 
 
-status_t
-unload_add_on(image_id id)
+status_t unload_add_on(image_id id)
 {
 	return __gRuntimeLoader->unload_add_on(id);
 }
 
 
-status_t
-get_image_symbol(image_id id, char const *symbolName, int32 symbolType,
+status_t get_image_symbol(image_id id, char const *symbolName, int32 symbolType,
 	void **_location)
 {
 	return __gRuntimeLoader->get_image_symbol(id, symbolName, symbolType,
@@ -272,8 +270,7 @@ get_image_symbol(image_id id, char const *symbolName, int32 symbolType,
 }
 
 
-status_t
-get_image_symbol_etc(image_id id, char const *symbolName, int32 symbolType,
+status_t get_image_symbol_etc(image_id id, char const *symbolName, int32 symbolType,
 	bool recursive, image_id *_inImage, void **_location)
 {
 	return __gRuntimeLoader->get_image_symbol(id, symbolName, symbolType,
@@ -281,30 +278,26 @@ get_image_symbol_etc(image_id id, char const *symbolName, int32 symbolType,
 }
 
 
-status_t
-get_nth_image_symbol(image_id id, int32 num, char *nameBuffer, int32 *_nameLength,
+status_t get_nth_image_symbol(image_id id, int32 num, char *nameBuffer, int32 *_nameLength,
 	int32 *_symbolType, void **_location)
 {
 	return __gRuntimeLoader->get_nth_image_symbol(id, num, nameBuffer, _nameLength, _symbolType, _location);
 }
 
 
-status_t
-_get_image_info(image_id id, image_info *info, size_t infoSize)
+status_t _get_image_info(image_id id, image_info *info, size_t infoSize)
 {
 	return _kern_get_image_info(id, info, infoSize);
 }
 
 
-status_t
-_get_next_image_info(team_id team, int32 *cookie, image_info *info, size_t infoSize)
+status_t _get_next_image_info(team_id team, int32 *cookie, image_info *info, size_t infoSize)
 {
 	return _kern_get_next_image_info(team, cookie, info, infoSize);
 }
 
 
-void
-clear_caches(void *address, size_t length, uint32 flags)
+void clear_caches(void *address, size_t length, uint32 flags)
 {
 	_kern_clear_caches(address, length, flags);
 }
@@ -353,8 +346,7 @@ next_argument(char **_start, bool separate)
 }
 
 
-status_t
-__parse_invoke_line(char *invoker, char ***_newArgs,
+status_t __parse_invoke_line(char *invoker, char ***_newArgs,
 	char * const **_oldArgs, int32 *_argCount, const char *arg0)
 {
 	int32 i, count = 0;
@@ -394,15 +386,13 @@ __parse_invoke_line(char *invoker, char ***_newArgs,
 }
 
 
-status_t
-__get_next_image_dependency(image_id id, uint32 *cookie, const char **_name)
+status_t __get_next_image_dependency(image_id id, uint32 *cookie, const char **_name)
 {
 	return __gRuntimeLoader->get_next_image_dependency(id, cookie, _name);
 }
 
 
-status_t
-__test_executable(const char *path, char *invoker)
+status_t __test_executable(const char *path, char *invoker)
 {
 	return __gRuntimeLoader->test_executable(path, invoker);
 }
@@ -417,8 +407,7 @@ __test_executable(const char *path, char *invoker)
 	executed. If the executable file specifies changes to environment variable
 	values, those will be performed.
 */
-status_t
-__flatten_process_args(const char* const* args, int32 argCount,
+status_t __flatten_process_args(const char* const* args, int32 argCount,
 	const char* const* env, int32* _envCount, const char* executablePath,
 	char*** _flatArgs, size_t* _flatSize)
 {
@@ -489,8 +478,7 @@ __flatten_process_args(const char* const* args, int32 argCount,
 
 
 extern "C" void _call_init_routines_(void);
-void
-_call_init_routines_(void)
+void _call_init_routines_(void)
 {
 	// This is called by the original BeOS startup code.
 	// We don't need it, because our loader already does the job, right?

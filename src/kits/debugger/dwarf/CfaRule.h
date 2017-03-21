@@ -104,46 +104,40 @@ CfaRule::CfaRule()
 }
 
 
-void
-CfaRule::SetToUndefined()
+void CfaRule::SetToUndefined()
 {
 	fType = CFA_RULE_UNDEFINED;
 }
 
 
-void
-CfaRule::SetToSameValue()
+void CfaRule::SetToSameValue()
 {
 	fType = CFA_RULE_SAME_VALUE;
 }
 
 
-void
-CfaRule::SetToLocationOffset(int64 offset)
+void CfaRule::SetToLocationOffset(int64 offset)
 {
 	fType = CFA_RULE_LOCATION_OFFSET;
 	fOffset = offset;
 }
 
 
-void
-CfaRule::SetToValueOffset(int64 offset)
+void CfaRule::SetToValueOffset(int64 offset)
 {
 	fType = CFA_RULE_VALUE_OFFSET;
 	fOffset = offset;
 }
 
 
-void
-CfaRule::SetToRegister(uint32 reg)
+void CfaRule::SetToRegister(uint32 reg)
 {
 	fType = CFA_RULE_REGISTER;
 	fRegister = reg;
 }
 
 
-void
-CfaRule::SetToLocationExpression(const void* block, size_t size)
+void CfaRule::SetToLocationExpression(const void* block, size_t size)
 {
 	fType = CFA_RULE_LOCATION_EXPRESSION;
 	fExpression.block = block;
@@ -151,8 +145,7 @@ CfaRule::SetToLocationExpression(const void* block, size_t size)
 }
 
 
-void
-CfaRule::SetToValueExpression(const void* block, size_t size)
+void CfaRule::SetToValueExpression(const void* block, size_t size)
 {
 	fType = CFA_RULE_VALUE_EXPRESSION;
 	fExpression.block = block;
@@ -170,15 +163,13 @@ CfaCfaRule::CfaCfaRule()
 }
 
 
-void
-CfaCfaRule::SetToUndefined()
+void CfaCfaRule::SetToUndefined()
 {
 	fType = CFA_CFA_RULE_UNDEFINED;
 }
 
 
-void
-CfaCfaRule::SetToRegisterOffset(uint32 reg, uint64 offset)
+void CfaCfaRule::SetToRegisterOffset(uint32 reg, uint64 offset)
 {
 	fType = CFA_CFA_RULE_REGISTER_OFFSET;
 	fRegisterOffset.reg = reg;
@@ -186,8 +177,7 @@ CfaCfaRule::SetToRegisterOffset(uint32 reg, uint64 offset)
 }
 
 
-void
-CfaCfaRule::SetToExpression(const void* block, size_t size)
+void CfaCfaRule::SetToExpression(const void* block, size_t size)
 {
 	fType = CFA_CFA_RULE_EXPRESSION;
 	fExpression.block = block;
@@ -195,15 +185,13 @@ CfaCfaRule::SetToExpression(const void* block, size_t size)
 }
 
 
-void
-CfaCfaRule::SetRegister(uint32 reg)
+void CfaCfaRule::SetRegister(uint32 reg)
 {
 	fRegisterOffset.reg = reg;
 }
 
 
-void
-CfaCfaRule::SetOffset(uint64 offset)
+void CfaCfaRule::SetOffset(uint64 offset)
 {
 	fRegisterOffset.offset = offset;
 }

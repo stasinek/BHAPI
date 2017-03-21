@@ -42,8 +42,7 @@ BFileRequest::Result() const
 }
 
 
-status_t
-BFileRequest::_ProtocolLoop()
+status_t BFileRequest::_ProtocolLoop()
 {
 	BNode node(fUrl.Path().String());
 

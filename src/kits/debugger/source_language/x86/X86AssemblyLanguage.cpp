@@ -17,8 +17,7 @@ X86AssemblyLanguage::~X86AssemblyLanguage()
 }
 
 
-const char*
-X86AssemblyLanguage::Name() const
+const char*  X86AssemblyLanguage::Name() const
 {
 	return "x86 assembly";
 }

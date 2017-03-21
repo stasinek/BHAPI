@@ -306,8 +306,7 @@ TeamDebugInfo::~TeamDebugInfo()
 }
 
 
-status_t
-TeamDebugInfo::Init()
+status_t TeamDebugInfo::Init()
 {
 	// check the lock
 	status_t error = fLock.InitCheck();
@@ -374,24 +373,21 @@ TeamDebugInfo::Init()
 }
 
 
-status_t
-TeamDebugInfo::LookupTypeByName(const BString& name,
+status_t TeamDebugInfo::LookupTypeByName(const BString& name,
 	const TypeLookupConstraints& constraints, Type*& _type)
 {
 	return GetType(fTypeCache, name, constraints, _type);
 }
 
 
-bool
-TeamDebugInfo::TypeExistsByName(const BString& name,
+bool TeamDebugInfo::TypeExistsByName(const BString& name,
 	const TypeLookupConstraints& constraints)
 {
 	return HasType(fTypeCache, name, constraints);
 }
 
 
-status_t
-TeamDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
+status_t TeamDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
 	const TypeLookupConstraints& constraints, Type*& _type)
 {
 	// maybe the type is already cached
@@ -436,8 +432,7 @@ TeamDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
 }
 
 
-bool
-TeamDebugInfo::HasType(GlobalTypeCache* cache, const BString& name,
+bool TeamDebugInfo::HasType(GlobalTypeCache* cache, const BString& name,
 	const TypeLookupConstraints& constraints)
 {
 	// maybe the type is already cached
@@ -477,8 +472,7 @@ TeamDebugInfo::HasType(GlobalTypeCache* cache, const BString& name,
 }
 
 
-status_t
-TeamDebugInfo::GetActiveSourceCode(FunctionDebugInfo* info, SourceCode*& _code)
+status_t TeamDebugInfo::GetActiveSourceCode(FunctionDebugInfo* info, SourceCode*& _code)
 {
 	AutoLocker<BLocker> locker(fLock);
 
@@ -531,8 +525,7 @@ TeamDebugInfo::GetActiveSourceCode(FunctionDebugInfo* info, SourceCode*& _code)
 }
 
 
-status_t
-TeamDebugInfo::LoadImageDebugInfo(const ImageInfo& imageInfo,
+status_t TeamDebugInfo::LoadImageDebugInfo(const ImageInfo& imageInfo,
 	LocatableFile* imageFile, ImageDebugInfoLoadingState& _state,
 	ImageDebugInfo*& _imageDebugInfo)
 {
@@ -580,8 +573,7 @@ TeamDebugInfo::LoadImageDebugInfo(const ImageInfo& imageInfo,
 }
 
 
-status_t
-TeamDebugInfo::LoadSourceCode(LocatableFile* file, FileSourceCode*& _sourceCode)
+status_t TeamDebugInfo::LoadSourceCode(LocatableFile* file, FileSourceCode*& _sourceCode)
 {
 	AutoLocker<BLocker> locker(fLock);
 
@@ -652,8 +644,7 @@ TeamDebugInfo::LoadSourceCode(LocatableFile* file, FileSourceCode*& _sourceCode)
 }
 
 
-void
-TeamDebugInfo::ClearSourceCode(LocatableFile* sourceFile)
+void TeamDebugInfo::ClearSourceCode(LocatableFile* sourceFile)
 {
 	AutoLocker<BLocker> locker(fLock);
 
@@ -663,8 +654,7 @@ TeamDebugInfo::ClearSourceCode(LocatableFile* sourceFile)
 }
 
 
-status_t
-TeamDebugInfo::DisassembleFunction(FunctionInstance* functionInstance,
+status_t TeamDebugInfo::DisassembleFunction(FunctionInstance* functionInstance,
 	DisassembledCode*& _sourceCode)
 {
 	// allocate a buffer for the function code
@@ -689,8 +679,7 @@ TeamDebugInfo::DisassembleFunction(FunctionInstance* functionInstance,
 }
 
 
-status_t
-TeamDebugInfo::AddImageDebugInfo(ImageDebugInfo* imageDebugInfo)
+status_t TeamDebugInfo::AddImageDebugInfo(ImageDebugInfo* imageDebugInfo)
 {
 	AutoLocker<BLocker> locker(fLock);
 		// We have both locks now, so that for read-only access either lock
@@ -756,8 +745,7 @@ TeamDebugInfo::AddImageDebugInfo(ImageDebugInfo* imageDebugInfo)
 }
 
 
-void
-TeamDebugInfo::RemoveImageDebugInfo(ImageDebugInfo* imageDebugInfo)
+void TeamDebugInfo::RemoveImageDebugInfo(ImageDebugInfo* imageDebugInfo)
 {
 	AutoLocker<BLocker> locker(fLock);
 		// We have both locks now, so that for read-only access either lock
@@ -848,8 +836,7 @@ TeamDebugInfo::FunctionByID(FunctionID* functionID) const
 }
 
 
-status_t
-TeamDebugInfo::_AddFunction(Function* function)
+status_t TeamDebugInfo::_AddFunction(Function* function)
 {
 	// If the function refers to a source file, add it to the respective entry.
 	if (LocatableFile* sourceFile = function->SourceFile()) {
@@ -886,8 +873,7 @@ TeamDebugInfo::_AddFunction(Function* function)
 }
 
 
-void
-TeamDebugInfo::_RemoveFunction(Function* function)
+void TeamDebugInfo::_RemoveFunction(Function* function)
 {
 	fFunctions->Remove(function);
 

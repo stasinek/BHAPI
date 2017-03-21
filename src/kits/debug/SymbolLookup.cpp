@@ -77,8 +77,7 @@ RemoteMemoryAccessor::~RemoteMemoryAccessor()
 }
 
 // Init
-status_t
-RemoteMemoryAccessor::Init()
+status_t RemoteMemoryAccessor::Init()
 {
 	// If the team is the kernel team, we don't try to clone the areas. Only
 	// SymbolLookup's image file functionality will be available.
@@ -240,8 +239,7 @@ SymbolLookup::~SymbolLookup()
 
 
 // Init
-status_t
-SymbolLookup::Init()
+status_t SymbolLookup::Init()
 {
 	TRACE(("SymbolLookup::Init()\n"));
 
@@ -307,8 +305,7 @@ SymbolLookup::Init()
 
 
 // LookupSymbolAddress
-status_t
-SymbolLookup::LookupSymbolAddress(addr_t address, addr_t *_baseAddress,
+status_t SymbolLookup::LookupSymbolAddress(addr_t address, addr_t *_baseAddress,
 	const char **_symbolName, size_t *_symbolNameLen, const char **_imageName,
 	bool *_exactMatch) const
 {
@@ -352,8 +349,7 @@ SymbolLookup::LookupSymbolAddress(addr_t address, addr_t *_baseAddress,
 
 
 // InitSymbolIterator
-status_t
-SymbolLookup::InitSymbolIterator(image_id imageID,
+status_t SymbolLookup::InitSymbolIterator(image_id imageID,
 	SymbolIterator& iterator) const
 {
 	TRACE(("SymbolLookup::InitSymbolIterator(): image ID: %" B_PRId32 "\n",
@@ -376,8 +372,7 @@ SymbolLookup::InitSymbolIterator(image_id imageID,
 
 
 // InitSymbolIterator
-status_t
-SymbolLookup::InitSymbolIteratorByAddress(addr_t address,
+status_t SymbolLookup::InitSymbolIteratorByAddress(addr_t address,
 	SymbolIterator& iterator) const
 {
 	TRACE(("SymbolLookup::InitSymbolIteratorByAddress(): base address: %#lx\n",
@@ -398,8 +393,7 @@ SymbolLookup::InitSymbolIteratorByAddress(addr_t address,
 
 
 // NextSymbol
-status_t
-SymbolLookup::NextSymbol(SymbolIterator& iterator, const char** _symbolName,
+status_t SymbolLookup::NextSymbol(SymbolIterator& iterator, const char** _symbolName,
 	size_t* _symbolNameLen, addr_t* _symbolAddress, size_t* _symbolSize,
 	int32* _symbolType) const
 {
@@ -409,8 +403,7 @@ SymbolLookup::NextSymbol(SymbolIterator& iterator, const char** _symbolName,
 
 
 // GetSymbol
-status_t
-SymbolLookup::GetSymbol(image_id imageID, const char* name, int32 symbolType,
+status_t SymbolLookup::GetSymbol(image_id imageID, const char* name, int32 symbolType,
 	void** _symbolLocation, size_t* _symbolSize, int32* _symbolType) const
 {
 	Image* image = _FindImageByID(imageID);
@@ -506,8 +499,7 @@ SymbolLookup::_SymbolNameLen(const char* address) const
 }
 
 
-status_t
-SymbolLookup::_LoadImageInfo(const image_info& imageInfo)
+status_t SymbolLookup::_LoadImageInfo(const image_info& imageInfo)
 {
 	status_t error = B_OK;
 
@@ -667,8 +659,7 @@ SymbolLookup::LoadedImage::LookupSymbol(addr_t address, addr_t* _baseAddress,
 }
 
 
-status_t
-SymbolLookup::LoadedImage::NextSymbol(int32& iterator, const char** _symbolName,
+status_t SymbolLookup::LoadedImage::NextSymbol(int32& iterator, const char** _symbolName,
 	size_t* _symbolNameLen, addr_t* _symbolAddress, size_t* _symbolSize,
 	int32* _symbolType) const
 {

@@ -9,7 +9,7 @@
 		and the userland stack.
 */
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <Drivers.h>
 
 #include "net_stack_driver.h"

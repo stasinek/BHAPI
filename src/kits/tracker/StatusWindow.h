@@ -174,15 +174,13 @@ private:
 };
 
 
-inline bool
-BStatusView::IsPaused() const
+inline bool BStatusView::IsPaused() const
 {
 	return fIsPaused;
 }
 
 
-inline bool
-BStatusView::WasCanceled() const
+inline bool BStatusView::WasCanceled() const
 {
 	return fWasCanceled;
 }

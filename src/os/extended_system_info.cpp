@@ -16,8 +16,7 @@
 namespace BPrivate {
 
 
-status_t
-get_extended_team_info(team_id teamID, uint32 flags, KMessage& info)
+status_t get_extended_team_info(team_id teamID, uint32 flags, KMessage& info)
 {
 	// initial buffer size
 	size_t bufferSize = 4096;

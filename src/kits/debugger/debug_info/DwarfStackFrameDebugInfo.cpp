@@ -193,8 +193,7 @@ DwarfStackFrameDebugInfo::~DwarfStackFrameDebugInfo()
 }
 
 
-status_t
-DwarfStackFrameDebugInfo::Init()
+status_t DwarfStackFrameDebugInfo::Init()
 {
 	if (fTypeContext == NULL)
 		return B_NO_MEMORY;
@@ -219,8 +218,7 @@ DwarfStackFrameDebugInfo::Init()
 }
 
 
-status_t
-DwarfStackFrameDebugInfo::CreateParameter(FunctionID* functionID,
+status_t DwarfStackFrameDebugInfo::CreateParameter(FunctionID* functionID,
 	DIEFormalParameter* parameterEntry, Variable*& _parameter)
 {
 	// get the name
@@ -243,8 +241,7 @@ DwarfStackFrameDebugInfo::CreateParameter(FunctionID* functionID,
 }
 
 
-status_t
-DwarfStackFrameDebugInfo::CreateLocalVariable(FunctionID* functionID,
+status_t DwarfStackFrameDebugInfo::CreateLocalVariable(FunctionID* functionID,
 	DIEVariable* variableEntry, Variable*& _variable)
 {
 	// get the name
@@ -278,8 +275,7 @@ DwarfStackFrameDebugInfo::CreateLocalVariable(FunctionID* functionID,
 }
 
 
-status_t
-DwarfStackFrameDebugInfo::CreateReturnValue(FunctionID* functionID,
+status_t DwarfStackFrameDebugInfo::CreateReturnValue(FunctionID* functionID,
 	DIEType* returnType, ValueLocation* location, CpuState* state,
 	Variable*& _variable)
 {
@@ -312,8 +308,7 @@ DwarfStackFrameDebugInfo::CreateReturnValue(FunctionID* functionID,
 }
 
 
-status_t
-DwarfStackFrameDebugInfo::_CreateVariable(ObjectID* id, const BString& name,
+status_t DwarfStackFrameDebugInfo::_CreateVariable(ObjectID* id, const BString& name,
 	DIEType* typeEntry, LocationDescription* locationDescription,
 	Variable*& _variable)
 {

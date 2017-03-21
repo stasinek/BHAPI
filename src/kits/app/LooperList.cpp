@@ -33,29 +33,25 @@ BLooperList::BLooperList()
 }
 
 
-bool
-BLooperList::Lock()
+bool BLooperList::Lock()
 {
 	return fLock.Lock();
 }
 
 
-void
-BLooperList::Unlock()
+void BLooperList::Unlock()
 {
 	fLock.Unlock();
 }
 
 
-bool
-BLooperList::IsLocked()
+bool BLooperList::IsLocked()
 {
 	return fLock.IsLocked();
 }
 
 
-void
-BLooperList::AddLooper(BLooper* looper)
+void BLooperList::AddLooper(BLooper* looper)
 {
 	BAutolock locker(fLock);
 	AssertLocked();
@@ -73,8 +69,7 @@ BLooperList::AddLooper(BLooper* looper)
 }
 
 
-bool
-BLooperList::IsLooperValid(const BLooper* looper)
+bool BLooperList::IsLooperValid(const BLooper* looper)
 {
 	BAutolock locker(fLock);
 	AssertLocked();
@@ -84,8 +79,7 @@ BLooperList::IsLooperValid(const BLooper* looper)
 }
 
 
-bool
-BLooperList::RemoveLooper(BLooper* looper)
+bool BLooperList::RemoveLooper(BLooper* looper)
 {
 	BAutolock locker(fLock);
 	AssertLocked();
@@ -101,8 +95,7 @@ BLooperList::RemoveLooper(BLooper* looper)
 }
 
 
-void
-BLooperList::GetLooperList(BList* list)
+void BLooperList::GetLooperList(BList* list)
 {
 	BAutolock locker(fLock);
 	AssertLocked();
@@ -114,8 +107,7 @@ BLooperList::GetLooperList(BList* list)
 }
 
 
-int32
-BLooperList::CountLoopers()
+int32 BLooperList::CountLoopers()
 {
 	BAutolock locker(fLock);
 	AssertLocked();
@@ -185,8 +177,7 @@ BLooperList::LooperForPort(port_id port)
 }
 
 
-void
-BLooperList::InitAfterFork()
+void BLooperList::InitAfterFork()
 {
 	// We need to reinitialize the locker to get a new semaphore
 	new (&fLock) BLocker("BLooperList lock");
@@ -194,15 +185,13 @@ BLooperList::InitAfterFork()
 }
 
 
-bool
-BLooperList::EmptySlotPred(LooperData& data)
+bool BLooperList::EmptySlotPred(LooperData& data)
 {
 	return data.looper == NULL;
 }
 
 
-void
-BLooperList::AssertLocked()
+void BLooperList::AssertLocked()
 {
 	if (!IsLocked())
 		debugger("looperlist is not locked; proceed at great risk!");
@@ -242,29 +231,25 @@ BLooperList::LooperData::operator=(const LooperData& other)
 }
 
 
-bool
-BLooperList::FindLooperPred::operator()(BLooperList::LooperData& data)
+bool BLooperList::FindLooperPred::operator()(BLooperList::LooperData& data)
 {
 	return data.looper && looper == data.looper;
 }
 
 
-bool
-BLooperList::FindThreadPred::operator()(LooperData& data)
+bool BLooperList::FindThreadPred::operator()(LooperData& data)
 {
 	return data.looper && thread == data.looper->Thread();
 }
 
 
-bool
-BLooperList::FindNamePred::operator()(LooperData& data)
+bool BLooperList::FindNamePred::operator()(LooperData& data)
 {
 	return data.looper && !strcmp(name, data.looper->Name());
 }
 
 
-bool
-BLooperList::FindPortPred::operator()(LooperData& data)
+bool BLooperList::FindPortPred::operator()(LooperData& data)
 {
 	return data.looper && port == _get_looper_port_(data.looper);
 }

@@ -46,7 +46,7 @@ BBox::~BBox()
 }
 
 
-void
+void 
 BBox::SetBorder(bhapi::border_style border)
 {
 	if(fBorder != border)
@@ -64,7 +64,7 @@ BBox::Border() const
 }
 
 
-void
+void 
 BBox::SetLabelAlignment(bhapi::alignment labelAlignment)
 {
 	if(fAlignment != labelAlignment)
@@ -82,7 +82,7 @@ BBox::LabelAlignment() const
 }
 
 
-void
+void 
 BBox::SetLabel(const char *label)
 {
 	if(!(label == NULL || *label == 0))
@@ -112,7 +112,7 @@ BBox::SetLabel(const char *label)
 }
 
 
-status_t
+status_t 
 BBox::SetLabel(BView *viewLabel)
 {
 	if(viewLabel != NULL)
@@ -183,7 +183,7 @@ BBox::ContentBounds() const
 }
 
 
-void
+void 
 BBox::Draw(BRect updateRect)
 {
 	if(!IsVisible() || fBorder == B_NO_BORDER) return;
@@ -210,14 +210,14 @@ BBox::Draw(BRect updateRect)
 }
 
 
-void
+void 
 BBox::FrameResized(float new_width, float new_height)
 {
 	ReAdjustLabel();
 }
 
 
-void
+void 
 BBox::ResizeToPreferred()
 {
 	if(fLabelView) fLabelView->ResizeToPreferred();
@@ -225,7 +225,7 @@ BBox::ResizeToPreferred()
 }
 
 
-void
+void 
 BBox::GetPreferredSize(float *width, float *height)
 {
 	if(!width && !height) return;
@@ -248,7 +248,7 @@ BBox::GetPreferredSize(float *width, float *height)
 }
 
 
-void
+void 
 BBox::ReAdjustLabel()
 {
 	if(fLabelView == NULL) return;
@@ -267,7 +267,7 @@ BBox::ReAdjustLabel()
 }
 
 
-void
+void 
 BBox::ChildRemoving(BView *child)
 {
 	if(fLabelView == child) fLabelView = NULL;

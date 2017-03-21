@@ -135,16 +135,14 @@ BBufferGroup::~BBufferGroup()
 }
 
 
-status_t
-BBufferGroup::InitCheck()
+status_t BBufferGroup::InitCheck()
 {
 	CALLED();
 	return fInitError;
 }
 
 
-status_t
-BBufferGroup::AddBuffer(const buffer_clone_info& info, BBuffer** _buffer)
+status_t BBufferGroup::AddBuffer(const buffer_clone_info& info, BBuffer** _buffer)
 {
 	CALLED();
 	if (fInitError != B_OK)
@@ -178,8 +176,7 @@ BBufferGroup::RequestBuffer(size_t size, bigtime_t timeout)
 }
 
 
-status_t
-BBufferGroup::RequestBuffer(BBuffer* buffer, bigtime_t timeout)
+status_t BBufferGroup::RequestBuffer(BBuffer* buffer, bigtime_t timeout)
 {
 	CALLED();
 	if (fInitError != B_OK)
@@ -195,8 +192,7 @@ BBufferGroup::RequestBuffer(BBuffer* buffer, bigtime_t timeout)
 }
 
 
-status_t
-BBufferGroup::RequestError()
+status_t BBufferGroup::RequestError()
 {
 	CALLED();
 	if (fInitError != B_OK)
@@ -206,8 +202,7 @@ BBufferGroup::RequestError()
 }
 
 
-status_t
-BBufferGroup::CountBuffers(int32* _count)
+status_t BBufferGroup::CountBuffers(int32* _count)
 {
 	CALLED();
 	if (fInitError != B_OK)
@@ -218,8 +213,7 @@ BBufferGroup::CountBuffers(int32* _count)
 }
 
 
-status_t
-BBufferGroup::GetBufferList(int32 bufferCount, BBuffer** _buffers)
+status_t BBufferGroup::GetBufferList(int32 bufferCount, BBuffer** _buffers)
 {
 	CALLED();
 	if (fInitError != B_OK)
@@ -232,8 +226,7 @@ BBufferGroup::GetBufferList(int32 bufferCount, BBuffer** _buffers)
 }
 
 
-status_t
-BBufferGroup::WaitForBuffers()
+status_t BBufferGroup::WaitForBuffers()
 {
 	CALLED();
 	if (fInitError != B_OK)
@@ -264,8 +257,7 @@ BBufferGroup::WaitForBuffers()
 }
 
 
-status_t
-BBufferGroup::ReclaimAllBuffers()
+status_t BBufferGroup::ReclaimAllBuffers()
 {
 	CALLED();
 	if (fInitError != B_OK)
@@ -302,8 +294,7 @@ BBufferGroup::ReclaimAllBuffers()
 //	#pragma mark - deprecated BeOS R4 API
 
 
-status_t
-BBufferGroup::AddBuffersTo(BMessage* message, const char* name, bool needLock)
+status_t BBufferGroup::AddBuffersTo(BMessage* message, const char* name, bool needLock)
 {
 	CALLED();
 	if (fInitError != B_OK)
@@ -341,8 +332,7 @@ BBufferGroup::AddBuffersTo(BMessage* message, const char* name, bool needLock)
 //BBufferGroup & BBufferGroup::operator=(const BBufferGroup &)
 
 
-status_t
-BBufferGroup::_Init()
+status_t BBufferGroup::_Init()
 {
 	CALLED();
 

@@ -81,36 +81,31 @@ SlaveNodes::~SlaveNodes()
 }
 
 
-int32
-SlaveNodes::CountSlaves() const
+int32 SlaveNodes::CountSlaves() const
 {
 	return fSlaveList.CountItems();
 }
 
 
-bool
-SlaveNodes::GetNextSlave(port_id** id)
+bool SlaveNodes::GetNextSlave(port_id** id)
 {
 	return fSlaveList.GetNext(id);
 }
 
 
-void
-SlaveNodes::Rewind()
+void SlaveNodes::Rewind()
 {
 	fSlaveList.Rewind();
 }
 
 
-bool
-SlaveNodes::InsertSlave(const media_node& node)
+bool SlaveNodes::InsertSlave(const media_node& node)
 {
 	return fSlaveList.Insert(node.node, node.port);
 }
 
 
-bool
-SlaveNodes::RemoveSlave(const media_node& node)
+bool SlaveNodes::RemoveSlave(const media_node& node)
 {
 	return fSlaveList.Remove(node.node);
 }
@@ -135,8 +130,7 @@ BTimeSource::~BTimeSource()
  * public BTimeSource
  *************************************************************/
 
-status_t
-BTimeSource::SnoozeUntil(bigtime_t performance_time,
+status_t BTimeSource::SnoozeUntil(bigtime_t performance_time,
 	bigtime_t with_latency, bool retry_signals)
 {
 	CALLED();
@@ -196,8 +190,7 @@ BTimeSource::RealTimeFor(bigtime_t performance_time,
 }
 
 
-bool
-BTimeSource::IsRunning()
+bool BTimeSource::IsRunning()
 {
 	PRINT(8, "CALLED BTimeSource::IsRunning()\n");
 
@@ -215,8 +208,7 @@ BTimeSource::IsRunning()
 }
 
 
-status_t
-BTimeSource::GetTime(bigtime_t* performance_time,
+status_t BTimeSource::GetTime(bigtime_t* performance_time,
 	bigtime_t* real_time, float* drift)
 {
 	PRINT(8, "CALLED BTimeSource::GetTime()\n");
@@ -249,8 +241,7 @@ BTimeSource::RealTime()
 }
 
 
-status_t
-BTimeSource::GetStartLatency(bigtime_t* out_latency)
+status_t BTimeSource::GetStartLatency(bigtime_t* out_latency)
 {
 	CALLED();
 	*out_latency = 0;
@@ -279,8 +270,7 @@ BTimeSource::BTimeSource()
 }
 
 
-status_t
-BTimeSource::HandleMessage(int32 message, const void* rawdata,
+status_t BTimeSource::HandleMessage(int32 message, const void* rawdata,
 	size_t size)
 {
 	PRINT(4, "BTimeSource::HandleMessage %#" B_PRIx32 ", node %" B_PRId32 "\n",
@@ -345,8 +335,7 @@ BTimeSource::HandleMessage(int32 message, const void* rawdata,
 }
 
 
-void
-BTimeSource::PublishTime(bigtime_t performance_time,
+void BTimeSource::PublishTime(bigtime_t performance_time,
 	bigtime_t real_time, float drift)
 {
 	TRACE_TIMESOURCE("BTimeSource::PublishTime timesource %" B_PRId32
@@ -369,8 +358,7 @@ BTimeSource::PublishTime(bigtime_t performance_time,
 }
 
 
-void
-BTimeSource::BroadcastTimeWarp(bigtime_t at_real_time,
+void BTimeSource::BroadcastTimeWarp(bigtime_t at_real_time,
 	bigtime_t new_performance_time)
 {
 	CALLED();
@@ -396,8 +384,7 @@ BTimeSource::BroadcastTimeWarp(bigtime_t at_real_time,
 }
 
 
-void
-BTimeSource::SendRunMode(run_mode mode)
+void BTimeSource::SendRunMode(run_mode mode)
 {
 	CALLED();
 	ASSERT(fSlaveNodes != NULL);
@@ -417,8 +404,7 @@ BTimeSource::SendRunMode(run_mode mode)
 }
 
 
-void
-BTimeSource::SetRunMode(run_mode mode)
+void BTimeSource::SetRunMode(run_mode mode)
 {
 	CALLED();
 	BMediaNode::SetRunMode(mode);
@@ -482,8 +468,7 @@ BTimeSource::BTimeSource(media_node_id id)
 }
 
 
-void
-BTimeSource::FinishCreate()
+void BTimeSource::FinishCreate()
 {
 	CALLED();
 
@@ -511,8 +496,7 @@ BTimeSource::FinishCreate()
 }
 
 
-status_t
-BTimeSource::RemoveMe(BMediaNode* node)
+status_t BTimeSource::RemoveMe(BMediaNode* node)
 {
 	CALLED();
 	if (fKinds & NODE_KIND_SHADOW_TIMESOURCE) {
@@ -527,8 +511,7 @@ BTimeSource::RemoveMe(BMediaNode* node)
 }
 
 
-status_t
-BTimeSource::AddMe(BMediaNode* node)
+status_t BTimeSource::AddMe(BMediaNode* node)
 {
 	CALLED();
 	if (fKinds & NODE_KIND_SHADOW_TIMESOURCE) {
@@ -542,8 +525,7 @@ BTimeSource::AddMe(BMediaNode* node)
 }
 
 
-void
-BTimeSource::DirectAddMe(const media_node& node)
+void BTimeSource::DirectAddMe(const media_node& node)
 {
 	CALLED();
 	ASSERT(fSlaveNodes != NULL);
@@ -576,8 +558,7 @@ BTimeSource::DirectAddMe(const media_node& node)
  }
 
 
-void
-BTimeSource::DirectRemoveMe(const media_node& node)
+void BTimeSource::DirectRemoveMe(const media_node& node)
 {
 	CALLED();
 	ASSERT(fSlaveNodes != NULL);
@@ -606,8 +587,7 @@ BTimeSource::DirectRemoveMe(const media_node& node)
 }
 
 
-void
-BTimeSource::DirectStart(bigtime_t at)
+void BTimeSource::DirectStart(bigtime_t at)
 {
 	CALLED();
 	if (fBuf)
@@ -617,8 +597,7 @@ BTimeSource::DirectStart(bigtime_t at)
 }
 
 
-void
-BTimeSource::DirectStop(bigtime_t at, bool immediate)
+void BTimeSource::DirectStop(bigtime_t at, bool immediate)
 {
 	CALLED();
 	if (fBuf)
@@ -628,15 +607,13 @@ BTimeSource::DirectStop(bigtime_t at, bool immediate)
 }
 
 
-void
-BTimeSource::DirectSeek(bigtime_t to, bigtime_t at)
+void BTimeSource::DirectSeek(bigtime_t to, bigtime_t at)
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BTimeSource::DirectSetRunMode(run_mode mode)
+void BTimeSource::DirectSetRunMode(run_mode mode)
 {
 	UNIMPLEMENTED();
 }

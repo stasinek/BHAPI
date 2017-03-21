@@ -48,7 +48,7 @@ BArchivable::~BArchivable()
 }
 
 
-status_t
+status_t 
 BArchivable::Archive(BMessage *into, bool deep) const
 {
     if(into == NULL) return B_ERROR;

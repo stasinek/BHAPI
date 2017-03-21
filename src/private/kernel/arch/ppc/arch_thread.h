@@ -29,8 +29,7 @@ arch_thread_get_current_thread(void)
 }
 
 
-static inline void
-arch_thread_set_current_thread(Thread *t)
+static inline void arch_thread_set_current_thread(Thread *t)
 {
     asm volatile("mtsprg2 %0" : : "r"(t));
 }

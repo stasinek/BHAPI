@@ -36,8 +36,7 @@ DropRepositoryRequest::~DropRepositoryRequest()
 }
 
 
-status_t
-DropRepositoryRequest::CreateInitialJobs()
+status_t DropRepositoryRequest::CreateInitialJobs()
 {
 	status_t result = InitCheck();
 	if (result != B_OK)

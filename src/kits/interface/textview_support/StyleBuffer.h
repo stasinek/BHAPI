@@ -156,8 +156,7 @@ private:
 };
 
 
-inline int32
-BTextView::StyleBuffer::NumRuns() const
+inline int32 BTextView::StyleBuffer::NumRuns() const
 {
 	return fStyleRunDesc.ItemCount();
 }

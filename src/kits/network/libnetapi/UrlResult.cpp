@@ -15,15 +15,13 @@ BUrlResult::~BUrlResult()
 }
 
 
-void
-BUrlResult::SetContentType(BString contentType)
+void BUrlResult::SetContentType(BString contentType)
 {
 	fContentType = contentType;
 }
 
 
-void
-BUrlResult::SetLength(size_t length)
+void BUrlResult::SetLength(size_t length)
 {
 	fLength = length;
 }

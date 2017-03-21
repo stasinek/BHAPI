@@ -201,8 +201,7 @@ RepositoryWriterImpl::~RepositoryWriterImpl()
 }
 
 
-status_t
-RepositoryWriterImpl::Init(const char* fileName)
+status_t RepositoryWriterImpl::Init(const char* fileName)
 {
 	try {
 		fPackageNames = new PackageNameSet();
@@ -219,8 +218,7 @@ RepositoryWriterImpl::Init(const char* fileName)
 }
 
 
-status_t
-RepositoryWriterImpl::AddPackage(const BEntry& packageEntry)
+status_t RepositoryWriterImpl::AddPackage(const BEntry& packageEntry)
 {
 	try {
 		return _AddPackage(packageEntry);
@@ -233,8 +231,7 @@ RepositoryWriterImpl::AddPackage(const BEntry& packageEntry)
 }
 
 
-status_t
-RepositoryWriterImpl::AddPackageInfo(const BPackageInfo& packageInfo)
+status_t RepositoryWriterImpl::AddPackageInfo(const BPackageInfo& packageInfo)
 {
 	try {
 		return _AddPackageInfo(packageInfo);
@@ -247,8 +244,7 @@ RepositoryWriterImpl::AddPackageInfo(const BPackageInfo& packageInfo)
 }
 
 
-status_t
-RepositoryWriterImpl::Finish()
+status_t RepositoryWriterImpl::Finish()
 {
 	try {
 		return _Finish();
@@ -261,8 +257,7 @@ RepositoryWriterImpl::Finish()
 }
 
 
-status_t
-RepositoryWriterImpl::_Init(const char* fileName)
+status_t RepositoryWriterImpl::_Init(const char* fileName)
 {
 	status_t error = inherited::Init(NULL, false, fileName,
 		BPackageWriterParameters());
@@ -273,8 +268,7 @@ RepositoryWriterImpl::_Init(const char* fileName)
 }
 
 
-status_t
-RepositoryWriterImpl::_Finish()
+status_t RepositoryWriterImpl::_Finish()
 {
 	hpkg_repo_header header;
 
@@ -320,8 +314,7 @@ RepositoryWriterImpl::_Finish()
 }
 
 
-status_t
-RepositoryWriterImpl::_AddPackage(const BEntry& packageEntry)
+status_t RepositoryWriterImpl::_AddPackage(const BEntry& packageEntry)
 {
 	status_t result = packageEntry.InitCheck();
 	if (result != B_OK) {
@@ -369,8 +362,7 @@ RepositoryWriterImpl::_AddPackage(const BEntry& packageEntry)
 }
 
 
-status_t
-RepositoryWriterImpl::_AddPackageInfo(const BPackageInfo& packageInfo)
+status_t RepositoryWriterImpl::_AddPackageInfo(const BPackageInfo& packageInfo)
 {
 	fPackageInfo = packageInfo;
 
@@ -383,8 +375,7 @@ RepositoryWriterImpl::_AddPackageInfo(const BPackageInfo& packageInfo)
 }
 
 
-status_t
-RepositoryWriterImpl::_RegisterCurrentPackageInfo()
+status_t RepositoryWriterImpl::_RegisterCurrentPackageInfo()
 {
 	status_t result = fPackageInfo.InitCheck();
 	if (result != B_OK) {
@@ -438,8 +429,7 @@ RepositoryWriterImpl::_RegisterCurrentPackageInfo()
 }
 
 
-status_t
-RepositoryWriterImpl::_WriteRepositoryInfo(hpkg_repo_header& header,
+status_t RepositoryWriterImpl::_WriteRepositoryInfo(hpkg_repo_header& header,
 	uint64& _length)
 {
 	// archive and flatten the repository info and write it
@@ -470,8 +460,7 @@ RepositoryWriterImpl::_WriteRepositoryInfo(hpkg_repo_header& header,
 }
 
 
-void
-RepositoryWriterImpl::_WritePackageAttributes(hpkg_repo_header& header,
+void RepositoryWriterImpl::_WritePackageAttributes(hpkg_repo_header& header,
 	uint64& _length)
 {
 	// write the package attributes (zlib writer on top of a file writer)

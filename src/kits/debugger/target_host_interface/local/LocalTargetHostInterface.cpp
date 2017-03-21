@@ -46,8 +46,7 @@ LocalTargetHostInterface::~LocalTargetHostInterface()
 }
 
 
-status_t
-LocalTargetHostInterface::Init(Settings* settings)
+status_t LocalTargetHostInterface::Init(Settings* settings)
 {
 	char hostname[HOST_NAME_MAX + 1];
 	status_t error = gethostname(hostname, sizeof(hostname));
@@ -102,8 +101,7 @@ LocalTargetHostInterface::Init(Settings* settings)
 }
 
 
-void
-LocalTargetHostInterface::Close()
+void LocalTargetHostInterface::Close()
 {
 	if (fDataPort > 0) {
 		__stop_watching_system(-1,
@@ -121,15 +119,13 @@ LocalTargetHostInterface::Close()
 }
 
 
-bool
-LocalTargetHostInterface::IsLocal() const
+bool LocalTargetHostInterface::IsLocal() const
 {
 	return true;
 }
 
 
-bool
-LocalTargetHostInterface::Connected() const
+bool LocalTargetHostInterface::Connected() const
 {
 	return true;
 }
@@ -142,8 +138,7 @@ LocalTargetHostInterface::GetTargetHost()
 }
 
 
-status_t
-LocalTargetHostInterface::Attach(team_id teamID, thread_id threadID,
+status_t LocalTargetHostInterface::Attach(team_id teamID, thread_id threadID,
 	DebuggerInterface*& _interface) const
 {
 	if (teamID < 0 && threadID < 0)
@@ -175,8 +170,7 @@ LocalTargetHostInterface::Attach(team_id teamID, thread_id threadID,
 }
 
 
-status_t
-LocalTargetHostInterface::CreateTeam(int commandLineArgc,
+status_t LocalTargetHostInterface::CreateTeam(int commandLineArgc,
 	const char* const* arguments, team_id& _teamID) const
 {
 	thread_id thread = load_program(arguments, commandLineArgc, false);
@@ -189,8 +183,7 @@ LocalTargetHostInterface::CreateTeam(int commandLineArgc,
 }
 
 
-status_t
-LocalTargetHostInterface::LoadCore(const char* coreFilePath,
+status_t LocalTargetHostInterface::LoadCore(const char* coreFilePath,
 	DebuggerInterface*& _interface, thread_id& _thread) const
 {
 	// load the core file
@@ -224,8 +217,7 @@ LocalTargetHostInterface::LoadCore(const char* coreFilePath,
 }
 
 
-status_t
-LocalTargetHostInterface::FindTeamByThread(thread_id thread,
+status_t LocalTargetHostInterface::FindTeamByThread(thread_id thread,
 	team_id& _teamID) const
 {
 	thread_info info;
@@ -238,8 +230,7 @@ LocalTargetHostInterface::FindTeamByThread(thread_id thread,
 }
 
 
-status_t
-LocalTargetHostInterface::_PortLoop(void* arg)
+status_t LocalTargetHostInterface::_PortLoop(void* arg)
 {
 	LocalTargetHostInterface* interface = (LocalTargetHostInterface*)arg;
 	set<team_id> waitingTeams;
@@ -308,8 +299,7 @@ LocalTargetHostInterface::_PortLoop(void* arg)
 }
 
 
-status_t
-LocalTargetHostInterface::_HandleTeamEvent(team_id team, int32 opcode,
+status_t LocalTargetHostInterface::_HandleTeamEvent(team_id team, int32 opcode,
 	bool& addToWaiters)
 {
 	addToWaiters = false;

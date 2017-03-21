@@ -31,8 +31,7 @@ BRepositoryWriter::~BRepositoryWriter()
 }
 
 
-status_t
-BRepositoryWriter::Init(const char* fileName)
+status_t BRepositoryWriter::Init(const char* fileName)
 {
 	if (fImpl == NULL)
 		return B_NO_MEMORY;
@@ -41,8 +40,7 @@ BRepositoryWriter::Init(const char* fileName)
 }
 
 
-status_t
-BRepositoryWriter::AddPackage(const BEntry& packageEntry)
+status_t BRepositoryWriter::AddPackage(const BEntry& packageEntry)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;
@@ -51,8 +49,7 @@ BRepositoryWriter::AddPackage(const BEntry& packageEntry)
 }
 
 
-status_t
-BRepositoryWriter::AddPackageInfo(const BPackageInfo& packageInfo)
+status_t BRepositoryWriter::AddPackageInfo(const BPackageInfo& packageInfo)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;
@@ -61,8 +58,7 @@ BRepositoryWriter::AddPackageInfo(const BPackageInfo& packageInfo)
 }
 
 
-status_t
-BRepositoryWriter::Finish()
+status_t BRepositoryWriter::Finish()
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;

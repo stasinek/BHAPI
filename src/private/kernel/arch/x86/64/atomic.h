@@ -6,22 +6,19 @@
 #define _KERNEL_ARCH_X86_64_ATOMIC_H
 
 
-static inline void
-memory_read_barrier_inline(void)
+static inline void memory_read_barrier_inline(void)
 {
 	asm volatile("lfence" : : : "memory");
 }
 
 
-static inline void
-memory_write_barrier_inline(void)
+static inline void memory_write_barrier_inline(void)
 {
 	asm volatile("sfence" : : : "memory");
 }
 
 
-static inline void
-memory_full_barrier_inline(void)
+static inline void memory_full_barrier_inline(void)
 {
 	asm volatile("mfence" : : : "memory");
 }

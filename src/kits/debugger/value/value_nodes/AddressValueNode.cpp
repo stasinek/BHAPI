@@ -47,8 +47,7 @@ AddressValueNode::GetType() const
 }
 
 
-status_t
-AddressValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
+status_t AddressValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 	ValueLocation*& _location, Value*& _value)
 {
 	// get the location
@@ -87,8 +86,7 @@ AddressValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 }
 
 
-status_t
-AddressValueNode::CreateChildren(TeamTypeInformation* info)
+status_t AddressValueNode::CreateChildren(TeamTypeInformation* info)
 {
 	if (fChild != NULL)
 		return B_OK;
@@ -123,8 +121,7 @@ AddressValueNode::CreateChildren(TeamTypeInformation* info)
 }
 
 
-int32
-AddressValueNode::CountChildren() const
+int32 AddressValueNode::CountChildren() const
 {
 	return fChild != NULL ? 1 : 0;
 }
@@ -178,8 +175,7 @@ AddressValueNodeChild::Parent() const
 }
 
 
-status_t
-AddressValueNodeChild::ResolveLocation(ValueLoader* valueLoader,
+status_t AddressValueNodeChild::ResolveLocation(ValueLoader* valueLoader,
 	ValueLocation*& _location)
 {
 	// The parent's value is an address pointing to this component.

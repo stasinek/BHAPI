@@ -85,8 +85,7 @@ BTransactionIssue::Path2() const
 }
 
 
-status_t
-BTransactionIssue::SystemError() const
+status_t BTransactionIssue::SystemError() const
 {
 	return fSystemError;
 }
@@ -173,8 +172,7 @@ BTransactionIssue::ToString() const
 }
 
 
-status_t
-BTransactionIssue::AddToMessage(BMessage& message) const
+status_t BTransactionIssue::AddToMessage(BMessage& message) const
 {
 	status_t error;
 	if ((error = message.AddInt32("type", (int32)fType)) != B_OK
@@ -191,8 +189,7 @@ BTransactionIssue::AddToMessage(BMessage& message) const
 }
 
 
-status_t
-BTransactionIssue::ExtractFromMessage(const BMessage& message)
+status_t BTransactionIssue::ExtractFromMessage(const BMessage& message)
 {
 	status_t error;
 	int32 type;
@@ -284,8 +281,7 @@ BCommitTransactionResult::~BCommitTransactionResult()
 }
 
 
-void
-BCommitTransactionResult::Unset()
+void BCommitTransactionResult::Unset()
 {
 	fError = B_TRANSACTION_INTERNAL_ERROR;
 	fSystemError = B_ERROR;
@@ -299,8 +295,7 @@ BCommitTransactionResult::Unset()
 }
 
 
-int32
-BCommitTransactionResult::CountIssues() const
+int32 BCommitTransactionResult::CountIssues() const
 {
 	return fIssues.CountItems();
 }
@@ -315,8 +310,7 @@ BCommitTransactionResult::IssueAt(int32 index) const
 }
 
 
-bool
-BCommitTransactionResult::AddIssue(const BTransactionIssue& issue)
+bool BCommitTransactionResult::AddIssue(const BTransactionIssue& issue)
 {
 	BTransactionIssue* newIssue = new(std::nothrow) BTransactionIssue(issue);
 	if (newIssue == NULL || !fIssues.AddItem(newIssue)) {
@@ -334,22 +328,19 @@ BCommitTransactionResult::Error() const
 }
 
 
-void
-BCommitTransactionResult::SetError(BTransactionError error)
+void BCommitTransactionResult::SetError(BTransactionError error)
 {
 	fError = error;
 }
 
 
-status_t
-BCommitTransactionResult::SystemError() const
+status_t BCommitTransactionResult::SystemError() const
 {
 	return fSystemError;
 }
 
 
-void
-BCommitTransactionResult::SetSystemError(status_t error)
+void BCommitTransactionResult::SetSystemError(status_t error)
 {
 	fSystemError = error;
 }
@@ -362,8 +353,7 @@ BCommitTransactionResult::ErrorPackage() const
 }
 
 
-void
-BCommitTransactionResult::SetErrorPackage(const BString& packageName)
+void BCommitTransactionResult::SetErrorPackage(const BString& packageName)
 {
 	fErrorPackage = packageName;
 }
@@ -503,8 +493,7 @@ BCommitTransactionResult::Path1() const
 }
 
 
-void
-BCommitTransactionResult::SetPath1(const BString& path)
+void BCommitTransactionResult::SetPath1(const BString& path)
 {
 	fPath1 = path;
 }
@@ -517,8 +506,7 @@ BCommitTransactionResult::Path2() const
 }
 
 
-void
-BCommitTransactionResult::SetPath2(const BString& path)
+void BCommitTransactionResult::SetPath2(const BString& path)
 {
 	fPath2 = path;
 }
@@ -531,8 +519,7 @@ BCommitTransactionResult::String1() const
 }
 
 
-void
-BCommitTransactionResult::SetString1(const BString& string)
+void BCommitTransactionResult::SetString1(const BString& string)
 {
 	fString1 = string;
 }
@@ -545,8 +532,7 @@ BCommitTransactionResult::String2() const
 }
 
 
-void
-BCommitTransactionResult::SetString2(const BString& string)
+void BCommitTransactionResult::SetString2(const BString& string)
 {
 	fString2 = string;
 }
@@ -559,15 +545,13 @@ BCommitTransactionResult::OldStateDirectory() const
 }
 
 
-void
-BCommitTransactionResult::SetOldStateDirectory(const BString& directory)
+void BCommitTransactionResult::SetOldStateDirectory(const BString& directory)
 {
 	fOldStateDirectory = directory;
 }
 
 
-status_t
-BCommitTransactionResult::AddToMessage(BMessage& message) const
+status_t BCommitTransactionResult::AddToMessage(BMessage& message) const
 {
 	status_t error;
 	if ((error = message.AddInt32("error", (int32)fError)) != B_OK
@@ -597,8 +581,7 @@ BCommitTransactionResult::AddToMessage(BMessage& message) const
 }
 
 
-status_t
-BCommitTransactionResult::ExtractFromMessage(const BMessage& message)
+status_t BCommitTransactionResult::ExtractFromMessage(const BMessage& message)
 {
 	Unset();
 

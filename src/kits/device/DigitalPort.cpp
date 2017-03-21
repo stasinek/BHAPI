@@ -15,21 +15,18 @@ BDigitalPort::~BDigitalPort()
 }
 
 
-status_t
-BDigitalPort::Open(const char *portName)
+status_t BDigitalPort::Open(const char *portName)
 {
 	return B_ERROR;
 }
 
 
-void
-BDigitalPort::Close(void)
+void BDigitalPort::Close(void)
 {
 }
 
 
-bool
-BDigitalPort::IsOpen(void)
+bool BDigitalPort::IsOpen(void)
 {
 	return false;
 }
@@ -49,48 +46,41 @@ BDigitalPort::Write(uint8 value)
 }
 
 
-status_t
-BDigitalPort::SetAsOutput(void)
+status_t BDigitalPort::SetAsOutput(void)
 {
 	return B_ERROR;
 }
 
 
-bool
-BDigitalPort::IsOutput(void)
+bool BDigitalPort::IsOutput(void)
 {
 	return false;
 }
 
 
-status_t
-BDigitalPort::SetAsInput(void)
+status_t BDigitalPort::SetAsInput(void)
 {
 	return B_ERROR;
 }
 
 
-bool
-BDigitalPort::IsInput(void)
+bool BDigitalPort::IsInput(void)
 {
 	return false;
 }
 
 
-void
-BDigitalPort::_ReservedDigitalPort1()
+void BDigitalPort::_ReservedDigitalPort1()
 {
 }
 
 
-void
-BDigitalPort::_ReservedDigitalPort2()
+void BDigitalPort::_ReservedDigitalPort2()
 {
 }
 
 
-void
-BDigitalPort::_ReservedDigitalPort3()
+void BDigitalPort::_ReservedDigitalPort3()
 {
 }
 

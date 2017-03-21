@@ -6,7 +6,7 @@
 #define	_FS_INDEX_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <dirent.h>
 
 

@@ -66,8 +66,7 @@ BGroupLayout::Spacing() const
 }
 
 
-void
-BGroupLayout::SetSpacing(float spacing)
+void BGroupLayout::SetSpacing(float spacing)
 {
 	spacing = BControlLook::ComposeSpacing(spacing);
 	if (spacing != fHSpacing) {
@@ -85,8 +84,7 @@ BGroupLayout::Orientation() const
 }
 
 
-void
-BGroupLayout::SetOrientation(orientation orientation)
+void BGroupLayout::SetOrientation(orientation orientation)
 {
 	if (orientation != fOrientation) {
 		fOrientation = orientation;
@@ -107,8 +105,7 @@ BGroupLayout::ItemWeight(int32 index) const
 }
 
 
-void
-BGroupLayout::SetItemWeight(int32 index, float weight)
+void BGroupLayout::SetItemWeight(int32 index, float weight)
 {
 	if (index < 0 || index >= CountItems())
 		return;
@@ -152,29 +149,25 @@ BGroupLayout::AddView(int32 index, BView* child, float weight)
 }
 
 
-bool
-BGroupLayout::AddItem(BLayoutItem* item)
+bool BGroupLayout::AddItem(BLayoutItem* item)
 {
 	return BTwoDimensionalLayout::AddItem(item);
 }
 
 
-bool
-BGroupLayout::AddItem(int32 index, BLayoutItem* item)
+bool BGroupLayout::AddItem(int32 index, BLayoutItem* item)
 {
 	return BTwoDimensionalLayout::AddItem(index, item);
 }
 
 
-bool
-BGroupLayout::AddItem(BLayoutItem* item, float weight)
+bool BGroupLayout::AddItem(BLayoutItem* item, float weight)
 {
 	return AddItem(-1, item, weight);
 }
 
 
-bool
-BGroupLayout::AddItem(int32 index, BLayoutItem* item, float weight)
+bool BGroupLayout::AddItem(int32 index, BLayoutItem* item, float weight)
 {
 	bool success = AddItem(index, item);
 	if (success) {
@@ -186,8 +179,7 @@ BGroupLayout::AddItem(int32 index, BLayoutItem* item, float weight)
 }
 
 
-status_t
-BGroupLayout::Archive(BMessage* into, bool deep) const
+status_t BGroupLayout::Archive(BMessage* into, bool deep) const
 {
 	BArchiver archiver(into);
 	status_t result = BTwoDimensionalLayout::Archive(into, deep);
@@ -199,15 +191,13 @@ BGroupLayout::Archive(BMessage* into, bool deep) const
 }
 
 
-status_t
-BGroupLayout::AllArchived(BMessage* into) const
+status_t BGroupLayout::AllArchived(BMessage* into) const
 {
 	return BTwoDimensionalLayout::AllArchived(into);
 }
 
 
-status_t
-BGroupLayout::AllUnarchived(const BMessage* from)
+status_t BGroupLayout::AllUnarchived(const BMessage* from)
 {
 	return BTwoDimensionalLayout::AllUnarchived(from);
 }
@@ -222,16 +212,14 @@ BGroupLayout::Instantiate(BMessage* from)
 }
 
 
-status_t
-BGroupLayout::ItemArchived(BMessage* into,
+status_t BGroupLayout::ItemArchived(BMessage* into,
 	BLayoutItem* item, int32 index) const
 {
 	return into->AddFloat(kItemWeightField, _LayoutDataForItem(item)->weight);
 }
 
 
-status_t
-BGroupLayout::ItemUnarchived(const BMessage* from,
+status_t BGroupLayout::ItemUnarchived(const BMessage* from,
 	BLayoutItem* item, int32 index)
 {
 	float weight;
@@ -244,16 +232,14 @@ BGroupLayout::ItemUnarchived(const BMessage* from,
 }
 
 
-bool
-BGroupLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
+bool BGroupLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
 {
 	item->SetLayoutData(new(nothrow) ItemLayoutData);
 	return item->LayoutData() != NULL;
 }
 
 
-void
-BGroupLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
+void BGroupLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
 {
 	if (ItemLayoutData* data = _LayoutDataForItem(item)) {
 		item->SetLayoutData(NULL);
@@ -262,8 +248,7 @@ BGroupLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
 }
 
 
-void
-BGroupLayout::PrepareItems(orientation orientation)
+void BGroupLayout::PrepareItems(orientation orientation)
 {
 	// filter the visible items
 	fVisibleItems.MakeEmpty();
@@ -276,22 +261,19 @@ BGroupLayout::PrepareItems(orientation orientation)
 }
 
 
-int32
-BGroupLayout::InternalCountColumns()
+int32 BGroupLayout::InternalCountColumns()
 {
 	return (fOrientation == B_HORIZONTAL ? fVisibleItems.CountItems() : 1);
 }
 
 
-int32
-BGroupLayout::InternalCountRows()
+int32 BGroupLayout::InternalCountRows()
 {
 	return (fOrientation == B_VERTICAL ? fVisibleItems.CountItems() : 1);
 }
 
 
-void
-BGroupLayout::GetColumnRowConstraints(orientation orientation, int32 index,
+void BGroupLayout::GetColumnRowConstraints(orientation orientation, int32 index,
 	ColumnRowConstraints* constraints)
 {
 	if (index >= 0 && index < fVisibleItems.CountItems()) {
@@ -306,8 +288,7 @@ BGroupLayout::GetColumnRowConstraints(orientation orientation, int32 index,
 }
 
 
-void
-BGroupLayout::GetItemDimensions(BLayoutItem* item, Dimensions* dimensions)
+void BGroupLayout::GetItemDimensions(BLayoutItem* item, Dimensions* dimensions)
 {
 	int32 index = fVisibleItems.IndexOf(item);
 	if (index < 0)
@@ -334,8 +315,7 @@ BGroupLayout::_LayoutDataForItem(BLayoutItem* item) const
 }
 
 
-status_t
-BGroupLayout::Perform(perform_code code, void* _data)
+status_t BGroupLayout::Perform(perform_code code, void* _data)
 {
 	return BTwoDimensionalLayout::Perform(code, _data);
 }

@@ -19,16 +19,14 @@ IntegerValue::~IntegerValue()
 }
 
 
-bool
-IntegerValue::IsSigned() const
+bool IntegerValue::IsSigned() const
 {
 	bool isSigned;
 	return fValue.IsInteger(&isSigned) && isSigned;
 }
 
 
-bool
-IntegerValue::ToString(BString& _string) const
+bool IntegerValue::ToString(BString& _string) const
 {
 	bool isSigned;
 	if (!fValue.IsInteger(&isSigned))
@@ -48,16 +46,14 @@ IntegerValue::ToString(BString& _string) const
 }
 
 
-bool
-IntegerValue::ToVariant(BVariant& _value) const
+bool IntegerValue::ToVariant(BVariant& _value) const
 {
 	_value = fValue;
 	return true;
 }
 
 
-bool
-IntegerValue::operator==(const Value& other) const
+bool IntegerValue::operator==(const Value& other) const
 {
 	const IntegerValue* otherInt = dynamic_cast<const IntegerValue*>(&other);
 	return otherInt != NULL ? fValue == otherInt->fValue : false;

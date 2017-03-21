@@ -45,16 +45,14 @@ DwarfLoadingStateHandler::~DwarfLoadingStateHandler()
 }
 
 
-bool
-DwarfLoadingStateHandler::SupportsState(
+bool DwarfLoadingStateHandler::SupportsState(
 	SpecificImageDebugInfoLoadingState* state)
 {
 	return dynamic_cast<DwarfImageDebugInfoLoadingState*>(state) != NULL;
 }
 
 
-void
-DwarfLoadingStateHandler::HandleState(
+void DwarfLoadingStateHandler::HandleState(
 	SpecificImageDebugInfoLoadingState* state, UserInterface* interface)
 {
 	DwarfImageDebugInfoLoadingState* dwarfState
@@ -142,8 +140,7 @@ DwarfLoadingStateHandler::HandleState(
 }
 
 
-status_t
-DwarfLoadingStateHandler::_GetMatchingDebugInfoPackage(
+status_t DwarfLoadingStateHandler::_GetMatchingDebugInfoPackage(
 	const BString& debugFileName, BString& _packageName)
 {
 	BString resolvableName;
@@ -180,8 +177,7 @@ DwarfLoadingStateHandler::_GetMatchingDebugInfoPackage(
 }
 
 
-status_t
-DwarfLoadingStateHandler::_GetResolvableName(const BString& debugFileName,
+status_t DwarfLoadingStateHandler::_GetResolvableName(const BString& debugFileName,
 	BString& _resolvableName, BPackageVersion& _resolvableVersion)
 {
 	BString fileName;

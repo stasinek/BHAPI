@@ -5,21 +5,11 @@
 #ifndef BHAPI_ROSTER_H
 #define BHAPI_ROSTER_H
 
+
+
 #ifdef __cplusplus
 namespace bhapi {
 #endif
-struct app_info {
-    app_info();
-    ~app_info();
-
-    thread_id	thread;
-    team_id		team;
-    port_id		port;
-    uint32		flags;
-    entry_ref	ref;
-    char		signature[B_MIME_TYPE_LENGTH];
-};
-
 // app flags
 #define B_SINGLE_LAUNCH			(0x0)
 #define B_MULTIPLE_LAUNCH		(0x1)
@@ -64,6 +54,25 @@ class BList;
 #include <Entry.h>
 #include <Messenger.h>
 #include <Haiku.h>
+
+#ifdef __cplusplus
+namespace bhapi {
+#endif
+struct app_info {
+    app_info();
+    ~app_info();
+
+    thread_id	thread;
+    team_id		team;
+    port_id		port;
+    uint32		flags;
+    entry_ref	ref;
+    char		signature[B_MIME_TYPE_LENGTH];
+};
+#ifdef __cplusplus
+}
+#endif
+
 class BHAPI_IMPEXP BRoster {
 public:
                                 BRoster();

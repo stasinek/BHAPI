@@ -61,7 +61,7 @@ EDFBRender::EDFBRender()
 }
 
 
-void
+void 
 EDFBRender::SetSurface(IDirectFBSurface *surface, BRect *margin)
 {
 	fSurface = surface;
@@ -71,7 +71,7 @@ EDFBRender::SetSurface(IDirectFBSurface *surface, BRect *margin)
 }
 
 
-void
+void 
 EDFBRender::SetClipping(const BRegion *clipping)
 {
 	fClipping.MakeEmpty();
@@ -86,7 +86,7 @@ EDFBRender::SetClipping(const BRegion *clipping)
 }
 
 
-void
+void 
 EDFBRender::PrepareForDrawing(BGraphicsContext *dc)
 {
 	if(dc == NULL) return;
@@ -99,14 +99,14 @@ EDFBRender::PrepareForDrawing(BGraphicsContext *dc)
 }
 
 
-status_t
+status_t 
 EDFBRender::InitCheck() const
 {
 	return(fSurface ? B_OK : B_NO_INIT);
 }
 
 
-void
+void 
 EDFBRender::GetFrame(__be_int32 *originX,  __be_int32 *originY,  __be_uint32 *width,  __be_uint32 *height) const
 {
 	int w = 0, h = 0;
@@ -119,7 +119,7 @@ EDFBRender::GetFrame(__be_int32 *originX,  __be_int32 *originY,  __be_uint32 *wi
 }
 
 
-void
+void 
 EDFBRender::GetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color &color) const
 {
 	DFBSurfacePixelFormat pixel_format;
@@ -234,7 +234,7 @@ EDFBRender::GetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color &color) const
 }
 
 
-void
+void 
 EDFBRender::PutPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color)
 {
 	if(fSurface == NULL) return;
@@ -249,7 +249,7 @@ EDFBRender::PutPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color)
 }
 
 
-void
+void 
 EDFBRender::PutRect(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bhapi::rgb_color color)
 {
 	if(fSurface == NULL || width == 0 || height == 0) return;

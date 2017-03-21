@@ -109,8 +109,7 @@ ThreadHandler::~ThreadHandler()
 }
 
 
-void
-ThreadHandler::Init()
+void ThreadHandler::Init()
 {
 	fWorker->ScheduleJob(new(std::nothrow) GetThreadStateJob(fDebuggerInterface,
 		fThread), fJobListener);
@@ -118,8 +117,7 @@ ThreadHandler::Init()
 }
 
 
-status_t
-ThreadHandler::SetBreakpointAndRun(target_addr_t address)
+status_t ThreadHandler::SetBreakpointAndRun(target_addr_t address)
 {
 	status_t error = _InstallTemporaryBreakpoint(address);
 	if (error != B_OK)
@@ -137,16 +135,14 @@ ThreadHandler::SetBreakpointAndRun(target_addr_t address)
 }
 
 
-bool
-ThreadHandler::HandleThreadDebugged(ThreadDebuggedEvent* event,
+bool ThreadHandler::HandleThreadDebugged(ThreadDebuggedEvent* event,
 	const BString& stoppedReason)
 {
 	return _HandleThreadStopped(NULL, THREAD_STOPPED_DEBUGGED, stoppedReason);
 }
 
 
-bool
-ThreadHandler::HandleDebuggerCall(DebuggerCallEvent* event)
+bool ThreadHandler::HandleDebuggerCall(DebuggerCallEvent* event)
 {
 	BString message;
 	fDebuggerInterface->ReadMemoryString(event->Message(), 1024, message);
@@ -154,8 +150,7 @@ ThreadHandler::HandleDebuggerCall(DebuggerCallEvent* event)
 }
 
 
-bool
-ThreadHandler::HandleBreakpointHit(BreakpointHitEvent* event)
+bool ThreadHandler::HandleBreakpointHit(BreakpointHitEvent* event)
 {
 	CpuState* cpuState = event->GetCpuState();
 	target_addr_t instructionPointer = cpuState->InstructionPointer();
@@ -215,16 +210,14 @@ ThreadHandler::HandleBreakpointHit(BreakpointHitEvent* event)
 }
 
 
-bool
-ThreadHandler::HandleWatchpointHit(WatchpointHitEvent* event)
+bool ThreadHandler::HandleWatchpointHit(WatchpointHitEvent* event)
 {
 	return _HandleThreadStopped(event->GetCpuState(),
 		THREAD_STOPPED_WATCHPOINT);
 }
 
 
-bool
-ThreadHandler::HandleSingleStep(SingleStepEvent* event)
+bool ThreadHandler::HandleSingleStep(SingleStepEvent* event)
 {
 	// Check whether we're stepping automatically.
 	if (fStepMode != STEP_NONE) {
@@ -237,8 +230,7 @@ ThreadHandler::HandleSingleStep(SingleStepEvent* event)
 }
 
 
-bool
-ThreadHandler::HandleExceptionOccurred(ExceptionOccurredEvent* event)
+bool ThreadHandler::HandleExceptionOccurred(ExceptionOccurredEvent* event)
 {
 	char buffer[256];
 	get_debug_exception_string(event->Exception(), buffer, sizeof(buffer));
@@ -246,8 +238,7 @@ ThreadHandler::HandleExceptionOccurred(ExceptionOccurredEvent* event)
 }
 
 
-bool
-ThreadHandler::HandleSignalReceived(SignalReceivedEvent* event)
+bool ThreadHandler::HandleSignalReceived(SignalReceivedEvent* event)
 {
 	::Team* team = fThread->GetTeam();
 	AutoLocker<Team> locker(team);
@@ -299,8 +290,7 @@ ThreadHandler::HandleSignalReceived(SignalReceivedEvent* event)
 }
 
 
-void
-ThreadHandler::HandleThreadAction(uint32 action, target_addr_t address)
+void ThreadHandler::HandleThreadAction(uint32 action, target_addr_t address)
 {
 	AutoLocker<Team> locker(fThread->GetTeam());
 
@@ -445,8 +435,7 @@ ThreadHandler::HandleThreadAction(uint32 action, target_addr_t address)
 }
 
 
-void
-ThreadHandler::HandleThreadStateChanged()
+void ThreadHandler::HandleThreadStateChanged()
 {
 	AutoLocker<Team> locker(fThread->GetTeam());
 
@@ -464,8 +453,7 @@ ThreadHandler::HandleThreadStateChanged()
 }
 
 
-void
-ThreadHandler::HandleCpuStateChanged()
+void ThreadHandler::HandleCpuStateChanged()
 {
 	AutoLocker<Team> locker(fThread->GetTeam());
 
@@ -482,14 +470,12 @@ ThreadHandler::HandleCpuStateChanged()
 }
 
 
-void
-ThreadHandler::HandleStackTraceChanged()
+void ThreadHandler::HandleStackTraceChanged()
 {
 }
 
 
-status_t
-ThreadHandler::GetImageDebugInfo(Image* image, ImageDebugInfo*& _info)
+status_t ThreadHandler::GetImageDebugInfo(Image* image, ImageDebugInfo*& _info)
 {
 	AutoLocker<Team> teamLocker(fThread->GetTeam());
 
@@ -505,8 +491,7 @@ ThreadHandler::GetImageDebugInfo(Image* image, ImageDebugInfo*& _info)
 }
 
 
-bool
-ThreadHandler::_HandleThreadStopped(CpuState* cpuState, uint32 stoppedReason,
+bool ThreadHandler::_HandleThreadStopped(CpuState* cpuState, uint32 stoppedReason,
 	const BString& stoppedReasonInfo)
 {
 	_ClearContinuationState();
@@ -520,8 +505,7 @@ ThreadHandler::_HandleThreadStopped(CpuState* cpuState, uint32 stoppedReason,
 }
 
 
-bool
-ThreadHandler::_HandleSetAddress(CpuState* state, target_addr_t address)
+bool ThreadHandler::_HandleSetAddress(CpuState* state, target_addr_t address)
 {
 	CpuState* newState = NULL;
 	if (state->Clone(newState) != B_OK)
@@ -540,8 +524,7 @@ ThreadHandler::_HandleSetAddress(CpuState* state, target_addr_t address)
 }
 
 
-void
-ThreadHandler::_SetThreadState(uint32 state, CpuState* cpuState,
+void ThreadHandler::_SetThreadState(uint32 state, CpuState* cpuState,
 	uint32 stoppedReason, const BString& stoppedReasonInfo)
 {
 	fThread->SetState(state, stoppedReason, stoppedReasonInfo);
@@ -583,16 +566,14 @@ ThreadHandler::_GetStatementAtInstructionPointer(StackFrame* frame)
 }
 
 
-void
-ThreadHandler::_StepFallback()
+void ThreadHandler::_StepFallback()
 {
 	fStepMode = STEP_NONE;
 	_SingleStepThread(0);
 }
 
 
-bool
-ThreadHandler::_DoStepOver(CpuState* cpuState)
+bool ThreadHandler::_DoStepOver(CpuState* cpuState)
 {
 	TRACE_CONTROL("ThreadHandler::_DoStepOver()\n");
 
@@ -627,8 +608,7 @@ ThreadHandler::_DoStepOver(CpuState* cpuState)
 }
 
 
-status_t
-ThreadHandler::_InstallTemporaryBreakpoint(target_addr_t address)
+status_t ThreadHandler::_InstallTemporaryBreakpoint(target_addr_t address)
 {
 	_UninstallTemporaryBreakpoint();
 
@@ -642,8 +622,7 @@ ThreadHandler::_InstallTemporaryBreakpoint(target_addr_t address)
 }
 
 
-void
-ThreadHandler::_UninstallTemporaryBreakpoint()
+void ThreadHandler::_UninstallTemporaryBreakpoint()
 {
 	if (fBreakpointAddress == 0)
 		return;
@@ -653,8 +632,7 @@ ThreadHandler::_UninstallTemporaryBreakpoint()
 }
 
 
-void
-ThreadHandler::_ClearContinuationState()
+void ThreadHandler::_ClearContinuationState()
 {
 	_UninstallTemporaryBreakpoint();
 
@@ -668,8 +646,7 @@ ThreadHandler::_ClearContinuationState()
 }
 
 
-void
-ThreadHandler::_RunThread(target_addr_t instructionPointer)
+void ThreadHandler::_RunThread(target_addr_t instructionPointer)
 {
 	fPreviousInstructionPointer = instructionPointer;
 	fDebuggerInterface->ContinueThread(ThreadID());
@@ -677,8 +654,7 @@ ThreadHandler::_RunThread(target_addr_t instructionPointer)
 }
 
 
-void
-ThreadHandler::_SingleStepThread(target_addr_t instructionPointer)
+void ThreadHandler::_SingleStepThread(target_addr_t instructionPointer)
 {
 	fPreviousInstructionPointer = instructionPointer;
 	fDebuggerInterface->SingleStepThread(ThreadID());
@@ -686,8 +662,7 @@ ThreadHandler::_SingleStepThread(target_addr_t instructionPointer)
 }
 
 
-bool
-ThreadHandler::_HandleBreakpointHitStep(CpuState* cpuState)
+bool ThreadHandler::_HandleBreakpointHitStep(CpuState* cpuState)
 {
 	// in any case uninstall the temporary breakpoint
 	_UninstallTemporaryBreakpoint();
@@ -797,8 +772,7 @@ ThreadHandler::_HandleBreakpointHitStep(CpuState* cpuState)
 }
 
 
-bool
-ThreadHandler::_HandleSingleStepStep(CpuState* cpuState)
+bool ThreadHandler::_HandleSingleStepStep(CpuState* cpuState)
 {
 	TRACE_CONTROL("ThreadHandler::_HandleSingleStepStep(): ip: %" B_PRIx64 "\n",
 		cpuState->InstructionPointer());
@@ -889,8 +863,7 @@ ThreadHandler::_HandleSingleStepStep(CpuState* cpuState)
 }
 
 
-bool
-ThreadHandler::_HandleBreakpointConditionIfNeeded(CpuState* cpuState)
+bool ThreadHandler::_HandleBreakpointConditionIfNeeded(CpuState* cpuState)
 {
 	AutoLocker< ::Team> teamLocker(fThread->GetTeam());
 	Breakpoint* breakpoint = fThread->GetTeam()->BreakpointAtAddress(
@@ -990,8 +963,7 @@ ThreadHandler::_HandleBreakpointConditionIfNeeded(CpuState* cpuState)
 }
 
 
-void
-ThreadHandler::_HandleBreakpointConditionEvaluated(ExpressionResult* value)
+void ThreadHandler::_HandleBreakpointConditionEvaluated(ExpressionResult* value)
 {
 	fConditionResult = value;
 	if (fConditionResult != NULL)
@@ -1000,8 +972,7 @@ ThreadHandler::_HandleBreakpointConditionEvaluated(ExpressionResult* value)
 }
 
 
-bool
-ThreadHandler::_CheckStopCondition()
+bool ThreadHandler::_CheckStopCondition()
 {
 	// if we we're unable to properly assess the expression result
 	// in any way, fall back to behaving like an unconditional breakpoint.
@@ -1019,8 +990,7 @@ ThreadHandler::_CheckStopCondition()
 }
 
 
-bool
-ThreadHandler::_HasExitedFrame(target_addr_t framePointer) const
+bool ThreadHandler::_HasExitedFrame(target_addr_t framePointer) const
 {
 	return fDebuggerInterface->GetArchitecture()->StackGrowthDirection()
 			== STACK_GROWTH_DIRECTION_POSITIVE

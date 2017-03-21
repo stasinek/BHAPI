@@ -873,8 +873,7 @@ FT_BEGIN_HEADER
   /*    Otherwise, the callback is only called once per scan-line, and     */
   /*    only for those scanlines that do have `gray' pixels on them.       */
   /*                                                                       */
-  typedef void
-  (*FT_SpanFunc)( int             y,
+  typedef void   (*FT_SpanFunc)( int             y,
                   int             count,
                   const FT_Span*  spans,
                   void*           user );
@@ -933,8 +932,7 @@ FT_BEGIN_HEADER
   /* <Return>                                                              */
   /*    1~if the pixel is `set', 0~otherwise.                              */
   /*                                                                       */
-  typedef void
-  (*FT_Raster_BitSet_Func)( int    y,
+  typedef void   (*FT_Raster_BitSet_Func)( int    y,
                             int    x,
                             void*  user );
 
@@ -1098,8 +1096,7 @@ FT_BEGIN_HEADER
   /* <Input>                                                               */
   /*    raster :: A handle to the raster object.                           */
   /*                                                                       */
-  typedef void
-  (*FT_Raster_DoneFunc)( FT_Raster  raster );
+  typedef void   (*FT_Raster_DoneFunc)( FT_Raster  raster );
 
 #define FT_Raster_Done_Func  FT_Raster_DoneFunc
 
@@ -1131,8 +1128,7 @@ FT_BEGIN_HEADER
   /*    passed to the raster constructor).  However, this is not           */
   /*    recommended for efficiency purposes.                               */
   /*                                                                       */
-  typedef void
-  (*FT_Raster_ResetFunc)( FT_Raster       raster,
+  typedef void   (*FT_Raster_ResetFunc)( FT_Raster       raster,
                           unsigned char*  pool_base,
                           unsigned long   pool_size );
 

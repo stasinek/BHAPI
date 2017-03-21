@@ -17,8 +17,7 @@
 	\param stackEnd The first address past the thread stack.
 	\return The number of return addresses written to the given array.
 */
-int32
-__arch_get_stack_trace(addr_t* returnAddresses, int32 maxCount,
+int32 __arch_get_stack_trace(addr_t* returnAddresses, int32 maxCount,
 	int32 skipFrames, addr_t stackBase, addr_t stackEnd)
 {
 	int32 count = 0;

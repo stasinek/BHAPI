@@ -42,8 +42,7 @@ SyscallInfo::SyscallInfo(bigtime_t startTime, bigtime_t endTime,
 }
 
 
-void
-SyscallInfo::SetTo(bigtime_t startTime, bigtime_t endTime, uint64 returnValue,
+void SyscallInfo::SetTo(bigtime_t startTime, bigtime_t endTime, uint64 returnValue,
 	uint32 syscall, const uint8* args)
 {
 	fStartTime = startTime;

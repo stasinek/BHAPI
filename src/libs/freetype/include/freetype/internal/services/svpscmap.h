@@ -37,14 +37,12 @@ FT_BEGIN_HEADER
   /*
    *  Macintosh name id to glyph name.  NULL if invalid index.
    */
-  typedef const char*
-  (*PS_Macintosh_NameFunc)( FT_UInt  name_index );
+  typedef const char*    (*PS_Macintosh_NameFunc)( FT_UInt  name_index );
 
   /*
    *  Adobe standard string ID to glyph name.  NULL if invalid index.
    */
-  typedef const char*
-  (*PS_Adobe_Std_StringsFunc)( FT_UInt  string_index );
+  typedef const char*    (*PS_Adobe_Std_StringsFunc)( FT_UInt  string_index );
 
 
   /*
@@ -74,16 +72,14 @@ FT_BEGIN_HEADER
    *  A function which returns a glyph name for a given index.  Returns
    *  NULL if invalid index.
    */
-  typedef const char*
-  (*PS_GetGlyphNameFunc)( FT_Pointer  data,
+  typedef const char*    (*PS_GetGlyphNameFunc)( FT_Pointer  data,
                           FT_UInt     string_index );
 
   /*
    *  A function used to release the glyph name returned by
    *  PS_GetGlyphNameFunc, when needed
    */
-  typedef void
-  (*PS_FreeGlyphNameFunc)( FT_Pointer  data,
+  typedef void   (*PS_FreeGlyphNameFunc)( FT_Pointer  data,
                            const char*  name );
 
   typedef FT_Error

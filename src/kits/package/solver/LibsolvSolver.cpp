@@ -194,8 +194,7 @@ LibsolvSolver::~LibsolvSolver()
 }
 
 
-status_t
-LibsolvSolver::Init()
+status_t LibsolvSolver::Init()
 {
 	_Cleanup();
 
@@ -204,8 +203,7 @@ LibsolvSolver::Init()
 }
 
 
-void
-LibsolvSolver::SetDebugLevel(int32 level)
+void LibsolvSolver::SetDebugLevel(int32 level)
 {
 	fDebugLevel = level;
 
@@ -214,8 +212,7 @@ LibsolvSolver::SetDebugLevel(int32 level)
 }
 
 
-status_t
-LibsolvSolver::AddRepository(BSolverRepository* repository)
+status_t LibsolvSolver::AddRepository(BSolverRepository* repository)
 {
 	if (repository == NULL || repository->InitCheck() != B_OK)
 		return B_BAD_VALUE;
@@ -239,8 +236,7 @@ LibsolvSolver::AddRepository(BSolverRepository* repository)
 }
 
 
-status_t
-LibsolvSolver::FindPackages(const char* searchString, uint32 flags,
+status_t LibsolvSolver::FindPackages(const char* searchString, uint32 flags,
 	BObjectList<BSolverPackage>& _packages)
 {
 	// add repositories to pool
@@ -305,8 +301,7 @@ LibsolvSolver::FindPackages(const char* searchString, uint32 flags,
 }
 
 
-status_t
-LibsolvSolver::FindPackages(const BSolverPackageSpecifierList& packages,
+status_t LibsolvSolver::FindPackages(const BSolverPackageSpecifierList& packages,
 	uint32 flags, BObjectList<BSolverPackage>& _packages,
 	const BSolverPackageSpecifier** _unmatched)
 {
@@ -335,8 +330,7 @@ LibsolvSolver::FindPackages(const BSolverPackageSpecifierList& packages,
 }
 
 
-status_t
-LibsolvSolver::Install(const BSolverPackageSpecifierList& packages,
+status_t LibsolvSolver::Install(const BSolverPackageSpecifierList& packages,
 	const BSolverPackageSpecifier** _unmatched)
 {
 	if (_unmatched != NULL)
@@ -367,8 +361,7 @@ LibsolvSolver::Install(const BSolverPackageSpecifierList& packages,
 }
 
 
-status_t
-LibsolvSolver::Uninstall(const BSolverPackageSpecifierList& packages,
+status_t LibsolvSolver::Uninstall(const BSolverPackageSpecifierList& packages,
 	const BSolverPackageSpecifier** _unmatched)
 {
 	if (_unmatched != NULL)
@@ -401,8 +394,7 @@ LibsolvSolver::Uninstall(const BSolverPackageSpecifierList& packages,
 }
 
 
-status_t
-LibsolvSolver::Update(const BSolverPackageSpecifierList& packages,
+status_t LibsolvSolver::Update(const BSolverPackageSpecifierList& packages,
 	bool installNotYetInstalled, const BSolverPackageSpecifier** _unmatched)
 {
 	if (_unmatched != NULL)
@@ -446,8 +438,7 @@ LibsolvSolver::Update(const BSolverPackageSpecifierList& packages,
 }
 
 
-status_t
-LibsolvSolver::FullSync()
+status_t LibsolvSolver::FullSync()
 {
 	// add repositories to pool
 	status_t error = _AddRepositories();
@@ -469,8 +460,7 @@ LibsolvSolver::FullSync()
 }
 
 
-status_t
-LibsolvSolver::VerifyInstallation(uint32 flags)
+status_t LibsolvSolver::VerifyInstallation(uint32 flags)
 {
 	if (_InstalledRepository() == NULL)
 		return B_BAD_VALUE;
@@ -497,8 +487,7 @@ LibsolvSolver::VerifyInstallation(uint32 flags)
 }
 
 
-status_t
-LibsolvSolver::SelectProblemSolution(BSolverProblem* _problem,
+status_t LibsolvSolver::SelectProblemSolution(BSolverProblem* _problem,
 	const BSolverProblemSolution* _solution)
 {
 	if (_problem == NULL)
@@ -519,8 +508,7 @@ LibsolvSolver::SelectProblemSolution(BSolverProblem* _problem,
 }
 
 
-status_t
-LibsolvSolver::SolveAgain()
+status_t LibsolvSolver::SolveAgain()
 {
 	if (fSolver == NULL || fJobs == NULL)
 		return B_BAD_VALUE;
@@ -537,8 +525,7 @@ LibsolvSolver::SolveAgain()
 }
 
 
-int32
-LibsolvSolver::CountProblems() const
+int32 LibsolvSolver::CountProblems() const
 {
 	return fProblems.CountItems();
 }
@@ -551,8 +538,7 @@ LibsolvSolver::ProblemAt(int32 index) const
 }
 
 
-status_t
-LibsolvSolver::GetResult(BSolverResult& _result)
+status_t LibsolvSolver::GetResult(BSolverResult& _result)
 {
 	if (fSolver == NULL || HasProblems())
 		return B_BAD_VALUE;
@@ -598,8 +584,7 @@ LibsolvSolver::GetResult(BSolverResult& _result)
 }
 
 
-status_t
-LibsolvSolver::_InitPool()
+status_t LibsolvSolver::_InitPool()
 {
 	_CleanupPool();
 
@@ -635,8 +620,7 @@ LibsolvSolver::_InitPool()
 }
 
 
-status_t
-LibsolvSolver::_InitJobQueue()
+status_t LibsolvSolver::_InitJobQueue()
 {
 	_CleanupJobQueue();
 
@@ -645,8 +629,7 @@ LibsolvSolver::_InitJobQueue()
 }
 
 
-void
-LibsolvSolver::_InitSolver()
+void LibsolvSolver::_InitSolver()
 {
 	_CleanupSolver();
 
@@ -656,8 +639,7 @@ LibsolvSolver::_InitSolver()
 }
 
 
-void
-LibsolvSolver::_Cleanup()
+void LibsolvSolver::_Cleanup()
 {
 	_CleanupPool();
 
@@ -667,8 +649,7 @@ LibsolvSolver::_Cleanup()
 }
 
 
-void
-LibsolvSolver::_CleanupPool()
+void LibsolvSolver::_CleanupPool()
 {
 	// clean up jobs and solver data
 	_CleanupJobQueue();
@@ -689,8 +670,7 @@ LibsolvSolver::_CleanupPool()
 }
 
 
-void
-LibsolvSolver::_CleanupJobQueue()
+void LibsolvSolver::_CleanupJobQueue()
 {
 	_CleanupSolver();
 
@@ -699,8 +679,7 @@ LibsolvSolver::_CleanupJobQueue()
 }
 
 
-void
-LibsolvSolver::_CleanupSolver()
+void LibsolvSolver::_CleanupSolver()
 {
 	fProblems.MakeEmpty();
 
@@ -711,8 +690,7 @@ LibsolvSolver::_CleanupSolver()
 }
 
 
-bool
-LibsolvSolver::_HaveRepositoriesChanged() const
+bool LibsolvSolver::_HaveRepositoriesChanged() const
 {
 	int32 repositoryCount = fRepositoryInfos.CountItems();
 	for (int32 i = 0; i < repositoryCount; i++) {
@@ -725,8 +703,7 @@ LibsolvSolver::_HaveRepositoriesChanged() const
 }
 
 
-status_t
-LibsolvSolver::_AddRepositories()
+status_t LibsolvSolver::_AddRepositories()
 {
 	if (fPool != NULL && !_HaveRepositoriesChanged())
 		return B_OK;
@@ -823,8 +800,7 @@ LibsolvSolver::_GetSolvable(BSolverPackage* package) const
 }
 
 
-status_t
-LibsolvSolver::_AddSpecifiedPackages(
+status_t LibsolvSolver::_AddSpecifiedPackages(
 	const BSolverPackageSpecifierList& packages,
 	const BSolverPackageSpecifier** _unmatched, int additionalFlags)
 {
@@ -895,8 +871,7 @@ LibsolvSolver::_AddSpecifiedPackages(
 }
 
 
-status_t
-LibsolvSolver::_AddProblem(Id problemId)
+status_t LibsolvSolver::_AddProblem(Id problemId)
 {
 	enum {
 		NEED_SOURCE		= 0x1,
@@ -1026,8 +1001,7 @@ LibsolvSolver::_AddProblem(Id problemId)
 }
 
 
-status_t
-LibsolvSolver::_AddSolution(Problem* problem, Id solutionId)
+status_t LibsolvSolver::_AddSolution(Problem* problem, Id solutionId)
 {
 	Solution* solution = new(std::nothrow) Solution(solutionId, problem);
 	if (solution == NULL || !problem->AppendSolution(solution)) {
@@ -1053,8 +1027,7 @@ LibsolvSolver::_AddSolution(Problem* problem, Id solutionId)
 }
 
 
-status_t
-LibsolvSolver::_AddSolutionElement(Solution* solution, Id sourceId, Id targetId)
+status_t LibsolvSolver::_AddSolutionElement(Solution* solution, Id sourceId, Id targetId)
 {
 	typedef BSolverProblemSolutionElement Element;
 
@@ -1182,8 +1155,7 @@ LibsolvSolver::_AddSolutionElement(Solution* solution, Id sourceId, Id targetId)
 }
 
 
-status_t
-LibsolvSolver::_AddSolutionElement(Solution* solution,
+status_t LibsolvSolver::_AddSolutionElement(Solution* solution,
 	BSolverProblemSolutionElement::BType type, Id sourceSolvableId,
 	Id targetSolvableId, const char* selectionString)
 {
@@ -1217,8 +1189,7 @@ LibsolvSolver::_AddSolutionElement(Solution* solution,
 }
 
 
-status_t
-LibsolvSolver::_GetResolvableExpression(Id id,
+status_t LibsolvSolver::_GetResolvableExpression(Id id,
 	BPackageResolvableExpression& _expression) const
 {
 	// Try to translate the libsolv ID to a resolvable expression. Generally
@@ -1282,8 +1253,7 @@ LibsolvSolver::_GetResolvableExpression(Id id,
 }
 
 
-status_t
-LibsolvSolver::_GetFoundPackages(SolvQueue& selection, uint32 flags,
+status_t LibsolvSolver::_GetFoundPackages(SolvQueue& selection, uint32 flags,
 	BObjectList<BSolverPackage>& _packages)
 {
 	// get solvables
@@ -1311,8 +1281,7 @@ LibsolvSolver::_GetFoundPackages(SolvQueue& selection, uint32 flags,
 }
 
 
-status_t
-LibsolvSolver::_Solve()
+status_t LibsolvSolver::_Solve()
 {
 	if (fJobs == NULL || fSolver == NULL)
 		return B_BAD_VALUE;
@@ -1332,8 +1301,7 @@ LibsolvSolver::_Solve()
 }
 
 
-void
-LibsolvSolver::_SetJobsSolverMode(int solverMode)
+void LibsolvSolver::_SetJobsSolverMode(int solverMode)
 {
 	for (int i = 0; i < fJobs->count; i += 2)
 		fJobs->elements[i] |= solverMode;

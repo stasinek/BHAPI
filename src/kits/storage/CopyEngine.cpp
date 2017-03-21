@@ -57,15 +57,13 @@ BCopyEngine::Controller() const
 }
 
 
-void
-BCopyEngine::SetController(BController* controller)
+void BCopyEngine::SetController(BController* controller)
 {
 	fController = controller;
 }
 
 
-uint32
-BCopyEngine::Flags() const
+uint32 BCopyEngine::Flags() const
 {
 	return fFlags;
 }
@@ -95,8 +93,7 @@ BCopyEngine::RemoveFlags(uint32 flags)
 }
 
 
-status_t
-BCopyEngine::CopyEntry(const Entry& sourceEntry, const Entry& destEntry)
+status_t BCopyEngine::CopyEntry(const Entry& sourceEntry, const Entry& destEntry)
 {
 	if (fBuffer == NULL) {
 		fBuffer = new(std::nothrow) char[kDefaultBufferSize];
@@ -127,8 +124,7 @@ BCopyEngine::CopyEntry(const Entry& sourceEntry, const Entry& destEntry)
 }
 
 
-status_t
-BCopyEngine::_CopyEntry(const char* sourcePath, const char* destPath)
+status_t BCopyEngine::_CopyEntry(const char* sourcePath, const char* destPath)
 {
 	// apply entry filter
 	if (fController != NULL && !fController->EntryStarted(sourcePath))
@@ -334,8 +330,7 @@ BCopyEngine::_CopyEntry(const char* sourcePath, const char* destPath)
 }
 
 
-status_t
-BCopyEngine::_CopyFileData(const char* sourcePath, BFile& source,
+status_t BCopyEngine::_CopyFileData(const char* sourcePath, BFile& source,
 	const char* destPath, BFile& destination)
 {
 	off_t offset = 0;
@@ -370,8 +365,7 @@ BCopyEngine::_CopyFileData(const char* sourcePath, BFile& source,
 }
 
 
-status_t
-BCopyEngine::_CopyAttributes(const char* sourcePath, BNode& source,
+status_t BCopyEngine::_CopyAttributes(const char* sourcePath, BNode& source,
 	const char* destPath, BNode& destination)
 {
 	char attrName[B_ATTR_NAME_LENGTH];
@@ -459,8 +453,7 @@ BCopyEngine::_CopyAttributes(const char* sourcePath, BNode& source,
 }
 
 
-void
-BCopyEngine::_NotifyError(status_t error, const char* format, ...)
+void BCopyEngine::_NotifyError(status_t error, const char* format, ...)
 {
 	if (fController != NULL) {
 		va_list args;
@@ -471,8 +464,7 @@ BCopyEngine::_NotifyError(status_t error, const char* format, ...)
 }
 
 
-void
-BCopyEngine::_NotifyErrorVarArgs(status_t error, const char* format,
+void BCopyEngine::_NotifyErrorVarArgs(status_t error, const char* format,
 	va_list args)
 {
 	if (fController != NULL) {
@@ -483,8 +475,7 @@ BCopyEngine::_NotifyErrorVarArgs(status_t error, const char* format,
 }
 
 
-status_t
-BCopyEngine::_HandleEntryError(const char* path, status_t error,
+status_t BCopyEngine::_HandleEntryError(const char* path, status_t error,
 	const char* format, ...)
 {
 	if (fController == NULL)
@@ -501,8 +492,7 @@ BCopyEngine::_HandleEntryError(const char* path, status_t error,
 }
 
 
-status_t
-BCopyEngine::_HandleAttributeError(const char* path, const char* attribute,
+status_t BCopyEngine::_HandleAttributeError(const char* path, const char* attribute,
 	uint32 attributeType, status_t error, const char* format, ...)
 {
 	if (fController == NULL)
@@ -532,38 +522,33 @@ BCopyEngine::BController::~BController()
 }
 
 
-bool
-BCopyEngine::BController::EntryStarted(const char* path)
+bool BCopyEngine::BController::EntryStarted(const char* path)
 {
 	return true;
 }
 
 
-bool
-BCopyEngine::BController::EntryFinished(const char* path, status_t error)
+bool BCopyEngine::BController::EntryFinished(const char* path, status_t error)
 {
 	return error == B_OK;
 }
 
 
-bool
-BCopyEngine::BController::AttributeStarted(const char* path,
+bool BCopyEngine::BController::AttributeStarted(const char* path,
 	const char* attribute, uint32 attributeType)
 {
 	return true;
 }
 
 
-bool
-BCopyEngine::BController::AttributeFinished(const char* path,
+bool BCopyEngine::BController::AttributeFinished(const char* path,
 	const char* attribute, uint32 attributeType, status_t error)
 {
 	return error == B_OK;
 }
 
 
-void
-BCopyEngine::BController::ErrorOccurred(const char* message, status_t error)
+void BCopyEngine::BController::ErrorOccurred(const char* message, status_t error)
 {
 }
 

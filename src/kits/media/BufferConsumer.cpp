@@ -64,8 +64,7 @@ BBufferConsumer::ConsumerType()
 }
 
 
-/*static*/ status_t
-BBufferConsumer::RegionToClipData(const BRegion* region, int32* _format,
+/*static*/ status_t BBufferConsumer::RegionToClipData(const BRegion* region, int32* _format,
 	int32 *_size, void* data)
 {
 	CALLED();
@@ -97,8 +96,7 @@ BBufferConsumer::BBufferConsumer(media_type consumerType)
 }
 
 
-/*static*/ void
-BBufferConsumer::NotifyLateProducer(const media_source& whatSource,
+/*static*/ void BBufferConsumer::NotifyLateProducer(const media_source& whatSource,
 	bigtime_t howMuch, bigtime_t performanceTime)
 {
 	CALLED();
@@ -115,8 +113,7 @@ BBufferConsumer::NotifyLateProducer(const media_source& whatSource,
 }
 
 
-status_t
-BBufferConsumer::SetVideoClippingFor(const media_source& output,
+status_t BBufferConsumer::SetVideoClippingFor(const media_source& output,
 	const media_destination& destination, const int16* shorts, int32 shortCount,
 	const media_video_display_info& display, void* userData, int32* _changeTag,
 	void *_reserved_)
@@ -158,8 +155,7 @@ BBufferConsumer::SetVideoClippingFor(const media_source& output,
 }
 
 
-status_t
-BBufferConsumer::SetOutputEnabled(const media_source &source,
+status_t BBufferConsumer::SetOutputEnabled(const media_source &source,
 								  const media_destination &destination,
 								  bool enabled,
 								  void *user_data,
@@ -186,8 +182,7 @@ BBufferConsumer::SetOutputEnabled(const media_source &source,
 }
 
 
-status_t
-BBufferConsumer::RequestFormatChange(const media_source &source,
+status_t BBufferConsumer::RequestFormatChange(const media_source &source,
 									 const media_destination &destination,
 									 const media_format &to_format,
 									 void *user_data,
@@ -214,8 +209,7 @@ BBufferConsumer::RequestFormatChange(const media_source &source,
 }
 
 
-status_t
-BBufferConsumer::RequestAdditionalBuffer(const media_source &source,
+status_t BBufferConsumer::RequestAdditionalBuffer(const media_source &source,
 										 BBuffer *prev_buffer,
 										 void *_reserved)
 {
@@ -235,8 +229,7 @@ BBufferConsumer::RequestAdditionalBuffer(const media_source &source,
 }
 
 
-status_t
-BBufferConsumer::RequestAdditionalBuffer(const media_source& source,
+status_t BBufferConsumer::RequestAdditionalBuffer(const media_source& source,
 	bigtime_t startTime, void *_reserved)
 {
 	CALLED();
@@ -255,8 +248,7 @@ BBufferConsumer::RequestAdditionalBuffer(const media_source& source,
 }
 
 
-status_t
-BBufferConsumer::SetOutputBuffersFor(const media_source &source,
+status_t BBufferConsumer::SetOutputBuffersFor(const media_source &source,
 	const media_destination &destination, BBufferGroup *group, void *user_data,
 	int32 *change_tag, bool will_reclaim, void *_reserved_)
 {
@@ -311,8 +303,7 @@ BBufferConsumer::SetOutputBuffersFor(const media_source &source,
 }
 
 
-status_t
-BBufferConsumer::SendLatencyChange(const media_source& source,
+status_t BBufferConsumer::SendLatencyChange(const media_source& source,
 	const media_destination& destination, bigtime_t newLatency, uint32 flags)
 {
 	CALLED();
@@ -337,8 +328,7 @@ BBufferConsumer::SendLatencyChange(const media_source& source,
 }
 
 
-status_t
-BBufferConsumer::HandleMessage(int32 message, const void* data, size_t size)
+status_t BBufferConsumer::HandleMessage(int32 message, const void* data, size_t size)
 {
 	PRINT(4, "BBufferConsumer::HandleMessage %#lx, node %ld\n", message, ID());
 	status_t rv;
@@ -464,8 +454,7 @@ BBufferConsumer::HandleMessage(int32 message, const void* data, size_t size)
 	return B_ERROR;
 }
 
-status_t
-BBufferConsumer::SeekTagRequested(const media_destination &destination,
+status_t BBufferConsumer::SeekTagRequested(const media_destination &destination,
 								  bigtime_t in_target_time,
 								  uint32 in_flags,
 								  media_seek_tag *out_seek_tag,
@@ -491,8 +480,7 @@ BBufferConsumer & BBufferConsumer::operator=(const BBufferConsumer &clone)
 
 /*!	Deprecated function for BeOS R4.
 */
-/* static */ status_t
-BBufferConsumer::SetVideoClippingFor(const media_source &output,
+/* static */ status_t BBufferConsumer::SetVideoClippingFor(const media_source &output,
 									 const int16 *shorts,
 									 int32 short_count,
 									 const media_video_display_info &display,
@@ -528,8 +516,7 @@ BBufferConsumer::SetVideoClippingFor(const media_source &output,
 
 /*!	Deprecated function for BeOS R4.
 */
-/*static*/ status_t
-BBufferConsumer::RequestFormatChange(const media_source& source,
+/*static*/ status_t BBufferConsumer::RequestFormatChange(const media_source& source,
 	const media_destination& destination, media_format* format,
 	int32* _changeTag)
 {
@@ -556,8 +543,7 @@ BBufferConsumer::RequestFormatChange(const media_source& source,
 
 /*!	Deprecated function for BeOS R4.
 */
-/*static*/ status_t
-BBufferConsumer::SetOutputEnabled(const media_source& source, bool enabled,
+/*static*/ status_t BBufferConsumer::SetOutputEnabled(const media_source& source, bool enabled,
 	int32* _changeTag)
 {
 	CALLED();

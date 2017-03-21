@@ -11,7 +11,7 @@
 //#	include <GraphicsDefs.h>
 //#	include <Looper.h>
 #endif
-#include <OS.h>
+#include <kernel/OS.h>
 using namespace bhapi;
 
 struct media_node;
@@ -893,15 +893,13 @@ struct media_decode_info {
 // #pragma mark - inline implementations
 
 
-inline bool
-media_format::IsVideo() const
+inline bool media_format::IsVideo() const
 {
     return type == B_MEDIA_ENCODED_VIDEO || type == B_MEDIA_RAW_VIDEO;
 }
 
 
-inline uint32
-media_format::Width() const
+inline uint32 media_format::Width() const
 {
     return type == B_MEDIA_ENCODED_VIDEO
         ? u.encoded_video.output.display.line_width
@@ -909,8 +907,7 @@ media_format::Width() const
 }
 
 
-inline uint32
-media_format::Height() const
+inline uint32 media_format::Height() const
 {
     return type == B_MEDIA_ENCODED_VIDEO
         ? u.encoded_video.output.display.line_count
@@ -954,15 +951,13 @@ media_format::ColorSpace()
 }
 
 
-inline bool
-media_format::IsAudio() const
+inline bool media_format::IsAudio() const
 {
     return type == B_MEDIA_ENCODED_AUDIO || type == B_MEDIA_RAW_AUDIO;
 }
 
 
-inline uint32
-media_format::AudioFormat() const
+inline uint32 media_format::AudioFormat() const
 {
     return type == B_MEDIA_ENCODED_AUDIO
         ? u.encoded_audio.output.format : u.raw_audio.format;
@@ -977,8 +972,7 @@ media_format::AudioFormat()
 }
 
 
-inline uint32
-media_format::AudioFrameSize() const
+inline uint32 media_format::AudioFrameSize() const
 {
     return type == B_MEDIA_ENCODED_AUDIO
         ? (u.encoded_audio.output.format
@@ -989,8 +983,7 @@ media_format::AudioFrameSize() const
 }
 
 
-inline uint32
-media_format::Encoding() const
+inline uint32 media_format::Encoding() const
 {
     return type == B_MEDIA_ENCODED_VIDEO
         ? u.encoded_video.encoding : type == B_MEDIA_ENCODED_AUDIO

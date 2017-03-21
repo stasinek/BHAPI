@@ -7,7 +7,7 @@
 
 
 #include <Drivers.h>
-#include <OS.h>
+#include <kernel/OS.h>
 #include <Haiku.h>
 
 

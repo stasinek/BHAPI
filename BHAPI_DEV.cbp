@@ -30,6 +30,8 @@
 			<Add option="-DBUILDING_DLL=1" />
 			<Add option="-DBHAPI_BUILD_LIBRARY" />
 			<Add option="-D__INTEL__" />
+			<Add directory="src" />
+			<Add directory="src/kits" />
 		</Compiler>
 		<Linker>
 			<Add option="-m32" />
@@ -208,10 +210,10 @@
 		<Unit filename="src/haiku/time.cpp" />
 		<Unit filename="src/haiku/wait_for_objects.cpp" />
 		<Unit filename="src/kits/AppKit.h" />
-		<Unit filename="src/kits/BE.cpp" />
-		<Unit filename="src/kits/BE.h" />
 		<Unit filename="src/kits/Be.1489058397.h" />
 		<Unit filename="src/kits/Be.1489087719.h" />
+		<Unit filename="src/kits/Be.cpp" />
+		<Unit filename="src/kits/Be.h" />
 		<Unit filename="src/kits/DeviceKit.h" />
 		<Unit filename="src/kits/GameKit.h" />
 		<Unit filename="src/kits/InterfaceKit.h" />
@@ -667,8 +669,8 @@
 		<Unit filename="src/kits/kernel/BHAPI_wrapper_port.cpp" />
 		<Unit filename="src/kits/kernel/Debug.cpp" />
 		<Unit filename="src/kits/kernel/Debug.h" />
-		<Unit filename="src/kits/kernel/KERNEL.h" />
-		<Unit filename="src/kits/kernel/KERNEL.h" />
+		<Unit filename="src/kits/kernel/Image.h" />
+		<Unit filename="src/kits/kernel/Kernel.h" />
 		<Unit filename="src/kits/kernel/Memory.h" />
 		<Unit filename="src/kits/kernel/OS.h" />
 		<Unit filename="src/kits/kernel/beos/BHAPI_wrapper_area.cpp" />
@@ -682,7 +684,6 @@
 		<Unit filename="src/kits/kernel/fs_info.h" />
 		<Unit filename="src/kits/kernel/fs_query.h" />
 		<Unit filename="src/kits/kernel/fs_volume.h" />
-		<Unit filename="src/kits/kernel/image.h" />
 		<Unit filename="src/kits/kernel/scheduler.h" />
 		<Unit filename="src/kits/kernel/thread/beos/BHAPI_wrapper_locker.cpp" />
 		<Unit filename="src/kits/kernel/thread/beos/BHAPI_wrapper_semaphore.cpp" />

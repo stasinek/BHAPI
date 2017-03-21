@@ -8,7 +8,7 @@
 
 #include <pthread.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 /** Size of the stack given to teams in user space */

@@ -54,8 +54,7 @@ BMediaRecorder::~BMediaRecorder()
 }
 
 
-status_t
-BMediaRecorder::InitCheck() const
+status_t BMediaRecorder::InitCheck() const
 {
 	CALLED();
 
@@ -63,8 +62,7 @@ BMediaRecorder::InitCheck() const
 }
 
 
-void
-BMediaRecorder::SetAcceptedFormat(const media_format& format)
+void BMediaRecorder::SetAcceptedFormat(const media_format& format)
 {
 	CALLED();
 
@@ -72,8 +70,7 @@ BMediaRecorder::SetAcceptedFormat(const media_format& format)
 }
 
 
-status_t
-BMediaRecorder::SetHooks(ProcessFunc recordFunc, NotifyFunc notifyFunc,
+status_t BMediaRecorder::SetHooks(ProcessFunc recordFunc, NotifyFunc notifyFunc,
 	void* cookie)
 {
 	CALLED();
@@ -86,8 +83,7 @@ BMediaRecorder::SetHooks(ProcessFunc recordFunc, NotifyFunc notifyFunc,
 }
 
 
-void
-BMediaRecorder::BufferReceived(void* buffer, size_t size,
+void BMediaRecorder::BufferReceived(void* buffer, size_t size,
 	const media_header& header)
 {
 	CALLED();
@@ -99,8 +95,7 @@ BMediaRecorder::BufferReceived(void* buffer, size_t size,
 }
 
 
-status_t
-BMediaRecorder::Connect(const media_format& format)
+status_t BMediaRecorder::Connect(const media_format& format)
 {
 	CALLED();
 
@@ -143,8 +138,7 @@ BMediaRecorder::Connect(const media_format& format)
 }
 
 
-status_t
-BMediaRecorder::Connect(const dormant_node_info& dormantNode,
+status_t BMediaRecorder::Connect(const dormant_node_info& dormantNode,
 	const media_format& format)
 {
 	CALLED();
@@ -175,8 +169,7 @@ BMediaRecorder::Connect(const dormant_node_info& dormantNode,
 }
 
 
-status_t
-BMediaRecorder::Connect(const media_node& node,
+status_t BMediaRecorder::Connect(const media_node& node,
 	const media_output* output, const media_format* format)
 {
 	CALLED();
@@ -194,8 +187,7 @@ BMediaRecorder::Connect(const media_node& node,
 }
 
 
-status_t
-BMediaRecorder::Disconnect()
+status_t BMediaRecorder::Disconnect()
 {
 	CALLED();
 
@@ -233,8 +225,7 @@ BMediaRecorder::Disconnect()
 }
 
 
-status_t
-BMediaRecorder::Start(bool force)
+status_t BMediaRecorder::Start(bool force)
 {
 	CALLED();
 
@@ -271,8 +262,7 @@ BMediaRecorder::Start(bool force)
 }
 
 
-status_t
-BMediaRecorder::Stop(bool force)
+status_t BMediaRecorder::Stop(bool force)
 {
 	CALLED();
 
@@ -294,8 +284,7 @@ BMediaRecorder::Stop(bool force)
 }
 
 
-bool
-BMediaRecorder::IsRunning() const
+bool BMediaRecorder::IsRunning() const
 {
 	CALLED();
 
@@ -303,8 +292,7 @@ BMediaRecorder::IsRunning() const
 }
 
 
-bool
-BMediaRecorder::IsConnected() const
+bool BMediaRecorder::IsConnected() const
 {
 	CALLED();
 
@@ -339,8 +327,7 @@ BMediaRecorder::Format() const
 }
 
 
-status_t
-BMediaRecorder::_Connect(const media_node& node,
+status_t BMediaRecorder::_Connect(const media_node& node,
 	const media_output* output, const media_format& format)
 {
 	CALLED();

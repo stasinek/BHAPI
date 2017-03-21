@@ -56,80 +56,70 @@ BPackageAttributeValue::BPackageAttributeValue()
 }
 
 
-void
-BPackageAttributeValue::SetTo(int8 value)
+void BPackageAttributeValue::SetTo(int8 value)
 {
 	signedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_INT;
 }
 
 
-void
-BPackageAttributeValue::SetTo(uint8 value)
+void BPackageAttributeValue::SetTo(uint8 value)
 {
 	unsignedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_UINT;
 }
 
 
-void
-BPackageAttributeValue::SetTo(int16 value)
+void BPackageAttributeValue::SetTo(int16 value)
 {
 	signedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_INT;
 }
 
 
-void
-BPackageAttributeValue::SetTo(uint16 value)
+void BPackageAttributeValue::SetTo(uint16 value)
 {
 	unsignedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_UINT;
 }
 
 
-void
-BPackageAttributeValue::SetTo(int32 value)
+void BPackageAttributeValue::SetTo(int32 value)
 {
 	signedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_INT;
 }
 
 
-void
-BPackageAttributeValue::SetTo(uint32 value)
+void BPackageAttributeValue::SetTo(uint32 value)
 {
 	unsignedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_UINT;
 }
 
 
-void
-BPackageAttributeValue::SetTo(int64 value)
+void BPackageAttributeValue::SetTo(int64 value)
 {
 	signedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_INT;
 }
 
 
-void
-BPackageAttributeValue::SetTo(uint64 value)
+void BPackageAttributeValue::SetTo(uint64 value)
 {
 	unsignedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_UINT;
 }
 
 
-void
-BPackageAttributeValue::SetTo(const char* value)
+void BPackageAttributeValue::SetTo(const char* value)
 {
 	string = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_STRING;
 }
 
 
-void
-BPackageAttributeValue::SetToData(uint64 size, uint64 offset)
+void BPackageAttributeValue::SetToData(uint64 size, uint64 offset)
 {
 	data.size = size;
 	data.offset = offset;
@@ -138,8 +128,7 @@ BPackageAttributeValue::SetToData(uint64 size, uint64 offset)
 }
 
 
-void
-BPackageAttributeValue::SetToData(uint64 size, const void* rawData)
+void BPackageAttributeValue::SetToData(uint64 size, const void* rawData)
 {
 	data.size = size;
 	if (size > 0)

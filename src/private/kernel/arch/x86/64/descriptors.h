@@ -60,15 +60,13 @@ struct tss {
 } _PACKED;
 
 
-static inline void
-clear_segment_descriptor(segment_descriptor* desc)
+static inline void clear_segment_descriptor(segment_descriptor* desc)
 {
 	*(uint64*)desc = 0;
 }
 
 
-static inline void
-set_segment_descriptor(segment_descriptor* desc, uint8 type, uint8 dpl)
+static inline void set_segment_descriptor(segment_descriptor* desc, uint8 type, uint8 dpl)
 {
 	clear_segment_descriptor(desc);
 

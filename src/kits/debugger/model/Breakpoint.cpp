@@ -31,15 +31,13 @@ Breakpoint::~Breakpoint()
 }
 
 
-void
-Breakpoint::SetInstalled(bool installed)
+void Breakpoint::SetInstalled(bool installed)
 {
 	fInstalled = installed;
 }
 
 
-bool
-Breakpoint::ShouldBeInstalled() const
+bool Breakpoint::ShouldBeInstalled() const
 {
 	if (!fClients.IsEmpty())
 		return true;
@@ -48,15 +46,13 @@ Breakpoint::ShouldBeInstalled() const
 }
 
 
-bool
-Breakpoint::IsUnused() const
+bool Breakpoint::IsUnused() const
 {
 	return fClients.IsEmpty() && fUserBreakpoints.IsEmpty();
 }
 
 
-bool
-Breakpoint::HasEnabledUserBreakpoint() const
+bool Breakpoint::HasEnabledUserBreakpoint() const
 {
 	for (UserBreakpointInstanceList::ConstIterator it
 				= fUserBreakpoints.GetIterator();
@@ -69,29 +65,25 @@ Breakpoint::HasEnabledUserBreakpoint() const
 }
 
 
-void
-Breakpoint::AddUserBreakpoint(UserBreakpointInstance* instance)
+void Breakpoint::AddUserBreakpoint(UserBreakpointInstance* instance)
 {
 	fUserBreakpoints.Add(instance);
 }
 
 
-void
-Breakpoint::RemoveUserBreakpoint(UserBreakpointInstance* instance)
+void Breakpoint::RemoveUserBreakpoint(UserBreakpointInstance* instance)
 {
 	fUserBreakpoints.Remove(instance);
 }
 
 
-bool
-Breakpoint::AddClient(BreakpointClient* client)
+bool Breakpoint::AddClient(BreakpointClient* client)
 {
 	return fClients.AddItem(client);
 }
 
 
-void
-Breakpoint::RemoveClient(BreakpointClient* client)
+void Breakpoint::RemoveClient(BreakpointClient* client)
 {
 	fClients.RemoveItem(client);
 }

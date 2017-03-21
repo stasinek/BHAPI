@@ -138,7 +138,7 @@ BSimpleXmlNode::FindNode(const char *name,  __be_int32 fromIndex) const
 }
 
 
-void
+void 
 BSimpleXmlNode::SetName(const char *name)
 {
 	if(fName) delete[] fName;
@@ -146,7 +146,7 @@ BSimpleXmlNode::SetName(const char *name)
 }
 
 
-void
+void 
 BSimpleXmlNode::SetContent(const char *content)
 {
 	if(fContent) delete[] fContent;
@@ -154,7 +154,7 @@ BSimpleXmlNode::SetContent(const char *content)
 }
 
 
-bool
+bool 
 BSimpleXmlNode::AddAttribute(const char *name, const char *content, bool replace_content)
 {
 	if(name == NULL || *name == 0) return false;
@@ -184,7 +184,7 @@ BSimpleXmlNode::AddAttribute(const char *name, const char *content, bool replace
 }
 
 
-bool
+bool 
 BSimpleXmlNode::RemoveAttribute(const char *name)
 {
 	__be_int32 index = FindAttribute(name);
@@ -200,7 +200,7 @@ BSimpleXmlNode::RemoveAttribute(const char *name)
 }
 
 
-bool
+bool 
 BSimpleXmlNode::AddNode(BSimpleXmlNode *node,  __be_int32 atIndex)
 {
 	if(node == NULL || node->fSuperNode != NULL) return false;
@@ -213,7 +213,7 @@ BSimpleXmlNode::AddNode(BSimpleXmlNode *node,  __be_int32 atIndex)
 }
 
 
-bool
+bool 
 BSimpleXmlNode::RemoveNode(BSimpleXmlNode *node)
 {
 	if(node == NULL || node->fSuperNode != this) return false;
@@ -226,7 +226,7 @@ BSimpleXmlNode::RemoveNode(BSimpleXmlNode *node)
 }
 
 
-bool
+bool 
 BSimpleXmlNode::RemoveSelf()
 {
 	if(fSuperNode == NULL) return false;
@@ -255,7 +255,7 @@ BSimpleXmlNode::SuperNode() const
 }
 
 
-void
+void 
 BSimpleXmlNode::PrintToStream() const
 {
 	__be_int32 nSuperNode = 0;

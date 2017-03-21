@@ -707,8 +707,7 @@ static unsigned char ebcdic_1047_to_8859[] = {
 /*
  * Copy buf[0 ... nbytes-1] into out[], translating EBCDIC to ASCII.
  */
-static void
-from_ebcdic(const unsigned char *buf, size_t nbytes, unsigned char *out)
+static void from_ebcdic(const unsigned char *buf, size_t nbytes, unsigned char *out)
 {
 	int i;
 

@@ -87,8 +87,7 @@ private:
 	int32						fToken;
 };
 
-inline bool
-UserMessagingListener::operator==(const NotificationListener& _other) const
+inline bool UserMessagingListener::operator==(const NotificationListener& _other) const
 {
 	const UserMessagingListener* other
 		= dynamic_cast<const UserMessagingListener*>(&_other);
@@ -252,8 +251,7 @@ private:
 };
 
 
-void
-DefaultNotificationService::Notify(const KMessage& event, uint32 eventMask)
+void DefaultNotificationService::Notify(const KMessage& event, uint32 eventMask)
 {
 	RecursiveLocker _(fLock);
 	NotifyLocked(event, eventMask);

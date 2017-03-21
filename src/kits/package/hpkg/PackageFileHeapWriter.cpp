@@ -221,8 +221,7 @@ PackageFileHeapWriter::~PackageFileHeapWriter()
 }
 
 
-void
-PackageFileHeapWriter::Init()
+void PackageFileHeapWriter::Init()
 {
 	// allocate data buffers
 	fPendingDataBuffer = malloc(kChunkSize);
@@ -232,8 +231,7 @@ PackageFileHeapWriter::Init()
 }
 
 
-void
-PackageFileHeapWriter::Reinit(PackageFileHeapReader* heapReader)
+void PackageFileHeapWriter::Reinit(PackageFileHeapReader* heapReader)
 {
 	fHeapOffset = heapReader->HeapOffset();
 	fCompressedHeapSize = heapReader->CompressedHeapSize();
@@ -254,8 +252,7 @@ PackageFileHeapWriter::Reinit(PackageFileHeapReader* heapReader)
 }
 
 
-status_t
-PackageFileHeapWriter::AddData(BDataReader& dataReader, off_t size,
+status_t PackageFileHeapWriter::AddData(BDataReader& dataReader, off_t size,
 	uint64& _offset)
 {
 	_offset = fUncompressedHeapSize;
@@ -291,8 +288,7 @@ PackageFileHeapWriter::AddData(BDataReader& dataReader, off_t size,
 }
 
 
-void
-PackageFileHeapWriter::AddDataThrows(const void* buffer, size_t size)
+void PackageFileHeapWriter::AddDataThrows(const void* buffer, size_t size)
 {
 	BBufferDataReader reader(buffer, size);
 	uint64 dummyOffset;
@@ -302,8 +298,7 @@ PackageFileHeapWriter::AddDataThrows(const void* buffer, size_t size)
 }
 
 
-void
-PackageFileHeapWriter::RemoveDataRanges(
+void PackageFileHeapWriter::RemoveDataRanges(
 	const ::BPrivate::RangeArray<uint64>& ranges)
 {
 	ssize_t rangeCount = ranges.CountRanges();
@@ -433,8 +428,7 @@ PackageFileHeapWriter::RemoveDataRanges(
 }
 
 
-status_t
-PackageFileHeapWriter::Finish()
+status_t PackageFileHeapWriter::Finish()
 {
 	// flush pending data, if any
 	status_t error = _FlushPendingData();
@@ -475,8 +469,7 @@ PackageFileHeapWriter::Finish()
 }
 
 
-status_t
-PackageFileHeapWriter::ReadAndDecompressChunk(size_t chunkIndex,
+status_t PackageFileHeapWriter::ReadAndDecompressChunk(size_t chunkIndex,
 	void* compressedDataBuffer, void* uncompressedDataBuffer)
 {
 	if (uint64(chunkIndex + 1) * kChunkSize > fUncompressedHeapSize) {
@@ -498,8 +491,7 @@ PackageFileHeapWriter::ReadAndDecompressChunk(size_t chunkIndex,
 }
 
 
-void
-PackageFileHeapWriter::_Uninit()
+void PackageFileHeapWriter::_Uninit()
 {
 	free(fPendingDataBuffer);
 	free(fCompressedDataBuffer);
@@ -508,8 +500,7 @@ PackageFileHeapWriter::_Uninit()
 }
 
 
-status_t
-PackageFileHeapWriter::_FlushPendingData()
+status_t PackageFileHeapWriter::_FlushPendingData()
 {
 	if (fPendingDataSize == 0)
 		return B_OK;
@@ -522,8 +513,7 @@ PackageFileHeapWriter::_FlushPendingData()
 }
 
 
-status_t
-PackageFileHeapWriter::_WriteChunk(const void* data, size_t size,
+status_t PackageFileHeapWriter::_WriteChunk(const void* data, size_t size,
 	bool mayCompress)
 {
 	// add offset
@@ -554,8 +544,7 @@ PackageFileHeapWriter::_WriteChunk(const void* data, size_t size,
 }
 
 
-status_t
-PackageFileHeapWriter::_WriteDataCompressed(const void* data, size_t size)
+status_t PackageFileHeapWriter::_WriteDataCompressed(const void* data, size_t size)
 {
 	if (fCompressionAlgorithm == NULL)
 		return B_BUFFER_OVERFLOW;
@@ -580,8 +569,7 @@ PackageFileHeapWriter::_WriteDataCompressed(const void* data, size_t size)
 }
 
 
-status_t
-PackageFileHeapWriter::_WriteDataUncompressed(const void* data, size_t size)
+status_t PackageFileHeapWriter::_WriteDataUncompressed(const void* data, size_t size)
 {
 	status_t error = fFile->WriteAtExactly(
 		fHeapOffset + (off_t)fCompressedHeapSize, data, size);
@@ -596,8 +584,7 @@ PackageFileHeapWriter::_WriteDataUncompressed(const void* data, size_t size)
 }
 
 
-void
-PackageFileHeapWriter::_PushChunks(ChunkBuffer& chunkBuffer, uint64 startOffset,
+void PackageFileHeapWriter::_PushChunks(ChunkBuffer& chunkBuffer, uint64 startOffset,
 	uint64 endOffset)
 {
 	if (endOffset > fUncompressedHeapSize) {
@@ -636,8 +623,7 @@ PackageFileHeapWriter::_PushChunks(ChunkBuffer& chunkBuffer, uint64 startOffset,
 }
 
 
-void
-PackageFileHeapWriter::_UnwriteLastPartialChunk()
+void PackageFileHeapWriter::_UnwriteLastPartialChunk()
 {
 	// If the last chunk is partial, read it in and remove it from the offsets.
 	size_t lastChunkSize = fUncompressedHeapSize % kChunkSize;

@@ -46,14 +46,14 @@ BLocker::~BLocker()
 }
 
 
-bool
+bool 
 BLocker::Lock()
 {
     return(bhapi::lock_locker(fLocker) == B_OK);
 }
 
 
-void
+void 
 BLocker::Unlock()
 {
     if(bhapi::count_locker_locks(fLocker) <= 0)
@@ -66,7 +66,7 @@ BLocker::Unlock()
 }
 
 
-status_t
+status_t 
 BLocker::LockWithTimeout(bigtime_t microseconds)
 {
     return bhapi::lock_locker_etc(fLocker, B_TIMEOUT, microseconds);
@@ -80,7 +80,7 @@ BLocker::CountLocks() const
 }
 
 
-bool
+bool 
 BLocker::IsLockedByCurrentThread() const
 {
     return(bhapi::count_locker_locks(fLocker) > 0);

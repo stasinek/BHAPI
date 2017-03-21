@@ -227,15 +227,13 @@ BGridLayout::~BGridLayout()
 }
 
 
-int32
-BGridLayout::CountColumns() const
+int32 BGridLayout::CountColumns() const
 {
 	return fColumnCount;
 }
 
 
-int32
-BGridLayout::CountRows() const
+int32 BGridLayout::CountRows() const
 {
 	return fRowCount;
 }
@@ -255,8 +253,7 @@ BGridLayout::VerticalSpacing() const
 }
 
 
-void
-BGridLayout::SetHorizontalSpacing(float spacing)
+void BGridLayout::SetHorizontalSpacing(float spacing)
 {
 	spacing = BControlLook::ComposeSpacing(spacing);
 	if (spacing != fHSpacing) {
@@ -267,8 +264,7 @@ BGridLayout::SetHorizontalSpacing(float spacing)
 }
 
 
-void
-BGridLayout::SetVerticalSpacing(float spacing)
+void BGridLayout::SetVerticalSpacing(float spacing)
 {
 	spacing = BControlLook::ComposeSpacing(spacing);
 	if (spacing != fVSpacing) {
@@ -279,8 +275,7 @@ BGridLayout::SetVerticalSpacing(float spacing)
 }
 
 
-void
-BGridLayout::SetSpacing(float horizontal, float vertical)
+void BGridLayout::SetSpacing(float horizontal, float vertical)
 {
 	horizontal = BControlLook::ComposeSpacing(horizontal);
 	vertical = BControlLook::ComposeSpacing(vertical);
@@ -300,8 +295,7 @@ BGridLayout::ColumnWeight(int32 column) const
 }
 
 
-void
-BGridLayout::SetColumnWeight(int32 column, float weight)
+void BGridLayout::SetColumnWeight(int32 column, float weight)
 {
 	fColumnInfos->SetWeight(column, weight);
 }
@@ -314,8 +308,7 @@ BGridLayout::MinColumnWidth(int32 column) const
 }
 
 
-void
-BGridLayout::SetMinColumnWidth(int32 column, float width)
+void BGridLayout::SetMinColumnWidth(int32 column, float width)
 {
 	fColumnInfos->SetMinSize(column, width);
 }
@@ -328,8 +321,7 @@ BGridLayout::MaxColumnWidth(int32 column) const
 }
 
 
-void
-BGridLayout::SetMaxColumnWidth(int32 column, float width)
+void BGridLayout::SetMaxColumnWidth(int32 column, float width)
 {
 	fColumnInfos->SetMaxSize(column, width);
 }
@@ -342,8 +334,7 @@ BGridLayout::RowWeight(int32 row) const
 }
 
 
-void
-BGridLayout::SetRowWeight(int32 row, float weight)
+void BGridLayout::SetRowWeight(int32 row, float weight)
 {
 	fRowInfos->SetWeight(row, weight);
 }
@@ -356,8 +347,7 @@ BGridLayout::MinRowHeight(int row) const
 }
 
 
-void
-BGridLayout::SetMinRowHeight(int32 row, float height)
+void BGridLayout::SetMinRowHeight(int32 row, float height)
 {
 	fRowInfos->SetMinSize(row, height);
 }
@@ -370,8 +360,7 @@ BGridLayout::MaxRowHeight(int32 row) const
 }
 
 
-void
-BGridLayout::SetMaxRowHeight(int32 row, float height)
+void BGridLayout::SetMaxRowHeight(int32 row, float height)
 {
 	fRowInfos->SetMaxSize(row, height);
 }
@@ -419,8 +408,7 @@ BGridLayout::AddView(BView* child, int32 column, int32 row, int32 columnCount,
 }
 
 
-bool
-BGridLayout::AddItem(BLayoutItem* item)
+bool BGridLayout::AddItem(BLayoutItem* item)
 {
 	// find a free spot
 	for (int32 row = 0; row < fRowCount; row++) {
@@ -435,15 +423,13 @@ BGridLayout::AddItem(BLayoutItem* item)
 }
 
 
-bool
-BGridLayout::AddItem(int32 index, BLayoutItem* item)
+bool BGridLayout::AddItem(int32 index, BLayoutItem* item)
 {
 	return AddItem(item);
 }
 
 
-bool
-BGridLayout::AddItem(BLayoutItem* item, int32 column, int32 row,
+bool BGridLayout::AddItem(BLayoutItem* item, int32 column, int32 row,
 	int32 columnCount, int32 rowCount)
 {
 	if (!_AreGridCellsEmpty(column, row, columnCount, rowCount))
@@ -475,8 +461,7 @@ BGridLayout::AddItem(BLayoutItem* item, int32 column, int32 row,
 }
 
 
-status_t
-BGridLayout::Archive(BMessage* into, bool deep) const
+status_t BGridLayout::Archive(BMessage* into, bool deep) const
 {
 	BArchiver archiver(into);
 	status_t result = BTwoDimensionalLayout::Archive(into, deep);
@@ -501,15 +486,13 @@ BGridLayout::Archive(BMessage* into, bool deep) const
 }
 
 
-status_t
-BGridLayout::AllArchived(BMessage* into) const
+status_t BGridLayout::AllArchived(BMessage* into) const
 {
 	return BTwoDimensionalLayout::AllArchived(into);
 }
 
 
-status_t
-BGridLayout::AllUnarchived(const BMessage* from)
+status_t BGridLayout::AllUnarchived(const BMessage* from)
 {
 	return BTwoDimensionalLayout::AllUnarchived(from);
 }
@@ -524,8 +507,7 @@ BGridLayout::Instantiate(BMessage* from)
 }
 
 
-status_t
-BGridLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32 index) const
+status_t BGridLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32 index) const
 {
 	ItemLayoutData* data =	_LayoutDataForItem(item);
 
@@ -543,8 +525,7 @@ BGridLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32 index) const
 }
 
 
-status_t
-BGridLayout::ItemUnarchived(const BMessage* from,
+status_t BGridLayout::ItemUnarchived(const BMessage* from,
 	BLayoutItem* item, int32 index)
 {
 	ItemLayoutData* data = _LayoutDataForItem(item);
@@ -584,16 +565,14 @@ BGridLayout::ItemUnarchived(const BMessage* from,
 }
 
 
-bool
-BGridLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
+bool BGridLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
 {
 	item->SetLayoutData(new(nothrow) ItemLayoutData);
 	return item->LayoutData() != NULL;
 }
 
 
-void
-BGridLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
+void BGridLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
 {
 	ItemLayoutData* data = _LayoutDataForItem(item);
 	Dimensions itemDimensions = data->dimensions;
@@ -645,36 +624,31 @@ BGridLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
 }
 
 
-bool
-BGridLayout::HasMultiColumnItems()
+bool BGridLayout::HasMultiColumnItems()
 {
 	return fMultiColumnItems > 0;
 }
 
 
-bool
-BGridLayout::HasMultiRowItems()
+bool BGridLayout::HasMultiRowItems()
 {
 	return fMultiRowItems > 0;
 }
 
 
-int32
-BGridLayout::InternalCountColumns()
+int32 BGridLayout::InternalCountColumns()
 {
 	return fColumnCount;
 }
 
 
-int32
-BGridLayout::InternalCountRows()
+int32 BGridLayout::InternalCountRows()
 {
 	return fRowCount;
 }
 
 
-void
-BGridLayout::GetColumnRowConstraints(orientation orientation, int32 index,
+void BGridLayout::GetColumnRowConstraints(orientation orientation, int32 index,
 	ColumnRowConstraints* constraints)
 {
 	if (orientation == B_HORIZONTAL) {
@@ -689,16 +663,14 @@ BGridLayout::GetColumnRowConstraints(orientation orientation, int32 index,
 }
 
 
-void
-BGridLayout::GetItemDimensions(BLayoutItem* item, Dimensions* dimensions)
+void BGridLayout::GetItemDimensions(BLayoutItem* item, Dimensions* dimensions)
 {
 	if (ItemLayoutData* data = _LayoutDataForItem(item))
 		*dimensions = data->dimensions;
 }
 
 
-bool
-BGridLayout::_IsGridCellEmpty(int32 column, int32 row)
+bool BGridLayout::_IsGridCellEmpty(int32 column, int32 row)
 {
 	if (column < 0 || row < 0)
 		return false;
@@ -710,8 +682,7 @@ BGridLayout::_IsGridCellEmpty(int32 column, int32 row)
 }
 
 
-bool
-BGridLayout::_AreGridCellsEmpty(int32 column, int32 row, int32 columnCount,
+bool BGridLayout::_AreGridCellsEmpty(int32 column, int32 row, int32 columnCount,
 	int32 rowCount)
 {
 	if (column < 0 || row < 0)
@@ -730,8 +701,7 @@ BGridLayout::_AreGridCellsEmpty(int32 column, int32 row, int32 columnCount,
 }
 
 
-bool
-BGridLayout::_InsertItemIntoGrid(BLayoutItem* item)
+bool BGridLayout::_InsertItemIntoGrid(BLayoutItem* item)
 {
 	BGridLayout::ItemLayoutData* data = _LayoutDataForItem(item);
 	int32 column = data->dimensions.x;
@@ -761,8 +731,7 @@ BGridLayout::_InsertItemIntoGrid(BLayoutItem* item)
 }
 
 
-bool
-BGridLayout::_ResizeGrid(int32 columnCount, int32 rowCount)
+bool BGridLayout::_ResizeGrid(int32 columnCount, int32 rowCount)
 {
 	if (columnCount == fColumnCount && rowCount == fRowCount)
 		return true;
@@ -816,8 +785,7 @@ BGridLayout::_LayoutDataForItem(BLayoutItem* item) const
 }
 
 
-status_t
-BGridLayout::Perform(perform_code d, void* arg)
+status_t BGridLayout::Perform(perform_code d, void* arg)
 {
 	return BTwoDimensionalLayout::Perform(d, arg);
 }

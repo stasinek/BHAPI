@@ -112,8 +112,7 @@ void BFilePanel::Show()
 }
 
 
-void
-BFilePanel::Hide()
+void BFilePanel::Hide()
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -124,8 +123,7 @@ BFilePanel::Hide()
 }
 
 
-bool
-BFilePanel::IsShowing() const
+bool BFilePanel::IsShowing() const
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -135,8 +133,7 @@ BFilePanel::IsShowing() const
 }
 
 
-void
-BFilePanel::SendMessage(const BMessenger* messenger, BMessage* message)
+void BFilePanel::SendMessage(const BMessenger* messenger, BMessage* message)
 {
     messenger->SendMessage(message);
 }
@@ -169,8 +166,7 @@ BFilePanel::Messenger() const
 }
 
 
-void
-BFilePanel::SetTarget(BMessenger target)
+void BFilePanel::SetTarget(BMessenger target)
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -180,8 +176,7 @@ BFilePanel::SetTarget(BMessenger target)
 }
 
 
-void
-BFilePanel::SetMessage(BMessage* message)
+void BFilePanel::SetMessage(BMessage* message)
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -191,8 +186,7 @@ BFilePanel::SetMessage(BMessage* message)
 }
 
 
-void
-BFilePanel::Refresh()
+void BFilePanel::Refresh()
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -213,8 +207,7 @@ BFilePanel::RefFilter() const
 }
 
 
-void
-BFilePanel::SetRefFilter(BRefFilter* filter)
+void BFilePanel::SetRefFilter(BRefFilter* filter)
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -224,8 +217,7 @@ BFilePanel::SetRefFilter(BRefFilter* filter)
 }
 
 
-void
-BFilePanel::SetButtonLabel(file_panel_button button, const char* text)
+void BFilePanel::SetButtonLabel(file_panel_button button, const char* text)
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -235,8 +227,7 @@ BFilePanel::SetButtonLabel(file_panel_button button, const char* text)
 }
 
 
-void
-BFilePanel::SetNodeFlavors(uint32 flavors)
+void BFilePanel::SetNodeFlavors(uint32 flavors)
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -246,8 +237,7 @@ BFilePanel::SetNodeFlavors(uint32 flavors)
 }
 
 
-void
-BFilePanel::GetPanelDirectory(entry_ref* ref) const
+void BFilePanel::GetPanelDirectory(entry_ref* ref) const
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -257,8 +247,7 @@ BFilePanel::GetPanelDirectory(entry_ref* ref) const
 }
 
 
-void
-BFilePanel::SetSaveText(const char* text)
+void BFilePanel::SetSaveText(const char* text)
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -268,8 +257,7 @@ BFilePanel::SetSaveText(const char* text)
 }
 
 
-void
-BFilePanel::SetPanelDirectory(const entry_ref* ref)
+void BFilePanel::SetPanelDirectory(const entry_ref* ref)
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -279,8 +267,7 @@ BFilePanel::SetPanelDirectory(const entry_ref* ref)
 }
 
 
-void
-BFilePanel::SetPanelDirectory(const char* path)
+void BFilePanel::SetPanelDirectory(const char* path)
 {
     entry_ref ref;
     status_t err = get_ref_for_path(path, &ref);
@@ -295,8 +282,7 @@ BFilePanel::SetPanelDirectory(const char* path)
 }
 
 
-void
-BFilePanel::SetPanelDirectory(const BEntry* entry)
+void BFilePanel::SetPanelDirectory(const BEntry* entry)
 {
     entry_ref ref;
 
@@ -305,8 +291,7 @@ BFilePanel::SetPanelDirectory(const BEntry* entry)
 }
 
 
-void
-BFilePanel::SetPanelDirectory(const BDirectory* dir)
+void BFilePanel::SetPanelDirectory(const BDirectory* dir)
 {
     BEntry	entry;
 
@@ -322,8 +307,7 @@ BFilePanel::Window() const
 }
 
 
-void
-BFilePanel::Rewind()
+void BFilePanel::Rewind()
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -333,8 +317,7 @@ BFilePanel::Rewind()
 }
 
 
-status_t
-BFilePanel::GetNextSelectedRef(entry_ref* ref)
+status_t BFilePanel::GetNextSelectedRef(entry_ref* ref)
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -345,8 +328,7 @@ BFilePanel::GetNextSelectedRef(entry_ref* ref)
 }
 
 
-void
-BFilePanel::SetHideWhenDone(bool on)
+void BFilePanel::SetHideWhenDone(bool on)
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -356,8 +338,7 @@ BFilePanel::SetHideWhenDone(bool on)
 }
 
 
-bool
-BFilePanel::HidesWhenDone(void) const
+bool BFilePanel::HidesWhenDone(void) const
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)
@@ -367,15 +348,13 @@ BFilePanel::HidesWhenDone(void) const
 }
 
 
-void
-BFilePanel::WasHidden()
+void BFilePanel::WasHidden()
 {
     // hook function
 }
 
 
-void
-BFilePanel::SelectionChanged()
+void BFilePanel::SelectionChanged()
 {
     // hook function
 }

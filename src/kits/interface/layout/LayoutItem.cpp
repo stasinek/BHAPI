@@ -78,30 +78,26 @@ BLayoutItem::NextSibling() const
 }
 
 
-bool
-BLayoutItem::RemoveSelf()
+bool BLayoutItem::RemoveSelf()
 {
 	if(fContainer == NULL) return false;
 	return fContainer->RemoveItem(this);
 }
 
 
-void
-BLayoutItem::SetResizingMode(__be_uint32 mode)
+void BLayoutItem::SetResizingMode(__be_uint32 mode)
 {
 	fResizingMode = mode;
 }
 
 
-__be_uint32
-BLayoutItem::ResizingMode() const
+__be_uint32 BLayoutItem::ResizingMode() const
 {
 	return fResizingMode;
 }
 
 
-void
-BLayoutItem::Show()
+void BLayoutItem::Show()
 {
 	if(fHidden == false) return;
 
@@ -113,8 +109,7 @@ BLayoutItem::Show()
 }
 
 
-void
-BLayoutItem::Hide()
+void BLayoutItem::Hide()
 {
 	if(fHidden == true) return;
 
@@ -126,8 +121,7 @@ BLayoutItem::Hide()
 }
 
 
-bool
-BLayoutItem::IsHidden(bool check_containers) const
+bool BLayoutItem::IsHidden(bool check_containers) const
 {
 	if(check_containers == false) return fHidden;
 	if(fHidden || fContainer == NULL) return true;
@@ -136,8 +130,7 @@ BLayoutItem::IsHidden(bool check_containers) const
 }
 
 
-void
-BLayoutItem::SendBehind(BLayoutItem *item)
+void BLayoutItem::SendBehind(BLayoutItem *item)
 {
 	if(fContainer == NULL || item == NULL || !(item->fContainer == fContainer && item->fIndex > fIndex)) return;
 
@@ -155,8 +148,7 @@ BLayoutItem::SendBehind(BLayoutItem *item)
 }
 
 
-void
-BLayoutItem::MoveTo(BPoint where)
+void BLayoutItem::MoveTo(BPoint where)
 {
 	if(fFrame.LeftTop() == where) return;
 
@@ -169,8 +161,7 @@ BLayoutItem::MoveTo(BPoint where)
 }
 
 
-void
-BLayoutItem::ScrollTo(BPoint where)
+void BLayoutItem::ScrollTo(BPoint where)
 {
 	if(where.x < 0) where.x = 0;
 	if(where.y < 0) where.y = 0;
@@ -185,8 +176,7 @@ BLayoutItem::ScrollTo(BPoint where)
 }
 
 
-void
-BLayoutItem::ResizeTo(float width, float height)
+void BLayoutItem::ResizeTo(float width, float height)
 {
 	if(fFrame.Width() == width && fFrame.Height() == height) return;
 
@@ -267,8 +257,7 @@ BLayoutItem::ResizeTo(float width, float height)
 }
 
 
-void
-BLayoutItem::MoveAndResizeTo(BPoint where, float width, float height)
+void BLayoutItem::MoveAndResizeTo(BPoint where, float width, float height)
 {
 	BRect oldFrame = fFrame;
 
@@ -285,8 +274,7 @@ BLayoutItem::MoveAndResizeTo(BPoint where, float width, float height)
 }
 
 
-void
-BLayoutItem::GetPreferredSize(float *width, float *height)
+void BLayoutItem::GetPreferredSize(float *width, float *height)
 {
 	if(width == NULL && height == NULL) return;
 
@@ -315,8 +303,7 @@ BLayoutItem::GetPreferredSize(float *width, float *height)
 }
 
 
-void
-BLayoutItem::ResizeToPreferred()
+void BLayoutItem::ResizeToPreferred()
 {
 	float w = -1, h = -1;
 	GetPreferredSize(&w, &h);
@@ -391,8 +378,7 @@ BLayoutItem::VisibleRegion() const
 }
 
 
-void
-BLayoutItem::GetVisibleRegion(BRegion **region)
+void BLayoutItem::GetVisibleRegion(BRegion **region)
 {
 	if(region) *region = &fVisibleRegion;
 }
@@ -419,8 +405,7 @@ BLayoutItem::Height() const
 }
 
 
-void
-BLayoutItem::ConvertToContainer(BPoint *pt) const
+void BLayoutItem::ConvertToContainer(BPoint *pt) const
 {
 	if(pt == NULL) return;
 
@@ -437,8 +422,7 @@ BLayoutItem::ConvertToContainer(BPoint pt) const
 }
 
 
-void
-BLayoutItem::ConvertFromContainer(BPoint *pt) const
+void BLayoutItem::ConvertFromContainer(BPoint *pt) const
 {
 	if(pt == NULL) return;
 
@@ -455,8 +439,7 @@ BLayoutItem::ConvertFromContainer(BPoint pt) const
 }
 
 
-void
-BLayoutItem::UpdateVisibleRegion()
+void BLayoutItem::UpdateVisibleRegion()
 {
 	BLayoutItem *item;
 

@@ -46,8 +46,7 @@ FT_BEGIN_HEADER
   /*
    * Used to implement FT_Get_Sfnt_Table().
    */
-  typedef void*
-  (*FT_SFNT_TableGetFunc)( FT_Face      face,
+  typedef void*     (*FT_SFNT_TableGetFunc)( FT_Face      face,
                            FT_Sfnt_Tag  tag );
 
 

@@ -46,8 +46,7 @@ DatabaseLocation::~DatabaseLocation()
 }
 
 
-bool
-DatabaseLocation::AddDirectory(const BString& directory)
+bool DatabaseLocation::AddDirectory(const BString& directory)
 {
 	return !directory.IsEmpty() && fDirectories.Add(directory);
 }
@@ -59,8 +58,7 @@ DatabaseLocation::AddDirectory(const BString& directory)
 	\param type The MIME type to open.
 	\param _node Node opened on the given MIME type.
 */
-status_t
-DatabaseLocation::OpenType(const char* type, BNode& _node) const
+status_t DatabaseLocation::OpenType(const char* type, BNode& _node) const
 {
 	if (type == NULL)
 		return B_BAD_VALUE;
@@ -83,8 +81,7 @@ DatabaseLocation::OpenType(const char* type, BNode& _node) const
 
 	\return A status code.
 */
-status_t
-DatabaseLocation::OpenWritableType(const char* type, BNode& _node, bool create,
+status_t DatabaseLocation::OpenWritableType(const char* type, BNode& _node, bool create,
 	bool* _didCreate) const
 {
 	if (_didCreate)
@@ -188,8 +185,7 @@ DatabaseLocation::ReadAttribute(const char* type, const char* attribute,
 
 	\return A status code.
 */
-status_t
-DatabaseLocation::ReadMessageAttribute(const char* type, const char* attribute,
+status_t DatabaseLocation::ReadMessageAttribute(const char* type, const char* attribute,
 	BMessage& _message) const
 {
 	if (type == NULL || attribute == NULL)
@@ -235,8 +231,7 @@ DatabaseLocation::ReadMessageAttribute(const char* type, const char* attribute,
 
 	\return A status code.
 */
-status_t
-DatabaseLocation::ReadStringAttribute(const char* type, const char* attribute,
+status_t DatabaseLocation::ReadStringAttribute(const char* type, const char* attribute,
 	BString& _string) const
 {
 	if (type == NULL || attribute == NULL)
@@ -264,8 +259,7 @@ DatabaseLocation::ReadStringAttribute(const char* type, const char* attribute,
 
 	\return A status code.
 */
-status_t
-DatabaseLocation::WriteAttribute(const char* type, const char* attribute,
+status_t DatabaseLocation::WriteAttribute(const char* type, const char* attribute,
 	const void* data, size_t length, type_code datatype, bool* _didCreate) const
 {
 	if (type == NULL || attribute == NULL || data == NULL)
@@ -295,8 +289,7 @@ DatabaseLocation::WriteAttribute(const char* type, const char* attribute,
 
 	\return A status code.
 */
-status_t
-DatabaseLocation::WriteMessageAttribute(const char* type, const char* attribute,
+status_t DatabaseLocation::WriteMessageAttribute(const char* type, const char* attribute,
 	const BMessage& message, bool* _didCreate) const
 {
 	BMallocIO data;
@@ -323,8 +316,7 @@ DatabaseLocation::WriteMessageAttribute(const char* type, const char* attribute,
 	\retval B_OK Success.
 	\retval B_ENTRY_NOT_FOUND No such type or attribute.
 */
-status_t
-DatabaseLocation::DeleteAttribute(const char* type, const char* attribute) const
+status_t DatabaseLocation::DeleteAttribute(const char* type, const char* attribute) const
 {
 	if (type == NULL || attribute == NULL)
 		return B_BAD_VALUE;
@@ -350,8 +342,7 @@ DatabaseLocation::DeleteAttribute(const char* type, const char* attribute) const
 	\retval B_OK Success.
 	\retval B_ENTRY_NOT_FOUND No app hint exists for the given type
 */
-status_t
-DatabaseLocation::GetAppHint(const char* type, entry_ref& _ref)
+status_t DatabaseLocation::GetAppHint(const char* type, entry_ref& _ref)
 {
 	if (type == NULL)
 		return B_BAD_VALUE;
@@ -383,8 +374,7 @@ DatabaseLocation::GetAppHint(const char* type, entry_ref& _ref)
 
 	\return A status code, \c B_OK on success or an error code on failure.
 */
-status_t
-DatabaseLocation::GetAttributesInfo(const char* type, BMessage& _info)
+status_t DatabaseLocation::GetAttributesInfo(const char* type, BMessage& _info)
 {
 	status_t result = ReadMessageAttribute(type, kAttrInfoAttr, _info);
 
@@ -419,8 +409,7 @@ DatabaseLocation::GetAttributesInfo(const char* type, BMessage& _info)
 	\retval B_OK Success.
 	\retval B_ENTRY_NOT_FOUND No short description exists for the given type.
 */
-status_t
-DatabaseLocation::GetShortDescription(const char* type, char* description)
+status_t DatabaseLocation::GetShortDescription(const char* type, char* description)
 {
 	ssize_t result = ReadAttribute(type, kShortDescriptionAttr, description,
 		B_MIME_TYPE_LENGTH, kShortDescriptionType);
@@ -444,8 +433,7 @@ DatabaseLocation::GetShortDescription(const char* type, char* description)
 	\retval B_OK Success.
 	\retval B_ENTRY_NOT_FOUND No long description exists for the given type
 */
-status_t
-DatabaseLocation::GetLongDescription(const char* type, char* description)
+status_t DatabaseLocation::GetLongDescription(const char* type, char* description)
 {
 	ssize_t result = ReadAttribute(type, kLongDescriptionAttr, description,
 		B_MIME_TYPE_LENGTH, kLongDescriptionType);
@@ -467,8 +455,7 @@ DatabaseLocation::GetLongDescription(const char* type, char* description)
 
 	\return A status code, \c B_OK on success or an error code on failure.
 */
-status_t
-DatabaseLocation::GetFileExtensions(const char* type, BMessage& _extensions)
+status_t DatabaseLocation::GetFileExtensions(const char* type, BMessage& _extensions)
 {
 	status_t result = ReadMessageAttribute(type, kFileExtensionsAttr, _extensions);
 	if (result == B_ENTRY_NOT_FOUND) {
@@ -500,8 +487,7 @@ DatabaseLocation::GetFileExtensions(const char* type, BMessage& _extensions)
 
 	\return A status code.
 */
-status_t
-DatabaseLocation::GetIcon(const char* type, BBitmap& _icon, icon_size size)
+status_t DatabaseLocation::GetIcon(const char* type, BBitmap& _icon, icon_size size)
 {
 	return GetIconForType(type, NULL, _icon, size);
 }
@@ -516,8 +502,7 @@ DatabaseLocation::GetIcon(const char* type, BBitmap& _icon, icon_size size)
 
 	\return A status code.
 */
-status_t
-DatabaseLocation::GetIcon(const char* type, uint8*& _data, size_t& _size)
+status_t DatabaseLocation::GetIcon(const char* type, uint8*& _data, size_t& _size)
 {
 	return GetIconForType(type, NULL, _data, _size);
 }
@@ -548,8 +533,7 @@ DatabaseLocation::GetIcon(const char* type, uint8*& _data, size_t& _size)
 	\retval B_OK Success.
 	\retval B_ENTRY_NOT_FOUND No icon of the given size exists for the given type
 */
-status_t
-DatabaseLocation::GetIconForType(const char* type, const char* fileType,
+status_t DatabaseLocation::GetIconForType(const char* type, const char* fileType,
 	BBitmap& _icon, icon_size which)
 {
 	if (type == NULL)
@@ -605,8 +589,7 @@ DatabaseLocation::GetIconForType(const char* type, const char* fileType,
 	\retval B_OK Success.
 	\retval B_ENTRY_NOT_FOUND No vector icon existed for the given type.
 */
-status_t
-DatabaseLocation::GetIconForType(const char* type, const char* fileType,
+status_t DatabaseLocation::GetIconForType(const char* type, const char* fileType,
 	uint8*& _data, size_t& _size)
 {
 	if (type == NULL)
@@ -681,8 +664,7 @@ DatabaseLocation::GetIconForType(const char* type, const char* fileType,
 	\retval B_OK Success.
 	\retval B_ENTRY_NOT_FOUND No such preferred application exists
 */
-status_t
-DatabaseLocation::GetPreferredApp(const char* type, char* signature,
+status_t DatabaseLocation::GetPreferredApp(const char* type, char* signature,
 	app_verb verb)
 {
 	// Since B_OPEN is the currently the only app_verb, it is essentially
@@ -703,15 +685,13 @@ DatabaseLocation::GetPreferredApp(const char* type, char* signature,
 	\retval B_OK Success.
 	\retval B_ENTRY_NOT_FOUND No such preferred application exists.
 */
-status_t
-DatabaseLocation::GetSnifferRule(const char* type, BString& _result)
+status_t DatabaseLocation::GetSnifferRule(const char* type, BString& _result)
 {
 	return ReadStringAttribute(type, kSnifferRuleAttr, _result);
 }
 
 
-status_t
-DatabaseLocation::GetSupportedTypes(const char* type, BMessage& _types)
+status_t DatabaseLocation::GetSupportedTypes(const char* type, BMessage& _types)
 {
 	status_t result = ReadMessageAttribute(type, kSupportedTypesAttr, _types);
 	if (result == B_ENTRY_NOT_FOUND) {
@@ -729,8 +709,7 @@ DatabaseLocation::GetSupportedTypes(const char* type, BMessage& _types)
 
 
 //! Checks if the given MIME type is present in the database
-bool
-DatabaseLocation::IsInstalled(const char* type)
+bool DatabaseLocation::IsInstalled(const char* type)
 {
 	BNode node;
 	return OpenType(type, node) == B_OK;
@@ -745,8 +724,7 @@ DatabaseLocation::_TypeToFilename(const char* type, int32 index) const
 }
 
 
-status_t
-DatabaseLocation::_OpenType(const char* type, BNode& _node, int32& _index) const
+status_t DatabaseLocation::_OpenType(const char* type, BNode& _node, int32& _index) const
 {
 	int32 count = fDirectories.CountStrings();
 	for (int32 i = 0; i < count; i++) {
@@ -762,8 +740,7 @@ DatabaseLocation::_OpenType(const char* type, BNode& _node, int32& _index) const
 }
 
 
-status_t
-DatabaseLocation::_CreateTypeNode(const char* type, BNode& _node) const
+status_t DatabaseLocation::_CreateTypeNode(const char* type, BNode& _node) const
 {
 	const char* slash = strchr(type, '/');
 	BString superTypeName;
@@ -806,8 +783,7 @@ DatabaseLocation::_CreateTypeNode(const char* type, BNode& _node) const
 }
 
 
-status_t
-DatabaseLocation::_CopyTypeNode(BNode& source, const char* type, BNode& _target)
+status_t DatabaseLocation::_CopyTypeNode(BNode& source, const char* type, BNode& _target)
 	const
 {
 	status_t result = _CreateTypeNode(type, _target);

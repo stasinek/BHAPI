@@ -185,8 +185,7 @@ static void set_clipping_rects(void* _context, size_t numRects, const BRect _rec
 }
 
 
-static void
-clip_to_picture(void* _context, int32 token, const BPoint& origin,
+static void clip_to_picture(void* _context, int32 token, const BPoint& origin,
     bool clipToInverse)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
@@ -195,56 +194,49 @@ clip_to_picture(void* _context, int32 token, const BPoint& origin,
 }
 
 
-static void
-push_state(void* _context)
+static void push_state(void* _context)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*))context->function_table[22])(context->user_data);
 }
 
 
-static void
-pop_state(void* _context)
+static void pop_state(void* _context)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*))context->function_table[23])(context->user_data);
 }
 
 
-static void
-enter_state_change(void* _context)
+static void enter_state_change(void* _context)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*))context->function_table[24])(context->user_data);
 }
 
 
-static void
-exit_state_change(void* _context)
+static void exit_state_change(void* _context)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*))context->function_table[25])(context->user_data);
 }
 
 
-static void
-enter_font_state(void* _context)
+static void enter_font_state(void* _context)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*))context->function_table[26])(context->user_data);
 }
 
 
-static void
-exit_font_state(void* _context)
+static void exit_font_state(void* _context)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*))context->function_table[27])(context->user_data);
 }
 
 
-static void
-set_origin(void* _context, const BPoint& origin)
+static void set_origin(void* _context, const BPoint& origin)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, BPoint))context->function_table[28])(context->user_data,
@@ -252,8 +244,7 @@ set_origin(void* _context, const BPoint& origin)
 }
 
 
-static void
-set_pen_location(void* _context, const BPoint& penLocation)
+static void set_pen_location(void* _context, const BPoint& penLocation)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, BPoint))context->function_table[29])(context->user_data,
@@ -261,8 +252,7 @@ set_pen_location(void* _context, const BPoint& penLocation)
 }
 
 
-static void
-set_drawing_mode(void* _context, drawing_mode mode)
+static void set_drawing_mode(void* _context, drawing_mode mode)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, drawing_mode))context->function_table[30])(
@@ -270,8 +260,7 @@ set_drawing_mode(void* _context, drawing_mode mode)
 }
 
 
-static void
-set_line_mode(void* _context, cap_mode capMode, join_mode joinMode,
+static void set_line_mode(void* _context, cap_mode capMode, join_mode joinMode,
     float miterLimit)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
@@ -280,8 +269,7 @@ set_line_mode(void* _context, cap_mode capMode, join_mode joinMode,
 }
 
 
-static void
-set_pen_size(void* _context, float size)
+static void set_pen_size(void* _context, float size)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, float))context->function_table[32])(context->user_data,
@@ -289,8 +277,7 @@ set_pen_size(void* _context, float size)
 }
 
 
-static void
-set_fore_color(void* _context, const rgb_color& color)
+static void set_fore_color(void* _context, const rgb_color& color)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, rgb_color))context->function_table[33])(
@@ -298,8 +285,7 @@ set_fore_color(void* _context, const rgb_color& color)
 }
 
 
-static void
-set_back_color(void* _context, const rgb_color& color)
+static void set_back_color(void* _context, const rgb_color& color)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, rgb_color))context->function_table[34])(
@@ -307,8 +293,7 @@ set_back_color(void* _context, const rgb_color& color)
 }
 
 
-static void
-set_stipple_pattern(void* _context, const pattern& stipplePattern)
+static void set_stipple_pattern(void* _context, const pattern& stipplePattern)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, pattern))context->function_table[35])(context->user_data,
@@ -316,8 +301,7 @@ set_stipple_pattern(void* _context, const pattern& stipplePattern)
 }
 
 
-static void
-set_scale(void* _context, float scale)
+static void set_scale(void* _context, float scale)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, float))context->function_table[36])(context->user_data,
@@ -325,8 +309,7 @@ set_scale(void* _context, float scale)
 }
 
 
-static void
-set_font_family(void* _context, const char* _family, size_t length)
+static void set_font_family(void* _context, const char* _family, size_t length)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     char* family = strndup(_family, length);
@@ -338,8 +321,7 @@ set_font_family(void* _context, const char* _family, size_t length)
 }
 
 
-static void
-set_font_style(void* _context, const char* _style, size_t length)
+static void set_font_style(void* _context, const char* _style, size_t length)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     char* style = strndup(_style, length);
@@ -351,8 +333,7 @@ set_font_style(void* _context, const char* _style, size_t length)
 }
 
 
-static void
-set_font_spacing(void* _context, uint8 spacing)
+static void set_font_spacing(void* _context, uint8 spacing)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, int32))context->function_table[39])(context->user_data,
@@ -360,8 +341,7 @@ set_font_spacing(void* _context, uint8 spacing)
 }
 
 
-static void
-set_font_size(void* _context, float size)
+static void set_font_size(void* _context, float size)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, float))context->function_table[40])(context->user_data,
@@ -369,8 +349,7 @@ set_font_size(void* _context, float size)
 }
 
 
-static void
-set_font_rotation(void* _context, float rotation)
+static void set_font_rotation(void* _context, float rotation)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, float))context->function_table[41])(context->user_data,
@@ -378,8 +357,7 @@ set_font_rotation(void* _context, float rotation)
 }
 
 
-static void
-set_font_encoding(void* _context, uint8 encoding)
+static void set_font_encoding(void* _context, uint8 encoding)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, int32))context->function_table[42])(context->user_data,
@@ -387,8 +365,7 @@ set_font_encoding(void* _context, uint8 encoding)
 }
 
 
-static void
-set_font_flags(void* _context, uint32 flags)
+static void set_font_flags(void* _context, uint32 flags)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, int32))context->function_table[43])(context->user_data,
@@ -396,8 +373,7 @@ set_font_flags(void* _context, uint32 flags)
 }
 
 
-static void
-set_font_shear(void* _context, float shear)
+static void set_font_shear(void* _context, float shear)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, float))context->function_table[44])(context->user_data,
@@ -405,8 +381,7 @@ set_font_shear(void* _context, float shear)
 }
 
 
-static void
-set_font_face(void* _context, uint16 face)
+static void set_font_face(void* _context, uint16 face)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
     ((void (*)(void*, int32))context->function_table[46])(context->user_data,
@@ -414,8 +389,7 @@ set_font_face(void* _context, uint16 face)
 }
 
 
-static void
-set_blending_mode(void* _context, source_alpha alphaSrcMode,
+static void set_blending_mode(void* _context, source_alpha alphaSrcMode,
     alpha_function alphaFncMode)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
@@ -501,8 +475,7 @@ PicturePlayer::~PicturePlayer()
 }
 
 
-status_t
-PicturePlayer::Play(void** callBackTable, int32 tableEntries, void* userData)
+status_t PicturePlayer::Play(void** callBackTable, int32 tableEntries, void* userData)
 {
     const BPrivate::picture_player_callbacks kAdapterCallbacks = {
         move_pen_by,
@@ -571,8 +544,7 @@ PicturePlayer::Play(void** callBackTable, int32 tableEntries, void* userData)
 }
 
 
-status_t
-PicturePlayer::Play(const picture_player_callbacks& callbacks,
+status_t PicturePlayer::Play(const picture_player_callbacks& callbacks,
     size_t callbacksSize, void* userData)
 {
     return _Play(callbacks, userData, fData, fSize, 0);
@@ -595,8 +567,7 @@ public:
         }
 
         template<typename T>
-        bool
-        Get(const T*& typed, size_t count = 1)
+        bool         Get(const T*& typed, size_t count = 1)
         {
             if (fRemaining < sizeof(T) * count)
                 return false;
@@ -608,8 +579,7 @@ public:
         }
 
         template<typename T>
-        bool
-        GetRemaining(const T*& buffer, size_t& size)
+        bool         GetRemaining(const T*& buffer, size_t& size)
         {
             if (fRemaining == 0)
                 return false;
@@ -632,8 +602,7 @@ struct picture_data_entry_header {
 } _PACKED;
 
 
-status_t
-PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* userData,
+status_t PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* userData,
     const void* buffer, size_t length, uint16 parentOp)
 {
 #if DEBUG

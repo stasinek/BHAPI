@@ -52,8 +52,7 @@ find_input_device(const char *name)
 }
 
 
-status_t
-get_input_devices(BList *list)
+status_t get_input_devices(BList *list)
 {
 	list->MakeEmpty();
 
@@ -83,8 +82,7 @@ get_input_devices(BList *list)
 }
 
 
-status_t
-watch_input_devices(BMessenger target, bool start)
+status_t watch_input_devices(BMessenger target, bool start)
 {
 	BMessage command(IS_WATCH_DEVICES);
 	BMessage reply;
@@ -116,8 +114,7 @@ BInputDevice::Type() const
 }
 
 
-bool
-BInputDevice::IsRunning() const
+bool BInputDevice::IsRunning() const
 {
 	if (!fName)
 		return false;
@@ -131,8 +128,7 @@ BInputDevice::IsRunning() const
 }
 
 
-status_t
-BInputDevice::Start()
+status_t BInputDevice::Start()
 {
 	if (!fName)
 		return B_ERROR;
@@ -146,8 +142,7 @@ BInputDevice::Start()
 }
 
 
-status_t
-BInputDevice::Stop()
+status_t BInputDevice::Stop()
 {
 	if (!fName)
 		return B_ERROR;
@@ -161,8 +156,7 @@ BInputDevice::Stop()
 }
 
 
-status_t
-BInputDevice::Control(uint32 code, BMessage *message)
+status_t BInputDevice::Control(uint32 code, BMessage *message)
 {
 	if (!fName)
 		return B_ERROR;
@@ -185,8 +179,7 @@ BInputDevice::Control(uint32 code, BMessage *message)
 }
 
 
-status_t
-BInputDevice::Start(input_device_type type)
+status_t BInputDevice::Start(input_device_type type)
 {
 	BMessage command(IS_START_DEVICE);
 	BMessage reply;
@@ -197,8 +190,7 @@ BInputDevice::Start(input_device_type type)
 }
 
 
-status_t
-BInputDevice::Stop(input_device_type type)
+status_t BInputDevice::Stop(input_device_type type)
 {
 	BMessage command(IS_STOP_DEVICE);
 	BMessage reply;
@@ -209,8 +201,7 @@ BInputDevice::Stop(input_device_type type)
 }
 
 
-status_t
-BInputDevice::Control(input_device_type type, uint32 code, BMessage *message)
+status_t BInputDevice::Control(input_device_type type, uint32 code, BMessage *message)
 {
 	BMessage command(IS_CONTROL_DEVICES);
 	BMessage reply;
@@ -238,8 +229,7 @@ BInputDevice::BInputDevice()
 }
 
 
-void
-BInputDevice::_SetNameAndType(const char *name, input_device_type type)
+void BInputDevice::_SetNameAndType(const char *name, input_device_type type)
 {
 	if (fName) {
 		free(fName);
@@ -253,8 +243,7 @@ BInputDevice::_SetNameAndType(const char *name, input_device_type type)
 }
 
 
-status_t
-_control_input_server_(BMessage *command, BMessage *reply)
+status_t _control_input_server_(BMessage *command, BMessage *reply)
 {
 	if (!sInputServer) {
 		sInputServer = new (std::nothrow) BMessenger;

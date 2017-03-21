@@ -117,8 +117,7 @@ GlobalTypeCache::~GlobalTypeCache()
 }
 
 
-status_t
-GlobalTypeCache::Init()
+status_t GlobalTypeCache::Init()
 {
 	// check lock
 	status_t error = fLock.InitCheck();
@@ -186,8 +185,7 @@ GlobalTypeCache::GetTypeByID(const BString& id) const
 }
 
 
-status_t
-GlobalTypeCache::AddType(Type* type)
+status_t GlobalTypeCache::AddType(Type* type)
 {
 	const BString& id = type->ID();
 	const BString& name = type->Name();
@@ -210,8 +208,7 @@ GlobalTypeCache::AddType(Type* type)
 }
 
 
-void
-GlobalTypeCache::RemoveType(Type* type)
+void GlobalTypeCache::RemoveType(Type* type)
 {
 	if (TypeEntry* typeEntry = fTypesByID->Lookup(type->ID())) {
 		if (typeEntry->type == type) {
@@ -226,8 +223,7 @@ GlobalTypeCache::RemoveType(Type* type)
 }
 
 
-void
-GlobalTypeCache::RemoveTypes(image_id imageID)
+void GlobalTypeCache::RemoveTypes(image_id imageID)
 {
 	AutoLocker<GlobalTypeCache> locker(this);
 

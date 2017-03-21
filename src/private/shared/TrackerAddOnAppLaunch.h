@@ -13,8 +13,7 @@
 #include <TrackerAddOn.h>
 
 
-void
-process_refs(entry_ref directory, BMessage* refs, void* reserved)
+void process_refs(entry_ref directory, BMessage* refs, void* reserved)
 {
 	// When this header file is included by an application it becomes
 	// ready to be used as a Tracker add-on. This function will launch

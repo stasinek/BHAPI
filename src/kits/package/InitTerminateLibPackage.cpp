@@ -12,8 +12,7 @@
 #endif
 
 
-extern "C" void
-initialize_after()
+extern "C" void initialize_after()
 {
 	#ifndef HAIKU_BOOTSTRAP_BUILD
 	curl_global_init(CURL_GLOBAL_SSL);
@@ -21,8 +20,7 @@ initialize_after()
 }
 
 
-extern "C" void
-terminate_after()
+extern "C" void terminate_after()
 {
 	#ifndef HAIKU_BOOTSTRAP_BUILD
 	curl_global_cleanup();

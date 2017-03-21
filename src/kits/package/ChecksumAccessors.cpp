@@ -44,8 +44,7 @@ ChecksumFileChecksumAccessor::ChecksumFileChecksumAccessor(
 }
 
 
-status_t
-ChecksumFileChecksumAccessor::GetChecksum(BString& checksum) const
+status_t ChecksumFileChecksumAccessor::GetChecksum(BString& checksum) const
 {
 	BFile checksumFile(&fChecksumFileEntry, B_READ_ONLY);
 	status_t result = checksumFile.InitCheck();
@@ -81,8 +80,7 @@ GeneralFileChecksumAccessor::GeneralFileChecksumAccessor(
 }
 
 
-status_t
-GeneralFileChecksumAccessor::GetChecksum(BString& checksum) const
+status_t GeneralFileChecksumAccessor::GetChecksum(BString& checksum) const
 {
 	SHA256 sha;
 
@@ -147,8 +145,7 @@ StringChecksumAccessor::StringChecksumAccessor(const BString& checksum)
 }
 
 
-status_t
-StringChecksumAccessor::GetChecksum(BString& _checksum) const
+status_t StringChecksumAccessor::GetChecksum(BString& _checksum) const
 {
 	_checksum = fChecksum;
 	return B_OK;

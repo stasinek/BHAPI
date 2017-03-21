@@ -63,8 +63,7 @@ BasicFunctionDebugInfo::PrettyName() const
 }
 
 
-bool
-BasicFunctionDebugInfo::IsMain() const
+bool BasicFunctionDebugInfo::IsMain() const
 {
 	return false;
 }

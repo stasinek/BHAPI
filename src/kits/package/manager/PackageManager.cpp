@@ -77,8 +77,7 @@ BPackageManager::~BPackageManager()
 }
 
 
-void
-BPackageManager::Init(uint32 flags)
+void BPackageManager::Init(uint32 flags)
 {
 	if (fSolver != NULL)
 		return;
@@ -133,8 +132,7 @@ BPackageManager::Init(uint32 flags)
 }
 
 
-void
-BPackageManager::SetDebugLevel(int32 level)
+void BPackageManager::SetDebugLevel(int32 level)
 {
 	fDebugLevel = level;
 
@@ -143,8 +141,7 @@ BPackageManager::SetDebugLevel(int32 level)
 }
 
 
-void
-BPackageManager::Install(const char* const* packages, int packageCount)
+void BPackageManager::Install(const char* const* packages, int packageCount)
 {
 	BSolverPackageSpecifierList packagesToInstall;
 	_AddPackageSpecifiers(packages, packageCount, packagesToInstall);
@@ -152,8 +149,7 @@ BPackageManager::Install(const char* const* packages, int packageCount)
 }
 
 
-void
-BPackageManager::Install(const BSolverPackageSpecifierList& packages)
+void BPackageManager::Install(const BSolverPackageSpecifierList& packages)
 {
 	Init(B_ADD_INSTALLED_REPOSITORIES | B_ADD_REMOTE_REPOSITORIES
 		| B_REFRESH_REPOSITORIES);
@@ -178,8 +174,7 @@ BPackageManager::Install(const BSolverPackageSpecifierList& packages)
 }
 
 
-void
-BPackageManager::Uninstall(const char* const* packages, int packageCount)
+void BPackageManager::Uninstall(const char* const* packages, int packageCount)
 {
 	BSolverPackageSpecifierList packagesToUninstall;
 	if (!packagesToUninstall.AppendSpecifiers(packages, packageCount))
@@ -188,8 +183,7 @@ BPackageManager::Uninstall(const char* const* packages, int packageCount)
 }
 
 
-void
-BPackageManager::Uninstall(const BSolverPackageSpecifierList& packages)
+void BPackageManager::Uninstall(const BSolverPackageSpecifierList& packages)
 {
 	Init(B_ADD_INSTALLED_REPOSITORIES);
 
@@ -270,8 +264,7 @@ BPackageManager::Uninstall(const BSolverPackageSpecifierList& packages)
 }
 
 
-void
-BPackageManager::Update(const char* const* packages, int packageCount)
+void BPackageManager::Update(const char* const* packages, int packageCount)
 {
 	BSolverPackageSpecifierList packagesToUpdate;
 	_AddPackageSpecifiers(packages, packageCount, packagesToUpdate);
@@ -279,8 +272,7 @@ BPackageManager::Update(const char* const* packages, int packageCount)
 }
 
 
-void
-BPackageManager::Update(const BSolverPackageSpecifierList& packages)
+void BPackageManager::Update(const BSolverPackageSpecifierList& packages)
 {
 	Init(B_ADD_INSTALLED_REPOSITORIES | B_ADD_REMOTE_REPOSITORIES
 		| B_REFRESH_REPOSITORIES);
@@ -306,8 +298,7 @@ BPackageManager::Update(const BSolverPackageSpecifierList& packages)
 }
 
 
-void
-BPackageManager::FullSync()
+void BPackageManager::FullSync()
 {
 	Init(B_ADD_INSTALLED_REPOSITORIES | B_ADD_REMOTE_REPOSITORIES
 		| B_REFRESH_REPOSITORIES);
@@ -326,8 +317,7 @@ BPackageManager::FullSync()
 }
 
 
-void
-BPackageManager::VerifyInstallation()
+void BPackageManager::VerifyInstallation()
 {
 	Init(B_ADD_INSTALLED_REPOSITORIES | B_ADD_REMOTE_REPOSITORIES
 		| B_REFRESH_REPOSITORIES);
@@ -363,8 +353,7 @@ BPackageManager::InstallationRepository()
 }
 
 
-void
-BPackageManager::JobStarted(BSupportKit::BJob* job)
+void BPackageManager::JobStarted(BSupportKit::BJob* job)
 {
 	if (dynamic_cast<FetchFileJob*>(job) != NULL) {
 		FetchFileJob* fetchJob = (FetchFileJob*)job;
@@ -377,8 +366,7 @@ BPackageManager::JobStarted(BSupportKit::BJob* job)
 }
 
 
-void
-BPackageManager::JobProgress(BSupportKit::BJob* job)
+void BPackageManager::JobProgress(BSupportKit::BJob* job)
 {
 	if (dynamic_cast<FetchFileJob*>(job) != NULL) {
 		FetchFileJob* fetchJob = (FetchFileJob*)job;
@@ -389,8 +377,7 @@ BPackageManager::JobProgress(BSupportKit::BJob* job)
 }
 
 
-void
-BPackageManager::JobSucceeded(BSupportKit::BJob* job)
+void BPackageManager::JobSucceeded(BSupportKit::BJob* job)
 {
 	if (dynamic_cast<FetchFileJob*>(job) != NULL) {
 		FetchFileJob* fetchJob = (FetchFileJob*)job;
@@ -403,8 +390,7 @@ BPackageManager::JobSucceeded(BSupportKit::BJob* job)
 }
 
 
-void
-BPackageManager::_HandleProblems()
+void BPackageManager::_HandleProblems()
 {
 	while (fSolver->HasProblems()) {
 		fUserInteractionHandler->HandleProblems();
@@ -416,8 +402,7 @@ BPackageManager::_HandleProblems()
 }
 
 
-void
-BPackageManager::_AnalyzeResult()
+void BPackageManager::_AnalyzeResult()
 {
 	BSolverResult result;
 	status_t error = fSolver->GetResult(result);
@@ -472,8 +457,7 @@ BPackageManager::_AnalyzeResult()
 }
 
 
-void
-BPackageManager::_ConfirmChanges(bool fromMostSpecific)
+void BPackageManager::_ConfirmChanges(bool fromMostSpecific)
 {
 	// check, if there are any changes at all
 	int32 count = fInstalledRepositories.CountItems();
@@ -492,8 +476,7 @@ BPackageManager::_ConfirmChanges(bool fromMostSpecific)
 }
 
 
-void
-BPackageManager::_ApplyPackageChanges(bool fromMostSpecific)
+void BPackageManager::_ApplyPackageChanges(bool fromMostSpecific)
 {
 	int32 count = fInstalledRepositories.CountItems();
 	if (fromMostSpecific) {
@@ -511,8 +494,7 @@ BPackageManager::_ApplyPackageChanges(bool fromMostSpecific)
 }
 
 
-void
-BPackageManager::_PreparePackageChanges(
+void BPackageManager::_PreparePackageChanges(
 	InstalledRepository& installationRepository)
 {
 	if (!installationRepository.HasChanges())
@@ -588,8 +570,7 @@ BPackageManager::_PreparePackageChanges(
 }
 
 
-void
-BPackageManager::_CommitPackageChanges(Transaction& transaction)
+void BPackageManager::_CommitPackageChanges(Transaction& transaction)
 {
 	InstalledRepository& installationRepository = transaction.Repository();
 
@@ -621,8 +602,7 @@ BPackageManager::_CommitPackageChanges(Transaction& transaction)
 }
 
 
-void
-BPackageManager::_ClonePackageFile(LocalRepository* repository,
+void BPackageManager::_ClonePackageFile(LocalRepository* repository,
 	BSolverPackage* package, const BEntry& entry)
 {
 	// get source and destination path
@@ -644,8 +624,7 @@ BPackageManager::_ClonePackageFile(LocalRepository* repository,
 }
 
 
-int32
-BPackageManager::_FindBasePackage(const PackageList& packages,
+int32 BPackageManager::_FindBasePackage(const PackageList& packages,
 	const BPackageInfo& info)
 {
 	if (info.BasePackage().IsEmpty())
@@ -684,8 +663,7 @@ BPackageManager::_FindBasePackage(const PackageList& packages,
 }
 
 
-void
-BPackageManager::_AddInstalledRepository(InstalledRepository* repository)
+void BPackageManager::_AddInstalledRepository(InstalledRepository* repository)
 {
 	fInstallationInterface->InitInstalledRepository(*repository);
 
@@ -698,8 +676,7 @@ BPackageManager::_AddInstalledRepository(InstalledRepository* repository)
 }
 
 
-void
-BPackageManager::_AddRemoteRepository(BPackageRoster& roster, const char* name,
+void BPackageManager::_AddRemoteRepository(BPackageRoster& roster, const char* name,
 	bool refresh)
 {
 	BRepositoryConfig config;
@@ -729,8 +706,7 @@ BPackageManager::_AddRemoteRepository(BPackageRoster& roster, const char* name,
 }
 
 
-status_t
-BPackageManager::_GetRepositoryCache(BPackageRoster& roster,
+status_t BPackageManager::_GetRepositoryCache(BPackageRoster& roster,
 	const BRepositoryConfig& config, bool refresh, BRepositoryCache& _cache)
 {
 	if (!refresh && roster.GetRepositoryCache(config.Name(), &_cache) == B_OK)
@@ -746,8 +722,7 @@ BPackageManager::_GetRepositoryCache(BPackageRoster& roster,
 }
 
 
-void
-BPackageManager::_AddPackageSpecifiers(const char* const* searchStrings,
+void BPackageManager::_AddPackageSpecifiers(const char* const* searchStrings,
 	int searchStringCount, BSolverPackageSpecifierList& specifierList)
 {
 	for (int i = 0; i < searchStringCount; i++) {
@@ -764,8 +739,7 @@ BPackageManager::_AddPackageSpecifiers(const char* const* searchStrings,
 }
 
 
-bool
-BPackageManager::_IsLocalPackage(const char* fileName)
+bool BPackageManager::_IsLocalPackage(const char* fileName)
 {
 	// Simple heuristic: fileName contains ".hpkg" and there's actually a file
 	// it refers to.
@@ -784,8 +758,7 @@ BPackageManager::_AddLocalPackage(const char* fileName)
 }
 
 
-bool
-BPackageManager::_NextSpecificInstallationLocation()
+bool BPackageManager::_NextSpecificInstallationLocation()
 {
 	if (fLocation == B_PACKAGE_INSTALLATION_LOCATION_SYSTEM) {
 		fLocation = B_PACKAGE_INSTALLATION_LOCATION_HOME;
@@ -798,8 +771,7 @@ BPackageManager::_NextSpecificInstallationLocation()
 }
 
 
-status_t
-BPackageManager::DownloadPackage(const BString& fileURL,
+status_t BPackageManager::DownloadPackage(const BString& fileURL,
 	const BEntry& targetEntry, const BString& checksum)
 {
 	BDecisionProvider provider;
@@ -809,8 +781,7 @@ BPackageManager::DownloadPackage(const BString& fileURL,
 }
 
 
-status_t
-BPackageManager::RefreshRepository(const BRepositoryConfig& repoConfig)
+status_t BPackageManager::RefreshRepository(const BRepositoryConfig& repoConfig)
 {
 	BDecisionProvider provider;
 	BContext context(provider, *this);
@@ -878,8 +849,7 @@ BPackageManager::MiscLocalRepository::AddLocalPackage(const char* fileName)
 }
 
 
-void
-BPackageManager::MiscLocalRepository::GetPackagePath(BSolverPackage* package,
+void BPackageManager::MiscLocalRepository::GetPackagePath(BSolverPackage* package,
 	BPath& _path)
 {
 	PackagePathMap::const_iterator it = fPackagePaths.find(package);
@@ -911,8 +881,7 @@ BPackageManager::InstalledRepository::InstalledRepository(const char* name,
 }
 
 
-void
-BPackageManager::InstalledRepository::GetPackagePath(BSolverPackage* package,
+void BPackageManager::InstalledRepository::GetPackagePath(BSolverPackage* package,
 	BPath& _path)
 {
 	directory_which packagesWhich;
@@ -937,8 +906,7 @@ BPackageManager::InstalledRepository::GetPackagePath(BSolverPackage* package,
 }
 
 
-void
-BPackageManager::InstalledRepository::DisablePackage(BSolverPackage* package)
+void BPackageManager::InstalledRepository::DisablePackage(BSolverPackage* package)
 {
 	if (fDisabledPackages.HasItem(package))
 		DIE("package %s already disabled", package->VersionedName().String());
@@ -956,22 +924,19 @@ BPackageManager::InstalledRepository::DisablePackage(BSolverPackage* package)
 }
 
 
-bool
-BPackageManager::InstalledRepository::EnablePackage(BSolverPackage* package)
+bool BPackageManager::InstalledRepository::EnablePackage(BSolverPackage* package)
 {
 	return fDisabledPackages.RemoveItem(package);
 }
 
 
-bool
-BPackageManager::InstalledRepository::HasChanges() const
+bool BPackageManager::InstalledRepository::HasChanges() const
 {
 	return !fPackagesToActivate.IsEmpty() || !fPackagesToDeactivate.IsEmpty();
 }
 
 
-void
-BPackageManager::InstalledRepository::ApplyChanges()
+void BPackageManager::InstalledRepository::ApplyChanges()
 {
 	// disable packages to deactivate
 	for (int32 i = 0; BSolverPackage* package = fPackagesToDeactivate.ItemAt(i);
@@ -1017,8 +982,7 @@ BPackageManager::InstallationInterface::~InstallationInterface()
 }
 
 
-void
-BPackageManager::InstallationInterface::ResultComputed(
+void BPackageManager::InstallationInterface::ResultComputed(
 	InstalledRepository& repository)
 {
 }
@@ -1039,8 +1003,7 @@ BPackageManager::ClientInstallationInterface::~ClientInstallationInterface()
 }
 
 
-void
-BPackageManager::ClientInstallationInterface::InitInstalledRepository(
+void BPackageManager::ClientInstallationInterface::InitInstalledRepository(
 	InstalledRepository& repository)
 {
 	const char* name = repository.InitialName();
@@ -1049,8 +1012,7 @@ BPackageManager::ClientInstallationInterface::InitInstalledRepository(
 }
 
 
-status_t
-BPackageManager::ClientInstallationInterface::PrepareTransaction(
+status_t BPackageManager::ClientInstallationInterface::PrepareTransaction(
 	Transaction& transaction)
 {
 	return fDaemonClient.CreateTransaction(transaction.Repository().Location(),
@@ -1059,8 +1021,7 @@ BPackageManager::ClientInstallationInterface::PrepareTransaction(
 }
 
 
-status_t
-BPackageManager::ClientInstallationInterface::CommitTransaction(
+status_t BPackageManager::ClientInstallationInterface::CommitTransaction(
 	Transaction& transaction, BCommitTransactionResult& _result)
 {
 	return fDaemonClient.CommitTransaction(transaction.ActivationTransaction(),
@@ -1076,79 +1037,68 @@ BPackageManager::UserInteractionHandler::~UserInteractionHandler()
 }
 
 
-void
-BPackageManager::UserInteractionHandler::HandleProblems()
+void BPackageManager::UserInteractionHandler::HandleProblems()
 {
 	throw BAbortedByUserException();
 }
 
 
-void
-BPackageManager::UserInteractionHandler::ConfirmChanges(bool fromMostSpecific)
+void BPackageManager::UserInteractionHandler::ConfirmChanges(bool fromMostSpecific)
 {
 	throw BAbortedByUserException();
 }
 
 
-void
-BPackageManager::UserInteractionHandler::Warn(status_t error,
+void BPackageManager::UserInteractionHandler::Warn(status_t error,
 	const char* format, ...)
 {
 }
 
 
-void
-BPackageManager::UserInteractionHandler::ProgressPackageDownloadStarted(
+void BPackageManager::UserInteractionHandler::ProgressPackageDownloadStarted(
 	const char* packageName)
 {
 }
 
 
-void
-BPackageManager::UserInteractionHandler::ProgressPackageDownloadActive(
+void BPackageManager::UserInteractionHandler::ProgressPackageDownloadActive(
 	const char* packageName, float completionPercentage, off_t bytes,
 	off_t totalBytes)
 {
 }
 
 
-void
-BPackageManager::UserInteractionHandler::ProgressPackageDownloadComplete(
+void BPackageManager::UserInteractionHandler::ProgressPackageDownloadComplete(
 	const char* packageName)
 {
 }
 
 
-void
-BPackageManager::UserInteractionHandler::ProgressPackageChecksumStarted(
+void BPackageManager::UserInteractionHandler::ProgressPackageChecksumStarted(
 	const char* title)
 {
 }
 
 
-void
-BPackageManager::UserInteractionHandler::ProgressPackageChecksumComplete(
+void BPackageManager::UserInteractionHandler::ProgressPackageChecksumComplete(
 	const char* title)
 {
 }
 
 
-void
-BPackageManager::UserInteractionHandler::ProgressStartApplyingChanges(
+void BPackageManager::UserInteractionHandler::ProgressStartApplyingChanges(
 	InstalledRepository& repository)
 {
 }
 
 
-void
-BPackageManager::UserInteractionHandler::ProgressTransactionCommitted(
+void BPackageManager::UserInteractionHandler::ProgressTransactionCommitted(
 	InstalledRepository& repository, const BCommitTransactionResult& result)
 {
 }
 
 
-void
-BPackageManager::UserInteractionHandler::ProgressApplyingChangesDone(
+void BPackageManager::UserInteractionHandler::ProgressApplyingChangesDone(
 	InstalledRepository& repository)
 {
 }

@@ -42,15 +42,13 @@ BFormat::~BFormat()
 }
 
 
-status_t
-BFormat::InitCheck() const
+status_t BFormat::InitCheck() const
 {
 	return fInitStatus;
 }
 
 
-status_t
-BFormat::_Initialize(const BLocale& locale)
+status_t BFormat::_Initialize(const BLocale& locale)
 {
 	BFormattingConventions conventions;
 	BLanguage language;
@@ -67,8 +65,7 @@ BFormat::_Initialize(const BLocale& locale)
 }
 
 
-status_t
-BFormat::_Initialize(const BLanguage& language,
+status_t BFormat::_Initialize(const BLanguage& language,
 	const BFormattingConventions& conventions)
 {
 	fConventions = conventions;

@@ -68,8 +68,7 @@ TMenuItemGroup::~TMenuItemGroup()
 }
 
 
-bool
-TMenuItemGroup::AddItem(BMenuItem* item)
+bool TMenuItemGroup::AddItem(BMenuItem* item)
 {
 	if (!fList.AddItem(item))
 		return false;
@@ -82,8 +81,7 @@ TMenuItemGroup::AddItem(BMenuItem* item)
 }
 
 
-bool
-TMenuItemGroup::AddItem(BMenuItem* item, int32 atIndex)
+bool TMenuItemGroup::AddItem(BMenuItem* item, int32 atIndex)
 {
 	if (!fList.AddItem(item, atIndex))
 		return false;
@@ -96,8 +94,7 @@ TMenuItemGroup::AddItem(BMenuItem* item, int32 atIndex)
 }
 
 
-bool
-TMenuItemGroup::AddItem(BMenu* menu)
+bool TMenuItemGroup::AddItem(BMenu* menu)
 {
 	BMenuItem* item = new BMenuItem(menu);
 	if (item == NULL)
@@ -112,8 +109,7 @@ TMenuItemGroup::AddItem(BMenu* menu)
 }
 
 
-bool
-TMenuItemGroup::AddItem(BMenu* menu, int32 atIndex)
+bool TMenuItemGroup::AddItem(BMenu* menu, int32 atIndex)
 {
 	BMenuItem* item = new BMenuItem(menu);
 	if (item == NULL)
@@ -128,8 +124,7 @@ TMenuItemGroup::AddItem(BMenu* menu, int32 atIndex)
 }
 
 
-bool
-TMenuItemGroup::RemoveItem(BMenuItem* item)
+bool TMenuItemGroup::RemoveItem(BMenuItem* item)
 {
 	if (fMenu)
 		fMenu->RemoveGroupItem(this, item);
@@ -138,8 +133,7 @@ TMenuItemGroup::RemoveItem(BMenuItem* item)
 }
 
 
-bool
-TMenuItemGroup::RemoveItem(BMenu* menu)
+bool TMenuItemGroup::RemoveItem(BMenu* menu)
 {
 	BMenuItem* item = menu->Superitem();
 	if (item == NULL)
@@ -170,15 +164,13 @@ TMenuItemGroup::ItemAt(int32 index)
 }
 
 
-int32
-TMenuItemGroup::CountItems()
+int32 TMenuItemGroup::CountItems()
 {
 	return fList.CountItems();
 }
 
 
-void
-TMenuItemGroup::Separated(bool separated)
+void TMenuItemGroup::Separated(bool separated)
 {
 	if (separated == fHasSeparator)
 		return;
@@ -192,8 +184,7 @@ TMenuItemGroup::Separated(bool separated)
 }
 
 
-bool
-TMenuItemGroup::HasSeparator()
+bool TMenuItemGroup::HasSeparator()
 {
 	return fHasSeparator;
 }
@@ -218,8 +209,7 @@ TGroupedMenu::~TGroupedMenu()
 }
 
 
-bool
-TGroupedMenu::AddGroup(TMenuItemGroup* group)
+bool TGroupedMenu::AddGroup(TMenuItemGroup* group)
 {
 	if (!fGroups.AddItem(group))
 		return false;
@@ -234,8 +224,7 @@ TGroupedMenu::AddGroup(TMenuItemGroup* group)
 }
 
 
-bool
-TGroupedMenu::AddGroup(TMenuItemGroup* group, int32 atIndex)
+bool TGroupedMenu::AddGroup(TMenuItemGroup* group, int32 atIndex)
 {
 	if (!fGroups.AddItem(group, atIndex))
 		return false;
@@ -250,8 +239,7 @@ TGroupedMenu::AddGroup(TMenuItemGroup* group, int32 atIndex)
 }
 
 
-bool
-TGroupedMenu::RemoveGroup(TMenuItemGroup* group)
+bool TGroupedMenu::RemoveGroup(TMenuItemGroup* group)
 {
 	if (group->HasSeparator()) {
 		delete RemoveItem(group->fFirstItemIndex);
@@ -276,15 +264,13 @@ TGroupedMenu::GroupAt(int32 index)
 }
 
 
-int32
-TGroupedMenu::CountGroups()
+int32 TGroupedMenu::CountGroups()
 {
 	return fGroups.CountItems();
 }
 
 
-void
-TGroupedMenu::AddGroupItem(TMenuItemGroup* group, BMenuItem* item,
+void TGroupedMenu::AddGroupItem(TMenuItemGroup* group, BMenuItem* item,
 	int32 atIndex)
 {
 	int32 groupIndex = fGroups.IndexOf(group);
@@ -334,8 +320,7 @@ TGroupedMenu::AddGroupItem(TMenuItemGroup* group, BMenuItem* item,
 }
 
 
-void
-TGroupedMenu::RemoveGroupItem(TMenuItemGroup* group, BMenuItem* item)
+void TGroupedMenu::RemoveGroupItem(TMenuItemGroup* group, BMenuItem* item)
 {
 	int32 groupIndex = fGroups.IndexOf(group);
 	bool removedSeparator = false;

@@ -26,8 +26,7 @@ FloatValueFormatter::~FloatValueFormatter()
 }
 
 
-status_t
-FloatValueFormatter::FormatValue(Value* _value, BString& _output)
+status_t FloatValueFormatter::FormatValue(Value* _value, BString& _output)
 {
 	FloatValue* value = dynamic_cast<FloatValue*>(_value);
 	if (value == NULL)
@@ -54,15 +53,13 @@ FloatValueFormatter::FormatValue(Value* _value, BString& _output)
 }
 
 
-bool
-FloatValueFormatter::SupportsValidation() const
+bool FloatValueFormatter::SupportsValidation() const
 {
 	return true;
 }
 
 
-bool
-FloatValueFormatter::ValidateFormattedValue(const BString& input,
+bool FloatValueFormatter::ValidateFormattedValue(const BString& input,
 	type_code type) const
 {
 	::Value* value = NULL;
@@ -70,16 +67,14 @@ FloatValueFormatter::ValidateFormattedValue(const BString& input,
 }
 
 
-status_t
-FloatValueFormatter::GetValueFromFormattedInput(const BString& input,
+status_t FloatValueFormatter::GetValueFromFormattedInput(const BString& input,
 	type_code type, Value*& _output) const
 {
 	return _PerformValidation(input, type, _output, true);
 }
 
 
-status_t
-FloatValueFormatter::_PerformValidation(const BString& input, type_code type,
+status_t FloatValueFormatter::_PerformValidation(const BString& input, type_code type,
 	::Value*& _output, bool wantsValue) const
 {
 	const char* text = input.String();

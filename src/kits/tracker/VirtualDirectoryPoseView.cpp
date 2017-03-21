@@ -53,8 +53,7 @@ VirtualDirectoryPoseView::~VirtualDirectoryPoseView()
 }
 
 
-void
-VirtualDirectoryPoseView::MessageReceived(BMessage* message)
+void VirtualDirectoryPoseView::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		// ignore all edit operations
@@ -75,8 +74,7 @@ VirtualDirectoryPoseView::MessageReceived(BMessage* message)
 }
 
 
-void
-VirtualDirectoryPoseView::AttachedToWindow()
+void VirtualDirectoryPoseView::AttachedToWindow()
 {
 	_inherited::AttachedToWindow();
 	SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
@@ -84,30 +82,26 @@ VirtualDirectoryPoseView::AttachedToWindow()
 }
 
 
-void
-VirtualDirectoryPoseView::RestoreState(AttributeStreamNode* node)
+void VirtualDirectoryPoseView::RestoreState(AttributeStreamNode* node)
 {
 	_inherited::RestoreState(node);
 	fViewState->SetViewMode(kListMode);
 }
 
 
-void
-VirtualDirectoryPoseView::RestoreState(const BMessage& message)
+void VirtualDirectoryPoseView::RestoreState(const BMessage& message)
 {
 	_inherited::RestoreState(message);
 	fViewState->SetViewMode(kListMode);
 }
 
 
-void
-VirtualDirectoryPoseView::SavePoseLocations(BRect* frameIfDesktop)
+void VirtualDirectoryPoseView::SavePoseLocations(BRect* frameIfDesktop)
 {
 }
 
 
-void
-VirtualDirectoryPoseView::SetViewMode(uint32 newMode)
+void VirtualDirectoryPoseView::SetViewMode(uint32 newMode)
 {
 }
 
@@ -134,8 +128,7 @@ VirtualDirectoryPoseView::InitDirentIterator(const entry_ref* ref)
 }
 
 
-void
-VirtualDirectoryPoseView::StartWatching()
+void VirtualDirectoryPoseView::StartWatching()
 {
 	// watch the directories
 	int32 count = fDirectoryPaths.CountStrings();
@@ -154,16 +147,14 @@ VirtualDirectoryPoseView::StartWatching()
 }
 
 
-void
-VirtualDirectoryPoseView::StopWatching()
+void VirtualDirectoryPoseView::StopWatching()
 {
 	BPathMonitor::StopWatching(this);
 	stop_watching(this);
 }
 
 
-bool
-VirtualDirectoryPoseView::FSNotification(const BMessage* message)
+bool VirtualDirectoryPoseView::FSNotification(const BMessage* message)
 {
 	switch (message->GetInt32("opcode", 0)) {
 		case B_ENTRY_CREATED:
@@ -184,8 +175,7 @@ VirtualDirectoryPoseView::FSNotification(const BMessage* message)
 }
 
 
-bool
-VirtualDirectoryPoseView::_EntryCreated(const BMessage* message)
+bool VirtualDirectoryPoseView::_EntryCreated(const BMessage* message)
 {
 	NotOwningEntryRef entryRef;
 	node_ref nodeRef;
@@ -275,8 +265,7 @@ VirtualDirectoryPoseView::_EntryCreated(const BMessage* message)
 }
 
 
-bool
-VirtualDirectoryPoseView::_EntryRemoved(const BMessage* message)
+bool VirtualDirectoryPoseView::_EntryRemoved(const BMessage* message)
 {
 	NotOwningEntryRef entryRef;
 	node_ref nodeRef;
@@ -379,8 +368,7 @@ VirtualDirectoryPoseView::_EntryRemoved(const BMessage* message)
 }
 
 
-bool
-VirtualDirectoryPoseView::_EntryMoved(const BMessage* message)
+bool VirtualDirectoryPoseView::_EntryMoved(const BMessage* message)
 {
 	NotOwningEntryRef fromEntryRef;
 	NotOwningEntryRef toEntryRef;
@@ -411,8 +399,7 @@ VirtualDirectoryPoseView::_EntryMoved(const BMessage* message)
 }
 
 
-bool
-VirtualDirectoryPoseView::_NodeStatChanged(const BMessage* message)
+bool VirtualDirectoryPoseView::_NodeStatChanged(const BMessage* message)
 {
 	node_ref nodeRef;
 	if (message->FindInt32("device", &nodeRef.device) != B_OK
@@ -456,8 +443,7 @@ VirtualDirectoryPoseView::_NodeStatChanged(const BMessage* message)
 }
 
 
-void
-VirtualDirectoryPoseView::_DispatchEntryCreatedOrRemovedMessage(int32 opcode,
+void VirtualDirectoryPoseView::_DispatchEntryCreatedOrRemovedMessage(int32 opcode,
 	const node_ref& nodeRef, const entry_ref& entryRef, const char* path,
 	bool dispatchToSuperClass)
 {
@@ -477,16 +463,14 @@ VirtualDirectoryPoseView::_DispatchEntryCreatedOrRemovedMessage(int32 opcode,
 }
 
 
-bool
-VirtualDirectoryPoseView::_GetEntry(const char* name, entry_ref& _ref,
+bool VirtualDirectoryPoseView::_GetEntry(const char* name, entry_ref& _ref,
 	struct stat* _st)
 {
 	return VirtualDirectoryManager::GetEntry(fDirectoryPaths, name, &_ref, _st);
 }
 
 
-status_t
-VirtualDirectoryPoseView::_UpdateDirectoryPaths()
+status_t VirtualDirectoryPoseView::_UpdateDirectoryPaths()
 {
 	VirtualDirectoryManager* manager = VirtualDirectoryManager::Instance();
 	Model* model = TargetModel();

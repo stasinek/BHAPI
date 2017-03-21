@@ -56,8 +56,7 @@ namespace BPrivate {
 	}
 
 
-	bool
-	CheckedSecureSocket::CertificateVerificationFailed(BCertificate& certificate,
+	bool 	CheckedSecureSocket::CertificateVerificationFailed(BCertificate& certificate,
 		const char* message)
 	{
 		return fRequest->_CertificateVerificationFailed(certificate, message);
@@ -86,8 +85,7 @@ namespace BPrivate {
 	}
 
 
-	bool
-	CheckedProxySecureSocket::CertificateVerificationFailed(BCertificate& certificate,
+	bool 	CheckedProxySecureSocket::CertificateVerificationFailed(BCertificate& certificate,
 		const char* message)
 	{
 		return fRequest->_CertificateVerificationFailed(certificate, message);
@@ -152,86 +150,74 @@ BHttpRequest::~BHttpRequest()
 }
 
 
-void
-BHttpRequest::SetMethod(const char* const method)
+void BHttpRequest::SetMethod(const char* const method)
 {
 	fRequestMethod = method;
 }
 
 
-void
-BHttpRequest::SetFollowLocation(bool follow)
+void BHttpRequest::SetFollowLocation(bool follow)
 {
 	fOptFollowLocation = follow;
 }
 
 
-void
-BHttpRequest::SetMaxRedirections(int8 redirections)
+void BHttpRequest::SetMaxRedirections(int8 redirections)
 {
 	fOptMaxRedirs = redirections;
 }
 
 
-void
-BHttpRequest::SetReferrer(const BString& referrer)
+void BHttpRequest::SetReferrer(const BString& referrer)
 {
 	fOptReferer = referrer;
 }
 
 
-void
-BHttpRequest::SetUserAgent(const BString& agent)
+void BHttpRequest::SetUserAgent(const BString& agent)
 {
 	fOptUserAgent = agent;
 }
 
 
-void
-BHttpRequest::SetDiscardData(bool discard)
+void BHttpRequest::SetDiscardData(bool discard)
 {
 	fOptDiscardData = discard;
 }
 
 
-void
-BHttpRequest::SetDisableListener(bool disable)
+void BHttpRequest::SetDisableListener(bool disable)
 {
 	fOptDisableListener = disable;
 }
 
 
-void
-BHttpRequest::SetAutoReferrer(bool enable)
+void BHttpRequest::SetAutoReferrer(bool enable)
 {
 	fOptAutoReferer = enable;
 }
 
 
-void
-BHttpRequest::SetHeaders(const BHttpHeaders& headers)
+void BHttpRequest::SetHeaders(const BHttpHeaders& headers)
 {
 	AdoptHeaders(new(std::nothrow) BHttpHeaders(headers));
 }
 
 
-void
-BHttpRequest::AdoptHeaders(BHttpHeaders* const headers)
+void BHttpRequest::AdoptHeaders(BHttpHeaders* const headers)
 {
 	delete fOptHeaders;
 	fOptHeaders = headers;
 }
 
 
-void
-BHttpRequest::SetPostFields(const BHttpForm& fields)
+void BHttpRequest::SetPostFields(const BHttpForm& fields)
 {
 	AdoptPostFields(new(std::nothrow) BHttpForm(fields));
 }
 
 
-void
-BHttpRequest::AdoptPostFields(BHttpForm* const fields)
+void BHttpRequest::AdoptPostFields(BHttpForm* const fields)
 {
 	delete fOptPostFields;
 	fOptPostFields = fields;
@@ -241,8 +227,7 @@ BHttpRequest::AdoptPostFields(BHttpForm* const fields)
 }
 
 
-void
-BHttpRequest::AdoptInputData(BDataIO* const data, const ssize_t size)
+void BHttpRequest::AdoptInputData(BDataIO* const data, const ssize_t size)
 {
 	delete fOptInputData;
 	fOptInputData = data;
@@ -250,54 +235,47 @@ BHttpRequest::AdoptInputData(BDataIO* const data, const ssize_t size)
 }
 
 
-void
-BHttpRequest::SetUserName(const BString& name)
+void BHttpRequest::SetUserName(const BString& name)
 {
 	fOptUsername = name;
 }
 
 
-void
-BHttpRequest::SetPassword(const BString& password)
+void BHttpRequest::SetPassword(const BString& password)
 {
 	fOptPassword = password;
 }
 
 
-/*static*/ bool
-BHttpRequest::IsInformationalStatusCode(int16 code)
+/*static*/ bool BHttpRequest::IsInformationalStatusCode(int16 code)
 {
 	return (code >= B_HTTP_STATUS__INFORMATIONAL_BASE)
 		&& (code <  B_HTTP_STATUS__INFORMATIONAL_END);
 }
 
 
-/*static*/ bool
-BHttpRequest::IsSuccessStatusCode(int16 code)
+/*static*/ bool BHttpRequest::IsSuccessStatusCode(int16 code)
 {
 	return (code >= B_HTTP_STATUS__SUCCESS_BASE)
 		&& (code <  B_HTTP_STATUS__SUCCESS_END);
 }
 
 
-/*static*/ bool
-BHttpRequest::IsRedirectionStatusCode(int16 code)
+/*static*/ bool BHttpRequest::IsRedirectionStatusCode(int16 code)
 {
 	return (code >= B_HTTP_STATUS__REDIRECTION_BASE)
 		&& (code <  B_HTTP_STATUS__REDIRECTION_END);
 }
 
 
-/*static*/ bool
-BHttpRequest::IsClientErrorStatusCode(int16 code)
+/*static*/ bool BHttpRequest::IsClientErrorStatusCode(int16 code)
 {
 	return (code >= B_HTTP_STATUS__CLIENT_ERROR_BASE)
 		&& (code <  B_HTTP_STATUS__CLIENT_ERROR_END);
 }
 
 
-/*static*/ bool
-BHttpRequest::IsServerErrorStatusCode(int16 code)
+/*static*/ bool BHttpRequest::IsServerErrorStatusCode(int16 code)
 {
 	return (code >= B_HTTP_STATUS__SERVER_ERROR_BASE)
 		&& (code <  B_HTTP_STATUS__SERVER_ERROR_END);
@@ -329,8 +307,7 @@ BHttpRequest::Result() const
 }
 
 
-status_t
-BHttpRequest::Stop()
+status_t BHttpRequest::Stop()
 {
 	if (fSocket != NULL) {
 		fSocket->Disconnect();
@@ -340,8 +317,7 @@ BHttpRequest::Stop()
 }
 
 
-void
-BHttpRequest::_ResetOptions()
+void BHttpRequest::_ResetOptions()
 {
 	delete fOptPostFields;
 	delete fOptHeaders;
@@ -363,8 +339,7 @@ BHttpRequest::_ResetOptions()
 }
 
 
-status_t
-BHttpRequest::_ProtocolLoop()
+status_t BHttpRequest::_ProtocolLoop()
 {
 	// Initialize the request redirection loop
 	int8 maxRedirs = fOptMaxRedirs;
@@ -517,8 +492,7 @@ BHttpRequest::_ProtocolLoop()
 }
 
 
-status_t
-BHttpRequest::_MakeRequest()
+status_t BHttpRequest::_MakeRequest()
 {
 	delete fSocket;
 
@@ -786,8 +760,7 @@ BHttpRequest::_MakeRequest()
 }
 
 
-void
-BHttpRequest::_ParseStatus()
+void BHttpRequest::_ParseStatus()
 {
 	// Status line should be formatted like: HTTP/M.m SSS ...
 	// With:   M = Major version of the protocol
@@ -815,8 +788,7 @@ BHttpRequest::_ParseStatus()
 }
 
 
-void
-BHttpRequest::_ParseHeaders()
+void BHttpRequest::_ParseHeaders()
 {
 	BString currentHeader;
 	while (_GetLine(currentHeader) != B_ERROR) {
@@ -833,8 +805,7 @@ BHttpRequest::_ParseHeaders()
 }
 
 
-void
-BHttpRequest::_SendRequest()
+void BHttpRequest::_SendRequest()
 {
 	BString request(fRequestMethod);
 	request << ' ';
@@ -870,8 +841,7 @@ BHttpRequest::_SendRequest()
 }
 
 
-void
-BHttpRequest::_SendHeaders()
+void BHttpRequest::_SendHeaders()
 {
 	BHttpHeaders outputHeaders;
 
@@ -998,8 +968,7 @@ BHttpRequest::_SendHeaders()
 }
 
 
-void
-BHttpRequest::_SendPostData()
+void BHttpRequest::_SendPostData()
 {
 	if (fRequestMethod == B_HTTP_POST && fOptPostFields != NULL) {
 		if (fOptPostFields->GetFormType() != B_HTTP_FORM_MULTIPART) {
@@ -1103,8 +1072,7 @@ BHttpRequest::_ResultHeaders()
 }
 
 
-void
-BHttpRequest::_SetResultStatusCode(int32 statusCode)
+void BHttpRequest::_SetResultStatusCode(int32 statusCode)
 {
 	fResult.fStatusCode = statusCode;
 }
@@ -1117,8 +1085,7 @@ BHttpRequest::_ResultStatusText()
 }
 
 
-bool
-BHttpRequest::_CertificateVerificationFailed(BCertificate& certificate,
+bool BHttpRequest::_CertificateVerificationFailed(BCertificate& certificate,
 	const char* message)
 {
 	if (fContext->HasCertificateException(certificate))
@@ -1135,8 +1102,7 @@ BHttpRequest::_CertificateVerificationFailed(BCertificate& certificate,
 }
 
 
-bool
-BHttpRequest::_IsDefaultPort()
+bool BHttpRequest::_IsDefaultPort()
 {
 	if (fSSL && Url().Port() == 443)
 		return true;

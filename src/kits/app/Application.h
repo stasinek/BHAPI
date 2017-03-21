@@ -35,7 +35,7 @@
 #include "../app/Cursor.h"
 #include "../add-ons/font/FontEngine.h"
 //-----------------------------------------------------------------------------
-#include <OS.h>
+#include <kernel/OS.h>
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 using namespace bhapi;
@@ -47,6 +47,21 @@ class BClipboard;
 #define BGRAPHICSENGINE_DEF
 class BGraphicsEngine;
 #endif
+
+class BCursor;
+class BList;
+class BLocker;
+class BMessageRunner;
+class BResources;
+class BServer;
+class BWindow;
+
+struct app_info;
+
+namespace BPrivate {
+    class PortLink;
+    class ServerMemoryAllocator;
+}
 //-----------------------------------------------------------------------------
 class BHAPI_IMPEXP BApplication : public BLooper {
 //-----------------------------------------------------------------------------
@@ -56,6 +71,7 @@ public:
     virtual ~BApplication();
 
     // Archiving
+    BApplication(void);
     BApplication(const BMessage *from);
     virtual status_t Archive(BMessage *into, bool deep = true) const;
     static BArchivable *Instantiate(const BMessage *from);
@@ -86,12 +102,14 @@ public:
 //-----------------------------------------------------------------------------
 private:
  //-----------------------------------------------------------------------------
+    friend class Private;
     friend class BLooper;
     friend class BMessageRunner;
     friend class BWindow;
     friend class BView;
     friend class BBitmap;
     friend class BScreen;
+    friend class BServer;
 
     friend BHAPI_IMPEXP bool bhapi::update_font_families(bool);
 
@@ -130,9 +148,12 @@ inline void BApplication::SetCursor(const void *cursor)
 }
 #endif // BHAPI_BUILD_LIBRARY
 namespace bhapi {
-extern BHAPI_IMPEXP BApplication *be_app;
-extern BHAPI_IMPEXP BMessenger be_app_messenger;
-extern BHAPI_IMPEXP BClipboard be_clipboard;
+extern BHAPI_IMPEXP BApplication __be_app;
+extern BHAPI_IMPEXP BMessenger __be_app_messenger;
+extern BHAPI_IMPEXP BClipboard __be_clipboard;
+extern BHAPI_IMPEXP BApplication* be_app;
+extern BHAPI_IMPEXP BMessenger* be_app_messenger;
+extern BHAPI_IMPEXP BClipboard* be_clipboard;
 }
 //-----------------------------------------------------------------------------
 #endif /* __cplusplus */

@@ -18,16 +18,14 @@ NoOpSettingsManager::~NoOpSettingsManager()
 }
 
 
-status_t
-NoOpSettingsManager::LoadTeamSettings(const char* teamName,
+status_t NoOpSettingsManager::LoadTeamSettings(const char* teamName,
 	TeamSettings& settings)
 {
 	return B_OK;
 }
 
 
-status_t
-NoOpSettingsManager::SaveTeamSettings(const TeamSettings& settings)
+status_t NoOpSettingsManager::SaveTeamSettings(const TeamSettings& settings)
 {
 	return B_OK;
 }

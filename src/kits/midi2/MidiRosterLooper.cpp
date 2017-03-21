@@ -57,8 +57,7 @@ BMidiRosterLooper::~BMidiRosterLooper()
 }
 
 
-bool 
-BMidiRosterLooper::Init(BMidiRoster* roster_)
+bool BMidiRosterLooper::Init(BMidiRoster* roster_)
 {
 	ASSERT(roster_ != NULL)
 
@@ -121,8 +120,7 @@ BMidiRosterLooper::FindEndpoint(int32 id)
 }
 
 
-void 
-BMidiRosterLooper::AddEndpoint(BMidiEndpoint* endp)
+void BMidiRosterLooper::AddEndpoint(BMidiEndpoint* endp)
 {
 	ASSERT(endp != NULL)
 	ASSERT(!fEndpoints.HasItem(endp))
@@ -148,8 +146,7 @@ BMidiRosterLooper::AddEndpoint(BMidiEndpoint* endp)
 }
 
 
-void 
-BMidiRosterLooper::RemoveEndpoint(BMidiEndpoint* endp)
+void BMidiRosterLooper::RemoveEndpoint(BMidiEndpoint* endp)
 {
 	ASSERT(endp != NULL)
 	ASSERT(fEndpoints.HasItem(endp))
@@ -168,8 +165,7 @@ BMidiRosterLooper::RemoveEndpoint(BMidiEndpoint* endp)
 }
 
 
-void 
-BMidiRosterLooper::StartWatching(const BMessenger* watcher_)
+void BMidiRosterLooper::StartWatching(const BMessenger* watcher_)
 {
 	ASSERT(watcher_ != NULL)
 
@@ -181,16 +177,14 @@ BMidiRosterLooper::StartWatching(const BMessenger* watcher_)
 }
 
 
-void 
-BMidiRosterLooper::StopWatching()
+void BMidiRosterLooper::StopWatching()
 {
 	delete fWatcher;
 	fWatcher = NULL;
 }
 
 
-void 
-BMidiRosterLooper::MessageReceived(BMessage* msg)
+void BMidiRosterLooper::MessageReceived(BMessage* msg)
 {
 	#ifdef DEBUG
 	printf("IN "); msg->PrintToStream();
@@ -209,15 +203,13 @@ BMidiRosterLooper::MessageReceived(BMessage* msg)
 }
 
 
-void 
-BMidiRosterLooper::OnAppRegistered(BMessage* msg)
+void BMidiRosterLooper::OnAppRegistered(BMessage* msg)
 {
 	release_sem(fInitLock);
 }
 
 
-void 
-BMidiRosterLooper::OnEndpointCreated(BMessage* msg)
+void BMidiRosterLooper::OnEndpointCreated(BMessage* msg)
 {
 	int32 id;
 	bool isRegistered;
@@ -261,8 +253,7 @@ BMidiRosterLooper::OnEndpointCreated(BMessage* msg)
 }
 
 
-void 
-BMidiRosterLooper::OnEndpointDeleted(BMessage* msg)
+void BMidiRosterLooper::OnEndpointDeleted(BMessage* msg)
 {
 	int32 id;
 	if (msg->FindInt32("midi:id", &id) == B_OK) {
@@ -304,8 +295,7 @@ BMidiRosterLooper::OnEndpointDeleted(BMessage* msg)
 }
 
 
-void 
-BMidiRosterLooper::OnEndpointChanged(BMessage* msg)
+void BMidiRosterLooper::OnEndpointChanged(BMessage* msg)
 {
 	int32 id;
 	if (msg->FindInt32("midi:id", &id) == B_OK) {
@@ -328,8 +318,7 @@ BMidiRosterLooper::OnEndpointChanged(BMessage* msg)
 }
 
 
-void 
-BMidiRosterLooper::OnConnectedDisconnected(BMessage* msg)
+void BMidiRosterLooper::OnConnectedDisconnected(BMessage* msg)
 {
 	int32 prodId, consId;
 	if ((msg->FindInt32("midi:producer", &prodId) == B_OK)
@@ -367,8 +356,7 @@ BMidiRosterLooper::OnConnectedDisconnected(BMessage* msg)
 }
 
 
-void 
-BMidiRosterLooper::ChangeRegistered(BMessage* msg, BMidiEndpoint* endp)
+void BMidiRosterLooper::ChangeRegistered(BMessage* msg, BMidiEndpoint* endp)
 {
 	ASSERT(msg != NULL)
 	ASSERT(endp != NULL)
@@ -392,8 +380,7 @@ BMidiRosterLooper::ChangeRegistered(BMessage* msg, BMidiEndpoint* endp)
 }
 
 
-void 
-BMidiRosterLooper::ChangeName(BMessage* msg, BMidiEndpoint* endp)
+void BMidiRosterLooper::ChangeName(BMessage* msg, BMidiEndpoint* endp)
 {
 	ASSERT(msg != NULL)
 	ASSERT(endp != NULL)
@@ -414,8 +401,7 @@ BMidiRosterLooper::ChangeName(BMessage* msg, BMidiEndpoint* endp)
 }
 
 
-void 
-BMidiRosterLooper::ChangeProperties(BMessage* msg, BMidiEndpoint* endp)
+void BMidiRosterLooper::ChangeProperties(BMessage* msg, BMidiEndpoint* endp)
 {
 	ASSERT(msg != NULL)
 	ASSERT(endp != NULL)
@@ -434,8 +420,7 @@ BMidiRosterLooper::ChangeProperties(BMessage* msg, BMidiEndpoint* endp)
 }
 
 
-void 
-BMidiRosterLooper::ChangeLatency(BMessage* msg, BMidiEndpoint* endp)
+void BMidiRosterLooper::ChangeLatency(BMessage* msg, BMidiEndpoint* endp)
 {
 	ASSERT(msg != NULL)
 	ASSERT(endp != NULL)
@@ -459,8 +444,7 @@ BMidiRosterLooper::ChangeLatency(BMessage* msg, BMidiEndpoint* endp)
 }
 
 
-void 
-BMidiRosterLooper::AllEndpoints()
+void BMidiRosterLooper::AllEndpoints()
 {
 	BMessage notify;
 	for (int32 t = 0; t < CountEndpoints(); ++t) {
@@ -474,8 +458,7 @@ BMidiRosterLooper::AllEndpoints()
 }
 
 
-void 
-BMidiRosterLooper::AllConnections()
+void BMidiRosterLooper::AllConnections()
 {
 	for (int32 t = 0; t < CountEndpoints(); ++t) {
 		BMidiEndpoint* endp = EndpointAt(t);
@@ -494,8 +477,7 @@ BMidiRosterLooper::AllConnections()
 }
 
 
-void 
-BMidiRosterLooper::ChangeEvent(BMessage* msg, BMidiEndpoint* endp)
+void BMidiRosterLooper::ChangeEvent(BMessage* msg, BMidiEndpoint* endp)
 {
 	ASSERT(fWatcher != NULL)
 	ASSERT(msg != NULL)
@@ -514,8 +496,7 @@ BMidiRosterLooper::ChangeEvent(BMessage* msg, BMidiEndpoint* endp)
 }
 
 
-void 
-BMidiRosterLooper::ConnectionEvent(
+void BMidiRosterLooper::ConnectionEvent(
 	BMidiProducer* prod, BMidiConsumer* cons, bool mustConnect)
 {
 	ASSERT(fWatcher != NULL)
@@ -537,8 +518,7 @@ BMidiRosterLooper::ConnectionEvent(
 }
 
 
-void 
-BMidiRosterLooper::DisconnectDeadConsumer(BMidiConsumer* cons)
+void BMidiRosterLooper::DisconnectDeadConsumer(BMidiConsumer* cons)
 {
 	ASSERT(cons != NULL)
 
@@ -560,8 +540,7 @@ BMidiRosterLooper::DisconnectDeadConsumer(BMidiConsumer* cons)
 }
 
 
-void 
-BMidiRosterLooper::DisconnectDeadProducer(BMidiProducer* prod)
+void BMidiRosterLooper::DisconnectDeadProducer(BMidiProducer* prod)
 {
 	ASSERT(prod != NULL)
 
@@ -594,8 +573,7 @@ BMidiRosterLooper::EndpointAt(int32 index)
 
 
 #ifdef DEBUG
-void 
-BMidiRosterLooper::DumpEndpoints()
+void BMidiRosterLooper::DumpEndpoints()
 {
 	if (Lock()) {
 		printf("*** START DumpEndpoints\n");

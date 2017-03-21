@@ -218,8 +218,7 @@ extern const BAffineTransform B_AFFINE_IDENTITY_TRANSFORM;
 // #pragma mark - inline methods
 
 
-inline void
-BAffineTransform::Apply(double* x, double* y) const
+inline void BAffineTransform::Apply(double* x, double* y) const
 {
 	register double tmp = *x;
 	*x = tmp * sx + *y * shx + tx;
@@ -227,8 +226,7 @@ BAffineTransform::Apply(double* x, double* y) const
 }
 
 
-inline void
-BAffineTransform::ApplyInverse(double* x, double* y) const
+inline void BAffineTransform::ApplyInverse(double* x, double* y) const
 {
 	register double d = InverseDeterminant();
 	register double a = (*x - tx) * d;
@@ -386,14 +384,12 @@ BAffineTransform::operator=(const BAffineTransform& other)
 	return *this;
 }
 
-inline bool
-BAffineTransform::operator==(const BAffineTransform& other) const
+inline bool BAffineTransform::operator==(const BAffineTransform& other) const
 {
 	return IsEqual(other);
 }
 
-inline bool
-BAffineTransform::operator!=(const BAffineTransform& other) const
+inline bool BAffineTransform::operator!=(const BAffineTransform& other) const
 {
 	return !IsEqual(other);
 }

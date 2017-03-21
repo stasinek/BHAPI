@@ -31,20 +31,17 @@ BCharacterSet::BCharacterSet(uint32 _id, uint32 _MIBenum, const char * _print_na
 	aliases = _aliases;
 }
 
-uint32
-BCharacterSet::GetFontID() const
+uint32 BCharacterSet::GetFontID() const
 {
 	return id;
 }
 
-uint32
-BCharacterSet::GetConversionID() const
+uint32 BCharacterSet::GetConversionID() const
 {
 	return id-1;
 }
 
-uint32
-BCharacterSet::GetMIBenum() const
+uint32 BCharacterSet::GetMIBenum() const
 {
 	return MIBenum;
 }
@@ -67,8 +64,7 @@ BCharacterSet::GetMIMEName() const
 	return mime_name;
 }
 
-int32
-BCharacterSet::CountAliases() const
+int32 BCharacterSet::CountAliases() const
 {
 	return aliases_count;
 }

@@ -97,7 +97,7 @@ BAlertTypeView::~BAlertTypeView()
 }
 
 
-void
+void 
 BAlertTypeView::InitBitmap()
 {
 	const char **xpm_data = NULL;
@@ -132,7 +132,7 @@ BAlertTypeView::InitBitmap()
 }
 
 
-void
+void 
 BAlertTypeView::SetViewColor(bhapi::rgb_color c)
 {
 	if(ViewColor() != c)
@@ -144,7 +144,7 @@ BAlertTypeView::SetViewColor(bhapi::rgb_color c)
 }
 
 
-void
+void 
 BAlertTypeView::Draw(BRect updateRect)
 {
 	BRect rect = Bounds();
@@ -156,7 +156,7 @@ BAlertTypeView::Draw(BRect updateRect)
 }
 
 
-void
+void 
 BAlertTypeView::GetPreferredSize(float *width, float *height)
 {
 	if(width) *width = 100;
@@ -172,7 +172,7 @@ BAlertButton::BAlertButton(BRect frame, const char *name, const char *label, BMe
 }
 
 
-status_t
+status_t 
 BAlertButton::Invoke(const BMessage *msg)
 {
     BAlert *alert = cast_as(Window(), BAlert);
@@ -293,7 +293,7 @@ BAlert::~BAlert()
 }
 
 
-bool
+bool 
 BAlert::QuitRequested()
 {
 	return true;
@@ -371,7 +371,7 @@ BAlert::Go(bool could_proxy)
 }
 
 
-status_t
+status_t 
 BAlert::Go(BInvoker *invoker)
 {
 	if(IsRunning() || Proxy() != this || IsLockedByCurrentThread())

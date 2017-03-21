@@ -77,8 +77,7 @@ BQueryContainerWindow::PoseView() const
 }
 
 
-void
-BQueryContainerWindow::CreatePoseView(Model* model)
+void BQueryContainerWindow::CreatePoseView(Model* model)
 {
 	fPoseView = NewPoseView(model, kListMode);
 
@@ -88,8 +87,7 @@ BQueryContainerWindow::CreatePoseView(Model* model)
 }
 
 
-void
-BQueryContainerWindow::AddWindowMenu(BMenu* menu)
+void BQueryContainerWindow::AddWindowMenu(BMenu* menu)
 {
 	BMenuItem* item;
 
@@ -120,8 +118,7 @@ BQueryContainerWindow::AddWindowMenu(BMenu* menu)
 }
 
 
-void
-BQueryContainerWindow::AddWindowContextMenus(BMenu* menu)
+void BQueryContainerWindow::AddWindowContextMenus(BMenu* menu)
 {
 	BMenuItem* resizeItem = new BMenuItem(B_TRANSLATE("Resize to fit"),
 		new BMessage(kResizeToFit), 'Y');
@@ -141,8 +138,7 @@ BQueryContainerWindow::AddWindowContextMenus(BMenu* menu)
 }
 
 
-void
-BQueryContainerWindow::SetUpDefaultState()
+void BQueryContainerWindow::SetUpDefaultState()
 {
 	BNode defaultingNode;
 
@@ -193,8 +189,7 @@ BQueryContainerWindow::SetUpDefaultState()
 }
 
 
-bool
-BQueryContainerWindow::ActiveOnDevice(dev_t device) const
+bool BQueryContainerWindow::ActiveOnDevice(dev_t device) const
 {
 	return PoseView()->ActiveOnDevice(device);
 }

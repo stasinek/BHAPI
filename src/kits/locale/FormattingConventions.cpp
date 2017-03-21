@@ -36,8 +36,7 @@
 // #pragma mark - helpers
 
 
-static bool
-FormatUsesAmPm(const BString& format)
+static bool FormatUsesAmPm(const BString& format)
 {
 	if (format.Length() == 0)
 		return false;
@@ -59,8 +58,7 @@ FormatUsesAmPm(const BString& format)
 }
 
 
-static void
-CoerceFormatTo12HourClock(BString& format)
+static void CoerceFormatTo12HourClock(BString& format)
 {
 	char* s = format.LockBuffer(format.Length());
 	if (s == NULL)
@@ -90,8 +88,7 @@ CoerceFormatTo12HourClock(BString& format)
 }
 
 
-static void
-CoerceFormatTo24HourClock(BString& format)
+static void CoerceFormatTo24HourClock(BString& format)
 {
 	char* buffer = format.LockBuffer(format.Length());
 	char* currentPos = buffer;
@@ -147,8 +144,7 @@ CoerceFormatTo24HourClock(BString& format)
 }
 
 
-static void
-CoerceFormatToAbbreviatedTimezone(BString& format)
+static void CoerceFormatToAbbreviatedTimezone(BString& format)
 {
 	char* s = format.LockBuffer(format.Length());
 	if (s == NULL)
@@ -300,8 +296,7 @@ BFormattingConventions::~BFormattingConventions()
 }
 
 
-bool
-BFormattingConventions::operator==(const BFormattingConventions& other) const
+bool BFormattingConventions::operator==(const BFormattingConventions& other) const
 {
 	if (this == &other)
 		return true;
@@ -324,29 +319,25 @@ BFormattingConventions::operator==(const BFormattingConventions& other) const
 }
 
 
-bool
-BFormattingConventions::operator!=(const BFormattingConventions& other) const
+bool BFormattingConventions::operator!=(const BFormattingConventions& other) const
 {
 	return !(*this == other);
 }
 
 
-const char*
-BFormattingConventions::ID() const
+const char*  BFormattingConventions::ID() const
 {
 	return fICULocale->getName();
 }
 
 
-const char*
-BFormattingConventions::LanguageCode() const
+const char*  BFormattingConventions::LanguageCode() const
 {
 	return fICULocale->getLanguage();
 }
 
 
-const char*
-BFormattingConventions::CountryCode() const
+const char*  BFormattingConventions::CountryCode() const
 {
 	const char* country = fICULocale->getCountry();
 	if (country == NULL || country[0] == '\0')
@@ -356,15 +347,13 @@ BFormattingConventions::CountryCode() const
 }
 
 
-bool
-BFormattingConventions::AreCountrySpecific() const
+bool BFormattingConventions::AreCountrySpecific() const
 {
 	return CountryCode() != NULL;
 }
 
 
-status_t
-BFormattingConventions::GetNativeName(BString& name) const
+status_t BFormattingConventions::GetNativeName(BString& name) const
 {
 	UnicodeString string;
 	fICULocale->getDisplayName(*fICULocale, string);
@@ -378,8 +367,7 @@ BFormattingConventions::GetNativeName(BString& name) const
 }
 
 
-status_t
-BFormattingConventions::GetName(BString& name,
+status_t BFormattingConventions::GetName(BString& name,
 	const BLanguage* displayLanguage) const
 {
 	BString displayLanguageID;
@@ -415,8 +403,7 @@ BFormattingConventions::MeasurementKind() const
 }
 
 
-status_t
-BFormattingConventions::GetDateFormat(BDateFormatStyle style,
+status_t BFormattingConventions::GetDateFormat(BDateFormatStyle style,
 	BString& outFormat) const
 {
 	if (style < 0 || style >= B_DATE_FORMAT_STYLE_COUNT)
@@ -448,8 +435,7 @@ BFormattingConventions::GetDateFormat(BDateFormatStyle style,
 }
 
 
-status_t
-BFormattingConventions::GetTimeFormat(BTimeFormatStyle style,
+status_t BFormattingConventions::GetTimeFormat(BTimeFormatStyle style,
 	BString& outFormat) const
 {
 	if (style < 0 || style >= B_TIME_FORMAT_STYLE_COUNT)
@@ -500,8 +486,7 @@ BFormattingConventions::GetTimeFormat(BTimeFormatStyle style,
 }
 
 
-status_t
-BFormattingConventions::GetDateTimeFormat(BDateFormatStyle dateStyle,
+status_t BFormattingConventions::GetDateTimeFormat(BDateFormatStyle dateStyle,
 	BTimeFormatStyle timeStyle, BString& outFormat) const
 {
 	if (dateStyle < 0 || dateStyle >= B_DATE_FORMAT_STYLE_COUNT)
@@ -537,76 +522,66 @@ BFormattingConventions::GetDateTimeFormat(BDateFormatStyle dateStyle,
 }
 
 
-status_t
-BFormattingConventions::GetNumericFormat(BString& outFormat) const
+status_t BFormattingConventions::GetNumericFormat(BString& outFormat) const
 {
 	// TODO!
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-BFormattingConventions::GetMonetaryFormat(BString& outFormat) const
+status_t BFormattingConventions::GetMonetaryFormat(BString& outFormat) const
 {
 	// TODO!
 	return B_UNSUPPORTED;
 }
 
 
-void
-BFormattingConventions::SetExplicitDateFormat(BDateFormatStyle style,
+void BFormattingConventions::SetExplicitDateFormat(BDateFormatStyle style,
 	const BString& format)
 {
 	fExplicitDateFormats[style] = format;
 }
 
 
-void
-BFormattingConventions::SetExplicitTimeFormat(BTimeFormatStyle style,
+void BFormattingConventions::SetExplicitTimeFormat(BTimeFormatStyle style,
 	const BString& format)
 {
 	fExplicitTimeFormats[style] = format;
 }
 
 
-void
-BFormattingConventions::SetExplicitDateTimeFormat(BDateFormatStyle dateStyle,
+void BFormattingConventions::SetExplicitDateTimeFormat(BDateFormatStyle dateStyle,
 	BTimeFormatStyle timeStyle, const BString& format)
 {
 	fExplicitDateTimeFormats[dateStyle][timeStyle] = format;
 }
 
 
-void
-BFormattingConventions::SetExplicitNumericFormat(const BString& format)
+void BFormattingConventions::SetExplicitNumericFormat(const BString& format)
 {
 	fExplicitNumericFormat = format;
 }
 
 
-void
-BFormattingConventions::SetExplicitMonetaryFormat(const BString& format)
+void BFormattingConventions::SetExplicitMonetaryFormat(const BString& format)
 {
 	fExplicitMonetaryFormat = format;
 }
 
 
-bool
-BFormattingConventions::UseStringsFromPreferredLanguage() const
+bool BFormattingConventions::UseStringsFromPreferredLanguage() const
 {
 	return fUseStringsFromPreferredLanguage;
 }
 
 
-void
-BFormattingConventions::SetUseStringsFromPreferredLanguage(bool value)
+void BFormattingConventions::SetUseStringsFromPreferredLanguage(bool value)
 {
 	fUseStringsFromPreferredLanguage = value;
 }
 
 
-bool
-BFormattingConventions::Use24HourClock() const
+bool BFormattingConventions::Use24HourClock() const
 {
 	int8 use24HourClock = fExplicitUse24HourClock != CLOCK_HOURS_UNSET
 		?  fExplicitUse24HourClock : fCachedUse24HourClock;
@@ -623,8 +598,7 @@ BFormattingConventions::Use24HourClock() const
 }
 
 
-void
-BFormattingConventions::SetExplicitUse24HourClock(bool value)
+void BFormattingConventions::SetExplicitUse24HourClock(bool value)
 {
 	int8 newUse24HourClock = value ? CLOCK_HOURS_24 : CLOCK_HOURS_12;
 	if (fExplicitUse24HourClock == newUse24HourClock)
@@ -637,8 +611,7 @@ BFormattingConventions::SetExplicitUse24HourClock(bool value)
 }
 
 
-void
-BFormattingConventions::UnsetExplicitUse24HourClock()
+void BFormattingConventions::UnsetExplicitUse24HourClock()
 {
 	fExplicitUse24HourClock = CLOCK_HOURS_UNSET;
 
@@ -647,8 +620,7 @@ BFormattingConventions::UnsetExplicitUse24HourClock()
 }
 
 
-status_t
-BFormattingConventions::Archive(BMessage* archive, bool deep) const
+status_t BFormattingConventions::Archive(BMessage* archive, bool deep) const
 {
 	status_t status = archive->AddString("conventions", fICULocale->getName());
 	for (int s = 0; s < B_DATE_FORMAT_STYLE_COUNT && status == B_OK; ++s) {

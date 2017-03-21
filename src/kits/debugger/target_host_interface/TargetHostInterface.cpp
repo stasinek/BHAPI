@@ -52,8 +52,7 @@ TargetHostInterface::~TargetHostInterface()
 }
 
 
-status_t
-TargetHostInterface::StartTeamDebugger(const TeamDebuggerOptions& options)
+status_t TargetHostInterface::StartTeamDebugger(const TeamDebuggerOptions& options)
 {
 	// we only want to stop in main for teams we're responsible for
 	// creating ourselves.
@@ -92,8 +91,7 @@ TargetHostInterface::StartTeamDebugger(const TeamDebuggerOptions& options)
 }
 
 
-int32
-TargetHostInterface::CountTeamDebuggers() const
+int32 TargetHostInterface::CountTeamDebuggers() const
 {
 	return fTeamDebuggers.CountItems();
 }
@@ -119,8 +117,7 @@ TargetHostInterface::FindTeamDebugger(team_id team) const
 }
 
 
-status_t
-TargetHostInterface::AddTeamDebugger(TeamDebugger* debugger)
+status_t TargetHostInterface::AddTeamDebugger(TeamDebugger* debugger)
 {
 	if (!fTeamDebuggers.BinaryInsert(debugger, &_CompareDebuggers))
 		return B_NO_MEMORY;
@@ -129,8 +126,7 @@ TargetHostInterface::AddTeamDebugger(TeamDebugger* debugger)
 }
 
 
-void
-TargetHostInterface::RemoveTeamDebugger(TeamDebugger* debugger)
+void TargetHostInterface::RemoveTeamDebugger(TeamDebugger* debugger)
 {
 	for (int32 i = 0; i < fTeamDebuggers.CountItems(); i++) {
 		if (fTeamDebuggers.ItemAt(i) == debugger) {
@@ -141,32 +137,28 @@ TargetHostInterface::RemoveTeamDebugger(TeamDebugger* debugger)
 }
 
 
-void
-TargetHostInterface::AddListener(Listener* listener)
+void TargetHostInterface::AddListener(Listener* listener)
 {
 	AutoLocker<TargetHostInterface> interfaceLocker(this);
 	fListeners.Add(listener);
 }
 
 
-void
-TargetHostInterface::RemoveListener(Listener* listener)
+void TargetHostInterface::RemoveListener(Listener* listener)
 {
 	AutoLocker<TargetHostInterface> interfaceLocker(this);
 	fListeners.Remove(listener);
 }
 
 
-void
-TargetHostInterface::Quit()
+void TargetHostInterface::Quit()
 {
 	if (fTeamDebuggers.CountItems() == 0)
 		BLooper::Quit();
 }
 
 
-void
-TargetHostInterface::MessageReceived(BMessage* message)
+void TargetHostInterface::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 	case MSG_TEAM_DEBUGGER_QUIT:
@@ -210,8 +202,7 @@ TargetHostInterface::MessageReceived(BMessage* message)
 }
 
 
-void
-TargetHostInterface::TeamDebuggerStarted(TeamDebugger* debugger)
+void TargetHostInterface::TeamDebuggerStarted(TeamDebugger* debugger)
 {
 	AutoLocker<TargetHostInterface> locker(this);
 	AddTeamDebugger(debugger);
@@ -219,8 +210,7 @@ TargetHostInterface::TeamDebuggerStarted(TeamDebugger* debugger)
 }
 
 
-void
-TargetHostInterface::TeamDebuggerRestartRequested(TeamDebugger* debugger)
+void TargetHostInterface::TeamDebuggerRestartRequested(TeamDebugger* debugger)
 {
 	BMessage message(MSG_TEAM_RESTART_REQUESTED);
 	message.AddInt32("team", debugger->TeamID());
@@ -228,8 +218,7 @@ TargetHostInterface::TeamDebuggerRestartRequested(TeamDebugger* debugger)
 }
 
 
-void
-TargetHostInterface::TeamDebuggerQuit(TeamDebugger* debugger)
+void TargetHostInterface::TeamDebuggerQuit(TeamDebugger* debugger)
 {
 	AutoLocker<TargetHostInterface> interfaceLocker(this);
 	RemoveTeamDebugger(debugger);
@@ -243,8 +232,7 @@ TargetHostInterface::TeamDebuggerQuit(TeamDebugger* debugger)
 }
 
 
-status_t
-TargetHostInterface::_StartTeamDebugger(team_id teamID,
+status_t TargetHostInterface::_StartTeamDebugger(team_id teamID,
 	const TeamDebuggerOptions& options, bool stopInMain)
 {
 	UserInterface* userInterface = options.userInterface;
@@ -300,8 +288,7 @@ TargetHostInterface::_StartTeamDebugger(team_id teamID,
 }
 
 
-void
-TargetHostInterface::_NotifyTeamDebuggerStarted(TeamDebugger* debugger)
+void TargetHostInterface::_NotifyTeamDebuggerStarted(TeamDebugger* debugger)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -310,8 +297,7 @@ TargetHostInterface::_NotifyTeamDebuggerStarted(TeamDebugger* debugger)
 }
 
 
-void
-TargetHostInterface::_NotifyTeamDebuggerQuit(TeamDebugger* debugger)
+void TargetHostInterface::_NotifyTeamDebuggerQuit(TeamDebugger* debugger)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -336,20 +322,17 @@ TargetHostInterface::Listener::~Listener()
 }
 
 
-void
-TargetHostInterface::Listener::TeamDebuggerStarted(TeamDebugger* debugger)
+void TargetHostInterface::Listener::TeamDebuggerStarted(TeamDebugger* debugger)
 {
 }
 
 
-void
-TargetHostInterface::Listener::TeamDebuggerQuit(TeamDebugger* debugger)
+void TargetHostInterface::Listener::TeamDebuggerQuit(TeamDebugger* debugger)
 {
 }
 
 
-void
-TargetHostInterface::Listener::TargetHostInterfaceQuit(
+void TargetHostInterface::Listener::TargetHostInterfaceQuit(
 	TargetHostInterface* interface)
 {
 }

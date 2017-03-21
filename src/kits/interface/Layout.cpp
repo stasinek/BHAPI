@@ -148,15 +148,13 @@ BLayout::AddView(int32 index, BView* child)
 }
 
 
-bool
-BLayout::AddItem(BLayoutItem* item)
+bool BLayout::AddItem(BLayoutItem* item)
 {
 	return AddItem(-1, item);
 }
 
 
-bool
-BLayout::AddItem(int32 index, BLayoutItem* item)
+bool BLayout::AddItem(int32 index, BLayoutItem* item)
 {
 	if (!fTarget || !item || fItems.HasItem(item))
 		return false;
@@ -195,8 +193,7 @@ BLayout::AddItem(int32 index, BLayoutItem* item)
 }
 
 
-bool
-BLayout::RemoveView(BView* child)
+bool BLayout::RemoveView(BView* child)
 {
 	bool removed = false;
 
@@ -220,8 +217,7 @@ BLayout::RemoveView(BView* child)
 }
 
 
-bool
-BLayout::RemoveItem(BLayoutItem* item)
+bool BLayout::RemoveItem(BLayoutItem* item)
 {
 	int32 index = IndexOfItem(item);
 	return (index >= 0 ? RemoveItem(index) != NULL : false);
@@ -257,22 +253,19 @@ BLayout::ItemAt(int32 index) const
 }
 
 
-int32
-BLayout::CountItems() const
+int32 BLayout::CountItems() const
 {
 	return fItems.CountItems();
 }
 
 
-int32
-BLayout::IndexOfItem(const BLayoutItem* item) const
+int32 BLayout::IndexOfItem(const BLayoutItem* item) const
 {
 	return fItems.IndexOf(item);
 }
 
 
-int32
-BLayout::IndexOfView(BView* child) const
+int32 BLayout::IndexOfView(BView* child) const
 {
 	if (child == NULL)
 		return -1;
@@ -290,15 +283,13 @@ BLayout::IndexOfView(BView* child) const
 }
 
 
-bool
-BLayout::AncestorsVisible() const
+bool BLayout::AncestorsVisible() const
 {
 	return fAncestorsVisible;
 }
 
 
-void
-BLayout::InvalidateLayout(bool children)
+void BLayout::InvalidateLayout(bool children)
 {
 	// printf("BLayout(%p)::InvalidateLayout(%i) : state %x, disabled %li\n",
 	// this, children, (unsigned int)fState, fInvalidationDisabled);
@@ -331,37 +322,32 @@ BLayout::InvalidateLayout(bool children)
 }
 
 
-void
-BLayout::RequireLayout()
+void BLayout::RequireLayout()
 {
 	fState |= B_LAYOUT_REQUIRED;
 }
 
 
-bool
-BLayout::IsValid()
+bool BLayout::IsValid()
 {
 	return (fState & B_LAYOUT_INVALID) == 0;
 }
 
 
-void
-BLayout::DisableLayoutInvalidation()
+void BLayout::DisableLayoutInvalidation()
 {
 	fInvalidationDisabled++;
 }
 
 
-void
-BLayout::EnableLayoutInvalidation()
+void BLayout::EnableLayoutInvalidation()
 {
 	if (fInvalidationDisabled > 0)
 		fInvalidationDisabled--;
 }
 
 
-void
-BLayout::LayoutItems(bool force)
+void BLayout::LayoutItems(bool force)
 {
 	if ((fState & B_LAYOUT_NECESSARY) == 0 && !force)
 		return;
@@ -377,8 +363,7 @@ BLayout::LayoutItems(bool force)
 }
 
 
-void
-BLayout::Relayout(bool immediate)
+void BLayout::Relayout(bool immediate)
 {
 	if ((fState & B_RELAYOUT_NOT_OK) == 0 || immediate) {
 		fState |= B_LAYOUT_REQUIRED;
@@ -387,8 +372,7 @@ BLayout::Relayout(bool immediate)
 }
 
 
-void
-BLayout::_LayoutWithinContext(bool force, BLayoutContext* context)
+void BLayout::_LayoutWithinContext(bool force, BLayoutContext* context)
 {
 // printf("BLayout(%p)::_LayoutWithinContext(%i, %p), state %x, fContext %p\n",
 // this, force, context, (unsigned int)fState, fContext);
@@ -433,8 +417,7 @@ BLayout::LayoutArea()
 }
 
 
-status_t
-BLayout::Archive(BMessage* into, bool deep) const
+status_t BLayout::Archive(BMessage* into, bool deep) const
 {
 	BArchiver archiver(into);
 	status_t err = BLayoutItem::Archive(into, deep);
@@ -457,15 +440,13 @@ BLayout::Archive(BMessage* into, bool deep) const
 }
 
 
-status_t
-BLayout::AllArchived(BMessage* archive) const
+status_t BLayout::AllArchived(BMessage* archive) const
 {
 	return BLayoutItem::AllArchived(archive);
 }
 
 
-status_t
-BLayout::AllUnarchived(const BMessage* from)
+status_t BLayout::AllUnarchived(const BMessage* from)
 {
 	BUnarchiver unarchiver(from);
 	status_t err = BLayoutItem::AllUnarchived(from);
@@ -502,47 +483,40 @@ BLayout::AllUnarchived(const BMessage* from)
 }
 
 
-status_t
-BLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32 index) const
+status_t BLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32 index) const
 {
 	return B_OK;
 }
 
 
-status_t
-BLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item, int32 index)
+status_t BLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item, int32 index)
 {
 	return B_OK;
 }
 
 
-bool
-BLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
+bool BLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
 {
 	return true;
 }
 
 
-void
-BLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
+void BLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
 {
 }
 
 
-void
-BLayout::LayoutInvalidated(bool children)
+void BLayout::LayoutInvalidated(bool children)
 {
 }
 
 
-void
-BLayout::OwnerChanged(BView* was)
+void BLayout::OwnerChanged(BView* was)
 {
 }
 
 
-void
-BLayout::AttachedToLayout()
+void BLayout::AttachedToLayout()
 {
 	if (!fOwner) {
 		Layout()->fNestedLayouts.AddItem(this);
@@ -551,8 +525,7 @@ BLayout::AttachedToLayout()
 }
 
 
-void
-BLayout::DetachedFromLayout(BLayout* from)
+void BLayout::DetachedFromLayout(BLayout* from)
 {
 	if (!fOwner) {
 		from->fNestedLayouts.RemoveItem(this);
@@ -561,8 +534,7 @@ BLayout::DetachedFromLayout(BLayout* from)
 }
 
 
-void
-BLayout::AncestorVisibilityChanged(bool shown)
+void BLayout::AncestorVisibilityChanged(bool shown)
 {
 	if (fAncestorsVisible == shown)
 		return;
@@ -572,8 +544,7 @@ BLayout::AncestorVisibilityChanged(bool shown)
 }
 
 
-void
-BLayout::VisibilityChanged(bool show)
+void BLayout::VisibilityChanged(bool show)
 {
 	if (fOwner)
 		return;
@@ -583,8 +554,7 @@ BLayout::VisibilityChanged(bool show)
 }
 
 
-void
-BLayout::ResetLayoutInvalidation()
+void BLayout::ResetLayoutInvalidation()
 {
 	fState &= ~B_LAYOUT_CACHE_INVALID;
 }
@@ -597,8 +567,7 @@ BLayout::LayoutContext() const
 }
 
 
-void
-BLayout::SetOwner(BView* owner)
+void BLayout::SetOwner(BView* owner)
 {
 	if (fOwner == owner)
 		return;
@@ -611,8 +580,7 @@ BLayout::SetOwner(BView* owner)
 }
 
 
-void
-BLayout::SetTarget(BView* target)
+void BLayout::SetTarget(BView* target)
 {
 	if (fTarget != target) {
 		/* With fTarget NULL, RemoveItem() will not remove the views from their
@@ -634,8 +602,7 @@ BLayout::SetTarget(BView* target)
 // Binary compatibility stuff
 
 
-status_t
-BLayout::Perform(perform_code code, void* _data)
+status_t BLayout::Perform(perform_code code, void* _data)
 {
 	return BLayoutItem::Perform(code, _data);
 }

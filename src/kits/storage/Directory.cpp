@@ -86,7 +86,7 @@ BDirectory::~BDirectory()
 }
 
 
-status_t
+status_t 
 BDirectory::SetTo(const char *path)
 {
 	if(path == NULL) return B_BAD_VALUE;
@@ -160,7 +160,7 @@ BDirectory::SetTo(const char *path)
 }
 
 
-void
+void 
 BDirectory::Unset()
 {
 	if(fDir != NULL)
@@ -187,7 +187,7 @@ BDirectory::Unset()
 }
 
 
-status_t
+status_t 
 BDirectory::InitCheck() const
 {
 	if(fName == NULL || fDir == NULL) return B_NO_INIT;
@@ -195,7 +195,7 @@ BDirectory::InitCheck() const
 }
 
 
-status_t
+status_t 
 BDirectory::GetEntry(BEntry *entry) const
 {
 	if(entry == NULL) return B_BAD_VALUE;
@@ -211,7 +211,7 @@ BDirectory::GetEntry(BEntry *entry) const
 }
 
 
-status_t
+status_t 
 BDirectory::GetNextEntry(BEntry *entry, bool traverse)
 {
 	if(entry == NULL) return B_BAD_VALUE;
@@ -309,7 +309,7 @@ BDirectory::GetNextEntry(BEntry *entry, bool traverse)
 }
 
 
-status_t
+status_t 
 BDirectory::Rewind()
 {
 	if(fName == NULL || fDir == NULL) return B_FILE_ERROR;
@@ -390,7 +390,7 @@ BDirectory::CountEntries()
 }
 
 
-void
+void 
 BDirectory::DoForEach(bool (*func)(const char *path))
 {
 	BEntry aEntry;
@@ -411,7 +411,7 @@ BDirectory::DoForEach(bool (*func)(const char *path))
 }
 
 
-void
+void 
 BDirectory::DoForEach(bool (*func)(const char *path, void *user_data), void *user_data)
 {
 	BEntry aEntry;

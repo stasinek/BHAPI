@@ -175,8 +175,7 @@ CompoundValueNode::GetType() const
 }
 
 
-status_t
-CompoundValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
+status_t CompoundValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 	ValueLocation*& _location, Value*& _value)
 {
 	// get the location
@@ -191,8 +190,7 @@ CompoundValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 }
 
 
-status_t
-CompoundValueNode::CreateChildren(TeamTypeInformation* info)
+status_t CompoundValueNode::CreateChildren(TeamTypeInformation* info)
 {
 	if (!fChildren.IsEmpty())
 		return B_OK;
@@ -230,8 +228,7 @@ CompoundValueNode::CreateChildren(TeamTypeInformation* info)
 }
 
 
-int32
-CompoundValueNode::CountChildren() const
+int32 CompoundValueNode::CountChildren() const
 {
 	return fChildren.CountItems();
 }

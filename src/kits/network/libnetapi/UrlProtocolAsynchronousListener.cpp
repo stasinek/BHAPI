@@ -56,8 +56,7 @@ BUrlProtocolAsynchronousListener::SynchronousListener()
 }
 
 
-void
-BUrlProtocolAsynchronousListener::MessageReceived(BMessage* message)
+void BUrlProtocolAsynchronousListener::MessageReceived(BMessage* message)
 {
 	if (message->what != B_URL_PROTOCOL_NOTIFICATION) {
 		BHandler::MessageReceived(message);

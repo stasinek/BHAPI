@@ -79,8 +79,7 @@ Tokenizer::Tokenizer()
 }
 
 
-void
-Tokenizer::SetTo(const char* string)
+void Tokenizer::SetTo(const char* string)
 {
 	fString = string;
 	fCurrentChar = fString.String();
@@ -260,8 +259,7 @@ Tokenizer::NextToken()
 }
 
 
-bool
-Tokenizer::_ParseOperator()
+bool Tokenizer::_ParseOperator()
 {
 	int32 type = TOKEN_NONE;
 	int32 length = 0;
@@ -411,8 +409,7 @@ Tokenizer::_ParseOperator()
 }
 
 
-void
-Tokenizer::RewindToken()
+void Tokenizer::RewindToken()
 {
 	fReuseToken = true;
 }
@@ -428,8 +425,7 @@ Tokenizer::_Peek() const
 }
 
 
-/*static*/ bool
-Tokenizer::_IsHexDigit(char c)
+/*static*/ bool Tokenizer::_IsHexDigit(char c)
 {
 	return isdigit(c) || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F');
 }
@@ -466,8 +462,7 @@ Tokenizer::_ParseHexOperand()
 }
 
 
-int32
-Tokenizer::_CurrentPos() const
+int32 Tokenizer::_CurrentPos() const
 {
 	return fCurrentChar - fString.String();
 }

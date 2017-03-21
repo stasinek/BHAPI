@@ -30,15 +30,13 @@ LocatableFile::~LocatableFile()
 }
 
 
-const char*
-LocatableFile::Name() const
+const char*  LocatableFile::Name() const
 {
 	return fName.String();
 }
 
 
-void
-LocatableFile::GetPath(BString& _path) const
+void LocatableFile::GetPath(BString& _path) const
 {
 	fParent->GetPath(_path);
 	if (_path.Length() != 0)
@@ -47,8 +45,7 @@ LocatableFile::GetPath(BString& _path) const
 }
 
 
-bool
-LocatableFile::GetLocatedPath(BString& _path) const
+bool LocatableFile::GetLocatedPath(BString& _path) const
 {
 	AutoLocker<LocatableEntryOwner> locker(fOwner);
 
@@ -65,8 +62,7 @@ LocatableFile::GetLocatedPath(BString& _path) const
 }
 
 
-void
-LocatableFile::SetLocatedPath(const BString& path, bool implicit)
+void LocatableFile::SetLocatedPath(const BString& path, bool implicit)
 {
 	// called with owner already locked
 
@@ -82,24 +78,21 @@ LocatableFile::SetLocatedPath(const BString& path, bool implicit)
 }
 
 
-bool
-LocatableFile::AddListener(Listener* listener)
+bool LocatableFile::AddListener(Listener* listener)
 {
 	AutoLocker<LocatableEntryOwner> locker(fOwner);
 	return fListeners.AddItem(listener);
 }
 
 
-void
-LocatableFile::RemoveListener(Listener* listener)
+void LocatableFile::RemoveListener(Listener* listener)
 {
 	AutoLocker<LocatableEntryOwner> locker(fOwner);
 	fListeners.RemoveItem(listener);
 }
 
 
-void
-LocatableFile::_NotifyListeners()
+void LocatableFile::_NotifyListeners()
 {
 	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->LocatableFileChanged(this);

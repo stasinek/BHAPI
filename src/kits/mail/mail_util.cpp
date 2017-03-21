@@ -152,8 +152,7 @@ handle_non_rfc2047_encoding(char **buffer, size_t *bufferLength,
 // #pragma mark -
 
 
-status_t
-write_read_attr(BNode& node, read_flags flag)
+status_t write_read_attr(BNode& node, read_flags flag)
 {
 	if (node.WriteAttr(B_MAIL_ATTR_READ, B_INT32_TYPE, 0, &flag, sizeof(int32))
 			< 0)
@@ -178,8 +177,7 @@ write_read_attr(BNode& node, read_flags flag)
 }
 
 
-status_t
-read_read_attr(BNode& node, read_flags& flag)
+status_t read_read_attr(BNode& node, read_flags& flag)
 {
 	if (node.ReadAttr(B_MAIL_ATTR_READ, B_INT32_TYPE, 0, &flag, sizeof(int32))
 			== sizeof(int32))
@@ -205,8 +203,7 @@ read_read_attr(BNode& node, read_flags& flag)
 // It also lets us add new conversions, like B_MAIL_US_ASCII_CONVERSION.
 
 
-status_t
-mail_convert_to_utf8(uint32 srcEncoding, const char *src, int32 *srcLen,
+status_t mail_convert_to_utf8(uint32 srcEncoding, const char *src, int32 *srcLen,
 	char *dst, int32 *dstLen, int32 *state, char substitute)
 {
 	int32 copyAmount;
@@ -263,8 +260,7 @@ mail_convert_to_utf8(uint32 srcEncoding, const char *src, int32 *srcLen,
 }
 
 
-status_t
-mail_convert_from_utf8(uint32 dstEncoding, const char *src, int32 *srcLen,
+status_t mail_convert_from_utf8(uint32 dstEncoding, const char *src, int32 *srcLen,
 	char *dst, int32 *dstLen, int32 *state, char substitute)
 {
 	int32 copyAmount;
@@ -746,8 +742,7 @@ utf8_to_rfc2047 (char **bufp, ssize_t length, uint32 charset, char encoding)
 }
 
 
-void
-FoldLineAtWhiteSpaceAndAddCRLF(BString &string)
+void FoldLineAtWhiteSpaceAndAddCRLF(BString &string)
 {
 	int inputLength = string.Length();
 	int lineStartIndex;
@@ -1075,8 +1070,7 @@ nextfoldedline(const char** header, char **buffer, size_t *buflen)
 }
 
 
-void
-trim_white_space(BString &string)
+void trim_white_space(BString &string)
 {
 	int32 i;
 	int32 length = string.Length();
@@ -1099,8 +1093,7 @@ trim_white_space(BString &string)
 	header parameter (should be from "To:" or "From:").
 	Tries to return the name rather than the eMail address.
 */
-void
-extract_address_name(BString &header)
+void extract_address_name(BString &header)
 {
 	BString name;
 	const char *start = header.String();
@@ -1192,8 +1185,7 @@ extract_address_name(BString &header)
 	messages posted about a topic.  The input string is modified in place to
 	become the output core subject string.
 */
-void
-SubjectToThread (BString &string)
+void SubjectToThread (BString &string)
 {
 // a regex that matches a non-ASCII UTF8 character:
 #define U8C \
@@ -1369,8 +1361,7 @@ ParseDateWithTimeZone(const char *DateString)
 
 /*! Parses a mail header and fills the headers BMessage
 */
-status_t
-parse_header(BMessage &headers, BPositionIO &input)
+status_t parse_header(BMessage &headers, BPositionIO &input)
 {
 	char *buffer = NULL;
 	size_t bufferSize = 0;
@@ -1407,8 +1398,7 @@ parse_header(BMessage &headers, BPositionIO &input)
 }
 
 
-status_t
-extract_from_header(const BString& header, const BString& field,
+status_t extract_from_header(const BString& header, const BString& field,
 	BString& target)
 {
 	int32 headerLength = header.Length();
@@ -1459,8 +1449,7 @@ extract_from_header(const BString& header, const BString& field,
 }
 
 
-void
-extract_address(BString &address)
+void extract_address(BString &address)
 {
 	const char *string = address.String();
 	int32 first;
@@ -1506,8 +1495,7 @@ extract_address(BString &address)
 }
 
 
-void
-get_address_list(BList &list, const char *string,
+void get_address_list(BList &list, const char *string,
 	void (*cleanupFunc)(BString &))
 {
 	if (string == NULL || !string[0])

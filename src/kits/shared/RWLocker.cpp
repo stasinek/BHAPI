@@ -58,16 +58,14 @@ RWLocker::~RWLocker()
 }
 
 // ReadLock
-bool
-RWLocker::ReadLock()
+bool RWLocker::ReadLock()
 {
 	status_t error = _ReadLock(B_INFINITE_TIMEOUT);
 	return (error == B_OK);
 }
 
 // ReadLockWithTimeout
-status_t
-RWLocker::ReadLockWithTimeout(bigtime_t timeout)
+status_t RWLocker::ReadLockWithTimeout(bigtime_t timeout)
 {
 	bigtime_t absoluteTimeout = system_time() + timeout;
 	// take care of overflow
@@ -77,8 +75,7 @@ RWLocker::ReadLockWithTimeout(bigtime_t timeout)
 }
 
 // ReadUnlock
-void
-RWLocker::ReadUnlock()
+void RWLocker::ReadUnlock()
 {
 	if (fLock.Lock()) {
 		thread_id thread = find_thread(NULL);
@@ -110,8 +107,7 @@ RWLocker::ReadUnlock()
 //
 // Returns whether or not the calling thread owns a read lock or even a
 // write lock.
-bool
-RWLocker::IsReadLocked() const
+bool RWLocker::IsReadLocked() const
 {
 	bool result = false;
 	if (fLock.Lock()) {
@@ -123,16 +119,14 @@ RWLocker::IsReadLocked() const
 }
 
 // WriteLock
-bool
-RWLocker::WriteLock()
+bool RWLocker::WriteLock()
 {
 	status_t error = _WriteLock(B_INFINITE_TIMEOUT);
 	return (error == B_OK);
 }
 
 // WriteLockWithTimeout
-status_t
-RWLocker::WriteLockWithTimeout(bigtime_t timeout)
+status_t RWLocker::WriteLockWithTimeout(bigtime_t timeout)
 {
 	bigtime_t absoluteTimeout = system_time() + timeout;
 	// take care of overflow
@@ -142,8 +136,7 @@ RWLocker::WriteLockWithTimeout(bigtime_t timeout)
 }
 
 // WriteUnlock
-void
-RWLocker::WriteUnlock()
+void RWLocker::WriteUnlock()
 {
 	if (fLock.Lock()) {
 		thread_id thread = find_thread(NULL);
@@ -176,15 +169,13 @@ RWLocker::WriteUnlock()
 // IsWriteLocked
 //
 // Returns whether or not the calling thread owns a write lock.
-bool
-RWLocker::IsWriteLocked() const
+bool RWLocker::IsWriteLocked() const
 {
 	return (fWriter == find_thread(NULL));
 }
 
 // _Init
-void
-RWLocker::_Init(const char* name)
+void RWLocker::_Init(const char* name)
 {
 	// init the mutex benaphore
 	BString mutexName(name);
@@ -201,8 +192,7 @@ RWLocker::_Init(const char* name)
 // _ReadLock
 //
 // /timeout/ -- absolute timeout
-status_t
-RWLocker::_ReadLock(bigtime_t timeout)
+status_t RWLocker::_ReadLock(bigtime_t timeout)
 {
 	status_t error = B_OK;
 	thread_id thread = find_thread(NULL);
@@ -272,8 +262,7 @@ RWLocker::_ReadLock(bigtime_t timeout)
 // _WriteLock
 //
 // /timeout/ -- absolute timeout
-status_t
-RWLocker::_WriteLock(bigtime_t timeout)
+status_t RWLocker::_WriteLock(bigtime_t timeout)
 {
 	status_t error = B_ERROR;
 	if (fLock.Lock()) {
@@ -401,8 +390,7 @@ RWLocker::_WriteLock(bigtime_t timeout)
 }
 
 // _AddReadLockInfo
-int32
-RWLocker::_AddReadLockInfo(ReadLockInfo* info)
+int32 RWLocker::_AddReadLockInfo(ReadLockInfo* info)
 {
 	int32 index = fReadLockInfos.CountItems();
 	fReadLockInfos.AddItem(info, index);
@@ -413,8 +401,7 @@ RWLocker::_AddReadLockInfo(ReadLockInfo* info)
 //
 // Create a new read lock info for the supplied thread and add it to the
 // list. Returns the index of the info.
-int32
-RWLocker::_NewReadLockInfo(thread_id thread, int32 count)
+int32 RWLocker::_NewReadLockInfo(thread_id thread, int32 count)
 {
 	ReadLockInfo* info = new ReadLockInfo;
 	info->reader = thread;
@@ -423,8 +410,7 @@ RWLocker::_NewReadLockInfo(thread_id thread, int32 count)
 }
 
 // _DeleteReadLockInfo
-void
-RWLocker::_DeleteReadLockInfo(int32 index)
+void RWLocker::_DeleteReadLockInfo(int32 index)
 {
 	if (ReadLockInfo* info = (ReadLockInfo*)fReadLockInfos.RemoveItem(index))
 		delete info;
@@ -438,8 +424,7 @@ RWLocker::_ReadLockInfoAt(int32 index) const
 }
 
 // _IndexOf
-int32
-RWLocker::_IndexOf(thread_id thread) const
+int32 RWLocker::_IndexOf(thread_id thread) const
 {
 	int32 count = fReadLockInfos.CountItems();
 	for (int32 i = 0; i < count; i++) {
@@ -450,8 +435,7 @@ RWLocker::_IndexOf(thread_id thread) const
 }
 
 // _AcquireBenaphore
-status_t
-RWLocker::_AcquireBenaphore(Benaphore& benaphore, bigtime_t timeout)
+status_t RWLocker::_AcquireBenaphore(Benaphore& benaphore, bigtime_t timeout)
 {
 	status_t error = B_OK;
 	if (atomic_add(&benaphore.counter, 1) > 0) {
@@ -462,8 +446,7 @@ RWLocker::_AcquireBenaphore(Benaphore& benaphore, bigtime_t timeout)
 }
 
 // _ReleaseBenaphore
-void
-RWLocker::_ReleaseBenaphore(Benaphore& benaphore)
+void RWLocker::_ReleaseBenaphore(Benaphore& benaphore)
 {
 	if (atomic_add(&benaphore.counter, -1) > 1)
 		release_sem(benaphore.semaphore);

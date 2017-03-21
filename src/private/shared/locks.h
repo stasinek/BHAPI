@@ -5,7 +5,7 @@
 #ifndef _LOCKS_H_
 #define _LOCKS_H_
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #ifdef __cplusplus
 extern "C" {

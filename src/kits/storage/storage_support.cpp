@@ -26,8 +26,7 @@ namespace Storage {
 /*!	\param path the path
 	\return \c true, if \a path is not \c NULL and absolute, \c false otherwise
 */
-bool
-is_absolute_path(const char *path)
+bool is_absolute_path(const char *path)
 {
 	return (path && path[0] == '/');
 }
@@ -51,8 +50,7 @@ is_absolute_path(const char *path)
 	\return \c B_OK, if everything went fine, B_BAD_VALUE, if the supplied
 		   path is invalid.
 */
-status_t
-parse_path(const char *fullPath, int &dirEnd, int &leafStart, int &leafEnd)
+status_t parse_path(const char *fullPath, int &dirEnd, int &leafStart, int &leafEnd)
 {
 	// check path and get length
 	if (!fullPath)
@@ -107,8 +105,7 @@ parse_path(const char *fullPath, int &dirEnd, int &leafStart, int &leafEnd)
 	\return \c B_OK, if everything went fine, B_BAD_VALUE, if the supplied
 		   path is invalid.
 */
-status_t
-parse_path(const char *fullPath, char *dirPath, char *leaf)
+status_t parse_path(const char *fullPath, char *dirPath, char *leaf)
 {
 	// parse the path and check the lengths
 	int leafStart, leafEnd, dirEnd;
@@ -129,8 +126,7 @@ parse_path(const char *fullPath, char *dirPath, char *leaf)
 
 // internal_parse_path
 static
-void
-internal_parse_path(const char *fullPath, int &leafStart, int &leafEnd,
+void internal_parse_path(const char *fullPath, int &leafStart, int &leafEnd,
 	int &pathEnd)
 {
 	if (fullPath == NULL)
@@ -182,8 +178,7 @@ internal_parse_path(const char *fullPath, int &leafStart, int &leafEnd,
 	\param leaf a variable the leaf name pointer shall be
 		   written into, may be NULL
 */
-status_t
-split_path(const char *fullPath, char *&path, char *&leaf)
+status_t split_path(const char *fullPath, char *&path, char *&leaf)
 {
 	return split_path(fullPath, &path, &leaf);
 }
@@ -196,8 +191,7 @@ split_path(const char *fullPath, char *&path, char *&leaf)
 	\param leaf a pointer to a variable the leaf name pointer shall be
 		   written into, may be NULL
 */
-status_t
-split_path(const char *fullPath, char **path, char **leaf)
+status_t split_path(const char *fullPath, char **path, char **leaf)
 {
 	if (path)
 		*path = NULL;
@@ -292,8 +286,7 @@ split_path(const char *fullPath, char **path, char **leaf)
 		   written into. \c 0 is returned, if there is no next component.
 	\return \c B_OK, if \a path is not \c NULL, \c B_BAD_VALUE otherwise
 */
-status_t
-parse_first_path_component(const char *path, int32& length,
+status_t parse_first_path_component(const char *path, int32& length,
 						   int32& nextComponent)
 {
 	status_t error = (path ? B_OK : B_BAD_VALUE);
@@ -326,8 +319,7 @@ parse_first_path_component(const char *path, int32& length,
 		   written into. \c 0 is returned, if there is no next component.
 	\return \c B_OK, if \a path is not \c NULL, \c B_BAD_VALUE otherwise
 */
-status_t
-parse_first_path_component(const char *path, char *&component,
+status_t parse_first_path_component(const char *path, char *&component,
 						   int32& nextComponent)
 {
 	int32 length;
@@ -353,8 +345,7 @@ parse_first_path_component(const char *path, char *&component,
 	- \c B_NAME_TOO_LONG, if \a entry is too long
 	\note \c "" is considered a valid entry name.
 */
-status_t
-check_entry_name(const char *entry)
+status_t check_entry_name(const char *entry)
 {
 	status_t error = (entry ? B_OK : B_BAD_VALUE);
 	if (error == B_OK) {
@@ -380,8 +371,7 @@ check_entry_name(const char *entry)
 	- \c B_NAME_TOO_LONG, if \a path, or any of its components is too long
 	\note \c "" is considered a valid path name.
 */
-status_t
-check_path_name(const char *path)
+status_t check_path_name(const char *path)
 {
 	status_t error = (path ? B_OK : B_BAD_VALUE);
 	// check the path components
@@ -409,8 +399,7 @@ to_lower(const char *str)
 	return result;
 }
 
-void
-to_lower(const char *str, std::string &result)
+void to_lower(const char *str, std::string &result)
 {
 	if (str) {
 		result = "";
@@ -420,8 +409,7 @@ to_lower(const char *str, std::string &result)
 		result = "(null)";
 }
 
-void
-to_lower(const char *str, char *result)
+void to_lower(const char *str, char *result)
 {
 	if (str && result) {
 		int i;
@@ -431,8 +419,7 @@ to_lower(const char *str, char *result)
 	}	
 }
 
-void
-to_lower(char *str)
+void to_lower(char *str)
 {
 	to_lower(str, str);
 }
@@ -487,15 +474,13 @@ void escape_path(char *str)
 }
 
 // device_is_root_device
-bool
-device_is_root_device(dev_t device)
+bool device_is_root_device(dev_t device)
 {
 	return device == 1;
 }
 
 // Close
-void
-FDCloser::Close()
+void FDCloser::Close()
 {
 	if (fFD >= 0)
 		_kern_close(fFD);

@@ -98,8 +98,7 @@ BPackageDataReaderFactory::BPackageDataReaderFactory()
 }
 
 
-status_t
-BPackageDataReaderFactory::CreatePackageDataReader(
+status_t BPackageDataReaderFactory::CreatePackageDataReader(
 	BAbstractBufferedDataReader* dataReader, const BPackageData& data,
 	BAbstractBufferedDataReader*& _reader)
 {

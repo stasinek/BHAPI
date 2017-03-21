@@ -7,7 +7,7 @@
 
 #include <new>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include "Debug.h"
 #include "Requests.h"
@@ -74,8 +74,7 @@ private:
 // Should be a member, but we don't have member templates on PPC.
 // TODO: Actually we seem to have. Check!
 template<typename SpecificRequest>
-status_t
-AllocateRequest(RequestAllocator& allocator, SpecificRequest** request)
+status_t AllocateRequest(RequestAllocator& allocator, SpecificRequest** request)
 {
 	if (!request)
 		RETURN_ERROR(B_BAD_VALUE);

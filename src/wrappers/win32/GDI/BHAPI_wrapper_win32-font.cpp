@@ -111,7 +111,7 @@ private:
 };
 
 
-status_t
+status_t 
 BFontWin32::_CreateFont(EWin32GraphicsEngine *win32Engine, const char *family, const char *style,
 			__be_uint32 height, bool aliasing, HFONT *font)
 {
@@ -159,7 +159,7 @@ LRESULT _bhapi_create_font(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_c
 }
 
 
-status_t
+status_t 
 BFontWin32::_DestroyFont(EWin32GraphicsEngine *win32Engine, HFONT *font)
 {
 	if(win32Engine == NULL || font == NULL) return B_ERROR;
@@ -192,7 +192,7 @@ LRESULT _bhapi_destroy_font(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_
 }
 
 
-status_t
+status_t 
 BFontWin32::_StringWidth(EWin32GraphicsEngine *win32Engine, const char *string,  __be_uint32 spacing,  __be_uint32 *w, HDC *hdc, HFONT *font)
 {
 	if(win32Engine == NULL || string == NULL || *string == 0 || w == NULL ||
@@ -293,7 +293,7 @@ LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, bhapi::win32
 }
 
 
-status_t
+status_t 
 BFontWin32::_GetHeight(EWin32GraphicsEngine *win32Engine,  __be_uint32 *leading,  __be_uint32 *ascent,  __be_uint32 *descent, HDC *hdc, HFONT *font)
 {
 	if(win32Engine == NULL || leading == NULL || ascent == NULL || descent == NULL ||
@@ -342,7 +342,7 @@ LRESULT _bhapi_font_get_height(EWin32GraphicsEngine *win32Engine, bhapi::win32_g
 }
 
 
-status_t
+status_t 
 BFontWin32::_RenderString(EWin32GraphicsEngine *win32Engine, EWin32GraphicsDrawable *pixmap, BGraphicsContext *dc,
 			  const char *string,  __be_uint32 spacing,
 			   __be_int32 x,  __be_int32 y,  __be_uint32 *w,  __be_uint32 *h,  __be_uint32 *ascent, HFONT *font)
@@ -491,7 +491,7 @@ LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, bhapi::win3
 }
 
 
-status_t
+status_t 
 BFontWin32::_CreateTmpDC(EWin32GraphicsEngine *win32Engine, HDC *hdc)
 {
 	if(win32Engine == NULL || hdc == NULL) return B_ERROR;
@@ -526,7 +526,7 @@ LRESULT _bhapi_creatbhapi::font_tmp_dc(EWin32GraphicsEngine *win32Engine, bhapi:
 }
 
 
-status_t
+status_t 
 BFontWin32::_DestroyTmpDC(EWin32GraphicsEngine *win32Engine, HDC *hdc)
 {
 	if(win32Engine == NULL || hdc == NULL) return B_ERROR;
@@ -631,7 +631,7 @@ BFontWin32::~BFontWin32()
 }
 
 
-bool
+bool 
 BFontWin32::IsValid() const
 {
 	return(fEngine != NULL && fTmpDC != NULL && Family() != NULL && Style() != NULL &&
@@ -639,14 +639,14 @@ BFontWin32::IsValid() const
 }
 
 
-bool
+bool 
 BFontWin32::IsScalable() const
 {
 	return fScalable;
 }
 
 
-void
+void 
 BFontWin32::ForceFontAliasing(bool enable)
 {
 	if(fForceAliasing == enable) return;
@@ -689,7 +689,7 @@ BFontWin32::StringWidth(const char *string, float size, float spacing, float she
 }
 
 
-void
+void 
 BFontWin32::GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const
 {
 	if(!height) return;
@@ -766,7 +766,7 @@ BFontWin32::RenderString(BHandler *_view, const char *string, float size, float 
 }
 
 
-bool
+bool 
 BFontWin32::Detach(bhapi::font_detach_callback *callback)
 {
 	if(!BFontEngine::Detach(callback)) return false;
@@ -776,7 +776,7 @@ BFontWin32::Detach(bhapi::font_detach_callback *callback)
 }
 
 
-status_t
+status_t 
 EWin32GraphicsEngine::InitalizeFonts()
 {
 	BAutolock <EWin32GraphicsEngine> autolock(this);
@@ -786,7 +786,7 @@ EWin32GraphicsEngine::InitalizeFonts()
 }
 
 
-void
+void 
 EWin32GraphicsEngine::DestroyFonts()
 {
 	// TODO
@@ -818,7 +818,7 @@ BOOL CALLBACK _etkEnumFamAndStyleCallBack_(ENUMLOGFONTEXA *lplfe, NEWTEXTMETRICE
 }
 
 
-status_t
+status_t 
 EWin32GraphicsEngine::UpdateFonts(bool check_only)
 {
 	Lock();

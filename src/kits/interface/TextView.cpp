@@ -117,7 +117,7 @@ BTextView::~BTextView()
 }
 
 
-void
+void 
 BTextView::ReScanRunArray(__be_int32 fromLine,  __be_int32 toLine)
 {
     if(fromLine < 0 || fromLine >= fLines.CountItems()) return;
@@ -182,7 +182,7 @@ BTextView::ReScanRunArray(__be_int32 fromLine,  __be_int32 toLine)
 }
 
 
-void
+void 
 BTextView::ReScanSize(__be_int32 fromLine,  __be_int32 toLine)
 {
     if(fromLine < 0 || fromLine >= fLines.CountItems()) return;
@@ -237,7 +237,7 @@ BTextView::ReScanSize(__be_int32 fromLine,  __be_int32 toLine)
 }
 
 
-void
+void 
 BTextView::ReScanLines()
 {
     bhapi::text_line *line;
@@ -318,7 +318,7 @@ BTextView::CurrentLine() const
 }
 
 
-void
+void 
 BTextView::GoToLine(__be_int32 index)
 {
     if(index < 0 || index >= fLines.CountItems()) return;
@@ -629,7 +629,7 @@ BTextView::TextHeight(__be_int32 fromLineIndex,  __be_int32 toLineIndex) const
 }
 
 
-void
+void 
 BTextView::GetTextRegion(__be_int32 startPos,  __be_int32 endPos, BRegion *region, bool utf8) const
 {
     if(region == NULL) return;
@@ -744,7 +744,7 @@ BTextView::GetTextRegion(__be_int32 startPos,  __be_int32 endPos, BRegion *regio
 }
 
 
-void
+void 
 BTextView::ScrollToOffset(__be_int32 offset, bool utf8)
 {
     BScrollView *scrollView = cast_as(Parent(), BScrollView);
@@ -774,7 +774,7 @@ BTextView::ScrollToOffset(__be_int32 offset, bool utf8)
 }
 
 
-void
+void 
 BTextView::ScrollToSelection()
 {
     if(!IsSelected()) return;
@@ -782,7 +782,7 @@ BTextView::ScrollToSelection()
 }
 
 
-void
+void 
 BTextView::FrameResized(float new_width, float new_height)
 {
     // TODO
@@ -824,14 +824,14 @@ BTextView::CharAt(__be_int32 index,  __be_uint8 *length) const
 }
 
 
-void
+void 
 BTextView::GetText(__be_int32 offset,  __be_int32 length, char *buffer) const
 {
     GetText(offset, length, buffer, length, false);
 }
 
 
-void
+void 
 BTextView::GetText(__be_int32 offset,  __be_int32 length, char *buffer,  __be_int32 buffer_size_in_bytes, bool utf8) const
 {
     if(buffer_size_in_bytes <= 0 || offset < 0 || length == 0 || fText.String() == NULL) return;
@@ -858,7 +858,7 @@ BTextView::GetText(__be_int32 offset,  __be_int32 length, char *buffer,  __be_in
 }
 
 
-void
+void 
 BTextView::SetRunArray(__be_int32 startPos,  __be_int32 endPos, const bhapi::text_run_array *runs, bool utf8)
 {
     if(fStylable == false || fText.Length() <= 0)
@@ -1000,21 +1000,21 @@ BTextView::RunArray(__be_int32 _startPos,  __be_int32 endPos,  __be_int32 *lengt
 }
 
 
-void
+void 
 BTextView::Insert(const char *text, const bhapi::text_run_array *runs, bool utf8)
 {
     if(text != NULL) Insert(fSelectStart, text, (utf8 ? bhapi::utf8_strlen(text) : strlen(text)), runs, utf8);
 }
 
 
-void
+void 
 BTextView::Insert(const char *text,  __be_int32 length, const bhapi::text_run_array *runs, bool utf8)
 {
     Insert(fSelectStart, text, length, runs, utf8);
 }
 
 
-void
+void 
 BTextView::Insert(__be_int32 offset, const char *text,  __be_int32 length, const bhapi::text_run_array *runs, bool utf8)
 {
      __be_int32 oldStart = fSelectStart, oldEnd = fSelectEnd;
@@ -1029,7 +1029,7 @@ BTextView::Insert(__be_int32 offset, const char *text,  __be_int32 length, const
 }
 
 
-void
+void 
 BTextView::InsertText(const char *start,  __be_int32 length,  __be_int32 offset, const bhapi::text_run_array *runs, bool utf8)
 {
     if(start == NULL || *start == 0 || length == 0 || offset > (utf8 ? fText.CountChars() : fText.Length())) return;
@@ -1096,7 +1096,7 @@ BTextView::InsertText(const char *start,  __be_int32 length,  __be_int32 offset,
 }
 
 
-void
+void 
 BTextView::SetText(const char *text, const bhapi::text_run_array *runs, bool utf8)
 {
     Delete(0, -1, false);
@@ -1105,7 +1105,7 @@ BTextView::SetText(const char *text, const bhapi::text_run_array *runs, bool utf
 }
 
 
-void
+void 
 BTextView::SetText(const char *text,  __be_int32 length, const bhapi::text_run_array *runs, bool utf8)
 {
     Delete(0, -1, false);
@@ -1114,7 +1114,7 @@ BTextView::SetText(const char *text,  __be_int32 length, const bhapi::text_run_a
 }
 
 
-void
+void 
 BTextView::SetText(BFile *file,  __be_int64 fileOffset,  __be_int32 length, const bhapi::text_run_array *runs, bool utf8)
 {
     Delete(0, -1, false);
@@ -1132,7 +1132,7 @@ BTextView::SetText(BFile *file,  __be_int64 fileOffset,  __be_int32 length, cons
 }
 
 
-void
+void 
 BTextView::Delete(__be_int32 startPos,  __be_int32 endPos, bool utf8)
 {
      __be_int32 oldStart = fSelectStart, oldEnd = fSelectEnd;
@@ -1147,7 +1147,7 @@ BTextView::Delete(__be_int32 startPos,  __be_int32 endPos, bool utf8)
 }
 
 
-void
+void 
 BTextView::DeleteText(__be_int32 startPos,  __be_int32 endPos, bool utf8)
 {
     if(fText.Length() <= 0 || startPos < 0) return;
@@ -1238,7 +1238,7 @@ BTextView::DeleteText(__be_int32 startPos,  __be_int32 endPos, bool utf8)
 }
 
 
-void
+void 
 BTextView::MakeEditable(bool editable)
 {
     if(fEditable != editable)
@@ -1249,14 +1249,14 @@ BTextView::MakeEditable(bool editable)
 }
 
 
-bool
+bool 
 BTextView::IsEditable() const
 {
     return fEditable;
 }
 
 
-void
+void 
 BTextView::MakeSelectable(bool selectable)
 {
     if(fSelectable != selectable)
@@ -1267,14 +1267,14 @@ BTextView::MakeSelectable(bool selectable)
 }
 
 
-bool
+bool 
 BTextView::IsSelectable() const
 {
     return fSelectable;
 }
 
 
-void
+void 
 BTextView::SetStylable(bool stylable)
 {
     if(fStylable != stylable)
@@ -1297,14 +1297,14 @@ BTextView::SetStylable(bool stylable)
 }
 
 
-bool
+bool 
 BTextView::IsStylable() const
 {
     return fStylable;
 }
 
 
-void
+void 
 BTextView::SetTabWidth(float width)
 {
     if(fTabWidth != width)
@@ -1323,21 +1323,21 @@ BTextView::TabWidth() const
 }
 
 
-void
+void 
 BTextView::SetAutoindent(bool flag)
 {
     fAutoindent = flag;
 }
 
 
-bool
+bool 
 BTextView::DoesAutoindent() const
 {
     return fAutoindent;
 }
 
 
-void
+void 
 BTextView::HideTyping(__be_uint8 flag)
 {
     if((flag != 0x00 && flag < 0x20) || flag > 0x7e) flag = 0x01;
@@ -1358,7 +1358,7 @@ BTextView::IsTypingHidden() const
 }
 
 
-void
+void 
 BTextView::SetAlignment(bhapi::alignment alignment)
 {
     if(fAlignment != alignment)
@@ -1376,7 +1376,7 @@ BTextView::Alignment() const
 }
 
 
-void
+void 
 BTextView::SetMaxBytes(__be_int32 max)
 {
     if(max < 0) max = B_MAXINT32;
@@ -1399,7 +1399,7 @@ BTextView::MaxBytes() const
 }
 
 
-void
+void 
 BTextView::Select(__be_int32 startPos,  __be_int32 endPos, bool utf8)
 {
     if((startPos == fSelectStart && endPos == fSelectEnd && utf8 == false) || fText.Length() <= 0) return;
@@ -1424,7 +1424,7 @@ BTextView::Select(__be_int32 startPos,  __be_int32 endPos, bool utf8)
 }
 
 
-bool
+bool 
 BTextView::GetSelection(__be_int32 *startPos,  __be_int32 *endPos, bool utf8) const
 {
     bool isSelected = (fSelectEnd > fSelectStart && fSelectStart >= 0 && fSelectEnd <= fText.Length());
@@ -1444,7 +1444,7 @@ BTextView::GetSelection(__be_int32 *startPos,  __be_int32 *endPos, bool utf8) co
 }
 
 
-void
+void 
 BTextView::Draw(BRect updateRect)
 {
     BRect rect = TextRect();
@@ -1658,7 +1658,7 @@ BTextView::Draw(BRect updateRect)
 }
 
 
-void
+void 
 BTextView::GetPreferredSize(float *width, float *height)
 {
     if(width)
@@ -1680,7 +1680,7 @@ BTextView::GetPreferredSize(float *width, float *height)
 }
 
 
-void
+void 
 BTextView::SetTextRect(BRect textRect)
 {
     BRect rect = Frame().OffsetToSelf(B_ORIGIN);
@@ -1709,7 +1709,7 @@ BTextView::TextRect() const
 }
 
 
-void
+void 
 BTextView::SetTextBackground(bhapi::rgb_color color)
 {
     if(fTextBkColor != color)
@@ -1727,7 +1727,7 @@ BTextView::TextBackground() const
 }
 
 
-void
+void 
 BTextView::FloorPosition(__be_int32 *pos)
 {
     if(pos == NULL) return;
@@ -1752,7 +1752,7 @@ BTextView::FloorPosition(__be_int32 *pos)
 }
 
 
-void
+void 
 BTextView::CeilPosition(__be_int32 *pos)
 {
     if(pos == NULL) return;
@@ -1773,7 +1773,7 @@ BTextView::CeilPosition(__be_int32 *pos)
 }
 
 
-void
+void 
 BTextView::SetPosition(__be_int32 pos, bool response, bool utf8)
 {
     if(IsEditable() == false) return;
@@ -1843,7 +1843,7 @@ BTextView::Position(bool utf8,  __be_int32 *lineOffset) const
 }
 
 
-void
+void 
 BTextView::MouseDown(BPoint where)
 {
     if(!IsEnabled() || !TextRect().Contains(where) || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON)) return;
@@ -1882,7 +1882,7 @@ BTextView::MouseDown(BPoint where)
 }
 
 
-void
+void 
 BTextView::MouseUp(BPoint where)
 {
     fSelectTracking = -1;
@@ -1890,7 +1890,7 @@ BTextView::MouseUp(BPoint where)
 }
 
 
-void
+void 
 BTextView::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
     if(TextRect().Contains(where) == false || code == B_EXITED_VIEW)
@@ -1949,7 +1949,7 @@ BTextView::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message
 }
 
 
-void
+void 
 BTextView::Cut(BClipboard *clipboard)
 {
     if(clipboard == NULL || IsSelected() == false) return;
@@ -1964,7 +1964,7 @@ BTextView::Cut(BClipboard *clipboard)
 }
 
 
-void
+void 
 BTextView::Copy(BClipboard *clipboard) const
 {
     BMessage *clipMsg = NULL;
@@ -1991,14 +1991,14 @@ BTextView::Copy(BClipboard *clipboard) const
 }
 
 
-bool
+bool 
 BTextView::AcceptsPaste(BClipboard *clipboard)
 {
     return(fEditable);
 }
 
 
-void
+void 
 BTextView::Paste(BClipboard *clipboard)
 {
     BString str;
@@ -2040,7 +2040,7 @@ BTextView::Paste(BClipboard *clipboard)
 }
 
 
-void
+void 
 BTextView::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
     if(!IsEnabled() || !(IsEditable() || IsSelectable()) || !IsFocus() || numBytes < 1) return;
@@ -2056,9 +2056,9 @@ BTextView::KeyDown(const char *bytes,  __be_int32 numBytes)
 
     if(!(numBytes != 1 || msg->what != B_KEY_DOWN || !IsEnabled() || !IsEditable() || !(modifiers & B_CONTROL_KEY)))
     {
-        if(*bytes == 'c' || *bytes == 'C') {Copy(&bhapi::be_clipboard); return;}
-        else if(*bytes == 'x' || *bytes == 'X') {Cut(&bhapi::be_clipboard); return;}
-        else if(*bytes == 'v' || *bytes == 'V') {Paste(&bhapi::be_clipboard); return;}
+        if(*bytes == 'c' || *bytes == 'C') {Copy(&bhapi::__be_clipboard); return;}
+        else if(*bytes == 'x' || *bytes == 'X') {Cut(&bhapi::__be_clipboard); return;}
+        else if(*bytes == 'v' || *bytes == 'V') {Paste(&bhapi::__be_clipboard); return;}
     }
 
     if((modifiers & B_CONTROL_KEY) || (modifiers & B_COMMAND_KEY) ||
@@ -2469,13 +2469,13 @@ BTextView::KeyDown(const char *bytes,  __be_int32 numBytes)
 }
 
 
-void
+void 
 BTextView::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
 }
 
 
-void
+void 
 BTextView::MessageReceived(BMessage *msg)
 {
     if(msg->what == B_MODIFIERS_CHANGED)
@@ -2489,7 +2489,7 @@ BTextView::MessageReceived(BMessage *msg)
 }
 
 
-void
+void 
 BTextView::WindowActivated(bool state)
 {
     fSelectTracking = -1;
@@ -2497,7 +2497,7 @@ BTextView::WindowActivated(bool state)
 }
 
 
-void
+void 
 BTextView::MakeFocus(bool focusState)
 {
     if(!focusState) fSelectTracking = -1;
@@ -2517,7 +2517,7 @@ BTextView::_StringWidth(const BFont &font, const char *str,  __be_int32 length) 
 }
 
 
-void
+void 
 BTextView::_DrawString(const BFont &font, const char *str, BPoint location,  __be_int32 length)
 {
     if(fTypingHidden == 0x01 || str == NULL || *str == 0 || length == 0) return;

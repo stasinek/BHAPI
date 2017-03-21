@@ -123,8 +123,7 @@ BCalendarView::Instantiate(BMessage* archive)
 }
 
 
-status_t
-BCalendarView::Archive(BMessage* archive, bool deep) const
+status_t BCalendarView::Archive(BMessage* archive, bool deep) const
 {
 	status_t status = BView::Archive(archive, deep);
 
@@ -150,8 +149,7 @@ BCalendarView::Archive(BMessage* archive, bool deep) const
 }
 
 
-void
-BCalendarView::AttachedToWindow()
+void BCalendarView::AttachedToWindow()
 {
 	BView::AttachedToWindow();
 
@@ -162,15 +160,13 @@ BCalendarView::AttachedToWindow()
 }
 
 
-void
-BCalendarView::FrameResized(float width, float height)
+void BCalendarView::FrameResized(float width, float height)
 {
 	Invalidate(Bounds());
 }
 
 
-void
-BCalendarView::Draw(BRect updateRect)
+void BCalendarView::Draw(BRect updateRect)
 {
 	if (LockLooper()) {
 		if (fFocusChanged) {
@@ -198,16 +194,14 @@ BCalendarView::Draw(BRect updateRect)
 }
 
 
-void
-BCalendarView::DrawDay(BView* owner, BRect frame, const char* text,
+void BCalendarView::DrawDay(BView* owner, BRect frame, const char* text,
 	bool isSelected, bool isEnabled, bool focus)
 {
 	_DrawItem(owner, frame, text, isSelected, isEnabled, focus);
 }
 
 
-void
-BCalendarView::DrawDayName(BView* owner, BRect frame, const char* text)
+void BCalendarView::DrawDayName(BView* owner, BRect frame, const char* text)
 {
 	// we get the full rect, fake this as the internal function
 	// shrinks the frame to work properly when drawing a day item
@@ -215,8 +209,7 @@ BCalendarView::DrawDayName(BView* owner, BRect frame, const char* text)
 }
 
 
-void
-BCalendarView::DrawWeekNumber(BView* owner, BRect frame, const char* text)
+void BCalendarView::DrawWeekNumber(BView* owner, BRect frame, const char* text)
 {
 	// we get the full rect, fake this as the internal function
 	// shrinks the frame to work properly when drawing a day item
@@ -224,8 +217,7 @@ BCalendarView::DrawWeekNumber(BView* owner, BRect frame, const char* text)
 }
 
 
-uint32
-BCalendarView::SelectionCommand() const
+uint32 BCalendarView::SelectionCommand() const
 {
 	if (SelectionMessage())
 		return SelectionMessage()->what;
@@ -234,44 +226,38 @@ BCalendarView::SelectionCommand() const
 }
 
 
-BMessage*
-BCalendarView::SelectionMessage() const
+BMessage*  BCalendarView::SelectionMessage() const
 {
 	return fSelectionMessage;
 }
 
 
-void
-BCalendarView::SetSelectionMessage(BMessage* message)
+void BCalendarView::SetSelectionMessage(BMessage* message)
 {
 	delete fSelectionMessage;
 	fSelectionMessage = message;
 }
 
 
-uint32
-BCalendarView::InvocationCommand() const
+uint32 BCalendarView::InvocationCommand() const
 {
 	return BInvoker::Command();
 }
 
 
-BMessage*
-BCalendarView::InvocationMessage() const
+BMessage*  BCalendarView::InvocationMessage() const
 {
 	return BInvoker::Message();
 }
 
 
-void
-BCalendarView::SetInvocationMessage(BMessage* message)
+void BCalendarView::SetInvocationMessage(BMessage* message)
 {
 	BInvoker::SetMessage(message);
 }
 
 
-void
-BCalendarView::MakeFocus(bool state)
+void BCalendarView::MakeFocus(bool state)
 {
 	if (IsFocus() == state)
 		return;
@@ -285,8 +271,7 @@ BCalendarView::MakeFocus(bool state)
 }
 
 
-status_t
-BCalendarView::Invoke(BMessage* message)
+status_t BCalendarView::Invoke(BMessage* message)
 {
 	bool notify = false;
 	uint32 kind = InvokeKind(&notify);
@@ -324,8 +309,7 @@ BCalendarView::Invoke(BMessage* message)
 }
 
 
-void
-BCalendarView::MouseDown(BPoint where)
+void BCalendarView::MouseDown(BPoint where)
 {
 	if (!IsFocus()) {
 		MakeFocus();
@@ -372,8 +356,7 @@ BCalendarView::MouseDown(BPoint where)
 }
 
 
-void
-BCalendarView::KeyDown(const char* bytes, int32 numBytes)
+void BCalendarView::KeyDown(const char* bytes, int32 numBytes)
 {
 	const int32 kRows = 6;
 	const int32 kColumns = 7;
@@ -463,8 +446,7 @@ BCalendarView::KeyDown(const char* bytes, int32 numBytes)
 }
 
 
-void
-BCalendarView::ResizeToPreferred()
+void BCalendarView::ResizeToPreferred()
 {
 	float width;
 	float height;
@@ -474,8 +456,7 @@ BCalendarView::ResizeToPreferred()
 }
 
 
-void
-BCalendarView::GetPreferredSize(float* width, float* height)
+void BCalendarView::GetPreferredSize(float* width, float* height)
 {
 	_GetPreferredSize(width, height);
 }
@@ -505,15 +486,13 @@ BCalendarView::PreferredSize()
 }
 
 
-int32
-BCalendarView::Day() const
+int32 BCalendarView::Day() const
 {
 	return fDate.Day();
 }
 
 
-int32
-BCalendarView::Year() const
+int32 BCalendarView::Year() const
 {
 	int32 year;
 	_GetYearMonthForSelection(fSelectedDay, &year, NULL);
@@ -522,8 +501,7 @@ BCalendarView::Year() const
 }
 
 
-int32
-BCalendarView::Month() const
+int32 BCalendarView::Month() const
 {
 	int32 month;
 	_GetYearMonthForSelection(fSelectedDay, NULL, &month);
@@ -532,8 +510,7 @@ BCalendarView::Month() const
 }
 
 
-bool
-BCalendarView::SetDay(int32 day)
+bool BCalendarView::SetDay(int32 day)
 {
 	BDate date = Date();
 	date.SetDay(day);
@@ -544,8 +521,7 @@ BCalendarView::SetDay(int32 day)
 }
 
 
-bool
-BCalendarView::SetMonth(int32 month)
+bool BCalendarView::SetMonth(int32 month)
 {
 	if (month < 1 || month > 12)
 		return false;
@@ -565,8 +541,7 @@ BCalendarView::SetMonth(int32 month)
 }
 
 
-bool
-BCalendarView::SetYear(int32 year)
+bool BCalendarView::SetYear(int32 year)
 {
 	BDate date = Date();
 
@@ -593,8 +568,7 @@ BCalendarView::Date() const
 }
 
 
-bool
-BCalendarView::SetDate(const BDate& date)
+bool BCalendarView::SetDate(const BDate& date)
 {
 	if (!date.IsValid())
 		return false;
@@ -636,8 +610,7 @@ BCalendarView::SetDate(const BDate& date)
 }
 
 
-bool
-BCalendarView::SetDate(int32 year, int32 month, int32 day)
+bool BCalendarView::SetDate(int32 year, int32 month, int32 day)
 {
 	return SetDate(BDate(year, month, day));
 }
@@ -650,8 +623,7 @@ BCalendarView::StartOfWeek() const
 }
 
 
-void
-BCalendarView::SetStartOfWeek(BWeekday startOfWeek)
+void BCalendarView::SetStartOfWeek(BWeekday startOfWeek)
 {
 	if (fStartOfWeek == (int32)startOfWeek)
 		return;
@@ -666,15 +638,13 @@ BCalendarView::SetStartOfWeek(BWeekday startOfWeek)
 }
 
 
-bool
-BCalendarView::IsDayNameHeaderVisible() const
+bool BCalendarView::IsDayNameHeaderVisible() const
 {
 	return fDayNameHeaderVisible;
 }
 
 
-void
-BCalendarView::SetDayNameHeaderVisible(bool visible)
+void BCalendarView::SetDayNameHeaderVisible(bool visible)
 {
 	if (fDayNameHeaderVisible == visible)
 		return;
@@ -684,15 +654,13 @@ BCalendarView::SetDayNameHeaderVisible(bool visible)
 }
 
 
-bool
-BCalendarView::IsWeekNumberHeaderVisible() const
+bool BCalendarView::IsWeekNumberHeaderVisible() const
 {
 	return fWeekNumberHeaderVisible;
 }
 
 
-void
-BCalendarView::SetWeekNumberHeaderVisible(bool visible)
+void BCalendarView::SetWeekNumberHeaderVisible(bool visible)
 {
 	if (fWeekNumberHeaderVisible == visible)
 		return;
@@ -702,8 +670,7 @@ BCalendarView::SetWeekNumberHeaderVisible(bool visible)
 }
 
 
-void
-BCalendarView::_InitObject()
+void BCalendarView::_InitObject()
 {
 	fDate = BDate::CurrentDate(B_LOCAL_TIME);
 
@@ -715,8 +682,7 @@ BCalendarView::_InitObject()
 }
 
 
-void
-BCalendarView::_SetToDay()
+void BCalendarView::_SetToDay()
 {
 	BDate date(fDate.Year(), fDate.Month(), 1);
 	if (!date.IsValid())
@@ -741,8 +707,7 @@ BCalendarView::_SetToDay()
 }
 
 
-void
-BCalendarView::_GetYearMonthForSelection(const Selection& selection,
+void BCalendarView::_GetYearMonthForSelection(const Selection& selection,
 	int32* year, int32* month) const
 {
 	BDate startOfMonth(fDate.Year(), fDate.Month(), 1);
@@ -763,8 +728,7 @@ BCalendarView::_GetYearMonthForSelection(const Selection& selection,
 }
 
 
-void
-BCalendarView::_GetPreferredSize(float* _width, float* _height)
+void BCalendarView::_GetPreferredSize(float* _width, float* _height)
 {
 	BFont font;
 	GetFont(&font);
@@ -795,16 +759,14 @@ BCalendarView::_GetPreferredSize(float* _width, float* _height)
 }
 
 
-void
-BCalendarView::_SetupDayNames()
+void BCalendarView::_SetupDayNames()
 {
 	for (int32 i = 0; i <= 6; ++i)
 		fDayNames[i] = fDate.ShortDayName(1 + (fStartOfWeek - 1 + i) % 7);
 }
 
 
-void
-BCalendarView::_SetupDayNumbers()
+void BCalendarView::_SetupDayNumbers()
 {
 	BDate startOfMonth(fDate.Year(), fDate.Month(), 1);
 	if (!startOfMonth.IsValid())
@@ -845,8 +807,7 @@ BCalendarView::_SetupDayNumbers()
 }
 
 
-void
-BCalendarView::_SetupWeekNumbers()
+void BCalendarView::_SetupWeekNumbers()
 {
 	BDate date(fDate.Year(), fDate.Month(), 1);
 	if (!date.IsValid())
@@ -860,8 +821,7 @@ BCalendarView::_SetupWeekNumbers()
 }
 
 
-void
-BCalendarView::_DrawDay(int32 currRow, int32 currColumn, int32 row,
+void BCalendarView::_DrawDay(int32 currRow, int32 currColumn, int32 row,
 	int32 column, int32 counter, BRect frame, const char* text, bool focus)
 {
 	BDate startOfMonth(fDate.Year(), fDate.Month(), 1);
@@ -887,8 +847,7 @@ BCalendarView::_DrawDay(int32 currRow, int32 currColumn, int32 row,
 }
 
 
-void
-BCalendarView::_DrawDays()
+void BCalendarView::_DrawDays()
 {
 	BRect frame = _FirstCalendarItemFrame();
 
@@ -916,8 +875,7 @@ BCalendarView::_DrawDays()
 }
 
 
-void
-BCalendarView::_DrawFocusRect()
+void BCalendarView::_DrawFocusRect()
 {
 	BRect frame = _FirstCalendarItemFrame();
 
@@ -951,8 +909,7 @@ BCalendarView::_DrawFocusRect()
 }
 
 
-void
-BCalendarView::_DrawDayHeader()
+void BCalendarView::_DrawDayHeader()
 {
 	if (!fDayNameHeaderVisible)
 		return;
@@ -981,8 +938,7 @@ BCalendarView::_DrawDayHeader()
 }
 
 
-void
-BCalendarView::_DrawWeekHeader()
+void BCalendarView::_DrawWeekHeader()
 {
 	if (!fWeekNumberHeaderVisible)
 		return;
@@ -1008,8 +964,7 @@ BCalendarView::_DrawWeekHeader()
 }
 
 
-void
-BCalendarView::_DrawItem(BView* owner, BRect frame, const char* text,
+void BCalendarView::_DrawItem(BView* owner, BRect frame, const char* text,
 	bool isSelected, bool isEnabled, bool focus)
 {
 	rgb_color lColor = LowColor();
@@ -1051,8 +1006,7 @@ BCalendarView::_DrawItem(BView* owner, BRect frame, const char* text,
 }
 
 
-void
-BCalendarView::_UpdateSelection()
+void BCalendarView::_UpdateSelection()
 {
 	BRect frame = _FirstCalendarItemFrame();
 

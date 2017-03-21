@@ -169,8 +169,7 @@ private:
 };
 
 
-inline const char*
-BColumn::Title() const
+inline const char*  BColumn::Title() const
 {
 	return fTitle.String();
 }
@@ -197,85 +196,73 @@ BColumn::Alignment() const
 }
 
 
-inline const char*
-BColumn::AttrName() const
+inline const char*  BColumn::AttrName() const
 {
 	return fAttrName.String();
 }
 
 
-inline uint32
-BColumn::AttrHash() const
+inline uint32 BColumn::AttrHash() const
 {
 	return fAttrHash;
 }
 
 
-inline uint32
-BColumn::AttrType() const
+inline uint32 BColumn::AttrType() const
 {
 	return fAttrType;
 }
 
 
-inline const char*
-BColumn::DisplayAs() const
+inline const char*  BColumn::DisplayAs() const
 {
 	return fDisplayAs.String();
 }
 
 
-inline bool
-BColumn::StatField() const
+inline bool BColumn::StatField() const
 {
 	return fStatField;
 }
 
 
-inline bool
-BColumn::Editable() const
+inline bool BColumn::Editable() const
 {
 	return fEditable;
 }
 
 
-inline void
-BColumn::SetWidth(float w)
+inline void BColumn::SetWidth(float w)
 {
 	fWidth = w;
 }
 
 
-inline void
-BColumn::SetOffset(float o)
+inline void BColumn::SetOffset(float o)
 {
 	fOffset = o;
 }
 
 
-inline uint32
-BViewState::ViewMode() const
+inline uint32 BViewState::ViewMode() const
 {
 	return fViewMode;
 }
 
 
-inline uint32
-BViewState::LastIconMode() const
+inline uint32 BViewState::LastIconMode() const
 {
 	return fLastIconMode;
 }
 
 
-inline uint32
-BViewState::IconSize() const
+inline uint32 BViewState::IconSize() const
 {
 	return fIconSize;
 }
 
 
-inline uint32
-BViewState::LastIconSize() const
+inline uint32 BViewState::LastIconSize() const
 {
 	return fLastIconSize;
 }
@@ -295,116 +282,99 @@ BViewState::IconOrigin() const
 }
 
 
-inline uint32
-BViewState::PrimarySort() const
+inline uint32 BViewState::PrimarySort() const
 {
 	return fPrimarySortAttr;
 }
 
 
-inline uint32
-BViewState::SecondarySort() const
+inline uint32 BViewState::SecondarySort() const
 {
 	return fSecondarySortAttr;
 }
 
 
-inline uint32
-BViewState::PrimarySortType() const
+inline uint32 BViewState::PrimarySortType() const
 {
 	return fPrimarySortType;
 }
 
-inline uint32
-BViewState::SecondarySortType() const
+inline uint32 BViewState::SecondarySortType() const
 {
 	return fSecondarySortType;
 }
 
-inline bool
-BViewState::ReverseSort() const
+inline bool BViewState::ReverseSort() const
 {
 	return fReverseSort;
 }
 
 
-inline void
-BViewState::SetViewMode(uint32 mode)
+inline void BViewState::SetViewMode(uint32 mode)
 {
 	fViewMode = mode;
 }
 
 
-inline void
-BViewState::SetLastIconMode(uint32 mode)
+inline void BViewState::SetLastIconMode(uint32 mode)
 {
 	fLastIconMode = mode;
 }
 
 
-inline void
-BViewState::SetIconSize(uint32 size)
+inline void BViewState::SetIconSize(uint32 size)
 {
 	fIconSize = size;
 }
 
 
-inline void
-BViewState::SetLastIconSize(uint32 size)
+inline void BViewState::SetLastIconSize(uint32 size)
 {
 	fLastIconSize = size;
 }
 
 
-inline void
-BViewState::SetListOrigin(BPoint newOrigin)
+inline void BViewState::SetListOrigin(BPoint newOrigin)
 {
 	fListOrigin = newOrigin;
 }
 
-inline void
-BViewState::SetIconOrigin(BPoint newOrigin)
+inline void BViewState::SetIconOrigin(BPoint newOrigin)
 {
 	fIconOrigin = newOrigin;
 }
 
-inline void
-BViewState::SetPrimarySort(uint32 attr)
+inline void BViewState::SetPrimarySort(uint32 attr)
 {
 	fPrimarySortAttr = attr;
 }
 
 
-inline void
-BViewState::SetSecondarySort(uint32 attr)
+inline void BViewState::SetSecondarySort(uint32 attr)
 {
 	fSecondarySortAttr = attr;
 }
 
 
-inline void
-BViewState::SetPrimarySortType(uint32 type)
+inline void BViewState::SetPrimarySortType(uint32 type)
 {
 	fPrimarySortType = type;
 }
 
 
-inline void
-BViewState::SetSecondarySortType(uint32 type)
+inline void BViewState::SetSecondarySortType(uint32 type)
 {
 	fSecondarySortType = type;
 }
 
 
-inline void
-BViewState::SetReverseSort(bool on)
+inline void BViewState::SetReverseSort(bool on)
 {
 	fReverseSort = on;
 }
 
 
-inline bool
-BViewState::StateNeedsSaving()
+inline bool BViewState::StateNeedsSaving()
 {
 	return (fPreviousViewMode != fViewMode)
 		|| (fPreviousLastIconMode != fLastIconMode)

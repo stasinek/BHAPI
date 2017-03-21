@@ -101,8 +101,7 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /*    global_len    :: The size in bytes of the global hints.            */
   /*                                                                       */
-  typedef void
-  (*FT_AutoHinter_GlobalGetFunc)( FT_AutoHinter  hinter,
+  typedef void   (*FT_AutoHinter_GlobalGetFunc)( FT_AutoHinter  hinter,
                                   FT_Face        face,
                                   void**         global_hints,
                                   long*          global_len );
@@ -123,8 +122,7 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /*    global :: A pointer to retrieved global hints to discard.          */
   /*                                                                       */
-  typedef void
-  (*FT_AutoHinter_GlobalDoneFunc)( FT_AutoHinter  hinter,
+  typedef void   (*FT_AutoHinter_GlobalDoneFunc)( FT_AutoHinter  hinter,
                                    void*          global );
 
 
@@ -143,8 +141,7 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /*    face   :: A handle to the face.                                    */
   /*                                                                       */
-  typedef void
-  (*FT_AutoHinter_GlobalResetFunc)( FT_AutoHinter  hinter,
+  typedef void   (*FT_AutoHinter_GlobalResetFunc)( FT_AutoHinter  hinter,
                                     FT_Face        face );
 
 

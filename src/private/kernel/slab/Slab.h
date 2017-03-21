@@ -74,16 +74,14 @@ void object_cache_get_usage(object_cache* cache, size_t* _allocatedMemory);
 #include <new>
 
 
-inline void*
-operator new(size_t size, ObjectCache* objectCache, uint32 flags) throw()
+inline void*   operator new(size_t size, ObjectCache* objectCache, uint32 flags) throw()
 {
 	return object_cache_alloc(objectCache, flags);
 }
 
 
 template<typename Type>
-inline void
-object_cache_delete(ObjectCache* objectCache, Type* object, uint32 flags = 0)
+inline void object_cache_delete(ObjectCache* objectCache, Type* object, uint32 flags = 0)
 {
 	if (object != NULL) {
 		object->~Type();

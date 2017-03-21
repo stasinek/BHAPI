@@ -10,7 +10,7 @@
 
 #include <../include/sys/stat.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <directories.h>
 #include <find_directory_private.h>
@@ -30,8 +30,7 @@ static const size_t kSiblingArchitectureCount
 	= sizeof(kSiblingArchitectures) / sizeof(const char*);
 
 
-static bool
-has_secondary_architecture(const char* architecture)
+static bool has_secondary_architecture(const char* architecture)
 {
 	if (strcmp(architecture, kPrimaryArchitecture) == 0)
 		return false;
@@ -48,15 +47,13 @@ has_secondary_architecture(const char* architecture)
 // #pragma mark -
 
 
-const char*
-__get_architecture()
+const char*  __get_architecture()
 {
 	return kArchitecture;
 }
 
 
-const char*
-__get_primary_architecture()
+const char*  __get_primary_architecture()
 {
 	return kPrimaryArchitecture;
 }
@@ -96,8 +93,7 @@ __get_architectures(const char** architectures, size_t count)
 }
 
 
-const char*
-__guess_architecture_for_path(const char* path)
+const char*  __guess_architecture_for_path(const char* path)
 {
 	if (kSiblingArchitectureCount == 0)
 		return kPrimaryArchitecture;

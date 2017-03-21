@@ -832,8 +832,7 @@ private:
 };
 
 
-extern bool
-ClearViewOriginOne(const char* name, uint32 type, off_t size, void* data,
+extern bool ClearViewOriginOne(const char* name, uint32 type, off_t size, void* data,
 	void* params);
 
 
@@ -868,8 +867,7 @@ BPoseView::IconPoseHeight() const
 }
 
 
-inline uint32
-BPoseView::IconSizeInt() const
+inline uint32 BPoseView::IconSizeInt() const
 {
 	return fViewState->IconSize();
 }
@@ -924,15 +922,13 @@ BPoseView::TitleView() const
 }
 
 
-inline bool
-BPoseView::StateNeedsSaving()
+inline bool BPoseView::StateNeedsSaving()
 {
 	return fStateNeedsSaving || fViewState->StateNeedsSaving();
 }
 
 
-inline uint32
-BPoseView::ViewMode() const
+inline uint32 BPoseView::ViewMode() const
 {
 	return fViewState->ViewMode();
 }
@@ -959,113 +955,97 @@ BPoseView::ActivePose() const
 }
 
 
-inline void
-BPoseView::DisableSaveLocation()
+inline void BPoseView::DisableSaveLocation()
 {
 	fSavePoseLocations = false;
 }
 
 
-inline bool
-BPoseView::IsFilePanel() const
+inline bool BPoseView::IsFilePanel() const
 {
 	return false;
 }
 
 
-inline bool
-BPoseView::IsDesktopWindow() const
+inline bool BPoseView::IsDesktopWindow() const
 {
 	return fIsDesktopWindow;
 }
 
 
-inline bool
-BPoseView::IsDesktopView() const
+inline bool BPoseView::IsDesktopView() const
 {
 	return false;
 }
 
 
-inline uint32
-BPoseView::PrimarySort() const
+inline uint32 BPoseView::PrimarySort() const
 {
 	return fViewState->PrimarySort();
 }
 
 
-inline uint32
-BPoseView::PrimarySortType() const
+inline uint32 BPoseView::PrimarySortType() const
 {
 	return fViewState->PrimarySortType();
 }
 
 
-inline uint32
-BPoseView::SecondarySort() const
+inline uint32 BPoseView::SecondarySort() const
 {
 	return fViewState->SecondarySort();
 }
 
 
-inline uint32
-BPoseView::SecondarySortType() const
+inline uint32 BPoseView::SecondarySortType() const
 {
 	return fViewState->SecondarySortType();
 }
 
 
-inline bool
-BPoseView::ReverseSort() const
+inline bool BPoseView::ReverseSort() const
 {
 	return fViewState->ReverseSort();
 }
 
 
-inline void
-BPoseView::SetShowHideSelection(bool on)
+inline void BPoseView::SetShowHideSelection(bool on)
 {
 	fShowHideSelection = on;
 }
 
 
-inline void
-BPoseView::SetIconMapping(bool on)
+inline void BPoseView::SetIconMapping(bool on)
 {
 	fOkToMapIcons = on;
 }
 
 
-inline void
-BPoseView::AddToExtent(const BRect&rect)
+inline void BPoseView::AddToExtent(const BRect&rect)
 {
 	fExtent = fExtent | rect;
 }
 
 
-inline void
-BPoseView::ClearExtent()
+inline void BPoseView::ClearExtent()
 {
 	fExtent.Set(INT32_MAX, INT32_MAX, INT32_MIN, INT32_MIN);
 }
 
 
-inline int32
-BPoseView::CountColumns() const
+inline int32 BPoseView::CountColumns() const
 {
 	return fColumnList->CountItems();
 }
 
 
-inline int32
-BPoseView::IndexOfColumn(const BColumn* column) const
+inline int32 BPoseView::IndexOfColumn(const BColumn* column) const
 {
 	return fColumnList->IndexOf(const_cast<BColumn*>(column));
 }
 
 
-inline int32
-BPoseView::IndexOfPose(const BPose* pose) const
+inline int32 BPoseView::IndexOfPose(const BPose* pose) const
 {
 	return CurrentPoseList()->IndexOf(pose);
 }
@@ -1099,92 +1079,79 @@ BPoseView::LastColumn() const
 }
 
 
-inline int32
-BPoseView::CountItems() const
+inline int32 BPoseView::CountItems() const
 {
 	return CurrentPoseList()->CountItems();
 }
 
 
-inline void
-BPoseView::SetMultipleSelection(bool state)
+inline void BPoseView::SetMultipleSelection(bool state)
 {
 	fMultipleSelection = state;
 }
 
 
-inline void
-BPoseView::SetSelectionChangedHook(bool state)
+inline void BPoseView::SetSelectionChangedHook(bool state)
 {
 	fSelectionChangedHook = state;
 }
 
 
-inline void
-BPoseView::SetAutoScroll(bool state)
+inline void BPoseView::SetAutoScroll(bool state)
 {
 	fShouldAutoScroll = state;
 }
 
 
-inline void
-BPoseView::SetPoseEditing(bool state)
+inline void BPoseView::SetPoseEditing(bool state)
 {
 	fAllowPoseEditing = state;
 }
 
 
-inline void
-BPoseView::SetDragEnabled(bool state)
+inline void BPoseView::SetDragEnabled(bool state)
 {
 	fDragEnabled = state;
 }
 
 
-inline void
-BPoseView::SetDropEnabled(bool state)
+inline void BPoseView::SetDropEnabled(bool state)
 {
 	fDropEnabled = state;
 }
 
 
-inline void
-BPoseView::SetSelectionRectEnabled(bool state)
+inline void BPoseView::SetSelectionRectEnabled(bool state)
 {
 	fSelectionRectEnabled = state;
 }
 
 
-inline void
-BPoseView::SetAlwaysAutoPlace(bool state)
+inline void BPoseView::SetAlwaysAutoPlace(bool state)
 {
 	fAlwaysAutoPlace = state;
 }
 
 
-inline void
-BPoseView::SetEnsurePosesVisible(bool state)
+inline void BPoseView::SetEnsurePosesVisible(bool state)
 {
 	fEnsurePosesVisible = state;
 }
 
 
-inline void
-BPoseView::SetSelectionHandler(BLooper* looper)
+inline void BPoseView::SetSelectionHandler(BLooper* looper)
 {
 	fSelectionHandler = looper;
 }
 
 
-inline void
-TScrollBar::SetTitleView(BView* view)
+inline void TScrollBar::SetTitleView(BView* view)
 {
 	fTitleView = view;
 }
 
 
-inline void
-BPoseView::SetRefFilter(BRefFilter* filter)
+inline void BPoseView::SetRefFilter(BRefFilter* filter)
 {
 	fRefFilter = filter;
 	if (filter != NULL)
@@ -1220,15 +1187,13 @@ BPoseView::FindPose(const entry_ref* entry, int32* index) const
 }
 
 
-inline bool
-BPoseView::HasPosesInClipboard()
+inline bool BPoseView::HasPosesInClipboard()
 {
 	return fHasPosesInClipboard;
 }
 
 
-inline void
-BPoseView::SetHasPosesInClipboard(bool hasPoses)
+inline void BPoseView::SetHasPosesInClipboard(bool hasPoses)
 {
 	fHasPosesInClipboard = hasPoses;
 }
@@ -1242,8 +1207,7 @@ BPoseView::CurrentPoseList() const
 
 
 template<class Param1>
-void
-EachTextWidget(BPose* pose, BPoseView* poseView,
+void EachTextWidget(BPose* pose, BPoseView* poseView,
 	void (*func)(BTextWidget*, BPose*, BPoseView*, BColumn*, Param1), Param1 p1)
 {
 	for (int32 index = 0; ;index++) {
@@ -1259,8 +1223,7 @@ EachTextWidget(BPose* pose, BPoseView* poseView,
 
 
 template<class Param1, class Param2>
-void
-EachTextWidget(BPose* pose, BPoseView* poseView,
+void EachTextWidget(BPose* pose, BPoseView* poseView,
 	void (*func)(BTextWidget*, BPose*, BPoseView*, BColumn*,
 	Param1, Param2), Param1 p1, Param2 p2)
 {

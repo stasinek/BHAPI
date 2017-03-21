@@ -9,15 +9,13 @@
 #include <Haiku.h>
 
 
-static inline bool
-IsInsideGlyph(uchar ch)
+static inline bool IsInsideGlyph(uchar ch)
 {
 	return (ch & 0xc0) == 0x80;
 }
 
 
-static inline uint32
-UTF8NextCharLenUnsafe(const char *text)
+static inline uint32 UTF8NextCharLenUnsafe(const char *text)
 {
 	const char *ptr = text;
 
@@ -29,8 +27,7 @@ UTF8NextCharLenUnsafe(const char *text)
 }
 
 
-static inline uint32
-UTF8NextCharLen(const char *text)
+static inline uint32 UTF8NextCharLen(const char *text)
 {
 	if (text == NULL || *text == 0)
 		return 0;
@@ -39,8 +36,7 @@ UTF8NextCharLen(const char *text)
 }
 
 
-static inline uint32
-UTF8NextCharLen(const char *bytes, size_t length)
+static inline uint32 UTF8NextCharLen(const char *bytes, size_t length)
 {
 	if (bytes == NULL || length == 0 || bytes[0] == 0)
 		return 0;
@@ -86,8 +82,7 @@ UTF8NextCharLen(const char *bytes, size_t length)
 }
 
 
-static inline uint32
-UTF8PreviousCharLen(const char *text, const char *limit)
+static inline uint32 UTF8PreviousCharLen(const char *text, const char *limit)
 {
 	const char *ptr = text;
 
@@ -108,8 +103,7 @@ UTF8PreviousCharLen(const char *text, const char *limit)
 	numChars characters are read. If numChars is a negative value it is ignored
 	and the string is read up to the terminating 0.
 */
-static inline uint32
-UTF8CountBytes(const char *bytes, int32 numChars)
+static inline uint32 UTF8CountBytes(const char *bytes, int32 numChars)
 {
 	if (bytes == NULL)
 		return 0;
@@ -134,8 +128,7 @@ UTF8CountBytes(const char *bytes, int32 numChars)
 	numBytes bytes are read. If numBytes is a negative value it is ignored
 	and the string is read up to the terminating 0.
 */
-static inline uint32
-UTF8CountChars(const char *bytes, int32 numBytes)
+static inline uint32 UTF8CountChars(const char *bytes, int32 numBytes)
 {
 	if (bytes == NULL)
 		return 0;
@@ -163,8 +156,7 @@ UTF8CountChars(const char *bytes, int32 numBytes)
 	returned. This makes it safe to overruns and enables streamed processing
 	of UTF8 strings.
 */
-static inline uint32
-UTF8ToCharCode(const char **bytes)
+static inline uint32 UTF8ToCharCode(const char **bytes)
 {
 	#define UTF8_SUBSTITUTE_CHARACTER	0xfffd
 

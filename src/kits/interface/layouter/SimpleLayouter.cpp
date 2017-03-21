@@ -134,8 +134,7 @@ SimpleLayouter::~SimpleLayouter()
 }
 
 // AddConstraints
-void
-SimpleLayouter::AddConstraints(int32 element, int32 length,
+void SimpleLayouter::AddConstraints(int32 element, int32 length,
 	float _min, float _max, float _preferred)
 {
 	if (element < 0 || element >= fElementCount) {
@@ -160,8 +159,7 @@ SimpleLayouter::AddConstraints(int32 element, int32 length,
 }
 
 // SetWeight
-void
-SimpleLayouter::SetWeight(int32 element, float weight)
+void SimpleLayouter::SetWeight(int32 element, float weight)
 {
 	if (element < 0 || element >= fElementCount) {
 		// error
@@ -203,8 +201,7 @@ SimpleLayouter::CreateLayoutInfo()
 }
 
 // Layout
-void
-SimpleLayouter::Layout(LayoutInfo* layoutInfo, float _size)
+void SimpleLayouter::Layout(LayoutInfo* layoutInfo, float _size)
 {
 	int32 size = int32(_size + 1);
 
@@ -248,8 +245,7 @@ SimpleLayouter::CloneLayouter()
 }
 
 // DistributeSize
-void
-SimpleLayouter::DistributeSize(int32 size, float weights[], int32 sizes[],
+void SimpleLayouter::DistributeSize(int32 size, float weights[], int32 sizes[],
 	int32 count)
 {
 	// create element infos
@@ -321,8 +317,7 @@ SimpleLayouter::_CalculateSumWeight(BList& elementInfos)
 }
 
 // _ValidateMinMax	
-void
-SimpleLayouter::_ValidateMinMax()
+void SimpleLayouter::_ValidateMinMax()
 {
 	if (fMinMaxValid)
 		return;
@@ -360,8 +355,7 @@ SimpleLayouter::_ValidateMinMax()
 }
 
 // _LayoutMax
-void
-SimpleLayouter::_LayoutMax()
+void SimpleLayouter::_LayoutMax()
 {
 	ElementInfo* infos = fElements;
 	int32 count = fElementCount;
@@ -397,8 +391,7 @@ SimpleLayouter::_LayoutMax()
 }
 
 // _LayoutStandard
-void
-SimpleLayouter::_LayoutStandard()
+void SimpleLayouter::_LayoutStandard()
 {
 	int32 space = fLayoutInfo->fSize - (fElementCount - 1) * fSpacing;
 

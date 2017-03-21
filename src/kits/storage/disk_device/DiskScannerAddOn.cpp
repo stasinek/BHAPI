@@ -173,8 +173,7 @@ BDiskScannerParameterEditor::View()
 
 	\return \c true, if the current parameters are valid, \c false otherwise.
 */
-bool
-BDiskScannerParameterEditor::EditingDone()
+bool BDiskScannerParameterEditor::EditingDone()
 {
 	return true;
 }
@@ -189,8 +188,7 @@ BDiskScannerParameterEditor::EditingDone()
 
 	\return \c B_OK, if everything went fine, another error code otherwise.
 */
-status_t
-BDiskScannerParameterEditor::GetParameters(BString *parameters)
+status_t BDiskScannerParameterEditor::GetParameters(BString *parameters)
 {
 	status_t error = (parameters ? B_OK : B_BAD_VALUE);
 	if (error == B_OK)

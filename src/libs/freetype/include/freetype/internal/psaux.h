@@ -67,8 +67,7 @@ FT_BEGIN_HEADER
              FT_Int     count,
              FT_Memory  memory );
 
-    void
-    (*done)( PS_Table  table );
+    void     (*done)( PS_Table  table );
 
     FT_Error
     (*add)( PS_Table    table,
@@ -76,8 +75,7 @@ FT_BEGIN_HEADER
             void*       object,
             FT_PtrDist  length );
 
-    void
-    (*release)( PS_Table  table );
+    void     (*release)( PS_Table  table );
 
   } PS_Table_FuncsRec;
 
@@ -210,8 +208,7 @@ FT_BEGIN_HEADER
   } T1_FieldLocation;
 
 
-  typedef void
-  (*T1_Field_ParseFunc)( FT_Face     face,
+  typedef void   (*T1_Field_ParseFunc)( FT_Face     face,
                          FT_Pointer  parser );
 
 
@@ -332,19 +329,15 @@ FT_BEGIN_HEADER
 
   typedef struct  PS_Parser_FuncsRec_
   {
-    void
-    (*init)( PS_Parser  parser,
+    void     (*init)( PS_Parser  parser,
              FT_Byte*   base,
              FT_Byte*   limit,
              FT_Memory  memory );
 
-    void
-    (*done)( PS_Parser  parser );
+    void     (*done)( PS_Parser  parser );
 
-    void
-    (*skip_spaces)( PS_Parser  parser );
-    void
-    (*skip_PS_token)( PS_Parser  parser );
+    void     (*skip_spaces)( PS_Parser  parser );
+    void     (*skip_PS_token)( PS_Parser  parser );
 
     FT_Long
     (*to_int)( PS_Parser  parser );
@@ -369,11 +362,9 @@ FT_BEGIN_HEADER
                        FT_Fixed*  values,
                        FT_Int     power_ten );
 
-    void
-    (*to_token)( PS_Parser  parser,
+    void     (*to_token)( PS_Parser  parser,
                  T1_Token   token );
-    void
-    (*to_token_array)( PS_Parser  parser,
+    void     (*to_token_array)( PS_Parser  parser,
                        T1_Token   tokens,
                        FT_UInt    max_tokens,
                        FT_Int*    pnum_tokens );
@@ -445,8 +436,7 @@ FT_BEGIN_HEADER
   (*T1_Builder_Check_Points_Func)( T1_Builder  builder,
                                    FT_Int      count );
 
-  typedef void
-  (*T1_Builder_Add_Point_Func)( T1_Builder  builder,
+  typedef void   (*T1_Builder_Add_Point_Func)( T1_Builder  builder,
                                 FT_Pos      x,
                                 FT_Pos      y,
                                 FT_Byte     flag );
@@ -464,23 +454,20 @@ FT_BEGIN_HEADER
                                   FT_Pos      x,
                                   FT_Pos      y );
 
-  typedef void
-  (*T1_Builder_Close_Contour_Func)( T1_Builder  builder );
+  typedef void   (*T1_Builder_Close_Contour_Func)( T1_Builder  builder );
 
 
   typedef const struct T1_Builder_FuncsRec_*  T1_Builder_Funcs;
 
   typedef struct  T1_Builder_FuncsRec_
   {
-    void
-    (*init)( T1_Builder    builder,
+    void     (*init)( T1_Builder    builder,
              FT_Face       face,
              FT_Size       size,
              FT_GlyphSlot  slot,
              FT_Bool       hinting );
 
-    void
-    (*done)( T1_Builder   builder );
+    void     (*done)( T1_Builder   builder );
 
     T1_Builder_Check_Points_Func   check_points;
     T1_Builder_Add_Point_Func      add_point;
@@ -645,8 +632,7 @@ FT_BEGIN_HEADER
              FT_Render_Mode       hint_mode,
              T1_Decoder_Callback  callback );
 
-    void
-    (*done)( T1_Decoder  decoder );
+    void     (*done)( T1_Decoder  decoder );
 
     FT_Error
     (*parse_charstrings)( T1_Decoder  decoder,
@@ -713,8 +699,7 @@ FT_BEGIN_HEADER
              FT_Byte*    base,
              FT_Byte*    limit );
 
-    void
-    (*done)( AFM_Parser  parser );
+    void     (*done)( AFM_Parser  parser );
 
     FT_Error
     (*parse)( AFM_Parser  parser );
@@ -797,8 +782,7 @@ FT_BEGIN_HEADER
     const T1_Builder_FuncsRec*  t1_builder_funcs;
     const T1_Decoder_FuncsRec*  t1_decoder_funcs;
 
-    void
-    (*t1_decrypt)( FT_Byte*   buffer,
+    void     (*t1_decrypt)( FT_Byte*   buffer,
                    FT_Offset  length,
                    FT_UShort  seed );
 

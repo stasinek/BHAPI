@@ -40,8 +40,7 @@ ImageDebugLoadingStateHandlerRoster::Default()
 }
 
 
-/*static*/ status_t
-ImageDebugLoadingStateHandlerRoster::CreateDefault()
+/*static*/ status_t ImageDebugLoadingStateHandlerRoster::CreateDefault()
 {
 	if (sDefaultInstance != NULL)
 		return B_OK;
@@ -65,8 +64,7 @@ ImageDebugLoadingStateHandlerRoster::CreateDefault()
 }
 
 
-/*static*/ void
-ImageDebugLoadingStateHandlerRoster::DeleteDefault()
+/*static*/ void ImageDebugLoadingStateHandlerRoster::DeleteDefault()
 {
 	ImageDebugLoadingStateHandlerRoster* roster = sDefaultInstance;
 	sDefaultInstance = NULL;
@@ -74,15 +72,13 @@ ImageDebugLoadingStateHandlerRoster::DeleteDefault()
 }
 
 
-status_t
-ImageDebugLoadingStateHandlerRoster::Init()
+status_t ImageDebugLoadingStateHandlerRoster::Init()
 {
 	return fLock.InitCheck();
 }
 
 
-status_t
-ImageDebugLoadingStateHandlerRoster::RegisterDefaultHandlers()
+status_t ImageDebugLoadingStateHandlerRoster::RegisterDefaultHandlers()
 {
 	ImageDebugLoadingStateHandler* handler;
 	BReference<ImageDebugLoadingStateHandler> handlerReference;
@@ -99,8 +95,7 @@ ImageDebugLoadingStateHandlerRoster::RegisterDefaultHandlers()
 }
 
 
-status_t
-ImageDebugLoadingStateHandlerRoster::FindStateHandler(
+status_t ImageDebugLoadingStateHandlerRoster::FindStateHandler(
 	SpecificImageDebugInfoLoadingState* state,
 	ImageDebugLoadingStateHandler*& _handler)
 {
@@ -122,8 +117,7 @@ ImageDebugLoadingStateHandlerRoster::FindStateHandler(
 }
 
 
-bool
-ImageDebugLoadingStateHandlerRoster::RegisterHandler(
+bool ImageDebugLoadingStateHandlerRoster::RegisterHandler(
 	ImageDebugLoadingStateHandler* handler)
 {
 	if (!fStateHandlers.AddItem(handler))
@@ -134,8 +128,7 @@ ImageDebugLoadingStateHandlerRoster::RegisterHandler(
 }
 
 
-void
-ImageDebugLoadingStateHandlerRoster::UnregisterHandler(
+void ImageDebugLoadingStateHandlerRoster::UnregisterHandler(
 	ImageDebugLoadingStateHandler* handler)
 {
 	if (fStateHandlers.RemoveItem(handler))

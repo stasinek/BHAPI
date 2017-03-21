@@ -147,8 +147,7 @@ _VECTOR_SET_CLASS_NAME::~VectorSet()
 	- \c B_NO_MEMORY: Insufficient memory for this operation.
 */
 _VECTOR_SET_TEMPLATE_LIST
-status_t
-_VECTOR_SET_CLASS_NAME::Insert(const Value &value, bool replace)
+status_t _VECTOR_SET_CLASS_NAME::Insert(const Value &value, bool replace)
 {
 	bool exists = false;
 	int32 index = _FindInsertionIndex(value, exists);
@@ -167,8 +166,7 @@ _VECTOR_SET_CLASS_NAME::Insert(const Value &value, bool replace)
 			contained an element with the value, \c 0 otherwise.
 */
 _VECTOR_SET_TEMPLATE_LIST
-int32
-_VECTOR_SET_CLASS_NAME::Remove(const Value &value)
+int32 _VECTOR_SET_CLASS_NAME::Remove(const Value &value)
 {
 	bool exists = false;
 	int32 index = _FindInsertionIndex(value, exists);
@@ -199,8 +197,7 @@ _VECTOR_SET_CLASS_NAME::Erase(const Iterator &iterator)
 */
 _VECTOR_SET_TEMPLATE_LIST
 inline
-int32
-_VECTOR_SET_CLASS_NAME::Count() const
+int32 _VECTOR_SET_CLASS_NAME::Count() const
 {
 	return fElements.Count();
 }
@@ -211,8 +208,7 @@ _VECTOR_SET_CLASS_NAME::Count() const
 */
 _VECTOR_SET_TEMPLATE_LIST
 inline
-bool
-_VECTOR_SET_CLASS_NAME::IsEmpty() const
+bool _VECTOR_SET_CLASS_NAME::IsEmpty() const
 {
 	return fElements.IsEmpty();
 }
@@ -221,8 +217,7 @@ _VECTOR_SET_CLASS_NAME::IsEmpty() const
 /*!	\brief Removes all elements from the set.
 */
 _VECTOR_SET_TEMPLATE_LIST
-void
-_VECTOR_SET_CLASS_NAME::MakeEmpty()
+void _VECTOR_SET_CLASS_NAME::MakeEmpty()
 {
 	fElements.MakeEmpty();
 }
@@ -451,8 +446,7 @@ _VECTOR_SET_CLASS_NAME::FindClose(const Value &value, bool less) const
 			located or at which it would need to be inserted.
 */
 _VECTOR_SET_TEMPLATE_LIST
-int32
-_VECTOR_SET_CLASS_NAME::_FindInsertionIndex(const Value &value,
+int32 _VECTOR_SET_CLASS_NAME::_FindInsertionIndex(const Value &value,
 											bool &exists) const
 {
 	// binary search

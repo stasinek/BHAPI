@@ -53,8 +53,7 @@ BControl::~BControl()
 }
 
 
-void
-BControl::SetLabel(const char *label)
+void BControl::SetLabel(const char *label)
 {
 	if(fLabel) delete[] fLabel;
 	if(label)
@@ -64,15 +63,13 @@ BControl::SetLabel(const char *label)
 }
 
 
-const char*
-BControl::Label() const
+const char*  BControl::Label() const
 {
 	return fLabel;
 }
 
 
-void
-BControl::SetValue(__be_int32 value)
+void BControl::SetValue(__be_int32 value)
 {
 	if(fValue != value)
 	{
@@ -82,15 +79,13 @@ BControl::SetValue(__be_int32 value)
 }
 
 
-__be_int32
-BControl::Value() const
+__be_int32 BControl::Value() const
 {
 	return fValue;
 }
 
 
-status_t
-BControl::Invoke(const BMessage *aMsg)
+status_t BControl::Invoke(const BMessage *aMsg)
 {
 	bool IsNotify = false;
 	__be_uint32 kind = InvokeKind(&IsNotify);
@@ -119,22 +114,19 @@ BControl::Invoke(const BMessage *aMsg)
 }
 
 
-void
-BControl::AttachedToWindow()
+void BControl::AttachedToWindow()
 {
 	if(Target() == NULL) SetTarget(Window());
 }
 
 
-void
-BControl::DetachedFromWindow()
+void BControl::DetachedFromWindow()
 {
 	if(Target() == Window()) SetTarget(NULL);
 }
 
 
-void
-BControl::MakeFocus(bool focusState)
+void BControl::MakeFocus(bool focusState)
 {
 	if(IsFocus() != focusState)
 	{
@@ -156,15 +148,13 @@ BControl::MakeFocus(bool focusState)
 }
 
 
-bool
-BControl::IsFocusChanging() const
+bool BControl::IsFocusChanging() const
 {
 	return fFocusChanging;
 }
 
 
-void
-BControl::SetValueNoUpdate(__be_int32 value)
+void BControl::SetValueNoUpdate(__be_int32 value)
 {
 	fValue = value;
 }

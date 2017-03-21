@@ -147,8 +147,7 @@ OneShotDelayedTask::~OneShotDelayedTask()
 }
 
 
-bool
-OneShotDelayedTask::RunIfNeeded(bigtime_t currentTime)
+bool OneShotDelayedTask::RunIfNeeded(bigtime_t currentTime)
 {
 	if (currentTime < fRunAfter)
 		return false;
@@ -178,8 +177,7 @@ PeriodicDelayedTask::~PeriodicDelayedTask()
 }
 
 
-bool
-PeriodicDelayedTask::RunIfNeeded(bigtime_t currentTime)
+bool PeriodicDelayedTask::RunIfNeeded(bigtime_t currentTime)
 {
 	if (currentTime < fRunAfter)
 		return false;
@@ -200,8 +198,7 @@ PeriodicDelayedTaskWithTimeout::PeriodicDelayedTaskWithTimeout(
 }
 
 
-bool
-PeriodicDelayedTaskWithTimeout::RunIfNeeded(bigtime_t currentTime)
+bool PeriodicDelayedTaskWithTimeout::RunIfNeeded(bigtime_t currentTime)
 {
 	if (currentTime < fRunAfter)
 		return false;
@@ -237,8 +234,7 @@ RunWhenIdleTask::~RunWhenIdleTask()
 }
 
 
-bool
-RunWhenIdleTask::RunIfNeeded(bigtime_t currentTime)
+bool RunWhenIdleTask::RunIfNeeded(bigtime_t currentTime)
 {
 	if (currentTime < fRunAfter)
 		return false;
@@ -263,8 +259,7 @@ RunWhenIdleTask::RunIfNeeded(bigtime_t currentTime)
 }
 
 
-void
-RunWhenIdleTask::ResetIdleTimer(bigtime_t currentTime)
+void RunWhenIdleTask::ResetIdleTimer(bigtime_t currentTime)
 {
 	fActivityLevel = ActivityLevel();
 	fActivityLevelStart = currentTime;
@@ -273,8 +268,7 @@ RunWhenIdleTask::ResetIdleTimer(bigtime_t currentTime)
 }
 
 
-bool
-RunWhenIdleTask::IsIdle(bigtime_t currentTime, float taskOverhead)
+bool RunWhenIdleTask::IsIdle(bigtime_t currentTime, float taskOverhead)
 {
 	bigtime_t currentActivityLevel = ActivityLevel();
 	float load = (float)(currentActivityLevel - fActivityLevel)
@@ -308,15 +302,13 @@ RunWhenIdleTask::IsIdle(bigtime_t currentTime, float taskOverhead)
 }
 
 
-bool
-RunWhenIdleTask::IdleTimerExpired(bigtime_t currentTime)
+bool RunWhenIdleTask::IdleTimerExpired(bigtime_t currentTime)
 {
 	return IsIdle(currentTime, 0);
 }
 
 
-bool
-RunWhenIdleTask::StillIdle(bigtime_t currentTime)
+bool RunWhenIdleTask::StillIdle(bigtime_t currentTime)
 {
 	return IsIdle(currentTime, kIdleTreshold);
 }
@@ -338,30 +330,26 @@ TaskLoop::~TaskLoop()
 }
 
 
-void
-TaskLoop::RunLater(DelayedTask* task)
+void TaskLoop::RunLater(DelayedTask* task)
 {
 	AddTask(task);
 }
 
 
-void
-TaskLoop::RunLater(FunctionObject* functor, bigtime_t delay)
+void TaskLoop::RunLater(FunctionObject* functor, bigtime_t delay)
 {
 	RunLater(new OneShotDelayedTask(functor, delay));
 }
 
 
-void
-TaskLoop::RunLater(FunctionObjectWithResult<bool>* functor,
+void TaskLoop::RunLater(FunctionObjectWithResult<bool>* functor,
 	bigtime_t delay, bigtime_t period)
 {
 	RunLater(new PeriodicDelayedTask(functor, delay, period));
 }
 
 
-void
-TaskLoop::RunLater(FunctionObjectWithResult<bool>* functor, bigtime_t delay,
+void TaskLoop::RunLater(FunctionObjectWithResult<bool>* functor, bigtime_t delay,
 	bigtime_t period, bigtime_t timeout)
 {
 	RunLater(new PeriodicDelayedTaskWithTimeout(functor, delay, period,
@@ -369,8 +357,7 @@ TaskLoop::RunLater(FunctionObjectWithResult<bool>* functor, bigtime_t delay,
 }
 
 
-void
-TaskLoop::RunWhenIdle(FunctionObjectWithResult<bool>* functor,
+void TaskLoop::RunWhenIdle(FunctionObjectWithResult<bool>* functor,
 	bigtime_t initialDelay, bigtime_t idleTime, bigtime_t heartBeat)
 {
 	RunLater(new RunWhenIdleTask(functor, initialDelay, idleTime, heartBeat));
@@ -380,8 +367,7 @@ TaskLoop::RunWhenIdle(FunctionObjectWithResult<bool>* functor,
 //	#pragma mark - TaskLoop
 
 
-void
-TaskLoop::AccumulatedRunLater(AccumulatingFunctionObject* functor,
+void TaskLoop::AccumulatedRunLater(AccumulatingFunctionObject* functor,
 	bigtime_t delay, bigtime_t maxAccumulatingTime, int32 maxAccumulateCount)
 {
 	AutoLock<BLocker> autoLock(&fLock);
@@ -406,8 +392,7 @@ TaskLoop::AccumulatedRunLater(AccumulatingFunctionObject* functor,
 }
 
 
-bool
-TaskLoop::Pulse()
+bool TaskLoop::Pulse()
 {
 	ASSERT(fLock.IsLocked());
 
@@ -462,16 +447,14 @@ TaskLoop::LatestRunTime() const
 }
 
 
-void
-TaskLoop::RemoveTask(DelayedTask* task)
+void TaskLoop::RemoveTask(DelayedTask* task)
 {
 	ASSERT(fLock.IsLocked());
 	// remove the task
 	fTaskList.RemoveItem(task);
 }
 
-void
-TaskLoop::AddTask(DelayedTask* task)
+void TaskLoop::AddTask(DelayedTask* task)
 {
 	AutoLock<BLocker> autoLock(&fLock);
 	if (!autoLock.IsLocked()) {
@@ -527,8 +510,7 @@ StandAloneTaskLoop::~StandAloneTaskLoop()
 }
 
 
-void
-StandAloneTaskLoop::StartPulsingIfNeeded()
+void StandAloneTaskLoop::StartPulsingIfNeeded()
 {
 	ASSERT(fLock.IsLocked());
 	if (fScanThread < 0) {
@@ -540,15 +522,13 @@ StandAloneTaskLoop::StartPulsingIfNeeded()
 }
 
 
-bool
-StandAloneTaskLoop::KeepPulsingWhenEmpty() const
+bool StandAloneTaskLoop::KeepPulsingWhenEmpty() const
 {
 	return fKeepThread;
 }
 
 
-status_t
-StandAloneTaskLoop::RunBinder(void* castToThis)
+status_t StandAloneTaskLoop::RunBinder(void* castToThis)
 {
 	StandAloneTaskLoop* self = (StandAloneTaskLoop*)castToThis;
 	self->Run();
@@ -556,8 +536,7 @@ StandAloneTaskLoop::RunBinder(void* castToThis)
 }
 
 
-void
-StandAloneTaskLoop::Run()
+void StandAloneTaskLoop::Run()
 {
 	for(;;) {
 		AutoLock<BLocker> autoLock(&fLock);
@@ -595,8 +574,7 @@ StandAloneTaskLoop::Run()
 }
 
 
-void
-StandAloneTaskLoop::AddTask(DelayedTask* delayedTask)
+void StandAloneTaskLoop::AddTask(DelayedTask* delayedTask)
 {
 	_inherited::AddTask(delayedTask);
 	if (fScanThread < 0)
@@ -630,8 +608,7 @@ PiggybackTaskLoop::~PiggybackTaskLoop()
 }
 
 
-void
-PiggybackTaskLoop::PulseMe()
+void PiggybackTaskLoop::PulseMe()
 {
 	if (!fPulseMe)
 		return;
@@ -646,15 +623,13 @@ PiggybackTaskLoop::PulseMe()
 }
 
 
-bool
-PiggybackTaskLoop::KeepPulsingWhenEmpty() const
+bool PiggybackTaskLoop::KeepPulsingWhenEmpty() const
 {
 	return false;
 }
 
 
-void
-PiggybackTaskLoop::StartPulsingIfNeeded()
+void PiggybackTaskLoop::StartPulsingIfNeeded()
 {
 	fPulseMe = true;
 }

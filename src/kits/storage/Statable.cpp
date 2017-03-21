@@ -45,8 +45,7 @@ BStatable::~BStatable()
 
 
 // Returns whether or not the current node is a file.
-bool
-BStatable::IsFile() const
+bool BStatable::IsFile() const
 {
 	struct stat stat;
 	if (GetStat(&stat) == B_OK)
@@ -57,8 +56,7 @@ BStatable::IsFile() const
 
 
 // Returns whether or not the current node is a directory.
-bool
-BStatable::IsDirectory() const
+bool BStatable::IsDirectory() const
 {
 	struct stat stat;
 	if (GetStat(&stat) == B_OK)
@@ -69,8 +67,7 @@ BStatable::IsDirectory() const
 
 
 // Returns whether or not the current node is a symbolic link.
-bool
-BStatable::IsSymLink() const
+bool BStatable::IsSymLink() const
 {
 	struct stat stat;
 	if (GetStat(&stat) == B_OK)
@@ -81,8 +78,7 @@ BStatable::IsSymLink() const
 
 
 // Fills out ref with the node_ref of the node.
-status_t
-BStatable::GetNodeRef(node_ref* ref) const
+status_t BStatable::GetNodeRef(node_ref* ref) const
 {
 	status_t result = (ref ? B_OK : B_BAD_VALUE);
 	struct stat stat;
@@ -100,8 +96,7 @@ BStatable::GetNodeRef(node_ref* ref) const
 
 
 // Fills out the node's UID into owner.
-status_t
-BStatable::GetOwner(uid_t* owner) const
+status_t BStatable::GetOwner(uid_t* owner) const
 {
 	status_t result = (owner ? B_OK : B_BAD_VALUE);
 	struct stat stat;
@@ -117,8 +112,7 @@ BStatable::GetOwner(uid_t* owner) const
 
 
 // Sets the node's UID to owner.
-status_t
-BStatable::SetOwner(uid_t owner)
+status_t BStatable::SetOwner(uid_t owner)
 {
 	struct stat stat;
 	stat.st_uid = owner;
@@ -128,8 +122,7 @@ BStatable::SetOwner(uid_t owner)
 
 
 // Fills out the node's GID into group.
-status_t
-BStatable::GetGroup(gid_t* group) const
+status_t BStatable::GetGroup(gid_t* group) const
 {
 	status_t result = (group ? B_OK : B_BAD_VALUE);
 	struct stat stat;
@@ -145,8 +138,7 @@ BStatable::GetGroup(gid_t* group) const
 
 
 // Sets the node's GID to group.
-status_t
-BStatable::SetGroup(gid_t group)
+status_t BStatable::SetGroup(gid_t group)
 {
 	struct stat stat;
 	stat.st_gid = group;
@@ -156,8 +148,7 @@ BStatable::SetGroup(gid_t group)
 
 
 // Fills out permissions with the node's permissions.
-status_t
-BStatable::GetPermissions(mode_t* permissions) const
+status_t BStatable::GetPermissions(mode_t* permissions) const
 {
 	status_t result = (permissions ? B_OK : B_BAD_VALUE);
 	struct stat stat;
@@ -173,8 +164,7 @@ BStatable::GetPermissions(mode_t* permissions) const
 
 
 // Sets the node's permissions to permissions.
-status_t
-BStatable::SetPermissions(mode_t permissions)
+status_t BStatable::SetPermissions(mode_t permissions)
 {
 	struct stat stat;
 	// the FS should do the correct masking -- only the S_IUMSK part is
@@ -186,8 +176,7 @@ BStatable::SetPermissions(mode_t permissions)
 
 
 // Fills out the size of the node's data (not counting attributes) into size.
-status_t
-BStatable::GetSize(off_t* size) const
+status_t BStatable::GetSize(off_t* size) const
 {
 	status_t result = (size ? B_OK : B_BAD_VALUE);
 	struct stat stat;
@@ -203,8 +192,7 @@ BStatable::GetSize(off_t* size) const
 
 
 // Fills out mtime with the last modification time of the node.
-status_t
-BStatable::GetModificationTime(time_t* mtime) const
+status_t BStatable::GetModificationTime(time_t* mtime) const
 {
 	status_t result = (mtime ? B_OK : B_BAD_VALUE);
 	struct stat stat;
@@ -220,8 +208,7 @@ BStatable::GetModificationTime(time_t* mtime) const
 
 
 // Sets the node's last modification time to mtime.
-status_t
-BStatable::SetModificationTime(time_t mtime)
+status_t BStatable::SetModificationTime(time_t mtime)
 {
 	struct stat stat;
 	stat.st_mtime = mtime;
@@ -231,8 +218,7 @@ BStatable::SetModificationTime(time_t mtime)
 
 
 // Fills out ctime with the creation time of the node
-status_t
-BStatable::GetCreationTime(time_t* ctime) const
+status_t BStatable::GetCreationTime(time_t* ctime) const
 {
 	status_t result = (ctime ? B_OK : B_BAD_VALUE);
 	struct stat stat;
@@ -248,8 +234,7 @@ BStatable::GetCreationTime(time_t* ctime) const
 
 
 // Sets the node's creation time to ctime.
-status_t
-BStatable::SetCreationTime(time_t ctime)
+status_t BStatable::SetCreationTime(time_t ctime)
 {
 	struct stat stat;
 	stat.st_crtime = ctime;
@@ -259,8 +244,7 @@ BStatable::SetCreationTime(time_t ctime)
 
 
 // Fills out atime with the access time of the node.
-status_t
-BStatable::GetAccessTime(time_t* atime) const
+status_t BStatable::GetAccessTime(time_t* atime) const
 {
 	status_t result = (atime ? B_OK : B_BAD_VALUE);
 	struct stat stat;
@@ -276,8 +260,7 @@ BStatable::GetAccessTime(time_t* atime) const
 
 
 // Sets the node's access time to atime.
-status_t
-BStatable::SetAccessTime(time_t atime)
+status_t BStatable::SetAccessTime(time_t atime)
 {
 	struct stat stat;
 	stat.st_atime = atime;
@@ -287,8 +270,7 @@ BStatable::SetAccessTime(time_t atime)
 
 
 // Fills out vol with the the volume that the node lives on.
-status_t
-BStatable::GetVolume(BVolume* volume) const
+status_t BStatable::GetVolume(BVolume* volume) const
 {
 	status_t result = (volume ? B_OK : B_BAD_VALUE);
 	struct stat stat;
@@ -303,8 +285,7 @@ BStatable::GetVolume(BVolume* volume) const
 
 
 // _OhSoStatable1() -> GetStat()
-extern "C" status_t
-#if __GNUC__ == 2
+extern "C" status_t #if __GNUC__ == 2
 _OhSoStatable1__9BStatable(const BStatable* self, struct stat* stat)
 #else
 _ZN9BStatable14_OhSoStatable1Ev(const BStatable* self, struct stat* stat)

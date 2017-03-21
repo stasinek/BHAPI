@@ -5,12 +5,11 @@
  */
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <musl/syscalls.h>
 
 
-status_t
-get_cpuid(cpuid_info* info, uint32 eaxRegister, uint32 cpuNum)
+status_t get_cpuid(cpuid_info* info, uint32 eaxRegister, uint32 cpuNum)
 {
 	__asm__("cpuid"
 		: "=a" (info->regs.eax), "=b" (info->regs.ebx), "=c" (info->regs.ecx),

@@ -36,8 +36,7 @@ RemoveRepositoryJob::~RemoveRepositoryJob()
 }
 
 
-status_t
-RemoveRepositoryJob::Execute()
+status_t RemoveRepositoryJob::Execute()
 {
 	BPackageRoster roster;
 	BRepositoryConfig repoConfig;

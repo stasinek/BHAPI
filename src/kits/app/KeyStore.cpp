@@ -28,23 +28,20 @@ BKeyStore::~BKeyStore()
 // #pragma mark - Key handling
 
 
-status_t
-BKeyStore::GetKey(BKeyType type, const char* identifier, BKey& key)
+status_t BKeyStore::GetKey(BKeyType type, const char* identifier, BKey& key)
 {
 	return GetKey(NULL, type, identifier, NULL, true, key);
 }
 
 
-status_t
-BKeyStore::GetKey(BKeyType type, const char* identifier,
+status_t BKeyStore::GetKey(BKeyType type, const char* identifier,
 	const char* secondaryIdentifier, BKey& key)
 {
 	return GetKey(NULL, type, identifier, secondaryIdentifier, true, key);
 }
 
 
-status_t
-BKeyStore::GetKey(BKeyType type, const char* identifier,
+status_t BKeyStore::GetKey(BKeyType type, const char* identifier,
 	const char* secondaryIdentifier, bool secondaryIdentifierOptional,
 	BKey& key)
 {
@@ -53,24 +50,21 @@ BKeyStore::GetKey(BKeyType type, const char* identifier,
 }
 
 
-status_t
-BKeyStore::GetKey(const char* keyring, BKeyType type, const char* identifier,
+status_t BKeyStore::GetKey(const char* keyring, BKeyType type, const char* identifier,
 	BKey& key)
 {
 	return GetKey(keyring, type, identifier, NULL, true, key);
 }
 
 
-status_t
-BKeyStore::GetKey(const char* keyring, BKeyType type, const char* identifier,
+status_t BKeyStore::GetKey(const char* keyring, BKeyType type, const char* identifier,
 	const char* secondaryIdentifier, BKey& key)
 {
 	return GetKey(keyring, type, identifier, secondaryIdentifier, true, key);
 }
 
 
-status_t
-BKeyStore::GetKey(const char* keyring, BKeyType type, const char* identifier,
+status_t BKeyStore::GetKey(const char* keyring, BKeyType type, const char* identifier,
 	const char* secondaryIdentifier, bool secondaryIdentifierOptional,
 	BKey& key)
 {
@@ -94,15 +88,13 @@ BKeyStore::GetKey(const char* keyring, BKeyType type, const char* identifier,
 }
 
 
-status_t
-BKeyStore::AddKey(const BKey& key)
+status_t BKeyStore::AddKey(const BKey& key)
 {
 	return AddKey(NULL, key);
 }
 
 
-status_t
-BKeyStore::AddKey(const char* keyring, const BKey& key)
+status_t BKeyStore::AddKey(const char* keyring, const BKey& key)
 {
 	BMessage keyMessage;
 	if (key.Flatten(keyMessage) != B_OK)
@@ -116,15 +108,13 @@ BKeyStore::AddKey(const char* keyring, const BKey& key)
 }
 
 
-status_t
-BKeyStore::RemoveKey(const BKey& key)
+status_t BKeyStore::RemoveKey(const BKey& key)
 {
 	return RemoveKey(NULL, key);
 }
 
 
-status_t
-BKeyStore::RemoveKey(const char* keyring, const BKey& key)
+status_t BKeyStore::RemoveKey(const char* keyring, const BKey& key)
 {
 	BMessage keyMessage;
 	if (key.Flatten(keyMessage) != B_OK)
@@ -138,30 +128,26 @@ BKeyStore::RemoveKey(const char* keyring, const BKey& key)
 }
 
 
-status_t
-BKeyStore::GetNextKey(uint32& cookie, BKey& key)
+status_t BKeyStore::GetNextKey(uint32& cookie, BKey& key)
 {
 	return GetNextKey(NULL, cookie, key);
 }
 
 
-status_t
-BKeyStore::GetNextKey(BKeyType type, BKeyPurpose purpose, uint32& cookie,
+status_t BKeyStore::GetNextKey(BKeyType type, BKeyPurpose purpose, uint32& cookie,
 	BKey& key)
 {
 	return GetNextKey(NULL, type, purpose, cookie, key);
 }
 
 
-status_t
-BKeyStore::GetNextKey(const char* keyring, uint32& cookie, BKey& key)
+status_t BKeyStore::GetNextKey(const char* keyring, uint32& cookie, BKey& key)
 {
 	return GetNextKey(keyring, B_KEY_TYPE_ANY, B_KEY_PURPOSE_ANY, cookie, key);
 }
 
 
-status_t
-BKeyStore::GetNextKey(const char* keyring, BKeyType type, BKeyPurpose purpose,
+status_t BKeyStore::GetNextKey(const char* keyring, BKeyType type, BKeyPurpose purpose,
 	uint32& cookie, BKey& key)
 {
 	BMessage message(KEY_STORE_GET_NEXT_KEY);
@@ -187,8 +173,7 @@ BKeyStore::GetNextKey(const char* keyring, BKeyType type, BKeyPurpose purpose,
 // #pragma mark - Keyrings
 
 
-status_t
-BKeyStore::AddKeyring(const char* keyring)
+status_t BKeyStore::AddKeyring(const char* keyring)
 {
 	BMessage message(KEY_STORE_ADD_KEYRING);
 	message.AddString("keyring", keyring);
@@ -196,8 +181,7 @@ BKeyStore::AddKeyring(const char* keyring)
 }
 
 
-status_t
-BKeyStore::RemoveKeyring(const char* keyring)
+status_t BKeyStore::RemoveKeyring(const char* keyring)
 {
 	BMessage message(KEY_STORE_REMOVE_KEYRING);
 	message.AddString("keyring", keyring);
@@ -205,8 +189,7 @@ BKeyStore::RemoveKeyring(const char* keyring)
 }
 
 
-status_t
-BKeyStore::GetNextKeyring(uint32& cookie, BString& keyring)
+status_t BKeyStore::GetNextKeyring(uint32& cookie, BString& keyring)
 {
 	BMessage message(KEY_STORE_GET_NEXT_KEYRING);
 	message.AddUInt32("cookie", cookie);
@@ -224,8 +207,7 @@ BKeyStore::GetNextKeyring(uint32& cookie, BString& keyring)
 }
 
 
-status_t
-BKeyStore::SetUnlockKey(const char* keyring, const BKey& key)
+status_t BKeyStore::SetUnlockKey(const char* keyring, const BKey& key)
 {
 	BMessage keyMessage;
 	if (key.Flatten(keyMessage) != B_OK)
@@ -239,8 +221,7 @@ BKeyStore::SetUnlockKey(const char* keyring, const BKey& key)
 }
 
 
-status_t
-BKeyStore::RemoveUnlockKey(const char* keyring)
+status_t BKeyStore::RemoveUnlockKey(const char* keyring)
 {
 	BMessage message(KEY_STORE_REMOVE_UNLOCK_KEY);
 	message.AddString("keyring", keyring);
@@ -251,22 +232,19 @@ BKeyStore::RemoveUnlockKey(const char* keyring)
 // #pragma mark - Master key
 
 
-status_t
-BKeyStore::SetMasterUnlockKey(const BKey& key)
+status_t BKeyStore::SetMasterUnlockKey(const BKey& key)
 {
 	return SetUnlockKey(NULL, key);
 }
 
 
-status_t
-BKeyStore::RemoveMasterUnlockKey()
+status_t BKeyStore::RemoveMasterUnlockKey()
 {
 	return RemoveUnlockKey(NULL);
 }
 
 
-status_t
-BKeyStore::AddKeyringToMaster(const char* keyring)
+status_t BKeyStore::AddKeyringToMaster(const char* keyring)
 {
 	BMessage message(KEY_STORE_ADD_KEYRING_TO_MASTER);
 	message.AddString("keyring", keyring);
@@ -274,8 +252,7 @@ BKeyStore::AddKeyringToMaster(const char* keyring)
 }
 
 
-status_t
-BKeyStore::RemoveKeyringFromMaster(const char* keyring)
+status_t BKeyStore::RemoveKeyringFromMaster(const char* keyring)
 {
 	BMessage message(KEY_STORE_REMOVE_KEYRING_FROM_MASTER);
 	message.AddString("keyring", keyring);
@@ -283,8 +260,7 @@ BKeyStore::RemoveKeyringFromMaster(const char* keyring)
 }
 
 
-status_t
-BKeyStore::GetNextMasterKeyring(uint32& cookie, BString& keyring)
+status_t BKeyStore::GetNextMasterKeyring(uint32& cookie, BString& keyring)
 {
 	BMessage message(KEY_STORE_GET_NEXT_MASTER_KEYRING);
 	message.AddUInt32("cookie", cookie);
@@ -305,8 +281,7 @@ BKeyStore::GetNextMasterKeyring(uint32& cookie, BString& keyring)
 // #pragma mark - Locking
 
 
-bool
-BKeyStore::IsKeyringUnlocked(const char* keyring)
+bool BKeyStore::IsKeyringUnlocked(const char* keyring)
 {
 	BMessage message(KEY_STORE_IS_KEYRING_UNLOCKED);
 	message.AddString("keyring", keyring);
@@ -323,8 +298,7 @@ BKeyStore::IsKeyringUnlocked(const char* keyring)
 }
 
 
-status_t
-BKeyStore::LockKeyring(const char* keyring)
+status_t BKeyStore::LockKeyring(const char* keyring)
 {
 	BMessage message(KEY_STORE_LOCK_KEYRING);
 	message.AddString("keyring", keyring);
@@ -332,8 +306,7 @@ BKeyStore::LockKeyring(const char* keyring)
 }
 
 
-status_t
-BKeyStore::LockMasterKeyring()
+status_t BKeyStore::LockMasterKeyring()
 {
 	return LockKeyring(NULL);
 }
@@ -343,15 +316,13 @@ BKeyStore::LockMasterKeyring()
 // #pragma mark - Applications
 
 
-status_t
-BKeyStore::GetNextApplication(uint32& cookie, BString& signature) const
+status_t BKeyStore::GetNextApplication(uint32& cookie, BString& signature) const
 {
 	return GetNextApplication(NULL, cookie, signature);
 }
 
 
-status_t
-BKeyStore::GetNextApplication(const char* keyring, uint32& cookie,
+status_t BKeyStore::GetNextApplication(const char* keyring, uint32& cookie,
 	BString& signature) const
 {
 	BMessage message(KEY_STORE_GET_NEXT_APPLICATION);
@@ -371,15 +342,13 @@ BKeyStore::GetNextApplication(const char* keyring, uint32& cookie,
 }
 
 
-status_t
-BKeyStore::RemoveApplication(const char* signature)
+status_t BKeyStore::RemoveApplication(const char* signature)
 {
 	return RemoveApplication(NULL, signature);
 }
 
 
-status_t
-BKeyStore::RemoveApplication(const char* keyring, const char* signature)
+status_t BKeyStore::RemoveApplication(const char* keyring, const char* signature)
 {
 	BMessage message(KEY_STORE_REMOVE_APPLICATION);
 	message.AddString("keyring", keyring);
@@ -392,8 +361,7 @@ BKeyStore::RemoveApplication(const char* keyring, const char* signature)
 // #pragma mark - Service functions
 
 
-status_t
-BKeyStore::GeneratePassword(BPasswordKey& password, size_t length, uint32 flags)
+status_t BKeyStore::GeneratePassword(BPasswordKey& password, size_t length, uint32 flags)
 {
 	return B_ERROR;
 }
@@ -409,8 +377,7 @@ BKeyStore::PasswordStrength(const char* password)
 // #pragma mark - Private functions
 
 
-status_t
-BKeyStore::_SendKeyMessage(BMessage& message, BMessage* reply) const
+status_t BKeyStore::_SendKeyMessage(BMessage& message, BMessage* reply) const
 {
 	BMessage localReply;
 	if (reply == NULL)

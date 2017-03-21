@@ -224,8 +224,7 @@ RegExp::~RegExp()
 }
 
 
-bool
-RegExp::SetPattern(const char* pattern, PatternType patternType,
+bool RegExp::SetPattern(const char* pattern, PatternType patternType,
 	bool caseSensitive)
 {
 	if (fData != NULL) {
@@ -306,8 +305,7 @@ RegExp::MatchResult::~MatchResult()
 }
 
 
-bool
-RegExp::MatchResult::HasMatched() const
+bool RegExp::MatchResult::HasMatched() const
 {
 	return fData != NULL && fData->MatchCount() > 0;
 }

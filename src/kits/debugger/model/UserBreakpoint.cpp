@@ -86,8 +86,7 @@ UserBreakpointInstance::UserBreakpointInstance(UserBreakpoint* userBreakpoint,
 }
 
 
-void
-UserBreakpointInstance::SetBreakpoint(Breakpoint* breakpoint)
+void UserBreakpointInstance::SetBreakpoint(Breakpoint* breakpoint)
 {
 	fBreakpoint = breakpoint;
 }
@@ -116,8 +115,7 @@ UserBreakpoint::~UserBreakpoint()
 }
 
 
-int32
-UserBreakpoint::CountInstances() const
+int32 UserBreakpoint::CountInstances() const
 {
 	return fInstances.CountItems();
 }
@@ -130,15 +128,13 @@ UserBreakpoint::InstanceAt(int32 index) const
 }
 
 
-bool
-UserBreakpoint::AddInstance(UserBreakpointInstance* instance)
+bool UserBreakpoint::AddInstance(UserBreakpointInstance* instance)
 {
 	return fInstances.AddItem(instance);
 }
 
 
-void
-UserBreakpoint::RemoveInstance(UserBreakpointInstance* instance)
+void UserBreakpoint::RemoveInstance(UserBreakpointInstance* instance)
 {
 	fInstances.RemoveItem(instance);
 }
@@ -151,29 +147,25 @@ UserBreakpoint::RemoveInstanceAt(int32 index)
 }
 
 
-void
-UserBreakpoint::SetValid(bool valid)
+void UserBreakpoint::SetValid(bool valid)
 {
 	fValid = valid;
 }
 
 
-void
-UserBreakpoint::SetEnabled(bool enabled)
+void UserBreakpoint::SetEnabled(bool enabled)
 {
 	fEnabled = enabled;
 }
 
 
-void
-UserBreakpoint::SetHidden(bool hidden)
+void UserBreakpoint::SetHidden(bool hidden)
 {
 	fHidden = hidden;
 }
 
 
-void
-UserBreakpoint::SetCondition(const BString& conditionExpression)
+void UserBreakpoint::SetCondition(const BString& conditionExpression)
 {
 	fConditionExpression = conditionExpression;
 }

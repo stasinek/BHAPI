@@ -428,8 +428,7 @@ private:
 
 
 template<typename Header, uint32 kMagic, uint16 kVersion, uint16 kMinorVersion>
-status_t
-ReaderImplBase::Init(BPositionIO* file, bool keepFile, Header& header, uint32 flags)
+status_t ReaderImplBase::Init(BPositionIO* file, bool keepFile, Header& header, uint32 flags)
 {
 	status_t error = _Init(file, keepFile);
 	if (error != B_OK)
@@ -539,16 +538,14 @@ ReaderImplBase::CurrentSection()
 }
 
 
-void
-ReaderImplBase::SetCurrentSection(PackageFileSection* section)
+void ReaderImplBase::SetCurrentSection(PackageFileSection* section)
 {
 	fCurrentSection = section;
 }
 
 
 template<typename Type>
-status_t
-ReaderImplBase::_Read(Type& _value)
+status_t ReaderImplBase::_Read(Type& _value)
 {
 	return _ReadSectionBuffer(&_value, sizeof(Type));
 }
@@ -561,8 +558,7 @@ ReaderImplBase::CurrentAttributeHandler() const
 }
 
 
-inline void
-ReaderImplBase::PushAttributeHandler(AttributeHandler* handler)
+inline void ReaderImplBase::PushAttributeHandler(AttributeHandler* handler)
 {
 	fAttributeHandlerStack.Add(handler);
 }
@@ -575,8 +571,7 @@ ReaderImplBase::PopAttributeHandler()
 }
 
 
-inline void
-ReaderImplBase::ClearAttributeHandlerStack()
+inline void ReaderImplBase::ClearAttributeHandlerStack()
 {
 	fAttributeHandlerStack.MakeEmpty();
 }

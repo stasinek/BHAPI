@@ -637,8 +637,7 @@ EXTERNC int OSS_write_patch2 (int fd, unsigned char *buf, int len);
  *
  *	int seqfd;		-- The file descriptor for /dev/sequencer.
  *
- *	void
- *	seqbuf_dump ()
+ *	void  *	seqbuf_dump ()
  *	{
  *	  if (_seqbufptr)
  *	    if (write (seqfd, _seqbuf, _seqbufptr) == -1)

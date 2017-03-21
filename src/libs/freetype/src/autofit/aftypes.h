@@ -295,20 +295,17 @@ extern void*  _af_debug_hints;
   (*AF_Script_InitMetricsFunc)( AF_ScriptMetrics  metrics,
                                 FT_Face           face );
 
-  typedef void
-  (*AF_Script_ScaleMetricsFunc)( AF_ScriptMetrics  metrics,
+  typedef void   (*AF_Script_ScaleMetricsFunc)( AF_ScriptMetrics  metrics,
                                  AF_Scaler         scaler );
 
-  typedef void
-  (*AF_Script_DoneMetricsFunc)( AF_ScriptMetrics  metrics );
+  typedef void   (*AF_Script_DoneMetricsFunc)( AF_ScriptMetrics  metrics );
 
 
   typedef FT_Error
   (*AF_Script_InitHintsFunc)( AF_GlyphHints     hints,
                               AF_ScriptMetrics  metrics );
 
-  typedef void
-  (*AF_Script_ApplyHintsFunc)( AF_GlyphHints     hints,
+  typedef void   (*AF_Script_ApplyHintsFunc)( AF_GlyphHints     hints,
                                FT_Outline*       outline,
                                AF_ScriptMetrics  metrics );
 

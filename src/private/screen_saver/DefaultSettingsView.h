@@ -13,8 +13,7 @@ class BView;
 
 namespace BPrivate {
 
-void
-BuildDefaultSettingsView(BView* view, const char* moduleName, const char* info);
+void BuildDefaultSettingsView(BView* view, const char* moduleName, const char* info);
 
 }	// namespace BPrivate
 

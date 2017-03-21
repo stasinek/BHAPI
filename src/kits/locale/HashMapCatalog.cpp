@@ -54,8 +54,7 @@ CatKey::CatKey()
 }
 
 
-bool
-CatKey::operator== (const CatKey& right) const
+bool CatKey::operator== (const CatKey& right) const
 {
 	// Two keys are equal if their hashval and key (string,context,comment)
 	// are equal (testing only the hash would not filter out collisions):
@@ -66,8 +65,7 @@ CatKey::operator== (const CatKey& right) const
 }
 
 
-bool
-CatKey::operator!= (const CatKey& right) const
+bool CatKey::operator!= (const CatKey& right) const
 {
 	// Two keys are equal if their hashval and key (string,context,comment)
 	// are equal (testing only the hash would not filter out collisions):
@@ -78,8 +76,7 @@ CatKey::operator!= (const CatKey& right) const
 }
 
 
-status_t
-CatKey::GetStringParts(BString* str, BString* ctx, BString* cmt) const
+status_t CatKey::GetStringParts(BString* str, BString* ctx, BString* cmt) const
 {
 	if (str) *str = fString;
 	if (ctx) *ctx = fContext;
@@ -89,8 +86,7 @@ CatKey::GetStringParts(BString* str, BString* ctx, BString* cmt) const
 }
 
 
-uint32
-CatKey::HashFun(const char* s, int startValue) {
+uint32 CatKey::HashFun(const char* s, int startValue) {
 	unsigned long h = startValue;
 	for ( ; *s; ++s)
 		h = 5 * h + *s;
@@ -105,15 +101,13 @@ CatKey::HashFun(const char* s, int startValue) {
 // HashMapCatalog
 
 
-void
-HashMapCatalog::MakeEmpty()
+void HashMapCatalog::MakeEmpty()
 {
 	fCatMap.Clear();
 }
 
 
-int32
-HashMapCatalog::CountItems() const
+int32 HashMapCatalog::CountItems() const
 {
 	return fCatMap.Size();
 }
@@ -147,8 +141,7 @@ HashMapCatalog::GetString(const CatKey& key)
 }
 
 
-static status_t
-parseQuotedChars(BString& stringToParse)
+static status_t parseQuotedChars(BString& stringToParse)
 {
 	char* in = stringToParse.LockBuffer(0);
 	if (in == NULL)
@@ -201,8 +194,7 @@ parseQuotedChars(BString& stringToParse)
 }
 
 
-status_t
-HashMapCatalog::SetString(const char *string, const char *translated,
+status_t HashMapCatalog::SetString(const char *string, const char *translated,
 	const char *context, const char *comment)
 {
 	BString stringCopy(string);
@@ -224,8 +216,7 @@ HashMapCatalog::SetString(const char *string, const char *translated,
 }
 
 
-status_t
-HashMapCatalog::SetString(int32 id, const char *translated)
+status_t HashMapCatalog::SetString(int32 id, const char *translated)
 {
 	BString translatedCopy(translated);
 	status_t result = parseQuotedChars(translatedCopy);
@@ -237,8 +228,7 @@ HashMapCatalog::SetString(int32 id, const char *translated)
 }
 
 
-status_t
-HashMapCatalog::SetString(const CatKey& key, const char *translated)
+status_t HashMapCatalog::SetString(const CatKey& key, const char *translated)
 {
 	BString translatedCopy(translated);
 	status_t result = parseQuotedChars(translatedCopy);
@@ -257,8 +247,7 @@ HashMapCatalog::SetString(const CatKey& key, const char *translated)
  * checksum algorithm that gives the same result if the string are sorted in the
  * wrong order, and this does happen, as an hash map is an unsorted container.
  */
-uint32
-HashMapCatalog::ComputeFingerprint() const
+uint32 HashMapCatalog::ComputeFingerprint() const
 {
 	uint32 checksum = 0;
 
@@ -275,8 +264,7 @@ HashMapCatalog::ComputeFingerprint() const
 }
 
 
-void
-HashMapCatalog::UpdateFingerprint()
+void HashMapCatalog::UpdateFingerprint()
 {
 	fFingerprint = ComputeFingerprint();
 }

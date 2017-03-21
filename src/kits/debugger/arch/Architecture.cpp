@@ -40,15 +40,13 @@ Architecture::~Architecture()
 }
 
 
-status_t
-Architecture::Init()
+status_t Architecture::Init()
 {
 	return B_OK;
 }
 
 
-status_t
-Architecture::InitRegisterRules(CfaContext& context) const
+status_t Architecture::InitRegisterRules(CfaContext& context) const
 {
 	// Init the initial register rules. The DWARF 3 specs on the
 	// matter: "The default rule for all columns before
@@ -93,8 +91,7 @@ Architecture::InitRegisterRules(CfaContext& context) const
 }
 
 
-status_t
-Architecture::CreateStackTrace(Team* team,
+status_t Architecture::CreateStackTrace(Team* team,
 	ImageDebugInfoProvider* imageInfoProvider, CpuState* cpuState,
 	StackTrace*& _stackTrace, ReturnValueInfoList* returnValueInfos,
 	int32 maxStackDepth, bool useExistingTrace, bool getFullFrameInfo)

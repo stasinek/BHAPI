@@ -40,8 +40,7 @@ IntegerValueFormatter::GetSettings() const
 }
 
 
-status_t
-IntegerValueFormatter::FormatValue(Value* _value, BString& _output)
+status_t IntegerValueFormatter::FormatValue(Value* _value, BString& _output)
 {
 	IntegerValue* value = dynamic_cast<IntegerValue*>(_value);
 	if (value == NULL)
@@ -62,15 +61,13 @@ IntegerValueFormatter::FormatValue(Value* _value, BString& _output)
 }
 
 
-bool
-IntegerValueFormatter::SupportsValidation() const
+bool IntegerValueFormatter::SupportsValidation() const
 {
 	return true;
 }
 
 
-bool
-IntegerValueFormatter::ValidateFormattedValue(const BString& input,
+bool IntegerValueFormatter::ValidateFormattedValue(const BString& input,
 	type_code type) const
 {
 	::Value* value = NULL;
@@ -78,16 +75,14 @@ IntegerValueFormatter::ValidateFormattedValue(const BString& input,
 }
 
 
-status_t
-IntegerValueFormatter::GetValueFromFormattedInput(const BString& input,
+status_t IntegerValueFormatter::GetValueFromFormattedInput(const BString& input,
 	type_code type, Value*& _output) const
 {
 	return _PerformValidation(input, type, _output, true);
 }
 
 
-status_t
-IntegerValueFormatter::_PerformValidation(const BString& input, type_code type,
+status_t IntegerValueFormatter::_PerformValidation(const BString& input, type_code type,
 	::Value*& _output, bool wantsValue) const
 {
 	integer_format format;
@@ -113,8 +108,7 @@ IntegerValueFormatter::_PerformValidation(const BString& input, type_code type,
 }
 
 
-status_t
-IntegerValueFormatter::_ValidateSigned(const BString& input, type_code type,
+status_t IntegerValueFormatter::_ValidateSigned(const BString& input, type_code type,
 	::Value*& _output, bool wantsValue) const
 {
 	const char* text = input.String();
@@ -168,8 +162,7 @@ IntegerValueFormatter::_ValidateSigned(const BString& input, type_code type,
 }
 
 
-status_t
-IntegerValueFormatter::_ValidateUnsigned(const BString& input, type_code type,
+status_t IntegerValueFormatter::_ValidateUnsigned(const BString& input, type_code type,
 	::Value*& _output, integer_format format, bool wantsValue) const
 {
 	const char* text = input.String();

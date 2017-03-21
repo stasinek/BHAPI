@@ -361,8 +361,7 @@
    *
    */
 
-  static const char*
-  cff_get_ps_name( CFF_Face  face )
+  static const char*    cff_get_ps_name( CFF_Face  face )
   {
     CFF_Font  cff = (CFF_Font)face->extra.data;
 

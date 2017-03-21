@@ -67,22 +67,22 @@ static void b_beos_clipboard_changed()
 	{
 		BHAPI_DEBUG("[GRAPHICS]: Clipboard message(\"%s\") sending...", str.String());
 		BMessage *clipMsg = NULL;
-		if(bhapi::be_clipboard.Lock())
+		if(bhapi::__be_clipboard.Lock())
 		{
-			if((clipMsg = bhapi::be_clipboard.Data()) != NULL)
+			if((clipMsg = bhapi::__be_clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
 				ssize_t textLen = 0;
 				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
 				   text == NULL || textLen != (ssize_t)str.Length() || str.Compare(text, (__be_int32)textLen) != 0)
 				{
-					bhapi::be_clipboard.Clear();
+					bhapi::__be_clipboard.Clear();
 					clipMsg->AddBool("BHAPI:msg_from_gui", true);
 					clipMsg->AddData("text/plain", B_MIME_TYPE, str.String(), str.Length());
-					bhapi::be_clipboard.Commit();
+					bhapi::__be_clipboard.Commit();
 				}
 			}
-			bhapi::be_clipboard.Unlock();
+			bhapi::__be_clipboard.Unlock();
 		}
 	}
 }
@@ -100,9 +100,9 @@ static bhapi::filter_result b_beos_clipboard_filter(BMessage *message, BHandler 
 		BString str;
 		BMessage *msg;
 
-		bhapi::be_clipboard.Lock();
+		bhapi::__be_clipboard.Lock();
 #if defined(BHAPI_ENABLE_DEBUG) && !defined(BHAPI_DISABLE_MORE_CHECKS)
-		if((msg = bhapi::be_clipboard.Data()) != NULL)
+		if((msg = bhapi::__be_clipboard.Data()) != NULL)
 		{
 			msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 			if(msg->HasBool("BHAPI:msg_from_gui"))
@@ -113,11 +113,11 @@ static bhapi::filter_result b_beos_clipboard_filter(BMessage *message, BHandler 
 			}
 		}
 #else
-		if(!((msg = bhapi::be_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
+		if(!((msg = bhapi::__be_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
 			msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 #endif
 		if(textLen > 0) str.SetTo(text, (__be_int32)textLen);
-		bhapi::be_clipboard.Unlock();
+		bhapi::__be_clipboard.Unlock();
 
 		if(str.Length() <= 0) break;
 
@@ -171,7 +171,7 @@ private:
 
 
 EBePrivateApp::EBePrivateApp(EBeGraphicsEngine *engine)
-	: BApplication(bhapi::be_app->Signature())
+	: BApplication(bhapi::__be_app->Signature())
 {
 	fEngine = engine;
 }
@@ -183,7 +183,7 @@ EBePrivateApp::~EBePrivateApp()
 }
 
 
-void
+void 
 EBePrivateApp::ReadyToRun()
 {
 	fEngine->Lock();
@@ -195,7 +195,7 @@ EBePrivateApp::ReadyToRun()
 }
 
 
-bool
+bool 
 EBePrivateApp::QuitRequested()
 {
 	bool retVal = false;
@@ -204,13 +204,13 @@ EBePrivateApp::QuitRequested()
 	if(fEngine->beDoQuit) retVal = true;
 	fEngine->Unlock();
 
-	if(!retVal) bhapi::be_app->PostMessage(B_QUIT_REQUESTED);
+	if(!retVal) bhapi::__be_app->PostMessage(B_QUIT_REQUESTED);
 
 	return retVal;
 }
 
 
-void
+void 
 EBePrivateApp::MessageReceived(BMessage *msg)
 {
 	if(msg->what == B_CLIPBOARD_CHANGED) b_beos_clipboard_changed();
@@ -265,7 +265,7 @@ EBePrivateAppWin::Run()
 }
 
 
-bool
+bool 
 EBePrivateAppWin::QuitRequested()
 {
 	bool retVal = false;
@@ -274,13 +274,13 @@ EBePrivateAppWin::QuitRequested()
 	if(fEngine->beDoQuit) retVal = true;
 	fEngine->Unlock();
 
-	if(!retVal) bhapi::be_app->PostMessage(B_QUIT_REQUESTED);
+	if(!retVal) bhapi::__be_app->PostMessage(B_QUIT_REQUESTED);
 
 	return retVal;
 }
 
 
-void
+void 
 EBePrivateAppWin::MessageReceived(BMessage *msg)
 {
 	if(msg->what == B_CLIPBOARD_CHANGED) b_beos_clipboard_changed();
@@ -299,7 +299,7 @@ EBeGraphicsEngine::~EBeGraphicsEngine()
 }
 
 
-status_t
+status_t 
 EBeGraphicsEngine::InitCheck()
 {
 	BAutolock <EBeGraphicsEngine> autolock(this);
@@ -308,14 +308,14 @@ EBeGraphicsEngine::InitCheck()
 }
 
 
-bool
+bool 
 EBeGraphicsEngine::Lock()
 {
 	return fLocker.Lock();
 }
 
 
-void
+void 
 EBeGraphicsEngine::Unlock()
 {
 	fLocker.Unlock();
@@ -363,13 +363,13 @@ static status_t b_beos_graphics_task(void *arg)
 }
 
 
-status_t
+status_t 
 EBeGraphicsEngine::Initalize()
 {
 	BMessageFilter *clipboardFilter = new BMessageFilter(B_CLIPBOARD_CHANGED, b_beos_clipboard_filter);
-	bhapi::be_app->Lock();
-	bhapi::be_app->AddFilter(clipboardFilter);
-	bhapi::be_app->Unlock();
+	bhapi::__be_app->Lock();
+	bhapi::__be_app->AddFilter(clipboardFilter);
+	bhapi::__be_app->Unlock();
 
 	Lock();
 
@@ -377,9 +377,9 @@ EBeGraphicsEngine::Initalize()
 	{
 		Unlock();
 
-		bhapi::be_app->Lock();
-		bhapi::be_app->RemoveFilter(clipboardFilter);
-		bhapi::be_app->Unlock();
+		bhapi::__be_app->Lock();
+		bhapi::__be_app->RemoveFilter(clipboardFilter);
+		bhapi::__be_app->Unlock();
 		delete clipboardFilter;
 		return B_OK;
 	}
@@ -389,9 +389,9 @@ EBeGraphicsEngine::Initalize()
 	{
 		Unlock();
 
-		bhapi::be_app->Lock();
-		bhapi::be_app->RemoveFilter(clipboardFilter);
-		bhapi::be_app->Unlock();
+		bhapi::__be_app->Lock();
+		bhapi::__be_app->RemoveFilter(clipboardFilter);
+		bhapi::__be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -409,9 +409,9 @@ EBeGraphicsEngine::Initalize()
 
 		Unlock();
 
-		bhapi::be_app->Lock();
-		bhapi::be_app->RemoveFilter(clipboardFilter);
-		bhapi::be_app->Unlock();
+		bhapi::__be_app->Lock();
+		bhapi::__be_app->RemoveFilter(clipboardFilter);
+		bhapi::__be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -443,9 +443,9 @@ EBeGraphicsEngine::Initalize()
 
 		Unlock();
 
-		bhapi::be_app->Lock();
-		bhapi::be_app->RemoveFilter(clipboardFilter);
-		bhapi::be_app->Unlock();
+		bhapi::__be_app->Lock();
+		bhapi::__be_app->RemoveFilter(clipboardFilter);
+		bhapi::__be_app->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -459,7 +459,7 @@ EBeGraphicsEngine::Initalize()
 }
 
 
-void
+void 
 EBeGraphicsEngine::Cancel()
 {
 	BMessageFilter *clipboardFilter = NULL;
@@ -510,9 +510,9 @@ EBeGraphicsEngine::Cancel()
 
 	if(clipboardFilter != NULL)
 	{
-		bhapi::be_app->Lock();
-		bhapi::be_app->RemoveFilter(clipboardFilter);
-		bhapi::be_app->Unlock();
+		bhapi::__be_app->Lock();
+		bhapi::__be_app->RemoveFilter(clipboardFilter);
+		bhapi::__be_app->Unlock();
 		delete clipboardFilter;
 	}
 }
@@ -539,7 +539,7 @@ EBeGraphicsEngine::CreateWindow(__be_int32 x,  __be_int32 y,  __be_uint32 w,  __
 }
 
 
-status_t
+status_t 
 EBeGraphicsEngine::GetDesktopBounds(__be_uint32 *w,  __be_uint32 *h)
 {
 	BScreen screen(B_MAIN_SCREEN_ID);
@@ -549,7 +549,7 @@ EBeGraphicsEngine::GetDesktopBounds(__be_uint32 *w,  __be_uint32 *h)
 }
 
 
-status_t
+status_t 
 EBeGraphicsEngine::GetCurrentWorkspace(__be_uint32 *workspace)
 {
 	if(workspace) *workspace = (__be_uint32)current_workspace() + 1;
@@ -557,7 +557,7 @@ EBeGraphicsEngine::GetCurrentWorkspace(__be_uint32 *workspace)
 }
 
 
-status_t
+status_t 
 EBeGraphicsEngine::SetCursor(const void *cursor_data)
 {
 	if(cursor_data)
@@ -574,7 +574,7 @@ EBeGraphicsEngine::SetCursor(const void *cursor_data)
 }
 
 
-status_t
+status_t 
 EBeGraphicsEngine::GetDefaultCursor(BCursor *cursor)
 {
 	if(cursor == NULL) return B_ERROR;

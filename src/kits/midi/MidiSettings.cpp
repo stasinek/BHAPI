@@ -17,8 +17,7 @@
 
 namespace BPrivate {
 
-status_t
-read_midi_settings(struct midi_settings* settings)
+status_t read_midi_settings(struct midi_settings* settings)
 {
 	if (settings == NULL)
 		return B_ERROR;
@@ -42,8 +41,7 @@ read_midi_settings(struct midi_settings* settings)
 }
 
 
-status_t
-write_midi_settings(struct midi_settings settings)
+status_t write_midi_settings(struct midi_settings settings)
 {
 	char buffer[B_FILE_NAME_LENGTH + 128];
 	snprintf(buffer, sizeof(buffer), "# Midi Settings\n soundfont = %s\n",

@@ -93,8 +93,7 @@ struct dano_variable_size_array {
 } _PACKED;
 
 
-inline int32
-pad_to_8(int32 value)
+inline int32 pad_to_8(int32 value)
 {
 	return (value + 7) & ~7;
 }
@@ -113,8 +112,7 @@ MessageAdapter::FlattenedSize(uint32 format, const BMessage *from)
 }
 
 
-/*static*/ status_t
-MessageAdapter::Flatten(uint32 format, const BMessage *from, char *buffer,
+/*static*/ status_t MessageAdapter::Flatten(uint32 format, const BMessage *from, char *buffer,
 	ssize_t *size)
 {
 	switch (format) {
@@ -127,8 +125,7 @@ MessageAdapter::Flatten(uint32 format, const BMessage *from, char *buffer,
 }
 
 
-/*static*/ status_t
-MessageAdapter::Flatten(uint32 format, const BMessage *from, BDataIO *stream,
+/*static*/ status_t MessageAdapter::Flatten(uint32 format, const BMessage *from, BDataIO *stream,
 	ssize_t *size)
 {
 	switch (format) {
@@ -165,8 +162,7 @@ MessageAdapter::Flatten(uint32 format, const BMessage *from, BDataIO *stream,
 }
 
 
-/*static*/ status_t
-MessageAdapter::Unflatten(uint32 format, BMessage *into, const char *buffer)
+/*static*/ status_t MessageAdapter::Unflatten(uint32 format, BMessage *into, const char *buffer)
 {
 	if (format == KMessage::kMessageHeaderMagic) {
 		KMessage message;
@@ -217,8 +213,7 @@ MessageAdapter::Unflatten(uint32 format, BMessage *into, const char *buffer)
 }
 
 
-/*static*/ status_t
-MessageAdapter::Unflatten(uint32 format, BMessage *into, BDataIO *stream)
+/*static*/ status_t MessageAdapter::Unflatten(uint32 format, BMessage *into, BDataIO *stream)
 {
 	try {
 		switch (format) {
@@ -239,8 +234,7 @@ MessageAdapter::Unflatten(uint32 format, BMessage *into, BDataIO *stream)
 }
 
 
-/*static*/ status_t
-MessageAdapter::ConvertToKMessage(const BMessage* from, KMessage& to)
+/*static*/ status_t MessageAdapter::ConvertToKMessage(const BMessage* from, KMessage& to)
 {
 	if (from == NULL)
 		return B_BAD_VALUE;
@@ -277,8 +271,7 @@ MessageAdapter::ConvertToKMessage(const BMessage* from, KMessage& to)
 }
 
 
-/*static*/ status_t
-MessageAdapter::_ConvertFromKMessage(const KMessage *fromMessage,
+/*static*/ status_t MessageAdapter::_ConvertFromKMessage(const KMessage *fromMessage,
 	BMessage *toMessage)
 {
 	if (!fromMessage || !toMessage)
@@ -401,8 +394,7 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 }
 
 
-/*static*/ status_t
-MessageAdapter::_FlattenR5Message(uint32 format, const BMessage *from,
+/*static*/ status_t MessageAdapter::_FlattenR5Message(uint32 format, const BMessage *from,
 	char *buffer, ssize_t *size)
 {
 	BMessage::Private messagePrivate((BMessage *)from);
@@ -544,8 +536,7 @@ MessageAdapter::_FlattenR5Message(uint32 format, const BMessage *from,
 }
 
 
-/*static*/ status_t
-MessageAdapter::_UnflattenR5Message(uint32 format, BMessage *into,
+/*static*/ status_t MessageAdapter::_UnflattenR5Message(uint32 format, BMessage *into,
 	BDataIO *stream)
 {
 	into->MakeEmpty();
@@ -700,8 +691,7 @@ MessageAdapter::_UnflattenR5Message(uint32 format, BMessage *into,
 }
 
 
-/*static*/ status_t
-MessageAdapter::_UnflattenDanoMessage(uint32 format, BMessage *into,
+/*static*/ status_t MessageAdapter::_UnflattenDanoMessage(uint32 format, BMessage *into,
 	BDataIO *stream)
 {
 	into->MakeEmpty();

@@ -42,8 +42,7 @@ arch_thread_get_current_thread(void)
 #ifdef __x86_64__
 
 
-static inline void
-arch_thread_set_current_thread(Thread* t)
+static inline void arch_thread_set_current_thread(Thread* t)
 {
 	// Point GS segment base at thread architecture data.
 	t->arch_info.thread = t;
@@ -59,8 +58,7 @@ arch_thread_set_current_thread(Thread* t)
 void arch_syscall_64_bit_return_value(void);
 
 
-static inline void
-arch_thread_set_current_thread(Thread* t)
+static inline void arch_thread_set_current_thread(Thread* t)
 {
 	asm volatile("mov %0, %%gs:0" : : "r" (t) : "memory");
 }

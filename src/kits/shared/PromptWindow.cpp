@@ -59,8 +59,7 @@ PromptWindow::~PromptWindow()
 }
 
 
-void
-PromptWindow::MessageReceived(BMessage* message)
+void PromptWindow::MessageReceived(BMessage* message)
 {
 	switch (message->what)
 	{
@@ -79,16 +78,14 @@ PromptWindow::MessageReceived(BMessage* message)
 }
 
 
-status_t
-PromptWindow::SetTarget(BMessenger messenger)
+status_t PromptWindow::SetTarget(BMessenger messenger)
 {
 	fTarget = messenger;
 	return B_OK;
 }
 
 
-status_t
-PromptWindow::SetMessage(BMessage* message)
+status_t PromptWindow::SetMessage(BMessage* message)
 {
 	delete fMessage;
 	fMessage = message;

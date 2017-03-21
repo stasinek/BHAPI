@@ -16,7 +16,7 @@
 #include <Accelerant.h>
 #include <Drivers.h>
 #include <PCI.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include "vm_device_version.h"
 #include "svga_reg.h"

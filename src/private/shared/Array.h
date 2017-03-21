@@ -13,7 +13,7 @@
 #include <Haiku.h>
 
 #if DEBUG
-#	include <OS.h>
+#	include <kernel/OS.h>
 #endif
 
 
@@ -90,8 +90,7 @@ Array<Element>::~Array()
 
 
 template<typename Element>
-bool
-Array<Element>::Add(const Element& element)
+bool Array<Element>::Add(const Element& element)
 {
 	if (!_Resize(fSize, 1))
 		return false;
@@ -103,16 +102,14 @@ Array<Element>::Add(const Element& element)
 
 
 template<typename Element>
-inline bool
-Array<Element>::AddUninitialized(int32 elementCount)
+inline bool Array<Element>::AddUninitialized(int32 elementCount)
 {
 	return InsertUninitialized(fSize, elementCount);
 }
 
 
 template<typename Element>
-bool
-Array<Element>::Insert(const Element& element, int32 index)
+bool Array<Element>::Insert(const Element& element, int32 index)
 {
 	if (index < 0 || index > fSize)
 		index = fSize;
@@ -127,8 +124,7 @@ Array<Element>::Insert(const Element& element, int32 index)
 
 
 template<typename Element>
-bool
-Array<Element>::InsertUninitialized(int32 index, int32 count)
+bool Array<Element>::InsertUninitialized(int32 index, int32 count)
 {
 	if (index < 0 || index > fSize || count < 0)
 		return false;
@@ -144,8 +140,7 @@ Array<Element>::InsertUninitialized(int32 index, int32 count)
 
 
 template<typename Element>
-bool
-Array<Element>::Remove(int32 index, int32 count)
+bool Array<Element>::Remove(int32 index, int32 count)
 {
 	if (index < 0 || count < 0 || index + count > fSize) {
 #if DEBUG
@@ -172,8 +167,7 @@ Array<Element>::Remove(int32 index, int32 count)
 
 
 template<typename Element>
-void
-Array<Element>::Clear()
+void Array<Element>::Clear()
 {
 	if (fSize == 0)
 		return;
@@ -187,8 +181,7 @@ Array<Element>::Clear()
 
 
 template<typename Element>
-void
-Array<Element>::MakeEmpty()
+void Array<Element>::MakeEmpty()
 {
 	Clear();
 }
@@ -242,8 +235,7 @@ Array<Element>::operator=(const Array<Element>& other)
 
 
 template<typename Element>
-bool
-Array<Element>::_Resize(int32 index, int32 delta)
+bool Array<Element>::_Resize(int32 index, int32 delta)
 {
 	// determine new capacity
 	int32 newSize = fSize + delta;

@@ -96,8 +96,7 @@ BOptionPopUp::MenuField()
 	\return \c true if The wanted option was found,
 			\c false otherwise.
 */ 
-bool
-BOptionPopUp::GetOptionAt(int32 index, const char** outName, int32* outValue)
+bool BOptionPopUp::GetOptionAt(int32 index, const char** outName, int32* outValue)
 {
 	bool result = false;
 	BMenu* menu = fMenuField->Menu();
@@ -121,8 +120,7 @@ BOptionPopUp::GetOptionAt(int32 index, const char** outName, int32* outValue)
 /*! \brief Removes the option at the given index.
 	\param index The index of the option to remove.
 */
-void
-BOptionPopUp::RemoveOptionAt(int32 index)
+void BOptionPopUp::RemoveOptionAt(int32 index)
 {
 	BMenu* menu = fMenuField->Menu();
 	if (menu != NULL)
@@ -132,8 +130,7 @@ BOptionPopUp::RemoveOptionAt(int32 index)
 
 /*! \brief Returns the amount of "Options" (entries) contained in the control.
 */
-int32
-BOptionPopUp::CountOptions() const
+int32 BOptionPopUp::CountOptions() const
 {
 	BMenu* menu = fMenuField->Menu();	
 	return (menu != NULL) ? menu->CountItems() : 0;
@@ -148,8 +145,7 @@ BOptionPopUp::CountOptions() const
 		\c B_BAD_VALUE if the given index was invalid.
 		\c B_ERROR if something else happened.
 */
-status_t
-BOptionPopUp::AddOptionAt(const char* name, int32 value, int32 index)
+status_t BOptionPopUp::AddOptionAt(const char* name, int32 value, int32 index)
 {
 	BMenu* menu = fMenuField->Menu();
 	if (menu == NULL)
@@ -185,8 +181,7 @@ BOptionPopUp::AddOptionAt(const char* name, int32 value, int32 index)
 
 
 // BeOS R5 compatibility, do not remove
-void
-BOptionPopUp::AllAttached()
+void BOptionPopUp::AllAttached()
 {
 	BOptionControl::AllAttached();
 }
@@ -194,8 +189,7 @@ BOptionPopUp::AllAttached()
 
 /*! \brief Sets the divider for the BMenuField and target the menu items to ourselves.
 */
-void
-BOptionPopUp::AttachedToWindow()
+void BOptionPopUp::AttachedToWindow()
 {
 	BOptionControl::AttachedToWindow();
 
@@ -210,8 +204,7 @@ BOptionPopUp::AttachedToWindow()
 }
 
 
-void
-BOptionPopUp::MessageReceived(BMessage* message)
+void BOptionPopUp::MessageReceived(BMessage* message)
 {
 	BOptionControl::MessageReceived(message);
 }
@@ -220,8 +213,7 @@ BOptionPopUp::MessageReceived(BMessage* message)
 /*! \brief Set the label of the control.
 	\param text The new label of the control.
 */
-void
-BOptionPopUp::SetLabel(const char* text)
+void BOptionPopUp::SetLabel(const char* text)
 {
 	BControl::SetLabel(text);
 	fMenuField->SetLabel(text);
@@ -238,8 +230,7 @@ BOptionPopUp::SetLabel(const char* text)
 	\param value The new value of the control.
 	Selects the option which has the given value.
 */
-void
-BOptionPopUp::SetValue(int32 value)
+void BOptionPopUp::SetValue(int32 value)
 {
 	BControl::SetValue(value);
 	BMenu* menu = fMenuField->Menu();
@@ -264,8 +255,7 @@ BOptionPopUp::SetValue(int32 value)
 /*! \brief Enables or disables the control.
 	\param state The new control's state.
 */
-void
-BOptionPopUp::SetEnabled(bool state)
+void BOptionPopUp::SetEnabled(bool state)
 {
 	BOptionControl::SetEnabled(state);
 	if (fMenuField)
@@ -279,8 +269,7 @@ BOptionPopUp::SetEnabled(bool state)
 	\param height A pointer to a float which will held the control's
 		preferred height.
 */
-void
-BOptionPopUp::GetPreferredSize(float* _width, float* _height)
+void BOptionPopUp::GetPreferredSize(float* _width, float* _height)
 {
 	float width, height;
 	fMenuField->GetPreferredSize(&width, &height);
@@ -303,8 +292,7 @@ BOptionPopUp::GetPreferredSize(float* _width, float* _height)
 
 /*! \brief Resizes the control to its preferred size.
 */
-void
-BOptionPopUp::ResizeToPreferred()
+void BOptionPopUp::ResizeToPreferred()
 {
 	float width, height;
 	GetPreferredSize(&width, &height);
@@ -320,8 +308,7 @@ BOptionPopUp::ResizeToPreferred()
 	\param outValue A pointer to an integer which will held the option's value.
 	\return The index of the selected option.
 */
-int32
-BOptionPopUp::SelectedOption(const char** outName, int32* outValue) const
+int32 BOptionPopUp::SelectedOption(const char** outName, int32* outValue) const
 {
 	BMenu* menu = fMenuField->Menu();
 	if (menu == NULL)

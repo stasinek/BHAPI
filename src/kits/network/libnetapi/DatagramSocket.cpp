@@ -38,22 +38,19 @@ BDatagramSocket::~BDatagramSocket()
 }
 
 
-status_t
-BDatagramSocket::Bind(const BNetworkAddress& local)
+status_t BDatagramSocket::Bind(const BNetworkAddress& local)
 {
 	return BAbstractSocket::Bind(local, SOCK_DGRAM);
 }
 
 
-status_t
-BDatagramSocket::Connect(const BNetworkAddress& peer, bigtime_t timeout)
+status_t BDatagramSocket::Connect(const BNetworkAddress& peer, bigtime_t timeout)
 {
 	return BAbstractSocket::Connect(peer, SOCK_DGRAM, timeout);
 }
 
 
-status_t
-BDatagramSocket::SetBroadcast(bool broadcast)
+status_t BDatagramSocket::SetBroadcast(bool broadcast)
 {
 	int value = broadcast ? 1 : 0;
 	if (setsockopt(fSocket, SOL_SOCKET, SO_BROADCAST, &value, sizeof(value))
@@ -64,8 +61,7 @@ BDatagramSocket::SetBroadcast(bool broadcast)
 }
 
 
-void
-BDatagramSocket::SetPeer(const BNetworkAddress& peer)
+void BDatagramSocket::SetPeer(const BNetworkAddress& peer)
 {
 	fPeer = peer;
 }

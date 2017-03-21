@@ -63,7 +63,7 @@ class BStreamIO;
 #endif
 //-----------------------------------------------------------------------------
 #include "../support/List.h"
-#include <OS.h>
+#include <kernel/OS.h>
 //-----------------------------------------------------------------------------
 class BHAPI_IMPEXP BMessage {
 public:
@@ -294,7 +294,7 @@ private:
     bool fIsReply;
 };
 //-----------------------------------------------------------------------------
-/*inline status_t
+/*inline status_t 
 BMessage::BGetInfo(type_code type,  __be_int32 index,
            char **nameFound, type_code *typeFound,  __be_int32 *countFound) const
 {
@@ -320,7 +320,7 @@ BMessage::BGetInfo(type_code type,  __be_int32 index,
 }
 
 
-inline status_t
+inline status_t 
 BMessage::BFindData(const char *name, type_code type,  __be_int32 index,
             const void **data,  ssize_t *numBytes) const
 {
@@ -348,7 +348,7 @@ BMessage::BFindData(const char *name, type_code type,  __be_int32 index,
 }
 
 
-inline status_t
+inline status_t 
 BMessage::BFindData(const char *name, type_code type,
             const void **data,  ssize_t *numBytes) const
 {

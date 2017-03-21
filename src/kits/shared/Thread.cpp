@@ -54,8 +54,7 @@ SimpleThread::~SimpleThread()
 }
 
 
-void
-SimpleThread::Go()
+void SimpleThread::Go()
 {
 	fScanThread = spawn_thread(SimpleThread::RunBinder,
 		fName ? fName : "TrackerTaskLoop", fPriority, this);
@@ -63,8 +62,7 @@ SimpleThread::Go()
 }
 
 
-status_t
-SimpleThread::RunBinder(void* castToThis)
+status_t SimpleThread::RunBinder(void* castToThis)
 {
 	SimpleThread* self = static_cast<SimpleThread*>(castToThis);
 	self->Run();
@@ -72,8 +70,7 @@ SimpleThread::RunBinder(void* castToThis)
 }
 
 
-void
-Thread::Launch(FunctionObject* functor, int32 priority, const char* name)
+void Thread::Launch(FunctionObject* functor, int32 priority, const char* name)
 {
 	new Thread(functor, priority, name);
 }
@@ -93,8 +90,7 @@ Thread::~Thread()
 }
 
 
-void
-Thread::Run()
+void Thread::Run()
 {
 	(*fFunctor)();
 	delete this;
@@ -102,8 +98,7 @@ Thread::Run()
 }
 
 
-void
-ThreadSequence::Launch(BObjectList<FunctionObject>* list, bool async,
+void ThreadSequence::Launch(BObjectList<FunctionObject>* list, bool async,
 	int32 priority)
 {
 	if (!async) {
@@ -129,8 +124,7 @@ ThreadSequence::~ThreadSequence()
 }
 
 
-void
-ThreadSequence::Run(BObjectList<FunctionObject>* list)
+void ThreadSequence::Run(BObjectList<FunctionObject>* list)
 {
 	int32 count = list->CountItems();
 	for (int32 index = 0; index < count; index++)
@@ -138,8 +132,7 @@ ThreadSequence::Run(BObjectList<FunctionObject>* list)
 }
 
 
-void
-ThreadSequence::Run()
+void ThreadSequence::Run()
 {
 	Run(fFunctorList);
 	delete this;

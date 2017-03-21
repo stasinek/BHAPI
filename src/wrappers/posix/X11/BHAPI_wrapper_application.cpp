@@ -49,22 +49,22 @@ static void b_x11_clipboard_changed(const char *aStr)
 	if(aStr == NULL || *aStr == 0) return;
 
 	BMessage *clipMsg = NULL;
-	if(bhapi::be_clipboard.Lock())
+	if(bhapi::__be_clipboard.Lock())
 	{
-		if((clipMsg = bhapi::be_clipboard.Data()) != NULL)
+		if((clipMsg = bhapi::__be_clipboard.Data()) != NULL)
 		{
 			const char *text = NULL;
 			ssize_t textLen = 0;
 			if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
 			   text == NULL || textLen != (ssize_t)strlen(aStr) || strncmp(text, aStr, (size_t)textLen) != 0)
 			{
-				bhapi::be_clipboard.Clear();
+				bhapi::__be_clipboard.Clear();
 				clipMsg->AddBool("BHAPI:msg_from_gui", true);
 				clipMsg->AddData("text/plain", B_MIME_TYPE, aStr, strlen(aStr));
-				bhapi::be_clipboard.Commit();
+				bhapi::__be_clipboard.Commit();
 			}
 		}
-		bhapi::be_clipboard.Unlock();
+		bhapi::__be_clipboard.Unlock();
 	}
 }
 
@@ -90,10 +90,10 @@ public:
 
 			BMessage *msg;
 
-			bhapi::be_clipboard.Lock();
-			if(!((msg = bhapi::be_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
+			bhapi::__be_clipboard.Lock();
+			if(!((msg = bhapi::__be_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
 				msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
-			bhapi::be_clipboard.Unlock();
+			bhapi::__be_clipboard.Unlock();
 
 			if(textLen <= 0) break;
 
@@ -171,7 +171,7 @@ EXGraphicsEngine::~EXGraphicsEngine()
 }
 
 
-bool
+bool 
 EXGraphicsEngine::Lock()
 {
 	if(!fLocker.Lock()) return false;
@@ -186,7 +186,7 @@ EXGraphicsEngine::Lock()
 }
 
 
-void
+void 
 EXGraphicsEngine::Unlock()
 {
 	if(fLocker.CountLocks() <= B_INT64_CONSTANT(0))
@@ -205,7 +205,7 @@ EXGraphicsEngine::Unlock()
 }
 
 
-status_t
+status_t 
 EXGraphicsEngine::InitCheck()
 {
 	BAutolock <EXGraphicsEngine> autolock(this);
@@ -214,7 +214,7 @@ EXGraphicsEngine::InitCheck()
 }
 
 
-bool
+bool 
 EXGraphicsEngine::GetContactor(Window w, BMessenger *msgr)
 {
 	if(w == None || msgr == NULL) return false;
@@ -296,10 +296,10 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				{
 					BString aStr;
 
-					if(bhapi::be_clipboard.Lock())
+					if(bhapi::__be_clipboard.Lock())
 					{
 						BMessage *clipMsg = NULL;
-						if((clipMsg = bhapi::be_clipboard.Data()) != NULL)
+						if((clipMsg = bhapi::__be_clipboard.Data()) != NULL)
 						{
 							const char *text = NULL;
 							ssize_t textLen = 0;
@@ -307,7 +307,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 							if(textLen > 0) aStr.SetTo(text, (__be_int32)textLen);
 						}
 					}
-					bhapi::be_clipboard.Unlock();
+					bhapi::__be_clipboard.Unlock();
 
 					if(aStr.Length() > 0 && event->xselectionrequest.target == x11Engine->atomCompoundText)
 					{
@@ -720,7 +720,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				// TODO: modifiers, clicks
 
 				message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-				etkWinMsgr = BMessenger(bhapi::be_app);
+				etkWinMsgr = BMessenger(bhapi::__be_clipboard);
 				etkWinMsgr.SendMessage(&message);
 			}
 			break;
@@ -751,7 +751,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				// TODO: modifiers
 
 				message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-				etkWinMsgr = BMessenger(bhapi::be_app);
+				etkWinMsgr = BMessenger(bhapi::__be_clipboard);
 				etkWinMsgr.SendMessage(&message);
 			}
 			break;
@@ -775,7 +775,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				message.AddInt32("buttons", buttons);
 
 				message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-				etkWinMsgr = BMessenger(bhapi::be_app);
+				etkWinMsgr = BMessenger(bhapi::__be_clipboard);
 				etkWinMsgr.SendMessage(&message);
 			}
 			break;
@@ -1039,7 +1039,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				}
 
 				message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-				etkWinMsgr = BMessenger(bhapi::be_app);
+				etkWinMsgr = BMessenger(bhapi::__be_clipboard);
 				etkWinMsgr.SendMessage(&message);
 
 				bool dealed = true;
@@ -1219,22 +1219,22 @@ static status_t b_x11_task(void *arg)
 }
 
 
-status_t
+status_t 
 EXGraphicsEngine::Initalize()
 {
 	BMessageFilter *clipboardFilter = new EX11ClipboardMessageFilter(this);
-	bhapi::be_app->Lock();
-	bhapi::be_app->AddFilter(clipboardFilter);
-	bhapi::be_app->Unlock();
+	bhapi::__be_clipboard->Lock();
+	bhapi::__be_clipboard->AddFilter(clipboardFilter);
+	bhapi::__be_clipboard->Unlock();
 
 	Lock();
 	if(fX11Thread != NULL)
 	{
 		Unlock();
 
-		bhapi::be_app->Lock();
-		bhapi::be_app->RemoveFilter(clipboardFilter);
-		bhapi::be_app->Unlock();
+		bhapi::__be_clipboard->Lock();
+		bhapi::__be_clipboard->RemoveFilter(clipboardFilter);
+		bhapi::__be_clipboard->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -1251,9 +1251,9 @@ EXGraphicsEngine::Initalize()
 		Unlock();
 		BHAPI_WARNING("[GRAPHICS]: %s --- Unable to open X11 display!", __PRETTY_FUNCTION__);
 
-		bhapi::be_app->Lock();
-		bhapi::be_app->RemoveFilter(clipboardFilter);
-		bhapi::be_app->Unlock();
+		bhapi::__be_clipboard->Lock();
+		bhapi::__be_clipboard->RemoveFilter(clipboardFilter);
+		bhapi::__be_clipboard->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -1348,9 +1348,9 @@ EXGraphicsEngine::Initalize()
 
 		BHAPI_WARNING("[GRAPHICS]: %s --- Unable to spawn graphics thread!", __PRETTY_FUNCTION__);
 
-		bhapi::be_app->Lock();
-		bhapi::be_app->RemoveFilter(clipboardFilter);
-		bhapi::be_app->Unlock();
+		bhapi::__be_clipboard->Lock();
+		bhapi::__be_clipboard->RemoveFilter(clipboardFilter);
+		bhapi::__be_clipboard->Unlock();
 		delete clipboardFilter;
 		return B_ERROR;
 	}
@@ -1365,7 +1365,7 @@ EXGraphicsEngine::Initalize()
 }
 
 
-void
+void 
 EXGraphicsEngine::Cancel()
 {
 	BMessageFilter *clipboardFilter = NULL;
@@ -1421,9 +1421,9 @@ EXGraphicsEngine::Cancel()
 
 	if(clipboardFilter != NULL)
 	{
-		bhapi::be_app->Lock();
-		bhapi::be_app->RemoveFilter(clipboardFilter);
-		bhapi::be_app->Unlock();
+		bhapi::__be_clipboard->Lock();
+		bhapi::__be_clipboard->RemoveFilter(clipboardFilter);
+		bhapi::__be_clipboard->Unlock();
 		delete clipboardFilter;
 	}
 }
@@ -1450,7 +1450,7 @@ EXGraphicsEngine::CreateWindow(__be_int32 x,  __be_int32 y,  __be_uint32 w,  __b
 }
 
 
-status_t
+status_t 
 EXGraphicsEngine::GetDesktopBounds(__be_uint32 *w,  __be_uint32 *h)
 {
 	BAutolock <EXGraphicsEngine> autolock(this);
@@ -1463,7 +1463,7 @@ EXGraphicsEngine::GetDesktopBounds(__be_uint32 *w,  __be_uint32 *h)
 }
 
 
-status_t
+status_t 
 EXGraphicsEngine::GetCurrentWorkspace(__be_uint32 *workspace)
 {
 	if(workspace == NULL) return B_ERROR;
@@ -1496,7 +1496,7 @@ EXGraphicsEngine::GetCurrentWorkspace(__be_uint32 *workspace)
 }
 
 
-status_t
+status_t 
 EXGraphicsEngine::SetCursor(const void *cursor_data)
 {
 	BAutolock <EXGraphicsEngine> autolock(this);
@@ -1589,14 +1589,14 @@ EXGraphicsEngine::SetCursor(const void *cursor_data)
 }
 
 
-status_t
+status_t 
 EXGraphicsEngine::GetDefaultCursor(BCursor *cursor)
 {
 	return B_ERROR;
 }
 
 
-bool
+bool 
 EXGraphicsEngine::ConvertRegion(const BRegion *region, Region *xRegion)
 {
 	if(xRegion == NULL) return false;
@@ -1636,7 +1636,7 @@ EXGraphicsEngine::ConvertRegion(const BRegion *region, Region *xRegion)
 }
 
 
-bool
+bool 
 EXGraphicsEngine::ConvertRegion(const BRegion *region, XRectangle **xRects, int *nrects)
 {
 	if(xRects == NULL || nrects == NULL) return false;

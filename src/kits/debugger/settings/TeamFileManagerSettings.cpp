@@ -25,15 +25,13 @@ TeamFileManagerSettings::operator=(const TeamFileManagerSettings& other)
 }
 
 
-const char*
-TeamFileManagerSettings::ID() const
+const char*  TeamFileManagerSettings::ID() const
 {
 	return "FileManager";
 }
 
 
-status_t
-TeamFileManagerSettings::SetTo(const BMessage& archive)
+status_t TeamFileManagerSettings::SetTo(const BMessage& archive)
 {
 	try {
 		fValues = archive;
@@ -45,8 +43,7 @@ TeamFileManagerSettings::SetTo(const BMessage& archive)
 }
 
 
-status_t
-TeamFileManagerSettings::WriteTo(BMessage& archive) const
+status_t TeamFileManagerSettings::WriteTo(BMessage& archive) const
 {
 	try {
 		archive = fValues;
@@ -58,8 +55,7 @@ TeamFileManagerSettings::WriteTo(BMessage& archive) const
 }
 
 
-int32
-TeamFileManagerSettings::CountSourceMappings() const
+int32 TeamFileManagerSettings::CountSourceMappings() const
 {
 	type_code type;
 	int32 count = 0;
@@ -71,8 +67,7 @@ TeamFileManagerSettings::CountSourceMappings() const
 }
 
 
-status_t
-TeamFileManagerSettings::AddSourceMapping(const BString& sourcePath,
+status_t TeamFileManagerSettings::AddSourceMapping(const BString& sourcePath,
 	const BString& locatedPath)
 {
 	BMessage mapping;
@@ -86,15 +81,13 @@ TeamFileManagerSettings::AddSourceMapping(const BString& sourcePath,
 }
 
 
-status_t
-TeamFileManagerSettings::RemoveSourceMappingAt(int32 index)
+status_t TeamFileManagerSettings::RemoveSourceMappingAt(int32 index)
 {
 	return fValues.RemoveData("source:mapping", index);
 }
 
 
-status_t
-TeamFileManagerSettings::GetSourceMappingAt(int32 index, BString& sourcePath,
+status_t TeamFileManagerSettings::GetSourceMappingAt(int32 index, BString& sourcePath,
 	BString& locatedPath)
 {
 	BMessage mapping;

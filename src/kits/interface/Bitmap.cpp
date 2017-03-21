@@ -59,14 +59,14 @@ BBitmapWindow::~BBitmapWindow()
 }
 
 
-bool
+bool 
 BBitmapWindow::IsDependsOnOthersWhenQuitRequested() const
 {
 	return true;
 }
 
 
-void
+void 
 BBitmap::InitSelf(BRect bounds, bool acceptsViews)
 {
 	fRows = 0;
@@ -158,14 +158,14 @@ BBitmap::~BBitmap()
 }
 
 
-status_t
+status_t 
 BBitmap::InitCheck() const
 {
 	return(fPixmap != NULL ? B_OK : B_ERROR);
 }
 
 
-bool
+bool 
 BBitmap::IsValid() const
 {
 	return(fPixmap != NULL);
@@ -180,14 +180,14 @@ BBitmap::Bounds() const
 }
 
 
-void
+void 
 BBitmap::AddChild(BView *view)
 {
 	if(fWindow != NULL) fWindow->AddChild(view);
 }
 
 
-bool
+bool 
 BBitmap::RemoveChild(BView *view)
 {
 	return(fWindow != NULL ? fWindow->RemoveChild(view) : false);
@@ -222,14 +222,14 @@ BBitmap::FindView(BPoint where) const
 }
 
 
-bool
+bool 
 BBitmap::Lock()
 {
 	return(fWindow != NULL ? fWindow->Lock() : false);
 }
 
 
-void
+void 
 BBitmap::Unlock()
 {
 	if(fWindow != NULL) fWindow->Unlock();

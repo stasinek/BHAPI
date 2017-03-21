@@ -149,8 +149,7 @@ FT_BEGIN_HEADER
   (*FT_CMap_InitFunc)( FT_CMap     cmap,
                        FT_Pointer  init_data );
 
-  typedef void
-  (*FT_CMap_DoneFunc)( FT_CMap  cmap );
+  typedef void   (*FT_CMap_DoneFunc)( FT_CMap  cmap );
 
   typedef FT_UInt
   (*FT_CMap_CharIndexFunc)( FT_CMap    cmap,
@@ -808,8 +807,7 @@ FT_BEGIN_HEADER
                             FT_GlyphSlot    slot,
                             FT_Render_Mode  render_mode );
 
-  typedef const char*
-  (*FT_Face_GetPostscriptNameFunc)( FT_Face  face );
+  typedef const char*    (*FT_Face_GetPostscriptNameFunc)( FT_Face  face );
 
   typedef FT_Error
   (*FT_Face_GetGlyphNameFunc)( FT_Face     face,

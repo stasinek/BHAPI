@@ -52,7 +52,7 @@ BMemory::Malloc(size_t size, void (*destroy_func)(void*))
 }
 
 
-void
+void 
 BMemory::Free(void *data)
 {
 	b_mem *mem = NULL;

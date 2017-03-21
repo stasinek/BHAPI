@@ -35,8 +35,7 @@ struct natural_chunk {
 };
 
 
-inline int32
-FetchNaturalChunk(natural_chunk& chunk, const char* source)
+inline int32 FetchNaturalChunk(natural_chunk& chunk, const char* source)
 {
 	if (chunk.type == natural_chunk::ASCII) {
 		// string chunk

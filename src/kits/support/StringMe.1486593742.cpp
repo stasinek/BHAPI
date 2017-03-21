@@ -270,8 +270,7 @@ static char* b_strrcasechr(const char *s, int c)
 #define MAX_STRING_LENGTH	(B_MAXINT32 - 1)
 
 
-bool
-BString::SetMinimumBufferSize(__be_int32 length)
+bool BString::SetMinimumBufferSize(__be_int32 length)
 {
 	if(length > MAX_STRING_LENGTH + 1) return false;
 
@@ -293,15 +292,13 @@ BString::SetMinimumBufferSize(__be_int32 length)
 }
 
 
-be_int32
-BString::MinimumBufferSize() const
+be_int32 BString::MinimumBufferSize() const
 {
 	return fMinBufferSize;
 }
 
 
-bool
-BString::_Resize(__be_int32 length)
+bool BString::_Resize(__be_int32 length)
 {
 	if(length <= 0)
 	{
@@ -410,15 +407,13 @@ BString::~BString()
 }
 
 
-const char*
-BString::String() const
+const char*  BString::String() const
 {
 	return fBuffer;
 }
 
 
-be_int32
-BString::Length() const
+be_int32 BString::Length() const
 {
 	return fLen;
 }
@@ -526,8 +521,7 @@ BString::CopyInto(BString &into,  __be_int32 fromOffset,  __be_int32 length) con
 }
 
 
-void
-BString::CopyInto(char *into, size_t into_size,  __be_int32 fromOffset,  __be_int32 length) const
+void BString::CopyInto(char *into, size_t into_size,  __be_int32 fromOffset,  __be_int32 length) const
 {
 	if(!into || into_size <= 0) return;
 	if(fromOffset < 0 || fromOffset >= fLen) return;
@@ -560,8 +554,7 @@ BString::MoveInto(BString &into,  __be_int32 from,  __be_int32 length)
 }
 
 
-void
-BString::MoveInto(char *into, size_t into_size,  __be_int32 from,  __be_int32 length)
+void BString::MoveInto(char *into, size_t into_size,  __be_int32 from,  __be_int32 length)
 {
 	if(!into || into_size <= 0) return;
 	if(from < 0 || from >= fLen) return;
@@ -579,8 +572,7 @@ BString::MoveInto(char *into, size_t into_size,  __be_int32 from,  __be_int32 le
 }
 
 
-void
-BString::MakeEmpty()
+void BString::MakeEmpty()
 {
 	Remove(0, -1);
 }
@@ -1044,22 +1036,19 @@ BString::IRemoveSet(const char *setOfCharsToRemove)
 }
 
 
-bool
-BString::operator<(const BString &str) const
+bool BString::operator<(const BString &str) const
 {
 	return(Compare(str) < 0);
 }
 
 
-bool
-BString::operator<=(const BString &str) const
+bool BString::operator<=(const BString &str) const
 {
 	return(Compare(str) <= 0);
 }
 
 
-bool
-BString::operator==(const BString &str) const
+bool BString::operator==(const BString &str) const
 {
     const char *a = this->String();
     const char *b = str.String();
@@ -1071,43 +1060,37 @@ BString::operator==(const BString &str) const
 }
 
 
-bool
-BString::operator>=(const BString &str) const
+bool BString::operator>=(const BString &str) const
 {
 	return(Compare(str) >= 0);
 }
 
 
-bool
-BString::operator>(const BString &str) const
+bool BString::operator>(const BString &str) const
 {
 	return(Compare(str) > 0);
 }
 
 
-bool
-BString::operator!=(const BString &str) const
+bool BString::operator!=(const BString &str) const
 {
 	return !operator==(str);
 }
 
 
-bool
-BString::operator<(const char *str) const
+bool BString::operator<(const char *str) const
 {
 	return(Compare(str) < 0);
 }
 
 
-bool
-BString::operator<=(const char *str) const
+bool BString::operator<=(const char *str) const
 {
 	return(Compare(str) <= 0);
 }
 
 
-bool
-BString::operator==(const char *str) const
+bool BString::operator==(const char *str) const
 {
     const char *a = this->String();
 	const char *b = str;
@@ -1119,22 +1102,19 @@ BString::operator==(const char *str) const
 }
 
 
-bool
-BString::operator>=(const char *str) const
+bool BString::operator>=(const char *str) const
 {
 	return(Compare(str) >= 0);
 }
 
 
-bool
-BString::operator>(const char *str) const
+bool BString::operator>(const char *str) const
 {
 	return(Compare(str) > 0);
 }
 
 
-bool
-BString::operator!=(const char *str) const
+bool BString::operator!=(const char *str) const
 {
 	return !operator==(str);
 }
@@ -1244,8 +1224,7 @@ BString::ICompare(const char *str,  __be_int32 n) const
 }
 
 
-be_int32
-BString::FindFirst(const BString &string) const
+be_int32 BString::FindFirst(const BString &string) const
 {
     if(this->String() == NULL || string.String() == NULL) return -1;
 
@@ -1257,8 +1236,7 @@ BString::FindFirst(const BString &string) const
 }
 
 
-be_int32
-BString::FindFirst(const char *string) const
+be_int32 BString::FindFirst(const char *string) const
 {
     if(this->String() == NULL || string == NULL || *string == 0) return -1;
 
@@ -1270,8 +1248,7 @@ BString::FindFirst(const char *string) const
 }
 
 
-be_int32
-BString::FindFirst(const BString &string,  __be_int32 fromOffset) const
+be_int32 BString::FindFirst(const BString &string,  __be_int32 fromOffset) const
 {
     if(this->String() == NULL || string.String() == NULL || fromOffset < 0 || fromOffset >= Length()) return -1;
 
@@ -1284,8 +1261,7 @@ BString::FindFirst(const BString &string,  __be_int32 fromOffset) const
 }
 
 
-be_int32
-BString::FindFirst(const char *string,  __be_int32 fromOffset) const
+be_int32 BString::FindFirst(const char *string,  __be_int32 fromOffset) const
 {
     if(this->String() == NULL || string == NULL || *string == 0 || fromOffset < 0 || fromOffset >= Length()) return -1;
 
@@ -1298,8 +1274,7 @@ BString::FindFirst(const char *string,  __be_int32 fromOffset) const
 }
 
 
-be_int32
-BString::FindFirst(char c) const
+be_int32 BString::FindFirst(char c) const
 {
     if(this->String() == NULL || c == 0) return -1;
 
@@ -1311,8 +1286,7 @@ BString::FindFirst(char c) const
 }
 
 
-be_int32
-BString::FindFirst(char c,  __be_int32 fromOffset) const
+be_int32 BString::FindFirst(char c,  __be_int32 fromOffset) const
 {
     if(this->String() == NULL || c == 0 || fromOffset < 0 || fromOffset >= Length()) return -1;
 
@@ -1325,8 +1299,7 @@ BString::FindFirst(char c,  __be_int32 fromOffset) const
 }
 
 
-be_int32
-BString::FindLast(const BString &string) const
+be_int32 BString::FindLast(const BString &string) const
 {
     if(this->String() == NULL || string.String() == NULL) return -1;
 
@@ -1338,8 +1311,7 @@ BString::FindLast(const BString &string) const
 }
 
 
-be_int32
-BString::FindLast(const char *string) const
+be_int32 BString::FindLast(const char *string) const
 {
     if(this->String() == NULL || string == NULL || *string == 0) return -1;
 
@@ -1351,8 +1323,7 @@ BString::FindLast(const char *string) const
 }
 
 
-be_int32
-BString::FindLast(const BString &string,  __be_int32 beforeOffset) const
+be_int32 BString::FindLast(const BString &string,  __be_int32 beforeOffset) const
 {
     if(this->String() == NULL || string.String() == NULL || beforeOffset < 0 || beforeOffset >= Length()) return -1;
 
@@ -1370,8 +1341,7 @@ BString::FindLast(const BString &string,  __be_int32 beforeOffset) const
 }
 
 
-be_int32
-BString::FindLast(const char *string,  __be_int32 beforeOffset) const
+be_int32 BString::FindLast(const char *string,  __be_int32 beforeOffset) const
 {
     if(this->String() == NULL || string == NULL || *string == 0 || beforeOffset < 0 || beforeOffset >= Length()) return -1;
 
@@ -1389,8 +1359,7 @@ BString::FindLast(const char *string,  __be_int32 beforeOffset) const
 }
 
 
-be_int32
-BString::FindLast(char c) const
+be_int32 BString::FindLast(char c) const
 {
     if(this->String() == 0 || c == 0) return -1;
 
@@ -1402,8 +1371,7 @@ BString::FindLast(char c) const
 }
 
 
-be_int32
-BString::FindLast(char c,  __be_int32 beforeOffset) const
+be_int32 BString::FindLast(char c,  __be_int32 beforeOffset) const
 {
     if(this->String() == NULL || c == 0 || beforeOffset < 0 || beforeOffset >= Length()) return -1;
 
@@ -1421,8 +1389,7 @@ BString::FindLast(char c,  __be_int32 beforeOffset) const
 }
 
 
-be_int32
-BString::IFindFirst(const BString &string) const
+be_int32 BString::IFindFirst(const BString &string) const
 {
     if(this->String() == NULL || string.String() == NULL) return -1;
 
@@ -1434,8 +1401,7 @@ BString::IFindFirst(const BString &string) const
 }
 
 
-be_int32
-BString::IFindFirst(const char *string) const
+be_int32 BString::IFindFirst(const char *string) const
 {
     if(this->String() == NULL || string == NULL || *string == 0) return -1;
 
@@ -1447,8 +1413,7 @@ BString::IFindFirst(const char *string) const
 }
 
 
-be_int32
-BString::IFindFirst(const BString &string,  __be_int32 fromOffset) const
+be_int32 BString::IFindFirst(const BString &string,  __be_int32 fromOffset) const
 {
     if(this->String() == NULL || string.String() == NULL || fromOffset < 0 || fromOffset >= Length()) return -1;
 
@@ -1461,8 +1426,7 @@ BString::IFindFirst(const BString &string,  __be_int32 fromOffset) const
 }
 
 
-be_int32
-BString::IFindFirst(const char *string,  __be_int32 fromOffset) const
+be_int32 BString::IFindFirst(const char *string,  __be_int32 fromOffset) const
 {
     if(this->String() == NULL || string == NULL || *string == 0 || fromOffset < 0 || fromOffset >= Length()) return -1;
 
@@ -1475,8 +1439,7 @@ BString::IFindFirst(const char *string,  __be_int32 fromOffset) const
 }
 
 
-be_int32
-BString::IFindFirst(char c) const
+be_int32 BString::IFindFirst(char c) const
 {
     if(this->String() == NULL || c == 0) return -1;
 
@@ -1488,8 +1451,7 @@ BString::IFindFirst(char c) const
 }
 
 
-be_int32
-BString::IFindFirst(char c,  __be_int32 fromOffset) const
+be_int32 BString::IFindFirst(char c,  __be_int32 fromOffset) const
 {
     if(this->String() == NULL || c == 0 || fromOffset < 0 || fromOffset >= Length()) return -1;
 
@@ -1502,8 +1464,7 @@ BString::IFindFirst(char c,  __be_int32 fromOffset) const
 }
 
 
-be_int32
-BString::IFindLast(const BString &string) const
+be_int32 BString::IFindLast(const BString &string) const
 {
     if(this->String() == NULL || string.String() == NULL) return -1;
 
@@ -1515,8 +1476,7 @@ BString::IFindLast(const BString &string) const
 }
 
 
-be_int32
-BString::IFindLast(const char *string) const
+be_int32 BString::IFindLast(const char *string) const
 {
     if(this->String() == NULL || string == NULL || *string == 0) return -1;
 
@@ -1528,8 +1488,7 @@ BString::IFindLast(const char *string) const
 }
 
 
-be_int32
-BString::IFindLast(const BString &string,  __be_int32 beforeOffset) const
+be_int32 BString::IFindLast(const BString &string,  __be_int32 beforeOffset) const
 {
     if(this->String() == NULL || string.String() == NULL || beforeOffset < 0 || beforeOffset >= Length()) return -1;
 
@@ -1547,8 +1506,7 @@ BString::IFindLast(const BString &string,  __be_int32 beforeOffset) const
 }
 
 
-be_int32
-BString::IFindLast(const char *string,  __be_int32 beforeOffset) const
+be_int32 BString::IFindLast(const char *string,  __be_int32 beforeOffset) const
 {
     if(this->String() == NULL || string == NULL || *string == 0 || beforeOffset < 0 || beforeOffset >= Length()) return -1;
 
@@ -1566,8 +1524,7 @@ BString::IFindLast(const char *string,  __be_int32 beforeOffset) const
 }
 
 
-be_int32
-BString::IFindLast(char c) const
+be_int32 BString::IFindLast(char c) const
 {
     if(this->String() == NULL || c == 0) return -1;
 
@@ -1579,8 +1536,7 @@ BString::IFindLast(char c) const
 }
 
 
-be_int32
-BString::IFindLast(char c,  __be_int32 beforeOffset) const
+be_int32 BString::IFindLast(char c,  __be_int32 beforeOffset) const
 {
     if(this->String() == NULL || c == 0 || beforeOffset < 0 || beforeOffset >= Length()) return -1;
 
@@ -2153,8 +2109,7 @@ BString::CapitalizeEachWord()
 }
 
 
-bool
-BString::IsNumber() const
+bool BString::IsNumber() const
 {
     const char *s = this->String();
 	__be_int32 length = Length();
@@ -2204,8 +2159,7 @@ BString::IsNumber() const
 }
 
 
-bool
-BString::IsInteger() const
+bool BString::IsInteger() const
 {
 	if(!IsNumber()) return false;
 
@@ -2230,8 +2184,7 @@ BString::IsInteger() const
 }
 
 
-bool
-BString::IsDecimal() const
+bool BString::IsDecimal() const
 {
 	if(!IsNumber()) return false;
 
@@ -2262,8 +2215,7 @@ bool b_get_hex(const BString &str, TYPE_INT *value)
 }
 
 
-bool
-BString::GetDecimal(float *value) const
+bool BString::GetDecimal(float *value) const
 {
 #if !(defined(_MSC_VER) && _MSC_VER <= 0x4b0)
 
@@ -2287,8 +2239,7 @@ BString::GetDecimal(float *value) const
 }
 
 
-bool
-BString::GetDecimal(double *value) const
+bool BString::GetDecimal(double *value) const
 {
 #if !(defined(_MSC_VER) && _MSC_VER <= 0x4b0)
 
@@ -2309,8 +2260,7 @@ BString::GetDecimal(double *value) const
 
 
 #ifdef BHAPI_SUPPORT_LONG_DOUBLE
-bool
-BString::GetDecimal(long double *value) const
+bool BString::GetDecimal(long double *value) const
 {
 	if(!value || !IsNumber()) return false;
 
@@ -2324,8 +2274,7 @@ BString::GetDecimal(long double *value) const
 #endif // BHAPI_SUPPORT_LONG_DOUBLE
 
 
-bool
-BString::GetInteger(__be_int8 *value) const
+bool BString::GetInteger(__be_int8 *value) const
 {
 	if(!value || !IsNumber()) return false;
 
@@ -2335,8 +2284,7 @@ BString::GetInteger(__be_int8 *value) const
 }
 
 
-bool
-BString::GetInteger(__be_uint8 *value) const
+bool BString::GetInteger(__be_uint8 *value) const
 {
 	if(!value || !IsNumber()) return false;
 
@@ -2348,8 +2296,7 @@ BString::GetInteger(__be_uint8 *value) const
 }
 
 
-bool
-BString::GetInteger(__be_int16 *value) const
+bool BString::GetInteger(__be_int16 *value) const
 {
 	if(!value || !IsNumber()) return false;
 
@@ -2359,8 +2306,7 @@ BString::GetInteger(__be_int16 *value) const
 }
 
 
-bool
-BString::GetInteger(__be_uint16 *value) const
+bool BString::GetInteger(__be_uint16 *value) const
 {
 	if(!value || !IsNumber()) return false;
 
@@ -2372,8 +2318,7 @@ BString::GetInteger(__be_uint16 *value) const
 }
 
 
-bool
-BString::GetInteger(__be_int32 *value) const
+bool BString::GetInteger(__be_int32 *value) const
 {
 	if(!value || !IsNumber()) return false;
 
@@ -2385,8 +2330,7 @@ BString::GetInteger(__be_int32 *value) const
 }
 
 
-bool
-BString::GetInteger(__be_uint32 *value) const
+bool BString::GetInteger(__be_uint32 *value) const
 {
 	if(!value || !IsNumber()) return false;
 
@@ -2398,8 +2342,7 @@ BString::GetInteger(__be_uint32 *value) const
 }
 
 
-bool
-BString::GetInteger(__be_int64 *value) const
+bool BString::GetInteger(__be_int64 *value) const
 {
 	if(!value || !IsNumber()) return false;
 
@@ -2428,8 +2371,7 @@ BString::GetInteger(__be_int64 *value) const
 }
 
 
-bool
-BString::GetInteger(__be_uint64 *value) const
+bool BString::GetInteger(__be_uint64 *value) const
 {
 #if !(defined(_MSC_VER) && _MSC_VER <= 0x4b0)
 	if(!value || !IsNumber()) return false;
@@ -2654,16 +2596,14 @@ BString::Split(const char delimiter,  __be_uint32 max_tokens) const
 }
 
 
-be_int32
-BString::CountChars() const
+be_int32 BString::CountChars() const
 {
 	if(fLen <= 0) return fLen;
 	return b_utf8_strlen(fBuffer);
 }
 
 
-const char*
-BString::CharAt(__be_int32 index,  __be_uint8 *length) const
+const char*  BString::CharAt(__be_int32 index,  __be_uint8 *length) const
 {
 	if(length) *length = 0;
 	if(fLen <= index) return NULL;

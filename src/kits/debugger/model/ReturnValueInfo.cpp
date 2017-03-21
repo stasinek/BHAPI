@@ -35,8 +35,7 @@ ReturnValueInfo::~ReturnValueInfo()
 }
 
 
-void
-ReturnValueInfo::SetTo(target_addr_t address, CpuState* state)
+void ReturnValueInfo::SetTo(target_addr_t address, CpuState* state)
 {
 	fAddress = address;
 

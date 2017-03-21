@@ -32,8 +32,7 @@ BTeamDebugger::~BTeamDebugger()
 }
 
 
-status_t
-BTeamDebugger::Install(team_id team)
+status_t BTeamDebugger::Install(team_id team)
 {
 	Uninstall();
 
@@ -63,8 +62,7 @@ BTeamDebugger::Install(team_id team)
 }
 
 
-status_t
-BTeamDebugger::Uninstall()
+status_t BTeamDebugger::Uninstall()
 {
 	if (Team() < 0)
 		return B_BAD_VALUE;
@@ -81,8 +79,7 @@ BTeamDebugger::Uninstall()
 }
 
 
-status_t
-BTeamDebugger::LoadProgram(const char* const* args, int32 argCount,
+status_t BTeamDebugger::LoadProgram(const char* const* args, int32 argCount,
 	bool traceLoading)
 {
 	// load the program
@@ -101,8 +98,7 @@ BTeamDebugger::LoadProgram(const char* const* args, int32 argCount,
 }
 
 
-status_t
-BTeamDebugger::ReadDebugMessage(int32& _messageCode,
+status_t BTeamDebugger::ReadDebugMessage(int32& _messageCode,
 	debug_debugger_message_data& messageBuffer)
 {
 	ssize_t bytesRead = read_port(fDebuggerPort, &_messageCode, &messageBuffer,
@@ -160,8 +156,7 @@ BTeamDebugger::_LoadProgram(const char* const* args, int32 argCount,
 }
 
 
-/*static*/ status_t
-BTeamDebugger::_FindProgram(const char* programName, BPath& resolvedPath)
+/*static*/ status_t BTeamDebugger::_FindProgram(const char* programName, BPath& resolvedPath)
 {
     // If the program name is absolute, then there's nothing to do.
     // If the program name consists of more than one path element, then we

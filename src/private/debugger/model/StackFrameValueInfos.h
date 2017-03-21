@@ -59,16 +59,14 @@ private:
 };
 
 
-bool
-StackFrameValueInfos::GetInfo(ObjectID* variable, const TypeComponentPath& path,
+bool StackFrameValueInfos::GetInfo(ObjectID* variable, const TypeComponentPath& path,
 	Type** _type, ValueLocation** _location) const
 {
 	return GetInfo(variable, &path, _type, _location);
 }
 
 
-bool
-StackFrameValueInfos::HasInfo(ObjectID* variable, const TypeComponentPath& path)
+bool StackFrameValueInfos::HasInfo(ObjectID* variable, const TypeComponentPath& path)
 	const
 {
 	return HasInfo(variable, &path);

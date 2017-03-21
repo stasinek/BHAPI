@@ -8,7 +8,7 @@
 #ifndef _SYSTEM_VM_DEFS_H
 #define _SYSTEM_VM_DEFS_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 // additional protection flags

@@ -19,8 +19,7 @@ static const int kCopyBufferSize = 64 * 1024;
 namespace BPrivate {
 
 
-status_t
-CopyAttributes(BNode& source, BNode& destination)
+status_t CopyAttributes(BNode& source, BNode& destination)
 {
 	char attrName[B_ATTR_NAME_LENGTH];
 	while (source.GetNextAttrName(attrName) == B_OK) {

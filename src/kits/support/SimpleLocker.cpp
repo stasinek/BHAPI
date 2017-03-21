@@ -46,21 +46,21 @@ BSimpleLocker::~BSimpleLocker()
 }
 
 
-bool
+bool 
 BSimpleLocker::IsValid() const
 {
 	return(fLocker != NULL);
 }
 
 
-bool
+bool 
 BSimpleLocker::Lock()
 {
 	return(fLocker != NULL ? bhapi::lock_simple_locker(fLocker) : false);
 }
 
 
-void
+void 
 BSimpleLocker::Unlock()
 {
 	if(fLocker != NULL) bhapi::unlock_simple_locker(fLocker);

@@ -124,8 +124,7 @@ BSeparatorView::Instantiate(BMessage* archive)
 }
 
 
-status_t
-BSeparatorView::Archive(BMessage* into, bool deep) const
+status_t BSeparatorView::Archive(BMessage* into, bool deep) const
 {
 	// TODO: Test this.
 	status_t result = BView::Archive(into, deep);
@@ -156,8 +155,7 @@ BSeparatorView::Archive(BMessage* into, bool deep) const
 // #pragma mark -
 
 
-void
-BSeparatorView::Draw(BRect updateRect)
+void BSeparatorView::Draw(BRect updateRect)
 {
 	rgb_color base = ui_color(B_PANEL_BACKGROUND_COLOR);
 	if (BView* parent = Parent()) {
@@ -258,8 +256,7 @@ BSeparatorView::Draw(BRect updateRect)
 }
 
 
-void
-BSeparatorView::GetPreferredSize(float* _width, float* _height)
+void BSeparatorView::GetPreferredSize(float* _width, float* _height)
 {
 	float width = 0.0f;
 	float height = 0.0f;
@@ -333,8 +330,7 @@ BSeparatorView::PreferredSize()
 // #pragma mark -
 
 
-void
-BSeparatorView::SetOrientation(orientation orientation)
+void BSeparatorView::SetOrientation(orientation orientation)
 {
 	if (orientation == fOrientation)
 		return;
@@ -353,8 +349,7 @@ BSeparatorView::SetOrientation(orientation orientation)
 }
 
 
-void
-BSeparatorView::SetAlignment(const BAlignment& aligment)
+void BSeparatorView::SetAlignment(const BAlignment& aligment)
 {
 	if (aligment == fAlignment)
 		return;
@@ -366,8 +361,7 @@ BSeparatorView::SetAlignment(const BAlignment& aligment)
 }
 
 
-void
-BSeparatorView::SetBorderStyle(border_style border)
+void BSeparatorView::SetBorderStyle(border_style border)
 {
 	if (border == fBorder)
 		return;
@@ -378,8 +372,7 @@ BSeparatorView::SetBorderStyle(border_style border)
 }
 
 
-void
-BSeparatorView::SetLabel(const char* label)
+void BSeparatorView::SetLabel(const char* label)
 {
 	if (label == NULL)
 		label = "";
@@ -394,8 +387,7 @@ BSeparatorView::SetLabel(const char* label)
 }
 
 
-void
-BSeparatorView::SetLabel(BView* view, bool deletePrevious)
+void BSeparatorView::SetLabel(BView* view, bool deletePrevious)
 {
 	if (fLabelView == view)
 		return;
@@ -413,8 +405,7 @@ BSeparatorView::SetLabel(BView* view, bool deletePrevious)
 }
 
 
-status_t
-BSeparatorView::Perform(perform_code code, void* data)
+status_t BSeparatorView::Perform(perform_code code, void* data)
 {
 	return BView::Perform(code, data);
 }
@@ -423,8 +414,7 @@ BSeparatorView::Perform(perform_code code, void* data)
 // #pragma mark - protected/private
 
 
-void
-BSeparatorView::DoLayout()
+void BSeparatorView::DoLayout()
 {
 	BView::DoLayout();
 
@@ -440,8 +430,7 @@ BSeparatorView::DoLayout()
 }
 
 
-void
-BSeparatorView::_Init(const char* label, BView* labelView,
+void BSeparatorView::_Init(const char* label, BView* labelView,
 	orientation orientation, BAlignment alignment, border_style border)
 {
 	fLabel = "";

@@ -54,8 +54,7 @@
   *
   */
 
-  static void*
-  get_sfnt_table( TT_Face      face,
+  static void*     get_sfnt_table( TT_Face      face,
                   FT_Sfnt_Tag  tag )
   {
     void*  table;
@@ -165,8 +164,7 @@
   *
   */
 
-  static const char*
-  sfnt_get_ps_name( TT_Face  face )
+  static const char*    sfnt_get_ps_name( TT_Face  face )
   {
     FT_Int       n, found_win, found_apple;
     const char*  result = NULL;

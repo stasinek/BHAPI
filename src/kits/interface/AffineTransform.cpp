@@ -74,8 +74,7 @@ BAffineTransform::~BAffineTransform()
 // #pragma mark -
 
 
-bool
-BAffineTransform::IsFixedSize() const
+bool BAffineTransform::IsFixedSize() const
 {
 	return true;
 }
@@ -95,8 +94,7 @@ BAffineTransform::FlattenedSize() const
 }
 
 
-status_t
-BAffineTransform::Flatten(void* _buffer, ssize_t size) const
+status_t BAffineTransform::Flatten(void* _buffer, ssize_t size) const
 {
 	if (_buffer == NULL || size < FlattenedSize())
 		return B_BAD_VALUE;
@@ -114,8 +112,7 @@ BAffineTransform::Flatten(void* _buffer, ssize_t size) const
 }
 
 
-status_t
-BAffineTransform::Unflatten(type_code code, const void* _buffer, ssize_t size)
+status_t BAffineTransform::Unflatten(type_code code, const void* _buffer, ssize_t size)
 {
 	if (_buffer == NULL || size < FlattenedSize() || code != TypeCode())
 		return B_BAD_VALUE;
@@ -195,8 +192,7 @@ BAffineTransform::ApplyInverse(const BPoint& point) const
 }
 
 
-void
-BAffineTransform::Apply(BPoint* point) const
+void BAffineTransform::Apply(BPoint* point) const
 {
 	if (point == NULL)
 		return;
@@ -208,8 +204,7 @@ BAffineTransform::Apply(BPoint* point) const
 }
 
 
-void
-BAffineTransform::ApplyInverse(BPoint* point) const
+void BAffineTransform::ApplyInverse(BPoint* point) const
 {
 	if (point == NULL)
 		return;
@@ -221,8 +216,7 @@ BAffineTransform::ApplyInverse(BPoint* point) const
 }
 
 
-void
-BAffineTransform::Apply(BPoint* points, uint32 count) const
+void BAffineTransform::Apply(BPoint* points, uint32 count) const
 {
 	if (points != NULL) {
 		for (uint32 i = 0; i < count; ++i)
@@ -231,8 +225,7 @@ BAffineTransform::Apply(BPoint* points, uint32 count) const
 }
 
 
-void
-BAffineTransform::ApplyInverse(BPoint* points, uint32 count) const
+void BAffineTransform::ApplyInverse(BPoint* points, uint32 count) const
 {
 	if (points != NULL) {
 		for (uint32 i = 0; i < count; ++i)
@@ -487,22 +480,19 @@ BAffineTransform::PreMultiply(const BAffineTransform& other)
 }
 
 
-bool
-BAffineTransform::IsValid(double epsilon) const
+bool BAffineTransform::IsValid(double epsilon) const
 {
 	return fabs(sx) > epsilon && fabs(sy) > epsilon;
 }
 
 
-static inline bool
-IsEqualEpsilon(double v1, double v2, double epsilon)
+static inline bool IsEqualEpsilon(double v1, double v2, double epsilon)
 {
     return fabs(v1 - v2) <= double(epsilon);
 }
 
 
-bool
-BAffineTransform::IsIdentity(double epsilon) const
+bool BAffineTransform::IsIdentity(double epsilon) const
 {
 	return IsEqualEpsilon(sx, 1.0, epsilon)
 		&& IsEqualEpsilon(shy, 0.0, epsilon)
@@ -513,16 +503,14 @@ BAffineTransform::IsIdentity(double epsilon) const
 }
 
 
-bool
-BAffineTransform::IsDilation(double epsilon) const
+bool BAffineTransform::IsDilation(double epsilon) const
 {
 	return IsEqualEpsilon(shy, 0.0, epsilon)
 		&& IsEqualEpsilon(shx, 0.0, epsilon);
 }
 
 
-bool
-BAffineTransform::IsEqual(const BAffineTransform& other, double epsilon) const
+bool BAffineTransform::IsEqual(const BAffineTransform& other, double epsilon) const
 {
 	return IsEqualEpsilon(sx, other.sx, epsilon)
 		&& IsEqualEpsilon(shy, other.shy, epsilon)
@@ -582,8 +570,7 @@ BAffineTransform::Reset()
 }
 
 
-void
-BAffineTransform::GetTranslation(double* _tx, double* _ty) const
+void BAffineTransform::GetTranslation(double* _tx, double* _ty) const
 {
 	if (_tx)
 		*_tx = tx;
@@ -614,8 +601,7 @@ BAffineTransform::Scale() const
 }
 
 
-void
-BAffineTransform::GetScale(double* _sx, double* _sy) const
+void BAffineTransform::GetScale(double* _sx, double* _sy) const
 {
 	double x1 = 0.0;
 	double y1 = 0.0;
@@ -632,8 +618,7 @@ BAffineTransform::GetScale(double* _sx, double* _sy) const
 }
 
 
-void
-BAffineTransform::GetScaleAbs(double* _sx, double* _sy) const
+void BAffineTransform::GetScaleAbs(double* _sx, double* _sy) const
 {
 	// When there is considerable shear this method gives us much
 	// better estimation than just sx, sy.
@@ -644,8 +629,7 @@ BAffineTransform::GetScaleAbs(double* _sx, double* _sy) const
 }
 
 
-bool
-BAffineTransform::GetAffineParameters(double* _translationX,
+bool BAffineTransform::GetAffineParameters(double* _translationX,
 	double* _translationY, double* _rotation, double* _scaleX, double* _scaleY,
 	double* _shearX, double* _shearY) const
 {

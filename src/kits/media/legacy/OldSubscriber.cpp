@@ -31,8 +31,7 @@ BSubscriber::~BSubscriber()
 }
 
 
-status_t
-BSubscriber::Subscribe(BAbstractBufferStream *stream)
+status_t BSubscriber::Subscribe(BAbstractBufferStream *stream)
 {
 	UNIMPLEMENTED();
 
@@ -40,8 +39,7 @@ BSubscriber::Subscribe(BAbstractBufferStream *stream)
 }
 
 
-status_t
-BSubscriber::Unsubscribe()
+status_t BSubscriber::Unsubscribe()
 {
 	UNIMPLEMENTED();
 
@@ -66,8 +64,7 @@ BSubscriber::Name() const
 }
 
 
-void
-BSubscriber::SetTimeout(bigtime_t microseconds)
+void BSubscriber::SetTimeout(bigtime_t microseconds)
 {
 	UNIMPLEMENTED();
 }
@@ -82,8 +79,7 @@ BSubscriber::Timeout() const
 }
 
 
-status_t
-BSubscriber::EnterStream(subscriber_id neighbor,
+status_t BSubscriber::EnterStream(subscriber_id neighbor,
 						 bool before,
 						 void *userData,
 						 enter_stream_hook entryFunction,
@@ -96,8 +92,7 @@ BSubscriber::EnterStream(subscriber_id neighbor,
 }
 
 
-status_t
-BSubscriber::ExitStream(bool synch)
+status_t BSubscriber::ExitStream(bool synch)
 {
 	UNIMPLEMENTED();
 
@@ -105,8 +100,7 @@ BSubscriber::ExitStream(bool synch)
 }
 
 
-bool
-BSubscriber::IsInStream() const
+bool BSubscriber::IsInStream() const
 {
 	UNIMPLEMENTED();
 
@@ -117,8 +111,7 @@ BSubscriber::IsInStream() const
  * protected BSubscriber
  *************************************************************/
 
-status_t
-BSubscriber::_ProcessLoop(void *arg)
+status_t BSubscriber::_ProcessLoop(void *arg)
 {
 	UNIMPLEMENTED();
 
@@ -126,8 +119,7 @@ BSubscriber::_ProcessLoop(void *arg)
 }
 
 
-status_t
-BSubscriber::ProcessLoop()
+status_t BSubscriber::ProcessLoop()
 {
 	UNIMPLEMENTED();
 
@@ -146,22 +138,19 @@ BSubscriber::Stream() const
  * private BSubscriber
  *************************************************************/
 
-void
-BSubscriber::_ReservedSubscriber1()
+void BSubscriber::_ReservedSubscriber1()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BSubscriber::_ReservedSubscriber2()
+void BSubscriber::_ReservedSubscriber2()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BSubscriber::_ReservedSubscriber3()
+void BSubscriber::_ReservedSubscriber3()
 {
 	UNIMPLEMENTED();
 }

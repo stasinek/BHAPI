@@ -49,10 +49,8 @@ BOptionControl::~BOptionControl()
 /*! \brief Overrides the base version to take special actions.
 	\param message The received message.
 	Calls SetValue() if receives a B_OPTION_CONTROL_VALUE message
-	which contains a "be:value" int32
-*/
-void
-BOptionControl::MessageReceived(BMessage *message)
+	which contains a "be:value" int32 */
+void BOptionControl::MessageReceived(BMessage *message)
 {
 	switch (message->what) {
 		case B_OPTION_CONTROL_VALUE:
@@ -77,8 +75,7 @@ BOptionControl::MessageReceived(BMessage *message)
 	\return \c B_OK if the option was added succesfully,
 		an error code otherwise.
 */
-status_t
-BOptionControl::AddOption(const char *name, int32 value)
+status_t BOptionControl::AddOption(const char *name, int32 value)
 {
 	int32 numOptions = CountOptions();
 	return AddOptionAt(name, value, numOptions);
@@ -91,8 +88,7 @@ BOptionControl::AddOption(const char *name, int32 value)
 		and it was correctly selected, an error code otherwise.
 	It works like SetValue(value);
 */
-status_t
-BOptionControl::SelectOptionFor(int32 value)
+status_t BOptionControl::SelectOptionFor(int32 value)
 {
 	// XXX: I wonder why this method was created in the first place,
 	// since you can obtain the same result simply by calling SetValue().
@@ -117,8 +113,7 @@ BOptionControl::SelectOptionFor(int32 value)
 	\return \c B_OK if there was an option with that name,
 		and it was correctly selected, an error code otherwise.
 */
-status_t
-BOptionControl::SelectOptionFor(const char *name)
+status_t BOptionControl::SelectOptionFor(const char *name)
 {
 	int32 numOptions = CountOptions();
 	for (int32 c = 0; c < numOptions; c++) {

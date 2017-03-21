@@ -94,8 +94,7 @@ BSound::~BSound()
 }
 
 
-status_t
-BSound::InitCheck()
+status_t BSound::InitCheck()
 {
 	return fStatus;
 }
@@ -109,8 +108,7 @@ BSound::AcquireRef()
 }
 
 
-bool
-BSound::ReleaseRef()
+bool BSound::ReleaseRef()
 {
 	if (atomic_add(&fRefCount, -1) == 1) {
 		delete this;
@@ -122,8 +120,7 @@ BSound::ReleaseRef()
 }
 
 
-int32
-BSound::RefCount() const
+int32 BSound::RefCount() const
 {
 	return fRefCount;
 }
@@ -144,8 +141,7 @@ BSound::Format() const
 }
 
 
-const void*
-BSound::Data() const
+const void*   BSound::Data() const
 {
 	return fData;
 }
@@ -164,8 +160,7 @@ BSound::Size() const
 }
 
 
-bool 
-BSound::GetDataAt(off_t offset, void* intoBuffer, size_t bufferSize,
+bool BSound::GetDataAt(off_t offset, void* intoBuffer, size_t bufferSize,
 	size_t* outUsed)
 {
 	if (intoBuffer == NULL)
@@ -229,24 +224,21 @@ BSound::GetDataAt(off_t offset, void* intoBuffer, size_t bufferSize,
 }
 
 
-status_t
-BSound::BindTo(BSoundPlayer* player, const media_raw_audio_format& format)
+status_t BSound::BindTo(BSoundPlayer* player, const media_raw_audio_format& format)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
 }
 
 
-status_t
-BSound::UnbindFrom(BSoundPlayer* player)
+status_t BSound::UnbindFrom(BSoundPlayer* player)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
 }
 
 
-status_t
-BSound::Perform(int32 code, ...)
+status_t BSound::Perform(int32 code, ...)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;

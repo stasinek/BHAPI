@@ -97,8 +97,7 @@ BArchiveManager::~BArchiveManager()
 }
 
 
-status_t
-BArchiveManager::GetTokenForArchivable(BArchivable* archivable, int32& _token)
+status_t BArchiveManager::GetTokenForArchivable(BArchivable* archivable, int32& _token)
 {
 	if (!archivable) {
 		_token = NULL_TOKEN;
@@ -115,8 +114,7 @@ BArchiveManager::GetTokenForArchivable(BArchivable* archivable, int32& _token)
 }
 
 
-status_t
-BArchiveManager::ArchiveObject(BArchivable* archivable,
+status_t BArchiveManager::ArchiveObject(BArchivable* archivable,
 	bool deep, int32& _token)
 {
 	if (!archivable) {
@@ -147,8 +145,7 @@ BArchiveManager::ArchiveObject(BArchivable* archivable,
 }
 
 
-bool
-BArchiveManager::IsArchived(BArchivable* archivable)
+bool BArchiveManager::IsArchived(BArchivable* archivable)
 {
 	if (!archivable)
 		return true;
@@ -157,8 +154,7 @@ BArchiveManager::IsArchived(BArchivable* archivable)
 }
 
 
-status_t
-BArchiveManager::ArchiverLeaving(const BArchiver* archiver, status_t err)
+status_t BArchiveManager::ArchiverLeaving(const BArchiver* archiver, status_t err)
 {
 	if (fError == B_OK)
 		fError = err;
@@ -205,8 +201,7 @@ BArchiveManager::ArchiverLeaving(const BArchiver* archiver, status_t err)
 }
 
 
-void
-BArchiveManager::RegisterArchivable(const BArchivable* archivable)
+void BArchiveManager::RegisterArchivable(const BArchivable* archivable)
 {
 	if (fTokenMap.size() == 0) {
 		ArchiveInfo& info = fTokenMap[archivable];
@@ -228,8 +223,7 @@ struct BUnarchiveManager::ArchiveInfo {
 	{
 	}
 
-	bool
-	operator<(const ArchiveInfo& other)
+	bool 	operator<(const ArchiveInfo& other)
 	{
 		return archivable < other.archivable;
 	}
@@ -276,8 +270,7 @@ BUnarchiveManager::~BUnarchiveManager()
 }
 
 
-status_t
-BUnarchiveManager::GetArchivableForToken(int32 token,
+status_t BUnarchiveManager::GetArchivableForToken(int32 token,
 	BUnarchiver::ownership_policy owning, BArchivable*& _archivable)
 {
 	if (token >= fObjectCount)
@@ -310,8 +303,7 @@ BUnarchiveManager::GetArchivableForToken(int32 token,
 }
 
 
-bool
-BUnarchiveManager::IsInstantiated(int32 token)
+bool BUnarchiveManager::IsInstantiated(int32 token)
 {
 	if (token < 0 || token >= fObjectCount)
 		return false;
@@ -319,8 +311,7 @@ BUnarchiveManager::IsInstantiated(int32 token)
 }
 
 
-void
-BUnarchiveManager::RegisterArchivable(BArchivable* archivable)
+void BUnarchiveManager::RegisterArchivable(BArchivable* archivable)
 {
 	if (!archivable)
 		debugger("Cannot register NULL pointer");
@@ -330,8 +321,7 @@ BUnarchiveManager::RegisterArchivable(BArchivable* archivable)
 }
 
 
-status_t
-BUnarchiveManager::UnarchiverLeaving(const BUnarchiver* unarchiver,
+status_t BUnarchiveManager::UnarchiverLeaving(const BUnarchiver* unarchiver,
 	status_t err)
 {
 	if (--fRefCount >= 0 && fError == B_OK)
@@ -374,8 +364,7 @@ BUnarchiveManager::UnarchiverLeaving(const BUnarchiver* unarchiver,
 }
 
 
-void
-BUnarchiveManager::RelinquishOwnership(BArchivable* archivable)
+void BUnarchiveManager::RelinquishOwnership(BArchivable* archivable)
 {
 	int32 token = NULL_TOKEN;
 	if (archivable)
@@ -389,8 +378,7 @@ BUnarchiveManager::RelinquishOwnership(BArchivable* archivable)
 }
 
 
-void
-BUnarchiveManager::AssumeOwnership(BArchivable* archivable)
+void BUnarchiveManager::AssumeOwnership(BArchivable* archivable)
 {
 	int32 token = NULL_TOKEN;
 	if (archivable)
@@ -404,8 +392,7 @@ BUnarchiveManager::AssumeOwnership(BArchivable* archivable)
 }
 
 
-void
-BUnarchiveManager::Acquire()
+void BUnarchiveManager::Acquire()
 {
 	if (fRefCount >= 0)
 		fRefCount++;

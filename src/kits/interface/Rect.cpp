@@ -46,21 +46,21 @@ inline double b_round(double value)
 #define b_round(a) round(a)
 #endif // HAVE_ROUND
 
-bool
+bool 
 BRect::Contains(BPoint pt) const
 {
 	return(IsValid() ? pt.x >= left && pt.x <= right && pt.y >= top && pt.y <= bottom : false);
 }
 
 
-bool
+bool 
 BRect::Contains(float x, float y) const
 {
 	return(IsValid() ? x >= left && x <= right && y >= top && y <= bottom : false);
 }
 
 
-bool
+bool 
 BRect::Contains(BRect r) const
 {
 	if(r.IsValid() == false) return false;
@@ -68,7 +68,7 @@ BRect::Contains(BRect r) const
 }
 
 
-bool
+bool 
 BRect::Contains(float l, float t, float r, float b) const
 {
 	if(!(l <= r && t <= b)) return false;
@@ -76,14 +76,14 @@ BRect::Contains(float l, float t, float r, float b) const
 }
 
 
-bool
+bool 
 BRect::operator==(BRect r) const
 {
 	return(r.left == left && r.right == right && r.top == top && r.bottom == bottom);
 }
 
 
-bool
+bool 
 BRect::operator!=(BRect r) const
 {
 	return(r.left != left || r.right != right || r.top != top || r.bottom != bottom);
@@ -145,14 +145,14 @@ BRect& BRect::operator|=(BRect r) // union
 }
 
 
-bool
+bool 
 BRect::Intersects(BRect r) const
 {
 	return Intersects(r.left, r.top, r.right, r.bottom);
 }
 
 
-bool
+bool 
 BRect::Intersects(float l, float t, float r, float b) const
 {
 	if(!IsValid() || !(l <= r && t <= b)) return false;
@@ -163,7 +163,7 @@ BRect::Intersects(float l, float t, float r, float b) const
 }
 
 
-void
+void 
 BRect::SetLeftTop(const BPoint pt)
 {
 	left = pt.x;
@@ -171,7 +171,7 @@ BRect::SetLeftTop(const BPoint pt)
 }
 
 
-void
+void 
 BRect::SetRightBottom(const BPoint pt)
 {
 	right = pt.x;
@@ -179,7 +179,7 @@ BRect::SetRightBottom(const BPoint pt)
 }
 
 
-void
+void 
 BRect::SetLeftBottom(const BPoint pt)
 {
 	left = pt.x;
@@ -187,7 +187,7 @@ BRect::SetLeftBottom(const BPoint pt)
 }
 
 
-void
+void 
 BRect::SetRightTop(const BPoint pt)
 {
 	right = pt.x;
@@ -195,7 +195,7 @@ BRect::SetRightTop(const BPoint pt)
 }
 
 
-void
+void 
 BRect::SetLeftTop(float x, float y)
 {
 	left = x;
@@ -203,7 +203,7 @@ BRect::SetLeftTop(float x, float y)
 }
 
 
-void
+void 
 BRect::SetRightBottom(float x, float y)
 {
 	right = x;
@@ -211,7 +211,7 @@ BRect::SetRightBottom(float x, float y)
 }
 
 
-void
+void 
 BRect::SetLeftBottom(float x, float y)
 {
 	left = x;
@@ -219,7 +219,7 @@ BRect::SetLeftBottom(float x, float y)
 }
 
 
-void
+void 
 BRect::SetRightTop(float x, float y)
 {
 	right = x;
@@ -227,7 +227,7 @@ BRect::SetRightTop(float x, float y)
 }
 
 
-void
+void 
 BRect::InsetBy(BPoint pt)
 {
 	left += pt.x;
@@ -237,7 +237,7 @@ BRect::InsetBy(BPoint pt)
 }
 
 
-void
+void 
 BRect::InsetBy(float dx, float dy)
 {
 	left += dx;
@@ -247,7 +247,7 @@ BRect::InsetBy(float dx, float dy)
 }
 
 
-void
+void 
 BRect::OffsetBy(BPoint pt)
 {
 	left += pt.x;
@@ -257,7 +257,7 @@ BRect::OffsetBy(BPoint pt)
 }
 
 
-void
+void 
 BRect::OffsetBy(float dx, float dy)
 {
 	left += dx;
@@ -267,7 +267,7 @@ BRect::OffsetBy(float dx, float dy)
 }
 
 
-void
+void 
 BRect::OffsetTo(BPoint pt)
 {
 	float width = right - left;
@@ -281,7 +281,7 @@ BRect::OffsetTo(BPoint pt)
 }
 
 
-void
+void 
 BRect::OffsetTo(float x, float y)
 {
 	float width = right - left;
@@ -391,7 +391,7 @@ BRect::OffsetToCopy(float x, float y) const
 }
 
 
-void
+void 
 BRect::Floor()
 {
 	left = (float)floor((double)left);
@@ -421,7 +421,7 @@ BRect::FloorCopy() const
 }
 
 
-void
+void 
 BRect::Ceil()
 {
 	left = (float)ceil((double)left);
@@ -451,7 +451,7 @@ BRect::CeilCopy() const
 }
 
 
-void
+void 
 BRect::Round()
 {
 	left = (float)b_round((double)left);
@@ -481,7 +481,7 @@ BRect::RoundCopy() const
 }
 
 
-void
+void 
 BRect::PrintToStream() const
 {
 	BHAPI_OUTPUT("BRect(%g, %g, %g, %g)", left, top, right, bottom);

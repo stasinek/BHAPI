@@ -45,8 +45,7 @@ BArchivable::~BArchivable()
 }
 
 
-status_t
-BArchivable::Archive(BMessage *into, bool deep) const
+status_t BArchivable::Archive(BMessage *into, bool deep) const
 {
 	if(into == NULL) return B_ERROR;
 	into->AddString("class", "BArchivable");

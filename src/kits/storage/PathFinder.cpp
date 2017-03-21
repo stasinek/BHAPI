@@ -34,22 +34,19 @@ BPathFinder::BPathFinder(const entry_ref& ref, const char* dependency)
 }
 
 
-status_t
-BPathFinder::SetTo(const void* codePointer, const char* dependency)
+status_t BPathFinder::SetTo(const void* codePointer, const char* dependency)
 {
 	return _SetTo(codePointer, NULL, dependency);
 }
 
 
-status_t
-BPathFinder::SetTo(const char* path, const char* dependency)
+status_t BPathFinder::SetTo(const char* path, const char* dependency)
 {
 	return _SetTo(NULL, path, dependency);
 }
 
 
-status_t
-BPathFinder::SetTo(const entry_ref& ref, const char* dependency)
+status_t BPathFinder::SetTo(const entry_ref& ref, const char* dependency)
 {
 	BPath path;
 	fInitStatus = path.SetTo(&ref);
@@ -60,8 +57,7 @@ BPathFinder::SetTo(const entry_ref& ref, const char* dependency)
 }
 
 
-status_t
-BPathFinder::FindPath(const char* architecture,
+status_t BPathFinder::FindPath(const char* architecture,
 	path_base_directory baseDirectory, const char* subPath, uint32 flags,
 	BPath& _path)
 {
@@ -91,31 +87,27 @@ BPathFinder::FindPath(const char* architecture,
 }
 
 
-status_t
-BPathFinder::FindPath(path_base_directory baseDirectory, const char* subPath,
+status_t BPathFinder::FindPath(path_base_directory baseDirectory, const char* subPath,
 	uint32 flags, BPath& _path)
 {
 	return FindPath(NULL, baseDirectory, subPath, flags, _path);
 }
 
 
-status_t
-BPathFinder::FindPath(path_base_directory baseDirectory, const char* subPath,
+status_t BPathFinder::FindPath(path_base_directory baseDirectory, const char* subPath,
 	BPath& _path)
 {
 	return FindPath(NULL, baseDirectory, subPath, 0, _path);
 }
 
 
-status_t
-BPathFinder::FindPath(path_base_directory baseDirectory, BPath& _path)
+status_t BPathFinder::FindPath(path_base_directory baseDirectory, BPath& _path)
 {
 	return FindPath(NULL, baseDirectory, NULL, 0, _path);
 }
 
 
-/*static*/ status_t
-BPathFinder::FindPaths(const char* architecture,
+/*static*/ status_t BPathFinder::FindPaths(const char* architecture,
 	path_base_directory baseDirectory, const char* subPath, uint32 flags,
 	BStringList& _paths)
 {
@@ -144,31 +136,27 @@ BPathFinder::FindPaths(const char* architecture,
 }
 
 
-/*static*/ status_t
-BPathFinder::FindPaths(path_base_directory baseDirectory, const char* subPath,
+/*static*/ status_t BPathFinder::FindPaths(path_base_directory baseDirectory, const char* subPath,
 	uint32 flags, BStringList& _paths)
 {
 	return FindPaths(NULL, baseDirectory, subPath, flags, _paths);
 }
 
 
-/*static*/ status_t
-BPathFinder::FindPaths(path_base_directory baseDirectory, const char* subPath,
+/*static*/ status_t BPathFinder::FindPaths(path_base_directory baseDirectory, const char* subPath,
 	BStringList& _paths)
 {
 	return FindPaths(NULL, baseDirectory, subPath, 0, _paths);
 }
 
 
-/*static*/ status_t
-BPathFinder::FindPaths(path_base_directory baseDirectory, BStringList& _paths)
+/*static*/ status_t BPathFinder::FindPaths(path_base_directory baseDirectory, BStringList& _paths)
 {
 	return FindPaths(NULL, baseDirectory, NULL, 0, _paths);
 }
 
 
-status_t
-BPathFinder::_SetTo(const void* codePointer, const char* path,
+status_t BPathFinder::_SetTo(const void* codePointer, const char* path,
 	const char* dependency)
 {
 	fCodePointer = codePointer;

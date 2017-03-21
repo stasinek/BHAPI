@@ -318,8 +318,7 @@ _VECTOR_MAP_CLASS_NAME::~VectorMap()
 	  (doesn't apply to the default strategy).
 */
 _VECTOR_MAP_TEMPLATE_LIST
-status_t
-_VECTOR_MAP_CLASS_NAME::Insert(const Key &key, const Value &value)
+status_t _VECTOR_MAP_CLASS_NAME::Insert(const Key &key, const Value &value)
 {
 	if (!fEntryStrategy.AreCompatible(key, value))
 		return B_BAD_VALUE;
@@ -337,8 +336,7 @@ _VECTOR_MAP_CLASS_NAME::Insert(const Key &key, const Value &value)
 */
 _VECTOR_MAP_TEMPLATE_LIST
 inline
-status_t
-_VECTOR_MAP_CLASS_NAME::Put(const Key &key, const Value &value)
+status_t _VECTOR_MAP_CLASS_NAME::Put(const Key &key, const Value &value)
 {
 	return Insert(key, value);
 }
@@ -390,8 +388,7 @@ _VECTOR_MAP_CLASS_NAME::Get(const Key &key) const
 			contained an entry with that key, \c 0 otherwise.
 */
 _VECTOR_MAP_TEMPLATE_LIST
-int32
-_VECTOR_MAP_CLASS_NAME::Remove(const Key &key)
+int32 _VECTOR_MAP_CLASS_NAME::Remove(const Key &key)
 {
 	bool exists = false;
 	int32 index = _FindInsertionIndex(key, exists);
@@ -422,8 +419,7 @@ _VECTOR_MAP_CLASS_NAME::Erase(const Iterator &iterator)
 */
 _VECTOR_MAP_TEMPLATE_LIST
 inline
-int32
-_VECTOR_MAP_CLASS_NAME::Count() const
+int32 _VECTOR_MAP_CLASS_NAME::Count() const
 {
 	return fElements.Count();
 }
@@ -434,8 +430,7 @@ _VECTOR_MAP_CLASS_NAME::Count() const
 */
 _VECTOR_MAP_TEMPLATE_LIST
 inline
-bool
-_VECTOR_MAP_CLASS_NAME::IsEmpty() const
+bool _VECTOR_MAP_CLASS_NAME::IsEmpty() const
 {
 	return fElements.IsEmpty();
 }
@@ -444,8 +439,7 @@ _VECTOR_MAP_CLASS_NAME::IsEmpty() const
 /*!	\brief Removes all entries from the map.
 */
 _VECTOR_MAP_TEMPLATE_LIST
-void
-_VECTOR_MAP_CLASS_NAME::MakeEmpty()
+void _VECTOR_MAP_CLASS_NAME::MakeEmpty()
 {
 	fElements.MakeEmpty();
 }
@@ -674,8 +668,7 @@ _VECTOR_MAP_CLASS_NAME::FindClose(const Key &key, bool less) const
 			located or at which it would need to be inserted.
 */
 _VECTOR_MAP_TEMPLATE_LIST
-int32
-_VECTOR_MAP_CLASS_NAME::_FindInsertionIndex(const Key &key,
+int32 _VECTOR_MAP_CLASS_NAME::_FindInsertionIndex(const Key &key,
 											bool &exists) const
 {
 	// binary search

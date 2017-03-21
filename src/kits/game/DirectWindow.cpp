@@ -40,8 +40,7 @@ enum dw_status_bits {
 #if DEBUG
 
 
-static void
-print_direct_buffer_state(const direct_buffer_state &state)
+static void print_direct_buffer_state(const direct_buffer_state &state)
 {
 	char string[128];
 	int modeState = state & B_DIRECT_MODE_MASK;
@@ -65,8 +64,7 @@ print_direct_buffer_state(const direct_buffer_state &state)
 }
 
 
-static void
-print_direct_driver_state(const direct_driver_state &state)
+static void print_direct_driver_state(const direct_driver_state &state)
 {
 	if (state == 0)
 		return;
@@ -84,8 +82,7 @@ print_direct_driver_state(const direct_driver_state &state)
 #if DEBUG > 1
 
 
-static void
-print_direct_buffer_layout(const buffer_layout &layout)
+static void print_direct_buffer_layout(const buffer_layout &layout)
 {
 	char string[64];
 	if (layout == B_BUFFER_NONINTERLEAVED)
@@ -97,8 +94,7 @@ print_direct_buffer_layout(const buffer_layout &layout)
 }
 
 
-static void
-print_direct_buffer_orientation(const buffer_orientation &orientation)
+static void print_direct_buffer_orientation(const buffer_orientation &orientation)
 {
 	char string[64];
 	switch (orientation) {
@@ -120,8 +116,7 @@ print_direct_buffer_orientation(const buffer_orientation &orientation)
 #endif	// DEBUG > 2
 
 
-static void
-print_direct_buffer_info(const direct_buffer_info &info)
+static void print_direct_buffer_info(const direct_buffer_info &info)
 {
 	print_direct_buffer_state(info.buffer_state);
 	print_direct_driver_state(info.driver_state);
@@ -198,113 +193,97 @@ BDirectWindow::Instantiate(BMessage* data)
 }
 
 
-status_t
-BDirectWindow::Archive(BMessage* data, bool deep) const
+status_t BDirectWindow::Archive(BMessage* data, bool deep) const
 {
 	return inherited::Archive(data, deep);
 }
 
 
-void
-BDirectWindow::Quit()
+void BDirectWindow::Quit()
 {
 	inherited::Quit();
 }
 
 
-void
-BDirectWindow::DispatchMessage(BMessage* message, BHandler* handler)
+void BDirectWindow::DispatchMessage(BMessage* message, BHandler* handler)
 {
 	inherited::DispatchMessage(message, handler);
 }
 
 
-void
-BDirectWindow::MessageReceived(BMessage* message)
+void BDirectWindow::MessageReceived(BMessage* message)
 {
 	inherited::MessageReceived(message);
 }
 
 
-void
-BDirectWindow::FrameMoved(BPoint newPosition)
+void BDirectWindow::FrameMoved(BPoint newPosition)
 {
 	inherited::FrameMoved(newPosition);
 }
 
 
-void
-BDirectWindow::WorkspacesChanged(uint32 oldWorkspaces, uint32 newWorkspaces)
+void BDirectWindow::WorkspacesChanged(uint32 oldWorkspaces, uint32 newWorkspaces)
 {
 	inherited::WorkspacesChanged(oldWorkspaces, newWorkspaces);
 }
 
 
-void
-BDirectWindow::WorkspaceActivated(int32 index, bool state)
+void BDirectWindow::WorkspaceActivated(int32 index, bool state)
 {
 	inherited::WorkspaceActivated(index, state);
 }
 
 
-void
-BDirectWindow::FrameResized(float newWidth, float newHeight)
+void BDirectWindow::FrameResized(float newWidth, float newHeight)
 {
 	inherited::FrameResized(newWidth, newHeight);
 }
 
 
-void
-BDirectWindow::Minimize(bool minimize)
+void BDirectWindow::Minimize(bool minimize)
 {
 	inherited::Minimize(minimize);
 }
 
 
-void
-BDirectWindow::Zoom(BPoint recPosition, float recWidth, float recHeight)
+void BDirectWindow::Zoom(BPoint recPosition, float recWidth, float recHeight)
 {
 	inherited::Zoom(recPosition, recWidth, recHeight);
 }
 
 
-void
-BDirectWindow::ScreenChanged(BRect screenFrame, color_space depth)
+void BDirectWindow::ScreenChanged(BRect screenFrame, color_space depth)
 {
 	inherited::ScreenChanged(screenFrame, depth);
 }
 
 
-void
-BDirectWindow::MenusBeginning()
+void BDirectWindow::MenusBeginning()
 {
 	inherited::MenusBeginning();
 }
 
 
-void
-BDirectWindow::MenusEnded()
+void BDirectWindow::MenusEnded()
 {
 	inherited::MenusEnded();
 }
 
 
-void
-BDirectWindow::WindowActivated(bool state)
+void BDirectWindow::WindowActivated(bool state)
 {
 	inherited::WindowActivated(state);
 }
 
 
-void
-BDirectWindow::Show()
+void BDirectWindow::Show()
 {
 	inherited::Show();
 }
 
 
-void
-BDirectWindow::Hide()
+void BDirectWindow::Hide()
 {
 	inherited::Hide();
 }
@@ -319,29 +298,25 @@ BDirectWindow::ResolveSpecifier(BMessage* message, int32 index,
 }
 
 
-status_t
-BDirectWindow::GetSupportedSuites(BMessage* data)
+status_t BDirectWindow::GetSupportedSuites(BMessage* data)
 {
 	return inherited::GetSupportedSuites(data);
 }
 
 
-status_t
-BDirectWindow::Perform(perform_code d, void* arg)
+status_t BDirectWindow::Perform(perform_code d, void* arg)
 {
 	return inherited::Perform(d, arg);
 }
 
 
-void
-BDirectWindow::task_looper()
+void BDirectWindow::task_looper()
 {
 	inherited::task_looper();
 }
 
 
-BMessage*
-BDirectWindow::ConvertToMessage(void* raw, int32 code)
+BMessage*  BDirectWindow::ConvertToMessage(void* raw, int32 code)
 {
 	return inherited::ConvertToMessage(raw, code);
 }
@@ -350,15 +325,13 @@ BDirectWindow::ConvertToMessage(void* raw, int32 code)
 //	#pragma mark - BDirectWindow specific API
 
 
-void
-BDirectWindow::DirectConnected(direct_buffer_info* info)
+void BDirectWindow::DirectConnected(direct_buffer_info* info)
 {
 	// implemented in subclasses
 }
 
 
-status_t
-BDirectWindow::GetClippingRegion(BRegion* region, BPoint* origin) const
+status_t BDirectWindow::GetClippingRegion(BRegion* region, BPoint* origin) const
 {
 	if (region == NULL)
 		return B_BAD_VALUE;
@@ -409,8 +382,7 @@ BDirectWindow::GetClippingRegion(BRegion* region, BPoint* origin) const
 }
 
 
-status_t
-BDirectWindow::SetFullScreen(bool enable)
+status_t BDirectWindow::SetFullScreen(bool enable)
 {
 	if (fIsFullScreen == enable)
 		return B_OK;
@@ -430,15 +402,13 @@ BDirectWindow::SetFullScreen(bool enable)
 }
 
 
-bool
-BDirectWindow::IsFullScreen() const
+bool BDirectWindow::IsFullScreen() const
 {
 	return fIsFullScreen;
 }
 
 
-/*static*/ bool
-BDirectWindow::SupportsWindowMode(screen_id id)
+/*static*/ bool BDirectWindow::SupportsWindowMode(screen_id id)
 {
 	display_mode mode;
 	status_t status = BScreen(id).GetMode(&mode);
@@ -452,15 +422,13 @@ BDirectWindow::SupportsWindowMode(screen_id id)
 //	#pragma mark - Private methods
 
 
-/*static*/ int32
-BDirectWindow::_daemon_thread(void* arg)
+/*static*/ int32 BDirectWindow::_daemon_thread(void* arg)
 {
 	return static_cast<BDirectWindow*>(arg)->_DirectDaemon();
 }
 
 
-int32
-BDirectWindow::_DirectDaemon()
+int32 BDirectWindow::_DirectDaemon()
 {
 	while (!fDaemonKiller) {
 		// This sem is released by the app_server when our
@@ -511,8 +479,7 @@ BDirectWindow::_DirectDaemon()
 }
 
 
-bool
-BDirectWindow::_LockDirect() const
+bool BDirectWindow::_LockDirect() const
 {
 	// LockDirect() and UnlockDirect() are no-op on BeOS. I tried to call BeOS's
 	// version repeatedly, from the same thread and from different threads,
@@ -540,8 +507,7 @@ BDirectWindow::_LockDirect() const
 }
 
 
-void
-BDirectWindow::_UnlockDirect() const
+void BDirectWindow::_UnlockDirect() const
 {
 #if DW_NEEDS_LOCKING
 	BDirectWindow* casted = const_cast<BDirectWindow*>(this);
@@ -554,8 +520,7 @@ BDirectWindow::_UnlockDirect() const
 }
 
 
-void
-BDirectWindow::_InitData()
+void BDirectWindow::_InitData()
 {
 	fConnectionEnable = false;
 	fIsFullScreen = false;
@@ -607,8 +572,7 @@ BDirectWindow::_InitData()
 }
 
 
-void
-BDirectWindow::_DisposeData()
+void BDirectWindow::_DisposeData()
 {
 	// wait until the connection terminates: we can't destroy
 	// the object until the client receives the B_DIRECT_STOP

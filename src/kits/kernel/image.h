@@ -5,7 +5,7 @@
 #ifndef BHAPI_IMAGE_H
 #define	BHAPI_IMAGE_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <../include/sys/param.h>
 
 #ifdef __cplusplus

@@ -52,22 +52,19 @@ BCardLayout::VisibleItem() const
 }
 
 
-int32
-BCardLayout::VisibleIndex() const
+int32 BCardLayout::VisibleIndex() const
 {
 	return IndexOfItem(fVisibleItem);
 }
 
 
-void
-BCardLayout::SetVisibleItem(int32 index)
+void BCardLayout::SetVisibleItem(int32 index)
 {
 	SetVisibleItem(ItemAt(index));
 }
 
 
-void
-BCardLayout::SetVisibleItem(BLayoutItem* item)
+void BCardLayout::SetVisibleItem(BLayoutItem* item)
 {
 	if (item == fVisibleItem)
 		return;
@@ -119,8 +116,7 @@ BCardLayout::BaseAlignment()
 }
 
 
-bool
-BCardLayout::HasHeightForWidth()
+bool BCardLayout::HasHeightForWidth()
 {
 	int32 count = CountItems();
 	for (int32 i = 0; i < count; i++) {
@@ -132,8 +128,7 @@ BCardLayout::HasHeightForWidth()
 }
 
 
-void
-BCardLayout::GetHeightForWidth(float width, float* min, float* max,
+void BCardLayout::GetHeightForWidth(float width, float* min, float* max,
 	float* preferred)
 {
 	_ValidateMinMax();
@@ -173,15 +168,13 @@ BCardLayout::GetHeightForWidth(float width, float* min, float* max,
 }
 
 
-void
-BCardLayout::LayoutInvalidated(bool children)
+void BCardLayout::LayoutInvalidated(bool children)
 {
 	fMinMaxValid = false;
 }
 
 
-void
-BCardLayout::DoLayout()
+void BCardLayout::DoLayout()
 {
 	_ValidateMinMax();
 
@@ -199,8 +192,7 @@ BCardLayout::DoLayout()
 }
 
 
-status_t
-BCardLayout::Archive(BMessage* into, bool deep) const
+status_t BCardLayout::Archive(BMessage* into, bool deep) const
 {
 	BArchiver archiver(into);
 	status_t err = BAbstractLayout::Archive(into, deep);
@@ -212,15 +204,13 @@ BCardLayout::Archive(BMessage* into, bool deep) const
 }
 
 
-status_t
-BCardLayout::AllArchived(BMessage* archive) const
+status_t BCardLayout::AllArchived(BMessage* archive) const
 {
 	return BAbstractLayout::AllArchived(archive);
 }
 
 
-status_t
-BCardLayout::AllUnarchived(const BMessage* from)
+status_t BCardLayout::AllUnarchived(const BMessage* from)
 {
 	status_t err = BLayout::AllUnarchived(from);
 	if (err != B_OK)
@@ -235,15 +225,13 @@ BCardLayout::AllUnarchived(const BMessage* from)
 }
 
 
-status_t
-BCardLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32 index) const
+status_t BCardLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32 index) const
 {
 	return BAbstractLayout::ItemArchived(into, item, index);
 }
 
 
-status_t
-BCardLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item,
+status_t BCardLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item,
 	int32 index)
 {
 	return BAbstractLayout::ItemUnarchived(from, item, index);
@@ -260,16 +248,14 @@ BCardLayout::Instantiate(BMessage* from)
 }
 
 
-bool
-BCardLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
+bool BCardLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
 {
 	item->SetVisible(false);
 	return true;
 }
 
 
-void
-BCardLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
+void BCardLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
 {
 	if (fVisibleItem == item) {
 		BLayoutItem* newVisibleItem = NULL;
@@ -278,8 +264,7 @@ BCardLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
 }
 
 
-void
-BCardLayout::_ValidateMinMax()
+void BCardLayout::_ValidateMinMax()
 {
 	if (fMinMaxValid)
 		return;
@@ -322,8 +307,7 @@ BCardLayout::_ValidateMinMax()
 }
 
 
-status_t
-BCardLayout::Perform(perform_code d, void* arg)
+status_t BCardLayout::Perform(perform_code d, void* arg)
 {
 	return BAbstractLayout::Perform(d, arg);
 }

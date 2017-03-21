@@ -75,8 +75,7 @@ BPolygon::Frame() const
 }
 
 
-void
-BPolygon::UpdateFrame()
+void BPolygon::UpdateFrame()
 {
 	if(fNeededToUpdateFrame == false) return;
 
@@ -102,8 +101,7 @@ BPolygon::UpdateFrame()
 }
 
 
-bool
-BPolygon::AddPoints(const BPoint *pts,  __be_int32 nPts, bool updateFrame)
+bool BPolygon::AddPoints(const BPoint *pts,  __be_int32 nPts, bool updateFrame)
 {
 	if(pts == NULL || nPts <= 0 || B_MAXINT32 - nPts < fCount) return false;
 
@@ -149,8 +147,7 @@ BPolygon::AddPoints(const BPoint *pts,  __be_int32 nPts, bool updateFrame)
 }
 
 
-void
-BPolygon::RemovePoints(__be_int32 fromIndex,  __be_int32 toIndex, bool updateFrame)
+void BPolygon::RemovePoints(__be_int32 fromIndex,  __be_int32 toIndex, bool updateFrame)
 {
 	if(fPts == NULL || fromIndex < 0 || fromIndex >= fCount || fromIndex > toIndex) return;
 
@@ -171,15 +168,13 @@ BPolygon::operator[](__be_int32 index) const
 }
 
 
-__be_int32
-BPolygon::CountPoints() const
+__be_int32 BPolygon::CountPoints() const
 {
 	return fCount;
 }
 
 
-bool
-BPolygon::MapTo(BRect srcRect, BRect dstRect)
+bool BPolygon::MapTo(BRect srcRect, BRect dstRect)
 {
 	if(fCount <= 0 || fPts == NULL) return false;
 	if(!srcRect.IsValid() || !dstRect.IsValid()) return false;
@@ -222,8 +217,7 @@ BPolygon::Points() const
 }
 
 
-void
-BPolygon::PrintToStream() const
+void BPolygon::PrintToStream() const
 {
 	const BPoint *pts = fPts;
 	for(__be_int32 i = 0; i < fCount; i++, pts++)

@@ -171,8 +171,7 @@ private:
 	replaced by "" for the primary architecture and by "/<arch>" for a secondary
 	architecture.
  */
-static const char*
-get_relative_directory_path(size_t installationLocationIndex,
+static const char*  get_relative_directory_path(size_t installationLocationIndex,
 	path_base_directory baseDirectory)
 {
 	switch (baseDirectory) {
@@ -234,8 +233,7 @@ get_relative_directory_path(size_t installationLocationIndex,
 }
 
 
-static status_t
-create_directory(char* path)
+static status_t create_directory(char* path)
 {
 	// find the first directory that doesn't exist
 	char* slash = path;
@@ -267,15 +265,13 @@ create_directory(char* path)
 }
 
 
-static bool
-is_in_range(const void* pointer, const void* base, size_t size)
+static bool is_in_range(const void* pointer, const void* base, size_t size)
 {
 	return pointer >= base && (addr_t)pointer < (addr_t)base + size;
 }
 
 
-static status_t
-find_image(const void* codePointer, image_info& _info)
+static status_t find_image(const void* codePointer, image_info& _info)
 {
 	int32 cookie = 0;
 
@@ -291,8 +287,7 @@ find_image(const void* codePointer, image_info& _info)
 }
 
 
-static status_t
-copy_path(const char* path, char* buffer, size_t bufferSize)
+static status_t copy_path(const char* path, char* buffer, size_t bufferSize)
 {
 	if (strlcpy(buffer, path, bufferSize) >= bufferSize)
 		return B_BUFFER_OVERFLOW;
@@ -300,8 +295,7 @@ copy_path(const char* path, char* buffer, size_t bufferSize)
 }
 
 
-static status_t
-normalize_path(const char* path, char* buffer, size_t bufferSize)
+static status_t normalize_path(const char* path, char* buffer, size_t bufferSize)
 {
 	status_t error;
 	if (bufferSize >= B_PATH_NAME_LENGTH) {
@@ -325,8 +319,7 @@ normalize_path(const char* path, char* buffer, size_t bufferSize)
 }
 
 
-static status_t
-normalize_longest_existing_path_prefix(const char* path, char* buffer,
+static status_t normalize_longest_existing_path_prefix(const char* path, char* buffer,
 	size_t bufferSize)
 {
 	if (strlcpy(buffer, path, bufferSize) >= bufferSize)
@@ -392,8 +385,7 @@ normalize_longest_existing_path_prefix(const char* path, char* buffer,
 }
 
 
-static status_t
-get_file_attribute(const char* path, const char* attribute, char* nameBuffer,
+static status_t get_file_attribute(const char* path, const char* attribute, char* nameBuffer,
 	size_t bufferSize)
 {
 	int fd = fs_open_attr(path, attribute, B_STRING_TYPE,
@@ -416,8 +408,7 @@ get_file_attribute(const char* path, const char* attribute, char* nameBuffer,
 }
 
 
-static status_t
-normalize_dependency(const char* dependency, char* buffer, size_t bufferSize)
+static status_t normalize_dependency(const char* dependency, char* buffer, size_t bufferSize)
 {
 	if (strlcpy(buffer, dependency, bufferSize) >= bufferSize)
 		return B_NAME_TOO_LONG;
@@ -492,8 +483,7 @@ process_path(const char* installationLocation, const char* architecture,
 }
 
 
-status_t
-internal_path_for_path(char* referencePath, size_t referencePathSize,
+status_t internal_path_for_path(char* referencePath, size_t referencePathSize,
 	const char* dependency, const char* architecture,
 	path_base_directory baseDirectory, const char* subPath, uint32 flags,
 	char* pathBuffer, size_t bufferSize)
@@ -582,8 +572,7 @@ internal_path_for_path(char* referencePath, size_t referencePathSize,
 // #pragma mark -
 
 
-status_t
-__find_path(const void* codePointer, path_base_directory baseDirectory,
+status_t __find_path(const void* codePointer, path_base_directory baseDirectory,
 	const char* subPath, char* pathBuffer, size_t bufferSize)
 {
 	return __find_path_etc(codePointer, NULL, NULL, baseDirectory, subPath, 0,
@@ -591,8 +580,7 @@ __find_path(const void* codePointer, path_base_directory baseDirectory,
 }
 
 
-status_t
-__find_path_etc(const void* codePointer, const char* dependency,
+status_t __find_path_etc(const void* codePointer, const char* dependency,
 	const char* architecture, path_base_directory baseDirectory,
 	const char* subPath, uint32 flags, char* pathBuffer, size_t bufferSize)
 {
@@ -614,8 +602,7 @@ __find_path_etc(const void* codePointer, const char* dependency,
 }
 
 
-status_t
-__find_path_for_path(const char* path, path_base_directory baseDirectory,
+status_t __find_path_for_path(const char* path, path_base_directory baseDirectory,
 	const char* subPath, char* pathBuffer, size_t bufferSize)
 {
 	return __find_path_for_path_etc(path, NULL, NULL, baseDirectory, subPath, 0,
@@ -623,8 +610,7 @@ __find_path_for_path(const char* path, path_base_directory baseDirectory,
 }
 
 
-status_t
-__find_path_for_path_etc(const char* path, const char* dependency,
+status_t __find_path_for_path_etc(const char* path, const char* dependency,
 	const char* architecture, path_base_directory baseDirectory,
 	const char* subPath, uint32 flags, char* pathBuffer, size_t bufferSize)
 {
@@ -646,8 +632,7 @@ __find_path_for_path_etc(const char* path, const char* dependency,
 }
 
 
-status_t
-__find_paths(path_base_directory baseDirectory, const char* subPath,
+status_t __find_paths(path_base_directory baseDirectory, const char* subPath,
 	char*** _paths, size_t* _pathCount)
 {
 	return __find_paths_etc(NULL, baseDirectory, subPath, 0, _paths,
@@ -655,8 +640,7 @@ __find_paths(path_base_directory baseDirectory, const char* subPath,
 }
 
 
-status_t
-__find_paths_etc(const char* architecture, path_base_directory baseDirectory,
+status_t __find_paths_etc(const char* architecture, path_base_directory baseDirectory,
 	const char* subPath, uint32 flags, char*** _paths, size_t* _pathCount)
 {
 	if (_paths == NULL || _pathCount == NULL)
@@ -741,8 +725,7 @@ __find_paths_etc(const char* architecture, path_base_directory baseDirectory,
 }
 
 
-const char*
-__guess_secondary_architecture_from_path(const char* path,
+const char*  __guess_secondary_architecture_from_path(const char* path,
 	const char* const* secondaryArchitectures,
 	size_t secondaryArchitectureCount)
 {

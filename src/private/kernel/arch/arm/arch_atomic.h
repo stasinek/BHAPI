@@ -28,22 +28,19 @@
 #endif
 
 
-static inline void
-memory_read_barrier_inline(void)
+static inline void memory_read_barrier_inline(void)
 {
 	dmb();
 }
 
 
-static inline void
-memory_write_barrier_inline(void)
+static inline void memory_write_barrier_inline(void)
 {
 	dmb();
 }
 
 
-static inline void
-memory_full_barrier_inline(void)
+static inline void memory_full_barrier_inline(void)
 {
 	dmb();
 }

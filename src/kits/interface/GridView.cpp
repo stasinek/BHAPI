@@ -38,8 +38,7 @@ BGridView::~BGridView()
 }
 
 
-void
-BGridView::SetLayout(BLayout* layout)
+void BGridView::SetLayout(BLayout* layout)
 {
 	// only BGridLayouts are allowed
 	if (!dynamic_cast<BGridLayout*>(layout))
@@ -65,8 +64,7 @@ BGridView::Instantiate(BMessage* from)
 }
 
 
-status_t
-BGridView::Perform(perform_code code, void* _data)
+status_t BGridView::Perform(perform_code code, void* _data)
 {
 	return BView::Perform(code, _data);
 }

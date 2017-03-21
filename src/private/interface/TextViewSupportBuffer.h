@@ -9,7 +9,7 @@
 #include <cstdlib>
 #include <cstring>
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <Haiku.h>
 
 
@@ -54,8 +54,7 @@ _BTextViewSupportBuffer_<T>::~_BTextViewSupportBuffer_()
 
 
 template <class T>
-void
-_BTextViewSupportBuffer_<T>::InsertItemsAt(int32 inNumItems,
+void _BTextViewSupportBuffer_<T>::InsertItemsAt(int32 inNumItems,
 												int32 inAtIndex,
 												const T* inItem)
 {
@@ -83,8 +82,7 @@ _BTextViewSupportBuffer_<T>::InsertItemsAt(int32 inNumItems,
 
 
 template <class T>
-void
-_BTextViewSupportBuffer_<T>::RemoveItemsAt(int32 inNumItems,
+void _BTextViewSupportBuffer_<T>::RemoveItemsAt(int32 inNumItems,
 												int32 inAtIndex)
 {
 	if (inNumItems < 1)
@@ -112,8 +110,7 @@ _BTextViewSupportBuffer_<T>::RemoveItemsAt(int32 inNumItems,
 
 
 template<class T>
-inline int32
-_BTextViewSupportBuffer_<T>::ItemCount() const
+inline int32 _BTextViewSupportBuffer_<T>::ItemCount() const
 {
 	return fItemCount;
 }

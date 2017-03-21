@@ -56,15 +56,13 @@ BSolverPackageSpecifierList::~BSolverPackageSpecifierList()
 }
 
 
-bool
-BSolverPackageSpecifierList::IsEmpty() const
+bool BSolverPackageSpecifierList::IsEmpty() const
 {
 	return fSpecifiers == NULL || fSpecifiers->empty();
 }
 
 
-int32
-BSolverPackageSpecifierList::CountSpecifiers() const
+int32 BSolverPackageSpecifierList::CountSpecifiers() const
 {
 	return fSpecifiers != NULL ? fSpecifiers->size() : 0;
 }
@@ -82,8 +80,7 @@ BSolverPackageSpecifierList::SpecifierAt(int32 index) const
 }
 
 
-bool
-BSolverPackageSpecifierList::AppendSpecifier(
+bool BSolverPackageSpecifierList::AppendSpecifier(
 	const BSolverPackageSpecifier& specifier)
 {
 	try {
@@ -101,22 +98,19 @@ BSolverPackageSpecifierList::AppendSpecifier(
 }
 
 
-bool
-BSolverPackageSpecifierList::AppendSpecifier(BSolverPackage* package)
+bool BSolverPackageSpecifierList::AppendSpecifier(BSolverPackage* package)
 {
 	return AppendSpecifier(BSolverPackageSpecifier(package));
 }
 
 
-bool
-BSolverPackageSpecifierList::AppendSpecifier(const BString& selectString)
+bool BSolverPackageSpecifierList::AppendSpecifier(const BString& selectString)
 {
 	return AppendSpecifier(BSolverPackageSpecifier(selectString));
 }
 
 
-bool
-BSolverPackageSpecifierList::AppendSpecifiers(const char* const* selectStrings,
+bool BSolverPackageSpecifierList::AppendSpecifiers(const char* const* selectStrings,
 	int32 count)
 {
 	for (int32 i = 0; i < count; i++) {
@@ -131,8 +125,7 @@ BSolverPackageSpecifierList::AppendSpecifiers(const char* const* selectStrings,
 }
 
 
-void
-BSolverPackageSpecifierList::MakeEmpty()
+void BSolverPackageSpecifierList::MakeEmpty()
 {
 	fSpecifiers->clear();
 }

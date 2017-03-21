@@ -82,8 +82,7 @@ TemplatesMenu::~TemplatesMenu()
 }
 
 
-void
-TemplatesMenu::AttachedToWindow()
+void TemplatesMenu::AttachedToWindow()
 {
 	BuildMenu();
 	BMenu::AttachedToWindow();
@@ -91,8 +90,7 @@ TemplatesMenu::AttachedToWindow()
 }
 
 
-status_t
-TemplatesMenu::SetTargetForItems(BHandler* target)
+status_t TemplatesMenu::SetTargetForItems(BHandler* target)
 {
 	status_t result = BMenu::SetTargetForItems(target);
 	if (fOpenItem)
@@ -102,8 +100,7 @@ TemplatesMenu::SetTargetForItems(BHandler* target)
 }
 
 
-status_t
-TemplatesMenu::SetTargetForItems(BMessenger messenger)
+status_t TemplatesMenu::SetTargetForItems(BMessenger messenger)
 {
 	status_t result = BMenu::SetTargetForItems(messenger);
 	if (fOpenItem)
@@ -113,15 +110,13 @@ TemplatesMenu::SetTargetForItems(BMessenger messenger)
 }
 
 
-void
-TemplatesMenu::UpdateMenuState()
+void TemplatesMenu::UpdateMenuState()
 {
 	BuildMenu(false);
 }
 
 
-bool
-TemplatesMenu::BuildMenu(bool addItems)
+bool TemplatesMenu::BuildMenu(bool addItems)
 {
 	// clear everything...
 	fOpenItem = NULL;

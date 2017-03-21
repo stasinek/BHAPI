@@ -10,7 +10,7 @@
 
 #include <algorithm>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <AutoDeleter.h>
 
@@ -34,8 +34,7 @@ CoreFileTeamInfo::CoreFileTeamInfo()
 }
 
 
-void
-CoreFileTeamInfo::Init(int32 id, int32 uid, int32 gid, const BString& args)
+void CoreFileTeamInfo::Init(int32 id, int32 uid, int32 gid, const BString& args)
 {
 	fId = id;
 	fUid = uid;
@@ -99,8 +98,7 @@ CoreFileImageInfo::~CoreFileImageInfo()
 }
 
 
-void
-CoreFileImageInfo::SetSymbolsInfo(CoreFileSymbolsInfo* symbolsInfo)
+void CoreFileImageInfo::SetSymbolsInfo(CoreFileSymbolsInfo* symbolsInfo)
 {
 	if (fSymbolsInfo != NULL)
 		delete fSymbolsInfo;
@@ -129,8 +127,7 @@ CoreFileSymbolsInfo::~CoreFileSymbolsInfo()
 }
 
 
-bool
-CoreFileSymbolsInfo::Init(const void* symbolTable, uint32 symbolCount,
+bool CoreFileSymbolsInfo::Init(const void* symbolTable, uint32 symbolCount,
 	uint32 symbolTableEntrySize, const char* stringTable,
 	uint32 stringTableSize)
 {
@@ -175,8 +172,7 @@ CoreFileThreadInfo::~CoreFileThreadInfo()
 }
 
 
-bool
-CoreFileThreadInfo::SetCpuState(const void* state, size_t size)
+bool CoreFileThreadInfo::SetCpuState(const void* state, size_t size)
 {
 	free(fCpuState);
 	fCpuState = NULL;
@@ -213,8 +209,7 @@ CoreFile::~CoreFile()
 }
 
 
-status_t
-CoreFile::Init(const char* fileName)
+status_t CoreFile::Init(const char* fileName)
 {
 	status_t error = fElfFile.Init(fileName);
 	if (error != B_OK)
@@ -240,8 +235,7 @@ CoreFile::ThreadInfoForId(int32 id) const
 }
 
 
-status_t
-CoreFile::CreateSymbolLookup(const CoreFileImageInfo* imageInfo,
+status_t CoreFile::CreateSymbolLookup(const CoreFileImageInfo* imageInfo,
 	ElfSymbolLookup*& _lookup)
 {
 	// get the needed data
@@ -279,8 +273,7 @@ CoreFile::CreateSymbolLookup(const CoreFileImageInfo* imageInfo,
 
 
 template<typename ElfClass>
-status_t
-CoreFile::_Init()
+status_t CoreFile::_Init()
 {
 	status_t error = _ReadNotes<ElfClass>();
 	if (error != B_OK)
@@ -293,8 +286,7 @@ B_PRId32 " threads\n", CountAreaInfos(), CountImageInfos(), CountThreadInfos());
 
 
 template<typename ElfClass>
-status_t
-CoreFile::_ReadNotes()
+status_t CoreFile::_ReadNotes()
 {
 	int32 count = fElfFile.CountSegments();
 	for (int32 i = 0; i < count; i++) {
@@ -311,8 +303,7 @@ CoreFile::_ReadNotes()
 
 
 template<typename ElfClass>
-status_t
-CoreFile::_ReadNotes(ElfSegment* segment)
+status_t CoreFile::_ReadNotes(ElfSegment* segment)
 {
 	// read the whole segment into memory
 	if ((uint64)segment->FileSize() > kMaxNotesSize) {
@@ -389,8 +380,7 @@ CoreFile::_ReadNotes(ElfSegment* segment)
 
 
 template<typename ElfClass>
-status_t
-CoreFile::_ReadNote(const char* name, uint32 type, const void* data,
+status_t CoreFile::_ReadNote(const char* name, uint32 type, const void* data,
 	uint32 dataSize)
 {
 	if (strcmp(name, ELF_NOTE_CORE) == 0) {
@@ -421,8 +411,7 @@ CoreFile::_ReadNote(const char* name, uint32 type, const void* data,
 
 
 template<typename ElfClass>
-status_t
-CoreFile::_ReadTeamNote(const void* data, uint32 dataSize)
+status_t CoreFile::_ReadTeamNote(const void* data, uint32 dataSize)
 {
 	typedef typename ElfClass::NoteTeam NoteTeam;
 
@@ -465,8 +454,7 @@ CoreFile::_ReadTeamNote(const void* data, uint32 dataSize)
 
 
 template<typename ElfClass>
-status_t
-CoreFile::_ReadAreasNote(const void* data, uint32 dataSize)
+status_t CoreFile::_ReadAreasNote(const void* data, uint32 dataSize)
 {
 	if (dataSize < 2 * sizeof(uint32)) {
 		WARNING("Areas note too short\n");
@@ -538,8 +526,7 @@ CoreFile::_ReadAreasNote(const void* data, uint32 dataSize)
 
 
 template<typename ElfClass>
-status_t
-CoreFile::_ReadImagesNote(const void* data, uint32 dataSize)
+status_t CoreFile::_ReadImagesNote(const void* data, uint32 dataSize)
 {
 	if (dataSize < 2 * sizeof(uint32)) {
 		WARNING("Images note too short\n");
@@ -622,8 +609,7 @@ CoreFile::_ReadImagesNote(const void* data, uint32 dataSize)
 
 
 template<typename ElfClass>
-status_t
-CoreFile::_ReadSymbolsNote(const void* data, uint32 dataSize)
+status_t CoreFile::_ReadSymbolsNote(const void* data, uint32 dataSize)
 {
 	if (dataSize < 3 * sizeof(uint32)) {
 		WARNING("Symbols note too short\n");
@@ -680,8 +666,7 @@ CoreFile::_ReadSymbolsNote(const void* data, uint32 dataSize)
 
 
 template<typename ElfClass>
-status_t
-CoreFile::_ReadThreadsNote(const void* data, uint32 dataSize)
+status_t CoreFile::_ReadThreadsNote(const void* data, uint32 dataSize)
 {
 	if (dataSize < 3 * sizeof(uint32)) {
 		WARNING("Threads note too short\n");
@@ -821,8 +806,7 @@ CoreFile::_ReadValue(const void*& data, uint32& dataSize)
 
 
 template<typename Entry>
-void
-CoreFile::_ReadEntry(const void*& data, uint32& dataSize, Entry& entry,
+void CoreFile::_ReadEntry(const void*& data, uint32& dataSize, Entry& entry,
 	size_t entrySize)
 {
 	memcpy(&entry, data, std::min(sizeof(entry), entrySize));
@@ -830,8 +814,7 @@ CoreFile::_ReadEntry(const void*& data, uint32& dataSize, Entry& entry,
 }
 
 
-void
-CoreFile::_Advance(const void*& data, uint32& dataSize, size_t by)
+void CoreFile::_Advance(const void*& data, uint32& dataSize, size_t by)
 {
 	data = (const uint8*)data + by;
 	dataSize -= by;

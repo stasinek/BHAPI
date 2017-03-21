@@ -63,7 +63,7 @@ BPixmap::~BPixmap()
 }
 
 
-void
+void 
 BPixmap::MakeEmpty()
 {
 	if(fPtr) FreeData(fPtr);
@@ -71,7 +71,7 @@ BPixmap::MakeEmpty()
 }
 
 
-status_t
+status_t 
 BPixmap::InitCheck() const
 {
 	return(fPtr != NULL ? B_OK : B_ERROR);
@@ -116,7 +116,7 @@ BPixmap::Bounds() const
 }
 
 
-bool
+bool 
 BPixmap::ResizeTo(__be_uint32 width,  __be_uint32 height, bhapi::color_space space)
 {
 	if(width == 0 || height == 0)
@@ -169,7 +169,7 @@ BPixmap::ResizeTo(__be_uint32 width,  __be_uint32 height, bhapi::color_space spa
 }
 
 
-bool
+bool 
 BPixmap::ResizeTo(BRect bounds, bhapi::color_space space)
 {
 	return ResizeTo((__be_uint32)(max_c(bounds.IntegerWidth() + 1, 0)), (__be_uint32)(max_c(bounds.IntegerHeight() + 1, 0)), space);
@@ -183,14 +183,14 @@ BPixmap::AllocData(size_t size)
 }
 
 
-void
+void 
 BPixmap::FreeData(void *data)
 {
 	if(data) free(data);
 }
 
 
-void
+void 
 BPixmap::GetFrame(__be_int32 *originX,  __be_int32 *originY,  __be_uint32 *width,  __be_uint32 *height) const
 {
 	if(originX) *originX = 0;
@@ -200,7 +200,7 @@ BPixmap::GetFrame(__be_int32 *originX,  __be_int32 *originY,  __be_uint32 *width
 }
 
 
-void
+void 
 BPixmap::GetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color &color) const
 {
 	if(fPtr == NULL) return;
@@ -248,7 +248,7 @@ BPixmap::GetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color &color) const
 }
 
 
-void
+void 
 BPixmap::PutPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color)
 {
 	if(fPtr == NULL) return;
@@ -297,7 +297,7 @@ BPixmap::PutPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color)
 }
 
 
-void
+void 
 BPixmap::PutRect(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bhapi::rgb_color color)
 {
 	if(fPtr == NULL) return;
@@ -344,7 +344,7 @@ BPixmap::PutRect(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 h
 }
 
 
-void
+void 
 BPixmap::SetBits(const void *data,  __be_int32 length,  __be_int32 offset, bhapi::color_space space)
 {
 	if(data == NULL || length <= 0 || offset < 0 || !IsValid()) return;
@@ -363,7 +363,7 @@ BPixmap::SetBits(const void *data,  __be_int32 length,  __be_int32 offset, bhapi
 }
 
 
-void
+void 
 BPixmap::SetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color)
 {
 	PutPixel(x, y, color);
@@ -379,7 +379,7 @@ BPixmap::GetPixel(__be_int32 x,  __be_int32 y) const
 }
 
 
-void
+void 
 BPixmap::DrawXPM(const char **xpm_data,  __be_int32 destX,  __be_int32 destY,  __be_int32 srcX,  __be_int32 srcY,  __be_int32 srcW,  __be_int32 srcH,  __be_uint8 alpha)
 {
 	if(xpm_data == NULL || *xpm_data == NULL ||

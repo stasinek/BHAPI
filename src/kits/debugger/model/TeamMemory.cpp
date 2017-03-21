@@ -8,7 +8,7 @@
 
 #include <algorithm>
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <StringClass.h>
 
 
@@ -17,8 +17,7 @@ TeamMemory::~TeamMemory()
 }
 
 
-status_t
-TeamMemory::ReadMemoryString(target_addr_t address, size_t maxLength,
+status_t TeamMemory::ReadMemoryString(target_addr_t address, size_t maxLength,
 	BString& _string)
 {
 	char buffer[B_PAGE_SIZE];

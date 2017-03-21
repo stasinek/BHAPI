@@ -92,14 +92,14 @@ BEntry::~BEntry()
 }
 
 
-status_t
+status_t 
 BEntry::SetTo(const char *path, bool traverse)
 {
 	return SetTo(path, NULL, traverse);
 }
 
 
-status_t
+status_t 
 BEntry::SetTo(const char *dir, const char *leaf, bool traverse)
 {
 	if(dir == NULL) return B_BAD_VALUE;
@@ -138,7 +138,7 @@ BEntry::SetTo(const char *dir, const char *leaf, bool traverse)
 }
 
 
-status_t
+status_t 
 BEntry::SetTo(const BDirectory *dir, const char *leaf, bool traverse)
 {
 	if(dir == NULL || dir->InitCheck() != B_OK) return B_BAD_VALUE;
@@ -146,7 +146,7 @@ BEntry::SetTo(const BDirectory *dir, const char *leaf, bool traverse)
 }
 
 
-void
+void 
 BEntry::Unset()
 {
 	if(fName != NULL) delete[] fName;
@@ -154,7 +154,7 @@ BEntry::Unset()
 }
 
 
-status_t
+status_t 
 BEntry::InitCheck() const
 {
 	if(fName == NULL) return B_NO_INIT;
@@ -162,7 +162,7 @@ BEntry::InitCheck() const
 }
 
 
-bool
+bool 
 BEntry::Exists() const
 {
 	if(fName == NULL) return false;
@@ -185,7 +185,7 @@ BEntry::Exists() const
 }
 
 
-bool
+bool 
 BEntry::IsHidden() const
 {
 	bool retVal = false;
@@ -205,7 +205,7 @@ BEntry::IsHidden() const
 }
 
 
-bool
+bool 
 BEntry::IsFile() const
 {
 	if(fName == NULL) return false;
@@ -228,7 +228,7 @@ BEntry::IsFile() const
 }
 
 
-bool
+bool 
 BEntry::IsDirectory() const
 {
 	if(fName == NULL) return false;
@@ -251,7 +251,7 @@ BEntry::IsDirectory() const
 }
 
 
-bool
+bool 
 BEntry::IsSymLink() const
 {
 #ifdef S_ISLNK
@@ -264,7 +264,7 @@ BEntry::IsSymLink() const
 }
 
 
-status_t
+status_t 
 BEntry::GetSize(__be_int64 *file_size) const
 {
 	if(fName == NULL || file_size == NULL) return B_ERROR;
@@ -293,7 +293,7 @@ BEntry::GetSize(__be_int64 *file_size) const
 }
 
 
-status_t
+status_t 
 BEntry::GetModificationTime(bigtime_t *time) const
 {
 	if(fName == NULL || time == NULL) return B_ERROR;
@@ -318,7 +318,7 @@ BEntry::GetModificationTime(bigtime_t *time) const
 }
 
 
-status_t
+status_t 
 BEntry::GetCreationTime(bigtime_t *time) const
 {
 	if(fName == NULL || time == NULL) return B_ERROR;
@@ -343,7 +343,7 @@ BEntry::GetCreationTime(bigtime_t *time) const
 }
 
 
-status_t
+status_t 
 BEntry::GetAccessTime(bigtime_t *time) const
 {
 	if(fName == NULL || time == NULL) return B_ERROR;
@@ -391,7 +391,7 @@ BEntry::Name() const
 }
 
 
-status_t
+status_t 
 BEntry::GetName(char *buffer, size_t bufferSize) const
 {
 	const char *name = Name();
@@ -411,7 +411,7 @@ BEntry::Path() const
 }
 
 
-status_t
+status_t 
 BEntry::GetPath(BPath *path) const
 {
 	if(path == NULL) return B_BAD_VALUE;
@@ -421,7 +421,7 @@ BEntry::GetPath(BPath *path) const
 }
 
 
-status_t
+status_t 
 BEntry::GetParent(BEntry *entry) const
 {
 	if(entry == NULL) return B_BAD_VALUE;
@@ -435,7 +435,7 @@ BEntry::GetParent(BEntry *entry) const
 }
 
 
-status_t
+status_t 
 BEntry::GetParent(BPath *path) const
 {
 	if(path == NULL) return B_BAD_VALUE;
@@ -449,7 +449,7 @@ BEntry::GetParent(BPath *path) const
 }
 
 
-status_t
+status_t 
 BEntry::GetParent(BDirectory *dir) const
 {
 	if(dir == NULL) return B_BAD_VALUE;
@@ -463,7 +463,7 @@ BEntry::GetParent(BDirectory *dir) const
 }
 
 
-bool
+bool 
 BEntry::operator==(const BEntry &entry) const
 {
 	if(fName == NULL && entry.fName == NULL) return true;
@@ -472,7 +472,7 @@ BEntry::operator==(const BEntry &entry) const
 }
 
 
-bool
+bool 
 BEntry::operator!=(const BEntry &entry) const
 {
 	if(fName == NULL && entry.fName == NULL) return false;

@@ -24,8 +24,7 @@ struct quehead {
 
 /** Initializes a queue to be used */
 
-static inline void
-initque(void *_head)
+static inline void initque(void *_head)
 {
 	struct quehead *head = (struct quehead *)_head;
 
@@ -35,8 +34,7 @@ initque(void *_head)
 
 /** Inserts an element (_element) to the queue (_head) */
 
-static inline void
-insque(void *_element, void *_head)
+static inline void insque(void *_element, void *_head)
 {
 	struct quehead *element = (struct quehead *)_element,
 		 *head = (struct quehead *)_head;
@@ -50,8 +48,7 @@ insque(void *_element, void *_head)
 
 /** removes an element from the queue it's currently in */
 
-static inline void
-remque(void *_element)
+static inline void remque(void *_element)
 {
 	struct quehead *element = (struct quehead *)_element;
 

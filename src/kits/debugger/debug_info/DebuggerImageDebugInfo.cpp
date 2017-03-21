@@ -35,15 +35,13 @@ DebuggerImageDebugInfo::~DebuggerImageDebugInfo()
 }
 
 
-status_t
-DebuggerImageDebugInfo::Init()
+status_t DebuggerImageDebugInfo::Init()
 {
 	return B_OK;
 }
 
 
-status_t
-DebuggerImageDebugInfo::GetFunctions(const BObjectList<SymbolInfo>& symbols,
+status_t DebuggerImageDebugInfo::GetFunctions(const BObjectList<SymbolInfo>& symbols,
 	BObjectList<FunctionDebugInfo>& functions)
 {
 	return SpecificImageDebugInfo::GetFunctionsFromSymbols(symbols, functions,
@@ -51,8 +49,7 @@ DebuggerImageDebugInfo::GetFunctions(const BObjectList<SymbolInfo>& symbols,
 }
 
 
-status_t
-DebuggerImageDebugInfo::GetType(GlobalTypeCache* cache,
+status_t DebuggerImageDebugInfo::GetType(GlobalTypeCache* cache,
 	const BString& name, const TypeLookupConstraints& constraints,
 	Type*& _type)
 {
@@ -60,8 +57,7 @@ DebuggerImageDebugInfo::GetType(GlobalTypeCache* cache,
 }
 
 
-bool
-DebuggerImageDebugInfo::HasType(const BString& name,
+bool DebuggerImageDebugInfo::HasType(const BString& name,
 	const TypeLookupConstraints& constraints) const
 {
 	return false;
@@ -75,8 +71,7 @@ DebuggerImageDebugInfo::GetAddressSectionType(target_addr_t address)
 }
 
 
-status_t
-DebuggerImageDebugInfo::CreateFrame(Image* image,
+status_t DebuggerImageDebugInfo::CreateFrame(Image* image,
 	FunctionInstance* functionInstance, CpuState* cpuState,
 	bool getFullFrameInfo, ReturnValueInfoList* returnValueInfos,
 	StackFrame*& _previousFrame, CpuState*& _previousCpuState)
@@ -85,16 +80,14 @@ DebuggerImageDebugInfo::CreateFrame(Image* image,
 }
 
 
-status_t
-DebuggerImageDebugInfo::GetStatement(FunctionDebugInfo* function,
+status_t DebuggerImageDebugInfo::GetStatement(FunctionDebugInfo* function,
 	target_addr_t address, Statement*& _statement)
 {
 	return fArchitecture->GetStatement(function, address, _statement);
 }
 
 
-status_t
-DebuggerImageDebugInfo::GetStatementAtSourceLocation(
+status_t DebuggerImageDebugInfo::GetStatementAtSourceLocation(
 	FunctionDebugInfo* function, const SourceLocation& sourceLocation,
 	Statement*& _statement)
 {
@@ -102,8 +95,7 @@ DebuggerImageDebugInfo::GetStatementAtSourceLocation(
 }
 
 
-status_t
-DebuggerImageDebugInfo::GetSourceLanguage(FunctionDebugInfo* function,
+status_t DebuggerImageDebugInfo::GetSourceLanguage(FunctionDebugInfo* function,
 	SourceLanguage*& _language)
 {
 	return B_UNSUPPORTED;
@@ -118,8 +110,7 @@ DebuggerImageDebugInfo::ReadCode(target_addr_t address, void* buffer,
 }
 
 
-status_t
-DebuggerImageDebugInfo::AddSourceCodeInfo(LocatableFile* file,
+status_t DebuggerImageDebugInfo::AddSourceCodeInfo(LocatableFile* file,
 	FileSourceCode* sourceCode)
 {
 	return B_UNSUPPORTED;

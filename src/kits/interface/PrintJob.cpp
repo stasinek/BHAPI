@@ -25,7 +25,7 @@
 #include <FindDirectory.h>
 #include <Messenger.h>
 #include <NodeInfo.h>
-#include <OS.h>
+#include <kernel/OS.h>
 #include <Path.h>
 #include <Region.h>
 #include <Roster.h>
@@ -100,8 +100,7 @@ struct _page_header_ {
 };
 
 
-static void
-ShowError(const char* message)
+static void ShowError(const char* message)
 {
 	BAlert* alert = new BAlert(B_TRANSLATE("Error"), message, B_TRANSLATE("OK"));
 	alert->SetFlags(alert->Flags() | B_CLOSE_ON_ESCAPE);
@@ -184,8 +183,7 @@ BPrintJob::~BPrintJob()
 }
 
 
-status_t
-BPrintJob::ConfigPage()
+status_t BPrintJob::ConfigPage()
 {
 	PrintServerMessenger messenger(PSRV_SHOW_PAGE_SETUP, fSetupMessage);
 	status_t status = messenger.SendRequest();
@@ -200,8 +198,7 @@ BPrintJob::ConfigPage()
 }
 
 
-status_t
-BPrintJob::ConfigJob()
+status_t BPrintJob::ConfigJob()
 {
 	PrintServerMessenger messenger(PSRV_SHOW_PRINT_SETUP, fSetupMessage);
 	status_t status = messenger.SendRequest();
@@ -218,8 +215,7 @@ BPrintJob::ConfigJob()
 }
 
 
-void
-BPrintJob::BeginJob()
+void BPrintJob::BeginJob()
 {
 	fError = B_ERROR;
 
@@ -287,8 +283,7 @@ BPrintJob::BeginJob()
 }
 
 
-void
-BPrintJob::CommitJob()
+void BPrintJob::CommitJob()
 {
 	if (fSpoolFile == NULL)
 		return;
@@ -344,8 +339,7 @@ BPrintJob::CommitJob()
 }
 
 
-void
-BPrintJob::CancelJob()
+void BPrintJob::CancelJob()
 {
 	if (fSpoolFile == NULL)
 		return;
@@ -357,8 +351,7 @@ BPrintJob::CancelJob()
 }
 
 
-void
-BPrintJob::SpoolPage()
+void BPrintJob::SpoolPage()
 {
 	if (fSpoolFile == NULL)
 		return;
@@ -380,16 +373,14 @@ BPrintJob::SpoolPage()
 }
 
 
-bool
-BPrintJob::CanContinue()
+bool BPrintJob::CanContinue()
 {
 	// Check if our local error storage is still B_OK
 	return fError == B_OK && !fAbort;
 }
 
 
-void
-BPrintJob::DrawView(BView* view, BRect rect, BPoint where)
+void BPrintJob::DrawView(BView* view, BRect rect, BPoint where)
 {
 	if (fSpoolFile == NULL)
 		return;
@@ -406,8 +397,7 @@ BPrintJob::DrawView(BView* view, BRect rect, BPoint where)
 }
 
 
-BMessage*
-BPrintJob::Settings()
+BMessage*  BPrintJob::Settings()
 {
 	if (fSetupMessage == NULL)
 		return NULL;
@@ -416,8 +406,7 @@ BPrintJob::Settings()
 }
 
 
-void
-BPrintJob::SetSettings(BMessage* message)
+void BPrintJob::SetSettings(BMessage* message)
 {
 	if (message != NULL)
 		_HandlePrintSetup(message);
@@ -427,8 +416,7 @@ BPrintJob::SetSettings(BMessage* message)
 }
 
 
-bool
-BPrintJob::IsSettingsMessageValid(BMessage* message) const
+bool BPrintJob::IsSettingsMessageValid(BMessage* message) const
 {
 	char* printerName = _GetCurrentPrinterName();
 	if (printerName == NULL)
@@ -467,8 +455,7 @@ BPrintJob::PrintableRect()
 }
 
 
-void
-BPrintJob::GetResolution(int32* xdpi, int32* ydpi)
+void BPrintJob::GetResolution(int32* xdpi, int32* ydpi)
 {
 	if (fDefaultSetupMessage == NULL)
 		_LoadDefaultSettings();
@@ -481,22 +468,19 @@ BPrintJob::GetResolution(int32* xdpi, int32* ydpi)
 }
 
 
-int32
-BPrintJob::FirstPage()
+int32 BPrintJob::FirstPage()
 {
 	return fFirstPage;
 }
 
 
-int32
-BPrintJob::LastPage()
+int32 BPrintJob::LastPage()
 {
 	return fLastPage;
 }
 
 
-int32
-BPrintJob::PrinterType(void*) const
+int32 BPrintJob::PrinterType(void*) const
 {
 	BMessenger printServer;
 	if (PrintServerMessenger::GetPrintServerMessenger(printServer) != B_OK)
@@ -517,8 +501,7 @@ BPrintJob::PrinterType(void*) const
 // #pragma mark - private
 
 
-void
-BPrintJob::_RecurseView(BView* view, BPoint origin, BPicture* picture,
+void BPrintJob::_RecurseView(BView* view, BPoint origin, BPicture* picture,
 	BRect rect)
 {
 	ASSERT(picture != NULL);
@@ -574,16 +557,14 @@ BPrintJob::_RecurseView(BView* view, BPoint origin, BPicture* picture,
 }
 
 
-void
-BPrintJob::_GetMangledName(char* buffer, size_t bufferSize) const
+void BPrintJob::_GetMangledName(char* buffer, size_t bufferSize) const
 {
 	snprintf(buffer, bufferSize, "%s@%" B_PRId64, fPrintJobName,
 		system_time() / 1000);
 }
 
 
-void
-BPrintJob::_HandlePageSetup(BMessage* setup)
+void BPrintJob::_HandlePageSetup(BMessage* setup)
 {
 	setup->FindRect(PSRV_FIELD_PRINTABLE_RECT, &fUsableSize);
 	setup->FindRect(PSRV_FIELD_PAPER_RECT, &fPaperSize);
@@ -598,8 +579,7 @@ BPrintJob::_HandlePageSetup(BMessage* setup)
 }
 
 
-bool
-BPrintJob::_HandlePrintSetup(BMessage* message)
+bool BPrintJob::_HandlePrintSetup(BMessage* message)
 {
 	_HandlePageSetup(message);
 
@@ -614,8 +594,7 @@ BPrintJob::_HandlePrintSetup(BMessage* message)
 }
 
 
-void
-BPrintJob::_NewPage()
+void BPrintJob::_NewPage()
 {
 	// init, write new page_header
 	fCurrentPageHeader->next_page = 0;
@@ -625,8 +604,7 @@ BPrintJob::_NewPage()
 }
 
 
-void
-BPrintJob::_EndLastPage()
+void BPrintJob::_EndLastPage()
 {
 	if (!fSpoolFile)
 		return;
@@ -645,15 +623,13 @@ BPrintJob::_EndLastPage()
 }
 
 
-void
-BPrintJob::_AddSetupSpec()
+void BPrintJob::_AddSetupSpec()
 {
 	fSetupMessage->Flatten(fSpoolFile);
 }
 
 
-void
-BPrintJob::_AddPicture(BPicture& picture, BRect& rect, BPoint& where)
+void BPrintJob::_AddPicture(BPicture& picture, BRect& rect, BPoint& where)
 {
 	ASSERT(fSpoolFile != NULL);
 
@@ -668,8 +644,7 @@ BPrintJob::_AddPicture(BPicture& picture, BRect& rect, BPoint& where)
 	could not be obtained. Caller is responsible to free the string using
 	free().
 */
-char*
-BPrintJob::_GetCurrentPrinterName() const
+char*  BPrintJob::_GetCurrentPrinterName() const
 {
 	BMessenger printServer;
 	if (PrintServerMessenger::GetPrintServerMessenger(printServer) != B_OK)
@@ -689,8 +664,7 @@ BPrintJob::_GetCurrentPrinterName() const
 }
 
 
-void
-BPrintJob::_LoadDefaultSettings()
+void BPrintJob::_LoadDefaultSettings()
 {
 	BMessenger printServer;
 	if (PrintServerMessenger::GetPrintServerMessenger(printServer) != B_OK)
@@ -744,8 +718,7 @@ PrintServerMessenger::~PrintServerMessenger()
 }
 
 
-void
-PrintServerMessenger::RejectUserInput()
+void PrintServerMessenger::RejectUserInput()
 {
 	fHiddenApplicationModalWindow = new BAlert("bogus", "app_modal", "OK");
 	fHiddenApplicationModalWindow->DefaultButton()->SetEnabled(false);
@@ -756,16 +729,14 @@ PrintServerMessenger::RejectUserInput()
 }
 
 
-void
-PrintServerMessenger::AllowUserInput()
+void PrintServerMessenger::AllowUserInput()
 {
 	fHiddenApplicationModalWindow->Lock();
 	fHiddenApplicationModalWindow->Quit();
 }
 
 
-void
-PrintServerMessenger::DeleteSemaphore()
+void PrintServerMessenger::DeleteSemaphore()
 {
 	if (fThreadCompleted >= B_OK) {
 		sem_id id = fThreadCompleted;
@@ -775,8 +746,7 @@ PrintServerMessenger::DeleteSemaphore()
 }
 
 
-status_t
-PrintServerMessenger::SendRequest()
+status_t PrintServerMessenger::SendRequest()
 {
 	fThreadCompleted = create_sem(0, "print_server_messenger_sem");
 	if (fThreadCompleted < B_OK)
@@ -816,8 +786,7 @@ PrintServerMessenger::SendRequest()
 }
 
 
-BMessage*
-PrintServerMessenger::Request()
+BMessage*  PrintServerMessenger::Request()
 {
 	if (fRequest != NULL)
 		return fRequest;
@@ -832,8 +801,7 @@ PrintServerMessenger::Request()
 }
 
 
-void
-PrintServerMessenger::SetResult(BMessage* result)
+void PrintServerMessenger::SetResult(BMessage* result)
 {
 	fResult = result;
 	DeleteSemaphore();
@@ -841,16 +809,14 @@ PrintServerMessenger::SetResult(BMessage* result)
 }
 
 
-status_t
-PrintServerMessenger::GetPrintServerMessenger(BMessenger& messenger)
+status_t PrintServerMessenger::GetPrintServerMessenger(BMessenger& messenger)
 {
 	messenger = BMessenger(PSRV_SIGNATURE_TYPE);
 	return messenger.IsValid() ? B_OK : B_ERROR;
 }
 
 
-status_t
-PrintServerMessenger::MessengerThread(void* data)
+status_t PrintServerMessenger::MessengerThread(void* data)
 {
 	PrintServerMessenger* messenger = static_cast<PrintServerMessenger*>(data);
 

@@ -54,8 +54,7 @@ SoundPlayNode::~SoundPlayNode()
 }
 
 
-bool
-SoundPlayNode::IsPlaying()
+bool SoundPlayNode::IsPlaying()
 {
 	return RunState() == B_STARTED;
 }
@@ -89,8 +88,7 @@ SoundPlayNode::AddOn(int32* _internalID) const
 }
 
 
-void
-SoundPlayNode::Preroll()
+void SoundPlayNode::Preroll()
 {
 	CALLED();
 	// TODO: Performance opportunity
@@ -98,16 +96,14 @@ SoundPlayNode::Preroll()
 }
 
 
-status_t
-SoundPlayNode::HandleMessage(int32 message, const void* data, size_t size)
+status_t SoundPlayNode::HandleMessage(int32 message, const void* data, size_t size)
 {
 	CALLED();
 	return B_ERROR;
 }
 
 
-void
-SoundPlayNode::NodeRegistered()
+void SoundPlayNode::NodeRegistered()
 {
 	CALLED();
 
@@ -130,24 +126,21 @@ SoundPlayNode::NodeRegistered()
 }
 
 
-status_t
-SoundPlayNode::RequestCompleted(const media_request_info& info)
+status_t SoundPlayNode::RequestCompleted(const media_request_info& info)
 {
 	CALLED();
 	return B_OK;
 }
 
 
-void
-SoundPlayNode::SetTimeSource(BTimeSource* timeSource)
+void SoundPlayNode::SetTimeSource(BTimeSource* timeSource)
 {
 	CALLED();
 	BMediaNode::SetTimeSource(timeSource);
 }
 
 
-void
-SoundPlayNode::SetRunMode(run_mode mode)
+void SoundPlayNode::SetRunMode(run_mode mode)
 {
 	TRACE("SoundPlayNode::SetRunMode mode:%i\n", mode);
 	BMediaNode::SetRunMode(mode);
@@ -157,8 +150,7 @@ SoundPlayNode::SetRunMode(run_mode mode)
 // #pragma mark - implementation for BBufferProducer
 
 
-status_t
-SoundPlayNode::FormatSuggestionRequested(media_type type, int32 /*quality*/,
+status_t SoundPlayNode::FormatSuggestionRequested(media_type type, int32 /*quality*/,
 	media_format* format)
 {
 	// FormatSuggestionRequested() is not necessarily part of the format
@@ -179,8 +171,7 @@ SoundPlayNode::FormatSuggestionRequested(media_type type, int32 /*quality*/,
 }
 
 
-status_t
-SoundPlayNode::FormatProposal(const media_source& output, media_format* format)
+status_t SoundPlayNode::FormatProposal(const media_source& output, media_format* format)
 {
 	// FormatProposal() is the first stage in the BMediaRoster::Connect()
 	// process. We hand out a suggested format, with wildcards for any
@@ -213,8 +204,7 @@ SoundPlayNode::FormatProposal(const media_source& output, media_format* format)
 }
 
 
-status_t
-SoundPlayNode::FormatChangeRequested(const media_source& source,
+status_t SoundPlayNode::FormatChangeRequested(const media_source& source,
 	const media_destination& destination, media_format* _format,
 	int32* /* deprecated */)
 {
@@ -225,8 +215,7 @@ SoundPlayNode::FormatChangeRequested(const media_source& source,
 }
 
 
-status_t
-SoundPlayNode::GetNextOutput(int32* cookie, media_output* _output)
+status_t SoundPlayNode::GetNextOutput(int32* cookie, media_output* _output)
 {
 	CALLED();
 
@@ -240,8 +229,7 @@ SoundPlayNode::GetNextOutput(int32* cookie, media_output* _output)
 }
 
 
-status_t
-SoundPlayNode::DisposeOutputCookie(int32 cookie)
+status_t SoundPlayNode::DisposeOutputCookie(int32 cookie)
 {
 	CALLED();
 	// do nothing because we don't use the cookie for anything special
@@ -249,8 +237,7 @@ SoundPlayNode::DisposeOutputCookie(int32 cookie)
 }
 
 
-status_t
-SoundPlayNode::SetBufferGroup(const media_source& forSource,
+status_t SoundPlayNode::SetBufferGroup(const media_source& forSource,
 	BBufferGroup* newGroup)
 {
 	CALLED();
@@ -286,8 +273,7 @@ SoundPlayNode::SetBufferGroup(const media_source& forSource,
 }
 
 
-status_t
-SoundPlayNode::GetLatency(bigtime_t* _latency)
+status_t SoundPlayNode::GetLatency(bigtime_t* _latency)
 {
 	CALLED();
 
@@ -297,8 +283,7 @@ SoundPlayNode::GetLatency(bigtime_t* _latency)
 }
 
 
-status_t
-SoundPlayNode::PrepareToConnect(const media_source& what,
+status_t SoundPlayNode::PrepareToConnect(const media_source& what,
 	const media_destination& where, media_format* format,
 	media_source* _source, char* _name)
 {
@@ -386,8 +371,7 @@ SoundPlayNode::PrepareToConnect(const media_source& what,
 }
 
 
-void
-SoundPlayNode::Connect(status_t error, const media_source& source,
+void SoundPlayNode::Connect(status_t error, const media_source& source,
 	const media_destination& destination, const media_format& format,
 	char* name)
 {
@@ -444,8 +428,7 @@ SoundPlayNode::Connect(status_t error, const media_source& source,
 }
 
 
-void
-SoundPlayNode::Disconnect(const media_source& what,
+void SoundPlayNode::Disconnect(const media_source& what,
 	const media_destination& where)
 {
 	CALLED();
@@ -472,8 +455,7 @@ SoundPlayNode::Disconnect(const media_source& what,
 }
 
 
-void
-SoundPlayNode::LateNoticeReceived(const media_source& what, bigtime_t howMuch,
+void SoundPlayNode::LateNoticeReceived(const media_source& what, bigtime_t howMuch,
 	bigtime_t performanceTime)
 {
 	CALLED();
@@ -518,8 +500,7 @@ SoundPlayNode::LateNoticeReceived(const media_source& what, bigtime_t howMuch,
 }
 
 
-void
-SoundPlayNode::EnableOutput(const media_source& what, bool enabled,
+void SoundPlayNode::EnableOutput(const media_source& what, bool enabled,
 	int32* /* deprecated */)
 {
 	CALLED();
@@ -540,8 +521,7 @@ SoundPlayNode::EnableOutput(const media_source& what, bool enabled,
 }
 
 
-void
-SoundPlayNode::AdditionalBufferRequested(const media_source& source,
+void SoundPlayNode::AdditionalBufferRequested(const media_source& source,
 	media_buffer_id previousBuffer, bigtime_t previousTime,
 	const media_seek_tag* previousTag)
 {
@@ -551,8 +531,7 @@ SoundPlayNode::AdditionalBufferRequested(const media_source& source,
 }
 
 
-void
-SoundPlayNode::LatencyChanged(const media_source& source,
+void SoundPlayNode::LatencyChanged(const media_source& source,
 	const media_destination& destination, bigtime_t newLatency, uint32 flags)
 {
 	CALLED();
@@ -576,8 +555,7 @@ SoundPlayNode::LatencyChanged(const media_source& source,
 // #pragma mark - implementation for BMediaEventLooper
 
 
-void
-SoundPlayNode::HandleEvent(const media_timed_event* event, bigtime_t lateness,
+void SoundPlayNode::HandleEvent(const media_timed_event* event, bigtime_t lateness,
 	bool realTimeEvent)
 {
 	CALLED();
@@ -619,8 +597,7 @@ SoundPlayNode::HandleEvent(const media_timed_event* event, bigtime_t lateness,
 
 // how should we handle late buffers?  drop them?
 // notify the producer?
-status_t
-SoundPlayNode::SendNewBuffer(const media_timed_event* event,
+status_t SoundPlayNode::SendNewBuffer(const media_timed_event* event,
 	bigtime_t lateness, bool realTimeEvent)
 {
 	CALLED();
@@ -698,8 +675,7 @@ SoundPlayNode::SendNewBuffer(const media_timed_event* event,
 }
 
 
-status_t
-SoundPlayNode::HandleDataStatus(const media_timed_event* event,
+status_t SoundPlayNode::HandleDataStatus(const media_timed_event* event,
 	bigtime_t lateness, bool realTimeEvent)
 {
 	TRACE("SoundPlayNode::HandleDataStatus status: %" B_PRId32 ", lateness: %"
@@ -719,8 +695,7 @@ SoundPlayNode::HandleDataStatus(const media_timed_event* event,
 }
 
 
-status_t
-SoundPlayNode::HandleStart(const media_timed_event* event, bigtime_t lateness,
+status_t SoundPlayNode::HandleStart(const media_timed_event* event, bigtime_t lateness,
 	bool realTimeEvent)
 {
 	CALLED();
@@ -745,8 +720,7 @@ SoundPlayNode::HandleStart(const media_timed_event* event, bigtime_t lateness,
 }
 
 
-status_t
-SoundPlayNode::HandleSeek(const media_timed_event* event, bigtime_t lateness,
+status_t SoundPlayNode::HandleSeek(const media_timed_event* event, bigtime_t lateness,
 	bool realTimeEvent)
 {
 	CALLED();
@@ -756,8 +730,7 @@ SoundPlayNode::HandleSeek(const media_timed_event* event, bigtime_t lateness,
 }
 
 
-status_t
-SoundPlayNode::HandleWarp(const media_timed_event* event, bigtime_t lateness,
+status_t SoundPlayNode::HandleWarp(const media_timed_event* event, bigtime_t lateness,
 	bool realTimeEvent)
 {
 	CALLED();
@@ -765,8 +738,7 @@ SoundPlayNode::HandleWarp(const media_timed_event* event, bigtime_t lateness,
 }
 
 
-status_t
-SoundPlayNode::HandleStop(const media_timed_event* event, bigtime_t lateness,
+status_t SoundPlayNode::HandleStop(const media_timed_event* event, bigtime_t lateness,
 	bool realTimeEvent)
 {
 	CALLED();
@@ -778,8 +750,7 @@ SoundPlayNode::HandleStop(const media_timed_event* event, bigtime_t lateness,
 }
 
 
-status_t
-SoundPlayNode::HandleParameter(const media_timed_event* event,
+status_t SoundPlayNode::HandleParameter(const media_timed_event* event,
 	bigtime_t lateness, bool realTimeEvent)
 {
 	CALLED();
@@ -787,8 +758,7 @@ SoundPlayNode::HandleParameter(const media_timed_event* event,
 }
 
 
-status_t
-SoundPlayNode::AllocateBuffers()
+status_t SoundPlayNode::AllocateBuffers()
 {
 	CALLED();
 

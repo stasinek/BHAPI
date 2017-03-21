@@ -296,8 +296,7 @@ DwarfTypeFactory::~DwarfTypeFactory()
 }
 
 
-status_t
-DwarfTypeFactory::CreateType(DIEType* typeEntry, DwarfType*& _type)
+status_t DwarfTypeFactory::CreateType(DIEType* typeEntry, DwarfType*& _type)
 {
 	// try the type cache first
 	BString name;
@@ -375,8 +374,7 @@ DwarfTypeFactory::CreateType(DIEType* typeEntry, DwarfType*& _type)
 }
 
 
-status_t
-DwarfTypeFactory::_CreateTypeInternal(const BString& name,
+status_t DwarfTypeFactory::_CreateTypeInternal(const BString& name,
 	DIEType* typeEntry, DwarfType*& _type)
 {
 	switch (typeEntry->Tag()) {
@@ -462,8 +460,7 @@ DwarfTypeFactory::_CreateTypeInternal(const BString& name,
 }
 
 
-status_t
-DwarfTypeFactory::_CreateCompoundType(const BString& name,
+status_t DwarfTypeFactory::_CreateCompoundType(const BString& name,
 	DIECompoundType* typeEntry, compound_type_kind compoundKind, DwarfType*& _type)
 {
 	TRACE_LOCALS("DwarfTypeFactory::_CreateCompoundType(\"%s\", %p, %d)\n",
@@ -614,8 +611,7 @@ printf("  -> failed to add type to cache\n");
 }
 
 
-status_t
-DwarfTypeFactory::_CreatePrimitiveType(const BString& name,
+status_t DwarfTypeFactory::_CreatePrimitiveType(const BString& name,
 	DIEBaseType* typeEntry, DwarfType*& _type)
 {
 	const DynamicAttributeValue* byteSizeValue = typeEntry->ByteSize();
@@ -723,8 +719,7 @@ DwarfTypeFactory::_CreatePrimitiveType(const BString& name,
 }
 
 
-status_t
-DwarfTypeFactory::_CreateAddressType(const BString& name,
+status_t DwarfTypeFactory::_CreateAddressType(const BString& name,
 	DIEAddressingType* typeEntry, address_type_kind addressKind,
 	DwarfType*& _type)
 {
@@ -762,8 +757,7 @@ DwarfTypeFactory::_CreateAddressType(const BString& name,
 }
 
 
-status_t
-DwarfTypeFactory::_CreateModifiedType(const BString& name,
+status_t DwarfTypeFactory::_CreateModifiedType(const BString& name,
 	DIEModifiedType* typeEntry, uint32 modifiers, DwarfType*& _type)
 {
 	// Get the base type entry. If it is a modified type too or a typedef,
@@ -854,8 +848,7 @@ DwarfTypeFactory::_CreateModifiedType(const BString& name,
 }
 
 
-status_t
-DwarfTypeFactory::_CreateTypedefType(const BString& name,
+status_t DwarfTypeFactory::_CreateTypedefType(const BString& name,
 	DIETypedef* typeEntry, DwarfType*& _type)
 {
 	// resolve the base type
@@ -881,8 +874,7 @@ DwarfTypeFactory::_CreateTypedefType(const BString& name,
 }
 
 
-status_t
-DwarfTypeFactory::_CreateArrayType(const BString& name,
+status_t DwarfTypeFactory::_CreateArrayType(const BString& name,
 	DIEArrayType* typeEntry, DwarfType*& _type)
 {
 	TRACE_LOCALS("DwarfTypeFactory::_CreateArrayType(\"%s\", %p)\n",
@@ -951,8 +943,7 @@ DwarfTypeFactory::_CreateArrayType(const BString& name,
 }
 
 
-status_t
-DwarfTypeFactory::_CreateEnumerationType(const BString& name,
+status_t DwarfTypeFactory::_CreateEnumerationType(const BString& name,
 	DIEEnumerationType* typeEntry, DwarfType*& _type)
 {
 	// create the base type (it's optional)
@@ -1018,8 +1009,7 @@ DwarfTypeFactory::_CreateEnumerationType(const BString& name,
 }
 
 
-status_t
-DwarfTypeFactory::_CreateSubrangeType(const BString& name,
+status_t DwarfTypeFactory::_CreateSubrangeType(const BString& name,
 	DIESubrangeType* typeEntry, DwarfType*& _type)
 {
 	// get the base type
@@ -1150,8 +1140,7 @@ DwarfTypeFactory::_CreateSubrangeType(const BString& name,
 }
 
 
-status_t
-DwarfTypeFactory::_CreateUnspecifiedType(const BString& name,
+status_t DwarfTypeFactory::_CreateUnspecifiedType(const BString& name,
 	DIEUnspecifiedType* typeEntry, DwarfType*& _type)
 {
 	DwarfUnspecifiedType* type = new(std::nothrow) DwarfUnspecifiedType(
@@ -1163,8 +1152,7 @@ DwarfTypeFactory::_CreateUnspecifiedType(const BString& name,
 	return B_OK;
 }
 
-status_t
-DwarfTypeFactory::_CreateFunctionType(const BString& name,
+status_t DwarfTypeFactory::_CreateFunctionType(const BString& name,
 	DIESubroutineType* typeEntry, DwarfType*& _type)
 {
 	// get the return type
@@ -1237,8 +1225,7 @@ DwarfTypeFactory::_CreateFunctionType(const BString& name,
 }
 
 
-status_t
-DwarfTypeFactory::_CreatePointerToMemberType(const BString& name,
+status_t DwarfTypeFactory::_CreatePointerToMemberType(const BString& name,
 	DIEPointerToMemberType* typeEntry, DwarfType*& _type)
 {
 	// get the containing and base type entries
@@ -1288,8 +1275,7 @@ DwarfTypeFactory::_CreatePointerToMemberType(const BString& name,
 }
 
 
-status_t
-DwarfTypeFactory::_ResolveTypedef(DIETypedef* entry,
+status_t DwarfTypeFactory::_ResolveTypedef(DIETypedef* entry,
 	DIEType*& _baseTypeEntry)
 {
 	while (true) {
@@ -1311,8 +1297,7 @@ DwarfTypeFactory::_ResolveTypedef(DIETypedef* entry,
 }
 
 
-status_t
-DwarfTypeFactory::_ResolveTypeByteSize(DIEType* typeEntry,
+status_t DwarfTypeFactory::_ResolveTypeByteSize(DIEType* typeEntry,
 	uint64& _size)
 {
 	TRACE_LOCALS("DwarfTypeFactory::_ResolveTypeByteSize(%p)\n",

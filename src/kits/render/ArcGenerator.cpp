@@ -201,7 +201,7 @@ BArcGenerator::BArcGenerator(BPoint center, float xRadius, float yRadius, BPoint
 }
 
 
-bool
+bool 
 BArcGenerator::Start(__be_int32 &x,  __be_int32 &y,  __be_int32 &step,  __be_int32 &pixels, bool &both, bool isLoopX, float pixel_size)
 {
 	fIsLoopX = isLoopX;
@@ -309,7 +309,7 @@ BArcGenerator::Start(__be_int32 &x,  __be_int32 &y,  __be_int32 &step,  __be_int
 }
 
 
-bool
+bool 
 BArcGenerator::Next(__be_int32 &next,  __be_int32 &pixels, bool &both)
 {
 	if(fStep <= 0) return false;

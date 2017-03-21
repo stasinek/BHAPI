@@ -44,8 +44,7 @@ BMergedDirectory::~BMergedDirectory()
 }
 
 
-status_t
-BMergedDirectory::Init()
+status_t BMergedDirectory::Init()
 {
 	delete fVisitedEntries;
 	fDirectories.MakeEmpty(true);
@@ -62,22 +61,19 @@ BMergedDirectory::Policy() const
 }
 
 
-void
-BMergedDirectory::SetPolicy(BPolicy policy)
+void BMergedDirectory::SetPolicy(BPolicy policy)
 {
 	fPolicy = policy;
 }
 
 
-status_t
-BMergedDirectory::AddDirectory(BDirectory* directory)
+status_t BMergedDirectory::AddDirectory(BDirectory* directory)
 {
 	return fDirectories.AddItem(directory) ? B_OK : B_NO_MEMORY;
 }
 
 
-status_t
-BMergedDirectory::AddDirectory(const char* path)
+status_t BMergedDirectory::AddDirectory(const char* path)
 {
 	BDirectory* directory = new(std::nothrow) BDirectory(path);
 	if (directory == NULL)
@@ -96,8 +92,7 @@ BMergedDirectory::AddDirectory(const char* path)
 }
 
 
-status_t
-BMergedDirectory::GetNextEntry(BEntry* entry, bool traverse)
+status_t BMergedDirectory::GetNextEntry(BEntry* entry, bool traverse)
 {
 	entry_ref ref;
 	status_t error = GetNextRef(&ref);
@@ -108,8 +103,7 @@ BMergedDirectory::GetNextEntry(BEntry* entry, bool traverse)
 }
 
 
-status_t
-BMergedDirectory::GetNextRef(entry_ref* ref)
+status_t BMergedDirectory::GetNextRef(entry_ref* ref)
 {
 	BPrivate::Storage::LongDirEntry entry;
 	int32 result = GetNextDirents(&entry, sizeof(entry), 1);
@@ -124,8 +118,7 @@ BMergedDirectory::GetNextRef(entry_ref* ref)
 }
 
 
-int32
-BMergedDirectory::GetNextDirents(struct dirent* direntBuffer, size_t bufferSize,
+int32 BMergedDirectory::GetNextDirents(struct dirent* direntBuffer, size_t bufferSize,
 	int32 maxEntries)
 {
 	if (maxEntries <= 0)
@@ -176,8 +169,7 @@ BMergedDirectory::GetNextDirents(struct dirent* direntBuffer, size_t bufferSize,
 }
 
 
-status_t
-BMergedDirectory::Rewind()
+status_t BMergedDirectory::Rewind()
 {
 	for (int32 i = 0; BDirectory* directory = fDirectories.ItemAt(i); i++)
 		directory->Rewind();
@@ -190,8 +182,7 @@ BMergedDirectory::Rewind()
 }
 
 
-int32
-BMergedDirectory::CountEntries()
+int32 BMergedDirectory::CountEntries()
 {
 	int32 count = 0;
 	char buffer[sizeof(dirent) + B_FILE_NAME_LENGTH];
@@ -201,8 +192,7 @@ BMergedDirectory::CountEntries()
 }
 
 
-bool
-BMergedDirectory::ShallPreferFirstEntry(const entry_ref& entry1, int32 index1,
+bool BMergedDirectory::ShallPreferFirstEntry(const entry_ref& entry1, int32 index1,
 	const entry_ref& entry2, int32 index2)
 {
 	// That's basically B_ALWAYS_FIRST semantics. A derived class will implement
@@ -211,8 +201,7 @@ BMergedDirectory::ShallPreferFirstEntry(const entry_ref& entry1, int32 index1,
 }
 
 
-void
-BMergedDirectory::_FindBestEntry(dirent* direntBuffer)
+void BMergedDirectory::_FindBestEntry(dirent* direntBuffer)
 {
 	entry_ref bestEntry(direntBuffer->d_pdev, direntBuffer->d_pino,
 		direntBuffer->d_name);

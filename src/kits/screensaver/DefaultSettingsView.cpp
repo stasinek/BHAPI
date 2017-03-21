@@ -18,8 +18,7 @@ namespace BPrivate {
 
 // Provides a consistent look for the settings view for screen savers
 // that don't provide any configuration settings.
-void
-BuildDefaultSettingsView(BView* view, const char* moduleName, const char* info)
+void BuildDefaultSettingsView(BView* view, const char* moduleName, const char* info)
 {
 	view->SetViewUIColor(B_PANEL_BACKGROUND_COLOR);
 

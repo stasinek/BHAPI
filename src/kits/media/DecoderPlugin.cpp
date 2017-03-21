@@ -25,24 +25,21 @@ Decoder::~Decoder()
 }
 
 	
-status_t
-Decoder::GetNextChunk(const void **chunkBuffer, size_t *chunkSize,
+status_t Decoder::GetNextChunk(const void **chunkBuffer, size_t *chunkSize,
 					  media_header *mediaHeader)
 {
 	return fChunkProvider->GetNextChunk(chunkBuffer, chunkSize, mediaHeader);
 }
 
 
-void
-Decoder::SetChunkProvider(ChunkProvider *provider)
+void Decoder::SetChunkProvider(ChunkProvider *provider)
 {
 	delete fChunkProvider;
 	fChunkProvider = provider;
 }
 
 
-status_t
-Decoder::Perform(perform_code code, void* _data)
+status_t Decoder::Perform(perform_code code, void* _data)
 {
 	return B_OK;
 }

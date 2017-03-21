@@ -34,8 +34,7 @@ BFlattenable::~BFlattenable()
 }
 
 
-bool
-BFlattenable::AllowsTypeCode(type_code code) const
+bool BFlattenable::AllowsTypeCode(type_code code) const
 {
 	return(code == TypeCode());
 }

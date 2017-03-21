@@ -89,8 +89,7 @@ GameProducer::AddOn(int32* internal_id) const
 
 
 // BBufferProducer methods
-status_t
-GameProducer::GetNextOutput(int32* cookie, media_output* _output)
+status_t GameProducer::GetNextOutput(int32* cookie, media_output* _output)
 {
 	// we currently support only one output
 	if (0 != *cookie)
@@ -102,16 +101,14 @@ GameProducer::GetNextOutput(int32* cookie, media_output* _output)
 }
 
 
-status_t
-GameProducer::DisposeOutputCookie(int32 cookie)
+status_t GameProducer::DisposeOutputCookie(int32 cookie)
 {
 	// do nothing because our cookie is only an integer
 	return B_OK;
 }
 
 
-void
-GameProducer::EnableOutput(const media_source& what, bool enabled,
+void GameProducer::EnableOutput(const media_source& what, bool enabled,
 	int32* _deprecated_)
 {
 	// If I had more than one output, I'd have to walk my list of output records
@@ -125,8 +122,7 @@ GameProducer::EnableOutput(const media_source& what, bool enabled,
 }
 
 
-status_t
-GameProducer::FormatSuggestionRequested(media_type type, int32 /*quality*/,
+status_t GameProducer::FormatSuggestionRequested(media_type type, int32 /*quality*/,
 	media_format* format)
 {
 	// insure that we received a format
@@ -145,8 +141,7 @@ GameProducer::FormatSuggestionRequested(media_type type, int32 /*quality*/,
 }
 
 
-status_t
-GameProducer::FormatProposal(const media_source& output, media_format* format)
+status_t GameProducer::FormatProposal(const media_source& output, media_format* format)
 {
 	// doest the proposed output match our output?
 	if (output != fOutput.source)
@@ -166,8 +161,7 @@ GameProducer::FormatProposal(const media_source& output, media_format* format)
 }
 
 
-status_t
-GameProducer::PrepareToConnect(const media_source& what,
+status_t GameProducer::PrepareToConnect(const media_source& what,
 	const media_destination& where, media_format* format,
 	media_source* _source, char* out_name)
 {
@@ -207,8 +201,7 @@ GameProducer::PrepareToConnect(const media_source& what,
 }
 
 
-void
-GameProducer::Connect(status_t error, const media_source& source,
+void GameProducer::Connect(status_t error, const media_source& source,
 	const media_destination& destination, const media_format& format,
 	char* ioName)
 {
@@ -272,8 +265,7 @@ GameProducer::Connect(status_t error, const media_source& source,
 }
 
 
-void
-GameProducer::Disconnect(const media_source& what,
+void GameProducer::Disconnect(const media_source& what,
 	const media_destination& where)
 {
 	// Make sure that our connection is the one being disconnected
@@ -286,8 +278,7 @@ GameProducer::Disconnect(const media_source& what,
 }
 
 
-status_t
-GameProducer::FormatChangeRequested(const media_source& source,
+status_t GameProducer::FormatChangeRequested(const media_source& source,
 	const media_destination& destination, media_format* io_format,
 	int32* _deprecated_)
 {
@@ -296,8 +287,7 @@ GameProducer::FormatChangeRequested(const media_source& source,
 }
 
 
-status_t
-GameProducer::SetBufferGroup(const media_source& forSource,
+status_t GameProducer::SetBufferGroup(const media_source& forSource,
 	BBufferGroup* newGroup)
 {
 	// verify that we didn't get bogus arguments before we proceed
@@ -336,8 +326,7 @@ GameProducer::SetBufferGroup(const media_source& forSource,
 }
 
 
-status_t
-GameProducer::GetLatency(bigtime_t* _latency)
+status_t GameProducer::GetLatency(bigtime_t* _latency)
 {
 	// report our *total* latency:  internal plus downstream plus scheduling
 	*_latency = EventLatency() + SchedulingLatency();
@@ -345,8 +334,7 @@ GameProducer::GetLatency(bigtime_t* _latency)
 }
 
 
-void
-GameProducer::LateNoticeReceived(const media_source& what, bigtime_t howMuch,
+void GameProducer::LateNoticeReceived(const media_source& what, bigtime_t howMuch,
 	bigtime_t performanceDuration)
 {
 	// If we're late, we need to catch up.  Respond in a manner appropriate to
@@ -377,8 +365,7 @@ GameProducer::LateNoticeReceived(const media_source& what, bigtime_t howMuch,
 }
 
 
-void
-GameProducer::LatencyChanged(const media_source& source,
+void GameProducer::LatencyChanged(const media_source& source,
 	const media_destination& destination, bigtime_t new_latency, uint32 flags)
 {
 	// something downstream changed latency, so we need to start producing
@@ -392,24 +379,21 @@ GameProducer::LatencyChanged(const media_source& source,
 }
 
 
-status_t
-GameProducer::SetPlayRate(int32 numerator, int32 denominator)
+status_t GameProducer::SetPlayRate(int32 numerator, int32 denominator)
 {
 	// Play rates are weird.  We don't support them
 	return B_ERROR;
 }
 
 
-status_t
-GameProducer::HandleMessage(int32 message, const void* data, size_t size)
+status_t GameProducer::HandleMessage(int32 message, const void* data, size_t size)
 {
 	// We currently do not handle private messages
 	return B_ERROR;
 }
 
 
-void
-GameProducer::AdditionalBufferRequested(const media_source& source,
+void GameProducer::AdditionalBufferRequested(const media_source& source,
 	media_buffer_id prev_buffer, bigtime_t prev_time,
 	const media_seek_tag* prev_tag)
 {
@@ -419,8 +403,7 @@ GameProducer::AdditionalBufferRequested(const media_source& source,
 
 
 // BMediaEventLooper methods
-void
-GameProducer::NodeRegistered()
+void GameProducer::NodeRegistered()
 {
 	// set up as much information about our output as we can
 	fOutput.source.port = ControlPort();
@@ -434,8 +417,7 @@ GameProducer::NodeRegistered()
 }
 
 
-void
-GameProducer::SetRunMode(run_mode mode)
+void GameProducer::SetRunMode(run_mode mode)
 {
 	// We don't support offline run mode, so broadcast an error if we're set to
 	// B_OFFLINE.  Unfortunately, we can't actually reject the mode change...
@@ -445,8 +427,7 @@ GameProducer::SetRunMode(run_mode mode)
 }
 
 
-void
-GameProducer::HandleEvent(const media_timed_event* event, bigtime_t lateness,
+void GameProducer::HandleEvent(const media_timed_event* event, bigtime_t lateness,
 	bool realTimeEvent)
 {
 //	FPRINTF(stderr, "ToneProducer::HandleEvent\n");

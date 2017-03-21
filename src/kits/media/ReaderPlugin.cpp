@@ -24,29 +24,25 @@ Reader::~Reader()
 }
 
 
-status_t
-Reader::GetMetaData(BMessage* _data)
+status_t Reader::GetMetaData(BMessage* _data)
 {
 	return B_NOT_SUPPORTED;
 }
 
 
-status_t
-Reader::Seek(void* cookie, uint32 flags, int64* frame, bigtime_t* time)
+status_t Reader::Seek(void* cookie, uint32 flags, int64* frame, bigtime_t* time)
 {
 	return B_NOT_SUPPORTED;
 }
 
 
-status_t
-Reader::FindKeyFrame(void* cookie, uint32 flags, int64* frame, bigtime_t* time)
+status_t Reader::FindKeyFrame(void* cookie, uint32 flags, int64* frame, bigtime_t* time)
 {
 	return B_NOT_SUPPORTED;
 }
 
 
-status_t
-Reader::GetStreamMetaData(void* cookie, BMessage* _data)
+status_t Reader::GetStreamMetaData(void* cookie, BMessage* _data)
 {
 	return B_NOT_SUPPORTED;
 }
@@ -59,15 +55,13 @@ Reader::Source() const
 }
 
 
-void
-Reader::Setup(BDataIO *source)
+void Reader::Setup(BDataIO *source)
 {
 	fSource = source;
 }
 
 
-status_t
-Reader::Perform(perform_code code, void* _data)
+status_t Reader::Perform(perform_code code, void* _data)
 {
 	return B_OK;
 }

@@ -8,8 +8,7 @@
 #include <../include/sys/types.h>
 
 
-extern "C" [[gnu::optimize("omit-frame-pointer")]] void
-atomic_set(int32_t* ptr, int32_t value)
+extern "C" [[gnu::optimize("omit-frame-pointer")]] void atomic_set(int32_t* ptr, int32_t value)
 {
 	auto& obj = *reinterpret_cast<std::atomic<int32_t>*>(ptr);
 	obj.store(value, std::memory_order_release);
@@ -65,8 +64,7 @@ atomic_get(int32_t* ptr)
 }
 
 
-extern "C" [[gnu::optimize("omit-frame-pointer")]] void
-atomic_set64(int64_t* ptr, int64_t value)
+extern "C" [[gnu::optimize("omit-frame-pointer")]] void atomic_set64(int64_t* ptr, int64_t value)
 {
 	auto& obj = *reinterpret_cast<std::atomic<int64_t>*>(ptr);
 	obj.store(value, std::memory_order_release);

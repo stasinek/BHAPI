@@ -20,8 +20,7 @@ BoolValueFormatter::~BoolValueFormatter()
 }
 
 
-status_t
-BoolValueFormatter::FormatValue(Value* _value, BString& _output)
+status_t BoolValueFormatter::FormatValue(Value* _value, BString& _output)
 {
 	BoolValue* value = dynamic_cast<BoolValue*>(_value);
 	if (value == NULL)

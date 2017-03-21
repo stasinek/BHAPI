@@ -11,7 +11,7 @@
 
 #include "udis86.h"
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include "CpuStateX86.h"
 #include "InstructionInfo.h"
@@ -64,8 +64,7 @@ DisassemblerX86::~DisassemblerX86()
 }
 
 
-status_t
-DisassemblerX86::Init(target_addr_t address, const void* code, size_t codeSize)
+status_t DisassemblerX86::Init(target_addr_t address, const void* code, size_t codeSize)
 {
 	// unset old data
 	delete fUdisData;
@@ -93,8 +92,7 @@ DisassemblerX86::Init(target_addr_t address, const void* code, size_t codeSize)
 }
 
 
-status_t
-DisassemblerX86::GetNextInstruction(BString& line, target_addr_t& _address,
+status_t DisassemblerX86::GetNextInstruction(BString& line, target_addr_t& _address,
 	target_size_t& _size, bool& _breakpointAllowed)
 {
 	unsigned int size = ud_disassemble(fUdisData);
@@ -118,8 +116,7 @@ DisassemblerX86::GetNextInstruction(BString& line, target_addr_t& _address,
 }
 
 
-status_t
-DisassemblerX86::GetPreviousInstruction(target_addr_t nextAddress,
+status_t DisassemblerX86::GetPreviousInstruction(target_addr_t nextAddress,
 	target_addr_t& _address, target_size_t& _size)
 {
 	if (nextAddress < fAddress || nextAddress > fAddress + fCodeSize)
@@ -141,8 +138,7 @@ DisassemblerX86::GetPreviousInstruction(target_addr_t nextAddress,
 }
 
 
-status_t
-DisassemblerX86::GetNextInstructionInfo(InstructionInfo& _info,
+status_t DisassemblerX86::GetNextInstructionInfo(InstructionInfo& _info,
 	CpuState* state)
 {
 	unsigned int size = ud_disassemble(fUdisData);

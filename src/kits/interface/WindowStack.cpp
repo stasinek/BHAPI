@@ -36,31 +36,27 @@ BWindowStack::~BWindowStack()
 }
 
 
-status_t
-BWindowStack::AddWindow(const BWindow* window)
+status_t BWindowStack::AddWindow(const BWindow* window)
 {
 	BMessenger messenger(window);
 	return AddWindow(messenger);
 }
 
 
-status_t
-BWindowStack::AddWindow(const BMessenger& window)
+status_t BWindowStack::AddWindow(const BMessenger& window)
 {
 	return AddWindowAt(window, -1);
 }
 
 
-status_t
-BWindowStack::AddWindowAt(const BWindow* window, int32 position)
+status_t BWindowStack::AddWindowAt(const BWindow* window, int32 position)
 {
 	BMessenger messenger(window);
 	return AddWindowAt(messenger, position);
 }
 
 
-status_t
-BWindowStack::AddWindowAt(const BMessenger& window, int32 position)
+status_t BWindowStack::AddWindowAt(const BMessenger& window, int32 position)
 {
 	_StartMessage(kAddWindowToStack);
 
@@ -75,16 +71,14 @@ BWindowStack::AddWindowAt(const BMessenger& window, int32 position)
 }
 
 
-status_t
-BWindowStack::RemoveWindow(const BWindow* window)
+status_t BWindowStack::RemoveWindow(const BWindow* window)
 {
 	BMessenger messenger(window);
 	return RemoveWindow(messenger);
 }
 
 
-status_t
-BWindowStack::RemoveWindow(const BMessenger& window)
+status_t BWindowStack::RemoveWindow(const BMessenger& window)
 {
 	_StartMessage(kRemoveWindowFromStack);
 	_AttachMessenger(window);
@@ -96,8 +90,7 @@ BWindowStack::RemoveWindow(const BMessenger& window)
 }
 
 
-status_t
-BWindowStack::RemoveWindowAt(int32 position, BMessenger* window)
+status_t BWindowStack::RemoveWindowAt(int32 position, BMessenger* window)
 {
 	_StartMessage(kRemoveWindowFromStackAt);
 	fLink->Attach<int32>(position);
@@ -113,8 +106,7 @@ BWindowStack::RemoveWindowAt(int32 position, BMessenger* window)
 }
 
 
-int32
-BWindowStack::CountWindows()
+int32 BWindowStack::CountWindows()
 {
 	_StartMessage(kCountWindowsOnStack);
 
@@ -131,8 +123,7 @@ BWindowStack::CountWindows()
 }
 
 
-status_t
-BWindowStack::WindowAt(int32 position, BMessenger& messenger)
+status_t BWindowStack::WindowAt(int32 position, BMessenger& messenger)
 {
 	_StartMessage(kWindowOnStackAt);
 	fLink->Attach<int32>(position);
@@ -146,16 +137,14 @@ BWindowStack::WindowAt(int32 position, BMessenger& messenger)
 }
 
 
-bool
-BWindowStack::HasWindow(const BWindow* window)
+bool BWindowStack::HasWindow(const BWindow* window)
 {
 	BMessenger messenger(window);
 	return HasWindow(messenger);
 }
 
 
-bool
-BWindowStack::HasWindow(const BMessenger& window)
+bool BWindowStack::HasWindow(const BMessenger& window)
 {
 	_StartMessage(kStackHasWindow);
 	_AttachMessenger(window);
@@ -173,8 +162,7 @@ BWindowStack::HasWindow(const BMessenger& window)
 }
 
 
-status_t
-BWindowStack::_AttachMessenger(const BMessenger& window)
+status_t BWindowStack::_AttachMessenger(const BMessenger& window)
 {
 	BMessenger::Private messengerPrivate(const_cast<BMessenger&>(window));
 	fLink->Attach<port_id>(messengerPrivate.Port());
@@ -183,8 +171,7 @@ BWindowStack::_AttachMessenger(const BMessenger& window)
 }
 
 
-status_t
-BWindowStack::_ReadMessenger(BMessenger& window)
+status_t BWindowStack::_ReadMessenger(BMessenger& window)
 {
 	port_id port;
 	int32 token;
@@ -200,8 +187,7 @@ BWindowStack::_ReadMessenger(BMessenger& window)
 }
 
 
-status_t
-BWindowStack::_StartMessage(int32 what)
+status_t BWindowStack::_StartMessage(int32 what)
 {
 	fLink->StartMessage(AS_TALK_TO_DESKTOP_LISTENER);
 	fLink->Attach<int32>(kMagicSATIdentifier);

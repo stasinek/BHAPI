@@ -22,30 +22,26 @@ ImageDebugInfoLoadingState::~ImageDebugInfoLoadingState()
 }
 
 
-bool
-ImageDebugInfoLoadingState::HasSpecificDebugInfoLoadingState() const
+bool ImageDebugInfoLoadingState::HasSpecificDebugInfoLoadingState() const
 {
 	return fSpecificInfoLoadingState.Get() != NULL;
 }
 
 
-void
-ImageDebugInfoLoadingState::SetSpecificDebugInfoLoadingState(
+void ImageDebugInfoLoadingState::SetSpecificDebugInfoLoadingState(
 	SpecificImageDebugInfoLoadingState* state)
 {
 	fSpecificInfoLoadingState.SetTo(state, true);
 }
 
 
-void
-ImageDebugInfoLoadingState::ClearSpecificDebugInfoLoadingState()
+void ImageDebugInfoLoadingState::ClearSpecificDebugInfoLoadingState()
 {
 	fSpecificInfoLoadingState = NULL;
 }
 
 
-bool
-ImageDebugInfoLoadingState::UserInputRequired() const
+bool ImageDebugInfoLoadingState::UserInputRequired() const
 {
 	if (HasSpecificDebugInfoLoadingState())
 		return fSpecificInfoLoadingState->UserInputRequired();
@@ -54,8 +50,7 @@ ImageDebugInfoLoadingState::UserInputRequired() const
 }
 
 
-void
-ImageDebugInfoLoadingState::SetSpecificInfoIndex(int32 index)
+void ImageDebugInfoLoadingState::SetSpecificInfoIndex(int32 index)
 {
 	fSpecificInfoIndex = index;
 }

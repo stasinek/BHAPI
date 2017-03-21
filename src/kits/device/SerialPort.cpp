@@ -25,8 +25,7 @@
 
 // Scans a directory and adds the entries it founds as strings to the
 // given list
-static int32
-scan_directory(const char *directory, BList *list)
+static int32 scan_directory(const char *directory, BList *list)
 {
 	BEntry entry;
 	BDirectory dir(SERIAL_DIR);
@@ -94,8 +93,7 @@ BSerialPort::~BSerialPort()
 	- A positive number if the serialport has been succesfully opened.
 	- An errorcode (negative integer) if not.
 */
-status_t
-BSerialPort::Open(const char *portName)
+status_t BSerialPort::Open(const char *portName)
 {
 	char buf[64];
 	
@@ -134,8 +132,7 @@ BSerialPort::Open(const char *portName)
 
 /*! \brief Closes the port.
 */
-void
-BSerialPort::Close(void)
+void BSerialPort::Close(void)
 {
 	if (ffd >= 0)
 		close(ffd);
@@ -173,8 +170,7 @@ BSerialPort::Write(const void *buf, size_t count)
 /*! \brief Set blocking mode
 	\param Blocking If true, enables the blocking mode. If false, disables it.
 */
-void
-BSerialPort::SetBlocking(bool Blocking)
+void BSerialPort::SetBlocking(bool Blocking)
 {
 	fBlocking = Blocking;
 	_DriverControl();
@@ -188,8 +184,7 @@ BSerialPort::SetBlocking(bool Blocking)
 	- Any value between 0 and 25,000,000, but remember that the granularity
 		of the serial driver is 100,000 microseconds.
 */
-status_t
-BSerialPort::SetTimeout(bigtime_t microSeconds)
+status_t BSerialPort::SetTimeout(bigtime_t microSeconds)
 {	
 	status_t err = B_BAD_VALUE;
 	
@@ -229,8 +224,7 @@ BSerialPort::SetTimeout(bigtime_t microSeconds)
 	- \c B_OK if all goes fine,
 	- an error code if something goes wrong.
 */
-status_t
-BSerialPort::SetDataRate(data_rate bitsPerSecond)
+status_t BSerialPort::SetDataRate(data_rate bitsPerSecond)
 {
 	fBaudRate = bitsPerSecond;
 	
@@ -251,8 +245,7 @@ BSerialPort::DataRate(void)
 
 /*! \brief Set the data bits (7 or 8)
 */
-void
-BSerialPort::SetDataBits(data_bits numBits)
+void BSerialPort::SetDataBits(data_bits numBits)
 {
 	fDataBits = numBits;
 	_DriverControl();
@@ -275,8 +268,7 @@ BSerialPort::DataBits(void)
 	- \c B_STOP_BITS_1 (or \c B_STOP_BIT_1)
 	- \c B_STOP_BITS_2
 */
-void
-BSerialPort::SetStopBits(stop_bits numBits)
+void BSerialPort::SetStopBits(stop_bits numBits)
 {
 	fStopBits = numBits;
 	_DriverControl();
@@ -300,8 +292,7 @@ BSerialPort::StopBits(void)
 	- \c B_EVEN_PARITY
 	- \c B_NO_PARITY
 */
-void
-BSerialPort::SetParityMode(parity_mode which)
+void BSerialPort::SetParityMode(parity_mode which)
 {
 	fParityMode = which;
 	_DriverControl();
@@ -320,8 +311,7 @@ BSerialPort::ParityMode(void)
 
 /*! \brief Clear the input buffer.
 */
-void
-BSerialPort::ClearInput(void)
+void BSerialPort::ClearInput(void)
 {
 	tcflush(ffd, TCIFLUSH);
 }
@@ -329,8 +319,7 @@ BSerialPort::ClearInput(void)
 
 /*! \brief Clear the output buffer.
 */
-void
-BSerialPort::ClearOutput(void)
+void BSerialPort::ClearOutput(void)
 {
 	tcflush(ffd, TCOFLUSH);
 }
@@ -343,8 +332,7 @@ BSerialPort::ClearOutput(void)
 	- \c B_SOFTWARE_CONTROL
 	- \c B_NOFLOW_CONTROL
 */
-void
-BSerialPort::SetFlowControl(uint32 method)
+void BSerialPort::SetFlowControl(uint32 method)
 {
 	fFlow = method;
 	_DriverControl();
@@ -354,16 +342,14 @@ BSerialPort::SetFlowControl(uint32 method)
 /*! \brief Returns the selected flow control.
 	\return The flow control for the current open port.	
 */
-uint32
-BSerialPort::FlowControl(void)
+uint32 BSerialPort::FlowControl(void)
 {
 	return fFlow;
 }
 
 
 /* Set the DTR */
-status_t
-BSerialPort::SetDTR(bool asserted)
+status_t BSerialPort::SetDTR(bool asserted)
 {
 	status_t status = ioctl(ffd, TCSETDTR, &asserted);
 	
@@ -372,8 +358,7 @@ BSerialPort::SetDTR(bool asserted)
 
 
 /* Set the RTS status */
-status_t
-BSerialPort::SetRTS(bool asserted)
+status_t BSerialPort::SetRTS(bool asserted)
 {
 	status_t status = ioctl(ffd, TCSETRTS, &asserted);
 	
@@ -386,8 +371,7 @@ BSerialPort::SetRTS(bool asserted)
 		that value stored.
 	\return ?
 */
-status_t
-BSerialPort::NumCharsAvailable(int32 *numChars)
+status_t BSerialPort::NumCharsAvailable(int32 *numChars)
 {
 	//No help from the BeBook...
 	if (ffd < 0)
@@ -403,8 +387,7 @@ BSerialPort::NumCharsAvailable(int32 *numChars)
 /*! \brief See if the Clear to Send pin is asserted.
 	\return true if CTS is asserted, false if not.
 */
-bool
-BSerialPort::IsCTS(void)
+bool BSerialPort::IsCTS(void)
 {
 	unsigned int bits = ioctl(ffd, TCGETBITS, 0); 
 	
@@ -418,8 +401,7 @@ BSerialPort::IsCTS(void)
 /*! \brief See if the Data Set Ready pin is asserted.
 	\return true if DSR is asserted, false if not.
 */
-bool
-BSerialPort::IsDSR(void)
+bool BSerialPort::IsDSR(void)
 {
 	unsigned int bits = ioctl(ffd, TCGETBITS, 0); 
 	
@@ -433,8 +415,7 @@ BSerialPort::IsDSR(void)
 /*! \brief See if the Ring Indicator pin is asserted.
 	\return true if RI is asserted, false if not.
 */
-bool
-BSerialPort::IsRI(void)
+bool BSerialPort::IsRI(void)
 {
 	unsigned int bits = ioctl(ffd, TCGETBITS, 0); 
 	
@@ -448,8 +429,7 @@ BSerialPort::IsRI(void)
 /*! \brief See if the Data Carrier Detect pin is asserted.
 	\return true if DCD is asserted, false if not.
 */
-bool
-BSerialPort::IsDCD(void)
+bool BSerialPort::IsDCD(void)
 {
 	unsigned int bits = ioctl(ffd, TCGETBITS, 0); 
 	
@@ -480,8 +460,7 @@ BSerialPort::WaitForInput(void)
 	\return An integer which represents the number of available
 		serial ports.
 */
-int32
-BSerialPort::CountDevices()
+int32 BSerialPort::CountDevices()
 {
 	int32 count = 0;
 	
@@ -503,8 +482,7 @@ BSerialPort::CountDevices()
 	- \c B_ERROR if something goes wrong
 	- \c B_OK if all goes fine.
 */
-status_t
-BSerialPort::GetDeviceName(int32 n, char *name, size_t bufSize)
+status_t BSerialPort::GetDeviceName(int32 n, char *name, size_t bufSize)
 {
 	status_t result = B_ERROR;
 	const char *dev = NULL;
@@ -527,8 +505,7 @@ BSerialPort::GetDeviceName(int32 n, char *name, size_t bufSize)
 	Query the serial driver about the available devices,
 	and build a list of them. 
 */
-void
-BSerialPort::_ScanDevices()
+void BSerialPort::_ScanDevices()
 {
 	// First, we empty the list
 	if (fDevices != NULL) {

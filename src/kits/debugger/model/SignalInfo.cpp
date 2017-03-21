@@ -36,8 +36,7 @@ SignalInfo::SignalInfo(int signal, const struct sigaction& handler,
 }
 
 
-void
-SignalInfo::SetTo(int signal, const struct sigaction& handler, bool deadly)
+void SignalInfo::SetTo(int signal, const struct sigaction& handler, bool deadly)
 {
 	fSignal = signal;
 	fDeadly = deadly;

@@ -33,16 +33,14 @@ DiscoveryAgent::RetrieveDevices(int option)
 }
 
 
-status_t
-DiscoveryAgent::StartInquiry(int accessCode, DiscoveryListener* listener)
+status_t DiscoveryAgent::StartInquiry(int accessCode, DiscoveryListener* listener)
 {
 	CALLED();
     return StartInquiry(accessCode, listener, GetInquiryTime());
 }
 
 
-status_t
-DiscoveryAgent::StartInquiry(uint32 accessCode, DiscoveryListener* listener, bigtime_t secs)
+status_t DiscoveryAgent::StartInquiry(uint32 accessCode, DiscoveryListener* listener, bigtime_t secs)
 {
 	CALLED();
     size_t size;
@@ -92,8 +90,7 @@ DiscoveryAgent::StartInquiry(uint32 accessCode, DiscoveryListener* listener, big
 }
 
 
-status_t
-DiscoveryAgent::CancelInquiry(DiscoveryListener* listener)
+status_t DiscoveryAgent::CancelInquiry(DiscoveryListener* listener)
 {
 	CALLED();
     size_t size;
@@ -125,8 +122,7 @@ DiscoveryAgent::CancelInquiry(DiscoveryListener* listener)
 }
 
 
-void
-DiscoveryAgent::SetLocalDeviceOwner(LocalDevice* ld)
+void DiscoveryAgent::SetLocalDeviceOwner(LocalDevice* ld)
 {
 	CALLED();
     fLocalDevice = ld;

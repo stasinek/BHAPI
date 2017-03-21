@@ -6,7 +6,7 @@
 #define _SYSTEM_INFO_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 enum {

@@ -43,8 +43,7 @@ CharStream::~CharStream() {
 	\param string The new character string to be streamed
 	\return Returns \c B_OK
 */
-status_t
-CharStream::SetTo(const std::string &string) {
+status_t CharStream::SetTo(const std::string &string) {
 	fString = string;
 	fPos = 0;
 	fCStatus = B_OK;
@@ -53,8 +52,7 @@ CharStream::SetTo(const std::string &string) {
 
 /*! \brief Unitializes the stream
 */
-void
-CharStream::Unset() {
+void CharStream::Unset() {
 	fString = "";
 	fPos = 0;
 	fCStatus = B_NO_INIT;
@@ -66,8 +64,7 @@ CharStream::Unset() {
 	- \c B_OK: Ready and initialized
 	- \c B_NO_INIT: Unitialized
 */
-status_t
-CharStream::InitCheck() const {
+status_t CharStream::InitCheck() const {
 	return fCStatus;
 }
 
@@ -75,8 +72,7 @@ CharStream::InitCheck() const {
 
 	If the stream is unitialized, \c true is also returned.
 */
-bool
-CharStream::IsEmpty() const {
+bool CharStream::IsEmpty() const {
 	return fPos >= fString.length();
 }
 
@@ -123,8 +119,7 @@ CharStream::Get() {
 	Throws a BPrivate::Storage::Sniffer::Err exception if the stream is
 	unitialized or there are no more characters to unget.
 */
-void
-CharStream::Unget() {
+void CharStream::Unget() {
 	if (fCStatus != B_OK)
 		throw new Err("Sniffer parser error: CharStream::Unget() called on uninitialized CharStream object", -1);
 	if (fPos > 0) 

@@ -11,7 +11,7 @@
 #define _LINK_SENDER_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 namespace BPrivate {
@@ -67,8 +67,7 @@ LinkSender::TargetTeam() const
 }
 
 
-inline void
-LinkSender::SetTargetTeam(team_id team)
+inline void LinkSender::SetTargetTeam(team_id team)
 {
 	fTargetTeam = team;
 }

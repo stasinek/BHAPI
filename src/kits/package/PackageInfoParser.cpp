@@ -30,8 +30,7 @@ BPackageInfo::Parser::Parser(ParseErrorListener* listener)
 }
 
 
-status_t
-BPackageInfo::Parser::Parse(const BString& packageInfoString,
+status_t BPackageInfo::Parser::Parse(const BString& packageInfoString,
 	BPackageInfo* packageInfo)
 {
 	if (packageInfo == NULL)
@@ -79,8 +78,7 @@ BPackageInfo::Parser::Parse(const BString& packageInfoString,
 }
 
 
-status_t
-BPackageInfo::Parser::ParseVersion(const BString& versionString,
+status_t BPackageInfo::Parser::ParseVersion(const BString& versionString,
 	bool revisionIsOptional, BPackageVersion& _version)
 {
 	fPos = versionString.String();
@@ -104,8 +102,7 @@ BPackageInfo::Parser::ParseVersion(const BString& versionString,
 }
 
 
-status_t
-BPackageInfo::Parser::ParseResolvableExpression(const BString& expressionString,
+status_t BPackageInfo::Parser::ParseResolvableExpression(const BString& expressionString,
 	BPackageResolvableExpression& _expression)
 {
 	fPos = expressionString.String();
@@ -280,15 +277,13 @@ BPackageInfo::Parser::_NextToken()
 }
 
 
-void
-BPackageInfo::Parser::_RewindTo(const Token& token)
+void BPackageInfo::Parser::_RewindTo(const Token& token)
 {
 	fPos = token.pos;
 }
 
 
-void
-BPackageInfo::Parser::_ParseStringValue(BString* value, const char** _tokenPos)
+void BPackageInfo::Parser::_ParseStringValue(BString* value, const char** _tokenPos)
 {
 	Token string = _NextToken();
 	if (string.type != TOKEN_STRING)
@@ -300,8 +295,7 @@ BPackageInfo::Parser::_ParseStringValue(BString* value, const char** _tokenPos)
 }
 
 
-void
-BPackageInfo::Parser::_ParseArchitectureValue(BPackageArchitecture* value)
+void BPackageInfo::Parser::_ParseArchitectureValue(BPackageArchitecture* value)
 {
 	Token arch = _NextToken();
 	if (arch.type == TOKEN_STRING) {
@@ -324,8 +318,7 @@ BPackageInfo::Parser::_ParseArchitectureValue(BPackageArchitecture* value)
 }
 
 
-void
-BPackageInfo::Parser::_ParseVersionValue(BPackageVersion* value,
+void BPackageInfo::Parser::_ParseVersionValue(BPackageVersion* value,
 	bool revisionIsOptional)
 {
 	Token word = _NextToken();
@@ -333,8 +326,7 @@ BPackageInfo::Parser::_ParseVersionValue(BPackageVersion* value,
 }
 
 
-/*static*/ void
-BPackageInfo::Parser::_ParseVersionValue(Token& word, BPackageVersion* value,
+/*static*/ void BPackageInfo::Parser::_ParseVersionValue(Token& word, BPackageVersion* value,
 	bool revisionIsOptional)
 {
 	if (word.type != TOKEN_STRING)
@@ -425,8 +417,7 @@ BPackageInfo::Parser::_ParseVersionValue(Token& word, BPackageVersion* value,
 }
 
 
-void
-BPackageInfo::Parser::_ParseResolvableExpression(const Token& token,
+void BPackageInfo::Parser::_ParseResolvableExpression(const Token& token,
 	BPackageResolvableExpression& _value, BString* _basePackage)
 {
 	if (token.type != TOKEN_STRING) {
@@ -480,8 +471,7 @@ BPackageInfo::Parser::_ParseResolvableExpression(const Token& token,
 }
 
 
-void
-BPackageInfo::Parser::_ParseList(ListElementParser& elementParser,
+void BPackageInfo::Parser::_ParseList(ListElementParser& elementParser,
 	bool allowSingleNonListElement)
 {
 	Token openBracket = _NextToken();
@@ -506,8 +496,7 @@ BPackageInfo::Parser::_ParseList(ListElementParser& elementParser,
 }
 
 
-void
-BPackageInfo::Parser::_ParseStringList(BStringList* value,
+void BPackageInfo::Parser::_ParseStringList(BStringList* value,
 	bool requireResolvableName, bool convertToLowerCase)
 {
 	struct StringParser : public ListElementParser {
@@ -549,8 +538,7 @@ BPackageInfo::Parser::_ParseStringList(BStringList* value,
 }
 
 
-uint32
-BPackageInfo::Parser::_ParseFlags()
+uint32 BPackageInfo::Parser::_ParseFlags()
 {
 	struct FlagParser : public ListElementParser {
 		uint32 flags;
@@ -584,8 +572,7 @@ BPackageInfo::Parser::_ParseFlags()
 }
 
 
-void
-BPackageInfo::Parser::_ParseResolvableList(
+void BPackageInfo::Parser::_ParseResolvableList(
 	BObjectList<BPackageResolvable>* value)
 {
 	struct ResolvableParser : public ListElementParser {
@@ -647,8 +634,7 @@ BPackageInfo::Parser::_ParseResolvableList(
 }
 
 
-void
-BPackageInfo::Parser::_ParseResolvableExprList(
+void BPackageInfo::Parser::_ParseResolvableExprList(
 	BObjectList<BPackageResolvableExpression>* value, BString* _basePackage)
 {
 	struct ResolvableExpressionParser : public ListElementParser {
@@ -678,8 +664,7 @@ BPackageInfo::Parser::_ParseResolvableExprList(
 }
 
 
-void
-BPackageInfo::Parser::_ParseGlobalWritableFileInfos(
+void BPackageInfo::Parser::_ParseGlobalWritableFileInfos(
 	GlobalWritableFileInfoList* infos)
 {
 	struct GlobalWritableFileInfoParser : public ListElementParser {
@@ -743,8 +728,7 @@ BPackageInfo::Parser::_ParseGlobalWritableFileInfos(
 }
 
 
-void
-BPackageInfo::Parser::_ParseUserSettingsFileInfos(
+void BPackageInfo::Parser::_ParseUserSettingsFileInfos(
 	UserSettingsFileInfoList* infos)
 {
 	struct UserSettingsFileInfoParser : public ListElementParser {
@@ -804,8 +788,7 @@ BPackageInfo::Parser::_ParseUserSettingsFileInfos(
 }
 
 
-void
-BPackageInfo::Parser::_ParseUsers(UserList* users)
+void BPackageInfo::Parser::_ParseUsers(UserList* users)
 {
 	struct UserParser : public ListElementParser {
 		Parser& parser;
@@ -914,8 +897,7 @@ BPackageInfo::Parser::_ParseUsers(UserList* users)
 }
 
 
-void
-BPackageInfo::Parser::_Parse(BPackageInfo* packageInfo)
+void BPackageInfo::Parser::_Parse(BPackageInfo* packageInfo)
 {
 	bool seen[B_PACKAGE_INFO_ENUM_COUNT];
 	for (int i = 0; i < B_PACKAGE_INFO_ENUM_COUNT; ++i)
@@ -1085,8 +1067,7 @@ BPackageInfo::Parser::_Parse(BPackageInfo* packageInfo)
 }
 
 
-/*static*/ inline bool
-BPackageInfo::Parser::_IsAlphaNumUnderscore(const BString& string,
+/*static*/ inline bool BPackageInfo::Parser::_IsAlphaNumUnderscore(const BString& string,
 	const char* additionalChars, int32* _errorPos)
 {
 	return _IsAlphaNumUnderscore(string.String(),
@@ -1094,8 +1075,7 @@ BPackageInfo::Parser::_IsAlphaNumUnderscore(const BString& string,
 }
 
 
-/*static*/ inline bool
-BPackageInfo::Parser::_IsAlphaNumUnderscore(const char* string,
+/*static*/ inline bool BPackageInfo::Parser::_IsAlphaNumUnderscore(const char* string,
 	const char* additionalChars, int32* _errorPos)
 {
 	return _IsAlphaNumUnderscore(string, string + strlen(string),
@@ -1103,8 +1083,7 @@ BPackageInfo::Parser::_IsAlphaNumUnderscore(const char* string,
 }
 
 
-/*static*/ bool
-BPackageInfo::Parser::_IsAlphaNumUnderscore(const char* start, const char* end,
+/*static*/ bool BPackageInfo::Parser::_IsAlphaNumUnderscore(const char* start, const char* end,
 	const char* additionalChars, int32* _errorPos)
 {
 	for (const char* c = start; c < end; c++) {
@@ -1119,8 +1098,7 @@ BPackageInfo::Parser::_IsAlphaNumUnderscore(const char* start, const char* end,
 }
 
 
-/*static*/ bool
-BPackageInfo::Parser::_IsValidResolvableName(const char* string,
+/*static*/ bool BPackageInfo::Parser::_IsValidResolvableName(const char* string,
 	int32* _errorPos)
 {
 	for (const char* c = string; *c != '\0'; c++) {

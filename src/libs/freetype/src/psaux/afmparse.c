@@ -116,8 +116,7 @@
 
 
   /* read a key or value in current column */
-  static char*
-  afm_stream_read_one( AFM_Stream  stream )
+  static char*    afm_stream_read_one( AFM_Stream  stream )
   {
     char*  str;
     int    ch;
@@ -156,8 +155,7 @@
 
 
   /* read a string (i.e., read to EOL) */
-  static char*
-  afm_stream_read_string( AFM_Stream  stream )
+  static char*    afm_stream_read_string( AFM_Stream  stream )
   {
     char*  str;
     int    ch;

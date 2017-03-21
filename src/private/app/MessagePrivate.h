@@ -96,14 +96,12 @@ class BMessage::Private {
 		{
 		}
 
-		void
-		SetTarget(int32 token)
+		void 		SetTarget(int32 token)
 		{
 			fMessage->fHeader->target = token;
 		}
 
-		void
-		SetReply(BMessenger messenger)
+		void 		SetReply(BMessenger messenger)
 		{
 			BMessenger::Private messengerPrivate(messenger);
 			fMessage->fHeader->reply_port = messengerPrivate.Port();
@@ -111,28 +109,24 @@ class BMessage::Private {
 			fMessage->fHeader->reply_team = messengerPrivate.Team();
 		}
 
-		void
-		SetReply(team_id team, port_id port, int32 target)
+		void 		SetReply(team_id team, port_id port, int32 target)
 		{
 			fMessage->fHeader->reply_port = port;
 			fMessage->fHeader->reply_target = target;
 			fMessage->fHeader->reply_team = team;
 		}
 
-		int32
-		GetTarget()
+		int32 		GetTarget()
 		{
 			return fMessage->fHeader->target;
 		}
 
-		bool
-		UsePreferredTarget()
+		bool 		UsePreferredTarget()
 		{
 			return fMessage->fHeader->target == B_PREFERRED_TOKEN;
 		}
 
-		void
-		SetWasDropped(bool wasDropped)
+		void 		SetWasDropped(bool wasDropped)
 		{
 			if (wasDropped)
 				fMessage->fHeader->flags |= MESSAGE_FLAG_WAS_DROPPED;
@@ -140,14 +134,12 @@ class BMessage::Private {
 				fMessage->fHeader->flags &= ~MESSAGE_FLAG_WAS_DROPPED;
 		}
 
-		status_t
-		Clear()
+		status_t 		Clear()
 		{
 			return fMessage->_Clear();
 		}
 
-		status_t
-		InitHeader()
+		status_t 		InitHeader()
 		{
 			return fMessage->_InitHeader();
 		}
@@ -170,22 +162,19 @@ class BMessage::Private {
 			return fMessage->fData;
 		}
 
-		status_t
-		FlattenToArea(message_header **header) const
+		status_t 		FlattenToArea(message_header **header) const
 		{
 			return fMessage->_FlattenToArea(header);
 		}
 
-		status_t
-		SendMessage(port_id port, team_id portOwner, int32 token,
+		status_t 		SendMessage(port_id port, team_id portOwner, int32 token,
 			bigtime_t timeout, bool replyRequired, BMessenger &replyTo) const
 		{
 			return fMessage->_SendMessage(port, portOwner, token,
 				timeout, replyRequired, replyTo);
 		}
 
-		status_t
-		SendMessage(port_id port, team_id portOwner, int32 token,
+		status_t 		SendMessage(port_id port, team_id portOwner, int32 token,
 			BMessage *reply, bigtime_t sendTimeout,
 			bigtime_t replyTimeout) const
 		{
@@ -193,48 +182,41 @@ class BMessage::Private {
 				reply, sendTimeout, replyTimeout);
 		}
 
-		void*
-		ArchivingPointer()
+		void*   		ArchivingPointer()
 		{
 			return fMessage->fArchivingPointer;
 		}
 
-		void
-		SetArchivingPointer(void* pointer)
+		void 		SetArchivingPointer(void* pointer)
 		{
 			fMessage->fArchivingPointer = pointer;
 		}
 
 		// static methods
 
-		static status_t
-		SendFlattenedMessage(void *data, int32 size, port_id port,
+		static status_t 		SendFlattenedMessage(void *data, int32 size, port_id port,
 			int32 token, bigtime_t timeout)
 		{
 			return BMessage::_SendFlattenedMessage(data, size,
 				port, token, timeout);
 		}
 
-		static void
-		StaticInit()
+		static void 		StaticInit()
 		{
 			BMessage::_StaticInit();
 		}
 
-		static void
-		StaticReInitForkedChild()
+		static void 		StaticReInitForkedChild()
 		{
 			BMessage::_StaticReInitForkedChild();
 		}
 
-		static void
-		StaticCleanup()
+		static void 		StaticCleanup()
 		{
 			BMessage::_StaticCleanup();
 		}
 
-		static void
-		StaticCacheCleanup()
+		static void 		StaticCacheCleanup()
 		{
 			BMessage::_StaticCacheCleanup();
 		}

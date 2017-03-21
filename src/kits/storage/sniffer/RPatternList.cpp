@@ -27,8 +27,7 @@ RPatternList::~RPatternList() {
 		delete *i;
 }
 
-status_t
-RPatternList::InitCheck() const {
+status_t RPatternList::InitCheck() const {
 	return B_OK;
 }
 
@@ -41,8 +40,7 @@ RPatternList::GetErr() const {
 	with any of the list's patterns. Each pattern is searched
 	over its own specified range.
 */
-bool
-RPatternList::Sniff(BPositionIO *data) const {
+bool RPatternList::Sniff(BPositionIO *data) const {
 	if (InitCheck() != B_OK)
 		return false;
 	else {
@@ -84,8 +82,7 @@ RPatternList::BytesNeeded() const
 	return result;
 }
 	
-void
-RPatternList::Add(RPattern *rpattern) {
+void RPatternList::Add(RPattern *rpattern) {
 	if (rpattern)
 		fList.push_back(rpattern);
 }

@@ -32,8 +32,7 @@ void* ___tls_get_addr(struct tls_index* ti) __attribute__((__regparm__(1)));
 static int32 gNextSlot = TLS_FIRST_FREE_SLOT;
 
 
-int32
-tls_allocate(void)
+int32 tls_allocate(void)
 {
 	int32 next = atomic_add(&gNextSlot, 1);
 	if (next >= TLS_MAX_KEYS)

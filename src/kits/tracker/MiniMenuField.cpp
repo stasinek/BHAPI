@@ -58,8 +58,7 @@ MiniMenuField::~MiniMenuField()
 }
 
 
-void
-MiniMenuField::AttachedToWindow()
+void MiniMenuField::AttachedToWindow()
 {
 	if (Parent() != NULL) {
 		SetViewColor(Parent()->ViewColor());
@@ -70,16 +69,14 @@ MiniMenuField::AttachedToWindow()
 }
 
 
-void
-MiniMenuField::MakeFocus(bool on)
+void MiniMenuField::MakeFocus(bool on)
 {
 	Invalidate();
 	BView::MakeFocus(on);
 }
 
 
-void
-MiniMenuField::KeyDown(const char* bytes, int32 numBytes)
+void MiniMenuField::KeyDown(const char* bytes, int32 numBytes)
 {
 	switch (bytes[0]) {
 		case B_SPACE:
@@ -96,8 +93,7 @@ MiniMenuField::KeyDown(const char* bytes, int32 numBytes)
 }
 
 
-void
-MiniMenuField::Draw(BRect)
+void MiniMenuField::Draw(BRect)
 {
 	BRect bounds(Bounds());
 	bounds.OffsetBy(1, 2);
@@ -147,8 +143,7 @@ MiniMenuField::Draw(BRect)
 }
 
 
-void
-MiniMenuField::MouseDown(BPoint)
+void MiniMenuField::MouseDown(BPoint)
 {
 	fMenu->Go(ConvertToScreen(BPoint(4, 4)), true);
 }

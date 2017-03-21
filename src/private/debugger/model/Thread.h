@@ -6,7 +6,7 @@
 #ifndef THREAD_H
 #define THREAD_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <StringClass.h>
 
 #include <Referenceable.h>

@@ -52,8 +52,7 @@ BTextView::UndoBuffer::~UndoBuffer()
 }
 
 
-void
-BTextView::UndoBuffer::Undo(BClipboard* clipboard)
+void BTextView::UndoBuffer::Undo(BClipboard* clipboard)
 {
 	fRedo ? RedoSelf(clipboard) : UndoSelf(clipboard);
 		
@@ -70,8 +69,7 @@ BTextView::UndoBuffer::State(bool* _isRedo) const
 }
 
 
-void
-BTextView::UndoBuffer::UndoSelf(BClipboard* clipboard)
+void BTextView::UndoBuffer::UndoSelf(BClipboard* clipboard)
 {
 	fTextView->Select(fStart, fStart);
 	fTextView->Insert(fTextData, fTextLength, fRunArray);
@@ -79,8 +77,7 @@ BTextView::UndoBuffer::UndoSelf(BClipboard* clipboard)
 }
 
 
-void
-BTextView::UndoBuffer::RedoSelf(BClipboard* clipboard)
+void BTextView::UndoBuffer::RedoSelf(BClipboard* clipboard)
 {
 }
 
@@ -99,8 +96,7 @@ BTextView::CutUndoBuffer::~CutUndoBuffer()
 }
 
 
-void 
-BTextView::CutUndoBuffer::RedoSelf(BClipboard* clipboard)
+void BTextView::CutUndoBuffer::RedoSelf(BClipboard* clipboard)
 {
 	BMessage* clip = NULL;
 	
@@ -146,8 +142,7 @@ BTextView::PasteUndoBuffer::~PasteUndoBuffer()
 }
 
 
-void
-BTextView::PasteUndoBuffer::UndoSelf(BClipboard* clipboard)
+void BTextView::PasteUndoBuffer::UndoSelf(BClipboard* clipboard)
 {
 	fTextView->Select(fStart, fStart);
 	fTextView->Delete(fStart, fStart + fPasteTextLength);
@@ -156,8 +151,7 @@ BTextView::PasteUndoBuffer::UndoSelf(BClipboard* clipboard)
 }
 
 
-void
-BTextView::PasteUndoBuffer::RedoSelf(BClipboard* clipboard)
+void BTextView::PasteUndoBuffer::RedoSelf(BClipboard* clipboard)
 {
 	fTextView->Select(fStart, fStart);
 	fTextView->Delete(fStart, fEnd);
@@ -180,8 +174,7 @@ BTextView::ClearUndoBuffer::~ClearUndoBuffer()
 }
 
 
-void
-BTextView::ClearUndoBuffer::RedoSelf(BClipboard* clipboard)
+void BTextView::ClearUndoBuffer::RedoSelf(BClipboard* clipboard)
 {
 	fTextView->Select(fStart, fStart);
 	fTextView->Delete(fStart, fEnd);
@@ -220,8 +213,7 @@ BTextView::DropUndoBuffer::~DropUndoBuffer()
 }
 
 
-void
-BTextView::DropUndoBuffer::UndoSelf(BClipboard* )
+void BTextView::DropUndoBuffer::UndoSelf(BClipboard* )
 {
 	fTextView->Select(fDropLocation, fDropLocation);
 	fTextView->Delete(fDropLocation, fDropLocation + fDropTextLength);
@@ -233,8 +225,7 @@ BTextView::DropUndoBuffer::UndoSelf(BClipboard* )
 }
 
 
-void
-BTextView::DropUndoBuffer::RedoSelf(BClipboard* )
+void BTextView::DropUndoBuffer::RedoSelf(BClipboard* )
 {
 	if (fInternalDrop) {
 		fTextView->Select(fStart, fStart);
@@ -265,8 +256,7 @@ BTextView::TypingUndoBuffer::~TypingUndoBuffer()
 }
 
 
-void
-BTextView::TypingUndoBuffer::UndoSelf(BClipboard* clipboard)
+void BTextView::TypingUndoBuffer::UndoSelf(BClipboard* clipboard)
 {
 	int32 len = fTypedEnd - fTypedStart;
 	
@@ -283,8 +273,7 @@ BTextView::TypingUndoBuffer::UndoSelf(BClipboard* clipboard)
 }
 
 
-void
-BTextView::TypingUndoBuffer::RedoSelf(BClipboard* clipboard)
+void BTextView::TypingUndoBuffer::RedoSelf(BClipboard* clipboard)
 {	
 	fTextView->Select(fTypedStart, fTypedStart);
 	fTextView->Delete(fTypedStart, fTypedStart + fTextLength);
@@ -293,8 +282,7 @@ BTextView::TypingUndoBuffer::RedoSelf(BClipboard* clipboard)
 }
 
 
-void
-BTextView::TypingUndoBuffer::InputCharacter(int32 len)
+void BTextView::TypingUndoBuffer::InputCharacter(int32 len)
 {
 	int32 start, end;
 	fTextView->GetSelection(&start, &end);
@@ -306,8 +294,7 @@ BTextView::TypingUndoBuffer::InputCharacter(int32 len)
 }
 
 
-void
-BTextView::TypingUndoBuffer::_Reset()
+void BTextView::TypingUndoBuffer::_Reset()
 {
 	free(fTextData);
 	fTextView->GetSelection(&fStart, &fEnd);
@@ -325,8 +312,7 @@ BTextView::TypingUndoBuffer::_Reset()
 }
 
 
-void
-BTextView::TypingUndoBuffer::BackwardErase()
+void BTextView::TypingUndoBuffer::BackwardErase()
 {
 	int32 start, end;
 	fTextView->GetSelection(&start, &end);
@@ -356,8 +342,7 @@ BTextView::TypingUndoBuffer::BackwardErase()
 }
 
 
-void
-BTextView::TypingUndoBuffer::ForwardErase()
+void BTextView::TypingUndoBuffer::ForwardErase()
 {
 	// TODO: Cleanup
 	int32 start, end;

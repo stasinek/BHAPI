@@ -5,8 +5,7 @@
  */
 
 
-/* static */ status_t
-NodeMonitorHandler::make_entry_ref(dev_t device, ino_t directory,
+/* static */ status_t NodeMonitorHandler::make_entry_ref(dev_t device, ino_t directory,
                                    const char * name, 
                                    entry_ref * ref)
 {
@@ -16,8 +15,7 @@ NodeMonitorHandler::make_entry_ref(dev_t device, ino_t directory,
 }
 
 
-/* static */ void
-NodeMonitorHandler::make_node_ref(dev_t device, ino_t node, node_ref * ref)
+/* static */ void NodeMonitorHandler::make_node_ref(dev_t device, ino_t node, node_ref * ref)
 {
 	ref->device = device;
 	ref->node = node;
@@ -41,8 +39,7 @@ NodeMonitorHandler::~NodeMonitorHandler()
 }
 
 
-/* virtual */ void
-NodeMonitorHandler::MessageReceived(BMessage * msg)
+/* virtual */ void NodeMonitorHandler::MessageReceived(BMessage * msg)
 {
 	status_t status = B_MESSAGE_NOT_UNDERSTOOD;
 	if (msg->what == B_NODE_MONITOR) {
@@ -84,24 +81,21 @@ NodeMonitorHandler::MessageReceived(BMessage * msg)
  * default virtual functions do nothing
  */
 
-/* virtual */ void
-NodeMonitorHandler::EntryCreated(const char *name, ino_t directory,
+/* virtual */ void NodeMonitorHandler::EntryCreated(const char *name, ino_t directory,
 	dev_t device, ino_t node)
 {
 	// ignore
 }
 
 
-/* virtual */ void
-NodeMonitorHandler::EntryRemoved(const char *name, ino_t directory,
+/* virtual */ void NodeMonitorHandler::EntryRemoved(const char *name, ino_t directory,
 	dev_t device, ino_t node)
 {
 	// ignore
 }
 
 
-/* virtual */ void
-NodeMonitorHandler::EntryMoved(const char *name, const char *fromName,
+/* virtual */ void NodeMonitorHandler::EntryMoved(const char *name, const char *fromName,
 	ino_t fromDirectory, ino_t toDirectory, dev_t device,ino_t node,
 	dev_t nodeDevice)
 {
@@ -109,30 +103,26 @@ NodeMonitorHandler::EntryMoved(const char *name, const char *fromName,
 }
 
 
-/* virtual */ void
-NodeMonitorHandler::StatChanged(ino_t node, dev_t device, int32 statFields)
+/* virtual */ void NodeMonitorHandler::StatChanged(ino_t node, dev_t device, int32 statFields)
 {
 	// ignore
 }
 
 
-/* virtual */ void
-NodeMonitorHandler::AttrChanged(ino_t node, dev_t device)
+/* virtual */ void NodeMonitorHandler::AttrChanged(ino_t node, dev_t device)
 {
 	// ignore
 }
 
 
-/* virtual */ void
-NodeMonitorHandler::DeviceMounted(dev_t new_device, dev_t device,
+/* virtual */ void NodeMonitorHandler::DeviceMounted(dev_t new_device, dev_t device,
 	ino_t directory)
 {
 	// ignore
 }
 
 
-/* virtual */ void
-NodeMonitorHandler::DeviceUnmounted(dev_t new_device)
+/* virtual */ void NodeMonitorHandler::DeviceUnmounted(dev_t new_device)
 {
 	// ignore
 }
@@ -142,8 +132,7 @@ NodeMonitorHandler::DeviceUnmounted(dev_t new_device)
  * private functions to rip apart the corresponding BMessage
  */
 
-status_t
-NodeMonitorHandler::HandleEntryCreated(BMessage * msg)
+status_t NodeMonitorHandler::HandleEntryCreated(BMessage * msg)
 {
 	const char *name;
 	ino_t directory;
@@ -160,8 +149,7 @@ NodeMonitorHandler::HandleEntryCreated(BMessage * msg)
 }
 
 
-status_t
-NodeMonitorHandler::HandleEntryRemoved(BMessage * msg)
+status_t NodeMonitorHandler::HandleEntryRemoved(BMessage * msg)
 {
 	const char *name;
 	ino_t directory;
@@ -178,8 +166,7 @@ NodeMonitorHandler::HandleEntryRemoved(BMessage * msg)
 }
 
 
-status_t
-NodeMonitorHandler::HandleEntryMoved(BMessage * msg)
+status_t NodeMonitorHandler::HandleEntryMoved(BMessage * msg)
 {
 	const char *name;
 	const char *fromName;
@@ -203,8 +190,7 @@ NodeMonitorHandler::HandleEntryMoved(BMessage * msg)
 }
 
 
-status_t
-NodeMonitorHandler::HandleStatChanged(BMessage * msg)
+status_t NodeMonitorHandler::HandleStatChanged(BMessage * msg)
 {
 	ino_t node;
 	dev_t device;
@@ -219,8 +205,7 @@ NodeMonitorHandler::HandleStatChanged(BMessage * msg)
 }
 
 
-status_t
-NodeMonitorHandler::HandleAttrChanged(BMessage * msg)
+status_t NodeMonitorHandler::HandleAttrChanged(BMessage * msg)
 {
 	ino_t node;
 	dev_t device;
@@ -233,8 +218,7 @@ NodeMonitorHandler::HandleAttrChanged(BMessage * msg)
 }
 
 
-status_t
-NodeMonitorHandler::HandleDeviceMounted(BMessage * msg)
+status_t NodeMonitorHandler::HandleDeviceMounted(BMessage * msg)
 {
 	dev_t new_device;
 	dev_t device;
@@ -249,8 +233,7 @@ NodeMonitorHandler::HandleDeviceMounted(BMessage * msg)
 }
 
 
-status_t
-NodeMonitorHandler::HandleDeviceUnmounted(BMessage * msg)
+status_t NodeMonitorHandler::HandleDeviceUnmounted(BMessage * msg)
 {
 	dev_t new_device;
 	if (msg->FindInt32("new device", &new_device) != B_OK) {

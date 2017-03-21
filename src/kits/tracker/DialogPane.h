@@ -104,8 +104,7 @@ private:
 };
 
 
-inline int32
-DialogPane::Mode() const
+inline int32 DialogPane::Mode() const
 {
 	return fMode;
 }

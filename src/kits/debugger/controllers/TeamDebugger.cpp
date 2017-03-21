@@ -323,8 +323,7 @@ TeamDebugger::~TeamDebugger()
 }
 
 
-status_t
-TeamDebugger::Init(DebuggerInterface* interface, thread_id threadID, int argc,
+status_t TeamDebugger::Init(DebuggerInterface* interface, thread_id threadID, int argc,
 	const char* const* argv, bool stopInMain)
 {
 	bool targetIsLocal = true;
@@ -555,15 +554,13 @@ TeamDebugger::Init(DebuggerInterface* interface, thread_id threadID, int argc,
 }
 
 
-void
-TeamDebugger::Activate()
+void TeamDebugger::Activate()
 {
 	fUserInterface->Show();
 }
 
 
-void
-TeamDebugger::MessageReceived(BMessage* message)
+void TeamDebugger::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case MSG_THREAD_RUN:
@@ -970,8 +967,7 @@ TeamDebugger::MessageReceived(BMessage* message)
 }
 
 
-void
-TeamDebugger::SourceEntryLocateRequested(const char* sourcePath,
+void TeamDebugger::SourceEntryLocateRequested(const char* sourcePath,
 	const char* locatedPath)
 {
 	AutoLocker<FileManager> locker(fFileManager);
@@ -979,8 +975,7 @@ TeamDebugger::SourceEntryLocateRequested(const char* sourcePath,
 }
 
 
-void
-TeamDebugger::SourceEntryInvalidateRequested(LocatableFile* sourceFile)
+void TeamDebugger::SourceEntryInvalidateRequested(LocatableFile* sourceFile)
 {
 	AutoLocker< ::Team> locker(fTeam);
 
@@ -988,8 +983,7 @@ TeamDebugger::SourceEntryInvalidateRequested(LocatableFile* sourceFile)
 }
 
 
-void
-TeamDebugger::FunctionSourceCodeRequested(FunctionInstance* functionInstance,
+void TeamDebugger::FunctionSourceCodeRequested(FunctionInstance* functionInstance,
 	bool forceDisassembly)
 {
 	Function* function = functionInstance->GetFunction();
@@ -1031,15 +1025,13 @@ TeamDebugger::FunctionSourceCodeRequested(FunctionInstance* functionInstance,
 }
 
 
-void
-TeamDebugger::ImageDebugInfoRequested(Image* image)
+void TeamDebugger::ImageDebugInfoRequested(Image* image)
 {
 	LoadImageDebugInfoJob::ScheduleIfNecessary(fWorker, image, this);
 }
 
 
-void
-TeamDebugger::ValueNodeValueRequested(CpuState* cpuState,
+void TeamDebugger::ValueNodeValueRequested(CpuState* cpuState,
 	ValueNodeContainer* container, ValueNode* valueNode)
 {
 	AutoLocker<ValueNodeContainer> containerLocker(container);
@@ -1064,8 +1056,7 @@ TeamDebugger::ValueNodeValueRequested(CpuState* cpuState,
 	}
 }
 
-void
-TeamDebugger::ValueNodeWriteRequested(ValueNode* node, CpuState* state,
+void TeamDebugger::ValueNodeWriteRequested(ValueNode* node, CpuState* state,
 	Value* newValue)
 {
 	// schedule the job
@@ -1083,8 +1074,7 @@ TeamDebugger::ValueNodeWriteRequested(ValueNode* node, CpuState* state,
 }
 
 
-void
-TeamDebugger::ThreadActionRequested(thread_id threadID,
+void TeamDebugger::ThreadActionRequested(thread_id threadID,
 	uint32 action, target_addr_t address)
 {
 	BMessage message(action);
@@ -1094,8 +1084,7 @@ TeamDebugger::ThreadActionRequested(thread_id threadID,
 }
 
 
-void
-TeamDebugger::SetBreakpointRequested(target_addr_t address, bool enabled,
+void TeamDebugger::SetBreakpointRequested(target_addr_t address, bool enabled,
 	bool hidden)
 {
 	BMessage message(MSG_SET_BREAKPOINT);
@@ -1106,8 +1095,7 @@ TeamDebugger::SetBreakpointRequested(target_addr_t address, bool enabled,
 }
 
 
-void
-TeamDebugger::SetBreakpointEnabledRequested(UserBreakpoint* breakpoint,
+void TeamDebugger::SetBreakpointEnabledRequested(UserBreakpoint* breakpoint,
 	bool enabled)
 {
 	BMessage message(MSG_SET_BREAKPOINT);
@@ -1120,8 +1108,7 @@ TeamDebugger::SetBreakpointEnabledRequested(UserBreakpoint* breakpoint,
 }
 
 
-void
-TeamDebugger::SetBreakpointConditionRequested(UserBreakpoint* breakpoint,
+void TeamDebugger::SetBreakpointConditionRequested(UserBreakpoint* breakpoint,
 	const char* condition)
 {
 	BMessage message(MSG_SET_BREAKPOINT_CONDITION);
@@ -1134,8 +1121,7 @@ TeamDebugger::SetBreakpointConditionRequested(UserBreakpoint* breakpoint,
 }
 
 
-void
-TeamDebugger::ClearBreakpointConditionRequested(UserBreakpoint* breakpoint)
+void TeamDebugger::ClearBreakpointConditionRequested(UserBreakpoint* breakpoint)
 {
 	BMessage message(MSG_CLEAR_BREAKPOINT_CONDITION);
 	BReference<UserBreakpoint> breakpointReference(breakpoint);
@@ -1146,8 +1132,7 @@ TeamDebugger::ClearBreakpointConditionRequested(UserBreakpoint* breakpoint)
 }
 
 
-void
-TeamDebugger::ClearBreakpointRequested(target_addr_t address)
+void TeamDebugger::ClearBreakpointRequested(target_addr_t address)
 {
 	BMessage message(MSG_CLEAR_BREAKPOINT);
 	message.AddUInt64("address", (uint64)address);
@@ -1155,8 +1140,7 @@ TeamDebugger::ClearBreakpointRequested(target_addr_t address)
 }
 
 
-void
-TeamDebugger::SetStopOnImageLoadRequested(bool enabled, bool useImageNames)
+void TeamDebugger::SetStopOnImageLoadRequested(bool enabled, bool useImageNames)
 {
 	BMessage message(MSG_STOP_ON_IMAGE_LOAD);
 	message.AddBool("enabled", enabled);
@@ -1165,8 +1149,7 @@ TeamDebugger::SetStopOnImageLoadRequested(bool enabled, bool useImageNames)
 }
 
 
-void
-TeamDebugger::AddStopImageNameRequested(const char* name)
+void TeamDebugger::AddStopImageNameRequested(const char* name)
 {
 	BMessage message(MSG_ADD_STOP_IMAGE_NAME);
 	message.AddString("name", name);
@@ -1174,8 +1157,7 @@ TeamDebugger::AddStopImageNameRequested(const char* name)
 }
 
 
-void
-TeamDebugger::RemoveStopImageNameRequested(const char* name)
+void TeamDebugger::RemoveStopImageNameRequested(const char* name)
 {
 	BMessage message(MSG_REMOVE_STOP_IMAGE_NAME);
 	message.AddString("name", name);
@@ -1183,8 +1165,7 @@ TeamDebugger::RemoveStopImageNameRequested(const char* name)
 }
 
 
-void
-TeamDebugger::SetDefaultSignalDispositionRequested(int32 disposition)
+void TeamDebugger::SetDefaultSignalDispositionRequested(int32 disposition)
 {
 	BMessage message(MSG_SET_DEFAULT_SIGNAL_DISPOSITION);
 	message.AddInt32("disposition", disposition);
@@ -1192,8 +1173,7 @@ TeamDebugger::SetDefaultSignalDispositionRequested(int32 disposition)
 }
 
 
-void
-TeamDebugger::SetCustomSignalDispositionRequested(int32 signal,
+void TeamDebugger::SetCustomSignalDispositionRequested(int32 signal,
 	int32 disposition)
 {
 	BMessage message(MSG_SET_CUSTOM_SIGNAL_DISPOSITION);
@@ -1203,8 +1183,7 @@ TeamDebugger::SetCustomSignalDispositionRequested(int32 signal,
 }
 
 
-void
-TeamDebugger::RemoveCustomSignalDispositionRequested(int32 signal)
+void TeamDebugger::RemoveCustomSignalDispositionRequested(int32 signal)
 {
 	BMessage message(MSG_REMOVE_CUSTOM_SIGNAL_DISPOSITION);
 	message.AddInt32("signal", signal);
@@ -1212,8 +1191,7 @@ TeamDebugger::RemoveCustomSignalDispositionRequested(int32 signal)
 }
 
 
-void
-TeamDebugger::ClearBreakpointRequested(UserBreakpoint* breakpoint)
+void TeamDebugger::ClearBreakpointRequested(UserBreakpoint* breakpoint)
 {
 	BMessage message(MSG_CLEAR_BREAKPOINT);
 	BReference<UserBreakpoint> breakpointReference(breakpoint);
@@ -1224,8 +1202,7 @@ TeamDebugger::ClearBreakpointRequested(UserBreakpoint* breakpoint)
 }
 
 
-void
-TeamDebugger::SetWatchpointRequested(target_addr_t address, uint32 type,
+void TeamDebugger::SetWatchpointRequested(target_addr_t address, uint32 type,
 	int32 length, bool enabled)
 {
 	BMessage message(MSG_SET_WATCHPOINT);
@@ -1237,8 +1214,7 @@ TeamDebugger::SetWatchpointRequested(target_addr_t address, uint32 type,
 }
 
 
-void
-TeamDebugger::SetWatchpointEnabledRequested(Watchpoint* watchpoint,
+void TeamDebugger::SetWatchpointEnabledRequested(Watchpoint* watchpoint,
 	bool enabled)
 {
 	BMessage message(MSG_SET_WATCHPOINT);
@@ -1251,8 +1227,7 @@ TeamDebugger::SetWatchpointEnabledRequested(Watchpoint* watchpoint,
 }
 
 
-void
-TeamDebugger::ClearWatchpointRequested(target_addr_t address)
+void TeamDebugger::ClearWatchpointRequested(target_addr_t address)
 {
 	BMessage message(MSG_CLEAR_WATCHPOINT);
 	message.AddUInt64("address", (uint64)address);
@@ -1260,8 +1235,7 @@ TeamDebugger::ClearWatchpointRequested(target_addr_t address)
 }
 
 
-void
-TeamDebugger::ClearWatchpointRequested(Watchpoint* watchpoint)
+void TeamDebugger::ClearWatchpointRequested(Watchpoint* watchpoint)
 {
 	BMessage message(MSG_CLEAR_WATCHPOINT);
 	BReference<Watchpoint> watchpointReference(watchpoint);
@@ -1272,8 +1246,7 @@ TeamDebugger::ClearWatchpointRequested(Watchpoint* watchpoint)
 }
 
 
-void
-TeamDebugger::InspectRequested(target_addr_t address,
+void TeamDebugger::InspectRequested(target_addr_t address,
 	TeamMemoryBlock::Listener *listener)
 {
 	BMessage message(MSG_INSPECT_ADDRESS);
@@ -1283,8 +1256,7 @@ TeamDebugger::InspectRequested(target_addr_t address,
 }
 
 
-void
-TeamDebugger::MemoryWriteRequested(target_addr_t address, const void* data,
+void TeamDebugger::MemoryWriteRequested(target_addr_t address, const void* data,
 	target_size_t size)
 {
 	BMessage message(MSG_WRITE_TARGET_MEMORY);
@@ -1295,8 +1267,7 @@ TeamDebugger::MemoryWriteRequested(target_addr_t address, const void* data,
 }
 
 
-void
-TeamDebugger::ExpressionEvaluationRequested(SourceLanguage* language,
+void TeamDebugger::ExpressionEvaluationRequested(SourceLanguage* language,
 	ExpressionInfo* info, StackFrame* frame, ::Thread* thread)
 {
 	BMessage message(MSG_EVALUATE_EXPRESSION);
@@ -1316,8 +1287,7 @@ TeamDebugger::ExpressionEvaluationRequested(SourceLanguage* language,
 }
 
 
-void
-TeamDebugger::DebugReportRequested(entry_ref* targetPath)
+void TeamDebugger::DebugReportRequested(entry_ref* targetPath)
 {
 	BMessage message(MSG_GENERATE_DEBUG_REPORT);
 	message.AddRef("target", targetPath);
@@ -1325,8 +1295,7 @@ TeamDebugger::DebugReportRequested(entry_ref* targetPath)
 }
 
 
-void
-TeamDebugger::WriteCoreFileRequested(entry_ref* targetPath)
+void TeamDebugger::WriteCoreFileRequested(entry_ref* targetPath)
 {
 	BMessage message(MSG_WRITE_CORE_FILE);
 	message.AddRef("target", targetPath);
@@ -1334,15 +1303,13 @@ TeamDebugger::WriteCoreFileRequested(entry_ref* targetPath)
 }
 
 
-void
-TeamDebugger::TeamRestartRequested()
+void TeamDebugger::TeamRestartRequested()
 {
 	PostMessage(MSG_TEAM_RESTART_REQUESTED);
 }
 
 
-bool
-TeamDebugger::UserInterfaceQuitRequested(QuitOption quitOption)
+bool TeamDebugger::UserInterfaceQuitRequested(QuitOption quitOption)
 {
 	bool askUser = false;
 	switch (quitOption) {
@@ -1398,8 +1365,7 @@ TeamDebugger::UserInterfaceQuitRequested(QuitOption quitOption)
 }
 
 
-void
-TeamDebugger::JobStarted(Job* job)
+void TeamDebugger::JobStarted(Job* job)
 {
 	BString description(job->GetDescription());
 	if (!description.IsEmpty()) {
@@ -1409,16 +1375,14 @@ TeamDebugger::JobStarted(Job* job)
 }
 
 
-void
-TeamDebugger::JobDone(Job* job)
+void TeamDebugger::JobDone(Job* job)
 {
 	TRACE_JOBS("TeamDebugger::JobDone(%p)\n", job);
 	_ResetUserBackgroundStatusIfNeeded();
 }
 
 
-void
-TeamDebugger::JobWaitingForInput(Job* job)
+void TeamDebugger::JobWaitingForInput(Job* job)
 {
 	LoadImageDebugInfoJob* infoJob = dynamic_cast<LoadImageDebugInfoJob*>(job);
 
@@ -1432,8 +1396,7 @@ TeamDebugger::JobWaitingForInput(Job* job)
 }
 
 
-void
-TeamDebugger::JobFailed(Job* job)
+void TeamDebugger::JobFailed(Job* job)
 {
 	TRACE_JOBS("TeamDebugger::JobFailed(%p)\n", job);
 	// TODO: notify user
@@ -1441,8 +1404,7 @@ TeamDebugger::JobFailed(Job* job)
 }
 
 
-void
-TeamDebugger::JobAborted(Job* job)
+void TeamDebugger::JobAborted(Job* job)
 {
 	TRACE_JOBS("TeamDebugger::JobAborted(%p)\n", job);
 	// TODO: For a stack frame source loader thread we should reset the
@@ -1451,8 +1413,7 @@ TeamDebugger::JobAborted(Job* job)
 }
 
 
-void
-TeamDebugger::ThreadStateChanged(const ::Team::ThreadEvent& event)
+void TeamDebugger::ThreadStateChanged(const ::Team::ThreadEvent& event)
 {
 	BMessage message(MSG_THREAD_STATE_CHANGED);
 	message.AddInt32("thread", event.GetThread()->ID());
@@ -1460,8 +1421,7 @@ TeamDebugger::ThreadStateChanged(const ::Team::ThreadEvent& event)
 }
 
 
-void
-TeamDebugger::ThreadCpuStateChanged(const ::Team::ThreadEvent& event)
+void TeamDebugger::ThreadCpuStateChanged(const ::Team::ThreadEvent& event)
 {
 	BMessage message(MSG_THREAD_CPU_STATE_CHANGED);
 	message.AddInt32("thread", event.GetThread()->ID());
@@ -1469,8 +1429,7 @@ TeamDebugger::ThreadCpuStateChanged(const ::Team::ThreadEvent& event)
 }
 
 
-void
-TeamDebugger::ThreadStackTraceChanged(const ::Team::ThreadEvent& event)
+void TeamDebugger::ThreadStackTraceChanged(const ::Team::ThreadEvent& event)
 {
 	BMessage message(MSG_THREAD_STACK_TRACE_CHANGED);
 	message.AddInt32("thread", event.GetThread()->ID());
@@ -1478,8 +1437,7 @@ TeamDebugger::ThreadStackTraceChanged(const ::Team::ThreadEvent& event)
 }
 
 
-void
-TeamDebugger::ImageDebugInfoChanged(const ::Team::ImageEvent& event)
+void TeamDebugger::ImageDebugInfoChanged(const ::Team::ImageEvent& event)
 {
 	BMessage message(MSG_IMAGE_DEBUG_INFO_CHANGED);
 	message.AddInt32("image", event.GetImage()->ID());
@@ -1487,15 +1445,13 @@ TeamDebugger::ImageDebugInfoChanged(const ::Team::ImageEvent& event)
 }
 
 
-/*static*/ status_t
-TeamDebugger::_DebugEventListenerEntry(void* data)
+/*static*/ status_t TeamDebugger::_DebugEventListenerEntry(void* data)
 {
 	return ((TeamDebugger*)data)->_DebugEventListener();
 }
 
 
-status_t
-TeamDebugger::_DebugEventListener()
+status_t TeamDebugger::_DebugEventListener()
 {
 	while (!fTerminating) {
 		// get the next event
@@ -1523,8 +1479,7 @@ TeamDebugger::_DebugEventListener()
 }
 
 
-void
-TeamDebugger::_HandleDebuggerMessage(DebugEvent* event)
+void TeamDebugger::_HandleDebuggerMessage(DebugEvent* event)
 {
 	TRACE_EVENTS("TeamDebugger::_HandleDebuggerMessage(): %" B_PRId32 "\n",
 		event->EventType());
@@ -1713,8 +1668,7 @@ TeamDebugger::_HandleDebuggerMessage(DebugEvent* event)
 }
 
 
-bool
-TeamDebugger::_HandleTeamDeleted(TeamDeletedEvent* event)
+bool TeamDebugger::_HandleTeamDeleted(TeamDeletedEvent* event)
 {
 	char message[64];
 	fDebuggerInterface->Close(false);
@@ -1747,8 +1701,7 @@ TeamDebugger::_HandleTeamDeleted(TeamDeletedEvent* event)
 }
 
 
-bool
-TeamDebugger::_HandleThreadCreated(ThreadCreatedEvent* event)
+bool TeamDebugger::_HandleThreadCreated(ThreadCreatedEvent* event)
 {
 	AutoLocker< ::Team> locker(fTeam);
 
@@ -1771,8 +1724,7 @@ TeamDebugger::_HandleThreadCreated(ThreadCreatedEvent* event)
 }
 
 
-bool
-TeamDebugger::_HandleThreadRenamed(ThreadRenamedEvent* event)
+bool TeamDebugger::_HandleThreadRenamed(ThreadRenamedEvent* event)
 {
 	AutoLocker< ::Team> locker(fTeam);
 
@@ -1785,8 +1737,7 @@ TeamDebugger::_HandleThreadRenamed(ThreadRenamedEvent* event)
 }
 
 
-bool
-TeamDebugger::_HandleThreadPriorityChanged(ThreadPriorityChangedEvent*)
+bool TeamDebugger::_HandleThreadPriorityChanged(ThreadPriorityChangedEvent*)
 {
 	// TODO: implement once we actually track thread priorities
 
@@ -1794,8 +1745,7 @@ TeamDebugger::_HandleThreadPriorityChanged(ThreadPriorityChangedEvent*)
 }
 
 
-bool
-TeamDebugger::_HandleThreadDeleted(ThreadDeletedEvent* event)
+bool TeamDebugger::_HandleThreadDeleted(ThreadDeletedEvent* event)
 {
 	AutoLocker< ::Team> locker(fTeam);
 	if (ThreadHandler* handler = fThreadHandlers.Lookup(event->Thread())) {
@@ -1807,8 +1757,7 @@ TeamDebugger::_HandleThreadDeleted(ThreadDeletedEvent* event)
 }
 
 
-bool
-TeamDebugger::_HandleImageCreated(ImageCreatedEvent* event)
+bool TeamDebugger::_HandleImageCreated(ImageCreatedEvent* event)
 {
 	AutoLocker< ::Team> locker(fTeam);
 	_AddImage(event->GetImageInfo());
@@ -1823,8 +1772,7 @@ TeamDebugger::_HandleImageCreated(ImageCreatedEvent* event)
 }
 
 
-bool
-TeamDebugger::_HandleImageDeleted(ImageDeletedEvent* event)
+bool TeamDebugger::_HandleImageDeleted(ImageDeletedEvent* event)
 {
 	AutoLocker< ::Team> locker(fTeam);
 	fTeam->RemoveImage(event->GetImageInfo().ImageID());
@@ -1845,8 +1793,7 @@ TeamDebugger::_HandleImageDeleted(ImageDeletedEvent* event)
 }
 
 
-bool
-TeamDebugger::_HandlePostSyscall(PostSyscallEvent* event)
+bool TeamDebugger::_HandlePostSyscall(PostSyscallEvent* event)
 {
 	const SyscallInfo& info = event->GetSyscallInfo();
 
@@ -1900,8 +1847,7 @@ TeamDebugger::_HandlePostSyscall(PostSyscallEvent* event)
 }
 
 
-void
-TeamDebugger::_PrepareForTeamExec(TeamExecEvent* event)
+void TeamDebugger::_PrepareForTeamExec(TeamExecEvent* event)
 {
 	// NB: must be called with team lock held.
 
@@ -1937,8 +1883,7 @@ TeamDebugger::_PrepareForTeamExec(TeamExecEvent* event)
 }
 
 
-void
-TeamDebugger::_HandleImageDebugInfoChanged(image_id imageID)
+void TeamDebugger::_HandleImageDebugInfoChanged(image_id imageID)
 {
 	// get the image (via the image handler)
 	AutoLocker< ::Team> locker(fTeam);
@@ -2017,8 +1962,7 @@ TeamDebugger::_HandleImageDebugInfoChanged(image_id imageID)
 }
 
 
-void
-TeamDebugger::_HandleImageFileChanged(image_id imageID)
+void TeamDebugger::_HandleImageFileChanged(image_id imageID)
 {
 	TRACE_IMAGES("TeamDebugger::_HandleImageFileChanged(%" B_PRId32 ")\n",
 		imageID);
@@ -2026,8 +1970,7 @@ TeamDebugger::_HandleImageFileChanged(image_id imageID)
 }
 
 
-void
-TeamDebugger::_HandleSetUserBreakpoint(target_addr_t address, bool enabled,
+void TeamDebugger::_HandleSetUserBreakpoint(target_addr_t address, bool enabled,
 	bool hidden)
 {
 	TRACE_CONTROL("TeamDebugger::_HandleSetUserBreakpoint(%#" B_PRIx64
@@ -2167,8 +2110,7 @@ TeamDebugger::_HandleSetUserBreakpoint(target_addr_t address, bool enabled,
 }
 
 
-void
-TeamDebugger::_HandleSetUserBreakpoint(UserBreakpoint* breakpoint, bool enabled)
+void TeamDebugger::_HandleSetUserBreakpoint(UserBreakpoint* breakpoint, bool enabled)
 {
 	status_t error = fBreakpointManager->InstallUserBreakpoint(breakpoint,
 		enabled);
@@ -2179,8 +2121,7 @@ TeamDebugger::_HandleSetUserBreakpoint(UserBreakpoint* breakpoint, bool enabled)
 }
 
 
-void
-TeamDebugger::_HandleClearUserBreakpoint(target_addr_t address)
+void TeamDebugger::_HandleClearUserBreakpoint(target_addr_t address)
 {
 	TRACE_CONTROL("TeamDebugger::_HandleClearUserBreakpoint(%#" B_PRIx64 ")\n",
 		address);
@@ -2200,15 +2141,13 @@ TeamDebugger::_HandleClearUserBreakpoint(target_addr_t address)
 }
 
 
-void
-TeamDebugger::_HandleClearUserBreakpoint(UserBreakpoint* breakpoint)
+void TeamDebugger::_HandleClearUserBreakpoint(UserBreakpoint* breakpoint)
 {
 	fBreakpointManager->UninstallUserBreakpoint(breakpoint);
 }
 
 
-void
-TeamDebugger::_HandleSetWatchpoint(target_addr_t address, uint32 type,
+void TeamDebugger::_HandleSetWatchpoint(target_addr_t address, uint32 type,
 	int32 length, bool enabled)
 {
 	Watchpoint* watchpoint = new(std::nothrow) Watchpoint(address, type,
@@ -2222,8 +2161,7 @@ TeamDebugger::_HandleSetWatchpoint(target_addr_t address, uint32 type,
 }
 
 
-void
-TeamDebugger::_HandleSetWatchpoint(Watchpoint* watchpoint, bool enabled)
+void TeamDebugger::_HandleSetWatchpoint(Watchpoint* watchpoint, bool enabled)
 {
 	status_t error = fWatchpointManager->InstallWatchpoint(watchpoint,
 		enabled);
@@ -2234,8 +2172,7 @@ TeamDebugger::_HandleSetWatchpoint(Watchpoint* watchpoint, bool enabled)
 }
 
 
-void
-TeamDebugger::_HandleClearWatchpoint(target_addr_t address)
+void TeamDebugger::_HandleClearWatchpoint(target_addr_t address)
 {
 	TRACE_CONTROL("TeamDebugger::_HandleClearWatchpoint(%#" B_PRIx64 ")\n",
 		address);
@@ -2253,15 +2190,13 @@ TeamDebugger::_HandleClearWatchpoint(target_addr_t address)
 }
 
 
-void
-TeamDebugger::_HandleClearWatchpoint(Watchpoint* watchpoint)
+void TeamDebugger::_HandleClearWatchpoint(Watchpoint* watchpoint)
 {
 	fWatchpointManager->UninstallWatchpoint(watchpoint);
 }
 
 
-void
-TeamDebugger::_HandleInspectAddress(target_addr_t address,
+void TeamDebugger::_HandleInspectAddress(target_addr_t address,
 	TeamMemoryBlock::Listener* listener)
 {
 	TRACE_CONTROL("TeamDebugger::_HandleInspectAddress(%" B_PRIx64 ", %p)\n",
@@ -2301,8 +2236,7 @@ TeamDebugger::_HandleInspectAddress(target_addr_t address,
 }
 
 
-void
-TeamDebugger::_HandleWriteMemory(target_addr_t address, void* data,
+void TeamDebugger::_HandleWriteMemory(target_addr_t address, void* data,
 	target_size_t size)
 {
 	TRACE_CONTROL("TeamDebugger::_HandleWriteTargetMemory(%" B_PRIx64 ", %p, "
@@ -2321,8 +2255,7 @@ TeamDebugger::_HandleWriteMemory(target_addr_t address, void* data,
 }
 
 
-void
-TeamDebugger::_HandleEvaluateExpression(SourceLanguage* language,
+void TeamDebugger::_HandleEvaluateExpression(SourceLanguage* language,
 	ExpressionInfo* info, StackFrame* frame, ::Thread* thread)
 {
 	status_t result = fWorker->ScheduleJob(
@@ -2335,8 +2268,7 @@ TeamDebugger::_HandleEvaluateExpression(SourceLanguage* language,
 }
 
 
-void
-TeamDebugger::_HandleWriteCoreFile(const entry_ref& targetPath)
+void TeamDebugger::_HandleWriteCoreFile(const entry_ref& targetPath)
 {
 	status_t result = fWorker->ScheduleJob(
 		new(std::nothrow) WriteCoreFileJob(fTeam, fDebuggerInterface,
@@ -2348,8 +2280,7 @@ TeamDebugger::_HandleWriteCoreFile(const entry_ref& targetPath)
 }
 
 
-status_t
-TeamDebugger::_HandleSetArguments(int argc, const char* const* argv)
+status_t TeamDebugger::_HandleSetArguments(int argc, const char* const* argv)
 {
 	fCommandLineArgc = argc;
 	fCommandLineArgv = new(std::nothrow) const char*[argc];
@@ -2368,8 +2299,7 @@ TeamDebugger::_HandleSetArguments(int argc, const char* const* argv)
 }
 
 
-void
-TeamDebugger::_HandleDebugInfoJobUserInput(ImageDebugInfoLoadingState* state)
+void TeamDebugger::_HandleDebugInfoJobUserInput(ImageDebugInfoLoadingState* state)
 {
 	SpecificImageDebugInfoLoadingState* specificState
 		= state->GetSpecificDebugInfoLoadingState();
@@ -2398,8 +2328,7 @@ TeamDebugger::_GetThreadHandler(thread_id threadID)
 }
 
 
-status_t
-TeamDebugger::_AddImage(const ImageInfo& imageInfo, Image** _image)
+status_t TeamDebugger::_AddImage(const ImageInfo& imageInfo, Image** _image)
 {
 	LocatableFile* file = NULL;
 	if (strchr(imageInfo.Name(), '/') != NULL)
@@ -2424,8 +2353,7 @@ TeamDebugger::_AddImage(const ImageInfo& imageInfo, Image** _image)
 }
 
 
-void
-TeamDebugger::_LoadSettings()
+void TeamDebugger::_LoadSettings()
 {
 	// get the team name
 	AutoLocker< ::Team> locker(fTeam);
@@ -2495,8 +2423,7 @@ TeamDebugger::_LoadSettings()
 }
 
 
-void
-TeamDebugger::_SaveSettings()
+void TeamDebugger::_SaveSettings()
 {
 	// get the settings
 	AutoLocker< ::Team> locker(fTeam);
@@ -2528,8 +2455,7 @@ TeamDebugger::_SaveSettings()
 }
 
 
-void
-TeamDebugger::_NotifyUser(const char* title, const char* text,...)
+void TeamDebugger::_NotifyUser(const char* title, const char* text,...)
 {
 	// print the message
 	char buffer[1024];
@@ -2543,8 +2469,7 @@ TeamDebugger::_NotifyUser(const char* title, const char* text,...)
 }
 
 
-void
-TeamDebugger::_ResetUserBackgroundStatusIfNeeded()
+void TeamDebugger::_ResetUserBackgroundStatusIfNeeded()
 {
 	if (!fWorker->HasPendingJobs())
 		fUserInterface->NotifyBackgroundWorkStatus("Ready.");

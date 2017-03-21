@@ -44,8 +44,7 @@ private:
 };
 
 
-bool
-TargetAddressRangeList::AddRange(target_addr_t start, target_size_t size)
+bool TargetAddressRangeList::AddRange(target_addr_t start, target_size_t size)
 {
 	return AddRange(TargetAddressRange(start, size));
 }

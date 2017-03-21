@@ -52,8 +52,7 @@ BMediaConnection::Connection() const
 }
 
 
-bool
-BMediaConnection::IsOutput() const
+bool BMediaConnection::IsOutput() const
 {
 	CALLED();
 
@@ -61,8 +60,7 @@ BMediaConnection::IsOutput() const
 }
 
 
-bool
-BMediaConnection::IsInput() const
+bool BMediaConnection::IsInput() const
 {
 	CALLED();
 
@@ -70,8 +68,7 @@ BMediaConnection::IsInput() const
 }
 
 
-bool
-BMediaConnection::HasBinding() const
+bool BMediaConnection::HasBinding() const
 {
 	CALLED();
 
@@ -88,8 +85,7 @@ BMediaConnection::Binding() const
 }
 
 
-void
-BMediaConnection::SetAcceptedFormat(const media_format& format)
+void BMediaConnection::SetAcceptedFormat(const media_format& format)
 {
 	CALLED();
 
@@ -106,8 +102,7 @@ BMediaConnection::AcceptedFormat() const
 }
 
 
-bool
-BMediaConnection::IsConnected() const
+bool BMediaConnection::IsConnected() const
 {
 	CALLED();
 
@@ -115,8 +110,7 @@ BMediaConnection::IsConnected() const
 }
 
 
-void*
-BMediaConnection::Cookie() const
+void*   BMediaConnection::Cookie() const
 {
 	CALLED();
 
@@ -124,8 +118,7 @@ BMediaConnection::Cookie() const
 }
 
 
-status_t
-BMediaConnection::Disconnect()
+status_t BMediaConnection::Disconnect()
 {
 	CALLED();
 
@@ -136,8 +129,7 @@ BMediaConnection::Disconnect()
 }
 
 
-status_t
-BMediaConnection::Release()
+status_t BMediaConnection::Release()
 {
 	CALLED();
 
@@ -145,8 +137,7 @@ BMediaConnection::Release()
 }
 
 
-void
-BMediaConnection::SetHooks(process_hook processHook,
+void BMediaConnection::SetHooks(process_hook processHook,
 	notify_hook notifyHook, void* cookie)
 {
 	CALLED();
@@ -157,8 +148,7 @@ BMediaConnection::SetHooks(process_hook processHook,
 }
 
 
-void
-BMediaConnection::SetBufferSize(size_t size)
+void BMediaConnection::SetBufferSize(size_t size)
 {
 	CALLED();
 
@@ -175,8 +165,7 @@ BMediaConnection::BufferSize() const
 }
 
 
-void
-BMediaConnection::SetBufferDuration(bigtime_t duration)
+void BMediaConnection::SetBufferDuration(bigtime_t duration)
 {
 	CALLED();
 
@@ -193,8 +182,7 @@ BMediaConnection::BufferDuration() const
 }
 
 
-void
-BMediaConnection::Connected(const media_format& format)
+void BMediaConnection::Connected(const media_format& format)
 {
 	if (fNotifyHook != NULL)
 		(*fNotifyHook)(B_CONNECTED, this);
@@ -203,8 +191,7 @@ BMediaConnection::Connected(const media_format& format)
 }
 
 
-void
-BMediaConnection::Disconnected()
+void BMediaConnection::Disconnected()
 {
 	if (fNotifyHook != NULL)
 		(*fNotifyHook)(B_DISCONNECTED, this);
@@ -213,8 +200,7 @@ BMediaConnection::Disconnected()
 }
 
 
-void
-BMediaConnection::_Init()
+void BMediaConnection::_Init()
 {
 	CALLED();
 
@@ -265,8 +251,7 @@ BMediaInput::MediaInput() const
 }
 
 
-status_t
-BMediaInput::FormatChanged(const media_format& format)
+status_t BMediaInput::FormatChanged(const media_format& format)
 {
 	if (!format_is_compatible(format, AcceptedFormat()))
 		return B_MEDIA_BAD_FORMAT;
@@ -277,8 +262,7 @@ BMediaInput::FormatChanged(const media_format& format)
 }
 
 
-void
-BMediaInput::BufferReceived(BBuffer* buffer)
+void BMediaInput::BufferReceived(BBuffer* buffer)
 {
 	CALLED();
 
@@ -307,8 +291,7 @@ BMediaOutput::BMediaOutput(BMediaClient* owner, media_connection_id id)
 }
 
 
-bool
-BMediaOutput::IsOutputEnabled() const
+bool BMediaOutput::IsOutputEnabled() const
 {
 	CALLED();
 
@@ -316,8 +299,7 @@ BMediaOutput::IsOutputEnabled() const
 }
 
 
-status_t
-BMediaOutput::PrepareToConnect(media_format* format)
+status_t BMediaOutput::PrepareToConnect(media_format* format)
 {
 	SetAcceptedFormat(*format);
 
@@ -325,8 +307,7 @@ BMediaOutput::PrepareToConnect(media_format* format)
 }
 
 
-status_t
-BMediaOutput::FormatProposal(media_format* format)
+status_t BMediaOutput::FormatProposal(media_format* format)
 {
 	if (fOwner->fNotifyHook != NULL) {
 		return (*fNotifyHook)(BMediaConnection::B_FORMAT_PROPOSAL,
@@ -338,15 +319,13 @@ BMediaOutput::FormatProposal(media_format* format)
 }
 
 
-status_t
-BMediaOutput::FormatChangeRequested(media_format* format)
+status_t BMediaOutput::FormatChangeRequested(media_format* format)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BMediaOutput::SendBuffer(BBuffer* buffer)
+status_t BMediaOutput::SendBuffer(BBuffer* buffer)
 {
 	CALLED();
 

@@ -32,8 +32,7 @@ BMidiSynthFile::~BMidiSynthFile()
 }
 
 
-status_t 
-BMidiSynthFile::LoadFile(const entry_ref* midi_entry_ref)
+status_t BMidiSynthFile::LoadFile(const entry_ref* midi_entry_ref)
 {
 	if (midi_entry_ref == NULL)
 		return B_BAD_VALUE;
@@ -55,16 +54,14 @@ BMidiSynthFile::LoadFile(const entry_ref* midi_entry_ref)
 }
 
 
-void 
-BMidiSynthFile::UnloadFile(void)
+void BMidiSynthFile::UnloadFile(void)
 {
 	delete fStore;
 	fStore = new BMidiStore();
 }
 
 
-status_t 
-BMidiSynthFile::Start(void)
+status_t BMidiSynthFile::Start(void)
 {
 	fStore->Connect(this);
 	fStore->SetCurrentEvent(0);
@@ -72,30 +69,26 @@ BMidiSynthFile::Start(void)
 }
 
 
-void 
-BMidiSynthFile::Stop(void)
+void BMidiSynthFile::Stop(void)
 {
 	fStore->Stop();
 	fStore->Disconnect(this);
 }
 
 
-void 
-BMidiSynthFile::Fade(void)
+void BMidiSynthFile::Fade(void)
 {
 	Stop();  // really quick fade :P
 }
 
 
-void 
-BMidiSynthFile::Pause(void)
+void BMidiSynthFile::Pause(void)
 {
 	fStore->fPaused = true;
 }
 
 
-void 
-BMidiSynthFile::Resume(void)
+void BMidiSynthFile::Resume(void)
 {
 	fStore->fPaused = false;
 }
@@ -122,8 +115,7 @@ BMidiSynthFile::Seek()
 }
 
 
-status_t 
-BMidiSynthFile::GetPatches(
+status_t BMidiSynthFile::GetPatches(
 	int16* pArray768, int16* pReturnedCount) const
 {
 	int16 count = 0;
@@ -139,30 +131,26 @@ BMidiSynthFile::GetPatches(
 }
 
 
-void 
-BMidiSynthFile::SetFileHook(synth_file_hook pSongHook, int32 arg)
+void BMidiSynthFile::SetFileHook(synth_file_hook pSongHook, int32 arg)
 {
 	fStore->fHookFunc = pSongHook;
 	fStore->fHookArg = arg;
 }
 
 
-bool 
-BMidiSynthFile::IsFinished() const
+bool BMidiSynthFile::IsFinished() const
 {
 	return fStore->fFinished;
 }
 
 
-void 
-BMidiSynthFile::ScaleTempoBy(double tempoFactor)
+void BMidiSynthFile::ScaleTempoBy(double tempoFactor)
 {
 	fStore->SetTempo((int32) (Tempo() * tempoFactor));
 }
 
 
-void 
-BMidiSynthFile::SetTempo(int32 newTempoBPM)
+void BMidiSynthFile::SetTempo(int32 newTempoBPM)
 {
 	fStore->SetTempo(newTempoBPM);
 }
@@ -175,36 +163,31 @@ BMidiSynthFile::Tempo(void) const
 }
 
 
-void 
-BMidiSynthFile::EnableLooping(bool loop)
+void BMidiSynthFile::EnableLooping(bool loop)
 {
 	fStore->fLooping = loop;
 }
 
 
-void 
-BMidiSynthFile::MuteTrack(int16 track, bool do_mute)
+void BMidiSynthFile::MuteTrack(int16 track, bool do_mute)
 {
 	fprintf(stderr, "[midi] MuteTrack is broken; don't use it\n");
 }
 
 
-void 
-BMidiSynthFile::GetMuteMap(char* pTracks) const
+void BMidiSynthFile::GetMuteMap(char* pTracks) const
 {
 	fprintf(stderr, "[midi] GetMuteMap is broken; don't use it\n");
 }
 
 
-void 
-BMidiSynthFile::SoloTrack(int16 track, bool do_solo)
+void BMidiSynthFile::SoloTrack(int16 track, bool do_solo)
 {
 	fprintf(stderr, "[midi] SoloTrack is broken; don't use it\n");
 }
 
 
-void 
-BMidiSynthFile::GetSoloMap(char* pTracks) const
+void BMidiSynthFile::GetSoloMap(char* pTracks) const
 {
 	fprintf(stderr, "[midi] GetSoloMap is broken; don't use it\n");
 }

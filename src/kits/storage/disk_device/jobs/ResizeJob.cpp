@@ -29,8 +29,7 @@ ResizeJob::~ResizeJob()
 
 
 // Do
-status_t
-ResizeJob::Do()
+status_t ResizeJob::Do()
 {
 	int32 changeCounter = fPartition->ChangeCounter();
 	int32 childChangeCounter = fChild->ChangeCounter();

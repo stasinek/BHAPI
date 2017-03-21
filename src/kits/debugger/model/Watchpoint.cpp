@@ -22,22 +22,19 @@ Watchpoint::~Watchpoint()
 }
 
 
-void
-Watchpoint::SetInstalled(bool installed)
+void Watchpoint::SetInstalled(bool installed)
 {
 	fInstalled = installed;
 }
 
 
-void
-Watchpoint::SetEnabled(bool enabled)
+void Watchpoint::SetEnabled(bool enabled)
 {
 	fEnabled = enabled;
 }
 
 
-bool
-Watchpoint::Contains(target_addr_t address) const
+bool Watchpoint::Contains(target_addr_t address) const
 {
 	return address >= fAddress && address <= (fAddress + fLength);
 }

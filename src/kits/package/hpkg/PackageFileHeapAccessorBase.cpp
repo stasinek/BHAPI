@@ -43,8 +43,7 @@ PackageFileHeapAccessorBase::OffsetArray::~OffsetArray()
 }
 
 
-bool
-PackageFileHeapAccessorBase::OffsetArray::InitUncompressedChunksOffsets(
+bool PackageFileHeapAccessorBase::OffsetArray::InitUncompressedChunksOffsets(
 	size_t totalChunkCount)
 {
 	if (totalChunkCount <= 1)
@@ -82,8 +81,7 @@ PackageFileHeapAccessorBase::OffsetArray::InitUncompressedChunksOffsets(
 }
 
 
-bool
-PackageFileHeapAccessorBase::OffsetArray::InitChunksOffsets(
+bool PackageFileHeapAccessorBase::OffsetArray::InitChunksOffsets(
 	size_t totalChunkCount, size_t baseIndex, const uint16* chunkSizes,
 	size_t chunkCount)
 {
@@ -132,8 +130,7 @@ PackageFileHeapAccessorBase::OffsetArray::InitChunksOffsets(
 }
 
 
-bool
-PackageFileHeapAccessorBase::OffsetArray::Init(size_t totalChunkCount,
+bool PackageFileHeapAccessorBase::OffsetArray::Init(size_t totalChunkCount,
 	const OffsetArray& other)
 {
 	if (other.fOffsets == NULL)
@@ -196,8 +193,7 @@ PackageFileHeapAccessorBase::~PackageFileHeapAccessorBase()
 }
 
 
-status_t
-PackageFileHeapAccessorBase::ReadDataToOutput(off_t offset, size_t size,
+status_t PackageFileHeapAccessorBase::ReadDataToOutput(off_t offset, size_t size,
 	BDataIO* output)
 {
 	if (size == 0)
@@ -246,8 +242,7 @@ PackageFileHeapAccessorBase::ReadDataToOutput(off_t offset, size_t size,
 }
 
 
-status_t
-PackageFileHeapAccessorBase::ReadAndDecompressChunkData(uint64 offset,
+status_t PackageFileHeapAccessorBase::ReadAndDecompressChunkData(uint64 offset,
 	size_t compressedSize, size_t uncompressedSize, void* compressedDataBuffer,
 	void* uncompressedDataBuffer)
 {
@@ -265,8 +260,7 @@ PackageFileHeapAccessorBase::ReadAndDecompressChunkData(uint64 offset,
 }
 
 
-status_t
-PackageFileHeapAccessorBase::DecompressChunkData(void* compressedDataBuffer,
+status_t PackageFileHeapAccessorBase::DecompressChunkData(void* compressedDataBuffer,
 	size_t compressedSize, void* uncompressedDataBuffer,
 	size_t uncompressedSize)
 {
@@ -290,8 +284,7 @@ PackageFileHeapAccessorBase::DecompressChunkData(void* compressedDataBuffer,
 }
 
 
-status_t
-PackageFileHeapAccessorBase::ReadFileData(uint64 offset, void* buffer,
+status_t PackageFileHeapAccessorBase::ReadFileData(uint64 offset, void* buffer,
 	size_t size)
 {
 	status_t error = fFile->ReadAtExactly(fHeapOffset + (off_t)offset, buffer,

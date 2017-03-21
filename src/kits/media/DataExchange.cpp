@@ -10,7 +10,7 @@
 #include <unistd.h>
 
 #include <Messenger.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <debug.h>
 #include <MediaMisc.h>
@@ -33,8 +33,7 @@ static void find_media_server_port();
 static void find_media_addon_server_port();
 
 
-static void
-find_media_server_port()
+static void find_media_server_port()
 {
 	sMediaServerPort = find_port(MEDIA_SERVER_PORT_NAME);
 	if (sMediaServerPort < 0) {
@@ -44,8 +43,7 @@ find_media_server_port()
 }
 
 
-static void
-find_media_addon_server_port()
+static void find_media_addon_server_port()
 {
 	sMediaAddonServerPort = find_port(MEDIA_ADDON_SERVER_PORT_NAME);
 	if (sMediaAddonServerPort < 0) {
@@ -58,8 +56,7 @@ find_media_addon_server_port()
 // #pragma mark -
 
 
-void
-InitServerDataExchange()
+void InitServerDataExchange()
 {
 	sMediaServerMessenger = BMessenger(B_MEDIA_SERVER_SIGNATURE);
 	find_media_server_port();
@@ -67,16 +64,14 @@ InitServerDataExchange()
 }
 
 
-void
-InitRosterDataExchange(const BMessenger& rosterMessenger)
+void InitRosterDataExchange(const BMessenger& rosterMessenger)
 {
 	sMediaRosterMessenger = rosterMessenger;
 }
 
 
 //! BMessage based data exchange with the local BMediaRoster
-status_t
-SendToRoster(BMessage* msg)
+status_t SendToRoster(BMessage* msg)
 {
 	status_t status = sMediaRosterMessenger.SendMessage(msg,
 		static_cast<BHandler*>(NULL), TIMEOUT);
@@ -89,8 +84,7 @@ SendToRoster(BMessage* msg)
 
 
 //! BMessage based data exchange with the media_server
-status_t
-SendToServer(BMessage* msg)
+status_t SendToServer(BMessage* msg)
 {
 	status_t status = sMediaServerMessenger.SendMessage(msg,
 		static_cast<BHandler*>(NULL), TIMEOUT);
@@ -102,8 +96,7 @@ SendToServer(BMessage* msg)
 }
 
 
-status_t
-QueryServer(BMessage& request, BMessage& reply)
+status_t QueryServer(BMessage& request, BMessage& reply)
 {
 	status_t status = sMediaServerMessenger.SendMessage(&request, &reply,
 		TIMEOUT, TIMEOUT);
@@ -117,14 +110,12 @@ QueryServer(BMessage& request, BMessage& reply)
 
 
 //! Raw data based data exchange with the media_server
-status_t
-SendToServer(int32 msgCode, command_data* msg, size_t size)
+status_t SendToServer(int32 msgCode, command_data* msg, size_t size)
 {
 	return SendToPort(sMediaServerPort, msgCode, msg, size);
 }
 
-status_t
-QueryServer(int32 msgCode, request_data* request, size_t requestSize,
+status_t QueryServer(int32 msgCode, request_data* request, size_t requestSize,
 	reply_data* reply, size_t replySize)
 {
 	return QueryPort(sMediaServerPort, msgCode, request, requestSize, reply,
@@ -133,15 +124,13 @@ QueryServer(int32 msgCode, request_data* request, size_t requestSize,
 
 
 //! Raw data based data exchange with the media_addon_server
-status_t
-SendToAddOnServer(int32 msgCode, command_data* msg, size_t size)
+status_t SendToAddOnServer(int32 msgCode, command_data* msg, size_t size)
 {
 	return SendToPort(sMediaAddonServerPort, msgCode, msg, size);
 }
 
 
-status_t
-QueryAddOnServer(int32 msgCode, request_data* request, size_t requestSize,
+status_t QueryAddOnServer(int32 msgCode, request_data* request, size_t requestSize,
 	reply_data* reply, size_t replySize)
 {
 	return QueryPort(sMediaAddonServerPort, msgCode, request, requestSize,
@@ -150,8 +139,7 @@ QueryAddOnServer(int32 msgCode, request_data* request, size_t requestSize,
 
 
 //! Raw data based data exchange with the media_server
-status_t
-SendToPort(port_id sendPort, int32 msgCode, command_data* msg, size_t size)
+status_t SendToPort(port_id sendPort, int32 msgCode, command_data* msg, size_t size)
 {
 	status_t status = write_port_etc(sendPort, msgCode, msg, size,
 		B_RELATIVE_TIMEOUT, TIMEOUT);
@@ -181,8 +169,7 @@ SendToPort(port_id sendPort, int32 msgCode, command_data* msg, size_t size)
 }
 
 
-status_t
-QueryPort(port_id requestPort, int32 msgCode, request_data* request,
+status_t QueryPort(port_id requestPort, int32 msgCode, request_data* request,
 	size_t requestSize, reply_data* reply, size_t replySize)
 {
 	status_t status = write_port_etc(requestPort, msgCode, request, requestSize,

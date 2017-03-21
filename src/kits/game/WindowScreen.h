@@ -7,7 +7,7 @@
 
 #include <Accelerant.h>
 #include <GraphicsCard.h>
-#include <OS.h>
+#include <kernel/OS.h>
 #include <Window.h>
 #include <kernel/Image.h>
 #include <Haiku.h>

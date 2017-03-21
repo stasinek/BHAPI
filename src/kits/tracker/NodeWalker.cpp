@@ -50,40 +50,35 @@ TWalker::~TWalker()
 
 
 // all the following calls are pure viruals, should not get called
-status_t
-TWalker::GetNextEntry(BEntry*, bool )
+status_t TWalker::GetNextEntry(BEntry*, bool )
 {
 	TRESPASS();
 	return B_ERROR;
 }
 
 
-status_t
-TWalker::GetNextRef(entry_ref*)
+status_t TWalker::GetNextRef(entry_ref*)
 {
 	TRESPASS();
 	return B_ERROR;
 }
 
 
-int32
-TWalker::GetNextDirents(struct dirent*, size_t, int32)
+int32 TWalker::GetNextDirents(struct dirent*, size_t, int32)
 {
 	TRESPASS();
 	return 0;
 }
 
 
-status_t
-TWalker::Rewind()
+status_t TWalker::Rewind()
 {
 	TRESPASS();
 	return B_ERROR;
 }
 
 
-int32
-TWalker::CountEntries()
+int32 TWalker::CountEntries()
 {
 	TRESPASS();
 	return -1;
@@ -271,8 +266,7 @@ TNodeWalker::~TNodeWalker()
 }
 
 
-status_t
-TNodeWalker::PopDirCommon()
+status_t TNodeWalker::PopDirCommon()
 {
 	ASSERT(fTopIndex >= 0);
 
@@ -294,8 +288,7 @@ TNodeWalker::PopDirCommon()
 }
 
 
-void
-TNodeWalker::PushDirCommon(const entry_ref* ref)
+void TNodeWalker::PushDirCommon(const entry_ref* ref)
 {
 	fTopDir = new BDirectory(ref);
 		// OK to ignore error here. Will
@@ -305,8 +298,7 @@ TNodeWalker::PushDirCommon(const entry_ref* ref)
 }
 
 
-status_t
-TNodeWalker::GetNextEntry(BEntry* entry, bool traverse)
+status_t TNodeWalker::GetNextEntry(BEntry* entry, bool traverse)
 {
 	if (fJustFile != NULL) {
 		*entry = *fJustFile;
@@ -346,8 +338,7 @@ TNodeWalker::GetNextEntry(BEntry* entry, bool traverse)
 }
 
 
-status_t
-TNodeWalker::GetNextRef(entry_ref* ref)
+status_t TNodeWalker::GetNextRef(entry_ref* ref)
 {
 	if (fJustFile != NULL) {
 		fJustFile->GetRef(ref);
@@ -387,8 +378,7 @@ TNodeWalker::GetNextRef(entry_ref* ref)
 }
 
 
-static int32
-build_dirent(const BEntry* source, struct dirent* ent,
+static int32 build_dirent(const BEntry* source, struct dirent* ent,
 	size_t size, int32 count)
 {
 	entry_ref ref;
@@ -423,8 +413,7 @@ build_dirent(const BEntry* source, struct dirent* ent,
 }
 
 
-int32
-TNodeWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
+int32 TNodeWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
 {
 	if (fJustFile != NULL) {
 		if (count == 0)
@@ -474,8 +463,7 @@ TNodeWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
 }
 
 
-status_t
-TNodeWalker::Rewind()
+status_t TNodeWalker::Rewind()
 {
 	if (fOriginalJustFile != NULL) {
 		// single file mode, rewind by pointing to the original file
@@ -501,8 +489,7 @@ TNodeWalker::Rewind()
 		// rewind the directory
 }
 
-int32
-TNodeWalker::CountEntries()
+int32 TNodeWalker::CountEntries()
 {
 	// should not be calling this
 	TRESPASS();
@@ -528,8 +515,7 @@ TVolWalker::~TVolWalker()
 }
 
 
-status_t
-TVolWalker::NextVolume()
+status_t TVolWalker::NextVolume()
 {
 	// The stack of directoies should be empty.
 	ASSERT(fTopIndex == -1);
@@ -559,8 +545,7 @@ TVolWalker::NextVolume()
 	return result;
 }
 
-status_t
-TVolWalker::GetNextEntry(BEntry* entry, bool traverse)
+status_t TVolWalker::GetNextEntry(BEntry* entry, bool traverse)
 {
 	if (fTopDir == NULL)
 		return B_ENTRY_NOT_FOUND;
@@ -580,8 +565,7 @@ TVolWalker::GetNextEntry(BEntry* entry, bool traverse)
 }
 
 
-status_t
-TVolWalker::GetNextRef(entry_ref* ref)
+status_t TVolWalker::GetNextRef(entry_ref* ref)
 {
 	if (fTopDir == NULL)
 		return B_ENTRY_NOT_FOUND;
@@ -601,8 +585,7 @@ TVolWalker::GetNextRef(entry_ref* ref)
 }
 
 
-int32
-TVolWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
+int32 TVolWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
 {
 	if (fTopDir == NULL)
 		return B_ENTRY_NOT_FOUND;
@@ -622,8 +605,7 @@ TVolWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
 }
 
 
-status_t
-TVolWalker::Rewind()
+status_t TVolWalker::Rewind()
 {
 	fVolRoster.Rewind();
 	return NextVolume();
@@ -647,8 +629,7 @@ TQueryWalker::~TQueryWalker()
 }
 
 
-status_t
-TQueryWalker::GetNextEntry(BEntry* entry, bool traverse)
+status_t TQueryWalker::GetNextEntry(BEntry* entry, bool traverse)
 {
 	status_t result;
 	do {
@@ -663,8 +644,7 @@ TQueryWalker::GetNextEntry(BEntry* entry, bool traverse)
 }
 
 
-status_t
-TQueryWalker::GetNextRef(entry_ref* ref)
+status_t TQueryWalker::GetNextRef(entry_ref* ref)
 {
 	status_t result;
 
@@ -682,8 +662,7 @@ TQueryWalker::GetNextRef(entry_ref* ref)
 }
 
 
-int32
-TQueryWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
+int32 TQueryWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
 {
 	int32 result;
 
@@ -700,8 +679,7 @@ TQueryWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
 }
 
 
-status_t
-TQueryWalker::NextVolume()
+status_t TQueryWalker::NextVolume()
 {
 	status_t result;
 	do {
@@ -721,8 +699,7 @@ TQueryWalker::NextVolume()
 }
 
 
-int32
-TQueryWalker::CountEntries()
+int32 TQueryWalker::CountEntries()
 {
 	// should not be calling this
 	TRESPASS();
@@ -730,8 +707,7 @@ TQueryWalker::CountEntries()
 }
 
 
-status_t
-TQueryWalker::Rewind()
+status_t TQueryWalker::Rewind()
 {
 	fVolRoster.Rewind();
 	return NextVolume();

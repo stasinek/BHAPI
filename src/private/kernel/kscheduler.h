@@ -102,8 +102,7 @@ int32 _user_get_scheduler_mode(void);
 /*!	Reschedules, if necessary.
 	The caller must hold the scheduler lock (with disabled interrupts).
 */
-static inline void
-scheduler_reschedule_if_necessary_locked()
+static inline void scheduler_reschedule_if_necessary_locked()
 {
 	if (gCPU[smp_get_current_cpu()].invoke_scheduler)
 		scheduler_reschedule(B_THREAD_READY);
@@ -113,8 +112,7 @@ scheduler_reschedule_if_necessary_locked()
 /*!	Reschedules, if necessary.
 	Is a no-op, if interrupts are disabled.
 */
-static inline void
-scheduler_reschedule_if_necessary()
+static inline void scheduler_reschedule_if_necessary()
 {
 	if (are_interrupts_enabled()) {
 		cpu_status state = disable_interrupts();

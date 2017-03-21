@@ -58,8 +58,7 @@ private:
 using BPrivate::Layout::LayoutOptimizer;
 
 
-inline bool
-fuzzy_equals(double a, double b)
+inline bool fuzzy_equals(double a, double b)
 {
 	return fabs(a - b) < kEqualsEpsilon;
 }

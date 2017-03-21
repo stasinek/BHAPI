@@ -32,7 +32,7 @@
 
 //#define TRACE_SERVER_LINK_GRADIENTS
 #ifdef TRACE_SERVER_LINK_GRADIENTS
-#	include <OS.h>
+#	include <kernel/OS.h>
 #	define GTRACE(x) debug_printf x
 #else
 #	define GTRACE(x) ;
@@ -52,16 +52,14 @@ ServerLink::~ServerLink()
 }
 
 
-void
-ServerLink::SetTo(port_id sender, port_id receiver)
+void ServerLink::SetTo(port_id sender, port_id receiver)
 {
 	fSender->SetPort(sender);
 	fReceiver->SetPort(receiver);
 }
 
 
-status_t
-ServerLink::ReadRegion(BRegion* region)
+status_t ServerLink::ReadRegion(BRegion* region)
 {
 	fReceiver->Read(&region->fCount, sizeof(int32));
 	if (region->fCount > 0) {
@@ -76,8 +74,7 @@ ServerLink::ReadRegion(BRegion* region)
 }
 
 
-status_t
-ServerLink::AttachRegion(const BRegion& region)
+status_t ServerLink::AttachRegion(const BRegion& region)
 {
 	fSender->Attach(&region.fCount, sizeof(int32));
 	if (region.fCount > 0) {
@@ -90,8 +87,7 @@ ServerLink::AttachRegion(const BRegion& region)
 }
 
 
-status_t
-ServerLink::ReadShape(BShape* shape)
+status_t ServerLink::ReadShape(BShape* shape)
 {
 	int32 opCount, ptCount;
 	fReceiver->Read(&opCount, sizeof(int32));
@@ -110,8 +106,7 @@ ServerLink::ReadShape(BShape* shape)
 }
 
 
-status_t
-ServerLink::AttachShape(BShape& shape)
+status_t ServerLink::AttachShape(BShape& shape)
 {
 	int32 opCount, ptCount;
 	uint32* opList;
@@ -129,16 +124,14 @@ ServerLink::AttachShape(BShape& shape)
 }
 
 
-status_t
-ServerLink::ReadGradient(BGradient** _gradient)
+status_t ServerLink::ReadGradient(BGradient** _gradient)
 {
 	GTRACE(("ServerLink::ReadGradient\n"));
 	return fReceiver->ReadGradient(_gradient);
 }
 
 
-status_t
-ServerLink::AttachGradient(const BGradient& gradient)
+status_t ServerLink::AttachGradient(const BGradient& gradient)
 {
 	GTRACE(("ServerLink::AttachGradient\n"));
 	BGradient::Type gradientType = gradient.GetType();
@@ -214,8 +207,7 @@ ServerLink::AttachGradient(const BGradient& gradient)
 }
 
 
-status_t
-ServerLink::FlushWithReply(int32& code)
+status_t ServerLink::FlushWithReply(int32& code)
 {
 	status_t status = Flush(B_INFINITE_TIMEOUT, true);
 	if (status < B_OK)

@@ -7,7 +7,7 @@
 
 
 #include <Bitmap.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 // This structure is placed in the client/server shared memory area.

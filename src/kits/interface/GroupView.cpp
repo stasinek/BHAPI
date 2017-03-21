@@ -38,8 +38,7 @@ BGroupView::~BGroupView()
 }
 
 
-void
-BGroupView::SetLayout(BLayout* layout)
+void BGroupView::SetLayout(BLayout* layout)
 {
 	// only BGroupLayouts are allowed
 	if (!dynamic_cast<BGroupLayout*>(layout))
@@ -66,8 +65,7 @@ BGroupView::GroupLayout() const
 }
 
 
-status_t
-BGroupView::Perform(perform_code code, void* _data)
+status_t BGroupView::Perform(perform_code code, void* _data)
 {
 	return BView::Perform(code, _data);
 }

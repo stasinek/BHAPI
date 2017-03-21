@@ -85,8 +85,7 @@ BTimeUnitFormat::~BTimeUnitFormat()
 }
 
 
-status_t
-BTimeUnitFormat::Format(BString& buffer, const int32 value,
+status_t BTimeUnitFormat::Format(BString& buffer, const int32 value,
 	const time_unit_element unit, time_unit_style style) const
 {
 	if (unit < 0 || unit > B_TIME_UNIT_LAST

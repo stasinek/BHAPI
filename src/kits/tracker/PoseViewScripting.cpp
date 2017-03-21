@@ -194,8 +194,7 @@ const property_info kPosesPropertyList[] = {
 };
 
 
-status_t
-BPoseView::GetSupportedSuites(BMessage* data)
+status_t BPoseView::GetSupportedSuites(BMessage* data)
 {
 	data->AddString("suites", kPosesSuites);
 	BPropertyInfo propertyInfo(
@@ -206,8 +205,7 @@ BPoseView::GetSupportedSuites(BMessage* data)
 }
 
 
-bool
-BPoseView::HandleScriptingMessage(BMessage* message)
+bool BPoseView::HandleScriptingMessage(BMessage* message)
 {
 	if (message->what != B_GET_PROPERTY
 		&& message->what != B_SET_PROPERTY
@@ -271,8 +269,7 @@ BPoseView::HandleScriptingMessage(BMessage* message)
 }
 
 
-bool
-BPoseView::ExecuteProperty(BMessage* specifier, int32 form,
+bool BPoseView::ExecuteProperty(BMessage* specifier, int32 form,
 	const char* property, BMessage* reply)
 {
 	status_t result = B_OK;
@@ -321,8 +318,7 @@ BPoseView::ExecuteProperty(BMessage* specifier, int32 form,
 }
 
 
-bool
-BPoseView::CreateProperty(BMessage* specifier, BMessage*, int32 form,
+bool BPoseView::CreateProperty(BMessage* specifier, BMessage*, int32 form,
 	const char* property, BMessage* reply)
 {
 	status_t result = B_OK;
@@ -377,8 +373,7 @@ BPoseView::CreateProperty(BMessage* specifier, BMessage*, int32 form,
 }
 
 
-bool
-BPoseView::DeleteProperty(BMessage* specifier, int32 form,
+bool BPoseView::DeleteProperty(BMessage* specifier, int32 form,
 	const char* property, BMessage* reply)
 {
 	status_t result = B_OK;
@@ -481,8 +476,7 @@ BPoseView::DeleteProperty(BMessage* specifier, int32 form,
 }
 
 
-bool
-BPoseView::CountProperty(BMessage*, int32, const char* property,
+bool BPoseView::CountProperty(BMessage*, int32, const char* property,
 	BMessage* reply)
 {
 	bool handled = false;
@@ -501,8 +495,7 @@ BPoseView::CountProperty(BMessage*, int32, const char* property,
 }
 
 
-bool
-BPoseView::GetProperty(BMessage* specifier, int32 form,
+bool BPoseView::GetProperty(BMessage* specifier, int32 form,
 	const char* property, BMessage* reply)
 {
 //	PRINT(("GetProperty %s\n", property));
@@ -633,8 +626,7 @@ BPoseView::GetProperty(BMessage* specifier, int32 form,
 }
 
 
-bool
-BPoseView::SetProperty(BMessage* message, BMessage*, int32 form,
+bool BPoseView::SetProperty(BMessage* message, BMessage*, int32 form,
 	const char* property, BMessage* reply)
 {
 	status_t result = B_OK;

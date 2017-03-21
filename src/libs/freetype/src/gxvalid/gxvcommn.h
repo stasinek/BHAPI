@@ -64,8 +64,7 @@ FT_BEGIN_HEADER
 
 #define DUMMY_LIMIT 0
 
-  typedef void
-  (*GXV_Validate_Func)( FT_Bytes       table,
+  typedef void   (*GXV_Validate_Func)( FT_Bytes       table,
                         FT_Bytes       limit,
                         GXV_Validator  valid );
 
@@ -87,8 +86,7 @@ FT_BEGIN_HEADER
   } GXV_LookupValue_SignSpec;
 
 
-  typedef void
-  (*GXV_Lookup_Value_Validate_Func)( FT_UShort            glyph,
+  typedef void   (*GXV_Lookup_Value_Validate_Func)( FT_UShort            glyph,
                                      GXV_LookupValueDesc  value,
                                      GXV_Validator        valid );
 
@@ -135,8 +133,7 @@ FT_BEGIN_HEADER
   } GXV_StateTable_GlyphOffsetDesc;
 
 
-  typedef void
-  (*GXV_StateTable_Subtable_Setup_Func)( FT_UShort      table_size,
+  typedef void   (*GXV_StateTable_Subtable_Setup_Func)( FT_UShort      table_size,
                                          FT_UShort      classTable,
                                          FT_UShort      stateArray,
                                          FT_UShort      entryTable,
@@ -145,8 +142,7 @@ FT_BEGIN_HEADER
                                          FT_UShort*     entryTable_length_p,
                                          GXV_Validator  valid );
 
-  typedef void
-  (*GXV_StateTable_Entry_Validate_Func)(
+  typedef void   (*GXV_StateTable_Entry_Validate_Func)(
      FT_Byte                         state,
      FT_UShort                       flags,
      GXV_StateTable_GlyphOffsetDesc  glyphOffset,
@@ -154,8 +150,7 @@ FT_BEGIN_HEADER
      FT_Bytes                        statetable_limit,
      GXV_Validator                   valid );
 
-  typedef void
-  (*GXV_StateTable_OptData_Load_Func)( FT_Bytes       table,
+  typedef void   (*GXV_StateTable_OptData_Load_Func)( FT_Bytes       table,
                                        FT_Bytes       limit,
                                        GXV_Validator  valid );
 
@@ -175,8 +170,7 @@ FT_BEGIN_HEADER
 
   typedef GXV_StateTable_GlyphOffsetDesc  GXV_XStateTable_GlyphOffsetDesc;
 
-  typedef void
-  (*GXV_XStateTable_Subtable_Setup_Func)( FT_ULong       table_size,
+  typedef void   (*GXV_XStateTable_Subtable_Setup_Func)( FT_ULong       table_size,
                                           FT_ULong       classTable,
                                           FT_ULong       stateArray,
                                           FT_ULong       entryTable,
@@ -185,8 +179,7 @@ FT_BEGIN_HEADER
                                           FT_ULong*      entryTable_length_p,
                                           GXV_Validator  valid );
 
-  typedef void
-  (*GXV_XStateTable_Entry_Validate_Func)(
+  typedef void   (*GXV_XStateTable_Entry_Validate_Func)(
      FT_UShort                       state,
      FT_UShort                       flags,
      GXV_StateTable_GlyphOffsetDesc  glyphOffset,

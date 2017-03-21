@@ -186,15 +186,13 @@ OpenHashTable<Element, ElementVec>::~OpenHashTable()
 }
 
 template<class Element, class ElementVec>
-bool
-OpenHashTable<Element, ElementVec>::InitCheck() const
+bool OpenHashTable<Element, ElementVec>::InitCheck() const
 {
 	return (fHashArray && fElementVector);
 }
 
 template<class Element, class ElementVec>
-int32
-OpenHashTable<Element, ElementVec>::OptimalSize(int32 minSize)
+int32 OpenHashTable<Element, ElementVec>::OptimalSize(int32 minSize)
 {
 	for (int32 index = 0; ; index++)
 		if (!kPrimes[index] || kPrimes[index] >= (uint32)minSize)
@@ -216,8 +214,7 @@ OpenHashTable<Element, ElementVec>::FindFirst(uint32 hash) const
 }
 
 template<class Element, class ElementVec>
-int32
-OpenHashTable<Element, ElementVec>::ElementIndex(const Element *element) const
+int32 OpenHashTable<Element, ElementVec>::ElementIndex(const Element *element) const
 {
 	return fElementVector->IndexOf(*element);
 }
@@ -230,22 +227,19 @@ OpenHashTable<Element, ElementVec>::ElementAt(int32 index) const
 }
 
 template<class Element, class ElementVec>
-int32
-OpenHashTable<Element, ElementVec>::ArraySize() const
+int32 OpenHashTable<Element, ElementVec>::ArraySize() const
 {
 	return fArraySize;
 }
 
 template<class Element, class ElementVec>
-int32
-OpenHashTable<Element, ElementVec>::VectorSize() const
+int32 OpenHashTable<Element, ElementVec>::VectorSize() const
 {
 	return fElementVector->Size();
 }
 
 template<class Element, class ElementVec>
-int32
-OpenHashTable<Element, ElementVec>::CountElements() const
+int32 OpenHashTable<Element, ElementVec>::CountElements() const
 {
 	return fElementCount;
 }
@@ -268,8 +262,7 @@ OpenHashTable<Element, ElementVec>::Add(uint32 hash)
 }
 
 template<class Element, class ElementVec>
-void
-OpenHashTable<Element, ElementVec>::Remove(Element *element, bool dontRehash)
+void OpenHashTable<Element, ElementVec>::Remove(Element *element, bool dontRehash)
 {
 	if (!dontRehash)
 		_RehashIfNeeded();
@@ -303,8 +296,7 @@ OpenHashTable<Element, ElementVec>::Remove(Element *element, bool dontRehash)
 }
 
 template<class Element, class ElementVec>
-void
-OpenHashTable<Element, ElementVec>::RemoveAll()
+void OpenHashTable<Element, ElementVec>::RemoveAll()
 {
 	for (int32 i = 0; fElementCount > 0 && i < fArraySize; i++) {
 		int32 index = fHashArray[i];
@@ -321,16 +313,14 @@ OpenHashTable<Element, ElementVec>::RemoveAll()
 }
 
 template<class Element, class ElementVec>
-void
-OpenHashTable<Element, ElementVec>::SetElementVector(ElementVec *elementVector)
+void OpenHashTable<Element, ElementVec>::SetElementVector(ElementVec *elementVector)
 {
 	fElementVector = elementVector;
 }
 
 // _RehashIfNeeded
 template<class Element, class ElementVec>
-bool
-OpenHashTable<Element, ElementVec>::_RehashIfNeeded()
+bool OpenHashTable<Element, ElementVec>::_RehashIfNeeded()
 {
 	// The load factor range [fMaxLoadFactor / 3, fMaxLoadFactor] is fine,
 	// I think. After rehashing the load factor will be about
@@ -345,8 +335,7 @@ OpenHashTable<Element, ElementVec>::_RehashIfNeeded()
 
 // _Rehash
 template<class Element, class ElementVec>
-bool
-OpenHashTable<Element, ElementVec>::_Rehash()
+bool OpenHashTable<Element, ElementVec>::_Rehash()
 {
 	bool result = true;
 	int32 newSize = int32(fElementCount * 1.73 * fMaxLoadFactor);
@@ -400,8 +389,7 @@ OpenHashElementArray<Element>::~OpenHashElementArray()
 }
 
 template<class Element>
-bool
-OpenHashElementArray<Element>::InitCheck() const
+bool OpenHashElementArray<Element>::InitCheck() const
 {
 	return fData;
 }
@@ -423,8 +411,7 @@ OpenHashElementArray<Element>::At(int32 index) const
 }
 
 template<class Element>
-int32
-OpenHashElementArray<Element>::IndexOf(const Element &element) const
+int32 OpenHashElementArray<Element>::IndexOf(const Element &element) const
 {
 	int32 result = &element - fData;
 	if (result < 0 || result > fSize)
@@ -434,8 +421,7 @@ OpenHashElementArray<Element>::IndexOf(const Element &element) const
 }
 
 template<class Element>
-int32
-OpenHashElementArray<Element>::Size() const
+int32 OpenHashElementArray<Element>::Size() const
 {
 	return fSize;
 }
@@ -494,8 +480,7 @@ OpenHashElementArray<Element>::Add()
 }
 
 template<class Element>
-void
-OpenHashElementArray<Element>::Remove(int32 index)
+void OpenHashElementArray<Element>::Remove(int32 index)
 {
 	// delete by chaining empty elements in a single linked
 	// list, reusing the next field

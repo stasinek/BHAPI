@@ -27,8 +27,7 @@ EditableCatalog::~EditableCatalog()
 }
 
 
-status_t
-EditableCatalog::SetString(const char* string, const char* translated,
+status_t EditableCatalog::SetString(const char* string, const char* translated,
 	const char* context, const char* comment)
 {
 	if (fCatalogData == NULL)
@@ -38,8 +37,7 @@ EditableCatalog::SetString(const char* string, const char* translated,
 }
 
 
-status_t
-EditableCatalog::SetString(int32 id, const char* translated)
+status_t EditableCatalog::SetString(int32 id, const char* translated)
 {
 	if (fCatalogData == NULL)
 		return B_NO_INIT;
@@ -48,8 +46,7 @@ EditableCatalog::SetString(int32 id, const char* translated)
 }
 
 
-bool
-EditableCatalog::CanWriteData() const
+bool EditableCatalog::CanWriteData() const
 {
 	if (fCatalogData == NULL)
 		return false;
@@ -58,8 +55,7 @@ EditableCatalog::CanWriteData() const
 }
 
 
-status_t
-EditableCatalog::SetData(const char* name, BMessage* msg)
+status_t EditableCatalog::SetData(const char* name, BMessage* msg)
 {
 	if (fCatalogData == NULL)
 		return B_NO_INIT;
@@ -68,8 +64,7 @@ EditableCatalog::SetData(const char* name, BMessage* msg)
 }
 
 
-status_t
-EditableCatalog::SetData(uint32 id, BMessage* msg)
+status_t EditableCatalog::SetData(uint32 id, BMessage* msg)
 {
 	if (fCatalogData == NULL)
 		return B_NO_INIT;
@@ -78,8 +73,7 @@ EditableCatalog::SetData(uint32 id, BMessage* msg)
 }
 
 
-status_t
-EditableCatalog::ReadFromFile(const char* path)
+status_t EditableCatalog::ReadFromFile(const char* path)
 {
 	if (fCatalogData == NULL)
 		return B_NO_INIT;
@@ -88,8 +82,7 @@ EditableCatalog::ReadFromFile(const char* path)
 }
 
 
-status_t
-EditableCatalog::ReadFromAttribute(const entry_ref& appOrAddOnRef)
+status_t EditableCatalog::ReadFromAttribute(const entry_ref& appOrAddOnRef)
 {
 	if (fCatalogData == NULL)
 		return B_NO_INIT;
@@ -98,8 +91,7 @@ EditableCatalog::ReadFromAttribute(const entry_ref& appOrAddOnRef)
 }
 
 
-status_t
-EditableCatalog::ReadFromResource(const entry_ref& appOrAddOnRef)
+status_t EditableCatalog::ReadFromResource(const entry_ref& appOrAddOnRef)
 {
 	if (fCatalogData == NULL)
 		return B_NO_INIT;
@@ -108,8 +100,7 @@ EditableCatalog::ReadFromResource(const entry_ref& appOrAddOnRef)
 }
 
 
-status_t
-EditableCatalog::WriteToFile(const char* path)
+status_t EditableCatalog::WriteToFile(const char* path)
 {
 	if (fCatalogData == NULL)
 		return B_NO_INIT;
@@ -118,8 +109,7 @@ EditableCatalog::WriteToFile(const char* path)
 }
 
 
-status_t
-EditableCatalog::WriteToAttribute(const entry_ref& appOrAddOnRef)
+status_t EditableCatalog::WriteToAttribute(const entry_ref& appOrAddOnRef)
 {
 	if (fCatalogData == NULL)
 		return B_NO_INIT;
@@ -128,8 +118,7 @@ EditableCatalog::WriteToAttribute(const entry_ref& appOrAddOnRef)
 }
 
 
-status_t
-EditableCatalog::WriteToResource(const entry_ref& appOrAddOnRef)
+status_t EditableCatalog::WriteToResource(const entry_ref& appOrAddOnRef)
 {
 	if (fCatalogData == NULL)
 		return B_NO_INIT;

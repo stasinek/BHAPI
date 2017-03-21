@@ -121,8 +121,7 @@ FT_BEGIN_HEADER
   /* <Note>                                                                */
   /*    This function does NOT destroy the face object.                    */
   /*                                                                       */
-  typedef void
-  (*TT_Done_Face_Func)( TT_Face  face );
+  typedef void   (*TT_Done_Face_Func)( TT_Face  face );
 
 
 #ifdef FT_CONFIG_OPTION_OLD_INTERNALS
@@ -609,8 +608,7 @@ FT_BEGIN_HEADER
   /* <Input>                                                               */
   /*    face :: A handle to the target face object.                        */
   /*                                                                       */
-  typedef void
-  (*TT_Free_Table_Func)( TT_Face  face );
+  typedef void   (*TT_Free_Table_Func)( TT_Face  face );
 
 
   /*

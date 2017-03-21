@@ -53,8 +53,7 @@ BGradientLinear::Start() const
 
 
 // SetStart
-void
-BGradientLinear::SetStart(const BPoint& start)
+void BGradientLinear::SetStart(const BPoint& start)
 {
 	fData.linear.x1 = start.x;
 	fData.linear.y1 = start.y;
@@ -62,8 +61,7 @@ BGradientLinear::SetStart(const BPoint& start)
 
 
 // SetStart
-void
-BGradientLinear::SetStart(float x, float y)
+void BGradientLinear::SetStart(float x, float y)
 {
 	fData.linear.x1 = x;
 	fData.linear.y1 = y;
@@ -79,8 +77,7 @@ BGradientLinear::End() const
 
 
 // SetEnd
-void
-BGradientLinear::SetEnd(const BPoint& end)
+void BGradientLinear::SetEnd(const BPoint& end)
 {
 	fData.linear.x2 = end.x;
 	fData.linear.y2 = end.y;
@@ -88,8 +85,7 @@ BGradientLinear::SetEnd(const BPoint& end)
 
 
 // SetEnd
-void
-BGradientLinear::SetEnd(float x, float y)
+void BGradientLinear::SetEnd(float x, float y)
 {
 	fData.linear.x2 = x;
 	fData.linear.y2 = y;

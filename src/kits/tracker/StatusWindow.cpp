@@ -136,8 +136,7 @@ TCustomButton::TCustomButton(BRect frame, uint32 what)
 }
 
 
-void
-TCustomButton::Draw(BRect updateRect)
+void TCustomButton::Draw(BRect updateRect)
 {
 	_inherited::Draw(updateRect);
 
@@ -225,8 +224,7 @@ BStatusWindow::~BStatusWindow()
 }
 
 
-void
-BStatusWindow::CreateStatusItem(thread_id thread, StatusWindowState type)
+void BStatusWindow::CreateStatusItem(thread_id thread, StatusWindowState type)
 {
 	AutoLock<BWindow> lock(this);
 
@@ -274,8 +272,7 @@ BStatusWindow::CreateStatusItem(thread_id thread, StatusWindowState type)
 }
 
 
-void
-BStatusWindow::InitStatusItem(thread_id thread, int32 totalItems,
+void BStatusWindow::InitStatusItem(thread_id thread, int32 totalItems,
 	off_t totalSize, const entry_ref* destDir, bool showCount)
 {
 	AutoLock<BWindow> lock(this);
@@ -292,8 +289,7 @@ BStatusWindow::InitStatusItem(thread_id thread, int32 totalItems,
 }
 
 
-void
-BStatusWindow::UpdateStatus(thread_id thread, const char* curItem,
+void BStatusWindow::UpdateStatus(thread_id thread, const char* curItem,
 	off_t itemSize, bool optional)
 {
 	AutoLock<BWindow> lock(this);
@@ -309,8 +305,7 @@ BStatusWindow::UpdateStatus(thread_id thread, const char* curItem,
 }
 
 
-void
-BStatusWindow::RemoveStatusItem(thread_id thread)
+void BStatusWindow::RemoveStatusItem(thread_id thread)
 {
 	AutoLock<BWindow> lock(this);
 	BStatusView* winner = NULL;
@@ -361,8 +356,7 @@ BStatusWindow::RemoveStatusItem(thread_id thread)
 }
 
 
-bool
-BStatusWindow::CheckCanceledOrPaused(thread_id thread)
+bool BStatusWindow::CheckCanceledOrPaused(thread_id thread)
 {
 	bool wasCanceled = false;
 	bool isPaused = false;
@@ -400,8 +394,7 @@ BStatusWindow::CheckCanceledOrPaused(thread_id thread)
 }
 
 
-bool
-BStatusWindow::AttemptToQuit()
+bool BStatusWindow::AttemptToQuit()
 {
 	// called when tracker is quitting
 	// try to cancel all the move/copy/empty trash threads in a nice way
@@ -419,8 +412,7 @@ BStatusWindow::AttemptToQuit()
 }
 
 
-void
-BStatusWindow::WindowActivated(bool state)
+void BStatusWindow::WindowActivated(bool state)
 {
 	if (!state)
 		fRetainDesktopFocus = false;
@@ -553,8 +545,7 @@ BStatusView::~BStatusView()
 }
 
 
-void
-BStatusView::Init()
+void BStatusView::Init()
 {
 	fTotalSize = fItemSize = fSizeProcessed = fLastSpeedReferenceSize
 		= fEstimatedFinishReferenceSize = 0;
@@ -573,8 +564,7 @@ BStatusView::Init()
 }
 
 
-void
-BStatusView::InitStatus(int32 totalItems, off_t totalSize,
+void BStatusView::InitStatus(int32 totalItems, off_t totalSize,
 	const entry_ref* destDir, bool showCount)
 {
 	Init();
@@ -631,8 +621,7 @@ BStatusView::InitStatus(int32 totalItems, off_t totalSize,
 }
 
 
-void
-BStatusView::Draw(BRect updateRect)
+void BStatusView::Draw(BRect updateRect)
 {
 	if (fBitmap != NULL) {
 		BPoint location;
@@ -854,16 +843,14 @@ BStatusView::_FullTimeRemainingString(time_t now, time_t finishTime,
 }
 
 
-void
-BStatusView::AttachedToWindow()
+void BStatusView::AttachedToWindow()
 {
 	fPauseButton->SetTarget(this);
 	fStopButton->SetTarget(this);
 }
 
 
-void
-BStatusView::MessageReceived(BMessage* message)
+void BStatusView::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case kPauseButton:
@@ -908,8 +895,7 @@ BStatusView::MessageReceived(BMessage* message)
 }
 
 
-void
-BStatusView::UpdateStatus(const char* curItem, off_t itemSize, bool optional)
+void BStatusView::UpdateStatus(const char* curItem, off_t itemSize, bool optional)
 {
 	if (!fShowCount) {
 		fStatusBar->Update((float)fItemSize / fTotalSize);
@@ -986,8 +972,7 @@ BStatusView::UpdateStatus(const char* curItem, off_t itemSize, bool optional)
 }
 
 
-void
-BStatusView::SetWasCanceled()
+void BStatusView::SetWasCanceled()
 {
 	fWasCanceled = true;
 }

@@ -58,16 +58,14 @@ private:
 };
 
 
-status_t
-BJson::Parse(BMessage& message, const char* JSON)
+status_t BJson::Parse(BMessage& message, const char* JSON)
 {
 	BString temp(JSON);
 	return Parse(message, temp);
 }
 
 
-status_t
-BJson::Parse(BMessage& message, BString& JSON)
+status_t BJson::Parse(BMessage& message, BString& JSON)
 {
 	try {
 		_Parse(message, JSON);
@@ -83,8 +81,7 @@ BJson::Parse(BMessage& message, BString& JSON)
 // #pragma mark - Private methods
 
 
-void
-BJson::_Parse(BMessage& message, BString& JSON)
+void BJson::_Parse(BMessage& message, BString& JSON)
 {
 	BMessageBuilder builder(message);
 	int32 pos = 0;
@@ -371,8 +368,7 @@ BJson::_ParseNumber(BString& JSON, int32& pos)
 }
 
 
-bool
-BJson::_ParseConstant(BString& JSON, int32& pos, const char* constant)
+bool BJson::_ParseConstant(BString& JSON, int32& pos, const char* constant)
 {
 	BString value;
 	JSON.CopyInto(value, pos, strlen(constant));

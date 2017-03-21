@@ -96,15 +96,13 @@ void BFilePanel::_ReservedFilePanel8() {}
 #if __GNUC__ && __GNUC__ < 3
 extern "C" {
 
-_EXPORT void
-run_open_panel__Fv()
+_EXPORT void run_open_panel__Fv()
 {
 	(new TFilePanel())->Show();
 }
 
 
-_EXPORT void
-run_save_panel__Fv()
+_EXPORT void run_save_panel__Fv()
 {
 	(new TFilePanel(B_SAVE_PANEL))->Show();
 }
@@ -122,20 +120,17 @@ __10BFilePanel15file_panel_modeP10BMessengerP9entry_refUlbP8BMessageP10BRefFilte
 								 hideWhenDone);
 }
 
-_EXPORT void
-SetPanelDirectory__10BFilePanelP10BDirectory(BFilePanel* self, BDirectory* d)
+_EXPORT void SetPanelDirectory__10BFilePanelP10BDirectory(BFilePanel* self, BDirectory* d)
 {
 	self->SetPanelDirectory(d);
 }
 
-_EXPORT void
-SetPanelDirectory__10BFilePanelP6BEntry(BFilePanel* self, BEntry* e)
+_EXPORT void SetPanelDirectory__10BFilePanelP6BEntry(BFilePanel* self, BEntry* e)
 {
 	self->SetPanelDirectory(e);
 }
 
-_EXPORT void
-SetPanelDirectory__10BFilePanelP9entry_ref(BFilePanel* self, entry_ref* r)
+_EXPORT void SetPanelDirectory__10BFilePanelP9entry_ref(BFilePanel* self, entry_ref* r)
 {
 	self->SetPanelDirectory(r);
 }

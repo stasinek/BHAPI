@@ -38,8 +38,7 @@ extern spinlock gSchedulerListenersLock;
 
 
 template<typename Parameter1>
-inline void
-NotifySchedulerListeners(void (SchedulerListener::*hook)(Parameter1),
+inline void NotifySchedulerListeners(void (SchedulerListener::*hook)(Parameter1),
 	Parameter1 parameter1)
 {
 	if (!gSchedulerListeners.IsEmpty()) {
@@ -51,8 +50,7 @@ NotifySchedulerListeners(void (SchedulerListener::*hook)(Parameter1),
 
 
 template<typename Parameter1, typename Parameter2>
-inline void
-NotifySchedulerListeners(
+inline void NotifySchedulerListeners(
 	void (SchedulerListener::*hook)(Parameter1, Parameter2),
 	Parameter1 parameter1, Parameter2 parameter2)
 {
@@ -84,8 +82,7 @@ extern spinlock gWaitObjectListenerLock;
 
 
 template<typename Parameter1>
-inline void
-NotifyWaitObjectListeners(void (WaitObjectListener::*hook)(Parameter1),
+inline void NotifyWaitObjectListeners(void (WaitObjectListener::*hook)(Parameter1),
 	Parameter1 parameter1)
 {
 	if (!gWaitObjectListeners.IsEmpty()) {
@@ -99,8 +96,7 @@ NotifyWaitObjectListeners(void (WaitObjectListener::*hook)(Parameter1),
 
 
 template<typename Parameter1, typename Parameter2>
-inline void
-NotifyWaitObjectListeners(
+inline void NotifyWaitObjectListeners(
 	void (WaitObjectListener::*hook)(Parameter1, Parameter2),
 	Parameter1 parameter1, Parameter2 parameter2)
 {

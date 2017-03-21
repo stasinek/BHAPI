@@ -97,8 +97,7 @@ AbstractPointerListHelper::~AbstractPointerListHelper()
 }
 
 
-void
-AbstractPointerListHelper::Swap(void **items, int32 i, int32 j)
+void AbstractPointerListHelper::Swap(void **items, int32 i, int32 j)
 {
 	void *swap = items[i];
 	items[i] = items[j];
@@ -106,8 +105,7 @@ AbstractPointerListHelper::Swap(void **items, int32 i, int32 j)
 }
 
 
-int32
-AbstractPointerListHelper::BinarySearchIndex(const void *key, const BList *list)
+int32 AbstractPointerListHelper::BinarySearchIndex(const void *key, const BList *list)
 {
 	int32 index;
 	const void **items = static_cast<const void**>(list->Items());
@@ -125,16 +123,14 @@ AbstractPointerListHelper::BinarySearch(const void *key, const BList *list)
 }
 
 
-void
-AbstractPointerListHelper::SortItems(BList *list)
+void AbstractPointerListHelper::SortItems(BList *list)
 {
 	void **items = static_cast<void**>(list->Items());
 	QuickSort(items, 0, list->CountItems()-1);
 }
 
 
-void
-AbstractPointerListHelper::HSortItems(BList *list)
+void AbstractPointerListHelper::HSortItems(BList *list)
 {
 	void **items = static_cast<void**>(list->Items());
 	int32 numItems = list->CountItems();
@@ -163,8 +159,7 @@ AbstractPointerListHelper::BinarySearch(const void *key, const void **items,
 }
 
 
-void
-AbstractPointerListHelper::QuickSort(void **items, int32 low, int32 high)
+void AbstractPointerListHelper::QuickSort(void **items, int32 low, int32 high)
 {
 	if (low <= high) {
 		sort(&items[low], &items[high+1], comparator(this));
@@ -278,16 +273,14 @@ _PointerList_::EachElement(GenericEachFunction function, void *arg)
 }
 
 
-void
-_PointerList_::SortItems(GenericCompareFunction compareFunc)
+void _PointerList_::SortItems(GenericCompareFunction compareFunc)
 {
 	PointerListHelper helper(compareFunc);
 	helper.SortItems(this);
 }
 
 
-void
-_PointerList_::SortItems(GenericCompareFunctionWithState compareFunc,
+void _PointerList_::SortItems(GenericCompareFunctionWithState compareFunc,
 	void *state)
 {
 	PointerListHelperWithState helper(compareFunc, state);
@@ -295,16 +288,14 @@ _PointerList_::SortItems(GenericCompareFunctionWithState compareFunc,
 }
 
 
-void
-_PointerList_::HSortItems(GenericCompareFunction compareFunc)
+void _PointerList_::HSortItems(GenericCompareFunction compareFunc)
 {
 	PointerListHelper helper(compareFunc);
 	helper.HSortItems(this);
 }
 
 
-void
-_PointerList_::HSortItems(GenericCompareFunctionWithState compareFunc,
+void _PointerList_::HSortItems(GenericCompareFunctionWithState compareFunc,
 	void *state)
 {
 	PointerListHelperWithState helper(compareFunc, state);
@@ -330,8 +321,7 @@ _PointerList_::BinarySearch(const void *key,
 }
 
 
-int32
-_PointerList_::BinarySearchIndex(const void *key,
+int32 _PointerList_::BinarySearchIndex(const void *key,
 	GenericCompareFunction compareFunc) const
 {
 	PointerListHelper helper(compareFunc);
@@ -339,8 +329,7 @@ _PointerList_::BinarySearchIndex(const void *key,
 }
 
 
-int32
-_PointerList_::BinarySearchIndex(const void *key,
+int32 _PointerList_::BinarySearchIndex(const void *key,
 			GenericCompareFunctionWithState compareFunc, void *state) const
 {
 	PointerListHelperWithState helper(compareFunc, state);
@@ -348,16 +337,14 @@ _PointerList_::BinarySearchIndex(const void *key,
 }
 
 
-int32
-_PointerList_::BinarySearchIndexByPredicate(const void *key,
+int32 _PointerList_::BinarySearchIndexByPredicate(const void *key,
 	UnaryPredicateGlue predicate) const
 {
 	PointerListHelperUsePredicate helper(predicate);
 	return helper.BinarySearchIndex(key, this);		
 }
 
-bool
-_PointerList_::ReplaceItem(int32 index, void *newItem)
+bool _PointerList_::ReplaceItem(int32 index, void *newItem)
 {
 	if (index < 0 || index >= CountItems())
 		return false;
@@ -369,8 +356,7 @@ _PointerList_::ReplaceItem(int32 index, void *newItem)
 }
 
 
-bool
-_PointerList_::MoveItem(int32 from, int32 to)
+bool _PointerList_::MoveItem(int32 from, int32 to)
 {
 	if (from == to)
 		return true;

@@ -54,8 +54,7 @@ BHttpHeader::BHttpHeader(const BHttpHeader& copy)
 }
 
 
-void
-BHttpHeader::SetName(const char* name)
+void BHttpHeader::SetName(const char* name)
 {
 	fRawHeaderValid = false;
 	fName = name;
@@ -63,8 +62,7 @@ BHttpHeader::SetName(const char* name)
 }
 
 
-void
-BHttpHeader::SetValue(const char* value)
+void BHttpHeader::SetValue(const char* value)
 {
 	fRawHeaderValid = false;
 	fValue = value;
@@ -72,8 +70,7 @@ BHttpHeader::SetValue(const char* value)
 }
 
 
-bool
-BHttpHeader::SetHeader(const char* string)
+bool BHttpHeader::SetHeader(const char* string)
 {
 	fRawHeaderValid = false;
 	fName.Truncate(0);
@@ -91,22 +88,19 @@ BHttpHeader::SetHeader(const char* string)
 }
 
 
-const char*
-BHttpHeader::Name() const
+const char*  BHttpHeader::Name() const
 {
 	return fName.String();
 }
 
 
-const char*
-BHttpHeader::Value() const
+const char*  BHttpHeader::Value() const
 {
 	return fValue.String();
 }
 
 
-const char*
-BHttpHeader::Header() const
+const char*  BHttpHeader::Header() const
 {
 	if (!fRawHeaderValid) {
 		fRawHeaderValid = true;
@@ -119,8 +113,7 @@ BHttpHeader::Header() const
 }
 
 
-bool
-BHttpHeader::NameIs(const char* name) const
+bool BHttpHeader::NameIs(const char* name) const
 {
 	return fName == BString(name).Trim().CapitalizeEachWord();
 }
@@ -164,8 +157,7 @@ BHttpHeaders::~BHttpHeaders()
 // #pragma mark Header access
 
 
-const char*
-BHttpHeaders::HeaderValue(const char* name) const
+const char*  BHttpHeaders::HeaderValue(const char* name) const
 {
 	for (int32 i = 0; i < fHeaderList.CountItems(); i++) {
 		BHttpHeader* header
@@ -193,8 +185,7 @@ BHttpHeaders::HeaderAt(int32 index) const
 // #pragma mark Header count
 
 
-int32
-BHttpHeaders::CountHeaders() const
+int32 BHttpHeaders::CountHeaders() const
 {
 	return fHeaderList.CountItems();
 }
@@ -203,8 +194,7 @@ BHttpHeaders::CountHeaders() const
 // #pragma Header tests
 
 
-int32
-BHttpHeaders::HasHeader(const char* name) const
+int32 BHttpHeaders::HasHeader(const char* name) const
 {
 	for (int32 i = 0; i < fHeaderList.CountItems(); i++) {
 		BHttpHeader* header
@@ -221,22 +211,19 @@ BHttpHeaders::HasHeader(const char* name) const
 // #pragma mark Header add/replace
 
 
-bool
-BHttpHeaders::AddHeader(const char* line)
+bool BHttpHeaders::AddHeader(const char* line)
 {
 	return _AddOrDeleteHeader(new(std::nothrow) BHttpHeader(line));
 }
 
 
-bool
-BHttpHeaders::AddHeader(const char* name, const char* value)
+bool BHttpHeaders::AddHeader(const char* name, const char* value)
 {
 	return _AddOrDeleteHeader(new(std::nothrow) BHttpHeader(name, value));
 }
 
 
-bool
-BHttpHeaders::AddHeader(const char* name, int32 value)
+bool BHttpHeaders::AddHeader(const char* name, int32 value)
 {
 	BString strValue;
 	strValue << value;
@@ -248,8 +235,7 @@ BHttpHeaders::AddHeader(const char* name, int32 value)
 // #pragma mark Header deletion
 
 
-void
-BHttpHeaders::Clear()
+void BHttpHeaders::Clear()
 {
 	_EraseData();
 	fHeaderList.MakeEmpty();
@@ -282,15 +268,13 @@ BHttpHeaders::operator[](int32 index) const
 }
 
 
-const char*
-BHttpHeaders::operator[](const char* name) const
+const char*  BHttpHeaders::operator[](const char* name) const
 {
 	return HeaderValue(name);
 }
 
 
-void
-BHttpHeaders::_EraseData()
+void BHttpHeaders::_EraseData()
 {
 	// Free allocated data;
 	for (int32 i = 0; i < fHeaderList.CountItems(); i++) {
@@ -302,8 +286,7 @@ BHttpHeaders::_EraseData()
 }
 
 
-bool
-BHttpHeaders::_AddOrDeleteHeader(BHttpHeader* header)
+bool BHttpHeaders::_AddOrDeleteHeader(BHttpHeader* header)
 {
 	if (header != NULL) {
 		if (fHeaderList.AddItem(header))

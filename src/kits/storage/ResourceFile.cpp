@@ -71,8 +71,7 @@ const char* kFileTypeNames[] = {
 // #pragma mark - helper functions/classes
 
 
-static void
-read_exactly(BPositionIO& file, off_t position, void* buffer, size_t size,
+static void read_exactly(BPositionIO& file, off_t position, void* buffer, size_t size,
 	const char* errorMessage = NULL)
 {
 	ssize_t read = file.ReadAt(position, buffer, size);
@@ -88,8 +87,7 @@ read_exactly(BPositionIO& file, off_t position, void* buffer, size_t size,
 }
 
 
-static void
-write_exactly(BPositionIO& file, off_t position, const void* buffer,
+static void write_exactly(BPositionIO& file, off_t position, const void* buffer,
 	size_t size, const char* errorMessage = NULL)
 {
 	ssize_t written = file.WriteAt(position, buffer, size);
@@ -113,8 +111,7 @@ align_value(const TV& value, const TA& alignment)
 }
 
 
-static uint32
-calculate_checksum(const void* data, uint32 size)
+static uint32 calculate_checksum(const void* data, uint32 size)
 {
 	uint32 checkSum = 0;
 	const uint8* csData = (const uint8*)data;
@@ -131,22 +128,19 @@ calculate_checksum(const void* data, uint32 size)
 }
 
 
-static inline const void*
-skip_bytes(const void* buffer, int32 offset)
+static inline const void*   skip_bytes(const void* buffer, int32 offset)
 {
 	return (const char*)buffer + offset;
 }
 
 
-static inline void*
-skip_bytes(void* buffer, int32 offset)
+static inline void*   skip_bytes(void* buffer, int32 offset)
 {
 	return (char*)buffer + offset;
 }
 
 
-static void
-fill_pattern(uint32 byteOffset, void* _buffer, uint32 count)
+static void fill_pattern(uint32 byteOffset, void* _buffer, uint32 count)
 {
 	uint32* buffer = (uint32*)_buffer;
 	for (uint32 i = 0; i < count; i++)
@@ -154,23 +148,20 @@ fill_pattern(uint32 byteOffset, void* _buffer, uint32 count)
 }
 
 
-static void
-fill_pattern(const void* dataBegin, void* buffer, uint32 count)
+static void fill_pattern(const void* dataBegin, void* buffer, uint32 count)
 {
 	fill_pattern((char*)buffer - (const char*)dataBegin, buffer, count);
 }
 
 
-static void
-fill_pattern(const void* dataBegin, void* buffer, const void* bufferEnd)
+static void fill_pattern(const void* dataBegin, void* buffer, const void* bufferEnd)
 {
 	fill_pattern(dataBegin, buffer,
 				 ((const char*)bufferEnd - (char*)buffer) / 4);
 }
 
 
-static bool
-check_pattern(uint32 byteOffset, void* _buffer, uint32 count,
+static bool check_pattern(uint32 byteOffset, void* _buffer, uint32 count,
 	bool hostEndianess)
 {
 	bool result = true;
@@ -233,8 +224,7 @@ ResourceFile::~ResourceFile()
 }
 
 
-status_t
-ResourceFile::SetTo(BFile* file, bool clobber)
+status_t ResourceFile::SetTo(BFile* file, bool clobber)
 {
 	status_t error = (file ? B_OK : B_BAD_VALUE);
 	Unset();
@@ -253,8 +243,7 @@ ResourceFile::SetTo(BFile* file, bool clobber)
 }
 
 
-void
-ResourceFile::Unset()
+void ResourceFile::Unset()
 {
 	fFile.Unset();
 	fFileType = FILE_TYPE_UNKNOWN;
@@ -263,15 +252,13 @@ ResourceFile::Unset()
 }
 
 
-status_t
-ResourceFile::InitCheck() const
+status_t ResourceFile::InitCheck() const
 {
 	return fFile.InitCheck();
 }
 
 
-status_t
-ResourceFile::InitContainer(ResourcesContainer& container)
+status_t ResourceFile::InitContainer(ResourcesContainer& container)
 {
 	container.MakeEmpty();
 	status_t error = InitCheck();
@@ -304,8 +291,7 @@ ResourceFile::InitContainer(ResourcesContainer& container)
 }
 
 
-status_t
-ResourceFile::ReadResource(ResourceItem& resource, bool force)
+status_t ResourceFile::ReadResource(ResourceItem& resource, bool force)
 {
 	status_t error = InitCheck();
 	size_t size = resource.DataSize();
@@ -333,8 +319,7 @@ ResourceFile::ReadResource(ResourceItem& resource, bool force)
 }
 
 
-status_t
-ResourceFile::ReadResources(ResourcesContainer& container, bool force)
+status_t ResourceFile::ReadResources(ResourcesContainer& container, bool force)
 {
 	status_t error = InitCheck();
 	int32 count = container.CountResources();
@@ -348,8 +333,7 @@ ResourceFile::ReadResources(ResourcesContainer& container, bool force)
 }
 
 
-status_t
-ResourceFile::WriteResources(ResourcesContainer& container)
+status_t ResourceFile::WriteResources(ResourcesContainer& container)
 {
 	status_t error = InitCheck();
 	if (error == B_OK && !fFile.File()->IsWritable())
@@ -364,8 +348,7 @@ ResourceFile::WriteResources(ResourcesContainer& container)
 }
 
 
-void
-ResourceFile::_InitFile(BFile& file, bool clobber)
+void ResourceFile::_InitFile(BFile& file, bool clobber)
 {
 	status_t error = B_OK;
 	fFile.Unset();
@@ -443,8 +426,7 @@ ResourceFile::_InitFile(BFile& file, bool clobber)
 }
 
 
-void
-ResourceFile::_InitELFFile(BFile& file)
+void ResourceFile::_InitELFFile(BFile& file)
 {
 	status_t error = B_OK;
 
@@ -492,8 +474,7 @@ ResourceFile::_InitELFFile(BFile& file)
 
 template<typename ElfHeader, typename ElfProgramHeader,
 	typename ElfSectionHeader>
-void
-ResourceFile::_InitELFXFile(BFile& file, uint64 fileSize)
+void ResourceFile::_InitELFXFile(BFile& file, uint64 fileSize)
 {
 	// read ELF header
 	ElfHeader fileHeader;
@@ -666,8 +647,7 @@ ResourceFile::_InitELFXFile(BFile& file, uint64 fileSize)
 }
 
 
-void
-ResourceFile::_InitPEFFile(BFile& file, const PEFContainerHeader& pefHeader)
+void ResourceFile::_InitPEFFile(BFile& file, const PEFContainerHeader& pefHeader)
 {
 	status_t error = B_OK;
 	// get the file size
@@ -716,8 +696,7 @@ ResourceFile::_InitPEFFile(BFile& file, const PEFContainerHeader& pefHeader)
 }
 
 
-void
-ResourceFile::_ReadHeader(resource_parse_info& parseInfo)
+void ResourceFile::_ReadHeader(resource_parse_info& parseInfo)
 {
 	// read the header
 	resources_header header;
@@ -766,8 +745,7 @@ ResourceFile::_ReadHeader(resource_parse_info& parseInfo)
 }
 
 
-void
-ResourceFile::_ReadIndex(resource_parse_info& parseInfo)
+void ResourceFile::_ReadIndex(resource_parse_info& parseInfo)
 {
 	int32& resourceCount = parseInfo.resource_count;
 	off_t& fileSize = parseInfo.file_size;
@@ -844,8 +822,7 @@ ResourceFile::_ReadIndex(resource_parse_info& parseInfo)
 }
 
 
-bool
-ResourceFile::_ReadIndexEntry(resource_parse_info& parseInfo, int32 index,
+bool ResourceFile::_ReadIndexEntry(resource_parse_info& parseInfo, int32 index,
 	uint32 tableOffset, bool peekAhead)
 {
 	off_t& fileSize = parseInfo.file_size;
@@ -895,8 +872,7 @@ ResourceFile::_ReadIndexEntry(resource_parse_info& parseInfo, int32 index,
 }
 
 
-void
-ResourceFile::_ReadInfoTable(resource_parse_info& parseInfo)
+void ResourceFile::_ReadInfoTable(resource_parse_info& parseInfo)
 {
 	int32& resourceCount = parseInfo.resource_count;
 	// read the info table
@@ -992,8 +968,7 @@ ResourceFile::_ReadInfoTable(resource_parse_info& parseInfo)
 }
 
 
-bool
-ResourceFile::_ReadInfoTableEnd(const void* data, int32 dataSize)
+bool ResourceFile::_ReadInfoTableEnd(const void* data, int32 dataSize)
 {
 	bool hasTableEnd = true;
 	if ((uint32)dataSize < kResourceInfoSeparatorSize)
@@ -1024,8 +999,7 @@ ResourceFile::_ReadInfoTableEnd(const void* data, int32 dataSize)
 }
 
 
-const void*
-ResourceFile::_ReadResourceInfo(resource_parse_info& parseInfo,
+const void*   ResourceFile::_ReadResourceInfo(resource_parse_info& parseInfo,
 	const MemArea& area, const resource_info* info, type_code type,
 	bool* readIndices)
 {
@@ -1074,8 +1048,7 @@ ResourceFile::_ReadResourceInfo(resource_parse_info& parseInfo,
 }
 
 
-status_t
-ResourceFile::_WriteResources(ResourcesContainer& container)
+status_t ResourceFile::_WriteResources(ResourcesContainer& container)
 {
 	status_t error = B_OK;
 	int32 resourceCount = container.CountResources();
@@ -1266,8 +1239,7 @@ ResourceFile::_WriteResources(ResourcesContainer& container)
 }
 
 
-status_t
-ResourceFile::_MakeEmptyResourceFile()
+status_t ResourceFile::_MakeEmptyResourceFile()
 {
 	status_t error = fFile.InitCheck();
 	if (error == B_OK && !fFile.File()->IsWritable())

@@ -213,36 +213,31 @@ CopyLoopControl::~CopyLoopControl()
 }
 
 
-void
-CopyLoopControl::Init(uint32 jobKind)
+void CopyLoopControl::Init(uint32 jobKind)
 {
 }
 
 
-void
-CopyLoopControl::Init(int32 totalItems, off_t totalSize,
+void CopyLoopControl::Init(int32 totalItems, off_t totalSize,
 	const entry_ref* destDir, bool showCount)
 {
 }
 
 
-bool
-CopyLoopControl::FileError(const char* message, const char* name,
+bool CopyLoopControl::FileError(const char* message, const char* name,
 	status_t error, bool allowContinue)
 {
 	return false;
 }
 
 
-void
-CopyLoopControl::UpdateStatus(const char* name, const entry_ref& ref,
+void CopyLoopControl::UpdateStatus(const char* name, const entry_ref& ref,
 	int32 count, bool optional)
 {
 }
 
 
-bool
-CopyLoopControl::CheckUserCanceled()
+bool CopyLoopControl::CheckUserCanceled()
 {
 	return false;
 }
@@ -257,36 +252,31 @@ CopyLoopControl::OverwriteOnConflict(const BEntry* srcEntry,
 }
 
 
-bool
-CopyLoopControl::SkipEntry(const BEntry*, bool)
+bool CopyLoopControl::SkipEntry(const BEntry*, bool)
 {
 	// Tracker makes no exceptions
 	return false;
 }
 
 
-void
-CopyLoopControl::ChecksumChunk(const char*, size_t)
+void CopyLoopControl::ChecksumChunk(const char*, size_t)
 {
 }
 
 
-bool
-CopyLoopControl::ChecksumFile(const entry_ref*)
+bool CopyLoopControl::ChecksumFile(const entry_ref*)
 {
 	return true;
 }
 
 
-bool
-CopyLoopControl::SkipAttribute(const char*)
+bool CopyLoopControl::SkipAttribute(const char*)
 {
 	return false;
 }
 
 
-bool
-CopyLoopControl::PreserveAttribute(const char*)
+bool CopyLoopControl::PreserveAttribute(const char*)
 {
 	return false;
 }
@@ -329,16 +319,14 @@ TrackerCopyLoopControl::~TrackerCopyLoopControl()
 }
 
 
-void
-TrackerCopyLoopControl::Init(uint32 jobKind)
+void TrackerCopyLoopControl::Init(uint32 jobKind)
 {
 	if (gStatusWindow != NULL)
 		gStatusWindow->CreateStatusItem(fThread, (StatusWindowState)jobKind);
 }
 
 
-void
-TrackerCopyLoopControl::Init(int32 totalItems, off_t totalSize,
+void TrackerCopyLoopControl::Init(int32 totalItems, off_t totalSize,
 	const entry_ref* destDir, bool showCount)
 {
 	if (gStatusWindow != NULL) {
@@ -348,8 +336,7 @@ TrackerCopyLoopControl::Init(int32 totalItems, off_t totalSize,
 }
 
 
-bool
-TrackerCopyLoopControl::FileError(const char* message, const char* name,
+bool TrackerCopyLoopControl::FileError(const char* message, const char* name,
 	status_t error, bool allowContinue)
 {
 	BString buffer(message);
@@ -371,8 +358,7 @@ TrackerCopyLoopControl::FileError(const char* message, const char* name,
 }
 
 
-void
-TrackerCopyLoopControl::UpdateStatus(const char* name, const entry_ref&,
+void TrackerCopyLoopControl::UpdateStatus(const char* name, const entry_ref&,
 	int32 count, bool optional)
 {
 	if (gStatusWindow != NULL)
@@ -380,8 +366,7 @@ TrackerCopyLoopControl::UpdateStatus(const char* name, const entry_ref&,
 }
 
 
-bool
-TrackerCopyLoopControl::CheckUserCanceled()
+bool TrackerCopyLoopControl::CheckUserCanceled()
 {
 	if (gStatusWindow == NULL)
 		return false;
@@ -398,8 +383,7 @@ TrackerCopyLoopControl::CheckUserCanceled()
 }
 
 
-bool
-TrackerCopyLoopControl::SkipAttribute(const char* attributeName)
+bool TrackerCopyLoopControl::SkipAttribute(const char* attributeName)
 {
 	for (const char** skipAttribute = kSkipAttributes; *skipAttribute;
 		skipAttribute++) {
@@ -411,8 +395,7 @@ TrackerCopyLoopControl::SkipAttribute(const char* attributeName)
 }
 
 
-void
-TrackerCopyLoopControl::SetSourceList(EntryList* list)
+void TrackerCopyLoopControl::SetSourceList(EntryList* list)
 {
 	fSourceList = list;
 }
@@ -444,8 +427,7 @@ GetWritableNode(BEntry* entry, StatStruct* statBuf = 0)
 }
 
 
-bool
-CheckDevicesEqual(const entry_ref* srcRef, const Model* targetModel)
+bool CheckDevicesEqual(const entry_ref* srcRef, const Model* targetModel)
 {
 	BDirectory destDir (targetModel->EntryRef());
 	struct stat deststat;
@@ -455,8 +437,7 @@ CheckDevicesEqual(const entry_ref* srcRef, const Model* targetModel)
 }
 
 
-status_t
-FSSetPoseLocation(ino_t destDirInode, BNode* destNode, BPoint point)
+status_t FSSetPoseLocation(ino_t destDirInode, BNode* destNode, BPoint point)
 {
 	PoseInfo poseInfo;
 	poseInfo.fInvisible = false;
@@ -473,8 +454,7 @@ FSSetPoseLocation(ino_t destDirInode, BNode* destNode, BPoint point)
 }
 
 
-status_t
-FSSetPoseLocation(BEntry* entry, BPoint point)
+status_t FSSetPoseLocation(BEntry* entry, BPoint point)
 {
 	BNode node(entry);
 	status_t result = node.InitCheck();
@@ -495,8 +475,7 @@ FSSetPoseLocation(BEntry* entry, BPoint point)
 }
 
 
-bool
-FSGetPoseLocation(const BNode* node, BPoint* point)
+bool FSGetPoseLocation(const BNode* node, BPoint* point)
 {
 	PoseInfo poseInfo;
 	if (ReadAttr(node, kAttrPoseInfo, kAttrPoseInfoForeign,
@@ -514,8 +493,7 @@ FSGetPoseLocation(const BNode* node, BPoint* point)
 }
 
 
-static void
-SetUpPoseLocation(ino_t sourceParentIno, ino_t destParentIno,
+static void SetUpPoseLocation(ino_t sourceParentIno, ino_t destParentIno,
 	const BNode* sourceNode, BNode* destNode, BPoint* loc)
 {
 	BPoint point;
@@ -539,8 +517,7 @@ SetUpPoseLocation(ino_t sourceParentIno, ino_t destParentIno,
 }
 
 
-void
-FSMoveToFolder(BObjectList<entry_ref>* srcList, BEntry* destEntry,
+void FSMoveToFolder(BObjectList<entry_ref>* srcList, BEntry* destEntry,
 	uint32 moveMode, BList* pointList)
 {
 	if (srcList->IsEmpty()) {
@@ -555,8 +532,7 @@ FSMoveToFolder(BObjectList<entry_ref>* srcList, BEntry* destEntry,
 }
 
 
-void
-FSDelete(entry_ref* ref, bool async, bool confirm)
+void FSDelete(entry_ref* ref, bool async, bool confirm)
 {
 	BObjectList<entry_ref>* list = new BObjectList<entry_ref>(1, true);
 	list->AddItem(ref);
@@ -564,8 +540,7 @@ FSDelete(entry_ref* ref, bool async, bool confirm)
 }
 
 
-void
-FSDeleteRefList(BObjectList<entry_ref>* list, bool async, bool confirm)
+void FSDeleteRefList(BObjectList<entry_ref>* list, bool async, bool confirm)
 {
 	if (async) {
 		LaunchInNewThread("DeleteTask", B_NORMAL_PRIORITY, _DeleteTask, list,
@@ -575,8 +550,7 @@ FSDeleteRefList(BObjectList<entry_ref>* list, bool async, bool confirm)
 }
 
 
-void
-FSRestoreRefList(BObjectList<entry_ref>* list, bool async)
+void FSRestoreRefList(BObjectList<entry_ref>* list, bool async)
 {
 	if (async) {
 		LaunchInNewThread("RestoreTask", B_NORMAL_PRIORITY, _RestoreTask,
@@ -586,8 +560,7 @@ FSRestoreRefList(BObjectList<entry_ref>* list, bool async)
 }
 
 
-void
-FSMoveToTrash(BObjectList<entry_ref>* srcList, BList* pointList, bool async)
+void FSMoveToTrash(BObjectList<entry_ref>* srcList, BList* pointList, bool async)
 {
 	if (srcList->IsEmpty()) {
 		delete srcList;
@@ -603,8 +576,7 @@ FSMoveToTrash(BObjectList<entry_ref>* srcList, BList* pointList, bool async)
 }
 
 
-static bool
-IsDisksWindowIcon(BEntry* entry)
+static bool IsDisksWindowIcon(BEntry* entry)
 {
 	BPath path;
 	if (entry->InitCheck() != B_OK || entry->GetPath(&path) != B_OK)
@@ -620,8 +592,7 @@ enum {
 };
 
 
-bool
-ConfirmChangeIfWellKnownDirectory(const BEntry* entry,
+bool ConfirmChangeIfWellKnownDirectory(const BEntry* entry,
 	const char* ifYouDoAction, const char* toDoAction,
 	const char* toConfirmAction, bool dontAsk, int32* confirmedAlready)
 {
@@ -728,8 +699,7 @@ ConfirmChangeIfWellKnownDirectory(const BEntry* entry,
 }
 
 
-static status_t
-InitCopy(CopyLoopControl* loopControl, uint32 moveMode,
+static status_t InitCopy(CopyLoopControl* loopControl, uint32 moveMode,
 	BObjectList<entry_ref>* srcList, BVolume* dstVol, BDirectory* destDir,
 	entry_ref* destRef, bool preflightNameCheck, bool needSizeCalculation,
 	int32* collisionCount, ConflictCheckResult* preflightResult)
@@ -848,24 +818,21 @@ InitCopy(CopyLoopControl* loopControl, uint32 moveMode,
 
 // ToDo:
 // get rid of this cruft
-bool
-delete_ref(void* ref)
+bool delete_ref(void* ref)
 {
 	delete (entry_ref*)ref;
 	return false;
 }
 
 
-bool
-delete_point(void* point)
+bool delete_point(void* point)
 {
 	delete (BPoint*)point;
 	return false;
 }
 
 
-static status_t
-MoveTask(BObjectList<entry_ref>* srcList, BEntry* destEntry, BList* pointList,
+static status_t MoveTask(BObjectList<entry_ref>* srcList, BEntry* destEntry, BList* pointList,
 	uint32 moveMode)
 {
 	ASSERT(!srcList->IsEmpty());
@@ -1117,8 +1084,7 @@ public:
 };
 
 
-void
-CopyFile(BEntry* srcFile, StatStruct* srcStat, BDirectory* destDir,
+void CopyFile(BEntry* srcFile, StatStruct* srcStat, BDirectory* destDir,
 	CopyLoopControl* loopControl, BPoint* loc, bool makeOriginalName,
 	Undo &undo)
 {
@@ -1192,8 +1158,7 @@ CopyFile(BEntry* srcFile, StatStruct* srcStat, BDirectory* destDir,
 
 
 #ifdef _SILENTLY_CORRECT_FILE_NAMES
-static bool
-CreateFileSystemCompatibleName(const BDirectory* destDir, char* destName)
+static bool CreateFileSystemCompatibleName(const BDirectory* destDir, char* destName)
 {
 	// Is it a FAT32 file system?
 	// (this is the only one we currently know about)
@@ -1230,8 +1195,7 @@ CreateFileSystemCompatibleName(const BDirectory* destDir, char* destName)
 #endif
 
 
-static void
-LowLevelCopy(BEntry* srcEntry, StatStruct* srcStat, BDirectory* destDir,
+static void LowLevelCopy(BEntry* srcEntry, StatStruct* srcStat, BDirectory* destDir,
 	char* destName, CopyLoopControl* loopControl, BPoint* loc)
 {
 	entry_ref ref;
@@ -1380,8 +1344,7 @@ LowLevelCopy(BEntry* srcEntry, StatStruct* srcStat, BDirectory* destDir,
 }
 
 
-void
-CopyAttributes(CopyLoopControl* control, BNode* srcNode, BNode* destNode,
+void CopyAttributes(CopyLoopControl* control, BNode* srcNode, BNode* destNode,
 	void* buffer, size_t bufsize)
 {
 	// ToDo:
@@ -1437,8 +1400,7 @@ CopyAttributes(CopyLoopControl* control, BNode* srcNode, BNode* destNode,
 }
 
 
-static void
-CopyFolder(BEntry* srcEntry, BDirectory* destDir,
+static void CopyFolder(BEntry* srcEntry, BDirectory* destDir,
 	CopyLoopControl* loopControl, BPoint* loc, bool makeOriginalName,
 	Undo &undo, bool removeSource = false)
 {
@@ -1570,8 +1532,7 @@ CopyFolder(BEntry* srcEntry, BDirectory* destDir,
 }
 
 
-status_t
-RecursiveMove(BEntry* entry, BDirectory* destDir,
+status_t RecursiveMove(BEntry* entry, BDirectory* destDir,
 	CopyLoopControl* loopControl)
 {
 	const char* name = entry->Name();
@@ -1607,8 +1568,7 @@ RecursiveMove(BEntry* entry, BDirectory* destDir,
 	return B_OK;
 }
 
-status_t
-MoveItem(BEntry* entry, BDirectory* destDir, BPoint* loc, uint32 moveMode,
+status_t MoveItem(BEntry* entry, BDirectory* destDir, BPoint* loc, uint32 moveMode,
 	const char* newName, Undo &undo, CopyLoopControl* loopControl)
 {
 	entry_ref ref;
@@ -1780,8 +1740,7 @@ MoveItem(BEntry* entry, BDirectory* destDir, BPoint* loc, uint32 moveMode,
 }
 
 
-void
-FSDuplicate(BObjectList<entry_ref>* srcList, BList* pointList)
+void FSDuplicate(BObjectList<entry_ref>* srcList, BList* pointList)
 {
 	LaunchInNewThread("DupTask", B_NORMAL_PRIORITY, MoveTask, srcList,
 		(BEntry*)NULL, pointList, kDuplicateSelection);
@@ -1789,8 +1748,7 @@ FSDuplicate(BObjectList<entry_ref>* srcList, BList* pointList)
 
 
 #if 0
-status_t
-FSCopyFolder(BEntry* srcEntry, BDirectory* destDir,
+status_t FSCopyFolder(BEntry* srcEntry, BDirectory* destDir,
 	CopyLoopControl* loopControl, BPoint* loc, bool makeOriginalName)
 {
 	try
@@ -1803,8 +1761,7 @@ FSCopyFolder(BEntry* srcEntry, BDirectory* destDir,
 #endif
 
 
-status_t
-FSCopyAttributesAndStats(BNode* srcNode, BNode* destNode)
+status_t FSCopyAttributesAndStats(BNode* srcNode, BNode* destNode)
 {
 	char* buffer = new char[1024];
 
@@ -1855,8 +1812,7 @@ FSCopyAttributesAndStats(BNode* srcNode, BNode* destNode)
 
 
 #if 0
-status_t
-FSCopyFile(BEntry* srcFile, StatStruct* srcStat, BDirectory* destDir,
+status_t FSCopyFile(BEntry* srcFile, StatStruct* srcStat, BDirectory* destDir,
 	CopyLoopControl* loopControl, BPoint* loc, bool makeOriginalName)
 {
 	try {
@@ -1871,8 +1827,7 @@ FSCopyFile(BEntry* srcFile, StatStruct* srcStat, BDirectory* destDir,
 #endif
 
 
-static status_t
-MoveEntryToTrash(BEntry* entry, BPoint* loc, Undo &undo)
+static status_t MoveEntryToTrash(BEntry* entry, BPoint* loc, Undo &undo)
 {
 	BDirectory trash_dir;
 	entry_ref ref;
@@ -2049,8 +2004,7 @@ PreFlightNameCheck(BObjectList<entry_ref>* srcList, const BDirectory* destDir,
 }
 
 
-void
-FileStatToString(StatStruct* stat, char* buffer, int32 length)
+void FileStatToString(StatStruct* stat, char* buffer, int32 length)
 {
 	tm timeData;
 	localtime_r(&stat->st_mtime, &timeData);
@@ -2065,8 +2019,7 @@ FileStatToString(StatStruct* stat, char* buffer, int32 length)
 }
 
 
-status_t
-CheckName(uint32 moveMode, const BEntry* sourceEntry,
+status_t CheckName(uint32 moveMode, const BEntry* sourceEntry,
 	const BDirectory* destDir, bool multipleCollisions,
 	ConflictCheckResult& conflictResolution)
 {
@@ -2252,8 +2205,7 @@ CheckName(uint32 moveMode, const BEntry* sourceEntry,
 }
 
 
-status_t
-FSDeleteFolder(BEntry* dirEntry, CopyLoopControl* loopControl,
+status_t FSDeleteFolder(BEntry* dirEntry, CopyLoopControl* loopControl,
 	bool updateStatus, bool deleteTopDir, bool upateFileNameInStatus)
 {
 	BDirectory dir(dirEntry);
@@ -2305,8 +2257,7 @@ FSDeleteFolder(BEntry* dirEntry, CopyLoopControl* loopControl,
 }
 
 
-void
-FSMakeOriginalName(BString &string, const BDirectory* destDir,
+void FSMakeOriginalName(BString &string, const BDirectory* destDir,
 	const char* suffix)
 {
 	if (!destDir->Contains(string.String()))
@@ -2318,8 +2269,7 @@ FSMakeOriginalName(BString &string, const BDirectory* destDir,
 }
 
 
-void
-FSMakeOriginalName(char* name, BDirectory* destDir, const char* suffix)
+void FSMakeOriginalName(char* name, BDirectory* destDir, const char* suffix)
 {
 	char		root[B_FILE_NAME_LENGTH];
 	char		copybase[B_FILE_NAME_LENGTH];
@@ -2405,8 +2355,7 @@ FSMakeOriginalName(char* name, BDirectory* destDir, const char* suffix)
 }
 
 
-status_t
-FSRecursiveCalcSize(BInfoWindow* window, CopyLoopControl* loopControl,
+status_t FSRecursiveCalcSize(BInfoWindow* window, CopyLoopControl* loopControl,
 	BDirectory* dir, off_t* _runningSize, int32* _fileCount, int32* _dirCount)
 {
 	dir->Rewind();
@@ -2440,8 +2389,7 @@ FSRecursiveCalcSize(BInfoWindow* window, CopyLoopControl* loopControl,
 }
 
 
-status_t
-CalcItemsAndSize(CopyLoopControl* loopControl,
+status_t CalcItemsAndSize(CopyLoopControl* loopControl,
 	BObjectList<entry_ref>* refList, ssize_t blockSize, int32* totalCount,
 	off_t* totalSize)
 {
@@ -2499,8 +2447,7 @@ CalcItemsAndSize(CopyLoopControl* loopControl,
 }
 
 
-status_t
-FSGetTrashDir(BDirectory* trashDir, dev_t dev)
+status_t FSGetTrashDir(BDirectory* trashDir, dev_t dev)
 {
 	if (trashDir == NULL)
 		return B_BAD_VALUE;
@@ -2567,8 +2514,7 @@ FSGetTrashDir(BDirectory* trashDir, dev_t dev)
 #if __GNUC__ && __GNUC__ < 3
 // obsolete version of FSGetDeskDir retained for bin compat with
 // BeIDE and a few other apps that apparently use it
-status_t
-FSGetDeskDir(BDirectory* deskDir, dev_t)
+status_t FSGetDeskDir(BDirectory* deskDir, dev_t)
 {
 	// since we no longer keep a desktop directory on any volume other
 	// than /boot, redirect to FSGetDeskDir ignoring the volume argument
@@ -2577,8 +2523,7 @@ FSGetDeskDir(BDirectory* deskDir, dev_t)
 #endif // __GNUC__ && __GNUC__ < 3
 
 
-status_t
-FSGetDeskDir(BDirectory* deskDir)
+status_t FSGetDeskDir(BDirectory* deskDir)
 {
 	if (deskDir == NULL)
 		return B_BAD_VALUE;
@@ -2619,8 +2564,7 @@ FSGetDeskDir(BDirectory* deskDir)
 }
 
 
-status_t
-FSGetBootDeskDir(BDirectory* deskDir)
+status_t FSGetBootDeskDir(BDirectory* deskDir)
 {
 	BVolume bootVolume;
 	BVolumeRoster().GetBootVolume(&bootVolume);
@@ -2635,8 +2579,7 @@ FSGetBootDeskDir(BDirectory* deskDir)
 }
 
 
-static bool
-FSIsDirFlavor(const BEntry* entry, directory_which directoryType)
+static bool FSIsDirFlavor(const BEntry* entry, directory_which directoryType)
 {
 	StatStruct dir_stat;
 	StatStruct entry_stat;
@@ -2659,22 +2602,19 @@ FSIsDirFlavor(const BEntry* entry, directory_which directoryType)
 }
 
 
-bool
-FSIsPrintersDir(const BEntry* entry)
+bool FSIsPrintersDir(const BEntry* entry)
 {
 	return FSIsDirFlavor(entry, B_USER_PRINTERS_DIRECTORY);
 }
 
 
-bool
-FSIsTrashDir(const BEntry* entry)
+bool FSIsTrashDir(const BEntry* entry)
 {
 	return FSIsDirFlavor(entry, B_TRASH_DIRECTORY);
 }
 
 
-bool
-FSIsDeskDir(const BEntry* entry)
+bool FSIsDeskDir(const BEntry* entry)
 {
 	BPath path;
 	status_t result = find_directory(B_DESKTOP_DIRECTORY, &path, true);
@@ -2686,23 +2626,20 @@ FSIsDeskDir(const BEntry* entry)
 }
 
 
-bool
-FSIsHomeDir(const BEntry* entry)
+bool FSIsHomeDir(const BEntry* entry)
 {
 	return FSIsDirFlavor(entry, B_USER_DIRECTORY);
 }
 
 
-bool
-FSIsRootDir(const BEntry* entry)
+bool FSIsRootDir(const BEntry* entry)
 {
 	BPath path(entry);
 	return path == "/";
 }
 
 
-bool
-DirectoryMatchesOrContains(const BEntry* entry, directory_which which)
+bool DirectoryMatchesOrContains(const BEntry* entry, directory_which which)
 {
 	BPath path;
 	if (find_directory(which, &path, false, NULL) != B_OK)
@@ -2721,8 +2658,7 @@ DirectoryMatchesOrContains(const BEntry* entry, directory_which which)
 }
 
 
-bool
-DirectoryMatchesOrContains(const BEntry* entry, const char* additionalPath,
+bool DirectoryMatchesOrContains(const BEntry* entry, const char* additionalPath,
 	directory_which which)
 {
 	BPath path;
@@ -2743,8 +2679,7 @@ DirectoryMatchesOrContains(const BEntry* entry, const char* additionalPath,
 }
 
 
-bool
-DirectoryMatches(const BEntry* entry, directory_which which)
+bool DirectoryMatches(const BEntry* entry, directory_which which)
 {
 	BPath path;
 	if (find_directory(which, &path, false, NULL) != B_OK)
@@ -2758,8 +2693,7 @@ DirectoryMatches(const BEntry* entry, directory_which which)
 }
 
 
-bool
-DirectoryMatches(const BEntry* entry, const char* additionalPath,
+bool DirectoryMatches(const BEntry* entry, const char* additionalPath,
 	directory_which which)
 {
 	BPath path;
@@ -2775,8 +2709,7 @@ DirectoryMatches(const BEntry* entry, const char* additionalPath,
 }
 
 
-extern status_t
-FSFindTrackerSettingsDir(BPath* path, bool autoCreate)
+extern status_t FSFindTrackerSettingsDir(BPath* path, bool autoCreate)
 {
 	status_t result = find_directory(B_USER_SETTINGS_DIRECTORY, path,
 		autoCreate);
@@ -2789,8 +2722,7 @@ FSFindTrackerSettingsDir(BPath* path, bool autoCreate)
 }
 
 
-bool
-FSInTrashDir(const entry_ref* ref)
+bool FSInTrashDir(const entry_ref* ref)
 {
 	BEntry entry(ref);
 	if (entry.InitCheck() != B_OK)
@@ -2804,8 +2736,7 @@ FSInTrashDir(const entry_ref* ref)
 }
 
 
-void
-FSEmptyTrash()
+void FSEmptyTrash()
 {
 	if (find_thread("_tracker_empty_trash_") != B_OK) {
 		resume_thread(spawn_thread(empty_trash, "_tracker_empty_trash_",
@@ -2814,8 +2745,7 @@ FSEmptyTrash()
 }
 
 
-status_t
-empty_trash(void*)
+status_t empty_trash(void*)
 {
 	// empty trash on all mounted volumes
 	status_t status = B_OK;
@@ -2883,8 +2813,7 @@ empty_trash(void*)
 }
 
 
-status_t
-_DeleteTask(BObjectList<entry_ref>* list, bool confirm)
+status_t _DeleteTask(BObjectList<entry_ref>* list, bool confirm)
 {
 	if (confirm) {
 		bool dontMoveToTrash = TrackerSettings().DontMoveFilesToTrash();
@@ -2961,8 +2890,7 @@ _DeleteTask(BObjectList<entry_ref>* list, bool confirm)
 	return B_OK;
 }
 
-status_t
-FSRecursiveCreateFolder(BPath path)
+status_t FSRecursiveCreateFolder(BPath path)
 {
 	BEntry entry(path.Path());
 	if (entry.InitCheck() != B_OK) {
@@ -2987,8 +2915,7 @@ FSRecursiveCreateFolder(BPath path)
 	return B_OK;
 }
 
-status_t
-_RestoreTask(BObjectList<entry_ref>* list)
+status_t _RestoreTask(BObjectList<entry_ref>* list)
 {
 	TrackerCopyLoopControl loopControl(kRestoreFromTrashState);
 
@@ -3050,8 +2977,7 @@ _RestoreTask(BObjectList<entry_ref>* list)
 	return err;
 }
 
-void
-FSCreateTrashDirs()
+void FSCreateTrashDirs()
 {
 	BVolume volume;
 	BVolumeRoster roster;
@@ -3067,8 +2993,7 @@ FSCreateTrashDirs()
 }
 
 
-status_t
-FSCreateNewFolder(const entry_ref* ref)
+status_t FSCreateNewFolder(const entry_ref* ref)
 {
 	node_ref node;
 	node.device = ref->device;
@@ -3095,8 +3020,7 @@ FSCreateNewFolder(const entry_ref* ref)
 }
 
 
-status_t
-FSCreateNewFolderIn(const node_ref* dirNode, entry_ref* newRef,
+status_t FSCreateNewFolderIn(const node_ref* dirNode, entry_ref* newRef,
 	node_ref* newNode)
 {
 	BDirectory dir(dirNode);
@@ -3200,8 +3124,7 @@ GetAttrInfo(const BNode* node, const char* hostAttrName,
 }
 
 
-status_t
-FSGetParentVirtualDirectoryAware(const BEntry& entry, entry_ref& _ref)
+status_t FSGetParentVirtualDirectoryAware(const BEntry& entry, entry_ref& _ref)
 {
 	node_ref nodeRef;
 	if (entry.GetNodeRef(&nodeRef) == B_OK) {
@@ -3228,8 +3151,7 @@ FSGetParentVirtualDirectoryAware(const BEntry& entry, entry_ref& _ref)
 }
 
 
-status_t
-FSGetParentVirtualDirectoryAware(const BEntry& entry, BEntry& _entry)
+status_t FSGetParentVirtualDirectoryAware(const BEntry& entry, BEntry& _entry)
 {
 	node_ref nodeRef;
 	if (entry.GetNodeRef(&nodeRef) == B_OK) {
@@ -3248,8 +3170,7 @@ FSGetParentVirtualDirectoryAware(const BEntry& entry, BEntry& _entry)
 }
 
 
-status_t
-FSGetParentVirtualDirectoryAware(const BEntry& entry, BNode& _node)
+status_t FSGetParentVirtualDirectoryAware(const BEntry& entry, BNode& _node)
 {
 	entry_ref ref;
 	status_t error = FSGetParentVirtualDirectoryAware(entry, ref);
@@ -3261,8 +3182,7 @@ FSGetParentVirtualDirectoryAware(const BEntry& entry, BNode& _node)
 
 // launching code
 
-static status_t
-TrackerOpenWith(const BMessage* refs)
+static status_t TrackerOpenWith(const BMessage* refs)
 {
 	BMessage clone(*refs);
 
@@ -3277,8 +3197,7 @@ TrackerOpenWith(const BMessage* refs)
 }
 
 
-static void
-AsynchLaunchBinder(void (*func)(const entry_ref*, const BMessage*, bool on),
+static void AsynchLaunchBinder(void (*func)(const entry_ref*, const BMessage*, bool on),
 	const entry_ref* appRef, const BMessage* refs, bool openWithOK)
 {
 	BMessage* task = new BMessage;
@@ -3293,8 +3212,7 @@ AsynchLaunchBinder(void (*func)(const entry_ref*, const BMessage*, bool on),
 }
 
 
-static bool
-SniffIfGeneric(const entry_ref* ref)
+static bool SniffIfGeneric(const entry_ref* ref)
 {
 	BNode node(ref);
 	char type[B_MIME_TYPE_LENGTH];
@@ -3316,8 +3234,7 @@ SniffIfGeneric(const entry_ref* ref)
 }
 
 
-static void
-SniffIfGeneric(const BMessage* refs)
+static void SniffIfGeneric(const BMessage* refs)
 {
 	entry_ref ref;
 	for (int32 index = 0; ; index++) {
@@ -3328,8 +3245,7 @@ SniffIfGeneric(const BMessage* refs)
 }
 
 
-static void
-_TrackerLaunchAppWithDocuments(const entry_ref* appRef, const BMessage* refs,
+static void _TrackerLaunchAppWithDocuments(const entry_ref* appRef, const BMessage* refs,
 	bool openWithOK)
 {
 	team_id team;
@@ -3389,8 +3305,7 @@ _TrackerLaunchAppWithDocuments(const entry_ref* appRef, const BMessage* refs,
 extern "C" char** environ;
 
 
-static status_t
-LoaderErrorDetails(const entry_ref* app, BString &details)
+static status_t LoaderErrorDetails(const entry_ref* app, BString &details)
 {
 	BPath path;
 	BEntry appEntry(app, true);
@@ -3488,8 +3403,7 @@ LoaderErrorDetails(const entry_ref* app, BString &details)
 }
 
 
-static void
-_TrackerLaunchDocuments(const entry_ref*, const BMessage* refs,
+static void _TrackerLaunchDocuments(const entry_ref*, const BMessage* refs,
 	bool openWithOK)
 {
 	if (refs == NULL)
@@ -3698,10 +3612,8 @@ _TrackerLaunchDocuments(const entry_ref*, const BMessage* refs,
 }
 
 // the following three calls don't return any reasonable error codes,
-// should fix that, making them void
-
-status_t
-TrackerLaunch(const entry_ref* appRef, const BMessage* refs, bool async,
+// should fix that, making them void 
+status_t TrackerLaunch(const entry_ref* appRef, const BMessage* refs, bool async,
 	bool openWithOK)
 {
 	if (!async)
@@ -3714,8 +3626,7 @@ TrackerLaunch(const entry_ref* appRef, const BMessage* refs, bool async,
 	return B_OK;
 }
 
-status_t
-TrackerLaunch(const entry_ref* appRef, bool async)
+status_t TrackerLaunch(const entry_ref* appRef, bool async)
 {
 	if (!async)
 		_TrackerLaunchAppWithDocuments(appRef, NULL, false);
@@ -3725,8 +3636,7 @@ TrackerLaunch(const entry_ref* appRef, bool async)
 	return B_OK;
 }
 
-status_t
-TrackerLaunch(const BMessage* refs, bool async, bool openWithOK)
+status_t TrackerLaunch(const BMessage* refs, bool async, bool openWithOK)
 {
 	if (!async)
 		_TrackerLaunchDocuments(NULL, refs, openWithOK);
@@ -3736,8 +3646,7 @@ TrackerLaunch(const BMessage* refs, bool async, bool openWithOK)
 	return B_OK;
 }
 
-status_t
-LaunchBrokenLink(const char* signature, const BMessage* refs)
+status_t LaunchBrokenLink(const char* signature, const BMessage* refs)
 {
 	// This call is to support a hacky workaround for double-clicking
 	// broken refs for cifs
@@ -3752,8 +3661,7 @@ LaunchBrokenLink(const char* signature, const BMessage* refs)
 #if !B_BEOS_VERSION_DANO
 _IMPEXP_TRACKER
 #endif
-status_t
-FSLaunchItem(const entry_ref* application, const BMessage* refsReceived,
+status_t FSLaunchItem(const entry_ref* application, const BMessage* refsReceived,
 	bool async, bool openWithOK)
 {
 	return TrackerLaunch(application, refsReceived, async, openWithOK);
@@ -3763,8 +3671,7 @@ FSLaunchItem(const entry_ref* application, const BMessage* refsReceived,
 #if !B_BEOS_VERSION_DANO
 _IMPEXP_TRACKER
 #endif
-status_t
-FSOpenWith(BMessage* listOfRefs)
+status_t FSOpenWith(BMessage* listOfRefs)
 {
 	status_t result = B_ERROR;
 	listOfRefs->what = B_REFS_RECEIVED;
@@ -3781,16 +3688,14 @@ FSOpenWith(BMessage* listOfRefs)
 // legacy calls, need for compatibility
 
 
-void
-FSOpenWithDocuments(const entry_ref* executable, BMessage* documents)
+void FSOpenWithDocuments(const entry_ref* executable, BMessage* documents)
 {
 	TrackerLaunch(executable, documents, true);
 	delete documents;
 }
 
 
-status_t
-FSLaunchUsing(const entry_ref* ref, BMessage* listOfRefs)
+status_t FSLaunchUsing(const entry_ref* ref, BMessage* listOfRefs)
 {
 	BMessage temp(B_REFS_RECEIVED);
 	if (listOfRefs == NULL) {
@@ -3804,8 +3709,7 @@ FSLaunchUsing(const entry_ref* ref, BMessage* listOfRefs)
 }
 
 
-status_t
-FSLaunchItem(const entry_ref* appRef, BMessage* refs, int32, bool async)
+status_t FSLaunchItem(const entry_ref* appRef, BMessage* refs, int32, bool async)
 {
 	if (refs != NULL)
 		refs->what = B_REFS_RECEIVED;
@@ -3817,16 +3721,14 @@ FSLaunchItem(const entry_ref* appRef, BMessage* refs, int32, bool async)
 }
 
 
-void
-FSLaunchItem(const entry_ref* appRef, BMessage* refs, int32 workspace)
+void FSLaunchItem(const entry_ref* appRef, BMessage* refs, int32 workspace)
 {
 	FSLaunchItem(appRef, refs, workspace, true);
 }
 
 
 // Get the original path of an entry in the trash
-status_t
-FSGetOriginalPath(BEntry* entry, BPath* result)
+status_t FSGetOriginalPath(BEntry* entry, BPath* result)
 {
 	status_t err;
 	entry_ref ref;
@@ -3929,16 +3831,14 @@ WellKnowEntryList::MatchEntryCommon(const node_ref* node)
 }
 
 
-void
-WellKnowEntryList::Quit()
+void WellKnowEntryList::Quit()
 {
 	delete self;
 	self = NULL;
 }
 
 
-void
-WellKnowEntryList::AddOne(directory_which which, const char* name)
+void WellKnowEntryList::AddOne(directory_which which, const char* name)
 {
 	BPath path;
 	if (find_directory(which, &path, true) != B_OK)
@@ -3953,8 +3853,7 @@ WellKnowEntryList::AddOne(directory_which which, const char* name)
 }
 
 
-void
-WellKnowEntryList::AddOne(directory_which which, directory_which base,
+void WellKnowEntryList::AddOne(directory_which which, directory_which base,
 	const char* extra, const char* name)
 {
 	BPath path;
@@ -3971,8 +3870,7 @@ WellKnowEntryList::AddOne(directory_which which, directory_which base,
 }
 
 
-void
-WellKnowEntryList::AddOne(directory_which which, const char* path,
+void WellKnowEntryList::AddOne(directory_which which, const char* path,
 	const char* name)
 {
 	BEntry entry(path, true);

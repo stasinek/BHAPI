@@ -254,8 +254,7 @@ _VECTOR_CLASS_NAME::~Vector()
 	- \c B_NO_MEMORY: Insufficient memory for this operation.
 */
 _VECTOR_TEMPLATE_LIST
-status_t
-_VECTOR_CLASS_NAME::PushFront(const Value &value)
+status_t _VECTOR_CLASS_NAME::PushFront(const Value &value)
 {
 	return Insert(value, 0);
 }
@@ -268,8 +267,7 @@ _VECTOR_CLASS_NAME::PushFront(const Value &value)
 	- \c B_NO_MEMORY: Insufficient memory for this operation.
 */
 _VECTOR_TEMPLATE_LIST
-status_t
-_VECTOR_CLASS_NAME::PushBack(const Value &value)
+status_t _VECTOR_CLASS_NAME::PushBack(const Value &value)
 {
 	return Insert(value, fItemCount);
 }
@@ -280,8 +278,7 @@ _VECTOR_CLASS_NAME::PushBack(const Value &value)
 	Invocation on an empty vector is harmless.
 */
 _VECTOR_TEMPLATE_LIST
-void
-_VECTOR_CLASS_NAME::PopFront()
+void _VECTOR_CLASS_NAME::PopFront()
 {
 	if (fItemCount > 0)
 		Erase(0);
@@ -293,8 +290,7 @@ _VECTOR_CLASS_NAME::PopFront()
 	Invocation on an empty vector is harmless.
 */
 _VECTOR_TEMPLATE_LIST
-void
-_VECTOR_CLASS_NAME::PopBack()
+void _VECTOR_CLASS_NAME::PopBack()
 {
 	if (fItemCount > 0)
 		Erase(fItemCount - 1);
@@ -309,8 +305,7 @@ _VECTOR_CLASS_NAME::PopBack()
 */
 _VECTOR_TEMPLATE_LIST
 inline
-void
-_VECTOR_CLASS_NAME::_MoveItems(Value* items, int32 offset, int32 count)
+void _VECTOR_CLASS_NAME::_MoveItems(Value* items, int32 offset, int32 count)
 {
 	if (count > 0 && offset != 0)
 		memmove(items + offset, items, count * sizeof(Value));
@@ -327,8 +322,7 @@ _VECTOR_CLASS_NAME::_MoveItems(Value* items, int32 offset, int32 count)
 	- \c B_NO_MEMORY: Insufficient memory for this operation.
 */
 _VECTOR_TEMPLATE_LIST
-status_t
-_VECTOR_CLASS_NAME::Insert(const Value &value, int32 index)
+status_t _VECTOR_CLASS_NAME::Insert(const Value &value, int32 index)
 {
 	if (index < 0 || index > fItemCount)
 		return B_BAD_VALUE;
@@ -350,8 +344,7 @@ _VECTOR_CLASS_NAME::Insert(const Value &value, int32 index)
 	- \c B_NO_MEMORY: Insufficient memory for this operation.
 */
 _VECTOR_TEMPLATE_LIST
-status_t
-_VECTOR_CLASS_NAME::Insert(const Value &value, const Iterator &iterator)
+status_t _VECTOR_CLASS_NAME::Insert(const Value &value, const Iterator &iterator)
 {
 	int32 index = _IteratorIndex(iterator);
 	if (index >= 0)
@@ -365,8 +358,7 @@ _VECTOR_CLASS_NAME::Insert(const Value &value, const Iterator &iterator)
 	\return The number of removed occurrences.
 */
 _VECTOR_TEMPLATE_LIST
-int32
-_VECTOR_CLASS_NAME::Remove(const Value &value)
+int32 _VECTOR_CLASS_NAME::Remove(const Value &value)
 {
 	int32 count = 0;
 	for (int32 i = fItemCount - 1; i >= 0; i--) {
@@ -422,8 +414,7 @@ _VECTOR_CLASS_NAME::Erase(const Iterator &iterator)
 */
 _VECTOR_TEMPLATE_LIST
 inline
-int32
-_VECTOR_CLASS_NAME::Count() const
+int32 _VECTOR_CLASS_NAME::Count() const
 {
 	return fItemCount;
 }
@@ -434,8 +425,7 @@ _VECTOR_CLASS_NAME::Count() const
 */
 _VECTOR_TEMPLATE_LIST
 inline
-bool
-_VECTOR_CLASS_NAME::IsEmpty() const
+bool _VECTOR_CLASS_NAME::IsEmpty() const
 {
 	return (fItemCount == 0);
 }
@@ -444,8 +434,7 @@ _VECTOR_CLASS_NAME::IsEmpty() const
 /*!	\brief Removes all elements from the vector.
 */
 _VECTOR_TEMPLATE_LIST
-void
-_VECTOR_CLASS_NAME::MakeEmpty()
+void _VECTOR_CLASS_NAME::MakeEmpty()
 {
 	for (int32 i = 0; i < fItemCount; i++)
 		fItems[i].~Value();
@@ -620,8 +609,7 @@ _VECTOR_CLASS_NAME::ElementAt(int32 index)
 			with the given value could be found or \a index is out of range.
 */
 _VECTOR_TEMPLATE_LIST
-int32
-_VECTOR_CLASS_NAME::IndexOf(const Value &value, int32 start) const
+int32 _VECTOR_CLASS_NAME::IndexOf(const Value &value, int32 start) const
 {
 	if (start >= 0) {
 		for (int32 i = start; i < fItemCount; i++) {
@@ -738,8 +726,7 @@ _VECTOR_CLASS_NAME::operator[](int32 index) const
 			allocation failed.
 */
 _VECTOR_TEMPLATE_LIST
-bool
-_VECTOR_CLASS_NAME::_Resize(size_t count)
+bool _VECTOR_CLASS_NAME::_Resize(size_t count)
 {
 	bool result = true;
 	// calculate the new capacity
@@ -769,8 +756,7 @@ _VECTOR_CLASS_NAME::_Resize(size_t count)
 */
 _VECTOR_TEMPLATE_LIST
 inline
-int32
-_VECTOR_CLASS_NAME::_IteratorIndex(const Iterator &iterator) const
+int32 _VECTOR_CLASS_NAME::_IteratorIndex(const Iterator &iterator) const
 {
 	if (iterator.Element()) {
 		int32 index = iterator.Element() - fItems;
@@ -788,8 +774,7 @@ _VECTOR_CLASS_NAME::_IteratorIndex(const Iterator &iterator) const
 */
 _VECTOR_TEMPLATE_LIST
 inline
-int32
-_VECTOR_CLASS_NAME::_IteratorIndex(const ConstIterator &iterator) const
+int32 _VECTOR_CLASS_NAME::_IteratorIndex(const ConstIterator &iterator) const
 {
 	if (iterator.Element()) {
 		int32 index = iterator.Element() - fItems;

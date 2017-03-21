@@ -52,22 +52,19 @@ PendingNodeMonitorEntry::PendingNodeMonitorEntry(const node_ref* node,
 }
 
 
-const BMessage*
-PendingNodeMonitorEntry::NodeMonitor() const
+const BMessage*  PendingNodeMonitorEntry::NodeMonitor() const
 {
 	return &fNodeMonitor;
 }
 
 
-bool
-PendingNodeMonitorEntry::Match(const node_ref* node) const
+bool PendingNodeMonitorEntry::Match(const node_ref* node) const
 {
 	return fNode == *node;
 }
 
 
-bool
-PendingNodeMonitorEntry::TooOld(bigtime_t now) const
+bool PendingNodeMonitorEntry::TooOld(bigtime_t now) const
 {
 	return now > fExpiresAfter;
 }
@@ -85,8 +82,7 @@ PendingNodeMonitorCache::~PendingNodeMonitorCache()
 }
 
 
-void
-PendingNodeMonitorCache::Add(const BMessage* message)
+void PendingNodeMonitorCache::Add(const BMessage* message)
 {
 #if xDEBUG
 	PRINT(("adding pending node monitor\n"));
@@ -101,8 +97,7 @@ PendingNodeMonitorCache::Add(const BMessage* message)
 }
 
 
-void
-PendingNodeMonitorCache::RemoveEntries(const node_ref* nodeRef)
+void PendingNodeMonitorCache::RemoveEntries(const node_ref* nodeRef)
 {
 	int32 count = fList.CountItems();
 	for (int32 index = count - 1; index >= 0; index--)
@@ -111,8 +106,7 @@ PendingNodeMonitorCache::RemoveEntries(const node_ref* nodeRef)
 }
 
 
-void
-PendingNodeMonitorCache::RemoveOldEntries()
+void PendingNodeMonitorCache::RemoveOldEntries()
 {
 	bigtime_t now = system_time();
 	int32 count = fList.CountItems();
@@ -124,8 +118,7 @@ PendingNodeMonitorCache::RemoveOldEntries()
 }
 
 
-void
-PendingNodeMonitorCache::PoseCreatedOrMoved(BPoseView* poseView,
+void PendingNodeMonitorCache::PoseCreatedOrMoved(BPoseView* poseView,
 	const BPose* pose)
 {
 	bigtime_t now = system_time();

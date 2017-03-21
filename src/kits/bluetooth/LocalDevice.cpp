@@ -85,8 +85,7 @@ LocalDevice::GetLocalDevice(const bdaddr_t bdaddr)
 }
 
 
-uint32
-LocalDevice::GetLocalDeviceCount()
+uint32 LocalDevice::GetLocalDeviceCount()
 {
 	BMessenger* messenger = _RetrieveBluetoothMessenger();
 	uint32 count = 0;
@@ -123,8 +122,7 @@ LocalDevice::GetProperty(const char* property)
 }
 
 
-status_t
-LocalDevice::GetProperty(const char* property, uint32* value)
+status_t LocalDevice::GetProperty(const char* property, uint32* value)
 {
 	if (fMessenger == NULL)
 		return B_ERROR;
@@ -174,8 +172,7 @@ LocalDevice::GetDiscoverable()
 }
 
 
-status_t
-LocalDevice::SetDiscoverable(int mode)
+status_t LocalDevice::SetDiscoverable(int mode)
 {
 	if (fMessenger == NULL)
 		return B_ERROR;
@@ -215,8 +212,7 @@ struct authentication_t {
 	uint8 param;
 };
 
-status_t
-LocalDevice::SetAuthentication(bool authentication)
+status_t LocalDevice::SetAuthentication(bool authentication)
 {
 	return SingleParameterCommandRequest<struct authentication_t, uint8>
 		(OGF_CONTROL_BASEBAND, OCF_WRITE_AUTH_ENABLE, authentication,
@@ -293,8 +289,7 @@ LocalDevice::GetFriendlyName()
 }
 
 
-status_t
-LocalDevice::SetFriendlyName(BString& name)
+status_t LocalDevice::SetFriendlyName(BString& name)
 {
 	int8 btStatus = BT_ERROR;
 
@@ -361,8 +356,7 @@ LocalDevice::GetDeviceClass()
 }
 
 
-status_t
-LocalDevice::SetDeviceClass(DeviceClass deviceClass)
+status_t LocalDevice::SetDeviceClass(DeviceClass deviceClass)
 {
 	int8 bt_status = BT_ERROR;
 
@@ -394,8 +388,7 @@ LocalDevice::SetDeviceClass(DeviceClass deviceClass)
 }
 
 
-status_t
-LocalDevice::_ReadLocalVersion()
+status_t LocalDevice::_ReadLocalVersion()
 {
 	int8 bt_status = BT_ERROR;
 
@@ -419,8 +412,7 @@ LocalDevice::_ReadLocalVersion()
 }
 
 
-status_t
-LocalDevice::_ReadBufferSize()
+status_t LocalDevice::_ReadBufferSize()
 {
 	int8 bt_status = BT_ERROR;
 
@@ -444,8 +436,7 @@ LocalDevice::_ReadBufferSize()
 }
 
 
-status_t
-LocalDevice::_ReadLocalFeatures()
+status_t LocalDevice::_ReadLocalFeatures()
 {
 	int8 bt_status = BT_ERROR;
 
@@ -469,8 +460,7 @@ LocalDevice::_ReadLocalFeatures()
 }
 
 
-status_t
-LocalDevice::_ReadLinkKeys()
+status_t LocalDevice::_ReadLinkKeys()
 {
 	int8 bt_status = BT_ERROR;
 
@@ -501,8 +491,7 @@ struct pageTimeout_t {
 	uint16 param;
 };
 
-status_t
-LocalDevice::_ReadTimeouts()
+status_t LocalDevice::_ReadTimeouts()
 {
 
 	// Read PageTimeout
@@ -521,8 +510,7 @@ LocalDevice::_ReadTimeouts()
 }
 
 
-status_t
-LocalDevice::Reset()
+status_t LocalDevice::Reset()
 {
 	int8 bt_status = BT_ERROR;
 
@@ -551,8 +539,7 @@ LocalDevice::getRecord(Connection notifier) {
 
 }
 
-void
-LocalDevice::updateRecord(ServiceRecord srvRecord) {
+void LocalDevice::updateRecord(ServiceRecord srvRecord) {
 
 }
 */

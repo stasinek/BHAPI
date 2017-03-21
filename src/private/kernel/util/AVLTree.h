@@ -214,8 +214,7 @@ AVLTree<Definition>::~AVLTree()
 
 
 template<typename Definition>
-inline void
-AVLTree<Definition>::Clear()
+inline void AVLTree<Definition>::Clear()
 {
 	fTree.MakeEmpty();
 }
@@ -308,8 +307,7 @@ AVLTree<Definition>::FindClosest(const Key& key, bool less) const
 
 
 template<typename Definition>
-status_t
-AVLTree<Definition>::Insert(Value* value, Iterator* iterator)
+status_t AVLTree<Definition>::Insert(Value* value, Iterator* iterator)
 {
 	AVLTreeNode* node = _GetAVLTreeNode(value);
 	status_t error = fTree.Insert(node);
@@ -333,8 +331,7 @@ AVLTree<Definition>::Remove(const Key& key)
 
 
 template<typename Definition>
-bool
-AVLTree<Definition>::Remove(Value* value)
+bool AVLTree<Definition>::Remove(Value* value)
 {
 	return fTree.Remove(_GetAVLTreeNode(value));
 }

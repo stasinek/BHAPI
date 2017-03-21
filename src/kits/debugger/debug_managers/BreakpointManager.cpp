@@ -36,15 +36,13 @@ BreakpointManager::~BreakpointManager()
 }
 
 
-status_t
-BreakpointManager::Init()
+status_t BreakpointManager::Init()
 {
 	return fLock.InitCheck();
 }
 
 
-status_t
-BreakpointManager::InstallUserBreakpoint(UserBreakpoint* userBreakpoint,
+status_t BreakpointManager::InstallUserBreakpoint(UserBreakpoint* userBreakpoint,
 	bool enabled)
 {
 	TRACE_CONTROL("BreakpointManager::InstallUserBreakpoint(%p, %d)\n",
@@ -181,8 +179,7 @@ BreakpointManager::InstallUserBreakpoint(UserBreakpoint* userBreakpoint,
 }
 
 
-void
-BreakpointManager::UninstallUserBreakpoint(UserBreakpoint* userBreakpoint)
+void BreakpointManager::UninstallUserBreakpoint(UserBreakpoint* userBreakpoint)
 {
 	AutoLocker<BLocker> installLocker(fLock);
 	AutoLocker<Team> teamLocker(fTeam);
@@ -228,8 +225,7 @@ BreakpointManager::UninstallUserBreakpoint(UserBreakpoint* userBreakpoint)
 }
 
 
-status_t
-BreakpointManager::InstallTemporaryBreakpoint(target_addr_t address,
+status_t BreakpointManager::InstallTemporaryBreakpoint(target_addr_t address,
 	BreakpointClient* client)
 {
 	AutoLocker<BLocker> installLocker(fLock);
@@ -281,8 +277,7 @@ BreakpointManager::InstallTemporaryBreakpoint(target_addr_t address,
 }
 
 
-void
-BreakpointManager::UninstallTemporaryBreakpoint(target_addr_t address,
+void BreakpointManager::UninstallTemporaryBreakpoint(target_addr_t address,
 	BreakpointClient* client)
 {
 	AutoLocker<BLocker> installLocker(fLock);
@@ -313,22 +308,19 @@ BreakpointManager::UninstallTemporaryBreakpoint(target_addr_t address,
 }
 
 
-void
-BreakpointManager::UpdateImageBreakpoints(Image* image)
+void BreakpointManager::UpdateImageBreakpoints(Image* image)
 {
 	_UpdateImageBreakpoints(image, false);
 }
 
 
-void
-BreakpointManager::RemoveImageBreakpoints(Image* image)
+void BreakpointManager::RemoveImageBreakpoints(Image* image)
 {
 	_UpdateImageBreakpoints(image, true);
 }
 
 
-void
-BreakpointManager::_UpdateImageBreakpoints(Image* image, bool removeOnly)
+void BreakpointManager::_UpdateImageBreakpoints(Image* image, bool removeOnly)
 {
 	AutoLocker<BLocker> installLocker(fLock);
 	AutoLocker<Team> teamLocker(fTeam);
@@ -480,8 +472,7 @@ BreakpointManager::_UpdateImageBreakpoints(Image* image, bool removeOnly)
 }
 
 
-status_t
-BreakpointManager::_UpdateBreakpointInstallation(Breakpoint* breakpoint)
+status_t BreakpointManager::_UpdateBreakpointInstallation(Breakpoint* breakpoint)
 {
 	bool shouldBeInstalled = breakpoint->ShouldBeInstalled();
 

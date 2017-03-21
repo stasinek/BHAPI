@@ -45,15 +45,13 @@ BMediaDecoder::~BMediaDecoder()
 }
 
 
-status_t 
-BMediaDecoder::InitCheck() const
+status_t BMediaDecoder::InitCheck() const
 {
 	return fInitStatus;
 }
 
 
-status_t 
-BMediaDecoder::SetTo(const media_format *in_format,
+status_t BMediaDecoder::SetTo(const media_format *in_format,
 					 const void *info,
 					 size_t info_size)
 {
@@ -83,8 +81,7 @@ fail:
 }
 
 
-status_t 
-BMediaDecoder::SetTo(const media_codec_info *mci)
+status_t BMediaDecoder::SetTo(const media_codec_info *mci)
 {
 	gPluginManager.DestroyDecoder(fDecoder);
 	fDecoder = NULL;
@@ -116,8 +113,7 @@ fail:
  *	use of a different decoder.
  */
 
-status_t 
-BMediaDecoder::SetInputFormat(const media_format *in_format,
+status_t BMediaDecoder::SetInputFormat(const media_format *in_format,
 							  const void *in_info,
 							  size_t in_size)
 {
@@ -135,8 +131,7 @@ BMediaDecoder::SetInputFormat(const media_format *in_format,
  *	specified any wildcards.
  */
 
-status_t 
-BMediaDecoder::SetOutputFormat(media_format *output_format)
+status_t BMediaDecoder::SetOutputFormat(media_format *output_format)
 {
 	if (!fDecoder)
 		return B_NO_INIT;
@@ -158,8 +153,7 @@ BMediaDecoder::SetOutputFormat(media_format *output_format)
  *	add-on calling the derived class' GetNextChunk() function.
  */
 
-status_t 
-BMediaDecoder::Decode(void *out_buffer, 
+status_t BMediaDecoder::Decode(void *out_buffer, 
 					  int64 *out_frameCount,
 					  media_header *out_mh, 
 					  media_decode_info *info)
@@ -171,8 +165,7 @@ BMediaDecoder::Decode(void *out_buffer,
 }
 
 
-status_t 
-BMediaDecoder::GetDecoderInfo(media_codec_info *out_info) const
+status_t BMediaDecoder::GetDecoderInfo(media_codec_info *out_info) const
 {
 	if (!fDecoder)
 		return B_NO_INIT;
@@ -196,8 +189,7 @@ BMediaDecoder::BMediaDecoder(const BMediaDecoder &);
 BMediaDecoder::BMediaDecoder & operator=(const BMediaDecoder &);
 */
 
-status_t
-BMediaDecoder::AttachToDecoder()
+status_t BMediaDecoder::AttachToDecoder()
 {
 	class MediaDecoderChunkProvider : public ChunkProvider {
 	private:
@@ -264,8 +256,7 @@ BMediaBufferDecoder::BMediaBufferDecoder(const media_codec_info *mci)
 }
 
 
-status_t 
-BMediaBufferDecoder::DecodeBuffer(const void *input_buffer, 
+status_t BMediaBufferDecoder::DecodeBuffer(const void *input_buffer, 
 								  size_t input_size,
 								  void *out_buffer, 
 								  int64 *out_frameCount,
@@ -283,8 +274,7 @@ BMediaBufferDecoder::DecodeBuffer(const void *input_buffer,
  *************************************************************/
 
 /* virtual */
-status_t
-BMediaBufferDecoder::GetNextChunk(const void **chunkData,
+status_t BMediaBufferDecoder::GetNextChunk(const void **chunkData,
 								  size_t *chunkLen,
                                   media_header *mh)
 {

@@ -144,8 +144,7 @@ getifaddrs(struct ifaddrs** _ifaddrs)
 }
 
 
-void
-freeifaddrs(struct ifaddrs* ifa)
+void freeifaddrs(struct ifaddrs* ifa)
 {
 	while (ifa != NULL) {
 		free((void*)ifa->ifa_name);

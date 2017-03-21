@@ -37,8 +37,7 @@ ExpressionValueNode::GetType() const
 }
 
 
-status_t
-ExpressionValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
+status_t ExpressionValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 	ValueLocation*& _location, Value*& _value)
 {
 	return B_NOT_SUPPORTED;
@@ -85,8 +84,7 @@ ExpressionValueNodeChild::Parent() const
 }
 
 
-status_t
-ExpressionValueNodeChild::ResolveLocation(ValueLoader* valueLoader,
+status_t ExpressionValueNodeChild::ResolveLocation(ValueLoader* valueLoader,
 	ValueLocation*& _location)
 {
 	_location = NULL;

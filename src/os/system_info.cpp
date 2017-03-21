@@ -5,7 +5,7 @@
  */
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 
@@ -64,8 +64,7 @@ typedef struct {
 } legacy_system_info;
 
 
-extern "C" status_t
-_get_system_info(legacy_system_info* info, size_t size)
+extern "C" status_t _get_system_info(legacy_system_info* info, size_t size)
 {
 	if (info == NULL || size != sizeof(legacy_system_info))
 		return B_BAD_VALUE;
@@ -146,44 +145,38 @@ _get_system_info(legacy_system_info* info, size_t size)
 #endif	// _BEOS_R5_COMPATIBLE_
 
 
-status_t
-__get_system_info(system_info* info)
+status_t __get_system_info(system_info* info)
 {
 	return _kern_get_system_info(info);
 }
 
 
-status_t
-__get_cpu_info(uint32 firstCPU, uint32 cpuCount, cpu_info* info)
+status_t __get_cpu_info(uint32 firstCPU, uint32 cpuCount, cpu_info* info)
 {
 	return _kern_get_cpu_info(firstCPU, cpuCount, info);
 }
 
 
-status_t
-__get_cpu_topology_info(cpu_topology_node_info* topologyInfos,
+status_t __get_cpu_topology_info(cpu_topology_node_info* topologyInfos,
 	uint32* topologyInfoCount)
 {
 	return _kern_get_cpu_topology_info(topologyInfos, topologyInfoCount);
 }
 
 
-status_t
-__start_watching_system(int32 object, uint32 flags, port_id port, int32 token)
+status_t __start_watching_system(int32 object, uint32 flags, port_id port, int32 token)
 {
 	return _kern_start_watching_system(object, flags, port, token);
 }
 
 
-status_t
-__stop_watching_system(int32 object, uint32 flags, port_id port, int32 token)
+status_t __stop_watching_system(int32 object, uint32 flags, port_id port, int32 token)
 {
 	return _kern_stop_watching_system(object, flags, port, token);
 }
 
 
-int32
-is_computer_on(void)
+int32 is_computer_on(void)
 {
 	return _kern_is_computer_on();
 }

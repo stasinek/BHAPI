@@ -32,8 +32,7 @@ arch_thread_get_current_thread(void)
 }
 
 
-extern inline void
-arch_thread_set_current_thread(Thread *t)
+extern inline void arch_thread_set_current_thread(Thread *t)
 {
 	gCurrentThread = t;
 }
@@ -50,8 +49,7 @@ arch_thread_get_current_thread(void)
 }
 
 
-extern inline void
-arch_thread_set_current_thread(Thread *t)
+extern inline void arch_thread_set_current_thread(Thread *t)
 {
 	uint64 v;
 	asm volatile("pmove %%srp,(%0)\n" \

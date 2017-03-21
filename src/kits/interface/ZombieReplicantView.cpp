@@ -46,8 +46,7 @@ _BZombieReplicantView_::~_BZombieReplicantView_()
 }
 
 
-void
-_BZombieReplicantView_::MessageReceived(BMessage* msg)
+void _BZombieReplicantView_::MessageReceived(BMessage* msg)
 {
 	switch (msg->what) {
 		case B_ABOUT_REQUESTED:
@@ -83,8 +82,7 @@ _BZombieReplicantView_::MessageReceived(BMessage* msg)
 }
 
 
-void
-_BZombieReplicantView_::Draw(BRect updateRect)
+void _BZombieReplicantView_::Draw(BRect updateRect)
 {
 	BRect bounds(Bounds());
 	font_height fh;
@@ -98,14 +96,12 @@ _BZombieReplicantView_::Draw(BRect updateRect)
 }
 
 
-void
-_BZombieReplicantView_::MouseDown(BPoint)
+void _BZombieReplicantView_::MouseDown(BPoint)
 {
 }
 
 
-status_t
-_BZombieReplicantView_::Archive(BMessage* archive, bool) const
+status_t _BZombieReplicantView_::Archive(BMessage* archive, bool) const
 {
 	*archive = *fArchive;
 
@@ -113,8 +109,7 @@ _BZombieReplicantView_::Archive(BMessage* archive, bool) const
 }
 
 
-void
-_BZombieReplicantView_::SetArchive(BMessage* archive)
+void _BZombieReplicantView_::SetArchive(BMessage* archive)
 {
 	fArchive = archive;
 }

@@ -206,8 +206,9 @@ typedef unsigned short ushort;
 #include <../include/sys/types.h>
 
 typedef size_t __be_size_t;
-#ifndef _SSIZE_T_DEFINED
-typedef size_t ssize_t;
-#endif
-
+#ifndef __clang__
+    #ifndef _SSIZE_T_DEFINED
+        typedef size_t ssize_t;
+    #endif
+#endif // __GNUC__
 #endif	/* BHAPI_HAIKU_TYPES_H */

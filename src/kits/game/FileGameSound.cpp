@@ -33,8 +33,7 @@ struct _gs_media_tracker
 
 
 // Local utility functions -----------------------------------------------
-bool
-FillBuffer(_gs_ramp* ramp, uint8* data, uint8* buffer, size_t* bytes)
+bool FillBuffer(_gs_ramp* ramp, uint8* data, uint8* buffer, size_t* bytes)
 {
 	int32 samples = *bytes / sizeof(uint8);
 
@@ -52,8 +51,7 @@ FillBuffer(_gs_ramp* ramp, uint8* data, uint8* buffer, size_t* bytes)
 }
 
 
-bool
-FillBuffer(_gs_ramp* ramp, int16* data, int16* buffer, size_t* bytes)
+bool FillBuffer(_gs_ramp* ramp, int16* data, int16* buffer, size_t* bytes)
 {
 	int32 samples = *bytes / sizeof(int16);
 
@@ -71,8 +69,7 @@ FillBuffer(_gs_ramp* ramp, int16* data, int16* buffer, size_t* bytes)
 }
 
 
-bool
-FillBuffer(_gs_ramp* ramp, int32* data, int32* buffer, size_t* bytes)
+bool FillBuffer(_gs_ramp* ramp, int32* data, int32* buffer, size_t* bytes)
 {
 	size_t byte = 0;
 	bool bytesAreReady = (*bytes > 0);
@@ -94,8 +91,7 @@ FillBuffer(_gs_ramp* ramp, int32* data, int32* buffer, size_t* bytes)
 }
 
 
-bool
-FillBuffer(_gs_ramp* ramp, float* data, float* buffer, size_t* bytes)
+bool FillBuffer(_gs_ramp* ramp, float* data, float* buffer, size_t* bytes)
 {
 	size_t byte = 0;
 	bool bytesAreReady = (*bytes > 0);
@@ -189,8 +185,7 @@ BFileGameSound::Clone() const
 }
 
 
-status_t
-BFileGameSound::StartPlaying()
+status_t BFileGameSound::StartPlaying()
 {
 	// restart playback if needed
 	if (IsPlaying())
@@ -201,8 +196,7 @@ BFileGameSound::StartPlaying()
 }
 
 
-status_t
-BFileGameSound::StopPlaying()
+status_t BFileGameSound::StopPlaying()
 {
 	status_t error = BStreamingGameSound::StopPlaying();
 
@@ -221,8 +215,7 @@ BFileGameSound::StopPlaying()
 }
 
 
-status_t
-BFileGameSound::Preload()
+status_t BFileGameSound::Preload()
 {
 	if (!IsPlaying())
 		Load();
@@ -231,8 +224,7 @@ BFileGameSound::Preload()
 }
 
 
-void
-BFileGameSound::FillBuffer(void* inBuffer, size_t inByteCount)
+void BFileGameSound::FillBuffer(void* inBuffer, size_t inByteCount)
 {
 	// Split or combine decoder buffers into mixer buffers
 	// fPlayPosition is where we got up to in the input buffer after last call
@@ -320,15 +312,13 @@ BFileGameSound::FillBuffer(void* inBuffer, size_t inByteCount)
 }
 
 
-status_t
-BFileGameSound::Perform(int32 selector, void* data)
+status_t BFileGameSound::Perform(int32 selector, void* data)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::SetPaused(bool isPaused, bigtime_t rampTime)
+status_t BFileGameSound::SetPaused(bool isPaused, bigtime_t rampTime)
 {
 	if (fPaused == isPaused)
 		return EALREADY;
@@ -356,8 +346,7 @@ BFileGameSound::SetPaused(bool isPaused, bigtime_t rampTime)
 }
 
 
-int32
-BFileGameSound::IsPaused()
+int32 BFileGameSound::IsPaused()
 {
 	if (fPausing)
 		return B_PAUSE_IN_PROGRESS;
@@ -369,8 +358,7 @@ BFileGameSound::IsPaused()
 }
 
 
-status_t
-BFileGameSound::Init(const entry_ref* file)
+status_t BFileGameSound::Init(const entry_ref* file)
 {
 	fAudioStream = new(std::nothrow) _gs_media_tracker;
 	if (!fAudioStream)
@@ -443,8 +431,7 @@ BFileGameSound::Init(const entry_ref* file)
 }
 
 
-bool
-BFileGameSound::Load()
+bool BFileGameSound::Load()
 {
 	if (!fAudioStream || !fAudioStream->stream)
 		return false;
@@ -470,8 +457,7 @@ BFileGameSound::Load()
 }
 
 
-bool
-BFileGameSound::Read(void* buffer, size_t bytes)
+bool BFileGameSound::Read(void* buffer, size_t bytes)
 {
 	return false;
 }
@@ -485,169 +471,145 @@ BFileGameSound::Read(void* buffer, size_t bytes)
  */
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_0(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_0(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_1(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_1(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_2(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_2(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_3(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_3(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_4(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_4(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_5(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_5(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_6(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_6(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_7(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_7(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_8(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_8(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_9(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_9(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_10(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_10(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_11(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_11(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_12(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_12(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_13(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_13(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_14(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_14(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_15(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_15(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_16(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_16(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_17(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_17(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_18(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_18(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_19(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_19(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_20(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_20(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_21(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_21(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_22(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_22(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BFileGameSound::_Reserved_BFileGameSound_23(int32 arg, ...)
+status_t BFileGameSound::_Reserved_BFileGameSound_23(int32 arg, ...)
 {
 	return B_ERROR;
 }

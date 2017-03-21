@@ -11,8 +11,7 @@
 #include "TypeHandlerRoster.h"
 
 
-status_t
-debugger_global_init(TargetHostInterfaceRoster::Listener* listener)
+status_t debugger_global_init(TargetHostInterfaceRoster::Listener* listener)
 {
 	status_t error = TypeHandlerRoster::CreateDefault();
 	if (error != B_OK)
@@ -39,8 +38,7 @@ debugger_global_init(TargetHostInterfaceRoster::Listener* listener)
 }
 
 
-void
-debugger_global_uninit()
+void debugger_global_uninit()
 {
 	TargetHostInterfaceRoster::DeleteDefault();
 	ImageDebugLoadingStateHandlerRoster::DeleteDefault();

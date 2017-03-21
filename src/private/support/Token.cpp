@@ -139,7 +139,7 @@ BTokensDepotPrivateData::AddToken(void *data)
 }
 
 
-void
+void 
 BTokensDepotPrivateData::RemoveToken(__be_uint64 token)
 {
 	__be_uint64 index = token >> 32;
@@ -280,7 +280,7 @@ BTokensDepot::FetchToken(__be_uint64 token)
 }
 
 
-void
+void 
 BTokensDepot::SetLocker(BLocker *locker, bool deconstruct_locker)
 {
 	if(fLocker != NULL && fDeconstructLocker) delete fLocker;
@@ -296,14 +296,14 @@ BTokensDepot::Locker() const
 }
 
 
-bool
+bool 
 BTokensDepot::Lock()
 {
 	return(fLocker == NULL ? true : fLocker->Lock());
 }
 
 
-void
+void 
 BTokensDepot::Unlock()
 {
 	if(fLocker != NULL) fLocker->Unlock();
@@ -322,7 +322,7 @@ BToken::~BToken()
 }
 
 
-bool
+bool 
 BToken::IsValid() const
 {
 	bool retVal = false;
@@ -451,7 +451,7 @@ BToken::Data() const
 }
 
 
-void
+void 
 BToken::SetData(void *data)
 {
 	if(!(fOriginal == false || fToken == B_MAXUINT64 || fDepot == NULL || fDepot->Lock() == false))
@@ -473,7 +473,7 @@ BToken::Depot() const
 }
 
 
-void
+void 
 BToken::MakeEmpty()
 {
 	if(!(fToken == B_MAXUINT64 || fDepot == NULL || fDepot->Lock() == false))

@@ -40,15 +40,13 @@ BRemoveEngine::Controller() const
 }
 
 
-void
-BRemoveEngine::SetController(BController* controller)
+void BRemoveEngine::SetController(BController* controller)
 {
 	fController = controller;
 }
 
 
-status_t
-BRemoveEngine::RemoveEntry(const Entry& entry)
+status_t BRemoveEngine::RemoveEntry(const Entry& entry)
 {
 	BPath pathBuffer;
 	const char* path;
@@ -60,8 +58,7 @@ BRemoveEngine::RemoveEntry(const Entry& entry)
 }
 
 
-status_t
-BRemoveEngine::_RemoveEntry(const char* path)
+status_t BRemoveEngine::_RemoveEntry(const char* path)
 {
 	// apply entry filter
 	if (fController != NULL && !fController->EntryStarted(path))
@@ -133,8 +130,7 @@ BRemoveEngine::_RemoveEntry(const char* path)
 }
 
 
-void
-BRemoveEngine::_NotifyErrorVarArgs(status_t error, const char* format,
+void BRemoveEngine::_NotifyErrorVarArgs(status_t error, const char* format,
 	va_list args)
 {
 	if (fController != NULL) {
@@ -145,8 +141,7 @@ BRemoveEngine::_NotifyErrorVarArgs(status_t error, const char* format,
 }
 
 
-status_t
-BRemoveEngine::_HandleEntryError(const char* path, status_t error,
+status_t BRemoveEngine::_HandleEntryError(const char* path, status_t error,
 	const char* format, ...)
 {
 	if (fController == NULL)
@@ -176,22 +171,19 @@ BRemoveEngine::BController::~BController()
 }
 
 
-bool
-BRemoveEngine::BController::EntryStarted(const char* path)
+bool BRemoveEngine::BController::EntryStarted(const char* path)
 {
 	return true;
 }
 
 
-bool
-BRemoveEngine::BController::EntryFinished(const char* path, status_t error)
+bool BRemoveEngine::BController::EntryFinished(const char* path, status_t error)
 {
 	return error == B_OK;
 }
 
 
-void
-BRemoveEngine::BController::ErrorOccurred(const char* message, status_t error)
+void BRemoveEngine::BController::ErrorOccurred(const char* message, status_t error)
 {
 }
 

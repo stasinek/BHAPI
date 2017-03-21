@@ -18,8 +18,7 @@ CppLanguage::~CppLanguage()
 }
 
 
-const char*
-CppLanguage::Name() const
+const char*  CppLanguage::Name() const
 {
 	return "C++";
 }

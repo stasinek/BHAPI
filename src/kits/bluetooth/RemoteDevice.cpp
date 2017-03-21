@@ -33,8 +33,7 @@ namespace Bluetooth {
 // TODO: Check headers for valid/reserved ranges
 static const uint16 invalidConnectionHandle = 0xF000;
 
-bool
-RemoteDevice::IsTrustedDevice(void)
+bool RemoteDevice::IsTrustedDevice(void)
 {
 	CALLED();
 	return true;
@@ -117,8 +116,7 @@ RemoteDevice::GetBluetoothAddress()
 }
 
 
-bool
-RemoteDevice::Equals(RemoteDevice* obj)
+bool RemoteDevice::Equals(RemoteDevice* obj)
 {
 	CALLED();
 	return bdaddrUtils::Compare(fBdaddr, obj->GetBluetoothAddress());
@@ -128,8 +126,7 @@ RemoteDevice::Equals(RemoteDevice* obj)
 //  static RemoteDevice* GetRemoteDevice(Connection conn);
 
 
-bool
-RemoteDevice::Authenticate()
+bool RemoteDevice::Authenticate()
 {
 	CALLED();
 	int8 btStatus = BT_ERROR;
@@ -204,8 +201,7 @@ RemoteDevice::Authenticate()
 }
 
 
-status_t
-RemoteDevice::Disconnect(int8 reason)
+status_t RemoteDevice::Disconnect(int8 reason)
 {
 	CALLED();
 	if (fHandle != invalidConnectionHandle) {
@@ -253,8 +249,7 @@ RemoteDevice::Disconnect(int8 reason)
 //  bool Encrypt(Connection conn, bool on);
 
 
-bool
-RemoteDevice::IsAuthenticated()
+bool RemoteDevice::IsAuthenticated()
 {
 	CALLED();
 	return true;
@@ -264,8 +259,7 @@ RemoteDevice::IsAuthenticated()
 //  bool IsAuthorized(Connection conn);
 
 
-bool
-RemoteDevice::IsEncrypted()
+bool RemoteDevice::IsEncrypted()
 {
 	CALLED();
 	return true;
@@ -281,8 +275,7 @@ RemoteDevice::GetLocalDeviceOwner()
 
 
 /* Private */
-void
-RemoteDevice::SetLocalDeviceOwner(LocalDevice* ld)
+void RemoteDevice::SetLocalDeviceOwner(LocalDevice* ld)
 {
 	CALLED();
 	fDiscovererLocalDevice = ld;
@@ -329,8 +322,7 @@ RemoteDevice::GetProperty(const char* property) /* Throwing */
 }
 
 
-status_t
-RemoteDevice::GetProperty(const char* property, uint32* value) /* Throwing */
+status_t RemoteDevice::GetProperty(const char* property, uint32* value) /* Throwing */
 {
 	CALLED();
 	return B_ERROR;

@@ -5,7 +5,7 @@
 #ifndef USERLAND_FS_PORT_H
 #define USERLAND_FS_PORT_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 class KernelDebug;
 

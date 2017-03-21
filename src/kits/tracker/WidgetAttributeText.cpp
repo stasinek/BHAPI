@@ -329,8 +329,7 @@ WidgetAttributeText::~WidgetAttributeText()
 }
 
 
-const char*
-WidgetAttributeText::FittingText(const BPoseView* view)
+const char*  WidgetAttributeText::FittingText(const BPoseView* view)
 {
 	if (fDirty || fColumn->Width() != fOldWidth || CheckSettingsChanged()
 		|| !fValueIsDefined) {
@@ -342,8 +341,7 @@ WidgetAttributeText::FittingText(const BPoseView* view)
 }
 
 
-bool
-WidgetAttributeText::CheckViewChanged(const BPoseView* view)
+bool WidgetAttributeText::CheckViewChanged(const BPoseView* view)
 {
 	BString newText;
 	FitValue(&newText, view);
@@ -355,8 +353,7 @@ WidgetAttributeText::CheckViewChanged(const BPoseView* view)
 }
 
 
-bool
-WidgetAttributeText::CheckSettingsChanged()
+bool WidgetAttributeText::CheckSettingsChanged()
 {
 	return false;
 }
@@ -401,15 +398,13 @@ WidgetAttributeText::Width(const BPoseView* pose)
 }
 
 
-void
-WidgetAttributeText::SetUpEditing(BTextView*)
+void WidgetAttributeText::SetUpEditing(BTextView*)
 {
 	ASSERT(fColumn->Editable());
 }
 
 
-bool
-WidgetAttributeText::CommitEditedText(BTextView*)
+bool WidgetAttributeText::CommitEditedText(BTextView*)
 {
 	// can't do anything here at this point
 	TRESPASS();
@@ -417,8 +412,7 @@ WidgetAttributeText::CommitEditedText(BTextView*)
 }
 
 
-status_t
-WidgetAttributeText::AttrAsString(const Model* model, BString* outString,
+status_t WidgetAttributeText::AttrAsString(const Model* model, BString* outString,
 	const char* attrName, int32 attrType, float width, BView* view,
 	int64* resultingValue)
 {
@@ -486,16 +480,14 @@ WidgetAttributeText::AttrAsString(const Model* model, BString* outString,
 }
 
 
-bool
-WidgetAttributeText::IsEditable() const
+bool WidgetAttributeText::IsEditable() const
 {
 	return fColumn->Editable()
 		&& !BVolume(fModel->StatBuf()->st_dev).IsReadOnly();
 }
 
 
-void
-WidgetAttributeText::SetDirty(bool value)
+void WidgetAttributeText::SetDirty(bool value)
 {
 	fDirty = value;
 }
@@ -513,8 +505,7 @@ StringAttributeText::StringAttributeText(const Model* model,
 }
 
 
-const char*
-StringAttributeText::ValueAsText(const BPoseView* /*view*/)
+const char*  StringAttributeText::ValueAsText(const BPoseView* /*view*/)
 {
 	if (fValueDirty)
 		ReadValue(&fFullValueText);
@@ -523,8 +514,7 @@ StringAttributeText::ValueAsText(const BPoseView* /*view*/)
 }
 
 
-bool
-StringAttributeText::CheckAttributeChanged()
+bool StringAttributeText::CheckAttributeChanged()
 {
 	BString newString;
 	ReadValue(&newString);
@@ -538,8 +528,7 @@ StringAttributeText::CheckAttributeChanged()
 }
 
 
-void
-StringAttributeText::FitValue(BString* outString, const BPoseView* view)
+void StringAttributeText::FitValue(BString* outString, const BPoseView* view)
 {
 	if (fValueDirty)
 		ReadValue(&fFullValueText);
@@ -572,8 +561,7 @@ StringAttributeText::Compare(WidgetAttributeText& attr, BPoseView* view)
 }
 
 
-bool
-StringAttributeText::CommitEditedText(BTextView* textView)
+bool StringAttributeText::CommitEditedText(BTextView* textView)
 {
 	ASSERT(fColumn->Editable());
 	const char* text = textView->Text();
@@ -614,8 +602,7 @@ ScalarAttributeText::ScalarAttributeText(const Model* model,
 }
 
 
-int64
-ScalarAttributeText::Value()
+int64 ScalarAttributeText::Value()
 {
 	if (fValueDirty)
 		fValue = ReadValue();
@@ -624,8 +611,7 @@ ScalarAttributeText::Value()
 }
 
 
-bool
-ScalarAttributeText::CheckAttributeChanged()
+bool ScalarAttributeText::CheckAttributeChanged()
 {
 	int64 newValue = ReadValue();
 	if (newValue == fValue)
@@ -672,8 +658,7 @@ PathAttributeText::PathAttributeText(const Model* model, const BColumn* column)
 }
 
 
-void
-PathAttributeText::ReadValue(BString* outString)
+void PathAttributeText::ReadValue(BString* outString)
 {
 	// get the path
 	BEntry entry(fModel->EntryRef());
@@ -700,8 +685,7 @@ OriginalPathAttributeText::OriginalPathAttributeText(const Model* model,
 }
 
 
-void
-OriginalPathAttributeText::ReadValue(BString* outString)
+void OriginalPathAttributeText::ReadValue(BString* outString)
 {
 	BEntry entry(fModel->EntryRef());
 	BPath path;
@@ -726,8 +710,7 @@ KindAttributeText::KindAttributeText(const Model* model, const BColumn* column)
 }
 
 
-void
-KindAttributeText::ReadValue(BString* outString)
+void KindAttributeText::ReadValue(BString* outString)
 {
 	BMimeType mime;
 	char desc[B_MIME_TYPE_LENGTH];
@@ -773,8 +756,7 @@ NameAttributeText::Compare(WidgetAttributeText& attr, BPoseView* view)
 }
 
 
-void
-NameAttributeText::ReadValue(BString* outString)
+void NameAttributeText::ReadValue(BString* outString)
 {
 	*outString = fModel->Name();
 
@@ -782,8 +764,7 @@ NameAttributeText::ReadValue(BString* outString)
 }
 
 
-void
-NameAttributeText::FitValue(BString* outString, const BPoseView* view)
+void NameAttributeText::FitValue(BString* outString, const BPoseView* view)
 {
 	if (fValueDirty)
 		ReadValue(&fFullValueText);
@@ -794,8 +775,7 @@ NameAttributeText::FitValue(BString* outString, const BPoseView* view)
 }
 
 
-void
-NameAttributeText::SetUpEditing(BTextView* textView)
+void NameAttributeText::SetUpEditing(BTextView* textView)
 {
 	DisallowFilenameKeys(textView);
 
@@ -804,8 +784,7 @@ NameAttributeText::SetUpEditing(BTextView* textView)
 }
 
 
-bool
-NameAttributeText::CommitEditedTextFlavor(BTextView* textView)
+bool NameAttributeText::CommitEditedTextFlavor(BTextView* textView)
 {
 	const char* text = textView->Text();
 
@@ -864,15 +843,13 @@ NameAttributeText::CommitEditedTextFlavor(BTextView* textView)
 }
 
 
-void
-NameAttributeText::SetSortFolderNamesFirst(bool enabled)
+void NameAttributeText::SetSortFolderNamesFirst(bool enabled)
 {
 	NameAttributeText::sSortFolderNamesFirst = enabled;
 }
 
 
-bool
-NameAttributeText::IsEditable() const
+bool NameAttributeText::IsEditable() const
 {
 	return StringAttributeText::IsEditable()
 		&& !fModel->HasLocalizedName();
@@ -908,8 +885,7 @@ RealNameAttributeText::Compare(WidgetAttributeText& attr, BPoseView* view)
 }
 
 
-void
-RealNameAttributeText::ReadValue(BString* outString)
+void RealNameAttributeText::ReadValue(BString* outString)
 {
 	*outString = fModel->EntryRef()->name;
 
@@ -917,8 +893,7 @@ RealNameAttributeText::ReadValue(BString* outString)
 }
 
 
-void
-RealNameAttributeText::FitValue(BString* outString, const BPoseView* view)
+void RealNameAttributeText::FitValue(BString* outString, const BPoseView* view)
 {
 	if (fValueDirty)
 		ReadValue(&fFullValueText);
@@ -929,8 +904,7 @@ RealNameAttributeText::FitValue(BString* outString, const BPoseView* view)
 }
 
 
-void
-RealNameAttributeText::SetUpEditing(BTextView* textView)
+void RealNameAttributeText::SetUpEditing(BTextView* textView)
 {
 	DisallowFilenameKeys(textView);
 
@@ -939,8 +913,7 @@ RealNameAttributeText::SetUpEditing(BTextView* textView)
 }
 
 
-bool
-RealNameAttributeText::CommitEditedTextFlavor(BTextView* textView)
+bool RealNameAttributeText::CommitEditedTextFlavor(BTextView* textView)
 {
 	const char* text = textView->Text();
 
@@ -1001,8 +974,7 @@ RealNameAttributeText::CommitEditedTextFlavor(BTextView* textView)
 }
 
 
-void
-RealNameAttributeText::SetSortFolderNamesFirst(bool enabled)
+void RealNameAttributeText::SetSortFolderNamesFirst(bool enabled)
 {
 	RealNameAttributeText::sSortFolderNamesFirst = enabled;
 }
@@ -1020,8 +992,7 @@ OwnerAttributeText::OwnerAttributeText(const Model* model,
 }
 
 
-void
-OwnerAttributeText::ReadValue(BString* outString)
+void OwnerAttributeText::ReadValue(BString* outString)
 {
 	uid_t nodeOwner = fModel->StatBuf()->st_uid;
 	BString user;
@@ -1047,8 +1018,7 @@ GroupAttributeText::GroupAttributeText(const Model* model,
 }
 
 
-void
-GroupAttributeText::ReadValue(BString* outString)
+void GroupAttributeText::ReadValue(BString* outString)
 {
 	gid_t nodeGroup = fModel->StatBuf()->st_gid;
 	BString group;
@@ -1078,8 +1048,7 @@ ModeAttributeText::ModeAttributeText(const Model* model,
 }
 
 
-void
-ModeAttributeText::ReadValue(BString* outString)
+void ModeAttributeText::ReadValue(BString* outString)
 {
 	mode_t mode = fModel->StatBuf()->st_mode;
 	mode_t baseMask = 00400;
@@ -1121,8 +1090,7 @@ SizeAttributeText::SizeAttributeText(const Model* model,
 }
 
 
-int64
-SizeAttributeText::ReadValue()
+int64 SizeAttributeText::ReadValue()
 {
 	fValueDirty = false;
 	// get the size
@@ -1145,8 +1113,7 @@ SizeAttributeText::ReadValue()
 }
 
 
-void
-SizeAttributeText::FitValue(BString* outString, const BPoseView* view)
+void SizeAttributeText::FitValue(BString* outString, const BPoseView* view)
 {
 	if (fValueDirty)
 		fValue = ReadValue();
@@ -1193,8 +1160,7 @@ TimeAttributeText::PreferredWidth(const BPoseView* pose) const
 }
 
 
-void
-TimeAttributeText::FitValue(BString* outString, const BPoseView* view)
+void TimeAttributeText::FitValue(BString* outString, const BPoseView* view)
 {
 	if (fValueDirty)
 		fValue = ReadValue();
@@ -1205,8 +1171,7 @@ TimeAttributeText::FitValue(BString* outString, const BPoseView* view)
 }
 
 
-bool
-TimeAttributeText::CheckSettingsChanged(void)
+bool TimeAttributeText::CheckSettingsChanged(void)
 {
 	// TODO : check against the actual locale settings
 	return false;
@@ -1224,8 +1189,7 @@ CreationTimeAttributeText::CreationTimeAttributeText(const Model* model,
 }
 
 
-int64
-CreationTimeAttributeText::ReadValue()
+int64 CreationTimeAttributeText::ReadValue()
 {
 	fValueDirty = false;
 	fValueIsDefined = true;
@@ -1244,8 +1208,7 @@ ModificationTimeAttributeText::ModificationTimeAttributeText(
 }
 
 
-int64
-ModificationTimeAttributeText::ReadValue()
+int64 ModificationTimeAttributeText::ReadValue()
 {
 	fValueDirty = false;
 	fValueIsDefined = true;
@@ -1264,8 +1227,7 @@ GenericAttributeText::GenericAttributeText(const Model* model,
 }
 
 
-bool
-GenericAttributeText::CheckAttributeChanged()
+bool GenericAttributeText::CheckAttributeChanged()
 {
 	GenericValueStruct tmpValue = fValue;
 	BString tmpString(fFullValueText);
@@ -1289,8 +1251,7 @@ GenericAttributeText::PreferredWidth(const BPoseView* pose) const
 }
 
 
-void
-GenericAttributeText::ReadValue(BString* outString)
+void GenericAttributeText::ReadValue(BString* outString)
 {
 	BModelOpener opener(const_cast<Model*>(fModel));
 
@@ -1410,8 +1371,7 @@ GenericAttributeText::ReadValue(BString* outString)
 }
 
 
-void
-GenericAttributeText::FitValue(BString* outString, const BPoseView* view)
+void GenericAttributeText::FitValue(BString* outString, const BPoseView* view)
 {
 	if (fValueDirty)
 		ReadValue(&fFullValueText);
@@ -1551,8 +1511,7 @@ GenericAttributeText::FitValue(BString* outString, const BPoseView* view)
 }
 
 
-const char*
-GenericAttributeText::ValueAsText(const BPoseView* view)
+const char*  GenericAttributeText::ValueAsText(const BPoseView* view)
 {
 	// TODO: redesign this - this is to make sure the value is valid
 	bool oldDirty = fDirty;
@@ -1632,14 +1591,12 @@ GenericAttributeText::Compare(WidgetAttributeText& attr, BPoseView*)
 				(fValue.uint32t == compareTo->fValue.uint32t ? 0 : 1) : -1;
 
 		case B_TIME_TYPE:
-			// time_t typedef'd to a long, i.e. a int32
-		case B_INT32_TYPE:
+			// time_t typedef'd to a long, i.e. a int32 		case B_INT32_TYPE:
 			return fValue.int32t >= compareTo->fValue.int32t ?
 				(fValue.int32t == compareTo->fValue.int32t ? 0 : 1) : -1;
 
 		case B_OFF_T_TYPE:
-			// off_t typedef'd to a long long, i.e. a int64
-		case B_INT64_TYPE:
+			// off_t typedef'd to a long long, i.e. a int64 		case B_INT64_TYPE:
 			return fValue.int64t >= compareTo->fValue.int64t ?
 				(fValue.int64t == compareTo->fValue.int64t ? 0 : 1) : -1;
 
@@ -1653,8 +1610,7 @@ GenericAttributeText::Compare(WidgetAttributeText& attr, BPoseView*)
 }
 
 
-bool
-GenericAttributeText::CommitEditedText(BTextView* textView)
+bool GenericAttributeText::CommitEditedText(BTextView* textView)
 {
 	ASSERT(fColumn->Editable());
 	const char* text = textView->Text();
@@ -1676,16 +1632,14 @@ GenericAttributeText::CommitEditedText(BTextView* textView)
 }
 
 
-void
-GenericAttributeText::SetUpEditing(BTextView* textView)
+void GenericAttributeText::SetUpEditing(BTextView* textView)
 {
 	textView->SetMaxBytes(kGenericReadBufferSize - 1);
 	textView->SetText(fFullValueText.String(), fFullValueText.Length());
 }
 
 
-bool
-GenericAttributeText::CommitEditedTextFlavor(BTextView* textView)
+bool GenericAttributeText::CommitEditedTextFlavor(BTextView* textView)
 {
 	BNode node(fModel->EntryRef());
 
@@ -1883,8 +1837,7 @@ DurationAttributeText::DurationAttributeText(const Model* model,
 // TODO: support editing!
 
 
-void
-DurationAttributeText::FitValue(BString* outString, const BPoseView* view)
+void DurationAttributeText::FitValue(BString* outString, const BPoseView* view)
 {
 	if (fValueDirty)
 		ReadValue(&fFullValueText);
@@ -1975,8 +1928,7 @@ CheckboxAttributeText::CheckboxAttributeText(const Model* model,
 }
 
 
-void
-CheckboxAttributeText::SetUpEditing(BTextView* view)
+void CheckboxAttributeText::SetUpEditing(BTextView* view)
 {
 	// TODO: support editing for real!
 	BString outString;
@@ -1985,8 +1937,7 @@ CheckboxAttributeText::SetUpEditing(BTextView* view)
 }
 
 
-void
-CheckboxAttributeText::FitValue(BString* outString, const BPoseView* view)
+void CheckboxAttributeText::FitValue(BString* outString, const BPoseView* view)
 {
 	if (fValueDirty)
 		ReadValue(&fFullValueText);
@@ -2045,8 +1996,7 @@ RatingAttributeText::RatingAttributeText(const Model* model,
 }
 
 
-void
-RatingAttributeText::SetUpEditing(BTextView* view)
+void RatingAttributeText::SetUpEditing(BTextView* view)
 {
 	// TODO: support editing for real!
 	BString outString;
@@ -2055,8 +2005,7 @@ RatingAttributeText::SetUpEditing(BTextView* view)
 }
 
 
-void
-RatingAttributeText::FitValue(BString* ratingString, const BPoseView* view)
+void RatingAttributeText::FitValue(BString* ratingString, const BPoseView* view)
 {
 	if (fValueDirty)
 		ReadValue(&fFullValueText);
@@ -2120,8 +2069,7 @@ OpenWithRelationAttributeText::OpenWithRelationAttributeText(const Model* model,
 }
 
 
-int64
-OpenWithRelationAttributeText::ReadValue()
+int64 OpenWithRelationAttributeText::ReadValue()
 {
 	fValueDirty = false;
 
@@ -2146,8 +2094,7 @@ OpenWithRelationAttributeText::PreferredWidth(const BPoseView* pose) const
 }
 
 
-void
-OpenWithRelationAttributeText::FitValue(BString* outString,
+void OpenWithRelationAttributeText::FitValue(BString* outString,
 	const BPoseView* view)
 {
 	if (fValueDirty)
@@ -2178,8 +2125,7 @@ VersionAttributeText::VersionAttributeText(const Model* model,
 }
 
 
-void
-VersionAttributeText::ReadValue(BString* outString)
+void VersionAttributeText::ReadValue(BString* outString)
 {
 	fValueDirty = false;
 

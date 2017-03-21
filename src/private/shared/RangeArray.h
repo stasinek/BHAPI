@@ -100,8 +100,7 @@ RangeArray<Value>::RangeArray(const RangeArray<Value>& other)
 
 
 template<typename Value>
-inline bool
-RangeArray<Value>::AddRange(const RangeType& range)
+inline bool RangeArray<Value>::AddRange(const RangeType& range)
 {
 	return AddRange(range.offset, range.size);
 }
@@ -115,8 +114,7 @@ RangeArray<Value>::AddRange(const RangeType& range)
 		allocation failed.
 */
 template<typename Value>
-bool
-RangeArray<Value>::AddRange(const Value& offset, const Value& size)
+bool RangeArray<Value>::AddRange(const Value& offset, const Value& size)
 {
 	if (size == 0)
 		return true;
@@ -155,8 +153,7 @@ RangeArray<Value>::AddRange(const Value& offset, const Value& size)
 
 
 template<typename Value>
-inline bool
-RangeArray<Value>::RemoveRange(const RangeType& range)
+inline bool RangeArray<Value>::RemoveRange(const RangeType& range)
 {
 	return RemoveRange(range.offset, range.size);
 }
@@ -174,8 +171,7 @@ RangeArray<Value>::RemoveRange(const RangeType& range)
 		memory allocation failed.
 */
 template<typename Value>
-bool
-RangeArray<Value>::RemoveRange(const Value& offset, const Value& size)
+bool RangeArray<Value>::RemoveRange(const Value& offset, const Value& size)
 {
 	if (size == 0)
 		return true;
@@ -231,24 +227,21 @@ RangeArray<Value>::RemoveRange(const Value& offset, const Value& size)
 
 
 template<typename Value>
-inline bool
-RangeArray<Value>::RemoveRanges(int32 index, int32 count)
+inline bool RangeArray<Value>::RemoveRanges(int32 index, int32 count)
 {
 	return fRanges.Remove(index, count);
 }
 
 
 template<typename Value>
-inline bool
-RangeArray<Value>::IntersectsWith(const RangeType& range) const
+inline bool RangeArray<Value>::IntersectsWith(const RangeType& range) const
 {
 	return IntersectsWith(range.offset, range.size);
 }
 
 
 template<typename Value>
-bool
-RangeArray<Value>::IntersectsWith(const Value& offset, const Value& size) const
+bool RangeArray<Value>::IntersectsWith(const Value& offset, const Value& size) const
 {
 	int32 index = InsertionIndex(offset);
 	return index < CountRanges() && RangeAt(index).offset < offset + size;
@@ -265,8 +258,7 @@ RangeArray<Value>::IntersectsWith(const Value& offset, const Value& size) const
 	\return The insertion index for a range starting at \a offset.
 */
 template<typename Value>
-int32
-RangeArray<Value>::InsertionIndex(const Value& offset) const
+int32 RangeArray<Value>::InsertionIndex(const Value& offset) const
 {
 	// binary search the index
 	int32 lower = 0;

@@ -34,7 +34,7 @@
 #include "../kernel/Debug.h"
 #include "../support/Errors.h"
 
-BApplicationConnector *bhapi::be_app_connector = NULL;
+BApplicationConnector *bhapi::__be_app_connector = NULL;
 
 BApplicationConnector::BApplicationConnector() : fLocker(true), fPort(NULL), fThread(NULL)
 {
@@ -77,21 +77,21 @@ BApplicationConnector::~BApplicationConnector()
 }
 
 
-bool
+bool 
 BApplicationConnector::Lock()
 {
     return fLocker.Lock();
 }
 
 
-void
+void 
 BApplicationConnector::Unlock()
 {
     fLocker.Unlock();
 }
 
 
-status_t
+status_t 
 BApplicationConnector::task(void *data)
 {
     BApplicationConnector *self = reinterpret_cast<BApplicationConnector*>(data);
@@ -129,17 +129,17 @@ BApplicationConnector::HandlersDepot() const
 }
 
 
-void
+void 
 BApplicationConnector::Init()
 {
-    bhapi::be_app_connector = new BApplicationConnector();
+    bhapi::__be_app_connector = new BApplicationConnector();
 }
 
 
-void
+void 
 BApplicationConnector::Quit()
 {
-    delete bhapi::be_app_connector;
+    delete bhapi::__be_app_connector;
 }
 
 

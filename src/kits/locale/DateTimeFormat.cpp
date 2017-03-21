@@ -46,8 +46,7 @@ BDateTimeFormat::~BDateTimeFormat()
 }
 
 
-void
-BDateTimeFormat::SetDateTimeFormat(BDateFormatStyle dateStyle,
+void BDateTimeFormat::SetDateTimeFormat(BDateFormatStyle dateStyle,
 	BTimeFormatStyle timeStyle, int32 elements) {
 	UErrorCode error = U_ZERO_ERROR;
 	DateTimePatternGenerator* generator
@@ -117,8 +116,7 @@ BDateTimeFormat::Format(char* target, size_t maxSize, time_t time,
 }
 
 
-status_t
-BDateTimeFormat::Format(BString& target, const time_t time,
+status_t BDateTimeFormat::Format(BString& target, const time_t time,
 	BDateFormatStyle dateStyle, BTimeFormatStyle timeStyle,
 	const BTimeZone* timeZone) const
 {

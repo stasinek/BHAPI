@@ -12,8 +12,7 @@
 #include <NetworkAddress.h>
 
 
-static bool
-strip_port(BString& host, BString& port)
+static bool strip_port(BString& host, BString& port)
 {
 	int32 first = host.FindFirst(':');
 	int32 separator = host.FindLast(':');
@@ -95,15 +94,13 @@ BNetworkAddressResolver::~BNetworkAddressResolver()
 }
 
 
-status_t
-BNetworkAddressResolver::InitCheck() const
+status_t BNetworkAddressResolver::InitCheck() const
 {
 	return fStatus;
 }
 
 
-void
-BNetworkAddressResolver::Unset()
+void BNetworkAddressResolver::Unset()
 {
 	if (fInfo != NULL) {
 		freeaddrinfo(fInfo);
@@ -113,23 +110,20 @@ BNetworkAddressResolver::Unset()
 }
 
 
-status_t
-BNetworkAddressResolver::SetTo(const char* address, uint16 port, uint32 flags)
+status_t BNetworkAddressResolver::SetTo(const char* address, uint16 port, uint32 flags)
 {
 	return SetTo(AF_UNSPEC, address, port, flags);
 }
 
 
-status_t
-BNetworkAddressResolver::SetTo(const char* address, const char* service,
+status_t BNetworkAddressResolver::SetTo(const char* address, const char* service,
 	uint32 flags)
 {
 	return SetTo(AF_UNSPEC, address, service, flags);
 }
 
 
-status_t
-BNetworkAddressResolver::SetTo(int family, const char* address, uint16 port,
+status_t BNetworkAddressResolver::SetTo(int family, const char* address, uint16 port,
 	uint32 flags)
 {
 	BString service;
@@ -139,8 +133,7 @@ BNetworkAddressResolver::SetTo(int family, const char* address, uint16 port,
 }
 
 
-status_t
-BNetworkAddressResolver::SetTo(int family, const char* host,
+status_t BNetworkAddressResolver::SetTo(int family, const char* host,
 	const char* service, uint32 flags)
 {
 	Unset();
@@ -210,8 +203,7 @@ BNetworkAddressResolver::SetTo(int family, const char* host,
 }
 
 
-status_t
-BNetworkAddressResolver::GetNextAddress(uint32* cookie,
+status_t BNetworkAddressResolver::GetNextAddress(uint32* cookie,
 	BNetworkAddress& address) const
 {
 	if (fStatus != B_OK)
@@ -237,8 +229,7 @@ BNetworkAddressResolver::GetNextAddress(uint32* cookie,
 }
 
 
-status_t
-BNetworkAddressResolver::GetNextAddress(int family, uint32* cookie,
+status_t BNetworkAddressResolver::GetNextAddress(int family, uint32* cookie,
 	BNetworkAddress& address) const
 {
 	if (fStatus != B_OK)

@@ -50,80 +50,70 @@ WriterImplBase::AttributeValue::~AttributeValue()
 }
 
 
-void
-WriterImplBase::AttributeValue::SetTo(int8 value)
+void WriterImplBase::AttributeValue::SetTo(int8 value)
 {
 	signedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_INT;
 }
 
 
-void
-WriterImplBase::AttributeValue::SetTo(uint8 value)
+void WriterImplBase::AttributeValue::SetTo(uint8 value)
 {
 	unsignedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_UINT;
 }
 
 
-void
-WriterImplBase::AttributeValue::SetTo(int16 value)
+void WriterImplBase::AttributeValue::SetTo(int16 value)
 {
 	signedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_INT;
 }
 
 
-void
-WriterImplBase::AttributeValue::SetTo(uint16 value)
+void WriterImplBase::AttributeValue::SetTo(uint16 value)
 {
 	unsignedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_UINT;
 }
 
 
-void
-WriterImplBase::AttributeValue::SetTo(int32 value)
+void WriterImplBase::AttributeValue::SetTo(int32 value)
 {
 	signedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_INT;
 }
 
 
-void
-WriterImplBase::AttributeValue::SetTo(uint32 value)
+void WriterImplBase::AttributeValue::SetTo(uint32 value)
 {
 	unsignedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_UINT;
 }
 
 
-void
-WriterImplBase::AttributeValue::SetTo(int64 value)
+void WriterImplBase::AttributeValue::SetTo(int64 value)
 {
 	signedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_INT;
 }
 
 
-void
-WriterImplBase::AttributeValue::SetTo(uint64 value)
+void WriterImplBase::AttributeValue::SetTo(uint64 value)
 {
 	unsignedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_UINT;
 }
 
 
-void
-WriterImplBase::AttributeValue::SetTo(CachedString* value)
+void WriterImplBase::AttributeValue::SetTo(CachedString* value)
 {
 	string = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_STRING;
 }
 
 
-void
-WriterImplBase::AttributeValue::SetToData(uint64 size, uint64 offset)
+void WriterImplBase::AttributeValue::SetToData(uint64 size, uint64 offset)
 {
 	data.size = size;
 	data.offset = offset;
@@ -132,8 +122,7 @@ WriterImplBase::AttributeValue::SetToData(uint64 size, uint64 offset)
 }
 
 
-void
-WriterImplBase::AttributeValue::SetToData(uint64 size, const void* rawData)
+void WriterImplBase::AttributeValue::SetToData(uint64 size, const void* rawData)
 {
 	data.size = size;
 	if (size > 0)
@@ -198,15 +187,13 @@ WriterImplBase::PackageAttribute::~PackageAttribute()
 }
 
 
-void
-WriterImplBase::PackageAttribute::AddChild(PackageAttribute* child)
+void WriterImplBase::PackageAttribute::AddChild(PackageAttribute* child)
 {
 	children.Add(child);
 }
 
 
-void
-WriterImplBase::PackageAttribute::_DeleteChildren()
+void WriterImplBase::PackageAttribute::_DeleteChildren()
 {
 	while (PackageAttribute* child = children.RemoveHead())
 		delete child;
@@ -252,8 +239,7 @@ WriterImplBase::~WriterImplBase()
 }
 
 
-status_t
-WriterImplBase::Init(BPositionIO* file, bool keepFile, const char* fileName,
+status_t WriterImplBase::Init(BPositionIO* file, bool keepFile, const char* fileName,
 	const BPackageWriterParameters& parameters)
 {
 	fParameters = parameters;
@@ -292,8 +278,7 @@ WriterImplBase::Init(BPositionIO* file, bool keepFile, const char* fileName,
 }
 
 
-status_t
-WriterImplBase::InitHeapReader(size_t headerSize)
+status_t WriterImplBase::InitHeapReader(size_t headerSize)
 {
 	// allocate the compression/decompression algorithm
 	CompressionAlgorithmOwner* compressionAlgorithm = NULL;
@@ -340,15 +325,13 @@ WriterImplBase::InitHeapReader(size_t headerSize)
 }
 
 
-void
-WriterImplBase::SetCompression(uint32 compression)
+void WriterImplBase::SetCompression(uint32 compression)
 {
 	fParameters.SetCompression(compression);
 }
 
 
-void
-WriterImplBase::RegisterPackageInfo(PackageAttributeList& attributeList,
+void WriterImplBase::RegisterPackageInfo(PackageAttributeList& attributeList,
 	const BPackageInfo& packageInfo)
 {
 	// name
@@ -543,8 +526,7 @@ WriterImplBase::RegisterPackageInfo(PackageAttributeList& attributeList,
 }
 
 
-void
-WriterImplBase::RegisterPackageVersion(PackageAttributeList& attributeList,
+void WriterImplBase::RegisterPackageVersion(PackageAttributeList& attributeList,
 	const BPackageVersion& version, BHPKGAttributeID attributeID)
 {
 	PackageAttribute* versionMajor = AddStringAttribute(attributeID,
@@ -572,8 +554,7 @@ WriterImplBase::RegisterPackageVersion(PackageAttributeList& attributeList,
 }
 
 
-void
-WriterImplBase::RegisterPackageResolvableExpressionList(
+void WriterImplBase::RegisterPackageResolvableExpressionList(
 	PackageAttributeList& attributeList,
 	const BObjectList<BPackageResolvableExpression>& expressionList, uint8 id)
 {
@@ -607,8 +588,7 @@ WriterImplBase::AddStringAttribute(BHPKGAttributeID id, const BString& value,
 }
 
 
-int32
-WriterImplBase::WriteCachedStrings(const StringCache& cache,
+int32 WriterImplBase::WriteCachedStrings(const StringCache& cache,
 	uint32 minUsageCount)
 {
 	// create an array of the cached strings
@@ -651,8 +631,7 @@ WriterImplBase::WriteCachedStrings(const StringCache& cache,
 }
 
 
-int32
-WriterImplBase::WritePackageAttributes(
+int32 WriterImplBase::WritePackageAttributes(
 	const PackageAttributeList& packageAttributes,
 	uint32& _stringsLengthUncompressed)
 {
@@ -668,8 +647,7 @@ WriterImplBase::WritePackageAttributes(
 }
 
 
-void
-WriterImplBase::WriteAttributeValue(const AttributeValue& value, uint8 encoding)
+void WriterImplBase::WriteAttributeValue(const AttributeValue& value, uint8 encoding)
 {
 	switch (value.type) {
 		case B_HPKG_ATTRIBUTE_TYPE_INT:
@@ -733,8 +711,7 @@ WriterImplBase::WriteAttributeValue(const AttributeValue& value, uint8 encoding)
 }
 
 
-void
-WriterImplBase::WriteUnsignedLEB128(uint64 value)
+void WriterImplBase::WriteUnsignedLEB128(uint64 value)
 {
 	uint8 bytes[10];
 	int32 count = 0;
@@ -748,8 +725,7 @@ WriterImplBase::WriteUnsignedLEB128(uint64 value)
 }
 
 
-void
-WriterImplBase::RawWriteBuffer(const void* buffer, size_t size, off_t offset)
+void WriterImplBase::RawWriteBuffer(const void* buffer, size_t size, off_t offset)
 {
 	status_t error = fFile->WriteAtExactly(offset, buffer, size);
 	if (error != B_OK) {
@@ -761,8 +737,7 @@ WriterImplBase::RawWriteBuffer(const void* buffer, size_t size, off_t offset)
 }
 
 
-void
-WriterImplBase::_AddStringAttributeList(BHPKGAttributeID id,
+void WriterImplBase::_AddStringAttributeList(BHPKGAttributeID id,
 	const BStringList& value, DoublyLinkedList<PackageAttribute>& list)
 {
 	for (int32 i = 0; i < value.CountStrings(); i++)
@@ -770,8 +745,7 @@ WriterImplBase::_AddStringAttributeList(BHPKGAttributeID id,
 }
 
 
-void
-WriterImplBase::_WritePackageAttributes(
+void WriterImplBase::_WritePackageAttributes(
 	const PackageAttributeList& packageAttributes)
 {
 	DoublyLinkedList<PackageAttribute>::ConstIterator it

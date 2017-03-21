@@ -48,16 +48,14 @@ BNumberFormatParameters::~BNumberFormatParameters()
 }
 
 // SetUseGrouping
-void
-BNumberFormatParameters::SetUseGrouping(bool useGrouping)
+void BNumberFormatParameters::SetUseGrouping(bool useGrouping)
 {
 	fUseGrouping = useGrouping;
 	fFlags |= USE_GROUPING_SET;
 }
 
 // UseGrouping
-bool
-BNumberFormatParameters::UseGrouping() const
+bool BNumberFormatParameters::UseGrouping() const
 {
 	if (fFlags & USE_GROUPING_SET)
 		return fUseGrouping;
@@ -67,8 +65,7 @@ BNumberFormatParameters::UseGrouping() const
 }
 
 // SetSignPolicy
-void
-BNumberFormatParameters::SetSignPolicy(number_format_sign_policy policy)
+void BNumberFormatParameters::SetSignPolicy(number_format_sign_policy policy)
 {
 	fSignPolicy = policy;
 	fFlags |= SIGN_POLICY_SET;
@@ -86,8 +83,7 @@ BNumberFormatParameters::SignPolicy() const
 }
 
 // SetBase
-void
-BNumberFormatParameters::SetBase(number_format_base base)
+void BNumberFormatParameters::SetBase(number_format_base base)
 {
 	fBase = base;
 	fFlags |= BASE_SET;
@@ -105,16 +101,14 @@ BNumberFormatParameters::Base() const
 }
 
 // SetUseBasePrefix
-void
-BNumberFormatParameters::SetUseBasePrefix(bool useBasePrefix)
+void BNumberFormatParameters::SetUseBasePrefix(bool useBasePrefix)
 {
 	fUseBasePrefix = useBasePrefix;
 	fFlags |= USE_BASE_PREFIX_SET;
 }
 
 // UseBasePrefix
-bool
-BNumberFormatParameters::UseBasePrefix() const
+bool BNumberFormatParameters::UseBasePrefix() const
 {
 	if (fFlags & USE_BASE_PREFIX_SET)
 		return fUseBasePrefix;
@@ -124,8 +118,7 @@ BNumberFormatParameters::UseBasePrefix() const
 }
 
 // SetMinimalIntegerDigits
-void
-BNumberFormatParameters::SetMinimalIntegerDigits(size_t minIntegerDigits)
+void BNumberFormatParameters::SetMinimalIntegerDigits(size_t minIntegerDigits)
 {
 	fMinimalIntegerDigits = minIntegerDigits;
 	fFlags |= MINIMAL_INTEGER_DIGITS_SET;
@@ -143,16 +136,14 @@ BNumberFormatParameters::MinimalIntegerDigits() const
 }
 
 // SetUseZeroPadding
-void
-BNumberFormatParameters::SetUseZeroPadding(bool useZeroPadding)
+void BNumberFormatParameters::SetUseZeroPadding(bool useZeroPadding)
 {
 	fUseZeroPadding = useZeroPadding;
 	fFlags |= USE_ZERO_PADDING_SET;
 }
 
 // UseZeroPadding
-bool
-BNumberFormatParameters::UseZeroPadding() const
+bool BNumberFormatParameters::UseZeroPadding() const
 {
 	if (fFlags & USE_ZERO_PADDING_SET)
 		return fUseZeroPadding;
@@ -162,8 +153,7 @@ BNumberFormatParameters::UseZeroPadding() const
 }
 
 // SetParentNumberParameters
-void
-BNumberFormatParameters::SetParentNumberParameters(
+void BNumberFormatParameters::SetParentNumberParameters(
 	const BNumberFormatParameters *parent)
 {
 	fParent = parent;

@@ -24,15 +24,13 @@ DebuggerTeamDebugInfo::~DebuggerTeamDebugInfo()
 }
 
 
-status_t
-DebuggerTeamDebugInfo::Init()
+status_t DebuggerTeamDebugInfo::Init()
 {
 	return B_OK;
 }
 
 
-status_t
-DebuggerTeamDebugInfo::CreateImageDebugInfo(const ImageInfo& imageInfo,
+status_t DebuggerTeamDebugInfo::CreateImageDebugInfo(const ImageInfo& imageInfo,
 	LocatableFile* imageFile, ImageDebugInfoLoadingState& _state,
 	SpecificImageDebugInfo*& _imageDebugInfo)
 {

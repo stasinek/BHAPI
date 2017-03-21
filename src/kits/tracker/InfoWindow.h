@@ -92,8 +92,7 @@ private:
 };
 
 
-inline bool
-BInfoWindow::StopCalc()
+inline bool BInfoWindow::StopCalc()
 {
 	return fStopCalc;
 }

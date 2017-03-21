@@ -49,22 +49,19 @@ const rgb_color kNormalColor = {150, 150, 150, 255};
 const rgb_color kHighlightColor = {100, 100, 0, 255};
 
 
-static void
-AddSelf(BView* self, BView* to)
+static void AddSelf(BView* self, BView* to)
 {
 	to->AddChild(self);
 }
 
 
-void
-ViewList::RemoveAll(BView*)
+void ViewList::RemoveAll(BView*)
 {
 	EachListItemIgnoreResult(this, &BView::RemoveSelf);
 }
 
 
-void
-ViewList::AddAll(BView* toParent)
+void ViewList::AddAll(BView* toParent)
 {
 	EachListItem(this, &AddSelf, toParent);
 }
@@ -108,8 +105,7 @@ DialogPane::~DialogPane()
 }
 
 
-void
-DialogPane::SetMode(int32 mode, bool initialSetup)
+void DialogPane::SetMode(int32 mode, bool initialSetup)
 {
 	ASSERT(mode < 3 && mode >= 0);
 
@@ -199,8 +195,7 @@ DialogPane::SetMode(int32 mode, bool initialSetup)
 }
 
 
-void
-DialogPane::AttachedToWindow()
+void DialogPane::AttachedToWindow()
 {
 	BView* parent = Parent();
 	if (parent != NULL) {
@@ -210,8 +205,7 @@ DialogPane::AttachedToWindow()
 }
 
 
-void
-DialogPane::ResizeParentWindow(int32 from, int32 to)
+void DialogPane::ResizeParentWindow(int32 from, int32 to)
 {
 	if (Window() == NULL)
 		return;
@@ -225,8 +219,7 @@ DialogPane::ResizeParentWindow(int32 from, int32 to)
 }
 
 
-void
-DialogPane::AddItem(BView* view, int32 toMode)
+void DialogPane::AddItem(BView* view, int32 toMode)
 {
 	if (toMode == 1)
 		fMode2Items.AddItem(view);
@@ -298,8 +291,7 @@ DialogPane::FrameForMode(int32 mode, BRect mode1Frame, BRect mode2Frame,
 }
 
 
-void
-DialogPane::SetSwitch(BControl* control)
+void DialogPane::SetSwitch(BControl* control)
 {
 	fLatch = control;
 	control->SetMessage(new BMessage(kValueChanged));
@@ -307,8 +299,7 @@ DialogPane::SetSwitch(BControl* control)
 }
 
 
-void
-DialogPane::MessageReceived(BMessage* message)
+void DialogPane::MessageReceived(BMessage* message)
 {
 	if (message->what == kValueChanged) {
 		int32 value;
@@ -352,8 +343,7 @@ PaneSwitch::~PaneSwitch()
 }
 
 
-void
-PaneSwitch::Draw(BRect)
+void PaneSwitch::Draw(BRect)
 {
 	BRect bounds(Bounds());
 
@@ -402,8 +392,7 @@ PaneSwitch::Draw(BRect)
 }
 
 
-void
-PaneSwitch::MouseDown(BPoint)
+void PaneSwitch::MouseDown(BPoint)
 {
 	if (!IsEnabled())
 		return;
@@ -415,8 +404,7 @@ PaneSwitch::MouseDown(BPoint)
 }
 
 
-void
-PaneSwitch::GetPreferredSize(float* _width, float* _height)
+void PaneSwitch::GetPreferredSize(float* _width, float* _height)
 {
 	BSize size = MinSize();
 	if (_width != NULL)
@@ -461,8 +449,7 @@ PaneSwitch::PreferredSize()
 }
 
 
-void
-PaneSwitch::SetLabels(const char* labelOn, const char* labelOff)
+void PaneSwitch::SetLabels(const char* labelOn, const char* labelOff)
 {
 	free(fLabelOn);
 	free(fLabelOff);
@@ -482,8 +469,7 @@ PaneSwitch::SetLabels(const char* labelOn, const char* labelOff)
 }
 
 
-void
-PaneSwitch::DoneTracking(BPoint point)
+void PaneSwitch::DoneTracking(BPoint point)
 {
 	BRect bounds(Bounds());
 	bounds.InsetBy(-3, -3);
@@ -497,8 +483,7 @@ PaneSwitch::DoneTracking(BPoint point)
 }
 
 
-void
-PaneSwitch::Track(BPoint point, uint32)
+void PaneSwitch::Track(BPoint point, uint32)
 {
 	BRect bounds(Bounds());
 	bounds.InsetBy(-3, -3);
@@ -511,8 +496,7 @@ PaneSwitch::Track(BPoint point, uint32)
 }
 
 
-void
-PaneSwitch::DrawInState(PaneSwitch::State state)
+void PaneSwitch::DrawInState(PaneSwitch::State state)
 {
 	BRect rect(0, 0,  __be_plain_font->Size(),  __be_plain_font->Size());
 	rect.OffsetBy(1, 1);

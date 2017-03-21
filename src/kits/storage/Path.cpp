@@ -226,7 +226,7 @@ BPath::~BPath()
 }
 
 
-status_t
+status_t 
 BPath::SetTo(const char *dir, const char *leaf, bool normalize)
 {
     BString str;
@@ -259,7 +259,7 @@ BPath::SetTo(const char *dir, const char *leaf, bool normalize)
 }
 
 
-status_t
+status_t 
 BPath::Append(const char *path, bool normalize)
 {
     if(fPath == NULL) return B_BAD_VALUE;
@@ -269,7 +269,7 @@ BPath::Append(const char *path, bool normalize)
 }
 
 
-void
+void 
 BPath::Unset()
 {
     if(fPath != NULL)
@@ -313,7 +313,7 @@ BPath::Leaf() const
 }
 
 
-status_t
+status_t 
 BPath::GetParent(BPath *parent) const
 {
     if(parent == NULL) return B_BAD_VALUE;
@@ -327,14 +327,14 @@ BPath::GetParent(BPath *parent) const
 }
 
 
-bool
+bool 
 BPath::operator==(const BPath &path) const
 {
     return operator==(path.fPath);
 }
 
 
-bool
+bool 
 BPath::operator==(const char *path) const
 {
     if(fPath == NULL && path == NULL) return true;
@@ -343,14 +343,14 @@ BPath::operator==(const char *path) const
 }
 
 
-bool
+bool 
 BPath::operator!=(const BPath &path) const
 {
     return operator!=(path.fPath);
 }
 
 
-bool
+bool 
 BPath::operator!=(const char *path) const
 {
     if(fPath == NULL && path == NULL) return false;

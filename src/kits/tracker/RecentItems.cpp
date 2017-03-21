@@ -140,8 +140,7 @@ RecentItemsMenu::~RecentItemsMenu()
 }
 
 
-bool
-RecentItemsMenu::AddNextItem()
+bool RecentItemsMenu::AddNextItem()
 {
 	BMenuItem* item = fIterator->GetNextMenuItem(FileMessage(),
 		ContainerMessage(), fItemTarget);
@@ -157,8 +156,7 @@ RecentItemsMenu::AddNextItem()
 }
 
 
-bool
-RecentItemsMenu::StartBuildingItemList()
+bool RecentItemsMenu::StartBuildingItemList()
 {
 	// remove any preexisting items
 	int32 itemCount = CountItems();
@@ -173,8 +171,7 @@ RecentItemsMenu::StartBuildingItemList()
 }
 
 
-void
-RecentItemsMenu::ClearMenuBuildingState()
+void RecentItemsMenu::ClearMenuBuildingState()
 {
 	fMenuBuilt = false;
 		// force rebuilding each time
@@ -256,8 +253,7 @@ BRecentItemsList::BRecentItemsList(int32 maxItems, bool navMenuFolders)
 }
 
 
-void
-BRecentItemsList::Rewind()
+void BRecentItemsList::Rewind()
 {
 	fIndex = 0;
 	fItems.MakeEmpty();
@@ -353,8 +349,7 @@ BRecentItemsList::GetNextMenuItem(const BMessage* fileOpenInvokeMessage,
 }
 
 
-status_t
-BRecentItemsList::GetNextRef(entry_ref* result)
+status_t BRecentItemsList::GetNextRef(entry_ref* result)
 {
 	return fItems.FindRef("refs", fIndex++, result);
 }
@@ -403,8 +398,7 @@ BRecentFilesList::~BRecentFilesList()
 }
 
 
-status_t
-BRecentFilesList::GetNextRef(entry_ref* ref)
+status_t BRecentFilesList::GetNextRef(entry_ref* ref)
 {
 	if (fIndex == 0) {
 		// Lazy roster Get
@@ -471,8 +465,7 @@ BRecentFoldersList::BRecentFoldersList(int32 maxItems, bool navMenuFolders,
 }
 
 
-status_t
-BRecentFoldersList::GetNextRef(entry_ref* ref)
+status_t BRecentFoldersList::GetNextRef(entry_ref* ref)
 {
 	if (fIndex == 0) {
 		// Lazy roster Get
@@ -495,8 +488,7 @@ BRecentAppsList::BRecentAppsList(int32 maxItems)
 }
 
 
-status_t
-BRecentAppsList::GetNextRef(entry_ref* ref)
+status_t BRecentAppsList::GetNextRef(entry_ref* ref)
 {
 	if (fIndex == 0) {
 		// Lazy roster Get

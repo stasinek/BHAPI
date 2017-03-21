@@ -158,7 +158,7 @@ BMallocIO::Position() const
 }
 
 
-status_t
+status_t 
 BMallocIO::SetSize(__be_int64 size)
 {
 	if(size < 0) return B_BAD_VALUE;
@@ -194,7 +194,7 @@ BMallocIO::SetSize(__be_int64 size)
 }
 
 
-void
+void 
 BMallocIO::SetBlockSize(size_t blocksize)
 {
 	fBlockSize = blocksize;
@@ -315,7 +315,7 @@ BMemoryIO::Position() const
 }
 
 
-status_t
+status_t 
 BMemoryIO::SetSize(__be_int64 size)
 {
 	if(size > (__be_int64)fRealLen) return B_NO_MEMORY;

@@ -196,15 +196,13 @@ private:
 
 // inlines follow
 
-inline bool
-BFilePanelPoseView::IsFilePanel() const
+inline bool BFilePanelPoseView::IsFilePanel() const
 {
 	return true;
 }
 
 
-inline bool
-TFilePanel::IsSavePanel() const
+inline bool TFilePanel::IsSavePanel() const
 {
 	return fIsSavePanel;
 }
@@ -217,29 +215,25 @@ TFilePanel::Target() const
 }
 
 
-inline void
-TFilePanel::Refresh()
+inline void TFilePanel::Refresh()
 {
 	fPoseView->Refresh();
 }
 
 
-inline bool
-TFilePanel::HidesWhenDone(void)
+inline bool TFilePanel::HidesWhenDone(void)
 {
 	return fHideWhenDone;
 }
 
 
-inline void
-TFilePanel::SetHideWhenDone(bool on)
+inline void TFilePanel::SetHideWhenDone(bool on)
 {
 	fHideWhenDone = on;
 }
 
 
-inline bool
-TFilePanel::TrackingMenu() const
+inline bool TFilePanel::TrackingMenu() const
 {
 	return fIsTrackingMenu;
 }

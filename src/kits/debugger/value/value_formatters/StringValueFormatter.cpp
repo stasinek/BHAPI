@@ -24,8 +24,7 @@ StringValueFormatter::~StringValueFormatter()
 }
 
 
-status_t
-StringValueFormatter::FormatValue(Value* value, BString& _output)
+status_t StringValueFormatter::FormatValue(Value* value, BString& _output)
 {
 	_output = "\"";
 	BString tempString;

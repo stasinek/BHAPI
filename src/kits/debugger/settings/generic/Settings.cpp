@@ -30,8 +30,7 @@ Settings::~Settings()
 }
 
 
-status_t
-Settings::Init()
+status_t Settings::Init()
 {
 	return fLock.InitCheck();
 }
@@ -62,8 +61,7 @@ Settings::Value(const char* settingID) const
 }
 
 
-bool
-Settings::SetValue(Setting* setting, const BVariant& value)
+bool Settings::SetValue(Setting* setting, const BVariant& value)
 {
 	AutoLocker<BLocker> locker(fLock);
 
@@ -82,8 +80,7 @@ Settings::SetValue(Setting* setting, const BVariant& value)
 }
 
 
-bool
-Settings::RestoreValues(const BMessage& message)
+bool Settings::RestoreValues(const BMessage& message)
 {
 	AutoLocker<BLocker> locker(fLock);
 
@@ -110,16 +107,14 @@ Settings::OptionValue(OptionsSetting* setting) const
 }
 
 
-bool
-Settings::AddListener(Listener* listener)
+bool Settings::AddListener(Listener* listener)
 {
 	AutoLocker<BLocker> locker(fLock);
 	return fListeners.AddItem(listener);
 }
 
 
-void
-Settings::RemoveListener(Listener* listener)
+void Settings::RemoveListener(Listener* listener)
 {
 	AutoLocker<BLocker> locker(fLock);
 	fListeners.RemoveItem(listener);

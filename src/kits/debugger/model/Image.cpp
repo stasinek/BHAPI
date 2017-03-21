@@ -36,15 +36,13 @@ Image::~Image()
 }
 
 
-status_t
-Image::Init()
+status_t Image::Init()
 {
 	return B_OK;
 }
 
 
-bool
-Image::ContainsAddress(target_addr_t address) const
+bool Image::ContainsAddress(target_addr_t address) const
 {
 	return (address >= fInfo.TextBase()
 			&& address < fInfo.TextBase() + fInfo.TextSize())
@@ -53,8 +51,7 @@ Image::ContainsAddress(target_addr_t address) const
 }
 
 
-status_t
-Image::SetImageDebugInfo(ImageDebugInfo* debugInfo,
+status_t Image::SetImageDebugInfo(ImageDebugInfo* debugInfo,
 	image_debug_info_state state)
 {
 	if (debugInfo == fDebugInfo && state == fDebugInfoState)

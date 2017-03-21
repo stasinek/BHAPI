@@ -21,8 +21,7 @@ RPattern::RPattern(Range range, Pattern *pattern)
 {
 }
 
-status_t
-RPattern::InitCheck() const {
+status_t RPattern::InitCheck() const {
 	status_t err = fRange.InitCheck();
 	if (!err)
 		err = fPattern ? B_OK : B_BAD_VALUE;
@@ -49,8 +48,7 @@ RPattern::~RPattern() {
 }
 
 //! Sniffs the given data stream over the object's range for the object's pattern
-bool
-RPattern::Sniff(BPositionIO *data, bool caseInsensitive) const {
+bool RPattern::Sniff(BPositionIO *data, bool caseInsensitive) const {
 	if (!data || InitCheck() != B_OK)
 		return false;
 	else 

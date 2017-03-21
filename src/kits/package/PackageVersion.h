@@ -67,43 +67,37 @@ private:
 };
 
 
-inline bool
-BPackageVersion::operator==(const BPackageVersion& other) const
+inline bool BPackageVersion::operator==(const BPackageVersion& other) const
 {
 	return Compare(other) == 0;
 }
 
 
-inline bool
-BPackageVersion::operator!=(const BPackageVersion& other) const
+inline bool BPackageVersion::operator!=(const BPackageVersion& other) const
 {
 	return Compare(other) != 0;
 }
 
 
-inline bool
-BPackageVersion::operator<(const BPackageVersion& other) const
+inline bool BPackageVersion::operator<(const BPackageVersion& other) const
 {
 	return Compare(other) < 0;
 }
 
 
-inline bool
-BPackageVersion::operator>(const BPackageVersion& other) const
+inline bool BPackageVersion::operator>(const BPackageVersion& other) const
 {
 	return Compare(other) > 0;
 }
 
 
-inline bool
-BPackageVersion::operator<=(const BPackageVersion& other) const
+inline bool BPackageVersion::operator<=(const BPackageVersion& other) const
 {
 	return Compare(other) <= 0;
 }
 
 
-inline bool
-BPackageVersion::operator>=(const BPackageVersion& other) const
+inline bool BPackageVersion::operator>=(const BPackageVersion& other) const
 {
 	return Compare(other) >= 0;
 }

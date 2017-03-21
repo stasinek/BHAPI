@@ -45,8 +45,7 @@ BPartitioningInfo::~BPartitioningInfo()
 
 
 // SetTo
-status_t
-BPartitioningInfo::SetTo(off_t offset, off_t size)
+status_t BPartitioningInfo::SetTo(off_t offset, off_t size)
 {
 	TRACE(("%p - BPartitioningInfo::SetTo(offset = %lld, size = %lld)\n", this, offset, size));
 
@@ -73,8 +72,7 @@ BPartitioningInfo::SetTo(off_t offset, off_t size)
 
 
 // Unset
-void
-BPartitioningInfo::Unset()
+void BPartitioningInfo::Unset()
 {
 	delete[] fSpaces;
 	fPartitionID = -1;
@@ -85,8 +83,7 @@ BPartitioningInfo::Unset()
 
 
 // ExcludeOccupiedSpace
-status_t
-BPartitioningInfo::ExcludeOccupiedSpace(off_t offset, off_t size)
+status_t BPartitioningInfo::ExcludeOccupiedSpace(off_t offset, off_t size)
 {
 	if (size <= 0)
 		return B_OK;
@@ -188,8 +185,7 @@ BPartitioningInfo::PartitionID() const
 
 
 // GetPartitionableSpaceAt
-status_t
-BPartitioningInfo::GetPartitionableSpaceAt(int32 index, off_t* offset,
+status_t BPartitioningInfo::GetPartitionableSpaceAt(int32 index, off_t* offset,
 										   off_t *size) const
 {
 	if (!fSpaces)
@@ -205,16 +201,14 @@ BPartitioningInfo::GetPartitionableSpaceAt(int32 index, off_t* offset,
 
 
 // CountPartitionableSpaces
-int32
-BPartitioningInfo::CountPartitionableSpaces() const
+int32 BPartitioningInfo::CountPartitionableSpaces() const
 {
 	return fCount;
 }
 
 
 // PrintToStream
-void
-BPartitioningInfo::PrintToStream() const
+void BPartitioningInfo::PrintToStream() const
 {
 	if (!fSpaces) {
 		printf("BPartitioningInfo is not initialized\n");
@@ -232,8 +226,7 @@ BPartitioningInfo::PrintToStream() const
 
 
 // _InsertSpaces
-status_t
-BPartitioningInfo::_InsertSpaces(int32 index, int32 count)
+status_t BPartitioningInfo::_InsertSpaces(int32 index, int32 count)
 {
 	if (index <= 0 || index > fCount || count <= 0)
 		return B_BAD_VALUE;
@@ -271,8 +264,7 @@ BPartitioningInfo::_InsertSpaces(int32 index, int32 count)
 
 
 // _RemoveSpaces
-void
-BPartitioningInfo::_RemoveSpaces(int32 index, int32 count)
+void BPartitioningInfo::_RemoveSpaces(int32 index, int32 count)
 {
 	if (index < 0 || count <= 0 || index + count > fCount)
 		return;

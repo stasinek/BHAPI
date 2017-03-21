@@ -546,8 +546,7 @@ DwarfFile::~DwarfFile()
 }
 
 
-status_t
-DwarfFile::StartLoading(const char* fileName, BString& _requiredExternalFile)
+status_t DwarfFile::StartLoading(const char* fileName, BString& _requiredExternalFile)
 {
 	fName = strdup(fileName);
 	if (fName == NULL)
@@ -570,8 +569,7 @@ DwarfFile::StartLoading(const char* fileName, BString& _requiredExternalFile)
 }
 
 
-status_t
-DwarfFile::Load(uint8 addressSize, const BString& externalInfoFilePath)
+status_t DwarfFile::Load(uint8 addressSize, const BString& externalInfoFilePath)
 {
 	status_t error = B_OK;
 	if (fDebugInfoSection == NULL) {
@@ -638,8 +636,7 @@ DwarfFile::Load(uint8 addressSize, const BString& externalInfoFilePath)
 }
 
 
-status_t
-DwarfFile::FinishLoading()
+status_t DwarfFile::FinishLoading()
 {
 	if (fFinished)
 		return B_OK;
@@ -668,8 +665,7 @@ DwarfFile::FinishLoading()
 }
 
 
-int32
-DwarfFile::CountCompilationUnits() const
+int32 DwarfFile::CountCompilationUnits() const
 {
 	return fCompilationUnits.CountItems();
 }
@@ -752,8 +748,7 @@ DwarfFile::ResolveRangeList(CompilationUnit* unit, uint64 offset) const
 }
 
 
-status_t
-DwarfFile::UnwindCallFrame(CompilationUnit* unit, uint8 addressSize,
+status_t DwarfFile::UnwindCallFrame(CompilationUnit* unit, uint8 addressSize,
 	DIESubprogram* subprogramEntry, target_addr_t location,
 	const DwarfTargetInterface* inputInterface,
 	DwarfTargetInterface* outputInterface, target_addr_t& _framePointer)
@@ -767,8 +762,7 @@ DwarfFile::UnwindCallFrame(CompilationUnit* unit, uint8 addressSize,
 }
 
 
-status_t
-DwarfFile::EvaluateExpression(CompilationUnit* unit, uint8 addressSize,
+status_t DwarfFile::EvaluateExpression(CompilationUnit* unit, uint8 addressSize,
 	DIESubprogram* subprogramEntry, const void* expression,
 	off_t expressionLength, const DwarfTargetInterface* targetInterface,
 	target_addr_t instructionPointer, target_addr_t framePointer,
@@ -786,8 +780,7 @@ DwarfFile::EvaluateExpression(CompilationUnit* unit, uint8 addressSize,
 }
 
 
-status_t
-DwarfFile::ResolveLocation(CompilationUnit* unit, uint8 addressSize,
+status_t DwarfFile::ResolveLocation(CompilationUnit* unit, uint8 addressSize,
 	DIESubprogram* subprogramEntry, const LocationDescription* location,
 	const DwarfTargetInterface* targetInterface,
 	target_addr_t instructionPointer, target_addr_t objectPointer,
@@ -812,8 +805,7 @@ DwarfFile::ResolveLocation(CompilationUnit* unit, uint8 addressSize,
 }
 
 
-status_t
-DwarfFile::EvaluateConstantValue(CompilationUnit* unit, uint8 addressSize,
+status_t DwarfFile::EvaluateConstantValue(CompilationUnit* unit, uint8 addressSize,
 	DIESubprogram* subprogramEntry, const ConstantAttributeValue* value,
 	const DwarfTargetInterface* targetInterface,
 	target_addr_t instructionPointer, target_addr_t framePointer,
@@ -848,8 +840,7 @@ DwarfFile::EvaluateConstantValue(CompilationUnit* unit, uint8 addressSize,
 }
 
 
-status_t
-DwarfFile::EvaluateDynamicValue(CompilationUnit* unit, uint8 addressSize,
+status_t DwarfFile::EvaluateDynamicValue(CompilationUnit* unit, uint8 addressSize,
 	DIESubprogram* subprogramEntry, const DynamicAttributeValue* value,
 	const DwarfTargetInterface* targetInterface,
 	target_addr_t instructionPointer, target_addr_t framePointer,
@@ -963,8 +954,7 @@ DwarfFile::EvaluateDynamicValue(CompilationUnit* unit, uint8 addressSize,
 }
 
 
-status_t
-DwarfFile::_ParseDebugInfoSection()
+status_t DwarfFile::_ParseDebugInfoSection()
 {
 	// iterate through the debug info section
 	DataReader dataReader(fDebugInfoSection->Data(),
@@ -1037,8 +1027,7 @@ DwarfFile::_ParseDebugInfoSection()
 }
 
 
-status_t
-DwarfFile::_ParseTypesSection()
+status_t DwarfFile::_ParseTypesSection()
 {
 	DataReader dataReader(fDebugTypesSection->Data(),
 		fDebugTypesSection->Size(), 4);
@@ -1129,8 +1118,7 @@ DwarfFile::_ParseTypesSection()
 }
 
 
-status_t
-DwarfFile::_ParseFrameSection(ElfSection* section, uint8 addressSize,
+status_t DwarfFile::_ParseFrameSection(ElfSection* section, uint8 addressSize,
 	bool ehFrame, FDEInfoList& infos)
 {
 	if (ehFrame) {
@@ -1239,8 +1227,7 @@ DwarfFile::_ParseFrameSection(ElfSection* section, uint8 addressSize,
 }
 
 
-status_t
-DwarfFile::_ParseCompilationUnit(CompilationUnit* unit)
+status_t DwarfFile::_ParseCompilationUnit(CompilationUnit* unit)
 {
 	AbbreviationTable* abbreviationTable;
 	status_t error = _GetAbbreviationTable(unit->AbbreviationOffset(),
@@ -1283,8 +1270,7 @@ DwarfFile::_ParseCompilationUnit(CompilationUnit* unit)
 }
 
 
-status_t
-DwarfFile::_ParseTypeUnit(TypeUnit* unit)
+status_t DwarfFile::_ParseTypeUnit(TypeUnit* unit)
 {
 	AbbreviationTable* abbreviationTable;
 	status_t error = _GetAbbreviationTable(unit->AbbreviationOffset(),
@@ -1334,8 +1320,7 @@ DwarfFile::_ParseTypeUnit(TypeUnit* unit)
 }
 
 
-status_t
-DwarfFile::_ParseDebugInfoEntry(DataReader& dataReader,
+status_t DwarfFile::_ParseDebugInfoEntry(DataReader& dataReader,
 	BaseUnit* unit, AbbreviationTable* abbreviationTable,
 	DebugInfoEntry*& _entry, bool& _endOfEntryList, int level)
 {
@@ -1427,8 +1412,7 @@ DwarfFile::_ParseDebugInfoEntry(DataReader& dataReader,
 }
 
 
-status_t
-DwarfFile::_FinishUnit(BaseUnit* unit)
+status_t DwarfFile::_FinishUnit(BaseUnit* unit)
 {
 	CompilationUnit* compilationUnit = dynamic_cast<CompilationUnit*>(unit);
 	bool isTypeUnit = compilationUnit == NULL;
@@ -1516,8 +1500,7 @@ DwarfFile::_FinishUnit(BaseUnit* unit)
 }
 
 
-status_t
-DwarfFile::_ParseEntryAttributes(DataReader& dataReader,
+status_t DwarfFile::_ParseEntryAttributes(DataReader& dataReader,
 	BaseUnit* unit, DebugInfoEntry* entry, AbbreviationEntry& abbreviationEntry)
 {
 	uint32 attributeName;
@@ -1753,8 +1736,7 @@ DwarfFile::_ParseEntryAttributes(DataReader& dataReader,
 }
 
 
-status_t
-DwarfFile::_ParseLineInfo(CompilationUnit* unit)
+status_t DwarfFile::_ParseLineInfo(CompilationUnit* unit)
 {
 	off_t offset = unit->UnitEntry()->StatementListOffset();
 
@@ -1863,8 +1845,7 @@ DwarfFile::_ParseLineInfo(CompilationUnit* unit)
 }
 
 
-status_t
-DwarfFile::_UnwindCallFrame(CompilationUnit* unit, uint8 addressSize,
+status_t DwarfFile::_UnwindCallFrame(CompilationUnit* unit, uint8 addressSize,
 	DIESubprogram* subprogramEntry, target_addr_t location,
 	const FDELookupInfo* info, const DwarfTargetInterface* inputInterface,
 	DwarfTargetInterface* outputInterface, target_addr_t& _framePointer)
@@ -2091,8 +2072,7 @@ DwarfFile::_UnwindCallFrame(CompilationUnit* unit, uint8 addressSize,
 }
 
 
-status_t
-DwarfFile::_ParseCIEHeader(ElfSection* debugFrameSection,
+status_t DwarfFile::_ParseCIEHeader(ElfSection* debugFrameSection,
 	bool usingEHFrameSection, CompilationUnit* unit, uint8 addressSize,
 	CfaContext& context, off_t cieOffset, CIEAugmentation& cieAugmentation,
 	DataReader& dataReader, off_t& _cieRemaining)
@@ -2169,8 +2149,7 @@ DwarfFile::_ParseCIEHeader(ElfSection* debugFrameSection,
 }
 
 
-status_t
-DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
+status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 	CfaContext& context, DataReader& dataReader, CIEAugmentation& augmentation)
 {
 	while (dataReader.BytesRemaining() > 0) {
@@ -2562,8 +2541,7 @@ DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 }
 
 
-status_t
-DwarfFile::_ParsePublicTypesInfo()
+status_t DwarfFile::_ParsePublicTypesInfo()
 {
 	TRACE_PUBTYPES("DwarfFile::_ParsePublicTypesInfo()\n");
 	if (fDebugPublicTypesSection == NULL) {
@@ -2602,8 +2580,7 @@ DwarfFile::_ParsePublicTypesInfo()
 }
 
 
-status_t
-DwarfFile::_ParsePublicTypesInfo(DataReader& dataReader, bool dwarf64)
+status_t DwarfFile::_ParsePublicTypesInfo(DataReader& dataReader, bool dwarf64)
 {
 	int version = dataReader.Read<uint16>(0);
 	if (version != 2) {
@@ -2641,8 +2618,7 @@ DwarfFile::_ParsePublicTypesInfo(DataReader& dataReader, bool dwarf64)
 }
 
 
-status_t
-DwarfFile::_GetAbbreviationTable(off_t offset, AbbreviationTable*& _table)
+status_t DwarfFile::_GetAbbreviationTable(off_t offset, AbbreviationTable*& _table)
 {
 	// check, whether we've already loaded it
 	for (AbbreviationTableList::Iterator it
@@ -2706,8 +2682,7 @@ DwarfFile::_ResolveReference(BaseUnit* unit, uint64 offset,
 }
 
 
-status_t
-DwarfFile::_GetLocationExpression(CompilationUnit* unit,
+status_t DwarfFile::_GetLocationExpression(CompilationUnit* unit,
 	const LocationDescription* location, target_addr_t instructionPointer,
 	const void*& _expression, off_t& _length) const
 {
@@ -2729,8 +2704,7 @@ DwarfFile::_GetLocationExpression(CompilationUnit* unit,
 }
 
 
-status_t
-DwarfFile::_FindLocationExpression(CompilationUnit* unit, uint64 offset,
+status_t DwarfFile::_FindLocationExpression(CompilationUnit* unit, uint64 offset,
 	target_addr_t address, const void*& _expression, off_t& _length) const
 {
 	if (unit == NULL)
@@ -2781,8 +2755,7 @@ DwarfFile::_FindLocationExpression(CompilationUnit* unit, uint64 offset,
 }
 
 
-status_t
-DwarfFile::_LocateDebugInfo(BString& _requiredExternalFileName,
+status_t DwarfFile::_LocateDebugInfo(BString& _requiredExternalFileName,
 	const char* locatedFilePath)
 {
 	ElfFile* debugInfoFile = fElfFile;
@@ -2852,8 +2825,7 @@ DwarfFile::_LocateDebugInfo(BString& _requiredExternalFileName,
 }
 
 
-status_t
-DwarfFile::_GetDebugInfoPath(const char* debugFileName,
+status_t DwarfFile::_GetDebugInfoPath(const char* debugFileName,
 	BString& _infoPath) const
 {
 	// first, see if we have a relative match to our local directory

@@ -32,8 +32,7 @@ BPackageData::BPackageData()
 }
 
 
-void
-BPackageData::SetData(uint64 size, uint64 offset)
+void BPackageData::SetData(uint64 size, uint64 offset)
 {
 	fUncompressedSize = fCompressedSize = size;
 	fOffset = offset;
@@ -41,8 +40,7 @@ BPackageData::SetData(uint64 size, uint64 offset)
 }
 
 
-void
-BPackageData::SetData(uint8 size, const void* data)
+void BPackageData::SetData(uint8 size, const void* data)
 {
 	fUncompressedSize = fCompressedSize = size;
 	if (size > 0)

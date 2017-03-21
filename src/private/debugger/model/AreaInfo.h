@@ -5,7 +5,7 @@
 #ifndef AREA_INFO_H
 #define AREA_INFO_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <StringClass.h>
 
 #include "Types.h"

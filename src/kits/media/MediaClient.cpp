@@ -43,8 +43,7 @@ BMediaClient::Client() const
 }
 
 
-status_t
-BMediaClient::InitCheck() const
+status_t BMediaClient::InitCheck() const
 {
 	CALLED();
 
@@ -93,8 +92,7 @@ BMediaClient::BeginOutput()
 }
 
 
-status_t
-BMediaClient::Bind(BMediaInput* input, BMediaOutput* output)
+status_t BMediaClient::Bind(BMediaInput* input, BMediaOutput* output)
 {
 	CALLED();
 
@@ -116,8 +114,7 @@ BMediaClient::Bind(BMediaInput* input, BMediaOutput* output)
 }
 
 
-status_t
-BMediaClient::Unbind(BMediaInput* input, BMediaOutput* output)
+status_t BMediaClient::Unbind(BMediaInput* input, BMediaOutput* output)
 {
 	CALLED();
 
@@ -134,8 +131,7 @@ BMediaClient::Unbind(BMediaInput* input, BMediaOutput* output)
 }
 
 
-status_t
-BMediaClient::Connect(BMediaConnection* ourConnection,
+status_t BMediaClient::Connect(BMediaConnection* ourConnection,
 	BMediaConnection* theirConnection)
 {
 	CALLED();
@@ -144,8 +140,7 @@ BMediaClient::Connect(BMediaConnection* ourConnection,
 }
 
 
-status_t
-BMediaClient::Connect(BMediaConnection* ourConnection,
+status_t BMediaClient::Connect(BMediaConnection* ourConnection,
 	const media_connection& theirConnection)
 {
 	CALLED();
@@ -159,8 +154,7 @@ BMediaClient::Connect(BMediaConnection* ourConnection,
 }
 
 
-status_t
-BMediaClient::Connect(BMediaConnection* connection,
+status_t BMediaClient::Connect(BMediaConnection* connection,
 	const media_client& client)
 {
 	CALLED();
@@ -171,8 +165,7 @@ BMediaClient::Connect(BMediaConnection* connection,
 }
 
 
-status_t
-BMediaClient::Disconnect()
+status_t BMediaClient::Disconnect()
 {
 	CALLED();
 
@@ -186,8 +179,7 @@ BMediaClient::Disconnect()
 }
 
 
-status_t
-BMediaClient::DisconnectConnection(BMediaConnection* conn)
+status_t BMediaClient::DisconnectConnection(BMediaConnection* conn)
 {
 	CALLED();
 
@@ -195,8 +187,7 @@ BMediaClient::DisconnectConnection(BMediaConnection* conn)
 }
 
 
-status_t
-BMediaClient::ReleaseConnection(BMediaConnection* conn)
+status_t BMediaClient::ReleaseConnection(BMediaConnection* conn)
 {
 	CALLED();
 
@@ -204,8 +195,7 @@ BMediaClient::ReleaseConnection(BMediaConnection* conn)
 }
 
 
-int32
-BMediaClient::CountInputs() const
+int32 BMediaClient::CountInputs() const
 {
 	CALLED();
 
@@ -213,8 +203,7 @@ BMediaClient::CountInputs() const
 }
 
 
-int32
-BMediaClient::CountOutputs() const
+int32 BMediaClient::CountOutputs() const
 {
 	CALLED();
 
@@ -290,8 +279,7 @@ BMediaClient::FindOutput(const media_source& source) const
 }
 
 
-bool
-BMediaClient::IsRunning() const
+bool BMediaClient::IsRunning() const
 {
 	CALLED();
 
@@ -299,8 +287,7 @@ BMediaClient::IsRunning() const
 }
 
 
-status_t
-BMediaClient::Start(bool force)
+status_t BMediaClient::Start(bool force)
 {
 	CALLED();
 
@@ -327,8 +314,7 @@ BMediaClient::Start(bool force)
 }
 
 
-status_t
-BMediaClient::Stop(bool force)
+status_t BMediaClient::Stop(bool force)
 {
 	CALLED();
 
@@ -344,8 +330,7 @@ BMediaClient::Stop(bool force)
 }
 
 
-status_t
-BMediaClient::Seek(bigtime_t mediaTime,
+status_t BMediaClient::Seek(bigtime_t mediaTime,
 	bigtime_t performanceTime)
 {
 	CALLED();
@@ -355,8 +340,7 @@ BMediaClient::Seek(bigtime_t mediaTime,
 }
 
 
-status_t
-BMediaClient::Roll(bigtime_t start, bigtime_t stop, bigtime_t seek)
+status_t BMediaClient::Roll(bigtime_t start, bigtime_t stop, bigtime_t seek)
 {
 	CALLED();
 
@@ -365,8 +349,7 @@ BMediaClient::Roll(bigtime_t start, bigtime_t stop, bigtime_t seek)
 }
 
 
-status_t
-BMediaClient::Preroll()
+status_t BMediaClient::Preroll()
 {
 	CALLED();
 
@@ -374,8 +357,7 @@ BMediaClient::Preroll()
 }
 
 
-status_t
-BMediaClient::SyncTo(bigtime_t performanceTime, bigtime_t timeout)
+status_t BMediaClient::SyncTo(bigtime_t performanceTime, bigtime_t timeout)
 {
 	CALLED();
 
@@ -393,8 +375,7 @@ BMediaClient::RunMode() const
 }
 
 
-status_t
-BMediaClient::SetRunMode(BMediaNode::run_mode mode)
+status_t BMediaClient::SetRunMode(BMediaNode::run_mode mode)
 {
 	CALLED();
 
@@ -402,8 +383,7 @@ BMediaClient::SetRunMode(BMediaNode::run_mode mode)
 }
 
 
-status_t
-BMediaClient::SetTimeSource(const media_client& timesource)
+status_t BMediaClient::SetTimeSource(const media_client& timesource)
 {
 	CALLED();
 
@@ -412,8 +392,7 @@ BMediaClient::SetTimeSource(const media_client& timesource)
 }
 
 
-void
-BMediaClient::GetLatencyRange(bigtime_t* min, bigtime_t* max) const
+void BMediaClient::GetLatencyRange(bigtime_t* min, bigtime_t* max) const
 {
 	CALLED();
 
@@ -422,8 +401,7 @@ BMediaClient::GetLatencyRange(bigtime_t* min, bigtime_t* max) const
 }
 
 
-void
-BMediaClient::SetLatencyRange(bigtime_t min, bigtime_t max)
+void BMediaClient::SetLatencyRange(bigtime_t min, bigtime_t max)
 {
 	CALLED();
 
@@ -441,8 +419,7 @@ BMediaClient::CurrentTime() const
 }
 
 
-void
-BMediaClient::AddInput(BMediaInput* input)
+void BMediaClient::AddInput(BMediaInput* input)
 {
 	CALLED();
 
@@ -450,8 +427,7 @@ BMediaClient::AddInput(BMediaInput* input)
 }
 
 
-void
-BMediaClient::AddOutput(BMediaOutput* output)
+void BMediaClient::AddOutput(BMediaOutput* output)
 {
 	CALLED();
 
@@ -468,8 +444,7 @@ BMediaClient::AddOn(int32* id) const
 }
 
 
-void
-BMediaClient::SetNotificationHook(notify_hook notifyHook, void* cookie)
+void BMediaClient::SetNotificationHook(notify_hook notifyHook, void* cookie)
 {
 	CALLED();
 
@@ -478,8 +453,7 @@ BMediaClient::SetNotificationHook(notify_hook notifyHook, void* cookie)
 }
 
 
-void
-BMediaClient::_Init()
+void BMediaClient::_Init()
 {
 	CALLED();
 
@@ -492,8 +466,7 @@ BMediaClient::_Init()
 }
 
 
-void
-BMediaClient::_Deinit()
+void BMediaClient::_Deinit()
 {
 	CALLED();
 
@@ -506,8 +479,7 @@ BMediaClient::_Deinit()
 }
 
 
-status_t
-BMediaClient::_ConnectInput(BMediaOutput* output,
+status_t BMediaClient::_ConnectInput(BMediaOutput* output,
 	const media_connection& input)
 {
 	CALLED();
@@ -525,8 +497,7 @@ BMediaClient::_ConnectInput(BMediaOutput* output,
 }
 
 
-status_t
-BMediaClient::_ConnectOutput(BMediaInput* input,
+status_t BMediaClient::_ConnectOutput(BMediaInput* input,
 	const media_connection& output)
 {
 	CALLED();

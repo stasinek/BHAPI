@@ -45,23 +45,20 @@ BRadioButton::~BRadioButton()
 }
 
 
-void
-BRadioButton::SetLabel(const char *label)
+void BRadioButton::SetLabel(const char *label)
 {
 	BControl::SetLabel(label);
 	Invalidate();
 }
 
 
-void
-BRadioButton::WindowActivated(bool state)
+void BRadioButton::WindowActivated(bool state)
 {
 	Invalidate();
 }
 
 
-void
-BRadioButton::Draw(BRect updateRect)
+void BRadioButton::Draw(BRect updateRect)
 {
 	if(Window() == NULL) return;
 
@@ -129,8 +126,7 @@ BRadioButton::Draw(BRect updateRect)
 	}
 }
 
-void
-BRadioButton::MouseDown(BPoint where)
+void BRadioButton::MouseDown(BPoint where)
 {
 	if(!IsEnabled() || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON)) return;
 
@@ -157,8 +153,7 @@ BRadioButton::MouseDown(BPoint where)
 }
 
 
-void
-BRadioButton::KeyDown(const char *bytes,  __be_int32 numBytes)
+void BRadioButton::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	if(!IsEnabled() || !IsFocus() || numBytes != 1) return;
 	if(!(bytes[0] == B_ENTER || bytes[0] == B_SPACE)) return;
@@ -172,16 +167,14 @@ BRadioButton::KeyDown(const char *bytes,  __be_int32 numBytes)
 }
 
 
-void
-BRadioButton::SetFont(const BFont *font,  __be_uint8 mask)
+void BRadioButton::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	BControl::SetFont(font, mask);
 	Invalidate();
 }
 
 
-void
-BRadioButton::GetPreferredSize(float *width, float *height)
+void BRadioButton::GetPreferredSize(float *width, float *height)
 {
 	if(width == NULL && height == NULL) return;
 
@@ -196,8 +189,7 @@ BRadioButton::GetPreferredSize(float *width, float *height)
 }
 
 
-void
-BRadioButton::SetValue(__be_int32 value)
+void BRadioButton::SetValue(__be_int32 value)
 {
 	if(value != Value())
 	{

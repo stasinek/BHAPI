@@ -127,8 +127,7 @@ BSolverProblemSolution::~BSolverProblemSolution()
 }
 
 
-int32
-BSolverProblemSolution::CountElements() const
+int32 BSolverProblemSolution::CountElements() const
 {
 	return fElements.CountItems();
 }
@@ -141,8 +140,7 @@ BSolverProblemSolution::ElementAt(int32 index) const
 }
 
 
-bool
-BSolverProblemSolution::AppendElement(const Element& element)
+bool BSolverProblemSolution::AppendElement(const Element& element)
 {
 	Element* newElement = new(std::nothrow) Element(element);
 	if (newElement == NULL || !fElements.AddItem(newElement)) {

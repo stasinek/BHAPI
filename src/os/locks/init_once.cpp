@@ -15,8 +15,7 @@ enum {
 };
 
 
-status_t
-__init_once(int32* control, status_t (*initRoutine)(void*), void* data)
+status_t __init_once(int32* control, status_t (*initRoutine)(void*), void* data)
 {
 	// Algorithm:
 	// The control variable goes through at most four states:

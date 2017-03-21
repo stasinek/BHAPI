@@ -161,15 +161,13 @@ BackgroundImage::~BackgroundImage()
 }
 
 
-void
-BackgroundImage::Add(BackgroundImageInfo* info)
+void BackgroundImage::Add(BackgroundImageInfo* info)
 {
 	fBitmapForWorkspaceList.AddItem(info);
 }
 
 
-void
-BackgroundImage::Show(BView* view, int32 workspace)
+void BackgroundImage::Show(BView* view, int32 workspace)
 {
 	fView = view;
 
@@ -184,8 +182,7 @@ BackgroundImage::Show(BView* view, int32 workspace)
 }
 
 
-void
-BackgroundImage::Show(BackgroundImageInfo* info, BView* view)
+void BackgroundImage::Show(BackgroundImageInfo* info, BView* view)
 {
 	BPoseView* poseView = dynamic_cast<BPoseView*>(view);
 	if (poseView != NULL)
@@ -278,8 +275,7 @@ BackgroundImage::BRectVerticalOverlap(BRect hostRect, BRect resizedRect)
 }
 
 
-void
-BackgroundImage::Remove()
+void BackgroundImage::Remove()
 {
 	if (fShowingBitmap != NULL) {
 		fView->ClearViewBitmap();
@@ -322,8 +318,7 @@ BackgroundImage::ImageInfoForWorkspace(int32 workspace) const
 }
 
 
-void
-BackgroundImage::WorkspaceActivated(BView* view, int32 workspace, bool state)
+void BackgroundImage::WorkspaceActivated(BView* view, int32 workspace, bool state)
 {
 	if (!fIsDesktop) {
 		// we only care for desktop bitmaps
@@ -353,8 +348,7 @@ BackgroundImage::WorkspaceActivated(BView* view, int32 workspace, bool state)
 }
 
 
-void
-BackgroundImage::ScreenChanged(BRect, color_space)
+void BackgroundImage::ScreenChanged(BRect, color_space)
 {
 	if (!fIsDesktop || fShowingBitmap == NULL)
 		return;

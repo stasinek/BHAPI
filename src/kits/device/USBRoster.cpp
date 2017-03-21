@@ -124,8 +124,7 @@ WatchedEntry::~WatchedEntry()
 }
 
 
-bool
-WatchedEntry::EntryCreated(entry_ref *ref)
+bool WatchedEntry::EntryCreated(entry_ref *ref)
 {
 	if (!fIsDirectory)
 		return false;
@@ -152,8 +151,7 @@ WatchedEntry::EntryCreated(entry_ref *ref)
 }
 
 
-bool
-WatchedEntry::EntryRemoved(ino_t node)
+bool WatchedEntry::EntryRemoved(ino_t node)
 {
 	if (!fIsDirectory)
 		return false;
@@ -208,8 +206,7 @@ RosterLooper::RosterLooper(BUSBRoster *roster)
 }
 
 
-void
-RosterLooper::Stop()
+void RosterLooper::Stop()
 {
 	Lock();
 	delete fRoot;
@@ -217,8 +214,7 @@ RosterLooper::Stop()
 }
 
 
-void
-RosterLooper::MessageReceived(BMessage *message)
+void RosterLooper::MessageReceived(BMessage *message)
 {
 	int32 opcode;
 	if (message->FindInt32("opcode", &opcode) < B_OK)
@@ -263,8 +259,7 @@ BUSBRoster::~BUSBRoster()
 }
 
 
-void
-BUSBRoster::Start()
+void BUSBRoster::Start()
 {
 	if (fLooper)
 		return;
@@ -273,8 +268,7 @@ BUSBRoster::Start()
 }
 
 
-void
-BUSBRoster::Stop()
+void BUSBRoster::Stop()
 {
 	if (!fLooper)
 		return;

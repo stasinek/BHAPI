@@ -210,8 +210,7 @@ FT_BEGIN_HEADER
 
   /*
    *  Return the maximum number of addressable elements in an array.
-   *  We limit ourselves to INT_MAX, rather than UINT_MAX, to avoid
-   *  any problems.
+   *  We limit ourselves to INT_MAX, rather than UINT_MAX, to avoid    *  any problems.
    */
 #define FT_ARRAY_MAX( ptr )           ( FT_INT_MAX / sizeof ( *(ptr) ) )
 

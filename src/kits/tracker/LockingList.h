@@ -68,24 +68,21 @@ LockingList<T>::LockingList(int32 itemsPerBlock, bool owning)
 
 
 template<class T>
-bool
-LockingList<T>::Lock()
+bool LockingList<T>::Lock()
 {
 	return lock.Lock();
 }
 
 
 template<class T>
-void
-LockingList<T>::Unlock()
+void LockingList<T>::Unlock()
 {
 	lock.Unlock();
 }
 
 
 template<class T>
-bool
-LockingList<T>::IsLocked() const
+bool LockingList<T>::IsLocked() const
 {
 	return lock.IsLocked();
 }

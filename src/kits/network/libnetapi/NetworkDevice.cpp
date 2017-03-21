@@ -40,8 +40,7 @@ struct ie_data {
 };
 
 
-static status_t
-get_80211(const char* name, int32 type, void* data, int32& length)
+static status_t get_80211(const char* name, int32 type, void* data, int32& length)
 {
 	int socket = ::socket(AF_INET, SOCK_DGRAM, 0);
 	if (socket < 0)
@@ -64,8 +63,7 @@ get_80211(const char* name, int32 type, void* data, int32& length)
 }
 
 
-template<typename T> status_t
-do_request(T& request, const char* name, int option)
+template<typename T> status_t do_request(T& request, const char* name, int option)
 {
 	int socket = ::socket(AF_LINK, SOCK_DGRAM, 0);
 	if (socket < 0)
@@ -94,8 +92,7 @@ read_le16(uint8*& data, int32& length)
 
 
 //! Read a 32 bit little endian value
-static uint32
-read_le32(uint8*& data, int32& length)
+static uint32 read_le32(uint8*& data, int32& length)
 {
 	uint32 value = B_LENDIAN_TO_HOST_INT32(*(uint32*)data);
 	data += 4;
@@ -104,8 +101,7 @@ read_le32(uint8*& data, int32& length)
 }
 
 
-static uint32
-from_rsn_cipher(uint32 cipher)
+static uint32 from_rsn_cipher(uint32 cipher)
 {
 	if ((cipher & 0xffffff) != RSN_OUI)
 		return B_NETWORK_CIPHER_CCMP;
@@ -128,8 +124,7 @@ from_rsn_cipher(uint32 cipher)
 }
 
 
-static uint32
-from_rsn_key_mode(uint32 mode)
+static uint32 from_rsn_key_mode(uint32 mode)
 {
 	if ((mode & 0xffffff) != RSN_OUI)
 		return B_KEY_MODE_IEEE802_1X;
@@ -154,8 +149,7 @@ from_rsn_key_mode(uint32 mode)
 
 
 //! Parse RSN/WPA information elements common data
-static void
-parse_ie_rsn_wpa(wireless_network& network, uint8*& data, int32& length)
+static void parse_ie_rsn_wpa(wireless_network& network, uint8*& data, int32& length)
 {
 	if (length >= 4) {
 		// parse group cipher
@@ -194,8 +188,7 @@ parse_ie_rsn_wpa(wireless_network& network, uint8*& data, int32& length)
 
 
 //! Parse RSN (Robust Security Network) information element.
-static void
-parse_ie_rsn(wireless_network& network, ie_data* ie)
+static void parse_ie_rsn(wireless_network& network, ie_data* ie)
 {
 	network.authentication_mode = B_NETWORK_AUTHENTICATION_WPA2;
 	network.cipher = B_NETWORK_CIPHER_CCMP;
@@ -217,8 +210,7 @@ parse_ie_rsn(wireless_network& network, ie_data* ie)
 
 
 //! Parse WPA information element.
-static bool
-parse_ie_wpa(wireless_network& network, ie_data* ie)
+static bool parse_ie_wpa(wireless_network& network, ie_data* ie)
 {
 	int32 length = ie->length;
 	if (length < 6)
@@ -246,8 +238,7 @@ parse_ie_wpa(wireless_network& network, ie_data* ie)
 
 
 //! Parse information elements.
-static void
-parse_ie(wireless_network& network, uint8* _ie, int32 ieLength)
+static void parse_ie(wireless_network& network, uint8* _ie, int32 ieLength)
 {
 	struct ie_data* ie = (ie_data*)_ie;
 	bool hadRSN = false;
@@ -296,23 +287,20 @@ parse_ie(wireless_network& network, uint8* _ie, int32 ieLength)
 }
 
 
-static void
-parse_ie(wireless_network& network, struct ieee80211req_sta_info& info)
+static void parse_ie(wireless_network& network, struct ieee80211req_sta_info& info)
 {
 	parse_ie(network, (uint8*)&info + info.isi_ie_off, info.isi_ie_len);
 }
 
 
-static void
-parse_ie(wireless_network& network, struct ieee80211req_scan_result& result)
+static void parse_ie(wireless_network& network, struct ieee80211req_scan_result& result)
 {
 	parse_ie(network, (uint8*)&result + result.isr_ie_off + result.isr_ssid_len
 			+ result.isr_meshid_len, result.isr_ie_len);
 }
 
 
-static bool
-get_ssid_from_ie(char* name, uint8* _ie, int32 ieLength)
+static bool get_ssid_from_ie(char* name, uint8* _ie, int32 ieLength)
 {
 	struct ie_data* ie = (ie_data*)_ie;
 
@@ -330,16 +318,14 @@ get_ssid_from_ie(char* name, uint8* _ie, int32 ieLength)
 }
 
 
-static bool
-get_ssid_from_ie(char* name, struct ieee80211req_sta_info& info)
+static bool get_ssid_from_ie(char* name, struct ieee80211req_sta_info& info)
 {
 	return get_ssid_from_ie(name, (uint8*)&info + info.isi_ie_off,
 		info.isi_ie_len);
 }
 
 
-static void
-fill_wireless_network(wireless_network& network,
+static void fill_wireless_network(wireless_network& network,
 	struct ieee80211req_sta_info& info)
 {
 	network.name[0] = '\0';
@@ -359,8 +345,7 @@ fill_wireless_network(wireless_network& network,
 }
 
 
-static void
-fill_wireless_network(wireless_network& network, const char* networkName,
+static void fill_wireless_network(wireless_network& network, const char* networkName,
 	struct ieee80211req_scan_result& result)
 {
 	strlcpy(network.name, networkName, sizeof(network.name));
@@ -380,8 +365,7 @@ fill_wireless_network(wireless_network& network, const char* networkName,
 }
 
 
-static status_t
-get_scan_result(const char* device, wireless_network& network, uint32 index,
+static status_t get_scan_result(const char* device, wireless_network& network, uint32 index,
 	const BNetworkAddress* address, const char* name)
 {
 	if (address != NULL && address->Family() != AF_LINK)
@@ -430,8 +414,7 @@ get_scan_result(const char* device, wireless_network& network, uint32 index,
 }
 
 
-static status_t
-get_station(const char* device, wireless_network& network, uint32 index,
+static status_t get_station(const char* device, wireless_network& network, uint32 index,
 	const BNetworkAddress* address, const char* name)
 {
 	if (address != NULL && address->Family() != AF_LINK)
@@ -481,8 +464,7 @@ get_station(const char* device, wireless_network& network, uint32 index,
 }
 
 
-static status_t
-get_network(const char* device, wireless_network& network, uint32 index,
+static status_t get_network(const char* device, wireless_network& network, uint32 index,
 	const BNetworkAddress* address, const char* name)
 {
 	status_t status = get_station(device, network, index, address, name);
@@ -516,37 +498,32 @@ BNetworkDevice::~BNetworkDevice()
 }
 
 
-void
-BNetworkDevice::Unset()
+void BNetworkDevice::Unset()
 {
 	fName[0] = '\0';
 }
 
 
-void
-BNetworkDevice::SetTo(const char* name)
+void BNetworkDevice::SetTo(const char* name)
 {
 	strlcpy(fName, name, IF_NAMESIZE);
 }
 
 
-const char*
-BNetworkDevice::Name() const
+const char*  BNetworkDevice::Name() const
 {
 	return fName;
 }
 
 
-bool
-BNetworkDevice::Exists() const
+bool BNetworkDevice::Exists() const
 {
 	ifreq request;
 	return do_request(request, Name(), SIOCGIFINDEX) == B_OK;
 }
 
 
-uint32
-BNetworkDevice::Index() const
+uint32 BNetworkDevice::Index() const
 {
 	ifreq request;
 	if (do_request(request, Name(), SIOCGIFINDEX) != B_OK)
@@ -556,8 +533,7 @@ BNetworkDevice::Index() const
 }
 
 
-uint32
-BNetworkDevice::Flags() const
+uint32 BNetworkDevice::Flags() const
 {
 	ifreq request;
 	if (do_request(request, Name(), SIOCGIFFLAGS) != B_OK)
@@ -567,15 +543,13 @@ BNetworkDevice::Flags() const
 }
 
 
-bool
-BNetworkDevice::HasLink() const
+bool BNetworkDevice::HasLink() const
 {
 	return (Flags() & IFF_LINK) != 0;
 }
 
 
-int32
-BNetworkDevice::CountMedia() const
+int32 BNetworkDevice::CountMedia() const
 {
 	ifmediareq request;
 	request.ifm_count = 0;
@@ -588,8 +562,7 @@ BNetworkDevice::CountMedia() const
 }
 
 
-int32
-BNetworkDevice::Media() const
+int32 BNetworkDevice::Media() const
 {
 	ifmediareq request;
 	request.ifm_count = 0;
@@ -602,16 +575,14 @@ BNetworkDevice::Media() const
 }
 
 
-int32
-BNetworkDevice::GetMediaAt(int32 index) const
+int32 BNetworkDevice::GetMediaAt(int32 index) const
 {
 	// TODO: this could do some caching
 	return 0;
 }
 
 
-status_t
-BNetworkDevice::SetMedia(int32 media)
+status_t BNetworkDevice::SetMedia(int32 media)
 {
 	ifreq request;
 	request.ifr_media = media;
@@ -619,8 +590,7 @@ BNetworkDevice::SetMedia(int32 media)
 }
 
 
-status_t
-BNetworkDevice::GetHardwareAddress(BNetworkAddress& address)
+status_t BNetworkDevice::GetHardwareAddress(BNetworkAddress& address)
 {
 	ifreq request;
 	status_t status = do_request(request, Name(), SIOCGIFADDR);
@@ -632,22 +602,19 @@ BNetworkDevice::GetHardwareAddress(BNetworkAddress& address)
 }
 
 
-bool
-BNetworkDevice::IsEthernet()
+bool BNetworkDevice::IsEthernet()
 {
 	return IFM_TYPE(Media()) == IFM_ETHER;
 }
 
 
-bool
-BNetworkDevice::IsWireless()
+bool BNetworkDevice::IsWireless()
 {
 	return IFM_TYPE(Media()) == IFM_IEEE80211;
 }
 
 
-status_t
-BNetworkDevice::Scan(bool wait, bool forceRescan)
+status_t BNetworkDevice::Scan(bool wait, bool forceRescan)
 {
 #if 0
 	if (index == 0) {
@@ -663,8 +630,7 @@ BNetworkDevice::Scan(bool wait, bool forceRescan)
 }
 
 
-status_t
-BNetworkDevice::GetNextNetwork(uint32& cookie, wireless_network& network)
+status_t BNetworkDevice::GetNextNetwork(uint32& cookie, wireless_network& network)
 {
 	status_t status = get_scan_result(Name(), network, cookie, NULL, NULL);
 	if (status != B_OK)
@@ -675,8 +641,7 @@ BNetworkDevice::GetNextNetwork(uint32& cookie, wireless_network& network)
 }
 
 
-status_t
-BNetworkDevice::GetNetwork(const char* name, wireless_network& network)
+status_t BNetworkDevice::GetNetwork(const char* name, wireless_network& network)
 {
 	if (name == NULL || name[0] == '\0')
 		return B_BAD_VALUE;
@@ -685,8 +650,7 @@ BNetworkDevice::GetNetwork(const char* name, wireless_network& network)
 }
 
 
-status_t
-BNetworkDevice::GetNetwork(const BNetworkAddress& address,
+status_t BNetworkDevice::GetNetwork(const BNetworkAddress& address,
 	wireless_network& network)
 {
 	if (address.Family() != AF_LINK)
@@ -696,8 +660,7 @@ BNetworkDevice::GetNetwork(const BNetworkAddress& address,
 }
 
 
-status_t
-BNetworkDevice::JoinNetwork(const char* name, const char* password)
+status_t BNetworkDevice::JoinNetwork(const char* name, const char* password)
 {
 	if (name == NULL || name[0] == '\0')
 		return B_BAD_VALUE;
@@ -724,16 +687,14 @@ BNetworkDevice::JoinNetwork(const char* name, const char* password)
 }
 
 
-status_t
-BNetworkDevice::JoinNetwork(const wireless_network& network,
+status_t BNetworkDevice::JoinNetwork(const wireless_network& network,
 	const char* password)
 {
 	return JoinNetwork(network.address, password);
 }
 
 
-status_t
-BNetworkDevice::JoinNetwork(const BNetworkAddress& address,
+status_t BNetworkDevice::JoinNetwork(const BNetworkAddress& address,
 	const char* password)
 {
 	if (address.InitCheck() != B_OK)
@@ -763,8 +724,7 @@ BNetworkDevice::JoinNetwork(const BNetworkAddress& address,
 }
 
 
-status_t
-BNetworkDevice::LeaveNetwork(const char* name)
+status_t BNetworkDevice::LeaveNetwork(const char* name)
 {
 	BMessage message(kMsgLeaveNetwork);
 	status_t status = message.AddString("device", Name());
@@ -785,15 +745,13 @@ BNetworkDevice::LeaveNetwork(const char* name)
 }
 
 
-status_t
-BNetworkDevice::LeaveNetwork(const wireless_network& network)
+status_t BNetworkDevice::LeaveNetwork(const wireless_network& network)
 {
 	return LeaveNetwork(network.address);
 }
 
 
-status_t
-BNetworkDevice::LeaveNetwork(const BNetworkAddress& address)
+status_t BNetworkDevice::LeaveNetwork(const BNetworkAddress& address)
 {
 	BMessage message(kMsgLeaveNetwork);
 	status_t status = message.AddString("device", Name());
@@ -816,8 +774,7 @@ BNetworkDevice::LeaveNetwork(const BNetworkAddress& address)
 }
 
 
-status_t
-BNetworkDevice::GetNextAssociatedNetwork(uint32& cookie,
+status_t BNetworkDevice::GetNextAssociatedNetwork(uint32& cookie,
 	wireless_network& network)
 {
 	BNetworkAddress address;
@@ -829,8 +786,7 @@ BNetworkDevice::GetNextAssociatedNetwork(uint32& cookie,
 }
 
 
-status_t
-BNetworkDevice::GetNextAssociatedNetwork(uint32& cookie,
+status_t BNetworkDevice::GetNextAssociatedNetwork(uint32& cookie,
 	BNetworkAddress& address)
 {
 	// We currently support only a single associated network

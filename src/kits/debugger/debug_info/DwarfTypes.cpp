@@ -103,8 +103,7 @@ dwarf_tag_to_type_kind(int32 tag)
 }
 
 
-int32
-dwarf_tag_to_subtype_kind(int32 tag)
+int32 dwarf_tag_to_subtype_kind(int32 tag)
 {
 	switch (tag) {
 		case DW_TAG_class_type:
@@ -196,8 +195,7 @@ DwarfType::~DwarfType()
 }
 
 
-/*static*/ bool
-DwarfType::GetTypeID(const DIEType* entry, BString& _id)
+/*static*/ bool DwarfType::GetTypeID(const DIEType* entry, BString& _id)
 {
 	char buffer[32];
 	snprintf(buffer, sizeof(buffer), "dwarf:%p", entry);
@@ -238,8 +236,7 @@ DwarfType::ByteSize() const
 }
 
 
-status_t
-DwarfType::CreateDerivedAddressType(address_type_kind addressType,
+status_t DwarfType::CreateDerivedAddressType(address_type_kind addressType,
 	AddressType*& _resultType)
 {
 	BString derivedName;
@@ -258,8 +255,7 @@ DwarfType::CreateDerivedAddressType(address_type_kind addressType,
 }
 
 
-status_t
-DwarfType::CreateDerivedArrayType(int64 lowerBound, int64 elementCount,
+status_t DwarfType::CreateDerivedArrayType(int64 lowerBound, int64 elementCount,
 	bool extendExisting, ArrayType*& _resultType)
 {
 	DwarfArrayType* resultType = NULL;
@@ -302,8 +298,7 @@ DwarfType::CreateDerivedArrayType(int64 lowerBound, int64 elementCount,
 }
 
 
-status_t
-DwarfType::ResolveObjectDataLocation(const ValueLocation& objectLocation,
+status_t DwarfType::ResolveObjectDataLocation(const ValueLocation& objectLocation,
 	ValueLocation*& _location)
 {
 	// TODO: In some source languages the object address might be a pointer
@@ -348,8 +343,7 @@ DwarfType::ResolveObjectDataLocation(const ValueLocation& objectLocation,
 }
 
 
-status_t
-DwarfType::ResolveObjectDataLocation(target_addr_t objectAddress,
+status_t DwarfType::ResolveObjectDataLocation(target_addr_t objectAddress,
 	ValueLocation*& _location)
 {
 	ValuePieceLocation piece;
@@ -368,8 +362,7 @@ DwarfType::ResolveObjectDataLocation(target_addr_t objectAddress,
 }
 
 
-status_t
-DwarfType::ResolveLocation(DwarfTypeContext* typeContext,
+status_t DwarfType::ResolveLocation(DwarfTypeContext* typeContext,
 	const LocationDescription* description, target_addr_t objectAddress,
 	bool hasObjectAddress, ValueLocation& _location)
 {
@@ -487,8 +480,7 @@ DwarfDataMember::~DwarfDataMember()
 	fType->ReleaseReference();
 }
 
-const char*
-DwarfDataMember::Name() const
+const char*  DwarfDataMember::Name() const
 {
 	return fName.Length() > 0 ? fName.String() : NULL;
 }
@@ -518,8 +510,7 @@ DwarfEnumeratorValue::~DwarfEnumeratorValue()
 {
 }
 
-const char*
-DwarfEnumeratorValue::Name() const
+const char*  DwarfEnumeratorValue::Name() const
 {
 	return fName.Length() > 0 ? fName.String() : NULL;
 }
@@ -576,8 +567,7 @@ DwarfFunctionParameter::~DwarfFunctionParameter()
 }
 
 
-const char*
-DwarfFunctionParameter::Name() const
+const char*  DwarfFunctionParameter::Name() const
 {
 	return fName.Length() > 0 ? fName.String() : NULL;
 }
@@ -649,8 +639,7 @@ DwarfPrimitiveType::GetDIEType() const
 }
 
 
-uint32
-DwarfPrimitiveType::TypeConstant() const
+uint32 DwarfPrimitiveType::TypeConstant() const
 {
 	return fTypeConstant;
 }
@@ -693,8 +682,7 @@ DwarfCompoundType::CompoundKind() const
 }
 
 
-int32
-DwarfCompoundType::CountBaseTypes() const
+int32 DwarfCompoundType::CountBaseTypes() const
 {
 	return fInheritances.CountItems();
 }
@@ -707,8 +695,7 @@ DwarfCompoundType::BaseTypeAt(int32 index) const
 }
 
 
-int32
-DwarfCompoundType::CountDataMembers() const
+int32 DwarfCompoundType::CountDataMembers() const
 {
 	return fDataMembers.CountItems();
 }
@@ -721,8 +708,7 @@ DwarfCompoundType::DataMemberAt(int32 index) const
 }
 
 
-int32
-DwarfCompoundType::CountTemplateParameters() const
+int32 DwarfCompoundType::CountTemplateParameters() const
 {
 	return fTemplateParameters.CountItems();
 }
@@ -735,8 +721,7 @@ DwarfCompoundType::TemplateParameterAt(int32 index) const
 }
 
 
-status_t
-DwarfCompoundType::ResolveBaseTypeLocation(BaseType* _baseType,
+status_t DwarfCompoundType::ResolveBaseTypeLocation(BaseType* _baseType,
 	const ValueLocation& parentLocation, ValueLocation*& _location)
 {
 	DwarfInheritance* baseType = dynamic_cast<DwarfInheritance*>(_baseType);
@@ -748,8 +733,7 @@ DwarfCompoundType::ResolveBaseTypeLocation(BaseType* _baseType,
 }
 
 
-status_t
-DwarfCompoundType::ResolveDataMemberLocation(DataMember* _member,
+status_t DwarfCompoundType::ResolveDataMemberLocation(DataMember* _member,
 	const ValueLocation& parentLocation, ValueLocation*& _location)
 {
 	DwarfDataMember* member = dynamic_cast<DwarfDataMember*>(_member);
@@ -850,8 +834,7 @@ DwarfCompoundType::GetDIEType() const
 }
 
 
-bool
-DwarfCompoundType::AddInheritance(DwarfInheritance* inheritance)
+bool DwarfCompoundType::AddInheritance(DwarfInheritance* inheritance)
 {
 	if (!fInheritances.AddItem(inheritance))
 		return false;
@@ -861,8 +844,7 @@ DwarfCompoundType::AddInheritance(DwarfInheritance* inheritance)
 }
 
 
-bool
-DwarfCompoundType::AddDataMember(DwarfDataMember* member)
+bool DwarfCompoundType::AddDataMember(DwarfDataMember* member)
 {
 	if (!fDataMembers.AddItem(member))
 		return false;
@@ -872,8 +854,7 @@ DwarfCompoundType::AddDataMember(DwarfDataMember* member)
 }
 
 
-bool
-DwarfCompoundType::AddTemplateParameter(DwarfTemplateParameter* parameter)
+bool DwarfCompoundType::AddTemplateParameter(DwarfTemplateParameter* parameter)
 {
 	if (!fTemplateParameters.AddItem(parameter))
 		return false;
@@ -883,8 +864,7 @@ DwarfCompoundType::AddTemplateParameter(DwarfTemplateParameter* parameter)
 }
 
 
-status_t
-DwarfCompoundType::_ResolveDataMemberLocation(DwarfType* memberType,
+status_t DwarfCompoundType::_ResolveDataMemberLocation(DwarfType* memberType,
 	const MemberLocation* memberLocation,
 	const ValueLocation& parentLocation, bool isBitField,
 	ValueLocation*& _location)
@@ -1007,8 +987,7 @@ DwarfArrayType::BaseType() const
 }
 
 
-int32
-DwarfArrayType::CountDimensions() const
+int32 DwarfArrayType::CountDimensions() const
 {
 	return fDimensions.CountItems();
 }
@@ -1021,8 +1000,7 @@ DwarfArrayType::DimensionAt(int32 index) const
 }
 
 
-status_t
-DwarfArrayType::ResolveElementLocation(const ArrayIndexPath& indexPath,
+status_t DwarfArrayType::ResolveElementLocation(const ArrayIndexPath& indexPath,
 	const ValueLocation& parentLocation, ValueLocation*& _location)
 {
 	if (indexPath.CountIndices() != CountDimensions())
@@ -1193,8 +1171,7 @@ DwarfArrayType::GetDIEType() const
 }
 
 
-bool
-DwarfArrayType::AddDimension(DwarfArrayDimension* dimension)
+bool DwarfArrayType::AddDimension(DwarfArrayDimension* dimension)
 {
 	if (!fDimensions.AddItem(dimension))
 		return false;
@@ -1226,8 +1203,7 @@ DwarfModifiedType::~DwarfModifiedType()
 }
 
 
-uint32
-DwarfModifiedType::Modifiers() const
+uint32 DwarfModifiedType::Modifiers() const
 {
 	return fModifiers;
 }
@@ -1356,8 +1332,7 @@ DwarfEnumerationType::BaseType() const
 }
 
 
-int32
-DwarfEnumerationType::CountValues() const
+int32 DwarfEnumerationType::CountValues() const
 {
 	return fValues.CountItems();
 }
@@ -1377,8 +1352,7 @@ DwarfEnumerationType::GetDIEType() const
 }
 
 
-bool
-DwarfEnumerationType::AddValue(DwarfEnumeratorValue* value)
+bool DwarfEnumerationType::AddValue(DwarfEnumeratorValue* value)
 {
 	if (!fValues.AddItem(value))
 		return false;
@@ -1498,8 +1472,7 @@ DwarfFunctionType::ReturnType() const
 }
 
 
-int32
-DwarfFunctionType::CountParameters() const
+int32 DwarfFunctionType::CountParameters() const
 {
 	return fParameters.CountItems();
 }
@@ -1512,15 +1485,13 @@ DwarfFunctionType::ParameterAt(int32 index) const
 }
 
 
-bool
-DwarfFunctionType::HasVariableArguments() const
+bool DwarfFunctionType::HasVariableArguments() const
 {
 	return fHasVariableArguments;
 }
 
 
-void
-DwarfFunctionType::SetHasVariableArguments(bool hasVarArgs)
+void DwarfFunctionType::SetHasVariableArguments(bool hasVarArgs)
 {
 	fHasVariableArguments = hasVarArgs;
 }
@@ -1533,8 +1504,7 @@ DwarfFunctionType::GetDIEType() const
 }
 
 
-bool
-DwarfFunctionType::AddParameter(DwarfFunctionParameter* parameter)
+bool DwarfFunctionType::AddParameter(DwarfFunctionParameter* parameter)
 {
 	if (!fParameters.AddItem(parameter))
 		return false;

@@ -42,8 +42,7 @@ BSynth::~BSynth()
 }
 
 
-status_t 
-BSynth::LoadSynthData(entry_ref* instrumentsFile)
+status_t BSynth::LoadSynthData(entry_ref* instrumentsFile)
 {
 	if (instrumentsFile == NULL) {
 		return B_BAD_VALUE;
@@ -57,8 +56,7 @@ BSynth::LoadSynthData(entry_ref* instrumentsFile)
 }
 
 
-status_t 
-BSynth::LoadSynthData(synth_mode mode)
+status_t BSynth::LoadSynthData(synth_mode mode)
 {
 	// Our softsynth doesn't support multiple modes like Be's synth did.
 	// Therefore, if you use this function, the synth will revert to its
@@ -81,22 +79,19 @@ BSynth::SynthMode()
 }
 
 
-void 
-BSynth::Unload()
+void BSynth::Unload()
 {
 	fSynth->Unload();
 }
 
 
-bool 
-BSynth::IsLoaded() const
+bool BSynth::IsLoaded() const
 {
 	return fSynth->IsLoaded();
 }
 
 
-status_t 
-BSynth::SetSamplingRate(int32 sample_rate)
+status_t BSynth::SetSamplingRate(int32 sample_rate)
 {
 	return fSynth->SetSamplingRate(sample_rate);
 }
@@ -109,8 +104,7 @@ BSynth::SamplingRate() const
 }
 
 
-status_t 
-BSynth::SetInterpolation(interpolation_mode interp_mode)
+status_t BSynth::SetInterpolation(interpolation_mode interp_mode)
 {
 	return fSynth->SetInterpolation(interp_mode);
 }
@@ -123,8 +117,7 @@ BSynth::Interpolation() const
 }
 
 
-void 
-BSynth::SetReverb(reverb_mode rev_mode)
+void BSynth::SetReverb(reverb_mode rev_mode)
 {
 	fSynth->SetReverb(rev_mode);
 }
@@ -137,22 +130,19 @@ BSynth::Reverb() const
 }
 
 
-status_t 
-BSynth::EnableReverb(bool reverb_enabled)
+status_t BSynth::EnableReverb(bool reverb_enabled)
 {
 	return fSynth->EnableReverb(reverb_enabled);
 }
 
 
-bool 
-BSynth::IsReverbEnabled() const
+bool BSynth::IsReverbEnabled() const
 {
 	return fSynth->IsReverbEnabled();
 }
 
 
-status_t 
-BSynth::SetVoiceLimits(
+status_t BSynth::SetVoiceLimits(
 	int16 maxSynthVoices, int16 maxSampleVoices, int16 limiterThreshhold)
 {
 	status_t err = B_OK;
@@ -186,8 +176,7 @@ BSynth::LimiterThreshhold() const
 }
 
 
-void 
-BSynth::SetSynthVolume(double theVolume)
+void BSynth::SetSynthVolume(double theVolume)
 {
 	fSynth->SetVolume(theVolume);
 }
@@ -200,8 +189,7 @@ BSynth::SynthVolume() const
 }
 
 
-void 
-BSynth::SetSampleVolume(double theVolume)
+void BSynth::SetSampleVolume(double theVolume)
 {
 	fprintf(stderr, "[midi] SetSampleVolume: BSamples not supported\n");
 }
@@ -215,8 +203,7 @@ BSynth::SampleVolume(void) const
 }
 
 
-status_t 
-BSynth::GetAudio(int16* pLeft, int16* pRight, int32 max_samples) const
+status_t BSynth::GetAudio(int16* pLeft, int16* pRight, int32 max_samples) const
 {
 	// We don't print a "not supported" message here. That would cause
 	// significant slowdowns because applications ask for this many times.
@@ -240,29 +227,25 @@ BSynth::GetAudio(int16* pLeft, int16* pRight, int32 max_samples) const
 }
 
 
-void 
-BSynth::Pause()
+void BSynth::Pause()
 {
 	fSynth->Pause();
 }
 
 
-void 
-BSynth::Resume()
+void BSynth::Resume()
 {
 	fSynth->Resume();
 }
 
 
-void 
-BSynth::SetControllerHook(int16 controller, synth_controller_hook cback)
+void BSynth::SetControllerHook(int16 controller, synth_controller_hook cback)
 {
 	fprintf(stderr, "[midi] SetControllerHook is not supported\n");
 }
 
 
-void 
-BSynth::_Init()
+void BSynth::_Init()
 {
 	delete  __be_synth;
 	__be_synth = this;

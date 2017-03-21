@@ -16,8 +16,7 @@ static map<int, int> sToHostErrorMap;
 static bool sErrorMapsInitialized = false;
 
 // init_error_map
-static void
-init_error_map()
+static void init_error_map()
 {
 	if (sErrorMapsInitialized)
 		return;

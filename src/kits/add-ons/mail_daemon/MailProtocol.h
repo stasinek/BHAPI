@@ -12,7 +12,7 @@
 #include <map>
 
 #include <Looper.h>
-#include <OS.h>
+#include <kernel/OS.h>
 #include <ObjectList.h>
 #include <Entry.h>
 #include <File.h>

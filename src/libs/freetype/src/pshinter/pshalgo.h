@@ -229,8 +229,7 @@ FT_BEGIN_HEADER
 #ifdef DEBUG_HINTER
   extern PSH_Hint_Table  ps_debug_hint_table;
 
-  typedef void
-  (*PSH_HintFunc)( PSH_Hint  hint,
+  typedef void   (*PSH_HintFunc)( PSH_Hint  hint,
                    FT_Bool   vertical );
 
   extern PSH_HintFunc    ps_debug_hint_func;

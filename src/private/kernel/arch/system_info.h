@@ -6,7 +6,7 @@
 #define _KERNEL_ARCH_SYSTEM_INFO_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <arch_system_info.h>
 
 

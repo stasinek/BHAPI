@@ -236,8 +236,7 @@ HashSet<Key>::~HashSet()
 
 // InitCheck
 template<typename Key>
-status_t
-HashSet<Key>::InitCheck() const
+status_t HashSet<Key>::InitCheck() const
 {
 	return (fTable.TableSize() > 0 ? B_OK : B_NO_MEMORY);
 }
@@ -245,8 +244,7 @@ HashSet<Key>::InitCheck() const
 
 // Add
 template<typename Key>
-status_t
-HashSet<Key>::Add(const Key& key)
+status_t HashSet<Key>::Add(const Key& key)
 {
 	Element* element = fTable.Lookup(key);
 	if (element) {
@@ -269,8 +267,7 @@ HashSet<Key>::Add(const Key& key)
 
 // Remove
 template<typename Key>
-bool
-HashSet<Key>::Remove(const Key& key)
+bool HashSet<Key>::Remove(const Key& key)
 {
 	Element* element = fTable.Lookup(key);
 	if (element == NULL)
@@ -285,8 +282,7 @@ HashSet<Key>::Remove(const Key& key)
 
 // Clear
 template<typename Key, typename Value>
-void
-HashSet<Key>::Clear()
+void HashSet<Key>::Clear()
 {
 	// clear the table and delete the elements
 	Element* element = fTable.Clear(true);
@@ -300,8 +296,7 @@ HashSet<Key>::Clear()
 
 // Contains
 template<typename Key>
-bool
-HashSet<Key>::Contains(const Key& key) const
+bool HashSet<Key>::Contains(const Key& key) const
 {
 	return fTable.Lookup(key) != NULL;
 }
@@ -309,8 +304,7 @@ HashSet<Key>::Contains(const Key& key) const
 
 // Size
 template<typename Key>
-int32
-HashSet<Key>::Size() const
+int32 HashSet<Key>::Size() const
 {
 	return fTable.CountElements();
 }

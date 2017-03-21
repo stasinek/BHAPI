@@ -57,16 +57,14 @@ BMenuField::~BMenuField()
 }
 
 
-void
-BMenuField::ChildRemoving(BView *child)
+void BMenuField::ChildRemoving(BView *child)
 {
 	if(child == fMenuBar) {fMenuBar = NULL; fMenu = NULL;}
 	BView::ChildRemoving(child);
 }
 
 
-void
-BMenuField::SetLabel(const char *label)
+void BMenuField::SetLabel(const char *label)
 {
 	if(fLabel != NULL) delete[] fLabel;
 	fLabel = (label == NULL ? NULL : bhapi::strdup(label));
@@ -74,15 +72,13 @@ BMenuField::SetLabel(const char *label)
 }
 
 
-const char*
-BMenuField::Label() const
+const char*  BMenuField::Label() const
 {
 	return fLabel;
 }
 
 
-void
-BMenuField::SetAlignment(bhapi::alignment alignment)
+void BMenuField::SetAlignment(bhapi::alignment alignment)
 {
 	if(alignment != fAlignment)
 	{
@@ -99,8 +95,7 @@ BMenuField::Alignment() const
 }
 
 
-void
-BMenuField::SetDivider(float divider)
+void BMenuField::SetDivider(float divider)
 {
 	if(fDivider < 0 && divider < 0) return;
 
@@ -120,8 +115,7 @@ BMenuField::Divider() const
 }
 
 
-bool
-BMenuField::SetMenu(BMenu *menu)
+bool BMenuField::SetMenu(BMenu *menu)
 {
 	if(fMenuBar == NULL || (menu == NULL ? false : (fMenuBar->AddItem(menu) == false))) return false;
 
@@ -162,8 +156,7 @@ BMenuField::MenuItem() const
 }
 
 
-void
-BMenuField::Draw(BRect updateRect)
+void BMenuField::Draw(BRect updateRect)
 {
 	if(Window() == NULL) return;
 
@@ -215,8 +208,7 @@ BMenuField::Draw(BRect updateRect)
 }
 
 
-void
-BMenuField::GetPreferredSize(float *width, float *height)
+void BMenuField::GetPreferredSize(float *width, float *height)
 {
 	if(width) *width = 0;
 	if(height) *height = 0;
@@ -240,8 +232,7 @@ BMenuField::GetPreferredSize(float *width, float *height)
 }
 
 
-void
-BMenuField::FrameResized(float new_width, float new_height)
+void BMenuField::FrameResized(float new_width, float new_height)
 {
 	if(fMenuBar == NULL) return;
 
@@ -256,15 +247,13 @@ BMenuField::FrameResized(float new_width, float new_height)
 }
 
 
-void
-BMenuField::FrameMoved(BPoint new_position)
+void BMenuField::FrameMoved(BPoint new_position)
 {
 	BMenuField::FrameResized(Frame().Width(), Frame().Height());
 }
 
 
-void
-BMenuField::WindowActivated(bool state)
+void BMenuField::WindowActivated(bool state)
 {
 	if(!state && fMenuBar) fMenuBar->SelectItem(NULL);
 
@@ -278,8 +267,7 @@ BMenuField::WindowActivated(bool state)
 }
 
 
-void
-BMenuField::MakeFocus(bool focusState)
+void BMenuField::MakeFocus(bool focusState)
 {
 	if(IsFocus() != focusState)
 	{
@@ -300,8 +288,7 @@ BMenuField::MakeFocus(bool focusState)
 }
 
 
-void
-BMenuField::SetFont(const BFont *font,  __be_uint8 mask)
+void BMenuField::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	BView::SetFont(font, mask);
 	BMenuField::FrameResized(Frame().Width(), Frame().Height());
@@ -309,8 +296,7 @@ BMenuField::SetFont(const BFont *font,  __be_uint8 mask)
 }
 
 
-void
-BMenuField::MouseDown(BPoint where)
+void BMenuField::MouseDown(BPoint where)
 {
 	if((Flags() & B_NAVIGABLE) && !IsFocus()) MakeFocus();
 
@@ -325,8 +311,7 @@ BMenuField::MouseDown(BPoint where)
 }
 
 
-void
-BMenuField::MouseUp(BPoint where)
+void BMenuField::MouseUp(BPoint where)
 {
 	BMenuItem *item = NULL;
 	if(fMenuBar == NULL || (item = fMenuBar->ItemAt(0)) == NULL) return;
@@ -338,8 +323,7 @@ BMenuField::MouseUp(BPoint where)
 }
 
 
-void
-BMenuField::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
+void BMenuField::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 	BMenuItem *item = NULL;
 	if(fMenuBar == NULL || (item = fMenuBar->ItemAt(0)) == NULL) return;
@@ -352,8 +336,7 @@ BMenuField::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_messag
 }
 
 
-void
-BMenuField::KeyDown(const char *bytes,  __be_int32 numBytes)
+void BMenuField::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	BMenuItem *item = NULL;
 	if(bytes == NULL || fMenuBar == NULL || (item = fMenuBar->ItemAt(0)) == NULL) return;
@@ -363,8 +346,7 @@ BMenuField::KeyDown(const char *bytes,  __be_int32 numBytes)
 }
 
 
-void
-BMenuField::KeyUp(const char *bytes,  __be_int32 numBytes)
+void BMenuField::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
 	BMenuItem *item = NULL;
 	if(bytes == NULL || fMenuBar == NULL || (item = fMenuBar->ItemAt(0)) == NULL) return;

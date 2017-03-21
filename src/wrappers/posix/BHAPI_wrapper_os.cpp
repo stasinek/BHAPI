@@ -60,7 +60,7 @@ static void b_posix_signal(int signumber)
 	BLocker *hLocker = bhapi::get_handler_operator_locker();
 
 	hLocker->Lock();
-	if(bhapi::be_app != NULL) bhapi::be_app->PostMessage(signumber == SIGINT ? B_QUIT_REQUESTED : _QUIT_);
+	if(bhapi::__be_clipboard != NULL) bhapi::__be_clipboard->PostMessage(signumber == SIGINT ? B_QUIT_REQUESTED : _QUIT_);
 	hLocker->Unlock();
 
 	void (*old_func)(int) = NULL;
@@ -77,7 +77,7 @@ static void b_posix_signal(int signumber)
 //						   signumber == SIGABRT ? "SIGABRT" : (
 //						   signumber == SIGTERM ? "SIGTERM" : "SIGQUIT"))));
 
-	while(signumber != SIGINT && bhapi::be_app != NULL) b_snooze(1000);
+	while(signumber != SIGINT && bhapi::__be_clipboard != NULL) b_snooze(1000);
 
 	if(old_func != NULL)
 	{

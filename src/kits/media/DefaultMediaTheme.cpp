@@ -146,8 +146,7 @@ class DiscreteMessageFilter : public MessageFilter {
 const uint32 kMsgParameterChanged = '_mPC';
 
 
-static bool 
-parameter_should_be_hidden(BParameter &parameter)
+static bool parameter_should_be_hidden(BParameter &parameter)
 {
 	// ToDo: note, this is probably completely stupid, but it's the only
 	// way I could safely remove the null parameters that are not shown
@@ -187,8 +186,7 @@ DynamicScrollView::~DynamicScrollView()
 }
 
 
-void
-DynamicScrollView::AttachedToWindow(void)
+void DynamicScrollView::AttachedToWindow(void)
 {
 	BRect frame = ConvertToScreen(Bounds());
 	BRect windowFrame = Window()->Frame();
@@ -203,22 +201,19 @@ DynamicScrollView::AttachedToWindow(void)
 }
 
 
-void 
-DynamicScrollView::FrameResized(float width, float height)
+void DynamicScrollView::FrameResized(float width, float height)
 {
 	UpdateBars();
 }
 
 
-void 
-DynamicScrollView::FrameMoved(BPoint newPosition)
+void DynamicScrollView::FrameMoved(BPoint newPosition)
 {
 	UpdateBars();
 }
 
 
-void 
-DynamicScrollView::GetPreferredSize(float *_width, float *_height)
+void DynamicScrollView::GetPreferredSize(float *_width, float *_height)
 {
 	float width = 50;
 	if (fVerticalScrollBar)
@@ -233,8 +228,7 @@ DynamicScrollView::GetPreferredSize(float *_width, float *_height)
 }
 
 
-void 
-DynamicScrollView::SetContentBounds(BRect bounds)
+void DynamicScrollView::SetContentBounds(BRect bounds)
 {
 	fContentBounds = bounds;
 	if (Window())
@@ -242,8 +236,7 @@ DynamicScrollView::SetContentBounds(BRect bounds)
 }
 
 
-void 
-DynamicScrollView::UpdateBars()
+void DynamicScrollView::UpdateBars()
 {
 	// we need the size that the view wants to have, and the one
 	// it could have (without the space for the scroll bars)
@@ -368,8 +361,7 @@ GroupView::~GroupView()
 }
 
 
-void 
-GroupView::AttachedToWindow()
+void GroupView::AttachedToWindow()
 {
 	for (int32 i = CountChildren(); i-- > 0;) {
 		BControl *control = dynamic_cast<BControl *>(ChildAt(i));
@@ -381,14 +373,12 @@ GroupView::AttachedToWindow()
 }
 
 
-void 
-GroupView::AllAttached()
+void GroupView::AllAttached()
 {
 }
 
 
-void 
-GroupView::GetPreferredSize(float *_width, float *_height)
+void GroupView::GetPreferredSize(float *_width, float *_height)
 {
 	if (_width)
 		*_width = fContentBounds.Width();
@@ -421,8 +411,7 @@ GroupView::MaxSize()
 }
 
 
-void 
-GroupView::SetContentBounds(BRect bounds)
+void GroupView::SetContentBounds(BRect bounds)
 {
 	fContentBounds = bounds;
 }
@@ -445,8 +434,7 @@ TabView::TabView(BRect frame, const char *name, button_width width,
 }
 
 
-void 
-TabView::FrameResized(float width, float height)
+void TabView::FrameResized(float width, float height)
 {
 	BRect rect = Bounds();
 	rect.top += TabHeight();
@@ -457,8 +445,7 @@ TabView::FrameResized(float width, float height)
 }
 
 
-void 
-TabView::Select(int32 tab)
+void TabView::Select(int32 tab)
 {
 	BTabView::Select(tab);
 
@@ -486,8 +473,7 @@ SeparatorView::~SeparatorView()
 }
 
 
-void 
-SeparatorView::Draw(BRect updateRect)
+void SeparatorView::Draw(BRect updateRect)
 {
 	rgb_color color = ui_color(B_PANEL_BACKGROUND_COLOR);
 	BRect rect = updateRect & Bounds();
@@ -524,8 +510,7 @@ TitleView::~TitleView()
 }
 
 
-void 
-TitleView::Draw(BRect updateRect)
+void TitleView::Draw(BRect updateRect)
 {
 	BRect rect(Bounds());
 
@@ -539,8 +524,7 @@ TitleView::Draw(BRect updateRect)
 }
 
 
-void 
-TitleView::GetPreferredSize(float *_width, float *_height)
+void TitleView::GetPreferredSize(float *_width, float *_height)
 {
 	if (_width)
 		*_width = StringWidth(fTitle) + 2;
@@ -678,8 +662,7 @@ ContinuousMessageFilter::Filter(BMessage *message, BHandler **target)
 }
 
 
-void
-ContinuousMessageFilter::_UpdateControl()
+void ContinuousMessageFilter::_UpdateControl()
 {
 	// TODO: response support!
 

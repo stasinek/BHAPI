@@ -18,7 +18,7 @@
 #include <Entry.h>
 #include <image.h>
 #include <Messenger.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <ServerLink.h>
 #include <ServerProtocol.h>
@@ -39,8 +39,7 @@ static team_id sCurrentTeam = -1;
 	- \c B_BAD_VALUE: \c NULL \a buffer.
 	- another error code
 */
-status_t
-get_app_path(team_id team, char *buffer)
+status_t get_app_path(team_id team, char *buffer)
 {
 	// The only way to get the path to the application's executable seems to
 	// be to get an image_info of its image, which also contains a path.
@@ -71,8 +70,7 @@ get_app_path(team_id team, char *buffer)
 	- \c B_BAD_VALUE: \c NULL \a buffer.
 	- another error code
 */
-status_t
-get_app_path(char *buffer)
+status_t get_app_path(char *buffer)
 {
 	return get_app_path(B_CURRENT_TEAM, buffer);
 }
@@ -88,8 +86,7 @@ get_app_path(char *buffer)
 	- \c B_BAD_VALUE: \c NULL \a ref.
 	- another error code
 */
-status_t
-get_app_ref(team_id team, entry_ref *ref, bool traverse)
+status_t get_app_ref(team_id team, entry_ref *ref, bool traverse)
 {
 	status_t error = (ref ? B_OK : B_BAD_VALUE);
 	char appFilePath[B_PATH_NAME_LENGTH];
@@ -115,8 +112,7 @@ get_app_ref(team_id team, entry_ref *ref, bool traverse)
 	- \c B_BAD_VALUE: \c NULL \a ref.
 	- another error code
 */
-status_t
-get_app_ref(entry_ref *ref, bool traverse)
+status_t get_app_ref(entry_ref *ref, bool traverse)
 {
 	return get_app_ref(B_CURRENT_TEAM, ref, traverse);
 }
@@ -137,8 +133,7 @@ current_team()
 }
 
 
-void
-init_team_after_fork()
+void init_team_after_fork()
 {
 	sCurrentTeam = -1;
 }
@@ -168,8 +163,7 @@ main_thread_for(team_id team)
 	\return \c true, if the application is showing a modal window, \c false
 			otherwise.
 */
-bool
-is_app_showing_modal_window(team_id team)
+bool is_app_showing_modal_window(team_id team)
 {
 	// TODO: Implement!
 	return true;
@@ -181,8 +175,7 @@ is_app_showing_modal_window(team_id team)
 
 /*!	Creates a connection with the desktop.
 */
-status_t
-create_desktop_connection(ServerLink* link, const char* name, int32 capacity)
+status_t create_desktop_connection(ServerLink* link, const char* name, int32 capacity)
 {
 	// Create the port so that the app_server knows where to send messages
 	port_id clientPort = create_port(capacity, name);
@@ -232,8 +225,7 @@ get_app_server_port()
 
 /*! Creates a connection with the desktop.
 */
-status_t
-create_desktop_connection(ServerLink* link, const char* name, int32 capacity)
+status_t create_desktop_connection(ServerLink* link, const char* name, int32 capacity)
 {
 	port_id serverPort = get_app_server_port();
 	if (serverPort < 0)

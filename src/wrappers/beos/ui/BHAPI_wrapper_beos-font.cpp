@@ -131,7 +131,7 @@ BFontBe::Attach(void (*callback)(void*), void *data)
 }
 
 
-bool
+bool 
 BFontBe::Detach(bhapi::font_detach_callback *callback)
 {
 	if(fBeEngine == NULL) return false;
@@ -142,21 +142,21 @@ BFontBe::Detach(bhapi::font_detach_callback *callback)
 }
 
 
-bool
+bool 
 BFontBe::IsValid() const
 {
 	return(fBeEngine != NULL && Family() != NULL && Style() != NULL);
 }
 
 
-bool
+bool 
 BFontBe::IsScalable() const
 {
 	return fScalable;
 }
 
 
-void
+void 
 BFontBe::ForceFontAliasing(bool enable)
 {
 	if(fBeEngine == NULL) return;
@@ -205,7 +205,7 @@ BFontBe::StringWidth(const char *string, float size, float spacing, float shear,
 }
 
 
-void
+void 
 BFontBe::GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const
 {
 	if(fBeEngine == NULL || height == NULL) return;
@@ -306,7 +306,7 @@ BFontBe::RenderString(BHandler *_view, const char *string, float size, float spa
 }
 
 
-status_t
+status_t 
 EBeGraphicsEngine::InitalizeFonts()
 {
 	BAutolock <EBeGraphicsEngine> autolock(this);
@@ -316,13 +316,13 @@ EBeGraphicsEngine::InitalizeFonts()
 }
 
 
-void
+void 
 EBeGraphicsEngine::DestroyFonts()
 {
 }
 
 
-status_t
+status_t 
 EBeGraphicsEngine::UpdateFonts(bool check_only)
 {
 	BAutolock <EBeGraphicsEngine> autolock(this);

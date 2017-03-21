@@ -40,8 +40,7 @@ BDebugEventInputStream::~BDebugEventInputStream()
 }
 
 
-status_t
-BDebugEventInputStream::SetTo(BDataIO* stream)
+status_t BDebugEventInputStream::SetTo(BDataIO* stream)
 {
 	Unset();
 
@@ -68,8 +67,7 @@ BDebugEventInputStream::SetTo(BDataIO* stream)
 }
 
 
-status_t
-BDebugEventInputStream::SetTo(const void* data, size_t size,
+status_t BDebugEventInputStream::SetTo(const void* data, size_t size,
 	bool takeOverOwnership)
 {
 	Unset();
@@ -93,8 +91,7 @@ BDebugEventInputStream::SetTo(const void* data, size_t size,
 }
 
 
-void
-BDebugEventInputStream::Unset()
+void BDebugEventInputStream::Unset()
 {
 	fStream = NULL;
 	fFlags = 0;
@@ -116,8 +113,7 @@ BDebugEventInputStream::Unset()
 }
 
 
-status_t
-BDebugEventInputStream::Seek(off_t streamOffset)
+status_t BDebugEventInputStream::Seek(off_t streamOffset)
 {
 	// TODO: Support for streams, at least for BPositionIOs.
 	if (fStream != NULL)
@@ -196,8 +192,7 @@ BDebugEventInputStream::ReadNextEvent(uint32* _event, uint32* _cpu,
 }
 
 
-status_t
-BDebugEventInputStream::_Init()
+status_t BDebugEventInputStream::_Init()
 {
 	fStreamPosition = 0;
 	fBufferPosition = 0;
@@ -251,8 +246,7 @@ BDebugEventInputStream::_Read(void* _buffer, size_t size)
 }
 
 
-status_t
-BDebugEventInputStream::_GetData(size_t size)
+status_t BDebugEventInputStream::_GetData(size_t size)
 {
 	if (fBufferSize >= size)
 		return B_OK;
@@ -297,8 +291,7 @@ BDebugEventOutputStream::~BDebugEventOutputStream()
 }
 
 
-status_t
-BDebugEventOutputStream::SetTo(BDataIO* stream, uint32 flags, uint32 eventMask)
+status_t BDebugEventOutputStream::SetTo(BDataIO* stream, uint32 flags, uint32 eventMask)
 {
 	Unset();
 
@@ -334,8 +327,7 @@ BDebugEventOutputStream::SetTo(BDataIO* stream, uint32 flags, uint32 eventMask)
 }
 
 
-void
-BDebugEventOutputStream::Unset()
+void BDebugEventOutputStream::Unset()
 {
 	Flush();
 	fStream = NULL;
@@ -343,8 +335,7 @@ BDebugEventOutputStream::Unset()
 }
 
 
-status_t
-BDebugEventOutputStream::Write(const void* buffer, size_t size)
+status_t BDebugEventOutputStream::Write(const void* buffer, size_t size)
 {
 	if (size == 0)
 		return B_OK;
@@ -361,8 +352,7 @@ BDebugEventOutputStream::Write(const void* buffer, size_t size)
 }
 
 
-status_t
-BDebugEventOutputStream::Flush()
+status_t BDebugEventOutputStream::Flush()
 {
 	return B_OK;
 }

@@ -32,8 +32,7 @@ ResourcesContainer::~ResourcesContainer()
 // AddResource
 //
 // Returns false, if item is NULL or memory is insufficient, true otherwise.
-bool
-ResourcesContainer::AddResource(ResourceItem *item, int32 index,
+bool ResourcesContainer::AddResource(ResourceItem *item, int32 index,
 								bool replace)
 {
 	bool result = false;
@@ -61,15 +60,13 @@ ResourcesContainer::RemoveResource(int32 index)
 }
 
 // RemoveResource
-bool
-ResourcesContainer::RemoveResource(ResourceItem *item)
+bool ResourcesContainer::RemoveResource(ResourceItem *item)
 {
 	return RemoveResource(IndexOf(item));
 }
 
 // MakeEmpty
-void
-ResourcesContainer::MakeEmpty()
+void ResourcesContainer::MakeEmpty()
 {
 	for (int32 i = 0; ResourceItem *item = ResourceAt(i); i++)
 		delete item;
@@ -78,8 +75,7 @@ ResourcesContainer::MakeEmpty()
 }
 
 // AssimilateResources
-void
-ResourcesContainer::AssimilateResources(ResourcesContainer &container)
+void ResourcesContainer::AssimilateResources(ResourcesContainer &container)
 {
 	// Resistance is futile! ;-)
 	int32 newCount = container.CountResources();
@@ -99,15 +95,13 @@ ResourcesContainer::AssimilateResources(ResourcesContainer &container)
 }
 
 // IndexOf
-int32
-ResourcesContainer::IndexOf(ResourceItem *item) const
+int32 ResourcesContainer::IndexOf(ResourceItem *item) const
 {
 	return fResources.IndexOf(item);
 }
 
 // IndexOf
-int32
-ResourcesContainer::IndexOf(const void *data) const
+int32 ResourcesContainer::IndexOf(const void *data) const
 {
 	int32 index = -1;
 	if (data) {
@@ -121,8 +115,7 @@ ResourcesContainer::IndexOf(const void *data) const
 }
 
 // IndexOf
-int32
-ResourcesContainer::IndexOf(type_code type, int32 id) const
+int32 ResourcesContainer::IndexOf(type_code type, int32 id) const
 {
 	int32 index = -1;
 	int32 count = CountResources();
@@ -135,8 +128,7 @@ ResourcesContainer::IndexOf(type_code type, int32 id) const
 }
 
 // IndexOf
-int32
-ResourcesContainer::IndexOf(type_code type, const char *name) const
+int32 ResourcesContainer::IndexOf(type_code type, const char *name) const
 {
 	int32 index = -1;
 	int32 count = CountResources();
@@ -153,8 +145,7 @@ ResourcesContainer::IndexOf(type_code type, const char *name) const
 }
 
 // IndexOfType
-int32
-ResourcesContainer::IndexOfType(type_code type, int32 typeIndex) const
+int32 ResourcesContainer::IndexOfType(type_code type, int32 typeIndex) const
 {
 	int32 index = -1;
 	int32 count = CountResources();
@@ -177,15 +168,13 @@ ResourcesContainer::ResourceAt(int32 index) const
 }
 
 // CountResources
-int32
-ResourcesContainer::CountResources() const
+int32 ResourcesContainer::CountResources() const
 {
 	return fResources.CountItems();
 }
 
 // SetModified
-void
-ResourcesContainer::SetModified(bool modified)
+void ResourcesContainer::SetModified(bool modified)
 {
 	fIsModified = modified;
 	// If unmodified, set the resource item's modified flag as well.
@@ -197,8 +186,7 @@ ResourcesContainer::SetModified(bool modified)
 }
 
 // IsModified
-bool
-ResourcesContainer::IsModified() const
+bool ResourcesContainer::IsModified() const
 {
 	bool isModified = fIsModified;
 	int32 count = CountResources();

@@ -124,7 +124,7 @@ EDFBGraphicsWindow::~EDFBGraphicsWindow()
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::GetContactor(BMessenger *msgr)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -138,7 +138,7 @@ EDFBGraphicsWindow::GetContactor(BMessenger *msgr)
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::ContactTo(const BMessenger *msgr)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -153,7 +153,7 @@ EDFBGraphicsWindow::ContactTo(const BMessenger *msgr)
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::SetBackgroundColor(bhapi::rgb_color bkColor)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -181,7 +181,7 @@ EDFBGraphicsWindow::SetBackgroundColor(bhapi::rgb_color bkColor)
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::SetFlags(__be_uint32 flags)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -207,7 +207,7 @@ EDFBGraphicsWindow::SetFlags(__be_uint32 flags)
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::SetLook(bhapi::window_look look)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -251,14 +251,14 @@ EDFBGraphicsWindow::SetLook(bhapi::window_look look)
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::SetFeel(bhapi::window_feel feel)
 {
 	return B_ERROR;
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::SetTitle(const char *title)
 {
 	if(fTitle) delete[] fTitle;
@@ -270,28 +270,28 @@ EDFBGraphicsWindow::SetTitle(const char *title)
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::SetWorkspaces(__be_uint32 workspaces)
 {
 	return B_ERROR;
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::GetWorkspaces(__be_uint32 *workspaces)
 {
 	return B_ERROR;
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::Iconify()
 {
 	return B_ERROR;
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::Show()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -316,7 +316,7 @@ EDFBGraphicsWindow::Show()
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::Hide()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -345,7 +345,7 @@ EDFBGraphicsWindow::Hide()
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::Raise()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -362,7 +362,7 @@ EDFBGraphicsWindow::Raise()
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::Lower(BGraphicsWindow *_frontWin)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -388,7 +388,7 @@ EDFBGraphicsWindow::Lower(BGraphicsWindow *_frontWin)
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::Activate(bool state)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -410,7 +410,7 @@ EDFBGraphicsWindow::Activate(bool state)
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::GetActivatedState(bool *state) const
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -424,7 +424,7 @@ EDFBGraphicsWindow::GetActivatedState(bool *state) const
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::MoveTo(__be_int32 x,  __be_int32 y)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -454,7 +454,7 @@ EDFBGraphicsWindow::MoveTo(__be_int32 x,  __be_int32 y)
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::ResizeTo(__be_uint32 w,  __be_uint32 h)
 {
 	if(w >= B_MAXINT32 || h >= B_MAXINT32)
@@ -498,7 +498,7 @@ EDFBGraphicsWindow::ResizeTo(__be_uint32 w,  __be_uint32 h)
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::MoveAndResizeTo(__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
 {
 	if(w >= B_MAXINT32 || h >= B_MAXINT32)
@@ -544,21 +544,21 @@ EDFBGraphicsWindow::MoveAndResizeTo(__be_int32 x,  __be_int32 y,  __be_uint32 w,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::SetSizeLimits(__be_uint32 min_w,  __be_uint32 max_w,  __be_uint32 min_h,  __be_uint32 max_h)
 {
 	return B_ERROR;
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::GetSizeLimits(__be_uint32 *min_w,  __be_uint32 *max_w,  __be_uint32 *min_h,  __be_uint32 *max_h)
 {
 	return B_ERROR;
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::GrabMouse()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -578,7 +578,7 @@ EDFBGraphicsWindow::GrabMouse()
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::UngrabMouse()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -600,7 +600,7 @@ EDFBGraphicsWindow::UngrabMouse()
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::GrabKeyboard()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -612,7 +612,7 @@ EDFBGraphicsWindow::GrabKeyboard()
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::UngrabKeyboard()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -624,14 +624,14 @@ EDFBGraphicsWindow::UngrabKeyboard()
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::QueryMouse(__be_int32 *x,  __be_int32 *y,  __be_int32 *buttons)
 {
 	return B_ERROR;
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::CopyTo(BGraphicsContext *dc,
 		           BGraphicsDrawable *dstDrawable,
 			    __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
@@ -696,7 +696,7 @@ EDFBGraphicsWindow::CopyTo(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
 			        __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
 			        __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)
@@ -710,7 +710,7 @@ EDFBGraphicsWindow::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::StrokePoint(BGraphicsContext *dc,
 				__be_int32 x,  __be_int32 y)
 {
@@ -723,7 +723,7 @@ EDFBGraphicsWindow::StrokePoint(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::StrokePoints(BGraphicsContext *dc,
 				 const  __be_int32 *pts,  __be_int32 count)
 {
@@ -736,7 +736,7 @@ EDFBGraphicsWindow::StrokePoints(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::StrokePoints_Colors(BGraphicsContext *dc,
 					const BList *ptsArrayLists,  __be_int32 arrayCount,
 					const bhapi::rgb_color *highColors)
@@ -750,7 +750,7 @@ EDFBGraphicsWindow::StrokePoints_Colors(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *dc,
 					const  __be_int32 *pts, const  __be_uint8 *alpha,  __be_int32 count)
 {
@@ -763,7 +763,7 @@ EDFBGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::StrokeLine(BGraphicsContext *dc,
 			        __be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1)
 {
@@ -776,7 +776,7 @@ EDFBGraphicsWindow::StrokeLine(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::StrokePolygon(BGraphicsContext *dc,
 				  const  __be_int32 *pts,  __be_int32 count, bool closed)
 {
@@ -789,7 +789,7 @@ EDFBGraphicsWindow::StrokePolygon(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::FillPolygon(BGraphicsContext *dc,
 				const  __be_int32 *pts,  __be_int32 count)
 {
@@ -802,7 +802,7 @@ EDFBGraphicsWindow::FillPolygon(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::StrokeRect(BGraphicsContext *dc,
 			        __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
 {
@@ -815,7 +815,7 @@ EDFBGraphicsWindow::StrokeRect(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::FillRect(BGraphicsContext *dc,
 			      __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
 {
@@ -828,7 +828,7 @@ EDFBGraphicsWindow::FillRect(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::StrokeRects(BGraphicsContext *dc,
 				const  __be_int32 *rects,  __be_int32 count)
 {
@@ -841,7 +841,7 @@ EDFBGraphicsWindow::StrokeRects(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::FillRects(BGraphicsContext *dc,
 			      const  __be_int32 *rects,  __be_int32 count)
 {
@@ -854,7 +854,7 @@ EDFBGraphicsWindow::FillRects(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::FillRegion(BGraphicsContext *dc,
 			       const BRegion &region)
 {
@@ -867,7 +867,7 @@ EDFBGraphicsWindow::FillRegion(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::StrokeRoundRect(BGraphicsContext *dc,
 				     __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
 {
@@ -880,7 +880,7 @@ EDFBGraphicsWindow::StrokeRoundRect(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::FillRoundRect(BGraphicsContext *dc,
 				   __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
 {
@@ -893,7 +893,7 @@ EDFBGraphicsWindow::FillRoundRect(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::StrokeArc(BGraphicsContext *dc,
 			       __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
 {
@@ -906,7 +906,7 @@ EDFBGraphicsWindow::StrokeArc(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsWindow::FillArc(BGraphicsContext *dc,
 			     __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
 {

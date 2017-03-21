@@ -162,23 +162,20 @@ AutomountSettingsPanel::~AutomountSettingsPanel()
 }
 
 
-bool
-AutomountSettingsPanel::IsDefaultable() const
+bool AutomountSettingsPanel::IsDefaultable() const
 {
 	return false;
 }
 
 
-void
-AutomountSettingsPanel::Revert()
+void AutomountSettingsPanel::Revert()
 {
 	_ParseSettings(fInitialSettings);
 	_SendSettings(false);
 }
 
 
-void
-AutomountSettingsPanel::ShowCurrentSettings()
+void AutomountSettingsPanel::ShowCurrentSettings()
 {
 	// Apply the settings
 	BMessage settings;
@@ -187,15 +184,13 @@ AutomountSettingsPanel::ShowCurrentSettings()
 }
 
 
-void
-AutomountSettingsPanel::RecordRevertSettings()
+void AutomountSettingsPanel::RecordRevertSettings()
 {
 	_GetSettings(&fInitialSettings);
 }
 
 
-bool
-AutomountSettingsPanel::IsRevertable() const
+bool AutomountSettingsPanel::IsRevertable() const
 {
 	BMessage currentSettings;
 	_GetSettings(&currentSettings);
@@ -204,8 +199,7 @@ AutomountSettingsPanel::IsRevertable() const
 }
 
 
-void
-AutomountSettingsPanel::AttachedToWindow()
+void AutomountSettingsPanel::AttachedToWindow()
 {
 	fInitialMountAllCheck->SetTarget(this);
 	fInitialMountAllBFSCheck->SetTarget(this);
@@ -221,8 +215,7 @@ AutomountSettingsPanel::AttachedToWindow()
 }
 
 
-void
-AutomountSettingsPanel::MessageReceived(BMessage* message)
+void AutomountSettingsPanel::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case B_QUIT_REQUESTED:
@@ -245,8 +238,7 @@ AutomountSettingsPanel::MessageReceived(BMessage* message)
 }
 
 
-void
-AutomountSettingsPanel::_SendSettings(bool rescan)
+void AutomountSettingsPanel::_SendSettings(bool rescan)
 {
 	BMessage message(kSetAutomounterParams);
 
@@ -276,8 +268,7 @@ AutomountSettingsPanel::_SendSettings(bool rescan)
 }
 
 
-void
-AutomountSettingsPanel::_GetSettings(BMessage* reply) const
+void AutomountSettingsPanel::_GetSettings(BMessage* reply) const
 {
 	BMessage message(kGetAutomounterParams);
 	if (fTarget.SendMessage(&message, reply, 2500000) != B_OK) {
@@ -291,8 +282,7 @@ AutomountSettingsPanel::_GetSettings(BMessage* reply) const
 }
 
 
-void
-AutomountSettingsPanel::_ParseSettings(const BMessage& settings)
+void AutomountSettingsPanel::_ParseSettings(const BMessage& settings)
 {
 	bool result;
 	if (settings.FindBool("autoMountAll", &result) == B_OK && result)

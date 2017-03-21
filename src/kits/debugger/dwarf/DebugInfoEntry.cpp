@@ -33,49 +33,42 @@ DebugInfoEntry::~DebugInfoEntry()
 }
 
 
-status_t
-DebugInfoEntry::InitAfterHierarchy(DebugInfoEntryInitInfo& info)
+status_t DebugInfoEntry::InitAfterHierarchy(DebugInfoEntryInitInfo& info)
 {
 	return B_OK;
 }
 
 
-status_t
-DebugInfoEntry::InitAfterAttributes(DebugInfoEntryInitInfo& info)
+status_t DebugInfoEntry::InitAfterAttributes(DebugInfoEntryInitInfo& info)
 {
 	return B_OK;
 }
 
 
-void
-DebugInfoEntry::SetParent(DebugInfoEntry* parent)
+void DebugInfoEntry::SetParent(DebugInfoEntry* parent)
 {
 	fParent = parent;
 }
 
 
-bool
-DebugInfoEntry::IsType() const
+bool DebugInfoEntry::IsType() const
 {
 	return false;
 }
 
 
-bool
-DebugInfoEntry::IsNamespace() const
+bool DebugInfoEntry::IsNamespace() const
 {
 	return false;
 }
 
 
-const char*
-DebugInfoEntry::Name() const
+const char*  DebugInfoEntry::Name() const
 {
 	return NULL;
 }
 
-const char*
-DebugInfoEntry::Description() const
+const char*  DebugInfoEntry::Description() const
 {
 	return NULL;
 }
@@ -109,8 +102,7 @@ DebugInfoEntry::GetLocationDescription()
 }
 
 
-bool
-DebugInfoEntry::GetDeclarationFile(uint32& _file) const
+bool DebugInfoEntry::GetDeclarationFile(uint32& _file) const
 {
 	DeclarationLocation* location = const_cast<DebugInfoEntry*>(this)
 		->GetDeclarationLocation();
@@ -122,8 +114,7 @@ DebugInfoEntry::GetDeclarationFile(uint32& _file) const
 }
 
 
-bool
-DebugInfoEntry::GetDeclarationLine(uint32& _line) const
+bool DebugInfoEntry::GetDeclarationLine(uint32& _line) const
 {
 	DeclarationLocation* location = const_cast<DebugInfoEntry*>(this)
 		->GetDeclarationLocation();
@@ -135,8 +126,7 @@ DebugInfoEntry::GetDeclarationLine(uint32& _line) const
 }
 
 
-bool
-DebugInfoEntry::GetDeclarationColumn(uint32& _column) const
+bool DebugInfoEntry::GetDeclarationColumn(uint32& _column) const
 {
 	DeclarationLocation* location = const_cast<DebugInfoEntry*>(this)
 		->GetDeclarationLocation();
@@ -148,16 +138,14 @@ DebugInfoEntry::GetDeclarationColumn(uint32& _column) const
 }
 
 
-status_t
-DebugInfoEntry::AddChild(DebugInfoEntry* child)
+status_t DebugInfoEntry::AddChild(DebugInfoEntry* child)
 {
 	// ignore children where we don't expect them
 	return ENTRY_NOT_HANDLED;
 }
 
 
-status_t
-DebugInfoEntry::AddAttribute_decl_file(uint16 attributeName,
+status_t DebugInfoEntry::AddAttribute_decl_file(uint16 attributeName,
 	const AttributeValue& value)
 {
 	if (DeclarationLocation* location = GetDeclarationLocation()) {
@@ -169,8 +157,7 @@ DebugInfoEntry::AddAttribute_decl_file(uint16 attributeName,
 }
 
 
-status_t
-DebugInfoEntry::AddAttribute_decl_line(uint16 attributeName,
+status_t DebugInfoEntry::AddAttribute_decl_line(uint16 attributeName,
 	const AttributeValue& value)
 {
 	if (DeclarationLocation* location = GetDeclarationLocation()) {
@@ -182,8 +169,7 @@ DebugInfoEntry::AddAttribute_decl_line(uint16 attributeName,
 }
 
 
-status_t
-DebugInfoEntry::AddAttribute_decl_column(uint16 attributeName,
+status_t DebugInfoEntry::AddAttribute_decl_column(uint16 attributeName,
 	const AttributeValue& value)
 {
 	if (DeclarationLocation* location = GetDeclarationLocation()) {
@@ -195,8 +181,7 @@ DebugInfoEntry::AddAttribute_decl_column(uint16 attributeName,
 }
 
 
-status_t
-DebugInfoEntry::AddAttribute_location(uint16 attributeName,
+status_t DebugInfoEntry::AddAttribute_location(uint16 attributeName,
 	const AttributeValue& value)
 {
 	if (LocationDescription* location = GetLocationDescription()) {
@@ -216,8 +201,7 @@ DebugInfoEntry::AddAttribute_location(uint16 attributeName,
 }
 
 
-status_t
-DebugInfoEntry::AddAttribute_sibling(uint16 attributeName,
+status_t DebugInfoEntry::AddAttribute_sibling(uint16 attributeName,
 	const AttributeValue& value)
 {
 	// This attribute is only intended to help the debug info consumer. We don't
@@ -330,8 +314,7 @@ DebugInfoEntry::GetDeclarationLocation()
 }
 
 
-status_t
-DebugInfoEntry::SetDynamicAttributeValue(DynamicAttributeValue& toSet,
+status_t DebugInfoEntry::SetDynamicAttributeValue(DynamicAttributeValue& toSet,
 	const AttributeValue& value)
 {
 	switch (value.attributeClass) {
@@ -350,8 +333,7 @@ DebugInfoEntry::SetDynamicAttributeValue(DynamicAttributeValue& toSet,
 }
 
 
-status_t
-DebugInfoEntry::SetConstantAttributeValue(ConstantAttributeValue& toSet,
+status_t DebugInfoEntry::SetConstantAttributeValue(ConstantAttributeValue& toSet,
 	const AttributeValue& value)
 {
 	switch (value.attributeClass) {
@@ -370,8 +352,7 @@ DebugInfoEntry::SetConstantAttributeValue(ConstantAttributeValue& toSet,
 }
 
 
-status_t
-DebugInfoEntry::SetMemberLocation(MemberLocation& toSet,
+status_t DebugInfoEntry::SetMemberLocation(MemberLocation& toSet,
 	const AttributeValue& value)
 {
 	switch (value.attributeClass) {

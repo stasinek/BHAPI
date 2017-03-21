@@ -19,22 +19,19 @@ LocalTargetHostInterfaceInfo::~LocalTargetHostInterfaceInfo()
 }
 
 
-status_t
-LocalTargetHostInterfaceInfo::Init()
+status_t LocalTargetHostInterfaceInfo::Init()
 {
 	return B_OK;
 }
 
 
-bool
-LocalTargetHostInterfaceInfo::IsLocal() const
+bool LocalTargetHostInterfaceInfo::IsLocal() const
 {
 	return true;
 }
 
 
-bool
-LocalTargetHostInterfaceInfo::IsConfigured(Settings* settings) const
+bool LocalTargetHostInterfaceInfo::IsConfigured(Settings* settings) const
 {
 	return true;
 }
@@ -50,8 +47,7 @@ LocalTargetHostInterfaceInfo::GetSettingsDescription() const
 }
 
 
-status_t
-LocalTargetHostInterfaceInfo::CreateInterface(Settings* settings,
+status_t LocalTargetHostInterfaceInfo::CreateInterface(Settings* settings,
 	TargetHostInterface*& _interface) const
 {
 	LocalTargetHostInterface* interface

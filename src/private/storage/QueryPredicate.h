@@ -128,8 +128,7 @@ ValueNode<ValueType>::ValueNode(const ValueType &value)
 
 // GetString
 template<typename ValueType>
-status_t
-ValueNode<ValueType>::GetString(BString &predicate)
+status_t ValueNode<ValueType>::GetString(BString &predicate)
 {
 	predicate.SetTo("");
 	predicate << fValue;

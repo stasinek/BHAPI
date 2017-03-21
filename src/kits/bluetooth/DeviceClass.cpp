@@ -16,8 +16,7 @@
 
 namespace Bluetooth {
 
-void
-DeviceClass::GetServiceClass(BString& serviceClass)
+void DeviceClass::GetServiceClass(BString& serviceClass)
 {
 	CALLED();
 	static const char *services[] = { B_TRANSLATE_MARK("Positioning"), 
@@ -46,8 +45,7 @@ DeviceClass::GetServiceClass(BString& serviceClass)
 }
 
 
-void
-DeviceClass::GetMajorDeviceClass(BString& majorClass)
+void DeviceClass::GetMajorDeviceClass(BString& majorClass)
 {
 	CALLED();
 	static const char *major_devices[] = { B_TRANSLATE_MARK("Miscellaneous"), 
@@ -64,8 +62,7 @@ DeviceClass::GetMajorDeviceClass(BString& majorClass)
 }
 
 
-void
-DeviceClass::GetMinorDeviceClass(BString& minorClass)
+void DeviceClass::GetMinorDeviceClass(BString& minorClass)
 {
 	CALLED();
 	uint major = MajorDeviceClass();
@@ -322,8 +319,7 @@ DeviceClass::GetMinorDeviceClass(BString& minorClass)
 }
 
 
-void
-DeviceClass::DumpDeviceClass(BString& string)
+void DeviceClass::DumpDeviceClass(BString& string)
 {
 	CALLED();
 	string << B_TRANSLATE("Service classes: ");
@@ -338,8 +334,7 @@ DeviceClass::DumpDeviceClass(BString& string)
 }
 
 
-void
-DeviceClass::Draw(BView* view, const BPoint& point)
+void DeviceClass::Draw(BView* view, const BPoint& point)
 {
 	CALLED();
 	rgb_color	kBlack = { 0,0,0,0 };

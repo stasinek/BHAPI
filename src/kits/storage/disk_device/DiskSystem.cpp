@@ -42,40 +42,35 @@ BDiskSystem::~BDiskSystem()
 
 
 // InitCheck
-status_t
-BDiskSystem::InitCheck() const
+status_t BDiskSystem::InitCheck() const
 {
 	return fID > 0 ? B_OK : fID;
 }
 
 
 // Name
-const char*
-BDiskSystem::Name() const
+const char*  BDiskSystem::Name() const
 {
 	return fName.String();
 }
 
 
 // ShortName
-const char*
-BDiskSystem::ShortName() const
+const char*  BDiskSystem::ShortName() const
 {
 	return fShortName.String();
 }
 
 
 // PrettyName
-const char*
-BDiskSystem::PrettyName() const
+const char*  BDiskSystem::PrettyName() const
 {
 	return fPrettyName.String();
 }
 
 
 // SupportsDefragmenting
-bool
-BDiskSystem::SupportsDefragmenting(bool* whileMounted) const
+bool BDiskSystem::SupportsDefragmenting(bool* whileMounted) const
 {
 	if (InitCheck() != B_OK
 		|| !(fFlags & B_DISK_SYSTEM_SUPPORTS_DEFRAGMENTING)) {
@@ -94,8 +89,7 @@ BDiskSystem::SupportsDefragmenting(bool* whileMounted) const
 
 
 // SupportsRepairing
-bool
-BDiskSystem::SupportsRepairing(bool checkOnly, bool* whileMounted) const
+bool BDiskSystem::SupportsRepairing(bool checkOnly, bool* whileMounted) const
 {
 	uint32 mainBit = B_DISK_SYSTEM_SUPPORTS_REPAIRING;
 	uint32 mountedBit = B_DISK_SYSTEM_SUPPORTS_REPAIRING_WHILE_MOUNTED;
@@ -119,8 +113,7 @@ BDiskSystem::SupportsRepairing(bool checkOnly, bool* whileMounted) const
 
 
 // SupportsResizing
-bool
-BDiskSystem::SupportsResizing(bool* whileMounted) const
+bool BDiskSystem::SupportsResizing(bool* whileMounted) const
 {
 	if (InitCheck() != B_OK
 		|| !(fFlags & B_DISK_SYSTEM_SUPPORTS_RESIZING)) {
@@ -139,8 +132,7 @@ BDiskSystem::SupportsResizing(bool* whileMounted) const
 
 
 // SupportsResizingChild
-bool
-BDiskSystem::SupportsResizingChild() const
+bool BDiskSystem::SupportsResizingChild() const
 {
 	return (InitCheck() == B_OK && IsPartitioningSystem()
 		&& (fFlags & B_DISK_SYSTEM_SUPPORTS_RESIZING_CHILD));
@@ -148,8 +140,7 @@ BDiskSystem::SupportsResizingChild() const
 
 
 // SupportsMoving
-bool
-BDiskSystem::SupportsMoving(bool* whileMounted) const
+bool BDiskSystem::SupportsMoving(bool* whileMounted) const
 {
 	if (InitCheck() != B_OK
 		|| !(fFlags & B_DISK_SYSTEM_SUPPORTS_MOVING)) {
@@ -168,8 +159,7 @@ BDiskSystem::SupportsMoving(bool* whileMounted) const
 
 
 // SupportsMovingChild
-bool
-BDiskSystem::SupportsMovingChild() const
+bool BDiskSystem::SupportsMovingChild() const
 {
 	return (InitCheck() == B_OK && IsPartitioningSystem()
 		&& (fFlags & B_DISK_SYSTEM_SUPPORTS_MOVING_CHILD));
@@ -177,8 +167,7 @@ BDiskSystem::SupportsMovingChild() const
 
 
 // SupportsName
-bool
-BDiskSystem::SupportsName() const
+bool BDiskSystem::SupportsName() const
 {
 	return (InitCheck() == B_OK && IsPartitioningSystem()
 		&& (fFlags & B_DISK_SYSTEM_SUPPORTS_NAME));
@@ -186,8 +175,7 @@ BDiskSystem::SupportsName() const
 
 
 // SupportsContentName
-bool
-BDiskSystem::SupportsContentName() const
+bool BDiskSystem::SupportsContentName() const
 {
 	return (InitCheck() == B_OK
 		&& (fFlags & B_DISK_SYSTEM_SUPPORTS_CONTENT_NAME));
@@ -195,8 +183,7 @@ BDiskSystem::SupportsContentName() const
 
 
 // SupportsSettingName
-bool
-BDiskSystem::SupportsSettingName() const
+bool BDiskSystem::SupportsSettingName() const
 {
 	return (InitCheck() == B_OK && IsPartitioningSystem()
 		&& (fFlags & B_DISK_SYSTEM_SUPPORTS_SETTING_NAME));
@@ -204,8 +191,7 @@ BDiskSystem::SupportsSettingName() const
 
 
 // SupportsSettingContentName
-bool
-BDiskSystem::SupportsSettingContentName(bool* whileMounted) const
+bool BDiskSystem::SupportsSettingContentName(bool* whileMounted) const
 {
 	if (InitCheck() != B_OK
 		|| !(fFlags & B_DISK_SYSTEM_SUPPORTS_SETTING_CONTENT_NAME)) {
@@ -225,8 +211,7 @@ BDiskSystem::SupportsSettingContentName(bool* whileMounted) const
 
 
 // SupportsSettingType
-bool
-BDiskSystem::SupportsSettingType() const
+bool BDiskSystem::SupportsSettingType() const
 {
 	return (InitCheck() == B_OK && IsPartitioningSystem()
 		&& (fFlags & B_DISK_SYSTEM_SUPPORTS_SETTING_TYPE));
@@ -234,8 +219,7 @@ BDiskSystem::SupportsSettingType() const
 
 
 // SupportsSettingParameters
-bool
-BDiskSystem::SupportsSettingParameters() const
+bool BDiskSystem::SupportsSettingParameters() const
 {
 	return (InitCheck() == B_OK && IsPartitioningSystem()
 		&& (fFlags & B_DISK_SYSTEM_SUPPORTS_SETTING_PARAMETERS));
@@ -243,8 +227,7 @@ BDiskSystem::SupportsSettingParameters() const
 
 
 // SupportsSettingContentParameters
-bool
-BDiskSystem::SupportsSettingContentParameters(bool* whileMounted) const
+bool BDiskSystem::SupportsSettingContentParameters(bool* whileMounted) const
 {
 	if (InitCheck() != B_OK
 		|| !(fFlags & B_DISK_SYSTEM_SUPPORTS_SETTING_CONTENT_PARAMETERS)) {
@@ -264,8 +247,7 @@ BDiskSystem::SupportsSettingContentParameters(bool* whileMounted) const
 
 
 // SupportsCreatingChild
-bool
-BDiskSystem::SupportsCreatingChild() const
+bool BDiskSystem::SupportsCreatingChild() const
 {
 	return (InitCheck() == B_OK && IsPartitioningSystem()
 		&& (fFlags & B_DISK_SYSTEM_SUPPORTS_CREATING_CHILD));
@@ -273,8 +255,7 @@ BDiskSystem::SupportsCreatingChild() const
 
 
 // SupportsDeletingChild
-bool
-BDiskSystem::SupportsDeletingChild() const
+bool BDiskSystem::SupportsDeletingChild() const
 {
 	return (InitCheck() == B_OK && IsPartitioningSystem()
 		&& (fFlags & B_DISK_SYSTEM_SUPPORTS_DELETING_CHILD));
@@ -282,16 +263,14 @@ BDiskSystem::SupportsDeletingChild() const
 
 
 // SupportsInitializing
-bool
-BDiskSystem::SupportsInitializing() const
+bool BDiskSystem::SupportsInitializing() const
 {
 	return (InitCheck() == B_OK
 		&& (fFlags & B_DISK_SYSTEM_SUPPORTS_INITIALIZING));
 }
 
 
-bool
-BDiskSystem::SupportsWriting() const
+bool BDiskSystem::SupportsWriting() const
 {
 	if (InitCheck() != B_OK
 		|| !IsFileSystem())
@@ -302,8 +281,7 @@ BDiskSystem::SupportsWriting() const
 
 
 // GetTypeForContentType
-status_t
-BDiskSystem::GetTypeForContentType(const char* contentType, BString* type) const
+status_t BDiskSystem::GetTypeForContentType(const char* contentType, BString* type) const
 {
 	if (InitCheck() != B_OK)
 		return InitCheck();
@@ -327,16 +305,14 @@ BDiskSystem::GetTypeForContentType(const char* contentType, BString* type) const
 
 
 // IsPartitioningSystem
-bool
-BDiskSystem::IsPartitioningSystem() const
+bool BDiskSystem::IsPartitioningSystem() const
 {
 	return InitCheck() == B_OK && !(fFlags & B_DISK_SYSTEM_IS_FILE_SYSTEM);
 }
 
 
 // IsFileSystem
-bool
-BDiskSystem::IsFileSystem() const
+bool BDiskSystem::IsFileSystem() const
 {
 	return InitCheck() == B_OK && (fFlags & B_DISK_SYSTEM_IS_FILE_SYSTEM);
 }
@@ -357,8 +333,7 @@ BDiskSystem::operator=(const BDiskSystem& other)
 
 
 // _SetTo
-status_t
-BDiskSystem::_SetTo(disk_system_id id)
+status_t BDiskSystem::_SetTo(disk_system_id id)
 {
 	_Unset();
 
@@ -375,8 +350,7 @@ BDiskSystem::_SetTo(disk_system_id id)
 
 
 // _SetTo
-status_t
-BDiskSystem::_SetTo(const user_disk_system_info* info)
+status_t BDiskSystem::_SetTo(const user_disk_system_info* info)
 {
 	_Unset();
 
@@ -394,8 +368,7 @@ BDiskSystem::_SetTo(const user_disk_system_info* info)
 
 
 // _Unset
-void
-BDiskSystem::_Unset()
+void BDiskSystem::_Unset()
 {
 	fID = B_NO_INIT;
 	fName = (const char*)NULL;

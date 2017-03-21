@@ -24,8 +24,7 @@ EnumerationValue::~EnumerationValue()
 }
 
 
-bool
-EnumerationValue::ToString(BString& _string) const
+bool EnumerationValue::ToString(BString& _string) const
 {
 	if (!fValue.IsInteger())
 		return false;

@@ -77,8 +77,7 @@ ValueLocation::ValueLocation(const ValueLocation& other)
 }
 
 
-bool
-ValueLocation::SetToByteOffset(const ValueLocation& other, uint64 byteOffset,
+bool ValueLocation::SetToByteOffset(const ValueLocation& other, uint64 byteOffset,
 	uint64 byteSize)
 {
 	Clear();
@@ -92,8 +91,7 @@ ValueLocation::SetToByteOffset(const ValueLocation& other, uint64 byteOffset,
 }
 
 
-bool
-ValueLocation::SetTo(const ValueLocation& other, uint64 bitOffset,
+bool ValueLocation::SetTo(const ValueLocation& other, uint64 bitOffset,
 	uint64 bitSize)
 {
 	Clear();
@@ -211,16 +209,14 @@ ValueLocation::SetTo(const ValueLocation& other, uint64 bitOffset,
 }
 
 
-void
-ValueLocation::Clear()
+void ValueLocation::Clear()
 {
 	fWritable = false;
 	fPieces.clear();
 }
 
 
-bool
-ValueLocation::AddPiece(const ValuePieceLocation& piece)
+bool ValueLocation::AddPiece(const ValuePieceLocation& piece)
 {
 	// Just add, don't normalize. This allows for using the class with different
 	// semantics (e.g. in the DWARF code).
@@ -239,8 +235,7 @@ ValueLocation::AddPiece(const ValuePieceLocation& piece)
 }
 
 
-int32
-ValueLocation::CountPieces() const
+int32 ValueLocation::CountPieces() const
 {
 	return fPieces.size();
 }
@@ -256,8 +251,7 @@ ValueLocation::PieceAt(int32 index) const
 }
 
 
-bool
-ValueLocation::SetPieceAt(int32 index, const ValuePieceLocation& piece)
+bool ValueLocation::SetPieceAt(int32 index, const ValuePieceLocation& piece)
 {
 	if (index < 0 || index >= (int32)fPieces.size())
 		return false;
@@ -275,8 +269,7 @@ ValueLocation::operator=(const ValueLocation& other)
 }
 
 
-void
-ValueLocation::Dump() const
+void ValueLocation::Dump() const
 {
 	int32 count = fPieces.size();
 	printf("ValueLocation: %s endian, %" B_PRId32 " pieces:\n",

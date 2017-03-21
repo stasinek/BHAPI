@@ -176,8 +176,7 @@ private:
 };
 
 
-inline uint64
-PackageFileHeapAccessorBase::OffsetArray::operator[](size_t index) const
+inline uint64 PackageFileHeapAccessorBase::OffsetArray::operator[](size_t index) const
 {
 	if (index == 0)
 		return 0;

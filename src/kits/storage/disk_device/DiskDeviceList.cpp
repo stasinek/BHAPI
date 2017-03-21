@@ -42,8 +42,7 @@ BDiskDeviceList::~BDiskDeviceList()
 // MessageReceived
 /*!	\brief Implemented to handle notification messages.
 */
-void
-BDiskDeviceList::MessageReceived(BMessage *message)
+void BDiskDeviceList::MessageReceived(BMessage *message)
 {
 	AutoLocker<BDiskDeviceList> _(this);
 	switch (message->what) {
@@ -103,8 +102,7 @@ BDiskDeviceList::MessageReceived(BMessage *message)
 /*!	\brief Implemented to unsubscribe from notification services when going
 		   to be detached from looper.
 */
-void
-BDiskDeviceList::SetNextHandler(BHandler *handler)
+void BDiskDeviceList::SetNextHandler(BHandler *handler)
 {
 	if (!handler) {
 		AutoLocker<BDiskDeviceList> _(this);
@@ -129,8 +127,7 @@ BDiskDeviceList::SetNextHandler(BHandler *handler)
 
 	\return \c B_OK, if everything went fine, another error code otherwise.
 */
-status_t
-BDiskDeviceList::Fetch()
+status_t BDiskDeviceList::Fetch()
 {
 	Unset();
 	AutoLocker<BDiskDeviceList> _(this);
@@ -166,8 +163,7 @@ BDiskDeviceList::Fetch()
 	doesn't succeed. That way an object can be used without locking in a
 	single threaded environment.
 */
-void
-BDiskDeviceList::Unset()
+void BDiskDeviceList::Unset()
 {
 	AutoLocker<BDiskDeviceList> _(this);
 	// unsubscribe from notification services
@@ -186,8 +182,7 @@ BDiskDeviceList::Unset()
 	\return \c true, if the list could be locked successfully, \c false
 			otherwise.
 */
-bool
-BDiskDeviceList::Lock()
+bool BDiskDeviceList::Lock()
 {
 	if (fLocker)
 		return fLocker->Lock();
@@ -201,8 +196,7 @@ BDiskDeviceList::Lock()
 	own BLocker, then this locker is unlocked, otherwise UnlockLooper() is
 	invoked.
 */
-void
-BDiskDeviceList::Unlock()
+void BDiskDeviceList::Unlock()
 {
 	if (fLocker)
 		return fLocker->Unlock();
@@ -216,8 +210,7 @@ BDiskDeviceList::Unlock()
 
 	\return The number of devices in the list.
 */
-int32
-BDiskDeviceList::CountDevices() const
+int32 BDiskDeviceList::CountDevices() const
 {
 	return fDevices.CountItems();
 }
@@ -386,8 +379,7 @@ BDiskDeviceList::PartitionWithID(int32 id) const
 
 	\param partition The concerned partition.
 */
-void
-BDiskDeviceList::MountPointMoved(BPartition *partition)
+void BDiskDeviceList::MountPointMoved(BPartition *partition)
 {
 	PartitionChanged(partition, B_DEVICE_MOUNT_POINT_MOVED);
 }
@@ -399,8 +391,7 @@ BDiskDeviceList::MountPointMoved(BPartition *partition)
 
 	\param partition The concerned partition.
 */
-void
-BDiskDeviceList::PartitionMounted(BPartition *partition)
+void BDiskDeviceList::PartitionMounted(BPartition *partition)
 {
 	PartitionChanged(partition, B_DEVICE_PARTITION_MOUNTED);
 }
@@ -412,8 +403,7 @@ BDiskDeviceList::PartitionMounted(BPartition *partition)
 
 	\param partition The concerned partition.
 */
-void
-BDiskDeviceList::PartitionUnmounted(BPartition *partition)
+void BDiskDeviceList::PartitionUnmounted(BPartition *partition)
 {
 	PartitionChanged(partition, B_DEVICE_PARTITION_UNMOUNTED);
 }
@@ -425,8 +415,7 @@ BDiskDeviceList::PartitionUnmounted(BPartition *partition)
 
 	\param partition The concerned partition.
 */
-void
-BDiskDeviceList::PartitionInitialized(BPartition *partition)
+void BDiskDeviceList::PartitionInitialized(BPartition *partition)
 {
 	PartitionChanged(partition, B_DEVICE_PARTITION_INITIALIZED);
 }
@@ -438,8 +427,7 @@ BDiskDeviceList::PartitionInitialized(BPartition *partition)
 
 	\param partition The concerned partition.
 */
-void
-BDiskDeviceList::PartitionResized(BPartition *partition)
+void BDiskDeviceList::PartitionResized(BPartition *partition)
 {
 	PartitionChanged(partition, B_DEVICE_PARTITION_RESIZED);
 }
@@ -451,8 +439,7 @@ BDiskDeviceList::PartitionResized(BPartition *partition)
 
 	\param partition The concerned partition.
 */
-void
-BDiskDeviceList::PartitionMoved(BPartition *partition)
+void BDiskDeviceList::PartitionMoved(BPartition *partition)
 {
 	PartitionChanged(partition, B_DEVICE_PARTITION_MOVED);
 }
@@ -464,8 +451,7 @@ BDiskDeviceList::PartitionMoved(BPartition *partition)
 
 	\param partition The concerned partition.
 */
-void
-BDiskDeviceList::PartitionCreated(BPartition *partition)
+void BDiskDeviceList::PartitionCreated(BPartition *partition)
 {
 }
 
@@ -485,8 +471,7 @@ BDiskDeviceList::PartitionCreated(BPartition *partition)
 		   invocation.
 	\param partitionID The ID of the concerned partition.
 */
-void
-BDiskDeviceList::PartitionDeleted(BPartition *partition,
+void BDiskDeviceList::PartitionDeleted(BPartition *partition,
 	partition_id partitionID)
 {
 }
@@ -498,8 +483,7 @@ BDiskDeviceList::PartitionDeleted(BPartition *partition,
 
 	\param partition The concerned partition.
 */
-void
-BDiskDeviceList::PartitionDefragmented(BPartition *partition)
+void BDiskDeviceList::PartitionDefragmented(BPartition *partition)
 {
 	PartitionChanged(partition, B_DEVICE_PARTITION_DEFRAGMENTED);
 }
@@ -511,8 +495,7 @@ BDiskDeviceList::PartitionDefragmented(BPartition *partition)
 
 	\param partition The concerned partition.
 */
-void
-BDiskDeviceList::PartitionRepaired(BPartition *partition)
+void BDiskDeviceList::PartitionRepaired(BPartition *partition)
 {
 	PartitionChanged(partition, B_DEVICE_PARTITION_REPAIRED);
 }
@@ -528,8 +511,7 @@ BDiskDeviceList::PartitionRepaired(BPartition *partition)
 	\param partition The concerned partition.
 	\param event The event that occurred, if you are interested in it after all.
 */
-void
-BDiskDeviceList::PartitionChanged(BPartition *partition, uint32 event)
+void BDiskDeviceList::PartitionChanged(BPartition *partition, uint32 event)
 {
 }
 
@@ -540,8 +522,7 @@ BDiskDeviceList::PartitionChanged(BPartition *partition, uint32 event)
 
 	\param device The concerned device.
 */
-void
-BDiskDeviceList::MediaChanged(BDiskDevice *device)
+void BDiskDeviceList::MediaChanged(BDiskDevice *device)
 {
 }
 
@@ -552,8 +533,7 @@ BDiskDeviceList::MediaChanged(BDiskDevice *device)
 
 	\param device The concerned device.
 */
-void
-BDiskDeviceList::DeviceAdded(BDiskDevice *device)
+void BDiskDeviceList::DeviceAdded(BDiskDevice *device)
 {
 }
 
@@ -567,8 +547,7 @@ BDiskDeviceList::DeviceAdded(BDiskDevice *device)
 
 	\param device The concerned device.
 */
-void
-BDiskDeviceList::DeviceRemoved(BDiskDevice *device)
+void BDiskDeviceList::DeviceRemoved(BDiskDevice *device)
 {
 }
 
@@ -580,8 +559,7 @@ BDiskDeviceList::DeviceRemoved(BDiskDevice *device)
 
 	\return \c B_OK, if everything went fine, another error code otherwise.
 */
-status_t
-BDiskDeviceList::_StartWatching()
+status_t BDiskDeviceList::_StartWatching()
 {
 	if (!Looper() || fSubscribed)
 		return B_BAD_VALUE;
@@ -597,8 +575,7 @@ BDiskDeviceList::_StartWatching()
 	The object must be locked (if possible at all), when this method is
 	invoked.
 */
-void
-BDiskDeviceList::_StopWatching()
+void BDiskDeviceList::_StopWatching()
 {
 	if (fSubscribed) {
 		BDiskDeviceRoster().StopWatching(BMessenger(this));
@@ -610,8 +587,7 @@ BDiskDeviceList::_StopWatching()
 /*!	\brief Handles a "mount point moved" message.
 	\param message The respective notification message.
 */
-void
-BDiskDeviceList::_MountPointMoved(BMessage *message)
+void BDiskDeviceList::_MountPointMoved(BMessage *message)
 {
 	if (_UpdateDevice(message) != NULL) {
 		if (BPartition *partition = _FindPartition(message))
@@ -623,8 +599,7 @@ BDiskDeviceList::_MountPointMoved(BMessage *message)
 /*!	\brief Handles a "partition mounted" message.
 	\param message The respective notification message.
 */
-void
-BDiskDeviceList::_PartitionMounted(BMessage *message)
+void BDiskDeviceList::_PartitionMounted(BMessage *message)
 {
 	if (_UpdateDevice(message) != NULL) {
 		if (BPartition *partition = _FindPartition(message))
@@ -636,8 +611,7 @@ BDiskDeviceList::_PartitionMounted(BMessage *message)
 /*!	\brief Handles a "partition unmounted" message.
 	\param message The respective notification message.
 */
-void
-BDiskDeviceList::_PartitionUnmounted(BMessage *message)
+void BDiskDeviceList::_PartitionUnmounted(BMessage *message)
 {
 	if (_UpdateDevice(message) != NULL) {
 		if (BPartition *partition = _FindPartition(message))
@@ -649,8 +623,7 @@ BDiskDeviceList::_PartitionUnmounted(BMessage *message)
 /*!	\brief Handles a "partition initialized" message.
 	\param message The respective notification message.
 */
-void
-BDiskDeviceList::_PartitionInitialized(BMessage *message)
+void BDiskDeviceList::_PartitionInitialized(BMessage *message)
 {
 	if (_UpdateDevice(message) != NULL) {
 		if (BPartition *partition = _FindPartition(message))
@@ -662,8 +635,7 @@ BDiskDeviceList::_PartitionInitialized(BMessage *message)
 /*!	\brief Handles a "partition resized" message.
 	\param message The respective notification message.
 */
-void
-BDiskDeviceList::_PartitionResized(BMessage *message)
+void BDiskDeviceList::_PartitionResized(BMessage *message)
 {
 	if (_UpdateDevice(message) != NULL) {
 		if (BPartition *partition = _FindPartition(message))
@@ -675,8 +647,7 @@ BDiskDeviceList::_PartitionResized(BMessage *message)
 /*!	\brief Handles a "partition moved" message.
 	\param message The respective notification message.
 */
-void
-BDiskDeviceList::_PartitionMoved(BMessage *message)
+void BDiskDeviceList::_PartitionMoved(BMessage *message)
 {
 	if (_UpdateDevice(message) != NULL) {
 		if (BPartition *partition = _FindPartition(message))
@@ -688,8 +659,7 @@ BDiskDeviceList::_PartitionMoved(BMessage *message)
 /*!	\brief Handles a "partition created" message.
 	\param message The respective notification message.
 */
-void
-BDiskDeviceList::_PartitionCreated(BMessage *message)
+void BDiskDeviceList::_PartitionCreated(BMessage *message)
 {
 	if (_UpdateDevice(message) != NULL) {
 		if (BPartition *partition = _FindPartition(message))
@@ -701,8 +671,7 @@ BDiskDeviceList::_PartitionCreated(BMessage *message)
 /*!	\brief Handles a "partition deleted" message.
 	\param message The respective notification message.
 */
-void
-BDiskDeviceList::_PartitionDeleted(BMessage *message)
+void BDiskDeviceList::_PartitionDeleted(BMessage *message)
 {
 	if (BPartition *partition = _FindPartition(message)) {
 		partition_id id = partition->ID();
@@ -716,8 +685,7 @@ BDiskDeviceList::_PartitionDeleted(BMessage *message)
 /*!	\brief Handles a "partition defragmented" message.
 	\param message The respective notification message.
 */
-void
-BDiskDeviceList::_PartitionDefragmented(BMessage *message)
+void BDiskDeviceList::_PartitionDefragmented(BMessage *message)
 {
 	if (_UpdateDevice(message) != NULL) {
 		if (BPartition *partition = _FindPartition(message))
@@ -729,8 +697,7 @@ BDiskDeviceList::_PartitionDefragmented(BMessage *message)
 /*!	\brief Handles a "partition repaired" message.
 	\param message The respective notification message.
 */
-void
-BDiskDeviceList::_PartitionRepaired(BMessage *message)
+void BDiskDeviceList::_PartitionRepaired(BMessage *message)
 {
 	if (_UpdateDevice(message) != NULL) {
 		if (BPartition *partition = _FindPartition(message))
@@ -742,8 +709,7 @@ BDiskDeviceList::_PartitionRepaired(BMessage *message)
 /*!	\brief Handles a "media changed" message.
 	\param message The respective notification message.
 */
-void
-BDiskDeviceList::_MediaChanged(BMessage *message)
+void BDiskDeviceList::_MediaChanged(BMessage *message)
 {
 	if (BDiskDevice *device = _UpdateDevice(message))
 		MediaChanged(device);
@@ -753,8 +719,7 @@ BDiskDeviceList::_MediaChanged(BMessage *message)
 /*!	\brief Handles a "device added" message.
 	\param message The respective notification message.
 */
-void
-BDiskDeviceList::_DeviceAdded(BMessage *message)
+void BDiskDeviceList::_DeviceAdded(BMessage *message)
 {
 	int32 id;
 	if (message->FindInt32("device_id", &id) == B_OK && !DeviceWithID(id)) {
@@ -771,8 +736,7 @@ BDiskDeviceList::_DeviceAdded(BMessage *message)
 /*!	\brief Handles a "device removed" message.
 	\param message The respective notification message.
 */
-void
-BDiskDeviceList::_DeviceRemoved(BMessage *message)
+void BDiskDeviceList::_DeviceRemoved(BMessage *message)
 {
 	if (BDiskDevice *device = _FindDevice(message)) {
 		fDevices.RemoveItem(device, false);

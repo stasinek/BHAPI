@@ -60,8 +60,7 @@ BCountry::~BCountry()
 }
 
 
-status_t
-BCountry::GetNativeName(BString& name) const
+status_t BCountry::GetNativeName(BString& name) const
 {
 	UnicodeString string;
 	fICULocale->getDisplayName(*fICULocale, string);
@@ -75,8 +74,7 @@ BCountry::GetNativeName(BString& name) const
 }
 
 
-status_t
-BCountry::GetName(BString& name, const BLanguage* displayLanguage) const
+status_t BCountry::GetName(BString& name, const BLanguage* displayLanguage) const
 {
 	status_t status = B_OK;
 	BString appLanguage;
@@ -102,22 +100,19 @@ BCountry::GetName(BString& name, const BLanguage* displayLanguage) const
 }
 
 
-const char*
-BCountry::Code() const
+const char*  BCountry::Code() const
 {
 	return fICULocale->getCountry();
 }
 
 
-status_t
-BCountry::GetIcon(BBitmap* result) const
+status_t BCountry::GetIcon(BBitmap* result) const
 {
 	return BLocaleRoster::Default()->GetFlagIconForCountry(result, Code());
 }
 
 
-status_t
-BCountry::GetAvailableTimeZones(BMessage* timeZones) const
+status_t BCountry::GetAvailableTimeZones(BMessage* timeZones) const
 {
 	return BLocaleRoster::Default()->GetAvailableTimeZonesForCountry(timeZones,
 		Code());

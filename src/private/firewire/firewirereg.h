@@ -37,7 +37,7 @@
 #ifndef _FIREWIREREG_H
 #define _FIREWIREREG_H
 #ifdef __HAIKU__
-#include <OS.h>
+#include <kernel/OS.h>
 #else
 #ifdef __DragonFly__
 typedef	d_thread_t fw_proc;

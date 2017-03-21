@@ -143,14 +143,14 @@ BVolume::~BVolume()
 }
 
 
-status_t
+status_t 
 BVolume::InitCheck() const
 {
     return(fDevice == 0 || fData == NULL ? B_NO_INIT : B_OK);
 }
 
 
-status_t
+status_t 
 BVolume::SetTo(b_dev_t dev)
 {
 #ifdef HAVE_MNTENT_H
@@ -305,7 +305,7 @@ BVolume::SetTo(b_dev_t dev)
 }
 
 
-void
+void 
 BVolume::Unset()
 {
     if(fData != NULL) bhapi::delete_dev_data((bhapi::dev_data_t*)fData);
@@ -322,7 +322,7 @@ BVolume::Device() const
 }
 
 
-status_t
+status_t 
 BVolume::GetName(BString *name) const
 {
     if(name == NULL) return B_BAD_VALUE;
@@ -344,7 +344,7 @@ status_t BVolume::GetName(char *name, size_t nameSize) const
 }
 
 
-status_t
+status_t 
 BVolume::SetName(const char *name)
 {
     // TODO
@@ -352,7 +352,7 @@ BVolume::SetName(const char *name)
 }
 
 
-status_t
+status_t 
 BVolume::GetRootDirectory(BDirectory *dir) const
 {
     if(dir == NULL) return B_BAD_VALUE;
@@ -363,14 +363,14 @@ BVolume::GetRootDirectory(BDirectory *dir) const
 }
 
 
-bool
+bool 
 BVolume::operator==(const BVolume &vol) const
 {
     return(fDevice == vol.fDevice);
 }
 
 
-bool
+bool 
 BVolume::operator!=(const BVolume &vol) const
 {
     return(fDevice != vol.fDevice);

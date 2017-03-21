@@ -22,8 +22,7 @@ BIntegerFormatParameters::~BIntegerFormatParameters()
 }
 
 // SetParentIntegerParameters
-void
-BIntegerFormatParameters::SetParentIntegerParameters(
+void BIntegerFormatParameters::SetParentIntegerParameters(
 	const BIntegerFormatParameters *parent)
 {
 	fParent = parent;

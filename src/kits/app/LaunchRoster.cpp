@@ -36,8 +36,7 @@ BLaunchRoster::Private::Private(BLaunchRoster& roster)
 }
 
 
-status_t
-BLaunchRoster::Private::RegisterSessionDaemon(const BMessenger& daemon)
+status_t BLaunchRoster::Private::RegisterSessionDaemon(const BMessenger& daemon)
 {
 	BMessage request(B_REGISTER_SESSION_DAEMON);
 	status_t status = request.AddInt32("user", getuid());
@@ -72,15 +71,13 @@ BLaunchRoster::~BLaunchRoster()
 }
 
 
-status_t
-BLaunchRoster::InitCheck() const
+status_t BLaunchRoster::InitCheck() const
 {
 	return fMessenger.Team() >= 0 ? B_OK : B_ERROR;
 }
 
 
-status_t
-BLaunchRoster::GetData(BMessage& data)
+status_t BLaunchRoster::GetData(BMessage& data)
 {
 	if (__be_app == NULL)
 		return B_BAD_VALUE;
@@ -89,8 +86,7 @@ BLaunchRoster::GetData(BMessage& data)
 }
 
 
-status_t
-BLaunchRoster::GetData(const char* signature, BMessage& data)
+status_t BLaunchRoster::GetData(const char* signature, BMessage& data)
 {
 	if (signature == NULL || signature[0] == '\0')
 		return B_BAD_VALUE;
@@ -136,16 +132,14 @@ BLaunchRoster::GetPort(const char* signature, const char* name)
 }
 
 
-status_t
-BLaunchRoster::Target(const char* name, const BMessage& data,
+status_t BLaunchRoster::Target(const char* name, const BMessage& data,
 	const char* baseName)
 {
 	return Target(name, &data, baseName);
 }
 
 
-status_t
-BLaunchRoster::Target(const char* name, const BMessage* data,
+status_t BLaunchRoster::Target(const char* name, const BMessage* data,
 	const char* baseName)
 {
 	if (name == NULL)
@@ -166,8 +160,7 @@ BLaunchRoster::Target(const char* name, const BMessage* data,
 }
 
 
-status_t
-BLaunchRoster::Start(const char* name)
+status_t BLaunchRoster::Start(const char* name)
 {
 	if (name == NULL)
 		return B_BAD_VALUE;
@@ -183,8 +176,7 @@ BLaunchRoster::Start(const char* name)
 }
 
 
-status_t
-BLaunchRoster::Stop(const char* name, bool force)
+status_t BLaunchRoster::Stop(const char* name, bool force)
 {
 	if (name == NULL)
 		return B_BAD_VALUE;
@@ -202,8 +194,7 @@ BLaunchRoster::Stop(const char* name, bool force)
 }
 
 
-status_t
-BLaunchRoster::StartSession(const char* login)
+status_t BLaunchRoster::StartSession(const char* login)
 {
 	if (login == NULL)
 		return B_BAD_VALUE;
@@ -219,37 +210,32 @@ BLaunchRoster::StartSession(const char* login)
 }
 
 
-status_t
-BLaunchRoster::RegisterEvent(const BMessenger& source, const char* name,
+status_t BLaunchRoster::RegisterEvent(const BMessenger& source, const char* name,
 	uint32 flags)
 {
 	return _UpdateEvent(B_REGISTER_LAUNCH_EVENT, source, name, flags);
 }
 
 
-status_t
-BLaunchRoster::UnregisterEvent(const BMessenger& source, const char* name)
+status_t BLaunchRoster::UnregisterEvent(const BMessenger& source, const char* name)
 {
 	return _UpdateEvent(B_UNREGISTER_LAUNCH_EVENT, source, name);
 }
 
 
-status_t
-BLaunchRoster::NotifyEvent(const BMessenger& source, const char* name)
+status_t BLaunchRoster::NotifyEvent(const BMessenger& source, const char* name)
 {
 	return _UpdateEvent(B_NOTIFY_LAUNCH_EVENT, source, name);
 }
 
 
-status_t
-BLaunchRoster::ResetStickyEvent(const BMessenger& source, const char* name)
+status_t BLaunchRoster::ResetStickyEvent(const BMessenger& source, const char* name)
 {
 	return _UpdateEvent(B_RESET_STICKY_LAUNCH_EVENT, source, name);
 }
 
 
-status_t
-BLaunchRoster::GetTargets(BStringList& targets)
+status_t BLaunchRoster::GetTargets(BStringList& targets)
 {
 	BMessage request(B_GET_LAUNCH_TARGETS);
 	status_t status = request.AddInt32("user", getuid());
@@ -266,15 +252,13 @@ BLaunchRoster::GetTargets(BStringList& targets)
 }
 
 
-status_t
-BLaunchRoster::GetTargetInfo(const char* name, BMessage& info)
+status_t BLaunchRoster::GetTargetInfo(const char* name, BMessage& info)
 {
 	return _GetInfo(B_GET_LAUNCH_TARGET_INFO, name, info);
 }
 
 
-status_t
-BLaunchRoster::GetJobs(const char* target, BStringList& jobs)
+status_t BLaunchRoster::GetJobs(const char* target, BStringList& jobs)
 {
 	BMessage request(B_GET_LAUNCH_JOBS);
 	status_t status = request.AddInt32("user", getuid());
@@ -293,15 +277,13 @@ BLaunchRoster::GetJobs(const char* target, BStringList& jobs)
 }
 
 
-status_t
-BLaunchRoster::GetJobInfo(const char* name, BMessage& info)
+status_t BLaunchRoster::GetJobInfo(const char* name, BMessage& info)
 {
 	return _GetInfo(B_GET_LAUNCH_JOB_INFO, name, info);
 }
 
 
-void
-BLaunchRoster::_InitMessenger()
+void BLaunchRoster::_InitMessenger()
 {
 	// find the launch_daemon port
 	port_id daemonPort = BPrivate::get_launch_daemon_port();
@@ -313,16 +295,14 @@ BLaunchRoster::_InitMessenger()
 }
 
 
-status_t
-BLaunchRoster::_SendRequest(BMessage& request)
+status_t BLaunchRoster::_SendRequest(BMessage& request)
 {
 	BMessage result;
 	return _SendRequest(request, result);
 }
 
 
-status_t
-BLaunchRoster::_SendRequest(BMessage& request, BMessage& result)
+status_t BLaunchRoster::_SendRequest(BMessage& request, BMessage& result)
 {
 	// Send the request, and evaluate the reply
 	status_t status = fMessenger.SendMessage(&request, &result);
@@ -333,8 +313,7 @@ BLaunchRoster::_SendRequest(BMessage& request, BMessage& result)
 }
 
 
-status_t
-BLaunchRoster::_UpdateEvent(uint32 what, const BMessenger& source,
+status_t BLaunchRoster::_UpdateEvent(uint32 what, const BMessenger& source,
 	const char* name, uint32 flags)
 {
 	if (__be_app == NULL || name == NULL || name[0] == '\0')
@@ -357,8 +336,7 @@ BLaunchRoster::_UpdateEvent(uint32 what, const BMessenger& source,
 }
 
 
-status_t
-BLaunchRoster::_GetInfo(uint32 what, const char* name, BMessage& info)
+status_t BLaunchRoster::_GetInfo(uint32 what, const char* name, BMessage& info)
 {
 	if (name == NULL || name[0] == '\0')
 		return B_BAD_VALUE;

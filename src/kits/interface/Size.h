@@ -83,65 +83,56 @@ BSize::Height() const
 }
 
 
-inline void
-BSize::Set(float width, float height)
+inline void BSize::Set(float width, float height)
 {
 	this->width = width;
 	this->height = height;
 }
 
 
-inline void
-BSize::SetWidth(float width)
+inline void BSize::SetWidth(float width)
 {
 	this->width = width;
 }
 
 
-inline void
-BSize::SetHeight(float height)
+inline void BSize::SetHeight(float height)
 {
 	this->height = height;
 }
 
 
-inline int32
-BSize::IntegerWidth() const
+inline int32 BSize::IntegerWidth() const
 {
 	return (int32)width;
 }
 
 
-inline int32
-BSize::IntegerHeight() const
+inline int32 BSize::IntegerHeight() const
 {
 	return (int32)height;
 }
 
 
-inline bool
-BSize::IsWidthSet() const
+inline bool BSize::IsWidthSet() const
 {
 	return width != B_SIZE_UNSET;
 }
 
 
-inline bool
-BSize::IsHeightSet() const
+inline bool BSize::IsHeightSet() const
 {
 	return height != B_SIZE_UNSET;
 }
 
 
-inline bool
-BSize::operator==(const BSize& other) const
+inline bool BSize::operator==(const BSize& other) const
 {
 	return (width == other.width && height == other.height);
 }
 
 
-inline bool
-BSize::operator!=(const BSize& other) const
+inline bool BSize::operator!=(const BSize& other) const
 {
 	return !(*this == other);
 }

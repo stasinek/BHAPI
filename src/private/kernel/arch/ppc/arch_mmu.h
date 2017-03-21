@@ -140,8 +140,7 @@ ppc_get_segment_register(void *virtualAddress)
 }
 
 
-static inline void
-ppc_set_segment_register(void *virtualAddress, segment_descriptor segment)
+static inline void ppc_set_segment_register(void *virtualAddress, segment_descriptor segment)
 {
 	set_sr(virtualAddress, *(uint32 *)&segment);
 }

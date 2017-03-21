@@ -5,7 +5,7 @@
 #ifndef _SYSTEM_SPINLOCK_CONTENTION_H
 #define _SYSTEM_SPINLOCK_CONTENTION_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 #define SPINLOCK_CONTENTION				"spinlock contention"

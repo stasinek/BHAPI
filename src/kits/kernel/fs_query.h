@@ -6,7 +6,7 @@
 #define _FS_QUERY_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <dirent.h>
 
 

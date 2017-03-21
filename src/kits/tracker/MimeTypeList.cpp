@@ -71,15 +71,13 @@ ShortMimeInfo::ShortMimeInfo(const char* shortDescription)
 }
 
 
-const char*
-ShortMimeInfo::InternalName() const
+const char*  ShortMimeInfo::InternalName() const
 {
 	return fPrivateName.String();
 }
 
 
-const char*
-ShortMimeInfo::ShortDescription() const
+const char*  ShortMimeInfo::ShortDescription() const
 {
 	return fShortDescription.String();
 }
@@ -93,8 +91,7 @@ ShortMimeInfo::CompareShortDescription(const ShortMimeInfo* a,
 }
 
 
-bool
-ShortMimeInfo::IsCommonMimeType() const
+bool ShortMimeInfo::IsCommonMimeType() const
 {
 	return fCommonMimeType;
 }
@@ -148,8 +145,7 @@ MimeTypeList::EachCommonType(bool (*func)(const ShortMimeInfo*, void*),
 }
 
 
-void
-MimeTypeList::Build()
+void MimeTypeList::Build()
 {
 	ASSERT(fLock.IsLocked());
 

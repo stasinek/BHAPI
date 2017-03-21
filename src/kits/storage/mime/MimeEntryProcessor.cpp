@@ -44,8 +44,7 @@ MimeEntryProcessor::~MimeEntryProcessor()
 }
 
 
-status_t
-MimeEntryProcessor::DoRecursively(const entry_ref& entry)
+status_t MimeEntryProcessor::DoRecursively(const entry_ref& entry)
 {
 	bool entryIsDir = false;
 	status_t error = Do(entry, &entryIsDir);

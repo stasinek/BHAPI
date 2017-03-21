@@ -47,8 +47,7 @@ Supertype::~Supertype()
 /*! \brief Returns a list of the installeds subtypes for this supertype
 	in the pre-allocated \c BMessage pointed to by \c types.
 */
-status_t
-Supertype::GetInstalledSubtypes(BMessage *types)
+status_t Supertype::GetInstalledSubtypes(BMessage *types)
 {
 	status_t err = types ? B_OK : B_BAD_VALUE;
 	// See if we need to fill up a new message
@@ -71,8 +70,7 @@ Supertype::GetInstalledSubtypes(BMessage *types)
 	- B_NAME_IN_USE: The subtype already exists in the subtype list
 	- "error code": failure
 */
-status_t
-Supertype::AddSubtype(const char *sub)
+status_t Supertype::AddSubtype(const char *sub)
 {
 	status_t err = sub ? B_OK : B_BAD_VALUE;
 	if (!err) 
@@ -90,8 +88,7 @@ Supertype::AddSubtype(const char *sub)
 	cached message,	if one exists.
 	\param sub The subtype to remove (do not include the supertype)
 */
-status_t
-Supertype::RemoveSubtype(const char *sub)
+status_t Supertype::RemoveSubtype(const char *sub)
 {
 	status_t err = sub ? B_OK : B_BAD_VALUE;
 	if (!err) 
@@ -105,8 +102,7 @@ Supertype::RemoveSubtype(const char *sub)
 
 // SetName
 //! Sets the supertype's name
-void
-Supertype::SetName(const char *super)
+void Supertype::SetName(const char *super)
 {
 	if (super)
 		fName = super;
@@ -114,8 +110,7 @@ Supertype::SetName(const char *super)
 
 // GetName
 //! Returns the supertype's name
-const char*
-Supertype::GetName()
+const char*  Supertype::GetName()
 {
 	return fName.c_str();
 }
@@ -126,8 +121,7 @@ Supertype::GetName()
 	field. The complete type ("supertype/subtype") is added. The supertype itself
 	is not added to the message.
 */
-status_t
-Supertype::FillMessageWithTypes(BMessage &msg) const
+status_t Supertype::FillMessageWithTypes(BMessage &msg) const
 {
 	status_t err = B_OK;
 	std::set<std::string>::const_iterator i;
@@ -145,8 +139,7 @@ Supertype::FillMessageWithTypes(BMessage &msg) const
 	
 	See \c Supertype::FillMessageWithTypes() for more information.
 */
-status_t
-Supertype::CreateMessageWithTypes(BMessage **result) const
+status_t Supertype::CreateMessageWithTypes(BMessage **result) const
 {
 	status_t err = result ? B_OK : B_BAD_VALUE;
 	// Alloc the message

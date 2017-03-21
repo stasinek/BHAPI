@@ -30,7 +30,7 @@
 #ifndef BHAPI_FONT_H
 #define BHAPI_FONT_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #define B_FONT_FAMILY_LENGTH	127
 #define B_FONT_STYLE_LENGTH	63

@@ -51,8 +51,7 @@ BFuncTranslator::TranslatorInfo() const
 }
 
 
-int32
-BFuncTranslator::TranslatorVersion() const
+int32 BFuncTranslator::TranslatorVersion() const
 {
 	return fData.version;
 }
@@ -90,8 +89,7 @@ BFuncTranslator::OutputFormats(int32* _count) const
 }
 
 
-status_t
-BFuncTranslator::Identify(BPositionIO* source, const translation_format* format,
+status_t BFuncTranslator::Identify(BPositionIO* source, const translation_format* format,
 	BMessage* ioExtension, translator_info* info, uint32 type)
 {
 	if (fData.identify_hook == NULL)
@@ -101,8 +99,7 @@ BFuncTranslator::Identify(BPositionIO* source, const translation_format* format,
 }
 
 
-status_t
-BFuncTranslator::Translate(BPositionIO* source, const translator_info *info,
+status_t BFuncTranslator::Translate(BPositionIO* source, const translator_info *info,
 	BMessage* ioExtension, uint32 type, BPositionIO* destination)
 {
 	if (fData.translate_hook == NULL)
@@ -112,8 +109,7 @@ BFuncTranslator::Translate(BPositionIO* source, const translator_info *info,
 }
 
 
-status_t
-BFuncTranslator::MakeConfigurationView(BMessage* ioExtension,
+status_t BFuncTranslator::MakeConfigurationView(BMessage* ioExtension,
 	BView** _view, BRect* _extent)
 {
 	if (fData.make_config_hook == NULL)
@@ -123,8 +119,7 @@ BFuncTranslator::MakeConfigurationView(BMessage* ioExtension,
 }
 
 
-status_t
-BFuncTranslator::GetConfigurationMessage(BMessage* ioExtension)
+status_t BFuncTranslator::GetConfigurationMessage(BMessage* ioExtension)
 {
 	if (fData.get_config_message_hook == NULL)
 		return B_ERROR;

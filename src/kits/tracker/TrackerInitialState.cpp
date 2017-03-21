@@ -297,8 +297,7 @@ ExtraAttributeLazyInstaller::~ExtraAttributeLazyInstaller()
 }
 
 
-bool
-ExtraAttributeLazyInstaller::AddExtraAttribute(const char* publicName,
+bool ExtraAttributeLazyInstaller::AddExtraAttribute(const char* publicName,
 	const char* name, uint32 type, bool viewable, bool editable, float width,
 	int32 alignment, bool extra)
 {
@@ -331,8 +330,7 @@ ExtraAttributeLazyInstaller::AddExtraAttribute(const char* publicName,
 // #pragma mark - static functions
 
 
-static void
-InstallTemporaryBackgroundImages(BNode* node, BMessage* message)
+static void InstallTemporaryBackgroundImages(BNode* node, BMessage* message)
 {
 	ssize_t size = message->FlattenedSize();
 	try {
@@ -348,8 +346,7 @@ InstallTemporaryBackgroundImages(BNode* node, BMessage* message)
 }
 
 
-static void
-AddTemporaryBackgroundImages(BMessage* message, const char* imagePath,
+static void AddTemporaryBackgroundImages(BMessage* message, const char* imagePath,
 	BackgroundImage::Mode mode, BPoint offset, uint32 workspaces,
 	bool textWidgetOutlines)
 {
@@ -368,8 +365,7 @@ AddTemporaryBackgroundImages(BMessage* message, const char* imagePath,
 #define B_TRANSLATION_CONTEXT "TrackerInitialState"
 
 
-bool
-TTracker::InstallMimeIfNeeded(const char* type, int32 bitsID,
+bool TTracker::InstallMimeIfNeeded(const char* type, int32 bitsID,
 	const char* shortDescription, const char* longDescription,
 	const char* preferredAppSignature, uint32 forceMask)
 {
@@ -436,8 +432,7 @@ TTracker::InstallMimeIfNeeded(const char* type, int32 bitsID,
 }
 
 
-void
-TTracker::InitMimeTypes()
+void TTracker::InitMimeTypes()
 {
 	InstallMimeIfNeeded(B_APP_MIME_TYPE, R_AppIcon, "Be Application",
 		"Generic Be application executable.", kTrackerSignature);
@@ -565,8 +560,7 @@ TTracker::InitMimeTypes()
 }
 
 
-void
-TTracker::InstallIndices()
+void TTracker::InstallIndices()
 {
 	BVolumeRoster roster;
 	BVolume volume;
@@ -581,16 +575,14 @@ TTracker::InstallIndices()
 }
 
 
-void
-TTracker::InstallIndices(dev_t device)
+void TTracker::InstallIndices(dev_t device)
 {
 	fs_create_index(device, kAttrQueryLastChange, B_INT32_TYPE, 0);
 	fs_create_index(device, "_trk/recentQuery", B_INT32_TYPE, 0);
 }
 
 
-void
-TTracker::InstallDefaultTemplates()
+void TTracker::InstallDefaultTemplates()
 {
 	BNode node;
 	BString query(kQueryTemplates);
@@ -641,8 +633,7 @@ TTracker::InstallDefaultTemplates()
 }
 
 
-void
-TTracker::InstallTemporaryBackgroundImages()
+void TTracker::InstallTemporaryBackgroundImages()
 {
 	// make the large Haiku Logo the default background
 

@@ -50,8 +50,7 @@ ContiguousStatement::CoveringAddressRange() const
 }
 
 
-int32
-ContiguousStatement::CountAddressRanges() const
+int32 ContiguousStatement::CountAddressRanges() const
 {
 	return 1;
 }
@@ -64,8 +63,7 @@ ContiguousStatement::AddressRangeAt(int32 index) const
 }
 
 
-bool
-ContiguousStatement::ContainsAddress(target_addr_t address) const
+bool ContiguousStatement::ContainsAddress(target_addr_t address) const
 {
 	return fRange.Contains(address);
 }

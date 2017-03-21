@@ -39,8 +39,7 @@ WriteCoreFileJob::Key() const
 }
 
 
-status_t
-WriteCoreFileJob::Do()
+status_t WriteCoreFileJob::Do()
 {
 	BPath path(&fTargetPath);
 	status_t error = path.InitCheck();

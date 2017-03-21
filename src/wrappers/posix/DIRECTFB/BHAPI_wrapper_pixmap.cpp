@@ -92,7 +92,7 @@ EDFBGraphicsDrawable::~EDFBGraphicsDrawable()
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -111,7 +111,7 @@ EDFBGraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::ResizeTo(__be_uint32 w,  __be_uint32 h)
 {
 	if(w >= B_MAXINT32 || h >= B_MAXINT32)
@@ -144,7 +144,7 @@ EDFBGraphicsDrawable::ResizeTo(__be_uint32 w,  __be_uint32 h)
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::CopyTo(BGraphicsContext *dc,
 			     BGraphicsDrawable *dstDrawable,
 			      __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
@@ -212,7 +212,7 @@ EDFBGraphicsDrawable::CopyTo(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
 				  __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
 				  __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)
@@ -226,7 +226,7 @@ EDFBGraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::StrokePoint(BGraphicsContext *dc,
 				   __be_int32 x,  __be_int32 y)
 {
@@ -239,7 +239,7 @@ EDFBGraphicsDrawable::StrokePoint(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::StrokePoints(BGraphicsContext *dc,
 				   const  __be_int32 *pts,  __be_int32 count)
 {
@@ -252,7 +252,7 @@ EDFBGraphicsDrawable::StrokePoints(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
 					  const BList *ptsArrayLists,  __be_int32 arrayCount,
 					  const bhapi::rgb_color *highColors)
@@ -266,7 +266,7 @@ EDFBGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
 					  const  __be_int32 *pts, const  __be_uint8 *alpha,  __be_int32 count)
 {
@@ -279,7 +279,7 @@ EDFBGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::StrokeLine(BGraphicsContext *dc,
 				  __be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1)
 {
@@ -292,7 +292,7 @@ EDFBGraphicsDrawable::StrokeLine(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
 				    const  __be_int32 *pts,  __be_int32 count, bool closed)
 {
@@ -305,7 +305,7 @@ EDFBGraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::FillPolygon(BGraphicsContext *dc,
 				  const  __be_int32 *pts,  __be_int32 count)
 {
@@ -318,7 +318,7 @@ EDFBGraphicsDrawable::FillPolygon(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::StrokeRect(BGraphicsContext *dc,
 				  __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
 {
@@ -331,7 +331,7 @@ EDFBGraphicsDrawable::StrokeRect(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::FillRect(BGraphicsContext *dc,
 			        __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
 {
@@ -344,7 +344,7 @@ EDFBGraphicsDrawable::FillRect(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::StrokeRects(BGraphicsContext *dc,
 				  const  __be_int32 *rects,  __be_int32 count)
 {
@@ -357,7 +357,7 @@ EDFBGraphicsDrawable::StrokeRects(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::FillRects(BGraphicsContext *dc,
 			        const  __be_int32 *rects,  __be_int32 count)
 {
@@ -370,7 +370,7 @@ EDFBGraphicsDrawable::FillRects(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::FillRegion(BGraphicsContext *dc,
 				 const BRegion &region)
 {
@@ -383,7 +383,7 @@ EDFBGraphicsDrawable::FillRegion(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
 				       __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
 {
@@ -396,7 +396,7 @@ EDFBGraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
 				     __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
 {
@@ -409,7 +409,7 @@ EDFBGraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::StrokeArc(BGraphicsContext *dc,
 				__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
 {
@@ -422,7 +422,7 @@ EDFBGraphicsDrawable::StrokeArc(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EDFBGraphicsDrawable::FillArc(BGraphicsContext *dc,
 			       __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
 {

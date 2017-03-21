@@ -58,8 +58,7 @@ ResolveValueNodeValueJob::Key() const
 }
 
 
-status_t
-ResolveValueNodeValueJob::Do()
+status_t ResolveValueNodeValueJob::Do()
 {
 	// check whether the node still belongs to the container
 	AutoLocker<ValueNodeContainer> containerLocker(fContainer);
@@ -90,8 +89,7 @@ ResolveValueNodeValueJob::Do()
 }
 
 
-status_t
-ResolveValueNodeValueJob::_ResolveNodeValue()
+status_t ResolveValueNodeValueJob::_ResolveNodeValue()
 {
 	// get the node child and parent node
 	AutoLocker<ValueNodeContainer> containerLocker(fContainer);
@@ -181,8 +179,7 @@ ResolveValueNodeValueJob::_ResolveNodeValue()
 }
 
 
-status_t
-ResolveValueNodeValueJob::_ResolveNodeChildLocation(ValueNodeChild* nodeChild)
+status_t ResolveValueNodeValueJob::_ResolveNodeChildLocation(ValueNodeChild* nodeChild)
 {
 	// resolve the location
 	ValueLoader valueLoader(fArchitecture, fDebuggerInterface, fCpuState);
@@ -202,8 +199,7 @@ ResolveValueNodeValueJob::_ResolveNodeChildLocation(ValueNodeChild* nodeChild)
 }
 
 
-status_t
-ResolveValueNodeValueJob::_ResolveParentNodeValue(ValueNode* parentNode)
+status_t ResolveValueNodeValueJob::_ResolveParentNodeValue(ValueNode* parentNode)
 {
 	AutoLocker<ValueNodeContainer> containerLocker(fContainer);
 

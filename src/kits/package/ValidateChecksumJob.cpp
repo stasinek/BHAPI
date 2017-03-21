@@ -39,8 +39,7 @@ ValidateChecksumJob::~ValidateChecksumJob()
 }
 
 
-status_t
-ValidateChecksumJob::Execute()
+status_t ValidateChecksumJob::Execute()
 {
 	if (fExpectedChecksumAccessor == NULL || fRealChecksumAccessor == NULL)
 		return B_BAD_VALUE;
@@ -70,8 +69,7 @@ ValidateChecksumJob::Execute()
 }
 
 
-bool
-ValidateChecksumJob::ChecksumsMatch() const
+bool ValidateChecksumJob::ChecksumsMatch() const
 {
 	return fChecksumsMatch;
 }

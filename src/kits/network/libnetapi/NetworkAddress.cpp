@@ -139,15 +139,13 @@ BNetworkAddress::~BNetworkAddress()
 }
 
 
-status_t
-BNetworkAddress::InitCheck() const
+status_t BNetworkAddress::InitCheck() const
 {
 	return fStatus;
 }
 
 
-void
-BNetworkAddress::Unset()
+void BNetworkAddress::Unset()
 {
 	fAddress.ss_family = AF_UNSPEC;
 	fAddress.ss_len = 2;
@@ -155,8 +153,7 @@ BNetworkAddress::Unset()
 }
 
 
-status_t
-BNetworkAddress::SetTo(const char* host, uint16 port, uint32 flags)
+status_t BNetworkAddress::SetTo(const char* host, uint16 port, uint32 flags)
 {
 	BReference<const BNetworkAddressResolver> resolver
 		= BNetworkAddressResolver::Resolve(host, port, flags);
@@ -184,8 +181,7 @@ BNetworkAddress::SetTo(const char* host, uint16 port, uint32 flags)
 }
 
 
-status_t
-BNetworkAddress::SetTo(const char* host, const char* service, uint32 flags)
+status_t BNetworkAddress::SetTo(const char* host, const char* service, uint32 flags)
 {
 	BReference<const BNetworkAddressResolver> resolver
 		= BNetworkAddressResolver::Resolve(host, service, flags);
@@ -213,8 +209,7 @@ BNetworkAddress::SetTo(const char* host, const char* service, uint32 flags)
 }
 
 
-status_t
-BNetworkAddress::SetTo(int family, const char* host, uint16 port, uint32 flags)
+status_t BNetworkAddress::SetTo(int family, const char* host, uint16 port, uint32 flags)
 {
 	if (family == AF_LINK) {
 		if (port != 0)
@@ -240,8 +235,7 @@ BNetworkAddress::SetTo(int family, const char* host, uint16 port, uint32 flags)
 }
 
 
-status_t
-BNetworkAddress::SetTo(int family, const char* host, const char* service,
+status_t BNetworkAddress::SetTo(int family, const char* host, const char* service,
 	uint32 flags)
 {
 	if (family == AF_LINK) {
@@ -268,8 +262,7 @@ BNetworkAddress::SetTo(int family, const char* host, const char* service,
 }
 
 
-void
-BNetworkAddress::SetTo(const sockaddr& address)
+void BNetworkAddress::SetTo(const sockaddr& address)
 {
 	if (address.sa_family == AF_UNSPEC) {
 		Unset();
@@ -297,8 +290,7 @@ BNetworkAddress::SetTo(const sockaddr& address)
 }
 
 
-void
-BNetworkAddress::SetTo(const sockaddr& address, size_t length)
+void BNetworkAddress::SetTo(const sockaddr& address, size_t length)
 {
 	if (address.sa_family == AF_UNSPEC || length == 0) {
 		Unset();
@@ -311,36 +303,31 @@ BNetworkAddress::SetTo(const sockaddr& address, size_t length)
 }
 
 
-void
-BNetworkAddress::SetTo(const sockaddr_storage& address)
+void BNetworkAddress::SetTo(const sockaddr_storage& address)
 {
 	SetTo((sockaddr&)address);
 }
 
 
-void
-BNetworkAddress::SetTo(const sockaddr_in& address)
+void BNetworkAddress::SetTo(const sockaddr_in& address)
 {
 	SetTo((sockaddr&)address);
 }
 
 
-void
-BNetworkAddress::SetTo(const sockaddr_in6& address)
+void BNetworkAddress::SetTo(const sockaddr_in6& address)
 {
 	SetTo((sockaddr&)address);
 }
 
 
-void
-BNetworkAddress::SetTo(const sockaddr_dl& address)
+void BNetworkAddress::SetTo(const sockaddr_dl& address)
 {
 	SetTo((sockaddr&)address);
 }
 
 
-void
-BNetworkAddress::SetTo(in_addr_t inetAddress, uint16 port)
+void BNetworkAddress::SetTo(in_addr_t inetAddress, uint16 port)
 {
 	memset(&fAddress, 0, sizeof(sockaddr_storage));
 
@@ -353,8 +340,7 @@ BNetworkAddress::SetTo(in_addr_t inetAddress, uint16 port)
 }
 
 
-void
-BNetworkAddress::SetTo(const in6_addr& inet6Address, uint16 port)
+void BNetworkAddress::SetTo(const in6_addr& inet6Address, uint16 port)
 {
 	memset(&fAddress, 0, sizeof(sockaddr_storage));
 
@@ -367,16 +353,14 @@ BNetworkAddress::SetTo(const in6_addr& inet6Address, uint16 port)
 }
 
 
-void
-BNetworkAddress::SetTo(const BNetworkAddress& other)
+void BNetworkAddress::SetTo(const BNetworkAddress& other)
 {
 	fAddress = other.fAddress;
 	fStatus = other.fStatus;
 }
 
 
-status_t
-BNetworkAddress::SetToBroadcast(int family, uint16 port)
+status_t BNetworkAddress::SetToBroadcast(int family, uint16 port)
 {
 	if (family != AF_INET)
 		return fStatus = B_NOT_SUPPORTED;
@@ -386,16 +370,14 @@ BNetworkAddress::SetToBroadcast(int family, uint16 port)
 }
 
 
-status_t
-BNetworkAddress::SetToLocal(int family, uint16 port)
+status_t BNetworkAddress::SetToLocal(int family, uint16 port)
 {
 	// TODO: choose a local address from the network interfaces
 	return fStatus = B_NOT_SUPPORTED;
 }
 
 
-status_t
-BNetworkAddress::SetToLoopback(int family, uint16 port)
+status_t BNetworkAddress::SetToLoopback(int family, uint16 port)
 {
 	switch (family) {
 		// TODO: choose family depending on availability of IPv6
@@ -416,8 +398,7 @@ BNetworkAddress::SetToLoopback(int family, uint16 port)
 }
 
 
-status_t
-BNetworkAddress::SetToMask(int family, uint32 prefixLength)
+status_t BNetworkAddress::SetToMask(int family, uint32 prefixLength)
 {
 	switch (family) {
 		case AF_INET:
@@ -468,8 +449,7 @@ BNetworkAddress::SetToMask(int family, uint32 prefixLength)
 }
 
 
-status_t
-BNetworkAddress::SetToWildcard(int family, uint16 port)
+status_t BNetworkAddress::SetToWildcard(int family, uint16 port)
 {
 	switch (family) {
 		case AF_INET:
@@ -488,8 +468,7 @@ BNetworkAddress::SetToWildcard(int family, uint16 port)
 }
 
 
-status_t
-BNetworkAddress::SetAddress(in_addr_t inetAddress)
+status_t BNetworkAddress::SetAddress(in_addr_t inetAddress)
 {
 	if (Family() != AF_INET)
 		return B_BAD_VALUE;
@@ -500,8 +479,7 @@ BNetworkAddress::SetAddress(in_addr_t inetAddress)
 }
 
 
-status_t
-BNetworkAddress::SetAddress(const in6_addr& inet6Address)
+status_t BNetworkAddress::SetAddress(const in6_addr& inet6Address)
 {
 	if (Family() != AF_INET6)
 		return B_BAD_VALUE;
@@ -513,8 +491,7 @@ BNetworkAddress::SetAddress(const in6_addr& inet6Address)
 }
 
 
-void
-BNetworkAddress::SetPort(uint16 port)
+void BNetworkAddress::SetPort(uint16 port)
 {
 	switch (fAddress.ss_family) {
 		case AF_INET:
@@ -531,8 +508,7 @@ BNetworkAddress::SetPort(uint16 port)
 }
 
 
-void
-BNetworkAddress::SetToLinkLevel(uint8* address, size_t length)
+void BNetworkAddress::SetToLinkLevel(uint8* address, size_t length)
 {
 	sockaddr_dl& link = (sockaddr_dl&)fAddress;
 	memset(&link, 0, sizeof(sockaddr_dl));
@@ -549,8 +525,7 @@ BNetworkAddress::SetToLinkLevel(uint8* address, size_t length)
 }
 
 
-void
-BNetworkAddress::SetToLinkLevel(const char* name)
+void BNetworkAddress::SetToLinkLevel(const char* name)
 {
 	sockaddr_dl& link = (sockaddr_dl&)fAddress;
 	memset(&link, 0, sizeof(sockaddr_dl));
@@ -572,8 +547,7 @@ BNetworkAddress::SetToLinkLevel(const char* name)
 }
 
 
-void
-BNetworkAddress::SetToLinkLevel(uint32 index)
+void BNetworkAddress::SetToLinkLevel(uint32 index)
 {
 	sockaddr_dl& link = (sockaddr_dl&)fAddress;
 	memset(&link, 0, sizeof(sockaddr_dl));
@@ -586,24 +560,21 @@ BNetworkAddress::SetToLinkLevel(uint32 index)
 }
 
 
-void
-BNetworkAddress::SetLinkLevelIndex(uint32 index)
+void BNetworkAddress::SetLinkLevelIndex(uint32 index)
 {
 	sockaddr_dl& link = (sockaddr_dl&)fAddress;
 	link.sdl_index = index;
 }
 
 
-void
-BNetworkAddress::SetLinkLevelType(uint8 type)
+void BNetworkAddress::SetLinkLevelType(uint8 type)
 {
 	sockaddr_dl& link = (sockaddr_dl&)fAddress;
 	link.sdl_type = type;
 }
 
 
-void
-BNetworkAddress::SetLinkLevelFrameType(uint16 frameType)
+void BNetworkAddress::SetLinkLevelFrameType(uint16 frameType)
 {
 	sockaddr_dl& link = (sockaddr_dl&)fAddress;
 	link.sdl_e_type = htons(frameType);
@@ -654,8 +625,7 @@ BNetworkAddress::SockAddr()
 }
 
 
-bool
-BNetworkAddress::IsEmpty() const
+bool BNetworkAddress::IsEmpty() const
 {
 	if (fAddress.ss_len == 0)
 		return true;
@@ -681,8 +651,7 @@ BNetworkAddress::IsEmpty() const
 }
 
 
-bool
-BNetworkAddress::IsWildcard() const
+bool BNetworkAddress::IsWildcard() const
 {
 	switch (fAddress.ss_family) {
 		case AF_INET:
@@ -698,8 +667,7 @@ BNetworkAddress::IsWildcard() const
 }
 
 
-bool
-BNetworkAddress::IsBroadcast() const
+bool BNetworkAddress::IsBroadcast() const
 {
 	switch (fAddress.ss_family) {
 		case AF_INET:
@@ -715,8 +683,7 @@ BNetworkAddress::IsBroadcast() const
 }
 
 
-bool
-BNetworkAddress::IsMulticast() const
+bool BNetworkAddress::IsMulticast() const
 {
 	switch (fAddress.ss_family) {
 		case AF_INET:
@@ -731,8 +698,7 @@ BNetworkAddress::IsMulticast() const
 }
 
 
-bool
-BNetworkAddress::IsMulticastGlobal() const
+bool BNetworkAddress::IsMulticastGlobal() const
 {
 	switch (fAddress.ss_family) {
 		case AF_INET6:
@@ -744,8 +710,7 @@ BNetworkAddress::IsMulticastGlobal() const
 }
 
 
-bool
-BNetworkAddress::IsMulticastNodeLocal() const
+bool BNetworkAddress::IsMulticastNodeLocal() const
 {
 	switch (fAddress.ss_family) {
 		case AF_INET6:
@@ -758,8 +723,7 @@ BNetworkAddress::IsMulticastNodeLocal() const
 }
 
 
-bool
-BNetworkAddress::IsMulticastLinkLocal() const
+bool BNetworkAddress::IsMulticastLinkLocal() const
 {
 	switch (fAddress.ss_family) {
 		case AF_INET6:
@@ -772,8 +736,7 @@ BNetworkAddress::IsMulticastLinkLocal() const
 }
 
 
-bool
-BNetworkAddress::IsMulticastSiteLocal() const
+bool BNetworkAddress::IsMulticastSiteLocal() const
 {
 	switch (fAddress.ss_family) {
 		case AF_INET6:
@@ -786,8 +749,7 @@ BNetworkAddress::IsMulticastSiteLocal() const
 }
 
 
-bool
-BNetworkAddress::IsMulticastOrgLocal() const
+bool BNetworkAddress::IsMulticastOrgLocal() const
 {
 	switch (fAddress.ss_family) {
 		case AF_INET6:
@@ -800,8 +762,7 @@ BNetworkAddress::IsMulticastOrgLocal() const
 }
 
 
-bool
-BNetworkAddress::IsLinkLocal() const
+bool BNetworkAddress::IsLinkLocal() const
 {
 	// TODO: ipv4
 	switch (fAddress.ss_family) {
@@ -814,8 +775,7 @@ BNetworkAddress::IsLinkLocal() const
 }
 
 
-bool
-BNetworkAddress::IsSiteLocal() const
+bool BNetworkAddress::IsSiteLocal() const
 {
 	switch (fAddress.ss_family) {
 		case AF_INET6:
@@ -827,8 +787,7 @@ BNetworkAddress::IsSiteLocal() const
 }
 
 
-bool
-BNetworkAddress::IsLocal() const
+bool BNetworkAddress::IsLocal() const
 {
 	BNetworkRoster& roster = BNetworkRoster::Default();
 
@@ -886,8 +845,7 @@ BNetworkAddress::PrefixLength() const
 }
 
 
-uint32
-BNetworkAddress::LinkLevelIndex() const
+uint32 BNetworkAddress::LinkLevelIndex() const
 {
 	return ((sockaddr_dl&)fAddress).sdl_index;
 }
@@ -935,8 +893,7 @@ BNetworkAddress::LinkLevelAddressLength() const
 }
 
 
-status_t
-BNetworkAddress::ResolveForDestination(const BNetworkAddress& destination)
+status_t BNetworkAddress::ResolveForDestination(const BNetworkAddress& destination)
 {
 	if (!IsWildcard())
 		return B_OK;
@@ -966,8 +923,7 @@ BNetworkAddress::ResolveForDestination(const BNetworkAddress& destination)
 }
 
 
-status_t
-BNetworkAddress::ResolveTo(const BNetworkAddress& address)
+status_t BNetworkAddress::ResolveTo(const BNetworkAddress& address)
 {
 	if (!IsWildcard())
 		return B_OK;
@@ -1061,8 +1017,7 @@ BNetworkAddress::ServiceName() const
 }
 
 
-bool
-BNetworkAddress::Equals(const BNetworkAddress& other, bool includePort) const
+bool BNetworkAddress::Equals(const BNetworkAddress& other, bool includePort) const
 {
 	if (IsEmpty() && other.IsEmpty())
 		return true;
@@ -1101,8 +1056,7 @@ BNetworkAddress::Equals(const BNetworkAddress& other, bool includePort) const
 // #pragma mark - BFlattenable implementation
 
 
-bool
-BNetworkAddress::IsFixedSize() const
+bool BNetworkAddress::IsFixedSize() const
 {
 	return false;
 }
@@ -1122,8 +1076,7 @@ BNetworkAddress::FlattenedSize() const
 }
 
 
-status_t
-BNetworkAddress::Flatten(void* buffer, ssize_t size) const
+status_t BNetworkAddress::Flatten(void* buffer, ssize_t size) const
 {
 	if (buffer == NULL || size < FlattenedSize())
 		return B_BAD_VALUE;
@@ -1133,8 +1086,7 @@ BNetworkAddress::Flatten(void* buffer, ssize_t size) const
 }
 
 
-status_t
-BNetworkAddress::Unflatten(type_code code, const void* buffer, ssize_t size)
+status_t BNetworkAddress::Unflatten(type_code code, const void* buffer, ssize_t size)
 {
 	// 2 bytes minimum for family, and length
 	if (buffer == NULL || size < 2)
@@ -1165,22 +1117,19 @@ BNetworkAddress::operator=(const BNetworkAddress& other)
 }
 
 
-bool
-BNetworkAddress::operator==(const BNetworkAddress& other) const
+bool BNetworkAddress::operator==(const BNetworkAddress& other) const
 {
 	return Equals(other);
 }
 
 
-bool
-BNetworkAddress::operator!=(const BNetworkAddress& other) const
+bool BNetworkAddress::operator!=(const BNetworkAddress& other) const
 {
 	return !Equals(other);
 }
 
 
-bool
-BNetworkAddress::operator<(const BNetworkAddress& other) const
+bool BNetworkAddress::operator<(const BNetworkAddress& other) const
 {
 	if (Family() < other.Family())
 		return true;
@@ -1269,8 +1218,7 @@ BNetworkAddress::operator const sockaddr&()
 // #pragma mark - private
 
 
-status_t
-BNetworkAddress::_ParseLinkAddress(const char* address)
+status_t BNetworkAddress::_ParseLinkAddress(const char* address)
 {
 	if (address == NULL)
 		return B_BAD_VALUE;

@@ -40,8 +40,7 @@
 
 
 // AddSizesInt32
-int32
-BLayoutUtils::AddSizesInt32(int32 a, int32 b)
+int32 BLayoutUtils::AddSizesInt32(int32 a, int32 b)
 {
 	if (a >= B_SIZE_UNLIMITED - b)
 		return B_SIZE_UNLIMITED;
@@ -50,8 +49,7 @@ BLayoutUtils::AddSizesInt32(int32 a, int32 b)
 
 
 // AddSizesInt32
-int32
-BLayoutUtils::AddSizesInt32(int32 a, int32 b, int32 c)
+int32 BLayoutUtils::AddSizesInt32(int32 a, int32 b, int32 c)
 {
 	return AddSizesInt32(AddSizesInt32(a, b), c);
 }
@@ -88,8 +86,7 @@ BLayoutUtils::AddDistances(float a, float b, float c)
 
 
 // SubtractSizesInt32
-int32
-BLayoutUtils::SubtractSizesInt32(int32 a, int32 b)
+int32 BLayoutUtils::SubtractSizesInt32(int32 a, int32 b)
 {
 	if (a < b)
 		return 0;
@@ -108,8 +105,7 @@ BLayoutUtils::SubtractDistances(float a, float b)
 
 
 // FixSizeConstraints
-void
-BLayoutUtils::FixSizeConstraints(float& min, float& max, float& preferred)
+void BLayoutUtils::FixSizeConstraints(float& min, float& max, float& preferred)
 {
 	if (max < min)
 		max = min;
@@ -121,8 +117,7 @@ BLayoutUtils::FixSizeConstraints(float& min, float& max, float& preferred)
 
 
 // FixSizeConstraints
-void
-BLayoutUtils::FixSizeConstraints(BSize& min, BSize& max, BSize& preferred)
+void BLayoutUtils::FixSizeConstraints(BSize& min, BSize& max, BSize& preferred)
 {
 	FixSizeConstraints(min.width, max.width, preferred.width);
 	FixSizeConstraints(min.height, max.height, preferred.height);
@@ -180,8 +175,7 @@ BLayoutUtils::AlignInFrame(BRect frame, BSize maxSize, BAlignment alignment)
 
 
 // AlignInFrame
-void
-BLayoutUtils::AlignInFrame(BView* view, BRect frame)
+void BLayoutUtils::AlignInFrame(BView* view, BRect frame)
 {
 	BSize maxSize = view->MaxSize();
 	BAlignment alignment = view->LayoutAlignment();
@@ -276,8 +270,7 @@ BLayoutUtils::GetLayoutTreeDump(BLayoutItem* item)
 }
 
 
-/*static*/ void
-BLayoutUtils::_GetLayoutTreeDump(BView* view, int level, BString& _output)
+/*static*/ void BLayoutUtils::_GetLayoutTreeDump(BView* view, int level, BString& _output)
 {
 	BString indent;
 	indent.SetTo(' ', level * 2);
@@ -316,8 +309,7 @@ BLayoutUtils::_GetLayoutTreeDump(BView* view, int level, BString& _output)
 }
 
 
-/*static*/ void
-BLayoutUtils::_GetLayoutTreeDump(BLayoutItem* item, int level,
+/*static*/ void BLayoutUtils::_GetLayoutTreeDump(BLayoutItem* item, int level,
 	bool isViewLayout, BString& _output)
 {
 	if (BViewLayoutItem* viewItem = dynamic_cast<BViewLayoutItem*>(item)) {

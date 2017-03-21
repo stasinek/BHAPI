@@ -27,8 +27,7 @@ protected:
 };
 
 
-uint32
-ObjectID::HashValue() const
+uint32 ObjectID::HashValue() const
 {
 	if (fHashValue == 0)
 		fHashValue = ComputeHashValue();
@@ -36,8 +35,7 @@ ObjectID::HashValue() const
 }
 
 
-bool
-ObjectID::operator!=(const ObjectID& other) const
+bool ObjectID::operator!=(const ObjectID& other) const
 {
 	return !(*this == other);
 }

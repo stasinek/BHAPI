@@ -56,16 +56,14 @@ BMediaRecorderNode::AddOn(int32* id) const
 }
 
 
-void
-BMediaRecorderNode::NodeRegistered()
+void BMediaRecorderNode::NodeRegistered()
 {
 	CALLED();
 	Run();
 }
 
 
-void
-BMediaRecorderNode::SetRunMode(run_mode mode)
+void BMediaRecorderNode::SetRunMode(run_mode mode)
 {
 	CALLED();
 
@@ -96,8 +94,7 @@ BMediaRecorderNode::SetRunMode(run_mode mode)
 }
 
 
-void
-BMediaRecorderNode::SetAcceptedFormat(const media_format& format)
+void BMediaRecorderNode::SetAcceptedFormat(const media_format& format)
 {
 	CALLED();
 
@@ -105,8 +102,7 @@ BMediaRecorderNode::SetAcceptedFormat(const media_format& format)
 }
 
 
-status_t
-BMediaRecorderNode::GetInput(media_input* outInput)
+status_t BMediaRecorderNode::GetInput(media_input* outInput)
 {
 	CALLED();
 
@@ -117,8 +113,7 @@ BMediaRecorderNode::GetInput(media_input* outInput)
 }
 
 
-void
-BMediaRecorderNode::SetDataEnabled(bool enabled)
+void BMediaRecorderNode::SetDataEnabled(bool enabled)
 {
 	CALLED();
 
@@ -129,8 +124,7 @@ BMediaRecorderNode::SetDataEnabled(bool enabled)
 }
 
 
-void
-BMediaRecorderNode::HandleEvent(const media_timed_event* event,
+void BMediaRecorderNode::HandleEvent(const media_timed_event* event,
 	bigtime_t lateness, bool realTimeEvent)
 {
 	CALLED();
@@ -139,8 +133,7 @@ BMediaRecorderNode::HandleEvent(const media_timed_event* event,
 }
 
 
-void
-BMediaRecorderNode::Start(bigtime_t performanceTime)
+void BMediaRecorderNode::Start(bigtime_t performanceTime)
 {
 	CALLED();
 
@@ -152,8 +145,7 @@ BMediaRecorderNode::Start(bigtime_t performanceTime)
 }
 
 
-void
-BMediaRecorderNode::Stop(bigtime_t performanceTime, bool immediate)
+void BMediaRecorderNode::Stop(bigtime_t performanceTime, bool immediate)
 {
 	CALLED();
 
@@ -165,8 +157,7 @@ BMediaRecorderNode::Stop(bigtime_t performanceTime, bool immediate)
 }
 
 
-void
-BMediaRecorderNode::Seek(bigtime_t mediaTime, bigtime_t performanceTime)
+void BMediaRecorderNode::Seek(bigtime_t mediaTime, bigtime_t performanceTime)
 {
 	CALLED();
 
@@ -176,8 +167,7 @@ BMediaRecorderNode::Seek(bigtime_t mediaTime, bigtime_t performanceTime)
 }
 
 
-void
-BMediaRecorderNode::TimeWarp(bigtime_t realTime, bigtime_t performanceTime)
+void BMediaRecorderNode::TimeWarp(bigtime_t realTime, bigtime_t performanceTime)
 {
 	CALLED();
 
@@ -189,8 +179,7 @@ BMediaRecorderNode::TimeWarp(bigtime_t realTime, bigtime_t performanceTime)
 }
 
 
-status_t
-BMediaRecorderNode::HandleMessage(int32 message,
+status_t BMediaRecorderNode::HandleMessage(int32 message,
 	const void* data, size_t size)
 {
 	CALLED();
@@ -205,8 +194,7 @@ BMediaRecorderNode::HandleMessage(int32 message,
 }
 
 
-status_t
-BMediaRecorderNode::AcceptFormat(const media_destination& dest,
+status_t BMediaRecorderNode::AcceptFormat(const media_destination& dest,
 	media_format* format)
 {
 	CALLED();
@@ -220,8 +208,7 @@ BMediaRecorderNode::AcceptFormat(const media_destination& dest,
 }
 
 
-status_t
-BMediaRecorderNode::GetNextInput(int32* cookie, media_input* outInput)
+status_t BMediaRecorderNode::GetNextInput(int32* cookie, media_input* outInput)
 {
 	CALLED();
 
@@ -235,15 +222,13 @@ BMediaRecorderNode::GetNextInput(int32* cookie, media_input* outInput)
 }
 
 
-void
-BMediaRecorderNode::DisposeInputCookie(int32 cookie)
+void BMediaRecorderNode::DisposeInputCookie(int32 cookie)
 {
 	CALLED();
 }
 
 
-void
-BMediaRecorderNode::BufferReceived(BBuffer* buffer)
+void BMediaRecorderNode::BufferReceived(BBuffer* buffer)
 {
 	CALLED();
 
@@ -254,8 +239,7 @@ BMediaRecorderNode::BufferReceived(BBuffer* buffer)
 }
 
 
-void
-BMediaRecorderNode::ProducerDataStatus(
+void BMediaRecorderNode::ProducerDataStatus(
 	const media_destination& forWhom, int32 status,
 	bigtime_t performanceTime)
 {
@@ -263,8 +247,7 @@ BMediaRecorderNode::ProducerDataStatus(
 }
 
 
-status_t
-BMediaRecorderNode::GetLatencyFor(const media_destination& forWhom,
+status_t BMediaRecorderNode::GetLatencyFor(const media_destination& forWhom,
 	bigtime_t* outLatency, media_node_id* outTimesource)
 {
 	CALLED();
@@ -276,8 +259,7 @@ BMediaRecorderNode::GetLatencyFor(const media_destination& forWhom,
 }
 
 
-status_t
-BMediaRecorderNode::Connected(const media_source &producer,
+status_t BMediaRecorderNode::Connected(const media_source &producer,
 	const media_destination &where, const media_format &withFormat,
 	media_input* outInput)
 {
@@ -294,8 +276,7 @@ BMediaRecorderNode::Connected(const media_source &producer,
 }
 
 
-void
-BMediaRecorderNode::Disconnected(const media_source& producer,
+void BMediaRecorderNode::Disconnected(const media_source& producer,
 	const media_destination& where)
 {
 	CALLED();
@@ -308,8 +289,7 @@ BMediaRecorderNode::Disconnected(const media_source& producer,
 }
 
 
-status_t
-BMediaRecorderNode::FormatChanged(const media_source& producer,
+status_t BMediaRecorderNode::FormatChanged(const media_source& producer,
 	const media_destination& consumer, int32 tag,
 	const media_format& format)
 {

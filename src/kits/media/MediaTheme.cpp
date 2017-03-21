@@ -47,15 +47,13 @@ BMediaTheme::Info()
 }
 
 
-int32
-BMediaTheme::ID()
+int32 BMediaTheme::ID()
 {
 	return fID;
 }
 
 
-bool
-BMediaTheme::GetRef(entry_ref* ref)
+bool BMediaTheme::GetRef(entry_ref* ref)
 {
 	if (!fIsAddOn || ref == NULL)
 		return false;
@@ -86,8 +84,7 @@ BMediaTheme::ViewFor(BParameterWeb* web, const BRect* hintRect,
 }
 
 
-status_t
-BMediaTheme::SetPreferredTheme(BMediaTheme* defaultTheme)
+status_t BMediaTheme::SetPreferredTheme(BMediaTheme* defaultTheme)
 {
 	CALLED();
 

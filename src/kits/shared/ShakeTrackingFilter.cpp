@@ -142,8 +142,7 @@ LowPassFilter::~LowPassFilter()
 }
 
 
-void
-LowPassFilter::Input(const BPoint& p)
+void LowPassFilter::Input(const BPoint& p)
 {
 	// A fifo buffer that maintains a sum of its elements
 	fSum -= fPoints[0];

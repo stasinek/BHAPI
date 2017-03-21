@@ -32,16 +32,14 @@ TeamMemoryBlock::~TeamMemoryBlock()
 }
 
 
-void
-TeamMemoryBlock::AddListener(Listener* listener)
+void TeamMemoryBlock::AddListener(Listener* listener)
 {
 	AutoLocker<BLocker> lock(fLock);
 	fListeners.Add(listener);
 }
 
 
-bool
-TeamMemoryBlock::HasListener(Listener* listener)
+bool TeamMemoryBlock::HasListener(Listener* listener)
 {
 	AutoLocker<BLocker> lock(fLock);
 	ListenerList::Iterator iterator = fListeners.GetIterator();
@@ -54,46 +52,40 @@ TeamMemoryBlock::HasListener(Listener* listener)
 }
 
 
-void
-TeamMemoryBlock::RemoveListener(Listener* listener)
+void TeamMemoryBlock::RemoveListener(Listener* listener)
 {
 	AutoLocker<BLocker> lock(fLock);
 	fListeners.Remove(listener);
 }
 
 
-void
-TeamMemoryBlock::MarkValid()
+void TeamMemoryBlock::MarkValid()
 {
 	fValid = true;
 	NotifyDataRetrieved();
 }
 
 
-void
-TeamMemoryBlock::Invalidate()
+void TeamMemoryBlock::Invalidate()
 {
 	fValid = false;
 }
 
 
-bool
-TeamMemoryBlock::Contains(target_addr_t address) const
+bool TeamMemoryBlock::Contains(target_addr_t address) const
 {
 	return fValid && address >= fBaseAddress
 		&& address < (fBaseAddress + sizeof(fData));
 }
 
 
-void
-TeamMemoryBlock::SetWritable(bool writable)
+void TeamMemoryBlock::SetWritable(bool writable)
 {
 	fWritable = writable;
 }
 
 
-void
-TeamMemoryBlock::NotifyDataRetrieved(status_t result)
+void TeamMemoryBlock::NotifyDataRetrieved(status_t result)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -105,8 +97,7 @@ TeamMemoryBlock::NotifyDataRetrieved(status_t result)
 }
 
 
-void
-TeamMemoryBlock::LastReferenceReleased()
+void TeamMemoryBlock::LastReferenceReleased()
 {
 	fBlockOwner->RemoveBlock(this);
 
@@ -122,14 +113,12 @@ TeamMemoryBlock::Listener::~Listener()
 }
 
 
-void
-TeamMemoryBlock::Listener::MemoryBlockRetrieved(TeamMemoryBlock* block)
+void TeamMemoryBlock::Listener::MemoryBlockRetrieved(TeamMemoryBlock* block)
 {
 }
 
 
-void
-TeamMemoryBlock::Listener::MemoryBlockRetrievalFailed(TeamMemoryBlock* block,
+void TeamMemoryBlock::Listener::MemoryBlockRetrievalFailed(TeamMemoryBlock* block,
 	status_t result)
 {
 }

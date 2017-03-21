@@ -53,8 +53,7 @@ GetStackTraceJob::Key() const
 }
 
 
-status_t
-GetStackTraceJob::Do()
+status_t GetStackTraceJob::Do()
 {
 	if (fCpuState == NULL)
 		return B_BAD_VALUE;
@@ -77,8 +76,7 @@ GetStackTraceJob::Do()
 }
 
 
-status_t
-GetStackTraceJob::GetImageDebugInfo(Image* image, ImageDebugInfo*& _info)
+status_t GetStackTraceJob::GetImageDebugInfo(Image* image, ImageDebugInfo*& _info)
 {
 	AutoLocker<Team> teamLocker(fThread->GetTeam());
 

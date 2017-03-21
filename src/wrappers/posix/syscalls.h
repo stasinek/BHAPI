@@ -6,7 +6,7 @@
 #define _KERNEL_SYSCALLS_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <image.h>
 //#include <disk_device_manager/ddm_userland_interface.h>
 #include <storage/DiskDeviceDefs.h>

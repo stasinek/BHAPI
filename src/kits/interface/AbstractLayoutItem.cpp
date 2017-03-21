@@ -76,29 +76,25 @@ BAbstractLayoutItem::Alignment()
 }
 
 
-void
-BAbstractLayoutItem::SetExplicitMinSize(BSize size)
+void BAbstractLayoutItem::SetExplicitMinSize(BSize size)
 {
 	fMinSize = size;
 }
 
 
-void
-BAbstractLayoutItem::SetExplicitMaxSize(BSize size)
+void BAbstractLayoutItem::SetExplicitMaxSize(BSize size)
 {
 	fMaxSize = size;
 }
 
 
-void
-BAbstractLayoutItem::SetExplicitPreferredSize(BSize size)
+void BAbstractLayoutItem::SetExplicitPreferredSize(BSize size)
 {
 	fPreferredSize = size;
 }
 
 
-void
-BAbstractLayoutItem::SetExplicitAlignment(BAlignment alignment)
+void BAbstractLayoutItem::SetExplicitAlignment(BAlignment alignment)
 {
 	fAlignment = alignment;
 }
@@ -132,8 +128,7 @@ BAbstractLayoutItem::BaseAlignment()
 }
 
 
-status_t
-BAbstractLayoutItem::Archive(BMessage* into, bool deep) const
+status_t BAbstractLayoutItem::Archive(BMessage* into, bool deep) const
 {
 	BArchiver archiver(into);
 	status_t err = BLayoutItem::Archive(into, deep);
@@ -154,50 +149,43 @@ BAbstractLayoutItem::Archive(BMessage* into, bool deep) const
 }
 
 
-status_t
-BAbstractLayoutItem::AllUnarchived(const BMessage* archive)
+status_t BAbstractLayoutItem::AllUnarchived(const BMessage* archive)
 {
 	return BLayoutItem::AllUnarchived(archive);
 }
 
 
-status_t
-BAbstractLayoutItem::AllArchived(BMessage* archive) const
+status_t BAbstractLayoutItem::AllArchived(BMessage* archive) const
 {
 	return BLayoutItem::AllArchived(archive);
 }
 
 
-void
-BAbstractLayoutItem::LayoutInvalidated(bool children)
+void BAbstractLayoutItem::LayoutInvalidated(bool children)
 {
 	BLayoutItem::LayoutInvalidated(children);
 }
 
 
-void
-BAbstractLayoutItem::AttachedToLayout()
+void BAbstractLayoutItem::AttachedToLayout()
 {
 	BLayoutItem::AttachedToLayout();
 }
 
 
-void
-BAbstractLayoutItem::DetachedFromLayout(BLayout* layout)
+void BAbstractLayoutItem::DetachedFromLayout(BLayout* layout)
 {
 	BLayoutItem::DetachedFromLayout(layout);
 }
 
 
-void
-BAbstractLayoutItem::AncestorVisibilityChanged(bool shown)
+void BAbstractLayoutItem::AncestorVisibilityChanged(bool shown)
 {
 	BLayoutItem::AncestorVisibilityChanged(shown);
 }
 
 
-status_t
-BAbstractLayoutItem::Perform(perform_code d, void* arg)
+status_t BAbstractLayoutItem::Perform(perform_code d, void* arg)
 {
 	return BLayoutItem::Perform(d, arg);
 }

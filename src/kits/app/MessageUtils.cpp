@@ -15,8 +15,7 @@
 
 namespace BPrivate {
 
-uint32
-CalculateChecksum(const uint8 *buffer, int32 size)
+uint32 CalculateChecksum(const uint8 *buffer, int32 size)
 {
 	uint32 sum = 0;
 	uint32 temp = 0;
@@ -41,8 +40,7 @@ CalculateChecksum(const uint8 *buffer, int32 size)
 
 
 /* entry_ref support functions */
-status_t
-entry_ref_flatten(char *buffer, size_t *size, const entry_ref *ref)
+status_t entry_ref_flatten(char *buffer, size_t *size, const entry_ref *ref)
 {
 	if (*size < sizeof(ref->device) + sizeof(ref->directory))
 		return B_BUFFER_OVERFLOW;
@@ -67,8 +65,7 @@ entry_ref_flatten(char *buffer, size_t *size, const entry_ref *ref)
 }
 
 
-status_t
-entry_ref_unflatten(entry_ref *ref, const char *buffer, size_t size)
+status_t entry_ref_unflatten(entry_ref *ref, const char *buffer, size_t size)
 {
 	if (size < sizeof(ref->device) + sizeof(ref->directory)) {
 		*ref = entry_ref();
@@ -94,8 +91,7 @@ entry_ref_unflatten(entry_ref *ref, const char *buffer, size_t size)
 }
 
 
-status_t
-entry_ref_swap(char *buffer, size_t size)
+status_t entry_ref_swap(char *buffer, size_t size)
 {
 	if (size < sizeof(dev_t) + sizeof(ino_t))
 		return B_BAD_VALUE;

@@ -188,8 +188,7 @@ BRegion::Support::CreateRegion(void)
     return new (nothrow) BRegion();
 }
 
-void
-BRegion::Support::DestroyRegion(BRegion* r)
+void BRegion::Support::DestroyRegion(BRegion* r)
 {
 	delete r;
 }
@@ -210,8 +209,7 @@ BRegion::Support::DestroyRegion(BRegion* r)
  *
  *-----------------------------------------------------------------------
  */
-void
-BRegion::Support::miSetExtents(BRegion* pReg)
+void BRegion::Support::miSetExtents(BRegion* pReg)
 {
     register clipping_rect*	pBox;
 	clipping_rect* pBoxEnd;
@@ -263,8 +261,7 @@ BRegion::Support::miSetExtents(BRegion* pReg)
    translates in place
    added by raymond
 */
-void
-BRegion::Support::XOffsetRegion(
+void BRegion::Support::XOffsetRegion(
     register BRegion* pRegion,
     register int x,
     register int y)
@@ -316,8 +313,7 @@ BRegion::Support::XOffsetRegion(
 			  else BRegion::Support::XOffsetRegion(a,0,b)
 #define ZCopyRegion(a,b) BRegion::Support::XUnionRegion(a,a,b)
 
-static void
-Compress(
+static void Compress(
     BRegion* r, BRegion* s, BRegion* t,
     register unsigned dx,
     register int xdir, register int grow)
@@ -488,8 +484,7 @@ BRegion::Support::XIntersectRegion(
     return 1;
 }
 
-void
-BRegion::Support::miRegionCopy(
+void BRegion::Support::miRegionCopy(
     register BRegion* dstrgn,
     register const BRegion* rgn)
 
@@ -505,8 +500,7 @@ BRegion::Support::miRegionCopy(
  *    if one region is above or below the other.
 */ 
 
-static void
-combineRegs(
+static void combineRegs(
     register BRegion* newReg,
     BRegion* reg1,
     BRegion* reg2)
@@ -800,8 +794,7 @@ BRegion::Support::miCoalesce(
  *
  *-----------------------------------------------------------------------
  */
-void
-BRegion::Support::miRegionOp(
+void BRegion::Support::miRegionOp(
     register BRegion* 	newReg,	    	    	/* Place to store result */
     const BRegion*	  	reg1,	    	    	/* First region in operation */
     const BRegion*	  	reg2,	    	    	/* 2d region in operation */

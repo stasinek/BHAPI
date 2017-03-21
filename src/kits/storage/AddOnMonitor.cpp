@@ -47,15 +47,13 @@ AddOnMonitor::~AddOnMonitor()
 }
 
 
-status_t
-AddOnMonitor::InitCheck()
+status_t AddOnMonitor::InitCheck()
 {
 	return fInitCheck;
 }
 
 
-void
-AddOnMonitor::SetHandler(AddOnMonitorHandler* handler)
+void AddOnMonitor::SetHandler(AddOnMonitorHandler* handler)
 {
 	if (handler == NULL)
 		return;

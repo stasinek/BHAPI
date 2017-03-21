@@ -162,7 +162,7 @@ LRESULT _bhapi_destroy_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gd
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
 {
 	if(fRequestAsyncWin == NULL) return B_ERROR;
@@ -175,7 +175,7 @@ EWin32GraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::ResizeTo(__be_uint32 w,  __be_uint32 h)
 {
 	if(fRequestAsyncWin == NULL) return B_ERROR;
@@ -249,7 +249,7 @@ LRESULT _bhapi_resize_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::CopyTo(BGraphicsContext *dc,
 			       BGraphicsDrawable *dstDrawable,
 			        __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
@@ -381,7 +381,7 @@ LRESULT _bhapi_draw_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_c
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
 				    __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
 				    __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)

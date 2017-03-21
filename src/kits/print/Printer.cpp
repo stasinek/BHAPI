@@ -87,7 +87,7 @@ BPrinter::~BPrinter()
 }
 
 
-status_t
+status_t 
 BPrinter::SetTo(const BEntry& entry)
 {
 	StopWatching();
@@ -97,7 +97,7 @@ BPrinter::SetTo(const BEntry& entry)
 }
 
 
-status_t
+status_t 
 BPrinter::SetTo(const node_ref& nodeRef)
 {
 	SetTo(BDirectory(&nodeRef));
@@ -105,7 +105,7 @@ BPrinter::SetTo(const node_ref& nodeRef)
 }
 
 
-status_t
+status_t 
 BPrinter::SetTo(const entry_ref& entryRef)
 {
 	StopWatching();
@@ -115,7 +115,7 @@ BPrinter::SetTo(const entry_ref& entryRef)
 }
 
 
-status_t
+status_t 
 BPrinter::SetTo(const BDirectory& directory)
 {
 	StopWatching();
@@ -128,7 +128,7 @@ BPrinter::SetTo(const BDirectory& directory)
 }
 
 
-void
+void 
 BPrinter::Unset()
 {
 	StopWatching();
@@ -136,7 +136,7 @@ BPrinter::Unset()
 }
 
 
-bool
+bool 
 BPrinter::IsValid() const
 {
 	BDirectory spoolDir(&fPrinterEntryRef);
@@ -154,7 +154,7 @@ BPrinter::IsValid() const
 }
 
 
-status_t
+status_t 
 BPrinter::InitCheck() const
 {
 	BDirectory spoolDir(&fPrinterEntryRef);
@@ -162,14 +162,14 @@ BPrinter::InitCheck() const
 }
 
 
-bool
+bool 
 BPrinter::IsFree() const
 {
 	return (State() == "free");
 }
 
 
-bool
+bool 
 BPrinter::IsDefault() const
 {
 	bool isDefault = false;
@@ -183,7 +183,7 @@ BPrinter::IsDefault() const
 }
 
 
-bool
+bool 
 BPrinter::IsShareable() const
 {
 	if (Name() == "Preview")
@@ -235,7 +235,7 @@ BPrinter::TransportAddress() const
 }
 
 
-status_t
+status_t 
 BPrinter::DefaultSettings(BMessage& settings)
 {
 	status_t status = B_ERROR;
@@ -261,7 +261,7 @@ BPrinter::DefaultSettings(BMessage& settings)
 }
 
 
-status_t
+status_t 
 BPrinter::StartWatching(const BMessenger& listener)
 {
 	StopWatching();
@@ -281,7 +281,7 @@ BPrinter::StartWatching(const BMessenger& listener)
 }
 
 
-void
+void 
 BPrinter::StopWatching()
 {
 	if (fListener) {
@@ -305,21 +305,21 @@ BPrinter::operator=(const BPrinter& printer)
 }
 
 
-bool
+bool 
 BPrinter::operator==(const BPrinter& printer) const
 {
 	return (fPrinterEntryRef == printer.fPrinterEntryRef);
 }
 
 
-bool
+bool 
 BPrinter::operator!=(const BPrinter& printer) const
 {
 	return (fPrinterEntryRef != printer.fPrinterEntryRef);
 }
 
 
-status_t
+status_t 
 BPrinter::_Configure() const
 {
 	status_t status = B_ERROR;
@@ -344,7 +344,7 @@ BPrinter::_Configure() const
 }
 
 
-status_t
+status_t 
 BPrinter::_ConfigureJob(BMessage& settings)
 {
 	status_t status = B_ERROR;
@@ -370,7 +370,7 @@ BPrinter::_ConfigureJob(BMessage& settings)
 }
 
 
-status_t
+status_t 
 BPrinter::_ConfigurePage(BMessage& settings)
 {
 	status_t status = B_ERROR;
@@ -436,7 +436,7 @@ BPrinter::_LoadDriver() const
 }
 
 
-void
+void 
 BPrinter::_AddPrinterName(BMessage& settings)
 {
 	settings.RemoveName(PSRV_FIELD_CURRENT_PRINTER);

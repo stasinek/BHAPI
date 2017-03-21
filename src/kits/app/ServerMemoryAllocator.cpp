@@ -56,15 +56,13 @@ ServerMemoryAllocator::~ServerMemoryAllocator()
 }
 
 
-status_t
-ServerMemoryAllocator::InitCheck()
+status_t ServerMemoryAllocator::InitCheck()
 {
 	return B_OK;
 }
 
 
-status_t
-ServerMemoryAllocator::AddArea(area_id serverArea, area_id& _area,
+status_t ServerMemoryAllocator::AddArea(area_id serverArea, area_id& _area,
 	uint8*& _base, size_t size, bool readOnly)
 {
 	area_mapping* mapping = new (std::nothrow) area_mapping;
@@ -110,8 +108,7 @@ ServerMemoryAllocator::AddArea(area_id serverArea, area_id& _area,
 }
 
 
-void
-ServerMemoryAllocator::RemoveArea(area_id serverArea)
+void ServerMemoryAllocator::RemoveArea(area_id serverArea)
 {
 	for (int32 i = fAreas.CountItems(); i-- > 0;) {
 		area_mapping* mapping = (area_mapping*)fAreas.ItemAt(i);
@@ -127,8 +124,7 @@ ServerMemoryAllocator::RemoveArea(area_id serverArea)
 }
 
 
-status_t
-ServerMemoryAllocator::AreaAndBaseFor(area_id serverArea, area_id& _area,
+status_t ServerMemoryAllocator::AreaAndBaseFor(area_id serverArea, area_id& _area,
 	uint8*& _base)
 {
 	// TODO: why not use a map?

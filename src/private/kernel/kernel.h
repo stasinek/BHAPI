@@ -19,8 +19,7 @@
 #	define KERNEL_LOAD_BASE		KERNEL_BASE
 #endif
 
-// macro to check whether an address is in the kernel address space (avoid
-// always-true checks)
+// macro to check whether an address is in the kernel address space (avoid // always-true checks)
 #if KERNEL_BASE == 0
 #	define IS_KERNEL_ADDRESS(x)		((addr_t)(x) <= KERNEL_TOP)
 #elif KERNEL_TOP == __HAIKU_ADDR_MAX

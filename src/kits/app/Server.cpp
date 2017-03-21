@@ -30,8 +30,7 @@ BServer::BServer(const char* signature, const char* looperName, port_id port,
 }
 
 
-status_t
-BServer::InitGUIContext()
+status_t BServer::InitGUIContext()
 {
 	if (fGUIContextInitialized)
 		return B_OK;

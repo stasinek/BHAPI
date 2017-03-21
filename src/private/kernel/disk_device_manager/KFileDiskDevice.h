@@ -3,7 +3,7 @@
 #ifndef _K_FILE_DISK_DEVICE_H
 #define _K_FILE_DISK_DEVICE_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include "KDiskDevice.h"
 

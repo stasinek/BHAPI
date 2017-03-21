@@ -227,8 +227,7 @@ const uint32 kPaneSwitchClosed = 0;
 const uint32 kPaneSwitchOpen = 2;
 
 
-static void
-OpenParentAndSelectOriginal(const entry_ref* ref)
+static void OpenParentAndSelectOriginal(const entry_ref* ref)
 {
 	BEntry entry(ref);
 	node_ref node;
@@ -332,8 +331,7 @@ BInfoWindow::InfoWindowRect(bool)
 }
 
 
-void
-BInfoWindow::Quit()
+void BInfoWindow::Quit()
 {
 	stop_watching(this);
 
@@ -352,15 +350,13 @@ BInfoWindow::Quit()
 }
 
 
-bool
-BInfoWindow::IsShowing(const node_ref* node) const
+bool BInfoWindow::IsShowing(const node_ref* node) const
 {
 	return *TargetModel()->node_ref() == *node;
 }
 
 
-void
-BInfoWindow::Show()
+void BInfoWindow::Show()
 {
 	BModelOpener modelOpener(TargetModel());
 	if (TargetModel()->InitCheck() != B_OK) {
@@ -418,8 +414,7 @@ BInfoWindow::Show()
 }
 
 
-void
-BInfoWindow::MessageReceived(BMessage* message)
+void BInfoWindow::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case kRestoreState:
@@ -672,8 +667,7 @@ BInfoWindow::MessageReceived(BMessage* message)
 }
 
 
-void
-BInfoWindow::GetSizeString(BString& result, off_t size, int32 fileCount)
+void BInfoWindow::GetSizeString(BString& result, off_t size, int32 fileCount)
 {
 	static BMessageFormat sizeFormat(B_TRANSLATE(
 		"{0, plural, one{(# byte)} other{(# bytes)}}"));
@@ -698,8 +692,7 @@ BInfoWindow::GetSizeString(BString& result, off_t size, int32 fileCount)
 }
 
 
-int32
-BInfoWindow::CalcSize(void* castToWindow)
+int32 BInfoWindow::CalcSize(void* castToWindow)
 {
 	BInfoWindow* window = static_cast<BInfoWindow*>(castToWindow);
 	BDirectory dir(window->TargetModel()->EntryRef());
@@ -778,8 +771,7 @@ BInfoWindow::CalcSize(void* castToWindow)
 }
 
 
-void
-BInfoWindow::SetSizeString(const char* sizeString)
+void BInfoWindow::SetSizeString(const char* sizeString)
 {
 	AttributeView* view
 		= dynamic_cast<AttributeView*>(FindView("attr_view"));
@@ -788,8 +780,7 @@ BInfoWindow::SetSizeString(const char* sizeString)
 }
 
 
-void
-BInfoWindow::OpenFilePanel(const entry_ref* ref)
+void BInfoWindow::OpenFilePanel(const entry_ref* ref)
 {
 	// Open a file dialog box to allow the user to select a new target
 	// for the sym link
@@ -995,8 +986,7 @@ AttributeView::~AttributeView()
 }
 
 
-void
-AttributeView::InitStrings(const Model* model)
+void AttributeView::InitStrings(const Model* model)
 {
 	BMimeType mime;
 	char kind[B_MIME_TYPE_LENGTH];
@@ -1064,8 +1054,7 @@ AttributeView::InitStrings(const Model* model)
 }
 
 
-void
-AttributeView::AttachedToWindow()
+void AttributeView::AttachedToWindow()
 {
 	BFont font(__be_plain_font);
 
@@ -1080,16 +1069,14 @@ AttributeView::AttachedToWindow()
 }
 
 
-void
-AttributeView::Pulse()
+void AttributeView::Pulse()
 {
 	CheckAndSetSize();
 	_inherited::Pulse();
 }
 
 
-void
-AttributeView::ModelChanged(Model* model, BMessage* message)
+void AttributeView::ModelChanged(Model* model, BMessage* message)
 {
 	BRect drawBounds(Bounds());
 	drawBounds.left = fDivider;
@@ -1206,8 +1193,7 @@ AttributeView::ModelChanged(Model* model, BMessage* message)
 // the old model and create a new one; BSymLink::SetTarget(),
 // would be nice)
 
-void
-AttributeView::ReLinkTargetModel(Model* model)
+void AttributeView::ReLinkTargetModel(Model* model)
 {
 	fModel = model;
 	if (fModel->IsSymLink()) {
@@ -1226,8 +1212,7 @@ AttributeView::ReLinkTargetModel(Model* model)
 }
 
 
-void
-AttributeView::MouseDown(BPoint where)
+void AttributeView::MouseDown(BPoint where)
 {
 	BEntry entry;
 	fModel->GetEntry(&entry);
@@ -1316,8 +1301,7 @@ AttributeView::MouseDown(BPoint where)
 }
 
 
-void
-AttributeView::MouseMoved(BPoint where, uint32, const BMessage* dragMessage)
+void AttributeView::MouseMoved(BPoint where, uint32, const BMessage* dragMessage)
 {
 	if (dragMessage != NULL && dragMessage->ReturnAddress() != BMessenger(this)
 		&& dragMessage->what == B_SIMPLE_DATA
@@ -1505,15 +1489,13 @@ AttributeView::MouseMoved(BPoint where, uint32, const BMessage* dragMessage)
 }
 
 
-void
-AttributeView::OpenLinkSource()
+void AttributeView::OpenLinkSource()
 {
 	OpenParentAndSelectOriginal(fModel->EntryRef());
 }
 
 
-void
-AttributeView::OpenLinkTarget()
+void AttributeView::OpenLinkTarget()
 {
 	Model resolvedModel(fModel->EntryRef(), true, true);
 	BEntry entry;
@@ -1541,8 +1523,7 @@ AttributeView::OpenLinkTarget()
 }
 
 
-void
-AttributeView::MouseUp(BPoint where)
+void AttributeView::MouseUp(BPoint where)
 {
 	// Are we in the link rect?
 	if (fTrackingState == link_track && fLinkRect.Contains(where)) {
@@ -1581,8 +1562,7 @@ AttributeView::MouseUp(BPoint where)
 }
 
 
-void
-AttributeView::CheckAndSetSize()
+void AttributeView::CheckAndSetSize()
 {
 	if (fModel->IsVolume() || fModel->IsRoot()) {
 		off_t freeBytes = 0;
@@ -1645,8 +1625,7 @@ AttributeView::CheckAndSetSize()
 }
 
 
-void
-AttributeView::MessageReceived(BMessage* message)
+void AttributeView::MessageReceived(BMessage* message)
 {
 	if (message->WasDropped()
 		&& message->what == B_SIMPLE_DATA
@@ -1690,8 +1669,7 @@ AttributeView::MessageReceived(BMessage* message)
 }
 
 
-void
-AttributeView::Draw(BRect)
+void AttributeView::Draw(BRect)
 {
 	// Set the low color for anti-aliasing
 	SetLowColor(ui_color(B_PANEL_BACKGROUND_COLOR));
@@ -1915,8 +1893,7 @@ AttributeView::Draw(BRect)
 }
 
 
-void
-AttributeView::BeginEditingTitle()
+void AttributeView::BeginEditingTitle()
 {
 	if (fTitleEditView != NULL)
 		return;
@@ -1959,8 +1936,7 @@ AttributeView::BeginEditingTitle()
 }
 
 
-void
-AttributeView::FinishEditingTitle(bool commit)
+void AttributeView::FinishEditingTitle(bool commit)
 {
 	if (fTitleEditView == NULL)
 		return;
@@ -2022,16 +1998,14 @@ AttributeView::FinishEditingTitle(bool commit)
 }
 
 
-void
-AttributeView::MakeFocus(bool focus)
+void AttributeView::MakeFocus(bool focus)
 {
 	if (!focus && fTitleEditView != NULL)
 		FinishEditingTitle(true);
 }
 
 
-void
-AttributeView::WindowActivated(bool active)
+void AttributeView::WindowActivated(bool active)
 {
 	if (active)
 		return;
@@ -2071,8 +2045,7 @@ AttributeView::CurrentFontHeight(float size)
 }
 
 
-status_t
-AttributeView::BuildContextMenu(BMenu* parent)
+status_t AttributeView::BuildContextMenu(BMenu* parent)
 {
 	if (parent == NULL)
 		return B_BAD_VALUE;
@@ -2178,8 +2151,7 @@ AttributeView::BuildContextMenu(BMenu* parent)
 }
 
 
-void
-AttributeView::SetPermissionsSwitchState(int32 state)
+void AttributeView::SetPermissionsSwitchState(int32 state)
 {
 	fPermissionsSwitch->SetValue(state);
 	fPermissionsSwitch->Invalidate();
@@ -2220,15 +2192,13 @@ AttributeView::LastSize() const
 }
 
 
-void
-AttributeView::SetLastSize(off_t lastSize)
+void AttributeView::SetLastSize(off_t lastSize)
 {
 	fLastSize = lastSize;
 }
 
 
-void
-AttributeView::SetSizeString(const char* sizeString)
+void AttributeView::SetSizeString(const char* sizeString)
 {
 	fSizeString = sizeString;
 
@@ -2254,8 +2224,7 @@ TrackingView::TrackingView(BRect frame, const char* str, BMessage* message)
 }
 
 
-void
-TrackingView::MouseDown(BPoint)
+void TrackingView::MouseDown(BPoint)
 {
 	if (Message() != NULL) {
 		fMouseDown = true;
@@ -2265,8 +2234,7 @@ TrackingView::MouseDown(BPoint)
 }
 
 
-void
-TrackingView::MouseMoved(BPoint, uint32 transit, const BMessage*)
+void TrackingView::MouseMoved(BPoint, uint32 transit, const BMessage*)
 {
 	if ((transit == B_ENTERED_VIEW || transit == B_EXITED_VIEW) && fMouseDown)
 		InvertRect(Bounds());
@@ -2278,8 +2246,7 @@ TrackingView::MouseMoved(BPoint, uint32 transit, const BMessage*)
 }
 
 
-void
-TrackingView::MouseUp(BPoint)
+void TrackingView::MouseUp(BPoint)
 {
 	if (Message() != NULL) {
 		if (fMouseInView)
@@ -2291,8 +2258,7 @@ TrackingView::MouseUp(BPoint)
 }
 
 
-void
-TrackingView::Draw(BRect)
+void TrackingView::Draw(BRect)
 {
 	if (Message() != NULL)
 		SetHighColor(kLinkColor);

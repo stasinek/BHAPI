@@ -396,8 +396,7 @@ BHandler::MessageReceived(BMessage *message)
 }
 
 
-void
-BHandler::SetNextHandler(BHandler *handler)
+void BHandler::SetNextHandler(BHandler *handler)
 {
     if(fLooper == NULL || handler == this || fNextHandler == handler) return;
 
@@ -517,15 +516,13 @@ BHandler::StopWatching(BMessenger msgr,  __be_uint32 what)
 }
 
 
-status_t
-BHandler::StopWatchingAll(BMessenger msgr)
+status_t BHandler::StopWatchingAll(BMessenger msgr)
 {
     return StopWatching(msgr, B_OBSERVER_OBSERVE_ALL);
 }
 
 
-status_t
-BHandler::StartWatching(BHandler *handler,  __be_uint32 what)
+status_t BHandler::StartWatching(BHandler *handler,  __be_uint32 what)
 {
     status_t status;
     BMessenger msgr(handler, NULL, &status);
@@ -535,8 +532,7 @@ BHandler::StartWatching(BHandler *handler,  __be_uint32 what)
 }
 
 
-status_t
-BHandler::StartWatchingAll(BHandler *handler)
+status_t BHandler::StartWatchingAll(BHandler *handler)
 {
     status_t status;
     BMessenger msgr(handler, NULL, &status);
@@ -545,9 +541,7 @@ BHandler::StartWatchingAll(BHandler *handler)
     return StartWatchingAll(msgr);
 }
 
-
-status_t
-BHandler::StopWatching(BHandler *handler,  __be_uint32 what)
+status_t BHandler::StopWatching(BHandler *handler,  __be_uint32 what)
 {
     status_t status;
     BMessenger msgr(handler, NULL, &status);
@@ -556,9 +550,7 @@ BHandler::StopWatching(BHandler *handler,  __be_uint32 what)
     return StopWatching(msgr, what);
 }
 
-
-status_t
-BHandler::StopWatchingAll(BHandler *handler)
+status_t BHandler::StopWatchingAll(BHandler *handler)
 {
     status_t status;
     BMessenger msgr(handler, NULL, &status);
@@ -567,9 +559,7 @@ BHandler::StopWatchingAll(BHandler *handler)
     return StopWatchingAll(msgr);
 }
 
-
-void
-BHandler::SendNotices(__be_uint32 what, const BMessage *message)
+void BHandler::SendNotices(__be_uint32 what, const BMessage *message)
 {
     if(fObserverList == NULL) return;
 
@@ -608,16 +598,14 @@ BHandler::SendNotices(__be_uint32 what, const BMessage *message)
 }
 
 
-bool
-BHandler::IsWatched(__be_uint32 what) const
+bool BHandler::IsWatched(__be_uint32 what) const
 {
     if(fObserverList == NULL) return false;
     return reinterpret_cast<BObserverList*>(fObserverList)->IsWatched(what);
 }
 
 
-bool
-BHandler::AddFilter(BMessageFilter *filter)
+bool BHandler::AddFilter(BMessageFilter *filter)
 {
     if(filter == NULL || filter->fHandler != NULL) return false;
     if(fFilters == NULL) fFilters = new BList();
@@ -626,25 +614,19 @@ BHandler::AddFilter(BMessageFilter *filter)
     return true;
 }
 
-
-bool
-BHandler::RemoveFilter(BMessageFilter *filter)
+bool BHandler::RemoveFilter(BMessageFilter *filter)
 {
     if(fFilters == NULL || filter == NULL || filter->fHandler != this || fFilters->RemoveItem(filter) == false) return false;
     filter->fHandler = NULL;
     return true;
 }
 
-
-const BList*
-BHandler::FilterList() const
+const BList* BHandler::FilterList() const
 {
     return fFilters;
 }
 
-
-bool
-BHandler::SetFilterList(const BList *filterList)
+bool BHandler::SetFilterList(const BList *filterList)
 {
     if(fFilters != NULL)
     {
@@ -669,20 +651,16 @@ BHandler::SetFilterList(const BList *filterList)
 }
 
 
-BHandler*
-BHandler::ResolveSpecifier(BMessage *msg,  __be_int32 index, BMessage *specifier,  __be_int32 what, const char *property)
+BHandler* BHandler::ResolveSpecifier(BMessage *msg,  __be_int32 index, BMessage *specifier,  __be_int32 what, const char *property)
 {
     // TODO
     BHAPI_WARNING("[APP]: %s --- TODO", __PRETTY_FUNCTION__);
     return NULL;
 }
 
-
-status_t
-BHandler::GetSupportedSuites(BMessage *data)
+status_t BHandler::GetSupportedSuites(BMessage *data)
 {
     // TODO
     BHAPI_WARNING("[APP]: %s --- TODO", __PRETTY_FUNCTION__);
     return B_ERROR;
 }
-

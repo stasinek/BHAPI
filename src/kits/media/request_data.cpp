@@ -69,8 +69,7 @@ PortPool::GetPort()
 }
 
 
-void
-PortPool::PutPort(port_id port)
+void PortPool::PutPort(port_id port)
 {
 	ASSERT(port >= 0);
 
@@ -99,8 +98,7 @@ request_data::~request_data()
 }
 
 
-status_t
-request_data::SendReply(status_t result, reply_data *reply,
+status_t request_data::SendReply(status_t result, reply_data *reply,
 	size_t replySize) const
 {
 	reply->result = result;

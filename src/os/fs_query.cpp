@@ -80,8 +80,7 @@ fs_read_query(DIR *dir)
 }
 
 
-status_t
-get_path_for_dirent(struct dirent *dent, char *buffer, size_t length)
+status_t get_path_for_dirent(struct dirent *dent, char *buffer, size_t length)
 {
 	if (dent == NULL || buffer == NULL)
 		return B_BAD_VALUE;

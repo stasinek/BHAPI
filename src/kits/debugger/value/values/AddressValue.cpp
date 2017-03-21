@@ -21,8 +21,7 @@ AddressValue::~AddressValue()
 }
 
 
-bool
-AddressValue::ToString(BString& _string) const
+bool AddressValue::ToString(BString& _string) const
 {
 	if (!fValue.IsInteger())
 		return false;

@@ -75,8 +75,7 @@ BRepositoryInfo::Instantiate(BMessage* data)
 }
 
 
-status_t
-BRepositoryInfo::Archive(BMessage* data, bool deep) const
+status_t BRepositoryInfo::Archive(BMessage* data, bool deep) const
 {
 	status_t result = inherited::Archive(data, deep);
 	if (result != B_OK)
@@ -110,22 +109,19 @@ BRepositoryInfo::Archive(BMessage* data, bool deep) const
 }
 
 
-status_t
-BRepositoryInfo::InitCheck() const
+status_t BRepositoryInfo::InitCheck() const
 {
 	return fInitStatus;
 }
 
 
-status_t
-BRepositoryInfo::SetTo(const BMessage* data)
+status_t BRepositoryInfo::SetTo(const BMessage* data)
 {
 	return fInitStatus = _SetTo(data);
 }
 
 
-status_t
-BRepositoryInfo::SetTo(const BEntry& entry)
+status_t BRepositoryInfo::SetTo(const BEntry& entry)
 {
 	return fInitStatus = _SetTo(entry);
 }
@@ -187,50 +183,43 @@ BRepositoryInfo::LicenseTexts() const
 }
 
 
-void
-BRepositoryInfo::SetName(const BString& name)
+void BRepositoryInfo::SetName(const BString& name)
 {
 	fName = name;
 }
 
 
-void
-BRepositoryInfo::SetOriginalBaseURL(const BString& url)
+void BRepositoryInfo::SetOriginalBaseURL(const BString& url)
 {
 	fOriginalBaseURL = url;
 }
 
 
-void
-BRepositoryInfo::SetVendor(const BString& vendor)
+void BRepositoryInfo::SetVendor(const BString& vendor)
 {
 	fVendor = vendor;
 }
 
 
-void
-BRepositoryInfo::SetSummary(const BString& summary)
+void BRepositoryInfo::SetSummary(const BString& summary)
 {
 	fSummary = summary;
 }
 
 
-void
-BRepositoryInfo::SetPriority(uint8 priority)
+void BRepositoryInfo::SetPriority(uint8 priority)
 {
 	fPriority = priority;
 }
 
 
-void
-BRepositoryInfo::SetArchitecture(BPackageArchitecture architecture)
+void BRepositoryInfo::SetArchitecture(BPackageArchitecture architecture)
 {
 	fArchitecture = architecture;
 }
 
 
-status_t
-BRepositoryInfo::AddLicense(const BString& licenseName,
+status_t BRepositoryInfo::AddLicense(const BString& licenseName,
 	const BString& licenseText)
 {
 	if (!fLicenseNames.Add(licenseName) || !fLicenseTexts.Add(licenseText))
@@ -240,16 +229,14 @@ BRepositoryInfo::AddLicense(const BString& licenseName,
 }
 
 
-void
-BRepositoryInfo::ClearLicenses()
+void BRepositoryInfo::ClearLicenses()
 {
 	fLicenseNames.MakeEmpty();
 	fLicenseTexts.MakeEmpty();
 }
 
 
-status_t
-BRepositoryInfo::_SetTo(const BMessage* data)
+status_t BRepositoryInfo::_SetTo(const BMessage* data)
 {
 	if (data == NULL)
 		return B_BAD_VALUE;
@@ -286,8 +273,7 @@ BRepositoryInfo::_SetTo(const BMessage* data)
 }
 
 
-status_t
-BRepositoryInfo::_SetTo(const BEntry& entry)
+status_t BRepositoryInfo::_SetTo(const BEntry& entry)
 {
 	BFile file(&entry, B_READ_ONLY);
 	status_t result = file.InitCheck();

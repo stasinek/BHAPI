@@ -74,8 +74,7 @@ PincodeWindow::PincodeWindow(RemoteDevice* rDevice)
 }
 
 
-void
-PincodeWindow::InitUI()
+void PincodeWindow::InitUI()
 {
 	SetLayout(new BGroupLayout(B_HORIZONTAL));
 
@@ -108,8 +107,7 @@ PincodeWindow::InitUI()
 }
 
 
-void
-PincodeWindow::MessageReceived(BMessage *msg)
+void PincodeWindow::MessageReceived(BMessage *msg)
 {
 //	status_t err = B_OK;
 

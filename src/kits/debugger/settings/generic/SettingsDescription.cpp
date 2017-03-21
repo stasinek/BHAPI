@@ -21,8 +21,7 @@ SettingsDescription::~SettingsDescription()
 }
 
 
-int32
-SettingsDescription::CountSettings() const
+int32 SettingsDescription::CountSettings() const
 {
 	return fSettings.CountItems();
 }
@@ -47,8 +46,7 @@ SettingsDescription::SettingByID(const char* id) const
 }
 
 
-bool
-SettingsDescription::AddSetting(Setting* setting)
+bool SettingsDescription::AddSetting(Setting* setting)
 {
 	if (!fSettings.AddItem(setting))
 		return false;

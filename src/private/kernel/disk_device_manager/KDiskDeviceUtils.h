@@ -45,8 +45,7 @@ max(const T &a, const T &b)
 
 // set_string
 static inline
-status_t
-set_string(char *&location, const char *newValue)
+status_t set_string(char *&location, const char *newValue)
 {
 	// unset old value
 	if (location) {

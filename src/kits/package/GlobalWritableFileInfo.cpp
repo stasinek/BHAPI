@@ -45,8 +45,7 @@ BGlobalWritableFileInfo::~BGlobalWritableFileInfo()
 }
 
 
-status_t
-BGlobalWritableFileInfo::InitCheck() const
+status_t BGlobalWritableFileInfo::InitCheck() const
 {
 	if (fPath.IsEmpty())
 		return B_NO_INIT;
@@ -61,8 +60,7 @@ BGlobalWritableFileInfo::Path() const
 }
 
 
-bool
-BGlobalWritableFileInfo::IsIncluded() const
+bool BGlobalWritableFileInfo::IsIncluded() const
 {
 	return fUpdateType != B_WRITABLE_FILE_UPDATE_TYPE_ENUM_COUNT;
 }
@@ -75,15 +73,13 @@ BGlobalWritableFileInfo::UpdateType() const
 }
 
 
-bool
-BGlobalWritableFileInfo::IsDirectory() const
+bool BGlobalWritableFileInfo::IsDirectory() const
 {
 	return fIsDirectory;
 }
 
 
-void
-BGlobalWritableFileInfo::SetTo(const BString& path,
+void BGlobalWritableFileInfo::SetTo(const BString& path,
 	BWritableFileUpdateType updateType, bool isDirectory)
 {
 	fPath = path;

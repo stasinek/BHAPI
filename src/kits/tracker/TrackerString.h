@@ -37,7 +37,7 @@ All rights reserved.
 
 #include <ctype.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <StringClass.h>
 
 #include "RegExp.h"
@@ -95,8 +95,7 @@ private:
 };
 
 
-inline bool
-TrackerString::MatchesRegExp(const RegExp* expression) const
+inline bool TrackerString::MatchesRegExp(const RegExp* expression) const
 {
 	if (expression == NULL || expression->InitCheck() != B_OK)
 		return false;
@@ -105,8 +104,7 @@ TrackerString::MatchesRegExp(const RegExp* expression) const
 }
 
 
-inline bool
-TrackerString::MatchesRegExp(const RegExp &expression) const
+inline bool TrackerString::MatchesRegExp(const RegExp &expression) const
 {
 	if (expression.InitCheck() != B_OK)
 		return false;
@@ -122,8 +120,7 @@ TrackerString::ConditionalToLower(char c, bool caseSensitivity) const
 }
 
 
-inline bool
-TrackerString::CharsAreEqual(char char1, char char2,
+inline bool TrackerString::CharsAreEqual(char char1, char char2,
 	bool caseSensitivity) const
 {
 	return ConditionalToLower(char1, caseSensitivity)

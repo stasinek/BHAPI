@@ -55,8 +55,7 @@ inline void* buildCommand(uint8 ogf, uint8 ocf, void** param, size_t psize,
 
 // Request that do not need any input parameter
 // Output reply can be fit in 32 bits field without talking status into account
-status_t
-NonParameterCommandRequest(uint8 ofg, uint8 ocf, int32* result, hci_id hId,
+status_t NonParameterCommandRequest(uint8 ofg, uint8 ocf, int32* result, hci_id hId,
 	BMessenger* messenger)
 {
 	CALLED();
@@ -713,24 +712,21 @@ const char* lmpVersion[] = { "1.0 " , "1.1 " , "1.2 " , "2.0 " , "2.1 "};
 #endif
 
 
-const char*
-BluetoothHciVersion(uint16 ver)
+const char*  BluetoothHciVersion(uint16 ver)
 {
 	CALLED();
 	return hciVersion[ver];
 }
 
 
-const char*
-BluetoothLmpVersion(uint16 ver)
+const char*  BluetoothLmpVersion(uint16 ver)
 {
 	CALLED();
 	return lmpVersion[ver];
 }
 
 
-const char*
-BluetoothCommandOpcode(uint16 opcode)
+const char*  BluetoothCommandOpcode(uint16 opcode)
 {
 	CALLED();
 	// NOTE: BT implementations beyond 2.1
@@ -773,8 +769,7 @@ BluetoothCommandOpcode(uint16 opcode)
 }
 
 
-const char*
-BluetoothEvent(uint8 event)
+const char*  BluetoothEvent(uint8 event)
 {
 	CALLED();
 	if (event < sizeof(bluetoothEvents) / sizeof(const char*))
@@ -784,8 +779,7 @@ BluetoothEvent(uint8 event)
 }
 
 
-const char*
-BluetoothManufacturer(uint16 manufacturer)
+const char*  BluetoothManufacturer(uint16 manufacturer)
 {
 	CALLED();
 	if (manufacturer < sizeof(bluetoothManufacturers) / sizeof(const char*))
@@ -797,8 +791,7 @@ BluetoothManufacturer(uint16 manufacturer)
 }
 
 
-const char*
-BluetoothError(uint8 error)
+const char*  BluetoothError(uint8 error)
 {
 	CALLED();
 	if (error < sizeof(bluetoothErrors) / sizeof(const char*))

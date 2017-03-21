@@ -10,7 +10,7 @@
 
 #include <libroot_private.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <image.h>
 
 
@@ -23,8 +23,7 @@ addr_t __gNetAPIStart;
 addr_t __gNetAPIEnd;
 
 
-static void
-find_own_image()
+static void find_own_image()
 {
 	int32 cookie = 0;
 	image_info info;
@@ -42,8 +41,7 @@ find_own_image()
 }
 
 
-extern "C" void
-initialize_before()
+extern "C" void initialize_before()
 {
 	// determine if we have to run in BeOS compatibility mode
 

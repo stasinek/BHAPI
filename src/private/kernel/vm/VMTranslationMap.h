@@ -143,8 +143,7 @@ struct VMPhysicalPageMapper {
 
 
 
-inline status_t
-VMTranslationMap::ProtectPage(VMArea* area, addr_t address, uint32 attributes)
+inline status_t VMTranslationMap::ProtectPage(VMArea* area, addr_t address, uint32 attributes)
 {
 	return Protect(address, address + B_PAGE_SIZE - 1, attributes,
 		area->MemoryType());
@@ -152,8 +151,7 @@ VMTranslationMap::ProtectPage(VMArea* area, addr_t address, uint32 attributes)
 
 
 #include <vm/VMArea.h>
-inline status_t
-VMTranslationMap::ProtectArea(VMArea* area, uint32 attributes)
+inline status_t VMTranslationMap::ProtectArea(VMArea* area, uint32 attributes)
 {
 	return Protect(area->Base(), area->Base() + area->Size() - 1, attributes,
 		area->MemoryType());

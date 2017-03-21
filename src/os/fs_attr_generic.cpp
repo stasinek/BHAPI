@@ -44,8 +44,7 @@ static const char* const kIDAttributeName = "id";
 
 
 // init_attribute_dir_base_dir
-static status_t
-init_attribute_dir_base_dir()
+static status_t init_attribute_dir_base_dir()
 {
 	static bool initialized = false;
 	static status_t initError;
@@ -130,8 +129,7 @@ deescape_attr_name(const char *name)
 #if HAIKU_HOST_USE_XATTR_REF
 
 
-static status_t
-make_unique_node_id(string& _id)
+static status_t make_unique_node_id(string& _id)
 {
 	// open random device
 	int fd = open("/dev/urandom", O_RDONLY);
@@ -167,8 +165,7 @@ make_unique_node_id(string& _id)
 }
 
 
-static status_t
-get_id_attribute(const char *path, int fd, string& _id)
+static status_t get_id_attribute(const char *path, int fd, string& _id)
 {
 	// list_attributes() and remove_attribute() are unused here -- prevent the
 	// warning
@@ -201,8 +198,7 @@ get_id_attribute(const char *path, int fd, string& _id)
 }
 
 
-static status_t
-set_id_attribute(const char *path, int fd, const char* id)
+static status_t set_id_attribute(const char *path, int fd, const char* id)
 {
 	string attributeName(kAttributeNamespace);
 	attributeName += kIDAttributeName;
@@ -228,8 +224,7 @@ get_attribute_dir_path(node_ref ref, const char *path, int fd)
 }
 
 
-static status_t
-get_attribute_dir_path_needed(node_ref ref, const char *path, int fd,
+static status_t get_attribute_dir_path_needed(node_ref ref, const char *path, int fd,
 	string& _attrDirPath)
 {
 	string id;
@@ -265,8 +260,7 @@ get_attribute_dir_path(node_ref ref, const char *path, int fd)
 }
 
 
-static status_t
-get_attribute_dir_path_needed(node_ref ref, const char *path, int fd,
+static status_t get_attribute_dir_path_needed(node_ref ref, const char *path, int fd,
 	string& _attrDirPath)
 {
 	_attrDirPath = get_attribute_dir_path(ref, path, fd);
@@ -278,8 +272,7 @@ get_attribute_dir_path_needed(node_ref ref, const char *path, int fd,
 
 
 // ensure_attribute_dir_exists
-static status_t
-ensure_attribute_dir_exists(node_ref ref, const char *path, int fd)
+static status_t ensure_attribute_dir_exists(node_ref ref, const char *path, int fd)
 {
 	// init the base directory and get the attribute directory path
 	status_t error = init_attribute_dir_base_dir();
@@ -329,8 +322,7 @@ open_attr_dir(node_ref ref, const char *path, int fd)
 }
 
 // get_attribute_path
-static status_t
-get_attribute_path(node_ref ref, const char *path, int fd,
+static status_t get_attribute_path(node_ref ref, const char *path, int fd,
 	const char *attribute, string &attrPath, string &typePath)
 {
 	if (!attribute || strlen(attribute) == 0)
@@ -354,8 +346,7 @@ get_attribute_path(node_ref ref, const char *path, int fd,
 
 
 // get_attribute_path_virtual_fd
-static status_t
-get_attribute_path_virtual_fd(int fd, const char *attribute, string &attrPath,
+static status_t get_attribute_path_virtual_fd(int fd, const char *attribute, string &attrPath,
 	string &typePath)
 {
 	// stat the file to get a node_ref
@@ -377,8 +368,7 @@ get_attribute_path_virtual_fd(int fd, const char *attribute, string &attrPath,
 
 
 // get_attribute_path
-static status_t
-get_attribute_path(int fd, const char *attribute, string &attrPath,
+static status_t get_attribute_path(int fd, const char *attribute, string &attrPath,
 	string &typePath)
 {
 	if (get_descriptor(fd)) {
@@ -466,8 +456,7 @@ fs_read_attr_dir(DIR *dir)
 }
 
 // fs_rewind_attr_dir
-void
-fs_rewind_attr_dir(DIR *dir)
+void fs_rewind_attr_dir(DIR *dir)
 {
 	rewinddir(dir);
 }
@@ -709,8 +698,7 @@ _kern_open_attr_dir(int fd, const char *path)
 }
 
 // _kern_rename_attr
-status_t
-_kern_rename_attr(int fromFile, const char *fromName, int toFile,
+status_t _kern_rename_attr(int fromFile, const char *fromName, int toFile,
 	const char *toName)
 {
 	if (!fromName || !toName)
@@ -748,8 +736,7 @@ _kern_rename_attr(int fromFile, const char *fromName, int toFile,
 }
 
 // _kern_remove_attr
-status_t
-_kern_remove_attr(int fd, const char *name)
+status_t _kern_remove_attr(int fd, const char *name)
 {
 	if (!name)
 		return B_BAD_VALUE;
@@ -775,8 +762,7 @@ _kern_remove_attr(int fd, const char *name)
 // __get_attribute_dir_path
 extern "C" bool __get_attribute_dir_path(const struct stat* st,
 	const char* path, char* buffer);
-bool
-__get_attribute_dir_path(const struct stat* st, const char* path, char* buffer)
+bool __get_attribute_dir_path(const struct stat* st, const char* path, char* buffer)
 {
 	node_ref ref(*st);
 	string dirPath = get_attribute_dir_path(ref, path, -1);

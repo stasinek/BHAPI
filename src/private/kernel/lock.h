@@ -10,7 +10,7 @@
 #define _KERNEL_LOCK_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <arch/atomic.h>
 #include <debug.h>
@@ -162,8 +162,7 @@ extern status_t _mutex_lock_with_timeout(mutex* lock, uint32 timeoutFlags,
 	bigtime_t timeout);
 
 
-static inline status_t
-rw_lock_read_lock(rw_lock* lock)
+static inline status_t rw_lock_read_lock(rw_lock* lock)
 {
 #if KDEBUG_RW_LOCK_DEBUG
 	return rw_lock_write_lock(lock);
@@ -176,8 +175,7 @@ rw_lock_read_lock(rw_lock* lock)
 }
 
 
-static inline status_t
-rw_lock_read_lock_with_timeout(rw_lock* lock, uint32 timeoutFlags,
+static inline status_t rw_lock_read_lock_with_timeout(rw_lock* lock, uint32 timeoutFlags,
 	bigtime_t timeout)
 {
 #if KDEBUG_RW_LOCK_DEBUG
@@ -191,8 +189,7 @@ rw_lock_read_lock_with_timeout(rw_lock* lock, uint32 timeoutFlags,
 }
 
 
-static inline void
-rw_lock_read_unlock(rw_lock* lock)
+static inline void rw_lock_read_unlock(rw_lock* lock)
 {
 #if KDEBUG_RW_LOCK_DEBUG
 	rw_lock_write_unlock(lock);
@@ -204,15 +201,13 @@ rw_lock_read_unlock(rw_lock* lock)
 }
 
 
-static inline void
-rw_lock_write_unlock(rw_lock* lock)
+static inline void rw_lock_write_unlock(rw_lock* lock)
 {
 	_rw_lock_write_unlock(lock);
 }
 
 
-static inline status_t
-mutex_lock(mutex* lock)
+static inline status_t mutex_lock(mutex* lock)
 {
 #if KDEBUG
 	return _mutex_lock(lock, NULL);
@@ -224,8 +219,7 @@ mutex_lock(mutex* lock)
 }
 
 
-static inline status_t
-mutex_trylock(mutex* lock)
+static inline status_t mutex_trylock(mutex* lock)
 {
 #if KDEBUG
 	return _mutex_trylock(lock);
@@ -237,8 +231,7 @@ mutex_trylock(mutex* lock)
 }
 
 
-static inline status_t
-mutex_lock_with_timeout(mutex* lock, uint32 timeoutFlags, bigtime_t timeout)
+static inline status_t mutex_lock_with_timeout(mutex* lock, uint32 timeoutFlags, bigtime_t timeout)
 {
 #if KDEBUG
 	return _mutex_lock_with_timeout(lock, timeoutFlags, timeout);
@@ -250,8 +243,7 @@ mutex_lock_with_timeout(mutex* lock, uint32 timeoutFlags, bigtime_t timeout)
 }
 
 
-static inline void
-mutex_unlock(mutex* lock)
+static inline void mutex_unlock(mutex* lock)
 {
 #if !KDEBUG
 	if (atomic_add(&lock->count, 1) < -1)
@@ -260,8 +252,7 @@ mutex_unlock(mutex* lock)
 }
 
 
-static inline void
-mutex_transfer_lock(mutex* lock, thread_id thread)
+static inline void mutex_transfer_lock(mutex* lock, thread_id thread)
 {
 #if KDEBUG
 	lock->holder = thread;
@@ -269,8 +260,7 @@ mutex_transfer_lock(mutex* lock, thread_id thread)
 }
 
 
-static inline void
-recursive_lock_transfer_lock(recursive_lock* lock, thread_id thread)
+static inline void recursive_lock_transfer_lock(recursive_lock* lock, thread_id thread)
 {
 	if (lock->recursion != 1)
 		panic("invalid recursion level for lock transfer!");

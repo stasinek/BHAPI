@@ -65,8 +65,7 @@ extern void *list_remove_head_item(struct list *list);
 extern void *list_remove_tail_item(struct list *list);
 extern void list_move_to_list(struct list *sourceList, struct list *targetList);
 
-static inline bool
-list_is_empty(struct list *list)
+static inline bool list_is_empty(struct list *list)
 {
 	return list->link.next == (list_link *)list;
 }

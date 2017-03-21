@@ -10,8 +10,7 @@
 #include <arch_cpu.h>
 
 
-void
-__arch_init_time(real_time_data* data, bool setDefaults)
+void __arch_init_time(real_time_data* data, bool setDefaults)
 {
 	uint32 conversionFactor;
 	uint64 conversionFactorNsecs;

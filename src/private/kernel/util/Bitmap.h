@@ -38,15 +38,13 @@ private:
 };
 
 
-status_t
-Bitmap::GetInitStatus()
+status_t Bitmap::GetInitStatus()
 {
 	return fInitStatus;
 }
 
 
-bool
-Bitmap::Get(int index) const
+bool Bitmap::Get(int index) const
 {
 	ASSERT(index < fSize);
 
@@ -56,8 +54,7 @@ Bitmap::Get(int index) const
 }
 
 
-void
-Bitmap::Set(int index)
+void Bitmap::Set(int index)
 {
 	ASSERT(index < fSize);
 
@@ -67,8 +64,7 @@ Bitmap::Set(int index)
 }
 
 
-void
-Bitmap::Clear(int index)
+void Bitmap::Clear(int index)
 {
 	ASSERT(index < fSize);
 

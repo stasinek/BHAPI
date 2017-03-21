@@ -200,8 +200,7 @@ static status_t get_path(dev_t device, ino_t node, const char *name,
 
 
 // find_dir_entry
-static status_t
-find_dir_entry(DIR *dir, const char *path, node_ref ref, string &name,
+static status_t find_dir_entry(DIR *dir, const char *path, node_ref ref, string &name,
 	bool skipDot)
 {
 	// find the entry
@@ -236,8 +235,7 @@ find_dir_entry(DIR *dir, const char *path, node_ref ref, string &name,
 }
 
 // find_dir_entry
-static status_t
-find_dir_entry(const char *path, node_ref ref, string &name, bool skipDot)
+static status_t find_dir_entry(const char *path, node_ref ref, string &name, bool skipDot)
 {
 	// open dir
 	DIR *dir = opendir(path);
@@ -253,8 +251,7 @@ find_dir_entry(const char *path, node_ref ref, string &name, bool skipDot)
 }
 
 
-static bool
-guess_normalized_dir_path(string path, node_ref ref, string& _normalizedPath)
+static bool guess_normalized_dir_path(string path, node_ref ref, string& _normalizedPath)
 {
 	// We assume the CWD is normalized and hope that the directory is an
 	// ancestor of it. We just chop off path components until we find a match or
@@ -284,8 +281,7 @@ guess_normalized_dir_path(string path, node_ref ref, string& _normalizedPath)
 
 
 // normalize_dir_path
-static status_t
-normalize_dir_path(string path, node_ref ref, string &normalizedPath)
+static status_t normalize_dir_path(string path, node_ref ref, string &normalizedPath)
 {
 	// get parent path
 	path += "/..";
@@ -333,8 +329,7 @@ normalize_dir_path(string path, node_ref ref, string &normalizedPath)
 }
 
 // normalize_dir_path
-static status_t
-normalize_dir_path(const char *path, string &normalizedPath)
+static status_t normalize_dir_path(const char *path, string &normalizedPath)
 {
 	// stat() the dir
 	struct stat st;
@@ -345,8 +340,7 @@ normalize_dir_path(const char *path, string &normalizedPath)
 }
 
 // normalize_entry_path
-static status_t
-normalize_entry_path(const char *path, string &normalizedPath)
+static status_t normalize_entry_path(const char *path, string &normalizedPath)
 {
 	const char *dirPath = NULL;
 	const char *leafName = NULL;
@@ -393,8 +387,7 @@ typedef map<node_ref, string> DirPathMap;
 static DirPathMap sDirPathMap;
 
 // get_path
-static status_t
-get_path(const node_ref *ref, const char *name, string &path)
+static status_t get_path(const node_ref *ref, const char *name, string &path)
 {
 	if (!ref && !name)
 		return B_BAD_VALUE;
@@ -443,8 +436,7 @@ get_path(const node_ref *ref, const char *name, string &path)
 }
 
 // get_path
-status_t
-BPrivate::get_path(int fd, const char *name, string &path)
+status_t BPrivate::get_path(int fd, const char *name, string &path)
 {
 	// get the node ref for the fd, if any, and the path part is not absolute
 	if (fd >= 0 && !(name && name[0] == '/')) {
@@ -478,8 +470,7 @@ BPrivate::get_path(int fd, const char *name, string &path)
 }
 
 // get_path
-static status_t
-get_path(dev_t device, ino_t directory, const char *name, string &path)
+static status_t get_path(dev_t device, ino_t directory, const char *name, string &path)
 {
 	node_ref ref;
 	ref.device = device;
@@ -489,8 +480,7 @@ get_path(dev_t device, ino_t directory, const char *name, string &path)
 }
 
 // add_dir_path
-static void
-add_dir_path(const char *path, const node_ref &ref)
+static void add_dir_path(const char *path, const node_ref &ref)
 {
 	// add the normalized path
 	string normalizedPath;
@@ -502,8 +492,7 @@ add_dir_path(const char *path, const node_ref &ref)
 // #pragma mark -
 
 // _kern_entry_ref_to_path
-status_t
-_kern_entry_ref_to_path(dev_t device, ino_t node, const char *leaf,
+status_t _kern_entry_ref_to_path(dev_t device, ino_t node, const char *leaf,
 	char *userPath, size_t pathLength)
 {
 	// get the path
@@ -523,8 +512,7 @@ _kern_entry_ref_to_path(dev_t device, ino_t node, const char *leaf,
 // #pragma mark -
 
 // _kern_create_dir
-status_t
-_kern_create_dir(int fd, const char *path, int perms)
+status_t _kern_create_dir(int fd, const char *path, int perms)
 {
 	// get a usable path
 	string realPath;
@@ -540,8 +528,7 @@ _kern_create_dir(int fd, const char *path, int perms)
 }
 
 // _kern_create_dir_entry_ref
-status_t
-_kern_create_dir_entry_ref(dev_t device, ino_t node, const char *name,
+status_t _kern_create_dir_entry_ref(dev_t device, ino_t node, const char *name,
 	int perms)
 {
 	// get a usable path
@@ -682,8 +669,7 @@ _kern_read_dir(int fd, struct dirent *buffer, size_t bufferSize,
 }
 
 // _kern_rewind_dir
-status_t
-_kern_rewind_dir(int fd)
+status_t _kern_rewind_dir(int fd)
 {
 	// get the descriptor
 	DirectoryDescriptor *descriptor
@@ -841,8 +827,7 @@ _kern_write(int fd, off_t pos, const void *buffer, size_t bufferSize)
 }
 
 // _kern_close
-status_t
-_kern_close(int fd)
+status_t _kern_close(int fd)
 {
 	return delete_descriptor(fd);
 }
@@ -866,8 +851,7 @@ _kern_dup(int fd)
 }
 
 // _kern_fsync
-status_t
-_kern_fsync(int fd)
+status_t _kern_fsync(int fd)
 {
 	// get the descriptor
 	FileDescriptor *descriptor
@@ -883,8 +867,7 @@ _kern_fsync(int fd)
 }
 
 // _kern_read_stat
-status_t
-_kern_read_stat(int fd, const char *path, bool traverseLink,
+status_t _kern_read_stat(int fd, const char *path, bool traverseLink,
 	struct stat *st, size_t statSize)
 {
 	if (path) {
@@ -915,8 +898,7 @@ _kern_read_stat(int fd, const char *path, bool traverseLink,
 }
 
 // _kern_write_stat
-status_t
-_kern_write_stat(int fd, const char *path, bool traverseLink,
+status_t _kern_write_stat(int fd, const char *path, bool traverseLink,
 	const struct stat *st, size_t statSize, int statMask)
 {
 	// get a usable path
@@ -1043,8 +1025,7 @@ _kern_write_stat(int fd, const char *path, bool traverseLink,
 // #pragma mark -
 
 // _kern_create_symlink
-status_t
-_kern_create_symlink(int fd, const char *path, const char *toPath, int mode)
+status_t _kern_create_symlink(int fd, const char *path, const char *toPath, int mode)
 {
 	// Note: path must not be NULL, so this will always work.
 	// get a usable path
@@ -1061,8 +1042,7 @@ _kern_create_symlink(int fd, const char *path, const char *toPath, int mode)
 }
 
 // _kern_read_link
-status_t
-_kern_read_link(int fd, const char *path, char *buffer, size_t *_bufferSize)
+status_t _kern_read_link(int fd, const char *path, char *buffer, size_t *_bufferSize)
 {
 	// get the path
 	string realPath;
@@ -1088,8 +1068,7 @@ _kern_read_link(int fd, const char *path, char *buffer, size_t *_bufferSize)
 }
 
 // _kern_unlink
-status_t
-_kern_unlink(int fd, const char *path)
+status_t _kern_unlink(int fd, const char *path)
 {
 	// get a usable path
 	string realPath;
@@ -1105,8 +1084,7 @@ _kern_unlink(int fd, const char *path)
 }
 
 // _kern_rename
-status_t
-_kern_rename(int oldDir, const char *oldPath, int newDir, const char *newPath)
+status_t _kern_rename(int oldDir, const char *oldPath, int newDir, const char *newPath)
 {
 	// get usable paths
 	string realOldPath;
@@ -1130,15 +1108,13 @@ _kern_rename(int oldDir, const char *oldPath, int newDir, const char *newPath)
 // #pragma mark -
 
 // _kern_lock_node
-status_t
-_kern_lock_node(int fd)
+status_t _kern_lock_node(int fd)
 {
 	return B_ERROR;
 }
 
 // _kern_unlock_node
-status_t
-_kern_unlock_node(int fd)
+status_t _kern_unlock_node(int fd)
 {
 	return B_ERROR;
 }

@@ -289,165 +289,144 @@ BVariant::operator=(const BVariant& other)
 }
 
 
-bool
-BVariant::operator!=(const BVariant& other) const
+bool BVariant::operator!=(const BVariant& other) const
 {
 	return !(*this == other);
 }
 
 
-void
-BVariant::SetTo(const BVariant& other)
+void BVariant::SetTo(const BVariant& other)
 {
 	Unset();
 	_SetTo(other);
 }
 
 
-void
-BVariant::SetTo(bool value)
+void BVariant::SetTo(bool value)
 {
 	Unset();
 	_SetTo(value);
 }
 
 
-void
-BVariant::SetTo(int8 value)
+void BVariant::SetTo(int8 value)
 {
 	Unset();
 	_SetTo(value);
 }
 
 
-void
-BVariant::SetTo(uint8 value)
+void BVariant::SetTo(uint8 value)
 {
 	Unset();
 	_SetTo(value);
 }
 
 
-void
-BVariant::SetTo(int16 value)
+void BVariant::SetTo(int16 value)
 {
 	Unset();
 	_SetTo(value);
 }
 
 
-void
-BVariant::SetTo(uint16 value)
+void BVariant::SetTo(uint16 value)
 {
 	Unset();
 	_SetTo(value);
 }
 
 
-void
-BVariant::SetTo(int32 value)
+void BVariant::SetTo(int32 value)
 {
 	Unset();
 	_SetTo(value);
 }
 
 
-void
-BVariant::SetTo(uint32 value)
+void BVariant::SetTo(uint32 value)
 {
 	Unset();
 	_SetTo(value);
 }
 
 
-void
-BVariant::SetTo(int64 value)
+void BVariant::SetTo(int64 value)
 {
 	Unset();
 	_SetTo(value);
 }
 
 
-void
-BVariant::SetTo(uint64 value)
+void BVariant::SetTo(uint64 value)
 {
 	Unset();
 	_SetTo(value);
 }
 
 
-void
-BVariant::SetTo(float value)
+void BVariant::SetTo(float value)
 {
 	Unset();
 	_SetTo(value);
 }
 
 
-void
-BVariant::SetTo(double value)
+void BVariant::SetTo(double value)
 {
 	Unset();
 	_SetTo(value);
 }
 
 
-void
-BVariant::SetTo(const BRect& value)
+void BVariant::SetTo(const BRect& value)
 {
 	Unset();
 	_SetTo(value.left, value.top, value.right, value.bottom);
 }
 
 
-void
-BVariant::SetTo(float left, float top, float right, float bottom)
+void BVariant::SetTo(float left, float top, float right, float bottom)
 {
 	Unset();
 	_SetTo(left, top, right, bottom);
 }
 
 
-void
-BVariant::SetTo(const void* value)
+void BVariant::SetTo(const void* value)
 {
 	Unset();
 	_SetTo(value);
 }
 
 
-void
-BVariant::SetTo(const char* value, uint32 flags)
+void BVariant::SetTo(const char* value, uint32 flags)
 {
 	Unset();
 	_SetTo(value, flags);
 }
 
 
-void
-BVariant::SetTo(BReferenceable* value, type_code type)
+void BVariant::SetTo(BReferenceable* value, type_code type)
 {
 	Unset();
 	_SetTo(value, type);
 }
 
 
-bool
-BVariant::IsNumber() const
+bool BVariant::IsNumber() const
 {
 	return TypeIsNumber(fType);
 }
 
 
-bool
-BVariant::IsInteger(bool* _isSigned) const
+bool BVariant::IsInteger(bool* _isSigned) const
 {
 	return TypeIsInteger(fType, _isSigned);
 }
 
 
-bool
-BVariant::IsFloat() const
+bool BVariant::IsFloat() const
 {
 	return TypeIsFloat(fType);
 }

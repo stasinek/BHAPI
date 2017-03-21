@@ -21,22 +21,19 @@ BTextView::LineBuffer::~LineBuffer()
 }
 
 
-void
-BTextView::LineBuffer::InsertLine(STELine* inLine, int32 index)
+void BTextView::LineBuffer::InsertLine(STELine* inLine, int32 index)
 {
 	InsertItemsAt(1, index, inLine);
 }
 
 
-void
-BTextView::LineBuffer::RemoveLines(int32 index, int32 count)
+void BTextView::LineBuffer::RemoveLines(int32 index, int32 count)
 {
 	RemoveItemsAt(count, index);
 }
 
 
-void
-BTextView::LineBuffer::RemoveLineRange(int32 fromOffset, int32 toOffset)
+void BTextView::LineBuffer::RemoveLineRange(int32 fromOffset, int32 toOffset)
 {
 	int32 fromLine = OffsetToLine(fromOffset);
 	int32 toLine = OffsetToLine(toOffset);
@@ -49,8 +46,7 @@ BTextView::LineBuffer::RemoveLineRange(int32 fromOffset, int32 toOffset)
 }
 
 
-int32
-BTextView::LineBuffer::OffsetToLine(int32 offset) const
+int32 BTextView::LineBuffer::OffsetToLine(int32 offset) const
 {
 	int32 minIndex = 0;
 	int32 maxIndex = fItemCount - 1;
@@ -71,8 +67,7 @@ BTextView::LineBuffer::OffsetToLine(int32 offset) const
 }
 
 
-int32
-BTextView::LineBuffer::PixelToLine(float pixel) const
+int32 BTextView::LineBuffer::PixelToLine(float pixel) const
 {
 	int32 minIndex = 0;
 	int32 maxIndex = fItemCount - 1;
@@ -93,16 +88,14 @@ BTextView::LineBuffer::PixelToLine(float pixel) const
 }
 
 
-void
-BTextView::LineBuffer::BumpOrigin(float delta, int32 index)
+void BTextView::LineBuffer::BumpOrigin(float delta, int32 index)
 {
 	for (long i = index; i < fItemCount; i++)
 		fBuffer[i].origin += delta;
 }
 
 
-void
-BTextView::LineBuffer::BumpOffset(int32 delta, int32 index)
+void BTextView::LineBuffer::BumpOffset(int32 delta, int32 index)
 {
 	for (long i = index; i < fItemCount; i++)
 		fBuffer[i].offset += delta;

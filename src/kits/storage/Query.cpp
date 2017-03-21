@@ -55,8 +55,7 @@ BQuery::~BQuery()
 
 
 // Resets the object to a uninitialized state.
-status_t
-BQuery::Clear()
+status_t BQuery::Clear()
 {
 	// close the currently open query
 	status_t error = B_OK;
@@ -79,16 +78,14 @@ BQuery::Clear()
 
 
 // Pushes an attribute name onto the predicate stack.
-status_t
-BQuery::PushAttr(const char* attrName)
+status_t BQuery::PushAttr(const char* attrName)
 {
 	return _PushNode(new(nothrow) AttributeNode(attrName), true);
 }
 
 
 // Pushes an operator onto the predicate stack.
-status_t
-BQuery::PushOp(query_op op)
+status_t BQuery::PushOp(query_op op)
 {
 	status_t error = B_OK;
 	switch (op) {
@@ -117,64 +114,56 @@ BQuery::PushOp(query_op op)
 
 
 // Pushes a uint32 onto the predicate stack.
-status_t
-BQuery::PushUInt32(uint32 value)
+status_t BQuery::PushUInt32(uint32 value)
 {
 	return _PushNode(new(nothrow) UInt32ValueNode(value), true);
 }
 
 
 // Pushes an int32 onto the predicate stack.
-status_t
-BQuery::PushInt32(int32 value)
+status_t BQuery::PushInt32(int32 value)
 {
 	return _PushNode(new(nothrow) Int32ValueNode(value), true);
 }
 
 
 // Pushes a uint64 onto the predicate stack.
-status_t
-BQuery::PushUInt64(uint64 value)
+status_t BQuery::PushUInt64(uint64 value)
 {
 	return _PushNode(new(nothrow) UInt64ValueNode(value), true);
 }
 
 
 // Pushes an int64 onto the predicate stack.
-status_t
-BQuery::PushInt64(int64 value)
+status_t BQuery::PushInt64(int64 value)
 {
 	return _PushNode(new(nothrow) Int64ValueNode(value), true);
 }
 
 
 // Pushes a float onto the predicate stack.
-status_t
-BQuery::PushFloat(float value)
+status_t BQuery::PushFloat(float value)
 {
 	return _PushNode(new(nothrow) FloatValueNode(value), true);
 }
 
 
 // Pushes a double onto the predicate stack.
-status_t
-BQuery::PushDouble(double value)
+status_t BQuery::PushDouble(double value)
 {
 	return _PushNode(new(nothrow) DoubleValueNode(value), true);
 }
 
 
 // Pushes a string onto the predicate stack.
-status_t
-BQuery::PushString(const char* value, bool caseInsensitive)
+status_t BQuery::PushString(const char* value, bool caseInsensitive)
 {
 	return _PushNode(new(nothrow) StringNode(value, caseInsensitive), true);
 }
 
 
 // Pushes a date onto the predicate stack.
-status_t
-BQuery::PushDate(const char* date)
+status_t BQuery::PushDate(const char* date)
 {
 	if (date == NULL || !date[0] || parsedate(date, time(NULL)) < 0)
 		return B_BAD_VALUE;
@@ -184,8 +173,7 @@ BQuery::PushDate(const char* date)
 
 
 // Assigns a volume to the BQuery object.
-status_t
-BQuery::SetVolume(const BVolume* volume)
+status_t BQuery::SetVolume(const BVolume* volume)
 {
 	if (volume == NULL)
 		return B_BAD_VALUE;
@@ -202,8 +190,7 @@ BQuery::SetVolume(const BVolume* volume)
 
 
 // Assigns the passed-in predicate expression.
-status_t
-BQuery::SetPredicate(const char* expression)
+status_t BQuery::SetPredicate(const char* expression)
 {
 	status_t error = (expression ? B_OK : B_BAD_VALUE);
 	if (error == B_OK && _HasFetched())
@@ -215,8 +202,7 @@ BQuery::SetPredicate(const char* expression)
 
 
 // Assigns the target messenger and makes the query live.
-status_t
-BQuery::SetTarget(BMessenger messenger)
+status_t BQuery::SetTarget(BMessenger messenger)
 {
 	status_t error = (messenger.IsValid() ? B_OK : B_BAD_VALUE);
 	if (error == B_OK && _HasFetched())
@@ -233,16 +219,14 @@ BQuery::SetTarget(BMessenger messenger)
 
 
 // Gets whether the query associated with this object is live.
-bool
-BQuery::IsLive() const
+bool BQuery::IsLive() const
 {
 	return fLive;
 }
 
 
 // Fills out buffer with the predicate string assigned to the BQuery object.
-status_t
-BQuery::GetPredicate(char* buffer, size_t length)
+status_t BQuery::GetPredicate(char* buffer, size_t length)
 {
 	status_t error = (buffer ? B_OK : B_BAD_VALUE);
 	if (error == B_OK)
@@ -259,8 +243,7 @@ BQuery::GetPredicate(char* buffer, size_t length)
 
 // Fills out the passed-in BString object with the predicate string
 // assigned to the BQuery object.
-status_t
-BQuery::GetPredicate(BString* predicate)
+status_t BQuery::GetPredicate(BString* predicate)
 {
 	status_t error = (predicate ? B_OK : B_BAD_VALUE);
 	if (error == B_OK)
@@ -296,8 +279,7 @@ BQuery::TargetDevice() const
 
 
 // Start fetching entries satisfying the predicate.
-status_t
-BQuery::Fetch()
+status_t BQuery::Fetch()
 {
 	if (_HasFetched())
 		return B_NOT_ALLOWED;
@@ -326,8 +308,7 @@ BQuery::Fetch()
 
 
 // Fills out entry with the next entry traversing symlinks if traverse is true.
-status_t
-BQuery::GetNextEntry(BEntry* entry, bool traverse)
+status_t BQuery::GetNextEntry(BEntry* entry, bool traverse)
 {
 	status_t error = (entry ? B_OK : B_BAD_VALUE);
 	if (error == B_OK) {
@@ -341,8 +322,7 @@ BQuery::GetNextEntry(BEntry* entry, bool traverse)
 
 
 // Fills out ref with the next entry as an entry_ref.
-status_t
-BQuery::GetNextRef(entry_ref* ref)
+status_t BQuery::GetNextRef(entry_ref* ref)
 {
 	status_t error = (ref ? B_OK : B_BAD_VALUE);
 	if (error == B_OK && !_HasFetched())
@@ -370,8 +350,7 @@ BQuery::GetNextRef(entry_ref* ref)
 
 // Fill out up to count entries into the array of dirent structs pointed
 // to by buffer.
-int32
-BQuery::GetNextDirents(struct dirent* buffer, size_t length, int32 count)
+int32 BQuery::GetNextDirents(struct dirent* buffer, size_t length, int32 count)
 {
 	if (!buffer)
 		return B_BAD_VALUE;
@@ -382,8 +361,7 @@ BQuery::GetNextDirents(struct dirent* buffer, size_t length, int32 count)
 
 
 // Rewinds the entry list back to the first entry.
-status_t
-BQuery::Rewind()
+status_t BQuery::Rewind()
 {
 	if (!_HasFetched())
 		return B_FILE_ERROR;
@@ -392,8 +370,7 @@ BQuery::Rewind()
 
 
 // Unimplemented method of the BEntryList interface.
-int32
-BQuery::CountEntries()
+int32 BQuery::CountEntries()
 {
 	return B_ERROR;
 }
@@ -403,8 +380,7 @@ BQuery::CountEntries()
 
 	\return \c true, if Fetch() was already called, \c false otherwise.
 */
-bool
-BQuery::_HasFetched() const
+bool BQuery::_HasFetched() const
 {
 	return fQueryFd >= 0;
 }
@@ -431,8 +407,7 @@ BQuery::_HasFetched() const
 	        allocate the predicate stack or push the node.
 	\retval B_NOT_ALLOWED _PushNode() was called after Fetch().
 */
-status_t
-BQuery::_PushNode(QueryNode* node, bool deleteOnError)
+status_t BQuery::_PushNode(QueryNode* node, bool deleteOnError)
 {
 	status_t error = (node ? B_OK : B_NO_MEMORY);
 	if (error == B_OK && _HasFetched())
@@ -461,8 +436,7 @@ BQuery::_PushNode(QueryNode* node, bool deleteOnError)
 	\retval B_OK Everything went fine.
 	\retval B_NO_MEMORY There was insufficient memory to store the predicate.
 */
-status_t
-BQuery::_SetPredicate(const char* expression)
+status_t BQuery::_SetPredicate(const char* expression)
 {
 	status_t error = B_OK;
 	// unset the old predicate
@@ -491,8 +465,7 @@ BQuery::_SetPredicate(const char* expression)
 	\retval B_NO_MEMORY There was insufficient memory.
 	\retval B_NOT_ALLOWED _EvaluateStack() was called after Fetch().
 */
-status_t
-BQuery::_EvaluateStack()
+status_t BQuery::_EvaluateStack()
 {
 	status_t error = B_OK;
 	if (fStack) {
@@ -519,8 +492,7 @@ BQuery::_EvaluateStack()
 
 	\param parsedPredicate The predicate string to fill out.
 */
-void
-BQuery::_ParseDates(BString& parsedPredicate)
+void BQuery::_ParseDates(BString& parsedPredicate)
 {
 	const char* start = fPredicate;
 	const char* pos = start;

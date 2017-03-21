@@ -361,8 +361,7 @@ HashMap<Key, Value>::~HashMap()
 
 // InitCheck
 template<typename Key, typename Value>
-status_t
-HashMap<Key, Value>::InitCheck() const
+status_t HashMap<Key, Value>::InitCheck() const
 {
 	return (fTable.InitCheck() && fElementArray.InitCheck()
 			? B_OK : B_NO_MEMORY);
@@ -370,8 +369,7 @@ HashMap<Key, Value>::InitCheck() const
 
 // Put
 template<typename Key, typename Value>
-status_t
-HashMap<Key, Value>::Put(const Key& key, Value value)
+status_t HashMap<Key, Value>::Put(const Key& key, Value value)
 {
 	Element* element = _FindElement(key);
 	if (element) {
@@ -403,8 +401,7 @@ HashMap<Key, Value>::Remove(const Key& key)
 
 // Clear
 template<typename Key, typename Value>
-void
-HashMap<Key, Value>::Clear()
+void HashMap<Key, Value>::Clear()
 {
 	fTable.RemoveAll();
 }
@@ -421,8 +418,7 @@ HashMap<Key, Value>::Get(const Key& key) const
 
 // Get
 template<typename Key, typename Value>
-bool
-HashMap<Key, Value>::Get(const Key& key, Value*& _value) const
+bool HashMap<Key, Value>::Get(const Key& key, Value*& _value) const
 {
 	if (Element* element = _FindElement(key)) {
 		_value = &element->fValue;
@@ -434,16 +430,14 @@ HashMap<Key, Value>::Get(const Key& key, Value*& _value) const
 
 // ContainsKey
 template<typename Key, typename Value>
-bool
-HashMap<Key, Value>::ContainsKey(const Key& key) const
+bool HashMap<Key, Value>::ContainsKey(const Key& key) const
 {
 	return _FindElement(key);
 }
 
 // Size
 template<typename Key, typename Value>
-int32
-HashMap<Key, Value>::Size() const
+int32 HashMap<Key, Value>::Size() const
 {
 	return fTable.CountElements();
 }

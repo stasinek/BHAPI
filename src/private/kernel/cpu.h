@@ -118,8 +118,7 @@ void cpu_idle(void);
 void cpu_wait(int32* variable, int32 test);
 
 
-static inline void
-cpu_pause(void)
+static inline void cpu_pause(void)
 {
 	arch_cpu_pause();
 }

@@ -10,7 +10,7 @@
 
 
 #include <KernelExport.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <util/kernel_cpp.h>
 
@@ -67,8 +67,7 @@ AreaKeeper::Map(const char *name, phys_addr_t physicalAddress, size_t numBytes,
 }
 
 
-void
-AreaKeeper::Detach()
+void AreaKeeper::Detach()
 {
 	fArea = -1;
 }

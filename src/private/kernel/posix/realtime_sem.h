@@ -9,7 +9,7 @@
 #include <sys/cdefs.h>
 #include <sys/types.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <musl/realtime_sem_defs.h>
 

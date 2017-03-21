@@ -84,8 +84,7 @@ BPushGameSound::LockNextPage(void **out_pagePtr, size_t *out_pageSize)
 }
 
 
-status_t
-BPushGameSound::UnlockPage(void *in_pagePtr)
+status_t BPushGameSound::UnlockPage(void *in_pagePtr)
 {
 	return (fPageLocked->RemoveItem(in_pagePtr)) ? B_OK : B_ERROR;
 }
@@ -100,8 +99,7 @@ BPushGameSound::LockForCyclic(void **out_basePtr, size_t *out_size)
 }
 
 
-status_t
-BPushGameSound::UnlockCyclic()
+status_t BPushGameSound::UnlockCyclic()
 {
 	return B_OK;
 }
@@ -125,31 +123,27 @@ BPushGameSound::Clone() const
 }
 
 
-status_t
-BPushGameSound::Perform(int32 selector, void *data)
+status_t BPushGameSound::Perform(int32 selector, void *data)
 {
 	return BStreamingGameSound::Perform(selector, data);
 }
 
 
-status_t
-BPushGameSound::SetParameters(size_t inBufferFrameCount,
+status_t BPushGameSound::SetParameters(size_t inBufferFrameCount,
 	const gs_audio_format *format, size_t inBufferCount)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-BPushGameSound::SetStreamHook(void (*hook)(void * inCookie, void * inBuffer,
+status_t BPushGameSound::SetStreamHook(void (*hook)(void * inCookie, void * inBuffer,
 	size_t inByteCount, BStreamingGameSound * me), void * cookie)
 {
 	return B_UNSUPPORTED;
 }
 
 
-void
-BPushGameSound::FillBuffer(void *inBuffer, size_t inByteCount)
+void BPushGameSound::FillBuffer(void *inBuffer, size_t inByteCount)
 {
 	size_t bytes = inByteCount;
 
@@ -181,8 +175,7 @@ BPushGameSound::FillBuffer(void *inBuffer, size_t inByteCount)
 }
 
 
-bool
-BPushGameSound::BytesReady(size_t * bytes)
+bool BPushGameSound::BytesReady(size_t * bytes)
 {
 	if (fPageLocked->CountItems() <= 0)
 		return true;
@@ -219,169 +212,145 @@ BPushGameSound::BytesReady(size_t * bytes)
  */
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_0(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_0(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_1(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_1(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_2(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_2(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_3(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_3(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_4(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_4(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_5(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_5(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_6(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_6(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_7(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_7(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_8(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_8(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_9(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_9(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_10(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_10(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_11(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_11(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_12(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_12(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_13(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_13(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_14(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_14(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_15(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_15(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_16(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_16(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_17(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_17(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_18(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_18(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_19(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_19(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_20(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_20(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_21(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_21(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_22(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_22(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BPushGameSound::_Reserved_BPushGameSound_23(int32 arg, ...)
+status_t BPushGameSound::_Reserved_BPushGameSound_23(int32 arg, ...)
 {
 	return B_ERROR;
 }

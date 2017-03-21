@@ -31,8 +31,7 @@ ChunkCache::~ChunkCache()
 }
 
 
-status_t
-ChunkCache::InitCheck() const
+status_t ChunkCache::InitCheck() const
 {
 	if (fRealTimePool == NULL)
 		return B_NO_MEMORY;
@@ -41,8 +40,7 @@ ChunkCache::InitCheck() const
 }
 
 
-void
-ChunkCache::MakeEmpty()
+void ChunkCache::MakeEmpty()
 {
 	ASSERT(IsLocked());
 
@@ -55,8 +53,7 @@ ChunkCache::MakeEmpty()
 }
 
 
-bool
-ChunkCache::SpaceLeft() const
+bool ChunkCache::SpaceLeft() const
 {
 	ASSERT(IsLocked());
 
@@ -95,8 +92,7 @@ ChunkCache::NextChunk(Reader* reader, void* cookie)
 /*	Moves the specified chunk to the unused list.
 	This means the chunk data can be overwritten again.
 */
-void
-ChunkCache::RecycleChunk(chunk_buffer* chunk)
+void ChunkCache::RecycleChunk(chunk_buffer* chunk)
 {
 	ASSERT(IsLocked());
 
@@ -108,8 +104,7 @@ ChunkCache::RecycleChunk(chunk_buffer* chunk)
 }
 
 
-bool
-ChunkCache::ReadNextChunk(Reader* reader, void* cookie)
+bool ChunkCache::ReadNextChunk(Reader* reader, void* cookie)
 {
 	ASSERT(IsLocked());
 

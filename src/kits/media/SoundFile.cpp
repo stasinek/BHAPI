@@ -34,8 +34,7 @@ BSoundFile::~BSoundFile()
 }
 
 
-status_t
-BSoundFile::InitCheck() const
+status_t BSoundFile::InitCheck() const
 {
 	if (!fSoundFile) {
 		return B_NO_INIT;
@@ -44,8 +43,7 @@ BSoundFile::InitCheck() const
 }
 
 
-status_t
-BSoundFile::SetTo(const entry_ref *ref,
+status_t BSoundFile::SetTo(const entry_ref *ref,
 				  uint32 open_mode)
 {
 	if (fMediaTrack) {
@@ -72,50 +70,43 @@ BSoundFile::SetTo(const entry_ref *ref,
 }
 
 
-int32
-BSoundFile::FileFormat() const
+int32 BSoundFile::FileFormat() const
 {
 	return fFileFormat;
 }
 
 
-int32
-BSoundFile::SamplingRate() const
+int32 BSoundFile::SamplingRate() const
 {
 	return fSamplingRate;
 }
 
 
-int32
-BSoundFile::CountChannels() const
+int32 BSoundFile::CountChannels() const
 {
 	return fChannelCount;
 }
 
 
-int32
-BSoundFile::SampleSize() const
+int32 BSoundFile::SampleSize() const
 {
 	return fSampleSize;
 }
 
 
-int32
-BSoundFile::ByteOrder() const
+int32 BSoundFile::ByteOrder() const
 {
 	return fByteOrder;
 }
 
 
-int32
-BSoundFile::SampleFormat() const
+int32 BSoundFile::SampleFormat() const
 {
 	return fSampleFormat;
 }
 
 
-int32
-BSoundFile::FrameSize() const
+int32 BSoundFile::FrameSize() const
 {
 	return fSampleSize * fChannelCount;
 }
@@ -128,15 +119,13 @@ BSoundFile::CountFrames() const
 }
 
 
-bool
-BSoundFile::IsCompressed() const
+bool BSoundFile::IsCompressed() const
 {
 	return fIsCompressed;
 }
 
 
-int32
-BSoundFile::CompressionType() const
+int32 BSoundFile::CompressionType() const
 {
 	return fCompressionType;
 }
@@ -149,56 +138,49 @@ BSoundFile::CompressionName() const
 }
 
 
-/* virtual */ int32
-BSoundFile::SetFileFormat(int32 format)
+/* virtual */ int32 BSoundFile::SetFileFormat(int32 format)
 {
 	fFileFormat = format;
 	return fFileFormat;
 }
 
 
-/* virtual */ int32
-BSoundFile::SetSamplingRate(int32 fps)
+/* virtual */ int32 BSoundFile::SetSamplingRate(int32 fps)
 {
 	fSamplingRate = fps;
 	return fSamplingRate;
 }
 
 
-/* virtual */ int32
-BSoundFile::SetChannelCount(int32 spf)
+/* virtual */ int32 BSoundFile::SetChannelCount(int32 spf)
 {
 	fChannelCount = spf;
 	return fChannelCount;
 }
 
 
-/* virtual */ int32
-BSoundFile::SetSampleSize(int32 bps)
+/* virtual */ int32 BSoundFile::SetSampleSize(int32 bps)
 {
 	fSampleSize = bps;
 	return fSampleSize;
 }
 
 
-/* virtual */ int32
-BSoundFile::SetByteOrder(int32 bord)
+/* virtual */ int32 BSoundFile::SetByteOrder(int32 bord)
 {
 	fByteOrder = bord;
 	return fByteOrder;
 }
 
 
-/* virtual */ int32
-BSoundFile::SetSampleFormat(int32 fmt)
+/* virtual */ int32 BSoundFile::SetSampleFormat(int32 fmt)
 {
 	fSampleFormat = fmt;
 	return fSampleFormat;
 }
 
 
-/* virtual */ int32
-BSoundFile::SetCompressionType(int32 type)
+/* virtual */ int32 BSoundFile::SetCompressionType(int32 type)
 {
 	return 0;
 }
@@ -211,8 +193,7 @@ BSoundFile::SetCompressionName(char *name)
 }
 
 
-/* virtual */ bool
-BSoundFile::SetIsCompressed(bool tf)
+/* virtual */ bool BSoundFile::SetIsCompressed(bool tf)
 {
 	return false;
 }
@@ -286,8 +267,7 @@ void BSoundFile::_ReservedSoundFile1() {}
 void BSoundFile::_ReservedSoundFile2() {}
 void BSoundFile::_ReservedSoundFile3() {}
 
-void
-BSoundFile::_init_raw_stats()
+void BSoundFile::_init_raw_stats()
 {
 	fSoundFile = 0;
 	fMediaFile = 0;
@@ -306,8 +286,7 @@ BSoundFile::_init_raw_stats()
 }
 
 
-status_t
-BSoundFile::_ref_to_file(const entry_ref *ref)
+status_t BSoundFile::_ref_to_file(const entry_ref *ref)
 {
 	status_t status;
 	BFile * file = new BFile(ref, B_READ_ONLY);

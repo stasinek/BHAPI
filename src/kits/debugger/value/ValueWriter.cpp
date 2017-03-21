@@ -41,8 +41,7 @@ ValueWriter::~ValueWriter()
 }
 
 
-status_t
-ValueWriter::WriteValue(ValueLocation* location, BVariant& value)
+status_t ValueWriter::WriteValue(ValueLocation* location, BVariant& value)
 {
 	if (!location->IsWritable())
 		return B_BAD_VALUE;

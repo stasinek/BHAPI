@@ -19,8 +19,7 @@ BErrorOutput::~BErrorOutput()
 }
 
 
-void
-BErrorOutput::PrintError(const char* format, ...)
+void BErrorOutput::PrintError(const char* format, ...)
 {
 	va_list args;
 	va_start(args, format);

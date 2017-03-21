@@ -39,8 +39,7 @@ ValueLoader::~ValueLoader()
 }
 
 
-status_t
-ValueLoader::LoadValue(ValueLocation* location, type_code valueType,
+status_t ValueLoader::LoadValue(ValueLocation* location, type_code valueType,
 	bool shortValueIsFine, BVariant& _value)
 {
 	static const size_t kMaxPieceSize = 16;
@@ -211,8 +210,7 @@ ValueLoader::LoadValue(ValueLocation* location, type_code valueType,
 }
 
 
-status_t
-ValueLoader::LoadRawValue(BVariant& location, size_t bytesToRead, void* _value)
+status_t ValueLoader::LoadRawValue(BVariant& location, size_t bytesToRead, void* _value)
 {
 	ssize_t bytesRead = fTeamMemory->ReadMemory(location.ToUInt64(),
 		_value, bytesToRead);
@@ -224,8 +222,7 @@ ValueLoader::LoadRawValue(BVariant& location, size_t bytesToRead, void* _value)
 }
 
 
-status_t
-ValueLoader::LoadStringValue(BVariant& location, size_t maxSize, BString& _value)
+status_t ValueLoader::LoadStringValue(BVariant& location, size_t maxSize, BString& _value)
 {
 	static const size_t kMaxStringSize = 255;
 

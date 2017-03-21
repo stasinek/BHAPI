@@ -69,8 +69,7 @@ BMediaEventLooper::BMediaEventLooper(uint32 apiVersion) :
 	fRealTimeQueue.SetCleanupHook(BMediaEventLooper::_CleanUpEntry, this);
 }
 
-/* virtual */ void
-BMediaEventLooper::NodeRegistered()
+/* virtual */ void BMediaEventLooper::NodeRegistered()
 {
 	CALLED();
 	// Calling Run() should be done by the derived class,
@@ -81,8 +80,7 @@ BMediaEventLooper::NodeRegistered()
 }
 
 
-/* virtual */ void
-BMediaEventLooper::Start(bigtime_t performance_time)
+/* virtual */ void BMediaEventLooper::Start(bigtime_t performance_time)
 {
 	CALLED();
 	// This hook function is called when a node is started
@@ -93,8 +91,7 @@ BMediaEventLooper::Start(bigtime_t performance_time)
 }
 
 
-/* virtual */ void
-BMediaEventLooper::Stop(bigtime_t performance_time,
+/* virtual */ void BMediaEventLooper::Stop(bigtime_t performance_time,
 						bool immediate)
 {
 	CALLED();
@@ -116,8 +113,7 @@ BMediaEventLooper::Stop(bigtime_t performance_time,
 }
 
 
-/* virtual */ void
-BMediaEventLooper::Seek(bigtime_t media_time,
+/* virtual */ void BMediaEventLooper::Seek(bigtime_t media_time,
 						bigtime_t performance_time)
 {
 	CALLED();
@@ -130,8 +126,7 @@ BMediaEventLooper::Seek(bigtime_t media_time,
 }
 
 
-/* virtual */ void
-BMediaEventLooper::TimeWarp(bigtime_t at_real_time,
+/* virtual */ void BMediaEventLooper::TimeWarp(bigtime_t at_real_time,
 							bigtime_t to_performance_time)
 {
 	CALLED();
@@ -153,8 +148,7 @@ BMediaEventLooper::TimeWarp(bigtime_t at_real_time,
 }
 
 
-/* virtual */ status_t
-BMediaEventLooper::AddTimer(bigtime_t at_performance_time,
+/* virtual */ status_t BMediaEventLooper::AddTimer(bigtime_t at_performance_time,
 							int32 cookie)
 {
 	CALLED();
@@ -167,8 +161,7 @@ BMediaEventLooper::AddTimer(bigtime_t at_performance_time,
 }
 
 
-/* virtual */ void
-BMediaEventLooper::SetRunMode(run_mode mode)
+/* virtual */ void BMediaEventLooper::SetRunMode(run_mode mode)
 {
 	CALLED();
 	// The SetRunMode() hook function is called when someone requests that your node's run mode be changed.
@@ -190,8 +183,7 @@ BMediaEventLooper::SetRunMode(run_mode mode)
 }
 
 
-/* virtual */ void
-BMediaEventLooper::CleanUpEvent(const media_timed_event *event)
+/* virtual */ void BMediaEventLooper::CleanUpEvent(const media_timed_event *event)
 {
 	CALLED();
 	// Implement this function to clean up after custom events you've created
@@ -208,8 +200,7 @@ BMediaEventLooper::OfflineTime()
 }
 
 
-/* virtual */ void
-BMediaEventLooper::ControlLoop()
+/* virtual */ void BMediaEventLooper::ControlLoop()
 {
 	CALLED();
 
@@ -310,16 +301,14 @@ BMediaEventLooper::RealTimeQueue()
 }
 
 
-int32
-BMediaEventLooper::Priority() const
+int32 BMediaEventLooper::Priority() const
 {
 	CALLED();
 	return fCurrentPriority;
 }
 
 
-int32
-BMediaEventLooper::RunState() const
+int32 BMediaEventLooper::RunState() const
 {
 	PRINT(6, "CALLED BMediaEventLooper::RunState()\n");
 	return fRunState;
@@ -350,8 +339,7 @@ BMediaEventLooper::SchedulingLatency() const
 }
 
 
-status_t
-BMediaEventLooper::SetPriority(int32 priority)
+status_t BMediaEventLooper::SetPriority(int32 priority)
 {
 	CALLED();
 
@@ -376,8 +364,7 @@ BMediaEventLooper::SetPriority(int32 priority)
 }
 
 
-void
-BMediaEventLooper::SetRunState(run_state state)
+void BMediaEventLooper::SetRunState(run_state state)
 {
 	CALLED();
 
@@ -390,8 +377,7 @@ BMediaEventLooper::SetRunState(run_state state)
 }
 
 
-void
-BMediaEventLooper::SetEventLatency(bigtime_t latency)
+void BMediaEventLooper::SetEventLatency(bigtime_t latency)
 {
 	CALLED();
 	// clamp to a valid value
@@ -403,24 +389,21 @@ BMediaEventLooper::SetEventLatency(bigtime_t latency)
 }
 
 
-void
-BMediaEventLooper::SetBufferDuration(bigtime_t duration)
+void BMediaEventLooper::SetBufferDuration(bigtime_t duration)
 {
 	CALLED();
 	fBufferDuration = duration;
 }
 
 
-void
-BMediaEventLooper::SetOfflineTime(bigtime_t offTime)
+void BMediaEventLooper::SetOfflineTime(bigtime_t offTime)
 {
 	CALLED();
 	fOfflineTime = offTime;
 }
 
 
-void
-BMediaEventLooper::Run()
+void BMediaEventLooper::Run()
 {
 	CALLED();
 
@@ -440,8 +423,7 @@ BMediaEventLooper::Run()
 }
 
 
-void
-BMediaEventLooper::Quit()
+void BMediaEventLooper::Quit()
 {
 	CALLED();
 
@@ -459,8 +441,7 @@ BMediaEventLooper::Quit()
 }
 
 
-void
-BMediaEventLooper::DispatchEvent(const media_timed_event *event,
+void BMediaEventLooper::DispatchEvent(const media_timed_event *event,
 								 bigtime_t lateness,
 								 bool realTimeEvent)
 {
@@ -501,8 +482,7 @@ BMediaEventLooper::DispatchEvent(const media_timed_event *event,
  *************************************************************/
 
 
-/* static */ int32
-BMediaEventLooper::_ControlThreadStart(void *arg)
+/* static */ int32 BMediaEventLooper::_ControlThreadStart(void *arg)
 {
 	CALLED();
 	((BMediaEventLooper *)arg)->SetRunState(B_STOPPED);
@@ -512,8 +492,7 @@ BMediaEventLooper::_ControlThreadStart(void *arg)
 }
 
 
-/* static */ void
-BMediaEventLooper::_CleanUpEntry(const media_timed_event *event,
+/* static */ void BMediaEventLooper::_CleanUpEntry(const media_timed_event *event,
 								 void *context)
 {
 	PRINT(6, "CALLED BMediaEventLooper::_CleanUpEntry()\n");
@@ -521,8 +500,7 @@ BMediaEventLooper::_CleanUpEntry(const media_timed_event *event,
 }
 
 
-void
-BMediaEventLooper::_DispatchCleanUp(const media_timed_event *event)
+void BMediaEventLooper::_DispatchCleanUp(const media_timed_event *event)
 {
 	PRINT(6, "CALLED BMediaEventLooper::_DispatchCleanUp()\n");
 
@@ -542,8 +520,7 @@ BMediaEventLooper &BMediaEventLooper::operator=(const BMediaEventLooper &)
  *************************************************************/
 
 
-status_t
-BMediaEventLooper::DeleteHook(BMediaNode *node)
+status_t BMediaEventLooper::DeleteHook(BMediaNode *node)
 {
 	CALLED();
 	// this is the DeleteHook that gets called by the media server

@@ -51,8 +51,7 @@ AddOnMonitorHandler::~AddOnMonitorHandler()
 }
 
 
-void
-AddOnMonitorHandler::MessageReceived(BMessage* msg)
+void AddOnMonitorHandler::MessageReceived(BMessage* msg)
 {
 	if (msg->what == B_PULSE)
 		_HandlePendingEntries();
@@ -61,8 +60,7 @@ AddOnMonitorHandler::MessageReceived(BMessage* msg)
 }
 
 
-status_t
-AddOnMonitorHandler::AddDirectory(const node_ref* nref, bool sync)
+status_t AddOnMonitorHandler::AddDirectory(const node_ref* nref, bool sync)
 {
 	// Keep the looper thread locked, since this method is likely to be called
 	// in a thread other than the looper thread. Otherwise we may access the
@@ -113,8 +111,7 @@ AddOnMonitorHandler::AddDirectory(const node_ref* nref, bool sync)
 }
 
 
-status_t
-AddOnMonitorHandler::AddAddOnDirectories(const char* leafPath)
+status_t AddOnMonitorHandler::AddAddOnDirectories(const char* leafPath)
 {
 	char parameter[32];
 	size_t parameterLength = sizeof(parameter);
@@ -169,27 +166,23 @@ AddOnMonitorHandler::AddAddOnDirectories(const char* leafPath)
 //	#pragma mark - AddOnMonitorHandler hooks
 
 
-void
-AddOnMonitorHandler::AddOnCreated(const add_on_entry_info* entryInfo)
+void AddOnMonitorHandler::AddOnCreated(const add_on_entry_info* entryInfo)
 {
 
 }
 
 
-void
-AddOnMonitorHandler::AddOnEnabled(const add_on_entry_info* entryInfo)
+void AddOnMonitorHandler::AddOnEnabled(const add_on_entry_info* entryInfo)
 {
 }
 
 
-void
-AddOnMonitorHandler::AddOnDisabled(const add_on_entry_info* entryInfo)
+void AddOnMonitorHandler::AddOnDisabled(const add_on_entry_info* entryInfo)
 {
 }
 
 
-void
-AddOnMonitorHandler::AddOnRemoved(const add_on_entry_info* entryInfo)
+void AddOnMonitorHandler::AddOnRemoved(const add_on_entry_info* entryInfo)
 {
 }
 
@@ -197,8 +190,7 @@ AddOnMonitorHandler::AddOnRemoved(const add_on_entry_info* entryInfo)
 //	#pragma mark - NodeMonitorHandler hooks
 
 
-void
-AddOnMonitorHandler::EntryCreated(const char* name, ino_t directory,
+void AddOnMonitorHandler::EntryCreated(const char* name, ino_t directory,
 	dev_t device, ino_t node)
 {
 	add_on_entry_info entryInfo;
@@ -209,8 +201,7 @@ AddOnMonitorHandler::EntryCreated(const char* name, ino_t directory,
 }
 
 
-void
-AddOnMonitorHandler::EntryRemoved(const char* name, ino_t directory,
+void AddOnMonitorHandler::EntryRemoved(const char* name, ino_t directory,
 	dev_t device, ino_t node)
 {
 	node_ref entryNodeRef;
@@ -273,8 +264,7 @@ AddOnMonitorHandler::EntryRemoved(const char* name, ino_t directory,
 }
 
 
-void
-AddOnMonitorHandler::EntryMoved(const char* name, const char* fromName,
+void AddOnMonitorHandler::EntryMoved(const char* name, const char* fromName,
 	ino_t fromDirectory, ino_t toDirectory, dev_t device, ino_t node,
 	dev_t nodeDevice)
 {
@@ -473,8 +463,7 @@ AddOnMonitorHandler::EntryMoved(const char* name, const char* fromName,
 }
 
 
-void
-AddOnMonitorHandler::StatChanged(ino_t node, dev_t device, int32 statFields)
+void AddOnMonitorHandler::StatChanged(ino_t node, dev_t device, int32 statFields)
 {
 	// This notification is received for the add-ons themselves.
 
@@ -506,8 +495,7 @@ AddOnMonitorHandler::StatChanged(ino_t node, dev_t device, int32 statFields)
 
 
 //!	Process pending entries.
-void
-AddOnMonitorHandler::_HandlePendingEntries()
+void AddOnMonitorHandler::_HandlePendingEntries()
 {
 	BDirectory directory;
 	EntryList::iterator iter = fPendingEntries.begin();
@@ -549,8 +537,7 @@ AddOnMonitorHandler::_HandlePendingEntries()
 }
 
 
-void
-AddOnMonitorHandler::_EntryCreated(add_on_entry_info& info)
+void AddOnMonitorHandler::_EntryCreated(add_on_entry_info& info)
 {
 	// put the new entry into the directory info
 	DirectoryList::iterator diter = fDirectories.begin();
@@ -594,8 +581,7 @@ AddOnMonitorHandler::_EntryCreated(add_on_entry_info& info)
 }
 
 
-bool
-AddOnMonitorHandler::_FindEntry(const node_ref& entry, const EntryList& list,
+bool AddOnMonitorHandler::_FindEntry(const node_ref& entry, const EntryList& list,
 	EntryList::iterator& it) const
 {
 	for (; EntryList::const_iterator(it) != list.end(); it++) {
@@ -606,8 +592,7 @@ AddOnMonitorHandler::_FindEntry(const node_ref& entry, const EntryList& list,
 }
 
 
-bool
-AddOnMonitorHandler::_FindEntry(const char* name, const EntryList& list,
+bool AddOnMonitorHandler::_FindEntry(const char* name, const EntryList& list,
 	EntryList::iterator& it) const
 {
 	for (; EntryList::const_iterator(it) != list.end(); it++) {
@@ -618,24 +603,21 @@ AddOnMonitorHandler::_FindEntry(const char* name, const EntryList& list,
 }
 
 
-bool
-AddOnMonitorHandler::_HasEntry(const node_ref& entry, EntryList& list) const
+bool AddOnMonitorHandler::_HasEntry(const node_ref& entry, EntryList& list) const
 {
 	EntryList::iterator it = list.begin();
 	return _FindEntry(entry, list, it);
 }
 
 
-bool
-AddOnMonitorHandler::_HasEntry(const char* name, EntryList& list) const
+bool AddOnMonitorHandler::_HasEntry(const char* name, EntryList& list) const
 {
 	EntryList::iterator it = list.begin();
 	return _FindEntry(name, list, it);
 }
 
 
-bool
-AddOnMonitorHandler::_FindDirectory(ino_t directory, dev_t device,
+bool AddOnMonitorHandler::_FindDirectory(ino_t directory, dev_t device,
 	DirectoryList::iterator& it) const
 {
 	node_ref nodeRef;
@@ -644,16 +626,14 @@ AddOnMonitorHandler::_FindDirectory(ino_t directory, dev_t device,
 }
 
 
-bool
-AddOnMonitorHandler::_FindDirectory(const node_ref& directoryNodeRef,
+bool AddOnMonitorHandler::_FindDirectory(const node_ref& directoryNodeRef,
 	DirectoryList::iterator& it) const
 {
 	return _FindDirectory(directoryNodeRef, it, fDirectories.end());
 }
 
 
-bool
-AddOnMonitorHandler::_FindDirectory(ino_t directory, dev_t device,
+bool AddOnMonitorHandler::_FindDirectory(ino_t directory, dev_t device,
 	DirectoryList::iterator& it,
 	const DirectoryList::const_iterator& end) const
 {
@@ -663,8 +643,7 @@ AddOnMonitorHandler::_FindDirectory(ino_t directory, dev_t device,
 }
 
 
-bool
-AddOnMonitorHandler::_FindDirectory(const node_ref& directoryNodeRef,
+bool AddOnMonitorHandler::_FindDirectory(const node_ref& directoryNodeRef,
 	DirectoryList::iterator& it,
 	const DirectoryList::const_iterator& end) const
 {
@@ -676,8 +655,7 @@ AddOnMonitorHandler::_FindDirectory(const node_ref& directoryNodeRef,
 }
 
 
-void
-AddOnMonitorHandler::_AddNewEntry(EntryList& list, add_on_entry_info& info)
+void AddOnMonitorHandler::_AddNewEntry(EntryList& list, add_on_entry_info& info)
 {
 	BDirectory directory(&info.dir_nref);
 	BEntry entry(&directory, info.name, true);

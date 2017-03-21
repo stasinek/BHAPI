@@ -48,8 +48,7 @@ SourceFile::~SourceFile()
 }
 
 
-status_t
-SourceFile::Init(const char* path)
+status_t SourceFile::Init(const char* path)
 {
 	// open the file
 	int fd = open(path, O_RDONLY);
@@ -118,30 +117,26 @@ SourceFile::Init(const char* path)
 }
 
 
-int32
-SourceFile::CountLines() const
+int32 SourceFile::CountLines() const
 {
 	return fLineCount;
 }
 
 
-const char*
-SourceFile::LineAt(int32 index) const
+const char*  SourceFile::LineAt(int32 index) const
 {
 	return index >= 0 && index < fLineCount
 		? fFileContent + fLineOffsets[index] : NULL;
 }
 
 
-int32
-SourceFile::LineLengthAt(int32 index) const
+int32 SourceFile::LineLengthAt(int32 index) const
 {
 	return index >= 0 && index < fLineCount
 		? fLineOffsets[index + 1] - fLineOffsets[index] - 1: 0;
 }
 
-void
-SourceFile::LastReferenceReleased()
+void SourceFile::LastReferenceReleased()
 {
 	fOwner->SourceFileUnused(this);
 	delete this;

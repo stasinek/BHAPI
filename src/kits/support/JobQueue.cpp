@@ -33,8 +33,7 @@ struct JobQueue::JobPriorityLess {
 		   runnable)
 		2. job ticket number (order in which jobs were added to the queue)
 */
-bool
-JobQueue::JobPriorityLess::operator()(const BJob* left, const BJob* right) const
+bool JobQueue::JobPriorityLess::operator()(const BJob* left, const BJob* right) const
 {
 	int32 difference = left->CountDependencies() - right->CountDependencies();
 	if (difference < 0)
@@ -70,15 +69,13 @@ JobQueue::~JobQueue()
 }
 
 
-status_t
-JobQueue::InitCheck() const
+status_t JobQueue::InitCheck() const
 {
 	return fInitStatus;
 }
 
 
-status_t
-JobQueue::AddJob(BJob* job)
+status_t JobQueue::AddJob(BJob* job)
 {
 	if (fQueuedJobs == NULL)
 		return B_NO_INIT;
@@ -104,8 +101,7 @@ JobQueue::AddJob(BJob* job)
 }
 
 
-status_t
-JobQueue::RemoveJob(BJob* job)
+status_t JobQueue::RemoveJob(BJob* job)
 {
 	if (fQueuedJobs == NULL)
 		return B_NO_INIT;
@@ -126,8 +122,7 @@ JobQueue::RemoveJob(BJob* job)
 }
 
 
-void
-JobQueue::JobSucceeded(BJob* job)
+void JobQueue::JobSucceeded(BJob* job)
 {
 	BAutolock lock(&fLock);
 	if (lock.IsLocked())
@@ -135,8 +130,7 @@ JobQueue::JobSucceeded(BJob* job)
 }
 
 
-void
-JobQueue::JobFailed(BJob* job)
+void JobQueue::JobFailed(BJob* job)
 {
 	BAutolock lock(&fLock);
 	if (lock.IsLocked())
@@ -155,8 +149,7 @@ JobQueue::Pop()
 }
 
 
-status_t
-JobQueue::Pop(bigtime_t timeout, bool returnWhenEmpty, BJob** _job)
+status_t JobQueue::Pop(bigtime_t timeout, bool returnWhenEmpty, BJob** _job)
 {
 	BAutolock lock(&fLock);
 	if (lock.IsLocked()) {
@@ -197,8 +190,7 @@ JobQueue::CountJobs() const
 }
 
 
-void
-JobQueue::Close()
+void JobQueue::Close()
 {
 	if (fHaveRunnableJobSem < 0)
 		return;
@@ -220,8 +212,7 @@ JobQueue::Close()
 }
 
 
-status_t
-JobQueue::_Init()
+status_t JobQueue::_Init()
 {
 	status_t result = fLock.InitCheck();
 	if (result != B_OK)
@@ -239,8 +230,7 @@ JobQueue::_Init()
 }
 
 
-void
-JobQueue::_RequeueDependantJobsOf(BJob* job)
+void JobQueue::_RequeueDependantJobsOf(BJob* job)
 {
 	while (BJob* dependantJob = job->DependantJobAt(0)) {
 		JobPriorityQueue::iterator found = fQueuedJobs->find(dependantJob);
@@ -266,8 +256,7 @@ JobQueue::_RequeueDependantJobsOf(BJob* job)
 }
 
 
-void
-JobQueue::_RemoveDependantJobsOf(BJob* job)
+void JobQueue::_RemoveDependantJobsOf(BJob* job)
 {
 	while (BJob* dependantJob = job->DependantJobAt(0)) {
 		try {

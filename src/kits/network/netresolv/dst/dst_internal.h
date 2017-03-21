@@ -145,8 +145,7 @@ void      dst_s_put_int32( u_int8_t *buf, const u_int32_t val);
 #else
 # define DUMP(a,b,c,d)
 #endif
-void
-dst_s_dump(const int mode, const u_char *data, const int size,
+void dst_s_dump(const int mode, const u_char *data, const int size,
             const char *msg);
 
 

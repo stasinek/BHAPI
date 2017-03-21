@@ -253,8 +253,7 @@ private:
 };
 
 
-inline void
-TraceOutput::Print(const char* format,...)
+inline void TraceOutput::Print(const char* format,...)
 {
 	va_list args;
 	va_start(args, format);

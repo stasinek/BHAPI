@@ -211,8 +211,7 @@ BGopherRequest::~BGopherRequest()
 }
 
 
-status_t
-BGopherRequest::Stop()
+status_t BGopherRequest::Stop()
 {
 	if (fSocket != NULL) {
 		fSocket->Disconnect();
@@ -229,8 +228,7 @@ BGopherRequest::Result() const
 }
 
 
-status_t
-BGopherRequest::_ProtocolLoop()
+status_t BGopherRequest::_ProtocolLoop()
 {
 	if (fSocket == NULL)
 		return B_NO_MEMORY;
@@ -388,8 +386,7 @@ BGopherRequest::_ProtocolLoop()
 }
 
 
-void
-BGopherRequest::_SendRequest()
+void BGopherRequest::_SendRequest()
 {
 	BString request;
 
@@ -404,8 +401,7 @@ BGopherRequest::_SendRequest()
 }
 
 
-bool
-BGopherRequest::_NeedsParsing()
+bool BGopherRequest::_NeedsParsing()
 {
 	if (fItemType == GOPHER_TYPE_DIRECTORY
 		|| fItemType == GOPHER_TYPE_QUERY)
@@ -414,8 +410,7 @@ BGopherRequest::_NeedsParsing()
 }
 
 
-bool
-BGopherRequest::_NeedsLastDotStrip()
+bool BGopherRequest::_NeedsLastDotStrip()
 {
 	if (fItemType == GOPHER_TYPE_DIRECTORY
 		|| fItemType == GOPHER_TYPE_QUERY
@@ -425,8 +420,7 @@ BGopherRequest::_NeedsLastDotStrip()
 }
 
 
-void
-BGopherRequest::_ParseInput(bool last)
+void BGopherRequest::_ParseInput(bool last)
 {
 	BString line;
 

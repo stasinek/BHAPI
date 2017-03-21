@@ -90,8 +90,7 @@ GetFormatForTypeAndFormat(type_code type, integer_format format,
 }
 
 
-/*static*/ bool
-IntegerFormatter::FormatValue(const BVariant& value, integer_format format,
+/*static*/ bool IntegerFormatter::FormatValue(const BVariant& value, integer_format format,
 	char* buffer, size_t bufferSize)
 {
 	bool isSigned;

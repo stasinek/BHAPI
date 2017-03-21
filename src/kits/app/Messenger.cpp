@@ -105,7 +105,7 @@ BMessenger::BMessenger(__be_int64 targetTeam,  __be_uint64 targetToken, bigtime_
 }
 
 
-void
+void 
 BMessenger::InitData(const BHandler *handler, const BLooper *looper, status_t *perr)
 {
     if(fHandlerToken != B_MAXUINT64) bhapi::unref_handler(fHandlerToken);
@@ -196,7 +196,7 @@ BMessenger::operator=(const BMessenger &from)
 }
 
 
-bool
+bool 
 BMessenger::operator==(const BMessenger &other) const
 {
     if(fTargetTeam != other.fTargetTeam) return false;
@@ -204,7 +204,7 @@ BMessenger::operator==(const BMessenger &other) const
 }
 
 
-bool
+bool 
 BMessenger::operator!=(const BMessenger &other) const
 {
     if(fTargetTeam != other.fTargetTeam) return true;
@@ -218,14 +218,14 @@ BMessenger::~BMessenger()
 }
 
 
-bool
+bool 
 BMessenger::IsTargetLocal() const
 {
     return(fTargetTeam == bhapi::get_current_team_id());
 }
 
 
-bool
+bool 
 BMessenger::IsAtTargetLooperThread() const
 {
     if(fTargetTeam != bhapi::get_current_team_id()) return false;
@@ -245,14 +245,14 @@ BMessenger::Target(BLooper **looper) const
 }
 
 
-bool
+bool 
 BMessenger::LockTarget() const
 {
     return(LockTargetWithTimeout(B_INFINITE_TIMEOUT) == B_OK);
 }
 
 
-status_t
+status_t 
 BMessenger::LockTargetWithTimeout(bigtime_t timeout) const
 {
     if(!IsTargetLocal()) return B_ERROR;
@@ -265,7 +265,7 @@ BMessenger::LockTargetWithTimeout(bigtime_t timeout) const
 }
 
 
-bool
+bool 
 BMessenger::IsValid() const
 {
     if(IsTargetLocal()) return(fLooperToken != B_MAXUINT64);
@@ -273,14 +273,14 @@ BMessenger::IsValid() const
 }
 
 
-status_t
+status_t 
 BMessenger::SendMessage(__be_uint32 command) const
 {
     BMessage msg(command);
     return SendMessage(&msg, NULL, B_INFINITE_TIMEOUT);
 }
 
-status_t
+status_t 
 BMessenger::SendMessage(__be_uint32 command, BHandler *reply_to = NULL) const
 {
     BMessage msg(command);
@@ -288,14 +288,14 @@ BMessenger::SendMessage(__be_uint32 command, BHandler *reply_to = NULL) const
 }
 
 
-status_t
+status_t 
 BMessenger::SendMessage(const BMessage *a_message) const
 {
 return BMessenger::SendMessage(a_message,NULL,B_INFINITE_TIMEOUT);
 
 }
 
-status_t
+status_t 
 BMessenger::SendMessage(const BMessage *a_message,
             BHandler *reply_to = NULL,
             bigtime_t timeout = B_INFINITE_TIMEOUT) const
@@ -319,13 +319,13 @@ BMessenger::SendMessage(const BMessage *a_message,
     return _SendMessage(&aMsg, replyToken, timeout);
 }
 
-status_t
+status_t 
 BMessenger::SendMessage(const BMessage *a_message, BMessage *reply_message) const
 {
 return BMessenger::SendMessage(a_message,reply_message,B_INFINITE_TIMEOUT,B_INFINITE_TIMEOUT);
 }
 
-status_t
+status_t 
 BMessenger::SendMessage(const BMessage *a_message, BMessage *reply_message, bigtime_t sendTimeout = B_INFINITE_TIMEOUT, bigtime_t replyTimeout = B_INFINITE_TIMEOUT) const
 {
     if(a_message == NULL || reply_message == NULL)
@@ -366,7 +366,7 @@ BMessenger::SendMessage(const BMessage *a_message, BMessage *reply_message, bigt
 }
 
 
-status_t
+status_t 
 BMessenger::_SendMessage(const BMessage *a_message,
               __be_uint64 replyToken,
              bigtime_t timeout) const
@@ -392,7 +392,7 @@ BMessenger::_SendMessage(const BMessage *a_message,
 }
 
 
-status_t
+status_t 
 BMessenger::_SendMessageToPort(void *port, const BMessage *msg,  __be_uint32 flags, bigtime_t timeout)
 {
     if(!port || !msg) return B_ERROR;
@@ -520,7 +520,7 @@ BMessenger::FlattenedSize() const
 }
 
 
-bool
+bool 
 BMessenger::Flatten(char *buffer, size_t bufferSize) const
 {
     if(buffer == NULL || bufferSize < FlattenedSize()) return false;
@@ -538,7 +538,7 @@ BMessenger::Flatten(char *buffer, size_t bufferSize) const
 }
 
 
-bool
+bool 
 BMessenger::Unflatten(const char *buffer, size_t bufferSize)
 {
     if(buffer == NULL || bufferSize < FlattenedSize()) return false;
@@ -598,7 +598,7 @@ BMessenger::Unflatten(const char *buffer, size_t bufferSize)
 }
 
 
-void
+void 
 BMessenger::PrintToStream() const
 {
     BHAPI_OUTPUT("******** BMessenger Debug Output **********\n");

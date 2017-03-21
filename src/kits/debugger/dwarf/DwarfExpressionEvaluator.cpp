@@ -69,16 +69,14 @@ struct DwarfExpressionEvaluator::EvaluationException {
 // #pragma mark - DwarfExpressionEvaluator
 
 
-void
-DwarfExpressionEvaluator::_AssertMinStackSize(size_t size) const
+void DwarfExpressionEvaluator::_AssertMinStackSize(size_t size) const
 {
 	if (fStackSize < size)
 		throw EvaluationException("pop from empty stack");
 }
 
 
-void
-DwarfExpressionEvaluator::_Push(target_addr_t value)
+void DwarfExpressionEvaluator::_Push(target_addr_t value)
 {
 	// resize the stack, if we hit the capacity
 	if (fStackSize == fStackCapacity) {
@@ -124,8 +122,7 @@ DwarfExpressionEvaluator::~DwarfExpressionEvaluator()
 }
 
 
-status_t
-DwarfExpressionEvaluator::Push(target_addr_t value)
+status_t DwarfExpressionEvaluator::Push(target_addr_t value)
 {
 	try {
 		_Push(value);
@@ -138,8 +135,7 @@ DwarfExpressionEvaluator::Push(target_addr_t value)
 }
 
 
-status_t
-DwarfExpressionEvaluator::Evaluate(const void* expression, size_t size,
+status_t DwarfExpressionEvaluator::Evaluate(const void* expression, size_t size,
 	target_addr_t& _result)
 {
 	fDataReader.SetTo(expression, size, fContext->AddressSize());
@@ -160,8 +156,7 @@ DwarfExpressionEvaluator::Evaluate(const void* expression, size_t size,
 }
 
 
-status_t
-DwarfExpressionEvaluator::EvaluateLocation(const void* expression, size_t size,
+status_t DwarfExpressionEvaluator::EvaluateLocation(const void* expression, size_t size,
 	ValueLocation& _location)
 {
 	_location.Clear();
@@ -264,8 +259,7 @@ DwarfExpressionEvaluator::EvaluateLocation(const void* expression, size_t size,
 }
 
 
-status_t
-DwarfExpressionEvaluator::_Evaluate(ValuePieceLocation* _piece)
+status_t DwarfExpressionEvaluator::_Evaluate(ValuePieceLocation* _piece)
 {
 	TRACE_EXPR_ONLY({
 		TRACE_EXPR("DwarfExpressionEvaluator::_Evaluate(%p, %" B_PRIdOFF ")\n",
@@ -701,8 +695,7 @@ DwarfExpressionEvaluator::_Evaluate(ValuePieceLocation* _piece)
 }
 
 
-void
-DwarfExpressionEvaluator::_DereferenceAddress(uint8 addressSize)
+void DwarfExpressionEvaluator::_DereferenceAddress(uint8 addressSize)
 {
 	uint32 valueType;
 	switch (addressSize) {
@@ -736,8 +729,7 @@ DwarfExpressionEvaluator::_DereferenceAddress(uint8 addressSize)
 }
 
 
-void
-DwarfExpressionEvaluator::_DereferenceAddressSpaceAddress(uint8 addressSize)
+void DwarfExpressionEvaluator::_DereferenceAddressSpaceAddress(uint8 addressSize)
 {
 	uint32 valueType;
 	switch (addressSize) {
@@ -772,8 +764,7 @@ DwarfExpressionEvaluator::_DereferenceAddressSpaceAddress(uint8 addressSize)
 }
 
 
-void
-DwarfExpressionEvaluator::_PushRegister(uint32 reg, target_addr_t offset)
+void DwarfExpressionEvaluator::_PushRegister(uint32 reg, target_addr_t offset)
 {
 	BVariant value;
 	if (!fContext->TargetInterface()->GetRegisterValue(reg, value))
@@ -783,8 +774,7 @@ DwarfExpressionEvaluator::_PushRegister(uint32 reg, target_addr_t offset)
 }
 
 
-void
-DwarfExpressionEvaluator::_Call(uint64 offset, uint8 refType)
+void DwarfExpressionEvaluator::_Call(uint64 offset, uint8 refType)
 {
 	if (fDataReader.HasOverflow())
 		throw EvaluationException("unexpected end of expression");

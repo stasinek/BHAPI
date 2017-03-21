@@ -191,16 +191,14 @@ TTrackerState::~TTrackerState()
 }
 
 
-void
-TTrackerState::SaveSettings(bool onlyIfNonDefault)
+void TTrackerState::SaveSettings(bool onlyIfNonDefault)
 {
 	if (fSettingsLoaded)
 		_inherited::SaveSettings(onlyIfNonDefault);
 }
 
 
-void
-TTrackerState::LoadSettingsIfNeeded()
+void TTrackerState::LoadSettingsIfNeeded()
 {
 	if (fSettingsLoaded)
 		return;
@@ -274,92 +272,79 @@ TrackerSettings::TrackerSettings()
 }
 
 
-void
-TrackerSettings::SaveSettings(bool onlyIfNonDefault)
+void TrackerSettings::SaveSettings(bool onlyIfNonDefault)
 {
 	gTrackerState.SaveSettings(onlyIfNonDefault);
 }
 
 
-bool
-TrackerSettings::ShowDisksIcon()
+bool TrackerSettings::ShowDisksIcon()
 {
 	return gTrackerState.fShowDisksIcon->Value();
 }
 
 
-void
-TrackerSettings::SetShowDisksIcon(bool enabled)
+void TrackerSettings::SetShowDisksIcon(bool enabled)
 {
 	gTrackerState.fShowDisksIcon->SetValue(enabled);
 }
 
 
-bool
-TrackerSettings::DesktopFilePanelRoot()
+bool TrackerSettings::DesktopFilePanelRoot()
 {
 	return gTrackerState.fDesktopFilePanelRoot->Value();
 }
 
 
-void
-TrackerSettings::SetDesktopFilePanelRoot(bool enabled)
+void TrackerSettings::SetDesktopFilePanelRoot(bool enabled)
 {
 	gTrackerState.fDesktopFilePanelRoot->SetValue(enabled);
 }
 
 
-bool
-TrackerSettings::MountVolumesOntoDesktop()
+bool TrackerSettings::MountVolumesOntoDesktop()
 {
 	return gTrackerState.fMountVolumesOntoDesktop->Value();
 }
 
 
-void
-TrackerSettings::SetMountVolumesOntoDesktop(bool enabled)
+void TrackerSettings::SetMountVolumesOntoDesktop(bool enabled)
 {
 	gTrackerState.fMountVolumesOntoDesktop->SetValue(enabled);
 }
 
 
-bool
-TrackerSettings::MountSharedVolumesOntoDesktop()
+bool TrackerSettings::MountSharedVolumesOntoDesktop()
 {
 	return gTrackerState.fMountSharedVolumesOntoDesktop->Value();
 }
 
 
-void
-TrackerSettings::SetMountSharedVolumesOntoDesktop(bool enabled)
+void TrackerSettings::SetMountSharedVolumesOntoDesktop(bool enabled)
 {
 	gTrackerState.fMountSharedVolumesOntoDesktop->SetValue(enabled);
 }
 
 
-bool
-TrackerSettings::EjectWhenUnmounting()
+bool TrackerSettings::EjectWhenUnmounting()
 {
 	return gTrackerState.fEjectWhenUnmounting->Value();
 }
 
 
-void
-TrackerSettings::SetEjectWhenUnmounting(bool enabled)
+void TrackerSettings::SetEjectWhenUnmounting(bool enabled)
 {
 	gTrackerState.fEjectWhenUnmounting->SetValue(enabled);
 }
 
 
-bool
-TrackerSettings::ShowVolumeSpaceBar()
+bool TrackerSettings::ShowVolumeSpaceBar()
 {
 	return gTrackerState.fShowVolumeSpaceBar->Value();
 }
 
 
-void
-TrackerSettings::SetShowVolumeSpaceBar(bool enabled)
+void TrackerSettings::SetShowVolumeSpaceBar(bool enabled)
 {
 	gTrackerState.fShowVolumeSpaceBar->SetValue(enabled);
 }
@@ -372,8 +357,7 @@ TrackerSettings::UsedSpaceColor()
 }
 
 
-void
-TrackerSettings::SetUsedSpaceColor(rgb_color color)
+void TrackerSettings::SetUsedSpaceColor(rgb_color color)
 {
 	gTrackerState.fUsedSpaceColor->ValueChanged(ColorToValue(color));
 }
@@ -386,8 +370,7 @@ TrackerSettings::FreeSpaceColor()
 }
 
 
-void
-TrackerSettings::SetFreeSpaceColor(rgb_color color)
+void TrackerSettings::SetFreeSpaceColor(rgb_color color)
 {
 	gTrackerState.fFreeSpaceColor->ValueChanged(ColorToValue(color));
 }
@@ -400,36 +383,31 @@ TrackerSettings::WarningSpaceColor()
 }
 
 
-void
-TrackerSettings::SetWarningSpaceColor(rgb_color color)
+void TrackerSettings::SetWarningSpaceColor(rgb_color color)
 {
 	gTrackerState.fWarningSpaceColor->ValueChanged(ColorToValue(color));
 }
 
 
-bool
-TrackerSettings::ShowFullPathInTitleBar()
+bool TrackerSettings::ShowFullPathInTitleBar()
 {
 	return gTrackerState.fShowFullPathInTitleBar->Value();
 }
 
 
-void
-TrackerSettings::SetShowFullPathInTitleBar(bool enabled)
+void TrackerSettings::SetShowFullPathInTitleBar(bool enabled)
 {
 	gTrackerState.fShowFullPathInTitleBar->SetValue(enabled);
 }
 
 
-bool
-TrackerSettings::SortFolderNamesFirst()
+bool TrackerSettings::SortFolderNamesFirst()
 {
 	return gTrackerState.fSortFolderNamesFirst->Value();
 }
 
 
-void
-TrackerSettings::SetSortFolderNamesFirst(bool enabled)
+void TrackerSettings::SetSortFolderNamesFirst(bool enabled)
 {
 	gTrackerState.fSortFolderNamesFirst->SetValue(enabled);
 	NameAttributeText::SetSortFolderNamesFirst(enabled);
@@ -437,92 +415,79 @@ TrackerSettings::SetSortFolderNamesFirst(bool enabled)
 }
 
 
-bool
-TrackerSettings::HideDotFiles()
+bool TrackerSettings::HideDotFiles()
 {
 	return gTrackerState.fHideDotFiles->Value();
 }
 
 
-void
-TrackerSettings::SetHideDotFiles(bool hide)
+void TrackerSettings::SetHideDotFiles(bool hide)
 {
 	gTrackerState.fHideDotFiles->SetValue(hide);
 }
 
 
-bool
-TrackerSettings::TypeAheadFiltering()
+bool TrackerSettings::TypeAheadFiltering()
 {
 	return gTrackerState.fTypeAheadFiltering->Value();
 }
 
 
-void
-TrackerSettings::SetTypeAheadFiltering(bool enabled)
+void TrackerSettings::SetTypeAheadFiltering(bool enabled)
 {
 	gTrackerState.fTypeAheadFiltering->SetValue(enabled);
 }
 
 
-bool
-TrackerSettings::ShowSelectionWhenInactive()
+bool TrackerSettings::ShowSelectionWhenInactive()
 {
 	return gTrackerState.fShowSelectionWhenInactive->Value();
 }
 
 
-void
-TrackerSettings::SetShowSelectionWhenInactive(bool enabled)
+void TrackerSettings::SetShowSelectionWhenInactive(bool enabled)
 {
 	gTrackerState.fShowSelectionWhenInactive->SetValue(enabled);
 }
 
 
-bool
-TrackerSettings::TransparentSelection()
+bool TrackerSettings::TransparentSelection()
 {
 	return gTrackerState.fTransparentSelection->Value();
 }
 
 
-void
-TrackerSettings::SetTransparentSelection(bool enabled)
+void TrackerSettings::SetTransparentSelection(bool enabled)
 {
 	gTrackerState.fTransparentSelection->SetValue(enabled);
 }
 
 
-bool
-TrackerSettings::SingleWindowBrowse()
+bool TrackerSettings::SingleWindowBrowse()
 {
 	return gTrackerState.fSingleWindowBrowse->Value();
 }
 
 
-void
-TrackerSettings::SetSingleWindowBrowse(bool enabled)
+void TrackerSettings::SetSingleWindowBrowse(bool enabled)
 {
 	gTrackerState.fSingleWindowBrowse->SetValue(enabled);
 }
 
 
-bool
-TrackerSettings::ShowNavigator()
+bool TrackerSettings::ShowNavigator()
 {
 	return gTrackerState.fShowNavigator->Value();
 }
 
 
-void
-TrackerSettings::SetShowNavigator(bool enabled)
+void TrackerSettings::SetShowNavigator(bool enabled)
 {
 	gTrackerState.fShowNavigator->SetValue(enabled);
 }
 
 
-void
-TrackerSettings::RecentCounts(int32* applications, int32* documents,
+void TrackerSettings::RecentCounts(int32* applications, int32* documents,
 	int32* folders)
 {
 	if (applications != NULL)
@@ -536,50 +501,43 @@ TrackerSettings::RecentCounts(int32* applications, int32* documents,
 }
 
 
-void
-TrackerSettings::SetRecentApplicationsCount(int32 count)
+void TrackerSettings::SetRecentApplicationsCount(int32 count)
 {
 	gTrackerState.fRecentApplicationsCount->ValueChanged(count);
 }
 
 
-void
-TrackerSettings::SetRecentDocumentsCount(int32 count)
+void TrackerSettings::SetRecentDocumentsCount(int32 count)
 {
 	gTrackerState.fRecentDocumentsCount->ValueChanged(count);
 }
 
 
-void
-TrackerSettings::SetRecentFoldersCount(int32 count)
+void TrackerSettings::SetRecentFoldersCount(int32 count)
 {
 	gTrackerState.fRecentFoldersCount->ValueChanged(count);
 }
 
 
-bool
-TrackerSettings::DontMoveFilesToTrash()
+bool TrackerSettings::DontMoveFilesToTrash()
 {
 	return gTrackerState.fDontMoveFilesToTrash->Value();
 }
 
 
-void
-TrackerSettings::SetDontMoveFilesToTrash(bool enabled)
+void TrackerSettings::SetDontMoveFilesToTrash(bool enabled)
 {
 	gTrackerState.fDontMoveFilesToTrash->SetValue(enabled);
 }
 
 
-bool
-TrackerSettings::AskBeforeDeleteFile()
+bool TrackerSettings::AskBeforeDeleteFile()
 {
 	return gTrackerState.fAskBeforeDeleteFile->Value();
 }
 
 
-void
-TrackerSettings::SetAskBeforeDeleteFile(bool enabled)
+void TrackerSettings::SetAskBeforeDeleteFile(bool enabled)
 {
 	gTrackerState.fAskBeforeDeleteFile->SetValue(enabled);
 }

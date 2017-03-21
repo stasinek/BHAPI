@@ -36,8 +36,7 @@ status_t __set_scheduler_mode(int32 mode);
 int32 __get_scheduler_mode(void);
 
 
-int32
-suggest_thread_priority(uint32 what, int32 period, bigtime_t jitter,
+int32 suggest_thread_priority(uint32 what, int32 period, bigtime_t jitter,
 	bigtime_t length)
 {
 	int i;
@@ -71,8 +70,7 @@ __set_scheduler_mode(int32 mode)
 }
 
 
-int32
-__get_scheduler_mode(void)
+int32 __get_scheduler_mode(void)
 {
 	return _kern_get_scheduler_mode();
 }

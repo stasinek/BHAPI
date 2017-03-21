@@ -263,8 +263,7 @@ WeakPointer::Get()
 }
 
 
-inline bool
-WeakPointer::Put()
+inline bool WeakPointer::Put()
 {
 	if (atomic_add(&fUseCount, -1) == 1) {
 		delete fObject;
@@ -275,15 +274,13 @@ WeakPointer::Put()
 }
 
 
-inline int32
-WeakPointer::UseCount() const
+inline int32 WeakPointer::UseCount() const
 {
 	return fUseCount;
 }
 
 
-inline void
-WeakPointer::GetUnchecked()
+inline void WeakPointer::GetUnchecked()
 {
 	atomic_add(&fUseCount, 1);
 }
@@ -307,8 +304,7 @@ BWeakReferenceable::~BWeakReferenceable()
 }
 
 
-inline status_t
-BWeakReferenceable::InitCheck()
+inline status_t BWeakReferenceable::InitCheck()
 {
 	if (fPointer == NULL)
 		return B_NO_MEMORY;

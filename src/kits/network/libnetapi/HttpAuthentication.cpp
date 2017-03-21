@@ -56,8 +56,7 @@ BHttpAuthentication::BHttpAuthentication(const BString& username, const BString&
 // #pragma mark Field modification
 
 
-void
-BHttpAuthentication::SetUserName(const BString& username)
+void BHttpAuthentication::SetUserName(const BString& username)
 {
 	fLock.Lock();
 	fUserName = username;
@@ -65,8 +64,7 @@ BHttpAuthentication::SetUserName(const BString& username)
 }
 
 
-void
-BHttpAuthentication::SetPassword(const BString& password)
+void BHttpAuthentication::SetPassword(const BString& password)
 {
 	fLock.Lock();
 	fPassword = password;
@@ -74,8 +72,7 @@ BHttpAuthentication::SetPassword(const BString& password)
 }
 
 
-void
-BHttpAuthentication::SetMethod(BHttpAuthenticationMethod method)
+void BHttpAuthentication::SetMethod(BHttpAuthenticationMethod method)
 {
 	fLock.Lock();
 	fAuthenticationMethod = method;
@@ -83,8 +80,7 @@ BHttpAuthentication::SetMethod(BHttpAuthenticationMethod method)
 }
 
 
-status_t
-BHttpAuthentication::Initialize(const BString& wwwAuthenticate)
+status_t BHttpAuthentication::Initialize(const BString& wwwAuthenticate)
 {
 	BPrivate::AutoLocker<BLocker> lock(fLock);
 

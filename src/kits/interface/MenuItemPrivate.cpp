@@ -21,8 +21,7 @@ MenuItemPrivate::MenuItemPrivate(BMenuItem* menuItem)
 }
 
 
-void
-MenuItemPrivate::SetSubmenu(BMenu* submenu)
+void MenuItemPrivate::SetSubmenu(BMenu* submenu)
 {
 	delete fMenuItem->fSubmenu;
 
@@ -39,15 +38,13 @@ MenuItemPrivate::SetSubmenu(BMenu* submenu)
 }
 
 
-void
-MenuItemPrivate::Install(BWindow* window)
+void MenuItemPrivate::Install(BWindow* window)
 {
 	fMenuItem->Install(window);
 }
 
 
-void
-MenuItemPrivate::Uninstall()
+void MenuItemPrivate::Uninstall()
 {
 	fMenuItem->Uninstall();
 }

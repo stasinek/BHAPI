@@ -458,7 +458,7 @@ BFontX11::Attach(void (*callback)(void*), void *data)
 }
 
 
-bool
+bool 
 BFontX11::Detach(bhapi::font_detach_callback *callback)
 {
 	if(fX11Engine == NULL) return false;
@@ -495,14 +495,14 @@ BFontX11::Detach(bhapi::font_detach_callback *callback)
 }
 
 
-bool
+bool 
 BFontX11::IsValid() const
 {
 	return(fX11Engine != NULL && fFonts.CountItems() > 0 && Family() != NULL && Style() != NULL);
 }
 
 
-bool
+bool 
 BFontX11::IsScalable() const
 {
 	return fScalable;
@@ -510,7 +510,7 @@ BFontX11::IsScalable() const
 
 
 #ifdef HAVE_XFT
-void
+void 
 BFontX11::ForceFontAliasing(bool enable)
 {
 	if(fX11Engine == NULL) return;
@@ -729,7 +729,7 @@ BFontX11::StringWidth(const char *string, float size, float spacing, float shear
 }
 
 
-void
+void 
 BFontX11::GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const
 {
 	if(fX11Engine == NULL || height == NULL) return;
@@ -1149,7 +1149,7 @@ BFontX11::RenderString(BHandler *_view, const char *string, float size, float sp
 }
 
 
-status_t
+status_t 
 EXGraphicsEngine::InitalizeFonts()
 {
 	BAutolock <EXGraphicsEngine> autolock(this);
@@ -1159,7 +1159,7 @@ EXGraphicsEngine::InitalizeFonts()
 }
 
 
-void
+void 
 EXGraphicsEngine::DestroyFonts()
 {
 	BAutolock <EXGraphicsEngine> autolock(this);
@@ -1182,7 +1182,7 @@ EXGraphicsEngine::DestroyFonts()
 }
 
 
-status_t
+status_t 
 EXGraphicsEngine::UpdateFonts(bool check_only)
 {
 	BAutolock <EXGraphicsEngine> autolock(this);

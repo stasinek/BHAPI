@@ -21,8 +21,7 @@ FloatValue::~FloatValue()
 }
 
 
-bool
-FloatValue::ToString(BString& _string) const
+bool FloatValue::ToString(BString& _string) const
 {
 	char buffer[128];
 
@@ -50,16 +49,14 @@ FloatValue::ToString(BString& _string) const
 }
 
 
-bool
-FloatValue::ToVariant(BVariant& _value) const
+bool FloatValue::ToVariant(BVariant& _value) const
 {
 	_value = fValue;
 	return true;
 }
 
 
-bool
-FloatValue::operator==(const Value& other) const
+bool FloatValue::operator==(const Value& other) const
 {
 	const FloatValue* otherFloat = dynamic_cast<const FloatValue*>(&other);
 	return otherFloat != NULL ? fValue == otherFloat->fValue : false;

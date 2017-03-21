@@ -127,29 +127,25 @@ ResourceFile::_GetInt(uint16 value) const
 }
 
 
-inline int32
-ResourceFile::_GetInt(int32 value) const
+inline int32 ResourceFile::_GetInt(int32 value) const
 {
 	return fHostEndianess ? value : (int32)B_SWAP_INT32((uint32)value);
 }
 
 
-inline uint32
-ResourceFile::_GetInt(uint32 value) const
+inline uint32 ResourceFile::_GetInt(uint32 value) const
 {
 	return fHostEndianess ? value : B_SWAP_INT32(value);
 }
 
 
-inline int64
-ResourceFile::_GetInt(int64 value) const
+inline int64 ResourceFile::_GetInt(int64 value) const
 {
 	return fHostEndianess ? value : (int64)B_SWAP_INT64((uint64)value);
 }
 
 
-inline uint64
-ResourceFile::_GetInt(uint64 value) const
+inline uint64 ResourceFile::_GetInt(uint64 value) const
 {
 	return fHostEndianess ? value : B_SWAP_INT64(value);
 }

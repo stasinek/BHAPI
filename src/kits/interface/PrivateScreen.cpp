@@ -149,8 +149,7 @@ BPrivateScreen::_Get(int32 id, bool check)
 }
 
 
-void
-BPrivateScreen::Put(BPrivateScreen* screen)
+void BPrivateScreen::Put(BPrivateScreen* screen)
 {
 	if (screen == NULL)
 		return;
@@ -188,8 +187,7 @@ BPrivateScreen::GetNext(BPrivateScreen* screen)
 }
 
 
-bool
-BPrivateScreen::_IsValid(int32 id)
+bool BPrivateScreen::_IsValid(int32 id)
 {
 	BPrivate::AppServerLink link;
 	link.StartMessage(AS_VALID_SCREEN_ID);
@@ -238,15 +236,13 @@ BPrivateScreen::Frame()
 }
 
 
-bool
-BPrivateScreen::IsValid() const
+bool BPrivateScreen::IsValid() const
 {
 	return BPrivateScreen::_IsValid(ID());
 }
 
 
-status_t
-BPrivateScreen::GetNextID(int32& id)
+status_t BPrivateScreen::GetNextID(int32& id)
 {
 	BPrivate::AppServerLink link;
 	link.StartMessage(AS_GET_NEXT_SCREEN_ID);
@@ -262,8 +258,7 @@ BPrivateScreen::GetNextID(int32& id)
 }
 
 
-status_t
-BPrivateScreen::WaitForRetrace(bigtime_t timeout)
+status_t BPrivateScreen::WaitForRetrace(bigtime_t timeout)
 {
 	// Get the retrace semaphore if it's the first time
 	// we are called. Cache the value then.
@@ -353,8 +348,7 @@ BPrivateScreen::ColorMap()
 }
 
 
-status_t
-BPrivateScreen::GetBitmap(BBitmap**_bitmap, bool drawCursor, BRect* bounds)
+status_t BPrivateScreen::GetBitmap(BBitmap**_bitmap, bool drawCursor, BRect* bounds)
 {
 	if (_bitmap == NULL)
 		return B_BAD_VALUE;
@@ -382,8 +376,7 @@ BPrivateScreen::GetBitmap(BBitmap**_bitmap, bool drawCursor, BRect* bounds)
 }
 
 
-status_t
-BPrivateScreen::ReadBitmap(BBitmap* bitmap, bool drawCursor, BRect* bounds)
+status_t BPrivateScreen::ReadBitmap(BBitmap* bitmap, bool drawCursor, BRect* bounds)
 {
 	if (bitmap == NULL)
 		return B_BAD_VALUE;
@@ -426,8 +419,7 @@ BPrivateScreen::DesktopColor(uint32 workspace)
 }
 
 
-void
-BPrivateScreen::SetDesktopColor(rgb_color color, uint32 workspace,
+void BPrivateScreen::SetDesktopColor(rgb_color color, uint32 workspace,
 	bool makeDefault)
 {
 	BPrivate::AppServerLink link;
@@ -440,8 +432,7 @@ BPrivateScreen::SetDesktopColor(rgb_color color, uint32 workspace,
 }
 
 
-status_t
-BPrivateScreen::ProposeMode(display_mode* target,
+status_t BPrivateScreen::ProposeMode(display_mode* target,
 	const display_mode* low, const display_mode* high)
 {
 	// We can't return B_BAD_VALUE here, because it's used to indicate
@@ -471,8 +462,7 @@ BPrivateScreen::ProposeMode(display_mode* target,
 }
 
 
-status_t
-BPrivateScreen::GetModeList(display_mode** _modeList, uint32* _count)
+status_t BPrivateScreen::GetModeList(display_mode** _modeList, uint32* _count)
 {
 	if (_modeList == NULL || _count == NULL)
 		return B_BAD_VALUE;
@@ -506,8 +496,7 @@ BPrivateScreen::GetModeList(display_mode** _modeList, uint32* _count)
 }
 
 
-status_t
-BPrivateScreen::GetMode(uint32 workspace, display_mode *mode)
+status_t BPrivateScreen::GetMode(uint32 workspace, display_mode *mode)
 {
 	if (mode == NULL)
 		return B_BAD_VALUE;
@@ -527,8 +516,7 @@ BPrivateScreen::GetMode(uint32 workspace, display_mode *mode)
 }
 
 
-status_t
-BPrivateScreen::SetMode(uint32 workspace, display_mode *mode, bool makeDefault)
+status_t BPrivateScreen::SetMode(uint32 workspace, display_mode *mode, bool makeDefault)
 {
 	if (mode == NULL)
 		return B_BAD_VALUE;
@@ -547,8 +535,7 @@ BPrivateScreen::SetMode(uint32 workspace, display_mode *mode, bool makeDefault)
 }
 
 
-status_t
-BPrivateScreen::GetDeviceInfo(accelerant_device_info *info)
+status_t BPrivateScreen::GetDeviceInfo(accelerant_device_info *info)
 {
 	if (info == NULL)
 		return B_BAD_VALUE;
@@ -567,8 +554,7 @@ BPrivateScreen::GetDeviceInfo(accelerant_device_info *info)
 }
 
 
-status_t
-BPrivateScreen::GetMonitorInfo(monitor_info* info)
+status_t BPrivateScreen::GetMonitorInfo(monitor_info* info)
 {
 	if (info == NULL)
 		return B_BAD_VALUE;
@@ -587,8 +573,7 @@ BPrivateScreen::GetMonitorInfo(monitor_info* info)
 }
 
 
-status_t
-BPrivateScreen::GetPixelClockLimits(display_mode *mode, uint32 *low, uint32 *high)
+status_t BPrivateScreen::GetPixelClockLimits(display_mode *mode, uint32 *low, uint32 *high)
 {
 	if (mode == NULL || low == NULL || high == NULL)
 		return B_BAD_VALUE;
@@ -609,8 +594,7 @@ BPrivateScreen::GetPixelClockLimits(display_mode *mode, uint32 *low, uint32 *hig
 }
 
 
-status_t
-BPrivateScreen::GetTimingConstraints(display_timing_constraints *constraints)
+status_t BPrivateScreen::GetTimingConstraints(display_timing_constraints *constraints)
 {
 	if (constraints == NULL)
 		return B_BAD_VALUE;
@@ -629,8 +613,7 @@ BPrivateScreen::GetTimingConstraints(display_timing_constraints *constraints)
 }
 
 
-status_t
-BPrivateScreen::SetDPMS(uint32 dpmsState)
+status_t BPrivateScreen::SetDPMS(uint32 dpmsState)
 {
 	BPrivate::AppServerLink link;
 	link.StartMessage(AS_SET_DPMS);
@@ -644,8 +627,7 @@ BPrivateScreen::SetDPMS(uint32 dpmsState)
 }
 
 
-uint32
-BPrivateScreen::DPMSState()
+uint32 BPrivateScreen::DPMSState()
 {
 	uint32 state = 0;
 
@@ -661,8 +643,7 @@ BPrivateScreen::DPMSState()
 }
 
 
-uint32
-BPrivateScreen::DPMSCapabilites()
+uint32 BPrivateScreen::DPMSCapabilites()
 {
 	uint32 capabilities = 0;
 
@@ -689,8 +670,7 @@ BPrivateScreen::BaseAddress()
 }
 
 
-uint32
-BPrivateScreen::BytesPerRow()
+uint32 BPrivateScreen::BytesPerRow()
 {
 	frame_buffer_config config;
 	if (_GetFrameBufferConfig(config) != B_OK)
@@ -703,8 +683,7 @@ BPrivateScreen::BytesPerRow()
 // #pragma mark - private methods
 
 
-void
-BPrivateScreen::_Acquire()
+void BPrivateScreen::_Acquire()
 {
 	fReferenceCount++;
 
@@ -713,8 +692,7 @@ BPrivateScreen::_Acquire()
 }
 
 
-bool
-BPrivateScreen::_Release()
+bool BPrivateScreen::_Release()
 {
 	return --fReferenceCount == 0;
 }
@@ -738,8 +716,7 @@ BPrivateScreen::_RetraceSemaphore()
 }
 
 
-status_t
-BPrivateScreen::_GetFrameBufferConfig(frame_buffer_config& config)
+status_t BPrivateScreen::_GetFrameBufferConfig(frame_buffer_config& config)
 {
 	BPrivate::AppServerLink link;
 	link.StartMessage(AS_GET_FRAME_BUFFER_CONFIG);

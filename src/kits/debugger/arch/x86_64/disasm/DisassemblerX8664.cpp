@@ -12,7 +12,7 @@
 
 #include "udis86.h"
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 #include "CpuStateX8664.h"
@@ -75,8 +75,7 @@ DisassemblerX8664::~DisassemblerX8664()
 }
 
 
-status_t
-DisassemblerX8664::Init(target_addr_t address, const void* code, size_t codeSize)
+status_t DisassemblerX8664::Init(target_addr_t address, const void* code, size_t codeSize)
 {
 	// unset old data
 	delete fUdisData;
@@ -104,8 +103,7 @@ DisassemblerX8664::Init(target_addr_t address, const void* code, size_t codeSize
 }
 
 
-status_t
-DisassemblerX8664::GetNextInstruction(BString& line, target_addr_t& _address,
+status_t DisassemblerX8664::GetNextInstruction(BString& line, target_addr_t& _address,
 	target_size_t& _size, bool& _breakpointAllowed)
 {
 	unsigned int size = ud_disassemble(fUdisData);
@@ -129,8 +127,7 @@ DisassemblerX8664::GetNextInstruction(BString& line, target_addr_t& _address,
 }
 
 
-status_t
-DisassemblerX8664::GetPreviousInstruction(target_addr_t nextAddress,
+status_t DisassemblerX8664::GetPreviousInstruction(target_addr_t nextAddress,
 	target_addr_t& _address, target_size_t& _size)
 {
 	if (nextAddress < fAddress || nextAddress > fAddress + fCodeSize)
@@ -152,8 +149,7 @@ DisassemblerX8664::GetPreviousInstruction(target_addr_t nextAddress,
 }
 
 
-status_t
-DisassemblerX8664::GetNextInstructionInfo(InstructionInfo& _info,
+status_t DisassemblerX8664::GetNextInstructionInfo(InstructionInfo& _info,
 	CpuState* state)
 {
 	unsigned int size = ud_disassemble(fUdisData);

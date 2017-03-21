@@ -53,16 +53,14 @@ static engine_token *sEngineToken;
 
 
 // Helper methods which translates the pre r5 graphics methods to r5 ones
-static int32
-card_sync()
+static int32 card_sync()
 {
 	sWaitIdleHook();
 	return 0;
 }
 
 
-static int32
-blit(int32 sx, int32 sy, int32 dx, int32 dy, int32 width, int32 height)
+static int32 blit(int32 sx, int32 sy, int32 dx, int32 dy, int32 width, int32 height)
 {
 	blit_params param;
 	param.src_left = sx;
@@ -82,8 +80,7 @@ blit(int32 sx, int32 sy, int32 dx, int32 dy, int32 width, int32 height)
 // TODO: This function seems not to be exported through CardHookAt().
 // At least, nothing I've tried uses it.
 #if 0
-static int32
-transparent_blit(int32 sx, int32 sy, int32 dx, int32 dy, int32 width,
+static int32 transparent_blit(int32 sx, int32 sy, int32 dx, int32 dy, int32 width,
 	int32 height, uint32 transparent_color)
 {
 	blit_params param;
@@ -102,8 +99,7 @@ transparent_blit(int32 sx, int32 sy, int32 dx, int32 dy, int32 width,
 #endif
 
 
-static int32
-scaled_filtered_blit(int32 sx, int32 sy, int32 sw, int32 sh, int32 dx, int32 dy,
+static int32 scaled_filtered_blit(int32 sx, int32 sy, int32 sw, int32 sh, int32 dx, int32 dy,
 	int32 dw, int32 dh)
 {
 	scaled_blit_params param;
@@ -123,8 +119,7 @@ scaled_filtered_blit(int32 sx, int32 sy, int32 sw, int32 sh, int32 dx, int32 dy,
 }
 
 
-static int32
-draw_rect_8(int32 sx, int32 sy, int32 sw, int32 sh, uint8 color_index)
+static int32 draw_rect_8(int32 sx, int32 sy, int32 sw, int32 sh, uint8 color_index)
 {
 	fill_rect_params param;
 	param.left = sx;
@@ -139,8 +134,7 @@ draw_rect_8(int32 sx, int32 sy, int32 sw, int32 sh, uint8 color_index)
 }
 
 
-static int32
-draw_rect_16(int32 sx, int32 sy, int32 sw, int32 sh, uint16 color)
+static int32 draw_rect_16(int32 sx, int32 sy, int32 sw, int32 sh, uint16 color)
 {
 	fill_rect_params param;
 	param.left = sx;
@@ -155,8 +149,7 @@ draw_rect_16(int32 sx, int32 sy, int32 sw, int32 sh, uint16 color)
 }
 
 
-static int32
-draw_rect_32(int32 sx, int32 sy, int32 sw, int32 sh, uint32 color)
+static int32 draw_rect_32(int32 sx, int32 sy, int32 sw, int32 sh, uint32 color)
 {
 	fill_rect_params param;
 	param.left = sx;
@@ -174,8 +167,7 @@ draw_rect_32(int32 sx, int32 sy, int32 sw, int32 sh, uint32 color)
 //	#pragma mark - public API calls
 
 
-void
-set_mouse_position(int32 x, int32 y)
+void set_mouse_position(int32 x, int32 y)
 {
 	BMessage command(IS_SET_MOUSE_POSITION);
 	BMessage reply;
@@ -229,8 +221,7 @@ BWindowScreen::~BWindowScreen()
 }
 
 
-void
-BWindowScreen::Quit(void)
+void BWindowScreen::Quit(void)
 {
 	CALLED();
 	Disconnect();
@@ -238,15 +229,13 @@ BWindowScreen::Quit(void)
 }
 
 
-void
-BWindowScreen::ScreenConnected(bool active)
+void BWindowScreen::ScreenConnected(bool active)
 {
 	// Implemented in subclasses
 }
 
 
-void
-BWindowScreen::Disconnect()
+void BWindowScreen::Disconnect()
 {
 	CALLED();
 	if (fLockState == 1) {
@@ -259,8 +248,7 @@ BWindowScreen::Disconnect()
 }
 
 
-void
-BWindowScreen::WindowActivated(bool active)
+void BWindowScreen::WindowActivated(bool active)
 {
 	CALLED();
 	fWindowState = active;
@@ -269,8 +257,7 @@ BWindowScreen::WindowActivated(bool active)
 }
 
 
-void
-BWindowScreen::WorkspaceActivated(int32 workspace, bool state)
+void BWindowScreen::WorkspaceActivated(int32 workspace, bool state)
 {
 	CALLED();
 	fWorkState = state;
@@ -288,15 +275,13 @@ BWindowScreen::WorkspaceActivated(int32 workspace, bool state)
 }
 
 
-void
-BWindowScreen::ScreenChanged(BRect screenFrame, color_space depth)
+void BWindowScreen::ScreenChanged(BRect screenFrame, color_space depth)
 {
 	// Implemented in subclasses
 }
 
 
-void
-BWindowScreen::Hide()
+void BWindowScreen::Hide()
 {
 	CALLED();
 
@@ -305,8 +290,7 @@ BWindowScreen::Hide()
 }
 
 
-void
-BWindowScreen::Show()
+void BWindowScreen::Show()
 {
 	CALLED();
 
@@ -314,8 +298,7 @@ BWindowScreen::Show()
 }
 
 
-void
-BWindowScreen::SetColorList(rgb_color *list, int32 firstIndex, int32 lastIndex)
+void BWindowScreen::SetColorList(rgb_color *list, int32 firstIndex, int32 lastIndex)
 {
 	CALLED();
 	if (firstIndex < 0 || lastIndex > 255 || firstIndex > lastIndex)
@@ -363,8 +346,7 @@ BWindowScreen::SetColorList(rgb_color *list, int32 firstIndex, int32 lastIndex)
 }
 
 
-status_t
-BWindowScreen::SetSpace(uint32 space)
+status_t BWindowScreen::SetSpace(uint32 space)
 {
 	CALLED();
 
@@ -377,15 +359,13 @@ BWindowScreen::SetSpace(uint32 space)
 }
 
 
-bool
-BWindowScreen::CanControlFrameBuffer()
+bool BWindowScreen::CanControlFrameBuffer()
 {
 	return (fCardInfo.flags & B_FRAME_BUFFER_CONTROL) != 0;
 }
 
 
-status_t
-BWindowScreen::SetFrameBuffer(int32 width, int32 height)
+status_t BWindowScreen::SetFrameBuffer(int32 width, int32 height)
 {
 	CALLED();
 	display_mode highMode = *fDisplayMode;
@@ -406,8 +386,7 @@ BWindowScreen::SetFrameBuffer(int32 width, int32 height)
 }
 
 
-status_t
-BWindowScreen::MoveDisplayArea(int32 x, int32 y)
+status_t BWindowScreen::MoveDisplayArea(int32 x, int32 y)
 {
 	CALLED();
 	move_display_area moveDisplayArea
@@ -499,8 +478,7 @@ BWindowScreen::CardInfo()
 }
 
 
-void
-BWindowScreen::RegisterThread(thread_id thread)
+void BWindowScreen::RegisterThread(thread_id thread)
 {
 	CALLED();
 
@@ -523,15 +501,13 @@ BWindowScreen::RegisterThread(thread_id thread)
 }
 
 
-void
-BWindowScreen::SuspensionHook(bool active)
+void BWindowScreen::SuspensionHook(bool active)
 {
 	// Implemented in subclasses
 }
 
 
-void
-BWindowScreen::Suspend(char* label)
+void BWindowScreen::Suspend(char* label)
 {
 	CALLED();
 	if (fDebugState) {
@@ -552,8 +528,7 @@ BWindowScreen::Suspend(char* label)
 }
 
 
-status_t
-BWindowScreen::Perform(perform_code d, void* arg)
+status_t BWindowScreen::Perform(perform_code d, void* arg)
 {
 	return inherited::Perform(d, arg);
 }
@@ -566,8 +541,7 @@ void BWindowScreen::_ReservedWindowScreen3() {}
 void BWindowScreen::_ReservedWindowScreen4() {}
 
 
-status_t
-BWindowScreen::_InitData(uint32 space, uint32 attributes)
+status_t BWindowScreen::_InitData(uint32 space, uint32 attributes)
 {
 	CALLED();
 
@@ -638,8 +612,7 @@ BWindowScreen::_InitData(uint32 space, uint32 attributes)
 }
 
 
-void
-BWindowScreen::_DisposeData()
+void BWindowScreen::_DisposeData()
 {
 	CALLED();
 	Disconnect();
@@ -666,8 +639,7 @@ BWindowScreen::_DisposeData()
 }
 
 
-status_t
-BWindowScreen::_LockScreen(bool lock)
+status_t BWindowScreen::_LockScreen(bool lock)
 {
 	if (fActivateState == lock)
 		return B_OK;
@@ -686,8 +658,7 @@ BWindowScreen::_LockScreen(bool lock)
 }
 
 
-status_t
-BWindowScreen::_Activate()
+status_t BWindowScreen::_Activate()
 {
 	CALLED();
 	status_t status = _AssertDisplayMode(fDisplayMode);
@@ -719,8 +690,7 @@ BWindowScreen::_Activate()
 }
 
 
-status_t
-BWindowScreen::_Deactivate()
+status_t BWindowScreen::_Deactivate()
 {
 	CALLED();
 
@@ -748,8 +718,7 @@ BWindowScreen::_Deactivate()
 }
 
 
-status_t
-BWindowScreen::_SetupAccelerantHooks()
+status_t BWindowScreen::_SetupAccelerantHooks()
 {
 	CALLED();
 
@@ -785,8 +754,7 @@ BWindowScreen::_SetupAccelerantHooks()
 }
 
 
-void
-BWindowScreen::_ResetAccelerantHooks()
+void BWindowScreen::_ResetAccelerantHooks()
 {
 	CALLED();
 	if (fWaitEngineIdle)
@@ -807,8 +775,7 @@ BWindowScreen::_ResetAccelerantHooks()
 }
 
 
-status_t
-BWindowScreen::_GetCardInfo()
+status_t BWindowScreen::_GetCardInfo()
 {
 	CALLED();
 
@@ -872,8 +839,7 @@ BWindowScreen::_GetCardInfo()
 }
 
 
-void
-BWindowScreen::_Suspend()
+void BWindowScreen::_Suspend()
 {
 	CALLED();
 
@@ -900,8 +866,7 @@ BWindowScreen::_Suspend()
 }
 
 
-void
-BWindowScreen::_Resume()
+void BWindowScreen::_Resume()
 {
 	CALLED();
 	graphics_card_info *info = CardInfo();
@@ -921,8 +886,7 @@ BWindowScreen::_Resume()
 }
 
 
-status_t
-BWindowScreen::_GetModeFromSpace(uint32 space, display_mode *dmode)
+status_t BWindowScreen::_GetModeFromSpace(uint32 space, display_mode *dmode)
 {
 	CALLED();
 
@@ -944,8 +908,7 @@ BWindowScreen::_GetModeFromSpace(uint32 space, display_mode *dmode)
 }
 
 
-status_t
-BWindowScreen::_InitClone()
+status_t BWindowScreen::_InitClone()
 {
 	CALLED();
 
@@ -1010,8 +973,7 @@ BWindowScreen::_InitClone()
 }
 
 
-status_t
-BWindowScreen::_AssertDisplayMode(display_mode* displayMode)
+status_t BWindowScreen::_AssertDisplayMode(display_mode* displayMode)
 {
 	CALLED();
 

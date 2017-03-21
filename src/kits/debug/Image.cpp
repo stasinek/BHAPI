@@ -34,8 +34,7 @@ Image::~Image()
 }
 
 
-status_t
-Image::GetSymbol(const char* name, int32 symbolType, void** _symbolLocation,
+status_t Image::GetSymbol(const char* name, int32 symbolType, void** _symbolLocation,
 	size_t* _symbolSize, int32* _symbolType) const
 {
 	// TODO: At least for ImageFile we could do hash lookups!
@@ -132,8 +131,7 @@ SymbolTableBasedImage::LookupSymbol(addr_t address, addr_t* _baseAddress,
 }
 
 
-status_t
-SymbolTableBasedImage::NextSymbol(int32& iterator, const char** _symbolName,
+status_t SymbolTableBasedImage::NextSymbol(int32& iterator, const char** _symbolName,
 	size_t* _symbolNameLen, addr_t* _symbolAddress, size_t* _symbolSize,
 	int32* _symbolType) const
 {
@@ -195,8 +193,7 @@ ImageFile::~ImageFile()
 }
 
 
-status_t
-ImageFile::Init(const image_info& info)
+status_t ImageFile::Init(const image_info& info)
 {
 	// just copy the image info
 	fInfo = info;
@@ -218,8 +215,7 @@ ImageFile::Init(const image_info& info)
 }
 
 
-status_t
-ImageFile::Init(const char* path)
+status_t ImageFile::Init(const char* path)
 {
 	// load the file
 	addr_t textAddress;
@@ -253,8 +249,7 @@ ImageFile::Init(const char* path)
 }
 
 
-status_t
-ImageFile::_LoadFile(const char* path, addr_t* _textAddress, size_t* _textSize,
+status_t ImageFile::_LoadFile(const char* path, addr_t* _textAddress, size_t* _textSize,
 	addr_t* _dataAddress, size_t* _dataSize)
 {
 	// open and stat() the file
@@ -333,8 +328,7 @@ ImageFile::_LoadFile(const char* path, addr_t* _textAddress, size_t* _textSize,
 }
 
 
-status_t
-ImageFile::_FindTableInSection(elf_ehdr* elfHeader, uint16 sectionType)
+status_t ImageFile::_FindTableInSection(elf_ehdr* elfHeader, uint16 sectionType)
 {
 	elf_shdr* sectionHeaders
 		= (elf_shdr*)(fMappedFile + elfHeader->e_shoff);
@@ -387,8 +381,7 @@ KernelImage::~KernelImage()
 }
 
 
-status_t
-KernelImage::Init(const image_info& info)
+status_t KernelImage::Init(const image_info& info)
 {
 	fInfo = info;
 
@@ -425,8 +418,7 @@ CommPageImage::~CommPageImage()
 }
 
 
-status_t
-CommPageImage::Init(const image_info& info)
+status_t CommPageImage::Init(const image_info& info)
 {
 	// find kernel image for commpage
 	image_id commPageID = -1;

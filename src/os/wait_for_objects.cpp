@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <../include/syscalls.h>
 
 

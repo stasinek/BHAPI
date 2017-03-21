@@ -31,8 +31,7 @@ DiskDeviceJobQueue::~DiskDeviceJobQueue()
 
 
 // AddJob
-status_t
-DiskDeviceJobQueue::AddJob(DiskDeviceJob* job)
+status_t DiskDeviceJobQueue::AddJob(DiskDeviceJob* job)
 {
 	if (!job)
 		return B_BAD_VALUE;
@@ -42,8 +41,7 @@ DiskDeviceJobQueue::AddJob(DiskDeviceJob* job)
 
 
 // Execute
-status_t
-DiskDeviceJobQueue::Execute()
+status_t DiskDeviceJobQueue::Execute()
 {
 	int32 count = fJobs.CountItems();
 	for (int32 i = 0; i < count; i++) {

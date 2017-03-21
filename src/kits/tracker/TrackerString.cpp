@@ -73,8 +73,7 @@ TrackerString::~TrackerString()
 }
 
 
-bool
-TrackerString::Matches(const char* string, bool caseSensitivity,
+bool TrackerString::Matches(const char* string, bool caseSensitivity,
 	TrackerStringExpressionType expressionType) const
 {
 	switch (expressionType) {
@@ -100,8 +99,7 @@ TrackerString::Matches(const char* string, bool caseSensitivity,
 }
 
 
-bool
-TrackerString::MatchesRegExp(const char* pattern, bool caseSensitivity) const
+bool TrackerString::MatchesRegExp(const char* pattern, bool caseSensitivity) const
 {
 	BString patternString(pattern);
 	BString textString(String());
@@ -120,15 +118,13 @@ TrackerString::MatchesRegExp(const char* pattern, bool caseSensitivity) const
 }
 
 
-bool
-TrackerString::MatchesGlob(const char* string, bool caseSensitivity) const
+bool TrackerString::MatchesGlob(const char* string, bool caseSensitivity) const
 {
 	return StringMatchesPattern(String(), string, caseSensitivity);
 }
 
 
-bool
-TrackerString::EndsWith(const char* string, bool caseSensitivity) const
+bool TrackerString::EndsWith(const char* string, bool caseSensitivity) const
 {
 	// If "string" is longer than "this",
 	// we should simply return false
@@ -143,8 +139,7 @@ TrackerString::EndsWith(const char* string, bool caseSensitivity) const
 }
 
 
-bool
-TrackerString::StartsWith(const char* string, bool caseSensitivity) const
+bool TrackerString::StartsWith(const char* string, bool caseSensitivity) const
 {
 	if (caseSensitivity)
 		return FindFirst(string) == 0;
@@ -153,8 +148,7 @@ TrackerString::StartsWith(const char* string, bool caseSensitivity) const
 }
 
 
-bool
-TrackerString::Contains(const char* string, bool caseSensitivity) const
+bool TrackerString::Contains(const char* string, bool caseSensitivity) const
 {
 	if (caseSensitivity)
 		return FindFirst(string) > -1;
@@ -167,8 +161,7 @@ TrackerString::Contains(const char* string, bool caseSensitivity) const
 // character following the initial '[' in a bracket expression.
 // The reason is that an encountered '[' will be taken literally.
 // (Makes it possible to match a '[' with the expression '[[]').
-bool
-TrackerString::MatchesBracketExpression(const char* string,
+bool TrackerString::MatchesBracketExpression(const char* string,
 	const char* pattern, bool caseSensitivity) const
 {
 	bool GlyphMatch = IsStartOfGlyph(string[0]);
@@ -235,8 +228,7 @@ TrackerString::MatchesBracketExpression(const char* string,
 }
 
 
-bool
-TrackerString::StringMatchesPattern(const char* string, const char* pattern,
+bool TrackerString::StringMatchesPattern(const char* string, const char* pattern,
 	bool caseSensitivity) const
 {
 	// One could do this dynamically, counting the number of *'s,
@@ -387,8 +379,7 @@ TrackerString::StringMatchesPattern(const char* string, const char* pattern,
 }
 
 
-bool
-TrackerString::UTF8CharsAreEqual(const char* string1,
+bool TrackerString::UTF8CharsAreEqual(const char* string1,
 	const char* string2) const
 {
 	const char* s1 = string1;
@@ -410,8 +401,7 @@ TrackerString::UTF8CharsAreEqual(const char* string1,
 }
 
 
-const char*
-TrackerString::MoveToEndOfGlyph(const char* string) const
+const char*  TrackerString::MoveToEndOfGlyph(const char* string) const
 {
 	const char* ptr = string;
 
@@ -422,22 +412,19 @@ TrackerString::MoveToEndOfGlyph(const char* string) const
 }
 
 
-bool
-TrackerString::IsGlyph(char ch) const
+bool TrackerString::IsGlyph(char ch) const
 {
 	return (ch & 0x80) == 0x80;
 }
 
 
-bool
-TrackerString::IsInsideGlyph(char ch) const
+bool TrackerString::IsInsideGlyph(char ch) const
 {
 	return (ch & 0xC0) == 0x80;
 }
 
 
-bool
-TrackerString::IsStartOfGlyph(char ch) const
+bool TrackerString::IsStartOfGlyph(char ch) const
 {
 	return (ch & 0xC0) == 0xC0;
 }

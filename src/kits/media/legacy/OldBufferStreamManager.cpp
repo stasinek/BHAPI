@@ -47,8 +47,7 @@ BBufferStreamManager::Stream() const
 }
 
 
-int32
-BBufferStreamManager::BufferCount() const
+int32 BBufferStreamManager::BufferCount() const
 {
 	UNIMPLEMENTED();
 
@@ -56,15 +55,13 @@ BBufferStreamManager::BufferCount() const
 }
 
 
-void
-BBufferStreamManager::SetBufferCount(int32 count)
+void BBufferStreamManager::SetBufferCount(int32 count)
 {
 	UNIMPLEMENTED();
 }
 
 
-int32
-BBufferStreamManager::BufferSize() const
+int32 BBufferStreamManager::BufferSize() const
 {
 	UNIMPLEMENTED();
 
@@ -72,8 +69,7 @@ BBufferStreamManager::BufferSize() const
 }
 
 
-void
-BBufferStreamManager::SetBufferSize(int32 bytes)
+void BBufferStreamManager::SetBufferSize(int32 bytes)
 {
 	UNIMPLEMENTED();
 }
@@ -88,8 +84,7 @@ BBufferStreamManager::BufferDelay() const
 }
 
 
-void
-BBufferStreamManager::SetBufferDelay(bigtime_t usecs)
+void BBufferStreamManager::SetBufferDelay(bigtime_t usecs)
 {
 	UNIMPLEMENTED();
 }
@@ -104,8 +99,7 @@ BBufferStreamManager::Timeout() const
 }
 
 
-void
-BBufferStreamManager::SetTimeout(bigtime_t usecs)
+void BBufferStreamManager::SetTimeout(bigtime_t usecs)
 {
 	UNIMPLEMENTED();
 }
@@ -156,15 +150,13 @@ BBufferStreamManager::NotificationPort() const
 }
 
 
-void
-BBufferStreamManager::SetNotificationPort(port_id port)
+void BBufferStreamManager::SetNotificationPort(port_id port)
 {
 	UNIMPLEMENTED();
 }
 
 
-bool
-BBufferStreamManager::Lock()
+bool BBufferStreamManager::Lock()
 {
 	UNIMPLEMENTED();
 
@@ -172,15 +164,13 @@ BBufferStreamManager::Lock()
 }
 
 
-void
-BBufferStreamManager::Unlock()
+void BBufferStreamManager::Unlock()
 {
 	UNIMPLEMENTED();
 }
 
 
-status_t
-BBufferStreamManager::Subscribe(BBufferStream *stream)
+status_t BBufferStreamManager::Subscribe(BBufferStream *stream)
 {
 	UNIMPLEMENTED();
 
@@ -188,8 +178,7 @@ BBufferStreamManager::Subscribe(BBufferStream *stream)
 }
 
 
-status_t
-BBufferStreamManager::Unsubscribe()
+status_t BBufferStreamManager::Unsubscribe()
 {
 	UNIMPLEMENTED();
 
@@ -209,22 +198,19 @@ BBufferStreamManager::ID() const
  * protected BBufferStreamManager
  *************************************************************/
 
-void
-BBufferStreamManager::StartProcessing()
+void BBufferStreamManager::StartProcessing()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BBufferStreamManager::StopProcessing()
+void BBufferStreamManager::StopProcessing()
 {
 	UNIMPLEMENTED();
 }
 
 
-status_t
-BBufferStreamManager::_ProcessingThread(void *arg)
+status_t BBufferStreamManager::_ProcessingThread(void *arg)
 {
 	UNIMPLEMENTED();
 
@@ -232,15 +218,13 @@ BBufferStreamManager::_ProcessingThread(void *arg)
 }
 
 
-void
-BBufferStreamManager::ProcessingThread()
+void BBufferStreamManager::ProcessingThread()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BBufferStreamManager::SetState(stream_state newState)
+void BBufferStreamManager::SetState(stream_state newState)
 {
 	UNIMPLEMENTED();
 }
@@ -258,22 +242,19 @@ BBufferStreamManager::SnoozeUntil(bigtime_t sys_time)
  * private BBufferStreamManager
  *************************************************************/
 
-void
-BBufferStreamManager::_ReservedBufferStreamManager1()
+void BBufferStreamManager::_ReservedBufferStreamManager1()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BBufferStreamManager::_ReservedBufferStreamManager2()
+void BBufferStreamManager::_ReservedBufferStreamManager2()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BBufferStreamManager::_ReservedBufferStreamManager3()
+void BBufferStreamManager::_ReservedBufferStreamManager3()
 {
 	UNIMPLEMENTED();
 }

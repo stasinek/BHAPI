@@ -149,8 +149,7 @@ class UndoItemRenameVolume : public UndoItem {
 //--------------------------
 
 
-static status_t
-ChangeListSource(BObjectList<entry_ref> &list, BEntry &entry)
+static status_t ChangeListSource(BObjectList<entry_ref> &list, BEntry &entry)
 {
 	node_ref source;
 	if (entry.GetNodeRef(&source) != B_OK)
@@ -167,8 +166,7 @@ ChangeListSource(BObjectList<entry_ref> &list, BEntry &entry)
 }
 
 
-static void
-AddUndoItem(UndoItem* item)
+static void AddUndoItem(UndoItem* item)
 {
 	BAutolock locker(sLock);
 
@@ -191,16 +189,14 @@ Undo::~Undo()
 }
 
 
-void
-Undo::UpdateEntry(BEntry* entry, const char* destName)
+void Undo::UpdateEntry(BEntry* entry, const char* destName)
 {
 	if (fUndo != NULL)
 		fUndo->UpdateEntry(entry, destName);
 }
 
 
-void
-Undo::Remove()
+void Undo::Remove()
 {
 	delete fUndo;
 	fUndo = NULL;
@@ -263,16 +259,14 @@ UndoItemCopy::~UndoItemCopy()
 }
 
 
-status_t
-UndoItemCopy::Undo()
+status_t UndoItemCopy::Undo()
 {
 	FSDeleteRefList(new BObjectList<entry_ref>(fTargetList), true, false);
 	return B_OK;
 }
 
 
-status_t
-UndoItemCopy::Redo()
+status_t UndoItemCopy::Redo()
 {
 	FSMoveToFolder(new BObjectList<entry_ref>(fSourceList),
 		new BEntry(&fTargetRef), FSUndoMoveMode(fMoveMode), NULL);
@@ -281,8 +275,7 @@ UndoItemCopy::Redo()
 }
 
 
-void
-UndoItemCopy::UpdateEntry(BEntry* entry, const char* name)
+void UndoItemCopy::UpdateEntry(BEntry* entry, const char* name)
 {
 	entry_ref changedRef;
 	if (entry->GetRef(&changedRef) != B_OK)
@@ -323,8 +316,7 @@ UndoItemMove::~UndoItemMove()
 }
 
 
-status_t
-UndoItemMove::Undo()
+status_t UndoItemMove::Undo()
 {
 	BObjectList<entry_ref>* list = new BObjectList<entry_ref>(fSourceList);
 	BEntry entry(&fTargetRef);
@@ -338,8 +330,7 @@ UndoItemMove::Undo()
 }
 
 
-status_t
-UndoItemMove::Redo()
+status_t UndoItemMove::Redo()
 {
 	// FSMoveToFolder() owns its arguments
 	FSMoveToFolder(new BObjectList<entry_ref>(fSourceList),
@@ -364,16 +355,14 @@ UndoItemFolder::~UndoItemFolder()
 }
 
 
-status_t
-UndoItemFolder::Undo()
+status_t UndoItemFolder::Undo()
 {
 	FSDelete(new entry_ref(fRef), false, false);
 	return B_OK;
 }
 
 
-status_t
-UndoItemFolder::Redo()
+status_t UndoItemFolder::Redo()
 {
 	return FSCreateNewFolder(&fRef);
 }
@@ -404,16 +393,14 @@ UndoItemRename::~UndoItemRename()
 }
 
 
-status_t
-UndoItemRename::Undo()
+status_t UndoItemRename::Undo()
 {
 	BEntry entry(&fRef, false);
 	return entry.Rename(fOrigRef.name);
 }
 
 
-status_t
-UndoItemRename::Redo()
+status_t UndoItemRename::Redo()
 {
 	BEntry entry(&fOrigRef, false);
 	return entry.Rename(fRef.name);
@@ -442,15 +429,13 @@ UndoItemRenameVolume::~UndoItemRenameVolume()
 }
 
 
-status_t
-UndoItemRenameVolume::Undo()
+status_t UndoItemRenameVolume::Undo()
 {
 	return fVolume.SetName(fOldName.String());
 }
 
 
-status_t
-UndoItemRenameVolume::Redo()
+status_t UndoItemRenameVolume::Redo()
 {
 	return fVolume.SetName(fNewName.String());
 }
@@ -459,8 +444,7 @@ UndoItemRenameVolume::Redo()
 //	#pragma mark - FSUndo() and FSRedo() functions
 
 
-void
-FSUndo()
+void FSUndo()
 {
 	BAutolock locker(sLock);
 
@@ -480,8 +464,7 @@ FSUndo()
 }
 
 
-void
-FSRedo()
+void FSRedo()
 {
 	BAutolock locker(sLock);
 

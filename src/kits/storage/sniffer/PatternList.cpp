@@ -28,8 +28,7 @@ PatternList::~PatternList() {
 		delete *i;	
 }
 
-status_t
-PatternList::InitCheck() const {
+status_t PatternList::InitCheck() const {
 	return fRange.InitCheck();
 }
 
@@ -41,8 +40,7 @@ PatternList::GetErr() const {
 /*! \brief Sniffs the given data stream, searching for a match with
 	any of the list's patterns.
 */
-bool
-PatternList::Sniff(BPositionIO *data) const {
+bool PatternList::Sniff(BPositionIO *data) const {
 	if (InitCheck() != B_OK)
 		return false;
 	else {
@@ -91,8 +89,7 @@ PatternList::BytesNeeded() const
 	return result;	
 }
 
-void
-PatternList::Add(Pattern *pattern) {
+void PatternList::Add(Pattern *pattern) {
 	if (pattern)
 		fList.push_back(pattern);
 }

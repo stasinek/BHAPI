@@ -90,8 +90,7 @@ ProtocolSocket::ProtocolSocket(net_socket* socket)
 }
 
 
-inline status_t
-ProtocolSocket::Open()
+inline status_t ProtocolSocket::Open()
 {
 	fDomain = fSocket->first_protocol->module->get_domain(
 		fSocket->first_protocol);

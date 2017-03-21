@@ -104,15 +104,13 @@ QuarantineTranslatorImage::~QuarantineTranslatorImage()
 }
 
 
-void
-QuarantineTranslatorImage::Put(const entry_ref& ref)
+void QuarantineTranslatorImage::Put(const entry_ref& ref)
 {
 	fRef = ref;
 }
 
 
-void
-QuarantineTranslatorImage::Remove()
+void QuarantineTranslatorImage::Remove()
 {
 	fRemove = true;
 }
@@ -211,8 +209,7 @@ BTranslatorRoster::Private::~Private()
 }
 
 
-void
-BTranslatorRoster::Private::MessageReceived(BMessage* message)
+void BTranslatorRoster::Private::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case B_NODE_MONITOR:
@@ -336,8 +333,7 @@ BTranslatorRoster::Private::MessageReceived(BMessage* message)
 }
 
 
-void
-BTranslatorRoster::Private::AddDefaultPaths()
+void BTranslatorRoster::Private::AddDefaultPaths()
 {
 	// add user directories first, so that they can override system translators
 	const directory_which paths[] = {
@@ -367,8 +363,7 @@ BTranslatorRoster::Private::AddDefaultPaths()
 	translators with the same name will be taken from the earlier directory
 	first. See _CompareTranslatorDirectoryPriority().
 */
-status_t
-BTranslatorRoster::Private::AddPaths(const char* paths)
+status_t BTranslatorRoster::Private::AddPaths(const char* paths)
 {
 	if (paths == NULL)
 		return B_BAD_VALUE;
@@ -412,8 +407,7 @@ BTranslatorRoster::Private::AddPaths(const char* paths)
 	Note, the order in which these directories are added to actually matters,
 	see AddPaths().
 */
-status_t
-BTranslatorRoster::Private::AddPath(const char* path, int32* _added)
+status_t BTranslatorRoster::Private::AddPath(const char* path, int32* _added)
 {
 	BDirectory directory(path);
 	status_t status = directory.InitCheck();
@@ -469,8 +463,7 @@ BTranslatorRoster::Private::AddPath(const char* path, int32* _added)
 }
 
 
-status_t
-BTranslatorRoster::Private::AddTranslator(BTranslator* translator,
+status_t BTranslatorRoster::Private::AddTranslator(BTranslator* translator,
 	image_id image, const entry_ref* ref, ino_t node)
 {
 	BAutolock locker(this);
@@ -494,8 +487,7 @@ BTranslatorRoster::Private::AddTranslator(BTranslator* translator,
 }
 
 
-void
-BTranslatorRoster::Private::RemoveTranslators(entry_ref& ref)
+void BTranslatorRoster::Private::RemoveTranslators(entry_ref& ref)
 {
 	_RemoveTranslators(NULL, &ref);
 }
@@ -517,8 +509,7 @@ BTranslatorRoster::Private::FindTranslator(translator_id id)
 }
 
 
-status_t
-BTranslatorRoster::Private::GetTranslatorData(image_id image,
+status_t BTranslatorRoster::Private::GetTranslatorData(image_id image,
 	translator_data& data)
 {
 	// If this is a translator add-on, it is in the C format
@@ -556,8 +547,7 @@ BTranslatorRoster::Private::GetTranslatorData(image_id image,
 }
 
 
-status_t
-BTranslatorRoster::Private::CreateTranslators(const entry_ref& ref,
+status_t BTranslatorRoster::Private::CreateTranslators(const entry_ref& ref,
 	int32& count, BMessage* update)
 {
 	BAutolock locker(this);
@@ -651,8 +641,7 @@ BTranslatorRoster::Private::CreateTranslators(const entry_ref& ref,
 }
 
 
-status_t
-BTranslatorRoster::Private::StartWatching(BMessenger target)
+status_t BTranslatorRoster::Private::StartWatching(BMessenger target)
 {
 	try {
 		fMessengers.push_back(target);
@@ -672,8 +661,7 @@ BTranslatorRoster::Private::StartWatching(BMessenger target)
 }
 
 
-status_t
-BTranslatorRoster::Private::StopWatching(BMessenger target)
+status_t BTranslatorRoster::Private::StopWatching(BMessenger target)
 {
 	MessengerList::iterator iterator = fMessengers.begin();
 
@@ -693,8 +681,7 @@ BTranslatorRoster::Private::StopWatching(BMessenger target)
 }
 
 
-status_t
-BTranslatorRoster::Private::StoreTranslators(BMessage& archive)
+status_t BTranslatorRoster::Private::StoreTranslators(BMessage& archive)
 {
 	BAutolock locker(this);
 
@@ -713,8 +700,7 @@ BTranslatorRoster::Private::StoreTranslators(BMessage& archive)
 }
 
 
-status_t
-BTranslatorRoster::Private::Identify(BPositionIO* source,
+status_t BTranslatorRoster::Private::Identify(BPositionIO* source,
 	BMessage* ioExtension, uint32 hintType, const char* hintMIME,
 	uint32 wantType, translator_info* _info)
 {
@@ -767,8 +753,7 @@ BTranslatorRoster::Private::Identify(BPositionIO* source,
 }
 
 
-status_t
-BTranslatorRoster::Private::GetTranslators(BPositionIO* source,
+status_t BTranslatorRoster::Private::GetTranslators(BPositionIO* source,
 	BMessage* ioExtension, uint32 hintType, const char* hintMIME,
 	uint32 wantType, translator_info** _info, int32* _numInfo)
 {
@@ -819,8 +804,7 @@ BTranslatorRoster::Private::GetTranslators(BPositionIO* source,
 }
 
 
-status_t
-BTranslatorRoster::Private::GetAllTranslators(translator_id** _ids,
+status_t BTranslatorRoster::Private::GetAllTranslators(translator_id** _ids,
 	int32* _count)
 {
 	BAutolock locker(this);
@@ -846,8 +830,7 @@ BTranslatorRoster::Private::GetAllTranslators(translator_id** _ids,
 }
 
 
-status_t
-BTranslatorRoster::Private::GetRefFor(translator_id id, entry_ref& ref)
+status_t BTranslatorRoster::Private::GetRefFor(translator_id id, entry_ref& ref)
 {
 	BAutolock locker(this);
 
@@ -865,8 +848,7 @@ BTranslatorRoster::Private::GetRefFor(translator_id id, entry_ref& ref)
 }
 
 
-void
-BTranslatorRoster::Private::_TranslatorDeleted(translator_id id, BTranslator* self)
+void BTranslatorRoster::Private::_TranslatorDeleted(translator_id id, BTranslator* self)
 {
 	BAutolock locker(this);
 
@@ -914,8 +896,7 @@ BTranslatorRoster::Private::_CompareSupport(const void* _a, const void* _b)
 	does not have any listeners, we don't need to notify anyone about those
 	changes.
 */
-void
-BTranslatorRoster::Private::_RescanChanged()
+void BTranslatorRoster::Private::_RescanChanged()
 {
 	while (!fRescanEntries.empty()) {
 		EntryRefSet::iterator iterator = fRescanEntries.begin();
@@ -1034,8 +1015,7 @@ BTranslatorRoster::Private::_FindTranslator(node_ref& nodeRef)
 	is to be found in two directories, the one with the higher priority is
 	chosen.
 */
-int32
-BTranslatorRoster::Private::_CompareTranslatorDirectoryPriority(
+int32 BTranslatorRoster::Private::_CompareTranslatorDirectoryPriority(
 	const entry_ref& a, const entry_ref& b) const
 {
 	// priority is determined by the order in the list
@@ -1063,8 +1043,7 @@ BTranslatorRoster::Private::_CompareTranslatorDirectoryPriority(
 }
 
 
-bool
-BTranslatorRoster::Private::_IsKnownDirectory(const node_ref& nodeRef) const
+bool BTranslatorRoster::Private::_IsKnownDirectory(const node_ref& nodeRef) const
 {
 	NodeRefList::const_iterator iterator = fDirectories.begin();
 
@@ -1079,8 +1058,7 @@ BTranslatorRoster::Private::_IsKnownDirectory(const node_ref& nodeRef) const
 }
 
 
-void
-BTranslatorRoster::Private::_RemoveTranslators(const node_ref* nodeRef,
+void BTranslatorRoster::Private::_RemoveTranslators(const node_ref* nodeRef,
 	const entry_ref* ref)
 {
 	if (ref == NULL && nodeRef == NULL)
@@ -1112,8 +1090,7 @@ BTranslatorRoster::Private::_RemoveTranslators(const node_ref* nodeRef,
 }
 
 
-void
-BTranslatorRoster::Private::_EntryAdded(const node_ref& nodeRef,
+void BTranslatorRoster::Private::_EntryAdded(const node_ref& nodeRef,
 	const char* name)
 {
 	entry_ref ref;
@@ -1133,8 +1110,7 @@ BTranslatorRoster::Private::_EntryAdded(const node_ref& nodeRef,
 
 	Called by the node monitor handling.
 */
-void
-BTranslatorRoster::Private::_EntryAdded(const entry_ref& ref)
+void BTranslatorRoster::Private::_EntryAdded(const entry_ref& ref)
 {
 	BEntry entry;
 	if (entry.SetTo(&ref) != B_OK || !entry.IsFile())
@@ -1153,8 +1129,7 @@ BTranslatorRoster::Private::_EntryAdded(const entry_ref& ref)
 }
 
 
-void
-BTranslatorRoster::Private::_NotifyListeners(BMessage& update) const
+void BTranslatorRoster::Private::_NotifyListeners(BMessage& update) const
 {
 	MessengerList::const_iterator iterator = fMessengers.begin();
 
@@ -1175,8 +1150,7 @@ BTranslatorReleaseDelegate::BTranslatorReleaseDelegate(BTranslator* translator)
 }
 
 
-void
-BTranslatorReleaseDelegate::Release()
+void BTranslatorReleaseDelegate::Release()
 {
 	fUnderlying->Release();
 	// ReleaseDelegate is only allowed to release a translator once.
@@ -1224,15 +1198,13 @@ BTranslatorRoster::~BTranslatorRoster()
 }
 
 
-void
-BTranslatorRoster::_Initialize()
+void BTranslatorRoster::_Initialize()
 {
 	fPrivate = new BTranslatorRoster::Private();
 }
 
 
-status_t
-BTranslatorRoster::Archive(BMessage* into, bool deep) const
+status_t BTranslatorRoster::Archive(BMessage* into, bool deep) const
 {
 	status_t status = BArchivable::Archive(into, deep);
 	if (status != B_OK)
@@ -1294,8 +1266,7 @@ BTranslatorRoster::Default()
 		/boot/home/config/add-ons/Translators,
 		/system/add-ons/Translators.
 */
-status_t
-BTranslatorRoster::AddTranslators(const char* path)
+status_t BTranslatorRoster::AddTranslators(const char* path)
 {
 	if (path == NULL)
 		path = getenv("TRANSLATORS");
@@ -1320,8 +1291,7 @@ BTranslatorRoster::AddTranslators(const char* path)
 	\return B_BAD_VALUE, if translator is NULL,
 		B_OK if all went well
 */
-status_t
-BTranslatorRoster::AddTranslator(BTranslator* translator)
+status_t BTranslatorRoster::AddTranslator(BTranslator* translator)
 {
 	if (!translator)
 		return B_BAD_VALUE;
@@ -1330,8 +1300,7 @@ BTranslatorRoster::AddTranslator(BTranslator* translator)
 }
 
 
-bool
-BTranslatorRoster::IsTranslator(entry_ref* ref)
+bool BTranslatorRoster::IsTranslator(entry_ref* ref)
 {
 	if (ref == NULL)
 		return false;
@@ -1374,8 +1343,7 @@ BTranslatorRoster::IsTranslator(entry_ref* ref)
 		B_NO_TRANSLATOR, no appropriate translator found,
 		and other errors from accessing the source stream
 */
-status_t
-BTranslatorRoster::Identify(BPositionIO* source, BMessage* ioExtension,
+status_t BTranslatorRoster::Identify(BPositionIO* source, BMessage* ioExtension,
 	translator_info* _info, uint32 hintType, const char* hintMIME,
 	uint32 wantType)
 {
@@ -1410,8 +1378,7 @@ BTranslatorRoster::Identify(BPositionIO* source, BMessage* ioExtension,
 		B_NO_TRANSLATOR, no translator could handle \a source
 		other errors, problems using \a source
 */
-status_t
-BTranslatorRoster::GetTranslators(BPositionIO* source, BMessage* ioExtension,
+status_t BTranslatorRoster::GetTranslators(BPositionIO* source, BMessage* ioExtension,
 	translator_info** _info, int32* _numInfo, uint32 hintType,
 	const char* hintMIME, uint32 wantType)
 {
@@ -1431,8 +1398,7 @@ BTranslatorRoster::GetTranslators(BPositionIO* source, BMessage* ioExtension,
 	\param _ids the array is stored there (you own the array).
 	\param _count number of IDs in the array.
 */
-status_t
-BTranslatorRoster::GetAllTranslators(translator_id** _ids, int32* _count)
+status_t BTranslatorRoster::GetAllTranslators(translator_id** _ids, int32* _count)
 {
 	if (_ids == NULL || _count == NULL)
 		return B_BAD_VALUE;
@@ -1455,8 +1421,7 @@ BTranslatorRoster::GetAllTranslators(translator_id** _ids, int32* _count)
 		B_BAD_VALUE, if all parameters are NULL
 		B_NO_TRANSLATOR, \id didn't identify an existing translator
 */
-status_t
-BTranslatorRoster::GetTranslatorInfo(translator_id id, const char** _name,
+status_t BTranslatorRoster::GetTranslatorInfo(translator_id id, const char** _name,
 	const char** _info, int32* _version)
 {
 	if (_name == NULL && _info == NULL && _version == NULL)
@@ -1492,8 +1457,7 @@ BTranslatorRoster::GetTranslatorInfo(translator_id id, const char** _name,
 		B_BAD_VALUE, if any parameter is NULL
 		B_NO_TRANSLATOR, \id didn't identify an existing translator
 */
-status_t
-BTranslatorRoster::GetInputFormats(translator_id id,
+status_t BTranslatorRoster::GetInputFormats(translator_id id,
 	const translation_format** _formats, int32* _numFormats)
 {
 	if (_formats == NULL || _numFormats == NULL)
@@ -1523,8 +1487,7 @@ BTranslatorRoster::GetInputFormats(translator_id id,
 		B_BAD_VALUE, if any parameter is NULL
 		B_NO_TRANSLATOR, \id didn't identify an existing translator
 */
-status_t
-BTranslatorRoster::GetOutputFormats(translator_id id,
+status_t BTranslatorRoster::GetOutputFormats(translator_id id,
 	const translation_format** _formats, int32* _numFormats)
 {
 	if (_formats == NULL || _numFormats == NULL)
@@ -1561,8 +1524,7 @@ BTranslatorRoster::GetOutputFormats(translator_id id,
 		B_NO_TRANSLATOR, no appropriate translator found,
 		and other errors from accessing the source and destination streams
 */
-status_t
-BTranslatorRoster::Translate(BPositionIO* source, const translator_info* info,
+status_t BTranslatorRoster::Translate(BPositionIO* source, const translator_info* info,
 	BMessage* ioExtension, BPositionIO* destination, uint32 wantOutType,
 	uint32 hintType, const char* hintMIME)
 {
@@ -1626,8 +1588,7 @@ BTranslatorRoster::Translate(BPositionIO* source, const translator_info* info,
 		B_NO_TRANSLATOR, no appropriate translator found,
 		and other errors from accessing the source and destination streams
 */
-status_t
-BTranslatorRoster::Translate(translator_id id, BPositionIO* source,
+status_t BTranslatorRoster::Translate(translator_id id, BPositionIO* source,
 	BMessage* ioExtension, BPositionIO* destination, uint32 wantOutType)
 {
 	if (source == NULL || destination == NULL)
@@ -1684,8 +1645,7 @@ BTranslatorRoster::Translate(translator_id id, BPositionIO* source,
 		B_BAD_VALUE, if any parameter is NULL
 		B_NO_TRANSLATOR, \id didn't identify an existing translator
 */
-status_t
-BTranslatorRoster::MakeConfigurationView(translator_id id,
+status_t BTranslatorRoster::MakeConfigurationView(translator_id id,
 	BMessage* ioExtension, BView** _view, BRect* _extent)
 {
 	if (_view == NULL || _extent == NULL)
@@ -1726,8 +1686,7 @@ BTranslatorRoster::AcquireTranslator(int32 id)
 		B_BAD_VALUE, if \a ioExtension is NULL
 		B_NO_TRANSLATOR, \id didn't identify an existing translator
 */
-status_t
-BTranslatorRoster::GetConfigurationMessage(translator_id id,
+status_t BTranslatorRoster::GetConfigurationMessage(translator_id id,
 	BMessage* ioExtension)
 {
 	if (!ioExtension)
@@ -1755,8 +1714,7 @@ BTranslatorRoster::GetConfigurationMessage(translator_id id,
 		B_BAD_VALUE, if \a ref is NULL
 		B_NO_TRANSLATOR, \id didn't identify an existing translator
 */
-status_t
-BTranslatorRoster::GetRefFor(translator_id id, entry_ref* ref)
+status_t BTranslatorRoster::GetRefFor(translator_id id, entry_ref* ref)
 {
 	if (ref == NULL)
 		return B_BAD_VALUE;
@@ -1765,15 +1723,13 @@ BTranslatorRoster::GetRefFor(translator_id id, entry_ref* ref)
 }
 
 
-status_t
-BTranslatorRoster::StartWatching(BMessenger target)
+status_t BTranslatorRoster::StartWatching(BMessenger target)
 {
 	return fPrivate->StartWatching(target);
 }
 
 
-status_t
-BTranslatorRoster::StopWatching(BMessenger target)
+status_t BTranslatorRoster::StopWatching(BMessenger target)
 {
 	return fPrivate->StopWatching(target);
 }
@@ -1796,8 +1752,7 @@ BTranslatorRoster::operator=(const BTranslatorRoster &tr)
 
 #if __GNUC__ == 2	// gcc 2
 
-/*static*/ const char*
-BTranslatorRoster::Version(int32* outCurVersion, int32* outMinVersion,
+/*static*/ const char*  BTranslatorRoster::Version(int32* outCurVersion, int32* outMinVersion,
 	int32 inAppVersion)
 {
 	if (!outCurVersion || !outMinVersion)

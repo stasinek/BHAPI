@@ -20,8 +20,7 @@ DwarfImageDebugInfoLoadingState::~DwarfImageDebugInfoLoadingState()
 }
 
 
-bool
-DwarfImageDebugInfoLoadingState::UserInputRequired() const
+bool DwarfImageDebugInfoLoadingState::UserInputRequired() const
 {
 	return fState.state == DWARF_FILE_LOADING_STATE_USER_INPUT_NEEDED;
 }

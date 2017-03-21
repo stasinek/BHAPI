@@ -96,7 +96,7 @@ EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine,  __be_int32 x,  
 
 	XClassHint class_hint;
 	class_hint.res_name = NULL;
-	class_hint.res_class = (char*)bhapi::be_app->Signature();
+	class_hint.res_class = (char*)bhapi::__be_clipboard->Signature();
 
 	XSetWMProperties(fEngine->xDisplay, xWindow, NULL, NULL, NULL, 0, &size_hints, &wm_hints, &class_hint);
 
@@ -164,7 +164,7 @@ EXGraphicsWindow::~EXGraphicsWindow()
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::ContactTo(const BMessenger *msgr)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -179,7 +179,7 @@ EXGraphicsWindow::ContactTo(const BMessenger *msgr)
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::SetBackgroundColor(bhapi::rgb_color bkColor)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -224,7 +224,7 @@ EXGraphicsWindow::SetBackgroundColor(bhapi::rgb_color bkColor)
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::SetFlags(__be_uint32 flags)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -266,7 +266,7 @@ EXGraphicsWindow::SetFlags(__be_uint32 flags)
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::SetLook(bhapi::window_look look)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -338,7 +338,7 @@ EXGraphicsWindow::SetLook(bhapi::window_look look)
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::SetFeel(bhapi::window_feel feel)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -355,7 +355,7 @@ EXGraphicsWindow::SetFeel(bhapi::window_feel feel)
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::SetTitle(const char *title)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -393,7 +393,7 @@ EXGraphicsWindow::SetTitle(const char *title)
 
 	XClassHint class_hint;
 	class_hint.res_name = (char*)title;
-	class_hint.res_class = (char*)bhapi::be_app->Signature();
+	class_hint.res_class = (char*)bhapi::__be_clipboard->Signature();
 
 	XSetClassHint(fEngine->xDisplay, xWindow, &class_hint);
 
@@ -403,7 +403,7 @@ EXGraphicsWindow::SetTitle(const char *title)
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::SetWorkspaces(__be_uint32 workspaces)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -462,7 +462,7 @@ EXGraphicsWindow::SetWorkspaces(__be_uint32 workspaces)
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::GetWorkspaces(__be_uint32 *workspaces)
 {
 	if(fEngine == NULL || workspaces == NULL) return B_ERROR;
@@ -496,7 +496,7 @@ EXGraphicsWindow::GetWorkspaces(__be_uint32 *workspaces)
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::Iconify()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -535,7 +535,7 @@ EXGraphicsWindow::Iconify()
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::Show()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -574,7 +574,7 @@ EXGraphicsWindow::Show()
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::Hide()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -613,7 +613,7 @@ EXGraphicsWindow::Hide()
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::MoveTo(__be_int32 x,  __be_int32 y)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -629,7 +629,7 @@ EXGraphicsWindow::MoveTo(__be_int32 x,  __be_int32 y)
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::ResizeTo(__be_uint32 w,  __be_uint32 h)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
@@ -651,7 +651,7 @@ EXGraphicsWindow::ResizeTo(__be_uint32 w,  __be_uint32 h)
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::MoveAndResizeTo(__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
@@ -673,7 +673,7 @@ EXGraphicsWindow::MoveAndResizeTo(__be_int32 x,  __be_int32 y,  __be_uint32 w,  
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::Raise()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -706,7 +706,7 @@ EXGraphicsWindow::Raise()
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::Lower(BGraphicsWindow *frontW)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -771,7 +771,7 @@ EXGraphicsWindow::Lower(BGraphicsWindow *frontW)
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::Activate(bool state)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -850,7 +850,7 @@ EXGraphicsWindow::Activate(bool state)
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::GetActivatedState(bool *state) const
 {
 	if(fEngine == NULL || state == NULL) return B_ERROR;
@@ -874,7 +874,7 @@ EXGraphicsWindow::GetActivatedState(bool *state) const
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::GrabMouse()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -897,7 +897,7 @@ EXGraphicsWindow::GrabMouse()
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::UngrabMouse()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -911,7 +911,7 @@ EXGraphicsWindow::UngrabMouse()
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::GrabKeyboard()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -931,7 +931,7 @@ EXGraphicsWindow::GrabKeyboard()
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::UngrabKeyboard()
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -945,7 +945,7 @@ EXGraphicsWindow::UngrabKeyboard()
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::SetSizeLimits(__be_uint32 min_w,  __be_uint32 max_w,  __be_uint32 min_h,  __be_uint32 max_h)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -967,7 +967,7 @@ EXGraphicsWindow::SetSizeLimits(__be_uint32 min_w,  __be_uint32 max_w,  __be_uin
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::GetSizeLimits(__be_uint32 *min_w,  __be_uint32 *max_w,  __be_uint32 *min_h,  __be_uint32 *max_h)
 {
 	if(min_w == NULL || max_w == NULL || min_h == NULL || max_h == NULL) return B_ERROR;
@@ -1003,7 +1003,7 @@ EXGraphicsWindow::GetSizeLimits(__be_uint32 *min_w,  __be_uint32 *max_w,  __be_u
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::QueryMouse(__be_int32 *x,  __be_int32 *y,  __be_int32 *buttons)
 {
 	if(x == NULL && y == NULL && buttons == NULL) return B_ERROR;
@@ -1032,7 +1032,7 @@ EXGraphicsWindow::QueryMouse(__be_int32 *x,  __be_int32 *y,  __be_int32 *buttons
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::CopyTo(BGraphicsContext *_dc_,
 			 BGraphicsDrawable *dstDrawable,
 			  __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,

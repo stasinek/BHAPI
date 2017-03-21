@@ -45,8 +45,7 @@ extern addr_t __gNetAPIStart;
 extern addr_t __gNetAPIEnd;
 
 
-static inline bool
-check_r5_compatibility()
+static inline bool check_r5_compatibility()
 {
 	if (!__gR5Compatibility)
 		return false;

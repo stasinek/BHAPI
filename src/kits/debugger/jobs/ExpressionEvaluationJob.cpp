@@ -71,8 +71,7 @@ ExpressionEvaluationJob::Key() const
 }
 
 
-status_t
-ExpressionEvaluationJob::Do()
+status_t ExpressionEvaluationJob::Do()
 {
 	BReference<Value> reference;
 	status_t result = B_OK;
@@ -105,8 +104,7 @@ ExpressionEvaluationJob::Do()
 }
 
 
-status_t
-ExpressionEvaluationJob::ResolveNodeValue(ValueNode* node)
+status_t ExpressionEvaluationJob::ResolveNodeValue(ValueNode* node)
 {
 	AutoLocker<Worker> workerLocker(GetWorker());
 	SimpleJobKey jobKey(node, JOB_TYPE_RESOLVE_VALUE_NODE_VALUE);

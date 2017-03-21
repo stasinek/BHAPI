@@ -18,15 +18,13 @@ x86_read_msr(uint32_t msr)
 }
 
 
-static inline void
-x86_write_msr(uint32_t msr, uint64_t value)
+static inline void x86_write_msr(uint32_t msr, uint64_t value)
 {
 	asm volatile("wrmsr" : : "a" (value) , "d" (value >> 32), "c" (msr));
 }
 
 
-static inline void
-x86_context_switch(arch_thread* oldState, arch_thread* newState)
+static inline void x86_context_switch(arch_thread* oldState, arch_thread* newState)
 {
 	uint16_t fpuControl;
 	asm volatile("fnstcw %0" : "=m" (fpuControl));
@@ -53,8 +51,7 @@ x86_context_switch(arch_thread* oldState, arch_thread* newState)
 }
 
 
-static inline void
-x86_swap_pgdir(uintptr_t root)
+static inline void x86_swap_pgdir(uintptr_t root)
 {
 	asm volatile("movq	%0, %%cr3" : : "r" (root));
 }

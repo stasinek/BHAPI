@@ -51,7 +51,7 @@ char __dont_remove_copyright_from_binary[] = "Copyright (c) 2002-2006 Marcus "
 #include <Message.h>
 #include <Messenger.h>
 #include <MimeType.h>
-#include <OS.h>
+#include <kernel/OS.h>
 #include <ParameterWeb.h>
 #include <Roster.h>
 #include <StopWatch.h>
@@ -127,8 +127,7 @@ BMediaRosterEx::BMediaRosterEx(status_t* _error)
 }
 
 
-void
-BMediaRosterEx::Quit()
+void BMediaRosterEx::Quit()
 {
 	if (__be_roster->StopWatching(BMessenger(this, this)) != B_OK)
 			TRACE("Can't unregister roster notifications");
@@ -140,8 +139,7 @@ BMediaRosterEx::Quit()
 }
 
 
-status_t
-BMediaRosterEx::BuildConnections()
+status_t BMediaRosterEx::BuildConnections()
 {
 	InitServerDataExchange();
 	// register this application with the media server
@@ -176,8 +174,7 @@ BMediaRosterEx::~BMediaRosterEx()
 }
 
 
-status_t
-BMediaRosterEx::SaveNodeConfiguration(BMediaNode* node)
+status_t BMediaRosterEx::SaveNodeConfiguration(BMediaNode* node)
 {
 	int32 flavorID;
 	BMediaAddOn* addon = node->AddOn(&flavorID);
@@ -200,8 +197,7 @@ BMediaRosterEx::SaveNodeConfiguration(BMediaNode* node)
 }
 
 
-status_t
-BMediaRosterEx::LoadNodeConfiguration(media_addon_id addonID, int32 flavorID,
+status_t BMediaRosterEx::LoadNodeConfiguration(media_addon_id addonID, int32 flavorID,
 	BMessage *_msg)
 {
 	// TODO: fix this
@@ -213,8 +209,7 @@ BMediaRosterEx::LoadNodeConfiguration(media_addon_id addonID, int32 flavorID,
 }
 
 
-status_t
-BMediaRosterEx::IncrementAddonFlavorInstancesCount(media_addon_id addonID,
+status_t BMediaRosterEx::IncrementAddonFlavorInstancesCount(media_addon_id addonID,
 	int32 flavorID)
 {
 	server_change_flavor_instances_count_request request;
@@ -229,8 +224,7 @@ BMediaRosterEx::IncrementAddonFlavorInstancesCount(media_addon_id addonID,
 }
 
 
-status_t
-BMediaRosterEx::DecrementAddonFlavorInstancesCount(media_addon_id addonID,
+status_t BMediaRosterEx::DecrementAddonFlavorInstancesCount(media_addon_id addonID,
 	int32 flavorID)
 {
 	server_change_flavor_instances_count_request request;
@@ -245,8 +239,7 @@ BMediaRosterEx::DecrementAddonFlavorInstancesCount(media_addon_id addonID,
 }
 
 
-status_t
-BMediaRosterEx::ReleaseNodeAll(const media_node& node)
+status_t BMediaRosterEx::ReleaseNodeAll(const media_node& node)
 {
 		CALLED();
 	if (IS_INVALID_NODE(node))
@@ -286,8 +279,7 @@ BMediaRosterEx::ReleaseNodeAll(const media_node& node)
 }
 
 
-status_t
-BMediaRosterEx::SetNodeCreator(media_node_id node, team_id creator)
+status_t BMediaRosterEx::SetNodeCreator(media_node_id node, team_id creator)
 {
 	server_set_node_creator_request request;
 	server_set_node_creator_reply reply;
@@ -299,8 +291,7 @@ BMediaRosterEx::SetNodeCreator(media_node_id node, team_id creator)
 }
 
 
-status_t
-BMediaRosterEx::GetNode(node_type type, media_node* out_node,
+status_t BMediaRosterEx::GetNode(node_type type, media_node* out_node,
 	int32* out_input_id, BString* out_input_name)
 {
 	if (out_node == NULL)
@@ -326,8 +317,7 @@ BMediaRosterEx::GetNode(node_type type, media_node* out_node,
 }
 
 
-status_t
-BMediaRosterEx::SetNode(node_type type, const media_node* node,
+status_t BMediaRosterEx::SetNode(node_type type, const media_node* node,
 	const dormant_node_info* info, const media_input* input)
 {
 	server_set_node_request request;
@@ -349,8 +339,7 @@ BMediaRosterEx::SetNode(node_type type, const media_node* node,
 }
 
 
-status_t
-BMediaRosterEx::GetAllOutputs(const media_node& node, List<media_output>* list)
+status_t BMediaRosterEx::GetAllOutputs(const media_node& node, List<media_output>* list)
 {
 	int32 cookie;
 	status_t rv;
@@ -396,8 +385,7 @@ BMediaRosterEx::GetAllOutputs(const media_node& node, List<media_output>* list)
 }
 
 
-status_t
-BMediaRosterEx::GetAllOutputs(BBufferProducer* node, List<media_output>* list)
+status_t BMediaRosterEx::GetAllOutputs(BBufferProducer* node, List<media_output>* list)
 {
 	int32 cookie;
 	status_t result;
@@ -426,8 +414,7 @@ BMediaRosterEx::GetAllOutputs(BBufferProducer* node, List<media_output>* list)
 }
 
 
-status_t
-BMediaRosterEx::GetAllInputs(const media_node& node, List<media_input>* list)
+status_t BMediaRosterEx::GetAllInputs(const media_node& node, List<media_input>* list)
 {
 	int32 cookie;
 	status_t rv;
@@ -473,8 +460,7 @@ BMediaRosterEx::GetAllInputs(const media_node& node, List<media_input>* list)
 }
 
 
-status_t
-BMediaRosterEx::GetAllInputs(BBufferConsumer* node, List<media_input>* list)
+status_t BMediaRosterEx::GetAllInputs(BBufferConsumer* node, List<media_input>* list)
 {
 	int32 cookie;
 	status_t result;
@@ -503,8 +489,7 @@ BMediaRosterEx::GetAllInputs(BBufferConsumer* node, List<media_input>* list)
 }
 
 
-status_t
-BMediaRosterEx::PublishOutputs(const media_node& node, List<media_output>* list)
+status_t BMediaRosterEx::PublishOutputs(const media_node& node, List<media_output>* list)
 {
 	server_publish_outputs_request request;
 	server_publish_outputs_reply reply;
@@ -552,8 +537,7 @@ BMediaRosterEx::PublishOutputs(const media_node& node, List<media_output>* list)
 }
 
 
-status_t
-BMediaRosterEx::PublishInputs(const media_node& node, List<media_input>* list)
+status_t BMediaRosterEx::PublishInputs(const media_node& node, List<media_input>* list)
 {
 	server_publish_inputs_request request;
 	server_publish_inputs_reply reply;
@@ -628,48 +612,42 @@ BMediaRosterEx::MakeTimeSourceObject(media_node_id timeSourceID)
 //	#pragma mark - public BMediaRoster
 
 
-status_t
-BMediaRoster::GetVideoInput(media_node* _node)
+status_t BMediaRoster::GetVideoInput(media_node* _node)
 {
 	CALLED();
 	return MediaRosterEx(this)->GetNode(VIDEO_INPUT, _node);
 }
 
 
-status_t
-BMediaRoster::GetAudioInput(media_node* _node)
+status_t BMediaRoster::GetAudioInput(media_node* _node)
 {
 	CALLED();
 	return MediaRosterEx(this)->GetNode(AUDIO_INPUT, _node);
 }
 
 
-status_t
-BMediaRoster::GetVideoOutput(media_node* _node)
+status_t BMediaRoster::GetVideoOutput(media_node* _node)
 {
 	CALLED();
 	return MediaRosterEx(this)->GetNode(VIDEO_OUTPUT, _node);
 }
 
 
-status_t
-BMediaRoster::GetAudioMixer(media_node* _node)
+status_t BMediaRoster::GetAudioMixer(media_node* _node)
 {
 	CALLED();
 	return MediaRosterEx(this)->GetNode(AUDIO_MIXER, _node);
 }
 
 
-status_t
-BMediaRoster::GetAudioOutput(media_node* _node)
+status_t BMediaRoster::GetAudioOutput(media_node* _node)
 {
 	CALLED();
 	return MediaRosterEx(this)->GetNode(AUDIO_OUTPUT, _node);
 }
 
 
-status_t
-BMediaRoster::GetAudioOutput(media_node* _node, int32* _inputID,
+status_t BMediaRoster::GetAudioOutput(media_node* _node, int32* _inputID,
 	BString* _inputName)
 {
 	CALLED();
@@ -678,8 +656,7 @@ BMediaRoster::GetAudioOutput(media_node* _node, int32* _inputID,
 }
 
 
-status_t
-BMediaRoster::GetTimeSource(media_node* _node)
+status_t BMediaRoster::GetTimeSource(media_node* _node)
 {
 	CALLED();
 	status_t rv;
@@ -700,80 +677,70 @@ BMediaRoster::GetTimeSource(media_node* _node)
 }
 
 
-status_t
-BMediaRoster::SetVideoInput(const media_node& producer)
+status_t BMediaRoster::SetVideoInput(const media_node& producer)
 {
 	CALLED();
 	return MediaRosterEx(this)->SetNode(VIDEO_INPUT, &producer);
 }
 
 
-status_t
-BMediaRoster::SetVideoInput(const dormant_node_info& producer)
+status_t BMediaRoster::SetVideoInput(const dormant_node_info& producer)
 {
 	CALLED();
 	return MediaRosterEx(this)->SetNode(VIDEO_INPUT, NULL, &producer);
 }
 
 
-status_t
-BMediaRoster::SetAudioInput(const media_node& producer)
+status_t BMediaRoster::SetAudioInput(const media_node& producer)
 {
 	CALLED();
 	return MediaRosterEx(this)->SetNode(AUDIO_INPUT, &producer);
 }
 
 
-status_t
-BMediaRoster::SetAudioInput(const dormant_node_info& producer)
+status_t BMediaRoster::SetAudioInput(const dormant_node_info& producer)
 {
 	CALLED();
 	return MediaRosterEx(this)->SetNode(AUDIO_INPUT, NULL, &producer);
 }
 
 
-status_t
-BMediaRoster::SetVideoOutput(const media_node& consumer)
+status_t BMediaRoster::SetVideoOutput(const media_node& consumer)
 {
 	CALLED();
 	return MediaRosterEx(this)->SetNode(VIDEO_OUTPUT, &consumer);
 }
 
 
-status_t
-BMediaRoster::SetVideoOutput(const dormant_node_info& consumer)
+status_t BMediaRoster::SetVideoOutput(const dormant_node_info& consumer)
 {
 	CALLED();
 	return MediaRosterEx(this)->SetNode(VIDEO_OUTPUT, NULL, &consumer);
 }
 
 
-status_t
-BMediaRoster::SetAudioOutput(const media_node& consumer)
+status_t BMediaRoster::SetAudioOutput(const media_node& consumer)
 {
 	CALLED();
 	return MediaRosterEx(this)->SetNode(AUDIO_OUTPUT, &consumer);
 }
 
 
-status_t
-BMediaRoster::SetAudioOutput(const media_input& input)
+status_t BMediaRoster::SetAudioOutput(const media_input& input)
 {
 	CALLED();
 	return MediaRosterEx(this)->SetNode(AUDIO_OUTPUT, NULL, NULL, &input);
 }
 
 
-status_t
-BMediaRoster::SetAudioOutput(const dormant_node_info& consumer)
+status_t BMediaRoster::SetAudioOutput(const dormant_node_info& consumer)
 {
 	CALLED();
 	return MediaRosterEx(this)->SetNode(AUDIO_OUTPUT, NULL, &consumer);
 }
 
 
-status_t
-BMediaRoster::GetNodeFor(media_node_id node, media_node* clone)
+status_t BMediaRoster::GetNodeFor(media_node_id node, media_node* clone)
 {
 	CALLED();
 	if (clone == NULL)
@@ -798,8 +765,7 @@ BMediaRoster::GetNodeFor(media_node_id node, media_node* clone)
 }
 
 
-status_t
-BMediaRoster::GetSystemTimeSource(media_node* clone)
+status_t BMediaRoster::GetSystemTimeSource(media_node* clone)
 {
 	CALLED();
 	status_t rv;
@@ -822,8 +788,7 @@ BMediaRoster::GetSystemTimeSource(media_node* clone)
 }
 
 
-status_t
-BMediaRoster::ReleaseNode(const media_node& node)
+status_t BMediaRoster::ReleaseNode(const media_node& node)
 {
 	CALLED();
 	if (IS_INVALID_NODE(node))
@@ -907,16 +872,14 @@ BMediaRoster::MakeTimeSourceFor(const media_node& forNode)
 }
 
 
-status_t
-BMediaRoster::Connect(const media_source& from, const media_destination& to,
+status_t BMediaRoster::Connect(const media_source& from, const media_destination& to,
 	media_format* _format, media_output* _output, media_input* _input)
 {
 	return BMediaRoster::Connect(from, to, _format, _output, _input, 0);
 }
 
 
-status_t
-BMediaRoster::Connect(const media_source& from, const media_destination& to,
+status_t BMediaRoster::Connect(const media_source& from, const media_destination& to,
 	media_format* io_format, media_output* out_output, media_input* out_input,
 	uint32 in_flags, void* _reserved)
 {
@@ -1111,8 +1074,7 @@ BMediaRoster::Connect(const media_source& from, const media_destination& to,
 };
 
 
-status_t
-BMediaRoster::Disconnect(media_node_id source_nodeid,
+status_t BMediaRoster::Disconnect(media_node_id source_nodeid,
 	const media_source& source, media_node_id destination_nodeid,
 	const media_destination& destination)
 {
@@ -1191,8 +1153,7 @@ BMediaRoster::Disconnect(media_node_id source_nodeid,
 }
 
 
-status_t
-BMediaRoster::Disconnect(const media_output& output, const media_input& input)
+status_t BMediaRoster::Disconnect(const media_output& output, const media_input& input)
 {
 	if (IS_INVALID_NODEID(output.node.node)) {
 		printf("BMediaRoster::Disconnect: output.node.node %" B_PRId32
@@ -1244,8 +1205,7 @@ BMediaRoster::Disconnect(const media_output& output, const media_input& input)
 }
 
 
-status_t
-BMediaRoster::StartNode(const media_node& node, bigtime_t atPerformanceTime)
+status_t BMediaRoster::StartNode(const media_node& node, bigtime_t atPerformanceTime)
 {
 	CALLED();
 	if (node.node <= 0)
@@ -1261,8 +1221,7 @@ BMediaRoster::StartNode(const media_node& node, bigtime_t atPerformanceTime)
 }
 
 
-status_t
-BMediaRoster::StopNode(const media_node& node, bigtime_t atPerformanceTime,
+status_t BMediaRoster::StopNode(const media_node& node, bigtime_t atPerformanceTime,
 	bool immediate)
 {
 	CALLED();
@@ -1280,8 +1239,7 @@ BMediaRoster::StopNode(const media_node& node, bigtime_t atPerformanceTime,
 }
 
 
-status_t
-BMediaRoster::SeekNode(const media_node& node, bigtime_t toMediaTime,
+status_t BMediaRoster::SeekNode(const media_node& node, bigtime_t toMediaTime,
 	bigtime_t atPerformanceTime)
 {
 	CALLED();
@@ -1299,8 +1257,7 @@ BMediaRoster::SeekNode(const media_node& node, bigtime_t toMediaTime,
 }
 
 
-status_t
-BMediaRoster::StartTimeSource(const media_node& node, bigtime_t atRealTime)
+status_t BMediaRoster::StartTimeSource(const media_node& node, bigtime_t atRealTime)
 {
 	CALLED();
 	if (IS_SYSTEM_TIMESOURCE(node)) {
@@ -1335,8 +1292,7 @@ BMediaRoster::StartTimeSource(const media_node& node, bigtime_t atRealTime)
 }
 
 
-status_t
-BMediaRoster::StopTimeSource(const media_node& node, bigtime_t atRealTime,
+status_t BMediaRoster::StopTimeSource(const media_node& node, bigtime_t atRealTime,
 	bool immediate)
 {
 	CALLED();
@@ -1373,8 +1329,7 @@ BMediaRoster::StopTimeSource(const media_node& node, bigtime_t atRealTime,
 }
 
 
-status_t
-BMediaRoster::SeekTimeSource(const media_node& node,
+status_t BMediaRoster::SeekTimeSource(const media_node& node,
 	bigtime_t toPerformanceTime, bigtime_t atRealTime)
 {
 	CALLED();
@@ -1413,8 +1368,7 @@ BMediaRoster::SeekTimeSource(const media_node& node,
 }
 
 
-status_t
-BMediaRoster::SyncToNode(const media_node& node, bigtime_t atTime,
+status_t BMediaRoster::SyncToNode(const media_node& node, bigtime_t atTime,
 	bigtime_t timeout)
 {
 	TRACE("BMediaRoster::SyncToNode, node %" B_PRId32 ", at real %" B_PRId64
@@ -1446,8 +1400,7 @@ BMediaRoster::SyncToNode(const media_node& node, bigtime_t atTime,
 }
 
 
-status_t
-BMediaRoster::SetRunModeNode(const media_node& node, BMediaNode::run_mode mode)
+status_t BMediaRoster::SetRunModeNode(const media_node& node, BMediaNode::run_mode mode)
 {
 	TRACE("BMediaRoster::SetRunModeNode, node %" B_PRId32 ", mode %d\n",
 		node.node, mode);
@@ -1461,8 +1414,7 @@ BMediaRoster::SetRunModeNode(const media_node& node, BMediaNode::run_mode mode)
 }
 
 
-status_t
-BMediaRoster::PrerollNode(const media_node& node)
+status_t BMediaRoster::PrerollNode(const media_node& node)
 {
 	CALLED();
 	if (IS_INVALID_NODE(node))
@@ -1473,8 +1425,7 @@ BMediaRoster::PrerollNode(const media_node& node)
 }
 
 
-status_t
-BMediaRoster::RollNode(const media_node& node, bigtime_t startPerformance,
+status_t BMediaRoster::RollNode(const media_node& node, bigtime_t startPerformance,
 	bigtime_t stopPerformance, bigtime_t atMediaTime)
 {
 	CALLED();
@@ -1495,8 +1446,7 @@ BMediaRoster::RollNode(const media_node& node, bigtime_t startPerformance,
 }
 
 
-status_t
-BMediaRoster::SetProducerRunModeDelay(const media_node& node,
+status_t BMediaRoster::SetProducerRunModeDelay(const media_node& node,
 	bigtime_t delay, BMediaNode::run_mode mode)
 {
 	TRACE("BMediaRoster::SetProducerRunModeDelay, node %" B_PRId32 ", delay %"
@@ -1515,8 +1465,7 @@ BMediaRoster::SetProducerRunModeDelay(const media_node& node,
 }
 
 
-status_t
-BMediaRoster::SetProducerRate(const media_node& producer, int32 numer,
+status_t BMediaRoster::SetProducerRate(const media_node& producer, int32 numer,
 	int32 denom)
 {
 	CALLED();
@@ -1545,8 +1494,7 @@ BMediaRoster::SetProducerRate(const media_node& producer, int32 numer,
 	of accepting more connections. The node may create an additional
 	output or input as the currently available is taken into usage.
 */
-status_t
-BMediaRoster::GetLiveNodeInfo(const media_node& node,
+status_t BMediaRoster::GetLiveNodeInfo(const media_node& node,
 	live_node_info* out_live_info)
 {
 	CALLED();
@@ -1571,8 +1519,7 @@ BMediaRoster::GetLiveNodeInfo(const media_node& node,
 }
 
 
-status_t
-BMediaRoster::GetLiveNodes(live_node_info* liveNodes, int32* _totalCount,
+status_t BMediaRoster::GetLiveNodes(live_node_info* liveNodes, int32* _totalCount,
 	const media_format* hasInput, const media_format* hasOutput,
 	const char* name, uint64 nodeKinds)
 {
@@ -1629,8 +1576,7 @@ BMediaRoster::GetLiveNodes(live_node_info* liveNodes, int32* _totalCount,
 }
 
 
-status_t
-BMediaRoster::GetFreeInputsFor(const media_node& node,
+status_t BMediaRoster::GetFreeInputsFor(const media_node& node,
 	media_input * out_free_inputs, int32 buf_num_inputs,
 	int32 * out_total_count, media_type filter_type)
 {
@@ -1690,8 +1636,7 @@ BMediaRoster::GetFreeInputsFor(const media_node& node,
 }
 
 
-status_t
-BMediaRoster::GetConnectedInputsFor(const media_node& node,
+status_t BMediaRoster::GetConnectedInputsFor(const media_node& node,
 	media_input* out_active_inputs, int32 buf_num_inputs,
 	int32* out_total_count)
 {
@@ -1734,8 +1679,7 @@ BMediaRoster::GetConnectedInputsFor(const media_node& node,
 }
 
 
-status_t
-BMediaRoster::GetAllInputsFor(const media_node& node, media_input* out_inputs,
+status_t BMediaRoster::GetAllInputsFor(const media_node& node, media_input* out_inputs,
 	int32 buf_num_inputs, int32* out_total_count)
 {
 	CALLED();
@@ -1774,8 +1718,7 @@ BMediaRoster::GetAllInputsFor(const media_node& node, media_input* out_inputs,
 }
 
 
-status_t
-BMediaRoster::GetFreeOutputsFor(const media_node& node,
+status_t BMediaRoster::GetFreeOutputsFor(const media_node& node,
 	media_output* out_free_outputs, int32 buf_num_outputs,
 	int32* out_total_count, media_type filter_type)
 {
@@ -1827,8 +1770,7 @@ BMediaRoster::GetFreeOutputsFor(const media_node& node,
 }
 
 
-status_t
-BMediaRoster::GetConnectedOutputsFor(const media_node& node,
+status_t BMediaRoster::GetConnectedOutputsFor(const media_node& node,
 	media_output* out_active_outputs, int32 buf_num_outputs,
 	int32* out_total_count)
 {
@@ -1873,8 +1815,7 @@ BMediaRoster::GetConnectedOutputsFor(const media_node& node,
 }
 
 
-status_t
-BMediaRoster::GetAllOutputsFor(const media_node& node,
+status_t BMediaRoster::GetAllOutputsFor(const media_node& node,
 	media_output* out_outputs, int32 buf_num_outputs, int32* out_total_count)
 {
 	CALLED();
@@ -1913,8 +1854,7 @@ BMediaRoster::GetAllOutputsFor(const media_node& node,
 }
 
 
-status_t
-BMediaRoster::StartWatching(const BMessenger& where)
+status_t BMediaRoster::StartWatching(const BMessenger& where)
 {
 	CALLED();
 	if (!where.IsValid()) {
@@ -1926,8 +1866,7 @@ BMediaRoster::StartWatching(const BMessenger& where)
 }
 
 
-status_t
-BMediaRoster::StartWatching(const BMessenger & where, int32 notificationType)
+status_t BMediaRoster::StartWatching(const BMessenger & where, int32 notificationType)
 {
 	CALLED();
 	if (!where.IsValid()) {
@@ -1948,8 +1887,7 @@ BMediaRoster::StartWatching(const BMessenger & where, int32 notificationType)
 }
 
 
-status_t
-BMediaRoster::StartWatching(const BMessenger& where, const media_node& node,
+status_t BMediaRoster::StartWatching(const BMessenger& where, const media_node& node,
 	int32 notificationType)
 {
 	CALLED();
@@ -1971,8 +1909,7 @@ BMediaRoster::StartWatching(const BMessenger& where, const media_node& node,
 }
 
 
-status_t
-BMediaRoster::StopWatching(const BMessenger& where)
+status_t BMediaRoster::StopWatching(const BMessenger& where)
 {
 	CALLED();
 	// messenger may already be invalid, so we don't check this
@@ -1981,8 +1918,7 @@ BMediaRoster::StopWatching(const BMessenger& where)
 }
 
 
-status_t
-BMediaRoster::StopWatching(const BMessenger& where, int32 notificationType)
+status_t BMediaRoster::StopWatching(const BMessenger& where, int32 notificationType)
 {
 	CALLED();
 	// messenger may already be invalid, so we don't check this
@@ -1996,8 +1932,7 @@ BMediaRoster::StopWatching(const BMessenger& where, int32 notificationType)
 }
 
 
-status_t
-BMediaRoster::StopWatching(const BMessenger& where, const media_node& node,
+status_t BMediaRoster::StopWatching(const BMessenger& where, const media_node& node,
 	int32 notificationType)
 {
 	CALLED();
@@ -2016,8 +1951,7 @@ BMediaRoster::StopWatching(const BMessenger& where, const media_node& node,
 }
 
 
-status_t
-BMediaRoster::RegisterNode(BMediaNode* node)
+status_t BMediaRoster::RegisterNode(BMediaNode* node)
 {
 	CALLED();
 	// addon-id = -1 (unused), addon-flavor-id = 0 (unused, too)
@@ -2025,8 +1959,7 @@ BMediaRoster::RegisterNode(BMediaNode* node)
 }
 
 
-status_t
-BMediaRosterEx::RegisterNode(BMediaNode* node, media_addon_id addOnID,
+status_t BMediaRosterEx::RegisterNode(BMediaNode* node, media_addon_id addOnID,
 	int32 flavorID)
 {
 	CALLED();
@@ -2136,8 +2069,7 @@ BMediaRosterEx::RegisterNode(BMediaNode* node, media_addon_id addOnID,
 }
 
 
-status_t
-BMediaRoster::UnregisterNode(BMediaNode* node)
+status_t BMediaRoster::UnregisterNode(BMediaNode* node)
 {
 	CALLED();
 	if (node == NULL)
@@ -2253,8 +2185,7 @@ BMediaRoster::CurrentRoster()
 }
 
 
-status_t
-BMediaRoster::SetTimeSourceFor(media_node_id node, media_node_id time_source)
+status_t BMediaRoster::SetTimeSourceFor(media_node_id node, media_node_id time_source)
 {
 	CALLED();
 	if (IS_INVALID_NODEID(node) || IS_INVALID_NODEID(time_source))
@@ -2310,8 +2241,7 @@ BMediaRoster::SetTimeSourceFor(media_node_id node, media_node_id time_source)
 }
 
 
-status_t
-BMediaRoster::GetParameterWebFor(const media_node& node, BParameterWeb** _web)
+status_t BMediaRoster::GetParameterWebFor(const media_node& node, BParameterWeb** _web)
 {
 	CALLED();
 	if (_web == NULL)
@@ -2388,8 +2318,7 @@ BMediaRoster::GetParameterWebFor(const media_node& node, BParameterWeb** _web)
 }
 
 
-status_t
-BMediaRoster::StartControlPanel(const media_node& node, BMessenger* _messenger)
+status_t BMediaRoster::StartControlPanel(const media_node& node, BMessenger* _messenger)
 {
 	CALLED();
 
@@ -2411,8 +2340,7 @@ BMediaRoster::StartControlPanel(const media_node& node, BMessenger* _messenger)
 }
 
 
-status_t
-BMediaRoster::GetDormantNodes(dormant_node_info* _info, int32* _count,
+status_t BMediaRoster::GetDormantNodes(dormant_node_info* _info, int32* _count,
 	const media_format* hasInput, const media_format* hasOutput,
 	const char* name, uint64 requireKinds, uint64 denyKinds)
 {
@@ -2467,8 +2395,7 @@ BMediaRoster::GetDormantNodes(dormant_node_info* _info, int32* _count,
 
 	Checks concerning global/local are not done here.
 */
-status_t
-BMediaRosterEx::InstantiateDormantNode(media_addon_id addonID, int32 flavorID,
+status_t BMediaRosterEx::InstantiateDormantNode(media_addon_id addonID, int32 flavorID,
 	team_id creator, media_node *_node)
 {
 	// This function is always called from the correct context, if the node
@@ -2602,8 +2529,7 @@ BMediaRosterEx::InstantiateDormantNode(media_addon_id addonID, int32 flavorID,
 }
 
 
-status_t
-BMediaRoster::InstantiateDormantNode(const dormant_node_info& info,
+status_t BMediaRoster::InstantiateDormantNode(const dormant_node_info& info,
 	media_node* _node, uint32 flags)
 {
 	CALLED();
@@ -2708,16 +2634,14 @@ BMediaRoster::InstantiateDormantNode(const dormant_node_info& info,
 }
 
 
-status_t
-BMediaRoster::InstantiateDormantNode(const dormant_node_info& info,
+status_t BMediaRoster::InstantiateDormantNode(const dormant_node_info& info,
 	media_node* _node)
 {
 	return InstantiateDormantNode(info, _node, 0);
 }
 
 
-status_t
-BMediaRoster::GetDormantNodeFor(const media_node& node,
+status_t BMediaRoster::GetDormantNodeFor(const media_node& node,
 	dormant_node_info* _info)
 {
 	CALLED();
@@ -2742,8 +2666,7 @@ BMediaRoster::GetDormantNodeFor(const media_node& node,
 }
 
 
-status_t
-BMediaRosterEx::GetDormantFlavorInfo(media_addon_id addonID, int32 flavorID,
+status_t BMediaRosterEx::GetDormantFlavorInfo(media_addon_id addonID, int32 flavorID,
 	dormant_flavor_info* _flavor)
 {
 	CALLED();
@@ -2779,8 +2702,7 @@ BMediaRosterEx::GetDormantFlavorInfo(media_addon_id addonID, int32 flavorID,
 }
 
 
-status_t
-BMediaRoster::GetDormantFlavorInfoFor(const dormant_node_info& dormant,
+status_t BMediaRoster::GetDormantFlavorInfoFor(const dormant_node_info& dormant,
 	dormant_flavor_info* _flavor)
 {
 	return MediaRosterEx(this)->GetDormantFlavorInfo(dormant.addon,
@@ -2790,8 +2712,7 @@ BMediaRoster::GetDormantFlavorInfoFor(const dormant_node_info& dormant,
 
 // Reports in outLatency the maximum latency found downstream from
 // the specified BBufferProducer, producer, given the current connections.
-status_t
-BMediaRoster::GetLatencyFor(const media_node& producer, bigtime_t* _latency)
+status_t BMediaRoster::GetLatencyFor(const media_node& producer, bigtime_t* _latency)
 {
 	CALLED();
 	if (_latency == NULL)
@@ -2816,8 +2737,7 @@ BMediaRoster::GetLatencyFor(const media_node& producer, bigtime_t* _latency)
 }
 
 
-status_t
-BMediaRoster::GetInitialLatencyFor(const media_node& producer,
+status_t BMediaRoster::GetInitialLatencyFor(const media_node& producer,
 	bigtime_t* _latency, uint32* _flags)
 {
 	CALLED();
@@ -2846,8 +2766,7 @@ BMediaRoster::GetInitialLatencyFor(const media_node& producer,
 }
 
 
-status_t
-BMediaRoster::GetStartLatencyFor(const media_node& timeSource,
+status_t BMediaRoster::GetStartLatencyFor(const media_node& timeSource,
 	bigtime_t* _latency)
 {
 	CALLED();
@@ -2874,8 +2793,7 @@ BMediaRoster::GetStartLatencyFor(const media_node& timeSource,
 }
 
 
-status_t
-BMediaRoster::GetFileFormatsFor(const media_node& fileInterface,
+status_t BMediaRoster::GetFileFormatsFor(const media_node& fileInterface,
 	media_file_format* _formats, int32* _numFormats)
 {
 	CALLED();
@@ -2917,8 +2835,7 @@ BMediaRoster::GetFileFormatsFor(const media_node& fileInterface,
 }
 
 
-status_t
-BMediaRoster::SetRefFor(const media_node& file_interface, const entry_ref& file,
+status_t BMediaRoster::SetRefFor(const media_node& file_interface, const entry_ref& file,
 	bool createAndTruncate, bigtime_t* _length)
 {
 	CALLED();
@@ -2950,8 +2867,7 @@ BMediaRoster::SetRefFor(const media_node& file_interface, const entry_ref& file,
 }
 
 
-status_t
-BMediaRoster::GetRefFor(const media_node& node, entry_ref* _file,
+status_t BMediaRoster::GetRefFor(const media_node& node, entry_ref* _file,
 	BMimeType* mimeType)
 {
 	CALLED();
@@ -2981,8 +2897,7 @@ BMediaRoster::GetRefFor(const media_node& node, entry_ref* _file,
 }
 
 
-status_t
-BMediaRoster::SniffRefFor(const media_node& file_interface,
+status_t BMediaRoster::SniffRefFor(const media_node& file_interface,
 	const entry_ref& file, BMimeType* mimeType, float* _capability)
 {
 	CALLED();
@@ -3017,8 +2932,7 @@ BMediaRoster::SniffRefFor(const media_node& file_interface,
 /*!	This is the generic "here's a file, now can someone please play it"
 	interface.
 */
-status_t
-BMediaRoster::SniffRef(const entry_ref& file, uint64 requireNodeKinds,
+status_t BMediaRoster::SniffRef(const entry_ref& file, uint64 requireNodeKinds,
 	dormant_node_info* _node, BMimeType* mimeType)
 {
 	CALLED();
@@ -3077,8 +2991,7 @@ BMediaRoster::SniffRef(const entry_ref& file, uint64 requireNodeKinds,
 }
 
 
-status_t
-BMediaRoster::GetDormantNodeForType(const BMimeType& type,
+status_t BMediaRoster::GetDormantNodeForType(const BMimeType& type,
 	uint64 requireNodeKinds, dormant_node_info* _node)
 {
 	UNIMPLEMENTED();
@@ -3086,8 +2999,7 @@ BMediaRoster::GetDormantNodeForType(const BMimeType& type,
 }
 
 
-status_t
-BMediaRoster::GetReadFileFormatsFor(const dormant_node_info& node,
+status_t BMediaRoster::GetReadFileFormatsFor(const dormant_node_info& node,
 	media_file_format* _readFormats, int32 readCount, int32* _readCount)
 {
 	UNIMPLEMENTED();
@@ -3095,8 +3007,7 @@ BMediaRoster::GetReadFileFormatsFor(const dormant_node_info& node,
 }
 
 
-status_t
-BMediaRoster::GetWriteFileFormatsFor(const dormant_node_info& node,
+status_t BMediaRoster::GetWriteFileFormatsFor(const dormant_node_info& node,
 	media_file_format* _write_formats, int32 writeCount, int32* _writeCount)
 {
 	UNIMPLEMENTED();
@@ -3104,8 +3015,7 @@ BMediaRoster::GetWriteFileFormatsFor(const dormant_node_info& node,
 }
 
 
-status_t
-BMediaRoster::GetFormatFor(const media_output& output, media_format* _format,
+status_t BMediaRoster::GetFormatFor(const media_output& output, media_format* _format,
 	uint32 flags)
 {
 	CALLED();
@@ -3133,8 +3043,7 @@ BMediaRoster::GetFormatFor(const media_output& output, media_format* _format,
 }
 
 
-status_t
-BMediaRoster::GetFormatFor(const media_input& input, media_format* _format,
+status_t BMediaRoster::GetFormatFor(const media_input& input, media_format* _format,
 	uint32 flags)
 {
 	CALLED();
@@ -3162,8 +3071,7 @@ BMediaRoster::GetFormatFor(const media_input& input, media_format* _format,
 }
 
 
-status_t
-BMediaRoster::GetFormatFor(const media_node& node, media_format* _format,
+status_t BMediaRoster::GetFormatFor(const media_node& node, media_format* _format,
 	float quality)
 {
 	UNIMPLEMENTED();
@@ -3242,8 +3150,7 @@ BMediaRoster::NodeIDFor(port_id port)
 }
 
 
-status_t
-BMediaRoster::GetInstancesFor(media_addon_id addon, int32 flavor,
+status_t BMediaRoster::GetInstancesFor(media_addon_id addon, int32 flavor,
 	media_node_id* _id, int32* _count)
 {
 	CALLED();
@@ -3276,24 +3183,21 @@ BMediaRoster::GetInstancesFor(media_addon_id addon, int32 flavor,
 }
 
 
-bool
-BMediaRoster::IsRunning()
+bool BMediaRoster::IsRunning()
 {
 	return  __be_roster->IsRunning(B_MEDIA_SERVER_SIGNATURE)
 		&&  __be_roster->IsRunning(B_MEDIA_ADDON_SERVER_SIGNATURE);
 }
 
 
-status_t
-BMediaRoster::SetRealtimeFlags(uint32 enabled)
+status_t BMediaRoster::SetRealtimeFlags(uint32 enabled)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
 }
 
 
-status_t
-BMediaRoster::GetRealtimeFlags(uint32* _enabled)
+status_t BMediaRoster::GetRealtimeFlags(uint32* _enabled)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
@@ -3337,8 +3241,7 @@ BMediaRoster::MediaFlags(media_flags cap, void* buffer, size_t maxSize)
 //	#pragma mark - BLooper overrides
 
 
-void
-BMediaRoster::MessageReceived(BMessage* message)
+void BMediaRoster::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case 'PING':
@@ -3497,8 +3400,7 @@ BMediaRoster::MessageReceived(BMessage* message)
 }
 
 
-bool
-BMediaRoster::QuitRequested()
+bool BMediaRoster::QuitRequested()
 {
 	CALLED();
 	return true;
@@ -3513,8 +3415,7 @@ BMediaRoster::ResolveSpecifier(BMessage* msg, int32 index, BMessage* specifier,
 }
 
 
-status_t
-BMediaRoster::GetSupportedSuites(BMessage* data)
+status_t BMediaRoster::GetSupportedSuites(BMessage* data)
 {
 	return BLooper::GetSupportedSuites(data);
 }
@@ -3534,8 +3435,7 @@ BMediaRoster::~BMediaRoster()
 
 
 //! Deprecated call.
-status_t
-BMediaRoster::SetOutputBuffersFor(const media_source& output,
+status_t BMediaRoster::SetOutputBuffersFor(const media_source& output,
 	BBufferGroup* group, bool willReclaim)
 {
 	UNIMPLEMENTED();
@@ -3568,24 +3468,21 @@ BMediaRoster::BMediaRoster()
 
 
 // TODO: Looks like these can be safely removed:
-/*static*/ status_t
-BMediaRoster::ParseCommand(BMessage& reply)
+/*static*/ status_t BMediaRoster::ParseCommand(BMessage& reply)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
 }
 
 
-status_t
-BMediaRoster::GetDefaultInfo(media_node_id forDefault, BMessage& config)
+status_t BMediaRoster::GetDefaultInfo(media_node_id forDefault, BMessage& config)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
 }
 
 
-status_t
-BMediaRoster::SetRunningDefault(media_node_id forDefault,
+status_t BMediaRoster::SetRunningDefault(media_node_id forDefault,
 	const media_node& node)
 {
 	UNIMPLEMENTED();

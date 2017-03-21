@@ -44,15 +44,13 @@ BMailSettings::~BMailSettings()
 }
 
 
-status_t
-BMailSettings::InitCheck() const
+status_t BMailSettings::InitCheck() const
 {
 	return B_OK;
 }
 
 
-status_t
-BMailSettings::Save()
+status_t BMailSettings::Save()
 {
 	BPath path;
 	status_t status = find_directory(B_USER_SETTINGS_DIRECTORY, &path);
@@ -74,8 +72,7 @@ BMailSettings::Save()
 }
 
 
-status_t
-BMailSettings::Reload()
+status_t BMailSettings::Reload()
 {
 	// Try directories from most specific to least
 	directory_which which[] = {
@@ -116,23 +113,20 @@ BMailSettings::Reload()
 //	# pragma mark - Global settings
 
 
-int32
-BMailSettings::WindowFollowsCorner()
+int32 BMailSettings::WindowFollowsCorner()
 {
 	return fData.FindInt32("WindowFollowsCorner");
 }
 
 
-void
-BMailSettings::SetWindowFollowsCorner(int32 whichCorner)
+void BMailSettings::SetWindowFollowsCorner(int32 whichCorner)
 {
 	if (fData.ReplaceInt32("WindowFollowsCorner", whichCorner) != B_OK)
 		fData.AddInt32("WindowFollowsCorner", whichCorner);
 }
 
 
-uint32
-BMailSettings::ShowStatusWindow()
+uint32 BMailSettings::ShowStatusWindow()
 {
 	int32 showStatusWindow;
 	if (fData.FindInt32("ShowStatusWindow", &showStatusWindow) != B_OK) {
@@ -144,23 +138,20 @@ BMailSettings::ShowStatusWindow()
 }
 
 
-void
-BMailSettings::SetShowStatusWindow(uint32 mode)
+void BMailSettings::SetShowStatusWindow(uint32 mode)
 {
 	if (fData.ReplaceInt32("ShowStatusWindow", mode) != B_OK)
 		fData.AddInt32("ShowStatusWindow", mode);
 }
 
 
-bool
-BMailSettings::DaemonAutoStarts()
+bool BMailSettings::DaemonAutoStarts()
 {
 	return fData.FindBool("DaemonAutoStarts");
 }
 
 
-void
-BMailSettings::SetDaemonAutoStarts(bool startIt)
+void BMailSettings::SetDaemonAutoStarts(bool startIt)
 {
 	if (fData.ReplaceBool("DaemonAutoStarts", startIt) != B_OK)
 		fData.AddBool("DaemonAutoStarts", startIt);
@@ -174,8 +165,7 @@ BMailSettings::ConfigWindowFrame()
 }
 
 
-void
-BMailSettings::SetConfigWindowFrame(BRect frame)
+void BMailSettings::SetConfigWindowFrame(BRect frame)
 {
 	if (fData.ReplaceRect("ConfigWindowFrame", frame) != B_OK)
 		fData.AddRect("ConfigWindowFrame", frame);
@@ -193,16 +183,14 @@ BMailSettings::StatusWindowFrame()
 }
 
 
-void
-BMailSettings::SetStatusWindowFrame(BRect frame)
+void BMailSettings::SetStatusWindowFrame(BRect frame)
 {
 	if (fData.ReplaceRect("StatusWindowFrame", frame) != B_OK)
 		fData.AddRect("StatusWindowFrame", frame);
 }
 
 
-int32
-BMailSettings::StatusWindowWorkspaces()
+int32 BMailSettings::StatusWindowWorkspaces()
 {
 	uint32 workspaces;
 	if (fData.FindInt32("StatusWindowWorkSpace", (int32*)&workspaces) != B_OK)
@@ -212,8 +200,7 @@ BMailSettings::StatusWindowWorkspaces()
 }
 
 
-void
-BMailSettings::SetStatusWindowWorkspaces(int32 workspace)
+void BMailSettings::SetStatusWindowWorkspaces(int32 workspace)
 {
 	if (fData.ReplaceInt32("StatusWindowWorkSpace", workspace) != B_OK)
 		fData.AddInt32("StatusWindowWorkSpace", workspace);
@@ -224,15 +211,13 @@ BMailSettings::SetStatusWindowWorkspaces(int32 workspace)
 }
 
 
-int32
-BMailSettings::StatusWindowLook()
+int32 BMailSettings::StatusWindowLook()
 {
 	return fData.FindInt32("StatusWindowLook");
 }
 
 
-void
-BMailSettings::SetStatusWindowLook(int32 look)
+void BMailSettings::SetStatusWindowLook(int32 look)
 {
 	if (fData.ReplaceInt32("StatusWindowLook", look) != B_OK)
 		fData.AddInt32("StatusWindowLook", look);
@@ -255,53 +240,46 @@ BMailSettings::AutoCheckInterval()
 }
 
 
-void
-BMailSettings::SetAutoCheckInterval(bigtime_t interval)
+void BMailSettings::SetAutoCheckInterval(bigtime_t interval)
 {
 	if (fData.ReplaceInt64("AutoCheckInterval", interval) != B_OK)
 		fData.AddInt64("AutoCheckInterval", interval);
 }
 
 
-bool
-BMailSettings::CheckOnlyIfPPPUp()
+bool BMailSettings::CheckOnlyIfPPPUp()
 {
 	return fData.FindBool("CheckOnlyIfPPPUp");
 }
 
 
-void
-BMailSettings::SetCheckOnlyIfPPPUp(bool yes)
+void BMailSettings::SetCheckOnlyIfPPPUp(bool yes)
 {
 	if (fData.ReplaceBool("CheckOnlyIfPPPUp", yes))
 		fData.AddBool("CheckOnlyIfPPPUp", yes);
 }
 
 
-bool
-BMailSettings::SendOnlyIfPPPUp()
+bool BMailSettings::SendOnlyIfPPPUp()
 {
 	return fData.FindBool("SendOnlyIfPPPUp");
 }
 
 
-void
-BMailSettings::SetSendOnlyIfPPPUp(bool yes)
+void BMailSettings::SetSendOnlyIfPPPUp(bool yes)
 {
 	if (fData.ReplaceBool("SendOnlyIfPPPUp", yes))
 		fData.AddBool("SendOnlyIfPPPUp", yes);
 }
 
 
-int32
-BMailSettings::DefaultOutboundAccount()
+int32 BMailSettings::DefaultOutboundAccount()
 {
 	return fData.FindInt32("DefaultOutboundAccount");
 }
 
 
-void
-BMailSettings::SetDefaultOutboundAccount(int32 to)
+void BMailSettings::SetDefaultOutboundAccount(int32 to)
 {
 	if (fData.ReplaceInt32("DefaultOutboundAccount", to) != B_OK)
 		fData.AddInt32("DefaultOutboundAccount", to);
@@ -356,8 +334,7 @@ BMailAccounts::BMailAccounts()
 }
 
 
-status_t
-BMailAccounts::AccountsPath(BPath& path)
+status_t BMailAccounts::AccountsPath(BPath& path)
 {
 	status_t status = find_directory(B_USER_SETTINGS_DIRECTORY, &path);
 	if (status != B_OK)
@@ -373,8 +350,7 @@ BMailAccounts::~BMailAccounts()
 }
 
 
-int32
-BMailAccounts::CountAccounts()
+int32 BMailAccounts::CountAccounts()
 {
 	return fAccounts.CountItems();
 }
@@ -424,8 +400,7 @@ BMailAddOnSettings::~BMailAddOnSettings()
 }
 
 
-status_t
-BMailAddOnSettings::Load(const BMessage& message)
+status_t BMailAddOnSettings::Load(const BMessage& message)
 {
 	const char* pathString = NULL;
 	if (message.FindString("add-on path", &pathString) != B_OK)
@@ -468,8 +443,7 @@ BMailAddOnSettings::Load(const BMessage& message)
 }
 
 
-status_t
-BMailAddOnSettings::Save(BMessage& message)
+status_t BMailAddOnSettings::Save(BMessage& message)
 {
 	BPath path(&fRef);
 	status_t status = message.AddString("add-on path", _RelativizePath(path));
@@ -484,8 +458,7 @@ BMailAddOnSettings::Save(BMessage& message)
 }
 
 
-void
-BMailAddOnSettings::SetAddOnRef(const entry_ref& ref)
+void BMailAddOnSettings::SetAddOnRef(const entry_ref& ref)
 {
 	fRef = ref;
 }
@@ -498,8 +471,7 @@ BMailAddOnSettings::AddOnRef() const
 }
 
 
-bool
-BMailAddOnSettings::HasBeenModified() const
+bool BMailAddOnSettings::HasBeenModified() const
 {
 	return fRef != fOriginalRef
 		|| !fOriginalSettings.HasSameData(*this, true, true);
@@ -509,8 +481,7 @@ BMailAddOnSettings::HasBeenModified() const
 /*!	Cuts off the ".../add-ons/mail_daemon" part of the provided \a path
 	in case it exists. Otherwise, the complete path will be returned.
 */
-const char*
-BMailAddOnSettings::_RelativizePath(const BPath& path) const
+const char*  BMailAddOnSettings::_RelativizePath(const BPath& path) const
 {
 	const char* string = path.Path();
 	const char* parentDirectory = "/mail_daemon/";
@@ -537,8 +508,7 @@ BMailProtocolSettings::~BMailProtocolSettings()
 }
 
 
-status_t
-BMailProtocolSettings::Load(const BMessage& message)
+status_t BMailProtocolSettings::Load(const BMessage& message)
 {
 	status_t status = BMailAddOnSettings::Load(message);
 	if (status != B_OK)
@@ -566,8 +536,7 @@ BMailProtocolSettings::Load(const BMessage& message)
 }
 
 
-status_t
-BMailProtocolSettings::Save(BMessage& message)
+status_t BMailProtocolSettings::Save(BMessage& message)
 {
 	status_t status = BMailAddOnSettings::Save(message);
 	if (status != B_OK)
@@ -583,15 +552,13 @@ BMailProtocolSettings::Save(BMessage& message)
 }
 
 
-int32
-BMailProtocolSettings::CountFilterSettings() const
+int32 BMailProtocolSettings::CountFilterSettings() const
 {
 	return fFiltersSettings.CountItems();
 }
 
 
-int32
-BMailProtocolSettings::AddFilterSettings(const entry_ref* ref)
+int32 BMailProtocolSettings::AddFilterSettings(const entry_ref* ref)
 {
 	BMailAddOnSettings* filterSettings = new BMailAddOnSettings();
 	if (ref != NULL)
@@ -605,15 +572,13 @@ BMailProtocolSettings::AddFilterSettings(const entry_ref* ref)
 }
 
 
-void
-BMailProtocolSettings::RemoveFilterSettings(int32 index)
+void BMailProtocolSettings::RemoveFilterSettings(int32 index)
 {
 	fFiltersSettings.RemoveItemAt(index);
 }
 
 
-bool
-BMailProtocolSettings::MoveFilterSettings(int32 from, int32 to)
+bool BMailProtocolSettings::MoveFilterSettings(int32 from, int32 to)
 {
 	if (from < 0 || from >= (int32)CountFilterSettings() || to < 0
 		|| to >= (int32)CountFilterSettings())
@@ -634,8 +599,7 @@ BMailProtocolSettings::FilterSettingsAt(int32 index) const
 }
 
 
-bool
-BMailProtocolSettings::HasBeenModified() const
+bool BMailProtocolSettings::HasBeenModified() const
 {
 	if (BMailAddOnSettings::HasBeenModified())
 		return true;
@@ -676,68 +640,59 @@ BMailAccountSettings::~BMailAccountSettings()
 }
 
 
-void
-BMailAccountSettings::SetAccountID(int32 id)
+void BMailAccountSettings::SetAccountID(int32 id)
 {
 	fModified = true;
 	fAccountID = id;
 }
 
 
-int32
-BMailAccountSettings::AccountID() const
+int32 BMailAccountSettings::AccountID() const
 {
 	return fAccountID;
 }
 
 
-void
-BMailAccountSettings::SetName(const char* name)
+void BMailAccountSettings::SetName(const char* name)
 {
 	fModified = true;
 	fAccountName = name;
 }
 
 
-const char*
-BMailAccountSettings::Name() const
+const char*  BMailAccountSettings::Name() const
 {
 	return fAccountName;
 }
 
 
-void
-BMailAccountSettings::SetRealName(const char* realName)
+void BMailAccountSettings::SetRealName(const char* realName)
 {
 	fModified = true;
 	fRealName = realName;
 }
 
 
-const char*
-BMailAccountSettings::RealName() const
+const char*  BMailAccountSettings::RealName() const
 {
 	return fRealName;
 }
 
 
-void
-BMailAccountSettings::SetReturnAddress(const char* returnAddress)
+void BMailAccountSettings::SetReturnAddress(const char* returnAddress)
 {
 	fModified = true;
 	fReturnAdress = returnAddress;
 }
 
 
-const char*
-BMailAccountSettings::ReturnAddress() const
+const char*  BMailAccountSettings::ReturnAddress() const
 {
 	return fReturnAdress;
 }
 
 
-bool
-BMailAccountSettings::SetInboundAddOn(const char* name)
+bool BMailAccountSettings::SetInboundAddOn(const char* name)
 {
 	entry_ref ref;
 	if (_GetAddOnRef("mail_daemon/inbound_protocols", name, ref) != B_OK)
@@ -748,8 +703,7 @@ BMailAccountSettings::SetInboundAddOn(const char* name)
 }
 
 
-bool
-BMailAccountSettings::SetOutboundAddOn(const char* name)
+bool BMailAccountSettings::SetOutboundAddOn(const char* name)
 {
 	entry_ref ref;
 	if (_GetAddOnRef("mail_daemon/outbound_protocols", name, ref) != B_OK)
@@ -802,52 +756,45 @@ BMailAccountSettings::OutboundSettings() const
 }
 
 
-bool
-BMailAccountSettings::HasInbound()
+bool BMailAccountSettings::HasInbound()
 {
 	return BEntry(&fInboundSettings.AddOnRef()).Exists();
 }
 
 
-bool
-BMailAccountSettings::HasOutbound()
+bool BMailAccountSettings::HasOutbound()
 {
 	return BEntry(&fOutboundSettings.AddOnRef()).Exists();
 }
 
 
-void
-BMailAccountSettings::SetInboundEnabled(bool enabled)
+void BMailAccountSettings::SetInboundEnabled(bool enabled)
 {
 	fInboundEnabled = enabled;
 	fModified = true;
 }
 
 
-bool
-BMailAccountSettings::IsInboundEnabled() const
+bool BMailAccountSettings::IsInboundEnabled() const
 {
 	return fInboundEnabled;
 }
 
 
-void
-BMailAccountSettings::SetOutboundEnabled(bool enabled)
+void BMailAccountSettings::SetOutboundEnabled(bool enabled)
 {
 	fOutboundEnabled = enabled;
 	fModified = true;
 }
 
 
-bool
-BMailAccountSettings::IsOutboundEnabled() const
+bool BMailAccountSettings::IsOutboundEnabled() const
 {
 	return fOutboundEnabled;
 }
 
 
-status_t
-BMailAccountSettings::Reload()
+status_t BMailAccountSettings::Reload()
 {
 	BFile file(&fAccountFile, B_READ_ONLY);
 	status_t status = file.InitCheck();
@@ -880,8 +827,7 @@ BMailAccountSettings::Reload()
 }
 
 
-status_t
-BMailAccountSettings::Save()
+status_t BMailAccountSettings::Save()
 {
 	fModified = false;
 
@@ -913,15 +859,13 @@ BMailAccountSettings::Save()
 }
 
 
-status_t
-BMailAccountSettings::Delete()
+status_t BMailAccountSettings::Delete()
 {
 	return fAccountFile.Remove();
 }
 
 
-bool
-BMailAccountSettings::HasBeenModified() const
+bool BMailAccountSettings::HasBeenModified() const
 {
 	return fModified
 		|| fInboundSettings.HasBeenModified()
@@ -936,8 +880,7 @@ BMailAccountSettings::AccountFile() const
 }
 
 
-status_t
-BMailAccountSettings::_CreateAccountFilePath()
+status_t BMailAccountSettings::_CreateAccountFilePath()
 {
 	BPath path;
 	status_t status = find_directory(B_USER_SETTINGS_DIRECTORY, &path);
@@ -972,8 +915,7 @@ BMailAccountSettings::_CreateAccountFilePath()
 }
 
 
-status_t
-BMailAccountSettings::_GetAddOnRef(const char* subPath, const char* name,
+status_t BMailAccountSettings::_GetAddOnRef(const char* subPath, const char* name,
 	entry_ref& ref)
 {
 	BStringList paths;

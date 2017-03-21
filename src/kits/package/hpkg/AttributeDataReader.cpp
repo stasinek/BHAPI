@@ -26,8 +26,7 @@ BAttributeDataReader::BAttributeDataReader(int fd, const char* attribute,
 }
 
 
-status_t
-BAttributeDataReader::ReadData(off_t offset, void* buffer, size_t size)
+status_t BAttributeDataReader::ReadData(off_t offset, void* buffer, size_t size)
 {
 	ssize_t bytesRead = fs_read_attr(fFD, fAttribute, fType, offset, buffer,
 		size);

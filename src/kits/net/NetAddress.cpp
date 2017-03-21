@@ -111,8 +111,7 @@ BNetAddress::BNetAddress(const BMessage *from)
 }
 
 
-status_t
-BNetAddress::Archive(BMessage *into, bool deep) const
+status_t BNetAddress::Archive(BMessage *into, bool deep) const
 {
 	if(!into) return B_ERROR;
 
@@ -134,8 +133,7 @@ BNetAddress::Instantiate(const BMessage *from)
 }
 
 
-status_t
-BNetAddress::InitCheck() const
+status_t BNetAddress::InitCheck() const
 {
 	return fStatus;
 }
@@ -150,8 +148,7 @@ BNetAddress::operator=(const BNetAddress &addr)
 }
 
 
-status_t
-BNetAddress::SetTo(const char *hostname,  __be_uint16 port)
+status_t BNetAddress::SetTo(const char *hostname,  __be_uint16 port)
 {
 	if(hostname == NULL) return B_ERROR;
 
@@ -199,8 +196,7 @@ BNetAddress::SetTo(const char *hostname,  __be_uint16 port)
 }
 
 
-status_t
-BNetAddress::SetTo(const char *hostname, const char *protocol, const char *service)
+status_t BNetAddress::SetTo(const char *hostname, const char *protocol, const char *service)
 {
 	if(hostname == NULL) return B_ERROR;
 
@@ -230,8 +226,7 @@ BNetAddress::SetTo(const char *hostname, const char *protocol, const char *servi
 }
 
 
-status_t
-BNetAddress::SetTo(const struct sockaddr_in &sa)
+status_t BNetAddress::SetTo(const struct sockaddr_in &sa)
 {
 	if(sa.sin_family != AF_INET)
 	{
@@ -244,8 +239,7 @@ BNetAddress::SetTo(const struct sockaddr_in &sa)
 }
 
 
-status_t
-BNetAddress::SetTo(const struct in_addr addr,  __be_uint16 port)
+status_t BNetAddress::SetTo(const struct in_addr addr,  __be_uint16 port)
 {
 	fAddr.sin_family = AF_INET;
 	fAddr.sin_port = htons(port);
@@ -254,8 +248,7 @@ BNetAddress::SetTo(const struct in_addr addr,  __be_uint16 port)
 }
 
 
-status_t
-BNetAddress::SetTo(__be_uint32 addr,  __be_uint16 port)
+status_t BNetAddress::SetTo(__be_uint32 addr,  __be_uint16 port)
 {
 	fAddr.sin_family = AF_INET;
 	fAddr.sin_port = htons(port);
@@ -264,8 +257,7 @@ BNetAddress::SetTo(__be_uint32 addr,  __be_uint16 port)
 }
 
 
-status_t
-BNetAddress::GetAddr(char *hostname, size_t hostname_len,  __be_uint16 *port) const
+status_t BNetAddress::GetAddr(char *hostname, size_t hostname_len,  __be_uint16 *port) const
 {
 	if(fStatus != B_OK) return B_ERROR;
 	if(!(hostname == NULL || hostname_len == 0))
@@ -309,8 +301,7 @@ BNetAddress::GetAddr(char *hostname, size_t hostname_len,  __be_uint16 *port) co
 }
 
 
-status_t
-BNetAddress::GetAddr(struct sockaddr_in &sa) const
+status_t BNetAddress::GetAddr(struct sockaddr_in &sa) const
 {
 	if(fStatus != B_OK) return B_ERROR;
 	sa = fAddr;
@@ -318,8 +309,7 @@ BNetAddress::GetAddr(struct sockaddr_in &sa) const
 }
 
 
-status_t
-BNetAddress::GetAddr(struct in_addr &addr,  __be_uint16 *port) const
+status_t BNetAddress::GetAddr(struct in_addr &addr,  __be_uint16 *port) const
 {
 	if(fStatus != B_OK) return B_ERROR;
 	addr = fAddr.sin_addr;

@@ -7,7 +7,7 @@
 
 
 #include <Haiku.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <../include/stdarg.h>
 

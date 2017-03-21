@@ -388,16 +388,14 @@ AttributeStreamConstValue<Type>::Next()
 
 
 template<class Type>
-const char*
-AttributeStreamConstValue<Type>::Get()
+const char*  AttributeStreamConstValue<Type>::Get()
 {
 	return (const char*)&fValue;
 }
 
 
 template<class Type>
-bool
-AttributeStreamConstValue<Type>::Fill(char* buffer) const
+bool AttributeStreamConstValue<Type>::Fill(char* buffer) const
 {
 	memcpy(buffer, &fValue, sizeof(Type));
 	return true;
@@ -405,8 +403,7 @@ AttributeStreamConstValue<Type>::Fill(char* buffer) const
 
 
 template<class Type>
-int32
-AttributeStreamConstValue<Type>::Find(const char* name, uint32 type) const
+int32 AttributeStreamConstValue<Type>::Find(const char* name, uint32 type) const
 {
 	if (strcmp(fAttr.Name(), name) == 0 && type == fAttr.Type())
 		return 0;

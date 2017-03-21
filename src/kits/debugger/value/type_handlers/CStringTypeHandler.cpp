@@ -60,8 +60,7 @@ CStringTypeHandler::SupportsType(Type* type)
 }
 
 
-status_t
-CStringTypeHandler::CreateValueNode(ValueNodeChild* nodeChild, Type* type,
+status_t CStringTypeHandler::CreateValueNode(ValueNodeChild* nodeChild, Type* type,
 	ValueNode*& _node)
 {
 	if (SupportsType(type) == 0.0f)

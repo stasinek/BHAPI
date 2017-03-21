@@ -9,7 +9,7 @@
 #define LOCK_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 typedef struct lock {
@@ -18,8 +18,7 @@ typedef struct lock {
 } lock;
 
 
-static inline status_t
-init_lock(struct lock *lock, const char *name)
+static inline status_t init_lock(struct lock *lock, const char *name)
 {
 	lock->sem = create_sem(0, name);
 	lock->count = 0;
@@ -28,15 +27,13 @@ init_lock(struct lock *lock, const char *name)
 }
 
 
-static inline void
-uninit_lock(struct lock *lock)
+static inline void uninit_lock(struct lock *lock)
 {
 	delete_sem(lock->sem);
 }
 
 
-static inline status_t
-acquire_lock(struct lock *lock)
+static inline status_t acquire_lock(struct lock *lock)
 {
 	if (atomic_add(&lock->count, 1) > 0)
 		return acquire_sem(lock->sem);
@@ -45,8 +42,7 @@ acquire_lock(struct lock *lock)
 }
 
 
-static inline status_t
-release_lock(struct lock *lock)
+static inline status_t release_lock(struct lock *lock)
 {
 	if (atomic_add(&lock->count, -1) > 1)
 		return release_sem(lock->sem);
@@ -70,8 +66,7 @@ class Autolock {
 				release_lock(fLock);
 		}
 
-		bool
-		IsLocked() const
+		bool 		IsLocked() const
 		{
 			return fStatus == B_OK;
 		}

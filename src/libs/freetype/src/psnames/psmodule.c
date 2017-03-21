@@ -471,8 +471,7 @@
 #endif /* FT_CONFIG_OPTION_ADOBE_GLYPH_LIST */
 
 
-  static const char*
-  ps_get_macintosh_name( FT_UInt  name_index )
+  static const char*    ps_get_macintosh_name( FT_UInt  name_index )
   {
     if ( name_index >= FT_NUM_MAC_NAMES )
       name_index = 0;
@@ -481,8 +480,7 @@
   }
 
 
-  static const char*
-  ps_get_standard_strings( FT_UInt  sid )
+  static const char*    ps_get_standard_strings( FT_UInt  sid )
   {
     if ( sid >= FT_NUM_SID_NAMES )
       return 0;

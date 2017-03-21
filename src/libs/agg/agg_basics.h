@@ -88,16 +88,14 @@ namespace agg
 
 #ifndef AGG_INT64
 #if defined(_MSC_VER) || defined(__BORLANDC__)
-#define AGG_INT64 signed __int64
-#else
+#define AGG_INT64 signed __int64 #else
 #define AGG_INT64 signed long long
 #endif
 #endif
 
 #ifndef AGG_INT64U
 #if defined(_MSC_VER) || defined(__BORLANDC__)
-#define AGG_INT64U unsigned __int64
-#else
+#define AGG_INT64U unsigned __int64 #else
 #define AGG_INT64U unsigned long long
 #endif
 #endif
@@ -120,10 +118,8 @@ namespace agg
     typedef AGG_INT8U  int8u;        //----int8u
     typedef AGG_INT16  int16;        //----int16
     typedef AGG_INT16U int16u;       //----int16u
-    typedef AGG_INT32  int32;        //----int32
-    typedef AGG_INT32U int32u;       //----int32u
-    typedef AGG_INT64  int64;        //----int64
-    typedef AGG_INT64U int64u;       //----int64u
+    typedef AGG_INT32  int32;        //----int32     typedef AGG_INT32U int32u;       //----int32u
+    typedef AGG_INT64  int64;        //----int64     typedef AGG_INT64U int64u;       //----int64u
 
 #if defined(AGG_FISTP)
 #pragma warning(push)

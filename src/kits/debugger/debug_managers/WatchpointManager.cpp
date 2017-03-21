@@ -34,15 +34,13 @@ WatchpointManager::~WatchpointManager()
 }
 
 
-status_t
-WatchpointManager::Init()
+status_t WatchpointManager::Init()
 {
 	return fLock.InitCheck();
 }
 
 
-status_t
-WatchpointManager::InstallWatchpoint(Watchpoint* watchpoint,
+status_t WatchpointManager::InstallWatchpoint(Watchpoint* watchpoint,
 	bool enabled)
 {
 	status_t error = B_OK;
@@ -84,8 +82,7 @@ WatchpointManager::InstallWatchpoint(Watchpoint* watchpoint,
 }
 
 
-void
-WatchpointManager::UninstallWatchpoint(Watchpoint* watchpoint)
+void WatchpointManager::UninstallWatchpoint(Watchpoint* watchpoint)
 {
 	AutoLocker<BLocker> installLocker(fLock);
 	AutoLocker<Team> teamLocker(fTeam);

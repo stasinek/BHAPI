@@ -63,16 +63,14 @@ private:
 };
 
 
-bool
-ExpressionValues::GetValue(FunctionID* function, Thread* thread,
+bool ExpressionValues::GetValue(FunctionID* function, Thread* thread,
 	const BString& expression, BVariant& _value) const
 {
 	return GetValue(function, thread, &expression, _value);
 }
 
 
-bool
-ExpressionValues::HasValue(FunctionID* function, Thread* thread,
+bool ExpressionValues::HasValue(FunctionID* function, Thread* thread,
 	const BString& expression) const
 {
 	return HasValue(function, thread, &expression);

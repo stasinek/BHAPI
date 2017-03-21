@@ -115,8 +115,7 @@ StripeView::~StripeView()
 }
 
 
-void
-StripeView::Draw(BRect updateRect)
+void StripeView::Draw(BRect updateRect)
 {
 	if (fIcon == NULL)
 		return;
@@ -135,8 +134,7 @@ StripeView::Draw(BRect updateRect)
 }
 
 
-void
-StripeView::SetIcon(BBitmap* icon)
+void StripeView::SetIcon(BBitmap* icon)
 {
 	if (fIcon != NULL)
 		delete fIcon;
@@ -217,8 +215,7 @@ AboutView::~AboutView()
 //	#pragma mark - AboutView private methods
 
 
-const char*
-AboutView::_GetVersionFromSignature(const char* signature)
+const char*  AboutView::_GetVersionFromSignature(const char* signature)
 {
 	if (signature == NULL)
 		return NULL;
@@ -315,8 +312,7 @@ AboutView::Icon()
 }
 
 
-status_t
-AboutView::SetIcon(BBitmap* icon)
+status_t AboutView::SetIcon(BBitmap* icon)
 {
 	if (fStripeView == NULL)
 		return B_NO_INIT;
@@ -327,15 +323,13 @@ AboutView::SetIcon(BBitmap* icon)
 }
 
 
-const char*
-AboutView::Name()
+const char*  AboutView::Name()
 {
 	return fNameView->Text();
 }
 
 
-status_t
-AboutView::SetName(const char* name)
+status_t AboutView::SetName(const char* name)
 {
 	fNameView->SetText(name);
 
@@ -343,15 +337,13 @@ AboutView::SetName(const char* name)
 }
 
 
-const char*
-AboutView::Version()
+const char*  AboutView::Version()
 {
 	return fVersionView->Text();
 }
 
 
-status_t
-AboutView::SetVersion(const char* version)
+status_t AboutView::SetVersion(const char* version)
 {
 	fVersionView->SetText(version);
 
@@ -395,8 +387,7 @@ BAboutWindow::~BAboutWindow()
 //	#pragma mark - BAboutWindow virtual methods
 
 
-void
-BAboutWindow::Show()
+void BAboutWindow::Show()
 {
 	if (IsHidden()) {
 		// move to current workspace
@@ -434,8 +425,7 @@ BAboutWindow::AboutPosition(float width, float height)
 }
 
 
-void
-BAboutWindow::AddDescription(const char* description)
+void BAboutWindow::AddDescription(const char* description)
 {
 	if (description == NULL)
 		return;
@@ -444,8 +434,7 @@ BAboutWindow::AddDescription(const char* description)
 }
 
 
-void
-BAboutWindow::AddCopyright(int32 firstCopyrightYear,
+void BAboutWindow::AddCopyright(int32 firstCopyrightYear,
 	const char* copyrightHolder, const char** extraCopyrights)
 {
 	BString copyright(B_UTF8_COPYRIGHT " %years% %holder%");
@@ -488,8 +477,7 @@ BAboutWindow::AddCopyright(int32 firstCopyrightYear,
 }
 
 
-void
-BAboutWindow::AddAuthors(const char** authors)
+void BAboutWindow::AddAuthors(const char** authors)
 {
 	if (authors == NULL)
 		return;
@@ -501,8 +489,7 @@ BAboutWindow::AddAuthors(const char** authors)
 }
 
 
-void
-BAboutWindow::AddSpecialThanks(const char** thanks)
+void BAboutWindow::AddSpecialThanks(const char** thanks)
 {
 	if (thanks == NULL)
 		return;
@@ -514,8 +501,7 @@ BAboutWindow::AddSpecialThanks(const char** thanks)
 }
 
 
-void
-BAboutWindow::AddVersionHistory(const char** history)
+void BAboutWindow::AddVersionHistory(const char** history)
 {
 	if (history == NULL)
 		return;
@@ -527,8 +513,7 @@ BAboutWindow::AddVersionHistory(const char** history)
 }
 
 
-void
-BAboutWindow::AddExtraInfo(const char* extraInfo)
+void BAboutWindow::AddExtraInfo(const char* extraInfo)
 {
 	if (extraInfo == NULL)
 		return;
@@ -546,8 +531,7 @@ BAboutWindow::AddExtraInfo(const char* extraInfo)
 }
 
 
-void
-BAboutWindow::AddText(const char* header, const char** contents)
+void BAboutWindow::AddText(const char* header, const char** contents)
 {
 	BTextView* infoView = fAboutView->InfoView();
 	int32 textLength = infoView->TextLength();
@@ -586,36 +570,31 @@ BAboutWindow::Icon()
 }
 
 
-void
-BAboutWindow::SetIcon(BBitmap* icon)
+void BAboutWindow::SetIcon(BBitmap* icon)
 {
 	fAboutView->SetIcon(icon);
 }
 
 
-const char*
-BAboutWindow::Name()
+const char*  BAboutWindow::Name()
 {
 	return fAboutView->Name();
 }
 
 
-void
-BAboutWindow::SetName(const char* name)
+void BAboutWindow::SetName(const char* name)
 {
 	fAboutView->SetName(name);
 }
 
 
-const char*
-BAboutWindow::Version()
+const char*  BAboutWindow::Version()
 {
 	return fAboutView->Version();
 }
 
 
-void
-BAboutWindow::SetVersion(const char* version)
+void BAboutWindow::SetVersion(const char* version)
 {
 	fAboutView->SetVersion(version);
 }

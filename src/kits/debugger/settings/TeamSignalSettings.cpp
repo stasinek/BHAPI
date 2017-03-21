@@ -32,15 +32,13 @@ TeamSignalSettings::operator=(const TeamSignalSettings& other)
 }
 
 
-const char*
-TeamSignalSettings::ID() const
+const char*  TeamSignalSettings::ID() const
 {
 	return "Signals";
 }
 
 
-status_t
-TeamSignalSettings::SetTo(const BMessage& archive)
+status_t TeamSignalSettings::SetTo(const BMessage& archive)
 {
 	try {
 		fValues = archive;
@@ -52,8 +50,7 @@ TeamSignalSettings::SetTo(const BMessage& archive)
 }
 
 
-status_t
-TeamSignalSettings::WriteTo(BMessage& archive) const
+status_t TeamSignalSettings::WriteTo(BMessage& archive) const
 {
 	try {
 		archive = fValues;
@@ -65,30 +62,26 @@ TeamSignalSettings::WriteTo(BMessage& archive) const
 }
 
 
-void
-TeamSignalSettings::Unset()
+void TeamSignalSettings::Unset()
 {
 	fValues.MakeEmpty();
 }
 
 
-void
-TeamSignalSettings::SetDefaultSignalDisposition(int32 disposition)
+void TeamSignalSettings::SetDefaultSignalDisposition(int32 disposition)
 {
 	fValues.SetInt32(skDefaultSignalFieldName, disposition);
 }
 
 
-int32
-TeamSignalSettings::DefaultSignalDisposition() const
+int32 TeamSignalSettings::DefaultSignalDisposition() const
 {
 	return fValues.GetInt32(skDefaultSignalFieldName,
 		SIGNAL_DISPOSITION_IGNORE);
 }
 
 
-int32
-TeamSignalSettings::CountCustomSignalDispositions() const
+int32 TeamSignalSettings::CountCustomSignalDispositions() const
 {
 	type_code type;
 	int32 count = 0;
@@ -100,8 +93,7 @@ TeamSignalSettings::CountCustomSignalDispositions() const
 }
 
 
-status_t
-TeamSignalSettings::AddCustomSignalDisposition(int32 signal, int32 disposition)
+status_t TeamSignalSettings::AddCustomSignalDisposition(int32 signal, int32 disposition)
 {
 	BMessage setting;
 	if (setting.AddInt32(skSignalNumberFieldName, signal) != B_OK
@@ -114,15 +106,13 @@ TeamSignalSettings::AddCustomSignalDisposition(int32 signal, int32 disposition)
 }
 
 
-status_t
-TeamSignalSettings::RemoveCustomSignalDispositionAt(int32 index)
+status_t TeamSignalSettings::RemoveCustomSignalDispositionAt(int32 index)
 {
 	return fValues.RemoveData(skSignalSettingName, index);
 }
 
 
-status_t
-TeamSignalSettings::GetCustomSignalDispositionAt(int32 index, int32& signal,
+status_t TeamSignalSettings::GetCustomSignalDispositionAt(int32 index, int32& signal,
 	int32& disposition) const
 {
 	BMessage setting;

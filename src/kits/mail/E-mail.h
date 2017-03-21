@@ -24,16 +24,11 @@ struct entry_ref;
 #define B_MAIL_ATTR_SUBJECT		"MAIL:subject"			// indexed string
 #define B_MAIL_ATTR_REPLY		"MAIL:reply"			// indexed string
 #define B_MAIL_ATTR_WHEN		"MAIL:when"				// indexed time
-#define B_MAIL_ATTR_FLAGS		"MAIL:flags"			// indexed int32
-#define B_MAIL_ATTR_RECIPIENTS	"MAIL:recipients"		// string
+#define B_MAIL_ATTR_FLAGS		"MAIL:flags"			// indexed int32 #define B_MAIL_ATTR_RECIPIENTS	"MAIL:recipients"		// string
 #define B_MAIL_ATTR_MIME		"MAIL:mime"				// string
-#define B_MAIL_ATTR_HEADER		"MAIL:header_length"	// int32
-#define B_MAIL_ATTR_CONTENT		"MAIL:content_length"	// int32
-#define B_MAIL_ATTR_READ		"MAIL:read"				// int32
-#define B_MAIL_ATTR_THREAD		"MAIL:thread"			// string
+#define B_MAIL_ATTR_HEADER		"MAIL:header_length"	// int32 #define B_MAIL_ATTR_CONTENT		"MAIL:content_length"	// int32 #define B_MAIL_ATTR_READ		"MAIL:read"				// int32 #define B_MAIL_ATTR_THREAD		"MAIL:thread"			// string
 #define B_MAIL_ATTR_ACCOUNT		"MAIL:account"			// string
-#define B_MAIL_ATTR_ACCOUNT_ID	"MAIL:account_id"		// int32
-
+#define B_MAIL_ATTR_ACCOUNT_ID	"MAIL:account_id"		// int32 
 
 // read flags
 enum read_flags {

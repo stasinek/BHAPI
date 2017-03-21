@@ -28,31 +28,27 @@ TargetHost::~TargetHost()
 }
 
 
-void
-TargetHost::AddListener(Listener* listener)
+void TargetHost::AddListener(Listener* listener)
 {
 	AutoLocker<TargetHost> hostLocker(this);
 	fListeners.Add(listener);
 }
 
 
-void
-TargetHost::RemoveListener(Listener* listener)
+void TargetHost::RemoveListener(Listener* listener)
 {
 	AutoLocker<TargetHost> hostLocker(this);
 	fListeners.Remove(listener);
 }
 
 
-int32
-TargetHost::CountTeams() const
+int32 TargetHost::CountTeams() const
 {
 	return fTeams.CountItems();
 }
 
 
-status_t
-TargetHost::AddTeam(const team_info& info)
+status_t TargetHost::AddTeam(const team_info& info)
 {
 	TeamInfo* teamInfo = new (std::nothrow) TeamInfo(info.team, info);
 	if (teamInfo == NULL)
@@ -66,8 +62,7 @@ TargetHost::AddTeam(const team_info& info)
 }
 
 
-void
-TargetHost::RemoveTeam(team_id team)
+void TargetHost::RemoveTeam(team_id team)
 {
 	int32 index = fTeams.BinarySearchIndexByKey(team,
 		&_FindTeamByKey);
@@ -80,8 +75,7 @@ TargetHost::RemoveTeam(team_id team)
 }
 
 
-void
-TargetHost::UpdateTeam(const team_info& info)
+void TargetHost::UpdateTeam(const team_info& info)
 {
 	int32 index = fTeams.BinarySearchIndexByKey(info.team,
 		&_FindTeamByKey);
@@ -126,8 +120,7 @@ TargetHost::_FindTeamByKey(const team_id* id, const TeamInfo* info)
 }
 
 
-void
-TargetHost::_NotifyTeamAdded(TeamInfo* info)
+void TargetHost::_NotifyTeamAdded(TeamInfo* info)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -136,8 +129,7 @@ TargetHost::_NotifyTeamAdded(TeamInfo* info)
 }
 
 
-void
-TargetHost::_NotifyTeamRemoved(team_id team)
+void TargetHost::_NotifyTeamRemoved(team_id team)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -146,8 +138,7 @@ TargetHost::_NotifyTeamRemoved(team_id team)
 }
 
 
-void
-TargetHost::_NotifyTeamRenamed(TeamInfo* info)
+void TargetHost::_NotifyTeamRenamed(TeamInfo* info)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -164,19 +155,16 @@ TargetHost::Listener::~Listener()
 }
 
 
-void
-TargetHost::Listener::TeamAdded(TeamInfo* info)
+void TargetHost::Listener::TeamAdded(TeamInfo* info)
 {
 }
 
 
-void
-TargetHost::Listener::TeamRemoved(team_id team)
+void TargetHost::Listener::TeamRemoved(team_id team)
 {
 }
 
 
-void
-TargetHost::Listener::TeamRenamed(TeamInfo* info)
+void TargetHost::Listener::TeamRenamed(TeamInfo* info)
 {
 }

@@ -43,8 +43,7 @@ kgetaddrinfo(const char* node, const char* service,
 }
 
 
-static inline void
-kfreeaddrinfo(struct addrinfo* res)
+static inline void kfreeaddrinfo(struct addrinfo* res)
 {
 	free(res);
 }

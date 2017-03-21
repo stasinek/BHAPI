@@ -89,15 +89,13 @@ PackageReaderImpl::PackageFile() const
 }
 
 
-inline uint64
-PackageReaderImpl::HeapOffset() const
+inline uint64 PackageReaderImpl::HeapOffset() const
 {
 	return fHeapOffset;
 }
 
 
-inline uint64
-PackageReaderImpl::HeapSize() const
+inline uint64 PackageReaderImpl::HeapSize() const
 {
 	return fHeapSize;
 }

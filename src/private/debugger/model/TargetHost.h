@@ -6,7 +6,7 @@
 #define TARGET_HOST_H
 
 #include <Locker.h>
-#include <OS.h>
+#include <kernel/OS.h>
 #include <StringClass.h>
 
 #include <ObjectList.h>

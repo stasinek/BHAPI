@@ -36,15 +36,13 @@ FileSourceCode::~FileSourceCode()
 }
 
 
-status_t
-FileSourceCode::Init()
+status_t FileSourceCode::Init()
 {
 	return fLock.InitCheck();
 }
 
 
-status_t
-FileSourceCode::AddSourceLocation(const SourceLocation& location)
+status_t FileSourceCode::AddSourceLocation(const SourceLocation& location)
 {
 	// Find the insertion index; don't insert twice.
 	bool foundMatch;
@@ -56,15 +54,13 @@ FileSourceCode::AddSourceLocation(const SourceLocation& location)
 }
 
 
-bool
-FileSourceCode::Lock()
+bool FileSourceCode::Lock()
 {
 	return fLock.Lock();
 }
 
 
-void
-FileSourceCode::Unlock()
+void FileSourceCode::Unlock()
 {
 	fLock.Unlock();
 }
@@ -77,29 +73,25 @@ FileSourceCode::GetSourceLanguage() const
 }
 
 
-int32
-FileSourceCode::CountLines() const
+int32 FileSourceCode::CountLines() const
 {
 	return fSourceFile->CountLines();
 }
 
 
-const char*
-FileSourceCode::LineAt(int32 index) const
+const char*  FileSourceCode::LineAt(int32 index) const
 {
 	return fSourceFile->LineAt(index);
 }
 
 
-int32
-FileSourceCode::LineLengthAt(int32 index) const
+int32 FileSourceCode::LineLengthAt(int32 index) const
 {
 	return fSourceFile->LineLengthAt(index);
 }
 
 
-bool
-FileSourceCode::GetStatementLocationRange(const SourceLocation& location,
+bool FileSourceCode::GetStatementLocationRange(const SourceLocation& location,
 	SourceLocation& _start, SourceLocation& _end) const
 {
 	int32 lineCount = CountLines();
@@ -129,8 +121,7 @@ FileSourceCode::GetSourceFile() const
 }
 
 
-int32
-FileSourceCode::_FindSourceLocationIndex(const SourceLocation& location,
+int32 FileSourceCode::_FindSourceLocationIndex(const SourceLocation& location,
 	bool& _foundMatch) const
 {
 	int32 lower = 0;

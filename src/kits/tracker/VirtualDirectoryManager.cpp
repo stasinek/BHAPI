@@ -320,8 +320,7 @@ VirtualDirectoryManager::Instance()
 }
 
 
-status_t
-VirtualDirectoryManager::ResolveDirectoryPaths(
+status_t VirtualDirectoryManager::ResolveDirectoryPaths(
 	const node_ref& definitionFileNodeRef,
 	const entry_ref& definitionFileEntryRef, BStringList& _directoryPaths,
 	node_ref* _definitionFileNodeRef, entry_ref* _definitionFileEntryRef)
@@ -360,8 +359,7 @@ VirtualDirectoryManager::ResolveDirectoryPaths(
 }
 
 
-bool
-VirtualDirectoryManager::GetDefinitionFileChangeTime(
+bool VirtualDirectoryManager::GetDefinitionFileChangeTime(
 	const node_ref& definitionFileRef, bigtime_t& _time) const
 {
 	Info* info = _InfoForNodeRef(definitionFileRef);
@@ -373,8 +371,7 @@ VirtualDirectoryManager::GetDefinitionFileChangeTime(
 }
 
 
-bool
-VirtualDirectoryManager::GetRootDefinitionFile(
+bool VirtualDirectoryManager::GetRootDefinitionFile(
 	const node_ref& definitionFileRef, node_ref& _rootDefinitionFileRef)
 {
 	Info* info = _InfoForNodeRef(definitionFileRef);
@@ -386,8 +383,7 @@ VirtualDirectoryManager::GetRootDefinitionFile(
 }
 
 
-bool
-VirtualDirectoryManager::GetSubDirectoryDefinitionFile(
+bool VirtualDirectoryManager::GetSubDirectoryDefinitionFile(
 	const node_ref& baseDefinitionRef, const char* subDirName,
 	entry_ref& _entryRef, node_ref& _nodeRef)
 {
@@ -405,8 +401,7 @@ VirtualDirectoryManager::GetSubDirectoryDefinitionFile(
 }
 
 
-bool
-VirtualDirectoryManager::GetParentDirectoryDefinitionFile(
+bool VirtualDirectoryManager::GetParentDirectoryDefinitionFile(
 	const node_ref& subDirDefinitionRef, entry_ref& _entryRef,
 	node_ref& _nodeRef)
 {
@@ -424,8 +419,7 @@ VirtualDirectoryManager::GetParentDirectoryDefinitionFile(
 }
 
 
-status_t
-VirtualDirectoryManager::TranslateDirectoryEntry(
+status_t VirtualDirectoryManager::TranslateDirectoryEntry(
 	const node_ref& definitionFileRef, dirent* buffer)
 {
 	NotOwningEntryRef entryRef(buffer->d_pdev, buffer->d_pino, buffer->d_name);
@@ -445,8 +439,7 @@ VirtualDirectoryManager::TranslateDirectoryEntry(
 }
 
 
-status_t
-VirtualDirectoryManager::TranslateDirectoryEntry(
+status_t VirtualDirectoryManager::TranslateDirectoryEntry(
 	const node_ref& definitionFileRef, entry_ref& _entryRef, node_ref& _nodeRef)
 {
 	Info* parentInfo = _InfoForNodeRef(definitionFileRef);
@@ -541,8 +534,7 @@ VirtualDirectoryManager::TranslateDirectoryEntry(
 }
 
 
-bool
-VirtualDirectoryManager::DefinitionFileChanged(
+bool VirtualDirectoryManager::DefinitionFileChanged(
 	const node_ref& definitionFileRef)
 {
 	Info* info = _InfoForNodeRef(definitionFileRef);
@@ -555,8 +547,7 @@ VirtualDirectoryManager::DefinitionFileChanged(
 }
 
 
-status_t
-VirtualDirectoryManager::DirectoryRemoved(const node_ref& definitionFileRef)
+status_t VirtualDirectoryManager::DirectoryRemoved(const node_ref& definitionFileRef)
 {
 	Info* info = _InfoForNodeRef(definitionFileRef);
 	if (info == NULL)
@@ -574,8 +565,7 @@ VirtualDirectoryManager::DirectoryRemoved(const node_ref& definitionFileRef)
 }
 
 
-/*static*/ bool
-VirtualDirectoryManager::GetEntry(const BStringList& directoryPaths,
+/*static*/ bool VirtualDirectoryManager::GetEntry(const BStringList& directoryPaths,
 	const char* name, entry_ref* _ref, struct stat* _st)
 {
 	int32 count = directoryPaths.CountStrings();
@@ -608,8 +598,7 @@ VirtualDirectoryManager::_InfoForNodeRef(const node_ref& nodeRef) const
 }
 
 
-bool
-VirtualDirectoryManager::_AddInfo(Info* info)
+bool VirtualDirectoryManager::_AddInfo(Info* info)
 {
 	try {
 		fInfos[info->DefinitionFileNodeRef()] = info;
@@ -620,8 +609,7 @@ VirtualDirectoryManager::_AddInfo(Info* info)
 }
 
 
-void
-VirtualDirectoryManager::_RemoveInfo(Info* info)
+void VirtualDirectoryManager::_RemoveInfo(Info* info)
 {
 	NodeRefInfoMap::iterator it = fInfos.find(info->DefinitionFileNodeRef());
 	if (it != fInfos.end())
@@ -629,8 +617,7 @@ VirtualDirectoryManager::_RemoveInfo(Info* info)
 }
 
 
-void
-VirtualDirectoryManager::_UpdateTree(RootInfo* root)
+void VirtualDirectoryManager::_UpdateTree(RootInfo* root)
 {
 	bool changed = false;
 	status_t result = root->ReadDefinition(&changed);
@@ -646,8 +633,7 @@ VirtualDirectoryManager::_UpdateTree(RootInfo* root)
 }
 
 
-void
-VirtualDirectoryManager::_UpdateTree(Info* info)
+void VirtualDirectoryManager::_UpdateTree(Info* info)
 {
 	const BStringList& directoryPaths = info->Root()->DirectoryPaths();
 
@@ -666,8 +652,7 @@ VirtualDirectoryManager::_UpdateTree(Info* info)
 }
 
 
-void
-VirtualDirectoryManager::_RemoveDirectory(Info* info)
+void VirtualDirectoryManager::_RemoveDirectory(Info* info)
 {
 	// recursively remove the subdirectories
 	for (int32 i = 0; Info* child = info->Children().ItemAt(i); i++)
@@ -688,8 +673,7 @@ VirtualDirectoryManager::_RemoveDirectory(Info* info)
 }
 
 
-status_t
-VirtualDirectoryManager::_ResolveUnknownDefinitionFile(
+status_t VirtualDirectoryManager::_ResolveUnknownDefinitionFile(
 	const node_ref& definitionFileNodeRef,
 	const entry_ref& definitionFileEntryRef, Info*& _info)
 {
@@ -766,8 +750,7 @@ VirtualDirectoryManager::_ResolveUnknownDefinitionFile(
 }
 
 
-status_t
-VirtualDirectoryManager::_CreateRootInfo(const node_ref& definitionFileNodeRef,
+status_t VirtualDirectoryManager::_CreateRootInfo(const node_ref& definitionFileNodeRef,
 	const entry_ref& definitionFileEntryRef, Info*& _info)
 {
 	RootInfo* root = new(std::nothrow) RootInfo(definitionFileNodeRef,
@@ -792,8 +775,7 @@ VirtualDirectoryManager::_CreateRootInfo(const node_ref& definitionFileNodeRef,
 }
 
 
-status_t
-VirtualDirectoryManager::_ReadSubDirectoryDefinitionFileInfo(
+status_t VirtualDirectoryManager::_ReadSubDirectoryDefinitionFileInfo(
 	const entry_ref& entryRef, entry_ref& _rootDefinitionFileEntryRef,
 	BString& _subDirPath)
 {

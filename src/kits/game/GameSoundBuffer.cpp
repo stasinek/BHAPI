@@ -45,8 +45,7 @@
 
 // Sound Buffer Utility functions ----------------------------------------
 template<typename T>
-static inline void
-ApplyMod(T* data, T* buffer, int64 index, float * pan)
+static inline void ApplyMod(T* data, T* buffer, int64 index, float * pan)
 {
 	data[index * 2] += T(float(buffer[index * 2]) * pan[0]);
 	data[index * 2 + 1] += T(float(buffer[index * 2 + 1]) * pan[1]);
@@ -109,15 +108,13 @@ GameSoundBuffer::Format() const
 }
 
 
-bool
-GameSoundBuffer::IsLooping() const
+bool GameSoundBuffer::IsLooping() const
 {
 	return fLooping;
 }
 
 
-void
-GameSoundBuffer::SetLooping(bool looping)
+void GameSoundBuffer::SetLooping(bool looping)
 {
 	fLooping = looping;
 }
@@ -130,8 +127,7 @@ GameSoundBuffer::Gain() const
 }
 
 
-status_t
-GameSoundBuffer::SetGain(float gain, bigtime_t duration)
+status_t GameSoundBuffer::SetGain(float gain, bigtime_t duration)
 {
 	if (gain < 0.0 || gain > 1.0)
 		return B_BAD_VALUE;
@@ -155,8 +151,7 @@ GameSoundBuffer::Pan() const
 }
 
 
-status_t
-GameSoundBuffer::SetPan(float pan, bigtime_t duration)
+status_t GameSoundBuffer::SetPan(float pan, bigtime_t duration)
 {
 	if (pan < -1.0 || pan > 1.0)
 		return B_BAD_VALUE;
@@ -181,8 +176,7 @@ GameSoundBuffer::SetPan(float pan, bigtime_t duration)
 }
 
 
-status_t
-GameSoundBuffer::GetAttributes(gs_attribute * attributes,
+status_t GameSoundBuffer::GetAttributes(gs_attribute * attributes,
 	size_t attributeCount)
 {
 	for (size_t i = 0; i < attributeCount; i++) {
@@ -215,8 +209,7 @@ GameSoundBuffer::GetAttributes(gs_attribute * attributes,
 }
 
 
-status_t
-GameSoundBuffer::SetAttributes(gs_attribute * attributes,
+status_t GameSoundBuffer::SetAttributes(gs_attribute * attributes,
 	size_t attributeCount)
 {
 	status_t error = B_OK;
@@ -244,8 +237,7 @@ GameSoundBuffer::SetAttributes(gs_attribute * attributes,
 }
 
 
-void
-GameSoundBuffer::Play(void * data, int64 frames)
+void GameSoundBuffer::Play(void * data, int64 frames)
 {
 	// Mh... should we add some locking?
 	if (!fIsPlaying)
@@ -314,8 +306,7 @@ GameSoundBuffer::Play(void * data, int64 frames)
 }
 
 
-void
-GameSoundBuffer::UpdateMods()
+void GameSoundBuffer::UpdateMods()
 {
 	// adjust the gain if needed
 	if (fGainRamp) {
@@ -343,8 +334,7 @@ GameSoundBuffer::UpdateMods()
 }
 
 
-void
-GameSoundBuffer::Reset()
+void GameSoundBuffer::Reset()
 {
 	fGain = 1.0;
 	delete fGainRamp;
@@ -361,8 +351,7 @@ GameSoundBuffer::Reset()
 }
 
 
-status_t
-GameSoundBuffer::Connect(media_node * consumer)
+status_t GameSoundBuffer::Connect(media_node * consumer)
 {
 	BMediaRoster* roster = BMediaRoster::Roster();
 	status_t err = roster->RegisterNode(fNode);
@@ -425,8 +414,7 @@ GameSoundBuffer::Connect(media_node * consumer)
 }
 
 
-status_t
-GameSoundBuffer::StartPlaying()
+status_t GameSoundBuffer::StartPlaying()
 {
 	if (fIsPlaying)
 		return EALREADY;
@@ -450,8 +438,7 @@ GameSoundBuffer::StartPlaying()
 }
 
 
-status_t
-GameSoundBuffer::StopPlaying()
+status_t GameSoundBuffer::StopPlaying()
 {
 	if (!fIsPlaying)
 		return EALREADY;
@@ -467,8 +454,7 @@ GameSoundBuffer::StopPlaying()
 }
 
 
-bool
-GameSoundBuffer::IsPlaying()
+bool GameSoundBuffer::IsPlaying()
 {
 	return fIsPlaying;
 }
@@ -492,16 +478,14 @@ SimpleSoundBuffer::~SimpleSoundBuffer()
 }
 
 
-void
-SimpleSoundBuffer::Reset()
+void SimpleSoundBuffer::Reset()
 {
 	GameSoundBuffer::Reset();
 	fPosition = 0;
 }
 
 
-void
-SimpleSoundBuffer::FillBuffer(void * data, int64 frames)
+void SimpleSoundBuffer::FillBuffer(void * data, int64 frames)
 {
 	char * buffer = (char*)data;
 	size_t bytes = fFrameSize * frames;
@@ -548,8 +532,7 @@ StreamingSoundBuffer::~StreamingSoundBuffer()
 }
 
 
-void
-StreamingSoundBuffer::FillBuffer(void * buffer, int64 frames)
+void StreamingSoundBuffer::FillBuffer(void * buffer, int64 frames)
 {
 	BStreamingGameSound* object = (BStreamingGameSound*)fStreamHook;
 

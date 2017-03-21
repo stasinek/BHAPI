@@ -58,16 +58,14 @@ FileControl::~FileControl()
 }
 
 
-void
-FileControl::AttachedToWindow()
+void FileControl::AttachedToWindow()
 {
 	fButton->SetTarget(this);
 	fPanel->SetTarget(this);
 }
 
 
-void
-FileControl::MessageReceived(BMessage* msg)
+void FileControl::MessageReceived(BMessage* msg)
 {
 	switch (msg->what) {
 		case kMsgSelectButton:
@@ -103,22 +101,19 @@ FileControl::MessageReceived(BMessage* msg)
 }
 
 
-void
-FileControl::SetText(const char* pathOfFile)
+void FileControl::SetText(const char* pathOfFile)
 {
 	fText->SetText(pathOfFile);
 }
 
 
-const char*
-FileControl::Text() const
+const char*  FileControl::Text() const
 {
 	return fText->Text();
 }
 
 
-void
-FileControl::SetEnabled(bool enabled)
+void FileControl::SetEnabled(bool enabled)
 {
 	fText->SetEnabled(enabled);
 	fButton->SetEnabled(enabled);
@@ -138,16 +133,14 @@ MailFileConfigView::MailFileConfigView(const char* label, const char* name,
 }
 
 
-void
-MailFileConfigView::SetTo(const BMessage* archive, BMessage* meta)
+void MailFileConfigView::SetTo(const BMessage* archive, BMessage* meta)
 {
 	SetText((fUseMeta ? meta : archive)->FindString(fName));
 	fMeta = meta;
 }
 
 
-status_t
-MailFileConfigView::SaveInto(BMailAddOnSettings& settings) const
+status_t MailFileConfigView::SaveInto(BMailAddOnSettings& settings) const
 {
 	BMessage* archive = fUseMeta ? fMeta : &settings;
 	return archive->SetString(fName, Text());

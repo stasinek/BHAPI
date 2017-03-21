@@ -109,8 +109,7 @@ BCollator& BCollator::operator=(const BCollator& source)
 }
 
 
-void
-BCollator::SetDefaultStrength(int8 strength)
+void BCollator::SetDefaultStrength(int8 strength)
 {
 	fDefaultStrength = strength;
 }
@@ -123,22 +122,19 @@ BCollator::DefaultStrength() const
 }
 
 
-void
-BCollator::SetIgnorePunctuation(bool ignore)
+void BCollator::SetIgnorePunctuation(bool ignore)
 {
 	fIgnorePunctuation = ignore;
 }
 
 
-bool
-BCollator::IgnorePunctuation() const
+bool BCollator::IgnorePunctuation() const
 {
 	return fIgnorePunctuation;
 }
 
 
-status_t
-BCollator::GetSortKey(const char* string, BString* key, int8 strength) const
+status_t BCollator::GetSortKey(const char* string, BString* key, int8 strength) const
 {
 	_SetStrength(strength);
 
@@ -186,8 +182,7 @@ BCollator::Compare(const char* s1, const char* s2, int8 strength) const
 }
 
 
-status_t
-BCollator::Archive(BMessage* archive, bool deep) const
+status_t BCollator::Archive(BMessage* archive, bool deep) const
 {
 	status_t status = BArchivable::Archive(archive, deep);
 	if (status < B_OK)
@@ -228,8 +223,7 @@ BCollator::Instantiate(BMessage* archive)
 }
 
 
-status_t
-BCollator::_SetStrength(int8 strength) const
+status_t BCollator::_SetStrength(int8 strength) const
 {
 	if (strength == B_COLLATE_DEFAULT)
 		strength = fDefaultStrength;

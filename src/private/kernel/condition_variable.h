@@ -6,7 +6,7 @@
 #define _KERNEL_CONDITION_VARIABLE_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <debug.h>
 
@@ -116,15 +116,13 @@ ConditionVariableEntry::~ConditionVariableEntry()
 #endif
 
 
-inline void
-ConditionVariable::NotifyOne(status_t result)
+inline void ConditionVariable::NotifyOne(status_t result)
 {
 	_Notify(false, result);
 }
 
 
-inline void
-ConditionVariable::NotifyAll(status_t result)
+inline void ConditionVariable::NotifyAll(status_t result)
 {
 	_Notify(true, result);
 }

@@ -78,8 +78,7 @@ BColorQuantizer::~BColorQuantizer()
 }
 
 
-bool
-BColorQuantizer::ProcessImage(const uint8* const * rowPtrs, int width,
+bool BColorQuantizer::ProcessImage(const uint8* const * rowPtrs, int width,
 	int height)
 {
 	for (int y = 0; y < height; y++) {
@@ -99,15 +98,13 @@ BColorQuantizer::ProcessImage(const uint8* const * rowPtrs, int width,
 }
 
 
-uint32
-BColorQuantizer::GetColorCount() const
+uint32 BColorQuantizer::GetColorCount() const
 {
 	return fLeafCount;
 }
 
 
-void
-BColorQuantizer::GetColorTable(RGBA* table) const
+void BColorQuantizer::GetColorTable(RGBA* table) const
 {
 	uint32 index = 0;
 	if (fOutputMaxColors < 16) {
@@ -147,8 +144,7 @@ BColorQuantizer::GetColorTable(RGBA* table) const
 // #pragma mark - private
 
 
-void
-BColorQuantizer::_AddColor(Node** _node, uint8 r, uint8 g, uint8 b, uint8 a,
+void BColorQuantizer::_AddColor(Node** _node, uint8 r, uint8 g, uint8 b, uint8 a,
 	uint32 bitsPerColor, uint32 level, uint32* _leafCount,
 	Node** reducibleNodes)
 {
@@ -198,8 +194,7 @@ BColorQuantizer::_CreateNode(uint32 level, uint32 bitsPerColor,
 }
 
 
-void
-BColorQuantizer::_ReduceTree(uint32 bitsPerColor, uint32* _leafCount,
+void BColorQuantizer::_ReduceTree(uint32 bitsPerColor, uint32* _leafCount,
 	Node** reducibleNodes)
 {
 	int i = bitsPerColor - 1;
@@ -242,8 +237,7 @@ BColorQuantizer::_ReduceTree(uint32 bitsPerColor, uint32* _leafCount,
 }
 
 
-void
-BColorQuantizer::_DeleteTree(Node** _node)
+void BColorQuantizer::_DeleteTree(Node** _node)
 {
 	for (int i = 0; i < 8; i++) {
 		if ((*_node)->child[i] != NULL)
@@ -254,8 +248,7 @@ BColorQuantizer::_DeleteTree(Node** _node)
 }
 
 
-void
-BColorQuantizer::_GetPaletteColors(Node* node, RGBA* table, uint32* _index,
+void BColorQuantizer::_GetPaletteColors(Node* node, RGBA* table, uint32* _index,
 	uint32* sums) const
 {
 	if (node == NULL)

@@ -14,8 +14,7 @@ namespace BPackageKit {
 namespace BHPKG {
 
 
-void
-BStandardErrorOutput::PrintErrorVarArgs(const char* format, va_list args)
+void BStandardErrorOutput::PrintErrorVarArgs(const char* format, va_list args)
 {
 	vfprintf(stderr, format, args);
 }

@@ -54,15 +54,13 @@ LinkSender::~LinkSender()
 }
 
 
-void
-LinkSender::SetPort(port_id port)
+void LinkSender::SetPort(port_id port)
 {
 	fPort = port;
 }
 
 
-status_t
-LinkSender::StartMessage(int32 code, size_t minSize)
+status_t LinkSender::StartMessage(int32 code, size_t minSize)
 {
 	// end previous message
 	if (EndMessage() < B_OK)
@@ -103,8 +101,7 @@ LinkSender::StartMessage(int32 code, size_t minSize)
 }
 
 
-status_t
-LinkSender::EndMessage(bool needsReply)
+status_t LinkSender::EndMessage(bool needsReply)
 {
 	if (fCurrentEnd == fCurrentStart || fCurrentStatus < B_OK)
 		return fCurrentStatus;
@@ -123,16 +120,14 @@ LinkSender::EndMessage(bool needsReply)
 }
 
 
-void
-LinkSender::CancelMessage()
+void LinkSender::CancelMessage()
 {
 	fCurrentEnd = fCurrentStart;
 	fCurrentStatus = B_OK;
 }
 
 
-status_t
-LinkSender::Attach(const void *passedData, size_t passedSize)
+status_t LinkSender::Attach(const void *passedData, size_t passedSize)
 {
 	size_t size = passedSize;
 	const void* data = passedData;
@@ -197,8 +192,7 @@ LinkSender::Attach(const void *passedData, size_t passedSize)
 }
 
 
-status_t
-LinkSender::AttachString(const char *string, int32 length)
+status_t LinkSender::AttachString(const char *string, int32 length)
 {
 	if (string == NULL)
 		string = "";
@@ -227,8 +221,7 @@ LinkSender::AttachString(const char *string, int32 length)
 }
 
 
-status_t
-LinkSender::AdjustBuffer(size_t newSize, char **_oldBuffer)
+status_t LinkSender::AdjustBuffer(size_t newSize, char **_oldBuffer)
 {
 	// make sure the new size is within bounds
 	if (newSize <= kInitialBufferSize)
@@ -261,8 +254,7 @@ LinkSender::AdjustBuffer(size_t newSize, char **_oldBuffer)
 }
 
 
-status_t
-LinkSender::FlushCompleted(size_t newBufferSize)
+status_t LinkSender::FlushCompleted(size_t newBufferSize)
 {
 	// we need to hide the incomplete message so that it's not flushed
 	int32 end = fCurrentEnd;
@@ -292,8 +284,7 @@ LinkSender::FlushCompleted(size_t newBufferSize)
 }
 
 
-status_t
-LinkSender::Flush(bigtime_t timeout, bool needsReply)
+status_t LinkSender::Flush(bigtime_t timeout, bool needsReply)
 {
 	if (fCurrentStatus < B_OK)
 		return fCurrentStatus;

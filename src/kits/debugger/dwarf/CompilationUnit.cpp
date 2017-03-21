@@ -48,15 +48,13 @@ CompilationUnit::~CompilationUnit()
 }
 
 
-void
-CompilationUnit::SetUnitEntry(DIECompileUnitBase* entry)
+void CompilationUnit::SetUnitEntry(DIECompileUnitBase* entry)
 {
 	fUnitEntry = entry;
 }
 
 
-void
-CompilationUnit::SetAddressRanges(TargetAddressRangeList* ranges)
+void CompilationUnit::SetAddressRanges(TargetAddressRangeList* ranges)
 {
 	if (fAddressRanges != NULL)
 		fAddressRanges->ReleaseReference();
@@ -75,8 +73,7 @@ CompilationUnit::AddressRangeBase() const
 }
 
 
-bool
-CompilationUnit::AddDirectory(const char* directory)
+bool CompilationUnit::AddDirectory(const char* directory)
 {
 	BString* directoryString = new(std::nothrow) BString(directory);
 	if (directoryString == NULL || directoryString->Length() == 0
@@ -89,23 +86,20 @@ CompilationUnit::AddDirectory(const char* directory)
 }
 
 
-int32
-CompilationUnit::CountDirectories() const
+int32 CompilationUnit::CountDirectories() const
 {
 	return fDirectories.CountItems();
 }
 
 
-const char*
-CompilationUnit::DirectoryAt(int32 index) const
+const char*  CompilationUnit::DirectoryAt(int32 index) const
 {
 	BString* directory = fDirectories.ItemAt(index);
 	return directory != NULL ? directory->String() : NULL;
 }
 
 
-bool
-CompilationUnit::AddFile(const char* fileName, int32 dirIndex)
+bool CompilationUnit::AddFile(const char* fileName, int32 dirIndex)
 {
 	File* file = new(std::nothrow) File(fileName, DirectoryAt(dirIndex));
 	if (file == NULL || file->fileName.Length() == 0 || !fFiles.AddItem(file)) {
@@ -117,15 +111,13 @@ CompilationUnit::AddFile(const char* fileName, int32 dirIndex)
 }
 
 
-int32
-CompilationUnit::CountFiles() const
+int32 CompilationUnit::CountFiles() const
 {
 	return fFiles.CountItems();
 }
 
 
-const char*
-CompilationUnit::FileAt(int32 index, const char** _directory) const
+const char*  CompilationUnit::FileAt(int32 index, const char** _directory) const
 {
 	if (File* file = fFiles.ItemAt(index)) {
 		if (_directory != NULL)

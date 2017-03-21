@@ -40,8 +40,7 @@ BProxySecureSocket::~BProxySecureSocket()
 }
 
 
-status_t
-BProxySecureSocket::Connect(const BNetworkAddress& peer, bigtime_t timeout)
+status_t BProxySecureSocket::Connect(const BNetworkAddress& peer, bigtime_t timeout)
 {
 	status_t status = InitCheck();
 	if (status != B_OK)

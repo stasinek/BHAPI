@@ -34,8 +34,7 @@ BUSBEndpoint::~BUSBEndpoint()
 }
 
 
-uint32
-BUSBEndpoint::Index() const
+uint32 BUSBEndpoint::Index() const
 {
 	return fIndex;
 }
@@ -62,48 +61,42 @@ BUSBEndpoint::Device() const
 }
 
 
-bool
-BUSBEndpoint::IsBulk() const
+bool BUSBEndpoint::IsBulk() const
 {
 	return (fDescriptor.attributes & USB_ENDPOINT_ATTR_MASK)
 		== USB_ENDPOINT_ATTR_BULK;
 }
 
 
-bool
-BUSBEndpoint::IsInterrupt() const
+bool BUSBEndpoint::IsInterrupt() const
 {
 	return (fDescriptor.attributes & USB_ENDPOINT_ATTR_MASK)
 		== USB_ENDPOINT_ATTR_INTERRUPT;
 }
 
 
-bool
-BUSBEndpoint::IsIsochronous() const
+bool BUSBEndpoint::IsIsochronous() const
 {
 	return (fDescriptor.attributes & USB_ENDPOINT_ATTR_MASK)
 		== USB_ENDPOINT_ATTR_ISOCHRONOUS;
 }
 
 
-bool
-BUSBEndpoint::IsControl() const
+bool BUSBEndpoint::IsControl() const
 {
 	return (fDescriptor.attributes & USB_ENDPOINT_ATTR_MASK)
 		== USB_ENDPOINT_ATTR_CONTROL;
 }
 
 
-bool
-BUSBEndpoint::IsInput() const
+bool BUSBEndpoint::IsInput() const
 {
 	return (fDescriptor.endpoint_address & USB_ENDPOINT_ADDR_DIR_IN)
 		== USB_ENDPOINT_ADDR_DIR_IN;
 }
 
 
-bool
-BUSBEndpoint::IsOutput() const
+bool BUSBEndpoint::IsOutput() const
 {
 	return (fDescriptor.endpoint_address & USB_ENDPOINT_ADDR_DIR_IN)
 		== USB_ENDPOINT_ADDR_DIR_OUT;
@@ -217,8 +210,7 @@ BUSBEndpoint::IsochronousTransfer(void *data, size_t length,
 }
 
 
-bool
-BUSBEndpoint::IsStalled() const
+bool BUSBEndpoint::IsStalled() const
 {
 	uint16 status = 0;
 	Device()->ControlTransfer(USB_REQTYPE_ENDPOINT_IN,
@@ -228,8 +220,7 @@ BUSBEndpoint::IsStalled() const
 }
 
 
-status_t
-BUSBEndpoint::ClearStall() const
+status_t BUSBEndpoint::ClearStall() const
 {
 	return Device()->ControlTransfer(USB_REQTYPE_ENDPOINT_OUT,
 		USB_REQUEST_CLEAR_FEATURE, USB_FEATURE_ENDPOINT_HALT,

@@ -163,8 +163,7 @@ fs_read_attr_dir(DIR* dir)
 }
 
 
-extern "C" void
-fs_rewind_attr_dir(DIR* dir)
+extern "C" void fs_rewind_attr_dir(DIR* dir)
 {
 	rewinddir(dir);
 }

@@ -30,8 +30,7 @@ CfaContext::~CfaContext()
 }
 
 
-void
-CfaContext::SetLocation(target_addr_t targetLocation,
+void CfaContext::SetLocation(target_addr_t targetLocation,
 	target_addr_t initialLocation)
 {
 	fTargetLocation = targetLocation;
@@ -39,8 +38,7 @@ CfaContext::SetLocation(target_addr_t targetLocation,
 }
 
 
-status_t
-CfaContext::Init(uint32 registerCount)
+status_t CfaContext::Init(uint32 registerCount)
 {
 	fRuleSet = new(std::nothrow) CfaRuleSet;
 	if (fRuleSet == NULL)
@@ -50,8 +48,7 @@ CfaContext::Init(uint32 registerCount)
 }
 
 
-status_t
-CfaContext::SaveInitialRuleSet()
+status_t CfaContext::SaveInitialRuleSet()
 {
 	fInitialRuleSet = fRuleSet->Clone();
 	if (fInitialRuleSet == NULL)
@@ -60,8 +57,7 @@ CfaContext::SaveInitialRuleSet()
 }
 
 
-status_t
-CfaContext::PushRuleSet()
+status_t CfaContext::PushRuleSet()
 {
 	CfaRuleSet* ruleSet = fRuleSet->Clone();
 	if (ruleSet == NULL || !fRuleSetStack.AddItem(ruleSet)) {
@@ -73,8 +69,7 @@ CfaContext::PushRuleSet()
 }
 
 
-status_t
-CfaContext::PopRuleSet()
+status_t CfaContext::PopRuleSet()
 {
 	if (fRuleSetStack.IsEmpty())
 		return B_BAD_DATA;
@@ -87,36 +82,31 @@ CfaContext::PopRuleSet()
 }
 
 
-void
-CfaContext::SetLocation(target_addr_t location)
+void CfaContext::SetLocation(target_addr_t location)
 {
 	fLocation = location;
 }
 
 
-void
-CfaContext::SetCodeAlignment(uint32 alignment)
+void CfaContext::SetCodeAlignment(uint32 alignment)
 {
 	fCodeAlignment = alignment;
 }
 
 
-void
-CfaContext::SetDataAlignment(int32 alignment)
+void CfaContext::SetDataAlignment(int32 alignment)
 {
 	fDataAlignment = alignment;
 }
 
 
-void
-CfaContext::SetReturnAddressRegister(uint32 reg)
+void CfaContext::SetReturnAddressRegister(uint32 reg)
 {
 	fReturnAddressRegister = reg;
 }
 
 
-void
-CfaContext::RestoreRegisterRule(uint32 reg)
+void CfaContext::RestoreRegisterRule(uint32 reg)
 {
 	if (CfaRule* rule = RegisterRule(reg)) {
 		if (fInitialRuleSet != NULL)

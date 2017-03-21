@@ -1,6 +1,6 @@
 #include "OS.h"
 
-extern "C" void
+extern "C" void 
 debug_printf(const char *format, ...)
 {
 	va_list list;
@@ -11,7 +11,7 @@ debug_printf(const char *format, ...)
 }
 
 
-extern "C" void
+extern "C" void 
 ktrace_printf(const char *format, ...)
 {
 }
@@ -25,7 +25,7 @@ fs_mount_volume(const char *where, const char *device, const char *filesystem,
 }
 
 
-status_t
+status_t 
 fs_unmount_volume(const char *path, uint32 flags)
 {
 	return B_ERROR;
@@ -39,7 +39,7 @@ atomic_get(vint32 *value)
 }
 
 
-status_t
+status_t 
 _get_port_message_info_etc(port_id id, port_message_info *info,
 	size_t infoSize, uint32 flags, bigtime_t timeout)
 {

@@ -86,8 +86,7 @@ TimeSourceObjectManager::GetTimeSource(const media_node& node)
 
 /*!	This function is called during deletion of the time source object.
 */
-void
-TimeSourceObjectManager::ObjectDeleted(BTimeSource* timeSource)
+void TimeSourceObjectManager::ObjectDeleted(BTimeSource* timeSource)
 {
 	CALLED();
 	BAutolock _(this);

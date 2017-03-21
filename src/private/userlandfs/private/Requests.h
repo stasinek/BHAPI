@@ -1979,8 +1979,7 @@ public:
 // do_for_request
 template<class Task>
 static
-status_t
-do_for_request(Request* request, Task& task)
+status_t do_for_request(Request* request, Task& task)
 {
 	if (!request)
 		return B_BAD_VALUE;

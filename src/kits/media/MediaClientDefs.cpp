@@ -30,15 +30,13 @@ media_connection::Kind() const
 }
 
 
-bool
-media_connection::IsInput() const
+bool media_connection::IsInput() const
 {
 	return Kind() == B_MEDIA_INPUT;
 }
 
 
-bool
-media_connection::IsOutput() const
+bool media_connection::IsOutput() const
 {
 	return Kind() == B_MEDIA_OUTPUT;
 }

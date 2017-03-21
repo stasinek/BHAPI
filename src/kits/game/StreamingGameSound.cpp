@@ -68,8 +68,7 @@ BStreamingGameSound::Clone() const
 }
 
 
-status_t
-BStreamingGameSound::SetStreamHook(void (*hook)(void* inCookie, void* inBuffer,
+status_t BStreamingGameSound::SetStreamHook(void (*hook)(void* inCookie, void* inBuffer,
 	size_t inByteCount, BStreamingGameSound * me), void * cookie)
 {
 	fStreamHook = hook;
@@ -79,8 +78,7 @@ BStreamingGameSound::SetStreamHook(void (*hook)(void* inCookie, void* inBuffer,
 }
 
 
-void
-BStreamingGameSound::FillBuffer(void *inBuffer,
+void BStreamingGameSound::FillBuffer(void *inBuffer,
 								size_t inByteCount)
 {
 	if (fStreamHook)
@@ -88,23 +86,20 @@ BStreamingGameSound::FillBuffer(void *inBuffer,
 }
 
 
-status_t
-BStreamingGameSound::Perform(int32 selector, void *data)
+status_t BStreamingGameSound::Perform(int32 selector, void *data)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::SetAttributes(gs_attribute * inAttributes,
+status_t BStreamingGameSound::SetAttributes(gs_attribute * inAttributes,
 									size_t inAttributeCount)
 {
 	return BGameSound::SetAttributes(inAttributes, inAttributeCount);
 }
 
 
-status_t
-BStreamingGameSound::SetParameters(size_t inBufferFrameCount,
+status_t BStreamingGameSound::SetParameters(size_t inBufferFrameCount,
 	const gs_audio_format *format, size_t inBufferCount)
 {
 	gs_id sound;
@@ -116,15 +111,13 @@ BStreamingGameSound::SetParameters(size_t inBufferFrameCount,
 }
 
 
-bool
-BStreamingGameSound::Lock()
+bool BStreamingGameSound::Lock()
 {
 	return fLock.Lock();
 }
 
 
-void
-BStreamingGameSound::Unlock()
+void BStreamingGameSound::Unlock()
 {
 	fLock.Unlock();
 }
@@ -138,169 +131,145 @@ BStreamingGameSound::Unlock()
  */
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_0(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_0(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_1(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_1(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_2(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_2(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_3(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_3(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_4(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_4(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_5(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_5(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_6(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_6(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_7(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_7(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_8(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_8(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_9(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_9(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_10(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_10(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_11(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_11(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_12(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_12(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_13(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_13(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_14(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_14(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_15(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_15(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_16(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_16(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_17(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_17(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_18(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_18(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_19(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_19(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_20(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_20(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_21(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_21(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_22(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_22(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BStreamingGameSound::_Reserved_BStreamingGameSound_23(int32 arg, ...)
+status_t BStreamingGameSound::_Reserved_BStreamingGameSound_23(int32 arg, ...)
 {
 	return B_ERROR;
 }

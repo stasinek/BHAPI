@@ -31,8 +31,7 @@ ArrayIndexPath::~ArrayIndexPath()
 }
 
 
-status_t
-ArrayIndexPath::SetTo(const char* path)
+status_t ArrayIndexPath::SetTo(const char* path)
 {
 	fIndices.Clear();
 
@@ -61,15 +60,13 @@ ArrayIndexPath::SetTo(const char* path)
 }
 
 
-void
-ArrayIndexPath::Clear()
+void ArrayIndexPath::Clear()
 {
 	fIndices.Clear();
 }
 
 
-bool
-ArrayIndexPath::GetPathString(BString& path) const
+bool ArrayIndexPath::GetPathString(BString& path) const
 {
 	path.Truncate(0);
 

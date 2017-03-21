@@ -19,8 +19,7 @@ BoolValue::~BoolValue()
 }
 
 
-bool
-BoolValue::ToString(BString& _string) const
+bool BoolValue::ToString(BString& _string) const
 {
 	BString string = fValue ? "true" : "false";
 	if (string.Length() == 0)
@@ -31,16 +30,14 @@ BoolValue::ToString(BString& _string) const
 }
 
 
-bool
-BoolValue::ToVariant(BVariant& _value) const
+bool BoolValue::ToVariant(BVariant& _value) const
 {
 	_value = fValue;
 	return true;
 }
 
 
-bool
-BoolValue::operator==(const Value& other) const
+bool BoolValue::operator==(const Value& other) const
 {
 	const BoolValue* otherBool = dynamic_cast<const BoolValue*>(&other);
 	return otherBool != NULL ? fValue == otherBool->fValue : false;

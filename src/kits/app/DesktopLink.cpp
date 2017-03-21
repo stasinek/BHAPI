@@ -28,8 +28,7 @@ DesktopLink::~DesktopLink()
 }
 
 
-status_t
-DesktopLink::InitCheck() const
+status_t DesktopLink::InitCheck() const
 {
 	return fReceiver->Port() < B_OK ? fReceiver->Port() : B_OK;
 }

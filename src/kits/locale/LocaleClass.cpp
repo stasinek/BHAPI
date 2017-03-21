@@ -65,8 +65,7 @@ BLocale::~BLocale()
 }
 
 
-status_t
-BLocale::GetCollator(BCollator* collator) const
+status_t BLocale::GetCollator(BCollator* collator) const
 {
 	if (!collator)
 		return B_BAD_VALUE;
@@ -81,8 +80,7 @@ BLocale::GetCollator(BCollator* collator) const
 }
 
 
-status_t
-BLocale::GetLanguage(BLanguage* language) const
+status_t BLocale::GetLanguage(BLanguage* language) const
 {
 	if (!language)
 		return B_BAD_VALUE;
@@ -97,8 +95,7 @@ BLocale::GetLanguage(BLanguage* language) const
 }
 
 
-status_t
-BLocale::GetFormattingConventions(BFormattingConventions* conventions) const
+status_t BLocale::GetFormattingConventions(BFormattingConventions* conventions) const
 {
 	if (!conventions)
 		return B_BAD_VALUE;
@@ -132,8 +129,7 @@ BLocale::GetString(uint32 id) const
 }
 
 
-void
-BLocale::SetFormattingConventions(const BFormattingConventions& conventions)
+void BLocale::SetFormattingConventions(const BFormattingConventions& conventions)
 {
 	BAutolock lock(fLock);
 	if (!lock.IsLocked())
@@ -143,8 +139,7 @@ BLocale::SetFormattingConventions(const BFormattingConventions& conventions)
 }
 
 
-void
-BLocale::SetCollator(const BCollator& newCollator)
+void BLocale::SetCollator(const BCollator& newCollator)
 {
 	BAutolock lock(fLock);
 	if (!lock.IsLocked())
@@ -154,8 +149,7 @@ BLocale::SetCollator(const BCollator& newCollator)
 }
 
 
-void
-BLocale::SetLanguage(const BLanguage& newLanguage)
+void BLocale::SetLanguage(const BLanguage& newLanguage)
 {
 	BAutolock lock(fLock);
 	if (!lock.IsLocked())

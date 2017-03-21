@@ -46,8 +46,7 @@ VariableValueNodeChild::Parent() const
 }
 
 
-status_t
-VariableValueNodeChild::ResolveLocation(ValueLoader* valueLoader,
+status_t VariableValueNodeChild::ResolveLocation(ValueLoader* valueLoader,
 	ValueLocation*& _location)
 {
 	_location = fVariable->Location();

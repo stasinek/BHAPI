@@ -81,8 +81,7 @@ enum nav_flags {
 };
 
 
-bool
-SpringLoadedFolderCompareMessages(const BMessage* incoming,
+bool SpringLoadedFolderCompareMessages(const BMessage* incoming,
 	const BMessage* dragMessage)
 {
 	if (incoming == NULL || dragMessage == NULL)
@@ -132,8 +131,7 @@ SpringLoadedFolderCompareMessages(const BMessage* incoming,
 }
 
 
-void
-SpringLoadedFolderSetMenuStates(const BMenu* menu,
+void SpringLoadedFolderSetMenuStates(const BMenu* menu,
 	const BObjectList<BString>* typeslist)
 {
 	if (menu == NULL || typeslist == NULL || typeslist->IsEmpty())
@@ -181,8 +179,7 @@ SpringLoadedFolderSetMenuStates(const BMenu* menu,
 }
 
 
-void
-SpringLoadedFolderAddUniqueTypeToList(entry_ref* ref,
+void SpringLoadedFolderAddUniqueTypeToList(entry_ref* ref,
 	BObjectList<BString>* typeslist)
 {
 	if (ref == NULL || typeslist == NULL)
@@ -226,8 +223,7 @@ SpringLoadedFolderAddUniqueTypeToList(entry_ref* ref,
 }
 
 
-void
-SpringLoadedFolderCacheDragData(const BMessage* incoming, BMessage** message,
+void SpringLoadedFolderCacheDragData(const BMessage* incoming, BMessage** message,
 	BObjectList<BString>** typeslist)
 {
 	if (incoming == NULL)
@@ -336,8 +332,7 @@ BNavMenu::~BNavMenu()
 }
 
 
-void
-BNavMenu::AttachedToWindow()
+void BNavMenu::AttachedToWindow()
 {
 	BSlowMenu::AttachedToWindow();
 
@@ -349,36 +344,31 @@ BNavMenu::AttachedToWindow()
 }
 
 
-void
-BNavMenu::DetachedFromWindow()
+void BNavMenu::DetachedFromWindow()
 {
 }
 
 
-void
-BNavMenu::ResetTargets()
+void BNavMenu::ResetTargets()
 {
 	SetTargetForItems(Target());
 }
 
 
-void
-BNavMenu::ForceRebuild()
+void BNavMenu::ForceRebuild()
 {
 	ClearMenuBuildingState();
 	fMenuBuilt = false;
 }
 
 
-bool
-BNavMenu::NeedsToRebuild() const
+bool BNavMenu::NeedsToRebuild() const
 {
 	return !fMenuBuilt;
 }
 
 
-void
-BNavMenu::SetNavDir(const entry_ref* ref)
+void BNavMenu::SetNavDir(const entry_ref* ref)
 {
 	ForceRebuild();
 		// reset the slow menu building mechanism so we can add more stuff
@@ -387,8 +377,7 @@ BNavMenu::SetNavDir(const entry_ref* ref)
 }
 
 
-void
-BNavMenu::ClearMenuBuildingState()
+void BNavMenu::ClearMenuBuildingState()
 {
 	delete fContainer;
 	fContainer = NULL;
@@ -406,8 +395,7 @@ BNavMenu::ClearMenuBuildingState()
 }
 
 
-bool
-BNavMenu::StartBuildingItemList()
+bool BNavMenu::StartBuildingItemList()
 {
 	BEntry entry;
 
@@ -485,8 +473,7 @@ BNavMenu::StartBuildingItemList()
 }
 
 
-void
-BNavMenu::AddRootItemsIfNeeded()
+void BNavMenu::AddRootItemsIfNeeded()
 {
 	BVolumeRoster roster;
 	roster.Rewind();
@@ -506,8 +493,7 @@ BNavMenu::AddRootItemsIfNeeded()
 }
 
 
-void
-BNavMenu::AddTrashItem()
+void BNavMenu::AddTrashItem()
 {
 	BPath path;
 	if (find_directory(B_TRASH_DIRECTORY, &path) == B_OK) {
@@ -518,8 +504,7 @@ BNavMenu::AddTrashItem()
 }
 
 
-bool
-BNavMenu::AddNextItem()
+bool BNavMenu::AddNextItem()
 {
 	if ((fFlags & kVolumesOnly) != 0) {
 		BuildVolumeMenu();
@@ -573,8 +558,7 @@ BNavMenu::AddNextItem()
 }
 
 
-void
-BNavMenu::AddOneItem(Model* model)
+void BNavMenu::AddOneItem(Model* model)
 {
 	BMenuItem* item = NewModelItem(model, &fMessage, fMessenger, false,
 		dynamic_cast<BContainerWindow*>(fParentWindow),
@@ -674,8 +658,7 @@ BNavMenu::NewModelItem(Model* model, const BMessage* invokeMessage,
 }
 
 
-void
-BNavMenu::BuildVolumeMenu()
+void BNavMenu::BuildVolumeMenu()
 {
 	BVolumeRoster roster;
 	BVolume volume;
@@ -742,8 +725,7 @@ BNavMenu::CompareOne(const BMenuItem* i1, const BMenuItem* i2)
 }
 
 
-void
-BNavMenu::DoneBuildingItemList()
+void BNavMenu::DoneBuildingItemList()
 {
 	// add sorted items to menu
 	if (TrackerSettings().SortFolderNamesFirst())
@@ -782,15 +764,13 @@ BNavMenu::DoneBuildingItemList()
 }
 
 
-int32
-BNavMenu::GetMaxMenuWidth(void)
+int32 BNavMenu::GetMaxMenuWidth(void)
 {
 	return std::max((int32)(BScreen().Frame().Width() / 4), kMinMenuWidth);
 }
 
 
-void
-BNavMenu::AddNavDir(const Model* model, uint32 what, BHandler* target,
+void BNavMenu::AddNavDir(const Model* model, uint32 what, BHandler* target,
 	bool populateSubmenu)
 {
 	BMessage* message = new BMessage((uint32)what);
@@ -811,8 +791,7 @@ BNavMenu::AddNavDir(const Model* model, uint32 what, BHandler* target,
 }
 
 
-void
-BNavMenu::AddNavParentDir(const char* name,const Model* model,
+void BNavMenu::AddNavParentDir(const char* name,const Model* model,
 	uint32 what, BHandler* target)
 {
 	BNavMenu* menu = new BNavMenu(name, what, target);
@@ -830,22 +809,19 @@ BNavMenu::AddNavParentDir(const char* name,const Model* model,
 }
 
 
-void
-BNavMenu::AddNavParentDir(const Model* model, uint32 what, BHandler* target)
+void BNavMenu::AddNavParentDir(const Model* model, uint32 what, BHandler* target)
 {
 	AddNavParentDir(B_TRANSLATE("parent folder"),model, what, target);
 }
 
 
-void
-BNavMenu::SetShowParent(bool show)
+void BNavMenu::SetShowParent(bool show)
 {
 	fFlags = uint8((fFlags & ~kShowParent) | (show ? kShowParent : 0));
 }
 
 
-void
-BNavMenu::SetTypesList(const BObjectList<BString>* list)
+void BNavMenu::SetTypesList(const BObjectList<BString>* list)
 {
 	if (list != NULL)
 		*fTypesList = *list;
@@ -861,8 +837,7 @@ BNavMenu::TypesList() const
 }
 
 
-void
-BNavMenu::SetTarget(const BMessenger& messenger)
+void BNavMenu::SetTarget(const BMessenger& messenger)
 {
 	fMessenger = messenger;
 }
@@ -890,8 +865,7 @@ BNavMenu::InitTrackingHook(bool (*hook)(BMenu*, void*),
 }
 
 
-void
-BNavMenu::SetTrackingHookDeep(BMenu* menu, bool (*func)(BMenu*, void*),
+void BNavMenu::SetTrackingHookDeep(BMenu* menu, bool (*func)(BMenu*, void*),
 	void* state)
 {
 	menu->SetTrackingHook(func, state);

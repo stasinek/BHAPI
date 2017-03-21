@@ -74,8 +74,7 @@ BTrashWatcher::~BTrashWatcher()
 }
 
 
-bool
-BTrashWatcher::IsTrashNode(const node_ref* testNode) const
+bool BTrashWatcher::IsTrashNode(const node_ref* testNode) const
 {
 	int32 count = fTrashNodeList.CountItems();
 	for (int32 index = 0; index < count; index++) {
@@ -88,8 +87,7 @@ BTrashWatcher::IsTrashNode(const node_ref* testNode) const
 }
 
 
-void
-BTrashWatcher::MessageReceived(BMessage* message)
+void BTrashWatcher::MessageReceived(BMessage* message)
 {
 	if (message->what != B_NODE_MONITOR) {
 		_inherited::MessageReceived(message);
@@ -151,8 +149,7 @@ BTrashWatcher::MessageReceived(BMessage* message)
 }
 
 
-void
-BTrashWatcher::UpdateTrashIcons()
+void BTrashWatcher::UpdateTrashIcons()
 {
 	BVolumeRoster roster;
 	BVolume volume;
@@ -200,8 +197,7 @@ BTrashWatcher::UpdateTrashIcons()
 }
 
 
-void
-BTrashWatcher::WatchTrashDirs()
+void BTrashWatcher::WatchTrashDirs()
 {
 	BVolumeRoster volRoster;
 	volRoster.Rewind();
@@ -221,8 +217,7 @@ BTrashWatcher::WatchTrashDirs()
 }
 
 
-bool
-BTrashWatcher::CheckTrashDirs()
+bool BTrashWatcher::CheckTrashDirs()
 {
 	BVolumeRoster volRoster;
 	volRoster.Rewind();

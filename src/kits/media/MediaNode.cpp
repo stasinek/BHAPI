@@ -173,8 +173,7 @@ BMediaNode::Release()
 }
 
 
-const char*
-BMediaNode::Name() const
+const char*  BMediaNode::Name() const
 {
 	CALLED();
 	return fName;
@@ -189,8 +188,7 @@ BMediaNode::ID() const
 }
 
 
-uint64
-BMediaNode::Kinds() const
+uint64 BMediaNode::Kinds() const
 {
 	CALLED();
 	return fKinds & NODE_KIND_USER_MASK;
@@ -262,8 +260,7 @@ BMediaNode::ControlPort() const
 }
 
 
-status_t
-BMediaNode::ReportError(node_error what, const BMessage* info)
+status_t BMediaNode::ReportError(node_error what, const BMessage* info)
 {
 	CALLED();
 
@@ -289,8 +286,7 @@ BMediaNode::ReportError(node_error what, const BMessage* info)
 }
 
 
-status_t
-BMediaNode::NodeStopped(bigtime_t whenPerformance)
+status_t BMediaNode::NodeStopped(bigtime_t whenPerformance)
 {
 	UNIMPLEMENTED();
 	// Called by derived classes when they have
@@ -312,8 +308,7 @@ BMediaNode::NodeStopped(bigtime_t whenPerformance)
  * call that requested the timer to return to the caller with an appropriate
  * value.
  */
-void
-BMediaNode::TimerExpired(bigtime_t notifyPoint, int32 cookie, status_t error)
+void BMediaNode::TimerExpired(bigtime_t notifyPoint, int32 cookie, status_t error)
 {
 	CALLED();
 	if (write_port((port_id)cookie, 0, &error, sizeof(error)) < 0) {
@@ -330,8 +325,7 @@ BMediaNode::BMediaNode(const char* name)
 }
 
 
-status_t
-BMediaNode::WaitForMessage(bigtime_t waitUntil, uint32 flags,
+status_t BMediaNode::WaitForMessage(bigtime_t waitUntil, uint32 flags,
 	void* _reserved_)
 {
 	TRACE("entering: BMediaNode::WaitForMessage()\n");
@@ -462,8 +456,7 @@ BMediaNode::WaitForMessage(bigtime_t waitUntil, uint32 flags,
 }
 
 
-void
-BMediaNode::Start(bigtime_t performance_time)
+void BMediaNode::Start(bigtime_t performance_time)
 {
 	CALLED();
 	// This hook function is called when a node is started
@@ -476,8 +469,7 @@ BMediaNode::Start(bigtime_t performance_time)
 }
 
 
-void
-BMediaNode::Stop(bigtime_t performance_time, bool immediate)
+void BMediaNode::Stop(bigtime_t performance_time, bool immediate)
 {
 	CALLED();
 	// This hook function is called when a node is stopped
@@ -490,8 +482,7 @@ BMediaNode::Stop(bigtime_t performance_time, bool immediate)
 }
 
 
-void
-BMediaNode::Seek(bigtime_t media_time, bigtime_t performance_time)
+void BMediaNode::Seek(bigtime_t media_time, bigtime_t performance_time)
 {
 	CALLED();
 	// This hook function is called when a node is asked
@@ -505,8 +496,7 @@ BMediaNode::Seek(bigtime_t media_time, bigtime_t performance_time)
 }
 
 
-void
-BMediaNode::SetRunMode(run_mode mode)
+void BMediaNode::SetRunMode(run_mode mode)
 {
 	CALLED();
 
@@ -520,24 +510,21 @@ BMediaNode::SetRunMode(run_mode mode)
 }
 
 
-void
-BMediaNode::TimeWarp(bigtime_t at_real_time, bigtime_t to_performance_time)
+void BMediaNode::TimeWarp(bigtime_t at_real_time, bigtime_t to_performance_time)
 {
 	CALLED();
 	// May be overriden by derived classes.
 }
 
 
-void
-BMediaNode::Preroll()
+void BMediaNode::Preroll()
 {
 	CALLED();
 	// May be overriden by derived classes.
 }
 
 
-void
-BMediaNode::SetTimeSource(BTimeSource* time_source)
+void BMediaNode::SetTimeSource(BTimeSource* time_source)
 {
 	CALLED();
 	// This is a hook function, and
@@ -552,8 +539,7 @@ BMediaNode::SetTimeSource(BTimeSource* time_source)
 }
 
 
-status_t
-BMediaNode::HandleMessage(int32 message, const void* data, size_t size)
+status_t BMediaNode::HandleMessage(int32 message, const void* data, size_t size)
 {
 	TRACE("BMediaNode::HandleMessage %#lx, node %ld\n", message, fNodeID);
 	switch (message) {
@@ -769,8 +755,7 @@ BMediaNode::HandleMessage(int32 message, const void* data, size_t size)
 }
 
 
-void
-BMediaNode::HandleBadMessage(int32 code, const void* buffer, size_t size)
+void BMediaNode::HandleBadMessage(int32 code, const void* buffer, size_t size)
 {
 	CALLED();
 
@@ -789,48 +774,42 @@ BMediaNode::HandleBadMessage(int32 code, const void* buffer, size_t size)
 }
 
 
-void
-BMediaNode::AddNodeKind(uint64 kind)
+void BMediaNode::AddNodeKind(uint64 kind)
 {
 	TRACE("BMediaNode::AddNodeKind: node %ld, this %p\n", fNodeID, this);
 	fKinds |= kind;
 }
 
 
-void*
-BMediaNode::operator new(size_t size)
+void*   BMediaNode::operator new(size_t size)
 {
 	CALLED();
 	return ::operator new(size);
 }
 
 
-void*
-BMediaNode::operator new(size_t size, const nothrow_t&) throw()
+void*   BMediaNode::operator new(size_t size, const nothrow_t&) throw()
 {
 	CALLED();
 	return ::operator new(size, nothrow);
 }
 
 
-void
-BMediaNode::operator delete(void* ptr)
+void BMediaNode::operator delete(void* ptr)
 {
 	CALLED();
 	::operator delete(ptr);
 }
 
 
-void
-BMediaNode::operator delete(void* ptr, const nothrow_t&) throw()
+void BMediaNode::operator delete(void* ptr, const nothrow_t&) throw()
 {
 	CALLED();
 	::operator delete(ptr, nothrow);
 }
 
 
-status_t
-BMediaNode::RequestCompleted(const media_request_info& info)
+status_t BMediaNode::RequestCompleted(const media_request_info& info)
 {
 	CALLED();
 	// This function is called whenever
@@ -846,8 +825,7 @@ BMediaNode::RequestCompleted(const media_request_info& info)
 }
 
 
-status_t
-BMediaNode::DeleteHook(BMediaNode* node)
+status_t BMediaNode::DeleteHook(BMediaNode* node)
 {
 	CALLED();
 	// Attention! We do not unregister TimeSourceObject nodes,
@@ -859,8 +837,7 @@ BMediaNode::DeleteHook(BMediaNode* node)
 }
 
 
-void
-BMediaNode::NodeRegistered()
+void BMediaNode::NodeRegistered()
 {
 	CALLED();
 	// The Media Server calls this hook function
@@ -869,8 +846,7 @@ BMediaNode::NodeRegistered()
 }
 
 
-status_t
-BMediaNode::GetNodeAttributes(media_node_attribute* outAttributes,
+status_t BMediaNode::GetNodeAttributes(media_node_attribute* outAttributes,
 	size_t inMaxCount)
 {
 	CALLED();
@@ -880,8 +856,7 @@ BMediaNode::GetNodeAttributes(media_node_attribute* outAttributes,
 }
 
 
-status_t
-BMediaNode::AddTimer(bigtime_t at_performance_time, int32 cookie)
+status_t BMediaNode::AddTimer(bigtime_t at_performance_time, int32 cookie)
 {
 	CALLED();
 	return B_ERROR;
@@ -912,8 +887,7 @@ BMediaNode::BMediaNode(const BMediaNode &clone)
 BMediaNode &BMediaNode::operator=(const BMediaNode &clone)
 */
 
-void
-BMediaNode::_InitObject(const char* name, media_node_id id, uint64 kinds)
+void BMediaNode::_InitObject(const char* name, media_node_id id, uint64 kinds)
 {
 	TRACE("BMediaNode::_InitObject: nodeid %ld, this %p\n", id, this);
 
@@ -951,8 +925,7 @@ BMediaNode::BMediaNode(const char* name, media_node_id id, uint32 kinds)
 }
 
 
-int32
-BMediaNode::NewChangeTag()
+int32 BMediaNode::NewChangeTag()
 {
 	CALLED();
 	// Change tags have been used in BeOS R4 to match up
@@ -969,8 +942,7 @@ BMediaNode::NewChangeTag()
 
 // BeOS R4 deprecated API
 
-int32
-BMediaNode::IncrementChangeTag()
+int32 BMediaNode::IncrementChangeTag()
 {
 	CALLED();
 	// Only present in BeOS R4
@@ -982,8 +954,7 @@ BMediaNode::IncrementChangeTag()
 }
 
 
-int32
-BMediaNode::ChangeTag()
+int32 BMediaNode::ChangeTag()
 {
 	UNIMPLEMENTED();
 	// Only present in BeOS R4
@@ -994,8 +965,7 @@ BMediaNode::ChangeTag()
 }
 
 
-int32
-BMediaNode::MintChangeTag()
+int32 BMediaNode::MintChangeTag()
 {
 	UNIMPLEMENTED();
 	// Only present in BeOS R4
@@ -1007,8 +977,7 @@ BMediaNode::MintChangeTag()
 }
 
 
-status_t
-BMediaNode::ApplyChangeTag(int32 previously_reserved)
+status_t BMediaNode::ApplyChangeTag(int32 previously_reserved)
 {
 	UNIMPLEMENTED();
 	// Only present in BeOS R4

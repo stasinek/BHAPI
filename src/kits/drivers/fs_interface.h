@@ -9,7 +9,7 @@
 /*! File System Interface Layer Definition */
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <Select.h>
 #include <module.h>
 #include <disk_device_manager.h>

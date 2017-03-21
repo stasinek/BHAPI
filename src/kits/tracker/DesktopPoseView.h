@@ -77,8 +77,7 @@ private:
 };
 
 
-inline bool
-DesktopPoseView::IsDesktopView() const
+inline bool DesktopPoseView::IsDesktopView() const
 {
 	return true;
 }

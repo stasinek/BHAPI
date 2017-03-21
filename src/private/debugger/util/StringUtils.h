@@ -15,8 +15,7 @@ public:
 };
 
 
-/*static*/ inline uint32
-StringUtils::HashValue(const BString& string)
+/*static*/ inline uint32 StringUtils::HashValue(const BString& string)
 {
 	return HashValue(string.String());
 }

@@ -1795,8 +1795,7 @@ CLanguageExpressionEvaluator::_ParseAtom()
 }
 
 
-void
-CLanguageExpressionEvaluator::_EatToken(int32 type)
+void CLanguageExpressionEvaluator::_EatToken(int32 type)
 {
 	Token token = fTokenizer->NextToken();
 	if (token.type != type) {
@@ -1901,8 +1900,7 @@ CLanguageExpressionEvaluator::_ParseType(Type* baseType)
 }
 
 
-void
-CLanguageExpressionEvaluator::_RequestValueIfNeeded(
+void CLanguageExpressionEvaluator::_RequestValueIfNeeded(
 	const Token& token, ValueNodeChild* child)
 {
 	status_t state;
@@ -1937,8 +1935,7 @@ CLanguageExpressionEvaluator::_RequestValueIfNeeded(
 }
 
 
-void
-CLanguageExpressionEvaluator::_GetNodeChildForPrimitive(const Token& token,
+void CLanguageExpressionEvaluator::_GetNodeChildForPrimitive(const Token& token,
 	const BVariant& value, ValueNodeChild*& _output) const
 {
 	Type* type = new(std::nothrow) SyntheticPrimitiveType(value.Type());

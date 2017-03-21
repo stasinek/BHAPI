@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <strings.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 #ifdef __cplusplus
@@ -36,8 +36,7 @@ int32 get_rounded_cpu_speed(void);
 	Note, this function is not thread safe, and must only be called once
 	at a time.
 */
-static const char*
-parse_intel(const char* name)
+static const char*  parse_intel(const char* name)
 {
 	static char buffer[49];
 
@@ -82,8 +81,7 @@ parse_intel(const char* name)
 }
 
 
-static const char*
-parse_amd(const char* name)
+static const char*  parse_amd(const char* name)
 {
 	static char buffer[49];
 
@@ -167,8 +165,7 @@ parse_amd(const char* name)
 #endif
 
 
-static const char*
-get_cpu_vendor_string(enum cpu_vendor cpuVendor)
+static const char*  get_cpu_vendor_string(enum cpu_vendor cpuVendor)
 {
 	// Should match vendors in OS.h
 	static const char* vendorStrings[] = {
@@ -184,8 +181,7 @@ get_cpu_vendor_string(enum cpu_vendor cpuVendor)
 
 #if defined(__INTEL__) || defined(__x86_64__)
 /*! Parameter 'name' needs to point to an allocated array of 49 characters. */
-void
-get_cpuid_model_string(char *name)
+void get_cpuid_model_string(char *name)
 {
 	/* References:
 	 *
@@ -240,8 +236,7 @@ get_cpuid_model_string(char *name)
 #endif	/* __INTEL__ || __x86_64__ */
 
 
-static const char*
-get_cpu_model_string(enum cpu_platform platform, enum cpu_vendor cpuVendor,
+static const char*  get_cpu_model_string(enum cpu_platform platform, enum cpu_vendor cpuVendor,
 	uint32 cpuModel)
 {
 #if defined(__INTEL__) || defined(__x86_64__)
@@ -459,8 +454,7 @@ get_cpu_model_string(enum cpu_platform platform, enum cpu_vendor cpuVendor,
 }
 
 
-void
-get_cpu_type(char *vendorBuffer, size_t vendorSize, char *modelBuffer,
+void get_cpu_type(char *vendorBuffer, size_t vendorSize, char *modelBuffer,
 	size_t modelSize)
 {
 	const char *vendor, *model;
@@ -515,8 +509,7 @@ get_cpu_type(char *vendorBuffer, size_t vendorSize, char *modelBuffer,
 }
 
 
-int32
-get_rounded_cpu_speed(void)
+int32 get_rounded_cpu_speed(void)
 {
 	uint32 topologyNodeCount = 0;
 	cpu_topology_node_info* topology = NULL;

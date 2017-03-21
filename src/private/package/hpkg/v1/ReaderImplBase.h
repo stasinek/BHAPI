@@ -283,16 +283,14 @@ ReaderImplBase::CurrentSection()
 }
 
 
-void
-ReaderImplBase::SetCurrentSection(SectionInfo* section)
+void ReaderImplBase::SetCurrentSection(SectionInfo* section)
 {
 	fCurrentSection = section;
 }
 
 
 template<typename Type>
-status_t
-ReaderImplBase::_Read(Type& _value)
+status_t ReaderImplBase::_Read(Type& _value)
 {
 	return _ReadSectionBuffer(&_value, sizeof(Type));
 }
@@ -305,8 +303,7 @@ ReaderImplBase::CurrentAttributeHandler() const
 }
 
 
-inline void
-ReaderImplBase::PushAttributeHandler(AttributeHandler* handler)
+inline void ReaderImplBase::PushAttributeHandler(AttributeHandler* handler)
 {
 	fAttributeHandlerStack.Add(handler);
 }
@@ -319,8 +316,7 @@ ReaderImplBase::PopAttributeHandler()
 }
 
 
-inline void
-ReaderImplBase::ClearAttributeHandlerStack()
+inline void ReaderImplBase::ClearAttributeHandlerStack()
 {
 	fAttributeHandlerStack.MakeEmpty();
 }

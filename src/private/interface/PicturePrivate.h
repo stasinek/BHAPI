@@ -7,7 +7,7 @@
 
 
 #include <Picture.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 void reconnect_pictures_to_app_server();

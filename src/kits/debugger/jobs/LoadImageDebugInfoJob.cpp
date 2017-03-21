@@ -43,8 +43,7 @@ LoadImageDebugInfoJob::Key() const
 }
 
 
-status_t
-LoadImageDebugInfoJob::Do()
+status_t LoadImageDebugInfoJob::Do()
 {
 	// get an image info for the image
 	AutoLocker<Team> locker(fImage->GetTeam());
@@ -71,8 +70,7 @@ LoadImageDebugInfoJob::Do()
 }
 
 
-/*static*/ status_t
-LoadImageDebugInfoJob::ScheduleIfNecessary(Worker* worker, Image* image,
+/*static*/ status_t LoadImageDebugInfoJob::ScheduleIfNecessary(Worker* worker, Image* image,
 	JobListener* listener, ImageDebugInfo** _imageDebugInfo)
 {
 	AutoLocker<Team> teamLocker(image->GetTeam());

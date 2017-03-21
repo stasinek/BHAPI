@@ -5,7 +5,7 @@
 #ifndef _LIBROOT_MEMORY_PRIVATE_H
 #define _LIBROOT_MEMORY_PRIVATE_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <sys/cdefs.h>
 

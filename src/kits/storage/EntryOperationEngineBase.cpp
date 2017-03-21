@@ -76,8 +76,7 @@ BEntryOperationEngineBase::Entry::~Entry()
 }
 
 
-status_t
-BEntryOperationEngineBase::Entry::GetPath(BPath& buffer, const char*& _path)
+status_t BEntryOperationEngineBase::Entry::GetPath(BPath& buffer, const char*& _path)
 	const
 {
 	status_t error = B_OK;
@@ -117,8 +116,7 @@ BEntryOperationEngineBase::Entry::Path() const
 }
 
 
-status_t
-BEntryOperationEngineBase::Entry::GetPathOrName(BString& _path) const
+status_t BEntryOperationEngineBase::Entry::GetPathOrName(BString& _path) const
 {
 	_path.Truncate(0);
 

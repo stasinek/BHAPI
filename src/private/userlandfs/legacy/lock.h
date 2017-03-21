@@ -8,7 +8,7 @@
 
 #include <BeBuild.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #ifndef _IMPEXP_KERNEL
 #define _IMPEXP_KERNEL

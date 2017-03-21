@@ -52,8 +52,7 @@ BNetworkRoster::CountInterfaces() const
 }
 
 
-status_t
-BNetworkRoster::GetNextInterface(uint32* cookie,
+status_t BNetworkRoster::GetNextInterface(uint32* cookie,
 	BNetworkInterface& interface) const
 {
 	// TODO: think about caching the interfaces!
@@ -107,8 +106,7 @@ BNetworkRoster::GetNextInterface(uint32* cookie,
 }
 
 
-status_t
-BNetworkRoster::AddInterface(const char* name)
+status_t BNetworkRoster::AddInterface(const char* name)
 {
 	int socket = ::socket(AF_INET, SOCK_DGRAM, 0);
 	if (socket < 0)
@@ -127,15 +125,13 @@ BNetworkRoster::AddInterface(const char* name)
 }
 
 
-status_t
-BNetworkRoster::AddInterface(const BNetworkInterface& interface)
+status_t BNetworkRoster::AddInterface(const BNetworkInterface& interface)
 {
 	return AddInterface(interface.Name());
 }
 
 
-status_t
-BNetworkRoster::RemoveInterface(const char* name)
+status_t BNetworkRoster::RemoveInterface(const char* name)
 {
 	int socket = ::socket(AF_INET, SOCK_DGRAM, 0);
 	if (socket < 0)
@@ -155,15 +151,13 @@ BNetworkRoster::RemoveInterface(const char* name)
 }
 
 
-status_t
-BNetworkRoster::RemoveInterface(const BNetworkInterface& interface)
+status_t BNetworkRoster::RemoveInterface(const BNetworkInterface& interface)
 {
 	return RemoveInterface(interface.Name());
 }
 
 
-int32
-BNetworkRoster::CountPersistentNetworks() const
+int32 BNetworkRoster::CountPersistentNetworks() const
 {
 	BMessenger networkServer(kNetServerSignature);
 	BMessage message(kMsgCountPersistentNetworks);
@@ -179,8 +173,7 @@ BNetworkRoster::CountPersistentNetworks() const
 }
 
 
-status_t
-BNetworkRoster::GetNextPersistentNetwork(uint32* cookie,
+status_t BNetworkRoster::GetNextPersistentNetwork(uint32* cookie,
 	wireless_network& network) const
 {
 	BMessenger networkServer(kNetServerSignature);
@@ -236,8 +229,7 @@ BNetworkRoster::GetNextPersistentNetwork(uint32* cookie,
 }
 
 
-status_t
-BNetworkRoster::AddPersistentNetwork(const wireless_network& network)
+status_t BNetworkRoster::AddPersistentNetwork(const wireless_network& network)
 {
 	BMessage message(kMsgAddPersistentNetwork);
 	BString networkName;
@@ -274,8 +266,7 @@ BNetworkRoster::AddPersistentNetwork(const wireless_network& network)
 }
 
 
-status_t
-BNetworkRoster::RemovePersistentNetwork(const char* name)
+status_t BNetworkRoster::RemovePersistentNetwork(const char* name)
 {
 	BMessage message(kMsgRemovePersistentNetwork);
 	status_t status = message.AddString("name", name);
@@ -292,15 +283,13 @@ BNetworkRoster::RemovePersistentNetwork(const char* name)
 }
 
 
-status_t
-BNetworkRoster::StartWatching(const BMessenger& target, uint32 eventMask)
+status_t BNetworkRoster::StartWatching(const BMessenger& target, uint32 eventMask)
 {
 	return start_watching_network(eventMask, target);
 }
 
 
-void
-BNetworkRoster::StopWatching(const BMessenger& target)
+void BNetworkRoster::StopWatching(const BMessenger& target)
 {
 	stop_watching_network(target);
 }

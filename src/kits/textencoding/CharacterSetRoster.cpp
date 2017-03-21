@@ -16,8 +16,7 @@ BCharacterSetRoster::~BCharacterSetRoster()
 	// nothing to do
 }
 
-status_t
-BCharacterSetRoster::GetNextCharacterSet(BCharacterSet * charset)
+status_t BCharacterSetRoster::GetNextCharacterSet(BCharacterSet * charset)
 {
 	if (charset == 0) {
 		return B_BAD_VALUE;
@@ -29,8 +28,7 @@ BCharacterSetRoster::GetNextCharacterSet(BCharacterSet * charset)
 	return B_NO_ERROR;
 }
 
-status_t
-BCharacterSetRoster::RewindCharacterSets()
+status_t BCharacterSetRoster::RewindCharacterSets()
 {
 	index = 0;
 	if (index >= character_sets_by_id_count) {
@@ -39,15 +37,13 @@ BCharacterSetRoster::RewindCharacterSets()
 	return B_NO_ERROR;
 }
 
-status_t
-BCharacterSetRoster::StartWatching(BMessenger target)
+status_t BCharacterSetRoster::StartWatching(BMessenger target)
 {
 	// TODO: implement it
 	return B_ERROR;
 }
 
-status_t
-BCharacterSetRoster::StopWatching(BMessenger target)
+status_t BCharacterSetRoster::StopWatching(BMessenger target)
 {
 	// TODO: implement it
 	return B_ERROR;

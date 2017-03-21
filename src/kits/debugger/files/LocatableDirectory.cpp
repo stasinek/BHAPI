@@ -21,8 +21,7 @@ LocatableDirectory::~LocatableDirectory()
 }
 
 
-const char*
-LocatableDirectory::Name() const
+const char*  LocatableDirectory::Name() const
 {
 	int32 lastSlash = fPath.FindLast('/');
 		// return -1, if not found
@@ -30,22 +29,19 @@ LocatableDirectory::Name() const
 }
 
 
-const char*
-LocatableDirectory::Path() const
+const char*  LocatableDirectory::Path() const
 {
 	return fPath.String();
 }
 
 
-void
-LocatableDirectory::GetPath(BString& _path) const
+void LocatableDirectory::GetPath(BString& _path) const
 {
 	_path = fPath;
 }
 
 
-bool
-LocatableDirectory::GetLocatedPath(BString& _path) const
+bool LocatableDirectory::GetLocatedPath(BString& _path) const
 {
 	if (fLocatedPath.Length() == 0)
 		return false;
@@ -54,8 +50,7 @@ LocatableDirectory::GetLocatedPath(BString& _path) const
 }
 
 
-void
-LocatableDirectory::SetLocatedPath(const BString& path, bool implicit)
+void LocatableDirectory::SetLocatedPath(const BString& path, bool implicit)
 {
 	fLocatedPath = path;
 	fState = implicit
@@ -64,15 +59,13 @@ LocatableDirectory::SetLocatedPath(const BString& path, bool implicit)
 }
 
 
-void
-LocatableDirectory::AddEntry(LocatableEntry* entry)
+void LocatableDirectory::AddEntry(LocatableEntry* entry)
 {
 	fEntries.Add(entry);
 }
 
 
-void
-LocatableDirectory::RemoveEntry(LocatableEntry* entry)
+void LocatableDirectory::RemoveEntry(LocatableEntry* entry)
 {
 	fEntries.Remove(entry);
 }

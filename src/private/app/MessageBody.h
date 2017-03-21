@@ -88,7 +88,7 @@ private:
 };
 
 
-inline void
+inline void 
 BMessageBody::PrintToStream() const
 {
 	PrintToStream(EOut);

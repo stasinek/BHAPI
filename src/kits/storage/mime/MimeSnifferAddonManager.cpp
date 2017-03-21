@@ -79,8 +79,7 @@ MimeSnifferAddonManager::Default()
 }
 
 // CreateDefault
-status_t
-MimeSnifferAddonManager::CreateDefault()
+status_t MimeSnifferAddonManager::CreateDefault()
 {
 	MimeSnifferAddonManager* manager
 		= new(std::nothrow) MimeSnifferAddonManager;
@@ -93,8 +92,7 @@ MimeSnifferAddonManager::CreateDefault()
 }
 
 // DeleteDefault
-void
-MimeSnifferAddonManager::DeleteDefault()
+void MimeSnifferAddonManager::DeleteDefault()
 {
 	MimeSnifferAddonManager* manager = sManager;
 	sManager = NULL;
@@ -103,8 +101,7 @@ MimeSnifferAddonManager::DeleteDefault()
 }
 
 // AddMimeSnifferAddon
-status_t
-MimeSnifferAddonManager::AddMimeSnifferAddon(BMimeSnifferAddon* addon)
+status_t MimeSnifferAddonManager::AddMimeSnifferAddon(BMimeSnifferAddon* addon)
 {
 	if (!addon)
 		return B_BAD_VALUE;
@@ -199,8 +196,7 @@ MimeSnifferAddonManager::GuessMimeType(BFile* file, const void* buffer,
 }
 
 // _GetAddons
-status_t
-MimeSnifferAddonManager::_GetAddons(AddonReference**& references, int32& count)
+status_t MimeSnifferAddonManager::_GetAddons(AddonReference**& references, int32& count)
 {
 	BAutolock locker(fLock);
 	if (!locker.IsLocked())
@@ -220,8 +216,7 @@ MimeSnifferAddonManager::_GetAddons(AddonReference**& references, int32& count)
 }
 
 // _PutAddons
-void
-MimeSnifferAddonManager::_PutAddons(AddonReference** references, int32 count)
+void MimeSnifferAddonManager::_PutAddons(AddonReference** references, int32 count)
 {
 	for (int32 i = 0; i < count; i++)
 		references[i]->PutReference();

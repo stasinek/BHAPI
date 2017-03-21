@@ -24,8 +24,7 @@
 using namespace BPrivate;
 
 
-status_t 
-_run_thread(void* data)
+status_t _run_thread(void* data)
 {
 	BMidi* midi = (BMidi*)data;
 	midi->Run();
@@ -59,87 +58,75 @@ BMidi::~BMidi()
 }
 
 
-void 
-BMidi::NoteOff(uchar channel, uchar note, uchar velocity, uint32 time)
+void BMidi::NoteOff(uchar channel, uchar note, uchar velocity, uint32 time)
 {
 	// do nothing
 }
 
 
-void 
-BMidi::NoteOn(uchar channel, uchar note, uchar velocity, uint32 time)
+void BMidi::NoteOn(uchar channel, uchar note, uchar velocity, uint32 time)
 {
 	// do nothing
 }
 
 
-void 
-BMidi::KeyPressure(
+void BMidi::KeyPressure(
 	uchar channel, uchar note, uchar pressure, uint32 time)
 {
 	// do nothing
 }
 
 
-void 
-BMidi::ControlChange(
+void BMidi::ControlChange(
 	uchar channel, uchar controlNumber, uchar controlValue, uint32 time)
 {
 	// do nothing
 }
 
 
-void 
-BMidi::ProgramChange(uchar channel, uchar programNumber, uint32 time)
+void BMidi::ProgramChange(uchar channel, uchar programNumber, uint32 time)
 {
 	// do nothing
 }
 
 
-void 
-BMidi::ChannelPressure(uchar channel, uchar pressure, uint32 time)
+void BMidi::ChannelPressure(uchar channel, uchar pressure, uint32 time)
 {
 	// do nothing
 }
 
 
-void 
-BMidi::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
+void BMidi::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
 {
 	// do nothing
 }
 
 
-void 
-BMidi::SystemExclusive(void* data, size_t length, uint32 time)
+void BMidi::SystemExclusive(void* data, size_t length, uint32 time)
 {
 	// do nothing
 }
 
 
-void 
-BMidi::SystemCommon(uchar status, uchar data1, uchar data2, uint32 time)
+void BMidi::SystemCommon(uchar status, uchar data1, uchar data2, uint32 time)
 {
 	// do nothing
 }
 
 
-void 
-BMidi::SystemRealTime(uchar status, uint32 time)
+void BMidi::SystemRealTime(uchar status, uint32 time)
 {
 	// do nothing
 }
 
 
-void 
-BMidi::TempoChange(int32 beatsPerMinute, uint32 time)
+void BMidi::TempoChange(int32 beatsPerMinute, uint32 time)
 {
 	// do nothing
 }
 
 
-void 
-BMidi::AllNotesOff(bool justChannel, uint32 time)
+void BMidi::AllNotesOff(bool justChannel, uint32 time)
 {
 	for (uchar channel = 1; channel <= 16; ++channel) {
 		SprayControlChange(channel, B_ALL_NOTES_OFF, 0, time);
@@ -153,8 +140,7 @@ BMidi::AllNotesOff(bool justChannel, uint32 time)
 }
 
 
-status_t 
-BMidi::Start()
+status_t BMidi::Start()
 {
 	if (fIsRunning) 
 		return B_OK;
@@ -178,23 +164,20 @@ BMidi::Start()
 }
 
 
-void 
-BMidi::Stop()
+void BMidi::Stop()
 {
 	AllNotesOff();
 	fThreadId = -1;
 }
     
 
-bool 
-BMidi::IsRunning() const
+bool BMidi::IsRunning() const
 {
 	return fIsRunning;
 }
 
 
-void 
-BMidi::Connect(BMidi* toObject)
+void BMidi::Connect(BMidi* toObject)
 {
 	if (toObject != NULL) {
 		if (fProducer->Connect(toObject->fConsumer) == B_OK) {
@@ -204,8 +187,7 @@ BMidi::Connect(BMidi* toObject)
 }
 
 
-void 
-BMidi::Disconnect(BMidi* fromObject)
+void BMidi::Disconnect(BMidi* fromObject)
 {
 	if (fromObject == NULL)
 		return;
@@ -216,8 +198,7 @@ BMidi::Disconnect(BMidi* fromObject)
 }
 
 
-bool 
-BMidi::IsConnected(BMidi* toObject) const
+bool BMidi::IsConnected(BMidi* toObject) const
 {
 	if (toObject != NULL)
 		return fProducer->IsConnected(toObject->fConsumer);
@@ -233,15 +214,13 @@ BMidi::Connections() const
 }
 
 
-void 
-BMidi::SnoozeUntil(uint32 time) const
+void BMidi::SnoozeUntil(uint32 time) const
 {
 	snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
 }
 
 
-bool 
-BMidi::KeepRunning()
+bool BMidi::KeepRunning()
 {
 	return (fThreadId != -1);
 }
@@ -252,15 +231,13 @@ void BMidi::_ReservedMidi2() {}
 void BMidi::_ReservedMidi3() {}
 
 
-void 
-BMidi::Run()
+void BMidi::Run()
 {
 	// do nothing
 }
 
 
-void 
-BMidi::SprayNoteOff(
+void BMidi::SprayNoteOff(
 	uchar channel, uchar note, uchar velocity, uint32 time) const
 {
 	fProducer->SprayNoteOff(
@@ -268,8 +245,7 @@ BMidi::SprayNoteOff(
 }
 
 
-void 
-BMidi::SprayNoteOn(
+void BMidi::SprayNoteOn(
 	uchar channel, uchar note, uchar velocity, uint32 time) const
 {
 	fProducer->SprayNoteOn(
@@ -277,8 +253,7 @@ BMidi::SprayNoteOn(
 }
 
 
-void 
-BMidi::SprayKeyPressure(
+void BMidi::SprayKeyPressure(
 	uchar channel, uchar note, uchar pressure, uint32 time) const
 {
 	fProducer->SprayKeyPressure(
@@ -286,8 +261,7 @@ BMidi::SprayKeyPressure(
 }
 
 
-void 
-BMidi::SprayControlChange(
+void BMidi::SprayControlChange(
 	uchar channel, uchar controlNumber, uchar controlValue, 
 	uint32 time) const
 {
@@ -296,8 +270,7 @@ BMidi::SprayControlChange(
 }
 
 
-void 
-BMidi::SprayProgramChange(
+void BMidi::SprayProgramChange(
 	uchar channel, uchar programNumber, uint32 time) const
 {
 	fProducer->SprayProgramChange(
@@ -305,8 +278,7 @@ BMidi::SprayProgramChange(
 }
 
 
-void 
-BMidi::SprayChannelPressure(
+void BMidi::SprayChannelPressure(
 	uchar channel, uchar pressure, uint32 time) const
 {
 	fProducer->SprayChannelPressure(
@@ -314,39 +286,34 @@ BMidi::SprayChannelPressure(
 }
 
 
-void 
-BMidi::SprayPitchBend(
+void BMidi::SprayPitchBend(
 	uchar channel, uchar lsb, uchar msb, uint32 time) const
 {
 	fProducer->SprayPitchBend(channel - 1, lsb, msb, MAKE_BIGTIME(time));
 }
 
 
-void 
-BMidi::SpraySystemExclusive(
+void BMidi::SpraySystemExclusive(
 	void* data, size_t length, uint32 time) const
 {
 	fProducer->SpraySystemExclusive(data, length, MAKE_BIGTIME(time));
 }
 
 
-void 
-BMidi::SpraySystemCommon(
+void BMidi::SpraySystemCommon(
 	uchar status, uchar data1, uchar data2, uint32 time) const
 {
 	fProducer->SpraySystemCommon(status, data1, data2, MAKE_BIGTIME(time));
 }
 
 
-void 
-BMidi::SpraySystemRealTime(uchar status, uint32 time) const
+void BMidi::SpraySystemRealTime(uchar status, uint32 time) const
 {
 	fProducer->SpraySystemRealTime(status, MAKE_BIGTIME(time));
 }
 
 
-void 
-BMidi::SprayTempoChange(int32 beatsPerMinute, uint32 time) const
+void BMidi::SprayTempoChange(int32 beatsPerMinute, uint32 time) const
 {
 	fProducer->SprayTempoChange(beatsPerMinute, MAKE_BIGTIME(time));
 }

@@ -175,15 +175,13 @@ BPose::ResolvedModel() const
 }
 
 
-inline bool
-BPose::IsSelected() const
+inline bool BPose::IsSelected() const
 {
 	return fIsSelected;
 }
 
 
-inline void
-BPose::Select(bool on)
+inline void BPose::Select(bool on)
 {
 	fIsSelected = on;
 	if (on)
@@ -198,50 +196,43 @@ BPose::SelectionTime()	const
 }
 
 
-inline bool
-BPose::NeedsSaveLocation() const
+inline bool BPose::NeedsSaveLocation() const
 {
 	return fNeedsSaveLocation;
 }
 
 
-inline void
-BPose::SetSaveLocation()
+inline void BPose::SetSaveLocation()
 {
 	fNeedsSaveLocation = true;
 }
 
 
-inline bool
-BPose::ListModeInited() const
+inline bool BPose::ListModeInited() const
 {
 	return fListModeInited;
 }
 
 
-inline bool
-BPose::WasAutoPlaced() const
+inline bool BPose::WasAutoPlaced() const
 {
 	return fWasAutoPlaced;
 }
 
 
-inline void
-BPose::SetAutoPlaced(bool on)
+inline void BPose::SetAutoPlaced(bool on)
 {
 	fWasAutoPlaced = on;
 }
 
 
-inline bool
-BPose::HasLocation() const
+inline bool BPose::HasLocation() const
 {
 	return fHasLocation;
 }
 
 
-inline void
-BPose::Draw(BRect poseRect, const BRect& updateRect, BPoseView* view,
+inline void BPose::Draw(BRect poseRect, const BRect& updateRect, BPoseView* view,
 	bool fullDraw)
 {
 	Draw(poseRect, updateRect, view, (BView*)view, fullDraw, BPoint(0, 0),
@@ -249,15 +240,13 @@ BPose::Draw(BRect poseRect, const BRect& updateRect, BPoseView* view,
 }
 
 
-inline uint32
-BPose::ClipboardMode() const
+inline uint32 BPose::ClipboardMode() const
 {
 	return fClipboardMode;
 }
 
 
-inline void
-BPose::SetClipboardMode(uint32 clipboardMode)
+inline void BPose::SetClipboardMode(uint32 clipboardMode)
 {
 	fClipboardMode = clipboardMode;
 }

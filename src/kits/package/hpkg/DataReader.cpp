@@ -32,8 +32,7 @@ BAbstractBufferedDataReader::~BAbstractBufferedDataReader()
 }
 
 
-status_t
-BAbstractBufferedDataReader::ReadData(off_t offset, void* buffer, size_t size)
+status_t BAbstractBufferedDataReader::ReadData(off_t offset, void* buffer, size_t size)
 {
 	BMemoryIO output(buffer, size);
 	return ReadDataToOutput(offset, size, &output);
@@ -51,8 +50,7 @@ BBufferDataReader::BBufferDataReader(const void* data, size_t size)
 }
 
 
-status_t
-BBufferDataReader::ReadData(off_t offset, void* buffer, size_t size)
+status_t BBufferDataReader::ReadData(off_t offset, void* buffer, size_t size)
 {
 	if (size == 0)
 		return B_OK;
@@ -68,8 +66,7 @@ BBufferDataReader::ReadData(off_t offset, void* buffer, size_t size)
 }
 
 
-status_t
-BBufferDataReader::ReadDataToOutput(off_t offset, size_t size, BDataIO* output)
+status_t BBufferDataReader::ReadDataToOutput(off_t offset, size_t size, BDataIO* output)
 {
 	if (size == 0)
 		return B_OK;

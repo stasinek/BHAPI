@@ -9,7 +9,7 @@
 #define KERNEL_SEM_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <thread.h>
 
 

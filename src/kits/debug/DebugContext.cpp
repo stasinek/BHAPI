@@ -19,8 +19,7 @@ BDebugContext::~BDebugContext()
 }
 
 
-status_t
-BDebugContext::Init(team_id team, port_id nubPort)
+status_t BDebugContext::Init(team_id team, port_id nubPort)
 {
 	Uninit();
 
@@ -34,8 +33,7 @@ BDebugContext::Init(team_id team, port_id nubPort)
 }
 
 
-void
-BDebugContext::Uninit()
+void BDebugContext::Uninit()
 {
 	if (fContext.team >= 0) {
 		destroy_debug_context(&fContext);
@@ -44,8 +42,7 @@ BDebugContext::Uninit()
 }
 
 
-status_t
-BDebugContext::SendDebugMessage(int32 messageCode, const void *message,
+status_t BDebugContext::SendDebugMessage(int32 messageCode, const void *message,
 	size_t messageSize, void* reply, size_t replySize)
 {
 	return send_debug_message(&fContext, messageCode, message, messageSize,
@@ -53,8 +50,7 @@ BDebugContext::SendDebugMessage(int32 messageCode, const void *message,
 }
 
 
-status_t
-BDebugContext::SetTeamDebuggingFlags(int32 flags)
+status_t BDebugContext::SetTeamDebuggingFlags(int32 flags)
 {
 	debug_nub_set_team_flags message;
 	message.flags = flags;
@@ -85,8 +81,7 @@ BDebugContext::ReadString(const void* address, char* buffer, size_t size)
 }
 
 
-status_t
-BDebugContext::SetBreakpoint(void* address)
+status_t BDebugContext::SetBreakpoint(void* address)
 {
 	debug_nub_set_breakpoint message;
 	message.reply_port = fContext.reply_port;
@@ -100,8 +95,7 @@ BDebugContext::SetBreakpoint(void* address)
 }
 
 
-status_t
-BDebugContext::ClearBreakpoint(void* address)
+status_t BDebugContext::ClearBreakpoint(void* address)
 {
 	debug_nub_clear_breakpoint message;
 	message.address = address;
@@ -111,8 +105,7 @@ BDebugContext::ClearBreakpoint(void* address)
 }
 
 
-status_t
-BDebugContext::SetWatchpoint(void* address, uint32 type, int32 length)
+status_t BDebugContext::SetWatchpoint(void* address, uint32 type, int32 length)
 {
 	debug_nub_set_watchpoint message;
 	message.reply_port = fContext.reply_port;
@@ -128,8 +121,7 @@ BDebugContext::SetWatchpoint(void* address, uint32 type, int32 length)
 }
 
 
-status_t
-BDebugContext::ClearWatchpoint(void* address)
+status_t BDebugContext::ClearWatchpoint(void* address)
 {
 	debug_nub_clear_watchpoint message;
 	message.address = address;
@@ -139,8 +131,7 @@ BDebugContext::ClearWatchpoint(void* address)
 }
 
 
-status_t
-BDebugContext::ContinueThread(thread_id thread, bool singleStep)
+status_t BDebugContext::ContinueThread(thread_id thread, bool singleStep)
 {
 	debug_nub_continue_thread message;
 	message.thread = thread;
@@ -152,8 +143,7 @@ BDebugContext::ContinueThread(thread_id thread, bool singleStep)
 }
 
 
-status_t
-BDebugContext::SetThreadDebuggingFlags(thread_id thread, int32 flags)
+status_t BDebugContext::SetThreadDebuggingFlags(thread_id thread, int32 flags)
 {
 	debug_nub_set_thread_flags message;
 	message.thread = thread;
@@ -164,8 +154,7 @@ BDebugContext::SetThreadDebuggingFlags(thread_id thread, int32 flags)
 }
 
 
-status_t
-BDebugContext::GetThreadCpuState(thread_id thread,
+status_t BDebugContext::GetThreadCpuState(thread_id thread,
 	debug_debugger_message* _messageCode, debug_cpu_state* cpuState)
 {
 	return debug_get_cpu_state(&fContext, thread, _messageCode, cpuState);

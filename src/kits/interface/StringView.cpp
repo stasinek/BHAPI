@@ -52,8 +52,7 @@ BStringView::~BStringView()
 }
 
 
-void
-BStringView::SetText(const char *text)
+void BStringView::SetText(const char *text)
 {
 	if(fText != text)
 	{
@@ -66,15 +65,13 @@ BStringView::SetText(const char *text)
 }
 
 
-const char*
-BStringView::Text() const
+const char*  BStringView::Text() const
 {
 	return fText.String();
 }
 
 
-void
-BStringView::SetAlignment(bhapi::alignment alignment)
+void BStringView::SetAlignment(bhapi::alignment alignment)
 {
 	if(fAlignment != alignment)
 	{
@@ -91,8 +88,7 @@ BStringView::Alignment() const
 }
 
 
-void
-BStringView::SetVerticalAlignment(bhapi::vertical_alignment alignment)
+void BStringView::SetVerticalAlignment(bhapi::vertical_alignment alignment)
 {
 	if(fVerticalAlignment != alignment)
 	{
@@ -109,8 +105,7 @@ BStringView::VerticalAlignment() const
 }
 
 
-void
-BStringView::Draw(BRect updateRect)
+void BStringView::Draw(BRect updateRect)
 {
 	if(Window() == NULL || !fTextArray || fTextArray->CountItems() <= 0) return;
 
@@ -190,8 +185,7 @@ BStringView::Draw(BRect updateRect)
 }
 
 
-void
-BStringView::SetFont(const BFont *font,  __be_uint8 mask)
+void BStringView::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	BFont fontPrev;
 	BFont fontCurr;
@@ -203,8 +197,7 @@ BStringView::SetFont(const BFont *font,  __be_uint8 mask)
 }
 
 
-void
-BStringView::GetPreferredSize(float *width, float *height)
+void BStringView::GetPreferredSize(float *width, float *height)
 {
 	if(!width && !height) return;
 

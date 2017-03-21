@@ -125,9 +125,7 @@
 // Private implementations
 #define __swap_double		__fssh_swap_double
 #define __swap_float		__fssh_swap_float
-#define __swap_int64		__fssh_swap_int64
-#define __swap_int32		__fssh_swap_int32
-#define __swap_int16		__fssh_swap_int16
+#define __swap_int64		__fssh_swap_int64 #define __swap_int32		__fssh_swap_int32 #define __swap_int16		__fssh_swap_int16
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1524,8 +1522,7 @@
 
 #define bigtime_t		fssh_bigtime_t
 
-#define status_t		fssh_status_t
-#define type_code		fssh_type_code
+#define status_t		fssh_status_t #define type_code		fssh_type_code
 
 #define mode_t			fssh_mode_t
 #define nlink_t			fssh_nlink_t

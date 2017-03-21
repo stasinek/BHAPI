@@ -53,8 +53,7 @@ namespace media {
 namespace notifications {
 
 
-status_t
-Register(const BMessenger& notifyHandler, const media_node& node,
+status_t Register(const BMessenger& notifyHandler, const media_node& node,
 	int32 notification)
 {
 	CALLED();
@@ -77,8 +76,7 @@ Register(const BMessenger& notifyHandler, const media_node& node,
 }
 
 
-status_t
-Unregister(const BMessenger& notifyHandler, const media_node& node,
+status_t Unregister(const BMessenger& notifyHandler, const media_node& node,
 	int32 notification)
 {
 	CALLED();
@@ -106,8 +104,7 @@ Unregister(const BMessenger& notifyHandler, const media_node& node,
 	model message for the error notification message.
 	The message field "be:node_id" will contain the node ID.
 */
-status_t
-ReportError(const media_node& node, BMediaNode::node_error what,
+status_t ReportError(const media_node& node, BMediaNode::node_error what,
 	const BMessage* info)
 {
 	CALLED();
@@ -124,8 +121,7 @@ ReportError(const media_node& node, BMediaNode::node_error what,
 }
 
 
-void
-NodesCreated(const media_node_id* ids, int32 count)
+void NodesCreated(const media_node_id* ids, int32 count)
 {
 	CALLED();
 	BMessage msg(MEDIA_SERVER_SEND_NOTIFICATIONS);
@@ -138,8 +134,7 @@ NodesCreated(const media_node_id* ids, int32 count)
 }
 
 
-void
-NodesDeleted(const media_node_id* ids, int32 count)
+void NodesDeleted(const media_node_id* ids, int32 count)
 {
 	CALLED();
 	BMessage msg(MEDIA_SERVER_SEND_NOTIFICATIONS);
@@ -152,8 +147,7 @@ NodesDeleted(const media_node_id* ids, int32 count)
 }
 
 
-void
-ConnectionMade(const media_input& input, const media_output& output,
+void ConnectionMade(const media_input& input, const media_output& output,
 	const media_format& format)
 {
 	CALLED();
@@ -167,8 +161,7 @@ ConnectionMade(const media_input& input, const media_output& output,
 }
 
 
-void
-ConnectionBroken(const media_source& source,
+void ConnectionBroken(const media_source& source,
 	const media_destination& destination)
 {
 	CALLED();
@@ -181,8 +174,7 @@ ConnectionBroken(const media_source& source,
 }
 
 
-void
-BuffersCreated(area_info* areas, int32 count)
+void BuffersCreated(area_info* areas, int32 count)
 {
 	CALLED();
 	BMessage msg(MEDIA_SERVER_SEND_NOTIFICATIONS);
@@ -195,8 +187,7 @@ BuffersCreated(area_info* areas, int32 count)
 }
 
 
-void
-BuffersDeleted(const media_buffer_id* ids, int32 count)
+void BuffersDeleted(const media_buffer_id* ids, int32 count)
 {
 	CALLED();
 	BMessage msg(MEDIA_SERVER_SEND_NOTIFICATIONS);
@@ -209,8 +200,7 @@ BuffersDeleted(const media_buffer_id* ids, int32 count)
 }
 
 
-void
-FormatChanged(const media_source& source, const media_destination& destination,
+void FormatChanged(const media_source& source, const media_destination& destination,
 	const media_format& format)
 {
 	CALLED();
@@ -224,8 +214,7 @@ FormatChanged(const media_source& source, const media_destination& destination,
 }
 
 
-status_t
-ParameterChanged(const media_node& node, int32 parameterID)
+status_t ParameterChanged(const media_node& node, int32 parameterID)
 {
 	CALLED();
 	BMessage msg(MEDIA_SERVER_SEND_NOTIFICATIONS);
@@ -237,8 +226,7 @@ ParameterChanged(const media_node& node, int32 parameterID)
 }
 
 
-void
-WebChanged(const media_node& node)
+void WebChanged(const media_node& node)
 {
 	CALLED();
 	BMessage msg(MEDIA_SERVER_SEND_NOTIFICATIONS);
@@ -249,8 +237,7 @@ WebChanged(const media_node& node)
 }
 
 
-status_t
-NewParameterValue(const media_node& node, int32 parameterID, bigtime_t when,
+status_t NewParameterValue(const media_node& node, int32 parameterID, bigtime_t when,
 	const void* param, size_t paramsize)
 {
 	CALLED();
@@ -265,8 +252,7 @@ NewParameterValue(const media_node& node, int32 parameterID, bigtime_t when,
 }
 
 
-void
-FlavorsChanged(media_addon_id addOnID, int32 newCount, int32 goneCount)
+void FlavorsChanged(media_addon_id addOnID, int32 newCount, int32 goneCount)
 {
 	CALLED();
 	BMessage msg(MEDIA_SERVER_SEND_NOTIFICATIONS);
@@ -279,8 +265,7 @@ FlavorsChanged(media_addon_id addOnID, int32 newCount, int32 goneCount)
 }
 
 
-void
-NodeStopped(const media_node& node, bigtime_t when)
+void NodeStopped(const media_node& node, bigtime_t when)
 {
 	CALLED();
 	BMessage msg(MEDIA_SERVER_SEND_NOTIFICATIONS);
@@ -296,8 +281,7 @@ NodeStopped(const media_node& node, bigtime_t when)
 // TODO: missing: B_MEDIA_DEFAULT_CHANGED: "default", "node"
 
 
-bool
-IsValidNotificationRequest(bool node_specific, int32 notification)
+bool IsValidNotificationRequest(bool node_specific, int32 notification)
 {
 	switch (notification) {
 		// valid for normal and node specific watching

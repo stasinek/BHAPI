@@ -14,15 +14,13 @@ BIntegerFormat::~BIntegerFormat()
 }
 
 // Format
-status_t
-BIntegerFormat::Format(int64 number, BString *buffer) const
+status_t BIntegerFormat::Format(int64 number, BString *buffer) const
 {
 	return B_ERROR;
 }
 
 // Format
-status_t
-BIntegerFormat::Format(int64 number, BString *buffer,
+status_t BIntegerFormat::Format(int64 number, BString *buffer,
 					   format_field_position *positions, int32 positionCount,
 					   int32 *fieldCount, bool allFieldPositions) const
 {

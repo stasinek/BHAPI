@@ -11,8 +11,7 @@
 //
 // from the Dragon Book: a slightly modified hashpjw()
 static inline
-uint32
-string_hash(const char *name)
+uint32 string_hash(const char *name)
 {
 	uint32 h = 0;
 	if (name) {

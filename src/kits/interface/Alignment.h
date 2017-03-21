@@ -75,43 +75,37 @@ BAlignment::Vertical() const
 }
 
 // SetHorizontal
-inline void
-BAlignment::SetHorizontal(alignment horizontal)
+inline void BAlignment::SetHorizontal(alignment horizontal)
 {
 	this->horizontal = horizontal;
 }
 
 // SetVertical
-inline void
-BAlignment::SetVertical(vertical_alignment vertical)
+inline void BAlignment::SetVertical(vertical_alignment vertical)
 {
 	this->vertical = vertical;
 }
 
 // IsHorizontalSet
-inline bool
-BAlignment::IsHorizontalSet() const
+inline bool BAlignment::IsHorizontalSet() const
 {
 	return (horizontal != B_ALIGN_HORIZONTAL_UNSET);
 }
 
 // IsVerticalSet
-inline bool
-BAlignment::IsVerticalSet() const
+inline bool BAlignment::IsVerticalSet() const
 {
 	return (vertical != B_ALIGN_VERTICAL_UNSET);
 }
 
 // ==
-inline bool
-BAlignment::operator==(const BAlignment& other) const
+inline bool BAlignment::operator==(const BAlignment& other) const
 {
 	return (horizontal == other.horizontal && vertical == other.vertical);
 }
 
 // !=
-inline bool
-BAlignment::operator!=(const BAlignment& other) const
+inline bool BAlignment::operator!=(const BAlignment& other) const
 {
 	return !(*this == other);
 }

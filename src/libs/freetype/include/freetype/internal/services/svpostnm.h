@@ -37,8 +37,7 @@ FT_BEGIN_HEADER
 #define FT_SERVICE_ID_POSTSCRIPT_FONT_NAME  "postscript-font-name"
 
 
-  typedef const char*
-  (*FT_PsName_GetFunc)( FT_Face  face );
+  typedef const char*    (*FT_PsName_GetFunc)( FT_Face  face );
 
 
   FT_DEFINE_SERVICE( PsFontName )

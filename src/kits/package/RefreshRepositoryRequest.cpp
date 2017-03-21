@@ -43,8 +43,7 @@ BRefreshRepositoryRequest::~BRefreshRepositoryRequest()
 }
 
 
-status_t
-BRefreshRepositoryRequest::CreateInitialJobs()
+status_t BRefreshRepositoryRequest::CreateInitialJobs()
 {
 	status_t result = InitCheck();
 	if (result != B_OK)
@@ -96,8 +95,7 @@ BRefreshRepositoryRequest::CreateInitialJobs()
 }
 
 
-void
-BRefreshRepositoryRequest::JobSucceeded(BSupportKit::BJob* job)
+void BRefreshRepositoryRequest::JobSucceeded(BSupportKit::BJob* job)
 {
 	if (job == fValidateChecksumJob
 		&& !fValidateChecksumJob->ChecksumsMatch()) {
@@ -109,8 +107,7 @@ BRefreshRepositoryRequest::JobSucceeded(BSupportKit::BJob* job)
 }
 
 
-status_t
-BRefreshRepositoryRequest::_FetchRepositoryCache()
+status_t BRefreshRepositoryRequest::_FetchRepositoryCache()
 {
 	// download repository cache and put it in either the common/user cache
 	// path, depending on where the corresponding repo-config lives

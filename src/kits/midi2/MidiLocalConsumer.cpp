@@ -55,8 +55,7 @@ BMidiLocalConsumer::~BMidiLocalConsumer()
 }
 
 
-void 
-BMidiLocalConsumer::SetLatency(bigtime_t latency_)
+void BMidiLocalConsumer::SetLatency(bigtime_t latency_)
 {
 	if (latency_ < 0) {
 		WARN("SetLatency() does not accept negative values");
@@ -84,23 +83,20 @@ BMidiLocalConsumer::GetProducerID()
 }
 
 
-void 
-BMidiLocalConsumer::SetTimeout(bigtime_t when, void* data)
+void BMidiLocalConsumer::SetTimeout(bigtime_t when, void* data)
 {
 	fTimeout = when;
 	fTimeoutData = data;
 }
 
 
-void 
-BMidiLocalConsumer::Timeout(void* data)
+void BMidiLocalConsumer::Timeout(void* data)
 {
 	// Do nothing.
 }
 
 
-void 
-BMidiLocalConsumer::Data(uchar* data, size_t length, bool atomic, bigtime_t time)
+void BMidiLocalConsumer::Data(uchar* data, size_t length, bool atomic, bigtime_t time)
 {
 	if (atomic) {
 		switch (data[0] & 0xF0) {
@@ -225,36 +221,31 @@ BMidiLocalConsumer::Data(uchar* data, size_t length, bool atomic, bigtime_t time
 }
 
 
-void 
-BMidiLocalConsumer::NoteOff(uchar channel, uchar note, uchar velocity, bigtime_t time)
+void BMidiLocalConsumer::NoteOff(uchar channel, uchar note, uchar velocity, bigtime_t time)
 {
 	// Do nothing.
 }
 
 
-void 
-BMidiLocalConsumer::NoteOn(uchar channel, uchar note, uchar velocity, bigtime_t time)
+void BMidiLocalConsumer::NoteOn(uchar channel, uchar note, uchar velocity, bigtime_t time)
 {
 	// Do nothing.
 }
 
 
-void 
-BMidiLocalConsumer::KeyPressure(uchar channel, uchar note, uchar pressure, bigtime_t time)
+void BMidiLocalConsumer::KeyPressure(uchar channel, uchar note, uchar pressure, bigtime_t time)
 {
 	// Do nothing.
 }
 
 
-void 
-BMidiLocalConsumer::ControlChange(uchar channel, uchar controlNumber, uchar controlValue, bigtime_t time)
+void BMidiLocalConsumer::ControlChange(uchar channel, uchar controlNumber, uchar controlValue, bigtime_t time)
 {
 	// Do nothing.
 }
 
 
-void 
-BMidiLocalConsumer::ProgramChange(uchar channel, uchar programNumber, bigtime_t time)
+void BMidiLocalConsumer::ProgramChange(uchar channel, uchar programNumber, bigtime_t time)
 {
 	// Do nothing.
 }
@@ -266,45 +257,39 @@ void BMidiLocalConsumer::ChannelPressure(uchar channel, uchar pressure, bigtime_
 }
 
 
-void 
-BMidiLocalConsumer::PitchBend(uchar channel, uchar lsb, uchar msb, bigtime_t time)
+void BMidiLocalConsumer::PitchBend(uchar channel, uchar lsb, uchar msb, bigtime_t time)
 {
 	// Do nothing.
 }
 
 
-void 
-BMidiLocalConsumer::SystemExclusive(
+void BMidiLocalConsumer::SystemExclusive(
 	void* data, size_t length, bigtime_t time)
 {
 	// Do nothing.
 }
 
 
-void 
-BMidiLocalConsumer::SystemCommon(
+void BMidiLocalConsumer::SystemCommon(
 	uchar statusByte, uchar data1, uchar data2, bigtime_t time)
 {
 	// Do nothing.
 }
 
 
-void 
-BMidiLocalConsumer::SystemRealTime(uchar statusByte, bigtime_t time)
+void BMidiLocalConsumer::SystemRealTime(uchar statusByte, bigtime_t time)
 {
 	// Do nothing.
 }
 
 
-void 
-BMidiLocalConsumer::TempoChange(int32 beatsPerMinute, bigtime_t time)
+void BMidiLocalConsumer::TempoChange(int32 beatsPerMinute, bigtime_t time)
 {
 	// Do nothing.
 }
 
 
-void 
-BMidiLocalConsumer::AllNotesOff(bool justChannel, bigtime_t time)
+void BMidiLocalConsumer::AllNotesOff(bool justChannel, bigtime_t time)
 {
 	// Do nothing.
 }

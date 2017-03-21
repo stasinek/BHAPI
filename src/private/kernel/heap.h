@@ -8,7 +8,7 @@
 #ifndef _KERNEL_HEAP_H
 #define _KERNEL_HEAP_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include "kernel_debug_config.h"
 
@@ -91,8 +91,7 @@ status_t heap_init_post_thread();
 #endif
 
 
-static inline void*
-malloc_etc(size_t size, uint32 flags)
+static inline void*   malloc_etc(size_t size, uint32 flags)
 {
 	return memalign_etc(0, size, flags);
 }
@@ -122,15 +121,13 @@ struct malloc_flags {
 };
 
 
-inline void*
-operator new(size_t size, const malloc_flags& flags) throw()
+inline void*   operator new(size_t size, const malloc_flags& flags) throw()
 {
 	return malloc_etc(size, flags.flags);
 }
 
 
-inline void*
-operator new[](size_t size, const malloc_flags& flags) throw()
+inline void*   operator new[](size_t size, const malloc_flags& flags) throw()
 {
 	return malloc_etc(size, flags.flags);
 }

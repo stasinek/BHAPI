@@ -27,8 +27,7 @@
 
 
 #if 0
-static const char*
-family_to_string(media_format_family family)
+static const char*  family_to_string(media_format_family family)
 {
 	switch (family) {
 		case B_ANY_FORMAT_FAMILY:
@@ -57,8 +56,7 @@ family_to_string(media_format_family family)
 }
 
 
-static const char*
-string_for_description(const media_format_description& desc, char* string,
+static const char*  string_for_description(const media_format_description& desc, char* string,
 	size_t length)
 {
 	switch (desc.family) {
@@ -133,8 +131,7 @@ pthread_once_t FormatManager::sInitOnce = PTHREAD_ONCE_INIT;
 FormatManager* FormatManager::sInstance = NULL;
 
 
-/* static */ void
-FormatManager::CreateInstance()
+/* static */ void FormatManager::CreateInstance()
 {
 	sInstance = new FormatManager();
 }
@@ -161,8 +158,7 @@ FormatManager::~FormatManager()
 	If there were any changes since the last time, the whole
 	list will be sent back.
 */
-void 
-FormatManager::GetFormats(bigtime_t lastUpdate, BMessage& reply)
+void FormatManager::GetFormats(bigtime_t lastUpdate, BMessage& reply)
 {
 	BAutolock locker(fLock);
 
@@ -186,8 +182,7 @@ FormatManager::GetFormats(bigtime_t lastUpdate, BMessage& reply)
 }
 
 
-status_t
-FormatManager::MakeFormatFor(const media_format_description* descriptions,
+status_t FormatManager::MakeFormatFor(const media_format_description* descriptions,
 	int32 descriptionCount, media_format& format, uint32 flags, void* _reserved)
 {
 	BAutolock locker(fLock);
@@ -255,8 +250,7 @@ FormatManager::MakeFormatFor(const media_format_description* descriptions,
 }
 
 
-void
-FormatManager::RemoveFormat(const media_format& format)
+void FormatManager::RemoveFormat(const media_format& format)
 {
 	BAutolock locker(fLock);
 

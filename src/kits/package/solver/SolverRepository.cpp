@@ -86,8 +86,7 @@ BSolverRepository::~BSolverRepository()
 }
 
 
-status_t
-BSolverRepository::SetTo(const BString& name)
+status_t BSolverRepository::SetTo(const BString& name)
 {
 	Unset();
 
@@ -96,8 +95,7 @@ BSolverRepository::SetTo(const BString& name)
 }
 
 
-status_t
-BSolverRepository::SetTo(BPackageInstallationLocation location)
+status_t BSolverRepository::SetTo(BPackageInstallationLocation location)
 {
 	Unset();
 
@@ -114,8 +112,7 @@ BSolverRepository::SetTo(BPackageInstallationLocation location)
 }
 
 
-status_t
-BSolverRepository::SetTo(BAllInstallationLocations)
+status_t BSolverRepository::SetTo(BAllInstallationLocations)
 {
 	status_t error = SetTo(B_PACKAGE_INSTALLATION_LOCATION_SYSTEM);
 	if (error != B_OK)
@@ -131,8 +128,7 @@ BSolverRepository::SetTo(BAllInstallationLocations)
 }
 
 
-status_t
-BSolverRepository::SetTo(const BRepositoryConfig& config)
+status_t BSolverRepository::SetTo(const BRepositoryConfig& config)
 {
 	Unset();
 
@@ -163,8 +159,7 @@ BSolverRepository::SetTo(const BRepositoryConfig& config)
 }
 
 
-status_t
-BSolverRepository::SetTo(const BRepositoryCache& cache)
+status_t BSolverRepository::SetTo(const BRepositoryCache& cache)
 {
 	Unset();
 
@@ -188,8 +183,7 @@ BSolverRepository::SetTo(const BRepositoryCache& cache)
 }
 
 
-void
-BSolverRepository::Unset()
+void BSolverRepository::Unset()
 {
 	fName = BString();
 	fPriority = 0;
@@ -199,22 +193,19 @@ BSolverRepository::Unset()
 }
 
 
-status_t
-BSolverRepository::InitCheck()
+status_t BSolverRepository::InitCheck()
 {
 	return fName.IsEmpty() ? B_NO_INIT : B_OK;
 }
 
 
-bool
-BSolverRepository::IsInstalled() const
+bool BSolverRepository::IsInstalled() const
 {
 	return fIsInstalled;
 }
 
 
-void
-BSolverRepository::SetInstalled(bool isInstalled)
+void BSolverRepository::SetInstalled(bool isInstalled)
 {
 	fIsInstalled = isInstalled;
 	fChangeCount++;
@@ -228,30 +219,26 @@ BSolverRepository::Name() const
 }
 
 
-int32
-BSolverRepository::Priority() const
+int32 BSolverRepository::Priority() const
 {
 	return fPriority;
 }
 
 
-void
-BSolverRepository::SetPriority(int32 priority)
+void BSolverRepository::SetPriority(int32 priority)
 {
 	fPriority = priority;
 	fChangeCount++;
 }
 
 
-bool
-BSolverRepository::IsEmpty() const
+bool BSolverRepository::IsEmpty() const
 {
 	return fPackages.IsEmpty();
 }
 
 
-int32
-BSolverRepository::CountPackages() const
+int32 BSolverRepository::CountPackages() const
 {
 	return fPackages.CountItems();
 }
@@ -264,8 +251,7 @@ BSolverRepository::PackageAt(int32 index) const
 }
 
 
-status_t
-BSolverRepository::AddPackage(const BPackageInfo& info,
+status_t BSolverRepository::AddPackage(const BPackageInfo& info,
 	BSolverPackage** _package)
 {
 	BSolverPackage* package = new(std::nothrow) BSolverPackage(this, info);
@@ -283,8 +269,7 @@ BSolverRepository::AddPackage(const BPackageInfo& info,
 }
 
 
-status_t
-BSolverRepository::AddPackages(BPackageInstallationLocation location)
+status_t BSolverRepository::AddPackages(BPackageInstallationLocation location)
 {
 	BPackageRoster roster;
 	BPackageInfoSet packageInfos;
@@ -303,8 +288,7 @@ BSolverRepository::AddPackages(BPackageInstallationLocation location)
 }
 
 
-bool
-BSolverRepository::RemovePackage(BSolverPackage* package)
+bool BSolverRepository::RemovePackage(BSolverPackage* package)
 {
 	if (!fPackages.RemoveItem(package, false))
 		return false;
@@ -314,8 +298,7 @@ BSolverRepository::RemovePackage(BSolverPackage* package)
 }
 
 
-bool
-BSolverRepository::DeletePackage(BSolverPackage* package)
+bool BSolverRepository::DeletePackage(BSolverPackage* package)
 {
 	if (!RemovePackage(package))
 		return false;
@@ -325,8 +308,7 @@ BSolverRepository::DeletePackage(BSolverPackage* package)
 }
 
 
-uint64
-BSolverRepository::ChangeCount() const
+uint64 BSolverRepository::ChangeCount() const
 {
 	return fChangeCount;
 }

@@ -28,8 +28,7 @@ BMessageBuilder::BMessageBuilder(BMessage& message)
     Message onto the stack and makes the new Message the
     current one.
 */
-status_t
-BMessageBuilder::PushObject(const char* name)
+status_t BMessageBuilder::PushObject(const char* name)
 {
 	BMessage* newMessage = new(std::nothrow) BMessage;
 	if (newMessage == NULL)
@@ -58,8 +57,7 @@ BMessageBuilder::PushObject(const char* name)
 	to a string and calls PushObject(const char*)
 	with it.
 */
-status_t
-BMessageBuilder::PushObject(uint32 name)
+status_t BMessageBuilder::PushObject(uint32 name)
 {
 	BString nameString;
 	nameString.SetToFormat("%" B_PRIu32, name);
@@ -70,8 +68,7 @@ BMessageBuilder::PushObject(uint32 name)
 /*! Pops the last BMessage off the stack and makes it
     the current one.
 */
-status_t
-BMessageBuilder::PopObject()
+status_t BMessageBuilder::PopObject()
 {
 	if (fStack.CountItems() < 1)
 		return B_ERROR;
@@ -91,8 +88,7 @@ BMessageBuilder::PopObject()
 
 /*! Gets the "what" of the current message.
 */
-uint32
-BMessageBuilder::What()
+uint32 BMessageBuilder::What()
 {
 	return fCurrentMessage->what;
 }
@@ -100,8 +96,7 @@ BMessageBuilder::What()
 
 /*! Sets the "what" of the current message.
 */
-void
-BMessageBuilder::SetWhat(uint32 what)
+void BMessageBuilder::SetWhat(uint32 what)
 {
 	fCurrentMessage->what = what;
 }
@@ -109,8 +104,7 @@ BMessageBuilder::SetWhat(uint32 what)
 
 /*! Gets the value of CountNames() from the current message.
 */
-uint32
-BMessageBuilder::CountNames(type_code type)
+uint32 BMessageBuilder::CountNames(type_code type)
 {
 	return fCurrentMessage->CountNames(type);
 }
@@ -119,99 +113,85 @@ BMessageBuilder::CountNames(type_code type)
 // #pragma mark - BMessageBuilder::Add (to fCurrentMessage)
 
 
-status_t
-BMessageBuilder::AddString(const char* name, const char* string)
+status_t BMessageBuilder::AddString(const char* name, const char* string)
 {
 	return fCurrentMessage->AddString(name, string);
 }
 
 
-status_t
-BMessageBuilder::AddString(const char* name, const BString& string)
+status_t BMessageBuilder::AddString(const char* name, const BString& string)
 {
 	return fCurrentMessage->AddString(name, string);
 }
 
 
-status_t
-BMessageBuilder::AddInt8(const char* name, int8 value)
+status_t BMessageBuilder::AddInt8(const char* name, int8 value)
 {
 	return fCurrentMessage->AddInt8(name, value);
 }
 
 
-status_t
-BMessageBuilder::AddUInt8(const char* name, uint8 value)
+status_t BMessageBuilder::AddUInt8(const char* name, uint8 value)
 {
 	return fCurrentMessage->AddUInt8(name, value);
 }
 
 
-status_t
-BMessageBuilder::AddInt16(const char* name, int16 value)
+status_t BMessageBuilder::AddInt16(const char* name, int16 value)
 {
 	return fCurrentMessage->AddInt16(name, value);
 }
 
 
-status_t
-BMessageBuilder::AddUInt16(const char* name, uint16 value)
+status_t BMessageBuilder::AddUInt16(const char* name, uint16 value)
 {
 	return fCurrentMessage->AddUInt16(name, value);
 }
 
 
-status_t
-BMessageBuilder::AddInt32(const char* name, int32 value)
+status_t BMessageBuilder::AddInt32(const char* name, int32 value)
 {
 	return fCurrentMessage->AddInt32(name, value);
 }
 
 
-status_t
-BMessageBuilder::AddUInt32(const char* name, uint32 value)
+status_t BMessageBuilder::AddUInt32(const char* name, uint32 value)
 {
 	return fCurrentMessage->AddUInt32(name, value);
 }
 
 
-status_t
-BMessageBuilder::AddInt64(const char* name, int64 value)
+status_t BMessageBuilder::AddInt64(const char* name, int64 value)
 {
 	return fCurrentMessage->AddInt64(name, value);
 }
 
 
-status_t
-BMessageBuilder::AddUInt64(const char* name, uint64 value)
+status_t BMessageBuilder::AddUInt64(const char* name, uint64 value)
 {
 	return fCurrentMessage->AddUInt64(name, value);
 }
 
 
-status_t
-BMessageBuilder::AddBool(const char* name, bool value)
+status_t BMessageBuilder::AddBool(const char* name, bool value)
 {
 	return fCurrentMessage->AddBool(name, value);
 }
 
 
-status_t
-BMessageBuilder::AddFloat(const char* name, float value)
+status_t BMessageBuilder::AddFloat(const char* name, float value)
 {
 	return fCurrentMessage->AddFloat(name, value);
 }
 
 
-status_t
-BMessageBuilder::AddDouble(const char* name, double value)
+status_t BMessageBuilder::AddDouble(const char* name, double value)
 {
 	return fCurrentMessage->AddDouble(name, value);
 }
 
 
-status_t
-BMessageBuilder::AddPointer(const char* name, const void* pointer)
+status_t BMessageBuilder::AddPointer(const char* name, const void* pointer)
 {
 	return fCurrentMessage->AddPointer(name, pointer);
 }

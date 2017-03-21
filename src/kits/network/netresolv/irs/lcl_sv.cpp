@@ -101,8 +101,7 @@ struct service_private {
 };
 
 
-static status_t
-find_own_image(image_info* _info)
+static status_t find_own_image(image_info* _info)
 {
 	int32 cookie = 0;
 	image_info info;
@@ -120,8 +119,7 @@ find_own_image(image_info* _info)
 }
 
 
-static char*
-get_next_line(struct service_private* service)
+static char*  get_next_line(struct service_private* service)
 {
 	if (service->file == NULL)
 		return NULL;
@@ -132,8 +130,7 @@ get_next_line(struct service_private* service)
 //	#pragma mark -
 
 
-static void
-sv_close(struct irs_sv *sv)
+static void sv_close(struct irs_sv *sv)
 {
 	struct service_private *service = (struct service_private *)sv->private_data;
 
@@ -145,8 +142,7 @@ sv_close(struct irs_sv *sv)
 }
 
 
-static void
-sv_rewind(struct irs_sv *sv)
+static void sv_rewind(struct irs_sv *sv)
 {
 	struct service_private *service
 		= (struct service_private *)sv->private_data;
@@ -304,8 +300,7 @@ sv_byport(struct irs_sv *sv, int port, const char *protocol)
 }
 
 
-static void
-sv_minimize(struct irs_sv *sv)
+static void sv_minimize(struct irs_sv *sv)
 {
 	struct service_private *service = (struct service_private *)sv->private_data;
 

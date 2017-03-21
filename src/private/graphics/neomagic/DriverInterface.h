@@ -13,7 +13,7 @@
 #include "video_overlay.h"
 #include <Drivers.h>
 #include <PCI.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #define DRIVER_PREFIX "neomagic"
 

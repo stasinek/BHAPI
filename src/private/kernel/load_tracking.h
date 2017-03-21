@@ -6,7 +6,7 @@
 #define _KERNEL_LOAD_TRACKING_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 const int32 kMaxLoad = 1000;
@@ -14,8 +14,7 @@ const bigtime_t kLoadMeasureInterval = 1000;
 const bigtime_t kIntervalInaccuracy = kLoadMeasureInterval / 4;
 
 
-static inline int32
-compute_load(bigtime_t& measureTime, bigtime_t& measureActiveTime, int32& load,
+static inline int32 compute_load(bigtime_t& measureTime, bigtime_t& measureActiveTime, int32& load,
 	bigtime_t now)
 {
 	if (measureTime == 0) {

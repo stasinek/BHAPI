@@ -29,8 +29,7 @@
 	\param mainMessenger A BMessenger targeting the registrar application.
 	\param mimeMessenger A BMessenger targeting the MIME manager.
 */
-void
-BRoster::Private::SetTo(BMessenger mainMessenger, BMessenger mimeMessenger)
+void BRoster::Private::SetTo(BMessenger mainMessenger, BMessenger mimeMessenger)
 {
 	if (fRoster != NULL) {
 		fRoster->fMessenger = mainMessenger;
@@ -57,8 +56,7 @@ BRoster::Private::SetTo(BMessenger mainMessenger, BMessenger mimeMessenger)
 	- \c B_NO_INIT: the roster is \c NULL.
 	- another error code
 */
-status_t
-BRoster::Private::SendTo(BMessage *message, BMessage *reply, bool mime)
+status_t BRoster::Private::SendTo(BMessage *message, BMessage *reply, bool mime)
 {
 	if (message == NULL)
 		return B_BAD_VALUE;
@@ -85,8 +83,7 @@ BRoster::Private::SendTo(BMessage *message, BMessage *reply, bool mime)
 		   checked, \c false for the roster messenger.
 	\return \true, if the selected messenger is valid, \c false otherwise.
 */
-bool
-BRoster::Private::IsMessengerValid(bool mime) const
+bool BRoster::Private::IsMessengerValid(bool mime) const
 {
 	return fRoster != NULL && (mime ? fRoster->_MimeMessenger().IsValid()
 		: fRoster->fMessenger.IsValid());
@@ -97,8 +94,7 @@ BRoster::Private::IsMessengerValid(bool mime) const
 
 	Called before the global constructors are invoked.
 */
-void
-BRoster::Private::InitBeRoster()
+void BRoster::Private::InitBeRoster()
 {
 	__be_roster = new BRoster;
 }
@@ -108,8 +104,7 @@ BRoster::Private::InitBeRoster()
 
 	Called after the global destructors are invoked.
 */
-void
-BRoster::Private::DeleteBeRoster()
+void BRoster::Private::DeleteBeRoster()
 {
 	delete  __be_roster;
 }

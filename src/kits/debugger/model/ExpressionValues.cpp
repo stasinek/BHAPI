@@ -126,8 +126,7 @@ ExpressionValues::~ExpressionValues()
 }
 
 
-status_t
-ExpressionValues::Init()
+status_t ExpressionValues::Init()
 {
 	fValues = new(std::nothrow) ValueTable;
 	if (fValues == NULL)
@@ -137,8 +136,7 @@ ExpressionValues::Init()
 }
 
 
-bool
-ExpressionValues::GetValue(FunctionID* function, ::Thread* thread,
+bool ExpressionValues::GetValue(FunctionID* function, ::Thread* thread,
 	const BString* expression, BVariant& _value) const
 {
 	ValueEntry* entry = fValues->Lookup(Key(function, thread, *expression));
@@ -150,16 +148,14 @@ ExpressionValues::GetValue(FunctionID* function, ::Thread* thread,
 }
 
 
-bool
-ExpressionValues::HasValue(FunctionID* function, ::Thread* thread,
+bool ExpressionValues::HasValue(FunctionID* function, ::Thread* thread,
 	const BString* expression) const
 {
 	return fValues->Lookup(Key(function, thread, *expression)) != NULL;
 }
 
 
-status_t
-ExpressionValues::SetValue(FunctionID* function, ::Thread* thread,
+status_t ExpressionValues::SetValue(FunctionID* function, ::Thread* thread,
 	const BString& expression, const BVariant& value)
 {
 	ValueEntry* entry = fValues->Lookup(Key(function, thread, expression));
@@ -175,8 +171,7 @@ ExpressionValues::SetValue(FunctionID* function, ::Thread* thread,
 }
 
 
-void
-ExpressionValues::_Cleanup()
+void ExpressionValues::_Cleanup()
 {
 	if (fValues != NULL) {
 		ValueEntry* entry = fValues->Clear(true);

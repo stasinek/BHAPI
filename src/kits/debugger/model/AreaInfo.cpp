@@ -51,8 +51,7 @@ AreaInfo::AreaInfo(team_id team, area_id area, const BString& name,
 }
 
 
-void
-AreaInfo::SetTo(team_id team, area_id area, const BString& name,
+void AreaInfo::SetTo(team_id team, area_id area, const BString& name,
 	target_addr_t address, target_size_t size, target_size_t ramSize,
 	uint32 lock, uint32 protection)
 {

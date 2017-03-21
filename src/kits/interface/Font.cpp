@@ -470,7 +470,7 @@ BFont::operator=(const bhapi::font_desc &fontDesc)
 }
 
 
-bool
+bool 
 BFont::operator==(const BFont &font)
 {
     if(fInfo == NULL && font.fInfo == NULL) return true;
@@ -481,7 +481,7 @@ BFont::operator==(const BFont &font)
 }
 
 
-bool
+bool 
 BFont::operator!=(const BFont &font)
 {
     if(fInfo == NULL && font.fInfo == NULL) return false;
@@ -492,7 +492,7 @@ BFont::operator!=(const BFont &font)
 }
 
 
-void
+void 
 BFont::SetSize(float size)
 {
     if(size <= 0) return;
@@ -510,7 +510,7 @@ BFont::Size() const
 }
 
 
-void
+void 
 BFont::SetSpacing(float spacing)
 {
     bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
@@ -526,7 +526,7 @@ BFont::Spacing() const
 }
 
 
-void
+void 
 BFont::SetShear(float shear)
 {
     if(shear < 45.f) shear = 45.f;
@@ -545,7 +545,7 @@ BFont::Shear() const
 }
 
 
-void
+void 
 BFont::SetBoldStyle(bool bold)
 {
     bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
@@ -553,7 +553,7 @@ BFont::SetBoldStyle(bool bold)
 }
 
 
-bool
+bool 
 BFont::IsBoldStyle() const
 {
     bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
@@ -569,7 +569,7 @@ BFont::Engine() const
 }
 
 
-bool
+bool 
 BFont::IsScalable() const
 {
     BFontEngine *engine = Engine();
@@ -577,7 +577,7 @@ BFont::IsScalable() const
 }
 
 
-bool
+bool 
 BFont::HasFixedSize(__be_int32 *count) const
 {
     BFontEngine *engine = Engine();
@@ -585,7 +585,7 @@ BFont::HasFixedSize(__be_int32 *count) const
 }
 
 
-bool
+bool 
 BFont::GetFixedSize(float *size,  __be_int32 index) const
 {
     BFontEngine *engine = Engine();
@@ -593,7 +593,7 @@ BFont::GetFixedSize(float *size,  __be_int32 index) const
 }
 
 
-status_t
+status_t 
 BFont::SetFamilyAndStyle(const bhapi::font_family family, const bhapi::font_style style)
 {
     bhapi::font_info *fontInfo = (bhapi::font_info*)fInfo;
@@ -606,7 +606,7 @@ BFont::SetFamilyAndStyle(const bhapi::font_family family, const bhapi::font_styl
 }
 
 
-status_t
+status_t 
 BFont::SetFamilyAndStyle(__be_uint32 code)
 {
     if(code == B_MAXUINT32) return B_BAD_VALUE;
@@ -624,7 +624,7 @@ BFont::SetFamilyAndStyle(__be_uint32 code)
 }
 
 
-status_t
+status_t 
 BFont::GetFamilyAndStyle(bhapi::font_family *family, bhapi::font_style *style) const
 {
     if(!family || !style) return B_BAD_VALUE;
@@ -681,7 +681,7 @@ BFont::StringWidth(const BString &str,  __be_int32 length, float tabWidth) const
 }
 
 
-void
+void 
 BFont::GetHeight(bhapi::font_height *height) const
 {
     if(!height) return;
@@ -731,7 +731,7 @@ BFont::CharWidths(const BString &str,  __be_int32 length,  __be_int32 *nChars, f
 }
 
 
-void
+void 
 BFont::PrintToStream() const
 {
     bhapi::font_family family;

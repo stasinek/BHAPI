@@ -6,7 +6,7 @@
 
 #include <locks.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <../include/syscalls.h>
 #include <user_thread.h>
@@ -19,8 +19,7 @@ typedef struct rw_lock_waiter {
 } rw_lock_waiter;
 
 
-static status_t
-rw_lock_wait(rw_lock *lock, bool writer)
+static status_t rw_lock_wait(rw_lock *lock, bool writer)
 {
 	rw_lock_waiter waiter;
 	waiter.thread = find_thread(NULL);
@@ -49,8 +48,7 @@ rw_lock_wait(rw_lock *lock, bool writer)
 }
 
 
-static void
-rw_lock_unblock(rw_lock *lock)
+static void rw_lock_unblock(rw_lock *lock)
 {
 	// this is called locked
 	if (lock->holder >= 0)
@@ -79,15 +77,13 @@ rw_lock_unblock(rw_lock *lock)
 }
 
 
-void
-__rw_lock_init(rw_lock *lock, const char *name)
+void __rw_lock_init(rw_lock *lock, const char *name)
 {
 	rw_lock_init_etc(lock, name, 0);
 }
 
 
-void
-__rw_lock_init_etc(rw_lock *lock, const char *name, uint32 flags)
+void __rw_lock_init_etc(rw_lock *lock, const char *name, uint32 flags)
 {
 	lock->waiters = NULL;
 	lock->holder = -1;
@@ -98,8 +94,7 @@ __rw_lock_init_etc(rw_lock *lock, const char *name, uint32 flags)
 }
 
 
-void
-__rw_lock_destroy(rw_lock *lock)
+void __rw_lock_destroy(rw_lock *lock)
 {
 	mutex_lock(&lock->lock);
 
@@ -113,8 +108,7 @@ __rw_lock_destroy(rw_lock *lock)
 }
 
 
-status_t
-__rw_lock_read_lock(rw_lock *lock)
+status_t __rw_lock_read_lock(rw_lock *lock)
 {
 	MutexLocker locker(lock->lock);
 
@@ -132,8 +126,7 @@ __rw_lock_read_lock(rw_lock *lock)
 }
 
 
-status_t
-__rw_lock_read_unlock(rw_lock *lock)
+status_t __rw_lock_read_unlock(rw_lock *lock)
 {
 	MutexLocker locker(lock->lock);
 
@@ -160,8 +153,7 @@ __rw_lock_read_unlock(rw_lock *lock)
 }
 
 
-status_t
-__rw_lock_write_lock(rw_lock *lock)
+status_t __rw_lock_write_lock(rw_lock *lock)
 {
 	MutexLocker locker(lock->lock);
 
@@ -193,8 +185,7 @@ __rw_lock_write_lock(rw_lock *lock)
 }
 
 
-status_t
-__rw_lock_write_unlock(rw_lock *lock)
+status_t __rw_lock_write_unlock(rw_lock *lock)
 {
 	MutexLocker locker(lock->lock);
 

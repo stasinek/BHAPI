@@ -48,8 +48,7 @@ BMenuBar::~BMenuBar()
 }
 
 
-void
-BMenuBar::MakeFocus(bool state)
+void BMenuBar::MakeFocus(bool state)
 {
 	BMenuField *parent = cast_as(Parent(), BMenuField);
 	if(!(state == false || parent == NULL || parent->MenuBar() != this)) return;
@@ -59,8 +58,7 @@ BMenuBar::MakeFocus(bool state)
 }
 
 
-void
-BMenuBar::MouseDown(BPoint where)
+void BMenuBar::MouseDown(BPoint where)
 {
 	BMenu::MouseDown(where);
 
@@ -106,8 +104,7 @@ BMenuBar::MouseDown(BPoint where)
 }
 
 
-void
-BMenuBar::MouseUp(BPoint where)
+void BMenuBar::MouseUp(BPoint where)
 {
 	BMenu::MouseUp(where);
 
@@ -153,8 +150,7 @@ BMenuBar::MouseUp(BPoint where)
 }
 
 
-void
-BMenuBar::ItemInvoked(BMenuItem *item)
+void BMenuBar::ItemInvoked(BMenuItem *item)
 {
 	BMenu::ItemInvoked(item);
 	SelectItem(NULL);
@@ -162,32 +158,28 @@ BMenuBar::ItemInvoked(BMenuItem *item)
 }
 
 
-void
-BMenuBar::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
+void BMenuBar::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 	if(CurrentSelection() == NULL) return;
 	BMenu::MouseMoved(where, code, a_message);
 }
 
 
-void
-BMenuBar::KeyDown(const char *bytes,  __be_int32 numBytes)
+void BMenuBar::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	if(CurrentSelection() == NULL) return;
 	BMenu::KeyDown(bytes, numBytes);
 }
 
 
-void
-BMenuBar::KeyUp(const char *bytes,  __be_int32 numBytes)
+void BMenuBar::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
 	if(CurrentSelection() == NULL) return;
 	BMenu::KeyUp(bytes, numBytes);
 }
 
 
-void
-BMenuBar::MessageReceived(BMessage *msg)
+void BMenuBar::MessageReceived(BMessage *msg)
 {
 	BMenu::MessageReceived(msg);
 
@@ -224,8 +216,7 @@ BMenuBar::MessageReceived(BMessage *msg)
 }
 
 
-void
-BMenuBar::Draw(BRect updateRect)
+void BMenuBar::Draw(BRect updateRect)
 {
 	if(!IsVisible()) return;
 
@@ -264,8 +255,7 @@ BMenuBar::Draw(BRect updateRect)
 }
 
 
-void
-BMenuBar::SetBorder(bhapi::menu_bar_border border)
+void BMenuBar::SetBorder(bhapi::menu_bar_border border)
 {
 	if(fBorder != border)
 	{

@@ -23,8 +23,7 @@ BNetworkRequest::BNetworkRequest(const BUrl& url, BUrlProtocolListener* listener
 }
 
 
-status_t
-BNetworkRequest::Stop()
+status_t BNetworkRequest::Stop()
 {
 	status_t threadStatus = BUrlRequest::Stop();
 
@@ -37,16 +36,14 @@ BNetworkRequest::Stop()
 }
 
 
-void
-BNetworkRequest::SetTimeout(bigtime_t timeout)
+void BNetworkRequest::SetTimeout(bigtime_t timeout)
 {
 	if (fSocket != NULL)
 		fSocket->SetTimeout(timeout);
 }
 
 
-bool
-BNetworkRequest::_ResolveHostName(BString host, uint16_t port)
+bool BNetworkRequest::_ResolveHostName(BString host, uint16_t port)
 {
 	_EmitDebug(B_URL_PROTOCOL_DEBUG_TEXT, "Resolving %s",
 		fUrl.UrlString().String());
@@ -66,14 +63,12 @@ BNetworkRequest::_ResolveHostName(BString host, uint16_t port)
 }
 
 
-static void
-empty(int)
+static void empty(int)
 {
 }
 
 
-void
-BNetworkRequest::_ProtocolSetup()
+void BNetworkRequest::_ProtocolSetup()
 {
 	// Setup an (empty) signal handler so we can be stopped by a signal,
 	// without the whole process being killed.
@@ -87,8 +82,7 @@ BNetworkRequest::_ProtocolSetup()
 }
 
 
-status_t
-BNetworkRequest::_GetLine(BString& destString)
+status_t BNetworkRequest::_GetLine(BString& destString)
 {
 	// Find a complete line in inputBuffer
 	uint32 characterIndex = 0;

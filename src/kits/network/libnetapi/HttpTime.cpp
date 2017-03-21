@@ -51,15 +51,13 @@ BHttpTime::BHttpTime(const BString& dateString)
 // #pragma mark Date modification
 
 
-void
-BHttpTime::SetString(const BString& string)
+void BHttpTime::SetString(const BString& string)
 {
 	fDateString = string;
 }
 
 
-void
-BHttpTime::SetDate(BDateTime date)
+void BHttpTime::SetDate(BDateTime date)
 {
 	fDate = date;
 }

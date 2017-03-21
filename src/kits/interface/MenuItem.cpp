@@ -97,7 +97,7 @@ BMenuItem::~BMenuItem()
 }
 
 
-void
+void 
 BMenuItem::SetLabel(const char *label)
 {
 	if((fLabel == NULL || strlen(fLabel) == 0) && (label == NULL || strlen(label) == 0)) return;
@@ -122,7 +122,7 @@ BMenuItem::SetLabel(const char *label)
 }
 
 
-void
+void 
 BMenuItem::SetEnabled(bool state)
 {
 	if(fEnabled != state)
@@ -134,7 +134,7 @@ BMenuItem::SetEnabled(bool state)
 }
 
 
-void
+void 
 BMenuItem::SetMarked(bool state)
 {
 	if(fMarked != state || !(fMenu == NULL || fMenu->fRadioMode == false))
@@ -170,7 +170,7 @@ BMenuItem::SetMarked(bool state)
 }
 
 
-void
+void 
 BMenuItem::SetShortcut(char ch,  __be_uint32 modifiers)
 {
 	if(fShortcut != ch || fModifiers != modifiers)
@@ -253,14 +253,14 @@ BMenuItem::Label() const
 }
 
 
-bool
+bool 
 BMenuItem::IsEnabled() const
 {
 	return fEnabled;
 }
 
 
-bool
+bool 
 BMenuItem::IsMarked() const
 {
 	return fMarked;
@@ -298,7 +298,7 @@ BMenuItem::Frame() const
 }
 
 
-bool
+bool 
 BMenuItem::IsSelected() const
 {
 	if(!fMenu) return false;
@@ -306,7 +306,7 @@ BMenuItem::IsSelected() const
 }
 
 
-void
+void 
 BMenuItem::GetContentSize(float *width, float *height) const
 {
     if((!width && !height) || !fMenu) return;
@@ -346,7 +346,7 @@ BMenuItem::GetContentSize(float *width, float *height) const
 }
 
 
-void
+void 
 BMenuItem::DrawContent()
 {
 	if(fMenu == NULL || fMenu->Window() == NULL) return;
@@ -426,7 +426,7 @@ BMenuItem::DrawContent()
 }
 
 
-void
+void 
 BMenuItem::Draw()
 {
 	if(fMenu == NULL || fMenu->Window() == NULL || fMenu->IsVisible() == false) return;
@@ -508,13 +508,13 @@ BMenuItem::Draw()
 }
 
 
-void
+void 
 BMenuItem::Highlight(bool on)
 {
 }
 
 
-void
+void 
 BMenuItem::ShowSubmenu(bool selectFirstItem)
 {
 	if(fSubmenu == NULL) return;
@@ -540,7 +540,7 @@ BMenuItem::ShowSubmenu(bool selectFirstItem)
 }
 
 
-bool
+bool 
 BMenuItem::SelectChanged()
 {
 	if(fMenu == NULL) return false;
@@ -563,7 +563,7 @@ BMenuItem::SelectChanged()
 }
 
 
-status_t
+status_t 
 BMenuItem::Invoke(const BMessage *msg)
 {
 	if(!msg && Message() == NULL) return B_ERROR;
@@ -589,7 +589,7 @@ BMenuSeparatorItem::~BMenuSeparatorItem()
 }
 
 
-void
+void 
 BMenuSeparatorItem::GetContentSize(float *width, float *height) const
 {
 	if(Menu() == NULL || (!width && !height)) return;
@@ -599,14 +599,14 @@ BMenuSeparatorItem::GetContentSize(float *width, float *height) const
 }
 
 
-bool
+bool 
 BMenuSeparatorItem::SelectChanged()
 {
 	return false;
 }
 
 
-void
+void 
 BMenuSeparatorItem::Draw()
 {
 	BRect frame = Frame();

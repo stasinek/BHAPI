@@ -234,8 +234,7 @@ BAdapterIO::~BAdapterIO()
 }
 
 
-void
-BAdapterIO::GetFlags(int32* flags) const
+void BAdapterIO::GetFlags(int32* flags) const
 {
 	CALLED();
 
@@ -312,8 +311,7 @@ BAdapterIO::Position() const
 }
 
 
-status_t
-BAdapterIO::SetSize(off_t size)
+status_t BAdapterIO::SetSize(off_t size)
 {
 	CALLED();
 
@@ -326,8 +324,7 @@ BAdapterIO::SetSize(off_t size)
 }
 
 
-status_t
-BAdapterIO::GetSize(off_t* size) const
+status_t BAdapterIO::GetSize(off_t* size) const
 {
 	CALLED();
 
@@ -340,8 +337,7 @@ BAdapterIO::GetSize(off_t* size) const
 }
 
 
-status_t
-BAdapterIO::Open()
+status_t BAdapterIO::Open()
 {
 	CALLED();
 
@@ -350,15 +346,13 @@ BAdapterIO::Open()
 }
 
 
-bool
-BAdapterIO::IsRunning() const
+bool BAdapterIO::IsRunning() const
 {
 	return fOpened;
 }
 
 
-void
-BAdapterIO::SeekCompleted()
+void BAdapterIO::SeekCompleted()
 {
 	CALLED();
 	release_sem(fSeekSem);
@@ -367,8 +361,7 @@ BAdapterIO::SeekCompleted()
 }
 
 
-status_t
-BAdapterIO::SetBuffer(BPositionIO* buffer)
+status_t BAdapterIO::SetBuffer(BPositionIO* buffer)
 {
 	// We can't change the buffer while we
 	// are running.
@@ -391,8 +384,7 @@ BAdapterIO::BuildInputAdapter()
 }
 
 
-status_t
-BAdapterIO::SeekRequested(off_t position)
+status_t BAdapterIO::SeekRequested(off_t position)
 {
 	CALLED();
 
@@ -407,8 +399,7 @@ BAdapterIO::BackWrite(const void* buffer, size_t size)
 }
 
 
-status_t
-BAdapterIO::_EvaluateWait(off_t pos, off_t size)
+status_t BAdapterIO::_EvaluateWait(off_t pos, off_t size)
 {
 	CALLED();
 

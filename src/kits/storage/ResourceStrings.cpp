@@ -70,8 +70,7 @@ BResourceStrings::~BResourceStrings()
 	\return \c B_OK, if the object is properly initialized, an error code
 			otherwise.
 */
-status_t
-BResourceStrings::InitCheck()
+status_t BResourceStrings::InitCheck()
 {
 	return _init_error;
 }
@@ -128,8 +127,7 @@ BResourceStrings::FindString(int32 id)
 	application file.
 	\param ref the entry_ref referring to the resource file
 */
-status_t
-BResourceStrings::SetStringFile(const entry_ref *ref)
+status_t BResourceStrings::SetStringFile(const entry_ref *ref)
 {
 	_string_lock.Lock();
 	// cleanup
@@ -208,8 +206,7 @@ BResourceStrings::SetStringFile(const entry_ref *ref)
 	- \c B_BAD_VALUE: \c NULL \a outRef.
 	- other error codes
 */
-status_t
-BResourceStrings::GetStringFile(entry_ref *outRef)
+status_t BResourceStrings::GetStringFile(entry_ref *outRef)
 {
 	status_t error = (outRef ? B_OK : B_BAD_VALUE);
 	if (error == B_OK)
@@ -228,8 +225,7 @@ BResourceStrings::GetStringFile(entry_ref *outRef)
 /*!	\brief Frees all resources associated with this object and sets all
 	member variables to harmless values.
 */
-void
-BResourceStrings::_Cleanup()
+void BResourceStrings::_Cleanup()
 {
 //	_string_lock.Lock();
 	_MakeEmpty();
@@ -247,8 +243,7 @@ BResourceStrings::_Cleanup()
 // _MakeEmpty
 /*!	\brief Empties the id->string hash table.
 */
-void
-BResourceStrings::_MakeEmpty()
+void BResourceStrings::_MakeEmpty()
 {
 	if (fHashTable) {
 		for (int32 i = 0; i < fHashTableSize; i++) {
@@ -268,8 +263,7 @@ BResourceStrings::_MakeEmpty()
 	- \c B_OK: Everything went fine.
 	- \c B_NO_MEMORY: Insuffient memory.
 */
-status_t
-BResourceStrings::_Rehash(int32 newSize)
+status_t BResourceStrings::_Rehash(int32 newSize)
 {
 	status_t error = B_OK;
 	if (newSize > 0 && newSize != fHashTableSize) {
@@ -383,8 +377,7 @@ BResourceStrings::_string_id_hash::~_string_id_hash()
 		   will be freed on destruction. If \c false, the entry points to the
 		   supplied string. It will not be freed() on destruction.
 */
-void
-BResourceStrings::_string_id_hash::assign_string(const char *str,
+void BResourceStrings::_string_id_hash::assign_string(const char *str,
 												 bool makeCopy)
 {
 	if (data_alloced)

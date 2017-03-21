@@ -11,7 +11,7 @@
 #define _THREAD_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <arch/atomic.h>
 #include <arch/thread.h>
@@ -109,8 +109,7 @@ thread_get_current_thread_id(void)
 	return thread ? thread->id : 0;
 }
 
-static inline bool
-thread_is_idle_thread(Thread *thread)
+static inline bool thread_is_idle_thread(Thread *thread)
 {
 	return thread->priority == B_IDLE_PRIORITY;
 }
@@ -188,8 +187,7 @@ int _user_setrlimit(int resource, const struct rlimit * rlp);
 			signal.
 	\return \c true, if the thread would be interrupted, \c false otherwise.
 */
-static inline bool
-thread_is_interrupted(Thread* thread, uint32 flags)
+static inline bool thread_is_interrupted(Thread* thread, uint32 flags)
 {
 	sigset_t pendingSignals = thread->AllPendingSignals();
 	return ((flags & B_CAN_INTERRUPT) != 0
@@ -210,8 +208,7 @@ thread_is_interrupted(Thread* thread, uint32 flags)
 	\param thread The thread in question.
 	\return \c true, if the thread is blocked, \c false otherwise.
 */
-static inline bool
-thread_is_blocked(Thread* thread)
+static inline bool thread_is_blocked(Thread* thread)
 {
 	return atomic_get(&thread->wait.status) == 1;
 }
@@ -321,8 +318,7 @@ thread_is_blocked(Thread* thread)
 	\param object The object the thread will be blocked at.  Informative/for
 		debugging purposes.
 */
-static inline void
-thread_prepare_to_block(Thread* thread, uint32 flags, uint32 type,
+static inline void thread_prepare_to_block(Thread* thread, uint32 flags, uint32 type,
 	const void* object)
 {
 	thread->wait.flags = flags;
@@ -347,8 +343,7 @@ thread_prepare_to_block(Thread* thread, uint32 flags, uint32 type,
 	\param status The unblocking status. That's what the unblocked thread's
 		call to thread_block_locked() will return.
 */
-static inline void
-thread_unblock_locked(Thread* thread, status_t status)
+static inline void thread_unblock_locked(Thread* thread, status_t status)
 {
 	if (atomic_test_and_set(&thread->wait.status, status, 1) != 1)
 		return;
@@ -382,8 +377,7 @@ thread_unblock_locked(Thread* thread, status_t status)
 		thread actually has been interrupted -- it could have been unblocked
 		before already.
 */
-static inline status_t
-thread_interrupt(Thread* thread, bool kill)
+static inline status_t thread_interrupt(Thread* thread, bool kill)
 {
 	if (thread_is_blocked(thread)) {
 		if ((thread->wait.flags & B_CAN_INTERRUPT) != 0
@@ -397,30 +391,26 @@ thread_interrupt(Thread* thread, bool kill)
 }
 
 
-static inline void
-thread_pin_to_current_cpu(Thread* thread)
+static inline void thread_pin_to_current_cpu(Thread* thread)
 {
 	thread->pinned_to_cpu++;
 }
 
 
-static inline void
-thread_unpin_from_current_cpu(Thread* thread)
+static inline void thread_unpin_from_current_cpu(Thread* thread)
 {
 	thread->pinned_to_cpu--;
 }
 
 
-static inline void
-thread_prepare_suspend()
+static inline void thread_prepare_suspend()
 {
 	Thread* thread = thread_get_current_thread();
 	thread->going_to_suspend = true;
 }
 
 
-static inline void
-thread_suspend(bool alreadyPrepared = false)
+static inline void thread_suspend(bool alreadyPrepared = false)
 {
 	Thread* thread = thread_get_current_thread();
 	if (!alreadyPrepared)
@@ -437,8 +427,7 @@ thread_suspend(bool alreadyPrepared = false)
 }
 
 
-static inline void
-thread_continue(Thread* thread)
+static inline void thread_continue(Thread* thread)
 {
 	thread->going_to_suspend = false;
 

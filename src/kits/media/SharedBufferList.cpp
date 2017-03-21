@@ -89,16 +89,14 @@ SharedBufferList::Get()
 }
 
 
-/*static*/ void
-SharedBufferList::Invalidate()
+/*static*/ void SharedBufferList::Invalidate()
 {
 	delete_area(sArea);
 	sList = NULL;
 }
 
 
-void
-SharedBufferList::Put()
+void SharedBufferList::Put()
 {
 	CALLED();
 	BAutolock _(sLocker);
@@ -111,8 +109,7 @@ SharedBufferList::Put()
 /*!	Deletes all BBuffers of the group specified by \a groupReclaimSem, then
 	unmaps the list from memory.
 */
-void
-SharedBufferList::DeleteGroupAndPut(sem_id groupReclaimSem)
+void SharedBufferList::DeleteGroupAndPut(sem_id groupReclaimSem)
 {
 	CALLED();
 
@@ -137,8 +134,7 @@ SharedBufferList::DeleteGroupAndPut(sem_id groupReclaimSem)
 }
 
 
-status_t
-SharedBufferList::Lock()
+status_t SharedBufferList::Lock()
 {
 	if (atomic_add(&fAtom, 1) > 0) {
 		status_t status;
@@ -152,8 +148,7 @@ SharedBufferList::Lock()
 }
 
 
-status_t
-SharedBufferList::Unlock()
+status_t SharedBufferList::Unlock()
 {
 	if (atomic_add(&fAtom, -1) > 1)
 		return release_sem(fSemaphore);
@@ -162,8 +157,7 @@ SharedBufferList::Unlock()
 }
 
 
-status_t
-SharedBufferList::AddBuffer(sem_id groupReclaimSem,
+status_t SharedBufferList::AddBuffer(sem_id groupReclaimSem,
 	const buffer_clone_info& info, BBuffer** _buffer)
 {
 	status_t status = Lock();
@@ -202,8 +196,7 @@ SharedBufferList::AddBuffer(sem_id groupReclaimSem,
 }
 
 
-status_t
-SharedBufferList::AddBuffer(sem_id groupReclaimSem, BBuffer* buffer)
+status_t SharedBufferList::AddBuffer(sem_id groupReclaimSem, BBuffer* buffer)
 {
 	CALLED();
 
@@ -224,8 +217,7 @@ SharedBufferList::AddBuffer(sem_id groupReclaimSem, BBuffer* buffer)
 }
 
 
-status_t
-SharedBufferList::CheckID(sem_id groupSem, media_buffer_id id) const
+status_t SharedBufferList::CheckID(sem_id groupSem, media_buffer_id id) const
 {
 	CALLED();
 
@@ -244,8 +236,7 @@ SharedBufferList::CheckID(sem_id groupSem, media_buffer_id id) const
 }
 
 
-status_t
-SharedBufferList::RequestBuffer(sem_id groupReclaimSem, int32 buffersInGroup,
+status_t SharedBufferList::RequestBuffer(sem_id groupReclaimSem, int32 buffersInGroup,
 	size_t size, media_buffer_id wantID, BBuffer** _buffer, bigtime_t timeout)
 {
 	CALLED();
@@ -337,8 +328,7 @@ SharedBufferList::RequestBuffer(sem_id groupReclaimSem, int32 buffersInGroup,
 }
 
 
-status_t
-SharedBufferList::RecycleBuffer(BBuffer* buffer)
+status_t SharedBufferList::RecycleBuffer(BBuffer* buffer)
 {
 	CALLED();
 
@@ -380,8 +370,7 @@ SharedBufferList::RecycleBuffer(BBuffer* buffer)
 /*!	Returns exactly \a bufferCount buffers from the group specified via its
 	\a groupReclaimSem if successful.
 */
-status_t
-SharedBufferList::GetBufferList(sem_id groupReclaimSem, int32 bufferCount,
+status_t SharedBufferList::GetBufferList(sem_id groupReclaimSem, int32 bufferCount,
 	BBuffer** buffers)
 {
 	CALLED();
@@ -405,8 +394,7 @@ SharedBufferList::GetBufferList(sem_id groupReclaimSem, int32 bufferCount,
 }
 
 
-status_t
-SharedBufferList::_Init()
+status_t SharedBufferList::_Init()
 {
 	CALLED();
 
@@ -427,8 +415,7 @@ SharedBufferList::_Init()
 
 /*!	Used by RequestBuffer, call this one with the list locked!
 */
-void
-SharedBufferList::_RequestBufferInOtherGroups(sem_id groupReclaimSem,
+void SharedBufferList::_RequestBufferInOtherGroups(sem_id groupReclaimSem,
 	media_buffer_id id)
 {
 	for (int32 i = 0; i < fCount; i++) {

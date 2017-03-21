@@ -183,15 +183,13 @@ BGroupLayoutBuilder::operator BGroupLayout*()
 }
 
 // _PushLayout
-bool
-BGroupLayoutBuilder::_PushLayout(BGroupLayout* layout)
+bool BGroupLayoutBuilder::_PushLayout(BGroupLayout* layout)
 {
 	return fLayoutStack.AddItem(layout);
 }
 
 // _PopLayout
-void
-BGroupLayoutBuilder::_PopLayout()
+void BGroupLayoutBuilder::_PopLayout()
 {
 	int32 count = fLayoutStack.CountItems();
 	if (count > 0)

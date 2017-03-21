@@ -322,22 +322,19 @@ ExpressionParser::~ExpressionParser()
 }
 
 
-bool
-ExpressionParser::DegreeMode()
+bool ExpressionParser::DegreeMode()
 {
 	return fDegreeMode;
 }
 
 
-void
-ExpressionParser::SetDegreeMode(bool degrees)
+void ExpressionParser::SetDegreeMode(bool degrees)
 {
 	fDegreeMode = degrees;
 }
 
 
-void
-ExpressionParser::SetSupportHexInput(bool enabled)
+void ExpressionParser::SetSupportHexInput(bool enabled)
 {
 	fTokenizer->SetSupportHexInput(enabled);
 }
@@ -375,8 +372,7 @@ ExpressionParser::Evaluate(const char* expressionString)
 }
 
 
-int64
-ExpressionParser::EvaluateToInt64(const char* expressionString)
+int64 ExpressionParser::EvaluateToInt64(const char* expressionString)
 {
 	fTokenizer->SetTo(expressionString);
 
@@ -547,8 +543,7 @@ struct Function {
 };
 
 
-void
-ExpressionParser::_InitArguments(MAPM values[], int32 argumentCount)
+void ExpressionParser::_InitArguments(MAPM values[], int32 argumentCount)
 {
 	_EatToken(TOKEN_OPENING_BRACKET);
 
@@ -717,8 +712,7 @@ ExpressionParser::_ParseFactorial(MAPM value)
 }
 
 
-void
-ExpressionParser::_EatToken(int32 type)
+void ExpressionParser::_EatToken(int32 type)
 {
 	Token token = fTokenizer->NextToken();
 	if (token.type != type) {

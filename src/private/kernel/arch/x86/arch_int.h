@@ -18,8 +18,7 @@ enum irq_source {
 };
 
 
-static inline void
-arch_int_enable_interrupts_inline(void)
+static inline void arch_int_enable_interrupts_inline(void)
 {
 	asm volatile("sti");
 }
@@ -37,16 +36,14 @@ arch_int_disable_interrupts_inline(void)
 }
 
 
-static inline void
-arch_int_restore_interrupts_inline(int oldState)
+static inline void arch_int_restore_interrupts_inline(int oldState)
 {
 	if (oldState)
 		asm("sti");
 }
 
 
-static inline bool
-arch_int_are_interrupts_enabled_inline(void)
+static inline bool arch_int_are_interrupts_enabled_inline(void)
 {
 	size_t flags;
 

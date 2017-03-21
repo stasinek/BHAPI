@@ -22,8 +22,7 @@ Range::Range(int32 start, int32 end)
 	SetTo(start, end);
 }
 
-status_t
-Range::InitCheck() const {
+status_t Range::InitCheck() const {
 	return fCStatus;
 }
 
@@ -40,18 +39,15 @@ Range::GetErr() const {
 	}
 }
 
-int32
-Range::Start() const {
+int32 Range::Start() const {
 	return fStart;
 }
 
-int32
-Range::End() const {
+int32 Range::End() const {
 	return fEnd;
 }
 	
-void
-Range::SetTo(int32 start, int32 end) {
+void Range::SetTo(int32 start, int32 end) {
 		fStart = start;
 		fEnd = end;
 	if (start > end) {

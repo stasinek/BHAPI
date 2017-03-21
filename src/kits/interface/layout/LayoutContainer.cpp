@@ -53,7 +53,7 @@ BLayoutContainer::~BLayoutContainer()
 }
 
 
-bool
+bool 
 BLayoutContainer::AddItem(BLayoutItem *item,  __be_int32 index)
 {
 	if(item == NULL || item->fContainer != NULL) return false;
@@ -74,7 +74,7 @@ BLayoutContainer::AddItem(BLayoutItem *item,  __be_int32 index)
 }
 
 
-bool
+bool 
 BLayoutContainer::RemoveItem(BLayoutItem *item)
 {
 	if(item == NULL || item->fContainer != this) return false;
@@ -134,7 +134,7 @@ BLayoutContainer::UnitsPerPixel() const
 }
 
 
-void
+void 
 BLayoutContainer::SetUnitsPerPixel(float value, bool deep)
 {
 	if(value <= 0) return;
@@ -186,13 +186,13 @@ BLayoutContainer::SetUnitsPerPixel(float value, bool deep)
 }
 
 
-void
+void 
 BLayoutContainer::Invalidate(BRect rect)
 {
 }
 
 
-void
+void 
 BLayoutContainer::SetPrivateData(void *data, void (*destroy_func)(void*))
 {
 	if(fPrivate[0] != NULL && fPrivate[1] != NULL)

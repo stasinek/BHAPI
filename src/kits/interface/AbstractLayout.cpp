@@ -320,29 +320,25 @@ BAbstractLayout::Alignment()
 }
 
 
-void
-BAbstractLayout::SetExplicitMinSize(BSize size)
+void BAbstractLayout::SetExplicitMinSize(BSize size)
 {
 	fExplicitData->SetMinSize(size);
 }
 
 
-void
-BAbstractLayout::SetExplicitMaxSize(BSize size)
+void BAbstractLayout::SetExplicitMaxSize(BSize size)
 {
 	fExplicitData->SetMaxSize(size);
 }
 
 
-void
-BAbstractLayout::SetExplicitPreferredSize(BSize size)
+void BAbstractLayout::SetExplicitPreferredSize(BSize size)
 {
 	fExplicitData->SetPreferredSize(size);
 }
 
 
-void
-BAbstractLayout::SetExplicitAlignment(BAlignment alignment)
+void BAbstractLayout::SetExplicitAlignment(BAlignment alignment)
 {
 	fExplicitData->SetAlignment(alignment);
 }
@@ -383,8 +379,7 @@ BAbstractLayout::Frame()
 }
 
 
-void
-BAbstractLayout::SetFrame(BRect frame)
+void BAbstractLayout::SetFrame(BRect frame)
 {
 	if (frame != fExplicitData->Frame()) {
 		fExplicitData->SetFrame(frame);
@@ -394,15 +389,13 @@ BAbstractLayout::SetFrame(BRect frame)
 }
 
 
-bool
-BAbstractLayout::IsVisible()
+bool BAbstractLayout::IsVisible()
 {
 	return fExplicitData->IsVisible(AncestorsVisible());
 }
 
 
-void
-BAbstractLayout::SetVisible(bool visible)
+void BAbstractLayout::SetVisible(bool visible)
 {
 	if (visible != fExplicitData->IsVisible(AncestorsVisible())) {
 		fExplicitData->SetVisible(visible);
@@ -413,8 +406,7 @@ BAbstractLayout::SetVisible(bool visible)
 }
 
 
-status_t
-BAbstractLayout::Archive(BMessage* into, bool deep) const
+status_t BAbstractLayout::Archive(BMessage* into, bool deep) const
 {
 	BArchiver archiver(into);
 	status_t err = BLayout::Archive(into, deep);
@@ -423,15 +415,13 @@ BAbstractLayout::Archive(BMessage* into, bool deep) const
 }
 
 
-status_t
-BAbstractLayout::AllArchived(BMessage* archive) const
+status_t BAbstractLayout::AllArchived(BMessage* archive) const
 {
 	return BLayout::AllArchived(archive);
 }
 
 
-status_t
-BAbstractLayout::AllUnarchived(const BMessage* from)
+status_t BAbstractLayout::AllUnarchived(const BMessage* from)
 {
 	status_t err = fExplicitData->RestoreDataFromArchive(from);
 	if (err != B_OK)
@@ -441,45 +431,39 @@ BAbstractLayout::AllUnarchived(const BMessage* from)
 }
 
 
-status_t
-BAbstractLayout::ItemArchived(BMessage* into, BLayoutItem* item,
+status_t BAbstractLayout::ItemArchived(BMessage* into, BLayoutItem* item,
 	int32 index) const
 {
 	return BLayout::ItemArchived(into, item, index);
 }
 
 
-status_t
-BAbstractLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item,
+status_t BAbstractLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item,
 	int32 index)
 {
 	return BLayout::ItemUnarchived(from, item, index);
 }
 
 
-bool
-BAbstractLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
+bool BAbstractLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
 {
 	return BLayout::ItemAdded(item, atIndex);
 }
 
 
-void
-BAbstractLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
+void BAbstractLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
 {
 	BLayout::ItemRemoved(item, fromIndex);
 }
 
 
-void
-BAbstractLayout::LayoutInvalidated(bool children)
+void BAbstractLayout::LayoutInvalidated(bool children)
 {
 	BLayout::LayoutInvalidated(children);
 }
 
 
-void
-BAbstractLayout::OwnerChanged(BView* was)
+void BAbstractLayout::OwnerChanged(BView* was)
 {
 	if (was) {
 		static_cast<ViewProxy*>(fExplicitData)->view = Owner();
@@ -491,22 +475,19 @@ BAbstractLayout::OwnerChanged(BView* was)
 }
 
 
-void
-BAbstractLayout::AttachedToLayout()
+void BAbstractLayout::AttachedToLayout()
 {
 	BLayout::AttachedToLayout();
 }
 
 
-void
-BAbstractLayout::DetachedFromLayout(BLayout* layout)
+void BAbstractLayout::DetachedFromLayout(BLayout* layout)
 {
 	BLayout::DetachedFromLayout(layout);
 }
 
 
-void
-BAbstractLayout::AncestorVisibilityChanged(bool shown)
+void BAbstractLayout::AncestorVisibilityChanged(bool shown)
 {
 	if (AncestorsVisible() == shown)
 		return;
@@ -524,8 +505,7 @@ BAbstractLayout::AncestorVisibilityChanged(bool shown)
 // Binary compatibility stuff
 
 
-status_t
-BAbstractLayout::Perform(perform_code code, void* _data)
+status_t BAbstractLayout::Perform(perform_code code, void* _data)
 {
 	return BLayout::Perform(code, _data);
 }

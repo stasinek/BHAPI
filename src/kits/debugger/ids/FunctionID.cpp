@@ -38,8 +38,7 @@ FunctionID::~FunctionID()
 }
 
 
-status_t
-FunctionID::Archive(BMessage* archive, bool deep) const
+status_t FunctionID::Archive(BMessage* archive, bool deep) const
 {
 	status_t error = BArchivable::Archive(archive, deep);
 	if (error != B_OK)
@@ -52,16 +51,14 @@ FunctionID::Archive(BMessage* archive, bool deep) const
 }
 
 
-uint32
-FunctionID::ComputeHashValue() const
+uint32 FunctionID::ComputeHashValue() const
 {
 	return StringUtils::HashValue(fPath) * 17
 		+ StringUtils::HashValue(fFunctionName);
 }
 
 
-bool
-FunctionID::IsValid() const
+bool FunctionID::IsValid() const
 {
 	return !fPath.Length() == 0 && !fFunctionName.Length() == 0;
 }
@@ -109,8 +106,7 @@ SourceFunctionID::Instantiate(BMessage* archive)
 }
 
 
-bool
-SourceFunctionID::operator==(const ObjectID& _other) const
+bool SourceFunctionID::operator==(const ObjectID& _other) const
 {
 	const SourceFunctionID* other = dynamic_cast<const SourceFunctionID*>(
 		&_other);
@@ -161,8 +157,7 @@ ImageFunctionID::Instantiate(BMessage* archive)
 }
 
 
-bool
-ImageFunctionID::operator==(const ObjectID& _other) const
+bool ImageFunctionID::operator==(const ObjectID& _other) const
 {
 	const ImageFunctionID* other = dynamic_cast<const ImageFunctionID*>(
 		&_other);

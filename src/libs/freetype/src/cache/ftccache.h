@@ -102,15 +102,13 @@ FT_BEGIN_HEADER
                            FTC_Cache   cache );
 
 
-  typedef void
-  (*FTC_Node_FreeFunc)( FTC_Node   node,
+  typedef void   (*FTC_Node_FreeFunc)( FTC_Node   node,
                         FTC_Cache  cache );
 
   typedef FT_Error
   (*FTC_Cache_InitFunc)( FTC_Cache  cache );
 
-  typedef void
-  (*FTC_Cache_DoneFunc)( FTC_Cache  cache );
+  typedef void   (*FTC_Cache_DoneFunc)( FTC_Cache  cache );
 
 
   typedef struct  FTC_CacheClassRec_

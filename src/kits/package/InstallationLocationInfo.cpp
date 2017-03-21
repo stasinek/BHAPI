@@ -32,8 +32,7 @@ BInstallationLocationInfo::~BInstallationLocationInfo()
 }
 
 
-void
-BInstallationLocationInfo::Unset()
+void BInstallationLocationInfo::Unset()
 {
 	fLocation = B_PACKAGE_INSTALLATION_LOCATION_ENUM_COUNT;
 	fBaseDirectoryRef = node_ref();
@@ -53,8 +52,7 @@ BInstallationLocationInfo::Location() const
 }
 
 
-void
-BInstallationLocationInfo::SetLocation(BPackageInstallationLocation location)
+void BInstallationLocationInfo::SetLocation(BPackageInstallationLocation location)
 {
 	fLocation = location;
 }
@@ -67,8 +65,7 @@ BInstallationLocationInfo::BaseDirectoryRef() const
 }
 
 
-status_t
-BInstallationLocationInfo::SetBaseDirectoryRef(const node_ref& ref)
+status_t BInstallationLocationInfo::SetBaseDirectoryRef(const node_ref& ref)
 {
 	fBaseDirectoryRef = ref;
 	return fBaseDirectoryRef == ref ? B_OK : B_NO_MEMORY;
@@ -82,8 +79,7 @@ BInstallationLocationInfo::PackagesDirectoryRef() const
 }
 
 
-status_t
-BInstallationLocationInfo::SetPackagesDirectoryRef(const node_ref& ref)
+status_t BInstallationLocationInfo::SetPackagesDirectoryRef(const node_ref& ref)
 {
 	fPackageDirectoryRef = ref;
 	return fPackageDirectoryRef == ref ? B_OK : B_NO_MEMORY;
@@ -97,8 +93,7 @@ BInstallationLocationInfo::LatestActivePackageInfos() const
 }
 
 
-void
-BInstallationLocationInfo::SetLatestActivePackageInfos(
+void BInstallationLocationInfo::SetLatestActivePackageInfos(
 	const BPackageInfoSet& infos)
 {
 	fLatestActivePackageInfos = infos;
@@ -112,8 +107,7 @@ BInstallationLocationInfo::LatestInactivePackageInfos() const
 }
 
 
-void
-BInstallationLocationInfo::SetLatestInactivePackageInfos(
+void BInstallationLocationInfo::SetLatestInactivePackageInfos(
 	const BPackageInfoSet& infos)
 {
 	fLatestInactivePackageInfos = infos;
@@ -127,8 +121,7 @@ BInstallationLocationInfo::CurrentlyActivePackageInfos() const
 }
 
 
-void
-BInstallationLocationInfo::SetCurrentlyActivePackageInfos(
+void BInstallationLocationInfo::SetCurrentlyActivePackageInfos(
 	const BPackageInfoSet& infos)
 {
 	fCurrentlyActivePackageInfos = infos;
@@ -142,22 +135,19 @@ BInstallationLocationInfo::OldStateName() const
 }
 
 
-void
-BInstallationLocationInfo::SetOldStateName(const BString& name)
+void BInstallationLocationInfo::SetOldStateName(const BString& name)
 {
 	fOldStateName = name;
 }
 
 
-int64
-BInstallationLocationInfo::ChangeCount() const
+int64 BInstallationLocationInfo::ChangeCount() const
 {
 	return fChangeCount;
 }
 
 
-void
-BInstallationLocationInfo::SetChangeCount(int64 changeCount)
+void BInstallationLocationInfo::SetChangeCount(int64 changeCount)
 {
 	fChangeCount = changeCount;
 }

@@ -126,57 +126,49 @@ private:
 };
 
 
-inline uint32
-BTextWidget::AttrHash() const
+inline uint32 BTextWidget::AttrHash() const
 {
 	return fAttrHash;
 }
 
 
-inline void
-BTextWidget::SetEditable(bool on)
+inline void BTextWidget::SetEditable(bool on)
 {
 	fEditable = on;
 }
 
 
-inline bool
-BTextWidget::IsEditable() const
+inline bool BTextWidget::IsEditable() const
 {
 	return fEditable && fText->IsEditable();
 }
 
 
-inline bool
-BTextWidget::IsVisible() const
+inline bool BTextWidget::IsVisible() const
 {
 	return fVisible;
 }
 
 
-inline void
-BTextWidget::SetVisible(bool on)
+inline void BTextWidget::SetVisible(bool on)
 {
 	fVisible = on;
 }
 
 
-inline bool
-BTextWidget::IsActive() const
+inline bool BTextWidget::IsActive() const
 {
 	return fActive;
 }
 
 
-inline void
-BTextWidget::SetActive(bool on)
+inline void BTextWidget::SetActive(bool on)
 {
 	fActive = on;
 }
 
 
-inline void
-BTextWidget::Draw(BRect widgetRect, BRect widgetTextRect, float width,
+inline void BTextWidget::Draw(BRect widgetRect, BRect widgetTextRect, float width,
 	BPoseView* view, bool selected, uint32 clipboardMode)
 {
 	Draw(widgetRect, widgetTextRect, width, view, (BView*)view, selected,

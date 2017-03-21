@@ -47,8 +47,7 @@ ResourceItem::WriteAt(off_t pos, const void *buffer, size_t size)
 }
 
 // SetSize
-status_t
-ResourceItem::SetSize(off_t size)
+status_t ResourceItem::SetSize(off_t size)
 {
 	status_t error = BMallocIO::SetSize(size);
 	if (error == B_OK)
@@ -57,16 +56,14 @@ ResourceItem::SetSize(off_t size)
 }
 
 // SetLocation
-void
-ResourceItem::SetLocation(int32 offset, size_t initialSize)
+void ResourceItem::SetLocation(int32 offset, size_t initialSize)
 {
 	SetOffset(offset);
 	fInitialSize = initialSize;
 }
 
 // SetIdentity
-void
-ResourceItem::SetIdentity(type_code type, int32 id, const char *name)
+void ResourceItem::SetIdentity(type_code type, int32 id, const char *name)
 {
 	fType = type;
 	fID = id;
@@ -74,15 +71,13 @@ ResourceItem::SetIdentity(type_code type, int32 id, const char *name)
 }
 
 // SetOffset
-void
-ResourceItem::SetOffset(int32 offset)
+void ResourceItem::SetOffset(int32 offset)
 {
 	fOffset = offset;
 }
 
 // Offset
-int32
-ResourceItem::Offset() const
+int32 ResourceItem::Offset() const
 {
 	return fOffset;
 }
@@ -104,8 +99,7 @@ ResourceItem::DataSize() const
 }
 
 // SetType
-void
-ResourceItem::SetType(type_code type)
+void ResourceItem::SetType(type_code type)
 {
 	fType = type;
 }
@@ -118,22 +112,19 @@ ResourceItem::Type() const
 }
 
 // SetID
-void
-ResourceItem::SetID(int32 id)
+void ResourceItem::SetID(int32 id)
 {
 	fID = id;
 }
 
 // ID
-int32
-ResourceItem::ID() const
+int32 ResourceItem::ID() const
 {
 	return fID;
 }
 
 // SetName
-void
-ResourceItem::SetName(const char *name)
+void ResourceItem::SetName(const char *name)
 {
 	fName = name;
 }
@@ -158,29 +149,25 @@ ResourceItem::Data() const
 }
 
 // SetLoaded
-void
-ResourceItem::SetLoaded(bool loaded)
+void ResourceItem::SetLoaded(bool loaded)
 {
 	fIsLoaded = loaded;
 }
 
 // IsLoaded
-bool
-ResourceItem::IsLoaded() const
+bool ResourceItem::IsLoaded() const
 {
 	return (BufferLength() > 0 || fIsLoaded);
 }
 
 // SetModified
-void
-ResourceItem::SetModified(bool modified)
+void ResourceItem::SetModified(bool modified)
 {
 	fIsModified = modified;
 }
 
 // IsModified
-bool
-ResourceItem::IsModified() const
+bool ResourceItem::IsModified() const
 {
 	return fIsModified;
 }

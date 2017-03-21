@@ -85,7 +85,7 @@ public:
 };
 
 
-void
+void 
 BView::InitSelf(BRect frame,  __be_uint32 resizingMode,  __be_uint32 flags)
 {
 	if(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL)
@@ -159,7 +159,7 @@ BView::~BView()
 }
 
 
-void
+void 
 BView::MessageReceived(BMessage *msg)
 {
 	switch(msg->what)
@@ -338,7 +338,7 @@ BView::MessageReceived(BMessage *msg)
 }
 
 
-void
+void 
 BView::Show()
 {
 	if(fLayout->IsHidden(false) == false) return;
@@ -355,7 +355,7 @@ BView::Show()
 }
 
 
-void
+void 
 BView::Hide()
 {
 	if(fLayout->IsHidden(false)) return;
@@ -374,7 +374,7 @@ BView::Hide()
 }
 
 
-bool
+bool 
 BView::IsHidden() const
 {
 	if(Window() == NULL) return true;
@@ -382,37 +382,37 @@ BView::IsHidden() const
 }
 
 
-void
+void 
 BView::AttachedToWindow()
 {
 }
 
 
-void
+void 
 BView::AllAttached()
 {
 }
 
 
-void
+void 
 BView::DetachedFromWindow()
 {
 }
 
 
-void
+void 
 BView::AllDetached()
 {
 }
 
 
-void
+void 
 BView::ChildRemoving(BView *child)
 {
 }
 
 
-void
+void 
 BView::AddChild(BView *child, BView *nextSibling)
 {
 	if(child == NULL || child->Looper() != NULL || child->Parent() != NULL ||
@@ -450,7 +450,7 @@ BView::AddChild(BView *child, BView *nextSibling)
 }
 
 
-bool
+bool 
 BView::IsSibling(const BView *sibling) const
 {
 	if(sibling == NULL || sibling == this) return false;
@@ -459,7 +459,7 @@ BView::IsSibling(const BView *sibling) const
 }
 
 
-bool
+bool 
 BView::RemoveChild(BView *child)
 {
 	if(child == NULL || child->Parent() != this) return false;
@@ -504,7 +504,7 @@ BView::RemoveChild(BView *child)
 }
 
 
-bool
+bool 
 BView::RemoveSelf()
 {
 	if(Parent() != NULL) return Parent()->RemoveChild(this);
@@ -619,32 +619,32 @@ BView::VisibleFrameRegion() const
 }
 
 
-bool
+bool 
 BView::IsVisible() const
 {
 	return(fLayout->VisibleRegion()->CountRects() > 0);
 }
 
 
-void
+void 
 BView::MouseDown(BPoint where)
 {
 }
 
 
-void
+void 
 BView::MouseUp(BPoint where)
 {
 }
 
 
-void
+void 
 BView::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 }
 
 
-void
+void 
 BView::WindowActivated(bool state)
 {
 }
@@ -669,55 +669,55 @@ BView::FindView(const char *name) const
 }
 
 
-void
+void 
 BView::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 }
 
 
-void
+void 
 BView::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
 }
 
 
-void
+void 
 BView::Pulse()
 {
 }
 
 
-void
+void 
 BView::FrameMoved(BPoint new_position)
 {
 }
 
 
-void
+void 
 BView::FrameResized(float new_width, float new_height)
 {
 }
 
 
-void
+void 
 BView::TargetedByScrollView(BScrollView *scroll_view)
 {
 }
 
 
-void
+void 
 BView::Draw(BRect updateRect)
 {
 }
 
 
-void
+void 
 BView::DrawAfterChildren(BRect updateRect)
 {
 }
 
 
-void
+void 
 BView::ConvertToScreen(BPoint* pt) const
 {
 	if(!pt) return;
@@ -739,7 +739,7 @@ BView::ConvertToScreen(BPoint pt) const
 }
 
 
-void
+void 
 BView::ConvertFromScreen(BPoint* pt) const
 {
 	if(pt == NULL || Window() == NULL) return;
@@ -756,7 +756,7 @@ BView::ConvertFromScreen(BPoint pt) const
 }
 
 
-void
+void 
 BView::ConvertToScreen(BRect *r) const
 {
 	if(r == NULL) return;
@@ -773,7 +773,7 @@ BView::ConvertToScreen(BRect r) const
 }
 
 
-void
+void 
 BView::ConvertFromScreen(BRect *r) const
 {
 	if(r == NULL) return;
@@ -790,7 +790,7 @@ BView::ConvertFromScreen(BRect r) const
 }
 
 
-void
+void 
 BView::ConvertToScreen(BRegion *region) const
 {
 	if(region == NULL || region->CountRects() <= 0) return;
@@ -808,7 +808,7 @@ BView::ConvertToScreen(const BRegion &region) const
 }
 
 
-void
+void 
 BView::ConvertFromScreen(BRegion *region) const
 {
 	if(region == NULL || region->CountRects() <= 0) return;
@@ -825,7 +825,7 @@ BView::ConvertFromScreen(const BRegion &region) const
 }
 
 
-void
+void 
 BView::ConvertToParent(BPoint *pt) const
 {
 	fLayout->ConvertToContainer(pt);
@@ -841,7 +841,7 @@ BView::ConvertToParent(BPoint pt) const
 }
 
 
-void
+void 
 BView::ConvertFromParent(BPoint *pt) const
 {
 	fLayout->ConvertFromContainer(pt);
@@ -857,7 +857,7 @@ BView::ConvertFromParent(BPoint pt) const
 }
 
 
-void
+void 
 BView::ConvertToParent(BRect *r) const
 {
 	if(r == NULL) return;
@@ -874,7 +874,7 @@ BView::ConvertToParent(BRect r) const
 }
 
 
-void
+void 
 BView::ConvertFromParent(BRect *r) const
 {
 	if(r == NULL) return;
@@ -891,7 +891,7 @@ BView::ConvertFromParent(BRect r) const
 }
 
 
-void
+void 
 BView::ConvertToParent(BRegion *region) const
 {
 	if(region == NULL || region->CountRects() <= 0) return;
@@ -909,7 +909,7 @@ BView::ConvertToParent(const BRegion &region) const
 }
 
 
-void
+void 
 BView::ConvertFromParent(BRegion *region) const
 {
 	if(region == NULL || region->CountRects() <= 0) return;
@@ -926,7 +926,7 @@ BView::ConvertFromParent(const BRegion &region) const
 }
 
 
-void
+void 
 BView::ConvertToWindow(BPoint* pt) const
 {
 	if(pt == NULL) return;
@@ -952,7 +952,7 @@ BView::ConvertToWindow(BPoint pt) const
 }
 
 
-void
+void 
 BView::ConvertFromWindow(BPoint* pt) const
 {
 	if(pt == NULL || Window() == NULL) return;
@@ -969,7 +969,7 @@ BView::ConvertFromWindow(BPoint pt) const
 }
 
 
-void
+void 
 BView::ConvertToWindow(BRect *r) const
 {
 	if(r == NULL) return;
@@ -986,7 +986,7 @@ BView::ConvertToWindow(BRect r) const
 }
 
 
-void
+void 
 BView::ConvertFromWindow(BRect *r) const
 {
 	if(r == NULL) return;
@@ -1003,7 +1003,7 @@ BView::ConvertFromWindow(BRect r) const
 }
 
 
-void
+void 
 BView::ConvertToWindow(BRegion *region) const
 {
 	if(region == NULL || region->CountRects() <= 0) return;
@@ -1021,7 +1021,7 @@ BView::ConvertToWindow(const BRegion &region) const
 }
 
 
-void
+void 
 BView::ConvertFromWindow(BRegion *region) const
 {
 	if(region == NULL || region->CountRects() <= 0) return;
@@ -1038,7 +1038,7 @@ BView::ConvertFromWindow(const BRegion &region) const
 }
 
 
-void
+void 
 BView::SetFlags(__be_uint32 flags)
 {
 	BWindow *win = Window();
@@ -1072,7 +1072,7 @@ BView::Flags() const
 }
 
 
-void
+void 
 BView::SetResizingMode(__be_uint32 mode)
 {
 	fLayout->SetResizingMode(mode);
@@ -1086,7 +1086,7 @@ BView::ResizingMode() const
 }
 
 
-void
+void 
 BView::_FrameChanged(BRect oldFrame, BRect newFrame)
 {
 	if(oldFrame == newFrame) return;
@@ -1127,42 +1127,42 @@ BView::_FrameChanged(BRect oldFrame, BRect newFrame)
 }
 
 
-void
+void 
 BView::MoveBy(float dh, float dv)
 {
 	MoveTo(fLayout->Frame().LeftTop() + BPoint(dh, dv));
 }
 
 
-void
+void 
 BView::MoveTo(BPoint where)
 {
 	fLayout->MoveTo(where);
 }
 
 
-void
+void 
 BView::MoveTo(float x, float y)
 {
 	MoveTo(BPoint(x, y));
 }
 
 
-void
+void 
 BView::ResizeBy(float dh, float dv)
 {
 	ResizeTo(fLayout->Width() + dh, fLayout->Height() + dv);
 }
 
 
-void
+void 
 BView::ResizeTo(float width, float height)
 {
 	fLayout->ResizeTo(width, height);
 }
 
 
-void
+void 
 BView::AttachToWindow()
 {
 	BWindow *win = Window();
@@ -1186,7 +1186,7 @@ BView::AttachToWindow()
 }
 
 
-void
+void 
 BView::DetachFromWindow()
 {
 	BWindow *win = Window();
@@ -1234,14 +1234,14 @@ BView::DetachFromWindow()
 }
 
 
-void
+void 
 BView::MovePenTo(BPoint pt)
 {
 	((BViewState*)fStates)->PenLocation = pt;
 }
 
 
-void
+void 
 BView::MovePenTo(float x, float y)
 {
 	((BViewState*)fStates)->PenLocation.x = x;
@@ -1249,7 +1249,7 @@ BView::MovePenTo(float x, float y)
 }
 
 
-void
+void 
 BView::MovePenBy(float dx, float dy)
 {
 	((BViewState*)fStates)->PenLocation.x += dx;
@@ -1264,7 +1264,7 @@ BView::PenLocation() const
 }
 
 
-void
+void 
 BView::SetPenSize(float size)
 {
 	if(size < 0) return;
@@ -1283,7 +1283,7 @@ BView::PenSize() const
 }
 
 
-void
+void 
 BView::SetViewColor(bhapi::rgb_color c)
 {
 	if(fViewColor != c)
@@ -1294,7 +1294,7 @@ BView::SetViewColor(bhapi::rgb_color c)
 }
 
 
-void
+void 
 BView::SetViewColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color c;
@@ -1310,14 +1310,14 @@ BView::ViewColor() const
 }
 
 
-void
+void 
 BView::SetHighColor(bhapi::rgb_color c)
 {
 	((BViewState*)fStates)->HighColor = c;
 }
 
 
-void
+void 
 BView::SetHighColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color c;
@@ -1333,14 +1333,14 @@ BView::HighColor() const
 }
 
 
-void
+void 
 BView::SetLowColor(bhapi::rgb_color c)
 {
 	((BViewState*)fStates)->LowColor = c;
 }
 
 
-void
+void 
 BView::SetLowColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color c;
@@ -1356,7 +1356,7 @@ BView::LowColor() const
 }
 
 
-void
+void 
 BView::StrokePoint(BPoint pt, bhapi::pattern p)
 {
 	MovePenTo(pt);
@@ -1377,7 +1377,7 @@ BView::StrokePoint(BPoint pt, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::StrokePoints(const BPoint *_pts,  __be_int32 count, const  __be_uint8 *alpha, bhapi::pattern p)
 {
 	if(_pts == NULL || count <= 0) return;
@@ -1429,14 +1429,14 @@ BView::StrokePoints(const BPoint *_pts,  __be_int32 count, const  __be_uint8 *al
 }
 
 
-void
+void 
 BView::StrokeLine(BPoint pt, bhapi::pattern p)
 {
 	StrokeLine(PenLocation(), pt, p);
 }
 
 
-void
+void 
 BView::StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern p)
 {
 	MovePenTo(pt1);
@@ -1464,7 +1464,7 @@ BView::StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::StrokeRect(BRect r, bhapi::pattern p)
 {
 	if(r.IsValid() == false || IsVisible() == false) return;
@@ -1483,7 +1483,7 @@ BView::StrokeRect(BRect r, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::StrokePolygon(const BPolygon *aPolygon, bool closed, bhapi::pattern p)
 {
 	if(aPolygon == NULL || aPolygon->CountPoints() <= 0 || IsVisible() == false) return;
@@ -1514,7 +1514,7 @@ BView::StrokePolygon(const BPolygon *aPolygon, bool closed, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::StrokePolygon(const BPoint *ptArray,  __be_int32 numPts, bool closed, bhapi::pattern p)
 {
 	BPolygon aPolygon(ptArray, numPts);
@@ -1523,7 +1523,7 @@ BView::StrokePolygon(const BPoint *ptArray,  __be_int32 numPts, bool closed, bha
 }
 
 
-void
+void 
 BView::FillPolygon(const BPolygon *aPolygon, bhapi::pattern p)
 {
 	if(aPolygon == NULL || aPolygon->CountPoints() <= 0 || IsVisible() == false) return;
@@ -1554,7 +1554,7 @@ BView::FillPolygon(const BPolygon *aPolygon, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::FillPolygon(const BPoint *ptArray,  __be_int32 numPts, bhapi::pattern p)
 {
 	BPolygon aPolygon(ptArray, numPts);
@@ -1563,7 +1563,7 @@ BView::FillPolygon(const BPoint *ptArray,  __be_int32 numPts, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p)
 {
 	BPoint pts[3] = {pt1, pt2, pt3};
@@ -1571,7 +1571,7 @@ BView::StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::FillTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p)
 {
 	BPoint pts[3] = {pt1, pt2, pt3};
@@ -1579,7 +1579,7 @@ BView::FillTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::StrokeRects(const BRect *rs,  __be_int32 count, bhapi::pattern p)
 {
 	if(rs == NULL || count <= 0 || IsVisible() == false) return;
@@ -1618,7 +1618,7 @@ BView::StrokeRects(const BRect *rs,  __be_int32 count, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::FillRect(BRect r, bhapi::pattern p)
 {
 	if(r.IsValid() == false || IsVisible() == false) return;
@@ -1637,7 +1637,7 @@ BView::FillRect(BRect r, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::FillRects(const BRect *rs,  __be_int32 count, bhapi::pattern p)
 {
 	if(rs == NULL || count <= 0 || IsVisible() == false) return;
@@ -1676,7 +1676,7 @@ BView::FillRects(const BRect *rs,  __be_int32 count, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::FillRegion(const BRegion *region, bhapi::pattern p)
 {
 	if(region == NULL || IsVisible() == false) return;
@@ -1695,7 +1695,7 @@ BView::FillRegion(const BRegion *region, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::StrokeRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p)
 {
 	if(r.IsValid() == false || xRadius < 0 || yRadius < 0 || IsVisible() == false) return;
@@ -1721,7 +1721,7 @@ BView::StrokeRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::FillRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p)
 {
 	if(r.IsValid() == false || xRadius < 0 || yRadius < 0 || IsVisible() == false) return;
@@ -1747,7 +1747,7 @@ BView::FillRoundRect(BRect r, float xRadius, float yRadius, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::StrokeArc(BPoint center, float xRadius, float yRadius, float start_angle, float arc_angle, bhapi::pattern p)
 {
 	if(xRadius <= 0 || yRadius <= 0) return;
@@ -1762,7 +1762,7 @@ BView::StrokeArc(BPoint center, float xRadius, float yRadius, float start_angle,
 }
 
 
-void
+void 
 BView::StrokeArc(BRect r, float start_angle, float arc_angle, bhapi::pattern p)
 {
 	if(r.IsValid() == false || IsVisible() == false) return;
@@ -1782,7 +1782,7 @@ BView::StrokeArc(BRect r, float start_angle, float arc_angle, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::FillArc(BPoint center, float xRadius, float yRadius, float start_angle, float arc_angle, bhapi::pattern p)
 {
 	if(xRadius <= 0 || yRadius <= 0) return;
@@ -1797,7 +1797,7 @@ BView::FillArc(BPoint center, float xRadius, float yRadius, float start_angle, f
 }
 
 
-void
+void 
 BView::FillArc(BRect r, float start_angle, float arc_angle, bhapi::pattern p)
 {
 	if(r.IsValid() == false || IsVisible() == false) return;
@@ -1817,35 +1817,35 @@ BView::FillArc(BRect r, float start_angle, float arc_angle, bhapi::pattern p)
 }
 
 
-void
+void 
 BView::StrokeEllipse(BPoint center, float xRadius, float yRadius, bhapi::pattern p)
 {
 	StrokeArc(center, xRadius, yRadius, 0, 360, p);
 }
 
 
-void
+void 
 BView::StrokeEllipse(BRect rect, bhapi::pattern p)
 {
 	StrokeArc(rect, 0, 360, p);
 }
 
 
-void
+void 
 BView::FillEllipse(BPoint center, float xRadius, float yRadius, bhapi::pattern p)
 {
 	FillArc(center, xRadius, yRadius, 0, 360, p);
 }
 
 
-void
+void 
 BView::FillEllipse(BRect rect, bhapi::pattern p)
 {
 	FillArc(rect, 0, 360, p);
 }
 
 
-void
+void 
 BView::PushState()
 {
 	if(Window() == NULL)
@@ -1854,7 +1854,7 @@ BView::PushState()
 }
 
 
-void
+void 
 BView::PopState()
 {
 	if(Window() == NULL)
@@ -1881,7 +1881,7 @@ BView::PopState()
 }
 
 
-void
+void 
 BView::Invalidate(BRect invalRect, bool redraw)
 {
 	if(invalRect.IsValid() == false || IsVisible() == false) return;
@@ -1890,14 +1890,14 @@ BView::Invalidate(BRect invalRect, bool redraw)
 }
 
 
-void
+void 
 BView::Invalidate(bool redraw)
 {
 	Invalidate(Bounds(), redraw);
 }
 
 
-void
+void 
 BView::_Expose(BRegion region, bigtime_t when)
 {
 	if(IsVisible() == false) return;
@@ -1981,7 +1981,7 @@ BView::_Expose(BRegion region, bigtime_t when)
 }
 
 
-void
+void 
 BView::SetDrawingMode(bhapi::drawing_mode mode)
 {
 	if(((BViewState*)fStates)->DrawingMode != mode)
@@ -1999,7 +1999,7 @@ BView::DrawingMode() const
 }
 
 
-void
+void 
 BView::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	if(font == NULL) return;
@@ -2025,7 +2025,7 @@ BView::SetFont(const BFont *font,  __be_uint8 mask)
 }
 
 
-void
+void 
 BView::SetFont(const bhapi::font_desc *fontDesc,  __be_uint8 mask)
 {
 	if(fontDesc == NULL) return;
@@ -2034,14 +2034,14 @@ BView::SetFont(const bhapi::font_desc *fontDesc,  __be_uint8 mask)
 }
 
 
-void
+void 
 BView::GetFont(BFont *font) const
 {
 	if(font != NULL) *font = ((BViewState*)fStates)->Font;
 }
 
 
-void
+void 
 BView::SetFontSize(float size)
 {
 	if(size <= 0) return;
@@ -2053,28 +2053,28 @@ BView::SetFontSize(float size)
 }
 
 
-void
+void 
 BView::GetFontHeight(bhapi::font_height *height) const
 {
 	((BViewState*)fStates)->Font.GetHeight(height);
 }
 
 
-void
+void 
 BView::ForceFontAliasing(bool enable)
 {
 	fForceFontAliasing = enable;
 }
 
 
-void
+void 
 BView::DrawString(const char *aString,  __be_int32 length, float tabWidth)
 {
 	DrawString(aString, PenLocation(), length, tabWidth);
 }
 
 
-void
+void 
 BView::DrawString(const char *aString, BPoint location,  __be_int32 length, float tabWidth)
 {
 	if(aString == NULL || *aString == 0 || length == 0 || IsVisible() == false) return;
@@ -2137,7 +2137,7 @@ BView::DrawString(const char *aString, BPoint location,  __be_int32 length, floa
 }
 
 
-void
+void 
 BView::DrawStringInDirectlyMode(const char *aString, BPoint location,  __be_int32 length)
 {
 	BFontEngine *engine = ((BViewState*)fStates)->Font.Engine();
@@ -2171,7 +2171,7 @@ BView::DrawStringInDirectlyMode(const char *aString, BPoint location,  __be_int3
 }
 
 
-void
+void 
 BView::DrawStringInPixmapMode(const char *aString, BPoint location,  __be_int32 length)
 {
 	BRect rect = VisibleBounds();
@@ -2320,14 +2320,14 @@ BView::DrawStringInPixmapMode(const char *aString, BPoint location,  __be_int32 
 }
 
 
-void
+void 
 BView::DrawString(const char *aString,  __be_int32 length, BPoint location, float tabWidth)
 {
 	DrawString(aString, location, length, tabWidth);
 }
 
 
-void
+void 
 BView::MakeFocus(bool focusState)
 {
 	BWindow *win = Window();
@@ -2353,7 +2353,7 @@ BView::MakeFocus(bool focusState)
 }
 
 
-bool
+bool 
 BView::IsFocus() const
 {
 	BWindow *win = Window();
@@ -2362,7 +2362,7 @@ BView::IsFocus() const
 }
 
 
-status_t
+status_t 
 BView::SetEventMask(__be_uint32 mask,  __be_uint32 options)
 {
 	if(fEventStored == false) return _SetEventMask(mask, options);
@@ -2374,7 +2374,7 @@ BView::SetEventMask(__be_uint32 mask,  __be_uint32 options)
 }
 
 
-status_t
+status_t 
 BView::_SetEventMask(__be_uint32 mask,  __be_uint32 options)
 {
 	BWindow *win = Window();
@@ -2441,7 +2441,7 @@ BView::EventMask() const
 }
 
 
-status_t
+status_t 
 BView::SetPrivateEventMask(__be_uint32 mask,  __be_uint32 options)
 {
 	// TODO: suspend etc...
@@ -2542,21 +2542,21 @@ BView::SetPrivateEventMask(__be_uint32 mask,  __be_uint32 options)
 }
 
 
-void
+void 
 BView::GetPreferredSize(float *width, float *height)
 {
 	fLayout->BLayoutItem::GetPreferredSize(width, height);
 }
 
 
-void
+void 
 BView::ResizeToPreferred()
 {
 	fLayout->BLayoutItem::ResizeToPreferred();
 }
 
 
-void
+void 
 BView::GetClippingRegion(BRegion *clipping) const
 {
 	if(clipping == NULL) return;
@@ -2566,7 +2566,7 @@ BView::GetClippingRegion(BRegion *clipping) const
 }
 
 
-void
+void 
 BView::ConstrainClippingRegion(const BRegion *_clipping)
 {
 	if(_clipping == NULL)
@@ -2597,7 +2597,7 @@ BView::ConstrainClippingRegion(const BRegion *_clipping)
 }
 
 
-void
+void 
 BView::ConstrainClippingRegion(BRect clipping)
 {
 	BRegion aRegion(clipping);
@@ -2605,7 +2605,7 @@ BView::ConstrainClippingRegion(BRect clipping)
 }
 
 
-status_t
+status_t 
 BView::GetMouse(BPoint *location,  __be_int32 *buttons, bool checkMessageQueue)
 {
 	BWindow *win = Window();
@@ -2633,7 +2633,7 @@ BView::GetMouse(BPoint *location,  __be_int32 *buttons, bool checkMessageQueue)
 }
 
 
-bool
+bool 
 BView::QueryCurrentMouse(bool pushed,  __be_int32 buttons, bool btnsAlone,  __be_int32 *clicks) const
 {
 	BWindow *win = Window();
@@ -2656,7 +2656,7 @@ BView::QueryCurrentMouse(bool pushed,  __be_int32 buttons, bool btnsAlone,  __be
 }
 
 
-void
+void 
 BView::_UpdateVisibleRegion()
 {
 	if(!(is_kind_of(Parent(), BScrollView) == false || cast_as(Parent(), BScrollView)->fTarget != this))
@@ -2674,7 +2674,7 @@ BView::_UpdateVisibleRegion()
 }
 
 
-bool
+bool 
 BView::IsPrinting() const
 {
 	// TODO
@@ -2689,7 +2689,7 @@ BView::UnitsPerPixel() const
 }
 
 
-void
+void 
 BView::SetEnabled(bool state)
 {
 	if(cast_as(fLayout, BViewLayout)->IsEnabled() != state)
@@ -2700,28 +2700,28 @@ BView::SetEnabled(bool state)
 }
 
 
-bool
+bool 
 BView::IsEnabled() const
 {
 	return cast_as(fLayout, BViewLayout)->IsEnabled();
 }
 
 
-void
+void 
 BView::ScrollBy(float dh, float dv)
 {
 	ScrollTo(BPoint(dh, dv) + fLayout->LeftTop());
 }
 
 
-void
+void 
 BView::ScrollTo(float x, float y)
 {
 	ScrollTo(BPoint(x, y));
 }
 
 
-void
+void 
 BView::ScrollTo(BPoint where)
 {
 	if(LeftTop() != where)
@@ -2740,7 +2740,7 @@ BView::ScrollTo(BPoint where)
 }
 
 
-void
+void 
 BView::SetSquarePointStyle(bool state)
 {
 	if(((BViewState*)fStates)->SquarePointStyle != state)
@@ -2750,21 +2750,21 @@ BView::SetSquarePointStyle(bool state)
 }
 
 
-bool
+bool 
 BView::IsSquarePointStyle() const
 {
 	return ((BViewState*)fStates)->SquarePointStyle;
 }
 
 
-void
+void 
 BView::DrawBitmap(const BBitmap *bitmap)
 {
 	DrawBitmap(bitmap, PenLocation());
 }
 
 
-void
+void 
 BView::DrawBitmap(const BBitmap *bitmap, BPoint where)
 {
 	if(bitmap == NULL) return;
@@ -2774,7 +2774,7 @@ BView::DrawBitmap(const BBitmap *bitmap, BPoint where)
 }
 
 
-void
+void 
 BView::DrawBitmap(const BBitmap *bitmap, BRect destRect)
 {
 	if(bitmap == NULL) return;
@@ -2784,7 +2784,7 @@ BView::DrawBitmap(const BBitmap *bitmap, BRect destRect)
 }
 
 
-void
+void 
 BView::DrawBitmap(const BBitmap *bitmap, BRect srcRect, BRect destRect)
 {
 	if(bitmap == NULL || bitmap->fPixmap == NULL ||

@@ -40,8 +40,7 @@ Pattern::~Pattern() {
 	delete fErrorMessage;
 }
 
-status_t
-Pattern::InitCheck() const {
+status_t Pattern::InitCheck() const {
 	return fCStatus;
 }
 
@@ -61,8 +60,7 @@ void dumpStr(const std::string &string, const char *label = NULL) {
 	printf("\n");
 }
 
-status_t
-Pattern::SetTo(const std::string &string, const std::string &mask) {
+status_t Pattern::SetTo(const std::string &string, const std::string &mask) {
 	fString = string;
 	if (fString.length() == 0) {
 		SetStatus(B_BAD_VALUE, "Sniffer pattern error: illegal empty pattern");		
@@ -83,8 +81,7 @@ Pattern::SetTo(const std::string &string, const std::string &mask) {
 	each offset withing the given range. Returns true is a match is found,
 	false if not.
 */
-bool
-Pattern::Sniff(Range range, BPositionIO *data, bool caseInsensitive) const {
+bool Pattern::Sniff(Range range, BPositionIO *data, bool caseInsensitive) const {
 	int32 start = range.Start();
 	int32 end = range.End();
 	off_t size = data->Seek(0, SEEK_END);
@@ -112,8 +109,7 @@ Pattern::BytesNeeded() const
 
 //#define OPTIMIZATION_IS_FOR_CHUMPS
 #if OPTIMIZATION_IS_FOR_CHUMPS
-bool
-Pattern::Sniff(off_t start, off_t size, BPositionIO *data, bool caseInsensitive) const {
+bool Pattern::Sniff(off_t start, off_t size, BPositionIO *data, bool caseInsensitive) const {
 	off_t len = fString.length();
 	char *buffer = new(nothrow) char[len+1];
 	if (buffer) {
@@ -158,8 +154,7 @@ Pattern::Sniff(off_t start, off_t size, BPositionIO *data, bool caseInsensitive)
 		return false;
 }
 #else
-bool
-Pattern::Sniff(off_t start, off_t size, BPositionIO *data, bool caseInsensitive) const {
+bool Pattern::Sniff(off_t start, off_t size, BPositionIO *data, bool caseInsensitive) const {
 	off_t len = fString.length();
 	char *buffer = new(std::nothrow) char[len+1];
 	if (buffer) {
@@ -205,8 +200,7 @@ Pattern::Sniff(off_t start, off_t size, BPositionIO *data, bool caseInsensitive)
 }
 #endif
 
-void
-Pattern::SetStatus(status_t status, const char *msg) {
+void Pattern::SetStatus(status_t status, const char *msg) {
 	fCStatus = status;
 	if (status == B_OK)
 		SetErrorMessage(NULL);
@@ -220,8 +214,7 @@ Pattern::SetStatus(status_t status, const char *msg) {
 	}
 }
 
-void
-Pattern::SetErrorMessage(const char *msg) {
+void Pattern::SetErrorMessage(const char *msg) {
 	delete fErrorMessage;
 	fErrorMessage = (msg) ? (new(std::nothrow) Err(msg, -1)) : (NULL);
 }

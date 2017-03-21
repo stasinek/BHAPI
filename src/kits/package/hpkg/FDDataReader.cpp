@@ -22,15 +22,13 @@ BFDDataReader::BFDDataReader(int fd)
 }
 
 
-void
-BFDDataReader::SetFD(int fd)
+void BFDDataReader::SetFD(int fd)
 {
 	fFD = fd;
 }
 
 
-status_t
-BFDDataReader::ReadData(off_t offset, void* buffer, size_t size)
+status_t BFDDataReader::ReadData(off_t offset, void* buffer, size_t size)
 {
 	ssize_t bytesRead = pread(fFD, buffer, size, offset);
 	if (bytesRead < 0)

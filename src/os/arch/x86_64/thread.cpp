@@ -4,7 +4,7 @@
  */
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include "syscalls.h"
 
 

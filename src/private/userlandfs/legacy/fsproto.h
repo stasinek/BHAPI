@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <iovec.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #ifndef BUILDING_USERLAND_FS_SERVER
 #	include <fs_attr.h>

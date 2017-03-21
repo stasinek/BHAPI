@@ -105,8 +105,7 @@ FT_BEGIN_HEADER
   /* <Input>                                                               */
   /*    module :: The module to finalize.                                  */
   /*                                                                       */
-  typedef void
-  (*FT_Module_Destructor)( FT_Module  module );
+  typedef void   (*FT_Module_Destructor)( FT_Module  module );
 
 
   /*************************************************************************/
@@ -293,8 +292,7 @@ FT_BEGIN_HEADER
 
 /* */
 
-  typedef void
-  (*FT_DebugHook_Func)( void*  arg );
+  typedef void   (*FT_DebugHook_Func)( void*  arg );
 
 
   /*************************************************************************/

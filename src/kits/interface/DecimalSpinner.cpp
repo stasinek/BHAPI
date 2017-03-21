@@ -172,8 +172,7 @@ BDecimalSpinner::Instantiate(BMessage* data)
 }
 
 
-status_t
-BDecimalSpinner::Archive(BMessage* data, bool deep) const
+status_t BDecimalSpinner::Archive(BMessage* data, bool deep) const
 {
 	status_t status = BAbstractSpinner::Archive(data, deep);
 	data->AddString("class", "DecimalSpinner");
@@ -197,8 +196,7 @@ BDecimalSpinner::Archive(BMessage* data, bool deep) const
 }
 
 
-status_t
-BDecimalSpinner::GetSupportedSuites(BMessage* message)
+status_t BDecimalSpinner::GetSupportedSuites(BMessage* message)
 {
 	message->AddString("suites", "suite/vnd.Haiku-decimal-spinner");
 
@@ -209,8 +207,7 @@ BDecimalSpinner::GetSupportedSuites(BMessage* message)
 }
 
 
-void
-BDecimalSpinner::AttachedToWindow()
+void BDecimalSpinner::AttachedToWindow()
 {
 	SetValue(fValue);
 
@@ -218,22 +215,19 @@ BDecimalSpinner::AttachedToWindow()
 }
 
 
-void
-BDecimalSpinner::Decrement()
+void BDecimalSpinner::Decrement()
 {
 	SetValue(Value() - Step());
 }
 
 
-void
-BDecimalSpinner::Increment()
+void BDecimalSpinner::Increment()
 {
 	SetValue(Value() + Step());
 }
 
 
-void
-BDecimalSpinner::SetEnabled(bool enable)
+void BDecimalSpinner::SetEnabled(bool enable)
 {
 	if (IsEnabled() == enable)
 		return;
@@ -245,8 +239,7 @@ BDecimalSpinner::SetEnabled(bool enable)
 }
 
 
-void
-BDecimalSpinner::SetMaxValue(double max)
+void BDecimalSpinner::SetMaxValue(double max)
 {
 	fMaxValue = max;
 	if (fValue > fMaxValue)
@@ -254,8 +247,7 @@ BDecimalSpinner::SetMaxValue(double max)
 }
 
 
-void
-BDecimalSpinner::SetMinValue(double min)
+void BDecimalSpinner::SetMinValue(double min)
 {
 	fMinValue = min;
 	if (fValue < fMinValue)
@@ -263,31 +255,27 @@ BDecimalSpinner::SetMinValue(double min)
 }
 
 
-void
-BDecimalSpinner::Range(double* min, double* max)
+void BDecimalSpinner::Range(double* min, double* max)
 {
 	*min = fMinValue;
 	*max = fMaxValue;
 }
 
 
-void
-BDecimalSpinner::SetRange(double min, double max)
+void BDecimalSpinner::SetRange(double min, double max)
 {
 	SetMinValue(min);
 	SetMaxValue(max);
 }
 
 
-void
-BDecimalSpinner::SetValue(int32 value)
+void BDecimalSpinner::SetValue(int32 value)
 {
 	SetValue((double)value);
 }
 
 
-void
-BDecimalSpinner::SetValue(double value)
+void BDecimalSpinner::SetValue(double value)
 {
 	// clip to range
 	if (value < fMinValue)
@@ -319,8 +307,7 @@ BDecimalSpinner::SetValue(double value)
 }
 
 
-void
-BDecimalSpinner::SetValueFromText()
+void BDecimalSpinner::SetValueFromText()
 {
 	SetValue(roundTo(atof(TextView()->Text()), Precision()));
 }
@@ -329,8 +316,7 @@ BDecimalSpinner::SetValueFromText()
 //	#pragma mark - BDecimalSpinner private methods
 
 
-void
-BDecimalSpinner::_InitObject()
+void BDecimalSpinner::_InitObject()
 {
 	fMaxValue = 100.0;
 	fMinValue = 0.0;

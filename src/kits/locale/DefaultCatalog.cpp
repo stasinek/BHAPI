@@ -153,8 +153,7 @@ DefaultCatalog::~DefaultCatalog()
 }
 
 
-void
-DefaultCatalog::SetSignature(const entry_ref &catalogOwner)
+void DefaultCatalog::SetSignature(const entry_ref &catalogOwner)
 {
 	// figure out mimetype from image
 	BFile objectFile(&catalogOwner, B_READ_ONLY);
@@ -179,15 +178,13 @@ DefaultCatalog::SetSignature(const entry_ref &catalogOwner)
 }
 
 
-status_t
-DefaultCatalog::SetRawString(const CatKey& key, const char *translated)
+status_t DefaultCatalog::SetRawString(const CatKey& key, const char *translated)
 {
 	return fCatMap.Put(key, translated);
 }
 
 
-status_t
-DefaultCatalog::ReadFromFile(const char *path)
+status_t DefaultCatalog::ReadFromFile(const char *path)
 {
 	if (!path)
 		path = fPath.String();
@@ -230,8 +227,7 @@ DefaultCatalog::ReadFromFile(const char *path)
 /*
  * this method is not currently being used, but it may be useful in the future...
  */
-status_t
-DefaultCatalog::ReadFromAttribute(const entry_ref &appOrAddOnRef)
+status_t DefaultCatalog::ReadFromAttribute(const entry_ref &appOrAddOnRef)
 {
 	BNode node;
 	status_t res = node.SetTo(&appOrAddOnRef);
@@ -261,8 +257,7 @@ DefaultCatalog::ReadFromAttribute(const entry_ref &appOrAddOnRef)
 }
 
 
-status_t
-DefaultCatalog::ReadFromResource(const entry_ref &appOrAddOnRef)
+status_t DefaultCatalog::ReadFromResource(const entry_ref &appOrAddOnRef)
 {
 	BFile file;
 	status_t res = file.SetTo(&appOrAddOnRef, B_READ_ONLY);
@@ -286,8 +281,7 @@ DefaultCatalog::ReadFromResource(const entry_ref &appOrAddOnRef)
 }
 
 
-status_t
-DefaultCatalog::WriteToFile(const char *path)
+status_t DefaultCatalog::WriteToFile(const char *path)
 {
 	BFile catalogFile;
 	if (path)
@@ -320,8 +314,7 @@ DefaultCatalog::WriteToFile(const char *path)
  * this method is not currently being used, but it may be useful in the
  * future...
  */
-status_t
-DefaultCatalog::WriteToAttribute(const entry_ref &appOrAddOnRef)
+status_t DefaultCatalog::WriteToAttribute(const entry_ref &appOrAddOnRef)
 {
 	BNode node;
 	status_t res = node.SetTo(&appOrAddOnRef);
@@ -346,8 +339,7 @@ DefaultCatalog::WriteToAttribute(const entry_ref &appOrAddOnRef)
 }
 
 
-status_t
-DefaultCatalog::WriteToResource(const entry_ref &appOrAddOnRef)
+status_t DefaultCatalog::WriteToResource(const entry_ref &appOrAddOnRef)
 {
 	BFile file;
 	status_t res = file.SetTo(&appOrAddOnRef, B_READ_WRITE);
@@ -379,8 +371,7 @@ DefaultCatalog::WriteToResource(const entry_ref &appOrAddOnRef)
 /*!	Writes mimetype, language-name and signature of catalog into the
 	catalog-file.
 */
-void
-DefaultCatalog::UpdateAttributes(BFile& catalogFile)
+void DefaultCatalog::UpdateAttributes(BFile& catalogFile)
 {
 	static const int bufSize = 256;
 	char buf[bufSize];
@@ -411,8 +402,7 @@ DefaultCatalog::UpdateAttributes(BFile& catalogFile)
 }
 
 
-status_t
-DefaultCatalog::Flatten(BDataIO *dataIO)
+status_t DefaultCatalog::Flatten(BDataIO *dataIO)
 {
 	UpdateFingerprint();
 		// make sure we have the correct fingerprint before we flatten it
@@ -456,8 +446,7 @@ DefaultCatalog::Flatten(BDataIO *dataIO)
 }
 
 
-status_t
-DefaultCatalog::Unflatten(BDataIO *dataIO)
+status_t DefaultCatalog::Unflatten(BDataIO *dataIO)
 {
 	fCatMap.Clear();
 	int32 count = 0;
@@ -551,8 +540,7 @@ DefaultCatalog::Create(const char *signature, const char *language)
 } // namespace BPrivate
 
 
-extern "C" status_t
-default_catalog_get_available_languages(BMessage* availableLanguages,
+extern "C" status_t default_catalog_get_available_languages(BMessage* availableLanguages,
 	const char* sigPattern, const char* langPattern, int32 fingerprint)
 {
 	if (availableLanguages == NULL || sigPattern == NULL)

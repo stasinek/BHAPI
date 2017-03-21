@@ -321,8 +321,7 @@ void InitOpenModelDumping();
 
 // inlines follow -----------------------------------
 
-inline const char*
-Model::MimeType() const
+inline const char*  Model::MimeType() const
 {
 	return fMimeType.String();
 }
@@ -364,8 +363,7 @@ Model::IconFrom() const
 }
 
 
-inline void
-Model::SetIconFrom(IconSource from)
+inline void Model::SetIconFrom(IconSource from)
 {
 	fIconFrom = from;
 }
@@ -379,8 +377,7 @@ Model::LinkTo() const
 }
 
 
-inline bool
-Model::IsFile() const
+inline bool Model::IsFile() const
 {
 	return fBaseType == kPlainNode
 		|| fBaseType == kQueryNode
@@ -390,15 +387,13 @@ Model::IsFile() const
 }
 
 
-inline bool
-Model::IsVolume() const
+inline bool Model::IsVolume() const
 {
 	return fBaseType == kVolumeNode;
 }
 
 
-inline bool
-Model::IsDirectory() const
+inline bool Model::IsDirectory() const
 {
 	return fBaseType == kDirectoryNode
 		|| fBaseType == kVolumeNode
@@ -408,22 +403,19 @@ Model::IsDirectory() const
 }
 
 
-inline bool
-Model::IsQuery() const
+inline bool Model::IsQuery() const
 {
 	return fBaseType == kQueryNode;
 }
 
 
-inline bool
-Model::IsQueryTemplate() const
+inline bool Model::IsQueryTemplate() const
 {
 	return fBaseType == kQueryTemplateNode;
 }
 
 
-inline bool
-Model::IsContainer() const
+inline bool Model::IsContainer() const
 {
 	// I guess as in should show container window -
 	// volumes show the volume window
@@ -431,50 +423,43 @@ Model::IsContainer() const
 }
 
 
-inline bool
-Model::IsRoot() const
+inline bool Model::IsRoot() const
 {
 	return fBaseType == kRootNode;
 }
 
 
-inline bool
-Model::IsTrash() const
+inline bool Model::IsTrash() const
 {
 	return fBaseType == kTrashNode;
 }
 
 
-inline bool
-Model::IsDesktop() const
+inline bool Model::IsDesktop() const
 {
 	return fBaseType == kDesktopNode;
 }
 
 
-inline bool
-Model::IsExecutable() const
+inline bool Model::IsExecutable() const
 {
 	return fBaseType == kExecutableNode;
 }
 
 
-inline bool
-Model::IsSymLink() const
+inline bool Model::IsSymLink() const
 {
 	return fBaseType == kLinkNode;
 }
 
 
-inline bool
-Model::IsVirtualDirectory() const
+inline bool Model::IsVirtualDirectory() const
 {
 	return fBaseType == kVirtualDirectoryNode;
 }
 
 
-inline bool
-Model::HasLocalizedName() const
+inline bool Model::HasLocalizedName() const
 {
 	return fHasLocalizedName;
 }
@@ -505,22 +490,19 @@ ModelNodeLazyOpener::~ModelNodeLazyOpener()
 }
 
 
-inline bool
-ModelNodeLazyOpener::IsOpen() const
+inline bool ModelNodeLazyOpener::IsOpen() const
 {
 	return fModel->IsNodeOpen();
 }
 
 
-inline bool
-ModelNodeLazyOpener::IsOpenForWriting() const
+inline bool ModelNodeLazyOpener::IsOpenForWriting() const
 {
 	return fModel->IsNodeOpenForWriting();
 }
 
 
-inline bool
-ModelNodeLazyOpener::IsOpen(bool forWriting) const
+inline bool ModelNodeLazyOpener::IsOpen(bool forWriting) const
 {
 	return forWriting ? fModel->IsNodeOpenForWriting() : fModel->IsNodeOpen();
 }
@@ -533,8 +515,7 @@ ModelNodeLazyOpener::TargetModel() const
 }
 
 
-inline status_t
-ModelNodeLazyOpener::OpenNode(bool writable)
+inline status_t ModelNodeLazyOpener::OpenNode(bool writable)
 {
 	if (writable) {
 		if (!fModel->IsNodeOpenForWriting())

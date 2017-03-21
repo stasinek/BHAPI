@@ -39,8 +39,7 @@ Thread::~Thread()
 }
 
 
-status_t
-Thread::Init()
+status_t Thread::Init()
 {
 	fReturnValueInfos = new(std::nothrow) ReturnValueInfoList;
 	if (fReturnValueInfos == NULL)
@@ -50,22 +49,19 @@ Thread::Init()
 }
 
 
-bool
-Thread::IsMainThread() const
+bool Thread::IsMainThread() const
 {
 	return fID == fTeam->ID();
 }
 
 
-void
-Thread::SetName(const BString& name)
+void Thread::SetName(const BString& name)
 {
 	fName = name;
 }
 
 
-void
-Thread::SetState(uint32 state, uint32 reason, const BString& info)
+void Thread::SetState(uint32 state, uint32 reason, const BString& info)
 {
 	if (state == fState && reason == fStoppedReason)
 		return;
@@ -86,8 +82,7 @@ Thread::SetState(uint32 state, uint32 reason, const BString& info)
 }
 
 
-void
-Thread::SetCpuState(CpuState* state)
+void Thread::SetCpuState(CpuState* state)
 {
 	if (state == fCpuState)
 		return;
@@ -104,8 +99,7 @@ Thread::SetCpuState(CpuState* state)
 }
 
 
-void
-Thread::SetStackTrace(StackTrace* trace)
+void Thread::SetStackTrace(StackTrace* trace)
 {
 	if (trace == fStackTrace)
 		return;
@@ -121,15 +115,13 @@ Thread::SetStackTrace(StackTrace* trace)
 	fTeam->NotifyThreadStackTraceChanged(this);
 }
 
-void
-Thread::SetStopRequestPending()
+void Thread::SetStopRequestPending()
 {
 	fStopRequestPending = true;
 }
 
 
-status_t
-Thread::AddReturnValueInfo(ReturnValueInfo* info)
+status_t Thread::AddReturnValueInfo(ReturnValueInfo* info)
 {
 	if (!fReturnValueInfos->AddItem(info))
 		return B_NO_MEMORY;
@@ -139,8 +131,7 @@ Thread::AddReturnValueInfo(ReturnValueInfo* info)
 }
 
 
-void
-Thread::ClearReturnValueInfos()
+void Thread::ClearReturnValueInfos()
 {
 	for (int32 i = 0; i < fReturnValueInfos->CountItems(); i++)
 		fReturnValueInfos->ItemAt(i)->ReleaseReference();

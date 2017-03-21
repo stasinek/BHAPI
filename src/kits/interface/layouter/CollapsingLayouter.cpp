@@ -29,15 +29,13 @@ public:
 		delete fTarget;
 	}
 
-	void
-	LayoutTarget(Layouter* layouter, float size)
+	void 	LayoutTarget(Layouter* layouter, float size)
 	{
 		if (layouter)
 			layouter->Layout(fTarget, size);
 	}
 
-	void
-	SetElementPosition(int32 element, int32 position)
+	void 	SetElementPosition(int32 element, int32 position)
 	{
 		fElements[element] = position;
 	}
@@ -130,8 +128,7 @@ CollapsingLayouter::~CollapsingLayouter()
 }
 
 
-void
-CollapsingLayouter::AddConstraints(int32 element, int32 length, float min,
+void CollapsingLayouter::AddConstraints(int32 element, int32 length, float min,
 	float max, float preferred)
 {
 	if (min == B_SIZE_UNSET && max == B_SIZE_UNSET)
@@ -169,8 +166,7 @@ CollapsingLayouter::AddConstraints(int32 element, int32 length, float min,
 }
 
 
-void
-CollapsingLayouter::SetWeight(int32 element, float weight)
+void CollapsingLayouter::SetWeight(int32 element, float weight)
 {
 	if (element < 0 || element >= fElementCount)
 		return;
@@ -217,8 +213,7 @@ CollapsingLayouter::CreateLayoutInfo()
 }
 
 
-void
-CollapsingLayouter::Layout(LayoutInfo* layoutInfo, float size)
+void CollapsingLayouter::Layout(LayoutInfo* layoutInfo, float size)
 {
 	_ValidateLayouter();
 	ProxyLayoutInfo* info = static_cast<ProxyLayoutInfo*>(layoutInfo);
@@ -246,8 +241,7 @@ CollapsingLayouter::CloneLayouter()
 }
 
 
-void
-CollapsingLayouter::_ValidateLayouter()
+void CollapsingLayouter::_ValidateLayouter()
 {
 	if (fLayouter)
 		return;
@@ -279,8 +273,7 @@ CollapsingLayouter::_CreateLayouter()
 }
 
 
-void
-CollapsingLayouter::_DoCollapse()
+void CollapsingLayouter::_DoCollapse()
 {
 	int32 shift = 0;
 	for (int32 i = 0; i < fElementCount; i++) {
@@ -296,8 +289,7 @@ CollapsingLayouter::_DoCollapse()
 }
 
 
-void
-CollapsingLayouter::_AddConstraints()
+void CollapsingLayouter::_AddConstraints()
 {
 	if (fLayouter == NULL)
 		return;
@@ -310,16 +302,14 @@ CollapsingLayouter::_AddConstraints()
 }
 
 
-void
-CollapsingLayouter::_AddConstraints(int32 position, const Constraint* c)
+void CollapsingLayouter::_AddConstraints(int32 position, const Constraint* c)
 {
 	fLayouter->AddConstraints(position, c->length, c->min, c->max,
 		c->preferred);
 }
 
 
-void
-CollapsingLayouter::_SetWeights()
+void CollapsingLayouter::_SetWeights()
 {
 	if (!fLayouter)
 		return;

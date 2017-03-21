@@ -65,8 +65,7 @@ ReaderImplBase::AttributeHandlerContext::AttributeHandlerContext(
 }
 
 
-void
-ReaderImplBase::AttributeHandlerContext::ErrorOccurred()
+void ReaderImplBase::AttributeHandlerContext::ErrorOccurred()
 {
 	if (hasLowLevelHandler)
 		lowLevelHandler->HandleErrorOccurred();
@@ -83,15 +82,13 @@ ReaderImplBase::AttributeHandler::~AttributeHandler()
 }
 
 
-void
-ReaderImplBase::AttributeHandler::SetLevel(int level)
+void ReaderImplBase::AttributeHandler::SetLevel(int level)
 {
 	fLevel = level;
 }
 
 
-status_t
-ReaderImplBase::AttributeHandler::HandleAttribute(
+status_t ReaderImplBase::AttributeHandler::HandleAttribute(
 	AttributeHandlerContext* context, uint8 id, const AttributeValue& value,
 	AttributeHandler** _handler)
 {
@@ -99,8 +96,7 @@ ReaderImplBase::AttributeHandler::HandleAttribute(
 }
 
 
-status_t
-ReaderImplBase::AttributeHandler::Delete(AttributeHandlerContext* context)
+status_t ReaderImplBase::AttributeHandler::Delete(AttributeHandlerContext* context)
 {
 	delete this;
 	return B_OK;
@@ -121,8 +117,7 @@ ReaderImplBase::PackageVersionAttributeHandler::PackageVersionAttributeHandler(
 }
 
 
-status_t
-ReaderImplBase::PackageVersionAttributeHandler::HandleAttribute(
+status_t ReaderImplBase::PackageVersionAttributeHandler::HandleAttribute(
 	AttributeHandlerContext* context, uint8 id, const AttributeValue& value,
 	AttributeHandler** _handler)
 {
@@ -154,8 +149,7 @@ ReaderImplBase::PackageVersionAttributeHandler::HandleAttribute(
 }
 
 
-status_t
-ReaderImplBase::PackageVersionAttributeHandler::Delete(
+status_t ReaderImplBase::PackageVersionAttributeHandler::Delete(
 	AttributeHandlerContext* context)
 {
 	status_t error = B_OK;
@@ -183,8 +177,7 @@ ReaderImplBase::PackageResolvableAttributeHandler
 }
 
 
-status_t
-ReaderImplBase::PackageResolvableAttributeHandler::HandleAttribute(
+status_t ReaderImplBase::PackageResolvableAttributeHandler::HandleAttribute(
 	AttributeHandlerContext* context, uint8 id, const AttributeValue& value,
 	AttributeHandler** _handler)
 {
@@ -230,8 +223,7 @@ ReaderImplBase::PackageResolvableAttributeHandler::HandleAttribute(
 }
 
 
-status_t
-ReaderImplBase::PackageResolvableAttributeHandler::Delete(
+status_t ReaderImplBase::PackageResolvableAttributeHandler::Delete(
 	AttributeHandlerContext* context)
 {
 	status_t error = context->packageContentHandler->HandlePackageAttribute(
@@ -255,8 +247,7 @@ ReaderImplBase::PackageResolvableExpressionAttributeHandler
 }
 
 
-status_t
-ReaderImplBase::PackageResolvableExpressionAttributeHandler::HandleAttribute(
+status_t ReaderImplBase::PackageResolvableExpressionAttributeHandler::HandleAttribute(
 	AttributeHandlerContext* context, uint8 id, const AttributeValue& value,
 	AttributeHandler** _handler)
 {
@@ -300,8 +291,7 @@ ReaderImplBase::PackageResolvableExpressionAttributeHandler::HandleAttribute(
 }
 
 
-status_t
-ReaderImplBase::PackageResolvableExpressionAttributeHandler::Delete(
+status_t ReaderImplBase::PackageResolvableExpressionAttributeHandler::Delete(
 	AttributeHandlerContext* context)
 {
 	status_t error = context->packageContentHandler->HandlePackageAttribute(
@@ -316,8 +306,7 @@ ReaderImplBase::PackageResolvableExpressionAttributeHandler::Delete(
 // #pragma mark - PackageAttributeHandler
 
 
-status_t
-ReaderImplBase::PackageAttributeHandler::HandleAttribute(
+status_t ReaderImplBase::PackageAttributeHandler::HandleAttribute(
 	AttributeHandlerContext* context, uint8 id, const AttributeValue& value,
 	AttributeHandler** _handler)
 {
@@ -492,8 +481,7 @@ ReaderImplBase::LowLevelAttributeHandler::LowLevelAttributeHandler(uint8 id,
 }
 
 
-status_t
-ReaderImplBase::LowLevelAttributeHandler::HandleAttribute(
+status_t ReaderImplBase::LowLevelAttributeHandler::HandleAttribute(
 	AttributeHandlerContext* context, uint8 id, const AttributeValue& value,
 	AttributeHandler** _handler)
 {
@@ -522,8 +510,7 @@ ReaderImplBase::LowLevelAttributeHandler::HandleAttribute(
 }
 
 
-status_t
-ReaderImplBase::LowLevelAttributeHandler::Delete(
+status_t ReaderImplBase::LowLevelAttributeHandler::Delete(
 	AttributeHandlerContext* context)
 {
 	status_t error = B_OK;
@@ -562,8 +549,7 @@ ReaderImplBase::~ReaderImplBase()
 }
 
 
-status_t
-ReaderImplBase::Init(int fd, bool keepFD)
+status_t ReaderImplBase::Init(int fd, bool keepFD)
 {
 	fFD = fd;
 	fOwnsFD = keepFD;
@@ -580,8 +566,7 @@ ReaderImplBase::Init(int fd, bool keepFD)
 }
 
 
-const char*
-ReaderImplBase::CheckCompression(const SectionInfo& section) const
+const char*  ReaderImplBase::CheckCompression(const SectionInfo& section) const
 {
 	switch (section.compression) {
 		case B_HPKG_COMPRESSION_NONE:
@@ -604,8 +589,7 @@ ReaderImplBase::CheckCompression(const SectionInfo& section) const
 }
 
 
-status_t
-ReaderImplBase::ParseStrings()
+status_t ReaderImplBase::ParseStrings()
 {
 	// allocate table, if there are any strings
 	if (fCurrentSection->stringsCount == 0) {
@@ -668,8 +652,7 @@ ReaderImplBase::ParseStrings()
 }
 
 
-status_t
-ReaderImplBase::ParsePackageAttributesSection(
+status_t ReaderImplBase::ParsePackageAttributesSection(
 	AttributeHandlerContext* context, AttributeHandler* rootAttributeHandler)
 {
 	// parse package attributes
@@ -709,8 +692,7 @@ ReaderImplBase::ParsePackageAttributesSection(
 }
 
 
-status_t
-ReaderImplBase::ParseAttributeTree(AttributeHandlerContext* context,
+status_t ReaderImplBase::ParseAttributeTree(AttributeHandlerContext* context,
 	bool& _sectionHandled)
 {
 	if (context->hasLowLevelHandler) {
@@ -740,8 +722,7 @@ ReaderImplBase::ParseAttributeTree(AttributeHandlerContext* context,
 }
 
 
-status_t
-ReaderImplBase::_ParseAttributeTree(AttributeHandlerContext* context)
+status_t ReaderImplBase::_ParseAttributeTree(AttributeHandlerContext* context)
 {
 	int level = 0;
 
@@ -791,8 +772,7 @@ ReaderImplBase::_ParseAttributeTree(AttributeHandlerContext* context)
 }
 
 
-status_t
-ReaderImplBase::_ReadAttribute(uint8& _id, AttributeValue& _value,
+status_t ReaderImplBase::_ReadAttribute(uint8& _id, AttributeValue& _value,
 	bool* _hasChildren, uint64* _tag)
 {
 	uint64 tag;
@@ -832,8 +812,7 @@ ReaderImplBase::_ReadAttribute(uint8& _id, AttributeValue& _value,
 }
 
 
-status_t
-ReaderImplBase::ReadAttributeValue(uint8 type, uint8 encoding,
+status_t ReaderImplBase::ReadAttributeValue(uint8 type, uint8 encoding,
 	AttributeValue& _value)
 {
 	switch (type) {
@@ -933,8 +912,7 @@ ReaderImplBase::ReadAttributeValue(uint8 type, uint8 encoding,
 }
 
 
-status_t
-ReaderImplBase::ReadUnsignedLEB128(uint64& _value)
+status_t ReaderImplBase::ReadUnsignedLEB128(uint64& _value)
 {
 	uint64 result = 0;
 	int shift = 0;
@@ -955,8 +933,7 @@ ReaderImplBase::ReadUnsignedLEB128(uint64& _value)
 }
 
 
-status_t
-ReaderImplBase::_ReadString(const char*& _string, size_t* _stringLength)
+status_t ReaderImplBase::_ReadString(const char*& _string, size_t* _stringLength)
 {
 	const char* string
 		= (const char*)fCurrentSection->data + fCurrentSection->currentOffset;
@@ -981,8 +958,7 @@ ReaderImplBase::_ReadString(const char*& _string, size_t* _stringLength)
 }
 
 
-status_t
-ReaderImplBase::_ReadSectionBuffer(void* buffer, size_t size)
+status_t ReaderImplBase::_ReadSectionBuffer(void* buffer, size_t size)
 {
 	if (size > fCurrentSection->uncompressedLength
 			- fCurrentSection->currentOffset) {
@@ -998,8 +974,7 @@ ReaderImplBase::_ReadSectionBuffer(void* buffer, size_t size)
 }
 
 
-status_t
-ReaderImplBase::ReadBuffer(off_t offset, void* buffer, size_t size)
+status_t ReaderImplBase::ReadBuffer(off_t offset, void* buffer, size_t size)
 {
 	ssize_t bytesRead = pread(fFD, buffer, size, offset);
 	if (bytesRead < 0) {
@@ -1017,8 +992,7 @@ ReaderImplBase::ReadBuffer(off_t offset, void* buffer, size_t size)
 }
 
 
-status_t
-ReaderImplBase::ReadCompressedBuffer(const SectionInfo& section)
+status_t ReaderImplBase::ReadCompressedBuffer(const SectionInfo& section)
 {
 	uint32 compressedSize = section.compressedLength;
 	uint64 offset = section.offset;

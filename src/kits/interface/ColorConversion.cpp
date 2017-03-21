@@ -126,8 +126,7 @@ PaletteConverter::~PaletteConverter()
 	\param palette The palette being a 256 entry rgb_color array.
 	\return \c B_OK, if everything went fine, an error code otherwise.
 */
-status_t
-PaletteConverter::SetTo(const rgb_color *palette)
+status_t PaletteConverter::SetTo(const rgb_color *palette)
 {
 	// cleanup
 	SetTo((const color_map*)NULL);
@@ -179,8 +178,7 @@ PaletteConverter::SetTo(const rgb_color *palette)
 	\param colorMap The completely initialized color map.
 	\return \c B_OK, if everything went fine, an error code otherwise.
 */
-status_t
-PaletteConverter::SetTo(const color_map *colorMap)
+status_t PaletteConverter::SetTo(const color_map *colorMap)
 {
 	// cleanup
 	if (fOwnColorMap) {
@@ -199,8 +197,7 @@ PaletteConverter::SetTo(const color_map *colorMap)
 	\return \c B_OK, if the converter is properly initialized, an error code
 			otherwise.
 */
-status_t
-PaletteConverter::InitCheck() const
+status_t PaletteConverter::InitCheck() const
 {
 	return fCStatus;
 }
@@ -402,8 +399,7 @@ PaletteConverter::RGB16ColorForIndex(uint8 index) const
 			(A[31:24]B[23:16]G[15:8]R[7:0]).
 */
 inline
-uint32
-PaletteConverter::RGBA32ColorForIndex(uint8 index) const
+uint32 PaletteConverter::RGBA32ColorForIndex(uint8 index) const
 {
 	const rgb_color &color = fColorMap->color_list[index];
 	return (color.red << 16) | (color.green << 8) | color.blue
@@ -426,8 +422,7 @@ PaletteConverter::RGBA32ColorForIndex(uint8 index) const
 		   into.
 */
 inline
-void
-PaletteConverter::RGBA32ColorForIndex(uint8 index, uint8 &red, uint8 &green,
+void PaletteConverter::RGBA32ColorForIndex(uint8 index, uint8 &red, uint8 &green,
 									 uint8 &blue, uint8 &alpha) const
 {
 	const rgb_color &color = fColorMap->color_list[index];
@@ -461,8 +456,7 @@ static PaletteConverter	sPaletteConverter;
 /*!	\brief Initialize the global instance of PaletteConverter using the system color palette.
 	\return B_OK.
 */
-/*static*/ status_t
-PaletteConverter::InitializeDefault(bool useServer)
+/*static*/ status_t PaletteConverter::InitializeDefault(bool useServer)
 {
 	if (sPaletteConverter.InitCheck() != B_OK) {
 		pthread_once(&sPaletteConverterInitOnce,
@@ -475,15 +469,13 @@ PaletteConverter::InitializeDefault(bool useServer)
 }
 
 
-/*static*/ void
-PaletteConverter::_InitializeDefaultAppServer()
+/*static*/ void PaletteConverter::_InitializeDefaultAppServer()
 {
 	sPaletteConverter.SetTo(system_colors());
 }
 
 
-/*static*/ void
-PaletteConverter::_InitializeDefaultNoAppServer()
+/*static*/ void PaletteConverter::_InitializeDefaultNoAppServer()
 {
 	sPaletteConverter.SetTo(kSystemPalette);
 }
@@ -493,8 +485,7 @@ typedef uint32 (readFunc)(const uint8 **source, int32 index);
 typedef void (writeFunc)(uint8 **dest, uint8 *data, int32 index);
 
 
-void
-WriteRGB24(uint8 **dest, uint8 *data, int32 index)
+void WriteRGB24(uint8 **dest, uint8 *data, int32 index)
 {
 	(*dest)[0] = data[0];
 	(*dest)[1] = data[1];
@@ -503,8 +494,7 @@ WriteRGB24(uint8 **dest, uint8 *data, int32 index)
 }
 
 
-uint32
-ReadRGB24(const uint8 **source, int32 index)
+uint32 ReadRGB24(const uint8 **source, int32 index)
 {
 	uint32 result = (*source)[0] | ((*source)[1] << 8) | ((*source)[2] << 16);
 	*source += 3;
@@ -512,8 +502,7 @@ ReadRGB24(const uint8 **source, int32 index)
 }
 
 
-void
-WriteGray8(uint8 **dest, uint8 *data, int32 index)
+void WriteGray8(uint8 **dest, uint8 *data, int32 index)
 {
 	**dest = (data[2] * 308 + data[1] * 600 + data[0] * 116) >> 10;
 	// this would boost the speed but is less accurate:
@@ -522,8 +511,7 @@ WriteGray8(uint8 **dest, uint8 *data, int32 index)
 }
 
 
-uint32
-ReadGray8(const uint8 **source, int32 index)
+uint32 ReadGray8(const uint8 **source, int32 index)
 {
 	uint32 result = **source;
 	(*source)++;
@@ -531,8 +519,7 @@ ReadGray8(const uint8 **source, int32 index)
 }
 
 
-void
-WriteGray1(uint8 **dest, uint8 *data, int32 index)
+void WriteGray1(uint8 **dest, uint8 *data, int32 index)
 {
 	int32 shift = 7 - (index % 8);
 	**dest &= ~(0x01 << shift);
@@ -542,8 +529,7 @@ WriteGray1(uint8 **dest, uint8 *data, int32 index)
 }
 
 
-uint32
-ReadGray1(const uint8 **source, int32 index)
+uint32 ReadGray1(const uint8 **source, int32 index)
 {
 	int32 shift = 7 - (index % 8);
 	uint32 result = ((**source >> shift) & 0x01) ? 0xff : 0x00;
@@ -553,16 +539,14 @@ ReadGray1(const uint8 **source, int32 index)
 }
 
 
-void
-WriteCMAP8(uint8 **dest, uint8 *data, int32 index)
+void WriteCMAP8(uint8 **dest, uint8 *data, int32 index)
 {
 	**dest = sPaletteConverter.IndexForRGBA32(*(uint32 *)data);
 	(*dest)++;
 }
 
 
-uint32
-ReadCMAP8(const uint8 **source, int32 index)
+uint32 ReadCMAP8(const uint8 **source, int32 index)
 {
 	uint32 result = sPaletteConverter.RGBA32ColorForIndex(**source);
 	(*source)++;
@@ -571,8 +555,7 @@ ReadCMAP8(const uint8 **source, int32 index)
 
 
 template<typename srcByte, typename dstByte>
-status_t
-ConvertBits(const srcByte *srcBits, dstByte *dstBits, int32 srcBitsLength,
+status_t ConvertBits(const srcByte *srcBits, dstByte *dstBits, int32 srcBitsLength,
 	int32 dstBitsLength, int32 redShift, int32 greenShift, int32 blueShift,
 	int32 alphaShift, int32 alphaBits, uint32 redMask, uint32 greenMask,
 	uint32 blueMask, uint32 alphaMask, int32 srcBytesPerRow,
@@ -736,8 +719,7 @@ ConvertBits(const srcByte *srcBits, dstByte *dstBits, int32 srcBitsLength,
 
 
 template<typename srcByte>
-status_t
-ConvertBits(const srcByte *srcBits, void *dstBits, int32 srcBitsLength,
+status_t ConvertBits(const srcByte *srcBits, void *dstBits, int32 srcBitsLength,
 	int32 dstBitsLength, int32 redShift, int32 greenShift, int32 blueShift,
 	int32 alphaShift, int32 alphaBits, int32 srcBytesPerRow,
 	int32 dstBytesPerRow, int32 srcBitsPerPixel, color_space srcColorSpace,
@@ -884,8 +866,7 @@ ConvertBits(const srcByte *srcBits, void *dstBits, int32 srcBitsLength,
 	- \c B_OK: Indicates success.
 	- \c B_BAD_VALUE: \c NULL buffer or at least one colorspace is unsupported.
 */
-status_t
-ConvertBits(const void *srcBits, void *dstBits, int32 srcBitsLength,
+status_t ConvertBits(const void *srcBits, void *dstBits, int32 srcBitsLength,
 	int32 dstBitsLength, int32 srcBytesPerRow, int32 dstBytesPerRow,
 	color_space srcColorSpace, color_space dstColorSpace, int32 width,
 	int32 height)
@@ -913,8 +894,7 @@ ConvertBits(const void *srcBits, void *dstBits, int32 srcBitsLength,
 	- \c B_OK: Indicates success.
 	- \c B_BAD_VALUE: \c NULL buffer or at least one colorspace is unsupported.
 */
-status_t
-ConvertBits(const void *srcBits, void *dstBits, int32 srcBitsLength,
+status_t ConvertBits(const void *srcBits, void *dstBits, int32 srcBitsLength,
 	int32 dstBitsLength, int32 srcBytesPerRow, int32 dstBytesPerRow,
 	color_space srcColorSpace, color_space dstColorSpace, BPoint srcOffset,
 	BPoint dstOffset, int32 width, int32 height)

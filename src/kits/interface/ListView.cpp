@@ -58,7 +58,7 @@ BListView::~BListView()
 }
 
 
-void
+void 
 BListView::MakeFocus(bool focusState)
 {
 	if(IsFocus() != focusState)
@@ -78,7 +78,7 @@ BListView::MakeFocus(bool focusState)
 }
 
 
-void
+void 
 BListView::WindowActivated(bool state)
 {
 	InvalidateItem(fPos);
@@ -90,14 +90,14 @@ BListView::WindowActivated(bool state)
 }
 
 
-bool
+bool 
 BListView::AddItem(BListItem *item)
 {
 	return BListView::AddItem(item, fItems.CountItems());
 }
 
 
-bool
+bool 
 BListView::AddItem(BListItem *item,  __be_int32 atIndex)
 {
 	if(item == NULL || item->fOwner != NULL) return false;
@@ -122,7 +122,7 @@ BListView::AddItem(BListItem *item,  __be_int32 atIndex)
 }
 
 
-bool
+bool 
 BListView::RemoveItem(BListItem *item, bool auto_destruct_item)
 {
 	if(BListView::RemoveItem(IndexOf(item)) == NULL) return false;
@@ -189,7 +189,7 @@ BListView::RemoveItem(__be_int32 index)
 }
 
 
-bool
+bool 
 BListView::RemoveItems(__be_int32 index,  __be_int32 count, bool auto_destruct_items)
 {
 	if(index < 0 || index >= fItems.CountItems()) return false;
@@ -209,7 +209,7 @@ BListView::RemoveItems(__be_int32 index,  __be_int32 count, bool auto_destruct_i
 }
 
 
-void
+void 
 BListView::SetListType(bhapi::list_view_type type)
 {
 	if(fListType != type)
@@ -295,7 +295,7 @@ BListView::IndexOf(BPoint where, bool mustVisible) const
 }
 
 
-bool
+bool 
 BListView::HasItem(const BListItem *item) const
 {
 	return((item == NULL || item->fOwner != this) ? false : true);
@@ -309,7 +309,7 @@ BListView::CountItems() const
 }
 
 
-void
+void 
 BListView::MakeEmpty()
 {
 	while(fItems.CountItems() > 0)
@@ -323,20 +323,20 @@ BListView::MakeEmpty()
 }
 
 
-bool
+bool 
 BListView::IsEmpty() const
 {
 	return fItems.IsEmpty();
 }
 
 
-void
+void 
 BListView::SelectionChanged()
 {
 }
 
 
-void
+void 
 BListView::Draw(BRect updateRect)
 {
 	if(Window() == NULL) return;
@@ -383,7 +383,7 @@ BListView::Draw(BRect updateRect)
 }
 
 
-void
+void 
 BListView::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	if(!IsEnabled() || !IsFocus() || numBytes != 1) return;
@@ -530,13 +530,13 @@ BListView::KeyDown(const char *bytes,  __be_int32 numBytes)
 }
 
 
-void
+void 
 BListView::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
 }
 
 
-void
+void 
 BListView::MouseDown(BPoint where)
 {
 	__be_int32 btnClicks = 1;
@@ -565,19 +565,19 @@ BListView::MouseDown(BPoint where)
 }
 
 
-void
+void 
 BListView::MouseUp(BPoint where)
 {
 }
 
 
-void
+void 
 BListView::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 }
 
 
-void
+void 
 BListView::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	if(font == NULL) return;
@@ -594,7 +594,7 @@ BListView::SetFont(const BFont *font,  __be_uint8 mask)
 }
 
 
-void
+void 
 BListView::SetSelectionMessage(BMessage *message)
 {
 	if(message == fSelectionMessage) return;
@@ -603,7 +603,7 @@ BListView::SetSelectionMessage(BMessage *message)
 }
 
 
-void
+void 
 BListView::SetInvocationMessage(BMessage *message)
 {
 	SetMessage(message);
@@ -638,7 +638,7 @@ BListView::InvocationCommand() const
 }
 
 
-status_t
+status_t 
 BListView::Invoke(const BMessage *msg)
 {
 	if(fFirstSelected < 0)
@@ -664,19 +664,19 @@ BListView::Invoke(const BMessage *msg)
 }
 
 
-void
+void 
 BListView::Select(__be_int32 index, bool extend)
 {
 	Select(index, index, extend);
 }
 
-void
+void 
 BListView::Select(__be_int32 start,  __be_int32 finish)
 {
 	Select(start, finish, false);
 }
 
-void
+void 
 BListView::Select(__be_int32 start,  __be_int32 finish, bool extend)
 {
 	if(extend == false)
@@ -715,7 +715,7 @@ BListView::Select(__be_int32 start,  __be_int32 finish, bool extend)
 }
 
 
-bool
+bool 
 BListView::IsItemSelected(__be_int32 index) const
 {
 	BListItem *item = (BListItem*)fItems.ItemAt(index);
@@ -741,7 +741,7 @@ BListView::CurrentSelection(__be_int32 index) const
 }
 
 
-void
+void 
 BListView::Deselect(__be_int32 index)
 {
 	BListItem *item = (BListItem*)fItems.ItemAt(index);
@@ -778,7 +778,7 @@ BListView::Deselect(__be_int32 index)
 }
 
 
-void
+void 
 BListView::DeselectAll()
 {
 	if(fFirstSelected < 0) return;
@@ -796,7 +796,7 @@ BListView::DeselectAll()
 }
 
 
-void
+void 
 BListView::DeselectExcept(__be_int32 start,  __be_int32 finish)
 {
 	if(fFirstSelected < 0) return;
@@ -826,7 +826,7 @@ BListView::DeselectExcept(__be_int32 start,  __be_int32 finish)
 }
 
 
-bool
+bool 
 BListView::SwapItems(__be_int32 indexA,  __be_int32 indexB)
 {
 	bool retVal = false;
@@ -872,7 +872,7 @@ BListView::SwapItems(__be_int32 indexA,  __be_int32 indexB)
 }
 
 
-bool
+bool 
 BListView::MoveItem(__be_int32 fromIndex,  __be_int32 toIndex)
 {
 	bool retVal = false;
@@ -901,7 +901,7 @@ BListView::MoveItem(__be_int32 fromIndex,  __be_int32 toIndex)
 }
 
 
-bool
+bool 
 BListView::ReplaceItem(__be_int32 index, BListItem *newItem, BListItem **oldItem)
 {
 	bool retVal = false;
@@ -946,7 +946,7 @@ BListView::ReplaceItem(__be_int32 index, BListItem *newItem, BListItem **oldItem
 }
 
 
-void
+void 
 BListView::SortItems(int (*cmp)(const BListItem **a, const BListItem **b))
 {
 	if(cmp == NULL) return;
@@ -968,14 +968,14 @@ BListView::SortItems(int (*cmp)(const BListItem **a, const BListItem **b))
 }
 
 
-void
+void 
 BListView::DoForEach(bool (*func)(BListItem *item))
 {
 	fItems.DoForEach((bool (*)(void*))func);
 }
 
 
-void
+void 
 BListView::DoForEach(bool (*func)(BListItem *item, void *user_data), void *user_data)
 {
 	fItems.DoForEach((bool (*)(void*, void*))func, user_data);
@@ -1017,7 +1017,7 @@ BListView::ItemFrame(__be_int32 index) const
 }
 
 
-void
+void 
 BListView::InvalidateItem(__be_int32 index)
 {
 	BRect r = ItemFrame(index);
@@ -1025,7 +1025,7 @@ BListView::InvalidateItem(__be_int32 index)
 }
 
 
-void
+void 
 BListView::ScrollToItem(__be_int32 index)
 {
 	BRect rect = ItemFrame(index);
@@ -1042,7 +1042,7 @@ BListView::ScrollToItem(__be_int32 index)
 }
 
 
-void
+void 
 BListView::ScrollToSelection()
 {
 	BScrollView *scrollView = cast_as(Parent(), BScrollView);
@@ -1062,21 +1062,21 @@ BListView::ScrollToSelection()
 }
 
 
-void
+void 
 BListView::AttachedToWindow()
 {
 	if(Target() == NULL) SetTarget(Window());
 }
 
 
-void
+void 
 BListView::DetachedFromWindow()
 {
 	if(Target() == Window()) SetTarget(NULL);
 }
 
 
-void
+void 
 BListView::SetPosition(__be_int32 pos)
 {
 	if(pos >= fItems.CountItems()) pos = -1;

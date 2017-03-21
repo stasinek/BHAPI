@@ -6,7 +6,7 @@
 #define	_JOYSTICK_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <Haiku.h>
 
 

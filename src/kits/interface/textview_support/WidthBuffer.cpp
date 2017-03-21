@@ -52,8 +52,7 @@ struct hashed_escapement {
 	\param charLen the length of the character to examine.
 	\return The code for the given character,
 */
-static inline uint32
-CharToCode(const char* text, const int32 charLen)
+static inline uint32 CharToCode(const char* text, const int32 charLen)
 {
 	uint32 value = 0;
 	int32 shiftVal = 24;
@@ -180,8 +179,7 @@ WidthBuffer::StringWidth(TextGapBuffer &inBuffer, int32 fromOffset,
 	\return \c true if the function founds the table,
 		\c false if not.
 */
-bool
-WidthBuffer::FindTable(const BFont* inStyle, int32* outIndex)
+bool WidthBuffer::FindTable(const BFont* inStyle, int32* outIndex)
 {
 	if (inStyle == NULL)
 		return false;
@@ -205,8 +203,7 @@ WidthBuffer::FindTable(const BFont* inStyle, int32* outIndex)
 	\param font The font to create the table for.
 	\return The index of the newly created table.
 */
-int32
-WidthBuffer::InsertTable(const BFont* font)
+int32 WidthBuffer::InsertTable(const BFont* font)
 {
 	_width_table_ table;
 
@@ -230,8 +227,7 @@ WidthBuffer::InsertTable(const BFont* font)
 	\return \c true if the function could find the escapement
 		for the given character, \c false if not.
 */
-bool
-WidthBuffer::GetEscapement(uint32 value, int32 index, float* escapement)
+bool WidthBuffer::GetEscapement(uint32 value, int32 index, float* escapement)
 {
 	const _width_table_ &table = fBuffer[index];
 	const hashed_escapement* widths
@@ -257,8 +253,7 @@ WidthBuffer::GetEscapement(uint32 value, int32 index, float* escapement)
 }
 
 
-uint32
-WidthBuffer::Hash(uint32 val)
+uint32 WidthBuffer::Hash(uint32 val)
 {
 	uint32 shifted = val >> 24;
 	uint32 result = (val >> 15) + (shifted * 3);

@@ -165,8 +165,7 @@ BMidiRoster::FindConsumer(int32 id, bool localOnly)
 }
 
 
-void 
-BMidiRoster::StartWatching(const BMessenger* msngr)
+void BMidiRoster::StartWatching(const BMessenger* msngr)
 {
 	if (msngr == NULL) {
 		WARN("StartWatching does not accept a NULL messenger")
@@ -180,8 +179,7 @@ BMidiRoster::StartWatching(const BMessenger* msngr)
 }
 
 
-void 
-BMidiRoster::StopWatching()
+void BMidiRoster::StopWatching()
 {
 	BMidiRosterLooper* looper = MidiRoster()->fLooper;
 	if (looper->Lock()) {
@@ -191,8 +189,7 @@ BMidiRoster::StopWatching()
 }
 
 
-status_t 
-BMidiRoster::Register(BMidiEndpoint* endp)
+status_t BMidiRoster::Register(BMidiEndpoint* endp)
 {
 	if (endp != NULL) {
 		return endp->Register();
@@ -202,8 +199,7 @@ BMidiRoster::Register(BMidiEndpoint* endp)
 }
 
 
-status_t 
-BMidiRoster::Unregister(BMidiEndpoint* endp)
+status_t BMidiRoster::Unregister(BMidiEndpoint* endp)
 {
 	if (endp != NULL) {
 		return endp->Unregister();
@@ -273,8 +269,7 @@ void BMidiRoster::_Reserved7() { }
 void BMidiRoster::_Reserved8() { }
 
 
-void 
-BMidiRoster::CreateLocal(BMidiEndpoint* endp)
+void BMidiRoster::CreateLocal(BMidiEndpoint* endp)
 {
 	ASSERT(endp != NULL)
 
@@ -326,8 +321,7 @@ BMidiRoster::CreateLocal(BMidiEndpoint* endp)
 }
 
 
-void 
-BMidiRoster::DeleteLocal(BMidiEndpoint* endp)
+void BMidiRoster::DeleteLocal(BMidiEndpoint* endp)
 {
 	ASSERT(endp != NULL)
 
@@ -356,8 +350,7 @@ BMidiRoster::DeleteLocal(BMidiEndpoint* endp)
 }
 
 
-status_t 
-BMidiRoster::SendRequest(BMessage* msg, BMessage* reply)
+status_t BMidiRoster::SendRequest(BMessage* msg, BMessage* reply)
 {
 	ASSERT(msg != NULL)
 	ASSERT(reply != NULL)

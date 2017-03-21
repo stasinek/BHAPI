@@ -47,8 +47,7 @@ BTitledColumn::BTitledColumn(const char* title, float width, float minWidth,
 }
 
 
-void
-BTitledColumn::DrawTitle(BRect rect, BView* parent)
+void BTitledColumn::DrawTitle(BRect rect, BView* parent)
 {
 	float width = rect.Width() - (2 * kTEXT_MARGIN);
 	BString out_string(fTitle);
@@ -58,15 +57,13 @@ BTitledColumn::DrawTitle(BRect rect, BView* parent)
 }
 
 
-void
-BTitledColumn::GetColumnName(BString* into) const
+void BTitledColumn::GetColumnName(BString* into) const
 {
 	*into = fTitle;
 }
 
 
-void
-BTitledColumn::DrawString(const char* string, BView* parent, BRect rect)
+void BTitledColumn::DrawString(const char* string, BView* parent, BRect rect)
 {
 	float width = rect.Width() - (2 * kTEXT_MARGIN);
 	float y;
@@ -99,15 +96,13 @@ BTitledColumn::DrawString(const char* string, BView* parent, BRect rect)
 }
 
 
-void
-BTitledColumn::SetTitle(const char* title)
+void BTitledColumn::SetTitle(const char* title)
 {
 	fTitle.SetTo(title);
 }
 
 
-void
-BTitledColumn::Title(BString* forTitle) const
+void BTitledColumn::Title(BString* forTitle) const
 {
 	if (forTitle)
 		forTitle->SetTo(fTitle.String());
@@ -140,8 +135,7 @@ BStringField::BStringField(const char* string)
 }
 
 
-void
-BStringField::SetString(const char* val)
+void BStringField::SetString(const char* val)
 {
 	fString = val;
 	fClippedString = "";
@@ -149,15 +143,13 @@ BStringField::SetString(const char* val)
 }
 
 
-const char*
-BStringField::String() const
+const char*  BStringField::String() const
 {
 	return fString.String();
 }
 
 
-void
-BStringField::SetWidth(float width)
+void BStringField::SetWidth(float width)
 {
 	fWidth = width;
 }
@@ -170,22 +162,19 @@ BStringField::Width()
 }
 
 
-void
-BStringField::SetClippedString(const char* val)
+void BStringField::SetClippedString(const char* val)
 {
 	fClippedString = val;
 }
 
 
-bool
-BStringField::HasClippedString() const
+bool BStringField::HasClippedString() const
 {
 	return !fClippedString.IsEmpty();
 }
 
 
-const char*
-BStringField::ClippedString()
+const char*  BStringField::ClippedString()
 {
 	return fClippedString.String();
 }
@@ -203,8 +192,7 @@ BStringColumn::BStringColumn(const char* title, float width, float minWidth,
 }
 
 
-void
-BStringColumn::DrawField(BField* _field, BRect rect, BView* parent)
+void BStringColumn::DrawField(BField* _field, BRect rect, BView* parent)
 {
 	float width = rect.Width() - (2 * kTEXT_MARGIN);
 	BStringField* field = static_cast<BStringField*>(_field);
@@ -244,8 +232,7 @@ BStringColumn::CompareFields(BField* field1, BField* field2)
 }
 
 
-bool
-BStringColumn::AcceptsField(const BField *field) const
+bool BStringColumn::AcceptsField(const BField *field) const
 {
 	return static_cast<bool>(dynamic_cast<const BStringField*>(field));
 }
@@ -266,8 +253,7 @@ BDateField::BDateField(time_t* time)
 }
 
 
-void
-BDateField::SetWidth(float width)
+void BDateField::SetWidth(float width)
 {
 	fWidth = width;
 }
@@ -280,15 +266,13 @@ BDateField::Width()
 }
 
 
-void
-BDateField::SetClippedString(const char* string)
+void BDateField::SetClippedString(const char* string)
 {
 	fClippedString = string;
 }
 
 
-const char*
-BDateField::ClippedString()
+const char*  BDateField::ClippedString()
 {
 	return fClippedString.String();
 }
@@ -331,8 +315,7 @@ const char *kTIME_FORMATS[] = {
 };
 
 
-void
-BDateColumn::DrawField(BField* _field, BRect rect, BView* parent)
+void BDateColumn::DrawField(BField* _field, BRect rect, BView* parent)
 {
 	float width = rect.Width() - (2 * kTEXT_MARGIN);
 	BDateField* field = (BDateField*)_field;
@@ -386,8 +369,7 @@ BSizeField::BSizeField(off_t size)
 }
 
 
-void
-BSizeField::SetSize(off_t size)
+void BSizeField::SetSize(off_t size)
 {
 	fSize = size;
 }
@@ -411,8 +393,7 @@ BSizeColumn::BSizeColumn(const char* title, float width, float minWidth,
 }
 
 
-void
-BSizeColumn::DrawField(BField* _field, BRect rect, BView* parent)
+void BSizeColumn::DrawField(BField* _field, BRect rect, BView* parent)
 {
 	char str[256];
 	float width = rect.Width() - (2 * kTEXT_MARGIN);
@@ -488,15 +469,13 @@ BIntegerField::BIntegerField(int32 number)
 }
 
 
-void
-BIntegerField::SetValue(int32 value)
+void BIntegerField::SetValue(int32 value)
 {
 	fInteger = value;
 }
 
 
-int32
-BIntegerField::Value()
+int32 BIntegerField::Value()
 {
 	return fInteger;
 }
@@ -513,8 +492,7 @@ BIntegerColumn::BIntegerColumn(const char* title, float width, float minWidth,
 }
 
 
-void
-BIntegerColumn::DrawField(BField *field, BRect rect, BView* parent)
+void BIntegerColumn::DrawField(BField *field, BRect rect, BView* parent)
 {
 	char formatted[256];
 	float width = rect.Width() - (2 * kTEXT_MARGIN);
@@ -546,8 +524,7 @@ GraphColumn::GraphColumn(const char* name, float width, float minWidth,
 }
 
 
-void
-GraphColumn::DrawField(BField* field, BRect rect, BView* parent)
+void GraphColumn::DrawField(BField* field, BRect rect, BView* parent)
 {
 	int number = ((BIntegerField*)field)->Value();
 
@@ -595,8 +572,7 @@ BBitmapField::Bitmap()
 }
 
 
-void
-BBitmapField::SetBitmap(BBitmap* bitmap)
+void BBitmapField::SetBitmap(BBitmap* bitmap)
 {
 	fBitmap = bitmap;
 }
@@ -613,8 +589,7 @@ BBitmapColumn::BBitmapColumn(const char* title, float width, float minWidth,
 }
 
 
-void
-BBitmapColumn::DrawField(BField* field, BRect rect, BView* parent)
+void BBitmapColumn::DrawField(BField* field, BRect rect, BView* parent)
 {
 	BBitmapField* bitmapField = static_cast<BBitmapField*>(field);
 	const BBitmap* bitmap = bitmapField->Bitmap();
@@ -664,8 +639,7 @@ BBitmapColumn::CompareFields(BField* /*field1*/, BField* /*field2*/)
 }
 
 
-bool
-BBitmapColumn::AcceptsField(const BField *field) const
+bool BBitmapColumn::AcceptsField(const BField *field) const
 {
 	return static_cast<bool>(dynamic_cast<const BBitmapField*>(field));
 }

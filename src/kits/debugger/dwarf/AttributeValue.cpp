@@ -10,8 +10,7 @@
 #include "AttributeClasses.h"
 
 
-const char*
-AttributeValue::ToString(char* buffer, size_t size)
+const char*  AttributeValue::ToString(char* buffer, size_t size)
 {
 	switch (attributeClass) {
 		case ATTRIBUTE_CLASS_ADDRESS:

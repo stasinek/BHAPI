@@ -36,22 +36,19 @@ TypeLookupConstraints::TypeLookupConstraints(type_kind typeKind,
 }
 
 
-bool
-TypeLookupConstraints::HasTypeKind() const
+bool TypeLookupConstraints::HasTypeKind() const
 {
 	return fTypeKindGiven;
 }
 
 
-bool
-TypeLookupConstraints::HasSubtypeKind() const
+bool TypeLookupConstraints::HasSubtypeKind() const
 {
 	return fSubtypeKindGiven;
 }
 
 
-bool
-TypeLookupConstraints::HasBaseTypeName() const
+bool TypeLookupConstraints::HasBaseTypeName() const
 {
 	return fBaseTypeName.Length() > 0;
 }
@@ -64,8 +61,7 @@ TypeLookupConstraints::TypeKind() const
 }
 
 
-int32
-TypeLookupConstraints::SubtypeKind() const
+int32 TypeLookupConstraints::SubtypeKind() const
 {
 	return fSubtypeKind;
 }
@@ -78,24 +74,21 @@ TypeLookupConstraints::BaseTypeName() const
 }
 
 
-void
-TypeLookupConstraints::SetTypeKind(type_kind typeKind)
+void TypeLookupConstraints::SetTypeKind(type_kind typeKind)
 {
 	fTypeKind = typeKind;
 	fTypeKindGiven = true;
 }
 
 
-void
-TypeLookupConstraints::SetSubtypeKind(int32 subtypeKind)
+void TypeLookupConstraints::SetSubtypeKind(int32 subtypeKind)
 {
 	fSubtypeKind = subtypeKind;
 	fSubtypeKindGiven = true;
 }
 
 
-void
-TypeLookupConstraints::SetBaseTypeName(const BString& name)
+void TypeLookupConstraints::SetBaseTypeName(const BString& name)
 {
 	fBaseTypeName = name;
 }

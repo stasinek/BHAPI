@@ -126,15 +126,13 @@ AbstractSetting::AbstractSetting(const BString& id, const BString& name)
 }
 
 
-const char*
-AbstractSetting::ID() const
+const char*  AbstractSetting::ID() const
 {
 	return fID;
 }
 
 
-const char*
-AbstractSetting::Name() const
+const char*  AbstractSetting::Name() const
 {
 	return fName;
 }
@@ -152,8 +150,7 @@ BoolSettingImpl::BoolSettingImpl(const BString& id, const BString& name,
 }
 
 
-bool
-BoolSettingImpl::DefaultBoolValue() const
+bool BoolSettingImpl::DefaultBoolValue() const
 {
 	return fDefaultValue;
 }
@@ -227,8 +224,7 @@ OptionsSettingImpl::DefaultOption() const
 }
 
 
-int32
-OptionsSettingImpl::CountOptions() const
+int32 OptionsSettingImpl::CountOptions() const
 {
 	return fOptions.CountItems();
 }
@@ -253,8 +249,7 @@ OptionsSettingImpl::OptionByID(const char* id) const
 }
 
 
-bool
-OptionsSettingImpl::AddOption(SettingsOption* option)
+bool OptionsSettingImpl::AddOption(SettingsOption* option)
 {
 	if (!fOptions.AddItem(option))
 		return false;
@@ -264,8 +259,7 @@ OptionsSettingImpl::AddOption(SettingsOption* option)
 }
 
 
-bool
-OptionsSettingImpl::AddOption(const BString& id, const BString& name)
+bool OptionsSettingImpl::AddOption(const BString& id, const BString& name)
 {
 	Option* option = new(std::nothrow) Option(id, name);
 	if (option == NULL)
@@ -276,8 +270,7 @@ OptionsSettingImpl::AddOption(const BString& id, const BString& name)
 }
 
 
-void
-OptionsSettingImpl::SetDefaultOption(SettingsOption* option)
+void OptionsSettingImpl::SetDefaultOption(SettingsOption* option)
 {
 	if (option == fDefaultOption)
 		return;

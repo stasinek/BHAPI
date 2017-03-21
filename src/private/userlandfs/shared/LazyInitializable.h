@@ -3,7 +3,7 @@
 #ifndef USERLAND_FS_LAZY_INITIALIZABLE_H
 #define USERLAND_FS_LAZY_INITIALIZABLE_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 namespace UserlandFSUtil {
 

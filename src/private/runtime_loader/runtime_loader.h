@@ -13,7 +13,7 @@
 
 
 #include <image.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <elf_private.h>
 

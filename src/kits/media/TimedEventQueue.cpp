@@ -72,8 +72,7 @@ media_timed_event::media_timed_event(const media_timed_event &clone)
 }
 
 
-void
-media_timed_event::operator=(const media_timed_event &clone)
+void media_timed_event::operator=(const media_timed_event &clone)
 {
 	CALLED();
 	memcpy(this, &clone, sizeof(*this));
@@ -127,8 +126,7 @@ BTimedEventQueue::operator new(size_t s)
 }
 
 
-void
-BTimedEventQueue::operator delete(void *p, size_t s)
+void BTimedEventQueue::operator delete(void *p, size_t s)
 {
 	CALLED();
 	return ::operator delete(p);
@@ -149,40 +147,35 @@ BTimedEventQueue::~BTimedEventQueue()
 }
 
 
-status_t
-BTimedEventQueue::AddEvent(const media_timed_event &event)
+status_t BTimedEventQueue::AddEvent(const media_timed_event &event)
 {
 	CALLED();
 	return fImp->AddEvent(event);
 }
 
 
-status_t
-BTimedEventQueue::RemoveEvent(const media_timed_event *event)
+status_t BTimedEventQueue::RemoveEvent(const media_timed_event *event)
 {
 	CALLED();
 	return fImp->RemoveEvent(event);
 }
 
 
-status_t
-BTimedEventQueue::RemoveFirstEvent(media_timed_event *outEvent)
+status_t BTimedEventQueue::RemoveFirstEvent(media_timed_event *outEvent)
 {
 	CALLED();
 	return fImp->RemoveFirstEvent(outEvent);
 }
 
 
-bool
-BTimedEventQueue::HasEvents() const
+bool BTimedEventQueue::HasEvents() const
 {
 	CALLED();
 	return fImp->HasEvents();
 }
 
 
-int32
-BTimedEventQueue::EventCount() const
+int32 BTimedEventQueue::EventCount() const
 {
 	CALLED();
 	return fImp->EventCount();
@@ -232,8 +225,7 @@ BTimedEventQueue::FindFirstMatch(bigtime_t eventTime,
 }
 
 
-status_t
-BTimedEventQueue::DoForEach(for_each_hook hook,
+status_t BTimedEventQueue::DoForEach(for_each_hook hook,
 							void *context,
 							bigtime_t eventTime,
 							time_direction direction,
@@ -245,8 +237,7 @@ BTimedEventQueue::DoForEach(for_each_hook hook,
 }
 
 
-void
-BTimedEventQueue::SetCleanupHook(cleanup_hook hook,
+void BTimedEventQueue::SetCleanupHook(cleanup_hook hook,
 								 void *context)
 {
 	CALLED();
@@ -254,8 +245,7 @@ BTimedEventQueue::SetCleanupHook(cleanup_hook hook,
 }
 
 
-status_t
-BTimedEventQueue::FlushEvents(bigtime_t eventTime,
+status_t BTimedEventQueue::FlushEvents(bigtime_t eventTime,
 							  time_direction direction,
 							  bool inclusive,
 							  int32 eventType)

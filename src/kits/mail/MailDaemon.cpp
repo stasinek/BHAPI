@@ -32,15 +32,13 @@ BMailDaemon::~BMailDaemon()
 }
 
 
-bool
-BMailDaemon::IsRunning()
+bool BMailDaemon::IsRunning()
 {
 	return fDaemon.IsValid();
 }
 
 
-status_t
-BMailDaemon::CheckMail(int32 accountID)
+status_t BMailDaemon::CheckMail(int32 accountID)
 {
 	if (!fDaemon.IsValid())
 		return B_MAIL_NO_DAEMON;
@@ -51,8 +49,7 @@ BMailDaemon::CheckMail(int32 accountID)
 }
 
 
-status_t
-BMailDaemon::CheckAndSendQueuedMail(int32 accountID)
+status_t BMailDaemon::CheckAndSendQueuedMail(int32 accountID)
 {
 	if (!fDaemon.IsValid())
 		return B_MAIL_NO_DAEMON;
@@ -63,8 +60,7 @@ BMailDaemon::CheckAndSendQueuedMail(int32 accountID)
 }
 
 
-status_t
-BMailDaemon::SendQueuedMail()
+status_t BMailDaemon::SendQueuedMail()
 {
 	if (!fDaemon.IsValid())
 		return B_MAIL_NO_DAEMON;
@@ -73,8 +69,7 @@ BMailDaemon::SendQueuedMail()
 }
 
 
-int32
-BMailDaemon::CountNewMessages(bool waitForFetchCompletion)
+int32 BMailDaemon::CountNewMessages(bool waitForFetchCompletion)
 {
 	if (!fDaemon.IsValid())
 		return B_MAIL_NO_DAEMON;
@@ -91,8 +86,7 @@ BMailDaemon::CountNewMessages(bool waitForFetchCompletion)
 }
 
 
-status_t
-BMailDaemon::MarkAsRead(int32 account, const entry_ref& ref, read_flags flag)
+status_t BMailDaemon::MarkAsRead(int32 account, const entry_ref& ref, read_flags flag)
 {
 	if (!fDaemon.IsValid())
 		return B_MAIL_NO_DAEMON;
@@ -106,8 +100,7 @@ BMailDaemon::MarkAsRead(int32 account, const entry_ref& ref, read_flags flag)
 }
 
 
-status_t
-BMailDaemon::FetchBody(const entry_ref& ref, BMessenger* listener)
+status_t BMailDaemon::FetchBody(const entry_ref& ref, BMessenger* listener)
 {
 	if (!fDaemon.IsValid())
 		return B_MAIL_NO_DAEMON;
@@ -122,8 +115,7 @@ BMailDaemon::FetchBody(const entry_ref& ref, BMessenger* listener)
 }
 
 
-status_t
-BMailDaemon::Quit()
+status_t BMailDaemon::Quit()
 {
 	if (!fDaemon.IsValid())
 		return B_MAIL_NO_DAEMON;
@@ -132,8 +124,7 @@ BMailDaemon::Quit()
 }
 
 
-status_t
-BMailDaemon::Launch()
+status_t BMailDaemon::Launch()
 {
 	status_t status =  __be_roster->Launch(B_MAIL_DAEMON_SIGNATURE);
 	if (status == B_OK)

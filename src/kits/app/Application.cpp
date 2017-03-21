@@ -51,9 +51,12 @@
 
 BHAPI_LOCAL BCursor _B_CURSOR_SYSTEM_DEFAULT(NULL);
 
+BHAPI_EXPORT BApplication bhapi::__be_app;
+BHAPI_EXPORT BMessenger bhapi::__be_app_messenger;
+BHAPI_EXPORT BClipboard bhapi::__be_clipboard("system");
 BHAPI_EXPORT BApplication *bhapi::be_app = NULL;
-BHAPI_EXPORT BMessenger bhapi::be_app_messenger;
-BHAPI_EXPORT BClipboard bhapi::be_clipboard("system");
+BHAPI_EXPORT BMessenger* bhapi::be_app_messenger = NULL;
+BHAPI_EXPORT BClipboard* bhapi::be_clipboard = NULL;
 BHAPI_EXPORT const BCursor *B_CURSOR_SYSTEM_DEFAULT = &_B_CURSOR_SYSTEM_DEFAULT;
 
 #ifdef BHAPI_BUILD_LIBRARY
@@ -66,6 +69,16 @@ extern bool bhapi::font_init(void);
 extern void bhapi::font_cancel(void);
 extern bool bhapi::font_lock(void);
 extern void bhapi::font_unlock(void);
+//-----------------------------------------------------------------------------
+
+BApplication::BApplication(void)
+    : BLooper(""), fQuit(false), fSignature(NULL),
+      fPulseRate(B_INT64_CONSTANT(500000)), fPulseRunner(NULL),
+      fGraphicsEngine(NULL), fGraphicsEngineAddon(NULL),
+      fCursor(NULL), fCursorHidden(false), fCursorObscure(false)
+{
+    Init("", NULL);
+}
 //-----------------------------------------------------------------------------
 
 void BApplication::Init(const char *signature, bool tryInterface)
@@ -85,12 +98,10 @@ void BApplication::Init(const char *signature, bool tryInterface)
     if(!(fPulseRunner == NULL || fPulseRunner->IsValid())) {delete fPulseRunner; fPulseRunner = NULL;}
 
     bhapi::be_app = this;
-    bhapi::be_app_messenger = BMessenger(this);
+    bhapi::__be_app_messenger = BMessenger(this);
 
     hLocker->Unlock();
-
-    bhapi::be_clipboard.StartWatching(bhapi::be_app_messenger);
-
+    bhapi::__be_clipboard.StartWatching(bhapi::__be_app_messenger);
     if(tryInterface) InitGraphicsEngine();
 }
 //-----------------------------------------------------------------------------
@@ -144,8 +155,8 @@ BApplication::~BApplication()
     }
     fModalWindows.MakeEmpty();
 
-    bhapi::be_clipboard.StopWatching(bhapi::be_app_messenger);
-    bhapi::be_app_messenger = BMessenger();
+    bhapi::__be_clipboard.StopWatching(bhapi::__be_app_messenger);
+    bhapi::__be_app_messenger = BMessenger();
 
     hLocker->Unlock();
 }
@@ -694,8 +705,8 @@ void BApplication::SetCursor(const BCursor *cursor, bool sync)
     {
         BMessage msg(B_APP_CURSOR_REQUESTED);
         msg.AddData("BHAPI:cursor_data", B_ANY_TYPE, cursor->Data(), (size_t)cursor->DataLength(), true);
-        if(sync == false) bhapi::be_app_messenger.SendMessage(&msg);
-        else bhapi::be_app_messenger.SendMessage(&msg, &msg);
+        if(sync == false) bhapi::__be_app_messenger.SendMessage(&msg);
+        else bhapi::__be_app_messenger.SendMessage(&msg, &msg);
     }
     else if(fCursor != *cursor)
     {
@@ -711,7 +722,7 @@ void BApplication::HideCursor()
     {
         BMessage msg(B_APP_CURSOR_REQUESTED);
         msg.AddBool("BHAPI:show_cursor", false);
-        bhapi::be_app_messenger.SendMessage(&msg);
+        bhapi::__be_app_messenger.SendMessage(&msg);
     }
     else if(!fCursorHidden)
     {
@@ -728,7 +739,7 @@ void BApplication::ShowCursor()
     {
         BMessage msg(B_APP_CURSOR_REQUESTED);
         msg.AddBool("BHAPI:show_cursor", true);
-        bhapi::be_app_messenger.SendMessage(&msg);
+        bhapi::__be_app_messenger.SendMessage(&msg);
     }
     else if(fCursorHidden || fCursorObscure)
     {
@@ -745,7 +756,7 @@ void BApplication::ObscureCursor()
     {
         BMessage msg(B_APP_CURSOR_REQUESTED);
         msg.AddBool("BHAPI:obscure_cursor", true);
-        bhapi::be_app_messenger.SendMessage(&msg);
+        bhapi::__be_app_messenger.SendMessage(&msg);
     }
     else if(!fCursorHidden && !fCursorObscure)
     {

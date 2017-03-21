@@ -29,8 +29,7 @@ CLanguageFamilySyntaxHighlighter::~CLanguageFamilySyntaxHighlighter()
 }
 
 
-status_t
-CLanguageFamilySyntaxHighlighter::ParseText(LineDataSource* source,
+status_t CLanguageFamilySyntaxHighlighter::ParseText(LineDataSource* source,
 	TeamTypeInformation* typeInfo, SyntaxHighlightInfo*& _info)
 {
 	Tokenizer* tokenizer = new(std::nothrow) Tokenizer();

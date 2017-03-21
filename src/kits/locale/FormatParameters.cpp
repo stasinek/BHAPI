@@ -32,8 +32,7 @@ BFormatParameters::~BFormatParameters()
 }
 
 // SetAlignment
-void
-BFormatParameters::SetAlignment(format_alignment alignment)
+void BFormatParameters::SetAlignment(format_alignment alignment)
 {
 	fAlignment = alignment;
 	fFlags |= ALIGNMENT_SET;
@@ -51,8 +50,7 @@ BFormatParameters::Alignment() const
 }
 
 // SetFormatWidth
-void
-BFormatParameters::SetFormatWidth(size_t width)
+void BFormatParameters::SetFormatWidth(size_t width)
 {
 	fWidth = width;
 	fFlags |= WIDTH_SET;
@@ -70,8 +68,7 @@ BFormatParameters::FormatWidth() const
 }
 
 // SetParentParameters
-void
-BFormatParameters::SetParentParameters(const BFormatParameters *parent)
+void BFormatParameters::SetParentParameters(const BFormatParameters *parent)
 {
 	fParent = parent;
 }

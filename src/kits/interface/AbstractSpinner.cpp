@@ -322,8 +322,7 @@ SpinnerButton::~SpinnerButton()
 }
 
 
-void
-SpinnerButton::AttachedToWindow()
+void SpinnerButton::AttachedToWindow()
 {
 	fParent = static_cast<BAbstractSpinner*>(Parent());
 
@@ -331,8 +330,7 @@ SpinnerButton::AttachedToWindow()
 }
 
 
-void
-SpinnerButton::DetachedFromWindow()
+void SpinnerButton::DetachedFromWindow()
 {
 	fParent = NULL;
 
@@ -340,8 +338,7 @@ SpinnerButton::DetachedFromWindow()
 }
 
 
-void
-SpinnerButton::Draw(BRect updateRect)
+void SpinnerButton::Draw(BRect updateRect)
 {
 	BRect rect(Bounds());
 	if (!rect.IsValid() || !rect.Intersects(updateRect))
@@ -442,8 +439,7 @@ SpinnerButton::Draw(BRect updateRect)
 }
 
 
-void
-SpinnerButton::MouseDown(BPoint where)
+void SpinnerButton::MouseDown(BPoint where)
 {
 	if (fIsEnabled) {
 		fIsMouseDown = true;
@@ -457,8 +453,7 @@ SpinnerButton::MouseDown(BPoint where)
 }
 
 
-void
-SpinnerButton::MouseMoved(BPoint where, uint32 transit,
+void SpinnerButton::MouseMoved(BPoint where, uint32 transit,
 	const BMessage* message)
 {
 	switch (transit) {
@@ -486,8 +481,7 @@ SpinnerButton::MouseMoved(BPoint where, uint32 transit,
 }
 
 
-void
-SpinnerButton::MouseUp(BPoint where)
+void SpinnerButton::MouseUp(BPoint where)
 {
 	fIsMouseDown = false;
 	Invalidate();
@@ -499,16 +493,14 @@ SpinnerButton::MouseUp(BPoint where)
 //	#pragma mark  - SpinnerButton private methods
 
 
-void
-SpinnerButton::_DoneTracking(BPoint where)
+void SpinnerButton::_DoneTracking(BPoint where)
 {
 	if (fIsMouseDown || !Bounds().Contains(where))
 		fIsMouseDown = false;
 }
 
 
-void
-SpinnerButton::_Track(BPoint where, uint32)
+void SpinnerButton::_Track(BPoint where, uint32)
 {
 	if (fParent == NULL || !Bounds().Contains(where)) {
 		fIsMouseDown = false;
@@ -545,8 +537,7 @@ SpinnerTextView::~SpinnerTextView()
 }
 
 
-void
-SpinnerTextView::AttachedToWindow()
+void SpinnerTextView::AttachedToWindow()
 {
 	fParent = static_cast<BAbstractSpinner*>(Parent());
 
@@ -554,8 +545,7 @@ SpinnerTextView::AttachedToWindow()
 }
 
 
-void
-SpinnerTextView::DetachedFromWindow()
+void SpinnerTextView::DetachedFromWindow()
 {
 	fParent = NULL;
 
@@ -563,8 +553,7 @@ SpinnerTextView::DetachedFromWindow()
 }
 
 
-void
-SpinnerTextView::KeyDown(const char* bytes, int32 numBytes)
+void SpinnerTextView::KeyDown(const char* bytes, int32 numBytes)
 {
 	if (fParent == NULL) {
 		BTextView::KeyDown(bytes, numBytes);
@@ -620,8 +609,7 @@ SpinnerTextView::KeyDown(const char* bytes, int32 numBytes)
 }
 
 
-void
-SpinnerTextView::MakeFocus(bool focus)
+void SpinnerTextView::MakeFocus(bool focus)
 {
 	BTextView::MakeFocus(focus);
 
@@ -658,15 +646,13 @@ BAbstractSpinner::LabelLayoutItem::LabelLayoutItem(BMessage* from)
 }
 
 
-bool
-BAbstractSpinner::LabelLayoutItem::IsVisible()
+bool BAbstractSpinner::LabelLayoutItem::IsVisible()
 {
 	return !fParent->IsHidden(fParent);
 }
 
 
-void
-BAbstractSpinner::LabelLayoutItem::SetVisible(bool visible)
+void BAbstractSpinner::LabelLayoutItem::SetVisible(bool visible)
 {
 }
 
@@ -678,16 +664,14 @@ BAbstractSpinner::LabelLayoutItem::Frame()
 }
 
 
-void
-BAbstractSpinner::LabelLayoutItem::SetFrame(BRect frame)
+void BAbstractSpinner::LabelLayoutItem::SetFrame(BRect frame)
 {
 	fFrame = frame;
 	fParent->_UpdateFrame();
 }
 
 
-void
-BAbstractSpinner::LabelLayoutItem::SetParent(BAbstractSpinner* parent)
+void BAbstractSpinner::LabelLayoutItem::SetParent(BAbstractSpinner* parent)
 {
 	fParent = parent;
 }
@@ -742,8 +726,7 @@ BAbstractSpinner::LabelLayoutItem::FrameInParent() const
 }
 
 
-status_t
-BAbstractSpinner::LabelLayoutItem::Archive(BMessage* into, bool deep) const
+status_t BAbstractSpinner::LabelLayoutItem::Archive(BMessage* into, bool deep) const
 {
 	BArchiver archiver(into);
 	status_t result = BAbstractLayoutItem::Archive(into, deep);
@@ -787,15 +770,13 @@ BAbstractSpinner::TextViewLayoutItem::TextViewLayoutItem(BMessage* from)
 }
 
 
-bool
-BAbstractSpinner::TextViewLayoutItem::IsVisible()
+bool BAbstractSpinner::TextViewLayoutItem::IsVisible()
 {
 	return !fParent->IsHidden(fParent);
 }
 
 
-void
-BAbstractSpinner::TextViewLayoutItem::SetVisible(bool visible)
+void BAbstractSpinner::TextViewLayoutItem::SetVisible(bool visible)
 {
 	// not allowed
 }
@@ -808,16 +789,14 @@ BAbstractSpinner::TextViewLayoutItem::Frame()
 }
 
 
-void
-BAbstractSpinner::TextViewLayoutItem::SetFrame(BRect frame)
+void BAbstractSpinner::TextViewLayoutItem::SetFrame(BRect frame)
 {
 	fFrame = frame;
 	fParent->_UpdateFrame();
 }
 
 
-void
-BAbstractSpinner::TextViewLayoutItem::SetParent(BAbstractSpinner* parent)
+void BAbstractSpinner::TextViewLayoutItem::SetParent(BAbstractSpinner* parent)
 {
 	fParent = parent;
 }
@@ -870,8 +849,7 @@ BAbstractSpinner::TextViewLayoutItem::FrameInParent() const
 }
 
 
-status_t
-BAbstractSpinner::TextViewLayoutItem::Archive(BMessage* into, bool deep) const
+status_t BAbstractSpinner::TextViewLayoutItem::Archive(BMessage* into, bool deep) const
 {
 	BArchiver archiver(into);
 	status_t result = BAbstractLayoutItem::Archive(into, deep);
@@ -948,8 +926,7 @@ BAbstractSpinner::Instantiate(BMessage* data)
 }
 
 
-status_t
-BAbstractSpinner::Archive(BMessage* data, bool deep) const
+status_t BAbstractSpinner::Archive(BMessage* data, bool deep) const
 {
 	status_t status = BControl::Archive(data, deep);
 	data->AddString("class", "Spinner");
@@ -967,8 +944,7 @@ BAbstractSpinner::Archive(BMessage* data, bool deep) const
 }
 
 
-status_t
-BAbstractSpinner::GetSupportedSuites(BMessage* message)
+status_t BAbstractSpinner::GetSupportedSuites(BMessage* message)
 {
 	message->AddString("suites", "suite/vnd.Haiku-spinner");
 
@@ -988,8 +964,7 @@ BAbstractSpinner::ResolveSpecifier(BMessage* message, int32 index, BMessage* spe
 }
 
 
-void
-BAbstractSpinner::AttachedToWindow()
+void BAbstractSpinner::AttachedToWindow()
 {
 	if (!Messenger().IsValid())
 		SetTarget(Window());
@@ -1004,8 +979,7 @@ BAbstractSpinner::AttachedToWindow()
 }
 
 
-void
-BAbstractSpinner::Draw(BRect updateRect)
+void BAbstractSpinner::Draw(BRect updateRect)
 {
 	_DrawLabel(updateRect);
 	_DrawTextView(updateRect);
@@ -1014,8 +988,7 @@ BAbstractSpinner::Draw(BRect updateRect)
 }
 
 
-void
-BAbstractSpinner::FrameResized(float width, float height)
+void BAbstractSpinner::FrameResized(float width, float height)
 {
 	BView::FrameResized(width, height);
 
@@ -1066,22 +1039,19 @@ BAbstractSpinner::FrameResized(float width, float height)
 }
 
 
-void
-BAbstractSpinner::ValueChanged()
+void BAbstractSpinner::ValueChanged()
 {
 	// hook method - does nothing
 }
 
 
-void
-BAbstractSpinner::MakeFocus(bool focus)
+void BAbstractSpinner::MakeFocus(bool focus)
 {
 	fTextView->MakeFocus(focus);
 }
 
 
-void
-BAbstractSpinner::ResizeToPreferred()
+void BAbstractSpinner::ResizeToPreferred()
 {
 	BView::ResizeToPreferred();
 
@@ -1096,8 +1066,7 @@ BAbstractSpinner::ResizeToPreferred()
 }
 
 
-void
-BAbstractSpinner::SetFlags(uint32 flags)
+void BAbstractSpinner::SetFlags(uint32 flags)
 {
 	// If the textview is navigable, set it to not navigable if needed,
 	// else if it is not navigable, set it to navigable if needed
@@ -1116,29 +1085,25 @@ BAbstractSpinner::SetFlags(uint32 flags)
 }
 
 
-void
-BAbstractSpinner::WindowActivated(bool active)
+void BAbstractSpinner::WindowActivated(bool active)
 {
 	_DrawTextView(fTextView->Frame());
 }
 
 
-void
-BAbstractSpinner::SetAlignment(alignment align)
+void BAbstractSpinner::SetAlignment(alignment align)
 {
 	fAlignment = align;
 }
 
 
-void
-BAbstractSpinner::SetButtonStyle(spinner_button_style buttonStyle)
+void BAbstractSpinner::SetButtonStyle(spinner_button_style buttonStyle)
 {
 	fButtonStyle = buttonStyle;
 }
 
 
-void
-BAbstractSpinner::SetDivider(float position)
+void BAbstractSpinner::SetDivider(float position)
 {
 	position = roundf(position);
 
@@ -1159,8 +1124,7 @@ BAbstractSpinner::SetDivider(float position)
 }
 
 
-void
-BAbstractSpinner::SetEnabled(bool enable)
+void BAbstractSpinner::SetEnabled(bool enable)
 {
 	if (IsEnabled() == enable)
 		return;
@@ -1183,8 +1147,7 @@ BAbstractSpinner::SetEnabled(bool enable)
 }
 
 
-void
-BAbstractSpinner::SetLabel(const char* label)
+void BAbstractSpinner::SetLabel(const char* label)
 {
 	BControl::SetLabel(label);
 
@@ -1193,15 +1156,13 @@ BAbstractSpinner::SetLabel(const char* label)
 }
 
 
-bool
-BAbstractSpinner::IsDecrementEnabled() const
+bool BAbstractSpinner::IsDecrementEnabled() const
 {
 	return fDecrement->IsEnabled();
 }
 
 
-void
-BAbstractSpinner::SetDecrementEnabled(bool enable)
+void BAbstractSpinner::SetDecrementEnabled(bool enable)
 {
 	if (IsDecrementEnabled() == enable)
 		return;
@@ -1211,15 +1172,13 @@ BAbstractSpinner::SetDecrementEnabled(bool enable)
 }
 
 
-bool
-BAbstractSpinner::IsIncrementEnabled() const
+bool BAbstractSpinner::IsIncrementEnabled() const
 {
 	return fIncrement->IsEnabled();
 }
 
 
-void
-BAbstractSpinner::SetIncrementEnabled(bool enable)
+void BAbstractSpinner::SetIncrementEnabled(bool enable)
 {
 	if (IsIncrementEnabled() == enable)
 		return;
@@ -1297,8 +1256,7 @@ BAbstractSpinner::TextView() const
 //	#pragma mark - BAbstractSpinner protected methods
 
 
-status_t
-BAbstractSpinner::AllArchived(BMessage* into) const
+status_t BAbstractSpinner::AllArchived(BMessage* into) const
 {
 	status_t result;
 	if ((result = BControl::AllArchived(into)) != B_OK)
@@ -1321,8 +1279,7 @@ BAbstractSpinner::AllArchived(BMessage* into) const
 }
 
 
-status_t
-BAbstractSpinner::AllUnarchived(const BMessage* from)
+status_t BAbstractSpinner::AllUnarchived(const BMessage* from)
 {
 	BUnarchiver unarchiver(from);
 
@@ -1355,8 +1312,7 @@ BAbstractSpinner::AllUnarchived(const BMessage* from)
 }
 
 
-void
-BAbstractSpinner::DoLayout()
+void BAbstractSpinner::DoLayout()
 {
 	if ((Flags() & B_SUPPORTS_LAYOUT) == 0)
 		return;
@@ -1400,8 +1356,7 @@ BAbstractSpinner::DoLayout()
 }
 
 
-void
-BAbstractSpinner::LayoutInvalidated(bool descendants)
+void BAbstractSpinner::LayoutInvalidated(bool descendants)
 {
 	if (fLayoutData != NULL)
 		fLayoutData->valid = false;
@@ -1411,8 +1366,7 @@ BAbstractSpinner::LayoutInvalidated(bool descendants)
 //	#pragma mark - BAbstractSpinner private methods
 
 
-void
-BAbstractSpinner::_DrawLabel(BRect updateRect)
+void BAbstractSpinner::_DrawLabel(BRect updateRect)
 {
 	BRect rect(Bounds());
 	rect.right = fDivider;
@@ -1456,8 +1410,7 @@ BAbstractSpinner::_DrawLabel(BRect updateRect)
 }
 
 
-void
-BAbstractSpinner::_DrawTextView(BRect updateRect)
+void BAbstractSpinner::_DrawTextView(BRect updateRect)
 {
 	BRect rect = fTextView->Frame();
 	rect.InsetBy(-kFrameMargin, -kFrameMargin);
@@ -1477,8 +1430,7 @@ BAbstractSpinner::_DrawTextView(BRect updateRect)
 }
 
 
-void
-BAbstractSpinner::_InitObject()
+void BAbstractSpinner::_InitObject()
 {
 	rgb_color bgColor = ui_color(B_PANEL_BACKGROUND_COLOR);
 	SetViewColor(bgColor);
@@ -1527,8 +1479,7 @@ BAbstractSpinner::_InitObject()
 }
 
 
-void
-BAbstractSpinner::_LayoutTextView()
+void BAbstractSpinner::_LayoutTextView()
 {
 	BRect rect;
 	if (fLayoutData->text_view_layout_item != NULL) {
@@ -1560,8 +1511,7 @@ BAbstractSpinner::_LayoutTextView()
 }
 
 
-void
-BAbstractSpinner::_UpdateFrame()
+void BAbstractSpinner::_UpdateFrame()
 {
 	if (fLayoutData->label_layout_item == NULL
 		|| fLayoutData->text_view_layout_item == NULL) {
@@ -1590,8 +1540,7 @@ BAbstractSpinner::_UpdateFrame()
 }
 
 
-void
-BAbstractSpinner::_UpdateTextViewColors(bool enable)
+void BAbstractSpinner::_UpdateTextViewColors(bool enable)
 {
 	rgb_color textColor;
 	rgb_color bgColor;
@@ -1620,8 +1569,7 @@ BAbstractSpinner::_UpdateTextViewColors(bool enable)
 }
 
 
-void
-BAbstractSpinner::_ValidateLayoutData()
+void BAbstractSpinner::_ValidateLayoutData()
 {
 	if (fLayoutData->valid)
 		return;

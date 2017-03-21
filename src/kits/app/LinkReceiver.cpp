@@ -40,7 +40,7 @@
 
 //#define TRACE_LINK_RECEIVER_GRADIENTS
 #ifdef TRACE_LINK_RECEIVER_GRADIENTS
-#	include <OS.h>
+#	include <kernel/OS.h>
 #	define GTRACE(x) debug_printf x
 #else
 #	define GTRACE(x) ;
@@ -65,15 +65,13 @@ LinkReceiver::~LinkReceiver()
 }
 
 
-void
-LinkReceiver::SetPort(port_id port)
+void LinkReceiver::SetPort(port_id port)
 {
 	fReceivePort = port;
 }
 
 
-status_t
-LinkReceiver::GetNextMessage(int32 &code, bigtime_t timeout)
+status_t LinkReceiver::GetNextMessage(int32 &code, bigtime_t timeout)
 {
 	fReadError = B_OK;
 
@@ -119,16 +117,14 @@ LinkReceiver::GetNextMessage(int32 &code, bigtime_t timeout)
 }
 
 
-bool
-LinkReceiver::HasMessages() const
+bool LinkReceiver::HasMessages() const
 {
 	return fDataSize - (fRecvStart + fReplySize) > 0
 		|| port_count(fReceivePort) > 0;
 }
 
 
-bool
-LinkReceiver::NeedsReply() const
+bool LinkReceiver::NeedsReply() const
 {
 	if (fReplySize == 0)
 		return false;
@@ -138,8 +134,7 @@ LinkReceiver::NeedsReply() const
 }
 
 
-int32
-LinkReceiver::Code() const
+int32 LinkReceiver::Code() const
 {
 	if (fReplySize == 0)
 		return B_ERROR;
@@ -149,8 +144,7 @@ LinkReceiver::Code() const
 }
 
 
-void
-LinkReceiver::ResetBuffer()
+void LinkReceiver::ResetBuffer()
 {
 	fRecvPosition = 0;
 	fRecvStart = 0;
@@ -159,8 +153,7 @@ LinkReceiver::ResetBuffer()
 }
 
 
-status_t
-LinkReceiver::AdjustReplyBuffer(bigtime_t timeout)
+status_t LinkReceiver::AdjustReplyBuffer(bigtime_t timeout)
 {
 	// Here we take advantage of the compiler's dead-code elimination
 	if (kInitialBufferSize == kMaxBufferSize) {
@@ -214,8 +207,7 @@ LinkReceiver::AdjustReplyBuffer(bigtime_t timeout)
 }
 
 
-status_t
-LinkReceiver::ReadFromPort(bigtime_t timeout)
+status_t LinkReceiver::ReadFromPort(bigtime_t timeout)
 {
 	// we are here so it means we finished reading the buffer contents
 	ResetBuffer();
@@ -261,8 +253,7 @@ LinkReceiver::ReadFromPort(bigtime_t timeout)
 }
 
 
-status_t
-LinkReceiver::Read(void *data, ssize_t passedSize)
+status_t LinkReceiver::Read(void *data, ssize_t passedSize)
 {
 //	STRACE(("info: LinkReceiver Read()ing %ld bytes...\n", size));
 	ssize_t size = passedSize;
@@ -314,8 +305,7 @@ LinkReceiver::Read(void *data, ssize_t passedSize)
 }
 
 
-status_t
-LinkReceiver::ReadString(char** _string, size_t* _length)
+status_t LinkReceiver::ReadString(char** _string, size_t* _length)
 {
 	int32 length = 0;
 	status_t status = Read<int32>(&length);
@@ -360,8 +350,7 @@ err:
 }
 
 
-status_t
-LinkReceiver::ReadString(BString &string, size_t* _length)
+status_t LinkReceiver::ReadString(BString &string, size_t* _length)
 {
 	int32 length = 0;
 	status_t status = Read<int32>(&length);
@@ -405,8 +394,7 @@ err:
 }
 
 
-status_t
-LinkReceiver::ReadString(char *buffer, size_t bufferLength)
+status_t LinkReceiver::ReadString(char *buffer, size_t bufferLength)
 {
 	int32 length = 0;
 	status_t status = Read<int32>(&length);
@@ -440,8 +428,7 @@ err:
 	return status;
 }
 
-status_t
-LinkReceiver::ReadRegion(BRegion* region)
+status_t LinkReceiver::ReadRegion(BRegion* region)
 {
 	status_t status = Read(&region->fCount, sizeof(int32));
 	if (status >= B_OK)
@@ -481,8 +468,7 @@ gradient_for_type(BGradient::Type type)
 }
 
 
-status_t
-LinkReceiver::ReadGradient(BGradient** _gradient)
+status_t LinkReceiver::ReadGradient(BGradient** _gradient)
 {
 	GTRACE(("LinkReceiver::ReadGradient\n"));
 

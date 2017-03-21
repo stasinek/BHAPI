@@ -83,8 +83,7 @@ BDirMenu::~BDirMenu()
 }
 
 
-void
-BDirMenu::Populate(const BEntry* startEntry, BWindow* originatingWindow,
+void BDirMenu::Populate(const BEntry* startEntry, BWindow* originatingWindow,
 	bool includeStartEntry, bool select, bool reverse, bool addShortcuts,
 	bool navMenuEntries)
 {
@@ -205,8 +204,7 @@ BDirMenu::Populate(const BEntry* startEntry, BWindow* originatingWindow,
 }
 
 
-void
-BDirMenu::AddItemToDirMenu(const BEntry* entry, BWindow* originatingWindow,
+void BDirMenu::AddItemToDirMenu(const BEntry* entry, BWindow* originatingWindow,
 	bool atEnd, bool addShortcuts, bool navMenuEntries)
 {
 	Model model(entry);
@@ -263,8 +261,7 @@ BDirMenu::AddItemToDirMenu(const BEntry* entry, BWindow* originatingWindow,
 }
 
 
-void
-BDirMenu::AddDisksIconToMenu(bool atEnd)
+void BDirMenu::AddDisksIconToMenu(bool atEnd)
 {
 	BEntry entry("/");
 	Model model(&entry);

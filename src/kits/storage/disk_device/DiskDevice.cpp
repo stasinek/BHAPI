@@ -66,8 +66,7 @@ BDiskDevice::~BDiskDevice()
 /*!	\brief Returns whether the device contains a media.
 	\return \c true, if the device contains a media, \c false otherwise.
 */
-bool
-BDiskDevice::HasMedia() const
+bool BDiskDevice::HasMedia() const
 {
 	return fDeviceData
 		&& (fDeviceData->device_flags & B_DISK_DEVICE_HAS_MEDIA) != 0;
@@ -78,8 +77,7 @@ BDiskDevice::HasMedia() const
 /*!	\brief Returns whether the device media are removable.
 	\return \c true, if the device media are removable, \c false otherwise.
 */
-bool
-BDiskDevice::IsRemovableMedia() const
+bool BDiskDevice::IsRemovableMedia() const
 {
 	return fDeviceData
 		&& (fDeviceData->device_flags & B_DISK_DEVICE_REMOVABLE) != 0;
@@ -87,8 +85,7 @@ BDiskDevice::IsRemovableMedia() const
 
 
 // IsReadOnlyMedia
-bool
-BDiskDevice::IsReadOnlyMedia() const
+bool BDiskDevice::IsReadOnlyMedia() const
 {
 	return fDeviceData
 		&& (fDeviceData->device_flags & B_DISK_DEVICE_READ_ONLY) != 0;
@@ -96,8 +93,7 @@ BDiskDevice::IsReadOnlyMedia() const
 
 
 // IsWriteOnceMedia
-bool
-BDiskDevice::IsWriteOnceMedia() const
+bool BDiskDevice::IsWriteOnceMedia() const
 {
 	return fDeviceData
 		&& (fDeviceData->device_flags & B_DISK_DEVICE_WRITE_ONCE) != 0;
@@ -117,8 +113,7 @@ BDiskDevice::IsWriteOnceMedia() const
 	- \c B_BAD_VALUE: The device media is not removable.
 	- other error codes
 */
-status_t
-BDiskDevice::Eject(bool update)
+status_t BDiskDevice::Eject(bool update)
 {
 	if (fDeviceData == NULL)
 		return B_NO_INIT;
@@ -146,8 +141,7 @@ BDiskDevice::Eject(bool update)
 
 
 // SetTo
-status_t
-BDiskDevice::SetTo(partition_id id)
+status_t BDiskDevice::SetTo(partition_id id)
 {
 	return _SetTo(id, true, 0);
 }
@@ -166,8 +160,7 @@ BDiskDevice::SetTo(partition_id id)
 		   May be \c NULL. Is not touched, if the method fails.
 	\return \c B_OK, if the update went fine, another error code otherwise.
 */
-status_t
-BDiskDevice::Update(bool* updated)
+status_t BDiskDevice::Update(bool* updated)
 {
 	if (InitCheck() != B_OK)
 		return InitCheck();
@@ -189,8 +182,7 @@ BDiskDevice::Update(bool* updated)
 
 
 // Unset
-void
-BDiskDevice::Unset()
+void BDiskDevice::Unset()
 {
 	BPartition::_Unset();
 	free(fDeviceData);
@@ -199,16 +191,14 @@ BDiskDevice::Unset()
 
 
 // InitCheck
-status_t
-BDiskDevice::InitCheck() const
+status_t BDiskDevice::InitCheck() const
 {
 	return fDeviceData ? B_OK : B_NO_INIT;
 }
 
 
 // GetPath
-status_t
-BDiskDevice::GetPath(BPath* path) const
+status_t BDiskDevice::GetPath(BPath* path) const
 {
 	if (!path || !fDeviceData)
 		return B_BAD_VALUE;
@@ -217,8 +207,7 @@ BDiskDevice::GetPath(BPath* path) const
 
 
 // IsModified
-bool
-BDiskDevice::IsModified() const
+bool BDiskDevice::IsModified() const
 {
 	if (InitCheck() != B_OK)
 		return false;
@@ -248,8 +237,7 @@ BDiskDevice::IsModified() const
  * 	\note This call locks the device. You need to call \ref CommitModifications
  * 		or \ref CancelModifications to unlock it.
  */
-status_t
-BDiskDevice::PrepareModifications()
+status_t BDiskDevice::PrepareModifications()
 {
 	TRACE("%p->BDiskDevice::PrepareModifications()\n", this);
 
@@ -301,8 +289,7 @@ BDiskDevice::PrepareModifications()
  * 	call.
  * 	Unlocks the device for further use.
  */
-status_t
-BDiskDevice::CommitModifications(bool synchronously,
+status_t BDiskDevice::CommitModifications(bool synchronously,
 	BMessenger progressMessenger, bool receiveCompleteProgressUpdates)
 {
 // TODO: Support parameters!
@@ -336,8 +323,7 @@ BDiskDevice::CommitModifications(bool synchronously,
  *
  * 	Nothing is written on the device and it is unlocked for further use.
  */
-status_t
-BDiskDevice::CancelModifications()
+status_t BDiskDevice::CancelModifications()
 {
 	status_t error = InitCheck();
 	if (error != B_OK)
@@ -359,8 +345,7 @@ BDiskDevice::CancelModifications()
 /*!	\brief Returns whether or not this device is a virtual device backed
 		up by a file.
 */
-bool
-BDiskDevice::IsFile() const
+bool BDiskDevice::IsFile() const
 {
 	return fDeviceData
 		&& (fDeviceData->device_flags & B_DISK_DEVICE_IS_FILE) != 0;
@@ -368,8 +353,7 @@ BDiskDevice::IsFile() const
 
 
 /*!	\brief Retrieves the path of the file backing up the disk device.*/
-status_t
-BDiskDevice::GetFilePath(BPath* path) const
+status_t BDiskDevice::GetFilePath(BPath* path) const
 {
 	if (path == NULL)
 		return B_BAD_VALUE;
@@ -405,8 +389,7 @@ BDiskDevice::operator=(const BDiskDevice&)
 
 
 // _GetData
-status_t
-BDiskDevice::_GetData(partition_id id, bool deviceOnly, size_t neededSize,
+status_t BDiskDevice::_GetData(partition_id id, bool deviceOnly, size_t neededSize,
 	user_disk_device_data** data)
 {
 	// get the device data
@@ -448,8 +431,7 @@ BDiskDevice::_GetData(partition_id id, bool deviceOnly, size_t neededSize,
 
 
 // _SetTo
-status_t
-BDiskDevice::_SetTo(partition_id id, bool deviceOnly, size_t neededSize)
+status_t BDiskDevice::_SetTo(partition_id id, bool deviceOnly, size_t neededSize)
 {
 	Unset();
 
@@ -470,8 +452,7 @@ BDiskDevice::_SetTo(partition_id id, bool deviceOnly, size_t neededSize)
 
 
 // _SetTo
-status_t
-BDiskDevice::_SetTo(user_disk_device_data* data)
+status_t BDiskDevice::_SetTo(user_disk_device_data* data)
 {
 	Unset();
 
@@ -494,8 +475,7 @@ BDiskDevice::_SetTo(user_disk_device_data* data)
 
 
 // _Update
-status_t
-BDiskDevice::_Update(user_disk_device_data* data, bool* updated)
+status_t BDiskDevice::_Update(user_disk_device_data* data, bool* updated)
 {
 	if (!data || !fDeviceData || ID() != data->device_partition_data.id)
 		return B_BAD_VALUE;
@@ -531,16 +511,14 @@ BDiskDevice::_Update(user_disk_device_data* data, bool* updated)
 
 
 // _AcceptVisitor
-bool
-BDiskDevice::_AcceptVisitor(BDiskDeviceVisitor* visitor, int32 level)
+bool BDiskDevice::_AcceptVisitor(BDiskDeviceVisitor* visitor, int32 level)
 {
 	return visitor->Visit(this);
 }
 
 
 // _ClearUserData
-void
-BDiskDevice::_ClearUserData(user_partition_data* data)
+void BDiskDevice::_ClearUserData(user_partition_data* data)
 {
 	data->user_data = NULL;
 

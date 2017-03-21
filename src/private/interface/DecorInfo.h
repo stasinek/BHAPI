@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Public domain source code.
  *
  * Author:
@@ -14,120 +14,117 @@
 #include <ObjectList.h>
 #include <StringClass.h>
 
-
 class BWindow;
 
-
 namespace BPrivate {
-
 
 // NOTE: DecorInfo itself is not thread-safe
 class DecorInfo {
 public:
-								DecorInfo();
-								DecorInfo(const BString& path);
-								DecorInfo(const entry_ref& ref);
-								~DecorInfo();
+                                DecorInfo();
+                                DecorInfo(const BString& path);
+                                DecorInfo(const entry_ref& ref);
+                                ~DecorInfo();
 
-			status_t			SetTo(const entry_ref& ref);
-			status_t			SetTo(BString path);
-			status_t			InitCheck()	const;
-			void				Unset();
+            status_t			SetTo(const entry_ref& ref);
+            status_t			SetTo(BString path);
+            status_t			InitCheck()	const;
+            void				Unset();
 
-			bool				IsDefault()	const;
+            bool				IsDefault()	const;
 
-			BString				Path()	const;
-					// Returns "Default" for the default decorator
+            BString				Path()	const;
+                    // Returns "Default" for the default decorator
 
-			const entry_ref*	Ref() const;
-				// Returns NULL if virtual (default) or InitCheck() != B_OK
-				// The ref returned may NOT be the same as the one given to
-				// SetTo or the constructor - we may have traversed a Symlink!
+            const entry_ref*	Ref() const;
+                // Returns NULL if virtual (default) or InitCheck() != B_OK
+                // The ref returned may NOT be the same as the one given to
+                // SetTo or the constructor - we may have traversed a Symlink!
 
-			BString				Name() const;
-			BString				ShortcutName() const;
+            BString				Name() const;
+            BString				ShortcutName() const;
 
-			BString				Authors() const;
-			BString				ShortDescription() const;
-			BString				LongDescription() const;
-			BString				LicenseURL() const;
-			BString				LicenseName() const;
-			BString				SupportURL() const;
+            BString				Authors() const;
+            BString				ShortDescription() const;
+            BString				LongDescription() const;
+            BString				LicenseURL() const;
+            BString				LicenseName() const;
+            BString				SupportURL() const;
 
-			float				Version() const;
-			time_t				ModificationTime() const;
+            float				Version() const;
+            time_t				ModificationTime() const;
 
-			bool				CheckForChanges(bool &deleted);
-
-private:
-			void				_Init(bool is_update = false);
+            bool				CheckForChanges(bool &deleted);
 
 private:
-			entry_ref			fRef;
+            void				_Init(bool is_update = false);
 
-			BString				fPath;
-			BString				fName;
-			BString				fAuthors;
-			BString				fShortDescription;
-			BString				fLongDescription;
-			BString				fLicenseURL;
-			BString				fLicenseName;
-			BString				fSupportURL;
+private:
+            entry_ref			fRef;
 
-			float				fVersion;
+            BString				fPath;
+            BString				fName;
+            BString				fAuthors;
+            BString				fShortDescription;
+            BString				fLongDescription;
+            BString				fLicenseURL;
+            BString				fLicenseName;
+            BString				fSupportURL;
 
-			time_t				fModificationTime;
+            float				fVersion;
 
-			status_t			fInitStatus;
+            time_t				fModificationTime;
+
+            status_t			fInitStatus;
 };
 
 
 class DecorInfoUtility {
 public:
-								DecorInfoUtility(bool scanNow = true);
-									// NOTE: When scanNow is passed false,
-									// scanning will be performed lazily, such
-									// as in CountDecorators() and other
-									// methods.
+                                DecorInfoUtility(bool scanNow = true);
+                                    // NOTE: When scanNow is passed false,
+                                    // scanning will be performed lazily, such
+                                    // as in CountDecorators() and other
+                                    // methods.
 
-								~DecorInfoUtility();
+                                ~DecorInfoUtility();
 
-			status_t			ScanDecorators();
-									// Can also be used to rescan for changes.
-									// Warning: potentially destructive as we
-									// will remove all DecorInfo objects which
-									// no longer have a file system cousin.
-									// TODO: Would a call-back mechanism be
-									// worthwhile here?
+            status_t			ScanDecorators();
+                                    // Can also be used to rescan for changes.
+                                    // Warning: potentially destructive as we
+                                    // will remove all DecorInfo objects which
+                                    // no longer have a file system cousin.
+                                    // TODO: Would a call-back mechanism be
+                                    // worthwhile here?
 
-			int32				CountDecorators();
+            int32				CountDecorators();
 
-			DecorInfo*			DecoratorAt(int32);
+            DecorInfo*			DecoratorAt(int32);
 
-			DecorInfo*			FindDecorator(const BString& string);
-									// Checks for ref.name, path, fName, and
-									// "Default," an empty-string returns the
-									// current decorator NULL on match failure
+            DecorInfo*			FindDecorator(const BString& string);
+                                    // Checks for ref.name, path, fName, and
+                                    // "Default," an empty-string returns the
+                                    // current decorator NULL on match failure
 
-			DecorInfo*			CurrentDecorator();
-			DecorInfo*			DefaultDecorator();
+            DecorInfo*			CurrentDecorator();
+            DecorInfo*			DefaultDecorator();
 
-			bool				IsCurrentDecorator(DecorInfo* decor);
+            bool				IsCurrentDecorator(DecorInfo* decor);
 
-			status_t			SetDecorator(DecorInfo* decor);
-			status_t			SetDecorator(int32);
+            status_t			SetDecorator(DecorInfo* decor);
+            status_t			SetDecorator(int32);
 
-			status_t			Preview(DecorInfo* decor, BWindow* window);
-
-private:
-			DecorInfo*			_FindDecor(const BString& path);
-
-			status_t			_ScanDecorators(BDirectory decoratorDirectory);
+            status_t			Preview(DecorInfo* decor, BWindow* window);
 
 private:
-			BObjectList<DecorInfo> fList;
-			BLocker				fLock;
-			bool				fHasScanned;
+            DecorInfo*			_FindDecor(const BString& path);
+
+            status_t			_ScanDecorators(BDirectory decoratorDirectory);
+
+private:
+            BObjectList<DecorInfo> fList;
+            BLocker				fLock;
+            bool				fHasScanned;
 };
 
 

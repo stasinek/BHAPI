@@ -249,8 +249,7 @@ get_attribute_class(uint32 name, uint32 form)
 }
 
 
-const char*
-get_attribute_name_name(uint32 name)
+const char*  get_attribute_name_name(uint32 name)
 {
 	if (name < DW_AT_linkage_name)
 		return sAttributeNameInfos[name].name;
@@ -264,8 +263,7 @@ get_attribute_name_name(uint32 name)
 }
 
 
-const char*
-get_attribute_form_name(uint32 form)
+const char*  get_attribute_form_name(uint32 form)
 {
 	return form < kAttributeFormInfoCount
 		? sAttributeFormInfos[form].name : NULL;

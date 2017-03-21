@@ -32,8 +32,7 @@ BPackageReader::~BPackageReader()
 }
 
 
-status_t
-BPackageReader::Init(const char* fileName)
+status_t BPackageReader::Init(const char* fileName)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;
@@ -42,8 +41,7 @@ BPackageReader::Init(const char* fileName)
 }
 
 
-status_t
-BPackageReader::Init(int fd, bool keepFD)
+status_t BPackageReader::Init(int fd, bool keepFD)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;
@@ -52,8 +50,7 @@ BPackageReader::Init(int fd, bool keepFD)
 }
 
 
-status_t
-BPackageReader::ParseContent(BPackageContentHandler* contentHandler)
+status_t BPackageReader::ParseContent(BPackageContentHandler* contentHandler)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;
@@ -62,8 +59,7 @@ BPackageReader::ParseContent(BPackageContentHandler* contentHandler)
 }
 
 
-status_t
-BPackageReader::ParseContent(BLowLevelPackageContentHandler* contentHandler)
+status_t BPackageReader::ParseContent(BLowLevelPackageContentHandler* contentHandler)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;

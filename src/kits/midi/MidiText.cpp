@@ -30,8 +30,7 @@ BMidiText::~BMidiText()
 }
 
 
-void 
-BMidiText::NoteOff(
+void BMidiText::NoteOff(
 	uchar channel, uchar note, uchar velocity, uint32 time)
 {
 	_WaitAndPrint(time);
@@ -41,8 +40,7 @@ BMidiText::NoteOff(
 }
 
 
-void 
-BMidiText::NoteOn(
+void BMidiText::NoteOn(
 	uchar channel, uchar note, uchar velocity, uint32 time)
 {
 	_WaitAndPrint(time);
@@ -52,8 +50,7 @@ BMidiText::NoteOn(
 }
 
 
-void 
-BMidiText::KeyPressure(
+void BMidiText::KeyPressure(
 	uchar channel, uchar note, uchar pressure, uint32 time)
 {
 	_WaitAndPrint(time);
@@ -63,8 +60,7 @@ BMidiText::KeyPressure(
 }
 
 
-void 
-BMidiText::ControlChange(
+void BMidiText::ControlChange(
 	uchar channel, uchar controlNumber, uchar controlValue, uint32 time)
 {
 	_WaitAndPrint(time);
@@ -74,8 +70,7 @@ BMidiText::ControlChange(
 }
 
 
-void 
-BMidiText::ProgramChange(
+void BMidiText::ProgramChange(
 	uchar channel, uchar programNumber, uint32 time)
 {
 	_WaitAndPrint(time);
@@ -85,8 +80,7 @@ BMidiText::ProgramChange(
 }
 
 
-void 
-BMidiText::ChannelPressure(uchar channel, uchar pressure, uint32 time)
+void BMidiText::ChannelPressure(uchar channel, uchar pressure, uint32 time)
 {
 	_WaitAndPrint(time);
 	printf(
@@ -95,8 +89,7 @@ BMidiText::ChannelPressure(uchar channel, uchar pressure, uint32 time)
 }
 
 
-void 
-BMidiText::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
+void BMidiText::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
 {
 	_WaitAndPrint(time);
 	printf(
@@ -105,8 +98,7 @@ BMidiText::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
 }
 
 
-void 
-BMidiText::SystemExclusive(void* data, size_t length, uint32 time)
+void BMidiText::SystemExclusive(void* data, size_t length, uint32 time)
 {
 	_WaitAndPrint(time);
 
@@ -117,8 +109,7 @@ BMidiText::SystemExclusive(void* data, size_t length, uint32 time)
 }
 
 
-void 
-BMidiText::SystemCommon(
+void BMidiText::SystemCommon(
 	uchar status, uchar data1, uchar data2, uint32 time)
 {
 	_WaitAndPrint(time);
@@ -128,16 +119,14 @@ BMidiText::SystemCommon(
 }
 
 
-void 
-BMidiText::SystemRealTime(uchar status, uint32 time)
+void BMidiText::SystemRealTime(uchar status, uint32 time)
 {
 	_WaitAndPrint(time);
 	printf("SYSTEM REAL TIME; status = %d\n", status);
 }
 
 
-void 
-BMidiText::ResetTimer(bool start)
+void BMidiText::ResetTimer(bool start)
 {
 	fStartTime = start ? B_NOW : 0;
 }
@@ -148,16 +137,14 @@ void BMidiText::_ReservedMidiText2() { }
 void BMidiText::_ReservedMidiText3() { }
 
 
-void 
-BMidiText::Run()
+void BMidiText::Run()
 {
 	while (KeepRunning())
 		snooze(50000);
 }
 
 
-void 
-BMidiText::_WaitAndPrint(uint32 time) 
+void BMidiText::_WaitAndPrint(uint32 time) 
 {
 	if (fStartTime == 0) 
 		fStartTime = time;

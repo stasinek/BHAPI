@@ -126,8 +126,7 @@ BSpinner::Instantiate(BMessage* data)
 }
 
 
-status_t
-BSpinner::Archive(BMessage* data, bool deep) const
+status_t BSpinner::Archive(BMessage* data, bool deep) const
 {
 	status_t status = BAbstractSpinner::Archive(data, deep);
 	data->AddString("class", "Spinner");
@@ -145,8 +144,7 @@ BSpinner::Archive(BMessage* data, bool deep) const
 }
 
 
-status_t
-BSpinner::GetSupportedSuites(BMessage* message)
+status_t BSpinner::GetSupportedSuites(BMessage* message)
 {
 	message->AddString("suites", "suite/vnd.Haiku-intenger-spinner");
 
@@ -157,8 +155,7 @@ BSpinner::GetSupportedSuites(BMessage* message)
 }
 
 
-void
-BSpinner::AttachedToWindow()
+void BSpinner::AttachedToWindow()
 {
 	SetValue(fValue);
 
@@ -166,22 +163,19 @@ BSpinner::AttachedToWindow()
 }
 
 
-void
-BSpinner::Decrement()
+void BSpinner::Decrement()
 {
 	SetValue(Value() - 1);
 }
 
 
-void
-BSpinner::Increment()
+void BSpinner::Increment()
 {
 	SetValue(Value() + 1);
 }
 
 
-void
-BSpinner::SetEnabled(bool enable)
+void BSpinner::SetEnabled(bool enable)
 {
 	if (IsEnabled() == enable)
 		return;
@@ -193,8 +187,7 @@ BSpinner::SetEnabled(bool enable)
 }
 
 
-void
-BSpinner::SetMaxValue(int32 max)
+void BSpinner::SetMaxValue(int32 max)
 {
 	fMaxValue = max;
 	if (fValue > fMaxValue)
@@ -202,8 +195,7 @@ BSpinner::SetMaxValue(int32 max)
 }
 
 
-void
-BSpinner::SetMinValue(int32 min)
+void BSpinner::SetMinValue(int32 min)
 {
 	fMinValue = min;
 	if (fValue < fMinValue)
@@ -211,24 +203,21 @@ BSpinner::SetMinValue(int32 min)
 }
 
 
-void
-BSpinner::Range(int32* min, int32* max)
+void BSpinner::Range(int32* min, int32* max)
 {
 	*min = fMinValue;
 	*max = fMaxValue;
 }
 
 
-void
-BSpinner::SetRange(int32 min, int32 max)
+void BSpinner::SetRange(int32 min, int32 max)
 {
 	SetMinValue(min);
 	SetMaxValue(max);
 }
 
 
-void
-BSpinner::SetValue(int32 value)
+void BSpinner::SetValue(int32 value)
 {
 	// clip to range
 	if (value < fMinValue)
@@ -256,8 +245,7 @@ BSpinner::SetValue(int32 value)
 }
 
 
-void
-BSpinner::SetValueFromText()
+void BSpinner::SetValueFromText()
 {
 	SetValue(atol(TextView()->Text()));
 }
@@ -266,8 +254,7 @@ BSpinner::SetValueFromText()
 //	#pragma mark - BSpinner private methods
 
 
-void
-BSpinner::_InitObject()
+void BSpinner::_InitObject()
 {
 	fMaxValue = INT32_MIN;
 	fMinValue = INT32_MAX;

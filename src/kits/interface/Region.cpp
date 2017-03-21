@@ -229,8 +229,7 @@ __be_int32 BRegion::CountRects() const
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-__be_int32
-BRegion::CountRects() const
+__be_int32 BRegion::CountRects() const
 {
 	return fRects.CountItems();
 }
@@ -295,8 +294,7 @@ BRegion BRegion::ScaleCopy(float <emphasis>scaling</emphasis>)
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-void
-BRegion::Set(BRect rect)
+void BRegion::Set(BRect rect)
 {
 	MakeEmpty();
 
@@ -315,8 +313,7 @@ BRegion::Set(BRect rect)
 }
 
 
-void
-BRegion::MakeEmpty()
+void BRegion::MakeEmpty()
 {
 	for(__be_int32 i = 0; i < fRects.CountItems(); i++)
 	{
@@ -372,8 +369,7 @@ inline BRect* rect_exclude(BRect s, BRect r,  __be_int8 *nRects)
 }
 
 
-bool
-BRegion::Include(BRect rect)
+bool BRegion::Include(BRect rect)
 {
 	if(rect.IsValid() == false) return false;
 
@@ -490,8 +486,7 @@ BRegion::Include(BRect rect)
 }
 
 
-bool
-BRegion::Include(const BRegion *region)
+bool BRegion::Include(const BRegion *region)
 {
 	if(region == NULL || region->CountRects() <= 0) return false;
 
@@ -521,8 +516,7 @@ BRegion::Include(const BRegion *region)
 }
 
 
-bool
-BRegion::Exclude(BRect r)
+bool BRegion::Exclude(BRect r)
 {
 	if(Intersects(r) == false) return true;
 
@@ -580,8 +574,7 @@ BRegion::Exclude(BRect r)
 }
 
 
-bool
-BRegion::Exclude(const BRegion *region)
+bool BRegion::Exclude(const BRegion *region)
 {
 	if(Intersects(region) == false) return true;
 
@@ -611,8 +604,7 @@ BRegion::Exclude(const BRegion *region)
 }
 
 
-void
-BRegion::OffsetBy(float dx, float dy)
+void BRegion::OffsetBy(float dx, float dy)
 {
 	if(fRects.CountItems() <= 0) return;
 
@@ -625,8 +617,7 @@ BRegion::OffsetBy(float dx, float dy)
 }
 
 
-void
-BRegion::OffsetBy(BPoint pt)
+void BRegion::OffsetBy(BPoint pt)
 {
 	OffsetBy(pt.x, pt.y);
 }
@@ -703,15 +694,13 @@ void BRegion::PrintToStream() const;
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-bool
-BRegion::Intersects(BRect rect) const
+bool BRegion::Intersects(BRect rect) const
 {
 	return Intersects(rect.left, rect.top, rect.right, rect.bottom);
 }
 
 
-bool
-BRegion::Intersects(float l, float t, float r, float b) const
+bool BRegion::Intersects(float l, float t, float r, float b) const
 {
 	if(fFrame.Intersects(l, t, r, b) == false) return false;
 
@@ -726,8 +715,7 @@ BRegion::Intersects(float l, float t, float r, float b) const
 }
 
 
-bool
-BRegion::Intersects(const BRegion *region) const
+bool BRegion::Intersects(const BRegion *region) const
 {
 	if(!region || fFrame.Intersects(region->fFrame) == false) return false;
 
@@ -748,15 +736,13 @@ BRegion::Intersects(const BRegion *region) const
 }
 
 
-bool
-BRegion::Contains(BPoint pt) const
+bool BRegion::Contains(BPoint pt) const
 {
 	return Contains(pt.x, pt.y);
 }
 
 
-bool
-BRegion::Contains(float x, float y) const
+bool BRegion::Contains(float x, float y) const
 {
 	if(fFrame.Contains(x, y) == false) return false;
 
@@ -771,23 +757,20 @@ BRegion::Contains(float x, float y) const
 }
 
 
-bool
-BRegion::Contains(BRect rect) const
+bool BRegion::Contains(BRect rect) const
 {
 	BRegion aRegion(rect);
 	return Contains(&aRegion);
 }
 
 
-bool
-BRegion::Contains(float l, float t, float r, float b) const
+bool BRegion::Contains(float l, float t, float r, float b) const
 {
 	return Contains(BRect(l, t, r, b));
 }
 
 
-bool
-BRegion::Contains(const BRegion *region) const
+bool BRegion::Contains(const BRegion *region) const
 {
 	if(!region || fFrame.Contains(region->fFrame) == false) return false;
 
@@ -800,8 +783,7 @@ BRegion::Contains(const BRegion *region) const
 }
 
 
-void
-BRegion::PrintToStream() const
+void BRegion::PrintToStream() const
 {
 	fFrame.PrintToStream();
 	BHAPI_OUTPUT("\n");
@@ -933,8 +915,7 @@ BRegion::operator|=(const BRegion &region)
 }
 
 
-void
-BRegion::Scale(float scaling)
+void BRegion::Scale(float scaling)
 {
 	if(fRects.CountItems() <= 0 || scaling < 0 || scaling == 1) return;
 

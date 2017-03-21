@@ -67,8 +67,7 @@ private:
 };
 
 
-inline void
-BDirMenu::SetMenuBar(BMenuBar* bar)
+inline void BDirMenu::SetMenuBar(BMenuBar* bar)
 {
 	fMenuBar = bar;
 }

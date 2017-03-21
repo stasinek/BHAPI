@@ -143,16 +143,14 @@ HeapMemberGetLink<Element, Key, LinkMember>::operator()(Element* element) const
 
 
 template<typename Key>
-bool
-HeapLesserCompare<Key>::operator()(Key a, Key b)
+bool HeapLesserCompare<Key>::operator()(Key a, Key b)
 {
 	return a < b;
 }
 
 
 template<typename Key>
-bool
-HeapGreaterCompare<Key>::operator()(Key a, Key b)
+bool HeapGreaterCompare<Key>::operator()(Key a, Key b)
 {
 	return a > b;
 }
@@ -205,8 +203,7 @@ HEAP_CLASS_NAME::GetKey(Element* element)
 
 
 HEAP_TEMPLATE_LIST
-void
-HEAP_CLASS_NAME::ModifyKey(Element* element, Key newKey)
+void HEAP_CLASS_NAME::ModifyKey(Element* element, Key newKey)
 {
 	HeapLink<Element, Key>* link = sGetLink(element);
 
@@ -222,8 +219,7 @@ HEAP_CLASS_NAME::ModifyKey(Element* element, Key newKey)
 
 
 HEAP_TEMPLATE_LIST
-void
-HEAP_CLASS_NAME::RemoveRoot()
+void HEAP_CLASS_NAME::RemoveRoot()
 {
 	ASSERT(fLastElement > 0);
 
@@ -245,8 +241,7 @@ HEAP_CLASS_NAME::RemoveRoot()
 
 
 HEAP_TEMPLATE_LIST
-status_t
-HEAP_CLASS_NAME::Insert(Element* element, Key key)
+status_t HEAP_CLASS_NAME::Insert(Element* element, Key key)
 {
 	if (fLastElement == fSize) {
 		status_t result = _GrowHeap();
@@ -270,8 +265,7 @@ HEAP_CLASS_NAME::Insert(Element* element, Key key)
 
 
 HEAP_TEMPLATE_LIST
-status_t
-HEAP_CLASS_NAME::_GrowHeap(int minimalSize)
+status_t HEAP_CLASS_NAME::_GrowHeap(int minimalSize)
 {
 	int newSize = max_c(max_c(fSize * 2, 4), minimalSize);
 
@@ -289,8 +283,7 @@ HEAP_CLASS_NAME::_GrowHeap(int minimalSize)
 
 
 HEAP_TEMPLATE_LIST
-void
-HEAP_CLASS_NAME::_MoveUp(HeapLink<Element, Key>* link)
+void HEAP_CLASS_NAME::_MoveUp(HeapLink<Element, Key>* link)
 {
 	while (true) {
 		int parent = (link->fIndex - 1) / 2;
@@ -311,8 +304,7 @@ HEAP_CLASS_NAME::_MoveUp(HeapLink<Element, Key>* link)
 
 
 HEAP_TEMPLATE_LIST
-void
-HEAP_CLASS_NAME::_MoveDown(HeapLink<Element, Key>* link)
+void HEAP_CLASS_NAME::_MoveDown(HeapLink<Element, Key>* link)
 {
 	int current;
 

@@ -511,8 +511,7 @@ Equation<QueryPolicy>::~Equation()
 
 
 template<typename QueryPolicy>
-status_t
-Equation<QueryPolicy>::InitCheck()
+status_t Equation<QueryPolicy>::InitCheck()
 {
 	if (fAttribute == NULL || fString == NULL
 		|| Term<QueryPolicy>::fOp == OP_NONE) {
@@ -524,8 +523,7 @@ Equation<QueryPolicy>::InitCheck()
 
 
 template<typename QueryPolicy>
-status_t
-Equation<QueryPolicy>::ParseQuotedString(char** _start, char** _end)
+status_t Equation<QueryPolicy>::ParseQuotedString(char** _start, char** _end)
 {
 	char* start = *_start;
 	char quote = *start++;
@@ -546,8 +544,7 @@ Equation<QueryPolicy>::ParseQuotedString(char** _start, char** _end)
 
 
 template<typename QueryPolicy>
-char*
-Equation<QueryPolicy>::CopyString(char* start, char* end)
+char*  Equation<QueryPolicy>::CopyString(char* start, char* end)
 {
 	// end points to the last character of the string - and the length
 	// also has to include the null-termination
@@ -569,8 +566,7 @@ Equation<QueryPolicy>::CopyString(char* start, char* end)
 
 
 template<typename QueryPolicy>
-status_t
-Equation<QueryPolicy>::ConvertValue(type_code type)
+status_t Equation<QueryPolicy>::ConvertValue(type_code type)
 {
 	// Has the type already been converted?
 	if (type == fType)
@@ -632,8 +628,7 @@ Equation<QueryPolicy>::ConvertValue(type_code type)
 	call ConvertValue() before this one.
 */
 template<typename QueryPolicy>
-bool
-Equation<QueryPolicy>::CompareTo(const uint8* value, size_t size)
+bool Equation<QueryPolicy>::CompareTo(const uint8* value, size_t size)
 {
 	int32 compare;
 
@@ -667,8 +662,7 @@ Equation<QueryPolicy>::CompareTo(const uint8* value, size_t size)
 
 
 template<typename QueryPolicy>
-void
-Equation<QueryPolicy>::Complement()
+void Equation<QueryPolicy>::Complement()
 {
 	QUERY_D(if (fOp <= OP_EQUATION || fOp > OP_LESS_THAN_OR_EQUAL) {
 		QUERY_FATAL("op out of range!\n");
@@ -682,8 +676,7 @@ Equation<QueryPolicy>::Complement()
 
 
 template<typename QueryPolicy>
-status_t
-Equation<QueryPolicy>::MatchEmptyString()
+status_t Equation<QueryPolicy>::MatchEmptyString()
 {
 	// There is no matching attribute, we will just bail out if we
 	// already know that our value is not of a string type.
@@ -707,8 +700,7 @@ Equation<QueryPolicy>::MatchEmptyString()
 	wrong.
 */
 template<typename QueryPolicy>
-status_t
-Equation<QueryPolicy>::Match(Entry* entry, Node* node,
+status_t Equation<QueryPolicy>::Match(Entry* entry, Node* node,
 	const char* attributeName, int32 type, const uint8* key, size_t size)
 {
 	// get a pointer to the attribute in question
@@ -761,8 +753,7 @@ Equation<QueryPolicy>::Match(Entry* entry, Node* node,
 
 
 template<typename QueryPolicy>
-void
-Equation<QueryPolicy>::CalculateScore(Index &index)
+void Equation<QueryPolicy>::CalculateScore(Index &index)
 {
 	// As always, these values could be tuned and refined.
 	// And the code could also need some real world testing :-)
@@ -795,8 +786,7 @@ Equation<QueryPolicy>::CalculateScore(Index &index)
 
 
 template<typename QueryPolicy>
-status_t
-Equation<QueryPolicy>::PrepareQuery(Context* /*context*/, Index& index,
+status_t Equation<QueryPolicy>::PrepareQuery(Context* /*context*/, Index& index,
 	IndexIterator** iterator, bool queryNonIndexed)
 {
 	status_t status = QueryPolicy::IndexSetTo(index, fAttribute);
@@ -882,8 +872,7 @@ Equation<QueryPolicy>::PrepareQuery(Context* /*context*/, Index& index,
 
 
 template<typename QueryPolicy>
-status_t
-Equation<QueryPolicy>::GetNextMatching(Context* context,
+status_t Equation<QueryPolicy>::GetNextMatching(Context* context,
 	IndexIterator* iterator, struct dirent* dirent, size_t bufferSize)
 {
 	while (true) {
@@ -977,8 +966,7 @@ Equation<QueryPolicy>::GetNextMatching(Context* context,
 
 
 template<typename QueryPolicy>
-bool
-Equation<QueryPolicy>::NeedsEntry()
+bool Equation<QueryPolicy>::NeedsEntry()
 {
 	return strcmp(fAttribute, "name") == 0;
 }
@@ -1011,8 +999,7 @@ Operator<QueryPolicy>::~Operator()
 
 
 template<typename QueryPolicy>
-status_t
-Operator<QueryPolicy>::Match(Entry* entry, Node* node, const char* attribute,
+status_t Operator<QueryPolicy>::Match(Entry* entry, Node* node, const char* attribute,
 	int32 type, const uint8* key, size_t size)
 {
 	if (Term<QueryPolicy>::fOp == OP_AND) {
@@ -1045,8 +1032,7 @@ Operator<QueryPolicy>::Match(Entry* entry, Node* node, const char* attribute,
 
 
 template<typename QueryPolicy>
-void
-Operator<QueryPolicy>::Complement()
+void Operator<QueryPolicy>::Complement()
 {
 	if (Term<QueryPolicy>::fOp == OP_AND)
 		Term<QueryPolicy>::fOp = OP_OR;
@@ -1059,8 +1045,7 @@ Operator<QueryPolicy>::Complement()
 
 
 template<typename QueryPolicy>
-void
-Operator<QueryPolicy>::CalculateScore(Index &index)
+void Operator<QueryPolicy>::CalculateScore(Index &index)
 {
 	fLeft->CalculateScore(index);
 	fRight->CalculateScore(index);
@@ -1068,8 +1053,7 @@ Operator<QueryPolicy>::CalculateScore(Index &index)
 
 
 template<typename QueryPolicy>
-int32
-Operator<QueryPolicy>::Score() const
+int32 Operator<QueryPolicy>::Score() const
 {
 	if (Term<QueryPolicy>::fOp == OP_AND) {
 		// return the one with the better score
@@ -1088,8 +1072,7 @@ Operator<QueryPolicy>::Score() const
 
 
 template<typename QueryPolicy>
-status_t
-Operator<QueryPolicy>::InitCheck()
+status_t Operator<QueryPolicy>::InitCheck()
 {
 	if ((Term<QueryPolicy>::fOp != OP_AND && Term<QueryPolicy>::fOp != OP_OR)
 		|| fLeft == NULL || fLeft->InitCheck() < B_OK
@@ -1101,8 +1084,7 @@ Operator<QueryPolicy>::InitCheck()
 
 
 template<typename QueryPolicy>
-bool
-Operator<QueryPolicy>::NeedsEntry()
+bool Operator<QueryPolicy>::NeedsEntry()
 {
 	return ((fLeft && fLeft->NeedsEntry()) || (fRight && fRight->NeedsEntry()));
 }
@@ -1113,8 +1095,7 @@ Operator<QueryPolicy>::NeedsEntry()
 #ifdef DEBUG_QUERY
 
 template<typename QueryPolicy>
-void
-Operator<QueryPolicy>::PrintToStream()
+void Operator<QueryPolicy>::PrintToStream()
 {
 	QUERY_D(__out("( "));
 	if (fLeft != NULL)
@@ -1136,8 +1117,7 @@ Operator<QueryPolicy>::PrintToStream()
 
 
 template<typename QueryPolicy>
-void
-Equation<QueryPolicy>::PrintToStream()
+void Equation<QueryPolicy>::PrintToStream()
 {
 	const char* symbol = "???";
 	switch (Term<QueryPolicy>::fOp) {
@@ -1290,8 +1270,7 @@ Expression<QueryPolicy>::ParseOr(char** expr)
 
 
 template<typename QueryPolicy>
-bool
-Expression<QueryPolicy>::IsOperator(char** expr, char op)
+bool Expression<QueryPolicy>::IsOperator(char** expr, char op)
 {
 	char* string = *expr;
 
@@ -1304,8 +1283,7 @@ Expression<QueryPolicy>::IsOperator(char** expr, char op)
 
 
 template<typename QueryPolicy>
-status_t
-Expression<QueryPolicy>::InitCheck()
+status_t Expression<QueryPolicy>::InitCheck()
 {
 	if (fTerm == NULL)
 		return B_BAD_VALUE;
@@ -1355,8 +1333,7 @@ Query<QueryPolicy>::~Query()
 
 
 template<typename QueryPolicy>
-/*static*/ status_t
-Query<QueryPolicy>::Create(Context* context, const char* queryString,
+/*static*/ status_t Query<QueryPolicy>::Create(Context* context, const char* queryString,
 	uint32 flags, port_id port, uint32 token, Query<QueryPolicy>*& _query)
 {
 	Expression<QueryPolicy>* expression
@@ -1385,8 +1362,7 @@ Query<QueryPolicy>::Create(Context* context, const char* queryString,
 
 
 template<typename QueryPolicy>
-status_t
-Query<QueryPolicy>::Rewind()
+status_t Query<QueryPolicy>::Rewind()
 {
 	// free previous stuff
 
@@ -1427,8 +1403,7 @@ Query<QueryPolicy>::Rewind()
 
 
 template<typename QueryPolicy>
-status_t
-Query<QueryPolicy>::GetNextEntry(struct dirent* dirent, size_t size)
+status_t Query<QueryPolicy>::GetNextEntry(struct dirent* dirent, size_t size)
 {
 	if (fIterator != NULL)
 		QueryPolicy::IndexIteratorResume(fIterator);
@@ -1443,8 +1418,7 @@ Query<QueryPolicy>::GetNextEntry(struct dirent* dirent, size_t size)
 
 
 template<typename QueryPolicy>
-void
-Query<QueryPolicy>::LiveUpdate(Entry* entry, Node* node, const char* attribute,
+void Query<QueryPolicy>::LiveUpdate(Entry* entry, Node* node, const char* attribute,
 	int32 type, const uint8* oldKey, size_t oldLength, const uint8* newKey,
 	size_t newLength)
 {
@@ -1512,8 +1486,7 @@ Query<QueryPolicy>::LiveUpdate(Entry* entry, Node* node, const char* attribute,
 
 
 template<typename QueryPolicy>
-void
-Query<QueryPolicy>::LiveUpdateRenameMove(Entry* entry, Node* node,
+void Query<QueryPolicy>::LiveUpdateRenameMove(Entry* entry, Node* node,
 	ino_t oldDirectoryID, const char* oldName, size_t oldLength,
 	ino_t newDirectoryID, const char* newName, size_t newLength)
 {
@@ -1550,8 +1523,7 @@ Query<QueryPolicy>::LiveUpdateRenameMove(Entry* entry, Node* node,
 
 
 template<typename QueryPolicy>
-status_t
-Query<QueryPolicy>::_GetNextEntry(struct dirent* dirent, size_t size)
+status_t Query<QueryPolicy>::_GetNextEntry(struct dirent* dirent, size_t size)
 {
 	// If we don't have an equation to use yet/anymore, get a new one
 	// from the stack
@@ -1589,8 +1561,7 @@ Query<QueryPolicy>::_GetNextEntry(struct dirent* dirent, size_t size)
 
 
 template<typename QueryPolicy>
-void
-Query<QueryPolicy>::_SendEntryNotification(Entry* entry,
+void Query<QueryPolicy>::_SendEntryNotification(Entry* entry,
 	status_t (*notify)(port_id, int32, dev_t, ino_t, const char*, ino_t))
 {
 	char nameBuffer[QueryPolicy::kMaxFileNameLength];

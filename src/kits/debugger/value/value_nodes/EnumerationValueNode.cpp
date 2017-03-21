@@ -38,8 +38,7 @@ EnumerationValueNode::GetType() const
 }
 
 
-status_t
-EnumerationValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
+status_t EnumerationValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 	ValueLocation*& _location, Value*& _value)
 {
 	// get the location

@@ -181,8 +181,7 @@ BPackageInfoSet::Iterator::Iterator(const PackageMap* map)
 }
 
 
-bool
-BPackageInfoSet::Iterator::HasNext() const
+bool BPackageInfoSet::Iterator::HasNext() const
 {
 	return fNextInfo != NULL;
 }
@@ -236,8 +235,7 @@ BPackageInfoSet::BPackageInfoSet(const BPackageInfoSet& other)
 }
 
 
-status_t
-BPackageInfoSet::AddInfo(const BPackageInfo& info)
+status_t BPackageInfoSet::AddInfo(const BPackageInfo& info)
 {
 	if (!_CopyOnWrite())
 		return B_NO_MEMORY;
@@ -246,8 +244,7 @@ BPackageInfoSet::AddInfo(const BPackageInfo& info)
 }
 
 
-void
-BPackageInfoSet::MakeEmpty()
+void BPackageInfoSet::MakeEmpty()
 {
 	if (fPackageMap == NULL || fPackageMap->CountPackageInfos() == 0)
 		return;
@@ -264,8 +261,7 @@ BPackageInfoSet::MakeEmpty()
 }
 
 
-uint32
-BPackageInfoSet::CountInfos() const
+uint32 BPackageInfoSet::CountInfos() const
 {
 	if (fPackageMap == NULL)
 		return 0;
@@ -299,8 +295,7 @@ BPackageInfoSet::operator=(const BPackageInfoSet& other)
 }
 
 
-bool
-BPackageInfoSet::_CopyOnWrite()
+bool BPackageInfoSet::_CopyOnWrite()
 {
 	if (fPackageMap == NULL) {
 		fPackageMap = PackageMap::Create();

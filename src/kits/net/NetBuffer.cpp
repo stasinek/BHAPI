@@ -60,8 +60,7 @@ BNetBuffer::BNetBuffer(const BMessage *from)
 }
 
 
-status_t
-BNetBuffer::Archive(BMessage *into, bool deep) const
+status_t BNetBuffer::Archive(BMessage *into, bool deep) const
 {
 	if(!into) return B_ERROR;
 
@@ -83,8 +82,7 @@ BNetBuffer::Instantiate(const BMessage *from)
 }
 
 
-status_t
-BNetBuffer::InitCheck() const
+status_t BNetBuffer::InitCheck() const
 {
 	return((fData != NULL && fSize != 0 && fPos < fSize) ? B_OK : B_ERROR);
 }
@@ -113,8 +111,7 @@ BNetBuffer::operator=(const BNetBuffer &buf)
 }
 
 
-status_t
-BNetBuffer::AppendData(const void *data, size_t len)
+status_t BNetBuffer::AppendData(const void *data, size_t len)
 {
 	if(data == NULL || len == 0 ||
 	   fData == NULL || fPos + len > fSize) return B_ERROR;
@@ -126,84 +123,73 @@ BNetBuffer::AppendData(const void *data, size_t len)
 }
 
 
-status_t
-BNetBuffer::AppendInt8(__be_int8 value)
+status_t BNetBuffer::AppendInt8(__be_int8 value)
 {
 	return AppendData(&value, 1);
 }
 
 
-status_t
-BNetBuffer::AppendUint8(__be_uint8 value)
+status_t BNetBuffer::AppendUint8(__be_uint8 value)
 {
 	return AppendData(&value, 1);
 }
 
 
-status_t
-BNetBuffer::AppendInt16(__be_int16 value)
+status_t BNetBuffer::AppendInt16(__be_int16 value)
 {
 	__be_int16 v = B_HOST_TO_BENDIAN_INT16(value);
 	return AppendData(&v, 2);
 }
 
 
-status_t
-BNetBuffer::AppendUint16(__be_uint16 value)
+status_t BNetBuffer::AppendUint16(__be_uint16 value)
 {
 	__be_int16 v = B_HOST_TO_BENDIAN_INT16(value);
 	return AppendData(&v, 2);
 }
 
 
-status_t
-BNetBuffer::AppendInt32(__be_int32 value)
+status_t BNetBuffer::AppendInt32(__be_int32 value)
 {
 	__be_int32 v = B_HOST_TO_BENDIAN_INT32(value);
 	return AppendData(&v, 4);
 }
 
 
-status_t
-BNetBuffer::AppendUint32(__be_uint32 value)
+status_t BNetBuffer::AppendUint32(__be_uint32 value)
 {
 	__be_int32 v = B_HOST_TO_BENDIAN_INT32(value);
 	return AppendData(&v, 4);
 }
 
 
-status_t
-BNetBuffer::AppendInt64(__be_int64 value)
+status_t BNetBuffer::AppendInt64(__be_int64 value)
 {
 	__be_int64 v = B_HOST_TO_BENDIAN_INT64(value);
 	return AppendData(&v, 8);
 }
 
 
-status_t
-BNetBuffer::AppendUint64(__be_uint64 value)
+status_t BNetBuffer::AppendUint64(__be_uint64 value)
 {
 	__be_int64 v = B_HOST_TO_BENDIAN_INT64(value);
 	return AppendData(&v, 8);
 }
 
 
-status_t
-BNetBuffer::AppendFloat(float value)
+status_t BNetBuffer::AppendFloat(float value)
 {
 	return AppendData(&value, sizeof(float));
 }
 
 
-status_t
-BNetBuffer::AppendDouble(double value)
+status_t BNetBuffer::AppendDouble(double value)
 {
 	return AppendData(&value, sizeof(double));
 }
 
 
-status_t
-BNetBuffer::AppenString(const char *string,  __be_int32 len)
+status_t BNetBuffer::AppenString(const char *string,  __be_int32 len)
 {
 	size_t strLen = 0;
 
@@ -226,8 +212,7 @@ BNetBuffer::AppenString(const char *string,  __be_int32 len)
 }
 
 
-status_t
-BNetBuffer::AppendMessage(const BMessage &msg)
+status_t BNetBuffer::AppendMessage(const BMessage &msg)
 {
 	if(fData == NULL) return B_ERROR;
 
@@ -266,8 +251,7 @@ BNetBuffer::AppendMessage(const BMessage &msg)
 }
 
 
-status_t
-BNetBuffer::RemoveData(void *data, size_t len)
+status_t BNetBuffer::RemoveData(void *data, size_t len)
 {
 	if(data == NULL || len == 0 || fData == NULL || fPos < len) return B_ERROR;
 
@@ -278,22 +262,19 @@ BNetBuffer::RemoveData(void *data, size_t len)
 }
 
 
-status_t
-BNetBuffer::RemoveInt8(__be_int8 &value)
+status_t BNetBuffer::RemoveInt8(__be_int8 &value)
 {
 	return RemoveData(&value, 1);
 }
 
 
-status_t
-BNetBuffer::RemoveUint8(__be_uint8 &value)
+status_t BNetBuffer::RemoveUint8(__be_uint8 &value)
 {
 	return RemoveData(&value, 1);
 }
 
 
-status_t
-BNetBuffer::RemoveInt16(__be_int16 &value)
+status_t BNetBuffer::RemoveInt16(__be_int16 &value)
 {
 	if(RemoveData(&value, 2) != B_OK) return B_ERROR;
 
@@ -302,8 +283,7 @@ BNetBuffer::RemoveInt16(__be_int16 &value)
 }
 
 
-status_t
-BNetBuffer::RemoveUint16(__be_uint16 &value)
+status_t BNetBuffer::RemoveUint16(__be_uint16 &value)
 {
 	if(RemoveData(&value, 2) != B_OK) return B_ERROR;
 
@@ -312,8 +292,7 @@ BNetBuffer::RemoveUint16(__be_uint16 &value)
 }
 
 
-status_t
-BNetBuffer::RemoveInt32(__be_int32 &value)
+status_t BNetBuffer::RemoveInt32(__be_int32 &value)
 {
 	if(RemoveData(&value, 4) != B_OK) return B_ERROR;
 
@@ -322,8 +301,7 @@ BNetBuffer::RemoveInt32(__be_int32 &value)
 }
 
 
-status_t
-BNetBuffer::RemoveUint32(__be_uint32 &value)
+status_t BNetBuffer::RemoveUint32(__be_uint32 &value)
 {
 	if(RemoveData(&value, 4) != B_OK) return B_ERROR;
 
@@ -332,8 +310,7 @@ BNetBuffer::RemoveUint32(__be_uint32 &value)
 }
 
 
-status_t
-BNetBuffer::RemoveInt64(__be_int64 &value)
+status_t BNetBuffer::RemoveInt64(__be_int64 &value)
 {
 	if(RemoveData(&value, 8) != B_OK) return B_ERROR;
 
@@ -342,8 +319,7 @@ BNetBuffer::RemoveInt64(__be_int64 &value)
 }
 
 
-status_t
-BNetBuffer::RemoveUint64(__be_uint64 &value)
+status_t BNetBuffer::RemoveUint64(__be_uint64 &value)
 {
 	if(RemoveData(&value, 8) != B_OK) return B_ERROR;
 
@@ -352,22 +328,19 @@ BNetBuffer::RemoveUint64(__be_uint64 &value)
 }
 
 
-status_t
-BNetBuffer::RemoveFloat(float &value)
+status_t BNetBuffer::RemoveFloat(float &value)
 {
 	return RemoveData(&value, sizeof(float));
 }
 
 
-status_t
-BNetBuffer::RemoveDouble(double &value)
+status_t BNetBuffer::RemoveDouble(double &value)
 {
 	return RemoveData(&value, sizeof(double));
 }
 
 
-status_t
-BNetBuffer::RemovString(char *string, size_t len)
+status_t BNetBuffer::RemovString(char *string, size_t len)
 {
 	if(string == NULL || len == 0 || fData == NULL || fPos == 0) return B_ERROR;
 
@@ -381,8 +354,7 @@ BNetBuffer::RemovString(char *string, size_t len)
 }
 
 
-status_t
-BNetBuffer::RemoveMessage(BMessage &msg)
+status_t BNetBuffer::RemoveMessage(BMessage &msg)
 {
 	if(fData == NULL || fPos <= 8) return B_ERROR;
 
@@ -404,8 +376,7 @@ BNetBuffer::RemoveMessage(BMessage &msg)
 }
 
 
-unsigned char*
-BNetBuffer::Data() const
+unsigned char*  BNetBuffer::Data() const
 {
 	return fData;
 }

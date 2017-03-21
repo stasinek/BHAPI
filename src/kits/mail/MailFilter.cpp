@@ -28,26 +28,22 @@ BMailFilter::HeaderFetched(entry_ref& ref, BFile& file, BMessage& attributes)
 }
 
 
-void
-BMailFilter::BodyFetched(const entry_ref& ref, BFile& file,
+void BMailFilter::BodyFetched(const entry_ref& ref, BFile& file,
 	BMessage& attributes)
 {
 }
 
 
-void
-BMailFilter::MailboxSynchronized(status_t status)
+void BMailFilter::MailboxSynchronized(status_t status)
 {
 }
 
 
-void
-BMailFilter::MessageReadyToSend(const entry_ref& ref, BFile& file)
+void BMailFilter::MessageReadyToSend(const entry_ref& ref, BFile& file)
 {
 }
 
 
-void
-BMailFilter::MessageSent(const entry_ref& ref, BFile& file)
+void BMailFilter::MessageSent(const entry_ref& ref, BFile& file)
 {
 }

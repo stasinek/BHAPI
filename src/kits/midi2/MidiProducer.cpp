@@ -16,8 +16,7 @@
 #include "protocol.h"
 
 
-status_t 
-BMidiProducer::Connect(BMidiConsumer* cons)
+status_t BMidiProducer::Connect(BMidiConsumer* cons)
 {
 	if (cons == NULL) {
 		WARN("Connect() does not accept a NULL consumer")
@@ -30,8 +29,7 @@ BMidiProducer::Connect(BMidiConsumer* cons)
 }
 
 
-status_t 
-BMidiProducer::Disconnect(BMidiConsumer* cons)
+status_t BMidiProducer::Disconnect(BMidiConsumer* cons)
 {
 	if (cons == NULL) {
 		WARN("Disconnect() does not accept a NULL consumer")
@@ -44,8 +42,7 @@ BMidiProducer::Disconnect(BMidiConsumer* cons)
 }
 
 
-bool 
-BMidiProducer::IsConnected(BMidiConsumer* cons) const
+bool BMidiProducer::IsConnected(BMidiConsumer* cons) const
 {
 	bool isConnected = false;
 
@@ -104,8 +101,7 @@ void BMidiProducer::_Reserved7() { }
 void BMidiProducer::_Reserved8() { }
 
 
-status_t 
-BMidiProducer::SendConnectRequest(
+status_t BMidiProducer::SendConnectRequest(
 	BMidiConsumer* cons, bool mustConnect)
 {
 	ASSERT(cons != NULL)
@@ -146,8 +142,7 @@ BMidiProducer::SendConnectRequest(
 }
 
 
-void 
-BMidiProducer::ConnectionMade(BMidiConsumer* consumer)
+void BMidiProducer::ConnectionMade(BMidiConsumer* consumer)
 {
 	if (consumer == NULL)
 		return;
@@ -165,8 +160,7 @@ BMidiProducer::ConnectionMade(BMidiConsumer* consumer)
 }
 
 
-bool 
-BMidiProducer::ConnectionBroken(BMidiConsumer* consumer)
+bool BMidiProducer::ConnectionBroken(BMidiConsumer* consumer)
 {
 	if (consumer == NULL)
 		return false;
@@ -202,15 +196,13 @@ BMidiProducer::ConsumerAt(int32 index) const
 }
 
 
-bool 
-BMidiProducer::LockProducer() const
+bool BMidiProducer::LockProducer() const
 {
 	return fLocker.Lock();
 }
 
 
-void 
-BMidiProducer::UnlockProducer() const
+void BMidiProducer::UnlockProducer() const
 {
 	fLocker.Unlock();
 }

@@ -34,8 +34,7 @@ BMediaFiles::~BMediaFiles()
 }
 
 
-status_t
-BMediaFiles::RewindTypes()
+status_t BMediaFiles::RewindTypes()
 {
 	CALLED();
 
@@ -64,8 +63,7 @@ BMediaFiles::RewindTypes()
 }
 
 
-status_t
-BMediaFiles::GetNextType(BString* _type)
+status_t BMediaFiles::GetNextType(BString* _type)
 {
 	CALLED();
 	if (fTypeIndex < 0 || fTypeIndex >= fTypes.CountItems()) {
@@ -81,8 +79,7 @@ BMediaFiles::GetNextType(BString* _type)
 }
 
 
-status_t
-BMediaFiles::RewindRefs(const char* type)
+status_t BMediaFiles::RewindRefs(const char* type)
 {
 	CALLED();
 
@@ -118,8 +115,7 @@ BMediaFiles::RewindRefs(const char* type)
 }
 
 
-status_t
-BMediaFiles::GetNextRef(BString* _type, entry_ref* _ref)
+status_t BMediaFiles::GetNextRef(BString* _type, entry_ref* _ref)
 {
 	CALLED();
 	if (fItemIndex < 0 || fItemIndex >= fItems.CountItems()) {
@@ -136,8 +132,7 @@ BMediaFiles::GetNextRef(BString* _type, entry_ref* _ref)
 }
 
 
-status_t
-BMediaFiles::GetRefFor(const char* type, const char* item, entry_ref* _ref)
+status_t BMediaFiles::GetRefFor(const char* type, const char* item, entry_ref* _ref)
 {
 	CALLED();
 
@@ -161,8 +156,7 @@ BMediaFiles::GetRefFor(const char* type, const char* item, entry_ref* _ref)
 }
 
 
-status_t
-BMediaFiles::GetAudioGainFor(const char* type, const char* item, float* _gain)
+status_t BMediaFiles::GetAudioGainFor(const char* type, const char* item, float* _gain)
 {
 	CALLED();
 
@@ -186,8 +180,7 @@ BMediaFiles::GetAudioGainFor(const char* type, const char* item, float* _gain)
 }
 
 
-status_t
-BMediaFiles::SetRefFor(const char* type, const char* item,
+status_t BMediaFiles::SetRefFor(const char* type, const char* item,
 	const entry_ref& ref)
 {
 	CALLED();
@@ -209,8 +202,7 @@ BMediaFiles::SetRefFor(const char* type, const char* item,
 }
 
 
-status_t
-BMediaFiles::SetAudioGainFor(const char* type, const char* item, float gain)
+status_t BMediaFiles::SetAudioGainFor(const char* type, const char* item, float gain)
 {
 	CALLED();
 
@@ -231,8 +223,7 @@ BMediaFiles::SetAudioGainFor(const char* type, const char* item, float gain)
 }
 
 
-status_t
-BMediaFiles::RemoveRefFor(const char* type, const char* item,
+status_t BMediaFiles::RemoveRefFor(const char* type, const char* item,
 	const entry_ref &ref)
 {
 	CALLED();
@@ -253,8 +244,7 @@ BMediaFiles::RemoveRefFor(const char* type, const char* item,
 }
 
 
-status_t
-BMediaFiles::RemoveItem(const char* type, const char* item)
+status_t BMediaFiles::RemoveItem(const char* type, const char* item)
 {
 	CALLED();
 
@@ -277,8 +267,7 @@ BMediaFiles::RemoveItem(const char* type, const char* item)
 // #pragma mark - private
 
 
-void
-BMediaFiles::_ClearTypes()
+void BMediaFiles::_ClearTypes()
 {
 	for (int32 i = 0; i < fTypes.CountItems(); i++)
 		delete (BString*)fTypes.ItemAt(i);
@@ -287,8 +276,7 @@ BMediaFiles::_ClearTypes()
 }
 
 
-void
-BMediaFiles::_ClearItems()
+void BMediaFiles::_ClearItems()
 {
 	for (int32 i = 0; i < fItems.CountItems(); i++)
 		delete (BString*)fItems.ItemAt(i);
@@ -300,8 +288,7 @@ BMediaFiles::_ClearItems()
 // #pragma mark - FBC padding
 
 
-status_t
-BMediaFiles::_Reserved_MediaFiles_0(void*,...)
+status_t BMediaFiles::_Reserved_MediaFiles_0(void*,...)
 {
 	// TODO: Someone didn't understand FBC
 	return B_ERROR;

@@ -50,8 +50,7 @@ BUSBConfiguration::~BUSBConfiguration()
 }
 
 
-uint32
-BUSBConfiguration::Index() const
+uint32 BUSBConfiguration::Index() const
 {
 	return fIndex;
 }
@@ -89,8 +88,7 @@ BUSBConfiguration::Descriptor() const
 }
 
 
-uint32
-BUSBConfiguration::CountInterfaces() const
+uint32 BUSBConfiguration::CountInterfaces() const
 {
 	return fDescriptor.number_interfaces;
 }

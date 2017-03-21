@@ -6,7 +6,7 @@
 #ifndef _DPC_MODULE_H_
 #define _DPC_MODULE_H_
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <module.h>
 
 #ifdef __cplusplus

@@ -56,8 +56,7 @@ WriteValueNodeValueJob::Key() const
 }
 
 
-status_t
-WriteValueNodeValueJob::Do()
+status_t WriteValueNodeValueJob::Do()
 {
 	ValueNodeContainer* container = fValueNode->Container();
 	if (container == NULL)

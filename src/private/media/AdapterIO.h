@@ -7,7 +7,7 @@
 
 
 #include <MediaIO.h>
-#include <OS.h>
+#include <kernel/OS.h>
 #include <RWLocker.h>
 #include <Haiku.h>
 

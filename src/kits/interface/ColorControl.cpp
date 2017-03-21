@@ -80,8 +80,7 @@ BColorControl::~BColorControl()
 }
 
 
-void
-BColorControl::Draw(BRect updateRect)
+void BColorControl::Draw(BRect updateRect)
 {
 	if(IsFocusChanging()) return;
 	_DrawColors(updateRect);
@@ -89,8 +88,7 @@ BColorControl::Draw(BRect updateRect)
 }
 
 
-void
-BColorControl::GetPreferredSize(float *width, float *height)
+void BColorControl::GetPreferredSize(float *width, float *height)
 {
 	if(width == NULL && height == NULL) return;
 
@@ -187,8 +185,7 @@ BColorControl::_DescriptionFrame()
 }
 
 
-void
-BColorControl::_DrawColors(BRect r)
+void BColorControl::_DrawColors(BRect r)
 {
 	BRect rect = _ColorsFrame();
 	r &= rect;
@@ -255,8 +252,7 @@ BColorControl::_DrawColors(BRect r)
 }
 
 
-void
-BColorControl::_DrawDescription(BRect r)
+void BColorControl::_DrawDescription(BRect r)
 {
 	BRect rect = _DescriptionFrame();
 	r &= rect;
@@ -337,8 +333,7 @@ BColorControl::_DrawDescription(BRect r)
 }
 
 
-void
-BColorControl::SetValue(__be_int32 color)
+void BColorControl::SetValue(__be_int32 color)
 {
 	if(color != Value())
 	{
@@ -363,8 +358,7 @@ bhapi::rgb_color BColorControl::ValueAsColor()
 }
 
 
-void
-BColorControl::MouseDown(BPoint where)
+void BColorControl::MouseDown(BPoint where)
 {
 	if(IsEnabled() == false) return;
 

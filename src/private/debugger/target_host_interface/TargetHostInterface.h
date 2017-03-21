@@ -5,7 +5,7 @@
 #ifndef TARGET_HOST_INTERFACE_H
 #define TARGET_HOST_INTERFACE_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <Looper.h>
 
 #include <ObjectList.h>

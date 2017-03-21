@@ -38,8 +38,7 @@ GetCpuStateJob::Key() const
 }
 
 
-status_t
-GetCpuStateJob::Do()
+status_t GetCpuStateJob::Do()
 {
 	CpuState* state;
 	status_t error = fDebuggerInterface->GetCpuState(fThread->ID(), state);

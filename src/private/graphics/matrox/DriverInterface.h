@@ -15,7 +15,7 @@
 #include "video_overlay.h"
 #include <Drivers.h>
 #include <PCI.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #define DRIVER_PREFIX "matrox" // apsed
 #define DEVICE_FORMAT "%04x_%04x_%02x%02x%02x" // apsed

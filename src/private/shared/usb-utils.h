@@ -12,8 +12,7 @@
 #include "usbhdr.h"
 
 
-void
-usb_get_vendor_info(uint16 vendorID, const char **vendorName)
+void usb_get_vendor_info(uint16 vendorID, const char **vendorName)
 {
 	int i;
 	for (i = 0; i < (int)USB_VENTABLE_LEN; i++) {
@@ -27,8 +26,7 @@ usb_get_vendor_info(uint16 vendorID, const char **vendorName)
 }
 
 
-void
-usb_get_device_info(uint16 vendorID, uint16 deviceID, const char **deviceName)
+void usb_get_device_info(uint16 vendorID, uint16 deviceID, const char **deviceName)
 {
 	int i;
 	// search for the device

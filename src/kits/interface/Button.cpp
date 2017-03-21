@@ -139,7 +139,7 @@ const char* BControl::Label() const
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-void
+void 
 BButton::SetLabel(const char *label)
 {
 	BControl::SetLabel(label);
@@ -147,7 +147,7 @@ BButton::SetLabel(const char *label)
 }
 
 
-void
+void 
 BButton::GetPreferredSize(float *width, float *height)
 {
 	b_theme_engine *theme = bhapi::get_current_theme_engine();
@@ -190,7 +190,7 @@ BButton::ContentFrame() const
 }
 
 
-void
+void 
 BButton::Draw(BRect updateRect)
 {
 	b_theme_engine *theme = bhapi::get_current_theme_engine();
@@ -250,7 +250,7 @@ void MyButton::DrawContent()
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-void
+void 
 BButton::DrawContent()
 {
 	if(Label() == NULL) return;
@@ -261,7 +261,7 @@ BButton::DrawContent()
 }
 
 
-void
+void 
 BButton::DetachedFromWindow()
 {
 	fInsided = false;
@@ -270,7 +270,7 @@ BButton::DetachedFromWindow()
 }
 
 
-void
+void 
 BButton::MouseDown(BPoint where)
 {
 	if(!IsEnabled() || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON)) return;
@@ -300,7 +300,7 @@ BButton::MouseDown(BPoint where)
 }
 
 
-void
+void 
 BButton::MouseUp(BPoint where)
 {
 	if(!fMousePushed) return;
@@ -317,7 +317,7 @@ BButton::MouseUp(BPoint where)
 }
 
 
-void
+void 
 BButton::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 	if(!IsEnabled()) return;
@@ -362,7 +362,7 @@ BButton::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 }
 
 
-void
+void 
 BButton::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	if(!IsEnabled() || !IsFocus() || numBytes != 1) return;
@@ -391,7 +391,7 @@ BButton::KeyDown(const char *bytes,  __be_int32 numBytes)
 }
 
 
-void
+void 
 BButton::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
 	if(Value() != B_CONTROL_ON || fMousePushed) return;
@@ -404,7 +404,7 @@ BButton::KeyUp(const char *bytes,  __be_int32 numBytes)
 }
 
 
-void
+void 
 BButton::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	BControl::SetFont(font, mask);
@@ -412,7 +412,7 @@ BButton::SetFont(const BFont *font,  __be_uint8 mask)
 }
 
 
-void
+void 
 BButton::WindowActivated(bool state)
 {
 	if(fMousePushed || Value() == B_CONTROL_ON)
@@ -444,7 +444,7 @@ BButton::WindowActivated(bool state)
 }
 
 
-void
+void 
 BButton::MakeFocus(bool focusState)
 {
 	if(focusState != IsFocus())
@@ -471,7 +471,7 @@ BButton::MakeFocus(bool focusState)
 
 
 #if 0
-void
+void 
 BButton::SetFlags(__be_uint32 flags)
 {
 	flags &= ~B_PULSE_NEEDED;
@@ -479,7 +479,7 @@ BButton::SetFlags(__be_uint32 flags)
 }
 
 
-void
+void 
 BButton::Pulse()
 {
 	if(Window() == NULL || IsFocus() == false) return;

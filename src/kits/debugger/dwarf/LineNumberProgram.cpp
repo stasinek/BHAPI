@@ -39,8 +39,7 @@ LineNumberProgram::~LineNumberProgram()
 }
 
 
-status_t
-LineNumberProgram::Init(const void* program, size_t programSize,
+status_t LineNumberProgram::Init(const void* program, size_t programSize,
 	uint8 minInstructionLength, bool defaultIsStatement, int8 lineBase,
 	uint8 lineRange, uint8 opcodeBase, const uint8* standardOpcodeLengths)
 {
@@ -68,8 +67,7 @@ LineNumberProgram::Init(const void* program, size_t programSize,
 }
 
 
-void
-LineNumberProgram::GetInitialState(State& state) const
+void LineNumberProgram::GetInitialState(State& state) const
 {
 	if (!IsValid())
 		return;
@@ -79,8 +77,7 @@ LineNumberProgram::GetInitialState(State& state) const
 }
 
 
-bool
-LineNumberProgram::GetNextRow(State& state) const
+bool LineNumberProgram::GetNextRow(State& state) const
 {
 	if (state.isSequenceEnd)
 		_SetToInitial(state);
@@ -203,8 +200,7 @@ LineNumberProgram::GetNextRow(State& state) const
 }
 
 
-void
-LineNumberProgram::_SetToInitial(State& state) const
+void LineNumberProgram::_SetToInitial(State& state) const
 {
 	state.address = 0;
 	state.file = 1;

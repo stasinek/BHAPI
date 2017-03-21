@@ -48,15 +48,13 @@ HashableString::HashableString(const BString& string)
 }
 
 
-inline uint32
-HashableString::GetHashCode() const
+inline uint32 HashableString::GetHashCode() const
 {
 	return fHashCode;
 }
 
 
-inline bool
-HashableString::operator!= (const HashableString& other) const
+inline bool HashableString::operator!= (const HashableString& other) const
 {
 	return Compare(other) != 0 || fHashCode != other.fHashCode;
 }

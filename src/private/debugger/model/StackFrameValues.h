@@ -55,16 +55,14 @@ private:
 };
 
 
-bool
-StackFrameValues::GetValue(ObjectID* variable, const TypeComponentPath& path,
+bool StackFrameValues::GetValue(ObjectID* variable, const TypeComponentPath& path,
 	BVariant& _value) const
 {
 	return GetValue(variable, &path, _value);
 }
 
 
-bool
-StackFrameValues::HasValue(ObjectID* variable, const TypeComponentPath& path)
+bool StackFrameValues::HasValue(ObjectID* variable, const TypeComponentPath& path)
 	const
 {
 	return HasValue(variable, &path);

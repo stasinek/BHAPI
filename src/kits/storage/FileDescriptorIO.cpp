@@ -75,15 +75,13 @@ BFileDescriptorIO::Position() const
 }
 
 
-status_t
-BFileDescriptorIO::SetSize(off_t size)
+status_t BFileDescriptorIO::SetSize(off_t size)
 {
 	return ftruncate(fFD, size) == 0 ? B_OK : errno;
 }
 
 
-status_t
-BFileDescriptorIO::GetSize(off_t* size) const
+status_t BFileDescriptorIO::GetSize(off_t* size) const
 {
 	struct stat st;
 	if (fstat(fFD, &st) < 0)

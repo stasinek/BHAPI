@@ -765,8 +765,7 @@ struct overlay_registers {
 #define INTEL_i965_OVERLAY_STATE_SIZE	36864
 #define INTEL_i965_3D_CONTEXT_SIZE		32768
 
-inline bool
-intel_uses_physical_overlay(intel_shared_info &info)
+inline bool intel_uses_physical_overlay(intel_shared_info &info)
 {
 	return !info.device_type.InGroup(INTEL_TYPE_Gxx);
 }

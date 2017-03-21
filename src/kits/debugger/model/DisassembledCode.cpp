@@ -48,16 +48,14 @@ DisassembledCode::~DisassembledCode()
 }
 
 
-bool
-DisassembledCode::Lock()
+bool DisassembledCode::Lock()
 {
 	// We're immutable, so no locking required.
 	return true;
 }
 
 
-void
-DisassembledCode::Unlock()
+void DisassembledCode::Unlock()
 {
 }
 
@@ -69,31 +67,27 @@ DisassembledCode::GetSourceLanguage() const
 }
 
 
-int32
-DisassembledCode::CountLines() const
+int32 DisassembledCode::CountLines() const
 {
 	return fLines.CountItems();
 }
 
 
-const char*
-DisassembledCode::LineAt(int32 index) const
+const char*  DisassembledCode::LineAt(int32 index) const
 {
 	Line* line = fLines.ItemAt(index);
 	return line != NULL ? line->line.String() : NULL;
 }
 
 
-int32
-DisassembledCode::LineLengthAt(int32 index) const
+int32 DisassembledCode::LineLengthAt(int32 index) const
 {
 	Line* line = fLines.ItemAt(index);
 	return line != NULL ? line->line.Length() : 0;
 }
 
 
-bool
-DisassembledCode::GetStatementLocationRange(const SourceLocation& location,
+bool DisassembledCode::GetStatementLocationRange(const SourceLocation& location,
 	SourceLocation& _start, SourceLocation& _end) const
 {
 	Line* line = fLines.ItemAt(location.Line());
@@ -143,15 +137,13 @@ DisassembledCode::StatementAddressRange() const
 }
 
 
-bool
-DisassembledCode::AddCommentLine(const BString& line)
+bool DisassembledCode::AddCommentLine(const BString& line)
 {
 	return _AddLine(line, NULL);
 }
 
 
-bool
-DisassembledCode::AddInstructionLine(const BString& line, target_addr_t address,
+bool DisassembledCode::AddInstructionLine(const BString& line, target_addr_t address,
 	target_size_t size)
 {
 	int32 lineIndex = fLines.CountItems();
@@ -173,8 +165,7 @@ DisassembledCode::AddInstructionLine(const BString& line, target_addr_t address,
 }
 
 
-bool
-DisassembledCode::_AddLine(const BString& _line, ContiguousStatement* statement)
+bool DisassembledCode::_AddLine(const BString& _line, ContiguousStatement* statement)
 {
 	Line* line = new(std::nothrow) Line(_line, statement);
 	if (line == NULL)

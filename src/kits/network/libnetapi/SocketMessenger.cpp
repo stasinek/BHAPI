@@ -61,8 +61,7 @@ BSocketMessenger::Private::~Private()
 }
 
 
-void
-BSocketMessenger::Private::ClearMessages()
+void BSocketMessenger::Private::ClearMessages()
 {
 	fReceivedReplies.Clear();
 	AutoLocker<BMessageQueue> queueLocker(fReceivedMessages);
@@ -132,8 +131,7 @@ BSocketMessenger::~BSocketMessenger()
 }
 
 
-void
-BSocketMessenger::Unset()
+void BSocketMessenger::Unset()
 {
 	if (fPrivateData == NULL)
 		return;
@@ -149,8 +147,7 @@ BSocketMessenger::Unset()
 }
 
 
-status_t
-BSocketMessenger::SetTo(const BNetworkAddress& address, bigtime_t timeout)
+status_t BSocketMessenger::SetTo(const BNetworkAddress& address, bigtime_t timeout)
 {
 	Unset();
 
@@ -171,22 +168,19 @@ BSocketMessenger::SetTo(const BNetworkAddress& address, bigtime_t timeout)
 }
 
 
-status_t
-BSocketMessenger::SetTo(const BSocketMessenger& target, bigtime_t timeout)
+status_t BSocketMessenger::SetTo(const BSocketMessenger& target, bigtime_t timeout)
 {
 	return SetTo(target.Address(), timeout);
 }
 
 
-status_t
-BSocketMessenger::SendMessage(const BMessage& message)
+status_t BSocketMessenger::SendMessage(const BMessage& message)
 {
 	return _SendMessage(message);
 }
 
 
-status_t
-BSocketMessenger::SendMessage(const BMessage& message, BMessage& _reply,
+status_t BSocketMessenger::SendMessage(const BMessage& message, BMessage& _reply,
 	bigtime_t timeout)
 {
 	int64 replyID = atomic_add64(&fPrivateData->fReplyIDCounter, 1);
@@ -200,8 +194,7 @@ BSocketMessenger::SendMessage(const BMessage& message, BMessage& _reply,
 }
 
 
-status_t
-BSocketMessenger::SendMessage(const BMessage& message,
+status_t BSocketMessenger::SendMessage(const BMessage& message,
 	BMessenger& replyTarget, bigtime_t timeout)
 {
 	BMessage reply;
@@ -213,8 +206,7 @@ BSocketMessenger::SendMessage(const BMessage& message,
 }
 
 
-status_t
-BSocketMessenger::SendReply(const BMessage& message, const BMessage& reply)
+status_t BSocketMessenger::SendReply(const BMessage& message, const BMessage& reply)
 {
 	int64 replyID;
 	if (message.FindInt64(kReplySenderIDField, &replyID) != B_OK)
@@ -226,8 +218,7 @@ BSocketMessenger::SendReply(const BMessage& message, const BMessage& reply)
 }
 
 
-status_t
-BSocketMessenger::ReceiveMessage(BMessage& _message, bigtime_t timeout)
+status_t BSocketMessenger::ReceiveMessage(BMessage& _message, bigtime_t timeout)
 {
 	status_t error = B_OK;
 	AutoLocker<BMessageQueue> queueLocker(fPrivateData->fReceivedMessages);
@@ -255,8 +246,7 @@ BSocketMessenger::ReceiveMessage(BMessage& _message, bigtime_t timeout)
 }
 
 
-void
-BSocketMessenger::_Init()
+void BSocketMessenger::_Init()
 {
 	if (fPrivateData != NULL)
 		return;
@@ -280,8 +270,7 @@ BSocketMessenger::_Init()
 }
 
 
-status_t
-BSocketMessenger::_WaitForMessage(bigtime_t timeout)
+status_t BSocketMessenger::_WaitForMessage(bigtime_t timeout)
 {
 	for (;;) {
 		status_t error = acquire_sem_etc(fPrivateData->fMessageWaiters, 1,
@@ -300,8 +289,7 @@ BSocketMessenger::_WaitForMessage(bigtime_t timeout)
 }
 
 
-status_t
-BSocketMessenger::_SendMessage(const BMessage& message)
+status_t BSocketMessenger::_SendMessage(const BMessage& message)
 {
 	ssize_t flatSize = message.FlattenedSize();
 	ssize_t totalSize = flatSize + sizeof(ssize_t);
@@ -325,8 +313,7 @@ BSocketMessenger::_SendMessage(const BMessage& message)
 }
 
 
-status_t
-BSocketMessenger::_ReadMessage(BMessage& _message)
+status_t BSocketMessenger::_ReadMessage(BMessage& _message)
 {
 	status_t error = fSocket.WaitForReadable(B_INFINITE_TIMEOUT);
 	if (error != B_OK)
@@ -359,8 +346,7 @@ BSocketMessenger::_ReadMessage(BMessage& _message)
 }
 
 
-status_t
-BSocketMessenger::_ReadReply(const int64 replyID, BMessage& reply,
+status_t BSocketMessenger::_ReadReply(const int64 replyID, BMessage& reply,
 	bigtime_t timeout)
 {
 	status_t error = B_OK;
@@ -383,8 +369,7 @@ BSocketMessenger::_ReadReply(const int64 replyID, BMessage& reply,
 }
 
 
-status_t
-BSocketMessenger::_MessageReader(void* arg)
+status_t BSocketMessenger::_MessageReader(void* arg)
 {
 	BSocketMessenger* messenger = (BSocketMessenger*)arg;
 	BSocketMessenger::Private* data = messenger->fPrivateData;

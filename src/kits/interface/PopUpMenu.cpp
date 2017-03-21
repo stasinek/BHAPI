@@ -71,7 +71,7 @@ BPopUpMenuView::BPopUpMenuView(BRect frame)
 }
 
 
-void
+void 
 BPopUpMenuView::Draw(BRect updateRect)
 {
 	if(!(Bounds().InsetByCopy(1, 1).Contains(updateRect)))
@@ -135,7 +135,7 @@ BPopUpMenuWindow::BPopUpMenuWindow(BPoint where, BPopUpMenu *menu, bool delivers
 }
 
 
-bool
+bool 
 BPopUpMenuWindow::QuitRequested()
 {
 	if(!(fMenu == NULL || fMenu->Window() != this))
@@ -153,7 +153,7 @@ BPopUpMenuWindow::QuitRequested()
 }
 
 
-void
+void 
 BPopUpMenuWindow::WaitToClose()
 {
 	if(fAsync || Proxy() == this || !IsLockedByCurrentThread())
@@ -195,7 +195,7 @@ BPopUpMenu::~BPopUpMenu()
 }
 
 
-void
+void 
 BPopUpMenu::MessageReceived(BMessage *msg)
 {
 	switch(msg->what)
@@ -268,7 +268,7 @@ BPopUpMenu::MessageReceived(BMessage *msg)
 }
 
 
-void
+void 
 BPopUpMenu::MouseUp(BPoint where)
 {
 	BPopUpMenuWindow *win = cast_as(Window(), BPopUpMenuWindow);
@@ -374,21 +374,21 @@ BPopUpMenu::Go(BPoint where, bool delivers_message, bool open_anyway, bool async
 }
 
 
-void
+void 
 BPopUpMenu::SetAsyncAutoDestruct(bool state)
 {
 	fAutoDestruct = state;
 }
 
 
-bool
+bool 
 BPopUpMenu::AsyncAutoDestruct() const
 {
 	return fAutoDestruct;
 }
 
 
-bool
+bool 
 BPopUpMenu::IsPopUpByGo() const
 {
 	return(is_instance_of(Window(), BPopUpMenuWindow) != 0);

@@ -64,8 +64,7 @@ BKeymap::~BKeymap()
 		charset (offsets go into this with size of character followed by
 		  character)
 */
-status_t
-BKeymap::SetTo(const char* path)
+status_t BKeymap::SetTo(const char* path)
 {
 	BFile file;
 	status_t status = file.SetTo(path, B_READ_ONLY);
@@ -76,8 +75,7 @@ BKeymap::SetTo(const char* path)
 }
 
 
-status_t
-BKeymap::SetTo(BDataIO& stream)
+status_t BKeymap::SetTo(BDataIO& stream)
 {
 	if (stream.Read(&fKeys, sizeof(fKeys)) < 1)
 		return B_IO_ERROR;
@@ -111,8 +109,7 @@ BKeymap::SetTo(BDataIO& stream)
 }
 
 
-status_t
-BKeymap::SetToCurrent()
+status_t BKeymap::SetToCurrent()
 {
 #ifdef HAIKU_TARGET_PLATFORM_HAIKU
 	key_map* keys = NULL;
@@ -130,8 +127,7 @@ BKeymap::SetToCurrent()
 }
 
 
-status_t
-BKeymap::SetToDefault()
+status_t BKeymap::SetToDefault()
 {
 #ifdef HAIKU_TARGET_PLATFORM_HAIKU
 	fKeys = kSystemKeymap;
@@ -152,8 +148,7 @@ BKeymap::SetToDefault()
 }
 
 
-void
-BKeymap::Unset()
+void BKeymap::Unset()
 {
 	delete[] fChars;
 	fChars = NULL;
@@ -166,8 +161,7 @@ BKeymap::Unset()
 /*!	We need to know if a key is a modifier key to choose
 	a valid key when several are pressed together
 */
-bool
-BKeymap::IsModifierKey(uint32 keyCode) const
+bool BKeymap::IsModifierKey(uint32 keyCode) const
 {
 	return keyCode == fKeys.caps_key
 		|| keyCode == fKeys.num_key
@@ -185,8 +179,7 @@ BKeymap::IsModifierKey(uint32 keyCode) const
 
 
 //! We need to know a modifier for a key
-uint32
-BKeymap::Modifier(uint32 keyCode) const
+uint32 BKeymap::Modifier(uint32 keyCode) const
 {
 	if (keyCode == fKeys.caps_key)
 		return B_CAPS_LOCK;
@@ -217,8 +210,7 @@ BKeymap::Modifier(uint32 keyCode) const
 }
 
 
-uint32
-BKeymap::KeyForModifier(uint32 modifier) const
+uint32 BKeymap::KeyForModifier(uint32 modifier) const
 {
 	if (modifier == B_CAPS_LOCK)
 		return fKeys.caps_key;
@@ -289,8 +281,7 @@ BKeymap::DeadKey(uint32 keyCode, uint32 modifiers, bool* _isEnabled) const
 
 
 //! Tell if a key is a dead second key.
-bool
-BKeymap::IsDeadSecondKey(uint32 keyCode, uint32 modifiers,
+bool BKeymap::IsDeadSecondKey(uint32 keyCode, uint32 modifiers,
 	uint8 activeDeadKey) const
 {
 	if (!activeDeadKey)
@@ -333,8 +324,7 @@ BKeymap::IsDeadSecondKey(uint32 keyCode, uint32 modifiers,
 
 
 //! Get the char for a key given modifiers and active dead key
-void
-BKeymap::GetChars(uint32 keyCode, uint32 modifiers, uint8 activeDeadKey,
+void BKeymap::GetChars(uint32 keyCode, uint32 modifiers, uint8 activeDeadKey,
 	char** chars, int32* numBytes) const
 {
 	*numBytes = 0;
@@ -445,8 +435,7 @@ BKeymap::GetChars(uint32 keyCode, uint32 modifiers, uint8 activeDeadKey,
 /*!	Get a list of characters translated from a given character and
 	set of modifiers to another set of modifiers.
 */
-status_t
-BKeymap::GetModifiedCharacters(const char* in, int32 inModifiers,
+status_t BKeymap::GetModifiedCharacters(const char* in, int32 inModifiers,
 	int32 outModifiers, BObjectList<const char>* _outList)
 {
 	if (in == NULL || *in == '\0' || _outList == NULL)
@@ -519,8 +508,7 @@ BKeymap::GetModifiedCharacters(const char* in, int32 inModifiers,
 }
 
 
-bool
-BKeymap::operator==(const BKeymap& other) const
+bool BKeymap::operator==(const BKeymap& other) const
 {
 	return fCharsSize == other.fCharsSize
 		&& !memcmp(&fKeys, &other.fKeys, sizeof(fKeys))
@@ -528,8 +516,7 @@ BKeymap::operator==(const BKeymap& other) const
 }
 
 
-bool
-BKeymap::operator!=(const BKeymap& other) const
+bool BKeymap::operator!=(const BKeymap& other) const
 {
 	return !(*this == other);
 }
@@ -549,8 +536,7 @@ BKeymap::operator=(const BKeymap& other)
 }
 
 
-int32
-BKeymap::Offset(uint32 keyCode, uint32 modifiers, uint32* _table) const
+int32 BKeymap::Offset(uint32 keyCode, uint32 modifiers, uint32* _table) const
 {
 	int32 offset;
 	uint32 table;

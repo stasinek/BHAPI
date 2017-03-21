@@ -63,8 +63,7 @@ BListItem::BListItem(BMessage *from)
 }
 
 
-status_t
-BListItem::Archive(BMessage *into, bool deep) const
+status_t BListItem::Archive(BMessage *into, bool deep) const
 {
 	if(!into) return B_ERROR;
 
@@ -91,68 +90,59 @@ BListItem::Width() const
 }
 
 
-bool
-BListItem::IsSelected() const
+bool BListItem::IsSelected() const
 {
 	return fSelected;
 }
 
 
-void
-BListItem::Select()
+void BListItem::Select()
 {
 	if(fOwner == NULL) return;
 	fOwner->Select(fOwner->IndexOf(this));
 }
 
 
-void
-BListItem::Deselect()
+void BListItem::Deselect()
 {
 	if(fOwner == NULL) return;
 	fOwner->Deselect(fOwner->IndexOf(this));
 }
 
 
-void
-BListItem::SetEnabled(bool state)
+void BListItem::SetEnabled(bool state)
 {
 	fEnabled = state;
 }
 
 
-bool
-BListItem::IsEnabled() const
+bool BListItem::IsEnabled() const
 {
 	return fEnabled;
 }
 
 
-void
-BListItem::SetHeight(float height)
+void BListItem::SetHeight(float height)
 {
 	if(height < 0) return;
 	fHeight = height;
 }
 
 
-void
-BListItem::SetWidth(float width)
+void BListItem::SetWidth(float width)
 {
 	if(width < 0) return;
 	fWidth = width;
 }
 
 
-bool
-BListItem::IsExpanded() const
+bool BListItem::IsExpanded() const
 {
 	return fExpanded;
 }
 
 
-void
-BListItem::SetExpanded(bool state)
+void BListItem::SetExpanded(bool state)
 {
 	if(fFullOwner == NULL)
 	{
@@ -167,23 +157,20 @@ BListItem::SetExpanded(bool state)
 }
 
 
-__be_uint32
-BListItem::OutlineLevel() const
+__be_uint32 BListItem::OutlineLevel() const
 {
 	return fLevel;
 }
 
 
-void
-BListItem::Invalidate()
+void BListItem::Invalidate()
 {
 	if(fOwner == NULL) return;
 	fOwner->InvalidateItem(fOwner->IndexOf(this));
 }
 
 
-bool
-BListItem::IsVisible() const
+bool BListItem::IsVisible() const
 {
 	if(fFullOwner == NULL) return false;
 	BListItem *superitem = fFullOwner->Superitem(this);
@@ -200,15 +187,13 @@ BListItem::SuperItem() const
 }
 
 
-bool
-BListItem::HasSubitems() const
+bool BListItem::HasSubitems() const
 {
 	return(fFullOwner == NULL ? false : fFullOwner->HasSubitems(this));
 }
 
 
-void
-BListItem::DrawLeader(BView *owner, BRect *itemRect)
+void BListItem::DrawLeader(BView *owner, BRect *itemRect)
 {
 	if(fFullOwner == NULL || owner == NULL || itemRect == NULL || itemRect->IsValid() == false) return;
 
@@ -231,8 +216,7 @@ BListItem::DrawLeader(BView *owner, BRect *itemRect)
 }
 
 
-void
-BListItem::GetLeaderSize(float *width, float *height) const
+void BListItem::GetLeaderSize(float *width, float *height) const
 {
 	if(width) *width = 0;
 	if(height) *height = fHeight;
@@ -245,46 +229,39 @@ BListItem::GetLeaderSize(float *width, float *height) const
 }
 
 
-void
-BListItem::SetFlags(__be_uint32 flags)
+void BListItem::SetFlags(__be_uint32 flags)
 {
 	fFlags = flags;
 }
 
 
-__be_uint32
-BListItem::Flags() const
+__be_uint32 BListItem::Flags() const
 {
 	return fFlags;
 }
 
 
-void
-BListItem::MouseDown(BView *owner, BPoint where)
+void BListItem::MouseDown(BView *owner, BPoint where)
 {
 }
 
 
-void
-BListItem::MouseUp(BView *owner, BPoint where)
+void BListItem::MouseUp(BView *owner, BPoint where)
 {
 }
 
 
-void
-BListItem::MouseMoved(BView *owner, BPoint where,  __be_uint32 code, const BMessage *a_message)
+void BListItem::MouseMoved(BView *owner, BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 }
 
 
-void
-BListItem::KeyDown(BView *owner, const char *bytes,  __be_int32 numBytes)
+void BListItem::KeyDown(BView *owner, const char *bytes,  __be_int32 numBytes)
 {
 }
 
 
-void
-BListItem::KeyUp(BView *owner, const char *bytes,  __be_int32 numBytes)
+void BListItem::KeyUp(BView *owner, const char *bytes,  __be_int32 numBytes)
 {
 }
 
@@ -302,8 +279,7 @@ StringItem::~StringItem()
 }
 
 
-void
-StringItem::DrawItem(BView *owner, BRect itemRect, bool drawEverything)
+void StringItem::DrawItem(BView *owner, BRect itemRect, bool drawEverything)
 {
 	bhapi::rgb_color bkColor = (IsSelected() ? bhapi::ui_color(B_DOCUMENT_HIGHLIGHT_COLOR): owner->ViewColor());
 	bhapi::rgb_color fgColor = bhapi::ui_color(B_DOCUMENT_TEXT_COLOR);
@@ -343,8 +319,7 @@ StringItem::DrawItem(BView *owner, BRect itemRect, bool drawEverything)
 }
 
 
-void
-StringItem::Update(BView *owner, const BFont *font)
+void StringItem::Update(BView *owner, const BFont *font)
 {
 	bhapi::font_height fontHeight;
 	font->GetHeight(&fontHeight);
@@ -357,16 +332,14 @@ StringItem::Update(BView *owner, const BFont *font)
 }
 
 
-void
-StringItem::SetText(const char *text)
+void StringItem::SetText(const char *text)
 {
 	if(fText) delete[] fText;
 	fText = (text == NULL ? NULL : bhapi::strdup(text));
 }
 
 
-const char*
-StringItem::Text() const
+const char*  StringItem::Text() const
 {
 	return fText;
 }

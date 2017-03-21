@@ -87,22 +87,19 @@ private:
 };
 
 
-inline bool
-RWLockManager::GenericLock(bool write, RWLockable* lockable)
+inline bool RWLockManager::GenericLock(bool write, RWLockable* lockable)
 {
 	return write ? WriteLock(lockable) : ReadLock(lockable);
 }
 
 
-inline bool
-RWLockManager::TryGenericLock(bool write, RWLockable* lockable)
+inline bool RWLockManager::TryGenericLock(bool write, RWLockable* lockable)
 {
 	return write ? TryWriteLock(lockable) : TryReadLock(lockable);
 }
 
 
-inline status_t
-RWLockManager::GenericLockWithTimeout(bool write, RWLockable* lockable,
+inline status_t RWLockManager::GenericLockWithTimeout(bool write, RWLockable* lockable,
 	bigtime_t timeout)
 {
 	return write
@@ -111,8 +108,7 @@ RWLockManager::GenericLockWithTimeout(bool write, RWLockable* lockable,
 }
 
 
-inline void
-RWLockManager::GenericUnlock(bool write, RWLockable* lockable)
+inline void RWLockManager::GenericUnlock(bool write, RWLockable* lockable)
 {
 	if (write)
 		WriteUnlock(lockable);

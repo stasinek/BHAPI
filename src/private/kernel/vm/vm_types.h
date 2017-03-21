@@ -201,8 +201,7 @@ enum {
 #define VM_PAGE_ALLOC_BUSY	0x00000020
 
 
-inline void
-vm_page::Init(page_num_t pageNumber)
+inline void vm_page::Init(page_num_t pageNumber)
 {
 	physical_page_number = pageNumber;
 	InitState(PAGE_STATE_FREE);
@@ -223,8 +222,7 @@ vm_page::Init(page_num_t pageNumber)
 #if DEBUG_PAGE_ACCESS
 #	include <thread.h>
 
-static inline void
-vm_page_debug_access_start(vm_page* page)
+static inline void vm_page_debug_access_start(vm_page* page)
 {
 	thread_id threadID = thread_get_current_thread_id();
 	thread_id previousThread = atomic_test_and_set(&page->accessing_thread,
@@ -238,8 +236,7 @@ vm_page_debug_access_start(vm_page* page)
 }
 
 
-static inline void
-vm_page_debug_access_end(vm_page* page)
+static inline void vm_page_debug_access_end(vm_page* page)
 {
 	thread_id threadID = thread_get_current_thread_id();
 	thread_id previousThread = atomic_test_and_set(&page->accessing_thread, -1,
@@ -253,8 +250,7 @@ vm_page_debug_access_end(vm_page* page)
 }
 
 
-static inline void
-vm_page_debug_access_check(vm_page* page)
+static inline void vm_page_debug_access_check(vm_page* page)
 {
 	thread_id thread = page->accessing_thread;
 	if (thread != thread_get_current_thread_id()) {
@@ -266,8 +262,7 @@ vm_page_debug_access_check(vm_page* page)
 }
 
 
-static inline void
-vm_page_debug_access_transfer(vm_page* page, thread_id expectedPreviousThread)
+static inline void vm_page_debug_access_transfer(vm_page* page, thread_id expectedPreviousThread)
 {
 	thread_id threadID = thread_get_current_thread_id();
 	thread_id previousThread = atomic_test_and_set(&page->accessing_thread,

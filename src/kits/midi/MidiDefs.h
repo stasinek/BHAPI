@@ -7,7 +7,7 @@
 
 //#include <private/fs_shell/fssh_api_wrapper.h>
 #include <Errors.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 //------------------------------------------------------------------------------
 

@@ -38,8 +38,7 @@ BMediaClientNode::BMediaClientNode(const char* name,
 }
 
 
-status_t
-BMediaClientNode::SendBuffer(BBuffer* buffer, BMediaConnection* conn)
+status_t BMediaClientNode::SendBuffer(BBuffer* buffer, BMediaConnection* conn)
 {
 	return BBufferProducer::SendBuffer(buffer, conn->Source(), conn->Destination());
 }
@@ -54,8 +53,7 @@ BMediaClientNode::AddOn(int32* id) const
 }
 
 
-void
-BMediaClientNode::NodeRegistered()
+void BMediaClientNode::NodeRegistered()
 {
 	CALLED();
 
@@ -63,8 +61,7 @@ BMediaClientNode::NodeRegistered()
 }
 
 
-void
-BMediaClientNode::SetRunMode(run_mode mode)
+void BMediaClientNode::SetRunMode(run_mode mode)
 {
 	CALLED();
 
@@ -93,8 +90,7 @@ BMediaClientNode::SetRunMode(run_mode mode)
 }
 
 
-void
-BMediaClientNode::Start(bigtime_t performanceTime)
+void BMediaClientNode::Start(bigtime_t performanceTime)
 {
 	CALLED();
 
@@ -103,8 +99,7 @@ BMediaClientNode::Start(bigtime_t performanceTime)
 }
 
 
-void
-BMediaClientNode::Stop(bigtime_t performanceTime, bool immediate)
+void BMediaClientNode::Stop(bigtime_t performanceTime, bool immediate)
 {
 	CALLED();
 
@@ -113,8 +108,7 @@ BMediaClientNode::Stop(bigtime_t performanceTime, bool immediate)
 }
 
 
-void
-BMediaClientNode::Seek(bigtime_t mediaTime, bigtime_t performanceTime)
+void BMediaClientNode::Seek(bigtime_t mediaTime, bigtime_t performanceTime)
 {
 	CALLED();
 
@@ -122,8 +116,7 @@ BMediaClientNode::Seek(bigtime_t mediaTime, bigtime_t performanceTime)
 }
 
 
-void
-BMediaClientNode::TimeWarp(bigtime_t realTime, bigtime_t performanceTime)
+void BMediaClientNode::TimeWarp(bigtime_t realTime, bigtime_t performanceTime)
 {
 	CALLED();
 
@@ -131,8 +124,7 @@ BMediaClientNode::TimeWarp(bigtime_t realTime, bigtime_t performanceTime)
 }
 
 
-status_t
-BMediaClientNode::HandleMessage(int32 message,
+status_t BMediaClientNode::HandleMessage(int32 message,
 	const void* data, size_t size)
 {
 	CALLED();
@@ -141,8 +133,7 @@ BMediaClientNode::HandleMessage(int32 message,
 }
 
 
-status_t
-BMediaClientNode::AcceptFormat(const media_destination& dest,
+status_t BMediaClientNode::AcceptFormat(const media_destination& dest,
 	media_format* format)
 {
 	CALLED();
@@ -160,8 +151,7 @@ BMediaClientNode::AcceptFormat(const media_destination& dest,
 }
 
 
-status_t
-BMediaClientNode::GetNextInput(int32* cookie,
+status_t BMediaClientNode::GetNextInput(int32* cookie,
 	media_input* input)
 {
 	CALLED();
@@ -184,16 +174,14 @@ BMediaClientNode::GetNextInput(int32* cookie,
 }
 
 
-void
-BMediaClientNode::DisposeInputCookie(int32 cookie)
+void BMediaClientNode::DisposeInputCookie(int32 cookie)
 {
 	CALLED();
 
 }
 
 
-void
-BMediaClientNode::BufferReceived(BBuffer* buffer)
+void BMediaClientNode::BufferReceived(BBuffer* buffer)
 {
 	CALLED();
 
@@ -203,8 +191,7 @@ BMediaClientNode::BufferReceived(BBuffer* buffer)
 }
 
 
-status_t
-BMediaClientNode::GetLatencyFor(const media_destination& dest,
+status_t BMediaClientNode::GetLatencyFor(const media_destination& dest,
 	bigtime_t* latency, media_node_id* timesource)
 {
 	CALLED();
@@ -219,8 +206,7 @@ BMediaClientNode::GetLatencyFor(const media_destination& dest,
 }
 
 
-status_t
-BMediaClientNode::Connected(const media_source& source,
+status_t BMediaClientNode::Connected(const media_source& source,
 	const media_destination& dest, const media_format& format,
 	media_input* outInput)
 {
@@ -240,8 +226,7 @@ BMediaClientNode::Connected(const media_source& source,
 }
 
 
-void
-BMediaClientNode::Disconnected(const media_source& source,
+void BMediaClientNode::Disconnected(const media_source& source,
 	const media_destination& dest)
 {
 	CALLED();
@@ -254,8 +239,7 @@ BMediaClientNode::Disconnected(const media_source& source,
 }
 
 
-status_t
-BMediaClientNode::FormatChanged(const media_source& source,
+status_t BMediaClientNode::FormatChanged(const media_source& source,
 	const media_destination& dest,
 	int32 tag, const media_format& format)
 {
@@ -269,8 +253,7 @@ BMediaClientNode::FormatChanged(const media_source& source,
 }
 
 
-status_t
-BMediaClientNode::FormatSuggestionRequested(media_type type,
+status_t BMediaClientNode::FormatSuggestionRequested(media_type type,
 	int32 quality, media_format* format)
 {
 	CALLED();
@@ -296,8 +279,7 @@ BMediaClientNode::FormatSuggestionRequested(media_type type,
 }
 
 
-status_t
-BMediaClientNode::FormatProposal(const media_source& source,
+status_t BMediaClientNode::FormatProposal(const media_source& source,
 	media_format* format)
 {
 	CALLED();
@@ -310,8 +292,7 @@ BMediaClientNode::FormatProposal(const media_source& source,
 }
 
 
-status_t
-BMediaClientNode::FormatChangeRequested(const media_source& source,
+status_t BMediaClientNode::FormatChangeRequested(const media_source& source,
 	const media_destination& dest, media_format* format,
 	int32* _deprecated_)
 {
@@ -325,8 +306,7 @@ BMediaClientNode::FormatChangeRequested(const media_source& source,
 }
 
 
-void
-BMediaClientNode::LateNoticeReceived(const media_source& source,
+void BMediaClientNode::LateNoticeReceived(const media_source& source,
 	bigtime_t late, bigtime_t when)
 {
 	CALLED();
@@ -334,8 +314,7 @@ BMediaClientNode::LateNoticeReceived(const media_source& source,
 }
 
 
-status_t
-BMediaClientNode::GetNextOutput(int32* cookie, media_output* output)
+status_t BMediaClientNode::GetNextOutput(int32* cookie, media_output* output)
 {
 	CALLED();
 
@@ -357,8 +336,7 @@ BMediaClientNode::GetNextOutput(int32* cookie, media_output* output)
 }
 
 
-status_t
-BMediaClientNode::DisposeOutputCookie(int32 cookie)
+status_t BMediaClientNode::DisposeOutputCookie(int32 cookie)
 {
 	CALLED();
 
@@ -366,8 +344,7 @@ BMediaClientNode::DisposeOutputCookie(int32 cookie)
 }
 
 
-status_t
-BMediaClientNode::SetBufferGroup(const media_source& source, BBufferGroup* group)
+status_t BMediaClientNode::SetBufferGroup(const media_source& source, BBufferGroup* group)
 {
 	CALLED();
 
@@ -400,8 +377,7 @@ BMediaClientNode::SetBufferGroup(const media_source& source, BBufferGroup* group
 }
 
 
-status_t
-BMediaClientNode::PrepareToConnect(const media_source& source,
+status_t BMediaClientNode::PrepareToConnect(const media_source& source,
 	const media_destination& dest, media_format* format,
 	media_source* out_source, char *name)
 {
@@ -432,8 +408,7 @@ BMediaClientNode::PrepareToConnect(const media_source& source,
 }
 
 
-void
-BMediaClientNode::Connect(status_t status, const media_source& source,
+void BMediaClientNode::Connect(status_t status, const media_source& source,
 	const media_destination& dest, const media_format& format,
 	char* name)
 {
@@ -460,8 +435,7 @@ BMediaClientNode::Connect(status_t status, const media_source& source,
 }
 
 
-void
-BMediaClientNode::Disconnect(const media_source& source,
+void BMediaClientNode::Disconnect(const media_source& source,
 	const media_destination& dest)
 {
 	CALLED();
@@ -477,8 +451,7 @@ BMediaClientNode::Disconnect(const media_source& source,
 }
 
 
-void
-BMediaClientNode::EnableOutput(const media_source& source,
+void BMediaClientNode::EnableOutput(const media_source& source,
 	bool enabled, int32* _deprecated_)
 {
 	CALLED();
@@ -491,8 +464,7 @@ BMediaClientNode::EnableOutput(const media_source& source,
 }
 
 
-status_t
-BMediaClientNode::GetLatency(bigtime_t* outLatency)
+status_t BMediaClientNode::GetLatency(bigtime_t* outLatency)
 {
 	CALLED();
 
@@ -502,24 +474,21 @@ BMediaClientNode::GetLatency(bigtime_t* outLatency)
 }
 
 
-void
-BMediaClientNode::LatencyChanged(const media_source& source,
+void BMediaClientNode::LatencyChanged(const media_source& source,
 	const media_destination& dest, bigtime_t latency, uint32 flags)
 {
 	CALLED();
 }
 
 
-void
-BMediaClientNode::ProducerDataStatus(const media_destination& dest,
+void BMediaClientNode::ProducerDataStatus(const media_destination& dest,
 	int32 status, bigtime_t when)
 {
 	CALLED();
 }
 
 
-void
-BMediaClientNode::HandleEvent(const media_timed_event* event,
+void BMediaClientNode::HandleEvent(const media_timed_event* event,
 	bigtime_t late, bool realTimeEvent)
 {
 	CALLED();
@@ -566,8 +535,7 @@ BMediaClientNode::~BMediaClientNode()
 }
 
 
-void
-BMediaClientNode::_HandleBuffer(BBuffer* buffer)
+void BMediaClientNode::_HandleBuffer(BBuffer* buffer)
 {
 	CALLED();
 
@@ -581,8 +549,7 @@ BMediaClientNode::_HandleBuffer(BBuffer* buffer)
 }
 
 
-void
-BMediaClientNode::_ProduceNewBuffer(const media_timed_event* event,
+void BMediaClientNode::_ProduceNewBuffer(const media_timed_event* event,
 	bigtime_t late)
 {
 	CALLED();
@@ -597,8 +564,7 @@ BMediaClientNode::_ProduceNewBuffer(const media_timed_event* event,
 }
 
 
-void
-BMediaClientNode::_HandleStart(bigtime_t performanceTime)
+void BMediaClientNode::_HandleStart(bigtime_t performanceTime)
 {
 	CALLED();
 
@@ -610,8 +576,7 @@ BMediaClientNode::_HandleStart(bigtime_t performanceTime)
 }
 
 
-void
-BMediaClientNode::_HandleStop(bigtime_t performanceTime,
+void BMediaClientNode::_HandleStop(bigtime_t performanceTime,
 	bool immediate)
 {
 	CALLED();
@@ -626,8 +591,7 @@ BMediaClientNode::_HandleStop(bigtime_t performanceTime,
 }
 
 
-void
-BMediaClientNode::_HandleSeek(bigtime_t mediaTime,
+void BMediaClientNode::_HandleSeek(bigtime_t mediaTime,
 	bigtime_t performanceTime)
 {
 	CALLED();
@@ -640,8 +604,7 @@ BMediaClientNode::_HandleSeek(bigtime_t mediaTime,
 }
 
 
-void
-BMediaClientNode::_HandleTimeWarp(bigtime_t realTime,
+void BMediaClientNode::_HandleTimeWarp(bigtime_t realTime,
 	bigtime_t performanceTime)
 {
 	CALLED();

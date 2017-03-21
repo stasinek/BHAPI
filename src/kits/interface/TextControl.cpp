@@ -53,7 +53,7 @@ BTextControl::~BTextControl()
 }
 
 
-void
+void 
 BTextControl::SetDivider(float divider)
 {
 	if(fDivider < 0 && divider < 0) return;
@@ -84,7 +84,7 @@ BTextControl::Divider() const
 }
 
 
-void
+void 
 BTextControl::SetModificationMessage(BMessage *msg)
 {
 	if(msg == fModificationMessage) return;
@@ -100,7 +100,7 @@ BTextControl::ModificationMessage() const
 }
 
 
-void
+void 
 BTextControl::SetText(const char *text)
 {
 	BTextEditable::SetText(text);
@@ -108,7 +108,7 @@ BTextControl::SetText(const char *text)
 }
 
 
-void
+void 
 BTextControl::SetLabel(const char *label)
 {
 	BRect margins(1, 1, 1, 1);
@@ -128,7 +128,7 @@ BTextControl::SetLabel(const char *label)
 }
 
 
-void
+void 
 BTextControl::Draw(BRect updateRect)
 {
 	if(Label() != NULL && fDivider != 0 && !IsFocusChanging())
@@ -197,7 +197,7 @@ BTextControl::Draw(BRect updateRect)
 }
 
 
-void
+void 
 BTextControl::GetPreferredSize(float *width, float *height)
 {
 	if(width) *width = 0;
@@ -222,7 +222,7 @@ BTextControl::GetPreferredSize(float *width, float *height)
 }
 
 
-void
+void 
 BTextControl::SetAlignment(bhapi::alignment forLabel, bhapi::alignment forText)
 {
 	if(forLabel == fLabelAlignment && TextAlignment() == forText) return;
@@ -234,7 +234,7 @@ BTextControl::SetAlignment(bhapi::alignment forLabel, bhapi::alignment forText)
 }
 
 
-void
+void 
 BTextControl::GetAlignment(bhapi::alignment *forLabel, bhapi::alignment *forText) const
 {
 	if(forLabel) *forLabel = fLabelAlignment;
@@ -242,7 +242,7 @@ BTextControl::GetAlignment(bhapi::alignment *forLabel, bhapi::alignment *forText
 }
 
 
-void
+void 
 BTextControl::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	BMessage *msg = (Window() == NULL ? NULL : Window()->CurrentMessage());
@@ -258,21 +258,21 @@ BTextControl::KeyDown(const char *bytes,  __be_int32 numBytes)
 			char *selText = NULL;
 			BMessage *clipMsg = NULL;
 
-			if(GetSelection(&startPos, &endPos) == false || bhapi::be_clipboard.Lock() == false) return;
-			if((selText = DuplicateText(startPos, endPos)) != NULL && (clipMsg = bhapi::be_clipboard.Data()) != NULL)
+			if(GetSelection(&startPos, &endPos) == false || bhapi::__be_clipboard.Lock() == false) return;
+			if((selText = DuplicateText(startPos, endPos)) != NULL && (clipMsg = bhapi::__be_clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
 				ssize_t textLen = 0;
 				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
 				   text == NULL || textLen != (ssize_t)strlen(selText) || strncmp(text, selText, (size_t)textLen) != 0)
 				{
-					bhapi::be_clipboard.Clear();
+					bhapi::__be_clipboard.Clear();
 					clipMsg->AddData("text/plain", B_MIME_TYPE, selText, strlen(selText));
-					bhapi::be_clipboard.Commit();
+					bhapi::__be_clipboard.Commit();
 				}
 			}
 			if(selText) free(selText);
-			bhapi::be_clipboard.Unlock();
+			bhapi::__be_clipboard.Unlock();
 
 			if(*bytes == 'x' || *bytes == 'X')
 			{
@@ -287,14 +287,14 @@ BTextControl::KeyDown(const char *bytes,  __be_int32 numBytes)
 			BString str;
 			BMessage *clipMsg = NULL;
 
-			if(bhapi::be_clipboard.Lock() == false) return;
-			if((clipMsg = bhapi::be_clipboard.Data()) != NULL)
+			if(bhapi::__be_clipboard.Lock() == false) return;
+			if((clipMsg = bhapi::__be_clipboard.Data()) != NULL)
 			{
 				const char *text = NULL;
 				ssize_t len = 0;
 				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &len)) str.SetTo(text, (__be_int32)len);
 			}
-			bhapi::be_clipboard.Unlock();
+			bhapi::__be_clipboard.Unlock();
 
 			if(str.Length() <= 0) return;
 

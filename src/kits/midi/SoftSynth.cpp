@@ -79,8 +79,7 @@ BSoftSynth::~BSoftSynth()
 }
 
 
-bool 
-BSoftSynth::InitCheck()
+bool BSoftSynth::InitCheck()
 {
 	if (!fSynth)
 		_Init();
@@ -88,8 +87,7 @@ BSoftSynth::InitCheck()
 }
 
 
-void 
-BSoftSynth::Unload(void)
+void BSoftSynth::Unload(void)
 {
 	_Done();
 	free(fInstrumentsFile);
@@ -97,15 +95,13 @@ BSoftSynth::Unload(void)
 }
 
 
-bool 
-BSoftSynth::IsLoaded(void) const
+bool BSoftSynth::IsLoaded(void) const
 {
 	return fInstrumentsFile != NULL;
 }
 
 
-status_t 
-BSoftSynth::SetDefaultInstrumentsFile()
+status_t BSoftSynth::SetDefaultInstrumentsFile()
 {
 	// TODO: Duplicated code, check MidiSettingsView::_LoadSettings() and
 	// MidiSettingsView::_RetrieveSoftSynthList()
@@ -161,8 +157,7 @@ BSoftSynth::SetDefaultInstrumentsFile()
 }
 
 
-status_t 
-BSoftSynth::SetInstrumentsFile(const char* path)
+status_t BSoftSynth::SetInstrumentsFile(const char* path)
 {
 	if (path == NULL)
 		return B_BAD_VALUE;
@@ -178,40 +173,35 @@ BSoftSynth::SetInstrumentsFile(const char* path)
 }
 
 
-status_t 
-BSoftSynth::LoadAllInstruments()
+status_t BSoftSynth::LoadAllInstruments()
 {
 	InitCheck();
 	return B_OK;
 }
 
 
-status_t 
-BSoftSynth::LoadInstrument(int16 instrument)
+status_t BSoftSynth::LoadInstrument(int16 instrument)
 {
 	UNIMPLEMENTED
 	return B_OK;
 }
 
 
-status_t 
-BSoftSynth::UnloadInstrument(int16 instrument)
+status_t BSoftSynth::UnloadInstrument(int16 instrument)
 {
 	UNIMPLEMENTED
 	return B_OK;
 }
 
 
-status_t 
-BSoftSynth::RemapInstrument(int16 from, int16 to)
+status_t BSoftSynth::RemapInstrument(int16 from, int16 to)
 {
 	UNIMPLEMENTED
 	return B_OK;
 }
 
 
-void 
-BSoftSynth::FlushInstrumentCache(bool startStopCache)
+void BSoftSynth::FlushInstrumentCache(bool startStopCache)
 {
 	// TODO: we may decide not to support this function because it's weird!
 	
@@ -219,8 +209,7 @@ BSoftSynth::FlushInstrumentCache(bool startStopCache)
 }
 
 
-void 
-BSoftSynth::SetVolume(double volume)
+void BSoftSynth::SetVolume(double volume)
 {
 	if (InitCheck())
 		if (volume >= 0.0) {
@@ -236,8 +225,7 @@ BSoftSynth::Volume(void) const
 }
 
 
-status_t 
-BSoftSynth::SetSamplingRate(int32 rate)
+status_t BSoftSynth::SetSamplingRate(int32 rate)
 {
 	if (rate == 22050 || rate == 44100 || rate == 48000) {
 		fSampleRate = rate;
@@ -255,8 +243,7 @@ BSoftSynth::SamplingRate() const
 }
 
 
-status_t 
-BSoftSynth::SetInterpolation(interpolation_mode mode)
+status_t BSoftSynth::SetInterpolation(interpolation_mode mode)
 {
 	// not used because our synth uses the same format than the soundplayer
 	fInterpMode = mode;
@@ -271,8 +258,7 @@ BSoftSynth::Interpolation() const
 }
 
 
-status_t 
-BSoftSynth::EnableReverb(bool enabled)
+status_t BSoftSynth::EnableReverb(bool enabled)
 {
 	fReverbEnabled = enabled;
 	fluid_synth_set_reverb_on(fSynth, enabled);
@@ -280,15 +266,13 @@ BSoftSynth::EnableReverb(bool enabled)
 }
 
 
-bool 
-BSoftSynth::IsReverbEnabled() const
+bool BSoftSynth::IsReverbEnabled() const
 {
 	return fReverbEnabled;
 }
 
 
-void 
-BSoftSynth::SetReverb(reverb_mode mode)
+void BSoftSynth::SetReverb(reverb_mode mode)
 {
 	if (mode < B_REVERB_NONE || mode > B_REVERB_DUNGEON)
 		return;
@@ -310,8 +294,7 @@ BSoftSynth::Reverb() const
 }
 
 
-status_t 
-BSoftSynth::SetMaxVoices(int32 max)
+status_t BSoftSynth::SetMaxVoices(int32 max)
 {
 	if (max > 0 && max <= 4096) {
 		fMaxVoices = max;
@@ -329,8 +312,7 @@ BSoftSynth::MaxVoices(void) const
 }
 
 
-status_t 
-BSoftSynth::SetLimiterThreshold(int32 threshold)
+status_t BSoftSynth::SetLimiterThreshold(int32 threshold)
 {
 	// not used
 	if (threshold > 0 && threshold <= 32) {
@@ -349,22 +331,19 @@ BSoftSynth::LimiterThreshold(void) const
 }
 
 
-void 
-BSoftSynth::Pause(void)
+void BSoftSynth::Pause(void)
 {
 	UNIMPLEMENTED
 }
 
 
-void 
-BSoftSynth::Resume(void)
+void BSoftSynth::Resume(void)
 {
 	UNIMPLEMENTED
 }
 
 
-void 
-BSoftSynth::NoteOff(
+void BSoftSynth::NoteOff(
 	uchar channel, uchar note, uchar velocity, uint32 time)
 {
 	if (InitCheck()) {
@@ -374,8 +353,7 @@ BSoftSynth::NoteOff(
 }
 
 
-void 
-BSoftSynth::NoteOn(
+void BSoftSynth::NoteOn(
 	uchar channel, uchar note, uchar velocity, uint32 time)
 {
 	if (InitCheck()) {
@@ -385,8 +363,7 @@ BSoftSynth::NoteOn(
 }
 
 
-void 
-BSoftSynth::KeyPressure(
+void BSoftSynth::KeyPressure(
 	uchar channel, uchar note, uchar pressure, uint32 time)
 {
 	if (InitCheck()) {
@@ -396,8 +373,7 @@ BSoftSynth::KeyPressure(
 }
 
 
-void 
-BSoftSynth::ControlChange(
+void BSoftSynth::ControlChange(
 	uchar channel, uchar controlNumber, uchar controlValue, uint32 time)
 {
 	if (InitCheck()) {
@@ -407,8 +383,7 @@ BSoftSynth::ControlChange(
 }
 
 
-void 
-BSoftSynth::ProgramChange(
+void BSoftSynth::ProgramChange(
 	uchar channel, uchar programNumber, uint32 time)
 {
 	if (InitCheck()) {
@@ -418,8 +393,7 @@ BSoftSynth::ProgramChange(
 }
 
 
-void 
-BSoftSynth::ChannelPressure(uchar channel, uchar pressure, uint32 time)
+void BSoftSynth::ChannelPressure(uchar channel, uchar pressure, uint32 time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -428,8 +402,7 @@ BSoftSynth::ChannelPressure(uchar channel, uchar pressure, uint32 time)
 }
 
 
-void 
-BSoftSynth::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
+void BSoftSynth::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -440,8 +413,7 @@ BSoftSynth::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
 }
 
 
-void 
-BSoftSynth::SystemExclusive(void* data, size_t length, uint32 time)
+void BSoftSynth::SystemExclusive(void* data, size_t length, uint32 time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -450,8 +422,7 @@ BSoftSynth::SystemExclusive(void* data, size_t length, uint32 time)
 }
 
 
-void 
-BSoftSynth::SystemCommon(
+void BSoftSynth::SystemCommon(
 	uchar status, uchar data1, uchar data2, uint32 time)
 {
 	if (InitCheck()) {
@@ -461,8 +432,7 @@ BSoftSynth::SystemCommon(
 }
 
 
-void 
-BSoftSynth::SystemRealTime(uchar status, uint32 time)
+void BSoftSynth::SystemRealTime(uchar status, uint32 time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -471,8 +441,7 @@ BSoftSynth::SystemRealTime(uchar status, uint32 time)
 }
 
 
-void 
-BSoftSynth::TempoChange(int32 beatsPerMinute, uint32 time)
+void BSoftSynth::TempoChange(int32 beatsPerMinute, uint32 time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -481,8 +450,7 @@ BSoftSynth::TempoChange(int32 beatsPerMinute, uint32 time)
 }
 
 
-void 
-BSoftSynth::AllNotesOff(bool justChannel, uint32 time)
+void BSoftSynth::AllNotesOff(bool justChannel, uint32 time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -501,8 +469,7 @@ BSoftSynth::AllNotesOff(bool justChannel, uint32 time)
 }
 
 
-void 
-BSoftSynth::_Init()
+void BSoftSynth::_Init()
 {
 	status_t err;
 	fInitCheck = false;
@@ -544,8 +511,7 @@ BSoftSynth::_Init()
 }
 
 
-void 
-BSoftSynth::_Done()
+void BSoftSynth::_Done()
 {
 	if (fSoundPlayer) {
 		fSoundPlayer->SetHasData(false);
@@ -564,8 +530,7 @@ BSoftSynth::_Done()
 }
 
 
-void
-BSoftSynth::PlayBuffer(void* cookie, void* data, size_t size,
+void BSoftSynth::PlayBuffer(void* cookie, void* data, size_t size,
 		const media_raw_audio_format& format)
 {
 	BSoftSynth* synth = (BSoftSynth*)cookie;

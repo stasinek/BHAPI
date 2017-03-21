@@ -42,8 +42,7 @@ enum {
 
 
 // Helper function that contacts the registrar for mime update calls
-status_t
-do_mime_update(int32 what, const char* path, int recursive,
+status_t do_mime_update(int32 what, const char* path, int recursive,
 	int synchronous, int force)
 {
 	BEntry root;
@@ -93,8 +92,7 @@ update_mime_info(const char* path, int recursive, int synchronous, int force)
 
 
 // Creates a MIME database entry for one or more applications.
-status_t
-create_app_meta_mime(const char* path, int recursive, int synchronous,
+status_t create_app_meta_mime(const char* path, int recursive, int synchronous,
 	int force)
 {
 	// Force recursion when given a NULL path
@@ -107,8 +105,7 @@ create_app_meta_mime(const char* path, int recursive, int synchronous,
 
 
 // Retrieves an icon associated with a given device.
-status_t
-get_device_icon(const char* device, void* icon, int32 size)
+status_t get_device_icon(const char* device, void* icon, int32 size)
 {
 	if (device == NULL || icon == NULL
 		|| (size != B_LARGE_ICON && size != B_MINI_ICON))
@@ -164,8 +161,7 @@ get_device_icon(const char* device, void* icon, int32 size)
 
 
 // Retrieves an icon associated with a given device.
-status_t
-get_device_icon(const char* device, BBitmap* icon, icon_size which)
+status_t get_device_icon(const char* device, BBitmap* icon, icon_size which)
 {
 	// check parameters
 	if (device == NULL || icon == NULL)
@@ -220,8 +216,7 @@ get_device_icon(const char* device, BBitmap* icon, icon_size which)
 }
 
 
-status_t
-get_device_icon(const char* device, uint8** _data, size_t* _size,
+status_t get_device_icon(const char* device, uint8** _data, size_t* _size,
 	type_code* _type)
 {
 	if (device == NULL || _data == NULL || _size == NULL || _type == NULL)
@@ -284,8 +279,7 @@ get_device_icon(const char* device, uint8** _data, size_t* _size,
 }
 
 
-status_t
-get_named_icon(const char* name, BBitmap* icon, icon_size which)
+status_t get_named_icon(const char* name, BBitmap* icon, icon_size which)
 {
 	// check parameters
 	if (name == NULL || icon == NULL)
@@ -315,8 +309,7 @@ get_named_icon(const char* name, BBitmap* icon, icon_size which)
 }
 
 
-status_t
-get_named_icon(const char* name, uint8** _data, size_t* _size, type_code* _type)
+status_t get_named_icon(const char* name, uint8** _data, size_t* _size, type_code* _type)
 {
 	if (name == NULL || _data == NULL || _size == NULL || _type == NULL)
 		return B_BAD_VALUE;

@@ -477,22 +477,19 @@ private:
 
 // inlines follow
 
-inline const char*
-SharedCacheEntry::FileType() const
+inline const char*  SharedCacheEntry::FileType() const
 {
     return fFileType.String();
 }
 
 
-inline const char*
-SharedCacheEntry::AppSignature() const
+inline const char*  SharedCacheEntry::AppSignature() const
 {
     return fAppSignature.String();
 }
 
 
-inline bool
-IconCache::NeedsDeletionNotification(IconSource from)
+inline bool IconCache::NeedsDeletionNotification(IconSource from)
 {
     return from == kNode;
 }
@@ -508,8 +505,7 @@ SharedIconCache::ResolveIfAlias(IconCacheEntry* entry) const
 }
 
 
-inline int32
-SharedIconCache::EntryIndex(const SharedCacheEntry* entry) const
+inline int32 SharedIconCache::EntryIndex(const SharedCacheEntry* entry) const
 {
     return fHashTable.ElementIndex(entry);
 }

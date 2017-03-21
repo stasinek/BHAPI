@@ -50,8 +50,7 @@ BTextEncoding::~BTextEncoding()
 }
 
 
-status_t
-BTextEncoding::InitCheck()
+status_t BTextEncoding::InitCheck()
 {
 	if (fName.IsEmpty())
 		return B_NO_INIT;
@@ -60,8 +59,7 @@ BTextEncoding::InitCheck()
 }
 
 
-status_t
-BTextEncoding::Decode(const char* input, size_t& inputLength, char* output,
+status_t BTextEncoding::Decode(const char* input, size_t& inputLength, char* output,
 	size_t& outputLength)
 {
 	const char* base = input;
@@ -100,8 +98,7 @@ BTextEncoding::Decode(const char* input, size_t& inputLength, char* output,
 }
 
 
-status_t
-BTextEncoding::Encode(const char* input, size_t& inputLength, char* output,
+status_t BTextEncoding::Encode(const char* input, size_t& inputLength, char* output,
 	size_t& outputLength)
 {
 	const char* base = input;
@@ -140,8 +137,7 @@ BTextEncoding::Encode(const char* input, size_t& inputLength, char* output,
 }
 
 
-status_t
-BTextEncoding::Flush(char* output, size_t& outputLength)
+status_t BTextEncoding::Flush(char* output, size_t& outputLength)
 {
 	char* target = output;
 

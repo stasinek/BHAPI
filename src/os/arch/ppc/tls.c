@@ -20,8 +20,7 @@ static int32 gNextSlot = TLS_FIRST_FREE_SLOT;
 static void *gSlots[TLS_MAX_KEYS];
 
 
-int32
-tls_allocate(void)
+int32 tls_allocate(void)
 {
 	int32 next = atomic_add(&gNextSlot, 1);
 	if (next >= TLS_MAX_KEYS)

@@ -112,8 +112,7 @@ BNotification::~BNotification()
 
 /*! \brief Returns initialization status.
  */
-status_t
-BNotification::InitCheck() const
+status_t BNotification::InitCheck() const
 {
 	return fInitStatus;
 }
@@ -146,8 +145,7 @@ BNotification::Instantiate(BMessage* archive)
 	- \c B_OK: Everything went fine.
 	- \c Other errors: Archiving has failed.
 */
-status_t
-BNotification::Archive(BMessage* archive, bool deep) const
+status_t BNotification::Archive(BMessage* archive, bool deep) const
 {
 	status_t status = BArchivable::Archive(archive, deep);
 
@@ -221,8 +219,7 @@ BNotification::Type() const
 
 	\return Notification's group.
 */
-const char*
-BNotification::Group() const
+const char*  BNotification::Group() const
 {
 	if (fGroup == "")
 		return NULL;
@@ -234,8 +231,7 @@ BNotification::Group() const
 
 	Notifications can be grouped together setting the same group.
 */
-void
-BNotification::SetGroup(const BString& group)
+void BNotification::SetGroup(const BString& group)
 {
 	fGroup = group;
 }
@@ -245,8 +241,7 @@ BNotification::SetGroup(const BString& group)
 
 	\return Notification's title.
 */
-const char*
-BNotification::Title() const
+const char*  BNotification::Title() const
 {
 	if (fTitle == "")
 		return NULL;
@@ -256,8 +251,7 @@ BNotification::Title() const
 
 /*! \brief Set notification's title.
 */
-void
-BNotification::SetTitle(const BString& title)
+void BNotification::SetTitle(const BString& title)
 {
 	fTitle = title;
 }
@@ -267,8 +261,7 @@ BNotification::SetTitle(const BString& title)
 
 	\return Notification's message.
 */
-const char*
-BNotification::Content() const
+const char*  BNotification::Content() const
 {
 	if (fContent == "")
 		return NULL;
@@ -278,8 +271,7 @@ BNotification::Content() const
 
 /*! \brief Sets notification's message.
 */
-void
-BNotification::SetContent(const BString& content)
+void BNotification::SetContent(const BString& content)
 {
 	fContent = content;
 }
@@ -289,8 +281,7 @@ BNotification::SetContent(const BString& content)
 
 	\return Notification's message identifier.
 */
-const char*
-BNotification::MessageID() const
+const char*  BNotification::MessageID() const
 {
 	if (fID == "")
 		return NULL;
@@ -300,8 +291,7 @@ BNotification::MessageID() const
 
 /*! \brief Sets notification's message identifier.
 */
-void
-BNotification::SetMessageID(const BString& id)
+void BNotification::SetMessageID(const BString& id)
 {
 	fID = id;
 }
@@ -333,8 +323,7 @@ BNotification::Progress() const
 
 	The value of @progress must be between 0.0 and 1.0.
 */
-void
-BNotification::SetProgress(float progress)
+void BNotification::SetProgress(float progress)
 {
 	if (progress < 0)
 		fProgress = 0;
@@ -345,8 +334,7 @@ BNotification::SetProgress(float progress)
 }
 
 
-const char*
-BNotification::OnClickApp() const
+const char*  BNotification::OnClickApp() const
 {
 	if (fApp == "")
 		return NULL;
@@ -354,8 +342,7 @@ BNotification::OnClickApp() const
 }
 
 
-void
-BNotification::SetOnClickApp(const BString& app)
+void BNotification::SetOnClickApp(const BString& app)
 {
 	fApp = app;
 }
@@ -368,8 +355,7 @@ BNotification::OnClickFile() const
 }
 
 
-status_t
-BNotification::SetOnClickFile(const entry_ref* file)
+status_t BNotification::SetOnClickFile(const entry_ref* file)
 {
 	delete fFile;
 
@@ -384,8 +370,7 @@ BNotification::SetOnClickFile(const entry_ref* file)
 }
 
 
-status_t
-BNotification::AddOnClickRef(const entry_ref* ref)
+status_t BNotification::AddOnClickRef(const entry_ref* ref)
 {
 	if (ref == NULL)
 		return B_BAD_VALUE;
@@ -398,8 +383,7 @@ BNotification::AddOnClickRef(const entry_ref* ref)
 }
 
 
-int32
-BNotification::CountOnClickRefs() const
+int32 BNotification::CountOnClickRefs() const
 {
 	return fRefs.CountItems();
 }
@@ -412,8 +396,7 @@ BNotification::OnClickRefAt(int32 index) const
 }
 
 
-status_t
-BNotification::AddOnClickArg(const BString& arg)
+status_t BNotification::AddOnClickArg(const BString& arg)
 {
 	char* clonedArg = strdup(arg.String());
 	if (clonedArg == NULL || !fArgv.AddItem(clonedArg))
@@ -423,15 +406,13 @@ BNotification::AddOnClickArg(const BString& arg)
 }
 
 
-int32
-BNotification::CountOnClickArgs() const
+int32 BNotification::CountOnClickArgs() const
 {
 	return fArgv.CountItems();
 }
 
 
-const char*
-BNotification::OnClickArgAt(int32 index) const
+const char*  BNotification::OnClickArgAt(int32 index) const
 {
 	return (char*)fArgv.ItemAt(index);
 }
@@ -459,8 +440,7 @@ BNotification::Icon() const
 	- \c B_NO_MEMORY: Allocation of @icon copy has failed.
 	- \c Other errors: Creation of @icon copy failed for some reason.
 */
-status_t
-BNotification::SetIcon(const BBitmap* icon)
+status_t BNotification::SetIcon(const BBitmap* icon)
 {
 	delete fBitmap;
 
@@ -488,8 +468,7 @@ BNotification::SetIcon(const BBitmap* icon)
 	  established or the server is not up and running anymore.
 	- \c Other errors: Building the message from the notification failed.
 */
-status_t
-BNotification::Send(bigtime_t timeout)
+status_t BNotification::Send(bigtime_t timeout)
 {
 	BMessage msg(kNotificationMessage);
 

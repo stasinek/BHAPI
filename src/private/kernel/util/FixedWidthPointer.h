@@ -122,32 +122,28 @@ private:
 
 
 template<typename Type>
-inline bool
-operator==(const FixedWidthPointer<Type>& a, const Type* b)
+inline bool operator==(const FixedWidthPointer<Type>& a, const Type* b)
 {
 	return a.Get() == (addr_t)b;
 }
 
 
 template<typename Type>
-inline bool
-operator!=(const FixedWidthPointer<Type>& a, const Type* b)
+inline bool operator!=(const FixedWidthPointer<Type>& a, const Type* b)
 {
 	return a.Get() != (addr_t)b;
 }
 
 
 template<typename Type>
-inline bool
-operator==(const FixedWidthPointer<Type>& a, Type* b)
+inline bool operator==(const FixedWidthPointer<Type>& a, Type* b)
 {
 	return a.Get() == (addr_t)b;
 }
 
 
 template<typename Type>
-inline bool
-operator!=(const FixedWidthPointer<Type>& a, Type* b)
+inline bool operator!=(const FixedWidthPointer<Type>& a, Type* b)
 {
 	return a.Get() != (addr_t)b;
 }

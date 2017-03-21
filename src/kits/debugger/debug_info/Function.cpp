@@ -29,8 +29,7 @@ Function::~Function()
 }
 
 
-void
-Function::SetSourceCode(FileSourceCode* source, function_source_state state)
+void Function::SetSourceCode(FileSourceCode* source, function_source_state state)
 {
 	if (source == fSourceCode && state == fSourceCodeState)
 		return;
@@ -58,22 +57,19 @@ Function::SetSourceCode(FileSourceCode* source, function_source_state state)
 }
 
 
-void
-Function::AddListener(Listener* listener)
+void Function::AddListener(Listener* listener)
 {
 	fListeners.Add(listener);
 }
 
 
-void
-Function::RemoveListener(Listener* listener)
+void Function::RemoveListener(Listener* listener)
 {
 	fListeners.Remove(listener);
 }
 
 
-void
-Function::AddInstance(FunctionInstance* instance)
+void Function::AddInstance(FunctionInstance* instance)
 {
 	bool firstInstance = fInstances.IsEmpty();
 	fInstances.Add(instance);
@@ -84,8 +80,7 @@ Function::AddInstance(FunctionInstance* instance)
 }
 
 
-void
-Function::RemoveInstance(FunctionInstance* instance)
+void Function::RemoveInstance(FunctionInstance* instance)
 {
 	fInstances.Remove(instance);
 	if (fInstances.IsEmpty() && instance->SourceFile() != NULL) {
@@ -95,8 +90,7 @@ Function::RemoveInstance(FunctionInstance* instance)
 }
 
 
-void
-Function::NotifySourceCodeChanged()
+void Function::NotifySourceCodeChanged()
 {
 	if (fNotificationsDisabled > 0)
 		return;
@@ -108,8 +102,7 @@ Function::NotifySourceCodeChanged()
 }
 
 
-void
-Function::LocatableFileChanged(LocatableFile* file)
+void Function::LocatableFileChanged(LocatableFile* file)
 {
 	BString locatedPath;
 	BString path;
@@ -132,7 +125,6 @@ Function::Listener::~Listener()
 }
 
 
-void
-Function::Listener::FunctionSourceCodeChanged(Function* function)
+void Function::Listener::FunctionSourceCodeChanged(Function* function)
 {
 }

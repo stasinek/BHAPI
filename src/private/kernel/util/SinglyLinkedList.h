@@ -177,8 +177,7 @@ class SinglyLinkedList {
 
 // Add
 SINGLY_LINKED_LIST_TEMPLATE_LIST
-void
-SINGLY_LINKED_LIST_CLASS_NAME::Add(Element* element)
+void SINGLY_LINKED_LIST_CLASS_NAME::Add(Element* element)
 {
 	if (element != NULL) {
 		sGetLink(element)->next = fFirst;
@@ -195,8 +194,7 @@ SINGLY_LINKED_LIST_CLASS_NAME::Add(Element* element)
 		\c false otherwise.
 */
 SINGLY_LINKED_LIST_TEMPLATE_LIST
-bool
-SINGLY_LINKED_LIST_CLASS_NAME::Remove(Element* element)
+bool SINGLY_LINKED_LIST_CLASS_NAME::Remove(Element* element)
 {
 	if (element == NULL)
 		return false;
@@ -222,8 +220,7 @@ SINGLY_LINKED_LIST_CLASS_NAME::Remove(Element* element)
 
 
 SINGLY_LINKED_LIST_TEMPLATE_LIST
-void
-SINGLY_LINKED_LIST_CLASS_NAME::Remove(Element* previous, Element* element)
+void SINGLY_LINKED_LIST_CLASS_NAME::Remove(Element* previous, Element* element)
 {
 //	ASSERT(previous == NULL
 //		? fFirst == element : sGetLink(previous)->next == element);
@@ -239,8 +236,7 @@ SINGLY_LINKED_LIST_CLASS_NAME::Remove(Element* previous, Element* element)
 
 
 SINGLY_LINKED_LIST_TEMPLATE_LIST
-void
-SINGLY_LINKED_LIST_CLASS_NAME::MoveFrom(SINGLY_LINKED_LIST_CLASS_NAME* fromList)
+void SINGLY_LINKED_LIST_CLASS_NAME::MoveFrom(SINGLY_LINKED_LIST_CLASS_NAME* fromList)
 {
 	if (fromList->fFirst == NULL)
 		return;
@@ -264,8 +260,7 @@ SINGLY_LINKED_LIST_CLASS_NAME::MoveFrom(SINGLY_LINKED_LIST_CLASS_NAME* fromList)
 
 // RemoveAll
 SINGLY_LINKED_LIST_TEMPLATE_LIST
-void
-SINGLY_LINKED_LIST_CLASS_NAME::RemoveAll()
+void SINGLY_LINKED_LIST_CLASS_NAME::RemoveAll()
 {
 	Element* element = fFirst;
 	while (element) {
@@ -299,8 +294,7 @@ SINGLY_LINKED_LIST_CLASS_NAME::GetNext(Element* element) const
 
 // Size
 SINGLY_LINKED_LIST_TEMPLATE_LIST
-int32
-SINGLY_LINKED_LIST_CLASS_NAME::Size() const
+int32 SINGLY_LINKED_LIST_CLASS_NAME::Size() const
 {
 	int32 count = 0;
 	for (Element* element = First(); element; element = GetNext(element))

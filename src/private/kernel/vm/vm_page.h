@@ -74,8 +74,7 @@ bool vm_page_is_dummy(struct vm_page *page);
 #endif
 
 
-static inline void
-vm_page_free(struct VMCache *cache, struct vm_page *page)
+static inline void vm_page_free(struct VMCache *cache, struct vm_page *page)
 {
 	vm_page_free_etc(cache, page, NULL);
 }

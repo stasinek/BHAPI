@@ -148,8 +148,7 @@ BSymLink::MakeLinkedPath(const BDirectory* dir, BPath* path)
 
 
 // Returns whether or not the object refers to an absolute path.
-bool
-BSymLink::IsAbsolute()
+bool BSymLink::IsAbsolute()
 {
 	char contents[B_PATH_NAME_LENGTH];
 	bool result = (ReadLink(contents, sizeof(contents)) >= 0);

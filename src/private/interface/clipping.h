@@ -71,8 +71,7 @@ sect_rect(const clipping_rect &r1, const clipping_rect &r2)
 
 
 // Adds the given offsets to the given rect.
-static inline void
-offset_rect(clipping_rect &rect, int32 x, int32 y)
+static inline void offset_rect(clipping_rect &rect, int32 x, int32 y)
 {
 	rect.left += x;
 	rect.top += y;
@@ -81,8 +80,7 @@ offset_rect(clipping_rect &rect, int32 x, int32 y)
 }
 
 
-static inline void
-scale_rect(clipping_rect& rect, float x, float y)
+static inline void scale_rect(clipping_rect& rect, float x, float y)
 {
 	rect.left = (int)(rect.left * x);
 	rect.top = (int)(rect.top * y);
@@ -125,8 +123,7 @@ to_clipping_rect(const BRect &rect)
 
 
 // Checks if the given point lies in the given rect's area
-static inline bool
-point_in(const clipping_rect &rect, int32 px, int32 py)
+static inline bool point_in(const clipping_rect &rect, int32 px, int32 py)
 {
 	if (px >= rect.left && px <= rect.right 
 			&& py >= rect.top && py <= rect.bottom)
@@ -136,8 +133,7 @@ point_in(const clipping_rect &rect, int32 px, int32 py)
 
 
 // Same as above, but it accepts a BPoint parameter
-static inline bool
-point_in(const clipping_rect &rect, const BPoint &pt)
+static inline bool point_in(const clipping_rect &rect, const BPoint &pt)
 {
 	if (pt.x >= rect.left && pt.x <= rect.right 
 			&& pt.y >= rect.top && pt.y <= rect.bottom)
@@ -146,8 +142,7 @@ point_in(const clipping_rect &rect, const BPoint &pt)
 }
 
 
-static inline bool
-rect_contains(const clipping_rect &rect, const clipping_rect &testRect)
+static inline bool rect_contains(const clipping_rect &rect, const clipping_rect &testRect)
 {
 	return rect.top <= testRect.top && rect.bottom >= testRect.bottom
 			&& rect.left <= testRect.left && rect.right >= testRect.right;
@@ -155,8 +150,7 @@ rect_contains(const clipping_rect &rect, const clipping_rect &testRect)
 
 
 // Checks if the rect is valid
-static inline bool
-valid_rect(const clipping_rect &rect)
+static inline bool valid_rect(const clipping_rect &rect)
 {
 	if (rect.left <= rect.right && rect.top <= rect.bottom)
 		return true;
@@ -165,8 +159,7 @@ valid_rect(const clipping_rect &rect)
 
 
 // Checks if the two rects intersect.
-static inline bool
-rects_intersect(const clipping_rect &rectA, const clipping_rect &rectB)
+static inline bool rects_intersect(const clipping_rect &rectA, const clipping_rect &rectB)
 {
 	// We behave like BRect::Intersects() does:
 	// we return false if one of the two rects is not valid
@@ -183,16 +176,14 @@ rects_intersect(const clipping_rect &rectA, const clipping_rect &rectB)
 
 
 // Returns the width of the given rect.
-static inline int32
-rect_width(const clipping_rect &rect)
+static inline int32 rect_width(const clipping_rect &rect)
 {
 	return rect.right - rect.left;
 }
 
 
 // Returns the height of the given rect.
-static inline int32
-rect_height(const clipping_rect &rect)
+static inline int32 rect_height(const clipping_rect &rect)
 {
 	return rect.bottom - rect.top;
 }

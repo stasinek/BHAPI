@@ -61,8 +61,7 @@ BEventStream::Start()
 }
 
 
-void
-BEventStream::SetStart(mk_time)
+void BEventStream::SetStart(mk_time)
 {
 	UNIMPLEMENTED();
 }
@@ -77,15 +76,13 @@ BEventStream::Duration()
 }
 
 
-void
-BEventStream::SetDuration(mk_time)
+void BEventStream::SetDuration(mk_time)
 {
 	UNIMPLEMENTED();
 }
 
 
-status_t
-BEventStream::SeekToTime(BMediaChannel *channel,
+status_t BEventStream::SeekToTime(BMediaChannel *channel,
 						 mk_time time)
 {
 	UNIMPLEMENTED();
@@ -136,8 +133,7 @@ BMediaRenderer::Transport()
 }
 
 
-void
-BMediaRenderer::SetTransport(BTransport *)
+void BMediaRenderer::SetTransport(BTransport *)
 {
 	UNIMPLEMENTED();
 }
@@ -169,29 +165,25 @@ BMediaRenderer::TimeBase()
 }
 
 
-void
-BMediaRenderer::Open()
+void BMediaRenderer::Open()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BMediaRenderer::Close()
+void BMediaRenderer::Close()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BMediaRenderer::WakeUp()
+void BMediaRenderer::WakeUp()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BMediaRenderer::TransportChanged(mk_time time,
+void BMediaRenderer::TransportChanged(mk_time time,
 								 mk_rate rate,
 								 transport_status status)
 {
@@ -199,36 +191,31 @@ BMediaRenderer::TransportChanged(mk_time time,
 }
 
 
-void
-BMediaRenderer::StreamChanged()
+void BMediaRenderer::StreamChanged()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BMediaRenderer::OpenReceived()
+void BMediaRenderer::OpenReceived()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BMediaRenderer::CloseReceived()
+void BMediaRenderer::CloseReceived()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BMediaRenderer::WakeUpReceived()
+void BMediaRenderer::WakeUpReceived()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BMediaRenderer::TransportChangedReceived(mk_time time,
+void BMediaRenderer::TransportChangedReceived(mk_time time,
 										 mk_rate rate,
 										 transport_status status)
 {
@@ -236,8 +223,7 @@ BMediaRenderer::TransportChangedReceived(mk_time time,
 }
 
 
-void
-BMediaRenderer::StreamChangedReceived()
+void BMediaRenderer::StreamChangedReceived()
 {
 	UNIMPLEMENTED();
 }
@@ -247,8 +233,7 @@ BMediaRenderer::StreamChangedReceived()
  *************************************************************/
 
 
-int32
-BMediaRenderer::_LoopThread(void *arg)
+int32 BMediaRenderer::_LoopThread(void *arg)
 {
 	UNIMPLEMENTED();
 
@@ -256,8 +241,7 @@ BMediaRenderer::_LoopThread(void *arg)
 }
 
 
-void
-BMediaRenderer::LoopThread()
+void BMediaRenderer::LoopThread()
 {
 	UNIMPLEMENTED();
 }
@@ -287,8 +271,7 @@ BTransport::TimeBase()
 }
 
 
-void
-BTransport::SetTimeBase(BTimeBase *)
+void BTransport::SetTimeBase(BTimeBase *)
 {
 	UNIMPLEMENTED();
 }
@@ -302,15 +285,13 @@ BTransport::Renderers()
 }
 
 
-void
-BTransport::AddRenderer(BMediaRenderer *)
+void BTransport::AddRenderer(BMediaRenderer *)
 {
 	UNIMPLEMENTED();
 }
 
 
-bool
-BTransport::RemoveRenderer(BMediaRenderer *)
+bool BTransport::RemoveRenderer(BMediaRenderer *)
 {
 	UNIMPLEMENTED();
 
@@ -327,8 +308,7 @@ BTransport::Status()
 }
 
 
-void
-BTransport::SetStatus(transport_status)
+void BTransport::SetStatus(transport_status)
 {
 	UNIMPLEMENTED();
 }
@@ -361,8 +341,7 @@ BTransport::TimeOffset()
 }
 
 
-void
-BTransport::SetTimeOffset(mk_time)
+void BTransport::SetTimeOffset(mk_time)
 {
 	UNIMPLEMENTED();
 }
@@ -395,44 +374,38 @@ BTransport::PerformanceEnd()
 }
 
 
-void
-BTransport::Open()
+void BTransport::Open()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BTransport::Close()
+void BTransport::Close()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BTransport::TransportChanged()
+void BTransport::TransportChanged()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BTransport::TimeSkipped()
+void BTransport::TimeSkipped()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BTransport::RequestWakeUp(mk_time,
+void BTransport::RequestWakeUp(mk_time,
 						  BMediaRenderer *)
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BTransport::SeekToTime(mk_time)
+void BTransport::SeekToTime(mk_time)
 {
 	UNIMPLEMENTED();
 }
@@ -470,15 +443,13 @@ BTimeBase::Transports()
 }
 
 
-void
-BTimeBase::AddTransport(BTransport *)
+void BTimeBase::AddTransport(BTransport *)
 {
 	UNIMPLEMENTED();
 }
 
 
-bool
-BTimeBase::RemoveTransport(BTransport *)
+bool BTimeBase::RemoveTransport(BTransport *)
 {
 	UNIMPLEMENTED();
 
@@ -486,15 +457,13 @@ BTimeBase::RemoveTransport(BTransport *)
 }
 
 
-void
-BTimeBase::TimeSkipped()
+void BTimeBase::TimeSkipped()
 {
 	UNIMPLEMENTED();
 }
 
 
-status_t
-BTimeBase::CallAt(mk_time time,
+status_t BTimeBase::CallAt(mk_time time,
 				  mk_deferred_call function,
 				  void *arg)
 {
@@ -540,16 +509,14 @@ BTimeBase::SystemTimeAt(mk_time time)
 }
 
 
-void
-BTimeBase::Sync(mk_time time,
+void BTimeBase::Sync(mk_time time,
 				bigtime_t system_time)
 {
 	UNIMPLEMENTED();
 }
 
 
-bool
-BTimeBase::IsAbsolute()
+bool BTimeBase::IsAbsolute()
 {
 	UNIMPLEMENTED();
 
@@ -560,8 +527,7 @@ BTimeBase::IsAbsolute()
  * private BTimeBase
  *************************************************************/
 
-int32
-BTimeBase::_SnoozeThread(void *arg)
+int32 BTimeBase::_SnoozeThread(void *arg)
 {
 	UNIMPLEMENTED();
 
@@ -569,8 +535,7 @@ BTimeBase::_SnoozeThread(void *arg)
 }
 
 
-void
-BTimeBase::SnoozeThread()
+void BTimeBase::SnoozeThread()
 {
 	UNIMPLEMENTED();
 }
@@ -601,8 +566,7 @@ BMediaChannel::Renderer()
 }
 
 
-void
-BMediaChannel::SetRenderer(BMediaRenderer *)
+void BMediaChannel::SetRenderer(BMediaRenderer *)
 {
 	UNIMPLEMENTED();
 }
@@ -616,8 +580,7 @@ BMediaChannel::Source()
 }
 
 
-void
-BMediaChannel::SetSource(BEventStream *)
+void BMediaChannel::SetSource(BEventStream *)
 {
 	UNIMPLEMENTED();
 }
@@ -632,15 +595,13 @@ BMediaChannel::Rate()
 }
 
 
-void
-BMediaChannel::SetRate(mk_rate)
+void BMediaChannel::SetRate(mk_rate)
 {
 	UNIMPLEMENTED();
 }
 
 
-bool
-BMediaChannel::LockChannel()
+bool BMediaChannel::LockChannel()
 {
 	UNIMPLEMENTED();
 
@@ -648,8 +609,7 @@ BMediaChannel::LockChannel()
 }
 
 
-status_t
-BMediaChannel::LockWithTimeout(bigtime_t)
+status_t BMediaChannel::LockWithTimeout(bigtime_t)
 {
 	UNIMPLEMENTED();
 
@@ -657,15 +617,13 @@ BMediaChannel::LockWithTimeout(bigtime_t)
 }
 
 
-void
-BMediaChannel::UnlockChannel()
+void BMediaChannel::UnlockChannel()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BMediaChannel::StreamChanged()
+void BMediaChannel::StreamChanged()
 {
 	UNIMPLEMENTED();
 }

@@ -26,8 +26,7 @@ RepairJob::~RepairJob()
 
 
 // Do
-status_t
-RepairJob::Do()
+status_t RepairJob::Do()
 {
 	int32 changeCounter = fPartition->ChangeCounter();
 	status_t error = _kern_repair_partition(fPartition->PartitionID(),

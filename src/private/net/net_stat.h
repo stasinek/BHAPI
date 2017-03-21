@@ -6,7 +6,7 @@
 #define NET_STAT_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <sys/socket.h>
 

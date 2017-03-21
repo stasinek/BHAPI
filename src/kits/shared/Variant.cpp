@@ -53,8 +53,7 @@ BVariant::~BVariant()
 }
 
 
-status_t
-BVariant::SetToTypedData(const void* data, type_code type)
+status_t BVariant::SetToTypedData(const void* data, type_code type)
 {
 	Unset();
 
@@ -112,8 +111,7 @@ BVariant::SetToTypedData(const void* data, type_code type)
 }
 
 
-void
-BVariant::Unset()
+void BVariant::Unset()
 {
 	if ((fFlags & B_VARIANT_OWNS_DATA) != 0) {
 		switch (fType) {
@@ -133,8 +131,7 @@ BVariant::Unset()
 }
 
 
-bool
-BVariant::operator==(const BVariant& other) const
+bool BVariant::operator==(const BVariant& other) const
 {
 	if (fType == 0)
 		return other.fType == 0;
@@ -206,8 +203,7 @@ BVariant::Bytes() const
 }
 
 
-bool
-BVariant::ToBool() const
+bool BVariant::ToBool() const
 {
 	switch (fType) {
 		case B_BOOL_TYPE:
@@ -272,29 +268,25 @@ BVariant::ToUInt16() const
 }
 
 
-int32
-BVariant::ToInt32() const
+int32 BVariant::ToInt32() const
 {
 	return _ToNumber<int32>();
 }
 
 
-uint32
-BVariant::ToUInt32() const
+uint32 BVariant::ToUInt32() const
 {
 	return _ToNumber<uint32>();
 }
 
 
-int64
-BVariant::ToInt64() const
+int64 BVariant::ToInt64() const
 {
 	return _ToNumber<int64>();
 }
 
 
-uint64
-BVariant::ToUInt64() const
+uint64 BVariant::ToUInt64() const
 {
 	return _ToNumber<uint64>();
 }
@@ -321,22 +313,19 @@ BVariant::ToRect() const
 }
 
 
-void*
-BVariant::ToPointer() const
+void*   BVariant::ToPointer() const
 {
 	return fType == B_POINTER_TYPE ? fString : NULL;
 }
 
 
-const char*
-BVariant::ToString() const
+const char*  BVariant::ToString() const
 {
 	return fType == B_STRING_TYPE ? fString : NULL;
 }
 
 
-void
-BVariant::_SetTo(const BVariant& other)
+void BVariant::_SetTo(const BVariant& other)
 {
 	if ((other.fFlags & B_VARIANT_OWNS_DATA) != 0) {
 		switch (other.fType) {
@@ -365,8 +354,7 @@ BVariant::ToReferenceable() const
 }
 
 
-void
-BVariant::SwapEndianess()
+void BVariant::SwapEndianess()
 {
 	if (!IsNumber() || fType == B_POINTER_TYPE)
 		return;
@@ -375,8 +363,7 @@ BVariant::SwapEndianess()
 }
 
 
-status_t
-BVariant::AddToMessage(BMessage& message, const char* fieldName) const
+status_t BVariant::AddToMessage(BMessage& message, const char* fieldName) const
 {
 	switch (fType) {
 		case B_BOOL_TYPE:
@@ -414,8 +401,7 @@ BVariant::AddToMessage(BMessage& message, const char* fieldName) const
 }
 
 
-status_t
-BVariant::SetFromMessage(const BMessage& message, const char* fieldName)
+status_t BVariant::SetFromMessage(const BMessage& message, const char* fieldName)
 {
 	// get the message field info
 	type_code type;
@@ -472,8 +458,7 @@ BVariant::SizeOfType(type_code type)
 }
 
 
-/*static*/ bool
-BVariant::TypeIsNumber(type_code type)
+/*static*/ bool BVariant::TypeIsNumber(type_code type)
 {
 	switch (type) {
 		case B_INT8_TYPE:
@@ -493,8 +478,7 @@ BVariant::TypeIsNumber(type_code type)
 }
 
 
-/*static*/ bool
-BVariant::TypeIsInteger(type_code type, bool* _isSigned)
+/*static*/ bool BVariant::TypeIsInteger(type_code type, bool* _isSigned)
 {
 	switch (type) {
 		case B_INT8_TYPE:
@@ -517,8 +501,7 @@ BVariant::TypeIsInteger(type_code type, bool* _isSigned)
 }
 
 
-/*static*/ bool
-BVariant::TypeIsFloat(type_code type)
+/*static*/ bool BVariant::TypeIsFloat(type_code type)
 {
 	switch (type) {
 		case B_FLOAT_TYPE:
@@ -530,8 +513,7 @@ BVariant::TypeIsFloat(type_code type)
 }
 
 
-void
-BVariant::_SetTo(bool value)
+void BVariant::_SetTo(bool value)
 {
 	fType = B_BOOL_TYPE;
 	fFlags = 0;
@@ -539,8 +521,7 @@ BVariant::_SetTo(bool value)
 }
 
 
-void
-BVariant::_SetTo(int8 value)
+void BVariant::_SetTo(int8 value)
 {
 	fType = B_INT8_TYPE;
 	fFlags = 0;
@@ -548,8 +529,7 @@ BVariant::_SetTo(int8 value)
 }
 
 
-void
-BVariant::_SetTo(uint8 value)
+void BVariant::_SetTo(uint8 value)
 {
 	fType = B_UINT8_TYPE;
 	fFlags = 0;
@@ -557,8 +537,7 @@ BVariant::_SetTo(uint8 value)
 }
 
 
-void
-BVariant::_SetTo(int16 value)
+void BVariant::_SetTo(int16 value)
 {
 	fType = B_INT16_TYPE;
 	fFlags = 0;
@@ -566,8 +545,7 @@ BVariant::_SetTo(int16 value)
 }
 
 
-void
-BVariant::_SetTo(uint16 value)
+void BVariant::_SetTo(uint16 value)
 {
 	fType = B_UINT16_TYPE;
 	fFlags = 0;
@@ -575,8 +553,7 @@ BVariant::_SetTo(uint16 value)
 }
 
 
-void
-BVariant::_SetTo(int32 value)
+void BVariant::_SetTo(int32 value)
 {
 	fType = B_INT32_TYPE;
 	fFlags = 0;
@@ -584,8 +561,7 @@ BVariant::_SetTo(int32 value)
 }
 
 
-void
-BVariant::_SetTo(uint32 value)
+void BVariant::_SetTo(uint32 value)
 {
 	fType = B_UINT32_TYPE;
 	fFlags = 0;
@@ -593,8 +569,7 @@ BVariant::_SetTo(uint32 value)
 }
 
 
-void
-BVariant::_SetTo(int64 value)
+void BVariant::_SetTo(int64 value)
 {
 	fType = B_INT64_TYPE;
 	fFlags = 0;
@@ -602,8 +577,7 @@ BVariant::_SetTo(int64 value)
 }
 
 
-void
-BVariant::_SetTo(uint64 value)
+void BVariant::_SetTo(uint64 value)
 {
 	fType = B_UINT64_TYPE;
 	fFlags = 0;
@@ -611,8 +585,7 @@ BVariant::_SetTo(uint64 value)
 }
 
 
-void
-BVariant::_SetTo(float value)
+void BVariant::_SetTo(float value)
 {
 	fType = B_FLOAT_TYPE;
 	fFlags = 0;
@@ -620,8 +593,7 @@ BVariant::_SetTo(float value)
 }
 
 
-void
-BVariant::_SetTo(double value)
+void BVariant::_SetTo(double value)
 {
 	fType = B_DOUBLE_TYPE;
 	fFlags = 0;
@@ -629,8 +601,7 @@ BVariant::_SetTo(double value)
 }
 
 
-void
-BVariant::_SetTo(float left, float top, float right, float bottom)
+void BVariant::_SetTo(float left, float top, float right, float bottom)
 {
 	fType = B_RECT_TYPE;
 	fFlags = 0;
@@ -641,8 +612,7 @@ BVariant::_SetTo(float left, float top, float right, float bottom)
 }
 
 
-void
-BVariant::_SetTo(const void* value)
+void BVariant::_SetTo(const void* value)
 {
 	fType = B_POINTER_TYPE;
 	fFlags = 0;
@@ -650,8 +620,7 @@ BVariant::_SetTo(const void* value)
 }
 
 
-bool
-BVariant::_SetTo(const char* value, uint32 flags)
+bool BVariant::_SetTo(const char* value, uint32 flags)
 {
 	fType = B_STRING_TYPE;
 	fFlags = 0;
@@ -673,8 +642,7 @@ BVariant::_SetTo(const char* value, uint32 flags)
 }
 
 
-void
-BVariant::_SetTo(BReferenceable* value, type_code type)
+void BVariant::_SetTo(BReferenceable* value, type_code type)
 {
 	fType = type;
 	fFlags = B_VARIANT_REFERENCEABLE_DATA;

@@ -582,8 +582,7 @@ typedef struct {
 
 #ifdef __cplusplus
 
-inline bool
-Elf32_Ehdr::IsHostEndian() const
+inline bool Elf32_Ehdr::IsHostEndian() const
 {
 #if B_HOST_IS_LENDIAN
 	return e_ident[EI_DATA] == ELFDATA2LSB;
@@ -593,8 +592,7 @@ Elf32_Ehdr::IsHostEndian() const
 }
 
 
-inline bool
-Elf64_Ehdr::IsHostEndian() const
+inline bool Elf64_Ehdr::IsHostEndian() const
 {
 #if B_HOST_IS_LENDIAN
 	return e_ident[EI_DATA] == ELFDATA2LSB;
@@ -604,29 +602,25 @@ Elf64_Ehdr::IsHostEndian() const
 }
 
 
-inline bool
-Elf32_Phdr::IsReadWrite() const
+inline bool Elf32_Phdr::IsReadWrite() const
 {
 	return !(~p_flags & (PF_READ | PF_WRITE));
 }
 
 
-inline bool
-Elf32_Phdr::IsExecutable() const
+inline bool Elf32_Phdr::IsExecutable() const
 {
 	return (p_flags & PF_EXECUTE) != 0;
 }
 
 
-inline bool
-Elf64_Phdr::IsReadWrite() const
+inline bool Elf64_Phdr::IsReadWrite() const
 {
 	return !(~p_flags & (PF_READ | PF_WRITE));
 }
 
 
-inline bool
-Elf64_Phdr::IsExecutable() const
+inline bool Elf64_Phdr::IsExecutable() const
 {
 	return (p_flags & PF_EXECUTE) != 0;
 }
@@ -646,8 +640,7 @@ Elf32_Sym::Type() const
 }
 
 
-inline void
-Elf32_Sym::SetInfo(uint8 bind, uint8 type)
+inline void Elf32_Sym::SetInfo(uint8 bind, uint8 type)
 {
 	st_info = ELF32_ST_INFO(bind, type);
 }
@@ -667,8 +660,7 @@ Elf64_Sym::Type() const
 }
 
 
-inline void
-Elf64_Sym::SetInfo(uint8 bind, uint8 type)
+inline void Elf64_Sym::SetInfo(uint8 bind, uint8 type)
 {
 	st_info = ELF64_ST_INFO(bind, type);
 }

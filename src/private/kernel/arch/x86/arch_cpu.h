@@ -498,15 +498,13 @@ void x86_fxsave_swap(void* oldFpuState, const void* newFpuState);
 #endif
 
 
-static inline void
-arch_cpu_idle(void)
+static inline void arch_cpu_idle(void)
 {
 	gCpuIdleFunc();
 }
 
 
-static inline void
-arch_cpu_pause(void)
+static inline void arch_cpu_pause(void)
 {
 	asm volatile("pause" : : : "memory");
 }

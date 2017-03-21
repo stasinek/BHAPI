@@ -92,8 +92,7 @@ TeamMemoryBlockManager::~TeamMemoryBlockManager()
 }
 
 
-status_t
-TeamMemoryBlockManager::Init()
+status_t TeamMemoryBlockManager::Init()
 {
 	status_t result = fLock.InitCheck();
 	if (result != B_OK)
@@ -156,8 +155,7 @@ TeamMemoryBlockManager::GetMemoryBlock(target_addr_t address)
 }
 
 
-void
-TeamMemoryBlockManager::_Cleanup()
+void TeamMemoryBlockManager::_Cleanup()
 {
 	if (fActiveBlocks != NULL) {
 		MemoryBlockEntry* entry = fActiveBlocks->Clear(true);
@@ -174,8 +172,7 @@ TeamMemoryBlockManager::_Cleanup()
 }
 
 
-void
-TeamMemoryBlockManager::_MarkDeadBlock(target_addr_t address)
+void TeamMemoryBlockManager::_MarkDeadBlock(target_addr_t address)
 {
 	MemoryBlockEntry* entry = fActiveBlocks->Lookup(address);
 	if (entry != NULL) {
@@ -186,8 +183,7 @@ TeamMemoryBlockManager::_MarkDeadBlock(target_addr_t address)
 }
 
 
-void
-TeamMemoryBlockManager::_RemoveBlock(target_addr_t address)
+void TeamMemoryBlockManager::_RemoveBlock(target_addr_t address)
 {
 	AutoLocker<BLocker> lock(fLock);
 	MemoryBlockEntry* entry = fActiveBlocks->Lookup(address);
@@ -220,8 +216,7 @@ TeamMemoryBlockOwner::~TeamMemoryBlockOwner()
 }
 
 
-void
-TeamMemoryBlockOwner::RemoveBlock(TeamMemoryBlock* block)
+void TeamMemoryBlockOwner::RemoveBlock(TeamMemoryBlock* block)
 {
 	fBlockManager->_RemoveBlock(block->BaseAddress());
 }

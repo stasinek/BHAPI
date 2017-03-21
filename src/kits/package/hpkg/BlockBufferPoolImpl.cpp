@@ -47,8 +47,7 @@ BlockBufferPoolImpl::~BlockBufferPoolImpl()
 }
 
 
-status_t
-BlockBufferPoolImpl::Init()
+status_t BlockBufferPoolImpl::Init()
 {
 	return B_OK;
 }
@@ -107,8 +106,7 @@ BlockBufferPoolImpl::GetBuffer(size_t size, PoolBuffer** owner, bool* _newBuffer
 }
 
 
-void
-BlockBufferPoolImpl::PutBufferAndCache(PoolBuffer** owner)
+void BlockBufferPoolImpl::PutBufferAndCache(PoolBuffer** owner)
 {
 	PoolBuffer* buffer = *owner;
 
@@ -140,8 +138,7 @@ BlockBufferPoolImpl::PutBufferAndCache(PoolBuffer** owner)
 }
 
 
-void
-BlockBufferPoolImpl::PutBuffer(PoolBuffer** owner)
+void BlockBufferPoolImpl::PutBuffer(PoolBuffer** owner)
 {
 	AutoLocker<BBufferPoolLockable> locker(fLockable);
 

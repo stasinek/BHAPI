@@ -55,7 +55,7 @@ BScreen::~BScreen()
 }
 
 
-bool
+bool 
 BScreen::IsValid() const
 {
 	// TODO
@@ -64,7 +64,7 @@ BScreen::IsValid() const
 }
 
 
-status_t
+status_t 
 BScreen::SetToNext()
 {
 	// TODO

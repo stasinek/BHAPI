@@ -34,8 +34,7 @@ DatabaseDirectory::~DatabaseDirectory()
 }
 
 
-status_t
-DatabaseDirectory::Init(DatabaseLocation* databaseLocation,
+status_t DatabaseDirectory::Init(DatabaseLocation* databaseLocation,
 	const char* superType)
 {
 	status_t error = BMergedDirectory::Init();
@@ -56,16 +55,14 @@ DatabaseDirectory::Init(DatabaseLocation* databaseLocation,
 }
 
 
-bool
-DatabaseDirectory::ShallPreferFirstEntry(const entry_ref& entry1, int32 index1,
+bool DatabaseDirectory::ShallPreferFirstEntry(const entry_ref& entry1, int32 index1,
 	const entry_ref& entry2, int32 index2)
 {
 	return _IsValidMimeTypeEntry(entry1) || !_IsValidMimeTypeEntry(entry2);
 }
 
 
-bool
-DatabaseDirectory::_IsValidMimeTypeEntry(const entry_ref& entry)
+bool DatabaseDirectory::_IsValidMimeTypeEntry(const entry_ref& entry)
 {
 	// check whether the MIME:TYPE attribute exists
 	BNode node;

@@ -85,24 +85,21 @@ DiskSystemAddOnManager::Default()
 
 
 // Lock
-bool
-DiskSystemAddOnManager::Lock()
+bool DiskSystemAddOnManager::Lock()
 {
 	return fLock.Lock();
 }
 
 
 // Unlock
-void
-DiskSystemAddOnManager::Unlock()
+void DiskSystemAddOnManager::Unlock()
 {
 	fLock.Unlock();
 }
 
 
 // LoadDiskSystems
-status_t
-DiskSystemAddOnManager::LoadDiskSystems()
+status_t DiskSystemAddOnManager::LoadDiskSystems()
 {
 	AutoLocker<BLocker> _(fLock);
 
@@ -132,8 +129,7 @@ DiskSystemAddOnManager::LoadDiskSystems()
 
 
 // UnloadDiskSystems
-void
-DiskSystemAddOnManager::UnloadDiskSystems()
+void DiskSystemAddOnManager::UnloadDiskSystems()
 {
 	AutoLocker<BLocker> _(fLock);
 
@@ -151,8 +147,7 @@ DiskSystemAddOnManager::UnloadDiskSystems()
 
 
 // CountAddOns
-int32
-DiskSystemAddOnManager::CountAddOns() const
+int32 DiskSystemAddOnManager::CountAddOns() const
 {
 	return fAddOns.CountItems();
 }
@@ -188,8 +183,7 @@ DiskSystemAddOnManager::GetAddOn(const char* name)
 
 
 // PutAddOn
-void
-DiskSystemAddOnManager::PutAddOn(BDiskSystemAddOn* _addOn)
+void DiskSystemAddOnManager::PutAddOn(BDiskSystemAddOn* _addOn)
 {
 	if (!_addOn)
 		return;
@@ -230,8 +224,7 @@ DiskSystemAddOnManager::DiskSystemAddOnManager()
 }
 
 
-/*static*/ void
-DiskSystemAddOnManager::_InitSingleton()
+/*static*/ void DiskSystemAddOnManager::_InitSingleton()
 {
 	sManager = new DiskSystemAddOnManager();
 }
@@ -246,8 +239,7 @@ DiskSystemAddOnManager::_AddOnAt(int32 index) const
 
 
 // _PutAddOn
-void
-DiskSystemAddOnManager::_PutAddOn(int32 index)
+void DiskSystemAddOnManager::_PutAddOn(int32 index)
 {
 	AddOn* addOn = (AddOn*)fAddOnsToBeUnloaded.ItemAt(index);
 	if (!addOn)
@@ -264,8 +256,7 @@ DiskSystemAddOnManager::_PutAddOn(int32 index)
 
 
 // _LoadAddOns
-status_t
-DiskSystemAddOnManager::_LoadAddOns(StringSet& alreadyLoaded,
+status_t DiskSystemAddOnManager::_LoadAddOns(StringSet& alreadyLoaded,
 	directory_which addOnDir)
 {
 	// get the add-on directory path

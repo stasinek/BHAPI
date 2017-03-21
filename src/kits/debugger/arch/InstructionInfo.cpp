@@ -33,8 +33,7 @@ InstructionInfo::InstructionInfo(target_addr_t address,
 }
 
 
-bool
-InstructionInfo::SetTo(target_addr_t address, target_addr_t targetAddress,
+bool InstructionInfo::SetTo(target_addr_t address, target_addr_t targetAddress,
 	target_size_t size, instruction_type type, bool breakpointAllowed,
 	const BString& disassembledLine)
 {

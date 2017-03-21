@@ -3,7 +3,7 @@
 #ifndef USERLAND_FS_AREA_SUPPORT_H
 #define USERLAND_FS_AREA_SUPPORT_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 namespace UserlandFSUtil {
 

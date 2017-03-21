@@ -96,8 +96,7 @@ BAppFileInfo::~BAppFileInfo()
 }
 
 
-status_t
-BAppFileInfo::SetTo(BFile* file)
+status_t BAppFileInfo::SetTo(BFile* file)
 {
 	// unset the old file
 	BNodeInfo::SetTo(NULL);
@@ -152,8 +151,7 @@ BAppFileInfo::SetTo(BFile* file)
 }
 
 
-status_t
-BAppFileInfo::GetType(char* type) const
+status_t BAppFileInfo::GetType(char* type) const
 {
 	// check param and initialization
 	status_t error = type != NULL ? B_OK : B_BAD_VALUE;
@@ -176,8 +174,7 @@ BAppFileInfo::GetType(char* type) const
 }
 
 
-status_t
-BAppFileInfo::SetType(const char* type)
+status_t BAppFileInfo::SetType(const char* type)
 {
 	// check initialization
 	status_t error = B_OK;
@@ -201,8 +198,7 @@ BAppFileInfo::SetType(const char* type)
 }
 
 
-status_t
-BAppFileInfo::GetSignature(char* signature) const
+status_t BAppFileInfo::GetSignature(char* signature) const
 {
 	// check param and initialization
 	status_t error = (signature ? B_OK : B_BAD_VALUE);
@@ -225,8 +221,7 @@ BAppFileInfo::GetSignature(char* signature) const
 }
 
 
-status_t
-BAppFileInfo::SetSignature(const char* signature)
+status_t BAppFileInfo::SetSignature(const char* signature)
 {
 	// check initialization
 	status_t error = B_OK;
@@ -250,8 +245,7 @@ BAppFileInfo::SetSignature(const char* signature)
 }
 
 
-status_t
-BAppFileInfo::GetCatalogEntry(char* catalogEntry) const
+status_t BAppFileInfo::GetCatalogEntry(char* catalogEntry) const
 {
 	if (catalogEntry == NULL)
 		return B_BAD_VALUE;
@@ -275,8 +269,7 @@ BAppFileInfo::GetCatalogEntry(char* catalogEntry) const
 }
 
 
-status_t
-BAppFileInfo::SetCatalogEntry(const char* catalogEntry)
+status_t BAppFileInfo::SetCatalogEntry(const char* catalogEntry)
 {
 	if (InitCheck() != B_OK)
 		return B_NO_INIT;
@@ -293,8 +286,7 @@ BAppFileInfo::SetCatalogEntry(const char* catalogEntry)
 }
 
 
-status_t
-BAppFileInfo::GetAppFlags(uint32* flags) const
+status_t BAppFileInfo::GetAppFlags(uint32* flags) const
 {
 	// check param and initialization
 	status_t error = flags != NULL ? B_OK : B_BAD_VALUE;
@@ -313,8 +305,7 @@ BAppFileInfo::GetAppFlags(uint32* flags) const
 }
 
 
-status_t
-BAppFileInfo::SetAppFlags(uint32 flags)
+status_t BAppFileInfo::SetAppFlags(uint32 flags)
 {
 	// check initialization
 	status_t error = B_OK;
@@ -329,8 +320,7 @@ BAppFileInfo::SetAppFlags(uint32 flags)
 }
 
 
-status_t
-BAppFileInfo::RemoveAppFlags()
+status_t BAppFileInfo::RemoveAppFlags()
 {
 	// check initialization
 	status_t error = B_OK;
@@ -344,8 +334,7 @@ BAppFileInfo::RemoveAppFlags()
 }
 
 
-status_t
-BAppFileInfo::GetSupportedTypes(BMessage* types) const
+status_t BAppFileInfo::GetSupportedTypes(BMessage* types) const
 {
 	// check param and initialization
 	status_t error = types != NULL ? B_OK : B_BAD_VALUE;
@@ -367,8 +356,7 @@ BAppFileInfo::GetSupportedTypes(BMessage* types) const
 }
 
 
-status_t
-BAppFileInfo::SetSupportedTypes(const BMessage* types, bool updateMimeDB,
+status_t BAppFileInfo::SetSupportedTypes(const BMessage* types, bool updateMimeDB,
 	bool syncAll)
 {
 	// check initialization
@@ -430,22 +418,19 @@ BAppFileInfo::SetSupportedTypes(const BMessage* types, bool updateMimeDB,
 }
 
 
-status_t
-BAppFileInfo::SetSupportedTypes(const BMessage* types, bool syncAll)
+status_t BAppFileInfo::SetSupportedTypes(const BMessage* types, bool syncAll)
 {
 	return SetSupportedTypes(types, true, syncAll);
 }
 
 
-status_t
-BAppFileInfo::SetSupportedTypes(const BMessage* types)
+status_t BAppFileInfo::SetSupportedTypes(const BMessage* types)
 {
 	return SetSupportedTypes(types, true, false);
 }
 
 
-bool
-BAppFileInfo::IsSupportedType(const char* type) const
+bool BAppFileInfo::IsSupportedType(const char* type) const
 {
 	status_t error = type != NULL ? B_OK : B_BAD_VALUE;
 	// get the supported types
@@ -471,8 +456,7 @@ BAppFileInfo::IsSupportedType(const char* type) const
 }
 
 
-bool
-BAppFileInfo::Supports(BMimeType* type) const
+bool BAppFileInfo::Supports(BMimeType* type) const
 {
 	status_t error
 		= type != NULL && type->InitCheck() == B_OK ? B_OK : B_BAD_VALUE;
@@ -494,50 +478,43 @@ BAppFileInfo::Supports(BMimeType* type) const
 }
 
 
-status_t
-BAppFileInfo::GetIcon(BBitmap* icon, icon_size which) const
+status_t BAppFileInfo::GetIcon(BBitmap* icon, icon_size which) const
 {
 	return GetIconForType(NULL, icon, which);
 }
 
 
-status_t
-BAppFileInfo::GetIcon(uint8** data, size_t* size) const
+status_t BAppFileInfo::GetIcon(uint8** data, size_t* size) const
 {
 	return GetIconForType(NULL, data, size);
 }
 
 
-status_t
-BAppFileInfo::SetIcon(const BBitmap* icon, icon_size which, bool updateMimeDB)
+status_t BAppFileInfo::SetIcon(const BBitmap* icon, icon_size which, bool updateMimeDB)
 {
 	return SetIconForType(NULL, icon, which, updateMimeDB);
 }
 
 
-status_t
-BAppFileInfo::SetIcon(const BBitmap* icon, icon_size which)
+status_t BAppFileInfo::SetIcon(const BBitmap* icon, icon_size which)
 {
 	return SetIconForType(NULL, icon, which, true);
 }
 
 
-status_t
-BAppFileInfo::SetIcon(const uint8* data, size_t size, bool updateMimeDB)
+status_t BAppFileInfo::SetIcon(const uint8* data, size_t size, bool updateMimeDB)
 {
 	return SetIconForType(NULL, data, size, updateMimeDB);
 }
 
 
-status_t
-BAppFileInfo::SetIcon(const uint8* data, size_t size)
+status_t BAppFileInfo::SetIcon(const uint8* data, size_t size)
 {
 	return SetIconForType(NULL, data, size, true);
 }
 
 
-status_t
-BAppFileInfo::GetVersionInfo(version_info* info, version_kind kind) const
+status_t BAppFileInfo::GetVersionInfo(version_info* info, version_kind kind) const
 {
 	// check params and initialization
 	if (info == NULL)
@@ -583,8 +560,7 @@ BAppFileInfo::GetVersionInfo(version_info* info, version_kind kind) const
 }
 
 
-status_t
-BAppFileInfo::SetVersionInfo(const version_info* info, version_kind kind)
+status_t BAppFileInfo::SetVersionInfo(const version_info* info, version_kind kind)
 {
 	// check initialization
 	status_t error = B_OK;
@@ -636,8 +612,7 @@ BAppFileInfo::SetVersionInfo(const version_info* info, version_kind kind)
 }
 
 
-status_t
-BAppFileInfo::GetIconForType(const char* type, BBitmap* icon, icon_size size)
+status_t BAppFileInfo::GetIconForType(const char* type, BBitmap* icon, icon_size size)
 	const
 {
 	if (InitCheck() != B_OK)
@@ -751,8 +726,7 @@ BAppFileInfo::GetIconForType(const char* type, BBitmap* icon, icon_size size)
 }
 
 
-status_t
-BAppFileInfo::GetIconForType(const char* type, uint8** data, size_t* size) const
+status_t BAppFileInfo::GetIconForType(const char* type, uint8** data, size_t* size) const
 {
 	if (InitCheck() != B_OK)
 		return B_NO_INIT;
@@ -784,8 +758,7 @@ BAppFileInfo::GetIconForType(const char* type, uint8** data, size_t* size) const
 }
 
 
-status_t
-BAppFileInfo::SetIconForType(const char* type, const BBitmap* icon,
+status_t BAppFileInfo::SetIconForType(const char* type, const BBitmap* icon,
 	icon_size which, bool updateMimeDB)
 {
 	status_t error = B_OK;
@@ -871,16 +844,14 @@ BAppFileInfo::SetIconForType(const char* type, const BBitmap* icon,
 }
 
 
-status_t
-BAppFileInfo::SetIconForType(const char* type, const BBitmap* icon,
+status_t BAppFileInfo::SetIconForType(const char* type, const BBitmap* icon,
 	icon_size which)
 {
 	return SetIconForType(type, icon, which, true);
 }
 
 
-status_t
-BAppFileInfo::SetIconForType(const char* type, const uint8* data, size_t size,
+status_t BAppFileInfo::SetIconForType(const char* type, const uint8* data, size_t size,
 	bool updateMimeDB)
 {
 	if (InitCheck() != B_OK)
@@ -921,15 +892,13 @@ BAppFileInfo::SetIconForType(const char* type, const uint8* data, size_t size,
 }
 
 
-status_t
-BAppFileInfo::SetIconForType(const char* type, const uint8* data, size_t size)
+status_t BAppFileInfo::SetIconForType(const char* type, const uint8* data, size_t size)
 {
 	return SetIconForType(type, data, size, true);
 }
 
 
-void
-BAppFileInfo::SetInfoLocation(info_location location)
+void BAppFileInfo::SetInfoLocation(info_location location)
 {
 	// if the resources failed to initialize, we must not use them
 	if (fResources == NULL)
@@ -938,15 +907,13 @@ BAppFileInfo::SetInfoLocation(info_location location)
 	fWhere = location;
 }
 
-bool
-BAppFileInfo::IsUsingAttributes() const
+bool BAppFileInfo::IsUsingAttributes() const
 {
 	return (fWhere & B_USE_ATTRIBUTES) != 0;
 }
 
 
-bool
-BAppFileInfo::IsUsingResources() const
+bool BAppFileInfo::IsUsingResources() const
 {
 	return (fWhere & B_USE_RESOURCES) != 0;
 }
@@ -985,8 +952,7 @@ BAppFileInfo::BAppFileInfo(const BAppFileInfo&)
 	\retval B_ENTRY_NOT_FOUND The file has not signature or the signature is
 	        (not installed in the MIME database.) no valid MIME string.
 */
-status_t
-BAppFileInfo::GetMetaMime(BMimeType* meta) const
+status_t BAppFileInfo::GetMetaMime(BMimeType* meta) const
 {
 	char signature[B_MIME_TYPE_LENGTH];
 	status_t error = GetSignature(signature);
@@ -1025,8 +991,7 @@ BAppFileInfo::GetMetaMime(BMimeType* meta) const
 	\retval B_NO_MEMORY Ran out of memory allocating the buffer.
 	\retval B_BAD_VALUE \a type did not match.
 */
-status_t
-BAppFileInfo::_ReadData(const char* name, int32 id, type_code type,
+status_t BAppFileInfo::_ReadData(const char* name, int32 id, type_code type,
 	void* buffer, size_t bufferSize, size_t& bytesRead, void** allocatedBuffer)
 	const
 {
@@ -1141,8 +1106,7 @@ BAppFileInfo::_ReadData(const char* name, int32 id, type_code type,
 	\retval B_OK Everything went fine.
 	\retval B_ERROR An error occurred while trying to write the data.
 */
-status_t
-BAppFileInfo::_WriteData(const char* name, int32 id, type_code type,
+status_t BAppFileInfo::_WriteData(const char* name, int32 id, type_code type,
 	const void* buffer, size_t bufferSize, bool findID)
 {
 	if (!IsUsingAttributes() && !IsUsingResources())
@@ -1193,8 +1157,7 @@ BAppFileInfo::_WriteData(const char* name, int32 id, type_code type,
 	\retval B_NO_INIT Not using attributes and not using resources.
 	\retval B_ENTRY_NOT_FOUND The attribute or resource was not found.
 */
-status_t
-BAppFileInfo::_RemoveData(const char* name, type_code type)
+status_t BAppFileInfo::_RemoveData(const char* name, type_code type)
 {
 	if (!IsUsingAttributes() && !IsUsingResources())
 		return B_NO_INIT;

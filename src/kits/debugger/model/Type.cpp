@@ -39,8 +39,7 @@ ArrayDimension::~ArrayDimension()
 }
 
 
-uint64
-ArrayDimension::CountElements() const
+uint64 ArrayDimension::CountElements() const
 {
 	Type* type = GetType();
 
@@ -95,8 +94,7 @@ Type::ResolveRawType(bool nextOneOnly) const
 }
 
 
-status_t
-Type::CreateDerivedAddressType(address_type_kind kind,
+status_t Type::CreateDerivedAddressType(address_type_kind kind,
 	AddressType*& _resultType)
 {
 	_resultType = NULL;
@@ -104,8 +102,7 @@ Type::CreateDerivedAddressType(address_type_kind kind,
 }
 
 
-status_t
-Type::CreateDerivedArrayType(int64 lowerBound, int64 elementCount,
+status_t Type::CreateDerivedArrayType(int64 lowerBound, int64 elementCount,
 	bool extendExisting, ArrayType*& _resultType)
 {
 	_resultType = NULL;

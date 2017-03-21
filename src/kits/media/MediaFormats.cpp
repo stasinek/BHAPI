@@ -29,8 +29,7 @@ static BObjectList<meta_format> sFormats;
 static bigtime_t sLastFormatsUpdate;
 
 
-status_t
-get_next_encoder(int32* cookie, const media_file_format* fileFormat,
+status_t get_next_encoder(int32* cookie, const media_file_format* fileFormat,
 	const media_format* inputFormat, media_format* _outputFormat,
 	media_codec_info* _codecInfo)
 {
@@ -76,8 +75,7 @@ get_next_encoder(int32* cookie, const media_file_format* fileFormat,
 }
 
 
-status_t
-get_next_encoder(int32* cookie, const media_file_format* fileFormat,
+status_t get_next_encoder(int32* cookie, const media_file_format* fileFormat,
 	const media_format* inputFormat, const media_format* outputFormat,
 	media_codec_info* _codecInfo, media_format* _acceptedInputFormat,
 	media_format* _acceptedOutputFormat)
@@ -135,8 +133,7 @@ get_next_encoder(int32* cookie, const media_file_format* fileFormat,
 }
 
 
-status_t
-get_next_encoder(int32* cookie, media_codec_info* _codecInfo)
+status_t get_next_encoder(int32* cookie, media_codec_info* _codecInfo)
 {
 	if (cookie == NULL || _codecInfo == NULL)
 		return B_BAD_VALUE;
@@ -156,8 +153,7 @@ get_next_encoder(int32* cookie, media_codec_info* _codecInfo)
 }
 
 
-bool
-does_file_accept_format(const media_file_format* _fileFormat,
+bool does_file_accept_format(const media_file_format* _fileFormat,
 	media_format* format, uint32 flags)
 {
 	UNIMPLEMENTED();
@@ -194,8 +190,7 @@ _media_format_description::operator=(const _media_format_description& other)
 }
 
 
-bool
-operator==(const media_format_description& a,
+bool operator==(const media_format_description& a,
 	const media_format_description& b)
 {
 	if (a.family != b.family)
@@ -229,8 +224,7 @@ operator==(const media_format_description& a,
 }
 
 
-bool
-operator<(const media_format_description& a, const media_format_description& b)
+bool operator<(const media_format_description& a, const media_format_description& b)
 {
 	if (a.family != b.family)
 		return a.family < b.family;
@@ -265,15 +259,13 @@ operator<(const media_format_description& a, const media_format_description& b)
 }
 
 
-bool
-operator==(const GUID& a, const GUID& b)
+bool operator==(const GUID& a, const GUID& b)
 {
 	return memcmp(&a, &b, sizeof(a)) == 0;
 }
 
 
-bool
-operator<(const GUID& a, const GUID& b)
+bool operator<(const GUID& a, const GUID& b)
 {
 	return memcmp(&a, &b, sizeof(a)) < 0;
 }
@@ -318,8 +310,7 @@ meta_format::meta_format(const meta_format& other)
 }
 
 
-bool 
-meta_format::Matches(const media_format& otherFormat,
+bool meta_format::Matches(const media_format& otherFormat,
 	media_format_family family)
 {
 	if (family != description.family)
@@ -358,8 +349,7 @@ meta_format::Compare(const meta_format* a, const meta_format* b)
  *	that we are working on the latest data set. The list is always sorted by
  *	description. The formats lock has to be held when you call this function.
  */
-static status_t
-update_media_formats()
+static status_t update_media_formats()
 {
 	if (!sLock.IsLocked())
 		return B_NOT_ALLOWED;
@@ -432,15 +422,13 @@ BMediaFormats::~BMediaFormats()
 }
 
 
-status_t 
-BMediaFormats::InitCheck()
+status_t BMediaFormats::InitCheck()
 {
 	return sLock.Sem() >= B_OK ? B_OK : sLock.Sem();
 }
 
 
-status_t 
-BMediaFormats::GetCodeFor(const media_format& format,
+status_t BMediaFormats::GetCodeFor(const media_format& format,
 	media_format_family family,
 	media_format_description* _description)
 {
@@ -465,8 +453,7 @@ BMediaFormats::GetCodeFor(const media_format& format,
 }
 
 
-status_t 
-BMediaFormats::GetFormatFor(const media_format_description& description,
+status_t BMediaFormats::GetFormatFor(const media_format_description& description,
 	media_format* _format)
 {
 	BAutolock locker(sLock);
@@ -498,8 +485,7 @@ BMediaFormats::GetFormatFor(const media_format_description& description,
 }
 
 
-status_t 
-BMediaFormats::GetBeOSFormatFor(uint32 format, 
+status_t BMediaFormats::GetBeOSFormatFor(uint32 format, 
 	media_format* _format, media_type type)
 {
 	BMediaFormats formats;
@@ -519,8 +505,7 @@ BMediaFormats::GetBeOSFormatFor(uint32 format,
 }
 
 
-status_t 
-BMediaFormats::GetAVIFormatFor(uint32 codec,
+status_t BMediaFormats::GetAVIFormatFor(uint32 codec,
 	media_format* _format, media_type type)
 {
 	UNIMPLEMENTED();
@@ -541,8 +526,7 @@ BMediaFormats::GetAVIFormatFor(uint32 codec,
 }
 
 
-status_t 
-BMediaFormats::GetQuicktimeFormatFor(uint32 vendor, uint32 codec, 
+status_t BMediaFormats::GetQuicktimeFormatFor(uint32 vendor, uint32 codec, 
 	media_format* _format, media_type type)
 {
 	BMediaFormats formats;
@@ -563,8 +547,7 @@ BMediaFormats::GetQuicktimeFormatFor(uint32 vendor, uint32 codec,
 }
 
 
-status_t 
-BMediaFormats::RewindFormats()
+status_t BMediaFormats::RewindFormats()
 {
 	if (!sLock.IsLocked() || sLock.LockingThread() != find_thread(NULL)) {
 		// TODO: Shouldn't we simply drop into the debugger in this case?
@@ -576,8 +559,7 @@ BMediaFormats::RewindFormats()
 }
 
 
-status_t 
-BMediaFormats::GetNextFormat(media_format* _format,
+status_t BMediaFormats::GetNextFormat(media_format* _format,
 	media_format_description* _description)
 {
 	if (!sLock.IsLocked() || sLock.LockingThread() != find_thread(NULL)) {
@@ -601,22 +583,19 @@ BMediaFormats::GetNextFormat(media_format* _format,
 }
 
 
-bool
-BMediaFormats::Lock()
+bool BMediaFormats::Lock()
 {
 	return sLock.Lock();
 }
 
 
-void 
-BMediaFormats::Unlock()
+void BMediaFormats::Unlock()
 {
 	sLock.Unlock();
 }
 
 
-status_t 
-BMediaFormats::MakeFormatFor(const media_format_description* descriptions,
+status_t BMediaFormats::MakeFormatFor(const media_format_description* descriptions,
 	int32 descriptionCount, media_format* format, uint32 flags,
 	void* _reserved)
 {
@@ -630,8 +609,7 @@ BMediaFormats::MakeFormatFor(const media_format_description* descriptions,
 // #pragma mark - deprecated API
 
 
-status_t 
-BMediaFormats::MakeFormatFor(const media_format_description& description,
+status_t BMediaFormats::MakeFormatFor(const media_format_description& description,
 	const media_format& inFormat, media_format* _outFormat)
 {
 	*_outFormat = inFormat;

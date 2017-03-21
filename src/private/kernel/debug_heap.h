@@ -33,16 +33,14 @@ void				debug_heap_init();
 struct kdebug_alloc_t {};
 extern const kdebug_alloc_t kdebug_alloc;
 
-inline void*
-operator new(size_t size, const kdebug_alloc_t&) throw()
+inline void*   operator new(size_t size, const kdebug_alloc_t&) throw()
 {
 	return debug_malloc(size);
 }
 
 namespace DebugAlloc {
 	template<typename Type>
-	inline void
-	destroy(Type* object)
+	inline void 	destroy(Type* object)
 	{
 		if (object != NULL) {
 			object->~Type();

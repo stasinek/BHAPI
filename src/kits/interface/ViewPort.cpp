@@ -269,8 +269,7 @@ BViewPort::ChildView() const
 }
 
 
-void
-BViewPort::SetChildView(BView* child)
+void BViewPort::SetChildView(BView* child)
 {
 	fLayout->SetChildView(child);
 	InvalidateLayout();
@@ -284,16 +283,14 @@ BViewPort::ChildItem() const
 }
 
 
-void
-BViewPort::SetChildItem(BLayoutItem* child)
+void BViewPort::SetChildItem(BLayoutItem* child)
 {
 	fLayout->SetChildItem(child);
 	InvalidateLayout();
 }
 
 
-void
-BViewPort::_Init()
+void BViewPort::_Init()
 {
 	fLayout = new ViewPortLayout(this);
 	SetLayout(fLayout);

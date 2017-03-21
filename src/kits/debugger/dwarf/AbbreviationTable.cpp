@@ -24,8 +24,7 @@ AbbreviationTable::~AbbreviationTable()
 }
 
 
-status_t
-AbbreviationTable::Init(const void* section, off_t sectionSize)
+status_t AbbreviationTable::Init(const void* section, off_t sectionSize)
 {
 	if (fOffset < 0 || fOffset >= sectionSize)
 		return B_BAD_DATA;
@@ -57,8 +56,7 @@ AbbreviationTable::Init(const void* section, off_t sectionSize)
 }
 
 
-bool
-AbbreviationTable::GetAbbreviationEntry(uint32 code, AbbreviationEntry& entry)
+bool AbbreviationTable::GetAbbreviationEntry(uint32 code, AbbreviationEntry& entry)
 {
 	AbbreviationTableEntry* tableEntry = fEntryTable.Lookup(code);
 	if (tableEntry == NULL)
@@ -69,8 +67,7 @@ AbbreviationTable::GetAbbreviationEntry(uint32 code, AbbreviationEntry& entry)
 }
 
 
-status_t
-AbbreviationTable::_ParseAbbreviationEntry(DataReader& abbrevReader,
+status_t AbbreviationTable::_ParseAbbreviationEntry(DataReader& abbrevReader,
 	bool& _nullEntry)
 {
 	uint32 code = abbrevReader.ReadUnsignedLEB128(0);

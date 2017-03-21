@@ -76,24 +76,21 @@ BJobSetupPanel::Instantiate(BMessage* data)
 }
 
 
-status_t
-BJobSetupPanel::Archive(BMessage* data, bool deep) const
+status_t BJobSetupPanel::Archive(BMessage* data, bool deep) const
 {
 	// TODO: implement
 	return B_ERROR;
 }
 
 
-void
-BJobSetupPanel::MessageReceived(BMessage* message)
+void BJobSetupPanel::MessageReceived(BMessage* message)
 {
 
 	BPrintPanel::MessageReceived(message);
 }
 
 
-status_t
-BJobSetupPanel::Go()
+status_t BJobSetupPanel::Go()
 {
 	status_t status = ShowPanel();
 
@@ -116,8 +113,7 @@ BJobSetupPanel::Printer() const
 }
 
 
-void
-BJobSetupPanel::SetPrinter(BPrinter* printer, bool keepSettings)
+void BJobSetupPanel::SetPrinter(BPrinter* printer, bool keepSettings)
 {
 	// TODO: implement
 }
@@ -130,8 +126,7 @@ BJobSetupPanel::PrintRange() const
 }
 
 
-void
-BJobSetupPanel::SetPrintRange(print_range range)
+void BJobSetupPanel::SetPrintRange(print_range range)
 {
 	switch (range) {
 		case B_ALL_PAGES: {
@@ -154,8 +149,7 @@ BJobSetupPanel::SetPrintRange(print_range range)
 }
 
 
-int32
-BJobSetupPanel::FirstPage() const
+int32 BJobSetupPanel::FirstPage() const
 {
 	BString text(fFirstPage->Text());
 	if (text.Length() <= 0)
@@ -165,8 +159,7 @@ BJobSetupPanel::FirstPage() const
 }
 
 
-int32
-BJobSetupPanel::LastPage() const
+int32 BJobSetupPanel::LastPage() const
 {
 	BString text(fLastPage->Text());
 	if (text.Length() <= 0)
@@ -176,8 +169,7 @@ BJobSetupPanel::LastPage() const
 }
 
 
-void
-BJobSetupPanel::SetPageRange(int32 firstPage, int32 lastPage)
+void BJobSetupPanel::SetPageRange(int32 firstPage, int32 lastPage)
 {
 	BString text;
 	SetPrintRange(B_PAGE_RANGE);
@@ -190,15 +182,13 @@ BJobSetupPanel::SetPageRange(int32 firstPage, int32 lastPage)
 }
 
 
-uint32
-BJobSetupPanel::OptionFlags() const
+uint32 BJobSetupPanel::OptionFlags() const
 {
 	return fJobPanelFlags;
 }
 
 
-void
-BJobSetupPanel::SetOptionFlags(uint32 flags)
+void BJobSetupPanel::SetOptionFlags(uint32 flags)
 {
 	bool value = false;
 	if (flags & B_PRINT_TO_FILE)
@@ -226,8 +216,7 @@ BJobSetupPanel::SetOptionFlags(uint32 flags)
 }
 
 
-void
-BJobSetupPanel::_InitObject()
+void BJobSetupPanel::_InitObject()
 {
 	fPrinterRoster = new BPrinterRoster();
 	fPrinterRoster->StartWatching(this);
@@ -240,8 +229,7 @@ BJobSetupPanel::_InitObject()
 }
 
 
-void
-BJobSetupPanel::_SetupInterface()
+void BJobSetupPanel::_SetupInterface()
 {
 	BGroupView* groupView = new BGroupView(B_VERTICAL, 10.0);
 
@@ -360,8 +348,7 @@ BJobSetupPanel::_SetupInterface()
 }
 
 
-void
-BJobSetupPanel::_DisallowChar(BTextView* textView)
+void BJobSetupPanel::_DisallowChar(BTextView* textView)
 {
 	for (uint32 i = 0; i < '0'; ++i)
 		textView->DisallowChar(i);

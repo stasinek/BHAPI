@@ -15,21 +15,18 @@ BD2A::~BD2A()
 }
 
 
-status_t
-BD2A::Open(const char* portName)
+status_t BD2A::Open(const char* portName)
 {
 	return B_ERROR;
 }
 
 
-void
-BD2A::Close()
+void BD2A::Close()
 {
 }
 
 
-bool
-BD2A::IsOpen()
+bool BD2A::IsOpen()
 {
 	return false;
 }
@@ -49,20 +46,17 @@ BD2A::Write(uint8 value)
 }
 
 
-void
-BD2A::_ReservedD2A1()
+void BD2A::_ReservedD2A1()
 {
 }
 
 
-void
-BD2A::_ReservedD2A2()
+void BD2A::_ReservedD2A2()
 {
 }
 
 
-void
-BD2A::_ReservedD2A3()
+void BD2A::_ReservedD2A3()
 {
 }
 

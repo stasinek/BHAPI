@@ -291,8 +291,7 @@ BTimeCode::~BTimeCode()
 }
 
 
-void
-BTimeCode::SetData(int hours,
+void BTimeCode::SetData(int hours,
 				   int minutes,
 				   int seconds,
 				   int frames)
@@ -305,8 +304,7 @@ BTimeCode::SetData(int hours,
 }
 
 
-status_t
-BTimeCode::SetType(timecode_type type)
+status_t BTimeCode::SetType(timecode_type type)
 {
 	CALLED();
 
@@ -314,8 +312,7 @@ BTimeCode::SetType(timecode_type type)
 }
 
 
-void
-BTimeCode::SetMicroseconds(bigtime_t us)
+void BTimeCode::SetMicroseconds(bigtime_t us)
 {
 	CALLED();
 
@@ -323,8 +320,7 @@ BTimeCode::SetMicroseconds(bigtime_t us)
 }
 
 
-void
-BTimeCode::SetLinearFrames(int32 linear_frames)
+void BTimeCode::SetLinearFrames(int32 linear_frames)
 {
 	CALLED();
 
@@ -346,8 +342,7 @@ BTimeCode::operator=(const BTimeCode &clone)
 }
 
 
-bool
-BTimeCode::operator==(const BTimeCode &other) const
+bool BTimeCode::operator==(const BTimeCode &other) const
 {
 	CALLED();
 
@@ -355,8 +350,7 @@ BTimeCode::operator==(const BTimeCode &other) const
 }
 
 
-bool
-BTimeCode::operator<(const BTimeCode &other) const
+bool BTimeCode::operator<(const BTimeCode &other) const
 {
 	CALLED();
 
@@ -451,8 +445,7 @@ BTimeCode::Type() const
 }
 
 
-void
-BTimeCode::GetData(int *out_hours,
+void BTimeCode::GetData(int *out_hours,
 				   int *out_minutes,
 				   int *out_seconds,
 				   int *out_frames,
@@ -482,8 +475,7 @@ BTimeCode::Microseconds() const
 }
 
 
-int32
-BTimeCode::LinearFrames() const
+int32 BTimeCode::LinearFrames() const
 {
 	int32 linear_frames;
 
@@ -497,8 +489,7 @@ BTimeCode::LinearFrames() const
 }
 
 
-void
-BTimeCode::GetString(char *str) const
+void BTimeCode::GetString(char *str) const
 {
 	CALLED();
 	sprintf(str,fInfo.format, fHours, fMinutes, fSeconds, fFrames);

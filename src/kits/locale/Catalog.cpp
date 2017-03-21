@@ -43,8 +43,7 @@ BCatalog::~BCatalog()
 }
 
 
-const char*
-BCatalog::GetString(const char* string, const char* context,
+const char*  BCatalog::GetString(const char* string, const char* context,
 	const char* comment)
 {
 	BAutolock lock(&fLock);
@@ -62,8 +61,7 @@ BCatalog::GetString(const char* string, const char* context,
 }
 
 
-const char*
-BCatalog::GetString(uint32 id)
+const char*  BCatalog::GetString(uint32 id)
 {
 	BAutolock lock(&fLock);
 	if (!lock.IsLocked())
@@ -80,8 +78,7 @@ BCatalog::GetString(uint32 id)
 }
 
 
-status_t
-BCatalog::GetData(const char* name, BMessage* msg)
+status_t BCatalog::GetData(const char* name, BMessage* msg)
 {
 	BAutolock lock(&fLock);
 	if (!lock.IsLocked())
@@ -101,8 +98,7 @@ BCatalog::GetData(const char* name, BMessage* msg)
 }
 
 
-status_t
-BCatalog::GetData(uint32 id, BMessage* msg)
+status_t BCatalog::GetData(uint32 id, BMessage* msg)
 {
 	BAutolock lock(&fLock);
 	if (!lock.IsLocked())
@@ -122,8 +118,7 @@ BCatalog::GetData(uint32 id, BMessage* msg)
 }
 
 
-status_t
-BCatalog::GetSignature(BString* sig)
+status_t BCatalog::GetSignature(BString* sig)
 {
 	BAutolock lock(&fLock);
 	if (!lock.IsLocked())
@@ -141,8 +136,7 @@ BCatalog::GetSignature(BString* sig)
 }
 
 
-status_t
-BCatalog::GetLanguage(BString* lang)
+status_t BCatalog::GetLanguage(BString* lang)
 {
 	BAutolock lock(&fLock);
 	if (!lock.IsLocked())
@@ -160,8 +154,7 @@ BCatalog::GetLanguage(BString* lang)
 }
 
 
-status_t
-BCatalog::GetFingerprint(uint32* fp)
+status_t BCatalog::GetFingerprint(uint32* fp)
 {
 	BAutolock lock(&fLock);
 	if (!lock.IsLocked())
@@ -179,8 +172,7 @@ BCatalog::GetFingerprint(uint32* fp)
 }
 
 
-status_t
-BCatalog::SetTo(const entry_ref& catalogOwner, const char* language,
+status_t BCatalog::SetTo(const entry_ref& catalogOwner, const char* language,
 	uint32 fingerprint)
 {
 	BAutolock lock(&fLock);
@@ -195,8 +187,7 @@ BCatalog::SetTo(const entry_ref& catalogOwner, const char* language,
 }
 
 
-status_t
-BCatalog::InitCheck() const
+status_t BCatalog::InitCheck() const
 {
 	BAutolock lock(&fLock);
 	if (!lock.IsLocked())
@@ -206,8 +197,7 @@ BCatalog::InitCheck() const
 }
 
 
-int32
-BCatalog::CountItems() const
+int32 BCatalog::CountItems() const
 {
 	BAutolock lock(&fLock);
 	if (!lock.IsLocked())

@@ -88,8 +88,7 @@ DebugReportGenerator::~DebugReportGenerator()
 }
 
 
-status_t
-DebugReportGenerator::Init()
+status_t DebugReportGenerator::Init()
 {
 	fTeamDataSem = create_sem(0, "debug_controller_data_wait");
 	if (fTeamDataSem < B_OK)
@@ -125,8 +124,7 @@ DebugReportGenerator::Create(::Team* team, UserInterfaceListener* listener,
 }
 
 
-status_t
-DebugReportGenerator::_GenerateReport(const entry_ref& outputPath)
+status_t DebugReportGenerator::_GenerateReport(const entry_ref& outputPath)
 {
 	BFile file(&outputPath, B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
 	status_t result = file.InitCheck();
@@ -162,8 +160,7 @@ DebugReportGenerator::_GenerateReport(const entry_ref& outputPath)
 }
 
 
-void
-DebugReportGenerator::MessageReceived(BMessage* message)
+void DebugReportGenerator::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case MSG_GENERATE_DEBUG_REPORT:
@@ -181,8 +178,7 @@ DebugReportGenerator::MessageReceived(BMessage* message)
 }
 
 
-void
-DebugReportGenerator::ThreadStackTraceChanged(const ::Team::ThreadEvent& event)
+void DebugReportGenerator::ThreadStackTraceChanged(const ::Team::ThreadEvent& event)
 {
 	if (fTraceWaitingThread == event.GetThread()) {
 		fTraceWaitingThread = NULL;
@@ -191,23 +187,20 @@ DebugReportGenerator::ThreadStackTraceChanged(const ::Team::ThreadEvent& event)
 }
 
 
-void
-DebugReportGenerator::MemoryBlockRetrieved(TeamMemoryBlock* block)
+void DebugReportGenerator::MemoryBlockRetrieved(TeamMemoryBlock* block)
 {
 	_HandleMemoryBlockRetrieved(block, B_OK);
 }
 
 
-void
-DebugReportGenerator::MemoryBlockRetrievalFailed(TeamMemoryBlock* block,
+void DebugReportGenerator::MemoryBlockRetrievalFailed(TeamMemoryBlock* block,
 	status_t result)
 {
 	_HandleMemoryBlockRetrieved(block, result);
 }
 
 
-void
-DebugReportGenerator::ValueNodeValueChanged(ValueNode* node)
+void DebugReportGenerator::ValueNodeValueChanged(ValueNode* node)
 {
 	if (node == fWaitingNode) {
 		fWaitingNode = NULL;
@@ -216,8 +209,7 @@ DebugReportGenerator::ValueNodeValueChanged(ValueNode* node)
 }
 
 
-void
-DebugReportGenerator::FunctionSourceCodeChanged(Function* function)
+void DebugReportGenerator::FunctionSourceCodeChanged(Function* function)
 {
 	AutoLocker< ::Team> teamLocker(fTeam);
 	if (function == fSourceWaitingFunction) {
@@ -230,8 +222,7 @@ DebugReportGenerator::FunctionSourceCodeChanged(Function* function)
 	}
 }
 
-status_t
-DebugReportGenerator::_GenerateReportHeader(BFile& _output)
+status_t DebugReportGenerator::_GenerateReportHeader(BFile& _output)
 {
 	AutoLocker< ::Team> locker(fTeam);
 
@@ -302,8 +293,7 @@ DebugReportGenerator::_GenerateReportHeader(BFile& _output)
 }
 
 
-status_t
-DebugReportGenerator::_DumpLoadedImages(BFile& _output)
+status_t DebugReportGenerator::_DumpLoadedImages(BFile& _output)
 {
 	AutoLocker< ::Team> locker(fTeam);
 
@@ -349,8 +339,7 @@ DebugReportGenerator::_DumpLoadedImages(BFile& _output)
 }
 
 
-status_t
-DebugReportGenerator::_DumpAreas(BFile& _output)
+status_t DebugReportGenerator::_DumpAreas(BFile& _output)
 {
 	BObjectList<AreaInfo> areas(20, true);
 	status_t result = fDebuggerInterface->GetAreaInfos(areas);
@@ -395,8 +384,7 @@ DebugReportGenerator::_DumpAreas(BFile& _output)
 }
 
 
-status_t
-DebugReportGenerator::_DumpSemaphores(BFile& _output)
+status_t DebugReportGenerator::_DumpSemaphores(BFile& _output)
 {
 	BObjectList<SemaphoreInfo> semaphores(20, true);
 	status_t error = fDebuggerInterface->GetSemaphoreInfos(semaphores);
@@ -430,8 +418,7 @@ DebugReportGenerator::_DumpSemaphores(BFile& _output)
 }
 
 
-status_t
-DebugReportGenerator::_DumpRunningThreads(BFile& _output)
+status_t DebugReportGenerator::_DumpRunningThreads(BFile& _output)
 {
 	AutoLocker< ::Team> locker(fTeam);
 
@@ -481,8 +468,7 @@ DebugReportGenerator::_DumpRunningThreads(BFile& _output)
 }
 
 
-status_t
-DebugReportGenerator::_DumpDebuggedThreadInfo(BFile& _output,
+status_t DebugReportGenerator::_DumpDebuggedThreadInfo(BFile& _output,
 	::Thread* thread)
 {
 	AutoLocker< ::Team> locker;
@@ -606,8 +592,7 @@ DebugReportGenerator::_DumpDebuggedThreadInfo(BFile& _output,
 }
 
 
-status_t
-DebugReportGenerator::_DumpFunctionDisassembly(BFile& _output,
+status_t DebugReportGenerator::_DumpFunctionDisassembly(BFile& _output,
 	target_addr_t instructionPointer)
 {
 	AutoLocker< ::Team> teamLocker(fTeam);
@@ -680,8 +665,7 @@ DebugReportGenerator::_DumpFunctionDisassembly(BFile& _output,
 }
 
 
-status_t
-DebugReportGenerator::_DumpStackFrameMemory(BFile& _output,
+status_t DebugReportGenerator::_DumpStackFrameMemory(BFile& _output,
 	CpuState* state, target_addr_t framePointer, uint8 stackDirection)
 {
 	target_addr_t startAddress;
@@ -723,8 +707,7 @@ DebugReportGenerator::_DumpStackFrameMemory(BFile& _output,
 }
 
 
-status_t
-DebugReportGenerator::_ResolveValueIfNeeded(ValueNode* node, StackFrame* frame,
+status_t DebugReportGenerator::_ResolveValueIfNeeded(ValueNode* node, StackFrame* frame,
 	int32 maxDepth)
 {
 	status_t result = B_OK;
@@ -764,8 +747,7 @@ DebugReportGenerator::_ResolveValueIfNeeded(ValueNode* node, StackFrame* frame,
 }
 
 
-void
-DebugReportGenerator::_HandleMemoryBlockRetrieved(TeamMemoryBlock* block,
+void DebugReportGenerator::_HandleMemoryBlockRetrieved(TeamMemoryBlock* block,
 	status_t result)
 {
 	if (fCurrentBlock != NULL) {

@@ -22,8 +22,7 @@
 #if DEBUG
 static FILE *sLogFile = NULL;
 
-inline void
-LOG(const char *fmt, ...)
+inline void LOG(const char *fmt, ...)
 {
 	char buf[1024];
 	va_list ap;
@@ -99,16 +98,14 @@ BJoystick::~BJoystick()
 }
 
 
-status_t
-BJoystick::Open(const char *portName)
+status_t BJoystick::Open(const char *portName)
 {
 	CALLED();
 	return Open(portName, true);
 }
 
 
-status_t
-BJoystick::Open(const char *portName, bool enhanced)
+status_t BJoystick::Open(const char *portName, bool enhanced)
 {
 	CALLED();
 
@@ -205,8 +202,7 @@ BJoystick::Open(const char *portName, bool enhanced)
 }
 
 
-void
-BJoystick::Close(void)
+void BJoystick::Close(void)
 {
 	CALLED();
 	if (fFD >= 0) {
@@ -216,8 +212,7 @@ BJoystick::Close(void)
 }
 
 
-status_t
-BJoystick::Update()
+status_t BJoystick::Update()
 {
 	CALLED();
 	if (fJoystickInfo == NULL || fJoystickData == NULL || fFD < 0)
@@ -266,8 +261,7 @@ BJoystick::Update()
 }
 
 
-status_t
-BJoystick::SetMaxLatency(bigtime_t maxLatency)
+status_t BJoystick::SetMaxLatency(bigtime_t maxLatency)
 {
 	CALLED();
 	if (fJoystickInfo == NULL || fFD < 0)
@@ -282,8 +276,7 @@ BJoystick::SetMaxLatency(bigtime_t maxLatency)
 }
 
 
-int32
-BJoystick::CountDevices()
+int32 BJoystick::CountDevices()
 {
 	CALLED();
 
@@ -297,8 +290,7 @@ BJoystick::CountDevices()
 }
 
 
-status_t
-BJoystick::GetDeviceName(int32 index, char *name, size_t bufSize)
+status_t BJoystick::GetDeviceName(int32 index, char *name, size_t bufSize)
 {
 	CALLED();
 	if (fDevices == NULL)
@@ -320,8 +312,7 @@ BJoystick::GetDeviceName(int32 index, char *name, size_t bufSize)
 }
 
 
-status_t
-BJoystick::RescanDevices()
+status_t BJoystick::RescanDevices()
 {
 	CALLED();
 
@@ -333,8 +324,7 @@ BJoystick::RescanDevices()
 }
 
 
-bool
-BJoystick::EnterEnhancedMode(const entry_ref *ref)
+bool BJoystick::EnterEnhancedMode(const entry_ref *ref)
 {
 	CALLED();
 	fBeBoxMode = false;
@@ -342,8 +332,7 @@ BJoystick::EnterEnhancedMode(const entry_ref *ref)
 }
 
 
-int32
-BJoystick::CountSticks()
+int32 BJoystick::CountSticks()
 {
 	CALLED();
 	if (fJoystickInfo == NULL)
@@ -353,8 +342,7 @@ BJoystick::CountSticks()
 }
 
 
-int32
-BJoystick::CountAxes()
+int32 BJoystick::CountAxes()
 {
 	CALLED();
 	if (fJoystickInfo == NULL)
@@ -364,8 +352,7 @@ BJoystick::CountAxes()
 }
 
 
-status_t
-BJoystick::GetAxisValues(int16 *outValues, int32 forStick)
+status_t BJoystick::GetAxisValues(int16 *outValues, int32 forStick)
 {
 	CALLED();
 
@@ -387,8 +374,7 @@ BJoystick::GetAxisValues(int16 *outValues, int32 forStick)
 }
 
 
-status_t
-BJoystick::GetAxisNameAt(int32 index, BString *outName)
+status_t BJoystick::GetAxisNameAt(int32 index, BString *outName)
 {
 	CALLED();
 
@@ -405,8 +391,7 @@ BJoystick::GetAxisNameAt(int32 index, BString *outName)
 }
 
 
-int32
-BJoystick::CountHats()
+int32 BJoystick::CountHats()
 {
 	CALLED();
 	if (fJoystickInfo == NULL)
@@ -416,8 +401,7 @@ BJoystick::CountHats()
 }
 
 
-status_t
-BJoystick::GetHatValues(uint8 *outHats, int32 forStick)
+status_t BJoystick::GetHatValues(uint8 *outHats, int32 forStick)
 {
 	CALLED();
 
@@ -439,8 +423,7 @@ BJoystick::GetHatValues(uint8 *outHats, int32 forStick)
 }
 
 
-status_t
-BJoystick::GetHatNameAt(int32 index, BString *outName)
+status_t BJoystick::GetHatNameAt(int32 index, BString *outName)
 {
 	CALLED();
 
@@ -457,8 +440,7 @@ BJoystick::GetHatNameAt(int32 index, BString *outName)
 }
 
 
-int32
-BJoystick::CountButtons()
+int32 BJoystick::CountButtons()
 {
 	CALLED();
 	if (fJoystickInfo == NULL)
@@ -468,8 +450,7 @@ BJoystick::CountButtons()
 }
 
 
-uint32
-BJoystick::ButtonValues(int32 forStick)
+uint32 BJoystick::ButtonValues(int32 forStick)
 {
 	CALLED();
 
@@ -489,8 +470,7 @@ BJoystick::ButtonValues(int32 forStick)
 }
 
 
-status_t
-BJoystick::GetButtonValues(bool *outButtons, int32 forStick)
+status_t BJoystick::GetButtonValues(bool *outButtons, int32 forStick)
 {
 	CALLED();
 
@@ -516,8 +496,7 @@ BJoystick::GetButtonValues(bool *outButtons, int32 forStick)
 }
 
 
-status_t
-BJoystick::GetButtonNameAt(int32 index, BString *outName)
+status_t BJoystick::GetButtonNameAt(int32 index, BString *outName)
 {
 	CALLED();
 
@@ -534,8 +513,7 @@ BJoystick::GetButtonNameAt(int32 index, BString *outName)
 }
 
 
-status_t
-BJoystick::GetControllerModule(BString *outName)
+status_t BJoystick::GetControllerModule(BString *outName)
 {
 	CALLED();
 	if (fJoystickInfo == NULL || fFD < 0)
@@ -549,8 +527,7 @@ BJoystick::GetControllerModule(BString *outName)
 }
 
 
-status_t
-BJoystick::GetControllerName(BString *outName)
+status_t BJoystick::GetControllerName(BString *outName)
 {
 	CALLED();
 	if (fJoystickInfo == NULL || fFD < 0)
@@ -564,8 +541,7 @@ BJoystick::GetControllerName(BString *outName)
 }
 
 
-bool
-BJoystick::IsCalibrationEnabled()
+bool BJoystick::IsCalibrationEnabled()
 {
 	CALLED();
 	if (fJoystickInfo == NULL)
@@ -575,8 +551,7 @@ BJoystick::IsCalibrationEnabled()
 }
 
 
-status_t
-BJoystick::EnableCalibration(bool calibrates)
+status_t BJoystick::EnableCalibration(bool calibrates)
 {
 	CALLED();
 	if (fJoystickInfo == NULL || fFD < 0)
@@ -591,15 +566,13 @@ BJoystick::EnableCalibration(bool calibrates)
 }
 
 
-void
-BJoystick::Calibrate(struct _extended_joystick *reading)
+void BJoystick::Calibrate(struct _extended_joystick *reading)
 {
 	CALLED();
 }
 
 
-void
-BJoystick::ScanDevices(bool useDisabled)
+void BJoystick::ScanDevices(bool useDisabled)
 {
 	CALLED();
 	if (useDisabled) {

@@ -42,8 +42,7 @@ static void EnsureIndexExists(const char *attrName)
  * prepares the system for use by the Locale Kit catalogs,
  * it makes sure that the required indices and mimetype exist:
  */
-static void
-SetupCatalogBasics()
+static void SetupCatalogBasics()
 {
 	// make sure the indices required for catalog-traversal are there:
 	EnsureIndexExists(BLocaleRoster::kCatLangAttr);
@@ -112,8 +111,7 @@ SetupCatalogBasics()
 }
 
 
-void
-__initialize_locale_kit()
+void __initialize_locale_kit()
 {
 	SetupCatalogBasics();
 

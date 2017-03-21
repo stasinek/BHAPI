@@ -84,8 +84,7 @@ BCountView::~BCountView()
 }
 
 
-void
-BCountView::TrySpinningBarberPole()
+void BCountView::TrySpinningBarberPole()
 {
 	if (!fShowingBarberPole)
 		return;
@@ -104,15 +103,13 @@ BCountView::TrySpinningBarberPole()
 }
 
 
-void
-BCountView::Pulse()
+void BCountView::Pulse()
 {
 	TrySpinningBarberPole();
 }
 
 
-void
-BCountView::EndBarberPole()
+void BCountView::EndBarberPole()
 {
 	if (!fShowingBarberPole)
 		return;
@@ -122,8 +119,7 @@ BCountView::EndBarberPole()
 }
 
 
-void
-BCountView::StartBarberPole()
+void BCountView::StartBarberPole()
 {
 	AutoLock<BWindow> lock(Window());
 	if (fShowingBarberPole)
@@ -179,8 +175,7 @@ BCountView::TextAndBarberPoleRect() const
 }
 
 
-void
-BCountView::CheckCount()
+void BCountView::CheckCount()
 {
 	// invalidate the count text area if necessary
 	if (fLastCount != fPoseView->CountItems()) {
@@ -193,8 +188,7 @@ BCountView::CheckCount()
 }
 
 
-void
-BCountView::Draw(BRect updateRect)
+void BCountView::Draw(BRect updateRect)
 {
 	BRect bounds(Bounds());
 
@@ -276,8 +270,7 @@ BCountView::Draw(BRect updateRect)
 }
 
 
-void
-BCountView::MouseDown(BPoint)
+void BCountView::MouseDown(BPoint)
 {
 	BContainerWindow* window = dynamic_cast<BContainerWindow*>(Window());
 	ThrowOnAssert(window != NULL);
@@ -307,8 +300,7 @@ BCountView::MouseDown(BPoint)
 }
 
 
-void
-BCountView::AttachedToWindow()
+void BCountView::AttachedToWindow()
 {
 	SetFont(__be_plain_font);
 	SetFontSize(9);
@@ -320,61 +312,53 @@ BCountView::AttachedToWindow()
 }
 
 
-void
-BCountView::SetTypeAhead(const char* string)
+void BCountView::SetTypeAhead(const char* string)
 {
 	fTypeAheadString = string;
 	Invalidate();
 }
 
 
-const char*
-BCountView::TypeAhead() const
+const char*  BCountView::TypeAhead() const
 {
 	return fTypeAheadString.String();
 }
 
 
-bool
-BCountView::IsTypingAhead() const
+bool BCountView::IsTypingAhead() const
 {
 	return fTypeAheadString.Length() != 0;
 }
 
 
-void
-BCountView::AddFilterCharacter(const char* character)
+void BCountView::AddFilterCharacter(const char* character)
 {
 	fFilterString.AppendChars(character, 1);
 	Invalidate();
 }
 
 
-void
-BCountView::RemoveFilterCharacter()
+void BCountView::RemoveFilterCharacter()
 {
 	fFilterString.TruncateChars(fFilterString.CountChars() - 1);
 	Invalidate();
 }
 
 
-void
-BCountView::CancelFilter()
+void BCountView::CancelFilter()
 {
 	fFilterString.Truncate(0);
 	Invalidate();
 }
 
 
-const char*
-BCountView::Filter() const
+const char*  BCountView::Filter() const
 {
 	return fFilterString.String();
 }
 
 
-bool
-BCountView::IsFiltering() const
+bool BCountView::IsFiltering() const
 {
 	return fFilterString.Length() > 0;
 }

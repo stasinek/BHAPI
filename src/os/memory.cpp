@@ -4,13 +4,12 @@
  */
 #include <memory_private.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <../include/syscalls.h>
 
 
-status_t
-get_memory_properties(team_id teamID, const void* address, uint32* _protected,
+status_t get_memory_properties(team_id teamID, const void* address, uint32* _protected,
 	 uint32* _lock)
 {
 	return _kern_get_memory_properties(teamID, address, _protected, _lock);

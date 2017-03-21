@@ -42,8 +42,7 @@ PackageFileHeapReader::~PackageFileHeapReader()
 }
 
 
-status_t
-PackageFileHeapReader::Init()
+status_t PackageFileHeapReader::Init()
 {
 	if (fUncompressedHeapSize == 0) {
 		if (fCompressedHeapSize != 0) {
@@ -151,8 +150,7 @@ PackageFileHeapReader::Clone() const
 }
 
 
-status_t
-PackageFileHeapReader::ReadAndDecompressChunk(size_t chunkIndex,
+status_t PackageFileHeapReader::ReadAndDecompressChunk(size_t chunkIndex,
 	void* compressedDataBuffer, void* uncompressedDataBuffer)
 {
 	uint64 offset = fOffsets[chunkIndex];

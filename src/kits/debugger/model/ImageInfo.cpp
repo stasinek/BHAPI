@@ -48,8 +48,7 @@ ImageInfo::ImageInfo(team_id team, image_id image, const BString& name,
 }
 
 
-void
-ImageInfo::SetTo(team_id team, image_id image, const BString& name,
+void ImageInfo::SetTo(team_id team, image_id image, const BString& name,
 	image_type type, target_addr_t textBase, target_size_t textSize,
 	target_addr_t dataBase, target_size_t dataSize)
 {

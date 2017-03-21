@@ -55,14 +55,12 @@ int int_io_interrupt_handler(int vector, bool levelTriggered);
 
 bool interrupts_enabled(void);
 
-static inline void
-enable_interrupts(void)
+static inline void enable_interrupts(void)
 {
 	arch_int_enable_interrupts();
 }
 
-static inline bool
-are_interrupts_enabled(void)
+static inline bool are_interrupts_enabled(void)
 {
 	return arch_int_are_interrupts_enabled();
 }

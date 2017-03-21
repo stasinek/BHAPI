@@ -92,8 +92,7 @@ BScrollView::~BScrollView()
 }
 
 
-status_t
-BScrollView::SetTarget(BView *newTarget)
+status_t BScrollView::SetTarget(BView *newTarget)
 {
 	if(newTarget == fTarget || newTarget == this) return B_ERROR;
 	if(newTarget != NULL)
@@ -152,8 +151,7 @@ BScrollView::Target() const
 }
 
 
-void
-BScrollView::SetBorder(bhapi::border_style border)
+void BScrollView::SetBorder(bhapi::border_style border)
 {
 	if(fBorder != border)
 	{
@@ -183,15 +181,13 @@ BScrollView::ScrollBar(bhapi::orientation direction) const
 }
 
 
-void
-BScrollView::Draw(BRect updateRect)
+void BScrollView::Draw(BRect updateRect)
 {
 	// TODO
 }
 
 
-void
-BScrollView::FrameResized(float new_width, float new_height)
+void BScrollView::FrameResized(float new_width, float new_height)
 {
 	if(fTarget == NULL) return;
 
@@ -264,8 +260,7 @@ BScrollView::FrameResized(float new_width, float new_height)
 }
 
 
-void
-BScrollView::SetScrollBarAutoState(bool alwaysShowHorizontal, bool alwaysShowVertical)
+void BScrollView::SetScrollBarAutoState(bool alwaysShowHorizontal, bool alwaysShowVertical)
 {
 	fAlwaysShowHorizontal = alwaysShowHorizontal;
 	fAlwaysShowVertical = alwaysShowVertical;
@@ -274,16 +269,14 @@ BScrollView::SetScrollBarAutoState(bool alwaysShowHorizontal, bool alwaysShowVer
 }
 
 
-void
-BScrollView::GetScrollBarAutoState(bool *alwaysShowHorizontal, bool *alwaysShowVertical) const
+void BScrollView::GetScrollBarAutoState(bool *alwaysShowHorizontal, bool *alwaysShowVertical) const
 {
 	if(alwaysShowHorizontal) *alwaysShowHorizontal = fAlwaysShowHorizontal;
 	if(alwaysShowVertical) *alwaysShowVertical = fAlwaysShowVertical;
 }
 
 
-void
-BScrollView::SetFlags(__be_uint32 flags)
+void BScrollView::SetFlags(__be_uint32 flags)
 {
 	flags |= B_FRAME_EVENTS;
 	if(fBorder != B_NO_BORDER)
@@ -294,8 +287,7 @@ BScrollView::SetFlags(__be_uint32 flags)
 }
 
 
-void
-BScrollView::ChildRemoving(BView *child)
+void BScrollView::ChildRemoving(BView *child)
 {
 	if(fHSB == child)
 	{

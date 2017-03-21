@@ -72,8 +72,7 @@ BListValueNode::BListElementNodeChild::~BListElementNodeChild()
 }
 
 
-status_t
-BListValueNode::BListElementNodeChild::ResolveLocation(
+status_t BListValueNode::BListElementNodeChild::ResolveLocation(
 	ValueLoader* valueLoader, ValueLocation*& _location)
 {
 	uint8 addressSize = valueLoader->GetArchitecture()->AddressSize();
@@ -139,8 +138,7 @@ BListValueNode::BListItemCountNodeChild::~BListItemCountNodeChild()
 }
 
 
-status_t
-BListValueNode::BListItemCountNodeChild::ResolveLocation(
+status_t BListValueNode::BListItemCountNodeChild::ResolveLocation(
 	ValueLoader* valueLoader, ValueLocation*& _location)
 {
 	ValueLocation* location = new(std::nothrow) ValueLocation();
@@ -190,8 +188,7 @@ BListValueNode::GetType() const
 }
 
 
-status_t
-BListValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
+status_t BListValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 	ValueLocation*& _location, Value*& _value)
 {
 	// get the location
@@ -294,15 +291,13 @@ BListValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 }
 
 
-status_t
-BListValueNode::CreateChildren(TeamTypeInformation* info)
+status_t BListValueNode::CreateChildren(TeamTypeInformation* info)
 {
 	return CreateChildrenInRange(info, 0, kMaxArrayElementCount);
 }
 
 
-int32
-BListValueNode::CountChildren() const
+int32 BListValueNode::CountChildren() const
 {
 	return fChildren.CountItems();
 }
@@ -315,22 +310,19 @@ BListValueNode::ChildAt(int32 index) const
 }
 
 
-bool
-BListValueNode::IsRangedContainer() const
+bool BListValueNode::IsRangedContainer() const
 {
 	return true;
 }
 
 
-bool
-BListValueNode::IsContainerRangeFixed() const
+bool BListValueNode::IsContainerRangeFixed() const
 {
 	return true;
 }
 
 
-void
-BListValueNode::ClearChildren()
+void BListValueNode::ClearChildren()
 {
 	fChildren.MakeEmpty();
 	fCountChildCreated = false;
@@ -339,8 +331,7 @@ BListValueNode::ClearChildren()
 }
 
 
-status_t
-BListValueNode::CreateChildrenInRange(TeamTypeInformation* info,
+status_t BListValueNode::CreateChildrenInRange(TeamTypeInformation* info,
 	int32 lowIndex, int32 highIndex)
 {
 	if (fLocationResolutionState != B_OK)
@@ -405,8 +396,7 @@ BListValueNode::CreateChildrenInRange(TeamTypeInformation* info,
 }
 
 
-status_t
-BListValueNode::SupportedChildRange(int32& lowIndex, int32& highIndex) const
+status_t BListValueNode::SupportedChildRange(int32& lowIndex, int32& highIndex) const
 {
 	lowIndex = 0;
 	highIndex = fItemCount - 1;

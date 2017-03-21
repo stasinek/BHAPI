@@ -207,8 +207,7 @@ BSlider::~BSlider()
 }
 
 
-void
-BSlider::_InitBarColor()
+void BSlider::_InitBarColor()
 {
 	if (__be_control_look != NULL) {
 		SetBarColor(__be_control_look->SliderBarColor(
@@ -222,8 +221,7 @@ BSlider::_InitBarColor()
 }
 
 
-void
-BSlider::_InitObject()
+void BSlider::_InitObject()
 {
 	fLocation.x = 0;
 	fLocation.y = 0;
@@ -251,8 +249,7 @@ BSlider::Instantiate(BMessage *archive)
 }
 
 
-status_t
-BSlider::Archive(BMessage *archive, bool deep) const
+status_t BSlider::Archive(BMessage *archive, bool deep) const
 {
 	status_t ret = BControl::Archive(archive, deep);
 
@@ -295,8 +292,7 @@ BSlider::Archive(BMessage *archive, bool deep) const
 }
 
 
-status_t
-BSlider::Perform(perform_code code, void* _data)
+status_t BSlider::Perform(perform_code code, void* _data)
 {
 	switch (code) {
 		case PERFORM_CODE_MIN_SIZE:
@@ -356,15 +352,13 @@ BSlider::Perform(perform_code code, void* _data)
 }
 
 
-void
-BSlider::WindowActivated(bool state)
+void BSlider::WindowActivated(bool state)
 {
 	BControl::WindowActivated(state);
 }
 
 
-void
-BSlider::AttachedToWindow()
+void BSlider::AttachedToWindow()
 {
 	ResizeToPreferred();
 
@@ -407,22 +401,19 @@ BSlider::AttachedToWindow()
 }
 
 
-void
-BSlider::AllAttached()
+void BSlider::AllAttached()
 {
 	BControl::AllAttached();
 }
 
 
-void
-BSlider::AllDetached()
+void BSlider::AllDetached()
 {
 	BControl::AllDetached();
 }
 
 
-void
-BSlider::DetachedFromWindow()
+void BSlider::DetachedFromWindow()
 {
 	BControl::DetachedFromWindow();
 
@@ -436,22 +427,19 @@ BSlider::DetachedFromWindow()
 }
 
 
-void
-BSlider::MessageReceived(BMessage *msg)
+void BSlider::MessageReceived(BMessage *msg)
 {
 	BControl::MessageReceived(msg);
 }
 
 
-void
-BSlider::FrameMoved(BPoint new_position)
+void BSlider::FrameMoved(BPoint new_position)
 {
 	BControl::FrameMoved(new_position);
 }
 
 
-void
-BSlider::FrameResized(float w,float h)
+void BSlider::FrameResized(float w,float h)
 {
 	BControl::FrameResized(w, h);
 
@@ -476,8 +464,7 @@ BSlider::FrameResized(float w,float h)
 }
 
 
-void
-BSlider::KeyDown(const char *bytes, int32 numBytes)
+void BSlider::KeyDown(const char *bytes, int32 numBytes)
 {
 	if (!IsEnabled() || IsHidden())
 		return;
@@ -519,8 +506,7 @@ BSlider::KeyDown(const char *bytes, int32 numBytes)
 	}
 }
 
-void
-BSlider::KeyUp(const char *bytes, int32 numBytes)
+void BSlider::KeyUp(const char *bytes, int32 numBytes)
 {
 	if (fInitialLocation != _Location()) {
 		// The last KeyDown event triggered the modification message or no
@@ -538,8 +524,7 @@ BSlider::KeyUp(const char *bytes, int32 numBytes)
 	Returns \c true if the relevant coordinate (depending on the orientation
 	of the slider) differs from \a comparePoint.
 */
-bool
-BSlider::_ConstrainPoint(BPoint& point, BPoint comparePoint) const
+bool BSlider::_ConstrainPoint(BPoint& point, BPoint comparePoint) const
 {
 	if (fOrientation == B_HORIZONTAL) {
 		if (point.x != comparePoint.x) {
@@ -565,8 +550,7 @@ BSlider::_ConstrainPoint(BPoint& point, BPoint comparePoint) const
 }
 
 
-void
-BSlider::MouseDown(BPoint point)
+void BSlider::MouseDown(BPoint point)
 {
 	if (!IsEnabled())
 		return;
@@ -610,8 +594,7 @@ BSlider::MouseDown(BPoint point)
 }
 
 
-void
-BSlider::MouseUp(BPoint point)
+void BSlider::MouseUp(BPoint point)
 {
 	if (IsTracking()) {
 		if (_Location() != fInitialLocation)
@@ -623,8 +606,7 @@ BSlider::MouseUp(BPoint point)
 }
 
 
-void
-BSlider::MouseMoved(BPoint point, uint32 transit, const BMessage *message)
+void BSlider::MouseMoved(BPoint point, uint32 transit, const BMessage *message)
 {
 	if (IsTracking()) {
 		if (_ConstrainPoint(point, _Location())) {
@@ -639,22 +621,19 @@ BSlider::MouseMoved(BPoint point, uint32 transit, const BMessage *message)
 }
 
 
-void
-BSlider::Pulse()
+void BSlider::Pulse()
 {
 	BControl::Pulse();
 }
 
 
-void
-BSlider::SetLabel(const char *label)
+void BSlider::SetLabel(const char *label)
 {
 	BControl::SetLabel(label);
 }
 
 
-void
-BSlider::SetLimitLabels(const char *minLabel, const char *maxLabel)
+void BSlider::SetLimitLabels(const char *minLabel, const char *maxLabel)
 {
 	free(fMinLimitLabel);
 	fMinLimitLabel = minLabel ? strdup(minLabel) : NULL;
@@ -674,22 +653,19 @@ BSlider::SetLimitLabels(const char *minLabel, const char *maxLabel)
 }
 
 
-const char*
-BSlider::MinLimitLabel() const
+const char*  BSlider::MinLimitLabel() const
 {
 	return fMinLimitLabel;
 }
 
 
-const char*
-BSlider::MaxLimitLabel() const
+const char*  BSlider::MaxLimitLabel() const
 {
 	return fMaxLimitLabel;
 }
 
 
-void
-BSlider::SetValue(int32 value)
+void BSlider::SetValue(int32 value)
 {
 	if (value < fMinValue)
 		value = fMinValue;
@@ -734,8 +710,7 @@ BSlider::SetValue(int32 value)
 }
 
 
-int32
-BSlider::ValueForPoint(BPoint location) const
+int32 BSlider::ValueForPoint(BPoint location) const
 {
 	float min;
 	float max;
@@ -759,8 +734,7 @@ BSlider::ValueForPoint(BPoint location) const
 }
 
 
-void
-BSlider::SetPosition(float position)
+void BSlider::SetPosition(float position)
 {
 	if (position <= 0.0f)
 		SetValue(fMinValue);
@@ -782,15 +756,13 @@ BSlider::Position() const
 }
 
 
-void
-BSlider::SetEnabled(bool on)
+void BSlider::SetEnabled(bool on)
 {
 	BControl::SetEnabled(on);
 }
 
 
-void
-BSlider::GetLimits(int32 *minimum, int32 *maximum) const
+void BSlider::GetLimits(int32 *minimum, int32 *maximum) const
 {
 	if (minimum != NULL)
 		*minimum = fMinValue;
@@ -802,8 +774,7 @@ BSlider::GetLimits(int32 *minimum, int32 *maximum) const
 // #pragma mark - drawing
 
 
-void
-BSlider::Draw(BRect updateRect)
+void BSlider::Draw(BRect updateRect)
 {
 	// clear out background
 	BRegion background(updateRect);
@@ -837,8 +808,7 @@ BSlider::Draw(BRect updateRect)
 }
 
 
-void
-BSlider::DrawSlider()
+void BSlider::DrawSlider()
 {
 	if (LockLooper()) {
 #if USE_OFF_SCREEN_VIEW
@@ -864,8 +834,7 @@ BSlider::DrawSlider()
 }
 
 
-void
-BSlider::DrawBar()
+void BSlider::DrawBar()
 {
 	BRect frame = BarFrame();
 	BView *view = OffscreenView();
@@ -996,8 +965,7 @@ BSlider::DrawBar()
 }
 
 
-void
-BSlider::DrawHashMarks()
+void BSlider::DrawHashMarks()
 {
 	if (fHashMarks == B_HASH_MARKS_NONE)
 		return;
@@ -1089,8 +1057,7 @@ BSlider::DrawHashMarks()
 }
 
 
-void
-BSlider::DrawThumb()
+void BSlider::DrawThumb()
 {
 	if (Style() == B_BLOCK_THUMB)
 		_DrawBlockThumb();
@@ -1099,8 +1066,7 @@ BSlider::DrawThumb()
 }
 
 
-void
-BSlider::DrawFocusMark()
+void BSlider::DrawFocusMark()
 {
 	if (!IsFocus())
 		return;
@@ -1127,8 +1093,7 @@ BSlider::DrawFocusMark()
 }
 
 
-void
-BSlider::DrawText()
+void BSlider::DrawText()
 {
 	BRect bounds(Bounds());
 	BView *view = OffscreenView();
@@ -1249,15 +1214,13 @@ BSlider::DrawText()
 // #pragma mark -
 
 
-const char*
-BSlider::UpdateText() const
+const char*  BSlider::UpdateText() const
 {
 	return NULL;
 }
 
 
-void
-BSlider::UpdateTextChanged()
+void BSlider::UpdateTextChanged()
 {
 	// update text label
 	float oldWidth = 0.0;
@@ -1415,22 +1378,19 @@ BSlider::ThumbFrame() const
 }
 
 
-void
-BSlider::SetFlags(uint32 flags)
+void BSlider::SetFlags(uint32 flags)
 {
 	BControl::SetFlags(flags);
 }
 
 
-void
-BSlider::SetResizingMode(uint32 mode)
+void BSlider::SetResizingMode(uint32 mode)
 {
 	BControl::SetResizingMode(mode);
 }
 
 
-void
-BSlider::GetPreferredSize(float* _width, float* _height)
+void BSlider::GetPreferredSize(float* _width, float* _height)
 {
 	BSize preferredSize = PreferredSize();
 
@@ -1458,15 +1418,13 @@ BSlider::GetPreferredSize(float* _width, float* _height)
 }
 
 
-void
-BSlider::ResizeToPreferred()
+void BSlider::ResizeToPreferred()
 {
 	BControl::ResizeToPreferred();
 }
 
 
-status_t
-BSlider::Invoke(BMessage* message)
+status_t BSlider::Invoke(BMessage* message)
 {
 	return BControl::Invoke(message);
 }
@@ -1481,30 +1439,26 @@ BSlider::ResolveSpecifier(BMessage* message, int32 index, BMessage* specifier,
 }
 
 
-status_t
-BSlider::GetSupportedSuites(BMessage* message)
+status_t BSlider::GetSupportedSuites(BMessage* message)
 {
 	return BControl::GetSupportedSuites(message);
 }
 
 
-void
-BSlider::SetModificationMessage(BMessage* message)
+void BSlider::SetModificationMessage(BMessage* message)
 {
 	delete fModificationMessage;
 	fModificationMessage = message;
 }
 
 
-BMessage*
-BSlider::ModificationMessage() const
+BMessage*  BSlider::ModificationMessage() const
 {
 	return fModificationMessage;
 }
 
 
-void
-BSlider::SetSnoozeAmount(int32 snoozeTime)
+void BSlider::SetSnoozeAmount(int32 snoozeTime)
 {
 	if (snoozeTime < 10000)
 		snoozeTime = 10000;
@@ -1515,44 +1469,38 @@ BSlider::SetSnoozeAmount(int32 snoozeTime)
 }
 
 
-int32
-BSlider::SnoozeAmount() const
+int32 BSlider::SnoozeAmount() const
 {
 	return fSnoozeAmount;
 }
 
 
-void
-BSlider::SetKeyIncrementValue(int32 incrementValue)
+void BSlider::SetKeyIncrementValue(int32 incrementValue)
 {
 	fKeyIncrementValue = incrementValue;
 }
 
 
-int32
-BSlider::KeyIncrementValue() const
+int32 BSlider::KeyIncrementValue() const
 {
 	return fKeyIncrementValue;
 }
 
 
-void
-BSlider::SetHashMarkCount(int32 hashMarkCount)
+void BSlider::SetHashMarkCount(int32 hashMarkCount)
 {
 	fHashMarkCount = hashMarkCount;
 	Invalidate();
 }
 
 
-int32
-BSlider::HashMarkCount() const
+int32 BSlider::HashMarkCount() const
 {
 	return fHashMarkCount;
 }
 
 
-void
-BSlider::SetHashMarks(hash_mark_location where)
+void BSlider::SetHashMarks(hash_mark_location where)
 {
 	fHashMarks = where;
 // TODO: enable if the hashmark look is influencing the control size!
@@ -1568,8 +1516,7 @@ BSlider::HashMarks() const
 }
 
 
-void
-BSlider::SetStyle(thumb_style style)
+void BSlider::SetStyle(thumb_style style)
 {
 	fStyle = style;
 	InvalidateLayout();
@@ -1584,8 +1531,7 @@ BSlider::Style() const
 }
 
 
-void
-BSlider::SetBarColor(rgb_color barColor)
+void BSlider::SetBarColor(rgb_color barColor)
 {
 	fBarColor = barColor;
 	Invalidate(BarFrame());
@@ -1599,8 +1545,7 @@ BSlider::BarColor() const
 }
 
 
-void
-BSlider::UseFillColor(bool useFill, const rgb_color* barColor)
+void BSlider::UseFillColor(bool useFill, const rgb_color* barColor)
 {
 	fUseFillColor = useFill;
 
@@ -1611,8 +1556,7 @@ BSlider::UseFillColor(bool useFill, const rgb_color* barColor)
 }
 
 
-bool
-BSlider::FillColor(rgb_color* barColor) const
+bool BSlider::FillColor(rgb_color* barColor) const
 {
 	if (barColor && fUseFillColor)
 		*barColor = fFillColor;
@@ -1639,8 +1583,7 @@ BSlider::Orientation() const
 }
 
 
-void
-BSlider::SetOrientation(orientation posture)
+void BSlider::SetOrientation(orientation posture)
 {
 	if (fOrientation == posture)
 		return;
@@ -1658,8 +1601,7 @@ BSlider::BarThickness() const
 }
 
 
-void
-BSlider::SetBarThickness(float thickness)
+void BSlider::SetBarThickness(float thickness)
 {
 	if (thickness < 1.0)
 		thickness = 1.0;
@@ -1686,8 +1628,7 @@ BSlider::SetBarThickness(float thickness)
 }
 
 
-void
-BSlider::SetFont(const BFont *font, uint32 properties)
+void BSlider::SetFont(const BFont *font, uint32 properties)
 {
 	BControl::SetFont(font, properties);
 
@@ -1704,8 +1645,7 @@ BSlider::SetFont(const BFont *font, uint32 properties)
 }
 
 
-void
-BSlider::SetLimits(int32 minimum, int32 maximum)
+void BSlider::SetLimits(int32 minimum, int32 maximum)
 {
 	if (minimum <= maximum) {
 		fMinValue = minimum;
@@ -1773,15 +1713,13 @@ BSlider::PreferredSize()
 }
 
 
-status_t
-BSlider::SetIcon(const BBitmap* icon, uint32 flags)
+status_t BSlider::SetIcon(const BBitmap* icon, uint32 flags)
 {
 	return BControl::SetIcon(icon, flags);
 }
 
 
-void
-BSlider::LayoutInvalidated(bool descendants)
+void BSlider::LayoutInvalidated(bool descendants)
 {
 	// invalidate cached preferred size
 	fMinSize.Set(-1, -1);
@@ -1790,8 +1728,7 @@ BSlider::LayoutInvalidated(bool descendants)
 
 // #pragma mark - private
 
-void
-BSlider::_DrawBlockThumb()
+void BSlider::_DrawBlockThumb()
 {
 	BRect frame = ThumbFrame();
 	BView *view = OffscreenView();
@@ -1924,8 +1861,7 @@ BSlider::_DrawBlockThumb()
 }
 
 
-void
-BSlider::_DrawTriangleThumb()
+void BSlider::_DrawTriangleThumb()
 {
 	BRect frame = ThumbFrame();
 	BView *view = OffscreenView();
@@ -2039,8 +1975,7 @@ BSlider::_Location() const
 }
 
 
-void
-BSlider::_SetLocationForValue(int32 value)
+void BSlider::_SetLocationForValue(int32 value)
 {
 	BPoint loc;
 	float range = (float)(fMaxValue - fMinValue);
@@ -2200,15 +2135,13 @@ BSlider::operator=(const BSlider &)
 
 #if __GNUC__ < 3
 
-extern "C" void
-GetLimits__7BSliderPlT1(BSlider* slider, int32* minimum, int32* maximum)
+extern "C" void GetLimits__7BSliderPlT1(BSlider* slider, int32* minimum, int32* maximum)
 {
 	slider->GetLimits(minimum, maximum);
 }
 
 
-extern "C" void
-_ReservedSlider4__7BSlider(BSlider *slider, int32 minimum, int32 maximum)
+extern "C" void _ReservedSlider4__7BSlider(BSlider *slider, int32 minimum, int32 maximum)
 {
 	slider->BSlider::SetLimits(minimum, maximum);
 }
@@ -2220,22 +2153,19 @@ _ReservedSlider5__7BSlider(BSlider *slider)
 }
 
 
-extern "C" void
-_ReservedSlider1__7BSlider(BSlider* slider, orientation _orientation)
+extern "C" void _ReservedSlider1__7BSlider(BSlider* slider, orientation _orientation)
 {
 	slider->BSlider::SetOrientation(_orientation);
 }
 
 
-extern "C" void
-_ReservedSlider2__7BSlider(BSlider* slider, float thickness)
+extern "C" void _ReservedSlider2__7BSlider(BSlider* slider, float thickness)
 {
 	slider->BSlider::SetBarThickness(thickness);
 }
 
 
-extern "C" void
-_ReservedSlider3__7BSlider(BSlider* slider, const BFont* font,
+extern "C" void _ReservedSlider3__7BSlider(BSlider* slider, const BFont* font,
 	uint32 properties)
 {
 	slider->BSlider::SetFont(font, properties);
@@ -2245,8 +2175,7 @@ _ReservedSlider3__7BSlider(BSlider* slider, const BFont* font,
 #endif	// __GNUC__ < 3
 
 
-extern "C" void
-B_IF_GCC_2(InvalidateLayout__7BSliderb, _ZN7BSlider16InvalidateLayoutEb)(
+extern "C" void B_IF_GCC_2(InvalidateLayout__7BSliderb, _ZN7BSlider16InvalidateLayoutEb)(
 	BView* view, bool descendants)
 {
 	perform_data_layout_invalidated data;

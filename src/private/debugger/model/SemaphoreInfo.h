@@ -5,7 +5,7 @@
 #ifndef SEMAPHORE_INFO_H
 #define SEMAPHORE_INFO_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <StringClass.h>
 
 #include "Types.h"

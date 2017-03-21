@@ -57,16 +57,14 @@ bool BTextView::InlineInput::IsActive() const
 	return fActive;
 }
 
-void
-BTextView::InlineInput::SetActive(bool active)
+void BTextView::InlineInput::SetActive(bool active)
 {
 	fActive = active;
 }
 
 /*! \brief Return the length of the inputted text.
 */
-int32
-BTextView::InlineInput::Length() const
+int32 BTextView::InlineInput::Length() const
 {
 	return fLength;
 }

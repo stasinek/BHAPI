@@ -21,8 +21,7 @@ AddOnImage::~AddOnImage()
 
 
 // Load
-status_t
-AddOnImage::Load(const char* path)
+status_t AddOnImage::Load(const char* path)
 {
 	Unload();
 	status_t error = (path ? B_OK : B_BAD_VALUE);
@@ -38,8 +37,7 @@ AddOnImage::Load(const char* path)
 
 
 // Unload
-void
-AddOnImage::Unload()
+void AddOnImage::Unload()
 {
 	if (fID >= 0) {
 		unload_add_on(fID);
@@ -49,8 +47,7 @@ AddOnImage::Unload()
 
 
 // SetID
-void
-AddOnImage::SetID(image_id id)
+void AddOnImage::SetID(image_id id)
 {
 	Unload();
 	if (id >= 0)

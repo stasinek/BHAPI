@@ -151,8 +151,7 @@ DormantNodeManager::GetAddOn(media_addon_id id)
 }
 
 
-void
-DormantNodeManager::PutAddOn(media_addon_id id)
+void DormantNodeManager::PutAddOn(media_addon_id id)
 {
 	TRACE("DormantNodeManager::PutAddon, id %" B_PRId32 "\n", id);
 
@@ -180,8 +179,7 @@ DormantNodeManager::PutAddOn(media_addon_id id)
 }
 
 
-void
-DormantNodeManager::PutAddOnDelayed(media_addon_id id)
+void DormantNodeManager::PutAddOnDelayed(media_addon_id id)
 {
 	// Called from a node destructor of the loaded media-add-on.
 	// We must make sure that the media-add-on stays in memory
@@ -231,8 +229,7 @@ DormantNodeManager::RegisterAddOn(const char* path)
 
 
 //!	For use by media_addon_server only
-void
-DormantNodeManager::UnregisterAddOn(media_addon_id id)
+void DormantNodeManager::UnregisterAddOn(media_addon_id id)
 {
 	TRACE("DormantNodeManager::UnregisterAddon id %" B_PRId32 "\n", id);
 	ASSERT(id > 0);
@@ -247,8 +244,7 @@ DormantNodeManager::UnregisterAddOn(media_addon_id id)
 }
 
 
-status_t
-DormantNodeManager::FindAddOnPath(BPath* path, media_addon_id id)
+status_t DormantNodeManager::FindAddOnPath(BPath* path, media_addon_id id)
 {
 	server_get_add_on_ref_request request;
 	request.add_on_id = id;
@@ -282,8 +278,7 @@ DormantNodeManager::_LookupAddOn(media_addon_id id)
 }
 
 
-status_t
-DormantNodeManager::_LoadAddOn(const char* path, media_addon_id id,
+status_t DormantNodeManager::_LoadAddOn(const char* path, media_addon_id id,
 	BMediaAddOn** _newAddOn, image_id* _newImage)
 {
 	image_id image = load_add_on(path);
@@ -326,8 +321,7 @@ DormantNodeManager::_LoadAddOn(const char* path, media_addon_id id,
 }
 
 
-void
-DormantNodeManager::_UnloadAddOn(BMediaAddOn* addOn, image_id image)
+void DormantNodeManager::_UnloadAddOn(BMediaAddOn* addOn, image_id image)
 {
 	ASSERT(addOn != NULL);
 	ASSERT(addOn->ImageID() == image);

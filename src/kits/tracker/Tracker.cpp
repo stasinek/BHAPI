@@ -123,8 +123,7 @@ public:
 	{
 	}
 
-	virtual void
-	MessageReceived(BMessage* message)
+	virtual void 	MessageReceived(BMessage* message)
 	{
 		void (*function)(const entry_ref*, const BMessage*, bool);
 		BMessage refs;
@@ -151,8 +150,7 @@ BLooper* gLaunchLooper = NULL;
 // #pragma mark - functions
 
 
-void
-InitIconPreloader()
+void InitIconPreloader()
 {
 	static int32 lock = 0;
 
@@ -192,8 +190,7 @@ InitIconPreloader()
 }	// namespace BPrivate
 
 
-uint32
-GetVolumeFlags(Model* model)
+uint32 GetVolumeFlags(Model* model)
 {
 	fs_info info;
 	if (model->IsVolume()) {
@@ -335,8 +332,7 @@ TTracker::~TTracker()
 }
 
 
-bool
-TTracker::QuitRequested()
+bool TTracker::QuitRequested()
 {
 	// don't allow user quitting
 	if (CurrentMessage() != NULL && CurrentMessage()->FindBool("shortcut")) {
@@ -452,8 +448,7 @@ TTracker::QuitRequested()
 }
 
 
-void
-TTracker::Quit()
+void TTracker::Quit()
 {
 	TrackerSettings().SaveSettings(false);
 
@@ -473,8 +468,7 @@ TTracker::Quit()
 }
 
 
-void
-TTracker::MessageReceived(BMessage* message)
+void TTracker::MessageReceived(BMessage* message)
 {
 	if (HandleScriptingMessage(message))
 		return;
@@ -624,8 +618,7 @@ TTracker::MessageReceived(BMessage* message)
 }
 
 
-void
-TTracker::Pulse()
+void TTracker::Pulse()
 {
 	if (!TrackerSettings().ShowVolumeSpaceBar())
 		return;
@@ -635,8 +628,7 @@ TTracker::Pulse()
 }
 
 
-void
-TTracker::SetDefaultPrinter(const BMessage* message)
+void TTracker::SetDefaultPrinter(const BMessage* message)
 {
 	// get the first item selected
 	int32 count = 0;
@@ -671,8 +663,7 @@ TTracker::SetDefaultPrinter(const BMessage* message)
 }
 
 
-void
-TTracker::MoveRefsToTrash(const BMessage* message)
+void TTracker::MoveRefsToTrash(const BMessage* message)
 {
 	int32 count;
 	uint32 type;
@@ -706,8 +697,7 @@ TTracker::MoveRefsToTrash(const BMessage* message)
 }
 
 
-void
-TTracker::SelectRefs(const BMessage* message)
+void TTracker::SelectRefs(const BMessage* message)
 {
 	uint32 type = 0;
 	int32 count = 0;
@@ -787,8 +777,7 @@ protected:
 };
 
 
-bool
-TTracker::LaunchAndCloseParentIfOK(const entry_ref* launchThis,
+bool TTracker::LaunchAndCloseParentIfOK(const entry_ref* launchThis,
 	const node_ref* closeThis, const BMessage* messageToBundle)
 {
 	BMessage refsReceived(B_REFS_RECEIVED);
@@ -808,8 +797,7 @@ TTracker::LaunchAndCloseParentIfOK(const entry_ref* launchThis,
 }
 
 
-status_t
-TTracker::OpenRef(const entry_ref* ref, const node_ref* nodeToClose,
+status_t TTracker::OpenRef(const entry_ref* ref, const node_ref* nodeToClose,
 	const node_ref* nodeToSelect, OpenSelector selector,
 	const BMessage* messageToBundle)
 {
@@ -914,8 +902,7 @@ TTracker::OpenRef(const entry_ref* ref, const node_ref* nodeToClose,
 }
 
 
-void
-TTracker::RefsReceived(BMessage* message)
+void TTracker::RefsReceived(BMessage* message)
 {
 	OpenSelector selector = kOpen;
 	if (message->HasInt32("launchUsingSelector"))
@@ -1026,8 +1013,7 @@ TTracker::RefsReceived(BMessage* message)
 }
 
 
-void
-TTracker::ArgvReceived(int32 argc, char** argv)
+void TTracker::ArgvReceived(int32 argc, char** argv)
 {
 	BMessage* message = CurrentMessage();
 	const char* currentWorkingDirectoryPath = NULL;
@@ -1047,8 +1033,7 @@ TTracker::ArgvReceived(int32 argc, char** argv)
 }
 
 
-void
-TTracker::OpenContainerWindow(Model* model, BMessage* originalRefsList,
+void TTracker::OpenContainerWindow(Model* model, BMessage* originalRefsList,
 	OpenSelector openSelector, uint32 openFlags, bool checkAlreadyOpen,
 	const BMessage* stateMessage)
 {
@@ -1131,8 +1116,7 @@ TTracker::OpenContainerWindow(Model* model, BMessage* originalRefsList,
 }
 
 
-void
-TTracker::EditQueries(const BMessage* message)
+void TTracker::EditQueries(const BMessage* message)
 {
 	bool editOnlyIfTemplate;
 	if (message->FindBool("editQueryOnPose", &editOnlyIfTemplate) != B_OK)
@@ -1151,8 +1135,7 @@ TTracker::EditQueries(const BMessage* message)
 }
 
 
-void
-TTracker::OpenInfoWindows(BMessage* message)
+void TTracker::OpenInfoWindows(BMessage* message)
 {
 	type_code type;
 	int32 count;
@@ -1242,8 +1225,7 @@ TTracker::FindContainerWindow(const entry_ref* entry, int32 number) const
 }
 
 
-bool
-TTracker::EntryHasWindowOpen(const entry_ref* entry)
+bool TTracker::EntryHasWindowOpen(const entry_ref* entry)
 {
 	AutoLock<WindowList> lock(&fWindowList);
 	return FindContainerWindow(entry) != NULL;
@@ -1293,8 +1275,7 @@ TTracker::FindInfoWindow(const node_ref* node) const
 }
 
 
-bool
-TTracker::QueryActiveForDevice(dev_t device)
+bool TTracker::QueryActiveForDevice(dev_t device)
 {
 	AutoLock<WindowList> lock(&fWindowList);
 	int32 count = fWindowList.CountItems();
@@ -1312,8 +1293,7 @@ TTracker::QueryActiveForDevice(dev_t device)
 }
 
 
-void
-TTracker::CloseActiveQueryWindows(dev_t device)
+void TTracker::CloseActiveQueryWindows(dev_t device)
 {
 	// used when trying to unmount a volume - an active query would prevent
 	// that from happening
@@ -1345,8 +1325,7 @@ TTracker::CloseActiveQueryWindows(dev_t device)
 }
 
 
-void
-TTracker::SaveAllPoseLocations()
+void TTracker::SaveAllPoseLocations()
 {
 	int32 numWindows = fWindowList.CountItems();
 	for (int32 windowIndex = 0; windowIndex < numWindows; windowIndex++) {
@@ -1364,8 +1343,7 @@ TTracker::SaveAllPoseLocations()
 }
 
 
-void
-TTracker::CloseWindowAndChildren(const node_ref* node)
+void TTracker::CloseWindowAndChildren(const node_ref* node)
 {
 	BDirectory dir(node);
 	if (dir.InitCheck() != B_OK)
@@ -1403,8 +1381,7 @@ TTracker::CloseWindowAndChildren(const node_ref* node)
 }
 
 
-void
-TTracker::CloseAllInWorkspace()
+void TTracker::CloseAllInWorkspace()
 {
 	AutoLock<WindowList> lock(&fWindowList);
 
@@ -1423,8 +1400,7 @@ TTracker::CloseAllInWorkspace()
 }
 
 
-void
-TTracker::CloseAllWindows()
+void TTracker::CloseAllWindows()
 {
 	// this is a response to the DeskBar sending us a B_QUIT, when it really
 	// means to say close all your windows. It might be better to have it
@@ -1455,8 +1431,7 @@ TTracker::CloseAllWindows()
 }
 
 
-void
-TTracker::_OpenPreviouslyOpenedWindows(const char* pathFilter)
+void TTracker::_OpenPreviouslyOpenedWindows(const char* pathFilter)
 {
 	size_t filterLength = 0;
 	if (pathFilter != NULL)
@@ -1533,8 +1508,7 @@ TTracker::_OpenPreviouslyOpenedWindows(const char* pathFilter)
 }
 
 
-void
-TTracker::ReadyToRun()
+void TTracker::ReadyToRun()
 {
 	gStatusWindow = new BStatusWindow();
 	InitMimeTypes();
@@ -1569,8 +1543,7 @@ TTracker::MimeTypes() const
 }
 
 
-void
-TTracker::SelectChildInParentSoon(const entry_ref* parent,
+void TTracker::SelectChildInParentSoon(const entry_ref* parent,
 	const node_ref* child)
 {
 	fTaskLoop->RunLater(NewMemberFunctionObjectWithResult
@@ -1579,8 +1552,7 @@ TTracker::SelectChildInParentSoon(const entry_ref* parent,
 }
 
 
-void
-TTracker::CloseParentWaitingForChildSoon(const entry_ref* child,
+void TTracker::CloseParentWaitingForChildSoon(const entry_ref* child,
 	const node_ref* parent)
 {
 	fTaskLoop->RunLater(NewMemberFunctionObjectWithResult
@@ -1589,8 +1561,7 @@ TTracker::CloseParentWaitingForChildSoon(const entry_ref* child,
 }
 
 
-void
-TTracker::SelectPoseAtLocationSoon(node_ref parent, BPoint pointInPose)
+void TTracker::SelectPoseAtLocationSoon(node_ref parent, BPoint pointInPose)
 {
 	fTaskLoop->RunLater(NewMemberFunctionObject
 		(&TTracker::SelectPoseAtLocationInParent, this, parent, pointInPose),
@@ -1598,8 +1569,7 @@ TTracker::SelectPoseAtLocationSoon(node_ref parent, BPoint pointInPose)
 }
 
 
-void
-TTracker::SelectPoseAtLocationInParent(node_ref parent, BPoint pointInPose)
+void TTracker::SelectPoseAtLocationInParent(node_ref parent, BPoint pointInPose)
 {
 	AutoLock<WindowList> lock(&fWindowList);
 	BContainerWindow* parentWindow = FindContainerWindow(&parent);
@@ -1610,8 +1580,7 @@ TTracker::SelectPoseAtLocationInParent(node_ref parent, BPoint pointInPose)
 }
 
 
-bool
-TTracker::CloseParentWaitingForChild(const entry_ref* child,
+bool TTracker::CloseParentWaitingForChild(const entry_ref* child,
 	const node_ref* parent)
 {
 	AutoLock<WindowList> lock(&fWindowList);
@@ -1640,8 +1609,7 @@ TTracker::CloseParentWaitingForChild(const entry_ref* child,
 }
 
 
-void
-TTracker::CloseParent(node_ref parent)
+void TTracker::CloseParent(node_ref parent)
 {
 	AutoLock<WindowList> lock(&fWindowList);
 	if (!lock)
@@ -1651,8 +1619,7 @@ TTracker::CloseParent(node_ref parent)
 }
 
 
-void
-TTracker::ShowSettingsWindow()
+void TTracker::ShowSettingsWindow()
 {
 	if (fSettingsWindow == NULL) {
 		fSettingsWindow = new TrackerSettingsWindow();
@@ -1670,8 +1637,7 @@ TTracker::ShowSettingsWindow()
 }
 
 
-bool
-TTracker::CloseParentWindowCommon(BContainerWindow* window)
+bool TTracker::CloseParentWindowCommon(BContainerWindow* window)
 {
 	ASSERT(fWindowList.IsLocked());
 
@@ -1685,8 +1651,7 @@ TTracker::CloseParentWindowCommon(BContainerWindow* window)
 }
 
 
-bool
-TTracker::SelectChildInParent(const entry_ref* parent, const node_ref* child)
+bool TTracker::SelectChildInParent(const entry_ref* parent, const node_ref* child)
 {
 	AutoLock<WindowList> lock(&fWindowList);
 
@@ -1711,8 +1676,7 @@ TTracker::SelectChildInParent(const entry_ref* parent, const node_ref* child)
 }
 
 
-status_t
-TTracker::NeedMoreNodeMonitors()
+status_t TTracker::NeedMoreNodeMonitors()
 {
 	fNodeMonitorCount += kNodeMonitorBumpValue;
 	PRINT(("bumping nodeMonitorCount to %" B_PRId32 "\n", fNodeMonitorCount));
@@ -1729,8 +1693,7 @@ TTracker::NeedMoreNodeMonitors()
 }
 
 
-status_t
-TTracker::WatchNode(const node_ref* node, uint32 flags, BMessenger target)
+status_t TTracker::WatchNode(const node_ref* node, uint32 flags, BMessenger target)
 {
 	status_t result = watch_node(node, flags, target);
 	if (result == B_OK || result != B_NO_MEMORY) {
@@ -1768,21 +1731,18 @@ TTracker::MountServer() const
 }
 
 
-bool
-TTracker::TrashFull() const
+bool TTracker::TrashFull() const
 {
 	return fTrashWatcher->CheckTrashDirs();
 }
 
 
-bool
-TTracker::IsTrashNode(const node_ref* node) const
+bool TTracker::IsTrashNode(const node_ref* node) const
 {
 	return fTrashWatcher->IsTrashNode(node);
 }
 
-bool
-TTracker::InTrashNode(const entry_ref* ref) const
+bool TTracker::InTrashNode(const entry_ref* ref) const
 {
 	return FSInTrashDir(ref);
 }

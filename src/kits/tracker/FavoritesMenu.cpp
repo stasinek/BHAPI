@@ -94,15 +94,13 @@ FavoritesMenu::~FavoritesMenu()
 }
 
 
-void
-FavoritesMenu::SetRefFilter(BRefFilter* filter)
+void FavoritesMenu::SetRefFilter(BRefFilter* filter)
 {
 	fRefFilter = filter;
 }
 
 
-bool
-FavoritesMenu::StartBuildingItemList()
+bool FavoritesMenu::StartBuildingItemList()
 {
 	// initialize the menu building state
 
@@ -122,8 +120,7 @@ FavoritesMenu::StartBuildingItemList()
 }
 
 
-bool
-FavoritesMenu::AddNextItem()
+bool FavoritesMenu::AddNextItem()
 {
 	// run the next chunk of code for a given item adding state
 
@@ -303,15 +300,13 @@ FavoritesMenu::AddNextItem()
 }
 
 
-void
-FavoritesMenu::DoneBuildingItemList()
+void FavoritesMenu::DoneBuildingItemList()
 {
 	SetTargetForItems(fTarget);
 }
 
 
-void
-FavoritesMenu::ClearMenuBuildingState()
+void FavoritesMenu::ClearMenuBuildingState()
 {
 	delete fContainer;
 	fContainer = NULL;
@@ -322,8 +317,7 @@ FavoritesMenu::ClearMenuBuildingState()
 }
 
 
-bool
-FavoritesMenu::ShouldShowModel(const Model* model)
+bool FavoritesMenu::ShouldShowModel(const Model* model)
 {
 	if (fIsSavePanel && model->IsFile())
 		return false;
@@ -364,8 +358,7 @@ RecentsMenu::RecentsMenu(const char* name, int32 which, uint32 what,
 }
 
 
-void
-RecentsMenu::DetachedFromWindow()
+void RecentsMenu::DetachedFromWindow()
 {
 	//
 	//	BNavMenu::DetachedFromWindow sets the TypesList to NULL
@@ -374,8 +367,7 @@ RecentsMenu::DetachedFromWindow()
 }
 
 
-bool
-RecentsMenu::StartBuildingItemList()
+bool RecentsMenu::StartBuildingItemList()
 {
 	int32 count = CountItems()-1;
 	for (int32 index = count; index >= 0; index--) {
@@ -396,8 +388,7 @@ RecentsMenu::StartBuildingItemList()
 }
 
 
-bool
-RecentsMenu::AddNextItem()
+bool RecentsMenu::AddNextItem()
 {
 	if (fRecentsCount > 0 && AddRecents(fRecentsCount))
 		return true;
@@ -407,8 +398,7 @@ RecentsMenu::AddNextItem()
 }
 
 
-bool
-RecentsMenu::AddRecents(int32 count)
+bool RecentsMenu::AddRecents(int32 count)
 {
 	if (fItemIndex == 0) {
 		fRecentList.MakeEmpty();
@@ -458,8 +448,7 @@ RecentsMenu::AddRecents(int32 count)
 }
 
 
-void
-RecentsMenu::DoneBuildingItemList()
+void RecentsMenu::DoneBuildingItemList()
 {
 	//
 	//	!! note: don't call inherited here
@@ -477,8 +466,7 @@ RecentsMenu::DoneBuildingItemList()
 }
 
 
-void
-RecentsMenu::ClearMenuBuildingState()
+void RecentsMenu::ClearMenuBuildingState()
 {
 	fMenuBuilt = false;
 	BNavMenu::ClearMenuBuildingState();

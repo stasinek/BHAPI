@@ -68,8 +68,7 @@ DecorInfo::~DecorInfo()
 }
 
 
-status_t
-DecorInfo::SetTo(const entry_ref& ref)
+status_t DecorInfo::SetTo(const entry_ref& ref)
 {
 	Unset();
 
@@ -82,8 +81,7 @@ DecorInfo::SetTo(const entry_ref& ref)
 }
 
 
-status_t
-DecorInfo::SetTo(BString path)
+status_t DecorInfo::SetTo(BString path)
 {
 	BEntry entry(path.String(), true);
 	entry_ref ref;
@@ -92,15 +90,13 @@ DecorInfo::SetTo(BString path)
 }
 
 
-status_t
-DecorInfo::InitCheck()	const
+status_t DecorInfo::InitCheck()	const
 {
 	return fInitStatus;
 }
 
 
-void
-DecorInfo::Unset()
+void DecorInfo::Unset()
 {
 	fRef = entry_ref();
 	fPath = "";
@@ -116,8 +112,7 @@ DecorInfo::Unset()
 }
 
 
-bool
-DecorInfo::IsDefault() const
+bool DecorInfo::IsDefault() const
 {
 	return fInitStatus == B_OK && fPath == "Default";
 }
@@ -211,8 +206,7 @@ DecorInfo::ModificationTime() const
 }
 
 
-bool
-DecorInfo::CheckForChanges(bool& deleted)
+bool DecorInfo::CheckForChanges(bool& deleted)
 {
 	if (InitCheck() != B_OK)
 		return false;
@@ -243,8 +237,7 @@ DecorInfo::CheckForChanges(bool& deleted)
 }
 
 
-void
-DecorInfo::_Init(bool isUpdate)
+void DecorInfo::_Init(bool isUpdate)
 {
 	if (!isUpdate && InitCheck() != B_NO_INIT) {
 		// TODO: remove after validation
@@ -378,8 +371,7 @@ DecorInfoUtility::~DecorInfoUtility()
 }
 
 
-status_t
-DecorInfoUtility::ScanDecorators()
+status_t DecorInfoUtility::ScanDecorators()
 {
 	status_t result;
 
@@ -463,8 +455,7 @@ DecorInfoUtility::ScanDecorators()
 }
 
 
-int32
-DecorInfoUtility::CountDecorators()
+int32 DecorInfoUtility::CountDecorators()
 {
 	BAutolock _(fLock);
 	if (!fHasScanned)
@@ -534,8 +525,7 @@ DecorInfoUtility::DefaultDecorator()
 }
 
 
-bool
-DecorInfoUtility::IsCurrentDecorator(DecorInfo* decor)
+bool DecorInfoUtility::IsCurrentDecorator(DecorInfo* decor)
 {
 	BAutolock _(fLock);
 	if (decor == NULL)
@@ -544,8 +534,7 @@ DecorInfoUtility::IsCurrentDecorator(DecorInfo* decor)
 }
 
 
-status_t
-DecorInfoUtility::SetDecorator(DecorInfo* decor)
+status_t DecorInfoUtility::SetDecorator(DecorInfo* decor)
 {
 	if (decor == NULL)
 		return B_BAD_VALUE;
@@ -558,8 +547,7 @@ DecorInfoUtility::SetDecorator(DecorInfo* decor)
 }
 
 
-status_t
-DecorInfoUtility::SetDecorator(int32 index)
+status_t DecorInfoUtility::SetDecorator(int32 index)
 {
 	BAutolock _(fLock);
 	if (!fHasScanned)
@@ -573,8 +561,7 @@ DecorInfoUtility::SetDecorator(int32 index)
 }
 
 
-status_t
-DecorInfoUtility::Preview(DecorInfo* decor, BWindow* window)
+status_t DecorInfoUtility::Preview(DecorInfo* decor, BWindow* window)
 {
 	if (decor == NULL)
 		return B_BAD_VALUE;
@@ -615,8 +602,7 @@ DecorInfoUtility::_FindDecor(const BString& pathString)
 }
 
 
-status_t
-DecorInfoUtility::_ScanDecorators(BDirectory decoratorDirectory)
+status_t DecorInfoUtility::_ScanDecorators(BDirectory decoratorDirectory)
 {
 	BAutolock _(fLock);
 

@@ -80,7 +80,7 @@ BPoint::operator=(const BPoint& from)
 }
 
 
-void
+void 
 BPoint::Set(float X, float Y)
 {
 	x = X;
@@ -122,20 +122,20 @@ BPoint::operator-=(const BPoint &minus)
 }
 
 
-bool
+bool 
 BPoint::operator!=(const BPoint &pt) const
 {
 	return(x != pt.x || y != pt.y);
 }
 
 
-bool
+bool 
 BPoint::operator==(const BPoint &pt) const
 {
 	return(x == pt.x && y == pt.y);
 }
 
-void
+void 
 BPoint::ConstrainTo(BRect rect)
 {
 	if(!(x >= rect.left && x <= rect.right))
@@ -166,7 +166,7 @@ BPoint::ConstrainTo(BRect rect)
 }
 
 
-void
+void 
 BPoint::Floor()
 {
 	x = (float)floor((double)x);
@@ -192,7 +192,7 @@ BPoint::FloorCopy() const
 }
 
 
-void
+void 
 BPoint::Ceil()
 {
 	x = (float)ceil((double)x);
@@ -218,7 +218,7 @@ BPoint::CeilCopy() const
 }
 
 
-void
+void 
 BPoint::Round()
 {
 	x = (float)b_round((double)x);
@@ -244,7 +244,7 @@ BPoint::RoundCopy() const
 }
 
 
-void
+void 
 BPoint::PrintToStream() const
 {
 	BHAPI_OUTPUT("BPoint(%g, %g)", x, y);

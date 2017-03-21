@@ -84,15 +84,13 @@ BDurationFormat::~BDurationFormat()
 }
 
 
-void
-BDurationFormat::SetSeparator(const BString& separator)
+void BDurationFormat::SetSeparator(const BString& separator)
 {
 	fSeparator = separator;
 }
 
 
-status_t
-BDurationFormat::SetTimeZone(const BTimeZone* timeZone)
+status_t BDurationFormat::SetTimeZone(const BTimeZone* timeZone)
 {
 	if (fCalendar == NULL)
 		return B_NO_INIT;
@@ -116,8 +114,7 @@ BDurationFormat::SetTimeZone(const BTimeZone* timeZone)
 }
 
 
-status_t
-BDurationFormat::Format(BString& buffer, const bigtime_t startValue,
+status_t BDurationFormat::Format(BString& buffer, const bigtime_t startValue,
 	const bigtime_t stopValue, time_unit_style style) const
 {
 	UErrorCode icuStatus = U_ZERO_ERROR;

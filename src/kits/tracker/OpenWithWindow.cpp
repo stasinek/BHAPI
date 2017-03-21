@@ -162,15 +162,13 @@ OpenWithContainerWindow::PoseView() const
 }
 
 
-const BMessage*
-OpenWithContainerWindow::EntryList() const
+const BMessage*  OpenWithContainerWindow::EntryList() const
 {
 	return fEntriesToOpen;
 }
 
 
-void
-OpenWithContainerWindow::OpenWithSelection()
+void OpenWithContainerWindow::OpenWithSelection()
 {
 	int32 count = PoseView()->SelectionList()->CountItems();
 	ASSERT(count == 1);
@@ -262,8 +260,7 @@ SetDefaultAppForOneType(const BString* element, void* castToEntryRef)
 }
 
 
-void
-OpenWithContainerWindow::MakeDefaultAndOpen()
+void OpenWithContainerWindow::MakeDefaultAndOpen()
 {
 	int32 count = PoseView()->SelectionList()->CountItems();
 	ASSERT(count == 1);
@@ -290,8 +287,7 @@ OpenWithContainerWindow::MakeDefaultAndOpen()
 }
 
 
-void
-OpenWithContainerWindow::MessageReceived(BMessage* message)
+void OpenWithContainerWindow::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case kDefaultButton:
@@ -339,29 +335,25 @@ OpenWithContainerWindow::KeyDownFilter(BMessage* message, BHandler**,
 }
 
 
-bool
-OpenWithContainerWindow::ShouldAddMenus() const
+bool OpenWithContainerWindow::ShouldAddMenus() const
 {
 	return false;
 }
 
 
-void
-OpenWithContainerWindow::ShowContextMenu(BPoint, const entry_ref*, BView*)
+void OpenWithContainerWindow::ShowContextMenu(BPoint, const entry_ref*, BView*)
 {
 }
 
 
-void
-OpenWithContainerWindow::AddShortcuts()
+void OpenWithContainerWindow::AddShortcuts()
 {
 	AddShortcut('I', B_COMMAND_KEY, new BMessage(kGetInfo), PoseView());
 	AddShortcut('Y', B_COMMAND_KEY, new BMessage(kResizeToFit), PoseView());
 }
 
 
-void
-OpenWithContainerWindow::NewAttributeMenu(BMenu* menu)
+void OpenWithContainerWindow::NewAttributeMenu(BMenu* menu)
 {
 	_inherited::NewAttributeMenu(menu);
 
@@ -392,8 +384,7 @@ OpenWithContainerWindow::NewAttributeMenu(BMenu* menu)
 }
 
 
-void
-OpenWithContainerWindow::SaveState(bool)
+void OpenWithContainerWindow::SaveState(bool)
 {
 	BNode defaultingNode;
 	if (DefaultStateSourceNode(kDefaultOpenWithTemplate, &defaultingNode,
@@ -405,22 +396,19 @@ OpenWithContainerWindow::SaveState(bool)
 }
 
 
-void
-OpenWithContainerWindow::SaveState(BMessage &message) const
+void OpenWithContainerWindow::SaveState(BMessage &message) const
 {
 	_inherited::SaveState(message);
 }
 
 
-void
-OpenWithContainerWindow::Init(const BMessage* message)
+void OpenWithContainerWindow::Init(const BMessage* message)
 {
 	_inherited::Init(message);
 }
 
 
-void
-OpenWithContainerWindow::InitLayout()
+void OpenWithContainerWindow::InitLayout()
 {
 	_inherited::InitLayout();
 
@@ -441,8 +429,7 @@ OpenWithContainerWindow::InitLayout()
 }
 
 
-void
-OpenWithContainerWindow::RestoreState()
+void OpenWithContainerWindow::RestoreState()
 {
 	BNode defaultingNode;
 	if (DefaultStateSourceNode(kDefaultOpenWithTemplate, &defaultingNode,
@@ -458,15 +445,13 @@ OpenWithContainerWindow::RestoreState()
 }
 
 
-void
-OpenWithContainerWindow::RestoreState(const BMessage &message)
+void OpenWithContainerWindow::RestoreState(const BMessage &message)
 {
 	_inherited::RestoreState(message);
 }
 
 
-void
-OpenWithContainerWindow::RestoreWindowState(AttributeStreamNode* node)
+void OpenWithContainerWindow::RestoreWindowState(AttributeStreamNode* node)
 {
 	if (node == NULL)
 		return;
@@ -481,49 +466,42 @@ OpenWithContainerWindow::RestoreWindowState(AttributeStreamNode* node)
 }
 
 
-void
-OpenWithContainerWindow::RestoreWindowState(const BMessage &message)
+void OpenWithContainerWindow::RestoreWindowState(const BMessage &message)
 {
 	_inherited::RestoreWindowState(message);
 }
 
 
-bool
-OpenWithContainerWindow::NeedsDefaultStateSetup()
+bool OpenWithContainerWindow::NeedsDefaultStateSetup()
 {
 	return true;
 }
 
 
-void
-OpenWithContainerWindow::SetUpDefaultState()
+void OpenWithContainerWindow::SetUpDefaultState()
 {
 }
 
 
-bool
-OpenWithContainerWindow::IsShowing(const node_ref*) const
+bool OpenWithContainerWindow::IsShowing(const node_ref*) const
 {
 	return false;
 }
 
 
-bool
-OpenWithContainerWindow::IsShowing(const entry_ref*) const
+bool OpenWithContainerWindow::IsShowing(const entry_ref*) const
 {
 	return false;
 }
 
 
-void
-OpenWithContainerWindow::SetCanSetAppAsDefault(bool on)
+void OpenWithContainerWindow::SetCanSetAppAsDefault(bool on)
 {
 	fLaunchAndMakeDefaultButton->SetEnabled(on);
 }
 
 
-void
-OpenWithContainerWindow::SetCanOpen(bool on)
+void OpenWithContainerWindow::SetCanOpen(bool on)
 {
 	fLaunchButton->SetEnabled(on);
 }
@@ -563,8 +541,7 @@ OpenWithPoseView::ContainerWindow() const
 }
 
 
-void
-OpenWithPoseView::AttachedToWindow()
+void OpenWithPoseView::AttachedToWindow()
 {
 	_inherited::AttachedToWindow();
 
@@ -573,15 +550,13 @@ OpenWithPoseView::AttachedToWindow()
 }
 
 
-bool
-OpenWithPoseView::CanHandleDragSelection(const Model*, const BMessage*, bool)
+bool OpenWithPoseView::CanHandleDragSelection(const Model*, const BMessage*, bool)
 {
 	return false;
 }
 
 
-static void
-AddSupportingAppForTypeToQuery(SearchForSignatureEntryList* queryIterator,
+static void AddSupportingAppForTypeToQuery(SearchForSignatureEntryList* queryIterator,
 	const char* type)
 {
 	// get supporting apps for type
@@ -682,15 +657,13 @@ OpenWithPoseView::InitDirentIterator(const entry_ref*)
 }
 
 
-void
-OpenWithPoseView::ReturnDirentIterator(EntryListBase* iterator)
+void OpenWithPoseView::ReturnDirentIterator(EntryListBase* iterator)
 {
 	// Do nothing. We keep our fIterator around as it is used by fRefFilter.
 }
 
 
-void
-OpenWithPoseView::OpenSelection(BPose* pose, int32*)
+void OpenWithPoseView::OpenSelection(BPose* pose, int32*)
 {
 	OpenWithContainerWindow* window = ContainerWindow();
 
@@ -753,8 +726,7 @@ OpenWithPoseView::OpenSelection(BPose* pose, int32*)
 }
 
 
-void
-OpenWithPoseView::Pulse()
+void OpenWithPoseView::Pulse()
 {
 	// disable the Open and make default button if the default
 	// app matches the selected app
@@ -799,8 +771,7 @@ OpenWithPoseView::Pulse()
 }
 
 
-void
-OpenWithPoseView::SetUpDefaultColumnsIfNeeded()
+void OpenWithPoseView::SetUpDefaultColumnsIfNeeded()
 {
 	// in case there were errors getting some columns
 	if (fColumnList->CountItems() != 0)
@@ -823,15 +794,13 @@ OpenWithPoseView::SetUpDefaultColumnsIfNeeded()
 }
 
 
-bool
-OpenWithPoseView::AddPosesThreadValid(const entry_ref*) const
+bool OpenWithPoseView::AddPosesThreadValid(const entry_ref*) const
 {
 	return true;
 }
 
 
-void
-OpenWithPoseView::CreatePoses(Model** models, PoseInfo* poseInfoArray,
+void OpenWithPoseView::CreatePoses(Model** models, PoseInfo* poseInfoArray,
 	int32 count, BPose** resultingPoses, bool insertionSort,
 	int32* lastPoseIndexPtr, BRect* boundsPtr, bool forceDraw)
 {
@@ -852,8 +821,7 @@ OpenWithPoseView::CreatePoses(Model** models, PoseInfo* poseInfoArray,
 }
 
 
-void
-OpenWithPoseView::KeyDown(const char* bytes, int32 count)
+void OpenWithPoseView::KeyDown(const char* bytes, int32 count)
 {
 	if (bytes[0] == B_TAB) {
 		// just shift the focus, don't tab to the next pose
@@ -863,76 +831,65 @@ OpenWithPoseView::KeyDown(const char* bytes, int32 count)
 }
 
 
-void
-OpenWithPoseView::SaveState(AttributeStreamNode* node)
+void OpenWithPoseView::SaveState(AttributeStreamNode* node)
 {
 	_inherited::SaveState(node);
 }
 
 
-void
-OpenWithPoseView::RestoreState(AttributeStreamNode* node)
+void OpenWithPoseView::RestoreState(AttributeStreamNode* node)
 {
 	_inherited::RestoreState(node);
 	fViewState->SetViewMode(kListMode);
 }
 
 
-void
-OpenWithPoseView::SaveState(BMessage &message) const
+void OpenWithPoseView::SaveState(BMessage &message) const
 {
 	_inherited::SaveState(message);
 }
 
 
-void
-OpenWithPoseView::RestoreState(const BMessage &message)
+void OpenWithPoseView::RestoreState(const BMessage &message)
 {
 	_inherited::RestoreState(message);
 	fViewState->SetViewMode(kListMode);
 }
 
 
-void
-OpenWithPoseView::SavePoseLocations(BRect*)
+void OpenWithPoseView::SavePoseLocations(BRect*)
 {
 }
 
 
-void
-OpenWithPoseView::MoveSelectionToTrash(bool)
+void OpenWithPoseView::MoveSelectionToTrash(bool)
 {
 }
 
 
-void
-OpenWithPoseView::MoveSelectionTo(BPoint, BPoint, BContainerWindow*)
+void OpenWithPoseView::MoveSelectionTo(BPoint, BPoint, BContainerWindow*)
 {
 }
 
 
-void
-OpenWithPoseView::MoveSelectionInto(Model*, BContainerWindow*, bool, bool)
+void OpenWithPoseView::MoveSelectionInto(Model*, BContainerWindow*, bool, bool)
 {
 }
 
 
-bool
-OpenWithPoseView::Represents(const node_ref*) const
+bool OpenWithPoseView::Represents(const node_ref*) const
 {
 	return false;
 }
 
 
-bool
-OpenWithPoseView::Represents(const entry_ref*) const
+bool OpenWithPoseView::Represents(const entry_ref*) const
 {
 	return false;
 }
 
 
-bool
-OpenWithPoseView::HandleMessageDropped(BMessage* DEBUG_ONLY(message))
+bool OpenWithPoseView::HandleMessageDropped(BMessage* DEBUG_ONLY(message))
 {
 #if DEBUG
 	// in debug mode allow tweaking the colors
@@ -951,8 +908,7 @@ OpenWithPoseView::HandleMessageDropped(BMessage* DEBUG_ONLY(message))
 }
 
 
-int32
-OpenWithPoseView::OpenWithRelation(const Model* model) const
+int32 OpenWithPoseView::OpenWithRelation(const Model* model) const
 {
 	OpenWithContainerWindow* window = ContainerWindow();
 
@@ -961,8 +917,7 @@ OpenWithPoseView::OpenWithRelation(const Model* model) const
 }
 
 
-void
-OpenWithPoseView::OpenWithRelationDescription(const Model* model,
+void OpenWithPoseView::OpenWithRelationDescription(const Model* model,
 	BString* description) const
 {
 	OpenWithContainerWindow* window = ContainerWindow();
@@ -985,8 +940,7 @@ OpenWithRefFilter::OpenWithRefFilter(SearchForSignatureEntryList* iterator,
 }
 
 
-bool
-OpenWithRefFilter::Filter(const entry_ref* ref, BNode* node, stat_beos* st,
+bool OpenWithRefFilter::Filter(const entry_ref* ref, BNode* node, stat_beos* st,
 	const char* filetype)
 {
 	Model *model = new Model(ref, true, true);
@@ -1015,8 +969,7 @@ RelationCachingModelProxy::~RelationCachingModelProxy()
 }
 
 
-int32
-RelationCachingModelProxy::Relation(SearchForSignatureEntryList* iterator,
+int32 RelationCachingModelProxy::Relation(SearchForSignatureEntryList* iterator,
 	BMessage* entries) const
 {
 	if (fRelation == kUnknownRelation)
@@ -1093,8 +1046,7 @@ SortByRelationAndName(const RelationCachingModelProxy* model1,
 } // namespace BPrivate
 
 
-bool
-OpenWithMenu::StartBuildingItemList()
+bool OpenWithMenu::StartBuildingItemList()
 {
 	fIterator = new SearchForSignatureEntryList(false);
 	// push all the supporting apps from all the entries into the
@@ -1117,8 +1069,7 @@ OpenWithMenu::StartBuildingItemList()
 }
 
 
-bool
-OpenWithMenu::AddNextItem()
+bool OpenWithMenu::AddNextItem()
 {
 	BEntry entry;
 	if (fIterator->GetNextEntry(&entry) != B_OK)
@@ -1138,8 +1089,7 @@ OpenWithMenu::AddNextItem()
 }
 
 
-void
-OpenWithMenu::DoneBuildingItemList()
+void OpenWithMenu::DoneBuildingItemList()
 {
 	// sort by app name
 	fSupportingAppList->SortItems(SortByRelationAndName, this);
@@ -1228,8 +1178,7 @@ OpenWithMenu::DoneBuildingItemList()
 }
 
 
-void
-OpenWithMenu::ClearMenuBuildingState()
+void OpenWithMenu::ClearMenuBuildingState()
 {
 	delete fIterator;
 	fIterator = NULL;
@@ -1260,8 +1209,7 @@ SearchForSignatureEntryList::~SearchForSignatureEntryList()
 }
 
 
-void
-SearchForSignatureEntryList::PushUniqueSignature(const char* str)
+void SearchForSignatureEntryList::PushUniqueSignature(const char* str)
 {
 	// do a unique add
 	if (fSignatures.EachElement(FindOne, (void*)str))
@@ -1271,22 +1219,19 @@ SearchForSignatureEntryList::PushUniqueSignature(const char* str)
 }
 
 
-status_t
-SearchForSignatureEntryList::GetNextEntry(BEntry* entry, bool)
+status_t SearchForSignatureEntryList::GetNextEntry(BEntry* entry, bool)
 {
 	return fIteratorList->GetNextEntry(entry);
 }
 
 
-status_t
-SearchForSignatureEntryList::GetNextRef(entry_ref* ref)
+status_t SearchForSignatureEntryList::GetNextRef(entry_ref* ref)
 {
 	return fIteratorList->GetNextRef(ref);
 }
 
 
-int32
-SearchForSignatureEntryList::GetNextDirents(struct dirent* buffer,
+int32 SearchForSignatureEntryList::GetNextDirents(struct dirent* buffer,
 	size_t length, int32 count)
 {
 	return fIteratorList->GetNextDirents(buffer, length, count);
@@ -1313,8 +1258,7 @@ AddOnePredicateTerm(const BString* item, void* castToParams)
 }
 
 
-status_t
-SearchForSignatureEntryList::Rewind()
+status_t SearchForSignatureEntryList::Rewind()
 {
 	if (fIteratorList)
 		return fIteratorList->Rewind();
@@ -1347,15 +1291,13 @@ SearchForSignatureEntryList::Rewind()
 }
 
 
-int32
-SearchForSignatureEntryList::CountEntries()
+int32 SearchForSignatureEntryList::CountEntries()
 {
 	return 0;
 }
 
 
-bool
-SearchForSignatureEntryList::GetPreferredApp(entry_ref* ref) const
+bool SearchForSignatureEntryList::GetPreferredApp(entry_ref* ref) const
 {
 	if (fPreferredAppCount == 1)
 		*ref = fPreferredRef;
@@ -1364,8 +1306,7 @@ SearchForSignatureEntryList::GetPreferredApp(entry_ref* ref) const
 }
 
 
-void
-SearchForSignatureEntryList::TrySettingPreferredApp(const entry_ref* ref)
+void SearchForSignatureEntryList::TrySettingPreferredApp(const entry_ref* ref)
 {
 	if (!fPreferredAppCount) {
 		fPreferredRef = *ref;
@@ -1377,8 +1318,7 @@ SearchForSignatureEntryList::TrySettingPreferredApp(const entry_ref* ref)
 }
 
 
-void
-SearchForSignatureEntryList::TrySettingPreferredAppForFile(const entry_ref* ref)
+void SearchForSignatureEntryList::TrySettingPreferredAppForFile(const entry_ref* ref)
 {
 	if (!fPreferredAppForFileCount) {
 		fPreferredRefForFile = *ref;
@@ -1390,29 +1330,25 @@ SearchForSignatureEntryList::TrySettingPreferredAppForFile(const entry_ref* ref)
 }
 
 
-void
-SearchForSignatureEntryList::NonGenericFileFound()
+void SearchForSignatureEntryList::NonGenericFileFound()
 {
 	fGenericFilesOnly = false;
 }
 
 
-bool
-SearchForSignatureEntryList::GenericFilesOnly() const
+bool SearchForSignatureEntryList::GenericFilesOnly() const
 {
 	return fGenericFilesOnly;
 }
 
 
-bool
-SearchForSignatureEntryList::ShowAllApplications() const
+bool SearchForSignatureEntryList::ShowAllApplications() const
 {
 	return fCanAddAllApps && !fFoundOneNonSuperHandler;
 }
 
 
-int32
-SearchForSignatureEntryList::Relation(const Model* nodeModel,
+int32 SearchForSignatureEntryList::Relation(const Model* nodeModel,
 	const Model* applicationModel)
 {
 	int32 supportsMimeType = applicationModel->SupportsMimeType(
@@ -1436,8 +1372,7 @@ SearchForSignatureEntryList::Relation(const Model* nodeModel,
 }
 
 
-int32
-SearchForSignatureEntryList::Relation(const BMessage* entriesToOpen,
+int32 SearchForSignatureEntryList::Relation(const BMessage* entriesToOpen,
 	const Model* model) const
 {
 	return Relation(entriesToOpen, model,
@@ -1446,8 +1381,7 @@ SearchForSignatureEntryList::Relation(const BMessage* entriesToOpen,
 }
 
 
-void
-SearchForSignatureEntryList::RelationDescription(const BMessage* entriesToOpen,
+void SearchForSignatureEntryList::RelationDescription(const BMessage* entriesToOpen,
 	const Model* model, BString* description) const
 {
 	RelationDescription(entriesToOpen, model, description,
@@ -1456,8 +1390,7 @@ SearchForSignatureEntryList::RelationDescription(const BMessage* entriesToOpen,
 }
 
 
-int32
-SearchForSignatureEntryList::Relation(const BMessage* entriesToOpen,
+int32 SearchForSignatureEntryList::Relation(const BMessage* entriesToOpen,
 	const Model* applicationModel, const entry_ref* preferredApp,
 	const entry_ref* preferredAppForFile)
 {
@@ -1494,8 +1427,7 @@ SearchForSignatureEntryList::Relation(const BMessage* entriesToOpen,
 }
 
 
-void
-SearchForSignatureEntryList::RelationDescription(const BMessage* entriesToOpen,
+void SearchForSignatureEntryList::RelationDescription(const BMessage* entriesToOpen,
 	const Model* applicationModel, BString* description,
 	const entry_ref* preferredApp, const entry_ref* preferredAppForFile)
 {
@@ -1567,8 +1499,7 @@ SearchForSignatureEntryList::RelationDescription(const BMessage* entriesToOpen,
 }
 
 
-bool
-SearchForSignatureEntryList::CanOpenWithFilter(const Model* appModel,
+bool SearchForSignatureEntryList::CanOpenWithFilter(const Model* appModel,
 	const BMessage* entriesToOpen, const entry_ref* preferredApp)
 {
 	ThrowOnAssert(appModel != NULL);
@@ -1675,8 +1606,7 @@ ConditionalAllAppsIterator::ConditionalAllAppsIterator(
 }
 
 
-void
-ConditionalAllAppsIterator::Instantiate()
+void ConditionalAllAppsIterator::Instantiate()
 {
 	if (fWalker != NULL)
 		return;
@@ -1695,8 +1625,7 @@ ConditionalAllAppsIterator::~ConditionalAllAppsIterator()
 }
 
 
-status_t
-ConditionalAllAppsIterator::GetNextEntry(BEntry* entry, bool traverse)
+status_t ConditionalAllAppsIterator::GetNextEntry(BEntry* entry, bool traverse)
 {
 	if (!Iterate())
 		return B_ENTRY_NOT_FOUND;
@@ -1706,8 +1635,7 @@ ConditionalAllAppsIterator::GetNextEntry(BEntry* entry, bool traverse)
 }
 
 
-status_t
-ConditionalAllAppsIterator::GetNextRef(entry_ref* ref)
+status_t ConditionalAllAppsIterator::GetNextRef(entry_ref* ref)
 {
 	if (!Iterate())
 		return B_ENTRY_NOT_FOUND;
@@ -1717,8 +1645,7 @@ ConditionalAllAppsIterator::GetNextRef(entry_ref* ref)
 }
 
 
-int32
-ConditionalAllAppsIterator::GetNextDirents(struct dirent* buffer,
+int32 ConditionalAllAppsIterator::GetNextDirents(struct dirent* buffer,
 	size_t length, int32 count)
 {
 	if (!Iterate())
@@ -1729,8 +1656,7 @@ ConditionalAllAppsIterator::GetNextDirents(struct dirent* buffer,
 }
 
 
-status_t
-ConditionalAllAppsIterator::Rewind()
+status_t ConditionalAllAppsIterator::Rewind()
 {
 	if (!Iterate())
 		return B_OK;
@@ -1740,8 +1666,7 @@ ConditionalAllAppsIterator::Rewind()
 }
 
 
-int32
-ConditionalAllAppsIterator::CountEntries()
+int32 ConditionalAllAppsIterator::CountEntries()
 {
 	if (!Iterate())
 		return 0;
@@ -1751,8 +1676,7 @@ ConditionalAllAppsIterator::CountEntries()
 }
 
 
-bool
-ConditionalAllAppsIterator::Iterate() const
+bool ConditionalAllAppsIterator::Iterate() const
 {
 	return fParent->ShowAllApplications();
 }

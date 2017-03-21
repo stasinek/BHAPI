@@ -37,8 +37,7 @@ ScreenSaverSettings::ScreenSaverSettings()
 
 
 //! Load the flattened settings BMessage from disk and parse it.
-bool
-ScreenSaverSettings::Load()
+bool ScreenSaverSettings::Load()
 {
 	BFile file(fSettingsPath.Path(), B_READ_ONLY);
 	if (file.InitCheck() != B_OK)
@@ -95,8 +94,7 @@ ScreenSaverSettings::Load()
 }
 
 
-void
-ScreenSaverSettings::Defaults()
+void ScreenSaverSettings::Defaults()
 {
 	fWindowFrame = BRect(96.5, 77.0, 542.5, 402);
 	fWindowTab = 0;
@@ -171,8 +169,7 @@ ScreenSaverSettings::Message()
 }
 
 
-status_t
-ScreenSaverSettings::GetModuleState(const char* name, BMessage* stateMessage)
+status_t ScreenSaverSettings::GetModuleState(const char* name, BMessage* stateMessage)
 {
 	if (name == NULL || *name == '\0')
 		return B_BAD_VALUE;
@@ -183,8 +180,7 @@ ScreenSaverSettings::GetModuleState(const char* name, BMessage* stateMessage)
 }
 
 
-void
-ScreenSaverSettings::SetModuleState(const char* name, BMessage* stateMessage)
+void ScreenSaverSettings::SetModuleState(const char* name, BMessage* stateMessage)
 {
 	if (name == NULL || *name == '\0')
 		return;
@@ -196,8 +192,7 @@ ScreenSaverSettings::SetModuleState(const char* name, BMessage* stateMessage)
 }
 
 
-void
-ScreenSaverSettings::Save()
+void ScreenSaverSettings::Save()
 {
   	BMessage &settings = Message();
 	PRINT_OBJECT(settings);

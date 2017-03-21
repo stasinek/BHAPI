@@ -39,8 +39,7 @@ BPrinterRoster::~BPrinterRoster()
 }
 
 
-int32
-BPrinterRoster::CountPrinters()
+int32 BPrinterRoster::CountPrinters()
 {
 	Rewind();
 
@@ -54,8 +53,7 @@ BPrinterRoster::CountPrinters()
 }
 
 
-status_t
-BPrinterRoster::GetNextPrinter(BPrinter* printer)
+status_t BPrinterRoster::GetNextPrinter(BPrinter* printer)
 {
 	if (!printer)
 		return B_BAD_VALUE;
@@ -79,8 +77,7 @@ BPrinterRoster::GetNextPrinter(BPrinter* printer)
 }
 
 
-status_t
-BPrinterRoster::GetDefaultPrinter(BPrinter* printer)
+status_t BPrinterRoster::GetDefaultPrinter(BPrinter* printer)
 {
 	if (!printer)
 		return B_BAD_VALUE;
@@ -104,8 +101,7 @@ BPrinterRoster::GetDefaultPrinter(BPrinter* printer)
 }
 
 
-status_t
-BPrinterRoster::FindPrinter(const BString& name, BPrinter* printer)
+status_t BPrinterRoster::FindPrinter(const BString& name, BPrinter* printer)
 {
 	if (name.Length() <= 0 || !printer)
 		return B_BAD_VALUE;
@@ -130,15 +126,13 @@ BPrinterRoster::FindPrinter(const BString& name, BPrinter* printer)
 }
 
 
-status_t
-BPrinterRoster::Rewind()
+status_t BPrinterRoster::Rewind()
 {
 	return fUserPrintersDirectory.Rewind();
 }
 
 
-status_t
-BPrinterRoster::StartWatching(const BMessenger& listener)
+status_t BPrinterRoster::StartWatching(const BMessenger& listener)
 {
 	StopWatching();
 
@@ -153,8 +147,7 @@ BPrinterRoster::StartWatching(const BMessenger& listener)
 }
 
 
-void
-BPrinterRoster::StopWatching()
+void BPrinterRoster::StopWatching()
 {
 	if (fListener) {
 		stop_watching(*fListener);

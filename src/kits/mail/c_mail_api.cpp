@@ -26,8 +26,7 @@
 #include <MailSettings.h>
 
 
-_EXPORT status_t
-check_for_mail(int32* _incomingCount)
+_EXPORT status_t check_for_mail(int32* _incomingCount)
 {
 	status_t status = BMailDaemon().CheckMail();
 	if (status != B_OK)
@@ -40,23 +39,20 @@ check_for_mail(int32* _incomingCount)
 }
 
 
-_EXPORT status_t
-send_queued_mail(void)
+_EXPORT status_t send_queued_mail(void)
 {
 	return BMailDaemon().SendQueuedMail();
 }
 
 
-_EXPORT int32
-count_pop_accounts(void)
+_EXPORT int32 count_pop_accounts(void)
 {
 	BMailAccounts accounts;
 	return accounts.CountAccounts();
 }
 
 
-_EXPORT status_t
-get_mail_notification(mail_notification *notification)
+_EXPORT status_t get_mail_notification(mail_notification *notification)
 {
 	notification->alert = true;
 	notification->beep = false;
@@ -64,15 +60,13 @@ get_mail_notification(mail_notification *notification)
 }
 
 
-_EXPORT status_t
-set_mail_notification(mail_notification *, bool)
+_EXPORT status_t set_mail_notification(mail_notification *, bool)
 {
 	return B_NO_REPLY;
 }
 
 
-_EXPORT status_t
-get_pop_account(mail_pop_account* account, int32 index)
+_EXPORT status_t get_pop_account(mail_pop_account* account, int32 index)
 {
 	BMailAccounts accounts;
 	BMailAccountSettings* accountSettings = accounts.AccountAt(index);
@@ -96,15 +90,13 @@ get_pop_account(mail_pop_account* account, int32 index)
 }
 
 
-_EXPORT status_t
-set_pop_account(mail_pop_account *, int32, bool)
+_EXPORT status_t set_pop_account(mail_pop_account *, int32, bool)
 {
 	return B_NO_REPLY;
 }
 
 
-_EXPORT status_t
-get_smtp_host(char* buffer)
+_EXPORT status_t get_smtp_host(char* buffer)
 {
 	BMailAccounts accounts;
 	BMailAccountSettings* account = accounts.AccountAt(
@@ -122,15 +114,13 @@ get_smtp_host(char* buffer)
 }
 
 
-_EXPORT status_t
-set_smtp_host(char * /* host */, bool /* save */)
+_EXPORT status_t set_smtp_host(char * /* host */, bool /* save */)
 {
 	return B_NO_REPLY;
 }
 
 
-_EXPORT status_t
-forward_mail(entry_ref *ref, const char *recipients, bool now)
+_EXPORT status_t forward_mail(entry_ref *ref, const char *recipients, bool now)
 {
 	BFile file(ref, O_RDONLY);
 	status_t status = file.InitCheck();

@@ -28,8 +28,7 @@ Rule::~Rule() {
 	Unset();	
 }
 
-status_t
-Rule::InitCheck() const {
+status_t Rule::InitCheck() const {
 	return fConjList ? B_OK : B_NO_INIT;
 }
 
@@ -40,8 +39,7 @@ Rule::Priority() const {
 }
 
 //! Sniffs the given data stream. Returns true if the rule matches, false if not.
-bool
-Rule::Sniff(BPositionIO *data) const {
+bool Rule::Sniff(BPositionIO *data) const {
 	if (InitCheck() != B_OK)
 		return false;
 	else {
@@ -84,8 +82,7 @@ Rule::BytesNeeded() const
 }
 
 
-void
-Rule::Unset() {
+void Rule::Unset() {
  	if (fConjList){
 		delete fConjList;
 		fConjList = NULL;
@@ -93,8 +90,7 @@ Rule::Unset() {
 }
 
 //! Called by Parser::Parse() after successfully parsing a sniffer rule.
-void
-Rule::SetTo(double priority, std::vector<DisjList*>* list) {
+void Rule::SetTo(double priority, std::vector<DisjList*>* list) {
 	Unset();
 	if (0.0 <= priority && priority <= 1.0)
 		fPriority = priority;

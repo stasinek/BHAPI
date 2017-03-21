@@ -373,8 +373,7 @@ private:
 
 // Insert
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::Insert(Element *element, bool back)
+void DOUBLY_LINKED_LIST_CLASS_NAME::Insert(Element *element, bool back)
 {
 	if (element) {
 		if (back) {
@@ -403,8 +402,7 @@ DOUBLY_LINKED_LIST_CLASS_NAME::Insert(Element *element, bool back)
 
 // Insert
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::Insert(Element *before, Element *element)
+void DOUBLY_LINKED_LIST_CLASS_NAME::Insert(Element *before, Element *element)
 {
 	if (before == NULL) {
 		Insert(element);
@@ -428,16 +426,14 @@ DOUBLY_LINKED_LIST_CLASS_NAME::Insert(Element *before, Element *element)
 
 // Add
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::Add(Element *element, bool back)
+void DOUBLY_LINKED_LIST_CLASS_NAME::Add(Element *element, bool back)
 {
 	Insert(element, back);
 }
 
 // Remove
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::Remove(Element *element)
+void DOUBLY_LINKED_LIST_CLASS_NAME::Remove(Element *element)
 {
 	if (element) {
 		Link *elLink = sGetLink(element);
@@ -456,8 +452,7 @@ DOUBLY_LINKED_LIST_CLASS_NAME::Remove(Element *element)
 
 // Swap
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::Swap(Element *a, Element *b)
+void DOUBLY_LINKED_LIST_CLASS_NAME::Swap(Element *a, Element *b)
 {
 	if (a && b && a != b) {
 		Element *aNext = sGetLink(a)->next;
@@ -479,8 +474,7 @@ DOUBLY_LINKED_LIST_CLASS_NAME::Swap(Element *a, Element *b)
 
 // MoveFrom
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::MoveFrom(DOUBLY_LINKED_LIST_CLASS_NAME *fromList)
+void DOUBLY_LINKED_LIST_CLASS_NAME::MoveFrom(DOUBLY_LINKED_LIST_CLASS_NAME *fromList)
 {
 	if (fromList && fromList->fFirst) {
 		if (fFirst) {
@@ -498,8 +492,7 @@ DOUBLY_LINKED_LIST_CLASS_NAME::MoveFrom(DOUBLY_LINKED_LIST_CLASS_NAME *fromList)
 
 // RemoveAll
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::RemoveAll()
+void DOUBLY_LINKED_LIST_CLASS_NAME::RemoveAll()
 {
 	Element *element = fFirst;
 	while (element) {

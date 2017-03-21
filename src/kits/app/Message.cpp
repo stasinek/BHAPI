@@ -484,7 +484,7 @@ bool BMessage::Unflatten(const char *buffer, size_t bufferSize)
 }
 
 
-bool
+bool 
 BMessage::IsSystem() const
 {
 #ifdef BHAPI_BIG_ENDIAN
@@ -495,14 +495,14 @@ BMessage::IsSystem() const
 }
 
 
-void
+void 
 BMessage::PrintToStream(BStreamIO &stream) const
 {
     // TODO
 }
 
 
-void
+void 
 BMessage::PrintToStream() const
 {
     BHAPI_OUTPUT("what = '%c%c%c%c'\t\tteam = %I64i\n",
@@ -723,7 +723,7 @@ BMessage::CountItems(__be_int32 nameIndex,  __be_int32 typeIndex, type_code *typ
 }
 
 
-bool
+bool 
 BMessage::TypeAt(const char *name,  __be_int32 typeIndex, type_code *type) const
 {
     if(!name || !type) return false;
@@ -740,7 +740,7 @@ BMessage::TypeAt(const char *name,  __be_int32 typeIndex, type_code *type) const
 }
 
 
-bool
+bool 
 BMessage::TypeAt(__be_int32 nameIndex,  __be_int32 typeIndex, type_code *type) const
 {
     if(!type) return false;
@@ -820,7 +820,7 @@ BMessage::NameAt(__be_int32 nameIndex) const
 }
 
 
-void
+void 
 BMessage::MakeEmpty()
 {
     for(__be_int32 k = 0; k < fObjectsList.CountItems(); k++)
@@ -854,14 +854,14 @@ BMessage::MakeEmpty()
 }
 
 
-bool
+bool 
 BMessage::IsEmpty() const
 {
     return fObjectsList.IsEmpty();
 }
 
 
-bool
+bool 
 BMessage::Rename(const char *old_entry, const char *new_entry)
 {
     if(!old_entry || !new_entry) return false;
@@ -883,7 +883,7 @@ BMessage::Rename(const char *old_entry, const char *new_entry)
 }
 
 
-bool
+bool 
 BMessage::AddData(const char *name, type_code type, const void *data, size_t numBytes, bool is_fixed_size)
 {
     if(!name) return false;
@@ -958,7 +958,7 @@ BMessage::AddData(const char *name, type_code type, const void *data, size_t num
 }
 
 
-bool
+bool 
 BMessage::AddString(const char *name, const char *aString)
 {
     if(!name || !aString) return false;
@@ -967,14 +967,14 @@ BMessage::AddString(const char *name, const char *aString)
 }
 
 
-bool
+bool 
 BMessage::AddString(const char *name, const BString &aString)
 {
     return AddString(name, aString.String());
 }
 
 
-bool
+bool 
 BMessage::AddInt8(const char *name,  __be_int8 val)
 {
     if(!name) return false;
@@ -982,7 +982,7 @@ BMessage::AddInt8(const char *name,  __be_int8 val)
 }
 
 
-bool
+bool 
 BMessage::AddInt16(const char *name,  __be_int16 val)
 {
     if(!name) return false;
@@ -990,7 +990,7 @@ BMessage::AddInt16(const char *name,  __be_int16 val)
 }
 
 
-bool
+bool 
 BMessage::AddInt32(const char *name,  __be_int32 val)
 {
     if(!name) return false;
@@ -998,7 +998,7 @@ BMessage::AddInt32(const char *name,  __be_int32 val)
 }
 
 
-bool
+bool 
 BMessage::AddInt64(const char *name,  __be_int64 val)
 {
     if(!name) return false;
@@ -1006,7 +1006,7 @@ BMessage::AddInt64(const char *name,  __be_int64 val)
 }
 
 
-bool
+bool 
 BMessage::AddBool(const char *name, bool aBoolean)
 {
     if(!name) return false;
@@ -1014,7 +1014,7 @@ BMessage::AddBool(const char *name, bool aBoolean)
 }
 
 
-bool
+bool 
 BMessage::AddFloat(const char *name, float aFloat)
 {
     if(!name) return false;
@@ -1022,7 +1022,7 @@ BMessage::AddFloat(const char *name, float aFloat)
 }
 
 
-bool
+bool 
 BMessage::AddDouble(const char *name, double aDouble)
 {
     if(!name) return false;
@@ -1030,7 +1030,7 @@ BMessage::AddDouble(const char *name, double aDouble)
 }
 
 
-bool
+bool 
 BMessage::AddPoint(const char *name, BPoint pt)
 {
     if(!name) return false;
@@ -1047,7 +1047,7 @@ BMessage::AddPoint(const char *name, BPoint pt)
 }
 
 
-bool
+bool 
 BMessage::AddRect(const char *name, BRect r)
 {
     if(!name) return false;
@@ -1068,7 +1068,7 @@ BMessage::AddRect(const char *name, BRect r)
 }
 
 
-bool
+bool 
 BMessage::AddPointer(const char *name, const void *ptr)
 {
     if(!name || !ptr) return false;
@@ -1076,7 +1076,7 @@ BMessage::AddPointer(const char *name, const void *ptr)
 }
 
 
-bool
+bool 
 BMessage::AddMessage(const char *name, const BMessage *msg)
 {
     if(!name || !msg) return false;
@@ -1101,7 +1101,7 @@ BMessage::AddMessage(const char *name, const BMessage *msg)
 }
 
 
-bool
+bool 
 BMessage::AddMessenger(const char *name, const BMessenger *msgr)
 {
     if(!name || !msgr) return false;
@@ -1127,21 +1127,21 @@ BMessage::AddMessenger(const char *name, const BMessenger *msgr)
 }
 
 
-bool
+bool 
 BMessage::AddMessenger(const char *name, const BMessenger &msgr)
 {
     return AddMessenger(name, &msgr);
 }
 
 
-bool
+bool 
 BMessage::FindData(const char *name, type_code type, const void **data,  ssize_t *numBytes) const
 {
     return FindData(name, type, 0, data, numBytes);
 }
 
 
-bool
+bool 
 BMessage::FindData(const char *name, type_code type,  __be_int32 index, const void **data,  ssize_t *numBytes) const
 {
     if(!name) return false;
@@ -1168,7 +1168,7 @@ BMessage::FindData(const char *name, type_code type,  __be_int32 index, const vo
 }
 
 
-bool
+bool 
 BMessage::FindData(__be_int32 nameIndex,  __be_int32 typeIndex,  __be_int32 index, const void **data,  ssize_t *numBytes) const
 {
     list_data *ldata = (list_data*)fObjectsList.ItemAt(nameIndex);
@@ -1193,28 +1193,28 @@ BMessage::FindData(__be_int32 nameIndex,  __be_int32 typeIndex,  __be_int32 inde
 }
 
 
-bool
+bool 
 BMessage::FindString(const char *name, const char **str) const
 {
     return FindString(name, 0, str);
 }
 
 
-bool
+bool 
 BMessage::FindString(const char *name,  __be_int32 index, const char **str) const
 {
     return FindData(name, B_STRING_TYPE, index, (const void**)str, NULL);
 }
 
 
-bool
+bool 
 BMessage::FindString(const char *name, BString *str) const
 {
     return FindString(name, 0, str);
 }
 
 
-bool
+bool 
 BMessage::FindString(const char *name,  __be_int32 index, BString *str) const
 {
     const char *string = NULL;
@@ -1224,14 +1224,14 @@ BMessage::FindString(const char *name,  __be_int32 index, BString *str) const
 }
 
 
-bool
+bool 
 BMessage::FindInt8(const char *name,  __be_int8 *val) const
 {
     return FindInt8(name, 0, val);
 }
 
 
-bool
+bool 
 BMessage::FindInt8(const char *name,  __be_int32 index,  __be_int8 *val) const
 {
     const  __be_int8 *value = NULL;
@@ -1241,14 +1241,14 @@ BMessage::FindInt8(const char *name,  __be_int32 index,  __be_int8 *val) const
 }
 
 
-bool
+bool 
 BMessage::FindInt16(const char *name,  __be_int16 *val) const
 {
     return FindInt16(name, 0, val);
 }
 
 
-bool
+bool 
 BMessage::FindInt16(const char *name,  __be_int32 index,  __be_int16 *val) const
 {
     const  __be_int16 *value = NULL;
@@ -1258,14 +1258,14 @@ BMessage::FindInt16(const char *name,  __be_int32 index,  __be_int16 *val) const
 }
 
 
-bool
+bool 
 BMessage::FindInt32(const char *name,  __be_int32 *val) const
 {
     return FindInt32(name, 0, val);
 }
 
 
-bool
+bool 
 BMessage::FindInt32(const char *name,  __be_int32 index,  __be_int32 *val) const
 {
     const  __be_int32 *value = NULL;
@@ -1275,14 +1275,14 @@ BMessage::FindInt32(const char *name,  __be_int32 index,  __be_int32 *val) const
 }
 
 
-bool
+bool 
 BMessage::FindInt64(const char *name,  __be_int64 *val) const
 {
     return FindInt64(name, 0, val);
 }
 
 
-bool
+bool 
 BMessage::FindInt64(const char *name,  __be_int32 index,  __be_int64 *val) const
 {
     const  __be_int64 *value = NULL;
@@ -1292,14 +1292,14 @@ BMessage::FindInt64(const char *name,  __be_int32 index,  __be_int64 *val) const
 }
 
 
-bool
+bool 
 BMessage::FindBool(const char *name, bool *aBoolean) const
 {
     return FindBool(name, 0, aBoolean);
 }
 
 
-bool
+bool 
 BMessage::FindBool(const char *name,  __be_int32 index, bool *aBoolean) const
 {
     const bool *value = NULL;
@@ -1309,14 +1309,14 @@ BMessage::FindBool(const char *name,  __be_int32 index, bool *aBoolean) const
 }
 
 
-bool
+bool 
 BMessage::FindFloat(const char *name, float *f) const
 {
     return FindFloat(name, 0, f);
 }
 
 
-bool
+bool 
 BMessage::FindFloat(const char *name,  __be_int32 index, float *f) const
 {
     const float *value = NULL;
@@ -1326,14 +1326,14 @@ BMessage::FindFloat(const char *name,  __be_int32 index, float *f) const
 }
 
 
-bool
+bool 
 BMessage::FindDouble(const char *name, double *d) const
 {
     return FindDouble(name, 0, d);
 }
 
 
-bool
+bool 
 BMessage::FindDouble(const char *name,  __be_int32 index, double *d) const
 {
     const double *value = NULL;
@@ -1343,14 +1343,14 @@ BMessage::FindDouble(const char *name,  __be_int32 index, double *d) const
 }
 
 
-bool
+bool 
 BMessage::FindPoint(const char *name, BPoint *pt) const
 {
     return FindPoint(name, 0, pt);
 }
 
 
-bool
+bool 
 BMessage::FindPoint(const char *name,  __be_int32 index, BPoint *pt) const
 {
     struct point_t {
@@ -1366,14 +1366,14 @@ BMessage::FindPoint(const char *name,  __be_int32 index, BPoint *pt) const
 }
 
 
-bool
+bool 
 BMessage::FindRect(const char *name, BRect *r) const
 {
     return FindRect(name, 0, r);
 }
 
 
-bool
+bool 
 BMessage::FindRect(const char *name,  __be_int32 index, BRect *r) const
 {
     struct rect_t {
@@ -1391,28 +1391,28 @@ BMessage::FindRect(const char *name,  __be_int32 index, BRect *r) const
 }
 
 
-bool
+bool 
 BMessage::FindPointer(const char *name, void **ptr) const
 {
     return FindPointer(name, 0, ptr);
 }
 
 
-bool
+bool 
 BMessage::FindPointer(const char *name,  __be_int32 index, void **ptr) const
 {
     return FindData(name, B_POINTER_TYPE, index, (const void**)ptr, NULL);
 }
 
 
-bool
+bool 
 BMessage::FindMessage(const char *name, BMessage *msg) const
 {
     return FindMessage(name, 0, msg);
 }
 
 
-bool
+bool 
 BMessage::FindMessage(const char *name,  __be_int32 index, BMessage *msg) const
 {
     const char *buffer = NULL;
@@ -1431,14 +1431,14 @@ BMessage::FindMessage(const char *name,  __be_int32 index, BMessage *msg) const
 }
 
 
-bool
+bool 
 BMessage::FindMessenger(const char *name, BMessenger *msgr) const
 {
     return FindMessenger(name, 0, msgr);
 }
 
 
-bool
+bool 
 BMessage::FindMessenger(const char *name,  __be_int32 index, BMessenger *msgr) const
 {
     const char *buffer = NULL;
@@ -1457,105 +1457,105 @@ BMessage::FindMessenger(const char *name,  __be_int32 index, BMessenger *msgr) c
 }
 
 
-bool
+bool 
 BMessage::HasData(const char *name, type_code type,  __be_int32 index) const
 {
     return FindData(name, type, index, NULL, NULL);
 }
 
 
-bool
+bool 
 BMessage::HasString(const char *name,  __be_int32 index) const
 {
     return FindString(name, index, (const char**)NULL);
 }
 
 
-bool
+bool 
 BMessage::HasInt8(const char *name,  __be_int32 index) const
 {
     return FindInt8(name, index, NULL);
 }
 
 
-bool
+bool 
 BMessage::HasInt16(const char *name,  __be_int32 index) const
 {
     return FindInt16(name, index, NULL);
 }
 
 
-bool
+bool 
 BMessage::HasInt32(const char *name,  __be_int32 index) const
 {
     return FindInt32(name, index, NULL);
 }
 
 
-bool
+bool 
 BMessage::HasInt64(const char *name,  __be_int32 index) const
 {
     return FindInt64(name, index, NULL);
 }
 
 
-bool
+bool 
 BMessage::HasBool(const char *name,  __be_int32 index) const
 {
     return FindBool(name, index, NULL);
 }
 
 
-bool
+bool 
 BMessage::HasFloat(const char *name,  __be_int32 index) const
 {
     return FindFloat(name, index, NULL);
 }
 
 
-bool
+bool 
 BMessage::HasDouble(const char *name,  __be_int32 index) const
 {
     return FindDouble(name, index, NULL);
 }
 
 
-bool
+bool 
 BMessage::HasPoint(const char *name,  __be_int32 index) const
 {
     return FindPoint(name, index, NULL);
 }
 
 
-bool
+bool 
 BMessage::HasRect(const char *name,  __be_int32 index) const
 {
     return FindRect(name, index, NULL);
 }
 
 
-bool
+bool 
 BMessage::HasPointer(const char *name,  __be_int32 index) const
 {
     return FindPointer(name, index, NULL);
 }
 
 
-bool
+bool 
 BMessage::HasMessage(const char *name,  __be_int32 index) const
 {
     return FindMessage(name, index, NULL);
 }
 
 
-bool
+bool 
 BMessage::HasMessenger(const char *name,  __be_int32 index) const
 {
     return FindMessenger(name, index, NULL);
 }
 
 
-bool
+bool 
 BMessage::RemoveData(const char *name, type_code type,  __be_int32 index)
 {
     if(!name) return false;
@@ -1589,7 +1589,7 @@ BMessage::RemoveData(const char *name, type_code type,  __be_int32 index)
 }
 
 
-bool
+bool 
 BMessage::RemoveData(const char *name, type_code type)
 {
     if(!name) return false;
@@ -1623,7 +1623,7 @@ BMessage::RemoveData(const char *name, type_code type)
 }
 
 
-bool
+bool 
 BMessage::RemoveData(const char *name)
 {
     if(!name) return false;
@@ -1657,98 +1657,98 @@ BMessage::RemoveData(const char *name)
 
 
 
-bool
+bool 
 BMessage::RemovString(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_STRING_TYPE, index);
 }
 
 
-bool
+bool 
 BMessage::RemoveInt8(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_INT8_TYPE, index);
 }
 
 
-bool
+bool 
 BMessage::RemoveInt16(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_INT16_TYPE, index);
 }
 
 
-bool
+bool 
 BMessage::RemoveInt32(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_INT32_TYPE, index);
 }
 
 
-bool
+bool 
 BMessage::RemoveInt64(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_INT64_TYPE, index);
 }
 
 
-bool
+bool 
 BMessage::RemoveBool(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_BOOL_TYPE, index);
 }
 
 
-bool
+bool 
 BMessage::RemoveFloat(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_FLOAT_TYPE, index);
 }
 
 
-bool
+bool 
 BMessage::RemoveDouble(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_DOUBLE_TYPE, index);
 }
 
 
-bool
+bool 
 BMessage::RemovePoint(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_POINT_TYPE, index);
 }
 
 
-bool
+bool 
 BMessage::RemoveRect(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_RECT_TYPE, index);
 }
 
 
-bool
+bool 
 BMessage::RemovePointer(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_POINTER_TYPE, index);
 }
 
 
-bool
+bool 
 BMessage::RemoveMessage(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_MESSAGE_TYPE, index);
 }
 
 
-bool
+bool 
 BMessage::RemoveMessenger(const char *name,  __be_int32 index)
 {
     return RemoveData(name, B_MESSENGER_TYPE, index);
 }
 
 
-bool
+bool 
 BMessage::ReplaceData(const char *name, type_code type,  __be_int32 index, const void *data, size_t numBytes, bool is_fixed_size)
 {
     if(!name) return false;
@@ -1806,14 +1806,14 @@ BMessage::ReplaceData(const char *name, type_code type,  __be_int32 index, const
 }
 
 
-bool
+bool 
 BMessage::ReplaceData(const char *name, type_code type, const void *data, size_t numBytes, bool is_fixed_size)
 {
     return ReplaceData(name, type, 0, data, numBytes, is_fixed_size);
 }
 
 
-bool
+bool 
 BMessage::ReplacString(const char *name,  __be_int32 index, const char *aString)
 {
     if(!name || !aString) return false;
@@ -1821,28 +1821,28 @@ BMessage::ReplacString(const char *name,  __be_int32 index, const char *aString)
 }
 
 
-bool
+bool 
 BMessage::ReplacString(const char *name, const char *aString)
 {
     return ReplacString(name, 0, aString);
 }
 
 
-bool
+bool 
 BMessage::ReplacString(const char *name,  __be_int32 index, const BString &aString)
 {
     return ReplacString(name, index, aString.String());
 }
 
 
-bool
+bool 
 BMessage::ReplacString(const char *name, const BString &aString)
 {
     return ReplacString(name, 0, aString);
 }
 
 
-bool
+bool 
 BMessage::ReplaceInt8(const char *name,  __be_int32 index,  __be_int8 val)
 {
     if(!name) return false;
@@ -1850,14 +1850,14 @@ BMessage::ReplaceInt8(const char *name,  __be_int32 index,  __be_int8 val)
 }
 
 
-bool
+bool 
 BMessage::ReplaceInt8(const char *name,  __be_int8 val)
 {
     return ReplaceInt8(name, 0, val);
 }
 
 
-bool
+bool 
 BMessage::ReplaceInt16(const char *name,  __be_int32 index,  __be_int16 val)
 {
     if(!name) return false;
@@ -1865,14 +1865,14 @@ BMessage::ReplaceInt16(const char *name,  __be_int32 index,  __be_int16 val)
 }
 
 
-bool
+bool 
 BMessage::ReplaceInt16(const char *name,  __be_int16 val)
 {
     return ReplaceInt16(name, 0, val);
 }
 
 
-bool
+bool 
 BMessage::ReplaceInt32(const char *name,  __be_int32 index,  __be_int32 val)
 {
     if(!name) return false;
@@ -1880,14 +1880,14 @@ BMessage::ReplaceInt32(const char *name,  __be_int32 index,  __be_int32 val)
 }
 
 
-bool
+bool 
 BMessage::ReplaceInt32(const char *name,  __be_int32 val)
 {
     return ReplaceInt32(name, 0, val);
 }
 
 
-bool
+bool 
 BMessage::ReplaceInt64(const char *name,  __be_int32 index,  __be_int64 val)
 {
     if(!name) return false;
@@ -1895,14 +1895,14 @@ BMessage::ReplaceInt64(const char *name,  __be_int32 index,  __be_int64 val)
 }
 
 
-bool
+bool 
 BMessage::ReplaceInt64(const char *name,  __be_int64 val)
 {
     return ReplaceInt64(name, 0, val);
 }
 
 
-bool
+bool 
 BMessage::ReplaceBool(const char *name,  __be_int32 index, bool aBoolean)
 {
     if(!name) return false;
@@ -1910,14 +1910,14 @@ BMessage::ReplaceBool(const char *name,  __be_int32 index, bool aBoolean)
 }
 
 
-bool
+bool 
 BMessage::ReplaceBool(const char *name, bool aBoolean)
 {
     return ReplaceBool(name, 0, aBoolean);
 }
 
 
-bool
+bool 
 BMessage::ReplaceFloat(const char *name,  __be_int32 index, float f)
 {
     if(!name) return false;
@@ -1925,14 +1925,14 @@ BMessage::ReplaceFloat(const char *name,  __be_int32 index, float f)
 }
 
 
-bool
+bool 
 BMessage::ReplaceFloat(const char *name, float f)
 {
     return ReplaceFloat(name, 0, f);
 }
 
 
-bool
+bool 
 BMessage::ReplaceDouble(const char *name,  __be_int32 index, double d)
 {
     if(!name) return false;
@@ -1940,14 +1940,14 @@ BMessage::ReplaceDouble(const char *name,  __be_int32 index, double d)
 }
 
 
-bool
+bool 
 BMessage::ReplaceDouble(const char *name, double d)
 {
     return ReplaceDouble(name, 0, d);
 }
 
 
-bool
+bool 
 BMessage::ReplacePoint(const char *name,  __be_int32 index, BPoint pt)
 {
     if(!name) return false;
@@ -1964,14 +1964,14 @@ BMessage::ReplacePoint(const char *name,  __be_int32 index, BPoint pt)
 }
 
 
-bool
+bool 
 BMessage::ReplacePoint(const char *name, BPoint pt)
 {
     return ReplacePoint(name, 0, pt);
 }
 
 
-bool
+bool 
 BMessage::ReplaceRect(const char *name,  __be_int32 index, BRect r)
 {
     if(!name) return false;
@@ -1992,14 +1992,14 @@ BMessage::ReplaceRect(const char *name,  __be_int32 index, BRect r)
 }
 
 
-bool
+bool 
 BMessage::ReplaceRect(const char *name, BRect r)
 {
     return ReplaceRect(name, 0, r);
 }
 
 
-bool
+bool 
 BMessage::ReplacePointer(const char *name,  __be_int32 index, const void *ptr)
 {
     if(!name || !ptr) return false;
@@ -2007,14 +2007,14 @@ BMessage::ReplacePointer(const char *name,  __be_int32 index, const void *ptr)
 }
 
 
-bool
+bool 
 BMessage::ReplacePointer(const char *name, const void *ptr)
 {
     return ReplacePointer(name, 0, ptr);
 }
 
 
-bool
+bool 
 BMessage::ReplaceMessage(const char *name,  __be_int32 index, const BMessage *msg)
 {
     if(!name || !msg) return false;
@@ -2039,14 +2039,14 @@ BMessage::ReplaceMessage(const char *name,  __be_int32 index, const BMessage *ms
 }
 
 
-bool
+bool 
 BMessage::ReplaceMessage(const char *name, const BMessage *msg)
 {
     return ReplaceMessage(name, 0, msg);
 }
 
 
-bool
+bool 
 BMessage::ReplaceMessenger(const char *name,  __be_int32 index, const BMessenger *msgr)
 {
     if(!name || !msgr) return false;
@@ -2072,42 +2072,42 @@ BMessage::ReplaceMessenger(const char *name,  __be_int32 index, const BMessenger
 }
 
 
-bool
+bool 
 BMessage::ReplaceMessenger(const char *name, const BMessenger *msgr)
 {
     return ReplaceMessenger(name, 0, msgr);
 }
 
 
-bool
+bool 
 BMessage::ReplaceMessenger(const char *name, const BMessenger &msgr)
 {
     return ReplaceMessenger(name, 0, &msgr);
 }
 
 
-bool
+bool 
 BMessage::ReplaceMessenger(const char *name,  __be_int32 index, const BMessenger &msgr)
 {
     return ReplaceMessenger(name, index, &msgr);
 }
 
 
-bool
+bool 
 BMessage::WasDelivered() const
 {
     return(fReplyToken != B_MAXUINT64 || fSource != NULL);
 }
 
 
-bool
+bool 
 BMessage::IsReply() const
 {
     return fIsReply;
 }
 
 
-bool
+bool 
 BMessage::IsSourceWaiting() const
 {
     if(fSource == NULL) return false;
@@ -2118,7 +2118,7 @@ BMessage::IsSourceWaiting() const
 }
 
 
-status_t
+status_t 
 BMessage::SendReply(__be_uint32 command, BHandler *replyHandler) const
 {
     BMessage msg(command);
@@ -2126,7 +2126,7 @@ BMessage::SendReply(__be_uint32 command, BHandler *replyHandler) const
 }
 
 
-status_t
+status_t 
 BMessage::SendReply(const BMessage *message, BHandler *replyHandler, bigtime_t sendTimeout) const
 {
     status_t retVal = B_BAD_VALUE;

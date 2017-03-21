@@ -14,7 +14,7 @@
 #include <Accelerant.h>
 #include <Drivers.h>
 #include <PCI.h>
-#include <OS.h>
+#include <kernel/OS.h>
 #include "video_overlay.h"
 #include "benaphore.h"
 #include "ddc.h"

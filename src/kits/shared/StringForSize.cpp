@@ -20,8 +20,7 @@ using BPrivate::gSystemCatalog;
 namespace BPrivate {
 
 
-const char*
-string_for_size(double size, char* string, size_t stringSize)
+const char*  string_for_size(double size, char* string, size_t stringSize)
 {
 	double kib = size / 1024.0;
 	if (kib < 1.0) {

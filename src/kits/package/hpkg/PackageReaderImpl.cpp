@@ -47,8 +47,7 @@ static const size_t kMaxTOCSize					= 64 * 1024 * 1024;
 static const size_t kMaxPackageAttributesSize	= 1 * 1024 * 1024;
 
 
-static status_t
-set_package_data_from_attribute_value(const BPackageAttributeValue& value,
+static status_t set_package_data_from_attribute_value(const BPackageAttributeValue& value,
 	BPackageData& data)
 {
 	if (value.encoding == B_HPKG_ATTRIBUTE_ENCODING_RAW_INLINE)
@@ -316,8 +315,7 @@ PackageReaderImpl::~PackageReaderImpl()
 }
 
 
-status_t
-PackageReaderImpl::Init(const char* fileName, uint32 flags)
+status_t PackageReaderImpl::Init(const char* fileName, uint32 flags)
 {
 	// open file
 	int fd = open(fileName, O_RDONLY);
@@ -331,8 +329,7 @@ PackageReaderImpl::Init(const char* fileName, uint32 flags)
 }
 
 
-status_t
-PackageReaderImpl::Init(int fd, bool keepFD, uint32 flags)
+status_t PackageReaderImpl::Init(int fd, bool keepFD, uint32 flags)
 {
 	BFdIO* file = new(std::nothrow) BFdIO(fd, keepFD);
 	if (file == NULL) {
@@ -345,8 +342,7 @@ PackageReaderImpl::Init(int fd, bool keepFD, uint32 flags)
 }
 
 
-status_t
-PackageReaderImpl::Init(BPositionIO* file, bool keepFile, uint32 flags,
+status_t PackageReaderImpl::Init(BPositionIO* file, bool keepFile, uint32 flags,
 	hpkg_header* _header)
 {
 	hpkg_header header;
@@ -380,8 +376,7 @@ PackageReaderImpl::Init(BPositionIO* file, bool keepFile, uint32 flags,
 }
 
 
-status_t
-PackageReaderImpl::ParseContent(BPackageContentHandler* contentHandler)
+status_t PackageReaderImpl::ParseContent(BPackageContentHandler* contentHandler)
 {
 	status_t error = _PrepareSections();
 	if (error != B_OK)
@@ -403,8 +398,7 @@ PackageReaderImpl::ParseContent(BPackageContentHandler* contentHandler)
 }
 
 
-status_t
-PackageReaderImpl::ParseContent(BLowLevelPackageContentHandler* contentHandler)
+status_t PackageReaderImpl::ParseContent(BLowLevelPackageContentHandler* contentHandler)
 {
 	status_t error = _PrepareSections();
 	if (error != B_OK)
@@ -426,8 +420,7 @@ PackageReaderImpl::ParseContent(BLowLevelPackageContentHandler* contentHandler)
 }
 
 
-status_t
-PackageReaderImpl::_PrepareSections()
+status_t PackageReaderImpl::_PrepareSections()
 {
 	status_t error = PrepareSection(fTOCSection);
 	if (error != B_OK)
@@ -441,8 +434,7 @@ PackageReaderImpl::_PrepareSections()
 }
 
 
-status_t
-PackageReaderImpl::_ParseTOC(AttributeHandlerContext* context,
+status_t PackageReaderImpl::_ParseTOC(AttributeHandlerContext* context,
 	AttributeHandler* rootAttributeHandler)
 {
 	// parse the TOC
@@ -479,8 +471,7 @@ PackageReaderImpl::_ParseTOC(AttributeHandlerContext* context,
 }
 
 
-status_t
-PackageReaderImpl::ReadAttributeValue(uint8 type, uint8 encoding,
+status_t PackageReaderImpl::ReadAttributeValue(uint8 type, uint8 encoding,
 	AttributeValue& _value)
 {
 	switch (type) {
@@ -531,8 +522,7 @@ PackageReaderImpl::ReadAttributeValue(uint8 type, uint8 encoding,
 }
 
 
-status_t
-PackageReaderImpl::_GetTOCBuffer(size_t size, const void*& _buffer)
+status_t PackageReaderImpl::_GetTOCBuffer(size_t size, const void*& _buffer)
 {
 	if (size > fTOCSection.uncompressedLength - fTOCSection.currentOffset) {
 		ErrorOutput()->PrintError("_GetTOCBuffer(%lu): read beyond TOC end\n",

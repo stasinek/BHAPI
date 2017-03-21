@@ -11,14 +11,13 @@
 
 #include <locks.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 // #pragma mark - recursive lock
 
 
-int32
-__recursive_lock_get_recursion(recursive_lock *lock)
+int32 __recursive_lock_get_recursion(recursive_lock *lock)
 {
 	if (lock->holder == find_thread(NULL))
 		return lock->recursion;
@@ -27,15 +26,13 @@ __recursive_lock_get_recursion(recursive_lock *lock)
 }
 
 
-void
-__recursive_lock_init(recursive_lock *lock, const char *name)
+void __recursive_lock_init(recursive_lock *lock, const char *name)
 {
 	recursive_lock_init_etc(lock, name, 0);
 }
 
 
-void
-__recursive_lock_init_etc(recursive_lock *lock, const char *name, uint32 flags)
+void __recursive_lock_init_etc(recursive_lock *lock, const char *name, uint32 flags)
 {
 	lock->holder = -1;
 	lock->recursion = 0;
@@ -43,8 +40,7 @@ __recursive_lock_init_etc(recursive_lock *lock, const char *name, uint32 flags)
 }
 
 
-void
-__recursive_lock_destroy(recursive_lock *lock)
+void __recursive_lock_destroy(recursive_lock *lock)
 {
 	if (lock == NULL)
 		return;
@@ -53,8 +49,7 @@ __recursive_lock_destroy(recursive_lock *lock)
 }
 
 
-status_t
-__recursive_lock_lock(recursive_lock *lock)
+status_t __recursive_lock_lock(recursive_lock *lock)
 {
 	thread_id thread = find_thread(NULL);
 
@@ -68,8 +63,7 @@ __recursive_lock_lock(recursive_lock *lock)
 }
 
 
-void
-__recursive_lock_unlock(recursive_lock *lock)
+void __recursive_lock_unlock(recursive_lock *lock)
 {
 	if (find_thread(NULL) != lock->holder) {
 		debugger("recursive_lock unlocked by non-holder thread!\n");

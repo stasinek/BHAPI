@@ -42,16 +42,13 @@ FT_BEGIN_HEADER
                         FT_GlyphSlot  slot );
 
   /* destroys a given glyph object */
-  typedef void
-  (*FT_Glyph_DoneFunc)( FT_Glyph  glyph );
+  typedef void   (*FT_Glyph_DoneFunc)( FT_Glyph  glyph );
 
-  typedef void
-  (*FT_Glyph_TransformFunc)( FT_Glyph          glyph,
+  typedef void   (*FT_Glyph_TransformFunc)( FT_Glyph          glyph,
                              const FT_Matrix*  matrix,
                              const FT_Vector*  delta );
 
-  typedef void
-  (*FT_Glyph_GetBBoxFunc)( FT_Glyph  glyph,
+  typedef void   (*FT_Glyph_GetBBoxFunc)( FT_Glyph  glyph,
                            FT_BBox*  abbox );
 
   typedef FT_Error
@@ -97,8 +94,7 @@ FT_BEGIN_HEADER
                                 const FT_Vector*  delta );
 
 
-  typedef void
-  (*FT_Renderer_GetCBoxFunc)( FT_Renderer   renderer,
+  typedef void   (*FT_Renderer_GetCBoxFunc)( FT_Renderer   renderer,
                               FT_GlyphSlot  slot,
                               FT_BBox*      cbox );
 

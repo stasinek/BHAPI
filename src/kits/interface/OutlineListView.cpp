@@ -47,8 +47,7 @@ BOutlineListView::~BOutlineListView()
 }
 
 
-bool
-BOutlineListView::AddUnder(BListItem *item, BListItem *superitem)
+bool BOutlineListView::AddUnder(BListItem *item, BListItem *superitem)
 {
 	if(item == NULL || item->fOwner != NULL || item->fFullOwner != NULL ||
 	   superitem == NULL || superitem->fFullOwner != this || superitem->fLevel == B_MAXUINT32) return false;
@@ -66,15 +65,13 @@ BOutlineListView::AddUnder(BListItem *item, BListItem *superitem)
 }
 
 
-bool
-BOutlineListView::AddItem(BListItem *item)
+bool BOutlineListView::AddItem(BListItem *item)
 {
 	return BOutlineListView::AddItem(item, fFullItems.CountItems());
 }
 
 
-bool
-BOutlineListView::AddItem(BListItem *item,  __be_int32 fullListIndex)
+bool BOutlineListView::AddItem(BListItem *item,  __be_int32 fullListIndex)
 {
 	if(item == NULL || item->fOwner != NULL || item->fFullOwner != NULL) return false;
 	if(fFullItems.AddItem(item, fullListIndex) == false) return false;
@@ -127,8 +124,7 @@ BOutlineListView::AddItem(BListItem *item,  __be_int32 fullListIndex)
 }
 
 
-bool
-BOutlineListView::RemoveItem(BListItem *item, bool auto_destruct_item_and_subitems)
+bool BOutlineListView::RemoveItem(BListItem *item, bool auto_destruct_item_and_subitems)
 {
 	if(BOutlineListView::RemoveItem(FullListIndexOf(item), auto_destruct_item_and_subitems, NULL) == NULL) return false;
 	if(auto_destruct_item_and_subitems) delete item;
@@ -173,8 +169,7 @@ BOutlineListView::RemoveItem(__be_int32 fullListIndex)
 }
 
 
-bool
-BOutlineListView::RemoveItems(__be_int32 fullListIndex,  __be_int32 count, bool auto_destruct_items)
+bool BOutlineListView::RemoveItems(__be_int32 fullListIndex,  __be_int32 count, bool auto_destruct_items)
 {
 	if(fullListIndex < 0 || fullListIndex >= fFullItems.CountItems()) return false;
 
@@ -204,8 +199,7 @@ BOutlineListView::FullListItemAt(__be_int32 fullListIndex) const
 }
 
 
-__be_int32
-BOutlineListView::FullListIndexOf(const BListItem *item) const
+__be_int32 BOutlineListView::FullListIndexOf(const BListItem *item) const
 {
 	if(item == NULL || item->fFullOwner != this) return -1;
 	return fFullItems.IndexOf((void*)item);
@@ -226,22 +220,19 @@ BOutlineListView::FullListLastItem() const
 }
 
 
-bool
-BOutlineListView::FullListHasItem(const BListItem *item) const
+bool BOutlineListView::FullListHasItem(const BListItem *item) const
 {
 	return(!(item == NULL || item->fFullOwner != this));
 }
 
 
-__be_int32
-BOutlineListView::FullListCountItems() const
+__be_int32 BOutlineListView::FullListCountItems() const
 {
 	return fFullItems.CountItems();
 }
 
 
-__be_int32
-BOutlineListView::FullListCurrentSelection(__be_int32 index) const
+__be_int32 BOutlineListView::FullListCurrentSelection(__be_int32 index) const
 {
 	__be_int32 tIndex = CurrentSelection(index);
 	BListItem *item = ItemAt(tIndex);
@@ -249,8 +240,7 @@ BOutlineListView::FullListCurrentSelection(__be_int32 index) const
 }
 
 
-void
-BOutlineListView::MakeEmpty()
+void BOutlineListView::MakeEmpty()
 {
 	while(fFullItems.CountItems() > 0)
 	{
@@ -261,22 +251,19 @@ BOutlineListView::MakeEmpty()
 }
 
 
-bool
-BOutlineListView::FullListIsEmpty() const
+bool BOutlineListView::FullListIsEmpty() const
 {
 	return fFullItems.IsEmpty();
 }
 
 
-void
-BOutlineListView::FullListDoForEach(bool (*func)(BListItem *item))
+void BOutlineListView::FullListDoForEach(bool (*func)(BListItem *item))
 {
 	fFullItems.DoForEach((bool (*)(void*))func);
 }
 
 
-void
-BOutlineListView::FullListDoForEach(bool (*func)(BListItem *item, void *user_data), void *user_data)
+void BOutlineListView::FullListDoForEach(bool (*func)(BListItem *item, void *user_data), void *user_data)
 {
 	fFullItems.DoForEach((bool (*)(void*, void*))func, user_data);
 }
@@ -300,8 +287,7 @@ BOutlineListView::Superitem(const BListItem *item) const
 }
 
 
-bool
-BOutlineListView::HasSubitems(const BListItem *item) const
+bool BOutlineListView::HasSubitems(const BListItem *item) const
 {
 	if(item == NULL || item->fFullOwner != this) return false;
 
@@ -313,8 +299,7 @@ BOutlineListView::HasSubitems(const BListItem *item) const
 }
 
 
-__be_int32
-BOutlineListView::CountItemsUnder(BListItem *item, bool oneLevelOnly) const
+__be_int32 BOutlineListView::CountItemsUnder(BListItem *item, bool oneLevelOnly) const
 {
 	if(item == NULL || item->fFullOwner != this) return 0;
 
@@ -380,8 +365,7 @@ BOutlineListView::EachItemUnder(BListItem *item, bool oneLevelOnly,
 }
 
 
-void
-BOutlineListView::Expand(BListItem *item)
+void BOutlineListView::Expand(BListItem *item)
 {
 	if(item == NULL || item->fFullOwner != this || item->fExpanded) return;
 
@@ -410,8 +394,7 @@ BOutlineListView::Expand(BListItem *item)
 }
 
 
-void
-BOutlineListView::Collapse(BListItem *item)
+void BOutlineListView::Collapse(BListItem *item)
 {
 	if(item == NULL || item->fFullOwner != this || item->fExpanded == false) return;
 
@@ -430,8 +413,7 @@ BOutlineListView::Collapse(BListItem *item)
 }
 
 
-bool
-BOutlineListView::IsExpanded(__be_int32 fullListIndex) const
+bool BOutlineListView::IsExpanded(__be_int32 fullListIndex) const
 {
 	BListItem *item = (BListItem*)fFullItems.ItemAt(fullListIndex);
 	return(item == NULL ? false : item->fExpanded);
@@ -445,8 +427,7 @@ BOutlineListView::FullListItems() const
 }
 
 
-void
-BOutlineListView::MouseDown(BPoint where)
+void BOutlineListView::MouseDown(BPoint where)
 {
 	__be_int32 btnClicks = 1;
 	if(!IsEnabled() || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON, true, &btnClicks) || btnClicks > 1)
@@ -477,22 +458,19 @@ BOutlineListView::MouseDown(BPoint where)
 }
 
 
-void
-BOutlineListView::MouseUp(BPoint where)
+void BOutlineListView::MouseUp(BPoint where)
 {
 	BListView::MouseUp(where);
 }
 
 
-void
-BOutlineListView::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
+void BOutlineListView::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 	BListView::MouseMoved(where, code, a_message);
 }
 
 
-void
-BOutlineListView::KeyDown(const char *bytes,  __be_int32 numBytes)
+void BOutlineListView::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	BListItem *item = ItemAt(Position());
 
@@ -511,8 +489,7 @@ BOutlineListView::KeyDown(const char *bytes,  __be_int32 numBytes)
 }
 
 
-void
-BOutlineListView::KeyUp(const char *bytes,  __be_int32 numBytes)
+void BOutlineListView::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
 	BListView::KeyUp(bytes, numBytes);
 }

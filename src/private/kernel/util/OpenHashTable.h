@@ -6,7 +6,7 @@
 #define _KERNEL_UTIL_OPEN_HASH_TABLE_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <stdlib.h>
 #include <string.h>
 

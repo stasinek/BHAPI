@@ -37,8 +37,7 @@ BPackageResolvable::BPackageResolvable(const BString& name,
 }
 
 
-status_t
-BPackageResolvable::InitCheck() const
+status_t BPackageResolvable::InitCheck() const
 {
 	return fName.Length() > 0 ? B_OK : B_NO_INIT;
 }
@@ -81,8 +80,7 @@ BPackageResolvable::ToString() const
 }
 
 
-void
-BPackageResolvable::SetTo(const BString& name, const BPackageVersion& version,
+void BPackageResolvable::SetTo(const BString& name, const BPackageVersion& version,
 	const BPackageVersion& compatibleVersion)
 {
 	fName = name;
@@ -93,8 +91,7 @@ BPackageResolvable::SetTo(const BString& name, const BPackageVersion& version,
 }
 
 
-void
-BPackageResolvable::Clear()
+void BPackageResolvable::Clear()
 {
 	fName.Truncate(0);
 	fVersion.Clear();

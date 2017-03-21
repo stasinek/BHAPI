@@ -100,7 +100,7 @@ EXGraphicsContext::~EXGraphicsContext()
 }
 
 
-bool
+bool 
 EXGraphicsContext::AllocXColor(EXGraphicsEngine *engine, bhapi::rgb_color color, unsigned long *pixel)
 {
 	if(engine == NULL || pixel == NULL) return false;
@@ -121,14 +121,14 @@ EXGraphicsContext::AllocXColor(EXGraphicsEngine *engine, bhapi::rgb_color color,
 }
 
 
-void
+void 
 EXGraphicsContext::FreeXColor(EXGraphicsEngine *engine, unsigned long pixel)
 {
 	if(engine != NULL) XFreeColors(engine->xDisplay, engine->xColormap, &pixel, 1, 0);
 }
 
 
-status_t
+status_t 
 EXGraphicsContext::GetXClipping(Region *xRegion) const
 {
 	if(xRegion == NULL) return B_BAD_VALUE;
@@ -140,7 +140,7 @@ EXGraphicsContext::GetXClipping(Region *xRegion) const
 }
 
 
-status_t
+status_t 
 EXGraphicsContext::GetXHighColor(unsigned long *pixel) const
 {
 	if(pixel == NULL) return B_BAD_VALUE;
@@ -149,7 +149,7 @@ EXGraphicsContext::GetXHighColor(unsigned long *pixel) const
 }
 
 
-status_t
+status_t 
 EXGraphicsContext::GetXLowColor(unsigned long *pixel) const
 {
 	if(pixel == NULL) return B_BAD_VALUE;
@@ -158,7 +158,7 @@ EXGraphicsContext::GetXLowColor(unsigned long *pixel) const
 }
 
 
-void
+void 
 EXGraphicsContext::PrepareXColor()
 {
 	if(fEngine == NULL) return;
@@ -176,7 +176,7 @@ EXGraphicsContext::PrepareXColor()
 }
 
 
-status_t
+status_t 
 EXGraphicsContext::SetDrawingMode(bhapi::drawing_mode mode)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -211,7 +211,7 @@ EXGraphicsContext::SetDrawingMode(bhapi::drawing_mode mode)
 }
 
 
-status_t
+status_t 
 EXGraphicsContext::SetClipping(const BRegion &region)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -234,7 +234,7 @@ EXGraphicsContext::SetClipping(const BRegion &region)
 }
 
 
-status_t
+status_t 
 EXGraphicsContext::SetHighColor(bhapi::rgb_color highColor)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -275,7 +275,7 @@ EXGraphicsContext::SetHighColor(bhapi::rgb_color highColor)
 }
 
 
-status_t
+status_t 
 EXGraphicsContext::SetLowColor(bhapi::rgb_color lowColor)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -316,7 +316,7 @@ EXGraphicsContext::SetLowColor(bhapi::rgb_color lowColor)
 }
 
 
-status_t
+status_t 
 EXGraphicsContext::SetPattern(bhapi::pattern pattern)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -356,7 +356,7 @@ EXGraphicsContext::SetPattern(bhapi::pattern pattern)
 }
 
 
-status_t
+status_t 
 EXGraphicsContext::SetPenSize(__be_uint32 penSize)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -1263,7 +1263,7 @@ static status_t b_draw_epixmap(Drawable xDrawable, EXGraphicsEngine *engine, EXG
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::StrokePoint(BGraphicsContext *_dc_,
 				__be_int32 x,  __be_int32 y)
 {
@@ -1277,7 +1277,7 @@ EXGraphicsDrawable::StrokePoint(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::StrokePoints(BGraphicsContext *_dc_,
 				 const  __be_int32 *pts,  __be_int32 count)
 {
@@ -1291,7 +1291,7 @@ EXGraphicsDrawable::StrokePoints(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *_dc_,
 					const BList *ptsArrayLists,  __be_int32 arrayCount,
 					const bhapi::rgb_color *highColors)
@@ -1306,7 +1306,7 @@ EXGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *_dc_,
 					const  __be_int32 *pts, const  __be_uint8 *alpha,  __be_int32 count)
 {
@@ -1320,7 +1320,7 @@ EXGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::StrokeLine(BGraphicsContext *_dc_,
 			        __be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1)
 {
@@ -1334,7 +1334,7 @@ EXGraphicsDrawable::StrokeLine(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::StrokePolygon(BGraphicsContext *_dc_,
 				  const  __be_int32 *pts,  __be_int32 count, bool closed)
 {
@@ -1348,7 +1348,7 @@ EXGraphicsDrawable::StrokePolygon(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::FillPolygon(BGraphicsContext *_dc_,
 				const  __be_int32 *pts,  __be_int32 count)
 {
@@ -1362,7 +1362,7 @@ EXGraphicsDrawable::FillPolygon(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::StrokeRect(BGraphicsContext *_dc_,
 			        __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
 {
@@ -1376,7 +1376,7 @@ EXGraphicsDrawable::StrokeRect(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::FillRect(BGraphicsContext *_dc_,
 			      __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
 {
@@ -1390,7 +1390,7 @@ EXGraphicsDrawable::FillRect(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::StrokeRects(BGraphicsContext *_dc_,
 				const  __be_int32 *rects,  __be_int32 count)
 {
@@ -1404,7 +1404,7 @@ EXGraphicsDrawable::StrokeRects(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::FillRects(BGraphicsContext *_dc_,
 			      const  __be_int32 *rects,  __be_int32 count)
 {
@@ -1418,7 +1418,7 @@ EXGraphicsDrawable::FillRects(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::FillRegion(BGraphicsContext *_dc_,
 			       const BRegion &region)
 {
@@ -1432,7 +1432,7 @@ EXGraphicsDrawable::FillRegion(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::StrokeRoundRect(BGraphicsContext *_dc_,
 				     __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
 {
@@ -1446,7 +1446,7 @@ EXGraphicsDrawable::StrokeRoundRect(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::FillRoundRect(BGraphicsContext *_dc_,
 				   __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
 {
@@ -1460,7 +1460,7 @@ EXGraphicsDrawable::FillRoundRect(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::StrokeArc(BGraphicsContext *_dc_,
 			       __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
 {
@@ -1474,7 +1474,7 @@ EXGraphicsDrawable::StrokeArc(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::FillArc(BGraphicsContext *_dc_,
 			     __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
 {
@@ -1488,7 +1488,7 @@ EXGraphicsDrawable::FillArc(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsDrawable::DrawPixmap(BGraphicsContext *_dc_, const BPixmap *pix,
 			        __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
 			        __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)
@@ -1502,7 +1502,7 @@ EXGraphicsDrawable::DrawPixmap(BGraphicsContext *_dc_, const BPixmap *pix,
 	return b_draw_epixmap(xPixmap, fEngine, dc, pix, x, y, w, h, dstX, dstY, dstW, dstH);
 }
 
-status_t
+status_t 
 EXGraphicsWindow::StrokePoint(BGraphicsContext *_dc_,
 			       __be_int32 x,  __be_int32 y)
 {
@@ -1516,7 +1516,7 @@ EXGraphicsWindow::StrokePoint(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::StrokePoints(BGraphicsContext *_dc_,
 			       const  __be_int32 *pts,  __be_int32 count)
 {
@@ -1530,7 +1530,7 @@ EXGraphicsWindow::StrokePoints(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::StrokePoints_Colors(BGraphicsContext *_dc_,
 				      const BList *ptsArrayLists,  __be_int32 arrayCount,
 				      const bhapi::rgb_color *highColors)
@@ -1545,7 +1545,7 @@ EXGraphicsWindow::StrokePoints_Colors(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *_dc_,
 				      const  __be_int32 *pts, const  __be_uint8 *alpha,  __be_int32 count)
 {
@@ -1559,7 +1559,7 @@ EXGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::StrokeLine(BGraphicsContext *_dc_,
 			      __be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1)
 {
@@ -1573,7 +1573,7 @@ EXGraphicsWindow::StrokeLine(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::StrokePolygon(BGraphicsContext *_dc_,
 				const  __be_int32 *pts,  __be_int32 count, bool closed)
 {
@@ -1587,7 +1587,7 @@ EXGraphicsWindow::StrokePolygon(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::FillPolygon(BGraphicsContext *_dc_,
 			      const  __be_int32 *pts,  __be_int32 count)
 {
@@ -1601,7 +1601,7 @@ EXGraphicsWindow::FillPolygon(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::StrokeRect(BGraphicsContext *_dc_,
 			      __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
 {
@@ -1615,7 +1615,7 @@ EXGraphicsWindow::StrokeRect(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::FillRect(BGraphicsContext *_dc_,
 			    __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
 {
@@ -1629,7 +1629,7 @@ EXGraphicsWindow::FillRect(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::StrokeRects(BGraphicsContext *_dc_,
 			      const  __be_int32 *rects,  __be_int32 count)
 {
@@ -1643,7 +1643,7 @@ EXGraphicsWindow::StrokeRects(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::FillRects(BGraphicsContext *_dc_,
 			    const  __be_int32 *rects,  __be_int32 count)
 {
@@ -1657,7 +1657,7 @@ EXGraphicsWindow::FillRects(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::FillRegion(BGraphicsContext *_dc_,
 			     const BRegion &region)
 {
@@ -1671,7 +1671,7 @@ EXGraphicsWindow::FillRegion(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::StrokeRoundRect(BGraphicsContext *_dc_,
 				   __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
 {
@@ -1685,7 +1685,7 @@ EXGraphicsWindow::StrokeRoundRect(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::FillRoundRect(BGraphicsContext *_dc_,
 				__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
 {
@@ -1699,7 +1699,7 @@ EXGraphicsWindow::FillRoundRect(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::StrokeArc(BGraphicsContext *_dc_,
 			     __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
 {
@@ -1713,7 +1713,7 @@ EXGraphicsWindow::StrokeArc(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::FillArc(BGraphicsContext *_dc_,
 			   __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
 {
@@ -1727,7 +1727,7 @@ EXGraphicsWindow::FillArc(BGraphicsContext *_dc_,
 }
 
 
-status_t
+status_t 
 EXGraphicsWindow::DrawPixmap(BGraphicsContext *_dc_, const BPixmap *pix,
 			      __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
 			      __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)

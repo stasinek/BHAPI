@@ -82,14 +82,12 @@ fwdma_bus_addr(struct fwdma_alloc_multi *am, int index)
 	return (am->seg[offset / ssize].bus_addr + (offset % ssize));
 }
 #ifndef __HAIKU__
-static __inline void
-fwdma_sync(struct fwdma_alloc *dma, bus_dmasync_op_t op)  
+static __inline void fwdma_sync(struct fwdma_alloc *dma, bus_dmasync_op_t op)  
 {
 	bus_dmamap_sync(dma->dma_tag, dma->dma_map, op);
 }
 
-static __inline void
-fwdma_sync_multiseg(struct fwdma_alloc_multi *am,
+static __inline void fwdma_sync_multiseg(struct fwdma_alloc_multi *am,
 			int start, int end, bus_dmasync_op_t op)
 {
 	struct fwdma_seg *seg, *eseg;
@@ -100,8 +98,7 @@ fwdma_sync_multiseg(struct fwdma_alloc_multi *am,
 		bus_dmamap_sync(am->dma_tag, seg->dma_map, op);
 }
 
-static __inline void
-fwdma_sync_multiseg_all(struct fwdma_alloc_multi *am, bus_dmasync_op_t op)
+static __inline void fwdma_sync_multiseg_all(struct fwdma_alloc_multi *am, bus_dmasync_op_t op)
 {
 	struct fwdma_seg *seg;
 	int i;

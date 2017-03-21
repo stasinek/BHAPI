@@ -62,8 +62,7 @@ AssociatedTypes::~AssociatedTypes()
 
 	See \c BMimeType::GetAssociatedTypes() for more information.
 */
-status_t
-AssociatedTypes::GetAssociatedTypes(const char *extension, BMessage *types)
+status_t AssociatedTypes::GetAssociatedTypes(const char *extension, BMessage *types)
 {
 	status_t err = extension && types ? B_OK : B_BAD_VALUE;
 	std::string extStr;
@@ -103,8 +102,7 @@ AssociatedTypes::GetAssociatedTypes(const char *extension, BMessage *types)
 	- \c B_OK: success
 	- \c other error code: failure
 */
-status_t
-AssociatedTypes::GuessMimeType(const char *filename, BString *result)
+status_t AssociatedTypes::GuessMimeType(const char *filename, BString *result)
 {
 	status_t err = filename && result ? B_OK : B_BAD_VALUE;
 	if (!err && !fHaveDoneFullBuild)
@@ -157,8 +155,7 @@ AssociatedTypes::GuessMimeType(const char *filename, BString *result)
 	- \c B_OK: success
 	- \c other error code: failure
 */
-status_t
-AssociatedTypes::GuessMimeType(const entry_ref *ref, BString *result)
+status_t AssociatedTypes::GuessMimeType(const entry_ref *ref, BString *result)
 {
 	// Convert the entry_ref to a filename and then do the check
 	if (!ref)
@@ -185,8 +182,7 @@ AssociatedTypes::GuessMimeType(const entry_ref *ref, BString *result)
 	\param types Pointer to a \c BMessage containing an array of associated
 	             file extensions in its \c Mime::kExtensionsField field.
 */
-status_t
-AssociatedTypes::SetFileExtensions(const char *type, const BMessage *extensions)
+status_t AssociatedTypes::SetFileExtensions(const char *type, const BMessage *extensions)
 {
 	status_t err = type && extensions ? B_OK : B_BAD_VALUE;
 	if (!fHaveDoneFullBuild)
@@ -238,8 +234,7 @@ AssociatedTypes::SetFileExtensions(const char *type, const BMessage *extensions)
 	types from each of said extensions' associated types list.
 	\param app The mime type whose file extensions you are clearing
 */
-status_t
-AssociatedTypes::DeleteFileExtensions(const char *type)
+status_t AssociatedTypes::DeleteFileExtensions(const char *type)
 {
 	BMessage extensions;
 	return SetFileExtensions(type, &extensions);
@@ -247,8 +242,7 @@ AssociatedTypes::DeleteFileExtensions(const char *type)
 
 // PrintToStream
 //! Dumps the associated types mapping to standard output
-void
-AssociatedTypes::PrintToStream() const
+void AssociatedTypes::PrintToStream() const
 {
 	printf("\n");
 	printf("-----------------\n");
@@ -287,8 +281,7 @@ AssociatedTypes::PrintToStream() const
 	- B_OK: success, even if the type was already in the associated types list
 	- "error code": failure
 */
-status_t
-AssociatedTypes::AddAssociatedType(const char *extension, const char *type)
+status_t AssociatedTypes::AddAssociatedType(const char *extension, const char *type)
 {
 	status_t err = extension && type ? B_OK : B_BAD_VALUE;
 	std::string extStr;
@@ -311,8 +304,7 @@ AssociatedTypes::AddAssociatedType(const char *extension, const char *type)
 	- B_OK: success, even if the type was not found in the associated types list
 	- "error code": failure
 */
-status_t
-AssociatedTypes::RemoveAssociatedType(const char *extension, const char *type)
+status_t AssociatedTypes::RemoveAssociatedType(const char *extension, const char *type)
 {
 	status_t err = extension && type ? B_OK : B_BAD_VALUE;
 	std::string extStr;
@@ -329,8 +321,7 @@ AssociatedTypes::RemoveAssociatedType(const char *extension, const char *type)
 /*! \brief Crawls the mime database and builds a list of associated types
 	for every associated file extension.
 */
-status_t
-AssociatedTypes::BuildAssociatedTypesTable()
+status_t AssociatedTypes::BuildAssociatedTypesTable()
 {
 	fFileExtensions.clear();
 	fAssociatedTypes.clear();
@@ -420,8 +411,7 @@ AssociatedTypes::BuildAssociatedTypesTable()
 	            and lowercase. Both "supertype" and "supertype/subtype" mime types
 	            are allowed.
 */
-status_t
-AssociatedTypes::ProcessType(const char *type)
+status_t AssociatedTypes::ProcessType(const char *type)
 {
 	status_t err = type ? B_OK : B_BAD_VALUE;
 	if (!err) {

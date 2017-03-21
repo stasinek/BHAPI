@@ -100,8 +100,7 @@
   *
   */
 
-  static const char*
-  t42_get_ps_font_name( T42_Face  face )
+  static const char*    t42_get_ps_font_name( T42_Face  face )
   {
     return (const char*)face->type1.font_name;
   }

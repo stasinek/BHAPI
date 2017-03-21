@@ -38,8 +38,7 @@ static pthread_once_t sLocaleRosterInitOnce = PTHREAD_ONCE_INIT;
 }	// anonymous namespace
 
 
-static void
-InitializeLocaleRoster()
+static void InitializeLocaleRoster()
 {
 	sLocaleRoster = new (std::nothrow) MutableLocaleRoster();
 }
@@ -65,37 +64,32 @@ MutableLocaleRoster::Default()
 }
 
 
-status_t
-MutableLocaleRoster::SetDefaultFormattingConventions(
+status_t MutableLocaleRoster::SetDefaultFormattingConventions(
 	const BFormattingConventions& newFormattingConventions)
 {
 	return fData->SetDefaultFormattingConventions(newFormattingConventions);
 }
 
 
-status_t
-MutableLocaleRoster::SetDefaultTimeZone(const BTimeZone& newZone)
+status_t MutableLocaleRoster::SetDefaultTimeZone(const BTimeZone& newZone)
 {
 	return fData->SetDefaultTimeZone(newZone);
 }
 
 
-status_t
-MutableLocaleRoster::SetPreferredLanguages(const BMessage* languages)
+status_t MutableLocaleRoster::SetPreferredLanguages(const BMessage* languages)
 {
 	return fData->SetPreferredLanguages(languages);
 }
 
 
-status_t
-MutableLocaleRoster::SetFilesystemTranslationPreferred(bool preferred)
+status_t MutableLocaleRoster::SetFilesystemTranslationPreferred(bool preferred)
 {
 	return fData->SetFilesystemTranslationPreferred(preferred);
 }
 
 
-status_t
-MutableLocaleRoster::LoadSystemCatalog(BCatalog* catalog) const
+status_t MutableLocaleRoster::LoadSystemCatalog(BCatalog* catalog) const
 {
 	if (!catalog)
 		return B_BAD_VALUE;
@@ -106,8 +100,8 @@ MutableLocaleRoster::LoadSystemCatalog(BCatalog* catalog) const
 	bool found = false;
 
 	while (get_next_image_info(0, &cookie, &info) == B_OK) {
-		if (info.data < (void*)&be_app
-			&& (char*)info.data + info.data_size > (void*)&be_app) {
+		if (info.data < (void*)&__be_clipboard
+			&& (char*)info.data + info.data_size > (void*)&__be_clipboard) {
 			found = true;
 			break;
 		}
@@ -244,8 +238,7 @@ MutableLocaleRoster::LoadCatalog(const entry_ref& catalogOwner,
  * Every single catalog of the chain will be deleted automatically.
  * Add-ons that have no more current catalogs are unloaded, too.
  */
-status_t
-MutableLocaleRoster::UnloadCatalog(BCatalogData* catalog)
+status_t MutableLocaleRoster::UnloadCatalog(BCatalogData* catalog)
 {
 	if (!catalog)
 		return B_BAD_VALUE;

@@ -28,15 +28,13 @@ DwarfManager::~DwarfManager()
 }
 
 
-status_t
-DwarfManager::Init()
+status_t DwarfManager::Init()
 {
 	return fLock.InitCheck();
 }
 
 
-status_t
-DwarfManager::LoadFile(const char* fileName, DwarfFileLoadingState& _state)
+status_t DwarfManager::LoadFile(const char* fileName, DwarfFileLoadingState& _state)
 {
 	AutoLocker<DwarfManager> locker(this);
 
@@ -83,8 +81,7 @@ DwarfManager::LoadFile(const char* fileName, DwarfFileLoadingState& _state)
 }
 
 
-status_t
-DwarfManager::FinishLoading()
+status_t DwarfManager::FinishLoading()
 {
 	AutoLocker<DwarfManager> locker(this);
 

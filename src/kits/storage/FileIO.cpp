@@ -97,15 +97,13 @@ BFileIO::Position() const
 }
 
 
-status_t
-BFileIO::SetSize(off_t size)
+status_t BFileIO::SetSize(off_t size)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-BFileIO::GetSize(off_t* _size) const
+status_t BFileIO::GetSize(off_t* _size) const
 {
 	// save the current position and seek to the end
 	off_t position = _Seek(0, SEEK_END);

@@ -75,8 +75,7 @@ BLocale::StringCompare(const BString* s1, const BString* s2) const
 }
 
 
-inline void
-BLocale::GetSortKey(const char* string, BString* sortKey) const
+inline void BLocale::GetSortKey(const char* string, BString* sortKey) const
 {
 	fCollator.GetSortKey(string, sortKey);
 }

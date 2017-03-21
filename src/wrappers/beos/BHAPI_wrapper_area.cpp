@@ -283,7 +283,7 @@ bhapi::clone_area_by_source(void *source_data, void **dest_addr,  __be_uint32 pr
 }
 
 
-BHAPI_IMPEXP status_t
+BHAPI_IMPEXP status_t 
 bhapi::get_area_info(void *data, b_area_info *info)
 {
 	b_beos_area_t *area = (b_beos_area_t*)data;
@@ -305,7 +305,7 @@ bhapi::get_area_info(void *data, b_area_info *info)
 }
 
 
-BHAPI_IMPEXP status_t
+BHAPI_IMPEXP status_t 
 bhapi::delete_area(void *data)
 {
 	b_beos_area_t *area = (b_beos_area_t*)data;
@@ -344,7 +344,7 @@ bhapi::delete_area(void *data)
 }
 
 
-BHAPI_IMPEXP status_t
+BHAPI_IMPEXP status_t 
 bhapi::delete_area_etc(void *data, bool no_clone)
 {
 	b_beos_area_t *area = (b_beos_area_t*)data;
@@ -383,7 +383,7 @@ bhapi::delete_area_etc(void *data, bool no_clone)
 }
 
 
-BHAPI_IMPEXP status_t
+BHAPI_IMPEXP status_t 
 b_resize_area(void *data, void **start_addr, size_t new_size)
 {
 	b_beos_area_t *area = (b_beos_area_t*)data;
@@ -418,7 +418,7 @@ b_resize_area(void *data, void **start_addr, size_t new_size)
 }
 
 
-BHAPI_IMPEXP status_t
+BHAPI_IMPEXP status_t 
 b_set_area_protection(void *data,  __be_uint32 new_protection)
 {
 	b_beos_area_t *area = (b_beos_area_t*)data;

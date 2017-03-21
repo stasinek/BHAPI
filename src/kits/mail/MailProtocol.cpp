@@ -75,8 +75,7 @@ BMailProtocol::AccountSettings() const
 }
 
 
-void
-BMailProtocol::SetMailNotifier(BMailNotifier* mailNotifier)
+void BMailProtocol::SetMailNotifier(BMailNotifier* mailNotifier)
 {
 	delete fMailNotifier;
 	fMailNotifier = mailNotifier;
@@ -90,16 +89,14 @@ BMailProtocol::MailNotifier() const
 }
 
 
-bool
-BMailProtocol::AddFilter(BMailFilter* filter)
+bool BMailProtocol::AddFilter(BMailFilter* filter)
 {
 	BLocker locker(this);
 	return fFilterList.AddItem(filter);
 }
 
 
-int32
-BMailProtocol::CountFilter() const
+int32 BMailProtocol::CountFilter() const
 {
 	BLocker locker(this);
 	return fFilterList.CountItems();
@@ -122,71 +119,62 @@ BMailProtocol::RemoveFilter(int32 index)
 }
 
 
-bool
-BMailProtocol::RemoveFilter(BMailFilter* filter)
+bool BMailProtocol::RemoveFilter(BMailFilter* filter)
 {
 	BLocker locker(this);
 	return fFilterList.RemoveItem(filter);
 }
 
 
-void
-BMailProtocol::MessageReceived(BMessage* message)
+void BMailProtocol::MessageReceived(BMessage* message)
 {
 	BLooper::MessageReceived(message);
 }
 
 
-status_t
-BMailProtocol::MoveMessage(const entry_ref& ref, BDirectory& dir)
+status_t BMailProtocol::MoveMessage(const entry_ref& ref, BDirectory& dir)
 {
 	BEntry entry(&ref);
 	return entry.MoveTo(&dir);
 }
 
 
-status_t
-BMailProtocol::DeleteMessage(const entry_ref& ref)
+status_t BMailProtocol::DeleteMessage(const entry_ref& ref)
 {
 	BEntry entry(&ref);
 	return entry.Remove();
 }
 
 
-void
-BMailProtocol::ShowError(const char* error)
+void BMailProtocol::ShowError(const char* error)
 {
 	if (MailNotifier() != NULL)
 		MailNotifier()->ShowError(error);
 }
 
 
-void
-BMailProtocol::ShowMessage(const char* message)
+void BMailProtocol::ShowMessage(const char* message)
 {
 	if (MailNotifier() != NULL)
 		MailNotifier()->ShowMessage(message);
 }
 
 
-void
-BMailProtocol::SetTotalItems(uint32 items)
+void BMailProtocol::SetTotalItems(uint32 items)
 {
 	if (MailNotifier() != NULL)
 		MailNotifier()->SetTotalItems(items);
 }
 
 
-void
-BMailProtocol::SetTotalItemsSize(uint64 size)
+void BMailProtocol::SetTotalItemsSize(uint64 size)
 {
 	if (MailNotifier() != NULL)
 		MailNotifier()->SetTotalItemsSize(size);
 }
 
 
-void
-BMailProtocol::ReportProgress(uint32 messages, uint64 bytes,
+void BMailProtocol::ReportProgress(uint32 messages, uint64 bytes,
 	const char* message)
 {
 	if (MailNotifier() != NULL)
@@ -194,16 +182,14 @@ BMailProtocol::ReportProgress(uint32 messages, uint64 bytes,
 }
 
 
-void
-BMailProtocol::ResetProgress(const char* message)
+void BMailProtocol::ResetProgress(const char* message)
 {
 	if (MailNotifier() != NULL)
 		MailNotifier()->ResetProgress(message);
 }
 
 
-void
-BMailProtocol::NotifyNewMessagesToFetch(int32 count)
+void BMailProtocol::NotifyNewMessagesToFetch(int32 count)
 {
 	ResetProgress();
 	SetTotalItems(count);
@@ -222,8 +208,7 @@ BMailProtocol::ProcessHeaderFetched(entry_ref& ref, BFile& file,
 }
 
 
-void
-BMailProtocol::NotifyBodyFetched(const entry_ref& ref, BFile& file,
+void BMailProtocol::NotifyBodyFetched(const entry_ref& ref, BFile& file,
 	BMessage& attributes)
 {
 	_NotifyBodyFetched(ref, file, attributes);
@@ -245,24 +230,21 @@ BMailProtocol::ProcessMessageFetched(entry_ref& ref, BFile& file,
 }
 
 
-void
-BMailProtocol::NotifyMessageReadyToSend(const entry_ref& ref, BFile& file)
+void BMailProtocol::NotifyMessageReadyToSend(const entry_ref& ref, BFile& file)
 {
 	for (int i = 0; i < fFilterList.CountItems(); i++)
 		fFilterList.ItemAt(i)->MessageReadyToSend(ref, file);
 }
 
 
-void
-BMailProtocol::NotifyMessageSent(const entry_ref& ref, BFile& file)
+void BMailProtocol::NotifyMessageSent(const entry_ref& ref, BFile& file)
 {
 	for (int i = 0; i < fFilterList.CountItems(); i++)
 		fFilterList.ItemAt(i)->MessageSent(ref, file);
 }
 
 
-void
-BMailProtocol::LoadFilters(const BMailProtocolSettings& settings)
+void BMailProtocol::LoadFilters(const BMailProtocolSettings& settings)
 {
 	for (int i = 0; i < settings.CountFilterSettings(); i++) {
 		BMailAddOnSettings* filterSettings = settings.FilterSettingsAt(i);
@@ -362,8 +344,7 @@ BMailProtocol::_ProcessHeaderFetched(entry_ref& ref, BFile& file,
 }
 
 
-void
-BMailProtocol::_NotifyBodyFetched(const entry_ref& ref, BFile& file,
+void BMailProtocol::_NotifyBodyFetched(const entry_ref& ref, BFile& file,
 	BMessage& attributes)
 {
 	for (int i = 0; i < fFilterList.CountItems(); i++)
@@ -387,8 +368,7 @@ BInboundMailProtocol::~BInboundMailProtocol()
 }
 
 
-void
-BInboundMailProtocol::MessageReceived(BMessage* message)
+void BInboundMailProtocol::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case kMsgSyncMessages:
@@ -446,23 +426,20 @@ BInboundMailProtocol::MessageReceived(BMessage* message)
 }
 
 
-status_t
-BInboundMailProtocol::MarkMessageAsRead(const entry_ref& ref, read_flags flag)
+status_t BInboundMailProtocol::MarkMessageAsRead(const entry_ref& ref, read_flags flag)
 {
 	BNode node(&ref);
 	return write_read_attr(node, flag);
 }
 
 
-status_t
-BInboundMailProtocol::AppendMessage(const entry_ref& ref)
+status_t BInboundMailProtocol::AppendMessage(const entry_ref& ref)
 {
 	return B_OK;
 }
 
 
-void
-BInboundMailProtocol::NotiyMailboxSynchronized(status_t status)
+void BInboundMailProtocol::NotiyMailboxSynchronized(status_t status)
 {
 	for (int32 i = 0; i < CountFilter(); i++)
 		FilterAt(i)->MailboxSynchronized(status);
@@ -486,8 +463,7 @@ BOutboundMailProtocol::~BOutboundMailProtocol()
 }
 
 
-void
-BOutboundMailProtocol::MessageReceived(BMessage* message)
+void BOutboundMailProtocol::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case kMsgSendMessage:

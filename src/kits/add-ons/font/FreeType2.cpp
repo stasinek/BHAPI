@@ -251,7 +251,7 @@ BFontFT2::Attach(void (*callback)(void*), void *data)
 }
 
 
-bool
+bool 
 BFontFT2::Detach(bhapi::font_detach_callback *callback)
 {
     BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
@@ -275,21 +275,21 @@ BFontFT2::CountFaces() const
 }
 
 
-bool
+bool 
 BFontFT2::IsValid() const
 {
     return(fFilename != NULL && fFaceIndex >= 0 && nFaces > 0 && Family() != NULL && Style() != NULL);
 }
 
 
-bool
+bool 
 BFontFT2::IsScalable() const
 {
     return fScalable;
 }
 
 
-void
+void 
 BFontFT2::ForceFontAliasing(bool enable)
 {
     if(fForceFontAliasing != enable)
@@ -299,7 +299,7 @@ BFontFT2::ForceFontAliasing(bool enable)
 }
 
 
-bool
+bool 
 BFontFT2::IsFixedSize(float size) const
 {
      __be_int32 count = 0;
@@ -364,7 +364,7 @@ BFontFT2::StringWidth(const char *string, float size, float spacing, float shear
 }
 
 
-void
+void 
 BFontFT2::GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const
 {
     if(!height) return;

@@ -22,22 +22,19 @@ namespace Bluetooth {
 
 
 /* hooks */
-void
-DiscoveryListener::DeviceDiscovered(RemoteDevice* btDevice, DeviceClass cod)
+void DiscoveryListener::DeviceDiscovered(RemoteDevice* btDevice, DeviceClass cod)
 {
 	CALLED();
 }
 
 
-void
-DiscoveryListener::InquiryStarted(status_t status)
+void DiscoveryListener::InquiryStarted(status_t status)
 {
 	CALLED();
 }
 
 
-void
-DiscoveryListener::InquiryCompleted(int discType)
+void DiscoveryListener::InquiryCompleted(int discType)
 {
 	CALLED();
 }
@@ -48,8 +45,7 @@ DiscoveryListener::InquiryCompleted(int discType)
 /* A LocalDevice is always referenced in any request to the
  * Bluetooth server therefore is going to be needed in any
  */
-void
-DiscoveryListener::SetLocalDeviceOwner(LocalDevice* ld)
+void DiscoveryListener::SetLocalDeviceOwner(LocalDevice* ld)
 {
 	CALLED();
 	fLocalDevice = ld;
@@ -64,8 +60,7 @@ DiscoveryListener::GetRemoteDevicesList(void)
 }
 
 
-void
-DiscoveryListener::MessageReceived(BMessage* message)
+void DiscoveryListener::MessageReceived(BMessage* message)
 {
 	CALLED();
 	int8 status;

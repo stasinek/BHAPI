@@ -96,8 +96,7 @@ Database::~Database()
 	- B_OK: success
 	- "error code": failure
 */
-status_t
-Database::InitCheck() const
+status_t Database::InitCheck() const
 {
 	return fStatus;
 }
@@ -113,8 +112,7 @@ Database::InitCheck() const
 	- B_FILE_EXISTS: the type is already installed
 	- "error code": failure
 */
-status_t
-Database::Install(const char *type)
+status_t Database::Install(const char *type)
 {
 	if (type == NULL)
 		return B_BAD_VALUE;
@@ -144,8 +142,7 @@ Database::Install(const char *type)
 	- B_OK: success
 	- "error code": failure
 */
-status_t
-Database::Delete(const char *type)
+status_t Database::Delete(const char *type)
 {
 	if (type == NULL)
 		return B_BAD_VALUE;
@@ -193,8 +190,7 @@ Database::Delete(const char *type)
 }
 
 
-status_t
-Database::_SetStringValue(const char *type, int32 what, const char* attribute,
+status_t Database::_SetStringValue(const char *type, int32 what, const char* attribute,
 	type_code attributeType, size_t maxLength, const char *value)
 {
 	size_t length = value != NULL ? strlen(value) : 0;
@@ -230,8 +226,7 @@ Database::_SetStringValue(const char *type, int32 what, const char* attribute,
 	\param decsription Pointer to an entry_ref containing the location of an application
 	       that should be used when launching an application with this signature.
 */
-status_t
-Database::SetAppHint(const char *type, const entry_ref *ref)
+status_t Database::SetAppHint(const char *type, const entry_ref *ref)
 {
 	DBG(OUT("Database::SetAppHint()\n"));
 
@@ -262,8 +257,7 @@ Database::SetAppHint(const char *type, const entry_ref *ref)
 	- \c B_OK: Success
 	- "error code": Failure
 */
-status_t
-Database::SetAttrInfo(const char *type, const BMessage *info)
+status_t Database::SetAttrInfo(const char *type, const BMessage *info)
 {
 	DBG(OUT("Database::SetAttrInfo()\n"));
 
@@ -289,8 +283,7 @@ Database::SetAttrInfo(const char *type, const BMessage *info)
 	\param type Pointer to a NULL-terminated string containing the MIME type of interest
 	\param decsription Pointer to a NULL-terminated string containing the new short description
 */
-status_t
-Database::SetShortDescription(const char *type, const char *description)
+status_t Database::SetShortDescription(const char *type, const char *description)
 {
 	DBG(OUT("Database::SetShortDescription()\n"));
 
@@ -303,8 +296,7 @@ Database::SetShortDescription(const char *type, const char *description)
 	\param type Pointer to a NULL-terminated string containing the MIME type of interest
 	\param decsription Pointer to a NULL-terminated string containing the new long description
 */
-status_t
-Database::SetLongDescription(const char *type, const char *description)
+status_t Database::SetLongDescription(const char *type, const char *description)
 {
 	DBG(OUT("Database::SetLongDescription()\n"));
 
@@ -330,8 +322,7 @@ Database::SetLongDescription(const char *type, const char *description)
 	- \c B_OK: Success
 	- "error code": Failure
 */
-status_t
-Database::SetFileExtensions(const char *type, const BMessage *extensions)
+status_t Database::SetFileExtensions(const char *type, const BMessage *extensions)
 {
 	DBG(OUT("Database::SetFileExtensions()\n"));
 
@@ -358,8 +349,7 @@ Database::SetFileExtensions(const char *type, const BMessage *extensions)
 /*!
 	\brief Sets a bitmap icon for the given mime type
 */
-status_t
-Database::SetIcon(const char* type, const BBitmap* icon, icon_size which)
+status_t Database::SetIcon(const char* type, const BBitmap* icon, icon_size which)
 {
 	if (icon != NULL)
 		return SetIcon(type, icon->Bits(), icon->BitsLength(), which);
@@ -370,8 +360,7 @@ Database::SetIcon(const char* type, const BBitmap* icon, icon_size which)
 /*!
 	\brief Sets a bitmap icon for the given mime type
 */
-status_t
-Database::SetIcon(const char *type, const void *data, size_t dataSize,
+status_t Database::SetIcon(const char *type, const void *data, size_t dataSize,
 	icon_size which)
 {
 	return SetIconForType(type, NULL, data, dataSize, which);
@@ -381,15 +370,13 @@ Database::SetIcon(const char *type, const void *data, size_t dataSize,
 /*!
 	\brief Sets the vector icon for the given mime type
 */
-status_t
-Database::SetIcon(const char *type, const void *data, size_t dataSize)
+status_t Database::SetIcon(const char *type, const void *data, size_t dataSize)
 {
 	return SetIconForType(type, NULL, data, dataSize);
 }
 
 
-status_t
-Database::SetIconForType(const char* type, const char* fileType,
+status_t Database::SetIconForType(const char* type, const char* fileType,
 	const BBitmap* icon, icon_size which)
 {
 	if (icon != NULL) {
@@ -422,8 +409,7 @@ Database::SetIconForType(const char* type, const char* fileType,
 	- "error code": Failure
 
 */
-status_t
-Database::SetIconForType(const char *type, const char *fileType,
+status_t Database::SetIconForType(const char *type, const char *fileType,
 	const void *data, size_t dataSize, icon_size which)
 {
 	DBG(OUT("Database::SetIconForType()\n"));
@@ -503,8 +489,7 @@ Database::SetIconForType(const char *type, const char *fileType,
 	- "error code": Failure
 
 */
-status_t
-Database::SetIconForType(const char *type, const char *fileType,
+status_t Database::SetIconForType(const char *type, const char *fileType,
 	const void *data, size_t dataSize)
 {
 	DBG(OUT("Database::SetIconForType()\n"));
@@ -558,8 +543,7 @@ Database::SetIconForType(const char *type, const char *fileType,
 	                 of the new preferred application
 	\param verb \c app_verb action for which the new preferred application is applicable
 */
-status_t
-Database::SetPreferredApp(const char *type, const char *signature, app_verb verb)
+status_t Database::SetPreferredApp(const char *type, const char *signature, app_verb verb)
 {
 	DBG(OUT("Database::SetPreferredApp()\n"));
 
@@ -572,8 +556,7 @@ Database::SetPreferredApp(const char *type, const char *signature, app_verb verb
 // SetSnifferRule
 /*! \brief Sets the mime sniffer rule for the given mime type
 */
-status_t
-Database::SetSnifferRule(const char *type, const char *rule)
+status_t Database::SetSnifferRule(const char *type, const char *rule)
 {
 	DBG(OUT("Database::SetSnifferRule()\n"));
 
@@ -611,8 +594,7 @@ Database::SetSnifferRule(const char *type, const char *rule)
 	- \c B_OK: success
 	- other error codes: failure
 */
-status_t
-Database::SetSupportedTypes(const char *type, const BMessage *types, bool fullSync)
+status_t Database::SetSupportedTypes(const char *type, const BMessage *types, bool fullSync)
 {
 	DBG(OUT("Database::SetSupportedTypes()\n"));
 
@@ -671,8 +653,7 @@ Database::SetSupportedTypes(const char *type, const BMessage *types, bool fullSy
 	- \c B_OK: Success
 	- "error code": Failure
 */
-status_t
-Database::GetInstalledSupertypes(BMessage *supertypes)
+status_t Database::GetInstalledSupertypes(BMessage *supertypes)
 {
 	return fInstalledTypes.GetInstalledSupertypes(supertypes);
 }
@@ -690,8 +671,7 @@ Database::GetInstalledSupertypes(BMessage *supertypes)
 	- \c B_OK: Success
 	- "error code": Failure
 */
-status_t
-Database::GetInstalledTypes(BMessage *types)
+status_t Database::GetInstalledTypes(BMessage *types)
 {
 	return fInstalledTypes.GetInstalledTypes(types);
 }
@@ -711,8 +691,7 @@ Database::GetInstalledTypes(BMessage *types)
 	- \c B_OK: Success
 	- "error code": Failure
 */
-status_t
-Database::GetInstalledTypes(const char *supertype, BMessage *subtypes)
+status_t Database::GetInstalledTypes(const char *supertype, BMessage *subtypes)
 {
 	return fInstalledTypes.GetInstalledTypes(supertype, subtypes);
 }
@@ -723,8 +702,7 @@ Database::GetInstalledTypes(const char *supertype, BMessage *subtypes)
 
 	Please see BMimeType::GetSupportingApps() for more details.
 */
-status_t
-Database::GetSupportingApps(const char *type, BMessage *signatures)
+status_t Database::GetSupportingApps(const char *type, BMessage *signatures)
 {
 	return fSupportingApps.GetSupportingApps(type, signatures);
 }
@@ -734,8 +712,7 @@ Database::GetSupportingApps(const char *type, BMessage *signatures)
 
 	Please see BMimeType::GetAssociatedTypes() for more details.
 */
-status_t
-Database::GetAssociatedTypes(const char *extension, BMessage *types)
+status_t Database::GetAssociatedTypes(const char *extension, BMessage *types)
 {
 	return B_ERROR;
 }
@@ -766,8 +743,7 @@ Database::GetAssociatedTypes(const char *extension, BMessage *types)
 	- \c B_OK: success (even if the guess returned is "application/octet-stream")
 	- other error code: failure
 */
-status_t
-Database::GuessMimeType(const entry_ref *ref, BString *result)
+status_t Database::GuessMimeType(const entry_ref *ref, BString *result)
 {
 	if (ref == NULL || result == NULL)
 		return B_BAD_VALUE;
@@ -831,8 +807,7 @@ Database::GuessMimeType(const entry_ref *ref, BString *result)
 	- \c B_OK: success
 	- error code: failure
 */
-status_t
-Database::GuessMimeType(const void *buffer, int32 length, BString *result)
+status_t Database::GuessMimeType(const void *buffer, int32 length, BString *result)
 {
 	if (buffer == NULL || result == NULL)
 		return B_BAD_VALUE;
@@ -860,8 +835,7 @@ Database::GuessMimeType(const void *buffer, int32 length, BString *result)
 	- \c B_OK: success
 	- error code: failure
 */
-status_t
-Database::GuessMimeType(const char *filename, BString *result)
+status_t Database::GuessMimeType(const char *filename, BString *result)
 {
 	if (filename == NULL || result == NULL)
 		return B_BAD_VALUE;
@@ -955,8 +929,7 @@ Database::GuessMimeType(const char *filename, BString *result)
 
 	\param target The \c BMessenger to subscribe to the MIME monitor service
 */
-status_t
-Database::StartWatching(BMessenger target)
+status_t Database::StartWatching(BMessenger target)
 {
 	DBG(OUT("Database::StartWatching()\n"));
 
@@ -972,8 +945,7 @@ Database::StartWatching(BMessenger target)
 	Unsubscribes the given BMessenger from the MIME monitor service
 	\param target The \c BMessenger to unsubscribe
 */
-status_t
-Database::StopWatching(BMessenger target)
+status_t Database::StopWatching(BMessenger target)
 {
 	DBG(OUT("Database::StopWatching()\n"));
 
@@ -998,8 +970,7 @@ Database::StopWatching(BMessenger target)
 	- B_ENTRY_NOT_FOUND: no such attribute existed
 	- "error code": failure
 */
-status_t
-Database::DeleteAppHint(const char *type)
+status_t Database::DeleteAppHint(const char *type)
 {
 	status_t status = fLocation->DeleteAttribute(type, kAppHintAttr);
 	if (status == B_OK)
@@ -1020,8 +991,7 @@ Database::DeleteAppHint(const char *type)
 	- B_ENTRY_NOT_FOUND: no such attribute existed
 	- "error code": failure
 */
-status_t
-Database::DeleteAttrInfo(const char *type)
+status_t Database::DeleteAttrInfo(const char *type)
 {
 	status_t status = fLocation->DeleteAttribute(type, kAttrInfoAttr);
 	if (status == B_OK)
@@ -1042,8 +1012,7 @@ Database::DeleteAttrInfo(const char *type)
 	- B_ENTRY_NOT_FOUND: no such attribute existed
 	- "error code": failure
 */
-status_t
-Database::DeleteShortDescription(const char *type)
+status_t Database::DeleteShortDescription(const char *type)
 {
 	status_t status = fLocation->DeleteAttribute(type, kShortDescriptionAttr);
 	if (status == B_OK)
@@ -1064,8 +1033,7 @@ Database::DeleteShortDescription(const char *type)
 	- B_ENTRY_NOT_FOUND: no such attribute existed
 	- "error code": failure
 */
-status_t
-Database::DeleteLongDescription(const char *type)
+status_t Database::DeleteLongDescription(const char *type)
 {
 	status_t status = fLocation->DeleteAttribute(type, kLongDescriptionAttr);
 	if (status == B_OK)
@@ -1086,8 +1054,7 @@ Database::DeleteLongDescription(const char *type)
 	- B_ENTRY_NOT_FOUND: no such attribute existed
 	- "error code": failure
 */
-status_t
-Database::DeleteFileExtensions(const char *type)
+status_t Database::DeleteFileExtensions(const char *type)
 {
 	status_t status = fLocation->DeleteAttribute(type, kFileExtensionsAttr);
 	if (status == B_OK)
@@ -1109,8 +1076,7 @@ Database::DeleteFileExtensions(const char *type)
 	- B_ENTRY_NOT_FOUND: no such attribute existed
 	- "error code": failure
 */
-status_t
-Database::DeleteIcon(const char *type, icon_size which)
+status_t Database::DeleteIcon(const char *type, icon_size which)
 {
 	const char *attr = which == B_MINI_ICON ? kMiniIconAttr : kLargeIconAttr;
 	status_t status = fLocation->DeleteAttribute(type, attr);
@@ -1132,8 +1098,7 @@ Database::DeleteIcon(const char *type, icon_size which)
 	- B_ENTRY_NOT_FOUND: no such attribute existed
 	- "error code": failure
 */
-status_t
-Database::DeleteIcon(const char *type)
+status_t Database::DeleteIcon(const char *type)
 {
 	// TODO: extra notification for vector icon (uses B_LARGE_ICON now)
 	status_t status = fLocation->DeleteAttribute(type, kIconAttr);
@@ -1162,8 +1127,7 @@ Database::DeleteIcon(const char *type)
 	- B_ENTRY_NOT_FOUND: no such attribute existed
 	- "error code": failure
 */
-status_t
-Database::DeleteIconForType(const char *type, const char *fileType, icon_size which)
+status_t Database::DeleteIconForType(const char *type, const char *fileType, icon_size which)
 {
 	if (fileType == NULL)
 		return B_BAD_VALUE;
@@ -1196,8 +1160,7 @@ Database::DeleteIconForType(const char *type, const char *fileType, icon_size wh
 	- B_ENTRY_NOT_FOUND: no such attribute existed
 	- "error code": failure
 */
-status_t
-Database::DeleteIconForType(const char *type, const char *fileType)
+status_t Database::DeleteIconForType(const char *type, const char *fileType)
 {
 	if (fileType == NULL)
 		return B_BAD_VALUE;
@@ -1227,8 +1190,7 @@ Database::DeleteIconForType(const char *type, const char *fileType)
 	- B_ENTRY_NOT_FOUND: no such attribute existed
 	- "error code": failure
 */
-status_t
-Database::DeletePreferredApp(const char *type, app_verb verb)
+status_t Database::DeletePreferredApp(const char *type, app_verb verb)
 {
 	status_t status;
 
@@ -1264,8 +1226,7 @@ Database::DeletePreferredApp(const char *type, app_verb verb)
 	- B_ENTRY_NOT_FOUND: no such attribute existed
 	- "error code": failure
 */
-status_t
-Database::DeleteSnifferRule(const char *type)
+status_t Database::DeleteSnifferRule(const char *type)
 {
 	status_t status = fLocation->DeleteAttribute(type, kSnifferRuleAttr);
 	if (status == B_OK) {
@@ -1296,8 +1257,7 @@ Database::DeleteSnifferRule(const char *type)
 	- B_ENTRY_NOT_FOUND: no such attribute existed
 	- "error code": failure
 */
-status_t
-Database::DeleteSupportedTypes(const char *type, bool fullSync)
+status_t Database::DeleteSupportedTypes(const char *type, bool fullSync)
 {
 	status_t status = fLocation->DeleteAttribute(type, kSupportedTypesAttr);
 
@@ -1324,8 +1284,7 @@ Database::DeleteSupportedTypes(const char *type, bool fullSync)
 }
 
 
-void
-Database::DeferInstallNotification(const char* type)
+void Database::DeferInstallNotification(const char* type)
 {
 	AutoLocker<BLocker> _(fDeferredInstallNotificationsLocker);
 
@@ -1347,8 +1306,7 @@ Database::DeferInstallNotification(const char* type)
 }
 
 
-void
-Database::UndeferInstallNotification(const char* type)
+void Database::UndeferInstallNotification(const char* type)
 {
 	AutoLocker<BLocker> locker(fDeferredInstallNotificationsLocker);
 
@@ -1370,16 +1328,14 @@ Database::UndeferInstallNotification(const char* type)
 
 
 //! \brief Sends a \c B_MIME_TYPE_CREATED notification to the mime monitor service
-status_t
-Database::_SendInstallNotification(const char *type)
+status_t Database::_SendInstallNotification(const char *type)
 {
 	return _SendMonitorUpdate(B_MIME_TYPE_CREATED, type, B_META_MIME_MODIFIED);
 }
 
 
 //! \brief Sends a \c B_MIME_TYPE_DELETED notification to the mime monitor service
-status_t
-Database::_SendDeleteNotification(const char *type)
+status_t Database::_SendDeleteNotification(const char *type)
 {
 	// Tell the backend first
 	return _SendMonitorUpdate(B_MIME_TYPE_DELETED, type, B_META_MIME_MODIFIED);
@@ -1394,8 +1350,7 @@ Database::_SendDeleteNotification(const char *type)
 	\param largeIcon \true if the the large icon was updated, \false if the
 		   small icon was updated
 */
-status_t
-Database::_SendMonitorUpdate(int32 which, const char *type, const char *extraType,
+status_t Database::_SendMonitorUpdate(int32 which, const char *type, const char *extraType,
 	bool largeIcon, int32 action)
 {
 	BMessage msg(B_META_MIME_CHANGED);
@@ -1425,8 +1380,7 @@ Database::_SendMonitorUpdate(int32 which, const char *type, const char *extraTyp
 	\param which Bitmask describing which attribute was updated
 	\param extraType The MIME type to which the change is applies
 */
-status_t
-Database::_SendMonitorUpdate(int32 which, const char *type, const char *extraType,
+status_t Database::_SendMonitorUpdate(int32 which, const char *type, const char *extraType,
 	int32 action)
 {
 	if (_CheckDeferredInstallNotification(which, type))
@@ -1454,8 +1408,7 @@ Database::_SendMonitorUpdate(int32 which, const char *type, const char *extraTyp
 	\param largeIcon \true if the the large icon was updated, \false if the
 		   small icon was updated
 */
-status_t
-Database::_SendMonitorUpdate(int32 which, const char *type, bool largeIcon, int32 action)
+status_t Database::_SendMonitorUpdate(int32 which, const char *type, bool largeIcon, int32 action)
 {
 	if (_CheckDeferredInstallNotification(which, type))
 		return B_OK;
@@ -1480,8 +1433,7 @@ Database::_SendMonitorUpdate(int32 which, const char *type, bool largeIcon, int3
 	\param type The MIME type that was updated
 	\param which Bitmask describing which attribute was updated
 */
-status_t
-Database::_SendMonitorUpdate(int32 which, const char *type, int32 action)
+status_t Database::_SendMonitorUpdate(int32 which, const char *type, int32 action)
 {
 	if (_CheckDeferredInstallNotification(which, type))
 		return B_OK;
@@ -1503,8 +1455,7 @@ Database::_SendMonitorUpdate(int32 which, const char *type, int32 action)
 	the MIME Monitor service
 	\param BMessage A preformatted MIME monitor message to be sent to all subscribers
 */
-status_t
-Database::_SendMonitorUpdate(BMessage &msg)
+status_t Database::_SendMonitorUpdate(BMessage &msg)
 {
 	if (fNotificationListener == NULL)
 		return B_OK;
@@ -1540,8 +1491,7 @@ Database::_FindDeferredInstallNotification(const char* type, bool remove)
 }
 
 
-bool
-Database::_CheckDeferredInstallNotification(int32 which, const char* type)
+bool Database::_CheckDeferredInstallNotification(int32 which, const char* type)
 {
 	AutoLocker<BLocker> locker(fDeferredInstallNotificationsLocker);
 

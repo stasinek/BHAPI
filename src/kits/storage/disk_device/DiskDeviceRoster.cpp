@@ -82,8 +82,7 @@ BDiskDeviceRoster::~BDiskDeviceRoster()
 	  reached.
 	- another error code
 */
-status_t
-BDiskDeviceRoster::GetNextDevice(BDiskDevice* device)
+status_t BDiskDeviceRoster::GetNextDevice(BDiskDevice* device)
 {
 	if (!device)
 		return B_BAD_VALUE;
@@ -101,16 +100,14 @@ BDiskDeviceRoster::GetNextDevice(BDiskDevice* device)
 /*!	\brief Rewinds the device list iterator.
 	\return \c B_OK, if everything went fine, another error code otherwise.
 */
-status_t
-BDiskDeviceRoster::RewindDevices()
+status_t BDiskDeviceRoster::RewindDevices()
 {
 	fDeviceCookie = 0;
 	return B_OK;
 }
 
 
-status_t
-BDiskDeviceRoster::GetNextDiskSystem(BDiskSystem* system)
+status_t BDiskDeviceRoster::GetNextDiskSystem(BDiskSystem* system)
 {
 	if (!system)
 		return B_BAD_VALUE;
@@ -123,16 +120,14 @@ BDiskDeviceRoster::GetNextDiskSystem(BDiskSystem* system)
 }
 
 
-status_t
-BDiskDeviceRoster::RewindDiskSystems()
+status_t BDiskDeviceRoster::RewindDiskSystems()
 {
 	fDiskSystemCookie = 0;
 	return B_OK;
 }
 
 
-status_t
-BDiskDeviceRoster::GetDiskSystem(BDiskSystem* system, const char* name)
+status_t BDiskDeviceRoster::GetDiskSystem(BDiskSystem* system, const char* name)
 {
 	if (!system)
 		return B_BAD_VALUE;
@@ -159,8 +154,7 @@ BDiskDeviceRoster::RegisterFileDevice(const char* filename)
 }
 
 
-status_t
-BDiskDeviceRoster::UnregisterFileDevice(const char* filename)
+status_t BDiskDeviceRoster::UnregisterFileDevice(const char* filename)
 {
 	if (!filename)
 		return B_BAD_VALUE;
@@ -168,8 +162,7 @@ BDiskDeviceRoster::UnregisterFileDevice(const char* filename)
 }
 
 
-status_t
-BDiskDeviceRoster::UnregisterFileDevice(partition_id device)
+status_t BDiskDeviceRoster::UnregisterFileDevice(partition_id device)
 {
 	if (device < 0)
 		return B_BAD_VALUE;
@@ -189,8 +182,7 @@ BDiskDeviceRoster::UnregisterFileDevice(partition_id device)
 		   May be \c NULL.
 	\return \c true, if the iteration was terminated, \c false otherwise.
 */
-bool
-BDiskDeviceRoster::VisitEachDevice(BDiskDeviceVisitor* visitor,
+bool BDiskDeviceRoster::VisitEachDevice(BDiskDeviceVisitor* visitor,
 	BDiskDevice* device)
 {
 	bool terminatedEarly = false;
@@ -227,8 +219,7 @@ BDiskDeviceRoster::VisitEachDevice(BDiskDeviceVisitor* visitor,
 		   May be \c NULL.
 	\return \c true, if the iteration was terminated, \c false otherwise.
 */
-bool
-BDiskDeviceRoster::VisitEachPartition(BDiskDeviceVisitor* visitor,
+bool BDiskDeviceRoster::VisitEachPartition(BDiskDeviceVisitor* visitor,
 	BDiskDevice* device, BPartition** partition)
 {
 	bool terminatedEarly = false;
@@ -272,8 +263,7 @@ BDiskDeviceRoster::VisitEachPartition(BDiskDeviceVisitor* visitor,
 		   May be \c NULL.
 	\return \c true, if the iteration was terminated, \c false otherwise.
 */
-bool
-BDiskDeviceRoster::VisitEachMountedPartition(BDiskDeviceVisitor* visitor,
+bool BDiskDeviceRoster::VisitEachMountedPartition(BDiskDeviceVisitor* visitor,
 	BDiskDevice* device, BPartition** partition)
 {
 	bool terminatedEarly = false;
@@ -307,8 +297,7 @@ BDiskDeviceRoster::VisitEachMountedPartition(BDiskDeviceVisitor* visitor,
 		   May be \c NULL.
 	\return \c true, if the iteration was terminated, \c false otherwise.
 */
-bool
-BDiskDeviceRoster::VisitEachMountablePartition(BDiskDeviceVisitor* visitor,
+bool BDiskDeviceRoster::VisitEachMountablePartition(BDiskDeviceVisitor* visitor,
 	BDiskDevice* device, BPartition** partition)
 {
 	bool terminatedEarly = false;
@@ -327,8 +316,7 @@ BDiskDeviceRoster::VisitEachMountablePartition(BDiskDeviceVisitor* visitor,
 
 /*!	\brief Finds a BPartition by BVolume.
 */
-status_t
-BDiskDeviceRoster::FindPartitionByVolume(const BVolume& volume,
+status_t BDiskDeviceRoster::FindPartitionByVolume(const BVolume& volume,
 	BDiskDevice* device, BPartition** _partition)
 {
 	class FindPartitionVisitor : public BDiskDeviceVisitor {
@@ -364,8 +352,7 @@ BDiskDeviceRoster::FindPartitionByVolume(const BVolume& volume,
 
 /*!	\brief Finds a BPartition by mount path.
 */
-status_t
-BDiskDeviceRoster::FindPartitionByMountPoint(const char* mountPoint,
+status_t BDiskDeviceRoster::FindPartitionByMountPoint(const char* mountPoint,
 	BDiskDevice* device, BPartition** _partition)
 {
 	BVolume volume(dev_for_path(mountPoint));
@@ -389,8 +376,7 @@ BDiskDeviceRoster::FindPartitionByMountPoint(const char* mountPoint,
 	- \c B_ENTRY_NOT_FOUND: A device with ID \a id could not be found.
 	- other error codes
 */
-status_t
-BDiskDeviceRoster::GetDeviceWithID(int32 id, BDiskDevice* device) const
+status_t BDiskDeviceRoster::GetDeviceWithID(int32 id, BDiskDevice* device) const
 {
 	if (!device)
 		return B_BAD_VALUE;
@@ -414,8 +400,7 @@ BDiskDeviceRoster::GetDeviceWithID(int32 id, BDiskDevice* device) const
 	- \c B_ENTRY_NOT_FOUND: A partition with ID \a id could not be found.
 	- other error codes
 */
-status_t
-BDiskDeviceRoster::GetPartitionWithID(int32 id, BDiskDevice* device,
+status_t BDiskDeviceRoster::GetPartitionWithID(int32 id, BDiskDevice* device,
 	BPartition** partition) const
 {
 	if (!device || !partition)
@@ -435,8 +420,7 @@ BDiskDeviceRoster::GetPartitionWithID(int32 id, BDiskDevice* device,
 }
 
 
-status_t
-BDiskDeviceRoster::GetDeviceForPath(const char* filename, BDiskDevice* device)
+status_t BDiskDeviceRoster::GetDeviceForPath(const char* filename, BDiskDevice* device)
 {
 	if (!filename || !device)
 		return B_BAD_VALUE;
@@ -452,8 +436,7 @@ BDiskDeviceRoster::GetDeviceForPath(const char* filename, BDiskDevice* device)
 }
 
 
-status_t
-BDiskDeviceRoster::GetPartitionForPath(const char* filename,
+status_t BDiskDeviceRoster::GetPartitionForPath(const char* filename,
 	BDiskDevice* device, BPartition** partition)
 {
 	if (!filename || !device || !partition)
@@ -478,8 +461,7 @@ BDiskDeviceRoster::GetPartitionForPath(const char* filename,
 }
 
 
-status_t
-BDiskDeviceRoster::GetFileDeviceForPath(const char* filename,
+status_t BDiskDeviceRoster::GetFileDeviceForPath(const char* filename,
 	BDiskDevice* device)
 {
 	if (!filename || !device)
@@ -511,8 +493,7 @@ BDiskDeviceRoster::GetFileDeviceForPath(const char* filename,
 		   notified.
 	\return \c B_OK, if everything went fine, another error code otherwise.
 */
-status_t
-BDiskDeviceRoster::StartWatching(BMessenger target, uint32 eventMask)
+status_t BDiskDeviceRoster::StartWatching(BMessenger target, uint32 eventMask)
 {
 	if (eventMask == 0)
 		return B_BAD_VALUE;
@@ -531,8 +512,7 @@ BDiskDeviceRoster::StartWatching(BMessenger target, uint32 eventMask)
 		   message shall not longer be sent.
 	\return \c B_OK, if everything went fine, another error code otherwise.
 */
-status_t
-BDiskDeviceRoster::StopWatching(BMessenger target)
+status_t BDiskDeviceRoster::StopWatching(BMessenger target)
 {
 	BMessenger::Private messengerPrivate(target);
 	port_id port = messengerPrivate.Port();
@@ -559,8 +539,7 @@ BDiskDeviceRoster::StopWatching(BMessenger target)
 	- \c B_ENTRY_NOT_FOUND: End of the list has been reached.
 	- other error codes
 */
-status_t
-BDiskDeviceRoster::GetNextPartitioningSystem(char *shortName, char *longName)
+status_t BDiskDeviceRoster::GetNextPartitioningSystem(char *shortName, char *longName)
 {
 	status_t error = (shortName ? B_OK : B_BAD_VALUE);
 	if (error == B_OK) {
@@ -620,8 +599,7 @@ BDiskDeviceRoster::GetNextPartitioningSystem(char *shortName, char *longName)
 	- \c B_ENTRY_NOT_FOUND: End of the list has been reached.
 	- other error codes
 */
-status_t
-BDiskDeviceRoster::GetNextFileSystem(char *shortName, char *longName)
+status_t BDiskDeviceRoster::GetNextFileSystem(char *shortName, char *longName)
 {
 	status_t error = (shortName ? B_OK : B_BAD_VALUE);
 	if (error == B_OK) {
@@ -666,8 +644,7 @@ BDiskDeviceRoster::GetNextFileSystem(char *shortName, char *longName)
 /*!	\brief Rewinds the partitioning system list iterator.
 	\return \c B_OK, if everything went fine, another error code otherwise.
 */
-status_t
-BDiskDeviceRoster::RewindPartitiningSystems()
+status_t BDiskDeviceRoster::RewindPartitiningSystems()
 {
 	if (fPartitionAddOnDir) {
 		delete fPartitionAddOnDir;
@@ -681,8 +658,7 @@ BDiskDeviceRoster::RewindPartitiningSystems()
 /*!	\brief Rewinds the file system list iterator.
 	\return \c B_OK, if everything went fine, another error code otherwise.
 */
-status_t
-BDiskDeviceRoster::RewindFileSystems()
+status_t BDiskDeviceRoster::RewindFileSystems()
 {
 	if (fFSAddOnDir) {
 		delete fFSAddOnDir;
@@ -709,8 +685,7 @@ BDiskDeviceRoster::RewindFileSystems()
 		 ID \a id could not be found.
 	- other error codes
 */
-status_t
-BDiskDeviceRoster::_GetObjectWithID(const char *fieldName, int32 id,
+status_t BDiskDeviceRoster::_GetObjectWithID(const char *fieldName, int32 id,
 	BDiskDevice *device) const
 {
 	status_t error = (device ? B_OK : B_BAD_VALUE);
@@ -749,8 +724,7 @@ BDiskDeviceRoster::_GetObjectWithID(const char *fieldName, int32 id,
 	- \c B_ENTRY_NOT_FOUND: End of directory.
 	- other error codes
 */
-status_t
-BDiskDeviceRoster::_GetNextAddOn(BDirectory **directory, int32 *index,
+status_t BDiskDeviceRoster::_GetNextAddOn(BDirectory **directory, int32 *index,
 	const char *subdir, AddOnImage *image)
 {
 	status_t error = (directory && index && subdir && image
@@ -783,8 +757,7 @@ BDiskDeviceRoster::_GetNextAddOn(BDirectory **directory, int32 *index,
 	- \c B_ENTRY_NOT_FOUND: End of directory.
 	- other error codes
 */
-status_t
-BDiskDeviceRoster::_GetNextAddOn(BDirectory *directory, AddOnImage *image)
+status_t BDiskDeviceRoster::_GetNextAddOn(BDirectory *directory, AddOnImage *image)
 {
 	status_t error = (directory ? B_OK : B_ENTRY_NOT_FOUND);
 	if (error == B_OK) {
@@ -813,8 +786,7 @@ BDiskDeviceRoster::_GetNextAddOn(BDirectory *directory, AddOnImage *image)
 	- \c B_ENTRY_NOT_FOUND: End of directory list.
 	- other error codes
 */
-status_t
-BDiskDeviceRoster::_GetNextAddOnDir(BPath *path, int32 *index,
+status_t BDiskDeviceRoster::_GetNextAddOnDir(BPath *path, int32 *index,
 	const char *subdir)
 {
 	status_t error = (*index < kAddOnDirCount ? B_OK : B_ENTRY_NOT_FOUND);
@@ -846,8 +818,7 @@ printf("  next add-on dir: `%s'\n", path->Path());
 	- \c B_ENTRY_NOT_FOUND: End of directory list.
 	- other error codes
 */
-status_t
-BDiskDeviceRoster::_GetNextAddOnDir(BDirectory **directory, int32 *index,
+status_t BDiskDeviceRoster::_GetNextAddOnDir(BDirectory **directory, int32 *index,
 	const char *subdir)
 {
 	BPath path;
@@ -870,8 +841,7 @@ BDiskDeviceRoster::_GetNextAddOnDir(BDirectory **directory, int32 *index,
 }
 
 
-status_t
-BDiskDeviceRoster::_LoadPartitionAddOn(const char *partitioningSystem,
+status_t BDiskDeviceRoster::_LoadPartitionAddOn(const char *partitioningSystem,
 	AddOnImage *image, BDiskScannerPartitionAddOn **_addOn)
 {
 	status_t error = partitioningSystem && image && _addOn

@@ -5,7 +5,7 @@
  ***********************************************************************/
 
 #include <Haiku.h>
-#include <OS.h>
+#include <kernel/OS.h>
 #include <Entry.h>
 
 #include <PlaySound.h>

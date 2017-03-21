@@ -11,7 +11,7 @@
 
 #include <new>
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <Size.h>
 
 #include <AutoDeleter.h>
@@ -204,8 +204,7 @@ ComplexLayouter::~ComplexLayouter()
 
 
 // InitCheck
-status_t
-ComplexLayouter::InitCheck() const
+status_t ComplexLayouter::InitCheck() const
 {
 	if (!fConstraints || !fWeights || !fSums || !fSumBackups || !fOptimizer)
 		return B_NO_MEMORY;
@@ -214,8 +213,7 @@ ComplexLayouter::InitCheck() const
 
 
 // AddConstraints
-void
-ComplexLayouter::AddConstraints(int32 element, int32 length,
+void ComplexLayouter::AddConstraints(int32 element, int32 length,
 	float _min, float _max, float _preferred)
 {
 	if (element < 0 || length <= 0 || element + length > fElementCount)
@@ -256,8 +254,7 @@ ComplexLayouter::AddConstraints(int32 element, int32 length,
 
 
 // SetWeight
-void
-ComplexLayouter::SetWeight(int32 element, float weight)
+void ComplexLayouter::SetWeight(int32 element, float weight)
 {
 	if (element < 0 || element >= fElementCount)
 		return;
@@ -308,8 +305,7 @@ ComplexLayouter::CreateLayoutInfo()
 
 
 // Layout
-void
-ComplexLayouter::Layout(LayoutInfo* _layoutInfo, float _size)
+void ComplexLayouter::Layout(LayoutInfo* _layoutInfo, float _size)
 {
 	TRACE("%p->ComplexLayouter::Layout(%ld)\n", this, (int32)_size);
 
@@ -398,8 +394,7 @@ ComplexLayouter::CloneLayouter()
 
 
 // _Layout
-bool
-ComplexLayouter::_Layout(int32 size, SumItem* sums, int32* sizes)
+bool ComplexLayouter::_Layout(int32 size, SumItem* sums, int32* sizes)
 {
 	// prepare the desired solution
 	SimpleLayouter::DistributeSize(size, fWeights, sizes, fElementCount);
@@ -459,8 +454,7 @@ ComplexLayouter::_Layout(int32 size, SumItem* sums, int32* sizes)
 
 
 // _AddOptimizerConstraints
-bool
-ComplexLayouter::_AddOptimizerConstraints()
+bool ComplexLayouter::_AddOptimizerConstraints()
 {
 	if (fOptimizerConstraintsAdded)
 		return true;
@@ -517,8 +511,7 @@ ComplexLayouter::_AddOptimizerConstraints()
 
 
 // _SatisfiesConstraints
-bool
-ComplexLayouter::_SatisfiesConstraints(int32* sizes) const
+bool ComplexLayouter::_SatisfiesConstraints(int32* sizes) const
 {
 	int32 sumValues[fElementCount + 1];
 	sumValues[0] = 0;
@@ -530,8 +523,7 @@ ComplexLayouter::_SatisfiesConstraints(int32* sizes) const
 
 
 // _SatisfiesConstraintsSums
-bool
-ComplexLayouter::_SatisfiesConstraintsSums(int32* sumValues) const
+bool ComplexLayouter::_SatisfiesConstraintsSums(int32* sumValues) const
 {
 	for (int32 i = 0; i < fElementCount; i++) {
 		Constraint* constraint = fConstraints[i];
@@ -548,8 +540,7 @@ ComplexLayouter::_SatisfiesConstraintsSums(int32* sumValues) const
 
 
 // _ValidateLayout
-void
-ComplexLayouter::_ValidateLayout()
+void ComplexLayouter::_ValidateLayout()
 {
 	// The general idea for computing the min and max for the given constraints
 	// is that we rewrite the problem a little. Instead of considering the
@@ -666,8 +657,7 @@ ComplexLayouter::_ValidateLayout()
 
 
 // _ApplyMaxConstraint
-void
-ComplexLayouter::_ApplyMaxConstraint(Constraint* currentConstraint, int32 index)
+void ComplexLayouter::_ApplyMaxConstraint(Constraint* currentConstraint, int32 index)
 {
 	SumItem& sum = fSums[index + 1];
 	SumItem& base = fSums[currentConstraint->start];
@@ -786,8 +776,7 @@ ComplexLayouter::_ApplyMaxConstraint(Constraint* currentConstraint, int32 index)
 	\a lastMaxConstraint will be ignored. To have all constraints be
 	considered pass \c fElementCount and \c NULL.
 */
-void
-ComplexLayouter::_PropagateChanges(SumItem* sums, int32 toIndex,
+void ComplexLayouter::_PropagateChanges(SumItem* sums, int32 toIndex,
 	Constraint* lastMaxConstraint)
 {
 	for (int32 i = 0; i < fElementCount; i++) {
@@ -837,8 +826,7 @@ ComplexLayouter::_PropagateChanges(SumItem* sums, int32 toIndex,
 
 
 // _PropagateChangesBack
-void
-ComplexLayouter::_PropagateChangesBack(SumItem* sums, int32 changedIndex,
+void ComplexLayouter::_PropagateChangesBack(SumItem* sums, int32 changedIndex,
 	Constraint* lastMaxConstraint)
 {
 	for (int32 i = changedIndex; i >= 0; i--) {
@@ -888,8 +876,7 @@ ComplexLayouter::_PropagateChangesBack(SumItem* sums, int32 changedIndex,
 
 
 // _BackupValues
-void
-ComplexLayouter::_BackupValues(int32 maxIndex)
+void ComplexLayouter::_BackupValues(int32 maxIndex)
 {
 	for (int32 i = 0; i <= maxIndex; i++) {
 		SumItem& sum = fSums[i + 1];
@@ -900,8 +887,7 @@ ComplexLayouter::_BackupValues(int32 maxIndex)
 
 
 // _RestoreValues
-void
-ComplexLayouter::_RestoreValues(int32 maxIndex)
+void ComplexLayouter::_RestoreValues(int32 maxIndex)
 {
 	for (int32 i = 0; i <= maxIndex; i++) {
 		SumItem& sum = fSums[i + 1];

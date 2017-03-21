@@ -495,79 +495,68 @@ BUrl::Fragment() const
 // #pragma mark URL fields tests
 
 
-bool
-BUrl::IsValid() const
+bool BUrl::IsValid() const
 {
 	// TODO: Implement for real!
 	return fHasProtocol && (fHasHost || fHasPath);
 }
 
 
-bool
-BUrl::HasProtocol() const
+bool BUrl::HasProtocol() const
 {
 	return fHasProtocol;
 }
 
 
-bool
-BUrl::HasAuthority() const
+bool BUrl::HasAuthority() const
 {
 	return fHasHost || fHasUserName;
 }
 
 
-bool
-BUrl::HasUserName() const
+bool BUrl::HasUserName() const
 {
 	return fHasUserName;
 }
 
 
-bool
-BUrl::HasPassword() const
+bool BUrl::HasPassword() const
 {
 	return fHasPassword;
 }
 
 
-bool
-BUrl::HasUserInfo() const
+bool BUrl::HasUserInfo() const
 {
 	return fHasUserName || fHasPassword;
 }
 
 
-bool
-BUrl::HasHost() const
+bool BUrl::HasHost() const
 {
 	return fHasHost;
 }
 
 
-bool
-BUrl::HasPort() const
+bool BUrl::HasPort() const
 {
 	return fHasPort;
 }
 
 
-bool
-BUrl::HasPath() const
+bool BUrl::HasPath() const
 {
 	return fHasPath;
 }
 
 
-bool
-BUrl::HasRequest() const
+bool BUrl::HasRequest() const
 {
 	return fHasRequest;
 }
 
 
-bool
-BUrl::HasFragment() const
+bool BUrl::HasFragment() const
 {
 	return fHasFragment;
 }
@@ -576,8 +565,7 @@ BUrl::HasFragment() const
 // #pragma mark URL encoding/decoding of needed fields
 
 
-void
-BUrl::UrlEncode(bool strict)
+void BUrl::UrlEncode(bool strict)
 {
 	fUser = _DoUrlEncodeChunk(fUser, strict);
 	fPassword = _DoUrlEncodeChunk(fPassword, strict);
@@ -587,8 +575,7 @@ BUrl::UrlEncode(bool strict)
 }
 
 
-void
-BUrl::UrlDecode(bool strict)
+void BUrl::UrlDecode(bool strict)
 {
 	fUser = _DoUrlDecodeChunk(fUser, strict);
 	fPassword = _DoUrlDecodeChunk(fPassword, strict);
@@ -598,8 +585,7 @@ BUrl::UrlDecode(bool strict)
 }
 
 
-status_t
-BUrl::IDNAToAscii()
+status_t BUrl::IDNAToAscii()
 {
 	UErrorCode err = U_ZERO_ERROR;
 	icu::IDNA* converter = icu::IDNA::createUTS46Instance(0, err);
@@ -620,8 +606,7 @@ BUrl::IDNAToAscii()
 }
 
 
-status_t
-BUrl::IDNAToUnicode()
+status_t BUrl::IDNAToUnicode()
 {
 	UErrorCode err = U_ZERO_ERROR;
 	icu::IDNA* converter = icu::IDNA::createUTS46Instance(0, err);
@@ -645,8 +630,7 @@ BUrl::IDNAToUnicode()
 // #pragma mark - utility functionality
 
 
-bool
-BUrl::HasPreferredApplication() const
+bool BUrl::HasPreferredApplication() const
 {
 	BString appSignature = PreferredApplication();
 	BMimeType mime(appSignature.String());
@@ -671,8 +655,7 @@ BUrl::PreferredApplication() const
 }
 
 
-status_t
-BUrl::OpenWithPreferredApplication(bool onProblemAskUser) const
+status_t BUrl::OpenWithPreferredApplication(bool onProblemAskUser) const
 {
 	if (!IsValid())
 		return B_BAD_VALUE;
@@ -732,8 +715,7 @@ BUrl::UrlDecode(const BString& url, bool strict)
 // #pragma mark BArchivable members
 
 
-status_t
-BUrl::Archive(BMessage* into, bool deep) const
+status_t BUrl::Archive(BMessage* into, bool deep) const
 {
 	status_t ret = BArchivable::Archive(into, deep);
 
@@ -756,8 +738,7 @@ BUrl::Instantiate(BMessage* archive)
 // #pragma mark URL comparison
 
 
-bool
-BUrl::operator==(BUrl& other) const
+bool BUrl::operator==(BUrl& other) const
 {
 	UrlString();
 	other.UrlString();
@@ -766,8 +747,7 @@ BUrl::operator==(BUrl& other) const
 }
 
 
-bool
-BUrl::operator!=(BUrl& other) const
+bool BUrl::operator!=(BUrl& other) const
 {
 	return !(*this == other);
 }
@@ -838,8 +818,7 @@ BUrl::operator const char*() const
 }
 
 
-void
-BUrl::_ResetFields()
+void BUrl::_ResetFields()
 {
 	fHasProtocol = false;
 	fHasUserName = false;
@@ -866,8 +845,7 @@ BUrl::_ResetFields()
 }
 
 
-void
-BUrl::_ExplodeUrlString(const BString& url)
+void BUrl::_ExplodeUrlString(const BString& url)
 {
 	// The regexp is provided in RFC3986 (URI generic syntax), Appendix B
 	static RegExp urlMatcher(
@@ -953,8 +931,7 @@ BUrl::_MergePath(const BString& relative) const
 
 // This sets the path without normalizing it. If fed with a path that has . or
 // .. segments, this would make the URL invalid.
-void
-BUrl::_SetPathUnsafe(const BString& path)
+void BUrl::_SetPathUnsafe(const BString& path)
 {
 	fPath = path;
 	fHasPath = true; // RFC says an empty path is still a path
@@ -962,8 +939,7 @@ BUrl::_SetPathUnsafe(const BString& path)
 }
 
 
-void
-BUrl::SetAuthority(const BString& authority)
+void BUrl::SetAuthority(const BString& authority)
 {
 	fAuthority = authority;
 
@@ -1094,8 +1070,7 @@ BUrl::_DoUrlDecodeChunk(const BString& chunk, bool strict)
 }
 
 
-bool
-BUrl::_IsProtocolValid()
+bool BUrl::_IsProtocolValid()
 {
 	for (int8 index = 0; index < fProtocol.Length(); index++) {
 		char c = fProtocol[index];
@@ -1110,23 +1085,20 @@ BUrl::_IsProtocolValid()
 }
 
 
-bool
-BUrl::_IsUnreserved(char c)
+bool BUrl::_IsUnreserved(char c)
 {
 	return isalnum(c) || c == '-' || c == '.' || c == '_' || c == '~';
 }
 
 
-bool
-BUrl::_IsGenDelim(char c)
+bool BUrl::_IsGenDelim(char c)
 {
 	return c == ':' || c == '/' || c == '?' || c == '#' || c == '['
 		|| c == ']' || c == '@';
 }
 
 
-bool
-BUrl::_IsSubDelim(char c)
+bool BUrl::_IsSubDelim(char c)
 {
 	return c == '!' || c == '$' || c == '&' || c == '\'' || c == '('
 		|| c == ')' || c == '*' || c == '+' || c == ',' || c == ';'

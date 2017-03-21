@@ -90,15 +90,13 @@ AddMenuItemVisitor::~AddMenuItemVisitor()
 }
 
 
-bool
-AddMenuItemVisitor::Visit(BDiskDevice* device)
+bool AddMenuItemVisitor::Visit(BDiskDevice* device)
 {
 	return Visit(device, 0);
 }
 
 
-bool
-AddMenuItemVisitor::Visit(BPartition* partition, int32 level)
+bool AddMenuItemVisitor::Visit(BPartition* partition, int32 level)
 {
 	if (!partition->ContainsFileSystem())
 		return false;
@@ -172,8 +170,7 @@ MountMenu::MountMenu(const char* name)
 }
 
 
-bool
-MountMenu::AddDynamicItem(add_state)
+bool MountMenu::AddDynamicItem(add_state)
 {
 	// remove old items
 	for (;;) {

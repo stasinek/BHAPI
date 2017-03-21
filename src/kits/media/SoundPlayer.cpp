@@ -151,8 +151,7 @@ cleanup:
 }
 
 
-status_t
-BSoundPlayer::InitCheck()
+status_t BSoundPlayer::InitCheck()
 {
 	CALLED();
 	return fInitStatus;
@@ -171,8 +170,7 @@ BSoundPlayer::Format() const
 }
 
 
-status_t
-BSoundPlayer::Start()
+status_t BSoundPlayer::Start()
 {
 	CALLED();
 
@@ -215,8 +213,7 @@ BSoundPlayer::Start()
 }
 
 
-void
-BSoundPlayer::Stop(bool block, bool flush)
+void BSoundPlayer::Stop(bool block, bool flush)
 {
 	CALLED();
 
@@ -287,8 +284,7 @@ BSoundPlayer::Latency()
 }
 
 
-void
-BSoundPlayer::SetHasData(bool hasData)
+void BSoundPlayer::SetHasData(bool hasData)
 {
 	CALLED();
 	if (hasData)
@@ -298,8 +294,7 @@ BSoundPlayer::SetHasData(bool hasData)
 }
 
 
-bool
-BSoundPlayer::HasData()
+bool BSoundPlayer::HasData()
 {
 	CALLED();
 	return (atomic_get(&fFlags) & F_HAS_DATA) != 0;
@@ -314,8 +309,7 @@ BSoundPlayer::BufferPlayer() const
 }
 
 
-void
-BSoundPlayer::SetBufferPlayer(BufferPlayerFunc playerFunction)
+void BSoundPlayer::SetBufferPlayer(BufferPlayerFunc playerFunction)
 {
 	CALLED();
 	BAutolock _(fLocker);
@@ -332,8 +326,7 @@ BSoundPlayer::EventNotifier() const
 }
 
 
-void
-BSoundPlayer::SetNotifier(EventNotifierFunc eventNotifierFunction)
+void BSoundPlayer::SetNotifier(EventNotifierFunc eventNotifierFunction)
 {
 	CALLED();
 	BAutolock _(fLocker);
@@ -342,16 +335,14 @@ BSoundPlayer::SetNotifier(EventNotifierFunc eventNotifierFunction)
 }
 
 
-void*
-BSoundPlayer::Cookie() const
+void*   BSoundPlayer::Cookie() const
 {
 	CALLED();
 	return fCookie;
 }
 
 
-void
-BSoundPlayer::SetCookie(void *cookie)
+void BSoundPlayer::SetCookie(void *cookie)
 {
 	CALLED();
 	BAutolock _(fLocker);
@@ -360,8 +351,7 @@ BSoundPlayer::SetCookie(void *cookie)
 }
 
 
-void
-BSoundPlayer::SetCallbacks(BufferPlayerFunc playerFunction,
+void BSoundPlayer::SetCallbacks(BufferPlayerFunc playerFunction,
 	EventNotifierFunc eventNotifierFunction, void* cookie)
 {
 	CALLED();
@@ -402,8 +392,7 @@ BSoundPlayer::PerformanceTime()
 }
 
 
-status_t
-BSoundPlayer::Preroll()
+status_t BSoundPlayer::Preroll()
 {
 	CALLED();
 
@@ -466,8 +455,7 @@ BSoundPlayer::StartPlaying(BSound* sound, bigtime_t atTime, float withVolume)
 }
 
 
-status_t
-BSoundPlayer::SetSoundVolume(play_id id, float newVolume)
+status_t BSoundPlayer::SetSoundVolume(play_id id, float newVolume)
 {
 	CALLED();
 	if (!fLocker.Lock())
@@ -489,8 +477,7 @@ BSoundPlayer::SetSoundVolume(play_id id, float newVolume)
 }
 
 
-bool
-BSoundPlayer::IsPlaying(play_id id)
+bool BSoundPlayer::IsPlaying(play_id id)
 {
 	CALLED();
 	if (!fLocker.Lock())
@@ -511,8 +498,7 @@ BSoundPlayer::IsPlaying(play_id id)
 }
 
 
-status_t
-BSoundPlayer::StopPlaying(play_id id)
+status_t BSoundPlayer::StopPlaying(play_id id)
 {
 	CALLED();
 	if (!fLocker.Lock())
@@ -545,8 +531,7 @@ BSoundPlayer::StopPlaying(play_id id)
 }
 
 
-status_t
-BSoundPlayer::WaitForSound(play_id id)
+status_t BSoundPlayer::WaitForSound(play_id id)
 {
 	CALLED();
 	if (!fLocker.Lock())
@@ -579,8 +564,7 @@ BSoundPlayer::Volume()
 }
 
 
-void
-BSoundPlayer::SetVolume(float newVolume)
+void BSoundPlayer::SetVolume(float newVolume)
 {
 	CALLED();
 	SetVolumeDB(20.0 * log10(newVolume));
@@ -608,8 +592,7 @@ BSoundPlayer::VolumeDB(bool forcePoll)
 }
 
 
-void
-BSoundPlayer::SetVolumeDB(float volumeDB)
+void BSoundPlayer::SetVolumeDB(float volumeDB)
 {
 	CALLED();
 	if (!fVolumeSlider)
@@ -633,8 +616,7 @@ BSoundPlayer::SetVolumeDB(float volumeDB)
 }
 
 
-status_t
-BSoundPlayer::GetVolumeInfo(media_node* _node, int32* _parameterID,
+status_t BSoundPlayer::GetVolumeInfo(media_node* _node, int32* _parameterID,
 	float* _minDB, float* _maxDB)
 {
 	CALLED();
@@ -657,8 +639,7 @@ BSoundPlayer::GetVolumeInfo(media_node* _node, int32* _parameterID,
 // #pragma mark - protected BSoundPlayer
 
 
-void
-BSoundPlayer::SetInitError(status_t error)
+void BSoundPlayer::SetInitError(status_t error)
 {
 	CALLED();
 	fInitStatus = error;
@@ -668,8 +649,7 @@ BSoundPlayer::SetInitError(status_t error)
 // #pragma mark - private BSoundPlayer
 
 
-void
-BSoundPlayer::_SoundPlayBufferFunc(void *cookie, void *buffer, size_t size,
+void BSoundPlayer::_SoundPlayBufferFunc(void *cookie, void *buffer, size_t size,
 	const media_raw_audio_format &format)
 {
 	// TODO: support more than one sound and make use of the format parameter
@@ -714,8 +694,7 @@ status_t BSoundPlayer::_Reserved_SoundPlayer_6(void*, ...) { return B_ERROR; }
 status_t BSoundPlayer::_Reserved_SoundPlayer_7(void*, ...) { return B_ERROR; }
 
 
-void
-BSoundPlayer::_Init(const media_node* node,
+void BSoundPlayer::_Init(const media_node* node,
 	const media_multi_audio_format* format, const char* name,
 	const media_input* input, BufferPlayerFunc playerFunction,
 	EventNotifierFunc eventNotifierFunction, void* cookie)
@@ -863,16 +842,14 @@ BSoundPlayer::_Init(const media_node* node,
 }
 
 
-void
-BSoundPlayer::_NotifySoundDone(play_id id, bool gotToPlay)
+void BSoundPlayer::_NotifySoundDone(play_id id, bool gotToPlay)
 {
 	CALLED();
 	Notify(B_SOUND_DONE, id, gotToPlay);
 }
 
 
-void
-BSoundPlayer::_GetVolumeSlider()
+void BSoundPlayer::_GetVolumeSlider()
 {
 	CALLED();
 
@@ -910,8 +887,7 @@ BSoundPlayer::_GetVolumeSlider()
 }
 
 
-void
-BSoundPlayer::Notify(sound_player_notification what, ...)
+void BSoundPlayer::Notify(sound_player_notification what, ...)
 {
 	CALLED();
 	if (fLocker.Lock()) {
@@ -922,8 +898,7 @@ BSoundPlayer::Notify(sound_player_notification what, ...)
 }
 
 
-void
-BSoundPlayer::PlayBuffer(void* buffer, size_t size,
+void BSoundPlayer::PlayBuffer(void* buffer, size_t size,
 	const media_raw_audio_format& format)
 {
 	if (fLocker.Lock()) {
@@ -943,8 +918,7 @@ sound_error::sound_error(const char* string)
 }
 
 
-const char*
-sound_error::what() const throw()
+const char*  sound_error::what() const throw()
 {
 	return m_str_const;
 }

@@ -17,8 +17,7 @@ public:
 	{
 	}
 
-	void
-	SetTo(const BLanguage* language)
+	void 	SetTo(const BLanguage* language)
 	{
 		fLanguage = language;
 	}

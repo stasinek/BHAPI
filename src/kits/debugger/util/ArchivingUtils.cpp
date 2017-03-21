@@ -9,8 +9,7 @@
 #include <Message.h>
 
 
-/*static*/ status_t
-ArchivingUtils::ArchiveChild(BArchivable* object, BMessage& parentArchive,
+/*static*/ status_t ArchivingUtils::ArchiveChild(BArchivable* object, BMessage& parentArchive,
 	const char* fieldName)
 {
 	if (object == NULL)

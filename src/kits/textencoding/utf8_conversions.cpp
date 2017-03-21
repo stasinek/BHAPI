@@ -29,8 +29,7 @@ using namespace BPrivate;
 int iconvctl(iconv_t icd, int request, void* argument);
 
 
-static void
-discard_invalid_input_character(iconv_t* conversion, char** inputBuffer,
+static void discard_invalid_input_character(iconv_t* conversion, char** inputBuffer,
 	size_t* inputLeft)
 {
 	if (*inputLeft == 0)
@@ -74,8 +73,7 @@ discard_invalid_input_character(iconv_t* conversion, char** inputBuffer,
 }
 
 
-status_t
-convert_encoding(const char* from, const char* to, const char* src,
+status_t convert_encoding(const char* from, const char* to, const char* src,
 	int32* srcLen, char* dst, int32* dstLen, int32* state,
 	char substitute)
 {
@@ -166,8 +164,7 @@ convert_encoding(const char* from, const char* to, const char* src,
 }
 
 
-status_t
-convert_to_utf8(uint32 srcEncoding, const char* src, int32* srcLen,
+status_t convert_to_utf8(uint32 srcEncoding, const char* src, int32* srcLen,
 	char* dst, int32* dstLen, int32* state, char substitute)
 {
 	const BCharacterSet* charset = BCharacterSetRoster::GetCharacterSetByConversionID(
@@ -188,8 +185,7 @@ convert_to_utf8(uint32 srcEncoding, const char* src, int32* srcLen,
 }
 
 
-status_t
-convert_from_utf8(uint32 dstEncoding, const char* src, int32* srcLen,
+status_t convert_from_utf8(uint32 dstEncoding, const char* src, int32* srcLen,
 	char* dst, int32* dstLen, int32* state, char substitute)
 {
 	const BCharacterSet* charset = BCharacterSetRoster::GetCharacterSetByConversionID(

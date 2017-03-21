@@ -171,8 +171,7 @@ BColumn::BColumn(const BMessage &message, int32 index)
 }
 
 
-void
-BColumn::_Init(const char* title, float offset, float width,
+void BColumn::_Init(const char* title, float offset, float width,
 	alignment align, const char* attributeName, uint32 attrType,
 	const char* displayAs, bool statField, bool editable)
 {
@@ -231,8 +230,7 @@ BColumn::InstantiateFromMessage(const BMessage &message, int32 index)
 }
 
 
-void
-BColumn::ArchiveToStream(BMallocIO* stream) const
+void BColumn::ArchiveToStream(BMallocIO* stream) const
 {
 	// write class identifier and version info
 	uint32 key = AttrHashString("BColumn", B_OBJECT_TYPE);
@@ -255,8 +253,7 @@ BColumn::ArchiveToStream(BMallocIO* stream) const
 }
 
 
-void
-BColumn::ArchiveToMessage(BMessage &message) const
+void BColumn::ArchiveToMessage(BMessage &message) const
 {
 	message.AddInt32(kColumnVersionName, kColumnStateArchiveVersion);
 
@@ -372,8 +369,7 @@ BViewState::BViewState(const BMessage &message)
 }
 
 
-void
-BViewState::ArchiveToStream(BMallocIO* stream) const
+void BViewState::ArchiveToStream(BMallocIO* stream) const
 {
 	// write class identifier and verison info
 	uint32 key = AttrHashString("BViewState", B_OBJECT_TYPE);
@@ -395,8 +391,7 @@ BViewState::ArchiveToStream(BMallocIO* stream) const
 }
 
 
-void
-BViewState::ArchiveToMessage(BMessage &message) const
+void BViewState::ArchiveToMessage(BMessage &message) const
 {
 	message.AddInt32(kViewStateVersionName, kViewStateArchiveVersion);
 
@@ -455,8 +450,7 @@ BViewState::InstantiateFromMessage(const BMessage &message)
 }
 
 
-void
-BViewState::_Init()
+void BViewState::_Init()
 {
 	fViewMode = kListMode;
 	fLastIconMode = 0;
@@ -472,8 +466,7 @@ BViewState::_Init()
 }
 
 
-void
-BViewState::_StorePreviousState()
+void BViewState::_StorePreviousState()
 {
 	fPreviousViewMode = fViewMode;
 	fPreviousLastIconMode = fLastIconMode;

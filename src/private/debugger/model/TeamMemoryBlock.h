@@ -6,7 +6,7 @@
 #define TEAM_MEMORY_BLOCK_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <Locker.h>
 #include <Referenceable.h>

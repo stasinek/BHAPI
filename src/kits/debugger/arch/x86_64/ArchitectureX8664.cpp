@@ -163,8 +163,7 @@ ArchitectureX8664::~ArchitectureX8664()
 }
 
 
-status_t
-ArchitectureX8664::Init()
+status_t ArchitectureX8664::Init()
 {
 	fAssemblyLanguage = new(std::nothrow) X86AssemblyLanguage;
 	if (fAssemblyLanguage == NULL)
@@ -287,15 +286,13 @@ ArchitectureX8664::Init()
 }
 
 
-int32
-ArchitectureX8664::StackGrowthDirection() const
+int32 ArchitectureX8664::StackGrowthDirection() const
 {
 	return STACK_GROWTH_DIRECTION_NEGATIVE;
 }
 
 
-int32
-ArchitectureX8664::CountRegisters() const
+int32 ArchitectureX8664::CountRegisters() const
 {
 	return fRegisters.Count();
 }
@@ -308,8 +305,7 @@ ArchitectureX8664::Registers() const
 }
 
 
-status_t
-ArchitectureX8664::InitRegisterRules(CfaContext& context) const
+status_t ArchitectureX8664::InitRegisterRules(CfaContext& context) const
 {
 	status_t error = Architecture::InitRegisterRules(context);
 	if (error != B_OK)
@@ -323,8 +319,7 @@ ArchitectureX8664::InitRegisterRules(CfaContext& context) const
 }
 
 
-status_t
-ArchitectureX8664::GetDwarfRegisterMaps(RegisterMap** _toDwarf,
+status_t ArchitectureX8664::GetDwarfRegisterMaps(RegisterMap** _toDwarf,
 	RegisterMap** _fromDwarf) const
 {
 	if (_toDwarf != NULL) {
@@ -341,8 +336,7 @@ ArchitectureX8664::GetDwarfRegisterMaps(RegisterMap** _toDwarf,
 }
 
 
-status_t
-ArchitectureX8664::GetCpuFeatures(uint32& flags)
+status_t ArchitectureX8664::GetCpuFeatures(uint32& flags)
 {
 	// TODO: implement if/when it winds up being needed.
 	flags = 0;
@@ -350,8 +344,7 @@ ArchitectureX8664::GetCpuFeatures(uint32& flags)
 }
 
 
-status_t
-ArchitectureX8664::CreateCpuState(CpuState*& _state)
+status_t ArchitectureX8664::CreateCpuState(CpuState*& _state)
 {
 	CpuStateX8664* state = new(std::nothrow) CpuStateX8664;
 	if (state == NULL)
@@ -362,8 +355,7 @@ ArchitectureX8664::CreateCpuState(CpuState*& _state)
 }
 
 
-status_t
-ArchitectureX8664::CreateCpuState(const void* cpuStateData, size_t size,
+status_t ArchitectureX8664::CreateCpuState(const void* cpuStateData, size_t size,
 	CpuState*& _state)
 {
 	if (size != sizeof(x86_64_debug_cpu_state))
@@ -379,8 +371,7 @@ ArchitectureX8664::CreateCpuState(const void* cpuStateData, size_t size,
 }
 
 
-status_t
-ArchitectureX8664::CreateStackFrame(Image* image, FunctionDebugInfo* function,
+status_t ArchitectureX8664::CreateStackFrame(Image* image, FunctionDebugInfo* function,
 	CpuState* _cpuState, bool isTopFrame, StackFrame*& _frame,
 	CpuState*& _previousCpuState)
 {
@@ -521,8 +512,7 @@ ArchitectureX8664::CreateStackFrame(Image* image, FunctionDebugInfo* function,
 }
 
 
-void
-ArchitectureX8664::UpdateStackFrameCpuState(const StackFrame* frame,
+void ArchitectureX8664::UpdateStackFrameCpuState(const StackFrame* frame,
 	Image* previousImage, FunctionDebugInfo* previousFunction,
 	CpuState* previousCpuState)
 {
@@ -562,8 +552,7 @@ ArchitectureX8664::UpdateStackFrameCpuState(const StackFrame* frame,
 }
 
 
-status_t
-ArchitectureX8664::ReadValueFromMemory(target_addr_t address, uint32 valueType,
+status_t ArchitectureX8664::ReadValueFromMemory(target_addr_t address, uint32 valueType,
 	BVariant& _value) const
 {
 	uint8 buffer[64];
@@ -618,8 +607,7 @@ ArchitectureX8664::ReadValueFromMemory(target_addr_t address, uint32 valueType,
 }
 
 
-status_t
-ArchitectureX8664::ReadValueFromMemory(target_addr_t addressSpace,
+status_t ArchitectureX8664::ReadValueFromMemory(target_addr_t addressSpace,
 	target_addr_t address, uint32 valueType, BVariant& _value) const
 {
 	// n/a on this architecture
@@ -627,8 +615,7 @@ ArchitectureX8664::ReadValueFromMemory(target_addr_t addressSpace,
 }
 
 
-status_t
-ArchitectureX8664::DisassembleCode(FunctionDebugInfo* function,
+status_t ArchitectureX8664::DisassembleCode(FunctionDebugInfo* function,
 	const void* buffer, size_t bufferSize, DisassembledCode*& _sourceCode)
 {
 	DisassembledCode* source = new(std::nothrow) DisassembledCode(
@@ -667,8 +654,7 @@ ArchitectureX8664::DisassembleCode(FunctionDebugInfo* function,
 }
 
 
-status_t
-ArchitectureX8664::GetStatement(FunctionDebugInfo* function,
+status_t ArchitectureX8664::GetStatement(FunctionDebugInfo* function,
 	target_addr_t address, Statement*& _statement)
 {
 // TODO: This is not architecture dependent anymore!
@@ -689,8 +675,7 @@ ArchitectureX8664::GetStatement(FunctionDebugInfo* function,
 }
 
 
-status_t
-ArchitectureX8664::GetInstructionInfo(target_addr_t address,
+status_t ArchitectureX8664::GetInstructionInfo(target_addr_t address,
 	InstructionInfo& _info, CpuState* state)
 {
 	// read the code - maximum x86{-64} instruction size = 15 bytes
@@ -710,8 +695,7 @@ ArchitectureX8664::GetInstructionInfo(target_addr_t address,
 }
 
 
-status_t
-ArchitectureX8664::ResolvePICFunctionAddress(target_addr_t instructionAddress,
+status_t ArchitectureX8664::ResolvePICFunctionAddress(target_addr_t instructionAddress,
 	CpuState* state, target_addr_t& _targetAddress)
 {
 	target_addr_t previousIP = state->InstructionPointer();
@@ -745,8 +729,7 @@ ArchitectureX8664::ResolvePICFunctionAddress(target_addr_t instructionAddress,
 }
 
 
-status_t
-ArchitectureX8664::GetWatchpointDebugCapabilities(int32& _maxRegisterCount,
+status_t ArchitectureX8664::GetWatchpointDebugCapabilities(int32& _maxRegisterCount,
 	int32& _maxBytesPerRegister, uint8& _watchpointCapabilityFlags)
 {
 	// Have 4 debug registers, 1 is required for breakpoint support, which
@@ -762,8 +745,7 @@ ArchitectureX8664::GetWatchpointDebugCapabilities(int32& _maxRegisterCount,
 }
 
 
-status_t
-ArchitectureX8664::GetReturnAddressLocation(StackFrame* frame,
+status_t ArchitectureX8664::GetReturnAddressLocation(StackFrame* frame,
 	target_size_t valueSize, ValueLocation*& _location)
 {
 	// for the calling conventions currently in use on Haiku,
@@ -798,8 +780,7 @@ ArchitectureX8664::GetReturnAddressLocation(StackFrame* frame,
 }
 
 
-void
-ArchitectureX8664::_AddRegister(int32 index, const char* name,
+void ArchitectureX8664::_AddRegister(int32 index, const char* name,
 	uint32 bitSize, uint32 valueType, register_type type, bool calleePreserved)
 {
 	if (!fRegisters.Add(Register(index, name, bitSize, valueType, type,
@@ -809,8 +790,7 @@ ArchitectureX8664::_AddRegister(int32 index, const char* name,
 }
 
 
-void
-ArchitectureX8664::_AddIntegerRegister(int32 index, const char* name,
+void ArchitectureX8664::_AddIntegerRegister(int32 index, const char* name,
 	uint32 valueType, register_type type, bool calleePreserved)
 {
 	_AddRegister(index, name, 8 * BVariant::SizeOfType(valueType), valueType,
@@ -818,16 +798,14 @@ ArchitectureX8664::_AddIntegerRegister(int32 index, const char* name,
 }
 
 
-void
-ArchitectureX8664::_AddFPRegister(int32 index, const char* name)
+void ArchitectureX8664::_AddFPRegister(int32 index, const char* name)
 {
 	_AddRegister(index, name, 8 * BVariant::SizeOfType(B_DOUBLE_TYPE),
 		B_DOUBLE_TYPE, REGISTER_TYPE_GENERAL_PURPOSE, true);
 }
 
 
-void
-ArchitectureX8664::_AddSIMDRegister(int32 index, const char* name,
+void ArchitectureX8664::_AddSIMDRegister(int32 index, const char* name,
 	uint32 byteSize)
 {
 	_AddRegister(index, name, byteSize * 8, B_RAW_TYPE,
@@ -835,8 +813,7 @@ ArchitectureX8664::_AddSIMDRegister(int32 index, const char* name,
 }
 
 
-bool
-ArchitectureX8664::_HasFunctionPrologue(FunctionDebugInfo* function) const
+bool ArchitectureX8664::_HasFunctionPrologue(FunctionDebugInfo* function) const
 {
 	if (function == NULL)
 		return false;

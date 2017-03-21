@@ -175,8 +175,7 @@ class DoublyLinkedQueue {
 
 // Insert
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_QUEUE_CLASS_NAME::Insert(Element *element)
+void DOUBLY_LINKED_QUEUE_CLASS_NAME::Insert(Element *element)
 {
 	if (element) {
 		Link *elLink = sGetLink(element);
@@ -190,8 +189,7 @@ DOUBLY_LINKED_QUEUE_CLASS_NAME::Insert(Element *element)
 
 // Insert
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_QUEUE_CLASS_NAME::Insert(Element *before, Element *element)
+void DOUBLY_LINKED_QUEUE_CLASS_NAME::Insert(Element *before, Element *element)
 {
 	if (before == NULL) {
 		Insert(element);
@@ -215,16 +213,14 @@ DOUBLY_LINKED_QUEUE_CLASS_NAME::Insert(Element *before, Element *element)
 
 // Add
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_QUEUE_CLASS_NAME::Add(Element *element)
+void DOUBLY_LINKED_QUEUE_CLASS_NAME::Add(Element *element)
 {
 	Insert(element);
 }
 
 // Remove
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_QUEUE_CLASS_NAME::Remove(Element *element)
+void DOUBLY_LINKED_QUEUE_CLASS_NAME::Remove(Element *element)
 {
 	if (element) {
 		Link *elLink = sGetLink(element);
@@ -242,8 +238,7 @@ DOUBLY_LINKED_QUEUE_CLASS_NAME::Remove(Element *element)
 
 // Swap
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_QUEUE_CLASS_NAME::Swap(Element *a, Element *b)
+void DOUBLY_LINKED_QUEUE_CLASS_NAME::Swap(Element *a, Element *b)
 {
 	if (a && b && a != b) {
 		Link *aLink = sGetLink(a);
@@ -277,8 +272,7 @@ DOUBLY_LINKED_QUEUE_CLASS_NAME::Swap(Element *a, Element *b)
 
 // MoveFrom
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_QUEUE_CLASS_NAME::MoveFrom(DOUBLY_LINKED_QUEUE_CLASS_NAME *fromList)
+void DOUBLY_LINKED_QUEUE_CLASS_NAME::MoveFrom(DOUBLY_LINKED_QUEUE_CLASS_NAME *fromList)
 {
 	if (fromList && fromList->fFirst) {
 		if (fFirst) {
@@ -297,8 +291,7 @@ DOUBLY_LINKED_QUEUE_CLASS_NAME::MoveFrom(DOUBLY_LINKED_QUEUE_CLASS_NAME *fromLis
 
 // RemoveAll
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_QUEUE_CLASS_NAME::RemoveAll()
+void DOUBLY_LINKED_QUEUE_CLASS_NAME::RemoveAll()
 {
 	Element *element = fFirst;
 	while (element) {
@@ -344,8 +337,7 @@ DOUBLY_LINKED_QUEUE_CLASS_NAME::GetNext(Element *element) const
 
 // Size
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-int32
-DOUBLY_LINKED_QUEUE_CLASS_NAME::Size() const
+int32 DOUBLY_LINKED_QUEUE_CLASS_NAME::Size() const
 {
 	int32 count = 0;
 	for (Element* element = First(); element; element = GetNext(element))

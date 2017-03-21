@@ -123,8 +123,7 @@ BSpaceLayoutItem::Alignment()
 }
 
 
-void
-BSpaceLayoutItem::SetExplicitMinSize(BSize size)
+void BSpaceLayoutItem::SetExplicitMinSize(BSize size)
 {
 	if (size.IsWidthSet())
 		fMinSize.width = size.width;
@@ -135,8 +134,7 @@ BSpaceLayoutItem::SetExplicitMinSize(BSize size)
 }
 
 
-void
-BSpaceLayoutItem::SetExplicitMaxSize(BSize size)
+void BSpaceLayoutItem::SetExplicitMaxSize(BSize size)
 {
 	if (size.IsWidthSet())
 		fMaxSize.width = size.width;
@@ -147,8 +145,7 @@ BSpaceLayoutItem::SetExplicitMaxSize(BSize size)
 }
 
 
-void
-BSpaceLayoutItem::SetExplicitPreferredSize(BSize size)
+void BSpaceLayoutItem::SetExplicitPreferredSize(BSize size)
 {
 	if (size.IsWidthSet())
 		fPreferredSize.width = size.width;
@@ -159,8 +156,7 @@ BSpaceLayoutItem::SetExplicitPreferredSize(BSize size)
 }
 
 
-void
-BSpaceLayoutItem::SetExplicitAlignment(BAlignment alignment)
+void BSpaceLayoutItem::SetExplicitAlignment(BAlignment alignment)
 {
 	if (alignment.IsHorizontalSet())
 		fAlignment.horizontal = alignment.horizontal;
@@ -171,15 +167,13 @@ BSpaceLayoutItem::SetExplicitAlignment(BAlignment alignment)
 }
 
 
-bool
-BSpaceLayoutItem::IsVisible()
+bool BSpaceLayoutItem::IsVisible()
 {
 	return fVisible;
 }
 
 
-void
-BSpaceLayoutItem::SetVisible(bool visible)
+void BSpaceLayoutItem::SetVisible(bool visible)
 {
 	fVisible = visible;
 }
@@ -192,15 +186,13 @@ BSpaceLayoutItem::Frame()
 }
 
 
-void
-BSpaceLayoutItem::SetFrame(BRect frame)
+void BSpaceLayoutItem::SetFrame(BRect frame)
 {
 	fFrame = frame;
 }
 
 
-status_t
-BSpaceLayoutItem::Archive(BMessage* into, bool deep) const
+status_t BSpaceLayoutItem::Archive(BMessage* into, bool deep) const
 {
 	status_t err = BLayoutItem::Archive(into, deep);
 

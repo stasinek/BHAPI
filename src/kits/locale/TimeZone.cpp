@@ -211,8 +211,7 @@ BTimeZone::OffsetFromGMT() const
 }
 
 
-bool
-BTimeZone::SupportsDaylightSaving() const
+bool BTimeZone::SupportsDaylightSaving() const
 {
 	if ((fInitializedFields & skSupportsDaylightSavingField) == 0) {
 		fSupportsDaylightSaving = fICUTimeZone->useDaylightTime();
@@ -223,22 +222,19 @@ BTimeZone::SupportsDaylightSaving() const
 }
 
 
-status_t
-BTimeZone::InitCheck() const
+status_t BTimeZone::InitCheck() const
 {
 	return fInitStatus;
 }
 
 
-status_t
-BTimeZone::SetLanguage(const BLanguage* language)
+status_t BTimeZone::SetLanguage(const BLanguage* language)
 {
 	return SetTo(fZoneID, language);
 }
 
 
-status_t
-BTimeZone::SetTo(const char* zoneID, const BLanguage* language)
+status_t BTimeZone::SetTo(const char* zoneID, const BLanguage* language)
 {
 	delete fICULocale;
 	fICULocale = NULL;

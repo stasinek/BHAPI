@@ -13,7 +13,7 @@
 #include <AffineTransform.h>
 #include <InterfaceDefs.h>
 #include <Font.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <stack>
 

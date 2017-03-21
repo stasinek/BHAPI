@@ -45,8 +45,7 @@ PrinterDriverAddOn::~PrinterDriverAddOn()
 }
 
 
-status_t
-PrinterDriverAddOn::AddPrinter(const char* spoolFolderName)
+status_t PrinterDriverAddOn::AddPrinter(const char* spoolFolderName)
 {
 	if (!IsLoaded())
 		return B_ERROR;
@@ -63,8 +62,7 @@ PrinterDriverAddOn::AddPrinter(const char* spoolFolderName)
 }
 
 
-status_t
-PrinterDriverAddOn::ConfigPage(BDirectory* spoolFolder, BMessage* settings)
+status_t PrinterDriverAddOn::ConfigPage(BDirectory* spoolFolder, BMessage* settings)
 {
 	if (!IsLoaded())
 		return B_ERROR;
@@ -83,8 +81,7 @@ PrinterDriverAddOn::ConfigPage(BDirectory* spoolFolder, BMessage* settings)
 }
 
 
-status_t
-PrinterDriverAddOn::ConfigJob(BDirectory* spoolFolder, BMessage* settings)
+status_t PrinterDriverAddOn::ConfigJob(BDirectory* spoolFolder, BMessage* settings)
 {
 	if (!IsLoaded())
 		return B_ERROR;
@@ -103,8 +100,7 @@ PrinterDriverAddOn::ConfigJob(BDirectory* spoolFolder, BMessage* settings)
 }
 
 
-status_t
-PrinterDriverAddOn::DefaultSettings(BDirectory* spoolFolder, BMessage* settings)
+status_t PrinterDriverAddOn::DefaultSettings(BDirectory* spoolFolder, BMessage* settings)
 {
 	if (!IsLoaded())
 		return B_ERROR;
@@ -127,8 +123,7 @@ PrinterDriverAddOn::DefaultSettings(BDirectory* spoolFolder, BMessage* settings)
 }
 
 
-status_t
-PrinterDriverAddOn::TakeJob(const char* spoolFile, BDirectory* spoolFolder)
+status_t PrinterDriverAddOn::TakeJob(const char* spoolFile, BDirectory* spoolFolder)
 {
 	if (!IsLoaded())
 		return B_ERROR;
@@ -155,8 +150,7 @@ PrinterDriverAddOn::TakeJob(const char* spoolFile, BDirectory* spoolFolder)
 }
 
 
-status_t
-PrinterDriverAddOn::FindPathToDriver(const char* driver, BPath* path)
+status_t PrinterDriverAddOn::FindPathToDriver(const char* driver, BPath* path)
 {
 	status_t result;
 	result = ::TestForAddonExistence(driver,
@@ -180,15 +174,13 @@ PrinterDriverAddOn::FindPathToDriver(const char* driver, BPath* path)
 }
 
 
-bool
-PrinterDriverAddOn::IsLoaded() const
+bool PrinterDriverAddOn::IsLoaded() const
 {
 	return fAddOnID > 0;
 }
 
 
-status_t
-PrinterDriverAddOn::CopyValidSettings(BMessage* settings, BMessage* newSettings)
+status_t PrinterDriverAddOn::CopyValidSettings(BMessage* settings, BMessage* newSettings)
 {
 	if (newSettings != NULL && newSettings->what != 'baad') {
 		*settings = *newSettings;

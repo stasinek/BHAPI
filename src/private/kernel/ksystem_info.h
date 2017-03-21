@@ -6,7 +6,7 @@
 #define _KERNEL_SYSTEM_INFO_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 struct kernel_args;

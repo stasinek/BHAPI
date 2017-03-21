@@ -8,7 +8,7 @@
 
 
 #include <ByteOrder.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <Referenceable.h>
 #include <Variant.h>
@@ -146,8 +146,7 @@ protected:
 };
 
 
-bool
-Architecture::IsHostEndian() const
+bool Architecture::IsHostEndian() const
 {
 	return fBigEndian == (B_HOST_IS_BENDIAN != 0);
 }

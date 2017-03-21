@@ -296,7 +296,7 @@ bhapi::clone_area_by_source(void *source_data, void **dest_addr,  __be_uint32 pr
 }
 
 
-BHAPI_EXPORT status_t
+BHAPI_EXPORT status_t 
 bhapi::get_area_info(void *data, b_area_info *info)
 {
 	bhapi::win32_area_t *area = (bhapi::win32_area_t*)data;
@@ -318,7 +318,7 @@ bhapi::get_area_info(void *data, b_area_info *info)
 }
 
 
-BHAPI_EXPORT status_t
+BHAPI_EXPORT status_t 
 bhapi::delete_area(void *data)
 {
 	bhapi::win32_area_t *area = (bhapi::win32_area_t*)data;
@@ -364,7 +364,7 @@ bhapi::delete_area(void *data)
 }
 
 
-BHAPI_EXPORT status_t
+BHAPI_EXPORT status_t 
 bhapi::delete_area_etc(void *data, bool no_clone)
 {
 	bhapi::win32_area_t *area = (bhapi::win32_area_t*)data;
@@ -410,7 +410,7 @@ bhapi::delete_area_etc(void *data, bool no_clone)
 }
 
 
-BHAPI_EXPORT status_t
+BHAPI_EXPORT status_t 
 b_resize_area(void *data, void **start_addr, size_t new_size)
 {
 	BHAPI_WARNING("%s: Not supported.", __PRETTY_FUNCTION__);
@@ -418,7 +418,7 @@ b_resize_area(void *data, void **start_addr, size_t new_size)
 }
 
 
-BHAPI_EXPORT status_t
+BHAPI_EXPORT status_t 
 b_set_area_protection(void *data,  __be_uint32 new_protection)
 {
 	BHAPI_WARNING("%s: Not supported.", __PRETTY_FUNCTION__);

@@ -222,8 +222,7 @@ using BPrivate::ShelfContainerViewFilter;
 
 /*!	\brief Helper function for BShelf::_AddReplicant()
 */
-static status_t
-send_reply(BMessage* message, status_t status, uint32 uniqueID)
+static status_t send_reply(BMessage* message, status_t status, uint32 uniqueID)
 {
 	if (message->IsSourceWaiting()) {
 		BMessage reply(B_REPLY);
@@ -236,8 +235,7 @@ send_reply(BMessage* message, status_t status, uint32 uniqueID)
 }
 
 
-static bool
-find_replicant(BList &list, const char *className, const char *addOn)
+static bool find_replicant(BList &list, const char *className, const char *addOn)
 {
 	int32 i = 0;
 	replicant_data *item;
@@ -289,8 +287,7 @@ replicant_data::~replicant_data()
 	delete message;
 }
 
-status_t
-replicant_data::Archive(BMessage* msg)
+status_t replicant_data::Archive(BMessage* msg)
 {
 	status_t result = B_OK;
 	BMessage archive;
@@ -363,8 +360,7 @@ replicant_data::Find(BList const *list, unsigned long id)
 
 
 //static
-int32
-replicant_data::IndexOf(BList const *list, BMessage const *msg)
+int32 replicant_data::IndexOf(BList const *list, BMessage const *msg)
 {
 	int32 i = 0;
 	replicant_data *item;
@@ -379,8 +375,7 @@ replicant_data::IndexOf(BList const *list, BMessage const *msg)
 
 
 //static
-int32
-replicant_data::IndexOf(BList const *list, BView const *view, bool allowZombie)
+int32 replicant_data::IndexOf(BList const *list, BView const *view, bool allowZombie)
 {
 	int32 i = 0;
 	replicant_data *item;
@@ -398,8 +393,7 @@ replicant_data::IndexOf(BList const *list, BView const *view, bool allowZombie)
 
 
 //static
-int32
-replicant_data::IndexOf(BList const *list, unsigned long id)
+int32 replicant_data::IndexOf(BList const *list, unsigned long id)
 {
 	int32 i = 0;
 	replicant_data *item;
@@ -566,8 +560,7 @@ BShelf::~BShelf()
 }
 
 
-status_t
-BShelf::Archive(BMessage *data, bool deep) const
+status_t BShelf::Archive(BMessage *data, bool deep) const
 {
 	return B_ERROR;
 }
@@ -580,8 +573,7 @@ BShelf::Instantiate(BMessage *data)
 }
 
 
-void
-BShelf::MessageReceived(BMessage *msg)
+void BShelf::MessageReceived(BMessage *msg)
 {
 	if (msg->what == kDeleteReplicant) {
 		BHandler *replicant = NULL;
@@ -697,8 +689,7 @@ BShelf::MessageReceived(BMessage *msg)
 }
 
 
-status_t
-BShelf::Save()
+status_t BShelf::Save()
 {
 	status_t status = B_ERROR;
 	if (fEntry != NULL) {
@@ -723,15 +714,13 @@ BShelf::Save()
 }
 
 
-void
-BShelf::SetDirty(bool state)
+void BShelf::SetDirty(bool state)
 {
 	fDirty = state;
 }
 
 
-bool
-BShelf::IsDirty() const
+bool BShelf::IsDirty() const
 {
 	return fDirty;
 }
@@ -822,8 +811,7 @@ BShelf::ResolveSpecifier(BMessage *msg, int32 index, BMessage *specifier,
 }
 
 
-status_t
-BShelf::GetSupportedSuites(BMessage *message)
+status_t BShelf::GetSupportedSuites(BMessage *message)
 {
 	status_t err;
 	err = message->AddString("suites", "suite/vnd.Be-shelf");
@@ -837,71 +825,61 @@ BShelf::GetSupportedSuites(BMessage *message)
 }
 
 
-status_t
-BShelf::Perform(perform_code d, void *arg)
+status_t BShelf::Perform(perform_code d, void *arg)
 {
 	return BHandler::Perform(d, arg);
 }
 
 
-bool
-BShelf::AllowsDragging() const
+bool BShelf::AllowsDragging() const
 {
 	return fAllowDragging;
 }
 
 
-void
-BShelf::SetAllowsDragging(bool state)
+void BShelf::SetAllowsDragging(bool state)
 {
 	fAllowDragging = state;
 }
 
 
-bool
-BShelf::AllowsZombies() const
+bool BShelf::AllowsZombies() const
 {
 	return fAllowZombies;
 }
 
 
-void
-BShelf::SetAllowsZombies(bool state)
+void BShelf::SetAllowsZombies(bool state)
 {
 	fAllowZombies = state;
 }
 
 
-bool
-BShelf::DisplaysZombies() const
+bool BShelf::DisplaysZombies() const
 {
 	return fDisplayZombies;
 }
 
 
-void
-BShelf::SetDisplaysZombies(bool state)
+void BShelf::SetDisplaysZombies(bool state)
 {
 	fDisplayZombies = state;
 }
 
 
-bool
-BShelf::IsTypeEnforced() const
+bool BShelf::IsTypeEnforced() const
 {
 	return fTypeEnforced;
 }
 
 
-void
-BShelf::SetTypeEnforced(bool state)
+void BShelf::SetTypeEnforced(bool state)
 {
 	fTypeEnforced = state;
 }
 
 
-status_t
-BShelf::SetSaveLocation(BDataIO *data_io)
+status_t BShelf::SetSaveLocation(BDataIO *data_io)
 {
 	fDirty = true;
 
@@ -916,8 +894,7 @@ BShelf::SetSaveLocation(BDataIO *data_io)
 }
 
 
-status_t
-BShelf::SetSaveLocation(const entry_ref *ref)
+status_t BShelf::SetSaveLocation(const entry_ref *ref)
 {
 	fDirty = true;
 
@@ -946,15 +923,13 @@ BShelf::SaveLocation(entry_ref *ref) const
 }
 
 
-status_t
-BShelf::AddReplicant(BMessage *data, BPoint location)
+status_t BShelf::AddReplicant(BMessage *data, BPoint location)
 {
 	return _AddReplicant(data, &location, fGenCount++);
 }
 
 
-status_t
-BShelf::DeleteReplicant(BView *replicant)
+status_t BShelf::DeleteReplicant(BView *replicant)
 {
 	int32 index = replicant_data::IndexOf(&fReplicants, replicant, true);
 
@@ -966,8 +941,7 @@ BShelf::DeleteReplicant(BView *replicant)
 }
 
 
-status_t
-BShelf::DeleteReplicant(BMessage *data)
+status_t BShelf::DeleteReplicant(BMessage *data)
 {
 	int32 index = replicant_data::IndexOf(&fReplicants, data);
 
@@ -979,8 +953,7 @@ BShelf::DeleteReplicant(BMessage *data)
 }
 
 
-status_t
-BShelf::DeleteReplicant(int32 index)
+status_t BShelf::DeleteReplicant(int32 index)
 {
 	replicant_data *item = (replicant_data*)fReplicants.ItemAt(index);
 	if (!item)
@@ -990,8 +963,7 @@ BShelf::DeleteReplicant(int32 index)
 }
 
 
-int32
-BShelf::CountReplicants() const
+int32 BShelf::CountReplicants() const
 {
 	return fReplicants.CountItems();
 }
@@ -1025,36 +997,31 @@ BShelf::ReplicantAt(int32 index, BView **_view, uint32 *_uniqueID,
 }
 
 
-int32
-BShelf::IndexOf(const BView* replicantView) const
+int32 BShelf::IndexOf(const BView* replicantView) const
 {
 	return replicant_data::IndexOf(&fReplicants, replicantView, false);
 }
 
 
-int32
-BShelf::IndexOf(const BMessage *archive) const
+int32 BShelf::IndexOf(const BMessage *archive) const
 {
 	return replicant_data::IndexOf(&fReplicants, archive);
 }
 
 
-int32
-BShelf::IndexOf(uint32 id) const
+int32 BShelf::IndexOf(uint32 id) const
 {
 	return replicant_data::IndexOf(&fReplicants, id);
 }
 
 
-bool
-BShelf::CanAcceptReplicantMessage(BMessage*) const
+bool BShelf::CanAcceptReplicantMessage(BMessage*) const
 {
 	return true;
 }
 
 
-bool
-BShelf::CanAcceptReplicantView(BRect, BView*, BMessage*) const
+bool BShelf::CanAcceptReplicantView(BRect, BView*, BMessage*) const
 {
 	return true;
 }
@@ -1067,15 +1034,13 @@ BShelf::AdjustReplicantBy(BRect, BMessage*) const
 }
 
 
-void
-BShelf::ReplicantDeleted(int32 index, const BMessage *archive,
+void BShelf::ReplicantDeleted(int32 index, const BMessage *archive,
 	const BView *replicant)
 {
 }
 
 
-extern "C" void
-_ReservedShelf1__6BShelfFv(BShelf *const, int32, const BMessage*, const BView*)
+extern "C" void _ReservedShelf1__6BShelfFv(BShelf *const, int32, const BMessage*, const BView*)
 {
 	// is not contained in BeOS R5's libbe, so we leave it empty
 }
@@ -1102,8 +1067,7 @@ BShelf::operator=(const BShelf &)
 }
 
 
-status_t
-BShelf::_Archive(BMessage *data) const
+status_t BShelf::_Archive(BMessage *data) const
 {
 	status_t status = BHandler::Archive(data);
 	if (status != B_OK)
@@ -1134,8 +1098,7 @@ BShelf::_Archive(BMessage *data) const
 }
 
 
-void
-BShelf::_InitData(BEntry *entry, BDataIO *stream, BView *view,
+void BShelf::_InitData(BEntry *entry, BDataIO *stream, BView *view,
 	bool allowDrags)
 {
 	fContainerView = view;
@@ -1198,8 +1161,7 @@ BShelf::_InitData(BEntry *entry, BDataIO *stream, BView *view,
 }
 
 
-status_t
-BShelf::_DeleteReplicant(replicant_data* item)
+status_t BShelf::_DeleteReplicant(replicant_data* item)
 {
 	BView *view = item->view;
 	if (view == NULL)
@@ -1253,8 +1215,7 @@ BShelf::_DeleteReplicant(replicant_data* item)
 
 
 //! Takes over ownership of \a data on success only
-status_t
-BShelf::_AddReplicant(BMessage *data, BPoint *location, uint32 uniqueID)
+status_t BShelf::_AddReplicant(BMessage *data, BPoint *location, uint32 uniqueID)
 {
 	// Check shelf types if needed
 	if (fTypeEnforced) {
@@ -1407,8 +1368,7 @@ BShelf::_GetReplicant(BMessage *data, BView *view, const BPoint &point,
 
 
 /* static */
-void
-BShelf::_GetReplicantData(BMessage *data, BView *view, BView *&replicant,
+void BShelf::_GetReplicantData(BMessage *data, BView *view, BView *&replicant,
 	BDragger *&dragger, BDragger::relation &relation)
 {
 	// Check if we have a dragger archived as "__widget" inside the message
@@ -1470,8 +1430,7 @@ BShelf::_CreateZombie(BMessage *data, BDragger *&dragger)
 }
 
 
-status_t
-BShelf::_GetProperty(BMessage *msg, BMessage *reply)
+status_t BShelf::_GetProperty(BMessage *msg, BMessage *reply)
 {
 	uint32 ID;
 	status_t err = B_ERROR;

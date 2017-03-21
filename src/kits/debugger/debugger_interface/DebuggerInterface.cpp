@@ -71,16 +71,14 @@ DebuggerInterface::~DebuggerInterface()
 }
 
 
-bool
-DebuggerInterface::IsPostMortem() const
+bool DebuggerInterface::IsPostMortem() const
 {
 	// only true for core file interfaces
 	return false;
 }
 
 
-status_t
-DebuggerInterface::GetElfSymbols(const char* filePath, int64 textDelta,
+status_t DebuggerInterface::GetElfSymbols(const char* filePath, int64 textDelta,
 	BObjectList<SymbolInfo>& infos)
 {
 	// open the ELF file
@@ -102,8 +100,7 @@ DebuggerInterface::GetElfSymbols(const char* filePath, int64 textDelta,
 }
 
 
-status_t
-DebuggerInterface::GetElfSymbols(const void* symbolTable, uint32 symbolCount,
+status_t DebuggerInterface::GetElfSymbols(const void* symbolTable, uint32 symbolCount,
 	uint32 symbolTableEntrySize, const char* stringTable,
 	uint32 stringTableSize, bool is64Bit, bool swappedByteOrder,
 	int64 textDelta, BObjectList<SymbolInfo>& infos)
@@ -129,8 +126,7 @@ DebuggerInterface::GetElfSymbols(const void* symbolTable, uint32 symbolCount,
 }
 
 
-status_t
-DebuggerInterface::GetElfSymbols(ElfSymbolLookup* symbolLookup,
+status_t DebuggerInterface::GetElfSymbols(ElfSymbolLookup* symbolLookup,
 	BObjectList<SymbolInfo>& infos)
 {
 	SymbolInfo symbolInfo;

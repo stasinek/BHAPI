@@ -59,8 +59,7 @@ LongAndDragTrackingFilter::~LongAndDragTrackingFilter()
 }
 
 
-void
-LongAndDragTrackingFilter::_StopTracking()
+void LongAndDragTrackingFilter::_StopTracking()
 {
 	delete fMessageRunner;
 	fMessageRunner = NULL;

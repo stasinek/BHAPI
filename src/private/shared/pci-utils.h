@@ -8,8 +8,7 @@
 
 #include <stdio.h>
 
-static void
-get_class_info(uint8 pci_class_base_id, uint8 pci_class_sub_id, uint8 pci_class_api_id, char *classInfo, size_t size)
+static void get_class_info(uint8 pci_class_base_id, uint8 pci_class_sub_id, uint8 pci_class_api_id, char *classInfo, size_t size)
 {
 	if (pci_class_base_id == 0x80)
 		snprintf(classInfo, size, " (Other)");
@@ -36,8 +35,7 @@ get_class_info(uint8 pci_class_base_id, uint8 pci_class_sub_id, uint8 pci_class_
 	}
 }
 
-static void
-get_vendor_info(uint16 vendorID, const char **venShort, const char **venFull)
+static void get_vendor_info(uint16 vendorID, const char **venShort, const char **venFull)
 {
 	int i;
 	for (i = 0; i < (int)PCI_VENTABLE_LEN; i++) {
@@ -58,8 +56,7 @@ get_vendor_info(uint16 vendorID, const char **venShort, const char **venFull)
 }
 
 
-static void
-get_device_info(uint16 vendorID, uint16 deviceID, 
+static void get_device_info(uint16 vendorID, uint16 deviceID, 
 	uint16 subvendorID, uint16 subsystemID, const char **devShort, const char **devFull)
 {
 	int i;

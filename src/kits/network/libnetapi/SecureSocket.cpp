@@ -85,8 +85,7 @@ BSecureSocket::Private::~Private()
 }
 
 
-status_t
-BSecureSocket::Private::InitCheck()
+status_t BSecureSocket::Private::InitCheck()
 {
 	if (fBIO == NULL)
 		return B_NO_MEMORY;
@@ -94,8 +93,7 @@ BSecureSocket::Private::InitCheck()
 }
 
 
-status_t
-BSecureSocket::Private::ErrorCode(int returnValue)
+status_t BSecureSocket::Private::ErrorCode(int returnValue)
 {
 	int error = SSL_get_error(fSSL, returnValue);
 	switch (error) {
@@ -175,8 +173,7 @@ BSecureSocket::Private::VerifyCallback(int ok, X509_STORE_CTX* ctx)
 }
 
 
-/* static */ void
-BSecureSocket::Private::_CreateContext()
+/* static */ void BSecureSocket::Private::_CreateContext()
 {
 	sContext = SSL_CTX_new(SSLv23_method());
 
@@ -256,8 +253,7 @@ BSecureSocket::~BSecureSocket()
 }
 
 
-status_t
-BSecureSocket::Connect(const BNetworkAddress& peer, bigtime_t timeout)
+status_t BSecureSocket::Connect(const BNetworkAddress& peer, bigtime_t timeout)
 {
 	status_t status = InitCheck();
 	if (status != B_OK)
@@ -271,8 +267,7 @@ BSecureSocket::Connect(const BNetworkAddress& peer, bigtime_t timeout)
 }
 
 
-void
-BSecureSocket::Disconnect()
+void BSecureSocket::Disconnect()
 {
 	if (IsConnected()) {
 		if (fPrivate->fSSL != NULL)
@@ -283,8 +278,7 @@ BSecureSocket::Disconnect()
 }
 
 
-status_t
-BSecureSocket::WaitForReadable(bigtime_t timeout) const
+status_t BSecureSocket::WaitForReadable(bigtime_t timeout) const
 {
 	if (fInitStatus != B_OK)
 		return fInitStatus;
@@ -298,8 +292,7 @@ BSecureSocket::WaitForReadable(bigtime_t timeout) const
 }
 
 
-status_t
-BSecureSocket::InitCheck()
+status_t BSecureSocket::InitCheck()
 {
 	if (fPrivate == NULL)
 		return B_NO_MEMORY;
@@ -309,8 +302,7 @@ BSecureSocket::InitCheck()
 }
 
 
-bool
-BSecureSocket::CertificateVerificationFailed(BCertificate&, const char*)
+bool BSecureSocket::CertificateVerificationFailed(BCertificate&, const char*)
 {
 	// Until apps actually make use of the certificate API, let's keep the old
 	// behavior and accept all connections, even if the certificate validation
@@ -350,8 +342,7 @@ BSecureSocket::Write(const void* buffer, size_t size)
 }
 
 
-status_t
-BSecureSocket::_Setup()
+status_t BSecureSocket::_Setup()
 {
 	// Do this only after BSocket::Connect has checked wether we're already
 	// connected. We don't want to kill an existing SSL session, as that would
@@ -410,29 +401,25 @@ BSecureSocket::~BSecureSocket()
 }
 
 
-bool
-BSecureSocket::CertificateVerificationFailed(BCertificate& certificate, const char*)
+bool BSecureSocket::CertificateVerificationFailed(BCertificate& certificate, const char*)
 {
 	(void)certificate;
 	return false;
 }
 
 
-status_t
-BSecureSocket::Connect(const BNetworkAddress& peer, bigtime_t timeout)
+status_t BSecureSocket::Connect(const BNetworkAddress& peer, bigtime_t timeout)
 {
 	return fInitStatus = B_UNSUPPORTED;
 }
 
 
-void
-BSecureSocket::Disconnect()
+void BSecureSocket::Disconnect()
 {
 }
 
 
-status_t
-BSecureSocket::WaitForReadable(bigtime_t timeout) const
+status_t BSecureSocket::WaitForReadable(bigtime_t timeout) const
 {
 	return B_UNSUPPORTED;
 }
@@ -455,15 +442,13 @@ BSecureSocket::Write(const void* buffer, size_t size)
 }
 
 
-status_t
-BSecureSocket::InitCheck()
+status_t BSecureSocket::InitCheck()
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-BSecureSocket::_Setup()
+status_t BSecureSocket::_Setup()
 {
 	return B_UNSUPPORTED;
 }

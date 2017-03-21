@@ -341,8 +341,7 @@ Base<ParentBuilder>::Base()
 
 
 template<typename ParentBuilder>
-void
-Base<ParentBuilder>::SetParent(ParentBuilder* parent)
+void Base<ParentBuilder>::SetParent(ParentBuilder* parent)
 {
 	fParent = parent;
 }

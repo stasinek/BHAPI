@@ -14,8 +14,7 @@
 namespace BPackageKit {
 
 
-const char*
-BPackageResolvableExpression
+const char*  BPackageResolvableExpression
 ::kOperatorNames[B_PACKAGE_RESOLVABLE_OP_ENUM_COUNT] = {
 	"<",
 	"<=",
@@ -66,8 +65,7 @@ BPackageResolvableExpression::BPackageResolvableExpression(
 }
 
 
-status_t
-BPackageResolvableExpression::InitCheck() const
+status_t BPackageResolvableExpression::InitCheck() const
 {
 	if (fName.Length() == 0)
 		return B_NO_INIT;
@@ -114,8 +112,7 @@ BPackageResolvableExpression::ToString() const
 }
 
 
-status_t
-BPackageResolvableExpression::SetTo(const BString& expressionString)
+status_t BPackageResolvableExpression::SetTo(const BString& expressionString)
 {
 	fName.Truncate(0);
 	fOperator = B_PACKAGE_RESOLVABLE_OP_ENUM_COUNT;
@@ -126,8 +123,7 @@ BPackageResolvableExpression::SetTo(const BString& expressionString)
 }
 
 
-void
-BPackageResolvableExpression::SetTo(const BString& name,
+void BPackageResolvableExpression::SetTo(const BString& name,
 	BPackageResolvableOperator _operator, const BPackageVersion& version)
 {
 	fName = name;
@@ -138,8 +134,7 @@ BPackageResolvableExpression::SetTo(const BString& name,
 }
 
 
-void
-BPackageResolvableExpression::Clear()
+void BPackageResolvableExpression::Clear()
 {
 	fName.Truncate(0);
 	fOperator = B_PACKAGE_RESOLVABLE_OP_ENUM_COUNT;
@@ -147,8 +142,7 @@ BPackageResolvableExpression::Clear()
 }
 
 
-bool
-BPackageResolvableExpression::Matches(const BPackageVersion& version,
+bool BPackageResolvableExpression::Matches(const BPackageVersion& version,
 	const BPackageVersion& compatibleVersion) const
 {
 	// If no particular version is required, we always match.
@@ -196,8 +190,7 @@ BPackageResolvableExpression::Matches(const BPackageVersion& version,
 }
 
 
-bool
-BPackageResolvableExpression::Matches(const BPackageResolvable& provides) const
+bool BPackageResolvableExpression::Matches(const BPackageResolvable& provides) const
 {
 	if (provides.Name() != fName)
 		return false;

@@ -6,7 +6,7 @@
 #define _KERNEL_ARCH_x86_SYSTEM_INFO_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #ifdef __cplusplus
 extern "C" {

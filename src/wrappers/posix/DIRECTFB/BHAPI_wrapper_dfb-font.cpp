@@ -129,7 +129,7 @@ EDFBFont::Attach(void (*callback)(void*), void *data)
 }
 
 
-bool
+bool 
 EDFBFont::Detach(bhapi::font_detach_callback *callback)
 {
 	if(fEngine == NULL) return false;
@@ -140,21 +140,21 @@ EDFBFont::Detach(bhapi::font_detach_callback *callback)
 }
 
 
-bool
+bool 
 EDFBFont::IsValid() const
 {
 	return(fEngine != NULL && fDFBFont != NULL && Family() != NULL && Style() != NULL);
 }
 
 
-bool
+bool 
 EDFBFont::IsScalable() const
 {
 	return fScalable;
 }
 
 
-void
+void 
 EDFBFont::ForceFontAliasing(bool enable)
 {
 	if(fEngine == NULL) return;
@@ -222,7 +222,7 @@ EDFBFont::StringWidth(const char *string, float size, float spacing, float shear
 }
 
 
-void
+void 
 EDFBFont::GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const
 {
 	if(fEngine == NULL || height == NULL) return;
@@ -338,7 +338,7 @@ EDFBFont::RenderString(BHandler *_view, const char *string, float size, float sp
 }
 
 
-status_t
+status_t 
 EDFBGraphicsEngine::InitalizeFonts()
 {
 	BAutolock <EDFBGraphicsEngine> autolock(this);
@@ -348,13 +348,13 @@ EDFBGraphicsEngine::InitalizeFonts()
 }
 
 
-void
+void 
 EDFBGraphicsEngine::DestroyFonts()
 {
 }
 
 
-status_t
+status_t 
 EDFBGraphicsEngine::UpdateFonts(bool check_only)
 {
 	BString fonts_dirs;

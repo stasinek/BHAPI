@@ -37,8 +37,7 @@ BCardView::~BCardView()
 }
 
 
-void
-BCardView::SetLayout(BLayout* layout)
+void BCardView::SetLayout(BLayout* layout)
 {
 	if (dynamic_cast<BCardLayout*>(layout) == NULL)
 		return;
@@ -63,8 +62,7 @@ BCardView::Instantiate(BMessage* from)
 }
 
 
-status_t
-BCardView::Perform(perform_code d, void* arg)
+status_t BCardView::Perform(perform_code d, void* arg)
 {
 	return BView::Perform(d, arg);
 }

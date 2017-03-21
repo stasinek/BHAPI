@@ -123,14 +123,14 @@ BMenu::~BMenu()
 }
 
 
-bool
+bool 
 BMenu::AddItem(BMenuItem *item)
 {
 	return AddItem(item, fMenuItems.CountItems());
 }
 
 
-bool
+bool 
 BMenu::AddItem(BMenuItem *item,  __be_int32 index)
 {
 	if(!item || item->Menu() != NULL || fLayout == B_ITEMS_IN_MATRIX) return false;
@@ -147,7 +147,7 @@ BMenu::AddItem(BMenuItem *item,  __be_int32 index)
 }
 
 
-bool
+bool 
 BMenu::AddItem(BMenuItem *item, BRect frame)
 {
 	if(!item || item->Menu() != NULL || !frame.IsValid() || fLayout != B_ITEMS_IN_MATRIX) return false;
@@ -164,14 +164,14 @@ BMenu::AddItem(BMenuItem *item, BRect frame)
 }
 
 
-bool
+bool 
 BMenu::AddItem(BMenu *menu)
 {
 	return AddItem(menu, fMenuItems.CountItems());
 }
 
 
-bool
+bool 
 BMenu::AddItem(BMenu *menu,  __be_int32 index)
 {
 	if(!menu || menu->Superitem() != NULL || fLayout == B_ITEMS_IN_MATRIX) return false;
@@ -198,7 +198,7 @@ BMenu::AddItem(BMenu *menu,  __be_int32 index)
 }
 
 
-bool
+bool 
 BMenu::AddItem(BMenu *menu, BRect frame)
 {
 	if(!menu || menu->Superitem() != NULL || !frame.IsValid() || fLayout != B_ITEMS_IN_MATRIX) return false;
@@ -223,7 +223,7 @@ BMenu::AddItem(BMenu *menu, BRect frame)
 }
 
 
-bool
+bool 
 BMenu::AddSeparatorItem()
 {
 	if(fLayout == B_ITEMS_IN_MATRIX) return false;
@@ -241,7 +241,7 @@ BMenu::AddSeparatorItem()
 }
 
 
-bool
+bool 
 BMenu::RemoveItem(BMenuItem *item)
 {
 	__be_int32 index = IndexOf(item);
@@ -273,7 +273,7 @@ BMenu::RemoveItem(__be_int32 index)
 }
 
 
-bool
+bool 
 BMenu::RemoveItem(BMenu *menu)
 {
 	if(!menu || menu->fSuperitem == NULL || menu->fSuperitem->fMenu != this) return false;
@@ -403,7 +403,7 @@ BMenu::Superitem() const
 }
 
 
-status_t
+status_t 
 BMenu::SetTargetForItems(BHandler *target)
 {
 	status_t status = B_OK;
@@ -414,7 +414,7 @@ BMenu::SetTargetForItems(BHandler *target)
 }
 
 
-status_t
+status_t 
 BMenu::SetTargetForItems(BMessenger messenger)
 {
 	for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
@@ -428,7 +428,7 @@ BMenu::SetTargetForItems(BMessenger messenger)
 }
 
 
-void
+void 
 BMenu::SetEnabled(bool state)
 {
 	if(BView::IsEnabled() != state)
@@ -454,7 +454,7 @@ BMenu::SetEnabled(bool state)
 }
 
 
-bool
+bool 
 BMenu::IsEnabled() const
 {
 	if(BView::IsEnabled() == false) return false;
@@ -463,7 +463,7 @@ BMenu::IsEnabled() const
 }
 
 
-void
+void 
 BMenu::AttachedToWindow()
 {
     if(is_instance_of(Window(), ESubmenuWindow)) SetEventMask(B_POINTER_EVENTS | B_KEYBOARD_EVENTS);
@@ -496,7 +496,7 @@ BMenu::AttachedToWindow()
 }
 
 
-void
+void 
 BMenu::DetachedFromWindow()
 {
 	Window()->StopWatchingAll(this);
@@ -511,7 +511,7 @@ BMenu::DetachedFromWindow()
 }
 
 
-void
+void 
 BMenu::MessageReceived(BMessage *msg)
 {
 	bool processed = false;
@@ -590,7 +590,7 @@ BMenu::MessageReceived(BMessage *msg)
 }
 
 
-void
+void 
 BMenu::MouseDown(BPoint where)
 {
 	if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0 || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON)) return;
@@ -629,7 +629,7 @@ BMenu::MouseDown(BPoint where)
 }
 
 
-void
+void 
 BMenu::MouseUp(BPoint where)
 {
 	if(fTrackingIndex >= 0)
@@ -694,7 +694,7 @@ BMenu::MouseUp(BPoint where)
 }
 
 
-void
+void 
 BMenu::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 	if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0 || !VisibleBounds().Contains(where)) return;
@@ -726,7 +726,7 @@ BMenu::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 }
 
 
-void
+void 
 BMenu::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0 || numBytes != 1 || bytes == NULL) return;
@@ -891,7 +891,7 @@ BMenu::KeyDown(const char *bytes,  __be_int32 numBytes)
 }
 
 
-void
+void 
 BMenu::KeyUp(const char *bytes,  __be_int32 numBytes)
 {
 	if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0 || numBytes != 1 || bytes == NULL) return;
@@ -1191,7 +1191,7 @@ BMenu::FindItem(BPoint where)
 }
 
 
-void
+void 
 BMenu::Refresh()
 {
     if(is_instance_of(Window(), ESubmenuWindow) || fResizeToFit)
@@ -1211,7 +1211,7 @@ BMenu::Refresh()
 }
 
 
-void
+void 
 BMenu::Draw(BRect updateRect)
 {
 	if(!IsVisible()) return;
@@ -1280,7 +1280,7 @@ BMenu::Layout() const
 }
 
 
-void
+void 
 BMenu::SetLayout(bhapi::menu_layout layout, float width, float height, bool resizeToFit)
 {
 	fLayout = layout;
@@ -1298,7 +1298,7 @@ BMenu::SetLayout(bhapi::menu_layout layout, float width, float height, bool resi
 }
 
 
-void
+void 
 BMenu::SetRadioMode(bool state)
 {
 	if(fRadioMode != state)
@@ -1334,7 +1334,7 @@ BMenu::SetRadioMode(bool state)
 }
 
 
-bool
+bool 
 BMenu::IsRadioMode() const
 {
 	return fRadioMode;
@@ -1370,7 +1370,7 @@ BMenu::FindMarked(__be_int32 *index) const
 }
 
 
-void
+void 
 BMenu::SetLabelFromMarked(bool state)
 {
 	if(fLabelFromMarked != state)
@@ -1401,14 +1401,14 @@ BMenu::SetLabelFromMarked(bool state)
 }
 
 
-bool
+bool 
 BMenu::IsLabelFromMarked() const
 {
 	return(fRadioMode ? fLabelFromMarked : false);
 }
 
 
-void
+void 
 BMenu::GetPreferredSize(float *width, float *height)
 {
 	if(!width && !height) return;
@@ -1484,7 +1484,7 @@ ESubmenuView::~ESubmenuView()
 }
 
 
-void
+void 
 ESubmenuView::Draw(BRect updateRect)
 {
 	if(!(Bounds().InsetByCopy(1, 1).Contains(updateRect)))
@@ -1540,14 +1540,14 @@ ESubmenuWindow::~ESubmenuWindow()
 }
 
 
-bool
+bool 
 ESubmenuWindow::IsDependsOnOthersWhenQuitRequested() const
 {
 	return true;
 }
 
 
-void
+void 
 ESubmenuWindow::DispatchMessage(BMessage *msg, BHandler *target)
 {
 	if(target == this && msg->what == _MENU_EVENT_)
@@ -1569,7 +1569,7 @@ ESubmenuWindow::DispatchMessage(BMessage *msg, BHandler *target)
 }
 
 
-void
+void 
 ESubmenuWindow::FrameMoved(BPoint new_position)
 {
 	if(IsHidden() || fMenu == NULL || fMenu->Supermenu() == NULL || fMenu->Supermenu()->Window() == NULL) return;
@@ -1577,7 +1577,7 @@ ESubmenuWindow::FrameMoved(BPoint new_position)
 }
 
 
-bool
+bool 
 ESubmenuWindow::QuitRequested()
 {
 	if(!(fMenu == NULL || fMenu->Window() != this))
@@ -1594,7 +1594,7 @@ ESubmenuWindow::QuitRequested()
 }
 
 
-bool
+bool 
 BMenu::PopUp(BPoint where, bool selectFirstItem)
 {
 	if(Window() != NULL) return false;
@@ -1631,7 +1631,7 @@ BMenu::PopUp(BPoint where, bool selectFirstItem)
 }
 
 
-void
+void 
 BMenu::ClosePopUp()
 {
 	ESubmenuWindow *win = cast_as(Window(), ESubmenuWindow);
@@ -1657,7 +1657,7 @@ BMenu::ClosePopUp()
 
 //#define TEMP_DEBUG(Exp)	{if((Exp)) BHAPI_DEBUG("[INTERFACE]: %s --- %s", __PRETTY_FUNCTION__, #Exp);}
 
-bool
+bool 
 BMenu::GetPopUpWhere(BPoint *where)
 {
 	if(!where) return false;
@@ -1704,7 +1704,7 @@ BMenu::GetPopUpWhere(BPoint *where)
 }
 
 
-void
+void 
 BMenu::SetItemMargins(float left, float top, float right, float bottom)
 {
 	if(left < 0) left = 0;
@@ -1720,7 +1720,7 @@ BMenu::SetItemMargins(float left, float top, float right, float bottom)
 }
 
 
-void
+void 
 BMenu::GetItemMargins(float *left, float *top, float *right, float *bottom) const
 {
 	if(left) *left = fMargins.left;
@@ -1738,7 +1738,7 @@ BMenu::CurrentSelection() const
 }
 
 
-void
+void 
 BMenu::ItemInvoked(BMenuItem *item)
 {
 	if(fRadioMode == false || item == NULL || item->fEnabled == false) return;
@@ -1746,7 +1746,7 @@ BMenu::ItemInvoked(BMenuItem *item)
 }
 
 
-void
+void 
 BMenu::SelectItem(BMenuItem *item, bool showSubmenu, bool selectFirstItem)
 {
 	if(!(item == NULL || item->fMenu == this)) return;
@@ -1784,7 +1784,7 @@ BMenu::SelectItem(BMenuItem *item, bool showSubmenu, bool selectFirstItem)
 }
 
 
-void
+void 
 BMenu::Hide()
 {
 	BView::Hide();

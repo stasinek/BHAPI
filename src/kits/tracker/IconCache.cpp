@@ -130,8 +130,7 @@ IconCacheEntry::~IconCacheEntry()
 }
 
 
-void
-IconCacheEntry::SetAliasFor(const SharedIconCache* sharedCache,
+void IconCacheEntry::SetAliasFor(const SharedIconCache* sharedCache,
 	const SharedCacheEntry* entry)
 {
 	sharedCache->SetAliasFor(this, entry);
@@ -157,8 +156,7 @@ IconCacheEntry::ResolveIfAlias(const SharedIconCache* sharedCache,
 }
 
 
-bool
-IconCacheEntry::CanConstructBitmap(IconDrawMode mode, icon_size) const
+bool IconCacheEntry::CanConstructBitmap(IconDrawMode mode, icon_size) const
 {
 	if (mode == kSelected) {
 		// for now only
@@ -169,8 +167,7 @@ IconCacheEntry::CanConstructBitmap(IconDrawMode mode, icon_size) const
 }
 
 
-bool
-IconCacheEntry::HaveIconBitmap(IconDrawMode mode, icon_size size) const
+bool IconCacheEntry::HaveIconBitmap(IconDrawMode mode, icon_size size) const
 {
 	ASSERT(mode == kSelected || mode == kNormalIcon);
 		// for now only
@@ -211,8 +208,7 @@ IconCacheEntry::IconForMode(IconDrawMode mode, icon_size size) const
 }
 
 
-bool
-IconCacheEntry::IconHitTest(BPoint where, IconDrawMode mode,
+bool IconCacheEntry::IconHitTest(BPoint where, IconDrawMode mode,
 	icon_size size) const
 {
 	ASSERT(where.x < size && where.y < size);
@@ -273,8 +269,7 @@ IconCacheEntry::ConstructBitmap(IconDrawMode requestedMode, icon_size size,
 }
 
 
-bool
-IconCacheEntry::AlternateModeForIconConstructing(IconDrawMode requestedMode,
+bool IconCacheEntry::AlternateModeForIconConstructing(IconDrawMode requestedMode,
 	IconDrawMode &alternate, icon_size)
 {
 	if ((requestedMode & kSelected) != 0) {
@@ -287,8 +282,7 @@ IconCacheEntry::AlternateModeForIconConstructing(IconDrawMode requestedMode,
 }
 
 
-void
-IconCacheEntry::SetIcon(BBitmap* bitmap, IconDrawMode mode, icon_size size,
+void IconCacheEntry::SetIcon(BBitmap* bitmap, IconDrawMode mode, icon_size size,
 	bool /*create*/)
 {
 	if (mode == kNormalIcon) {
@@ -1071,8 +1065,7 @@ IconCache::Preload(AutoLock<SimpleIconCache>* nodeCacheLocker,
 }
 
 
-void
-IconCache::Draw(Model* model, BView* view, BPoint where, IconDrawMode mode,
+void IconCache::Draw(Model* model, BView* view, BPoint where, IconDrawMode mode,
 	icon_size size, bool async)
 {
 	// the following does not actually lock the caches, we are using the
@@ -1101,8 +1094,7 @@ IconCache::Draw(Model* model, BView* view, BPoint where, IconDrawMode mode,
 }
 
 
-void
-IconCache::SyncDraw(Model* model, BView* view, BPoint where,
+void IconCache::SyncDraw(Model* model, BView* view, BPoint where,
 	IconDrawMode mode, icon_size size,
 	void (*blitFunc)(BView*, BPoint, BBitmap*, void*),
 	void* passThruState)
@@ -1124,8 +1116,7 @@ IconCache::SyncDraw(Model* model, BView* view, BPoint where,
 }
 
 
-void
-IconCache::Preload(Model* model, IconDrawMode mode, icon_size size,
+void IconCache::Preload(Model* model, IconDrawMode mode, icon_size size,
 	bool permanent)
 {
 	AutoLock<SimpleIconCache> nodeCacheLocker(&fNodeCache, false);
@@ -1136,8 +1127,7 @@ IconCache::Preload(Model* model, IconDrawMode mode, icon_size size,
 }
 
 
-status_t
-IconCache::Preload(const char* fileType, IconDrawMode mode, icon_size size)
+status_t IconCache::Preload(const char* fileType, IconDrawMode mode, icon_size size)
 {
 	AutoLock<SimpleIconCache> sharedCacheLocker(&fSharedCache);
 	LazyBitmapAllocator lazyBitmap(size);
@@ -1172,8 +1162,7 @@ IconCache::Preload(const char* fileType, IconDrawMode mode, icon_size size)
 }
 
 
-void
-IconCache::Deleting(const Model* model)
+void IconCache::Deleting(const Model* model)
 {
 	AutoLock<SimpleIconCache> lock(&fNodeCache);
 
@@ -1184,8 +1173,7 @@ IconCache::Deleting(const Model* model)
 }
 
 
-void
-IconCache::Removing(const Model* model)
+void IconCache::Removing(const Model* model)
 {
 	AutoLock<SimpleIconCache> lock(&fNodeCache);
 
@@ -1194,16 +1182,14 @@ IconCache::Removing(const Model* model)
 }
 
 
-void
-IconCache::Deleting(const BView* view)
+void IconCache::Deleting(const BView* view)
 {
 	AutoLock<SimpleIconCache> lock(&fNodeCache);
 	fNodeCache.Deleting(view);
 }
 
 
-void
-IconCache::IconChanged(Model* model)
+void IconCache::IconChanged(Model* model)
 {
 	AutoLock<SimpleIconCache> lock(&fNodeCache);
 
@@ -1214,8 +1200,7 @@ IconCache::IconChanged(Model* model)
 }
 
 
-void
-IconCache::IconChanged(const char* mimeType, const char* appSignature)
+void IconCache::IconChanged(const char* mimeType, const char* appSignature)
 {
 	AutoLock<SimpleIconCache> sharedLock(&fSharedCache);
 	SharedCacheEntry* entry = fSharedCache.FindItem(mimeType, appSignature);
@@ -1244,8 +1229,7 @@ IconCache::MakeSelectedIcon(const BBitmap* normal, icon_size size,
 
 
 #if xDEBUG
-static void
-DumpBitmap(const BBitmap* bitmap)
+static void DumpBitmap(const BBitmap* bitmap)
 {
 	if (bitmap == NULL) {
 		printf("NULL bitmap passed to DumpBitmap\n");
@@ -1270,8 +1254,7 @@ DumpBitmap(const BBitmap* bitmap)
 #endif
 
 
-void
-IconCache::InitHighlightTable()
+void IconCache::InitHighlightTable()
 {
 	// build the color transform tables for different icon modes
 	BScreen screen(B_MAIN_SCREEN_ID);
@@ -1349,8 +1332,7 @@ IconCache::MakeTransformedIcon(const BBitmap* source, icon_size /*size*/,
 }
 
 
-bool
-IconCache::IconHitTest(BPoint where, const Model* model, IconDrawMode mode,
+bool IconCache::IconHitTest(BPoint where, const Model* model, IconDrawMode mode,
 	icon_size size)
 {
 	AutoLock<SimpleIconCache> nodeCacheLocker(&fNodeCache, false);
@@ -1369,8 +1351,7 @@ IconCache::IconHitTest(BPoint where, const Model* model, IconDrawMode mode,
 }
 
 
-void
-IconCacheEntry::RetireIcons(BObjectList<BBitmap>* retiredBitmapList)
+void IconCacheEntry::RetireIcons(BObjectList<BBitmap>* retiredBitmapList)
 {
 	if (fLargeIcon != NULL) {
 		retiredBitmapList->AddItem(fLargeIcon);
@@ -1422,16 +1403,14 @@ SharedIconCache::SharedIconCache()
 }
 
 
-void
-SharedIconCache::Draw(IconCacheEntry* entry, BView* view, BPoint where,
+void SharedIconCache::Draw(IconCacheEntry* entry, BView* view, BPoint where,
 	IconDrawMode mode, icon_size size, bool async)
 {
 	((SharedCacheEntry*)entry)->Draw(view, where, mode, size, async);
 }
 
 
-void
-SharedIconCache::Draw(IconCacheEntry* entry, BView* view, BPoint where,
+void SharedIconCache::Draw(IconCacheEntry* entry, BView* view, BPoint where,
 	IconDrawMode mode, icon_size size, void (*blitFunc)(BView*, BPoint,
 	BBitmap*, void*), void* passThruState)
 {
@@ -1507,8 +1486,7 @@ SharedIconCache::AddItem(SharedCacheEntry** outstandingEntry,
 }
 
 
-void
-SharedIconCache::IconChanged(SharedCacheEntry* entry)
+void SharedIconCache::IconChanged(SharedCacheEntry* entry)
 {
 	// by now there should be no aliases to entry, just remove entry
 	// itself
@@ -1518,8 +1496,7 @@ SharedIconCache::IconChanged(SharedCacheEntry* entry)
 }
 
 
-void
-SharedIconCache::RemoveAliasesTo(int32 aliasIndex)
+void SharedIconCache::RemoveAliasesTo(int32 aliasIndex)
 {
 	int32 count = fHashTable.VectorSize();
 	for (int32 index = 0; index < count; index++) {
@@ -1530,8 +1507,7 @@ SharedIconCache::RemoveAliasesTo(int32 aliasIndex)
 }
 
 
-void
-SharedIconCache::SetAliasFor(IconCacheEntry* entry,
+void SharedIconCache::SetAliasFor(IconCacheEntry* entry,
 	const SharedCacheEntry* original) const
 {
 	entry->fAliasForIndex = fHashTable.ElementIndex(original);
@@ -1555,8 +1531,7 @@ SharedCacheEntry::SharedCacheEntry(const char* fileType,
 }
 
 
-void
-SharedCacheEntry::Draw(BView* view, BPoint where, IconDrawMode mode,
+void SharedCacheEntry::Draw(BView* view, BPoint where, IconDrawMode mode,
 	icon_size size, bool async)
 {
 	BBitmap* bitmap = IconForMode(mode, size);
@@ -1581,8 +1556,7 @@ SharedCacheEntry::Draw(BView* view, BPoint where, IconDrawMode mode,
 }
 
 
-void
-SharedCacheEntry::Draw(BView* view, BPoint where, IconDrawMode mode,
+void SharedCacheEntry::Draw(BView* view, BPoint where, IconDrawMode mode,
 	icon_size size, void (*blitFunc)(BView*, BPoint, BBitmap*, void*),
 	void* passThruState)
 {
@@ -1594,8 +1568,7 @@ SharedCacheEntry::Draw(BView* view, BPoint where, IconDrawMode mode,
 }
 
 
-uint32
-SharedCacheEntry::Hash(const char* fileType, const char* appSignature)
+uint32 SharedCacheEntry::Hash(const char* fileType, const char* appSignature)
 {
 	uint32 hash = HashString(fileType, 0);
 	if (appSignature != NULL && *appSignature != '\0')
@@ -1605,8 +1578,7 @@ SharedCacheEntry::Hash(const char* fileType, const char* appSignature)
 }
 
 
-uint32
-SharedCacheEntry::Hash() const
+uint32 SharedCacheEntry::Hash() const
 {
 	uint32 hash = HashString(fFileType.String(), 0);
 	if (fAppSignature.Length() > 0)
@@ -1616,16 +1588,14 @@ SharedCacheEntry::Hash() const
 }
 
 
-bool
-SharedCacheEntry::operator==(const SharedCacheEntry &entry) const
+bool SharedCacheEntry::operator==(const SharedCacheEntry &entry) const
 {
 	return fFileType == entry.FileType()
 		&& fAppSignature == entry.AppSignature();
 }
 
 
-void
-SharedCacheEntry::SetTo(const char* fileType, const char* appSignature)
+void SharedCacheEntry::SetTo(const char* fileType, const char* appSignature)
 {
 	fFileType = fileType;
 	fAppSignature = appSignature;
@@ -1666,8 +1636,7 @@ NodeCacheEntry::NodeCacheEntry(const node_ref* node, bool permanent)
 }
 
 
-void
-NodeCacheEntry::Draw(BView* view, BPoint where, IconDrawMode mode,
+void NodeCacheEntry::Draw(BView* view, BPoint where, IconDrawMode mode,
 	icon_size size, bool async)
 {
 	BBitmap* bitmap = IconForMode(mode, size);
@@ -1695,8 +1664,7 @@ NodeCacheEntry::Draw(BView* view, BPoint where, IconDrawMode mode,
 }
 
 
-void
-NodeCacheEntry::Draw(BView* view, BPoint where, IconDrawMode mode,
+void NodeCacheEntry::Draw(BView* view, BPoint where, IconDrawMode mode,
 	icon_size size, void (*blitFunc)(BView*, BPoint, BBitmap*, void*),
 	void* passThruState)
 {
@@ -1715,44 +1683,38 @@ NodeCacheEntry::Node() const
 }
 
 
-uint32
-NodeCacheEntry::Hash() const
+uint32 NodeCacheEntry::Hash() const
 {
 	return Hash(&fRef);
 }
 
 
-uint32
-NodeCacheEntry::Hash(const node_ref* node)
+uint32 NodeCacheEntry::Hash(const node_ref* node)
 {
 	return node->device ^ ((uint32*)&node->node)[0]
 		^ ((uint32*)&node->node)[1];
 }
 
 
-bool
-NodeCacheEntry::operator==(const NodeCacheEntry &entry) const
+bool NodeCacheEntry::operator==(const NodeCacheEntry &entry) const
 {
 	return fRef == entry.fRef;
 }
 
 
-void
-NodeCacheEntry::SetTo(const node_ref* node)
+void NodeCacheEntry::SetTo(const node_ref* node)
 {
 	fRef = *node;
 }
 
 
-bool
-NodeCacheEntry::Permanent() const
+bool NodeCacheEntry::Permanent() const
 {
 	return fPermanent;
 }
 
 
-void
-NodeCacheEntry::MakePermanent()
+void NodeCacheEntry::MakePermanent()
 {
 	fPermanent = true;
 }
@@ -1777,16 +1739,14 @@ NodeIconCache::NodeIconCache()
 }
 
 
-void
-NodeIconCache::Draw(IconCacheEntry* entry, BView* view, BPoint where,
+void NodeIconCache::Draw(IconCacheEntry* entry, BView* view, BPoint where,
 	IconDrawMode mode, icon_size size, bool async)
 {
 	((NodeCacheEntry*)entry)->Draw(view, where, mode, size, async);
 }
 
 
-void
-NodeIconCache::Draw(IconCacheEntry* entry, BView* view, BPoint where,
+void NodeIconCache::Draw(IconCacheEntry* entry, BView* view, BPoint where,
 	IconDrawMode mode, icon_size size,
 	void (*blitFunc)(BView*, BPoint, BBitmap*, void*), void* passThruState)
 {
@@ -1842,8 +1802,7 @@ NodeIconCache::AddItem(NodeCacheEntry** outstandingEntry,
 }
 
 
-void
-NodeIconCache::Deleting(const node_ref* node)
+void NodeIconCache::Deleting(const node_ref* node)
 {
 	NodeCacheEntry* entry = FindItem(node);
 	ASSERT(entry != NULL);
@@ -1854,8 +1813,7 @@ NodeIconCache::Deleting(const node_ref* node)
 }
 
 
-void
-NodeIconCache::Removing(const node_ref* node)
+void NodeIconCache::Removing(const node_ref* node)
 {
 	NodeCacheEntry* entry = FindItem(node);
 	ASSERT(entry != NULL);
@@ -1866,8 +1824,7 @@ NodeIconCache::Removing(const node_ref* node)
 }
 
 
-void
-NodeIconCache::Deleting(const BView*)
+void NodeIconCache::Deleting(const BView*)
 {
 #ifdef NODE_CACHE_ASYNC_DRAWS
 	TRESPASS();
@@ -1875,15 +1832,13 @@ NodeIconCache::Deleting(const BView*)
 }
 
 
-void
-NodeIconCache::IconChanged(const Model* model)
+void NodeIconCache::IconChanged(const Model* model)
 {
 	Deleting(model->node_ref());
 }
 
 
-void
-NodeIconCache::RemoveAliasesTo(int32 aliasIndex)
+void NodeIconCache::RemoveAliasesTo(int32 aliasIndex)
 {
 	int32 count = fHashTable.VectorSize();
 	for (int32 index = 0; index < count; index++) {
@@ -1921,8 +1876,7 @@ SimpleIconCache::SimpleIconCache(const char* name)
 }
 
 
-void
-SimpleIconCache::Draw(IconCacheEntry*, BView*, BPoint, IconDrawMode,
+void SimpleIconCache::Draw(IconCacheEntry*, BView*, BPoint, IconDrawMode,
 	icon_size, bool)
 {
 	TRESPASS();
@@ -1930,8 +1884,7 @@ SimpleIconCache::Draw(IconCacheEntry*, BView*, BPoint, IconDrawMode,
 }
 
 
-void
-SimpleIconCache::Draw(IconCacheEntry*, BView*, BPoint, IconDrawMode,
+void SimpleIconCache::Draw(IconCacheEntry*, BView*, BPoint, IconDrawMode,
 	icon_size, void(*)(BView*, BPoint, BBitmap*, void*), void*)
 {
 	TRESPASS();
@@ -1939,22 +1892,19 @@ SimpleIconCache::Draw(IconCacheEntry*, BView*, BPoint, IconDrawMode,
 }
 
 
-bool
-SimpleIconCache::Lock()
+bool SimpleIconCache::Lock()
 {
 	return fLock.Lock();
 }
 
 
-void
-SimpleIconCache::Unlock()
+void SimpleIconCache::Unlock()
 {
 	fLock.Unlock();
 }
 
 
-bool
-SimpleIconCache::IsLocked() const
+bool SimpleIconCache::IsLocked() const
 {
 	return fLock.IsLocked();
 }

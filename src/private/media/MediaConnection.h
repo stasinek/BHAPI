@@ -64,8 +64,7 @@ public:
 
 	// TODO: while most of the objects for both kinds are common
 	// it would be worthwile to have a private implementation
-	// so that we can better model the differences and avoid
-	// problems.
+	// so that we can better model the differences and avoid 	// problems.
 	bool							IsInput() const;
 	bool 							IsOutput() const;
 

@@ -36,8 +36,7 @@ static BObjectList<BPicture> sPictureList;
 static BLocker sPictureListLock;
 
 
-void
-reconnect_pictures_to_app_server()
+void reconnect_pictures_to_app_server()
 {
 	BAutolock _(sPictureListLock);
 	for (int32 i = 0; i < sPictureList.CountItems(); i++) {
@@ -54,8 +53,7 @@ BPicture::Private::Private(BPicture* picture)
 }
 
 
-void
-BPicture::Private::ReconnectToAppServer()
+void BPicture::Private::ReconnectToAppServer()
 {
 	fPicture->_Upload();
 }
@@ -207,8 +205,7 @@ BPicture::BPicture(const void* data, int32 size)
 }
 
 
-void
-BPicture::_InitData()
+void BPicture::_InitData()
 {
 	fToken = -1;
 	fUsurped = NULL;
@@ -228,8 +225,7 @@ BPicture::~BPicture()
 }
 
 
-void
-BPicture::_DisposeData()
+void BPicture::_DisposeData()
 {
 	if (fToken != -1) {
 		BPrivate::AppServerLink link;
@@ -255,8 +251,7 @@ BPicture::Instantiate(BMessage* data)
 }
 
 
-status_t
-BPicture::Archive(BMessage* data, bool deep) const
+status_t BPicture::Archive(BMessage* data, bool deep) const
 {
 	if (!const_cast<BPicture*>(this)->_AssertLocalCopy())
 		return B_ERROR;
@@ -293,15 +288,13 @@ BPicture::Archive(BMessage* data, bool deep) const
 }
 
 
-status_t
-BPicture::Perform(perform_code code, void* arg)
+status_t BPicture::Perform(perform_code code, void* arg)
 {
 	return BArchivable::Perform(code, arg);
 }
 
 
-status_t
-BPicture::Play(void** callBackTable, int32 tableEntries, void* user)
+status_t BPicture::Play(void** callBackTable, int32 tableEntries, void* user)
 {
 	if (!_AssertLocalCopy())
 		return B_ERROR;
@@ -313,8 +306,7 @@ BPicture::Play(void** callBackTable, int32 tableEntries, void* user)
 }
 
 
-status_t
-BPicture::Flatten(BDataIO* stream)
+status_t BPicture::Flatten(BDataIO* stream)
 {
 	// TODO: what about endianess?
 
@@ -333,8 +325,7 @@ BPicture::Flatten(BDataIO* stream)
 }
 
 
-status_t
-BPicture::Unflatten(BDataIO* stream)
+status_t BPicture::Unflatten(BDataIO* stream)
 {
 	// TODO: clear current picture data?
 
@@ -364,29 +355,25 @@ BPicture::Unflatten(BDataIO* stream)
 }
 
 
-void
-BPicture::_ImportOldData(const void* data, int32 size)
+void BPicture::_ImportOldData(const void* data, int32 size)
 {
 	// TODO: We don't support old data for now
 }
 
 
-void
-BPicture::SetToken(int32 token)
+void BPicture::SetToken(int32 token)
 {
 	fToken = token;
 }
 
 
-int32
-BPicture::Token() const
+int32 BPicture::Token() const
 {
 	return fToken;
 }
 
 
-bool
-BPicture::_AssertLocalCopy()
+bool BPicture::_AssertLocalCopy()
 {
 	if (fExtent->Data() != NULL)
 		return true;
@@ -398,8 +385,7 @@ BPicture::_AssertLocalCopy()
 }
 
 
-bool
-BPicture::_AssertOldLocalCopy()
+bool BPicture::_AssertOldLocalCopy()
 {
 	// TODO: We don't support old data for now
 
@@ -407,8 +393,7 @@ BPicture::_AssertOldLocalCopy()
 }
 
 
-bool
-BPicture::_AssertServerCopy()
+bool BPicture::_AssertServerCopy()
 {
 	if (fToken != -1)
 		return true;
@@ -425,8 +410,7 @@ BPicture::_AssertServerCopy()
 }
 
 
-status_t
-BPicture::_Upload()
+status_t BPicture::_Upload()
 {
 	if (fExtent == NULL || fExtent->Data() == NULL)
 		return B_BAD_VALUE;
@@ -456,8 +440,7 @@ BPicture::_Upload()
 }
 
 
-status_t
-BPicture::_Download()
+status_t BPicture::_Download()
 {
 	ASSERT(fExtent->Data() == NULL);
 	ASSERT(fToken != -1);
@@ -490,8 +473,7 @@ BPicture::_Download()
 }
 
 
-const void*
-BPicture::Data() const
+const void*   BPicture::Data() const
 {
 	if (fExtent->Data() == NULL)
 		const_cast<BPicture*>(this)->_AssertLocalCopy();
@@ -500,8 +482,7 @@ BPicture::Data() const
 }
 
 
-int32
-BPicture::DataSize() const
+int32 BPicture::DataSize() const
 {
 	if (fExtent->Data() == NULL)
 		const_cast<BPicture*>(this)->_AssertLocalCopy();
@@ -510,8 +491,7 @@ BPicture::DataSize() const
 }
 
 
-void
-BPicture::Usurp(BPicture* lameDuck)
+void BPicture::Usurp(BPicture* lameDuck)
 {
 	_DisposeData();
 
@@ -563,8 +543,7 @@ _BPictureExtent_::~_BPictureExtent_()
 }
 
 
-status_t
-_BPictureExtent_::ImportData(const void* data, int32 size)
+status_t _BPictureExtent_::ImportData(const void* data, int32 size)
 {
 	if (data == NULL)
 		return B_BAD_VALUE;
@@ -580,8 +559,7 @@ _BPictureExtent_::ImportData(const void* data, int32 size)
 }
 
 
-status_t
-_BPictureExtent_::Unflatten(BDataIO* stream)
+status_t _BPictureExtent_::Unflatten(BDataIO* stream)
 {
 	if (stream == NULL)
 		return B_BAD_VALUE;
@@ -630,8 +608,7 @@ _BPictureExtent_::Unflatten(BDataIO* stream)
 }
 
 
-status_t
-_BPictureExtent_::Flatten(BDataIO* stream)
+status_t _BPictureExtent_::Flatten(BDataIO* stream)
 {
 	int32 count = fPictures.CountItems();
 	ssize_t bytesWritten = stream->Write(&count, sizeof(count));
@@ -665,8 +642,7 @@ _BPictureExtent_::Flatten(BDataIO* stream)
 }
 
 
-status_t
-_BPictureExtent_::SetSize(int32 size)
+status_t _BPictureExtent_::SetSize(int32 size)
 {
 	if (size < 0)
 		return B_BAD_VALUE;

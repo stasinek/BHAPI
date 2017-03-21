@@ -105,15 +105,13 @@ BSimpleGameSound::Clone() const
 }
 
 
-/* virtual */ status_t
-BSimpleGameSound::Perform(int32 selector, void * data)
+/* virtual */ status_t BSimpleGameSound::Perform(int32 selector, void * data)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::SetIsLooping(bool looping)
+status_t BSimpleGameSound::SetIsLooping(bool looping)
 {
 	gs_attribute attribute;
 
@@ -126,8 +124,7 @@ BSimpleGameSound::SetIsLooping(bool looping)
 }
 
 
-bool
-BSimpleGameSound::IsLooping() const
+bool BSimpleGameSound::IsLooping() const
 {
 	gs_attribute attribute;
 
@@ -141,8 +138,7 @@ BSimpleGameSound::IsLooping() const
 }
 
 
-status_t
-BSimpleGameSound::Init(const entry_ref* inFile)
+status_t BSimpleGameSound::Init(const entry_ref* inFile)
 {
 	BMediaFile file(inFile);
 	gs_audio_format gsformat;
@@ -218,8 +214,7 @@ BSimpleGameSound::Init(const entry_ref* inFile)
 }
 
 
-status_t
-BSimpleGameSound::Init(const void* inData, int64 inFrameCount,
+status_t BSimpleGameSound::Init(const void* inData, int64 inFrameCount,
 	const gs_audio_format* format)
 {
 	gs_id sound;
@@ -242,169 +237,145 @@ BSimpleGameSound::Init(const void* inData, int64 inFrameCount,
  */
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_0(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_0(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_1(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_1(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_2(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_2(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_3(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_3(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_4(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_4(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_5(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_5(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_6(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_6(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_7(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_7(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_8(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_8(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_9(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_9(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_10(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_10(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_11(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_11(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_12(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_12(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_13(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_13(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_14(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_14(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_15(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_15(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_16(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_16(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_17(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_17(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_18(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_18(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_19(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_19(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_20(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_20(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_21(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_21(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_22(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_22(int32 arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t
-BSimpleGameSound::_Reserved_BSimpleGameSound_23(int32 arg, ...)
+status_t BSimpleGameSound::_Reserved_BSimpleGameSound_23(int32 arg, ...)
 {
 	return B_ERROR;
 }

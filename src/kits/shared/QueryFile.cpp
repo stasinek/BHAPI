@@ -52,15 +52,13 @@ BQueryFile::~BQueryFile()
 }
 
 
-status_t
-BQueryFile::InitCheck() const
+status_t BQueryFile::InitCheck() const
 {
 	return fStatus;
 }
 
 
-status_t
-BQueryFile::SetTo(const entry_ref& ref)
+status_t BQueryFile::SetTo(const entry_ref& ref)
 {
 	Unset();
 
@@ -118,8 +116,7 @@ BQueryFile::SetTo(const entry_ref& ref)
 }
 
 
-status_t
-BQueryFile::SetTo(const BEntry& entry)
+status_t BQueryFile::SetTo(const BEntry& entry)
 {
 	entry_ref ref;
 	fStatus = entry.GetRef(&ref);
@@ -130,8 +127,7 @@ BQueryFile::SetTo(const BEntry& entry)
 }
 
 
-status_t
-BQueryFile::SetTo(const char* path)
+status_t BQueryFile::SetTo(const char* path)
 {
 	entry_ref ref;
 	fStatus = get_ref_for_path(path, &ref);
@@ -142,8 +138,7 @@ BQueryFile::SetTo(const char* path)
 }
 
 
-status_t
-BQueryFile::SetTo(BQuery& query)
+status_t BQueryFile::SetTo(BQuery& query)
 {
 	Unset();
 
@@ -158,8 +153,7 @@ BQueryFile::SetTo(BQuery& query)
 }
 
 
-void
-BQueryFile::Unset()
+void BQueryFile::Unset()
 {
 	fStatus = B_NO_INIT;
 	fCurrentVolumeIndex = -1;
@@ -169,37 +163,32 @@ BQueryFile::Unset()
 }
 
 
-status_t
-BQueryFile::SetPredicate(const char* predicate)
+status_t BQueryFile::SetPredicate(const char* predicate)
 {
 	fPredicate = predicate;
 	return B_OK;
 }
 
 
-status_t
-BQueryFile::AddVolume(const BVolume& volume)
+status_t BQueryFile::AddVolume(const BVolume& volume)
 {
 	return fVolumes.AddItem((void*)(addr_t)volume.Device()) ? B_OK : B_NO_MEMORY;
 }
 
 
-status_t
-BQueryFile::AddVolume(dev_t device)
+status_t BQueryFile::AddVolume(dev_t device)
 {
 	return fVolumes.AddItem((void*)(addr_t)device) ? B_OK : B_NO_MEMORY;
 }
 
 
-const char*
-BQueryFile::Predicate() const
+const char*  BQueryFile::Predicate() const
 {
 	return fPredicate.String();
 }
 
 
-int32
-BQueryFile::CountVolumes() const
+int32 BQueryFile::CountVolumes() const
 {
 	return fVolumes.CountItems();
 }
@@ -215,16 +204,14 @@ BQueryFile::VolumeAt(int32 index) const
 }
 
 
-status_t
-BQueryFile::WriteTo(const entry_ref& ref)
+status_t BQueryFile::WriteTo(const entry_ref& ref)
 {
 	// TODO: implement
 	return B_NOT_SUPPORTED;
 }
 
 
-status_t
-BQueryFile::WriteTo(const char* path)
+status_t BQueryFile::WriteTo(const char* path)
 {
 	entry_ref ref;
 	status_t status = get_ref_for_path(path, &ref);
@@ -238,8 +225,7 @@ BQueryFile::WriteTo(const char* path)
 // #pragma mark - BEntryList implementation
 
 
-status_t
-BQueryFile::GetNextEntry(BEntry* entry, bool traverse)
+status_t BQueryFile::GetNextEntry(BEntry* entry, bool traverse)
 {
 	if (fCurrentVolumeIndex == -1) {
 		// Start with first volume
@@ -265,8 +251,7 @@ BQueryFile::GetNextEntry(BEntry* entry, bool traverse)
 }
 
 
-status_t
-BQueryFile::GetNextRef(entry_ref* ref)
+status_t BQueryFile::GetNextRef(entry_ref* ref)
 {
 	if (fCurrentVolumeIndex == -1) {
 		// Start with first volume
@@ -292,8 +277,7 @@ BQueryFile::GetNextRef(entry_ref* ref)
 }
 
 
-int32
-BQueryFile::GetNextDirents(struct dirent* buffer, size_t length, int32 count)
+int32 BQueryFile::GetNextDirents(struct dirent* buffer, size_t length, int32 count)
 {
 	if (fCurrentVolumeIndex == -1) {
 		// Start with first volume
@@ -319,31 +303,27 @@ BQueryFile::GetNextDirents(struct dirent* buffer, size_t length, int32 count)
 }
 
 
-status_t
-BQueryFile::Rewind()
+status_t BQueryFile::Rewind()
 {
 	fCurrentVolumeIndex = -1;
 	return B_OK;
 }
 
 
-int32
-BQueryFile::CountEntries()
+int32 BQueryFile::CountEntries()
 {
 	// not supported
 	return -1;
 }
 
 
-/*static*/ const char*
-BQueryFile::MimeType()
+/*static*/ const char*  BQueryFile::MimeType()
 {
 	return B_QUERY_MIMETYPE;
 }
 
 
-status_t
-BQueryFile::_SetQuery(int32 index)
+status_t BQueryFile::_SetQuery(int32 index)
 {
 	if (fCurrentVolumeIndex >= CountVolumes())
 		return B_ENTRY_NOT_FOUND;

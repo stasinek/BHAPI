@@ -47,8 +47,7 @@ DwarfTeamDebugInfo::~DwarfTeamDebugInfo()
 }
 
 
-status_t
-DwarfTeamDebugInfo::Init()
+status_t DwarfTeamDebugInfo::Init()
 {
 	fManager = new(std::nothrow) DwarfManager(fArchitecture->AddressSize());
 	if (fManager == NULL)
@@ -62,8 +61,7 @@ DwarfTeamDebugInfo::Init()
 }
 
 
-status_t
-DwarfTeamDebugInfo::CreateImageDebugInfo(const ImageInfo& imageInfo,
+status_t DwarfTeamDebugInfo::CreateImageDebugInfo(const ImageInfo& imageInfo,
 	LocatableFile* imageFile, ImageDebugInfoLoadingState& _state,
 	SpecificImageDebugInfo*& _imageDebugInfo)
 {

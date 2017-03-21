@@ -40,8 +40,7 @@ InitRamp(float* value, float set, float frames, bigtime_t duration)
 }
 
 
-bool
-ChangeRamp(_gs_ramp* ramp)
+bool ChangeRamp(_gs_ramp* ramp)
 {
 	if (ramp->frame_count > ramp->frame_total)
 		return true;
@@ -92,8 +91,7 @@ get_sample_size(int32 format)
 }
 
 
-void
-media_to_gs_format(gs_audio_format* dest, media_raw_audio_format* source)
+void media_to_gs_format(gs_audio_format* dest, media_raw_audio_format* source)
 {
 	dest->format = source->format;
 	dest->frame_rate = source->frame_rate;

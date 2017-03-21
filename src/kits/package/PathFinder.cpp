@@ -22,8 +22,7 @@ using namespace BPackageKit::BPrivate;
 using namespace BPackageKit::BManager::BPrivate;
 
 
-static status_t
-find_package(const BPackageResolvableExpression& expression,
+static status_t find_package(const BPackageResolvableExpression& expression,
 	BString& _versionedPackageName)
 {
 	if (expression.InitCheck() != B_OK)
@@ -70,8 +69,7 @@ BPathFinder::BPathFinder(const BResolvableExpression& expression,
 }
 
 
-status_t
-BPathFinder::SetTo(const BResolvableExpression& expression,
+status_t BPathFinder::SetTo(const BResolvableExpression& expression,
 	const char* dependency)
 {
 	BString versionedPackageName;

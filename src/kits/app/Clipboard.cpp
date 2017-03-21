@@ -225,7 +225,7 @@ BMessenger BClipboard::DataSource() const
 	// TODO
 	if(fName == NULL) return BMessenger();
 
-	return bhapi::be_app_messenger;
+	return bhapi::__be_app_messenger;
 }
 
 BMessage* BClipboard::Data() const

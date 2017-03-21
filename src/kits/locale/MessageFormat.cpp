@@ -39,15 +39,13 @@ BMessageFormat::~BMessageFormat()
 }
 
 
-status_t
-BMessageFormat::InitCheck()
+status_t BMessageFormat::InitCheck()
 {
 	return fInitStatus;
 }
 
 
-status_t
-BMessageFormat::Format(BString& output, const int64 arg) const
+status_t BMessageFormat::Format(BString& output, const int64 arg) const
 {
 	if (fInitStatus != B_OK)
 		return fInitStatus;
@@ -71,8 +69,7 @@ BMessageFormat::Format(BString& output, const int64 arg) const
 }
 
 
-status_t
-BMessageFormat::_Initialize(const UnicodeString& pattern)
+status_t BMessageFormat::_Initialize(const UnicodeString& pattern)
 {
 	fInitStatus = B_OK;
 	UErrorCode error = U_ZERO_ERROR;

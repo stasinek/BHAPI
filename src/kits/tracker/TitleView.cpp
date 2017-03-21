@@ -65,8 +65,7 @@ static rgb_color sShadowColor;
 static rgb_color sDarkShadowColor;
 
 
-static void
-_DrawLine(BPoseView* view, BPoint from, BPoint to)
+static void _DrawLine(BPoseView* view, BPoint from, BPoint to)
 {
 	rgb_color highColor = view->HighColor();
 	view->SetHighColor(tint_color(view->LowColor(), B_DARKEN_1_TINT));
@@ -75,15 +74,13 @@ _DrawLine(BPoseView* view, BPoint from, BPoint to)
 }
 
 
-static void
-_UndrawLine(BPoseView* view, BPoint from, BPoint to)
+static void _UndrawLine(BPoseView* view, BPoint from, BPoint to)
 {
 	view->StrokeLine(from, to, B_SOLID_LOW);
 }
 
 
-static void
-_DrawOutline(BView* view, BRect where)
+static void _DrawOutline(BView* view, BRect where)
 {
 	where.right++;
 	where.bottom--;
@@ -141,8 +138,7 @@ BTitleView::~BTitleView()
 }
 
 
-void
-BTitleView::Reset()
+void BTitleView::Reset()
 {
 	fTitleList.MakeEmpty();
 
@@ -156,8 +152,7 @@ BTitleView::Reset()
 }
 
 
-void
-BTitleView::AddTitle(BColumn* column, const BColumn* after)
+void BTitleView::AddTitle(BColumn* column, const BColumn* after)
 {
 	int32 count = fTitleList.CountItems();
 	int32 index;
@@ -178,8 +173,7 @@ BTitleView::AddTitle(BColumn* column, const BColumn* after)
 }
 
 
-void
-BTitleView::RemoveTitle(BColumn* column)
+void BTitleView::RemoveTitle(BColumn* column)
 {
 	int32 count = fTitleList.CountItems();
 	for (int32 index = 0; index < count; index++) {
@@ -208,15 +202,13 @@ BTitleView::MaxSize()
 }
 
 
-void
-BTitleView::Draw(BRect rect)
+void BTitleView::Draw(BRect rect)
 {
 	Draw(rect, false);
 }
 
 
-void
-BTitleView::Draw(BRect /*updateRect*/, bool useOffscreen, bool updateOnly,
+void BTitleView::Draw(BRect /*updateRect*/, bool useOffscreen, bool updateOnly,
 	const BColumnTitle* pressedColumn,
 	void (*trackRectBlitter)(BView*, BRect), BRect passThru)
 {
@@ -285,8 +277,7 @@ BTitleView::Draw(BRect /*updateRect*/, bool useOffscreen, bool updateOnly,
 }
 
 
-void
-BTitleView::MouseDown(BPoint where)
+void BTitleView::MouseDown(BPoint where)
 {
 	BContainerWindow* window = dynamic_cast<BContainerWindow*>(Window());
 	if (window == NULL)
@@ -357,8 +348,7 @@ BTitleView::MouseDown(BPoint where)
 }
 
 
-void
-BTitleView::MouseUp(BPoint where)
+void BTitleView::MouseUp(BPoint where)
 {
 	if (fTrackingState == NULL)
 		return;
@@ -370,8 +360,7 @@ BTitleView::MouseUp(BPoint where)
 }
 
 
-void
-BTitleView::MouseMoved(BPoint where, uint32 code, const BMessage* dragMessage)
+void BTitleView::MouseMoved(BPoint where, uint32 code, const BMessage* dragMessage)
 {
 	BContainerWindow* window = dynamic_cast<BContainerWindow*>(Window());
 	if (window == NULL)
@@ -455,8 +444,7 @@ BColumnTitle::BColumnTitle(BTitleView* view, BColumn* column)
 }
 
 
-bool
-BColumnTitle::InColumnResizeArea(BPoint where) const
+bool BColumnTitle::InColumnResizeArea(BPoint where) const
 {
 	BRect edge(Bounds());
 	edge.left = edge.right - kEdgeSize;
@@ -477,8 +465,7 @@ BColumnTitle::Bounds() const
 }
 
 
-void
-BColumnTitle::Draw(BView* view, bool pressed)
+void BColumnTitle::Draw(BView* view, bool pressed)
 {
 	BRect bounds(Bounds());
 
@@ -576,8 +563,7 @@ ColumnTrackState::ColumnTrackState(BTitleView* view, BColumnTitle* title,
 }
 
 
-void
-ColumnTrackState::MouseUp(BPoint where)
+void ColumnTrackState::MouseUp(BPoint where)
 {
 	// if it is pressed shortly and not moved, it is a click
 	// else it is a track
@@ -588,8 +574,7 @@ ColumnTrackState::MouseUp(BPoint where)
 }
 
 
-void
-ColumnTrackState::MouseMoved(BPoint where, uint32 buttons)
+void ColumnTrackState::MouseMoved(BPoint where, uint32 buttons)
 {
 	if (!fHasMoved && system_time() < fPastClickTime) {
 		BRect moveMargin(fFirstClickPoint, fFirstClickPoint);
@@ -619,8 +604,7 @@ ColumnResizeState::ColumnResizeState(BTitleView* view, BColumnTitle* title,
 }
 
 
-bool
-ColumnResizeState::ValueChanged(BPoint where)
+bool ColumnResizeState::ValueChanged(BPoint where)
 {
 	float newWidth = where.x + fInitialTrackOffset
 		- fTitle->fColumn->Offset();
@@ -631,8 +615,7 @@ ColumnResizeState::ValueChanged(BPoint where)
 }
 
 
-void
-ColumnResizeState::Moved(BPoint where, uint32)
+void ColumnResizeState::Moved(BPoint where, uint32)
 {
 	float newWidth = where.x + fInitialTrackOffset
 		- fTitle->fColumn->Offset();
@@ -655,22 +638,19 @@ ColumnResizeState::Moved(BPoint where, uint32)
 }
 
 
-void
-ColumnResizeState::Done(BPoint /*where*/)
+void ColumnResizeState::Done(BPoint /*where*/)
 {
 	UndrawLine();
 }
 
 
-void
-ColumnResizeState::Clicked(BPoint /*where*/)
+void ColumnResizeState::Clicked(BPoint /*where*/)
 {
 	UndrawLine();
 }
 
 
-void
-ColumnResizeState::DrawLine()
+void ColumnResizeState::DrawLine()
 {
 	BPoseView* poseView = fTitleView->PoseView();
 	ASSERT(!poseView->IsDesktopWindow());
@@ -686,8 +666,7 @@ ColumnResizeState::DrawLine()
 }
 
 
-void
-ColumnResizeState::UndrawLine()
+void ColumnResizeState::UndrawLine()
 {
 	if (fLastLineDrawPos < 0)
 		return;
@@ -721,8 +700,7 @@ ColumnDragState::ColumnDragState(BTitleView* view, BColumnTitle* columnTitle,
 // Autoscroll when dragging column left/right
 // fix dragging back a column before the first column (now adds as last)
 // make column swaps/adds not invalidate/redraw columns to the left
-void
-ColumnDragState::Moved(BPoint where, uint32)
+void ColumnDragState::Moved(BPoint where, uint32)
 {
 	// figure out where we are with the mouse
 	BRect titleBounds(fTitleView->Bounds());
@@ -801,8 +779,7 @@ ColumnDragState::Moved(BPoint where, uint32)
 }
 
 
-void
-ColumnDragState::Done(BPoint /*where*/)
+void ColumnDragState::Done(BPoint /*where*/)
 {
 	if (fTrackingRemovedColumn)
 		fTitleView->EndRectTracking();
@@ -810,8 +787,7 @@ ColumnDragState::Done(BPoint /*where*/)
 }
 
 
-void
-ColumnDragState::Clicked(BPoint /*where*/)
+void ColumnDragState::Clicked(BPoint /*where*/)
 {
 	BPoseView* poseView = fTitleView->PoseView();
 	uint32 hash = fTitle->Column()->AttrHash();
@@ -849,22 +825,19 @@ ColumnDragState::Clicked(BPoint /*where*/)
 }
 
 
-bool
-ColumnDragState::ValueChanged(BPoint)
+bool ColumnDragState::ValueChanged(BPoint)
 {
 	return true;
 }
 
 
-void
-ColumnDragState::DrawPressNoOutline()
+void ColumnDragState::DrawPressNoOutline()
 {
 	fTitleView->Draw(fTitleView->Bounds(), true, false, fTitle);
 }
 
 
-void
-ColumnDragState::DrawOutline(float pos)
+void ColumnDragState::DrawOutline(float pos)
 {
 	BRect outline(fTitle->Bounds());
 	outline.OffsetBy(pos, 0);
@@ -873,8 +846,7 @@ ColumnDragState::DrawOutline(float pos)
 }
 
 
-void
-ColumnDragState::UndrawOutline()
+void ColumnDragState::UndrawOutline()
 {
 	fTitleView->Draw(fTitleView->Bounds(), true, false);
 }

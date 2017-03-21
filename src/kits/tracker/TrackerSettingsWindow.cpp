@@ -136,8 +136,7 @@ TrackerSettingsWindow::TrackerSettingsWindow()
 }
 
 
-bool
-TrackerSettingsWindow::QuitRequested()
+bool TrackerSettingsWindow::QuitRequested()
 {
 	if (IsHidden())
 		return true;
@@ -147,8 +146,7 @@ TrackerSettingsWindow::QuitRequested()
 }
 
 
-void
-TrackerSettingsWindow::MessageReceived(BMessage* message)
+void TrackerSettingsWindow::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case kSettingsContentsModified:
@@ -174,8 +172,7 @@ TrackerSettingsWindow::MessageReceived(BMessage* message)
 }
 
 
-void
-TrackerSettingsWindow::Show()
+void TrackerSettingsWindow::Show()
 {
 	if (Lock()) {
 		int32 itemCount = fSettingsTypeListView->CountItems();
@@ -201,8 +198,7 @@ TrackerSettingsWindow::Show()
 }
 
 
-void
-TrackerSettingsWindow::ShowPage(SettingsPage page)
+void TrackerSettingsWindow::ShowPage(SettingsPage page)
 {
 	fSettingsTypeListView->Select(page);
 }
@@ -223,8 +219,7 @@ TrackerSettingsWindow::_ViewAt(int32 i)
 }
 
 
-void
-TrackerSettingsWindow::_HandleChangedContents()
+void TrackerSettingsWindow::_HandleChangedContents()
 {
 	fSettingsTypeListView->Invalidate();
 	_UpdateButtons();
@@ -233,8 +228,7 @@ TrackerSettingsWindow::_HandleChangedContents()
 }
 
 
-void
-TrackerSettingsWindow::_UpdateButtons()
+void TrackerSettingsWindow::_UpdateButtons()
 {
 	int32 itemCount = fSettingsTypeListView->CountItems();
 
@@ -251,8 +245,7 @@ TrackerSettingsWindow::_UpdateButtons()
 }
 
 
-void
-TrackerSettingsWindow::_HandlePressedDefaultsButton()
+void TrackerSettingsWindow::_HandlePressedDefaultsButton()
 {
 	int32 itemCount = fSettingsTypeListView->CountItems();
 
@@ -265,8 +258,7 @@ TrackerSettingsWindow::_HandlePressedDefaultsButton()
 }
 
 
-void
-TrackerSettingsWindow::_HandlePressedRevertButton()
+void TrackerSettingsWindow::_HandlePressedRevertButton()
 {
 	int32 itemCount = fSettingsTypeListView->CountItems();
 
@@ -279,8 +271,7 @@ TrackerSettingsWindow::_HandlePressedRevertButton()
 }
 
 
-void
-TrackerSettingsWindow::_HandleChangedSettingsView()
+void TrackerSettingsWindow::_HandleChangedSettingsView()
 {
 	int32 currentSelection = fSettingsTypeListView->CurrentSelection();
 	if (currentSelection < 0)
@@ -317,8 +308,7 @@ SettingsItem::SettingsItem(const char* label, SettingsView* view)
 }
 
 
-void
-SettingsItem::DrawItem(BView* owner, BRect rect, bool drawEverything)
+void SettingsItem::DrawItem(BView* owner, BRect rect, bool drawEverything)
 {
 	if (fSettingsView) {
 		bool isRevertable = fSettingsView->IsRevertable();

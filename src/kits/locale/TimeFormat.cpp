@@ -48,8 +48,7 @@ BTimeFormat::~BTimeFormat()
 }
 
 
-void
-BTimeFormat::SetTimeFormat(BTimeFormatStyle style,
+void BTimeFormat::SetTimeFormat(BTimeFormatStyle style,
 	const BString& format)
 {
 	fConventions.SetExplicitTimeFormat(style, format);
@@ -80,8 +79,7 @@ BTimeFormat::Format(char* string, size_t maxSize, time_t time,
 }
 
 
-status_t
-BTimeFormat::Format(BString& string, const time_t time,
+status_t BTimeFormat::Format(BString& string, const time_t time,
 	const BTimeFormatStyle style, const BTimeZone* timeZone) const
 {
 	ObjectDeleter<DateFormat> timeFormatter(_CreateTimeFormatter(style));
@@ -107,8 +105,7 @@ BTimeFormat::Format(BString& string, const time_t time,
 }
 
 
-status_t
-BTimeFormat::Format(BString& string, int*& fieldPositions, int& fieldCount,
+status_t BTimeFormat::Format(BString& string, int*& fieldPositions, int& fieldCount,
 	time_t time, BTimeFormatStyle style) const
 {
 	ObjectDeleter<DateFormat> timeFormatter(_CreateTimeFormatter(style));
@@ -147,8 +144,7 @@ BTimeFormat::Format(BString& string, int*& fieldPositions, int& fieldCount,
 }
 
 
-status_t
-BTimeFormat::GetTimeFields(BDateElement*& fields, int& fieldCount,
+status_t BTimeFormat::GetTimeFields(BDateElement*& fields, int& fieldCount,
 	BTimeFormatStyle style) const
 {
 	ObjectDeleter<DateFormat> timeFormatter(_CreateTimeFormatter(style));
@@ -203,8 +199,7 @@ BTimeFormat::GetTimeFields(BDateElement*& fields, int& fieldCount,
 }
 
 
-status_t
-BTimeFormat::Parse(BString source, BTimeFormatStyle style, BTime& output)
+status_t BTimeFormat::Parse(BString source, BTimeFormatStyle style, BTime& output)
 {
 	ObjectDeleter<DateFormat> timeFormatter(_CreateTimeFormatter(style));
 	if (timeFormatter.Get() == NULL)

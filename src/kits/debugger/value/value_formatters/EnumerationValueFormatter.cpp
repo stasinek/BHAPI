@@ -21,8 +21,7 @@ EnumerationValueFormatter::~EnumerationValueFormatter()
 }
 
 
-status_t
-EnumerationValueFormatter::FormatValue(Value* _value, BString& _output)
+status_t EnumerationValueFormatter::FormatValue(Value* _value, BString& _output)
 {
 	Config* config = GetConfig();
 	if (config != NULL && config->IntegerFormat() == INTEGER_FORMAT_DEFAULT) {

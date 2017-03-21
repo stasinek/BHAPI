@@ -61,7 +61,7 @@ BScrollBar::~BScrollBar()
 }
 
 
-void
+void 
 BScrollBar::_SetValue(float value, bool response)
 {
 	if(value < fRangeMin) value = fRangeMin;
@@ -86,7 +86,7 @@ BScrollBar::_SetValue(float value, bool response)
 }
 
 
-void
+void 
 BScrollBar::SetValue(float value)
 {
 	_SetValue(value, true);
@@ -100,7 +100,7 @@ BScrollBar::Value() const
 }
 
 
-void
+void 
 BScrollBar::SetProportion(float ratio)
 {
 	if(ratio < 0 || ratio > 1) return;
@@ -124,13 +124,13 @@ BScrollBar::Proportion() const
 }
 
 
-void
+void 
 BScrollBar::ValueChanged(float value)
 {
 }
 
 
-void
+void 
 BScrollBar::SetRange(float min, float max)
 {
 	float rangeMin = min_c(min, max);
@@ -156,7 +156,7 @@ BScrollBar::SetRange(float min, float max)
 }
 
 
-void
+void 
 BScrollBar::GetRange(float *min, float *max) const
 {
 	if(min != NULL) *min = fRangeMin;
@@ -164,7 +164,7 @@ BScrollBar::GetRange(float *min, float *max) const
 }
 
 
-void
+void 
 BScrollBar::SetSteps(float smallStep, float largeStep)
 {
 	if(smallStep > 0)
@@ -174,7 +174,7 @@ BScrollBar::SetSteps(float smallStep, float largeStep)
 }
 
 
-void
+void 
 BScrollBar::GetSteps(float *smallStep, float *largeStep) const
 {
 	if(smallStep != NULL) *smallStep = fStepSmall;
@@ -182,7 +182,7 @@ BScrollBar::GetSteps(float *smallStep, float *largeStep) const
 }
 
 
-status_t
+status_t 
 BScrollBar::SetTarget(BView *target)
 {
 	if(target == this) return B_ERROR;
@@ -227,7 +227,7 @@ BScrollBar::Orientation() const
 }
 
 
-void
+void 
 BScrollBar::Draw(BRect updateRect)
 {
 	if(!IsVisible()) return;
@@ -245,7 +245,7 @@ BScrollBar::Draw(BRect updateRect)
 }
 
 
-void
+void 
 BScrollBar::DetachedFromWindow()
 {
 	fTracking = false;
@@ -253,7 +253,7 @@ BScrollBar::DetachedFromWindow()
 }
 
 
-void
+void 
 BScrollBar::MouseDown(BPoint where)
 {
 	if(fRangeMin == fRangeMax || IsEnabled() == false || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON)) return;
@@ -297,7 +297,7 @@ BScrollBar::MouseDown(BPoint where)
 }
 
 
-void
+void 
 BScrollBar::MouseUp(BPoint where)
 {
 	if(!fTracking) return;
@@ -314,7 +314,7 @@ BScrollBar::MouseUp(BPoint where)
 }
 
 
-void
+void 
 BScrollBar::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 {
 	if(fRangeMin == fRangeMax || IsEnabled() == false) return;
@@ -371,7 +371,7 @@ BScrollBar::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_messag
 }
 
 
-void
+void 
 BScrollBar::doScroll(__be_int8 state)
 {
 	if(state <= 0 || state > 4) return;

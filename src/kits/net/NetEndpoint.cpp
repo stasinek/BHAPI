@@ -108,7 +108,7 @@ BNetEndpoint::BNetEndpoint(const BMessage *from)
 }
 
 
-status_t
+status_t 
 BNetEndpoint::Archive(BMessage *into, bool deep) const
 {
     if(!into) return B_ERROR;
@@ -131,7 +131,7 @@ BNetEndpoint::Instantiate(const BMessage *from)
 }
 
 
-status_t
+status_t 
 BNetEndpoint::InitCheck() const
 {
     return(fSocket == -1 ? B_ERROR : B_OK);
@@ -154,7 +154,7 @@ BNetEndpoint::operator=(const BNetEndpoint &endpoint)
 }
 
 
-status_t
+status_t 
 BNetEndpoint::SetProtocol(int proto)
 {
     if(fProtocol != proto)
@@ -243,7 +243,7 @@ BNetEndpoint::SetNonBlocking(bool state)
 }
 
 
-bool
+bool 
 BNetEndpoint::IsNonBlocking() const
 {
     return fNonBlocking;
@@ -264,7 +264,7 @@ BNetEndpoint::RemoteAddr() const
 }
 
 
-void
+void 
 BNetEndpoint::_Close()
 {
     if(fSocket != -1)
@@ -285,7 +285,7 @@ BNetEndpoint::_Close()
 }
 
 
-void
+void 
 BNetEndpoint::Close()
 {
     _Close();
@@ -293,7 +293,7 @@ BNetEndpoint::Close()
 }
 
 
-status_t
+status_t 
 BNetEndpoint::Bind(const BNetAddress &addr)
 {
     if(fSocket == -1) return B_ERROR;
@@ -316,7 +316,7 @@ BNetEndpoint::Bind(const BNetAddress &addr)
 }
 
 
-status_t
+status_t 
 BNetEndpoint::Bind(__be_uint16 port)
 {
     BNetAddress addr(INADDR_LOOPBACK, port);
@@ -324,7 +324,7 @@ BNetEndpoint::Bind(__be_uint16 port)
 }
 
 
-status_t
+status_t 
 BNetEndpoint::Connect(const BNetAddress &addr)
 {
     if(fSocket == -1) return B_ERROR;
@@ -353,7 +353,7 @@ BNetEndpoint::Connect(const BNetAddress &addr)
 }
 
 
-status_t
+status_t 
 BNetEndpoint::Connect(const char *address,  __be_uint16 port)
 {
     BNetAddress addr(address, port);
@@ -361,7 +361,7 @@ BNetEndpoint::Connect(const char *address,  __be_uint16 port)
 }
 
 
-status_t
+status_t 
 BNetEndpoint::Listen(int backlog)
 {
     if(fSocket == -1) return B_ERROR;
@@ -475,7 +475,7 @@ BNetEndpoint::SendTo(const BNetBuffer &buf, const BNetAddress &to, int flags)
 }
 
 
-void
+void 
 BNetEndpoint::SetTimeout(bigtime_t timeout)
 {
     if(timeout < 0) timeout = 0;
@@ -550,7 +550,7 @@ BNetEndpoint::ReceiveFrom(BNetBuffer &buf, size_t len, const BNetAddress &from, 
 }
 
 
-bool
+bool 
 BNetEndpoint::IsDataPending(bigtime_t _timeout)
 {
     if(fSocket == -1) return false;

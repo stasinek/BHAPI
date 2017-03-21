@@ -31,6 +31,31 @@
 #define BHAPI_ENTRY_H
 
 #include "Path.h"
+#include "Statable.h"
+
+#ifdef __cplusplus /* Just for C++ */
+namespace bhapi {
+#endif
+struct entry_ref {
+                                entry_ref();
+                                entry_ref(dev_t dev, ino_t dir,
+                                    const char* name);
+                                entry_ref(const entry_ref& ref);
+                                ~entry_ref();
+
+            status_t			set_name(const char* name);
+
+            bool				operator==(const entry_ref& ref) const;
+            bool				operator!=(const entry_ref& ref) const;
+            entry_ref&			operator=(const entry_ref& ref);
+
+            dev_t				device;
+            ino_t				directory;
+            char*				name;
+};
+#ifdef __cplusplus /* Just for C++ */
+}
+#endif
 
 #ifdef __cplusplus /* Just for C++ */
 
@@ -48,16 +73,16 @@ public:
     BEntry(const BEntry &entry);
     virtual ~BEntry();
 
+    status_t	InitCheck() const;
+
     status_t	SetTo(const char *dir, const char *leaf, bool traverse = false);
     status_t	SetTo(const BDirectory *dir, const char *leaf, bool traverse = false);
     status_t	SetTo(const char *path, bool traverse = false);
     void		Unset();
 
-    status_t	InitCheck() const;
-
     bool		Exists() const;
-    bool		IsHidden() const;
 
+    bool		IsHidden() const;
     bool		IsFile() const;
     bool		IsDirectory() const;
     bool		IsSymLink() const;
@@ -67,10 +92,9 @@ public:
     status_t	GetCreationTime(bigtime_t *time) const;
     status_t	GetAccessTime(bigtime_t *time) const;
 
-    const char	*Name() const;
+    const char* Name() const;
     status_t	GetName(char *buffer, size_t bufferSize) const;
-
-    const char	*Path() const;
+    const char* Path() const;
     status_t	GetPath(BPath *path) const;
 
     status_t	GetParent(BEntry *entry) const;
@@ -79,15 +103,16 @@ public:
 
     bool		operator==(const BEntry &entry) const;
     bool		operator!=(const BEntry &entry) const;
-    BEntry&		operator=(const BEntry &entry);
+    BEntry&		operator =(const BEntry &entry);
 
 private:
     friend class BDirectory;
-
     char *fName;
 };
 
-#endif /* __cplusplus */
+status_t get_ref_for_path(const char* path, bhapi::entry_ref* ref);
+bool operator<(const bhapi::entry_ref& a, const bhapi::entry_ref& b);
 
+#endif /* __cplusplus */
 #endif /* BHAPI_ENTRY_H */
 

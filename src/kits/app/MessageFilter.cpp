@@ -148,15 +148,13 @@ BMessageFilter::MessageSource() const
 }
 
 
-__be_uint32
-BMessageFilter::Command() const
+__be_uint32 BMessageFilter::Command() const
 {
 	return fCommand;
 }
 
 
-bool
-BMessageFilter::FiltersAnyCommand() const
+bool BMessageFilter::FiltersAnyCommand() const
 {
 	return fFiltersAny;
 }

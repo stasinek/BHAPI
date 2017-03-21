@@ -57,7 +57,7 @@ bhapi::load_addon(const char* path)
 }
 
 
-BHAPI_EXPORT status_t
+BHAPI_EXPORT status_t 
 bhapi::unload_addon(void *data)
 {
 	if(data == NULL) return B_ERROR;
@@ -66,7 +66,7 @@ bhapi::unload_addon(void *data)
 }
 
 
-BHAPI_EXPORT status_t
+BHAPI_EXPORT status_t 
 bhapi::get_image_symbol(void *data, const char *name, void **ptr)
 {
 	if(data == NULL || name == NULL || *name == 0 || ptr == NULL) return B_BAD_VALUE;

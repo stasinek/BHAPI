@@ -94,8 +94,7 @@ BSlowContextMenu::~BSlowContextMenu()
 }
 
 
-void
-BSlowContextMenu::AttachedToWindow()
+void BSlowContextMenu::AttachedToWindow()
 {
 	// showing flag is set immediately as
 	// it may take a while to build the menu's
@@ -121,8 +120,7 @@ BSlowContextMenu::AttachedToWindow()
 }
 
 
-void
-BSlowContextMenu::DetachedFromWindow()
+void BSlowContextMenu::DetachedFromWindow()
 {
 	// see note above in AttachedToWindow
 	fIsShowing = false;
@@ -136,8 +134,7 @@ BSlowContextMenu::DetachedFromWindow()
 }
 
 
-void
-BSlowContextMenu::SetNavDir(const entry_ref* ref)
+void BSlowContextMenu::SetNavDir(const entry_ref* ref)
 {
 	ForceRebuild();
 		// reset the slow menu building mechanism so we can add more stuff
@@ -146,23 +143,20 @@ BSlowContextMenu::SetNavDir(const entry_ref* ref)
 }
 
 
-void
-BSlowContextMenu::ForceRebuild()
+void BSlowContextMenu::ForceRebuild()
 {
 	ClearMenuBuildingState();
 	fMenuBuilt = false;
 }
 
 
-bool
-BSlowContextMenu::NeedsToRebuild() const
+bool BSlowContextMenu::NeedsToRebuild() const
 {
 	return !fMenuBuilt;
 }
 
 
-void
-BSlowContextMenu::ClearMenu()
+void BSlowContextMenu::ClearMenu()
 {
 	RemoveItems(0, CountItems(), true);
 
@@ -170,8 +164,7 @@ BSlowContextMenu::ClearMenu()
 }
 
 
-void
-BSlowContextMenu::ClearMenuBuildingState()
+void BSlowContextMenu::ClearMenuBuildingState()
 {
 	delete fContainer;
 	fContainer = NULL;
@@ -190,8 +183,7 @@ const int32 kItemsToAddChunk = 20;
 const bigtime_t kMaxTimeBuildingMenu = 200000;
 
 
-bool
-BSlowContextMenu::AddDynamicItem(add_state state)
+bool BSlowContextMenu::AddDynamicItem(add_state state)
 {
 	if (fMenuBuilt)
 		return false;
@@ -225,8 +217,7 @@ BSlowContextMenu::AddDynamicItem(add_state state)
 }
 
 
-bool
-BSlowContextMenu::StartBuildingItemList()
+bool BSlowContextMenu::StartBuildingItemList()
 {
 	// return false when done building
 	BEntry entry;
@@ -283,8 +274,7 @@ BSlowContextMenu::StartBuildingItemList()
 }
 
 
-void
-BSlowContextMenu::AddRootItemsIfNeeded()
+void BSlowContextMenu::AddRootItemsIfNeeded()
 {
 	BVolumeRoster roster;
 	roster.Rewind();
@@ -304,8 +294,7 @@ BSlowContextMenu::AddRootItemsIfNeeded()
 }
 
 
-void
-BSlowContextMenu::AddTrashItem()
+void BSlowContextMenu::AddTrashItem()
 {
 	BPath path;
 	if (find_directory(B_TRASH_DIRECTORY, &path) == B_OK) {
@@ -316,8 +305,7 @@ BSlowContextMenu::AddTrashItem()
 }
 
 
-bool
-BSlowContextMenu::AddNextItem()
+bool BSlowContextMenu::AddNextItem()
 {
 	if (fVolsOnly) {
 		BuildVolumeMenu();
@@ -357,8 +345,7 @@ BSlowContextMenu::AddNextItem()
 }
 
 
-void
-BSlowContextMenu::AddOneItem(Model* model)
+void BSlowContextMenu::AddOneItem(Model* model)
 {
 	BMenuItem* item = NewModelItem(model, &fMessage, fMessenger, false,
 		dynamic_cast<BContainerWindow*>(fParentWindow), fTypesList,
@@ -448,8 +435,7 @@ BSlowContextMenu::NewModelItem(Model* model, const BMessage* invokeMessage,
 }
 
 
-void
-BSlowContextMenu::BuildVolumeMenu()
+void BSlowContextMenu::BuildVolumeMenu()
 {
 	BVolumeRoster roster;
 	BVolume	volume;
@@ -492,8 +478,7 @@ BSlowContextMenu::BuildVolumeMenu()
 }
 
 
-void
-BSlowContextMenu::DoneBuildingItemList()
+void BSlowContextMenu::DoneBuildingItemList()
 {
 	// add sorted items to menu
 	if (TrackerSettings().SortFolderNamesFirst())
@@ -517,15 +502,13 @@ BSlowContextMenu::DoneBuildingItemList()
 }
 
 
-void
-BSlowContextMenu::SetTypesList(const BObjectList<BString>* list)
+void BSlowContextMenu::SetTypesList(const BObjectList<BString>* list)
 {
 	fTypesList = list;
 }
 
 
-void
-BSlowContextMenu::SetTarget(const BMessenger &target)
+void BSlowContextMenu::SetTarget(const BMessenger &target)
 {
 	fMessenger = target;
 }
@@ -544,8 +527,7 @@ BSlowContextMenu::InitTrackingHook(bool (*hook)(BMenu*, void*),
 }
 
 
-void
-BSlowContextMenu::SetTrackingHookDeep(BMenu* menu,
+void BSlowContextMenu::SetTrackingHookDeep(BMenu* menu,
 	bool (*func)(BMenu*, void*), void* state)
 {
 	menu->SetTrackingHook(func, state);

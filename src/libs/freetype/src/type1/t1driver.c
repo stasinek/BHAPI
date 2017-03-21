@@ -96,8 +96,7 @@
   *
   */
 
-  static const char*
-  t1_get_ps_name( T1_Face  face )
+  static const char*    t1_get_ps_name( T1_Face  face )
   {
     return (const char*) face->type1.font_name;
   }

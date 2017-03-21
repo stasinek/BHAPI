@@ -45,8 +45,7 @@
    *
    */
 
-  static const char*
-  cid_get_postscript_name( CID_Face  face )
+  static const char*    cid_get_postscript_name( CID_Face  face )
   {
     const char*  result = face->cid.cid_font_name;
 

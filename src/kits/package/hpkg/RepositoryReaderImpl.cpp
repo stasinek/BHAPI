@@ -180,8 +180,7 @@ RepositoryReaderImpl::~RepositoryReaderImpl()
 }
 
 
-status_t
-RepositoryReaderImpl::Init(const char* fileName)
+status_t RepositoryReaderImpl::Init(const char* fileName)
 {
 	// open file
 	int fd = open(fileName, O_RDONLY);
@@ -196,8 +195,7 @@ RepositoryReaderImpl::Init(const char* fileName)
 }
 
 
-status_t
-RepositoryReaderImpl::Init(int fd, bool keepFD)
+status_t RepositoryReaderImpl::Init(int fd, bool keepFD)
 {
 	BFdIO* file = new(std::nothrow) BFdIO(fd, keepFD);
 	if (file == NULL) {
@@ -210,8 +208,7 @@ RepositoryReaderImpl::Init(int fd, bool keepFD)
 }
 
 
-status_t
-RepositoryReaderImpl::Init(BPositionIO* file, bool keepFile)
+status_t RepositoryReaderImpl::Init(BPositionIO* file, bool keepFile)
 {
 	hpkg_repo_header header;
 	status_t error = inherited::Init<hpkg_repo_header, B_HPKG_REPO_MAGIC,
@@ -267,8 +264,7 @@ RepositoryReaderImpl::Init(BPositionIO* file, bool keepFile)
 }
 
 
-status_t
-RepositoryReaderImpl::GetRepositoryInfo(BRepositoryInfo* _repositoryInfo) const
+status_t RepositoryReaderImpl::GetRepositoryInfo(BRepositoryInfo* _repositoryInfo) const
 {
 	if (_repositoryInfo == NULL)
 		return B_BAD_VALUE;
@@ -278,8 +274,7 @@ RepositoryReaderImpl::GetRepositoryInfo(BRepositoryInfo* _repositoryInfo) const
 }
 
 
-status_t
-RepositoryReaderImpl::ParseContent(BRepositoryContentHandler* contentHandler)
+status_t RepositoryReaderImpl::ParseContent(BRepositoryContentHandler* contentHandler)
 {
 	status_t result = contentHandler->HandleRepositoryInfo(fRepositoryInfo);
 	if (result == B_OK) {

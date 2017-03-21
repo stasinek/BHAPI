@@ -19,8 +19,7 @@ CfaRuleSet::CfaRuleSet()
 }
 
 
-status_t
-CfaRuleSet::Init(uint32 registerCount)
+status_t CfaRuleSet::Init(uint32 registerCount)
 {
 	fRegisterRules = new(std::nothrow) CfaRule[registerCount];
 	if (fRegisterRules == NULL)

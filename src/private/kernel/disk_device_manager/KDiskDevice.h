@@ -6,7 +6,7 @@
 #define _K_DISK_DEVICE_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <lock.h>
 

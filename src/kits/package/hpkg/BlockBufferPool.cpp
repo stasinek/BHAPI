@@ -30,8 +30,7 @@ BBlockBufferPool::~BBlockBufferPool()
 }
 
 
-status_t
-BBlockBufferPool::Init()
+status_t BBlockBufferPool::Init()
 {
 	if (fImpl == NULL)
 		return B_NO_MEMORY;
@@ -51,16 +50,14 @@ BBlockBufferPool::GetBuffer(size_t size, PoolBuffer** owner,
 }
 
 
-void
-BBlockBufferPool::PutBufferAndCache(PoolBuffer** owner)
+void BBlockBufferPool::PutBufferAndCache(PoolBuffer** owner)
 {
 	if (fImpl != NULL)
 		fImpl->PutBufferAndCache(owner);
 }
 
 
-void
-BBlockBufferPool::PutBuffer(PoolBuffer** owner)
+void BBlockBufferPool::PutBuffer(PoolBuffer** owner)
 {
 	if (fImpl != NULL)
 		fImpl->PutBuffer(owner);

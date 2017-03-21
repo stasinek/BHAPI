@@ -7,7 +7,7 @@
 #define _DEBUG_SUPPORT_H
 
 #include <debugger.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -28,8 +28,7 @@ TypeUnit::~TypeUnit()
 }
 
 
-void
-TypeUnit::SetUnitEntry(DIETypeUnit* entry)
+void TypeUnit::SetUnitEntry(DIETypeUnit* entry)
 {
 	fUnitEntry = entry;
 }
@@ -42,8 +41,7 @@ TypeUnit::TypeEntry() const
 }
 
 
-void
-TypeUnit::SetTypeEntry(DebugInfoEntry* entry)
+void TypeUnit::SetTypeEntry(DebugInfoEntry* entry)
 {
 	fTypeEntry = entry;
 }

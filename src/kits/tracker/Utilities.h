@@ -470,8 +470,7 @@ Color(int32 r, int32 g, int32 b, int32 alpha = 255)
 void PrintToStream(rgb_color color);
 
 template <class InitCheckable>
-void
-ThrowOnInitCheckError(InitCheckable* item)
+void ThrowOnInitCheckError(InitCheckable* item)
 {
     if (item == NULL)
         throw (status_t)B_ERROR;
@@ -505,8 +504,7 @@ void HexDump(const void* buffer, int32 length);
 
 #if xDEBUG
 
-inline void
-PrintRefToStream(const entry_ref* ref, const char* trailer = "\n")
+inline void PrintRefToStream(const entry_ref* ref, const char* trailer = "\n")
 {
     if (ref == NULL) {
         PRINT(("NULL entry_ref%s", trailer));
@@ -520,8 +518,7 @@ PrintRefToStream(const entry_ref* ref, const char* trailer = "\n")
 }
 
 
-inline void
-PrintEntryToStream(const BEntry* entry, const char* trailer = "\n")
+inline void PrintEntryToStream(const BEntry* entry, const char* trailer = "\n")
 {
     if (entry == NULL) {
         PRINT(("NULL entry%s", trailer));
@@ -534,8 +531,7 @@ PrintEntryToStream(const BEntry* entry, const char* trailer = "\n")
 }
 
 
-inline void
-PrintDirToStream(const BDirectory* dir, const char* trailer = "\n")
+inline void PrintDirToStream(const BDirectory* dir, const char* trailer = "\n")
 {
     if (dir == NULL) {
         PRINT(("NULL entry_ref%s", trailer));

@@ -57,15 +57,13 @@ bool user_access(Function function)
 }
 
 
-inline status_t
-arch_cpu_user_memcpy(void* src, const void* dst, size_t n)
+inline status_t arch_cpu_user_memcpy(void* src, const void* dst, size_t n)
 {
 	return user_access([=] { memcpy(src, dst, n); }) ? B_OK : B_ERROR;
 }
 
 
-inline status_t
-arch_cpu_user_memset(void* src, char v, size_t n)
+inline status_t arch_cpu_user_memset(void* src, char v, size_t n)
 {
 	return user_access([=] { memset(src, v, n); }) ? B_OK : B_ERROR;
 }

@@ -10,7 +10,7 @@
 #include <../include/syslog.h>
 
 #include <FindDirectory.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <commpage_defs.h>
 #include <errno_private.h>
@@ -23,8 +23,7 @@
 static struct real_time_data* sRealTimeData;
 
 
-void
-__init_time(addr_t commPageTable)
+void __init_time(addr_t commPageTable)
 {
 	sRealTimeData = (struct real_time_data*)
 		(((addr_t*)commPageTable)[COMMPAGE_ENTRY_REAL_TIME_DATA]
@@ -44,8 +43,7 @@ __get_system_time_offset()
 //	#pragma mark - public API
 
 
-uint32
-real_time_clock(void)
+uint32 real_time_clock(void)
 {
 	return (__arch_get_system_time_offset(sRealTimeData) + system_time())
 		/ 1000000;
@@ -59,15 +57,13 @@ real_time_clock_usecs(void)
 }
 
 
-void
-set_real_time_clock(uint32 secs)
+void set_real_time_clock(uint32 secs)
 {
 	_kern_set_real_time_clock((bigtime_t)secs * 1000000);
 }
 
 
-status_t
-set_timezone(const char* /*timezone*/)
+status_t set_timezone(const char* /*timezone*/)
 {
 	/* There's nothing we can do here, since we no longer support named
 	 * timezones.

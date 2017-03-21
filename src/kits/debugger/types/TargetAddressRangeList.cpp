@@ -27,22 +27,19 @@ TargetAddressRangeList::TargetAddressRangeList(
 }
 
 
-void
-TargetAddressRangeList::Clear()
+void TargetAddressRangeList::Clear()
 {
 	fRanges.Clear();
 }
 
 
-bool
-TargetAddressRangeList::AddRange(const TargetAddressRange& range)
+bool TargetAddressRangeList::AddRange(const TargetAddressRange& range)
 {
 	return fRanges.Add(range);
 }
 
 
-int32
-TargetAddressRangeList::CountRanges() const
+int32 TargetAddressRangeList::CountRanges() const
 {
 	return fRanges.Size();
 }
@@ -83,8 +80,7 @@ TargetAddressRangeList::CoveringRange() const
 }
 
 
-bool
-TargetAddressRangeList::Contains(target_addr_t address) const
+bool TargetAddressRangeList::Contains(target_addr_t address) const
 {
 	int32 count = fRanges.Size();
 	for (int32 i = 0; i < count; i++) {

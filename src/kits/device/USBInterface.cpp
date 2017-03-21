@@ -48,15 +48,13 @@ BUSBInterface::~BUSBInterface()
 }
 
 
-uint32
-BUSBInterface::Index() const
+uint32 BUSBInterface::Index() const
 {
 	return fIndex;
 }
 
 
-uint32
-BUSBInterface::AlternateIndex() const
+uint32 BUSBInterface::AlternateIndex() const
 {
 	if (fAlternate == B_USB_RAW_ACTIVE_ALTERNATE)
 		return ActiveAlternateIndex();
@@ -123,8 +121,7 @@ BUSBInterface::Descriptor() const
 }
 
 
-status_t
-BUSBInterface::OtherDescriptorAt(uint32 index, usb_descriptor *descriptor,
+status_t BUSBInterface::OtherDescriptorAt(uint32 index, usb_descriptor *descriptor,
 	size_t length) const
 {
 	if (length <= 0 || descriptor == NULL)
@@ -145,8 +142,7 @@ BUSBInterface::OtherDescriptorAt(uint32 index, usb_descriptor *descriptor,
 }
 
 
-uint32
-BUSBInterface::CountEndpoints() const
+uint32 BUSBInterface::CountEndpoints() const
 {
 	return fDescriptor.num_endpoints;
 }
@@ -162,8 +158,7 @@ BUSBInterface::EndpointAt(uint32 index) const
 }
 
 
-uint32
-BUSBInterface::CountAlternates() const
+uint32 BUSBInterface::CountAlternates() const
 {
 	usb_raw_command command;
 	command.alternate.config_index = fConfiguration->Index();
@@ -204,8 +199,7 @@ BUSBInterface::AlternateAt(uint32 alternateIndex) const
 }
 
 
-uint32
-BUSBInterface::ActiveAlternateIndex() const
+uint32 BUSBInterface::ActiveAlternateIndex() const
 {
 	usb_raw_command command;
 	command.alternate.config_index = fConfiguration->Index();
@@ -218,8 +212,7 @@ BUSBInterface::ActiveAlternateIndex() const
 }
 
 
-status_t
-BUSBInterface::SetAlternate(uint32 alternateIndex)
+status_t BUSBInterface::SetAlternate(uint32 alternateIndex)
 {
 	usb_raw_command command;
 	command.alternate.alternate_info = alternateIndex;
@@ -234,8 +227,7 @@ BUSBInterface::SetAlternate(uint32 alternateIndex)
 }
 
 
-void
-BUSBInterface::_UpdateDescriptorAndEndpoints()
+void BUSBInterface::_UpdateDescriptorAndEndpoints()
 {
 	usb_raw_command command;
 	command.interface_etc.descriptor = &fDescriptor;

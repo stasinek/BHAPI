@@ -40,8 +40,7 @@ AddRepositoryRequest::~AddRepositoryRequest()
 }
 
 
-status_t
-AddRepositoryRequest::CreateInitialJobs()
+status_t AddRepositoryRequest::CreateInitialJobs()
 {
 	status_t result = InitCheck();
 	if (result != B_OK)
@@ -87,8 +86,7 @@ AddRepositoryRequest::CreateInitialJobs()
 }
 
 
-void
-AddRepositoryRequest::JobSucceeded(BSupportKit::BJob* job)
+void AddRepositoryRequest::JobSucceeded(BSupportKit::BJob* job)
 {
 	if (job == fActivateJob)
 		fRepositoryName = fActivateJob->RepositoryName();

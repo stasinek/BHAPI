@@ -116,8 +116,7 @@ StackFrameValues::~StackFrameValues()
 }
 
 
-status_t
-StackFrameValues::Init()
+status_t StackFrameValues::Init()
 {
 	fValues = new(std::nothrow) ValueTable;
 	if (fValues == NULL)
@@ -127,8 +126,7 @@ StackFrameValues::Init()
 }
 
 
-bool
-StackFrameValues::GetValue(ObjectID* variable, const TypeComponentPath* path,
+bool StackFrameValues::GetValue(ObjectID* variable, const TypeComponentPath* path,
 	BVariant& _value) const
 {
 	ValueEntry* entry = fValues->Lookup(
@@ -141,16 +139,14 @@ StackFrameValues::GetValue(ObjectID* variable, const TypeComponentPath* path,
 }
 
 
-bool
-StackFrameValues::HasValue(ObjectID* variable, const TypeComponentPath* path)
+bool StackFrameValues::HasValue(ObjectID* variable, const TypeComponentPath* path)
 	const
 {
 	return fValues->Lookup(Key(variable, (TypeComponentPath*)path)) != NULL;
 }
 
 
-status_t
-StackFrameValues::SetValue(ObjectID* variable, TypeComponentPath* path,
+status_t StackFrameValues::SetValue(ObjectID* variable, TypeComponentPath* path,
 	const BVariant& value)
 {
 	ValueEntry* entry = fValues->Lookup(Key(variable, path));
@@ -166,8 +162,7 @@ StackFrameValues::SetValue(ObjectID* variable, TypeComponentPath* path,
 }
 
 
-void
-StackFrameValues::_Cleanup()
+void StackFrameValues::_Cleanup()
 {
 	if (fValues != NULL) {
 		ValueEntry* entry = fValues->Clear(true);

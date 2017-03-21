@@ -190,8 +190,7 @@ BDragger::Instantiate(BMessage* data)
 }
 
 
-status_t
-BDragger::Archive(BMessage* data, bool deep) const
+status_t BDragger::Archive(BMessage* data, bool deep) const
 {
 	status_t ret = BView::Archive(data, deep);
 	if (ret != B_OK)
@@ -220,8 +219,7 @@ BDragger::Archive(BMessage* data, bool deep) const
 }
 
 
-void
-BDragger::AttachedToWindow()
+void BDragger::AttachedToWindow()
 {
 	if (fIsZombie) {
 		SetLowColor(kZombieColor);
@@ -238,15 +236,13 @@ BDragger::AttachedToWindow()
 }
 
 
-void
-BDragger::DetachedFromWindow()
+void BDragger::DetachedFromWindow()
 {
 	_RemoveFromList();
 }
 
 
-void
-BDragger::Draw(BRect update)
+void BDragger::Draw(BRect update)
 {
 	BRect bounds(Bounds());
 
@@ -286,8 +282,7 @@ BDragger::Draw(BRect update)
 }
 
 
-void
-BDragger::MouseDown(BPoint where)
+void BDragger::MouseDown(BPoint where)
 {
 	if (fTarget == NULL || !AreDraggersDrawn())
 		return;
@@ -300,22 +295,19 @@ BDragger::MouseDown(BPoint where)
 }
 
 
-void
-BDragger::MouseUp(BPoint point)
+void BDragger::MouseUp(BPoint point)
 {
 	BView::MouseUp(point);
 }
 
 
-void
-BDragger::MouseMoved(BPoint point, uint32 code, const BMessage* msg)
+void BDragger::MouseMoved(BPoint point, uint32 code, const BMessage* msg)
 {
 	BView::MouseMoved(point, code, msg);
 }
 
 
-void
-BDragger::MessageReceived(BMessage* msg)
+void BDragger::MessageReceived(BMessage* msg)
 {
 	switch (msg->what) {
 		case B_TRASH_TARGET:
@@ -385,22 +377,19 @@ BDragger::MessageReceived(BMessage* msg)
 }
 
 
-void
-BDragger::FrameMoved(BPoint newPosition)
+void BDragger::FrameMoved(BPoint newPosition)
 {
 	BView::FrameMoved(newPosition);
 }
 
 
-void
-BDragger::FrameResized(float newWidth, float newHeight)
+void BDragger::FrameResized(float newWidth, float newHeight)
 {
 	BView::FrameResized(newWidth, newHeight);
 }
 
 
-status_t
-BDragger::ShowAllDraggers()
+status_t BDragger::ShowAllDraggers()
 {
 	BPrivate::AppServerLink link;
 	link.StartMessage(AS_SET_SHOW_ALL_DRAGGERS);
@@ -418,8 +407,7 @@ BDragger::ShowAllDraggers()
 }
 
 
-status_t
-BDragger::HideAllDraggers()
+status_t BDragger::HideAllDraggers()
 {
 	BPrivate::AppServerLink link;
 	link.StartMessage(AS_SET_SHOW_ALL_DRAGGERS);
@@ -437,8 +425,7 @@ BDragger::HideAllDraggers()
 }
 
 
-bool
-BDragger::AreDraggersDrawn()
+bool BDragger::AreDraggersDrawn()
 {
 	DraggerManager* manager = DraggerManager::Default();
 	AutoLocker<DraggerManager> locker(manager);
@@ -467,15 +454,13 @@ BDragger::ResolveSpecifier(BMessage* message, int32 index, BMessage* specifier,
 }
 
 
-status_t
-BDragger::GetSupportedSuites(BMessage* data)
+status_t BDragger::GetSupportedSuites(BMessage* data)
 {
 	return BView::GetSupportedSuites(data);
 }
 
 
-status_t
-BDragger::Perform(perform_code code, void* _data)
+status_t BDragger::Perform(perform_code code, void* _data)
 {
 	switch (code) {
 		case PERFORM_CODE_MIN_SIZE:
@@ -530,43 +515,37 @@ BDragger::Perform(perform_code code, void* _data)
 }
 
 
-void
-BDragger::ResizeToPreferred()
+void BDragger::ResizeToPreferred()
 {
 	BView::ResizeToPreferred();
 }
 
 
-void
-BDragger::GetPreferredSize(float* _width, float* _height)
+void BDragger::GetPreferredSize(float* _width, float* _height)
 {
 	BView::GetPreferredSize(_width, _height);
 }
 
 
-void
-BDragger::MakeFocus(bool state)
+void BDragger::MakeFocus(bool state)
 {
 	BView::MakeFocus(state);
 }
 
 
-void
-BDragger::AllAttached()
+void BDragger::AllAttached()
 {
 	BView::AllAttached();
 }
 
 
-void
-BDragger::AllDetached()
+void BDragger::AllDetached()
 {
 	BView::AllDetached();
 }
 
 
-status_t
-BDragger::SetPopUp(BPopUpMenu* menu)
+status_t BDragger::SetPopUp(BPopUpMenu* menu)
 {
 	if (menu != NULL && menu != fPopUp) {
 		delete fPopUp;
@@ -588,8 +567,7 @@ BDragger::PopUp() const
 }
 
 
-bool
-BDragger::InShelf() const
+bool BDragger::InShelf() const
 {
 	return fShelf != NULL;
 }
@@ -609,8 +587,7 @@ BDragger::DragBitmap(BPoint* offset, drawing_mode* mode)
 }
 
 
-bool
-BDragger::IsVisibilityChanging() const
+bool BDragger::IsVisibilityChanging() const
 {
 	return fTransition;
 }
@@ -628,8 +605,7 @@ BDragger::operator=(const BDragger&)
 }
 
 
-/*static*/ void
-BDragger::_UpdateShowAllDraggers(bool visible)
+/*static*/ void BDragger::_UpdateShowAllDraggers(bool visible)
 {
 	DraggerManager* manager = DraggerManager::Default();
 	AutoLocker<DraggerManager> locker(manager);
@@ -645,16 +621,14 @@ BDragger::_UpdateShowAllDraggers(bool visible)
 }
 
 
-void
-BDragger::_InitData()
+void BDragger::_InitData()
 {
 	fBitmap = new BBitmap(BRect(0.0f, 0.0f, 7.0f, 7.0f), B_CMAP8, false, false);
 	fBitmap->SetBits(kHandBitmap, fBitmap->BitsLength(), 0, B_CMAP8);
 }
 
 
-void
-BDragger::_AddToList()
+void BDragger::_AddToList()
 {
 	DraggerManager* manager = DraggerManager::Default();
 	AutoLocker<DraggerManager> locker(manager);
@@ -674,8 +648,7 @@ BDragger::_AddToList()
 }
 
 
-void
-BDragger::_RemoveFromList()
+void BDragger::_RemoveFromList()
 {
 	DraggerManager* manager = DraggerManager::Default();
 	AutoLocker<DraggerManager> locker(manager);
@@ -683,8 +656,7 @@ BDragger::_RemoveFromList()
 }
 
 
-status_t
-BDragger::_DetermineRelationship()
+status_t BDragger::_DetermineRelationship()
 {
 	if (fTarget != NULL) {
 		if (fTarget == Parent())
@@ -715,8 +687,7 @@ BDragger::_DetermineRelationship()
 }
 
 
-status_t
-BDragger::_SetViewToDrag(BView* target)
+status_t BDragger::_SetViewToDrag(BView* target)
 {
 	if (target->Window() != Window())
 		return B_ERROR;
@@ -730,15 +701,13 @@ BDragger::_SetViewToDrag(BView* target)
 }
 
 
-void
-BDragger::_SetShelf(BShelf* shelf)
+void BDragger::_SetShelf(BShelf* shelf)
 {
 	fShelf = shelf;
 }
 
 
-void
-BDragger::_SetZombied(bool state)
+void BDragger::_SetZombied(bool state)
 {
 	fIsZombie = state;
 
@@ -749,8 +718,7 @@ BDragger::_SetZombied(bool state)
 }
 
 
-void
-BDragger::_BuildDefaultPopUp()
+void BDragger::_BuildDefaultPopUp()
 {
 	fPopUp = new BPopUpMenu("Shelf", false, false, B_ITEMS_IN_COLUMN);
 
@@ -771,8 +739,7 @@ BDragger::_BuildDefaultPopUp()
 }
 
 
-void
-BDragger::_ShowPopUp(BView* target, BPoint where)
+void BDragger::_ShowPopUp(BView* target, BPoint where)
 {
 	BPoint point = ConvertToScreen(where);
 

@@ -52,8 +52,7 @@ FT_BEGIN_HEADER
                                FT_Fixed     x_delta,
                                FT_Fixed     y_delta );
 
-  typedef void
-  (*PSH_Globals_DestroyFunc)( PSH_Globals  globals );
+  typedef void   (*PSH_Globals_DestroyFunc)( PSH_Globals  globals );
 
 
   typedef struct  PSH_Globals_FuncsRec_
@@ -135,8 +134,7 @@ FT_BEGIN_HEADER
    *   close an opened recording session.
    *
    */
-  typedef void
-  (*T1_Hints_OpenFunc)( T1_Hints  hints );
+  typedef void   (*T1_Hints_OpenFunc)( T1_Hints  hints );
 
 
   /*************************************************************************
@@ -174,8 +172,7 @@ FT_BEGIN_HEADER
    *   the real stem position is `coords[0]+coords[1]'.
    *
    */
-  typedef void
-  (*T1_Hints_SetStemFunc)( T1_Hints  hints,
+  typedef void   (*T1_Hints_SetStemFunc)( T1_Hints  hints,
                            FT_UInt   dimension,
                            FT_Long*  coords );
 
@@ -208,8 +205,7 @@ FT_BEGIN_HEADER
    *   counter-controlled).
    *
    */
-  typedef void
-  (*T1_Hints_SetStem3Func)( T1_Hints  hints,
+  typedef void   (*T1_Hints_SetStem3Func)( T1_Hints  hints,
                             FT_UInt   dimension,
                             FT_Long*  coords );
 
@@ -232,8 +228,7 @@ FT_BEGIN_HEADER
    *     previously defined hints apply.
    *
    */
-  typedef void
-  (*T1_Hints_ResetFunc)( T1_Hints  hints,
+  typedef void   (*T1_Hints_ResetFunc)( T1_Hints  hints,
                          FT_UInt   end_point );
 
 
@@ -421,8 +416,7 @@ FT_BEGIN_HEADER
    *   close an opened recording session.
    *
    */
-  typedef void
-  (*T2_Hints_OpenFunc)( T2_Hints  hints );
+  typedef void   (*T2_Hints_OpenFunc)( T2_Hints  hints );
 
 
   /*************************************************************************
@@ -461,8 +455,7 @@ FT_BEGIN_HEADER
    *   specification.
    *
    */
-  typedef void
-  (*T2_Hints_StemsFunc)( T2_Hints   hints,
+  typedef void   (*T2_Hints_StemsFunc)( T2_Hints   hints,
                          FT_UInt    dimension,
                          FT_UInt    count,
                          FT_Fixed*  coordinates );
@@ -503,8 +496,7 @@ FT_BEGIN_HEADER
    *   respects the same format.
    *
    */
-  typedef void
-  (*T2_Hints_MaskFunc)( T2_Hints        hints,
+  typedef void   (*T2_Hints_MaskFunc)( T2_Hints        hints,
                         FT_UInt         end_point,
                         FT_UInt         bit_count,
                         const FT_Byte*  bytes );
@@ -545,8 +537,7 @@ FT_BEGIN_HEADER
    *    respects the same format.
    *
    */
-  typedef void
-  (*T2_Hints_CounterFunc)( T2_Hints        hints,
+  typedef void   (*T2_Hints_CounterFunc)( T2_Hints        hints,
                            FT_UInt         bit_count,
                            const FT_Byte*  bytes );
 

@@ -62,8 +62,7 @@ DynamicBuffer::DynamicBuffer(const DynamicBuffer& buffer) :
 }
 
 
-status_t
-DynamicBuffer::InitCheck() const
+status_t DynamicBuffer::InitCheck() const
 {
 	return fInit;
 }
@@ -106,8 +105,7 @@ DynamicBuffer::Read(void* data, size_t size)
 }
 
 
-unsigned char*
-DynamicBuffer::Data() const
+unsigned char*  DynamicBuffer::Data() const
 {
 	return fBuffer + fDataStart;
 }
@@ -127,8 +125,7 @@ DynamicBuffer::BytesRemaining() const
 }
 
 
-void
-DynamicBuffer::PrintToStream()
+void DynamicBuffer::PrintToStream()
 {
 	printf("Current buffer size : %ld\n", fBufferSize);
 	printf("Data start position : %ld\n", fDataStart);
@@ -138,8 +135,7 @@ DynamicBuffer::PrintToStream()
 }
 
 
-status_t
-DynamicBuffer::_GrowToFit(size_t size, bool exact)
+status_t DynamicBuffer::_GrowToFit(size_t size, bool exact)
 {
 	if (size <= fBufferSize - fDataEnd)
 		return B_OK;

@@ -21,96 +21,84 @@ BScreenSaver::~BScreenSaver()
 }
 
 
-status_t
-BScreenSaver::InitCheck()
+status_t BScreenSaver::InitCheck()
 {
     // This method is meant to be overridden
     return B_OK;
 }
 
 
-status_t
-BScreenSaver::StartSaver(BView *view, bool preview)
+status_t BScreenSaver::StartSaver(BView *view, bool preview)
 {
     // This method is meant to be overridden
     return B_OK;
 }
 
 
-void
-BScreenSaver::StopSaver()
+void BScreenSaver::StopSaver()
 {
 	// This method is meant to be overridden
 	return;
 }
 
 
-void
-BScreenSaver::Draw(BView *view, int32 frame)
+void BScreenSaver::Draw(BView *view, int32 frame)
 {
 	// This method is meant to be overridden
 	return;
 }
 
 
-void
-BScreenSaver::DirectConnected(direct_buffer_info *info)
+void BScreenSaver::DirectConnected(direct_buffer_info *info)
 {
 	// This method is meant to be overridden
 	return;
 }
 
 
-void
-BScreenSaver::DirectDraw(int32 frame)
+void BScreenSaver::DirectDraw(int32 frame)
 {
 	// This method is meant to be overridden
 	return;
 }
 
 
-void
-BScreenSaver::StartConfig(BView *configView)
+void BScreenSaver::StartConfig(BView *configView)
 {
 	// This method is meant to be overridden
 	return;
 }
 
 
-void
-BScreenSaver::StopConfig()
+void BScreenSaver::StopConfig()
 {
 	// This method is meant to be overridden
 	return;
 }
 
 
-void
-BScreenSaver::SupplyInfo(BMessage* info) const
+void BScreenSaver::SupplyInfo(BMessage* info) const
 {
 	// This method is meant to be overridden
 	return;
 }
 
 
-void
-BScreenSaver::ModulesChanged(const BMessage* info)
+void BScreenSaver::ModulesChanged(const BMessage* info)
 {
 	// This method is meant to be overridden
 	return;
 }
 
 
-status_t
-BScreenSaver::SaveState(BMessage *into) const
+status_t BScreenSaver::SaveState(BMessage *into) const
 {
     // This method is meant to be overridden
     return B_ERROR;
 }
 
 
-void
-BScreenSaver::SetTickSize(bigtime_t tickSize)
+void BScreenSaver::SetTickSize(bigtime_t tickSize)
 {
 	fTickSize = tickSize;
 }
@@ -123,23 +111,20 @@ BScreenSaver::TickSize() const
 }
 
 
-void
-BScreenSaver::SetLoop(int32 onCount, int32 offCount)
+void BScreenSaver::SetLoop(int32 onCount, int32 offCount)
 {
 	fLoopOnCount = onCount;
 	fLoopOffCount = offCount;
 }
 
 
-int32
-BScreenSaver::LoopOnCount() const
+int32 BScreenSaver::LoopOnCount() const
 {
     return fLoopOnCount;
 }
 
 
-int32
-BScreenSaver::LoopOffCount() const
+int32 BScreenSaver::LoopOffCount() const
 {
     return fLoopOffCount;
 }

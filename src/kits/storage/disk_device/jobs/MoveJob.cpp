@@ -39,8 +39,7 @@ MoveJob::~MoveJob()
 
 
 // Init
-status_t
-MoveJob::Init(off_t offset, PartitionReference** contents, int32 contentsCount)
+status_t MoveJob::Init(off_t offset, PartitionReference** contents, int32 contentsCount)
 {
 	fContents = new(nothrow) PartitionReference*[contentsCount];
 	if (!fContents)
@@ -59,8 +58,7 @@ MoveJob::Init(off_t offset, PartitionReference** contents, int32 contentsCount)
 
 
 // Do
-status_t
-MoveJob::Do()
+status_t MoveJob::Do()
 {
 	int32 changeCounter = fPartition->ChangeCounter();
 	int32 childChangeCounter = fChild->ChangeCounter();

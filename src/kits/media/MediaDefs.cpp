@@ -130,66 +130,57 @@ media_source media_source::null(-1, -1);
 // #pragma mark -
 
 
-bool
-operator==(const media_destination& a, const media_destination& b)
+bool operator==(const media_destination& a, const media_destination& b)
 {
 	return a.port == b.port && a.id == b.id;
 }
 
 
-bool
-operator!=(const media_destination& a, const media_destination& b)
+bool operator!=(const media_destination& a, const media_destination& b)
 {
 	return a.port != b.port || a.id != b.id;
 }
 
 
-bool
-operator<(const media_destination& a, const media_destination& b)
+bool operator<(const media_destination& a, const media_destination& b)
 {
 	UNIMPLEMENTED();
 	return false;
 }
 
 
-bool
-operator==(const media_source& a, const media_source& b)
+bool operator==(const media_source& a, const media_source& b)
 {
 	return a.port == b.port && a.id == b.id;
 }
 
 
-bool
-operator!=(const media_source& a, const media_source& b)
+bool operator!=(const media_source& a, const media_source& b)
 {
 	return a.port != b.port || a.id != b.id;
 }
 
 
-bool
-operator<(const media_source& a, const media_source& b)
+bool operator<(const media_source& a, const media_source& b)
 {
 	UNIMPLEMENTED();
 	return false;
 }
 
 
-bool
-operator==(const media_node& a, const media_node& b)
+bool operator==(const media_node& a, const media_node& b)
 {
 	return a.node == b.node && a.port == b.port && a.kind == b.kind;
 }
 
 
-bool
-operator!=(const media_node& a, const media_node& b)
+bool operator!=(const media_node& a, const media_node& b)
 {
 	return a.node != b.node || a.port != b.port || a.kind != b.kind;
 }
 
 
-bool
-operator<(const media_node& a, const media_node& b)
+bool operator<(const media_node& a, const media_node& b)
 {
 	UNIMPLEMENTED();
 	return false;
@@ -217,8 +208,7 @@ media_multistream_format media_multistream_format::wildcard = {0};
 // #pragma mark - media_format::Matches() support
 
 
-static bool
-raw_audio_format_matches(const media_raw_audio_format& a,
+static bool raw_audio_format_matches(const media_raw_audio_format& a,
 	const media_raw_audio_format& b)
 {
 	if (a.frame_rate != 0 && b.frame_rate != 0 && a.frame_rate != b.frame_rate)
@@ -241,8 +231,7 @@ raw_audio_format_matches(const media_raw_audio_format& a,
 }
 
 
-static bool
-multi_audio_info_matches(const media_multi_audio_info& a,
+static bool multi_audio_info_matches(const media_multi_audio_info& a,
 	const media_multi_audio_info& b)
 {
 	if (a.channel_mask != 0 && b.channel_mask != 0
@@ -259,16 +248,14 @@ multi_audio_info_matches(const media_multi_audio_info& a,
 }
 
 
-static bool
-multi_audio_format_matches(const media_multi_audio_format& a,
+static bool multi_audio_format_matches(const media_multi_audio_format& a,
 	const media_multi_audio_format& b)
 {
 	return raw_audio_format_matches(a, b) && multi_audio_info_matches(a, b);
 }
 
 
-static bool
-raw_video_format_matches(const media_raw_video_format& a,
+static bool raw_video_format_matches(const media_raw_video_format& a,
 	const media_raw_video_format& b)
 {
 	if (a.field_rate != 0 && b.field_rate != 0
@@ -332,8 +319,7 @@ raw_video_format_matches(const media_raw_video_format& a,
 }
 
 
-static bool
-multistream_format_matches(const media_multistream_format& a,
+static bool multistream_format_matches(const media_multistream_format& a,
 	const media_multistream_format& b)
 {
 	if (a.avg_bit_rate != 0 && b.avg_bit_rate != 0
@@ -443,8 +429,7 @@ multistream_format_matches(const media_multistream_format& a,
 }
 
 
-static bool
-encoded_audio_format_matches(const media_encoded_audio_format& a,
+static bool encoded_audio_format_matches(const media_encoded_audio_format& a,
 	const media_encoded_audio_format& b)
 {
 	if (!raw_audio_format_matches(a.output, b.output))
@@ -469,8 +454,7 @@ encoded_audio_format_matches(const media_encoded_audio_format& a,
 }
 
 
-static bool
-encoded_video_format_matches(const media_encoded_video_format& a,
+static bool encoded_video_format_matches(const media_encoded_video_format& a,
 	const media_encoded_video_format& b)
 {
 	if (!raw_video_format_matches(a.output, b.output))
@@ -513,8 +497,7 @@ encoded_video_format_matches(const media_encoded_video_format& a,
 // #pragma mark - media_format::SpecializeTo() support
 
 
-static void
-raw_audio_format_specialize(media_raw_audio_format* format,
+static void raw_audio_format_specialize(media_raw_audio_format* format,
 	const media_raw_audio_format* other)
 {
 	if (format->frame_rate == 0)
@@ -532,8 +515,7 @@ raw_audio_format_specialize(media_raw_audio_format* format,
 }
 
 
-static void
-multi_audio_info_specialize(media_multi_audio_info* format,
+static void multi_audio_info_specialize(media_multi_audio_info* format,
 	const media_multi_audio_info* other)
 {
 	if (format->channel_mask == 0)
@@ -545,8 +527,7 @@ multi_audio_info_specialize(media_multi_audio_info* format,
 }
 
 
-static void
-multi_audio_format_specialize(media_multi_audio_format* format,
+static void multi_audio_format_specialize(media_multi_audio_format* format,
 	const media_multi_audio_format* other)
 {
 	raw_audio_format_specialize(format, other);
@@ -554,8 +535,7 @@ multi_audio_format_specialize(media_multi_audio_format* format,
 }
 
 
-static void
-raw_video_format_specialize(media_raw_video_format* format,
+static void raw_video_format_specialize(media_raw_video_format* format,
 	const media_raw_video_format* other)
 {
 	if (format->field_rate == 0)
@@ -589,8 +569,7 @@ raw_video_format_specialize(media_raw_video_format* format,
 }
 
 
-static void
-multistream_format_specialize(media_multistream_format* format,
+static void multistream_format_specialize(media_multistream_format* format,
 	const media_multistream_format* other)
 {
 	if (format->avg_bit_rate == 0)
@@ -655,8 +634,7 @@ multistream_format_specialize(media_multistream_format* format,
 }
 
 
-static void
-encoded_audio_format_specialize(media_encoded_audio_format* format,
+static void encoded_audio_format_specialize(media_encoded_audio_format* format,
 	const media_encoded_audio_format* other)
 {
 	raw_audio_format_specialize(&format->output, &other->output);
@@ -670,8 +648,7 @@ encoded_audio_format_specialize(media_encoded_audio_format* format,
 }
 
 
-static void
-encoded_video_format_specialize(media_encoded_video_format* format,
+static void encoded_video_format_specialize(media_encoded_video_format* format,
 	const media_encoded_video_format* other)
 {
 	raw_video_format_specialize(&format->output, &other->output);
@@ -693,8 +670,7 @@ encoded_video_format_specialize(media_encoded_video_format* format,
 // #pragma mark - media_format
 
 
-bool
-media_format::Matches(const media_format* other) const
+bool media_format::Matches(const media_format* other) const
 {
 	CALLED();
 
@@ -731,8 +707,7 @@ media_format::Matches(const media_format* other) const
 }
 
 
-void
-media_format::SpecializeTo(const media_format* otherFormat)
+void media_format::SpecializeTo(const media_format* otherFormat)
 {
 	CALLED();
 
@@ -778,8 +753,7 @@ media_format::SpecializeTo(const media_format* otherFormat)
 }
 
 
-status_t
-media_format::SetMetaData(const void* data, size_t size)
+status_t media_format::SetMetaData(const void* data, size_t size)
 {
 	if (!data || size < 0 || size > META_DATA_MAX_SIZE)
 		return B_BAD_VALUE;
@@ -816,15 +790,13 @@ media_format::SetMetaData(const void* data, size_t size)
 }
 
 
-const void*
-media_format::MetaData() const
+const void*   media_format::MetaData() const
 {
 	return meta_data;
 }
 
 
-int32
-media_format::MetaDataSize() const
+int32 media_format::MetaDataSize() const
 {
 	return meta_data_size;
 }
@@ -895,8 +867,7 @@ media_format::operator=(const media_format& clone)
 // #pragma mark -
 
 
-bool
-operator==(const media_raw_audio_format& a, const media_raw_audio_format& b)
+bool operator==(const media_raw_audio_format& a, const media_raw_audio_format& b)
 {
 	return a.frame_rate == b.frame_rate
 		&& a.channel_count == b.channel_count
@@ -906,8 +877,7 @@ operator==(const media_raw_audio_format& a, const media_raw_audio_format& b)
 }
 
 
-bool
-operator==(const media_multi_audio_info& a, const media_multi_audio_info& b)
+bool operator==(const media_multi_audio_info& a, const media_multi_audio_info& b)
 {
 	return a.channel_mask == b.channel_mask
 		&& a.valid_bits == b.valid_bits
@@ -915,8 +885,7 @@ operator==(const media_multi_audio_info& a, const media_multi_audio_info& b)
 }
 
 
-bool
-operator==(const media_multi_audio_format& a,
+bool operator==(const media_multi_audio_format& a,
 	const media_multi_audio_format& b)
 {
 	return (media_raw_audio_format)a == (media_raw_audio_format)b
@@ -924,8 +893,7 @@ operator==(const media_multi_audio_format& a,
 }
 
 
-bool
-operator==(const media_encoded_audio_format& a,
+bool operator==(const media_encoded_audio_format& a,
 	const media_encoded_audio_format& b)
 {
 	return a.output == b.output
@@ -936,8 +904,7 @@ operator==(const media_encoded_audio_format& a,
 }
 
 
-bool
-operator==(const media_video_display_info& a,
+bool operator==(const media_video_display_info& a,
 	const media_video_display_info& b)
 {
 	return a.format == b.format
@@ -950,8 +917,7 @@ operator==(const media_video_display_info& a,
 }
 
 
-bool
-operator==(const media_raw_video_format& a, const media_raw_video_format& b)
+bool operator==(const media_raw_video_format& a, const media_raw_video_format& b)
 {
 	return a.field_rate == b.field_rate
 		&& a.interlace == b.interlace
@@ -964,8 +930,7 @@ operator==(const media_raw_video_format& a, const media_raw_video_format& b)
 }
 
 
-bool
-operator==(const media_encoded_video_format& a,
+bool operator==(const media_encoded_video_format& a,
 	const media_encoded_video_format& b)
 {
 	return a.output == b.output
@@ -978,8 +943,7 @@ operator==(const media_encoded_video_format& a,
 }
 
 
-bool
-operator==(const media_multistream_format::vid_info& a,
+bool operator==(const media_multistream_format::vid_info& a,
 	const media_multistream_format::vid_info& b)
 {
 	return a.frame_rate == b.frame_rate
@@ -993,8 +957,7 @@ operator==(const media_multistream_format::vid_info& a,
 }
 
 
-bool
-operator==(const media_multistream_format::avi_info& a,
+bool operator==(const media_multistream_format::avi_info& a,
 	const media_multistream_format::avi_info& b)
 {
 	return a.us_per_frame == b.us_per_frame
@@ -1009,8 +972,7 @@ operator==(const media_multistream_format::avi_info& a,
 }
 
 
-bool
-operator==(const media_multistream_format& a,
+bool operator==(const media_multistream_format& a,
 	const media_multistream_format& b)
 {
 	if (a.avg_bit_rate != b.avg_bit_rate
@@ -1035,8 +997,7 @@ operator==(const media_multistream_format& a,
 }
 
 
-bool
-operator==(const media_format& a, const media_format& b)
+bool operator==(const media_format& a, const media_format& b)
 {
 	if (a.type != b.type
 		|| a.user_data_type != b.user_data_type
@@ -1074,15 +1035,13 @@ operator==(const media_format& a, const media_format& b)
 /*! return \c true if a and b are compatible (accounting for wildcards)
 	a is the format you want to feed to something accepting b
 */
-bool
-format_is_compatible(const media_format& a, const media_format& b)
+bool format_is_compatible(const media_format& a, const media_format& b)
 {
 	return a.Matches(&b);
 }
 
 
-bool
-string_for_format(const media_format& f, char* buf, size_t size)
+bool string_for_format(const media_format& f, char* buf, size_t size)
 {
 	char encoding[10]; /* maybe Be wanted to use some 4CCs ? */
 	const char* videoOrientation = "0"; /* I'd use "NC", R5 uses 0. */
@@ -1179,16 +1138,14 @@ string_for_format(const media_format& f, char* buf, size_t size)
 // #pragma mark -
 
 
-bool
-operator==(const media_file_format_id& a, const media_file_format_id& b)
+bool operator==(const media_file_format_id& a, const media_file_format_id& b)
 {
 	return a.node == b.node && a.device == b.device
 		&& a.internal_id == b.internal_id;
 }
 
 
-bool
-operator<(const media_file_format_id& a, const media_file_format_id& b)
+bool operator<(const media_file_format_id& a, const media_file_format_id& b)
 {
 	return a.internal_id < b.internal_id;
 }
@@ -1198,8 +1155,7 @@ operator<(const media_file_format_id& a, const media_file_format_id& b)
 
 
 //! Use this function to iterate through available file format writers.
-status_t
-get_next_file_format(int32* cookie, media_file_format* mff)
+status_t get_next_file_format(int32* cookie, media_file_format* mff)
 {
 	if (cookie == NULL || mff == NULL)
 		return B_BAD_VALUE;
@@ -1233,8 +1189,7 @@ const type_code B_CODEC_TYPE_INFO = 0x040807b2;
 #define MEDIA_SERVICE_NOTIFICATION_ID "MediaServiceNotificationID"
 
 
-void
-notify_system(float progress, const char* message)
+void notify_system(float progress, const char* message)
 {
 	BNotification notification(B_PROGRESS_NOTIFICATION);
 	notification.SetMessageID(MEDIA_SERVICE_NOTIFICATION_ID);
@@ -1253,8 +1208,7 @@ notify_system(float progress, const char* message)
 }
 
 
-void
-progress_shutdown(int stage,
+void progress_shutdown(int stage,
 	bool (*progress)(int stage, const char* message, void* cookie),
 	void* cookie)
 {
@@ -1291,8 +1245,7 @@ progress_shutdown(int stage,
 }
 
 
-status_t
-shutdown_media_server(bigtime_t timeout,
+status_t shutdown_media_server(bigtime_t timeout,
 	bool (*progress)(int stage, const char* message, void* cookie),
 	void* cookie)
 {
@@ -1357,8 +1310,7 @@ shutdown_media_server(bigtime_t timeout,
 }
 
 
-void
-progress_startup(int stage,
+void progress_startup(int stage,
 	bool (*progress)(int stage, const char* message, void* cookie),
 	void* cookie)
 {
@@ -1392,15 +1344,13 @@ progress_startup(int stage,
 }
 
 
-status_t
-launch_media_server(uint32 flags)
+status_t launch_media_server(uint32 flags)
 {
 	return launch_media_server(0, NULL, NULL, flags);
 }
 
 
-status_t
-launch_media_server(bigtime_t timeout,
+status_t launch_media_server(bigtime_t timeout,
 	bool (*progress)(int stage, const char* message, void* cookie),
 	void* cookie, uint32 flags)
 {
@@ -1458,8 +1408,7 @@ launch_media_server(bigtime_t timeout,
 //	B_MEDIA_REALTIME_DISABLED is returned.
 //	If there are not enough system resources to enable real-time performance,
 //	B_MEDIA_REALTIME_UNAVAILABLE is returned.
-status_t
-media_realtime_init_image(image_id image, uint32 flags)
+status_t media_realtime_init_image(image_id image, uint32 flags)
 {
 	UNIMPLEMENTED();
 	return B_OK;
@@ -1472,8 +1421,7 @@ media_realtime_init_image(image_id image, uint32 flags)
 //	256 kB of the stack, so you should pass some smaller value you determine
 //	from profiling the thread; typically in the 32-64kB range.
 //	Return values are the same as for media_prepare_realtime_image().
-status_t
-media_realtime_init_thread(thread_id thread, size_t stack_used, uint32 flags)
+status_t media_realtime_init_thread(thread_id thread, size_t stack_used, uint32 flags)
 {
 	UNIMPLEMENTED();
 	return B_OK;

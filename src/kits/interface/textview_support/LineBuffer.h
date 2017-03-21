@@ -45,8 +45,7 @@ public:
 };
 
 
-inline int32
-BTextView::LineBuffer::NumLines() const
+inline int32 BTextView::LineBuffer::NumLines() const
 {
 	return fItemCount - 1;
 }

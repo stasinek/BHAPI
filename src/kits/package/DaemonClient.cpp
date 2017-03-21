@@ -37,8 +37,7 @@ BDaemonClient::~BDaemonClient()
 }
 
 
-status_t
-BDaemonClient::GetInstallationLocationInfo(
+status_t BDaemonClient::GetInstallationLocationInfo(
 	BPackageInstallationLocation location, BInstallationLocationInfo& _info)
 {
 	status_t error = _InitMessenger();
@@ -106,8 +105,7 @@ BDaemonClient::GetInstallationLocationInfo(
 }
 
 
-status_t
-BDaemonClient::CommitTransaction(const BActivationTransaction& transaction,
+status_t BDaemonClient::CommitTransaction(const BActivationTransaction& transaction,
 	BCommitTransactionResult& _result)
 {
 	if (transaction.InitCheck() != B_OK)
@@ -133,8 +131,7 @@ BDaemonClient::CommitTransaction(const BActivationTransaction& transaction,
 }
 
 
-status_t
-BDaemonClient::CreateTransaction(BPackageInstallationLocation location,
+status_t BDaemonClient::CreateTransaction(BPackageInstallationLocation location,
 	BActivationTransaction& _transaction, BDirectory& _transactionDirectory)
 {
 	// get an info for the location
@@ -187,8 +184,7 @@ BDaemonClient::CreateTransaction(BPackageInstallationLocation location,
 }
 
 
-status_t
-BDaemonClient::_InitMessenger()
+status_t BDaemonClient::_InitMessenger()
 {
 	if (fDaemonMessenger.IsValid())
 		return B_OK;
@@ -200,8 +196,7 @@ BDaemonClient::_InitMessenger()
 }
 
 
-status_t
-BDaemonClient::_ExtractPackageInfoSet(const BMessage& message,
+status_t BDaemonClient::_ExtractPackageInfoSet(const BMessage& message,
 	const char* field, BPackageInfoSet& _infos)
 {
 	// get the number of items

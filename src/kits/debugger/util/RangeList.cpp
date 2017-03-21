@@ -20,8 +20,7 @@ RangeList::~RangeList()
 }
 
 
-status_t
-RangeList::AddRange(int32 lowValue, int32 highValue)
+status_t RangeList::AddRange(int32 lowValue, int32 highValue)
 {
 	if (lowValue > highValue)
 		return B_BAD_VALUE;
@@ -76,15 +75,13 @@ RangeList::AddRange(int32 lowValue, int32 highValue)
 }
 
 
-status_t
-RangeList::AddRange(const Range& range)
+status_t RangeList::AddRange(const Range& range)
 {
 	return AddRange(range.lowerBound, range.upperBound);
 }
 
 
-void
-RangeList::RemoveRangeAt(int32 index)
+void RangeList::RemoveRangeAt(int32 index)
 {
 	if (index < 0 || index >= CountItems())
 		return;
@@ -93,8 +90,7 @@ RangeList::RemoveRangeAt(int32 index)
 }
 
 
-bool
-RangeList::Contains(int32 value) const
+bool RangeList::Contains(int32 value) const
 {
 	for (int32 i = 0; i < CountItems(); i++) {
 		const Range* range = ItemAt(i);
@@ -108,8 +104,7 @@ RangeList::Contains(int32 value) const
 }
 
 
-int32
-RangeList::CountRanges() const
+int32 RangeList::CountRanges() const
 {
 	return CountItems();
 }
@@ -122,8 +117,7 @@ RangeList::RangeAt(int32 index) const
 }
 
 
-void
-RangeList::_CollapseOverlappingRanges(int32 startIndex, int32 highValue)
+void RangeList::_CollapseOverlappingRanges(int32 startIndex, int32 highValue)
 {
 	for (int32 i = startIndex; i < CountItems();) {
 		// check if it also overlaps any of the following

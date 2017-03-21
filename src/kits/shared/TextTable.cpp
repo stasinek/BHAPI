@@ -143,15 +143,13 @@ TextTable::~TextTable()
 }
 
 
-int32
-TextTable::CountColumns() const
+int32 TextTable::CountColumns() const
 {
 	return fColumns.CountItems();
 }
 
 
-void
-TextTable::AddColumn(const BString& title, enum alignment align,
+void TextTable::AddColumn(const BString& title, enum alignment align,
 	bool canTruncate)
 {
 	Column* column = new Column(title, align, canTruncate);
@@ -162,8 +160,7 @@ TextTable::AddColumn(const BString& title, enum alignment align,
 }
 
 
-int32
-TextTable::CountRows() const
+int32 TextTable::CountRows() const
 {
 	return fRows.CountItems();
 }
@@ -179,8 +176,7 @@ TextTable::TextAt(int32 rowIndex, int32 columnIndex) const
 }
 
 
-void
-TextTable::SetTextAt(int32 rowIndex, int32 columnIndex, const BString& text)
+void TextTable::SetTextAt(int32 rowIndex, int32 columnIndex, const BString& text)
 {
 	// If necessary append empty rows up to the specified row index.
 	while (rowIndex >= fRows.CountItems()) {
@@ -204,8 +200,7 @@ TextTable::SetTextAt(int32 rowIndex, int32 columnIndex, const BString& text)
 }
 
 
-void
-TextTable::Print(int32 maxWidth)
+void TextTable::Print(int32 maxWidth)
 {
 	int32 columnCount = fColumns.CountItems();
 	if (columnCount == 0)

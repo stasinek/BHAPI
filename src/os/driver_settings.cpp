@@ -31,7 +31,7 @@
 #include <directories.h>
 #include <driver_settings.h>
 #include <FindDirectory.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #ifdef _KERNEL_MODE
 #	include <KernelExport.h>
@@ -108,8 +108,7 @@ static mutex sLock = MUTEX_INITIALIZER("driver settings");
 	Those characters are ignored in the input stream and won't be added
 	to any words.
 */
-static inline bool
-is_parameter_separator(char c)
+static inline bool is_parameter_separator(char c)
 {
 	return c == '\n' || c == ';';
 }
@@ -117,15 +116,13 @@ is_parameter_separator(char c)
 
 /*! Indicates if "c" begins a new word or not.
 */
-static inline bool
-is_word_break(char c)
+static inline bool is_word_break(char c)
 {
 	return isspace(c) || is_parameter_separator(c);
 }
 
 
-static inline bool
-check_handle(settings_handle *handle)
+static inline bool check_handle(settings_handle *handle)
 {
 	if (handle == NULL
 		|| handle->magic != SETTINGS_MAGIC)
@@ -161,8 +158,7 @@ get_parameter(settings_handle *handle, const char *name)
 	If the word is followed by a newline it will return B_OK, if white
 	spaces follows, it will return CONTINUE_PARAMETER.
 */
-static status_t
-get_word(char **_pos, char **_word, int32 assignmentMode, bool allowNewLine)
+static status_t get_word(char **_pos, char **_word, int32 assignmentMode, bool allowNewLine)
 {
 	char *pos = *_pos;
 	char quoted = 0;
@@ -270,8 +266,7 @@ get_word(char **_pos, char **_word, int32 assignmentMode, bool allowNewLine)
 }
 
 
-static status_t
-parse_parameter(struct driver_parameter *parameter, char **_pos, int32 level)
+static status_t parse_parameter(struct driver_parameter *parameter, char **_pos, int32 level)
 {
 	char *pos = *_pos;
 	status_t status;
@@ -305,8 +300,7 @@ parse_parameter(struct driver_parameter *parameter, char **_pos, int32 level)
 }
 
 
-static status_t
-parse_parameters(struct driver_parameter **_parameters, int *_count,
+static status_t parse_parameters(struct driver_parameter **_parameters, int *_count,
 	char **_pos, int32 level)
 {
 	if (level > MAX_SETTINGS_LEVEL)
@@ -360,8 +354,7 @@ parse_parameters(struct driver_parameter **_parameters, int *_count,
 }
 
 
-static status_t
-parse_settings(settings_handle *handle)
+static status_t parse_settings(settings_handle *handle)
 {
 	char *text = handle->text;
 
@@ -376,8 +369,7 @@ parse_settings(settings_handle *handle)
 }
 
 
-static void
-free_parameter(struct driver_parameter *parameter)
+static void free_parameter(struct driver_parameter *parameter)
 {
 	int32 i;
 	for (i = parameter->parameter_count; i-- > 0;)
@@ -388,8 +380,7 @@ free_parameter(struct driver_parameter *parameter)
 }
 
 
-static void
-free_settings(settings_handle *handle)
+static void free_settings(settings_handle *handle)
 {
 	int32 i;
 	for (i = handle->settings.parameter_count; i-- > 0;)
@@ -468,8 +459,7 @@ load_driver_settings_from_file(int file, const char *driverName)
 }
 
 
-static bool
-put_string(char **_buffer, ssize_t *_bufferSize, char *string)
+static bool put_string(char **_buffer, ssize_t *_bufferSize, char *string)
 {
 	size_t length, reserved, quotes;
 	char *buffer = *_buffer, c;
@@ -516,8 +506,7 @@ put_string(char **_buffer, ssize_t *_bufferSize, char *string)
 }
 
 
-static bool
-put_chars(char **_buffer, ssize_t *_bufferSize, const char *chars)
+static bool put_chars(char **_buffer, ssize_t *_bufferSize, const char *chars)
 {
 	char *buffer = *_buffer;
 	size_t length;
@@ -542,8 +531,7 @@ put_chars(char **_buffer, ssize_t *_bufferSize, const char *chars)
 }
 
 
-static bool
-put_char(char **_buffer, ssize_t *_bufferSize, char c)
+static bool put_char(char **_buffer, ssize_t *_bufferSize, char c)
 {
 	char *buffer = *_buffer;
 
@@ -562,16 +550,14 @@ put_char(char **_buffer, ssize_t *_bufferSize, char c)
 }
 
 
-static void
-put_level_space(char **_buffer, ssize_t *_bufferSize, int32 level)
+static void put_level_space(char **_buffer, ssize_t *_bufferSize, int32 level)
 {
 	while (level-- > 0)
 		put_char(_buffer, _bufferSize, '\t');
 }
 
 
-static void
-put_parameter(char **_buffer, ssize_t *_bufferSize,
+static void put_parameter(char **_buffer, ssize_t *_bufferSize,
 	struct driver_parameter *parameter, int32 level, bool flat)
 {
 	int32 i;
@@ -629,8 +615,7 @@ find_driver_settings(const char *name)
 }
 
 
-status_t
-driver_settings_init(kernel_args *args)
+status_t driver_settings_init(kernel_args *args)
 {
 	struct driver_settings_file *settings = args->driver_settings;
 
@@ -683,8 +668,7 @@ driver_settings_init(kernel_args *args)
 //	#pragma mark - public API
 
 
-status_t
-unload_driver_settings(void *_handle)
+status_t unload_driver_settings(void *_handle)
 {
 	settings_handle *handle = (settings_handle *)_handle;
 	if (!check_handle(handle))
@@ -812,8 +796,7 @@ load_driver_settings(const char *driverName)
 }
 
 
-void*
-load_driver_settings_file(int fd)
+void*   load_driver_settings_file(int fd)
 {
 	return load_driver_settings_from_file(fd, NULL);
 }
@@ -854,8 +837,7 @@ parse_driver_settings_string(const char *settingsString)
 	If the "handle" parameter is not a valid driver settings handle, or
 	the "buffer" parameter is NULL, B_BAD_VALUE is returned.
 */
-status_t
-get_driver_settings_string(void *_handle, char *buffer, ssize_t *_bufferSize,
+status_t get_driver_settings_string(void *_handle, char *buffer, ssize_t *_bufferSize,
 	bool flat)
 {
 	settings_handle *handle = (settings_handle *)_handle;
@@ -883,8 +865,7 @@ get_driver_settings_string(void *_handle, char *buffer, ssize_t *_bufferSize,
 	doesn't have any values.
 	Also returns "unknownValue" if the handle passed in was not valid.
 */
-bool
-get_driver_boolean_parameter(void *_handle, const char *keyName,
+bool get_driver_boolean_parameter(void *_handle, const char *keyName,
 	bool unknownValue, bool noArgValue)
 {
 	settings_handle *handle = (settings_handle*)_handle;
@@ -956,8 +937,7 @@ get_driver_settings(void *handle)
 }
 
 
-status_t
-delete_driver_settings(void *_handle)
+status_t delete_driver_settings(void *_handle)
 {
 	return unload_driver_settings(_handle);
 }

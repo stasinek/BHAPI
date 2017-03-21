@@ -52,36 +52,31 @@ BPackageRoster::~BPackageRoster()
 }
 
 
-status_t
-BPackageRoster::GetCommonRepositoryConfigPath(BPath* path, bool create) const
+status_t BPackageRoster::GetCommonRepositoryConfigPath(BPath* path, bool create) const
 {
 	return _GetRepositoryPath(path, create, B_SYSTEM_SETTINGS_DIRECTORY);
 }
 
 
-status_t
-BPackageRoster::GetUserRepositoryConfigPath(BPath* path, bool create) const
+status_t BPackageRoster::GetUserRepositoryConfigPath(BPath* path, bool create) const
 {
 	return _GetRepositoryPath(path, create, B_USER_SETTINGS_DIRECTORY);
 }
 
 
-status_t
-BPackageRoster::GetCommonRepositoryCachePath(BPath* path, bool create) const
+status_t BPackageRoster::GetCommonRepositoryCachePath(BPath* path, bool create) const
 {
 	return _GetRepositoryPath(path, create, B_SYSTEM_CACHE_DIRECTORY);
 }
 
 
-status_t
-BPackageRoster::GetUserRepositoryCachePath(BPath* path, bool create) const
+status_t BPackageRoster::GetUserRepositoryCachePath(BPath* path, bool create) const
 {
 	return _GetRepositoryPath(path, create, B_USER_CACHE_DIRECTORY);
 }
 
 
-status_t
-BPackageRoster::VisitCommonRepositoryConfigs(BRepositoryConfigVisitor& visitor)
+status_t BPackageRoster::VisitCommonRepositoryConfigs(BRepositoryConfigVisitor& visitor)
 {
 	BPath commonRepositoryConfigPath;
 	status_t result
@@ -93,8 +88,7 @@ BPackageRoster::VisitCommonRepositoryConfigs(BRepositoryConfigVisitor& visitor)
 }
 
 
-status_t
-BPackageRoster::VisitUserRepositoryConfigs(BRepositoryConfigVisitor& visitor)
+status_t BPackageRoster::VisitUserRepositoryConfigs(BRepositoryConfigVisitor& visitor)
 {
 	BPath userRepositoryConfigPath;
 	status_t result = GetUserRepositoryConfigPath(&userRepositoryConfigPath);
@@ -105,8 +99,7 @@ BPackageRoster::VisitUserRepositoryConfigs(BRepositoryConfigVisitor& visitor)
 }
 
 
-status_t
-BPackageRoster::GetRepositoryNames(BStringList& names)
+status_t BPackageRoster::GetRepositoryNames(BStringList& names)
 {
 	struct RepositoryNameCollector : public BRepositoryConfigVisitor {
 		RepositoryNameCollector(BStringList& _names)
@@ -138,8 +131,7 @@ BPackageRoster::GetRepositoryNames(BStringList& names)
 }
 
 
-status_t
-BPackageRoster::GetRepositoryCache(const BString& name,
+status_t BPackageRoster::GetRepositoryCache(const BString& name,
 	BRepositoryCache* repositoryCache)
 {
 	if (repositoryCache == NULL)
@@ -165,8 +157,7 @@ BPackageRoster::GetRepositoryCache(const BString& name,
 }
 
 
-status_t
-BPackageRoster::GetRepositoryConfig(const BString& name,
+status_t BPackageRoster::GetRepositoryConfig(const BString& name,
 	BRepositoryConfig* repositoryConfig)
 {
 	if (repositoryConfig == NULL)
@@ -192,8 +183,7 @@ BPackageRoster::GetRepositoryConfig(const BString& name,
 }
 
 
-status_t
-BPackageRoster::GetInstallationLocationInfo(
+status_t BPackageRoster::GetInstallationLocationInfo(
 	BPackageInstallationLocation location, BInstallationLocationInfo& _info)
 {
 // This method makes sense only on an installed Haiku, but not for the build
@@ -207,8 +197,7 @@ BPackageRoster::GetInstallationLocationInfo(
 }
 
 
-status_t
-BPackageRoster::GetActivePackages(BPackageInstallationLocation location,
+status_t BPackageRoster::GetActivePackages(BPackageInstallationLocation location,
 	BPackageInfoSet& packageInfos)
 {
 // This method makes sense only on an installed Haiku, but not for the build
@@ -227,8 +216,7 @@ BPackageRoster::GetActivePackages(BPackageInstallationLocation location,
 }
 
 
-status_t
-BPackageRoster::StartWatching(const BMessenger& target, uint32 eventMask)
+status_t BPackageRoster::StartWatching(const BMessenger& target, uint32 eventMask)
 {
 // This method makes sense only on an installed Haiku, but not for the build
 // tools.
@@ -262,8 +250,7 @@ BPackageRoster::StartWatching(const BMessenger& target, uint32 eventMask)
 }
 
 
-status_t
-BPackageRoster::StopWatching(const BMessenger& target)
+status_t BPackageRoster::StopWatching(const BMessenger& target)
 {
 // This method makes sense only on an installed Haiku, but not for the build
 // tools.
@@ -295,8 +282,7 @@ BPackageRoster::StopWatching(const BMessenger& target)
 }
 
 
-status_t
-BPackageRoster::_GetRepositoryPath(BPath* path, bool create,
+status_t BPackageRoster::_GetRepositoryPath(BPath* path, bool create,
 	directory_which whichDir) const
 {
 	if (path == NULL)
@@ -320,8 +306,7 @@ BPackageRoster::_GetRepositoryPath(BPath* path, bool create,
 }
 
 
-status_t
-BPackageRoster::_VisitRepositoryConfigs(const BPath& path,
+status_t BPackageRoster::_VisitRepositoryConfigs(const BPath& path,
 	BRepositoryConfigVisitor& visitor)
 {
 	BDirectory directory(path.Path());

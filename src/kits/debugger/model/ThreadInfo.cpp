@@ -33,8 +33,7 @@ ThreadInfo::ThreadInfo(team_id team, thread_id thread, const BString& name)
 }
 
 
-void
-ThreadInfo::SetTo(team_id team, thread_id thread, const BString& name)
+void ThreadInfo::SetTo(team_id team, thread_id thread, const BString& name)
 {
 	fTeam = team;
 	fThread = thread;

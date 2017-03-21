@@ -48,8 +48,7 @@ ElfSection::~ElfSection()
 }
 
 
-status_t
-ElfSection::Load()
+status_t ElfSection::Load()
 {
 	if (fLoadCount > 0) {
 		fLoadCount++;
@@ -72,8 +71,7 @@ ElfSection::Load()
 }
 
 
-void
-ElfSection::Unload()
+void ElfSection::Unload()
 {
 	if (fLoadCount == 0)
 		return;
@@ -198,8 +196,7 @@ ElfFile::~ElfFile()
 }
 
 
-status_t
-ElfFile::Init(const char* fileName)
+status_t ElfFile::Init(const char* fileName)
 {
 	// open file
 	fFD = open(fileName, O_RDONLY);
@@ -264,8 +261,7 @@ ElfFile::GetSection(const char* name)
 }
 
 
-void
-ElfFile::PutSection(ElfSection* section)
+void ElfFile::PutSection(ElfSection* section)
 {
 	if (section != NULL)
 		section->Unload();
@@ -342,8 +338,7 @@ ElfFile::CreateSymbolLookupSource(uint64 fileOffset, uint64 fileLength,
 }
 
 
-status_t
-ElfFile::CreateSymbolLookup(uint64 textDelta, ElfSymbolLookup*& _lookup) const
+status_t ElfFile::CreateSymbolLookup(uint64 textDelta, ElfSymbolLookup*& _lookup) const
 {
 	// Get the symbol table + corresponding string section. There may be two
 	// symbol tables: the dynamic and the non-dynamic one. The former contains
@@ -382,8 +377,7 @@ ElfFile::CreateSymbolLookup(uint64 textDelta, ElfSymbolLookup*& _lookup) const
 
 
 template<typename ElfClass>
-status_t
-ElfFile::_LoadFile(const char* fileName)
+status_t ElfFile::_LoadFile(const char* fileName)
 {
 	typedef typename ElfClass::Ehdr Ehdr;
 	typedef typename ElfClass::Phdr Phdr;
@@ -534,8 +528,7 @@ ElfFile::_LoadFile(const char* fileName)
 }
 
 
-bool
-ElfFile::_FindSymbolSections(ElfSection*& _symbolSection,
+bool ElfFile::_FindSymbolSections(ElfSection*& _symbolSection,
 	ElfSection*& _stringSection, uint32 type) const
 {
 	// get the symbol table section
@@ -554,16 +547,14 @@ ElfFile::_FindSymbolSections(ElfSection*& _symbolSection,
 }
 
 
-bool
-ElfFile::_CheckRange(uint64 offset, uint64 size) const
+bool ElfFile::_CheckRange(uint64 offset, uint64 size) const
 {
 	return offset < fFileSize && offset + size <= fFileSize;
 }
 
 
 template<typename ElfClass>
-bool
-ElfFile::_CheckElfHeader(typename ElfClass::Ehdr& elfHeader)
+bool ElfFile::_CheckElfHeader(typename ElfClass::Ehdr& elfHeader)
 {
 	if (Get(elfHeader.e_shnum) > 0) {
 		if (Get(elfHeader.e_shoff) == 0

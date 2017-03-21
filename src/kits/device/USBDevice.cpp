@@ -36,15 +36,13 @@ BUSBDevice::~BUSBDevice()
 }
 
 
-status_t
-BUSBDevice::InitCheck()
+status_t BUSBDevice::InitCheck()
 {
 	return (fRawFD >= 0 ? B_OK : B_ERROR);
 }
 
 
-status_t
-BUSBDevice::SetTo(const char *path)
+status_t BUSBDevice::SetTo(const char *path)
 {
 	if (!path)
 		return B_BAD_VALUE;
@@ -84,8 +82,7 @@ BUSBDevice::SetTo(const char *path)
 }
 
 
-void
-BUSBDevice::Unset()
+void BUSBDevice::Unset()
 {
 	if (fRawFD >= 0)
 		close(fRawFD);
@@ -121,8 +118,7 @@ BUSBDevice::Location() const
 }
 
 
-bool
-BUSBDevice::IsHub() const
+bool BUSBDevice::IsHub() const
 {
 	return fDescriptor.device_class == 0x09;
 }
@@ -310,8 +306,7 @@ BUSBDevice::GetDescriptor(uint8 type, uint8 index, uint16 languageID,
 }
 
 
-uint32
-BUSBDevice::CountConfigurations() const
+uint32 BUSBDevice::CountConfigurations() const
 {
 	return fDescriptor.num_configurations;
 }
@@ -337,8 +332,7 @@ BUSBDevice::ActiveConfiguration() const
 }
 
 
-status_t
-BUSBDevice::SetConfiguration(const BUSBConfiguration *configuration)
+status_t BUSBDevice::SetConfiguration(const BUSBConfiguration *configuration)
 {
 	if (!configuration || configuration->Index() >= fDescriptor.num_configurations)
 		return B_BAD_VALUE;

@@ -62,8 +62,7 @@ SupportingApps::~SupportingApps()
 
 	See \c BMimeType::GetSupportingApps() for more information.
 */
-status_t
-SupportingApps::GetSupportingApps(const char *type, BMessage *apps)
+status_t SupportingApps::GetSupportingApps(const char *type, BMessage *apps)
 {
 	status_t err = type && apps ? B_OK : B_BAD_VALUE;
 	// See if we need to do our initial build still
@@ -154,8 +153,7 @@ SupportingApps::GetSupportingApps(const char *type, BMessage *apps)
 	                said mappings are not updated until the next SetSupportedTypes(..., true)
 	                call.
 */
-status_t
-SupportingApps::SetSupportedTypes(const char *app, const BMessage *types, bool fullSync)
+status_t SupportingApps::SetSupportedTypes(const char *app, const BMessage *types, bool fullSync)
 {
 	status_t err = app && types ? B_OK : B_BAD_VALUE;
 	if (!fHaveDoneFullBuild)
@@ -211,8 +209,7 @@ SupportingApps::SetSupportedTypes(const char *app, const BMessage *types, bool f
 	\param app The application whose supported types you are clearing
 	\param fullSync See SupportingApps::SetSupportedTypes()
 */
-status_t
-SupportingApps::DeleteSupportedTypes(const char *app, bool fullSync)
+status_t SupportingApps::DeleteSupportedTypes(const char *app, bool fullSync)
 {
 	BMessage types;
 	return SetSupportedTypes(app, &types, fullSync);
@@ -228,8 +225,7 @@ SupportingApps::DeleteSupportedTypes(const char *app, bool fullSync)
 	- B_OK: success, even if the app was already in the supporting apps list
 	- "error code": failure
 */
-status_t
-SupportingApps::AddSupportingApp(const char *type, const char *app)
+status_t SupportingApps::AddSupportingApp(const char *type, const char *app)
 {
 	status_t err = type && app ? B_OK : B_BAD_VALUE;
 	if (!err)
@@ -247,8 +243,7 @@ SupportingApps::AddSupportingApp(const char *type, const char *app)
 	- B_OK: success, even if the app was not found in the supporting apps list
 	- "error code": failure
 */
-status_t
-SupportingApps::RemoveSupportingApp(const char *type, const char *app)
+status_t SupportingApps::RemoveSupportingApp(const char *type, const char *app)
 {
 	status_t err = type && app ? B_OK : B_BAD_VALUE;
 	if (!err)
@@ -260,8 +255,7 @@ SupportingApps::RemoveSupportingApp(const char *type, const char *app)
 /*! \brief Crawls the mime database and builds a list of supporting application
 	signatures for every supported type.
 */
-status_t
-SupportingApps::BuildSupportingAppsTable()
+status_t SupportingApps::BuildSupportingAppsTable()
 {
 	fSupportedTypes.clear();
 	fSupportingApps.clear();

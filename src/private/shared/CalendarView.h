@@ -106,8 +106,7 @@ private:
 									{
 									}
 
-									void
-									SetTo(int32 _row, int32 _column)
+									void 									SetTo(int32 _row, int32 _column)
 									{
 										row = _row;
 										column = _column;

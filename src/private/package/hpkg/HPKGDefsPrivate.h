@@ -88,8 +88,7 @@ attribute_tag_encoding(uint16 tag)
 }
 
 
-static inline bool
-attribute_tag_has_children(uint16 tag)
+static inline bool attribute_tag_has_children(uint16 tag)
 {
 	return (((tag - 1) >> 10) & 0x1) != 0;
 }

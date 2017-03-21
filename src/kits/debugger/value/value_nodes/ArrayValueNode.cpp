@@ -58,8 +58,7 @@ AbstractArrayValueNode::GetType() const
 }
 
 
-status_t
-AbstractArrayValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
+status_t AbstractArrayValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 	ValueLocation*& _location, Value*& _value)
 {
 	// get the location
@@ -74,8 +73,7 @@ AbstractArrayValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 }
 
 
-status_t
-AbstractArrayValueNode::CreateChildren(TeamTypeInformation* info)
+status_t AbstractArrayValueNode::CreateChildren(TeamTypeInformation* info)
 {
 	if (!fChildren.IsEmpty())
 		return B_OK;
@@ -84,8 +82,7 @@ AbstractArrayValueNode::CreateChildren(TeamTypeInformation* info)
 }
 
 
-int32
-AbstractArrayValueNode::CountChildren() const
+int32 AbstractArrayValueNode::CountChildren() const
 {
 	return fChildren.CountItems();
 }
@@ -98,15 +95,13 @@ AbstractArrayValueNode::ChildAt(int32 index) const
 }
 
 
-bool
-AbstractArrayValueNode::IsRangedContainer() const
+bool AbstractArrayValueNode::IsRangedContainer() const
 {
 	return true;
 }
 
 
-void
-AbstractArrayValueNode::ClearChildren()
+void AbstractArrayValueNode::ClearChildren()
 {
 	fChildren.MakeEmpty();
 	fLowerBound = 0;
@@ -116,8 +111,7 @@ AbstractArrayValueNode::ClearChildren()
 }
 
 
-status_t
-AbstractArrayValueNode::CreateChildrenInRange(TeamTypeInformation* info,
+status_t AbstractArrayValueNode::CreateChildrenInRange(TeamTypeInformation* info,
 	int32 lowIndex, int32 highIndex)
 {
 	// TODO: ensure that we don't already have children in the specified
@@ -175,8 +169,7 @@ AbstractArrayValueNode::CreateChildrenInRange(TeamTypeInformation* info,
 }
 
 
-status_t
-AbstractArrayValueNode::SupportedChildRange(int32& lowIndex,
+status_t AbstractArrayValueNode::SupportedChildRange(int32& lowIndex,
 	int32& highIndex) const
 {
 	if (!fBoundsInitialized) {
@@ -288,8 +281,7 @@ ArrayValueNodeChild::GetType() const
 }
 
 
-status_t
-ArrayValueNodeChild::ResolveLocation(ValueLoader* valueLoader,
+status_t ArrayValueNodeChild::ResolveLocation(ValueLoader* valueLoader,
 	ValueLocation*& _location)
 {
 	// get the parent (== array) location
@@ -359,15 +351,13 @@ InternalArrayValueNodeChild::GetType() const
 }
 
 
-bool
-InternalArrayValueNodeChild::IsInternal() const
+bool InternalArrayValueNodeChild::IsInternal() const
 {
 	return true;
 }
 
 
-status_t
-InternalArrayValueNodeChild::CreateInternalNode(ValueNode*& _node)
+status_t InternalArrayValueNodeChild::CreateInternalNode(ValueNode*& _node)
 {
 	ValueNode* node = new(std::nothrow) InternalArrayValueNode(this, fType,
 		fParent->Dimension() + 1);
@@ -379,8 +369,7 @@ InternalArrayValueNodeChild::CreateInternalNode(ValueNode*& _node)
 }
 
 
-status_t
-InternalArrayValueNodeChild::ResolveLocation(ValueLoader* valueLoader,
+status_t InternalArrayValueNodeChild::ResolveLocation(ValueLoader* valueLoader,
 	ValueLocation*& _location)
 {
 	// This is an internal child node for a non-final dimension -- just clone

@@ -459,8 +459,7 @@ PackageWriterImpl::~PackageWriterImpl()
 }
 
 
-status_t
-PackageWriterImpl::Init(const char* fileName,
+status_t PackageWriterImpl::Init(const char* fileName,
 	const BPackageWriterParameters& parameters)
 {
 	try {
@@ -474,8 +473,7 @@ PackageWriterImpl::Init(const char* fileName,
 }
 
 
-status_t
-PackageWriterImpl::Init(BPositionIO* file, bool keepFile,
+status_t PackageWriterImpl::Init(BPositionIO* file, bool keepFile,
 	const BPackageWriterParameters& parameters)
 {
 	try {
@@ -489,8 +487,7 @@ PackageWriterImpl::Init(BPositionIO* file, bool keepFile,
 }
 
 
-status_t
-PackageWriterImpl::SetInstallPath(const char* installPath)
+status_t PackageWriterImpl::SetInstallPath(const char* installPath)
 {
 	fInstallPath = installPath;
 	return installPath == NULL
@@ -499,15 +496,13 @@ PackageWriterImpl::SetInstallPath(const char* installPath)
 }
 
 
-void
-PackageWriterImpl::SetCheckLicenses(bool checkLicenses)
+void PackageWriterImpl::SetCheckLicenses(bool checkLicenses)
 {
 	fCheckLicenses = checkLicenses;
 }
 
 
-status_t
-PackageWriterImpl::AddEntry(const char* fileName, int fd)
+status_t PackageWriterImpl::AddEntry(const char* fileName, int fd)
 {
 	try {
 		// if it's ".PackageInfo", parse it
@@ -581,8 +576,7 @@ PackageWriterImpl::AddEntry(const char* fileName, int fd)
 }
 
 
-status_t
-PackageWriterImpl::Finish()
+status_t PackageWriterImpl::Finish()
 {
 	try {
 		if ((Flags() & B_HPKG_WRITER_UPDATE_PACKAGE) != 0) {
@@ -621,8 +615,7 @@ PackageWriterImpl::Finish()
 }
 
 
-status_t
-PackageWriterImpl::Recompress(BPositionIO* inputFile)
+status_t PackageWriterImpl::Recompress(BPositionIO* inputFile)
 {
 	if (inputFile == NULL)
 		return B_BAD_VALUE;
@@ -638,8 +631,7 @@ PackageWriterImpl::Recompress(BPositionIO* inputFile)
 }
 
 
-status_t
-PackageWriterImpl::_Init(BPositionIO* file, bool keepFile, const char* fileName,
+status_t PackageWriterImpl::_Init(BPositionIO* file, bool keepFile, const char* fileName,
 	const BPackageWriterParameters& parameters)
 {
 	status_t result = inherited::Init(file, keepFile, fileName, parameters);
@@ -706,8 +698,7 @@ PackageWriterImpl::_Init(BPositionIO* file, bool keepFile, const char* fileName,
 }
 
 
-status_t
-PackageWriterImpl::_Finish()
+status_t PackageWriterImpl::_Finish()
 {
 	// write entries
 	for (EntryList::ConstIterator it = fRootEntry->ChildIterator();
@@ -771,8 +762,7 @@ PackageWriterImpl::_Finish()
 }
 
 
-status_t
-PackageWriterImpl::_Recompress(BPositionIO* inputFile)
+status_t PackageWriterImpl::_Recompress(BPositionIO* inputFile)
 {
 	if (inputFile == NULL)
 		return B_BAD_VALUE;
@@ -839,8 +829,7 @@ PackageWriterImpl::_Recompress(BPositionIO* inputFile)
 }
 
 
-status_t
-PackageWriterImpl::_CheckLicenses()
+status_t PackageWriterImpl::_CheckLicenses()
 {
 	BPath systemLicensePath;
 	status_t result
@@ -886,8 +875,7 @@ PackageWriterImpl::_CheckLicenses()
 }
 
 
-bool
-PackageWriterImpl::_IsEntryInPackage(const char* fileName)
+bool PackageWriterImpl::_IsEntryInPackage(const char* fileName)
 {
 	const char* originalFileName = fileName;
 
@@ -967,8 +955,7 @@ PackageWriterImpl::_IsEntryInPackage(const char* fileName)
 }
 
 
-void
-PackageWriterImpl::_UpdateReadPackageInfo()
+void PackageWriterImpl::_UpdateReadPackageInfo()
 {
 	// get the .PackageInfo entry attribute
 	Attribute* attribute = fRootAttribute->FindEntryChild(
@@ -1029,8 +1016,7 @@ PackageWriterImpl::_UpdateReadPackageInfo()
 }
 
 
-void
-PackageWriterImpl::_UpdateCheckEntryCollisions()
+void PackageWriterImpl::_UpdateCheckEntryCollisions()
 {
 	for (EntryList::ConstIterator it = fRootEntry->ChildIterator();
 			Entry* entry = it.Next();) {
@@ -1042,8 +1028,7 @@ PackageWriterImpl::_UpdateCheckEntryCollisions()
 }
 
 
-void
-PackageWriterImpl::_UpdateCheckEntryCollisions(Attribute* parentAttribute,
+void PackageWriterImpl::_UpdateCheckEntryCollisions(Attribute* parentAttribute,
 	int dirFD, Entry* entry, const char* fileName, char* pathBuffer)
 {
 	bool isImplicitEntry = entry != NULL && entry->IsImplicit();
@@ -1200,8 +1185,7 @@ PackageWriterImpl::_UpdateCheckEntryCollisions(Attribute* parentAttribute,
 }
 
 
-void
-PackageWriterImpl::_CompactHeap()
+void PackageWriterImpl::_CompactHeap()
 {
 	int32 count = fHeapRangesToRemove->CountRanges();
 	if (count == 0)
@@ -1229,8 +1213,7 @@ PackageWriterImpl::_CompactHeap()
 }
 
 
-void
-PackageWriterImpl::_AttributeRemoved(Attribute* attribute)
+void PackageWriterImpl::_AttributeRemoved(Attribute* attribute)
 {
 	AttributeValue& value = attribute->value;
 	if (value.type == B_HPKG_ATTRIBUTE_TYPE_RAW
@@ -1248,8 +1231,7 @@ PackageWriterImpl::_AttributeRemoved(Attribute* attribute)
 }
 
 
-status_t
-PackageWriterImpl::_RegisterEntry(const char* fileName, int fd)
+status_t PackageWriterImpl::_RegisterEntry(const char* fileName, int fd)
 {
 	if (*fileName == '\0') {
 		fListener->PrintError("Invalid empty file name\n");
@@ -1322,8 +1304,7 @@ PackageWriterImpl::_RegisterEntry(Entry* parent, const char* name,
 }
 
 
-void
-PackageWriterImpl::_WriteTOC(hpkg_header& header, uint64& _length)
+void PackageWriterImpl::_WriteTOC(hpkg_header& header, uint64& _length)
 {
 	// write the subsections
 	uint64 startOffset = fHeapWriter->UncompressedHeapSize();
@@ -1352,8 +1333,7 @@ PackageWriterImpl::_WriteTOC(hpkg_header& header, uint64& _length)
 }
 
 
-void
-PackageWriterImpl::_WriteAttributeChildren(Attribute* attribute)
+void PackageWriterImpl::_WriteAttributeChildren(Attribute* attribute)
 {
 	DoublyLinkedList<Attribute>::Iterator it
 		= attribute->children.GetIterator();
@@ -1374,8 +1354,7 @@ PackageWriterImpl::_WriteAttributeChildren(Attribute* attribute)
 }
 
 
-void
-PackageWriterImpl::_WritePackageAttributes(hpkg_header& header, uint64& _length)
+void PackageWriterImpl::_WritePackageAttributes(hpkg_header& header, uint64& _length)
 {
 	// write cached strings and package attributes tree
 	off_t startOffset = fHeapWriter->UncompressedHeapSize();
@@ -1397,8 +1376,7 @@ PackageWriterImpl::_WritePackageAttributes(hpkg_header& header, uint64& _length)
 }
 
 
-void
-PackageWriterImpl::_AddEntry(int dirFD, Entry* entry, const char* fileName,
+void PackageWriterImpl::_AddEntry(int dirFD, Entry* entry, const char* fileName,
 	char* pathBuffer)
 {
 	bool isImplicitEntry = entry != NULL && entry->IsImplicit();
@@ -1559,8 +1537,7 @@ PackageWriterImpl::_AddEntry(int dirFD, Entry* entry, const char* fileName,
 }
 
 
-void
-PackageWriterImpl::_AddDirectoryChildren(Entry* entry, int fd, char* pathBuffer)
+void PackageWriterImpl::_AddDirectoryChildren(Entry* entry, int fd, char* pathBuffer)
 {
 	// directory -- recursively add children
 	if (entry != NULL && entry->IsImplicit()) {
@@ -1644,8 +1621,7 @@ PackageWriterImpl::_AddDataAttribute(BHPKGAttributeID attributeID,
 }
 
 
-status_t
-PackageWriterImpl::_AddData(BDataReader& dataReader, off_t size)
+status_t PackageWriterImpl::_AddData(BDataReader& dataReader, off_t size)
 {
 	// add short data inline
 	if (size <= B_HPKG_MAX_INLINE_DATA_SIZE) {

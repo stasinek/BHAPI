@@ -159,8 +159,7 @@ BNetEndpoint::~BNetEndpoint()
 // #pragma mark -
 
 
-status_t
-BNetEndpoint::Archive(BMessage* into, bool deep) const
+status_t BNetEndpoint::Archive(BMessage* into, bool deep) const
 {
 	if (!into)
 		return B_ERROR;
@@ -218,8 +217,7 @@ BNetEndpoint::Instantiate(BMessage* archive)
 // #pragma mark -
 
 
-status_t
-BNetEndpoint::InitCheck() const
+status_t BNetEndpoint::InitCheck() const
 {
 	return fSocket == -1 ? B_NO_INIT : B_OK;
 }
@@ -246,8 +244,7 @@ BNetEndpoint::RemoteAddr() const
 }
 
 
-status_t
-BNetEndpoint::SetProtocol(int protocol)
+status_t BNetEndpoint::SetProtocol(int protocol)
 {
 	Close();
 	fType = protocol;	// sic (protocol is SOCK_DGRAM or SOCK_STREAM)
@@ -308,8 +305,7 @@ BNetEndpoint::SetReuseAddr(bool enable)
 }
 
 
-void
-BNetEndpoint::SetTimeout(bigtime_t timeout)
+void BNetEndpoint::SetTimeout(bigtime_t timeout)
 {
 	fTimeout = timeout;
 	// TODO: Map value < 0 to B_INFINITE_TIMEOUT or use -1 by default.
@@ -323,8 +319,7 @@ BNetEndpoint::Error() const
 }
 
 
-char*
-BNetEndpoint::ErrorStr() const
+char*  BNetEndpoint::ErrorStr() const
 {
 	return strerror(fStatus);
 }
@@ -333,8 +328,7 @@ BNetEndpoint::ErrorStr() const
 // #pragma mark -
 
 
-void
-BNetEndpoint::Close()
+void BNetEndpoint::Close()
 {
 	if (fSocket >= 0)
 		close(fSocket);
@@ -344,8 +338,7 @@ BNetEndpoint::Close()
 }
 
 
-status_t
-BNetEndpoint::Bind(const BNetAddress& address)
+status_t BNetEndpoint::Bind(const BNetAddress& address)
 {
 	if (fSocket < 0 && _SetupSocket() != B_OK)
 		return fStatus;
@@ -373,16 +366,14 @@ BNetEndpoint::Bind(const BNetAddress& address)
 }
 
 
-status_t
-BNetEndpoint::Bind(int port)
+status_t BNetEndpoint::Bind(int port)
 {
 	BNetAddress addr(INADDR_ANY, port);
 	return Bind(addr);
 }
 
 
-status_t
-BNetEndpoint::Connect(const BNetAddress& address)
+status_t BNetEndpoint::Connect(const BNetAddress& address)
 {
 	if (fSocket < 0 && _SetupSocket() != B_OK)
 		return fStatus;
@@ -408,16 +399,14 @@ BNetEndpoint::Connect(const BNetAddress& address)
 }
 
 
-status_t
-BNetEndpoint::Connect(const char *hostname, int port)
+status_t BNetEndpoint::Connect(const char *hostname, int port)
 {
 	BNetAddress addr(hostname, port);
 	return Connect(addr);
 }
 
 
-status_t
-BNetEndpoint::Listen(int backlog)
+status_t BNetEndpoint::Listen(int backlog)
 {
 	if (fSocket < 0 && _SetupSocket() != B_OK)
 		return fStatus;
@@ -474,8 +463,7 @@ BNetEndpoint::Accept(int32 timeout)
 // #pragma mark -
 
 
-bool
-BNetEndpoint::IsDataPending(bigtime_t timeout)
+bool BNetEndpoint::IsDataPending(bigtime_t timeout)
 {
 	struct timeval tv;
 	fd_set fds;
@@ -498,8 +486,7 @@ BNetEndpoint::IsDataPending(bigtime_t timeout)
 }
 
 
-int32
-BNetEndpoint::Receive(void* buffer, size_t length, int flags)
+int32 BNetEndpoint::Receive(void* buffer, size_t length, int flags)
 {
 	if (fSocket < 0 && _SetupSocket() != B_OK)
 		return fStatus;
@@ -517,8 +504,7 @@ BNetEndpoint::Receive(void* buffer, size_t length, int flags)
 }
 
 
-int32
-BNetEndpoint::Receive(BNetBuffer& buffer, size_t length, int flags)
+int32 BNetEndpoint::Receive(BNetBuffer& buffer, size_t length, int flags)
 {
 	BNetBuffer chunk(length);
 	ssize_t bytesReceived = Receive(chunk.Data(), length, flags);
@@ -528,8 +514,7 @@ BNetEndpoint::Receive(BNetBuffer& buffer, size_t length, int flags)
 }
 
 
-int32
-BNetEndpoint::ReceiveFrom(void* buffer, size_t length,
+int32 BNetEndpoint::ReceiveFrom(void* buffer, size_t length,
 	BNetAddress& address, int flags)
 {
 	if (fSocket < 0 && _SetupSocket() != B_OK)
@@ -554,8 +539,7 @@ BNetEndpoint::ReceiveFrom(void* buffer, size_t length,
 }
 
 
-int32
-BNetEndpoint::ReceiveFrom(BNetBuffer& buffer, size_t length,
+int32 BNetEndpoint::ReceiveFrom(BNetBuffer& buffer, size_t length,
 	BNetAddress& address, int flags)
 {
 	BNetBuffer chunk(length);
@@ -566,8 +550,7 @@ BNetEndpoint::ReceiveFrom(BNetBuffer& buffer, size_t length,
 }
 
 
-int32
-BNetEndpoint::Send(const void* buffer, size_t length, int flags)
+int32 BNetEndpoint::Send(const void* buffer, size_t length, int flags)
 {
 	if (fSocket < 0 && _SetupSocket() != B_OK)
 		return fStatus;
@@ -580,15 +563,13 @@ BNetEndpoint::Send(const void* buffer, size_t length, int flags)
 }
 
 
-int32
-BNetEndpoint::Send(BNetBuffer& buffer, int flags)
+int32 BNetEndpoint::Send(BNetBuffer& buffer, int flags)
 {
 	return Send(buffer.Data(), buffer.Size(), flags);
 }
 
 
-int32
-BNetEndpoint::SendTo(const void* buffer, size_t length,
+int32 BNetEndpoint::SendTo(const void* buffer, size_t length,
 	const BNetAddress& address, int flags)
 {
 	if (fSocket < 0 && _SetupSocket() != B_OK)
@@ -607,8 +588,7 @@ BNetEndpoint::SendTo(const void* buffer, size_t length,
 }
 
 
-int32
-BNetEndpoint::SendTo(BNetBuffer& buffer,
+int32 BNetEndpoint::SendTo(BNetBuffer& buffer,
 	const BNetAddress& address, int flags)
 {
 	return SendTo(buffer.Data(), buffer.Size(), address, flags);
@@ -618,8 +598,7 @@ BNetEndpoint::SendTo(BNetBuffer& buffer,
 // #pragma mark -
 
 
-status_t
-BNetEndpoint::_SetupSocket()
+status_t BNetEndpoint::_SetupSocket()
 {
 	if ((fSocket = socket(fFamily, fType, fProtocol)) < 0)
 		fStatus = errno;

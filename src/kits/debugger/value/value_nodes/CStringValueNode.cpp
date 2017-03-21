@@ -43,8 +43,7 @@ CStringValueNode::GetType() const
 }
 
 
-status_t
-CStringValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
+status_t CStringValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 	ValueLocation*& _location, Value*& _value)
 {
 	// get the location

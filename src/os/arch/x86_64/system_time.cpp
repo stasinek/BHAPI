@@ -11,8 +11,7 @@ static uint64_t cv_factor;
 static uint64_t cv_factor_nsec;
 
 
-extern "C" void
-__x86_setup_system_time(uint64_t cv, uint64_t cv_nsec)
+extern "C" void __x86_setup_system_time(uint64_t cv, uint64_t cv_nsec)
 {
     cv_factor = cv;
     cv_factor_nsec = cv_nsec;

@@ -57,8 +57,7 @@ StackFrame::~StackFrame()
 }
 
 
-status_t
-StackFrame::Init()
+status_t StackFrame::Init()
 {
 	// create values map
 	fValues = new(std::nothrow) StackFrameValues;
@@ -82,8 +81,7 @@ StackFrame::Init()
 }
 
 
-void
-StackFrame::SetPreviousCpuState(CpuState* state)
+void StackFrame::SetPreviousCpuState(CpuState* state)
 {
 	if (fPreviousCpuState != NULL)
 		fPreviousCpuState->ReleaseReference();
@@ -94,15 +92,13 @@ StackFrame::SetPreviousCpuState(CpuState* state)
 		fPreviousCpuState->AcquireReference();
 }
 
-void
-StackFrame::SetReturnAddress(target_addr_t address)
+void StackFrame::SetReturnAddress(target_addr_t address)
 {
 	fReturnAddress = address;
 }
 
 
-void
-StackFrame::SetImage(Image* image)
+void StackFrame::SetImage(Image* image)
 {
 	if (fImage != NULL)
 		fImage->ReleaseReference();
@@ -114,8 +110,7 @@ StackFrame::SetImage(Image* image)
 }
 
 
-void
-StackFrame::SetFunction(FunctionInstance* function)
+void StackFrame::SetFunction(FunctionInstance* function)
 {
 	if (fFunction != NULL)
 		fFunction->ReleaseReference();
@@ -127,8 +122,7 @@ StackFrame::SetFunction(FunctionInstance* function)
 }
 
 
-int32
-StackFrame::CountParameters() const
+int32 StackFrame::CountParameters() const
 {
 	return fParameters.CountItems();
 }
@@ -141,8 +135,7 @@ StackFrame::ParameterAt(int32 index) const
 }
 
 
-bool
-StackFrame::AddParameter(Variable* parameter)
+bool StackFrame::AddParameter(Variable* parameter)
 {
 	if (!fParameters.AddItem(parameter))
 		return false;
@@ -152,8 +145,7 @@ StackFrame::AddParameter(Variable* parameter)
 }
 
 
-int32
-StackFrame::CountLocalVariables() const
+int32 StackFrame::CountLocalVariables() const
 {
 	return fLocalVariables.CountItems();
 }
@@ -166,8 +158,7 @@ StackFrame::LocalVariableAt(int32 index) const
 }
 
 
-bool
-StackFrame::AddLocalVariable(Variable* variable)
+bool StackFrame::AddLocalVariable(Variable* variable)
 {
 	if (!fLocalVariables.AddItem(variable))
 		return false;
@@ -177,22 +168,19 @@ StackFrame::AddLocalVariable(Variable* variable)
 }
 
 
-void
-StackFrame::AddListener(Listener* listener)
+void StackFrame::AddListener(Listener* listener)
 {
 	fListeners.Add(listener);
 }
 
 
-void
-StackFrame::RemoveListener(Listener* listener)
+void StackFrame::RemoveListener(Listener* listener)
 {
 	fListeners.Remove(listener);
 }
 
 
-void
-StackFrame::NotifyValueRetrieved(Variable* variable, TypeComponentPath* path)
+void StackFrame::NotifyValueRetrieved(Variable* variable, TypeComponentPath* path)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -209,8 +197,7 @@ StackFrame::Listener::~Listener()
 }
 
 
-void
-StackFrame::Listener::StackFrameValueRetrieved(StackFrame* stackFrame,
+void StackFrame::Listener::StackFrameValueRetrieved(StackFrame* stackFrame,
 	Variable* variable, TypeComponentPath* path)
 {
 }

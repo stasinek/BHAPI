@@ -55,8 +55,7 @@ BUserSettingsFileInfo::~BUserSettingsFileInfo()
 }
 
 
-status_t
-BUserSettingsFileInfo::InitCheck() const
+status_t BUserSettingsFileInfo::InitCheck() const
 {
 	return fPath.IsEmpty() ? B_NO_INIT : B_OK;
 }
@@ -76,15 +75,13 @@ BUserSettingsFileInfo::TemplatePath() const
 }
 
 
-bool
-BUserSettingsFileInfo::IsDirectory() const
+bool BUserSettingsFileInfo::IsDirectory() const
 {
 	return fIsDirectory;
 }
 
 
-void
-BUserSettingsFileInfo::SetTo(const BString& path, const BString& templatePath)
+void BUserSettingsFileInfo::SetTo(const BString& path, const BString& templatePath)
 {
 	fPath = path;
 	fTemplatePath = templatePath;
@@ -92,8 +89,7 @@ BUserSettingsFileInfo::SetTo(const BString& path, const BString& templatePath)
 }
 
 
-void
-BUserSettingsFileInfo::SetTo(const BString& path, bool isDirectory)
+void BUserSettingsFileInfo::SetTo(const BString& path, bool isDirectory)
 {
 	fPath = path;
 	fTemplatePath.Truncate(0);

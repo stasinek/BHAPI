@@ -28,8 +28,7 @@ DriverSettingsConverter::~DriverSettingsConverter()
 }
 
 
-status_t
-DriverSettingsConverter::ConvertFromDriverSettings(
+status_t DriverSettingsConverter::ConvertFromDriverSettings(
 	const driver_parameter& parameter, const char* name, int32 index,
 	uint32 type, BMessage& target)
 {
@@ -37,8 +36,7 @@ DriverSettingsConverter::ConvertFromDriverSettings(
 }
 
 
-status_t
-DriverSettingsConverter::ConvertEmptyFromDriverSettings(
+status_t DriverSettingsConverter::ConvertEmptyFromDriverSettings(
 	const driver_parameter& parameter, const char* name, uint32 type,
 	BMessage& target)
 {
@@ -46,8 +44,7 @@ DriverSettingsConverter::ConvertEmptyFromDriverSettings(
 }
 
 
-status_t
-DriverSettingsConverter::ConvertToDriverSettings(const BMessage& source,
+status_t DriverSettingsConverter::ConvertToDriverSettings(const BMessage& source,
 	const char* name, int32 index, uint32 type, BString& value)
 {
 	return B_NOT_SUPPORTED;
@@ -67,8 +64,7 @@ DriverSettingsMessageAdapter::~DriverSettingsMessageAdapter()
 }
 
 
-status_t
-DriverSettingsMessageAdapter::ConvertFromDriverSettings(
+status_t DriverSettingsMessageAdapter::ConvertFromDriverSettings(
 	const driver_settings& settings, const settings_template* settingsTemplate,
 	BMessage& message)
 {
@@ -89,8 +85,7 @@ DriverSettingsMessageAdapter::ConvertFromDriverSettings(
 }
 
 
-status_t
-DriverSettingsMessageAdapter::ConvertFromDriverSettings(const char* path,
+status_t DriverSettingsMessageAdapter::ConvertFromDriverSettings(const char* path,
 	const settings_template* settingsTemplate, BMessage& message)
 {
 	void* handle = load_driver_settings(path);
@@ -110,8 +105,7 @@ DriverSettingsMessageAdapter::ConvertFromDriverSettings(const char* path,
 }
 
 
-status_t
-DriverSettingsMessageAdapter::ConvertToDriverSettings(
+status_t DriverSettingsMessageAdapter::ConvertToDriverSettings(
 	const settings_template* settingsTemplate, BString& settings,
 	const BMessage& message)
 {
@@ -131,8 +125,7 @@ DriverSettingsMessageAdapter::ConvertToDriverSettings(
 }
 
 
-status_t
-DriverSettingsMessageAdapter::ConvertToDriverSettings(const char* path,
+status_t DriverSettingsMessageAdapter::ConvertToDriverSettings(const char* path,
 	const settings_template* settingsTemplate, const BMessage& message)
 {
 	BString settings;
@@ -194,8 +187,7 @@ DriverSettingsMessageAdapter::_FindParentValueTemplate(
 }
 
 
-status_t
-DriverSettingsMessageAdapter::_AddParameter(const driver_parameter& parameter,
+status_t DriverSettingsMessageAdapter::_AddParameter(const driver_parameter& parameter,
 	const settings_template& settingsTemplate, BMessage& message)
 {
 	const char* name = settingsTemplate.name;
@@ -260,8 +252,7 @@ DriverSettingsMessageAdapter::_AddParameter(const driver_parameter& parameter,
 }
 
 
-status_t
-DriverSettingsMessageAdapter::_ConvertFromDriverParameter(
+status_t DriverSettingsMessageAdapter::_ConvertFromDriverParameter(
 	const driver_parameter& parameter,
 	const settings_template* settingsTemplate, BMessage& message)
 {
@@ -297,8 +288,7 @@ DriverSettingsMessageAdapter::_ConvertFromDriverParameter(
 }
 
 
-status_t
-DriverSettingsMessageAdapter::_AppendSettings(
+status_t DriverSettingsMessageAdapter::_AppendSettings(
 	const settings_template* settingsTemplate, BString& settings,
 	const BMessage& message, const char* name, type_code type, int32 count,
 	const char* settingName)

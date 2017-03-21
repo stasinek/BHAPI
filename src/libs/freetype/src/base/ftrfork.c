@@ -736,8 +736,7 @@
   }
 
 
-  static char*
-  raccess_make_file_name( FT_Memory    memory,
+  static char*    raccess_make_file_name( FT_Memory    memory,
                           const char  *original_name,
                           const char  *insertion )
   {

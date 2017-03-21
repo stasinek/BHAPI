@@ -30,8 +30,7 @@ BLowLevelPackageContentHandler::~BLowLevelPackageContentHandler()
 }
 
 
-/*static*/ const char*
-BLowLevelPackageContentHandler::AttributeNameForID(uint8 id)
+/*static*/ const char*  BLowLevelPackageContentHandler::AttributeNameForID(uint8 id)
 {
 	if (id >= B_HPKG_ATTRIBUTE_ID_ENUM_COUNT)
 		return NULL;

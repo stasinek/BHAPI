@@ -7,8 +7,7 @@
 #include "UnsupportedLanguage.h"
 
 
-const char*
-UnsupportedLanguage::Name() const
+const char*  UnsupportedLanguage::Name() const
 {
 	return "unsupported";
 }

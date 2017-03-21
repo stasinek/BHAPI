@@ -11,8 +11,7 @@
 
 #if 0
 // TODO: move this to the KeyStore or the registrar backend if needed
-static bool
-CompareLists(BObjectList<BString> a, BObjectList<BString> b)
+static bool CompareLists(BObjectList<BString> a, BObjectList<BString> b)
 {
 	if (a.CountItems() != b.CountItems())
 		return false;
@@ -54,15 +53,13 @@ BKey::~BKey()
 }
 
 
-void
-BKey::Unset()
+void BKey::Unset()
 {
 	SetTo(B_KEY_PURPOSE_GENERIC, "", "", NULL, 0);
 }
 
 
-status_t
-BKey::SetTo(BKeyPurpose purpose, const char* identifier,
+status_t BKey::SetTo(BKeyPurpose purpose, const char* identifier,
 	const char* secondaryIdentifier, const uint8* data, size_t length)
 {
 	fCreationTime = 0;
@@ -73,8 +70,7 @@ BKey::SetTo(BKeyPurpose purpose, const char* identifier,
 }
 
 
-void
-BKey::SetPurpose(BKeyPurpose purpose)
+void BKey::SetPurpose(BKeyPurpose purpose)
 {
 	fPurpose = purpose;
 }
@@ -87,36 +83,31 @@ BKey::Purpose() const
 }
 
 
-void
-BKey::SetIdentifier(const char* identifier)
+void BKey::SetIdentifier(const char* identifier)
 {
 	fIdentifier = identifier;
 }
 
 
-const char*
-BKey::Identifier() const
+const char*  BKey::Identifier() const
 {
 	return fIdentifier.String();
 }
 
 
-void
-BKey::SetSecondaryIdentifier(const char* identifier)
+void BKey::SetSecondaryIdentifier(const char* identifier)
 {
 	fSecondaryIdentifier = identifier;
 }
 
 
-const char*
-BKey::SecondaryIdentifier() const
+const char*  BKey::SecondaryIdentifier() const
 {
 	return fSecondaryIdentifier.String();
 }
 
 
-status_t
-BKey::SetData(const uint8* data, size_t length)
+status_t BKey::SetData(const uint8* data, size_t length)
 {
 	fData.SetSize(0);
 	ssize_t bytesWritten = fData.WriteAt(0, data, length);
@@ -141,8 +132,7 @@ BKey::Data() const
 }
 
 
-status_t
-BKey::GetData(uint8* buffer, size_t bufferSize) const
+status_t BKey::GetData(uint8* buffer, size_t bufferSize) const
 {
 	ssize_t bytesRead = fData.ReadAt(0, buffer, bufferSize);
 	if (bytesRead < 0)
@@ -153,8 +143,7 @@ BKey::GetData(uint8* buffer, size_t bufferSize) const
 
 
 
-const char*
-BKey::Owner() const
+const char*  BKey::Owner() const
 {
 	return fOwner.String();
 }
@@ -167,8 +156,7 @@ BKey::CreationTime() const
 }
 
 
-status_t
-BKey::Flatten(BMessage& message) const
+status_t BKey::Flatten(BMessage& message) const
 {
 	if (message.MakeEmpty() != B_OK
 		|| message.AddUInt32("type", Type()) != B_OK
@@ -187,8 +175,7 @@ BKey::Flatten(BMessage& message) const
 }
 
 
-status_t
-BKey::Unflatten(const BMessage& message)
+status_t BKey::Unflatten(const BMessage& message)
 {
 	BKeyType type;
 	if (message.FindUInt32("type", (uint32*)&type) != B_OK || type != Type())
@@ -226,8 +213,7 @@ BKey::operator=(const BKey& other)
 }
 
 
-bool
-BKey::operator==(const BKey& other) const
+bool BKey::operator==(const BKey& other) const
 {
 	return Type() == other.Type()
 		&& DataLength() == other.DataLength()
@@ -239,15 +225,13 @@ BKey::operator==(const BKey& other) const
 }
 
 
-bool
-BKey::operator!=(const BKey& other) const
+bool BKey::operator!=(const BKey& other) const
 {
 	return !(*this == other);
 }
 
 
-void
-BKey::PrintToStream()
+void BKey::PrintToStream()
 {
 	if (Type() == B_KEY_TYPE_GENERIC)
 		printf("generic key:\n");
@@ -310,8 +294,7 @@ BPasswordKey::~BPasswordKey()
 }
 
 
-status_t
-BPasswordKey::SetTo(const char* password, BKeyPurpose purpose,
+status_t BPasswordKey::SetTo(const char* password, BKeyPurpose purpose,
 	const char* identifier, const char* secondaryIdentifier)
 {
 	return BKey::SetTo(purpose, identifier, secondaryIdentifier,
@@ -319,22 +302,19 @@ BPasswordKey::SetTo(const char* password, BKeyPurpose purpose,
 }
 
 
-status_t
-BPasswordKey::SetPassword(const char* password)
+status_t BPasswordKey::SetPassword(const char* password)
 {
 	return SetData((const uint8*)password, strlen(password) + 1);
 }
 
 
-const char*
-BPasswordKey::Password() const
+const char*  BPasswordKey::Password() const
 {
 	return (const char*)Data();
 }
 
 
-void
-BPasswordKey::PrintToStream()
+void BPasswordKey::PrintToStream()
 {
 	printf("password key:\n");
 	BKey::PrintToStream();

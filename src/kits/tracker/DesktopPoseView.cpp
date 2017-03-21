@@ -114,8 +114,7 @@ DesktopPoseView::InitDirentIterator(const entry_ref* ref)
 }
 
 
-bool
-DesktopPoseView::FSNotification(const BMessage* message)
+bool DesktopPoseView::FSNotification(const BMessage* message)
 {
 	switch (message->FindInt32("opcode")) {
 		case B_DEVICE_MOUNTED:
@@ -145,23 +144,20 @@ DesktopPoseView::FSNotification(const BMessage* message)
 }
 
 
-bool
-DesktopPoseView::AddPosesThreadValid(const entry_ref*) const
+bool DesktopPoseView::AddPosesThreadValid(const entry_ref*) const
 {
 	return true;
 }
 
 
-void
-DesktopPoseView::AddPosesCompleted()
+void DesktopPoseView::AddPosesCompleted()
 {
 	_inherited::AddPosesCompleted();
 	CreateTrashPose();
 }
 
 
-bool
-DesktopPoseView::Represents(const node_ref* ref) const
+bool DesktopPoseView::Represents(const node_ref* ref) const
 {
 	// When the Tracker is set up to integrate non-boot beos volumes,
 	// it represents the home/Desktop folders of all beos volumes
@@ -170,8 +166,7 @@ DesktopPoseView::Represents(const node_ref* ref) const
 }
 
 
-bool
-DesktopPoseView::Represents(const entry_ref* ref) const
+bool DesktopPoseView::Represents(const entry_ref* ref) const
 {
 	BEntry entry(ref);
 	node_ref nref;
@@ -180,8 +175,7 @@ DesktopPoseView::Represents(const entry_ref* ref) const
 }
 
 
-void
-DesktopPoseView::ShowVolumes(bool visible, bool showShared)
+void DesktopPoseView::ShowVolumes(bool visible, bool showShared)
 {
 	if (LockLooper()) {
 		SavePoseLocations();
@@ -195,8 +189,7 @@ DesktopPoseView::ShowVolumes(bool visible, bool showShared)
 }
 
 
-void
-DesktopPoseView::StartSettingsWatch()
+void DesktopPoseView::StartSettingsWatch()
 {
 	if (__be_app->LockLooper()) {
 		__be_app->StartWatching(this, kShowDisksIconChanged);
@@ -207,8 +200,7 @@ DesktopPoseView::StartSettingsWatch()
 }
 
 
-void
-DesktopPoseView::StopSettingsWatch()
+void DesktopPoseView::StopSettingsWatch()
 {
 	if (__be_app->LockLooper()) {
 		__be_app->StopWatching(this, kShowDisksIconChanged);
@@ -219,8 +211,7 @@ DesktopPoseView::StopSettingsWatch()
 }
 
 
-void
-DesktopPoseView::AdaptToVolumeChange(BMessage* message)
+void DesktopPoseView::AdaptToVolumeChange(BMessage* message)
 {
 	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	ThrowOnAssert(tracker != NULL);
@@ -268,8 +259,7 @@ DesktopPoseView::AdaptToVolumeChange(BMessage* message)
 }
 
 
-void
-DesktopPoseView::AdaptToDesktopIntegrationChange(BMessage* message)
+void DesktopPoseView::AdaptToDesktopIntegrationChange(BMessage* message)
 {
 	bool mountVolumesOnDesktop = true;
 	bool mountSharedVolumesOntoDesktop = true;

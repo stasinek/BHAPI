@@ -96,8 +96,7 @@ BSolverProblem::Dependency() const
 }
 
 
-int32
-BSolverProblem::CountSolutions() const
+int32 BSolverProblem::CountSolutions() const
 {
 	return fSolutions.CountItems();
 }
@@ -110,8 +109,7 @@ BSolverProblem::SolutionAt(int32 index) const
 }
 
 
-bool
-BSolverProblem::AppendSolution(BSolverProblemSolution* solution)
+bool BSolverProblem::AppendSolution(BSolverProblemSolution* solution)
 {
 	return fSolutions.AddItem(solution);
 }

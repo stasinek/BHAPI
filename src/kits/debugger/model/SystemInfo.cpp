@@ -29,8 +29,7 @@ SystemInfo::SystemInfo(team_id team, const system_info& info,
 }
 
 
-void
-SystemInfo::SetTo(team_id team, const system_info& info, const utsname& name)
+void SystemInfo::SetTo(team_id team, const system_info& info, const utsname& name)
 {
 	fTeam = team;
 	memcpy(&fSystemInfo, &info, sizeof(system_info));

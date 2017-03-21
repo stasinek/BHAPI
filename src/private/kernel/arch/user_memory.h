@@ -6,7 +6,7 @@
 #define _KERNEL_ARCH_USER_MEMORY_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <thread.h>
 
@@ -27,8 +27,7 @@ status_t _arch_cpu_user_memset(void* s, char c, size_t count,
 }
 
 
-static inline status_t
-arch_cpu_user_memcpy(void* to, const void* from, size_t size)
+static inline status_t arch_cpu_user_memcpy(void* to, const void* from, size_t size)
 {
 	return _arch_cpu_user_memcpy(to, from, size,
 		&thread_get_current_thread()->fault_handler);
@@ -43,8 +42,7 @@ arch_cpu_user_strlcpy(char* to, const char* from, size_t size)
 }
 
 
-static inline status_t
-arch_cpu_user_memset(void* s, char c, size_t count)
+static inline status_t arch_cpu_user_memset(void* s, char c, size_t count)
 {
 	return _arch_cpu_user_memset(s, c, count,
 		&thread_get_current_thread()->fault_handler);

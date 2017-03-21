@@ -99,8 +99,7 @@ static pthread_once_t sDefaultDatabaseLocationInitOnce = PTHREAD_ONCE_INIT;
 static DatabaseLocation* sDefaultDatabaseLocation = NULL;
 
 
-static void
-init_default_database_location()
+static void init_default_database_location()
 {
 	static DatabaseLocation databaseLocation;
 	sDefaultDatabaseLocation = &databaseLocation;
@@ -160,8 +159,7 @@ default_database_location()
 	\c dataSize. The array is allocated with \c new[], and it's your
 	responsibility to \c delete[] it when you're finished.
 */
-status_t
-get_icon_data(const BBitmap *icon, icon_size which, void **data,
+status_t get_icon_data(const BBitmap *icon, icon_size which, void **data,
 	int32 *dataSize)
 {
 	if (icon == NULL || data == NULL || dataSize == 0

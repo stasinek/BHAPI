@@ -22,8 +22,7 @@ static CreateSolverFunction* sCreateSolver = NULL;
 static pthread_once_t sLoadLibsolvSolverAddOnInitOnce = PTHREAD_ONCE_INIT;
 
 
-static void
-load_libsolv_solver_add_on()
+static void load_libsolv_solver_add_on()
 {
 	int flags = 0;
 #ifdef HAIKU_TARGET_PLATFORM_HAIKU
@@ -56,8 +55,7 @@ BSolver::~BSolver()
 }
 
 
-/*static*/ status_t
-BSolver::Create(BSolver*& _solver)
+/*static*/ status_t BSolver::Create(BSolver*& _solver)
 {
 	pthread_once(&sLoadLibsolvSolverAddOnInitOnce, &load_libsolv_solver_add_on);
 	if (sCreateSolver == NULL)

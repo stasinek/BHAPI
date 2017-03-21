@@ -3,7 +3,7 @@
 #ifndef USERLAND_FS_REQUEST_H
 #define USERLAND_FS_REQUEST_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 // address info flags
 enum {

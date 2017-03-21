@@ -230,8 +230,7 @@ FT_BEGIN_HEADER
   /*    user   :: A typeless pointer passed to @FT_List_Iterate.  It can   */
   /*              be used to point to the iteration's state.               */
   /*                                                                       */
-  typedef void
-  (*FT_List_Destructor)( FT_Memory  memory,
+  typedef void   (*FT_List_Destructor)( FT_Memory  memory,
                          void*      data,
                          void*      user );
 

@@ -45,8 +45,7 @@ BPackageVersion::BPackageVersion(const BString& major, const BString& minor,
 }
 
 
-status_t
-BPackageVersion::InitCheck() const
+status_t BPackageVersion::InitCheck() const
 {
 	return fMajor.Length() > 0 ? B_OK : B_NO_INIT;
 }
@@ -80,8 +79,7 @@ BPackageVersion::PreRelease() const
 }
 
 
-uint32
-BPackageVersion::Revision() const
+uint32 BPackageVersion::Revision() const
 {
 	return fRevision;
 }
@@ -145,8 +143,7 @@ BPackageVersion::ToString() const
 }
 
 
-void
-BPackageVersion::SetTo(const BString& major, const BString& minor,
+void BPackageVersion::SetTo(const BString& major, const BString& minor,
 	const BString& micro, const BString& preRelease, uint32 revision)
 {
 	fMajor = major;
@@ -162,8 +159,7 @@ BPackageVersion::SetTo(const BString& major, const BString& minor,
 }
 
 
-status_t
-BPackageVersion::SetTo(const BString& versionString, bool revisionIsOptional)
+status_t BPackageVersion::SetTo(const BString& versionString, bool revisionIsOptional)
 {
 	Clear();
 	return BPackageInfo::ParseVersionString(versionString, revisionIsOptional,
@@ -171,8 +167,7 @@ BPackageVersion::SetTo(const BString& versionString, bool revisionIsOptional)
 }
 
 
-void
-BPackageVersion::Clear()
+void BPackageVersion::Clear()
 {
 	fMajor.Truncate(0);
 	fMinor.Truncate(0);

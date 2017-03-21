@@ -584,8 +584,7 @@ struct quehead {
 
 #ifdef __CC_SUPPORTS___INLINE
 
-static __inline void
-insque(void *a, void *b)
+static __inline void insque(void *a, void *b)
 {
 	struct quehead *element = (struct quehead *)a,
 		 *head = (struct quehead *)b;
@@ -596,8 +595,7 @@ insque(void *a, void *b)
 	element->qh_link->qh_rlink = element;
 }
 
-static __inline void
-remque(void *a)
+static __inline void remque(void *a)
 {
 	struct quehead *element = (struct quehead *)a;
 

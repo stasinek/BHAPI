@@ -37,7 +37,7 @@ All rights reserved.
 
 #include <Debug.h>
 #include <Looper.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include "ObjectList.h"
 #include "FunctionObject.h"
@@ -260,8 +260,7 @@ private:
 
 
 template<class Param1>
-void
-LaunchInNewThread(const char* name, int32 priority, status_t (*func)(Param1),
+void LaunchInNewThread(const char* name, int32 priority, status_t (*func)(Param1),
 	Param1 p1)
 {
 	Thread::Launch(new SingleParamFunctionObjectWorkaround<Param1>(func, p1),
@@ -270,8 +269,7 @@ LaunchInNewThread(const char* name, int32 priority, status_t (*func)(Param1),
 
 
 template<class T>
-void
-LaunchInNewThread(const char* name, int32 priority, status_t (T::*function)(),
+void LaunchInNewThread(const char* name, int32 priority, status_t (T::*function)(),
 	T* onThis)
 {
 	Thread::Launch(new SimpleMemberFunctionObjectWorkaround<T>(function,
@@ -280,8 +278,7 @@ LaunchInNewThread(const char* name, int32 priority, status_t (T::*function)(),
 
 
 template<class Param1, class Param2>
-void
-LaunchInNewThread(const char* name, int32 priority,
+void LaunchInNewThread(const char* name, int32 priority,
 	status_t (*func)(Param1, Param2),
 	Param1 p1, Param2 p2)
 {
@@ -292,8 +289,7 @@ LaunchInNewThread(const char* name, int32 priority,
 
 
 template<class Param1, class Param2, class Param3>
-void
-LaunchInNewThread(const char* name, int32 priority,
+void LaunchInNewThread(const char* name, int32 priority,
 	status_t (*func)(Param1, Param2, Param3),
 	Param1 p1, Param2 p2, Param3 p3)
 {
@@ -303,8 +299,7 @@ LaunchInNewThread(const char* name, int32 priority,
 
 
 template<class Param1, class Param2, class Param3, class Param4>
-void
-LaunchInNewThread(const char* name, int32 priority,
+void LaunchInNewThread(const char* name, int32 priority,
 	status_t (*func)(Param1, Param2, Param3, Param4),
 	Param1 p1, Param2 p2, Param3 p3, Param4 p4)
 {
@@ -341,8 +336,7 @@ private:
 
 
 template<class View>
-void
-MouseDownThread<View>::TrackMouse(View* view,
+void MouseDownThread<View>::TrackMouse(View* view,
 	void(View::*donePressing)(BPoint),
 	void(View::*pressing)(BPoint, uint32), bigtime_t pressingPeriod)
 {
@@ -369,8 +363,7 @@ MouseDownThread<View>::~MouseDownThread()
 
 
 template<class View>
-void
-MouseDownThread<View>::Go()
+void MouseDownThread<View>::Go()
 {
 	fThreadID = spawn_thread(&MouseDownThread::TrackBinder,
 		"MouseTrackingThread", B_NORMAL_PRIORITY, this);
@@ -382,8 +375,7 @@ MouseDownThread<View>::Go()
 
 
 template<class View>
-status_t
-MouseDownThread<View>::TrackBinder(void* castToThis)
+status_t MouseDownThread<View>::TrackBinder(void* castToThis)
 {
 	MouseDownThread* self = static_cast<MouseDownThread*>(castToThis);
 	self->Track();
@@ -393,8 +385,7 @@ MouseDownThread<View>::TrackBinder(void* castToThis)
 
 
 template<class View>
-void
-MouseDownThread<View>::Track()
+void MouseDownThread<View>::Track()
 {
 	for (;;) {
 		MessengerAutoLocker lock(&fOwner);

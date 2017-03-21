@@ -189,8 +189,7 @@ CLanguageFamilySyntaxHighlightInfo::~CLanguageFamilySyntaxHighlightInfo()
 }
 
 
-int32
-CLanguageFamilySyntaxHighlightInfo::GetLineHighlightRanges(int32 line,
+int32 CLanguageFamilySyntaxHighlightInfo::GetLineHighlightRanges(int32 line,
 	int32* _columns, syntax_highlight_type* _types, int32 maxCount)
 {
 	if (line >= fHighlightSource->CountLines())
@@ -224,8 +223,7 @@ CLanguageFamilySyntaxHighlightInfo::GetLineHighlightRanges(int32 line,
 }
 
 
-status_t
-CLanguageFamilySyntaxHighlightInfo::_ParseLines()
+status_t CLanguageFamilySyntaxHighlightInfo::_ParseLines()
 {
 	syntax_highlight_type type = SYNTAX_HIGHLIGHT_NONE;
 
@@ -249,8 +247,7 @@ CLanguageFamilySyntaxHighlightInfo::_ParseLines()
 }
 
 
-status_t
-CLanguageFamilySyntaxHighlightInfo::_ParseLine(int32 line,
+status_t CLanguageFamilySyntaxHighlightInfo::_ParseLine(int32 line,
 	syntax_highlight_type& _lastType, LineInfo*& _info)
 {
 	bool inCommentBlock = (_lastType == SYNTAX_HIGHLIGHT_COMMENT);

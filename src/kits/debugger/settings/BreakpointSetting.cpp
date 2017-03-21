@@ -49,8 +49,7 @@ BreakpointSetting::~BreakpointSetting()
 }
 
 
-status_t
-BreakpointSetting::SetTo(const UserBreakpointLocation& location, bool enabled,
+status_t BreakpointSetting::SetTo(const UserBreakpointLocation& location, bool enabled,
 	bool hidden, const BString& conditionExpression)
 {
 	_Unset();
@@ -72,8 +71,7 @@ BreakpointSetting::SetTo(const UserBreakpointLocation& location, bool enabled,
 }
 
 
-status_t
-BreakpointSetting::SetTo(const BMessage& archive)
+status_t BreakpointSetting::SetTo(const BMessage& archive)
 {
 	_Unset();
 
@@ -110,8 +108,7 @@ BreakpointSetting::SetTo(const BMessage& archive)
 }
 
 
-status_t
-BreakpointSetting::WriteTo(BMessage& archive) const
+status_t BreakpointSetting::WriteTo(BMessage& archive) const
 {
 	if (fFunctionID == NULL)
 		return B_BAD_VALUE;
@@ -161,8 +158,7 @@ BreakpointSetting::operator=(const BreakpointSetting& other)
 }
 
 
-void
-BreakpointSetting::_Unset()
+void BreakpointSetting::_Unset()
 {
 	if (fFunctionID != NULL) {
 		fFunctionID->ReleaseReference();

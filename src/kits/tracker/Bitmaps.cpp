@@ -91,8 +91,7 @@ BImageResources::ViewResources()
 }
 
 
-status_t
-BImageResources::FinishResources(BResources* res) const
+status_t BImageResources::FinishResources(BResources* res) const
 {
 	ASSERT(res == &fResources);
 	if (res != &fResources)
@@ -104,8 +103,7 @@ BImageResources::FinishResources(BResources* res) const
 }
 
 
-const void*
-BImageResources::LoadResource(type_code type, int32 id,
+const void*   BImageResources::LoadResource(type_code type, int32 id,
 	size_t* out_size) const
 {
 	// Serialize execution.
@@ -123,8 +121,7 @@ BImageResources::LoadResource(type_code type, int32 id,
 }
 
 
-const void*
-BImageResources::LoadResource(type_code type, const char* name,
+const void*   BImageResources::LoadResource(type_code type, const char* name,
 	size_t* out_size) const
 {
 	// Serialize execution.
@@ -140,8 +137,7 @@ BImageResources::LoadResource(type_code type, const char* name,
 }
 
 
-status_t
-BImageResources::GetIconResource(int32 id, icon_size size,
+status_t BImageResources::GetIconResource(int32 id, icon_size size,
 	BBitmap* dest) const
 {
 	size_t length = 0;
@@ -177,8 +173,7 @@ BImageResources::GetIconResource(int32 id, icon_size size,
 }
 
 
-status_t
-BImageResources::GetIconResource(int32 id, const uint8** iconData,
+status_t BImageResources::GetIconResource(int32 id, const uint8** iconData,
 	size_t* iconSize) const
 {
 	// try to load vector icon data from resources
@@ -213,8 +208,7 @@ BImageResources::find_image(void* memAddr) const
 }
 
 
-status_t
-BImageResources::GetBitmapResource(type_code type, int32 id,
+status_t BImageResources::GetBitmapResource(type_code type, int32 id,
 	BBitmap** out) const
 {
 	*out = NULL;

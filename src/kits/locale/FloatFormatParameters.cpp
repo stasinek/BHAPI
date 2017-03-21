@@ -49,8 +49,7 @@ BFloatFormatParameters::~BFloatFormatParameters()
 }
 
 // SetMinimalFractionDigits
-void
-BFloatFormatParameters::SetMinimalFractionDigits(size_t minFractionDigits)
+void BFloatFormatParameters::SetMinimalFractionDigits(size_t minFractionDigits)
 {
 	fMinimalFractionDigits = minFractionDigits;
 	fFlags |= MINIMAL_FRACTION_DIGITS_SET;
@@ -68,8 +67,7 @@ BFloatFormatParameters::MinimalFractionDigits() const
 }
 
 // SetMaximalFractionDigits
-void
-BFloatFormatParameters::SetMaximalFractionDigits(size_t maxFractionDigits)
+void BFloatFormatParameters::SetMaximalFractionDigits(size_t maxFractionDigits)
 {
 	fMaximalFractionDigits = maxFractionDigits;
 	fFlags |= MAXIMAL_FRACTION_DIGITS_SET;
@@ -87,16 +85,14 @@ BFloatFormatParameters::MaximalFractionDigits() const
 }
 
 // SetUseUpperCase
-void
-BFloatFormatParameters::SetUseUpperCase(bool useCapitals)
+void BFloatFormatParameters::SetUseUpperCase(bool useCapitals)
 {
 	fUseUpperCase = useCapitals;
 	fFlags |= USE_UPPER_CASE_SET;
 }
 
 // UseUpperCase
-bool
-BFloatFormatParameters::UseUpperCase() const
+bool BFloatFormatParameters::UseUpperCase() const
 {
 	if (fFlags & USE_UPPER_CASE_SET)
 		return fUseUpperCase;
@@ -106,8 +102,7 @@ BFloatFormatParameters::UseUpperCase() const
 }
 
 // SetFloatFormatType
-void
-BFloatFormatParameters::SetFloatFormatType(float_format_type type)
+void BFloatFormatParameters::SetFloatFormatType(float_format_type type)
 {
 	fFloatFormatType = type;
 	fFlags |= FLOAT_FORMAT_TYPE_SET;
@@ -125,8 +120,7 @@ BFloatFormatParameters::FloatFormatType() const
 }
 
 // SetAlwaysUseFractionSeparator
-void
-BFloatFormatParameters::SetAlwaysUseFractionSeparator(
+void BFloatFormatParameters::SetAlwaysUseFractionSeparator(
 	bool alwaysUseFractionSeparator)
 {
 	fAlwaysUseFractionSeparator = alwaysUseFractionSeparator;
@@ -134,8 +128,7 @@ BFloatFormatParameters::SetAlwaysUseFractionSeparator(
 }
 
 // AlwaysUseFractionSeparator
-bool
-BFloatFormatParameters::AlwaysUseFractionSeparator() const
+bool BFloatFormatParameters::AlwaysUseFractionSeparator() const
 {
 	if (fFlags & ALWAYS_USE_FRACTION_SEPARATOR_SET)
 		return fAlwaysUseFractionSeparator;
@@ -145,8 +138,7 @@ BFloatFormatParameters::AlwaysUseFractionSeparator() const
 }
 
 // SetKeepTrailingFractionZeros
-void
-BFloatFormatParameters::SetKeepTrailingFractionZeros(
+void BFloatFormatParameters::SetKeepTrailingFractionZeros(
 	bool keepTrailingFractionZeros)
 {
 	fKeepTrailingFractionZeros = keepTrailingFractionZeros;
@@ -154,8 +146,7 @@ BFloatFormatParameters::SetKeepTrailingFractionZeros(
 }
 
 // KeepTrailingFractionZeros
-bool
-BFloatFormatParameters::KeepTrailingFractionZeros() const
+bool BFloatFormatParameters::KeepTrailingFractionZeros() const
 {
 	if (fFlags & KEEP_TRAILING_FRACTION_ZEROS_SET)
 		return fKeepTrailingFractionZeros;
@@ -165,8 +156,7 @@ BFloatFormatParameters::KeepTrailingFractionZeros() const
 }
 
 // SetParentFloatParameters
-void
-BFloatFormatParameters::SetParentFloatParameters(
+void BFloatFormatParameters::SetParentFloatParameters(
 	const BFloatFormatParameters *parent)
 {
 	fParent = parent;

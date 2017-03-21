@@ -57,8 +57,7 @@ BRepositoryConfig::~BRepositoryConfig()
 }
 
 
-status_t
-BRepositoryConfig::Store(const BEntry& entry) const
+status_t BRepositoryConfig::Store(const BEntry& entry) const
 {
 	BFile file(&entry, B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
 	status_t result = file.InitCheck();
@@ -78,15 +77,13 @@ BRepositoryConfig::Store(const BEntry& entry) const
 }
 
 
-status_t
-BRepositoryConfig::InitCheck() const
+status_t BRepositoryConfig::InitCheck() const
 {
 	return fInitStatus;
 }
 
 
-status_t
-BRepositoryConfig::SetTo(const BEntry& entry)
+status_t BRepositoryConfig::SetTo(const BEntry& entry)
 {
 	fEntry = entry;
 	fInitStatus = B_NO_INIT;
@@ -146,8 +143,7 @@ BRepositoryConfig::Priority() const
 }
 
 
-bool
-BRepositoryConfig::IsUserSpecific() const
+bool BRepositoryConfig::IsUserSpecific() const
 {
 	return fIsUserSpecific;
 }
@@ -169,29 +165,25 @@ BRepositoryConfig::PackagesURL() const
 }
 
 
-void
-BRepositoryConfig::SetName(const BString& name)
+void BRepositoryConfig::SetName(const BString& name)
 {
 	fName = name;
 }
 
 
-void
-BRepositoryConfig::SetBaseURL(const BString& baseURL)
+void BRepositoryConfig::SetBaseURL(const BString& baseURL)
 {
 	fBaseURL = baseURL;
 }
 
 
-void
-BRepositoryConfig::SetPriority(uint8 priority)
+void BRepositoryConfig::SetPriority(uint8 priority)
 {
 	fPriority = priority;
 }
 
 
-void
-BRepositoryConfig::SetIsUserSpecific(bool isUserSpecific)
+void BRepositoryConfig::SetIsUserSpecific(bool isUserSpecific)
 {
 	fIsUserSpecific = isUserSpecific;
 }

@@ -760,8 +760,7 @@ scsi_sense_asc_table sSCSISenseAscTable[] =
 #define	SCSI_SENSE_ASC_ASCQ_TABLE_LEN	(sizeof(sSCSISenseAscTable)/sizeof(scsi_sense_asc_table))
 
 
-status_t
-scsi_get_sense_key_info(uint8 key, const char **label, err_act *action, status_t *error)
+status_t scsi_get_sense_key_info(uint8 key, const char **label, err_act *action, status_t *error)
 {
 	int i;
 	for (i = 0; i < (int)SCSI_SENSE_KEY_TABLE_LEN; i++) {
@@ -777,8 +776,7 @@ scsi_get_sense_key_info(uint8 key, const char **label, err_act *action, status_t
 }
 
 
-status_t
-scsi_get_sense_asc_info(uint16 asc_asq, const char **label, err_act *action, status_t *error)
+status_t scsi_get_sense_asc_info(uint16 asc_asq, const char **label, err_act *action, status_t *error)
 {
 	int i;
 	for (i = 0; i < (int)SCSI_SENSE_ASC_ASCQ_TABLE_LEN; i++) {

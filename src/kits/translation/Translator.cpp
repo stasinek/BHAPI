@@ -72,8 +72,7 @@ BTranslator *BTranslator::Release()
 }
 
 
-int32
-BTranslator::ReferenceCount()
+int32 BTranslator::ReferenceCount()
 {
 	return fRefCount;
 }
@@ -84,8 +83,7 @@ BTranslator::ReferenceCount()
 	for the translator so the user can change its settings.
 	This method is optional.
 */
-status_t
-BTranslator::MakeConfigurationView(BMessage* ioExtension,
+status_t BTranslator::MakeConfigurationView(BMessage* ioExtension,
 	BView** outView, BRect* outExtent)
 {
 	return B_ERROR;
@@ -96,8 +94,7 @@ BTranslator::MakeConfigurationView(BMessage* ioExtension,
 	Puts the current configuration for the translator into
 	ioExtension. This method is optional.
 */
-status_t
-BTranslator::GetConfigurationMessage(BMessage* ioExtension)
+status_t BTranslator::GetConfigurationMessage(BMessage* ioExtension)
 {
 	return B_ERROR;
 }

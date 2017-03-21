@@ -37,8 +37,7 @@ BMidiLocalProducer::~BMidiLocalProducer()
 }
 
 
-void
-BMidiLocalProducer::Connected(BMidiConsumer* cons)
+void BMidiLocalProducer::Connected(BMidiConsumer* cons)
 {
 	ASSERT(cons != NULL)
 	TRACE(("Connected() %" B_PRId32 " to %" B_PRId32 "", ID(), cons->ID()))
@@ -47,8 +46,7 @@ BMidiLocalProducer::Connected(BMidiConsumer* cons)
 }
 
 
-void
-BMidiLocalProducer::Disconnected(BMidiConsumer* cons)
+void BMidiLocalProducer::Disconnected(BMidiConsumer* cons)
 {
 	ASSERT(cons != NULL)
 	TRACE(("Disconnected() %" B_PRId32 " from %" B_PRId32 "", ID(), cons->ID()))
@@ -57,16 +55,14 @@ BMidiLocalProducer::Disconnected(BMidiConsumer* cons)
 }
 
 
-void
-BMidiLocalProducer::SprayData(void* data, size_t length,
+void BMidiLocalProducer::SprayData(void* data, size_t length,
 	bool atomic, bigtime_t time) const
 {
 	SprayEvent(data, length, atomic, time);
 }
 
 
-void
-BMidiLocalProducer::SprayNoteOff(uchar channel, uchar note,
+void BMidiLocalProducer::SprayNoteOff(uchar channel, uchar note,
 	uchar velocity, bigtime_t time) const
 {
 	if (channel < 16) {
@@ -82,8 +78,7 @@ BMidiLocalProducer::SprayNoteOff(uchar channel, uchar note,
 }
 
 
-void
-BMidiLocalProducer::SprayNoteOn(uchar channel, uchar note,
+void BMidiLocalProducer::SprayNoteOn(uchar channel, uchar note,
 	uchar velocity, bigtime_t time) const
 {
 	if (channel < 16) {
@@ -99,8 +94,7 @@ BMidiLocalProducer::SprayNoteOn(uchar channel, uchar note,
 }
 
 
-void
-BMidiLocalProducer::SprayKeyPressure(uchar channel, uchar note,
+void BMidiLocalProducer::SprayKeyPressure(uchar channel, uchar note,
 	uchar pressure, bigtime_t time) const
 {
 	if (channel < 16) {
@@ -116,8 +110,7 @@ BMidiLocalProducer::SprayKeyPressure(uchar channel, uchar note,
 }
 
 
-void
-BMidiLocalProducer::SprayControlChange(uchar channel,
+void BMidiLocalProducer::SprayControlChange(uchar channel,
 	uchar controlNumber, uchar controlValue, bigtime_t time) const
 {
 	if (channel < 16) {
@@ -133,8 +126,7 @@ BMidiLocalProducer::SprayControlChange(uchar channel,
 }
 
 
-void
-BMidiLocalProducer::SprayProgramChange(uchar channel,
+void BMidiLocalProducer::SprayProgramChange(uchar channel,
 	uchar programNumber, bigtime_t time) const
 {
 	if (channel < 16) {
@@ -149,8 +141,7 @@ BMidiLocalProducer::SprayProgramChange(uchar channel,
 }
 
 
-void
-BMidiLocalProducer::SprayChannelPressure(uchar channel,
+void BMidiLocalProducer::SprayChannelPressure(uchar channel,
 	uchar pressure, bigtime_t time) const
 {
 	if (channel < 16) {
@@ -165,8 +156,7 @@ BMidiLocalProducer::SprayChannelPressure(uchar channel,
 }
 
 
-void
-BMidiLocalProducer::SprayPitchBend(uchar channel,
+void BMidiLocalProducer::SprayPitchBend(uchar channel,
 	uchar lsb, uchar msb, bigtime_t time) const
 {
 	if (channel < 16) {
@@ -182,16 +172,14 @@ BMidiLocalProducer::SprayPitchBend(uchar channel,
 }
 
 
-void
-BMidiLocalProducer::SpraySystemExclusive(void* data,
+void BMidiLocalProducer::SpraySystemExclusive(void* data,
 	size_t length, bigtime_t time) const
 {
 	SprayEvent(data, length, true, time, true);
 }
 
 
-void
-BMidiLocalProducer::SpraySystemCommon(uchar status, uchar data1,
+void BMidiLocalProducer::SpraySystemCommon(uchar status, uchar data1,
 	uchar data2, bigtime_t time) const
 {
 	size_t len;
@@ -225,8 +213,7 @@ BMidiLocalProducer::SpraySystemCommon(uchar status, uchar data1,
 }
 
 
-void
-BMidiLocalProducer::SpraySystemRealTime(uchar status,
+void BMidiLocalProducer::SpraySystemRealTime(uchar status,
 	bigtime_t time) const
 {
 	if (status >= B_TIMING_CLOCK)
@@ -236,8 +223,7 @@ BMidiLocalProducer::SpraySystemRealTime(uchar status,
 }
 
 
-void
-BMidiLocalProducer::SprayTempoChange(int32 beatsPerMinute,
+void BMidiLocalProducer::SprayTempoChange(int32 beatsPerMinute,
 	bigtime_t time) const
 {
 	int32 tempo = 60000000 / beatsPerMinute;
@@ -266,8 +252,7 @@ void BMidiLocalProducer::_Reserved8() { }
 
 //------------------------------------------------------------------------------
 
-void
-BMidiLocalProducer::SprayEvent(const void* data, size_t length,
+void BMidiLocalProducer::SprayEvent(const void* data, size_t length,
 	bool atomic, bigtime_t time, bool sysex) const
 {
 	if (LockProducer()) {

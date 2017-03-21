@@ -90,8 +90,7 @@ mangle_attribute_name(const char* name)
 
 
 // demangle_attribute_name
-static bool
-demangle_attribute_name(const char* name, string& demangledName)
+static bool demangle_attribute_name(const char* name, string& demangledName)
 {
     // chop of our xattr namespace and translate:
     // "%\" -> '/'
@@ -443,8 +442,7 @@ fs_read_attr_dir(DIR *dir)
 }
 
 // fs_rewind_attr_dir
-void
-fs_rewind_attr_dir(DIR *dir)
+void fs_rewind_attr_dir(DIR *dir)
 {
     // get attr dir
     AttributeDirectory* attrDir = AttributeDirectory::Get(dir);
@@ -751,8 +749,7 @@ _kern_open_attr_dir(int fd, const char *path)
 }
 
 // _kern_rename_attr
-status_t
-_kern_rename_attr(int fromFile, const char *fromName, int toFile,
+status_t _kern_rename_attr(int fromFile, const char *fromName, int toFile,
     const char *toName)
 {
     // not supported ATM
@@ -760,8 +757,7 @@ _kern_rename_attr(int fromFile, const char *fromName, int toFile,
 }
 
 // _kern_remove_attr
-status_t
-_kern_remove_attr(int fd, const char *name)
+status_t _kern_remove_attr(int fd, const char *name)
 {
     if (!name)
         return B_BAD_VALUE;

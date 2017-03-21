@@ -52,12 +52,10 @@ All rights reserved.
 #define B_BACKGROUND_ORIGIN			"be:bgndimginfooffset"
 	// BPoint
 #define B_BACKGROUND_TEXT_OUTLINE	"be:bgndimginfoerasetext"
-	// bool
-	// NOTE: the actual attribute name is kept for backwards
+	// bool 	// NOTE: the actual attribute name is kept for backwards
 	//       compatible settings
 #define B_BACKGROUND_WORKSPACES		"be:bgndimginfoworkspaces"
-	// uint32
-
+	// uint32 
 /*----------------------------------------------------------------*/
 /*-----  Background mode values  ---------------------------------*/
 

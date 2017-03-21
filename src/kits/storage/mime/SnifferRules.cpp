@@ -154,8 +154,7 @@ SnifferRules::~SnifferRules()
 	- \c Mime::kMimeGuessFailure: no match found (\a type is left unmodified)
 	- error code: failure
 */
-status_t
-SnifferRules::GuessMimeType(const entry_ref *ref, BString *type)
+status_t SnifferRules::GuessMimeType(const entry_ref *ref, BString *type)
 {
 	status_t err = ref && type ? B_OK : B_BAD_VALUE;
 	ssize_t bytes = 0;
@@ -211,8 +210,7 @@ SnifferRules::GuessMimeType(const entry_ref *ref, BString *type)
 	- \c Mime::kMimeGuessFailure: no match found (\a type is left unmodified)
 	- error code: failure
 */
-status_t
-SnifferRules::GuessMimeType(const void *buffer, int32 length, BString *type)
+status_t SnifferRules::GuessMimeType(const void *buffer, int32 length, BString *type)
 {
 	return GuessMimeType(NULL, buffer, length, type);
 }
@@ -231,8 +229,7 @@ SnifferRules::GuessMimeType(const void *buffer, int32 length, BString *type)
 	- \c B_OK: success
 	- other error code: failure
 */
-status_t
-SnifferRules::SetSnifferRule(const char *type, const char *rule)
+status_t SnifferRules::SetSnifferRule(const char *type, const char *rule)
 {
 	status_t err = type && rule ? B_OK : B_BAD_VALUE;
 	if (!err && !fHaveDoneFullBuild)
@@ -283,8 +280,7 @@ SnifferRules::SetSnifferRule(const char *type, const char *rule)
 	- \c B_OK: success (even if no rule existed for the given type)
 	- other error code: failure
 */
-status_t
-SnifferRules::DeleteSnifferRule(const char *type)
+status_t SnifferRules::DeleteSnifferRule(const char *type)
 {
 	status_t err = type ? B_OK : B_BAD_VALUE;
 	if (!err && !fHaveDoneFullBuild)
@@ -306,8 +302,7 @@ SnifferRules::DeleteSnifferRule(const char *type)
 
 // PrintToStream
 //! Dumps the list of sniffer rules in sorted order to standard output
-void
-SnifferRules::PrintToStream() const
+void SnifferRules::PrintToStream() const
 {
 	printf("\n");
 	printf("--------------\n");
@@ -332,8 +327,7 @@ SnifferRules::PrintToStream() const
 
 	Initial MaxBytesNeeded() info is compiled by this function as well.
 */
-status_t
-SnifferRules::BuildRuleList()
+status_t SnifferRules::BuildRuleList()
 {
 	fRuleList.clear();
 
@@ -441,8 +435,7 @@ SnifferRules::BuildRuleList()
 	- \c Mime::kMimeGuessFailure: no match found (\a type is left unmodified)
 	- error code: failure
 */
-status_t
-SnifferRules::GuessMimeType(BFile* file, const void *buffer, int32 length,
+status_t SnifferRules::GuessMimeType(BFile* file, const void *buffer, int32 length,
 	BString *type)
 {
 	status_t err = buffer && type ? B_OK : B_BAD_VALUE;
@@ -550,8 +543,7 @@ SnifferRules::MaxBytesNeeded()
 	- \c B_OK: success
 	- \c other error code: failure
 */
-status_t
-SnifferRules::ProcessType(const char *type, ssize_t *bytesNeeded)
+status_t SnifferRules::ProcessType(const char *type, ssize_t *bytesNeeded)
 {
 	status_t err = type && bytesNeeded ? B_OK : B_BAD_VALUE;
 	if (!err)

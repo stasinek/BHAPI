@@ -27,15 +27,13 @@ BNetworkRoute::~BNetworkRoute()
 }
 
 
-status_t
-BNetworkRoute::SetTo(const BNetworkRoute& other)
+status_t BNetworkRoute::SetTo(const BNetworkRoute& other)
 {
 	return SetTo(other.RouteEntry());
 }
 
 
-status_t
-BNetworkRoute::SetTo(const route_entry& routeEntry)
+status_t BNetworkRoute::SetTo(const route_entry& routeEntry)
 {
 	#define SET_ADDRESS(address, setFunction) \
 		if (routeEntry.address != NULL) { \
@@ -56,8 +54,7 @@ BNetworkRoute::SetTo(const route_entry& routeEntry)
 }
 
 
-void
-BNetworkRoute::Adopt(BNetworkRoute& other)
+void BNetworkRoute::Adopt(BNetworkRoute& other)
 {
 	memcpy(&fRouteEntry, &other.fRouteEntry, sizeof(route_entry));
 	memset(&other.fRouteEntry, 0, sizeof(route_entry));
@@ -78,15 +75,13 @@ BNetworkRoute::Destination() const
 }
 
 
-status_t
-BNetworkRoute::SetDestination(const sockaddr& destination)
+status_t BNetworkRoute::SetDestination(const sockaddr& destination)
 {
 	return _AllocateAndSetAddress(destination, fRouteEntry.destination);
 }
 
 
-void
-BNetworkRoute::UnsetDestination()
+void BNetworkRoute::UnsetDestination()
 {
 	_FreeAndUnsetAddress(fRouteEntry.destination);
 }
@@ -99,15 +94,13 @@ BNetworkRoute::Mask() const
 }
 
 
-status_t
-BNetworkRoute::SetMask(const sockaddr& mask)
+status_t BNetworkRoute::SetMask(const sockaddr& mask)
 {
 	return _AllocateAndSetAddress(mask, fRouteEntry.mask);
 }
 
 
-void
-BNetworkRoute::UnsetMask()
+void BNetworkRoute::UnsetMask()
 {
 	_FreeAndUnsetAddress(fRouteEntry.mask);
 }
@@ -120,15 +113,13 @@ BNetworkRoute::Gateway() const
 }
 
 
-status_t
-BNetworkRoute::SetGateway(const sockaddr& gateway)
+status_t BNetworkRoute::SetGateway(const sockaddr& gateway)
 {
 	return _AllocateAndSetAddress(gateway, fRouteEntry.gateway);
 }
 
 
-void
-BNetworkRoute::UnsetGateway()
+void BNetworkRoute::UnsetGateway()
 {
 	_FreeAndUnsetAddress(fRouteEntry.gateway);
 }
@@ -141,43 +132,37 @@ BNetworkRoute::Source() const
 }
 
 
-status_t
-BNetworkRoute::SetSource(const sockaddr& source)
+status_t BNetworkRoute::SetSource(const sockaddr& source)
 {
 	return _AllocateAndSetAddress(source, fRouteEntry.source);
 }
 
 
-void
-BNetworkRoute::UnsetSource()
+void BNetworkRoute::UnsetSource()
 {
 	_FreeAndUnsetAddress(fRouteEntry.source);
 }
 
 
-uint32
-BNetworkRoute::Flags() const
+uint32 BNetworkRoute::Flags() const
 {
 	return fRouteEntry.flags;
 }
 
 
-void
-BNetworkRoute::SetFlags(uint32 flags)
+void BNetworkRoute::SetFlags(uint32 flags)
 {
 	fRouteEntry.flags = flags;
 }
 
 
-uint32
-BNetworkRoute::MTU() const
+uint32 BNetworkRoute::MTU() const
 {
 	return fRouteEntry.mtu;
 }
 
 
-void
-BNetworkRoute::SetMTU(uint32 mtu)
+void BNetworkRoute::SetMTU(uint32 mtu)
 {
 	fRouteEntry.mtu = mtu;
 }
@@ -201,8 +186,7 @@ BNetworkRoute::AddressFamily() const
 }
 
 
-status_t
-BNetworkRoute::GetDefaultRoute(int family, const char* interfaceName,
+status_t BNetworkRoute::GetDefaultRoute(int family, const char* interfaceName,
 	BNetworkRoute& route)
 {
 	BObjectList<BNetworkRoute> routes(1, true);
@@ -218,8 +202,7 @@ BNetworkRoute::GetDefaultRoute(int family, const char* interfaceName,
 }
 
 
-status_t
-BNetworkRoute::GetDefaultGateway(int family, const char* interfaceName,
+status_t BNetworkRoute::GetDefaultGateway(int family, const char* interfaceName,
 	sockaddr& gateway)
 {
 	BNetworkRoute route;
@@ -236,23 +219,20 @@ BNetworkRoute::GetDefaultGateway(int family, const char* interfaceName,
 }
 
 
-status_t
-BNetworkRoute::GetRoutes(int family, BObjectList<BNetworkRoute>& routes)
+status_t BNetworkRoute::GetRoutes(int family, BObjectList<BNetworkRoute>& routes)
 {
 	return GetRoutes(family, NULL, 0, routes);
 }
 
 
-status_t
-BNetworkRoute::GetRoutes(int family, const char* interfaceName,
+status_t BNetworkRoute::GetRoutes(int family, const char* interfaceName,
 	BObjectList<BNetworkRoute>& routes)
 {
 	return GetRoutes(family, interfaceName, 0, routes);
 }
 
 
-status_t
-BNetworkRoute::GetRoutes(int family, const char* interfaceName,
+status_t BNetworkRoute::GetRoutes(int family, const char* interfaceName,
 	uint32 filterFlags, BObjectList<BNetworkRoute>& routes)
 {
 	int socket = ::socket(family, SOCK_DGRAM, 0);
@@ -326,8 +306,7 @@ BNetworkRoute::GetRoutes(int family, const char* interfaceName,
 }
 
 
-status_t
-BNetworkRoute::_AllocateAndSetAddress(const sockaddr& from,
+status_t BNetworkRoute::_AllocateAndSetAddress(const sockaddr& from,
 	sockaddr*& to)
 {
 	if (from.sa_len > sizeof(sockaddr_storage))
@@ -344,8 +323,7 @@ BNetworkRoute::_AllocateAndSetAddress(const sockaddr& from,
 }
 
 
-void
-BNetworkRoute::_FreeAndUnsetAddress(sockaddr*& address)
+void BNetworkRoute::_FreeAndUnsetAddress(sockaddr*& address)
 {
 	free(address);
 	address = NULL;

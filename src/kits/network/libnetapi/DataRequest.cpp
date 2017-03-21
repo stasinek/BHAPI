@@ -30,8 +30,7 @@ BDataRequest::Result() const
 }
 
 
-status_t
-BDataRequest::_ProtocolLoop()
+status_t BDataRequest::_ProtocolLoop()
 {
 	BString mimeType;
 	BString charset;

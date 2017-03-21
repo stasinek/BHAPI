@@ -75,15 +75,13 @@ BSolverResult::~BSolverResult()
 }
 
 
-bool
-BSolverResult::IsEmpty() const
+bool BSolverResult::IsEmpty() const
 {
 	return fElements.IsEmpty();
 }
 
 
-int32
-BSolverResult::CountElements() const
+int32 BSolverResult::CountElements() const
 {
 	return fElements.CountItems();
 }
@@ -96,15 +94,13 @@ BSolverResult::ElementAt(int32 index) const
 }
 
 
-void
-BSolverResult::MakeEmpty()
+void BSolverResult::MakeEmpty()
 {
 	fElements.MakeEmpty();
 }
 
 
-bool
-BSolverResult::AppendElement(const BSolverResultElement& element)
+bool BSolverResult::AppendElement(const BSolverResultElement& element)
 {
 	BSolverResultElement* newElement
 		= new(std::nothrow) BSolverResultElement(element);

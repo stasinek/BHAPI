@@ -8,16 +8,14 @@
 #include <libroot_private.h>
 
 
-void*
-get_stack_frame(void)
+void*   get_stack_frame(void)
 {
 	// TODO: Implement!
 	return NULL;
 }
 
 
-void*
-__arch_get_caller(void)
+void*   __arch_get_caller(void)
 {
 	// TODO: Implement!
 	return NULL;

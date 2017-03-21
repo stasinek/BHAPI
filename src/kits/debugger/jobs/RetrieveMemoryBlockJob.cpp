@@ -40,8 +40,7 @@ RetrieveMemoryBlockJob::Key() const
 }
 
 
-status_t
-RetrieveMemoryBlockJob::Do()
+status_t RetrieveMemoryBlockJob::Do()
 {
 	ssize_t result = fTeamMemory->ReadMemory(fMemoryBlock->BaseAddress(),
 		fMemoryBlock->Data(), fMemoryBlock->Size());

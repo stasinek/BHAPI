@@ -5,7 +5,7 @@
 #include <Haiku.h>
 #include <Message.h>
 #include <Midi2Defs.h>
-#include <OS.h>
+#include <kernel/OS.h>
 #include <StringClass.h>
 
 class BMidiProducer;

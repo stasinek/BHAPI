@@ -49,15 +49,13 @@ FetchFileJob::DownloadProgress() const
 }
 
 
-const char*
-FetchFileJob::DownloadURL() const
+const char*  FetchFileJob::DownloadURL() const
 {
 	return fFileURL.String();
 }
 
 
-const char*
-FetchFileJob::DownloadFileName() const
+const char*  FetchFileJob::DownloadFileName() const
 {
 	return fTargetEntry.Name();
 }
@@ -77,8 +75,7 @@ FetchFileJob::DownloadTotalBytes() const
 }
 
 
-status_t
-FetchFileJob::Execute()
+status_t FetchFileJob::Execute()
 {
 	status_t result = fTargetFile.InitCheck();
 	if (result != B_OK)
@@ -156,8 +153,7 @@ FetchFileJob::_WriteCallback(void *buffer, size_t size, size_t nmemb,
 }
 
 
-void
-FetchFileJob::Cleanup(status_t jobResult)
+void FetchFileJob::Cleanup(status_t jobResult)
 {
 	if (jobResult != B_OK)
 		fTargetEntry.Remove();

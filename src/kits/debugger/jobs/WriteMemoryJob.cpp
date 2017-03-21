@@ -37,8 +37,7 @@ WriteMemoryJob::Key() const
 }
 
 
-status_t
-WriteMemoryJob::Do()
+status_t WriteMemoryJob::Do()
 {
 	ssize_t result = fTeamMemory->WriteMemory(fTargetAddress, fData, fSize);
 	if (result < 0)

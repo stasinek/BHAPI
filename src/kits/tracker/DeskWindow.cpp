@@ -89,8 +89,7 @@ MatchOne(struct AddonShortcut* item, void* castToName)
 }
 
 
-static void
-AddOneShortcut(Model* model, char key, uint32 modifiers, BDeskWindow* window)
+static void AddOneShortcut(Model* model, char key, uint32 modifiers, BDeskWindow* window)
 {
 	if (key == '\0')
 		return;
@@ -130,8 +129,7 @@ FindElement(struct AddonShortcut* item, void* castToOther)
 }
 
 
-static void
-LoadAddOnDir(BDirectory directory, BDeskWindow* window,
+static void LoadAddOnDir(BDirectory directory, BDeskWindow* window,
 	LockingList<AddonShortcut>* list)
 {
 	BEntry entry;
@@ -227,8 +225,7 @@ BDeskWindow::~BDeskWindow()
 }
 
 
-void
-BDeskWindow::Init(const BMessage*)
+void BDeskWindow::Init(const BMessage*)
 {
 	// Set the size of the screen before calling the container window's
 	// Init() because it will add volume poses to this window and
@@ -261,8 +258,7 @@ BDeskWindow::Init(const BMessage*)
 }
 
 
-void
-BDeskWindow::InitAddonsList(bool update)
+void BDeskWindow::InitAddonsList(bool update)
 {
 	AutoLock<LockingList<AddonShortcut> > lock(fAddonsList);
 	if (lock.IsLocked()) {
@@ -286,8 +282,7 @@ BDeskWindow::InitAddonsList(bool update)
 }
 
 
-void
-BDeskWindow::ApplyShortcutPreferences(bool update)
+void BDeskWindow::ApplyShortcutPreferences(bool update)
 {
 	AutoLock<LockingList<AddonShortcut> > lock(fAddonsList);
 	if (lock.IsLocked()) {
@@ -376,8 +371,7 @@ BDeskWindow::ApplyShortcutPreferences(bool update)
 }
 
 
-void
-BDeskWindow::Quit()
+void BDeskWindow::Quit()
 {
 	if (fNavigationItem != NULL) {
 		// this duplicates BContainerWindow::Quit because
@@ -406,8 +400,7 @@ BDeskWindow::NewPoseView(Model* model, uint32 viewMode)
 }
 
 
-void
-BDeskWindow::CreatePoseView(Model* model)
+void BDeskWindow::CreatePoseView(Model* model)
 {
 	fPoseView = NewPoseView(model, kIconMode);
 	fPoseView->SetIconMapping(false);
@@ -437,8 +430,7 @@ BDeskWindow::CreatePoseView(Model* model)
 }
 
 
-void
-BDeskWindow::AddWindowContextMenus(BMenu* menu)
+void BDeskWindow::AddWindowContextMenus(BMenu* menu)
 {
 	BRoster roster;
 	if (!roster.IsRunning(kDeskbarSignature)) {
@@ -555,23 +547,20 @@ BDeskWindow::AddWindowContextMenus(BMenu* menu)
 }
 
 
-void
-BDeskWindow::WorkspaceActivated(int32 workspace, bool state)
+void BDeskWindow::WorkspaceActivated(int32 workspace, bool state)
 {
 	if (fBackgroundImage)
 		fBackgroundImage->WorkspaceActivated(PoseView(), workspace, state);
 }
 
 
-void
-BDeskWindow::SaveDesktopPoseLocations()
+void BDeskWindow::SaveDesktopPoseLocations()
 {
 	PoseView()->SavePoseLocations(&fOldFrame);
 }
 
 
-void
-BDeskWindow::ScreenChanged(BRect frame, color_space space)
+void BDeskWindow::ScreenChanged(BRect frame, color_space space)
 {
 	bool frameChanged = (frame != fOldFrame);
 
@@ -588,8 +577,7 @@ BDeskWindow::ScreenChanged(BRect frame, color_space space)
 }
 
 
-void
-BDeskWindow::UpdateDesktopBackgroundImages()
+void BDeskWindow::UpdateDesktopBackgroundImages()
 {
 	WindowStateNodeOpener opener(this, false);
 	fBackgroundImage = BackgroundImage::Refresh(fBackgroundImage,
@@ -597,8 +585,7 @@ BDeskWindow::UpdateDesktopBackgroundImages()
 }
 
 
-void
-BDeskWindow::Show()
+void BDeskWindow::Show()
 {
 	if (fBackgroundImage)
 		fBackgroundImage->Show(PoseView(), current_workspace());
@@ -609,29 +596,25 @@ BDeskWindow::Show()
 }
 
 
-bool
-BDeskWindow::ShouldAddScrollBars() const
+bool BDeskWindow::ShouldAddScrollBars() const
 {
 	return false;
 }
 
 
-bool
-BDeskWindow::ShouldAddMenus() const
+bool BDeskWindow::ShouldAddMenus() const
 {
 	return false;
 }
 
 
-bool
-BDeskWindow::ShouldAddContainerView() const
+bool BDeskWindow::ShouldAddContainerView() const
 {
 	return false;
 }
 
 
-void
-BDeskWindow::MessageReceived(BMessage* message)
+void BDeskWindow::MessageReceived(BMessage* message)
 {
 	if (message->WasDropped()) {
 		const rgb_color* color;

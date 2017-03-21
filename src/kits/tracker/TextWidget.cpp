@@ -95,8 +95,7 @@ BTextWidget::Compare(const BTextWidget& with, BPoseView* view) const
 }
 
 
-const char*
-BTextWidget::Text(const BPoseView* view) const
+const char*  BTextWidget::Text(const BPoseView* view) const
 {
 	StringAttributeText* textAttribute
 		= dynamic_cast<StringAttributeText*>(fText);
@@ -228,8 +227,7 @@ BTextWidget::CalcClickRect(BPoint poseLoc, const BColumn* column,
 }
 
 
-void
-BTextWidget::CheckExpiration()
+void BTextWidget::CheckExpiration()
 {
 	if (IsEditable() && fParams.pose->IsSelected() && fLastClickedTime) {
 		bigtime_t doubleClickSpeed;
@@ -250,16 +248,14 @@ BTextWidget::CheckExpiration()
 }
 
 
-void
-BTextWidget::CancelWait()
+void BTextWidget::CancelWait()
 {
 	fLastClickedTime = 0;
 	fParams.poseView->SetTextWidgetToCheck(NULL);
 }
 
 
-void
-BTextWidget::MouseUp(BRect bounds, BPoseView* view, BPose* pose, BPoint)
+void BTextWidget::MouseUp(BRect bounds, BPoseView* view, BPose* pose, BPoint)
 {
 	// Register the time of that click.  The PoseView, through its Pulse()
 	// will allow us to StartEdit() if no other click have been registered since
@@ -344,8 +340,7 @@ TextViewFilter(BMessage* message, BHandler**, BMessageFilter* filter)
 }
 
 
-void
-BTextWidget::StartEdit(BRect bounds, BPoseView* view, BPose* pose)
+void BTextWidget::StartEdit(BRect bounds, BPoseView* view, BPose* pose)
 {
 	view->SetTextWidgetToCheck(NULL, this);
 	if (!IsEditable() || IsActive())
@@ -447,8 +442,7 @@ BTextWidget::StartEdit(BRect bounds, BPoseView* view, BPose* pose)
 }
 
 
-void
-BTextWidget::StopEdit(bool saveChanges, BPoint poseLoc, BPoseView* view,
+void BTextWidget::StopEdit(bool saveChanges, BPoint poseLoc, BPoseView* view,
 	BPose* pose, int32 poseIndex)
 {
 	// find the text editing view
@@ -489,8 +483,7 @@ BTextWidget::StopEdit(bool saveChanges, BPoint poseLoc, BPoseView* view,
 }
 
 
-void
-BTextWidget::CheckAndUpdate(BPoint loc, const BColumn* column,
+void BTextWidget::CheckAndUpdate(BPoint loc, const BColumn* column,
 	BPoseView* view, bool visible)
 {
 	BRect oldRect;
@@ -507,8 +500,7 @@ BTextWidget::CheckAndUpdate(BPoint loc, const BColumn* column,
 }
 
 
-void
-BTextWidget::SelectAll(BPoseView* view)
+void BTextWidget::SelectAll(BPoseView* view)
 {
 	BTextView* text = dynamic_cast<BTextView*>(
 		view->FindView("WidgetTextView"));
@@ -517,8 +509,7 @@ BTextWidget::SelectAll(BPoseView* view)
 }
 
 
-void
-BTextWidget::Draw(BRect eraseRect, BRect textRect, float, BPoseView* view,
+void BTextWidget::Draw(BRect eraseRect, BRect textRect, float, BPoseView* view,
 	BView* drawView, bool selected, uint32 clipboardMode, BPoint offset,
 	bool direct)
 {

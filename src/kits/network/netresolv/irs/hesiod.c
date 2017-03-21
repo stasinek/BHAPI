@@ -170,8 +170,7 @@ hesiod_init(void **context)
  * hesiod_end --
  *	Deallocates the hesiod_p.
  */
-void 
-hesiod_end(void *context)
+void hesiod_end(void *context)
 {
 	struct hesiod_p *ctx = (struct hesiod_p *) context;
 
@@ -289,8 +288,7 @@ hesiod_resolve(void *context, const char *name, const char *type)
 }
 
 /*ARGSUSED*/
-void 
-hesiod_free_list(void *context, char **list)
+void hesiod_free_list(void *context, char **list)
 {
 	char  **p;
 

@@ -15,8 +15,7 @@ namespace BPrivate {
 
 
 // from the Dragon Book: a slightly modified hashpjw()
-uint32
-hash_string(const char* string)
+uint32 hash_string(const char* string)
 {
 	if (string == NULL)
 		return 0;
@@ -70,8 +69,7 @@ StringCache::Get(const char* value)
 }
 
 
-void
-StringCache::Put(CachedString* string)
+void StringCache::Put(CachedString* string)
 {
 	if (string != NULL) {
 		if (--string->usageCount == 0) {

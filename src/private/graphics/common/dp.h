@@ -12,7 +12,7 @@
 #include <Accelerant.h>
 #include "dp_raw.h"
 #include <GraphicsDefs.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 typedef struct {

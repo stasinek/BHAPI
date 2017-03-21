@@ -14,7 +14,7 @@
 
 #include <AutoLocker.h>
 #include <memory_private.h>
-#include <OS.h>
+#include <kernel/OS.h>
 #include <system_info.h>
 #include <util/DoublyLinkedList.h>
 #include <util/KMessage.h>
@@ -258,8 +258,7 @@ LocalDebuggerInterface::~LocalDebuggerInterface()
 }
 
 
-status_t
-LocalDebuggerInterface::Init()
+status_t LocalDebuggerInterface::Init()
 {
 	// create the architecture
 #if defined(ARCH_x86)
@@ -307,8 +306,7 @@ LocalDebuggerInterface::Init()
 }
 
 
-void
-LocalDebuggerInterface::Close(bool killTeam)
+void LocalDebuggerInterface::Close(bool killTeam)
 {
 	if (killTeam)
 		kill_team(fTeamID);
@@ -326,8 +324,7 @@ LocalDebuggerInterface::Close(bool killTeam)
 }
 
 
-bool
-LocalDebuggerInterface::Connected() const
+bool LocalDebuggerInterface::Connected() const
 {
 	return fNubPort >= 0;
 }
@@ -347,8 +344,7 @@ LocalDebuggerInterface::GetArchitecture() const
 }
 
 
-status_t
-LocalDebuggerInterface::GetNextDebugEvent(DebugEvent*& _event)
+status_t LocalDebuggerInterface::GetNextDebugEvent(DebugEvent*& _event)
 {
 	while (true) {
 		char buffer[2048];
@@ -397,29 +393,25 @@ LocalDebuggerInterface::GetNextDebugEvent(DebugEvent*& _event)
 }
 
 
-status_t
-LocalDebuggerInterface::SetTeamDebuggingFlags(uint32 flags)
+status_t LocalDebuggerInterface::SetTeamDebuggingFlags(uint32 flags)
 {
 	return set_team_debugging_flags(fNubPort, flags);
 }
 
 
-status_t
-LocalDebuggerInterface::ContinueThread(thread_id thread)
+status_t LocalDebuggerInterface::ContinueThread(thread_id thread)
 {
 	return continue_thread(fNubPort, thread);
 }
 
 
-status_t
-LocalDebuggerInterface::StopThread(thread_id thread)
+status_t LocalDebuggerInterface::StopThread(thread_id thread)
 {
 	return debug_thread(thread);
 }
 
 
-status_t
-LocalDebuggerInterface::SingleStepThread(thread_id thread)
+status_t LocalDebuggerInterface::SingleStepThread(thread_id thread)
 {
 	debug_nub_continue_thread continueMessage;
 	continueMessage.thread = thread;
@@ -431,8 +423,7 @@ LocalDebuggerInterface::SingleStepThread(thread_id thread)
 }
 
 
-status_t
-LocalDebuggerInterface::InstallBreakpoint(target_addr_t address)
+status_t LocalDebuggerInterface::InstallBreakpoint(target_addr_t address)
 {
 	DebugContextGetter contextGetter(fDebugContextPool);
 
@@ -449,8 +440,7 @@ LocalDebuggerInterface::InstallBreakpoint(target_addr_t address)
 }
 
 
-status_t
-LocalDebuggerInterface::UninstallBreakpoint(target_addr_t address)
+status_t LocalDebuggerInterface::UninstallBreakpoint(target_addr_t address)
 {
 	debug_nub_clear_breakpoint message;
 	message.address = (void*)(addr_t)address;
@@ -460,8 +450,7 @@ LocalDebuggerInterface::UninstallBreakpoint(target_addr_t address)
 }
 
 
-status_t
-LocalDebuggerInterface::InstallWatchpoint(target_addr_t address, uint32 type,
+status_t LocalDebuggerInterface::InstallWatchpoint(target_addr_t address, uint32 type,
 	int32 length)
 {
 	DebugContextGetter contextGetter(fDebugContextPool);
@@ -481,8 +470,7 @@ LocalDebuggerInterface::InstallWatchpoint(target_addr_t address, uint32 type,
 }
 
 
-status_t
-LocalDebuggerInterface::UninstallWatchpoint(target_addr_t address)
+status_t LocalDebuggerInterface::UninstallWatchpoint(target_addr_t address)
 {
 	DebugContextGetter contextGetter(fDebugContextPool);
 
@@ -494,8 +482,7 @@ LocalDebuggerInterface::UninstallWatchpoint(target_addr_t address)
 }
 
 
-status_t
-LocalDebuggerInterface::GetSystemInfo(SystemInfo& info)
+status_t LocalDebuggerInterface::GetSystemInfo(SystemInfo& info)
 {
 	system_info sysInfo;
 	status_t result = get_system_info(&sysInfo);
@@ -512,8 +499,7 @@ LocalDebuggerInterface::GetSystemInfo(SystemInfo& info)
 }
 
 
-status_t
-LocalDebuggerInterface::GetTeamInfo(TeamInfo& info)
+status_t LocalDebuggerInterface::GetTeamInfo(TeamInfo& info)
 {
 	team_info teamInfo;
 	status_t result = get_team_info(fTeamID, &teamInfo);
@@ -525,8 +511,7 @@ LocalDebuggerInterface::GetTeamInfo(TeamInfo& info)
 }
 
 
-status_t
-LocalDebuggerInterface::GetThreadInfos(BObjectList<ThreadInfo>& infos)
+status_t LocalDebuggerInterface::GetThreadInfos(BObjectList<ThreadInfo>& infos)
 {
 	thread_info threadInfo;
 	int32 cookie = 0;
@@ -543,8 +528,7 @@ LocalDebuggerInterface::GetThreadInfos(BObjectList<ThreadInfo>& infos)
 }
 
 
-status_t
-LocalDebuggerInterface::GetImageInfos(BObjectList<ImageInfo>& infos)
+status_t LocalDebuggerInterface::GetImageInfos(BObjectList<ImageInfo>& infos)
 {
 	// get the team's images
 	image_info imageInfo;
@@ -563,8 +547,7 @@ LocalDebuggerInterface::GetImageInfos(BObjectList<ImageInfo>& infos)
 }
 
 
-status_t
-LocalDebuggerInterface::GetAreaInfos(BObjectList<AreaInfo>& infos)
+status_t LocalDebuggerInterface::GetAreaInfos(BObjectList<AreaInfo>& infos)
 {
 	// get the team's areas
 	area_info areaInfo;
@@ -583,8 +566,7 @@ LocalDebuggerInterface::GetAreaInfos(BObjectList<AreaInfo>& infos)
 }
 
 
-status_t
-LocalDebuggerInterface::GetSemaphoreInfos(BObjectList<SemaphoreInfo>& infos)
+status_t LocalDebuggerInterface::GetSemaphoreInfos(BObjectList<SemaphoreInfo>& infos)
 {
 	// get the team's semaphores
 	sem_info semInfo;
@@ -602,8 +584,7 @@ LocalDebuggerInterface::GetSemaphoreInfos(BObjectList<SemaphoreInfo>& infos)
 }
 
 
-status_t
-LocalDebuggerInterface::GetSymbolInfos(team_id team, image_id image,
+status_t LocalDebuggerInterface::GetSymbolInfos(team_id team, image_id image,
 	BObjectList<SymbolInfo>& infos)
 {
 	// create a lookup context
@@ -647,8 +628,7 @@ LocalDebuggerInterface::GetSymbolInfos(team_id team, image_id image,
 }
 
 
-status_t
-LocalDebuggerInterface::GetSymbolInfo(team_id team, image_id image, const char* name,
+status_t LocalDebuggerInterface::GetSymbolInfo(team_id team, image_id image, const char* name,
 	int32 symbolType, SymbolInfo& info)
 {
 	// create a lookup context
@@ -676,8 +656,7 @@ LocalDebuggerInterface::GetSymbolInfo(team_id team, image_id image, const char* 
 }
 
 
-status_t
-LocalDebuggerInterface::GetThreadInfo(thread_id thread, ThreadInfo& info)
+status_t LocalDebuggerInterface::GetThreadInfo(thread_id thread, ThreadInfo& info)
 {
 	thread_info threadInfo;
 	status_t error = get_thread_info(thread, &threadInfo);
@@ -689,8 +668,7 @@ LocalDebuggerInterface::GetThreadInfo(thread_id thread, ThreadInfo& info)
 }
 
 
-status_t
-LocalDebuggerInterface::GetCpuState(thread_id thread, CpuState*& _state)
+status_t LocalDebuggerInterface::GetCpuState(thread_id thread, CpuState*& _state)
 {
 	debug_cpu_state debugState;
 	status_t error = _GetDebugCpuState(thread, debugState);
@@ -701,8 +679,7 @@ LocalDebuggerInterface::GetCpuState(thread_id thread, CpuState*& _state)
 }
 
 
-status_t
-LocalDebuggerInterface::SetCpuState(thread_id thread, const CpuState* state)
+status_t LocalDebuggerInterface::SetCpuState(thread_id thread, const CpuState* state)
 {
 	debug_cpu_state debugState;
 	status_t error = _GetDebugCpuState(thread, debugState);
@@ -726,15 +703,13 @@ LocalDebuggerInterface::SetCpuState(thread_id thread, const CpuState* state)
 }
 
 
-status_t
-LocalDebuggerInterface::GetCpuFeatures(uint32& flags)
+status_t LocalDebuggerInterface::GetCpuFeatures(uint32& flags)
 {
 	return fArchitecture->GetCpuFeatures(flags);
 }
 
 
-status_t
-LocalDebuggerInterface::WriteCoreFile(const char* path)
+status_t LocalDebuggerInterface::WriteCoreFile(const char* path)
 {
 	DebugContextGetter contextGetter(fDebugContextPool);
 
@@ -754,8 +729,7 @@ LocalDebuggerInterface::WriteCoreFile(const char* path)
 }
 
 
-status_t
-LocalDebuggerInterface::GetMemoryProperties(target_addr_t address,
+status_t LocalDebuggerInterface::GetMemoryProperties(target_addr_t address,
 	uint32& protection, uint32& locking)
 {
 	return get_memory_properties(fTeamID, (const void *)address,
@@ -784,8 +758,7 @@ LocalDebuggerInterface::WriteMemory(target_addr_t address, void* buffer,
 }
 
 
-status_t
-LocalDebuggerInterface::_CreateDebugEvent(int32 messageCode,
+status_t LocalDebuggerInterface::_CreateDebugEvent(int32 messageCode,
 	const debug_debugger_message_data& message, bool& _ignore,
 	DebugEvent*& _event)
 {
@@ -936,8 +909,7 @@ LocalDebuggerInterface::_CreateDebugEvent(int32 messageCode,
 }
 
 
-status_t
-LocalDebuggerInterface::_GetNextSystemWatchEvent(DebugEvent*& _event,
+status_t LocalDebuggerInterface::_GetNextSystemWatchEvent(DebugEvent*& _event,
 	KMessage& message)
 {
 	status_t error = B_OK;
@@ -981,8 +953,7 @@ LocalDebuggerInterface::_GetNextSystemWatchEvent(DebugEvent*& _event,
 }
 
 
-status_t
-LocalDebuggerInterface::_GetDebugCpuState(thread_id thread, debug_cpu_state& _state)
+status_t LocalDebuggerInterface::_GetDebugCpuState(thread_id thread, debug_cpu_state& _state)
 {
 	DebugContextGetter contextGetter(fDebugContextPool);
 

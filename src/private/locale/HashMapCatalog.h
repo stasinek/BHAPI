@@ -150,8 +150,7 @@ HashMapCatalog::CatWalker::CatWalker(HashMapCatalog* catalog)
 }
 
 
-inline bool
-HashMapCatalog::CatWalker::AtEnd() const
+inline bool HashMapCatalog::CatWalker::AtEnd() const
 {
 	return atEnd;
 }
@@ -173,8 +172,7 @@ HashMapCatalog::CatWalker::GetValue() const
 }
 
 
-inline void
-HashMapCatalog::CatWalker::Next()
+inline void HashMapCatalog::CatWalker::Next()
 {
 	if (fPos.HasNext()) {
 		current = fPos.Next();
@@ -184,8 +182,7 @@ HashMapCatalog::CatWalker::Next()
 }
 
 
-inline status_t
-HashMapCatalog::GetWalker(CatWalker *walker)
+inline status_t HashMapCatalog::GetWalker(CatWalker *walker)
 {
 	if (!walker)
 		return B_BAD_VALUE;

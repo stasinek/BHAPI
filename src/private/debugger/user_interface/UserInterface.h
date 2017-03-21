@@ -7,7 +7,7 @@
 #define USER_INTERFACE_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <Referenceable.h>
 

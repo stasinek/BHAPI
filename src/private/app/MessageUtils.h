@@ -20,15 +20,13 @@ uint32 CalculateChecksum(const uint8 *buffer, int32 size);
 
 
 template<class T>
-inline void
-byte_swap(T &/*data*/)
+inline void byte_swap(T &/*data*/)
 {
 	// Specialize for data types which actually swap
 }
 
 
-inline void
-write_helper(BDataIO *stream, const void *data, size_t size)
+inline void write_helper(BDataIO *stream, const void *data, size_t size)
 {
 	status_t error = stream->Write(data, size);
 	if (error < B_OK)
@@ -113,72 +111,63 @@ private:
 
 
 template<>
-inline void
-byte_swap(double &data)
+inline void byte_swap(double &data)
 {
 	data = __swap_double(data);
 }
 
 
 template<>
-inline void
-byte_swap(float &data)
+inline void byte_swap(float &data)
 {
 	data = __swap_float(data);
 }
 
 
 template<>
-inline void
-byte_swap(int64 &data)
+inline void byte_swap(int64 &data)
 {
 	data = __swap_int64(data);
 }
 
 
 template<>
-inline void
-byte_swap(uint64 &data)
+inline void byte_swap(uint64 &data)
 {
 	data = __swap_int64(data);
 }
 
 
 template<>
-inline void
-byte_swap(int32 &data)
+inline void byte_swap(int32 &data)
 {
 	data = __swap_int32(data);
 }
 
 
 template<>
-inline void
-byte_swap(uint32 &data)
+inline void byte_swap(uint32 &data)
 {
 	data = __swap_int32(data);
 }
 
 
 template<>
-inline void
-byte_swap(int16 &data)
+inline void byte_swap(int16 &data)
 {
 	data = __swap_int16(data);
 }
 
 
 template<>
-inline void
-byte_swap(uint16 &data)
+inline void byte_swap(uint16 &data)
 {
 	data = __swap_int16(data);
 }
 
 
 template<>
-inline void
-byte_swap(entry_ref &data)
+inline void byte_swap(entry_ref &data)
 {
 	byte_swap(data.device);
 	byte_swap(data.directory);

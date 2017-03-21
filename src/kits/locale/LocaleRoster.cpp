@@ -64,8 +64,7 @@ int32 BLocaleRoster::kEmbeddedCatResId = 0xCADA;
 	// this may live in an app- or add-on-file
 
 
-static const char*
-country_code_for_language(const BLanguage& language)
+static const char*  country_code_for_language(const BLanguage& language)
 {
 	if (language.IsCountrySpecific())
 		return language.CountryCode();
@@ -146,15 +145,13 @@ BLocaleRoster::Default()
 }
 
 
-status_t
-BLocaleRoster::Refresh()
+status_t BLocaleRoster::Refresh()
 {
 	return fData->Refresh();
 }
 
 
-status_t
-BLocaleRoster::GetDefaultTimeZone(BTimeZone* timezone) const
+status_t BLocaleRoster::GetDefaultTimeZone(BTimeZone* timezone) const
 {
 	if (!timezone)
 		return B_BAD_VALUE;
@@ -176,8 +173,7 @@ BLocaleRoster::GetDefaultLocale() const
 }
 
 
-status_t
-BLocaleRoster::GetLanguage(const char* languageCode,
+status_t BLocaleRoster::GetLanguage(const char* languageCode,
 	BLanguage** _language) const
 {
 	if (_language == NULL || languageCode == NULL || languageCode[0] == '\0')
@@ -192,8 +188,7 @@ BLocaleRoster::GetLanguage(const char* languageCode,
 }
 
 
-status_t
-BLocaleRoster::GetPreferredLanguages(BMessage* languages) const
+status_t BLocaleRoster::GetPreferredLanguages(BMessage* languages) const
 {
 	if (!languages)
 		return B_BAD_VALUE;
@@ -212,8 +207,7 @@ BLocaleRoster::GetPreferredLanguages(BMessage* languages) const
  * \brief Fills \c message with 'language'-fields containing the language-
  * ID(s) of all available languages.
  */
-status_t
-BLocaleRoster::GetAvailableLanguages(BMessage* languages) const
+status_t BLocaleRoster::GetAvailableLanguages(BMessage* languages) const
 {
 	if (!languages)
 		return B_BAD_VALUE;
@@ -228,8 +222,7 @@ BLocaleRoster::GetAvailableLanguages(BMessage* languages) const
 }
 
 
-status_t
-BLocaleRoster::GetAvailableCountries(BMessage* countries) const
+status_t BLocaleRoster::GetAvailableCountries(BMessage* countries) const
 {
 	if (!countries)
 		return B_BAD_VALUE;
@@ -244,8 +237,7 @@ BLocaleRoster::GetAvailableCountries(BMessage* countries) const
 }
 
 
-status_t
-BLocaleRoster::GetAvailableTimeZones(BMessage* timeZones) const
+status_t BLocaleRoster::GetAvailableTimeZones(BMessage* timeZones) const
 {
 	if (!timeZones)
 		return B_BAD_VALUE;
@@ -274,8 +266,7 @@ BLocaleRoster::GetAvailableTimeZones(BMessage* timeZones) const
 }
 
 
-status_t
-BLocaleRoster::GetAvailableTimeZonesWithRegionInfo(BMessage* timeZones) const
+status_t BLocaleRoster::GetAvailableTimeZonesWithRegionInfo(BMessage* timeZones) const
 {
 	if (!timeZones)
 		return B_BAD_VALUE;
@@ -315,8 +306,7 @@ BLocaleRoster::GetAvailableTimeZonesWithRegionInfo(BMessage* timeZones) const
 }
 
 
-status_t
-BLocaleRoster::GetAvailableTimeZonesForCountry(BMessage* timeZones,
+status_t BLocaleRoster::GetAvailableTimeZonesForCountry(BMessage* timeZones,
 	const char* countryCode) const
 {
 	if (!timeZones)
@@ -347,8 +337,7 @@ BLocaleRoster::GetAvailableTimeZonesForCountry(BMessage* timeZones,
 }
 
 
-status_t
-BLocaleRoster::GetFlagIconForCountry(BBitmap* flagIcon, const char* countryCode)
+status_t BLocaleRoster::GetFlagIconForCountry(BBitmap* flagIcon, const char* countryCode)
 {
 	if (countryCode == NULL)
 		return B_BAD_VALUE;
@@ -385,8 +374,7 @@ BLocaleRoster::GetFlagIconForCountry(BBitmap* flagIcon, const char* countryCode)
 }
 
 
-status_t
-BLocaleRoster::GetFlagIconForLanguage(BBitmap* flagIcon,
+status_t BLocaleRoster::GetFlagIconForLanguage(BBitmap* flagIcon,
 	const char* languageCode)
 {
 	if (languageCode == NULL || languageCode[0] == '\0'
@@ -429,8 +417,7 @@ BLocaleRoster::GetFlagIconForLanguage(BBitmap* flagIcon,
 }
 
 
-status_t
-BLocaleRoster::GetAvailableCatalogs(BMessage*  languageList,
+status_t BLocaleRoster::GetAvailableCatalogs(BMessage*  languageList,
 	const char* sigPattern,	const char* langPattern, int32 fingerprint) const
 {
 	if (languageList == NULL)
@@ -456,8 +443,7 @@ BLocaleRoster::GetAvailableCatalogs(BMessage*  languageList,
 }
 
 
-bool
-BLocaleRoster::IsFilesystemTranslationPreferred() const
+bool BLocaleRoster::IsFilesystemTranslationPreferred() const
 {
 	BAutolock lock(fData->fLock);
 	if (!lock.IsLocked())
@@ -484,8 +470,7 @@ BLocaleRoster::IsFilesystemTranslationPreferred() const
 	Lookup is done for the top preferred language, only.
 	Lookup fails if a comment is present in the catalog entry.
 */
-status_t
-BLocaleRoster::GetLocalizedFileName(BString& localizedFileName,
+status_t BLocaleRoster::GetLocalizedFileName(BString& localizedFileName,
 	const entry_ref& ref, bool traverse)
 {
 	BString signature;
@@ -518,8 +503,7 @@ BLocaleRoster::GetLocalizedFileName(BString& localizedFileName,
 }
 
 
-static status_t
-_InitializeCatalog(void* param)
+static status_t _InitializeCatalog(void* param)
 {
 	BCatalog* catalog = (BCatalog*)param;
 
@@ -559,8 +543,7 @@ BLocaleRoster::_GetCatalog(BCatalog* catalog, int32* catalogInitStatus)
 }
 
 
-status_t
-BLocaleRoster::_PrepareCatalogEntry(const entry_ref& ref, BString& signature,
+status_t BLocaleRoster::_PrepareCatalogEntry(const entry_ref& ref, BString& signature,
 	BString& context, BString& string, bool traverse)
 {
 	BEntry entry(&ref, traverse);

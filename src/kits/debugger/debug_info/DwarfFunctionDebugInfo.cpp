@@ -78,8 +78,7 @@ DwarfFunctionDebugInfo::PrettyName() const
 }
 
 
-bool
-DwarfFunctionDebugInfo::IsMain() const
+bool DwarfFunctionDebugInfo::IsMain() const
 {
 	return fSubprogramEntry->IsMain();
 }

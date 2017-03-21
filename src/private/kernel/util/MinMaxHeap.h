@@ -149,8 +149,7 @@ MinMaxHeapMemberGetLink<Element, Key, LinkMember>::operator()(
 
 
 template<typename Key>
-bool
-MinMaxHeapCompare<Key>::operator()(Key a, Key b)
+bool MinMaxHeapCompare<Key>::operator()(Key a, Key b)
 {
 	return a < b;
 }
@@ -227,8 +226,7 @@ MIN_MAX_HEAP_CLASS_NAME::GetKey(Element* element)
 
 
 MIN_MAX_HEAP_TEMPLATE_LIST
-void
-MIN_MAX_HEAP_CLASS_NAME::ModifyKey(Element* element, Key newKey)
+void MIN_MAX_HEAP_CLASS_NAME::ModifyKey(Element* element, Key newKey)
 {
 	MinMaxHeapLink<Element, Key>* link = sGetLink(element);
 
@@ -246,8 +244,7 @@ MIN_MAX_HEAP_CLASS_NAME::ModifyKey(Element* element, Key newKey)
 
 
 MIN_MAX_HEAP_TEMPLATE_LIST
-void
-MIN_MAX_HEAP_CLASS_NAME::RemoveMinimum()
+void MIN_MAX_HEAP_CLASS_NAME::RemoveMinimum()
 {
 	if (fMinLastElement == 0) {
 		ASSERT(fMaxLastElement == 1);
@@ -267,8 +264,7 @@ MIN_MAX_HEAP_CLASS_NAME::RemoveMinimum()
 
 
 MIN_MAX_HEAP_TEMPLATE_LIST
-void
-MIN_MAX_HEAP_CLASS_NAME::RemoveMaximum()
+void MIN_MAX_HEAP_CLASS_NAME::RemoveMaximum()
 {
 	if (fMaxLastElement == 0) {
 		ASSERT(fMinLastElement == 1);
@@ -288,8 +284,7 @@ MIN_MAX_HEAP_CLASS_NAME::RemoveMaximum()
 
 
 MIN_MAX_HEAP_TEMPLATE_LIST
-status_t
-MIN_MAX_HEAP_CLASS_NAME::Insert(Element* element, Key key)
+status_t MIN_MAX_HEAP_CLASS_NAME::Insert(Element* element, Key key)
 {
 	if (min_c(fMinLastElement, fMaxLastElement) == fSize) {
 		ASSERT(max_c(fMinLastElement, fMaxLastElement) == fSize);
@@ -321,8 +316,7 @@ MIN_MAX_HEAP_CLASS_NAME::Insert(Element* element, Key key)
 
 
 MIN_MAX_HEAP_TEMPLATE_LIST
-status_t
-MIN_MAX_HEAP_CLASS_NAME::_GrowHeap(int minimalSize)
+status_t MIN_MAX_HEAP_CLASS_NAME::_GrowHeap(int minimalSize)
 {
 	minimalSize = minimalSize % 2 == 0 ? minimalSize : minimalSize + 1;
 	int newSize = max_c(max_c(fSize * 4, 4), minimalSize);
@@ -345,8 +339,7 @@ MIN_MAX_HEAP_CLASS_NAME::_GrowHeap(int minimalSize)
 
 
 MIN_MAX_HEAP_TEMPLATE_LIST
-void
-MIN_MAX_HEAP_CLASS_NAME::_MoveUp(MinMaxHeapLink<Element, Key>* link)
+void MIN_MAX_HEAP_CLASS_NAME::_MoveUp(MinMaxHeapLink<Element, Key>* link)
 {
 	Element** tree = link->fMinTree ? fMinElements : fMaxElements;
 	while (true) {
@@ -371,8 +364,7 @@ MIN_MAX_HEAP_CLASS_NAME::_MoveUp(MinMaxHeapLink<Element, Key>* link)
 
 
 MIN_MAX_HEAP_TEMPLATE_LIST
-void
-MIN_MAX_HEAP_CLASS_NAME::_MoveDown(MinMaxHeapLink<Element, Key>* link)
+void MIN_MAX_HEAP_CLASS_NAME::_MoveDown(MinMaxHeapLink<Element, Key>* link)
 {
 	int current;
 
@@ -415,8 +407,7 @@ MIN_MAX_HEAP_CLASS_NAME::_MoveDown(MinMaxHeapLink<Element, Key>* link)
 
 
 MIN_MAX_HEAP_TEMPLATE_LIST
-bool
-MIN_MAX_HEAP_CLASS_NAME::_ChangeTree(MinMaxHeapLink<Element, Key>* link)
+bool MIN_MAX_HEAP_CLASS_NAME::_ChangeTree(MinMaxHeapLink<Element, Key>* link)
 {
 	int otherLastElement = link->fMinTree ? fMaxLastElement : fMinLastElement;
 
@@ -465,8 +456,7 @@ MIN_MAX_HEAP_CLASS_NAME::_ChangeTree(MinMaxHeapLink<Element, Key>* link)
 
 
 MIN_MAX_HEAP_TEMPLATE_LIST
-void
-MIN_MAX_HEAP_CLASS_NAME::_RemoveLast(bool minTree)
+void MIN_MAX_HEAP_CLASS_NAME::_RemoveLast(bool minTree)
 {
 	bool deleteMin = fMaxLastElement < fMinLastElement;
 

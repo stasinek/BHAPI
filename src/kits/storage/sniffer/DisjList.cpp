@@ -19,13 +19,11 @@ DisjList::DisjList()
 DisjList::~DisjList() {
 }
 
-void
-DisjList::SetCaseInsensitive(bool how) {
+void DisjList::SetCaseInsensitive(bool how) {
 	fCaseInsensitive = how;
 }
 
-bool
-DisjList::IsCaseInsensitive() {
+bool DisjList::IsCaseInsensitive() {
 	return fCaseInsensitive;
 }
 

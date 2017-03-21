@@ -40,23 +40,20 @@ static BSimpleLocker _e_net_locker(true);
 static bool _e_net_enabled = false;
 
 
-void
-BNetDebug::Enable(bool state)
+void BNetDebug::Enable(bool state)
 {
 	BAutolock <BSimpleLocker> autolock(_e_net_locker);
 	if(autolock.IsLocked()) _e_net_enabled = state;
 }
 
 
-bool
-BNetDebug::IsEnabled()
+bool BNetDebug::IsEnabled()
 {
 	return _e_net_enabled;
 }
 
 
-void
-BNetDebug::Debug(const char *format, ...)
+void BNetDebug::Debug(const char *format, ...)
 {
 	if(!format) return;
 
@@ -78,8 +75,7 @@ BNetDebug::Debug(const char *format, ...)
 }
 
 
-void
-BNetDebug::Print(const char *string)
+void BNetDebug::Print(const char *string)
 {
 	if(string == NULL || *string == 0) return;
 
@@ -90,8 +86,7 @@ BNetDebug::Print(const char *string)
 }
 
 
-void
-BNetDebug::Dump(const char *data, size_t len, const char *title)
+void BNetDebug::Dump(const char *data, size_t len, const char *title)
 {
 	if(!data || len == 0) return;
 

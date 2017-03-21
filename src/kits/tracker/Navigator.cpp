@@ -82,8 +82,7 @@ BNavigator::~BNavigator()
 }
 
 
-void
-BNavigator::AttachedToWindow()
+void BNavigator::AttachedToWindow()
 {
 	// Set up toolbar items
 	BBitmap* bmpBack = new BBitmap(BRect(0, 0, 19, 19), B_RGBA32);
@@ -112,16 +111,14 @@ BNavigator::AttachedToWindow()
 }
 
 
-void
-BNavigator::AllAttached()
+void BNavigator::AllAttached()
 {
 	// Inital setup of widget states
 	UpdateLocation(0, kActionSet);
 }
 
 
-void
-BNavigator::Draw(BRect updateRect)
+void BNavigator::Draw(BRect updateRect)
 {
 	// Draw a 1px bottom border, like BMenuBar
 	BRect rect(Bounds());
@@ -135,8 +132,7 @@ BNavigator::Draw(BRect updateRect)
 }
 
 
-void
-BNavigator::MessageReceived(BMessage* message)
+void BNavigator::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case kNavigatorCommandBackward:
@@ -181,8 +177,7 @@ BNavigator::MessageReceived(BMessage* message)
 }
 
 
-void
-BNavigator::GoBackward(bool option)
+void BNavigator::GoBackward(bool option)
 {
 	int32 itemCount = fBackHistory.CountItems();
 	if (itemCount >= 2 && fBackHistory.ItemAt(itemCount - 2)) {
@@ -193,8 +188,7 @@ BNavigator::GoBackward(bool option)
 }
 
 
-void
-BNavigator::GoForward(bool option)
+void BNavigator::GoForward(bool option)
 {
 	if (fForwHistory.CountItems() >= 1) {
 		BEntry entry;
@@ -204,8 +198,7 @@ BNavigator::GoForward(bool option)
 }
 
 
-void
-BNavigator::GoUp(bool option)
+void BNavigator::GoUp(bool option)
 {
 	BEntry entry;
 	if (entry.SetTo(fPath.Path()) == B_OK) {
@@ -217,8 +210,7 @@ BNavigator::GoUp(bool option)
 }
 
 
-void
-BNavigator::SendNavigationMessage(NavigationAction action, BEntry* entry,
+void BNavigator::SendNavigationMessage(NavigationAction action, BEntry* entry,
 	bool option)
 {
 	entry_ref ref;
@@ -274,8 +266,7 @@ BNavigator::SendNavigationMessage(NavigationAction action, BEntry* entry,
 }
 
 
-void
-BNavigator::GoTo()
+void BNavigator::GoTo()
 {
 	BString pathname = fLocation->Text();
 
@@ -302,8 +293,7 @@ BNavigator::GoTo()
 }
 
 
-void
-BNavigator::UpdateLocation(const Model* newmodel, int32 action)
+void BNavigator::UpdateLocation(const Model* newmodel, int32 action)
 {
 	if (newmodel)
 		newmodel->GetPath(&fPath);

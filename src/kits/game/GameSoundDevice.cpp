@@ -68,8 +68,7 @@ GetDefaultDevice()
 }
 
 
-void
-ReleaseDevice()
+void ReleaseDevice()
 {
 	BAutolock _(sDeviceRefCountLock);
 
@@ -111,8 +110,7 @@ BGameSoundDevice::~BGameSoundDevice()
 }
 
 
-status_t
-BGameSoundDevice::InitCheck() const
+status_t BGameSoundDevice::InitCheck() const
 {
 	return fInitError;
 }
@@ -132,15 +130,13 @@ BGameSoundDevice::Format(gs_id sound) const
 }
 
 
-void
-BGameSoundDevice::SetInitError(status_t error)
+void BGameSoundDevice::SetInitError(status_t error)
 {
 	fInitError = error;
 }
 
 
-status_t
-BGameSoundDevice::CreateBuffer(gs_id* sound, const gs_audio_format* format,
+status_t BGameSoundDevice::CreateBuffer(gs_id* sound, const gs_audio_format* format,
 	const void* data, int64 frames)
 {
 	if (frames <= 0 || !sound)
@@ -163,8 +159,7 @@ BGameSoundDevice::CreateBuffer(gs_id* sound, const gs_audio_format* format,
 }
 
 
-status_t
-BGameSoundDevice::CreateBuffer(gs_id* sound, const void* object,
+status_t BGameSoundDevice::CreateBuffer(gs_id* sound, const void* object,
 	const gs_audio_format* format, size_t inBufferFrameCount,
 	size_t inBufferCount)
 {
@@ -189,8 +184,7 @@ BGameSoundDevice::CreateBuffer(gs_id* sound, const void* object,
 }
 
 
-void
-BGameSoundDevice::ReleaseBuffer(gs_id sound)
+void BGameSoundDevice::ReleaseBuffer(gs_id sound)
 {
 	if (sound <= 0)
 		return;
@@ -206,8 +200,7 @@ BGameSoundDevice::ReleaseBuffer(gs_id sound)
 }
 
 
-status_t
-BGameSoundDevice::Buffer(gs_id sound, gs_audio_format* format, void*& data)
+status_t BGameSoundDevice::Buffer(gs_id sound, gs_audio_format* format, void*& data)
 {
 	if (!format || sound <= 0)
 		return B_BAD_VALUE;
@@ -223,8 +216,7 @@ BGameSoundDevice::Buffer(gs_id sound, gs_audio_format* format, void*& data)
 }
 
 
-status_t
-BGameSoundDevice::StartPlaying(gs_id sound)
+status_t BGameSoundDevice::StartPlaying(gs_id sound)
 {
 	if (sound <= 0)
 		return B_BAD_VALUE;
@@ -239,8 +231,7 @@ BGameSoundDevice::StartPlaying(gs_id sound)
 }
 
 
-status_t
-BGameSoundDevice::StopPlaying(gs_id sound)
+status_t BGameSoundDevice::StopPlaying(gs_id sound)
 {
 	if (sound <= 0)
 		return B_BAD_VALUE;
@@ -255,8 +246,7 @@ BGameSoundDevice::StopPlaying(gs_id sound)
 }
 
 
-bool
-BGameSoundDevice::IsPlaying(gs_id sound)
+bool BGameSoundDevice::IsPlaying(gs_id sound)
 {
 	if (sound <= 0)
 		return false;
@@ -264,8 +254,7 @@ BGameSoundDevice::IsPlaying(gs_id sound)
 }
 
 
-status_t
-BGameSoundDevice::GetAttributes(gs_id sound, gs_attribute* attributes,
+status_t BGameSoundDevice::GetAttributes(gs_id sound, gs_attribute* attributes,
 	size_t attributeCount)
 {
 	if (!fSounds[sound - 1])
@@ -275,8 +264,7 @@ BGameSoundDevice::GetAttributes(gs_id sound, gs_attribute* attributes,
 }
 
 
-status_t
-BGameSoundDevice::SetAttributes(gs_id sound, gs_attribute* attributes,
+status_t BGameSoundDevice::SetAttributes(gs_id sound, gs_attribute* attributes,
 	size_t attributeCount)
 {
 	if (!fSounds[sound - 1])
@@ -286,8 +274,7 @@ BGameSoundDevice::SetAttributes(gs_id sound, gs_attribute* attributes,
 }
 
 
-int32
-BGameSoundDevice::AllocateSound()
+int32 BGameSoundDevice::AllocateSound()
 {
 	for (int32 i = 0; i < fSoundCount; i++)
 		if (!fSounds[i])

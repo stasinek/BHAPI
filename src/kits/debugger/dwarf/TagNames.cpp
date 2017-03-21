@@ -106,8 +106,7 @@ static struct InitTagNames {
 } sInitTagNames;
 
 
-const char*
-get_entry_tag_name(uint16 tag)
+const char*  get_entry_tag_name(uint16 tag)
 {
 	if (tag <= DW_TAG_template_alias)
 		return sTagNames[tag];

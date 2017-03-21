@@ -117,8 +117,7 @@ StackFrameValueInfos::~StackFrameValueInfos()
 }
 
 
-status_t
-StackFrameValueInfos::Init()
+status_t StackFrameValueInfos::Init()
 {
 	fValues = new(std::nothrow) ValueTable;
 	if (fValues == NULL)
@@ -128,8 +127,7 @@ StackFrameValueInfos::Init()
 }
 
 
-bool
-StackFrameValueInfos::GetInfo(ObjectID* variable,
+bool StackFrameValueInfos::GetInfo(ObjectID* variable,
 	const TypeComponentPath* path, Type** _type,
 	ValueLocation** _location) const
 {
@@ -152,16 +150,14 @@ StackFrameValueInfos::GetInfo(ObjectID* variable,
 }
 
 
-bool
-StackFrameValueInfos::HasInfo(ObjectID* variable,
+bool StackFrameValueInfos::HasInfo(ObjectID* variable,
 	const TypeComponentPath* path) const
 {
 	return fValues->Lookup(Key(variable, (TypeComponentPath*)path)) != NULL;
 }
 
 
-status_t
-StackFrameValueInfos::SetInfo(ObjectID* variable, TypeComponentPath* path,
+status_t StackFrameValueInfos::SetInfo(ObjectID* variable, TypeComponentPath* path,
 	Type* type, ValueLocation* location)
 {
 	InfoEntry* entry = fValues->Lookup(Key(variable, path));
@@ -177,8 +173,7 @@ StackFrameValueInfos::SetInfo(ObjectID* variable, TypeComponentPath* path,
 }
 
 
-void
-StackFrameValueInfos::_Cleanup()
+void StackFrameValueInfos::_Cleanup()
 {
 	if (fValues != NULL) {
 		InfoEntry* entry = fValues->Clear(true);

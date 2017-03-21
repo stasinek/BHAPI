@@ -196,8 +196,7 @@ FT_BEGIN_HEADER
    *     as a read-only byte block).
    *
    */
-  typedef void
-  (*FT_Incremental_FreeGlyphDataFunc)( FT_Incremental  incremental,
+  typedef void   (*FT_Incremental_FreeGlyphDataFunc)( FT_Incremental  incremental,
                                        FT_Data*        data );
 
 

@@ -36,8 +36,7 @@ CreateChildJob::~CreateChildJob()
 
 
 // Init
-status_t
-CreateChildJob::Init(off_t offset, off_t size, const char* type,
+status_t CreateChildJob::Init(off_t offset, off_t size, const char* type,
 	const char* name, const char* parameters)
 {
 	fOffset = offset;
@@ -52,8 +51,7 @@ CreateChildJob::Init(off_t offset, off_t size, const char* type,
 
 
 // Do
-status_t
-CreateChildJob::Do()
+status_t CreateChildJob::Do()
 {
 	int32 changeCounter = fPartition->ChangeCounter();
 	partition_id childID;

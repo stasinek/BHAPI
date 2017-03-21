@@ -152,15 +152,13 @@ BMailComponent *BMIMEMultipartMailContainer::GetComponent(int32 index, bool pars
 }
 
 
-int32
-BMIMEMultipartMailContainer::CountComponents() const
+int32 BMIMEMultipartMailContainer::CountComponents() const
 {
 	return _components_in_code.CountItems();
 }
 
 
-status_t
-BMIMEMultipartMailContainer::RemoveComponent(BMailComponent *component)
+status_t BMIMEMultipartMailContainer::RemoveComponent(BMailComponent *component)
 {
 	if (component == NULL)
 		return B_BAD_VALUE;
@@ -176,8 +174,7 @@ BMIMEMultipartMailContainer::RemoveComponent(BMailComponent *component)
 }
 
 
-status_t
-BMIMEMultipartMailContainer::RemoveComponent(int32 index)
+status_t BMIMEMultipartMailContainer::RemoveComponent(int32 index)
 {
 	if (index >= CountComponents())
 		return B_BAD_INDEX;

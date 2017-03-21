@@ -125,22 +125,19 @@ BRepositoryCache::Info() const
 }
 
 
-bool
-BRepositoryCache::IsUserSpecific() const
+bool BRepositoryCache::IsUserSpecific() const
 {
 	return fIsUserSpecific;
 }
 
 
-void
-BRepositoryCache::SetIsUserSpecific(bool isUserSpecific)
+void BRepositoryCache::SetIsUserSpecific(bool isUserSpecific)
 {
 	fIsUserSpecific = isUserSpecific;
 }
 
 
-status_t
-BRepositoryCache::SetTo(const BEntry& entry)
+status_t BRepositoryCache::SetTo(const BEntry& entry)
 {
 	// unset
 	fPackages.MakeEmpty();
@@ -175,8 +172,7 @@ BRepositoryCache::SetTo(const BEntry& entry)
 }
 
 
-uint32
-BRepositoryCache::CountPackages() const
+uint32 BRepositoryCache::CountPackages() const
 {
 	return fPackages.CountInfos();
 }

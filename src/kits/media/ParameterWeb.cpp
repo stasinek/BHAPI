@@ -210,8 +210,7 @@ reserve_in_buffer(void **_buffer)
 }
 #endif
 
-template<class Type> void
-write_to_buffer(void **_buffer, Type value)
+template<class Type> void write_to_buffer(void **_buffer, Type value)
 {
     Type *typedBuffer = static_cast<Type *>(*_buffer);
 
@@ -222,8 +221,7 @@ write_to_buffer(void **_buffer, Type value)
 }
 
 
-void
-write_string_to_buffer(void **_buffer, const char *string)
+void write_string_to_buffer(void **_buffer, const char *string)
 {
     uint8 *buffer = static_cast<uint8 *>(*_buffer);
     uint32 length = string ? strlen(string) : 0;
@@ -240,8 +238,7 @@ write_string_to_buffer(void **_buffer, const char *string)
 }
 
 
-static void
-skip_in_buffer(const void **_buffer, uint32 bytes)
+static void skip_in_buffer(const void **_buffer, uint32 bytes)
 {
     const uint8 *buffer = static_cast<const uint8 *>(*_buffer);
 
@@ -369,8 +366,7 @@ BParameterWeb::MakeGroup(const char* name)
 }
 
 
-int32
-BParameterWeb::CountGroups()
+int32 BParameterWeb::CountGroups()
 {
     return fGroups->CountItems();
 }
@@ -383,8 +379,7 @@ BParameterWeb::GroupAt(int32 index)
 }
 
 
-int32
-BParameterWeb::CountParameters()
+int32 BParameterWeb::CountParameters()
 {
     CALLED();
 
@@ -439,8 +434,7 @@ BParameterWeb::ParameterAt(int32 index)
 }
 
 
-bool
-BParameterWeb::IsFixedSize() const
+bool BParameterWeb::IsFixedSize() const
 {
     return false;
 }
@@ -488,8 +482,7 @@ BParameterWeb::FlattenedSize() const
 }
 
 
-status_t
-BParameterWeb::Flatten(void* buffer, ssize_t size) const
+status_t BParameterWeb::Flatten(void* buffer, ssize_t size) const
 {
     CALLED();
 
@@ -540,15 +533,13 @@ BParameterWeb::Flatten(void* buffer, ssize_t size) const
 }
 
 
-bool
-BParameterWeb::AllowsTypeCode(type_code code) const
+bool BParameterWeb::AllowsTypeCode(type_code code) const
 {
     return code == TypeCode();
 }
 
 
-status_t
-BParameterWeb::Unflatten(type_code code, const void* buffer, ssize_t size)
+status_t BParameterWeb::Unflatten(type_code code, const void* buffer, ssize_t size)
 {
     CALLED();
 
@@ -650,8 +641,7 @@ BParameterWeb::Unflatten(type_code code, const void* buffer, ssize_t size)
 }
 
 
-void
-BParameterWeb::AddRefFix(void* oldItem, void* newItem)
+void BParameterWeb::AddRefFix(void* oldItem, void* newItem)
 {
     fOldRefs->AddItem(oldItem);
     fNewRefs->AddItem(newItem);
@@ -701,22 +691,19 @@ BParameterGroup::Web() const
 }
 
 
-const char*
-BParameterGroup::Name() const
+const char*  BParameterGroup::Name() const
 {
     return fName;
 }
 
 
-void
-BParameterGroup::SetFlags(uint32 flags)
+void BParameterGroup::SetFlags(uint32 flags)
 {
     fFlags = flags;
 }
 
 
-uint32
-BParameterGroup::Flags() const
+uint32 BParameterGroup::Flags() const
 {
     return fFlags;
 }
@@ -809,8 +796,7 @@ BParameterGroup::MakeGroup(const char* name)
 }
 
 
-int32
-BParameterGroup::CountParameters()
+int32 BParameterGroup::CountParameters()
 {
     return fControls->CountItems();
 }
@@ -823,8 +809,7 @@ BParameterGroup::ParameterAt(int32 index)
 }
 
 
-int32
-BParameterGroup::CountGroups()
+int32 BParameterGroup::CountGroups()
 {
     return fGroups->CountItems();
 }
@@ -837,8 +822,7 @@ BParameterGroup::GroupAt(int32 index)
 }
 
 
-bool
-BParameterGroup::IsFixedSize() const
+bool BParameterGroup::IsFixedSize() const
 {
     return false;
 }
@@ -913,8 +897,7 @@ BParameterGroup::FlattenedSize() const
 }
 
 
-status_t
-BParameterGroup::Flatten(void* buffer, ssize_t size) const
+status_t BParameterGroup::Flatten(void* buffer, ssize_t size) const
 {
     CALLED();
 
@@ -997,15 +980,13 @@ BParameterGroup::Flatten(void* buffer, ssize_t size) const
 }
 
 
-bool
-BParameterGroup::AllowsTypeCode(type_code code) const
+bool BParameterGroup::AllowsTypeCode(type_code code) const
 {
     return code == TypeCode();
 }
 
 
-status_t
-BParameterGroup::Unflatten(type_code code, const void* buffer, ssize_t size)
+status_t BParameterGroup::Unflatten(type_code code, const void* buffer, ssize_t size)
 {
     CALLED();
 
@@ -1218,50 +1199,43 @@ BParameter::Group() const
 }
 
 
-const char*
-BParameter::Name() const
+const char*  BParameter::Name() const
 {
     return fName;
 }
 
 
-const char*
-BParameter::Kind() const
+const char*  BParameter::Kind() const
 {
     return fKind;
 }
 
 
-const char*
-BParameter::Unit() const
+const char*  BParameter::Unit() const
 {
     return fUnit;
 }
 
 
-int32
-BParameter::ID() const
+int32 BParameter::ID() const
 {
     return fID;
 }
 
 
-void
-BParameter::SetFlags(uint32 flags)
+void BParameter::SetFlags(uint32 flags)
 {
     fFlags = flags;
 }
 
 
-uint32
-BParameter::Flags() const
+uint32 BParameter::Flags() const
 {
     return fFlags;
 }
 
 
-status_t
-BParameter::GetValue(void* buffer, size_t* _size, bigtime_t* _when)
+status_t BParameter::GetValue(void* buffer, size_t* _size, bigtime_t* _when)
 {
     CALLED();
 
@@ -1333,8 +1307,7 @@ BParameter::GetValue(void* buffer, size_t* _size, bigtime_t* _when)
 }
 
 
-status_t
-BParameter::SetValue(const void* buffer, size_t size, bigtime_t when)
+status_t BParameter::SetValue(const void* buffer, size_t size, bigtime_t when)
 {
     CALLED();
 
@@ -1393,15 +1366,13 @@ BParameter::SetValue(const void* buffer, size_t size, bigtime_t when)
 }
 
 
-int32
-BParameter::CountChannels()
+int32 BParameter::CountChannels()
 {
     return fChannels;
 }
 
 
-void
-BParameter::SetChannelCount(int32 count)
+void BParameter::SetChannelCount(int32 count)
 {
     fChannels = count;
 }
@@ -1414,15 +1385,13 @@ BParameter::MediaType()
 }
 
 
-void
-BParameter::SetMediaType(media_type type)
+void BParameter::SetMediaType(media_type type)
 {
     fMediaType = type;
 }
 
 
-int32
-BParameter::CountInputs()
+int32 BParameter::CountInputs()
 {
     return fInputs->CountItems();
 }
@@ -1435,8 +1404,7 @@ BParameter::InputAt(int32 index)
 }
 
 
-void
-BParameter::AddInput(BParameter* input)
+void BParameter::AddInput(BParameter* input)
 {
     CALLED();
 
@@ -1455,8 +1423,7 @@ BParameter::AddInput(BParameter* input)
 }
 
 
-int32
-BParameter::CountOutputs()
+int32 BParameter::CountOutputs()
 {
     return fOutputs->CountItems();
 }
@@ -1469,8 +1436,7 @@ BParameter::OutputAt(int32 index)
 }
 
 
-void
-BParameter::AddOutput(BParameter* output)
+void BParameter::AddOutput(BParameter* output)
 {
     CALLED();
 
@@ -1489,8 +1455,7 @@ BParameter::AddOutput(BParameter* output)
 }
 
 
-bool
-BParameter::IsFixedSize() const
+bool BParameter::IsFixedSize() const
 {
     return false;
 }
@@ -1542,8 +1507,7 @@ BParameter::FlattenedSize() const
 }
 
 
-status_t
-BParameter::Flatten(void* buffer, ssize_t size) const
+status_t BParameter::Flatten(void* buffer, ssize_t size) const
 {
     CALLED();
 
@@ -1594,15 +1558,13 @@ BParameter::Flatten(void* buffer, ssize_t size) const
 }
 
 
-bool
-BParameter::AllowsTypeCode(type_code code) const
+bool BParameter::AllowsTypeCode(type_code code) const
 {
     return code == TypeCode();
 }
 
 
-status_t
-BParameter::Unflatten(type_code code, const void* buffer, ssize_t size)
+status_t BParameter::Unflatten(type_code code, const void* buffer, ssize_t size)
 {
     CALLED();
 
@@ -1753,8 +1715,7 @@ BParameter::~BParameter()
     and output lists.
     This is called by BParameterWeb::Unflatten().
 */
-void
-BParameter::FixRefs(BList& old, BList& updated)
+void BParameter::FixRefs(BList& old, BList& updated)
 {
     CALLED();
 
@@ -1835,8 +1796,7 @@ BContinuousParameter::ValueStep()
 }
 
 
-void
-BContinuousParameter::SetResponse(int resp, float factor, float offset)
+void BContinuousParameter::SetResponse(int resp, float factor, float offset)
 {
     fResponse = static_cast<response>(resp);
     fFactor = factor;
@@ -1844,8 +1804,7 @@ BContinuousParameter::SetResponse(int resp, float factor, float offset)
 }
 
 
-void
-BContinuousParameter::GetResponse(int* _resp, float* _factor, float* _offset)
+void BContinuousParameter::GetResponse(int* _resp, float* _factor, float* _offset)
 {
     if (_resp != NULL)
         *_resp = fResponse;
@@ -1866,8 +1825,7 @@ BContinuousParameter::FlattenedSize() const
 }
 
 
-status_t
-BContinuousParameter::Flatten(void* buffer, ssize_t size) const
+status_t BContinuousParameter::Flatten(void* buffer, ssize_t size) const
 {
     CALLED();
 
@@ -1903,8 +1861,7 @@ BContinuousParameter::Flatten(void* buffer, ssize_t size) const
 }
 
 
-status_t
-BContinuousParameter::Unflatten(type_code code, const void* buffer,
+status_t BContinuousParameter::Unflatten(type_code code, const void* buffer,
     ssize_t size)
 {
     CALLED();
@@ -1986,22 +1943,19 @@ BDiscreteParameter::ValueType()
 }
 
 
-int32
-BDiscreteParameter::CountItems()
+int32 BDiscreteParameter::CountItems()
 {
     return fValues->CountItems();
 }
 
 
-const char*
-BDiscreteParameter::ItemNameAt(int32 index)
+const char*  BDiscreteParameter::ItemNameAt(int32 index)
 {
     return reinterpret_cast<const char*>(fSelections->ItemAt(index));
 }
 
 
-int32
-BDiscreteParameter::ItemValueAt(int32 index)
+int32 BDiscreteParameter::ItemValueAt(int32 index)
 {
     int32* item = static_cast<int32*>(fValues->ItemAt(index));
     if (item == NULL)
@@ -2011,8 +1965,7 @@ BDiscreteParameter::ItemValueAt(int32 index)
 }
 
 
-status_t
-BDiscreteParameter::AddItem(int32 value, const char* name)
+status_t BDiscreteParameter::AddItem(int32 value, const char* name)
 {
     CALLED();
 
@@ -2040,8 +1993,7 @@ err:
 }
 
 
-status_t
-BDiscreteParameter::MakeItemsFromInputs()
+status_t BDiscreteParameter::MakeItemsFromInputs()
 {
     CALLED();
 
@@ -2055,8 +2007,7 @@ BDiscreteParameter::MakeItemsFromInputs()
 }
 
 
-status_t
-BDiscreteParameter::MakeItemsFromOutputs()
+status_t BDiscreteParameter::MakeItemsFromOutputs()
 {
     CALLED();
 
@@ -2070,8 +2021,7 @@ BDiscreteParameter::MakeItemsFromOutputs()
 }
 
 
-void
-BDiscreteParameter::MakeEmpty()
+void BDiscreteParameter::MakeEmpty()
 {
     CALLED();
 
@@ -2110,8 +2060,7 @@ BDiscreteParameter::FlattenedSize() const
 }
 
 
-status_t
-BDiscreteParameter::Flatten(void* buffer, ssize_t size) const
+status_t BDiscreteParameter::Flatten(void* buffer, ssize_t size) const
 {
     CALLED();
 
@@ -2151,8 +2100,7 @@ BDiscreteParameter::Flatten(void* buffer, ssize_t size) const
 }
 
 
-status_t
-BDiscreteParameter::Unflatten(type_code code, const void* buffer, ssize_t size)
+status_t BDiscreteParameter::Unflatten(type_code code, const void* buffer, ssize_t size)
 {
     CALLED();
 
@@ -2262,8 +2210,7 @@ BTextParameter::FlattenedSize() const
 }
 
 
-status_t
-BTextParameter::Flatten(void* buffer, ssize_t size) const
+status_t BTextParameter::Flatten(void* buffer, ssize_t size) const
 {
     if (buffer == NULL) {
         ERROR("BTextParameter::Flatten(): buffer is NULL\n");
@@ -2292,8 +2239,7 @@ BTextParameter::Flatten(void* buffer, ssize_t size) const
 }
 
 
-status_t
-BTextParameter::Unflatten(type_code code, const void* buffer, ssize_t size)
+status_t BTextParameter::Unflatten(type_code code, const void* buffer, ssize_t size)
 {
     // we try to check if the buffer size is long enough to hold an object
     // as early as possible.
@@ -2365,15 +2311,13 @@ BNullParameter::FlattenedSize() const
 }
 
 
-status_t
-BNullParameter::Flatten(void* buffer, ssize_t size) const
+status_t BNullParameter::Flatten(void* buffer, ssize_t size) const
 {
     return BParameter::Flatten(buffer, size);
 }
 
 
-status_t
-BNullParameter::Unflatten(type_code code, const void* buffer, ssize_t size)
+status_t BNullParameter::Unflatten(type_code code, const void* buffer, ssize_t size)
 {
     return BParameter::Unflatten(code, buffer, size);
 }

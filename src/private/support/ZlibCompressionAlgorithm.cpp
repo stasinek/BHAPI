@@ -55,15 +55,13 @@ BZlibCompressionParameters::~BZlibCompressionParameters()
 }
 
 
-int32
-BZlibCompressionParameters::CompressionLevel() const
+int32 BZlibCompressionParameters::CompressionLevel() const
 {
 	return fCompressionLevel;
 }
 
 
-void
-BZlibCompressionParameters::SetCompressionLevel(int32 level)
+void BZlibCompressionParameters::SetCompressionLevel(int32 level)
 {
 	fCompressionLevel = level;
 }
@@ -76,22 +74,19 @@ BZlibCompressionParameters::BufferSize() const
 }
 
 
-void
-BZlibCompressionParameters::SetBufferSize(size_t size)
+void BZlibCompressionParameters::SetBufferSize(size_t size)
 {
 	fBufferSize = sanitize_buffer_size(size);
 }
 
 
-bool
-BZlibCompressionParameters::IsGzipFormat() const
+bool BZlibCompressionParameters::IsGzipFormat() const
 {
 	return fGzipFormat;
 }
 
 
-void
-BZlibCompressionParameters::SetGzipFormat(bool gzipFormat)
+void BZlibCompressionParameters::SetGzipFormat(bool gzipFormat)
 {
 	fGzipFormat = gzipFormat;
 }
@@ -120,8 +115,7 @@ BZlibDecompressionParameters::BufferSize() const
 }
 
 
-void
-BZlibDecompressionParameters::SetBufferSize(size_t size)
+void BZlibDecompressionParameters::SetBufferSize(size_t size)
 {
 	fBufferSize = sanitize_buffer_size(size);
 }
@@ -320,8 +314,7 @@ BZlibCompressionAlgorithm::~BZlibCompressionAlgorithm()
 }
 
 
-status_t
-BZlibCompressionAlgorithm::CreateCompressingInputStream(BDataIO* input,
+status_t BZlibCompressionAlgorithm::CreateCompressingInputStream(BDataIO* input,
 	const BCompressionParameters* parameters, BDataIO*& _stream)
 {
 #ifdef B_ZLIB_COMPRESSION_SUPPORT
@@ -333,8 +326,7 @@ BZlibCompressionAlgorithm::CreateCompressingInputStream(BDataIO* input,
 }
 
 
-status_t
-BZlibCompressionAlgorithm::CreateCompressingOutputStream(BDataIO* output,
+status_t BZlibCompressionAlgorithm::CreateCompressingOutputStream(BDataIO* output,
 	const BCompressionParameters* parameters, BDataIO*& _stream)
 {
 #ifdef B_ZLIB_COMPRESSION_SUPPORT
@@ -346,8 +338,7 @@ BZlibCompressionAlgorithm::CreateCompressingOutputStream(BDataIO* output,
 }
 
 
-status_t
-BZlibCompressionAlgorithm::CreateDecompressingInputStream(BDataIO* input,
+status_t BZlibCompressionAlgorithm::CreateDecompressingInputStream(BDataIO* input,
 	const BDecompressionParameters* parameters, BDataIO*& _stream)
 {
 	return Stream<BAbstractInputStream, DecompressionStrategy>::Create(
@@ -355,8 +346,7 @@ BZlibCompressionAlgorithm::CreateDecompressingInputStream(BDataIO* input,
 }
 
 
-status_t
-BZlibCompressionAlgorithm::CreateDecompressingOutputStream(BDataIO* output,
+status_t BZlibCompressionAlgorithm::CreateDecompressingOutputStream(BDataIO* output,
 	const BDecompressionParameters* parameters, BDataIO*& _stream)
 {
 	return Stream<BAbstractOutputStream, DecompressionStrategy>::Create(
@@ -364,8 +354,7 @@ BZlibCompressionAlgorithm::CreateDecompressingOutputStream(BDataIO* output,
 }
 
 
-status_t
-BZlibCompressionAlgorithm::CompressBuffer(const void* input,
+status_t BZlibCompressionAlgorithm::CompressBuffer(const void* input,
 	size_t inputSize, void* output, size_t outputSize, size_t& _compressedSize,
 	const BCompressionParameters* parameters)
 {
@@ -390,8 +379,7 @@ BZlibCompressionAlgorithm::CompressBuffer(const void* input,
 }
 
 
-status_t
-BZlibCompressionAlgorithm::DecompressBuffer(const void* input,
+status_t BZlibCompressionAlgorithm::DecompressBuffer(const void* input,
 	size_t inputSize, void* output, size_t outputSize,
 	size_t& _uncompressedSize, const BDecompressionParameters* parameters)
 {
@@ -406,8 +394,7 @@ BZlibCompressionAlgorithm::DecompressBuffer(const void* input,
 }
 
 
-/*static*/ status_t
-BZlibCompressionAlgorithm::_TranslateZlibError(int error)
+/*static*/ status_t BZlibCompressionAlgorithm::_TranslateZlibError(int error)
 {
 	switch (error) {
 		case Z_OK:

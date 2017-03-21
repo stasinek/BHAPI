@@ -23,8 +23,7 @@ PartitionReference::~PartitionReference()
 
 
 // SetTo
-void
-PartitionReference::SetTo(partition_id id, int32 changeCounter)
+void PartitionReference::SetTo(partition_id id, int32 changeCounter)
 {
 	fID = id;
 	fChangeCounter = changeCounter;
@@ -40,24 +39,21 @@ PartitionReference::PartitionID() const
 
 
 // SetPartitionID
-void
-PartitionReference::SetPartitionID(partition_id id)
+void PartitionReference::SetPartitionID(partition_id id)
 {
 	fID = id;
 }
 
 
 // ChangeCounter
-int32
-PartitionReference::ChangeCounter() const
+int32 PartitionReference::ChangeCounter() const
 {
 	return fChangeCounter;
 }
 
 
 // SetChangeCounter
-void
-PartitionReference::SetChangeCounter(int32 counter)
+void PartitionReference::SetChangeCounter(int32 counter)
 {
 	fChangeCounter = counter;
 }

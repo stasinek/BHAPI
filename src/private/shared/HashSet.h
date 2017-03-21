@@ -254,8 +254,7 @@ HashSet<Key>::~HashSet()
 
 // InitCheck
 template<typename Key>
-status_t
-HashSet<Key>::InitCheck() const
+status_t HashSet<Key>::InitCheck() const
 {
 	return (fTable.InitCheck() && fElementArray.InitCheck()
 			? B_OK : B_NO_MEMORY);
@@ -263,8 +262,7 @@ HashSet<Key>::InitCheck() const
 
 // Add
 template<typename Key>
-status_t
-HashSet<Key>::Add(const Key& key)
+status_t HashSet<Key>::Add(const Key& key)
 {
 	if (Contains(key))
 		return B_OK;
@@ -277,8 +275,7 @@ HashSet<Key>::Add(const Key& key)
 
 // Remove
 template<typename Key>
-bool
-HashSet<Key>::Remove(const Key& key)
+bool HashSet<Key>::Remove(const Key& key)
 {
 	if (Element* element = _FindElement(key)) {
 		fTable.Remove(element);
@@ -289,24 +286,21 @@ HashSet<Key>::Remove(const Key& key)
 
 // Clear
 template<typename Key>
-void
-HashSet<Key>::Clear()
+void HashSet<Key>::Clear()
 {
 	fTable.RemoveAll();
 }
 
 // Contains
 template<typename Key>
-bool
-HashSet<Key>::Contains(const Key& key) const
+bool HashSet<Key>::Contains(const Key& key) const
 {
 	return _FindElement(key);
 }
 
 // Size
 template<typename Key>
-int32
-HashSet<Key>::Size() const
+int32 HashSet<Key>::Size() const
 {
 	return fTable.CountElements();
 }

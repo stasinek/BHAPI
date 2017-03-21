@@ -48,8 +48,7 @@ dup_maybe_system(int fd)
 }
 
 
-static status_t
-close_maybe_system(int fd)
+static status_t close_maybe_system(int fd)
 {
 	if (get_descriptor(fd) != NULL)
 		return _kern_close(fd);
@@ -67,22 +66,19 @@ Descriptor::~Descriptor()
 }
 
 // IsSystemFD
-bool
-Descriptor::IsSystemFD() const
+bool Descriptor::IsSystemFD() const
 {
 	return false;
 }
 
 // GetPath
-status_t
-Descriptor::GetPath(string& path) const
+status_t Descriptor::GetPath(string& path) const
 {
 	return get_path(fd, NULL, path);
 }
 
 // GetNodeRef
-status_t
-Descriptor::GetNodeRef(node_ref &ref)
+status_t Descriptor::GetNodeRef(node_ref &ref)
 {
 	struct stat st;
 	status_t error = GetStat(false, &st);
@@ -111,8 +107,7 @@ FileDescriptor::~FileDescriptor()
 }
 
 // Close
-status_t
-FileDescriptor::Close()
+status_t FileDescriptor::Close()
 {
 	if (fd >= 0) {
 		int oldFD = fd;
@@ -125,8 +120,7 @@ FileDescriptor::Close()
 }
 
 // Dup
-status_t
-FileDescriptor::Dup(Descriptor *&clone)
+status_t FileDescriptor::Dup(Descriptor *&clone)
 {
 	int dupFD = dup(fd);
 	if (dupFD < 0)
@@ -137,8 +131,7 @@ FileDescriptor::Dup(Descriptor *&clone)
 }
 
 // GetStat
-status_t
-FileDescriptor::GetStat(bool traverseLink, struct stat *st)
+status_t FileDescriptor::GetStat(bool traverseLink, struct stat *st)
 {
 	if (fstat(fd, st) < 0)
 		return errno;
@@ -146,8 +139,7 @@ FileDescriptor::GetStat(bool traverseLink, struct stat *st)
 }
 
 // IsSystemFD
-bool
-FileDescriptor::IsSystemFD() const
+bool FileDescriptor::IsSystemFD() const
 {
 	return true;
 }
@@ -170,8 +162,7 @@ DirectoryDescriptor::~DirectoryDescriptor()
 }
 
 // Close
-status_t
-DirectoryDescriptor::Close()
+status_t DirectoryDescriptor::Close()
 {
 	if (dir) {
 		DIR *oldDir = dir;
@@ -184,8 +175,7 @@ DirectoryDescriptor::Close()
 }
 
 // Dup
-status_t
-DirectoryDescriptor::Dup(Descriptor *&clone)
+status_t DirectoryDescriptor::Dup(Descriptor *&clone)
 {
 	string path;
 	status_t error = get_path(fd, NULL, path);
@@ -201,8 +191,7 @@ DirectoryDescriptor::Dup(Descriptor *&clone)
 }
 
 // GetStat
-status_t
-DirectoryDescriptor::GetStat(bool traverseLink, struct stat *st)
+status_t DirectoryDescriptor::GetStat(bool traverseLink, struct stat *st)
 {
 	// get a usable path
 	string realPath;
@@ -221,8 +210,7 @@ DirectoryDescriptor::GetStat(bool traverseLink, struct stat *st)
 }
 
 // GetNodeRef
-status_t
-DirectoryDescriptor::GetNodeRef(node_ref &ref)
+status_t DirectoryDescriptor::GetNodeRef(node_ref &ref)
 {
 	ref = this->ref;
 
@@ -240,23 +228,20 @@ SymlinkDescriptor::SymlinkDescriptor(const char *path)
 }
 
 // Close
-status_t
-SymlinkDescriptor::Close()
+status_t SymlinkDescriptor::Close()
 {
 	return B_OK;
 }
 
 // Dup
-status_t
-SymlinkDescriptor::Dup(Descriptor *&clone)
+status_t SymlinkDescriptor::Dup(Descriptor *&clone)
 {
 	clone = new SymlinkDescriptor(path.c_str());
 	return B_OK;
 }
 
 // GetStat
-status_t
-SymlinkDescriptor::GetStat(bool traverseLink, struct stat *st)
+status_t SymlinkDescriptor::GetStat(bool traverseLink, struct stat *st)
 {
 	// stat
 	int result;
@@ -272,8 +257,7 @@ SymlinkDescriptor::GetStat(bool traverseLink, struct stat *st)
 }
 
 // GetPath
-status_t
-SymlinkDescriptor::GetPath(string& path) const
+status_t SymlinkDescriptor::GetPath(string& path) const
 {
 	path = this->path;
 	return B_OK;
@@ -303,8 +287,7 @@ AttributeDescriptor::~AttributeDescriptor()
 }
 
 
-status_t
-AttributeDescriptor::Init()
+status_t AttributeDescriptor::Init()
 {
 	if (fFileFD < 0)
 		return B_IO_ERROR;
@@ -352,8 +335,7 @@ AttributeDescriptor::Init()
 }
 
 
-status_t
-AttributeDescriptor::Write(off_t offset, const void* buffer, size_t bufferSize)
+status_t AttributeDescriptor::Write(off_t offset, const void* buffer, size_t bufferSize)
 {
 	if (offset < 0)
 		return B_BAD_VALUE;
@@ -394,8 +376,7 @@ AttributeDescriptor::Write(off_t offset, const void* buffer, size_t bufferSize)
 }
 
 
-status_t
-AttributeDescriptor::Close()
+status_t AttributeDescriptor::Close()
 {
 	if (fFileFD < 0)
 		return B_BAD_VALUE;
@@ -411,15 +392,13 @@ AttributeDescriptor::Close()
 }
 
 
-status_t
-AttributeDescriptor::Dup(Descriptor*& clone)
+status_t AttributeDescriptor::Dup(Descriptor*& clone)
 {
 	return B_NOT_SUPPORTED;
 }
 
 
-status_t
-AttributeDescriptor::GetStat(bool traverseLink, struct stat* st)
+status_t AttributeDescriptor::GetStat(bool traverseLink, struct stat* st)
 {
 	return B_NOT_SUPPORTED;
 }
@@ -441,8 +420,7 @@ AttrDirDescriptor::~AttrDirDescriptor()
 }
 
 // Close
-status_t
-AttrDirDescriptor::Close()
+status_t AttrDirDescriptor::Close()
 {
 	if (dir) {
 		DIR *oldDir = dir;
@@ -455,24 +433,21 @@ AttrDirDescriptor::Close()
 }
 
 // Dup
-status_t
-AttrDirDescriptor::Dup(Descriptor *&clone)
+status_t AttrDirDescriptor::Dup(Descriptor *&clone)
 {
 	// we don't allow dup()int attr dir descriptors
 	return B_FILE_ERROR;
 }
 
 // GetStat
-status_t
-AttrDirDescriptor::GetStat(bool traverseLink, struct stat *st)
+status_t AttrDirDescriptor::GetStat(bool traverseLink, struct stat *st)
 {
 	// we don't allow stat()int attr dir descriptors
 	return B_FILE_ERROR;
 }
 
 // GetNodeRef
-status_t
-AttrDirDescriptor::GetNodeRef(node_ref &ref)
+status_t AttrDirDescriptor::GetNodeRef(node_ref &ref)
 {
 	ref = this->ref;
 
@@ -517,8 +492,7 @@ add_descriptor(Descriptor *descriptor)
 }
 
 // delete_descriptor
-status_t
-delete_descriptor(int fd)
+status_t delete_descriptor(int fd)
 {
 	DescriptorMap::iterator it = sDescriptors->find(fd);
 	if (it == sDescriptors->end())
@@ -536,8 +510,7 @@ delete_descriptor(int fd)
 }
 
 
-bool
-is_unknown_or_system_descriptor(int fd)
+bool is_unknown_or_system_descriptor(int fd)
 {
 	Descriptor* descriptor = get_descriptor(fd);
 	return descriptor == NULL || descriptor->IsSystemFD();

@@ -42,7 +42,7 @@ class BMessage;
 #define BMESSAGE_DEF
 #endif
 //-----------------------------------------------------------------------------
-#include <OS.h>
+#include <kernel/OS.h>
 //-----------------------------------------------------------------------------
 class BHAPI_IMPEXP BMessageRunner {
 public:

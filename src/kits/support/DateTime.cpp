@@ -765,8 +765,7 @@ int32 BDate::WeekNumber() const
 	Returns the day of the week in the range of 1 to 7, while 1 stands for
 	monday. If the date is invalid, the function will return B_ERROR.
 */
-int32
-BDate::DayOfWeek() const
+int32 BDate::DayOfWeek() const
 {
 	// http://en.wikipedia.org/wiki/Julian_day#Calculation
 	return IsValid() ? (DateToJulianDay() % 7) + 1 : int32(B_ERROR);
@@ -777,8 +776,7 @@ BDate::DayOfWeek() const
 	Returns the day of the year in the range of 1 to 365 (366 in leap years). If
 	the date is invalid, the function will return B_ERROR.
 */
-int32
-BDate::DayOfYear() const
+int32 BDate::DayOfYear() const
 {
 	if (!IsValid())
 		return int32(B_ERROR);
@@ -791,8 +789,7 @@ BDate::DayOfYear() const
 	Returns true if the year of this object is a leap year, otherwise false. If
 	the \c year passed is before 4713 BC, the result is undefined.
 */
-bool
-BDate::IsLeapYear() const
+bool BDate::IsLeapYear() const
 {
 	return IsLeapYear(fYear);
 }
@@ -802,8 +799,7 @@ BDate::IsLeapYear() const
 	Returns true if the passed \c year is a leap year, otherwise false. If the
 	\c year passed is before 4713 BC, the result is undefined.
 */
-/*static*/ bool
-BDate::IsLeapYear(int32 year)
+/*static*/ bool BDate::IsLeapYear(int32 year)
 {
 	if (year < 1582) {
 		if (year < 0)
@@ -818,8 +814,7 @@ BDate::IsLeapYear(int32 year)
 	Returns the number of days in the year of the current date. If the date is
 	valid it will return 365 or 366, otherwise B_ERROR;
 */
-int32
-BDate::DaysInYear() const
+int32 BDate::DaysInYear() const
 {
 	if (!IsValid())
 		return int32(B_ERROR);
@@ -832,8 +827,7 @@ BDate::DaysInYear() const
 	Returns the number of days in the month of the current date. If the date is
 	valid it will return 28 up to 31, otherwise B_ERROR;
 */
-int32
-BDate::DaysInMonth() const
+int32 BDate::DaysInMonth() const
 {
 	if (!IsValid())
 		return int32(B_ERROR);
@@ -972,8 +966,7 @@ BDate::LongMonthName(int32 month)
 	Converts the date to Julian day. If your date is invalid, the function will
 	return B_ERROR.
 */
-int32
-BDate::DateToJulianDay() const
+int32 BDate::DateToJulianDay() const
 {
 	return _DateToJulianDay(fYear, fMonth, fDay);
 }
@@ -1023,8 +1016,7 @@ BDate::JulianDayToDate(int32 julianDay)
 /*!
 	Returns true if this date is different from \c date, otherwise false.
 */
-bool
-BDate::operator!=(const BDate& date) const
+bool BDate::operator!=(const BDate& date) const
 {
 	return DateToJulianDay() != date.DateToJulianDay();
 }
@@ -1033,8 +1025,7 @@ BDate::operator!=(const BDate& date) const
 /*!
 	Returns true if this date is equal to \c date, otherwise false.
 */
-bool
-BDate::operator==(const BDate& date) const
+bool BDate::operator==(const BDate& date) const
 {
 	return DateToJulianDay() == date.DateToJulianDay();
 }
@@ -1043,8 +1034,7 @@ BDate::operator==(const BDate& date) const
 /*!
 	Returns true if this date is earlier than \c date, otherwise false.
 */
-bool
-BDate::operator<(const BDate& date) const
+bool BDate::operator<(const BDate& date) const
 {
 	return DateToJulianDay() < date.DateToJulianDay();
 }
@@ -1054,8 +1044,7 @@ BDate::operator<(const BDate& date) const
 	Returns true if this date is earlier than or equal to \c date, otherwise
 	false.
 */
-bool
-BDate::operator<=(const BDate& date) const
+bool BDate::operator<=(const BDate& date) const
 {
 	return DateToJulianDay() <= date.DateToJulianDay();
 }
@@ -1064,8 +1053,7 @@ BDate::operator<=(const BDate& date) const
 /*!
 	Returns true if this date is later than \c date, otherwise false.
 */
-bool
-BDate::operator>(const BDate& date) const
+bool BDate::operator>(const BDate& date) const
 {
 	return DateToJulianDay() > date.DateToJulianDay();
 }
@@ -1075,15 +1063,13 @@ BDate::operator>(const BDate& date) const
 	Returns true if this date is later than or equal to \c date, otherwise
 	false.
 */
-bool
-BDate::operator>=(const BDate& date) const
+bool BDate::operator>=(const BDate& date) const
 {
 	return DateToJulianDay() >= date.DateToJulianDay();
 }
 
 
-bool
-BDate::_SetDate(int32 year, int32 month, int32 day)
+bool BDate::_SetDate(int32 year, int32 month, int32 day)
 {
 	fDay = -1;
 	fYear = 0;
@@ -1100,8 +1086,7 @@ BDate::_SetDate(int32 year, int32 month, int32 day)
 }
 
 
-int32
-BDate::_DaysInMonth(int32 year, int32 month)
+int32 BDate::_DaysInMonth(int32 year, int32 month)
 {
 	if (month == 2 && IsLeapYear(year))
 		return 29;
@@ -1113,8 +1098,7 @@ BDate::_DaysInMonth(int32 year, int32 month)
 }
 
 
-int32
-BDate::_DateToJulianDay(int32 _year, int32 month, int32 day)
+int32 BDate::_DateToJulianDay(int32 _year, int32 month, int32 day)
 {
 	if (IsValid(_year, month, day)) {
 		int32 year = _year;
@@ -1194,8 +1178,7 @@ BDateTime::~BDateTime()
 				\c other error codes, depending on failure to append
 				fields to the message.
 */
-status_t
-BDateTime::Archive(BMessage* into) const
+status_t BDateTime::Archive(BMessage* into) const
 {
 	status_t ret = fDate.Archive(into);
 	if (ret == B_OK)
@@ -1207,8 +1190,7 @@ BDateTime::Archive(BMessage* into) const
 /*!
 	Returns true if the date time is valid, otherwise false.
 */
-bool
-BDateTime::IsValid() const
+bool BDateTime::IsValid() const
 {
 	return fDate.IsValid() && fTime.IsValid();
 }
@@ -1228,8 +1210,7 @@ BDateTime::CurrentDateTime(time_type type)
 /*!
 	Sets the current date and time of this object to \c date and \c time.
 */
-void
-BDateTime::SetDateTime(const BDate& date, const BTime& time)
+void BDateTime::SetDateTime(const BDate& date, const BTime& time)
 {
 	fDate = date;
 	fTime = time;
@@ -1259,8 +1240,7 @@ BDateTime::Date() const
 /*!
 	Set the current date of this object to \c date.
 */
-void
-BDateTime::SetDate(const BDate& date)
+void BDateTime::SetDate(const BDate& date)
 {
 	fDate = date;
 }
@@ -1289,8 +1269,7 @@ BDateTime::Time() const
 /*!
 	Sets the current time of this object to \c time.
 */
-void
-BDateTime::SetTime(const BTime& time)
+void BDateTime::SetTime(const BTime& time)
 {
 	fTime = time;
 }
@@ -1330,8 +1309,7 @@ BDateTime::Time_t() const
 	Sets the current date and time converted from seconds since
 	1.1.1970 - 00:00:00.
 */
-void
-BDateTime::SetTime_t(time_t seconds)
+void BDateTime::SetTime_t(time_t seconds)
 {
 	time_t timePart = seconds % kSecondsPerDay;
 	if (timePart < 0) {
@@ -1352,8 +1330,7 @@ BDateTime::SetTime_t(time_t seconds)
 /*!
 	Returns true if this datetime is different from \c dateTime, otherwise false.
 */
-bool
-BDateTime::operator!=(const BDateTime& dateTime) const
+bool BDateTime::operator!=(const BDateTime& dateTime) const
 {
 	return fTime != dateTime.fTime && fDate != dateTime.fDate;
 }
@@ -1362,8 +1339,7 @@ BDateTime::operator!=(const BDateTime& dateTime) const
 /*!
 	Returns true if this datetime is equal to \c dateTime, otherwise false.
 */
-bool
-BDateTime::operator==(const BDateTime& dateTime) const
+bool BDateTime::operator==(const BDateTime& dateTime) const
 {
 	return fTime == dateTime.fTime && fDate == dateTime.fDate;
 }
@@ -1372,8 +1348,7 @@ BDateTime::operator==(const BDateTime& dateTime) const
 /*!
 	Returns true if this datetime is earlier than \c dateTime, otherwise false.
 */
-bool
-BDateTime::operator<(const BDateTime& dateTime) const
+bool BDateTime::operator<(const BDateTime& dateTime) const
 {
 	if (fDate < dateTime.fDate)
 		return true;
@@ -1387,8 +1362,7 @@ BDateTime::operator<(const BDateTime& dateTime) const
 	Returns true if this datetime is earlier than or equal to \c dateTime,
 	otherwise false.
 */
-bool
-BDateTime::operator<=(const BDateTime& dateTime) const
+bool BDateTime::operator<=(const BDateTime& dateTime) const
 {
 	if (fDate < dateTime.fDate)
 		return true;
@@ -1401,8 +1375,7 @@ BDateTime::operator<=(const BDateTime& dateTime) const
 /*!
 	Returns true if this datetime is later than \c dateTime, otherwise false.
 */
-bool
-BDateTime::operator>(const BDateTime& dateTime) const
+bool BDateTime::operator>(const BDateTime& dateTime) const
 {
 	if (fDate > dateTime.fDate)
 		return true;
@@ -1416,8 +1389,7 @@ BDateTime::operator>(const BDateTime& dateTime) const
 	Returns true if this datetime is later than or equal to \c dateTime,
 	otherwise false.
 */
-bool
-BDateTime::operator>=(const BDateTime& dateTime) const
+bool BDateTime::operator>=(const BDateTime& dateTime) const
 {
 	if (fDate > dateTime.fDate)
 		return true;

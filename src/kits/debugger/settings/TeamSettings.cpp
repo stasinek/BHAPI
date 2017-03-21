@@ -47,8 +47,7 @@ TeamSettings::~TeamSettings()
 }
 
 
-status_t
-TeamSettings::SetTo(Team* team)
+status_t TeamSettings::SetTo(Team* team)
 {
 	_Unset();
 
@@ -96,8 +95,7 @@ TeamSettings::SetTo(Team* team)
 }
 
 
-status_t
-TeamSettings::SetTo(const BMessage& archive,
+status_t TeamSettings::SetTo(const BMessage& archive,
 	const TeamUiSettingsFactory& factory)
 {
 	_Unset();
@@ -153,8 +151,7 @@ TeamSettings::SetTo(const BMessage& archive,
 }
 
 
-status_t
-TeamSettings::WriteTo(BMessage& archive) const
+status_t TeamSettings::WriteTo(BMessage& archive) const
 {
 	status_t error = archive.AddString("teamName", fTeamName);
 	if (error != B_OK)
@@ -203,8 +200,7 @@ TeamSettings::WriteTo(BMessage& archive) const
 }
 
 
-int32
-TeamSettings::CountBreakpoints() const
+int32 TeamSettings::CountBreakpoints() const
 {
 	return fBreakpoints.CountItems();
 }
@@ -217,8 +213,7 @@ TeamSettings::BreakpointAt(int32 index) const
 }
 
 
-int32
-TeamSettings::CountUiSettings() const
+int32 TeamSettings::CountUiSettings() const
 {
 	return fUiSettings.CountItems();
 }
@@ -244,8 +239,7 @@ TeamSettings::UiSettingFor(const char* id) const
 }
 
 
-status_t
-TeamSettings::AddUiSettings(TeamUiSettings* settings)
+status_t TeamSettings::AddUiSettings(TeamUiSettings* settings)
 {
 	if (!fUiSettings.AddItem(settings))
 		return B_NO_MEMORY;
@@ -299,8 +293,7 @@ TeamSettings::FileManagerSettings() const
 }
 
 
-status_t
-TeamSettings::SetFileManagerSettings(TeamFileManagerSettings* settings)
+status_t TeamSettings::SetFileManagerSettings(TeamFileManagerSettings* settings)
 {
 	try {
 		*fFileManagerSettings = *settings;
@@ -319,8 +312,7 @@ TeamSettings::SignalSettings() const
 }
 
 
-status_t
-TeamSettings::SetSignalSettings(TeamSignalSettings* settings)
+status_t TeamSettings::SetSignalSettings(TeamSignalSettings* settings)
 {
 	try {
 		*fSignalSettings = *settings;
@@ -332,8 +324,7 @@ TeamSettings::SetSignalSettings(TeamSignalSettings* settings)
 }
 
 
-void
-TeamSettings::_Unset()
+void TeamSettings::_Unset()
 {
 	for (int32 i = 0; BreakpointSetting* breakpoint = fBreakpoints.ItemAt(i);
 			i++) {

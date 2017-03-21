@@ -138,8 +138,7 @@ BMessageValueNode::GetType() const
 }
 
 
-status_t
-BMessageValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
+status_t BMessageValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 	ValueLocation*& _location, Value*& _value)
 {
 	fIsFlatMessage = dynamic_cast<BMessageFieldNodeChild*>(NodeChild())
@@ -322,8 +321,7 @@ BMessageValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 }
 
 
-status_t
-BMessageValueNode::CreateChildren(TeamTypeInformation* info)
+status_t BMessageValueNode::CreateChildren(TeamTypeInformation* info)
 {
 	DataMember* member = NULL;
 	CompoundType* messageType = dynamic_cast<CompoundType*>(fType);
@@ -375,8 +373,7 @@ BMessageValueNode::CreateChildren(TeamTypeInformation* info)
 }
 
 
-int32
-BMessageValueNode::CountChildren() const
+int32 BMessageValueNode::CountChildren() const
 {
 	return fChildren.CountItems();
 }
@@ -389,8 +386,7 @@ BMessageValueNode::ChildAt(int32 index) const
 }
 
 
-status_t
-BMessageValueNode::_GetTypeForTypeCode(TeamTypeInformation* info,
+status_t BMessageValueNode::_GetTypeForTypeCode(TeamTypeInformation* info,
 	type_code type, Type*& _type)
 {
 	BString typeName;
@@ -513,8 +509,7 @@ BMessageValueNode::_GetTypeForTypeCode(TeamTypeInformation* info,
 }
 
 
-status_t
-BMessageValueNode::_FindField(const char* name, type_code type,
+status_t BMessageValueNode::_FindField(const char* name, type_code type,
 	BMessage::field_header** result) const
 {
 	if (name == NULL)
@@ -550,8 +545,7 @@ BMessageValueNode::_FindField(const char* name, type_code type,
 }
 
 
-uint32
-BMessageValueNode::_HashName(const char* name) const
+uint32 BMessageValueNode::_HashName(const char* name) const
 {
 	char ch;
 	uint32 result = 0;
@@ -566,8 +560,7 @@ BMessageValueNode::_HashName(const char* name) const
 }
 
 
-status_t
-BMessageValueNode::_FindDataLocation(const char* name, type_code type,
+status_t BMessageValueNode::_FindDataLocation(const char* name, type_code type,
 	int32 index, ValueLocation& location) const
 {
 	BMessage::field_header* field = NULL;
@@ -638,8 +631,7 @@ BMessageValueNode::BMessageFieldNode::GetType() const
 }
 
 
-status_t
-BMessageValueNode::BMessageFieldNode::CreateChildren(TeamTypeInformation* info)
+status_t BMessageValueNode::BMessageFieldNode::CreateChildren(TeamTypeInformation* info)
 {
 	Type* type = NULL;
 	status_t error = fParent->_GetTypeForTypeCode(info, fFieldType, type);
@@ -670,8 +662,7 @@ BMessageValueNode::BMessageFieldNode::CreateChildren(TeamTypeInformation* info)
 }
 
 
-int32
-BMessageValueNode::BMessageFieldNode::CountChildren() const
+int32 BMessageValueNode::BMessageFieldNode::CountChildren() const
 {
 	return fChildren.CountItems();
 }
@@ -683,8 +674,7 @@ BMessageValueNode::BMessageFieldNode::ChildAt(int32 index) const
 }
 
 
-status_t
-BMessageValueNode::BMessageFieldNode::ResolvedLocationAndValue(
+status_t BMessageValueNode::BMessageFieldNode::ResolvedLocationAndValue(
 	ValueLoader* loader, ValueLocation *& _location, Value*& _value)
 {
 	_location = NULL;
@@ -746,15 +736,13 @@ BMessageValueNode::BMessageFieldNodeChild::Parent() const
 }
 
 
-bool
-BMessageValueNode::BMessageFieldNodeChild::IsInternal() const
+bool BMessageValueNode::BMessageFieldNodeChild::IsInternal() const
 {
 	return fFieldCount > 1 && fFieldIndex == -1;
 }
 
 
-status_t
-BMessageValueNode::BMessageFieldNodeChild::CreateInternalNode(
+status_t BMessageValueNode::BMessageFieldNodeChild::CreateInternalNode(
 	ValueNode*& _node)
 {
 	BMessageFieldNode* node = new(std::nothrow)
@@ -767,8 +755,7 @@ BMessageValueNode::BMessageFieldNodeChild::CreateInternalNode(
 }
 
 
-status_t
-BMessageValueNode::BMessageFieldNodeChild::ResolveLocation(
+status_t BMessageValueNode::BMessageFieldNodeChild::ResolveLocation(
 	ValueLoader* valueLoader, ValueLocation*& _location)
 {
 	_location = new(std::nothrow)ValueLocation();

@@ -64,8 +64,7 @@ using std::nothrow;
 
 
 // is_zero
-static inline bool
-is_zero(double* x, int n)
+static inline bool is_zero(double* x, int n)
 {
 	for (int i = 0; i < n; i++) {
 		if (!fuzzy_equals(x[i], 0))
@@ -77,8 +76,7 @@ is_zero(double* x, int n)
 
 
 // add_vectors
-static inline void
-add_vectors(double* x, const double* y, int n)
+static inline void add_vectors(double* x, const double* y, int n)
 {
 	for (int i = 0; i < n; i++)
 		x[i] += y[i];
@@ -86,8 +84,7 @@ add_vectors(double* x, const double* y, int n)
 
 
 // add_vectors_scaled
-static inline void
-add_vectors_scaled(double* x, const double* y, double scalar, int n)
+static inline void add_vectors_scaled(double* x, const double* y, double scalar, int n)
 {
 	for (int i = 0; i < n; i++)
 		x[i] += y[i] * scalar;
@@ -95,8 +92,7 @@ add_vectors_scaled(double* x, const double* y, double scalar, int n)
 
 
 // negate_vector
-static inline void
-negate_vector(double* x, int n)
+static inline void negate_vector(double* x, int n)
 {
 	for (int i = 0; i < n; i++)
 		x[i] = -x[i];
@@ -126,8 +122,7 @@ allocate_matrix(int m, int n)
 
 
 // free_matrix
-static void
-free_matrix(double** matrix)
+static void free_matrix(double** matrix)
 {
 	if (matrix) {
 		delete[] *matrix;
@@ -140,8 +135,7 @@ free_matrix(double** matrix)
 /*!	y = Ax
 	A: m x n matrix
 */
-static inline void
-multiply_matrix_vector(const double* const* A, const double* x, int m, int n,
+static inline void multiply_matrix_vector(const double* const* A, const double* x, int m, int n,
 	double* y)
 {
 	for (int i = 0; i < m; i++) {
@@ -156,8 +150,7 @@ multiply_matrix_vector(const double* const* A, const double* x, int m, int n,
 // multiply_matrices
 /*!	c = a*b
 */
-static void
-multiply_matrices(const double* const* a, const double* const* b, double** c,
+static void multiply_matrices(const double* const* a, const double* const* b, double** c,
 	int m, int n, int l)
 {
 	for (int i = 0; i < m; i++) {
@@ -172,8 +165,7 @@ multiply_matrices(const double* const* a, const double* const* b, double** c,
 
 
 // transpose_matrix
-static inline void
-transpose_matrix(const double* const* A, double** Atrans, int m, int n)
+static inline void transpose_matrix(const double* const* A, double** Atrans, int m, int n)
 {
 	for (int i = 0; i < m; i++) {
 		for (int k = 0; k < n; k++)
@@ -183,8 +175,7 @@ transpose_matrix(const double* const* A, double** Atrans, int m, int n)
 
 
 // zero_matrix
-static inline void
-zero_matrix(double** A, int m, int n)
+static inline void zero_matrix(double** A, int m, int n)
 {
 	for (int i = 0; i < m; i++) {
 		for (int k = 0; k < n; k++)
@@ -194,8 +185,7 @@ zero_matrix(double** A, int m, int n)
 
 
 // copy_matrix
-static inline void
-copy_matrix(const double* const* A, double** B, int m, int n)
+static inline void copy_matrix(const double* const* A, double** B, int m, int n)
 {
 	for (int i = 0; i < m; i++) {
 		for (int k = 0; k < n; k++)
@@ -204,8 +194,7 @@ copy_matrix(const double* const* A, double** B, int m, int n)
 }
 
 
-static inline void
-multiply_optimization_matrix_vector(const double* x, int n, double* y)
+static inline void multiply_optimization_matrix_vector(const double* x, int n, double* y)
 {
 	// The matrix has the form:
 	//  2 -1  0     ...   0  0
@@ -228,8 +217,7 @@ multiply_optimization_matrix_vector(const double* x, int n, double* y)
 }
 
 
-static inline void
-multiply_optimization_matrix_matrix(const double* const* A, int m, int n,
+static inline void multiply_optimization_matrix_matrix(const double* const* A, int m, int n,
 	double** B)
 {
 	if (m == 1) {
@@ -247,8 +235,7 @@ multiply_optimization_matrix_matrix(const double* const* A, int m, int n,
 
 
 template<typename Type>
-static inline void
-swap(Type& a, Type& b)
+static inline void swap(Type& a, Type& b)
 {
 	Type c = a;
 	a = b;
@@ -259,8 +246,7 @@ swap(Type& a, Type& b)
 // #pragma mark - algorithms
 
 
-bool
-solve(double** a, int n, double* b)
+bool solve(double** a, int n, double* b)
 {
 	// index array for row permutation
 	// Note: We could eliminate it, if we would permutate the row pointers of a.
@@ -409,8 +395,7 @@ remove_linearly_dependent_rows(double** A, double** temp, bool* independentRows,
 
 /*!	QR decomposition using Householder transformations.
 */
-bool
-qr_decomposition(double** a, int m, int n, double* d, double** q)
+bool qr_decomposition(double** a, int m, int n, double* d, double** q)
 {
 	if (m < n)
 		return false;
@@ -560,8 +545,7 @@ LayoutOptimizer::~LayoutOptimizer()
 
 
 // InitCheck
-status_t
-LayoutOptimizer::InitCheck() const
+status_t LayoutOptimizer::InitCheck() const
 {
 	if (!fVariables || !fTemp1 || !fTemp2 || !fZtrans || !fQ)
 		return B_NO_MEMORY;
@@ -590,8 +574,7 @@ LayoutOptimizer::Clone() const
 	  -\sum_{i=right+1}^{left} x_i >=/= value, if left > right
 	If \a equality is \c true, the constraint is an equality constraint.
 */
-bool
-LayoutOptimizer::AddConstraint(int32 left, int32 right, double value,
+bool LayoutOptimizer::AddConstraint(int32 left, int32 right, double value,
 	bool equality)
 {
 	Constraint* constraint = new(nothrow) Constraint(left, right, value,
@@ -609,8 +592,7 @@ LayoutOptimizer::AddConstraint(int32 left, int32 right, double value,
 
 
 // AddConstraintsFrom
-bool
-LayoutOptimizer::AddConstraintsFrom(const LayoutOptimizer* other)
+bool LayoutOptimizer::AddConstraintsFrom(const LayoutOptimizer* other)
 {
 	if (!other || other->fVariableCount != fVariableCount)
 		return false;
@@ -629,8 +611,7 @@ LayoutOptimizer::AddConstraintsFrom(const LayoutOptimizer* other)
 
 
 // RemoveAllConstraints
-void
-LayoutOptimizer::RemoveAllConstraints()
+void LayoutOptimizer::RemoveAllConstraints()
 {
 	int32 count = fConstraints.CountItems();
 	for (int32 i = 0; i < count; i++) {
@@ -649,8 +630,7 @@ LayoutOptimizer::RemoveAllConstraints()
 	The \a values array must contain a feasible solution when called and will
 	be overwritten with the optimial solution the method computes.
 */
-bool
-LayoutOptimizer::Solve(const double* desired, double size, double* values)
+bool LayoutOptimizer::Solve(const double* desired, double size, double* values)
 {
 	if (fVariables == NULL || desired == NULL|| values == NULL)
 		return false;
@@ -681,8 +661,7 @@ LayoutOptimizer::Solve(const double* desired, double size, double* values)
 
 
 // _Solve
-bool
-LayoutOptimizer::_Solve(const double* desired, double* values)
+bool LayoutOptimizer::_Solve(const double* desired, double* values)
 {
 	int32 constraintCount = fConstraints.CountItems();
 
@@ -885,8 +864,7 @@ TRACE_ONLY(
 }
 
 
-bool
-LayoutOptimizer::_SolveSubProblem(const double* d, int am, double* p)
+bool LayoutOptimizer::_SolveSubProblem(const double* d, int am, double* p)
 {
 	// We have to solve the QP subproblem:
 	//   min_p 1/2p^TGp + d^Tp
@@ -948,8 +926,7 @@ LayoutOptimizer::_SolveSubProblem(const double* d, int am, double* p)
 
 
 // _SetResult
-void
-LayoutOptimizer::_SetResult(const double* x, double* values)
+void LayoutOptimizer::_SetResult(const double* x, double* values)
 {
 	values[0] = x[0];
 	for (int i = 1; i < fVariableCount; i++)

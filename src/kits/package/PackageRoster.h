@@ -43,11 +43,9 @@ enum {
 // notification message "event" field values
 enum {
 	B_INSTALLATION_LOCATION_PACKAGES_CHANGED,
-		// "location": int32
-		//		the installation location
+		// "location": int32 		//		the installation location
 		//		(B_PACKAGE_INSTALLATION_LOCATION_{SYSTEM,HOME}
-		// "change count": int64
-		//		the installation location change count
+		// "change count": int64 		//		the installation location change count
 };
 
 

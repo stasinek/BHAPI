@@ -203,24 +203,21 @@ dormant_flavor_info::operator=(const flavor_info &clone)
 }
 
 
-void
-dormant_flavor_info::set_name(const char *newName)
+void dormant_flavor_info::set_name(const char *newName)
 {
 	delete[] name;
 	name = _newstrdup(newName);
 }
 
 
-void
-dormant_flavor_info::set_info(const char *newInfo)
+void dormant_flavor_info::set_info(const char *newInfo)
 {
 	delete[] info;
 	info = _newstrdup(newInfo);
 }
 
 
-void
-dormant_flavor_info::add_in_format(const media_format &in_format)
+void dormant_flavor_info::add_in_format(const media_format &in_format)
 {
 	media_format *p = new(std::nothrow) media_format[in_format_count + 1];
 	if (p) {
@@ -234,8 +231,7 @@ dormant_flavor_info::add_in_format(const media_format &in_format)
 }
 
 
-void
-dormant_flavor_info::add_out_format(const media_format &out_format)
+void dormant_flavor_info::add_out_format(const media_format &out_format)
 {
 	media_format *p = new(std::nothrow) media_format[out_format_count + 1];
 	if (p) {
@@ -249,8 +245,7 @@ dormant_flavor_info::add_out_format(const media_format &out_format)
 }
 
 
-bool
-dormant_flavor_info::IsFixedSize() const
+bool dormant_flavor_info::IsFixedSize() const
 {
 	return false;
 }
@@ -295,8 +290,7 @@ dormant_flavor_info::FlattenedSize() const
 }
 
 
-status_t
-dormant_flavor_info::Flatten(void *buffer, ssize_t size) const
+status_t dormant_flavor_info::Flatten(void *buffer, ssize_t size) const
 {
 	if (size < FlattenedSize())
 		return B_ERROR;
@@ -373,8 +367,7 @@ dormant_flavor_info::Flatten(void *buffer, ssize_t size) const
 }
 
 
-status_t
-dormant_flavor_info::Unflatten(type_code c, const void *buffer, ssize_t size)
+status_t dormant_flavor_info::Unflatten(type_code c, const void *buffer, ssize_t size)
 {
 	if (c != FLATTEN_TYPECODE)
 		return B_ERROR;
@@ -489,8 +482,7 @@ BMediaAddOn::~BMediaAddOn()
 }
 
 
-status_t
-BMediaAddOn::InitCheck(const char **_failureText)
+status_t BMediaAddOn::InitCheck(const char **_failureText)
 {
 	CALLED();
 	// only to be implemented by derived classes
@@ -499,8 +491,7 @@ BMediaAddOn::InitCheck(const char **_failureText)
 }
 
 
-int32
-BMediaAddOn::CountFlavors()
+int32 BMediaAddOn::CountFlavors()
 {
 	CALLED();
 	// only to be implemented by derived classes
@@ -508,8 +499,7 @@ BMediaAddOn::CountFlavors()
 }
 
 
-status_t
-BMediaAddOn::GetFlavorAt(int32 n, const flavor_info **_info)
+status_t BMediaAddOn::GetFlavorAt(int32 n, const flavor_info **_info)
 {
 	CALLED();
 	// only to be implemented by derived classes
@@ -527,8 +517,7 @@ BMediaAddOn::InstantiateNodeFor(const flavor_info *info, BMessage *config,
 }
 
 
-status_t
-BMediaAddOn::GetConfigurationFor(BMediaNode *node, BMessage *toMessage)
+status_t BMediaAddOn::GetConfigurationFor(BMediaNode *node, BMessage *toMessage)
 {
 	CALLED();
 	// only to be implemented by derived classes
@@ -536,8 +525,7 @@ BMediaAddOn::GetConfigurationFor(BMediaNode *node, BMessage *toMessage)
 }
 
 
-bool
-BMediaAddOn::WantsAutoStart()
+bool BMediaAddOn::WantsAutoStart()
 {
 	CALLED();
 	// only to be implemented by derived classes
@@ -545,8 +533,7 @@ BMediaAddOn::WantsAutoStart()
 }
 
 
-status_t
-BMediaAddOn::AutoStart(int count, BMediaNode **_node, int32 *_internalID,
+status_t BMediaAddOn::AutoStart(int count, BMediaNode **_node, int32 *_internalID,
 	bool *_hasMore)
 {
 	CALLED();
@@ -555,8 +542,7 @@ BMediaAddOn::AutoStart(int count, BMediaNode **_node, int32 *_internalID,
 }
 
 
-status_t
-BMediaAddOn::SniffRef(const entry_ref &file, BMimeType *mimeType,
+status_t BMediaAddOn::SniffRef(const entry_ref &file, BMimeType *mimeType,
 	float *_quality, int32 *_internalID)
 {
 	CALLED();
@@ -565,8 +551,7 @@ BMediaAddOn::SniffRef(const entry_ref &file, BMimeType *mimeType,
 }
 
 
-status_t
-BMediaAddOn::SniffType(const BMimeType &type, float *_quality,
+status_t BMediaAddOn::SniffType(const BMimeType &type, float *_quality,
 	int32 *_internalID)
 {
 	CALLED();
@@ -575,8 +560,7 @@ BMediaAddOn::SniffType(const BMimeType &type, float *_quality,
 }
 
 
-status_t
-BMediaAddOn::GetFileFormatList(int32 flavorID,
+status_t BMediaAddOn::GetFileFormatList(int32 flavorID,
 	media_file_format *writableFormats, int32 maxWriteItems, int32 *_writeItems,
 	media_file_format *readableFormats, int32 maxReadItems, int32 *_readItems,
 	void *_reserved)
@@ -587,8 +571,7 @@ BMediaAddOn::GetFileFormatList(int32 flavorID,
 }
 
 
-status_t
-BMediaAddOn::SniffTypeKind(const BMimeType &type, uint64 kinds, float *_quality,
+status_t BMediaAddOn::SniffTypeKind(const BMimeType &type, uint64 kinds, float *_quality,
 	int32 *_internalID, void *_reserved)
 {
 	CALLED();
@@ -614,8 +597,7 @@ BMediaAddOn::AddonID()
 // #pragma mark - protected BMediaAddOn
 
 
-status_t
-BMediaAddOn::NotifyFlavorChange()
+status_t BMediaAddOn::NotifyFlavorChange()
 {
 	CALLED();
 	if (fAddon == 0)

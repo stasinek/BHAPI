@@ -241,43 +241,37 @@ public:
 
 
 
-bool
-VMCache::Lock()
+bool VMCache::Lock()
 {
 	return mutex_lock(&fLock) == B_OK;
 }
 
 
-bool
-VMCache::TryLock()
+bool VMCache::TryLock()
 {
 	return mutex_trylock(&fLock) == B_OK;
 }
 
 
-bool
-VMCache::SwitchLock(mutex* from)
+bool VMCache::SwitchLock(mutex* from)
 {
 	return mutex_switch_lock(from, &fLock) == B_OK;
 }
 
 
-bool
-VMCache::SwitchFromReadLock(rw_lock* from)
+bool VMCache::SwitchFromReadLock(rw_lock* from)
 {
 	return mutex_switch_from_read_lock(from, &fLock) == B_OK;
 }
 
 
-void
-VMCache::AssertLocked()
+void VMCache::AssertLocked()
 {
 	ASSERT_LOCKED_MUTEX(&fLock);
 }
 
 
-void
-VMCache::AcquireRefLocked()
+void VMCache::AcquireRefLocked()
 {
 	ASSERT_LOCKED_MUTEX(&fLock);
 
@@ -285,8 +279,7 @@ VMCache::AcquireRefLocked()
 }
 
 
-void
-VMCache::AcquireRef()
+void VMCache::AcquireRef()
 {
 	Lock();
 	fRefCount++;
@@ -294,8 +287,7 @@ VMCache::AcquireRef()
 }
 
 
-void
-VMCache::ReleaseRefLocked()
+void VMCache::ReleaseRefLocked()
 {
 	ASSERT_LOCKED_MUTEX(&fLock);
 
@@ -303,8 +295,7 @@ VMCache::ReleaseRefLocked()
 }
 
 
-void
-VMCache::ReleaseRef()
+void VMCache::ReleaseRef()
 {
 	Lock();
 	fRefCount--;
@@ -312,16 +303,14 @@ VMCache::ReleaseRef()
 }
 
 
-void
-VMCache::ReleaseRefAndUnlock(bool consumerLocked)
+void VMCache::ReleaseRefAndUnlock(bool consumerLocked)
 {
 	ReleaseRefLocked();
 	Unlock(consumerLocked);
 }
 
 
-void
-VMCache::MarkPageUnbusy(vm_page* page)
+void VMCache::MarkPageUnbusy(vm_page* page)
 {
 	ASSERT(page->busy);
 	page->busy = false;
@@ -336,8 +325,7 @@ VMCache::WiredPagesCount() const
 }
 
 
-void
-VMCache::IncrementWiredPagesCount()
+void VMCache::IncrementWiredPagesCount()
 {
 	ASSERT(fWiredPagesCount < page_count);
 
@@ -345,8 +333,7 @@ VMCache::IncrementWiredPagesCount()
 }
 
 
-void
-VMCache::DecrementWiredPagesCount()
+void VMCache::DecrementWiredPagesCount()
 {
 	ASSERT(fWiredPagesCount > 0);
 
@@ -356,16 +343,14 @@ VMCache::DecrementWiredPagesCount()
 
 // vm_page methods implemented here to avoid VMCache.h inclusion in vm_types.h
 
-inline void
-vm_page::IncrementWiredCount()
+inline void vm_page::IncrementWiredCount()
 {
 	if (fWiredCount++ == 0)
 		cache_ref->cache->IncrementWiredPagesCount();
 }
 
 
-inline void
-vm_page::DecrementWiredCount()
+inline void vm_page::DecrementWiredCount()
 {
 	ASSERT(fWiredCount > 0);
 

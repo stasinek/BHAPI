@@ -70,8 +70,7 @@ CatalogAddOnInfo::~CatalogAddOnInfo()
 }
 
 
-bool
-CatalogAddOnInfo::MakeSureItsLoaded()
+bool CatalogAddOnInfo::MakeSureItsLoaded()
 {
 	if (!fIsEmbedded && fAddOnImage < B_OK) {
 		// add-on has not been loaded yet, so we try to load it:
@@ -95,8 +94,7 @@ CatalogAddOnInfo::MakeSureItsLoaded()
 }
 
 
-void
-CatalogAddOnInfo::UnloadIfPossible()
+void CatalogAddOnInfo::UnloadIfPossible()
 {
 	if (!fIsEmbedded && fLoadedCatalogs.IsEmpty()) {
 		unload_add_on(fAddOnImage);
@@ -144,15 +142,13 @@ LocaleRosterData::~LocaleRosterData()
 }
 
 
-status_t
-LocaleRosterData::InitCheck() const
+status_t LocaleRosterData::InitCheck() const
 {
 	return fAreResourcesLoaded ? B_OK : B_NO_INIT;
 }
 
 
-status_t
-LocaleRosterData::Refresh()
+status_t LocaleRosterData::Refresh()
 {
 	BAutolock lock(fLock);
 	if (!lock.IsLocked())
@@ -177,8 +173,7 @@ LocaleRosterData::CompareInfos(const void* left, const void* right)
 }
 
 
-status_t
-LocaleRosterData::SetDefaultFormattingConventions(
+status_t LocaleRosterData::SetDefaultFormattingConventions(
 	const BFormattingConventions& newFormattingConventions)
 {
 	status_t status = B_OK;
@@ -203,8 +198,7 @@ LocaleRosterData::SetDefaultFormattingConventions(
 }
 
 
-status_t
-LocaleRosterData::SetDefaultTimeZone(const BTimeZone& newZone)
+status_t LocaleRosterData::SetDefaultTimeZone(const BTimeZone& newZone)
 {
 	status_t status = B_OK;
 
@@ -228,8 +222,7 @@ LocaleRosterData::SetDefaultTimeZone(const BTimeZone& newZone)
 }
 
 
-status_t
-LocaleRosterData::SetPreferredLanguages(const BMessage* languages)
+status_t LocaleRosterData::SetPreferredLanguages(const BMessage* languages)
 {
 	status_t status = B_OK;
 
@@ -253,8 +246,7 @@ LocaleRosterData::SetPreferredLanguages(const BMessage* languages)
 }
 
 
-status_t
-LocaleRosterData::SetFilesystemTranslationPreferred(bool preferred)
+status_t LocaleRosterData::SetFilesystemTranslationPreferred(bool preferred)
 {
 	BAutolock lock(fLock);
 	if (!lock.IsLocked())
@@ -275,8 +267,7 @@ LocaleRosterData::SetFilesystemTranslationPreferred(bool preferred)
 }
 
 
-status_t
-LocaleRosterData::GetResources(BResources** resources)
+status_t LocaleRosterData::GetResources(BResources** resources)
 {
 	if (resources == NULL)
 		return B_BAD_VALUE;
@@ -299,8 +290,7 @@ LocaleRosterData::GetResources(BResources** resources)
 }
 
 
-status_t
-LocaleRosterData::_Initialize()
+status_t LocaleRosterData::_Initialize()
 {
 	status_t result = _InitializeCatalogAddOns();
 	if (result != B_OK)
@@ -318,8 +308,7 @@ LocaleRosterData::_Initialize()
 iterate over add-on-folders and collect information about each
 catalog-add-ons (types of catalogs) into fCatalogAddOnInfos.
 */
-status_t
-LocaleRosterData::_InitializeCatalogAddOns()
+status_t LocaleRosterData::_InitializeCatalogAddOns()
 {
 	BAutolock lock(fLock);
 	if (!lock.IsLocked())
@@ -417,8 +406,7 @@ LocaleRosterData::_InitializeCatalogAddOns()
 /*
  * unloads all catalog-add-ons (which will throw away all loaded catalogs, too)
  */
-void
-LocaleRosterData::_CleanupCatalogAddOns()
+void LocaleRosterData::_CleanupCatalogAddOns()
 {
 	BAutolock lock(fLock);
 	if (!lock.IsLocked())
@@ -434,8 +422,7 @@ LocaleRosterData::_CleanupCatalogAddOns()
 }
 
 
-status_t
-LocaleRosterData::_LoadLocaleSettings()
+status_t LocaleRosterData::_LoadLocaleSettings()
 {
 	BPath path;
 	BFile file;
@@ -476,8 +463,7 @@ LocaleRosterData::_LoadLocaleSettings()
 }
 
 
-status_t
-LocaleRosterData::_LoadTimeSettings()
+status_t LocaleRosterData::_LoadTimeSettings()
 {
 	BPath path;
 	BFile file;
@@ -507,8 +493,7 @@ LocaleRosterData::_LoadTimeSettings()
 }
 
 
-status_t
-LocaleRosterData::_SaveLocaleSettings()
+status_t LocaleRosterData::_SaveLocaleSettings()
 {
 	BMessage settings;
 	status_t status = _AddDefaultFormattingConventionsToMessage(&settings);
@@ -536,8 +521,7 @@ LocaleRosterData::_SaveLocaleSettings()
 }
 
 
-status_t
-LocaleRosterData::_SaveTimeSettings()
+status_t LocaleRosterData::_SaveTimeSettings()
 {
 	BMessage settings;
 	status_t status = _AddDefaultTimeZoneToMessage(&settings);
@@ -561,8 +545,7 @@ LocaleRosterData::_SaveTimeSettings()
 }
 
 
-status_t
-LocaleRosterData::_SetDefaultFormattingConventions(
+status_t LocaleRosterData::_SetDefaultFormattingConventions(
 	const BFormattingConventions& newFormattingConventions)
 {
 	fDefaultLocale.SetFormattingConventions(newFormattingConventions);
@@ -580,8 +563,7 @@ LocaleRosterData::_SetDefaultFormattingConventions(
 }
 
 
-status_t
-LocaleRosterData::_SetDefaultTimeZone(const BTimeZone& newZone)
+status_t LocaleRosterData::_SetDefaultTimeZone(const BTimeZone& newZone)
 {
 	fDefaultTimeZone = newZone;
 
@@ -594,8 +576,7 @@ LocaleRosterData::_SetDefaultTimeZone(const BTimeZone& newZone)
 }
 
 
-status_t
-LocaleRosterData::_SetPreferredLanguages(const BMessage* languages)
+status_t LocaleRosterData::_SetPreferredLanguages(const BMessage* languages)
 {
 	BString langName;
 	if (languages != NULL
@@ -618,15 +599,13 @@ LocaleRosterData::_SetPreferredLanguages(const BMessage* languages)
 }
 
 
-void
-LocaleRosterData::_SetFilesystemTranslationPreferred(bool preferred)
+void LocaleRosterData::_SetFilesystemTranslationPreferred(bool preferred)
 {
 	fIsFilesystemTranslationPreferred = preferred;
 }
 
 
-status_t
-LocaleRosterData::_AddDefaultFormattingConventionsToMessage(
+status_t LocaleRosterData::_AddDefaultFormattingConventionsToMessage(
 	BMessage* message) const
 {
 	BFormattingConventions conventions;
@@ -636,15 +615,13 @@ LocaleRosterData::_AddDefaultFormattingConventionsToMessage(
 }
 
 
-status_t
-LocaleRosterData::_AddDefaultTimeZoneToMessage(BMessage* message) const
+status_t LocaleRosterData::_AddDefaultTimeZoneToMessage(BMessage* message) const
 {
 	return message->AddString(kTimezoneField, fDefaultTimeZone.ID());
 }
 
 
-status_t
-LocaleRosterData::_AddPreferredLanguagesToMessage(BMessage* message) const
+status_t LocaleRosterData::_AddPreferredLanguagesToMessage(BMessage* message) const
 {
 	status_t status = B_OK;
 
@@ -660,8 +637,7 @@ LocaleRosterData::_AddPreferredLanguagesToMessage(BMessage* message) const
 }
 
 
-status_t
-LocaleRosterData::_AddFilesystemTranslationPreferenceToMessage(
+status_t LocaleRosterData::_AddFilesystemTranslationPreferenceToMessage(
 	BMessage* message) const
 {
 	return message->AddBool(kTranslateFilesystemField,

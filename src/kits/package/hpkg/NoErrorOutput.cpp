@@ -15,8 +15,7 @@ namespace BPackageKit {
 namespace BHPKG {
 
 
-void
-BNoErrorOutput::PrintErrorVarArgs(const char* format, va_list args)
+void BNoErrorOutput::PrintErrorVarArgs(const char* format, va_list args)
 {
 }
 

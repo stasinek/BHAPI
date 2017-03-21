@@ -51,23 +51,20 @@ BTab::~BTab()
 }
 
 
-void
-BTab::SetLabel(const char *label)
+void BTab::SetLabel(const char *label)
 {
 	if(fLabel) delete[] fLabel;
 	fLabel = (label == NULL ? NULL : bhapi::strdup(label));
 }
 
 
-const char*
-BTab::Label() const
+const char*  BTab::Label() const
 {
 	return fLabel;
 }
 
 
-void
-BTab::Select()
+void BTab::Select()
 {
 	if(fOwner == NULL) return;
 
@@ -83,8 +80,7 @@ BTab::Select()
 }
 
 
-void
-BTab::Deselect()
+void BTab::Deselect()
 {
 	if(IsSelected() == false) return;
 	fOwner->fSelection = -1;
@@ -92,44 +88,38 @@ BTab::Deselect()
 }
 
 
-bool
-BTab::IsSelected() const
+bool BTab::IsSelected() const
 {
 	if(fOwner == NULL) return false;
 	return(fOwner->fSelection == fOwner->TabIndexOf(this));
 }
 
 
-void
-BTab::SetEnabled(bool state)
+void BTab::SetEnabled(bool state)
 {
 	fEnabled = state;
 }
 
 
-bool
-BTab::IsEnabled() const
+bool BTab::IsEnabled() const
 {
 	return fEnabled;
 }
 
 
-void
-BTab::MakeFocus(bool state)
+void BTab::MakeFocus(bool state)
 {
 	fFocus = state;
 }
 
 
-bool
-BTab::IsFocus() const
+bool BTab::IsFocus() const
 {
 	return fFocus;
 }
 
 
-bool
-BTab::SetView(BView *targetView, BView **oldTargetView)
+bool BTab::SetView(BView *targetView, BView **oldTargetView)
 {
 	if(targetView == NULL ? false : (targetView->Parent() != NULL || targetView->Window() != NULL)) return false;
 
@@ -164,8 +154,7 @@ BTab::TabView() const
 }
 
 
-void
-BTab::DrawFocusMark(BView* owner, BRect frame)
+void BTab::DrawFocusMark(BView* owner, BRect frame)
 {
 	if(!fFocus || !fEnabled) return;
 
@@ -173,8 +162,7 @@ BTab::DrawFocusMark(BView* owner, BRect frame)
 }
 
 
-void
-BTab::DrawLabel(BView* owner, BRect frame)
+void BTab::DrawLabel(BView* owner, BRect frame)
 {
 	if(fLabel == NULL) return;
 
@@ -195,8 +183,7 @@ BTab::DrawLabel(BView* owner, BRect frame)
 }
 
 
-void
-BTab::DrawTab(BView* owner, BRect frame, bhapi::tab_position position, bool full)
+void BTab::DrawTab(BView* owner, BRect frame, bhapi::tab_position position, bool full)
 {
 	bhapi::rgb_color shineColor = bhapi::ui_color(B_SHINE_COLOR);
 	bhapi::rgb_color shadowColor = bhapi::ui_color(B_SHADOW_COLOR);
@@ -262,8 +249,7 @@ BTabView::~BTabView()
 }
 
 
-void
-BTabView::Select(__be_int32 tabIndex)
+void BTabView::Select(__be_int32 tabIndex)
 {
 	if((tabIndex >= 0 ? tabIndex == fSelection : fSelection < 0) || tabIndex >= fTabs.CountItems()) return;
 
@@ -280,15 +266,13 @@ BTabView::Select(__be_int32 tabIndex)
 }
 
 
-__be_int32
-BTabView::Selection() const
+__be_int32 BTabView::Selection() const
 {
 	return fSelection;
 }
 
 
-bool
-BTabView::AddTab(BView *tabTargetView, BTab *tab)
+bool BTabView::AddTab(BView *tabTargetView, BTab *tab)
 {
 	if(tabTargetView == NULL && tab == NULL) return false;
 
@@ -341,8 +325,7 @@ BTabView::RemoveTab(__be_int32 tabIndex)
 }
 
 
-__be_int32
-BTabView::CountTabs() const
+__be_int32 BTabView::CountTabs() const
 {
 	return fTabs.CountItems();
 }
@@ -355,8 +338,7 @@ BTabView::TabAt(__be_int32 tabIndex) const
 }
 
 
-__be_int32
-BTabView::TabIndexOf(const BTab *tab) const
+__be_int32 BTabView::TabIndexOf(const BTab *tab) const
 {
 	if(tab == NULL || tab->fOwner != this) return -1;
 	return fTabs.IndexOf((void*)tab);
@@ -378,8 +360,7 @@ BTabView::ContainerView() const
 }
 
 
-void
-BTabView::SetTabWidth(bhapi::button_width tabWidth)
+void BTabView::SetTabWidth(bhapi::button_width tabWidth)
 {
 	if(fTabWidth != tabWidth)
 	{
@@ -399,8 +380,7 @@ BTabView::TabWidth() const
 }
 
 
-void
-BTabView::SetTabHeight(float tabHeight)
+void BTabView::SetTabHeight(float tabHeight)
 {
 	if(tabHeight > 0 && tabHeight != fTabHeight)
 	{
@@ -427,8 +407,7 @@ BTabView::TabHeight() const
 }
 
 
-void
-BTabView::ChildRemoving(BView *child)
+void BTabView::ChildRemoving(BView *child)
 {
 	if(child == fContainer)
 	{
@@ -506,8 +485,7 @@ BTabView::DrawTabs()
 }
 
 
-void
-BTabView::DrawBox(BRect selTabRect)
+void BTabView::DrawBox(BRect selTabRect)
 {
 	BRect rect = Frame().OffsetToSelf(B_ORIGIN);
 	rect.top += fTabHeight;
@@ -539,16 +517,14 @@ BTabView::DrawBox(BRect selTabRect)
 }
 
 
-void
-BTabView::Draw(BRect updateRect)
+void BTabView::Draw(BRect updateRect)
 {
 	BRect selTabRect = DrawTabs();
 	DrawBox(selTabRect);
 }
 
 
-void
-BTabView::MouseDown(BPoint where)
+void BTabView::MouseDown(BPoint where)
 {
 	__be_int32 btnClicks = 1;
 	if(where.y > fTabHeight + 1.f || !IsEnabled() ||

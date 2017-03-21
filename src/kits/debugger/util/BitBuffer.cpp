@@ -74,8 +74,7 @@ BitBuffer::~BitBuffer()
 }
 
 
-bool
-BitBuffer::AddBytes(const void* data, size_t size)
+bool BitBuffer::AddBytes(const void* data, size_t size)
 {
 	if (size == 0)
 		return true;
@@ -93,8 +92,7 @@ BitBuffer::AddBytes(const void* data, size_t size)
 }
 
 
-bool
-BitBuffer::AddBits(const void* _data, uint64 bitSize, uint32 bitOffset)
+bool BitBuffer::AddBits(const void* _data, uint64 bitSize, uint32 bitOffset)
 {
 	if (bitSize == 0)
 		return true;
@@ -140,8 +138,7 @@ BitBuffer::AddBits(const void* _data, uint64 bitSize, uint32 bitOffset)
 }
 
 
-bool
-BitBuffer::AddZeroBits(uint64 bitSize)
+bool BitBuffer::AddZeroBits(uint64 bitSize)
 {
 	if (bitSize == 0)
 		return true;

@@ -32,8 +32,7 @@ RWLockManager::~RWLockManager()
 }
 
 
-bool
-RWLockManager::ReadLock(RWLockable* lockable)
+bool RWLockManager::ReadLock(RWLockable* lockable)
 {
 	AutoLocker<RWLockManager> locker(this);
 
@@ -46,8 +45,7 @@ RWLockManager::ReadLock(RWLockable* lockable)
 }
 
 
-bool
-RWLockManager::TryReadLock(RWLockable* lockable)
+bool RWLockManager::TryReadLock(RWLockable* lockable)
 {
 	AutoLocker<RWLockManager> locker(this);
 
@@ -60,8 +58,7 @@ RWLockManager::TryReadLock(RWLockable* lockable)
 }
 
 
-status_t
-RWLockManager::ReadLockWithTimeout(RWLockable* lockable, bigtime_t timeout)
+status_t RWLockManager::ReadLockWithTimeout(RWLockable* lockable, bigtime_t timeout)
 {
 	AutoLocker<RWLockManager> locker(this);
 
@@ -74,8 +71,7 @@ RWLockManager::ReadLockWithTimeout(RWLockable* lockable, bigtime_t timeout)
 }
 
 
-void
-RWLockManager::ReadUnlock(RWLockable* lockable)
+void RWLockManager::ReadUnlock(RWLockable* lockable)
 {
 	AutoLocker<RWLockManager> locker(this);
 
@@ -89,8 +85,7 @@ RWLockManager::ReadUnlock(RWLockable* lockable)
 }
 
 
-bool
-RWLockManager::WriteLock(RWLockable* lockable)
+bool RWLockManager::WriteLock(RWLockable* lockable)
 {
 	AutoLocker<RWLockManager> locker(this);
 
@@ -111,8 +106,7 @@ RWLockManager::WriteLock(RWLockable* lockable)
 }
 
 
-bool
-RWLockManager::TryWriteLock(RWLockable* lockable)
+bool RWLockManager::TryWriteLock(RWLockable* lockable)
 {
 	AutoLocker<RWLockManager> locker(this);
 
@@ -133,8 +127,7 @@ RWLockManager::TryWriteLock(RWLockable* lockable)
 }
 
 
-status_t
-RWLockManager::WriteLockWithTimeout(RWLockable* lockable, bigtime_t timeout)
+status_t RWLockManager::WriteLockWithTimeout(RWLockable* lockable, bigtime_t timeout)
 {
 	AutoLocker<RWLockManager> locker(this);
 
@@ -155,8 +148,7 @@ RWLockManager::WriteLockWithTimeout(RWLockable* lockable, bigtime_t timeout)
 }
 
 
-void
-RWLockManager::WriteUnlock(RWLockable* lockable)
+void RWLockManager::WriteUnlock(RWLockable* lockable)
 {
 	AutoLocker<RWLockManager> locker(this);
 
@@ -173,8 +165,7 @@ RWLockManager::WriteUnlock(RWLockable* lockable)
 }
 
 
-status_t
-RWLockManager::_Wait(RWLockable* lockable, bool writer, bigtime_t timeout)
+status_t RWLockManager::_Wait(RWLockable* lockable, bool writer, bigtime_t timeout)
 {
 	if (timeout == 0)
 		return B_TIMED_OUT;
@@ -211,8 +202,7 @@ RWLockManager::_Wait(RWLockable* lockable, bool writer, bigtime_t timeout)
 }
 
 
-void
-RWLockManager::_Unblock(RWLockable* lockable)
+void RWLockManager::_Unblock(RWLockable* lockable)
 {
 	// Check whether there any waiting threads at all and whether anyone
 	// has the write lock

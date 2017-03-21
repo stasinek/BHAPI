@@ -53,15 +53,13 @@ public:
 	}
 
 
-	static void
-	SetManagerPointer(BMessage* archive, BManagerBase* manager)
+	static void 	SetManagerPointer(BMessage* archive, BManagerBase* manager)
 	{
 		BMessage::Private(archive).SetArchivingPointer(manager);
 	}
 
 
-	void
-	MarkArchive(BMessage* archive)
+	void 	MarkArchive(BMessage* archive)
 	{
 		BManagerBase* manager = ManagerPointer(archive);
 		if (manager != NULL)
@@ -71,8 +69,7 @@ public:
 	}
 
 
-	void
-	UnmarkArchive(BMessage* archive)
+	void 	UnmarkArchive(BMessage* archive)
 	{
 		BManagerBase* manager = ManagerPointer(archive);
 		if (manager == this)

@@ -17,8 +17,7 @@ public:
 	{
 	}
 
-	void
-	SetTo(const BFormattingConventions* conventions)
+	void 	SetTo(const BFormattingConventions* conventions)
 	{
 		fFormattingConventions = conventions;
 	}

@@ -58,8 +58,7 @@ default_mail_out_directory()
 }
 
 
-status_t
-WriteMessageFile(const BMessage& archive, const BPath& path, const char* name)
+status_t WriteMessageFile(const BMessage& archive, const BPath& path, const char* name)
 {
 	status_t ret = B_OK;
 	BString leaf = name;

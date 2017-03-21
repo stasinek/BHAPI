@@ -238,8 +238,7 @@ FT_BEGIN_HEADER
 
   /* this compiler provides the __int64 type */
 #define FT_LONG64
-#define FT_INT64  __int64
-
+#define FT_INT64  __int64 
 #elif defined( __BORLANDC__ )  /* Borland C++ */
 
   /* XXXX: We should probably check the value of __BORLANDC__ in order */
@@ -247,8 +246,7 @@ FT_BEGIN_HEADER
 
   /* this compiler provides the __int64 type */
 #define FT_LONG64
-#define FT_INT64  __int64
-
+#define FT_INT64  __int64 
 #elif defined( __WATCOMC__ )   /* Watcom C++ */
 
   /* Watcom doesn't provide 64-bit data types */

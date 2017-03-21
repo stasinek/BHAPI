@@ -16,8 +16,7 @@
 // #pragma mark - TypeComponent
 
 
-bool
-TypeComponent::HasPrefix(const TypeComponent& other) const
+bool TypeComponent::HasPrefix(const TypeComponent& other) const
 {
 	if (*this == other)
 		return true;
@@ -28,16 +27,14 @@ TypeComponent::HasPrefix(const TypeComponent& other) const
 }
 
 
-uint32
-TypeComponent::HashValue() const
+uint32 TypeComponent::HashValue() const
 {
 	uint32 hash = ((uint32)index << 8) | (componentKind << 4) | typeKind;
 	return StringUtils::HashValue(name) * 13 + hash;
 }
 
 
-void
-TypeComponent::Dump() const
+void TypeComponent::Dump() const
 {
 	switch (typeKind) {
 		case TYPE_PRIMITIVE:
@@ -94,8 +91,7 @@ TypeComponent::Dump() const
 }
 
 
-bool
-TypeComponent::operator==(const TypeComponent& other) const
+bool TypeComponent::operator==(const TypeComponent& other) const
 {
 	return componentKind == other.componentKind
 		&& typeKind == other.typeKind
@@ -127,8 +123,7 @@ TypeComponentPath::~TypeComponentPath()
 }
 
 
-int32
-TypeComponentPath::CountComponents() const
+int32 TypeComponentPath::CountComponents() const
 {
 	return fComponents.CountItems();
 }
@@ -142,8 +137,7 @@ TypeComponentPath::ComponentAt(int32 index) const
 }
 
 
-bool
-TypeComponentPath::AddComponent(const TypeComponent& component)
+bool TypeComponentPath::AddComponent(const TypeComponent& component)
 {
 	TypeComponent* myComponent = new(std::nothrow) TypeComponent(component);
 	if (myComponent == NULL || !fComponents.AddItem(myComponent)) {
@@ -155,8 +149,7 @@ TypeComponentPath::AddComponent(const TypeComponent& component)
 }
 
 
-void
-TypeComponentPath::Clear()
+void TypeComponentPath::Clear()
 {
 	fComponents.MakeEmpty();
 }
@@ -182,8 +175,7 @@ TypeComponentPath::CreateSubPath(int32 componentCount) const
 }
 
 
-uint32
-TypeComponentPath::HashValue() const
+uint32 TypeComponentPath::HashValue() const
 {
 	int32 count = fComponents.CountItems();
 	if (count == 0)
@@ -198,8 +190,7 @@ TypeComponentPath::HashValue() const
 }
 
 
-void
-TypeComponentPath::Dump() const
+void TypeComponentPath::Dump() const
 {
 	int32 count = fComponents.CountItems();
 	for (int32 i = 0; i < count; i++) {
@@ -230,8 +221,7 @@ TypeComponentPath::operator=(const TypeComponentPath& other)
 }
 
 
-bool
-TypeComponentPath::operator==(const TypeComponentPath& other) const
+bool TypeComponentPath::operator==(const TypeComponentPath& other) const
 {
 	int32 count = fComponents.CountItems();
 	if (count != other.fComponents.CountItems())

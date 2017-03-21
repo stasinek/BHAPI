@@ -12,23 +12,20 @@ ValueFormatter::~ValueFormatter()
 }
 
 
-bool
-ValueFormatter::SupportsValidation() const
+bool ValueFormatter::SupportsValidation() const
 {
 	return false;
 }
 
 
-bool
-ValueFormatter::ValidateFormattedValue(const BString& input, type_code type)
+bool ValueFormatter::ValidateFormattedValue(const BString& input, type_code type)
 	const
 {
 	return false;
 }
 
 
-status_t
-ValueFormatter::GetValueFromFormattedInput(const BString& input,
+status_t ValueFormatter::GetValueFromFormattedInput(const BString& input,
 	type_code type, Value*& _output) const
 {
 	return B_NOT_SUPPORTED;

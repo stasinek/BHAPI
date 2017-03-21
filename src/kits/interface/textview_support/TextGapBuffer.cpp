@@ -49,8 +49,7 @@ TextGapBuffer::~TextGapBuffer()
 }
 
 
-void
-TextGapBuffer::InsertText(const char* inText, int32 inNumItems, int32 inAtIndex)
+void TextGapBuffer::InsertText(const char* inText, int32 inNumItems, int32 inAtIndex)
 {
 	if (inNumItems < 1)
 		return;
@@ -72,8 +71,7 @@ TextGapBuffer::InsertText(const char* inText, int32 inNumItems, int32 inAtIndex)
 }
 
 
-void
-TextGapBuffer::InsertText(BFile* file, int32 fileOffset, int32 inNumItems,
+void TextGapBuffer::InsertText(BFile* file, int32 fileOffset, int32 inNumItems,
 	int32 inAtIndex)
 {
 	off_t fileSize;
@@ -109,8 +107,7 @@ TextGapBuffer::InsertText(BFile* file, int32 fileOffset, int32 inNumItems,
 }
 
 
-void
-TextGapBuffer::RemoveRange(int32 start, int32 end)
+void TextGapBuffer::RemoveRange(int32 start, int32 end)
 {
 	int32 inAtIndex = start;
 	int32 inNumItems = end - start;
@@ -131,8 +128,7 @@ TextGapBuffer::RemoveRange(int32 start, int32 end)
 }
 
 
-const char*
-TextGapBuffer::GetString(int32 fromOffset, int32* _numBytes)
+const char*  TextGapBuffer::GetString(int32 fromOffset, int32* _numBytes)
 {
 	const char* result = "";
 	if (_numBytes == NULL)
@@ -187,8 +183,7 @@ TextGapBuffer::GetString(int32 fromOffset, int32* _numBytes)
 }
 
 
-bool
-TextGapBuffer::FindChar(char inChar, int32 fromIndex, int32* ioDelta)
+bool TextGapBuffer::FindChar(char inChar, int32 fromIndex, int32* ioDelta)
 {
 	int32 numChars = *ioDelta;
 	for (int32 i = 0; i < numChars; i++) {
@@ -205,8 +200,7 @@ TextGapBuffer::FindChar(char inChar, int32 fromIndex, int32* ioDelta)
 }
 
 
-const char*
-TextGapBuffer::Text()
+const char*  TextGapBuffer::Text()
 {
 	const char* realText = RealText();
 
@@ -234,8 +228,7 @@ TextGapBuffer::Text()
 }
 
 
-const char*
-TextGapBuffer::RealText()
+const char*  TextGapBuffer::RealText()
 {
 	_MoveGapTo(fItemCount);
 
@@ -247,8 +240,7 @@ TextGapBuffer::RealText()
 }
 
 
-void
-TextGapBuffer::GetString(int32 offset, int32 length, char* buffer)
+void TextGapBuffer::GetString(int32 offset, int32 length, char* buffer)
 {
 	if (buffer == NULL)
 		return;
@@ -288,22 +280,19 @@ TextGapBuffer::GetString(int32 offset, int32 length, char* buffer)
 }
 
 
-bool
-TextGapBuffer::PasswordMode() const
+bool TextGapBuffer::PasswordMode() const
 {
 	return fPasswordMode;
 }
 
 
-void
-TextGapBuffer::SetPasswordMode(bool state)
+void TextGapBuffer::SetPasswordMode(bool state)
 {
 	fPasswordMode = state;
 }
 
 
-void
-TextGapBuffer::_MoveGapTo(int32 toIndex)
+void TextGapBuffer::_MoveGapTo(int32 toIndex)
 {
 	if (toIndex == fGapIndex)
 		return;
@@ -332,8 +321,7 @@ TextGapBuffer::_MoveGapTo(int32 toIndex)
 }
 
 
-void
-TextGapBuffer::_EnlargeGapTo(int32 inCount)
+void TextGapBuffer::_EnlargeGapTo(int32 inCount)
 {
 	if (inCount == fGapCount)
 		return;
@@ -347,8 +335,7 @@ TextGapBuffer::_EnlargeGapTo(int32 inCount)
 }
 
 
-void
-TextGapBuffer::_ShrinkGapTo(int32 inCount)
+void TextGapBuffer::_ShrinkGapTo(int32 inCount)
 {
 	if (inCount == fGapCount)
 		return;

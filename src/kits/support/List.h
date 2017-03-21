@@ -31,7 +31,7 @@
 #ifndef BHAPI_LIST_H
 #define BHAPI_LIST_H
 #ifdef __cplusplus /* Just for C++ */
-#include <OS.h>
+#include <kernel/OS.h>
 class BHAPI_IMPEXP BList {
 public:
     // BList(__be_int32), BList(__be_int32,  __be_int32):

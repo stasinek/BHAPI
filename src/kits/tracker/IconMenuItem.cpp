@@ -43,8 +43,7 @@ All rights reserved.
 #include <NodeInfo.h>
 
 
-static void
-DimmedIconBlitter(BView* view, BPoint where, BBitmap* bitmap, void*)
+static void DimmedIconBlitter(BView* view, BPoint where, BBitmap* bitmap, void*)
 {
 	if (bitmap->ColorSpace() == B_RGBA32) {
 		rgb_color oldHighColor = view->HighColor();
@@ -111,15 +110,13 @@ ModelMenuItem::~ModelMenuItem()
 }
 
 
-status_t
-ModelMenuItem::SetEntry(const BEntry* entry)
+status_t ModelMenuItem::SetEntry(const BEntry* entry)
 {
 	return fModel.SetTo(entry);
 }
 
 
-void
-ModelMenuItem::DrawContent()
+void ModelMenuItem::DrawContent()
 {
 	if (fDrawText) {
 		BPoint drawPoint(ContentLocation());
@@ -133,16 +130,14 @@ ModelMenuItem::DrawContent()
 }
 
 
-void
-ModelMenuItem::Highlight(bool hilited)
+void ModelMenuItem::Highlight(bool hilited)
 {
 	_inherited::Highlight(hilited);
 	DrawIcon();
 }
 
 
-void
-ModelMenuItem::DrawIcon()
+void ModelMenuItem::DrawIcon()
 {
 	Menu()->PushState();
 
@@ -173,8 +168,7 @@ ModelMenuItem::DrawIcon()
 }
 
 
-void
-ModelMenuItem::GetContentSize(float* width, float* height)
+void ModelMenuItem::GetContentSize(float* width, float* height)
 {
 	_inherited::GetContentSize(width, height);
 	fHeightDelta = 16 - *height;
@@ -184,8 +178,7 @@ ModelMenuItem::GetContentSize(float* width, float* height)
 }
 
 
-status_t
-ModelMenuItem::Invoke(BMessage* message)
+status_t ModelMenuItem::Invoke(BMessage* message)
 {
 	if (Menu() == NULL)
 		return B_ERROR;
@@ -228,8 +221,7 @@ SpecialModelMenuItem::SpecialModelMenuItem(const Model* model, BMenu* menu)
 }
 
 
-void
-SpecialModelMenuItem::DrawContent()
+void SpecialModelMenuItem::DrawContent()
 {
 	Menu()->PushState();
 
@@ -343,8 +335,7 @@ IconMenuItem::~IconMenuItem()
 }
 
 
-void
-IconMenuItem::GetContentSize(float* width, float* height)
+void IconMenuItem::GetContentSize(float* width, float* height)
 {
 	_inherited::GetContentSize(width, height);
 
@@ -356,8 +347,7 @@ IconMenuItem::GetContentSize(float* width, float* height)
 }
 
 
-void
-IconMenuItem::DrawContent()
+void IconMenuItem::DrawContent()
 {
 	BPoint drawPoint(ContentLocation());
 	drawPoint.x += 20;

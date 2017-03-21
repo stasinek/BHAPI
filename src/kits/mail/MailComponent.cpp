@@ -52,8 +52,7 @@ BMailComponent::~BMailComponent()
 }
 
 
-uint32
-BMailComponent::ComponentType()
+uint32 BMailComponent::ComponentType()
 {
 	if (NULL != dynamic_cast<BAttributedMailAttachment*> (this))
 		return B_MAIL_ATTRIBUTED_ATTACHMENT;
@@ -92,8 +91,7 @@ BMailComponent::WhatIsThis()
 }
 
 
-bool
-BMailComponent::IsAttachment()
+bool BMailComponent::IsAttachment()
 {
 	const char* disposition = HeaderField("Content-Disposition");
 	if ((disposition != NULL)
@@ -117,8 +115,7 @@ BMailComponent::IsAttachment()
 }
 
 
-void
-BMailComponent::SetHeaderField(const char* key, const char* value,
+void BMailComponent::SetHeaderField(const char* key, const char* value,
 	uint32 charset, mail_encoding encoding, bool replace_existing)
 {
 	if (replace_existing)
@@ -139,8 +136,7 @@ BMailComponent::SetHeaderField(const char* key, const char* value,
 }
 
 
-void
-BMailComponent::SetHeaderField(const char* key, BMessage* structure,
+void BMailComponent::SetHeaderField(const char* key, BMessage* structure,
 	bool replace_existing)
 {
 	int32 charset = B_MAIL_NULL_CONVERSION;
@@ -185,8 +181,7 @@ BMailComponent::SetHeaderField(const char* key, BMessage* structure,
 }
 
 
-const char*
-BMailComponent::HeaderField(const char* key, int32 index) const
+const char*  BMailComponent::HeaderField(const char* key, int32 index) const
 {
 	const char* string = NULL;
 
@@ -195,8 +190,7 @@ BMailComponent::HeaderField(const char* key, int32 index) const
 }
 
 
-status_t
-BMailComponent::HeaderField(const char* key, BMessage* structure,
+status_t BMailComponent::HeaderField(const char* key, BMessage* structure,
 	int32 index) const
 {
 	BString string = HeaderField(key, index);
@@ -258,15 +252,13 @@ BMailComponent::HeaderField(const char* key, BMessage* structure,
 }
 
 
-status_t
-BMailComponent::RemoveHeader(const char* key)
+status_t BMailComponent::RemoveHeader(const char* key)
 {
 	return headers.RemoveName(key);
 }
 
 
-const char*
-BMailComponent::HeaderAt(int32 index) const
+const char*  BMailComponent::HeaderAt(int32 index) const
 {
 #if defined(HAIKU_TARGET_PLATFORM_DANO)
 	const
@@ -279,22 +271,19 @@ BMailComponent::HeaderAt(int32 index) const
 }
 
 
-status_t
-BMailComponent::GetDecodedData(BPositionIO*)
+status_t BMailComponent::GetDecodedData(BPositionIO*)
 {
 	return B_OK;
 }
 
 
-status_t
-BMailComponent::SetDecodedData(BPositionIO*)
+status_t BMailComponent::SetDecodedData(BPositionIO*)
 {
 	return B_OK;
 }
 
 
-status_t
-BMailComponent::SetToRFC822(BPositionIO* data, size_t /*length*/, bool /*parse_now*/)
+status_t BMailComponent::SetToRFC822(BPositionIO* data, size_t /*length*/, bool /*parse_now*/)
 {
 	headers.MakeEmpty();
 
@@ -303,8 +292,7 @@ BMailComponent::SetToRFC822(BPositionIO* data, size_t /*length*/, bool /*parse_n
 }
 
 
-status_t
-BMailComponent::RenderToRFC822(BPositionIO* render_to)
+status_t BMailComponent::RenderToRFC822(BPositionIO* render_to)
 {
 	int32 charset = B_ISO15_CONVERSION;
 	int8 encoding = quoted_printable;
@@ -352,8 +340,7 @@ BMailComponent::RenderToRFC822(BPositionIO* render_to)
 }
 
 
-status_t
-BMailComponent::MIMEType(BMimeType* mime)
+status_t BMailComponent::MIMEType(BMimeType* mime)
 {
 	bool foundBestHeader;
 	const char* boundaryString;
@@ -441,16 +428,14 @@ BTextMailComponent::~BTextMailComponent()
 }
 
 
-void
-BTextMailComponent::SetEncoding(mail_encoding encoding, int32 charset)
+void BTextMailComponent::SetEncoding(mail_encoding encoding, int32 charset)
 {
 	this->encoding = encoding;
 	this->charset = charset;
 }
 
 
-void
-BTextMailComponent::SetText(const char* text)
+void BTextMailComponent::SetText(const char* text)
 {
 	this->text.SetTo(text);
 
@@ -458,8 +443,7 @@ BTextMailComponent::SetText(const char* text)
 }
 
 
-void
-BTextMailComponent::AppendText(const char* text)
+void BTextMailComponent::AppendText(const char* text)
 {
 	ParseRaw();
 
@@ -467,8 +451,7 @@ BTextMailComponent::AppendText(const char* text)
 }
 
 
-const char*
-BTextMailComponent::Text()
+const char*  BTextMailComponent::Text()
 {
 	ParseRaw();
 
@@ -485,8 +468,7 @@ BTextMailComponent::BStringText()
 }
 
 
-void
-BTextMailComponent::Quote(const char* message, const char* quote_style)
+void BTextMailComponent::Quote(const char* message, const char* quote_style)
 {
 	ParseRaw();
 
@@ -500,8 +482,7 @@ BTextMailComponent::Quote(const char* message, const char* quote_style)
 }
 
 
-status_t
-BTextMailComponent::GetDecodedData(BPositionIO* data)
+status_t BTextMailComponent::GetDecodedData(BPositionIO* data)
 {
 	ParseRaw();
 
@@ -528,8 +509,7 @@ BTextMailComponent::GetDecodedData(BPositionIO* data)
 }
 
 
-status_t
-BTextMailComponent::SetDecodedData(BPositionIO* data)
+status_t BTextMailComponent::SetDecodedData(BPositionIO* data)
 {
 	char buffer[255];
 	size_t buf_len;
@@ -545,8 +525,7 @@ BTextMailComponent::SetDecodedData(BPositionIO* data)
 }
 
 
-status_t
-BTextMailComponent::SetToRFC822(BPositionIO* data, size_t length, bool parseNow)
+status_t BTextMailComponent::SetToRFC822(BPositionIO* data, size_t length, bool parseNow)
 {
 	off_t position = data->Position();
 	BMailComponent::SetToRFC822(data, length);
@@ -570,8 +549,7 @@ BTextMailComponent::SetToRFC822(BPositionIO* data, size_t length, bool parseNow)
 }
 
 
-status_t
-BTextMailComponent::ParseRaw()
+status_t BTextMailComponent::ParseRaw()
 {
 	if (raw_data == NULL)
 		return B_OK;
@@ -652,8 +630,7 @@ BTextMailComponent::ParseRaw()
 }
 
 
-status_t
-BTextMailComponent::RenderToRFC822(BPositionIO* render_to)
+status_t BTextMailComponent::RenderToRFC822(BPositionIO* render_to)
 {
 	status_t status = ParseRaw();
 	if (status < B_OK)

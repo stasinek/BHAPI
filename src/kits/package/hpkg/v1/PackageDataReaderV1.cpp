@@ -423,8 +423,7 @@ BPackageDataReaderFactory::BPackageDataReaderFactory(BBufferPool* bufferPool)
 }
 
 
-status_t
-BPackageDataReaderFactory::CreatePackageDataReader(BDataReader* dataReader,
+status_t BPackageDataReaderFactory::CreatePackageDataReader(BDataReader* dataReader,
 	const BPackageData& data, BAbstractBufferedDataReader*& _reader)
 {
 	if (data.IsEncodedInline()) {

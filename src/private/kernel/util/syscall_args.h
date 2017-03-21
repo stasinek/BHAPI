@@ -15,8 +15,7 @@
 // copy_ref_var_from_user
 template<typename T>
 inline
-status_t
-copy_ref_var_from_user(T *user, T &kernel)
+status_t copy_ref_var_from_user(T *user, T &kernel)
 {
 	if (!IS_USER_ADDRESS(user))
 		return B_BAD_ADDRESS;
@@ -26,8 +25,7 @@ copy_ref_var_from_user(T *user, T &kernel)
 // copy_ref_var_to_user
 template<typename T>
 inline
-status_t
-copy_ref_var_to_user(T &kernel, T *user)
+status_t copy_ref_var_to_user(T &kernel, T *user)
 {
 	if (!IS_USER_ADDRESS(user))
 		return B_BAD_ADDRESS;

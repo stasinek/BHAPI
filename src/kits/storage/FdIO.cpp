@@ -35,8 +35,7 @@ BFdIO::~BFdIO()
 }
 
 
-void
-BFdIO::SetTo(int fd, bool keepFd)
+void BFdIO::SetTo(int fd, bool keepFd)
 {
 	Unset();
 
@@ -45,8 +44,7 @@ BFdIO::SetTo(int fd, bool keepFd)
 }
 
 
-void
-BFdIO::Unset()
+void BFdIO::Unset()
 {
 	if (fOwnsFd && fFd >= 0)
 		close(fFd);
@@ -103,15 +101,13 @@ BFdIO::Position() const
 }
 
 
-status_t
-BFdIO::SetSize(off_t size)
+status_t BFdIO::SetSize(off_t size)
 {
 	return ftruncate(fFd, size) == 0 ? B_OK : errno;
 }
 
 
-status_t
-BFdIO::GetSize(off_t* _size) const
+status_t BFdIO::GetSize(off_t* _size) const
 {
 	struct stat st;
 	if (fstat(fFd, &st) != 0)

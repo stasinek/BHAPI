@@ -13,8 +13,7 @@
 #include "DwarfFile.h"
 
 
-/*static*/ void
-DwarfUtils::GetDIEName(const DebugInfoEntry* entry, BString& _name)
+/*static*/ void DwarfUtils::GetDIEName(const DebugInfoEntry* entry, BString& _name)
 {
 	// If we don't seem to have a name but an abstract origin, return the
 	// origin's name.
@@ -39,8 +38,7 @@ DwarfUtils::GetDIEName(const DebugInfoEntry* entry, BString& _name)
 }
 
 
-/*static*/ void
-DwarfUtils::GetDIETypeName(const DebugInfoEntry* entry, BString& _name)
+/*static*/ void DwarfUtils::GetDIETypeName(const DebugInfoEntry* entry, BString& _name)
 {
 	const DIEType* type = dynamic_cast<const DIEType*>(entry);
 	if (type == NULL)
@@ -100,8 +98,7 @@ DwarfUtils::GetDIETypeName(const DebugInfoEntry* entry, BString& _name)
 }
 
 
-/*static*/ void
-DwarfUtils::GetFullDIEName(const DebugInfoEntry* entry, BString& _name)
+/*static*/ void DwarfUtils::GetFullDIEName(const DebugInfoEntry* entry, BString& _name)
 {
 	BString generatedName;
 	// If we don't seem to have a name but an abstract origin, return the
@@ -183,8 +180,7 @@ DwarfUtils::GetFullDIEName(const DebugInfoEntry* entry, BString& _name)
 }
 
 
-/*static*/ void
-DwarfUtils::GetFullyQualifiedDIEName(const DebugInfoEntry* entry,
+/*static*/ void DwarfUtils::GetFullyQualifiedDIEName(const DebugInfoEntry* entry,
 	BString& _name)
 {
 	// If we don't seem to have a name but an abstract origin, return the
@@ -231,8 +227,7 @@ DwarfUtils::GetFullyQualifiedDIEName(const DebugInfoEntry* entry,
 }
 
 
-/*static*/ bool
-DwarfUtils::GetDeclarationLocation(DwarfFile* dwarfFile,
+/*static*/ bool DwarfUtils::GetDeclarationLocation(DwarfFile* dwarfFile,
 	const DebugInfoEntry* entry, const char*& _directory, const char*& _file,
 	int32& _line, int32& _column)
 {

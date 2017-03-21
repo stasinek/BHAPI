@@ -436,8 +436,7 @@ ShapePrinter::~ShapePrinter() {
 	fPrinter->DecIndent();
 }
 
-status_t 
-ShapePrinter::IterateBezierTo(int32 bezierCount, BPoint *control)
+status_t ShapePrinter::IterateBezierTo(int32 bezierCount, BPoint *control)
 {
 	fPrinter->Indent(); fPrinter->Print("BezierTo"); fPrinter->Cr();
 	for (int32 i = 0; i < bezierCount; i++, control += 3) {
@@ -451,15 +450,13 @@ ShapePrinter::IterateBezierTo(int32 bezierCount, BPoint *control)
 	return B_OK;
 }
 
-status_t 
-ShapePrinter::IterateClose(void)
+status_t ShapePrinter::IterateClose(void)
 {
 	fPrinter->Indent(); fPrinter->Print("Close"); fPrinter->Cr();
 	return B_OK;
 }
 
-status_t 
-ShapePrinter::IterateLineTo(int32 lineCount, BPoint *linePoints)
+status_t ShapePrinter::IterateLineTo(int32 lineCount, BPoint *linePoints)
 {
 	fPrinter->Indent(); fPrinter->Print("LineTo"); fPrinter->Cr();
 	BPoint *p = linePoints;
@@ -470,8 +467,7 @@ ShapePrinter::IterateLineTo(int32 lineCount, BPoint *linePoints)
 	return B_OK;
 }
 
-status_t 
-ShapePrinter::IterateMoveTo(BPoint *point)
+status_t ShapePrinter::IterateMoveTo(BPoint *point)
 {
 	fPrinter->Indent(); fPrinter->Print("MoveTo", point); fPrinter->Cr();
 	return B_OK;

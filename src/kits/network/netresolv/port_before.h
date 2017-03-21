@@ -89,23 +89,18 @@ struct timespec {
 #define NET_R_COPY buf, buflen
 #define NET_R_COPY_ARGS NET_R_ARGS
 #define NET_R_END_RESULT(x) /*empty*/
-#define NET_R_END_RETURN void
-#undef NET_R_ENT_ARGS /*empty*/
+#define NET_R_END_RETURN void #undef NET_R_ENT_ARGS /*empty*/
 #define NET_R_OK nptr
 #define NET_R_RETURN struct netent *
 #undef NET_R_SET_RESULT /*empty*/
 #undef NET_R_SETANSWER
-#define NET_R_SET_RETURN void
-#undef NETENT_DATA
+#define NET_R_SET_RETURN void #undef NETENT_DATA
 
 
-#define GROUP_R_SET_RETURN void
-#undef GROUP_R_SET_RESULT /*empty*/
-#define GROUP_R_END_RETURN void
-#define GROUP_R_END_RESULT(x) /*empty*/
+#define GROUP_R_SET_RETURN void #undef GROUP_R_SET_RESULT /*empty*/
+#define GROUP_R_END_RETURN void #define GROUP_R_END_RESULT(x) /*empty*/
 
-#define GROUP_R_ENT_ARGS void
-
+#define GROUP_R_ENT_ARGS void 
 
 
 #define HOST_R_ARGS char *buf, int buflen, int *h_errnop
@@ -113,15 +108,13 @@ struct timespec {
 #define HOST_R_COPY buf, buflen
 #define HOST_R_COPY_ARGS char *buf, int buflen
 #define HOST_R_END_RESULT(x) /*empty*/
-#define HOST_R_END_RETURN void
-#undef HOST_R_ENT_ARGS /*empty*/
+#define HOST_R_END_RETURN void #undef HOST_R_ENT_ARGS /*empty*/
 #define HOST_R_ERRNO *h_errnop = h_errno
 #define HOST_R_OK hptr
 #define HOST_R_RETURN struct hostent *
 #undef HOST_R_SETANSWER
 #undef HOST_R_SET_RESULT
-#define HOST_R_SET_RETURN void
-#undef HOSTENT_DATA
+#define HOST_R_SET_RETURN void #undef HOSTENT_DATA
 
 #define NGR_R_ARGS char *buf, int buflen
 #define NGR_R_BAD (0)
@@ -129,14 +122,12 @@ struct timespec {
 #define NGR_R_COPY_ARGS NGR_R_ARGS
 #define NGR_R_CONST
 #define NGR_R_END_RESULT(x)  /*empty*/
-#define NGR_R_END_RETURN void
-#undef NGR_R_END_ARGS /*empty*/
+#define NGR_R_END_RETURN void #undef NGR_R_END_ARGS /*empty*/
 #define NGR_R_OK 1
 #define NGR_R_RETURN int
 #define NGR_R_SET_CONST const
 #undef NGR_R_SET_RESULT /*empty*/
-#define NGR_R_SET_RETURN void
-#undef NGR_R_SET_ARGS
+#define NGR_R_SET_RETURN void #undef NGR_R_SET_ARGS
 
 
 #if !defined(NGR_R_SET_ARGS) && defined(NGR_R_END_ARGS)
@@ -148,42 +139,36 @@ struct timespec {
 #define PROTO_R_COPY buf, buflen
 #define PROTO_R_COPY_ARGS PROTO_R_ARGS
 #define PROTO_R_END_RESULT(x) /*empty*/
-#define PROTO_R_END_RETURN void
-#undef PROTO_R_ENT_ARGS /*empty*/
+#define PROTO_R_END_RETURN void #undef PROTO_R_ENT_ARGS /*empty*/
 #undef PROTO_R_ENT_UNUSED
 #define PROTO_R_OK pptr
 #undef PROTO_R_SETANSWER
 #define PROTO_R_RETURN struct protoent *
 #undef PROTO_R_SET_RESULT
-#define PROTO_R_SET_RETURN void
-#undef PROTOENT_DATA
+#define PROTO_R_SET_RETURN void #undef PROTOENT_DATA
 
 
 
 
 
 #define PASS_R_END_RESULT(x) /*empty*/
-#define PASS_R_END_RETURN void
-#undef PASS_R_ENT_ARGS
+#define PASS_R_END_RETURN void #undef PASS_R_ENT_ARGS
 
 
 #undef PASS_R_SET_RESULT /*empty*/
-#define PASS_R_SET_RETURN void
-
+#define PASS_R_SET_RETURN void 
 #define SERV_R_ARGS char *buf, int buflen
 #define SERV_R_BAD NULL
 #define SERV_R_COPY buf, buflen
 #define SERV_R_COPY_ARGS SERV_R_ARGS
 #define SERV_R_END_RESULT(x) /*empty*/
-#define SERV_R_END_RETURN void
-#undef SERV_R_ENT_ARGS /*empty*/
+#define SERV_R_END_RETURN void #undef SERV_R_ENT_ARGS /*empty*/
 #undef SERV_R_ENT_UNUSED /*empty*/
 #define SERV_R_OK sptr
 #undef SERV_R_SETANSWER
 #define SERV_R_RETURN struct servent *
 #undef SERV_R_SET_RESULT
-#define SERV_R_SET_RETURN void
-
+#define SERV_R_SET_RETURN void 
 
 
 #define DE_CONST(konst, var) \

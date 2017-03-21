@@ -29,15 +29,13 @@ Writer::Target() const
 }
 
 
-void
-Writer::Setup(BDataIO* target)
+void Writer::Setup(BDataIO* target)
 {
 	fTarget = target;
 }
 
 
-status_t
-Writer::Perform(perform_code code, void* data)
+status_t Writer::Perform(perform_code code, void* data)
 {
 	return B_OK;
 }

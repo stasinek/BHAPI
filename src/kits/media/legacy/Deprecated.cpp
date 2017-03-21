@@ -16,40 +16,35 @@
 
 // BMediaRoster
 
-status_t
-BMediaRoster::SetRealtimeFlags(uint32 enabled)
+status_t BMediaRoster::SetRealtimeFlags(uint32 enabled)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
 }
 
 
-status_t
-BMediaRoster::GetRealtimeFlags(uint32* _enabled)
+status_t BMediaRoster::GetRealtimeFlags(uint32* _enabled)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
 }
 
 
-/*static*/ status_t
-BMediaRoster::ParseCommand(BMessage& reply)
+/*static*/ status_t BMediaRoster::ParseCommand(BMessage& reply)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
 }
 
 
-status_t
-BMediaRoster::GetDefaultInfo(media_node_id forDefault, BMessage& config)
+status_t BMediaRoster::GetDefaultInfo(media_node_id forDefault, BMessage& config)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
 }
 
 
-status_t
-BMediaRoster::SetRunningDefault(media_node_id forDefault,
+status_t BMediaRoster::SetRunningDefault(media_node_id forDefault,
 	const media_node& node)
 {
 	UNIMPLEMENTED();
@@ -58,8 +53,7 @@ BMediaRoster::SetRunningDefault(media_node_id forDefault,
 
 
 //! Deprecated call.
-status_t
-BMediaRoster::SetOutputBuffersFor(const media_source& output,
+status_t BMediaRoster::SetOutputBuffersFor(const media_source& output,
 	BBufferGroup* group, bool willReclaim)
 {
 	UNIMPLEMENTED();
@@ -77,8 +71,7 @@ status_t media_realtime_init_thread(thread_id thread, size_t stack_used,
 	uint32 flags);
 
 
-status_t
-launch_media_server(uint32 flags)
+status_t launch_media_server(uint32 flags)
 {
 	return launch_media_server(0, NULL, NULL, flags);
 }
@@ -89,8 +82,7 @@ launch_media_server(uint32 flags)
 //	B_MEDIA_REALTIME_DISABLED is returned.
 //	If there are not enough system resources to enable real-time performance,
 //	B_MEDIA_REALTIME_UNAVAILABLE is returned.
-status_t
-media_realtime_init_image(image_id image, uint32 flags)
+status_t media_realtime_init_image(image_id image, uint32 flags)
 {
 	UNIMPLEMENTED();
 	return B_OK;
@@ -104,8 +96,7 @@ media_realtime_init_image(image_id image, uint32 flags)
 //	256 kB of the stack, so you should pass some smaller value you determine
 //	from profiling the thread; typically in the 32-64kB range.
 //	Return values are the same as for media_prepare_realtime_image().
-status_t
-media_realtime_init_thread(thread_id thread, size_t stack_used, uint32 flags)
+status_t media_realtime_init_thread(thread_id thread, size_t stack_used, uint32 flags)
 {
 	UNIMPLEMENTED();
 	return B_OK;

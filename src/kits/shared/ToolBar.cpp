@@ -31,8 +31,7 @@ LockableButton::LockableButton(const char* name, const char* label,
 }
 
 
-void
-LockableButton::MouseDown(BPoint point)
+void LockableButton::MouseDown(BPoint point)
 {
 	if ((modifiers() & B_SHIFT_KEY) != 0 || Value() == B_CONTROL_ON)
 		SetBehavior(B_TOGGLE_BEHAVIOR);
@@ -71,8 +70,7 @@ BToolBar::~BToolBar()
 }
 
 
-void
-BToolBar::Hide()
+void BToolBar::Hide()
 {
 	BView::Hide();
 	// TODO: This could be fixed in BView instead. Looking from the
@@ -81,16 +79,14 @@ BToolBar::Hide()
 }
 
 
-void
-BToolBar::AddAction(uint32 command, BHandler* target, const BBitmap* icon,
+void BToolBar::AddAction(uint32 command, BHandler* target, const BBitmap* icon,
 	const char* toolTipText, const char* text, bool lockable)
 {
 	AddAction(new BMessage(command), target, icon, toolTipText, text, lockable);
 }
 
 
-void
-BToolBar::AddAction(BMessage* message, BHandler* target,
+void BToolBar::AddAction(BMessage* message, BHandler* target,
 	const BBitmap* icon, const char* toolTipText, const char* text,
 	bool lockable)
 {
@@ -110,8 +106,7 @@ BToolBar::AddAction(BMessage* message, BHandler* target,
 }
 
 
-void
-BToolBar::AddSeparator()
+void BToolBar::AddSeparator()
 {
 	orientation ont = (fOrientation == B_HORIZONTAL) ?
 		B_VERTICAL : B_HORIZONTAL;
@@ -119,38 +114,33 @@ BToolBar::AddSeparator()
 }
 
 
-void
-BToolBar::AddGlue()
+void BToolBar::AddGlue()
 {
 	GroupLayout()->AddItem(BSpaceLayoutItem::CreateGlue());
 }
 
 
-void
-BToolBar::AddView(BView* view)
+void BToolBar::AddView(BView* view)
 {
 	GroupLayout()->AddView(view);
 }
 
 
-void
-BToolBar::SetActionEnabled(uint32 command, bool enabled)
+void BToolBar::SetActionEnabled(uint32 command, bool enabled)
 {
 	if (BButton* button = FindButton(command))
 		button->SetEnabled(enabled);
 }
 
 
-void
-BToolBar::SetActionPressed(uint32 command, bool pressed)
+void BToolBar::SetActionPressed(uint32 command, bool pressed)
 {
 	if (BButton* button = FindButton(command))
 		button->SetValue(pressed);
 }
 
 
-void
-BToolBar::SetActionVisible(uint32 command, bool visible)
+void BToolBar::SetActionVisible(uint32 command, bool visible)
 {
 	BButton* button = FindButton(command);
 	if (button == NULL)
@@ -187,8 +177,7 @@ BToolBar::FindButton(uint32 command) const
 // #pragma mark - Private methods
 
 
-void
-BToolBar::Pulse()
+void BToolBar::Pulse()
 {
 	// TODO: Perhaps this could/should be addressed in BView instead.
 	if (IsHidden())
@@ -196,8 +185,7 @@ BToolBar::Pulse()
 }
 
 
-void
-BToolBar::FrameResized(float width, float height)
+void BToolBar::FrameResized(float width, float height)
 {
 	// TODO: There seems to be a bug in app_server which does not
 	// correctly trigger invalidation of views which are shown, when
@@ -206,8 +194,7 @@ BToolBar::FrameResized(float width, float height)
 }
 
 
-void
-BToolBar::_Init()
+void BToolBar::_Init()
 {
 	float inset = ceilf(__be_control_look->DefaultItemSpacing() / 2);
 	GroupLayout()->SetInsets(inset, 0, inset, 0);
@@ -217,8 +204,7 @@ BToolBar::_Init()
 }
 
 
-void
-BToolBar::_HideToolTips() const
+void BToolBar::_HideToolTips() const
 {
 	for (int32 i = 0; BView* view = ChildAt(i); i++)
 		view->HideToolTip();

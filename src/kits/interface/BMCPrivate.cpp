@@ -149,8 +149,7 @@ _BMCMenuBar_::Instantiate(BMessage* data)
 }
 
 
-void
-_BMCMenuBar_::AttachedToWindow()
+void _BMCMenuBar_::AttachedToWindow()
 {
 	fMenuField = static_cast<BMenuField*>(Parent());
 
@@ -171,8 +170,7 @@ _BMCMenuBar_::AttachedToWindow()
 }
 
 
-void
-_BMCMenuBar_::Draw(BRect updateRect)
+void _BMCMenuBar_::Draw(BRect updateRect)
 {
 	if (fFixedSize) {
 		// Set the width of the menu bar because the menu bar bounds may have
@@ -205,8 +203,7 @@ _BMCMenuBar_::Draw(BRect updateRect)
 }
 
 
-void
-_BMCMenuBar_::FrameResized(float width, float height)
+void _BMCMenuBar_::FrameResized(float width, float height)
 {
 	// we need to take care of cleaning up the parent menu field
 	float diff = width - fPreviousWidth;
@@ -232,8 +229,7 @@ _BMCMenuBar_::FrameResized(float width, float height)
 }
 
 
-void
-_BMCMenuBar_::MakeFocus(bool focused)
+void _BMCMenuBar_::MakeFocus(bool focused)
 {
 	if (IsFocus() == focused)
 		return;
@@ -242,8 +238,7 @@ _BMCMenuBar_::MakeFocus(bool focused)
 }
 
 
-void
-_BMCMenuBar_::MessageReceived(BMessage* message)
+void _BMCMenuBar_::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case 'TICK':
@@ -269,8 +264,7 @@ _BMCMenuBar_::MessageReceived(BMessage* message)
 }
 
 
-void
-_BMCMenuBar_::SetMaxContentWidth(float width)
+void _BMCMenuBar_::SetMaxContentWidth(float width)
 {
 	float left;
 	float right;
@@ -280,8 +274,7 @@ _BMCMenuBar_::SetMaxContentWidth(float width)
 }
 
 
-void
-_BMCMenuBar_::SetEnabled(bool enabled)
+void _BMCMenuBar_::SetEnabled(bool enabled)
 {
 	fMenuField->SetEnabled(enabled);
 
@@ -318,8 +311,7 @@ _BMCMenuBar_::MaxSize()
 //	#pragma mark - _BMCMenuBar_ private methods
 
 
-void
-_BMCMenuBar_::_Init()
+void _BMCMenuBar_::_Init()
 {
 	SetFlags(Flags() | B_FRAME_EVENTS | B_FULL_UPDATE_ON_RESIZE);
 	SetBorder(B_BORDER_CONTENTS);

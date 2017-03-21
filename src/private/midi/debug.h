@@ -25,7 +25,7 @@
 #ifndef MIDI_DEBUG_H
 #define MIDI_DEBUG_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <stdio.h>
 
 #define WARN(args) { fprintf(stderr, "[midi] WARNING: %s\n", args); } 

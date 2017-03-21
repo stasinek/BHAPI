@@ -83,15 +83,13 @@ BMenuScroller::BMenuScroller(BRect frame)
 }
 
 
-bool
-BMenuScroller::IsEnabled() const
+bool BMenuScroller::IsEnabled() const
 {
 	return fEnabled;
 }
 
 
-void
-BMenuScroller::SetEnabled(bool enabled)
+void BMenuScroller::SetEnabled(bool enabled)
 {
 	fEnabled = enabled;
 }
@@ -107,8 +105,7 @@ UpperScroller::UpperScroller(BRect frame)
 }
 
 
-void
-UpperScroller::Draw(BRect updateRect)
+void UpperScroller::Draw(BRect updateRect)
 {
 	SetLowColor(tint_color(ui_color(B_MENU_BACKGROUND_COLOR), B_DARKEN_1_TINT));
 	float middle = Bounds().right / 2;
@@ -139,8 +136,7 @@ LowerScroller::LowerScroller(BRect frame)
 }
 
 
-void
-LowerScroller::Draw(BRect updateRect)
+void LowerScroller::Draw(BRect updateRect)
 {
 	SetLowColor(tint_color(ui_color(B_MENU_BACKGROUND_COLOR), B_DARKEN_1_TINT));
 
@@ -174,8 +170,7 @@ BMenuFrame::BMenuFrame(BMenu *menu)
 }
 
 
-void
-BMenuFrame::AttachedToWindow()
+void BMenuFrame::AttachedToWindow()
 {
 	BView::AttachedToWindow();
 
@@ -191,16 +186,14 @@ BMenuFrame::AttachedToWindow()
 }
 
 
-void
-BMenuFrame::DetachedFromWindow()
+void BMenuFrame::DetachedFromWindow()
 {
 	if (fMenu != NULL)
 		RemoveChild(fMenu);
 }
 
 
-void
-BMenuFrame::Draw(BRect updateRect)
+void BMenuFrame::Draw(BRect updateRect)
 {
 	if (fMenu != NULL && fMenu->CountItems() == 0) {
 		BRect rect(Bounds());
@@ -253,15 +246,13 @@ BMenuWindow::~BMenuWindow()
 }
 
 
-void
-BMenuWindow::DispatchMessage(BMessage *message, BHandler *handler)
+void BMenuWindow::DispatchMessage(BMessage *message, BHandler *handler)
 {
 	BWindow::DispatchMessage(message, handler);
 }
 
 
-void
-BMenuWindow::AttachMenu(BMenu *menu)
+void BMenuWindow::AttachMenu(BMenu *menu)
 {
 	if (fMenuFrame)
 		debugger("BMenuWindow: a menu is already attached!");
@@ -274,8 +265,7 @@ BMenuWindow::AttachMenu(BMenu *menu)
 }
 
 
-void
-BMenuWindow::DetachMenu()
+void BMenuWindow::DetachMenu()
 {
 	DetachScrollers();
 	if (fMenuFrame) {
@@ -287,8 +277,7 @@ BMenuWindow::DetachMenu()
 }
 
 
-void
-BMenuWindow::AttachScrollers()
+void BMenuWindow::AttachScrollers()
 {
 	// We want to attach a scroller only if there's a
 	// menu frame already existing.
@@ -323,8 +312,7 @@ BMenuWindow::AttachScrollers()
 }
 
 
-void
-BMenuWindow::DetachScrollers()
+void BMenuWindow::DetachScrollers()
 {
 	// BeOS doesn't remember the position where the last scrolling ended,
 	// so we just scroll back to the beginning.
@@ -345,15 +333,13 @@ BMenuWindow::DetachScrollers()
 }
 
 
-void
-BMenuWindow::SetSmallStep(float step)
+void BMenuWindow::SetSmallStep(float step)
 {
 	fScrollStep = step;
 }
 
 
-void
-BMenuWindow::GetSteps(float* _smallStep, float* _largeStep) const
+void BMenuWindow::GetSteps(float* _smallStep, float* _largeStep) const
 {
 	if (_smallStep != NULL)
 		*_smallStep = fScrollStep;
@@ -366,16 +352,14 @@ BMenuWindow::GetSteps(float* _smallStep, float* _largeStep) const
 }
 
 
-bool
-BMenuWindow::HasScrollers() const
+bool BMenuWindow::HasScrollers() const
 {
 	return fMenuFrame != NULL && fUpperScroller != NULL
 		&& fLowerScroller != NULL;
 }
 
 
-bool
-BMenuWindow::CheckForScrolling(const BPoint &cursor)
+bool BMenuWindow::CheckForScrolling(const BPoint &cursor)
 {
 	if (!fMenuFrame || !fUpperScroller || !fLowerScroller)
 		return false;
@@ -384,8 +368,7 @@ BMenuWindow::CheckForScrolling(const BPoint &cursor)
 }
 
 
-bool
-BMenuWindow::TryScrollBy(const float& step)
+bool BMenuWindow::TryScrollBy(const float& step)
 {
 	if (!fMenuFrame || !fUpperScroller || !fLowerScroller)
 		return false;
@@ -395,8 +378,7 @@ BMenuWindow::TryScrollBy(const float& step)
 }
 
 
-bool
-BMenuWindow::TryScrollTo(const float& where)
+bool BMenuWindow::TryScrollTo(const float& where)
 {
 	if (!fMenuFrame || !fUpperScroller || !fLowerScroller)
 		return false;
@@ -406,8 +388,7 @@ BMenuWindow::TryScrollTo(const float& where)
 }
 
 
-bool
-BMenuWindow::_Scroll(const BPoint& where)
+bool BMenuWindow::_Scroll(const BPoint& where)
 {
 	ASSERT((fLowerScroller != NULL));
 	ASSERT((fUpperScroller != NULL));
@@ -435,8 +416,7 @@ BMenuWindow::_Scroll(const BPoint& where)
 }
 
 
-void
-BMenuWindow::_ScrollBy(const float& step)
+void BMenuWindow::_ScrollBy(const float& step)
 {
 	if (step > 0) {
 		if (fValue == 0) {

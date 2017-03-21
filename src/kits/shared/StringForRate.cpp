@@ -19,8 +19,7 @@ using BPrivate::gSystemCatalog;
 namespace BPrivate {
 
 
-const char*
-string_for_rate(double rate, char* string, size_t stringSize, double base)
+const char*  string_for_rate(double rate, char* string, size_t stringSize, double base)
 {
 	double kbps = rate / base;
 	if (kbps < 10.0) {

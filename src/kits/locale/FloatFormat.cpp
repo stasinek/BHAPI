@@ -14,15 +14,13 @@ BFloatFormat::~BFloatFormat()
 }
 
 // Format
-status_t
-BFloatFormat::Format(double number, BString *buffer) const
+status_t BFloatFormat::Format(double number, BString *buffer) const
 {
 	return B_ERROR;
 }
 
 // Format
-status_t
-BFloatFormat::Format(double number, BString *buffer,
+status_t BFloatFormat::Format(double number, BString *buffer,
 					 format_field_position *positions, int32 positionCount,
 					 int32 *fieldCount, bool allFieldPositions) const
 {

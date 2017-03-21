@@ -52,31 +52,27 @@ BStatusBar::~BStatusBar()
 }
 
 
-void
-BStatusBar::SetBarHeight(float height)
+void BStatusBar::SetBarHeight(float height)
 {
 	if(fBarHeight != height && height >= 0) fBarHeight = height;
 }
 
 
-void
-BStatusBar::SetText(const char *str)
+void BStatusBar::SetText(const char *str)
 {
 	if(fText) delete[] fText;
 	fText = (str == NULL ? NULL : bhapi::strdup(str));
 }
 
 
-void
-BStatusBar::SetTrailingText(const char *str)
+void BStatusBar::SetTrailingText(const char *str)
 {
 	if(fTrailingText) delete[] fTrailingText;
 	fTrailingText = (str == NULL ? NULL : bhapi::strdup(str));
 }
 
 
-void
-BStatusBar::SetMaxValue(float max)
+void BStatusBar::SetMaxValue(float max)
 {
 	if(fMaxValue != max && max >= 0)
 	{
@@ -86,15 +82,13 @@ BStatusBar::SetMaxValue(float max)
 }
 
 
-void
-BStatusBar::Update(float delta, const char *text, const char *trailing_text)
+void BStatusBar::Update(float delta, const char *text, const char *trailing_text)
 {
 	SetTo(max_c(0.f, min_c(fCurrentValue + delta, fMaxValue)), text, trailing_text);
 }
 
 
-void
-BStatusBar::Reset(const char *label, const char *trailing_label)
+void BStatusBar::Reset(const char *label, const char *trailing_label)
 {
 	SetMaxValue(100);
 	SetTo(0, "", "");
@@ -107,8 +101,7 @@ BStatusBar::Reset(const char *label, const char *trailing_label)
 }
 
 
-void
-BStatusBar::SetTo(float value, const char *text, const char *trailing_text)
+void BStatusBar::SetTo(float value, const char *text, const char *trailing_text)
 {
 	if(value < 0 || value > fMaxValue) return;
 
@@ -149,36 +142,31 @@ BStatusBar::BarHeight() const
 }
 
 
-const char*
-BStatusBar::Text() const
+const char*  BStatusBar::Text() const
 {
 	return fText;
 }
 
 
-const char*
-BStatusBar::TrailingText() const
+const char*  BStatusBar::TrailingText() const
 {
 	return fTrailingText;
 }
 
 
-const char*
-BStatusBar::Label() const
+const char*  BStatusBar::Label() const
 {
 	return fLabel;
 }
 
 
-const char*
-BStatusBar::TrailingLabel() const
+const char*  BStatusBar::TrailingLabel() const
 {
 	return fTrailingLabel;
 }
 
 
-void
-BStatusBar::MessageReceived(BMessage *msg)
+void BStatusBar::MessageReceived(BMessage *msg)
 {
 	switch(msg->what)
 	{
@@ -214,8 +202,7 @@ BStatusBar::MessageReceived(BMessage *msg)
 }
 
 
-void
-BStatusBar::Draw(BRect updateRect)
+void BStatusBar::Draw(BRect updateRect)
 {
 	bhapi::rgb_color shineColor = bhapi::ui_color(B_SHINE_COLOR);
 	bhapi::rgb_color shadowColor = bhapi::ui_color(B_SHADOW_COLOR);
@@ -337,8 +324,7 @@ BStatusBar::Draw(BRect updateRect)
 }
 
 
-void
-BStatusBar::GetPreferredSize(float *width, float *height)
+void BStatusBar::GetPreferredSize(float *width, float *height)
 {
 	if(width == NULL && height == NULL) return;
 

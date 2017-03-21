@@ -49,15 +49,13 @@ BLayoutItem::Layout() const
 }
 
 
-bool
-BLayoutItem::RemoveSelf()
+bool BLayoutItem::RemoveSelf()
 {
 	return Layout() != NULL && Layout()->RemoveItem(this);
 }
 
 
-void
-BLayoutItem::SetExplicitSize(BSize size)
+void BLayoutItem::SetExplicitSize(BSize size)
 {
 	SetExplicitMinSize(size);
 	SetExplicitMaxSize(size);
@@ -65,16 +63,14 @@ BLayoutItem::SetExplicitSize(BSize size)
 }
 
 
-bool
-BLayoutItem::HasHeightForWidth()
+bool BLayoutItem::HasHeightForWidth()
 {
 	// no "height for width" by default
 	return false;
 }
 
 
-void
-BLayoutItem::GetHeightForWidth(float width, float* min, float* max,
+void BLayoutItem::GetHeightForWidth(float width, float* min, float* max,
 	float* preferred)
 {
 	// no "height for width" by default
@@ -88,8 +84,7 @@ BLayoutItem::View()
 }
 
 
-void
-BLayoutItem::InvalidateLayout(bool children)
+void BLayoutItem::InvalidateLayout(bool children)
 {
 	LayoutInvalidated(children);
 	if (fLayout)
@@ -97,8 +92,7 @@ BLayoutItem::InvalidateLayout(bool children)
 }
 
 
-void
-BLayoutItem::Relayout(bool immediate)
+void BLayoutItem::Relayout(bool immediate)
 {
 	BView* view = View();
 	if (view && !immediate)
@@ -108,22 +102,19 @@ BLayoutItem::Relayout(bool immediate)
 }
 
 
-void*
-BLayoutItem::LayoutData() const
+void*   BLayoutItem::LayoutData() const
 {
 	return fLayoutData;
 }
 
 
-void
-BLayoutItem::SetLayoutData(void* data)
+void BLayoutItem::SetLayoutData(void* data)
 {
 	fLayoutData = data;
 }
 
 
-void
-BLayoutItem::AlignInFrame(BRect frame)
+void BLayoutItem::AlignInFrame(BRect frame)
 {
 	BSize maxSize = MaxSize();
 	BAlignment alignment = Alignment();
@@ -150,8 +141,7 @@ BLayoutItem::AlignInFrame(BRect frame)
 }
 
 
-status_t
-BLayoutItem::Archive(BMessage* into, bool deep) const
+status_t BLayoutItem::Archive(BMessage* into, bool deep) const
 {
 	BArchiver archiver(into);
 	status_t err = BArchivable::Archive(into, deep);
@@ -163,23 +153,20 @@ BLayoutItem::Archive(BMessage* into, bool deep) const
 }
 
 
-status_t
-BLayoutItem::AllArchived(BMessage* into) const
+status_t BLayoutItem::AllArchived(BMessage* into) const
 {
 	BArchiver archiver(into);
 	return BArchivable::AllArchived(into);
 }
 
 
-status_t
-BLayoutItem::AllUnarchived(const BMessage* from)
+status_t BLayoutItem::AllUnarchived(const BMessage* from)
 {
 	return BArchivable::AllUnarchived(from);
 }
 
 
-void
-BLayoutItem::SetLayout(BLayout* layout)
+void BLayoutItem::SetLayout(BLayout* layout)
 {
 	if (layout == fLayout)
 		return;
@@ -203,36 +190,31 @@ BLayoutItem::SetLayout(BLayout* layout)
 }
 
 
-status_t
-BLayoutItem::Perform(perform_code code, void* _data)
+status_t BLayoutItem::Perform(perform_code code, void* _data)
 {
 	return BArchivable::Perform(code, _data);
 }
 
 
-void
-BLayoutItem::LayoutInvalidated(bool children)
+void BLayoutItem::LayoutInvalidated(bool children)
 {
 	// hook method
 }
 
 
-void
-BLayoutItem::AttachedToLayout()
+void BLayoutItem::AttachedToLayout()
 {
 	// hook method
 }
 
 
-void
-BLayoutItem::DetachedFromLayout(BLayout* oldLayout)
+void BLayoutItem::DetachedFromLayout(BLayout* oldLayout)
 {
 	// hook method
 }
 
 
-void
-BLayoutItem::AncestorVisibilityChanged(bool shown)
+void BLayoutItem::AncestorVisibilityChanged(bool shown)
 {
 	// hook method
 }

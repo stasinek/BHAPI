@@ -197,8 +197,7 @@ SelectionWindow::SelectionWindow(BContainerWindow* window)
 }
 
 
-void
-SelectionWindow::MessageReceived(BMessage* message)
+void SelectionWindow::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case kSelectButtonPressed:
@@ -228,16 +227,14 @@ SelectionWindow::MessageReceived(BMessage* message)
 }
 
 
-bool
-SelectionWindow::QuitRequested()
+bool SelectionWindow::QuitRequested()
 {
 	Hide();
 	return false;
 }
 
 
-void
-SelectionWindow::MoveCloseToMouse()
+void SelectionWindow::MoveCloseToMouse()
 {
 	uint32 buttons;
 	BPoint mousePosition;
@@ -288,8 +285,7 @@ SelectionWindow::ExpressionType() const
 }
 
 
-void
-SelectionWindow::Expression(BString &result) const
+void SelectionWindow::Expression(BString &result) const
 {
 	if (!fExpressionTextControl->LockLooper())
 		return;
@@ -300,8 +296,7 @@ SelectionWindow::Expression(BString &result) const
 }
 
 
-bool
-SelectionWindow::IgnoreCase() const
+bool SelectionWindow::IgnoreCase() const
 {
 	if (!fIgnoreCaseCheckBox->LockLooper()) {
 		// default action
@@ -316,8 +311,7 @@ SelectionWindow::IgnoreCase() const
 }
 
 
-bool
-SelectionWindow::Invert() const
+bool SelectionWindow::Invert() const
 {
 	if (!fInverseCheckBox->LockLooper()) {
 		// default action

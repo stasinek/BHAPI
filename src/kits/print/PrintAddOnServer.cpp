@@ -26,8 +26,7 @@ PrintAddOnServer::~PrintAddOnServer()
 }
 
 
-status_t
-PrintAddOnServer::AddPrinter(const char* spoolFolderName)
+status_t PrintAddOnServer::AddPrinter(const char* spoolFolderName)
 {
 	BMessage message(kMessageAddPrinter);
 	message.AddString(kPrinterDriverAttribute, Driver());
@@ -42,8 +41,7 @@ PrintAddOnServer::AddPrinter(const char* spoolFolderName)
 }
 
 
-status_t
-PrintAddOnServer::ConfigPage(BDirectory* spoolFolder,
+status_t PrintAddOnServer::ConfigPage(BDirectory* spoolFolder,
 	BMessage* settings)
 {
 	BMessage message(kMessageConfigPage);
@@ -60,8 +58,7 @@ PrintAddOnServer::ConfigPage(BDirectory* spoolFolder,
 }
 
 
-status_t
-PrintAddOnServer::ConfigJob(BDirectory* spoolFolder,
+status_t PrintAddOnServer::ConfigJob(BDirectory* spoolFolder,
 	BMessage* settings)
 {
 	BMessage message(kMessageConfigJob);
@@ -78,8 +75,7 @@ PrintAddOnServer::ConfigJob(BDirectory* spoolFolder,
 }
 
 
-status_t
-PrintAddOnServer::DefaultSettings(BDirectory* spoolFolder,
+status_t PrintAddOnServer::DefaultSettings(BDirectory* spoolFolder,
 	BMessage* settings)
 {
 	BMessage message(kMessageDefaultSettings);
@@ -95,8 +91,7 @@ PrintAddOnServer::DefaultSettings(BDirectory* spoolFolder,
 }
 
 
-status_t
-PrintAddOnServer::TakeJob(const char* spoolFile,
+status_t PrintAddOnServer::TakeJob(const char* spoolFile,
 				BDirectory* spoolFolder)
 {
 	BMessage message(kMessageTakeJob);
@@ -113,22 +108,19 @@ PrintAddOnServer::TakeJob(const char* spoolFile,
 }
 
 
-status_t
-PrintAddOnServer::FindPathToDriver(const char* driver, BPath* path)
+status_t PrintAddOnServer::FindPathToDriver(const char* driver, BPath* path)
 {
 	return PrinterDriverAddOn::FindPathToDriver(driver, path);
 }
 
 
-const char*
-PrintAddOnServer::Driver() const
+const char*  PrintAddOnServer::Driver() const
 {
 	return fDriver.String();
 }
 
 
-status_t
-PrintAddOnServer::Launch(BMessenger& messenger)
+status_t PrintAddOnServer::Launch(BMessenger& messenger)
 {
 	team_id team;
 	status_t result =
@@ -143,15 +135,13 @@ PrintAddOnServer::Launch(BMessenger& messenger)
 }
 
 
-bool
-PrintAddOnServer::IsLaunched()
+bool PrintAddOnServer::IsLaunched()
 {
 	return fLaunchStatus == B_OK;
 }
 
 
-void
-PrintAddOnServer::Quit()
+void PrintAddOnServer::Quit()
 {
 	if (fLaunchStatus == B_OK) {
 		fMessenger.SendMessage(B_QUIT_REQUESTED);
@@ -160,8 +150,7 @@ PrintAddOnServer::Quit()
 }
 
 
-void
-PrintAddOnServer::AddDirectory(BMessage& message, const char* name,
+void PrintAddOnServer::AddDirectory(BMessage& message, const char* name,
 	BDirectory* directory)
 {
 	BEntry entry;
@@ -177,8 +166,7 @@ PrintAddOnServer::AddDirectory(BMessage& message, const char* name,
 }
 
 
-void
-PrintAddOnServer::AddEntryRef(BMessage& message, const char* name,
+void PrintAddOnServer::AddEntryRef(BMessage& message, const char* name,
 	const entry_ref* entryRef)
 {
 	BPath path(entryRef);
@@ -189,8 +177,7 @@ PrintAddOnServer::AddEntryRef(BMessage& message, const char* name,
 }
 
 
-status_t
-PrintAddOnServer::SendRequest(BMessage& request, BMessage& reply)
+status_t PrintAddOnServer::SendRequest(BMessage& request, BMessage& reply)
 {
 	if (!IsLaunched())
 		return fLaunchStatus;
@@ -200,8 +187,7 @@ PrintAddOnServer::SendRequest(BMessage& request, BMessage& reply)
 }
 
 
-status_t
-PrintAddOnServer::GetResult(BMessage& reply)
+status_t PrintAddOnServer::GetResult(BMessage& reply)
 {
 	int32 status;
 	status_t result = reply.FindInt32(kPrintAddOnServerStatusAttribute,
@@ -212,8 +198,7 @@ PrintAddOnServer::GetResult(BMessage& reply)
 }
 
 
-status_t
-PrintAddOnServer::GetResultAndUpdateSettings(BMessage& reply, BMessage* settings)
+status_t PrintAddOnServer::GetResultAndUpdateSettings(BMessage& reply, BMessage* settings)
 {
 	BMessage newSettings;
 	if (reply.FindMessage(kPrintSettingsAttribute, &newSettings) == B_OK)

@@ -129,8 +129,7 @@
 
 #include <stdio.h>
 
-  static const char*
-  af_dir_str( AF_Direction  dir )
+  static const char*    af_dir_str( AF_Direction  dir )
   {
     const char*  result;
 
@@ -194,8 +193,7 @@
   }
 
 
-  static const char*
-  af_edge_flags_to_string( AF_Edge_Flags  flags )
+  static const char*    af_edge_flags_to_string( AF_Edge_Flags  flags )
   {
     static char  temp[32];
     int          pos = 0;

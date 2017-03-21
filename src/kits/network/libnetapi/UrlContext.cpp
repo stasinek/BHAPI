@@ -47,15 +47,13 @@ BUrlContext::~BUrlContext()
 // #pragma mark Context modifiers
 
 
-void
-BUrlContext::SetCookieJar(const BNetworkCookieJar& cookieJar)
+void BUrlContext::SetCookieJar(const BNetworkCookieJar& cookieJar)
 {
 	fCookieJar = cookieJar;
 }
 
 
-void
-BUrlContext::AddAuthentication(const BUrl& url,
+void BUrlContext::AddAuthentication(const BUrl& url,
 	const BHttpAuthentication& authentication)
 {
 	BString domain = url.Host();
@@ -78,16 +76,14 @@ BUrlContext::AddAuthentication(const BUrl& url,
 }
 
 
-void
-BUrlContext::SetProxy(BString host, uint16 port)
+void BUrlContext::SetProxy(BString host, uint16 port)
 {
 	fProxyHost = host;
 	fProxyPort = port;
 }
 
 
-void
-BUrlContext::AddCertificateException(const BCertificate& certificate)
+void BUrlContext::AddCertificateException(const BCertificate& certificate)
 {
 	BCertificate* copy = new(std::nothrow) BCertificate(certificate);
 	if (copy != NULL) {
@@ -126,8 +122,7 @@ BUrlContext::GetAuthentication(const BUrl& url)
 }
 
 
-bool
-BUrlContext::UseProxy()
+bool BUrlContext::UseProxy()
 {
 	return !fProxyHost.IsEmpty();
 }
@@ -147,8 +142,7 @@ BUrlContext::GetProxyPort()
 }
 
 
-bool
-BUrlContext::HasCertificateException(const BCertificate& certificate)
+bool BUrlContext::HasCertificateException(const BCertificate& certificate)
 {
 	struct Equals: public UnaryPredicate<const BCertificate> {
 		Equals(const BCertificate& itemToMatch)

@@ -31,8 +31,7 @@ BRepositoryReader::~BRepositoryReader()
 }
 
 
-status_t
-BRepositoryReader::Init(const char* fileName)
+status_t BRepositoryReader::Init(const char* fileName)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;
@@ -41,8 +40,7 @@ BRepositoryReader::Init(const char* fileName)
 }
 
 
-status_t
-BRepositoryReader::ParseContent(BRepositoryContentHandler* contentHandler)
+status_t BRepositoryReader::ParseContent(BRepositoryContentHandler* contentHandler)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;

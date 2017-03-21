@@ -45,8 +45,7 @@ AppMetaMimeCreator::~AppMetaMimeCreator()
 }
 
 
-status_t
-AppMetaMimeCreator::Do(const entry_ref& entry, bool* _entryIsDir)
+status_t AppMetaMimeCreator::Do(const entry_ref& entry, bool* _entryIsDir)
 {
 	BFile file;
 	status_t status = file.SetTo(&entry, B_READ_ONLY | O_NOTRAVERSE);

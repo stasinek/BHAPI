@@ -34,22 +34,19 @@ FT_BEGIN_HEADER
                        FT_Int         num_params,
                        FT_Parameter*  parameters );
 
-  typedef void
-  (*FT_Face_DoneFunc)( FT_Face  face );
+  typedef void   (*FT_Face_DoneFunc)( FT_Face  face );
 
 
   typedef FT_Error
   (*FT_Size_InitFunc)( FT_Size  size );
 
-  typedef void
-  (*FT_Size_DoneFunc)( FT_Size  size );
+  typedef void   (*FT_Size_DoneFunc)( FT_Size  size );
 
 
   typedef FT_Error
   (*FT_Slot_InitFunc)( FT_GlyphSlot  slot );
 
-  typedef void
-  (*FT_Slot_DoneFunc)( FT_GlyphSlot  slot );
+  typedef void   (*FT_Slot_DoneFunc)( FT_GlyphSlot  slot );
 
 
   typedef FT_Error

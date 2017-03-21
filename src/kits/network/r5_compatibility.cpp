@@ -93,8 +93,7 @@ find_net_setting(net_settings* settings, const char* heading,
 }
 
 
-status_t
-set_net_setting(net_settings* settings, const char* heading,
+status_t set_net_setting(net_settings* settings, const char* heading,
 	const char* name, const char* value)
 {
 	return B_UNSUPPORTED;

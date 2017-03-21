@@ -36,7 +36,7 @@
 
 #include <string.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 #include <ParameterWeb.h>
 #include <Roster.h>
 
@@ -123,8 +123,7 @@ BControllable::Web()
 }
 
 
-bool
-BControllable::LockParameterWeb()
+bool BControllable::LockParameterWeb()
 {
 	CALLED();
 	if (fSem <= 0)
@@ -143,8 +142,7 @@ BControllable::LockParameterWeb()
 }
 
 
-void
-BControllable::UnlockParameterWeb()
+void BControllable::UnlockParameterWeb()
 {
 	CALLED();
 	if (fSem <= 0)
@@ -170,8 +168,7 @@ BControllable::BControllable()
 }
 
 
-status_t
-BControllable::SetParameterWeb(BParameterWeb* web)
+status_t BControllable::SetParameterWeb(BParameterWeb* web)
 {
 	CALLED();
 
@@ -193,8 +190,7 @@ BControllable::SetParameterWeb(BParameterWeb* web)
 }
 
 
-status_t
-BControllable::HandleMessage(int32 message, const void* data, size_t size)
+status_t BControllable::HandleMessage(int32 message, const void* data, size_t size)
 {
 	PRINT(4, "BControllable::HandleMessage %#lx, node %ld\n", message, ID());
 
@@ -315,16 +311,14 @@ BControllable::HandleMessage(int32 message, const void* data, size_t size)
 }
 
 
-status_t
-BControllable::BroadcastChangedParameter(int32 id)
+status_t BControllable::BroadcastChangedParameter(int32 id)
 {
 	CALLED();
 	return BPrivate::media::notifications::ParameterChanged(Node(), id);
 }
 
 
-status_t
-BControllable::BroadcastNewParameterValue(bigtime_t when, int32 id,
+status_t BControllable::BroadcastNewParameterValue(bigtime_t when, int32 id,
 	void* newValue, size_t valueSize)
 {
 	CALLED();
@@ -333,8 +327,7 @@ BControllable::BroadcastNewParameterValue(bigtime_t when, int32 id,
 }
 
 
-status_t
-BControllable::StartControlPanel(BMessenger* _messenger)
+status_t BControllable::StartControlPanel(BMessenger* _messenger)
 {
 	CALLED();
 
@@ -377,8 +370,7 @@ BControllable::StartControlPanel(BMessenger* _messenger)
 }
 
 
-status_t
-BControllable::ApplyParameterData(const void* value, size_t size)
+status_t BControllable::ApplyParameterData(const void* value, size_t size)
 {
 	UNIMPLEMENTED();
 
@@ -386,8 +378,7 @@ BControllable::ApplyParameterData(const void* value, size_t size)
 }
 
 
-status_t
-BControllable::MakeParameterData(const int32* controls, int32 count,
+status_t BControllable::MakeParameterData(const int32* controls, int32 count,
 	void* buffer, size_t* ioSize)
 {
 	UNIMPLEMENTED();

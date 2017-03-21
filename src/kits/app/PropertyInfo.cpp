@@ -67,8 +67,7 @@ int32 BPropertyInfo::FindMatch(BMessage* message, int32 index,
 }
 
 
-bool
-BPropertyInfo::IsFixedSize() const
+bool BPropertyInfo::IsFixedSize() const
 {
 	return false;
 }
@@ -147,8 +146,7 @@ BPropertyInfo::FlattenedSize() const
 }
 
 
-status_t
-BPropertyInfo::Flatten(void* buffer, ssize_t numBytes) const
+status_t BPropertyInfo::Flatten(void* buffer, ssize_t numBytes) const
 {
 	if (numBytes < FlattenedSize())
 		return B_NO_MEMORY;
@@ -236,15 +234,13 @@ BPropertyInfo::Flatten(void* buffer, ssize_t numBytes) const
 }
 
 
-bool
-BPropertyInfo::AllowsTypeCode(type_code code) const
+bool BPropertyInfo::AllowsTypeCode(type_code code) const
 {
 	return code == B_PROPERTY_INFO_TYPE;
 }
 
 
-status_t
-BPropertyInfo::Unflatten(type_code code, const void* buffer,
+status_t BPropertyInfo::Unflatten(type_code code, const void* buffer,
 	ssize_t numBytes)
 {
 	if (!AllowsTypeCode(code))
@@ -385,22 +381,19 @@ BPropertyInfo::Values() const
 }
 
 
-int32
-BPropertyInfo::CountProperties() const
+int32 BPropertyInfo::CountProperties() const
 {
 	return fPropCount;
 }
 
 
-int32
-BPropertyInfo::CountValues() const
+int32 BPropertyInfo::CountValues() const
 {
 	return fValueCount;
 }
 
 
-void
-BPropertyInfo::PrintToStream() const
+void BPropertyInfo::PrintToStream() const
 {
 	printf("      property   commands                       types                specifiers\n");
 	printf("--------------------------------------------------------------------------------\n");
@@ -433,8 +426,7 @@ BPropertyInfo::PrintToStream() const
 }
 
 
-bool
-BPropertyInfo::FindCommand(uint32 what, int32 index, property_info *propertyInfo)
+bool BPropertyInfo::FindCommand(uint32 what, int32 index, property_info *propertyInfo)
 {
 	bool result = false;
 
@@ -453,8 +445,7 @@ BPropertyInfo::FindCommand(uint32 what, int32 index, property_info *propertyInfo
 }
 
 
-bool
-BPropertyInfo::FindSpecifier(uint32 form, property_info *propertyInfo)
+bool BPropertyInfo::FindSpecifier(uint32 form, property_info *propertyInfo)
 {
 	bool result = false;
 
@@ -491,8 +482,7 @@ BPropertyInfo::operator=(const BPropertyInfo &)
 }
 
 
-void
-BPropertyInfo::FreeMem()
+void BPropertyInfo::FreeMem()
 {
 	int i, j, k;
 

@@ -62,15 +62,13 @@ _BTextInput_::Instantiate(BMessage* archive)
 }
 
 
-status_t
-_BTextInput_::Archive(BMessage* data, bool deep) const
+status_t _BTextInput_::Archive(BMessage* data, bool deep) const
 {
 	return BTextView::Archive(data, true);
 }
 
 
-void
-_BTextInput_::MouseDown(BPoint where)
+void _BTextInput_::MouseDown(BPoint where)
 {
 	if (!IsFocus()) {
 		MakeFocus(true);
@@ -82,8 +80,7 @@ _BTextInput_::MouseDown(BPoint where)
 }
 
 
-void
-_BTextInput_::FrameResized(float width, float height)
+void _BTextInput_::FrameResized(float width, float height)
 {
 	BTextView::FrameResized(width, height);
 
@@ -91,8 +88,7 @@ _BTextInput_::FrameResized(float width, float height)
 }
 
 
-void
-_BTextInput_::KeyDown(const char* bytes, int32 numBytes)
+void _BTextInput_::KeyDown(const char* bytes, int32 numBytes)
 {
 	switch (*bytes) {
 		case B_ENTER:
@@ -121,8 +117,7 @@ _BTextInput_::KeyDown(const char* bytes, int32 numBytes)
 }
 
 
-void
-_BTextInput_::MakeFocus(bool state)
+void _BTextInput_::MakeFocus(bool state)
 {
 	if (state == IsFocus())
 		return;
@@ -163,8 +158,7 @@ _BTextInput_::MinSize()
 }
 
 
-void
-_BTextInput_::AlignTextRect()
+void _BTextInput_::AlignTextRect()
 {
 	// the label font could require the control to be higher than
 	// necessary for the text view, we compensate this by layouting
@@ -201,8 +195,7 @@ _BTextInput_::AlignTextRect()
 }
 
 
-void
-_BTextInput_::SetInitialText()
+void _BTextInput_::SetInitialText()
 {
 	free(fPreviousText);
 	fPreviousText = NULL;
@@ -212,16 +205,14 @@ _BTextInput_::SetInitialText()
 }
 
 
-void
-_BTextInput_::Paste(BClipboard* clipboard)
+void _BTextInput_::Paste(BClipboard* clipboard)
 {
 	BTextView::Paste(clipboard);
 	Invalidate();
 }
 
 
-void
-_BTextInput_::InsertText(const char* inText, int32 inLength,
+void _BTextInput_::InsertText(const char* inText, int32 inLength,
 	int32 inOffset, const text_run_array* inRuns)
 {
 	// Filter all line breaks, note that inText is not terminated.
@@ -243,8 +234,7 @@ _BTextInput_::InsertText(const char* inText, int32 inLength,
 }
 
 
-void
-_BTextInput_::DeleteText(int32 fromOffset, int32 toOffset)
+void _BTextInput_::DeleteText(int32 fromOffset, int32 toOffset)
 {
 	BTextView::DeleteText(fromOffset, toOffset);
 

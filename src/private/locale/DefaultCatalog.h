@@ -63,8 +63,7 @@ class DefaultCatalog : public HashMapCatalog {
 };
 
 
-extern "C" status_t
-default_catalog_get_available_languages(BMessage* availableLanguages,
+extern "C" status_t default_catalog_get_available_languages(BMessage* availableLanguages,
 	const char* sigPattern, const char* langPattern = NULL,
 	int32 fingerprint = 0);
 

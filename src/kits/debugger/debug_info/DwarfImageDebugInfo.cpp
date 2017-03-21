@@ -366,8 +366,7 @@ DwarfImageDebugInfo::~DwarfImageDebugInfo()
 }
 
 
-status_t
-DwarfImageDebugInfo::Init()
+status_t DwarfImageDebugInfo::Init()
 {
 	status_t error = fLock.InitCheck();
 	if (error != B_OK)
@@ -395,8 +394,7 @@ DwarfImageDebugInfo::Init()
 }
 
 
-status_t
-DwarfImageDebugInfo::GetFunctions(const BObjectList<SymbolInfo>& symbols,
+status_t DwarfImageDebugInfo::GetFunctions(const BObjectList<SymbolInfo>& symbols,
 	BObjectList<FunctionDebugInfo>& functions)
 {
 	TRACE_IMAGES("DwarfImageDebugInfo::GetFunctions()\n");
@@ -522,8 +520,7 @@ DwarfImageDebugInfo::GetFunctions(const BObjectList<SymbolInfo>& symbols,
 }
 
 
-status_t
-DwarfImageDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
+status_t DwarfImageDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
 	const TypeLookupConstraints& constraints, Type*& _type)
 {
 	TypeNameEntry* entry = fTypeNameTable->Lookup(name);
@@ -570,8 +567,7 @@ DwarfImageDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
 }
 
 
-bool
-DwarfImageDebugInfo::HasType(const BString& name,
+bool DwarfImageDebugInfo::HasType(const BString& name,
 	const TypeLookupConstraints& constraints) const
 {
 	TypeNameEntry* entry = fTypeNameTable->Lookup(name);
@@ -616,8 +612,7 @@ DwarfImageDebugInfo::GetAddressSectionType(target_addr_t address)
 }
 
 
-status_t
-DwarfImageDebugInfo::CreateFrame(Image* image,
+status_t DwarfImageDebugInfo::CreateFrame(Image* image,
 	FunctionInstance* functionInstance, CpuState* cpuState,
 	bool getFullFrameInfo, ReturnValueInfoList* returnValueInfos,
 	StackFrame*& _frame, CpuState*& _previousCpuState)
@@ -785,8 +780,7 @@ DwarfImageDebugInfo::CreateFrame(Image* image,
 }
 
 
-status_t
-DwarfImageDebugInfo::GetStatement(FunctionDebugInfo* _function,
+status_t DwarfImageDebugInfo::GetStatement(FunctionDebugInfo* _function,
 	target_addr_t address, Statement*& _statement)
 {
 	TRACE_CODE("DwarfImageDebugInfo::GetStatement(function: %p, address: %#"
@@ -880,8 +874,7 @@ DwarfImageDebugInfo::GetStatement(FunctionDebugInfo* _function,
 }
 
 
-status_t
-DwarfImageDebugInfo::GetStatementAtSourceLocation(FunctionDebugInfo* _function,
+status_t DwarfImageDebugInfo::GetStatementAtSourceLocation(FunctionDebugInfo* _function,
 	const SourceLocation& sourceLocation, Statement*& _statement)
 {
 	DwarfFunctionDebugInfo* function
@@ -973,8 +966,7 @@ DwarfImageDebugInfo::GetStatementAtSourceLocation(FunctionDebugInfo* _function,
 }
 
 
-status_t
-DwarfImageDebugInfo::GetSourceLanguage(FunctionDebugInfo* _function,
+status_t DwarfImageDebugInfo::GetSourceLanguage(FunctionDebugInfo* _function,
 	SourceLanguage*& _language)
 {
 	DwarfFunctionDebugInfo* function
@@ -1017,8 +1009,7 @@ DwarfImageDebugInfo::ReadCode(target_addr_t address, void* buffer, size_t size)
 }
 
 
-status_t
-DwarfImageDebugInfo::AddSourceCodeInfo(LocatableFile* file,
+status_t DwarfImageDebugInfo::AddSourceCodeInfo(LocatableFile* file,
 	FileSourceCode* sourceCode)
 {
 	bool addedAny = false;
@@ -1038,8 +1029,7 @@ DwarfImageDebugInfo::AddSourceCodeInfo(LocatableFile* file,
 }
 
 
-status_t
-DwarfImageDebugInfo::_AddSourceCodeInfo(CompilationUnit* unit,
+status_t DwarfImageDebugInfo::_AddSourceCodeInfo(CompilationUnit* unit,
 	FileSourceCode* sourceCode, int32 fileIndex)
 {
 	// Get the statements by executing the line number program for the
@@ -1095,8 +1085,7 @@ DwarfImageDebugInfo::_AddSourceCodeInfo(CompilationUnit* unit,
 }
 
 
-int32
-DwarfImageDebugInfo::_GetSourceFileIndex(CompilationUnit* unit,
+int32 DwarfImageDebugInfo::_GetSourceFileIndex(CompilationUnit* unit,
 	LocatableFile* sourceFile) const
 {
 	// get the index of the source file in the compilation unit for cheaper
@@ -1117,8 +1106,7 @@ DwarfImageDebugInfo::_GetSourceFileIndex(CompilationUnit* unit,
 }
 
 
-status_t
-DwarfImageDebugInfo::_CreateLocalVariables(CompilationUnit* unit,
+status_t DwarfImageDebugInfo::_CreateLocalVariables(CompilationUnit* unit,
 	StackFrame* frame, FunctionID* functionID,
 	DwarfStackFrameDebugInfo& factory, target_addr_t instructionPointer,
 	target_addr_t lowPC, const EntryListWrapper& variableEntries,
@@ -1194,8 +1182,7 @@ DwarfImageDebugInfo::_CreateLocalVariables(CompilationUnit* unit,
 }
 
 
-status_t
-DwarfImageDebugInfo::_CreateReturnValues(ReturnValueInfoList* returnValueInfos,
+status_t DwarfImageDebugInfo::_CreateReturnValues(ReturnValueInfoList* returnValueInfos,
 	Image* image, StackFrame* frame, DwarfStackFrameDebugInfo& factory)
 {
 	for (int32 i = 0; i < returnValueInfos->CountItems(); i++) {
@@ -1307,8 +1294,7 @@ DwarfImageDebugInfo::_CreateReturnValues(ReturnValueInfoList* returnValueInfos,
 }
 
 
-bool
-DwarfImageDebugInfo::_EvaluateBaseTypeConstraints(DIEType* type,
+bool DwarfImageDebugInfo::_EvaluateBaseTypeConstraints(DIEType* type,
 	const TypeLookupConstraints& constraints) const
 {
 	if (constraints.HasBaseTypeName()) {
@@ -1353,8 +1339,7 @@ DwarfImageDebugInfo::_EvaluateBaseTypeConstraints(DIEType* type,
 }
 
 
-status_t
-DwarfImageDebugInfo::_BuildTypeNameTable()
+status_t DwarfImageDebugInfo::_BuildTypeNameTable()
 {
 	fTypeNameTable = new(std::nothrow) TypeNameTable;
 	if (fTypeNameTable == NULL)

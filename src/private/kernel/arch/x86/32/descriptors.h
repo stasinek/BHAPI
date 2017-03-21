@@ -91,15 +91,13 @@ typedef segment_descriptor global_descriptor_table[GDT_SEGMENT_COUNT];
 extern global_descriptor_table gGDTs[];
 
 
-static inline void
-clear_segment_descriptor(segment_descriptor* desc)
+static inline void clear_segment_descriptor(segment_descriptor* desc)
 {
 	*(long long*)desc = 0;
 }
 
 
-static inline void
-set_segment_descriptor_base(segment_descriptor* desc, addr_t base)
+static inline void set_segment_descriptor_base(segment_descriptor* desc, addr_t base)
 {
 	desc->base_00_15 = (addr_t)base & 0xffff;	// base is 32 bits long
 	desc->base_23_16 = ((addr_t)base >> 16) & 0xff;
@@ -107,8 +105,7 @@ set_segment_descriptor_base(segment_descriptor* desc, addr_t base)
 }
 
 
-static inline void
-set_segment_descriptor(segment_descriptor* desc, addr_t base, uint32 limit,
+static inline void set_segment_descriptor(segment_descriptor* desc, addr_t base, uint32 limit,
 	uint8 type, uint8 privilegeLevel)
 {
 	set_segment_descriptor_base(desc, base);
@@ -136,8 +133,7 @@ set_segment_descriptor(segment_descriptor* desc, addr_t base, uint32 limit,
 }
 
 
-static inline void
-set_tss_descriptor(segment_descriptor* desc, addr_t base, uint32 limit)
+static inline void set_tss_descriptor(segment_descriptor* desc, addr_t base, uint32 limit)
 {
 	// the TSS descriptor has a special layout different from the standard descriptor
 	set_segment_descriptor_base(desc, base);

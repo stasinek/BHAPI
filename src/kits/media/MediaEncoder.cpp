@@ -36,31 +36,27 @@ BMediaEncoder::~BMediaEncoder()
 }
 
 
-status_t 
-BMediaEncoder::InitCheck() const
+status_t BMediaEncoder::InitCheck() const
 {
 	UNIMPLEMENTED();
 
 	return B_OK;
 }
 
-status_t 
-BMediaEncoder::SetTo(const media_format *output_format)
+status_t BMediaEncoder::SetTo(const media_format *output_format)
 {
 	UNIMPLEMENTED();
 	return B_OK;
 }
 
-status_t 
-BMediaEncoder::SetTo(const media_codec_info *mci)
+status_t BMediaEncoder::SetTo(const media_codec_info *mci)
 {
 	UNIMPLEMENTED();
 	return B_OK;
 }
 
 
-status_t 
-BMediaEncoder::SetFormat(media_format *input_format,
+status_t BMediaEncoder::SetFormat(media_format *input_format,
 						 media_format *output_format,
 						 media_file_format *mfi)
 {
@@ -68,8 +64,7 @@ BMediaEncoder::SetFormat(media_format *input_format,
 	return B_OK;
 }
 
-status_t 
-BMediaEncoder::Encode(const void *buffer, 
+status_t BMediaEncoder::Encode(const void *buffer, 
 					  int64 frame_count,
 					  media_encode_info *info)
 {
@@ -78,16 +73,14 @@ BMediaEncoder::Encode(const void *buffer,
 }
 
 
-status_t 
-BMediaEncoder::GetEncodeParameters(encode_parameters *parameters) const
+status_t BMediaEncoder::GetEncodeParameters(encode_parameters *parameters) const
 {
 	UNIMPLEMENTED();
 	return B_OK;
 }
 
 
-status_t 
-BMediaEncoder::SetEncodeParameters(encode_parameters *parameters)
+status_t BMediaEncoder::SetEncodeParameters(encode_parameters *parameters)
 {
 	UNIMPLEMENTED();
 	return B_OK;
@@ -98,8 +91,7 @@ BMediaEncoder::SetEncodeParameters(encode_parameters *parameters)
  * protected BMediaEncoder
  *************************************************************/
 
-/* virtual */ status_t 
-BMediaEncoder::AddTrackInfo(uint32 code, const char *data, size_t size)
+/* virtual */ status_t BMediaEncoder::AddTrackInfo(uint32 code, const char *data, size_t size)
 {
 	UNIMPLEMENTED();
 	return B_OK;
@@ -116,8 +108,7 @@ BMediaEncoder::BMediaEncoder(const BMediaEncoder &);
 BMediaEncoder::BMediaEncoder & operator=(const BMediaEncoder &);
 */
 
-/* static */ status_t 
-BMediaEncoder::write_chunk(void *classptr, 
+/* static */ status_t BMediaEncoder::write_chunk(void *classptr, 
 						   const void *chunk_data,
 						   size_t chunk_len, 
 						   media_encode_info *info)
@@ -127,15 +118,13 @@ BMediaEncoder::write_chunk(void *classptr,
 }
 
 
-void
-BMediaEncoder::Init()
+void BMediaEncoder::Init()
 {
 	UNIMPLEMENTED();
 }
 
 
-void 
-BMediaEncoder::ReleaseEncoder()
+void BMediaEncoder::ReleaseEncoder()
 {
 	UNIMPLEMENTED();
 }
@@ -179,8 +168,7 @@ BMediaBufferEncoder::BMediaBufferEncoder(const media_codec_info *mci)
 }
 
 
-status_t
-BMediaBufferEncoder::EncodeToBuffer(void *output_buffer,
+status_t BMediaBufferEncoder::EncodeToBuffer(void *output_buffer,
 									size_t *output_size,
 									const void *input_buffer,
 									int64 frame_count,
@@ -196,8 +184,7 @@ BMediaBufferEncoder::EncodeToBuffer(void *output_buffer,
  * public BMediaBufferEncoder
  *************************************************************/
 
-status_t
-BMediaBufferEncoder::WriteChunk(const void *chunk_data,
+status_t BMediaBufferEncoder::WriteChunk(const void *chunk_data,
 								size_t chunk_len,
 								media_encode_info *info)
 {

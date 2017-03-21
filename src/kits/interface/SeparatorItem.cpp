@@ -35,8 +35,7 @@ BSeparatorItem::~BSeparatorItem()
 }
 
 
-status_t
-BSeparatorItem::Archive(BMessage* data, bool deep) const
+status_t BSeparatorItem::Archive(BMessage* data, bool deep) const
 {
 	return BMenuItem::Archive(data, deep);
 }
@@ -52,15 +51,13 @@ BSeparatorItem::Instantiate(BMessage* data)
 }
 
 
-void
-BSeparatorItem::SetEnabled(bool enable)
+void BSeparatorItem::SetEnabled(bool enable)
 {
 	// Don't do anything - we don't want to get enabled ever
 }
 
 
-void
-BSeparatorItem::GetContentSize(float* _width, float* _height)
+void BSeparatorItem::GetContentSize(float* _width, float* _height)
 {
 	if (_width != NULL)
 		*_width = 2.0;
@@ -76,8 +73,7 @@ BSeparatorItem::GetContentSize(float* _width, float* _height)
 }
 
 
-void
-BSeparatorItem::Draw()
+void BSeparatorItem::Draw()
 {
 	BMenu *menu = Menu();
 	if (menu == NULL)

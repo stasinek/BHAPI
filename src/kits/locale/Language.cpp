@@ -58,8 +58,7 @@ BLanguage::~BLanguage()
 }
 
 
-status_t
-BLanguage::SetTo(const char* language)
+status_t BLanguage::SetTo(const char* language)
 {
 	delete fICULocale;
 	fICULocale = new icu::Locale(language);
@@ -70,8 +69,7 @@ BLanguage::SetTo(const char* language)
 }
 
 
-status_t
-BLanguage::GetNativeName(BString& name) const
+status_t BLanguage::GetNativeName(BString& name) const
 {
 	UnicodeString string;
 	fICULocale->getDisplayName(*fICULocale, string);
@@ -85,8 +83,7 @@ BLanguage::GetNativeName(BString& name) const
 }
 
 
-status_t
-BLanguage::GetName(BString& name, const BLanguage* displayLanguage) const
+status_t BLanguage::GetName(BString& name, const BLanguage* displayLanguage) const
 {
 	status_t status = B_OK;
 
@@ -114,15 +111,13 @@ BLanguage::GetName(BString& name, const BLanguage* displayLanguage) const
 }
 
 
-status_t
-BLanguage::GetIcon(BBitmap* result) const
+status_t BLanguage::GetIcon(BBitmap* result) const
 {
 	return BLocaleRoster::Default()->GetFlagIconForCountry(result, Code());
 }
 
 
-const char*
-BLanguage::GetString(uint32 id) const
+const char*  BLanguage::GetString(uint32 id) const
 {
 	if (id < B_LANGUAGE_STRINGS_BASE
 		|| id >= B_LANGUAGE_STRINGS_BASE + B_NUM_LANGUAGE_STRINGS)
@@ -136,15 +131,13 @@ BLanguage::GetString(uint32 id) const
 }
 
 
-const char*
-BLanguage::Code() const
+const char*  BLanguage::Code() const
 {
 	return fICULocale->getLanguage();
 }
 
 
-const char*
-BLanguage::CountryCode() const
+const char*  BLanguage::CountryCode() const
 {
 	const char* country = fICULocale->getCountry();
 	if (country == NULL || country[0] == '\0')
@@ -154,8 +147,7 @@ BLanguage::CountryCode() const
 }
 
 
-const char*
-BLanguage::ScriptCode() const
+const char*  BLanguage::ScriptCode() const
 {
 	const char* script = fICULocale->getScript();
 	if (script == NULL || script[0] == '\0')
@@ -165,8 +157,7 @@ BLanguage::ScriptCode() const
 }
 
 
-const char*
-BLanguage::Variant() const
+const char*  BLanguage::Variant() const
 {
 	const char* variant = fICULocale->getVariant();
 	if (variant == NULL || variant[0] == '\0')
@@ -176,22 +167,19 @@ BLanguage::Variant() const
 }
 
 
-const char*
-BLanguage::ID() const
+const char*  BLanguage::ID() const
 {
 	return fICULocale->getName();
 }
 
 
-bool
-BLanguage::IsCountrySpecific() const
+bool BLanguage::IsCountrySpecific() const
 {
 	return CountryCode() != NULL;
 }
 
 
-bool
-BLanguage::IsVariant() const
+bool BLanguage::IsVariant() const
 {
 	return Variant() != NULL;
 }

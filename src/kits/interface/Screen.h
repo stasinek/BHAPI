@@ -33,10 +33,11 @@
 #ifdef __cplusplus /* Just for C++ */
 class BWindow;
 #include "../interface/Rect.h"
+#include "../interface/GraphicsDefs.h"
+#include <kernel/OS.h>
 class BHAPI_IMPEXP BScreen {
 public:
-    BScreen(__be_uint32 id = 0);
-    BScreen(BWindow *win);
+    BScreen(bhapi::screen_id id = B_MAIN_SCREEN_ID);
     ~BScreen();
 
     bool		IsValid() const;

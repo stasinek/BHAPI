@@ -21,32 +21,27 @@ BJobStateListener::~BJobStateListener()
 }
 
 
-void
-BJobStateListener::JobStarted(BJob* job)
+void BJobStateListener::JobStarted(BJob* job)
 {
 }
 
 
-void
-BJobStateListener::JobProgress(BJob* job)
+void BJobStateListener::JobProgress(BJob* job)
 {
 }
 
 
-void
-BJobStateListener::JobSucceeded(BJob* job)
+void BJobStateListener::JobSucceeded(BJob* job)
 {
 }
 
 
-void
-BJobStateListener::JobFailed(BJob* job)
+void BJobStateListener::JobFailed(BJob* job)
 {
 }
 
 
-void
-BJobStateListener::JobAborted(BJob* job)
+void BJobStateListener::JobAborted(BJob* job)
 {
 }
 
@@ -72,8 +67,7 @@ BJob::~BJob()
 }
 
 
-status_t
-BJob::InitCheck() const
+status_t BJob::InitCheck() const
 {
 	return fInitStatus;
 }
@@ -93,8 +87,7 @@ BJob::State() const
 }
 
 
-status_t
-BJob::Result() const
+status_t BJob::Result() const
 {
 	return fResult;
 }
@@ -107,36 +100,31 @@ BJob::ErrorString() const
 }
 
 
-uint32
-BJob::TicketNumber() const
+uint32 BJob::TicketNumber() const
 {
 	return fTicketNumber;
 }
 
 
-void
-BJob::_SetTicketNumber(uint32 ticketNumber)
+void BJob::_SetTicketNumber(uint32 ticketNumber)
 {
 	fTicketNumber = ticketNumber;
 }
 
 
-void
-BJob::_ClearTicketNumber()
+void BJob::_ClearTicketNumber()
 {
 	fTicketNumber = 0xFFFFFFFFUL;
 }
 
 
-void
-BJob::SetErrorString(const BString& error)
+void BJob::SetErrorString(const BString& error)
 {
 	fErrorString = error;
 }
 
 
-status_t
-BJob::Run()
+status_t BJob::Run()
 {
 	if (fState != B_JOB_STATE_WAITING_TO_RUN)
 		return B_NOT_ALLOWED;
@@ -159,28 +147,24 @@ BJob::Run()
 }
 
 
-void
-BJob::Cleanup(status_t /*jobResult*/)
+void BJob::Cleanup(status_t /*jobResult*/)
 {
 }
 
 
-status_t
-BJob::AddStateListener(BJobStateListener* listener)
+status_t BJob::AddStateListener(BJobStateListener* listener)
 {
 	return fStateListeners.AddItem(listener) ? B_OK : B_ERROR;
 }
 
 
-status_t
-BJob::RemoveStateListener(BJobStateListener* listener)
+status_t BJob::RemoveStateListener(BJobStateListener* listener)
 {
 	return fStateListeners.RemoveItem(listener) ? B_OK : B_ERROR;
 }
 
 
-status_t
-BJob::AddDependency(BJob* job)
+status_t BJob::AddDependency(BJob* job)
 {
 	if (fDependencies.HasItem(job))
 		return B_ERROR;
@@ -192,8 +176,7 @@ BJob::AddDependency(BJob* job)
 }
 
 
-status_t
-BJob::RemoveDependency(BJob* job)
+status_t BJob::RemoveDependency(BJob* job)
 {
 	if (!fDependencies.HasItem(job))
 		return B_ERROR;
@@ -205,15 +188,13 @@ BJob::RemoveDependency(BJob* job)
 }
 
 
-bool
-BJob::IsRunnable() const
+bool BJob::IsRunnable() const
 {
 	return fDependencies.IsEmpty();
 }
 
 
-int32
-BJob::CountDependencies() const
+int32 BJob::CountDependencies() const
 {
 	return fDependencies.CountItems();
 }
@@ -226,15 +207,13 @@ BJob::DependantJobAt(int32 index) const
 }
 
 
-void
-BJob::SetState(BJobState state)
+void BJob::SetState(BJobState state)
 {
 	fState = state;
 }
 
 
-void
-BJob::NotifyStateListeners()
+void BJob::NotifyStateListeners()
 {
 	int32 count = fStateListeners.CountItems();
 	for (int i = 0; i < count; ++i) {

@@ -129,8 +129,7 @@ BSlowContextMenu::Target() const
 }
 
 
-inline const bool
-BSlowContextMenu::IsShowing() const
+inline const bool BSlowContextMenu::IsShowing() const
 {
     return fIsShowing;
 }

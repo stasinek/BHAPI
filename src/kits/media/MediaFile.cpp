@@ -82,8 +82,7 @@ BMediaFile::BMediaFile(const media_file_format* mfi, int32 flags)
 }
 
 
-status_t
-BMediaFile::SetTo(const entry_ref* ref)
+status_t BMediaFile::SetTo(const entry_ref* ref)
 {
 	CALLED();
 
@@ -98,8 +97,7 @@ BMediaFile::SetTo(const entry_ref* ref)
 }
 
 
-status_t
-BMediaFile::SetTo(BDataIO* destination)
+status_t BMediaFile::SetTo(BDataIO* destination)
 {
 	CALLED();
 
@@ -121,16 +119,14 @@ BMediaFile::~BMediaFile()
 }
 
 
-status_t
-BMediaFile::InitCheck() const
+status_t BMediaFile::InitCheck() const
 {
 	CALLED();
 	return fErr;
 }
 
 
-status_t
-BMediaFile::GetFileFormatInfo(media_file_format* mfi) const
+status_t BMediaFile::GetFileFormatInfo(media_file_format* mfi) const
 {
 	CALLED();
 	if (mfi == NULL)
@@ -142,8 +138,7 @@ BMediaFile::GetFileFormatInfo(media_file_format* mfi) const
 }
 
 
-status_t
-BMediaFile::GetMetaData(BMessage* _data) const
+status_t BMediaFile::GetMetaData(BMessage* _data) const
 {
 	if (fExtractor == NULL)
 		return B_NO_INIT;
@@ -156,15 +151,13 @@ BMediaFile::GetMetaData(BMessage* _data) const
 }
 
 
-const char*
-BMediaFile::Copyright() const
+const char*  BMediaFile::Copyright() const
 {
 	return fExtractor->Copyright();
 }
 
 
-int32
-BMediaFile::CountTracks() const
+int32 BMediaFile::CountTracks() const
 {
 	return fTrackNum;
 }
@@ -193,8 +186,7 @@ BMediaFile::TrackAt(int32 index)
 // the memory usage of your application. The specific 'track' object
 // can no longer be used, but you can create another one by calling
 // TrackAt() with the same track index.
-status_t
-BMediaFile::ReleaseTrack(BMediaTrack* track)
+status_t BMediaFile::ReleaseTrack(BMediaTrack* track)
 {
 	CALLED();
 	if (!fTrackList || !track)
@@ -213,8 +205,7 @@ BMediaFile::ReleaseTrack(BMediaTrack* track)
 }
 
 
-status_t
-BMediaFile::ReleaseAllTracks()
+status_t BMediaFile::ReleaseAllTracks()
 {
 	CALLED();
 	if (!fTrackList)
@@ -293,8 +284,7 @@ CreateTrack__10BMediaFileP12media_format(BMediaFile* self, media_format* mf)
 
 
 // Lets you set the copyright info for the entire file
-status_t
-BMediaFile::AddCopyright(const char* copyright)
+status_t BMediaFile::AddCopyright(const char* copyright)
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -304,8 +294,7 @@ BMediaFile::AddCopyright(const char* copyright)
 
 
 // Call this to add user-defined chunks to a file (if they're supported)
-status_t
-BMediaFile::AddChunk(int32 type, const void* data, size_t size)
+status_t BMediaFile::AddChunk(int32 type, const void* data, size_t size)
 {
 	UNIMPLEMENTED();
 	return B_OK;
@@ -313,8 +302,7 @@ BMediaFile::AddChunk(int32 type, const void* data, size_t size)
 
 
 // After you have added all the tracks you want, call this
-status_t
-BMediaFile::CommitHeader()
+status_t BMediaFile::CommitHeader()
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -324,8 +312,7 @@ BMediaFile::CommitHeader()
 
 
 // After you have written all the data to the track objects, call this
-status_t
-BMediaFile::CloseFile()
+status_t BMediaFile::CloseFile()
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -336,8 +323,7 @@ BMediaFile::CloseFile()
 // This is for controlling file format parameters
 
 // returns a copy of the parameter web
-status_t
-BMediaFile::GetParameterWeb(BParameterWeb** outWeb)
+status_t BMediaFile::GetParameterWeb(BParameterWeb** outWeb)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
@@ -353,16 +339,14 @@ BMediaFile::Web()
 }
 
 
-status_t
-BMediaFile::GetParameterValue(int32 id,	void* value, size_t* size)
+status_t BMediaFile::GetParameterValue(int32 id,	void* value, size_t* size)
 {
 	UNIMPLEMENTED();
 	return B_OK;
 }
 
 
-status_t
-BMediaFile::SetParameterValue(int32 id,	const void* value, size_t size)
+status_t BMediaFile::SetParameterValue(int32 id,	const void* value, size_t size)
 {
 	UNIMPLEMENTED();
 	return B_OK;
@@ -377,16 +361,14 @@ BMediaFile::GetParameterView()
 }
 
 
-status_t
-BMediaFile::Perform(int32 selector, void* data)
+status_t BMediaFile::Perform(int32 selector, void* data)
 {
 	UNIMPLEMENTED();
 	return B_OK;
 }
 
 
-status_t
-BMediaFile::ControlFile(int32 selector, void* ioData, size_t size)
+status_t BMediaFile::ControlFile(int32 selector, void* ioData, size_t size)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
@@ -396,8 +378,7 @@ BMediaFile::ControlFile(int32 selector, void* ioData, size_t size)
 // #pragma mark - private
 
 
-void
-BMediaFile::_Init()
+void BMediaFile::_Init()
 {
 	CALLED();
 
@@ -417,8 +398,7 @@ BMediaFile::_Init()
 }
 
 
-void
-BMediaFile::_UnInit()
+void BMediaFile::_UnInit()
 {
 	ReleaseAllTracks();
 	free(fTrackList);
@@ -436,8 +416,7 @@ BMediaFile::_UnInit()
 }
 
 
-void
-BMediaFile::_InitReader(BDataIO* source, int32 flags)
+void BMediaFile::_InitReader(BDataIO* source, int32 flags)
 {
 	CALLED();
 
@@ -489,8 +468,7 @@ BMediaFile::_InitReader(BDataIO* source, int32 flags)
 }
 
 
-void
-BMediaFile::_InitWriter(BDataIO* target, const media_file_format* fileFormat,
+void BMediaFile::_InitWriter(BDataIO* target, const media_file_format* fileFormat,
 	int32 flags)
 {
 	CALLED();

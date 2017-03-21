@@ -37,8 +37,7 @@ ExpressionResult::~ExpressionResult()
 }
 
 
-void
-ExpressionResult::SetToPrimitive(Value* value)
+void ExpressionResult::SetToPrimitive(Value* value)
 {
 	_Unset();
 
@@ -50,8 +49,7 @@ ExpressionResult::SetToPrimitive(Value* value)
 }
 
 
-void
-ExpressionResult::SetToValueNode(ValueNodeChild* child)
+void ExpressionResult::SetToValueNode(ValueNodeChild* child)
 {
 	_Unset();
 
@@ -75,8 +73,7 @@ ExpressionResult::SetToValueNode(ValueNodeChild* child)
 }
 
 
-void
-ExpressionResult::SetToType(Type* type)
+void ExpressionResult::SetToType(Type* type)
 {
 	_Unset();
 
@@ -88,8 +85,7 @@ ExpressionResult::SetToType(Type* type)
 }
 
 
-void
-ExpressionResult::_Unset()
+void ExpressionResult::_Unset()
 {
 	if (fPrimitiveValue != NULL) {
 		fPrimitiveValue->ReleaseReference();
@@ -139,29 +135,25 @@ ExpressionInfo::ExpressionInfo(const BString& expression)
 }
 
 
-void
-ExpressionInfo::SetTo(const BString& expression)
+void ExpressionInfo::SetTo(const BString& expression)
 {
 	fExpression = expression;
 }
 
 
-void
-ExpressionInfo::AddListener(Listener* listener)
+void ExpressionInfo::AddListener(Listener* listener)
 {
 	fListeners.Add(listener);
 }
 
 
-void
-ExpressionInfo::RemoveListener(Listener* listener)
+void ExpressionInfo::RemoveListener(Listener* listener)
 {
 	fListeners.Remove(listener);
 }
 
 
-void
-ExpressionInfo::NotifyExpressionEvaluated(status_t result,
+void ExpressionInfo::NotifyExpressionEvaluated(status_t result,
 	ExpressionResult* value)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();

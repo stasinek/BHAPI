@@ -30,7 +30,7 @@
 #ifndef BHAPI_DATA_IO_H
 #define BHAPI_DATA_IO_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 #ifdef __cplusplus /* Just for C++ */
 class BHAPI_IMPEXP BDataIO {
 public:

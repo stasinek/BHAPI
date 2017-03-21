@@ -161,8 +161,7 @@ dst_s_get_int16(const u_char *buf)
 }
 
 /*%
- * dst_s_get_int32
- *     This routine extracts a 32 bit integer from a four byte character
+ * dst_s_get_int32  *     This routine extracts a 32 bit integer from a four byte character
  *     string.  The character string is assumed to be in network byte
  *     order and may be unaligned.  The number returned is in host order.
  * Parameter
@@ -199,8 +198,7 @@ dst_s_put_int16(u_int8_t *buf, const u_int16_t val)
 }
 
 /*%
- * dst_s_put_int32
- *     Take a 32 bit integer and store the value in a four byte
+ * dst_s_put_int32  *     Take a 32 bit integer and store the value in a four byte
  *     character string.  The integer is assumed to be in network
  *     order and the string is returned in host order.
  *

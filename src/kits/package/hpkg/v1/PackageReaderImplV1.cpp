@@ -389,8 +389,7 @@ PackageReaderImpl::~PackageReaderImpl()
 }
 
 
-status_t
-PackageReaderImpl::Init(const char* fileName)
+status_t PackageReaderImpl::Init(const char* fileName)
 {
 	// open file
 	int fd = open(fileName, O_RDONLY);
@@ -404,8 +403,7 @@ PackageReaderImpl::Init(const char* fileName)
 }
 
 
-status_t
-PackageReaderImpl::Init(int fd, bool keepFD)
+status_t PackageReaderImpl::Init(int fd, bool keepFD)
 {
 	status_t error = inherited::Init(fd, keepFD);
 	if (error != B_OK)
@@ -584,8 +582,7 @@ PackageReaderImpl::Init(int fd, bool keepFD)
 }
 
 
-status_t
-PackageReaderImpl::ParseContent(BPackageContentHandler* contentHandler)
+status_t PackageReaderImpl::ParseContent(BPackageContentHandler* contentHandler)
 {
 	AttributeHandlerContext context(ErrorOutput(), contentHandler,
 		B_HPKG_SECTION_PACKAGE_ATTRIBUTES);
@@ -603,8 +600,7 @@ PackageReaderImpl::ParseContent(BPackageContentHandler* contentHandler)
 }
 
 
-status_t
-PackageReaderImpl::ParseContent(BLowLevelPackageContentHandler* contentHandler)
+status_t PackageReaderImpl::ParseContent(BLowLevelPackageContentHandler* contentHandler)
 {
 	AttributeHandlerContext context(ErrorOutput(), contentHandler,
 		B_HPKG_SECTION_PACKAGE_ATTRIBUTES);
@@ -622,8 +618,7 @@ PackageReaderImpl::ParseContent(BLowLevelPackageContentHandler* contentHandler)
 }
 
 
-status_t
-PackageReaderImpl::_ParseTOC(AttributeHandlerContext* context,
+status_t PackageReaderImpl::_ParseTOC(AttributeHandlerContext* context,
 	AttributeHandler* rootAttributeHandler)
 {
 	// parse the TOC
@@ -664,8 +659,7 @@ PackageReaderImpl::_ParseTOC(AttributeHandlerContext* context,
 }
 
 
-status_t
-PackageReaderImpl::ReadAttributeValue(uint8 type, uint8 encoding,
+status_t PackageReaderImpl::ReadAttributeValue(uint8 type, uint8 encoding,
 	AttributeValue& _value)
 {
 	switch (type) {
@@ -716,8 +710,7 @@ PackageReaderImpl::ReadAttributeValue(uint8 type, uint8 encoding,
 }
 
 
-status_t
-PackageReaderImpl::_GetTOCBuffer(size_t size, const void*& _buffer)
+status_t PackageReaderImpl::_GetTOCBuffer(size_t size, const void*& _buffer)
 {
 	if (size > fTOCSection.uncompressedLength - fTOCSection.currentOffset) {
 		ErrorOutput()->PrintError("_GetTOCBuffer(%lu): read beyond TOC end\n",

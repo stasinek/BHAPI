@@ -55,8 +55,7 @@ BUser::~BUser()
 }
 
 
-status_t
-BUser::InitCheck() const
+status_t BUser::InitCheck() const
 {
 	if (fName.IsEmpty())
 		return B_NO_INIT;
@@ -101,8 +100,7 @@ BUser::Groups() const
 }
 
 
-status_t
-BUser::SetTo(const BString& name, const BString& realName, const BString& home,
+status_t BUser::SetTo(const BString& name, const BString& realName, const BString& home,
 	const BString& shell, const BStringList& groups)
 {
 	fName = name;
@@ -115,8 +113,7 @@ BUser::SetTo(const BString& name, const BString& realName, const BString& home,
 }
 
 
-/*static*/ bool
-BUser::IsValidUserName(const char* name)
+/*static*/ bool BUser::IsValidUserName(const char* name)
 {
 	if (name[0] == '\0')
 		return false;

@@ -61,8 +61,7 @@ if_nametoindex(const char* name)
 }
 
 
-char*
-if_indextoname(unsigned index, char* nameBuffer)
+char*  if_indextoname(unsigned index, char* nameBuffer)
 {
 	BPrivate::Socket socket;
 	if (socket.FD() < 0)
@@ -135,8 +134,7 @@ if_nameindex(void)
 }
 
 
-void
-if_freenameindex(struct if_nameindex *interfaceArray)
+void if_freenameindex(struct if_nameindex *interfaceArray)
 {
 	for (int i = 0; interfaceArray[i].if_name; i++)
 		free(interfaceArray[i].if_name);

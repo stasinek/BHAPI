@@ -131,8 +131,7 @@ BTrackReader::BTrackReader(BFile *file, media_raw_audio_format const &format) :
 }
 
 
-void
-BTrackReader::SetToTrack(BMediaTrack *track)
+void BTrackReader::SetToTrack(BMediaTrack *track)
 {	
 	media_format fmt;
 	memset(&fmt, 0, sizeof(fmt)); //wildcard
@@ -178,8 +177,7 @@ BTrackReader::~BTrackReader()
 }
 
 
-status_t
-BTrackReader::InitCheck()
+status_t BTrackReader::InitCheck()
 {
 	CALLED();
 	return fMediaTrack ? fMediaTrack->InitCheck() : B_ERROR;
@@ -210,8 +208,7 @@ BTrackReader::FrameSize(void)
 }
 
 
-status_t 
-BTrackReader::ReadFrames(void* in_buffer, int32 frame_count)
+status_t BTrackReader::ReadFrames(void* in_buffer, int32 frame_count)
 {
 	CALLED();
 
@@ -246,8 +243,7 @@ BTrackReader::ReadFrames(void* in_buffer, int32 frame_count)
 }
 
 
-status_t 
-BTrackReader::SeekToFrame(int64* in_out_frame)
+status_t BTrackReader::SeekToFrame(int64* in_out_frame)
 {
 	CALLED();
 	status_t s = fMediaTrack->SeekToFrame(in_out_frame, B_MEDIA_SEEK_CLOSEST_BACKWARD);

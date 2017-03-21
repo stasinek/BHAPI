@@ -43,7 +43,7 @@
 #include "../../kernel/Debug.h"
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::StrokePoint(BGraphicsContext *dc,
 				     __be_int32 x,  __be_int32 y)
 {
@@ -62,7 +62,7 @@ EWin32GraphicsDrawable::StrokePoint(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::StrokePoints(BGraphicsContext *dc,
 				     const  __be_int32 *pts,  __be_int32 count)
 {
@@ -81,7 +81,7 @@ EWin32GraphicsDrawable::StrokePoints(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
 					    const BList *ptsArrayLists,  __be_int32 arrayCount, const bhapi::rgb_color *highColors)
 {
@@ -101,7 +101,7 @@ EWin32GraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
 					    const  __be_int32 *pts, const  __be_uint8 *alpha,  __be_int32 count)
 {
@@ -121,7 +121,7 @@ EWin32GraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::StrokeLine(BGraphicsContext *dc,
 				    __be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1)
 {
@@ -144,7 +144,7 @@ EWin32GraphicsDrawable::StrokeLine(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::StrokeRect(BGraphicsContext *dc,
 				    __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
 {
@@ -170,7 +170,7 @@ EWin32GraphicsDrawable::StrokeRect(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::StrokeRects(BGraphicsContext *dc,
 				    const  __be_int32 *rects,  __be_int32 count)
 {
@@ -189,7 +189,7 @@ EWin32GraphicsDrawable::StrokeRects(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::FillRect(BGraphicsContext *dc,
 				  __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
 {
@@ -210,7 +210,7 @@ EWin32GraphicsDrawable::FillRect(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::FillRects(BGraphicsContext *dc,
 				  const  __be_int32 *rects,  __be_int32 count)
 {
@@ -229,7 +229,7 @@ EWin32GraphicsDrawable::FillRects(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::FillRegion(BGraphicsContext *dc,
 				   const BRegion &region)
 {
@@ -253,7 +253,7 @@ EWin32GraphicsDrawable::FillRegion(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
 					__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
 {
@@ -287,7 +287,7 @@ EWin32GraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
 				       __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
 {
@@ -318,7 +318,7 @@ EWin32GraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::StrokeArc(BGraphicsContext *dc,
 				   __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
 {
@@ -346,7 +346,7 @@ EWin32GraphicsDrawable::StrokeArc(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::FillArc(BGraphicsContext *dc,
 				__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
 {
@@ -371,7 +371,7 @@ EWin32GraphicsDrawable::FillArc(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
 				      const  __be_int32 *pts,  __be_int32 count, bool closed)
 {
@@ -396,7 +396,7 @@ EWin32GraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
 }
 
 
-status_t
+status_t 
 EWin32GraphicsDrawable::FillPolygon(BGraphicsContext *dc,
 				    const  __be_int32 *pts,  __be_int32 count)
 {
@@ -439,7 +439,7 @@ EWin32GraphicsEngine::ConvertRegion(const BRegion *region)
 }
 
 
-bool
+bool 
 EWin32GraphicsEngine::PrepareContext(EWin32GraphicsDrawable *pixmap, BGraphicsContext *dc,
 				     bool hollowBrush, bool setPenSize)
 {

@@ -389,8 +389,7 @@ private:
 
 // Insert
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::Insert(Element* element, bool back)
+void DOUBLY_LINKED_LIST_CLASS_NAME::Insert(Element* element, bool back)
 {
 	if (element) {
 #if DEBUG_DOUBLY_LINKED_LIST
@@ -424,8 +423,7 @@ DOUBLY_LINKED_LIST_CLASS_NAME::Insert(Element* element, bool back)
 
 
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::InsertBefore(Element* before, Element* element)
+void DOUBLY_LINKED_LIST_CLASS_NAME::InsertBefore(Element* before, Element* element)
 {
 	ASSERT(element != NULL);
 
@@ -454,8 +452,7 @@ DOUBLY_LINKED_LIST_CLASS_NAME::InsertBefore(Element* before, Element* element)
 
 
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::InsertAfter(Element* insertAfter,
+void DOUBLY_LINKED_LIST_CLASS_NAME::InsertAfter(Element* insertAfter,
 	Element* element)
 {
 	ASSERT(element != NULL);
@@ -492,8 +489,7 @@ DOUBLY_LINKED_LIST_CLASS_NAME::InsertAfter(Element* insertAfter,
 
 
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::Insert(Element* before, Element* element)
+void DOUBLY_LINKED_LIST_CLASS_NAME::Insert(Element* before, Element* element)
 {
 	InsertBefore(before, element);
 }
@@ -501,16 +497,14 @@ DOUBLY_LINKED_LIST_CLASS_NAME::Insert(Element* before, Element* element)
 
 // Add
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::Add(Element* element, bool back)
+void DOUBLY_LINKED_LIST_CLASS_NAME::Add(Element* element, bool back)
 {
 	Insert(element, back);
 }
 
 // Remove
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::Remove(Element* element)
+void DOUBLY_LINKED_LIST_CLASS_NAME::Remove(Element* element)
 {
 	if (element) {
 #if DEBUG_DOUBLY_LINKED_LIST
@@ -533,8 +527,7 @@ DOUBLY_LINKED_LIST_CLASS_NAME::Remove(Element* element)
 
 // Swap
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::Swap(Element* a, Element* b)
+void DOUBLY_LINKED_LIST_CLASS_NAME::Swap(Element* a, Element* b)
 {
 	if (a && b && a != b) {
 		Element* aNext = sGetLink(a)->next;
@@ -556,8 +549,7 @@ DOUBLY_LINKED_LIST_CLASS_NAME::Swap(Element* a, Element* b)
 
 // MoveFrom
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::MoveFrom(DOUBLY_LINKED_LIST_CLASS_NAME* fromList)
+void DOUBLY_LINKED_LIST_CLASS_NAME::MoveFrom(DOUBLY_LINKED_LIST_CLASS_NAME* fromList)
 {
 	if (fromList && fromList->fFirst) {
 		if (fFirst) {
@@ -575,8 +567,7 @@ DOUBLY_LINKED_LIST_CLASS_NAME::MoveFrom(DOUBLY_LINKED_LIST_CLASS_NAME* fromList)
 
 // RemoveAll
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::RemoveAll()
+void DOUBLY_LINKED_LIST_CLASS_NAME::RemoveAll()
 {
 	fFirst = NULL;
 	fLast = NULL;
@@ -626,8 +617,7 @@ DOUBLY_LINKED_LIST_CLASS_NAME::GetNext(Element* element) const
 
 
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-bool
-DOUBLY_LINKED_LIST_CLASS_NAME::Contains(Element* _element) const
+bool DOUBLY_LINKED_LIST_CLASS_NAME::Contains(Element* _element) const
 {
 	for (Element* element = First(); element; element = GetNext(element)) {
 		if (element == _element)
@@ -640,8 +630,7 @@ DOUBLY_LINKED_LIST_CLASS_NAME::Contains(Element* _element) const
 
 // Count
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-int32
-DOUBLY_LINKED_LIST_CLASS_NAME::Count() const
+int32 DOUBLY_LINKED_LIST_CLASS_NAME::Count() const
 {
 	int32 count = 0;
 	for (Element* element = First(); element; element = GetNext(element))
@@ -652,8 +641,7 @@ DOUBLY_LINKED_LIST_CLASS_NAME::Count() const
 
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
 template<typename Less>
-void
-DOUBLY_LINKED_LIST_CLASS_NAME::Sort(const Less& less)
+void DOUBLY_LINKED_LIST_CLASS_NAME::Sort(const Less& less)
 {
 	// selection sort
 	Element* tail = Head();

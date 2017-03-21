@@ -34,8 +34,7 @@ BCommandPipe::~BCommandPipe()
 }
 
 
-status_t
-BCommandPipe::AddArg(const char* arg)
+status_t BCommandPipe::AddArg(const char* arg)
 {
 	if (arg == NULL || arg[0] == '\0')
 		return B_BAD_VALUE;
@@ -53,8 +52,7 @@ BCommandPipe::AddArg(const char* arg)
 }
 
 
-void
-BCommandPipe::PrintToStream() const
+void BCommandPipe::PrintToStream() const
 {
 	for (int32 i = 0L; i < fArgList.CountItems(); i++)
 		printf("%s ", reinterpret_cast<char*>(fArgList.ItemAtFast(i)));
@@ -63,8 +61,7 @@ BCommandPipe::PrintToStream() const
 }
 
 
-void
-BCommandPipe::FlushArgs()
+void BCommandPipe::FlushArgs()
 {
 	// Delete all arguments from the list
 	for (int32 i = fArgList.CountItems() - 1; i >= 0; i--)
@@ -75,8 +72,7 @@ BCommandPipe::FlushArgs()
 }
 
 
-void
-BCommandPipe::Close()
+void BCommandPipe::Close()
 {
 	if (fStdErrOpen) {
 		close(fStdErr[0]);
@@ -230,8 +226,7 @@ BCommandPipe::PipeInto(FILE** _outAndErr)
 // #pragma mark -
 
 
-void
-BCommandPipe::Run()
+void BCommandPipe::Run()
 {
 	// Runs the command without bothering to redirect streams, this is similar
 	// to system() but uses pipes and wait_for_thread.... Synchronous.
@@ -246,8 +241,7 @@ BCommandPipe::Run()
 }
 
 
-void
-BCommandPipe::RunAsync()
+void BCommandPipe::RunAsync()
 {
 	// Runs the command without bothering to redirect streams, this is similar
 	// to system() but uses pipes.... Asynchronous.
@@ -261,8 +255,7 @@ BCommandPipe::RunAsync()
 // #pragma mark -
 
 
-status_t
-BCommandPipe::ReadLines(FILE* file, LineReader* lineReader)
+status_t BCommandPipe::ReadLines(FILE* file, LineReader* lineReader)
 {
 	// Reads output of file, line by line. Each line is passed to lineReader
 	// for inspection, and the IsCanceled() method is repeatedly called.

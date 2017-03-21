@@ -10,7 +10,7 @@
 #define _KERNEL_VM_VM_ADDRESS_SPACE_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <vm/vm_priv.h>
 #include <vm/VMArea.h>
@@ -154,8 +154,7 @@ protected:
 };
 
 
-void
-VMAddressSpace::Put()
+void VMAddressSpace::Put()
 {
 	team_id id = fID;
 	if (atomic_add(&fRefCount, -1) == 1)

@@ -56,15 +56,13 @@ BMidiPort::~BMidiPort()
 }
 
 
-status_t 
-BMidiPort::InitCheck() const
+status_t BMidiPort::InitCheck() const
 {
 	return fStatus;
 }
 
 
-status_t 
-BMidiPort::Open(const char* name)
+status_t BMidiPort::Open(const char* name)
 {
 	fStatus = B_ERROR;
 
@@ -101,8 +99,7 @@ BMidiPort::Open(const char* name)
 }
 
 
-void 
-BMidiPort::Close()
+void BMidiPort::Close()
 {
 	if (fRemoteSource != NULL) {
 		fRemoteSource->Disconnect(fLocalSink);
@@ -128,24 +125,21 @@ BMidiPort::PortName() const
 }
 
 
-void 
-BMidiPort::NoteOff(
+void BMidiPort::NoteOff(
 	uchar channel, uchar note, uchar velocity, uint32 time)
 {
 	fLocalSource->SprayNoteOff(channel - 1, note, velocity, MAKE_BIGTIME(time));
 }
 
 
-void 
-BMidiPort::NoteOn(
+void BMidiPort::NoteOn(
 	uchar channel, uchar note, uchar velocity, uint32 time)
 {
 	fLocalSource->SprayNoteOn(channel - 1, note, velocity, MAKE_BIGTIME(time));
 }
 
 
-void 
-BMidiPort::KeyPressure(
+void BMidiPort::KeyPressure(
 	uchar channel, uchar note, uchar pressure, uint32 time)
 {
 	fLocalSource->SprayKeyPressure(
@@ -153,8 +147,7 @@ BMidiPort::KeyPressure(
 }
 
 
-void 
-BMidiPort::ControlChange(
+void BMidiPort::ControlChange(
 	uchar channel, uchar controlNumber, uchar controlValue, uint32 time)
 {
 	fLocalSource->SprayControlChange(
@@ -162,8 +155,7 @@ BMidiPort::ControlChange(
 }
 
 
-void 
-BMidiPort::ProgramChange(
+void BMidiPort::ProgramChange(
 	uchar channel, uchar programNumber, uint32 time)
 {
 	fLocalSource->SprayProgramChange(
@@ -171,45 +163,39 @@ BMidiPort::ProgramChange(
 }
 
 
-void 
-BMidiPort::ChannelPressure(uchar channel, uchar pressure, uint32 time)
+void BMidiPort::ChannelPressure(uchar channel, uchar pressure, uint32 time)
 {
 	fLocalSource->SprayChannelPressure(
 		channel - 1, pressure, MAKE_BIGTIME(time));
 }
 
 
-void 
-BMidiPort::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
+void BMidiPort::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
 {
 	fLocalSource->SprayPitchBend(channel - 1, lsb, msb, MAKE_BIGTIME(time));
 }
 
 
-void 
-BMidiPort::SystemExclusive(void* data, size_t length, uint32 time)
+void BMidiPort::SystemExclusive(void* data, size_t length, uint32 time)
 {
 	fLocalSource->SpraySystemExclusive(data, length, MAKE_BIGTIME(time));
 }
 
 
-void 
-BMidiPort::SystemCommon(
+void BMidiPort::SystemCommon(
 	uchar status, uchar data1, uchar data2, uint32 time)
 {
 	fLocalSource->SpraySystemCommon(status, data1, data2, MAKE_BIGTIME(time));
 }
 
 
-void 
-BMidiPort::SystemRealTime(uchar status, uint32 time)
+void BMidiPort::SystemRealTime(uchar status, uint32 time)
 {
 	fLocalSource->SpraySystemRealTime(status, MAKE_BIGTIME(time));
 }
 
 
-status_t 
-BMidiPort::Start()
+status_t BMidiPort::Start()
 {
 	status_t err = super::Start();
 
@@ -221,8 +207,7 @@ BMidiPort::Start()
 }
 
 
-void 
-BMidiPort::Stop()
+void BMidiPort::Stop()
 {
 	if (fRemoteSource != NULL) {
 		fRemoteSource->Disconnect(fLocalSink);
@@ -239,8 +224,7 @@ BMidiPort::CountDevices()
 }
 
 
-status_t 
-BMidiPort::GetDeviceName(int32 n, char* name, size_t bufSize)
+status_t BMidiPort::GetDeviceName(int32 n, char* name, size_t bufSize)
 {
 	BMidiEndpoint* endp = (BMidiEndpoint*)fDevices->ItemAt(n);
 	if (endp == NULL)
@@ -260,16 +244,14 @@ void BMidiPort::_ReservedMidiPort2() { }
 void BMidiPort::_ReservedMidiPort3() { }
 
 
-void 
-BMidiPort::Run()
+void BMidiPort::Run()
 {
 	while (KeepRunning()) 
 		snooze(50000);
 }
 
 
-void 
-BMidiPort::ScanDevices()
+void BMidiPort::ScanDevices()
 {
 	EmptyDeviceList();
 
@@ -298,8 +280,7 @@ BMidiPort::ScanDevices()
 }
 
 
-void 
-BMidiPort::EmptyDeviceList()
+void BMidiPort::EmptyDeviceList()
 {
 	for (int32 t = 0; t < fDevices->CountItems(); ++t) 
 		((BMidiEndpoint*)fDevices->ItemAt(t))->Release();

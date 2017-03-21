@@ -50,8 +50,7 @@ BGradientConic::Center() const
 
 
 // SetCenter
-void
-BGradientConic::SetCenter(const BPoint& center)
+void BGradientConic::SetCenter(const BPoint& center)
 {
 	fData.conic.cx = center.x;
 	fData.conic.cy = center.y;
@@ -59,8 +58,7 @@ BGradientConic::SetCenter(const BPoint& center)
 
 
 // SetCenter
-void
-BGradientConic::SetCenter(float cx, float cy)
+void BGradientConic::SetCenter(float cx, float cy)
 {
 	fData.conic.cx = cx;
 	fData.conic.cy = cy;
@@ -76,8 +74,7 @@ BGradientConic::Angle() const
 
 
 // SetAngle
-void
-BGradientConic::SetAngle(float angle)
+void BGradientConic::SetAngle(float angle)
 {
 	fData.conic.angle = angle;
 }

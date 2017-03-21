@@ -19,8 +19,7 @@ static const size_t kVersionByteIndex = 6;
 static const size_t kVariantByteIndex = 8;
 
 
-static bool
-init_random_seed()
+static bool init_random_seed()
 {
 	// set a time-based seed
 	timespec time;
@@ -56,8 +55,7 @@ BUuid::~BUuid()
 }
 
 
-bool
-BUuid::IsNil() const
+bool BUuid::IsNil() const
 {
 	for (size_t i = 0; i < sizeof(fValue); i++) {
 		if (fValue[i] != 0)
@@ -115,8 +113,7 @@ BUuid::operator=(const BUuid& other)
 }
 
 
-bool
-BUuid::_SetToDevRandom()
+bool BUuid::_SetToDevRandom()
 {
 	// open device
 	int fd = open("/dev/urandom", O_RDONLY);
@@ -134,8 +131,7 @@ BUuid::_SetToDevRandom()
 }
 
 
-void
-BUuid::_SetToRandomFallback()
+void BUuid::_SetToRandomFallback()
 {
 	static bool sSeedInitialized = init_random_seed();
 	(void)sSeedInitialized;

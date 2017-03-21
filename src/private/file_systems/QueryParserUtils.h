@@ -55,8 +55,7 @@ status_t	matchString(char* pattern, char* string);
 __END_DECLS
 
 
-static inline bool
-isPattern(char* string)
+static inline bool isPattern(char* string)
 {
 	return getFirstPatternSymbol(string) >= 0 ? true : false;
 }

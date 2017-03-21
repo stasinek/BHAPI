@@ -93,8 +93,7 @@ BMediaTrack::~BMediaTrack()
  * public BMediaTrack
  *************************************************************/
 
-status_t
-BMediaTrack::InitCheck() const
+status_t BMediaTrack::InitCheck() const
 {
 	CALLED();
 
@@ -102,8 +101,7 @@ BMediaTrack::InitCheck() const
 }
 
 
-status_t
-BMediaTrack::GetCodecInfo(media_codec_info* _codecInfo) const
+status_t BMediaTrack::GetCodecInfo(media_codec_info* _codecInfo) const
 {
 	CALLED();
 
@@ -118,8 +116,7 @@ BMediaTrack::GetCodecInfo(media_codec_info* _codecInfo) const
 }
 
 
-status_t
-BMediaTrack::EncodedFormat(media_format* _format) const
+status_t BMediaTrack::EncodedFormat(media_format* _format) const
 {
 	CALLED();
 
@@ -152,8 +149,7 @@ status_t DecodedFormat__11BMediaTrackP12media_format(BMediaTrack* self,
 }
 
 
-status_t
-BMediaTrack::DecodedFormat(media_format* _format, uint32 flags)
+status_t BMediaTrack::DecodedFormat(media_format* _format, uint32 flags)
 {
 	CALLED();
 
@@ -288,8 +284,7 @@ BMediaTrack::DecodedFormat(media_format* _format, uint32 flags)
 }
 
 
-status_t
-BMediaTrack::GetMetaData(BMessage* _data) const
+status_t BMediaTrack::GetMetaData(BMessage* _data) const
 {
 	CALLED();
 
@@ -305,8 +300,7 @@ BMediaTrack::GetMetaData(BMessage* _data) const
 }
 
 
-int64
-BMediaTrack::CountFrames() const
+int64 BMediaTrack::CountFrames() const
 {
 	CALLED();
 
@@ -327,8 +321,7 @@ BMediaTrack::Duration() const
 }
 
 
-int64
-BMediaTrack::CurrentFrame() const
+int64 BMediaTrack::CurrentFrame() const
 {
 	return fCurrentFrame;
 }
@@ -344,8 +337,7 @@ BMediaTrack::CurrentTime() const
 // Compatibility for R5 and below. Required by Corum III and Civ:CTP.
 #if __GNUC__ < 3
 
-extern "C" status_t
-ReadFrames__11BMediaTrackPcPxP12media_header(BMediaTrack* self,
+extern "C" status_t ReadFrames__11BMediaTrackPcPxP12media_header(BMediaTrack* self,
 	char* _buffer, int64* _frameCount, media_header* header)
 {
 	return self->ReadFrames(_buffer, _frameCount, header, 0);
@@ -353,15 +345,13 @@ ReadFrames__11BMediaTrackPcPxP12media_header(BMediaTrack* self,
 
 #endif	// __GNUC__ < 3
 
-status_t
-BMediaTrack::ReadFrames(void* buffer, int64* _frameCount, media_header* header)
+status_t BMediaTrack::ReadFrames(void* buffer, int64* _frameCount, media_header* header)
 {
 	return ReadFrames(buffer, _frameCount, header, NULL);
 }
 
 
-status_t
-BMediaTrack::ReadFrames(void* buffer, int64* _frameCount,
+status_t BMediaTrack::ReadFrames(void* buffer, int64* _frameCount,
 	media_header* _header, media_decode_info* info)
 {
 //	CALLED();
@@ -415,8 +405,7 @@ BMediaTrack::ReadFrames(void* buffer, int64* _frameCount,
 }
 
 
-status_t
-BMediaTrack::ReplaceFrames(const void* inBuffer, int64* _frameCount,
+status_t BMediaTrack::ReplaceFrames(const void* inBuffer, int64* _frameCount,
 	const media_header* header)
 {
 	UNIMPLEMENTED();
@@ -429,8 +418,7 @@ BMediaTrack::ReplaceFrames(const void* inBuffer, int64* _frameCount,
 }
 
 
-status_t
-BMediaTrack::SeekToTime(bigtime_t* _time, int32 flags)
+status_t BMediaTrack::SeekToTime(bigtime_t* _time, int32 flags)
 {
 	CALLED();
 
@@ -478,8 +466,7 @@ BMediaTrack::SeekToTime(bigtime_t* _time, int32 flags)
 }
 
 
-status_t
-BMediaTrack::SeekToFrame(int64* _frame, int32 flags)
+status_t BMediaTrack::SeekToFrame(int64* _frame, int32 flags)
 {
 	CALLED();
 
@@ -527,8 +514,7 @@ BMediaTrack::SeekToFrame(int64* _frame, int32 flags)
 }
 
 
-status_t
-BMediaTrack::FindKeyFrameForTime(bigtime_t* _time, int32 flags) const
+status_t BMediaTrack::FindKeyFrameForTime(bigtime_t* _time, int32 flags) const
 {
 	CALLED();
 
@@ -553,8 +539,7 @@ BMediaTrack::FindKeyFrameForTime(bigtime_t* _time, int32 flags) const
 }
 
 
-status_t
-BMediaTrack::FindKeyFrameForFrame(int64* _frame, int32 flags) const
+status_t BMediaTrack::FindKeyFrameForFrame(int64* _frame, int32 flags) const
 {
 	CALLED();
 
@@ -579,8 +564,7 @@ BMediaTrack::FindKeyFrameForFrame(int64* _frame, int32 flags) const
 }
 
 
-status_t
-BMediaTrack::ReadChunk(char** _buffer, int32* _size, media_header* _header)
+status_t BMediaTrack::ReadChunk(char** _buffer, int32* _size, media_header* _header)
 {
 	CALLED();
 
@@ -620,8 +604,7 @@ BMediaTrack::ReadChunk(char** _buffer, int32* _size, media_header* _header)
 }
 
 
-status_t
-BMediaTrack::AddCopyright(const char* copyright)
+status_t BMediaTrack::AddCopyright(const char* copyright)
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -630,8 +613,7 @@ BMediaTrack::AddCopyright(const char* copyright)
 }
 
 
-status_t
-BMediaTrack::AddTrackInfo(uint32 code, const void* data, size_t size,
+status_t BMediaTrack::AddTrackInfo(uint32 code, const void* data, size_t size,
 	uint32 flags)
 {
 	if (fWriter == NULL)
@@ -641,8 +623,7 @@ BMediaTrack::AddTrackInfo(uint32 code, const void* data, size_t size,
 }
 
 
-status_t
-BMediaTrack::WriteFrames(const void* data, int32 frameCount, int32 flags)
+status_t BMediaTrack::WriteFrames(const void* data, int32 frameCount, int32 flags)
 {
 	media_encode_info encodeInfo;
 	encodeInfo.flags = flags;
@@ -651,8 +632,7 @@ BMediaTrack::WriteFrames(const void* data, int32 frameCount, int32 flags)
 }
 
 
-status_t
-BMediaTrack::WriteFrames(const void* data, int64 frameCount,
+status_t BMediaTrack::WriteFrames(const void* data, int64 frameCount,
 	media_encode_info* info)
 {
 	if (fEncoder == NULL)
@@ -662,8 +642,7 @@ BMediaTrack::WriteFrames(const void* data, int64 frameCount,
 }
 
 
-status_t
-BMediaTrack::WriteChunk(const void* data, size_t size, uint32 flags)
+status_t BMediaTrack::WriteChunk(const void* data, size_t size, uint32 flags)
 {
 	media_encode_info encodeInfo;
 	encodeInfo.flags = flags;
@@ -672,8 +651,7 @@ BMediaTrack::WriteChunk(const void* data, size_t size, uint32 flags)
 }
 
 
-status_t
-BMediaTrack::WriteChunk(const void* data, size_t size, media_encode_info* info)
+status_t BMediaTrack::WriteChunk(const void* data, size_t size, media_encode_info* info)
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -682,8 +660,7 @@ BMediaTrack::WriteChunk(const void* data, size_t size, media_encode_info* info)
 }
 
 
-status_t
-BMediaTrack::Flush()
+status_t BMediaTrack::Flush()
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -704,8 +681,7 @@ BMediaTrack::Web()
 }
 
 
-status_t
-BMediaTrack::GetParameterWeb(BParameterWeb** outWeb)
+status_t BMediaTrack::GetParameterWeb(BParameterWeb** outWeb)
 {
 	if (outWeb == NULL)
 		return B_BAD_VALUE;
@@ -724,8 +700,7 @@ BMediaTrack::GetParameterWeb(BParameterWeb** outWeb)
 }
 
 
-status_t
-BMediaTrack::GetParameterValue(int32 id, void* value, size_t* size)
+status_t BMediaTrack::GetParameterValue(int32 id, void* value, size_t* size)
 {
 	if (value == NULL || size == NULL)
 		return B_BAD_VALUE;
@@ -737,8 +712,7 @@ BMediaTrack::GetParameterValue(int32 id, void* value, size_t* size)
 }
 
 
-status_t
-BMediaTrack::SetParameterValue(int32 id, const void* value, size_t size)
+status_t BMediaTrack::SetParameterValue(int32 id, const void* value, size_t size)
 {
 	if (value == NULL || size == 0)
 		return B_BAD_VALUE;
@@ -760,8 +734,7 @@ BMediaTrack::GetParameterView()
 }
 
 
-status_t
-BMediaTrack::GetQuality(float* quality)
+status_t BMediaTrack::GetQuality(float* quality)
 {
 	if (quality == NULL)
 		return B_BAD_VALUE;
@@ -777,8 +750,7 @@ BMediaTrack::GetQuality(float* quality)
 }
 
 
-status_t
-BMediaTrack::SetQuality(float quality)
+status_t BMediaTrack::SetQuality(float quality)
 {
 	encode_parameters parameters;
 	status_t result = GetEncodeParameters(&parameters);
@@ -797,8 +769,7 @@ BMediaTrack::SetQuality(float quality)
 }
 
 
-status_t
-BMediaTrack::GetEncodeParameters(encode_parameters* parameters) const
+status_t BMediaTrack::GetEncodeParameters(encode_parameters* parameters) const
 {
 	if (parameters == NULL)
 		return B_BAD_VALUE;
@@ -810,8 +781,7 @@ BMediaTrack::GetEncodeParameters(encode_parameters* parameters) const
 }
 
 
-status_t
-BMediaTrack::SetEncodeParameters(encode_parameters* parameters)
+status_t BMediaTrack::SetEncodeParameters(encode_parameters* parameters)
 {
 	if (parameters == NULL)
 		return B_BAD_VALUE;
@@ -823,8 +793,7 @@ BMediaTrack::SetEncodeParameters(encode_parameters* parameters)
 }
 
 
-status_t
-BMediaTrack::Perform(int32 selector, void* data)
+status_t BMediaTrack::Perform(int32 selector, void* data)
 {
 	return B_OK;
 }
@@ -906,15 +875,13 @@ BMediaTrack::BMediaTrack(BPrivate::media::MediaWriter* writer,
 
 
 // Does nothing, returns B_ERROR, for Zeta compatiblity only
-status_t
-BMediaTrack::ControlCodec(int32 selector, void* io_data, size_t size)
+status_t BMediaTrack::ControlCodec(int32 selector, void* io_data, size_t size)
 {
 	return B_ERROR;
 }
 
 
-void
-BMediaTrack::SetupWorkaround()
+void BMediaTrack::SetupWorkaround()
 {
 	app_info	ainfo;
 	thread_info	tinfo;
@@ -940,8 +907,7 @@ BMediaTrack::SetupWorkaround()
 }
 
 
-bool
-BMediaTrack::SetupFormatTranslation(const media_format &from, media_format* to)
+bool BMediaTrack::SetupFormatTranslation(const media_format &from, media_format* to)
 {
 	gPluginManager.DestroyDecoder(fRawDecoder);
 	fRawDecoder = NULL;
@@ -1098,8 +1064,7 @@ RawDecoderChunkProvider::~RawDecoderChunkProvider()
 }
 
 
-status_t
-RawDecoderChunkProvider::GetNextChunk(const void** chunkBuffer,
+status_t RawDecoderChunkProvider::GetNextChunk(const void** chunkBuffer,
 	size_t* chunkSize, media_header* header)
 {
 	int64 frames;

@@ -43,8 +43,7 @@ ValueNode::Name() const
 }
 
 
-void
-ValueNode::SetContainer(ValueNodeContainer* container)
+void ValueNode::SetContainer(ValueNodeContainer* container)
 {
 	if (container == fContainer)
 		return;
@@ -64,44 +63,38 @@ ValueNode::SetContainer(ValueNodeContainer* container)
 }
 
 
-bool
-ValueNode::IsRangedContainer() const
+bool ValueNode::IsRangedContainer() const
 {
 	return false;
 }
 
 
-bool
-ValueNode::IsContainerRangeFixed() const
+bool ValueNode::IsContainerRangeFixed() const
 {
 	return false;
 }
 
 
-void
-ValueNode::ClearChildren()
+void ValueNode::ClearChildren()
 {
 	// do nothing
 }
 
 
-status_t
-ValueNode::CreateChildrenInRange(TeamTypeInformation* info, int32 lowIndex,
+status_t ValueNode::CreateChildrenInRange(TeamTypeInformation* info, int32 lowIndex,
 	int32 highIndex)
 {
 	return B_NOT_SUPPORTED;
 }
 
 
-status_t
-ValueNode::SupportedChildRange(int32& lowIndex, int32& highIndex) const
+status_t ValueNode::SupportedChildRange(int32& lowIndex, int32& highIndex) const
 {
 	return B_NOT_SUPPORTED;
 }
 
 
-void
-ValueNode::SetLocationAndValue(ValueLocation* location, Value* value,
+void ValueNode::SetLocationAndValue(ValueLocation* location, Value* value,
 	status_t resolutionState)
 {
 	if (fLocation != location) {
@@ -153,22 +146,19 @@ ValueNodeChild::~ValueNodeChild()
 }
 
 
-bool
-ValueNodeChild::IsInternal() const
+bool ValueNodeChild::IsInternal() const
 {
 	return false;
 }
 
 
-status_t
-ValueNodeChild::CreateInternalNode(ValueNode*& _node)
+status_t ValueNodeChild::CreateInternalNode(ValueNode*& _node)
 {
 	return B_BAD_VALUE;
 }
 
 
-void
-ValueNodeChild::SetContainer(ValueNodeContainer* container)
+void ValueNodeChild::SetContainer(ValueNodeContainer* container)
 {
 	if (container == fContainer)
 		return;
@@ -187,8 +177,7 @@ ValueNodeChild::SetContainer(ValueNodeContainer* container)
 }
 
 
-void
-ValueNodeChild::SetNode(ValueNode* node)
+void ValueNodeChild::SetNode(ValueNode* node)
 {
 	if (node == fNode)
 		return;
@@ -218,8 +207,7 @@ ValueNodeChild::Location() const
 }
 
 
-void
-ValueNodeChild::SetLocation(ValueLocation* location, status_t resolutionState)
+void ValueNodeChild::SetLocation(ValueLocation* location, status_t resolutionState)
 {
 	if (fLocation != location) {
 		if (fLocation != NULL)
@@ -246,14 +234,12 @@ ChildlessValueNode::ChildlessValueNode(ValueNodeChild* nodeChild)
 }
 
 
-status_t
-ChildlessValueNode::CreateChildren(TeamTypeInformation* info)
+status_t ChildlessValueNode::CreateChildren(TeamTypeInformation* info)
 {
 	return B_OK;
 }
 
-int32
-ChildlessValueNode::CountChildren() const
+int32 ChildlessValueNode::CountChildren() const
 {
 	return 0;
 }

@@ -23,8 +23,7 @@
 #include <../include/syscalls.h>
 
 
-static void
-convert_from_r5_sockaddr(struct sockaddr *_to, const struct sockaddr *_from)
+static void convert_from_r5_sockaddr(struct sockaddr *_to, const struct sockaddr *_from)
 {
 	const r5_sockaddr_in *from = (r5_sockaddr_in *)_from;
 	sockaddr_in *to = (sockaddr_in *)_to;
@@ -45,8 +44,7 @@ convert_from_r5_sockaddr(struct sockaddr *_to, const struct sockaddr *_from)
 }
 
 
-static void
-convert_to_r5_sockaddr(struct sockaddr *_to,
+static void convert_to_r5_sockaddr(struct sockaddr *_to,
 	const struct sockaddr *_from)
 {
 	const sockaddr_in *from = (sockaddr_in *)_from;
@@ -67,8 +65,7 @@ convert_to_r5_sockaddr(struct sockaddr *_to,
 }
 
 
-static void
-convert_from_r5_socket(int& family, int& type, int& protocol)
+static void convert_from_r5_socket(int& family, int& type, int& protocol)
 {
 	switch (family) {
 		case R5_AF_INET:
@@ -104,8 +101,7 @@ convert_from_r5_socket(int& family, int& type, int& protocol)
 }
 
 
-static void
-convert_from_r5_sockopt(int& level, int& option)
+static void convert_from_r5_sockopt(int& level, int& option)
 {
 	if (level == R5_SOL_SOCKET)
 		level = SOL_SOCKET;

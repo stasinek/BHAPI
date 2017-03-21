@@ -174,16 +174,14 @@ extern bool ppc_set_fault_handler(addr_t *handlerLocation, addr_t handler)
 	__attribute__((noinline));
 
 
-static inline void
-arch_cpu_pause(void)
+static inline void arch_cpu_pause(void)
 {
 	// TODO: PowerPC review logic of setting very low for pause
 	SRH_very_low();
 }
 
 
-static inline void
-arch_cpu_idle(void)
+static inline void arch_cpu_idle(void)
 {
 	// TODO: PowerPC CPU idle call
 }

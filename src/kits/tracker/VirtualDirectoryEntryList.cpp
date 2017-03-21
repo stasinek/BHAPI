@@ -60,15 +60,13 @@ VirtualDirectoryEntryList::~VirtualDirectoryEntryList()
 }
 
 
-status_t
-VirtualDirectoryEntryList::InitCheck() const
+status_t VirtualDirectoryEntryList::InitCheck() const
 {
 	return EntryListBase::InitCheck();
 }
 
 
-status_t
-VirtualDirectoryEntryList::GetNextEntry(BEntry* entry, bool traverse)
+status_t VirtualDirectoryEntryList::GetNextEntry(BEntry* entry, bool traverse)
 {
 	entry_ref ref;
 	status_t error = GetNextRef(&ref);
@@ -79,8 +77,7 @@ VirtualDirectoryEntryList::GetNextEntry(BEntry* entry, bool traverse)
 }
 
 
-status_t
-VirtualDirectoryEntryList::GetNextRef(entry_ref* ref)
+status_t VirtualDirectoryEntryList::GetNextRef(entry_ref* ref)
 {
 	BPrivate::Storage::LongDirEntry entry;
 	int32 result = GetNextDirents(&entry, sizeof(entry), 1);
@@ -95,8 +92,7 @@ VirtualDirectoryEntryList::GetNextRef(entry_ref* ref)
 }
 
 
-int32
-VirtualDirectoryEntryList::GetNextDirents(struct dirent* buffer, size_t length,
+int32 VirtualDirectoryEntryList::GetNextDirents(struct dirent* buffer, size_t length,
 	int32 count)
 {
 	if (count > 1)
@@ -122,22 +118,19 @@ VirtualDirectoryEntryList::GetNextDirents(struct dirent* buffer, size_t length,
 }
 
 
-status_t
-VirtualDirectoryEntryList::Rewind()
+status_t VirtualDirectoryEntryList::Rewind()
 {
 	return fMergedDirectory.Rewind();
 }
 
 
-int32
-VirtualDirectoryEntryList::CountEntries()
+int32 VirtualDirectoryEntryList::CountEntries()
 {
 	return 0;
 }
 
 
-status_t
-VirtualDirectoryEntryList::_InitMergedDirectory(
+status_t VirtualDirectoryEntryList::_InitMergedDirectory(
 	const BStringList& directoryPaths)
 {
 	status_t error = fMergedDirectory.Init();

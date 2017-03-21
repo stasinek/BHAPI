@@ -95,8 +95,7 @@ EXGraphicsDrawable::~EXGraphicsDrawable()
 }
 
 
-status_t
-EXGraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
+status_t EXGraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -139,8 +138,7 @@ EXGraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
 }
 
 
-status_t
-EXGraphicsDrawable::ResizeTo(__be_uint32 w,  __be_uint32 h)
+status_t EXGraphicsDrawable::ResizeTo(__be_uint32 w,  __be_uint32 h)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
@@ -169,8 +167,7 @@ EXGraphicsDrawable::ResizeTo(__be_uint32 w,  __be_uint32 h)
 }
 
 
-status_t
-EXGraphicsDrawable::CopyTo(BGraphicsContext *_dc_,
+status_t EXGraphicsDrawable::CopyTo(BGraphicsContext *_dc_,
 			   BGraphicsDrawable *dstDrawable,
 			    __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
 			    __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)

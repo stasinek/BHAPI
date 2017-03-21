@@ -94,8 +94,7 @@ BResources::~BResources()
 
 // Initialized the BResources object to represent the resources of
 // the supplied file.
-status_t
-BResources::SetTo(const BFile* file, bool clobber)
+status_t BResources::SetTo(const BFile* file, bool clobber)
 {
 	Unset();
 	status_t error = B_OK;
@@ -132,8 +131,7 @@ BResources::SetTo(const BFile* file, bool clobber)
 
 // Initialized the BResources object to represent the resources of
 // the file referred to by the supplied path.
-status_t
-BResources::SetTo(const char* path, bool clobber)
+status_t BResources::SetTo(const char* path, bool clobber)
 {
 	if (!path)
 		return B_BAD_VALUE;
@@ -155,8 +153,7 @@ BResources::SetTo(const char* path, bool clobber)
 
 // Initialized the BResources object to represent the resources of the
 // file referenced by the supplied ref.
-status_t
-BResources::SetTo(const entry_ref* ref, bool clobber)
+status_t BResources::SetTo(const entry_ref* ref, bool clobber)
 {
 	if (!ref)
 		return B_BAD_VALUE;
@@ -178,8 +175,7 @@ BResources::SetTo(const entry_ref* ref, bool clobber)
 
 // Initialized the BResources object to represent the resources of
 // the file from which the specified image has been loaded.
-status_t
-BResources::SetToImage(image_id image, bool clobber)
+status_t BResources::SetToImage(image_id image, bool clobber)
 {
 #ifdef HAIKU_TARGET_PLATFORM_HAIKU
 	// get an image info
@@ -200,8 +196,7 @@ BResources::SetToImage(image_id image, bool clobber)
 
 // Initialized the BResources object to represent the resources of
 // the file from which the specified pointer has been loaded.
-status_t
-BResources::SetToImage(const void* codeOrDataPointer, bool clobber)
+status_t BResources::SetToImage(const void* codeOrDataPointer, bool clobber)
 {
 #ifdef HAIKU_TARGET_PLATFORM_HAIKU
 	// iterate through the images and find the one in question
@@ -228,8 +223,7 @@ BResources::SetToImage(const void* codeOrDataPointer, bool clobber)
 
 
 // Returns the BResources object to an uninitialized state.
-void
-BResources::Unset()
+void BResources::Unset()
 {
 	if (fContainer && fContainer->IsModified())
 		Sync();
@@ -245,8 +239,7 @@ BResources::Unset()
 
 
 // Gets the initialization status of the object.
-status_t
-BResources::InitCheck() const
+status_t BResources::InitCheck() const
 {
 	return (fContainer ? B_OK : B_NO_MEMORY);
 }
@@ -261,8 +254,7 @@ BResources::File() const
 
 
 // Loads a resource identified by type and id into memory.
-const void*
-BResources::LoadResource(type_code type, int32 id, size_t* _size)
+const void*   BResources::LoadResource(type_code type, int32 id, size_t* _size)
 {
 	// find the resource
 	status_t error = InitCheck();
@@ -287,8 +279,7 @@ BResources::LoadResource(type_code type, int32 id, size_t* _size)
 
 
 // Loads a resource identified by type and name into memory.
-const void*
-BResources::LoadResource(type_code type, const char* name, size_t* _size)
+const void*   BResources::LoadResource(type_code type, const char* name, size_t* _size)
 {
 	// find the resource
 	status_t error = InitCheck();
@@ -313,8 +304,7 @@ BResources::LoadResource(type_code type, const char* name, size_t* _size)
 
 
 // Loads all resources of the specified type into memory.
-status_t
-BResources::PreloadResourceType(type_code type)
+status_t BResources::PreloadResourceType(type_code type)
 {
 	status_t error = InitCheck();
 	if (error == B_OK && fResourceFile) {
@@ -338,8 +328,7 @@ BResources::PreloadResourceType(type_code type)
 
 
 // Writes all changes to the resources to the file.
-status_t
-BResources::Sync()
+status_t BResources::Sync()
 {
 	status_t error = InitCheck();
 	if (error == B_OK)
@@ -360,8 +349,7 @@ BResources::Sync()
 
 // Adds the resources of fromFile to the internal file of the
 // BResources object.
-status_t
-BResources::MergeFrom(BFile* fromFile)
+status_t BResources::MergeFrom(BFile* fromFile)
 {
 	status_t error = (fromFile ? B_OK : B_BAD_VALUE);
 	if (error == B_OK)
@@ -382,8 +370,7 @@ BResources::MergeFrom(BFile* fromFile)
 
 
 // Writes the resources to a new file.
-status_t
-BResources::WriteTo(BFile* file)
+status_t BResources::WriteTo(BFile* file)
 {
 	status_t error = (file ? B_OK : B_BAD_VALUE);
 	if (error == B_OK)
@@ -412,8 +399,7 @@ BResources::WriteTo(BFile* file)
 
 
 // Adds a new resource to the file.
-status_t
-BResources::AddResource(type_code type, int32 id, const void* data,
+status_t BResources::AddResource(type_code type, int32 id, const void* data,
 						size_t length, const char* name)
 {
 	status_t error = (data ? B_OK : B_BAD_VALUE);
@@ -446,8 +432,7 @@ BResources::AddResource(type_code type, int32 id, const void* data,
 
 // Returns whether the file contains a resource with the specified
 // type and id.
-bool
-BResources::HasResource(type_code type, int32 id)
+bool BResources::HasResource(type_code type, int32 id)
 {
 	return (InitCheck() == B_OK && fContainer->IndexOf(type, id) >= 0);
 }
@@ -455,16 +440,14 @@ BResources::HasResource(type_code type, int32 id)
 
 // Returns whether the file contains a resource with the specified
 // type and name.
-bool
-BResources::HasResource(type_code type, const char* name)
+bool BResources::HasResource(type_code type, const char* name)
 {
 	return (InitCheck() == B_OK && fContainer->IndexOf(type, name) >= 0);
 }
 
 
 // Gets information about a resource identified by byindex.
-bool
-BResources::GetResourceInfo(int32 byIndex, type_code* typeFound,
+bool BResources::GetResourceInfo(int32 byIndex, type_code* typeFound,
 	int32* idFound, const char** nameFound, size_t* lengthFound)
 {
 	ResourceItem* item = NULL;
@@ -485,8 +468,7 @@ BResources::GetResourceInfo(int32 byIndex, type_code* typeFound,
 
 
 // Gets information about a resource identified by byType and andIndex.
-bool
-BResources::GetResourceInfo(type_code byType, int32 andIndex, int32* idFound,
+bool BResources::GetResourceInfo(type_code byType, int32 andIndex, int32* idFound,
 	const char** nameFound, size_t* lengthFound)
 {
 	ResourceItem* item = NULL;
@@ -507,8 +489,7 @@ BResources::GetResourceInfo(type_code byType, int32 andIndex, int32* idFound,
 
 
 // Gets information about a resource identified by byType and andID.
-bool
-BResources::GetResourceInfo(type_code byType, int32 andID,
+bool BResources::GetResourceInfo(type_code byType, int32 andID,
 	const char** nameFound, size_t* lengthFound)
 {
 	ResourceItem* item = NULL;
@@ -525,8 +506,7 @@ BResources::GetResourceInfo(type_code byType, int32 andID,
 
 
 // Gets information about a resource identified by byType and andName.
-bool
-BResources::GetResourceInfo(type_code byType, const char* andName,
+bool BResources::GetResourceInfo(type_code byType, const char* andName,
 	int32* idFound, size_t* lengthFound)
 {
 	ResourceItem* item = NULL;
@@ -543,8 +523,7 @@ BResources::GetResourceInfo(type_code byType, const char* andName,
 
 
 // Gets information about a resource identified by byPointer.
-bool
-BResources::GetResourceInfo(const void* byPointer, type_code* typeFound,
+bool BResources::GetResourceInfo(const void* byPointer, type_code* typeFound,
 	int32* idFound, size_t* lengthFound, const char** nameFound)
 {
 	ResourceItem* item = NULL;
@@ -565,8 +544,7 @@ BResources::GetResourceInfo(const void* byPointer, type_code* typeFound,
 
 
 // Removes a resource identified by its data pointer.
-status_t
-BResources::RemoveResource(const void* resource)
+status_t BResources::RemoveResource(const void* resource)
 {
 	status_t error = (resource ? B_OK : B_BAD_VALUE);
 	if (error == B_OK)
@@ -586,8 +564,7 @@ BResources::RemoveResource(const void* resource)
 
 
 // Removes a resource identified by type and id.
-status_t
-BResources::RemoveResource(type_code type, int32 id)
+status_t BResources::RemoveResource(type_code type, int32 id)
 {
 	status_t error = InitCheck();
 	if (error == B_OK)
@@ -609,8 +586,7 @@ BResources::RemoveResource(type_code type, int32 id)
 
 // Writes data into an existing resource
 // (deprecated, use AddResource() instead).
-status_t
-BResources::WriteResource(type_code type, int32 id, const void* data,
+status_t BResources::WriteResource(type_code type, int32 id, const void* data,
 	off_t offset, size_t length)
 {
 	status_t error = (data && offset >= 0 ? B_OK : B_BAD_VALUE);
@@ -645,8 +621,7 @@ BResources::WriteResource(type_code type, int32 id, const void* data,
 
 // Reads data from an existing resource
 // (deprecated, use LoadResource() instead).
-status_t
-BResources::ReadResource(type_code type, int32 id, void* data, off_t offset,
+status_t BResources::ReadResource(type_code type, int32 id, void* data, off_t offset,
 	size_t length)
 {
 	status_t error = (data && offset >= 0 ? B_OK : B_BAD_VALUE);
@@ -674,8 +649,7 @@ BResources::ReadResource(type_code type, int32 id, void* data, off_t offset,
 
 // Finds a resource by type and id and returns a pointer to a copy of
 // its data (deprecated, use LoadResource() instead).
-void*
-BResources::FindResource(type_code type, int32 id, size_t* lengthFound)
+void*   BResources::FindResource(type_code type, int32 id, size_t* lengthFound)
 {
 	void* result = NULL;
 	size_t size = 0;
@@ -692,8 +666,7 @@ BResources::FindResource(type_code type, int32 id, size_t* lengthFound)
 
 // Finds a resource by type and name and returns a pointer to a copy of
 // its data (deprecated, use LoadResource() instead).
-void*
-BResources::FindResource(type_code type, const char* name, size_t* lengthFound)
+void*   BResources::FindResource(type_code type, const char* name, size_t* lengthFound)
 {
 	void* result = NULL;
 	size_t size = 0;

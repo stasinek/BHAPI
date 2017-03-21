@@ -31,8 +31,7 @@ BADCStream::~BADCStream()
 }
 
 
-status_t
-BADCStream::SetADCInput(int32 device)
+status_t BADCStream::SetADCInput(int32 device)
 {
 	UNIMPLEMENTED();
 
@@ -40,8 +39,7 @@ BADCStream::SetADCInput(int32 device)
 }
 
 
-status_t
-BADCStream::ADCInput(int32 *device) const
+status_t BADCStream::ADCInput(int32 *device) const
 {
 	UNIMPLEMENTED();
 
@@ -49,8 +47,7 @@ BADCStream::ADCInput(int32 *device) const
 }
 
 
-status_t
-BADCStream::SetSamplingRate(float sRate)
+status_t BADCStream::SetSamplingRate(float sRate)
 {
 	UNIMPLEMENTED();
 
@@ -58,8 +55,7 @@ BADCStream::SetSamplingRate(float sRate)
 }
 
 
-status_t
-BADCStream::SamplingRate(float *sRate) const
+status_t BADCStream::SamplingRate(float *sRate) const
 {
 	UNIMPLEMENTED();
 
@@ -67,8 +63,7 @@ BADCStream::SamplingRate(float *sRate) const
 }
 
 
-status_t
-BADCStream::BoostMic(bool boost)
+status_t BADCStream::BoostMic(bool boost)
 {
 	UNIMPLEMENTED();
 
@@ -76,8 +71,7 @@ BADCStream::BoostMic(bool boost)
 }
 
 
-bool
-BADCStream::IsMicBoosted() const
+bool BADCStream::IsMicBoosted() const
 {
 	UNIMPLEMENTED();
 
@@ -85,8 +79,7 @@ BADCStream::IsMicBoosted() const
 }
 
 
-status_t
-BADCStream::SetStreamBuffers(size_t bufferSize,
+status_t BADCStream::SetStreamBuffers(size_t bufferSize,
 							 int32 bufferCount)
 {
 	UNIMPLEMENTED();
@@ -120,22 +113,19 @@ BADCStream::StreamID() const
  *************************************************************/
 
 
-void
-BADCStream::_ReservedADCStream1()
+void BADCStream::_ReservedADCStream1()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BADCStream::_ReservedADCStream2()
+void BADCStream::_ReservedADCStream2()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BADCStream::_ReservedADCStream3()
+void BADCStream::_ReservedADCStream3()
 {
 	UNIMPLEMENTED();
 }
@@ -156,8 +146,7 @@ BDACStream::~BDACStream()
 }
 
 
-status_t
-BDACStream::SetSamplingRate(float sRate)
+status_t BDACStream::SetSamplingRate(float sRate)
 {
 	UNIMPLEMENTED();
 
@@ -165,8 +154,7 @@ BDACStream::SetSamplingRate(float sRate)
 }
 
 
-status_t
-BDACStream::SamplingRate(float *sRate) const
+status_t BDACStream::SamplingRate(float *sRate) const
 {
 	UNIMPLEMENTED();
 
@@ -174,8 +162,7 @@ BDACStream::SamplingRate(float *sRate) const
 }
 
 
-status_t
-BDACStream::SetVolume(int32 device,
+status_t BDACStream::SetVolume(int32 device,
 					  float l_volume,
 					  float r_volume)
 {
@@ -185,8 +172,7 @@ BDACStream::SetVolume(int32 device,
 }
 
 
-status_t
-BDACStream::GetVolume(int32 device,
+status_t BDACStream::GetVolume(int32 device,
 					  float *l_volume,
 					  float *r_volume,
 					  bool *enabled) const
@@ -197,8 +183,7 @@ BDACStream::GetVolume(int32 device,
 }
 
 
-status_t
-BDACStream::EnableDevice(int32 device,
+status_t BDACStream::EnableDevice(int32 device,
 						 bool enable)
 {
 	UNIMPLEMENTED();
@@ -207,8 +192,7 @@ BDACStream::EnableDevice(int32 device,
 }
 
 
-bool
-BDACStream::IsDeviceEnabled(int32 device) const
+bool BDACStream::IsDeviceEnabled(int32 device) const
 {
 	UNIMPLEMENTED();
 
@@ -216,8 +200,7 @@ BDACStream::IsDeviceEnabled(int32 device) const
 }
 
 
-status_t
-BDACStream::SetStreamBuffers(size_t bufferSize,
+status_t BDACStream::SetStreamBuffers(size_t bufferSize,
 							 int32 bufferCount)
 {
 	UNIMPLEMENTED();
@@ -249,22 +232,19 @@ BDACStream::StreamID() const
  * private BDACStream
  *************************************************************/
 
-void
-BDACStream::_ReservedDACStream1()
+void BDACStream::_ReservedDACStream1()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BDACStream::_ReservedDACStream2()
+void BDACStream::_ReservedDACStream2()
 {
 	UNIMPLEMENTED();
 }
 
 
-void
-BDACStream::_ReservedDACStream3()
+void BDACStream::_ReservedDACStream3()
 {
 	UNIMPLEMENTED();
 }

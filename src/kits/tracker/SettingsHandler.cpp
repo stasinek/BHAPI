@@ -90,8 +90,7 @@ ArgvParser::~ArgvParser()
 }
 
 
-void
-ArgvParser::MakeArgvEmpty()
+void ArgvParser::MakeArgvEmpty()
 {
 	// done with current argv, free it up
 	for (int32 index = 0; index < fArgc; index++)
@@ -101,8 +100,7 @@ ArgvParser::MakeArgvEmpty()
 }
 
 
-status_t
-ArgvParser::SendArgv(ArgvHandler argvHandlerFunc, void* passThru)
+status_t ArgvParser::SendArgv(ArgvHandler argvHandlerFunc, void* passThru)
 {
 	if (fArgc) {
 		NextArgv();
@@ -121,8 +119,7 @@ ArgvParser::SendArgv(ArgvHandler argvHandlerFunc, void* passThru)
 }
 
 
-void
-ArgvParser::NextArgv()
+void ArgvParser::NextArgv()
 {
 	if (fSawBackslash) {
 		fCurrentArgs[++fCurrentArgsPos] = '\\';
@@ -139,8 +136,7 @@ ArgvParser::NextArgv()
 }
 
 
-void
-ArgvParser::NextArgvIfNotEmpty()
+void ArgvParser::NextArgvIfNotEmpty()
 {
 	if (!fSawBackslash && fCurrentArgsPos < 0)
 		return;
@@ -164,8 +160,7 @@ ArgvParser::GetCh()
 }
 
 
-status_t
-ArgvParser::EachArgv(const char* name, ArgvHandler argvHandlerFunc,
+status_t ArgvParser::EachArgv(const char* name, ArgvHandler argvHandlerFunc,
 	void* passThru)
 {
 	ArgvParser parser(name);
@@ -174,8 +169,7 @@ ArgvParser::EachArgv(const char* name, ArgvHandler argvHandlerFunc,
 }
 
 
-status_t
-ArgvParser::EachArgvPrivate(const char* name, ArgvHandler argvHandlerFunc,
+status_t ArgvParser::EachArgvPrivate(const char* name, ArgvHandler argvHandlerFunc,
 	void* passThru)
 {
 	status_t result;
@@ -273,8 +267,7 @@ SettingsArgvDispatcher::SettingsArgvDispatcher(const char* name)
 }
 
 
-void
-SettingsArgvDispatcher::SaveSettings(Settings* settings,
+void SettingsArgvDispatcher::SaveSettings(Settings* settings,
 	bool onlyIfNonDefault)
 {
 	if (!onlyIfNonDefault || NeedsSaving()) {
@@ -285,8 +278,7 @@ SettingsArgvDispatcher::SaveSettings(Settings* settings,
 }
 
 
-bool
-SettingsArgvDispatcher::HandleRectValue(BRect &result,
+bool SettingsArgvDispatcher::HandleRectValue(BRect &result,
 	const char* const* argv, bool printError)
 {
 	if (!*argv) {
@@ -321,8 +313,7 @@ SettingsArgvDispatcher::HandleRectValue(BRect &result,
 }
 
 
-void
-SettingsArgvDispatcher::WriteRectValue(Settings* setting, BRect rect)
+void SettingsArgvDispatcher::WriteRectValue(Settings* setting, BRect rect)
 {
 	setting->Write("%d %d %d %d", (int32)rect.left, (int32)rect.top,
 		(int32)rect.right, (int32)rect.bottom);
@@ -352,8 +343,7 @@ Settings::~Settings()
 }
 
 
-const char*
-Settings::ParseUserSettings(int, const char* const* argv, void* castToThis)
+const char*  Settings::ParseUserSettings(int, const char* const* argv, void* castToThis)
 {
 	if (!*argv)
 		return 0;
@@ -366,8 +356,7 @@ Settings::ParseUserSettings(int, const char* const* argv, void* castToThis)
 }
 
 
-bool
-Settings::Add(SettingsArgvDispatcher* setting)
+bool Settings::Add(SettingsArgvDispatcher* setting)
 {
 	// check for uniqueness
 	if (Find(setting->Name()))
@@ -394,8 +383,7 @@ Settings::Find(const char* name)
 }
 
 
-void
-Settings::TryReadingSettings()
+void Settings::TryReadingSettings()
 {
 	BPath prefsPath;
 	if (find_directory(B_USER_SETTINGS_DIRECTORY, &prefsPath, true) == B_OK) {
@@ -408,15 +396,13 @@ Settings::TryReadingSettings()
 }
 
 
-void
-Settings::SaveSettings(bool onlyIfNonDefault)
+void Settings::SaveSettings(bool onlyIfNonDefault)
 {
 	SaveCurrentSettings(onlyIfNonDefault);
 }
 
 
-void
-Settings::MakeSettingsDirectory(BDirectory* resultingSettingsDir)
+void Settings::MakeSettingsDirectory(BDirectory* resultingSettingsDir)
 {
 	BPath path;
 	if (find_directory(B_USER_SETTINGS_DIRECTORY, &path, true) != B_OK)
@@ -442,8 +428,7 @@ Settings::MakeSettingsDirectory(BDirectory* resultingSettingsDir)
 }
 
 
-void
-Settings::SaveCurrentSettings(bool onlyIfNonDefault)
+void Settings::SaveCurrentSettings(bool onlyIfNonDefault)
 {
 	BDirectory settingsDir;
 	MakeSettingsDirectory(&settingsDir);
@@ -467,8 +452,7 @@ Settings::SaveCurrentSettings(bool onlyIfNonDefault)
 }
 
 
-void
-Settings::Write(const char* format, ...)
+void Settings::Write(const char* format, ...)
 {
 	va_list args;
 
@@ -478,8 +462,7 @@ Settings::Write(const char* format, ...)
 }
 
 
-void
-Settings::VSWrite(const char* format, va_list arg)
+void Settings::VSWrite(const char* format, va_list arg)
 {
 	char fBuffer[2048];
 	vsprintf(fBuffer, format, arg);

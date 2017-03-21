@@ -72,8 +72,7 @@ VirtualDirectoryWindow::VirtualDirectoryWindow(LockingList<BWindow>* windowList,
 }
 
 
-void
-VirtualDirectoryWindow::CreatePoseView(Model* model)
+void VirtualDirectoryWindow::CreatePoseView(Model* model)
 {
 	fPoseView = NewPoseView(model, kListMode);
 	if (fPoseView == NULL)
@@ -130,8 +129,7 @@ VirtualDirectoryWindow::PoseView() const
 }
 
 
-void
-VirtualDirectoryWindow::AddWindowMenu(BMenu* menu)
+void VirtualDirectoryWindow::AddWindowMenu(BMenu* menu)
 {
 	BMenuItem* item;
 
@@ -167,8 +165,7 @@ VirtualDirectoryWindow::AddWindowMenu(BMenu* menu)
 }
 
 
-void
-VirtualDirectoryWindow::AddWindowContextMenus(BMenu* menu)
+void VirtualDirectoryWindow::AddWindowContextMenus(BMenu* menu)
 {
 	BMenuItem* resizeItem = new BMenuItem(B_TRANSLATE("Resize to fit"),
 		new BMessage(kResizeToFit), 'Y');

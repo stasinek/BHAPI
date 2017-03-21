@@ -31,8 +31,7 @@ BGeolocation::BGeolocation(const BUrl& service)
 }
 
 
-status_t
-BGeolocation::LocateSelf(float& latitude, float& longitude)
+status_t BGeolocation::LocateSelf(float& latitude, float& longitude)
 {
 	// Enumerate wifi network and build JSON message
 	BNetworkRoster& roster = BNetworkRoster::Default();

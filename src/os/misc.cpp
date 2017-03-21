@@ -3,8 +3,7 @@ include <../include/stdarg.h>
 
 #include <fs_volume.h>
 
-extern "C" void
-debug_printf(const char *format, ...)
+extern "C" void debug_printf(const char *format, ...)
 {
 	va_list list;
 
@@ -14,8 +13,7 @@ debug_printf(const char *format, ...)
 }
 
 
-extern "C" void
-ktrace_printf(const char *format, ...)
+extern "C" void ktrace_printf(const char *format, ...)
 {
 }
 
@@ -28,22 +26,19 @@ fs_mount_volume(const char *where, const char *device, const char *filesystem,
 }
 
 
-status_t
-fs_unmount_volume(const char *path, uint32 flags)
+status_t fs_unmount_volume(const char *path, uint32 flags)
 {
 	return B_ERROR;
 }
 
 
-int32
-atomic_get(vint32 *value)
+int32 atomic_get(vint32 *value)
 {
 	return *value;
 }
 
 
-status_t
-_get_port_message_info_etc(port_id id, port_message_info *info,
+status_t _get_port_message_info_etc(port_id id, port_message_info *info,
 	size_t infoSize, uint32 flags, bigtime_t timeout)
 {
 	return B_ERROR;
@@ -62,13 +57,12 @@ _get_port_message_info_etc(port_id id, port_message_info *info,
 
 #include <Debug.h>
 #include <image.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 mode_t __gUmask = 022;
 
 // debugger
-void
-debugger(const char *message)
+void debugger(const char *message)
 {
 	fprintf(stderr, "debugger() called: %s\n", message);
 	exit(1);
@@ -94,8 +88,7 @@ system_time(void)
 }
 
 // snooze
-status_t
-snooze(bigtime_t amount)
+status_t snooze(bigtime_t amount)
 {
 	if (amount <= 0)
 		return B_OK;
@@ -116,8 +109,7 @@ snooze(bigtime_t amount)
 }
 
 // snooze_until
-status_t
-snooze_until(bigtime_t time, int timeBase)
+status_t snooze_until(bigtime_t time, int timeBase)
 {
 	return snooze(time - system_time());
 }

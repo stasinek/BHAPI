@@ -279,8 +279,7 @@ BTwoDimensionalLayout::~BTwoDimensionalLayout()
 }
 
 
-void
-BTwoDimensionalLayout::SetInsets(float left, float top, float right,
+void BTwoDimensionalLayout::SetInsets(float left, float top, float right,
 	float bottom)
 {
 	fLeftInset = BControlLook::ComposeSpacing(left);
@@ -292,8 +291,7 @@ BTwoDimensionalLayout::SetInsets(float left, float top, float right,
 }
 
 
-void
-BTwoDimensionalLayout::SetInsets(float horizontal, float vertical)
+void BTwoDimensionalLayout::SetInsets(float horizontal, float vertical)
 {
 	fLeftInset = BControlLook::ComposeSpacing(horizontal);
 	fRightInset = fLeftInset;
@@ -305,8 +303,7 @@ BTwoDimensionalLayout::SetInsets(float horizontal, float vertical)
 }
 
 
-void
-BTwoDimensionalLayout::SetInsets(float insets)
+void BTwoDimensionalLayout::SetInsets(float insets)
 {
 	fLeftInset = BControlLook::ComposeSpacing(insets);
 	fRightInset = fLeftInset;
@@ -317,8 +314,7 @@ BTwoDimensionalLayout::SetInsets(float insets)
 }
 
 
-void
-BTwoDimensionalLayout::GetInsets(float* left, float* top, float* right,
+void BTwoDimensionalLayout::GetInsets(float* left, float* top, float* right,
 	float* bottom) const
 {
 	if (left)
@@ -332,8 +328,7 @@ BTwoDimensionalLayout::GetInsets(float* left, float* top, float* right,
 }
 
 
-void
-BTwoDimensionalLayout::AlignLayoutWith(BTwoDimensionalLayout* other,
+void BTwoDimensionalLayout::AlignLayoutWith(BTwoDimensionalLayout* other,
 	orientation orientation)
 {
 	if (!other || other == this)
@@ -376,16 +371,14 @@ BTwoDimensionalLayout::BaseAlignment()
 }
 
 
-bool
-BTwoDimensionalLayout::HasHeightForWidth()
+bool BTwoDimensionalLayout::HasHeightForWidth()
 {
 	_ValidateMinMax();
 	return fLocalLayouter->HasHeightForWidth();
 }
 
 
-void
-BTwoDimensionalLayout::GetHeightForWidth(float width, float* min, float* max,
+void BTwoDimensionalLayout::GetHeightForWidth(float width, float* min, float* max,
 	float* preferred)
 {
 	if (!HasHeightForWidth())
@@ -398,15 +391,13 @@ BTwoDimensionalLayout::GetHeightForWidth(float width, float* min, float* max,
 }
 
 
-void
-BTwoDimensionalLayout::SetFrame(BRect frame)
+void BTwoDimensionalLayout::SetFrame(BRect frame)
 {
 	BAbstractLayout::SetFrame(frame);
 }
 
 
-status_t
-BTwoDimensionalLayout::Archive(BMessage* into, bool deep) const
+status_t BTwoDimensionalLayout::Archive(BMessage* into, bool deep) const
 {
 	BArchiver archiver(into);
 	status_t err = BAbstractLayout::Archive(into, deep);
@@ -426,8 +417,7 @@ BTwoDimensionalLayout::Archive(BMessage* into, bool deep) const
 }
 
 
-status_t
-BTwoDimensionalLayout::AllArchived(BMessage* into) const
+status_t BTwoDimensionalLayout::AllArchived(BMessage* into) const
 {
 	BArchiver archiver(into);
 
@@ -438,8 +428,7 @@ BTwoDimensionalLayout::AllArchived(BMessage* into) const
 }
 
 
-status_t
-BTwoDimensionalLayout::AllUnarchived(const BMessage* from)
+status_t BTwoDimensionalLayout::AllUnarchived(const BMessage* from)
 {
 	status_t err = BLayout::AllUnarchived(from);
 	if (err != B_OK)
@@ -454,16 +443,14 @@ BTwoDimensionalLayout::AllUnarchived(const BMessage* from)
 }
 
 
-status_t
-BTwoDimensionalLayout::ItemArchived(BMessage* into, BLayoutItem* item,
+status_t BTwoDimensionalLayout::ItemArchived(BMessage* into, BLayoutItem* item,
 	int32 index) const
 {
 	return BAbstractLayout::ItemArchived(into, item, index);
 }
 
 
-status_t
-BTwoDimensionalLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item,
+status_t BTwoDimensionalLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item,
 	int32 index)
 {
 	return BAbstractLayout::ItemUnarchived(from, item, index);
@@ -472,15 +459,13 @@ BTwoDimensionalLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item,
 
 
 
-void
-BTwoDimensionalLayout::LayoutInvalidated(bool children)
+void BTwoDimensionalLayout::LayoutInvalidated(bool children)
 {
 	fLocalLayouter->InvalidateLayout();
 }
 
 
-void
-BTwoDimensionalLayout::DoLayout()
+void BTwoDimensionalLayout::DoLayout()
 {
 	_ValidateMinMax();
 
@@ -545,8 +530,7 @@ BTwoDimensionalLayout::AddInsets(BSize size)
 }
 
 
-void
-BTwoDimensionalLayout::AddInsets(float* minHeight, float* maxHeight,
+void BTwoDimensionalLayout::AddInsets(float* minHeight, float* maxHeight,
 	float* preferredHeight)
 {
 	float insets = fTopInset + fBottomInset - 1;
@@ -570,28 +554,24 @@ BTwoDimensionalLayout::SubtractInsets(BSize size)
 }
 
 
-void
-BTwoDimensionalLayout::PrepareItems(orientation orientation)
+void BTwoDimensionalLayout::PrepareItems(orientation orientation)
 {
 }
 
 
-bool
-BTwoDimensionalLayout::HasMultiColumnItems()
+bool BTwoDimensionalLayout::HasMultiColumnItems()
 {
 	return false;
 }
 
 
-bool
-BTwoDimensionalLayout::HasMultiRowItems()
+bool BTwoDimensionalLayout::HasMultiRowItems()
 {
 	return false;
 }
 
 
-void
-BTwoDimensionalLayout::_ValidateMinMax()
+void BTwoDimensionalLayout::_ValidateMinMax()
 {
 	fLocalLayouter->ValidateMinMax();
 }
@@ -641,8 +621,7 @@ BTwoDimensionalLayout::CompoundLayouter::GetLayoutInfo()
 }
 
 
-void
-BTwoDimensionalLayout::CompoundLayouter::AddLocalLayouter(
+void BTwoDimensionalLayout::CompoundLayouter::AddLocalLayouter(
 	LocalLayouter* localLayouter)
 {
 	if (localLayouter) {
@@ -654,8 +633,7 @@ BTwoDimensionalLayout::CompoundLayouter::AddLocalLayouter(
 }
 
 
-void
-BTwoDimensionalLayout::CompoundLayouter::RemoveLocalLayouter(
+void BTwoDimensionalLayout::CompoundLayouter::RemoveLocalLayouter(
 	LocalLayouter* localLayouter)
 {
 	if (fLocalLayouters.RemoveItem(localLayouter))
@@ -663,8 +641,7 @@ BTwoDimensionalLayout::CompoundLayouter::RemoveLocalLayouter(
 }
 
 
-status_t
-BTwoDimensionalLayout::CompoundLayouter::AddAlignedLayoutsToArchive(
+status_t BTwoDimensionalLayout::CompoundLayouter::AddAlignedLayoutsToArchive(
 	BArchiver* archiver, LocalLayouter* requestedBy)
 {
 	// The LocalLayouter* that really owns us is at index 0, layouts
@@ -685,8 +662,7 @@ BTwoDimensionalLayout::CompoundLayouter::AddAlignedLayoutsToArchive(
 }
 
 
-void
-BTwoDimensionalLayout::CompoundLayouter::AbsorbCompoundLayouter(
+void BTwoDimensionalLayout::CompoundLayouter::AbsorbCompoundLayouter(
 	CompoundLayouter* other)
 {
 	if (other == this)
@@ -704,8 +680,7 @@ BTwoDimensionalLayout::CompoundLayouter::AbsorbCompoundLayouter(
 }
 
 
-void
-BTwoDimensionalLayout::CompoundLayouter::InvalidateLayout()
+void BTwoDimensionalLayout::CompoundLayouter::InvalidateLayout()
 {
 	if (!fLayouter)
 		return;
@@ -726,15 +701,13 @@ BTwoDimensionalLayout::CompoundLayouter::InvalidateLayout()
 }
 
 
-bool
-BTwoDimensionalLayout::CompoundLayouter::IsMinMaxValid()
+bool BTwoDimensionalLayout::CompoundLayouter::IsMinMaxValid()
 {
 	return (fLayouter != NULL);
 }
 
 
-void
-BTwoDimensionalLayout::CompoundLayouter::ValidateMinMax()
+void BTwoDimensionalLayout::CompoundLayouter::ValidateMinMax()
 {
 	if (IsMinMaxValid())
 		return;
@@ -759,8 +732,7 @@ BTwoDimensionalLayout::CompoundLayouter::ValidateMinMax()
 }
 
 
-void
-BTwoDimensionalLayout::CompoundLayouter::Layout(float size,
+void BTwoDimensionalLayout::CompoundLayouter::Layout(float size,
 	LocalLayouter* localLayouter, BLayoutContext* context)
 {
 	ValidateMinMax();
@@ -773,16 +745,14 @@ BTwoDimensionalLayout::CompoundLayouter::Layout(float size,
 }
 
 
-void
-BTwoDimensionalLayout::CompoundLayouter::DoLayout(float size,
+void BTwoDimensionalLayout::CompoundLayouter::DoLayout(float size,
 	LocalLayouter* localLayouter, BLayoutContext* context)
 {
 	fLayouter->Layout(fLayoutInfo, size);
 }
 
 
-void
-BTwoDimensionalLayout::CompoundLayouter::_PrepareItems()
+void BTwoDimensionalLayout::CompoundLayouter::_PrepareItems()
 {
 	int32 count = fLocalLayouters.CountItems();
 	for (int32 i = 0; i < count; i++) {
@@ -792,8 +762,7 @@ BTwoDimensionalLayout::CompoundLayouter::_PrepareItems()
 }
 
 
-int32
-BTwoDimensionalLayout::CompoundLayouter::_CountElements()
+int32 BTwoDimensionalLayout::CompoundLayouter::_CountElements()
 {
 	int32 elementCount = 0;
 	int32 count = fLocalLayouters.CountItems();
@@ -807,8 +776,7 @@ BTwoDimensionalLayout::CompoundLayouter::_CountElements()
 }
 
 
-bool
-BTwoDimensionalLayout::CompoundLayouter::_HasMultiElementItems()
+bool BTwoDimensionalLayout::CompoundLayouter::_HasMultiElementItems()
 {
 	int32 count = fLocalLayouters.CountItems();
 	for (int32 i = 0; i < count; i++) {
@@ -821,8 +789,7 @@ BTwoDimensionalLayout::CompoundLayouter::_HasMultiElementItems()
 }
 
 
-void
-BTwoDimensionalLayout::CompoundLayouter::_AddConstraints(Layouter* layouter)
+void BTwoDimensionalLayout::CompoundLayouter::_AddConstraints(Layouter* layouter)
 {
 	int32 count = fLocalLayouters.CountItems();
 	for (int32 i = 0; i < count; i++) {
@@ -864,8 +831,7 @@ BTwoDimensionalLayout::VerticalCompoundLayouter::GetLayouter(bool minMax)
 }
 
 
-void
-BTwoDimensionalLayout::VerticalCompoundLayouter::InvalidateLayout()
+void BTwoDimensionalLayout::VerticalCompoundLayouter::InvalidateLayout()
 {
 	CompoundLayouter::InvalidateLayout();
 
@@ -873,8 +839,7 @@ BTwoDimensionalLayout::VerticalCompoundLayouter::InvalidateLayout()
 }
 
 
-void
-BTwoDimensionalLayout::VerticalCompoundLayouter::InvalidateHeightForWidth()
+void BTwoDimensionalLayout::VerticalCompoundLayouter::InvalidateHeightForWidth()
 {
 	if (fHeightForWidthLayouter != NULL) {
 		delete fHeightForWidthLayouter;
@@ -892,8 +857,7 @@ BTwoDimensionalLayout::VerticalCompoundLayouter::InvalidateHeightForWidth()
 }
 
 
-void
-BTwoDimensionalLayout::VerticalCompoundLayouter::InternalGetHeightForWidth(
+void BTwoDimensionalLayout::VerticalCompoundLayouter::InternalGetHeightForWidth(
 	LocalLayouter* localLayouter, BLayoutContext* context, bool realLayout,
 	float* minHeight, float* maxHeight, float* preferredHeight)
 {
@@ -948,8 +912,7 @@ BTwoDimensionalLayout::VerticalCompoundLayouter::InternalGetHeightForWidth(
 }
 
 
-void
-BTwoDimensionalLayout::VerticalCompoundLayouter::DoLayout(float size,
+void BTwoDimensionalLayout::VerticalCompoundLayouter::DoLayout(float size,
 	LocalLayouter* localLayouter, BLayoutContext* context)
 {
 	Layouter* layouter;
@@ -966,8 +929,7 @@ BTwoDimensionalLayout::VerticalCompoundLayouter::DoLayout(float size,
 }
 
 
-bool
-BTwoDimensionalLayout::VerticalCompoundLayouter::_HasHeightForWidth()
+bool BTwoDimensionalLayout::VerticalCompoundLayouter::_HasHeightForWidth()
 {
 	int32 count = fLocalLayouters.CountItems();
 	for (int32 i = 0; i < count; i++) {
@@ -980,8 +942,7 @@ BTwoDimensionalLayout::VerticalCompoundLayouter::_HasHeightForWidth()
 }
 
 
-bool
-BTwoDimensionalLayout::VerticalCompoundLayouter
+bool BTwoDimensionalLayout::VerticalCompoundLayouter
 	::_SetHeightForWidthLayoutContext(BLayoutContext* context)
 {
 	if (context == fHeightForWidthLayoutContext)
@@ -1009,8 +970,7 @@ BTwoDimensionalLayout::VerticalCompoundLayouter
 }
 
 
-void
-BTwoDimensionalLayout::VerticalCompoundLayouter::LayoutContextLeft(
+void BTwoDimensionalLayout::VerticalCompoundLayouter::LayoutContextLeft(
 	BLayoutContext* context)
 {
 	fHeightForWidthLayoutContext = NULL;
@@ -1074,16 +1034,14 @@ BTwoDimensionalLayout::LocalLayouter::PreferredSize()
 }
 
 
-void
-BTwoDimensionalLayout::LocalLayouter::InvalidateLayout()
+void BTwoDimensionalLayout::LocalLayouter::InvalidateLayout()
 {
 	fHLayouter->InvalidateLayout();
 	fVLayouter->InvalidateLayout();
 }
 
 
-void
-BTwoDimensionalLayout::LocalLayouter::Layout(BSize size)
+void BTwoDimensionalLayout::LocalLayouter::Layout(BSize size)
 {
 	DoHorizontalLayout(size.width);
 	fVLayouter->Layout(size.height, this, fLayout->LayoutContext());
@@ -1105,8 +1063,7 @@ BTwoDimensionalLayout::LocalLayouter::ItemFrame(Dimensions itemDimensions)
 }
 
 
-void
-BTwoDimensionalLayout::LocalLayouter::ValidateMinMax()
+void BTwoDimensionalLayout::LocalLayouter::ValidateMinMax()
 {
 	if (fHLayouter->IsMinMaxValid() && fVLayouter->IsMinMaxValid())
 		return;
@@ -1122,8 +1079,7 @@ BTwoDimensionalLayout::LocalLayouter::ValidateMinMax()
 }
 
 
-void
-BTwoDimensionalLayout::LocalLayouter::DoHorizontalLayout(float width)
+void BTwoDimensionalLayout::LocalLayouter::DoHorizontalLayout(float width)
 {
 	BLayoutContext* context = fLayout->LayoutContext();
 	if (fHorizontalLayoutContext != context
@@ -1135,8 +1091,7 @@ BTwoDimensionalLayout::LocalLayouter::DoHorizontalLayout(float width)
 }
 
 
-void
-BTwoDimensionalLayout::LocalLayouter::InternalGetHeightForWidth(float width,
+void BTwoDimensionalLayout::LocalLayouter::InternalGetHeightForWidth(float width,
 	float* minHeight, float* maxHeight, float* preferredHeight)
 {
 	DoHorizontalLayout(width);
@@ -1145,8 +1100,7 @@ BTwoDimensionalLayout::LocalLayouter::InternalGetHeightForWidth(float width,
 }
 
 
-void
-BTwoDimensionalLayout::LocalLayouter::AlignWith(LocalLayouter* other,
+void BTwoDimensionalLayout::LocalLayouter::AlignWith(LocalLayouter* other,
 	orientation orientation)
 {
 	if (orientation == B_HORIZONTAL)
@@ -1156,8 +1110,7 @@ BTwoDimensionalLayout::LocalLayouter::AlignWith(LocalLayouter* other,
 }
 
 
-status_t
-BTwoDimensionalLayout::LocalLayouter::AddAlignedLayoutsToArchive(
+status_t BTwoDimensionalLayout::LocalLayouter::AddAlignedLayoutsToArchive(
 	BArchiver* archiver)
 {
 	status_t err = fHLayouter->AddAlignedLayoutsToArchive(archiver, this);
@@ -1169,8 +1122,7 @@ BTwoDimensionalLayout::LocalLayouter::AddAlignedLayoutsToArchive(
 }
 
 
-status_t
-BTwoDimensionalLayout::LocalLayouter::AddOwnerToArchive(BArchiver* archiver,
+status_t BTwoDimensionalLayout::LocalLayouter::AddOwnerToArchive(BArchiver* archiver,
 	CompoundLayouter* requestedBy, bool& _wasAvailable)
 {
 	const char* field = kHAlignedLayoutField;
@@ -1184,8 +1136,7 @@ BTwoDimensionalLayout::LocalLayouter::AddOwnerToArchive(BArchiver* archiver,
 }
 
 
-status_t
-BTwoDimensionalLayout::LocalLayouter::AlignLayoutsFromArchive(
+status_t BTwoDimensionalLayout::LocalLayouter::AlignLayoutsFromArchive(
 	BUnarchiver* unarchiver, orientation posture)
 {
 	const char* field = kHAlignedLayoutField;
@@ -1210,16 +1161,14 @@ BTwoDimensionalLayout::LocalLayouter::AlignLayoutsFromArchive(
 }
 
 
-void
-BTwoDimensionalLayout::LocalLayouter::PrepareItems(
+void BTwoDimensionalLayout::LocalLayouter::PrepareItems(
 	CompoundLayouter* compoundLayouter)
 {
 	fLayout->PrepareItems(compoundLayouter->Orientation());
 }
 
 
-int32
-BTwoDimensionalLayout::LocalLayouter::CountElements(
+int32 BTwoDimensionalLayout::LocalLayouter::CountElements(
 	CompoundLayouter* compoundLayouter)
 {
 	if (compoundLayouter->Orientation() == B_HORIZONTAL)
@@ -1229,8 +1178,7 @@ BTwoDimensionalLayout::LocalLayouter::CountElements(
 }
 
 
-bool
-BTwoDimensionalLayout::LocalLayouter::HasMultiElementItems(
+bool BTwoDimensionalLayout::LocalLayouter::HasMultiElementItems(
 	CompoundLayouter* compoundLayouter)
 {
 	if (compoundLayouter->Orientation() == B_HORIZONTAL)
@@ -1240,8 +1188,7 @@ BTwoDimensionalLayout::LocalLayouter::HasMultiElementItems(
 }
 
 
-void
-BTwoDimensionalLayout::LocalLayouter::AddConstraints(
+void BTwoDimensionalLayout::LocalLayouter::AddConstraints(
 	CompoundLayouter* compoundLayouter, Layouter* layouter)
 {
 	enum orientation orientation = compoundLayouter->Orientation();
@@ -1302,15 +1249,13 @@ BTwoDimensionalLayout::LocalLayouter::Spacing(
 }
 
 
-bool
-BTwoDimensionalLayout::LocalLayouter::HasHeightForWidth()
+bool BTwoDimensionalLayout::LocalLayouter::HasHeightForWidth()
 {
 	return !fHeightForWidthItems.IsEmpty();
 }
 
 
-bool
-BTwoDimensionalLayout::LocalLayouter::AddHeightForWidthConstraints(
+bool BTwoDimensionalLayout::LocalLayouter::AddHeightForWidthConstraints(
 	VerticalCompoundLayouter* compoundLayouter, Layouter* layouter,
 	BLayoutContext* context)
 {
@@ -1348,16 +1293,14 @@ BTwoDimensionalLayout::LocalLayouter::AddHeightForWidthConstraints(
 }
 
 
-void
-BTwoDimensionalLayout::LocalLayouter::SetHeightForWidthConstraintsAdded(
+void BTwoDimensionalLayout::LocalLayouter::SetHeightForWidthConstraintsAdded(
 	bool added)
 {
 	fHeightForWidthConstraintsAdded = added;
 }
 
 
-void
-BTwoDimensionalLayout::LocalLayouter::SetCompoundLayouter(
+void BTwoDimensionalLayout::LocalLayouter::SetCompoundLayouter(
 	CompoundLayouter* compoundLayouter, orientation orientation)
 {
 	CompoundLayouter* oldCompoundLayouter;
@@ -1384,8 +1327,7 @@ BTwoDimensionalLayout::LocalLayouter::SetCompoundLayouter(
 }
 
 
-void
-BTwoDimensionalLayout::LocalLayouter::InternalInvalidateLayout(
+void BTwoDimensionalLayout::LocalLayouter::InternalInvalidateLayout(
 	CompoundLayouter* compoundLayouter)
 {
 	_SetHorizontalLayoutContext(NULL, -1);
@@ -1394,8 +1336,7 @@ BTwoDimensionalLayout::LocalLayouter::InternalInvalidateLayout(
 }
 
 
-void
-BTwoDimensionalLayout::LocalLayouter::_SetHorizontalLayoutContext(
+void BTwoDimensionalLayout::LocalLayouter::_SetHorizontalLayoutContext(
 	BLayoutContext* context, float width)
 {
 	if (context != fHorizontalLayoutContext) {
@@ -1412,16 +1353,14 @@ BTwoDimensionalLayout::LocalLayouter::_SetHorizontalLayoutContext(
 }
 
 
-void
-BTwoDimensionalLayout::LocalLayouter::LayoutContextLeft(BLayoutContext* context)
+void BTwoDimensionalLayout::LocalLayouter::LayoutContextLeft(BLayoutContext* context)
 {
 	fHorizontalLayoutContext = NULL;
 	fHorizontalLayoutWidth = -1;
 }
 
 
-status_t
-BTwoDimensionalLayout::Perform(perform_code code, void* _data)
+status_t BTwoDimensionalLayout::Perform(perform_code code, void* _data)
 {
 	return BAbstractLayout::Perform(code, _data);
 }

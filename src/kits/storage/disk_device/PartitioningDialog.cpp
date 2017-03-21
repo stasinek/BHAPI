@@ -50,8 +50,7 @@ PartitioningDialog::~PartitioningDialog()
 }
 
 // MessageReceived
-void
-PartitioningDialog::MessageReceived(BMessage *message)
+void PartitioningDialog::MessageReceived(BMessage *message)
 {
 	switch (message->what) {
 		case MSG_OK:
@@ -75,8 +74,7 @@ PartitioningDialog::MessageReceived(BMessage *message)
 }
 
 // QuitRequested
-bool
-PartitioningDialog::QuitRequested()
+bool PartitioningDialog::QuitRequested()
 {
 	if (fCancelled)
 		*fCancelled = true;
@@ -84,8 +82,7 @@ PartitioningDialog::QuitRequested()
 }
 
 // Go
-status_t
-PartitioningDialog::Go(BDiskScannerParameterEditor *editor, bool *_cancelled)
+status_t PartitioningDialog::Go(BDiskScannerParameterEditor *editor, bool *_cancelled)
 {
 	status_t error = _Init(editor);
 	bool wasRun = false;
@@ -112,8 +109,7 @@ PartitioningDialog::Go(BDiskScannerParameterEditor *editor, bool *_cancelled)
 }
 
 // _Init
-status_t
-PartitioningDialog::_Init(BDiskScannerParameterEditor *editor)
+status_t PartitioningDialog::_Init(BDiskScannerParameterEditor *editor)
 {
 	status_t error = (editor ? B_OK : B_BAD_VALUE);
 	// set the parameter editor and view

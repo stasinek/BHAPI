@@ -34,16 +34,14 @@ struct __timer_t {
 };
 
 
-static inline void
-bigtime_to_timespec(bigtime_t time, timespec& spec)
+static inline void bigtime_to_timespec(bigtime_t time, timespec& spec)
 {
 	spec.tv_sec = time / 1000000;
 	spec.tv_nsec = (time % 1000000) * 1000;
 }
 
 
-static inline bool
-timespec_to_bigtime(const timespec& spec, bigtime_t& _time)
+static inline bool timespec_to_bigtime(const timespec& spec, bigtime_t& _time)
 {
 	if (spec.tv_sec < 0 || spec.tv_nsec < 0 || spec.tv_nsec >= 1000000000)
 		return false;
@@ -54,8 +52,7 @@ timespec_to_bigtime(const timespec& spec, bigtime_t& _time)
 }
 
 
-static inline bool
-timeval_to_timespec(const timeval& val, timespec& spec)
+static inline bool timeval_to_timespec(const timeval& val, timespec& spec)
 {
 	if (val.tv_sec < 0 || val.tv_usec < 0 || val.tv_usec >= 1000000)
 		return false;
@@ -67,8 +64,7 @@ timeval_to_timespec(const timeval& val, timespec& spec)
 }
 
 
-static inline void
-timespec_to_timeval(const timespec& spec, timeval& val)
+static inline void timespec_to_timeval(const timespec& spec, timeval& val)
 {
 	val.tv_sec = spec.tv_sec;
 	val.tv_usec = spec.tv_nsec / 1000;

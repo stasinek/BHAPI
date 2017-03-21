@@ -6,7 +6,7 @@
 #ifndef CPU_STATE_H
 #define CPU_STATE_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <Referenceable.h>
 #include <Variant.h>

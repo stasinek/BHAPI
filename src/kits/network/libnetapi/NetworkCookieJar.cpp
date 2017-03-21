@@ -98,8 +98,7 @@ BNetworkCookieJar::~BNetworkCookieJar()
 // #pragma mark Add cookie to cookie jar
 
 
-status_t
-BNetworkCookieJar::AddCookie(const BNetworkCookie& cookie)
+status_t BNetworkCookieJar::AddCookie(const BNetworkCookie& cookie)
 {
 	BNetworkCookie* heapCookie = new(std::nothrow) BNetworkCookie(cookie);
 	if (heapCookie == NULL)
@@ -113,8 +112,7 @@ BNetworkCookieJar::AddCookie(const BNetworkCookie& cookie)
 }
 
 
-status_t
-BNetworkCookieJar::AddCookie(const BString& cookie, const BUrl& referrer)
+status_t BNetworkCookieJar::AddCookie(const BString& cookie, const BUrl& referrer)
 {
 	BNetworkCookie* heapCookie = new(std::nothrow) BNetworkCookie(cookie,
 		referrer);
@@ -131,8 +129,7 @@ BNetworkCookieJar::AddCookie(const BString& cookie, const BUrl& referrer)
 }
 
 
-status_t
-BNetworkCookieJar::AddCookie(BNetworkCookie* cookie)
+status_t BNetworkCookieJar::AddCookie(BNetworkCookie* cookie)
 {
 	if (fCookieHashMap == NULL)
 		return B_NO_MEMORY;
@@ -213,8 +210,7 @@ BNetworkCookieJar::AddCookie(BNetworkCookie* cookie)
 }
 
 
-status_t
-BNetworkCookieJar::AddCookies(const BNetworkCookieList& cookies)
+status_t BNetworkCookieJar::AddCookies(const BNetworkCookieList& cookies)
 {
 	for (int32 i = 0; i < cookies.CountItems(); i++) {
 		const BNetworkCookie* cookiePtr = cookies.ItemAt(i);
@@ -233,8 +229,7 @@ BNetworkCookieJar::AddCookies(const BNetworkCookieList& cookies)
 // #pragma mark Purge useless cookies
 
 
-uint32
-BNetworkCookieJar::DeleteOutdatedCookies()
+uint32 BNetworkCookieJar::DeleteOutdatedCookies()
 {
 	int32 deleteCount = 0;
 	const BNetworkCookie* cookiePtr;
@@ -250,8 +245,7 @@ BNetworkCookieJar::DeleteOutdatedCookies()
 }
 
 
-uint32
-BNetworkCookieJar::PurgeForExit()
+uint32 BNetworkCookieJar::PurgeForExit()
 {
 	int32 deleteCount = 0;
 	const BNetworkCookie* cookiePtr;
@@ -270,8 +264,7 @@ BNetworkCookieJar::PurgeForExit()
 // #pragma mark BArchivable interface
 
 
-status_t
-BNetworkCookieJar::Archive(BMessage* into, bool deep) const
+status_t BNetworkCookieJar::Archive(BMessage* into, bool deep) const
 {
 	status_t error = BArchivable::Archive(into, deep);
 
@@ -308,8 +301,7 @@ BNetworkCookieJar::Instantiate(BMessage* archive)
 // #pragma mark BFlattenable interface
 
 
-bool
-BNetworkCookieJar::IsFixedSize() const
+bool BNetworkCookieJar::IsFixedSize() const
 {
 	// Flattened size vary
 	return false;
@@ -332,8 +324,7 @@ BNetworkCookieJar::FlattenedSize() const
 }
 
 
-status_t
-BNetworkCookieJar::Flatten(void* buffer, ssize_t size) const
+status_t BNetworkCookieJar::Flatten(void* buffer, ssize_t size) const
 {
 	if (FlattenedSize() > size)
 		return B_ERROR;
@@ -346,16 +337,14 @@ BNetworkCookieJar::Flatten(void* buffer, ssize_t size) const
 }
 
 
-bool
-BNetworkCookieJar::AllowsTypeCode(type_code) const
+bool BNetworkCookieJar::AllowsTypeCode(type_code) const
 {
 	// TODO
 	return false;
 }
 
 
-status_t
-BNetworkCookieJar::Unflatten(type_code, const void* buffer, ssize_t size)
+status_t BNetworkCookieJar::Unflatten(type_code, const void* buffer, ssize_t size)
 {
 	BString flattenedCookies;
 	flattenedCookies.SetTo(reinterpret_cast<const char*>(buffer), size);
@@ -472,8 +461,7 @@ BNetworkCookieJar::GetUrlIterator(const BUrl& url) const
 }
 
 
-void
-BNetworkCookieJar::_DoFlatten() const
+void BNetworkCookieJar::_DoFlatten() const
 {
 	fFlattened.Truncate(0);
 
@@ -564,8 +552,7 @@ BNetworkCookieJar::Iterator::operator=(const Iterator& other)
 }
 
 
-bool
-BNetworkCookieJar::Iterator::HasNext() const
+bool BNetworkCookieJar::Iterator::HasNext() const
 {
 	return fElement;
 }
@@ -658,8 +645,7 @@ BNetworkCookieJar::Iterator::Remove()
 }
 
 
-void
-BNetworkCookieJar::Iterator::_FindNext()
+void BNetworkCookieJar::Iterator::_FindNext()
 {
 	fLastElement = fElement;
 
@@ -741,8 +727,7 @@ BNetworkCookieJar::UrlIterator::~UrlIterator()
 }
 
 
-bool
-BNetworkCookieJar::UrlIterator::HasNext() const
+bool BNetworkCookieJar::UrlIterator::HasNext() const
 {
 	return fElement;
 }
@@ -821,8 +806,7 @@ BNetworkCookieJar::UrlIterator::operator=(
 }
 
 
-void
-BNetworkCookieJar::UrlIterator::_Initialize()
+void BNetworkCookieJar::UrlIterator::_Initialize()
 {
 	BString domain = fUrl.Host();
 
@@ -845,8 +829,7 @@ BNetworkCookieJar::UrlIterator::_Initialize()
 }
 
 
-bool
-BNetworkCookieJar::UrlIterator::_SuperDomain()
+bool BNetworkCookieJar::UrlIterator::_SuperDomain()
 {
 	BString domain(fIterator->fKey.GetString());
 		// Makes a copy of the characters from the key. This is important,
@@ -863,8 +846,7 @@ BNetworkCookieJar::UrlIterator::_SuperDomain()
 }
 
 
-void
-BNetworkCookieJar::UrlIterator::_FindNext()
+void BNetworkCookieJar::UrlIterator::_FindNext()
 {
 	fLastIndex = fIndex;
 	fLastElement = fElement;
@@ -890,8 +872,7 @@ BNetworkCookieJar::UrlIterator::_FindNext()
 }
 
 
-void
-BNetworkCookieJar::UrlIterator::_FindDomain()
+void BNetworkCookieJar::UrlIterator::_FindDomain()
 {
 	if (fList != NULL)
 		fList->Unlock();
@@ -911,8 +892,7 @@ BNetworkCookieJar::UrlIterator::_FindDomain()
 }
 
 
-bool
-BNetworkCookieJar::UrlIterator::_FindPath()
+bool BNetworkCookieJar::UrlIterator::_FindPath()
 {
 	fIndex++;
 	while (fList && fIndex < fList->CountItems()) {
@@ -944,22 +924,19 @@ BNetworkCookieList::~BNetworkCookieList()
 }
 
 
-status_t
-BNetworkCookieList::LockForReading()
+status_t BNetworkCookieList::LockForReading()
 {
 	return pthread_rwlock_rdlock(&fLock);
 }
 
 
-status_t
-BNetworkCookieList::LockForWriting()
+status_t BNetworkCookieList::LockForWriting()
 {
 	return pthread_rwlock_wrlock(&fLock);
 }
 
 
-status_t
-BNetworkCookieList::Unlock()
+status_t BNetworkCookieList::Unlock()
 {
 	return pthread_rwlock_unlock(&fLock);
 }

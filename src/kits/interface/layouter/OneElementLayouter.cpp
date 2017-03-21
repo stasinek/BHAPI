@@ -43,8 +43,7 @@ OneElementLayouter::~OneElementLayouter()
 }
 
 // AddConstraints
-void
-OneElementLayouter::AddConstraints(int32 element, int32 length,
+void OneElementLayouter::AddConstraints(int32 element, int32 length,
 	float min, float max, float preferred)
 {
 	fMin = max_c(fMin, min);
@@ -56,8 +55,7 @@ OneElementLayouter::AddConstraints(int32 element, int32 length,
 }
 
 // SetWeight
-void
-OneElementLayouter::SetWeight(int32 element, float weight)
+void OneElementLayouter::SetWeight(int32 element, float weight)
 {
 	// not needed
 }
@@ -91,8 +89,7 @@ OneElementLayouter::CreateLayoutInfo()
 }
 
 // Layout
-void
-OneElementLayouter::Layout(LayoutInfo* layoutInfo, float size)
+void OneElementLayouter::Layout(LayoutInfo* layoutInfo, float size)
 {
 	((MyLayoutInfo*)layoutInfo)->fSize = max_c(size, fMin);
 }

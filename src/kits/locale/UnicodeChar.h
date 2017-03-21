@@ -361,8 +361,7 @@ class BUnicodeChar {
 };
 
 
-inline uint32
-BUnicodeChar::FromUTF8(const char* in)
+inline uint32 BUnicodeChar::FromUTF8(const char* in)
 {
 	const char* string = in;
 	return FromUTF8(&string);

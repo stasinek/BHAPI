@@ -53,8 +53,7 @@ public:
    *  @brief  Check if file is open.
    *  @return  True if file is open.
   */
-  bool
-  is_open() const { return (file != NULL); }
+  bool   is_open() const { return (file != NULL); }
 
   /**
    *  @brief  Open gzipped file.
@@ -88,8 +87,7 @@ protected:
    *  @brief  Convert ios open mode int to mode string used by zlib.
    *  @return  True if valid mode flag combination.
   */
-  bool
-  open_mode(std::ios_base::openmode mode,
+  bool   open_mode(std::ios_base::openmode mode,
             char* c_mode) const;
 
   /**
@@ -167,8 +165,7 @@ private:
    *  buffer already exists or is external, the buffer pointers will be
    *  reset to their original state.
   */
-  void
-  enable_buffer();
+  void   enable_buffer();
 
   /**
    *  @brief  Destroy internal buffer.
@@ -177,8 +174,7 @@ private:
    *  that the internal buffer is deallocated if it exists. In any
    *  case, it will also reset the buffer pointers.
   */
-  void
-  disable_buffer();
+  void   disable_buffer();
 
   /**
    *  Underlying file pointer.
@@ -266,8 +262,7 @@ public:
    *  @brief  Check if file is open.
    *  @return  True if file is open.
   */
-  bool
-  is_open() { return sb.is_open(); }
+  bool   is_open() { return sb.is_open(); }
 
   /**
    *  @brief  Open gzipped file.
@@ -281,8 +276,7 @@ public:
    *  you manually clear() the state. The choice is a matter of
    *  convenience.
   */
-  void
-  open(const char* name,
+  void   open(const char* name,
        std::ios_base::openmode mode = std::ios_base::in);
 
   /**
@@ -293,8 +287,7 @@ public:
    *  Stream will be in state good() if attach succeeded; otherwise
    *  in state fail().
   */
-  void
-  attach(int fd,
+  void   attach(int fd,
          std::ios_base::openmode mode = std::ios_base::in);
 
   /**
@@ -302,8 +295,7 @@ public:
    *
    *  Stream will be in state fail() if close failed.
   */
-  void
-  close();
+  void   close();
 
 private:
   /**
@@ -355,8 +347,7 @@ public:
    *  @brief  Check if file is open.
    *  @return  True if file is open.
   */
-  bool
-  is_open() { return sb.is_open(); }
+  bool   is_open() { return sb.is_open(); }
 
   /**
    *  @brief  Open gzipped file.
@@ -370,8 +361,7 @@ public:
    *  you manually clear() the state. The choice is a matter of
    *  convenience.
   */
-  void
-  open(const char* name,
+  void   open(const char* name,
        std::ios_base::openmode mode = std::ios_base::out);
 
   /**
@@ -382,8 +372,7 @@ public:
    *  Stream will be in state good() if attach succeeded; otherwise
    *  in state fail().
   */
-  void
-  attach(int fd,
+  void   attach(int fd,
          std::ios_base::openmode mode = std::ios_base::out);
 
   /**
@@ -391,8 +380,7 @@ public:
    *
    *  Stream will be in state fail() if close failed.
   */
-  void
-  close();
+  void   close();
 
 private:
   /**

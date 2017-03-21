@@ -163,40 +163,35 @@ MediaExtractor::~MediaExtractor()
 }
 
 
-status_t
-MediaExtractor::InitCheck()
+status_t MediaExtractor::InitCheck()
 {
 	CALLED();
 	return fInitStatus;
 }
 
 
-void
-MediaExtractor::GetFileFormatInfo(media_file_format* fileFormat) const
+void MediaExtractor::GetFileFormatInfo(media_file_format* fileFormat) const
 {
 	CALLED();
 	*fileFormat = fFileFormat;
 }
 
 
-status_t
-MediaExtractor::GetMetaData(BMessage* _data) const
+status_t MediaExtractor::GetMetaData(BMessage* _data) const
 {
 	CALLED();
 	return fReader->GetMetaData(_data);
 }
 
 
-int32
-MediaExtractor::StreamCount()
+int32 MediaExtractor::StreamCount()
 {
 	CALLED();
 	return fStreamCount;
 }
 
 
-const char*
-MediaExtractor::Copyright()
+const char*  MediaExtractor::Copyright()
 {
 	return fReader->Copyright();
 }
@@ -209,8 +204,7 @@ MediaExtractor::EncodedFormat(int32 stream)
 }
 
 
-int64
-MediaExtractor::CountFrames(int32 stream) const
+int64 MediaExtractor::CountFrames(int32 stream) const
 {
 	CALLED();
 	if (fStreamInfo[stream].status != B_OK)
@@ -250,8 +244,7 @@ MediaExtractor::Duration(int32 stream) const
 }
 
 
-status_t
-MediaExtractor::Seek(int32 stream, uint32 seekTo, int64* _frame,
+status_t MediaExtractor::Seek(int32 stream, uint32 seekTo, int64* _frame,
 	bigtime_t* _time)
 {
 	CALLED();
@@ -273,8 +266,7 @@ MediaExtractor::Seek(int32 stream, uint32 seekTo, int64* _frame,
 }
 
 
-status_t
-MediaExtractor::FindKeyFrame(int32 stream, uint32 seekTo, int64* _frame,
+status_t MediaExtractor::FindKeyFrame(int32 stream, uint32 seekTo, int64* _frame,
 	bigtime_t* _time) const
 {
 	CALLED();
@@ -287,8 +279,7 @@ MediaExtractor::FindKeyFrame(int32 stream, uint32 seekTo, int64* _frame,
 }
 
 
-status_t
-MediaExtractor::GetNextChunk(int32 stream, const void** _chunkBuffer,
+status_t MediaExtractor::GetNextChunk(int32 stream, const void** _chunkBuffer,
 	size_t* _chunkSize, media_header* mediaHeader)
 {
 	stream_info& info = fStreamInfo[stream];
@@ -321,8 +312,7 @@ MediaExtractor::GetNextChunk(int32 stream, const void** _chunkBuffer,
 }
 
 
-status_t
-MediaExtractor::CreateDecoder(int32 stream, Decoder** _decoder,
+status_t MediaExtractor::CreateDecoder(int32 stream, Decoder** _decoder,
 	media_codec_info* codecInfo)
 {
 	CALLED();
@@ -385,8 +375,7 @@ MediaExtractor::CreateDecoder(int32 stream, Decoder** _decoder,
 }
 
 
-status_t
-MediaExtractor::GetStreamMetaData(int32 stream, BMessage* _data) const
+status_t MediaExtractor::GetStreamMetaData(int32 stream, BMessage* _data) const
 {
 	const stream_info& info = fStreamInfo[stream];
 
@@ -397,8 +386,7 @@ MediaExtractor::GetStreamMetaData(int32 stream, BMessage* _data) const
 }
 
 
-void
-MediaExtractor::_RecycleLastChunk(stream_info& info)
+void MediaExtractor::_RecycleLastChunk(stream_info& info)
 {
 	if (info.lastChunk != NULL) {
 		info.chunkCache->RecycleChunk(info.lastChunk);
@@ -407,16 +395,14 @@ MediaExtractor::_RecycleLastChunk(stream_info& info)
 }
 
 
-status_t
-MediaExtractor::_ExtractorEntry(void* extractor)
+status_t MediaExtractor::_ExtractorEntry(void* extractor)
 {
 	static_cast<MediaExtractor*>(extractor)->_ExtractorThread();
 	return B_OK;
 }
 
 
-void
-MediaExtractor::_ExtractorThread()
+void MediaExtractor::_ExtractorThread()
 {
 	while (true) {
 		status_t status;

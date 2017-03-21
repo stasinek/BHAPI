@@ -45,16 +45,14 @@ BLayoutContext::~BLayoutContext()
 }
 
 // AddListener
-void
-BLayoutContext::AddListener(BLayoutContextListener* listener)
+void BLayoutContext::AddListener(BLayoutContextListener* listener)
 {
 	if (listener)
 		fListeners.AddItem(listener);
 }
 
 // RemoveListener
-void
-BLayoutContext::RemoveListener(BLayoutContextListener* listener)
+void BLayoutContext::RemoveListener(BLayoutContextListener* listener)
 {
 	if (listener)
 		fListeners.RemoveItem(listener);

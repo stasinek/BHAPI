@@ -134,8 +134,7 @@ IconSpewer::~IconSpewer()
 }
 
 
-void
-IconSpewer::Run()
+void IconSpewer::Run()
 {
 	BStopWatch watch("", true);
 	for (;;) {
@@ -153,8 +152,7 @@ IconSpewer::Run()
 }
 
 
-void
-IconSpewer::Quit()
+void IconSpewer::Quit()
 {
 	kill_thread(fScanThread);
 	fScanThread = -1;
@@ -166,8 +164,7 @@ const int32 kRowCount = 10;
 const int32 kColumnCount = 10;
 
 
-void
-IconSpewer::DrawSomeNew()
+void IconSpewer::DrawSomeNew()
 {
 	target->Lock();
 	BView* view = target->FindView("iconView");
@@ -219,8 +216,7 @@ IconSpewer::DrawSomeNew()
 bool oldIconCacheInited = false;
 
 
-void
-IconSpewer::DrawSomeOld()
+void IconSpewer::DrawSomeOld()
 {
 #if 0
 	if (!oldIconCacheInited)
@@ -327,16 +323,14 @@ IconTestWindow::IconTestWindow()
 }
 
 
-bool
-IconTestWindow::QuitRequested()
+bool IconTestWindow::QuitRequested()
 {
 	iconSpewer.Quit();
 	return true;
 }
 
 
-void
-RunIconCacheTests()
+void RunIconCacheTests()
 {
 	(new IconTestWindow())->Show();
 }

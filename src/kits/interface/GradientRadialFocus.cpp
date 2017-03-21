@@ -58,8 +58,7 @@ BGradientRadialFocus::Center() const
 
 
 // SetCenter
-void
-BGradientRadialFocus::SetCenter(const BPoint& center)
+void BGradientRadialFocus::SetCenter(const BPoint& center)
 {
 	fData.radial_focus.cx = center.x;
 	fData.radial_focus.cy = center.y;
@@ -67,8 +66,7 @@ BGradientRadialFocus::SetCenter(const BPoint& center)
 
 
 // SetCenter
-void
-BGradientRadialFocus::SetCenter(float cx, float cy)
+void BGradientRadialFocus::SetCenter(float cx, float cy)
 {
 	fData.radial_focus.cx = cx;
 	fData.radial_focus.cy = cy;
@@ -84,8 +82,7 @@ BGradientRadialFocus::Focal() const
 
 
 // SetFocal
-void
-BGradientRadialFocus::SetFocal(const BPoint& focal)
+void BGradientRadialFocus::SetFocal(const BPoint& focal)
 {
 	fData.radial_focus.fx = focal.x;
 	fData.radial_focus.fy = focal.y;
@@ -93,8 +90,7 @@ BGradientRadialFocus::SetFocal(const BPoint& focal)
 
 
 // SetFocal
-void
-BGradientRadialFocus::SetFocal(float fx, float fy)
+void BGradientRadialFocus::SetFocal(float fx, float fy)
 {
 	fData.radial_focus.fx = fx;
 	fData.radial_focus.fy = fy;
@@ -110,8 +106,7 @@ BGradientRadialFocus::Radius() const
 
 
 // SetRadius
-void
-BGradientRadialFocus::SetRadius(float radius)
+void BGradientRadialFocus::SetRadius(float radius)
 {
 	fData.radial_focus.radius = radius;
 }

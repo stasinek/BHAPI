@@ -62,8 +62,7 @@ BodyDownloadConfigView::BodyDownloadConfigView()
 }
 
 
-void
-BodyDownloadConfigView::SetTo(const BMailProtocolSettings& settings)
+void BodyDownloadConfigView::SetTo(const BMailProtocolSettings& settings)
 {
 	int32 limit = settings.GetInt32(kPartialDownloadLimit, -1);
 	if (limit < 0) {
@@ -80,8 +79,7 @@ BodyDownloadConfigView::SetTo(const BMailProtocolSettings& settings)
 }
 
 
-status_t
-BodyDownloadConfigView::SaveInto(BMailAddOnSettings& settings) const
+status_t BodyDownloadConfigView::SaveInto(BMailAddOnSettings& settings) const
 {
 	if (fPartialBox->Value() == B_CONTROL_ON) {
 		settings.SetInt32(kPartialDownloadLimit,
@@ -93,8 +91,7 @@ BodyDownloadConfigView::SaveInto(BMailAddOnSettings& settings) const
 }
 
 
-void
-BodyDownloadConfigView::MessageReceived(BMessage *msg)
+void BodyDownloadConfigView::MessageReceived(BMessage *msg)
 {
 	if (msg->what != 'SIZF')
 		return BView::MessageReceived(msg);
@@ -102,8 +99,7 @@ BodyDownloadConfigView::MessageReceived(BMessage *msg)
 }
 
 
-void
-BodyDownloadConfigView::AttachedToWindow()
+void BodyDownloadConfigView::AttachedToWindow()
 {
 	fPartialBox->SetTarget(this);
 	fPartialBox->ResizeToPreferred();
@@ -179,8 +175,7 @@ MailProtocolConfigView::~MailProtocolConfigView()
 }
 
 
-void
-MailProtocolConfigView::SetTo(const BMailProtocolSettings& settings)
+void MailProtocolConfigView::SetTo(const BMailProtocolSettings& settings)
 {
 	BString host = settings.FindString("server");
 	if (settings.HasInt32("port"))
@@ -231,8 +226,7 @@ MailProtocolConfigView::SetTo(const BMailProtocolSettings& settings)
 }
 
 
-void
-MailProtocolConfigView::AddFlavor(const char* label)
+void MailProtocolConfigView::AddFlavor(const char* label)
 {
 	if (fFlavorField != NULL) {
 		fFlavorField->Menu()->AddItem(new BMenuItem(label, NULL));
@@ -243,8 +237,7 @@ MailProtocolConfigView::AddFlavor(const char* label)
 }
 
 
-void
-MailProtocolConfigView::AddAuthMethod(const char* label, bool needUserPassword)
+void MailProtocolConfigView::AddAuthMethod(const char* label, bool needUserPassword)
 {
 	if (fAuthenticationField != NULL) {
 		fAuthenticationField->Menu()->AddItem(new BMenuItem(label,
@@ -267,8 +260,7 @@ MailProtocolConfigView::Layout() const
 }
 
 
-status_t
-MailProtocolConfigView::SaveInto(BMailAddOnSettings& settings) const
+status_t MailProtocolConfigView::SaveInto(BMailAddOnSettings& settings) const
 {
 	if (fHostControl != NULL) {
 		int32 port = -1;
@@ -317,8 +309,7 @@ MailProtocolConfigView::SaveInto(BMailAddOnSettings& settings) const
 }
 
 
-void
-MailProtocolConfigView::AttachedToWindow()
+void MailProtocolConfigView::AttachedToWindow()
 {
 	if (fAuthenticationField != NULL)
 		fAuthenticationField->Menu()->SetTargetForItems(this);
@@ -328,8 +319,7 @@ MailProtocolConfigView::AttachedToWindow()
 }
 
 
-void
-MailProtocolConfigView::MessageReceived(BMessage* message)
+void MailProtocolConfigView::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case kMsgNeedPassword:
@@ -376,8 +366,7 @@ MailProtocolConfigView::_AddMenuField(BGridLayout* layout, const char* name,
 }
 
 
-void
-MailProtocolConfigView::_StoreIndexOfMarked(BMessage& message, const char* name,
+void MailProtocolConfigView::_StoreIndexOfMarked(BMessage& message, const char* name,
 	BMenuField* field) const
 {
 	int32 index = -1;
@@ -390,8 +379,7 @@ MailProtocolConfigView::_StoreIndexOfMarked(BMessage& message, const char* name,
 }
 
 
-void
-MailProtocolConfigView::_StoreCheckBox(BMessage& message, const char* name,
+void MailProtocolConfigView::_StoreCheckBox(BMessage& message, const char* name,
 	BCheckBox* checkBox) const
 {
 	bool value = checkBox != NULL && checkBox->Value() == B_CONTROL_ON;
@@ -402,8 +390,7 @@ MailProtocolConfigView::_StoreCheckBox(BMessage& message, const char* name,
 }
 
 
-void
-MailProtocolConfigView::_SetCredentialsEnabled(bool enabled)
+void MailProtocolConfigView::_SetCredentialsEnabled(bool enabled)
 {
 	if (fUserControl != NULL && fPasswordControl != NULL) {
 		fUserControl->SetEnabled(enabled);

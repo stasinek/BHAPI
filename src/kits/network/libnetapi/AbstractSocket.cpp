@@ -49,29 +49,25 @@ BAbstractSocket::~BAbstractSocket()
 }
 
 
-status_t
-BAbstractSocket::InitCheck() const
+status_t BAbstractSocket::InitCheck() const
 {
 	return fInitStatus;
 }
 
 
-bool
-BAbstractSocket::IsBound() const
+bool BAbstractSocket::IsBound() const
 {
 	return fIsBound;
 }
 
 
-bool
-BAbstractSocket::IsConnected() const
+bool BAbstractSocket::IsConnected() const
 {
 	return fIsConnected;
 }
 
 
-void
-BAbstractSocket::Disconnect()
+void BAbstractSocket::Disconnect()
 {
 	if (fSocket < 0)
 		return;
@@ -85,8 +81,7 @@ BAbstractSocket::Disconnect()
 }
 
 
-status_t
-BAbstractSocket::SetTimeout(bigtime_t timeout)
+status_t BAbstractSocket::SetTimeout(bigtime_t timeout)
 {
 	if (timeout < 0)
 		timeout = 0;
@@ -138,15 +133,13 @@ BAbstractSocket::MaxTransmissionSize() const
 }
 
 
-status_t
-BAbstractSocket::WaitForReadable(bigtime_t timeout) const
+status_t BAbstractSocket::WaitForReadable(bigtime_t timeout) const
 {
 	return _WaitFor(POLLIN, timeout);
 }
 
 
-status_t
-BAbstractSocket::WaitForWritable(bigtime_t timeout) const
+status_t BAbstractSocket::WaitForWritable(bigtime_t timeout) const
 {
 	return _WaitFor(POLLOUT, timeout);
 }
@@ -162,8 +155,7 @@ BAbstractSocket::Socket() const
 //	#pragma mark - protected
 
 
-status_t
-BAbstractSocket::Bind(const BNetworkAddress& local, int type)
+status_t BAbstractSocket::Bind(const BNetworkAddress& local, int type)
 {
 	fInitStatus = _OpenIfNeeded(local.Family(), type);
 	if (fInitStatus != B_OK)
@@ -178,8 +170,7 @@ BAbstractSocket::Bind(const BNetworkAddress& local, int type)
 }
 
 
-status_t
-BAbstractSocket::Connect(const BNetworkAddress& peer, int type,
+status_t BAbstractSocket::Connect(const BNetworkAddress& peer, int type,
 	bigtime_t timeout)
 {
 	Disconnect();
@@ -217,8 +208,7 @@ BAbstractSocket::Connect(const BNetworkAddress& peer, int type,
 //	#pragma mark - private
 
 
-status_t
-BAbstractSocket::_OpenIfNeeded(int family, int type)
+status_t BAbstractSocket::_OpenIfNeeded(int family, int type)
 {
 	if (fSocket >= 0)
 		return B_OK;
@@ -232,8 +222,7 @@ BAbstractSocket::_OpenIfNeeded(int family, int type)
 }
 
 
-status_t
-BAbstractSocket::_UpdateLocalAddress()
+status_t BAbstractSocket::_UpdateLocalAddress()
 {
 	socklen_t localLength = sizeof(sockaddr_storage);
 	if (getsockname(fSocket, fLocal, &localLength) != 0)
@@ -243,8 +232,7 @@ BAbstractSocket::_UpdateLocalAddress()
 }
 
 
-status_t
-BAbstractSocket::_WaitFor(int flags, bigtime_t timeout) const
+status_t BAbstractSocket::_WaitFor(int flags, bigtime_t timeout) const
 {
 	if (fInitStatus != B_OK)
 		return fInitStatus;

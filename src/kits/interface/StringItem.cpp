@@ -57,8 +57,7 @@ BStringItem::Instantiate(BMessage* archive)
 }
 
 
-status_t
-BStringItem::Archive(BMessage* archive, bool deep) const
+status_t BStringItem::Archive(BMessage* archive, bool deep) const
 {
 	status_t status = BListItem::Archive(archive);
 
@@ -69,8 +68,7 @@ BStringItem::Archive(BMessage* archive, bool deep) const
 }
 
 
-void
-BStringItem::DrawItem(BView* owner, BRect frame, bool complete)
+void BStringItem::DrawItem(BView* owner, BRect frame, bool complete)
 {
 	if (fText == NULL)
 		return;
@@ -98,8 +96,7 @@ BStringItem::DrawItem(BView* owner, BRect frame, bool complete)
 }
 
 
-void
-BStringItem::SetText(const char* text)
+void BStringItem::SetText(const char* text)
 {
 	free(fText);
 	fText = NULL;
@@ -109,15 +106,13 @@ BStringItem::SetText(const char* text)
 }
 
 
-const char*
-BStringItem::Text() const
+const char*  BStringItem::Text() const
 {
 	return fText;
 }
 
 
-void
-BStringItem::Update(BView* owner, const BFont* font)
+void BStringItem::Update(BView* owner, const BFont* font)
 {
 	if (fText != NULL) {
 		SetWidth(font->StringWidth(fText)
@@ -134,8 +129,7 @@ BStringItem::Update(BView* owner, const BFont* font)
 }
 
 
-status_t
-BStringItem::Perform(perform_code d, void* arg)
+status_t BStringItem::Perform(perform_code d, void* arg)
 {
 	return BListItem::Perform(d, arg);
 }

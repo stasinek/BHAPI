@@ -44,8 +44,7 @@ BFileInterface::BFileInterface()
 }
 
 
-status_t
-BFileInterface::HandleMessage(int32 message,
+status_t BFileInterface::HandleMessage(int32 message,
 							  const void *data,
 							  size_t size)
 {

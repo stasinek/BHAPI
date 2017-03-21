@@ -34,8 +34,7 @@ IconView::~IconView()
 }
 
 
-status_t
-IconView::SetIcon(const BPath& path, icon_size iconSize)
+status_t IconView::SetIcon(const BPath& path, icon_size iconSize)
 {
 	fDrawIcon = false;
 	
@@ -72,8 +71,7 @@ IconView::SetIcon(const BPath& path, icon_size iconSize)
 }
 
 
-void
-IconView::DrawIcon(bool draw)
+void IconView::DrawIcon(bool draw)
 {
 	if (draw == fDrawIcon)
 		return;
@@ -83,8 +81,7 @@ IconView::DrawIcon(bool draw)
 }
 
 
-void
-IconView::Draw(BRect area)
+void IconView::Draw(BRect area)
 {
 	if (fDrawIcon && fIconBitmap != NULL) {
 		SetDrawingMode(B_OP_ALPHA);
@@ -96,8 +93,7 @@ IconView::Draw(BRect area)
 }
 
 
-status_t
-IconView::InitCheck() const
+status_t IconView::InitCheck() const
 {
 	if (fIconBitmap == NULL)
 		return B_NO_MEMORY;
@@ -106,8 +102,7 @@ IconView::InitCheck() const
 }
 
 
-void
-IconView::_SetSize()
+void IconView::_SetSize()
 {
 	SetExplicitMinSize(BSize(fIconSize, fIconSize));
 	SetExplicitMaxSize(BSize(fIconSize, fIconSize));

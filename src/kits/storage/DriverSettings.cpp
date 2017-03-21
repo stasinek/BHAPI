@@ -75,8 +75,7 @@ BDriverParameterIterator::~BDriverParameterIterator()
 }
 
 
-bool
-BDriverParameterIterator::HasNext() const
+bool BDriverParameterIterator::HasNext() const
 {
 	return fDelegate != NULL ? fDelegate->HasNext() : false;
 }
@@ -107,8 +106,7 @@ BDriverParameterIterator::operator=(const BDriverParameterIterator& other)
 }
 
 
-void
-BDriverParameterIterator::_SetTo(Delegate* delegate, bool addReference)
+void BDriverParameterIterator::_SetTo(Delegate* delegate, bool addReference)
 {
 	if (fDelegate != NULL)
 		fDelegate->ReleaseReference();
@@ -231,8 +229,7 @@ BDriverParameterContainer::~BDriverParameterContainer()
 }
 
 
-int32
-BDriverParameterContainer::CountParameters() const
+int32 BDriverParameterContainer::CountParameters() const
 {
 	int32 count;
 	return GetParametersAndCount(count) != NULL ? count : 0;
@@ -260,8 +257,7 @@ BDriverParameterContainer::ParameterAt(int32 index) const
 }
 
 
-bool
-BDriverParameterContainer::FindParameter(const char* name,
+bool BDriverParameterContainer::FindParameter(const char* name,
 	BDriverParameter* _parameter) const
 {
 	if (name == NULL)
@@ -316,8 +312,7 @@ BDriverParameterContainer::ParameterIterator(const char* name) const
 }
 
 
-const char*
-BDriverParameterContainer::GetParameterValue(const char* name,
+const char*  BDriverParameterContainer::GetParameterValue(const char* name,
 	const char* unknownValue, const char* noValue) const
 {
 	BDriverParameter parameter;
@@ -327,8 +322,7 @@ BDriverParameterContainer::GetParameterValue(const char* name,
 }
 
 
-bool
-BDriverParameterContainer::GetBoolParameterValue(const char* name,
+bool BDriverParameterContainer::GetBoolParameterValue(const char* name,
 	bool unknownValue, bool noValue) const
 {
 	BDriverParameter parameter;
@@ -338,8 +332,7 @@ BDriverParameterContainer::GetBoolParameterValue(const char* name,
 }
 
 
-int32
-BDriverParameterContainer::GetInt32ParameterValue(const char* name,
+int32 BDriverParameterContainer::GetInt32ParameterValue(const char* name,
 	int32 unknownValue, int32 noValue) const
 {
 	BDriverParameter parameter;
@@ -349,8 +342,7 @@ BDriverParameterContainer::GetInt32ParameterValue(const char* name,
 }
 
 
-int64
-BDriverParameterContainer::GetInt64ParameterValue(const char* name,
+int64 BDriverParameterContainer::GetInt64ParameterValue(const char* name,
 	int64 unknownValue, int64 noValue) const
 {
 	BDriverParameter parameter;
@@ -378,8 +370,7 @@ BDriverSettings::~BDriverSettings()
 }
 
 
-status_t
-BDriverSettings::Load(const char* driverNameOrAbsolutePath)
+status_t BDriverSettings::Load(const char* driverNameOrAbsolutePath)
 {
 	Unset();
 
@@ -397,8 +388,7 @@ BDriverSettings::Load(const char* driverNameOrAbsolutePath)
 }
 
 
-status_t
-BDriverSettings::Load(const entry_ref& ref)
+status_t BDriverSettings::Load(const entry_ref& ref)
 {
 	Unset();
 
@@ -408,8 +398,7 @@ BDriverSettings::Load(const entry_ref& ref)
 }
 
 
-status_t
-BDriverSettings::SetToString(const char* string)
+status_t BDriverSettings::SetToString(const char* string)
 {
 	Unset();
 
@@ -427,8 +416,7 @@ BDriverSettings::SetToString(const char* string)
 }
 
 
-void
-BDriverSettings::Unset()
+void BDriverSettings::Unset()
 {
 	if (fSettingsHandle != NULL)
 		unload_driver_settings(fSettingsHandle);
@@ -481,29 +469,25 @@ BDriverParameter::~BDriverParameter()
 }
 
 
-void
-BDriverParameter::SetTo(const driver_parameter* parameter)
+void BDriverParameter::SetTo(const driver_parameter* parameter)
 {
 	fParameter = parameter;
 }
 
 
-bool
-BDriverParameter::IsValid() const
+bool BDriverParameter::IsValid() const
 {
 	return fParameter != NULL;
 }
 
 
-const char*
-BDriverParameter::Name() const
+const char*  BDriverParameter::Name() const
 {
 	return fParameter != NULL ? fParameter->name : NULL;
 }
 
 
-int32
-BDriverParameter::CountValues() const
+int32 BDriverParameter::CountValues() const
 {
 	return fParameter != NULL ? fParameter->value_count : 0;
 }
@@ -516,8 +500,7 @@ BDriverParameter::Values() const
 }
 
 
-const char*
-BDriverParameter::ValueAt(int32 index, const char* noValue) const
+const char*  BDriverParameter::ValueAt(int32 index, const char* noValue) const
 {
 	if (fParameter == NULL || index < 0 || index >= fParameter->value_count)
 		return noValue;
@@ -525,8 +508,7 @@ BDriverParameter::ValueAt(int32 index, const char* noValue) const
 }
 
 
-bool
-BDriverParameter::BoolValueAt(int32 index, bool noValue) const
+bool BDriverParameter::BoolValueAt(int32 index, bool noValue) const
 {
 	const char* value = ValueAt(index, NULL);
 	if (value == NULL)
@@ -540,8 +522,7 @@ BDriverParameter::BoolValueAt(int32 index, bool noValue) const
 }
 
 
-int32
-BDriverParameter::Int32ValueAt(int32 index, int32 noValue) const
+int32 BDriverParameter::Int32ValueAt(int32 index, int32 noValue) const
 {
 	const char* value = ValueAt(index, NULL);
 	if (value == NULL)
@@ -550,8 +531,7 @@ BDriverParameter::Int32ValueAt(int32 index, int32 noValue) const
 }
 
 
-int64
-BDriverParameter::Int64ValueAt(int32 index, int64 noValue) const
+int64 BDriverParameter::Int64ValueAt(int32 index, int64 noValue) const
 {
 	const char* value = ValueAt(index, NULL);
 	if (value == NULL)

@@ -29,8 +29,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define u32 uint32
-#define u16 uint16
+#define u32 uint32 #define u16 uint16
 #define u8 uint8
 
 #define __KERNEL__

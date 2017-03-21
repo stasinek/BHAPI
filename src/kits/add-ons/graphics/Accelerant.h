@@ -6,7 +6,7 @@
 #define BHAPI_ACCELERANT_H_
 
 #include <GraphicsDefs.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #if defined(__cplusplus)
     extern "C" {

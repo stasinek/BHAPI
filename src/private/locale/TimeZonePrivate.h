@@ -17,8 +17,7 @@ public:
 	{
 	}
 
-	void
-	SetTo(const BTimeZone* timeZone)
+	void 	SetTo(const BTimeZone* timeZone)
 	{
 		fTimeZone = timeZone;
 	}

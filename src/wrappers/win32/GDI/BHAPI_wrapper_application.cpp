@@ -70,22 +70,22 @@ static void bhapi::win32_clipboard_changed()
         aStr.ReplaceAll("\r\n", "\n");
 
         BMessage *clipMsg = NULL;
-        if(bhapi::be_clipboard.Lock())
+        if(bhapi::__be_clipboard.Lock())
         {
-            if((clipMsg = bhapi::be_clipboard.Data()) != NULL)
+            if((clipMsg = bhapi::__be_clipboard.Data()) != NULL)
             {
                 const char *text = NULL;
                  ssize_t textLen = 0;
                 if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
                         text == NULL || textLen != (ssize_t)aStr.Length() || aStr.Compare(text, (__be_int32)textLen) != 0)
                 {
-                    bhapi::be_clipboard.Clear();
+                    bhapi::__be_clipboard.Clear();
                     clipMsg->AddBool("BHAPI:msg_from_gui", true);
                     clipMsg->AddData("text/plain", B_MIME_TYPE, (void*)aStr.String(), (size_t)aStr.Length());
-                    bhapi::be_clipboard.Commit();
+                    bhapi::__be_clipboard.Commit();
                 }
             }
-            bhapi::be_clipboard.Unlock();
+            bhapi::__be_clipboard.Unlock();
         }
     }
 }
@@ -103,11 +103,11 @@ static bhapi::filter_result bhapi::win32_clipboard_filter(BMessage *message, BHa
         BString str;
         BMessage *msg;
 
-        bhapi::be_clipboard.Lock();
-        if(!((msg = bhapi::be_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
+        bhapi::__be_clipboard.Lock();
+        if(!((msg = bhapi::__be_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
             msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
         if(textLen > 0) str.SetTo(text, (__be_int32)textLen);
-        bhapi::be_clipboard.Unlock();
+        bhapi::__be_clipboard.Unlock();
 
         if(str.Length() <= 0) break;
         str.ReplaceAll("\n", "\r\n");
@@ -183,7 +183,7 @@ BHAPI_IMPEXP BGraphicsEngine* bhapi::get_built_in_graphics_engine()
 #endif
 
 
-status_t
+status_t 
 EWin32GraphicsEngine::InitCheck()
 {
     BAutolock <EWin32GraphicsEngine> autolock(this);
@@ -195,21 +195,21 @@ EWin32GraphicsEngine::InitCheck()
 }
 
 
-bool
+bool 
 EWin32GraphicsEngine::Lock()
 {
     return fLocker.Lock();
 }
 
 
-void
+void 
 EWin32GraphicsEngine::Unlock()
 {
     fLocker.Unlock();
 }
 
 
-bool
+bool 
 EWin32GraphicsEngine::GetContactor(HWND hWnd, BMessenger *msgr)
 {
     if(hWnd == NULL || msgr == NULL) return false;
@@ -871,7 +871,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
     else
         if(winMsg->message == WM_QUIT)
         {
-            bhapi::be_app->PostMessage(B_QUIT_REQUESTED);
+            bhapi::__be_clipboard->PostMessage(B_QUIT_REQUESTED);
         }
         else
             if(win32Engine->GetContactor(winMsg->hwnd, &etkWinMsgr) == false || etkWinMsgr.IsValid() == false)
@@ -1125,7 +1125,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     message.AddFloat("BHAPI:wheel_delta_y", zDelta > 0 ? -1.f : 1.f);
 
                     message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-                    etkWinMsgr = BMessenger(bhapi::be_app);
+                    etkWinMsgr = BMessenger(bhapi::__be_clipboard);
                     etkWinMsgr.SendMessage(&message);
                 }
                 break;
@@ -1163,7 +1163,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     message.AddPoint("screen_where", BPoint((float)xScreenPos, (float)yScreenPos));
 
                     message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-                    etkWinMsgr = BMessenger(bhapi::be_app);
+                    etkWinMsgr = BMessenger(bhapi::__be_clipboard);
                     etkWinMsgr.SendMessage(&message);
                 }
                 break;
@@ -1212,7 +1212,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     message.AddPoint("screen_where", BPoint((float)xScreenPos, (float)yScreenPos));
 
                     message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-                    etkWinMsgr = BMessenger(bhapi::be_app);
+                    etkWinMsgr = BMessenger(bhapi::__be_clipboard);
                     etkWinMsgr.SendMessage(&message);
                 }
                 break;
@@ -1250,7 +1250,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     message.AddPoint("screen_where", BPoint((float)xScreenPos, (float)yScreenPos));
 
                     message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-                    etkWinMsgr = BMessenger(bhapi::be_app);
+                    etkWinMsgr = BMessenger(bhapi::__be_clipboard);
                     etkWinMsgr.SendMessage(&message);
                 }
                 break;
@@ -1446,7 +1446,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     }
 
                     message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-                    etkWinMsgr = BMessenger(bhapi::be_app);
+                    etkWinMsgr = BMessenger(bhapi::__be_clipboard);
                     etkWinMsgr.SendMessage(&message);
 
                     bool dealed = true;
@@ -1583,7 +1583,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     message.what = B_KEY_DOWN;
                     message.AddString("bytes", str);
                     message.AddMessenger("BHAPI:msg_for_target", etkWinMsgr);
-                    etkWinMsgr = BMessenger(bhapi::be_app);
+                    etkWinMsgr = BMessenger(bhapi::__be_clipboard);
                     etkWinMsgr.SendMessage(&message);
                     message.what = B_KEY_UP;
                     etkWinMsgr.SendMessage(&message);
@@ -1730,7 +1730,7 @@ static status_t b_graphics_request_task(void *arg)
     win32Engine->win32ThreadID = GetCurrentThreadId();
 
     WNDCLASSEXA wcApp;
-    wcApp.lpszClassName = bhapi::be_app->Name();
+    wcApp.lpszClassName = bhapi::__be_clipboard->Name();
     wcApp.hInstance = win32Engine->win32Hinstance;
     wcApp.lpfnWndProc = _win32_WndProc_;
     wcApp.hCursor = LoadCursor(NULL, IDC_ARROW);
@@ -1860,13 +1860,13 @@ EWin32GraphicsEngine::~EWin32GraphicsEngine()
 }
 
 
-status_t
+status_t 
 EWin32GraphicsEngine::Initalize()
 {
     BMessageFilter *clipboardFilter = new BMessageFilter(B_CLIPBOARD_CHANGED, bhapi::win32_clipboard_filter);
-    bhapi::be_app->Lock();
-    bhapi::be_app->AddFilter(clipboardFilter);
-    bhapi::be_app->Unlock();
+    bhapi::__be_clipboard->Lock();
+    bhapi::__be_clipboard->AddFilter(clipboardFilter);
+    bhapi::__be_clipboard->Unlock();
 
     Lock();
 
@@ -1875,9 +1875,9 @@ EWin32GraphicsEngine::Initalize()
         Unlock();
         BHAPI_WARNING("[GRAPHICS]: %s --- win32Hinstance == NULL", __PRETTY_FUNCTION__);
 
-        bhapi::be_app->Lock();
-        bhapi::be_app->RemoveFilter(clipboardFilter);
-        bhapi::be_app->Unlock();
+        bhapi::__be_clipboard->Lock();
+        bhapi::__be_clipboard->RemoveFilter(clipboardFilter);
+        bhapi::__be_clipboard->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
@@ -1886,9 +1886,9 @@ EWin32GraphicsEngine::Initalize()
     {
         Unlock();
 
-        bhapi::be_app->Lock();
-        bhapi::be_app->RemoveFilter(clipboardFilter);
-        bhapi::be_app->Unlock();
+        bhapi::__be_clipboard->Lock();
+        bhapi::__be_clipboard->RemoveFilter(clipboardFilter);
+        bhapi::__be_clipboard->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
@@ -1902,9 +1902,9 @@ EWin32GraphicsEngine::Initalize()
 
         Unlock();
 
-        bhapi::be_app->Lock();
-        bhapi::be_app->RemoveFilter(clipboardFilter);
-        bhapi::be_app->Unlock();
+        bhapi::__be_clipboard->Lock();
+        bhapi::__be_clipboard->RemoveFilter(clipboardFilter);
+        bhapi::__be_clipboard->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
@@ -1928,9 +1928,9 @@ EWin32GraphicsEngine::Initalize()
 
         Unlock();
 
-        bhapi::be_app->Lock();
-        bhapi::be_app->RemoveFilter(clipboardFilter);
-        bhapi::be_app->Unlock();
+        bhapi::__be_clipboard->Lock();
+        bhapi::__be_clipboard->RemoveFilter(clipboardFilter);
+        bhapi::__be_clipboard->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
@@ -1950,9 +1950,9 @@ EWin32GraphicsEngine::Initalize()
 
         Unlock();
 
-        bhapi::be_app->Lock();
-        bhapi::be_app->RemoveFilter(clipboardFilter);
-        bhapi::be_app->Unlock();
+        bhapi::__be_clipboard->Lock();
+        bhapi::__be_clipboard->RemoveFilter(clipboardFilter);
+        bhapi::__be_clipboard->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
@@ -1980,9 +1980,9 @@ EWin32GraphicsEngine::Initalize()
 
         Unlock();
 
-        bhapi::be_app->Lock();
-        bhapi::be_app->RemoveFilter(clipboardFilter);
-        bhapi::be_app->Unlock();
+        bhapi::__be_clipboard->Lock();
+        bhapi::__be_clipboard->RemoveFilter(clipboardFilter);
+        bhapi::__be_clipboard->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
@@ -2015,9 +2015,9 @@ EWin32GraphicsEngine::Initalize()
 
         Unlock();
 
-        bhapi::be_app->Lock();
-        bhapi::be_app->RemoveFilter(clipboardFilter);
-        bhapi::be_app->Unlock();
+        bhapi::__be_clipboard->Lock();
+        bhapi::__be_clipboard->RemoveFilter(clipboardFilter);
+        bhapi::__be_clipboard->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
@@ -2054,9 +2054,9 @@ EWin32GraphicsEngine::Initalize()
 
         Unlock();
 
-        bhapi::be_app->Lock();
-        bhapi::be_app->RemoveFilter(clipboardFilter);
-        bhapi::be_app->Unlock();
+        bhapi::__be_clipboard->Lock();
+        bhapi::__be_clipboard->RemoveFilter(clipboardFilter);
+        bhapi::__be_clipboard->Unlock();
         delete clipboardFilter;
         return B_ERROR;
     }
@@ -2072,7 +2072,7 @@ EWin32GraphicsEngine::Initalize()
 }
 
 
-void
+void 
 EWin32GraphicsEngine::Cancel()
 {
     BMessageFilter *clipboardFilter = NULL;
@@ -2108,9 +2108,9 @@ EWin32GraphicsEngine::Cancel()
 
     if(clipboardFilter != NULL)
     {
-        bhapi::be_app->Lock();
-        bhapi::be_app->RemoveFilter(clipboardFilter);
-        bhapi::be_app->Unlock();
+        bhapi::__be_clipboard->Lock();
+        bhapi::__be_clipboard->RemoveFilter(clipboardFilter);
+        bhapi::__be_clipboard->Unlock();
         delete clipboardFilter;
     }
 }
@@ -2137,7 +2137,7 @@ EWin32GraphicsEngine::CreateWindow(__be_int32 x,  __be_int32 y,  __be_uint32 w, 
 }
 
 
-status_t
+status_t 
 EWin32GraphicsEngine::GetDesktopBounds(__be_uint32 *w,  __be_uint32 *h)
 {
     BAutolock <EWin32GraphicsEngine> autolock(this);
@@ -2151,7 +2151,7 @@ EWin32GraphicsEngine::GetDesktopBounds(__be_uint32 *w,  __be_uint32 *h)
 }
 
 
-status_t
+status_t 
 EWin32GraphicsEngine::GetCurrentWorkspace(__be_uint32 *workspace)
 {
     // don't support workspace
@@ -2160,7 +2160,7 @@ EWin32GraphicsEngine::GetCurrentWorkspace(__be_uint32 *workspace)
 }
 
 
-status_t
+status_t 
 EWin32GraphicsEngine::SetCursor(const void *cursor_data)
 {
     if(win32RequestWin == NULL) return B_ERROR;
@@ -2176,7 +2176,7 @@ EWin32GraphicsEngine::SetCursor(const void *cursor_data)
 }
 
 
-status_t
+status_t 
 EWin32GraphicsEngine::GetDefaultCursor(BCursor *cursor)
 {
     return B_ERROR;

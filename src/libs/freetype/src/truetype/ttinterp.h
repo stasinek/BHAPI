@@ -71,8 +71,7 @@ FT_BEGIN_HEADER
                              FT_F26Dot6  compensation );
 
   /* Point displacement along the freedom vector routine */
-  typedef void
-  (*TT_Move_Func)( EXEC_OP_ TT_GlyphZone  zone,
+  typedef void   (*TT_Move_Func)( EXEC_OP_ TT_GlyphZone  zone,
                             FT_UShort     point,
                             FT_F26Dot6    distance );
 
@@ -87,8 +86,7 @@ FT_BEGIN_HEADER
 
   /* setting or moving a cvt value.  Take care of non-square pixels  */
   /* if necessary                                                    */
-  typedef void
-  (*TT_Set_CVT_Func)( EXEC_OP_ FT_ULong    idx,
+  typedef void   (*TT_Set_CVT_Func)( EXEC_OP_ FT_ULong    idx,
                                FT_F26Dot6  value );
 
 

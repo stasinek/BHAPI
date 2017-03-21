@@ -7,8 +7,7 @@
 
 
 // from the Dragon Book: a slightly modified hashpjw()
-/*static*/ uint32
-StringUtils::HashValue(const char* string)
+/*static*/ uint32 StringUtils::HashValue(const char* string)
 {
 	if (string == NULL)
 		return 0;

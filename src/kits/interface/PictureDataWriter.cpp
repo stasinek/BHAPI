@@ -44,8 +44,7 @@ PictureDataWriter::~PictureDataWriter()
 }
 
 
-status_t
-PictureDataWriter::SetTo(BPositionIO* data)
+status_t PictureDataWriter::SetTo(BPositionIO* data)
 {
 	if (data == NULL)
 		return B_BAD_VALUE;
@@ -56,8 +55,7 @@ PictureDataWriter::SetTo(BPositionIO* data)
 }
 
 
-status_t
-PictureDataWriter::WriteSetOrigin(const BPoint& point)
+status_t PictureDataWriter::WriteSetOrigin(const BPoint& point)
 {
 	try {
 		BeginOp(B_PIC_SET_ORIGIN);
@@ -71,8 +69,7 @@ PictureDataWriter::WriteSetOrigin(const BPoint& point)
 }
 
 
-status_t
-PictureDataWriter::WriteInvertRect(const BRect& rect)
+status_t PictureDataWriter::WriteInvertRect(const BRect& rect)
 {
 	try {
 		WriteSetDrawingMode(B_OP_INVERT);
@@ -90,8 +87,7 @@ PictureDataWriter::WriteInvertRect(const BRect& rect)
 }
 
 
-status_t
-PictureDataWriter::WriteSetDrawingMode(const drawing_mode& mode)
+status_t PictureDataWriter::WriteSetDrawingMode(const drawing_mode& mode)
 {
 	try {
 		BeginOp(B_PIC_SET_DRAWING_MODE);
@@ -105,8 +101,7 @@ PictureDataWriter::WriteSetDrawingMode(const drawing_mode& mode)
 }
 
 
-status_t
-PictureDataWriter::WriteSetPenLocation(const BPoint& point)
+status_t PictureDataWriter::WriteSetPenLocation(const BPoint& point)
 {
 	try {
 		BeginOp(B_PIC_SET_PEN_LOCATION);
@@ -120,8 +115,7 @@ PictureDataWriter::WriteSetPenLocation(const BPoint& point)
 }
 
 
-status_t
-PictureDataWriter::WriteSetPenSize(const float& penSize)
+status_t PictureDataWriter::WriteSetPenSize(const float& penSize)
 {
 	try {
 		BeginOp(B_PIC_SET_PEN_SIZE);
@@ -135,8 +129,7 @@ PictureDataWriter::WriteSetPenSize(const float& penSize)
 }
 
 
-status_t
-PictureDataWriter::WriteSetLineMode(const cap_mode& cap, const join_mode& join,
+status_t PictureDataWriter::WriteSetLineMode(const cap_mode& cap, const join_mode& join,
 	const float& miterLimit)
 {
 	try {
@@ -153,8 +146,7 @@ PictureDataWriter::WriteSetLineMode(const cap_mode& cap, const join_mode& join,
 }
 
 
-status_t
-PictureDataWriter::WriteSetScale(const float& scale)
+status_t PictureDataWriter::WriteSetScale(const float& scale)
 {
 	try {
 		BeginOp(B_PIC_SET_SCALE);
@@ -168,8 +160,7 @@ PictureDataWriter::WriteSetScale(const float& scale)
 }
 
 
-status_t
-PictureDataWriter::WriteSetTransform(BAffineTransform transform)
+status_t PictureDataWriter::WriteSetTransform(BAffineTransform transform)
 {
 	try {
 		BeginOp(B_PIC_SET_TRANSFORM);
@@ -183,8 +174,7 @@ PictureDataWriter::WriteSetTransform(BAffineTransform transform)
 }
 
 
-status_t
-PictureDataWriter::WriteTranslateBy(double x, double y)
+status_t PictureDataWriter::WriteTranslateBy(double x, double y)
 {
 	try {
 		BeginOp(B_PIC_AFFINE_TRANSLATE);
@@ -199,8 +189,7 @@ PictureDataWriter::WriteTranslateBy(double x, double y)
 }
 
 
-status_t
-PictureDataWriter::WriteScaleBy(double x, double y)
+status_t PictureDataWriter::WriteScaleBy(double x, double y)
 {
 	try {
 		BeginOp(B_PIC_AFFINE_SCALE);
@@ -215,8 +204,7 @@ PictureDataWriter::WriteScaleBy(double x, double y)
 }
 
 
-status_t
-PictureDataWriter::WriteRotateBy(double angleRadians)
+status_t PictureDataWriter::WriteRotateBy(double angleRadians)
 {
 	try {
 		BeginOp(B_PIC_AFFINE_ROTATE);
@@ -230,8 +218,7 @@ PictureDataWriter::WriteRotateBy(double angleRadians)
 }
 
 
-status_t
-PictureDataWriter::WriteSetPattern(const ::pattern& pattern)
+status_t PictureDataWriter::WriteSetPattern(const ::pattern& pattern)
 {
 	try {
 		BeginOp(B_PIC_SET_STIPLE_PATTERN);
@@ -245,8 +232,7 @@ PictureDataWriter::WriteSetPattern(const ::pattern& pattern)
 }
 
 
-status_t
-PictureDataWriter::WriteClipToPicture(int32 pictureToken,
+status_t PictureDataWriter::WriteClipToPicture(int32 pictureToken,
 						const BPoint& origin, bool inverse)
 {
 	// TODO: I don't know if it's compatible with R5's BPicture version
@@ -264,8 +250,7 @@ PictureDataWriter::WriteClipToPicture(int32 pictureToken,
 }
 
 
-status_t
-PictureDataWriter::WriteSetClipping(const BRegion& region)
+status_t PictureDataWriter::WriteSetClipping(const BRegion& region)
 {
 	// TODO: I don't know if it's compatible with R5's BPicture version
 	try {
@@ -287,8 +272,7 @@ PictureDataWriter::WriteSetClipping(const BRegion& region)
 }
 
 
-status_t
-PictureDataWriter::WriteClearClipping()
+status_t PictureDataWriter::WriteClearClipping()
 {
 	try {
 		BeginOp(B_PIC_CLEAR_CLIPPING_RECTS);
@@ -301,8 +285,7 @@ PictureDataWriter::WriteClearClipping()
 }
 
 
-status_t
-PictureDataWriter::WriteSetHighColor(const rgb_color& color)
+status_t PictureDataWriter::WriteSetHighColor(const rgb_color& color)
 {
 	try {
 		BeginOp(B_PIC_SET_FORE_COLOR);
@@ -316,8 +299,7 @@ PictureDataWriter::WriteSetHighColor(const rgb_color& color)
 }
 
 
-status_t
-PictureDataWriter::WriteSetLowColor(const rgb_color& color)
+status_t PictureDataWriter::WriteSetLowColor(const rgb_color& color)
 {
 	try {
 		BeginOp(B_PIC_SET_BACK_COLOR);
@@ -331,8 +313,7 @@ PictureDataWriter::WriteSetLowColor(const rgb_color& color)
 }
 
 
-status_t
-PictureDataWriter::WriteDrawRect(const BRect& rect, const bool& fill)
+status_t PictureDataWriter::WriteDrawRect(const BRect& rect, const bool& fill)
 {
 	try {
 		BeginOp(fill ? B_PIC_FILL_RECT : B_PIC_STROKE_RECT);
@@ -346,8 +327,7 @@ PictureDataWriter::WriteDrawRect(const BRect& rect, const bool& fill)
 }
 
 
-status_t
-PictureDataWriter::WriteDrawRoundRect(const BRect& rect, const BPoint& radius,
+status_t PictureDataWriter::WriteDrawRoundRect(const BRect& rect, const BPoint& radius,
 	const bool& fill)
 {
 	try {
@@ -363,8 +343,7 @@ PictureDataWriter::WriteDrawRoundRect(const BRect& rect, const BPoint& radius,
 }
 
 
-status_t
-PictureDataWriter::WriteDrawEllipse(const BRect& rect, const bool& fill)
+status_t PictureDataWriter::WriteDrawEllipse(const BRect& rect, const bool& fill)
 {
 	try {
 		BeginOp(fill ? B_PIC_FILL_ELLIPSE : B_PIC_STROKE_ELLIPSE);
@@ -378,8 +357,7 @@ PictureDataWriter::WriteDrawEllipse(const BRect& rect, const bool& fill)
 }
 
 
-status_t
-PictureDataWriter::WriteDrawArc(const BPoint& center, const BPoint& radius,
+status_t PictureDataWriter::WriteDrawArc(const BPoint& center, const BPoint& radius,
 	const float& startTheta, const float& arcTheta, const bool& fill)
 {
 	try {
@@ -397,8 +375,7 @@ PictureDataWriter::WriteDrawArc(const BPoint& center, const BPoint& radius,
 }
 
 
-status_t
-PictureDataWriter::WriteDrawPolygon(const int32& numPoints, BPoint* points,
+status_t PictureDataWriter::WriteDrawPolygon(const int32& numPoints, BPoint* points,
 	const bool& isClosed, const bool& fill)
 {
 	try {
@@ -419,8 +396,7 @@ PictureDataWriter::WriteDrawPolygon(const int32& numPoints, BPoint* points,
 }
 
 
-status_t
-PictureDataWriter::WriteDrawBezier(const BPoint points[4], const bool& fill)
+status_t PictureDataWriter::WriteDrawBezier(const BPoint points[4], const bool& fill)
 {
 	try {
 		BeginOp(fill ? B_PIC_FILL_BEZIER : B_PIC_STROKE_BEZIER);
@@ -436,8 +412,7 @@ PictureDataWriter::WriteDrawBezier(const BPoint points[4], const bool& fill)
 }
 
 
-status_t
-PictureDataWriter::WriteStrokeLine(const BPoint& start, const BPoint& end)
+status_t PictureDataWriter::WriteStrokeLine(const BPoint& start, const BPoint& end)
 {
 	try {
 		BeginOp(B_PIC_STROKE_LINE);
@@ -452,8 +427,7 @@ PictureDataWriter::WriteStrokeLine(const BPoint& start, const BPoint& end)
 }
 
 
-status_t
-PictureDataWriter::WriteDrawString(const BPoint& where, const char* string,
+status_t PictureDataWriter::WriteDrawString(const BPoint& where, const char* string,
 	const int32& length, const escapement_delta& escapement)
 {
 	try {
@@ -477,8 +451,7 @@ PictureDataWriter::WriteDrawString(const BPoint& where, const char* string,
 }
 
 
-status_t
-PictureDataWriter::WriteDrawShape(const int32& opCount, const void* opList,
+status_t PictureDataWriter::WriteDrawShape(const int32& opCount, const void* opList,
 	const int32& ptCount, const void* ptList, const bool& fill)
 {
 	try {
@@ -496,8 +469,7 @@ PictureDataWriter::WriteDrawShape(const int32& opCount, const void* opList,
 }
 
 
-status_t
-PictureDataWriter::WriteDrawBitmap(const BRect& srcRect, const BRect& dstRect,
+status_t PictureDataWriter::WriteDrawBitmap(const BRect& srcRect, const BRect& dstRect,
 	const int32& width, const int32& height, const int32& bytesPerRow,
 	const int32& colorSpace, const int32& flags, const void* data,
 	const int32& length)
@@ -523,8 +495,7 @@ PictureDataWriter::WriteDrawBitmap(const BRect& srcRect, const BRect& dstRect,
 }
 
 
-status_t
-PictureDataWriter::WriteDrawPicture(const BPoint& where, const int32& token)
+status_t PictureDataWriter::WriteDrawPicture(const BPoint& where, const int32& token)
 {
 	// TODO: I'm not sure about this function. I think we need
 	// to attach the picture data too.
@@ -543,8 +514,7 @@ PictureDataWriter::WriteDrawPicture(const BPoint& where, const int32& token)
 }
 
 
-status_t
-PictureDataWriter::WriteSetFontFamily(const font_family family)
+status_t PictureDataWriter::WriteSetFontFamily(const font_family family)
 {
 	try {
 		BeginOp(B_PIC_SET_FONT_FAMILY);
@@ -559,8 +529,7 @@ PictureDataWriter::WriteSetFontFamily(const font_family family)
 }
 
 
-status_t
-PictureDataWriter::WriteSetFontStyle(const font_style style)
+status_t PictureDataWriter::WriteSetFontStyle(const font_style style)
 {
 	try {
 		BeginOp(B_PIC_SET_FONT_STYLE);
@@ -575,8 +544,7 @@ PictureDataWriter::WriteSetFontStyle(const font_style style)
 }
 
 
-status_t
-PictureDataWriter::WriteSetFontSpacing(const int32& spacing)
+status_t PictureDataWriter::WriteSetFontSpacing(const int32& spacing)
 {
 	try {
 		BeginOp(B_PIC_SET_FONT_SPACING);
@@ -590,8 +558,7 @@ PictureDataWriter::WriteSetFontSpacing(const int32& spacing)
 }
 
 
-status_t
-PictureDataWriter::WriteSetFontSize(const float& size)
+status_t PictureDataWriter::WriteSetFontSize(const float& size)
 {
 	try {
 		BeginOp(B_PIC_SET_FONT_SIZE);
@@ -605,8 +572,7 @@ PictureDataWriter::WriteSetFontSize(const float& size)
 }
 
 
-status_t
-PictureDataWriter::WriteSetFontRotation(const float& rotation)
+status_t PictureDataWriter::WriteSetFontRotation(const float& rotation)
 {
 	try {
 		BeginOp(B_PIC_SET_FONT_ROTATE);
@@ -620,8 +586,7 @@ PictureDataWriter::WriteSetFontRotation(const float& rotation)
 }
 
 
-status_t
-PictureDataWriter::WriteSetFontEncoding(const int32& encoding)
+status_t PictureDataWriter::WriteSetFontEncoding(const int32& encoding)
 {
 	try {
 		BeginOp(B_PIC_SET_FONT_ENCODING);
@@ -635,8 +600,7 @@ PictureDataWriter::WriteSetFontEncoding(const int32& encoding)
 }
 
 
-status_t
-PictureDataWriter::WriteSetFontFlags(const int32& flags)
+status_t PictureDataWriter::WriteSetFontFlags(const int32& flags)
 {
 	try {
 		BeginOp(B_PIC_SET_FONT_FLAGS);
@@ -650,8 +614,7 @@ PictureDataWriter::WriteSetFontFlags(const int32& flags)
 }
 
 
-status_t
-PictureDataWriter::WriteSetFontShear(const float& shear)
+status_t PictureDataWriter::WriteSetFontShear(const float& shear)
 {
 	try {
 		BeginOp(B_PIC_SET_FONT_SHEAR);
@@ -665,8 +628,7 @@ PictureDataWriter::WriteSetFontShear(const float& shear)
 }
 
 
-status_t
-PictureDataWriter::WriteSetFontFace(const int32& face)
+status_t PictureDataWriter::WriteSetFontFace(const int32& face)
 {
 	try {
 		BeginOp(B_PIC_SET_FONT_FACE);
@@ -680,8 +642,7 @@ PictureDataWriter::WriteSetFontFace(const int32& face)
 }
 
 
-status_t
-PictureDataWriter::WritePushState()
+status_t PictureDataWriter::WritePushState()
 {
 	try {
 		BeginOp(B_PIC_PUSH_STATE);
@@ -694,8 +655,7 @@ PictureDataWriter::WritePushState()
 }
 
 
-status_t
-PictureDataWriter::WritePopState()
+status_t PictureDataWriter::WritePopState()
 {
 	try {
 		BeginOp(B_PIC_POP_STATE);
@@ -708,8 +668,7 @@ PictureDataWriter::WritePopState()
 }
 
 
-status_t
-PictureDataWriter::WriteBlendLayer(Layer* layer)
+status_t PictureDataWriter::WriteBlendLayer(Layer* layer)
 {
 	try {
 		BeginOp(B_PIC_BLEND_LAYER);
@@ -723,8 +682,7 @@ PictureDataWriter::WriteBlendLayer(Layer* layer)
 }
 
 
-status_t
-PictureDataWriter::WriteClipToRect(const BRect& rect, bool inverse)
+status_t PictureDataWriter::WriteClipToRect(const BRect& rect, bool inverse)
 {
 	try {
 		BeginOp(B_PIC_CLIP_TO_RECT);
@@ -739,8 +697,7 @@ PictureDataWriter::WriteClipToRect(const BRect& rect, bool inverse)
 }
 
 
-status_t
-PictureDataWriter::WriteClipToShape(int32 opCount, const void* opList,
+status_t PictureDataWriter::WriteClipToShape(int32 opCount, const void* opList,
 	int32 ptCount, const void* ptList, bool inverse)
 {
 	try {
@@ -760,8 +717,7 @@ PictureDataWriter::WriteClipToShape(int32 opCount, const void* opList,
 
 
 // private
-void
-PictureDataWriter::BeginOp(const int16& op)
+void PictureDataWriter::BeginOp(const int16& op)
 {
 	if (fData == NULL)
 		THROW_ERROR(B_NO_INIT);
@@ -775,8 +731,7 @@ PictureDataWriter::BeginOp(const int16& op)
 }
 
 
-void
-PictureDataWriter::EndOp()
+void PictureDataWriter::EndOp()
 {
 	if (fData == NULL)
 		THROW_ERROR(B_NO_INIT);
@@ -799,8 +754,7 @@ PictureDataWriter::EndOp()
 }
 
 
-void
-PictureDataWriter::WriteData(const void* data, size_t size)
+void PictureDataWriter::WriteData(const void* data, size_t size)
 {
 	ssize_t result = fData->Write(data, size);
 	if (result < 0)

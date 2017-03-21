@@ -145,8 +145,7 @@ BNetAddress::operator=(const BNetAddress& other)
  *		You can generally be safe using the MAXHOSTNAMELEN define, which
  *		defaults to 64 bytes--don't forget to leave room for the NULL!
  */
-status_t
-BNetAddress::GetAddr(char* hostname, unsigned short* port) const
+status_t BNetAddress::GetAddr(char* hostname, unsigned short* port) const
 {
 	if (fInit != B_OK)
 		return B_NO_INIT;
@@ -334,8 +333,7 @@ BNetAddress::Instantiate(BMessage* archive)
  * Returns:
  *		B_OK/B_ERROR for success/failure.
  */
-status_t
-BNetAddress::SetTo(const char* hostname, unsigned short port)
+status_t BNetAddress::SetTo(const char* hostname, unsigned short port)
 {
 	if (hostname == NULL)
 		return B_ERROR;
@@ -369,8 +367,7 @@ BNetAddress::SetTo(const char* hostname, unsigned short port)
 	\param addr address
 	\return B_OK.
 */
-status_t
-BNetAddress::SetTo(const struct sockaddr_in& addr)
+status_t BNetAddress::SetTo(const struct sockaddr_in& addr)
 {
 	fPort = addr.sin_port;
 	fAddress = addr.sin_addr.s_addr;
@@ -396,8 +393,7 @@ BNetAddress::SetTo(const struct sockaddr_in& addr)
 
 	\return B_OK.
 */
-status_t
-BNetAddress::SetTo(in_addr addr, int port)
+status_t BNetAddress::SetTo(in_addr addr, int port)
 {
 	fFamily = AF_INET;
 	fPort = htons((short)port);
@@ -415,8 +411,7 @@ BNetAddress::SetTo(in_addr addr, int port)
 
 	\return B_OK.
 */
-status_t
-BNetAddress::SetTo(uint32 addr, int port)
+status_t BNetAddress::SetTo(uint32 addr, int port)
 {
 	fFamily = AF_INET;
 	fPort = htons((short)port);
@@ -452,8 +447,7 @@ BNetAddress::SetTo(uint32 addr, int port)
  *		determine the port number (see getservbyname(3)).  This method will
  *		fail if the aforementioned precondition is not met.
  */
-status_t
-BNetAddress::SetTo(const char* hostname, const char* protocol,
+status_t BNetAddress::SetTo(const char* hostname, const char* protocol,
 	const char* service)
 {
 	struct servent* serviceEntry = getservbyname(service, protocol);

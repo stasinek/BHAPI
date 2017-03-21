@@ -37,8 +37,7 @@ get_tls()
 }
 
 
-int32
-tls_allocate()
+int32 tls_allocate()
 {
 	if (gNextSlot < TLS_MAX_KEYS) {
 		auto next = gNextSlot++;
@@ -50,8 +49,7 @@ tls_allocate()
 }
 
 
-void*
-tls_get(int32 index)
+void*   tls_get(int32 index)
 {
 	return get_tls()[index];
 }
@@ -64,15 +62,13 @@ tls_address(int32 index)
 }
 
 
-void
-tls_set(int32 index, void* value)
+void tls_set(int32 index, void* value)
 {
 	get_tls()[index] = value;
 }
 
 
-extern "C" void*
-__tls_get_addr(tls_index* ti)
+extern "C" void*   __tls_get_addr(tls_index* ti)
 {
 	return __gRuntimeLoader->get_tls_address(ti->module, ti->offset);
 }

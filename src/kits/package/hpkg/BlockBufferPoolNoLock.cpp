@@ -26,15 +26,13 @@ BBlockBufferPoolNoLock::~BBlockBufferPoolNoLock()
 }
 
 
-bool
-BBlockBufferPoolNoLock::Lock()
+bool BBlockBufferPoolNoLock::Lock()
 {
 	return true;
 }
 
 
-void
-BBlockBufferPoolNoLock::Unlock()
+void BBlockBufferPoolNoLock::Unlock()
 {
 }
 

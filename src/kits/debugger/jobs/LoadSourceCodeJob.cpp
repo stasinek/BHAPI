@@ -49,8 +49,7 @@ LoadSourceCodeJob::Key() const
 }
 
 
-status_t
-LoadSourceCodeJob::Do()
+status_t LoadSourceCodeJob::Do()
 {
 	// if requested, try loading the source code for the function
 	Function* function = fFunctionInstance->GetFunction();

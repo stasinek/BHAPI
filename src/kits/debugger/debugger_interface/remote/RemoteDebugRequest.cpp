@@ -34,8 +34,7 @@ RemoteDebugRequest::~RemoteDebugRequest()
 }
 
 
-status_t
-RemoteDebugRequest::LoadFromMessage(const BMessage& data)
+status_t RemoteDebugRequest::LoadFromMessage(const BMessage& data)
 {
 	if (data.FindInt32("type") != Type())
 		return B_BAD_VALUE;
@@ -44,8 +43,7 @@ RemoteDebugRequest::LoadFromMessage(const BMessage& data)
 }
 
 
-status_t
-RemoteDebugRequest::SaveToMessage(BMessage& _output) const
+status_t RemoteDebugRequest::SaveToMessage(BMessage& _output) const
 {
 	_output.MakeEmpty();
 
@@ -57,8 +55,7 @@ RemoteDebugRequest::SaveToMessage(BMessage& _output) const
 }
 
 
-void
-RemoteDebugRequest::SetArchitecture(Architecture* architecture)
+void RemoteDebugRequest::SetArchitecture(Architecture* architecture)
 {
 	fArchitecture = architecture;
 	fArchitecture->AcquireReference();
@@ -84,8 +81,7 @@ RemoteDebugResponse::~RemoteDebugResponse()
 }
 
 
-void
-RemoteDebugResponse::SetRequestInfo(RemoteDebugRequest* request,
+void RemoteDebugResponse::SetRequestInfo(RemoteDebugRequest* request,
 	status_t result)
 {
 	fRequest = request;
@@ -94,8 +90,7 @@ RemoteDebugResponse::SetRequestInfo(RemoteDebugRequest* request,
 }
 
 
-status_t
-RemoteDebugResponse::LoadFromMessage(const BMessage& data)
+status_t RemoteDebugResponse::LoadFromMessage(const BMessage& data)
 {
 	if (data.FindInt32("type") != Request()->Type())
 		return B_BAD_VALUE;
@@ -107,8 +102,7 @@ RemoteDebugResponse::LoadFromMessage(const BMessage& data)
 }
 
 
-status_t
-RemoteDebugResponse::SaveToMessage(BMessage& _output) const
+status_t RemoteDebugResponse::SaveToMessage(BMessage& _output) const
 {
 	_output.MakeEmpty();
 
@@ -127,15 +121,13 @@ RemoteDebugResponse::SaveToMessage(BMessage& _output) const
 }
 
 
-status_t
-RemoteDebugResponse::LoadSpecificInfoFromMessage(const BMessage& data)
+status_t RemoteDebugResponse::LoadSpecificInfoFromMessage(const BMessage& data)
 {
 	return B_OK;
 }
 
 
-status_t
-RemoteDebugResponse::SaveSpecificInfoToMessage(BMessage& _output) const
+status_t RemoteDebugResponse::SaveSpecificInfoToMessage(BMessage& _output) const
 {
 	return B_OK;
 }
@@ -158,8 +150,7 @@ RemoteDebugReadMemoryRequest::~RemoteDebugReadMemoryRequest()
 }
 
 
-void
-RemoteDebugReadMemoryRequest::SetTo(target_addr_t address, target_size_t size)
+void RemoteDebugReadMemoryRequest::SetTo(target_addr_t address, target_size_t size)
 {
 	fAddress = address;
 	fSize = size;
@@ -173,8 +164,7 @@ RemoteDebugReadMemoryRequest::Type() const
 }
 
 
-status_t
-RemoteDebugReadMemoryRequest::LoadSpecificInfoFromMessage(const BMessage& data)
+status_t RemoteDebugReadMemoryRequest::LoadSpecificInfoFromMessage(const BMessage& data)
 {
 	if (data.FindUInt64("address", &fAddress) != B_OK)
 		return B_BAD_VALUE;
@@ -186,8 +176,7 @@ RemoteDebugReadMemoryRequest::LoadSpecificInfoFromMessage(const BMessage& data)
 }
 
 
-status_t
-RemoteDebugReadMemoryRequest::SaveSpecificInfoToMessage(
+status_t RemoteDebugReadMemoryRequest::SaveSpecificInfoToMessage(
 	BMessage& _output) const
 {
 	status_t error = _output.AddUInt64("address", fAddress);
@@ -218,8 +207,7 @@ RemoteDebugWriteMemoryRequest::~RemoteDebugWriteMemoryRequest()
 }
 
 
-status_t
-RemoteDebugWriteMemoryRequest::SetTo(target_addr_t address, const void* data,
+status_t RemoteDebugWriteMemoryRequest::SetTo(target_addr_t address, const void* data,
 	target_size_t size)
 {
 	if (size == 0 || data == NULL)
@@ -244,8 +232,7 @@ RemoteDebugWriteMemoryRequest::Type() const
 }
 
 
-status_t
-RemoteDebugWriteMemoryRequest::LoadSpecificInfoFromMessage(
+status_t RemoteDebugWriteMemoryRequest::LoadSpecificInfoFromMessage(
 	const BMessage& data)
 {
 	if (data.FindUInt64("address", &fAddress) != B_OK)
@@ -274,8 +261,7 @@ RemoteDebugWriteMemoryRequest::LoadSpecificInfoFromMessage(
 }
 
 
-status_t
-RemoteDebugWriteMemoryRequest::SaveSpecificInfoToMessage(
+status_t RemoteDebugWriteMemoryRequest::SaveSpecificInfoToMessage(
 	BMessage& _output) const
 {
 	status_t error = _output.AddUInt64("address", fAddress);
@@ -306,8 +292,7 @@ RemoteDebugSetTeamFlagsRequest::~RemoteDebugSetTeamFlagsRequest()
 }
 
 
-void
-RemoteDebugSetTeamFlagsRequest::SetTo(int32 flags)
+void RemoteDebugSetTeamFlagsRequest::SetTo(int32 flags)
 {
 	fFlags = flags;
 }
@@ -320,8 +305,7 @@ RemoteDebugSetTeamFlagsRequest::Type() const
 }
 
 
-status_t
-RemoteDebugSetTeamFlagsRequest::LoadSpecificInfoFromMessage(
+status_t RemoteDebugSetTeamFlagsRequest::LoadSpecificInfoFromMessage(
 	const BMessage& data)
 {
 	if (data.FindInt32("flags", &fFlags) != B_OK)
@@ -331,8 +315,7 @@ RemoteDebugSetTeamFlagsRequest::LoadSpecificInfoFromMessage(
 }
 
 
-status_t
-RemoteDebugSetTeamFlagsRequest::SaveSpecificInfoToMessage(
+status_t RemoteDebugSetTeamFlagsRequest::SaveSpecificInfoToMessage(
 	BMessage& _output) const
 {
 	return _output.AddInt32("flags", fFlags);
@@ -356,8 +339,7 @@ RemoteDebugSetThreadFlagsRequest::~RemoteDebugSetThreadFlagsRequest()
 }
 
 
-void
-RemoteDebugSetThreadFlagsRequest::SetTo(thread_id thread, int32 flags)
+void RemoteDebugSetThreadFlagsRequest::SetTo(thread_id thread, int32 flags)
 {
 	fThread = thread;
 	fFlags = flags;
@@ -371,8 +353,7 @@ RemoteDebugSetThreadFlagsRequest::Type() const
 }
 
 
-status_t
-RemoteDebugSetThreadFlagsRequest::LoadSpecificInfoFromMessage(
+status_t RemoteDebugSetThreadFlagsRequest::LoadSpecificInfoFromMessage(
 	const BMessage& data)
 {
 	if (data.FindInt32("thread", &fThread) != B_OK)
@@ -385,8 +366,7 @@ RemoteDebugSetThreadFlagsRequest::LoadSpecificInfoFromMessage(
 }
 
 
-status_t
-RemoteDebugSetThreadFlagsRequest::SaveSpecificInfoToMessage(
+status_t RemoteDebugSetThreadFlagsRequest::SaveSpecificInfoToMessage(
 	BMessage& _output) const
 {
 	status_t error = _output.AddInt32("thread", fThread);
@@ -413,15 +393,13 @@ RemoteDebugThreadActionRequest::~RemoteDebugThreadActionRequest()
 }
 
 
-void
-RemoteDebugThreadActionRequest::SetTo(thread_id thread)
+void RemoteDebugThreadActionRequest::SetTo(thread_id thread)
 {
 	fThread = thread;
 }
 
 
-status_t
-RemoteDebugThreadActionRequest::LoadSpecificInfoFromMessage(
+status_t RemoteDebugThreadActionRequest::LoadSpecificInfoFromMessage(
 	const BMessage& data)
 {
 	if (data.FindInt32("thread", &fThread) != B_OK)
@@ -431,8 +409,7 @@ RemoteDebugThreadActionRequest::LoadSpecificInfoFromMessage(
 }
 
 
-status_t
-RemoteDebugThreadActionRequest::SaveSpecificInfoToMessage(
+status_t RemoteDebugThreadActionRequest::SaveSpecificInfoToMessage(
 	BMessage& _output) const
 {
 	return _output.AddInt32("thread", fThread);
@@ -543,8 +520,7 @@ RemoteDebugSetCpuStateRequest::~RemoteDebugSetCpuStateRequest()
 }
 
 
-void
-RemoteDebugSetCpuStateRequest::SetTo(thread_id thread, CpuState* state)
+void RemoteDebugSetCpuStateRequest::SetTo(thread_id thread, CpuState* state)
 {
 	fThread = thread;
 	fCpuState = state;
@@ -560,8 +536,7 @@ RemoteDebugSetCpuStateRequest::Type() const
 }
 
 
-status_t
-RemoteDebugSetCpuStateRequest::LoadSpecificInfoFromMessage(
+status_t RemoteDebugSetCpuStateRequest::LoadSpecificInfoFromMessage(
 	const BMessage& data)
 {
 	if (data.FindInt32("thread", &fThread) != B_OK)
@@ -584,8 +559,7 @@ RemoteDebugSetCpuStateRequest::LoadSpecificInfoFromMessage(
 }
 
 
-status_t
-RemoteDebugSetCpuStateRequest::SaveSpecificInfoToMessage(
+status_t RemoteDebugSetCpuStateRequest::SaveSpecificInfoToMessage(
 	BMessage& _output) const
 {
 	status_t error = _output.AddInt32("thread", fThread);
@@ -625,16 +599,14 @@ RemoteDebugReadMemoryResponse::~RemoteDebugReadMemoryResponse()
 }
 
 
-void
-RemoteDebugReadMemoryResponse::SetTo(void* data, target_size_t size)
+void RemoteDebugReadMemoryResponse::SetTo(void* data, target_size_t size)
 {
 	fData = data;
 	fSize = size;
 }
 
 
-status_t
-RemoteDebugReadMemoryResponse::LoadSpecificInfoFromMessage(
+status_t RemoteDebugReadMemoryResponse::LoadSpecificInfoFromMessage(
 	const BMessage& data)
 {
 	status_t error = data.FindUInt64("size", &fSize);
@@ -659,8 +631,7 @@ RemoteDebugReadMemoryResponse::LoadSpecificInfoFromMessage(
 }
 
 
-status_t
-RemoteDebugReadMemoryResponse::SaveSpecificInfoToMessage(
+status_t RemoteDebugReadMemoryResponse::SaveSpecificInfoToMessage(
 	BMessage& _output) const
 {
 	if (fData == NULL)
@@ -692,8 +663,7 @@ RemoteDebugGetCpuStateResponse::~RemoteDebugGetCpuStateResponse()
 }
 
 
-void
-RemoteDebugGetCpuStateResponse::SetTo(CpuState* state)
+void RemoteDebugGetCpuStateResponse::SetTo(CpuState* state)
 {
 	fCpuState = state;
 	if (fCpuState != NULL)
@@ -701,8 +671,7 @@ RemoteDebugGetCpuStateResponse::SetTo(CpuState* state)
 }
 
 
-status_t
-RemoteDebugGetCpuStateResponse::LoadSpecificInfoFromMessage(
+status_t RemoteDebugGetCpuStateResponse::LoadSpecificInfoFromMessage(
 	const BMessage& data)
 {
 	if (fCpuState != NULL) {
@@ -722,8 +691,7 @@ RemoteDebugGetCpuStateResponse::LoadSpecificInfoFromMessage(
 }
 
 
-status_t
-RemoteDebugGetCpuStateResponse::SaveSpecificInfoToMessage(
+status_t RemoteDebugGetCpuStateResponse::SaveSpecificInfoToMessage(
 	BMessage& _output) const
 {
 	size_t stateSize = GetArchitecture()->DebugCpuStateSize();

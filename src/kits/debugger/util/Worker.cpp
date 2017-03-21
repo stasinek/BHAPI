@@ -44,8 +44,7 @@ SimpleJobKey::HashValue() const
 }
 
 
-bool
-SimpleJobKey::operator==(const JobKey& other) const
+bool SimpleJobKey::operator==(const JobKey& other) const
 {
 	const SimpleJobKey* otherKey = dynamic_cast<const SimpleJobKey*>(&other);
 	return otherKey != NULL && object == otherKey->object
@@ -70,32 +69,27 @@ JobListener::~JobListener()
 }
 
 
-void
-JobListener::JobStarted(Job* job)
+void JobListener::JobStarted(Job* job)
 {
 }
 
 
-void
-JobListener::JobDone(Job* job)
+void JobListener::JobDone(Job* job)
 {
 }
 
 
-void
-JobListener::JobWaitingForInput(Job* job)
+void JobListener::JobWaitingForInput(Job* job)
 {
 }
 
 
-void
-JobListener::JobFailed(Job* job)
+void JobListener::JobFailed(Job* job)
 {
 }
 
 
-void
-JobListener::JobAborted(Job* job)
+void JobListener::JobAborted(Job* job)
 {
 }
 
@@ -126,15 +120,13 @@ Job::WaitFor(const JobKey& key)
 }
 
 
-status_t
-Job::WaitForUserInput()
+status_t Job::WaitForUserInput()
 {
 	return fWorker->WaitForUserInput(this);
 }
 
 
-void
-Job::SetDescription(const char* format, ...)
+void Job::SetDescription(const char* format, ...)
 {
 	va_list args;
 	va_start(args, format);
@@ -142,29 +134,25 @@ Job::SetDescription(const char* format, ...)
 }
 
 
-void
-Job::SetWorker(Worker* worker)
+void Job::SetWorker(Worker* worker)
 {
 	fWorker = worker;
 }
 
 
-void
-Job::SetState(job_state state)
+void Job::SetState(job_state state)
 {
 	fState = state;
 }
 
 
-void
-Job::SetDependency(Job* job)
+void Job::SetDependency(Job* job)
 {
 	fDependency = job;
 }
 
 
-void
-Job::SetWaitStatus(job_wait_status status)
+void Job::SetWaitStatus(job_wait_status status)
 {
 	fWaitStatus = status;
 	switch (fWaitStatus) {
@@ -179,22 +167,19 @@ Job::SetWaitStatus(job_wait_status status)
 }
 
 
-status_t
-Job::AddListener(JobListener* listener)
+status_t Job::AddListener(JobListener* listener)
 {
 	return fListeners.AddItem(listener) ? B_OK : B_NO_MEMORY;
 }
 
 
-void
-Job::RemoveListener(JobListener* listener)
+void Job::RemoveListener(JobListener* listener)
 {
 	fListeners.RemoveItem(listener);
 }
 
 
-void
-Job::NotifyListeners()
+void Job::NotifyListeners()
 {
 	int32 count = fListeners.CountItems();
 	for (int32 i = count - 1; i >= 0; i--) {
@@ -243,8 +228,7 @@ Worker::~Worker()
 }
 
 
-status_t
-Worker::Init()
+status_t Worker::Init()
 {
 	// check lock
 	status_t error = fLock.InitCheck();
@@ -273,8 +257,7 @@ Worker::Init()
 }
 
 
-void
-Worker::ShutDown()
+void Worker::ShutDown()
 {
 	AutoLocker<Worker> locker(this);
 
@@ -298,8 +281,7 @@ Worker::ShutDown()
 }
 
 
-status_t
-Worker::ScheduleJob(Job* job, JobListener* listener)
+status_t Worker::ScheduleJob(Job* job, JobListener* listener)
 {
 	if (job == NULL)
 		return B_NO_MEMORY;
@@ -330,8 +312,7 @@ Worker::ScheduleJob(Job* job, JobListener* listener)
 }
 
 
-void
-Worker::AbortJob(const JobKey& key)
+void Worker::AbortJob(const JobKey& key)
 {
 	AutoLocker<Worker> locker(this);
 
@@ -351,8 +332,7 @@ Worker::GetJob(const JobKey& key)
 }
 
 
-status_t
-Worker::ResumeJob(Job* job)
+status_t Worker::ResumeJob(Job* job)
 {
 	AutoLocker<Worker> locker(this);
 
@@ -370,16 +350,14 @@ Worker::ResumeJob(Job* job)
 }
 
 
-bool
-Worker::HasPendingJobs()
+bool Worker::HasPendingJobs()
 {
 	AutoLocker<Worker> locker(this);
 	return !fJobs.IsEmpty();
 }
 
 
-status_t
-Worker::AddListener(const JobKey& key, JobListener* listener)
+status_t Worker::AddListener(const JobKey& key, JobListener* listener)
 {
 	AutoLocker<Worker> locker(this);
 
@@ -391,8 +369,7 @@ Worker::AddListener(const JobKey& key, JobListener* listener)
 }
 
 
-void
-Worker::RemoveListener(const JobKey& key, JobListener* listener)
+void Worker::RemoveListener(const JobKey& key, JobListener* listener)
 {
 	AutoLocker<Worker> locker(this);
 
@@ -422,8 +399,7 @@ Worker::WaitForJob(Job* waitingJob, const JobKey& key)
 }
 
 
-status_t
-Worker::WaitForUserInput(Job* waitingJob)
+status_t Worker::WaitForUserInput(Job* waitingJob)
 {
 	AutoLocker<Worker> locker(this);
 
@@ -438,15 +414,13 @@ Worker::WaitForUserInput(Job* waitingJob)
 }
 
 
-/*static*/ status_t
-Worker::_WorkerLoopEntry(void* data)
+/*static*/ status_t Worker::_WorkerLoopEntry(void* data)
 {
 	return ((Worker*)data)->_WorkerLoop();
 }
 
 
-status_t
-Worker::_WorkerLoop()
+status_t Worker::_WorkerLoop()
 {
 	_ProcessJobs();
 
@@ -459,8 +433,7 @@ Worker::_WorkerLoop()
 }
 
 
-void
-Worker::_ProcessJobs()
+void Worker::_ProcessJobs()
 {
 	while (true) {
 		AutoLocker<Worker> locker(this);
@@ -506,8 +479,7 @@ Worker::_ProcessJobs()
 }
 
 
-void
-Worker::_AbortJob(Job* job, bool removeFromTable)
+void Worker::_AbortJob(Job* job, bool removeFromTable)
 {
 	switch (job->State()) {
 		case JOB_STATE_ABORTED:
@@ -539,8 +511,7 @@ Worker::_AbortJob(Job* job, bool removeFromTable)
 }
 
 
-void
-Worker::_FinishJob(Job* job)
+void Worker::_FinishJob(Job* job)
 {
 	// wake up dependent jobs
 	if (!job->DependentJobs().IsEmpty()) {

@@ -41,8 +41,7 @@ struct debug_symbol_iterator : BPrivate::Debug::SymbolIterator {
 
 
 // init_debug_context
-status_t
-init_debug_context(debug_context *context, team_id team, port_id nubPort)
+status_t init_debug_context(debug_context *context, team_id team, port_id nubPort)
 {
 	if (!context || team < 0 || nubPort < 0)
 		return B_BAD_VALUE;
@@ -59,8 +58,7 @@ init_debug_context(debug_context *context, team_id team, port_id nubPort)
 }
 
 // destroy_debug_context
-void
-destroy_debug_context(debug_context *context)
+void destroy_debug_context(debug_context *context)
 {
 	if (context) {
 		if (context->reply_port >= 0)
@@ -73,8 +71,7 @@ destroy_debug_context(debug_context *context)
 }
 
 // send_debug_message
-status_t
-send_debug_message(debug_context *context, int32 messageCode,
+status_t send_debug_message(debug_context *context, int32 messageCode,
 	const void *message, int32 messageSize, void *reply, int32 replySize)
 {
 	if (!context)
@@ -284,8 +281,7 @@ debug_write_memory(debug_context *context, const void *_address, void *_buffer,
 }
 
 // debug_get_cpu_state
-status_t
-debug_get_cpu_state(debug_context *context, thread_id thread,
+status_t debug_get_cpu_state(debug_context *context, thread_id thread,
 	debug_debugger_message *messageCode, debug_cpu_state *cpuState)
 {
 	if (!context || !cpuState)
@@ -317,8 +313,7 @@ debug_get_cpu_state(debug_context *context, thread_id thread,
 // #pragma mark -
 
 // debug_get_instruction_pointer
-status_t
-debug_get_instruction_pointer(debug_context *context, thread_id thread,
+status_t debug_get_instruction_pointer(debug_context *context, thread_id thread,
 	void **ip, void **stackFrameAddress)
 {
 	if (!context || !ip || !stackFrameAddress)
@@ -329,8 +324,7 @@ debug_get_instruction_pointer(debug_context *context, thread_id thread,
 }
 
 // debug_get_stack_frame
-status_t
-debug_get_stack_frame(debug_context *context, void *stackFrameAddress,
+status_t debug_get_stack_frame(debug_context *context, void *stackFrameAddress,
 	debug_stack_frame_info *stackFrameInfo)
 {
 	if (!context || !stackFrameAddress || !stackFrameInfo)
@@ -344,8 +338,7 @@ debug_get_stack_frame(debug_context *context, void *stackFrameAddress,
 // #pragma mark -
 
 // debug_create_symbol_lookup_context
-status_t
-debug_create_symbol_lookup_context(team_id team, image_id image,
+status_t debug_create_symbol_lookup_context(team_id team, image_id image,
 	debug_symbol_lookup_context **_lookupContext)
 {
 	if (team < 0 || !_lookupContext)
@@ -382,8 +375,7 @@ debug_create_symbol_lookup_context(team_id team, image_id image,
 }
 
 // debug_delete_symbol_lookup_context
-void
-debug_delete_symbol_lookup_context(debug_symbol_lookup_context *lookupContext)
+void debug_delete_symbol_lookup_context(debug_symbol_lookup_context *lookupContext)
 {
 	if (lookupContext) {
 		delete lookupContext->lookup;
@@ -393,8 +385,7 @@ debug_delete_symbol_lookup_context(debug_symbol_lookup_context *lookupContext)
 
 
 // debug_get_symbol
-status_t
-debug_get_symbol(debug_symbol_lookup_context* lookupContext, image_id image,
+status_t debug_get_symbol(debug_symbol_lookup_context* lookupContext, image_id image,
 	const char* name, int32 symbolType, void** _symbolLocation,
 	size_t* _symbolSize, int32* _symbolType)
 {
@@ -408,8 +399,7 @@ debug_get_symbol(debug_symbol_lookup_context* lookupContext, image_id image,
 
 
 // debug_lookup_symbol_address
-status_t
-debug_lookup_symbol_address(debug_symbol_lookup_context *lookupContext,
+status_t debug_lookup_symbol_address(debug_symbol_lookup_context *lookupContext,
 	const void *address, void **baseAddress, char *symbolName,
 	int32 symbolNameSize, char *imageName, int32 imageNameSize,
 	bool *exactMatch)
@@ -455,8 +445,7 @@ debug_lookup_symbol_address(debug_symbol_lookup_context *lookupContext,
 }
 
 
-status_t
-debug_create_image_symbol_iterator(debug_symbol_lookup_context* lookupContext,
+status_t debug_create_image_symbol_iterator(debug_symbol_lookup_context* lookupContext,
 	image_id imageID, debug_symbol_iterator** _iterator)
 {
 	if (!lookupContext || !lookupContext->lookup)
@@ -504,8 +493,7 @@ debug_create_image_symbol_iterator(debug_symbol_lookup_context* lookupContext,
 }
 
 
-status_t
-debug_create_file_symbol_iterator(const char* path,
+status_t debug_create_file_symbol_iterator(const char* path,
 	debug_symbol_iterator** _iterator)
 {
 	if (path == NULL)
@@ -539,16 +527,14 @@ debug_create_file_symbol_iterator(const char* path,
 }
 
 
-void
-debug_delete_symbol_iterator(debug_symbol_iterator* iterator)
+void debug_delete_symbol_iterator(debug_symbol_iterator* iterator)
 {
 	delete iterator;
 }
 
 
 // debug_next_image_symbol
-status_t
-debug_next_image_symbol(debug_symbol_iterator* iterator, char* nameBuffer,
+status_t debug_next_image_symbol(debug_symbol_iterator* iterator, char* nameBuffer,
 	size_t nameBufferLength, int32* _symbolType, void** _symbolLocation,
 	size_t* _symbolSize)
 {
@@ -581,8 +567,7 @@ debug_next_image_symbol(debug_symbol_iterator* iterator, char* nameBuffer,
 }
 
 
-status_t
-debug_get_symbol_iterator_image_info(debug_symbol_iterator* iterator,
+status_t debug_get_symbol_iterator_image_info(debug_symbol_iterator* iterator,
 	image_info* info)
 {
 	if (iterator == NULL || iterator->image == NULL || info == NULL)

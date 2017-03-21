@@ -43,8 +43,7 @@ BMidiSynth::~BMidiSynth()
 }
 
 
-status_t 
-BMidiSynth::EnableInput(bool enable, bool loadInstruments)
+status_t BMidiSynth::EnableInput(bool enable, bool loadInstruments)
 {
 	status_t err = B_OK;
 	fInputEnabled = enable;
@@ -57,15 +56,13 @@ BMidiSynth::EnableInput(bool enable, bool loadInstruments)
 }
 
 
-bool 
-BMidiSynth::IsInputEnabled() const
+bool BMidiSynth::IsInputEnabled() const
 {
 	return fInputEnabled;
 }
 
 
-void 
-BMidiSynth::SetVolume(double volume)
+void BMidiSynth::SetVolume(double volume)
 {
 	__be_synth->fSynth->SetVolume(volume);
 }
@@ -78,8 +75,7 @@ BMidiSynth::Volume() const
 }
 
 
-void 
-BMidiSynth::SetTransposition(int16 offset)
+void BMidiSynth::SetTransposition(int16 offset)
 {
 	fTranspose = offset;
 }
@@ -92,57 +88,49 @@ BMidiSynth::Transposition() const
 }
 
 
-void 
-BMidiSynth::MuteChannel(int16 channel, bool do_mute)
+void BMidiSynth::MuteChannel(int16 channel, bool do_mute)
 {
 	fprintf(stderr, "[midi] MuteChannel is broken; don't use it\n");
 }
 
 
-void 
-BMidiSynth::GetMuteMap(char* pChannels) const
+void BMidiSynth::GetMuteMap(char* pChannels) const
 {
 	fprintf(stderr, "[midi] GetMuteMap is broken; don't use it\n");
 }
 
 
-void 
-BMidiSynth::SoloChannel(int16 channel, bool do_solo)
+void BMidiSynth::SoloChannel(int16 channel, bool do_solo)
 {
 	fprintf(stderr, "[midi] SoloChannel is broken; don't use it\n");
 }
 
 
-void 
-BMidiSynth::GetSoloMap(char* pChannels) const
+void BMidiSynth::GetSoloMap(char* pChannels) const
 {
 	fprintf(stderr, "[midi] GetSoloMap is broken; don't use it\n");
 }
 
 
-status_t 
-BMidiSynth::LoadInstrument(int16 instrument)
+status_t BMidiSynth::LoadInstrument(int16 instrument)
 {
 	return  __be_synth->fSynth->LoadInstrument(instrument);
 }
 
 
-status_t 
-BMidiSynth::UnloadInstrument(int16 instrument)
+status_t BMidiSynth::UnloadInstrument(int16 instrument)
 {
 	return  __be_synth->fSynth->UnloadInstrument(instrument);
 }
 
 
-status_t 
-BMidiSynth::RemapInstrument(int16 from, int16 to)
+status_t BMidiSynth::RemapInstrument(int16 from, int16 to)
 {
 	return  __be_synth->fSynth->RemapInstrument(from, to);
 }
 
 
-void 
-BMidiSynth::FlushInstrumentCache(bool startStopCache)
+void BMidiSynth::FlushInstrumentCache(bool startStopCache)
 {
 	__be_synth->fSynth->FlushInstrumentCache(startStopCache);
 }
@@ -155,8 +143,7 @@ BMidiSynth::Tick() const
 }
 
 
-void 
-BMidiSynth::NoteOff(
+void BMidiSynth::NoteOff(
 	uchar channel, uchar note, uchar velocity, uint32 time)
 {
 	if (fInputEnabled)
@@ -164,8 +151,7 @@ BMidiSynth::NoteOff(
 }
 
 
-void 
-BMidiSynth::NoteOn(
+void BMidiSynth::NoteOn(
 	uchar channel, uchar note, uchar velocity, uint32 time)
 {
 	if (fInputEnabled)
@@ -173,8 +159,7 @@ BMidiSynth::NoteOn(
 }
 
 
-void 
-BMidiSynth::KeyPressure(
+void BMidiSynth::KeyPressure(
 	uchar channel, uchar note, uchar pressure, uint32 time)
 {
 	if (fInputEnabled)
@@ -183,8 +168,7 @@ BMidiSynth::KeyPressure(
 }
 
 
-void 
-BMidiSynth::ControlChange(
+void BMidiSynth::ControlChange(
 	uchar channel, uchar controlNumber, uchar controlValue, uint32 time)
 {
 	if (fInputEnabled)
@@ -193,8 +177,7 @@ BMidiSynth::ControlChange(
 }
 
 
-void 
-BMidiSynth::ProgramChange(
+void BMidiSynth::ProgramChange(
 	uchar channel, uchar programNumber, uint32 time)
 {
 	if (fInputEnabled)
@@ -202,24 +185,21 @@ BMidiSynth::ProgramChange(
 }
 
 
-void 
-BMidiSynth::ChannelPressure(uchar channel, uchar pressure, uint32 time)
+void BMidiSynth::ChannelPressure(uchar channel, uchar pressure, uint32 time)
 {
 	if (fInputEnabled)
 		__be_synth->fSynth->ChannelPressure(channel, pressure, time);
 }
 
 
-void 
-BMidiSynth::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
+void BMidiSynth::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
 {
 	if (fInputEnabled)
 		__be_synth->fSynth->PitchBend(channel, lsb, msb, time);
 }
 
 
-void 
-BMidiSynth::AllNotesOff(bool justChannel, uint32 time)
+void BMidiSynth::AllNotesOff(bool justChannel, uint32 time)
 {
 	if (fInputEnabled)
 		__be_synth->fSynth->AllNotesOff(justChannel, time);
@@ -232,8 +212,7 @@ void BMidiSynth::_ReservedMidiSynth3() { }
 void BMidiSynth::_ReservedMidiSynth4() { }
 
 
-void 
-BMidiSynth::Run()
+void BMidiSynth::Run()
 {
 	// do nothing
 }

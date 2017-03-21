@@ -209,8 +209,7 @@ FilePermissionsView::FilePermissionsView(BRect rect, Model* model)
 }
 
 
-void
-FilePermissionsView::ModelChanged(Model* model)
+void FilePermissionsView::ModelChanged(Model* model)
 {
 	fModel = model;
 
@@ -307,8 +306,7 @@ FilePermissionsView::ModelChanged(Model* model)
 }
 
 
-void
-FilePermissionsView::MessageReceived(BMessage* message)
+void FilePermissionsView::MessageReceived(BMessage* message)
 {
 	switch(message->what) {
 		case kPermissionsChanged:
@@ -381,8 +379,7 @@ FilePermissionsView::MessageReceived(BMessage* message)
 }
 
 
-void
-FilePermissionsView::AttachedToWindow()
+void FilePermissionsView::AttachedToWindow()
 {
 	fReadUserCheckBox->SetTarget(this);
 	fReadGroupCheckBox->SetTarget(this);

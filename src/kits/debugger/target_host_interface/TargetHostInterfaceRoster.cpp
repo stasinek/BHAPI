@@ -41,8 +41,7 @@ TargetHostInterfaceRoster::Default()
 }
 
 
-/*static*/ status_t
-TargetHostInterfaceRoster::CreateDefault(Listener* listener)
+/*static*/ status_t TargetHostInterfaceRoster::CreateDefault(Listener* listener)
 {
 	if (sDefaultInstance != NULL)
 		return B_OK;
@@ -66,8 +65,7 @@ TargetHostInterfaceRoster::CreateDefault(Listener* listener)
 }
 
 
-/*static*/ void
-TargetHostInterfaceRoster::DeleteDefault()
+/*static*/ void TargetHostInterfaceRoster::DeleteDefault()
 {
 	TargetHostInterfaceRoster* roster = sDefaultInstance;
 	sDefaultInstance = NULL;
@@ -75,16 +73,14 @@ TargetHostInterfaceRoster::DeleteDefault()
 }
 
 
-status_t
-TargetHostInterfaceRoster::Init(Listener* listener)
+status_t TargetHostInterfaceRoster::Init(Listener* listener)
 {
 	fListener = listener;
 	return fLock.InitCheck();
 }
 
 
-status_t
-TargetHostInterfaceRoster::RegisterInterfaceInfos()
+status_t TargetHostInterfaceRoster::RegisterInterfaceInfos()
 {
 	TargetHostInterfaceInfo* info = NULL;
 	BReference<TargetHostInterfaceInfo> interfaceReference;
@@ -105,8 +101,7 @@ TargetHostInterfaceRoster::RegisterInterfaceInfos()
 }
 
 
-int32
-TargetHostInterfaceRoster::CountInterfaceInfos() const
+int32 TargetHostInterfaceRoster::CountInterfaceInfos() const
 {
 	return fInterfaceInfos.CountItems();
 }
@@ -119,8 +114,7 @@ TargetHostInterfaceRoster::InterfaceInfoAt(int32 index) const
 }
 
 
-status_t
-TargetHostInterfaceRoster::CreateInterface(TargetHostInterfaceInfo* info,
+status_t TargetHostInterfaceRoster::CreateInterface(TargetHostInterfaceInfo* info,
 	Settings* settings, TargetHostInterface*& _interface)
 {
 	// TODO: this should eventually verify that an active interface with
@@ -145,8 +139,7 @@ TargetHostInterfaceRoster::CreateInterface(TargetHostInterfaceInfo* info,
 }
 
 
-int32
-TargetHostInterfaceRoster::CountActiveInterfaces() const
+int32 TargetHostInterfaceRoster::CountActiveInterfaces() const
 {
 	return fActiveInterfaces.CountItems();
 }
@@ -159,24 +152,21 @@ TargetHostInterfaceRoster::ActiveInterfaceAt(int32 index) const
 }
 
 
-void
-TargetHostInterfaceRoster::TeamDebuggerStarted(TeamDebugger* debugger)
+void TargetHostInterfaceRoster::TeamDebuggerStarted(TeamDebugger* debugger)
 {
 	fRunningTeamDebuggers++;
 	fListener->TeamDebuggerCountChanged(fRunningTeamDebuggers);
 }
 
 
-void
-TargetHostInterfaceRoster::TeamDebuggerQuit(TeamDebugger* debugger)
+void TargetHostInterfaceRoster::TeamDebuggerQuit(TeamDebugger* debugger)
 {
 	fRunningTeamDebuggers--;
 	fListener->TeamDebuggerCountChanged(fRunningTeamDebuggers);
 }
 
 
-void
-TargetHostInterfaceRoster::TargetHostInterfaceQuit(
+void TargetHostInterfaceRoster::TargetHostInterfaceQuit(
 	TargetHostInterface* interface)
 {
 	AutoLocker<TargetHostInterfaceRoster> locker(this);
@@ -192,7 +182,6 @@ TargetHostInterfaceRoster::Listener::~Listener()
 }
 
 
-void
-TargetHostInterfaceRoster::Listener::TeamDebuggerCountChanged(int32 count)
+void TargetHostInterfaceRoster::Listener::TeamDebuggerCountChanged(int32 count)
 {
 }

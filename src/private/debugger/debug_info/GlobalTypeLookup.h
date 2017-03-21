@@ -78,15 +78,13 @@ public:
 };
 
 
-bool
-GlobalTypeCache::Lock()
+bool GlobalTypeCache::Lock()
 {
 	return fLock.Lock();
 }
 
 
-void
-GlobalTypeCache::Unlock()
+void GlobalTypeCache::Unlock()
 {
 	fLock.Unlock();
 }

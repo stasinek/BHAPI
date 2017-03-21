@@ -40,8 +40,7 @@ CoreFileDebuggerInterface::~CoreFileDebuggerInterface()
 }
 
 
-status_t
-CoreFileDebuggerInterface::Init()
+status_t CoreFileDebuggerInterface::Init()
 {
 	// create the Architecture object
 	uint16 machine = fCoreFile->GetElfFile().Machine();
@@ -64,21 +63,18 @@ CoreFileDebuggerInterface::Init()
 }
 
 
-void
-CoreFileDebuggerInterface::Close(bool killTeam)
+void CoreFileDebuggerInterface::Close(bool killTeam)
 {
 }
 
 
-bool
-CoreFileDebuggerInterface::Connected() const
+bool CoreFileDebuggerInterface::Connected() const
 {
 	return true;
 }
 
 
-bool
-CoreFileDebuggerInterface::IsPostMortem() const
+bool CoreFileDebuggerInterface::IsPostMortem() const
 {
 	return true;
 }
@@ -98,79 +94,68 @@ CoreFileDebuggerInterface::GetArchitecture() const
 }
 
 
-status_t
-CoreFileDebuggerInterface::GetNextDebugEvent(DebugEvent*& _event)
+status_t CoreFileDebuggerInterface::GetNextDebugEvent(DebugEvent*& _event)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::SetTeamDebuggingFlags(uint32 flags)
+status_t CoreFileDebuggerInterface::SetTeamDebuggingFlags(uint32 flags)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::ContinueThread(thread_id thread)
+status_t CoreFileDebuggerInterface::ContinueThread(thread_id thread)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::StopThread(thread_id thread)
+status_t CoreFileDebuggerInterface::StopThread(thread_id thread)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::SingleStepThread(thread_id thread)
+status_t CoreFileDebuggerInterface::SingleStepThread(thread_id thread)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::InstallBreakpoint(target_addr_t address)
+status_t CoreFileDebuggerInterface::InstallBreakpoint(target_addr_t address)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::UninstallBreakpoint(target_addr_t address)
+status_t CoreFileDebuggerInterface::UninstallBreakpoint(target_addr_t address)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::InstallWatchpoint(target_addr_t address, uint32 type,
+status_t CoreFileDebuggerInterface::InstallWatchpoint(target_addr_t address, uint32 type,
 	int32 length)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::UninstallWatchpoint(target_addr_t address)
+status_t CoreFileDebuggerInterface::UninstallWatchpoint(target_addr_t address)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::GetSystemInfo(SystemInfo& info)
+status_t CoreFileDebuggerInterface::GetSystemInfo(SystemInfo& info)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::GetTeamInfo(TeamInfo& info)
+status_t CoreFileDebuggerInterface::GetTeamInfo(TeamInfo& info)
 {
 	const CoreFileTeamInfo& coreInfo = fCoreFile->GetTeamInfo();
 	info.SetTo(coreInfo.Id(), coreInfo.Arguments());
@@ -178,8 +163,7 @@ CoreFileDebuggerInterface::GetTeamInfo(TeamInfo& info)
 }
 
 
-status_t
-CoreFileDebuggerInterface::GetThreadInfos(BObjectList<ThreadInfo>& infos)
+status_t CoreFileDebuggerInterface::GetThreadInfos(BObjectList<ThreadInfo>& infos)
 {
 	int32 count = fCoreFile->CountThreadInfos();
 	for (int32 i = 0; i < count; i++) {
@@ -197,8 +181,7 @@ CoreFileDebuggerInterface::GetThreadInfos(BObjectList<ThreadInfo>& infos)
 }
 
 
-status_t
-CoreFileDebuggerInterface::GetImageInfos(BObjectList<ImageInfo>& infos)
+status_t CoreFileDebuggerInterface::GetImageInfos(BObjectList<ImageInfo>& infos)
 {
 	int32 count = fCoreFile->CountImageInfos();
 	for (int32 i = 0; i < count; i++) {
@@ -218,22 +201,19 @@ CoreFileDebuggerInterface::GetImageInfos(BObjectList<ImageInfo>& infos)
 }
 
 
-status_t
-CoreFileDebuggerInterface::GetAreaInfos(BObjectList<AreaInfo>& infos)
+status_t CoreFileDebuggerInterface::GetAreaInfos(BObjectList<AreaInfo>& infos)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::GetSemaphoreInfos(BObjectList<SemaphoreInfo>& infos)
+status_t CoreFileDebuggerInterface::GetSemaphoreInfos(BObjectList<SemaphoreInfo>& infos)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::GetSymbolInfos(team_id team, image_id image,
+status_t CoreFileDebuggerInterface::GetSymbolInfos(team_id team, image_id image,
 	BObjectList<SymbolInfo>& infos)
 {
 	// get the image info
@@ -271,8 +251,7 @@ CoreFileDebuggerInterface::GetSymbolInfos(team_id team, image_id image,
 }
 
 
-status_t
-CoreFileDebuggerInterface::GetSymbolInfo(team_id team, image_id image,
+status_t CoreFileDebuggerInterface::GetSymbolInfo(team_id team, image_id image,
 	const char* name, int32 symbolType, SymbolInfo& info)
 {
 	// TODO:...
@@ -280,8 +259,7 @@ CoreFileDebuggerInterface::GetSymbolInfo(team_id team, image_id image,
 }
 
 
-status_t
-CoreFileDebuggerInterface::GetThreadInfo(thread_id thread, ThreadInfo& info)
+status_t CoreFileDebuggerInterface::GetThreadInfo(thread_id thread, ThreadInfo& info)
 {
 	const CoreFileThreadInfo* coreInfo = fCoreFile->ThreadInfoForId(thread);
 	if (coreInfo == NULL)
@@ -292,8 +270,7 @@ CoreFileDebuggerInterface::GetThreadInfo(thread_id thread, ThreadInfo& info)
 }
 
 
-status_t
-CoreFileDebuggerInterface::GetCpuState(thread_id thread, CpuState*& _state)
+status_t CoreFileDebuggerInterface::GetCpuState(thread_id thread, CpuState*& _state)
 {
 	const CoreFileThreadInfo* coreInfo = fCoreFile->ThreadInfoForId(thread);
 	if (coreInfo == NULL)
@@ -304,29 +281,25 @@ CoreFileDebuggerInterface::GetCpuState(thread_id thread, CpuState*& _state)
 }
 
 
-status_t
-CoreFileDebuggerInterface::SetCpuState(thread_id thread, const CpuState* state)
+status_t CoreFileDebuggerInterface::SetCpuState(thread_id thread, const CpuState* state)
 {
 	return B_UNSUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::GetCpuFeatures(uint32& flags)
+status_t CoreFileDebuggerInterface::GetCpuFeatures(uint32& flags)
 {
 	return fArchitecture->GetCpuFeatures(flags);
 }
 
 
-status_t
-CoreFileDebuggerInterface::WriteCoreFile(const char* path)
+status_t CoreFileDebuggerInterface::WriteCoreFile(const char* path)
 {
 	return B_NOT_SUPPORTED;
 }
 
 
-status_t
-CoreFileDebuggerInterface::GetMemoryProperties(target_addr_t address,
+status_t CoreFileDebuggerInterface::GetMemoryProperties(target_addr_t address,
 	uint32& protection, uint32& locking)
 {
 	const CoreFileAreaInfo* info = fCoreFile->AreaInfoForAddress(address);
@@ -386,8 +359,7 @@ CoreFileDebuggerInterface::WriteMemory(target_addr_t address, void* buffer,
 }
 
 
-void
-CoreFileDebuggerInterface::_GetThreadInfo(const CoreFileThreadInfo& coreInfo,
+void CoreFileDebuggerInterface::_GetThreadInfo(const CoreFileThreadInfo& coreInfo,
 	ThreadInfo& info)
 {
 	info.SetTo(TeamID(), coreInfo.Id(), coreInfo.Name());

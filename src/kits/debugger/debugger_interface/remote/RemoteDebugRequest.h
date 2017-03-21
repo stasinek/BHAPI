@@ -9,7 +9,7 @@
 
 #include <Referenceable.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 enum remote_request_type {

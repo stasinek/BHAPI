@@ -9,8 +9,7 @@
 #define _KERNEL_ARCH_PPC_ATOMIC_H
 
 
-static inline void
-memory_read_barrier_inline(void)
+static inline void memory_read_barrier_inline(void)
 {
 	#ifdef __powerpc64__
 	asm volatile("lwsync" : : : "memory");
@@ -20,8 +19,7 @@ memory_read_barrier_inline(void)
 }
 
 
-static inline void
-memory_write_barrier_inline(void)
+static inline void memory_write_barrier_inline(void)
 {
 	#ifdef __powerpc64__
 	asm volatile("lwsync" : : : "memory");
@@ -31,8 +29,7 @@ memory_write_barrier_inline(void)
 }
 
 
-static inline void
-memory_full_barrier_inline(void)
+static inline void memory_full_barrier_inline(void)
 {
 	asm volatile("sync" : : : "memory");
 }
@@ -43,16 +40,14 @@ memory_full_barrier_inline(void)
 #define memory_full_barrier		memory_full_barrier_inline
 
 
-static inline void
-atomic_set_inline(int32* value, int32 newValue)
+static inline void atomic_set_inline(int32* value, int32 newValue)
 {
 	memory_write_barrier();
 	*(volatile int32*)value = newValue;
 }
 
 
-static inline int32
-atomic_get_and_set_inline(int32* value, int32 newValue)
+static inline int32 atomic_get_and_set_inline(int32* value, int32 newValue)
 {
 	// BIG TODO: PowerPC Atomic get and set
 //	asm volatile("xchgl %0, (%1)"
@@ -63,8 +58,7 @@ atomic_get_and_set_inline(int32* value, int32 newValue)
 }
 
 
-static inline int32
-atomic_test_and_set_inline(int32* value, int32 newValue, int32 testAgainst)
+static inline int32 atomic_test_and_set_inline(int32* value, int32 newValue, int32 testAgainst)
 {
 	// BIG TODO: PowerPC Atomic test and set inline
 //	asm volatile("lock; cmpxchgl %2, (%3)"
@@ -75,8 +69,7 @@ atomic_test_and_set_inline(int32* value, int32 newValue, int32 testAgainst)
 }
 
 
-static inline int32
-atomic_add_inline(int32* value, int32 newValue)
+static inline int32 atomic_add_inline(int32* value, int32 newValue)
 {
 	// BIG TODO: PowerPC Atomic add inline
 //	asm volatile("lock; xaddl %0, (%1)"
@@ -87,8 +80,7 @@ atomic_add_inline(int32* value, int32 newValue)
 }
 
 
-static inline int32
-atomic_get_inline(int32* value)
+static inline int32 atomic_get_inline(int32* value)
 {
 	int32 newValue = *(volatile int32*)value;
 	memory_read_barrier();

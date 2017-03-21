@@ -89,8 +89,7 @@ BControlLook::ComposeSpacing(float spacing)
 }
 
 
-uint32
-BControlLook::Flags(BControl* control) const
+uint32 BControlLook::Flags(BControl* control) const
 {
 	uint32 flags = 0;
 
@@ -125,8 +124,7 @@ BControlLook::Flags(BControl* control) const
 // #pragma mark -
 
 
-void
-BControlLook::DrawButtonFrame(BView* view, BRect& rect, const BRect& updateRect,
+void BControlLook::DrawButtonFrame(BView* view, BRect& rect, const BRect& updateRect,
 	const rgb_color& base, const rgb_color& background, uint32 flags,
 	uint32 borders)
 {
@@ -135,8 +133,7 @@ BControlLook::DrawButtonFrame(BView* view, BRect& rect, const BRect& updateRect,
 }
 
 
-void
-BControlLook::DrawButtonFrame(BView* view, BRect& rect, const BRect& updateRect,
+void BControlLook::DrawButtonFrame(BView* view, BRect& rect, const BRect& updateRect,
 	float radius, const rgb_color& base, const rgb_color& background, uint32 flags,
 	uint32 borders)
 {
@@ -145,8 +142,7 @@ BControlLook::DrawButtonFrame(BView* view, BRect& rect, const BRect& updateRect,
 }
 
 
-void
-BControlLook::DrawButtonFrame(BView* view, BRect& rect,
+void BControlLook::DrawButtonFrame(BView* view, BRect& rect,
 	const BRect& updateRect, float leftTopRadius, float rightTopRadius,
 	float leftBottomRadius, float rightBottomRadius, const rgb_color& base,
 	const rgb_color& background, uint32 flags,
@@ -158,8 +154,7 @@ BControlLook::DrawButtonFrame(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawButtonBackground(BView* view, BRect& rect,
+void BControlLook::DrawButtonBackground(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, uint32 flags,
 	uint32 borders, orientation orientation)
 {
@@ -168,8 +163,7 @@ BControlLook::DrawButtonBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawButtonBackground(BView* view, BRect& rect,
+void BControlLook::DrawButtonBackground(BView* view, BRect& rect,
 	const BRect& updateRect, float radius, const rgb_color& base, uint32 flags,
 	uint32 borders, orientation orientation)
 {
@@ -178,8 +172,7 @@ BControlLook::DrawButtonBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawButtonBackground(BView* view, BRect& rect,
+void BControlLook::DrawButtonBackground(BView* view, BRect& rect,
 	const BRect& updateRect, float leftTopRadius, float rightTopRadius,
 	float leftBottomRadius, float rightBottomRadius, const rgb_color& base,
 	uint32 flags, uint32 borders, orientation orientation)
@@ -190,8 +183,7 @@ BControlLook::DrawButtonBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawMenuBarBackground(BView* view, BRect& rect,
+void BControlLook::DrawMenuBarBackground(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, uint32 flags,
 	uint32 borders)
 {
@@ -236,8 +228,7 @@ BControlLook::DrawMenuBarBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawMenuFieldFrame(BView* view, BRect& rect,
+void BControlLook::DrawMenuFieldFrame(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base,
 	const rgb_color& background, uint32 flags, uint32 borders)
 {
@@ -246,8 +237,7 @@ BControlLook::DrawMenuFieldFrame(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawMenuFieldFrame(BView* view, BRect& rect,
+void BControlLook::DrawMenuFieldFrame(BView* view, BRect& rect,
 	const BRect& updateRect, float radius, const rgb_color& base,
 	const rgb_color& background, uint32 flags, uint32 borders)
 {
@@ -256,8 +246,7 @@ BControlLook::DrawMenuFieldFrame(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawMenuFieldFrame(BView* view, BRect& rect,
+void BControlLook::DrawMenuFieldFrame(BView* view, BRect& rect,
 	const BRect& updateRect, float leftTopRadius,
 	float rightTopRadius, float leftBottomRadius,
 	float rightBottomRadius, const rgb_color& base,
@@ -269,8 +258,7 @@ BControlLook::DrawMenuFieldFrame(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawMenuFieldBackground(BView* view, BRect& rect,
+void BControlLook::DrawMenuFieldBackground(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, bool popupIndicator,
 	uint32 flags)
 {
@@ -279,8 +267,7 @@ BControlLook::DrawMenuFieldBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawMenuFieldBackground(BView* view, BRect& rect,
+void BControlLook::DrawMenuFieldBackground(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, uint32 flags,
 	uint32 borders)
 {
@@ -289,8 +276,7 @@ BControlLook::DrawMenuFieldBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawMenuFieldBackground(BView* view, BRect& rect,
+void BControlLook::DrawMenuFieldBackground(BView* view, BRect& rect,
 	const BRect& updateRect, float radius, const rgb_color& base,
 	bool popupIndicator, uint32 flags)
 {
@@ -299,8 +285,7 @@ BControlLook::DrawMenuFieldBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawMenuFieldBackground(BView* view, BRect& rect,
+void BControlLook::DrawMenuFieldBackground(BView* view, BRect& rect,
 	const BRect& updateRect, float leftTopRadius, float rightTopRadius,
 	float leftBottomRadius, float rightBottomRadius, const rgb_color& base,
 	bool popupIndicator, uint32 flags)
@@ -311,8 +296,7 @@ BControlLook::DrawMenuFieldBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawMenuBackground(BView* view, BRect& rect,
+void BControlLook::DrawMenuBackground(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, uint32 flags,
 	uint32 borders)
 {
@@ -346,8 +330,7 @@ BControlLook::DrawMenuBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawMenuItemBackground(BView* view, BRect& rect,
+void BControlLook::DrawMenuItemBackground(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, uint32 flags,
 	uint32 borders)
 {
@@ -386,8 +369,7 @@ BControlLook::DrawMenuItemBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawStatusBar(BView* view, BRect& rect, const BRect& updateRect,
+void BControlLook::DrawStatusBar(BView* view, BRect& rect, const BRect& updateRect,
 	const rgb_color& base, const rgb_color& barColor, float progressPosition)
 {
 	if (!rect.Intersects(updateRect))
@@ -439,8 +421,7 @@ BControlLook::DrawStatusBar(BView* view, BRect& rect, const BRect& updateRect,
 }
 
 
-void
-BControlLook::DrawCheckBox(BView* view, BRect& rect, const BRect& updateRect,
+void BControlLook::DrawCheckBox(BView* view, BRect& rect, const BRect& updateRect,
 	const rgb_color& base, uint32 flags)
 {
 	if (!rect.Intersects(updateRect))
@@ -511,8 +492,7 @@ BControlLook::DrawCheckBox(BView* view, BRect& rect, const BRect& updateRect,
 }
 
 
-void
-BControlLook::DrawRadioButton(BView* view, BRect& rect, const BRect& updateRect,
+void BControlLook::DrawRadioButton(BView* view, BRect& rect, const BRect& updateRect,
 	const rgb_color& base, uint32 flags)
 {
 	if (!rect.Intersects(updateRect))
@@ -582,8 +562,7 @@ BControlLook::DrawRadioButton(BView* view, BRect& rect, const BRect& updateRect,
 }
 
 
-void
-BControlLook::DrawScrollBarBackground(BView* view, BRect& rect1, BRect& rect2,
+void BControlLook::DrawScrollBarBackground(BView* view, BRect& rect1, BRect& rect2,
 	const BRect& updateRect, const rgb_color& base, uint32 flags,
 	orientation orientation)
 {
@@ -592,8 +571,7 @@ BControlLook::DrawScrollBarBackground(BView* view, BRect& rect1, BRect& rect2,
 }
 
 
-void
-BControlLook::DrawScrollBarBackground(BView* view, BRect& rect,
+void BControlLook::DrawScrollBarBackground(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, uint32 flags,
 	orientation orientation)
 {
@@ -676,8 +654,7 @@ BControlLook::DrawScrollBarBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawScrollViewFrame(BView* view, BRect& rect,
+void BControlLook::DrawScrollViewFrame(BView* view, BRect& rect,
 	const BRect& updateRect, BRect verticalScrollBarFrame,
 	BRect horizontalScrollBarFrame, const rgb_color& base,
 	border_style border, uint32 flags, uint32 _borders)
@@ -760,8 +737,7 @@ BControlLook::DrawScrollViewFrame(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawArrowShape(BView* view, BRect& rect, const BRect& updateRect,
+void BControlLook::DrawArrowShape(BView* view, BRect& rect, const BRect& updateRect,
 	const rgb_color& base, uint32 direction, uint32 flags, float tint)
 {
 	BPoint tri1, tri2, tri3;
@@ -848,8 +824,7 @@ BControlLook::SliderBarColor(const rgb_color& base)
 }
 
 
-void
-BControlLook::DrawSliderBar(BView* view, BRect rect, const BRect& updateRect,
+void BControlLook::DrawSliderBar(BView* view, BRect rect, const BRect& updateRect,
 	const rgb_color& base, rgb_color leftFillColor, rgb_color rightFillColor,
 	float sliderScale, uint32 flags, orientation orientation)
 {
@@ -905,8 +880,7 @@ BControlLook::DrawSliderBar(BView* view, BRect rect, const BRect& updateRect,
 }
 
 
-void
-BControlLook::DrawSliderBar(BView* view, BRect rect, const BRect& updateRect,
+void BControlLook::DrawSliderBar(BView* view, BRect rect, const BRect& updateRect,
 	const rgb_color& base, rgb_color fillColor, uint32 flags,
 	orientation orientation)
 {
@@ -1052,8 +1026,7 @@ BControlLook::DrawSliderBar(BView* view, BRect rect, const BRect& updateRect,
 }
 
 
-void
-BControlLook::DrawSliderThumb(BView* view, BRect& rect, const BRect& updateRect,
+void BControlLook::DrawSliderThumb(BView* view, BRect& rect, const BRect& updateRect,
 	const rgb_color& base, uint32 flags, orientation orientation)
 {
 	if (!rect.IsValid() || !rect.Intersects(updateRect))
@@ -1136,8 +1109,7 @@ BControlLook::DrawSliderThumb(BView* view, BRect& rect, const BRect& updateRect,
 }
 
 
-void
-BControlLook::DrawSliderTriangle(BView* view, BRect& rect,
+void BControlLook::DrawSliderTriangle(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, uint32 flags,
 	orientation orientation)
 {
@@ -1145,8 +1117,7 @@ BControlLook::DrawSliderTriangle(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawSliderTriangle(BView* view, BRect& rect,
+void BControlLook::DrawSliderTriangle(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, const rgb_color& fill,
 	uint32 flags, orientation orientation)
 {
@@ -1263,8 +1234,7 @@ BControlLook::DrawSliderTriangle(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawSliderHashMarks(BView* view, BRect& rect,
+void BControlLook::DrawSliderHashMarks(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, int32 count,
 	hash_mark_location location, uint32 flags, orientation orientation)
 {
@@ -1353,8 +1323,7 @@ BControlLook::DrawSliderHashMarks(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawActiveTab(BView* view, BRect& rect, const BRect& updateRect,
+void BControlLook::DrawActiveTab(BView* view, BRect& rect, const BRect& updateRect,
 	const rgb_color& base, uint32 flags, uint32 borders)
 {
 	if (!rect.IsValid() || !rect.Intersects(updateRect))
@@ -1454,8 +1423,7 @@ BControlLook::DrawActiveTab(BView* view, BRect& rect, const BRect& updateRect,
 }
 
 
-void
-BControlLook::DrawInactiveTab(BView* view, BRect& rect, const BRect& updateRect,
+void BControlLook::DrawInactiveTab(BView* view, BRect& rect, const BRect& updateRect,
 	const rgb_color& base, uint32 flags, uint32 borders)
 {
 	if (!rect.IsValid() || !rect.Intersects(updateRect))
@@ -1517,8 +1485,7 @@ BControlLook::DrawInactiveTab(BView* view, BRect& rect, const BRect& updateRect,
 }
 
 
-void
-BControlLook::DrawSplitter(BView* view, BRect& rect, const BRect& updateRect,
+void BControlLook::DrawSplitter(BView* view, BRect& rect, const BRect& updateRect,
 	const rgb_color& base, orientation orientation, uint32 flags,
 	uint32 borders)
 {
@@ -1632,8 +1599,7 @@ BControlLook::DrawSplitter(BView* view, BRect& rect, const BRect& updateRect,
 // #pragma mark -
 
 
-void
-BControlLook::DrawBorder(BView* view, BRect& rect, const BRect& updateRect,
+void BControlLook::DrawBorder(BView* view, BRect& rect, const BRect& updateRect,
 	const rgb_color& base, border_style border, uint32 flags, uint32 borders)
 {
 	if (border == B_NO_BORDER)
@@ -1651,8 +1617,7 @@ BControlLook::DrawBorder(BView* view, BRect& rect, const BRect& updateRect,
 }
 
 
-void
-BControlLook::DrawRaisedBorder(BView* view, BRect& rect,
+void BControlLook::DrawRaisedBorder(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, uint32 flags,
 	uint32 borders)
 {
@@ -1672,8 +1637,7 @@ BControlLook::DrawRaisedBorder(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawTextControlBorder(BView* view, BRect& rect,
+void BControlLook::DrawTextControlBorder(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, uint32 flags,
 	uint32 borders)
 {
@@ -1742,8 +1706,7 @@ BControlLook::DrawTextControlBorder(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawGroupFrame(BView* view, BRect& rect, const BRect& updateRect,
+void BControlLook::DrawGroupFrame(BView* view, BRect& rect, const BRect& updateRect,
 	const rgb_color& base, uint32 borders)
 {
 	rgb_color frameColor = tint_color(base, 1.30);
@@ -1761,8 +1724,7 @@ BControlLook::DrawGroupFrame(BView* view, BRect& rect, const BRect& updateRect,
 }
 
 
-void
-BControlLook::DrawLabel(BView* view, const char* label, BRect rect,
+void BControlLook::DrawLabel(BView* view, const char* label, BRect rect,
 	const BRect& updateRect, const rgb_color& base, uint32 flags)
 {
 	DrawLabel(view, label, NULL, rect, updateRect, base, flags,
@@ -1770,8 +1732,7 @@ BControlLook::DrawLabel(BView* view, const char* label, BRect rect,
 }
 
 
-void
-BControlLook::DrawLabel(BView* view, const char* label, BRect rect,
+void BControlLook::DrawLabel(BView* view, const char* label, BRect rect,
 	const BRect& updateRect, const rgb_color& base, uint32 flags,
 	const BAlignment& alignment)
 {
@@ -1779,8 +1740,7 @@ BControlLook::DrawLabel(BView* view, const char* label, BRect rect,
 }
 
 
-void
-BControlLook::DrawLabel(BView* view, const char* label, const rgb_color& base,
+void BControlLook::DrawLabel(BView* view, const char* label, const rgb_color& base,
 	uint32 flags, const BPoint& where)
 {
 	// setup the text color
@@ -1889,8 +1849,7 @@ BControlLook::DrawLabel(BView* view, const char* label, const rgb_color& base,
 }
 
 
-void
-BControlLook::DrawLabel(BView* view, const char* label, const BBitmap* icon,
+void BControlLook::DrawLabel(BView* view, const char* label, const BBitmap* icon,
 	BRect rect, const BRect& updateRect, const rgb_color& base, uint32 flags)
 {
 	DrawLabel(view, label, icon, rect, updateRect, base, flags,
@@ -1898,8 +1857,7 @@ BControlLook::DrawLabel(BView* view, const char* label, const BBitmap* icon,
 }
 
 
-void
-BControlLook::DrawLabel(BView* view, const char* label, const BBitmap* icon,
+void BControlLook::DrawLabel(BView* view, const char* label, const BBitmap* icon,
 	BRect rect, const BRect& updateRect, const rgb_color& base, uint32 flags,
 	const BAlignment& alignment)
 {
@@ -1971,8 +1929,7 @@ BControlLook::DrawLabel(BView* view, const char* label, const BBitmap* icon,
 }
 
 
-void
-BControlLook::GetFrameInsets(frame_type frameType, uint32 flags, float& _left,
+void BControlLook::GetFrameInsets(frame_type frameType, uint32 flags, float& _left,
 	float& _top, float& _right, float& _bottom)
 {
 	// All frames have the same inset on each side.
@@ -1999,8 +1956,7 @@ BControlLook::GetFrameInsets(frame_type frameType, uint32 flags, float& _left,
 }
 
 
-void
-BControlLook::GetBackgroundInsets(background_type backgroundType,
+void BControlLook::GetBackgroundInsets(background_type backgroundType,
 	uint32 flags, float& _left, float& _top, float& _right, float& _bottom)
 {
 	// Most backgrounds have the same inset on each side.
@@ -2041,8 +1997,7 @@ BControlLook::GetBackgroundInsets(background_type backgroundType,
 }
 
 
-void
-BControlLook::GetInsets(frame_type frameType, background_type backgroundType,
+void BControlLook::GetInsets(frame_type frameType, background_type backgroundType,
 	uint32 flags, float& _left, float& _top, float& _right, float& _bottom)
 {
 	GetFrameInsets(frameType, flags, _left, _top, _right, _bottom);
@@ -2057,8 +2012,7 @@ BControlLook::GetInsets(frame_type frameType, background_type backgroundType,
 }
 
 
-void
-BControlLook::DrawButtonWithPopUpBackground(BView* view, BRect& rect,
+void BControlLook::DrawButtonWithPopUpBackground(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, uint32 flags,
 	uint32 borders, orientation orientation)
 {
@@ -2067,8 +2021,7 @@ BControlLook::DrawButtonWithPopUpBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawButtonWithPopUpBackground(BView* view, BRect& rect,
+void BControlLook::DrawButtonWithPopUpBackground(BView* view, BRect& rect,
 	const BRect& updateRect, float radius, const rgb_color& base, uint32 flags,
 	uint32 borders, orientation orientation)
 {
@@ -2077,8 +2030,7 @@ BControlLook::DrawButtonWithPopUpBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::DrawButtonWithPopUpBackground(BView* view, BRect& rect,
+void BControlLook::DrawButtonWithPopUpBackground(BView* view, BRect& rect,
 	const BRect& updateRect, float leftTopRadius, float rightTopRadius,
 	float leftBottomRadius, float rightBottomRadius, const rgb_color& base,
 	uint32 flags, uint32 borders, orientation orientation)
@@ -2089,8 +2041,7 @@ BControlLook::DrawButtonWithPopUpBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::SetBackgroundInfo(const BMessage& backgroundInfo)
+void BControlLook::SetBackgroundInfo(const BMessage& backgroundInfo)
 {
 	fBackgroundInfo = backgroundInfo;
 	fCachedWorkspace = -1;
@@ -2100,8 +2051,7 @@ BControlLook::SetBackgroundInfo(const BMessage& backgroundInfo)
 // #pragma mark -
 
 
-void
-BControlLook::_DrawButtonFrame(BView* view, BRect& rect,
+void BControlLook::_DrawButtonFrame(BView* view, BRect& rect,
 	const BRect& updateRect, float leftTopRadius, float rightTopRadius,
 	float leftBottomRadius, float rightBottomRadius, const rgb_color& base,
 	const rgb_color& background, float contrast, float brightness,
@@ -2273,8 +2223,7 @@ BControlLook::_DrawButtonFrame(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::_DrawOuterResessedFrame(BView* view, BRect& rect,
+void BControlLook::_DrawOuterResessedFrame(BView* view, BRect& rect,
 	const rgb_color& base, float contrast, float brightness, uint32 flags,
 	uint32 borders)
 {
@@ -2299,8 +2248,7 @@ BControlLook::_DrawOuterResessedFrame(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::_DrawFrame(BView* view, BRect& rect, const rgb_color& left,
+void BControlLook::_DrawFrame(BView* view, BRect& rect, const rgb_color& left,
 	const rgb_color& top, const rgb_color& right, const rgb_color& bottom,
 	uint32 borders)
 {
@@ -2335,8 +2283,7 @@ BControlLook::_DrawFrame(BView* view, BRect& rect, const rgb_color& left,
 }
 
 
-void
-BControlLook::_DrawFrame(BView* view, BRect& rect, const rgb_color& left,
+void BControlLook::_DrawFrame(BView* view, BRect& rect, const rgb_color& left,
 	const rgb_color& top, const rgb_color& right, const rgb_color& bottom,
 	const rgb_color& rightTop, const rgb_color& leftBottom, uint32 borders)
 {
@@ -2386,8 +2333,7 @@ BControlLook::_DrawFrame(BView* view, BRect& rect, const rgb_color& left,
 }
 
 
-void
-BControlLook::_DrawButtonBackground(BView* view, BRect& rect,
+void BControlLook::_DrawButtonBackground(BView* view, BRect& rect,
 	const BRect& updateRect, float leftTopRadius, float rightTopRadius,
 	float leftBottomRadius, float rightBottomRadius, const rgb_color& base,
 	bool popupIndicator, uint32 flags, uint32 borders, orientation orientation)
@@ -2421,8 +2367,7 @@ BControlLook::_DrawButtonBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::_DrawFlatButtonBackground(BView* view, BRect& rect,
+void BControlLook::_DrawFlatButtonBackground(BView* view, BRect& rect,
 	const BRect& updateRect, const rgb_color& base, bool popupIndicator,
 	uint32 flags, uint32 borders, orientation orientation)
 {
@@ -2446,8 +2391,7 @@ BControlLook::_DrawFlatButtonBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::_DrawNonFlatButtonBackground(BView* view, BRect& rect,
+void BControlLook::_DrawNonFlatButtonBackground(BView* view, BRect& rect,
 	const BRect& updateRect, BRegion& clipping, float leftTopRadius,
 	float rightTopRadius, float leftBottomRadius, float rightBottomRadius,
 	const rgb_color& base, bool popupIndicator, uint32 flags, uint32 borders,
@@ -2602,8 +2546,7 @@ BControlLook::_DrawNonFlatButtonBackground(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::_DrawPopUpMarker(BView* view, const BRect& rect,
+void BControlLook::_DrawPopUpMarker(BView* view, const BRect& rect,
 	const rgb_color& base, uint32 flags)
 {
 	BPoint center(roundf((rect.left + rect.right) / 2.0),
@@ -2629,8 +2572,7 @@ BControlLook::_DrawPopUpMarker(BView* view, const BRect& rect,
 }
 
 
-void
-BControlLook::_DrawMenuFieldBackgroundOutside(BView* view, BRect& rect,
+void BControlLook::_DrawMenuFieldBackgroundOutside(BView* view, BRect& rect,
 	const BRect& updateRect, float leftTopRadius, float rightTopRadius,
 	float leftBottomRadius, float rightBottomRadius, const rgb_color& base,
 	bool popupIndicator, uint32 flags)
@@ -2672,8 +2614,7 @@ BControlLook::_DrawMenuFieldBackgroundOutside(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::_DrawMenuFieldBackgroundInside(BView* view, BRect& rect,
+void BControlLook::_DrawMenuFieldBackgroundInside(BView* view, BRect& rect,
 	const BRect& updateRect, float leftTopRadius, float rightTopRadius,
 	float leftBottomRadius, float rightBottomRadius, const rgb_color& base,
 	uint32 flags, uint32 borders)
@@ -2864,8 +2805,7 @@ BControlLook::_DrawMenuFieldBackgroundInside(BView* view, BRect& rect,
 }
 
 
-void
-BControlLook::_DrawRoundCornerLeftTop(BView* view, BRect& cornerRect,
+void BControlLook::_DrawRoundCornerLeftTop(BView* view, BRect& cornerRect,
 	const BRect& updateRect, const rgb_color& background,
 	const rgb_color& edgeColor, const rgb_color& frameColor,
 	const rgb_color& bevelColor, const BGradientLinear& fillGradient)
@@ -2877,8 +2817,7 @@ BControlLook::_DrawRoundCornerLeftTop(BView* view, BRect& cornerRect,
 }
 
 
-void
-BControlLook::_DrawRoundCornerFrameLeftTop(BView* view, BRect& cornerRect,
+void BControlLook::_DrawRoundCornerFrameLeftTop(BView* view, BRect& cornerRect,
 	const BRect& updateRect, const rgb_color& background,
 	const rgb_color& edgeColor, const rgb_color& frameColor)
 {
@@ -2911,8 +2850,7 @@ BControlLook::_DrawRoundCornerFrameLeftTop(BView* view, BRect& cornerRect,
 }
 
 
-void
-BControlLook::_DrawRoundCornerBackgroundLeftTop(BView* view, BRect& cornerRect,
+void BControlLook::_DrawRoundCornerBackgroundLeftTop(BView* view, BRect& cornerRect,
 	const BRect& updateRect, const rgb_color& bevelColor,
 	const BGradientLinear& fillGradient)
 {
@@ -2934,8 +2872,7 @@ BControlLook::_DrawRoundCornerBackgroundLeftTop(BView* view, BRect& cornerRect,
 }
 
 
-void
-BControlLook::_DrawRoundCornerRightTop(BView* view, BRect& cornerRect,
+void BControlLook::_DrawRoundCornerRightTop(BView* view, BRect& cornerRect,
 	const BRect& updateRect, const rgb_color& background,
 	const rgb_color& edgeTopColor, const rgb_color& edgeRightColor,
 	const rgb_color& frameTopColor, const rgb_color& frameRightColor,
@@ -2950,8 +2887,7 @@ BControlLook::_DrawRoundCornerRightTop(BView* view, BRect& cornerRect,
 }
 
 
-void
-BControlLook::_DrawRoundCornerFrameRightTop(BView* view, BRect& cornerRect,
+void BControlLook::_DrawRoundCornerFrameRightTop(BView* view, BRect& cornerRect,
 	const BRect& updateRect, const rgb_color& background,
 	const rgb_color& edgeTopColor, const rgb_color& edgeRightColor,
 	const rgb_color& frameTopColor, const rgb_color& frameRightColor)
@@ -2997,8 +2933,7 @@ BControlLook::_DrawRoundCornerFrameRightTop(BView* view, BRect& cornerRect,
 }
 
 
-void
-BControlLook::_DrawRoundCornerBackgroundRightTop(BView* view, BRect& cornerRect,
+void BControlLook::_DrawRoundCornerBackgroundRightTop(BView* view, BRect& cornerRect,
 	const BRect& updateRect, const rgb_color& bevelTopColor,
 	const rgb_color& bevelRightColor, const BGradientLinear& fillGradient)
 {
@@ -3024,8 +2959,7 @@ BControlLook::_DrawRoundCornerBackgroundRightTop(BView* view, BRect& cornerRect,
 }
 
 
-void
-BControlLook::_DrawRoundCornerLeftBottom(BView* view, BRect& cornerRect,
+void BControlLook::_DrawRoundCornerLeftBottom(BView* view, BRect& cornerRect,
 	const BRect& updateRect, const rgb_color& background,
 	const rgb_color& edgeLeftColor, const rgb_color& edgeBottomColor,
 	const rgb_color& frameLeftColor, const rgb_color& frameBottomColor,
@@ -3040,8 +2974,7 @@ BControlLook::_DrawRoundCornerLeftBottom(BView* view, BRect& cornerRect,
 }
 
 
-void
-BControlLook::_DrawRoundCornerFrameLeftBottom(BView* view, BRect& cornerRect,
+void BControlLook::_DrawRoundCornerFrameLeftBottom(BView* view, BRect& cornerRect,
 	const BRect& updateRect, const rgb_color& background,
 	const rgb_color& edgeLeftColor, const rgb_color& edgeBottomColor,
 	const rgb_color& frameLeftColor, const rgb_color& frameBottomColor)
@@ -3087,8 +3020,7 @@ BControlLook::_DrawRoundCornerFrameLeftBottom(BView* view, BRect& cornerRect,
 }
 
 
-void
-BControlLook::_DrawRoundCornerBackgroundLeftBottom(BView* view, BRect& cornerRect,
+void BControlLook::_DrawRoundCornerBackgroundLeftBottom(BView* view, BRect& cornerRect,
 	const BRect& updateRect, const rgb_color& bevelLeftColor,
 	const rgb_color& bevelBottomColor, const BGradientLinear& fillGradient)
 {
@@ -3114,8 +3046,7 @@ BControlLook::_DrawRoundCornerBackgroundLeftBottom(BView* view, BRect& cornerRec
 }
 
 
-void
-BControlLook::_DrawRoundCornerRightBottom(BView* view, BRect& cornerRect,
+void BControlLook::_DrawRoundCornerRightBottom(BView* view, BRect& cornerRect,
 	const BRect& updateRect, const rgb_color& background,
 	const rgb_color& edgeColor, const rgb_color& frameColor,
 	const rgb_color& bevelColor, const BGradientLinear& fillGradient)
@@ -3127,8 +3058,7 @@ BControlLook::_DrawRoundCornerRightBottom(BView* view, BRect& cornerRect,
 }
 
 
-void
-BControlLook::_DrawRoundCornerFrameRightBottom(BView* view, BRect& cornerRect,
+void BControlLook::_DrawRoundCornerFrameRightBottom(BView* view, BRect& cornerRect,
 	const BRect& updateRect, const rgb_color& background,
 	const rgb_color& edgeColor, const rgb_color& frameColor)
 {
@@ -3161,8 +3091,7 @@ BControlLook::_DrawRoundCornerFrameRightBottom(BView* view, BRect& cornerRect,
 }
 
 
-void
-BControlLook::_DrawRoundCornerBackgroundRightBottom(BView* view,
+void BControlLook::_DrawRoundCornerBackgroundRightBottom(BView* view,
 	BRect& cornerRect, const BRect& updateRect, const rgb_color& bevelColor,
 	const BGradientLinear& fillGradient)
 {
@@ -3184,8 +3113,7 @@ BControlLook::_DrawRoundCornerBackgroundRightBottom(BView* view,
 }
 
 
-void
-BControlLook::_DrawRoundBarCorner(BView* view, BRect& rect,
+void BControlLook::_DrawRoundBarCorner(BView* view, BRect& rect,
 	const BRect& updateRect,
 	const rgb_color& edgeLightColor, const rgb_color& edgeShadowColor,
 	const rgb_color& frameLightColor, const rgb_color& frameShadowColor,
@@ -3404,8 +3332,7 @@ BControlLook::_BevelShadowColor(const rgb_color& base, uint32 flags)
 }
 
 
-void
-BControlLook::_FillGradient(BView* view, const BRect& rect,
+void BControlLook::_FillGradient(BView* view, const BRect& rect,
 	const rgb_color& base, float topTint, float bottomTint,
 	orientation orientation)
 {
@@ -3415,8 +3342,7 @@ BControlLook::_FillGradient(BView* view, const BRect& rect,
 }
 
 
-void
-BControlLook::_FillGlossyGradient(BView* view, const BRect& rect,
+void BControlLook::_FillGlossyGradient(BView* view, const BRect& rect,
 	const rgb_color& base, float topTint, float middle1Tint,
 	float middle2Tint, float bottomTint, orientation orientation)
 {
@@ -3427,8 +3353,7 @@ BControlLook::_FillGlossyGradient(BView* view, const BRect& rect,
 }
 
 
-void
-BControlLook::_MakeGradient(BGradientLinear& gradient, const BRect& rect,
+void BControlLook::_MakeGradient(BGradientLinear& gradient, const BRect& rect,
 	const rgb_color& base, float topTint, float bottomTint,
 	orientation orientation) const
 {
@@ -3442,8 +3367,7 @@ BControlLook::_MakeGradient(BGradientLinear& gradient, const BRect& rect,
 }
 
 
-void
-BControlLook::_MakeGlossyGradient(BGradientLinear& gradient, const BRect& rect,
+void BControlLook::_MakeGlossyGradient(BGradientLinear& gradient, const BRect& rect,
 	const rgb_color& base, float topTint, float middle1Tint,
 	float middle2Tint, float bottomTint,
 	orientation orientation) const
@@ -3460,8 +3384,7 @@ BControlLook::_MakeGlossyGradient(BGradientLinear& gradient, const BRect& rect,
 }
 
 
-void
-BControlLook::_MakeButtonGradient(BGradientLinear& gradient, BRect& rect,
+void BControlLook::_MakeButtonGradient(BGradientLinear& gradient, BRect& rect,
 	const rgb_color& base, uint32 flags, orientation orientation) const
 {
 	float topTint = 0.49;
@@ -3496,8 +3419,7 @@ BControlLook::_MakeButtonGradient(BGradientLinear& gradient, BRect& rect,
 
 
 
-bool
-BControlLook::_RadioButtonAndCheckBoxMarkColor(const rgb_color& base,
+bool BControlLook::_RadioButtonAndCheckBoxMarkColor(const rgb_color& base,
 	rgb_color& color, uint32 flags) const
 {
 	if ((flags & (B_ACTIVATED | B_PARTIALLY_ACTIVATED | B_CLICKED)) == 0) {

@@ -49,7 +49,7 @@ All rights reserved.
 #include <Font.h>
 #include <IconUtils.h>
 #include <MenuItem.h>
-#include <OS.h>
+#include <kernel/OS.h>
 #include <PopUpMenu.h>
 #include <Region.h>
 #include <StorageDefs.h>
@@ -86,8 +86,7 @@ const float kExactMatchScore = INFINITY;
 bool gLocalizedNamePreferred;
 
 
-bool
-SecondaryMouseButtonDown(int32 modifiers, int32 buttons)
+bool SecondaryMouseButtonDown(int32 modifiers, int32 buttons)
 {
 	return (buttons & B_SECONDARY_MOUSE_BUTTON) != 0
 		|| ((buttons & B_PRIMARY_MOUSE_BUTTON) != 0
@@ -95,8 +94,7 @@ SecondaryMouseButtonDown(int32 modifiers, int32 buttons)
 }
 
 
-uint32
-HashString(const char* string, uint32 seed)
+uint32 HashString(const char* string, uint32 seed)
 {
 	char ch;
 	uint32 hash = seed;
@@ -111,8 +109,7 @@ HashString(const char* string, uint32 seed)
 }
 
 
-uint32
-AttrHashString(const char* string, uint32 type)
+uint32 AttrHashString(const char* string, uint32 type)
 {
 	char c;
 	uint32 hash = 0;
@@ -130,8 +127,7 @@ AttrHashString(const char* string, uint32 type)
 }
 
 
-bool
-ValidateStream(BMallocIO* stream, uint32 key, int32 version)
+bool ValidateStream(BMallocIO* stream, uint32 key, int32 version)
 {
 	uint32 testKey;
 	int32 testVersion;
@@ -145,15 +141,13 @@ ValidateStream(BMallocIO* stream, uint32 key, int32 version)
 }
 
 
-void
-DisallowFilenameKeys(BTextView* textView)
+void DisallowFilenameKeys(BTextView* textView)
 {
 	textView->DisallowChar('/');
 }
 
 
-void
-DisallowMetaKeys(BTextView* textView)
+void DisallowMetaKeys(BTextView* textView)
 {
 	textView->DisallowChar(B_TAB);
 	textView->DisallowChar(B_ESCAPE);
@@ -183,8 +177,7 @@ PeriodicUpdatePoses::~PeriodicUpdatePoses()
 }
 
 
-void
-PeriodicUpdatePoses::AddPose(BPose* pose, BPoseView* poseView,
+void PeriodicUpdatePoses::AddPose(BPose* pose, BPoseView* poseView,
 	PeriodicUpdateCallback callback, void* cookie)
 {
 	periodic_pose* periodic = new periodic_pose;
@@ -196,8 +189,7 @@ PeriodicUpdatePoses::AddPose(BPose* pose, BPoseView* poseView,
 }
 
 
-bool
-PeriodicUpdatePoses::RemovePose(BPose* pose, void** cookie)
+bool PeriodicUpdatePoses::RemovePose(BPose* pose, void** cookie)
 {
 	int32 count = fPoseList.CountItems();
 	for (int32 index = 0; index < count; index++) {
@@ -218,8 +210,7 @@ PeriodicUpdatePoses::RemovePose(BPose* pose, void** cookie)
 }
 
 
-void
-PeriodicUpdatePoses::DoPeriodicUpdate(bool forceRedraw)
+void PeriodicUpdatePoses::DoPeriodicUpdate(bool forceRedraw)
 {
 	if (!fLock->Lock())
 		return;
@@ -243,8 +234,7 @@ PeriodicUpdatePoses gPeriodicUpdatePoses;
 }	// namespace BPrivate
 
 
-void
-PoseInfo::EndianSwap(void* castToThis)
+void PoseInfo::EndianSwap(void* castToThis)
 {
 	PoseInfo* self = (PoseInfo*)castToThis;
 
@@ -265,8 +255,7 @@ PoseInfo::EndianSwap(void* castToThis)
 }
 
 
-void
-PoseInfo::PrintToStream()
+void PoseInfo::PrintToStream()
 {
 	PRINT(("%s, inode:%" B_PRIx64 ", location %f %f\n",
 		fInvisible ? "hidden" : "visible",
@@ -311,8 +300,7 @@ ExtendedPoseInfo::SizeWithHeadroom(size_t oldSize)
 }
 
 
-bool
-ExtendedPoseInfo::HasLocationForFrame(BRect frame) const
+bool ExtendedPoseInfo::HasLocationForFrame(BRect frame) const
 {
 	for (int32 index = 0; index < fNumFrames; index++) {
 		if (fLocations[index].fFrame == frame)
@@ -336,8 +324,7 @@ ExtendedPoseInfo::LocationForFrame(BRect frame) const
 }
 
 
-bool
-ExtendedPoseInfo::SetLocationForFrame(BPoint newLocation, BRect frame)
+bool ExtendedPoseInfo::SetLocationForFrame(BPoint newLocation, BRect frame)
 {
 	for (int32 index = 0; index < fNumFrames; index++) {
 		if (fLocations[index].fFrame == frame) {
@@ -358,8 +345,7 @@ ExtendedPoseInfo::SetLocationForFrame(BPoint newLocation, BRect frame)
 }
 
 
-void
-ExtendedPoseInfo::EndianSwap(void* castToThis)
+void ExtendedPoseInfo::EndianSwap(void* castToThis)
 {
 	ExtendedPoseInfo* self = (ExtendedPoseInfo *)castToThis;
 
@@ -386,8 +372,7 @@ ExtendedPoseInfo::EndianSwap(void* castToThis)
 }
 
 
-void
-ExtendedPoseInfo::PrintToStream()
+void ExtendedPoseInfo::PrintToStream()
 {
 }
 
@@ -416,8 +401,7 @@ OffscreenBitmap::~OffscreenBitmap()
 }
 
 
-void
-OffscreenBitmap::NewBitmap(BRect bounds)
+void OffscreenBitmap::NewBitmap(BRect bounds)
 {
 	delete fBitmap;
 	fBitmap = new(std::nothrow) BBitmap(bounds, B_RGB32, true);
@@ -449,8 +433,7 @@ OffscreenBitmap::BeginUsing(BRect frame)
 }
 
 
-void
-OffscreenBitmap::DoneUsing()
+void OffscreenBitmap::DoneUsing()
 {
 	fBitmap->Unlock();
 }
@@ -481,8 +464,7 @@ namespace BPrivate {
 // Changes the alpha value of the given bitmap to create a nice
 // horizontal fade out in the specified region.
 // "from" is always transparent, "to" opaque.
-void
-FadeRGBA32Horizontal(uint32* bits, int32 width, int32 height, int32 from,
+void FadeRGBA32Horizontal(uint32* bits, int32 width, int32 height, int32 from,
 	int32 to)
 {
 	// check parameters
@@ -515,8 +497,7 @@ FadeRGBA32Horizontal(uint32* bits, int32 width, int32 height, int32 from,
 	vertical fade out in the specified region.
 	"from" is always transparent, "to" opaque.
 */
-void
-FadeRGBA32Vertical(uint32* bits, int32 width, int32 height, int32 from,
+void FadeRGBA32Vertical(uint32* bits, int32 width, int32 height, int32 from,
 	int32 to)
 {
 	// check parameters
@@ -581,8 +562,7 @@ DraggableIcon::~DraggableIcon()
 }
 
 
-void
-DraggableIcon::SetTarget(BMessenger target)
+void DraggableIcon::SetTarget(BMessenger target)
 {
 	fTarget = target;
 }
@@ -597,8 +577,7 @@ DraggableIcon::PreferredRect(BPoint offset, icon_size which)
 }
 
 
-void
-DraggableIcon::AttachedToWindow()
+void DraggableIcon::AttachedToWindow()
 {
 	BView* parent = Parent();
 	if (parent != NULL) {
@@ -608,8 +587,7 @@ DraggableIcon::AttachedToWindow()
 }
 
 
-void
-DraggableIcon::MouseDown(BPoint point)
+void DraggableIcon::MouseDown(BPoint point)
 {
 	if (!DragStarted(&fMessage))
 		return;
@@ -639,15 +617,13 @@ DraggableIcon::MouseDown(BPoint point)
 }
 
 
-bool
-DraggableIcon::DragStarted(BMessage*)
+bool DraggableIcon::DragStarted(BMessage*)
 {
 	return true;
 }
 
 
-void
-DraggableIcon::Draw(BRect)
+void DraggableIcon::Draw(BRect)
 {
 	SetDrawingMode(B_OP_ALPHA);
 	SetBlendingMode(B_PIXEL_ALPHA, B_ALPHA_OVERLAY);
@@ -688,8 +664,7 @@ FlickerFreeStringView::~FlickerFreeStringView()
 }
 
 
-void
-FlickerFreeStringView::Draw(BRect)
+void FlickerFreeStringView::Draw(BRect)
 {
 	BRect bounds(Bounds());
 	if (fBitmap == NULL)
@@ -760,8 +735,7 @@ FlickerFreeStringView::Draw(BRect)
 }
 
 
-void
-FlickerFreeStringView::AttachedToWindow()
+void FlickerFreeStringView::AttachedToWindow()
 {
 	_inherited::AttachedToWindow();
 	if (Parent() != NULL) {
@@ -773,8 +747,7 @@ FlickerFreeStringView::AttachedToWindow()
 }
 
 
-void
-FlickerFreeStringView::SetViewColor(rgb_color color)
+void FlickerFreeStringView::SetViewColor(rgb_color color)
 {
 	if (fViewColor != color) {
 		fViewColor = color;
@@ -784,8 +757,7 @@ FlickerFreeStringView::SetViewColor(rgb_color color)
 }
 
 
-void
-FlickerFreeStringView::SetLowColor(rgb_color color)
+void FlickerFreeStringView::SetLowColor(rgb_color color)
 {
 	if (fLowColor != color) {
 		fLowColor = color;
@@ -811,15 +783,13 @@ TitledSeparatorItem::~TitledSeparatorItem()
 }
 
 
-void
-TitledSeparatorItem::SetEnabled(bool)
+void TitledSeparatorItem::SetEnabled(bool)
 {
 	// leave disabled
 }
 
 
-void
-TitledSeparatorItem::GetContentSize(float* width, float* height)
+void TitledSeparatorItem::GetContentSize(float* width, float* height)
 {
 	_inherited::GetContentSize(width, height);
 }
@@ -832,8 +802,7 @@ ShiftMenuBackgroundColor(float by)
 }
 
 
-void
-TitledSeparatorItem::Draw()
+void TitledSeparatorItem::Draw()
 {
 	BRect frame(Frame());
 
@@ -978,8 +947,7 @@ ShortcutFilter::Filter(BMessage* message, BHandler**)
 
 namespace BPrivate {
 
-void
-EmbedUniqueVolumeInfo(BMessage* message, const BVolume* volume)
+void EmbedUniqueVolumeInfo(BMessage* message, const BVolume* volume)
 {
 	BDirectory rootDirectory;
 	time_t created;
@@ -997,8 +965,7 @@ EmbedUniqueVolumeInfo(BMessage* message, const BVolume* volume)
 }
 
 
-status_t
-MatchArchivedVolume(BVolume* volume, const BMessage* message, int32 index)
+status_t MatchArchivedVolume(BVolume* volume, const BMessage* message, int32 index)
 {
 	time_t created;
 	off_t capacity;
@@ -1089,8 +1056,7 @@ MatchArchivedVolume(BVolume* volume, const BMessage* message, int32 index)
 }
 
 
-void
-StringFromStream(BString* string, BMallocIO* stream, bool endianSwap)
+void StringFromStream(BString* string, BMallocIO* stream, bool endianSwap)
 {
 	int32 length;
 	stream->Read(&length, sizeof(length));
@@ -1110,8 +1076,7 @@ StringFromStream(BString* string, BMallocIO* stream, bool endianSwap)
 }
 
 
-void
-StringToStream(const BString* string, BMallocIO* stream)
+void StringToStream(const BString* string, BMallocIO* stream)
 {
 	int32 length = string->Length();
 	stream->Write(&length, sizeof(int32));
@@ -1119,15 +1084,13 @@ StringToStream(const BString* string, BMallocIO* stream)
 }
 
 
-int32
-ArchiveSize(const BString* string)
+int32 ArchiveSize(const BString* string)
 {
 	return string->Length() + 1 + (ssize_t)sizeof(int32);
 }
 
 
-int32
-CountRefs(const BMessage* message)
+int32 CountRefs(const BMessage* message)
 {
 	uint32 type;
 	int32 count;
@@ -1160,8 +1123,7 @@ EachEntryRefCommon(BMessage* message, entry_ref *(*func)(entry_ref*, void*),
 }
 
 
-bool
-ContainsEntryRef(const BMessage* message, const entry_ref* ref)
+bool ContainsEntryRef(const BMessage* message, const entry_ref* ref)
 {
 	entry_ref match;
 	for (int32 index = 0; (message->FindRef("refs", index, &match) == B_OK);
@@ -1211,8 +1173,7 @@ EachEntryRef(const BMessage* message,
 }
 
 
-void
-TruncateLeaf(BString* string)
+void TruncateLeaf(BString* string)
 {
 	for (int32 index = string->Length(); index >= 0; index--) {
 		if ((*string)[index] == '/') {
@@ -1223,8 +1184,7 @@ TruncateLeaf(BString* string)
 }
 
 
-int64
-StringToScalar(const char* text)
+int64 StringToScalar(const char* text)
 {
 	char* end;
 	int64 val;
@@ -1280,8 +1240,7 @@ SeparatorLine::SeparatorLine(BPoint where, float length, bool vertical,
 }
 
 
-void
-SeparatorLine::Draw(BRect)
+void SeparatorLine::Draw(BRect)
 {
 	BRect bounds(Bounds());
 	rgb_color hiliteColor = tint_color(ViewColor(), 1.5f);
@@ -1301,8 +1260,7 @@ SeparatorLine::Draw(BRect)
 }
 
 
-void
-HexDump(const void* buf, int32 length)
+void HexDump(const void* buf, int32 length)
 {
 	const int32 kBytesPerLine = 16;
 	int32 offset;
@@ -1339,8 +1297,7 @@ HexDump(const void* buf, int32 length)
 }
 
 
-void
-EnableNamedMenuItem(BMenu* menu, const char* itemName, bool on)
+void EnableNamedMenuItem(BMenu* menu, const char* itemName, bool on)
 {
 	BMenuItem* item = menu->FindItem(itemName);
 	if (item != NULL)
@@ -1348,8 +1305,7 @@ EnableNamedMenuItem(BMenu* menu, const char* itemName, bool on)
 }
 
 
-void
-MarkNamedMenuItem(BMenu* menu, const char* itemName, bool on)
+void MarkNamedMenuItem(BMenu* menu, const char* itemName, bool on)
 {
 	BMenuItem* item = menu->FindItem(itemName);
 	if (item != NULL)
@@ -1357,8 +1313,7 @@ MarkNamedMenuItem(BMenu* menu, const char* itemName, bool on)
 }
 
 
-void
-EnableNamedMenuItem(BMenu* menu, uint32 commandName, bool on)
+void EnableNamedMenuItem(BMenu* menu, uint32 commandName, bool on)
 {
 	BMenuItem* item = menu->FindItem(commandName);
 	if (item != NULL)
@@ -1366,8 +1321,7 @@ EnableNamedMenuItem(BMenu* menu, uint32 commandName, bool on)
 }
 
 
-void
-MarkNamedMenuItem(BMenu* menu, uint32 commandName, bool on)
+void MarkNamedMenuItem(BMenu* menu, uint32 commandName, bool on)
 {
 	BMenuItem* item = menu->FindItem(commandName);
 	if (item != NULL)
@@ -1375,8 +1329,7 @@ MarkNamedMenuItem(BMenu* menu, uint32 commandName, bool on)
 }
 
 
-void
-DeleteSubmenu(BMenuItem* submenuItem)
+void DeleteSubmenu(BMenuItem* submenuItem)
 {
 	if (submenuItem == NULL)
 		return;
@@ -1395,8 +1348,7 @@ DeleteSubmenu(BMenuItem* submenuItem)
 }
 
 
-status_t
-GetAppSignatureFromAttr(BFile* file, char* attr)
+status_t GetAppSignatureFromAttr(BFile* file, char* attr)
 {
 	// This call is a performance improvement that
 	// avoids using the BAppFileInfo API when retrieving the
@@ -1418,8 +1370,7 @@ GetAppSignatureFromAttr(BFile* file, char* attr)
 }
 
 
-status_t
-GetAppIconFromAttr(BFile* file, BBitmap* icon, icon_size which)
+status_t GetAppIconFromAttr(BFile* file, BBitmap* icon, icon_size which)
 {
 	// This call is a performance improvement that
 	// avoids using the BAppFileInfo API when retrieving the
@@ -1472,16 +1423,14 @@ GetAppIconFromAttr(BFile* file, BBitmap* icon, icon_size which)
 }
 
 
-status_t
-GetFileIconFromAttr(BNode* node, BBitmap* icon, icon_size which)
+status_t GetFileIconFromAttr(BNode* node, BBitmap* icon, icon_size which)
 {
 	BNodeInfo fileInfo(node);
 	return fileInfo.GetIcon(icon, which);
 }
 
 
-void
-PrintToStream(rgb_color color)
+void PrintToStream(rgb_color color)
 {
 	printf("r:%x, g:%x, b:%x, a:%x\n",
 		color.red, color.green, color.blue, color.alpha);
@@ -1549,8 +1498,7 @@ PositionPassingMenuItem::PositionPassingMenuItem(BMenu* menu, BMessage* message)
 }
 
 
-status_t
-PositionPassingMenuItem::Invoke(BMessage* message)
+status_t PositionPassingMenuItem::Invoke(BMessage* message)
 {
 	if (Menu() == NULL)
 		return B_ERROR;
@@ -1597,8 +1545,7 @@ PositionPassingMenuItem::Invoke(BMessage* message)
 //	#pragma mark - BPrivate functions
 
 
-bool
-BootedInSafeMode()
+bool BootedInSafeMode()
 {
 	const char* safeMode = getenv("SAFEMODE");
 	return (safeMode && strcmp(safeMode, "yes") == 0);
@@ -1657,8 +1604,7 @@ ComputeTypeAheadScore(const char* text, const char* match, bool wordMode)
 //	#pragma mark - throw on error functions.
 
 
-void
-_ThrowOnError(status_t result, const char* DEBUG_ONLY(file),
+void _ThrowOnError(status_t result, const char* DEBUG_ONLY(file),
 	int32 DEBUG_ONLY(line))
 {
 	if (result != B_OK) {
@@ -1668,8 +1614,7 @@ _ThrowOnError(status_t result, const char* DEBUG_ONLY(file),
 }
 
 
-void
-_ThrowIfNotSize(ssize_t size, const char* DEBUG_ONLY(file),
+void _ThrowIfNotSize(ssize_t size, const char* DEBUG_ONLY(file),
 	int32 DEBUG_ONLY(line))
 {
 	if (size < B_OK) {
@@ -1679,8 +1624,7 @@ _ThrowIfNotSize(ssize_t size, const char* DEBUG_ONLY(file),
 }
 
 
-void
-_ThrowOnAssert(bool success, const char* DEBUG_ONLY(file),
+void _ThrowOnAssert(bool success, const char* DEBUG_ONLY(file),
 	int32 DEBUG_ONLY(line))
 {
 	if (!success) {

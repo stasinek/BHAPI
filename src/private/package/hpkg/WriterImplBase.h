@@ -201,22 +201,19 @@ private:
 
 
 template<typename Type>
-inline void
-WriterImplBase::Write(const Type& value)
+inline void WriterImplBase::Write(const Type& value)
 {
 	WriteBuffer(&value, sizeof(Type));
 }
 
 
-inline void
-WriterImplBase::WriteString(const char* string)
+inline void WriterImplBase::WriteString(const char* string)
 {
 	WriteBuffer(string, strlen(string) + 1);
 }
 
 
-inline void
-WriterImplBase::WriteBuffer(const void* data, size_t size)
+inline void WriterImplBase::WriteBuffer(const void* data, size_t size)
 {
 	fHeapWriter->AddDataThrows(data, size);
 }
@@ -229,8 +226,7 @@ WriterImplBase::File() const
 }
 
 
-inline uint32
-WriterImplBase::Flags() const
+inline uint32 WriterImplBase::Flags() const
 {
 	return fParameters.Flags();
 }
@@ -271,8 +267,7 @@ WriterImplBase::PackageStringCache()
 }
 
 
-inline void
-WriterImplBase::SetFinished(bool finished)
+inline void WriterImplBase::SetFinished(bool finished)
 {
 	fFinished = finished;
 }

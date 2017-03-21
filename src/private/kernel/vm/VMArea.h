@@ -219,15 +219,13 @@ private:
 };
 
 
-uint32
-VMArea::MemoryType() const
+uint32 VMArea::MemoryType() const
 {
 	return (uint32)memory_type << MEMORY_TYPE_SHIFT;
 }
 
 
-void
-VMArea::SetMemoryType(uint32 memoryType)
+void VMArea::SetMemoryType(uint32 memoryType)
 {
 	memory_type = memoryType >> MEMORY_TYPE_SHIFT;
 }

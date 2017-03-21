@@ -43,23 +43,20 @@ BCheckBox::~BCheckBox()
 }
 
 
-void
-BCheckBox::SetLabel(const char *label)
+void BCheckBox::SetLabel(const char *label)
 {
 	BControl::SetLabel(label);
 	Invalidate();
 }
 
 
-void
-BCheckBox::WindowActivated(bool state)
+void BCheckBox::WindowActivated(bool state)
 {
 	Invalidate();
 }
 
 
-void
-BCheckBox::Draw(BRect updateRect)
+void BCheckBox::Draw(BRect updateRect)
 {
 	if(Window() == NULL) return;
 
@@ -135,8 +132,7 @@ BCheckBox::Draw(BRect updateRect)
 	}
 }
 
-void
-BCheckBox::MouseDown(BPoint where)
+void BCheckBox::MouseDown(BPoint where)
 {
 	if(!IsEnabled() || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON)) return;
 
@@ -160,8 +156,7 @@ BCheckBox::MouseDown(BPoint where)
 }
 
 
-void
-BCheckBox::KeyDown(const char *bytes,  __be_int32 numBytes)
+void BCheckBox::KeyDown(const char *bytes,  __be_int32 numBytes)
 {
 	if(!IsEnabled() || !IsFocus() || numBytes != 1) return;
 	if(!(bytes[0] == B_ENTER || bytes[0] == B_SPACE)) return;
@@ -172,16 +167,14 @@ BCheckBox::KeyDown(const char *bytes,  __be_int32 numBytes)
 }
 
 
-void
-BCheckBox::SetFont(const BFont *font,  __be_uint8 mask)
+void BCheckBox::SetFont(const BFont *font,  __be_uint8 mask)
 {
 	BControl::SetFont(font, mask);
 	Invalidate();
 }
 
 
-void
-BCheckBox::GetPreferredSize(float *width, float *height)
+void BCheckBox::GetPreferredSize(float *width, float *height)
 {
 	if(width == NULL && height == NULL) return;
 

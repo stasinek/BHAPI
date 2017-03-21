@@ -12,7 +12,7 @@
 
 #include <../include/strings.h>
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 
 #define TRACE_PARSEDATE 0
@@ -471,8 +471,7 @@ struct parsed_element {
 };
 
 
-void
-parsed_element::SetCharType(uint8 fieldType, int8 modify)
+void parsed_element::SetCharType(uint8 fieldType, int8 modify)
 {
 	base_type = type = fieldType;
 	value_type = VALUE_CHAR;
@@ -480,8 +479,7 @@ parsed_element::SetCharType(uint8 fieldType, int8 modify)
 }
 
 
-void
-parsed_element::Adopt(const known_identifier& identifier)
+void parsed_element::Adopt(const known_identifier& identifier)
 {
 	base_type = type = identifier.type;
 	flags = identifier.flags;
@@ -495,8 +493,7 @@ parsed_element::Adopt(const known_identifier& identifier)
 }
 
 
-void
-parsed_element::AdoptUnit(const known_identifier& identifier)
+void parsed_element::AdoptUnit(const known_identifier& identifier)
 {
 	base_type = type = TYPE_UNIT;
 	flags = identifier.flags;
@@ -505,8 +502,7 @@ parsed_element::AdoptUnit(const known_identifier& identifier)
 }
 
 
-inline bool
-parsed_element::IsNextLastThis()
+inline bool parsed_element::IsNextLastThis()
 {
 	return base_type == TYPE_MODIFIER
 		&& (modifier == MODIFY_NEXT || modifier == MODIFY_LAST
@@ -517,8 +513,7 @@ parsed_element::IsNextLastThis()
 //	#pragma mark -
 
 
-bool
-DateMask::HasTime()
+bool DateMask::HasTime()
 {
 	// this will cause
 	return IsSet(TYPE_HOUR);
@@ -529,8 +524,7 @@ DateMask::HasTime()
 	sense that it doesn't need to have a prefilled "struct tm"
 	when its time value is computed.
 */
-bool
-DateMask::IsComplete()
+bool DateMask::IsComplete()
 {
 	// mask must be absolute, at last
 	if ((fMask & Flag(TYPE_UNIT)) != 0)
@@ -544,8 +538,7 @@ DateMask::IsComplete()
 //	#pragma mark -
 
 
-static status_t
-preparseDate(const char* dateString, parsed_element* elements)
+static status_t preparseDate(const char* dateString, parsed_element* elements)
 {
 	int32 index = 0, modify = MODIFY_NONE;
 	char c;
@@ -699,8 +692,7 @@ preparseDate(const char* dateString, parsed_element* elements)
 }
 
 
-static void
-computeRelativeUnit(parsed_element& element, struct tm& tm, int* _flags)
+static void computeRelativeUnit(parsed_element& element, struct tm& tm, int* _flags)
 {
 	// set the relative start depending on unit
 
@@ -1150,8 +1142,7 @@ parsedate(const char* dateString, time_t now)
 }
 
 
-void
-set_dateformats(const char** table)
+void set_dateformats(const char** table)
 {
 	sFormatsTable = table ? table : kFormatsTable;
 }

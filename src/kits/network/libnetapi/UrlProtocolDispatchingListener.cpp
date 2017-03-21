@@ -38,16 +38,14 @@ BUrlProtocolDispatchingListener::~BUrlProtocolDispatchingListener()
 }
 
 
-void
-BUrlProtocolDispatchingListener::ConnectionOpened(BUrlRequest* caller)
+void BUrlProtocolDispatchingListener::ConnectionOpened(BUrlRequest* caller)
 {
 	BMessage message(B_URL_PROTOCOL_NOTIFICATION);
 	_SendMessage(&message, B_URL_PROTOCOL_CONNECTION_OPENED, caller);
 }
 
 
-void
-BUrlProtocolDispatchingListener::HostnameResolved(BUrlRequest* caller,
+void BUrlProtocolDispatchingListener::HostnameResolved(BUrlRequest* caller,
 	const char* ip)
 {
 	BMessage message(B_URL_PROTOCOL_NOTIFICATION);
@@ -57,24 +55,21 @@ BUrlProtocolDispatchingListener::HostnameResolved(BUrlRequest* caller,
 }
 
 
-void
-BUrlProtocolDispatchingListener::ResponseStarted(BUrlRequest* caller)
+void BUrlProtocolDispatchingListener::ResponseStarted(BUrlRequest* caller)
 {
 	BMessage message(B_URL_PROTOCOL_NOTIFICATION);
 	_SendMessage(&message, B_URL_PROTOCOL_RESPONSE_STARTED, caller);
 }
 
 
-void
-BUrlProtocolDispatchingListener::HeadersReceived(BUrlRequest* caller)
+void BUrlProtocolDispatchingListener::HeadersReceived(BUrlRequest* caller)
 {
 	BMessage message(B_URL_PROTOCOL_NOTIFICATION);
 	_SendMessage(&message, B_URL_PROTOCOL_HEADERS_RECEIVED, caller);
 }
 
 
-void
-BUrlProtocolDispatchingListener::DataReceived(BUrlRequest* caller,
+void BUrlProtocolDispatchingListener::DataReceived(BUrlRequest* caller,
 	const char* data, off_t position, ssize_t size)
 {
 	BMessage message(B_URL_PROTOCOL_NOTIFICATION);
@@ -89,8 +84,7 @@ BUrlProtocolDispatchingListener::DataReceived(BUrlRequest* caller,
 }
 
 
-void
-BUrlProtocolDispatchingListener::DownloadProgress(BUrlRequest* caller,
+void BUrlProtocolDispatchingListener::DownloadProgress(BUrlRequest* caller,
 	ssize_t bytesReceived, ssize_t bytesTotal)
 {
 	BMessage message(B_URL_PROTOCOL_NOTIFICATION);
@@ -101,8 +95,7 @@ BUrlProtocolDispatchingListener::DownloadProgress(BUrlRequest* caller,
 }
 
 
-void
-BUrlProtocolDispatchingListener::UploadProgress(BUrlRequest* caller,
+void BUrlProtocolDispatchingListener::UploadProgress(BUrlRequest* caller,
 	ssize_t bytesSent, ssize_t bytesTotal)
 {
 	BMessage message(B_URL_PROTOCOL_NOTIFICATION);
@@ -114,8 +107,7 @@ BUrlProtocolDispatchingListener::UploadProgress(BUrlRequest* caller,
 
 
 
-void
-BUrlProtocolDispatchingListener::RequestCompleted(BUrlRequest* caller,
+void BUrlProtocolDispatchingListener::RequestCompleted(BUrlRequest* caller,
 	bool success)
 {
 	BMessage message(B_URL_PROTOCOL_NOTIFICATION);
@@ -125,8 +117,7 @@ BUrlProtocolDispatchingListener::RequestCompleted(BUrlRequest* caller,
 }
 
 
-bool
-BUrlProtocolDispatchingListener::CertificateVerificationFailed(
+bool BUrlProtocolDispatchingListener::CertificateVerificationFailed(
 	BUrlRequest* caller, BCertificate& certificate, const char* error)
 {
 	BMessage message(B_URL_PROTOCOL_NOTIFICATION);
@@ -144,8 +135,7 @@ BUrlProtocolDispatchingListener::CertificateVerificationFailed(
 }
 
 
-void
-BUrlProtocolDispatchingListener::_SendMessage(BMessage* message, 
+void BUrlProtocolDispatchingListener::_SendMessage(BMessage* message, 
 	int8 notification, BUrlRequest* caller)
 {
 	ASSERT(message != NULL);

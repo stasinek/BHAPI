@@ -90,7 +90,7 @@ BWindowLayoutItem::~BWindowLayoutItem()
 }
 
 
-void
+void 
 BWindowLayoutItem::Invalidate(BRect rect)
 {
 	if(Container() == NULL) return;
@@ -116,14 +116,14 @@ BWindowLayoutContainer::~BWindowLayoutContainer()
 }
 
 
-void
+void 
 BWindowLayoutContainer::MoveTo(BPoint where)
 {
 	fOrigin = where;
 }
 
 
-void
+void 
 BWindowLayoutContainer::ResizeTo(float width, float height)
 {
 	fTopItem->ResizeTo(width, height);
@@ -144,7 +144,7 @@ BWindowLayoutContainer::TopItem() const
 }
 
 
-void
+void 
 BWindowLayoutContainer::Invalidate(BRect rect)
 {
 	if(fWindow == NULL) return;
@@ -153,7 +153,7 @@ BWindowLayoutContainer::Invalidate(BRect rect)
 }
 
 
-void
+void 
 BWindow::InitSelf(BRect frame, const char *title, bhapi::window_look look, bhapi::window_feel feel,  __be_uint32 flags,  __be_uint32 workspace)
 {
 	if(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL)
@@ -293,7 +293,7 @@ BWindow::~BWindow()
 }
 
 
-void
+void 
 BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 {
 	if(target == NULL) target = PreferredHandler();
@@ -677,7 +677,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 }
 
 
-void
+void 
 BWindow::Quit()
 {
 	if(!IsLockedByCurrentThread())
@@ -695,7 +695,7 @@ BWindow::Quit()
 }
 
 
-void
+void 
 BWindow::Show()
 {
 	if(cast_as(fLayout, BWindowLayoutContainer)->TopItem()->IsHidden(false) == false) return;
@@ -718,7 +718,7 @@ BWindow::Show()
 }
 
 
-void
+void 
 BWindow::Hide()
 {
 	if(cast_as(fLayout, BWindowLayoutContainer)->TopItem()->IsHidden(false)) return;
@@ -772,14 +772,14 @@ BWindow::Hide()
 }
 
 
-bool
+bool 
 BWindow::IsHidden() const
 {
 	return cast_as(fLayout, BWindowLayoutContainer)->TopItem()->IsHidden();
 }
 
 
-bool
+bool 
 BWindow::IsMinimized() const
 {
 	if(IsHidden()) return false;
@@ -788,7 +788,7 @@ BWindow::IsMinimized() const
 }
 
 
-void
+void 
 BWindow::AddViewChildrenToHandlersList(BWindow *win, BView *child)
 {
 	if(win == NULL || child == NULL) return;
@@ -811,7 +811,7 @@ BWindow::AddViewChildrenToHandlersList(BWindow *win, BView *child)
 }
 
 
-void
+void 
 BWindow::RemoveViewChildrenFromHandlersList(BWindow *win, BView *child)
 {
 	if(win == NULL || child == NULL || child->Looper() != win) return;
@@ -828,7 +828,7 @@ BWindow::RemoveViewChildrenFromHandlersList(BWindow *win, BView *child)
 }
 
 
-void
+void 
 BWindow::AddChild(BView *child, BView *nextSibling)
 {
 	if(child == NULL || child->Looper() != NULL || child->Parent() != NULL ||
@@ -861,7 +861,7 @@ BWindow::AddChild(BView *child, BView *nextSibling)
 }
 
 
-bool
+bool 
 BWindow::RemoveChild(BView *child)
 {
 	if(child == NULL || child->Looper() != this || child->Parent() != NULL) return false;
@@ -915,7 +915,7 @@ BWindow::ChildAt(__be_int32 index) const
 }
 
 
-void
+void 
 BWindow::ConvertToScreen(BPoint* pt) const
 {
 	if(!pt) return;
@@ -932,7 +932,7 @@ BWindow::ConvertToScreen(BPoint pt) const
 }
 
 
-void
+void 
 BWindow::ConvertFromScreen(BPoint* pt) const
 {
 	if(!pt) return;
@@ -949,7 +949,7 @@ BWindow::ConvertFromScreen(BPoint pt) const
 }
 
 
-void
+void 
 BWindow::ConvertToScreen(BRect *r) const
 {
 	if(!r) return;
@@ -967,7 +967,7 @@ BWindow::ConvertToScreen(BRect r) const
 }
 
 
-void
+void 
 BWindow::ConvertFromScreen(BRect *r) const
 {
 	if(!r) return;
@@ -985,7 +985,7 @@ BWindow::ConvertFromScreen(BRect r) const
 }
 
 
-void
+void 
 BWindow::ConvertToScreen(BRegion *region) const
 {
 	if(!region || region->CountRects() <= 0) return;
@@ -1003,7 +1003,7 @@ BWindow::ConvertToScreen(const BRegion &region) const
 }
 
 
-void
+void 
 BWindow::ConvertFromScreen(BRegion *region) const
 {
 	if(!region || region->CountRects() <= 0) return;
@@ -1021,31 +1021,31 @@ BWindow::ConvertFromScreen(const BRegion &region) const
 }
 
 
-void
+void 
 BWindow::FrameMoved(BPoint new_position)
 {
 }
 
 
-void
+void 
 BWindow::WorkspacesChanged(__be_uint32 old_ws,  __be_uint32 new_ws)
 {
 }
 
 
-void
+void 
 BWindow::WorkspaceActivated(__be_int32 ws, bool state)
 {
 }
 
 
-void
+void 
 BWindow::FrameResized(float new_width, float new_height)
 {
 }
 
 
-void
+void 
 BWindow::Minimize(bool minimize)
 {
 	if(minimize)
@@ -1104,7 +1104,7 @@ BWindow::Frame() const
 }
 
 
-void
+void 
 BWindow::Invalidate(BRect invalRect, bool redraw)
 {
 	if(IsHidden() || invalRect.IsValid() == false) return;
@@ -1127,7 +1127,7 @@ BWindow::Invalidate(BRect invalRect, bool redraw)
 }
 
 
-void
+void 
 BWindow::DisableUpdates()
 {
 	__be_int64 currentThread = bhapi::get_current_thread_id();
@@ -1149,7 +1149,7 @@ BWindow::DisableUpdates()
 }
 
 
-void
+void 
 BWindow::EnableUpdates()
 {
 	__be_int64 currentThread = bhapi::get_current_thread_id();
@@ -1182,14 +1182,14 @@ BWindow::EnableUpdates()
 }
 
 
-bool
+bool 
 BWindow::NeedsUpdate() const
 {
 	return(fExposeRect.IsValid() || fUpdateRect.IsValid());
 }
 
 
-void
+void 
 BWindow::_UpdateIfNeeded(bigtime_t when)
 {
 	if(_HasResizeMessage(false) || NeedsUpdate() == false) return;
@@ -1242,14 +1242,14 @@ BWindow::_UpdateIfNeeded(bigtime_t when)
 }
 
 
-void
+void 
 BWindow::UpdateIfNeeded()
 {
 	_UpdateIfNeeded(b_real_time_clock_usecs());
 }
 
 
-void
+void 
 BWindow::_Update(BRect rect, bool force_update)
 {
 	if(rect.IsValid() == false) return;
@@ -1269,7 +1269,7 @@ BWindow::_Update(BRect rect, bool force_update)
 }
 
 
-void
+void 
 BWindow::SetBackgroundColor(bhapi::rgb_color c)
 {
 	if(fDC->HighColor() != c)
@@ -1283,7 +1283,7 @@ BWindow::SetBackgroundColor(bhapi::rgb_color c)
 }
 
 
-void
+void 
 BWindow::SetBackgroundColor(__be_uint8 r,  __be_uint8 g,  __be_uint8 b,  __be_uint8 a)
 {
 	bhapi::rgb_color c;
@@ -1299,7 +1299,7 @@ BWindow::BackgroundColor() const
 }
 
 
-void
+void 
 BWindow::_Expose(BRect rect, bigtime_t when)
 {
 	rect &= Bounds();
@@ -1319,14 +1319,14 @@ BWindow::_Expose(BRect rect, bigtime_t when)
 }
 
 
-bool
+bool 
 BWindow::InUpdate() const
 {
 	return fInUpdate;
 }
 
 
-bool
+bool 
 BWindow::_HasResizeMessage(bool setBrokeOnExpose)
 {
 	bool retVal = false;
@@ -1350,7 +1350,7 @@ BWindow::_HasResizeMessage(bool setBrokeOnExpose)
 }
 
 
-void
+void 
 BWindow::Activate(bool state)
 {
 	if(!(IsHidden() || fMinimized) || !state)
@@ -1373,14 +1373,14 @@ BWindow::Activate(bool state)
 }
 
 
-bool
+bool 
 BWindow::IsActivate() const
 {
 	return fActivated;
 }
 
 
-void
+void 
 BWindow::WindowActivated(bool state)
 {
 }
@@ -1426,7 +1426,7 @@ BWindow::CurrentFocus() const
 }
 
 
-status_t
+status_t 
 BWindow::SetType(bhapi::window_type type)
 {
 	bhapi::window_look look;
@@ -1489,7 +1489,7 @@ BWindow::Type() const
 }
 
 
-status_t
+status_t 
 BWindow::SetLook(bhapi::window_look look)
 {
 	if(fWindowLook != look)
@@ -1510,7 +1510,7 @@ BWindow::Look() const
 }
 
 
-status_t
+status_t 
 BWindow::SetFeel(bhapi::window_feel feel)
 {
 	if(fWindowFeel != feel)
@@ -1542,7 +1542,7 @@ BWindow::Feel() const
 }
 
 
-status_t
+status_t 
 BWindow::SetFlags(__be_uint32 flags)
 {
 	if(fWindowFlags != flags)
@@ -1580,7 +1580,7 @@ BWindow::Flags() const
 }
 
 
-void
+void 
 BWindow::SetWorkspaces(__be_uint32 workspace)
 {
 	if(workspace == 0)
@@ -1613,14 +1613,14 @@ BWindow::Workspaces() const
 }
 
 
-void
+void 
 BWindow::MoveBy(float dx, float dy)
 {
 	MoveTo(Frame().LeftTop() + BPoint(dx, dy));
 }
 
 
-void
+void 
 BWindow::ResizeBy(float dx, float dy)
 {
 	BRect frame = Frame();
@@ -1628,7 +1628,7 @@ BWindow::ResizeBy(float dx, float dy)
 }
 
 
-void
+void 
 BWindow::MoveTo(BPoint where)
 {
 	if(fWindow == NULL)
@@ -1657,7 +1657,7 @@ BWindow::MoveTo(BPoint where)
 }
 
 
-void
+void 
 BWindow::MoveToCenter()
 {
 	BScreen scr(this);
@@ -1667,7 +1667,7 @@ BWindow::MoveToCenter()
 }
 
 
-void
+void 
 BWindow::ResizeTo(float w, float h)
 {
 	if(fWindow == NULL)
@@ -1721,7 +1721,7 @@ BWindow::ResizeTo(float w, float h)
 }
 
 
-void
+void 
 BWindow::SetSizeLimits(float min_h, float max_h, float min_v, float max_v)
 {
 	if(fWindow == NULL)
@@ -1750,7 +1750,7 @@ BWindow::SetSizeLimits(float min_h, float max_h, float min_v, float max_v)
 }
 
 
-void
+void 
 BWindow::GetSizeLimits(float *min_h, float *max_h, float *min_v, float *max_v) const
 {
 	__be_uint32 minH = B_MAXUINT32, maxH = B_MAXUINT32, minV = B_MAXUINT32, maxV = B_MAXUINT32;
@@ -1763,7 +1763,7 @@ BWindow::GetSizeLimits(float *min_h, float *max_h, float *min_v, float *max_v) c
 }
 
 
-status_t
+status_t 
 BWindow::SendBehind(const BWindow *win)
 {
 	if(fWindow == NULL)
@@ -1782,7 +1782,7 @@ BWindow::SendBehind(const BWindow *win)
 }
 
 
-bool
+bool 
 BWindow::_GrabMouse()
 {
 	if(fWindow == NULL)
@@ -1811,7 +1811,7 @@ BWindow::_GrabMouse()
 }
 
 
-bool
+bool 
 BWindow::_GrabKeyboard()
 {
 	if(fWindow == NULL)
@@ -1840,7 +1840,7 @@ BWindow::_GrabKeyboard()
 }
 
 
-void
+void 
 BWindow::_UngrabMouse()
 {
 	if(fWindow == NULL)
@@ -1856,7 +1856,7 @@ BWindow::_UngrabMouse()
 }
 
 
-void
+void 
 BWindow::_UngrabKeyboard()
 {
 	if(fWindow == NULL)
@@ -1872,49 +1872,49 @@ BWindow::_UngrabKeyboard()
 }
 
 
-bool
+bool 
 BWindow::GrabMouse()
 {
 	return _GrabMouse();
 }
 
 
-bool
+bool 
 BWindow::GrabKeyboard()
 {
 	return _GrabKeyboard();
 }
 
 
-void
+void 
 BWindow::UngrabMouse()
 {
 	_UngrabMouse();
 }
 
 
-void
+void 
 BWindow::UngrabKeyboard()
 {
 	_UngrabKeyboard();
 }
 
 
-bool
+bool 
 BWindow::IsMouseGrabbed() const
 {
 	return(fMouseGrabCount > 0);
 }
 
 
-bool
+bool 
 BWindow::IsKeyboardGrabbed() const
 {
 	return(fKeyboardGrabCount > 0);
 }
 
 
-void
+void 
 BWindow::SetPulseRate(bigtime_t rate)
 {
 	if(fPulseRunner->SetInterval(rate) == B_OK)
@@ -1943,7 +1943,7 @@ BWindow::Title() const
 }
 
 
-void
+void 
 BWindow::SetTitle(const char *title)
 {
 	BString str(title);

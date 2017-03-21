@@ -49,8 +49,7 @@ static const mail_header_field gDefaultFields[] = {
 
 
 //!	Replaces tabs and other white space with spaces, compresses spaces.
-void
-sanitize_white_space(BString& string)
+void sanitize_white_space(BString& string)
 {
 	char* buffer = string.LockBuffer(string.Length() + 1);
 	if (buffer == NULL)
@@ -206,16 +205,14 @@ HaikuMailFormatFilter::HeaderFetched(entry_ref& ref, BFile& file,
 }
 
 
-void
-HaikuMailFormatFilter::BodyFetched(const entry_ref& ref, BFile& file,
+void HaikuMailFormatFilter::BodyFetched(const entry_ref& ref, BFile& file,
 	BMessage& attributes)
 {
 	_SetType(attributes, B_MAIL_TYPE);
 }
 
 
-void
-HaikuMailFormatFilter::MessageSent(const entry_ref& ref, BFile& file)
+void HaikuMailFormatFilter::MessageSent(const entry_ref& ref, BFile& file)
 {
 	mail_flags flags = B_MAIL_SENT;
 	file.WriteAttr(B_MAIL_ATTR_FLAGS, B_INT32_TYPE, 0, &flags, sizeof(int32));
@@ -233,8 +230,7 @@ HaikuMailFormatFilter::MessageSent(const entry_ref& ref, BFile& file)
 }
 
 
-void
-HaikuMailFormatFilter::_RemoveExtraWhitespace(BString& name)
+void HaikuMailFormatFilter::_RemoveExtraWhitespace(BString& name)
 {
 	int spaces = 0;
 	for (int i = 0; i <= name.Length();) {
@@ -257,8 +253,7 @@ HaikuMailFormatFilter::_RemoveExtraWhitespace(BString& name)
 }
 
 
-void
-HaikuMailFormatFilter::_RemoveLeadingDots(BString& name)
+void HaikuMailFormatFilter::_RemoveLeadingDots(BString& name)
 {
 	int dots = 0;
 	while (dots < name.Length() && name.ByteAt(dots) == '.')
@@ -307,8 +302,7 @@ HaikuMailFormatFilter::_ExtractName(const BString& from)
 }
 
 
-status_t
-HaikuMailFormatFilter::_SetType(BMessage& attributes, const char* mimeType)
+status_t HaikuMailFormatFilter::_SetType(BMessage& attributes, const char* mimeType)
 {
 	return attributes.SetData("BEOS:TYPE", B_MIME_STRING_TYPE, mimeType,
 		strlen(mimeType) + 1, false);

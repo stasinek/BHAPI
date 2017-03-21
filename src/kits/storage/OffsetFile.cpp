@@ -37,8 +37,7 @@ OffsetFile::~OffsetFile()
 }
 
 // SetTo
-status_t
-OffsetFile::SetTo(BFile *file, off_t offset)
+status_t OffsetFile::SetTo(BFile *file, off_t offset)
 {
 	Unset();
 	fFile = file;
@@ -47,8 +46,7 @@ OffsetFile::SetTo(BFile *file, off_t offset)
 }
 
 // Unset
-void
-OffsetFile::Unset()
+void OffsetFile::Unset()
 {
 	fFile = NULL;
 	fOffset = 0;
@@ -56,8 +54,7 @@ OffsetFile::Unset()
 }
 
 // InitCheck
-status_t
-OffsetFile::InitCheck() const
+status_t OffsetFile::InitCheck() const
 {
 	return (fFile ? fFile->InitCheck() : B_NO_INIT);
 }
@@ -132,8 +129,7 @@ OffsetFile::Position() const
 }
 
 // SetSize
-status_t
-OffsetFile::SetSize(off_t size)
+status_t OffsetFile::SetSize(off_t size)
 {
 	status_t error = (size >= 0 ? B_OK : B_BAD_VALUE );
 	if (error == B_OK)
@@ -144,8 +140,7 @@ OffsetFile::SetSize(off_t size)
 }
 
 // GetSize
-status_t
-OffsetFile::GetSize(off_t *size) const
+status_t OffsetFile::GetSize(off_t *size) const
 {
 	status_t error = (size ? B_OK : B_BAD_VALUE );
 	if (error == B_OK)

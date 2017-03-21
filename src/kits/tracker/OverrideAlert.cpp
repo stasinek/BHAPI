@@ -84,8 +84,7 @@ OverrideAlert::~OverrideAlert()
 }
 
 
-void
-OverrideAlert::DispatchMessage(BMessage* message, BHandler* handler)
+void OverrideAlert::DispatchMessage(BMessage* message, BHandler* handler)
 {
 	if (message->what == B_KEY_DOWN || message->what == B_KEY_UP
 		|| message->what == B_UNMAPPED_KEY_DOWN
@@ -140,8 +139,7 @@ OverrideAlert::OverPosition(float width, float height)
 }
 
 
-void
-OverrideAlert::UpdateButtons(uint32 modifiers, bool force)
+void OverrideAlert::UpdateButtons(uint32 modifiers, bool force)
 {
 	if (modifiers == fCurModifiers && !force)
 		return;

@@ -47,8 +47,7 @@ BGradientDiamond::Center() const
 
 
 // SetCenter
-void
-BGradientDiamond::SetCenter(const BPoint& center)
+void BGradientDiamond::SetCenter(const BPoint& center)
 {
 	fData.diamond.cx = center.x;
 	fData.diamond.cy = center.y;
@@ -56,8 +55,7 @@ BGradientDiamond::SetCenter(const BPoint& center)
 
 
 // SetCenter
-void
-BGradientDiamond::SetCenter(float cx, float cy)
+void BGradientDiamond::SetCenter(float cx, float cy)
 {
 	fData.diamond.cx = cx;
 	fData.diamond.cy = cy;

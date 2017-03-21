@@ -62,8 +62,7 @@ private:
 };
 
 
-inline int32
-TextGapBuffer::Length() const
+inline int32 TextGapBuffer::Length() const
 {
 	return fItemCount;
 }

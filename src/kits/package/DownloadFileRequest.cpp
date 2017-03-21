@@ -41,8 +41,7 @@ DownloadFileRequest::~DownloadFileRequest()
 }
 
 
-status_t
-DownloadFileRequest::CreateInitialJobs()
+status_t DownloadFileRequest::CreateInitialJobs()
 {
 	status_t error = InitCheck();
 	if (error != B_OK)

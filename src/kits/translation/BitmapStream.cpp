@@ -211,8 +211,7 @@ BBitmapStream::Size() const
 
 // Sets the size of the data.
 // I'm not sure if this method has any real purpose.
-status_t
-BBitmapStream::SetSize(off_t size)
+status_t BBitmapStream::SetSize(off_t size)
 {
 	if (size < 0)
 		return B_BAD_VALUE;
@@ -232,8 +231,7 @@ BBitmapStream::SetSize(off_t size)
 
 
 // Sets _bitmap to point to the internal bitmap object.
-status_t
-BBitmapStream::DetachBitmap(BBitmap** _bitmap)
+status_t BBitmapStream::DetachBitmap(BBitmap** _bitmap)
 {
 	if (_bitmap == NULL)
 		return B_BAD_VALUE;
@@ -249,8 +247,7 @@ BBitmapStream::DetachBitmap(BBitmap** _bitmap)
 
 // Swaps the byte order of source, no matter the byte order, and
 // copies the result to destination.
-void
-BBitmapStream::SwapHeader(const TranslatorBitmap* source,
+void BBitmapStream::SwapHeader(const TranslatorBitmap* source,
 	TranslatorBitmap* destination)
 {
 	if (source == NULL || destination == NULL)

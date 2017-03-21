@@ -23,8 +23,7 @@ __arm_setup_system_time(vint32 *cvFactor)
 
 //XXX: this is a hack
 // remove me when platform code works
-static int64
-__arm_get_time_base(void)
+static int64 __arm_get_time_base(void)
 {
 	static uint64 time_dilation_field = 0;
 	return time_dilation_field++;

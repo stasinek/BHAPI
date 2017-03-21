@@ -42,8 +42,7 @@ BVolumeRoster::~BVolumeRoster()
 }
 
 
-status_t
-BVolumeRoster::GetNextVolume(BVolume *vol)
+status_t BVolumeRoster::GetNextVolume(BVolume *vol)
 {
 	if(vol == NULL) return B_BAD_VALUE;
 
@@ -65,15 +64,13 @@ BVolumeRoster::GetNextVolume(BVolume *vol)
 }
 
 
-void
-BVolumeRoster::Rewind()
+void BVolumeRoster::Rewind()
 {
 	fPos = 0;
 }
 
 
-status_t
-BVolumeRoster::GetBootVolume(BVolume *vol)
+status_t BVolumeRoster::GetBootVolume(BVolume *vol)
 {
 	if(vol == NULL) return B_BAD_VALUE;
 

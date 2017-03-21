@@ -155,8 +155,7 @@ BChannelControl::~BChannelControl()
 }
 
 
-status_t
-BChannelControl::Archive(BMessage* data, bool deep) const
+status_t BChannelControl::Archive(BMessage* data, bool deep) const
 {
 	status_t status = BControl::Archive(data, deep);
 	if (status == B_OK)
@@ -192,43 +191,37 @@ BChannelControl::Archive(BMessage* data, bool deep) const
 }
 
 
-void
-BChannelControl::FrameResized(float newWidth, float newHeight)
+void BChannelControl::FrameResized(float newWidth, float newHeight)
 {
 	BView::FrameResized(newWidth, newHeight);
 }
 
 
-void
-BChannelControl::SetFont(const BFont* font, uint32 mask)
+void BChannelControl::SetFont(const BFont* font, uint32 mask)
 {
 	BView::SetFont(font, mask);
 }
 
 
-void
-BChannelControl::AttachedToWindow()
+void BChannelControl::AttachedToWindow()
 {
 	BControl::AttachedToWindow();
 }
 
 
-void
-BChannelControl::DetachedFromWindow()
+void BChannelControl::DetachedFromWindow()
 {
 	BControl::DetachedFromWindow();
 }
 
 
-void
-BChannelControl::ResizeToPreferred()
+void BChannelControl::ResizeToPreferred()
 {
 	BControl::ResizeToPreferred();
 }
 
 
-void
-BChannelControl::MessageReceived(BMessage* message)
+void BChannelControl::MessageReceived(BMessage* message)
 {
 	BControl::MessageReceived(message);
 }
@@ -250,8 +243,7 @@ BChannelControl::ResolveSpecifier(BMessage* message, int32 index,
 }
 
 
-status_t
-BChannelControl::GetSupportedSuites(BMessage* data)
+status_t BChannelControl::GetSupportedSuites(BMessage* data)
 {
 	if (data == NULL)
 		return B_BAD_VALUE;
@@ -269,23 +261,20 @@ BChannelControl::GetSupportedSuites(BMessage* data)
 }
 
 
-void
-BChannelControl::SetModificationMessage(BMessage* message)
+void BChannelControl::SetModificationMessage(BMessage* message)
 {
 	delete fModificationMsg;
 	fModificationMsg = message;
 }
 
 
-BMessage*
-BChannelControl::ModificationMessage() const
+BMessage*  BChannelControl::ModificationMessage() const
 {
 	return fModificationMsg;
 }
 
 
-status_t
-BChannelControl::Invoke(BMessage* message)
+status_t BChannelControl::Invoke(BMessage* message)
 {
 	bool notify = false;
 	BMessage invokeMessage(InvokeKind(&notify));
@@ -301,8 +290,7 @@ BChannelControl::Invoke(BMessage* message)
 }
 
 
-status_t
-BChannelControl::InvokeChannel(BMessage* message, int32 fromChannel,
+status_t BChannelControl::InvokeChannel(BMessage* message, int32 fromChannel,
 	int32 channelCount, const bool* _mask)
 {
 	bool notify = false;
@@ -327,8 +315,7 @@ BChannelControl::InvokeChannel(BMessage* message, int32 fromChannel,
 }
 
 
-status_t
-BChannelControl::InvokeNotifyChannel(BMessage* message, uint32 kind,
+status_t BChannelControl::InvokeNotifyChannel(BMessage* message, uint32 kind,
 	int32 fromChannel, int32 channelCount, const bool* _mask)
 {
 	BeginInvokeNotify(kind);
@@ -339,8 +326,7 @@ BChannelControl::InvokeNotifyChannel(BMessage* message, uint32 kind,
 }
 
 
-void
-BChannelControl::SetValue(int32 value)
+void BChannelControl::SetValue(int32 value)
 {
 	// Get real
 	if (value > fChannelMax[fCurrentChannel])
@@ -356,8 +342,7 @@ BChannelControl::SetValue(int32 value)
 }
 
 
-status_t
-BChannelControl::SetCurrentChannel(int32 channel)
+status_t BChannelControl::SetCurrentChannel(int32 channel)
 {
 	if (channel < 0 || channel >= fChannelCount)
 		return B_BAD_INDEX;
@@ -371,22 +356,19 @@ BChannelControl::SetCurrentChannel(int32 channel)
 }
 
 
-int32
-BChannelControl::CurrentChannel() const
+int32 BChannelControl::CurrentChannel() const
 {
 	return fCurrentChannel;
 }
 
 
-int32
-BChannelControl::CountChannels() const
+int32 BChannelControl::CountChannels() const
 {
 	return fChannelCount;
 }
 
 
-status_t
-BChannelControl::SetChannelCount(int32 channel_count)
+status_t BChannelControl::SetChannelCount(int32 channel_count)
 {
 	if (channel_count < 0 || channel_count >= MaxChannelCount())
 		return B_BAD_VALUE;
@@ -416,8 +398,7 @@ BChannelControl::SetChannelCount(int32 channel_count)
 }
 
 
-int32
-BChannelControl::ValueFor(int32 channel) const
+int32 BChannelControl::ValueFor(int32 channel) const
 {
 	int32 value = 0;
 	if (GetValue(&value, channel, 1) <= 0)
@@ -427,8 +408,7 @@ BChannelControl::ValueFor(int32 channel) const
 }
 
 
-int32
-BChannelControl::GetValue(int32* outValues, int32 fromChannel,
+int32 BChannelControl::GetValue(int32* outValues, int32 fromChannel,
 	int32 channelCount) const
 {
 	int32 i = 0;
@@ -439,23 +419,20 @@ BChannelControl::GetValue(int32* outValues, int32 fromChannel,
 }
 
 
-status_t
-BChannelControl::SetValueFor(int32 channel, int32 value)
+status_t BChannelControl::SetValueFor(int32 channel, int32 value)
 {
 	return SetValue(channel, 1, &value);
 }
 
 
-status_t
-BChannelControl::SetValue(int32 fromChannel, int32 channelCount,
+status_t BChannelControl::SetValue(int32 fromChannel, int32 channelCount,
 	const int32* values)
 {
 	return StuffValues(fromChannel, channelCount, values);
 }
 
 
-status_t
-BChannelControl::SetAllValue(int32 values)
+status_t BChannelControl::SetAllValue(int32 values)
 {
 	int32* newValues = new int32[fChannelCount];
 	for (int32 i = 0; i < fChannelCount; i++) {
@@ -473,23 +450,20 @@ BChannelControl::SetAllValue(int32 values)
 }
 
 
-status_t
-BChannelControl::SetLimitsFor(int32 channel, int32 minimum, int32 maximum)
+status_t BChannelControl::SetLimitsFor(int32 channel, int32 minimum, int32 maximum)
 {
 	return SetLimitsFor(channel, 1, &minimum, &maximum);
 }
 
 
-status_t
-BChannelControl::GetLimitsFor(int32 channel, int32* minimum,
+status_t BChannelControl::GetLimitsFor(int32 channel, int32* minimum,
 	int32* maximum) const
 {
 	return GetLimitsFor(channel, 1, minimum, maximum);
 }
 
 
-status_t
-BChannelControl::SetLimitsFor(int32 fromChannel, int32 channelCount,
+status_t BChannelControl::SetLimitsFor(int32 fromChannel, int32 channelCount,
 	const int32* minimum, const int32* maximum)
 {
 	if (fromChannel + channelCount > CountChannels())
@@ -511,8 +485,7 @@ BChannelControl::SetLimitsFor(int32 fromChannel, int32 channelCount,
 }
 
 
-status_t
-BChannelControl::GetLimitsFor(int32 fromChannel, int32 channelCount,
+status_t BChannelControl::GetLimitsFor(int32 fromChannel, int32 channelCount,
 	int32* minimum, int32* maximum) const
 {
 	if (minimum == NULL || maximum == NULL)
@@ -532,8 +505,7 @@ BChannelControl::GetLimitsFor(int32 fromChannel, int32 channelCount,
 }
 
 
-status_t
-BChannelControl::SetLimits(int32 minimum, int32 maximum)
+status_t BChannelControl::SetLimits(int32 minimum, int32 maximum)
 {
 	if (minimum > maximum)
 		return B_BAD_VALUE;
@@ -553,8 +525,7 @@ BChannelControl::SetLimits(int32 minimum, int32 maximum)
 }
 
 
-status_t
-BChannelControl::GetLimits(int32* outMinimum, int32* outMaximum) const
+status_t BChannelControl::GetLimits(int32* outMinimum, int32* outMaximum) const
 {
 	if (outMinimum == NULL || outMaximum == NULL)
 		return B_BAD_VALUE;
@@ -572,8 +543,7 @@ BChannelControl::GetLimits(int32* outMinimum, int32* outMaximum) const
 }
 
 
-status_t
-BChannelControl::SetLimitLabels(const char* minLabel, const char* maxLabel)
+status_t BChannelControl::SetLimitLabels(const char* minLabel, const char* maxLabel)
 {
 	if (minLabel != fMinLabel)
 		fMinLabel = minLabel;
@@ -587,22 +557,19 @@ BChannelControl::SetLimitLabels(const char* minLabel, const char* maxLabel)
 }
 
 
-const char*
-BChannelControl::MinLimitLabel() const
+const char*  BChannelControl::MinLimitLabel() const
 {
 	return fMinLabel.String();
 }
 
 
-const char*
-BChannelControl::MaxLimitLabel() const
+const char*  BChannelControl::MaxLimitLabel() const
 {
 	return fMaxLabel.String();
 }
 
 
-status_t
-BChannelControl::SetLimitLabelsFor(int32 channel, const char* minLabel,
+status_t BChannelControl::SetLimitLabelsFor(int32 channel, const char* minLabel,
 	const char* maxLabel)
 {
 	(*(label_map*)fMultiLabels)[channel].max_label = maxLabel;
@@ -611,8 +578,7 @@ BChannelControl::SetLimitLabelsFor(int32 channel, const char* minLabel,
 }
 
 
-status_t
-BChannelControl::SetLimitLabelsFor(int32 fromChannel, int32 channelCount,
+status_t BChannelControl::SetLimitLabelsFor(int32 fromChannel, int32 channelCount,
 	const char* minLabel, const char* maxLabel)
 {
 	for (int32 i = fromChannel; i < fromChannel + channelCount; i++) {
@@ -622,8 +588,7 @@ BChannelControl::SetLimitLabelsFor(int32 fromChannel, int32 channelCount,
 }
 
 
-const char*
-BChannelControl::MinLimitLabelFor(int32 channel) const
+const char*  BChannelControl::MinLimitLabelFor(int32 channel) const
 {
 	if (fMultiLabels != NULL) {
 		label_map::const_iterator iter = ((label_map*)fMultiLabels)->find(channel);
@@ -634,8 +599,7 @@ BChannelControl::MinLimitLabelFor(int32 channel) const
 }
 
 
-const char*
-BChannelControl::MaxLimitLabelFor(int32 channel) const
+const char*  BChannelControl::MaxLimitLabelFor(int32 channel) const
 {
 	if (fMultiLabels != NULL) {
 		label_map::const_iterator iter = ((label_map*)fMultiLabels)->find(channel);
@@ -646,8 +610,7 @@ BChannelControl::MaxLimitLabelFor(int32 channel) const
 }
 
 
-status_t
-BChannelControl::StuffValues(int32 fromChannel, int32 channelCount,
+status_t BChannelControl::StuffValues(int32 fromChannel, int32 channelCount,
 	const int32* values)
 {
 	if (values == NULL)

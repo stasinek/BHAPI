@@ -6,7 +6,7 @@
 #define _KERNEL_SYSCALL_RESTART_H
 
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <thread.h>
 
@@ -16,8 +16,7 @@
 	the value from the syscall restart parameters, if the syscall has been
 	restarted. A negative value means infinite timeout.
 */
-static inline void
-syscall_restart_handle_timeout_pre(bigtime_t& timeout)
+static inline void syscall_restart_handle_timeout_pre(bigtime_t& timeout)
 {
 	// If restarted, get the timeout from the restart parameters. Otherwise
 	// convert relative timeout to an absolute one.
@@ -38,8 +37,7 @@ syscall_restart_handle_timeout_pre(bigtime_t& timeout)
 	the value from the syscall restart parameters, if the syscall has been
 	restarted.
 */
-static inline void
-syscall_restart_handle_timeout_pre(uint32& flags, bigtime_t& timeout)
+static inline void syscall_restart_handle_timeout_pre(uint32& flags, bigtime_t& timeout)
 {
 	// If restarted, get the timeout from the restart parameters. Otherwise
 	// convert relative timeout to an absolute one. Note that we preserve
@@ -63,8 +61,7 @@ syscall_restart_handle_timeout_pre(uint32& flags, bigtime_t& timeout)
 }
 
 
-static inline status_t
-syscall_restart_handle_timeout_post(status_t error, bigtime_t timeout)
+static inline status_t syscall_restart_handle_timeout_post(status_t error, bigtime_t timeout)
 {
 	if (error == B_INTERRUPTED) {
 		// interrupted -- store timeout and set flag for syscall restart
@@ -77,8 +74,7 @@ syscall_restart_handle_timeout_post(status_t error, bigtime_t timeout)
 }
 
 
-static inline status_t
-syscall_restart_handle_post(status_t error)
+static inline status_t syscall_restart_handle_post(status_t error)
 {
 	if (error == B_INTERRUPTED) {
 		// interrupted -- set flag for syscall restart
@@ -90,8 +86,7 @@ syscall_restart_handle_post(status_t error)
 }
 
 
-static inline bool
-syscall_restart_is_restarted()
+static inline bool syscall_restart_is_restarted()
 {
 	Thread* thread = thread_get_current_thread();
 
@@ -106,8 +101,7 @@ syscall_restart_is_restarted()
 
 	TODO: this function is actually needed as part of the public API for ioctl()
 */
-static inline bool
-is_called_via_syscall(void)
+static inline bool is_called_via_syscall(void)
 {
 	Thread* thread = thread_get_current_thread();
 	return (thread->flags & THREAD_FLAGS_SYSCALL) != 0;

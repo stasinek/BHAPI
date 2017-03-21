@@ -10,7 +10,7 @@
 
 
 #include <image.h>
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <util/DoublyLinkedList.h>
 

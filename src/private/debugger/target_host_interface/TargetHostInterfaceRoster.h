@@ -5,7 +5,7 @@
 #ifndef TARGET_HOST_INTERFACE_ROSTER_H
 #define TARGET_HOST_INTERFACE_ROSTER_H
 
-#include <OS.h>
+#include <kernel/OS.h>
 
 #include <Locker.h>
 #include <ObjectList.h>

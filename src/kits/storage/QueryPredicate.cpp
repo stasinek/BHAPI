@@ -47,15 +47,13 @@ LeafNode::~LeafNode()
 }
 
 
-uint32
-LeafNode::Arity() const
+uint32 LeafNode::Arity() const
 {
 	return 0;
 }
 
 
-status_t
-LeafNode::SetChildAt(QueryNode *child, int32 index)
+status_t LeafNode::SetChildAt(QueryNode *child, int32 index)
 {
 	return B_BAD_VALUE;
 }
@@ -84,15 +82,13 @@ UnaryNode::~UnaryNode()
 }
 
 
-uint32
-UnaryNode::Arity() const
+uint32 UnaryNode::Arity() const
 {
 	return 1;
 }
 
 
-status_t
-UnaryNode::SetChildAt(QueryNode *child, int32 index)
+status_t UnaryNode::SetChildAt(QueryNode *child, int32 index)
 {
 	status_t error = B_OK;
 	if (index == 0) {
@@ -132,15 +128,13 @@ BinaryNode::~BinaryNode()
 }
 
 
-uint32
-BinaryNode::Arity() const
+uint32 BinaryNode::Arity() const
 {
 	return 2;
 }
 
 
-status_t
-BinaryNode::SetChildAt(QueryNode *child, int32 index)
+status_t BinaryNode::SetChildAt(QueryNode *child, int32 index)
 {
 	status_t error = B_OK;
 	if (index == 0) {
@@ -177,8 +171,7 @@ AttributeNode::AttributeNode(const char *attribute)
 }
 
 
-status_t
-AttributeNode::GetString(BString &predicate)
+status_t AttributeNode::GetString(BString &predicate)
 {
 	predicate.SetTo(fAttribute);
 	return B_OK;
@@ -226,8 +219,7 @@ StringNode::StringNode(const char *value, bool caseInsensitive)
 }
 
 
-status_t
-StringNode::GetString(BString &predicate)
+status_t StringNode::GetString(BString &predicate)
 {
 	BString escaped(fValue);
 	escaped.CharacterEscape("\"\\'", '\\');
@@ -247,8 +239,7 @@ DateNode::DateNode(const char *value)
 }
 
 
-status_t
-DateNode::GetString(BString &predicate)
+status_t DateNode::GetString(BString &predicate)
 {
 	BString escaped(fValue);
 	escaped.CharacterEscape("%\"\\'", '\\');
@@ -262,8 +253,7 @@ DateNode::GetString(BString &predicate)
 
 
 template<>
-status_t
-ValueNode<float>::GetString(BString &predicate)
+status_t ValueNode<float>::GetString(BString &predicate)
 {
 	char buffer[32];
 	union {
@@ -279,8 +269,7 @@ ValueNode<float>::GetString(BString &predicate)
 
 
 template<>
-status_t
-ValueNode<double>::GetString(BString &predicate)
+status_t ValueNode<double>::GetString(BString &predicate)
 {
 	char buffer[32];
 	union {
@@ -305,8 +294,7 @@ SpecialOpNode::SpecialOpNode(query_op op)
 }
 
 
-status_t
-SpecialOpNode::GetString(BString &predicate)
+status_t SpecialOpNode::GetString(BString &predicate)
 {
 	return B_BAD_VALUE;
 }
@@ -322,8 +310,7 @@ UnaryOpNode::UnaryOpNode(query_op op)
 }
 
 
-status_t
-UnaryOpNode::GetString(BString &predicate)
+status_t UnaryOpNode::GetString(BString &predicate)
 {
 	status_t error = (fChild ? B_OK : B_BAD_VALUE);
 	if (error == B_OK) {
@@ -349,8 +336,7 @@ BinaryOpNode::BinaryOpNode(query_op op)
 }
 
 
-status_t
-BinaryOpNode::GetString(BString &predicate)
+status_t BinaryOpNode::GetString(BString &predicate)
 {
 	status_t error = (fChild1 && fChild2 ? B_OK : B_BAD_VALUE);
 	BString childString1;
@@ -451,8 +437,7 @@ QueryStack::~QueryStack()
 }
 
 
-status_t
-QueryStack::PushNode(QueryNode *node)
+status_t QueryStack::PushNode(QueryNode *node)
 {
 	status_t error = (node ? B_OK : B_BAD_VALUE);
 	if (error == B_OK) {
@@ -470,8 +455,7 @@ QueryStack::PopNode()
 }
 
 
-status_t
-QueryStack::ConvertToTree(QueryNode *&rootNode)
+status_t QueryStack::ConvertToTree(QueryNode *&rootNode)
 {
 	status_t error = _GetSubTree(rootNode);
 	if (error == B_OK && !fNodes.IsEmpty()) {
@@ -483,8 +467,7 @@ QueryStack::ConvertToTree(QueryNode *&rootNode)
 }
 
 
-status_t
-QueryStack::_GetSubTree(QueryNode *&rootNode)
+status_t QueryStack::_GetSubTree(QueryNode *&rootNode)
 {
 	QueryNode *node = PopNode();
 	status_t error = (node ? B_OK : B_BAD_VALUE);

@@ -65,8 +65,7 @@ BIconButton::~BIconButton()
 }
 
 
-void
-BIconButton::MessageReceived(BMessage* message)
+void BIconButton::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		default:
@@ -76,8 +75,7 @@ BIconButton::MessageReceived(BMessage* message)
 }
 
 
-void
-BIconButton::AttachedToWindow()
+void BIconButton::AttachedToWindow()
 {
 	rgb_color background = B_TRANSPARENT_COLOR;
 	if (BView* parent = Parent()) {
@@ -95,8 +93,7 @@ BIconButton::AttachedToWindow()
 }
 
 
-void
-BIconButton::Draw(BRect updateRect)
+void BIconButton::Draw(BRect updateRect)
 {
 	rgb_color background = LowColor();
 
@@ -134,16 +131,14 @@ BIconButton::Draw(BRect updateRect)
 }
 
 
-bool
-BIconButton::ShouldDrawBorder() const
+bool BIconButton::ShouldDrawBorder() const
 {
 	return (IsEnabled() && (IsInside() || IsTracking()))
 		|| _HasFlags(STATE_FORCE_PRESSED);
 }
 
 
-void
-BIconButton::DrawBorder(BRect& frame, const BRect& updateRect,
+void BIconButton::DrawBorder(BRect& frame, const BRect& updateRect,
 	const rgb_color& backgroundColor, uint32 flags)
 {
 	__be_control_look->DrawButtonFrame(this, frame, updateRect, backgroundColor,
@@ -151,8 +146,7 @@ BIconButton::DrawBorder(BRect& frame, const BRect& updateRect,
 }
 
 
-void
-BIconButton::DrawBackground(BRect& frame, const BRect& updateRect,
+void BIconButton::DrawBackground(BRect& frame, const BRect& updateRect,
 	const rgb_color& backgroundColor, uint32 flags)
 {
 	__be_control_look->DrawButtonBackground(this, frame, updateRect,
@@ -160,8 +154,7 @@ BIconButton::DrawBackground(BRect& frame, const BRect& updateRect,
 }
 
 
-void
-BIconButton::MouseDown(BPoint where)
+void BIconButton::MouseDown(BPoint where)
 {
 	if (!IsValid())
 		return;
@@ -179,8 +172,7 @@ BIconButton::MouseDown(BPoint where)
 }
 
 
-void
-BIconButton::MouseUp(BPoint where)
+void BIconButton::MouseUp(BPoint where)
 {
 	if (!IsValid())
 		return;
@@ -196,8 +188,7 @@ BIconButton::MouseUp(BPoint where)
 }
 
 
-void
-BIconButton::MouseMoved(BPoint where, uint32 transit, const BMessage* message)
+void BIconButton::MouseMoved(BPoint where, uint32 transit, const BMessage* message)
 {
 	if (!IsValid())
 		return;
@@ -219,8 +210,7 @@ BIconButton::MouseMoved(BPoint where, uint32 transit, const BMessage* message)
 }
 
 
-void
-BIconButton::GetPreferredSize(float* width, float* height)
+void BIconButton::GetPreferredSize(float* width, float* height)
 {
 	float minWidth = 0.0f;
 	float minHeight = 0.0f;
@@ -268,8 +258,7 @@ BIconButton::MaxSize()
 }
 
 
-status_t
-BIconButton::Invoke(BMessage* message)
+status_t BIconButton::Invoke(BMessage* message)
 {
 	if (message == NULL)
 		message = Message();
@@ -284,22 +273,19 @@ BIconButton::Invoke(BMessage* message)
 }
 
 
-void
-BIconButton::SetPressed(bool pressed)
+void BIconButton::SetPressed(bool pressed)
 {
 	_SetFlags(STATE_FORCE_PRESSED, pressed);
 }
 
 
-bool
-BIconButton::IsPressed() const
+bool BIconButton::IsPressed() const
 {
 	return _HasFlags(STATE_FORCE_PRESSED);
 }
 
 
-status_t
-BIconButton::SetIcon(int32 resourceID)
+status_t BIconButton::SetIcon(int32 resourceID)
 {
 	app_info info;
 	status_t status =  __be_app->GetAppInfo(&info);
@@ -330,8 +316,7 @@ BIconButton::SetIcon(int32 resourceID)
 }
 
 
-status_t
-BIconButton::SetIcon(const char* pathToBitmap)
+status_t BIconButton::SetIcon(const char* pathToBitmap)
 {
 	if (pathToBitmap == NULL)
 		return B_BAD_VALUE;
@@ -381,8 +366,7 @@ BIconButton::SetIcon(const char* pathToBitmap)
 }
 
 
-status_t
-BIconButton::SetIcon(const BBitmap* bitmap, uint32 flags)
+status_t BIconButton::SetIcon(const BBitmap* bitmap, uint32 flags)
 {
 	if (bitmap && bitmap->ColorSpace() == B_CMAP8) {
 		status_t status = bitmap->InitCheck();
@@ -399,8 +383,7 @@ BIconButton::SetIcon(const BBitmap* bitmap, uint32 flags)
 }
 
 
-status_t
-BIconButton::SetIcon(const BMimeType* fileType, bool small)
+status_t BIconButton::SetIcon(const BMimeType* fileType, bool small)
 {
 	status_t status = fileType ? fileType->InitCheck() : B_BAD_VALUE;
 	if (status >= B_OK) {
@@ -432,8 +415,7 @@ BIconButton::SetIcon(const BMimeType* fileType, bool small)
 }
 
 
-status_t
-BIconButton::SetIcon(const unsigned char* bitsFromQuickRes,
+status_t BIconButton::SetIcon(const unsigned char* bitsFromQuickRes,
 	uint32 width, uint32 height, color_space format, bool convertToBW)
 {
 	status_t status = B_BAD_VALUE;
@@ -502,16 +484,14 @@ BIconButton::SetIcon(const unsigned char* bitsFromQuickRes,
 }
 
 
-void
-BIconButton::ClearIcon()
+void BIconButton::ClearIcon()
 {
 	_DeleteBitmaps();
 	_Update();
 }
 
 
-void
-BIconButton::TrimIcon(bool keepAspect)
+void BIconButton::TrimIcon(bool keepAspect)
 {
 	if (fNormalBitmap == NULL)
 		return;
@@ -571,8 +551,7 @@ BIconButton::TrimIcon(bool keepAspect)
 }
 
 
-bool
-BIconButton::IsValid() const
+bool BIconButton::IsValid() const
 {
 	return (fNormalBitmap && fDisabledBitmap && fClickedBitmap
 		&& fDisabledClickedBitmap
@@ -623,16 +602,14 @@ BIconButton::Bitmap() const
 }
 
 
-void
-BIconButton::SetValue(int32 value)
+void BIconButton::SetValue(int32 value)
 {
 	BControl::SetValue(value);
 	_SetFlags(STATE_PRESSED, value != 0);
 }
 
 
-void
-BIconButton::SetEnabled(bool enabled)
+void BIconButton::SetEnabled(bool enabled)
 {
 	BControl::SetEnabled(enabled);
 	if (!enabled) {
@@ -645,15 +622,13 @@ BIconButton::SetEnabled(bool enabled)
 // #pragma mark - protected
 
 
-bool
-BIconButton::IsInside() const
+bool BIconButton::IsInside() const
 {
 	return _HasFlags(STATE_INSIDE);
 }
 
 
-void
-BIconButton::SetInside(bool inside)
+void BIconButton::SetInside(bool inside)
 {
 	_SetFlags(STATE_INSIDE, inside);
 }
@@ -686,8 +661,7 @@ BIconButton::_ConvertToRGB32(const BBitmap* bitmap) const
 }
 
 
-status_t
-BIconButton::_MakeBitmaps(const BBitmap* bitmap)
+status_t BIconButton::_MakeBitmaps(const BBitmap* bitmap)
 {
 	status_t status = bitmap ? bitmap->InitCheck() : B_BAD_VALUE;
 	if (status == B_OK) {
@@ -813,8 +787,7 @@ BIconButton::_MakeBitmaps(const BBitmap* bitmap)
 }
 
 
-void
-BIconButton::_DeleteBitmaps()
+void BIconButton::_DeleteBitmaps()
 {
 	delete fNormalBitmap;
 	fNormalBitmap = NULL;
@@ -827,8 +800,7 @@ BIconButton::_DeleteBitmaps()
 }
 
 
-void
-BIconButton::_Update()
+void BIconButton::_Update()
 {
 	if (LockLooper()) {
 		Invalidate();
@@ -837,8 +809,7 @@ BIconButton::_Update()
 }
 
 
-void
-BIconButton::_SetFlags(uint32 flags, bool set)
+void BIconButton::_SetFlags(uint32 flags, bool set)
 {
 	if (_HasFlags(flags) != set) {
 		if (set)
@@ -853,16 +824,14 @@ BIconButton::_SetFlags(uint32 flags, bool set)
 }
 
 
-bool
-BIconButton::_HasFlags(uint32 flags) const
+bool BIconButton::_HasFlags(uint32 flags) const
 {
 	return (fButtonState & flags) != 0;
 }
 
 
 //!	This one calls _Update() if needed; BControl::SetTracking() isn't virtual.
-void
-BIconButton::_SetTracking(bool tracking)
+void BIconButton::_SetTracking(bool tracking)
 {
 	if (IsTracking() == tracking)
 		return;

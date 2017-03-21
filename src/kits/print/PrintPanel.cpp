@@ -95,8 +95,7 @@ BPrintPanel::Instantiate(BMessage* data)
 }
 
 
-status_t
-BPrintPanel::Archive(BMessage* data, bool deep) const
+status_t BPrintPanel::Archive(BMessage* data, bool deep) const
 {
 	// TODO: implement
 	return B_ERROR;
@@ -110,8 +109,7 @@ BPrintPanel::Panel() const
 }
 
 
-void
-BPrintPanel::AddPanel(BView* panel)
+void BPrintPanel::AddPanel(BView* panel)
 {
 	BView* child = Panel();
 	if (child) {
@@ -126,8 +124,7 @@ BPrintPanel::AddPanel(BView* panel)
 }
 
 
-bool
-BPrintPanel::RemovePanel(BView* child)
+bool BPrintPanel::RemovePanel(BView* child)
 {
 	BView* panel = Panel();
 	if (child == panel)
@@ -137,8 +134,7 @@ BPrintPanel::RemovePanel(BView* child)
 }
 
 
-void
-BPrintPanel::MessageReceived(BMessage* message)
+void BPrintPanel::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case '_ok_': {
@@ -156,8 +152,7 @@ BPrintPanel::MessageReceived(BMessage* message)
 }
 
 
-void
-BPrintPanel::FrameResized(float newWidth, float newHeight)
+void BPrintPanel::FrameResized(float newWidth, float newHeight)
 {
 	BWindow::FrameResized(newWidth, newHeight);
 }
@@ -171,43 +166,37 @@ BPrintPanel::ResolveSpecifier(BMessage* message, int32 index, BMessage* specifie
 }
 
 
-status_t
-BPrintPanel::GetSupportedSuites(BMessage* data)
+status_t BPrintPanel::GetSupportedSuites(BMessage* data)
 {
 	return BWindow::GetSupportedSuites(data);
 }
 
 
-status_t
-BPrintPanel::Perform(perform_code d, void* arg)
+status_t BPrintPanel::Perform(perform_code d, void* arg)
 {
 	return BWindow::Perform(d, arg);
 }
 
 
-void
-BPrintPanel::Quit()
+void BPrintPanel::Quit()
 {
 	BWindow::Quit();
 }
 
 
-bool
-BPrintPanel::QuitRequested()
+bool BPrintPanel::QuitRequested()
 {
 	return BWindow::QuitRequested();
 }
 
 
-void
-BPrintPanel::DispatchMessage(BMessage* message, BHandler* handler)
+void BPrintPanel::DispatchMessage(BMessage* message, BHandler* handler)
 {
 	BWindow::DispatchMessage(message, handler);
 }
 
 
-status_t
-BPrintPanel::ShowPanel()
+status_t BPrintPanel::ShowPanel()
 {
 	fPrintPanelSem = create_sem(0, "PrintPanel");
 	if (fPrintPanelSem < 0) {
@@ -245,15 +234,13 @@ BPrintPanel::ShowPanel()
 }
 
 
-void
-BPrintPanel::AddChild(BView* child, BView* before)
+void BPrintPanel::AddChild(BView* child, BView* before)
 {
 	BWindow::AddChild(child, before);
 }
 
 
-bool
-BPrintPanel::RemoveChild(BView* child)
+bool BPrintPanel::RemoveChild(BView* child)
 {
 	return BWindow::RemoveChild(child);
 }

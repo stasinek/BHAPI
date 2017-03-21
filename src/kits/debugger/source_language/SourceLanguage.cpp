@@ -20,8 +20,7 @@ SourceLanguage::GetSyntaxHighlighter() const
 }
 
 
-status_t
-SourceLanguage::EvaluateExpression(const BString& expression,
+status_t SourceLanguage::EvaluateExpression(const BString& expression,
 	ValueNodeManager* manager, TeamTypeInformation* info,
 	ExpressionResult*& _resultValue, ValueNode*& _neededNode)
 {

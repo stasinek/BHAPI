@@ -33,43 +33,37 @@ BPackageWriterParameters::~BPackageWriterParameters()
 }
 
 
-uint32
-BPackageWriterParameters::Flags() const
+uint32 BPackageWriterParameters::Flags() const
 {
 	return fFlags;
 }
 
 
-void
-BPackageWriterParameters::SetFlags(uint32 flags)
+void BPackageWriterParameters::SetFlags(uint32 flags)
 {
 	fFlags = flags;
 }
 
 
-uint32
-BPackageWriterParameters::Compression() const
+uint32 BPackageWriterParameters::Compression() const
 {
 	return fCompression;
 }
 
 
-void
-BPackageWriterParameters::SetCompression(uint32 compression)
+void BPackageWriterParameters::SetCompression(uint32 compression)
 {
 	fCompression = compression;
 }
 
 
-int32
-BPackageWriterParameters::CompressionLevel() const
+int32 BPackageWriterParameters::CompressionLevel() const
 {
 	return fCompressionLevel;
 }
 
 
-void
-BPackageWriterParameters::SetCompressionLevel(int32 compressionLevel)
+void BPackageWriterParameters::SetCompressionLevel(int32 compressionLevel)
 {
 	fCompressionLevel = compressionLevel;
 }
@@ -91,8 +85,7 @@ BPackageWriter::~BPackageWriter()
 }
 
 
-status_t
-BPackageWriter::Init(const char* fileName,
+status_t BPackageWriter::Init(const char* fileName,
 	const BPackageWriterParameters* parameters)
 {
 	if (fImpl == NULL)
@@ -105,8 +98,7 @@ BPackageWriter::Init(const char* fileName,
 }
 
 
-status_t
-BPackageWriter::Init(BPositionIO* file, bool keepFile,
+status_t BPackageWriter::Init(BPositionIO* file, bool keepFile,
 	const BPackageWriterParameters* parameters)
 {
 	if (fImpl == NULL)
@@ -119,8 +111,7 @@ BPackageWriter::Init(BPositionIO* file, bool keepFile,
 }
 
 
-status_t
-BPackageWriter::SetInstallPath(const char* installPath)
+status_t BPackageWriter::SetInstallPath(const char* installPath)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;
@@ -129,16 +120,14 @@ BPackageWriter::SetInstallPath(const char* installPath)
 }
 
 
-void
-BPackageWriter::SetCheckLicenses(bool checkLicenses)
+void BPackageWriter::SetCheckLicenses(bool checkLicenses)
 {
 	if (fImpl != NULL)
 		fImpl->SetCheckLicenses(checkLicenses);
 }
 
 
-status_t
-BPackageWriter::AddEntry(const char* fileName, int fd)
+status_t BPackageWriter::AddEntry(const char* fileName, int fd)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;
@@ -147,8 +136,7 @@ BPackageWriter::AddEntry(const char* fileName, int fd)
 }
 
 
-status_t
-BPackageWriter::Finish()
+status_t BPackageWriter::Finish()
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;
@@ -157,8 +145,7 @@ BPackageWriter::Finish()
 }
 
 
-status_t
-BPackageWriter::Recompress(BPositionIO* inputFile)
+status_t BPackageWriter::Recompress(BPositionIO* inputFile)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;

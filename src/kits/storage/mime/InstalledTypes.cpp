@@ -63,8 +63,7 @@ InstalledTypes::~InstalledTypes()
 
 	See \c BMimeType::GetInstalledTypes(BMessage*) for more information.
 */
-status_t
-InstalledTypes::GetInstalledTypes(BMessage *types)
+status_t InstalledTypes::GetInstalledTypes(BMessage *types)
 {
 	status_t err = types ? B_OK : B_BAD_VALUE;
 	// See if we need to do our initial build still
@@ -89,8 +88,7 @@ InstalledTypes::GetInstalledTypes(BMessage *types)
 	See \c BMimeType::GetInstalledTypes(const char*, BMessage*) for more
 	information.
 */
-status_t
-InstalledTypes::GetInstalledTypes(const char *supertype, BMessage *types)
+status_t InstalledTypes::GetInstalledTypes(const char *supertype, BMessage *types)
 {
 	if (supertype == NULL || types == NULL)
 		return B_BAD_VALUE;
@@ -125,8 +123,7 @@ InstalledTypes::GetInstalledTypes(const char *supertype, BMessage *types)
 
 	See \c BMimeType::GetInstalledSupertypes() for more information.
 */
-status_t
-InstalledTypes::GetInstalledSupertypes(BMessage *types)
+status_t InstalledTypes::GetInstalledSupertypes(BMessage *types)
 {
 	if (types == NULL)
 		return B_BAD_VALUE;
@@ -154,8 +151,7 @@ InstalledTypes::GetInstalledSupertypes(BMessage *types)
 	If cached messages exist, the type is simply appended to the end of
 	the current type list.
 */
-status_t
-InstalledTypes::AddType(const char *type)
+status_t InstalledTypes::AddType(const char *type)
 {
 	if (!fHaveDoneFullBuild)
 		return B_OK;
@@ -194,8 +190,7 @@ InstalledTypes::AddType(const char *type)
 
 	Any corresponding cached messages are invalidated.
 */
-status_t
-InstalledTypes::RemoveType(const char *type)
+status_t InstalledTypes::RemoveType(const char *type)
 {
 	if (!fHaveDoneFullBuild)
 		return B_OK;
@@ -234,8 +229,7 @@ InstalledTypes::RemoveType(const char *type)
 	- B_OK: success, even if the supertype already existed in the map
 	- "error code": failure
 */
-status_t
-InstalledTypes::_AddSupertype(const char *super,
+status_t InstalledTypes::_AddSupertype(const char *super,
 	std::map<std::string, Supertype>::iterator &i)
 {
 	if (super == NULL)
@@ -268,8 +262,7 @@ InstalledTypes::_AddSupertype(const char *super,
 	- B_NAME_IN_USE: The subtype already exists in the subtype list
 	- "error code": failure
 */
-status_t
-InstalledTypes::_AddSubtype(const char *super, const char *sub)
+status_t InstalledTypes::_AddSubtype(const char *super, const char *sub)
 {
 	if (super == NULL || sub == NULL)
 		return B_BAD_VALUE;
@@ -292,8 +285,7 @@ InstalledTypes::_AddSubtype(const char *super, const char *sub)
 	- B_NAME_IN_USE: The subtype already exists in the subtype list
 	- "error code": failure
 */
-status_t
-InstalledTypes::_AddSubtype(Supertype &super, const char *sub)
+status_t InstalledTypes::_AddSubtype(Supertype &super, const char *sub)
 {
 	if (sub == NULL)
 		return B_BAD_VALUE;
@@ -310,8 +302,7 @@ InstalledTypes::_AddSubtype(Supertype &super, const char *sub)
 
 /*! \brief Removes the given supertype and any corresponding subtypes.
 */
-status_t
-InstalledTypes::_RemoveSupertype(const char *super)
+status_t InstalledTypes::_RemoveSupertype(const char *super)
 {
 	if (super == NULL)
 		return B_BAD_VALUE;
@@ -325,8 +316,7 @@ InstalledTypes::_RemoveSupertype(const char *super)
 
 /*! \brief Removes the given subtype from the given supertype.
 */
-status_t
-InstalledTypes::_RemoveSubtype(const char *super, const char *sub)
+status_t InstalledTypes::_RemoveSubtype(const char *super, const char *sub)
 {
 	if (super == NULL || sub == NULL)
 		return B_BAD_VALUE;
@@ -346,8 +336,7 @@ InstalledTypes::_RemoveSubtype(const char *super, const char *sub)
 
 
 //! Clears any cached messages and empties the supertype map
-void
-InstalledTypes::_Unset()
+void InstalledTypes::_Unset()
 {
 	_ClearCachedMessages();
 	fSupertypes.clear();
@@ -355,8 +344,7 @@ InstalledTypes::_Unset()
 
 
 //! Frees any cached messages and sets their pointers to NULL
-void
-InstalledTypes::_ClearCachedMessages()
+void InstalledTypes::_ClearCachedMessages()
 {
 	delete fCachedSupertypesMessage;
 	delete fCachedMessage;
@@ -369,8 +357,7 @@ InstalledTypes::_ClearCachedMessages()
 
 	An initial set of cached messages are also created.
 */
-status_t
-InstalledTypes::_BuildInstalledTypesList()
+status_t InstalledTypes::_BuildInstalledTypesList()
 {
 	status_t err = B_OK;
 	_Unset();
@@ -468,8 +455,7 @@ InstalledTypes::_BuildInstalledTypesList()
 /*! \brief Allocates a new BMessage into the BMessage pointer pointed to by \c result
 	and fills it with a complete list of installed types.
 */
-status_t
-InstalledTypes::_CreateMessageWithTypes(BMessage **_result) const
+status_t InstalledTypes::_CreateMessageWithTypes(BMessage **_result) const
 {
 	if (_result == NULL)
 		return B_BAD_VALUE;
@@ -500,8 +486,7 @@ InstalledTypes::_CreateMessageWithTypes(BMessage **_result) const
 /*! \brief Allocates a new BMessage into the BMessage pointer pointed to by \c result
 	and fills it with a complete list of installed supertypes.
 */
-status_t
-InstalledTypes::_CreateMessageWithSupertypes(BMessage **_result) const
+status_t InstalledTypes::_CreateMessageWithSupertypes(BMessage **_result) const
 {
 	if (_result == NULL)
 		return B_BAD_VALUE;

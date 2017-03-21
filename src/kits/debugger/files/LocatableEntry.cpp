@@ -40,8 +40,7 @@ LocatableEntry::~LocatableEntry()
 }
 
 
-void
-LocatableEntry::LastReferenceReleased()
+void LocatableEntry::LastReferenceReleased()
 {
 	fOwner->LocatableEntryUnused(this);
 }

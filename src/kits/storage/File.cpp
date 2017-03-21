@@ -172,14 +172,14 @@ BFile::~BFile()
 }
 
 
-status_t
+status_t 
 BFile::InitCheck() const
 {
     return(fFD == NULL ? B_NO_INIT : B_OK);
 }
 
 
-status_t
+status_t 
 BFile::SetTo(const char *path,  __be_uint32 open_mode,  __be_uint32 access_mode)
 {
     if(path == NULL || *path == 0) return B_BAD_VALUE;
@@ -229,7 +229,7 @@ BFile::SetTo(const char *path,  __be_uint32 open_mode,  __be_uint32 access_mode)
 }
 
 
-status_t
+status_t 
 BFile::SetTo(const BEntry *entry,  __be_uint32 open_mode,  __be_uint32 access_mode)
 {
     if(entry == NULL) return B_BAD_VALUE;
@@ -241,7 +241,7 @@ BFile::SetTo(const BEntry *entry,  __be_uint32 open_mode,  __be_uint32 access_mo
 }
 
 
-status_t
+status_t 
 BFile::SetTo(const BDirectory *dir, const char *leaf,  __be_uint32 open_mode,  __be_uint32 access_mode)
 {
     if(dir == NULL || leaf == NULL) return B_BAD_VALUE;
@@ -258,7 +258,7 @@ BFile::SetTo(const BDirectory *dir, const char *leaf,  __be_uint32 open_mode,  _
 }
 
 
-void
+void 
 BFile::Unset()
 {
     if(fFD != NULL)
@@ -275,14 +275,14 @@ BFile::Unset()
 }
 
 
-bool
+bool 
 BFile::IsReadable() const
 {
     return(fFD == NULL ? false : true);
 }
 
 
-bool
+bool 
 BFile::IsWritable() const
 {
     if(fFD == NULL) return false;
@@ -389,7 +389,7 @@ BFile::Position() const
 }
 
 
-status_t
+status_t 
 BFile::SetSize(__be_int64 size)
 {
     if(fFD == NULL || size < B_INT64_CONSTANT(0) || size == B_MAXINT64) return B_BAD_VALUE;

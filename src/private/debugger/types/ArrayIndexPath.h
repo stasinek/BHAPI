@@ -40,30 +40,26 @@ private:
 };
 
 
-int32
-ArrayIndexPath::CountIndices() const
+int32 ArrayIndexPath::CountIndices() const
 {
 	return fIndices.Count();
 }
 
 
-int64
-ArrayIndexPath::IndexAt(int32 index) const
+int64 ArrayIndexPath::IndexAt(int32 index) const
 {
 	return index >= 0 && index < fIndices.Count()
 		? fIndices.ElementAt(index) : -1;
 }
 
 
-bool
-ArrayIndexPath::AddIndex(int64 index)
+bool ArrayIndexPath::AddIndex(int64 index)
 {
 	return fIndices.Add(index);
 }
 
 
-void
-ArrayIndexPath::SetIndexAt(int32 at, int64 newIndex)
+void ArrayIndexPath::SetIndexAt(int32 at, int64 newIndex)
 {
 	if (at >= 0 && at < fIndices.Count())
 		fIndices[at] = newIndex;

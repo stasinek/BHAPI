@@ -15,8 +15,7 @@
 #include "protocol.h"
 
 
-const char*
-BMidiEndpoint::Name() const
+const char*  BMidiEndpoint::Name() const
 {
 	const char* str = NULL;
 
@@ -33,8 +32,7 @@ BMidiEndpoint::Name() const
 }
 
 
-void
-BMidiEndpoint::SetName(const char* newName)
+void BMidiEndpoint::SetName(const char* newName)
 {
 	if (newName == NULL) {
 		WARN("SetName() does not accept a NULL name");
@@ -61,50 +59,43 @@ BMidiEndpoint::SetName(const char* newName)
 }
 
 
-int32
-BMidiEndpoint::ID() const
+int32 BMidiEndpoint::ID() const
 {
 	return fId;
 }
 
 
-bool
-BMidiEndpoint::IsProducer() const
+bool BMidiEndpoint::IsProducer() const
 {
 	return !fIsConsumer;
 }
 
 
-bool
-BMidiEndpoint::IsConsumer() const
+bool BMidiEndpoint::IsConsumer() const
 {
 	return fIsConsumer;
 }
 
 
-bool
-BMidiEndpoint::IsRemote() const
+bool BMidiEndpoint::IsRemote() const
 {
 	return !fIsLocal;
 }
 
 
-bool
-BMidiEndpoint::IsLocal() const
+bool BMidiEndpoint::IsLocal() const
 {
 	return fIsLocal;
 }
 
 
-bool
-BMidiEndpoint::IsPersistent() const
+bool BMidiEndpoint::IsPersistent() const
 {
 	return false;
 }
 
 
-bool
-BMidiEndpoint::IsValid() const
+bool BMidiEndpoint::IsValid() const
 {
 	if (IsLocal())
 		return (ID() > 0);
@@ -114,8 +105,7 @@ BMidiEndpoint::IsValid() const
 }
 
 
-status_t
-BMidiEndpoint::Release()
+status_t BMidiEndpoint::Release()
 {
 	int32 old = atomic_add(&fRefCount, -1);
 
@@ -138,8 +128,7 @@ BMidiEndpoint::Release()
 }
 
 
-status_t
-BMidiEndpoint::Acquire()
+status_t BMidiEndpoint::Acquire()
 {
 #ifdef DEBUG
 	int32 old = 
@@ -152,8 +141,7 @@ BMidiEndpoint::Acquire()
 }
 
 
-status_t
-BMidiEndpoint::SetProperties(const BMessage* properties_)
+status_t BMidiEndpoint::SetProperties(const BMessage* properties_)
 {
 	if (properties_ == NULL) {
 		WARN("SetProperties() does not accept a NULL message")
@@ -180,8 +168,7 @@ BMidiEndpoint::SetProperties(const BMessage* properties_)
 }
 
 
-status_t
-BMidiEndpoint::GetProperties(BMessage* _properties) const
+status_t BMidiEndpoint::GetProperties(BMessage* _properties) const
 {
 	if (_properties == NULL) {
 		WARN("GetProperties() does not accept NULL properties")
@@ -197,8 +184,7 @@ BMidiEndpoint::GetProperties(BMessage* _properties) const
 }
 
 
-status_t
-BMidiEndpoint::Register()
+status_t BMidiEndpoint::Register()
 {
 	if (IsRemote()) { 
 		WARN("You cannot Register() remote endpoints");
@@ -215,8 +201,7 @@ BMidiEndpoint::Register()
 }
 
 
-status_t
-BMidiEndpoint::Unregister()
+status_t BMidiEndpoint::Unregister()
 {
 	if (IsRemote()) { 
 		WARN("You cannot Unregister() remote endpoints");
@@ -275,8 +260,7 @@ void BMidiEndpoint::_Reserved8() { }
 
 //------------------------------------------------------------------------------
 
-status_t
-BMidiEndpoint::SendRegisterRequest(bool registered)
+status_t BMidiEndpoint::SendRegisterRequest(bool registered)
 {
 	BMessage msg;
 	msg.AddBool("midi:registered", registered);
@@ -293,8 +277,7 @@ BMidiEndpoint::SendRegisterRequest(bool registered)
 }
 
 
-status_t
-BMidiEndpoint::SendChangeRequest(BMessage* msg)
+status_t BMidiEndpoint::SendChangeRequest(BMessage* msg)
 {
 	ASSERT(msg != NULL)
 
@@ -314,8 +297,7 @@ BMidiEndpoint::SendChangeRequest(BMessage* msg)
 }
 
 
-bool
-BMidiEndpoint::IsRegistered() const
+bool BMidiEndpoint::IsRegistered() const
 {
 	// No need to protect this with a lock, because reading
 	// and writing a bool is always an atomic operation.
@@ -324,15 +306,13 @@ BMidiEndpoint::IsRegistered() const
 }
 
 
-bool
-BMidiEndpoint::LockLooper() const
+bool BMidiEndpoint::LockLooper() const
 {
 	return BMidiRoster::MidiRoster()->fLooper->Lock();
 }
 
 
-void
-BMidiEndpoint::UnlockLooper() const
+void BMidiEndpoint::UnlockLooper() const
 {
 	BMidiRoster::MidiRoster()->fLooper->Unlock();
 }

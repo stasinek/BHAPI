@@ -323,8 +323,7 @@ BTranslationUtils::GetBitmap(BPositionIO *stream, BTranslatorRoster *roster)
 	\return B_ERROR, if any other error occurred
 	\return B_OK, if successful
 */
-status_t
-BTranslationUtils::GetStyledText(BPositionIO* source, BTextView* intoView,
+status_t BTranslationUtils::GetStyledText(BPositionIO* source, BTextView* intoView,
 	const char* encoding, BTranslatorRoster* roster)
 {
 	if (source == NULL || intoView == NULL)
@@ -436,8 +435,7 @@ BTranslationUtils::GetStyledText(BPositionIO* source, BTextView* intoView,
 }
 
 
-status_t
-BTranslationUtils::GetStyledText(BPositionIO* source, BTextView* intoView,
+status_t BTranslationUtils::GetStyledText(BPositionIO* source, BTextView* intoView,
 	BTranslatorRoster* roster)
 {
 	return GetStyledText(source, intoView, NULL, roster);
@@ -465,8 +463,7 @@ BTranslationUtils::GetStyledText(BPositionIO* source, BTextView* intoView,
 	\return B_ERROR, if anything else went wrong
 	\return B_NO_ERROR, if successful
 */
-status_t
-BTranslationUtils::PutStyledText(BTextView *fromView, BPositionIO *intoStream,
+status_t BTranslationUtils::PutStyledText(BTextView *fromView, BPositionIO *intoStream,
 	BTranslatorRoster *roster)
 {
 	if (fromView == NULL || intoStream == NULL)
@@ -614,8 +611,7 @@ BTranslationUtils::PutStyledText(BTextView *fromView, BPositionIO *intoStream,
 		B_OK, if successful, and any possible file error
 		if writing failed.
 */
-status_t
-BTranslationUtils::WriteStyledEditFile(BTextView* view, BFile* file, const char *encoding)
+status_t BTranslationUtils::WriteStyledEditFile(BTextView* view, BFile* file, const char *encoding)
 {
 	if (view == NULL || file == NULL)
 		return B_BAD_VALUE;
@@ -737,8 +733,7 @@ BTranslationUtils::WriteStyledEditFile(BTextView* view, BFile* file, const char 
 }
 
 
-status_t
-BTranslationUtils::WriteStyledEditFile(BTextView* view, BFile* file)
+status_t BTranslationUtils::WriteStyledEditFile(BTextView* view, BFile* file)
 {
 	return WriteStyledEditFile(view, file, NULL);
 }
@@ -872,8 +867,7 @@ BTranslationUtils::GetDefaultSettings(const char *kTranslatorName,
 //          B_OK, if successful
 //          error value if not successful
 // ---------------------------------------------------------------
-status_t
-BTranslationUtils::AddTranslationItems(BMenu *intoMenu, uint32 fromType,
+status_t BTranslationUtils::AddTranslationItems(BMenu *intoMenu, uint32 fromType,
 	const BMessage *kModel, const char *kTranslatorIdName,
 	const char *kTranslatorTypeName, BTranslatorRoster *roster)
 {

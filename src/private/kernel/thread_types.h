@@ -709,8 +709,7 @@ private:
 };
 
 
-inline int32
-Team::HighestPendingSignalPriority(sigset_t nonBlocked) const
+inline int32 Team::HighestPendingSignalPriority(sigset_t nonBlocked) const
 {
 	return fPendingSignals.HighestSignalPriority(nonBlocked);
 }
@@ -737,8 +736,7 @@ Thread::AllPendingSignals() const
 }
 
 
-inline int32
-Thread::HighestPendingSignalPriority(sigset_t nonBlocked) const
+inline int32 Thread::HighestPendingSignalPriority(sigset_t nonBlocked) const
 {
 	return fPendingSignals.HighestSignalPriority(nonBlocked);
 }

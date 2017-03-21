@@ -29,8 +29,7 @@ PartitionFilterVisitor::PartitionFilterVisitor(BDiskDeviceVisitor *visitor,
 }
 
 // Visit
-bool
-PartitionFilterVisitor::Visit(BDiskDevice *device)
+bool PartitionFilterVisitor::Visit(BDiskDevice *device)
 {
 	if (fFilter->Filter(device, 0))
 		return fVisitor->Visit(device);
@@ -38,8 +37,7 @@ PartitionFilterVisitor::Visit(BDiskDevice *device)
 }
 
 // Visit
-bool
-PartitionFilterVisitor::Visit(BPartition *partition, int32 level)
+bool PartitionFilterVisitor::Visit(BPartition *partition, int32 level)
 {
 	if (fFilter->Filter(partition, level))
 		return fVisitor->Visit(partition, level);
@@ -59,15 +57,13 @@ IDFinderVisitor::IDFinderVisitor(int32 id)
 }
 
 // Visit
-bool
-IDFinderVisitor::Visit(BDiskDevice *device)
+bool IDFinderVisitor::Visit(BDiskDevice *device)
 {
 	return (device->ID() == fID);
 }
 
 // Visit
-bool
-IDFinderVisitor::Visit(BPartition *partition, int32 level)
+bool IDFinderVisitor::Visit(BPartition *partition, int32 level)
 {
 	return (partition->ID() == fID);
 }

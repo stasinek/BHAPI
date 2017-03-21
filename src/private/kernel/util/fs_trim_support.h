@@ -12,8 +12,7 @@
 #include <syscall_restart.h>
 
 
-static inline status_t
-get_trim_data_from_user(void* buffer, size_t size, MemoryDeleter& deleter,
+static inline status_t get_trim_data_from_user(void* buffer, size_t size, MemoryDeleter& deleter,
 	fs_trim_data*& _trimData)
 {
 	if (!is_called_via_syscall() && !IS_USER_ADDRESS(buffer)) {
@@ -52,8 +51,7 @@ get_trim_data_from_user(void* buffer, size_t size, MemoryDeleter& deleter,
 }
 
 
-static inline status_t
-copy_trim_data_to_user(void* buffer, fs_trim_data* trimData)
+static inline status_t copy_trim_data_to_user(void* buffer, fs_trim_data* trimData)
 {
 	if (!is_called_via_syscall() && !IS_USER_ADDRESS(buffer))
 		return B_OK;

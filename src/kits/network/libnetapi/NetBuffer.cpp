@@ -76,8 +76,7 @@ BNetBuffer::operator=(const BNetBuffer& buffer)
 }
 
 
-status_t
-BNetBuffer::Archive(BMessage* into, bool deep) const
+status_t BNetBuffer::Archive(BMessage* into, bool deep) const
 {
 	if (fInit != B_OK)
 		return B_NO_INIT;
@@ -108,82 +107,71 @@ BNetBuffer::Instantiate(BMessage* archive)
 }
 
 
-status_t
-BNetBuffer::InitCheck()
+status_t BNetBuffer::InitCheck()
 {
 	return fInit;
 }
 
 
-status_t
-BNetBuffer::AppendInt8(int8 data)
+status_t BNetBuffer::AppendInt8(int8 data)
 {
 	return AppendData((const void*)&data, sizeof(int8));
 }
 
 
-status_t
-BNetBuffer::AppendUint8(uint8 data)
+status_t BNetBuffer::AppendUint8(uint8 data)
 {
 	return AppendData((const void*)&data, sizeof(int8));
 }
 
 
-status_t
-BNetBuffer::AppendInt16(int16 data)
+status_t BNetBuffer::AppendInt16(int16 data)
 {
 	int16  __be_data = B_HOST_TO_BENDIAN_INT16(data);
 	return AppendData((const void*)&be_data, sizeof(int16));
 }
 
 
-status_t
-BNetBuffer::AppendUint16(uint16 data)
+status_t BNetBuffer::AppendUint16(uint16 data)
 {
 	uint16  __be_data = B_HOST_TO_BENDIAN_INT16(data);
 	return AppendData((const void*)&be_data, sizeof(uint16));
 }
 
 
-status_t
-BNetBuffer::AppendInt32(int32 data)
+status_t BNetBuffer::AppendInt32(int32 data)
 {
 	int32  __be_data = B_HOST_TO_BENDIAN_INT32(data);
 	return AppendData((const void*)&be_data, sizeof(int32));
 }
 
 
-status_t
-BNetBuffer::AppendUint32(uint32 data)
+status_t BNetBuffer::AppendUint32(uint32 data)
 {
 	uint32  __be_data = B_HOST_TO_BENDIAN_INT32(data);
 	return AppendData((const void*)&be_data, sizeof(uint32));
 }
 
 
-status_t
-BNetBuffer::AppendFloat(float data)
+status_t BNetBuffer::AppendFloat(float data)
 {
 	return AppendData((const void*)&data, sizeof(float));
 }
 
 
-status_t
-BNetBuffer::AppendDouble(double data)
+status_t BNetBuffer::AppendDouble(double data)
 {
 	return AppendData((const void*)&data, sizeof(double));
 }
 
 
-status_t
-BNetBuffer::AppendString(const char* data)
+status_t BNetBuffer::AppendString(const char* data)
 {
 	return AppendData((const void*)data, strlen(data) + 1);
 }
 
 
-status_t
-BNetBuffer::AppendData(const void* data, size_t size)
+status_t BNetBuffer::AppendData(const void* data, size_t size)
 {
 	if (fInit != B_OK)
 		return B_NO_INIT;
@@ -197,8 +185,7 @@ BNetBuffer::AppendData(const void* data, size_t size)
 
 #define STACK_BUFFER_SIZE 2048
 
-status_t
-BNetBuffer::AppendMessage(const BMessage& data)
+status_t BNetBuffer::AppendMessage(const BMessage& data)
 {
 	char stackFlattenedData[STACK_BUFFER_SIZE];
 
@@ -230,38 +217,33 @@ BNetBuffer::AppendMessage(const BMessage& data)
 }
 
 
-status_t
-BNetBuffer::AppendInt64(int64 data)
+status_t BNetBuffer::AppendInt64(int64 data)
 {
 	int64  __be_data = B_HOST_TO_BENDIAN_INT64(data);
 	return AppendData((const void*)&be_data, sizeof(int64));
 }
 
 
-status_t
-BNetBuffer::AppendUint64(uint64 data)
+status_t BNetBuffer::AppendUint64(uint64 data)
 {
 	uint64  __be_data = B_HOST_TO_BENDIAN_INT64(data);
 	return AppendData((const void*)&be_data, sizeof(uint64));
 }
 
 
-status_t
-BNetBuffer::RemoveInt8(int8& data)
+status_t BNetBuffer::RemoveInt8(int8& data)
 {
 	return RemoveData((void*)&data, sizeof(int8));
 }
 
 
-status_t
-BNetBuffer::RemoveUint8(uint8& data)
+status_t BNetBuffer::RemoveUint8(uint8& data)
 {
 	return RemoveData((void*)&data, sizeof(uint8));
 }
 
 
-status_t
-BNetBuffer::RemoveInt16(int16& data)
+status_t BNetBuffer::RemoveInt16(int16& data)
 {
 	int16  __be_data;
 	status_t result = RemoveData((void*)&be_data, sizeof(int16));
@@ -274,8 +256,7 @@ BNetBuffer::RemoveInt16(int16& data)
 }
 
 
-status_t
-BNetBuffer::RemoveUint16(uint16& data)
+status_t BNetBuffer::RemoveUint16(uint16& data)
 {
 	uint16  __be_data;
 	status_t result = RemoveData((void*)&be_data, sizeof(uint16));
@@ -288,8 +269,7 @@ BNetBuffer::RemoveUint16(uint16& data)
 }
 
 
-status_t
-BNetBuffer::RemoveInt32(int32& data)
+status_t BNetBuffer::RemoveInt32(int32& data)
 {
 	int32  __be_data;
 	status_t result = RemoveData((void*)&be_data, sizeof(int32));
@@ -302,8 +282,7 @@ BNetBuffer::RemoveInt32(int32& data)
 }
 
 
-status_t
-BNetBuffer::RemoveUint32(uint32& data)
+status_t BNetBuffer::RemoveUint32(uint32& data)
 {
 	uint32  __be_data;
 	status_t result = RemoveData((void*)&be_data, sizeof(uint32));
@@ -316,22 +295,19 @@ BNetBuffer::RemoveUint32(uint32& data)
 }
 
 
-status_t
-BNetBuffer::RemoveFloat(float& data)
+status_t BNetBuffer::RemoveFloat(float& data)
 {
 	return RemoveData((void*)&data, sizeof(float));
 }
 
 
-status_t
-BNetBuffer::RemoveDouble(double& data)
+status_t BNetBuffer::RemoveDouble(double& data)
 {
 	return RemoveData((void*)&data, sizeof(double));
 }
 
 
-status_t
-BNetBuffer::RemoveString(char* data, size_t size)
+status_t BNetBuffer::RemoveString(char* data, size_t size)
 {
 	// TODO(bga): Should we do anything specific to handle the terminating
 	// NULL byte?
@@ -339,8 +315,7 @@ BNetBuffer::RemoveString(char* data, size_t size)
 }
 
 
-status_t
-BNetBuffer::RemoveData(void* data, size_t size)
+status_t BNetBuffer::RemoveData(void* data, size_t size)
 {
 	if (fInit != B_OK)
 		return B_NO_INIT;
@@ -352,8 +327,7 @@ BNetBuffer::RemoveData(void* data, size_t size)
 }
 
 
-status_t
-BNetBuffer::RemoveMessage(BMessage& data)
+status_t BNetBuffer::RemoveMessage(BMessage& data)
 {
 	if (fInit != B_OK)
 		return B_NO_INIT;
@@ -380,8 +354,7 @@ BNetBuffer::RemoveMessage(BMessage& data)
 }
 
 
-status_t
-BNetBuffer::RemoveInt64(int64& data)
+status_t BNetBuffer::RemoveInt64(int64& data)
 {
 	int64  __be_data;
 	status_t result = RemoveData((void*)&be_data, sizeof(int64));
@@ -394,8 +367,7 @@ BNetBuffer::RemoveInt64(int64& data)
 }
 
 
-status_t
-BNetBuffer::RemoveUint64(uint64& data)
+status_t BNetBuffer::RemoveUint64(uint64& data)
 {
 	uint64  __be_data;
 	status_t result = RemoveData((void*)&be_data, sizeof(uint64));
@@ -408,8 +380,7 @@ BNetBuffer::RemoveUint64(uint64& data)
 }
 
 
-unsigned char*
-BNetBuffer::Data() const
+unsigned char*  BNetBuffer::Data() const
 {
 	if (fInit != B_OK)
 		return NULL;
@@ -438,37 +409,31 @@ BNetBuffer::BytesRemaining() const
 }
 
 
-void
-BNetBuffer::_ReservedBNetBufferFBCCruft1()
+void BNetBuffer::_ReservedBNetBufferFBCCruft1()
 {
 }
 
 
-void
-BNetBuffer::_ReservedBNetBufferFBCCruft2()
+void BNetBuffer::_ReservedBNetBufferFBCCruft2()
 {
 }
 
 
-void
-BNetBuffer::_ReservedBNetBufferFBCCruft3()
+void BNetBuffer::_ReservedBNetBufferFBCCruft3()
 {
 }
 
 
-void
-BNetBuffer::_ReservedBNetBufferFBCCruft4()
+void BNetBuffer::_ReservedBNetBufferFBCCruft4()
 {
 }
 
 
-void
-BNetBuffer::_ReservedBNetBufferFBCCruft5()
+void BNetBuffer::_ReservedBNetBufferFBCCruft5()
 {
 }
 
 
-void
-BNetBuffer::_ReservedBNetBufferFBCCruft6()
+void BNetBuffer::_ReservedBNetBufferFBCCruft6()
 {
 }

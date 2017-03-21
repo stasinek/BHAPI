@@ -76,8 +76,7 @@ BPictureButton::Instantiate(BMessage* data)
 }
 
 
-status_t
-BPictureButton::Archive(BMessage* data, bool deep) const
+status_t BPictureButton::Archive(BMessage* data, bool deep) const
 {
 	status_t err = BControl::Archive(data, deep);
 	if (err != B_OK)
@@ -118,78 +117,67 @@ BPictureButton::Archive(BMessage* data, bool deep) const
 }
 
 
-void
-BPictureButton::AttachedToWindow()
+void BPictureButton::AttachedToWindow()
 {
 	BControl::AttachedToWindow();
 }
 
 
-void
-BPictureButton::DetachedFromWindow()
+void BPictureButton::DetachedFromWindow()
 {
 	BControl::DetachedFromWindow();
 }
 
 
-void
-BPictureButton::AllAttached()
+void BPictureButton::AllAttached()
 {
 	BControl::AllAttached();
 }
 
 
-void
-BPictureButton::AllDetached()
+void BPictureButton::AllDetached()
 {
 	BControl::AllDetached();
 }
 
 
-void
-BPictureButton::ResizeToPreferred()
+void BPictureButton::ResizeToPreferred()
 {
 	BControl::ResizeToPreferred();
 }
 
 
-void
-BPictureButton::GetPreferredSize(float* _width, float* _height)
+void BPictureButton::GetPreferredSize(float* _width, float* _height)
 {
 	BControl::GetPreferredSize(_width, _height);
 }
 
 
-void
-BPictureButton::FrameMoved(BPoint newPosition)
+void BPictureButton::FrameMoved(BPoint newPosition)
 {
 	BControl::FrameMoved(newPosition);
 }
 
 
-void
-BPictureButton::FrameResized(float newWidth, float newHeight)
+void BPictureButton::FrameResized(float newWidth, float newHeight)
 {
 	BControl::FrameResized(newWidth, newHeight);
 }
 
 
-void
-BPictureButton::WindowActivated(bool active)
+void BPictureButton::WindowActivated(bool active)
 {
 	BControl::WindowActivated(active);
 }
 
 
-void
-BPictureButton::MakeFocus(bool focus)
+void BPictureButton::MakeFocus(bool focus)
 {
 	BControl::MakeFocus(focus);
 }
 
 
-void
-BPictureButton::Draw(BRect updateRect)
+void BPictureButton::Draw(BRect updateRect)
 {
 	if (IsEnabled()) {
 		if (Value() == B_CONTROL_ON)
@@ -215,15 +203,13 @@ BPictureButton::Draw(BRect updateRect)
 }
 
 
-void
-BPictureButton::MessageReceived(BMessage* message)
+void BPictureButton::MessageReceived(BMessage* message)
 {
 	BControl::MessageReceived(message);
 }
 
 
-void
-BPictureButton::KeyDown(const char* bytes, int32 numBytes)
+void BPictureButton::KeyDown(const char* bytes, int32 numBytes)
 {
 	if (numBytes == 1) {
 		switch (bytes[0]) {
@@ -248,8 +234,7 @@ BPictureButton::KeyDown(const char* bytes, int32 numBytes)
 }
 
 
-void
-BPictureButton::MouseDown(BPoint where)
+void BPictureButton::MouseDown(BPoint where)
 {
 	if (!IsEnabled()) {
 		BControl::MouseDown(where);
@@ -271,8 +256,7 @@ BPictureButton::MouseDown(BPoint where)
 }
 
 
-void
-BPictureButton::MouseUp(BPoint where)
+void BPictureButton::MouseUp(BPoint where)
 {
 	if (IsEnabled() && IsTracking()) {
 		if (Bounds().Contains(where)) {
@@ -290,8 +274,7 @@ BPictureButton::MouseUp(BPoint where)
 }
 
 
-void
-BPictureButton::MouseMoved(BPoint where, uint32 code,
+void BPictureButton::MouseMoved(BPoint where, uint32 code,
 	const BMessage* dragMessage)
 {
 	if (IsEnabled() && IsTracking()) {
@@ -307,32 +290,28 @@ BPictureButton::MouseMoved(BPoint where, uint32 code,
 // #pragma mark -
 
 
-void
-BPictureButton::SetEnabledOn(BPicture* picture)
+void BPictureButton::SetEnabledOn(BPicture* picture)
 {
 	delete fEnabledOn;
 	fEnabledOn = new (std::nothrow) BPicture(*picture);
 }
 
 
-void
-BPictureButton::SetEnabledOff(BPicture* picture)
+void BPictureButton::SetEnabledOff(BPicture* picture)
 {
 	delete fEnabledOff;
 	fEnabledOff = new (std::nothrow) BPicture(*picture);
 }
 
 
-void
-BPictureButton::SetDisabledOn(BPicture* picture)
+void BPictureButton::SetDisabledOn(BPicture* picture)
 {
 	delete fDisabledOn;
 	fDisabledOn = new (std::nothrow) BPicture(*picture);
 }
 
 
-void
-BPictureButton::SetDisabledOff(BPicture* picture)
+void BPictureButton::SetDisabledOff(BPicture* picture)
 {
 	delete fDisabledOff;
 	fDisabledOff = new (std::nothrow) BPicture(*picture);
@@ -367,29 +346,25 @@ BPictureButton::DisabledOff() const
 }
 
 
-void
-BPictureButton::SetBehavior(uint32 behavior)
+void BPictureButton::SetBehavior(uint32 behavior)
 {
 	fBehavior = behavior;
 }
 
 
-uint32
-BPictureButton::Behavior() const
+uint32 BPictureButton::Behavior() const
 {
 	return fBehavior;
 }
 
 
-void
-BPictureButton::SetValue(int32 value)
+void BPictureButton::SetValue(int32 value)
 {
 	BControl::SetValue(value);
 }
 
 
-status_t
-BPictureButton::Invoke(BMessage* message)
+status_t BPictureButton::Invoke(BMessage* message)
 {
 	return BControl::Invoke(message);
 }
@@ -404,15 +379,13 @@ BPictureButton::ResolveSpecifier(BMessage* message, int32 index,
 }
 
 
-status_t
-BPictureButton::GetSupportedSuites(BMessage* data)
+status_t BPictureButton::GetSupportedSuites(BMessage* data)
 {
 	return BControl::GetSupportedSuites(data);
 }
 
 
-status_t
-BPictureButton::Perform(perform_code code, void* _data)
+status_t BPictureButton::Perform(perform_code code, void* _data)
 {
 	switch (code) {
 		case PERFORM_CODE_MIN_SIZE:
@@ -472,8 +445,7 @@ BPictureButton::Perform(perform_code code, void* _data)
 }
 
 
-status_t
-BPictureButton::SetIcon(const BBitmap* icon, uint32 flags)
+status_t BPictureButton::SetIcon(const BBitmap* icon, uint32 flags)
 {
 	return BControl::SetIcon(icon, flags);
 }

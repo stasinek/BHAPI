@@ -44,8 +44,7 @@ const char* B_FILE_MIME_TYPE		= "application/octet-stream";
 const char* B_APP_MIME_TYPE			= B_ELF_APP_MIME_TYPE;
 
 
-static bool
-isValidMimeChar(const char ch)
+static bool isValidMimeChar(const char ch)
 {
 	// Handles white space and most CTLs
 	return ch > 32
@@ -99,8 +98,7 @@ BMimeType::~BMimeType()
 
 
 // Initializes this object to the supplied MIME type.
-status_t
-BMimeType::SetTo(const char* mimeType)
+status_t BMimeType::SetTo(const char* mimeType)
 {
 	if (mimeType == NULL) {
 		Unset();
@@ -121,8 +119,7 @@ BMimeType::SetTo(const char* mimeType)
 
 
 // Returns the object to an uninitialized state
-void
-BMimeType::Unset()
+void BMimeType::Unset()
 {
 	delete [] fType;
 	fType = NULL;
@@ -131,32 +128,28 @@ BMimeType::Unset()
 
 
 // Returns the result of the most recent constructor or SetTo() call
-status_t
-BMimeType::InitCheck() const
+status_t BMimeType::InitCheck() const
 {
 	return fCStatus;
 }
 
 
 // Returns the MIME string represented by this object
-const char*
-BMimeType::Type() const
+const char*  BMimeType::Type() const
 {
 	return fType;
 }
 
 
 // Returns whether the object represents a valid MIME type
-bool
-BMimeType::IsValid() const
+bool BMimeType::IsValid() const
 {
 	return InitCheck() == B_OK && BMimeType::IsValid(Type());
 }
 
 
 // Returns whether this objects represents a supertype
-bool
-BMimeType::IsSupertypeOnly() const
+bool BMimeType::IsSupertypeOnly() const
 {
 	if (fCStatus == B_OK) {
 		// We assume here fCStatus will be B_OK *only* if
@@ -174,8 +167,7 @@ BMimeType::IsSupertypeOnly() const
 
 // Returns whether or not this type is currently installed in the
 // MIME database
-bool
-BMimeType::IsInstalled() const
+bool BMimeType::IsInstalled() const
 {
 	return InitCheck() == B_OK
 		&& default_database_location()->IsInstalled(Type());
@@ -183,8 +175,7 @@ BMimeType::IsInstalled() const
 
 
 // Gets the supertype of the MIME type represented by this object
-status_t
-BMimeType::GetSupertype(BMimeType* supertype) const
+status_t BMimeType::GetSupertype(BMimeType* supertype) const
 {
 	if (supertype == NULL)
 		return B_BAD_VALUE;
@@ -214,8 +205,7 @@ BMimeType::GetSupertype(BMimeType* supertype) const
 
 
 // Returns whether this and the supplied MIME type are equal
-bool
-BMimeType::operator==(const BMimeType &type) const
+bool BMimeType::operator==(const BMimeType &type) const
 {
 	if (InitCheck() == B_NO_INIT && type.InitCheck() == B_NO_INIT)
 		return true;
@@ -227,8 +217,7 @@ BMimeType::operator==(const BMimeType &type) const
 
 
 // Returns whether this and the supplied MIME type are equal
-bool
-BMimeType::operator==(const char* type) const
+bool BMimeType::operator==(const char* type) const
 {
 	BMimeType mime;
 	if (type)
@@ -240,8 +229,7 @@ BMimeType::operator==(const char* type) const
 
 // Returns whether this MIME type is a supertype of or equals the
 // supplied one
-bool
-BMimeType::Contains(const BMimeType* type) const
+bool BMimeType::Contains(const BMimeType* type) const
 {
 	if (type == NULL)
 		return false;
@@ -257,8 +245,7 @@ BMimeType::Contains(const BMimeType* type) const
 
 
 // Adds the MIME type to the MIME database
-status_t
-BMimeType::Install()
+status_t BMimeType::Install()
 {
 	status_t err = InitCheck();
 
@@ -287,8 +274,7 @@ BMimeType::Install()
 
 
 // Removes the MIME type from the MIME database
-status_t
-BMimeType::Delete()
+status_t BMimeType::Delete()
 {
 	status_t err = InitCheck();
 
@@ -317,8 +303,7 @@ BMimeType::Delete()
 
 
 // Fetches the large or mini icon associated with the MIME type
-status_t
-BMimeType::GetIcon(BBitmap* icon, icon_size size) const
+status_t BMimeType::GetIcon(BBitmap* icon, icon_size size) const
 {
 	if (icon == NULL)
 		return B_BAD_VALUE;
@@ -332,8 +317,7 @@ BMimeType::GetIcon(BBitmap* icon, icon_size size) const
 
 
 //	Fetches the vector icon associated with the MIME type
-status_t
-BMimeType::GetIcon(uint8** data, size_t* size) const
+status_t BMimeType::GetIcon(uint8** data, size_t* size) const
 {
 	if (data == NULL || size == NULL)
 		return B_BAD_VALUE;
@@ -348,8 +332,7 @@ BMimeType::GetIcon(uint8** data, size_t* size) const
 
 // Fetches the signature of the MIME type's preferred application from the
 // MIME database
-status_t
-BMimeType::GetPreferredApp(char* signature, app_verb verb) const
+status_t BMimeType::GetPreferredApp(char* signature, app_verb verb) const
 {
 	status_t err = InitCheck();
 	if (err == B_OK) {
@@ -363,8 +346,7 @@ BMimeType::GetPreferredApp(char* signature, app_verb verb) const
 
 // Fetches from the MIME database a BMessage describing the attributes
 // typically associated with files of the given MIME type
-status_t
-BMimeType::GetAttrInfo(BMessage* info) const
+status_t BMimeType::GetAttrInfo(BMessage* info) const
 {
 	if (info == NULL)
 		return B_BAD_VALUE;
@@ -379,8 +361,7 @@ BMimeType::GetAttrInfo(BMessage* info) const
 
 // Fetches the MIME type's associated filename extensions from the MIME
 // database
-status_t
-BMimeType::GetFileExtensions(BMessage* extensions) const
+status_t BMimeType::GetFileExtensions(BMessage* extensions) const
 {
 	if (extensions == NULL)
 		return B_BAD_VALUE;
@@ -396,8 +377,7 @@ BMimeType::GetFileExtensions(BMessage* extensions) const
 
 
 // Fetches the MIME type's short description from the MIME database
-status_t
-BMimeType::GetShortDescription(char* description) const
+status_t BMimeType::GetShortDescription(char* description) const
 {
 	status_t err = InitCheck();
 	if (err == B_OK) {
@@ -410,8 +390,7 @@ BMimeType::GetShortDescription(char* description) const
 
 
 // Fetches the MIME type's long description from the MIME database
-status_t
-BMimeType::GetLongDescription(char* description) const
+status_t BMimeType::GetLongDescription(char* description) const
 {
 	status_t err = InitCheck();
 	if (err == B_OK) {
@@ -425,8 +404,7 @@ BMimeType::GetLongDescription(char* description) const
 
 // Fetches a \c BMessage containing a list of MIME signatures of
 // applications that are able to handle files of this MIME type.
-status_t
-BMimeType::GetSupportingApps(BMessage* signatures) const
+status_t BMimeType::GetSupportingApps(BMessage* signatures) const
 {
 	if (signatures == NULL)
 		return B_BAD_VALUE;
@@ -453,24 +431,21 @@ BMimeType::GetSupportingApps(BMessage* signatures) const
 
 
 // Sets the large or mini icon for the MIME type
-status_t
-BMimeType::SetIcon(const BBitmap* icon, icon_size which)
+status_t BMimeType::SetIcon(const BBitmap* icon, icon_size which)
 {
 	return SetIconForType(NULL, icon, which);
 }
 
 
 // Sets the vector icon for the MIME type
-status_t
-BMimeType::SetIcon(const uint8* data, size_t size)
+status_t BMimeType::SetIcon(const uint8* data, size_t size)
 {
 	return SetIconForType(NULL, data, size);
 }
 
 
 // Sets the preferred application for the MIME type
-status_t
-BMimeType::SetPreferredApp(const char* signature, app_verb verb)
+status_t BMimeType::SetPreferredApp(const char* signature, app_verb verb)
 {
 	status_t err = InitCheck();
 
@@ -510,8 +485,7 @@ BMimeType::SetPreferredApp(const char* signature, app_verb verb)
 
 // Sets the description of the attributes typically associated with files
 // of the given MIME type
-status_t
-BMimeType::SetAttrInfo(const BMessage* info)
+status_t BMimeType::SetAttrInfo(const BMessage* info)
 {
 	status_t err = InitCheck();
 
@@ -540,8 +514,7 @@ BMimeType::SetAttrInfo(const BMessage* info)
 
 
 // Sets the list of filename extensions associated with the MIME type
-status_t
-BMimeType::SetFileExtensions(const BMessage* extensions)
+status_t BMimeType::SetFileExtensions(const BMessage* extensions)
 {
 	status_t err = InitCheck();
 
@@ -576,8 +549,7 @@ BMimeType::SetFileExtensions(const BMessage* extensions)
 
 
 // Sets the short description field for the MIME type
-status_t
-BMimeType::SetShortDescription(const char* description)
+status_t BMimeType::SetShortDescription(const char* description)
 {
 	status_t err = InitCheck();
 
@@ -616,8 +588,7 @@ BMimeType::SetShortDescription(const char* description)
 
 
 // Sets the long description field for the MIME type
-status_t
-BMimeType::SetLongDescription(const char* description)
+status_t BMimeType::SetLongDescription(const char* description)
 {
 	status_t err = InitCheck();
 
@@ -657,8 +628,7 @@ BMimeType::SetLongDescription(const char* description)
 
 // Fetches a BMessage listing all the MIME supertypes currently
 // installed in the MIME database.
-/*static*/ status_t
-BMimeType::GetInstalledSupertypes(BMessage* supertypes)
+/*static*/ status_t BMimeType::GetInstalledSupertypes(BMessage* supertypes)
 {
 	if (supertypes == NULL)
 		return B_BAD_VALUE;
@@ -682,8 +652,7 @@ BMimeType::GetInstalledSupertypes(BMessage* supertypes)
 
 // Fetches a BMessage listing all the MIME types currently installed
 // in the MIME database.
-status_t
-BMimeType::GetInstalledTypes(BMessage* types)
+status_t BMimeType::GetInstalledTypes(BMessage* types)
 {
 	return GetInstalledTypes(NULL, types);
 }
@@ -691,8 +660,7 @@ BMimeType::GetInstalledTypes(BMessage* types)
 
 // Fetches a BMessage listing all the MIME subtypes of the given
 // supertype currently installed in the MIME database.
-/*static*/ status_t
-BMimeType::GetInstalledTypes(const char* supertype, BMessage* types)
+/*static*/ status_t BMimeType::GetInstalledTypes(const char* supertype, BMessage* types)
 {
 	if (types == NULL)
 		return B_BAD_VALUE;
@@ -720,8 +688,7 @@ BMimeType::GetInstalledTypes(const char* supertype, BMessage* types)
 
 // Fetches a \c BMessage containing a list of MIME signatures of
 // applications that are able to handle files of any type.
-status_t
-BMimeType::GetWildcardApps(BMessage* wild_ones)
+status_t BMimeType::GetWildcardApps(BMessage* wild_ones)
 {
 	BMimeType mime;
 	status_t err = mime.SetTo("application/octet-stream");
@@ -732,8 +699,7 @@ BMimeType::GetWildcardApps(BMessage* wild_ones)
 
 
 // Returns whether the given string represents a valid MIME type.
-bool
-BMimeType::IsValid(const char* string)
+bool BMimeType::IsValid(const char* string)
 {
 	if (string == NULL)
 		return false;
@@ -760,8 +726,7 @@ BMimeType::IsValid(const char* string)
 
 // Fetches an \c entry_ref that serves as a hint as to where the MIME type's
 // preferred application might live
-status_t
-BMimeType::GetAppHint(entry_ref* ref) const
+status_t BMimeType::GetAppHint(entry_ref* ref) const
 {
 	if (ref == NULL)
 		return B_BAD_VALUE;
@@ -774,8 +739,7 @@ BMimeType::GetAppHint(entry_ref* ref) const
 
 
 // Sets the app hint field for the MIME type
-status_t
-BMimeType::SetAppHint(const entry_ref* ref)
+status_t BMimeType::SetAppHint(const entry_ref* ref)
 {
 	status_t err = InitCheck();
 
@@ -811,8 +775,7 @@ BMimeType::SetAppHint(const entry_ref* ref)
 
 // Fetches the large or mini icon used by an application of this type for
 // files of the given type.
-status_t
-BMimeType::GetIconForType(const char* type, BBitmap* icon, icon_size which) const
+status_t BMimeType::GetIconForType(const char* type, BBitmap* icon, icon_size which) const
 {
 	if (icon == NULL)
 		return B_BAD_VALUE;
@@ -835,8 +798,7 @@ BMimeType::GetIconForType(const char* type, BBitmap* icon, icon_size which) cons
 
 // Fetches the vector icon used by an application of this type for files of
 // the given type.
-status_t
-BMimeType::GetIconForType(const char* type, uint8** _data, size_t* _size) const
+status_t BMimeType::GetIconForType(const char* type, uint8** _data, size_t* _size) const
 {
 	if (_data == NULL || _size == NULL)
 		return B_BAD_VALUE;
@@ -856,8 +818,7 @@ BMimeType::GetIconForType(const char* type, uint8** _data, size_t* _size) const
 
 // Sets the large or mini icon used by an application of this type for
 // files of the given type.
-status_t
-BMimeType::SetIconForType(const char* type, const BBitmap* icon, icon_size which)
+status_t BMimeType::SetIconForType(const char* type, const BBitmap* icon, icon_size which)
 {
 	status_t err = InitCheck();
 
@@ -916,8 +877,7 @@ BMimeType::SetIconForType(const char* type, const BBitmap* icon, icon_size which
 
 // Sets the large or mini icon used by an application of this type for
 // files of the given type.
-status_t
-BMimeType::SetIconForType(const char* type, const uint8* data, size_t dataSize)
+status_t BMimeType::SetIconForType(const char* type, const uint8* data, size_t dataSize)
 {
 	status_t err = InitCheck();
 
@@ -957,8 +917,7 @@ BMimeType::SetIconForType(const char* type, const uint8* data, size_t dataSize)
 
 
 // Retrieves the MIME type's sniffer rule
-status_t
-BMimeType::GetSnifferRule(BString* result) const
+status_t BMimeType::GetSnifferRule(BString* result) const
 {
 	if (result == NULL)
 		return B_BAD_VALUE;
@@ -972,8 +931,7 @@ BMimeType::GetSnifferRule(BString* result) const
 
 
 // Sets the MIME type's sniffer rule
-status_t
-BMimeType::SetSnifferRule(const char* rule)
+status_t BMimeType::SetSnifferRule(const char* rule)
 {
 	status_t err = InitCheck();
 	if (err == B_OK && rule != NULL && rule[0] != '\0')
@@ -1012,8 +970,7 @@ BMimeType::SetSnifferRule(const char* rule)
 
 
 // Checks whether a MIME sniffer rule is valid or not.
-status_t
-BMimeType::CheckSnifferRule(const char* rule, BString* parseError)
+status_t BMimeType::CheckSnifferRule(const char* rule, BString* parseError)
 {
 	BPrivate::Storage::Sniffer::Rule snifferRule;
 
@@ -1023,8 +980,7 @@ BMimeType::CheckSnifferRule(const char* rule, BString* parseError)
 
 // Guesses a MIME type for the entry referred to by the given
 // entry_ref.
-status_t
-BMimeType::GuessMimeType(const entry_ref* file, BMimeType* type)
+status_t BMimeType::GuessMimeType(const entry_ref* file, BMimeType* type)
 {
 	status_t err = file && type ? B_OK : B_BAD_VALUE;
 
@@ -1060,8 +1016,7 @@ BMimeType::GuessMimeType(const entry_ref* file, BMimeType* type)
 
 
 // Guesses a MIME type for the supplied chunk of data.
-status_t
-BMimeType::GuessMimeType(const void* buffer, int32 length, BMimeType* type)
+status_t BMimeType::GuessMimeType(const void* buffer, int32 length, BMimeType* type)
 {
 	status_t err = buffer && type ? B_OK : B_BAD_VALUE;
 
@@ -1097,8 +1052,7 @@ BMimeType::GuessMimeType(const void* buffer, int32 length, BMimeType* type)
 
 
 // Guesses a MIME type for the given filename.
-status_t
-BMimeType::GuessMimeType(const char* filename, BMimeType* type)
+status_t BMimeType::GuessMimeType(const char* filename, BMimeType* type)
 {
 	status_t err = filename && type ? B_OK : B_BAD_VALUE;
 
@@ -1134,8 +1088,7 @@ BMimeType::GuessMimeType(const char* filename, BMimeType* type)
 
 
 // Starts monitoring the MIME database for a given target.
-status_t
-BMimeType::StartWatching(BMessenger target)
+status_t BMimeType::StartWatching(BMessenger target)
 {
 	BMessage message(B_REG_MIME_START_WATCHING);
 	BMessage reply;
@@ -1161,8 +1114,7 @@ BMimeType::StartWatching(BMessenger target)
 
 
 // Stops monitoring the MIME database for a given target
-status_t
-BMimeType::StopWatching(BMessenger target)
+status_t BMimeType::StopWatching(BMessenger target)
 {
 	BMessage message(B_REG_MIME_STOP_WATCHING);
 	BMessage reply;
@@ -1188,8 +1140,7 @@ BMimeType::StopWatching(BMessenger target)
 
 
 // Initializes this object to the supplied MIME type
-status_t
-BMimeType::SetType(const char* mimeType)
+status_t BMimeType::SetType(const char* mimeType)
 {
 	return SetTo(mimeType);
 }
@@ -1217,8 +1168,7 @@ BMimeType::BMimeType(const BMimeType &)
 }
 
 
-status_t
-BMimeType::GetSupportedTypes(BMessage* types)
+status_t BMimeType::GetSupportedTypes(BMessage* types)
 {
 	if (types == NULL)
 		return B_BAD_VALUE;
@@ -1260,8 +1210,7 @@ BMimeType::GetSupportedTypes(BMessage* types)
 
 	\returns \c B_OK on success or another error code on failure.
 */
-status_t
-BMimeType::SetSupportedTypes(const BMessage* types, bool fullSync)
+status_t BMimeType::SetSupportedTypes(const BMessage* types, bool fullSync)
 {
 	status_t err = InitCheck();
 
@@ -1310,8 +1259,7 @@ BMimeType::SetSupportedTypes(const BMessage* types, bool fullSync)
 
 	\returns \c B_OK on success or another error code on failure.
 */
-status_t
-BMimeType::GetAssociatedTypes(const char* extension, BMessage* types)
+status_t BMimeType::GetAssociatedTypes(const char* extension, BMessage* types)
 {
 	status_t err = extension && types ? B_OK : B_BAD_VALUE;
 

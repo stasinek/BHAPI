@@ -135,8 +135,7 @@ BChannelSlider::Instantiate(BMessage* archive)
 }
 
 
-status_t
-BChannelSlider::Archive(BMessage* into, bool deep) const
+status_t BChannelSlider::Archive(BMessage* into, bool deep) const
 {
 	status_t status = BChannelControl::Archive(into, deep);
 	if (status == B_OK)
@@ -146,8 +145,7 @@ BChannelSlider::Archive(BMessage* into, bool deep) const
 }
 
 
-void
-BChannelSlider::AttachedToWindow()
+void BChannelSlider::AttachedToWindow()
 {
 	BView* parent = Parent();
 	if (parent != NULL)
@@ -157,29 +155,25 @@ BChannelSlider::AttachedToWindow()
 }
 
 
-void
-BChannelSlider::AllAttached()
+void BChannelSlider::AllAttached()
 {
 	BChannelControl::AllAttached();
 }
 
 
-void
-BChannelSlider::DetachedFromWindow()
+void BChannelSlider::DetachedFromWindow()
 {
 	BChannelControl::DetachedFromWindow();
 }
 
 
-void
-BChannelSlider::AllDetached()
+void BChannelSlider::AllDetached()
 {
 	BChannelControl::AllDetached();
 }
 
 
-void
-BChannelSlider::MessageReceived(BMessage* message)
+void BChannelSlider::MessageReceived(BMessage* message)
 {
 	switch (message->what) {
 		case B_SET_PROPERTY: {
@@ -224,8 +218,7 @@ BChannelSlider::MessageReceived(BMessage* message)
 }
 
 
-void
-BChannelSlider::Draw(BRect updateRect)
+void BChannelSlider::Draw(BRect updateRect)
 {
 	_UpdateFontDimens();
 	_DrawThumbs();
@@ -270,8 +263,7 @@ BChannelSlider::Draw(BRect updateRect)
 }
 
 
-void
-BChannelSlider::MouseDown(BPoint where)
+void BChannelSlider::MouseDown(BPoint where)
 {
 	if (!IsEnabled())
 		BControl::MouseDown(where);
@@ -355,8 +347,7 @@ BChannelSlider::MouseDown(BPoint where)
 }
 
 
-void
-BChannelSlider::MouseUp(BPoint where)
+void BChannelSlider::MouseUp(BPoint where)
 {
 	if (IsEnabled() && IsTracking()) {
 		_FinishChange();
@@ -370,8 +361,7 @@ BChannelSlider::MouseUp(BPoint where)
 }
 
 
-void
-BChannelSlider::MouseMoved(BPoint where, uint32 code, const BMessage* message)
+void BChannelSlider::MouseMoved(BPoint where, uint32 code, const BMessage* message)
 {
 	if (IsEnabled() && IsTracking())
 		_MouseMovedCommon(where, B_ORIGIN);
@@ -380,29 +370,25 @@ BChannelSlider::MouseMoved(BPoint where, uint32 code, const BMessage* message)
 }
 
 
-void
-BChannelSlider::WindowActivated(bool state)
+void BChannelSlider::WindowActivated(bool state)
 {
 	BChannelControl::WindowActivated(state);
 }
 
 
-void
-BChannelSlider::KeyDown(const char* bytes, int32 numBytes)
+void BChannelSlider::KeyDown(const char* bytes, int32 numBytes)
 {
 	BControl::KeyDown(bytes, numBytes);
 }
 
 
-void
-BChannelSlider::KeyUp(const char* bytes, int32 numBytes)
+void BChannelSlider::KeyUp(const char* bytes, int32 numBytes)
 {
 	BView::KeyUp(bytes, numBytes);
 }
 
 
-void
-BChannelSlider::FrameResized(float newWidth, float newHeight)
+void BChannelSlider::FrameResized(float newWidth, float newHeight)
 {
 	BChannelControl::FrameResized(newWidth, newHeight);
 
@@ -413,15 +399,13 @@ BChannelSlider::FrameResized(float newWidth, float newHeight)
 }
 
 
-void
-BChannelSlider::SetFont(const BFont* font, uint32 mask)
+void BChannelSlider::SetFont(const BFont* font, uint32 mask)
 {
 	BChannelControl::SetFont(font, mask);
 }
 
 
-void
-BChannelSlider::MakeFocus(bool focusState)
+void BChannelSlider::MakeFocus(bool focusState)
 {
 	if (focusState && !IsFocus())
 		fFocusChannel = -1;
@@ -429,8 +413,7 @@ BChannelSlider::MakeFocus(bool focusState)
 }
 
 
-void
-BChannelSlider::GetPreferredSize(float* width, float* height)
+void BChannelSlider::GetPreferredSize(float* width, float* height)
 {
 	_UpdateFontDimens();
 
@@ -469,8 +452,7 @@ BChannelSlider::ResolveSpecifier(BMessage* message, int32 index,
 }
 
 
-status_t
-BChannelSlider::GetSupportedSuites(BMessage* data)
+status_t BChannelSlider::GetSupportedSuites(BMessage* data)
 {
 	if (data == NULL)
 		return B_BAD_VALUE;
@@ -487,8 +469,7 @@ BChannelSlider::GetSupportedSuites(BMessage* data)
 }
 
 
-void
-BChannelSlider::SetEnabled(bool on)
+void BChannelSlider::SetEnabled(bool on)
 {
 	BChannelControl::SetEnabled(on);
 }
@@ -501,8 +482,7 @@ BChannelSlider::Orientation() const
 }
 
 
-void
-BChannelSlider::SetOrientation(orientation orientation)
+void BChannelSlider::SetOrientation(orientation orientation)
 {
 	bool isVertical = orientation == B_VERTICAL;
 	if (isVertical != fIsVertical) {
@@ -513,22 +493,19 @@ BChannelSlider::SetOrientation(orientation orientation)
 }
 
 
-int32
-BChannelSlider::MaxChannelCount() const
+int32 BChannelSlider::MaxChannelCount() const
 {
 	return 32;
 }
 
 
-bool
-BChannelSlider::SupportsIndividualLimits() const
+bool BChannelSlider::SupportsIndividualLimits() const
 {
 	return false;
 }
 
 
-void
-BChannelSlider::DrawChannel(BView* into, int32 channel, BRect area,
+void BChannelSlider::DrawChannel(BView* into, int32 channel, BRect area,
 	bool pressed)
 {
 	float hCenter = area.Width() / 2;
@@ -556,8 +533,7 @@ BChannelSlider::DrawChannel(BView* into, int32 channel, BRect area,
 }
 
 
-void
-BChannelSlider::DrawGroove(BView* into, int32 channel, BPoint leftTop,
+void BChannelSlider::DrawGroove(BView* into, int32 channel, BPoint leftTop,
 	BPoint bottomRight)
 {
 	ASSERT(into != NULL);
@@ -576,8 +552,7 @@ BChannelSlider::DrawGroove(BView* into, int32 channel, BPoint leftTop,
 }
 
 
-void
-BChannelSlider::DrawThumb(BView* into, int32 channel, BPoint where,
+void BChannelSlider::DrawThumb(BView* into, int32 channel, BPoint where,
 	bool pressed)
 {
 	ASSERT(into != NULL);
@@ -691,8 +666,7 @@ BChannelSlider::ThumbRangeFor(int32 channel)
 // #pragma mark -
 
 
-void
-BChannelSlider::_InitData()
+void BChannelSlider::_InitData()
 {
 	_UpdateFontDimens();
 
@@ -714,8 +688,7 @@ BChannelSlider::_InitData()
 }
 
 
-void
-BChannelSlider::_FinishChange(bool update)
+void BChannelSlider::_FinishChange(bool update)
 {
 	if (fInitialValues != NULL) {
 		bool* inMask = NULL;
@@ -741,8 +714,7 @@ BChannelSlider::_FinishChange(bool update)
 }
 
 
-void
-BChannelSlider::_UpdateFontDimens()
+void BChannelSlider::_UpdateFontDimens()
 {
 	font_height height;
 	GetFontHeight(&height);
@@ -751,8 +723,7 @@ BChannelSlider::_UpdateFontDimens()
 }
 
 
-void
-BChannelSlider::_DrawThumbs()
+void BChannelSlider::_DrawThumbs()
 {
 	if (fBacking == NULL) {
 		// This is the idea: we build a bitmap by taking the coordinates
@@ -858,8 +829,7 @@ BChannelSlider::_DrawThumbs()
 }
 
 
-void
-BChannelSlider::_DrawGrooveFrame(BView* into, const BRect& area)
+void BChannelSlider::_DrawGrooveFrame(BView* into, const BRect& area)
 {
 	if (into) {
 		rgb_color oldColor = into->HighColor();
@@ -880,8 +850,7 @@ BChannelSlider::_DrawGrooveFrame(BView* into, const BRect& area)
 }
 
 
-void
-BChannelSlider::_MouseMovedCommon(BPoint point, BPoint point2)
+void BChannelSlider::_MouseMovedCommon(BPoint point, BPoint point2)
 {
 	float floatValue = 0;
 	int32 limitRange = MaxLimitList()[fCurrentChannel] -

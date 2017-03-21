@@ -35,8 +35,7 @@ extern void operator delete[](void *ptr) throw ();
 
 #if __cplusplus >= 201402L
 
-inline void
-operator delete(void *ptr, size_t size) throw ()
+inline void operator delete(void *ptr, size_t size) throw ()
 {
 	free(ptr);
 }

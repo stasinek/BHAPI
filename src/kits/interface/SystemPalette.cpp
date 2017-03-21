@@ -34,8 +34,7 @@ static color_map sColorMap;
 	\param blue2 Blue component of the second color.
 	\return The distance between the given colors.
 */
-static inline uint32
-color_distance(uint8 red1, uint8 green1, uint8 blue1,
+static inline uint32 color_distance(uint8 red1, uint8 green1, uint8 blue1,
 			   uint8 red2, uint8 green2, uint8 blue2)
 {
 	int rd = (int)red1 - (int)red2;
@@ -89,8 +88,7 @@ InvertColor(const rgb_color &color)
 }
 
 
-static void
-FillColorMap(const rgb_color *palette, color_map *map)
+static void FillColorMap(const rgb_color *palette, color_map *map)
 {
 	memcpy(map->color_list, palette, sizeof(map->color_list));
 	

@@ -35,8 +35,7 @@ BIcon::~BIcon()
 }
 
 
-status_t
-BIcon::SetTo(const BBitmap* bitmap, uint32 flags)
+status_t BIcon::SetTo(const BBitmap* bitmap, uint32 flags)
 {
 	if (!bitmap->IsValid())
 		return B_BAD_VALUE;
@@ -117,8 +116,7 @@ BIcon::SetTo(const BBitmap* bitmap, uint32 flags)
 }
 
 
-bool
-BIcon::SetBitmap(BBitmap* bitmap, uint32 which)
+bool BIcon::SetBitmap(BBitmap* bitmap, uint32 which)
 {
 	BitmapList& list = (which & B_DISABLED_ICON_BITMAP) == 0
 		? fEnabledBitmaps : fDisabledBitmaps;
@@ -161,8 +159,7 @@ BIcon::CreateBitmap(const BRect& bounds, color_space colorSpace, uint32 which)
 }
 
 
-status_t
-BIcon::SetExternalBitmap(const BBitmap* bitmap, uint32 which, uint32 flags)
+status_t BIcon::SetExternalBitmap(const BBitmap* bitmap, uint32 which, uint32 flags)
 {
 	BBitmap* ourBitmap = NULL;
 	if (bitmap != NULL) {
@@ -201,16 +198,14 @@ BIcon::CopyBitmap(const BBitmap& bitmapToClone, uint32 which)
 }
 
 
-void
-BIcon::DeleteBitmaps()
+void BIcon::DeleteBitmaps()
 {
 	fEnabledBitmaps.MakeEmpty(true);
 	fDisabledBitmaps.MakeEmpty(true);
 }
 
 
-/*static*/ status_t
-BIcon::UpdateIcon(const BBitmap* bitmap, uint32 flags, BIcon*& _icon)
+/*static*/ status_t BIcon::UpdateIcon(const BBitmap* bitmap, uint32 flags, BIcon*& _icon)
 {
 	if (bitmap == NULL) {
 		delete _icon;
@@ -233,8 +228,7 @@ BIcon::UpdateIcon(const BBitmap* bitmap, uint32 flags, BIcon*& _icon)
 }
 
 
-/*static*/ status_t
-BIcon::SetIconBitmap(const BBitmap* bitmap, uint32 which, uint32 flags,
+/*static*/ status_t BIcon::SetIconBitmap(const BBitmap* bitmap, uint32 which, uint32 flags,
 	BIcon*& _icon)
 {
 	bool newIcon = false;
@@ -278,8 +272,7 @@ BIcon::_ConvertToRGB32(const BBitmap* bitmap, bool noAppServerLink)
 }
 
 
-/*static*/ status_t
-BIcon::_TrimBitmap(const BBitmap* bitmap, bool keepAspect,
+/*static*/ status_t BIcon::_TrimBitmap(const BBitmap* bitmap, bool keepAspect,
 	BBitmap*& _trimmedBitmap)
 {
 	if (bitmap == NULL || !bitmap->IsValid()
@@ -349,8 +342,7 @@ BIcon::_TrimBitmap(const BBitmap* bitmap, bool keepAspect,
 }
 
 
-status_t
-BIcon::_MakeBitmaps(const BBitmap* bitmap, uint32 flags)
+status_t BIcon::_MakeBitmaps(const BBitmap* bitmap, uint32 flags)
 {
 	// make our own versions of the bitmap
 	BRect b(bitmap->Bounds());

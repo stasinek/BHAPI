@@ -89,14 +89,14 @@ BMessageNode::TypeCode() const
 }
 
 
-bool
+bool 
 BMessageNode::AddItem(BMessageItem *item)
 {
 	return fItems.AddItem(item);
 }
 
 
-void
+void 
 BMessageNode::RemoveItem(BMessageItem *item)
 {
 	if(fItems.RemoveItem(fItems.IndexOf(item)) != item)
@@ -138,7 +138,7 @@ BMessageItem::~BMessageItem()
 }
 
 
-void
+void 
 BMessageItem::SetData(void *data, size_t nBytes, bool fixedSize)
 {
 	if(fFixedSize && fData != NULL) BMemory::Free(fData);
@@ -163,7 +163,7 @@ BMessageItem::Bytes() const
 }
 
 
-bool
+bool 
 BMessageItem::IsFixedSize() const
 {
 	return fFixedSize;
@@ -182,7 +182,7 @@ BMessageBody::~BMessageBody()
 }
 
 
-bool
+bool 
 BMessageBody::AddItem(const char *name, type_code type, BMessageItem *item)
 {
 	// TODO
@@ -191,7 +191,7 @@ BMessageBody::AddItem(const char *name, type_code type, BMessageItem *item)
 }
 
 
-void
+void 
 BMessageBody::RemoveItem(BMessageItem *item)
 {
 	// TODO
@@ -222,7 +222,7 @@ BMessageBody::FlattenedSize() const
 }
 
 
-bool
+bool 
 BMessageBody::Flatten(char *buffer, size_t size) const
 {
 	// TODO
@@ -231,7 +231,7 @@ BMessageBody::Flatten(char *buffer, size_t size) const
 }
 
 
-bool
+bool 
 BMessageBody::Flatten(BDataIO *stream,  ssize_t *size) const
 {
 	// TODO
@@ -240,7 +240,7 @@ BMessageBody::Flatten(BDataIO *stream,  ssize_t *size) const
 }
 
 
-bool
+bool 
 BMessageBody::Unflatten(const char *buffer, size_t size)
 {
 	// TODO
@@ -249,7 +249,7 @@ BMessageBody::Unflatten(const char *buffer, size_t size)
 }
 
 
-bool
+bool 
 BMessageBody::Unflatten(BDataIO *stream, size_t size)
 {
 	// TODO
@@ -258,7 +258,7 @@ BMessageBody::Unflatten(BDataIO *stream, size_t size)
 }
 
 
-void
+void 
 BMessageBody::PrintToStream(BStreamIO &stream) const
 {
 	// TODO

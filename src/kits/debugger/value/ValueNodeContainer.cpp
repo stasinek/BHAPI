@@ -27,15 +27,13 @@ ValueNodeContainer::~ValueNodeContainer()
 }
 
 
-status_t
-ValueNodeContainer::Init()
+status_t ValueNodeContainer::Init()
 {
 	return fLock.InitCheck();
 }
 
 
-int32
-ValueNodeContainer::CountChildren() const
+int32 ValueNodeContainer::CountChildren() const
 {
 	return fChildren.CountItems();
 }
@@ -48,8 +46,7 @@ ValueNodeContainer::ChildAt(int32 index) const
 }
 
 
-bool
-ValueNodeContainer::AddChild(ValueNodeChild* child)
+bool ValueNodeContainer::AddChild(ValueNodeChild* child)
 {
 	AutoLocker<ValueNodeContainer> locker(this);
 
@@ -63,8 +60,7 @@ ValueNodeContainer::AddChild(ValueNodeChild* child)
 }
 
 
-void
-ValueNodeContainer::RemoveChild(ValueNodeChild* child)
+void ValueNodeContainer::RemoveChild(ValueNodeChild* child)
 {
 	if (child->Container() != this || !fChildren.RemoveItem(child))
 		return;
@@ -74,8 +70,7 @@ ValueNodeContainer::RemoveChild(ValueNodeChild* child)
 }
 
 
-void
-ValueNodeContainer::RemoveAllChildren()
+void ValueNodeContainer::RemoveAllChildren()
 {
 	for (int32 i = 0; ValueNodeChild* child = ChildAt(i); i++) {
 		child->SetContainer(NULL);
@@ -86,22 +81,19 @@ ValueNodeContainer::RemoveAllChildren()
 }
 
 
-bool
-ValueNodeContainer::AddListener(Listener* listener)
+bool ValueNodeContainer::AddListener(Listener* listener)
 {
 	return fListeners.AddItem(listener);
 }
 
 
-void
-ValueNodeContainer::RemoveListener(Listener* listener)
+void ValueNodeContainer::RemoveListener(Listener* listener)
 {
 	fListeners.RemoveItem(listener);
 }
 
 
-void
-ValueNodeContainer::NotifyValueNodeChanged(ValueNodeChild* nodeChild,
+void ValueNodeContainer::NotifyValueNodeChanged(ValueNodeChild* nodeChild,
 	ValueNode* oldNode, ValueNode* newNode)
 {
 	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
@@ -109,24 +101,21 @@ ValueNodeContainer::NotifyValueNodeChanged(ValueNodeChild* nodeChild,
 }
 
 
-void
-ValueNodeContainer::NotifyValueNodeChildrenCreated(ValueNode* node)
+void ValueNodeContainer::NotifyValueNodeChildrenCreated(ValueNode* node)
 {
 	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->ValueNodeChildrenCreated(node);
 }
 
 
-void
-ValueNodeContainer::NotifyValueNodeChildrenDeleted(ValueNode* node)
+void ValueNodeContainer::NotifyValueNodeChildrenDeleted(ValueNode* node)
 {
 	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->ValueNodeChildrenDeleted(node);
 }
 
 
-void
-ValueNodeContainer::NotifyValueNodeValueChanged(ValueNode* node)
+void ValueNodeContainer::NotifyValueNodeValueChanged(ValueNode* node)
 {
 	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->ValueNodeValueChanged(node);
@@ -141,26 +130,22 @@ ValueNodeContainer::Listener::~Listener()
 }
 
 
-void
-ValueNodeContainer::Listener::ValueNodeChanged(ValueNodeChild* nodeChild,
+void ValueNodeContainer::Listener::ValueNodeChanged(ValueNodeChild* nodeChild,
 	ValueNode* oldNode, ValueNode* newNode)
 {
 }
 
 
-void
-ValueNodeContainer::Listener::ValueNodeChildrenCreated(ValueNode* node)
+void ValueNodeContainer::Listener::ValueNodeChildrenCreated(ValueNode* node)
 {
 }
 
 
-void
-ValueNodeContainer::Listener::ValueNodeChildrenDeleted(ValueNode* node)
+void ValueNodeContainer::Listener::ValueNodeChildrenDeleted(ValueNode* node)
 {
 }
 
 
-void
-ValueNodeContainer::Listener::ValueNodeValueChanged(ValueNode* node)
+void ValueNodeContainer::Listener::ValueNodeValueChanged(ValueNode* node)
 {
 }

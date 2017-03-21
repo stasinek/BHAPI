@@ -13,8 +13,7 @@
 
 
 // http://graphics.stanford.edu/~seander/bithacks.html
-static inline uint32
-next_power_of_2(uint32 v)
+static inline uint32 next_power_of_2(uint32 v)
 {
 	v--;
 	v |= v >> 1;
@@ -29,8 +28,7 @@ next_power_of_2(uint32 v)
 
 
 // http://graphics.stanford.edu/~seander/bithacks.html
-static inline uint32
-count_set_bits(uint32 v)
+static inline uint32 count_set_bits(uint32 v)
 {
 	v = v - ((v >> 1) & 0x55555555);
 	v = (v & 0x33333333) + ((v >> 2) & 0x33333333);
@@ -38,8 +36,7 @@ count_set_bits(uint32 v)
 }
 
 
-static inline uint32
-log2(uint32 v)
+static inline uint32 log2(uint32 v)
 {
 	static const int MultiplyDeBruijnBitPosition[32] = {
 		0, 9, 1, 10, 13, 21, 2, 29, 11, 14, 16, 18, 22, 25, 3, 30,

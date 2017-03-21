@@ -40,8 +40,7 @@ TempfileManager::~TempfileManager()
 }
 
 
-void
-TempfileManager::SetBaseDirectory(const BDirectory& baseDirectory)
+void TempfileManager::SetBaseDirectory(const BDirectory& baseDirectory)
 {
 	fBaseDirectory = baseDirectory;
 }

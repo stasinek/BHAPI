@@ -23,8 +23,7 @@
 
 
 // Subscribes a target to watch node changes on a volume.
-status_t
-watch_volume(dev_t volume, uint32 flags, BMessenger target)
+status_t watch_volume(dev_t volume, uint32 flags, BMessenger target)
 {
 	if ((flags & (B_WATCH_NAME | B_WATCH_STAT | B_WATCH_ATTR)) == 0)
 		return B_BAD_VALUE;
@@ -38,8 +37,7 @@ watch_volume(dev_t volume, uint32 flags, BMessenger target)
 }
 
 
-status_t
-watch_volume(dev_t volume, uint32 flags, const BHandler* handler,
+status_t watch_volume(dev_t volume, uint32 flags, const BHandler* handler,
 	const BLooper* looper)
 {
 	return watch_volume(volume, flags, BMessenger(handler, looper));
@@ -47,8 +45,7 @@ watch_volume(dev_t volume, uint32 flags, const BHandler* handler,
 
 
 // Subscribes or unsubscribes a target to node and/or mount watching.
-status_t
-watch_node(const node_ref* node, uint32 flags, BMessenger target)
+status_t watch_node(const node_ref* node, uint32 flags, BMessenger target)
 {
 	if (!target.IsValid())
 		return B_BAD_VALUE;
@@ -91,8 +88,7 @@ watch_node(const node_ref* node, uint32 flags, BMessenger target)
 
 // Subscribes or unsubscribes a handler or looper to node and/or mount
 // watching.
-status_t
-watch_node(const node_ref* node, uint32 flags, const BHandler* handler,
+status_t watch_node(const node_ref* node, uint32 flags, const BHandler* handler,
 	const BLooper* looper)
 {
 	return watch_node(node, flags, BMessenger(handler, looper));
@@ -100,8 +96,7 @@ watch_node(const node_ref* node, uint32 flags, const BHandler* handler,
 
 
 // Unsubscribes a target from node and mount monitoring.
-status_t
-stop_watching(BMessenger target)
+status_t stop_watching(BMessenger target)
 {
 	if (!target.IsValid())
 		return B_BAD_VALUE;
@@ -115,8 +110,7 @@ stop_watching(BMessenger target)
 
 
 // Unsubscribes a target from node and mount monitoring.
-status_t
-stop_watching(const BHandler* handler, const BLooper* looper)
+status_t stop_watching(const BHandler* handler, const BLooper* looper)
 {
 	return stop_watching(BMessenger(handler, looper));
 }

@@ -106,8 +106,7 @@ const property_info kTrackerPropertyList[] = {
 };
 
 
-status_t
-TTracker::GetSupportedSuites(BMessage* data)
+status_t TTracker::GetSupportedSuites(BMessage* data)
 {
 	data->AddString("suites", kTrackerSuites);
 	BPropertyInfo propertyInfo(const_cast<property_info*>(
@@ -137,8 +136,7 @@ TTracker::ResolveSpecifier(BMessage* message, int32 index, BMessage* specifier,
 }
 
 
-bool
-TTracker::HandleScriptingMessage(BMessage* message)
+bool TTracker::HandleScriptingMessage(BMessage* message)
 {
 	if (message->what != B_GET_PROPERTY
 		&& message->what != B_SET_PROPERTY
@@ -202,8 +200,7 @@ TTracker::HandleScriptingMessage(BMessage* message)
 }
 
 
-bool
-TTracker::CreateProperty(BMessage* message, BMessage*, int32 form,
+bool TTracker::CreateProperty(BMessage* message, BMessage*, int32 form,
 	const char* property, BMessage* reply)
 {
 	bool handled = false;
@@ -236,8 +233,7 @@ TTracker::CreateProperty(BMessage* message, BMessage*, int32 form,
 }
 
 
-bool
-TTracker::DeleteProperty(BMessage*, int32 form, const char* property, BMessage*)
+bool TTracker::DeleteProperty(BMessage*, int32 form, const char* property, BMessage*)
 {
 	if (strcmp(property, kPropertyTrash) == 0) {
 		// deleting on a selection is handled as removing a part of the
@@ -259,8 +255,7 @@ TTracker::DeleteProperty(BMessage*, int32 form, const char* property, BMessage*)
 }
 
 
-bool
-TTracker::ExecuteProperty(BMessage* message, int32 form, const char* property,
+bool TTracker::ExecuteProperty(BMessage* message, int32 form, const char* property,
 	BMessage* reply)
 {
 	if (strcmp(property, kPropertyPreferences) == 0) {
@@ -300,15 +295,13 @@ TTracker::ExecuteProperty(BMessage* message, int32 form, const char* property,
 }
 
 
-bool
-TTracker::CountProperty(BMessage*, int32, const char*, BMessage*)
+bool TTracker::CountProperty(BMessage*, int32, const char*, BMessage*)
 {
 	return false;
 }
 
 
-bool
-TTracker::GetProperty(BMessage* message, int32 form, const char* property,
+bool TTracker::GetProperty(BMessage* message, int32 form, const char* property,
 		BMessage* reply)
 {
 	if (strcmp(property, kPropertyFolder) == 0) {
@@ -337,8 +330,7 @@ TTracker::GetProperty(BMessage* message, int32 form, const char* property,
 }
 
 
-bool
-TTracker::SetProperty(BMessage*, BMessage*, int32, const char*, BMessage*)
+bool TTracker::SetProperty(BMessage*, BMessage*, int32, const char*, BMessage*)
 {
 	return false;
 }

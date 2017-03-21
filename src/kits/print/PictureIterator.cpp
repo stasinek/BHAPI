@@ -145,7 +145,6 @@ playbackHandlers[] = {
 		NULL
 	}; 
 
-void
-PictureIterator::Iterate(BPicture* picture) {
+void PictureIterator::Iterate(BPicture* picture) {
 	picture->Play(playbackHandlers, 50, this);
 }

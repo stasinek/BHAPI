@@ -147,15 +147,13 @@ class ViewState {
 };
 
 
-inline bool
-ViewState::IsValid(uint32 bit) const
+inline bool ViewState::IsValid(uint32 bit) const
 {
 	return valid_flags & bit;
 }
 
 
-inline bool
-ViewState::IsAllValid() const
+inline bool ViewState::IsAllValid() const
 {
 	return (valid_flags & B_VIEW_ALL_BITS & ~B_VIEW_CLIP_REGION_BIT)
 		== (B_VIEW_ALL_BITS & ~B_VIEW_CLIP_REGION_BIT);

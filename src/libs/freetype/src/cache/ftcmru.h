@@ -100,8 +100,7 @@ FT_BEGIN_HEADER
                             FT_Pointer   key,
                             FT_Pointer   data );
 
-  typedef void
-  (*FTC_MruNode_DoneFunc)( FTC_MruNode  node,
+  typedef void   (*FTC_MruNode_DoneFunc)( FTC_MruNode  node,
                            FT_Pointer   data );
 
 

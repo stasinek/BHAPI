@@ -50,8 +50,7 @@ BGradientRadial::Center() const
 
 
 // SetCenter
-void
-BGradientRadial::SetCenter(const BPoint& center)
+void BGradientRadial::SetCenter(const BPoint& center)
 {
 	fData.radial.cx = center.x;
 	fData.radial.cy = center.y;
@@ -59,8 +58,7 @@ BGradientRadial::SetCenter(const BPoint& center)
 
 
 // SetCenter
-void
-BGradientRadial::SetCenter(float cx, float cy)
+void BGradientRadial::SetCenter(float cx, float cy)
 {
 	fData.radial.cx = cx;
 	fData.radial.cy = cy;
@@ -76,8 +74,7 @@ BGradientRadial::Radius() const
 
 
 // SetRadius
-void
-BGradientRadial::SetRadius(float radius)
+void BGradientRadial::SetRadius(float radius)
 {
 	fData.radial.radius = radius;
 }

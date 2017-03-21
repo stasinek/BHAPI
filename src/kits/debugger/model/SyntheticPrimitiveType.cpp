@@ -27,8 +27,7 @@ SyntheticPrimitiveType::~SyntheticPrimitiveType()
 }
 
 
-uint32
-SyntheticPrimitiveType::TypeConstant() const
+uint32 SyntheticPrimitiveType::TypeConstant() const
 {
 	return fTypeConstant;
 }
@@ -69,8 +68,7 @@ SyntheticPrimitiveType::ByteSize() const
 }
 
 
-status_t
-SyntheticPrimitiveType::ResolveObjectDataLocation(
+status_t SyntheticPrimitiveType::ResolveObjectDataLocation(
 	const ValueLocation& objectLocation, ValueLocation*& _location)
 {
 	_location = NULL;
@@ -78,8 +76,7 @@ SyntheticPrimitiveType::ResolveObjectDataLocation(
 }
 
 
-status_t
-SyntheticPrimitiveType::ResolveObjectDataLocation(target_addr_t objectAddress,
+status_t SyntheticPrimitiveType::ResolveObjectDataLocation(target_addr_t objectAddress,
 	ValueLocation*& _location)
 {
 	_location = NULL;
@@ -87,8 +84,7 @@ SyntheticPrimitiveType::ResolveObjectDataLocation(target_addr_t objectAddress,
 }
 
 
-void
-SyntheticPrimitiveType::_Init()
+void SyntheticPrimitiveType::_Init()
 {
 	fID.SetToFormat("%p", this);
 	fName.SetTo(UiUtils::TypeCodeToString(fTypeConstant));

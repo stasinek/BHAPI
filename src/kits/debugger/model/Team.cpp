@@ -109,23 +109,20 @@ Team::~Team()
 }
 
 
-status_t
-Team::Init()
+status_t Team::Init()
 {
 	return fLock.InitCheck();
 }
 
 
-void
-Team::SetName(const BString& name)
+void Team::SetName(const BString& name)
 {
 	fName = name;
 	_NotifyTeamRenamed();
 }
 
 
-void
-Team::AddThread(Thread* thread)
+void Team::AddThread(Thread* thread)
 {
 	fThreads.Add(thread);
 	_NotifyThreadAdded(thread);
@@ -133,8 +130,7 @@ Team::AddThread(Thread* thread)
 
 
 
-status_t
-Team::AddThread(const ThreadInfo& threadInfo, Thread** _thread)
+status_t Team::AddThread(const ThreadInfo& threadInfo, Thread** _thread)
 {
 	Thread* thread = new(std::nothrow) Thread(this, threadInfo.ThreadID());
 	if (thread == NULL)
@@ -156,16 +152,14 @@ Team::AddThread(const ThreadInfo& threadInfo, Thread** _thread)
 }
 
 
-void
-Team::RemoveThread(Thread* thread)
+void Team::RemoveThread(Thread* thread)
 {
 	fThreads.Remove(thread);
 	_NotifyThreadRemoved(thread);
 }
 
 
-bool
-Team::RemoveThread(thread_id threadID)
+bool Team::RemoveThread(thread_id threadID)
 {
 	Thread* thread = ThreadByID(threadID);
 	if (thread == NULL)
@@ -197,8 +191,7 @@ Team::Threads() const
 }
 
 
-status_t
-Team::AddImage(const ImageInfo& imageInfo, LocatableFile* imageFile,
+status_t Team::AddImage(const ImageInfo& imageInfo, LocatableFile* imageFile,
 	Image** _image)
 {
 	Image* image = new(std::nothrow) Image(this, imageInfo, imageFile);
@@ -224,16 +217,14 @@ Team::AddImage(const ImageInfo& imageInfo, LocatableFile* imageFile,
 }
 
 
-void
-Team::RemoveImage(Image* image)
+void Team::RemoveImage(Image* image)
 {
 	fImages.Remove(image);
 	_NotifyImageRemoved(image);
 }
 
 
-bool
-Team::RemoveImage(image_id imageID)
+bool Team::RemoveImage(image_id imageID)
 {
 	Image* image = ImageByID(imageID);
 	if (image == NULL)
@@ -278,16 +269,14 @@ Team::Images() const
 }
 
 
-void
-Team::ClearImages()
+void Team::ClearImages()
 {
 	while (!fImages.IsEmpty())
 		RemoveImage(fImages.First());
 }
 
 
-bool
-Team::AddStopImageName(const BString& name)
+bool Team::AddStopImageName(const BString& name)
 {
 	if (!fStopImageNames.Add(name))
 		return false;
@@ -299,16 +288,14 @@ Team::AddStopImageName(const BString& name)
 }
 
 
-void
-Team::RemoveStopImageName(const BString& name)
+void Team::RemoveStopImageName(const BString& name)
 {
 	fStopImageNames.Remove(name);
 	NotifyStopImageNameRemoved(name);
 }
 
 
-void
-Team::SetStopOnImageLoad(bool enabled, bool useImageNameList)
+void Team::SetStopOnImageLoad(bool enabled, bool useImageNameList)
 {
 	fStopOnImageLoad = enabled;
 	fStopImageNameListEnabled = useImageNameList;
@@ -323,8 +310,7 @@ Team::StopImageNames() const
 }
 
 
-void
-Team::SetDefaultSignalDisposition(int32 disposition)
+void Team::SetDefaultSignalDisposition(int32 disposition)
 {
 	if (disposition != fDefaultSignalDisposition) {
 		fDefaultSignalDisposition = disposition;
@@ -333,8 +319,7 @@ Team::SetDefaultSignalDisposition(int32 disposition)
 }
 
 
-bool
-Team::SetCustomSignalDisposition(int32 signal, int32 disposition)
+bool Team::SetCustomSignalDisposition(int32 signal, int32 disposition)
 {
 	SignalDispositionMappings::iterator it = fCustomSignalDispositions.find(
 		signal);
@@ -353,8 +338,7 @@ Team::SetCustomSignalDisposition(int32 signal, int32 disposition)
 }
 
 
-void
-Team::RemoveCustomSignalDisposition(int32 signal)
+void Team::RemoveCustomSignalDisposition(int32 signal)
 {
 	SignalDispositionMappings::iterator it = fCustomSignalDispositions.find(
 		signal);
@@ -367,8 +351,7 @@ Team::RemoveCustomSignalDisposition(int32 signal)
 }
 
 
-int32
-Team::SignalDispositionFor(int32 signal) const
+int32 Team::SignalDispositionFor(int32 signal) const
 {
 	SignalDispositionMappings::const_iterator it
 		= fCustomSignalDispositions.find(signal);
@@ -386,15 +369,13 @@ Team::GetSignalDispositionMappings() const
 }
 
 
-void
-Team::ClearSignalDispositionMappings()
+void Team::ClearSignalDispositionMappings()
 {
 	fCustomSignalDispositions.clear();
 }
 
 
-bool
-Team::AddBreakpoint(Breakpoint* breakpoint)
+bool Team::AddBreakpoint(Breakpoint* breakpoint)
 {
 	if (fBreakpoints.BinaryInsert(breakpoint, &Breakpoint::CompareBreakpoints))
 		return true;
@@ -404,8 +385,7 @@ Team::AddBreakpoint(Breakpoint* breakpoint)
 }
 
 
-void
-Team::RemoveBreakpoint(Breakpoint* breakpoint)
+void Team::RemoveBreakpoint(Breakpoint* breakpoint)
 {
 	int32 index = fBreakpoints.BinarySearchIndex(*breakpoint,
 		&Breakpoint::CompareBreakpoints);
@@ -417,8 +397,7 @@ Team::RemoveBreakpoint(Breakpoint* breakpoint)
 }
 
 
-int32
-Team::CountBreakpoints() const
+int32 Team::CountBreakpoints() const
 {
 	return fBreakpoints.CountItems();
 }
@@ -439,8 +418,7 @@ Team::BreakpointAtAddress(target_addr_t address) const
 }
 
 
-void
-Team::GetBreakpointsInAddressRange(TargetAddressRange range,
+void Team::GetBreakpointsInAddressRange(TargetAddressRange range,
 	BObjectList<UserBreakpoint>& breakpoints) const
 {
 	int32 index = fBreakpoints.FindBinaryInsertionIndex(
@@ -460,8 +438,7 @@ Team::GetBreakpointsInAddressRange(TargetAddressRange range,
 }
 
 
-void
-Team::GetBreakpointsForSourceCode(SourceCode* sourceCode,
+void Team::GetBreakpointsForSourceCode(SourceCode* sourceCode,
 	BObjectList<UserBreakpoint>& breakpoints) const
 {
 	if (DisassembledCode* disassembledCode
@@ -491,24 +468,21 @@ Team::GetBreakpointsForSourceCode(SourceCode* sourceCode,
 }
 
 
-void
-Team::AddUserBreakpoint(UserBreakpoint* userBreakpoint)
+void Team::AddUserBreakpoint(UserBreakpoint* userBreakpoint)
 {
 	fUserBreakpoints.Add(userBreakpoint);
 	userBreakpoint->AcquireReference();
 }
 
 
-void
-Team::RemoveUserBreakpoint(UserBreakpoint* userBreakpoint)
+void Team::RemoveUserBreakpoint(UserBreakpoint* userBreakpoint)
 {
 	fUserBreakpoints.Remove(userBreakpoint);
 	userBreakpoint->ReleaseReference();
 }
 
 
-bool
-Team::AddWatchpoint(Watchpoint* watchpoint)
+bool Team::AddWatchpoint(Watchpoint* watchpoint)
 {
 	if (fWatchpoints.BinaryInsert(watchpoint, &Watchpoint::CompareWatchpoints))
 		return true;
@@ -518,8 +492,7 @@ Team::AddWatchpoint(Watchpoint* watchpoint)
 }
 
 
-void
-Team::RemoveWatchpoint(Watchpoint* watchpoint)
+void Team::RemoveWatchpoint(Watchpoint* watchpoint)
 {
 	int32 index = fWatchpoints.BinarySearchIndex(*watchpoint,
 		&Watchpoint::CompareWatchpoints);
@@ -531,8 +504,7 @@ Team::RemoveWatchpoint(Watchpoint* watchpoint)
 }
 
 
-int32
-Team::CountWatchpoints() const
+int32 Team::CountWatchpoints() const
 {
 	return fWatchpoints.CountItems();
 }
@@ -553,8 +525,7 @@ Team::WatchpointAtAddress(target_addr_t address) const
 }
 
 
-void
-Team::GetWatchpointsInAddressRange(TargetAddressRange range,
+void Team::GetWatchpointsInAddressRange(TargetAddressRange range,
 	BObjectList<Watchpoint>& watchpoints) const
 {
 	int32 index = fWatchpoints.FindBinaryInsertionIndex(
@@ -568,8 +539,7 @@ Team::GetWatchpointsInAddressRange(TargetAddressRange range,
 }
 
 
-status_t
-Team::GetStatementAtAddress(target_addr_t address, FunctionInstance*& _function,
+status_t Team::GetStatementAtAddress(target_addr_t address, FunctionInstance*& _function,
 	Statement*& _statement)
 {
 	TRACE_CODE("Team::GetStatementAtAddress(%#" B_PRIx64 ")\n", address);
@@ -623,8 +593,7 @@ Team::GetStatementAtAddress(target_addr_t address, FunctionInstance*& _function,
 }
 
 
-status_t
-Team::GetStatementAtSourceLocation(SourceCode* sourceCode,
+status_t Team::GetStatementAtSourceLocation(SourceCode* sourceCode,
 	const SourceLocation& location, Statement*& _statement)
 {
 	TRACE_CODE("Team::GetStatementAtSourceLocation(%p, (%" B_PRId32 ", %"
@@ -673,24 +642,21 @@ Team::FunctionByID(FunctionID* functionID) const
 }
 
 
-void
-Team::AddListener(Listener* listener)
+void Team::AddListener(Listener* listener)
 {
 	AutoLocker<Team> locker(this);
 	fListeners.Add(listener);
 }
 
 
-void
-Team::RemoveListener(Listener* listener)
+void Team::RemoveListener(Listener* listener)
 {
 	AutoLocker<Team> locker(this);
 	fListeners.Remove(listener);
 }
 
 
-void
-Team::NotifyThreadStateChanged(Thread* thread)
+void Team::NotifyThreadStateChanged(Thread* thread)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -700,8 +666,7 @@ Team::NotifyThreadStateChanged(Thread* thread)
 }
 
 
-void
-Team::NotifyThreadCpuStateChanged(Thread* thread)
+void Team::NotifyThreadCpuStateChanged(Thread* thread)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -711,8 +676,7 @@ Team::NotifyThreadCpuStateChanged(Thread* thread)
 }
 
 
-void
-Team::NotifyThreadStackTraceChanged(Thread* thread)
+void Team::NotifyThreadStackTraceChanged(Thread* thread)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -722,8 +686,7 @@ Team::NotifyThreadStackTraceChanged(Thread* thread)
 }
 
 
-void
-Team::NotifyImageDebugInfoChanged(Image* image)
+void Team::NotifyImageDebugInfoChanged(Image* image)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -733,8 +696,7 @@ Team::NotifyImageDebugInfoChanged(Image* image)
 }
 
 
-void
-Team::NotifyStopOnImageLoadChanged(bool enabled, bool useImageNameList)
+void Team::NotifyStopOnImageLoadChanged(bool enabled, bool useImageNameList)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -745,8 +707,7 @@ Team::NotifyStopOnImageLoadChanged(bool enabled, bool useImageNameList)
 }
 
 
-void
-Team::NotifyStopImageNameAdded(const BString& name)
+void Team::NotifyStopImageNameAdded(const BString& name)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -756,8 +717,7 @@ Team::NotifyStopImageNameAdded(const BString& name)
 }
 
 
-void
-Team::NotifyStopImageNameRemoved(const BString& name)
+void Team::NotifyStopImageNameRemoved(const BString& name)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -768,8 +728,7 @@ Team::NotifyStopImageNameRemoved(const BString& name)
 }
 
 
-void
-Team::NotifyDefaultSignalDispositionChanged(int32 disposition)
+void Team::NotifyDefaultSignalDispositionChanged(int32 disposition)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -781,8 +740,7 @@ Team::NotifyDefaultSignalDispositionChanged(int32 disposition)
 }
 
 
-void
-Team::NotifyCustomSignalDispositionChanged(int32 signal, int32 disposition)
+void Team::NotifyCustomSignalDispositionChanged(int32 signal, int32 disposition)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -794,8 +752,7 @@ Team::NotifyCustomSignalDispositionChanged(int32 signal, int32 disposition)
 }
 
 
-void
-Team::NotifyCustomSignalDispositionRemoved(int32 signal)
+void Team::NotifyCustomSignalDispositionRemoved(int32 signal)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -807,8 +764,7 @@ Team::NotifyCustomSignalDispositionRemoved(int32 signal)
 }
 
 
-void
-Team::NotifyConsoleOutputReceived(int32 fd, const BString& output)
+void Team::NotifyConsoleOutputReceived(int32 fd, const BString& output)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -819,8 +775,7 @@ Team::NotifyConsoleOutputReceived(int32 fd, const BString& output)
 }
 
 
-void
-Team::NotifyUserBreakpointChanged(UserBreakpoint* breakpoint)
+void Team::NotifyUserBreakpointChanged(UserBreakpoint* breakpoint)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -830,8 +785,7 @@ Team::NotifyUserBreakpointChanged(UserBreakpoint* breakpoint)
 }
 
 
-void
-Team::NotifyWatchpointChanged(Watchpoint* watchpoint)
+void Team::NotifyWatchpointChanged(Watchpoint* watchpoint)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -841,8 +795,7 @@ Team::NotifyWatchpointChanged(Watchpoint* watchpoint)
 }
 
 
-void
-Team::NotifyDebugReportChanged(const char* reportPath)
+void Team::NotifyDebugReportChanged(const char* reportPath)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -852,8 +805,7 @@ Team::NotifyDebugReportChanged(const char* reportPath)
 }
 
 
-void
-Team::NotifyCoreFileChanged(const char* targetPath)
+void Team::NotifyCoreFileChanged(const char* targetPath)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -863,8 +815,7 @@ Team::NotifyCoreFileChanged(const char* targetPath)
 }
 
 
-void
-Team::NotifyMemoryChanged(target_addr_t address, target_size_t size)
+void Team::NotifyMemoryChanged(target_addr_t address, target_size_t size)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -874,8 +825,7 @@ Team::NotifyMemoryChanged(target_addr_t address, target_size_t size)
 }
 
 
-void
-Team::_NotifyTeamRenamed()
+void Team::_NotifyTeamRenamed()
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -884,8 +834,7 @@ Team::_NotifyTeamRenamed()
 }
 
 
-void
-Team::_NotifyThreadAdded(Thread* thread)
+void Team::_NotifyThreadAdded(Thread* thread)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -894,8 +843,7 @@ Team::_NotifyThreadAdded(Thread* thread)
 }
 
 
-void
-Team::_NotifyThreadRemoved(Thread* thread)
+void Team::_NotifyThreadRemoved(Thread* thread)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -904,8 +852,7 @@ Team::_NotifyThreadRemoved(Thread* thread)
 }
 
 
-void
-Team::_NotifyImageAdded(Image* image)
+void Team::_NotifyImageAdded(Image* image)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -914,8 +861,7 @@ Team::_NotifyImageAdded(Image* image)
 }
 
 
-void
-Team::_NotifyImageRemoved(Image* image)
+void Team::_NotifyImageRemoved(Image* image)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -1101,156 +1047,131 @@ Team::Listener::~Listener()
 }
 
 
-void
-Team::Listener::TeamRenamed(const Team::Event& event)
+void Team::Listener::TeamRenamed(const Team::Event& event)
 {
 }
 
 
-void
-Team::Listener::ThreadAdded(const Team::ThreadEvent& event)
+void Team::Listener::ThreadAdded(const Team::ThreadEvent& event)
 {
 }
 
 
-void
-Team::Listener::ThreadRemoved(const Team::ThreadEvent& event)
+void Team::Listener::ThreadRemoved(const Team::ThreadEvent& event)
 {
 }
 
 
-void
-Team::Listener::ImageAdded(const Team::ImageEvent& event)
+void Team::Listener::ImageAdded(const Team::ImageEvent& event)
 {
 }
 
 
-void
-Team::Listener::ImageRemoved(const Team::ImageEvent& event)
+void Team::Listener::ImageRemoved(const Team::ImageEvent& event)
 {
 }
 
 
-void
-Team::Listener::ThreadStateChanged(const Team::ThreadEvent& event)
+void Team::Listener::ThreadStateChanged(const Team::ThreadEvent& event)
 {
 }
 
 
-void
-Team::Listener::ThreadCpuStateChanged(const Team::ThreadEvent& event)
+void Team::Listener::ThreadCpuStateChanged(const Team::ThreadEvent& event)
 {
 }
 
 
-void
-Team::Listener::ThreadStackTraceChanged(const Team::ThreadEvent& event)
+void Team::Listener::ThreadStackTraceChanged(const Team::ThreadEvent& event)
 {
 }
 
 
-void
-Team::Listener::ImageDebugInfoChanged(const Team::ImageEvent& event)
+void Team::Listener::ImageDebugInfoChanged(const Team::ImageEvent& event)
 {
 }
 
 
-void
-Team::Listener::StopOnImageLoadSettingsChanged(
+void Team::Listener::StopOnImageLoadSettingsChanged(
 	const Team::ImageLoadEvent& event)
 {
 }
 
 
-void
-Team::Listener::StopOnImageLoadNameAdded(const Team::ImageLoadNameEvent& event)
+void Team::Listener::StopOnImageLoadNameAdded(const Team::ImageLoadNameEvent& event)
 {
 }
 
 
-void
-Team::Listener::StopOnImageLoadNameRemoved(
+void Team::Listener::StopOnImageLoadNameRemoved(
 	const Team::ImageLoadNameEvent& event)
 {
 }
 
 
-void
-Team::Listener::DefaultSignalDispositionChanged(
+void Team::Listener::DefaultSignalDispositionChanged(
 	const Team::DefaultSignalDispositionEvent& event)
 {
 }
 
 
-void
-Team::Listener::CustomSignalDispositionChanged(
+void Team::Listener::CustomSignalDispositionChanged(
 	const Team::CustomSignalDispositionEvent& event)
 {
 }
 
 
-void
-Team::Listener::CustomSignalDispositionRemoved(
+void Team::Listener::CustomSignalDispositionRemoved(
 	const Team::CustomSignalDispositionEvent& event)
 {
 }
 
 
-void
-Team::Listener::ConsoleOutputReceived(const Team::ConsoleOutputEvent& event)
+void Team::Listener::ConsoleOutputReceived(const Team::ConsoleOutputEvent& event)
 {
 }
 
 
-void
-Team::Listener::BreakpointAdded(const Team::BreakpointEvent& event)
+void Team::Listener::BreakpointAdded(const Team::BreakpointEvent& event)
 {
 }
 
 
-void
-Team::Listener::BreakpointRemoved(const Team::BreakpointEvent& event)
+void Team::Listener::BreakpointRemoved(const Team::BreakpointEvent& event)
 {
 }
 
 
-void
-Team::Listener::UserBreakpointChanged(const Team::UserBreakpointEvent& event)
+void Team::Listener::UserBreakpointChanged(const Team::UserBreakpointEvent& event)
 {
 }
 
 
-void
-Team::Listener::WatchpointAdded(const Team::WatchpointEvent& event)
+void Team::Listener::WatchpointAdded(const Team::WatchpointEvent& event)
 {
 }
 
 
-void
-Team::Listener::WatchpointRemoved(const Team::WatchpointEvent& event)
+void Team::Listener::WatchpointRemoved(const Team::WatchpointEvent& event)
 {
 }
 
 
-void
-Team::Listener::WatchpointChanged(const Team::WatchpointEvent& event)
+void Team::Listener::WatchpointChanged(const Team::WatchpointEvent& event)
 {
 }
 
 
-void
-Team::Listener::DebugReportChanged(const Team::DebugReportEvent& event)
+void Team::Listener::DebugReportChanged(const Team::DebugReportEvent& event)
 {
 }
 
 
-void
-Team::Listener::CoreFileChanged(const Team::CoreFileChangedEvent& event)
+void Team::Listener::CoreFileChanged(const Team::CoreFileChangedEvent& event)
 {
 }
 
 
-void
-Team::Listener::MemoryChanged(const Team::MemoryChangedEvent& event)
+void Team::Listener::MemoryChanged(const Team::MemoryChangedEvent& event)
 {
 }
