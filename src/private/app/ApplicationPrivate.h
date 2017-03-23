@@ -15,10 +15,8 @@ class BApplication::Private {
     public:
         static inline BPrivate::PortLink *ServerLink()
             { return  __be_app->fServerLink; }
-
         static inline BPrivate::ServerMemoryAllocator* ServerAllocator()
             { return  __be_app->fServerAllocator; }
-
         static inline server_read_only_memory* ServerReadOnlyMemory()
             { return (server_read_only_memory*)be_app->fServerReadOnlyMemory; }
 };

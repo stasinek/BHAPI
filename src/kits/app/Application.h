@@ -33,6 +33,7 @@
 #include "../app/MessageRunner.h"
 #include "../app/Looper.h"
 #include "../app/Cursor.h"
+#include "../app/Roster.h"
 #include "../add-ons/font/FontEngine.h"
 //-----------------------------------------------------------------------------
 #include <kernel/OS.h>
@@ -55,8 +56,7 @@ class BMessageRunner;
 class BResources;
 class BServer;
 class BWindow;
-
-struct app_info;
+//struct app_info;
 
 namespace BPrivate {
     class PortLink;
@@ -67,39 +67,57 @@ class BHAPI_IMPEXP BApplication : public BLooper {
 //-----------------------------------------------------------------------------
 public:
 //-----------------------------------------------------------------------------
-    BApplication(const char *signature, bool tryInterface = true);
+    BApplication(const char* signature, status_t* error);
+    BApplication(const char *signature, bool try_Interface = true);
     virtual ~BApplication();
 
     // Archiving
     BApplication(void);
     BApplication(const BMessage *from);
-    virtual status_t Archive(BMessage *into, bool deep = true) const;
-    static BArchivable *Instantiate(const BMessage *from);
+    virtual status_t        Archive(BMessage *into, bool deep = true) const;
+    static BArchivable*     Instantiate(const BMessage *from);
 
-    const char		*Signature() const;
+    const char*             Signature() const;
 
-    virtual void		*Run();
-    virtual void		Quit();
-    virtual bool		QuitRequested();
+    virtual void*           Run();
+    virtual void            Quit();
+    virtual bool            QuitRequested();
 
     // Empty functions BEGIN --- just for derivative class
-    virtual void		ReadyToRun();
-    virtual void		Pulse();
+    virtual void            ReadyToRun();
+    virtual void            Pulse();
     // Empty functions END
 
-    void			SetPulseRate(bigtime_t rate);
-    bigtime_t		PulseRate() const;
+    void                    SetPulseRate(bigtime_t rate);
+    bigtime_t               PulseRate() const;
 
-    virtual void		MessageReceived(BMessage *msg);
-    virtual void		DispatchMessage(BMessage *msg, BHandler *target);
+    virtual void            MessageReceived(BMessage *msg);
+    virtual void            DispatchMessage(BMessage *msg, BHandler *target);
 
-    void			SetCursor(const void *cursor);
-    void			SetCursor(const BCursor *cursor, bool sync = true);
-    void			HideCursor();
-    void			ShowCursor();
-    void			ObscureCursor();
-    bool			IsCursorHidden() const;
-//-----------------------------------------------------------------------------
+    void                    SetCursor(const void *cursor);
+    void                    SetCursor(const BCursor *cursor, bool sync = true);
+    void                    HideCursor();
+    void                    ShowCursor();
+    void                    ObscureCursor();
+    bool                    IsCursorHidden() const;
+    int32                   CountWindows() const;
+    BWindow*                WindowAt(int32 index) const;
+    int32                   CountLoopers() const;
+    BLooper*                LooperAt(int32 index) const;
+    bool                    IsLaunching() const;
+    status_t                GetAppInfo(bhapi::app_info* info) const;
+    static	BResources*		AppResources();
+    // Register a BLooper to be quit before the BApplication
+    // object is destroyed.
+    status_t                RegisterLooper(BLooper* looper);
+    status_t                UnregisterLooper(BLooper* looper);
+    // More scripting
+    virtual status_t		GetSupportedSuites(BMessage* data);
+    // Private or reserved
+    virtual status_t		Perform(perform_code d, void* arg);
+    class Private;
+
+ //-----------------------------------------------------------------------------
 private:
  //-----------------------------------------------------------------------------
     friend class Private;
@@ -137,6 +155,58 @@ private:
     BCursor fCursor;
     bool fCursorHidden;
     bool fCursorObscure;
+
+                                BApplication(const char* signature,
+                                    const char* looperName, port_id port,
+                                    bool initGUI, status_t* error);
+                                BApplication(uint32 signature);
+                                BApplication(const BApplication&);
+            BApplication&		operator=(const BApplication&);
+
+    virtual	void				_ReservedApplication1();
+    virtual	void				_ReservedApplication2();
+    virtual	void				_ReservedApplication3();
+    virtual	void				_ReservedApplication4();
+    virtual	void				_ReservedApplication5();
+    virtual	void				_ReservedApplication6();
+    virtual	void				_ReservedApplication7();
+    virtual	void				_ReservedApplication8();
+
+    virtual	bool				ScriptReceived(BMessage* msg, int32 index,
+                                    BMessage* specifier, int32 form,
+                                    const char* property);
+            void				_InitData(const char* signature, bool initGUI,
+                                    status_t* error);
+            port_id				_GetPort(const char* signature);
+            void				BeginRectTracking(BRect r, bool trackWhole);
+            void				EndRectTracking();
+            status_t			_SetupServerAllocator();
+            status_t			_InitGUIContext();
+            status_t			_ConnectToServer();
+            void				_ReconnectToServer();
+            bool				_QuitAllWindows(bool force);
+            bool				_WindowQuitLoop(bool quitFilePanels,
+                                    bool force);
+            void				_ArgvReceived(BMessage* message);
+
+            uint32				InitialWorkspace();
+            int32				_CountWindows(bool includeMenus) const;
+            BWindow*			_WindowAt(uint32 index,
+                                    bool includeMenus) const;
+
+    static	void				_InitAppResources();
+
+private:
+    static	BResources*			sAppResources;
+            const char*			fAppName;
+            ::BPrivate::PortLink*	fServerLink;
+            ::BPrivate::ServerMemoryAllocator* fServerAllocator;
+            void*				fCursorData;
+            uint32				fInitialWorkspace;
+            status_t			fInitError;
+            void*				fServerReadOnlyMemory;
+            uint32				_reserved[12];
+            bool				fReadyToRunCalled;
 //-----------------------------------------------------------------------------
 };
 //-----------------------------------------------------------------------------

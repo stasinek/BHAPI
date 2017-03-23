@@ -5,8 +5,6 @@
 #ifndef BHAPI_ROSTER_H
 #define BHAPI_ROSTER_H
 
-
-
 #ifdef __cplusplus
 namespace bhapi {
 #endif

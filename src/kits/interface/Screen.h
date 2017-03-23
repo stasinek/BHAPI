@@ -31,26 +31,101 @@
 #define BHAPI_SCREEN_H
 
 #ifdef __cplusplus /* Just for C++ */
+#ifndef BWINDOW_DEF
+#define BWINDOW_DEF
 class BWindow;
+#endif
 #include "../interface/Rect.h"
 #include "../interface/GraphicsDefs.h"
 #include <kernel/OS.h>
+namespace BPrivate {
+    class BPrivateScreen;
+}
 class BHAPI_IMPEXP BScreen {
 public:
-    BScreen(bhapi::screen_id id = B_MAIN_SCREEN_ID);
-    ~BScreen();
+            BScreen(__be_uint32 id);
+            BScreen(bhapi::screen_id id = B_MAIN_SCREEN_ID);
+            BScreen(BWindow* window);
+           ~BScreen();
 
-    bool		IsValid() const;
-    status_t	SetToNext();
+    bool	IsValid();
+    status_t			SetToNext();
 
-    BRect		Frame() const;
-     __be_uint32		ID() const;
+    bhapi::color_space			ColorSpace();
+            BRect				Frame();
+            bhapi::screen_id			ID();
+
+            status_t			WaitForRetrace();
+            status_t			WaitForRetrace(bigtime_t timeout);
+
+            uint8				IndexForColor(bhapi::rgb_color color);
+            uint8				IndexForColor(uint8 red, uint8 green,
+                                    uint8 blue, uint8 alpha = 255);
+            bhapi::rgb_color			ColorForIndex(uint8 index);
+            uint8				InvertIndex(uint8 index);
+
+            const bhapi::color_map*	ColorMap();
+
+            status_t			GetBitmap(BBitmap** _bitmap,
+                                    bool drawCursor = true,
+                                    BRect* frame = NULL);
+            status_t			ReadBitmap(BBitmap* bitmap,
+                                    bool drawCursor = true,
+                                    BRect* frame = NULL);
+
+            bhapi::rgb_color			DesktopColor();
+            bhapi::rgb_color			DesktopColor(uint32 workspace);
+            void				SetDesktopColor(bhapi::rgb_color color,
+                                    bool stick = true);
+            void				SetDesktopColor(bhapi::rgb_color color,
+                                    uint32 workspace, bool stick = true);
+
+            status_t			ProposeMode(bhapi::display_mode* target,
+                                    const bhapi::display_mode* low,
+                                    const bhapi::display_mode* high);
+            status_t			GetModeList(bhapi::display_mode** _modeList,
+                                    uint32* _count);
+            status_t			GetMode(bhapi::display_mode* mode);
+            status_t			GetMode(uint32 workspace,
+                                    bhapi::display_mode* mode);
+            status_t			SetMode(bhapi::display_mode* mode,
+                                    bool makeDefault = false);
+            status_t			SetMode(uint32 workspace,
+                                    bhapi::display_mode* mode,
+                                    bool makeDefault = false);
+            status_t			GetDeviceInfo(accelerant_device_info* info);
+            status_t			GetMonitorInfo(bhapi::monitor_info* info);
+            status_t			GetPixelClockLimits(bhapi::display_mode* mode,
+                                    uint32* _low, uint32* _high);
+            status_t			GetTimingConstraints(
+                                    display_timing_constraints*
+                                        timingConstraints);
+            status_t			SetDPMS(uint32 state);
+            uint32				DPMSState();
+            uint32				DPMSCapabilites();
 
 private:
-     __be_uint32 fID;
+    // Forbidden and deprecated methods
+                                BScreen(const BScreen& other);
+            BScreen&			operator=(const BScreen& other);
+
+            BPrivate::BPrivateScreen* private_screen();
+            status_t			ProposeDisplayMode(display_mode* target,
+                                    const bhapi::display_mode* low,
+                                    const bhapi::display_mode* high);
+            void*				BaseAddress();
+            uint32				BytesPerRow();
+
+private:
+            BPrivate::BPrivateScreen* fScreen;
+            __be_uint32 fID;
 };
 
+inline uint8 BScreen::IndexForColor(bhapi::rgb_color color)
+{
+    return IndexForColor(color.red, color.green, color.blue, color.alpha);
+}
+#define BWINDOW_DEF
 #endif /* __cplusplus */
-
 #endif /* BHAPI_SCREEN_H */
 

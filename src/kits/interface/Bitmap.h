@@ -35,6 +35,36 @@
 #include "../interface/View.h"
 
 #ifdef __cplusplus /* Just for C++ */
+class BView;
+class BWindow;
+namespace BPrivate {
+    class BPrivateScreen;
+}
+
+enum {
+    B_BITMAP_CLEAR_TO_WHITE				= 0x00000001,
+    B_BITMAP_ACCEPTS_VIEWS				= 0x00000002,
+    B_BITMAP_IS_AREA					= 0x00000004,
+    B_BITMAP_IS_LOCKED					= 0x00000008 | B_BITMAP_IS_AREA,
+    B_BITMAP_IS_CONTIGUOUS				= 0x00000010 | B_BITMAP_IS_LOCKED,
+    B_BITMAP_IS_OFFSCREEN				= 0x00000020,
+        // Offscreen but non-overlay bitmaps are not supported on Haiku,
+        // but appearantly never were on BeOS either! The accelerant API
+        // would need to be extended to so that the app_server can ask
+        // the graphics driver to reserve memory for a bitmap and for this
+        // to make any sense, an accelerated blit from this memory into
+        // the framebuffer needs to be added to the API as well.
+    B_BITMAP_WILL_OVERLAY				= 0x00000040 | B_BITMAP_IS_OFFSCREEN,
+    B_BITMAP_RESERVE_OVERLAY_CHANNEL	= 0x00000080,
+
+    // Haiku extensions:
+    B_BITMAP_NO_SERVER_LINK				= 0x00000100,
+        // Cheap to create, object will manage memory itself,
+        // no BApplication needs to run, but one can't draw such
+        // a BBitmap.
+};
+
+#define B_ANY_BYTES_PER_ROW	-1
 class BGraphicsDrawable;
 class BPixmap;
 class BHAPI_IMPEXP BBitmap : public BArchivable {
@@ -57,6 +87,8 @@ public:
     BView		*FindView(BPoint where) const;
     bool		Lock();
     void		Unlock();
+    bool				IsLocked() const;
+    class Private;
 
 private:
     friend class BView;
