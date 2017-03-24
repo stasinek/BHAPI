@@ -192,10 +192,10 @@ void BCountView::Draw(BRect updateRect)
 {
 	BRect bounds(Bounds());
 
-	__be_control_look->DrawBorder(this, bounds, updateRect, ViewColor(),
+	be_control_look->DrawBorder(this, bounds, updateRect, ViewColor(),
 		B_PLAIN_BORDER, 0,
 		BControlLook::B_BOTTOM_BORDER | BControlLook::B_LEFT_BORDER);
-	__be_control_look->DrawMenuBarBackground(this, bounds, updateRect,
+	be_control_look->DrawMenuBarBackground(this, bounds, updateRect,
 		ViewColor());
 
 	BString itemString;

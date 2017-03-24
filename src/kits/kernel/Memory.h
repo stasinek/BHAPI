@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -26,22 +26,17 @@
  * File: Memory.h
  *
  * --------------------------------------------------------------------------*/
-
 #ifndef BHAPI_PRIVATE_MEMORY_H
 #define BHAPI_PRIVATE_MEMORY_H
-
 #include <Haiku.h>
-
 #ifdef __cplusplus /* Just for C++ */
-
 class BHAPI_LOCAL BMemory
 {
 public:
-	static void	*Malloc(size_t size, void (*destroy_func)(void*) = NULL);
-	static void	Free(void *data);
+    static void	*Malloc(size_t size, void (*destroy_func)(void*) = NULL);
+    static void	Free(void *data);
 };
-
+#define BMEMORY_DEF
 #endif /* __cplusplus */
-
 #endif /* BHAPI_PRIVATE_MEMORY_H */
 

@@ -336,8 +336,8 @@ EXGraphicsContext::SetPattern(bhapi::pattern pattern)
 			// convert bhapi::pattern to XBitmapFile format --- convert left to right.
 			char pat[8];
 			bzero(pat, sizeof(pat));
-			for(__be_uint8 i = 0; i < 8; i++)
-				for(__be_uint8 j = 0; j < 8; j++)
+			for(uint8 i = 0; i < 8; i++)
+				for(uint8 j = 0; j < 8; j++)
 					pat[i] |= ((pattern.data[i] >> j) & 0x01) << (7 - j);
 
 			Pixmap stipple = XCreateBitmapFromData(fEngine->xDisplay, fEngine->xRootWindow, pat, 8, 8);
@@ -357,7 +357,7 @@ EXGraphicsContext::SetPattern(bhapi::pattern pattern)
 
 
 status_t 
-EXGraphicsContext::SetPenSize(__be_uint32 penSize)
+EXGraphicsContext::SetPenSize(uint32 penSize)
 {
 	if(fEngine == NULL) return B_ERROR;
 	if(PenSize() == penSize) return B_OK;
@@ -379,7 +379,7 @@ EXGraphicsContext::SetPenSize(__be_uint32 penSize)
 
 
 static status_t bhapi::stroke_point(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				    __be_int32 x,  __be_int32 y)
+				    int32 x,  int32 y)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
@@ -419,7 +419,7 @@ static status_t bhapi::stroke_point(Drawable xDrawable, EXGraphicsEngine *engine
 
 
 static status_t bhapi::stroke_points(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				    const  __be_int32 *pts,  __be_int32 count)
+				    const  int32 *pts,  int32 count)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || count <= 0) return B_ERROR;
 
@@ -428,7 +428,7 @@ static status_t bhapi::stroke_points(Drawable xDrawable, EXGraphicsEngine *engin
 		XPoint *xPts = new XPoint[count];
 		if(!xPts) return B_ERROR;
 
-		for(__be_int32 i = 0; i < count; i++) {xPts[i].x = *pts++; xPts[i].y = *pts++;}
+		for(int32 i = 0; i < count; i++) {xPts[i].x = *pts++; xPts[i].y = *pts++;}
 
 		dc->PrepareXColor();
 		XDrawPoints(engine->xDisplay, xDrawable, dc->xGC, xPts, count, CoordModeOrigin);
@@ -441,7 +441,7 @@ static status_t bhapi::stroke_points(Drawable xDrawable, EXGraphicsEngine *engin
 		if(!rs) return B_ERROR;
 
 		int pos = (int)((dc->PenSize() - 1) / 2);
-		for(__be_int32 i = 0; i < count; i++)
+		for(int32 i = 0; i < count; i++)
 		{
 			rs[i].x = *pts++; rs[i].y = *pts++;
 			rs[i].x -= pos; rs[i].y -= pos;
@@ -458,7 +458,7 @@ static status_t bhapi::stroke_points(Drawable xDrawable, EXGraphicsEngine *engin
 		XSegment *xSegs = new XSegment[count];
 		if(!xSegs) return B_ERROR;
 
-		for(__be_int32 i = 0; i < count; i++) {xSegs[i].x1 = xSegs[i].x2 = *pts++; xSegs[i].y1 = xSegs[i].y2 = *pts++;}
+		for(int32 i = 0; i < count; i++) {xSegs[i].x1 = xSegs[i].x2 = *pts++; xSegs[i].y1 = xSegs[i].y2 = *pts++;}
 
 		dc->PrepareXColor();
 
@@ -487,20 +487,20 @@ static status_t bhapi::stroke_points(Drawable xDrawable, EXGraphicsEngine *engin
 
 
 static status_t bhapi::stroke_points_colors(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-					   const BList *ptsArrayLists,  __be_int32 arrayCount,
+					   const BList *ptsArrayLists,  int32 arrayCount,
 					   const bhapi::rgb_color *high_colors)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL || ptsArrayLists == NULL || arrayCount <= 0) return B_ERROR;
 
 	bhapi::rgb_color oldColor = dc->HighColor();
 
-	for(__be_int32 k = 0; k < arrayCount; k++, ptsArrayLists++)
+	for(int32 k = 0; k < arrayCount; k++, ptsArrayLists++)
 	{
 		if(ptsArrayLists == NULL) break;
 
 		bhapi::rgb_color color = (high_colors == NULL ? oldColor : *high_colors++);
 
-		__be_int32 count = ptsArrayLists->CountItems();
+		int32 count = ptsArrayLists->CountItems();
 		if(count <= 0) continue;
 
 		if(dc->SetHighColor(color) != B_OK) continue;
@@ -510,10 +510,10 @@ static status_t bhapi::stroke_points_colors(Drawable xDrawable, EXGraphicsEngine
 			XPoint *xPts = new XPoint[count];
 			if(!xPts) continue;
 
-			__be_int32 _count_ = 0;
-			for(__be_int32 i = 0; i < count; i++)
+			int32 _count_ = 0;
+			for(int32 i = 0; i < count; i++)
 			{
-				const  __be_int32 *pt = (const  __be_int32*)ptsArrayLists->ItemAt(i);
+				const  int32 *pt = (const  int32*)ptsArrayLists->ItemAt(i);
 				if(!pt) continue;
 
 				xPts[_count_].x = *pt++; xPts[_count_].y = *pt++;
@@ -534,10 +534,10 @@ static status_t bhapi::stroke_points_colors(Drawable xDrawable, EXGraphicsEngine
 			if(!rs) continue;
 
 			int pos = (int)((dc->PenSize() - 1) / 2);
-			__be_int32 _count_ = 0;
-			for(__be_int32 i = 0; i < count; i++)
+			int32 _count_ = 0;
+			for(int32 i = 0; i < count; i++)
 			{
-				const  __be_int32 *pt = (const  __be_int32*)ptsArrayLists->ItemAt(i);
+				const  int32 *pt = (const  int32*)ptsArrayLists->ItemAt(i);
 				if(!pt) continue;
 
 				rs[_count_].x = *pt++; rs[_count_].y = *pt++;
@@ -559,10 +559,10 @@ static status_t bhapi::stroke_points_colors(Drawable xDrawable, EXGraphicsEngine
 			XSegment *xSegs = new XSegment[count];
 			if(!xSegs) continue;
 
-			__be_int32 _count_ = 0;
-			for(__be_int32 i = 0; i < count; i++)
+			int32 _count_ = 0;
+			for(int32 i = 0; i < count; i++)
 			{
-				const  __be_int32 *pt = (const  __be_int32*)ptsArrayLists->ItemAt(i);
+				const  int32 *pt = (const  int32*)ptsArrayLists->ItemAt(i);
 				if(!pt) continue;
 
 				xSegs[_count_].x1 = xSegs[_count_].x2 = *pt++; xSegs[_count_].y1 = xSegs[_count_].y2 = *pt++;
@@ -602,7 +602,7 @@ static status_t bhapi::stroke_points_colors(Drawable xDrawable, EXGraphicsEngine
 
 
 static status_t bhapi::stroke_points_alphas(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-					  const  __be_int32 *pts, const  __be_uint8 *alpha,  __be_int32 count)
+					  const  int32 *pts, const  uint8 *alpha,  int32 count)
 {
 #ifdef HAVE_XRENDER
 	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || alpha == NULL || count <= 0) return B_ERROR;
@@ -623,27 +623,27 @@ static status_t bhapi::stroke_points_alphas(Drawable xDrawable, EXGraphicsEngine
 	xrcolor.green = (unsigned short)color.green * 257;
 	xrcolor.blue = (unsigned short)color.blue * 257;
 
-	for(__be_int32 i = 0; i < count; i++)
+	for(int32 i = 0; i < count; i++)
 	{
 		xrcolor.alpha = (unsigned short)(*alpha++) * 257;
 		if(dc->PenSize() <= 1)
 		{
-			__be_int32 x = *pts++;
-			__be_int32 y = *pts++;
+			int32 x = *pts++;
+			int32 y = *pts++;
 			XRenderFillRectangle(engine->xDisplay, PictOpOver, xPict, &xrcolor, x, y, 1, 1);
 		}
 		else if(dc->IsSquarePointStyle())
 		{
-			__be_int32 x = *pts++;
-			__be_int32 y = *pts++;
+			int32 x = *pts++;
+			int32 y = *pts++;
 			XRenderFillRectangle(engine->xDisplay, PictOpOver, xPict, &xrcolor,
 					     x - (int)((dc->PenSize() - 1) / 2), y - (int)((dc->PenSize() - 1) / 2),
 					     dc->PenSize(), dc->PenSize());
 		}
 		else
 		{
-			__be_int32 x = *pts++;
-			__be_int32 y = *pts++;
+			int32 x = *pts++;
+			int32 y = *pts++;
 			int pos = (int)((dc->PenSize() - 1) / 2);
 
 			Pixmap srcPixmap = XCreatePixmap(engine->xDisplay, engine->xRootWindow,
@@ -717,7 +717,7 @@ static status_t bhapi::stroke_points_alphas(Drawable xDrawable, EXGraphicsEngine
 
 
 static status_t bhapi::stroke_line(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				   __be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1)
+				   int32 x0,  int32 y0,  int32 x1,  int32 y1)
 {
 	if(x0 == x1 && y0 == y1) return bhapi::stroke_point(xDrawable, engine, dc, x0, y0);
 
@@ -731,12 +731,12 @@ static status_t bhapi::stroke_line(Drawable xDrawable, EXGraphicsEngine *engine,
 
 
 static status_t bhapi::stroke_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				   __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+				   int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	if(w == 0 && h == 0)
 		return bhapi::stroke_point(xDrawable, engine, dc, x, y);
 	else if(w == 0 || h == 0)
-		return bhapi::stroke_line(xDrawable, engine, dc, x, y, x + (__be_int32)w, y + (__be_int32)h);
+		return bhapi::stroke_line(xDrawable, engine, dc, x, y, x + (int32)w, y + (int32)h);
 
 	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
@@ -748,7 +748,7 @@ static status_t bhapi::stroke_rect(Drawable xDrawable, EXGraphicsEngine *engine,
 
 
 static status_t bhapi::stroke_rects(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				   const  __be_int32 *rects,  __be_int32 count)
+				   const  int32 *rects,  int32 count)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL || rects == NULL || count <= 0) return B_ERROR;
 
@@ -761,12 +761,12 @@ static status_t bhapi::stroke_rects(Drawable xDrawable, EXGraphicsEngine *engine
 		return B_ERROR;
 	}
 
-	__be_int32 rsCount = 0;
-	__be_int32 segsCount = 0;
+	int32 rsCount = 0;
+	int32 segsCount = 0;
 
-	for(__be_int32 i = 0; i < count; i++)
+	for(int32 i = 0; i < count; i++)
 	{
-		__be_int32 x = *rects++;  __be_int32 y = *rects++;  __be_uint32 w = (__be_uint32)(*rects++);  __be_uint32 h = (__be_uint32)(*rects++);
+		int32 x = *rects++;  int32 y = *rects++;  uint32 w = (uint32)(*rects++);  uint32 h = (uint32)(*rects++);
 		if(w == 0 || h == 0)
 		{
 			segs[segsCount].x1 = x; segs[segsCount].y1 = y;
@@ -796,7 +796,7 @@ static status_t bhapi::stroke_rects(Drawable xDrawable, EXGraphicsEngine *engine
 
 
 static status_t b_fill_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+				int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
@@ -808,16 +808,16 @@ static status_t b_fill_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGrap
 
 
 static status_t b_fill_rects(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				 const  __be_int32 *rects,  __be_int32 count)
+				 const  int32 *rects,  int32 count)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL || rects == NULL || count <= 0) return B_ERROR;
 
 	XRectangle *rs = new XRectangle[count];
 	if(!rs) return B_ERROR;
 
-	for(__be_int32 i = 0; i < count; i++)
+	for(int32 i = 0; i < count; i++)
 	{
-		__be_int32 x = *rects++;  __be_int32 y = *rects++;  __be_uint32 w = (__be_uint32)(*rects++);  __be_uint32 h = (__be_uint32)(*rects++);
+		int32 x = *rects++;  int32 y = *rects++;  uint32 w = (uint32)(*rects++);  uint32 h = (uint32)(*rects++);
 		rs[i].x = x; rs[i].y = y;
 		rs[i].width = w + 1; rs[i].height = h + 1;
 	}
@@ -840,7 +840,7 @@ static status_t b_fill_region(Drawable xDrawable, EXGraphicsEngine *engine, EXGr
 	if(aRegion.CountRects() == 1)
 	{
 		BRect r = aRegion.Frame().FloorSelf();
-		return b_fill_rect(xDrawable, engine, dc, (__be_int32)r.left, (__be_int32)r.top, (__be_uint32)r.Width(), (__be_uint32)r.Height());
+		return b_fill_rect(xDrawable, engine, dc, (int32)r.left, (int32)r.top, (uint32)r.Width(), (uint32)r.Height());
 	}
 	else if(aRegion.CountRects() <= 0) return B_ERROR;
 
@@ -850,7 +850,7 @@ static status_t b_fill_region(Drawable xDrawable, EXGraphicsEngine *engine, EXGr
 	Region xRegion = XCreateRegion();
 	if(xRegion == NULL) return B_ERROR;
 
-	for(__be_int32 i = 0; i < aRegion.CountRects(); i++)
+	for(int32 i = 0; i < aRegion.CountRects(); i++)
 	{
 		BRect r = aRegion.RectAt(i).FloorSelf();
 
@@ -875,12 +875,12 @@ static status_t b_fill_region(Drawable xDrawable, EXGraphicsEngine *engine, EXGr
 
 
 static status_t bhapi::stroke_arc(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				  __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float start_angle, float end_angle)
+				  int32 x,  int32 y,  uint32 w,  uint32 h, float start_angle, float end_angle)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
 	if(w == 0 && h == 0) return bhapi::stroke_point(xDrawable, engine, dc, x, y);
-	else if(w == 0 || h == 0) return bhapi::stroke_line(xDrawable, engine, dc, x, y, x + (__be_int32)w, y + (__be_int32)h);
+	else if(w == 0 || h == 0) return bhapi::stroke_line(xDrawable, engine, dc, x, y, x + (int32)w, y + (int32)h);
 
 	if(end_angle - start_angle >= 360 || end_angle - start_angle <= -360)
 	{
@@ -904,7 +904,7 @@ static status_t bhapi::stroke_arc(Drawable xDrawable, EXGraphicsEngine *engine, 
 
 
 static status_t b_fill_arc(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-			        __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float start_angle, float end_angle)
+			        int32 x,  int32 y,  uint32 w,  uint32 h, float start_angle, float end_angle)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
@@ -932,7 +932,7 @@ static status_t b_fill_arc(Drawable xDrawable, EXGraphicsEngine *engine, EXGraph
 
 
 static status_t bhapi::stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-					__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
+					int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
@@ -945,7 +945,7 @@ static status_t bhapi::stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *e
 	if(w == 0 && h == 0)
 		return bhapi::stroke_point(xDrawable, engine, dc, x, y);
 	else if(w == 0 || h == 0)
-		return bhapi::stroke_line(xDrawable, engine, dc, x, y, x + (__be_int32)w, y + (__be_int32)h);
+		return bhapi::stroke_line(xDrawable, engine, dc, x, y, x + (int32)w, y + (int32)h);
 
 	XArc xarcs[4];
 	XSegment xsegments[4];
@@ -957,17 +957,17 @@ static status_t bhapi::stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *e
 		xarcs[0].width = w; xarcs[0].height = 2 * yRadius;
 		xarcs[0].angle1 = 0; xarcs[0].angle2 = 180 * 64;
 
-		xarcs[1].x = x; xarcs[1].y = y + (__be_int32)(h - 2 * yRadius);
+		xarcs[1].x = x; xarcs[1].y = y + (int32)(h - 2 * yRadius);
 		xarcs[1].width = w; xarcs[1].height = 2 * yRadius;
 		xarcs[1].angle1 = 180 * 64; xarcs[1].angle2 = 180 * 64;
 
 		nxarcs = 2;
 
-		xsegments[0].x1 = x; xsegments[0].y1 = y + (__be_int32)yRadius + 1;
-		xsegments[0].x2 = x; xsegments[0].y2 = y + (__be_int32)(h - yRadius) - 1;
+		xsegments[0].x1 = x; xsegments[0].y1 = y + (int32)yRadius + 1;
+		xsegments[0].x2 = x; xsegments[0].y2 = y + (int32)(h - yRadius) - 1;
 
-		xsegments[1].x1 = x + (__be_int32)w; xsegments[1].y1 = y + (__be_int32)yRadius + 1;
-		xsegments[1].x2 = x + (__be_int32)w; xsegments[1].y2 = y + (__be_int32)(h - yRadius) - 1;
+		xsegments[1].x1 = x + (int32)w; xsegments[1].y1 = y + (int32)yRadius + 1;
+		xsegments[1].x2 = x + (int32)w; xsegments[1].y2 = y + (int32)(h - yRadius) - 1;
 
 		nxsegments = 2;
 	}
@@ -977,17 +977,17 @@ static status_t bhapi::stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *e
 		xarcs[0].width = 2 * xRadius; xarcs[0].height = h;
 		xarcs[0].angle1 = 90 * 64; xarcs[0].angle2 = 180 * 64;
 
-		xarcs[1].x = x + (__be_int32)(w - 2 * xRadius); xarcs[1].y = y;
+		xarcs[1].x = x + (int32)(w - 2 * xRadius); xarcs[1].y = y;
 		xarcs[1].width = 2 * xRadius; xarcs[1].height = h;
 		xarcs[1].angle1 = -90 * 64; xarcs[1].angle2 = 180 * 64;
 
 		nxarcs = 2;
 
-		xsegments[0].x1 = x + (__be_int32)xRadius + 1; xsegments[0].y1 = y;
-		xsegments[0].x2 = x + (__be_int32)(w - xRadius) - 1; xsegments[0].y2 = y;
+		xsegments[0].x1 = x + (int32)xRadius + 1; xsegments[0].y1 = y;
+		xsegments[0].x2 = x + (int32)(w - xRadius) - 1; xsegments[0].y2 = y;
 
-		xsegments[1].x1 = x + (__be_int32)xRadius + 1; xsegments[1].y1 = y + (__be_int32)h;
-		xsegments[1].x2 = x + (__be_int32)(w - xRadius) - 1; xsegments[1].y2 = y + (__be_int32)h;
+		xsegments[1].x1 = x + (int32)xRadius + 1; xsegments[1].y1 = y + (int32)h;
+		xsegments[1].x2 = x + (int32)(w - xRadius) - 1; xsegments[1].y2 = y + (int32)h;
 
 		nxsegments = 2;
 	}
@@ -997,31 +997,31 @@ static status_t bhapi::stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *e
 		xarcs[0].width = 2 * xRadius; xarcs[0].height = 2 * yRadius;
 		xarcs[0].angle1 = 90 * 64; xarcs[0].angle2 = 90 * 64;
 
-		xarcs[1].x = x + (__be_int32)(w - 2 * xRadius); xarcs[1].y = y;
+		xarcs[1].x = x + (int32)(w - 2 * xRadius); xarcs[1].y = y;
 		xarcs[1].width = 2 * xRadius; xarcs[1].height = 2 * yRadius;
 		xarcs[1].angle1 = 0; xarcs[1].angle2 = 90 * 64;
 
-		xarcs[2].x = x; xarcs[2].y = y + (__be_int32)(h - 2 * yRadius);
+		xarcs[2].x = x; xarcs[2].y = y + (int32)(h - 2 * yRadius);
 		xarcs[2].width = 2 * xRadius; xarcs[2].height = 2 * yRadius;
 		xarcs[2].angle1 = 180 * 64; xarcs[2].angle2 = 90 * 64;
 
-		xarcs[3].x = x + (__be_int32)(w - 2 * xRadius); xarcs[3].y = y + (__be_int32)(h - 2 * yRadius);
+		xarcs[3].x = x + (int32)(w - 2 * xRadius); xarcs[3].y = y + (int32)(h - 2 * yRadius);
 		xarcs[3].width = 2 * xRadius; xarcs[3].height = 2 * yRadius;
 		xarcs[3].angle1 = 270 * 64; xarcs[3].angle2 = 90 * 64;
 
 		nxarcs = 4;
 
-		xsegments[0].x1 = x; xsegments[0].y1 = y + (__be_int32)yRadius + 1;
-		xsegments[0].x2 = x; xsegments[0].y2 = y + (__be_int32)(h - yRadius) - 1;
+		xsegments[0].x1 = x; xsegments[0].y1 = y + (int32)yRadius + 1;
+		xsegments[0].x2 = x; xsegments[0].y2 = y + (int32)(h - yRadius) - 1;
 
-		xsegments[1].x1 = x + (__be_int32)w; xsegments[1].y1 = y + (__be_int32)yRadius + 1;
-		xsegments[1].x2 = x + (__be_int32)w; xsegments[1].y2 = y + (__be_int32)(h - yRadius) - 1;
+		xsegments[1].x1 = x + (int32)w; xsegments[1].y1 = y + (int32)yRadius + 1;
+		xsegments[1].x2 = x + (int32)w; xsegments[1].y2 = y + (int32)(h - yRadius) - 1;
 
-		xsegments[2].x1 = x + (__be_int32)xRadius + 1; xsegments[2].y1 = y;
-		xsegments[2].x2 = x + (__be_int32)(w - xRadius) - 1; xsegments[2].y2 = y;
+		xsegments[2].x1 = x + (int32)xRadius + 1; xsegments[2].y1 = y;
+		xsegments[2].x2 = x + (int32)(w - xRadius) - 1; xsegments[2].y2 = y;
 
-		xsegments[3].x1 = x + (__be_int32)xRadius + 1; xsegments[3].y1 = y + (__be_int32)h;
-		xsegments[3].x2 = x + (__be_int32)(w - xRadius) - 1; xsegments[3].y2 = y + (__be_int32)h;
+		xsegments[3].x1 = x + (int32)xRadius + 1; xsegments[3].y1 = y + (int32)h;
+		xsegments[3].x2 = x + (int32)(w - xRadius) - 1; xsegments[3].y2 = y + (int32)h;
 
 		nxsegments = 4;
 	}
@@ -1035,7 +1035,7 @@ static status_t bhapi::stroke_round_rect(Drawable xDrawable, EXGraphicsEngine *e
 
 
 static status_t b_fill_round_rect(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				       __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
+				       int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL) return B_ERROR;
 
@@ -1060,13 +1060,13 @@ static status_t b_fill_round_rect(Drawable xDrawable, EXGraphicsEngine *engine, 
 		xarcs[0].width = w; xarcs[0].height = 2 * yRadius;
 		xarcs[0].angle1 = 0; xarcs[0].angle2 = 180 * 64;
 
-		xarcs[1].x = x; xarcs[1].y = y + (__be_int32)(h - 2 * yRadius);
+		xarcs[1].x = x; xarcs[1].y = y + (int32)(h - 2 * yRadius);
 		xarcs[1].width = w; xarcs[1].height = 2 * yRadius;
 		xarcs[1].angle1 = 180 * 64; xarcs[1].angle2 = 180 * 64;
 
 		nxarcs = 2;
 
-		xrectangles[0].x = x; xrectangles[0].y = y + (__be_int32)yRadius;
+		xrectangles[0].x = x; xrectangles[0].y = y + (int32)yRadius;
 		xrectangles[0].width = w; xrectangles[0].height = h - 2 * yRadius;
 
 		nxrectangles = 1;
@@ -1077,13 +1077,13 @@ static status_t b_fill_round_rect(Drawable xDrawable, EXGraphicsEngine *engine, 
 		xarcs[0].width = 2 * xRadius; xarcs[0].height = h;
 		xarcs[0].angle1 = 90 * 64; xarcs[0].angle2 = 180 * 64;
 
-		xarcs[1].x = x + (__be_int32)(w - 2 * xRadius); xarcs[1].y = y;
+		xarcs[1].x = x + (int32)(w - 2 * xRadius); xarcs[1].y = y;
 		xarcs[1].width = 2 * xRadius; xarcs[1].height = h;
 		xarcs[1].angle1 = -90 * 64; xarcs[1].angle2 = 180 * 64;
 
 		nxarcs = 2;
 
-		xrectangles[0].x = x + (__be_int32)xRadius; xrectangles[0].y = y;
+		xrectangles[0].x = x + (int32)xRadius; xrectangles[0].y = y;
 		xrectangles[0].width = w - 2 * xRadius; xrectangles[0].height = h;
 
 		nxrectangles = 1;
@@ -1094,27 +1094,27 @@ static status_t b_fill_round_rect(Drawable xDrawable, EXGraphicsEngine *engine, 
 		xarcs[0].width = 2 * xRadius; xarcs[0].height = 2 * yRadius;
 		xarcs[0].angle1 = 90 * 64; xarcs[0].angle2 = 90 * 64;
 
-		xarcs[1].x = x + (__be_int32)(w - 2 * xRadius); xarcs[1].y = y;
+		xarcs[1].x = x + (int32)(w - 2 * xRadius); xarcs[1].y = y;
 		xarcs[1].width = 2 * xRadius; xarcs[1].height = 2 * yRadius;
 		xarcs[1].angle1 = 0; xarcs[1].angle2 = 90 * 64;
 
-		xarcs[2].x = x; xarcs[2].y = y + (__be_int32)(h - 2 * yRadius);
+		xarcs[2].x = x; xarcs[2].y = y + (int32)(h - 2 * yRadius);
 		xarcs[2].width = 2 * xRadius; xarcs[2].height = 2 * yRadius;
 		xarcs[2].angle1 = 180 * 64; xarcs[2].angle2 = 90 * 64;
 
-		xarcs[3].x = x + (__be_int32)(w - 2 * xRadius); xarcs[3].y = y + (__be_int32)(h - 2 * yRadius);
+		xarcs[3].x = x + (int32)(w - 2 * xRadius); xarcs[3].y = y + (int32)(h - 2 * yRadius);
 		xarcs[3].width = 2 * xRadius; xarcs[3].height = 2 * yRadius;
 		xarcs[3].angle1 = 270 * 64; xarcs[3].angle2 = 90 * 64;
 
 		nxarcs = 4;
 
-		xrectangles[0].x = x; xrectangles[0].y = y + (__be_int32)yRadius;
+		xrectangles[0].x = x; xrectangles[0].y = y + (int32)yRadius;
 		xrectangles[0].width = w; xrectangles[0].height = h - 2 * yRadius;
 
-		xrectangles[1].x = x + (__be_int32)xRadius; xrectangles[1].y = y;
+		xrectangles[1].x = x + (int32)xRadius; xrectangles[1].y = y;
 		xrectangles[1].width = w - 2 * xRadius; xrectangles[1].height = yRadius;
 
-		xrectangles[2].x = x + (__be_int32)xRadius; xrectangles[2].y = y + (__be_int32)(h - yRadius);
+		xrectangles[2].x = x + (int32)xRadius; xrectangles[2].y = y + (int32)(h - yRadius);
 		xrectangles[2].width = w - 2 * xRadius; xrectangles[2].height = yRadius;
 
 		nxrectangles = 3;
@@ -1129,7 +1129,7 @@ static status_t b_fill_round_rect(Drawable xDrawable, EXGraphicsEngine *engine, 
 
 
 static status_t bhapi::stroke_polygon(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				     const  __be_int32 *pts,  __be_int32 count, bool closed)
+				     const  int32 *pts,  int32 count, bool closed)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || count <= 0 || count >= B_MAXINT) return B_ERROR;
 
@@ -1139,7 +1139,7 @@ static status_t bhapi::stroke_polygon(Drawable xDrawable, EXGraphicsEngine *engi
 	XPoint *xPts = new XPoint[count + 1];
 	if(!xPts) return B_ERROR;
 
-	for(__be_int32 i = 0; i < count; i++) {xPts[i].x = *pts++; xPts[i].y = *pts++;}
+	for(int32 i = 0; i < count; i++) {xPts[i].x = *pts++; xPts[i].y = *pts++;}
 
 	int ptsCount = count;
 	if((xPts[count - 1].x != xPts[0].x || xPts[count - 1].y != xPts[0].y) && closed)
@@ -1158,7 +1158,7 @@ static status_t bhapi::stroke_polygon(Drawable xDrawable, EXGraphicsEngine *engi
 
 
 static status_t b_fill_polygon(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc,
-				   const  __be_int32 *pts,  __be_int32 count)
+				   const  int32 *pts,  int32 count)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL || pts == NULL || count <= 0 || count >= B_MAXINT) return B_ERROR;
 
@@ -1190,7 +1190,7 @@ static status_t b_fill_polygon(Drawable xDrawable, EXGraphicsEngine *engine, EXG
 	XPoint *xPts = new XPoint[count];
 	if(!xPts) return B_ERROR;
 
-	for(__be_int32 i = 0; i < count; i++) {xPts[i].x = *pts++; xPts[i].y = *pts++;}
+	for(int32 i = 0; i < count; i++) {xPts[i].x = *pts++; xPts[i].y = *pts++;}
 
 	int ptsCount = count;
 	if(xPts[count - 1].x == xPts[0].x && xPts[count - 1].y == xPts[0].y) ptsCount--;
@@ -1204,8 +1204,8 @@ static status_t b_fill_polygon(Drawable xDrawable, EXGraphicsEngine *engine, EXG
 
 
 static status_t b_draw_epixmap(Drawable xDrawable, EXGraphicsEngine *engine, EXGraphicsContext *dc, const BPixmap *epixmap,
-				    __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
-				    __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)
+				    int32 x,  int32 y,  uint32 w,  uint32 h,
+				    int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
 {
 	if(xDrawable == None || engine == NULL || dc == NULL || epixmap == NULL || epixmap->IsValid() == false) return B_ERROR;
 
@@ -1265,7 +1265,7 @@ static status_t b_draw_epixmap(Drawable xDrawable, EXGraphicsEngine *engine, EXG
 
 status_t 
 EXGraphicsDrawable::StrokePoint(BGraphicsContext *_dc_,
-				__be_int32 x,  __be_int32 y)
+				int32 x,  int32 y)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1279,7 +1279,7 @@ EXGraphicsDrawable::StrokePoint(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::StrokePoints(BGraphicsContext *_dc_,
-				 const  __be_int32 *pts,  __be_int32 count)
+				 const  int32 *pts,  int32 count)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1293,7 +1293,7 @@ EXGraphicsDrawable::StrokePoints(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *_dc_,
-					const BList *ptsArrayLists,  __be_int32 arrayCount,
+					const BList *ptsArrayLists,  int32 arrayCount,
 					const bhapi::rgb_color *highColors)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
@@ -1308,7 +1308,7 @@ EXGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *_dc_,
-					const  __be_int32 *pts, const  __be_uint8 *alpha,  __be_int32 count)
+					const  int32 *pts, const  uint8 *alpha,  int32 count)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1322,7 +1322,7 @@ EXGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::StrokeLine(BGraphicsContext *_dc_,
-			        __be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1)
+			        int32 x0,  int32 y0,  int32 x1,  int32 y1)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1336,7 +1336,7 @@ EXGraphicsDrawable::StrokeLine(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::StrokePolygon(BGraphicsContext *_dc_,
-				  const  __be_int32 *pts,  __be_int32 count, bool closed)
+				  const  int32 *pts,  int32 count, bool closed)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1350,7 +1350,7 @@ EXGraphicsDrawable::StrokePolygon(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::FillPolygon(BGraphicsContext *_dc_,
-				const  __be_int32 *pts,  __be_int32 count)
+				const  int32 *pts,  int32 count)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1364,7 +1364,7 @@ EXGraphicsDrawable::FillPolygon(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::StrokeRect(BGraphicsContext *_dc_,
-			        __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+			        int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1378,7 +1378,7 @@ EXGraphicsDrawable::StrokeRect(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::FillRect(BGraphicsContext *_dc_,
-			      __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+			      int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1392,7 +1392,7 @@ EXGraphicsDrawable::FillRect(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::StrokeRects(BGraphicsContext *_dc_,
-				const  __be_int32 *rects,  __be_int32 count)
+				const  int32 *rects,  int32 count)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1406,7 +1406,7 @@ EXGraphicsDrawable::StrokeRects(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::FillRects(BGraphicsContext *_dc_,
-			      const  __be_int32 *rects,  __be_int32 count)
+			      const  int32 *rects,  int32 count)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1434,7 +1434,7 @@ EXGraphicsDrawable::FillRegion(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::StrokeRoundRect(BGraphicsContext *_dc_,
-				     __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
+				     int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1448,7 +1448,7 @@ EXGraphicsDrawable::StrokeRoundRect(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::FillRoundRect(BGraphicsContext *_dc_,
-				   __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
+				   int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1462,7 +1462,7 @@ EXGraphicsDrawable::FillRoundRect(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::StrokeArc(BGraphicsContext *_dc_,
-			       __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
+			       int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1476,7 +1476,7 @@ EXGraphicsDrawable::StrokeArc(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::FillArc(BGraphicsContext *_dc_,
-			     __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
+			     int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1490,8 +1490,8 @@ EXGraphicsDrawable::FillArc(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsDrawable::DrawPixmap(BGraphicsContext *_dc_, const BPixmap *pix,
-			        __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
-			        __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)
+			        int32 x,  int32 y,  uint32 w,  uint32 h,
+			        int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1504,7 +1504,7 @@ EXGraphicsDrawable::DrawPixmap(BGraphicsContext *_dc_, const BPixmap *pix,
 
 status_t 
 EXGraphicsWindow::StrokePoint(BGraphicsContext *_dc_,
-			       __be_int32 x,  __be_int32 y)
+			       int32 x,  int32 y)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1518,7 +1518,7 @@ EXGraphicsWindow::StrokePoint(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::StrokePoints(BGraphicsContext *_dc_,
-			       const  __be_int32 *pts,  __be_int32 count)
+			       const  int32 *pts,  int32 count)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1532,7 +1532,7 @@ EXGraphicsWindow::StrokePoints(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::StrokePoints_Colors(BGraphicsContext *_dc_,
-				      const BList *ptsArrayLists,  __be_int32 arrayCount,
+				      const BList *ptsArrayLists,  int32 arrayCount,
 				      const bhapi::rgb_color *highColors)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
@@ -1547,7 +1547,7 @@ EXGraphicsWindow::StrokePoints_Colors(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *_dc_,
-				      const  __be_int32 *pts, const  __be_uint8 *alpha,  __be_int32 count)
+				      const  int32 *pts, const  uint8 *alpha,  int32 count)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1561,7 +1561,7 @@ EXGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::StrokeLine(BGraphicsContext *_dc_,
-			      __be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1)
+			      int32 x0,  int32 y0,  int32 x1,  int32 y1)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1575,7 +1575,7 @@ EXGraphicsWindow::StrokeLine(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::StrokePolygon(BGraphicsContext *_dc_,
-				const  __be_int32 *pts,  __be_int32 count, bool closed)
+				const  int32 *pts,  int32 count, bool closed)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1589,7 +1589,7 @@ EXGraphicsWindow::StrokePolygon(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::FillPolygon(BGraphicsContext *_dc_,
-			      const  __be_int32 *pts,  __be_int32 count)
+			      const  int32 *pts,  int32 count)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1603,7 +1603,7 @@ EXGraphicsWindow::FillPolygon(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::StrokeRect(BGraphicsContext *_dc_,
-			      __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+			      int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1617,7 +1617,7 @@ EXGraphicsWindow::StrokeRect(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::FillRect(BGraphicsContext *_dc_,
-			    __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+			    int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1631,7 +1631,7 @@ EXGraphicsWindow::FillRect(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::StrokeRects(BGraphicsContext *_dc_,
-			      const  __be_int32 *rects,  __be_int32 count)
+			      const  int32 *rects,  int32 count)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1645,7 +1645,7 @@ EXGraphicsWindow::StrokeRects(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::FillRects(BGraphicsContext *_dc_,
-			    const  __be_int32 *rects,  __be_int32 count)
+			    const  int32 *rects,  int32 count)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1673,7 +1673,7 @@ EXGraphicsWindow::FillRegion(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::StrokeRoundRect(BGraphicsContext *_dc_,
-				   __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
+				   int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1687,7 +1687,7 @@ EXGraphicsWindow::StrokeRoundRect(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::FillRoundRect(BGraphicsContext *_dc_,
-				__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
+				int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1701,7 +1701,7 @@ EXGraphicsWindow::FillRoundRect(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::StrokeArc(BGraphicsContext *_dc_,
-			     __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
+			     int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1715,7 +1715,7 @@ EXGraphicsWindow::StrokeArc(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::FillArc(BGraphicsContext *_dc_,
-			   __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
+			   int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;
@@ -1729,8 +1729,8 @@ EXGraphicsWindow::FillArc(BGraphicsContext *_dc_,
 
 status_t 
 EXGraphicsWindow::DrawPixmap(BGraphicsContext *_dc_, const BPixmap *pix,
-			      __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
-			      __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)
+			      int32 x,  int32 y,  uint32 w,  uint32 h,
+			      int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
 {
 	EXGraphicsContext *dc = cast_as(_dc_, EXGraphicsContext);
 	if(fEngine == NULL || dc == NULL || dc->fEngine != fEngine) return B_ERROR;

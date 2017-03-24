@@ -236,7 +236,7 @@ void BTitleView::Draw(BRect /*updateRect*/, bool useOffscreen, bool updateOnly,
 	view->StrokeLine(bounds.LeftBottom(), bounds.RightBottom());
 	bounds.bottom--;
 
-	__be_control_look->DrawButtonBackground(view, bounds, bounds, base, 0,
+	be_control_look->DrawButtonBackground(view, bounds, bounds, base, 0,
 		BControlLook::B_TOP_BORDER | BControlLook::B_BOTTOM_BORDER);
 
 	int32 count = fTitleList.CountItems();
@@ -480,7 +480,7 @@ void BColumnTitle::Draw(BView* view, bool pressed)
 		rgb_color base = tint_color(ui_color(B_PANEL_BACKGROUND_COLOR),
 			B_DARKEN_1_TINT);
 
-		__be_control_look->DrawButtonBackground(view, rect, rect, base, 0,
+		be_control_look->DrawButtonBackground(view, rect, rect, base, 0,
 			BControlLook::B_TOP_BORDER | BControlLook::B_BOTTOM_BORDER);
 	}
 

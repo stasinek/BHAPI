@@ -39,16 +39,16 @@ class BHAPI_IMPEXP BLineGenerator {
 public:
     BLineGenerator(BPoint start, BPoint end);
 
-    bool Start(__be_int32 &x,  __be_int32 &y,  __be_int32 &step,  __be_int32 &pixels, bool isLoopX = true, float pixel_size = 1);
-    bool Next(__be_int32 &next,  __be_int32 &pixels);
+    bool Start(int32 &x,  int32 &y,  int32 &step,  int32 &pixels, bool isLoopX = true, float pixel_size = 1);
+    bool Next(int32 &next,  int32 &pixels);
 
 private:
     BPoint fStart;
     BPoint fEnd;
 
-     __be_uint8 fDirection;
-     __be_int32 fStep;
-     __be_int32 fStepOther;
+     uint8 fDirection;
+     int32 fStep;
+     int32 fStepOther;
 	bool fIsLoopX;
 
 	float fEltaNext;

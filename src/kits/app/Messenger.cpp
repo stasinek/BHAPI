@@ -50,7 +50,7 @@ BMessenger::BMessenger()
 }
 
 
-BMessenger::BMessenger(const char *signature,  __be_int64 team, status_t *perr)
+BMessenger::BMessenger(const char *signature,  int64 team, status_t *perr)
     : fHandlerToken(B_MAXUINT64), fLooperToken(B_MAXUINT64),
       fPort(NULL), fSem(NULL), fTargetTeam(B_INT64_CONSTANT(0))
 {
@@ -70,7 +70,7 @@ BMessenger::BMessenger(const BHandler *handler,
 }
 
 
-BMessenger::BMessenger(__be_int64 targetTeam,  __be_uint64 targetToken, bigtime_t timestamp, status_t *perr)
+BMessenger::BMessenger(int64 targetTeam,  uint64 targetToken, bigtime_t timestamp, status_t *perr)
     : fHandlerToken(B_MAXUINT64), fLooperToken(B_MAXUINT64),
       fPort(NULL), fSem(NULL), fTargetTeam(B_INT64_CONSTANT(0))
 {
@@ -87,7 +87,7 @@ BMessenger::BMessenger(__be_int64 targetTeam,  __be_uint64 targetToken, bigtime_
         return;
     }
 
-    __be_uint64 looperToken = B_MAXUINT64;
+    uint64 looperToken = B_MAXUINT64;
 
     if(bhapi::get_handler_create_time_stamp(targetToken) != timestamp ||
        (looperToken = bhapi::get_ref_looper_token(targetToken)) == B_MAXUINT64)
@@ -122,10 +122,10 @@ BMessenger::InitData(const BHandler *handler, const BLooper *looper, status_t *p
 
     if(handler)
     {
-        __be_uint64 handlerToken = bhapi::get_ref_handler_token(handler);
+        uint64 handlerToken = bhapi::get_ref_handler_token(handler);
         if(handlerToken == B_MAXUINT64) return;
 
-        __be_uint64 looperToken = bhapi::get_ref_looper_token(handlerToken);
+        uint64 looperToken = bhapi::get_ref_looper_token(handlerToken);
         if(looperToken == B_MAXUINT64) {bhapi::unref_handler(handlerToken); return;}
 
         fTargetTeam = bhapi::get_current_team_id();
@@ -136,7 +136,7 @@ BMessenger::InitData(const BHandler *handler, const BLooper *looper, status_t *p
     }
     else if(looper)
     {
-        __be_uint64 looperToken = bhapi::get_ref_handler_token(looper);
+        uint64 looperToken = bhapi::get_ref_handler_token(looper);
         if(looperToken == B_MAXUINT64) return;
 
         fTargetTeam = bhapi::get_current_team_id();
@@ -274,14 +274,14 @@ BMessenger::IsValid() const
 
 
 status_t 
-BMessenger::SendMessage(__be_uint32 command) const
+BMessenger::SendMessage(uint32 command) const
 {
     BMessage msg(command);
     return SendMessage(&msg, NULL, B_INFINITE_TIMEOUT);
 }
 
 status_t 
-BMessenger::SendMessage(__be_uint32 command, BHandler *reply_to = NULL) const
+BMessenger::SendMessage(uint32 command, BHandler *reply_to = NULL) const
 {
     BMessage msg(command);
     return SendMessage(&msg, reply_to, B_INFINITE_TIMEOUT);
@@ -306,7 +306,7 @@ BMessenger::SendMessage(const BMessage *a_message,
         return B_BAD_VALUE;
     }
 
-    __be_uint64 replyToken = bhapi::get_handler_token(reply_to);
+    uint64 replyToken = bhapi::get_handler_token(reply_to);
 
     BMessage aMsg(*a_message);
     aMsg.fIsReply = false;
@@ -368,7 +368,7 @@ BMessenger::SendMessage(const BMessage *a_message, BMessage *reply_message, bigt
 
 status_t 
 BMessenger::_SendMessage(const BMessage *a_message,
-              __be_uint64 replyToken,
+              uint64 replyToken,
              bigtime_t timeout) const
 {
     if(a_message == NULL) return B_BAD_VALUE;
@@ -393,7 +393,7 @@ BMessenger::_SendMessage(const BMessage *a_message,
 
 
 status_t 
-BMessenger::_SendMessageToPort(void *port, const BMessage *msg,  __be_uint32 flags, bigtime_t timeout)
+BMessenger::_SendMessageToPort(void *port, const BMessage *msg,  uint32 flags, bigtime_t timeout)
 {
     if(!port || !msg) return B_ERROR;
 
@@ -433,16 +433,16 @@ BMessenger::_SendMessageToPort(void *port, const BMessage *msg,  __be_uint32 fla
 
 
 BMessage*
-BMessenger::_GetMessageFromPort(void *port,  __be_uint32 flags, bigtime_t timeout, status_t *err)
+BMessenger::_GetMessageFromPort(void *port,  uint32 flags, bigtime_t timeout, status_t *err)
 {
     status_t retErr = B_OK;
     BMessage* retMsg = NULL;
 
     do{
-         __be_int64 bufferSize = bhapi::port_buffer_size_etc((port_id)port, flags, timeout);
+         int64 bufferSize = bhapi::port_buffer_size_etc((port_id)port, flags, timeout);
         if(bufferSize == 0)
         {
-            __be_int32 code;
+            int32 code;
             retErr = bhapi::read_port_etc((port_id)port, &code, NULL, 0, B_TIMEOUT, B_INT64_CONSTANT(0));
 //			if(retErr != B_OK) BHAPI_DEBUG("[APP]: Port read failed(0x%x). (%s:%d)", retErr, __FILE__, __LINE__);
             break;
@@ -464,7 +464,7 @@ BMessenger::_GetMessageFromPort(void *port,  __be_uint32 flags, bigtime_t timeou
         }
         bzero(buffer, (size_t)bufferSize);
 
-        __be_int32 code;
+        int32 code;
         if((retErr = bhapi::read_port_etc((port_id)port, &code, buffer, bufferSize, B_TIMEOUT, B_INT64_CONSTANT(0))) != B_OK)
         {
 //			BHAPI_DEBUG("[APP]: Port read failed(0x%x). (%s:%d)", retErr, __FILE__, __LINE__);
@@ -516,7 +516,7 @@ BMessenger::_GetMessageFromPort(void *port,  __be_uint32 flags, bigtime_t timeou
 size_t
 BMessenger::FlattenedSize() const
 {
-    return(2 * sizeof(__be_uint64) + 2 * sizeof(bigtime_t) + sizeof(__be_int64));
+    return(2 * sizeof(uint64) + 2 * sizeof(bigtime_t) + sizeof(int64));
 }
 
 
@@ -528,10 +528,10 @@ BMessenger::Flatten(char *buffer, size_t bufferSize) const
     bigtime_t handler_stamp = bhapi::get_handler_create_time_stamp(fHandlerToken);
     bigtime_t looper_stamp = bhapi::get_handler_create_time_stamp(fLooperToken);
 
-    memcpy(buffer, &fTargetTeam, sizeof(__be_int64)); buffer += sizeof(__be_int64);
-    memcpy(buffer, &fHandlerToken, sizeof(__be_uint64)); buffer += sizeof(__be_uint64);
+    memcpy(buffer, &fTargetTeam, sizeof(int64)); buffer += sizeof(int64);
+    memcpy(buffer, &fHandlerToken, sizeof(uint64)); buffer += sizeof(uint64);
     memcpy(buffer, &handler_stamp, sizeof(bigtime_t)); buffer += sizeof(bigtime_t);
-    memcpy(buffer, &fLooperToken, sizeof(__be_uint64)); buffer += sizeof(__be_uint64);
+    memcpy(buffer, &fLooperToken, sizeof(uint64)); buffer += sizeof(uint64);
     memcpy(buffer, &looper_stamp, sizeof(bigtime_t));
 
     return true;
@@ -546,14 +546,14 @@ BMessenger::Unflatten(const char *buffer, size_t bufferSize)
     bigtime_t handler_stamp = B_MAXINT64;
     bigtime_t looper_stamp = B_MAXINT64;
 
-    __be_int64 target_team = B_INT64_CONSTANT(0);
-    __be_uint64 handler_token = B_MAXUINT64;
-    __be_uint64 looper_token = B_MAXUINT64;
+    int64 target_team = B_INT64_CONSTANT(0);
+    uint64 handler_token = B_MAXUINT64;
+    uint64 looper_token = B_MAXUINT64;
 
-    memcpy(&target_team, buffer, sizeof(__be_int64)); buffer += sizeof(__be_int64);
-    memcpy(&handler_token, buffer, sizeof(__be_uint64)); buffer += sizeof(__be_uint64);
+    memcpy(&target_team, buffer, sizeof(int64)); buffer += sizeof(int64);
+    memcpy(&handler_token, buffer, sizeof(uint64)); buffer += sizeof(uint64);
     memcpy(&handler_stamp, buffer, sizeof(bigtime_t)); buffer += sizeof(bigtime_t);
-    memcpy(&looper_token, buffer, sizeof(__be_uint64)); buffer += sizeof(__be_uint64);
+    memcpy(&looper_token, buffer, sizeof(uint64)); buffer += sizeof(uint64);
     memcpy(&looper_stamp, buffer, sizeof(bigtime_t));
 
     if(fHandlerToken != B_MAXUINT64) bhapi::unref_handler(fHandlerToken);

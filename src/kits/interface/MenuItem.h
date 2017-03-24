@@ -39,19 +39,19 @@ class BMessage;
 #include <Haiku.h>
 class BHAPI_IMPEXP BMenuItem : public BArchivable, public BInvoker {
 public:
-    BMenuItem(const char *label, BMessage *message, char shortcut = 0,  __be_uint32 modifiers = 0);
+    BMenuItem(const char *label, BMessage *message, char shortcut = 0,  uint32 modifiers = 0);
     BMenuItem(BMenu *menu, BMessage *message = NULL);
     virtual ~BMenuItem();
 
     virtual void		SetLabel(const char *label);
     virtual void		SetEnabled(bool state);
     virtual void		SetMarked(bool state);
-    virtual void		SetShortcut(char ch,  __be_uint32 modifiers);
+    virtual void		SetShortcut(char ch,  uint32 modifiers);
 
     const char*		Label() const;
     bool			IsEnabled() const;
     bool			IsMarked() const;
-    char			Shortcut(__be_uint32 *modifiers = NULL) const;
+    char			Shortcut(uint32 *modifiers = NULL) const;
 
     BMenu*			Submenu() const;
     BMenu*			Menu() const;
@@ -73,7 +73,7 @@ protected:
 
 private:
     char fShortcut;
-     __be_uint32 fModifiers;
+     uint32 fModifiers;
 
     BRect fFrame;
     bool fMarked;

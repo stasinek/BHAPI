@@ -77,9 +77,9 @@ public:
 	virtual bool IsScalable() const;
 	virtual void ForceFontAliasing(bool enable);
 
-	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold,  __be_int32 length) const;
+	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32 length) const;
 	virtual void GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const;
-	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold,  __be_int32 length);
+	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold,  int32 length);
 
 	virtual bool Detach(bhapi::font_detach_callback *callback);
 
@@ -91,21 +91,21 @@ private:
 
 	HDC fTmpDC;
 	HFONT fCacheFont;
-	__be_uint32 fCacheFontHeight;
+	uint32 fCacheFontHeight;
 
 	bool fForceAliasing;
 	bool fScalable;
 
 	static status_t _CreateFont(EWin32GraphicsEngine *win32Engine, const char *family, const char *style,
-				       __be_uint32 height, bool aliasing, HFONT *font);
+				       uint32 height, bool aliasing, HFONT *font);
 	static status_t _DestroyFont(EWin32GraphicsEngine *win32Engine, HFONT *font);
 	static status_t _StringWidth(EWin32GraphicsEngine *win32Engine, const char *string,
-				        __be_uint32 spacing,  __be_uint32 *w, HDC *hdc, HFONT *font);
-	static status_t _GetHeight(EWin32GraphicsEngine *win32Engine,  __be_uint32 *leading,  __be_uint32 *ascent,  __be_uint32 *descent,
+				        uint32 spacing,  uint32 *w, HDC *hdc, HFONT *font);
+	static status_t _GetHeight(EWin32GraphicsEngine *win32Engine,  uint32 *leading,  uint32 *ascent,  uint32 *descent,
 				     HDC *hdc, HFONT *font);
 	static status_t _RenderString(EWin32GraphicsEngine *win32Engine, EWin32GraphicsDrawable *pixmap, BGraphicsContext *dc,
-					const char *string,  __be_uint32 spacing,
-					__be_int32 x,  __be_int32 y,  __be_uint32 *w,  __be_uint32 *h,  __be_uint32 *ascent, HFONT *font);
+					const char *string,  uint32 spacing,
+					int32 x,  int32 y,  uint32 *w,  uint32 *h,  uint32 *ascent, HFONT *font);
 	static status_t _CreateTmpDC(EWin32GraphicsEngine *win32Engine, HDC *hdc);
 	static status_t _DestroyTmpDC(EWin32GraphicsEngine *win32Engine, HDC *hdc);
 };
@@ -113,7 +113,7 @@ private:
 
 status_t 
 BFontWin32::_CreateFont(EWin32GraphicsEngine *win32Engine, const char *family, const char *style,
-			__be_uint32 height, bool aliasing, HFONT *font)
+			uint32 height, bool aliasing, HFONT *font)
 {
 	if(win32Engine == NULL || font == NULL ||
 	   family == NULL || *family == 0 || style == NULL || *style == 0) return B_ERROR;
@@ -193,7 +193,7 @@ LRESULT _bhapi_destroy_font(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_
 
 
 status_t 
-BFontWin32::_StringWidth(EWin32GraphicsEngine *win32Engine, const char *string,  __be_uint32 spacing,  __be_uint32 *w, HDC *hdc, HFONT *font)
+BFontWin32::_StringWidth(EWin32GraphicsEngine *win32Engine, const char *string,  uint32 spacing,  uint32 *w, HDC *hdc, HFONT *font)
 {
 	if(win32Engine == NULL || string == NULL || *string == 0 || w == NULL ||
 	   hdc == NULL || *hdc == NULL || font == NULL || *font == NULL) return B_ERROR;
@@ -232,9 +232,9 @@ LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, bhapi::win32
 		return FALSE;
 	}
 
-	__be_uint32 width = 0;
-	__be_uint32 height = (__be_uint32)ptm.tmHeight;
-	__be_uint32 delta = callback->fontSpacing;
+	uint32 width = 0;
+	uint32 height = (uint32)ptm.tmHeight;
+	uint32 delta = callback->fontSpacing;
 
 	if(GetVersion() < 0x80000000) // Windows NT/2000/XP
 	{
@@ -255,7 +255,7 @@ LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, bhapi::win32
 				GetCharWidthW(*(callback->fontTmpDC), *tmp, *tmp, &cWidth);
 			}
 
-			width += (cWidth > 0 ? (__be_uint32)cWidth : height) + (tmp == (const unichar32*)utf32 ? 0 : delta);
+			width += (cWidth > 0 ? (uint32)cWidth : height) + (tmp == (const unichar32*)utf32 ? 0 : delta);
 			tmp = bhapi::utf32_next(tmp);
 		}
 
@@ -263,23 +263,23 @@ LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, bhapi::win32
 	}
 	else // Windows 95/98
 	{
-		__be_uint8 uLen = 0;
+		uint8 uLen = 0;
 		const char *uStr = bhapi::utf8_at(callback->fontString, 0, &uLen);
 		const char *tmp = uStr;
 
 		while(!(!tmp || *tmp == 0))
 		{
-			__be_int32 cWidth = -1;
+			int32 cWidth = -1;
 
-            char *aStr = bhapi::win32_convert_utf8_to_active(tmp, (__be_int32)uLen);
+            char *aStr = bhapi::win32_convert_utf8_to_active(tmp, (int32)uLen);
 			if(aStr != NULL)
 			{
 				SIZE sz;
-                if(GetTextExtentPoint32A(*(callback->fontTmpDC), aStr, strlen(aStr), &sz)) cWidth = (__be_int32)sz.cx;
+                if(GetTextExtentPoint32A(*(callback->fontTmpDC), aStr, strlen(aStr), &sz)) cWidth = (int32)sz.cx;
 				free(aStr);
 			}
 
-			width += (cWidth > 0 ? (__be_uint32)cWidth : height) + (tmp == uStr ? 0 : delta);
+			width += (cWidth > 0 ? (uint32)cWidth : height) + (tmp == uStr ? 0 : delta);
 
 			tmp = bhapi::utf8_next(tmp, &uLen);
 		}
@@ -294,7 +294,7 @@ LRESULT _bhapi_font_string_width(EWin32GraphicsEngine *win32Engine, bhapi::win32
 
 
 status_t 
-BFontWin32::_GetHeight(EWin32GraphicsEngine *win32Engine,  __be_uint32 *leading,  __be_uint32 *ascent,  __be_uint32 *descent, HDC *hdc, HFONT *font)
+BFontWin32::_GetHeight(EWin32GraphicsEngine *win32Engine,  uint32 *leading,  uint32 *ascent,  uint32 *descent, HDC *hdc, HFONT *font)
 {
 	if(win32Engine == NULL || leading == NULL || ascent == NULL || descent == NULL ||
 	   hdc == NULL || *hdc == NULL || font == NULL || *font == NULL) return B_ERROR;
@@ -332,9 +332,9 @@ LRESULT _bhapi_font_get_height(EWin32GraphicsEngine *win32Engine, bhapi::win32_g
 		return FALSE;
 	}
 
-	callback->ww = (__be_uint32)ptm.tmInternalLeading;
-	callback->wh = (__be_uint32)ptm.tmAscent;
-	callback->h = (__be_uint32)ptm.tmDescent;
+	callback->ww = (uint32)ptm.tmInternalLeading;
+	callback->wh = (uint32)ptm.tmAscent;
+	callback->h = (uint32)ptm.tmDescent;
 
 	SelectObject(*(callback->fontTmpDC), GetStockObject(DEFAULT_GUI_FONT));
 
@@ -344,8 +344,8 @@ LRESULT _bhapi_font_get_height(EWin32GraphicsEngine *win32Engine, bhapi::win32_g
 
 status_t 
 BFontWin32::_RenderString(EWin32GraphicsEngine *win32Engine, EWin32GraphicsDrawable *pixmap, BGraphicsContext *dc,
-			  const char *string,  __be_uint32 spacing,
-			   __be_int32 x,  __be_int32 y,  __be_uint32 *w,  __be_uint32 *h,  __be_uint32 *ascent, HFONT *font)
+			  const char *string,  uint32 spacing,
+			   int32 x,  int32 y,  uint32 *w,  uint32 *h,  uint32 *ascent, HFONT *font)
 {
 	if(win32Engine == NULL || pixmap == NULL || dc == NULL ||
 	   string == NULL || *string == 0 ||
@@ -399,9 +399,9 @@ LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, bhapi::win3
 	int x = callback->x;
 	int y = callback->y - (int)ptm.tmAscent - 1;
 
-	__be_uint32 width = 0;
-	__be_uint32 height = (__be_uint32)ptm.tmHeight;
-	__be_uint32 delta = callback->fontSpacing;
+	uint32 width = 0;
+	uint32 height = (uint32)ptm.tmHeight;
+	uint32 delta = callback->fontSpacing;
 
 	if(GetVersion() < 0x80000000) // Windows NT/2000/XP
 	{
@@ -443,7 +443,7 @@ LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, bhapi::win3
 			}
 
 			x += (cWidth > 0 ? cWidth : (int)height) + (int)delta;
-			width += (cWidth > 0 ? (__be_uint32)cWidth : height) + (tmp == (const unichar32*)utf32 ? 0 : delta);
+			width += (cWidth > 0 ? (uint32)cWidth : height) + (tmp == (const unichar32*)utf32 ? 0 : delta);
 			tmp = bhapi::utf32_next(tmp);
 		}
 
@@ -451,19 +451,19 @@ LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, bhapi::win3
 	}
 	else // Windows 95/98
 	{
-		__be_uint8 uLen = 0;
+		uint8 uLen = 0;
 		const char *uStr = bhapi::utf8_at(callback->fontString, 0, &uLen);
 		const char *tmp = uStr;
 
 		while(!(!tmp || *tmp == 0))
 		{
-			__be_int32 cWidth = -1;
+			int32 cWidth = -1;
 
-            char *aStr = bhapi::win32_convert_utf8_to_active(tmp, (__be_int32)uLen);
+            char *aStr = bhapi::win32_convert_utf8_to_active(tmp, (int32)uLen);
 			if(aStr != NULL)
 			{
 				SIZE sz;
-                if(GetTextExtentPoint32A(callback->pixmap->win32HDC, aStr, strlen(aStr), &sz)) cWidth = (__be_int32)sz.cx;
+                if(GetTextExtentPoint32A(callback->pixmap->win32HDC, aStr, strlen(aStr), &sz)) cWidth = (int32)sz.cx;
 			}
 
 			if(cWidth > 0 && aStr != NULL)
@@ -475,7 +475,7 @@ LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, bhapi::win3
 			if(aStr != NULL) free(aStr);
 
 			x += (cWidth > 0 ? cWidth : (int)height) + (int)delta;
-			width += (cWidth > 0 ? (__be_uint32)cWidth : height) + (tmp == uStr ? 0 : delta);
+			width += (cWidth > 0 ? (uint32)cWidth : height) + (tmp == uStr ? 0 : delta);
 
 			tmp = bhapi::utf8_next(tmp, &uLen);
 		}
@@ -485,7 +485,7 @@ LRESULT _bhapi_font_render_string(EWin32GraphicsEngine *win32Engine, bhapi::win3
 
 	callback->w = width;
 	callback->h = height;
-	callback->wh = (__be_uint32)ptm.tmAscent;
+	callback->wh = (uint32)ptm.tmAscent;
 
 	return TRUE;
 }
@@ -585,13 +585,13 @@ BFontWin32::BFontWin32(EWin32GraphicsEngine *win32Engine, const char *wFontname,
 	}
 	else if(fontMsg.HasInt32("height"))
 	{
-		__be_int32 nSizes = fontMsg.CountItems("height", B_INT32_TYPE);
+		int32 nSizes = fontMsg.CountItems("height", B_INT32_TYPE);
 		if(nSizes <= 0) return;
 		float *font_sizes = new float[nSizes];
 		if(font_sizes == NULL) return;
-		for(__be_int32 i = 0; i < nSizes; i++)
+		for(int32 i = 0; i < nSizes; i++)
 		{
-			__be_int32 val = 0;
+			int32 val = 0;
 			fontMsg.FindInt32("height", i, &val);
 			font_sizes[i] = (float)val;
 		}
@@ -657,15 +657,15 @@ BFontWin32::ForceFontAliasing(bool enable)
 
 
 float
-BFontWin32::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  __be_int32 length) const
+BFontWin32::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32 length) const
 {
 	if(fEngine == NULL || fTmpDC == NULL ||
 	   (int)size <= 0 || string == NULL || *string == 0 || length == 0 || !IsAttached()) return 0;
 
 	HFONT curFont = NULL;
-	if(fCacheFont == NULL || fCacheFontHeight != (__be_uint32)size)
+	if(fCacheFont == NULL || fCacheFontHeight != (uint32)size)
 	{
-		_CreateFont(fEngine, fLocalFontFamily.String(), fLocalFontStyle.String(), (__be_uint32)size, fForceAliasing, &curFont);
+		_CreateFont(fEngine, fLocalFontFamily.String(), fLocalFontStyle.String(), (uint32)size, fForceAliasing, &curFont);
 	}
 	else
 	{
@@ -677,8 +677,8 @@ BFontWin32::StringWidth(const char *string, float size, float spacing, float she
 	BString str;
 	str.Append(string, length);
 
-	__be_uint32 width = 0;
-	_StringWidth(fEngine, str.String(), (__be_uint32)ceil((double)(spacing * size)), &width, (HDC*)&fTmpDC, &curFont);
+	uint32 width = 0;
+	_StringWidth(fEngine, str.String(), (uint32)ceil((double)(spacing * size)), &width, (HDC*)&fTmpDC, &curFont);
 
 	if(curFont != fCacheFont)
 	{
@@ -698,9 +698,9 @@ BFontWin32::GetHeight(bhapi::font_height *height, float size, float shear, bool 
 	if(fEngine == NULL || fTmpDC == NULL || (int)size <= 0 || !IsAttached()) return;
 
 	HFONT curFont = NULL;
-	if(fCacheFont == NULL || fCacheFontHeight != (__be_uint32)size)
+	if(fCacheFont == NULL || fCacheFontHeight != (uint32)size)
 	{
-		_CreateFont(fEngine, fLocalFontFamily.String(), fLocalFontStyle.String(), (__be_uint32)size, fForceAliasing, &curFont);
+		_CreateFont(fEngine, fLocalFontFamily.String(), fLocalFontStyle.String(), (uint32)size, fForceAliasing, &curFont);
 	}
 	else
 	{
@@ -709,7 +709,7 @@ BFontWin32::GetHeight(bhapi::font_height *height, float size, float shear, bool 
 
 	if(curFont == NULL) return;
 
-	__be_uint32 leading = 0, ascent = 0, descent = 0;
+	uint32 leading = 0, ascent = 0, descent = 0;
 	_GetHeight(fEngine, &leading, &ascent, &descent, (HDC*)&fTmpDC, &curFont);
 
 	if(curFont != fCacheFont)
@@ -724,7 +724,7 @@ BFontWin32::GetHeight(bhapi::font_height *height, float size, float shear, bool 
 
 
 BRect
-BFontWin32::RenderString(BHandler *_view, const char *string, float size, float spacing, float shear, bool bold,  __be_int32 length)
+BFontWin32::RenderString(BHandler *_view, const char *string, float size, float spacing, float shear, bool bold,  int32 length)
 {
 	if(fEngine == NULL || (int)size <= 0 || string == NULL || *string == 0 || length == 0 || !IsAttached()) return BRect();
 
@@ -739,20 +739,20 @@ BFontWin32::RenderString(BHandler *_view, const char *string, float size, float 
 	BGraphicsContext *dc = fEngine->GetContext(view);
 	if(pix == NULL || dc == NULL) return BRect();
 
-	if(fCacheFont == NULL || fCacheFontHeight != (__be_uint32)size)
+	if(fCacheFont == NULL || fCacheFontHeight != (uint32)size)
 	{
 		if(_CreateFont(fEngine, fLocalFontFamily.String(), fLocalFontStyle.String(),
-			       (__be_uint32)size, fForceAliasing, &fCacheFont) != B_OK) return BRect();
-		fCacheFontHeight = (__be_uint32)size;
+			       (uint32)size, fForceAliasing, &fCacheFont) != B_OK) return BRect();
+		fCacheFontHeight = (uint32)size;
 	}
 
 	BPoint pt = view->ConvertToWindow(view->PenLocation()).FloorSelf();
 	BString str;
 	str.Append(string, length);
 
-	__be_uint32 w, h, ascent;
-	if(_RenderString(fEngine, pix, dc, str.String(), (__be_uint32)ceil((double)(spacing * size)),
-			 (__be_int32)pt.x, (__be_int32)pt.y, &w, &h, &ascent, &fCacheFont) != B_OK) return BRect();
+	uint32 w, h, ascent;
+	if(_RenderString(fEngine, pix, dc, str.String(), (uint32)ceil((double)(spacing * size)),
+			 (int32)pt.x, (int32)pt.y, &w, &h, &ascent, &fCacheFont) != B_OK) return BRect();
 
 	BRect updateRect;
 	updateRect.left = pt.x;
@@ -849,12 +849,12 @@ EWin32GraphicsEngine::UpdateFonts(bool check_only)
 
 	Unlock();
 
-	for(__be_int32 i = 0; i < fontMsg.CountItems("BHAPI:font", B_STRING_TYPE); i++)
+	for(int32 i = 0; i < fontMsg.CountItems("BHAPI:font", B_STRING_TYPE); i++)
 	{
 		BString str;
 		fontMsg.FindString("BHAPI:font", i, &str);
 
-		__be_int32 escapeIndex = str.FindFirst("\t");
+		int32 escapeIndex = str.FindFirst("\t");
 		if(escapeIndex <= 0 || escapeIndex >= str.Length() - 1) continue;
 
 		BString fontFamily;

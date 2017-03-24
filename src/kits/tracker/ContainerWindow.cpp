@@ -429,9 +429,9 @@ void DraggableContainerIcon::Draw(BRect updateRect)
 
 	BRect rect(Bounds());
 	rgb_color base = ui_color(B_MENU_BACKGROUND_COLOR);
-	__be_control_look->DrawBorder(this, rect, updateRect, base, B_PLAIN_BORDER,
+	be_control_look->DrawBorder(this, rect, updateRect, base, B_PLAIN_BORDER,
 		0, BControlLook::B_BOTTOM_BORDER);
-	__be_control_look->DrawMenuBarBackground(this, rect, updateRect, base, 0,
+	be_control_look->DrawMenuBarBackground(this, rect, updateRect, base, 0,
 		BControlLook::B_ALL_BORDERS & ~BControlLook::B_LEFT_BORDER);
 
 	// Draw the icon, straddling the border

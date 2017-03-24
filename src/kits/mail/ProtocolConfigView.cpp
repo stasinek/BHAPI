@@ -55,7 +55,7 @@ BodyDownloadConfigView::BodyDownloadConfigView()
 		B_SIZE_UNSET));
 
 	BLayoutBuilder::Group<>(this, B_HORIZONTAL,
-			__be_control_look->DefaultLabelSpacing())
+			be_control_look->DefaultLabelSpacing())
 		.Add(fPartialBox)
 		.Add(fSizeControl->CreateTextViewLayoutItem())
 		.Add(fSizeControl->CreateLabelLayoutItem());

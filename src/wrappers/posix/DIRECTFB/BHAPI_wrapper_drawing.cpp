@@ -48,10 +48,10 @@ private:
 	BRect fMargins;
 
 	virtual status_t InitCheck() const;
-	virtual void GetFrame(__be_int32 *originX,  __be_int32 *originY,  __be_uint32 *width,  __be_uint32 *height) const;
-	virtual void GetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color &color) const;
-	virtual void PutPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color);
-	virtual void PutRect(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bhapi::rgb_color color);
+	virtual void GetFrame(int32 *originX,  int32 *originY,  uint32 *width,  uint32 *height) const;
+	virtual void GetPixel(int32 x,  int32 y, bhapi::rgb_color &color) const;
+	virtual void PutPixel(int32 x,  int32 y, bhapi::rgb_color color);
+	virtual void PutRect(int32 x,  int32 y,  uint32 width,  uint32 height, bhapi::rgb_color color);
 };
 
 
@@ -77,7 +77,7 @@ EDFBRender::SetClipping(const BRegion *clipping)
 	fClipping.MakeEmpty();
 	if(clipping != NULL)
 	{
-		for(__be_int32 i = 0; i < clipping->CountRects(); i++)
+		for(int32 i = 0; i < clipping->CountRects(); i++)
 		{
 			BRect rect = clipping->RectAt(i).FloorCopy();
 			fClipping.Include(rect);
@@ -107,28 +107,28 @@ EDFBRender::InitCheck() const
 
 
 void 
-EDFBRender::GetFrame(__be_int32 *originX,  __be_int32 *originY,  __be_uint32 *width,  __be_uint32 *height) const
+EDFBRender::GetFrame(int32 *originX,  int32 *originY,  uint32 *width,  uint32 *height) const
 {
 	int w = 0, h = 0;
 	if(fSurface) fSurface->GetSize(fSurface, &w, &h);
 
 	if(originX) *originX = 0;
 	if(originY) *originY = 0;
-	if(width) *width = (__be_uint32)w - (__be_uint32)fMargins.left - (__be_uint32)fMargins.top;
-	if(height) *height = (__be_uint32)h - (__be_uint32)fMargins.top - (__be_uint32)fMargins.bottom;
+	if(width) *width = (uint32)w - (uint32)fMargins.left - (uint32)fMargins.top;
+	if(height) *height = (uint32)h - (uint32)fMargins.top - (uint32)fMargins.bottom;
 }
 
 
 void 
-EDFBRender::GetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color &color) const
+EDFBRender::GetPixel(int32 x,  int32 y, bhapi::rgb_color &color) const
 {
 	DFBSurfacePixelFormat pixel_format;
 	void *ptr;
 	int pitch;
-	__be_uint32 dfbColor = 0;
+	uint32 dfbColor = 0;
 
-	x += (__be_int32)fMargins.left;
-	y += (__be_int32)fMargins.top;
+	x += (int32)fMargins.left;
+	y += (int32)fMargins.top;
 
 	if(fSurface == NULL) return;
 	if(fSurface->GetPixelFormat(fSurface, &pixel_format) != DFB_OK)
@@ -146,27 +146,27 @@ EDFBRender::GetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color &color) const
 	switch(DFB_BYTES_PER_PIXEL(pixel_format))
 	{
 		case 1: // 8-bpp
-			dfbColor = (__be_uint32)(*((__be_uint8*)ptr + y * pitch + x));
+			dfbColor = (uint32)(*((uint8*)ptr + y * pitch + x));
 			break;
 
 		case 2: // 15-bpp or 16-bpp
-			dfbColor = (__be_uint32)(*((__be_uint16*)ptr + y * pitch / 2 + x));
+			dfbColor = (uint32)(*((uint16*)ptr + y * pitch / 2 + x));
 			break;
 
 		case 3: // 24-bpp
 			{
-				__be_uint8 *bufp;
-				bufp = (__be_uint8*)ptr + y * pitch + x * 3;
+				uint8 *bufp;
+				bufp = (uint8*)ptr + y * pitch + x * 3;
 #ifdef BHAPI_BIG_ENDIAN
-				dfbColor = ((__be_uint32)bufp[0] << 16) | ((__be_uint32)bufp[1] << 8) | (__be_uint32)bufp[2];
+				dfbColor = ((uint32)bufp[0] << 16) | ((uint32)bufp[1] << 8) | (uint32)bufp[2];
 #else
-				dfbColor = ((__be_uint32)bufp[2] << 16) | ((__be_uint32)bufp[1] << 8) | (__be_uint32)bufp[0];
+				dfbColor = ((uint32)bufp[2] << 16) | ((uint32)bufp[1] << 8) | (uint32)bufp[0];
 #endif
 			}
 			break;
 
 		case 4: // 32-bpp
-			dfbColor = *((__be_uint32*)ptr + y * pitch / 4 + x);
+			dfbColor = *((uint32*)ptr + y * pitch / 4 + x);
 			break;
 
 		default:
@@ -235,13 +235,13 @@ EDFBRender::GetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color &color) const
 
 
 void 
-EDFBRender::PutPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color)
+EDFBRender::PutPixel(int32 x,  int32 y, bhapi::rgb_color color)
 {
 	if(fSurface == NULL) return;
 	if(fClipping.Contains(BPoint((float)x, (float)y)) == false) return;
 
-	x += (__be_int32)fMargins.left;
-	y += (__be_int32)fMargins.top;
+	x += (int32)fMargins.left;
+	y += (int32)fMargins.top;
 
 	fSurface->SetDrawingFlags(fSurface, DSDRAW_NOFX);
 	fSurface->SetColor(fSurface, color.red, color.green, color.blue, 255);
@@ -250,7 +250,7 @@ EDFBRender::PutPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color)
 
 
 void 
-EDFBRender::PutRect(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bhapi::rgb_color color)
+EDFBRender::PutRect(int32 x,  int32 y,  uint32 width,  uint32 height, bhapi::rgb_color color)
 {
 	if(fSurface == NULL || width == 0 || height == 0) return;
 
@@ -265,7 +265,7 @@ EDFBRender::PutRect(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint3
 #ifdef DFB_HAVE_FILLRECTANGLES
 	DFBRectangle *dfbRects = (DFBRectangle*)malloc(sizeof(DFBRectangle) * (size_t)aRegion.CountRects());
 #endif
-	for(__be_int32 i = 0; i < aRegion.CountRects(); i++)
+	for(int32 i = 0; i < aRegion.CountRects(); i++)
 	{
 		BRect r = aRegion.RectAt(i).FloorCopy();
 #ifdef DFB_HAVE_FILLRECTANGLES
@@ -299,7 +299,7 @@ static EDFBRender b_dfb_render;
 
 
 status_t b_dfbhapi::stroke_point(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-				__be_int32 x,  __be_int32 y, BRect *margins)
+				int32 x,  int32 y, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
 	b_dfb_render.PrepareForDrawing(dc);
@@ -313,15 +313,15 @@ status_t b_dfbhapi::stroke_point(IDirectFBSurface *dfbSurface, BGraphicsContext 
 
 
 status_t b_dfbhapi::stroke_points(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-				 const  __be_int32 *pts,  __be_int32 count, BRect *margins)
+				 const  int32 *pts,  int32 count, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
 	b_dfb_render.PrepareForDrawing(dc);
 
-	for(__be_int32 i = 0; i < count; i++)
+	for(int32 i = 0; i < count; i++)
 	{
-		__be_int32 x = *pts++;
-		__be_int32 y = *pts++;
+		int32 x = *pts++;
+		int32 y = *pts++;
 		b_dfb_render.StrokePoint(x, y, dc->Pattern());
 	}
 
@@ -332,31 +332,31 @@ status_t b_dfbhapi::stroke_points(IDirectFBSurface *dfbSurface, BGraphicsContext
 
 
 status_t b_dfbhapi::stroke_points_color(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-				       const BList *ptsArrayLists,  __be_int32 arrayCount, const bhapi::rgb_color *high_colors, BRect *margins)
+				       const BList *ptsArrayLists,  int32 arrayCount, const bhapi::rgb_color *high_colors, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
 	b_dfb_render.PrepareForDrawing(dc);
 
 	bhapi::rgb_color oldColor = dc->HighColor();
 
-	for(__be_int32 k = 0; k < arrayCount; k++, ptsArrayLists++)
+	for(int32 k = 0; k < arrayCount; k++, ptsArrayLists++)
 	{
 		if(ptsArrayLists == NULL) break;
 
 		bhapi::rgb_color color = (high_colors == NULL ? oldColor : *high_colors++);
 
-		__be_int32 count = ptsArrayLists->CountItems();
+		int32 count = ptsArrayLists->CountItems();
 		if(count <= 0) continue;
 
 		b_dfb_render.SetHighColor(color);
 
-		for(__be_int32 i = 0; i < count; i++)
+		for(int32 i = 0; i < count; i++)
 		{
-			const  __be_int32 *pt = (const  __be_int32*)ptsArrayLists->ItemAt(i);
+			const  int32 *pt = (const  int32*)ptsArrayLists->ItemAt(i);
 			if(!pt) continue;
 
-			__be_int32 x = *pt++;
-			__be_int32 y = *pt++;
+			int32 x = *pt++;
+			int32 y = *pt++;
 			b_dfb_render.StrokePoint(x, y, dc->Pattern());
 		}
 	}
@@ -368,7 +368,7 @@ status_t b_dfbhapi::stroke_points_color(IDirectFBSurface *dfbSurface, BGraphicsC
 
 
 status_t b_dfbhapi::stroke_points_alphas(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-					const  __be_int32 *pts, const  __be_uint8 *alpha,  __be_int32 count, BRect *margins)
+					const  int32 *pts, const  uint8 *alpha,  int32 count, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
 	b_dfb_render.PrepareForDrawing(dc);
@@ -376,10 +376,10 @@ status_t b_dfbhapi::stroke_points_alphas(IDirectFBSurface *dfbSurface, BGraphics
 
 	bhapi::rgb_color c = dc->HighColor();
 
-	for(__be_int32 i = 0; i < count; i++)
+	for(int32 i = 0; i < count; i++)
 	{
-		__be_int32 x = *pts++;
-		__be_int32 y = *pts++;
+		int32 x = *pts++;
+		int32 y = *pts++;
 		c.alpha = *alpha++;
 
 		b_dfb_render.SetHighColor(c);
@@ -393,7 +393,7 @@ status_t b_dfbhapi::stroke_points_alphas(IDirectFBSurface *dfbSurface, BGraphics
 
 
 status_t b_dfbhapi::stroke_line(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-			        __be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1, BRect *margins)
+			        int32 x0,  int32 y0,  int32 x1,  int32 y1, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
 	b_dfb_render.PrepareForDrawing(dc);
@@ -417,7 +417,7 @@ status_t b_dfbhapi::stroke_line(IDirectFBSurface *dfbSurface, BGraphicsContext *
 
 
 status_t b_dfbhapi::stroke_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-			        __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, BRect *margins)
+			        int32 x,  int32 y,  uint32 w,  uint32 h, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
 	b_dfb_render.PrepareForDrawing(dc);
@@ -426,12 +426,12 @@ status_t b_dfbhapi::stroke_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *
 
 	if(dc->PenSize() <= 1)
 	{
-		b_dfb_render.StrokeLine(x, y, x + (__be_int32)w, y, dc->Pattern());
-		if(h > 0) b_dfb_render.StrokeLine(x, y + (__be_int32)h, x + (__be_int32)w, y + (__be_int32)h, dc->Pattern());
+		b_dfb_render.StrokeLine(x, y, x + (int32)w, y, dc->Pattern());
+		if(h > 0) b_dfb_render.StrokeLine(x, y + (int32)h, x + (int32)w, y + (int32)h, dc->Pattern());
 		if(h > 1)
 		{
-			b_dfb_render.StrokeLine(x, y + 1, x, y + (__be_int32)h - 1, dc->Pattern());
-			b_dfb_render.StrokeLine(x + (__be_int32)w, y + 1, x + (__be_int32)w, y + (__be_int32)h - 1, dc->Pattern());
+			b_dfb_render.StrokeLine(x, y + 1, x, y + (int32)h - 1, dc->Pattern());
+			b_dfb_render.StrokeLine(x + (int32)w, y + 1, x + (int32)w, y + (int32)h - 1, dc->Pattern());
 		}
 		retVal = B_OK;
 	}
@@ -447,7 +447,7 @@ status_t b_dfbhapi::stroke_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *
 
 
 status_t b_dfb_fill_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-			      __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, BRect *margins)
+			      int32 x,  int32 y,  uint32 w,  uint32 h, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
 	b_dfb_render.PrepareForDrawing(dc);
@@ -461,7 +461,7 @@ status_t b_dfb_fill_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 
 
 status_t b_dfbhapi::stroke_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-				const  __be_int32 *rects,  __be_int32 count, BRect *margins)
+				const  int32 *rects,  int32 count, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
 	b_dfb_render.PrepareForDrawing(dc);
@@ -470,16 +470,16 @@ status_t b_dfbhapi::stroke_rects(IDirectFBSurface *dfbSurface, BGraphicsContext 
 
 	if(dc->PenSize() <= 1)
 	{
-		for(__be_int32 i = 0; i < count; i++)
+		for(int32 i = 0; i < count; i++)
 		{
-			__be_int32 x = *rects++;  __be_int32 y = *rects++;  __be_uint32 w = (__be_uint32)(*rects++);  __be_uint32 h = (__be_uint32)(*rects++);
+			int32 x = *rects++;  int32 y = *rects++;  uint32 w = (uint32)(*rects++);  uint32 h = (uint32)(*rects++);
 
-			b_dfb_render.StrokeLine(x, y, x + (__be_int32)w, y, dc->Pattern());
-			if(h > 0) b_dfb_render.StrokeLine(x, y + (__be_int32)h, x + (__be_int32)w, y + (__be_int32)h, dc->Pattern());
+			b_dfb_render.StrokeLine(x, y, x + (int32)w, y, dc->Pattern());
+			if(h > 0) b_dfb_render.StrokeLine(x, y + (int32)h, x + (int32)w, y + (int32)h, dc->Pattern());
 			if(h > 1)
 			{
-				b_dfb_render.StrokeLine(x, y + 1, x, y + (__be_int32)h - 1, dc->Pattern());
-				b_dfb_render.StrokeLine(x + (__be_int32)w, y + 1, x + (__be_int32)w, y + (__be_int32)h - 1, dc->Pattern());
+				b_dfb_render.StrokeLine(x, y + 1, x, y + (int32)h - 1, dc->Pattern());
+				b_dfb_render.StrokeLine(x + (int32)w, y + 1, x + (int32)w, y + (int32)h - 1, dc->Pattern());
 			}
 		}
 
@@ -497,14 +497,14 @@ status_t b_dfbhapi::stroke_rects(IDirectFBSurface *dfbSurface, BGraphicsContext 
 
 
 status_t b_dfb_fill_rects(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-			      const  __be_int32 *rects,  __be_int32 count, BRect *margins)
+			      const  int32 *rects,  int32 count, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
 	b_dfb_render.PrepareForDrawing(dc);
 
-	for(__be_int32 i = 0; i < count; i++)
+	for(int32 i = 0; i < count; i++)
 	{
-		__be_int32 x = *rects++;  __be_int32 y = *rects++;  __be_uint32 w = (__be_uint32)(*rects++);  __be_uint32 h = (__be_uint32)(*rects++);
+		int32 x = *rects++;  int32 y = *rects++;  uint32 w = (uint32)(*rects++);  uint32 h = (uint32)(*rects++);
 		b_dfb_render.FillRect(x, y, w + 1, h + 1, dc->Pattern());
 	}
 
@@ -537,7 +537,7 @@ status_t b_dfb_fill_region(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 
 
 status_t b_dfbhapi::stroke_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-			       __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle, BRect *margins)
+			       int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
 	b_dfb_render.PrepareForDrawing(dc);
@@ -549,7 +549,7 @@ status_t b_dfbhapi::stroke_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *d
 		if(endAngle - startAngle >= 360.f)
 			b_dfb_render.StrokeEllipse(x, y, w, h, dc->Pattern());
 		else
-			b_dfb_render.StrokeArc(x, y, w, h, (__be_int32)(startAngle * 64.f), (__be_int32)(endAngle * 64.f), dc->Pattern());
+			b_dfb_render.StrokeArc(x, y, w, h, (int32)(startAngle * 64.f), (int32)(endAngle * 64.f), dc->Pattern());
 		retVal = B_OK;
 	}
 	else
@@ -564,7 +564,7 @@ status_t b_dfbhapi::stroke_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *d
 
 
 status_t b_dfb_fill_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-			     __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle, BRect *margins)
+			     int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle, BRect *margins)
 {
 	b_dfb_render.SetSurface(dfbSurface, margins);
 	b_dfb_render.PrepareForDrawing(dc);
@@ -588,12 +588,12 @@ status_t b_dfb_fill_arc(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 
 
 status_t b_dfbhapi::stroke_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-				  const  __be_int32 *pts,  __be_int32 count, bool closed, BRect *margins)
+				  const  int32 *pts,  int32 count, bool closed, BRect *margins)
 {
 	BPolygon aPolygon;
 	BPoint aPt;
 
-	for(__be_int32 i = 0; i < count; i++)
+	for(int32 i = 0; i < count; i++)
 	{
 		aPt.x = (float)(*pts++) + 0.5f;
 		aPt.y = (float)(*pts++) + 0.5f;
@@ -614,12 +614,12 @@ status_t b_dfbhapi::stroke_polygon(IDirectFBSurface *dfbSurface, BGraphicsContex
 
 
 status_t b_dfb_fill_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-				const  __be_int32 *pts,  __be_int32 count, BRect *margins)
+				const  int32 *pts,  int32 count, BRect *margins)
 {
 	BPolygon aPolygon;
 	BPoint aPt;
 
-	for(__be_int32 i = 0; i < count; i++)
+	for(int32 i = 0; i < count; i++)
 	{
 		aPt.x = (float)(*pts++) + 0.5f;
 		aPt.y = (float)(*pts++) + 0.5f;
@@ -640,7 +640,7 @@ status_t b_dfb_fill_polygon(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
 
 
 status_t b_dfbhapi::stroke_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-				      __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius, BRect *margins)
+				      int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius, BRect *margins)
 {
 	// TODO
 	return B_ERROR;
@@ -648,7 +648,7 @@ status_t b_dfbhapi::stroke_round_rect(IDirectFBSurface *dfbSurface, BGraphicsCon
 
 
 status_t b_dfb_fill_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *dc,
-				    __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius, BRect *margins)
+				    int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius, BRect *margins)
 {
 	// TODO
 	return B_ERROR;
@@ -656,8 +656,8 @@ status_t b_dfb_fill_round_rect(IDirectFBSurface *dfbSurface, BGraphicsContext *d
 
 
 status_t b_dfb_draw_epixmap(IDirectFBSurface *dfbSurface, BGraphicsContext *dc, const BPixmap *pix,
-				__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
-				__be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH, BRect *margins)
+				int32 x,  int32 y,  uint32 w,  uint32 h,
+				int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH, BRect *margins)
 {
 	int maxX = 0, maxY = 0;
 
@@ -677,17 +677,17 @@ status_t b_dfb_draw_epixmap(IDirectFBSurface *dfbSurface, BGraphicsContext *dc, 
 	b_dfb_render.PrepareForDrawing(dc);
 	b_dfb_render.SetPenSize(0);
 
-	for(__be_int32 j = 0; j <= (__be_int32)h; j++)
+	for(int32 j = 0; j <= (int32)h; j++)
 	{
-		__be_int32 srcY = y + j;
+		int32 srcY = y + j;
 		if(srcY < 0 || dstY + j < 0) continue;
-		if(srcY > (__be_int32)pix->Bounds().Height() || dstY + j > maxY) break;
+		if(srcY > (int32)pix->Bounds().Height() || dstY + j > maxY) break;
 
-		for(__be_int32 i = 0; i <= (__be_int32)w; i++)
+		for(int32 i = 0; i <= (int32)w; i++)
 		{
-			__be_int32 srcX = x + i;
+			int32 srcX = x + i;
 			if(srcX < 0 || dstX + i < 0) continue;
-			if(srcX > (__be_int32)pix->Bounds().Width() || dstX + i > maxX) break;
+			if(srcX > (int32)pix->Bounds().Width() || dstX + i > maxX) break;
 
 			b_dfb_render.SetHighColor(pix->GetPixel(x + i, y + j));
 			b_dfb_render.StrokePoint(dstX + i, dstY + j, B_SOLID_HIGH);

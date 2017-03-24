@@ -49,11 +49,11 @@ public:
     BMessageRunner(const BMessenger &target,
                const BMessage *msg,
                bigtime_t interval,
-                __be_int32 count = -1);
+                int32 count = -1);
     BMessageRunner(const BMessenger &target,
                const BMessage *msg,
                bigtime_t interval,
-                __be_int32 count,
+                int32 count,
                const BMessenger &replyTo);
     virtual ~BMessageRunner();
 
@@ -63,24 +63,24 @@ public:
     status_t	SetReplyTo(const BMessenger &replyTo);
     status_t	SetMessage(const BMessage *msg);
     status_t	SetInterval(bigtime_t interval);
-    status_t	SetCount(__be_int32 count);
+    status_t	SetCount(int32 count);
 
-    status_t	GetInfo(bigtime_t *interval,  __be_int32 *count) const;
+    status_t	GetInfo(bigtime_t *interval,  int32 *count) const;
     status_t	GetInfo(BMessenger *target, BMessage *msg,
-                bigtime_t *interval,  __be_int32 *count,
+                bigtime_t *interval,  int32 *count,
                 BMessenger *replyTo = NULL) const;
 
 private:
     friend class BApplication;
 
-     __be_int32 fToken;
+     int32 fToken;
 
     BMessenger *fTarget;
     BMessenger *fReplyTo;
     BMessage *fMessage;
     bigtime_t fInterval;
     bigtime_t fPrevSendTime;
-     __be_int32 fCount;
+     int32 fCount;
 };
 //-----------------------------------------------------------------------------
 #endif /* __cplusplus */

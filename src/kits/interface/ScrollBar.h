@@ -68,7 +68,7 @@ public:
     virtual void	Draw(BRect updateRect);
     virtual void	MouseDown(BPoint where);
     virtual void	MouseUp(BPoint where);
-    virtual void	MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message);
+    virtual void	MouseMoved(BPoint where,  uint32 code, const BMessage *a_message);
     virtual void	DetachedFromWindow();
 
 private:
@@ -84,10 +84,10 @@ private:
     BView *fTarget;
 
     bool fTracking;
-     __be_int8 fTrackingState;
+     int8 fTrackingState;
     BPoint fMousePosition;
     BRegion fTrackingRegion;
-    void doScroll(__be_int8 state);
+    void doScroll(int8 state);
     void _SetValue(float value, bool response);
 
     BMessageRunner *fRunner;

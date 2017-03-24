@@ -40,9 +40,9 @@ BHAPI_IMPEXP bigtime_t b_real_time_clock_usecs(void)
 
 
 // return the number of seconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-BHAPI_IMPEXP  __be_uint32 b_real_time_clock(void)
+BHAPI_IMPEXP  uint32 b_real_time_clock(void)
 {
-	return (__be_uint32)real_time_clock();
+	return (uint32)real_time_clock();
 }
 
 

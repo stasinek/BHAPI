@@ -39,19 +39,19 @@ public:
              const char *name,
              const char *label,
              BMessage *message,
-              __be_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-              __be_uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+              uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+              uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
     virtual ~BRadioButton();
 
     virtual void	SetLabel(const char *label);
 
     virtual void	Draw(BRect updateRect);
     virtual void	MouseDown(BPoint where);
-    virtual void	KeyDown(const char *bytes,  __be_int32 numBytes);
-    virtual void	SetFont(const BFont *font,  __be_uint8 mask = B_FONT_ALL);
+    virtual void	KeyDown(const char *bytes,  int32 numBytes);
+    virtual void	SetFont(const BFont *font,  uint8 mask = B_FONT_ALL);
     virtual void	WindowActivated(bool state);
 
-    virtual void	SetValue(__be_int32 value);
+    virtual void	SetValue(int32 value);
     virtual void	GetPreferredSize(float *width, float *height);
 };
 

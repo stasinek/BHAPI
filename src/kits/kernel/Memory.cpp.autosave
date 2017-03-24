@@ -23,31 +23,34 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * File: Flattenable.h
+ * File: Memory.cpp
  *
  * --------------------------------------------------------------------------*/
 
-#ifndef BHAPI_FLATTENABLE_H
-#define BHAPI_FLATTENABLE_H
+#include "Memory.h"
+#include "../kernel/Debug.h"
 
-#include <Haiku.h>
-#ifdef __cplusplus /* Just for C++ */
-
-class BHAPI_IMPEXP BFlattenable {
-public:
-    virtual ~BFlattenable();
-
-    virtual bool		IsFixedSize() const = 0;
-
-    virtual type_code	TypeCode() const = 0;
-    virtual bool		AllowsTypeCode(type_code code) const;
-
-    virtual  ssize_t		FlattenedSize() const = 0;
-    virtual status_t	Flatten(void *buffer,  ssize_t numBytes);
-    virtual status_t	Unflatten(type_code, const void *buffer,  ssize_t numBytes);
+struct BHAPI_LOCAL b_mem {
+	void (*destroy_func)(void*);
+	void *data;
 };
 
-#endif /* __cplusplus */
+void* BMemory::Malloc(size_t size, void (*destroy_func)(void*))
+{
+	b_mem *mem = NULL;
+	if(~((size_t)0) - sizeof(b_mem) < size ||
+	   (mem = (b_mem*)malloc(sizeof(b_mem) + size)) == NULL) return NULL;
+	mem->destroy_func = destroy_func;
+	mem->data = (unsigned char*)mem + sizeof(b_mem);
+	return(mem->data);
+}
 
-#endif /* BHAPI_FLATTENABLE_H */
-
+void BMemory::Free(void *data)
+{
+	b_mem *mem = NULL;
+	if(data == NULL) return;
+	mem = (b_mem*)((unsigned char*)data - sizeof(b_mem));
+	if(mem->data != data) BHAPI_ERROR("[PRIVATE]: %s --- Invalid pointer.", __PRETTY_FUNCTION__);
+	if(mem->destroy_func != NULL) mem->destroy_func(mem->data);
+	free(mem);
+}

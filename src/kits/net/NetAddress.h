@@ -43,11 +43,11 @@
 #include "../support/Archivable.h"
 class BHAPI_IMPEXP BNetAddress : public BArchivable {
 public:
-    BNetAddress(const char *hostname = NULL,  __be_uint16 port = 0);
+    BNetAddress(const char *hostname = NULL,  uint16 port = 0);
     BNetAddress(const char *hostname, const char *protocol, const char *service);
     BNetAddress(const struct sockaddr_in &sa);
-    BNetAddress(const struct in_addr addr,  __be_uint16 port = 0);
-    BNetAddress(__be_uint32 addr,  __be_uint16 port = 0);
+    BNetAddress(const struct in_addr addr,  uint16 port = 0);
+    BNetAddress(uint32 addr,  uint16 port = 0);
     BNetAddress(const BNetAddress &from);
     virtual ~BNetAddress();
 
@@ -60,15 +60,15 @@ public:
 
     BNetAddress	&operator=(const BNetAddress &addr);
 
-    status_t	SetTo(const char *hostname,  __be_uint16 port = 0);
+    status_t	SetTo(const char *hostname,  uint16 port = 0);
     status_t	SetTo(const char *hostname, const char *protocol, const char *service);
     status_t	SetTo(const struct sockaddr_in &sa);
-    status_t	SetTo(const struct in_addr addr,  __be_uint16 port = 0);
-    status_t	SetTo(__be_uint32 addr = INADDR_ANY,  __be_uint16 port = 0);
+    status_t	SetTo(const struct in_addr addr,  uint16 port = 0);
+    status_t	SetTo(uint32 addr = INADDR_ANY,  uint16 port = 0);
 
-    status_t	GetAddr(char *hostname, size_t hostname_len,  __be_uint16 *port = NULL) const;
+    status_t	GetAddr(char *hostname, size_t hostname_len,  uint16 *port = NULL) const;
     status_t	GetAddr(struct sockaddr_in &sa) const;
-    status_t	GetAddr(struct in_addr &addr,  __be_uint16 *port = NULL) const;
+    status_t	GetAddr(struct in_addr &addr,  uint16 *port = NULL) const;
 
 private:
     struct sockaddr_in fAddr;

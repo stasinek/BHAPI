@@ -109,10 +109,10 @@ void BLineGenerator::InitDirection()
 <section id="ELINEGENERATOR_FUNCTION_START">
 	<title>开始像素点生成</title>
 	<programlisting>
-bool BLineGenerator::Start(__be_int32 &<emphasis>x</emphasis>,
-                            __be_int32 &<emphasis>y</emphasis>,
-                            __be_int32 &<emphasis>step</emphasis>,
-                            __be_int32 &<emphasis>pixels</emphasis>,
+bool BLineGenerator::Start(int32 &<emphasis>x</emphasis>,
+                            int32 &<emphasis>y</emphasis>,
+                            int32 &<emphasis>step</emphasis>,
+                            int32 &<emphasis>pixels</emphasis>,
                            bool <emphasis>isLoopX = true</emphasis>,
                            float <emphasis>pixelSize = 1</emphasis>)
 	</programlisting>
@@ -136,7 +136,7 @@ bool BLineGenerator::Start(__be_int32 &<emphasis>x</emphasis>,
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-bool BLineGenerator::Start(__be_int32 &x,  __be_int32 &y,  __be_int32 &step,  __be_int32 &pixels, bool isLoopX, float pixel_size)
+bool BLineGenerator::Start(int32 &x,  int32 &y,  int32 &step,  int32 &pixels, bool isLoopX, float pixel_size)
 {
 	if(pixel_size <= 0) return false;
 
@@ -184,11 +184,11 @@ bool BLineGenerator::Start(__be_int32 &x,  __be_int32 &y,  __be_int32 &step,  __
 	if(ptEndR.x > (float)B_MAXINT32 || ptEndR.x < (float)B_MININT32) return false;
 	if(ptEndR.y > (float)B_MAXINT32 || ptEndR.y < (float)B_MININT32) return false;
 
-	x = (__be_int32)ptStartR.x;
-	y = (__be_int32)ptStartR.y;
+	x = (int32)ptStartR.x;
+	y = (int32)ptStartR.y;
 
-	__be_int32 x2 = (__be_int32)ptEndR.x;
-	__be_int32 y2 = (__be_int32)ptEndR.y;
+	int32 x2 = (int32)ptEndR.x;
+	int32 y2 = (int32)ptEndR.y;
 
 	if((step = (fIsLoopX ? x2 - x : y2 - y)) == 0)
 	{
@@ -300,7 +300,7 @@ bool BLineGenerator::Start(__be_int32 &x,  __be_int32 &y,  __be_int32 &step,  __
 <section id="ELINEGENERATOR_FUNCTION_NEXT">
 	<title>下一个像素点生成</title>
 	<programlisting>
-bool BLineGenerator::Next(__be_int32 &<emphasis>next</emphasis>,  __be_int32 &<emphasis>pixels</emphasis>)
+bool BLineGenerator::Next(int32 &<emphasis>next</emphasis>,  int32 &<emphasis>pixels</emphasis>)
 	</programlisting>
 	<itemizedlist>
 		<listitem><para><emphasis>next</emphasis>是下一像素点 y(x) 坐标。
@@ -314,7 +314,7 @@ bool BLineGenerator::Next(__be_int32 &<emphasis>next</emphasis>,  __be_int32 &<e
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-bool BLineGenerator::Next(__be_int32 &next,  __be_int32 &pixels)
+bool BLineGenerator::Next(int32 &next,  int32 &pixels)
 {
 	if(fStep == 0) return false;
 

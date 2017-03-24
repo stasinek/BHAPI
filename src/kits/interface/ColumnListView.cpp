@@ -1736,7 +1736,7 @@ void BColumnListView::Draw(BRect updateRect)
 			BPoint(rect.right, rect.top));
 	}
 
-	__be_control_look->DrawScrollViewFrame(this, rect, updateRect,
+	be_control_look->DrawScrollViewFrame(this, rect, updateRect,
 		verticalScrollBarFrame, horizontalScrollBarFrame,
 		base, fBorderStyle, flags);
 
@@ -1745,7 +1745,7 @@ void BColumnListView::Draw(BRect updateRect)
 		BRegion region(rect & fStatusView->Frame().InsetByCopy(-2, -2));
 		ConstrainClippingRegion(&region);
 		rect.bottom = fStatusView->Frame().top - 1;
-		__be_control_look->DrawScrollViewFrame(this, rect, updateRect,
+		be_control_look->DrawScrollViewFrame(this, rect, updateRect,
 			BRect(), BRect(), base, fBorderStyle, flags);
 	}
 }
@@ -2427,7 +2427,7 @@ void TitleView::DrawTitle(BView* view, BRect rect, BColumn* column, bool depress
 	if (depressed)
 		base = tint_color(base, B_DARKEN_1_TINT);
 
-	__be_control_look->DrawButtonBackground(view, bgRect, rect, base, 0,
+	be_control_look->DrawButtonBackground(view, bgRect, rect, base, 0,
 		BControlLook::B_TOP_BORDER | BControlLook::B_BOTTOM_BORDER);
 
 	view->SetHighColor(tint_color(ui_color(B_PANEL_BACKGROUND_COLOR),

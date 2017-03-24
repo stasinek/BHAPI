@@ -52,7 +52,7 @@ class BLooper;
 class BHAPI_IMPEXP BMessenger {
 public:
     BMessenger();
-    BMessenger(const char *signature,  __be_int64 team = 0, status_t *perr = NULL);
+    BMessenger(const char *signature,  int64 team = 0, status_t *perr = NULL);
     BMessenger(const BHandler *handler, const BLooper *looper = NULL, status_t *perr = NULL);
 
     BMessenger(const BMessenger &msgr);
@@ -65,8 +65,8 @@ public:
     bool		LockTarget() const;
     status_t	LockTargetWithTimeout(bigtime_t timeout) const;
 
-    status_t	SendMessage(__be_uint32 command) const;
-    status_t	SendMessage(__be_uint32 command, BHandler *reply_to) const;
+    status_t	SendMessage(uint32 command) const;
+    status_t	SendMessage(uint32 command, BHandler *reply_to) const;
     status_t	SendMessage(const BMessage *a_message) const;
     status_t	SendMessage(const BMessage *a_message, BHandler *reply_to, bigtime_t timeout) const;
     status_t	SendMessage(const BMessage *a_message, BMessage *reply_message) const;
@@ -88,22 +88,22 @@ private:
     friend class BMessage;
     friend class BInvoker;
 
-    BMessenger(__be_int64 targetTeam,  __be_uint64 targetToken, bigtime_t timestamp, status_t *perr);
+    BMessenger(int64 targetTeam,  uint64 targetToken, bigtime_t timestamp, status_t *perr);
 
-     __be_uint64 fHandlerToken;
-     __be_uint64 fLooperToken;
+     uint64 fHandlerToken;
+     uint64 fLooperToken;
 
     void *fPort;
     void *fSem;
 
-     __be_int64 fTargetTeam;
+     int64 fTargetTeam;
 
     void InitData(const BHandler *handler, const BLooper *looper, status_t *perr);
 
-    static status_t _SendMessageToPort(void *port, const BMessage *msg,  __be_uint32 flags, bigtime_t timeout);
-    static BMessage* _GetMessageFromPort(void *port,  __be_uint32 flags, bigtime_t timeout, status_t *err);
+    static status_t _SendMessageToPort(void *port, const BMessage *msg,  uint32 flags, bigtime_t timeout);
+    static BMessage* _GetMessageFromPort(void *port,  uint32 flags, bigtime_t timeout, status_t *err);
 
-    status_t _SendMessage(const BMessage *a_message,  __be_uint64 replyToken, bigtime_t timeout) const;
+    status_t _SendMessage(const BMessage *a_message,  uint64 replyToken, bigtime_t timeout) const;
 };
 //-----------------------------------------------------------------------------
 #endif /* __cplusplus */

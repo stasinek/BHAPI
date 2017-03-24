@@ -33,7 +33,7 @@
 #include "Handler.h"
 #include "Looper.h"
 
-BMessageFilter::BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,  __be_uint32 command, bhapi::filter_hook filter)
+BMessageFilter::BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,  uint32 command, bhapi::filter_hook filter)
 	: fFiltersAny(false), fHandler(NULL)
 {
 	fDelivery = delivery;
@@ -52,7 +52,7 @@ BMessageFilter::BMessageFilter(bhapi::message_delivery delivery, bhapi::message_
 }
 
 
-BMessageFilter::BMessageFilter(__be_uint32 command, bhapi::filter_hook filter)
+BMessageFilter::BMessageFilter(uint32 command, bhapi::filter_hook filter)
 	: fFiltersAny(false), fDelivery(B_ANY_DELIVERY), fSource(B_ANY_SOURCE), fHandler(NULL)
 {
 	fCommand = command;
@@ -148,7 +148,7 @@ BMessageFilter::MessageSource() const
 }
 
 
-__be_uint32 BMessageFilter::Command() const
+uint32 BMessageFilter::Command() const
 {
 	return fCommand;
 }

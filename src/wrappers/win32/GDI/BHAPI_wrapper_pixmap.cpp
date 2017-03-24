@@ -36,7 +36,7 @@
 #include "../../kernel/Debug.h"
 
 
-EWin32GraphicsDrawable::EWin32GraphicsDrawable(EWin32GraphicsEngine *win32Engine,  __be_uint32 w,  __be_uint32 h)
+EWin32GraphicsDrawable::EWin32GraphicsDrawable(EWin32GraphicsEngine *win32Engine,  uint32 w,  uint32 h)
 	: BGraphicsDrawable(), win32Pixmap(NULL), win32HDC(NULL), win32Pen(NULL), win32Brush(NULL),
 	  fRequestAsyncWin(NULL), WMBHAPI_MESSAGE(0)
 {
@@ -176,7 +176,7 @@ EWin32GraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
 
 
 status_t 
-EWin32GraphicsDrawable::ResizeTo(__be_uint32 w,  __be_uint32 h)
+EWin32GraphicsDrawable::ResizeTo(uint32 w,  uint32 h)
 {
 	if(fRequestAsyncWin == NULL) return B_ERROR;
 
@@ -252,8 +252,8 @@ LRESULT _bhapi_resize_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi
 status_t 
 EWin32GraphicsDrawable::CopyTo(BGraphicsContext *dc,
 			       BGraphicsDrawable *dstDrawable,
-			        __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
-			        __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)
+			        int32 x,  int32 y,  uint32 w,  uint32 h,
+			        int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || dstDrawable == NULL) return B_ERROR;
 
@@ -314,7 +314,7 @@ LRESULT _bhapi_draw_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_c
 		if(win->win32Window == NULL) return FALSE;
 
 #if 0
-		__be_int8 otherThread = (GetCurrentThreadId() == win32Engine->win32ThreadID ? 0 : 1);
+		int8 otherThread = (GetCurrentThreadId() == win32Engine->win32ThreadID ? 0 : 1);
 		if(otherThread == 1)
 			otherThread = (AttachThreadInput(win32Engine->win32ThreadID, GetCurrentThreadId(), TRUE) == 0 ? 2 : 1);
 		if(otherThread > 1) return FALSE;
@@ -383,8 +383,8 @@ LRESULT _bhapi_draw_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_c
 
 status_t 
 EWin32GraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
-				    __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
-				    __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)
+				    int32 x,  int32 y,  uint32 w,  uint32 h,
+				    int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
 {
 	if(fRequestAsyncWin == NULL) return B_ERROR;
 

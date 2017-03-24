@@ -52,10 +52,10 @@ public:
     BObserverList();
     ~BObserverList();
 
-    status_t	AddWatching(BMessenger msgr,  __be_uint32 what);
-    status_t	RemoveWatching(BMessenger msgr,  __be_uint32 what);
-    bool		IsWatched(__be_uint32 what) const;
-    BList		*GetObserverList(__be_uint32 what) const;
+    status_t	AddWatching(BMessenger msgr,  uint32 what);
+    status_t	RemoveWatching(BMessenger msgr,  uint32 what);
+    bool		IsWatched(uint32 what) const;
+    BList		*GetObserverList(uint32 what) const;
 
 private:
     BList fListWatching;
@@ -93,21 +93,21 @@ public:
         return(fMessenger == msgr);
     }
 
-    bool AddWhat(__be_uint32 what)
+    bool AddWhat(uint32 what)
     {
         if(what == B_OBSERVER_OBSERVE_ALL) return false;
         return fWhats.AddItem(reinterpret_cast<void*>(what));
     }
 
-    bool RemoveWhat(__be_uint32 what)
+    bool RemoveWhat(uint32 what)
     {
         if(what == B_OBSERVER_OBSERVE_ALL) return false;
 
-         __be_int32 save_count = fWhats.CountItems();
+         int32 save_count = fWhats.CountItems();
 
-        for(__be_int32 i = 0; i < fWhats.CountItems(); i++)
+        for(int32 i = 0; i < fWhats.CountItems(); i++)
         {
-            if(reinterpret_cast<__be_uint32>(fWhats.ItemAt(i)) == what)
+            if(reinterpret_cast<uint32>(fWhats.ItemAt(i)) == what)
             {
                 fWhats.RemoveItem(i);
                 break;
@@ -117,18 +117,18 @@ public:
         return(save_count > fWhats.CountItems());
     }
 
-    bool HasWhat(__be_uint32 what) const
+    bool HasWhat(uint32 what) const
     {
         if(what == B_OBSERVER_OBSERVE_ALL) return false;
 
-        for(__be_int32 i = 0; i < fWhats.CountItems(); i++)
+        for(int32 i = 0; i < fWhats.CountItems(); i++)
         {
-            if(reinterpret_cast<__be_uint32>(fWhats.ItemAt(i)) == what) return true;
+            if(reinterpret_cast<uint32>(fWhats.ItemAt(i)) == what) return true;
         }
         return false;
     }
 
-     __be_int32 CountWhats() const
+     int32 CountWhats() const
     {
         return fWhats.CountItems();
     }
@@ -145,25 +145,25 @@ BObserverList::BObserverList()
 
 BObserverList::~BObserverList()
 {
-    for(__be_int32 i = 0; i < fListWatching.CountItems(); i++)
+    for(int32 i = 0; i < fListWatching.CountItems(); i++)
     {
         delete (BWatchingInfo*)fListWatching.ItemAt(i);
     }
 
-    for(__be_int32 i = 0; i < fListWatchingAll.CountItems(); i++)
+    for(int32 i = 0; i < fListWatchingAll.CountItems(); i++)
     {
         delete (BWatchingInfo*)fListWatchingAll.ItemAt(i);
     }
 }
 
-status_t BObserverList::AddWatching(BMessenger msgr,  __be_uint32 what)
+status_t BObserverList::AddWatching(BMessenger msgr,  uint32 what)
 {
     if(msgr.IsValid() == false) return B_BAD_HANDLER;
 
     BWatchingInfo *info = NULL;
-     __be_int32 index_single = -1, index_all = -1;
+     int32 index_single = -1, index_all = -1;
 
-    for(__be_int32 i = 0; i < fListWatching.CountItems(); i++)
+    for(int32 i = 0; i < fListWatching.CountItems(); i++)
     {
         if(((BWatchingInfo*)fListWatching.ItemAt(i))->IsSameMessenger(msgr))
         {
@@ -171,7 +171,7 @@ status_t BObserverList::AddWatching(BMessenger msgr,  __be_uint32 what)
             break;
         }
     }
-    for(__be_int32 i = 0; i < fListWatchingAll.CountItems(); i++)
+    for(int32 i = 0; i < fListWatchingAll.CountItems(); i++)
     {
         if(((BWatchingInfo*)fListWatchingAll.ItemAt(i))->IsSameMessenger(msgr))
         {
@@ -221,14 +221,14 @@ status_t BObserverList::AddWatching(BMessenger msgr,  __be_uint32 what)
     }
 }
 
-status_t BObserverList::RemoveWatching(BMessenger msgr,  __be_uint32 what)
+status_t BObserverList::RemoveWatching(BMessenger msgr,  uint32 what)
 {
     if(msgr.IsValid() == false) return B_BAD_HANDLER;
 
     BWatchingInfo *info = NULL;
-     __be_int32 index_single = -1, index_all = -1;
+     int32 index_single = -1, index_all = -1;
 
-    for(__be_int32 i = 0; i < fListWatching.CountItems(); i++)
+    for(int32 i = 0; i < fListWatching.CountItems(); i++)
     {
         if(((BWatchingInfo*)fListWatching.ItemAt(i))->IsSameMessenger(msgr))
         {
@@ -236,7 +236,7 @@ status_t BObserverList::RemoveWatching(BMessenger msgr,  __be_uint32 what)
             break;
         }
     }
-    for(__be_int32 i = 0; i < fListWatchingAll.CountItems(); i++)
+    for(int32 i = 0; i < fListWatchingAll.CountItems(); i++)
     {
         if(((BWatchingInfo*)fListWatchingAll.ItemAt(i))->IsSameMessenger(msgr))
         {
@@ -269,27 +269,27 @@ status_t BObserverList::RemoveWatching(BMessenger msgr,  __be_uint32 what)
 }
 
 
-BList* BObserverList::GetObserverList(__be_uint32 what) const
+BList* BObserverList::GetObserverList(uint32 what) const
 {
     BList *list = new BList();
 
     if(what == B_OBSERVER_OBSERVE_ALL)
     {
-        for(__be_int32 i = 0; i < fListWatchingAll.CountItems(); i++)
+        for(int32 i = 0; i < fListWatchingAll.CountItems(); i++)
             list->AddItem(((BWatchingInfo*)fListWatchingAll.ItemAt(i))->Messenger());
 
-        for(__be_int32 i = 0; i < fListWatching.CountItems(); i++)
+        for(int32 i = 0; i < fListWatching.CountItems(); i++)
             list->AddItem(((BWatchingInfo*)fListWatching.ItemAt(i))->Messenger());
     }
     else
     {
-        for(__be_int32 i = 0; i < fListWatching.CountItems(); i++)
+        for(int32 i = 0; i < fListWatching.CountItems(); i++)
         {
             BWatchingInfo *aInfo = (BWatchingInfo*)fListWatching.ItemAt(i);
             if(aInfo->HasWhat(what)) list->AddItem(aInfo->Messenger());
         }
 
-        for(__be_int32 i = 0; i < fListWatchingAll.CountItems(); i++)
+        for(int32 i = 0; i < fListWatchingAll.CountItems(); i++)
         {
             BWatchingInfo *aInfo = (BWatchingInfo*)fListWatchingAll.ItemAt(i);
             if(aInfo->HasWhat(what) == false) list->AddItem(aInfo->Messenger());
@@ -305,17 +305,17 @@ BList* BObserverList::GetObserverList(__be_uint32 what) const
     return list;
 }
 
-bool BObserverList::IsWatched(__be_uint32 what) const
+bool BObserverList::IsWatched(uint32 what) const
 {
     if(what == B_OBSERVER_OBSERVE_ALL) return(fListWatching.IsEmpty() == false || fListWatchingAll.IsEmpty() == false);
 
-    for(__be_int32 i = 0; i < fListWatching.CountItems(); i++)
+    for(int32 i = 0; i < fListWatching.CountItems(); i++)
     {
         if(((BWatchingInfo*)fListWatching.ItemAt(i))->HasWhat(what)) return true;
     }
 
-     __be_int32 exclude_times = 0;
-    for(__be_int32 i = 0; i < fListWatchingAll.CountItems(); i++)
+     int32 exclude_times = 0;
+    for(int32 i = 0; i < fListWatchingAll.CountItems(); i++)
     {
         if(((BWatchingInfo*)fListWatchingAll.ItemAt(i))->HasWhat(what)) exclude_times++;
     }
@@ -494,7 +494,7 @@ BHandler::UnlockLooper()
 
 
 status_t
-BHandler::StartWatching(BMessenger msgr,  __be_uint32 what)
+BHandler::StartWatching(BMessenger msgr,  uint32 what)
 {
     if(fObserverList == NULL) fObserverList = reinterpret_cast<void*>(new BObserverList());
     return reinterpret_cast<BObserverList*>(fObserverList)->AddWatching(msgr, what);
@@ -509,7 +509,7 @@ BHandler::StartWatchingAll(BMessenger msgr)
 
 
 status_t
-BHandler::StopWatching(BMessenger msgr,  __be_uint32 what)
+BHandler::StopWatching(BMessenger msgr,  uint32 what)
 {
     if(fObserverList == NULL) return B_ERROR;
     return reinterpret_cast<BObserverList*>(fObserverList)->RemoveWatching(msgr, what);
@@ -522,7 +522,7 @@ status_t BHandler::StopWatchingAll(BMessenger msgr)
 }
 
 
-status_t BHandler::StartWatching(BHandler *handler,  __be_uint32 what)
+status_t BHandler::StartWatching(BHandler *handler,  uint32 what)
 {
     status_t status;
     BMessenger msgr(handler, NULL, &status);
@@ -541,7 +541,7 @@ status_t BHandler::StartWatchingAll(BHandler *handler)
     return StartWatchingAll(msgr);
 }
 
-status_t BHandler::StopWatching(BHandler *handler,  __be_uint32 what)
+status_t BHandler::StopWatching(BHandler *handler,  uint32 what)
 {
     status_t status;
     BMessenger msgr(handler, NULL, &status);
@@ -559,7 +559,7 @@ status_t BHandler::StopWatchingAll(BHandler *handler)
     return StopWatchingAll(msgr);
 }
 
-void BHandler::SendNotices(__be_uint32 what, const BMessage *message)
+void BHandler::SendNotices(uint32 what, const BMessage *message)
 {
     if(fObserverList == NULL) return;
 
@@ -575,7 +575,7 @@ void BHandler::SendNotices(__be_uint32 what, const BMessage *message)
     }
     msg.AddInt32(B_OBSERVE_WHAT_CHANGE, what);
 
-    for(__be_int32 i = 0; i < msgrsList->CountItems(); i++)
+    for(int32 i = 0; i < msgrsList->CountItems(); i++)
     {
         BMessenger *aMsgr = (BMessenger*)msgrsList->ItemAt(i);
 
@@ -598,7 +598,7 @@ void BHandler::SendNotices(__be_uint32 what, const BMessage *message)
 }
 
 
-bool BHandler::IsWatched(__be_uint32 what) const
+bool BHandler::IsWatched(uint32 what) const
 {
     if(fObserverList == NULL) return false;
     return reinterpret_cast<BObserverList*>(fObserverList)->IsWatched(what);
@@ -632,7 +632,7 @@ bool BHandler::SetFilterList(const BList *filterList)
     {
         // Here we delete all filters without calling "RemoveFilter",
         // if you care about this, you should inherit this function.
-        for(__be_int32 i = 0; i < fFilters->CountItems(); i++)
+        for(int32 i = 0; i < fFilters->CountItems(); i++)
         {
             BMessageFilter *filter = (BMessageFilter*)fFilters->ItemAt(i);
             filter->fHandler = NULL;
@@ -644,14 +644,14 @@ bool BHandler::SetFilterList(const BList *filterList)
 
     if(filterList != NULL)
     {
-        for(__be_int32 i = 0; i < filterList->CountItems(); i++) AddFilter((BMessageFilter*)filterList->ItemAt(i));
+        for(int32 i = 0; i < filterList->CountItems(); i++) AddFilter((BMessageFilter*)filterList->ItemAt(i));
     }
 
     return true;
 }
 
 
-BHandler* BHandler::ResolveSpecifier(BMessage *msg,  __be_int32 index, BMessage *specifier,  __be_int32 what, const char *property)
+BHandler* BHandler::ResolveSpecifier(BMessage *msg,  int32 index, BMessage *specifier,  int32 what, const char *property)
 {
     // TODO
     BHAPI_WARNING("[APP]: %s --- TODO", __PRETTY_FUNCTION__);

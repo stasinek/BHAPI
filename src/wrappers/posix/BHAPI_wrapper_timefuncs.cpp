@@ -41,18 +41,18 @@
 // return the number of microseconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
 BHAPI_IMPEXP bigtime_t b_real_time_clock_usecs(void)
 {
-	__be_int64 current_time = B_INT64_CONSTANT(-1);
+	int64 current_time = B_INT64_CONSTANT(-1);
 #if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)
 	struct timespec ts;
 
 	if(clock_gettime(CLOCK_REALTIME, &ts) == 0)
-		current_time = (__be_int64)ts.tv_sec * SECS_TO_US + (__be_int64)(ts.tv_nsec + 500) / B_INT64_CONSTANT(1000);
+		current_time = (int64)ts.tv_sec * SECS_TO_US + (int64)(ts.tv_nsec + 500) / B_INT64_CONSTANT(1000);
 #else
 #ifdef HAVE_GETTIMEOFDAY
 	struct timeval tv;
 
 	if(gettimeofday(&tv, NULL) == 0)
-		current_time = (__be_int64)tv.tv_sec * SECS_TO_US + (__be_int64)tv.tv_usec;
+		current_time = (int64)tv.tv_sec * SECS_TO_US + (int64)tv.tv_usec;
 #else
 	#error "no time function implement b_real_time_clock_usec!"
 #endif
@@ -62,16 +62,16 @@ BHAPI_IMPEXP bigtime_t b_real_time_clock_usecs(void)
 
 
 // return the number of seconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-BHAPI_IMPEXP  __be_uint32 b_real_time_clock(void)
+BHAPI_IMPEXP  uint32 b_real_time_clock(void)
 {
-	__be_uint32 current_time = 0;
+	uint32 current_time = 0;
 #if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)
 	struct timespec ts;
-	if(clock_gettime(CLOCK_REALTIME, &ts) == 0) current_time = (__be_uint32)ts.tv_sec;
+	if(clock_gettime(CLOCK_REALTIME, &ts) == 0) current_time = (uint32)ts.tv_sec;
 #else
 #ifdef HAVE_GETTIMEOFDAY
 	struct timeval tv;
-	if(gettimeofday(&tv, NULL) == 0) current_time = (__be_uint32)tv.tv_sec;
+	if(gettimeofday(&tv, NULL) == 0) current_time = (uint32)tv.tv_sec;
 #else
 	#error "no time function implement b_real_time_clock!"
 #endif
@@ -80,7 +80,7 @@ BHAPI_IMPEXP  __be_uint32 b_real_time_clock(void)
 }
 
 
-static  __be_int64 b_unix_boot_time = B_INT64_CONSTANT(-1);
+static  int64 b_unix_boot_time = B_INT64_CONSTANT(-1);
 static BSimpleLocker b_unix_boot_time_locker(true);
 
 
@@ -101,7 +101,7 @@ BHAPI_IMPEXP bigtime_t b_system_boot_time(void)
 
 		if(clock_gettime(CLOCK_MONOTONIC, &ts) == 0)
 		{
-			bigtime_t up_time = (__be_int64)ts.tv_sec * SECS_TO_US + (__be_int64)(ts.tv_nsec + 500) / B_INT64_CONSTANT(1000);
+			bigtime_t up_time = (int64)ts.tv_sec * SECS_TO_US + (int64)(ts.tv_nsec + 500) / B_INT64_CONSTANT(1000);
 			retValue = b_unix_boot_time = b_real_time_clock_usecs() - up_time;
 		}
 #else

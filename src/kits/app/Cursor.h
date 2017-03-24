@@ -38,6 +38,7 @@
 //-----------------------------------------------------------------------------
 class BHAPI_IMPEXP BCursor : public BArchivable {
 public:
+    BCursor();
     BCursor(const void *cursorData);
     BCursor(const BCursor &cursor);
     virtual ~BCursor();
@@ -47,15 +48,15 @@ public:
     bool		operator!=(const BCursor &other) const;
 
     const void 	*Data() const;
-     __be_uint32		DataLength() const;
+     uint32		DataLength() const;
 
-     __be_uint8		ColorDepth() const;
-     __be_uint8		Width() const;
-     __be_uint8		Height() const;
+     uint8		ColorDepth() const;
+     uint8		Width() const;
+     uint8		Height() const;
 
-     __be_uint16		Spot() const;
-     __be_uint8		SpotX() const;
-     __be_uint8		SpotY() const;
+     uint16		Spot() const;
+     uint8		SpotX() const;
+     uint8		SpotY() const;
 
     const void	*Bits() const;
     const void	*Mask() const;
@@ -66,12 +67,12 @@ private:
 //-----------------------------------------------------------------------------
 #ifdef BHAPI_BUILD_LIBRARY
 //-----------------------------------------------------------------------------
-inline  __be_uint8 BCursor::SpotX() const
+inline  uint8 BCursor::SpotX() const
 {
     return(Spot() >> 8);
 }
 //-----------------------------------------------------------------------------
-inline  __be_uint8 BCursor::SpotY() const
+inline  uint8 BCursor::SpotY() const
 {
     return(Spot() & 0xff);
 }

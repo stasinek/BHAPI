@@ -204,7 +204,7 @@ BSplitLayout::BSplitLayout(BMessage* from)
 	fTopInset(0),
 	fBottomInset(0),
 	fSplitterSize(6),
-	fSpacing(__be_control_look->DefaultItemSpacing()),
+	fSpacing(be_control_look->DefaultItemSpacing()),
 
 	fSplitterItems(),
 	fVisibleItems(),

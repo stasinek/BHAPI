@@ -26,6 +26,10 @@ class BNode;
 #define BNODE_DEF
 #endif
 //-----------------------------------------------------------------------------
+namespace bhapi {
+struct entry_ref;
+}
+//-----------------------------------------------------------------------------
 class BNodeInfo {
 public:
                                 BNodeInfo();
@@ -50,12 +54,12 @@ public:
                                     app_verb verb = B_OPEN) const;
             status_t			SetPreferredApp(const char* signature,
                                     app_verb verb = B_OPEN);
-            status_t			GetAppHint(entry_ref* ref) const;
-            status_t			SetAppHint(const entry_ref* ref);
+            status_t			GetAppHint(bhapi::entry_ref* ref) const;
+            status_t			SetAppHint(const bhapi::entry_ref* ref);
 
             status_t			GetTrackerIcon(BBitmap* icon,
                                     icon_size which = B_LARGE_ICON) const;
-    static	status_t			GetTrackerIcon(const entry_ref* ref,
+    static	status_t			GetTrackerIcon(const bhapi::entry_ref* ref,
                                     BBitmap* icon,
                                     icon_size which = B_LARGE_ICON);
 private:

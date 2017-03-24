@@ -130,8 +130,8 @@ bool bhapi::get_prog_argc_argv_linux(BString &progName, BStringArray &progArgv)
 		{
 			bzero(procFileNameBuffer, (size_t)(maxPath + 1));
 			int length = readlink(procFileName.String(), procFileNameBuffer, (size_t)(maxPath + 1));
-			BString str;  __be_int32 strFound;
-			str.Append(procFileNameBuffer, length > 0 ? (__be_int32)length : 0);
+			BString str;  int32 strFound;
+			str.Append(procFileNameBuffer, length > 0 ? (int32)length : 0);
 			if((strFound = str.FindLast('/')) >= 0)
 			{
 				str.Remove(strFound + 1, -1);
@@ -149,7 +149,7 @@ bool bhapi::get_prog_argc_argv_linux(BString &progName, BStringArray &progArgv)
 
 				if(length > 0)
 				{
-					progName.SetTo(procFileNameBuffer, (__be_int32)length);
+					progName.SetTo(procFileNameBuffer, (int32)length);
 					progArgv.MakeEmpty();
 
 					procFileName.RemoveLast("/exe");

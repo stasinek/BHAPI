@@ -54,7 +54,7 @@ using namespace bhapi;
 #ifdef _WIN32
 extern "C" {
 namespace bhapi {
-char* win32_convert_utf8_to_active(const char *str,  __be_int32 length);
+char* win32_convert_utf8_to_active(const char *str,  int32 length);
 }
 }
 #endif // _WIN32
@@ -63,7 +63,7 @@ namespace bhapi {
 extern status_t path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);
 
 #ifndef _WIN32
-inline int file_openmode_to_flags(__be_uint32 open_mode)
+inline int file_openmode_to_flags(uint32 open_mode)
 {
     int flags;
 
@@ -87,7 +87,7 @@ inline int file_openmode_to_flags(__be_uint32 open_mode)
     return flags;
 }
 #else
-inline DWORD file_openmode_to_creation_disposition(__be_uint32 open_mode)
+inline DWORD file_openmode_to_creation_disposition(uint32 open_mode)
 {
     if(open_mode & B_CREATE_FILE)
     {
@@ -103,7 +103,7 @@ inline DWORD file_openmode_to_creation_disposition(__be_uint32 open_mode)
 
 
 #ifndef _WIN32
-inline mode_t file_access_mode_to_mode_t(__be_uint32 access_mode)
+inline mode_t file_access_mode_to_mode_t(uint32 access_mode)
 {
     mode_t mode = 0;
 
@@ -130,21 +130,21 @@ BFile::BFile()
 }
 
 
-BFile::BFile(const char *path,  __be_uint32 open_mode,  __be_uint32 access_mode)
+BFile::BFile(const char *path,  uint32 open_mode,  uint32 access_mode)
     : fFD(NULL), fMode(0)
 {
     SetTo(path, open_mode, access_mode);
 }
 
 
-BFile::BFile(const BEntry *entry,  __be_uint32 open_mode,  __be_uint32 access_mode)
+BFile::BFile(const BEntry *entry,  uint32 open_mode,  uint32 access_mode)
     : fFD(NULL), fMode(0)
 {
     SetTo(entry, open_mode, access_mode);
 }
 
 
-BFile::BFile(const BDirectory *dir, const char *leaf,  __be_uint32 open_mode,  __be_uint32 access_mode)
+BFile::BFile(const BDirectory *dir, const char *leaf,  uint32 open_mode,  uint32 access_mode)
     : fFD(NULL), fMode(0)
 {
     SetTo(dir, leaf, open_mode, access_mode);
@@ -172,15 +172,15 @@ BFile::~BFile()
 }
 
 
-status_t 
+status_t
 BFile::InitCheck() const
 {
     return(fFD == NULL ? B_NO_INIT : B_OK);
 }
 
 
-status_t 
-BFile::SetTo(const char *path,  __be_uint32 open_mode,  __be_uint32 access_mode)
+status_t
+BFile::SetTo(const char *path,  uint32 open_mode,  uint32 access_mode)
 {
     if(path == NULL || *path == 0) return B_BAD_VALUE;
 
@@ -229,8 +229,8 @@ BFile::SetTo(const char *path,  __be_uint32 open_mode,  __be_uint32 access_mode)
 }
 
 
-status_t 
-BFile::SetTo(const BEntry *entry,  __be_uint32 open_mode,  __be_uint32 access_mode)
+status_t
+BFile::SetTo(const BEntry *entry,  uint32 open_mode,  uint32 access_mode)
 {
     if(entry == NULL) return B_BAD_VALUE;
 
@@ -241,8 +241,8 @@ BFile::SetTo(const BEntry *entry,  __be_uint32 open_mode,  __be_uint32 access_mo
 }
 
 
-status_t 
-BFile::SetTo(const BDirectory *dir, const char *leaf,  __be_uint32 open_mode,  __be_uint32 access_mode)
+status_t
+BFile::SetTo(const BDirectory *dir, const char *leaf,  uint32 open_mode,  uint32 access_mode)
 {
     if(dir == NULL || leaf == NULL) return B_BAD_VALUE;
 
@@ -258,7 +258,7 @@ BFile::SetTo(const BDirectory *dir, const char *leaf,  __be_uint32 open_mode,  _
 }
 
 
-void 
+void
 BFile::Unset()
 {
     if(fFD != NULL)
@@ -275,14 +275,14 @@ BFile::Unset()
 }
 
 
-bool 
+bool
 BFile::IsReadable() const
 {
     return(fFD == NULL ? false : true);
 }
 
 
-bool 
+bool
 BFile::IsWritable() const
 {
     if(fFD == NULL) return false;
@@ -305,10 +305,10 @@ BFile::Read(void *buffer, size_t size)
 
 
 ssize_t
-BFile::ReadAt(__be_int64 pos, void *buffer, size_t size)
+BFile::ReadAt(int64 pos, void *buffer, size_t size)
 {
     if(!IsReadable() || buffer == NULL) return -1;
-    __be_int64 savePosition = Position();
+    int64 savePosition = Position();
     if(Seek(pos, B_SEEK_SET) < B_INT64_CONSTANT(0)) return -1;
     ssize_t retVal = Read(buffer, size);
     Seek(savePosition, B_SEEK_SET);
@@ -331,10 +331,10 @@ BFile::Write(const void *buffer, size_t size)
 
 
 ssize_t
-BFile::WriteAt(__be_int64 pos, const void *buffer, size_t size)
+BFile::WriteAt(int64 pos, const void *buffer, size_t size)
 {
     if(!IsWritable() || buffer == NULL) return -1;
-    __be_int64 savePosition = Position();
+    int64 savePosition = Position();
     if(Seek(pos, B_SEEK_SET) < B_INT64_CONSTANT(0)) return -1;
     ssize_t retVal = Write(buffer, size);
     Seek(savePosition, B_SEEK_SET);
@@ -342,8 +342,7 @@ BFile::WriteAt(__be_int64 pos, const void *buffer, size_t size)
 }
 
 
-__be_int64
-BFile::Seek(__be_int64 position,  __be_uint32 seek_mode)
+off_t BFile::Seek(off_t position,  uint32 seek_mode)
 {
     if(fFD == NULL || (seek_mode == B_SEEK_SET && position < B_INT64_CONSTANT(0))) return B_INT64_CONSTANT(-1);
 
@@ -353,9 +352,9 @@ BFile::Seek(__be_int64 position,  __be_uint32 seek_mode)
     else if(seek_mode == B_SEEK_END) whence = SEEK_END;
 
     off_t pos = (off_t)-1;
-    if(sizeof(off_t) > 4 || pos < (__be_int64)B_MAXUINT32) pos = lseek(*((int*)fFD), (off_t)position, whence);
+    if(sizeof(off_t) > 4 || pos < (int64)B_MAXUINT32) pos = lseek(*((int*)fFD), (off_t)position, whence);
     if(pos == (off_t)-1) return B_INT64_CONSTANT(-1);
-    return (__be_int64)pos;
+    return (int64)pos;
 #else
     DWORD whence = FILE_BEGIN;
     if(seek_mode == B_SEEK_CUR) whence = FILE_CURRENT;
@@ -370,15 +369,14 @@ BFile::Seek(__be_int64 position,  __be_uint32 seek_mode)
 }
 
 
-__be_int64
-BFile::Position() const
+off_t BFile::Position() const
 {
     if(fFD == NULL) return B_INT64_CONSTANT(-1);
 
 #ifndef _WIN32
     off_t pos = lseek(*((int*)fFD), 0, SEEK_CUR);
     if(pos == (off_t)-1) return B_INT64_CONSTANT(-1);
-    return (__be_int64)pos;
+    return (int64)pos;
 #else
     LARGE_INTEGER li;
     li.HighPart = 0;
@@ -389,19 +387,18 @@ BFile::Position() const
 }
 
 
-status_t 
-BFile::SetSize(__be_int64 size)
+status_t BFile::SetSize(int64 size)
 {
     if(fFD == NULL || size < B_INT64_CONSTANT(0) || size == B_MAXINT64) return B_BAD_VALUE;
 #ifndef _WIN32
     int status = -1;
-    if(sizeof(off_t) > 4 || size < (__be_int64)B_MAXUINT32) status = ftruncate(*((int*)fFD), (off_t)size);
+    if(sizeof(off_t) > 4 || size < (int64)B_MAXUINT32) status = ftruncate(*((int*)fFD), (off_t)size);
     if(status != 0) return B_FILE_ERROR;
 
     lseek(*((int*)fFD), 0, SEEK_SET);
     return B_OK;
 #else
-    __be_int64 oldPos = Position();
+    int64 oldPos = Position();
     if(Seek(size, B_SEEK_SET) < B_INT64_CONSTANT(0) || SetEndOfFile((HANDLE)fFD) == 0)
     {
         Seek(oldPos, B_SEEK_SET);
@@ -414,8 +411,7 @@ BFile::SetSize(__be_int64 size)
 }
 
 
-BFile&
-BFile::operator=(const BFile &from)
+BFile& BFile::operator=(const BFile &from)
 {
 #ifndef _WIN32
     int newFD = (from.fFD == NULL ? -1 : dup(*((int*)from.fFD)));
@@ -462,4 +458,3 @@ BFile::operator=(const BFile &from)
 
     return *this;
 }
-

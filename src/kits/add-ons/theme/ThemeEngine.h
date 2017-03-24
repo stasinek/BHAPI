@@ -74,23 +74,23 @@ typedef struct b_theme_engine {
 	void (*get_button_preferred_size)(struct b_theme_engine *engine,
                       const BView *view, float *width, float *height,
 					  const char *button_label);
-     __be_uint8 (*should_button_do_focus_flash)(struct b_theme_engine *engine, const BView *view);
+     uint8 (*should_button_do_focus_flash)(struct b_theme_engine *engine, const BView *view);
 	void (*get_button_border_margins)(struct b_theme_engine *engine,
                       const BView *view, float *left, float *top, float *right, float *bottom);
 	void (*draw_button_border)(struct b_theme_engine *engine,
                    BView *view, BRect frame,
-                   bool button_pushed, bool mouse_inside_button,  __be_uint8 focus_flash);
+                   bool button_pushed, bool mouse_inside_button,  uint8 focus_flash);
 	void (*clear_button_content)(struct b_theme_engine *engine,
                      BView *view, BRect frame,
-                     bool button_pushed, bool mouse_inside_button,  __be_uint8 focus_flash);
+                     bool button_pushed, bool mouse_inside_button,  uint8 focus_flash);
 	void (*draw_button_label)(struct b_theme_engine *engine,
                   BView *view, BRect frame,
 				  const char *button_label,
-                  bool button_pushed, bool mouse_inside_button,  __be_uint8 focus_flash);
+                  bool button_pushed, bool mouse_inside_button,  uint8 focus_flash);
 	void (*draw_button)(struct b_theme_engine *engine,
                 BView *view, BRect frame,
 			    const char *button_label,
-                bool button_pushed, bool mouse_inside_button,  __be_uint8 focus_flash);
+                bool button_pushed, bool mouse_inside_button,  uint8 focus_flash);
 
 	// engine
 	bool (*init)(struct b_theme_engine *engine);

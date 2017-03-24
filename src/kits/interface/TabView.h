@@ -90,23 +90,23 @@ class BHAPI_IMPEXP BTabView : public BView {
 public:
     BTabView(BRect frame, const char *name,
          bhapi::button_width tabWidth = B_WIDTH_AS_USUAL,
-          __be_uint32 resizeMode = B_FOLLOW_ALL,
-          __be_uint32 flags = B_WILL_DRAW | B_NAVIGABLE_JUMP | B_FRAME_EVENTS | B_NAVIGABLE);
+          uint32 resizeMode = B_FOLLOW_ALL,
+          uint32 flags = B_WILL_DRAW | B_NAVIGABLE_JUMP | B_FRAME_EVENTS | B_NAVIGABLE);
     virtual ~BTabView();
 
-    virtual void		Select(__be_int32 tabIndex);
-     __be_int32			Selection() const;
+    virtual void		Select(int32 tabIndex);
+     int32			Selection() const;
 
     virtual bool		AddTab(BView *tabTargetView, BTab *tab = NULL);
-    virtual BTab		*RemoveTab(__be_int32 tabIndex);
+    virtual BTab		*RemoveTab(int32 tabIndex);
 
-     __be_int32			CountTabs() const;
-    BTab			*TabAt(__be_int32 tabIndex) const;
-     __be_int32			TabIndexOf(const BTab *tab) const;
-    BView			*ViewForTab(__be_int32 tabIndex) const;
+     int32			CountTabs() const;
+    BTab			*TabAt(int32 tabIndex) const;
+     int32			TabIndexOf(const BTab *tab) const;
+    BView			*ViewForTab(int32 tabIndex) const;
     BView			*ContainerView() const;
 
-    virtual BRect		TabFrame(__be_int32 tabIndex) const;
+    virtual BRect		TabFrame(int32 tabIndex) const;
     virtual BRect		DrawTabs();
     virtual void		DrawBox(BRect selTabRect);
 
@@ -128,7 +128,7 @@ private:
     BList fTabs;
     bhapi::button_width fTabWidth;
     float fTabHeight;
-     __be_int32 fSelection;
+     int32 fSelection;
 
     BView *fContainer;
 };

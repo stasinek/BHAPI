@@ -39,7 +39,7 @@
 #include "../app/Application.h"
 
 
-EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine,  __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine,  int32 x,  int32 y,  uint32 w,  uint32 h)
 	: BGraphicsWindow(), fEngine(NULL), fFlags(0)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
@@ -112,7 +112,7 @@ EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine,  __be_int32 x,  
 			XInternAtom(fEngine->xDisplay, "ATOMBHAPI_CAST_ADDRESS", False), BHAPI_X11_ADDRESS_T_FORMAT,
 			PropModeReplace, (const unsigned char*)&self_address, BHAPI_X11_ADDRESS_T_NELEMENTS);
 
-	__be_uint8 winState = 0; // hidden
+	uint8 winState = 0; // hidden
 	XChangeProperty(fEngine->xDisplay, xWindow,
 			XInternAtom(fEngine->xDisplay, "ATOMBHAPI_WINDOW_STATE", False),
 			XInternAtom(fEngine->xDisplay, "ATOMBHAPI_BOOL", False), 8,
@@ -225,7 +225,7 @@ EXGraphicsWindow::SetBackgroundColor(bhapi::rgb_color bkColor)
 
 
 status_t 
-EXGraphicsWindow::SetFlags(__be_uint32 flags)
+EXGraphicsWindow::SetFlags(uint32 flags)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -404,7 +404,7 @@ EXGraphicsWindow::SetTitle(const char *title)
 
 
 status_t 
-EXGraphicsWindow::SetWorkspaces(__be_uint32 workspaces)
+EXGraphicsWindow::SetWorkspaces(uint32 workspaces)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -426,7 +426,7 @@ EXGraphicsWindow::SetWorkspaces(__be_uint32 workspaces)
 	if(format == 32 && nitems == 1 && prop != NULL) maxWorkspace = *((long*)prop);
 	if(prop != NULL) XFree(prop);
 //	BHAPI_DEBUG("[GRAPHICS]: Max Workspace is %ld", maxWorkspace);
-	if(workspaces != B_ALL_WORKSPACES && workspaces > (__be_uint32)maxWorkspace) return B_ERROR;
+	if(workspaces != B_ALL_WORKSPACES && workspaces > (uint32)maxWorkspace) return B_ERROR;
 
 	long desktop = (workspaces == B_ALL_WORKSPACES ? (long)0xFFFFFFFF : (long)(workspaces - 1));
 
@@ -463,7 +463,7 @@ EXGraphicsWindow::SetWorkspaces(__be_uint32 workspaces)
 
 
 status_t 
-EXGraphicsWindow::GetWorkspaces(__be_uint32 *workspaces)
+EXGraphicsWindow::GetWorkspaces(uint32 *workspaces)
 {
 	if(fEngine == NULL || workspaces == NULL) return B_ERROR;
 
@@ -504,7 +504,7 @@ EXGraphicsWindow::Iconify()
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	__be_uint8 *_winState = NULL;
+	uint8 *_winState = NULL;
 	Atom type = None;
 	int format;
 	unsigned long nitems;
@@ -520,7 +520,7 @@ EXGraphicsWindow::Iconify()
 
 	if(*_winState != 2) // if not iconed, here we don't check whether the window is hidden, leave it to BHAPI++
 	{
-		__be_uint8 winState = 2; // iconed
+		uint8 winState = 2; // iconed
 		XChangeProperty(fEngine->xDisplay, xWindow,
 				XInternAtom(fEngine->xDisplay, "ATOMBHAPI_WINDOW_STATE", False),
 				XInternAtom(fEngine->xDisplay, "ATOMBHAPI_BOOL", False), 8,
@@ -543,7 +543,7 @@ EXGraphicsWindow::Show()
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	__be_uint8 *_winState = NULL;
+	uint8 *_winState = NULL;
 	Atom type = None;
 	int format;
 	unsigned long nitems;
@@ -559,7 +559,7 @@ EXGraphicsWindow::Show()
 
 	if(*_winState != 1) // if not shown
 	{
-		__be_uint8 winState = 1; // shown
+		uint8 winState = 1; // shown
 		XChangeProperty(fEngine->xDisplay, xWindow,
 				XInternAtom(fEngine->xDisplay, "ATOMBHAPI_WINDOW_STATE", False),
 				XInternAtom(fEngine->xDisplay, "ATOMBHAPI_BOOL", False), 8,
@@ -582,7 +582,7 @@ EXGraphicsWindow::Hide()
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	__be_uint8 *_winState = NULL;
+	uint8 *_winState = NULL;
 	Atom type = None;
 	int format;
 	unsigned long nitems;
@@ -598,7 +598,7 @@ EXGraphicsWindow::Hide()
 
 	if(*_winState != 0) // if not hide
 	{
-		__be_uint8 winState = 0; // hidden
+		uint8 winState = 0; // hidden
 		XChangeProperty(fEngine->xDisplay, xWindow,
 				XInternAtom(fEngine->xDisplay, "ATOMBHAPI_WINDOW_STATE", False),
 				XInternAtom(fEngine->xDisplay, "ATOMBHAPI_BOOL", False), 8,
@@ -614,7 +614,7 @@ EXGraphicsWindow::Hide()
 
 
 status_t 
-EXGraphicsWindow::MoveTo(__be_int32 x,  __be_int32 y)
+EXGraphicsWindow::MoveTo(int32 x,  int32 y)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -630,7 +630,7 @@ EXGraphicsWindow::MoveTo(__be_int32 x,  __be_int32 y)
 
 
 status_t 
-EXGraphicsWindow::ResizeTo(__be_uint32 w,  __be_uint32 h)
+EXGraphicsWindow::ResizeTo(uint32 w,  uint32 h)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
@@ -652,7 +652,7 @@ EXGraphicsWindow::ResizeTo(__be_uint32 w,  __be_uint32 h)
 
 
 status_t 
-EXGraphicsWindow::MoveAndResizeTo(__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+EXGraphicsWindow::MoveAndResizeTo(int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
@@ -681,7 +681,7 @@ EXGraphicsWindow::Raise()
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	__be_uint8 *_winState = NULL;
+	uint8 *_winState = NULL;
 	Atom type = None;
 	int format;
 	unsigned long nitems;
@@ -714,7 +714,7 @@ EXGraphicsWindow::Lower(BGraphicsWindow *frontW)
 	BAutolock <EXGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	__be_uint8 *_winState = NULL;
+	uint8 *_winState = NULL;
 	Atom type = None;
 	int format;
 	unsigned long nitems;
@@ -946,7 +946,7 @@ EXGraphicsWindow::UngrabKeyboard()
 
 
 status_t 
-EXGraphicsWindow::SetSizeLimits(__be_uint32 min_w,  __be_uint32 max_w,  __be_uint32 min_h,  __be_uint32 max_h)
+EXGraphicsWindow::SetSizeLimits(uint32 min_w,  uint32 max_w,  uint32 min_h,  uint32 max_h)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -968,7 +968,7 @@ EXGraphicsWindow::SetSizeLimits(__be_uint32 min_w,  __be_uint32 max_w,  __be_uin
 
 
 status_t 
-EXGraphicsWindow::GetSizeLimits(__be_uint32 *min_w,  __be_uint32 *max_w,  __be_uint32 *min_h,  __be_uint32 *max_h)
+EXGraphicsWindow::GetSizeLimits(uint32 *min_w,  uint32 *max_w,  uint32 *min_h,  uint32 *max_h)
 {
 	if(min_w == NULL || max_w == NULL || min_h == NULL || max_h == NULL) return B_ERROR;
 
@@ -1004,7 +1004,7 @@ EXGraphicsWindow::GetSizeLimits(__be_uint32 *min_w,  __be_uint32 *max_w,  __be_u
 
 
 status_t 
-EXGraphicsWindow::QueryMouse(__be_int32 *x,  __be_int32 *y,  __be_int32 *buttons)
+EXGraphicsWindow::QueryMouse(int32 *x,  int32 *y,  int32 *buttons)
 {
 	if(x == NULL && y == NULL && buttons == NULL) return B_ERROR;
 
@@ -1035,8 +1035,8 @@ EXGraphicsWindow::QueryMouse(__be_int32 *x,  __be_int32 *y,  __be_int32 *buttons
 status_t 
 EXGraphicsWindow::CopyTo(BGraphicsContext *_dc_,
 			 BGraphicsDrawable *dstDrawable,
-			  __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
-			  __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)
+			  int32 x,  int32 y,  uint32 w,  uint32 h,
+			  int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
 {
 	if(w != dstW || h != dstH)
 	{

@@ -102,16 +102,12 @@ static const rgb_color _kDefaultColors[kColorWhichCount] = {
 };
 const rgb_color* BPrivate::kDefaultColors = &_kDefaultColors[0];
 
-
 namespace BPrivate {
-
-
 /*!	Fills the \a width, \a height, and \a colorSpace parameters according
     to the window screen's mode.
     Returns \c true if the mode is known.
 */
-bool
-get_mode_parameter(uint32 mode, int32& width, int32& height,
+bool get_mode_parameter(uint32 mode, int32& width, int32& height,
     uint32& colorSpace)
 {
     switch (mode) {
@@ -342,7 +338,7 @@ status_t set_screen_space(int32 index, uint32 space, bool stick)
         return B_BAD_VALUE;
 
     BScreen screen(B_MAIN_SCREEN_ID);
-    display_mode mode;
+    bhapi::display_mode mode;
 
     // TODO: What about refresh rate ?
     // currently we get it from the current video mode, but
@@ -1045,7 +1041,7 @@ rgb_color bhapi::ui_color(color_which which)
         return make_color(0, 0, 0);
     }
 
-    if (__be_app != NULL) {
+    if (be_app != NULL) {
         server_read_only_memory* shared
             = BApplication::Private::ServerReadOnlyMemory();
         if (shared != NULL)
@@ -1115,11 +1111,11 @@ _init_interface_kit_()
         return status;
 
     // init global clipboard
-    if (__be_clipboard == NULL)
-        __be_clipboard = new BClipboard(NULL);
+    if (be_clipboard == NULL)
+        be_clipboard = new BClipboard(NULL);
 
     // TODO: Could support different themes here in the future.
-    __be_control_look = new BControlLook();
+    be_control_look = new BControlLook();
 
     _init_global_fonts_();
 
@@ -1154,8 +1150,8 @@ _fini_interface_kit_()
     delete BPrivate::gWidthBuffer;
     BPrivate::gWidthBuffer = NULL;
 
-    delete  __be_control_look;
-    __be_control_look = NULL;
+    delete  be_control_look;
+    be_control_look = NULL;
 
     // TODO: Anything else?
 
@@ -1305,8 +1301,7 @@ do_window_action(int32 windowToken, int32 action, BRect zoomRect, bool zoom)
 }
 
 
-client_window_info*
-get_window_info(int32 serverToken)
+client_window_info* get_window_info(int32 serverToken)
 {
     BPrivate::AppServerLink link;
 
@@ -1329,8 +1324,7 @@ get_window_info(int32 serverToken)
 }
 
 
-int32*
-get_token_list(team_id team, int32* _count)
+int32* get_token_list(team_id team, int32* _count)
 {
     BPrivate::AppServerLink link;
 

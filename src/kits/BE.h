@@ -53,21 +53,21 @@
 extern "C" {
 namespace bhapi {
 #endif // __cplusplus
-extern BHAPI_IMPEXP const  __be_uint8 be_major_version;
-extern BHAPI_IMPEXP const  __be_uint8 be_minor_version;
-extern BHAPI_IMPEXP const  __be_uint8 be_micro_version;
-extern BHAPI_IMPEXP const  __be_uint8 be_interface_age;
-extern BHAPI_IMPEXP const  __be_uint16 be_binary_age;
+extern BHAPI_IMPEXP const  uint8 be_major_version;
+extern BHAPI_IMPEXP const  uint8 be_minor_version;
+extern BHAPI_IMPEXP const  uint8 be_micro_version;
+extern BHAPI_IMPEXP const  uint8 be_interface_age;
+extern BHAPI_IMPEXP const  uint16 be_binary_age;
 #ifdef __cplusplus
 } /* namespace */
 }
 #endif // __cplusplus
 #else
-extern const  __be_uint8 be_major_version;
-extern const  __be_uint8 be_minor_version;
-extern const  __be_uint8 be_micro_version;
-extern const  __be_uint8 be_interface_age;
-extern const  __be_uint16 be_binary_age;
+extern const  uint8 be_major_version;
+extern const  uint8 be_minor_version;
+extern const  uint8 be_micro_version;
+extern const  uint8 be_interface_age;
+extern const  uint16 be_binary_age;
 #endif
 //-----------------------------------------------------------------------------
 #endif // BHAPI_BE_H

@@ -45,7 +45,7 @@
 
 status_t 
 EWin32GraphicsDrawable::StrokePoint(BGraphicsContext *dc,
-				     __be_int32 x,  __be_int32 y)
+				     int32 x,  int32 y)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
@@ -64,7 +64,7 @@ EWin32GraphicsDrawable::StrokePoint(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::StrokePoints(BGraphicsContext *dc,
-				     const  __be_int32 *pts,  __be_int32 count)
+				     const  int32 *pts,  int32 count)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || count <= 0) return B_ERROR;
 
@@ -83,7 +83,7 @@ EWin32GraphicsDrawable::StrokePoints(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
-					    const BList *ptsArrayLists,  __be_int32 arrayCount, const bhapi::rgb_color *highColors)
+					    const BList *ptsArrayLists,  int32 arrayCount, const bhapi::rgb_color *highColors)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || ptsArrayLists == NULL || arrayCount <= 0) return B_ERROR;
 
@@ -103,7 +103,7 @@ EWin32GraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
-					    const  __be_int32 *pts, const  __be_uint8 *alpha,  __be_int32 count)
+					    const  int32 *pts, const  uint8 *alpha,  int32 count)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || alpha == NULL || count <= 0) return B_ERROR;
 
@@ -123,7 +123,7 @@ EWin32GraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::StrokeLine(BGraphicsContext *dc,
-				    __be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1)
+				    int32 x0,  int32 y0,  int32 x1,  int32 y1)
 {
 	if(x0 == x1 && y0 == y1) return StrokePoint(dc, x0, y0);
 
@@ -146,14 +146,14 @@ EWin32GraphicsDrawable::StrokeLine(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::StrokeRect(BGraphicsContext *dc,
-				    __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+				    int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
 	if(w == 0 && h == 0)
 		return StrokePoint(dc, x, y);
 	else if(w == 0 || h == 0)
-		return StrokeLine(dc, x, y, x + (__be_int32)w, y + (__be_int32)h);
+		return StrokeLine(dc, x, y, x + (int32)w, y + (int32)h);
 
 	bhapi::win32_gdi_callback_t callback;
 	callback.command = WMBHAPI_MESSAGE_STROKE_RECT;
@@ -172,7 +172,7 @@ EWin32GraphicsDrawable::StrokeRect(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::StrokeRects(BGraphicsContext *dc,
-				    const  __be_int32 *rects,  __be_int32 count)
+				    const  int32 *rects,  int32 count)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || rects == NULL || count <= 0) return B_ERROR;
 
@@ -191,7 +191,7 @@ EWin32GraphicsDrawable::StrokeRects(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::FillRect(BGraphicsContext *dc,
-				  __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+				  int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
@@ -212,7 +212,7 @@ EWin32GraphicsDrawable::FillRect(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::FillRects(BGraphicsContext *dc,
-				  const  __be_int32 *rects,  __be_int32 count)
+				  const  int32 *rects,  int32 count)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || rects == NULL || count <= 0) return B_ERROR;
 
@@ -238,7 +238,7 @@ EWin32GraphicsDrawable::FillRegion(BGraphicsContext *dc,
 	if(region.CountRects() == 1)
 	{
 		BRect r = region.RectAt(0).FloorSelf();
-		return FillRect(dc, (__be_int32)r.left, (__be_int32)r.top, (__be_uint32)r.Width(), (__be_uint32)r.Height());
+		return FillRect(dc, (int32)r.left, (int32)r.top, (uint32)r.Width(), (uint32)r.Height());
 	}
 
 	bhapi::win32_gdi_callback_t callback;
@@ -255,7 +255,7 @@ EWin32GraphicsDrawable::FillRegion(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
-					__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
+					int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
@@ -268,7 +268,7 @@ EWin32GraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
 	if(w == 0 && h == 0)
 		return StrokePoint(dc, x, y);
 	else if(w == 0 || h == 0)
-		return StrokeLine(dc, x, y, x + (__be_int32)w, y + (__be_int32)h);
+		return StrokeLine(dc, x, y, x + (int32)w, y + (int32)h);
 
 	bhapi::win32_gdi_callback_t callback;
 	callback.command = WMBHAPI_MESSAGE_STROKE_ROUND_RECT;
@@ -289,7 +289,7 @@ EWin32GraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
-				       __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
+				       int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
@@ -320,14 +320,14 @@ EWin32GraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::StrokeArc(BGraphicsContext *dc,
-				   __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
+				   int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
 	if(w == 0 && h == 0)
 		return StrokePoint(dc, x, y);
 	else if(w == 0 || h == 0)
-		return StrokeLine(dc, x, y, x + (__be_int32)w, y + (__be_int32)h);
+		return StrokeLine(dc, x, y, x + (int32)w, y + (int32)h);
 
 	bhapi::win32_gdi_callback_t callback;
 	callback.command = WMBHAPI_MESSAGE_STROKE_ARC;
@@ -348,7 +348,7 @@ EWin32GraphicsDrawable::StrokeArc(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::FillArc(BGraphicsContext *dc,
-				__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
+				int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL) return B_ERROR;
 
@@ -373,7 +373,7 @@ EWin32GraphicsDrawable::FillArc(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
-				      const  __be_int32 *pts,  __be_int32 count, bool closed)
+				      const  int32 *pts,  int32 count, bool closed)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || count <= 0) return B_ERROR;
 
@@ -398,7 +398,7 @@ EWin32GraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsDrawable::FillPolygon(BGraphicsContext *dc,
-				    const  __be_int32 *pts,  __be_int32 count)
+				    const  int32 *pts,  int32 count)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || pts == NULL || count <= 0) return B_ERROR;
 
@@ -422,7 +422,7 @@ EWin32GraphicsEngine::ConvertRegion(const BRegion *region)
 {
 	HRGN hrgn = NULL;
 
-	for(__be_int32 i = 0; i < (region ? region->CountRects() : 0); i++)
+	for(int32 i = 0; i < (region ? region->CountRects() : 0); i++)
 	{
 		BRect r = region->RectAt(i).FloorCopy();
 		if(i == 0) {hrgn = CreateRectRgn((int)r.left, (int)r.top, (int)r.right + 1, (int)r.bottom + 1); continue;}
@@ -546,7 +546,7 @@ EWin32GraphicsEngine::PrepareContext(EWin32GraphicsDrawable *pixmap, BGraphicsCo
 }
 
 
-static bool _bhapi_dc_query_high_color(const bhapi::pattern &pattern,  __be_int32 x,  __be_int32 y)
+static bool _bhapi_dc_query_high_color(const bhapi::pattern &pattern,  int32 x,  int32 y)
 {
 	if(pattern == B_SOLID_HIGH) return true;
 	else if(pattern == B_SOLID_LOW) return false;
@@ -554,7 +554,7 @@ static bool _bhapi_dc_query_high_color(const bhapi::pattern &pattern,  __be_int3
 	x %= 8;
 	y %= 8;
 
-	__be_uint8 pat = pattern.data[y];
+	uint8 pat = pattern.data[y];
 	if(pat & (1 << (7 - x))) return true;
 
 	return false;
@@ -613,26 +613,26 @@ LRESULT _bhapi_stroke_points(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false) return FALSE;
 
-	const  __be_int32 *pts = callback->pts;
+	const  int32 *pts = callback->pts;
 	if(callback->dc->PenSize() <= 1)
 	{
 		COLORREF wHighColor = RGB(callback->dc->HighColor().red, callback->dc->HighColor().green, callback->dc->HighColor().blue);
 		COLORREF wLowColor = RGB(callback->dc->LowColor().red, callback->dc->LowColor().green, callback->dc->LowColor().blue);
 
-		for(__be_int32 i = 0; i < callback->ptsCount; i++)
+		for(int32 i = 0; i < callback->ptsCount; i++)
 		{
-			__be_int32 x = *pts++;
-			__be_int32 y = *pts++;
+			int32 x = *pts++;
+			int32 y = *pts++;
 			SetPixel(callback->pixmap->win32HDC, x, y,
 				 (_bhapi_dc_query_high_color(callback->dc->Pattern(), x, y) ? wHighColor : wLowColor));
 		}
 	}
 	else
 	{
-		for(__be_int32 i = 0; i < callback->ptsCount; i++)
+		for(int32 i = 0; i < callback->ptsCount; i++)
 		{
-			__be_int32 x = *pts++;
-			__be_int32 y = *pts++;
+			int32 x = *pts++;
+			int32 y = *pts++;
 
 			int left = x - (int)((callback->dc->PenSize() - 1) / 2);
 			int top = y - (int)((callback->dc->PenSize() - 1) / 2);
@@ -728,13 +728,13 @@ LRESULT _bhapi_stroke_points_color(EWin32GraphicsEngine *win32Engine, bhapi::win
 
 	bhapi::rgb_color oldColor = callback->dc->HighColor();
 
-	for(__be_int32 k = 0; k < callback->ptsArrayCount; k++, ptsArrayLists++)
+	for(int32 k = 0; k < callback->ptsArrayCount; k++, ptsArrayLists++)
 	{
 		if(ptsArrayLists == NULL) break;
 
 		bhapi::rgb_color color = (high_colors == NULL ? callback->dc->HighColor() : *high_colors++);
 
-		__be_int32 count = ptsArrayLists->CountItems();
+		int32 count = ptsArrayLists->CountItems();
 		if(count <= 0) continue;
 
 		if(callback->dc->PenSize() <= 1)
@@ -744,13 +744,13 @@ LRESULT _bhapi_stroke_points_color(EWin32GraphicsEngine *win32Engine, bhapi::win
 						 callback->dc->LowColor().green,
 						 callback->dc->LowColor().blue);
 
-			for(__be_int32 i = 0; i < count; i++)
+			for(int32 i = 0; i < count; i++)
 			{
-				const  __be_int32 *pt = (const  __be_int32*)ptsArrayLists->ItemAt(i);
+				const  int32 *pt = (const  int32*)ptsArrayLists->ItemAt(i);
 				if(pt == NULL) continue;
 
-				__be_int32 x = *pt++;
-				__be_int32 y = *pt++;
+				int32 x = *pt++;
+				int32 y = *pt++;
 
 				SetPixel(callback->pixmap->win32HDC, x, y,
 					 (_bhapi_dc_query_high_color(callback->dc->Pattern(), x, y) ? wHighColor : wLowColor));
@@ -758,13 +758,13 @@ LRESULT _bhapi_stroke_points_color(EWin32GraphicsEngine *win32Engine, bhapi::win
 		}
 		else
 		{
-			for(__be_int32 i = 0; i < count; i++)
+			for(int32 i = 0; i < count; i++)
 			{
-				const  __be_int32 *pt = (const  __be_int32*)ptsArrayLists->ItemAt(i);
+				const  int32 *pt = (const  int32*)ptsArrayLists->ItemAt(i);
 				if(pt == NULL) continue;
 
-				__be_int32 x = *pt++;
-				__be_int32 y = *pt++;
+				int32 x = *pt++;
+				int32 y = *pt++;
 
 				if(oldColor != color)
 				{
@@ -803,14 +803,14 @@ LRESULT _bhapi_stroke_points_alpha(EWin32GraphicsEngine *win32Engine, bhapi::win
 
 	if(callback->dc->PenSize() <= 1)
 	{
-		const  __be_int32 *pts = callback->pts;
-		const  __be_uint8 *alphas = callback->ptsAlpha;
+		const  int32 *pts = callback->pts;
+		const  uint8 *alphas = callback->ptsAlpha;
 
-		for(__be_int32 i = 0; i < callback->ptsCount; i++)
+		for(int32 i = 0; i < callback->ptsCount; i++)
 		{
-			__be_int32 x = *pts++;
-			__be_int32 y = *pts++;
-			__be_uint8 alpha = *alphas++;
+			int32 x = *pts++;
+			int32 y = *pts++;
+			uint8 alpha = *alphas++;
 
 			COLORREF wcolor = GetPixel(callback->pixmap->win32HDC, (int)x, (int)y);
 			bhapi::rgb_color color;
@@ -902,10 +902,10 @@ LRESULT _bhapi_stroke_rects(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, true, true) == false) return FALSE;
 
-	const  __be_int32 *pts = callback->pts;
-	for(__be_int32 i = 0; i < callback->ptsCount; i++)
+	const  int32 *pts = callback->pts;
+	for(int32 i = 0; i < callback->ptsCount; i++)
 	{
-		__be_int32 x = *pts++;  __be_int32 y = *pts++;  __be_uint32 w = (__be_uint32)(*pts++);  __be_uint32 h = (__be_uint32)(*pts++);
+		int32 x = *pts++;  int32 y = *pts++;  uint32 w = (uint32)(*pts++);  uint32 h = (uint32)(*pts++);
 		Rectangle(callback->pixmap->win32HDC, x, y, x + (int)w + 1, y + (int)h + 1);
 	}
 
@@ -943,10 +943,10 @@ LRESULT _bhapi_fill_rects(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_ca
 
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false) return FALSE;
 
-	const  __be_int32 *pts = callback->pts;
-	for(__be_int32 i = 0; i < callback->ptsCount; i++)
+	const  int32 *pts = callback->pts;
+	for(int32 i = 0; i < callback->ptsCount; i++)
 	{
-		__be_int32 x = *pts++;  __be_int32 y = *pts++;  __be_uint32 w = (__be_uint32)(*pts++);  __be_uint32 h = (__be_uint32)(*pts++);
+		int32 x = *pts++;  int32 y = *pts++;  uint32 w = (uint32)(*pts++);  uint32 h = (uint32)(*pts++);
 		Rectangle(callback->pixmap->win32HDC, x, y, x + (int)w + 1, y + (int)h + 1);
 	}
 
@@ -966,7 +966,7 @@ LRESULT _bhapi_fill_region(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_c
 	if(win32Engine->PrepareContext(callback->pixmap, callback->dc, false, false) == false) return FALSE;
 
 	HRGN hrgn = NULL;
-	for(__be_int32 i = 0; i < callback->region->CountRects(); i++)
+	for(int32 i = 0; i < callback->region->CountRects(); i++)
 	{
 		BRect r = callback->region->RectAt(i).FloorSelf();
 		if(i == 0) {hrgn = CreateRectRgn((int)r.left, (int)r.top, (int)r.right + 1, (int)r.bottom + 1); continue;}
@@ -1085,12 +1085,12 @@ LRESULT _bhapi_stroke_arc(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_ca
 	if(ptStart == ptEnd)
 	{
 		status = Ellipse(callback->pixmap->win32HDC,
-				 callback->x, callback->y, callback->x + (__be_int32)callback->w + 1, callback->y + (__be_int32)callback->h + 1);
+				 callback->x, callback->y, callback->x + (int32)callback->w + 1, callback->y + (int32)callback->h + 1);
 	}
 	else
 	{
 		status = Arc(callback->pixmap->win32HDC,
-			     callback->x, callback->y, callback->x + (__be_int32)callback->w + 1, callback->y + (__be_int32)callback->h + 1,
+			     callback->x, callback->y, callback->x + (int32)callback->w + 1, callback->y + (int32)callback->h + 1,
 			     (int)ptStart.x, (int)ptStart.y, (int)ptEnd.x, (int)ptEnd.y);
 	}
 
@@ -1153,12 +1153,12 @@ LRESULT _bhapi_fill_arc(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_call
 	if(ptStart == ptEnd)
 	{
 		status = Ellipse(callback->pixmap->win32HDC,
-				 callback->x, callback->y, callback->x + (__be_int32)callback->w + 1, callback->y + (__be_int32)callback->h + 1);
+				 callback->x, callback->y, callback->x + (int32)callback->w + 1, callback->y + (int32)callback->h + 1);
 	}
 	else
 	{
 		status = Pie(callback->pixmap->win32HDC,
-			     callback->x, callback->y, callback->x + (__be_int32)callback->w + 1, callback->y + (__be_int32)callback->h + 1,
+			     callback->x, callback->y, callback->x + (int32)callback->w + 1, callback->y + (int32)callback->h + 1,
 			     (int)ptStart.x, (int)ptStart.y, (int)ptEnd.x, (int)ptEnd.y);
 	}
 
@@ -1176,8 +1176,8 @@ LRESULT _bhapi_stroke_polygon(EWin32GraphicsEngine *win32Engine, bhapi::win32_gd
 	POINT *wPts = new POINT[callback->ptsCount + 1];
 	if(wPts == NULL) return FALSE;
 
-	const  __be_int32 *pts = callback->pts;
-	for(__be_int32 i = 0; i < callback->ptsCount; i++)
+	const  int32 *pts = callback->pts;
+	for(int32 i = 0; i < callback->ptsCount; i++)
 	{
 		wPts[i].x = *pts++;
 		wPts[i].y = *pts++;
@@ -1275,8 +1275,8 @@ LRESULT _bhapi_fill_polygon(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_
 	POINT *wPts = new POINT[callback->ptsCount];
 	if(wPts == NULL) return FALSE;
 
-	const  __be_int32 *pts = callback->pts;
-	for(__be_int32 i = 0; i < callback->ptsCount; i++)
+	const  int32 *pts = callback->pts;
+	for(int32 i = 0; i < callback->ptsCount; i++)
 	{
 		wPts[i].x = *pts++;
 		wPts[i].y = *pts++;
@@ -1335,9 +1335,9 @@ LRESULT _bhapi_draw_epixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_
 		case B_RGB24_BIG:
 			if((bits = malloc((size_t)epixmap->BitsLength())) != NULL)
 			{
-				__be_uint8 *tmp = (__be_uint8*)bits;
-				const  __be_uint8 *src = (const  __be_uint8*)epixmap->Bits();
-				for(__be_uint32 i = 0; i < epixmap->BitsLength(); i += 3, tmp += 3, src += 3)
+				uint8 *tmp = (uint8*)bits;
+				const  uint8 *src = (const  uint8*)epixmap->Bits();
+				for(uint32 i = 0; i < epixmap->BitsLength(); i += 3, tmp += 3, src += 3)
 				{
 					tmp[0] = src[2];
 					tmp[1] = src[1];

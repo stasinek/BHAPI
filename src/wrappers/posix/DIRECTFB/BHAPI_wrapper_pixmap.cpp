@@ -35,7 +35,7 @@
 #include "BHAPI_wrapper_dfb.h"
 
 
-EDFBGraphicsDrawable::EDFBGraphicsDrawable(EDFBGraphicsEngine *dfbEngine,  __be_uint32 w,  __be_uint32 h)
+EDFBGraphicsDrawable::EDFBGraphicsDrawable(EDFBGraphicsEngine *dfbEngine,  uint32 w,  uint32 h)
 	: BGraphicsDrawable(), fEngine(NULL)
 {
 	if(w >= B_MAXINT32 || h >= B_MAXINT32)
@@ -112,7 +112,7 @@ EDFBGraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
 
 
 status_t 
-EDFBGraphicsDrawable::ResizeTo(__be_uint32 w,  __be_uint32 h)
+EDFBGraphicsDrawable::ResizeTo(uint32 w,  uint32 h)
 {
 	if(w >= B_MAXINT32 || h >= B_MAXINT32)
 	{
@@ -147,8 +147,8 @@ EDFBGraphicsDrawable::ResizeTo(__be_uint32 w,  __be_uint32 h)
 status_t 
 EDFBGraphicsDrawable::CopyTo(BGraphicsContext *dc,
 			     BGraphicsDrawable *dstDrawable,
-			      __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
-			      __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)
+			      int32 x,  int32 y,  uint32 w,  uint32 h,
+			      int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
 {
 	if(w >= B_MAXINT32 || h >= B_MAXINT32 || dstW >= B_MAXINT32 || dstH >= B_MAXINT32)
 	{
@@ -214,8 +214,8 @@ EDFBGraphicsDrawable::CopyTo(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
-				  __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
-				  __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)
+				  int32 x,  int32 y,  uint32 w,  uint32 h,
+				  int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -228,7 +228,7 @@ EDFBGraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
 
 status_t 
 EDFBGraphicsDrawable::StrokePoint(BGraphicsContext *dc,
-				   __be_int32 x,  __be_int32 y)
+				   int32 x,  int32 y)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -241,7 +241,7 @@ EDFBGraphicsDrawable::StrokePoint(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::StrokePoints(BGraphicsContext *dc,
-				   const  __be_int32 *pts,  __be_int32 count)
+				   const  int32 *pts,  int32 count)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -254,7 +254,7 @@ EDFBGraphicsDrawable::StrokePoints(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
-					  const BList *ptsArrayLists,  __be_int32 arrayCount,
+					  const BList *ptsArrayLists,  int32 arrayCount,
 					  const bhapi::rgb_color *highColors)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -268,7 +268,7 @@ EDFBGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
-					  const  __be_int32 *pts, const  __be_uint8 *alpha,  __be_int32 count)
+					  const  int32 *pts, const  uint8 *alpha,  int32 count)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -281,7 +281,7 @@ EDFBGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::StrokeLine(BGraphicsContext *dc,
-				  __be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1)
+				  int32 x0,  int32 y0,  int32 x1,  int32 y1)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -294,7 +294,7 @@ EDFBGraphicsDrawable::StrokeLine(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
-				    const  __be_int32 *pts,  __be_int32 count, bool closed)
+				    const  int32 *pts,  int32 count, bool closed)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -307,7 +307,7 @@ EDFBGraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::FillPolygon(BGraphicsContext *dc,
-				  const  __be_int32 *pts,  __be_int32 count)
+				  const  int32 *pts,  int32 count)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -320,7 +320,7 @@ EDFBGraphicsDrawable::FillPolygon(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::StrokeRect(BGraphicsContext *dc,
-				  __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+				  int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -333,7 +333,7 @@ EDFBGraphicsDrawable::StrokeRect(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::FillRect(BGraphicsContext *dc,
-			        __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+			        int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -346,7 +346,7 @@ EDFBGraphicsDrawable::FillRect(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::StrokeRects(BGraphicsContext *dc,
-				  const  __be_int32 *rects,  __be_int32 count)
+				  const  int32 *rects,  int32 count)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -359,7 +359,7 @@ EDFBGraphicsDrawable::StrokeRects(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::FillRects(BGraphicsContext *dc,
-			        const  __be_int32 *rects,  __be_int32 count)
+			        const  int32 *rects,  int32 count)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -385,7 +385,7 @@ EDFBGraphicsDrawable::FillRegion(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
-				       __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
+				       int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -398,7 +398,7 @@ EDFBGraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
-				     __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
+				     int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -411,7 +411,7 @@ EDFBGraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::StrokeArc(BGraphicsContext *dc,
-				__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
+				int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -424,7 +424,7 @@ EDFBGraphicsDrawable::StrokeArc(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsDrawable::FillArc(BGraphicsContext *dc,
-			       __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
+			       int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
 {
 	if(fEngine == NULL) return B_ERROR;
 

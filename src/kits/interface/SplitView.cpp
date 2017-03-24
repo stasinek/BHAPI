@@ -335,7 +335,7 @@ void BSplitView::_DrawDefaultSplitter(BView* view, BRect frame,
 	const BRect& updateRect, orientation orientation, bool pressed)
 {
 	uint32 flags = pressed ? BControlLook::B_ACTIVATED : 0;
-	__be_control_look->DrawSplitter(view, frame, updateRect, view->ViewColor(),
+	be_control_look->DrawSplitter(view, frame, updateRect, view->ViewColor(),
 		orientation, flags, 0);
 }
 

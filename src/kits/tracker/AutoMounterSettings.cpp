@@ -70,7 +70,7 @@ AutomountSettingsPanel::AutomountSettingsPanel()
 	SettingsView(""),
 	fTarget(kMountServerSignature)
 {
-	const float spacing =  __be_control_look->DefaultItemSpacing();
+	const float spacing =  be_control_look->DefaultItemSpacing();
 
 	// "Automatic Disk Mounting" group
 

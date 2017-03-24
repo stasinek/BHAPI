@@ -37,8 +37,8 @@ class BHAPI_IMPEXP BBox : public BView {
 public:
     BBox(BRect frame,
          const char *name = NULL,
-          __be_uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-          __be_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS | B_NAVIGABLE_JUMP,
+          uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+          uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS | B_NAVIGABLE_JUMP,
          bhapi::border_style border = B_FANCY_BORDER);
     virtual ~BBox();
 

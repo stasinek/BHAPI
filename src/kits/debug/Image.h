@@ -28,8 +28,8 @@ public:
                                 Image();
     virtual						~Image();
 
-            const image_info&	Info() const		{ return fInfo; }
-            image_id			ID() const			{ return fInfo.id; }
+            const bhapi::image_info&	Info() const		{ return fInfo; }
+            bhapi::image_id			ID() const			{ return fInfo.id; }
             const char*			Name() const		{ return fInfo.name; }
             addr_t				TextAddress() const
                 { return (addr_t)fInfo.text; }
@@ -51,7 +51,7 @@ public:
                                     int32* _symbolType) const;
 
 protected:
-            image_info			fInfo;
+            bhapi::image_info			fInfo;
 };
 
 
@@ -88,7 +88,7 @@ public:
                                 ImageFile();
     virtual						~ImageFile();
 
-            status_t			Init(const image_info& info);
+            status_t			Init(const bhapi::image_info& info);
             status_t			Init(const char* path);
 
 private:
@@ -111,7 +111,7 @@ public:
                                 KernelImage();
     virtual						~KernelImage();
 
-            status_t			Init(const image_info& info);
+            status_t			Init(const bhapi::image_info& info);
 };
 
 
@@ -120,7 +120,7 @@ public:
                                 CommPageImage();
     virtual						~CommPageImage();
 
-            status_t			Init(const image_info& info);
+            status_t			Init(const bhapi::image_info& info);
 };
 
 }	// namespace Debug

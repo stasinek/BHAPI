@@ -125,7 +125,7 @@ void BNavigator::Draw(BRect updateRect)
 	rgb_color base = LowColor();
 	uint32 flags = 0;
 
-	__be_control_look->DrawBorder(this, rect, updateRect, base,
+	be_control_look->DrawBorder(this, rect, updateRect, base,
 		B_PLAIN_BORDER, flags, BControlLook::B_BOTTOM_BORDER);
 
 	_inherited::Draw(rect & updateRect);

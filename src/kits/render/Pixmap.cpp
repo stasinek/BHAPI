@@ -43,7 +43,7 @@ BPixmap::BPixmap()
 }
 
 
-BPixmap::BPixmap(__be_uint32 width,  __be_uint32 height, bhapi::color_space space)
+BPixmap::BPixmap(uint32 width,  uint32 height, bhapi::color_space space)
 	: BRender(), fPtr(NULL), fColorSpace((bhapi::color_space)0), fRows(0), fColumns(0), fRowBytes(0)
 {
 	ResizeTo(width, height, space);
@@ -53,7 +53,7 @@ BPixmap::BPixmap(__be_uint32 width,  __be_uint32 height, bhapi::color_space spac
 BPixmap::BPixmap(BRect bounds, bhapi::color_space space)
 	: BRender(), fPtr(NULL), fColorSpace((bhapi::color_space)0), fRows(0), fColumns(0), fRowBytes(0)
 {
-	ResizeTo((__be_uint32)(max_c(bounds.IntegerWidth() + 1, 0)), (__be_uint32)(max_c(bounds.IntegerHeight() + 1, 0)), space);
+	ResizeTo((uint32)(max_c(bounds.IntegerWidth() + 1, 0)), (uint32)(max_c(bounds.IntegerHeight() + 1, 0)), space);
 }
 
 
@@ -85,7 +85,7 @@ BPixmap::Bits() const
 }
 
 
-__be_uint32
+uint32
 BPixmap::BitsLength() const
 {
 	if(!fPtr) return 0;
@@ -93,7 +93,7 @@ BPixmap::BitsLength() const
 }
 
 
-__be_uint32
+uint32
 BPixmap::BytesPerRow() const
 {
 	if(!fPtr) return 0;
@@ -117,7 +117,7 @@ BPixmap::Bounds() const
 
 
 bool 
-BPixmap::ResizeTo(__be_uint32 width,  __be_uint32 height, bhapi::color_space space)
+BPixmap::ResizeTo(uint32 width,  uint32 height, bhapi::color_space space)
 {
 	if(width == 0 || height == 0)
 	{
@@ -163,7 +163,7 @@ BPixmap::ResizeTo(__be_uint32 width,  __be_uint32 height, bhapi::color_space spa
 	fRows = height;
 	fColumns = width;
 	fColorSpace = space;
-	fRowBytes = (__be_uint32)allocSize / fRows;
+	fRowBytes = (uint32)allocSize / fRows;
 
 	return true;
 }
@@ -172,7 +172,7 @@ BPixmap::ResizeTo(__be_uint32 width,  __be_uint32 height, bhapi::color_space spa
 bool 
 BPixmap::ResizeTo(BRect bounds, bhapi::color_space space)
 {
-	return ResizeTo((__be_uint32)(max_c(bounds.IntegerWidth() + 1, 0)), (__be_uint32)(max_c(bounds.IntegerHeight() + 1, 0)), space);
+	return ResizeTo((uint32)(max_c(bounds.IntegerWidth() + 1, 0)), (uint32)(max_c(bounds.IntegerHeight() + 1, 0)), space);
 }
 
 
@@ -191,7 +191,7 @@ BPixmap::FreeData(void *data)
 
 
 void 
-BPixmap::GetFrame(__be_int32 *originX,  __be_int32 *originY,  __be_uint32 *width,  __be_uint32 *height) const
+BPixmap::GetFrame(int32 *originX,  int32 *originY,  uint32 *width,  uint32 *height) const
 {
 	if(originX) *originX = 0;
 	if(originY) *originY = 0;
@@ -201,16 +201,16 @@ BPixmap::GetFrame(__be_int32 *originX,  __be_int32 *originY,  __be_uint32 *width
 
 
 void 
-BPixmap::GetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color &color) const
+BPixmap::GetPixel(int32 x,  int32 y, bhapi::rgb_color &color) const
 {
 	if(fPtr == NULL) return;
 
-	if(x < 0 || y < 0 || (__be_uint32)x >= fColumns || (__be_uint32)y >= fRows) return;
+	if(x < 0 || y < 0 || (uint32)x >= fColumns || (uint32)y >= fRows) return;
 
 	if(fColorSpace == B_RGB32 || fColorSpace == B_RGBA32)
 	{
-		const  __be_uint32 *bits = (const  __be_uint32*)fPtr;
-		bits += (size_t)(fColumns * (__be_uint32)y + (__be_uint32)x);
+		const  uint32 *bits = (const  uint32*)fPtr;
+		bits += (size_t)(fColumns * (uint32)y + (uint32)x);
 #ifndef BHAPI_BIG_ENDIAN
 		/* A-R-G-B */
 		color.set_to((*bits >> 16) & 0xff, (*bits >> 8) & 0xff, *bits & 0xff,
@@ -223,8 +223,8 @@ BPixmap::GetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color &color) const
 	}
 	else if(fColorSpace == B_RGB24)
 	{
-		const  __be_uint8 *bits = (const  __be_uint8*)fPtr;
-		bits += 3 * (size_t)(fColumns * (__be_uint32)y + (__be_uint32)x);
+		const  uint8 *bits = (const  uint8*)fPtr;
+		bits += 3 * (size_t)(fColumns * (uint32)y + (uint32)x);
 		color.blue = *bits++;
 		color.green = *bits++;
 		color.red = *bits;
@@ -232,8 +232,8 @@ BPixmap::GetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color &color) const
 	}
 	else if(fColorSpace == B_RGB24_BIG)
 	{
-		const  __be_uint8 *bits = (const  __be_uint8*)fPtr;
-		bits += 3 * (size_t)(fColumns * (__be_uint32)y + (__be_uint32)x);
+		const  uint8 *bits = (const  uint8*)fPtr;
+		bits += 3 * (size_t)(fColumns * (uint32)y + (uint32)x);
 		color.red = *bits++;
 		color.green = *bits++;
 		color.blue = *bits;
@@ -241,38 +241,38 @@ BPixmap::GetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color &color) const
 	}
 	else if(fColorSpace == B_CMAP8)
 	{
-		const  __be_uint8 *bits = (const  __be_uint8*)fPtr;
-		bits += (size_t)(fColumns * (__be_uint32)y + (__be_uint32)x);
+		const  uint8 *bits = (const  uint8*)fPtr;
+		bits += (size_t)(fColumns * (uint32)y + (uint32)x);
         color = bhapi::find_color_for_index(*bits);
 	}
 }
 
 
 void 
-BPixmap::PutPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color)
+BPixmap::PutPixel(int32 x,  int32 y, bhapi::rgb_color color)
 {
 	if(fPtr == NULL) return;
 
-	if(x < 0 || y < 0 || (__be_uint32)x >= fColumns || (__be_uint32)y >= fRows) return;
+	if(x < 0 || y < 0 || (uint32)x >= fColumns || (uint32)y >= fRows) return;
 
 	if(fColorSpace == B_RGB32 || fColorSpace == B_RGBA32)
 	{
-		__be_uint32 *bits = (__be_uint32*)fPtr;
-		bits += (size_t)(fColumns * (__be_uint32)y + (__be_uint32)x);
+		uint32 *bits = (uint32*)fPtr;
+		bits += (size_t)(fColumns * (uint32)y + (uint32)x);
 #ifndef BHAPI_BIG_ENDIAN
 		/* A-R-G-B */
-		*bits = ((fColorSpace == B_RGBA32 ? (__be_uint32)color.alpha : 0x000000ff) << 24) |
-			((__be_uint32)color.red << 16) | ((__be_uint32)color.green << 8) | (__be_uint32)color.blue;
+		*bits = ((fColorSpace == B_RGBA32 ? (uint32)color.alpha : 0x000000ff) << 24) |
+			((uint32)color.red << 16) | ((uint32)color.green << 8) | (uint32)color.blue;
 #else
 		/* B-G-R-A */
-		*bits = (fColorSpace == B_RGBA32 ? (__be_uint32)color.alpha : 0x000000ff) |
-			((__be_uint32)color.red << 8) | ((__be_uint32)color.green << 16) | ((__be_uint32)color.blue << 24);
+		*bits = (fColorSpace == B_RGBA32 ? (uint32)color.alpha : 0x000000ff) |
+			((uint32)color.red << 8) | ((uint32)color.green << 16) | ((uint32)color.blue << 24);
 #endif
 	}
 	else if(fColorSpace == B_RGB24)
 	{
-		__be_uint8 *bits = (__be_uint8*)fPtr;
-		bits += 3 * (size_t)(fColumns * (__be_uint32)y + (__be_uint32)x);
+		uint8 *bits = (uint8*)fPtr;
+		bits += 3 * (size_t)(fColumns * (uint32)y + (uint32)x);
 
 		*bits++ = color.blue;
 		*bits++ = color.green;
@@ -280,8 +280,8 @@ BPixmap::PutPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color)
 	}
 	else if(fColorSpace == B_RGB24_BIG)
 	{
-		__be_uint8 *bits = (__be_uint8*)fPtr;
-		bits += 3 * (size_t)(fColumns * (__be_uint32)y + (__be_uint32)x);
+		uint8 *bits = (uint8*)fPtr;
+		bits += 3 * (size_t)(fColumns * (uint32)y + (uint32)x);
 
 		*bits++ = color.red;
 		*bits++ = color.green;
@@ -289,8 +289,8 @@ BPixmap::PutPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color)
 	}
 	else if(fColorSpace == B_CMAP8)
 	{
-		__be_uint8 *bits = (__be_uint8*)fPtr;
-		bits += (size_t)(fColumns * (__be_uint32)y + (__be_uint32)x);
+		uint8 *bits = (uint8*)fPtr;
+		bits += (size_t)(fColumns * (uint32)y + (uint32)x);
 
         *bits = bhapi::find_index_for_color(color.red, color.green, color.blue);
 	}
@@ -298,62 +298,62 @@ BPixmap::PutPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color)
 
 
 void 
-BPixmap::PutRect(__be_int32 x,  __be_int32 y,  __be_uint32 width,  __be_uint32 height, bhapi::rgb_color color)
+BPixmap::PutRect(int32 x,  int32 y,  uint32 width,  uint32 height, bhapi::rgb_color color)
 {
 	if(fPtr == NULL) return;
 
-	if(x < 0 || y < 0 || (__be_uint32)x >= fColumns || (__be_uint32)y >= fRows) return;
+	if(x < 0 || y < 0 || (uint32)x >= fColumns || (uint32)y >= fRows) return;
 
-	width = min_c((__be_uint32)(fColumns - x), width);
-	height = min_c((__be_uint32)(fRows - y), height);
+	width = min_c((uint32)(fColumns - x), width);
+	height = min_c((uint32)(fRows - y), height);
 
 	if(width == 0 || height == 0) return;
 
 	if((fColorSpace == B_RGB32 || fColorSpace == B_RGBA32) && DrawingMode() == B_OP_COPY)
 	{
-		__be_uint32 val;
+		uint32 val;
 #ifndef BHAPI_BIG_ENDIAN
 		/* A-R-G-B */
-		val = ((fColorSpace == B_RGBA32 ? (__be_uint32)color.alpha : 0x000000ff) << 24) |
-		       ((__be_uint32)color.red << 16) | ((__be_uint32)color.green << 8) | (__be_uint32)color.blue;
+		val = ((fColorSpace == B_RGBA32 ? (uint32)color.alpha : 0x000000ff) << 24) |
+		       ((uint32)color.red << 16) | ((uint32)color.green << 8) | (uint32)color.blue;
 #else
 		/* B-G-R-A */
-		val = (fColorSpace == B_RGBA32 ? (__be_uint32)color.alpha : 0x000000ff) |
-		       ((__be_uint32)color.red << 8) | ((__be_uint32)color.green << 16) | ((__be_uint32)color.blue << 24);
+		val = (fColorSpace == B_RGBA32 ? (uint32)color.alpha : 0x000000ff) |
+		       ((uint32)color.red << 8) | ((uint32)color.green << 16) | ((uint32)color.blue << 24);
 #endif
-		for(__be_uint32 k = 0; k < height; k++)
+		for(uint32 k = 0; k < height; k++)
 		{
-			__be_uint32 *bits = (__be_uint32*)fPtr + (size_t)(fColumns * (__be_uint32)(y + k) + (__be_uint32)x);
-			for(__be_uint32 i = 0; i < width; i++) memcpy(bits++, &val, sizeof(val));
+			uint32 *bits = (uint32*)fPtr + (size_t)(fColumns * (uint32)(y + k) + (uint32)x);
+			for(uint32 i = 0; i < width; i++) memcpy(bits++, &val, sizeof(val));
 		}
 	}
 	else if(fColorSpace == B_CMAP8 && DrawingMode() == B_OP_COPY)
 	{
-         __be_uint8 val = bhapi::find_index_for_color(color.red, color.green, color.blue);
-		for(__be_uint32 k = 0; k < height; k++)
+         uint8 val = bhapi::find_index_for_color(color.red, color.green, color.blue);
+		for(uint32 k = 0; k < height; k++)
 		{
-			__be_uint8 *bits = (__be_uint8*)fPtr + (size_t)(fColumns * (__be_uint32)(y + k) + (__be_uint32)x);
-			for(__be_uint32 i = 0; i < width; i++) memcpy(bits++, &val, sizeof(val));
+			uint8 *bits = (uint8*)fPtr + (size_t)(fColumns * (uint32)(y + k) + (uint32)x);
+			for(uint32 i = 0; i < width; i++) memcpy(bits++, &val, sizeof(val));
 		}
 	}
 	else
 	{
-		for(__be_uint32 k = 0; k < height; k++)
-			for(__be_uint32 i = 0; i < width; i++) PutPixel(x + i, y + k, color);
+		for(uint32 k = 0; k < height; k++)
+			for(uint32 i = 0; i < width; i++) PutPixel(x + i, y + k, color);
 	}
 }
 
 
 void 
-BPixmap::SetBits(const void *data,  __be_int32 length,  __be_int32 offset, bhapi::color_space space)
+BPixmap::SetBits(const void *data,  int32 length,  int32 offset, bhapi::color_space space)
 {
 	if(data == NULL || length <= 0 || offset < 0 || !IsValid()) return;
-	if(BitsLength() - (__be_uint32)length < (__be_uint32)offset) length = BitsLength() - (__be_uint32)offset;
+	if(BitsLength() - (uint32)length < (uint32)offset) length = BitsLength() - (uint32)offset;
 	if(length <= 0) return;
 
 	if(fColorSpace == space)
 	{
-		memcpy((__be_uint8*)fPtr + offset, data, (size_t)length);
+		memcpy((uint8*)fPtr + offset, data, (size_t)length);
 	}
 	else
 	{
@@ -364,14 +364,14 @@ BPixmap::SetBits(const void *data,  __be_int32 length,  __be_int32 offset, bhapi
 
 
 void 
-BPixmap::SetPixel(__be_int32 x,  __be_int32 y, bhapi::rgb_color color)
+BPixmap::SetPixel(int32 x,  int32 y, bhapi::rgb_color color)
 {
 	PutPixel(x, y, color);
 }
 
 
 bhapi::rgb_color
-BPixmap::GetPixel(__be_int32 x,  __be_int32 y) const
+BPixmap::GetPixel(int32 x,  int32 y) const
 {
     bhapi::rgb_color color = bhapi::make_rgb_color(0, 0, 0, 0);
 	GetPixel(x, y, color);
@@ -380,21 +380,21 @@ BPixmap::GetPixel(__be_int32 x,  __be_int32 y) const
 
 
 void 
-BPixmap::DrawXPM(const char **xpm_data,  __be_int32 destX,  __be_int32 destY,  __be_int32 srcX,  __be_int32 srcY,  __be_int32 srcW,  __be_int32 srcH,  __be_uint8 alpha)
+BPixmap::DrawXPM(const char **xpm_data,  int32 destX,  int32 destY,  int32 srcX,  int32 srcY,  int32 srcW,  int32 srcH,  uint8 alpha)
 {
 	if(xpm_data == NULL || *xpm_data == NULL ||
-	   destX >= (__be_int32)fColumns || destY >= (__be_int32)fRows || srcX < 0 || srcY < 0 || srcW == 0 || srcH == 0) return;
+	   destX >= (int32)fColumns || destY >= (int32)fRows || srcX < 0 || srcY < 0 || srcW == 0 || srcH == 0) return;
 
 	BString str, tmp;
 	BStringArray colors;
-	__be_int32 xpmWidth = 0, xpmHeight = 0, numColor = 0, bytesColor = 0, offset;
+	int32 xpmWidth = 0, xpmHeight = 0, numColor = 0, bytesColor = 0, offset;
 
 	str.SetTo(*xpm_data++);
 
 	offset = 0;
-	for(__be_int32 i = 0; i < 4; i++)
+	for(int32 i = 0; i < 4; i++)
 	{
-		__be_int32 oldOffset = offset;
+		int32 oldOffset = offset;
 		offset = (i == 3 ? str.Length() : str.FindFirst(" ", offset));
 		if(offset < 0) break;
 		tmp.SetTo(str.String() + oldOffset, (offset++) - oldOffset);
@@ -417,10 +417,10 @@ BPixmap::DrawXPM(const char **xpm_data,  __be_int32 destX,  __be_int32 destY,  _
 	if(srcW < 0) srcW = xpmWidth;
 	if(srcH < 0) srcH = xpmHeight;
 
-	__be_uint32 *colors_array = (__be_uint32*)malloc(sizeof(__be_uint32) * (size_t)numColor);
+	uint32 *colors_array = (uint32*)malloc(sizeof(uint32) * (size_t)numColor);
 	if(colors_array == NULL) return;
 
-	for(__be_int32 i = 0; i < numColor && *xpm_data != NULL; i++, xpm_data++)
+	for(int32 i = 0; i < numColor && *xpm_data != NULL; i++, xpm_data++)
 	{
 		str.SetTo(*xpm_data);
 
@@ -449,26 +449,26 @@ BPixmap::DrawXPM(const char **xpm_data,  __be_int32 destX,  __be_int32 destY,  _
 
 	if(colors.CountItems() != numColor) {free(colors_array); return;}
 
-	for(__be_int32 j = 0; j < xpmHeight && *xpm_data != NULL; j++, xpm_data++)
+	for(int32 j = 0; j < xpmHeight && *xpm_data != NULL; j++, xpm_data++)
 	{
-		__be_int32 Y = destY + (j - srcY);
+		int32 Y = destY + (j - srcY);
 
 		if(Y < 0 || j < srcY) continue;
-		if(Y >= (__be_int32)fRows || j >= srcY + (__be_int32)srcH) break;
+		if(Y >= (int32)fRows || j >= srcY + (int32)srcH) break;
 
 		offset = 0;
 		str.SetTo(*xpm_data);
 
-		for(__be_int32 i = 0; i < xpmWidth && offset <= str.Length() - bytesColor; i++, offset += bytesColor)
+		for(int32 i = 0; i < xpmWidth && offset <= str.Length() - bytesColor; i++, offset += bytesColor)
 		{
-			__be_int32 X = destX + (i - srcX);
+			int32 X = destX + (i - srcX);
 
 			if(X < 0 || i < srcX) continue;
-			if(X >= (__be_int32)fColumns || i >= srcX + (__be_int32)srcW) break;
+			if(X >= (int32)fColumns || i >= srcX + (int32)srcW) break;
 
 			tmp.SetTo(str.String() + offset, bytesColor);
-			__be_int32 *color = NULL;
-             __be_int32 found = colors.FindString(tmp);
+			int32 *color = NULL;
+             int32 found = colors.FindString(tmp);
 			if(found < 0) break;
 			if(colors.ItemAt(found, (void**)&color) == NULL) break;
 			if(color == NULL || *color == 0xE9E9E9) continue;

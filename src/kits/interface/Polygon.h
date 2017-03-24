@@ -34,7 +34,7 @@
 #include "../interface/Rect.h"
 class BHAPI_IMPEXP BPolygon {
 public:
-    BPolygon(const BPoint *pts,  __be_int32 nPts);
+    BPolygon(const BPoint *pts,  int32 nPts);
     BPolygon();
     BPolygon(const BPolygon *poly);
     virtual ~BPolygon();
@@ -42,15 +42,15 @@ public:
     BPolygon	&operator=(const BPolygon &poly);
     BRect		Frame() const;
 
-    bool		AddPoints(const BPoint *pts,  __be_int32 nPts, bool updateFrame = true);
-    void		RemovePoints(__be_int32 fromIndex,  __be_int32 toIndex, bool updateFrame = true);
+    bool		AddPoints(const BPoint *pts,  int32 nPts, bool updateFrame = true);
+    void		RemovePoints(int32 fromIndex,  int32 toIndex, bool updateFrame = true);
 
     bool		AddPoint(const BPoint &aPt, bool updateFrame = true);
-    void		RemovePoint(__be_int32 index, bool updateFrame = true);
+    void		RemovePoint(int32 index, bool updateFrame = true);
     void		UpdateFrame();
 
-    const BPoint	&operator[](__be_int32 index) const; // none checking
-     __be_int32		CountPoints() const;
+    const BPoint	&operator[](int32 index) const; // none checking
+     int32		CountPoints() const;
 
     bool		MapTo(BRect srcRect, BRect dstRect);
 
@@ -59,7 +59,7 @@ public:
 
 private:
     BRect fFrame;
-     __be_int32 fCount;
+     int32 fCount;
     BPoint *fPts;
     bool fNeededToUpdateFrame;
 };
@@ -71,7 +71,7 @@ inline bool BPolygon::AddPoint(const BPoint &aPt, bool updateFrame)
 }
 
 
-inline void BPolygon::RemovePoint(__be_int32 index, bool updateFrame)
+inline void BPolygon::RemovePoint(int32 index, bool updateFrame)
 {
     RemovePoints(index, index, updateFrame);
 }

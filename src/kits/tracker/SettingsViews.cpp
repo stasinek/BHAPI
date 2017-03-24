@@ -190,7 +190,7 @@ DesktopSettingsView::DesktopSettingsView()
 		B_TRANSLATE("Show shared volumes on Desktop"),
 		new BMessage(kVolumesOnDesktopChanged));
 
-	const float spacing =  __be_control_look->DefaultItemSpacing();
+	const float spacing =  be_control_look->DefaultItemSpacing();
 
 	BLayoutBuilder::Group<>(this, B_VERTICAL, 0)
 		.Add(fShowDisksIconRadioButton)
@@ -440,7 +440,7 @@ WindowsSettingsView::WindowsSettingsView()
 		B_TRANSLATE("Enable type-ahead filtering"),
 		new BMessage(kTypeAheadFilteringChanged));
 
-	const float spacing =  __be_control_look->DefaultItemSpacing();
+	const float spacing =  be_control_look->DefaultItemSpacing();
 
 	BLayoutBuilder::Group<>(this, B_VERTICAL, 0)
 		.AddGroup(B_VERTICAL, 0)

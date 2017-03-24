@@ -224,7 +224,6 @@ SOURCES += \
 #    src/private/support/ZlibCompressionAlgorithm.cpp \
 #    src/private/support/Uuid.cpp \
 #    src/private/support/DataPositionIOWrapper.cpp \
-#    src/kits/support/StringClass.cpp \
 #    src/kits/kernel/Kernel.cpp \
 #    src/kits/app/AppDefs.cpp \
 #    src/kits/app/AppMisc.cpp \
@@ -988,6 +987,7 @@ SOURCES += \
 #    src/kits/storage/Statable.cpp \
 #    src/kits/storage/storage_support.cpp \
 #    src/kits/storage/SymLink.cpp \
+#    src/kits/support/StringClass.cpp \
 #    src/kits/support/ArchivingManagers.cpp \
 #    src/kits/support/PointerList.cpp \
 ##    src/kits/textencoding/character_sets.cpp \

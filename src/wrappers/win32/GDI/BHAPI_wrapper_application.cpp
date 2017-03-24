@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -28,7 +28,7 @@
  * --------------------------------------------------------------------------*/
 #ifdef WIN32
 
-#include "BHAPI_wrapper_win32gdi.h"
+//#include "BHAPI_wrapper_win32gdi.h"
 
 #include "../../kernel/Kernel.h"
 #include "../../kernel/Debug.h"
@@ -77,7 +77,7 @@ static void bhapi::win32_clipboard_changed()
                 const char *text = NULL;
                  ssize_t textLen = 0;
                 if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
-                        text == NULL || textLen != (ssize_t)aStr.Length() || aStr.Compare(text, (__be_int32)textLen) != 0)
+                        text == NULL || textLen != (ssize_t)aStr.Length() || aStr.Compare(text, (int32)textLen) != 0)
                 {
                     bhapi::__be_clipboard.Clear();
                     clipMsg->AddBool("BHAPI:msg_from_gui", true);
@@ -106,7 +106,7 @@ static bhapi::filter_result bhapi::win32_clipboard_filter(BMessage *message, BHa
         bhapi::__be_clipboard.Lock();
         if(!((msg = bhapi::__be_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
             msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
-        if(textLen > 0) str.SetTo(text, (__be_int32)textLen);
+        if(textLen > 0) str.SetTo(text, (int32)textLen);
         bhapi::__be_clipboard.Unlock();
 
         if(str.Length() <= 0) break;
@@ -120,7 +120,7 @@ static bhapi::filter_result bhapi::win32_clipboard_filter(BMessage *message, BHa
             unichar16*wStr = bhapi::utf8_convert_to_unicode(str.String(), -1);
             if(wStr)
             {
-                 __be_int32 len = 0;
+                 int32 len = 0;
                 for(unichar16*tmp = wStr; *tmp != 0; tmp++) len += 2;
                 if((hMem = GlobalAlloc(GMEM_MOVEABLE, (size_t)len + 2)) != NULL)
                 {
@@ -138,7 +138,7 @@ static bhapi::filter_result bhapi::win32_clipboard_filter(BMessage *message, BHa
             char *aStr = bhapi::win32_convert_utf8_to_active(str.String(), -1);
             if(aStr)
             {
-                 __be_int32 len = strlen(aStr);
+                 int32 len = strlen(aStr);
                 if((hMem = GlobalAlloc(GMEM_MOVEABLE, (size_t)len + 1)) != NULL)
                 {
                     void *addr = GlobalLock(hMem);
@@ -183,7 +183,7 @@ BHAPI_IMPEXP BGraphicsEngine* bhapi::get_built_in_graphics_engine()
 #endif
 
 
-status_t 
+status_t
 EWin32GraphicsEngine::InitCheck()
 {
     BAutolock <EWin32GraphicsEngine> autolock(this);
@@ -195,21 +195,21 @@ EWin32GraphicsEngine::InitCheck()
 }
 
 
-bool 
+bool
 EWin32GraphicsEngine::Lock()
 {
     return fLocker.Lock();
 }
 
 
-void 
+void
 EWin32GraphicsEngine::Unlock()
 {
     fLocker.Unlock();
 }
 
 
-bool 
+bool
 EWin32GraphicsEngine::GetContactor(HWND hWnd, BMessenger *msgr)
 {
     if(hWnd == NULL || msgr == NULL) return false;
@@ -260,17 +260,17 @@ LRESULT _bhapi_set_app_cursor(EWin32GraphicsEngine *win32Engine, bhapi::win32_gd
 
         if(GetVersion() < 0x80000000) // Windows NT/2000/XP
         {
-            const  __be_uint8 *bits = (const  __be_uint8*)cursor.Bits();
-            const  __be_uint8 *mask = (const  __be_uint8*)cursor.Mask();
+            const  uint8 *bits = (const  uint8*)cursor.Bits();
+            const  uint8 *mask = (const  uint8*)cursor.Mask();
 
-             __be_uint8 *ANDmaskCursor = (__be_uint8*)malloc((size_t)(mask - bits));
-             __be_uint8 *XORmaskCursor = (__be_uint8*)malloc((size_t)(mask - bits));
+             uint8 *ANDmaskCursor = (uint8*)malloc((size_t)(mask - bits));
+             uint8 *XORmaskCursor = (uint8*)malloc((size_t)(mask - bits));
 
             if(ANDmaskCursor != NULL && XORmaskCursor != NULL)
             {
-                 __be_uint8 *ANDmask = ANDmaskCursor;
-                 __be_uint8 *XORmask = XORmaskCursor;
-                const  __be_uint8 *tmp = mask;
+                 uint8 *ANDmask = ANDmaskCursor;
+                 uint8 *XORmask = XORmaskCursor;
+                const  uint8 *tmp = mask;
                 for(; bits != tmp; bits++, mask++, ANDmask++, XORmask++)
                 {
                     *XORmask = ~(*bits) & (*mask);
@@ -290,34 +290,34 @@ LRESULT _bhapi_set_app_cursor(EWin32GraphicsEngine *win32Engine, bhapi::win32_gd
         {
             int w = GetSystemMetrics(SM_CXCURSOR), h = GetSystemMetrics(SM_CYCURSOR);
 
-             __be_uint8 *ANDmaskCursor = (__be_uint8*)malloc(w * h / 8);
-             __be_uint8 *XORmaskCursor = (__be_uint8*)malloc(w * h / 8);
+             uint8 *ANDmaskCursor = (uint8*)malloc(w * h / 8);
+             uint8 *XORmaskCursor = (uint8*)malloc(w * h / 8);
 
             if(w % 8 == 0 && cursor.Width() % 8 == 0 && ANDmaskCursor != NULL && XORmaskCursor != NULL)
             {
                 memset(ANDmaskCursor, ~0, w * h / 8);
                 memset(XORmaskCursor, 0, w * h / 8);
 
-                 __be_int32 n = 0;
-                for(__be_int32 j = (h - (int)cursor.Height()) / 2; j < h && n < (__be_int32)cursor.Height(); j++, n++)
+                 int32 n = 0;
+                for(int32 j = (h - (int)cursor.Height()) / 2; j < h && n < (int32)cursor.Height(); j++, n++)
                 {
                     if(j < 0) continue;
 
-                    const  __be_uint8 *__bits = (const  __be_uint8*)cursor.Bits() + n * (__be_int32)cursor.Width() / 8;
-                    const  __be_uint8 *__mask = (const  __be_uint8*)cursor.Mask() + n * (__be_int32)cursor.Width() / 8;
-                     __be_uint8 *__ANDmask = ANDmaskCursor + j * w / 8;
-                     __be_uint8 *__XORmask = XORmaskCursor + j * w / 8;
+                    const  uint8 *__bits = (const  uint8*)cursor.Bits() + n * (int32)cursor.Width() / 8;
+                    const  uint8 *__mask = (const  uint8*)cursor.Mask() + n * (int32)cursor.Width() / 8;
+                     uint8 *__ANDmask = ANDmaskCursor + j * w / 8;
+                     uint8 *__XORmask = XORmaskCursor + j * w / 8;
 
-                     __be_int32 m = 0;
+                     int32 m = 0;
 
-                    for(__be_int32 i = (w - (int)cursor.Width()) / 2; i < w && m < (__be_int32)cursor.Width(); i += 8, m += 8)
+                    for(int32 i = (w - (int)cursor.Width()) / 2; i < w && m < (int32)cursor.Width(); i += 8, m += 8)
                     {
                         if(i < 0) continue;
 
-                        const  __be_uint8 *bits = __bits + m / 8;
-                        const  __be_uint8 *mask = __mask + m / 8;
-                         __be_uint8 *ANDmask = __ANDmask + i / 8;
-                         __be_uint8 *XORmask = __XORmask + i / 8;
+                        const  uint8 *bits = __bits + m / 8;
+                        const  uint8 *mask = __mask + m / 8;
+                         uint8 *ANDmask = __ANDmask + i / 8;
+                         uint8 *XORmask = __XORmask + i / 8;
 
                         *XORmask = ~(*bits) & (*mask);
                         *ANDmask = ~(*mask);
@@ -1152,7 +1152,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     bhapi::win32_window_convert_to_screen(winMsg->hwnd, &xScreenPos, &yScreenPos);
                     win32Engine->Unlock();
 
-                     __be_int32 buttons = 0;
+                     int32 buttons = 0;
                     if(winMsg->wParam & MK_LBUTTON) buttons += 1;
                     if(winMsg->wParam & MK_RBUTTON) buttons += 2;
                     if(winMsg->wParam & MK_MBUTTON) buttons += 3;
@@ -1176,7 +1176,7 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     int yPos = GET_Y_LPARAM(winMsg->lParam);
                     int xScreenPos = xPos;
                     int yScreenPos = yPos;
-                     __be_int32 clicks;
+                     int32 clicks;
 
                     win32Engine->Lock();
                     if(win32Engine->win32PrevMouseMovedWin == etkWinMsgr)
@@ -1192,14 +1192,14 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     bhapi::win32_window_convert_to_screen(winMsg->hwnd, &xScreenPos, &yScreenPos);
                     win32Engine->Unlock();
 
-                     __be_int32 button = 0;
+                     int32 button = 0;
                     if(winMsg->message == WM_LBUTTONDOWN) button = 1;
                     else
                         if(winMsg->message == WM_MBUTTONDOWN) button = 2;
                         else
                             if(winMsg->message == WM_RBUTTONDOWN) button = 3;
 
-                     __be_int32 buttons = 0;
+                     int32 buttons = 0;
                     if(winMsg->wParam & MK_LBUTTON) buttons += 1;
                     if(winMsg->wParam & MK_MBUTTON) buttons += 2;
                     if(winMsg->wParam & MK_RBUTTON) buttons += 3;
@@ -1231,14 +1231,14 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     bhapi::win32_window_convert_to_screen(winMsg->hwnd, &xScreenPos, &yScreenPos);
                     win32Engine->Unlock();
 
-                     __be_int32 button = 0;
+                     int32 button = 0;
                     if(winMsg->message == WM_LBUTTONUP) button = 1;
                     else
                         if(winMsg->message == WM_MBUTTONUP) button = 2;
                         else
                             if(winMsg->message == WM_RBUTTONUP) button = 3;
 
-                     __be_int32 buttons = 0;
+                     int32 buttons = 0;
                     if(winMsg->wParam & MK_LBUTTON) buttons += 1;
                     if(winMsg->wParam & MK_MBUTTON) buttons += 2;
                     if(winMsg->wParam & MK_RBUTTON) buttons += 3;
@@ -1263,15 +1263,15 @@ static bool b_process_win32_event(EWin32GraphicsEngine *win32Engine, MSG *winMsg
                     if(GetKeyboardState(keyState) == 0) {handled = false; break;}
                     UINT scanCode = (UINT)((winMsg->lParam >> 16) & 0xff);
 
-                    message.AddInt32("key", (__be_int32)scanCode);
+                    message.AddInt32("key", (int32)scanCode);
                     if(winMsg->message == WM_KEYDOWN)
-                        message.AddInt32("BHAPI:key_repeat", (__be_int32)(winMsg->lParam & 0xffff));
+                        message.AddInt32("BHAPI:key_repeat", (int32)(winMsg->lParam & 0xffff));
 
 //                  BHAPI_DEBUG("[GRAPHICS]: %s: %d",
 //                        winMsg->message == WM_KEYDOWN ? "KEYDOWN" : "KEYUP",
-//                        (__be_int32)winMsg->wParam);
+//                        (int32)winMsg->wParam);
 
-                     __be_int32 modifiers = 0;
+                     int32 modifiers = 0;
                     if((keyState[VK_SHIFT] >> 4) > 0) modifiers |= B_SHIFT_KEY;
                     if((keyState[VK_MENU] >> 4) > 0) modifiers |= B_COMMAND_KEY;
                     if((keyState[VK_CONTROL] >> 4) > 0) modifiers |= B_CONTROL_KEY;
@@ -1860,7 +1860,7 @@ EWin32GraphicsEngine::~EWin32GraphicsEngine()
 }
 
 
-status_t 
+status_t
 EWin32GraphicsEngine::Initalize()
 {
     BMessageFilter *clipboardFilter = new BMessageFilter(B_CLIPBOARD_CHANGED, bhapi::win32_clipboard_filter);
@@ -1959,7 +1959,7 @@ EWin32GraphicsEngine::Initalize()
 
     Unlock();
 
-     __be_int64 count = 0;
+     int64 count = 0;
 
     bhapi::acquire_sem(fRequestSem);
     if(bhapi::get_sem_count(fRequestSem, &count) != B_OK || count > 0)
@@ -2072,7 +2072,7 @@ EWin32GraphicsEngine::Initalize()
 }
 
 
-void 
+void
 EWin32GraphicsEngine::Cancel()
 {
     BMessageFilter *clipboardFilter = NULL;
@@ -2124,21 +2124,21 @@ EWin32GraphicsEngine::CreateContext()
 
 
 BGraphicsDrawable*
-EWin32GraphicsEngine::CreatePixmap(__be_uint32 w,  __be_uint32 h)
+EWin32GraphicsEngine::CreatePixmap(uint32 w,  uint32 h)
 {
     return(new EWin32GraphicsDrawable(this, w, h));
 }
 
 
 BGraphicsWindow*
-EWin32GraphicsEngine::CreateWindow(__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+EWin32GraphicsEngine::CreateWindow(int32 x,  int32 y,  uint32 w,  uint32 h)
 {
     return(new EWin32GraphicsWindow(this, x, y, w, h));
 }
 
 
-status_t 
-EWin32GraphicsEngine::GetDesktopBounds(__be_uint32 *w,  __be_uint32 *h)
+status_t
+EWin32GraphicsEngine::GetDesktopBounds(uint32 *w,  uint32 *h)
 {
     BAutolock <EWin32GraphicsEngine> autolock(this);
 
@@ -2151,8 +2151,8 @@ EWin32GraphicsEngine::GetDesktopBounds(__be_uint32 *w,  __be_uint32 *h)
 }
 
 
-status_t 
-EWin32GraphicsEngine::GetCurrentWorkspace(__be_uint32 *workspace)
+status_t
+EWin32GraphicsEngine::GetCurrentWorkspace(uint32 *workspace)
 {
     // don't support workspace
     if(workspace != NULL) *workspace = 0;
@@ -2160,7 +2160,7 @@ EWin32GraphicsEngine::GetCurrentWorkspace(__be_uint32 *workspace)
 }
 
 
-status_t 
+status_t
 EWin32GraphicsEngine::SetCursor(const void *cursor_data)
 {
     if(win32RequestWin == NULL) return B_ERROR;
@@ -2176,7 +2176,7 @@ EWin32GraphicsEngine::SetCursor(const void *cursor_data)
 }
 
 
-status_t 
+status_t
 EWin32GraphicsEngine::GetDefaultCursor(BCursor *cursor)
 {
     return B_ERROR;

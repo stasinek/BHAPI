@@ -45,14 +45,14 @@ public:
     virtual  ssize_t		Read(void *buffer, size_t size);
     virtual  ssize_t		Write(const void *buffer, size_t size);
 
-    BStreamIO 		&operator<<(__be_int8 value);
-    BStreamIO 		&operator<<(__be_uint8 value);
-    BStreamIO 		&operator<<(__be_int16 value);
-    BStreamIO 		&operator<<(__be_uint16 value);
-    BStreamIO 		&operator<<(__be_int32 value);
-    BStreamIO 		&operator<<(__be_uint32 value);
-    BStreamIO 		&operator<<(__be_int64 value);
-    BStreamIO 		&operator<<(__be_uint64 value);
+    BStreamIO 		&operator<<(int8 value);
+    BStreamIO 		&operator<<(uint8 value);
+    BStreamIO 		&operator<<(int16 value);
+    BStreamIO 		&operator<<(uint16 value);
+    BStreamIO 		&operator<<(int32 value);
+    BStreamIO 		&operator<<(uint32 value);
+    BStreamIO 		&operator<<(int64 value);
+    BStreamIO 		&operator<<(uint64 value);
     BStreamIO 		&operator<<(float value);
     BStreamIO 		&operator<<(double value);
     BStreamIO 		&operator<<(const void *value);

@@ -141,7 +141,7 @@ bool BIconButton::ShouldDrawBorder() const
 void BIconButton::DrawBorder(BRect& frame, const BRect& updateRect,
 	const rgb_color& backgroundColor, uint32 flags)
 {
-	__be_control_look->DrawButtonFrame(this, frame, updateRect, backgroundColor,
+	be_control_look->DrawButtonFrame(this, frame, updateRect, backgroundColor,
 		backgroundColor, flags);
 }
 
@@ -149,7 +149,7 @@ void BIconButton::DrawBorder(BRect& frame, const BRect& updateRect,
 void BIconButton::DrawBackground(BRect& frame, const BRect& updateRect,
 	const rgb_color& backgroundColor, uint32 flags)
 {
-	__be_control_look->DrawButtonBackground(this, frame, updateRect,
+	be_control_look->DrawButtonBackground(this, frame, updateRect,
 		backgroundColor, flags);
 }
 

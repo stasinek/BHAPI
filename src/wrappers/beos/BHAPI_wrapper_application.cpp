@@ -58,7 +58,7 @@ static void b_beos_clipboard_changed()
 			const char *text = NULL;
 			ssize_t textLen = 0;
 			beClipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
-			if(textLen > 0) str.SetTo(text, (__be_int32)textLen);
+			if(textLen > 0) str.SetTo(text, (int32)textLen);
 		}
 		__be_clipboard->Unlock();
 	}
@@ -74,7 +74,7 @@ static void b_beos_clipboard_changed()
 				const char *text = NULL;
 				ssize_t textLen = 0;
 				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
-				   text == NULL || textLen != (ssize_t)str.Length() || str.Compare(text, (__be_int32)textLen) != 0)
+				   text == NULL || textLen != (ssize_t)str.Length() || str.Compare(text, (int32)textLen) != 0)
 				{
 					bhapi::__be_clipboard.Clear();
 					clipMsg->AddBool("BHAPI:msg_from_gui", true);
@@ -116,7 +116,7 @@ static bhapi::filter_result b_beos_clipboard_filter(BMessage *message, BHandler 
 		if(!((msg = bhapi::__be_clipboard.Data()) == NULL || msg->HasBool("BHAPI:msg_from_gui")))
 			msg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
 #endif
-		if(textLen > 0) str.SetTo(text, (__be_int32)textLen);
+		if(textLen > 0) str.SetTo(text, (int32)textLen);
 		bhapi::__be_clipboard.Unlock();
 
 		if(str.Length() <= 0) break;
@@ -420,7 +420,7 @@ EBeGraphicsEngine::Initalize()
 
 	Unlock();
 
-	__be_int64 count = 0;
+	int64 count = 0;
 
     status_t status = bhapi::acquire_sem(fRequestSem);
 	if(status == B_OK) status = bhapi::get_sem_count(fRequestSem, &count);
@@ -526,33 +526,33 @@ EBeGraphicsEngine::CreateContext()
 
 
 BGraphicsDrawable*
-EBeGraphicsEngine::CreatePixmap(__be_uint32 w,  __be_uint32 h)
+EBeGraphicsEngine::CreatePixmap(uint32 w,  uint32 h)
 {
 	return(new EBeGraphicsDrawable(this, w, h));
 }
 
 
 BGraphicsWindow*
-EBeGraphicsEngine::CreateWindow(__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+EBeGraphicsEngine::CreateWindow(int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	return(new EBeGraphicsWindow(this, x, y, w, h));
 }
 
 
 status_t 
-EBeGraphicsEngine::GetDesktopBounds(__be_uint32 *w,  __be_uint32 *h)
+EBeGraphicsEngine::GetDesktopBounds(uint32 *w,  uint32 *h)
 {
 	BScreen screen(B_MAIN_SCREEN_ID);
-	if(w) *w = (__be_uint32)screen.Frame().Width() + 1;
-	if(h) *h = (__be_uint32)screen.Frame().Height() + 1;
+	if(w) *w = (uint32)screen.Frame().Width() + 1;
+	if(h) *h = (uint32)screen.Frame().Height() + 1;
 	return B_OK;
 }
 
 
 status_t 
-EBeGraphicsEngine::GetCurrentWorkspace(__be_uint32 *workspace)
+EBeGraphicsEngine::GetCurrentWorkspace(uint32 *workspace)
 {
-	if(workspace) *workspace = (__be_uint32)current_workspace() + 1;
+	if(workspace) *workspace = (uint32)current_workspace() + 1;
 	return B_OK;
 }
 

@@ -66,95 +66,73 @@ namespace BPrivate {
 class BHAPI_IMPEXP BApplication : public BLooper {
 //-----------------------------------------------------------------------------
 public:
-//-----------------------------------------------------------------------------
-    BApplication(const char* signature, status_t* error);
-    BApplication(const char *signature, bool try_Interface = true);
-    virtual ~BApplication();
+public:
+                                BApplication(const char* signature);
+                                BApplication(const char* signature,
+                                    status_t* error);
+    virtual						~BApplication();
 
     // Archiving
-    BApplication(void);
-    BApplication(const BMessage *from);
-    virtual status_t        Archive(BMessage *into, bool deep = true) const;
-    static BArchivable*     Instantiate(const BMessage *from);
+                                BApplication(BMessage* data);
+    static	BArchivable*		Instantiate(BMessage* data);
+    virtual	status_t			Archive(BMessage* data, bool deep = true) const;
 
-    const char*             Signature() const;
+            status_t			InitCheck() const;
 
-    virtual void*           Run();
-    virtual void            Quit();
-    virtual bool            QuitRequested();
+    // App control and System Message handling
+    virtual	void *			Run();
+    virtual	void				Quit();
+    virtual bool				QuitRequested();
+    virtual	void				Pulse();
+    virtual	void				ReadyToRun();
+    virtual	void				MessageReceived(BMessage* message);
+    virtual	void				ArgvReceived(int32 argc, char** argv);
+    virtual	void				AppActivated(bool active);
+    virtual	void				RefsReceived(BMessage* message);
+    virtual	void				AboutRequested();
 
-    // Empty functions BEGIN --- just for derivative class
-    virtual void            ReadyToRun();
-    virtual void            Pulse();
-    // Empty functions END
+    // Scripting
+    virtual BHandler*			ResolveSpecifier(BMessage* message, int32 index,
+                                    BMessage* specifier, int32 form,
+                                    const char* property);
 
-    void                    SetPulseRate(bigtime_t rate);
-    bigtime_t               PulseRate() const;
+    // Cursor control, window/looper list, and app info
+            void				ShowCursor();
+            void				HideCursor();
+            void				ObscureCursor();
+            bool				IsCursorHidden() const;
+            void				SetCursor(const void* cursor);
+            void				SetCursor(const BCursor* cursor,
+                                    bool sync = true);
 
-    virtual void            MessageReceived(BMessage *msg);
-    virtual void            DispatchMessage(BMessage *msg, BHandler *target);
+            int32				CountWindows() const;
+            BWindow*			WindowAt(int32 index) const;
 
-    void                    SetCursor(const void *cursor);
-    void                    SetCursor(const BCursor *cursor, bool sync = true);
-    void                    HideCursor();
-    void                    ShowCursor();
-    void                    ObscureCursor();
-    bool                    IsCursorHidden() const;
-    int32                   CountWindows() const;
-    BWindow*                WindowAt(int32 index) const;
-    int32                   CountLoopers() const;
-    BLooper*                LooperAt(int32 index) const;
-    bool                    IsLaunching() const;
-    status_t                GetAppInfo(bhapi::app_info* info) const;
-    static	BResources*		AppResources();
-    // Register a BLooper to be quit before the BApplication
-    // object is destroyed.
-    status_t                RegisterLooper(BLooper* looper);
-    status_t                UnregisterLooper(BLooper* looper);
+            int32				CountLoopers() const;
+            BLooper*			LooperAt(int32 index) const;
+            bool				IsLaunching() const;
+            const char*			Signature() const;
+            status_t			GetAppInfo(app_info* info) const;
+    static	BResources*			AppResources();
+
+    virtual	void				DispatchMessage(BMessage* message,
+                                    BHandler* handler);
+            void				SetPulseRate(bigtime_t rate);
+
     // More scripting
-    virtual status_t		GetSupportedSuites(BMessage* data);
+    virtual status_t			GetSupportedSuites(BMessage* data);
+
+
     // Private or reserved
-    virtual status_t		Perform(perform_code d, void* arg);
+    virtual status_t			Perform(perform_code d, void* arg);
+
     class Private;
 
- //-----------------------------------------------------------------------------
 private:
- //-----------------------------------------------------------------------------
+    typedef BLooper _inherited;
+
     friend class Private;
-    friend class BLooper;
-    friend class BMessageRunner;
-    friend class BWindow;
-    friend class BView;
-    friend class BBitmap;
-    friend class BScreen;
     friend class BServer;
-
-    friend BHAPI_IMPEXP bool bhapi::update_font_families(bool);
-
-    bool fQuit;
-    char *fSignature;
-    bigtime_t fPulseRate;
-    BMessageRunner *fPulseRunner;
-
-    static BList sRunnerList;
-    static bigtime_t sRunnerMinimumInterval;
-    static void dispatch_message_runners();
-
-    bool quit_all_loopers(bool force);
-
-    BGraphicsEngine *fGraphicsEngine;
-    void *fGraphicsEngineAddon;
-    void InitGraphicsEngine();
-
-    void Init(const char *signature, bool tryInterface);
-
-    BList fModalWindows;
-    bool AddModalWindow(BMessenger &msgr);
-    bool RemoveModalWindow(BMessenger &msgr);
-
-    BCursor fCursor;
-    bool fCursorHidden;
-    bool fCursorObscure;
 
                                 BApplication(const char* signature,
                                     const char* looperName, port_id port,
@@ -198,15 +176,72 @@ private:
 
 private:
     static	BResources*			sAppResources;
+
             const char*			fAppName;
             ::BPrivate::PortLink*	fServerLink;
             ::BPrivate::ServerMemoryAllocator* fServerAllocator;
+
             void*				fCursorData;
+            bigtime_t			fPulseRate;
             uint32				fInitialWorkspace;
+            BMessageRunner*		fPulseRunner;
             status_t			fInitError;
             void*				fServerReadOnlyMemory;
             uint32				_reserved[12];
+
             bool				fReadyToRunCalled;
+//-----------------------------------------------------------------------------
+public:
+            BApplication(const char *signature, bool try_Interface = true);
+
+    // Archiving
+    BApplication(void);
+    BApplication(const BMessage *from);
+    static BArchivable*     Instantiate(const BMessage *from);
+
+
+
+    bigtime_t               PulseRate() const;
+
+    // Register a BLooper to be quit before the BApplication
+    // object is destroyed.
+    status_t                RegisterLooper(BLooper* looper);
+    status_t                UnregisterLooper(BLooper* looper);
+    // More scripting
+ //-----------------------------------------------------------------------------
+private:
+ //-----------------------------------------------------------------------------
+    friend class BLooper;
+    friend class BMessageRunner;
+    friend class BWindow;
+    friend class BView;
+    friend class BBitmap;
+    friend class BScreen;
+
+    friend BHAPI_IMPEXP bool bhapi::update_font_families(bool);
+
+    bool fQuit;
+    char *fSignature;
+
+    static BList sRunnerList;
+    static bigtime_t sRunnerMinimumInterval;
+    static void dispatch_message_runners();
+
+    bool quit_all_loopers(bool force);
+
+    BGraphicsEngine *fGraphicsEngine;
+    void *fGraphicsEngineAddon;
+    void InitGraphicsEngine();
+
+    void Init(const char *signature, bool tryInterface);
+
+    BList fModalWindows;
+    bool AddModalWindow(BMessenger &msgr);
+    bool RemoveModalWindow(BMessenger &msgr);
+
+    BCursor fCursor;
+    bool fCursorHidden;
+    bool fCursorObscure;
 //-----------------------------------------------------------------------------
 };
 //-----------------------------------------------------------------------------
@@ -223,7 +258,6 @@ extern BHAPI_IMPEXP BMessenger __be_app_messenger;
 extern BHAPI_IMPEXP BClipboard __be_clipboard;
 extern BHAPI_IMPEXP BApplication* be_app;
 extern BHAPI_IMPEXP BMessenger* be_app_messenger;
-extern BHAPI_IMPEXP BClipboard* be_clipboard;
 }
 //-----------------------------------------------------------------------------
 #endif /* __cplusplus */

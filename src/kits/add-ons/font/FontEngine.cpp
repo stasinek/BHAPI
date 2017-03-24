@@ -130,7 +130,7 @@ void BFontEngine::OutOfServing()
     if(bhapi::font_canceling || fServing == NULL) return;
 
     BFontEngine *engine = NULL;
-    for(__be_int32 i = 0; i < fServing->CountItems(); i++)
+    for(int32 i = 0; i < fServing->CountItems(); i++)
     {
         fServing->ItemAt(i, (void**)&engine);
         if(engine != this) continue;
@@ -139,7 +139,7 @@ void BFontEngine::OutOfServing()
             if(fServing->CountItems() <= 0)
             {
                 BStringArray *styles = NULL;
-                for(__be_int32 j = 0; j < bhapi::font_families.CountItems(); j++)
+                for(int32 j = 0; j < bhapi::font_families.CountItems(); j++)
                 {
                     bhapi::font_families.ItemAt(j, (void**)&styles);
                     if(styles != fServing) continue;
@@ -158,7 +158,7 @@ BFontEngine::~BFontEngine()
 {
     if(InServing()) OutOfServing();
 
-    for(__be_int32 i = 0; i < fAttached.CountItems(); i++)
+    for(int32 i = 0; i < fAttached.CountItems(); i++)
     {
         bhapi::font_detach_callback *eCallback = (bhapi::font_detach_callback*)fAttached.ItemAt(i);
         if(!eCallback) continue;
@@ -202,7 +202,7 @@ bool
 BFontEngine::Detach(bhapi::font_detach_callback *callback)
 {
     if(!callback) return false;
-    for(__be_int32 i = fAttached.CountItems() - 1; i >= 0; i--)
+    for(int32 i = fAttached.CountItems() - 1; i >= 0; i--)
     {
         bhapi::font_detach_callback *eCallback = (bhapi::font_detach_callback*)fAttached.ItemAt(i);
         if(eCallback != callback) continue;
@@ -255,7 +255,7 @@ BHAPI_EXPORT void BFontEngine::SetRenderMode(bhapi::font_render_mode rmode)
 }
 
 
-BHAPI_EXPORT bool BFontEngine::HasFixedSize(__be_int32 *count) const
+BHAPI_EXPORT bool BFontEngine::HasFixedSize(int32 *count) const
 {
     if(nFixedSize > 0 && fFixedSize != NULL)
     {
@@ -267,7 +267,7 @@ BHAPI_EXPORT bool BFontEngine::HasFixedSize(__be_int32 *count) const
 }
 
 
-BHAPI_EXPORT bool BFontEngine::GetFixedSize(float *size,  __be_int32 index) const
+BHAPI_EXPORT bool BFontEngine::GetFixedSize(float *size,  int32 index) const
 {
     if(size == NULL || index < 0) return false;
 
@@ -296,7 +296,7 @@ BHAPI_EXPORT void BFontEngine::SetStyle(const char *style)
 }
 
 
-BHAPI_EXPORT void BFontEngine::SetFixedSize(float *sizes,  __be_int32 count)
+BHAPI_EXPORT void BFontEngine::SetFixedSize(float *sizes,  int32 count)
 {
     if(fFixedSize)
     {
@@ -336,7 +336,7 @@ BFontEngine::ForceFontAliasing(bool enable)
 
 
 float
-BFontEngine::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  __be_int32 length) const
+BFontEngine::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32 length) const
 {
     return 0;
 }
@@ -350,7 +350,7 @@ BFontEngine::GetHeight(bhapi::font_height *height, float size, float shear, bool
 
 
 float
-BFontEngine::StringWidth(const BString &str, float size, float spacing, float shear, bool bold,  __be_int32 length) const
+BFontEngine::StringWidth(const BString &str, float size, float spacing, float shear, bool bold,  int32 length) const
 {
     return StringWidth(str.String(), size, spacing, shear, bold, length);
 }
@@ -359,7 +359,7 @@ BFontEngine::StringWidth(const BString &str, float size, float spacing, float sh
 BRect
 BFontEngine::RenderString(BHandler *view, const char *string,
               float size, float spacing,
-              float shear, bool bold,  __be_int32 length)
+              float shear, bool bold,  int32 length)
 {
     return BRect();
 }
@@ -368,31 +368,31 @@ BFontEngine::RenderString(BHandler *view, const char *string,
 BRect
 BFontEngine::RenderString(BHandler *view, const BString &str,
               float size, float spacing,
-              float shear, bool bold,  __be_int32 length)
+              float shear, bool bold,  int32 length)
 {
     return RenderString(view, str.String(), size, spacing, shear, bold, length);
 }
 
 
-__be_uint8*
-BFontEngine::RenderString(const char *string,  __be_int32 *width,  __be_int32 *height, bool *is_mono,
+uint8*
+BFontEngine::RenderString(const char *string,  int32 *width,  int32 *height, bool *is_mono,
               float size, float spacing,
-              float shear, bool bold,  __be_int32 length)
+              float shear, bool bold,  int32 length)
 {
     return NULL;
 }
 
 
-__be_uint8*
-BFontEngine::RenderString(const BString &str,  __be_int32 *width,  __be_int32 *height, bool *is_mono,
+uint8*
+BFontEngine::RenderString(const BString &str,  int32 *width,  int32 *height, bool *is_mono,
               float size, float spacing,
-              float shear, bool bold,  __be_int32 length)
+              float shear, bool bold,  int32 length)
 {
     return RenderString(str.String(), width, height, is_mono, size, spacing, shear, bold, length);
 }
 
 
-BHAPI_EXPORT  __be_int32 bhapi::count_font_families(void)
+BHAPI_EXPORT  int32 bhapi::count_font_families(void)
 {
     BAutolock <BLocker> autolock(&bhapi::font_locker);
 
@@ -400,7 +400,7 @@ BHAPI_EXPORT  __be_int32 bhapi::count_font_families(void)
 }
 
 
-BHAPI_EXPORT status_t bhapi::get_font_family(__be_int32 index, const char **name)
+BHAPI_EXPORT status_t bhapi::get_font_family(int32 index, const char **name)
 {
     if(!name) return B_BAD_VALUE;
 
@@ -414,24 +414,24 @@ BHAPI_EXPORT status_t bhapi::get_font_family(__be_int32 index, const char **name
 }
 
 
-BHAPI_EXPORT  __be_int32 bhapi::get_font_family_index(const char *name)
+BHAPI_EXPORT  int32 bhapi::get_font_family_index(const char *name)
 {
     if(!name) return -1;
 
     BAutolock <BLocker> autolock(&bhapi::font_locker);
 
-     __be_int32 fIndex = bhapi::font_families.FindString(name);
+     int32 fIndex = bhapi::font_families.FindString(name);
     return fIndex;
 }
 
 
-BHAPI_EXPORT  __be_int32 bhapi::get_font_style_index(const char *family, const char *name)
+BHAPI_EXPORT  int32 bhapi::get_font_style_index(const char *family, const char *name)
 {
     if(!family || !name) return -1;
 
     BAutolock <BLocker> autolock(&bhapi::font_locker);
 
-     __be_int32 index = bhapi::font_families.FindString(family);
+     int32 index = bhapi::font_families.FindString(family);
     if(index < 0) return -1;
 
     BStringArray *styles = NULL;
@@ -443,7 +443,7 @@ BHAPI_EXPORT  __be_int32 bhapi::get_font_style_index(const char *family, const c
 }
 
 
-BHAPI_EXPORT  __be_int32 bhapi::count_font_styles(const char *name)
+BHAPI_EXPORT  int32 bhapi::count_font_styles(const char *name)
 {
     BAutolock <BLocker> autolock(&bhapi::font_locker);
 
@@ -451,7 +451,7 @@ BHAPI_EXPORT  __be_int32 bhapi::count_font_styles(const char *name)
 }
 
 
-BHAPI_EXPORT  __be_int32 bhapi::count_font_styles(__be_int32 index)
+BHAPI_EXPORT  int32 bhapi::count_font_styles(int32 index)
 {
     if(index < 0) return -1;
 
@@ -464,13 +464,13 @@ BHAPI_EXPORT  __be_int32 bhapi::count_font_styles(__be_int32 index)
 }
 
 
-BHAPI_EXPORT status_t bhapi::get_font_style(const char *family,  __be_int32 index, const char **name)
+BHAPI_EXPORT status_t bhapi::get_font_style(const char *family,  int32 index, const char **name)
 {
     if(!family || !name) return B_BAD_VALUE;
 
     BAutolock <BLocker> autolock(&bhapi::font_locker);
 
-     __be_int32 fIndex = bhapi::font_families.FindString(family);
+     int32 fIndex = bhapi::font_families.FindString(family);
     if(fIndex < 0) return B_ERROR;
 
     BStringArray *styles = NULL;
@@ -502,7 +502,7 @@ BHAPI_EXPORT BFontEngine* bhapi::get_font_engine(const char *family, const char 
 }
 
 
-BHAPI_EXPORT BFontEngine* bhapi::get_font_engine(__be_int32 familyIndex,  __be_int32 styleIndex)
+BHAPI_EXPORT BFontEngine* bhapi::get_font_engine(int32 familyIndex,  int32 styleIndex)
 {
     BAutolock <BLocker> autolock(&bhapi::font_locker);
 
@@ -545,14 +545,14 @@ BHAPI_EXPORT bool bhapi::update_font_families(bool check_only)
     if(!check_only)
     {
         BStringArray *styles;
-        for(__be_int32 i = 0; i < bhapi::font_families.CountItems(); i++)
+        for(int32 i = 0; i < bhapi::font_families.CountItems(); i++)
         {
             styles = NULL;
             bhapi::font_families.ItemAt(i, (void**)&styles);
             if(styles)
             {
                 BFontEngine *engine;
-                for(__be_int32 j = 0; j < styles->CountItems(); j++)
+                for(int32 j = 0; j < styles->CountItems(); j++)
                 {
                     engine = NULL;
                     styles->ItemAt(j, (void**)&engine);
@@ -786,14 +786,14 @@ BHAPI_LOCAL void bhapi::font_cancel(void)
         bhapi::font_other_cancel();
 
         BStringArray *styles;
-        for(__be_int32 i = 0; i < bhapi::font_families.CountItems(); i++)
+        for(int32 i = 0; i < bhapi::font_families.CountItems(); i++)
         {
             styles = NULL;
             bhapi::font_families.ItemAt(i, (void**)&styles);
             if(styles)
             {
                 BFontEngine *engine;
-                for(__be_int32 j = 0; j < styles->CountItems(); j++)
+                for(int32 j = 0; j < styles->CountItems(); j++)
                 {
                     engine = NULL;
                     styles->ItemAt(j, (void**)&engine);

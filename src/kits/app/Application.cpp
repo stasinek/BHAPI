@@ -48,7 +48,7 @@
 #include "Application.h"
 #include "Clipboard.h"
 //-----------------------------------------------------------------------------
-
+#define B_APP_CURSOR_REQUESTED (uint32)0
 BHAPI_LOCAL BCursor _B_CURSOR_SYSTEM_DEFAULT(NULL);
 
 BHAPI_EXPORT BApplication bhapi::__be_app;
@@ -148,7 +148,7 @@ BApplication::~BApplication()
     if(fSignature) delete[] fSignature;
 
     hLocker->Lock();
-    for(__be_int32 i = 0; i < fModalWindows.CountItems(); i++)
+    for(int32 i = 0; i < fModalWindows.CountItems(); i++)
     {
         BMessenger *tMsgr = (BMessenger*)fModalWindows.ItemAt(i);
         delete tMsgr;
@@ -222,7 +222,7 @@ void *BApplication::Run()
         if(!fQuit)
         {
             MessageQueue()->Lock();
-            aMsg = MessageQueue()->FindMessage((__be_int32)0);
+            aMsg = MessageQueue()->FindMessage((int32)0);
             if(!(aMsg == NULL || aMsg->what != _QUIT_)) fQuit = true;
             MessageQueue()->Unlock();
         }
@@ -250,7 +250,7 @@ void BApplication::dispatch_message_runners()
 
     sRunnerMinimumInterval = B_INT64_CONSTANT(0);
     bigtime_t curTime = b_real_time_clock_usecs();
-    for(__be_int32 i = 0; i < sRunnerList.CountItems(); i++)
+    for(int32 i = 0; i < sRunnerList.CountItems(); i++)
     {
         BMessageRunner *runner = (BMessageRunner*)sRunnerList.ItemAt(i);
         if(runner == NULL || runner->IsValid() == false || runner->fCount == 0 || runner->fInterval <= B_INT64_CONSTANT(0) ||
@@ -441,7 +441,7 @@ void BApplication::MessageReceived(BMessage *msg)
 #if 0
 //-----------------------------------------------------------------------------
 
-__be_int32 BApplication::CountLoopers()
+int32 BApplication::CountLoopers()
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     BAutolock <BLocker>autolock(hLocker);
@@ -450,7 +450,7 @@ __be_int32 BApplication::CountLoopers()
 }
 //-----------------------------------------------------------------------------
 
-BLooper* BApplication::LooperAt(__be_int32 index)
+BLooper* BApplication::LooperAt(int32 index)
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     BAutolock <BLocker>autolock(hLocker);
@@ -463,7 +463,7 @@ BLooper* BApplication::LooperAt(__be_int32 index)
 
 bool BApplication::quit_all_loopers(bool force)
 {
-     __be_int32 index;
+     int32 index;
     BLooper *looper = NULL;
     BLocker *hLocker = bhapi::get_handler_operator_locker();
 
@@ -549,7 +549,7 @@ void BApplication::InitGraphicsEngine()
 
         BPath aPath;
 
-        for(__be_int8 i = 0; i < 3; i++)
+        for(int8 i = 0; i < 3; i++)
         {
             if(i < 2)
             {
@@ -654,7 +654,7 @@ bool BApplication::AddModalWindow(BMessenger &msgr)
 
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     hLocker->Lock();
-    for(__be_int32 i = 0; i < fModalWindows.CountItems(); i++)
+    for(int32 i = 0; i < fModalWindows.CountItems(); i++)
     {
         BMessenger *tMsgr = (BMessenger*)fModalWindows.ItemAt(i);
         if(*tMsgr == *aMsgr)
@@ -680,7 +680,7 @@ bool BApplication::RemoveModalWindow(BMessenger &msgr)
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     hLocker->Lock();
-    for(__be_int32 i = 0; i < fModalWindows.CountItems(); i++)
+    for(int32 i = 0; i < fModalWindows.CountItems(); i++)
     {
         BMessenger *tMsgr = (BMessenger*)fModalWindows.ItemAt(i);
         if(*tMsgr == msgr)
@@ -1011,14 +1011,6 @@ fill_argv_message(BMessage &message)
 //	#pragma mark - BApplication
 
 
-BApplication::BApplication(const char* signature)
-    :
-    BLooper(kDefaultLooperName)
-{
-    _InitData(signature, true, NULL);
-}
-
-
 BApplication::BApplication(const char* signature, status_t* _error)
     :
     BLooper(kDefaultLooperName)
@@ -1038,7 +1030,7 @@ BApplication::BApplication(const char* signature, const char* looperName,
         fOwnsPort = false;
 }
 
-
+/*
 BApplication::BApplication(BMessage* data)
     // Note: BeOS calls the private BLooper(int32, port_id, const char*)
     // constructor here, test if it's needed
@@ -1054,7 +1046,7 @@ BApplication::BApplication(BMessage* data)
     if (data->FindInt64("_pulse", &pulseRate) == B_OK)
         SetPulseRate(pulseRate);
 }
-
+*/
 
 BApplication::BApplication(uint32 signature)
 {
@@ -1066,7 +1058,7 @@ BApplication::BApplication(const BApplication &rhs)
 }
 
 
-BApplication::~BApplication()
+/*BApplication::~BApplication()
 {
     Lock();
 
@@ -1103,7 +1095,7 @@ BApplication::~BApplication()
     // uninitialize be_app, the be_app_messenger is invalidated automatically
     be_app = NULL;
 }
-
+*/
 
 BApplication&
 BApplication::operator=(const BApplication &rhs)
@@ -1276,7 +1268,7 @@ BApplication::_InitData(const char* signature, bool initGUI, status_t* _error)
 
         // init be_app and be_app_messenger
         be_app = this;
-        be_app_messenger = BMessenger(NULL, this);
+        __be_app_messenger = BMessenger(NULL, this);
 
         // set the BHandler's name
         SetName(ref.name);
@@ -1311,7 +1303,7 @@ BApplication::_GetPort(const char* signature)
     return BLaunchRoster().GetPort(signature, NULL);
 }
 
-
+/*
 BArchivable*
 BApplication::Instantiate(BMessage* data)
 {
@@ -1419,23 +1411,9 @@ BApplication::QuitRequested()
 {
     return _QuitAllWindows(false);
 }
+*/
 
-
-void
-BApplication::Pulse()
-{
-    // supposed to be implemented by subclasses
-}
-
-
-void
-BApplication::ReadyToRun()
-{
-    // supposed to be implemented by subclasses
-}
-
-
-void
+/*void
 BApplication::MessageReceived(BMessage* message)
 {
     switch (message->what) {
@@ -1481,36 +1459,8 @@ BApplication::MessageReceived(BMessage* message)
             BLooper::MessageReceived(message);
     }
 }
-
-
-void
-BApplication::ArgvReceived(int32 argc, char** argv)
-{
-    // supposed to be implemented by subclasses
-}
-
-
-void
-BApplication::AppActivated(bool active)
-{
-    // supposed to be implemented by subclasses
-}
-
-
-void
-BApplication::RefsReceived(BMessage* message)
-{
-    // supposed to be implemented by subclasses
-}
-
-
-void
-BApplication::AboutRequested()
-{
-    // supposed to be implemented by subclasses
-}
-
-
+*/
+/*
 BHandler*
 BApplication::ResolveSpecifier(BMessage* message, int32 index,
     BMessage* specifier, int32 what, const char* property)
@@ -1693,6 +1643,8 @@ BApplication::SetCursor(const BCursor* cursor, bool sync)
         link.Flush();
 }
 
+*/
+
 
 int32
 BApplication::CountWindows() const
@@ -1774,13 +1726,13 @@ BApplication::IsLaunching() const
     return !fReadyToRunCalled;
 }
 
-
+/*
 const char*
 BApplication::Signature() const
 {
     return fAppName;
 }
-
+*/
 
 status_t
 BApplication::GetAppInfo(app_info* info) const
@@ -1800,7 +1752,7 @@ BApplication::AppResources()
     return sAppResources;
 }
 
-
+/*
 void
 BApplication::DispatchMessage(BMessage* message, BHandler* handler)
 {
@@ -1937,7 +1889,7 @@ BApplication::SetPulseRate(bigtime_t rate)
     fPulseRate = rate;
     Unlock();
 }
-
+*/
 
 status_t
 BApplication::GetSupportedSuites(BMessage* data)
@@ -2348,9 +2300,7 @@ BApplication::_QuitAllWindows(bool force)
     return quit;
 }
 
-
-void
-BApplication::_ArgvReceived(BMessage* message)
+void BApplication::_ArgvReceived(BMessage* message)
 {
     ASSERT(message != NULL);
 

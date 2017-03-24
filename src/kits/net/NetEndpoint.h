@@ -52,8 +52,8 @@ public:
 
 	status_t		SetProtocol(int proto);
 
-    int			SetSocketOption(__be_int32 level,  __be_int32 option, const void *data, size_t data_len);
-    int			GetSocketOption(__be_int32 level,  __be_int32 option, void *data, size_t *data_len) const;
+    int			SetSocketOption(int32 level,  int32 option, const void *data, size_t data_len);
+    int			GetSocketOption(int32 level,  int32 option, void *data, size_t *data_len) const;
 
 	int			SetNonBlocking(bool state = true);
 	bool			IsNonBlocking() const;
@@ -66,37 +66,37 @@ public:
 	virtual void		Close();
 
 	virtual status_t	Bind(const BNetAddress &addr);
-    virtual status_t	Bind(__be_uint16 port = 0);
+    virtual status_t	Bind(uint16 port = 0);
 
 	virtual status_t	Connect(const BNetAddress &addr);
-    virtual status_t	Connect(const char *address,  __be_uint16 port);
+    virtual status_t	Connect(const char *address,  uint16 port);
 
 	virtual status_t	Listen(int backlog = 5);
-    virtual BNetEndpoint	*Accept(__be_int32 timeout_msec = -1);
+    virtual BNetEndpoint	*Accept(int32 timeout_msec = -1);
 
-     __be_int32			Error() const;
+     int32			Error() const;
 	const char		*ErrorStr() const;
 
-    virtual  __be_int32		Send(const void *buf, size_t len, int flags = 0);
-    virtual  __be_int32		Send(const BNetBuffer &buf, int flags = 0);
-    virtual  __be_int32		SendTo(const void *buf, size_t len, const BNetAddress &to, int flags = 0);
-    virtual  __be_int32		SendTo(const BNetBuffer &buf, const BNetAddress &to, int flags = 0);
+    virtual  int32		Send(const void *buf, size_t len, int flags = 0);
+    virtual  int32		Send(const BNetBuffer &buf, int flags = 0);
+    virtual  int32		SendTo(const void *buf, size_t len, const BNetAddress &to, int flags = 0);
+    virtual  int32		SendTo(const BNetBuffer &buf, const BNetAddress &to, int flags = 0);
 
     void			SetTimeout(bigtime_t timeout);
-    virtual  __be_int32		Receive(void *buf, size_t len, int flags = 0);
-    virtual  __be_int32		Receive(BNetBuffer &buf, size_t len, int flags = 0);
-    virtual  __be_int32		ReceiveFrom(void *buf, size_t len, const BNetAddress &from, int flags = 0);
-    virtual  __be_int32		ReceiveFrom(BNetBuffer &buf, size_t len, const BNetAddress &from, int flags = 0);
+    virtual  int32		Receive(void *buf, size_t len, int flags = 0);
+    virtual  int32		Receive(BNetBuffer &buf, size_t len, int flags = 0);
+    virtual  int32		ReceiveFrom(void *buf, size_t len, const BNetAddress &from, int flags = 0);
+    virtual  int32		ReceiveFrom(BNetBuffer &buf, size_t len, const BNetAddress &from, int flags = 0);
 
     virtual bool		IsDataPending(bigtime_t timeout = 0);
 
 protected:
 	// Socket(): use it carefully please.
-     __be_int32			Socket() const;
+     int32			Socket() const;
 
 private:
-     __be_int32 fSocket;
-     __be_int32 fProtocol;
+     int32 fSocket;
+     int32 fProtocol;
 	bool fBind;
 	bool fNonBlocking;
 	bigtime_t fTimeout;

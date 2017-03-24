@@ -39,14 +39,14 @@ public:
     BObject();
     virtual ~BObject();
 
-    BObject		&operator+=(__be_uint64 vitalities);
-    BObject		&operator-=(__be_uint64 vitalities);
+    BObject		&operator+=(uint64 vitalities);
+    BObject		&operator-=(uint64 vitalities);
     BObject		&operator++();
     BObject		&operator--();
-     __be_uint64		Vitalities() const;
+     uint64		Vitalities() const;
 
 private:
-     __be_uint64 fVitalities;
+     uint64 fVitalities;
 };
 
 namespace bhapi {

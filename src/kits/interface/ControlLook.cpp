@@ -74,15 +74,15 @@ BControlLook::ComposeSpacing(float spacing)
 	switch ((int)spacing) {
 		case B_USE_DEFAULT_SPACING:
 		case B_USE_ITEM_SPACING:
-			return  __be_control_look->DefaultItemSpacing();
+			return  be_control_look->DefaultItemSpacing();
 		case B_USE_HALF_ITEM_SPACING:
-			return ceilf(__be_control_look->DefaultItemSpacing() * 0.5f);
+			return ceilf(be_control_look->DefaultItemSpacing() * 0.5f);
 		case B_USE_WINDOW_SPACING:
-			return  __be_control_look->DefaultItemSpacing();
+			return  be_control_look->DefaultItemSpacing();
 		case B_USE_SMALL_SPACING:
-			return ceilf(__be_control_look->DefaultItemSpacing() * 0.7f);
+			return ceilf(be_control_look->DefaultItemSpacing() * 0.7f);
 		case B_USE_BIG_SPACING:
-			return ceilf(__be_control_look->DefaultItemSpacing() * 1.3f);
+			return ceilf(be_control_look->DefaultItemSpacing() * 1.3f);
 	}
 
 	return spacing;
@@ -3459,7 +3459,7 @@ bool BControlLook::_RadioButtonAndCheckBoxMarkColor(const rgb_color& base,
 
 // NOTE: May come from a add-on in the future. Initialized in
 // InterfaceDefs.cpp
-BControlLook*  __be_control_look = NULL;
+BControlLook*  be_control_look = NULL;
 
 
 } // namespace BPrivate

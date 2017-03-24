@@ -50,12 +50,12 @@ public:
     virtual  ssize_t		Read(void *buffer, size_t size);
     virtual  ssize_t		Write(const void *buffer, size_t size);
 
-    virtual  ssize_t		ReadAt(__be_int64 pos, void *buffer, size_t size) = 0;
-    virtual  ssize_t		WriteAt(__be_int64 pos, const void *buffer, size_t size) = 0;
+    virtual  ssize_t		ReadAt(int64 pos, void *buffer, size_t size) = 0;
+    virtual  ssize_t		WriteAt(int64 pos, const void *buffer, size_t size) = 0;
 
-    virtual  off_t		Seek(__be_int64 position,  __be_uint32 seek_mode) = 0;
+    virtual  off_t		Seek(int64 position,  uint32 seek_mode);
     virtual  off_t		Position() const = 0;
-    virtual status_t	SetSize(__be_int64 size) = 0;
+    virtual status_t	SetSize(int64 size) = 0;
 };
 
 
@@ -64,12 +64,12 @@ public:
     BMallocIO();
     virtual ~BMallocIO();
 
-    virtual  ssize_t		ReadAt(__be_int64 pos, void *buffer, size_t size);
-    virtual  ssize_t		WriteAt(__be_int64 pos, const void *buffer, size_t size);
+    virtual  ssize_t		ReadAt(int64 pos, void *buffer, size_t size);
+    virtual  ssize_t		WriteAt(int64 pos, const void *buffer, size_t size);
 
-    virtual  off_t		Seek(__be_int64 position,  __be_uint32 seek_mode);
+    virtual  off_t		Seek(int64 position,  uint32 seek_mode);
     virtual  off_t		Position() const;
-    virtual status_t	SetSize(__be_int64 size);
+    virtual status_t	SetSize(int64 size);
 
     void			SetBlockSize(size_t blocksize);
     const void		*Buffer() const;
@@ -89,12 +89,12 @@ public:
     BMemoryIO(const void *ptr, size_t length);
     virtual ~BMemoryIO();
 
-    virtual  ssize_t		ReadAt(__be_int64 pos, void *buffer, size_t size);
-    virtual  ssize_t		WriteAt(__be_int64 pos, const void *buffer, size_t size);
+    virtual  ssize_t		ReadAt(int64 pos, void *buffer, size_t size);
+    virtual  ssize_t		WriteAt(int64 pos, const void *buffer, size_t size);
 
-    virtual  off_t		Seek(__be_int64 position,  __be_uint32 seek_mode);
+    virtual  off_t		Seek(int64 position,  uint32 seek_mode);
     virtual  off_t		Position() const;
-    virtual status_t	SetSize(__be_int64 size);
+    virtual status_t	SetSize(int64 size);
 
 private:
     bool fReadOnly;

@@ -50,7 +50,7 @@ class BClipboard;
 namespace bhapi {
 #endif
 typedef struct text_run {
-     __be_int32			offset;		/* byte/character(utf8 mode) offset of first byte/character(utf8 mode) of run */
+     int32			offset;		/* byte/character(utf8 mode) offset of first byte/character(utf8 mode) of run */
     bhapi::font_desc		font;		/* font of run */
     bhapi::rgb_color		color;		/* color of run */
     bhapi::rgb_color		background;	/* background of run */
@@ -63,7 +63,7 @@ typedef struct text_run {
 #endif /* __cplusplus */
 } text_run;
 typedef struct text_run_array {
-     __be_int32			count;		/* number of text runs */
+     int32			count;		/* number of text runs */
     text_run		runs[1];	/* array of count number of runs */
 } text_run_array;
 #ifdef __cplusplus /* Just for C++ */
@@ -76,39 +76,39 @@ public:
     BTextView(BRect frame,
           const char *name,
           BRect textRect,
-           __be_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-           __be_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS);
+           uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+           uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS);
     BTextView(BRect frame,
           const char *name,
           BRect textRect,
           const BFont *font, const bhapi::rgb_color *color,
-           __be_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-           __be_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS);
+           uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+           uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS);
     virtual ~BTextView();
 
     const char	*Text() const;
-     __be_int32		TextLength() const; // ASCII
-     __be_int32		TextChars() const; // UTF-8
+     int32		TextLength() const; // ASCII
+     int32		TextChars() const; // UTF-8
 
-    char		ByteAt(__be_int32 index) const; // ASCII
-    const char	*CharAt(__be_int32 index,  __be_uint8 *length = NULL) const; // UTF-8
-    void		GetText(__be_int32 offset,  __be_int32 length, char *buffer) const; // ASCII
-    void		GetText(__be_int32 offset,  __be_int32 length, char *buffer,  __be_int32 buffer_size_in_bytes, bool utf8) const;
+    char		ByteAt(int32 index) const; // ASCII
+    const char	*CharAt(int32 index,  uint8 *length = NULL) const; // UTF-8
+    void		GetText(int32 offset,  int32 length, char *buffer) const; // ASCII
+    void		GetText(int32 offset,  int32 length, char *buffer,  int32 buffer_size_in_bytes, bool utf8) const;
 
     void		SetText(const char *text, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
-    void		SetText(const char *text,  __be_int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
-    void		SetText(BFile *file,  __be_int64 fileOffset,  __be_int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
+    void		SetText(const char *text,  int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
+    void		SetText(BFile *file,  int64 fileOffset,  int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
 
-    void		SetRunArray(__be_int32 startPos,  __be_int32 endPos, const bhapi::text_run_array *runs, bool utf8 = false); // exclude endPos
+    void		SetRunArray(int32 startPos,  int32 endPos, const bhapi::text_run_array *runs, bool utf8 = false); // exclude endPos
 
     // RunArray(): return value must free by "free"
-    bhapi::text_run_array *RunArray(__be_int32 startPos,  __be_int32 endPos,  __be_int32 *length = NULL, bool utf8 = false) const; // exclude endPos
+    bhapi::text_run_array *RunArray(int32 startPos,  int32 endPos,  int32 *length = NULL, bool utf8 = false) const; // exclude endPos
 
     void		Insert(const char *text, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
-    void		Insert(const char *text,  __be_int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
-    void		Insert(__be_int32 offset, const char *text,  __be_int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
+    void		Insert(const char *text,  int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
+    void		Insert(int32 offset, const char *text,  int32 length, const bhapi::text_run_array *runs = NULL, bool utf8 = false);
     void		Delete();
-    void		Delete(__be_int32 startPos,  __be_int32 endPos, bool utf8 = false); // exclude endPos
+    void		Delete(int32 startPos,  int32 endPos, bool utf8 = false); // exclude endPos
 
     void		MakeEditable(bool editable);
     bool		IsEditable() const;
@@ -128,28 +128,28 @@ public:
     void		SetAlignment(bhapi::alignment alignment);
     bhapi::alignment	Alignment() const;
 
-    void		SetMaxBytes(__be_int32 max);
-     __be_int32		MaxBytes() const;
+    void		SetMaxBytes(int32 max);
+     int32		MaxBytes() const;
 
     // HideTyping(): flag
     // 	0x00(false)	--- show everything
     // 	0x20 ~ 0x7e	--- replace the characters with this
     // 	others(true)	--- invisible
-    void		HideTyping(__be_uint8 flag = 0x2a);
-     __be_uint8		IsTypingHidden() const;
+    void		HideTyping(uint8 flag = 0x2a);
+     uint8		IsTypingHidden() const;
 
     void		SetTextRect(BRect textRect);
     BRect		TextRect() const;
 
-    virtual void	Select(__be_int32 startPos,  __be_int32 endPos, bool utf8 = false); // exclude endPos
-    bool		GetSelection(__be_int32 *startPos,  __be_int32 *endPos, bool utf8 = false) const; // exclude endPos
+    virtual void	Select(int32 startPos,  int32 endPos, bool utf8 = false); // exclude endPos
+    bool		GetSelection(int32 *startPos,  int32 *endPos, bool utf8 = false) const; // exclude endPos
     void		SelectAll();
     void		Deselect();
     bool		IsSelected() const;
 
-     __be_int32		CountLines() const;
-     __be_int32		CurrentLine() const;
-    void		GoToLine(__be_int32 index);
+     int32		CountLines() const;
+     int32		CurrentLine() const;
+    void		GoToLine(int32 index);
 
     virtual bool	AcceptsPaste(BClipboard *clipboard);
 
@@ -158,41 +158,41 @@ public:
     virtual void	Paste(BClipboard *clipboard);
     void		Clear();
 
-     __be_int32		LineAt(__be_int32 offset, bool utf8 = false) const;
-     __be_int32		LineAt(BPoint pt, bool visible = true) const;
-    BPoint		PointAt(__be_int32 offset, float *height = NULL, bool max_height = false, bool utf8 = false) const;
-     __be_int32		OffsetAt(BPoint pt, bool visible = true, bool utf8 = false) const;
-     __be_int32		OffsetAt(__be_int32 line, bool utf8 = false) const;
+     int32		LineAt(int32 offset, bool utf8 = false) const;
+     int32		LineAt(BPoint pt, bool visible = true) const;
+    BPoint		PointAt(int32 offset, float *height = NULL, bool max_height = false, bool utf8 = false) const;
+     int32		OffsetAt(BPoint pt, bool visible = true, bool utf8 = false) const;
+     int32		OffsetAt(int32 line, bool utf8 = false) const;
 
-    float		LineWidth(__be_int32 lineIndex = 0) const;
-    float		LineHeight(__be_int32 lineIndex = 0) const;
-    float		TextHeight(__be_int32 fromLineIndex,  __be_int32 toLineIndex) const;
+    float		LineWidth(int32 lineIndex = 0) const;
+    float		LineHeight(int32 lineIndex = 0) const;
+    float		TextHeight(int32 fromLineIndex,  int32 toLineIndex) const;
 
-    void		GetTextRegion(__be_int32 startPos,  __be_int32 endPos, BRegion *region, bool utf8 = false) const; // exclude endPos
-    virtual void	ScrollToOffset(__be_int32 offset, bool utf8 = false);
+    void		GetTextRegion(int32 startPos,  int32 endPos, BRegion *region, bool utf8 = false) const; // exclude endPos
+    virtual void	ScrollToOffset(int32 offset, bool utf8 = false);
     void		ScrollToSelection();
 
     void		SetTextBackground(bhapi::rgb_color color);
     bhapi::rgb_color	TextBackground() const;
 
-    void		SetPosition(__be_int32 pos, bool response = true, bool utf8 = false);
-     __be_int32		Position(bool utf8 = false,  __be_int32 *lineOffset = NULL) const;
+    void		SetPosition(int32 pos, bool response = true, bool utf8 = false);
+     int32		Position(bool utf8 = false,  int32 *lineOffset = NULL) const;
 
     virtual void	Draw(BRect updateRect);
     virtual void	FrameResized(float new_width, float new_height);
     virtual void	MouseDown(BPoint where);
     virtual void	MouseUp(BPoint where);
-    virtual void	MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message);
-    virtual void	KeyDown(const char *bytes,  __be_int32 numBytes);
-    virtual void	KeyUp(const char *bytes,  __be_int32 numBytes);
+    virtual void	MouseMoved(BPoint where,  uint32 code, const BMessage *a_message);
+    virtual void	KeyDown(const char *bytes,  int32 numBytes);
+    virtual void	KeyUp(const char *bytes,  int32 numBytes);
     virtual void	WindowActivated(bool state);
     virtual void	MakeFocus(bool focusState = true);
     virtual void	MessageReceived(BMessage *msg);
     virtual void	GetPreferredSize(float *width, float *height);
 
 protected:
-    virtual void	InsertText(const char *text,  __be_int32 length,  __be_int32 offset, const bhapi::text_run_array *runs, bool utf8);
-    virtual void	DeleteText(__be_int32 startPos,  __be_int32 endPos, bool utf8);
+    virtual void	InsertText(const char *text,  int32 length,  int32 offset, const bhapi::text_run_array *runs, bool utf8);
+    virtual void	DeleteText(int32 startPos,  int32 endPos, bool utf8);
 
 private:
     BRect fMargins;
@@ -203,29 +203,29 @@ private:
     bool fSelectable;
     bool fStylable;
     bhapi::alignment fAlignment;
-     __be_int32 fMaxBytes;
+     int32 fMaxBytes;
     float fTabWidth;
     bool fAutoindent;
-     __be_uint8 fTypingHidden;
+     uint8 fTypingHidden;
 
-     __be_int32 fSelectTracking;
-     __be_int32 fSelectStart;
-     __be_int32 fSelectEnd;
+     int32 fSelectTracking;
+     int32 fSelectStart;
+     int32 fSelectEnd;
 
     BList fLines;
-     __be_int32 fCurrentLine;
-     __be_int32 fCursor;
+     int32 fCurrentLine;
+     int32 fCursor;
 
     bhapi::rgb_color fTextBkColor;
 
-    void ReScanRunArray(__be_int32 fromLine,  __be_int32 toLine);
-    void ReScanSize(__be_int32 fromLine,  __be_int32 toLine);
+    void ReScanRunArray(int32 fromLine,  int32 toLine);
+    void ReScanSize(int32 fromLine,  int32 toLine);
     void ReScanLines();
-    void FloorPosition(__be_int32 *pos);
-    void CeilPosition(__be_int32 *pos);
+    void FloorPosition(int32 *pos);
+    void CeilPosition(int32 *pos);
 
-    float _StringWidth(const BFont &font, const char *str,  __be_int32 length) const;
-    void _DrawString(const BFont &font, const char *str, BPoint location,  __be_int32 length);
+    float _StringWidth(const BFont &font, const char *str,  int32 length) const;
+    void _DrawString(const BFont &font, const char *str, BPoint location,  int32 length);
 };
 #ifdef BHAPI_BUILD_LIBRARY
 
@@ -246,7 +246,7 @@ inline bool BTextView::IsSelected() const
 
 inline void BTextView::Delete()
 {
-     __be_int32 startPos = 0, endPos = 0;
+     int32 startPos = 0, endPos = 0;
     if(GetSelection(&startPos, &endPos, false)) Delete(startPos, endPos, false);
 }
 

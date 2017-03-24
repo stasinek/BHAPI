@@ -71,10 +71,10 @@ public:
     virtual ~BFont();
 
     status_t        SetFamilyAndStyle(const bhapi::font_family family, const bhapi::font_style style);
-    status_t        SetFamilyAndStyle(__be_uint32 code);
+    status_t        SetFamilyAndStyle(uint32 code);
 
     status_t        GetFamilyAndStyle(bhapi::font_family *family, bhapi::font_style *style) const;
-     __be_uint32	FamilyAndStyle() const;
+     uint32	FamilyAndStyle() const;
 
     void            SetSize(float size);
     void            SetSpacing(float spacing);
@@ -87,22 +87,22 @@ public:
     bool            IsBoldStyle() const;
 
     bool            IsScalable() const;
-    bool            HasFixedSize(__be_int32 *count = NULL) const;
-    bool            GetFixedSize(float *size,  __be_int32 index = 0) const;
+    bool            HasFixedSize(int32 *count = NULL) const;
+    bool            GetFixedSize(float *size,  int32 index = 0) const;
 
     // tabWidth:
     // 	positive --- fixed size
     // 	0        --- decided on the font
     // 	negative --- multiple of space
-    float           StringWidth(const char *string,  __be_int32 length = -1, float tabWidth = 0) const;
-    float           StringWidth(const BString &str,  __be_int32 length = -1, float tabWidth = 0) const;
+    float           StringWidth(const char *string,  int32 length = -1, float tabWidth = 0) const;
+    float           StringWidth(const BString &str,  int32 length = -1, float tabWidth = 0) const;
     void            GetHeight(bhapi::font_height *height) const;
 
     // CharWidths(): return value must free by "delete[]"
-    float*          CharWidths(const char *string,  __be_int32 *nChars, float tabWidth = 0) const;
-    float*          CharWidths(const BString &str,  __be_int32 *nChars, float tabWidth = 0) const;
-    float*          CharWidths(const char *string,  __be_int32 length,  __be_int32 *nChars, float tabWidth = 0) const;
-    float*          CharWidths(const BString &str,  __be_int32 length,  __be_int32 *nChars, float tabWidth = 0) const;
+    float*          CharWidths(const char *string,  int32 *nChars, float tabWidth = 0) const;
+    float*          CharWidths(const BString &str,  int32 *nChars, float tabWidth = 0) const;
+    float*          CharWidths(const char *string,  int32 length,  int32 *nChars, float tabWidth = 0) const;
+    float*          CharWidths(const BString &str,  int32 length,  int32 *nChars, float tabWidth = 0) const;
 
     BFont&          operator=(const BFont &font);
     BFont&          operator=(const bhapi::font_desc &fontDesc);
@@ -121,13 +121,13 @@ namespace bhapi {
 extern BHAPI_IMPEXP const BFont* plain_font;
 extern BHAPI_IMPEXP const BFont* bold_font;
 extern BHAPI_IMPEXP const BFont* fixed_font;
-BHAPI_IMPEXP  __be_int32	count_font_families(void);
-BHAPI_IMPEXP status_t       get_font_family(__be_int32 index, const char **name);
-BHAPI_IMPEXP  __be_int32	get_font_family_index(const char *name);
-BHAPI_IMPEXP  __be_int32	count_font_styles(const char *family);
-BHAPI_IMPEXP  __be_int32	count_font_styles(__be_int32 index);
-BHAPI_IMPEXP status_t       get_font_style(const char *family,  __be_int32 index, const char **name);
-BHAPI_IMPEXP  __be_int32	get_font_style_index(const char *family, const char *name);
+BHAPI_IMPEXP  int32	count_font_families(void);
+BHAPI_IMPEXP status_t       get_font_family(int32 index, const char **name);
+BHAPI_IMPEXP  int32	get_font_family_index(const char *name);
+BHAPI_IMPEXP  int32	count_font_styles(const char *family);
+BHAPI_IMPEXP  int32	count_font_styles(int32 index);
+BHAPI_IMPEXP status_t       get_font_style(const char *family,  int32 index, const char **name);
+BHAPI_IMPEXP  int32	get_font_style_index(const char *family, const char *name);
 BHAPI_IMPEXP bool           update_font_families(bool check_only);
 }
 #endif /* __cplusplus */

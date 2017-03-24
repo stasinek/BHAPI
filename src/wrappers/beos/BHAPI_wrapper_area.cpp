@@ -53,7 +53,7 @@ typedef struct b_beos_area_t {
 	char		*name;
 	char		*domain;
 	char		*ipc_name;
-	__be_uint32		prot;
+	uint32		prot;
 	size_t		length;
 	void		*addr;
 	area_id		beArea;
@@ -143,14 +143,14 @@ static void BHAPI_UNLOCK_AREA()
 
 
 typedef struct b_beos_area_info_t {
-	__be_int32		magic;
+	int32		magic;
 	bool		closed;
 	size_t		length;
 } b_beos_area_info_t;
 
 
 BHAPI_IMPEXP void*
-bhapi::create_area(const char *name, void **start_addr, size_t size,  __be_uint32 protection, const char *domain, bhapi::area_access area_access)
+bhapi::create_area(const char *name, void **start_addr, size_t size,  uint32 protection, const char *domain, bhapi::area_access area_access)
 {
 	if(size <= 0) return NULL;
 
@@ -216,7 +216,7 @@ bhapi::create_area(const char *name, void **start_addr, size_t size,  __be_uint3
 
 
 BHAPI_IMPEXP void*
-bhapi::clone_area(const char *name, void **dest_addr,  __be_uint32 protection, const char *domain)
+bhapi::clone_area(const char *name, void **dest_addr,  uint32 protection, const char *domain)
 {
 	char *ipc_name = b_area_ipc_name(name, domain);
 	if(!ipc_name) return NULL;
@@ -274,7 +274,7 @@ bhapi::clone_area(const char *name, void **dest_addr,  __be_uint32 protection, c
 
 
 BHAPI_IMPEXP void*
-bhapi::clone_area_by_source(void *source_data, void **dest_addr,  __be_uint32 protection)
+bhapi::clone_area_by_source(void *source_data, void **dest_addr,  uint32 protection)
 {
 	b_beos_area_t *source_area = (b_beos_area_t*)source_data;
 	if(!source_area) return NULL;
@@ -419,7 +419,7 @@ b_resize_area(void *data, void **start_addr, size_t new_size)
 
 
 BHAPI_IMPEXP status_t 
-b_set_area_protection(void *data,  __be_uint32 new_protection)
+b_set_area_protection(void *data,  uint32 new_protection)
 {
 	b_beos_area_t *area = (b_beos_area_t*)data;
 	if(!area) return B_BAD_VALUE;

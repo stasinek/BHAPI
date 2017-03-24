@@ -73,8 +73,8 @@ public:
     BRegion& operator|=(const BRegion &region);
 
     BRect Frame() const;
-    BRect RectAt(__be_int32 index) const;
-     __be_int32 CountRects() const;
+    BRect RectAt(int32 index) const;
+     int32 CountRects() const;
 
     void Set(BRect singleBound);
     void MakeEmpty();

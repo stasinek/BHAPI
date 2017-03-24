@@ -170,15 +170,15 @@ void _BTextInput_::AlignTextRect()
 	float hInset = 2;
 	float textFontWidth = TextRect().right;
 
-	if (__be_control_look != NULL)  {
+	if (be_control_look != NULL)  {
 		switch (Alignment()) {
 			case B_ALIGN_LEFT:
-				hInset =  __be_control_look->DefaultLabelSpacing();
+				hInset =  be_control_look->DefaultLabelSpacing();
 				break;
 
 			case B_ALIGN_RIGHT:
 				hInset  = textRect.right - textFontWidth;
-				hInset -=  __be_control_look->DefaultLabelSpacing();
+				hInset -=  be_control_look->DefaultLabelSpacing();
 				break;
 
 			case B_ALIGN_CENTER:

@@ -98,28 +98,28 @@ BHAPI_EXPORT void bhapi::font_freetype2_cancel(void)
 
 class BFontFT2 : public BFontEngine {
 public:
-    BFontFT2(const BEntry *entry,  __be_int32 faceIndex);
+    BFontFT2(const BEntry *entry,  int32 faceIndex);
     virtual ~BFontFT2();
 
-     __be_int32 CountFaces() const;
+     int32 CountFaces() const;
 
     virtual bool IsValid() const;
 
     virtual bool IsScalable() const;
     virtual void ForceFontAliasing(bool enable);
 
-    virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold,  __be_int32 length) const;
+    virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32 length) const;
     virtual void GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const;
-    virtual  __be_uint8* RenderString(const char *string,  __be_int32 *width,  __be_int32 *height, bool *is_mono,
-                     float size, float spacing, float shear, bool bold,  __be_int32 length);
+    virtual  uint8* RenderString(const char *string,  int32 *width,  int32 *height, bool *is_mono,
+                     float size, float spacing, float shear, bool bold,  int32 length);
 
     virtual bhapi::font_detach_callback* Attach(void (*callback)(void*), void *data);
     virtual bool Detach(bhapi::font_detach_callback *callback);
 
 private:
     char *fFilename;
-     __be_int32 fFaceIndex;
-     __be_int32 nFaces;
+     int32 fFaceIndex;
+     int32 nFaces;
     FT_Face fFace;
     bool fScalable;
     bool fForceFontAliasing;
@@ -128,7 +128,7 @@ private:
 };
 
 
-BFontFT2::BFontFT2(const BEntry *entry,  __be_int32 faceIndex)
+BFontFT2::BFontFT2(const BEntry *entry,  int32 faceIndex)
     : BFontEngine(), fFilename(NULL), fFaceIndex(-1), nFaces(-1), fFace(NULL), fScalable(false), fForceFontAliasing(false)
 {
     BPath aPath;
@@ -171,7 +171,7 @@ BFontFT2::BFontFT2(const BEntry *entry,  __be_int32 faceIndex)
     if(family.Length() <= 0)
     {
         family = aPath.Leaf();
-         __be_int32 cFound;
+         int32 cFound;
         if((cFound = family.FindFirst('.')) >= 0) family.Remove(cFound, -1);
         if(family.Length() < 0) family = "Unknown";
     }
@@ -197,7 +197,7 @@ BFontFT2::BFontFT2(const BEntry *entry,  __be_int32 faceIndex)
     {
         float *sizes = new float[(int)fFace->num_fixed_sizes];
         for(int i = 0; i < fFace->num_fixed_sizes; i++) sizes[i] = (float)(fFace->available_sizes[i].height);
-        SetFixedSize(sizes, (__be_int32)fFace->num_fixed_sizes);
+        SetFixedSize(sizes, (int32)fFace->num_fixed_sizes);
         delete[] sizes;
     }
 
@@ -268,7 +268,7 @@ BFontFT2::Detach(bhapi::font_detach_callback *callback)
 }
 
 
-__be_int32
+int32
 BFontFT2::CountFaces() const
 {
     return nFaces;
@@ -302,9 +302,9 @@ BFontFT2::ForceFontAliasing(bool enable)
 bool 
 BFontFT2::IsFixedSize(float size) const
 {
-     __be_int32 count = 0;
+     int32 count = 0;
     if(size <= 0 || !HasFixedSize(&count) || count <= 0) return false;
-    for(__be_int32 i = 0; i < count; i++)
+    for(int32 i = 0; i < count; i++)
     {
         float nsize = 0;
         if(!GetFixedSize(&nsize, i)) continue;
@@ -315,7 +315,7 @@ BFontFT2::IsFixedSize(float size) const
 
 
 float
-BFontFT2::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  __be_int32 length) const
+BFontFT2::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32 length) const
 {
     BAutolock <BLocker> autolock(&bhapi::ft2_font_locker);
 
@@ -401,9 +401,9 @@ BFontFT2::GetHeight(bhapi::font_height *height, float size, float shear, bool bo
 }
 
 
-__be_uint8*
-BFontFT2::RenderString(const char *string,  __be_int32 *width,  __be_int32 *height, bool *is_mono,
-               float size, float spacing, float shear, bool bold,  __be_int32 length)
+uint8*
+BFontFT2::RenderString(const char *string,  int32 *width,  int32 *height, bool *is_mono,
+               float size, float spacing, float shear, bool bold,  int32 length)
 {
     if(string == NULL || *string == 0 || length == 0 || width == NULL || height == NULL || is_mono == NULL) return NULL;
 
@@ -420,17 +420,17 @@ BFontFT2::RenderString(const char *string,  __be_int32 *width,  __be_int32 *heig
     if((stringWidth = StringWidth(string, size, spacing, shear, bold, length)) <= 0) return NULL;
     GetHeight(&fontHeight, size, shear, bold);
 
-     __be_int32 w, h;
-    w = (__be_int32)ceil(stringWidth) + 1;
-    h = (__be_int32)ceil(fontHeight.ascent + fontHeight.descent) + 1;
+     int32 w, h;
+    w = (int32)ceil(stringWidth) + 1;
+    h = (int32)ceil(fontHeight.ascent + fontHeight.descent) + 1;
 
-     __be_uint8 *bitmap = new  __be_uint8[w * h];
+     uint8 *bitmap = new  uint8[w * h];
     if(!bitmap)
     {
         BHAPI_WARNING("[FONT]: %s --- Unable to alloc memory for bitmap data.", __PRETTY_FUNCTION__);
         return NULL;
     }
-    bzero(bitmap, sizeof(__be_uint8) * (size_t)(w * h));
+    bzero(bitmap, sizeof(uint8) * (size_t)(w * h));
 
     unichar16*unicode = bhapi::utf8_convert_to_unicode(string, length);
     if(!unicode)
@@ -440,8 +440,8 @@ BFontFT2::RenderString(const char *string,  __be_int32 *width,  __be_int32 *heig
     }
 
     const unichar16*ch;
-     __be_uint32 x = 0;
-     __be_uint32 y = (__be_uint32)ceil(fontHeight.ascent);
+     uint32 x = 0;
+     uint32 y = (uint32)ceil(fontHeight.ascent);
     bool do_mono = fForceFontAliasing;
     for(ch = unicode; !(ch == NULL || *ch == 0); ch = bhapi::unicode_next(ch, NULL))
     {
@@ -453,17 +453,17 @@ BFontFT2::RenderString(const char *string,  __be_int32 *width,  __be_int32 *heig
 
         FT_Bitmap *ftbitmap = &(fFace->glyph->bitmap);
 
-         __be_int32 xx = x + (__be_int32)(fFace->glyph->bitmap_left);
-         __be_int32 yy = y - (__be_int32)(fFace->glyph->bitmap_top);
-         __be_int32 bitmapWidth = (__be_int32)(ftbitmap->width);
-         __be_int32 bitmapHeight = (__be_int32)(ftbitmap->rows);
-         __be_int32 lineBytes = (__be_int32)(ftbitmap->pitch > 0 ? ftbitmap->pitch : -(ftbitmap->pitch));
-         __be_int32 maxxx = min_c(w, xx + bitmapWidth);
-         __be_int32 maxyy = min_c(h, yy + bitmapHeight);
+         int32 xx = x + (int32)(fFace->glyph->bitmap_left);
+         int32 yy = y - (int32)(fFace->glyph->bitmap_top);
+         int32 bitmapWidth = (int32)(ftbitmap->width);
+         int32 bitmapHeight = (int32)(ftbitmap->rows);
+         int32 lineBytes = (int32)(ftbitmap->pitch > 0 ? ftbitmap->pitch : -(ftbitmap->pitch));
+         int32 maxxx = min_c(w, xx + bitmapWidth);
+         int32 maxyy = min_c(h, yy + bitmapHeight);
 
-        for(__be_int32 i = yy, p = 0; i < maxyy; i++, p++)
+        for(int32 i = yy, p = 0; i < maxyy; i++, p++)
         {
-             __be_uint8* dest = bitmap;
+             uint8* dest = bitmap;
             dest += i * w + xx;
             unsigned char* src = ftbitmap->buffer;
             src += p * lineBytes;
@@ -471,17 +471,17 @@ BFontFT2::RenderString(const char *string,  __be_int32 *width,  __be_int32 *heig
             switch(ftbitmap->pixel_mode)
             {
                 case FT_PIXEL_MODE_GRAY:
-                    for(__be_int32 j = xx; j < maxxx; j++) *dest++ = (__be_uint8)(*src++);
+                    for(int32 j = xx; j < maxxx; j++) *dest++ = (uint8)(*src++);
                     break;
 
                 case FT_PIXEL_MODE_MONO:
-                    for(__be_int32 j = xx; j < maxxx; )
+                    for(int32 j = xx; j < maxxx; )
                     {
-                         __be_uint8 val = (__be_uint8)(*src++);
-                         __be_int32 left = maxxx - j >= 8 ? 8 : maxxx - j;
-                         __be_uint8 left_offset = 7;
+                         uint8 val = (uint8)(*src++);
+                         int32 left = maxxx - j >= 8 ? 8 : maxxx - j;
+                         uint8 left_offset = 7;
 
-                        for(__be_int32 k = 0; k < left; k++, left_offset--, j++)
+                        for(int32 k = 0; k < left; k++, left_offset--, j++)
                             *dest++ = (val & (1 << left_offset)) ? 255 : 0;
                     }
                     break;
@@ -491,7 +491,7 @@ BFontFT2::RenderString(const char *string,  __be_int32 *width,  __be_int32 *heig
             }
         }
 
-        x += (__be_uint32)((float)(fFace->glyph->metrics.horiAdvance) / 64.f) + (__be_uint32)ceil((double)(spacing * size)); // next x
+        x += (uint32)((float)(fFace->glyph->metrics.horiAdvance) / 64.f) + (uint32)ceil((double)(spacing * size)); // next x
     }
 
     free(unicode);
@@ -554,7 +554,7 @@ BHAPI_EXPORT bool b_update_freetype2_font_families(bool check_only)
 //	BHAPI_DEBUG("[FONT]: Fonts directory number: %d", fonts_dirs_array->CountItems());
 
     const BString *_fonts_dir;
-    for(__be_int32 m = 0; (_fonts_dir = fonts_dirs_array->ItemAt(m)) != NULL; m++)
+    for(int32 m = 0; (_fonts_dir = fonts_dirs_array->ItemAt(m)) != NULL; m++)
     {
         BDirectory directory(_fonts_dir->String());
         if(directory.InitCheck() != B_OK)
@@ -575,9 +575,9 @@ BHAPI_EXPORT bool b_update_freetype2_font_families(bool check_only)
             if(filename.Length() < 5) continue;
             const char *fontPattern[] = {".ttf", ".ttc", ".pcf", ".fon", ".pfa", ".pfb"};
             bool isPatternMatched = false;
-            for(__be_uint8 i = 0; i < 6; i++)
+            for(uint8 i = 0; i < 6; i++)
             {
-                if(filename.IFindLast(fontPattern[i]) == filename.Length() - (__be_int32)strlen(fontPattern[i]))
+                if(filename.IFindLast(fontPattern[i]) == filename.Length() - (int32)strlen(fontPattern[i]))
                 {
                     isPatternMatched = true;
                     break;
@@ -587,7 +587,7 @@ BHAPI_EXPORT bool b_update_freetype2_font_families(bool check_only)
 
 //			BHAPI_DEBUG("[FONT]: Reading font file \"%s\" ...", aPath.Path());
 
-             __be_int32 faceIndex = 0, nFaces = 0;
+             int32 faceIndex = 0, nFaces = 0;
             do{
                 BFontFT2 *engine = new BFontFT2(&aEntry, faceIndex);
                 if(!engine || !engine->IsValid())

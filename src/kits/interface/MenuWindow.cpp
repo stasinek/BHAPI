@@ -197,7 +197,7 @@ void BMenuFrame::Draw(BRect updateRect)
 {
 	if (fMenu != NULL && fMenu->CountItems() == 0) {
 		BRect rect(Bounds());
-		__be_control_look->DrawMenuBackground(this, rect, updateRect,
+		be_control_look->DrawMenuBackground(this, rect, updateRect,
 			ui_color(B_MENU_BACKGROUND_COLOR));
 		SetDrawingMode(B_OP_OVER);
 

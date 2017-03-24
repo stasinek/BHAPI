@@ -43,7 +43,7 @@ namespace BPrivate {
 }
 class BHAPI_IMPEXP BScreen {
 public:
-            BScreen(__be_uint32 id);
+            BScreen(uint32 id);
             BScreen(bhapi::screen_id id = B_MAIN_SCREEN_ID);
             BScreen(BWindow* window);
            ~BScreen();
@@ -118,7 +118,7 @@ private:
 
 private:
             BPrivate::BPrivateScreen* fScreen;
-            __be_uint32 fID;
+            uint32 fID;
 };
 
 inline uint8 BScreen::IndexForColor(bhapi::rgb_color color)

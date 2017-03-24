@@ -50,9 +50,9 @@ public:
 	virtual bool IsScalable() const;
 	virtual void ForceFontAliasing(bool enable);
 
-	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold,  __be_int32 length) const;
+	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32 length) const;
 	virtual void GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const;
-	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold,  __be_int32 length);
+	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold,  int32 length);
 
 	virtual bhapi::font_detach_callback* Attach(void (*callback)(void*), void *data);
 	virtual bool Detach(bhapi::font_detach_callback *callback);
@@ -84,7 +84,7 @@ BFontBe::BFontBe(EBeGraphicsEngine *beEngine, const font_family family, const fo
 	int32 nTuned = fBeFont.CountTuned();
 
 	float *fontSizes = (nTuned > 0 ? new float[nTuned] : NULL);
-	__be_int32 nFontSizes = 0;
+	int32 nFontSizes = 0;
 
 	for(int32 i = 0; i < nTuned && fontSizes != NULL; i++)
 	{
@@ -94,7 +94,7 @@ BFontBe::BFontBe(EBeGraphicsEngine *beEngine, const font_family family, const fo
 		fBeFont.SetSize(fontInfo.size);
 
 		bool isFixed = fBeFont.IsFixed();
-		for(__be_int32 j = 0; j < nFontSizes; j++)
+		for(int32 j = 0; j < nFontSizes; j++)
 			if(fontSizes[j] == fontInfo.size) {isFixed = false; break;}
 		if(isFixed == false) continue;
 
@@ -167,7 +167,7 @@ BFontBe::ForceFontAliasing(bool enable)
 
 
 float
-BFontBe::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  __be_int32 length) const
+BFontBe::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32 length) const
 {
 	if(fBeEngine == NULL) return 0;
 	if((int)size <= 0 || string == NULL || *string == 0 || length == 0 || !IsAttached()) return 0;
@@ -186,16 +186,16 @@ BFontBe::StringWidth(const char *string, float size, float spacing, float shear,
 	aFont.GetHeight(&fontHeight);
 
 	float width = 0;
-	if(length < 0 || (size_t)length > strlen(string)) length = (__be_int32)strlen(string);
+	if(length < 0 || (size_t)length > strlen(string)) length = (int32)strlen(string);
 	float height = fontHeight.ascent + fontHeight.descent;
 	float delta = (float)ceil((double)(spacing * size));
 
-	__be_uint8 bytes = 0;
+	uint8 bytes = 0;
 	const char *str = bhapi::utf8_at(string, 0, &bytes);
 	const char *tmp = str;
 	while(!(tmp == NULL || bytes == 0 || (size_t)(tmp - string) > (size_t)length - (size_t)bytes))
 	{
-		BString aStr(tmp, (__be_int32)bytes);
+		BString aStr(tmp, (int32)bytes);
 		float bWidth = aFont.StringWidth(aStr.String());
 		width += (bWidth > 0 ? bWidth : height) + (tmp == str ? 0.f : delta);
 		tmp = bhapi::utf8_next(tmp, &bytes);
@@ -234,7 +234,7 @@ BFontBe::GetHeight(bhapi::font_height *height, float size, float shear, bool bol
 
 
 BRect
-BFontBe::RenderString(BHandler *_view, const char *string, float size, float spacing, float shear, bool bold,  __be_int32 length)
+BFontBe::RenderString(BHandler *_view, const char *string, float size, float spacing, float shear, bool bold,  int32 length)
 {
 	if(fBeEngine == NULL || (int)size <= 0 || string == NULL || *string == 0 || length == 0) return BRect();
 
@@ -272,18 +272,18 @@ BFontBe::RenderString(BHandler *_view, const char *string, float size, float spa
 	fBeFont.GetHeight(&fontHeight);
 
 	float width = 0;
-	if(length < 0 || (size_t)length > strlen(string)) length = (__be_int32)strlen(string);
+	if(length < 0 || (size_t)length > strlen(string)) length = (int32)strlen(string);
 	float height = fontHeight.ascent + fontHeight.descent;
 	float delta = (float)ceil((double)(spacing * size));
 	BPoint pt = view->ConvertToWindow(view->PenLocation());
 	BPoint bPt(pt.x, pt.y);
 
-	__be_uint8 bytes = 0;
+	uint8 bytes = 0;
 	const char *str = bhapi::utf8_at(string, 0, &bytes);
 	const char *tmp = str;
 	while(!(tmp == NULL || bytes == 0 || (size_t)(tmp - string) > (size_t)length - (size_t)bytes))
 	{
-		BString aStr(tmp, (__be_int32)bytes);
+		BString aStr(tmp, (int32)bytes);
 		float bWidth = fBeFont.StringWidth(aStr.String());
 
 		if(bWidth > 0) bView->DrawString(aStr.String(), bPt);

@@ -58,11 +58,11 @@ typedef struct threadCallback {
 typedef struct bhapi::win32_thread_t {
 	HANDLE			handle;
 
-	__be_int32			priority;
-	__be_int32			running;
+	int32			priority;
+	int32			running;
 	bool			exited;
 	status_t		status;
-	__be_int64			ID;
+	int64			ID;
 	threadCallback	callback;
 	BList			exit_callbacks;
 
@@ -174,21 +174,21 @@ public:
 		return priThread;
 	}
 
-	__be_int32 UnrefThread(bhapi::win32_thread_private_t *priThread)
+	int32 UnrefThread(bhapi::win32_thread_private_t *priThread)
 	{
 		bhapi::win32_thread_t *td = (priThread == NULL ? NULL : priThread->thread);
 		if(td == NULL || td->private_threads.CountItems() == 0 || fList.IndexOf((void*)td) < 0) return -1;
 		if(td->private_threads.RemoveItem((void*)priThread) == false) return -1;
 		delete priThread;
-		__be_int32 count = td->private_threads.CountItems();
+		int32 count = td->private_threads.CountItems();
 		if(count == 0) fList.RemoveItem((void*)td);
 		return count;
 	}
 
-	bhapi::win32_thread_private_t* OpenThread(__be_int64 tid)
+	bhapi::win32_thread_private_t* OpenThread(int64 tid)
 	{
 		if(tid == B_INT64_CONSTANT(0)) return NULL;
-		for(__be_int32 i = 0; i < fList.CountItems(); i++)
+		for(int32 i = 0; i < fList.CountItems(); i++)
 		{
 			bhapi::win32_thread_t* td = (bhapi::win32_thread_t*)fList.ItemAt(i);
 			if(td->ID == tid) return RefThread(td);
@@ -205,9 +205,9 @@ static EThreadsList __bhapi_thread_lists__;
 #define BHAPI_OPEN_THREAD_(tid)	__bhapi_thread_lists__.OpenThread(tid)
 
 
-BHAPI_EXPORT  __be_int64 bhapi::get_current_thread_id(void)
+BHAPI_EXPORT  int64 bhapi::get_current_thread_id(void)
 {
-	return((__be_int64)GetCurrentThreadId());
+	return((int64)GetCurrentThreadId());
 }
 
 
@@ -336,9 +336,9 @@ BHAPI_EXPORT void* bhapi::create_thread_by_current_thread(void)
 
 
 BHAPI_EXPORT void* bhapi::create_thread(b_thread_func threadFunction,
-				     __be_int32 priority,
+				     int32 priority,
 				    void *arg,
-				     __be_int64 *threadId)
+				     int64 *threadId)
 {
 	if(threadFunction == NULL) return NULL;
 
@@ -389,7 +389,7 @@ BHAPI_EXPORT void* bhapi::create_thread(b_thread_func threadFunction,
 	thread->priority = -1;
 	thread->running = 0;
 	thread->exited = false;
-	thread->ID = (__be_int64)winThreadId;
+	thread->ID = (int64)winThreadId;
 	thread->existent = false;
 
 	BHAPI_UNLOCK_THREAD();
@@ -401,7 +401,7 @@ BHAPI_EXPORT void* bhapi::create_thread(b_thread_func threadFunction,
 }
 
 
-BHAPI_EXPORT void* bhapi::open_thread(__be_int64 threadId)
+BHAPI_EXPORT void* bhapi::open_thread(int64 threadId)
 {
 	BHAPI_LOCK_THREAD();
 	bhapi::win32_thread_private_t *priThread = BHAPI_OPEN_THREAD_(threadId);
@@ -420,7 +420,7 @@ BHAPI_EXPORT status_t bhapi::delete_thread(void *data)
 	bool threadIsCopy = priThread->copy;
 
 	BHAPI_LOCK_THREAD();
-	__be_int32 count = BHAPI_UNREF_THREAD_(priThread);
+	int32 count = BHAPI_UNREF_THREAD_(priThread);
 	BHAPI_UNLOCK_THREAD();
 
 	if(count < 0) return B_ERROR;
@@ -535,27 +535,27 @@ BHAPI_EXPORT status_t b_suspend_thread(void *data)
 }
 
 
-BHAPI_EXPORT  __be_int64 bhapi::get_thread_id(void *data)
+BHAPI_EXPORT  int64 bhapi::get_thread_id(void *data)
 {
 	bhapi::win32_thread_private_t *priThread = (bhapi::win32_thread_private_t*)data;
 	bhapi::win32_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL) return B_INT64_CONSTANT(0);
 
 	bhapi::lock_thread_inter(thread);
-	__be_int64 thread_id = thread->ID;
+	int64 thread_id = thread->ID;
 	bhapi::unlock_thread_inter(thread);
 
 	return thread_id;
 }
 
 
-BHAPI_EXPORT  __be_uint32 bhapi::get_thread_run_state(void *data)
+BHAPI_EXPORT  uint32 bhapi::get_thread_run_state(void *data)
 {
 	bhapi::win32_thread_private_t *priThread = (bhapi::win32_thread_private_t*)data;
 	bhapi::win32_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL) return BHAPI_THREAD_INVALID;
 
-	__be_uint32 retVal = BHAPI_THREAD_INVALID;
+	uint32 retVal = BHAPI_THREAD_INVALID;
 
 	bhapi::lock_thread_inter(thread);
 
@@ -588,7 +588,7 @@ BHAPI_EXPORT  __be_uint32 bhapi::get_thread_run_state(void *data)
 }
 
 
-BHAPI_EXPORT status_t b_set_thread_priority(void *data,  __be_int32 new_priority)
+BHAPI_EXPORT status_t b_set_thread_priority(void *data,  int32 new_priority)
 {
 	bhapi::win32_thread_private_t *priThread = (bhapi::win32_thread_private_t*)data;
 	bhapi::win32_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
@@ -608,7 +608,7 @@ BHAPI_EXPORT status_t b_set_thread_priority(void *data,  __be_int32 new_priority
 		bhapi::unlock_thread_inter(thread);
 		return B_ERROR;
 	}
-	__be_int32 old_priority = thread->priority;
+	int32 old_priority = thread->priority;
 	thread->priority = new_priority;
 	bhapi::unlock_thread_inter(thread);
 
@@ -616,14 +616,14 @@ BHAPI_EXPORT status_t b_set_thread_priority(void *data,  __be_int32 new_priority
 }
 
 
-BHAPI_EXPORT  __be_int32 bhapi::get_thread_priority(void *data)
+BHAPI_EXPORT  int32 bhapi::get_thread_priority(void *data)
 {
 	bhapi::win32_thread_private_t *priThread = (bhapi::win32_thread_private_t*)data;
 	bhapi::win32_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL) return -1;
 
 	bhapi::lock_thread_inter(thread);
-	__be_int32 priority = thread->priority;
+	int32 priority = thread->priority;
 	bhapi::unlock_thread_inter(thread);
 
 	return priority;
@@ -710,7 +710,7 @@ BHAPI_EXPORT void b_exit_thread(status_t status)
 }
 
 
-BHAPI_EXPORT status_t bhapi::wait_for_thread_etc(void *data, status_t *thread_return_value,  __be_uint32 flags, bigtime_t microseconds_timeout)
+BHAPI_EXPORT status_t bhapi::wait_for_thread_etc(void *data, status_t *thread_return_value,  uint32 flags, bigtime_t microseconds_timeout)
 {
 	bhapi::win32_thread_private_t *priThread = (bhapi::win32_thread_private_t*)data;
 	bhapi::win32_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
@@ -886,8 +886,8 @@ BHAPI_EXPORT status_t b_snooze_until(bigtime_t time, int timebase)
 }
 
 
-BHAPI_EXPORT  __be_int64 bhapi::get_current_team_id(void)
+BHAPI_EXPORT  int64 bhapi::get_current_team_id(void)
 {
-	return((__be_int64)GetCurrentProcessId());
+	return((int64)GetCurrentProcessId());
 }
 #endif // BHAPI_OS_WIN32

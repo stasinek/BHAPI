@@ -660,7 +660,7 @@ extern "C" {
 
 /* time functions */
 namespace bhapi {
-BHAPI_IMPEXP  __be_uint32    real_time_clock(void);
+BHAPI_IMPEXP  uint32    real_time_clock(void);
 BHAPI_IMPEXP bigtime_t real_time_clock_usecs(void);
 BHAPI_IMPEXP bigtime_t system_boot_time(void); /* system boot time in microseconds */
 BHAPI_IMPEXP bigtime_t system_time(void); /* time since booting in microseconds */
@@ -670,7 +670,7 @@ BHAPI_IMPEXP bigtime_t system_time(void); /* time since booting in microseconds 
  * typedef struct area_info {
     char		name[B_OS_NAME_LENGTH + 1];
     size_t		size;
-     __be_uint32		protection;
+     uint32		protection;
     void		*address;
     char		domain[5];
 } area_info;
@@ -691,17 +691,17 @@ typedef enum area_access {
 
 #ifdef __cplusplus
 /*ETK
-BHAPI_IMPEXP void*	create_area(const char *name, void **start_addr, size_t size,  __be_uint32 protection,
+BHAPI_IMPEXP void*	create_area(const char *name, void **start_addr, size_t size,  uint32 protection,
                         const char *domain, bhapi::area_access a_area_access = BHAPI_AREA_ACCESS_OWNER);
 */
 #else
 /*ETK
-BHAPI_IMPEXP void*	create_area(const char *name, void **start_addr, size_t size,  __be_uint32 protection,
+BHAPI_IMPEXP void*	create_area(const char *name, void **start_addr, size_t size,  uint32 protection,
                         const char *domain, bhapi::area_access a_area_access);
 */
 #endif
-//BHAPI_IMPEXP void*	clone_area(const char *name, void **dest_addr,  __be_uint32 protection, const char *domain);
-BHAPI_IMPEXP void*	clone_area_by_source(void *source_area, void **dest_addr,  __be_uint32 protection);
+//BHAPI_IMPEXP void*	clone_area(const char *name, void **dest_addr,  uint32 protection, const char *domain);
+BHAPI_IMPEXP void*	clone_area_by_source(void *source_area, void **dest_addr,  uint32 protection);
 //BHAPI_IMPEXP status_t	get_area_info(void *area, bhapi::area_info *info);
 //BHAPI_IMPEXP status_t	delete_area(void *area);
 BHAPI_IMPEXP status_t	delete_area_etc(void *area, bool no_clone);
@@ -710,7 +710,7 @@ BHAPI_IMPEXP status_t	delete_area_etc(void *area, bool no_clone);
  * 	When it was resized, the clone-area must reclone to get the valid address.
  * */
 //BHAPI_IMPEXP status_t	resize_area(void *area, void **start_addr, size_t new_size);
-//BHAPI_IMPEXP status_t	set_area_protection(void *area,  __be_uint32 new_protection);
+//BHAPI_IMPEXP status_t	set_area_protection(void *area,  uint32 new_protection);
 //* locker functions */
 BHAPI_IMPEXP void*	create_locker(void);
 BHAPI_IMPEXP void*	clone_locker(void* locker);
@@ -720,14 +720,14 @@ BHAPI_IMPEXP status_t	delete_locker(void* locker);
  * */
 BHAPI_IMPEXP status_t	close_locker(void* locker);
 BHAPI_IMPEXP status_t	lock_locker(void *locker);
-BHAPI_IMPEXP status_t	lock_locker_etc(void *locker,  __be_uint32 flags, bigtime_t timeout);
+BHAPI_IMPEXP status_t	lock_locker_etc(void *locker,  uint32 flags, bigtime_t timeout);
 BHAPI_IMPEXP status_t	unlock_locker(void *locker);
 /* bhapi::count_locker_locks:
  * 	return count of locks when locked by current thread,
  * 	return less than 0 when locked by other thread or invalid,
  * 	return 0 when it isn't locked or valid.
  * */
-BHAPI_IMPEXP  __be_int64	count_locker_locks(void *locker);
+BHAPI_IMPEXP  int64	count_locker_locks(void *locker);
 /* bhapi::*_simple_locker:
  *	The "simple_locker" DO NOT support nested-locking
  * */
@@ -745,16 +745,16 @@ BHAPI_IMPEXP void	bhapi::memory_tracing_unlock(void);
 /* semaphore functions */
 //typedef struct sem_info {
 //    char		name[B_OS_NAME_LENGTH + 1];
-//     __be_int64		latest_holder_team;
-//     __be_int64		latest_holder_thread;
-//     __be_int64		count;
+//     int64		latest_holder_team;
+//     int64		latest_holder_thread;
+//     int64		count;
 //    bool		closed;
 //} sem_info;
 
 #ifdef __cplusplus
-//BHAPI_IMPEXP void*	create_sem(__be_int64 count, const char *name, bhapi::area_access a_area_access = BHAPI_AREA_ACCESS_OWNER);
+//BHAPI_IMPEXP void*	create_sem(int64 count, const char *name, bhapi::area_access a_area_access = BHAPI_AREA_ACCESS_OWNER);
 #else
-//BHAPI_IMPEXP void*	create_sem(__be_int64 count, const char *name, bhapi::area_access a_area_access);
+//BHAPI_IMPEXP void*	create_sem(int64 count, const char *name, bhapi::area_access a_area_access);
 #endif
 BHAPI_IMPEXP void*	clone_sem(const char *name);
 BHAPI_IMPEXP void*	clone_sem_by_source(void *sem);
@@ -769,22 +769,22 @@ BHAPI_IMPEXP void*	clone_sem_by_source(void *sem);
 //BHAPI_IMPEXP status_t	close_sem(void* sem);
 //BHAPI_IMPEXP status_t	acquire_sem(void *sem);
 //BHAPI_IMPEXP status_t	release_sem(void *sem);
-//BHAPI_IMPEXP status_t	acquire_sem_etc(void *sem,  __be_int64 count,  __be_uint32 flags, bigtime_t timeout);
-//BHAPI_IMPEXP status_t	release_sem_etc(void *sem,  __be_int64 count,  __be_uint32 flags);
-//BHAPI_IMPEXP status_t	get_sem_count(void *sem,  __be_int64 *count);
+//BHAPI_IMPEXP status_t	acquire_sem_etc(void *sem,  int64 count,  uint32 flags, bigtime_t timeout);
+//BHAPI_IMPEXP status_t	release_sem_etc(void *sem,  int64 count,  uint32 flags);
+//BHAPI_IMPEXP status_t	get_sem_count(void *sem,  int64 *count);
 
 /* thread functions */
 /* Default stack size of thread: 256KB */
 BHAPI_IMPEXP status_t	snooze(bigtime_t microseconds);
 BHAPI_IMPEXP status_t	snooze_until(bigtime_t time, int timebase);
-BHAPI_IMPEXP  __be_int64	get_current_team_id(void);
-BHAPI_IMPEXP  __be_int64	get_current_thread_id(void);
+BHAPI_IMPEXP  int64	get_current_team_id(void);
+BHAPI_IMPEXP  int64	get_current_thread_id(void);
 BHAPI_IMPEXP void*	create_thread_by_current_thread(void);
 BHAPI_IMPEXP void*	create_thread(b_thread_func threadFunction,
-                       __be_int32 priority,
+                       int32 priority,
                       void *arg,
-                       __be_int64 *threadId);
-BHAPI_IMPEXP void*	open_thread(__be_int64 threadId);
+                       int64 *threadId);
+BHAPI_IMPEXP void*	open_thread(int64 threadId);
 BHAPI_IMPEXP status_t	delete_thread(void *thread);
 
 /* bhapi::suspend_thread():
@@ -794,7 +794,7 @@ BHAPI_IMPEXP status_t	delete_thread(void *thread);
 //BHAPI_IMPEXP status_t	suspend_thread(void *thread);
 //BHAPI_IMPEXP status_t	resume_thread(void *thread);
 BHAPI_IMPEXP status_t	on_exit_thread(void (*callback)(void *), void *user_data);
-BHAPI_IMPEXP  __be_int64	get_thread_id(void *thread);
+BHAPI_IMPEXP  int64	get_thread_id(void *thread);
 
 enum {
     BHAPI_THREAD_INVALID = 0,
@@ -803,21 +803,21 @@ enum {
     BHAPI_THREAD_EXITED,
     BHAPI_THREAD_SUSPENDED,
 };
-BHAPI_IMPEXP  __be_uint32	get_thread_run_state(void *thread);
-//BHAPI_IMPEXP status_t	set_thread_priority(void *thread,  __be_int32 new_priority);
-BHAPI_IMPEXP  __be_int32	get_thread_priority(void *thread);
+BHAPI_IMPEXP  uint32	get_thread_run_state(void *thread);
+//BHAPI_IMPEXP status_t	set_thread_priority(void *thread,  int32 new_priority);
+BHAPI_IMPEXP  int32	get_thread_priority(void *thread);
 BHAPI_IMPEXP void	exit_thread(status_t status);
 //BHAPI_IMPEXP status_t	wait_for_thread(void *thread, status_t *thread_return_value);
-BHAPI_IMPEXP status_t	wait_for_thread_etc(void *thread, status_t *thread_return_value,  __be_uint32 flags, bigtime_t timeout);
+BHAPI_IMPEXP status_t	wait_for_thread_etc(void *thread, status_t *thread_return_value,  uint32 flags, bigtime_t timeout);
 
 #define BHAPI_MAX_PORT_BUFFER_SIZE		((size_t)4096)
-#define BHAPI_VALID_MAX_PORT_QUEUE_LENGTH		((__be_int32)300)
+#define BHAPI_VALID_MAX_PORT_QUEUE_LENGTH		((int32)300)
 
 /* port functions */
 //#ifdef __cplusplus
-//BHAPI_IMPEXP void*	create_port(__be_int32 queue_length, const char *name, bhapi::area_access a_area_access = BHAPI_AREA_ACCESS_OWNER);
+//BHAPI_IMPEXP void*	create_port(int32 queue_length, const char *name, bhapi::area_access a_area_access = BHAPI_AREA_ACCESS_OWNER);
 //#else
-//BHAPI_IMPEXP void*	create_port(__be_int32 queue_length, const char *name, bhapi::area_access a_area_access aa);
+//BHAPI_IMPEXP void*	create_port(int32 queue_length, const char *name, bhapi::area_access a_area_access aa);
 //#endif
 BHAPI_IMPEXP void*	open_port(const char *name);
 BHAPI_IMPEXP void*	open_port_by_source(void *port);
@@ -829,15 +829,15 @@ BHAPI_IMPEXP void*	open_port_by_source(void *port);
  * */
 //BHAPI_IMPEXP status_t	close_port(void *port);
 
-//BHAPI_IMPEXP status_t	write_port(void *port,  __be_int32 code, const void *buf, size_t buf_size);
+//BHAPI_IMPEXP status_t	write_port(void *port,  int32 code, const void *buf, size_t buf_size);
 //BHAPI_IMPEXP  ssize_t	port_buffer_size(void *port);
-//BHAPI_IMPEXP status_t	read_port(void *port,  __be_int32 *code, void *buf, size_t buf_size);
+//BHAPI_IMPEXP status_t	read_port(void *port,  int32 *code, void *buf, size_t buf_size);
 
-//BHAPI_IMPEXP status_t	write_port_etc(void *port,  __be_int32 code, const void *buf, size_t buf_size,  __be_uint32 flags, bigtime_t timeout);
-//BHAPI_IMPEXP  ssize_t	port_buffer_size_etc(void *port,  __be_uint32 flags, bigtime_t timeout);
-//BHAPI_IMPEXP status_t	read_port_etc(void *port,  __be_int32 *code, void *buf, size_t buf_size,  __be_uint32 flags, bigtime_t timeout);
+//BHAPI_IMPEXP status_t	write_port_etc(void *port,  int32 code, const void *buf, size_t buf_size,  uint32 flags, bigtime_t timeout);
+//BHAPI_IMPEXP  ssize_t	port_buffer_size_etc(void *port,  uint32 flags, bigtime_t timeout);
+//BHAPI_IMPEXP status_t	read_port_etc(void *port,  int32 *code, void *buf, size_t buf_size,  uint32 flags, bigtime_t timeout);
 
-//BHAPI_IMPEXP  __be_int32	port_count(void *port);
+//BHAPI_IMPEXP  int32	port_count(void *port);
 
 
 /* image functions */

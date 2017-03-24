@@ -40,7 +40,7 @@
 #include "../../render/Pixmap.h"
 
 
-EBeBitmapPriv::EBeBitmapPriv(__be_uint32 w,  __be_uint32 h)
+EBeBitmapPriv::EBeBitmapPriv(uint32 w,  uint32 h)
 	: BBitmap(BRect(0, 0, w, h), B_RGB32, true)
 {
 	if((fView = new BView(BRect(0, 0, w, h), NULL, B_FOLLOW_ALL, 0)) != NULL)
@@ -62,7 +62,7 @@ EBeBitmapPriv::~EBeBitmapPriv()
 }
 
 
-EBeGraphicsDrawable::EBeGraphicsDrawable(EBeGraphicsEngine *beEngine,  __be_uint32 w,  __be_uint32 h)
+EBeGraphicsDrawable::EBeGraphicsDrawable(EBeGraphicsEngine *beEngine,  uint32 w,  uint32 h)
 	: BGraphicsDrawable(), beBitmap(NULL), fEngine(NULL)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
@@ -121,7 +121,7 @@ EBeGraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
 
 
 status_t 
-EBeGraphicsDrawable::ResizeTo(__be_uint32 w,  __be_uint32 h)
+EBeGraphicsDrawable::ResizeTo(uint32 w,  uint32 h)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
@@ -153,7 +153,7 @@ static void __bhapi_convert_region(const BRegion *region, BRegion *beRegion, BRe
 
 	if(region != NULL)
 	{
-		for(__be_int32 i = 0; i < region->CountRects(); i++)
+		for(int32 i = 0; i < region->CountRects(); i++)
 		{
 			BRect r = region->RectAt(i);
 			BRect bRect(r.left, r.top, r.right, r.bottom);
@@ -170,8 +170,8 @@ static void __bhapi_convert_region(const BRegion *region, BRegion *beRegion, BRe
 status_t 
 EBeGraphicsDrawable::CopyTo(BGraphicsContext *dc,
 			    BGraphicsDrawable *dstDrawable,
-			     __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
-			     __be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)
+			     int32 x,  int32 y,  uint32 w,  uint32 h,
+			     int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32 || dstW == B_MAXUINT32 || dstH == B_MAXUINT32)
 	{
@@ -272,8 +272,8 @@ bool __bhapi_prepare_beview(BView *view, BGraphicsContext *dc)
 
 status_t 
 EBeGraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *epixmap,
-				__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,
-				__be_int32 dstX,  __be_int32 dstY,  __be_uint32 dstW,  __be_uint32 dstH)
+				int32 x,  int32 y,  uint32 w,  uint32 h,
+				int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
 {
 	if(fEngine == NULL || epixmap == NULL || epixmap->IsValid() == false) return B_ERROR;
 
@@ -299,9 +299,9 @@ EBeGraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *epixmap,
 			bitsLen = (int32)epixmap->BitsLength();
 			if((bits = malloc((size_t)bitsLen)) != NULL)
 			{
-				__be_uint8 *tmp = (__be_uint8*)bits;
-				const  __be_uint8 *src = (const  __be_uint8*)epixmap->Bits();
-				for(__be_uint32 i = 0; i < epixmap->BitsLength(); i += 3, tmp += 3, src += 3)
+				uint8 *tmp = (uint8*)bits;
+				const  uint8 *src = (const  uint8*)epixmap->Bits();
+				for(uint32 i = 0; i < epixmap->BitsLength(); i += 3, tmp += 3, src += 3)
 				{
 					tmp[0] = src[2];
 					tmp[1] = src[1];
@@ -315,9 +315,9 @@ EBeGraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *epixmap,
 			bitsLen = ((int32)epixmap->Bounds().Width() + 1) * ((int32)epixmap->Bounds().Height() + 1) * 3;
 			if((bits = malloc((size_t)bitsLen)) != NULL)
 			{
-				__be_uint8 *tmp = (__be_uint8*)bits;
-				const  __be_uint8 *src = (const  __be_uint8*)epixmap->Bits();
-				for(__be_uint32 i = 0; i < epixmap->BitsLength(); i += 4, tmp += 3, src += 4)
+				uint8 *tmp = (uint8*)bits;
+				const  uint8 *src = (const  uint8*)epixmap->Bits();
+				for(uint32 i = 0; i < epixmap->BitsLength(); i += 4, tmp += 3, src += 4)
 				{
 					tmp[0] = src[2];
 					tmp[1] = src[1];
@@ -352,7 +352,7 @@ EBeGraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *epixmap,
 
 status_t 
 EBeGraphicsDrawable::StrokePoint(BGraphicsContext *dc,
-				  __be_int32 x,  __be_int32 y)
+				  int32 x,  int32 y)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -388,7 +388,7 @@ EBeGraphicsDrawable::StrokePoint(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::StrokePoints(BGraphicsContext *dc,
-				  const  __be_int32 *pts,  __be_int32 count)
+				  const  int32 *pts,  int32 count)
 {
 	if(fEngine == NULL) return B_ERROR;
 	if(pts == NULL || count <= 0) return B_ERROR;
@@ -405,7 +405,7 @@ EBeGraphicsDrawable::StrokePoints(BGraphicsContext *dc,
 
 	if(dc->PenSize() <= 1)
 	{
-		for(__be_int32 i = 0; i < count; i++)
+		for(int32 i = 0; i < count; i++)
 		{
 			int32 x = *pts++;
 			int32 y = *pts++;
@@ -414,7 +414,7 @@ EBeGraphicsDrawable::StrokePoints(BGraphicsContext *dc,
 	}
 	else
 	{
-		for(__be_int32 i = 0; i < count; i++)
+		for(int32 i = 0; i < count; i++)
 		{
 			int32 x = *pts++;
 			int32 y = *pts++;
@@ -436,7 +436,7 @@ EBeGraphicsDrawable::StrokePoints(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
-					 const BList *ptsArrayLists,  __be_int32 arrayCount,
+					 const BList *ptsArrayLists,  int32 arrayCount,
 					 const bhapi::rgb_color *highColors)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -451,22 +451,22 @@ EBeGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
 	if(bView == NULL || __bhapi_prepare_beview(bView, dc) == false) return B_ERROR;
 
 	bhapi::rgb_color oldColor = dc->HighColor();
-	for(__be_int32 k = 0; k < arrayCount; k++, ptsArrayLists++)
+	for(int32 k = 0; k < arrayCount; k++, ptsArrayLists++)
 	{
 		if(ptsArrayLists == NULL) break;
 
 		bhapi::rgb_color color = (highColors == NULL ? oldColor : *highColors++);
 
-		__be_int32 count = ptsArrayLists->CountItems();
+		int32 count = ptsArrayLists->CountItems();
 		if(count <= 0) continue;
 
 		bView->SetHighColor(*((rgb_color*)&color));
 
 		if(dc->PenSize() <= 1)
 		{
-			for(__be_int32 i = 0; i < count; i++)
+			for(int32 i = 0; i < count; i++)
 			{
-				const  __be_int32 *pt = (const  __be_int32*)ptsArrayLists->ItemAt(i);
+				const  int32 *pt = (const  int32*)ptsArrayLists->ItemAt(i);
 				if(!pt) continue;
 
 				int32 x = *pt++;
@@ -476,9 +476,9 @@ EBeGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
 		}
 		else
 		{
-			for(__be_int32 i = 0; i < count; i++)
+			for(int32 i = 0; i < count; i++)
 			{
-				const  __be_int32 *pt = (const  __be_int32*)ptsArrayLists->ItemAt(i);
+				const  int32 *pt = (const  int32*)ptsArrayLists->ItemAt(i);
 				if(!pt) continue;
 
 				int32 x = *pt++;
@@ -502,7 +502,7 @@ EBeGraphicsDrawable::StrokePoints_Colors(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
-					 const  __be_int32 *pts, const  __be_uint8 *alpha,  __be_int32 count)
+					 const  int32 *pts, const  uint8 *alpha,  int32 count)
 {
 	if(fEngine == NULL) return B_ERROR;
 	if(pts == NULL || count <= 0) return B_ERROR;
@@ -521,7 +521,7 @@ EBeGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
 
 	if(dc->PenSize() <= 1)
 	{
-		for(__be_int32 i = 0; i < count; i++)
+		for(int32 i = 0; i < count; i++)
 		{
 			int32 x = *pts++;
 			int32 y = *pts++;
@@ -534,7 +534,7 @@ EBeGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
 	}
 	else
 	{
-		for(__be_int32 i = 0; i < count; i++)
+		for(int32 i = 0; i < count; i++)
 		{
 			int32 x = *pts++;
 			int32 y = *pts++;
@@ -559,7 +559,7 @@ EBeGraphicsDrawable::StrokePoints_Alphas(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::StrokeLine(BGraphicsContext *dc,
-				__be_int32 x0,  __be_int32 y0,  __be_int32 x1,  __be_int32 y1)
+				int32 x0,  int32 y0,  int32 x1,  int32 y1)
 {
 	if(x0 == x1 && y0 == y1) return StrokePoint(dc, x0, y0);
 
@@ -583,7 +583,7 @@ EBeGraphicsDrawable::StrokeLine(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
-				   const  __be_int32 *pts,  __be_int32 count, bool closed)
+				   const  int32 *pts,  int32 count, bool closed)
 {
 	if(fEngine == NULL || dc == NULL || pts == NULL || count <= 0 || count >= B_MAXINT32) return B_ERROR;
 
@@ -602,7 +602,7 @@ EBeGraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
 
 	BPoint *bPts = new BPoint[count];
 	if(!bPts) return B_ERROR;
-	for(__be_int32 i = 0; i < count; i++) {bPts[i].x = *pts++; bPts[i].y = *pts++;}
+	for(int32 i = 0; i < count; i++) {bPts[i].x = *pts++; bPts[i].y = *pts++;}
 
 	bView->StrokePolygon(bPts, count, closed, *((pattern*)&pat));
 
@@ -614,7 +614,7 @@ EBeGraphicsDrawable::StrokePolygon(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::FillPolygon(BGraphicsContext *dc,
-				 const  __be_int32 *pts,  __be_int32 count)
+				 const  int32 *pts,  int32 count)
 {
 	if(fEngine == NULL || dc == NULL || pts == NULL || count <= 0 || count >= B_MAXINT32) return B_ERROR;
 
@@ -632,7 +632,7 @@ EBeGraphicsDrawable::FillPolygon(BGraphicsContext *dc,
 
 	BPoint *bPts = new BPoint[count];
 	if(!bPts) return B_ERROR;
-	for(__be_int32 i = 0; i < count; i++) {bPts[i].x = *pts++; bPts[i].y = *pts++;}
+	for(int32 i = 0; i < count; i++) {bPts[i].x = *pts++; bPts[i].y = *pts++;}
 
 	bView->FillPolygon(bPts, count, *((pattern*)&pat));
 
@@ -644,12 +644,12 @@ EBeGraphicsDrawable::FillPolygon(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::StrokeRect(BGraphicsContext *dc,
-				__be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+				int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	if(w == 0 && h == 0)
 		return StrokePoint(dc, x, y);
 	else if(w == 0 || h == 0)
-		return StrokeLine(dc, x, y, x + (__be_int32)w, y + (__be_int32)h);
+		return StrokeLine(dc, x, y, x + (int32)w, y + (int32)h);
 
 	if(fEngine == NULL) return B_ERROR;
 
@@ -671,7 +671,7 @@ EBeGraphicsDrawable::StrokeRect(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::FillRect(BGraphicsContext *dc,
-			       __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h)
+			       int32 x,  int32 y,  uint32 w,  uint32 h)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -693,7 +693,7 @@ EBeGraphicsDrawable::FillRect(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::StrokeRects(BGraphicsContext *dc,
-				 const  __be_int32 *rects,  __be_int32 count)
+				 const  int32 *rects,  int32 count)
 {
 	if(fEngine == NULL) return B_ERROR;
 	if(rects == NULL || count <= 0) return B_ERROR;
@@ -708,9 +708,9 @@ EBeGraphicsDrawable::StrokeRects(BGraphicsContext *dc,
 
 	bhapi::pattern pat = dc->Pattern();
 
-	for(__be_int32 i = 0; i < count; i++)
+	for(int32 i = 0; i < count; i++)
 	{
-		__be_int32 x = *rects++;  __be_int32 y = *rects++;  __be_uint32 w = (__be_uint32)(*rects++);  __be_uint32 h = (__be_uint32)(*rects++);
+		int32 x = *rects++;  int32 y = *rects++;  uint32 w = (uint32)(*rects++);  uint32 h = (uint32)(*rects++);
 
 		if(w == 0 && h == 0)
 		{
@@ -746,7 +746,7 @@ EBeGraphicsDrawable::StrokeRects(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::FillRects(BGraphicsContext *dc,
-			       const  __be_int32 *rects,  __be_int32 count)
+			       const  int32 *rects,  int32 count)
 {
 	if(fEngine == NULL) return B_ERROR;
 	if(rects == NULL || count <= 0) return B_ERROR;
@@ -761,9 +761,9 @@ EBeGraphicsDrawable::FillRects(BGraphicsContext *dc,
 
 	bhapi::pattern pat = dc->Pattern();
 
-	for(__be_int32 i = 0; i < count; i++)
+	for(int32 i = 0; i < count; i++)
 	{
-		__be_int32 x = *rects++;  __be_int32 y = *rects++;  __be_uint32 w = (__be_uint32)(*rects++);  __be_uint32 h = (__be_uint32)(*rects++);
+		int32 x = *rects++;  int32 y = *rects++;  uint32 w = (uint32)(*rects++);  uint32 h = (uint32)(*rects++);
 		bView->FillRect(BRect(x, y, x + w, y + h), *((pattern*)&pat));
 	}
 
@@ -793,7 +793,7 @@ EBeGraphicsDrawable::FillRegion(BGraphicsContext *dc,
 	if(aRegion.CountRects() <= 0) return B_ERROR;
 
 	BRegion beRegion;
-	for(__be_int32 i = 0; i < aRegion.CountRects(); i++)
+	for(int32 i = 0; i < aRegion.CountRects(); i++)
 	{
 		BRect r = aRegion.RectAt(i).FloorCopy();
 
@@ -815,7 +815,7 @@ EBeGraphicsDrawable::FillRegion(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
-				      __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
+				      int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -838,7 +838,7 @@ EBeGraphicsDrawable::StrokeRoundRect(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
-				    __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h,  __be_uint32 xRadius,  __be_uint32 yRadius)
+				    int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -861,7 +861,7 @@ EBeGraphicsDrawable::FillRoundRect(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::StrokeArc(BGraphicsContext *dc,
-			        __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
+			        int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -883,7 +883,7 @@ EBeGraphicsDrawable::StrokeArc(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsDrawable::FillArc(BGraphicsContext *dc,
-			      __be_int32 x,  __be_int32 y,  __be_uint32 w,  __be_uint32 h, float startAngle, float endAngle)
+			      int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
 {
 	if(fEngine == NULL) return B_ERROR;
 

@@ -96,7 +96,7 @@ TrackerSettingsWindow::TrackerSettingsWindow()
 
 	fSettingsContainerBox = new BBox("SettingsContainerBox");
 
-//	const float spacing =  __be_control_look->DefaultItemSpacing();
+//	const float spacing =  be_control_look->DefaultItemSpacing();
 
 	BLayoutBuilder::Group<>(this)
 		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
@@ -340,7 +340,7 @@ void SettingsItem::DrawItem(BView* owner, BRect rect, bool drawEverything)
 		owner->GetFontHeight(&fheight);
 
 		owner->DrawString(Text(),
-			BPoint(rect.left +  __be_control_look->DefaultLabelSpacing(),
+			BPoint(rect.left +  be_control_look->DefaultLabelSpacing(),
 				rect.top + fheight.ascent + 2 + floorf(fheight.leading / 2)));
 
 		owner->SetHighColor(ui_color(B_LIST_ITEM_TEXT_COLOR));

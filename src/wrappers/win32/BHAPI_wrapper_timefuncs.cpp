@@ -46,7 +46,7 @@ BHAPI_EXPORT bigtime_t b_real_time_clock_usecs(void)
 	GetSystemTimeAsFileTime(&CurrentTime);
 
 	// get the full win32 value, in 100-nanoseconds
-	__be_int64 t = ((__be_int64)CurrentTime.dwHighDateTime << 32) | ((__be_int64)CurrentTime.dwLowDateTime);
+	int64 t = ((int64)CurrentTime.dwHighDateTime << 32) | ((int64)CurrentTime.dwLowDateTime);
 	t -= (SECS_BETWEEN_EPOCHS * SECS_TO_100NS);
 	t /= 10;
 
@@ -55,9 +55,9 @@ BHAPI_EXPORT bigtime_t b_real_time_clock_usecs(void)
 
 
 // return the number of seconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-BHAPI_EXPORT  __be_uint32 b_real_time_clock(void)
+BHAPI_EXPORT  uint32 b_real_time_clock(void)
 {
-	return((__be_uint32)(b_real_time_clock_usecs() / SECS_TO_US));
+	return((uint32)(b_real_time_clock_usecs() / SECS_TO_US));
 }
 
 

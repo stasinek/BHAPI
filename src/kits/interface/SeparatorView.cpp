@@ -220,14 +220,14 @@ void BSeparatorView::Draw(BRect updateRect)
 				/ 2);
 			bounds.bottom = bounds.top + borderSize - 1;
 			region.Exclude(bounds);
-			__be_control_look->DrawBorder(this, bounds, updateRect, base,
+			be_control_look->DrawBorder(this, bounds, updateRect, base,
 				fBorder, 0, BControlLook::B_TOP_BORDER);
 		} else {
 			bounds.left = floorf((bounds.left + bounds.right + 1 - borderSize)
 				/ 2);
 			bounds.right = bounds.left + borderSize - 1;
 			region.Exclude(bounds);
-			__be_control_look->DrawBorder(this, bounds, updateRect, base,
+			be_control_look->DrawBorder(this, bounds, updateRect, base,
 				fBorder, 0, BControlLook::B_LEFT_BORDER);
 		}
 		if (labelBounds.IsValid())

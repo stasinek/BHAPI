@@ -69,7 +69,7 @@ ssize_t BStreamIO::Write(const void *a_buffer, size_t size)
 }
 
 
-BStreamIO& BStreamIO::operator<<(__be_int8 value)
+BStreamIO& BStreamIO::operator<<(int8 value)
 {
     BString str;
     str << value;
@@ -79,7 +79,7 @@ BStreamIO& BStreamIO::operator<<(__be_int8 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(__be_uint8 value)
+BStreamIO::operator<<(uint8 value)
 {
     BString str;
     str << value;
@@ -89,7 +89,7 @@ BStreamIO::operator<<(__be_uint8 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(__be_int16 value)
+BStreamIO::operator<<(int16 value)
 {
     BString str;
     str << value;
@@ -99,7 +99,7 @@ BStreamIO::operator<<(__be_int16 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(__be_uint16 value)
+BStreamIO::operator<<(uint16 value)
 {
     BString str;
     str << value;
@@ -109,7 +109,7 @@ BStreamIO::operator<<(__be_uint16 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(__be_int32 value)
+BStreamIO::operator<<(int32 value)
 {
     BString str;
     str << value;
@@ -119,7 +119,7 @@ BStreamIO::operator<<(__be_int32 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(__be_uint32 value)
+BStreamIO::operator<<(uint32 value)
 {
     BString str;
     str << value;
@@ -129,7 +129,7 @@ BStreamIO::operator<<(__be_uint32 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(__be_int64 value)
+BStreamIO::operator<<(int64 value)
 {
     BString str;
     str << value;
@@ -139,7 +139,7 @@ BStreamIO::operator<<(__be_int64 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(__be_uint64 value)
+BStreamIO::operator<<(uint64 value)
 {
     BString str;
     str << value;
@@ -207,7 +207,7 @@ BStreamIO::operator<<(BStreamIO &stream)
     if(&stream == &endl || &stream == &ends)
         return operator<<(&stream == &endl ? '\n' : ' ');
 
-     __be_int8 buf[512];
+     int8 buf[512];
      ssize_t len;
 
     bzero(buf, sizeof(buf));

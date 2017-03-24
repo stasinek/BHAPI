@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -28,17 +28,17 @@
  *
  * --------------------------------------------------------------------------*/
 #include "SupportDefs.h"
-
+//-------------------------------------------------------------------------------------------------
 #ifdef BHAPI_BUILD_LIBRARY
 namespace bhapi {
-extern BHAPI_EXPORT const  __be_uint8 major_version;
-extern BHAPI_EXPORT const  __be_uint8 minor_version;
-extern BHAPI_EXPORT const  __be_uint8 micro_version;
-extern BHAPI_EXPORT const  __be_uint8 interface_age;
-extern BHAPI_EXPORT const  __be_uint16 binary_age;
+extern BHAPI_EXPORT const  uint8 major_version;
+extern BHAPI_EXPORT const  uint8 minor_version;
+extern BHAPI_EXPORT const  uint8 micro_version;
+extern BHAPI_EXPORT const  uint8 interface_age;
+extern BHAPI_EXPORT const  uint8 binary_age;
 }
 #endif
-
+//-------------------------------------------------------------------------------------------------
 BHAPI_EXPORT int32 	bhapi::atomic_add (int32 *value, int32 addValue) { return 0; }
 BHAPI_EXPORT int64 	bhapi::atomic_add64 (int64 *value, int64 addValue) { return 0; }
 BHAPI_EXPORT int32 	bhapi::atomic_and (int32 *value, int32 andValue) { return 0; }
@@ -53,5 +53,8 @@ BHAPI_EXPORT void 	bhapi::atomic_set (int32 *value, int32 newValue) {}
 BHAPI_EXPORT void 	bhapi::atomic_set64 (int64 *value, int64 newValue) {}
 BHAPI_EXPORT int32 	bhapi::atomic_test_and_set (int32 *value, int32 newValue, int32 testAgains) { return 0; }
 BHAPI_EXPORT int64 	bhapi::atomic_test_and_set64 (int64 *value, int64 newValue, int64 testAgainst) { return 0; }
-BHAPI_EXPORT void * 	bhapi::get_stack_frame (void) { return NULL; }
+//-------------------------------------------------------------------------------------------------
+BHAPI_EXPORT void*  bhapi::get_stack_frame (void) { return NULL; }
+//-------------------------------------------------------------------------------------------------
 BHAPI_EXPORT const char* B_EMPTY_STRING = "";
+//-------------------------------------------------------------------------------------------------

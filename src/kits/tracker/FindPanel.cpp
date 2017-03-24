@@ -980,7 +980,7 @@ void FindPanel::ResizeMenuField(BMenuField* menuField)
 		}
 	}
 
-	float maxWidth =  __be_control_look->DefaultItemSpacing() * 20;
+	float maxWidth =  be_control_look->DefaultItemSpacing() * 20;
 	size.width = std::min(width + padding, maxWidth);
 	menuField->SetExplicitSize(size);
 }

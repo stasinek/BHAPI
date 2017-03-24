@@ -58,7 +58,7 @@ namespace bhapi {
 #endif
 //-----------------------------------------------------------------------------
 typedef struct invoker_notify_state {
-     __be_uint32 kind;
+     uint32 kind;
     bool called;
 } invoker_notify_state;
 #ifdef __cplusplus /* Just for C++ */
@@ -79,7 +79,7 @@ public:
 
     virtual status_t	SetMessage(BMessage *message);
     BMessage*		Message() const;
-     __be_uint32			Command() const;
+     uint32			Command() const;
 
     virtual status_t	SetTarget(const BHandler *handler, const BLooper *looper = NULL);
     virtual status_t	SetTarget(BMessenger messenger);
@@ -92,9 +92,9 @@ public:
     BHandler*		HandlerForReply() const;
 
     virtual status_t	Invoke(const BMessage *msg = NULL);
-    //    status_t		InvokeNotify(const BMessage *msg,  __be_uint32 kind = B_CONTROL_INVOKED);
+    //    status_t		InvokeNotify(const BMessage *msg,  uint32 kind = B_CONTROL_INVOKED);
     status_t		InvokeNotify(const BMessage *msg);
-    status_t		InvokeNotify(const BMessage *msg,  __be_uint32 kind);
+    status_t		InvokeNotify(const BMessage *msg,  uint32 kind);
 
     status_t		SetTimeout(bigtime_t timeout);
     bigtime_t		Timeout() const;
@@ -104,24 +104,24 @@ protected:
        B_CONTROL_INVOKED for raw Invoke() calls, or the kind
        supplied to InvokeNotify().  In addition, 'notify' will be
        set to true if this was an InvokeNotify() call, else false. */
-     __be_uint32			InvokeKind(bool* notify = NULL);
+     uint32			InvokeKind(bool* notify = NULL);
 
     /* Start and end an InvokeNotify context around an Invoke() call.
        These are only needed for writing custom methods that
        emulate the standard InvokeNotify() call. */
-//    void			BeginInvokeNotify(__be_uint32 kind = B_CONTROL_INVOKED);
+//    void			BeginInvokeNotify(uint32 kind = B_CONTROL_INVOKED);
     void			BeginInvokeNotify(void);
-    void			BeginInvokeNotify(__be_uint32 kind);
+    void			BeginInvokeNotify(uint32 kind);
     void			EndInvokeNotify();
 
 private:
     BMessage *fMessage;
     BMessenger fMessenger;
-     __be_uint64 fReplyHandlerToken;
+     uint64 fReplyHandlerToken;
 
     bigtime_t fTimeout;
 
-     __be_uint32 fNotifyKind;
+     uint32 fNotifyKind;
     bool fNotifyCalled;
 
     BList fNotifyStatesList;

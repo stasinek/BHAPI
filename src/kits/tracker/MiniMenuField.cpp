@@ -138,7 +138,7 @@ void MiniMenuField::Draw(BRect)
 	float tint = Window()->IsActive() ? B_DARKEN_3_TINT : B_DARKEN_1_TINT;
 
 	SetDrawingMode(B_OP_COPY);
-	__be_control_look->DrawArrowShape(this, rect, rect, arrowColor,
+	be_control_look->DrawArrowShape(this, rect, rect, arrowColor,
 		BControlLook::B_RIGHT_ARROW, 0, tint);
 }
 

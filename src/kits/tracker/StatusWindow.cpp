@@ -632,7 +632,7 @@ void BStatusView::Draw(BRect updateRect)
 	}
 
 	BRect bounds(Bounds());
-	__be_control_look->DrawRaisedBorder(this, bounds, updateRect, ViewColor());
+	be_control_look->DrawRaisedBorder(this, bounds, updateRect, ViewColor());
 
 	SetHighColor(0, 0, 0);
 
@@ -650,7 +650,7 @@ void BStatusView::Draw(BRect updateRect)
 	float normalFontSize = font.Size();
 	float smallFontSize = max_c(normalFontSize * 0.8f, 8.0f);
 	float availableSpace = fStatusBar->Frame().Width();
-	availableSpace -=  __be_control_look->DefaultLabelSpacing();
+	availableSpace -=  be_control_look->DefaultLabelSpacing();
 		// subtract to provide some room between our two strings
 
 	float destinationStringWidth = 0.f;

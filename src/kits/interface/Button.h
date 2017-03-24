@@ -43,8 +43,8 @@ public:
 		const char *name,
 		const char *label,
 		BMessage *message,
-         __be_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-         __be_uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+         uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+         uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
     virtual ~BButton();
 
 	virtual void	SetLabel(const char *label);
@@ -53,10 +53,10 @@ public:
 	virtual void	DetachedFromWindow();
     virtual void	MouseDown(BPoint where);
     virtual void	MouseUp(BPoint where);
-    virtual void	MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message);
-    virtual void	KeyDown(const char *bytes,  __be_int32 numBytes);
-    virtual void	KeyUp(const char *bytes,  __be_int32 numBytes);
-    virtual void	SetFont(const BFont *font,  __be_uint8 mask = B_FONT_ALL);
+    virtual void	MouseMoved(BPoint where,  uint32 code, const BMessage *a_message);
+    virtual void	KeyDown(const char *bytes,  int32 numBytes);
+    virtual void	KeyUp(const char *bytes,  int32 numBytes);
+    virtual void	SetFont(const BFont *font,  uint8 mask = B_FONT_ALL);
 	virtual void	WindowActivated(bool state);
 	virtual void	MakeFocus(bool focusState = true);
 
@@ -69,7 +69,7 @@ protected:
 private:
 	bool fInsided;
 	bool fMousePushed;
-     __be_uint8 fFocusFlash;
+     uint8 fFocusFlash;
 	BMessageRunner *fRunner;
 };
 

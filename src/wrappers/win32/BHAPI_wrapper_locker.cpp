@@ -56,7 +56,7 @@ typedef struct bhapi::win32_locker_t {
 		}
 	}
 
-	void SetHolderThreadId(__be_int64 id)
+	void SetHolderThreadId(int64 id)
 	{
 		holderThreadId = id;
 	}
@@ -66,8 +66,8 @@ typedef struct bhapi::win32_locker_t {
 		return(holderThreadId == bhapi::get_current_thread_id());
 	}
 
-	__be_int64			holderThreadId;
-	__be_int64			lockCount;
+	int64			holderThreadId;
+	int64			lockCount;
 	bool			closed;
 
 	CRITICAL_SECTION	iLocker;
@@ -76,7 +76,7 @@ typedef struct bhapi::win32_locker_t {
 
 	bool			created;
 
-	__be_uint32			refCount;
+	uint32			refCount;
 } bhapi::win32_locker_t;
 
 
@@ -152,7 +152,7 @@ BHAPI_EXPORT status_t bhapi::delete_locker(void *data)
 		bhapi::unlock_locker_inter(locker);
 		return B_ERROR;
 	}
-	__be_uint32 count = --(locker->refCount);
+	uint32 count = --(locker->refCount);
 #if 0
 	bool locked = locker->HolderThreadIsCurrent();
 #endif
@@ -259,7 +259,7 @@ BHAPI_EXPORT status_t bhapi::lock_locker(void *data)
 }
 
 
-BHAPI_EXPORT status_t bhapi::lock_locker_etc(void *data,  __be_uint32 flags, bigtime_t microseconds_timeout)
+BHAPI_EXPORT status_t bhapi::lock_locker_etc(void *data,  uint32 flags, bigtime_t microseconds_timeout)
 {
 	bhapi::win32_locker_t *locker = (bhapi::win32_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -397,9 +397,9 @@ BHAPI_EXPORT status_t bhapi::unlock_locker(void *data)
 }
 
 
-BHAPI_EXPORT  __be_int64 bhapi::count_locker_locks(void *data)
+BHAPI_EXPORT  int64 bhapi::count_locker_locks(void *data)
 {
-	__be_int64 retVal = B_INT64_CONSTANT(0);
+	int64 retVal = B_INT64_CONSTANT(0);
 
 	bhapi::win32_locker_t *locker = (bhapi::win32_locker_t*)data;
 

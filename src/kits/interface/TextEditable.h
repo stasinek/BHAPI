@@ -43,40 +43,40 @@ public:
               const char *name,
               const char *initial_text,
               BMessage *message,
-               __be_uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-               __be_uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS);
+               uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+               uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS);
     virtual ~BTextEditable();
 
     void		MakeEditable(bool editable);
     bool		IsEditable() const;
 
-    void		SetPosition(__be_int32 pos); // UTF-8
-     __be_int32		Position() const; // UTF-8
+    void		SetPosition(int32 pos); // UTF-8
+     int32		Position() const; // UTF-8
 
     virtual void	SetText(const char *text);
     void		SetText(const BString &text);
     const char	*Text() const;
-    char		*DuplicateText(__be_int32 startPos,  __be_int32 endPos); // UTF-8, return value must free by "free"
+    char		*DuplicateText(int32 startPos,  int32 endPos); // UTF-8, return value must free by "free"
 
-    void		SetMaxChars(__be_int32 max);
-     __be_int32		MaxChars() const;
+    void		SetMaxChars(int32 max);
+     int32		MaxChars() const;
 
     // HideTyping(): flag
     // 	0x00(false)	--- show everything
     // 	0x20 ~ 0x7e	--- replace the characters with this
     // 	others(true)	--- invisible
-    void		HideTyping(__be_uint8 flag = 0x2a);
-     __be_uint8		IsTypingHidden() const;
+    void		HideTyping(uint8 flag = 0x2a);
+     uint8		IsTypingHidden() const;
 
-    void		InsertText(const char *text,  __be_int32 nChars = -1,  __be_int32 position = -1); // UTF-8
-    void		RemoveText(__be_int32 startPos,  __be_int32 endPos); // UTF-8, include endPos
+    void		InsertText(const char *text,  int32 nChars = -1,  int32 position = -1); // UTF-8
+    void		RemoveText(int32 startPos,  int32 endPos); // UTF-8, include endPos
     void		MakeEmpty();
 
     void		MakeSelectable(bool selectable);
     bool		IsSelectable() const;
 
-    virtual void	Select(__be_int32 startPos,  __be_int32 endPos); // UTF-8, include endPos
-    bool		GetSelection(__be_int32 *startPos,  __be_int32 *endPos) const; // UTF-8, include endPos
+    virtual void	Select(int32 startPos,  int32 endPos); // UTF-8, include endPos
+    bool		GetSelection(int32 *startPos,  int32 *endPos) const; // UTF-8, include endPos
     void		SelectAll();
     void		Deselect();
     bool		IsSelected() const;
@@ -91,11 +91,11 @@ public:
     virtual void	FrameResized(float new_width, float new_height);
     virtual void	MouseDown(BPoint where);
     virtual void	MouseUp(BPoint where);
-    virtual void	MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message);
+    virtual void	MouseMoved(BPoint where,  uint32 code, const BMessage *a_message);
     virtual void	WindowActivated(bool state);
-    virtual void	KeyDown(const char *bytes,  __be_int32 numBytes);
-    virtual void	KeyUp(const char *bytes,  __be_int32 numBytes);
-    virtual void	SetFont(const BFont *font,  __be_uint8 mask = B_FONT_ALL);
+    virtual void	KeyDown(const char *bytes,  int32 numBytes);
+    virtual void	KeyUp(const char *bytes,  int32 numBytes);
+    virtual void	SetFont(const BFont *font,  uint8 mask = B_FONT_ALL);
     virtual void	GetPreferredSize(float *width, float *height);
     virtual void	MakeFocus(bool focusState = true);
     virtual void	MessageReceived(BMessage *msg);
@@ -105,23 +105,23 @@ private:
     bool fEditable;
     bool fSelectable;
     bhapi::alignment fAlignment;
-     __be_int32 fPosition;
-     __be_int32 fSelectStart;
-     __be_int32 fSelectEnd;
+     int32 fPosition;
+     int32 fSelectStart;
+     int32 fSelectEnd;
     BRect fMargins;
     float *fCharWidths;
-     __be_int32 fCount;
+     int32 fCount;
     float locationOffset;
-     __be_int32 fSelectTracking;
-     __be_int32 fMaxChars;
-     __be_uint8 fTypingHidden;
+     int32 fSelectTracking;
+     int32 fMaxChars;
+     uint8 fTypingHidden;
 
     void DrawSelectedBackground(BRect updateRect);
     void DrawCursor();
 
-    bool GetCharLocation(__be_int32 pos, float *x, float *y, BFont *font = NULL);
+    bool GetCharLocation(int32 pos, float *x, float *y, BFont *font = NULL);
     float _StringWidth(const BFont &font, const char *str) const;
-    float *_CharWidths(const BFont &font, const char *str,  __be_int32 *count) const;
+    float *_CharWidths(const BFont &font, const char *str,  int32 *count) const;
     void _DrawString(const char *str, BPoint location);
 };
 #ifdef BHAPI_BUILD_LIBRARY

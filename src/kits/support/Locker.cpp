@@ -73,7 +73,7 @@ BLocker::LockWithTimeout(bigtime_t microseconds)
 }
 
 
-__be_int64
+int64
 BLocker::CountLocks() const
 {
     return bhapi::count_locker_locks(fLocker);

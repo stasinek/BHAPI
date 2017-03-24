@@ -521,6 +521,6 @@ void PaneSwitch::DrawInState(PaneSwitch::State state)
 	}
 
 	SetDrawingMode(B_OP_COPY);
-	__be_control_look->DrawArrowShape(this, rect, rect, arrowColor,
+	be_control_look->DrawArrowShape(this, rect, rect, arrowColor,
 		arrowDirection, 0, tint);
 }

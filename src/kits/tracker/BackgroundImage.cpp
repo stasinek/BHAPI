@@ -104,7 +104,7 @@ BackgroundImage::GetBackgroundImage(const BNode* node, bool isDesktop)
 			break;
 
 		if (isDesktop)
-			__be_control_look->SetBackgroundInfo(container);
+			be_control_look->SetBackgroundInfo(container);
 
 		container.FindInt32(kBackgroundImageInfoWorkspaces, index,
 			(int32*)&workspaces);

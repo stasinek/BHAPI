@@ -78,10 +78,10 @@ public:
 
     // running apps
             bool				IsRunning(const char* signature) const;
-            bool				IsRunning(entry_ref* ref) const;
+            bool				IsRunning(bhapi::entry_ref* ref) const;
 
-            team_id				TeamFor(const char* signature) const;
-            team_id				TeamFor(entry_ref* ref) const;
+            bhapi::team_id				TeamFor(const char* signature) const;
+            bhapi::team_id				TeamFor(bhapi::entry_ref* ref) const;
 
             void				GetAppList(BList* teamIDList) const;
             void				GetAppList(const char* signature,
@@ -89,18 +89,18 @@ public:
 
     // app infos
             status_t			GetAppInfo(const char* signature,
-                                    app_info* info) const;
-            status_t			GetAppInfo(entry_ref* ref,
-                                    app_info* info) const;
+                                    bhapi::app_info* info) const;
+            status_t			GetAppInfo(bhapi::entry_ref* ref,
+                                    bhapi::app_info* info) const;
 
             status_t			GetRunningAppInfo(team_id team,
-                                    app_info* info) const;
+                                    bhapi::app_info* info) const;
             status_t			GetActiveAppInfo(app_info* info) const;
 
     // find app
             status_t			FindApp(const char* mimeType,
-                                    entry_ref* app) const;
-            status_t			FindApp(entry_ref* ref, entry_ref* app) const;
+                                    bhapi::entry_ref* app) const;
+            status_t			FindApp(bhapi::entry_ref* ref, bhapi::entry_ref* app) const;
 
     // broadcast
             status_t			Broadcast(BMessage* message) const;
@@ -114,47 +114,31 @@ public:
                                             | B_REQUEST_QUIT) const;
             status_t			StopWatching(BMessenger target) const;
 
-            status_t			ActivateApp(team_id team) const;
+            status_t			ActivateApp(bhapi::team_id team) const;
 
     // launch app
             status_t			Launch(const char* mimeType,
                                     BMessage* initialMessage = NULL,
-                                    team_id* _appTeam = NULL) const;
+                                    bhapi::team_id* _appTeam = NULL) const;
             status_t			Launch(const char* mimeType, BList* messageList,
-                                    team_id* _appTeam = NULL) const;
+                                    bhapi::team_id* _appTeam = NULL) const;
             status_t			Launch(const char* mimeType, int argc,
                                     const char* const* args,
-                                    team_id* _appTeam = NULL) const;
-            status_t			Launch(const entry_ref* ref,
+                                    bhapi::team_id* _appTeam = NULL) const;
+            status_t			Launch(const bhapi::entry_ref* ref,
                                     const BMessage* initialMessage = NULL,
-                                    team_id* _appTeam = NULL) const;
-            status_t			Launch(const entry_ref* ref,
-                                    const BList* messageList,
-                                    team_id* _appTeam = NULL) const;
-            status_t			Launch(const entry_ref* ref, int argc,
-                                    const char* const* args,
-                                    team_id* _appTeam = NULL) const;
+                                    bhapi::team_id* _appTeam = NULL) const;
+            status_t			Launch(const bhapi::entry_ref* ref, const BList* messageList, team_id* _appTeam = NULL) const;
+            status_t			Launch(const bhapi::entry_ref* ref, int argc, const char* const* args, team_id* _appTeam = NULL) const;
 
     // recent documents, folders, apps
-            void				GetRecentDocuments(BMessage* refList,
-                                    int32 maxCount, const char* fileType = NULL,
-                                    const char* signature = NULL) const;
-            void				GetRecentDocuments(BMessage* refList,
-                                    int32 maxCount, const char* fileTypes[],
-                                    int32 fileTypesCount,
-                                    const char* signature = NULL) const;
+            void				GetRecentDocuments(BMessage* refList, int32 maxCount, const char* fileType = NULL, const char* signature = NULL) const;
+            void				GetRecentDocuments(BMessage* refList, int32 maxCount, const char* fileTypes[], int32 fileTypesCount, const char* signature = NULL) const;
+            void				GetRecentFolders(BMessage* refList, int32 maxCount, const char* signature = NULL) const;
+            void				GetRecentApps(BMessage* refList,int32 maxCount) const;
 
-            void				GetRecentFolders(BMessage* refList,
-                                    int32 maxCount,
-                                    const char* signature = NULL) const;
-
-            void				GetRecentApps(BMessage* refList,
-                                    int32 maxCount) const;
-
-            void				AddToRecentDocuments(const entry_ref* document,
-                                    const char* signature = NULL) const;
-            void				AddToRecentFolders(const entry_ref* folder,
-                                    const char* signature = NULL) const;
+            void				AddToRecentDocuments(const bhapi::entry_ref* document, const char* signature = NULL) const;
+            void				AddToRecentFolders(const bhapi::entry_ref* folder, const char* signature = NULL) const;
 
     // private/reserved stuff starts here
     class Private;
@@ -163,34 +147,18 @@ private:
     class ArgVector;
     friend class Private;
 
-            status_t			_ShutDown(bool reboot, bool confirm,
-                                    bool synchronous);
+            status_t			_ShutDown(bool reboot, bool confirm, bool synchronous);
 
-            status_t			_AddApplication(const char* signature,
-                                    const entry_ref* ref, uint32 flags,
-                                    team_id team, thread_id thread,
-                                    port_id port, bool fullRegistration,
-                                    uint32* pToken, team_id* otherTeam) const;
+            status_t			_AddApplication(const char* signature, const bhapi::entry_ref* ref, uint32 flags,bhapi::team_id team, bhapi::thread_id thread, bhapi::port_id port, bool fullRegistration, uint32* pToken, team_id* otherTeam) const;
+            status_t			_SetSignature(bhapi::team_id team,const char* signature) const;
+            void				_SetThread(bhapi::team_id team, bhapi::thread_id thread) const;
+            status_t			_SetThreadAndTeam(uint32 entryToken, bhapi::thread_id thread, team_id team, bhapi::port_id* _port) const;
 
-            status_t			_SetSignature(team_id team,
-                                    const char* signature) const;
+            status_t			_CompleteRegistration(team_id team, thread_id thread, port_id port) const;
 
-            void				_SetThread(team_id team,
-                                    thread_id thread) const;
+            bool				_IsAppPreRegistered(const bhapi::entry_ref* ref, team_id team, app_info* info) const;
 
-            status_t			_SetThreadAndTeam(uint32 entryToken,
-                                    thread_id thread, team_id team,
-                                    port_id* _port) const;
-
-            status_t			_CompleteRegistration(team_id team,
-                                    thread_id thread, port_id port) const;
-
-            bool				_IsAppPreRegistered(const entry_ref* ref,
-                                    team_id team, app_info* info) const;
-
-            status_t			_IsAppRegistered(const entry_ref* ref,
-                                    team_id team, uint32 token,
-                                    bool* preRegistered, app_info* info) const;
+            status_t			_IsAppRegistered(const bhapi::entry_ref* ref, team_id team, uint32 token, bool* preRegistered, app_info* info) const;
 
             status_t			_RemovePreRegApp(uint32 entryToken) const;
             status_t			_RemoveApp(team_id team) const;
@@ -198,7 +166,7 @@ private:
             void				_ApplicationCrashed(team_id team);
 
             status_t			_LaunchApp(const char* mimeType,
-                                    const entry_ref* ref,
+                                    const bhapi::entry_ref* ref,
                                     const BList* messageList, int argc,
                                     const char* const* args,
                                     const char** environment,
@@ -212,26 +180,26 @@ private:
 
             void				_DumpRoster() const;
 
-            status_t			_ResolveApp(const char* inType, entry_ref* ref,
-                                    entry_ref* appRef,
+            status_t			_ResolveApp(const char* inType, bhapi::entry_ref* ref,
+                                    bhapi::entry_ref* appRef,
                                     char* signature,
                                     uint32* appFlags,
                                     bool* wasDocument) const;
 
-            status_t			_TranslateRef(entry_ref* ref,
-                                    BMimeType* appMeta, entry_ref* appRef,
+            status_t			_TranslateRef(bhapi::entry_ref* ref,
+                                    BMimeType* appMeta, bhapi::entry_ref* appRef,
                                     BFile* appFile, bool* wasDocument) const;
 
             status_t			_TranslateType(const char* mimeType,
-                                    BMimeType* appMeta, entry_ref* appRef,
+                                    BMimeType* appMeta, bhapi::entry_ref* appRef,
                                     BFile* appFile) const;
 
-            status_t			_GetFileType(const entry_ref* file,
+            status_t			_GetFileType(const bhapi::entry_ref* file,
                                     BNodeInfo* nodeInfo, char* mimeType) const;
             status_t			_SendToRunning(team_id team, int argc,
                                     const char* const* args,
                                     const BList* messageList,
-                                    const entry_ref* ref,
+                                    const bhapi::entry_ref* ref,
                                     bool readyToRun) const;
 
             void				_SetWithoutRegistrar(bool noRegistrar);
@@ -256,9 +224,7 @@ private:
             bool				fNoRegistrar;
             uint32				_reserved[1];
 };
-
 // global BRoster instance
-extern const BRoster*  __be_roster;
-
-
-#endif	// _ROSTER_H
+extern const BRoster *__be_roster, *be_roster;
+#define BROSTER_DEF
+#endif	// BHAPI_ROSTER_H
