@@ -34,7 +34,6 @@
  */
 #ifndef BHAPI_HAIKU_CONSTANTS_H
 #define BHAPI_HAIKU_CONSTANTS_H
-
 #include "HaikuConfig.h"
 
 enum {
@@ -119,7 +118,5 @@ extern const char* B_URL_WAIS;
     /*  application/x-vnd.Be.URL.wais */
 extern const char* B_URL_FILE;
     /*  application/x-vnd.Be.URL.file */
-
-#include <Errors.h>
 
 #endif	/* _TYPE_CONSTANTS_H */

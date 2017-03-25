@@ -31,10 +31,9 @@
  */
 #ifndef BHAPI_UTF8_H
 #define BHAPI_UTF8_H
-
 #include "../interface/InterfaceDefs.h"
 #include <Haiku.h>
-
+//-------------------------------------------------------------------------------------------------
 /*  Conversion Flavors */
 enum {
     B_ISO1_CONVERSION,				/*  ISO 8859-x */
@@ -66,39 +65,10 @@ enum {
     B_UTF16_CONVERSION,				/*  Unicode UTF-16 */
     B_MS_WINDOWS_1250_CONVERSION	/*  Windows Central European Codepage */
 };
-
+//-------------------------------------------------------------------------------------------------
 /*  Conversion Functions */
-
 #ifdef __cplusplus
 namespace bhapi {
-status_t convert_to_utf8(uint32 sourceEncoding, const char* source, int32* sourceLength, char* dest, int32* destLength, int32* state,
-    char substitute = B_SUBSTITUTE);
-status_t convert_from_utf8(uint32 destEncoding, const char* source,
-    int32* sourceLength, char* dest, int32* destLength, int32* state,
-    char substitute = B_SUBSTITUTE);
-BHAPI_IMPEXP unichar16*		utf8_convert_to_unicode(const char *str,  int32 length);
-BHAPI_IMPEXP unichar32*		utf8_convert_to_utf32(const char *str,  int32 length);
-BHAPI_IMPEXP bool                utf8_is_token(const char *str);
-BHAPI_IMPEXP  int32             utf8_strlen(const char *str);
-BHAPI_IMPEXP  int32             utf8_strlen_etc(const char *str,  int32 nbytes);
-BHAPI_IMPEXP  int32             utf8_strlen_fast(const char *str,  int32 nbytes); /* none checking */
-BHAPI_IMPEXP const char*         utf8_at(const char *str,  int32 index,  uint8 *nbytes);
-BHAPI_IMPEXP const char*         utf8_next(const char *str,  uint8 *length);
-
-BHAPI_IMPEXP char*               utf32_convert_to_utf8(const unichar32 *str,  int32 ulength);
-BHAPI_IMPEXP unichar16*		utf32_convert_to_unicode(const unichar32 *str,  int32 ulength);
-BHAPI_IMPEXP  int32             utf32_strlen(const unichar32 *ustr);
-BHAPI_IMPEXP  int32             utf32_strlen_etc(const unichar32 *ustr,  int32 nchars);
-BHAPI_IMPEXP const unichar32*	utf32_at(const unichar32* ustr,  int32 index);
-BHAPI_IMPEXP const unichar32*	utf32_next(const unichar32* ustr);
-
-BHAPI_IMPEXP char*               unicode_convert_to_utf8(const unichar16*str,  int32 ulength);
-BHAPI_IMPEXP unichar32*		unicode_convert_to_utf32(const unichar16*str,  int32 ulength);
-BHAPI_IMPEXP  int32             unicode_strlen(const unichar16*ustr);
-BHAPI_IMPEXP  int32             unicode_strlen_etc(const unichar16*ustr,  int32 nchars, bool utf16_style);
-BHAPI_IMPEXP const unichar16*	unicode_at(const unichar16* ustr,  int32 index, bool *utf16);
-BHAPI_IMPEXP const unichar16*	unicode_next(const unichar16* ustr, bool *utf16);
-
 BHAPI_IMPEXP bool IsInsideGlyph(uchar ch);
 BHAPI_IMPEXP uint32 UTF8NextCharLenUnsafe(const char *text);
 BHAPI_IMPEXP uint32 UTF8NextCharLen(const char *text);
@@ -126,4 +96,6 @@ BHAPI_IMPEXP uint32 UTF8CountChars(const char *bytes, int32 numBytes);
 BHAPI_IMPEXP uint32 UTF8ToCharCode(const char **bytes);
 }
 #endif	/* __cplusplus */
+//-------------------------------------------------------------------------------------------------
 #endif	/* BHAPI_UTF8_H */
+//-------------------------------------------------------------------------------------------------

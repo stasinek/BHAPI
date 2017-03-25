@@ -29,7 +29,6 @@
  * --------------------------------------------------------------------------*/
 #ifndef BHAPI_SUPPORT_DEFS_H
 #define BHAPI_SUPPORT_DEFS_H
-//-------------------------------------------------------------------------------------------------
 #include <Haiku.h>
 //-------------------------------------------------------------------------------------------------
 #ifndef __cplusplus
@@ -76,23 +75,26 @@
 #ifndef TRUE
     #define TRUE (!FALSE)
 #endif
+//-------------------------------------------------------------------------------------------------
 #include <math.h>
 #ifndef min_c
-    #define min_c(a, b)  ((a) > (b) ? (b) : (a))
+#define min_c(a, b)  ((a) > (b) ? (b) : (a))
+#endif
+#ifndef min
+#define min(a, b) ((a) > (b) ? (b) : (a))
+#endif
+#ifndef MIN
+#define MIN(a, b) min(a,b)
 #endif
 #ifndef max_c
-    #define max_c(a, b)  ((a) > (b) ? (a) : (b))
+#define max_c(a, b)  ((a) > (b) ? (a) : (b))
 #endif
-//-------------------------------------------------------------------------------------------------
-#ifndef __cplusplus
-    #ifndef min
-    #define min(a, b) ((a) > (b) ? (b) : (a))
-    #endif
-
-    #ifndef max
-    #define max(a, b) ((a) > (b) ? (a) : (b))
-    #endif
-#endif /* !__cplusplus */
+#ifndef max
+#define max(a, b) ((a) > (b) ? (a) : (b))
+#endif
+#ifndef MAX
+#define MAX(a, b) max(a,b)
+#endif
 //-------------------------------------------------------------------------------------------------
 #ifndef NULL
 #  ifdef __cplusplus
@@ -331,8 +333,11 @@ extern "C" const char* B_EMPTY_STRING;
 //-------------------------------------------------------------------------------------------------
 /* Use the built-in atomic functions, if requested and available. */
 //-------------------------------------------------------------------------------------------------
-#if __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7) || defined(__clang__)
+#ifdef __cplusplus
+namespace bhapi {
+#endif
 //-------------------------------------------------------------------------------------------------
+#if __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7) || defined(__clang__)
 static __inline__ void atomic_set(int32* value, int32 newValue)
 {
     __atomic_store_n(value, newValue, __ATOMIC_RELEASE);
@@ -408,10 +413,6 @@ static __inline__ int64 atomic_get64(int64* value)
 }
 #else	/* __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7) */
 //-------------------------------------------------------------------------------------------------
-#ifdef __cplusplus
-extern "C" {
-#endif
-//-------------------------------------------------------------------------------------------------
 /* Atomic functions; previous value is returned */
 extern void		atomic_set(int32* value, int32 newValue);
 extern int32	atomic_get_and_set(int32* value, int32 newValue);
@@ -429,19 +430,11 @@ extern int64	atomic_and64(int64 *value, int64 andValue);
 extern int64	atomic_or64(int64 *value, int64 orValue);
 extern int64	atomic_get64(int64 *value);
 //-------------------------------------------------------------------------------------------------
-#ifdef __cplusplus
-}
-#endif // cplusplus
-//-------------------------------------------------------------------------------------------------
-#ifdef __cplusplus
-extern "C" {
-#endif
-/* Other stuff */
 extern void*	get_stack_frame(void);
-#ifdef __cplusplus
-}
-#endif
 //-------------------------------------------------------------------------------------------------
 #endif // GCC
+#ifdef __cplusplus
+}
+#endif // namespace bhapi
 #endif /* BHAPI_SUPPORT_DEFS_H */
 //-------------------------------------------------------------------------------------------------

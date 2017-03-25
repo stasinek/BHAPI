@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -29,15 +29,8 @@
 
 #ifndef BHAPI_INTERFACE_DEFS_H
 #define BHAPI_INTERFACE_DEFS_H
-
 #include "../interface/GraphicsDefs.h"
-
-class BBitmap;
-class BPoint;
-class BRect;
-
 // some handy UTF-8 characters
-
 #define B_UTF8_BULLET		"\xE2\x80\xA2"
 #define B_UTF8_ELLIPSIS		"\xE2\x80\xA6"
 #define B_UTF8_OPEN_QUOTE	"\xE2\x80\x9C"
@@ -53,19 +46,6 @@ class BRect;
 #else
     #define B_MAX_MOUSE_BUTTONS 16
 #endif
-
-#ifdef __cplusplus /* Just for C++ */
-extern "C" {
-namespace bhapi {
-#endif
-
-
-// Key definitions
-
-struct key_info {
-    uint32	modifiers;
-    uint8	key_states[16];
-};
 
 enum {
     B_BACKSPACE			= 0x08,
@@ -112,43 +92,6 @@ enum {
     B_SCROLL_KEY		= 0x0f,
     B_PAUSE_KEY			= 0x10
 };
-
-struct key_map {
-    uint32	version;
-    uint32	caps_key;
-    uint32	scroll_key;
-    uint32	num_key;
-    uint32	left_shift_key;
-    uint32	right_shift_key;
-    uint32	left_command_key;
-    uint32	right_command_key;
-    uint32	left_control_key;
-    uint32	right_control_key;
-    uint32	left_option_key;
-    uint32	right_option_key;
-    uint32	menu_key;
-    uint32	lock_settings;
-    int32	control_map[128];
-    int32	option_caps_shift_map[128];
-    int32	option_caps_map[128];
-    int32	option_shift_map[128];
-    int32	option_map[128];
-    int32	caps_shift_map[128];
-    int32	caps_map[128];
-    int32	shift_map[128];
-    int32	normal_map[128];
-    int32	acute_dead_key[32];
-    int32	grave_dead_key[32];
-    int32	circumflex_dead_key[32];
-    int32	dieresis_dead_key[32];
-    int32	tilde_dead_key[32];
-    uint32	acute_tables;
-    uint32	grave_tables;
-    uint32	circumflex_tables;
-    uint32	dieresis_tables;
-    uint32	tilde_tables;
-};
-
 enum {
     B_CONTROL_TABLE				= 0x00000001,
     B_OPTION_CAPS_SHIFT_TABLE	= 0x00000002,
@@ -160,7 +103,6 @@ enum {
     B_SHIFT_TABLE				= 0x00000080,
     B_NORMAL_TABLE				= 0x00000100
 };
-
 // modifiers
 enum {
     B_SHIFT_KEY			= 0x00000001,
@@ -180,17 +122,7 @@ enum {
     B_LEFT_OPTION_KEY	= 0x00004000,
     B_RIGHT_OPTION_KEY	= 0x00008000,
     B_FUNCTIONS_KEY     = 0x00010000
-
-
 };
-
-
-// Mouse definitions
-
-struct mouse_map {
-    uint32	button[B_MAX_MOUSE_BUTTONS];
-};
-
 enum mode_mouse {
     B_NORMAL_MOUSE 			= 0,
     B_CLICK_TO_FOCUS_MOUSE	= -1,
@@ -202,10 +134,7 @@ enum mode_focus_follows_mouse {
     B_WARP_FOCUS_FOLLOWS_MOUSE			= 1,
     B_INSTANT_WARP_FOCUS_FOLLOWS_MOUSE	= 2
 };
-
-
 // View orientation/alignment/style
-
 enum border_style {
     B_PLAIN_BORDER,
     B_FANCY_BORDER,
@@ -221,13 +150,6 @@ enum button_width {
     B_WIDTH_AS_USUAL,
     B_WIDTH_FROM_WIDEST,
     B_WIDTH_FROM_LABEL
-};
-
-struct scroll_bar_info {
-    bool	proportional;
-    bool	double_arrows;
-    int32	knob;
-    int32	min_knob_size;
 };
 
 enum alignment {
@@ -252,11 +174,7 @@ enum vertical_alignment {
     B_ALIGN_NO_VERTICAL			= B_ALIGN_VERTICAL_UNSET,
     B_ALIGN_USE_FULL_HEIGHT		= -2L
 };
-
-
 // Layout spacing and insets, see BControlLook::ComposeSpacing()
-
-
 enum {
     B_USE_DEFAULT_SPACING = -1002,
     B_USE_ITEM_SPACING = -1003,
@@ -270,10 +188,7 @@ enum {
     B_USE_BIG_INSETS = -1007,
     B_USE_BIG_SPACING = -1007
 };
-
-
 // Line join and cap modes
-
 enum join_mode {
     B_ROUND_JOIN = 0,
     B_MITER_JOIN,
@@ -287,20 +202,13 @@ enum cap_mode {
     B_BUTT_CAP		= B_BUTT_JOIN,
     B_SQUARE_CAP	= B_SQUARE_JOIN
 };
-
 const float B_DEFAULT_MITER_LIMIT = 10.0F;
-
-
 // Polygon filling rules
-
 enum {
     B_EVEN_ODD = 0,
     B_NONZERO
 };
-
-
 // Bitmap and overlay constants
-
 enum bitmap_tiling {
     B_TILE_BITMAP_X				= 0x00000001,
     B_TILE_BITMAP_Y				= 0x00000002,
@@ -318,10 +226,7 @@ enum bitmap_drawing_options {
     B_FILTER_BITMAP_BILINEAR	= 0x00000100,
     B_WAIT_FOR_RETRACE			= 0x00000800
 };
-
-
 // Default UI Colors
-
 enum color_which {
     B_PANEL_BACKGROUND_COLOR = 1,
     B_PANEL_TEXT_COLOR = 10,
@@ -384,10 +289,7 @@ enum color_which {
     B_DESKTOP_COLOR = 99
         // see BScreen class for B_DESKTOP_COLOR replacement
 };
-
-
 // Color tinting
-
 const float B_LIGHTEN_MAX_TINT	= 0.0f;		// 216 --> 255.0 (255)
 const float B_LIGHTEN_2_TINT	= 0.385f;	// 216 --> 240.0 (240)
 const float B_LIGHTEN_1_TINT	= 0.590f;	// 216 --> 232.0 (232)
@@ -403,10 +305,7 @@ const float B_DARKEN_MAX_TINT	= 2.0f;		// 216 -->   0.0   (0)
 const float B_DISABLED_LABEL_TINT		= B_DARKEN_3_TINT;
 const float B_HIGHLIGHT_BACKGROUND_TINT	= B_DARKEN_2_TINT;
 const float B_DISABLED_MARK_TINT		= B_LIGHTEN_2_TINT;
-
-
 // Icon related constants
-
 // Values for [Set]IconBitmap() of various view classes. Not all types are
 // applicable for all views.
 enum {
@@ -415,15 +314,13 @@ enum {
     B_PARTIALLY_ACTIVATE_ICON_BITMAP		= 0x02,
     // flag, can be combined with any of the above
     B_DISABLED_ICON_BITMAP					= 0x80,
-        // disabled version of the specified bitmap
+    // disabled version of the specified bitmap
 };
-
 // flags for SetIconBitmap() of various view classes
 enum {
     B_KEEP_ICON_BITMAP						= 0x0001,
         // transfer bitmap ownership to the view
 };
-
 // flags for SetIcon() of various view classes
 enum {
     B_TRIM_ICON_BITMAP						= 0x0100,
@@ -435,7 +332,94 @@ enum {
     B_CREATE_PARTIALLY_ACTIVE_ICON_BITMAP	= 0x0800,
     B_CREATE_DISABLED_ICON_BITMAPS			= 0x1000,
 };
+enum {
+    B_FOLLOW_NONE			= 0,
+    B_FOLLOW_LEFT			= 1,
+    B_FOLLOW_RIGHT			= 1 << 1,
+    B_FOLLOW_TOP			= 1 << 2,
+    B_FOLLOW_BOTTOM			= 1 << 3,
+    B_FOLLOW_H_CENTER		= 1 << 4,
+    B_FOLLOW_V_CENTER		= 1 << 5,
+    B_FOLLOW_ALL			= 0xffff
+};
+#define B_FOLLOW_LEFT_RIGHT	(B_FOLLOW_LEFT | B_FOLLOW_RIGHT)
+#define B_FOLLOW_TOP_BOTTOM	(B_FOLLOW_TOP | B_FOLLOW_BOTTOM)
+#define B_FOLLOW_ALL_SIDES    B_FOLLOW_ALL
 
+enum {
+    B_PRIMARY_MOUSE_BUTTON = 1,
+    B_SECONDARY_MOUSE_BUTTON = 2,
+    B_TERTIARY_MOUSE_BUTTON = 3
+};
+
+#ifndef BBITMAP_DEF
+#define BBITMAP_DEF
+class BBitmap;
+#endif
+#ifndef BPOINT_DEF
+#define BPOINT_DEF
+class BPoint;
+#endif
+#ifndef BRECT_DEF
+#define BRECT_DEF
+class BRect;
+#endif
+
+#ifdef __cplusplus /* Just for C++ */
+namespace bhapi {
+#endif
+// Key definitions
+struct key_info {
+    uint32	modifiers;
+    uint8	key_states[16];
+};
+
+struct key_map {
+    uint32	version;
+    uint32	caps_key;
+    uint32	scroll_key;
+    uint32	num_key;
+    uint32	left_shift_key;
+    uint32	right_shift_key;
+    uint32	left_command_key;
+    uint32	right_command_key;
+    uint32	left_control_key;
+    uint32	right_control_key;
+    uint32	left_option_key;
+    uint32	right_option_key;
+    uint32	menu_key;
+    uint32	lock_settings;
+    int32	control_map[128];
+    int32	option_caps_shift_map[128];
+    int32	option_caps_map[128];
+    int32	option_shift_map[128];
+    int32	option_map[128];
+    int32	caps_shift_map[128];
+    int32	caps_map[128];
+    int32	shift_map[128];
+    int32	normal_map[128];
+    int32	acute_dead_key[32];
+    int32	grave_dead_key[32];
+    int32	circumflex_dead_key[32];
+    int32	dieresis_dead_key[32];
+    int32	tilde_dead_key[32];
+    uint32	acute_tables;
+    uint32	grave_tables;
+    uint32	circumflex_tables;
+    uint32	dieresis_tables;
+    uint32	tilde_tables;
+};
+// Mouse definitions
+struct mouse_map {
+    uint32	button[B_MAX_MOUSE_BUTTONS];
+};
+
+struct scroll_bar_info {
+    bool	proportional;
+    bool	double_arrows;
+    int32	knob;
+    int32	min_knob_size;
+};
 
 const color_map* system_colors();
 status_t		get_deskbar_frame(BRect* frame);
@@ -496,49 +480,14 @@ rgb_color		ui_color(color_which which);
 void			set_ui_color(const color_which& which, const rgb_color& color);
 rgb_color		tint_color(rgb_color color, float tint);
 
-extern "C" status_t _init_interface_kit_();
+extern "C" status_t __init_interface_kit_();
     // for convenience, should be removed including the friend declarations
     // in Menu.h, ...
-
-enum {
-    B_FOLLOW_NONE			= 0,
-    B_FOLLOW_LEFT			= 1,
-    B_FOLLOW_RIGHT			= 1 << 1,
-    B_FOLLOW_TOP			= 1 << 2,
-    B_FOLLOW_BOTTOM			= 1 << 3,
-    B_FOLLOW_H_CENTER		= 1 << 4,
-    B_FOLLOW_V_CENTER		= 1 << 5,
-    B_FOLLOW_ALL			= 0xffff
-};
-
-#define B_FOLLOW_LEFT_RIGHT	(B_FOLLOW_LEFT | B_FOLLOW_RIGHT)
-#define B_FOLLOW_TOP_BOTTOM	(B_FOLLOW_TOP | B_FOLLOW_BOTTOM)
-#define B_FOLLOW_ALL_SIDES    B_FOLLOW_ALL
-
-enum {
-    B_PRIMARY_MOUSE_BUTTON = 1,
-    B_SECONDARY_MOUSE_BUTTON = 2,
-    B_TERTIARY_MOUSE_BUTTON = 3
-};
-#ifdef __cplusplus /* Just for C++ */
-} // namespace
-} /* extern "C" */
-#endif
-
-
-#ifdef __cplusplus /* Just for C++ */
-extern "C" {
-namespace bhapi {
-#endif
-
-BHAPI_IMPEXP bhapi::rgb_color ui_color(bhapi::color_which which);
+BHAPI_IMPEXP rgb_color ui_color(color_which which);
 BHAPI_IMPEXP float ui_get_scrollbar_horizontal_height();
 BHAPI_IMPEXP float ui_get_scrollbar_vertical_width();
-
 #ifdef __cplusplus /* Just for C++ */
-} /* extern "C" */
 } // namespace
 #endif
-
 #endif /* BHAPI_INTERFACE_DEFS_H */
 

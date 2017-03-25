@@ -28,9 +28,8 @@
  * --------------------------------------------------------------------------*/
 #ifndef BHAPI_ERRORS_H
 #define BHAPI_ERRORS_H
-
 #include <Haiku.h>
-
+//-------------------------------------------------------------------------------------------------
 /* Error baselines */
 #define B_GENERAL_ERROR_BASE		INT_MIN
 #define B_OS_ERROR_BASE				(B_GENERAL_ERROR_BASE + 0x1000)
@@ -46,10 +45,10 @@
 #define B_MAIL_ERROR_BASE			(B_GENERAL_ERROR_BASE + 0x8000)
 #define B_PRINT_ERROR_BASE			(B_GENERAL_ERROR_BASE + 0x9000)
 #define B_DEVICE_ERROR_BASE			(B_GENERAL_ERROR_BASE + 0xa000)
-
+//-------------------------------------------------------------------------------------------------
 /* Developer-defined errors start at (B_ERRORS_END+1) */
 #define B_ERRORS_END				(B_GENERAL_ERROR_BASE + 0xffff)
-
+//-------------------------------------------------------------------------------------------------
 /* General Errors */
 #define B_NO_MEMORY					(B_GENERAL_ERROR_BASE + 0)
 #define B_IO_ERROR					(B_GENERAL_ERROR_BASE + 1)
@@ -74,7 +73,7 @@
 #define B_ERROR						(-1)
 #define B_OK						((int)0)
 #define B_NO_ERROR					((int)0)
-
+//-------------------------------------------------------------------------------------------------
 /* Kernel Kit Errors */
 #define B_BAD_SEM_ID				(B_OS_ERROR_BASE + 0)
 #define B_NO_MORE_SEMS				(B_OS_ERROR_BASE + 1)
@@ -97,7 +96,7 @@
 #define B_LEGACY_EXECUTABLE			(B_OS_ERROR_BASE + 0x306)
 
 #define B_DEBUGGER_ALREADY_INSTALLED	(B_OS_ERROR_BASE + 0x400)
-
+//-------------------------------------------------------------------------------------------------
 /* Application Kit Errors */
 #define B_BAD_REPLY							(B_APP_ERROR_BASE + 0)
 #define B_DUPLICATE_REPLY					(B_APP_ERROR_BASE + 1)
@@ -118,11 +117,11 @@
 #define B_NOT_A_MESSAGE						(B_APP_ERROR_BASE + 16)
 #define B_SHUTDOWN_CANCELLED				(B_APP_ERROR_BASE + 17)
 #define B_SHUTTING_DOWN						(B_APP_ERROR_BASE + 18)
-
+//-------------------------------------------------------------------------------------------------
 /* Storage Kit/File System Errors */
 #define B_FILE_ERROR						(B_STORAGE_ERROR_BASE + 0)
 #define B_FILE_NOT_FOUND					(B_STORAGE_ERROR_BASE + 1)
-            /* deprecated: use B_ENTRY_NOT_FOUND instead */
+/* deprecated: use B_ENTRY_NOT_FOUND instead */
 #define B_FILE_EXISTS						(B_STORAGE_ERROR_BASE + 2)
 #define B_ENTRY_NOT_FOUND					(B_STORAGE_ERROR_BASE + 3)
 #define B_NAME_TOO_LONG						(B_STORAGE_ERROR_BASE + 4)
@@ -139,7 +138,7 @@
 #define B_PARTITION_TOO_SMALL				(B_STORAGE_ERROR_BASE + 15)
 #define B_PARTIAL_READ						(B_STORAGE_ERROR_BASE + 16)
 #define B_PARTIAL_WRITE						(B_STORAGE_ERROR_BASE + 17)
-
+//-------------------------------------------------------------------------------------------------
 /* POSIX Errors */
 #ifdef B_USE_POSITIVE_POSIX_ERRORS
 #	define B_TO_POSIX_ERROR(error)		(-(error))
@@ -169,14 +168,14 @@
 #define ETXTBSY			B_TO_POSIX_ERROR(B_POSIX_ERROR_BASE + 59)
 #define ENOATTR			B_TO_POSIX_ERROR(B_POSIX_ERROR_BASE + 60)
 
-/* new error codes that can be mapped to POSIX errors */
+/* New error codes that can be mapped to POSIX errors */
 #define	B_BUFFER_OVERFLOW			B_FROM_POSIX_ERROR(EOVERFLOW)
 #define B_TOO_MANY_ARGS				B_FROM_POSIX_ERROR(E2BIG)
 #define	B_FILE_TOO_LARGE			B_FROM_POSIX_ERROR(EFBIG)
 #define B_RESULT_NOT_REPRESENTABLE	B_FROM_POSIX_ERROR(ERANGE)
 #define	B_DEVICE_NOT_FOUND			B_FROM_POSIX_ERROR(ENODEV)
 #define B_NOT_SUPPORTED				B_FROM_POSIX_ERROR(EOPNOTSUPP)
-
+//-------------------------------------------------------------------------------------------------
 /* Media Kit Errors */
 #define B_STREAM_NOT_FOUND				(B_MEDIA_ERROR_BASE + 0)
 #define B_SERVER_NOT_FOUND				(B_MEDIA_ERROR_BASE + 1)
@@ -218,7 +217,7 @@
 #define B_MEDIA_DUPLICATE_FORMAT		(B_MEDIA_ERROR_BASE + 128)
 #define B_MEDIA_REALTIME_DISABLED		(B_MEDIA_ERROR_BASE + 129)
 #define B_MEDIA_REALTIME_UNAVAILABLE	(B_MEDIA_ERROR_BASE + 130)
-
+//-------------------------------------------------------------------------------------------------
 /* Mail Kit Errors */
 #define B_MAIL_NO_DAEMON				(B_MAIL_ERROR_BASE + 0)
 #define B_MAIL_UNKNOWN_USER				(B_MAIL_ERROR_BASE + 1)
@@ -228,10 +227,10 @@
 #define B_MAIL_UNKNOWN_FIELD			(B_MAIL_ERROR_BASE + 5)
 #define B_MAIL_NO_RECIPIENT				(B_MAIL_ERROR_BASE + 6)
 #define B_MAIL_INVALID_MAIL				(B_MAIL_ERROR_BASE + 7)
-
+//-------------------------------------------------------------------------------------------------
 /* Printing Errors */
 #define B_NO_PRINT_SERVER				(B_PRINT_ERROR_BASE + 0)
-
+//-------------------------------------------------------------------------------------------------
 /* Device Kit Errors */
 #define B_DEV_INVALID_IOCTL				(B_DEVICE_ERROR_BASE + 0)
 #define B_DEV_NO_MEMORY					(B_DEVICE_ERROR_BASE + 1)
@@ -265,26 +264,24 @@
 #define B_DEV_PENDING					(B_DEVICE_ERROR_BASE + 28)
 #define B_DEV_MULTIPLE_ERRORS			(B_DEVICE_ERROR_BASE + 29)
 #define B_DEV_TOO_LATE					(B_DEVICE_ERROR_BASE + 30)
-
+//-------------------------------------------------------------------------------------------------
 /* Translation Kit Errors */
 #define B_TRANSLATION_BASE_ERROR		(B_TRANSLATION_ERROR_BASE + 0)
 #define B_NO_TRANSLATOR					(B_TRANSLATION_ERROR_BASE + 1)
 #define B_ILLEGAL_DATA					(B_TRANSLATION_ERROR_BASE + 2)
 
-#define B_TO_POSITIVE_ERROR(error)	_to_positive_error(error)
-#define B_TO_NEGATIVE_ERROR(error)	_to_negative_error(error)
-
-
+#define B_TO_POSITIVE_ERROR(error)	__to_positive_error(error)
+#define B_TO_NEGATIVE_ERROR(error)	__to_negative_error(error)
+//-------------------------------------------------------------------------------------------------
 #ifdef __cplusplus
-extern "C" {
+namespace bhapi {
 #endif
-
-int _to_positive_error(int error);
-int _to_negative_error(int error);
-
+BHAPI_IMPEXP int __to_positive_error(int error);
+BHAPI_IMPEXP int __to_negative_error(int error);
 #ifdef __cplusplus
 }
 #endif
-
+//-------------------------------------------------------------------------------------------------
 #endif /* BHAPI_ERRORS_H */
+//-------------------------------------------------------------------------------------------------
 

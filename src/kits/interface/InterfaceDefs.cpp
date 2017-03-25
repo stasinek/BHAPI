@@ -10,7 +10,6 @@
  *		Wim van der Meer <WPJvanderMeer@gmail.com>
  */
 
-
 /*!	Global functions and variables for the Interface Kit */
 #include <InterfaceDefs.h>
 #include <new>
@@ -55,14 +54,12 @@ struct general_ui_info {
     bool		color_frame;
     rgb_color	window_frame_color;
 };
-
 struct general_ui_info general_info;
 
-menu_info *_menu_info_ptr_;
-
+menu_info *__menu_info_ptr;
 extern "C" const char B_NOTIFICATION_SENDER[] = "be:sender";
 
-static const rgb_color _kDefaultColors[kColorWhichCount] = {
+static const rgb_color kDefaultColors[kColorWhichCount] = {
     {216, 216, 216, 255},	// B_PANEL_BACKGROUND_COLOR
     {216, 216, 216, 255},	// B_MENU_BACKGROUND_COLOR
     {255, 203, 0, 255},		// B_WINDOW_TAB_COLOR
@@ -100,7 +97,7 @@ static const rgb_color _kDefaultColors[kColorWhichCount] = {
     {255, 65, 54, 255},		// B_FAILURE_COLOR
     {}
 };
-const rgb_color* BPrivate::kDefaultColors = &_kDefaultColors[0];
+const rgb_color* BPrivate::kDefaultColors = &__kDefaultColors[0];
 
 namespace BPrivate {
 /*!	Fills the \a width, \a height, and \a colorSpace parameters according
@@ -322,7 +319,6 @@ get_is_subpixel_ordering_regular(bool* subpixelOrdering)
     return B_OK;
 }
 
-
 const color_map* system_colors()
 {
     return BScreen(B_MAIN_SCREEN_ID).ColorMap();
@@ -354,9 +350,7 @@ status_t set_screen_space(int32 index, uint32 space, bool stick)
     return screen.SetMode(index, &mode, stick);
 }
 
-
-status_t
-get_scroll_bar_info(scroll_bar_info *info)
+status_t get_scroll_bar_info(scroll_bar_info *info)
 {
     if (info == NULL)
         return B_BAD_VALUE;
@@ -373,10 +367,7 @@ get_scroll_bar_info(scroll_bar_info *info)
 
     return B_ERROR;
 }
-
-
-status_t
-set_scroll_bar_info(scroll_bar_info *info)
+status_t set_scroll_bar_info(scroll_bar_info *info)
 {
     if (info == NULL)
         return B_BAD_VALUE;
@@ -393,10 +384,7 @@ set_scroll_bar_info(scroll_bar_info *info)
 
     return B_ERROR;
 }
-
-
-status_t
-get_mouse_type(int32 *type)
+status_t get_mouse_type(int32 *type)
 {
     BMessage command(IS_GET_MOUSE_TYPE);
     BMessage reply;
@@ -407,9 +395,7 @@ get_mouse_type(int32 *type)
     return reply.FindInt32("mouse_type", type);
 }
 
-
-status_t
-set_mouse_type(int32 type)
+status_t set_mouse_type(int32 type)
 {
     BMessage command(IS_SET_MOUSE_TYPE);
     BMessage reply;
@@ -420,9 +406,7 @@ set_mouse_type(int32 type)
     return _control_input_server_(&command, &reply);
 }
 
-
-status_t
-get_mouse_map(mouse_map *map)
+status_tg get_mouse_map(mouse_map *map)
 {
     BMessage command(IS_GET_MOUSE_MAP);
     BMessage reply;
@@ -440,9 +424,7 @@ get_mouse_map(mouse_map *map)
     return B_OK;
 }
 
-
-status_t
-set_mouse_map(mouse_map *map)
+status_t set_mouse_map(mouse_map *map)
 {
     BMessage command(IS_SET_MOUSE_MAP);
     BMessage reply;
@@ -454,9 +436,7 @@ set_mouse_map(mouse_map *map)
     return _control_input_server_(&command, &reply);
 }
 
-
-status_t
-get_click_speed(bigtime_t *speed)
+status_t get_click_speed(bigtime_t *speed)
 {
     BMessage command(IS_GET_CLICK_SPEED);
     BMessage reply;
@@ -472,8 +452,7 @@ get_click_speed(bigtime_t *speed)
 }
 
 
-status_t
-set_click_speed(bigtime_t speed)
+status_t set_click_speed(bigtime_t speed)
 {
     BMessage command(IS_SET_CLICK_SPEED);
     BMessage reply;
@@ -481,9 +460,7 @@ set_click_speed(bigtime_t speed)
     return _control_input_server_(&command, &reply);
 }
 
-
-status_t
-get_mouse_speed(int32 *speed)
+status_t get_mouse_speed(int32 *speed)
 {
     BMessage command(IS_GET_MOUSE_SPEED);
     BMessage reply;
@@ -498,9 +475,7 @@ get_mouse_speed(int32 *speed)
     return B_OK;
 }
 
-
-status_t
-set_mouse_speed(int32 speed)
+status_t set_mouse_speed(int32 speed)
 {
     BMessage command(IS_SET_MOUSE_SPEED);
     BMessage reply;
@@ -508,9 +483,7 @@ set_mouse_speed(int32 speed)
     return _control_input_server_(&command, &reply);
 }
 
-
-status_t
-get_mouse_acceleration(int32 *speed)
+status_t get_mouse_acceleration(int32 *speed)
 {
     BMessage command(IS_GET_MOUSE_ACCELERATION);
     BMessage reply;
@@ -523,9 +496,7 @@ get_mouse_acceleration(int32 *speed)
     return B_OK;
 }
 
-
-status_t
-set_mouse_acceleration(int32 speed)
+status_t set_mouse_acceleration(int32 speed)
 {
     BMessage command(IS_SET_MOUSE_ACCELERATION);
     BMessage reply;
@@ -533,9 +504,7 @@ set_mouse_acceleration(int32 speed)
     return _control_input_server_(&command, &reply);
 }
 
-
-status_t
-get_key_repeat_rate(int32 *rate)
+status_t get_key_repeat_rate(int32 *rate)
 {
     BMessage command(IS_GET_KEY_REPEAT_RATE);
     BMessage reply;
@@ -548,9 +517,7 @@ get_key_repeat_rate(int32 *rate)
     return B_OK;
 }
 
-
-status_t
-set_key_repeat_rate(int32 rate)
+status_t set_key_repeat_rate(int32 rate)
 {
     BMessage command(IS_SET_KEY_REPEAT_RATE);
     BMessage reply;
@@ -558,9 +525,7 @@ set_key_repeat_rate(int32 rate)
     return _control_input_server_(&command, &reply);
 }
 
-
-status_t
-get_key_repeat_delay(bigtime_t *delay)
+status_t get_key_repeat_delay(bigtime_t *delay)
 {
     BMessage command(IS_GET_KEY_REPEAT_DELAY);
     BMessage reply;
@@ -573,16 +538,13 @@ get_key_repeat_delay(bigtime_t *delay)
     return B_OK;
 }
 
-
-status_t
-set_key_repeat_delay(bigtime_t  delay)
+status_t set_key_repeat_delay(bigtime_t  delay)
 {
     BMessage command(IS_SET_KEY_REPEAT_DELAY);
     BMessage reply;
     command.AddInt64("delay", delay);
     return _control_input_server_(&command, &reply);
 }
-
 
 uint32 modifiers()
 {
@@ -601,9 +563,7 @@ uint32 modifiers()
     return modifier;
 }
 
-
-status_t
-get_key_info(key_info *info)
+status_t get_key_info(key_info *info)
 {
     BMessage command(IS_GET_KEY_INFO);
     BMessage reply;
@@ -623,16 +583,12 @@ get_key_info(key_info *info)
     return B_OK;
 }
 
-
-void
-get_key_map(key_map **map, char **key_buffer)
+void get_key_map(key_map **map, char **key_buffer)
 {
-    _get_key_map(map, key_buffer, NULL);
+    __get_key_map(map, key_buffer, NULL);
 }
 
-
-void
-_get_key_map(key_map **map, char **key_buffer, ssize_t *key_buffer_size)
+void __get_key_map(key_map **map, char **key_buffer, ssize_t *key_buffer_size)
 {
     BMessage command(IS_GET_KEY_MAP);
     BMessage reply;

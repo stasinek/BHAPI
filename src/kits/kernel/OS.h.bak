@@ -1,0 +1,11 @@
+﻿#ifndef BHAPI_OS_H
+#define BHAPI_OS_H
+
+#include "os/kernel.h"
+#include "os/memory.h"
+#include "os/debug.h"
+#include "os/image.h"
+#include "os/scheduler.h"
+
+#endif // BHAPI_OS_H
+

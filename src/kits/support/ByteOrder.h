@@ -29,14 +29,10 @@
 
 #ifndef BHAPI_BYTE_ORDER_H
 #define BHAPI_BYTE_ORDER_H
-
 #include <Haiku.h>
 
-#ifdef __cplusplus /* Just for C++ */
-extern "C" {
-namespace bhapi {
-#endif
-typedef enum swap_action {
+/* swap directions */
+typedef enum {
     B_SWAP_HOST_TO_LENDIAN,
     B_SWAP_HOST_TO_BENDIAN,
     B_SWAP_LENDIAN_TO_HOST,
@@ -44,80 +40,109 @@ typedef enum swap_action {
     B_SWAP_ALWAYS
 } swap_action;
 
-BHAPI_IMPEXP status_t       swap_data(type_code type, void *data, size_t len, swap_action action);
-BHAPI_IMPEXP bool			is_type_swapped(type_code type);
-BHAPI_IMPEXP float			swap_float(float value);
-BHAPI_IMPEXP double			swap_double(double value);
-
-#define B_SWAP_INT16(v)		((((v) & 0xff) << 8) | (((v) >> 8) & 0xff))
-#define B_SWAP_INT32(v)		((B_SWAP_INT16((v) & 0xffff) << 16) | B_SWAP_INT16(((v) >> 16) & 0xffff))
-#define B_SWAP_INT64(v)		((B_SWAP_INT32((v) & 0xffffffff) << 32) | B_SWAP_INT32(((v) >> 32) & 0xffffffff))
-#define B_SWAP_FLOAT(v)		swap_float(v)
-#define B_SWAP_DOUBLE(v)	swap_double(v)
-
-#ifdef BHAPI_LITTLE_ENDIAN
-
-#define B_HOST_IS_LENDIAN		1
-#define B_HOST_IS_BENDIAN		0
-
-#define B_HOST_TO_LENDIAN_INT16(v)	((v) & 0xffff)
-#define B_HOST_TO_LENDIAN_INT32(v)	((v) & 0xffffffff)
-#define B_HOST_TO_LENDIAN_INT64(v)	 (v)
-#define B_HOST_TO_LENDIAN_FLOAT(v) 	 (v)
-#define B_HOST_TO_LENDIAN_DOUBLE(v)  (v)
-
-#define B_HOST_TO_BENDIAN_INT16(v)    B_SWAP_INT16(v)
-#define B_HOST_TO_BENDIAN_INT32(v)    B_SWAP_INT32(v)
-#define B_HOST_TO_BENDIAN_INT64(v)    B_SWAP_INT64(v)
-#define B_HOST_TO_BENDIAN_FLOAT(v)    B_SWAP_FLOAT(v)
-#define B_HOST_TO_BENDIAN_DOUBLE(v)   B_SWAP_DOUBLE(v)
-
-#define B_LENDIAN_TO_HOST_INT16(v)	((v) & 0xffff)
-#define B_LENDIAN_TO_HOST_INT32(v)	((v) & 0xffffffff)
-#define B_LENDIAN_TO_HOST_INT64(v)	 (v)
-#define B_LENDIAN_TO_HOST_FLOAT(v)	 (v)
-#define B_LENDIAN_TO_HOST_DOUBLE(v)	 (v)
-
-#define B_BENDIAN_TO_HOST_INT16(v)    B_SWAP_INT16(v)
-#define B_BENDIAN_TO_HOST_INT32(v)    B_SWAP_INT32(v)
-#define B_BENDIAN_TO_HOST_INT64(v)    B_SWAP_INT64(v)
-#define B_BENDIAN_TO_HOST_FLOAT(v)    B_SWAP_FLOAT(v)
-#define B_BENDIAN_TO_HOST_DOUBLE(v)   B_SWAP_DOUBLE(v)
-
-#else /* BHAPI_BIG_ENDIAN */
-
-#define B_HOST_IS_LENDIAN		0
-#define B_HOST_IS_BENDIAN		1
-
-#define B_HOST_TO_LENDIAN_INT16(v)    B_SWAP_INT16(v)
-#define B_HOST_TO_LENDIAN_INT32(v)    B_SWAP_INT32(v)
-#define B_HOST_TO_LENDIAN_INT64(v)    B_SWAP_INT64(v)
-#define B_HOST_TO_LENDIAN_FLOAT(v)    B_SWAP_FLOAT(v)
-#define B_HOST_TO_LENDIAN_DOUBLE(v)   B_SWAP_DOUBLE(v)
-
-#define B_HOST_TO_BENDIAN_INT16(v)	((v) & 0xffff)
-#define B_HOST_TO_BENDIAN_INT32(v)	((v) & 0xffffffff)
-#define B_HOST_TO_BENDIAN_INT64(v)	(v)
-#define B_HOST_TO_BENDIAN_FLOAT(v)	(v)
-#define B_HOST_TO_BENDIAN_DOUBLE(v)	(v)
-
-#define B_LENDIAN_TO_HOST_INT16(v)    B_SWAP_INT16(v)
-#define B_LENDIAN_TO_HOST_INT32(v)    B_SWAP_INT32(v)
-#define B_LENDIAN_TO_HOST_INT64(v)    B_SWAP_INT64(v)
-#define B_LENDIAN_TO_HOST_FLOAT(v)    B_SWAP_FLOAT(v)
-#define B_LENDIAN_TO_HOST_DOUBLE(v)    B_SWAP_DOUBLE(v)
-
-#define B_BENDIAN_TO_HOST_INT16(v)	((v) & 0xffff)
-#define B_BENDIAN_TO_HOST_INT32(v)	((v) & 0xffffffff)
-#define B_BENDIAN_TO_HOST_INT64(v)	(v)
-#define B_BENDIAN_TO_HOST_FLOAT(v)	(v)
-#define B_BENDIAN_TO_HOST_DOUBLE(v)	(v)
-
-#endif /* BHAPI_LITTLE_ENDIAN */
-#ifdef __cplusplus
-} /* namespace */
-} // extern "C"
+/* BSD/networking macros */
+#ifndef htonl
+#	define htonl(x) B_HOST_TO_BENDIAN_INT32(x)
+#	define ntohl(x) B_BENDIAN_TO_HOST_INT32(x)
+#	define htons(x) B_HOST_TO_BENDIAN_INT16(x)
+#	define ntohs(x) B_BENDIAN_TO_HOST_INT16(x)
 #endif
 
+/* always swap macros */
+#define B_SWAP_DOUBLE(arg)   __swap_double(arg)
+#define B_SWAP_FLOAT(arg)    __swap_float(arg)
+#define B_SWAP_INT64(arg)    __swap_int64(arg)
+#define B_SWAP_INT32(arg)    __swap_int32(arg)
+#define B_SWAP_INT16(arg)    __swap_int16(arg)
+
+#if BYTE_ORDER == __LITTLE_ENDIAN
+/* Host is little endian */
+
+#define B_HOST_IS_LENDIAN 1
+#define B_HOST_IS_BENDIAN 0
+
+/* Host native to little endian */
+#define B_HOST_TO_LENDIAN_DOUBLE(arg)	(double)(arg)
+#define B_HOST_TO_LENDIAN_FLOAT(arg)	(float)(arg)
+#define B_HOST_TO_LENDIAN_INT64(arg)	(uint64)(arg)
+#define B_HOST_TO_LENDIAN_INT32(arg)	(uint32)(arg)
+#define B_HOST_TO_LENDIAN_INT16(arg)	(uint16)(arg)
+
+/* Little endian to host native */
+#define B_LENDIAN_TO_HOST_DOUBLE(arg)	(double)(arg)
+#define B_LENDIAN_TO_HOST_FLOAT(arg)	(float)(arg)
+#define B_LENDIAN_TO_HOST_INT64(arg)	(uint64)(arg)
+#define B_LENDIAN_TO_HOST_INT32(arg)	(uint32)(arg)
+#define B_LENDIAN_TO_HOST_INT16(arg)	(uint16)(arg)
+
+/* Host native to big endian */
+#define B_HOST_TO_BENDIAN_DOUBLE(arg)	__swap_double(arg)
+#define B_HOST_TO_BENDIAN_FLOAT(arg)	__swap_float(arg)
+#define B_HOST_TO_BENDIAN_INT64(arg)	__swap_int64(arg)
+#define B_HOST_TO_BENDIAN_INT32(arg)	__swap_int32(arg)
+#define B_HOST_TO_BENDIAN_INT16(arg)	__swap_int16(arg)
+
+/* Big endian to host native */
+#define B_BENDIAN_TO_HOST_DOUBLE(arg)	__swap_double(arg)
+#define B_BENDIAN_TO_HOST_FLOAT(arg)	__swap_float(arg)
+#define B_BENDIAN_TO_HOST_INT64(arg)	__swap_int64(arg)
+#define B_BENDIAN_TO_HOST_INT32(arg)	__swap_int32(arg)
+#define B_BENDIAN_TO_HOST_INT16(arg)	__swap_int16(arg)
+
+#else	/* BYTE_ORDER */
+/* Host is big endian */
+
+#define B_HOST_IS_LENDIAN 0
+#define B_HOST_IS_BENDIAN 1
+
+/* Host native to little endian */
+#define B_HOST_TO_LENDIAN_DOUBLE(arg)	__swap_double(arg)
+#define B_HOST_TO_LENDIAN_FLOAT(arg)	__swap_float(arg)
+#define B_HOST_TO_LENDIAN_INT64(arg)	__swap_int64(arg)
+#define B_HOST_TO_LENDIAN_INT32(arg)	__swap_int32(arg)
+#define B_HOST_TO_LENDIAN_INT16(arg)	__swap_int16(arg)
+
+/* Little endian to host native */
+#define B_LENDIAN_TO_HOST_DOUBLE(arg)	__swap_double(arg)
+#define B_LENDIAN_TO_HOST_FLOAT(arg)	__swap_float(arg)
+#define B_LENDIAN_TO_HOST_INT64(arg)	__swap_int64(arg)
+#define B_LENDIAN_TO_HOST_INT32(arg)	__swap_int32(arg)
+#define B_LENDIAN_TO_HOST_INT16(arg)	__swap_int16(arg)
+
+/* Host native to big endian */
+#define B_HOST_TO_BENDIAN_DOUBLE(arg)	(double)(arg)
+#define B_HOST_TO_BENDIAN_FLOAT(arg)	(float)(arg)
+#define B_HOST_TO_BENDIAN_INT64(arg)	(uint64)(arg)
+#define B_HOST_TO_BENDIAN_INT32(arg)	(uint32)(arg)
+#define B_HOST_TO_BENDIAN_INT16(arg)	(uint16)(arg)
+/* Big endian to host native */
+#define B_BENDIAN_TO_HOST_DOUBLE(arg)	(double)(arg)
+#define B_BENDIAN_TO_HOST_FLOAT(arg)	(float)(arg)
+#define B_BENDIAN_TO_HOST_INT64(arg)	(uint64)(arg)
+#define B_BENDIAN_TO_HOST_INT32(arg)	(uint32)(arg)
+#define B_BENDIAN_TO_HOST_INT16(arg)	(uint16)(arg)
+#endif	/* BYTE_ORDER */
+
+#ifdef __cplusplus /* Just for C++ */
+namespace bhapi {
+#endif
+
+BHAPI_IMPEXP status_t       swap_data(type_code type, void *data, size_t len, swap_action action);
+BHAPI_IMPEXP bool			is_type_swapped(type_code type);
+BHAPI_IMPEXP float			__swap_float(float value);
+BHAPI_IMPEXP double			__swap_double(double value);
+#if __GNUC__ >= 4
+#define __swap_int64(arg)	(uint64)__builtin_bswap64(arg)
+#define __swap_int32(arg)	(uint32)__builtin_bswap32(arg)
+#define __swap_int16(arg)	(uint16)__builtin_bswap16(arg)
+#else
+extern uint64 __swap_int64(uint64 arg);
+extern uint32 __swap_int32(uint32 arg);
+extern uint16 __swap_int16(uint16 arg);
+#endif
+
+#ifdef __cplusplus
+} /* namespace */
+#endif
 #endif /* BHAPI_BYTE_ORDER_H */
 

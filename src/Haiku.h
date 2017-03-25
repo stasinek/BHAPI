@@ -7,5 +7,6 @@
 #include "HaikuDefs.h"
 
 #include <ByteOrder.h>
+#include <Errors.h>
 
 #endif

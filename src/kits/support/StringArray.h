@@ -29,7 +29,6 @@
 
 #ifndef BHAPI_STRING_ARRAY_H
 #define BHAPI_STRING_ARRAY_H
-
 #include "List.h"
 #include <Haiku.h>
 

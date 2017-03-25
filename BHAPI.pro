@@ -8,6 +8,7 @@ TARGET = be
 TEMPLATE = lib
 DEFINES += __INTEL__
 DEFINES += BHAPI_BUILD_LIBRARY
+DEFINES += "BYTE_ORDER=__LITTLE_ENDIAN"
 DEFINES += BHAPI_OS_WIN32
 DEFINES += BHAPI_GRAPHICS_WIN32_BUILT_IN
 
@@ -43,7 +44,7 @@ INCLUDEPATH += ../BHAPI/src/kits/bluetooth
 INCLUDEPATH += ../BHAPI/src/kits/debug
 INCLUDEPATH += ../BHAPI/src/kits/debugger
 INCLUDEPATH += ../BHAPI/src/kits/device
-INCLUDEPATH += ../BHAPI/src/kits/drivers
+INCLUDEPATH += ../BHAPI/src/drivers
 INCLUDEPATH += ../BHAPI/src/kits/game
 INCLUDEPATH += ../BHAPI/src/kits/interface
 INCLUDEPATH += ../BHAPI/src/kits/kernel
@@ -58,39 +59,42 @@ INCLUDEPATH += ../BHAPI/src/kits/package
 INCLUDEPATH += ../BHAPI/src/kits/print
 INCLUDEPATH += ../BHAPI/src/kits/shared
 INCLUDEPATH += ../BHAPI/src/kits/storage
-INCLUDEPATH += ../BHAPI/src/kits/system
+INCLUDEPATH += ../BHAPI/src/os
 INCLUDEPATH += ../BHAPI/src/kits/support
 INCLUDEPATH += ../BHAPI/src/kits/tracker
 INCLUDEPATH += ../BHAPI/src/kits/textencoding
 INCLUDEPATH += ../BHAPI/src/kits/translation
 INCLUDEPATH += ../BHAPI/src/kits/xml
 INCLUDEPATH += ../BHAPI/src/private
-INCLUDEPATH += ../BHAPI/src/private/app
-INCLUDEPATH += ../BHAPI/src/private/audio
-INCLUDEPATH += ../BHAPI/src/private/binary_compatbility
-INCLUDEPATH += ../BHAPI/src/private/device
-INCLUDEPATH += ../BHAPI/src/private/drivers
-INCLUDEPATH += ../BHAPI/src/private/debug
-INCLUDEPATH += ../BHAPI/src/private/debugger
-INCLUDEPATH += ../BHAPI/src/private/graphics
-INCLUDEPATH += ../BHAPI/src/private/interface
-INCLUDEPATH += ../BHAPI/src/private/input
-INCLUDEPATH += ../BHAPI/src/private/kernel
-INCLUDEPATH += ../BHAPI/src/private/locale
-INCLUDEPATH += ../BHAPI/src/private/mail
-INCLUDEPATH += ../BHAPI/src/private/media
-INCLUDEPATH += ../BHAPI/src/private/midi
-INCLUDEPATH += ../BHAPI/src/private/midi2
-INCLUDEPATH += ../BHAPI/src/private/net
-INCLUDEPATH += ../BHAPI/src/private/package
-INCLUDEPATH += ../BHAPI/src/private/shared
-INCLUDEPATH += ../BHAPI/src/private/storage
-INCLUDEPATH += ../BHAPI/src/private/support
-INCLUDEPATH += ../BHAPI/src/private/system
-INCLUDEPATH += ../BHAPI/src/private/fs_shell
-INCLUDEPATH += ../BHAPI/src/private/tracker
-INCLUDEPATH += ../BHAPI/src/private/translation
+INCLUDEPATH += ../BHAPI/src/private/libs
 INCLUDEPATH += ../BHAPI/src/libs
+INCLUDEPATH += ../BHAPI/src/private/libs/fs_shell
+INCLUDEPATH += ../BHAPI/src/private/libs/freetype
+INCLUDEPATH += ../BHAPI/src/private/drivers
+INCLUDEPATH += ../BHAPI/src/private/drivers/graphics
+INCLUDEPATH += ../BHAPI/src/private/kits/app
+INCLUDEPATH += ../BHAPI/src/private/kits/audio
+INCLUDEPATH += ../BHAPI/src/private/kits/binary_compatbility
+INCLUDEPATH += ../BHAPI/src/private/kits/device
+INCLUDEPATH += ../BHAPI/src/private/kits/debug
+INCLUDEPATH += ../BHAPI/src/private/kits/debugger
+INCLUDEPATH += ../BHAPI/src/private/kits/interface
+INCLUDEPATH += ../BHAPI/src/private/kits/input
+INCLUDEPATH += ../BHAPI/src/private/kits/kernel
+INCLUDEPATH += ../BHAPI/src/private/kits/locale
+INCLUDEPATH += ../BHAPI/src/private/kits/mail
+INCLUDEPATH += ../BHAPI/src/private/kits/media
+INCLUDEPATH += ../BHAPI/src/private/kits/midi
+INCLUDEPATH += ../BHAPI/src/private/kits/midi2
+INCLUDEPATH += ../BHAPI/src/private/kits/net
+INCLUDEPATH += ../BHAPI/src/private/kits/package
+INCLUDEPATH += ../BHAPI/src/private/kits/shared
+INCLUDEPATH += ../BHAPI/src/private/kits/storage
+INCLUDEPATH += ../BHAPI/src/private/kits/support
+INCLUDEPATH += ../BHAPI/src/private/kits/tracker
+INCLUDEPATH += ../BHAPI/src/private/kits/translation
+INCLUDEPATH += ../BHAPI/src/private/kits/textencoding
+INCLUDEPATH += ../BHAPI/src/private/os
 #INCLUDEPATH += ../musl
 #INCLUDEPATH += ../musl/arch/i386
 #INCLUDEPATH += ../musl/arch/generic
@@ -100,7 +104,7 @@ INCLUDEPATH += ../BHAPI/src/libs/lz4/include
 INCLUDEPATH += ../BHAPI/src/libs/freetype/include
 INCLUDEPATH += ../BHAPI/src/libs/zlib/include
 INCLUDEPATH += ../BHAPI/src/wrappers/beos
-INCLUDEPATH += ../BHAPI/src/wrappers/beos/ui
+INCLUDEPATH += ../BHAPI/src/wrappers/os/ui
 INCLUDEPATH += ../BHAPI/src/wrappers/macos
 INCLUDEPATH += ../BHAPI/src/wrappers/macos/carbon
 INCLUDEPATH += ../BHAPI/src/wrappers/win32
@@ -150,8 +154,8 @@ SOURCES += \
 #    src/kits/app/MessageQueue.cpp \
 #    src/kits/app/MessageRunner.cpp \
 #    src/kits/app/Messenger.cpp \
-#    src/kits/kernel/Debug.cpp \
-    src/kits/kernel/Memory.cpp \
+#    src/os/Debug.cpp \
+    src/private/os/memory_private.cpp \
 #    src/kits/net/NetAddress.cpp \
 #    src/kits/net/NetBuffer.cpp \
 #    src/kits/net/NetDebug.cpp \
@@ -209,23 +213,22 @@ SOURCES += \
 #    src/kits/support/JobQueue.cpp \
 #    src/kits/support/Referenceable.cpp \
 #    src/kits/support/StopWatch.cpp \
-#    src/kits/support/ByteOrder.cpp \
-#    src/kits/support/StringArray.cpp \
-#    src/kits/support/StringList.cpp \
+    src/kits/support/ByteOrder.cpp \
+    src/kits/support/StringArray.cpp \
+    src/kits/support/StringList.cpp \
 #    src/kits/support/StandardIO.cpp \
-#    src/kits/support/UTF8.cpp \
-#    src/private/app/MessageBody.cpp \
-#    src/private/app/PrivateApplication.cpp \
-#    src/private/app/PrivateHandler.cpp \
+    src/kits/support/UTF8.cpp \
 #    src/private/support/Object.cpp \
 #    src/private/support/Token.cpp \
-#    src/private/support/StringPrivate.cpp \
+    src/private/kits/support/StringPrivate.cpp \
 #    src/private/support/CompressionAlgorithm.cpp \
 #    src/private/support/ZlibCompressionAlgorithm.cpp \
 #    src/private/support/Uuid.cpp \
 #    src/private/support/DataPositionIOWrapper.cpp \
-#    src/kits/support/StringClass.cpp \
-#    src/kits/kernel/Kernel.cpp \
+#    src/private/app/MessageBody.cpp \
+#    src/private/app/PrivateApplication.cpp \
+#    src/private/app/PrivateHandler.cpp \
+    src/os/kernel.cpp \
 #    src/kits/app/AppDefs.cpp \
 #    src/kits/app/AppMisc.cpp \
 #    src/kits/app/AppServerLink.cpp \
@@ -251,15 +254,15 @@ SOURCES += \
 #    src/kits/app/ServerMemoryAllocator.cpp \
 #    src/kits/app/TokenSpace.cpp \
 #    src/kits/app/TypeConstants.cpp \
-##    src/kits/bluetooth/UI/ConnectionIncoming.cpp \
-##    src/kits/bluetooth/UI/PincodeWindow.cpp \
-##    src/kits/bluetooth/CommandManager.cpp \
-##    src/kits/bluetooth/DeviceClass.cpp \
-##    src/kits/bluetooth/DiscoveryAgent.cpp \
-##    src/kits/bluetooth/DiscoveryListener.cpp \
-##    src/kits/bluetooth/KitSupport.cpp \
-##    src/kits/bluetooth/LocalDevice.cpp \
-##    src/kits/bluetooth/RemoteDevice.cpp \
+#    src/kits/bluetooth/UI/ConnectionIncoming.cpp \
+#    src/kits/bluetooth/UI/PincodeWindow.cpp \
+#    src/kits/bluetooth/CommandManager.cpp \
+#    src/kits/bluetooth/DeviceClass.cpp \
+#    src/kits/bluetooth/DiscoveryAgent.cpp \
+#    src/kits/bluetooth/DiscoveryListener.cpp \
+#    src/kits/bluetooth/KitSupport.cpp \
+#    src/kits/bluetooth/LocalDevice.cpp \
+#    src/kits/bluetooth/RemoteDevice.cpp \
 #    src/kits/debug/debug_support.cpp \
 #    src/kits/debug/DebugContext.cpp \
 #    src/kits/debug/DebugEventStream.cpp \
@@ -988,12 +991,14 @@ SOURCES += \
 #    src/kits/storage/Statable.cpp \
 #    src/kits/storage/storage_support.cpp \
 #    src/kits/storage/SymLink.cpp \
+    src/kits/support/StringClass.cpp \
 #    src/kits/support/ArchivingManagers.cpp \
 #    src/kits/support/PointerList.cpp \
-##    src/kits/textencoding/character_sets.cpp \
-##    src/kits/textencoding/CharacterSet.cpp \
-#    src/kits/textencoding/CharacterSetRoster.cpp \
-#    src/kits/textencoding/utf8_conversions.cpp \
+    src/private/kits/textencoding/character_sets.cpp \
+    src/private/kits/textencoding/CharacterSet.cpp \
+#    src/private/kits/textencoding/CharacterSetRoster.cpp \
+    src/kits/textencoding/utf8_conversions.cpp \
+    src/kits/textencoding/utf8_functions.cpp \
 #    src/kits/tracker/AttributeStream.cpp \
 #    src/kits/tracker/AutoMounterSettings.cpp \
 #    src/kits/tracker/BackgroundImage.cpp \
@@ -1169,8 +1174,7 @@ SOURCES += \
 #    src/os/function_remapper.cpp \
 #    src/os/image.cpp \
 #    src/os/launch.cpp \
-#    src/os/memory.cpp \
-#    src/os/misc.cpp \
+#    src/private/os/memory_private.cpp \
 #    src/os/parsedate.cpp \
 #    src/os/syscalls.cpp \
 #    src/os/system_info.cpp \
@@ -1190,6 +1194,7 @@ SOURCES += \
 #    src/os/thread.c \
 #    src/wrappers/BHAPI_wrapper_port.cpp
 
+
 HEADERS +=  \
     bhapi.h \
     bhapi_global.h \
@@ -1200,7 +1205,7 @@ HEADERS +=  \
 #    src/kits/NetKit.h \
 #    src/kits/RenderKit.h \
 #    src/kits/StorageKit.h \
-#    src/kits/SupportKit.h \
+    src/kits/SupportKit.h \
 #    src/kits/XmlKit.h \
 #    src/kits/add-ons/font/FontEngine.h \
 #    src/kits/add-ons/graphics/GraphicsEngine.h \
@@ -1256,8 +1261,8 @@ HEADERS +=  \
 #    src/kits/interface/View.h \
 #    src/kits/interface/ViewPrivate.h \
 #    src/kits/interface/Window.h \
-#    src/kits/kernel/Debug.h \
-#    src/kits/kernel/Kernel.h \
+#    src/os/Debug.h \
+#    src/os/kernel.h \
 #    src/kits/net/NetAddress.h \
 #    src/kits/net/NetBuffer.h \
 #    src/kits/net/NetDebug.h \
@@ -1282,12 +1287,12 @@ HEADERS +=  \
 #    src/kits/support/List.h \
 #    src/kits/support/ClassInfo.h \
 #    src/kits/support/DataIO.h \
-#    src/kits/support/Errors.h \
+    src/kits/support/Errors.h \
 #    src/kits/support/Flattenable.h \
 #    src/kits/support/Locker.h \
 #    src/kits/support/SimpleLocker.h \
 #    src/kits/support/StreamIO.h \
-#    src/kits/support/SupportDefs.h \
+    src/kits/support/SupportDefs.h \
 #    src/kits/support/Beep.h \
 #    src/kits/support/BlockCache.h \
 #    src/kits/support/BufferedDataIO.h \
@@ -1300,14 +1305,14 @@ HEADERS +=  \
 #    src/kits/support/StandardIO.h \
 #    src/kits/support/StopWatch.h \
 #    src/kits/support/TLS.h \
-#    src/kits/support/UTF8.h \
+    src/kits/support/UTF8.h \
 #    src/kits/support/Architecture.h \
-#    src/kits/support/StringArray.h \
-#    src/kits/support/StringList.h \
+    src/kits/support/StringArray.h \
+    src/kits/support/StringList.h \
 #
-    src/private/app/MessageBody.h \
-    src/private/support/Object.h \
-    src/private/app/PrivateApplication.h \
+#    src/private/app/MessageBody.h \
+#    src/private/support/Object.h \
+#    src/private/app/PrivateApplication.h \
 #    src/private/app/PrivateHandler.h \
 #    src/kits/add-ons/graphics/Accelerant.h \
 #    src/kits/add-ons/graphics/GraphicsCard.h \
@@ -1323,8 +1328,8 @@ HEADERS +=  \
 #    src/kits/add-ons/registrar/MimeSnifferAddon.h \
 #    src/kits/add-ons/screen_saver/ScreenSaver.h \
 #    src/kits/add-ons/tracker/TrackerAddOn.h \
- #   src/kits/app/Key.h \
- #   src/kits/app/KeyStore.h \
+#    src/kits/app/Key.h \
+#    src/kits/app/KeyStore.h \
 #    src/kits/app/link_message.h \
 #    src/kits/app/Notification.h \
 #    src/kits/app/PropertyInfo.h \
@@ -1455,7 +1460,7 @@ HEADERS +=  \
 #    src/kits/drivers/pcmcia/ftl.h \
 #    src/kits/drivers/pcmcia/k_compat.h \
 #    src/kits/drivers/pcmcia/mem_op.h \
-#    src/kits/drivers/pcmcia/memory.h \
+#    src/kits/drivers/pcmcia/memory_private.h \
 #    src/kits/drivers/pcmcia/ss.h \
 #    src/kits/drivers/pcmcia/version.h \
 #    src/kits/drivers/tty/tty_module.h \
@@ -1595,17 +1600,17 @@ HEADERS +=  \
 #    src/kits/interface/TwoDimensionalLayout.h \
 #    src/kits/interface/UnicodeBlockObjects.h \
 #    src/kits/interface/ViewLayoutItem.h \
-#    src/kits/kernel/debugger.h \
-#    src/kits/kernel/elf.h \
-#    src/kits/kernel/fs_attr.h \
-#    src/kits/kernel/fs_index.h \
-#    src/kits/kernel/fs_info.h \
-#    src/kits/kernel/fs_query.h \
-#    src/kits/kernel/fs_volume.h \
-    src/kits/kernel/Memory.h \
-    src/kits/kernel/OS.h \
-    src/kits/kernel/Scheduler.h \
-    src/kits/kernel/Image.h \
+#    src/os/debugger.h \
+#    src/os/elf.h \
+#    src/os/fs_attr.h \
+#    src/os/fs_index.h \
+#    src/os/fs_info.h \
+#    src/os/fs_query.h \
+#    src/os/fs_volume.h \
+    src/private/os/memory_private.h \
+    src/os/OS.h \
+    src/os/scheduler.h \
+    src/os/image.h \
     src/private/kernel/Memory.h \
 #    src/kits/locale/tools/CollectingCatalog.h \
 #    src/kits/locale/Catalog.h \
@@ -1885,11 +1890,14 @@ HEADERS +=  \
 #    src/kits/storage/SymLink.h \
 #    src/kits/support/ArchivingManagers.h \
 #    src/kits/support/Debug.h \
-#    src/private/support/Token.h \
-    src/private/support/StringPrivate.h \
-#    src/kits/support/StringClass.h \
+#    src/private/kits/support/Token.h \
+    src/private/kits/support/StringPrivate.h \
+    src/kits/support/StringClass.h \
 #    src/kits/support/parsedate.h \
-#    src/kits/textencoding/character_sets.h \
+    src/kits/textencoding/utf8_functions.h \
+    src/private/kits/textencoding/CharacterSet.h \
+    src/private/kits/textencoding/CharacterSetRoster.h \
+    src/private/kits/textencoding/character_sets.h \
 #    src/kits/tracker/Attributes.h \
 #    src/kits/tracker/AttributeStream.h \
 #    src/kits/tracker/Background.h \
@@ -1991,7 +1999,7 @@ HEADERS +=  \
 #    src/os/remapped_functions.h \
 #    src/os/fs_node_ref.h \
 #    src/os/fs_path_buffer.h \
-    src/private/system/elf_private.h
+    src/private/os/elf_private.h
 
 LIBS -= -lfreetype
 LIBS += -L"../freetype/lib/debug" -libfreetype
@@ -2017,7 +2025,7 @@ contains(QMAKE_COMPILER_DEFINES, __INTEL__) {
 #    src/kits/debugger/arch/x86/CpuStateX86.h
 INCLUDEPATH += src/kits/arch/x86
 INCLUDEPATH += src/kits/debugger/arch/x86
-#INCLUDEPATH += src/private/system/arch/x86
+#INCLUDEPATH += src/private/os/arch/x86
 #INCLUDEPATH += src/libs/musl
 #INCLUDEPATH += src/libs/musl/arch/x86
 }
@@ -2084,20 +2092,20 @@ contains(QMAKE_COMPILER_DEFINES, __ARM__) {
 }
 
 contains(QMAKE_COMPILER_DEFINES, BEOS) {
-#SOURCES +=  src/wrappers/beos/BHAPI_wrapper_application.cpp \
-#    src/wrappers/beos/BHAPI_wrapper_area.cpp \
-#    src/wrappers/beos/BHAPI_wrapper_image.cpp \
-#    src/wrappers/beos/BHAPI_wrapper_os.cpp \
-#    src/wrappers/beos/BHAPI_wrapper_timefuncs.cpp \
-#    src/wrappers/beos/BHAPI_wrapper_locker.cpp \
-#    src/wrappers/beos/BHAPI_wrapper_semaphore.cpp \
-#    src/wrappers/beos/BHAPI_wrapper_thread.cpp \
-#    src/wrappers/beos/ui/BHAPI_wrapper_beos-font.cpp \
-#    src/wrappers/beos/ui/BHAPI_wrapper_drawing.cpp \
-#    src/wrappers/beos/ui/BHAPI_wrapper_pixmap.cpp \
-#    src/wrappers/beos/ui/BHAPI_wrapper_window.cpp
+#SOURCES +=  src/wrappers/os/BHAPI_wrapper_application.cpp \
+#    src/wrappers/os/BHAPI_wrapper_area.cpp \
+#    src/wrappers/os/BHAPI_wrapper_image.cpp \
+#    src/wrappers/os/BHAPI_wrapper_os.cpp \
+#    src/wrappers/os/BHAPI_wrapper_timefuncs.cpp \
+#    src/wrappers/os/BHAPI_wrapper_locker.cpp \
+#    src/wrappers/os/BHAPI_wrapper_semaphore.cpp \
+#    src/wrappers/os/BHAPI_wrapper_thread.cpp \
+#    src/wrappers/os/ui/BHAPI_wrapper_beos-font.cpp \
+#    src/wrappers/os/ui/BHAPI_wrapper_drawing.cpp \
+#    src/wrappers/os/ui/BHAPI_wrapper_pixmap.cpp \
+#    src/wrappers/os/ui/BHAPI_wrapper_window.cpp
 
-HEADERS += src/wrappers/beos/ui/BHAPI_wrapper_beos-graphics.h
+HEADERS += src/wrappers/os/ui/BHAPI_wrapper_beos-graphics.h
 }
 
 contains(QMAKE_COMPILER_DEFINES, WIN32) {
@@ -2121,37 +2129,37 @@ LIBS += -lws2_32 -lwsock32 -lwinmm -limm32 -lole32 -loleaut32
 }
 
 contains(QMAKE_COMPILER_DEFINES, LINUX) {
-SOURCES += src/wrappers/posix/X11/BHAPI_wrapper_application.cpp \
-    src/wrappers/posix/X11/BHAPI_wrapper_drawing.cpp \
-    src/wrappers/posix/X11/BHAPI_wrapper_pixmap.cpp \
-    src/wrappers/posix/X11/BHAPI_wrapper_window.cpp \
-    src/wrappers/posix/X11/BHAPI_wrapper_x11-font.cpp \
-    src/wrappers/posix/BHAPI_wrapper_locker.cpp \
-    src/wrappers/posix/BHAPI_wrapper_semaphore-mach.cpp \
-    src/wrappers/posix/BHAPI_wrapper_semaphore-umtx.cpp \
-    src/wrappers/posix/BHAPI_wrapper_semaphore.cpp \
-    src/wrappers/posix/BHAPI_wrapper_thread.cpp \
-    src/wrappers/posix/BHAPI_wrapper_area.cpp \
-    src/wrappers/posix/BHAPI_wrapper_image.cpp \
-    src/wrappers/posix/BHAPI_wrapper_os.cpp \
-    src/wrappers/posix/BHAPI_wrapper_timefuncs.cpp
+#SOURCES += src/wrappers/posix/X11/BHAPI_wrapper_application.cpp \
+#    src/wrappers/posix/X11/BHAPI_wrapper_drawing.cpp \
+#    src/wrappers/posix/X11/BHAPI_wrapper_pixmap.cpp \
+#    src/wrappers/posix/X11/BHAPI_wrapper_window.cpp \
+#    src/wrappers/posix/X11/BHAPI_wrapper_x11-font.cpp \
+#    src/wrappers/posix/BHAPI_wrapper_locker.cpp \
+#    src/wrappers/posix/BHAPI_wrapper_semaphore-mach.cpp \
+#    src/wrappers/posix/BHAPI_wrapper_semaphore-umtx.cpp \
+#    src/wrappers/posix/BHAPI_wrapper_semaphore.cpp \
+#    src/wrappers/posix/BHAPI_wrapper_thread.cpp \
+#    src/wrappers/posix/BHAPI_wrapper_area.cpp \
+#    src/wrappers/posix/BHAPI_wrapper_image.cpp \
+#    src/wrappers/posix/BHAPI_wrapper_os.cpp \
+#    src/wrappers/posix/BHAPI_wrapper_timefuncs.cpp
 
-HEADERS +=     src/wrappers/posix/X11/BHAPI_wrapper_x11.h
+#HEADERS +=     src/wrappers/posix/X11/BHAPI_wrapper_x11.h
 }
 
 contains(QMAKE_COMPILER_DEFINES, DIRECTFB) {
-SOURCES +=    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_application.cpp \
-    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_dfb-font.cpp \
-    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_drawing.cpp \
-    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_pixmap.cpp \
-    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_window.cpp \
-    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_wm.cpp
+#SOURCES +=    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_application.cpp \
+#    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_dfb-font.cpp \
+#    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_drawing.cpp \
+#    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_pixmap.cpp \
+#    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_window.cpp \
+#    src/wrappers/posix/DIRECTFB/BHAPI_wrapper_wm.cpp
 
-HEADERS += src/wrappers/posix/DIRECTFB/BHAPI_wrapper_dfb.h
+#HEADERS += src/wrappers/posix/DIRECTFB/BHAPI_wrapper_dfb.h
 }
 
 contains(QMAKE_COMPILER_DEFINES, MACOS) {
-HEADERS += src/kits/interface/carbon/BHAPI_wrapper_carbon.h
+#HEADERS += src/kits/interface/carbon/BHAPI_wrapper_carbon.h
 }
 
 contains(QMAKE_COMPILER_DEFINES, __GNUC__) {
@@ -2231,7 +2239,6 @@ QMAKE_LFLAGS += -Wno-error=unused-command-line-argument-hard-error-in-future
     }
 
 }
-
 
 unix {
     target.path = /usr/lib

@@ -3,30 +3,25 @@
  * Distributed under the terms of the MIT License.
  */
 
-#ifndef IMAGE_H
-#define IMAGE_H
+#ifndef BEOS_DEBUG_IMAGE_H
+#define BEOS_DEBUG_IMAGE_H
 
-
-
-#include <elf_private.h>
-#include <image.h>
 #include <kernel/OS.h>
-
 #include <util/DoublyLinkedList.h>
+#include <elf_private.h>
 
-
+#ifdef __cplusplus
+namespace bhapi {
 struct image_t;
 struct runtime_loader_debug_area;
-
-
-namespace BPrivate {
-namespace Debug {
-
-
+}
+#endif
+#ifdef __cplusplus
+namespace BPrivate { namespace Debug {
 class Image : public DoublyLinkedListLinkImpl<Image> {
 public:
                                 Image();
-    virtual						~Image();
+    virtual					~Image();
 
             const bhapi::image_info&	Info() const		{ return fInfo; }
             bhapi::image_id			ID() const			{ return fInfo.id; }
@@ -45,7 +40,6 @@ public:
                                     size_t* _symbolNameLen,
                                     addr_t* _symbolAddress, size_t* _symbolSize,
                                     int32* _symbolType) const = 0;
-
     virtual	status_t			GetSymbol(const char* name, int32 symbolType,
                                     void** _symbolLocation, size_t* _symbolSize,
                                     int32* _symbolType) const;
@@ -53,7 +47,6 @@ public:
 protected:
             bhapi::image_info			fInfo;
 };
-
 
 class SymbolTableBasedImage : public Image {
 public:
@@ -125,9 +118,6 @@ public:
 
 }	// namespace Debug
 }	// namespace BPrivate
-
-
 using BPrivate::Debug::ImageFile;
-
-
-#endif	// IMAGE_H
+#endif  // C++
+#endif	// BEOS_DEBUG_IMAGE_H

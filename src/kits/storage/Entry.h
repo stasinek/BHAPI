@@ -30,8 +30,8 @@
 #ifndef BHAPI_ENTRY_H
 #define BHAPI_ENTRY_H
 
-#include "Path.h"
-#include "Statable.h"
+#include <Path.h>
+#include <Statable.h>
 #include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */

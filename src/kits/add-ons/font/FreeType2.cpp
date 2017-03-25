@@ -522,7 +522,7 @@ BHAPI_EXPORT bool b_update_freetype2_font_families(bool check_only)
 #ifdef _WIN32
         fonts_dirs = "C:\\Progra~1\\freetype";
 #elif defined(BHAPI_OS_BEOS)
-        fonts_dirs = "/boot/beos/etc/fonts/ttfonts";
+        fonts_dirs = "/boot/os/etc/fonts/ttfonts";
         BHAPI_WARNING("[FONT]: you can set the environment \"FREETYPB_FONTS_DIR\" to match the correct dirs.");
 #else
         fonts_dirs = "/usr/share/fonts/freetype";

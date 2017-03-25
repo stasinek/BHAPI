@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -26,164 +26,164 @@
  * File: ByteOrder.c
  *
  * --------------------------------------------------------------------------*/
+#include <ByteOrder.h>
+#include <Errors.h>
+//-----------------------------------------------------------------------------
 
-#include "ByteOrder.h"
-#include "../support/Errors.h"
-
-BHAPI_IMPEXP status_t b_swap_data(type_code type, void *_data, size_t len, bhapi::swap_action action)
+BHAPI_IMPEXP status_t bhapi::swap_data(type_code type, void *_data, size_t len, swap_action action)
 {
-	status_t retVal = B_BAD_VALUE;
+    status_t retVal = B_BAD_VALUE;
 
-	if(_data == NULL || len == 0) return B_BAD_VALUE;
+    if(_data == NULL || len == 0) return B_BAD_VALUE;
 
-	switch(action)
-	{
+    switch(action)
+    {
 #ifdef BHAPI_LITTLE_ENDIAN
-		case B_SWAP_HOST_TO_LENDIAN:
-		case B_SWAP_LENDIAN_TO_HOST:
+        case B_SWAP_HOST_TO_LENDIAN:
+        case B_SWAP_LENDIAN_TO_HOST:
 #else
-		case B_SWAP_HOST_TO_BENDIAN:
-		case B_SWAP_BENDIAN_TO_HOST:
+        case B_SWAP_HOST_TO_BENDIAN:
+        case B_SWAP_BENDIAN_TO_HOST:
 #endif
-			return B_OK;
+            return B_OK;
 
-		default:
-			break;
-	}
+        default:
+            break;
+    }
 
-	switch(type)
-	{
-		case B_BOOL_TYPE:
-		case B_INT8_TYPE:
-		case B_UINT8_TYPE:
-		case B_CHAR_TYPE:
-		case B_STRING_TYPE:
-		case B_MIME_TYPE:
-			retVal = B_OK;
-			break;
+    switch(type)
+    {
+        case B_BOOL_TYPE:
+        case B_INT8_TYPE:
+        case B_UINT8_TYPE:
+        case B_CHAR_TYPE:
+        case B_STRING_TYPE:
+        case B_MIME_TYPE:
+            retVal = B_OK;
+            break;
 
-		case B_INT16_TYPE:
-		case B_UINT16_TYPE:
-			if(len % 2 == 0)
-			{
-				__be_uint16 *data = (__be_uint16*)_data;
-				for(len = len / 2; len > 0; len--, data++) *data = B_SWAP_INT16(*data);
-				retVal = B_OK;
-			}
-			break;
+        case B_INT16_TYPE:
+        case B_UINT16_TYPE:
+            if(len % 2 == 0)
+            {
+                __be_uint16 *data = (__be_uint16*)_data;
+                for(len = len / 2; len > 0; len--, data++) *data = B_SWAP_INT16(*data);
+                retVal = B_OK;
+            }
+            break;
 
-		case B_INT32_TYPE:
-		case B_UINT32_TYPE:
-			if(len % 4 == 0)
-			{
-				__be_uint32 *data = (__be_uint32*)_data;
-				for(len = len / 4; len > 0; len--, data++) *data = B_SWAP_INT32(*data);
-				retVal = B_OK;
-			}
-			break;
+        case B_INT32_TYPE:
+        case B_UINT32_TYPE:
+            if(len % 4 == 0)
+            {
+                __be_uint32 *data = (__be_uint32*)_data;
+                for(len = len / 4; len > 0; len--, data++) *data = B_SWAP_INT32(*data);
+                retVal = B_OK;
+            }
+            break;
 
-		case B_INT64_TYPE:
-		case B_UINT64_TYPE:
-			if(len % 8 == 0)
-			{
-				__be_uint64 *data = (__be_uint64*)_data;
-				for(len = len / 8; len > 0; len--, data++) *data = B_SWAP_INT64(*data);
-				retVal = B_OK;
-			}
-			break;
+        case B_INT64_TYPE:
+        case B_UINT64_TYPE:
+            if(len % 8 == 0)
+            {
+                __be_uint64 *data = (__be_uint64*)_data;
+                for(len = len / 8; len > 0; len--, data++) *data = B_SWAP_INT64(*data);
+                retVal = B_OK;
+            }
+            break;
 
 #if SIZEOF_FLOAT == 4
-		case B_FLOAT_TYPE:
-		case B_RECT_TYPE:
-		case B_POINT_TYPE:
-			if(len % 4 == 0)
-			{
-				float *data = (float*)_data;
-				for(len = len / 4; len > 0; len--, data++) *data = B_SWAP_FLOAT(*data);
-				retVal = B_OK;
-			}
-			break;
+        case B_FLOAT_TYPE:
+        case B_RECT_TYPE:
+        case B_POINT_TYPE:
+            if(len % 4 == 0)
+            {
+                float *data = (float*)_data;
+                for(len = len / 4; len > 0; len--, data++) *data = B_SWAP_FLOAT(*data);
+                retVal = B_OK;
+            }
+            break;
 #endif
 
 #if SIZEOF_DOUBLE == 8
-		case B_DOUBLE_TYPE:
-			if(len % 8 == 0)
-			{
-				double *data = (double*)_data;
-				for(len = len / 8; len > 0; len--, data++) *data = B_SWAP_DOUBLE(*data);
-				retVal = B_OK;
-			}
-			break;
+        case B_DOUBLE_TYPE:
+            if(len % 8 == 0)
+            {
+                double *data = (double*)_data;
+                for(len = len / 8; len > 0; len--, data++) *data = B_SWAP_DOUBLE(*data);
+                retVal = B_OK;
+            }
+            break;
 #endif
 
-		default:
-			/* TODO: other types */
-			break;
-	}
+        default:
+            /* TODO: other types */
+            break;
+    }
 
-	return retVal;
+    return retVal;
 }
-
+//-----------------------------------------------------------------------------
 
 BHAPI_IMPEXP bool bhapi::is_type_swapped(type_code type)
 {
-	switch(type)
-	{
-		case B_ANY_TYPE:
-		case B_BOOL_TYPE:
-		case B_CHAR_TYPE:
-		case B_DOUBLE_TYPE:
-		case B_FLOAT_TYPE:
-		case B_INT64_TYPE:
-		case B_INT32_TYPE:
-		case B_INT16_TYPE:
-		case B_INT8_TYPE:
-		case B_MESSAGE_TYPE:
-		case B_MESSENGER_TYPE:
-		case B_POINTER_TYPE:
-		case B_SIZE_T_TYPE:
-		case B_be_size_t_TYPE:
-		case B_STRING_TYPE:
-		case B_UINT64_TYPE:
-		case B_UINT32_TYPE:
-		case B_UINT16_TYPE:
-		case B_UINT8_TYPE:
-		case B_POINT_TYPE:
-		case B_RECT_TYPE:
-		case B_MIME_TYPE:
-		case B_UNKNOWN_TYPE:
-			return true;
+    switch(type)
+    {
+        case B_ANY_TYPE:
+        case B_BOOL_TYPE:
+        case B_CHAR_TYPE:
+        case B_DOUBLE_TYPE:
+        case B_FLOAT_TYPE:
+        case B_INT64_TYPE:
+        case B_INT32_TYPE:
+        case B_INT16_TYPE:
+        case B_INT8_TYPE:
+        case B_MESSAGE_TYPE:
+        case B_MESSENGER_TYPE:
+        case B_POINTER_TYPE:
+        case B_SIZE_T_TYPE:
+        case B_SIZE_TYPE:
+        case B_STRING_TYPE:
+        case B_UINT64_TYPE:
+        case B_UINT32_TYPE:
+        case B_UINT16_TYPE:
+        case B_UINT8_TYPE:
+        case B_POINT_TYPE:
+        case B_RECT_TYPE:
+        case B_MIME_TYPE:
+//      case B_UNKNOWN_TYPE:
+            return true;
 
-		default:
-			return false;
-	}
+        default:
+            return false;
+    }
 }
+//-----------------------------------------------------------------------------
 
-
-BHAPI_IMPEXP float b_swap_float(float value)
+BHAPI_IMPEXP float bhapi::__swap_float(float value)
 {
 #if SIZEOF_FLOAT == 4
-	__be_int32 v;
-	memcpy(&v, &value, 4);
-	v = B_SWAP_INT32(v);
-	memcpy(&value, &v, 4);
-	return value;
+    __be_int32 v;
+    memcpy(&v, &value, 4);
+    v = B_SWAP_INT32(v);
+    memcpy(&value, &v, 4);
+    return value;
 #else
-	#error "Unknown"
+    #error "Unknown"
 #endif
 }
+//-----------------------------------------------------------------------------
 
-
-BHAPI_IMPEXP double b_swap_double(double value)
+BHAPI_IMPEXP double bhapi::__swap_double(double value)
 {
 #if SIZEOF_DOUBLE == 8
-	__be_int64 v;
-	memcpy(&v, &value, 8);
-	v = B_SWAP_INT64(v);
-	memcpy(&value, &v, 8);
-	return value;
+    __be_int64 v;
+    memcpy(&v, &value, 8);
+    v = B_SWAP_INT64(v);
+    memcpy(&value, &v, 8);
+    return value;
 #else
-	#error "Unknown"
+    #error "Unknown"
 #endif
 }
-
+//-----------------------------------------------------------------------------

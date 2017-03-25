@@ -135,43 +135,6 @@
 #define B_MAXUINT32 UINT_MAX
 #define B_MAXINT32 INT_MAX
 
-#ifdef __cplusplus
-namespace bhapi {
-#endif /* __cplusplus */
-BHAPI_IMPEXP int32 	atomic_add (int32 *value, int32 addValue);
-// 	Atomically add the value of addValue to value. More...
-BHAPI_IMPEXP int64 	atomic_add64 (int64 *value, int64 addValue);
-// 	Atomically add the value of addValue to value. More...
-BHAPI_IMPEXP int32 	atomic_and (int32 *value, int32 andValue);
-// 	Atomically perform a bitwise AND operation of andValue to the variable andValue. More...
-BHAPI_IMPEXP int64 	atomic_and64 (int64 *value, int64 andValue);
-// 	Atomically perform a bitwise AND operation of andValue to the variable andValue. More...
-BHAPI_IMPEXP int32 	atomic_get (int32 *value);
-// 	Atomically return the value of value. More...
-BHAPI_IMPEXP int64 	atomic_get64 (int64 *value);
-// 	Atomically return the value of value. More...
-BHAPI_IMPEXP int32 	atomic_get_and_set (int32 *value, int32 newValue);
-// 	Atomically set the variable value to newvalue and return the old value. More...
-BHAPI_IMPEXP int64 	atomic_get_and_set64 (int64 *value, int64 newValue);
-// 	Atomically set the variable value to newvalue and return the old value. More...
-BHAPI_IMPEXP int32 	atomic_or (int32 *value, int32 orValue);
-// 	Atomically perform a bitwise OR operation of orValue to the variable andValue. More...
-BHAPI_IMPEXP int64 	atomic_or64 (int64 *value, int64 orValue);
-// 	Atomically perform a bitwise OR operation of orValue to the variable andValue. More...
-BHAPI_IMPEXP void 	atomic_set (int32 *value, int32 newValue);
-// 	Atomically set the variable value to newvalue. More...
-BHAPI_IMPEXP void 	atomic_set64 (int64 *value, int64 newValue);
-// 	Atomically set the variable value to newvalue. More...
-BHAPI_IMPEXP int32 	atomic_test_and_set (int32 *value, int32 newValue, int32 testAgainst);
-// 	Atomically set the variable value to newValue if the current value is testAgainst. More...
-BHAPI_IMPEXP int64 	atomic_test_and_set64 (int64 *value, int64 newValue, int64 testAgainst);
-// 	Atomically set the variable value to newValue if the current value is testAgainst. More...
-BHAPI_IMPEXP void * 	get_stack_frame (void);
-// 	Internal function.
-#ifdef __cplusplus
-} /* namespace */
-#endif /* __cplusplus */
-
 #ifndef _MSC_VER
 #   include <../include/sys/cdefs.h>
 #endif
@@ -181,5 +144,6 @@ BHAPI_IMPEXP void * 	get_stack_frame (void);
 
 #include <SupportDefs.h>
 #include <StorageDefs.h>
+#include <InterfaceDefs.h>
 
 #endif
