@@ -1,0 +1,21 @@
+SubDir HAIKU_TOP src system kernel util ;
+
+UsePrivateHeaders [ FDirName kernel util ] ;
+
+KernelMergeObject kernel_util.o :
+	AVLTreeBase.cpp
+	Bitmap.cpp
+	hostname.cpp
+	inet_addr.c
+	inet_ntop.c
+	kernel_cpp.cpp
+	KernelReferenceable.cpp
+	list.cpp
+	queue.cpp
+	ring_buffer.cpp
+	RadixBitmap.cpp
+	Random.cpp
+	StringHash.cpp
+
+	: $(TARGET_KERNEL_PIC_CCFLAGS) -DUSING_LIBGCC
+;

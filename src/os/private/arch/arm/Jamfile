@@ -1,0 +1,61 @@
+SubDir HAIKU_TOP src system kernel arch arm ;
+
+SubDirHdrs $(SUBDIR) $(DOTDOT) generic ;
+UsePrivateKernelHeaders ;
+UsePrivateHeaders [ FDirName kernel arch $(TARGET_KERNEL_ARCH) board $(TARGET_BOOT_BOARD) ] ;
+
+
+SEARCH_SOURCE += [ FDirName $(SUBDIR) paging ] ;
+SEARCH_SOURCE += [ FDirName $(SUBDIR) paging 32bit ] ;
+SEARCH_SOURCE += [ FDirName $(SUBDIR) $(DOTDOT) generic ] ;
+
+KernelMergeObject kernel_arch_arm.o :
+	arch_commpage.cpp
+	arch_cpu.cpp
+	arch_debug_console.cpp
+	arch_debug.cpp
+	arch_elf.cpp
+	arch_exceptions.S
+	arch_int.cpp
+	arch_platform.cpp
+	arch_real_time_clock.cpp
+	arch_smp.cpp
+	arch_system_info.cpp
+	arch_thread.cpp
+	arch_timer.cpp
+	arch_user_debugger.cpp
+	arch_vm.cpp
+	arch_vm_translation_map.cpp
+	arch_asm.S
+	debug_uart_8250.cpp
+	arch_uart_8250.cpp
+	arch_uart_pl011.cpp
+
+	arch_atomic64.cpp
+	arch_atomic32.cpp
+
+	# SoC minimal kernel-required support
+	# (timers, interrupts, rtc?)
+	soc.cpp
+	soc_pxa.cpp
+	soc_omap3.cpp
+
+	# paging
+	arm_physical_page_mapper_large_memory.cpp
+	ARMPagingMethod.cpp
+	ARMPagingStructures.cpp
+	ARMVMTranslationMap.cpp
+
+	# paging/32bit
+	ARMPagingMethod32Bit.cpp
+	ARMPagingStructures32Bit.cpp
+	ARMVMTranslationMap32Bit.cpp
+
+	:
+	$(TARGET_KERNEL_PIC_CCFLAGS) -Wno-unused
+	:
+
+;
+
+CreateAsmStructOffsetsHeader asm_offsets.h : asm_offsets.cpp ;
+

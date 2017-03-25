@@ -1,0 +1,35 @@
+SubDir HAIKU_TOP src system kernel disk_device_manager ;
+
+SEARCH_SOURCE += [ FDirName $(SUBDIR) jobs ] ;
+SEARCH_SOURCE += [ FDirName $(HAIKU_TOP) src kits storage disk_device ] ;
+	# DiskDeviceTypes.cpp
+
+UsePrivateHeaders [ FDirName kernel boot platform $(TARGET_BOOT_PLATFORM) ] ;
+UsePrivateHeaders [ FDirName kernel disk_device_manager ] ;
+UsePrivateHeaders [ FDirName kernel ] ;
+UsePrivateHeaders [ FDirName kernel fs ] ;
+UsePrivateHeaders [ FDirName kernel util ] ;
+UsePrivateSystemHeaders ;
+UsePrivateHeaders shared ;
+UsePrivateHeaders storage ;
+
+KernelMergeObject kernel_disk_device_manager.o :
+	ddm_userland_interface.cpp
+	disk_device_manager.cpp
+	KDiskDevice.cpp
+	KDiskDeviceManager.cpp
+	KFileDiskDevice.cpp
+	KDiskSystem.cpp
+	KFileSystem.cpp
+	KPartition.cpp
+	KPartitioningSystem.cpp
+	KPartitionListener.cpp
+	KPartitionVisitor.cpp
+	UserDataWriter.cpp
+
+	# disk device types
+	DiskDeviceTypes.cpp
+
+	: $(TARGET_KERNEL_PIC_CCFLAGS)
+;
+

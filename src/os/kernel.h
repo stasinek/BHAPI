@@ -633,5 +633,6 @@ BHAPI_IMPEXP status_t	unload_addon(void *image);
 #ifdef __cplusplus
 } // namespace bhapi
 #endif
+
 #endif /* BHAPI_KERNEL_H */
 

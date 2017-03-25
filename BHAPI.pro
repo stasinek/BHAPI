@@ -44,7 +44,11 @@ INCLUDEPATH += ../BHAPI/src/kits/bluetooth
 INCLUDEPATH += ../BHAPI/src/kits/debug
 INCLUDEPATH += ../BHAPI/src/kits/debugger
 INCLUDEPATH += ../BHAPI/src/kits/device
-INCLUDEPATH += ../BHAPI/src/drivers
+INCLUDEPATH += ../BHAPI/src/kits/support
+INCLUDEPATH += ../BHAPI/src/kits/tracker
+INCLUDEPATH += ../BHAPI/src/kits/textencoding
+INCLUDEPATH += ../BHAPI/src/kits/translation
+INCLUDEPATH += ../BHAPI/src/kits/xml
 INCLUDEPATH += ../BHAPI/src/kits/game
 INCLUDEPATH += ../BHAPI/src/kits/interface
 INCLUDEPATH += ../BHAPI/src/kits/kernel
@@ -60,41 +64,36 @@ INCLUDEPATH += ../BHAPI/src/kits/print
 INCLUDEPATH += ../BHAPI/src/kits/shared
 INCLUDEPATH += ../BHAPI/src/kits/storage
 INCLUDEPATH += ../BHAPI/src/os
-INCLUDEPATH += ../BHAPI/src/kits/support
-INCLUDEPATH += ../BHAPI/src/kits/tracker
-INCLUDEPATH += ../BHAPI/src/kits/textencoding
-INCLUDEPATH += ../BHAPI/src/kits/translation
-INCLUDEPATH += ../BHAPI/src/kits/xml
-INCLUDEPATH += ../BHAPI/src/private
-INCLUDEPATH += ../BHAPI/src/private/libs
 INCLUDEPATH += ../BHAPI/src/libs
-INCLUDEPATH += ../BHAPI/src/private/libs/fs_shell
-INCLUDEPATH += ../BHAPI/src/private/libs/freetype
-INCLUDEPATH += ../BHAPI/src/private/drivers
-INCLUDEPATH += ../BHAPI/src/private/drivers/graphics
-INCLUDEPATH += ../BHAPI/src/private/kits/app
-INCLUDEPATH += ../BHAPI/src/private/kits/audio
-INCLUDEPATH += ../BHAPI/src/private/kits/binary_compatbility
-INCLUDEPATH += ../BHAPI/src/private/kits/device
-INCLUDEPATH += ../BHAPI/src/private/kits/debug
-INCLUDEPATH += ../BHAPI/src/private/kits/debugger
-INCLUDEPATH += ../BHAPI/src/private/kits/interface
-INCLUDEPATH += ../BHAPI/src/private/kits/input
-INCLUDEPATH += ../BHAPI/src/private/kits/kernel
-INCLUDEPATH += ../BHAPI/src/private/kits/locale
-INCLUDEPATH += ../BHAPI/src/private/kits/mail
-INCLUDEPATH += ../BHAPI/src/private/kits/media
-INCLUDEPATH += ../BHAPI/src/private/kits/midi
-INCLUDEPATH += ../BHAPI/src/private/kits/midi2
-INCLUDEPATH += ../BHAPI/src/private/kits/net
-INCLUDEPATH += ../BHAPI/src/private/kits/package
-INCLUDEPATH += ../BHAPI/src/private/kits/shared
-INCLUDEPATH += ../BHAPI/src/private/kits/storage
-INCLUDEPATH += ../BHAPI/src/private/kits/support
-INCLUDEPATH += ../BHAPI/src/private/kits/tracker
-INCLUDEPATH += ../BHAPI/src/private/kits/translation
-INCLUDEPATH += ../BHAPI/src/private/kits/textencoding
-INCLUDEPATH += ../BHAPI/src/private/os
+INCLUDEPATH += ../BHAPI/src/drivers
+INCLUDEPATH += ../BHAPI/src/os/private
+INCLUDEPATH += ../BHAPI/src/drivers/private
+INCLUDEPATH += ../BHAPI/src/drivers/graphics/private
+INCLUDEPATH += ../BHAPI/src/kits/app/private
+INCLUDEPATH += ../BHAPI/src/kits/audio/private
+INCLUDEPATH += ../BHAPI/src/kits/binary_compatbility/private
+INCLUDEPATH += ../BHAPI/src/kits/device/private
+INCLUDEPATH += ../BHAPI/src/kits/debug/private
+INCLUDEPATH += ../BHAPI/src/kits/debugger/private
+INCLUDEPATH += ../BHAPI/src/kits/interface/private
+INCLUDEPATH += ../BHAPI/src/kits/input/private
+INCLUDEPATH += ../BHAPI/src/kits/kernel/private
+INCLUDEPATH += ../BHAPI/src/kits/locale/private
+INCLUDEPATH += ../BHAPI/src/kits/mail/private
+INCLUDEPATH += ../BHAPI/src/kits/media/private
+INCLUDEPATH += ../BHAPI/src/kits/midi/private
+INCLUDEPATH += ../BHAPI/src/kits/midi2/private
+INCLUDEPATH += ../BHAPI/src/kits/net/private
+INCLUDEPATH += ../BHAPI/src/kits/package/private
+INCLUDEPATH += ../BHAPI/src/kits/shared/private
+INCLUDEPATH += ../BHAPI/src/kits/storage/private
+INCLUDEPATH += ../BHAPI/src/kits/support/private
+INCLUDEPATH += ../BHAPI/src/kits/tracker/private
+INCLUDEPATH += ../BHAPI/src/kits/translation/private
+INCLUDEPATH += ../BHAPI/src/kits/textencoding/private
+INCLUDEPATH += ../BHAPI/src/os/private
+INCLUDEPATH += ../BHAPI/src/libs/fs_shell/private
+INCLUDEPATH += ../BHAPI/src/libs/freetype/private
 #INCLUDEPATH += ../musl
 #INCLUDEPATH += ../musl/arch/i386
 #INCLUDEPATH += ../musl/arch/generic
@@ -155,7 +154,7 @@ SOURCES += \
 #    src/kits/app/MessageRunner.cpp \
 #    src/kits/app/Messenger.cpp \
 #    src/os/Debug.cpp \
-    src/private/os/memory_private.cpp \
+    src/os/private/memory_private.cpp \
 #    src/kits/net/NetAddress.cpp \
 #    src/kits/net/NetBuffer.cpp \
 #    src/kits/net/NetDebug.cpp \
@@ -220,7 +219,7 @@ SOURCES += \
     src/kits/support/UTF8.cpp \
 #    src/private/support/Object.cpp \
 #    src/private/support/Token.cpp \
-    src/private/kits/support/StringPrivate.cpp \
+    src/kits/support/private/StringPrivate.cpp \
 #    src/private/support/CompressionAlgorithm.cpp \
 #    src/private/support/ZlibCompressionAlgorithm.cpp \
 #    src/private/support/Uuid.cpp \
@@ -994,9 +993,8 @@ SOURCES += \
     src/kits/support/StringClass.cpp \
 #    src/kits/support/ArchivingManagers.cpp \
 #    src/kits/support/PointerList.cpp \
-    src/private/kits/textencoding/character_sets.cpp \
-    src/private/kits/textencoding/CharacterSet.cpp \
-#    src/private/kits/textencoding/CharacterSetRoster.cpp \
+    src/kits/textencoding/private/CharacterSet.cpp \
+#    src/kits/textencoding/private/CharacterSetRoster.cpp \
     src/kits/textencoding/utf8_conversions.cpp \
     src/kits/textencoding/utf8_functions.cpp \
 #    src/kits/tracker/AttributeStream.cpp \
@@ -1174,7 +1172,7 @@ SOURCES += \
 #    src/os/function_remapper.cpp \
 #    src/os/image.cpp \
 #    src/os/launch.cpp \
-#    src/private/os/memory_private.cpp \
+#    src/os/private/memory_private.cpp \
 #    src/os/parsedate.cpp \
 #    src/os/syscalls.cpp \
 #    src/os/system_info.cpp \
@@ -1262,7 +1260,7 @@ HEADERS +=  \
 #    src/kits/interface/ViewPrivate.h \
 #    src/kits/interface/Window.h \
 #    src/os/Debug.h \
-#    src/os/kernel.h \
+    src/os/kernel.h \
 #    src/kits/net/NetAddress.h \
 #    src/kits/net/NetBuffer.h \
 #    src/kits/net/NetDebug.h \
@@ -1309,7 +1307,6 @@ HEADERS +=  \
 #    src/kits/support/Architecture.h \
     src/kits/support/StringArray.h \
     src/kits/support/StringList.h \
-#
 #    src/private/app/MessageBody.h \
 #    src/private/support/Object.h \
 #    src/private/app/PrivateApplication.h \
@@ -1601,17 +1598,17 @@ HEADERS +=  \
 #    src/kits/interface/UnicodeBlockObjects.h \
 #    src/kits/interface/ViewLayoutItem.h \
 #    src/os/debugger.h \
-#    src/os/elf.h \
+    src/os/elf.h \
 #    src/os/fs_attr.h \
 #    src/os/fs_index.h \
 #    src/os/fs_info.h \
 #    src/os/fs_query.h \
 #    src/os/fs_volume.h \
-    src/private/os/memory_private.h \
+    src/os/private/memory_private.h \
+    src/os/private/kernel_private.h \
     src/os/OS.h \
     src/os/scheduler.h \
     src/os/image.h \
-    src/private/kernel/Memory.h \
 #    src/kits/locale/tools/CollectingCatalog.h \
 #    src/kits/locale/Catalog.h \
 #    src/kits/locale/CatalogData.h \
@@ -1890,14 +1887,13 @@ HEADERS +=  \
 #    src/kits/storage/SymLink.h \
 #    src/kits/support/ArchivingManagers.h \
 #    src/kits/support/Debug.h \
-#    src/private/kits/support/Token.h \
-    src/private/kits/support/StringPrivate.h \
+#    src/kits/support/private/Token.h \
+    src/kits/support/private/StringPrivate.h \
     src/kits/support/StringClass.h \
 #    src/kits/support/parsedate.h \
     src/kits/textencoding/utf8_functions.h \
-    src/private/kits/textencoding/CharacterSet.h \
-    src/private/kits/textencoding/CharacterSetRoster.h \
-    src/private/kits/textencoding/character_sets.h \
+    src/kits/textencoding/private/CharacterSet.h \
+    src/kits/textencoding/private/CharacterSetRoster.h \
 #    src/kits/tracker/Attributes.h \
 #    src/kits/tracker/AttributeStream.h \
 #    src/kits/tracker/Background.h \
@@ -1999,7 +1995,7 @@ HEADERS +=  \
 #    src/os/remapped_functions.h \
 #    src/os/fs_node_ref.h \
 #    src/os/fs_path_buffer.h \
-    src/private/os/elf_private.h
+    src/os/private/elf_private.h
 
 LIBS -= -lfreetype
 LIBS += -L"../freetype/lib/debug" -libfreetype
@@ -2025,7 +2021,7 @@ contains(QMAKE_COMPILER_DEFINES, __INTEL__) {
 #    src/kits/debugger/arch/x86/CpuStateX86.h
 INCLUDEPATH += src/kits/arch/x86
 INCLUDEPATH += src/kits/debugger/arch/x86
-#INCLUDEPATH += src/private/os/arch/x86
+#INCLUDEPATH += src/os/private/arch/x86
 #INCLUDEPATH += src/libs/musl
 #INCLUDEPATH += src/libs/musl/arch/x86
 }

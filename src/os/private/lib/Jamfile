@@ -1,0 +1,142 @@
+SubDir HAIKU_TOP src system kernel lib ;
+
+UsePrivateHeaders shared ;
+UsePrivateHeaders [ FDirName libroot locale ] ;
+
+# force inclusion of kernel_lib.h
+local kernelLibHeader = [ FDirName $(SUBDIR) kernel_lib.h ] ;
+CCFLAGS += -include $(kernelLibHeader) ;
+C++FLAGS += -include $(kernelLibHeader) ;
+
+
+local librootSources = [ FDirName $(HAIKU_TOP) src system libroot ] ;
+local librootOSSources = [ FDirName $(librootSources) os ] ;
+local posixSources = [ FDirName $(librootSources) posix ] ;
+
+
+# kernel libroot os files
+
+local sources =
+	driver_settings.cpp
+	find_directory.cpp
+	fs_info.c
+	system_revision.c
+	wait_for_objects.cpp
+	;
+
+SourceHdrs $(sources) : $(librootOSSources) ;
+
+KernelMergeObject kernel_os_main.o : $(sources)
+	: $(TARGET_KERNEL_PIC_CCFLAGS)
+;
+
+SEARCH on [ FGristFiles $(sources) ]
+	= [ FDirName $(HAIKU_TOP) src system libroot os ] ;
+
+# kernel libroot posix files
+
+SEARCH_SOURCE += [ FDirName $(posixSources) ] ;
+SEARCH_SOURCE += [ FDirName $(posixSources) locale ] ;
+SEARCH_SOURCE += [ FDirName $(posixSources) stdio ] ;
+SEARCH_SOURCE += [ FDirName $(posixSources) stdlib ] ;
+SEARCH_SOURCE += [ FDirName $(posixSources) string ] ;
+SEARCH_SOURCE += [ FDirName $(posixSources) sys ] ;
+SEARCH_SOURCE += [ FDirName $(posixSources) time ] ;
+SEARCH_SOURCE += [ FDirName $(posixSources) unistd ] ;
+
+KernelMergeObject kernel_lib_posix.o :
+	# main
+	kernel_errno.cpp
+	dirent.c
+	fcntl.cpp
+	poll.c
+	utime.c
+	# locale
+	ctype.cpp
+	localeconv.cpp
+	LocaleData.cpp
+	# stdio (this subdir)
+	kernel_vsprintf.cpp
+	# stdlib
+	abs.c
+	atoi.c
+	bsearch.c
+	merge.c
+	qsort.c
+	rand.c
+	random.c
+	strtod.c
+	strtol.c
+	strtoll.c
+	strtoul.c
+	strtoull.c
+	# sys
+	chmod.c
+	stat.c
+	mkdir.c
+	select.c
+	gettimeofday.c
+	uio.c
+	# time
+	time.c
+	# unistd
+	access.c
+	chown.c
+	close.c
+	#conf.c
+	directory.c
+	dup.c
+	ioctl.c
+	link.c
+	lseek.c
+	mount.c
+	read.c
+	sync.c
+	truncate.c
+	usergroup.cpp
+	write.c
+	# string
+	ffs.cpp
+	memchr.c
+	memcmp.c
+	memmove.c
+	strcasecmp.c
+	strcasestr.c
+	strcat.c
+	strchr.c
+	strcmp.c
+	strcpy.c
+	strcspn.c
+	strdup.cpp
+	strerror.c
+	strlcat.c
+	strlcpy.c
+	strlen.cpp
+	strncat.c
+	strncmp.c
+	strncpy.cpp
+	strndup.cpp
+	strnlen.cpp
+	strpbrk.c
+	strrchr.c
+	strspn.c
+	strstr.c
+	strtok.c
+	strupr.c
+
+	: $(TARGET_KERNEL_PIC_CCFLAGS)
+;
+
+# misc
+
+SEARCH_SOURCE = [ FDirName $(HAIKU_TOP) src kits support ] ;
+
+KernelMergeObject kernel_misc.o :
+	DataIO.cpp
+	Referenceable.cpp
+
+	: $(TARGET_KERNEL_PIC_CCFLAGS)
+;
+
+HaikuSubInclude arch $(TARGET_ARCH) ;
+HaikuSubInclude zlib ;

@@ -1,0 +1,26 @@
+SubDir HAIKU_TOP src system kernel device_manager ;
+
+UsePrivateHeaders [ FDirName kernel boot platform $(TARGET_BOOT_PLATFORM) ] ;
+UsePrivateHeaders [ FDirName kernel util ] shared ;
+
+KernelMergeObject kernel_device_manager.o :
+	AbstractModuleDevice.cpp
+	BaseDevice.cpp
+	device_manager.cpp
+	devfs.cpp
+	FileDevice.cpp
+	id_generator.cpp
+	io_resources.cpp
+	legacy_drivers.cpp
+
+	dma_resources.cpp
+	io_requests.cpp
+	IOCache.cpp
+	IOCallback.cpp
+	IORequest.cpp
+	IOScheduler.cpp
+	IOSchedulerRoster.cpp
+	IOSchedulerSimple.cpp
+	:
+	$(TARGET_KERNEL_PIC_CCFLAGS)
+;

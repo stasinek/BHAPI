@@ -1,0 +1,14 @@
+SubDir HAIKU_TOP src system kernel slab ;
+
+
+KernelMergeObject kernel_slab.o :
+	allocator.cpp
+	HashedObjectCache.cpp
+	MemoryManager.cpp
+	ObjectCache.cpp
+	ObjectDepot.cpp
+	Slab.cpp
+	SmallObjectCache.cpp
+
+	: $(TARGET_KERNEL_PIC_CCFLAGS)
+;

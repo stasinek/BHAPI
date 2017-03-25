@@ -1,0 +1,36 @@
+SubDir HAIKU_TOP src system kernel lib arch x86_64 ;
+
+# find the generated asm_offsets.h
+SubDirHdrs [ FDirName $(TARGET_COMMON_DEBUG_OBJECT_DIR_$(TARGET_PACKAGING_ARCH))
+	system kernel arch $(TARGET_KERNEL_ARCH) ] ;
+
+SEARCH_SOURCE += [ FDirName $(SUBDIR) $(DOTDOT) generic ] ;
+
+local librootSources = [ FDirName $(HAIKU_TOP) src system libroot ] ;
+local posixSources = [ FDirName $(librootSources) posix ] ;
+
+SEARCH_SOURCE += [ FDirName $(librootSources) os arch $(TARGET_ARCH) ] ;
+SEARCH_SOURCE += [ FDirName $(librootSources) os arch generic ] ;
+
+KernelMergeObject kernel_os_arch_$(TARGET_ARCH).o :
+	byteorder.S
+	system_time.cpp
+
+	generic_atomic.cpp
+	: $(TARGET_KERNEL_PIC_CCFLAGS)
+;
+
+SEARCH_SOURCE += [ FDirName $(posixSources) arch $(TARGET_ARCH) ] ;
+SEARCH_SOURCE += [ FDirName $(posixSources) string arch $(TARGET_ARCH) ] ;
+
+KernelMergeObject kernel_lib_posix_arch_$(TARGET_ARCH).o :
+	siglongjmp.S
+	sigsetjmp.S
+	kernel_longjmp_return.c
+	kernel_setjmp_save_sigs.c
+
+	arch_string.cpp
+
+	: $(TARGET_KERNEL_PIC_CCFLAGS)
+;
+

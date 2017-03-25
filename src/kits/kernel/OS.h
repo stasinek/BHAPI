@@ -5,8 +5,8 @@
 #include <os/debug.h>
 #include <os/image.h>
 #include <os/scheduler.h>
-#include <os/syscalls.h>
-#include <os/memory_private.h>
+#include <os/private/syscalls.h>
+#include <os/private/memory_private.h>
 
 #endif // BHAPI_OS_H
 

@@ -1,0 +1,24 @@
+SubDir HAIKU_TOP src system kernel fs ;
+
+UsePrivateHeaders [ FDirName kernel disk_device_manager ] ;
+UsePrivateHeaders [ FDirName kernel fs ] ;
+UsePrivateHeaders [ FDirName kernel util ] ;
+UsePrivateHeaders net shared storage ;
+
+UseHeaders [ FDirName $(SUBDIR) $(DOTDOT) device_manager ] ;
+
+KernelMergeObject kernel_fs.o :
+	EntryCache.cpp
+	fd.cpp
+	fifo.cpp
+	KPath.cpp
+	node_monitor.cpp
+	rootfs.cpp
+	socket.cpp
+	Vnode.cpp
+	vfs.cpp
+	vfs_boot.cpp
+	vfs_net_boot.cpp
+
+	: $(TARGET_KERNEL_PIC_CCFLAGS)
+;

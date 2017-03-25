@@ -1,0 +1,12 @@
+SubDir HAIKU_TOP src system kernel cache ;
+
+UseHeaders [ FDirName $(SUBDIR) $(DOTDOT) device_manager ] ;
+
+KernelMergeObject kernel_cache.o :
+	block_cache.cpp
+	file_cache.cpp
+	file_map.cpp
+	vnode_store.cpp
+
+	: $(TARGET_KERNEL_PIC_CCFLAGS)
+;
