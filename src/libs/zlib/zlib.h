@@ -1,4 +1,4 @@
-/* zlib.h -- interface of the 'zlib' general purpose compression library
+﻿/* zlib.h -- interface of the 'zlib' general purpose compression library
   version 1.2.8, April 28th, 2013
 
   Copyright (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -1668,7 +1668,7 @@ ZEXTERN int ZEXPORT inflateBackInit_ OF((z_streamp strm, int windowBits,
 struct gzFile_s {
     unsigned have;
     unsigned char *next;
-    z_off64_t pos;
+    off64_t pos;
 };
 ZEXTERN int ZEXPORT gzgetc_ OF((gzFile file));  /* backward compatibility */
 #ifdef Z_PREFIX_SET
@@ -1688,11 +1688,11 @@ ZEXTERN int ZEXPORT gzgetc_ OF((gzFile file));  /* backward compatibility */
  */
 #ifdef Z_LARGE64
    ZEXTERN gzFile ZEXPORT gzopen64 OF((const char *, const char *));
-   ZEXTERN z_off64_t ZEXPORT gzseek64 OF((gzFile, z_off64_t, int));
-   ZEXTERN z_off64_t ZEXPORT gztell64 OF((gzFile));
-   ZEXTERN z_off64_t ZEXPORT gzoffset64 OF((gzFile));
-   ZEXTERN uLong ZEXPORT adler32_combine64 OF((uLong, uLong, z_off64_t));
-   ZEXTERN uLong ZEXPORT crc32_combine64 OF((uLong, uLong, z_off64_t));
+   ZEXTERN off64_t ZEXPORT gzseek64 OF((gzFile, off64_t, int));
+   ZEXTERN off64_t ZEXPORT gztell64 OF((gzFile));
+   ZEXTERN off64_t ZEXPORT gzoffset64 OF((gzFile));
+   ZEXTERN uLong ZEXPORT adler32_combine64 OF((uLong, uLong, off64_t));
+   ZEXTERN uLong ZEXPORT crc32_combine64 OF((uLong, uLong, off64_t));
 #endif
 
 #if !defined(ZLIB_INTERNAL) && defined(Z_WANT64)

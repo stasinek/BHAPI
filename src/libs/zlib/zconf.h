@@ -1,4 +1,4 @@
-/* zconf.h -- configuration of the zlib compression library
+﻿/* zconf.h -- configuration of the zlib compression library
  * Copyright (C) 1995-2013 Jean-loup Gailly.
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
@@ -482,11 +482,11 @@ typedef uLong FAR uLongf;
 #endif
 
 #if !defined(_WIN32) && defined(Z_LARGE64)
-#  define z_off64_t off64_t
+#  define off64_t off64_t
 #else
 #  if defined(_WIN32) && !defined(__GNUC__) && !defined(Z_SOLO)
-#    define z_off64_t __int64 #  else
-#    define z_off64_t z_off_t
+#    define off64_t __int64 #  else
+#    define off64_t z_off_t
 #  endif
 #endif
 

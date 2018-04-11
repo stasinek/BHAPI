@@ -7,6 +7,8 @@
 #include <os/scheduler.h>
 #include <os/private/syscalls.h>
 #include <os/private/memory_private.h>
+#include <os/thread.h>
+#include <os/elf.h>
 
 #endif // BHAPI_OS_H
 

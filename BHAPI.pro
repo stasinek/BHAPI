@@ -1179,7 +1179,7 @@ SOURCES += \
 #    src/os/time.cpp \
 #    src/os/wait_for_objects.cpp \
 #    src/os/area.c \
-#    src/os/atomic.c \
+    src/os/atomic.c \
 #    src/os/debug.c \
 #    src/os/fs_index.c \
 #    src/os/fs_info.c \
@@ -1351,7 +1351,7 @@ HEADERS +=  \
 #    src/kits/bluetooth/LocalDeviceAddOn.h \
 #    src/kits/bluetooth/RemoteDevice.h \
 #    src/kits/debug/arch/arch_debug_support.h \
-#    src/kits/debug/image.h \
+    src/kits/debug/image.h \
 #    src/kits/debug/SymbolLookup.h \
 #    src/kits/debugger/arch/InstructionInfo.h \
 #    src/kits/debugger/arch/RegisterMap.h \

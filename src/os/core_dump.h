@@ -4,15 +4,11 @@
  *
  * Core dump support.
  */
-#ifndef _KERNEL_CORE_DUMP_H
-#define _KERNEL_CORE_DUMP_H
-
-
+#ifndef BHAPI_KERNEL_CORE_DUMP_H
+#define BHAPI_KERNEL_CORE_DUMP_H
 #include <Haiku.h>
-
 
 status_t	core_dump_write_core_file(const char* path, bool killTeam);
 void		core_dump_trap_thread();
 
-
-#endif	// _KERNEL_CORE_DUMP_H
+#endif	// BHAPI_KERNEL_CORE_DUMP_H

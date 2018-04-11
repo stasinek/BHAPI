@@ -1,4 +1,4 @@
-/* crc32.c -- compute the CRC-32 of a data stream
+﻿/* crc32.c -- compute the CRC-32 of a data stream
  * Copyright (C) 1995-2006, 2010, 2011, 2012 Mark Adler
  * For conditions of distribution and use, see copyright notice in zlib.h
  *
@@ -50,7 +50,7 @@
 local unsigned long gf2_matrix_times OF((unsigned long *mat,
                                          unsigned long vec));
 local void gf2_matrix_square OF((unsigned long *square, unsigned long *mat));
-local uLong crc32_combine_ OF((uLong crc1, uLong crc2, z_off64_t len2));
+local uLong crc32_combine_ OF((uLong crc1, uLong crc2, off64_t len2));
 
 
 #ifdef DYNAMIC_CRC_TABLE
@@ -355,7 +355,7 @@ local void gf2_matrix_square(square, mat)
 local uLong crc32_combine_(crc1, crc2, len2)
     uLong crc1;
     uLong crc2;
-    z_off64_t len2;
+    off64_t len2;
 {
     int n;
     unsigned long row;
@@ -419,7 +419,7 @@ uLong ZEXPORT crc32_combine(crc1, crc2, len2)
 uLong ZEXPORT crc32_combine64(crc1, crc2, len2)
     uLong crc1;
     uLong crc2;
-    z_off64_t len2;
+    off64_t len2;
 {
     return crc32_combine_(crc1, crc2, len2);
 }

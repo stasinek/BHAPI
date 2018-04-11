@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-#include <kernel/OS.h>
+#include <kernel.h>
 #include <syscalls.h>
 #include <memory_private.h>
 #include <stdarg.h>
@@ -14,7 +14,7 @@ extern "C" void debug_printf(const char *format, ...)
 }
 //-----------------------------------------------------------------------------
 
-extern "C" void  ktrace_printf(const char *format, ...)
+extern "C" void ktrace_printf(const char *format, ...)
 {
 }
 //-----------------------------------------------------------------------------
@@ -31,14 +31,14 @@ status_t fs_unmount_volume(const char *path, uint32 flags)
 }
 //-----------------------------------------------------------------------------
 
-int32 atomic_get(vint32 *value)
-{
-    return *value;
-}
-//-----------------------------------------------------------------------------
-
 status_t __get_port_message_info_etc(port_id id, port_message_info *info, size_t infoSize, uint32 flags, bigtime_t timeout)
 {
     return B_ERROR;
+}
+//-----------------------------------------------------------------------------
+
+int32 atomic_get(vint32 *value)
+{
+    return *value;
 }
 //-----------------------------------------------------------------------------

@@ -1,0 +1,15 @@
+CREATE release\libbe.a
+ADDMOD release\bhapi.o
+ADDMOD release\memory_private.o
+ADDMOD release\ByteOrder.o
+ADDMOD release\StringArray.o
+ADDMOD release\StringList.o
+ADDMOD release\UTF8.o
+ADDMOD release\StringPrivate.o
+ADDMOD release\kernel.o
+ADDMOD release\StringClass.o
+ADDMOD release\CharacterSet.o
+ADDMOD release\utf8_conversions.o
+ADDMOD release\utf8_functions.o
+ADDMOD release\atomic.o
+SAVE

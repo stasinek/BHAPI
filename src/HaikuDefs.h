@@ -1,4 +1,4 @@
-﻿#ifndef BHAPI_HAIKU_DEFS_H
+#ifndef BHAPI_HAIKU_DEFS_H
 #define BHAPI_HAIKU_DEFS_H
 
 #include <HaikuConfig.h>
@@ -103,7 +103,7 @@
     STACK_DIRECTION = 0 => direction of growth unknown */
 /* #undef STACK_DIRECTION */
 
-#include <../include/limits.h>
+#include <limits.h>
 
 #ifdef _MSC_VER /* MSC compiler */
 #	ifndef LLONG_MAX
@@ -135,12 +135,15 @@
 #define B_MAXUINT32 UINT_MAX
 #define B_MAXINT32 INT_MAX
 
-#ifndef _MSC_VER
-#   include <../include/sys/cdefs.h>
+// Build on Windows for Windows
+#ifdef WIN32
+#ifndef __clang__
+#include <include/sys/cdefs.h>
 #endif
-#include <../include/stdlib.h>
-#include <../include/stdio.h>
-#include <../include/string.h>
+#include <include/stdlib.h>
+#include <include/stdio.h>
+#include <include/string.h>
+#endif
 
 #include <SupportDefs.h>
 #include <StorageDefs.h>

@@ -130,9 +130,9 @@
 /* provide prototypes for these when building zlib without LFS */
 #if !defined(_LARGEFILE64_SOURCE) || _LFS64_LARGEFILE-0 == 0
     ZEXTERN gzFile ZEXPORT gzopen64 OF((const char *, const char *));
-    ZEXTERN z_off64_t ZEXPORT gzseek64 OF((gzFile, z_off64_t, int));
-    ZEXTERN z_off64_t ZEXPORT gztell64 OF((gzFile));
-    ZEXTERN z_off64_t ZEXPORT gzoffset64 OF((gzFile));
+    ZEXTERN off64_t ZEXPORT gzseek64 OF((gzFile, off64_t, int));
+    ZEXTERN off64_t ZEXPORT gztell64 OF((gzFile));
+    ZEXTERN off64_t ZEXPORT gzoffset64 OF((gzFile));
 #endif
 
 /* default memLevel */
@@ -175,14 +175,14 @@ typedef struct {
     int direct;             /* 0 if processing gzip, 1 if transparent */
         /* just for reading */
     int how;                /* 0: get header, 1: copy, 2: decompress */
-    z_off64_t start;        /* where the gzip data started, for rewinding */
+    off64_t start;        /* where the gzip data started, for rewinding */
     int eof;                /* true if end of input file reached */
     int past;               /* true if read requested past end */
         /* just for writing */
     int level;              /* compression level */
     int strategy;           /* compression strategy */
         /* seek request */
-    z_off64_t skip;         /* amount to skip (already rewound if backwards) */
+    off64_t skip;         /* amount to skip (already rewound if backwards) */
     int seek;               /* true if seek request pending */
         /* error information */
     int err;                /* error code */
@@ -198,12 +198,12 @@ void ZLIB_INTERNAL gz_error OF((gz_statep, int, const char *));
 char ZLIB_INTERNAL *gz_strwinerror OF((DWORD error));
 #endif
 
-/* GT_OFF(x), where x is an unsigned value, is true if x > maximum z_off64_t
-   value -- needed when comparing unsigned to z_off64_t, which is signed
-   (possible z_off64_t types off_t, off64_t, and long are all signed) */
+/* GT_OFF(x), where x is an unsigned value, is true if x > maximum off64_t
+   value -- needed when comparing unsigned to off64_t, which is signed
+   (possible off64_t types off_t, off64_t, and long are all signed) */
 #ifdef INT_MAX
-#  define GT_OFF(x) (sizeof(int) == sizeof(z_off64_t) && (x) > INT_MAX)
+#  define GT_OFF(x) (sizeof(int) == sizeof(off64_t) && (x) > INT_MAX)
 #else
 unsigned ZLIB_INTERNAL gz_intmax OF((void));
-#  define GT_OFF(x) (sizeof(int) == sizeof(z_off64_t) && (x) > gz_intmax())
+#  define GT_OFF(x) (sizeof(int) == sizeof(off64_t) && (x) > gz_intmax())
 #endif

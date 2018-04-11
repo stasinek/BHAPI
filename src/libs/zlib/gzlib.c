@@ -359,13 +359,13 @@ int ZEXPORT gzrewind(file)
 }
 
 /* -- see zlib.h -- */
-z_off64_t ZEXPORT gzseek64(file, offset, whence)
+off64_t ZEXPORT gzseek64(file, offset, whence)
     gzFile file;
-    z_off64_t offset;
+    off64_t offset;
     int whence;
 {
     unsigned n;
-    z_off64_t ret;
+    off64_t ret;
     gz_statep state;
 
     /* get internal structure and check integrity */
@@ -419,7 +419,7 @@ z_off64_t ZEXPORT gzseek64(file, offset, whence)
 
     /* if reading, skip what's in output buffer (one less gzgetc() check) */
     if (state->mode == GZ_READ) {
-        n = GT_OFF(state->x.have) || (z_off64_t)state->x.have > offset ?
+        n = GT_OFF(state->x.have) || (off64_t)state->x.have > offset ?
             (unsigned)offset : state->x.have;
         state->x.have -= n;
         state->x.next += n;
@@ -441,14 +441,14 @@ z_off_t ZEXPORT gzseek(file, offset, whence)
     z_off_t offset;
     int whence;
 {
-    z_off64_t ret;
+    off64_t ret;
 
-    ret = gzseek64(file, (z_off64_t)offset, whence);
+    ret = gzseek64(file, (off64_t)offset, whence);
     return ret == (z_off_t)ret ? (z_off_t)ret : -1;
 }
 
 /* -- see zlib.h -- */
-z_off64_t ZEXPORT gztell64(file)
+off64_t ZEXPORT gztell64(file)
     gzFile file;
 {
     gz_statep state;
@@ -468,17 +468,17 @@ z_off64_t ZEXPORT gztell64(file)
 z_off_t ZEXPORT gztell(file)
     gzFile file;
 {
-    z_off64_t ret;
+    off64_t ret;
 
     ret = gztell64(file);
     return ret == (z_off_t)ret ? (z_off_t)ret : -1;
 }
 
 /* -- see zlib.h -- */
-z_off64_t ZEXPORT gzoffset64(file)
+off64_t ZEXPORT gzoffset64(file)
     gzFile file;
 {
-    z_off64_t offset;
+    off64_t offset;
     gz_statep state;
 
     /* get internal structure and check integrity */
@@ -501,7 +501,7 @@ z_off64_t ZEXPORT gzoffset64(file)
 z_off_t ZEXPORT gzoffset(file)
     gzFile file;
 {
-    z_off64_t ret;
+    off64_t ret;
 
     ret = gzoffset64(file);
     return ret == (z_off_t)ret ? (z_off_t)ret : -1;

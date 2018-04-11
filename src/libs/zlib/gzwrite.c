@@ -8,7 +8,7 @@
 /* Local functions */
 local int gz_init OF((gz_statep));
 local int gz_comp OF((gz_statep, int));
-local int gz_zero OF((gz_statep, z_off64_t));
+local int gz_zero OF((gz_statep, off64_t));
 
 /* Initialize state for writing a gzip file.  Mark initialization by setting
    state->size to non-zero.  Return -1 on failure or 0 on success. */
@@ -132,7 +132,7 @@ local int gz_comp(state, flush)
 /* Compress len zeros to output.  Return -1 on error, 0 on success. */
 local int gz_zero(state, len)
     gz_statep state;
-    z_off64_t len;
+    off64_t len;
 {
     int first;
     unsigned n;
@@ -145,7 +145,7 @@ local int gz_zero(state, len)
     /* compress len zeros (len guaranteed > 0) */
     first = 1;
     while (len) {
-        n = GT_OFF(state->size) || (z_off64_t)state->size > len ?
+        n = GT_OFF(state->size) || (off64_t)state->size > len ?
             (unsigned)len : state->size;
         if (first) {
             memset(state->in, 0, n);

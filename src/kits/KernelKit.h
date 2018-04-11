@@ -29,8 +29,8 @@
 #ifndef B_KERNEL_KIT_H
 #define B_KERNEL_KIT_H
 
-#include "kernel/Debug.h"
-#include "kernel/Kernel.h"
-#include "kernel/Memory.h"
+//#include "kits/kernel/Debug.h"
+#include <kits/kernel/Kernel.h>
+#include <kits/kernel/Memory.h>
 
 #endif

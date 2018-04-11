@@ -2,11 +2,12 @@
  * Copyright 2007-2011, Ingo Weinhold, ingo_weinhold@gmx.de.
  * Distributed under the terms of the MIT License.
  */
-#ifndef _KERNEL_CONDITION_VARIABLE_H
-#define _KERNEL_CONDITION_VARIABLE_H
+#ifndef BHAPI_KERNEL_CONDITION_VARIABLE_H
+#define BHAPI_KERNEL_CONDITION_VARIABLE_H
 
 
 #include <kernel/OS.h>
+#include <thread.h>
 #include <os/thread_types.h>
 #include <debug.h>
 

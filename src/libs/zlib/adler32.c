@@ -1,4 +1,4 @@
-/* adler32.c -- compute the Adler-32 checksum of a data stream
+﻿/* adler32.c -- compute the Adler-32 checksum of a data stream
  * Copyright (C) 1995-2011 Mark Adler
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
@@ -9,7 +9,7 @@
 
 #define local static
 
-local uLong adler32_combine_ OF((uLong adler1, uLong adler2, z_off64_t len2));
+local uLong adler32_combine_ OF((uLong adler1, uLong adler2, off64_t len2));
 
 #define BASE 65521      /* largest prime smaller than 65536 */
 #define NMAX 5552
@@ -44,7 +44,7 @@ local uLong adler32_combine_ OF((uLong adler1, uLong adler2, z_off64_t len2));
     } while (0)
 #  define MOD63(a) \
     do { /* this assumes a is not negative */ \
-        z_off64_t tmp = a >> 32; \
+        off64_t tmp = a >> 32; \
         a &= 0xffffffffL; \
         a += (tmp << 8) - (tmp << 5) + tmp; \
         tmp = a >> 16; \
@@ -136,7 +136,7 @@ uLong ZEXPORT adler32(adler, buf, len)
 local uLong adler32_combine_(adler1, adler2, len2)
     uLong adler1;
     uLong adler2;
-    z_off64_t len2;
+    off64_t len2;
 {
     unsigned long sum1;
     unsigned long sum2;
@@ -173,7 +173,7 @@ uLong ZEXPORT adler32_combine(adler1, adler2, len2)
 uLong ZEXPORT adler32_combine64(adler1, adler2, len2)
     uLong adler1;
     uLong adler2;
-    z_off64_t len2;
+    off64_t len2;
 {
     return adler32_combine_(adler1, adler2, len2);
 }
