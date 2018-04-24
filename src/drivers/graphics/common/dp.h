@@ -9,10 +9,10 @@
 #define _DP_H
 
 
-#include <Accelerant.h>
-#include "dp_raw.h"
-#include <GraphicsDefs.h>
-#include <kernel/OS.h>
+#include <kits/netAccelerant.h>
+#include <kits/netdp_raw.h>
+#include <kits/netGraphicsDefs.h>
+#include <kits/kernel/OS.h>
 
 
 typedef struct {

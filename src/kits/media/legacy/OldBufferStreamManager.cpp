@@ -10,7 +10,7 @@
 #if __GNUC__ < 3
 
 
-#include "OldBufferStreamManager.h"
+#include <OldBufferStreamManager.h>
 
 #include <debug.h>
 

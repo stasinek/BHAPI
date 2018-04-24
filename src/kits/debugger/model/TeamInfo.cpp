@@ -4,7 +4,7 @@
  */
 
 
-#include "TeamInfo.h"
+#include <TeamInfo.h>
 
 
 TeamInfo::TeamInfo()

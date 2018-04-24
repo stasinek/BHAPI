@@ -28,7 +28,7 @@ THE SOFTWARE.
 #ifndef _TEMPLATE_H
 #define _TEMPLATE_H
 
-#include "PictureIterator.h"
+#include <PictureIterator.h>
 
 class Template : public PictureIterator
 {

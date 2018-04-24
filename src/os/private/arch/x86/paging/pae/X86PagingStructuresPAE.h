@@ -6,8 +6,8 @@
 #define KERNEL_ARCH_X86_PAGING_PAE_X86_PAGING_STRUCTURES_PAE_H
 
 
-#include "paging/pae/paging.h"
-#include "paging/X86PagingStructures.h"
+#include <paging/pae/paging.h>
+#include <paging/X86PagingStructures.h>
 
 
 #if B_HAIKU_PHYSICAL_BITS == 64

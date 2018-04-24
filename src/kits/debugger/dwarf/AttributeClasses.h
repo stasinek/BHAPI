@@ -6,7 +6,7 @@
 #ifndef ATTRIBUTE_TABLES_H
 #define ATTRIBUTE_TABLES_H
 
-#include "DebugInfoEntry.h"
+#include <DebugInfoEntry.h>
 
 
 typedef status_t (DebugInfoEntry::* DebugInfoEntrySetter)(uint16,

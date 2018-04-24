@@ -7,7 +7,7 @@
 	ResourceItem implementation.
 */
 
-#include "ResourceItem.h"
+#include <ResourceItem.h>
 
 
 

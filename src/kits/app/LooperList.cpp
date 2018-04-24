@@ -10,13 +10,13 @@
 //! Maintains a global list of all loopers in a given team.
 
 
-#include "LooperList.h"
+#include <kits/netLooperList.h>
 
-#include <Autolock.h>
-#include <Looper.h>
+#include <kits/netAutolock.h>
+#include <kits/netLooper.h>
 
-#include <algorithm>
-#include <string.h>
+#include <kits/netalgorithm>
+#include <kits/netstring.h>
 
 
 using std::vector;

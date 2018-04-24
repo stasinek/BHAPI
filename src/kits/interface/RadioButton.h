@@ -32,7 +32,7 @@
 #define BHAPI_RADIO_BUTTON_H
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../interface/Control.h"
+#include <kits/interface/Control.h>
 class BHAPI_IMPEXP BRadioButton : public BControl {
 public:
     BRadioButton(BRect frame,

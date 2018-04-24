@@ -4,9 +4,9 @@
  */
 
 
-#include "SettingsDescription.h"
+#include <SettingsDescription.h>
 
-#include "Setting.h"
+#include <Setting.h>
 
 
 SettingsDescription::SettingsDescription()

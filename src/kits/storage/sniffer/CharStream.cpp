@@ -1,4 +1,4 @@
-#include "sniffer/CharStream.h"
+#include <sniffer/CharStream.h>
 
 #include <sniffer/Err.h>
 

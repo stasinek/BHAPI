@@ -7,7 +7,7 @@
  * Distributed under the terms of the NewOS License.
  */
 
-#include "debug_builtin_commands.h"
+#include <debug_builtin_commands.h>
 
 #include <ctype.h>
 #include <string.h>
@@ -16,8 +16,8 @@
 #include <debug.h>
 #include <kernel.h>
 
-#include "debug_commands.h"
-#include "gdb.h"
+#include <debug_commands.h>
+#include <gdb.h>
 
 
 static int

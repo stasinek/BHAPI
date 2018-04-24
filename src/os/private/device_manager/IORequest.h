@@ -17,7 +17,7 @@
 #include <lock.h>
 #include <util/DoublyLinkedList.h>
 
-#include "dma_resources.h"
+#include <dma_resources.h>
 
 
 #define B_PHYSICAL_IO_REQUEST	0x01	/* buffer points to physical memory */

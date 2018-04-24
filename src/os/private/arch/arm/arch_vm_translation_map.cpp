@@ -13,8 +13,8 @@
 
 #include <boot/kernel_args.h>
 
-#include "paging/32bit/ARMPagingMethod32Bit.h"
-//#include "paging/pae/ARMPagingMethodPAE.h"
+#include <paging/32bit/ARMPagingMethod32Bit.h>
+//#include <paging/pae/ARMPagingMethodPAE.h>
 
 
 //#define TRACE_VM_TMAP

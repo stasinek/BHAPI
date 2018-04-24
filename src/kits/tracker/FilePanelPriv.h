@@ -37,9 +37,9 @@ All rights reserved.
 
 #include <FilePanel.h>
 
-#include "ContainerWindow.h"
-#include "PoseView.h"
-#include "TaskLoop.h"
+#include <ContainerWindow.h>
+#include <PoseView.h>
+#include <TaskLoop.h>
 
 
 class BTextControl;

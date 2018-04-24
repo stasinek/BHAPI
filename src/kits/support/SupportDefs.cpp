@@ -27,7 +27,7 @@
  * Description: Body of support functions
  *
  * --------------------------------------------------------------------------*/
-#include "SupportDefs.h"
+#include <SupportDefs.h>
 //-------------------------------------------------------------------------------------------------
 #ifdef BHAPI_BUILD_LIBRARY
 namespace bhapi {

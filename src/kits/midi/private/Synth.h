@@ -5,7 +5,7 @@
 #include <Haiku.h>
 #include <Entry.h>
 #include <MidiDefs.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 typedef enum interpolation_mode
 {

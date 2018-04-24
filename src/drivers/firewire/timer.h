@@ -19,7 +19,7 @@
 #ifndef __TIMER_H
 #define __TIMER_H
 
-#include <KernelExport.h>
+#include <kits/kernelExport.h>
 
 // Since the BeOS kernel timers are executed in interrupt context,
 // a new timer has been created. The timers are executed in thread

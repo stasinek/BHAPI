@@ -1,7 +1,7 @@
 #ifndef FS_IMPL_H
 #define FS_IMPL_H
 
-#include <../include/string>
+#include <string>
 
 #include <Haiku.h>
 

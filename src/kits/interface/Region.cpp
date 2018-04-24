@@ -61,9 +61,9 @@
 </document>
 -----------------------------------------------------------------------------*/
 
-#include "Region.h"
+#include <Region.h>
 
-#include "../kernel/Debug.h"
+#include <os/debug.h>
 
 /* --------------------------------------------------------------------------
 <document lang="zh_CN.UTF-8">

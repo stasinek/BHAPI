@@ -7,13 +7,13 @@
 #ifndef B_TRANSLATION_KIT_H
 #define B_TRANSLATION_KIT_H
 
-#include <BitmapStream.h>
-#include <TranslationErrors.h>
-#include <TranslationUtils.h>
-#include <TranslatorFormats.h>
-#include <TranslatorRoster.h>
-#include <Translator.h>
+#include <kits/translation/BitmapStream.h>
+#include <kits/translation/translation/TranslationErrors.h>
+#include <kits/translation/TranslationUtils.h>
+#include <kits/translation/TranslatorFormats.h>
+#include <kits/translation/TranslatorRoster.h>
+#include <kits/translation/Translator.h>
 
-#include <TranslationDefs.h>
+#include <kits/translation/TranslationDefs.h>
 
 #endif

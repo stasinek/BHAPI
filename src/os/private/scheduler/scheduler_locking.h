@@ -8,7 +8,7 @@
 
 #include <util/AutoLock.h>
 
-#include "scheduler_cpu.h"
+#include <scheduler_cpu.h>
 
 
 namespace Scheduler {

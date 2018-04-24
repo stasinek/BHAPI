@@ -36,7 +36,7 @@
 #ifndef _FWDMA_H
 #define _FWDMA_H
 
-#include "fwglue.h"
+#include <kits/netfwglue.h>
 
 
 struct fwdma_alloc {

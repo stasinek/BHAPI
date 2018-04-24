@@ -6,7 +6,7 @@
 #define CPP_LANGUAGE_H
 
 
-#include "CLanguageFamily.h"
+#include <CLanguageFamily.h>
 
 
 class CppLanguage : public CLanguageFamily {

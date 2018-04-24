@@ -9,7 +9,7 @@
 #define _DESKTOP_LINK_H
 
 
-#include <PortLink.h>
+#include <kits/netPortLink.h>
 
 
 namespace BPrivate {

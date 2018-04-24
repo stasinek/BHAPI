@@ -6,7 +6,7 @@
 #define SYNTHETIC_PRIMITIVE_TYPE_H
 
 
-#include "Type.h"
+#include <Type.h>
 
 #include <StringClass.h>
 

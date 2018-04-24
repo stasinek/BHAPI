@@ -27,13 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "NetDebug.h"
+#include <NetDebug.h>
 
-#include "../support/Autolock.h"
-#include "../support/SimpleLocker.h"
-#include "../support/StringClass.h"
+#include <kits/support/Autolock.h>
+#include <kits/support/SimpleLocker.h>
+#include <kits/support/StringClass.h>
 
-#include <../include/stdarg.h>
+#include <stdarg.h>
 
 
 static BSimpleLocker _e_net_locker(true);

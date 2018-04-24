@@ -3,17 +3,17 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "StackFrame.h"
+#include <StackFrame.h>
 
 #include <new>
 
-#include "CpuState.h"
-#include "FunctionInstance.h"
-#include "Image.h"
-#include "StackFrameDebugInfo.h"
-#include "StackFrameValueInfos.h"
-#include "StackFrameValues.h"
-#include "Variable.h"
+#include <CpuState.h>
+#include <FunctionInstance.h>
+#include <Image.h>
+#include <StackFrameDebugInfo.h>
+#include <StackFrameValueInfos.h>
+#include <StackFrameValues.h>
+#include <Variable.h>
 
 
 // #pragma mark - StackFrame

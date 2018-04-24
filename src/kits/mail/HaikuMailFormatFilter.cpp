@@ -7,7 +7,7 @@
  */
 
 
-#include "HaikuMailFormatFilter.h"
+#include <HaikuMailFormatFilter.h>
 
 #include <ctype.h>
 

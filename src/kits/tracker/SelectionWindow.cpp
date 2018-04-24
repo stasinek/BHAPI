@@ -40,11 +40,11 @@ All rights reserved.
 #include <MenuItem.h>
 #include <MessageFilter.h>
 
-#include "AutoLock.h"
-#include "ContainerWindow.h"
-#include "Commands.h"
-#include "Screen.h"
-#include "SelectionWindow.h"
+#include <AutoLock.h>
+#include <ContainerWindow.h>
+#include <Commands.h>
+#include <Screen.h>
+#include <SelectionWindow.h>
 
 
 const uint32 kSelectButtonPressed = 'sbpr';

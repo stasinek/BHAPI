@@ -5,9 +5,9 @@
 #ifndef BHAPI_APP_MISC_H
 #define BHAPI_APP_MISC_H
 
-#include <Handler.h>
-#include <Locker.h>
-#include <kernel/OS.h>
+#include <kits/app/Handler.h>
+#include <kits/netLocker.h>
+#include <kits/kernel/OS.h>
 #include <Haiku.h>
 
 //struct entry_ref;

@@ -45,11 +45,11 @@
 	#define DFB_HAVE_FILLRECTANGLES
 #endif
 
-#include "../../add-ons/graphics/GraphicsEngine.h"
-#include "../../support/Locker.h"
-#include "../../support/List.h"
-#include "../../interface/Window.h"
-#include "../../app/MessageFilter.h"
+#include <kits/add-ons/graphics/GraphicsEngine.h>
+#include <kits/support/Locker.h>
+#include <kits/support/List.h>
+#include <kits/interface/Window.h>
+#include <kits/app/MessageFilter.h>
 
 #ifdef __cplusplus /* just for C++ */
 

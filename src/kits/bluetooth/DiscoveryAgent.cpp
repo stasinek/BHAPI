@@ -16,7 +16,7 @@
 #include <bluetoothserver_p.h>
 #include <CommandManager.h>
 
-#include "KitSupport.h"
+#include <KitSupport.h>
 
 namespace Bluetooth {
 

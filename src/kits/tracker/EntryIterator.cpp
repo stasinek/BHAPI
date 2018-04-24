@@ -41,7 +41,7 @@ All rights reserved.
 #include <new>
 #include <string.h>
 
-#include "EntryIterator.h"
+#include <EntryIterator.h>
 
 
 //	#pragma mark - TWalkerWrapper

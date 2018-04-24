@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Image.h"
+#include <Image.h>
 
 #include <errno.h>
 #include <fcntl.h>

@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Watchpoint.h"
+#include <Watchpoint.h>
 
 
 Watchpoint::Watchpoint(target_addr_t address, uint32 type, int32 length)

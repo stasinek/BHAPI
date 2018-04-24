@@ -12,7 +12,7 @@
 #include <Haiku.h>
 #include <TextView.h>
 
-#include "TextViewSupportBuffer.h"
+#include <TextViewSupportBuffer.h>
 
 struct STELine {
 	long		offset;		// offset of first character of line

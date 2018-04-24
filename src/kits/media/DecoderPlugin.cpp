@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DecoderPlugin.h"
+#include <DecoderPlugin.h>
 
 #include <stdio.h>
 #include <string.h>

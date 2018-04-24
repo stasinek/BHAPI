@@ -4,12 +4,12 @@
  */
 
 
-#include "InitializeJob.h"
+#include <InitializeJob.h>
 
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
-#include "DiskDeviceUtils.h"
-#include "PartitionReference.h"
+#include <DiskDeviceUtils.h>
+#include <PartitionReference.h>
 
 
 // constructor

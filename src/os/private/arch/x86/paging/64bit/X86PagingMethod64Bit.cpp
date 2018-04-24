@@ -9,7 +9,7 @@
  */
 
 
-#include "paging/64bit/X86PagingMethod64Bit.h"
+#include <paging/64bit/X86PagingMethod64Bit.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -20,10 +20,10 @@
 #include <vm/vm_page.h>
 #include <vm/VMAddressSpace.h>
 
-#include "paging/64bit/X86PagingStructures64Bit.h"
-#include "paging/64bit/X86VMTranslationMap64Bit.h"
-#include "paging/x86_physical_page_mapper.h"
-#include "paging/x86_physical_page_mapper_mapped.h"
+#include <paging/64bit/X86PagingStructures64Bit.h>
+#include <paging/64bit/X86VMTranslationMap64Bit.h>
+#include <paging/x86_physical_page_mapper.h>
+#include <paging/x86_physical_page_mapper_mapped.h>
 
 
 //#define TRACE_X86_PAGING_METHOD_64BIT

@@ -28,21 +28,21 @@
  * --------------------------------------------------------------------------*/
 #ifdef LINUX
 
-#include "BHAPI_wrapper_x11.h"
+#include <BHAPI_wrapper_x11.h>
 
 #if 1
 // "Xutf8*" functions don't work well enough
 #undef X_HAVE_UTF8_STRING
 #endif
 
-#include "BHAPI_wrapper_x11.h"
+#include <BHAPI_wrapper_x11.h>
 
-#include "../add-ons/font/FontEngine.h"
-#include "../support/ClassInfo.h"
-#include "../support/List.h"
-#include "../support/Autolock.h"
-#include "../interface/Window.h"
-#include "../interface/View.h"
+#include <kits/add-ons/font/FontEngine.h>
+#include <kits/support/ClassInfo.h>
+#include <kits/support/List.h>
+#include <kits/support/Autolock.h>
+#include <kits/interface/Window.h>
+#include <kits/interface/View.h>
 
 
 class BFontX11 : public BFontEngine {

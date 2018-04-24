@@ -27,10 +27,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "FindDirectory.h"
+#include <FindDirectory.h>
 
-#include "../support/StringClass.h"
-#include "../support/Errors.h"
+#include <kits/support/StringClass.h>
+#include <kits/support/Errors.h>
 
 #ifdef __BEOS__
 #include <be/storage/FindDirectory.h>

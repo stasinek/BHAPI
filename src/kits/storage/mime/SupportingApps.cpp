@@ -25,7 +25,7 @@
 #include <mime/database_support.h>
 #include <mime/DatabaseDirectory.h>
 #include <mime/DatabaseLocation.h>
-#include <../include/storage_support.h>
+#include <storage_support.h>
 
 
 #define DBG(x) x

@@ -4,15 +4,15 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "ImageDebugInfo.h"
+#include <ImageDebugInfo.h>
 
 #include <new>
 
-#include "DebuggerInterface.h"
-#include "FunctionDebugInfo.h"
-#include "FunctionInstance.h"
-#include "SpecificImageDebugInfo.h"
-#include "SymbolInfo.h"
+#include <DebuggerInterface.h>
+#include <FunctionDebugInfo.h>
+#include <FunctionInstance.h>
+#include <SpecificImageDebugInfo.h>
+#include <SymbolInfo.h>
 
 
 ImageDebugInfo::ImageDebugInfo(const ImageInfo& imageInfo)

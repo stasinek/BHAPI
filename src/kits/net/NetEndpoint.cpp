@@ -29,25 +29,25 @@
 
 // WARNING: MT-SAFE uncompleted yet !!!
 
-#include "NetEndpoint.h"
+#include <NetEndpoint.h>
 
-#include "../support/Errors.h"
-#include "../app/Message.h"
-#include "../kernel/Debug.h"
+#include <kits/support/Errors.h>
+#include <kits/app/Message.h>
+#include <os/debug.h>
 
 #include <errno.h>
 
-#include <../include/sys/types.h>
+#include <sys/types.h>
 #include <signal.h>
 
 #ifndef _WIN32
-#	include <../include/sys/time.h>
+#	include <sys/time.h>
 #	include <netdb.h>
 #	include <unistd.h>
 #	include <fcntl.h>
 
 #	ifdef __BEOS__
-#		include <../include/sys/socket.h>
+#		include <sys/socket.h>
 #		ifdef BONE_VERSION
 #			include <arpa/inet.h>
 #		endif

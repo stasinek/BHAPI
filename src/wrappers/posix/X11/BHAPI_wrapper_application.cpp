@@ -31,15 +31,15 @@
 
 #include <locale.h>
 
-#include "BHAPI_wrapper_x11.h"
+#include <BHAPI_wrapper_x11.h>
 
-#include "../../kernel/Kernel.h"
-#include "../../support/StringClass.h"
-#include "../../support/Locker.h"
-#include "../../support/Autolock.h"
-#include "../../app/Application.h"
-#include "../../app/Clipboard.h"
-#include "../../interface/InterfaceDefs.h"
+#include <os/kernel.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/Locker.h>
+#include <kits/support/Autolock.h>
+#include <kits/app/Application.h>
+#include <kits/app/Clipboard.h>
+#include <kits/interface/InterfaceDefs.h>
 
 #define CLICK_TIMEOUT 200
 

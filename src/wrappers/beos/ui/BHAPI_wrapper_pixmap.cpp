@@ -33,11 +33,11 @@
 #include <be/interface/Region.h>
 #include <be/interface/Bitmap.h>
 
-#include "BHAPI_wrapper_beos-graphics.h"
+#include <BHAPI_wrapper_beos-graphics.h>
 
-#include "../../support/ClassInfo.h"
-#include "../../support/Autolock.h"
-#include "../../render/Pixmap.h"
+#include <kits/support/ClassInfo.h>
+#include <kits/support/Autolock.h>
+#include <kits/render/Pixmap.h>
 
 
 EBeBitmapPriv::EBeBitmapPriv(uint32 w,  uint32 h)

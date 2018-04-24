@@ -14,7 +14,7 @@
 #include <elf_private.h>
 #include <util/DoublyLinkedList.h>
 
-#include "Types.h"
+#include <Types.h>
 
 
 class ElfSymbolLookup;

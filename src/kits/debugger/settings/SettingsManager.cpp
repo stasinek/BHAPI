@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "SettingsManager.h"
+#include <SettingsManager.h>
 
 
 SettingsManager::~SettingsManager()

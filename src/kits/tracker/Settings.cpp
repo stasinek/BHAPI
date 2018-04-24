@@ -41,7 +41,7 @@ All rights reserved.
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "TrackerSettings.h"
+#include <TrackerSettings.h>
 
 
 Settings* settings = NULL;

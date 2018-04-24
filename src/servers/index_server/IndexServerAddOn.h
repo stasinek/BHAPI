@@ -16,7 +16,7 @@
 #include <StringClass.h>
 #include <Volume.h>
 
-#include "Referenceable.h"
+#include <Referenceable.h>
 
 
 class analyser_settings {

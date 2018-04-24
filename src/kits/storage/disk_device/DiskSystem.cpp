@@ -9,9 +9,9 @@
 #include <Partition.h>
 
 #include <ddm_userland_interface_defs.h>
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
-#include "DiskSystemAddOnManager.h"
+#include <DiskSystemAddOnManager.h>
 
 
 // constructor

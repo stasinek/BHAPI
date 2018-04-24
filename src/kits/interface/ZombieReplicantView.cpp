@@ -12,7 +12,7 @@
 #include <StringClass.h>
 #include <SystemCatalog.h>
 
-#include "ZombieReplicantView.h"
+#include <ZombieReplicantView.h>
 
 
 

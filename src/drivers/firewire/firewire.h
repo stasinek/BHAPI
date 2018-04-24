@@ -38,8 +38,8 @@
 #ifndef _FIREWIRE_H
 #define _FIREWIRE_H 1
 #ifdef __HAIKU__
-#include <stdint.h>
-#include <sys/ioccom.h>
+#include <kits/netstdint.h>
+#include <kits/netsys/ioccom.h>
 #endif
 
 #define	DEV_DEF  0

@@ -9,8 +9,8 @@
 //!	UndoBuffer and its subclasses handle different types of Undo operations.
 
 
-#include "UndoBuffer.h"
-#include "utf8_functions.h"
+#include <UndoBuffer.h>
+#include <utf8_functions.h>
 
 #include <Clipboard.h>
 

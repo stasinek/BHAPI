@@ -27,19 +27,19 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "NetAddress.h"
+#include <NetAddress.h>
 
-#include "../app/Message.h"
-#include "../kernel/Debug.h"
-#include "../support/Errors.h"
-#include "../support/ByteOrder.h"
+#include <kits/app/Message.h>
+#include <os/debug.h>
+#include <kits/support/Errors.h>
+#include <kits/support/ByteOrder.h>
 
 #ifndef _WIN32
 #	include <netdb.h>
 #	include <netinet/in.h>
 
 #	ifdef __BEOS__
-#		include <../include/sys/socket.h>
+#		include <sys/socket.h>
 #		ifdef BONE_VERSION
 #			include <arpa/inet.h>
 #		endif

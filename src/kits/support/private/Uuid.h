@@ -33,7 +33,7 @@
 #ifndef BHAPI_UUID_H
 #define BHAPI_UUID_H
 
-#include "SupportDefs.h"
+#include <SupportDefs.h>
 
 namespace BPrivate {
 class BString;

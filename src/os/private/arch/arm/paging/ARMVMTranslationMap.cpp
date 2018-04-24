@@ -8,12 +8,12 @@
  */
 
 
-#include "paging/ARMVMTranslationMap.h"
+#include <paging/ARMVMTranslationMap.h>
 
 #include <thread.h>
 #include <smp.h>
 
-#include "paging/ARMPagingStructures.h"
+#include <paging/ARMPagingStructures.h>
 
 
 //#define TRACE_ARM_VM_TRANSLATION_MAP

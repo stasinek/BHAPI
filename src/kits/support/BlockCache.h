@@ -49,7 +49,7 @@
 #ifndef BHAPI_BLOCK_CACHE_H
 #define BHAPI_BLOCK_CACHE_H
 
-#include "Locker.h"
+#include <Locker.h>
 
 // The allocation type to be used in the constructor
 enum {

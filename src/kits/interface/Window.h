@@ -133,11 +133,11 @@ namespace BPrivate {
     class PortLink;
 };
 #include <View.h>
-#include "../app/Looper.h"
-#include "../interface/Rect.h"
-#include "../support/List.h"
+#include <kits/app/Looper.h>
+#include <kits/interface/Rect.h>
+#include <kits/support/List.h>
 #include <Size.h>
-#include "GraphicsDefs.h"
+#include <GraphicsDefs.h>
 class BHAPI_IMPEXP BWindow : public BLooper {
 public:
                                 BWindow(BRect frame, const char* title,

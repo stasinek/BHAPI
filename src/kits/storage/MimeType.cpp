@@ -9,7 +9,7 @@
  */
 
 
-#include "MimeType.h"
+#include <MimeType.h>
 
 #include <Bitmap.h>
 #include <mime/database_support.h>
@@ -23,7 +23,7 @@
 #include <ctype.h>
 #include <new>
 
-#include <../include/strings.h>
+#include <strings.h>
 
 
 using namespace BPrivate;

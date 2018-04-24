@@ -12,7 +12,7 @@
 #include <ObjectList.h>
 #include <Referenceable.h>
 
-#include "Type.h"
+#include <Type.h>
 
 
 class Architecture;

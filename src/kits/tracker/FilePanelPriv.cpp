@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "FilePanelPriv.h"
+#include <FilePanelPriv.h>
 
 #include <string.h>
 
@@ -62,23 +62,23 @@ All rights reserved.
 #include <Volume.h>
 #include <VolumeRoster.h>
 
-#include "Attributes.h"
-#include "AttributeStream.h"
-#include "AutoLock.h"
-#include "Commands.h"
-#include "CountView.h"
-#include "DesktopPoseView.h"
-#include "DirMenu.h"
-#include "FavoritesMenu.h"
-#include "FSUtils.h"
-#include "FSClipboard.h"
-#include "IconMenuItem.h"
-#include "MimeTypes.h"
-#include "NavMenu.h"
-#include "Tracker.h"
-#include "Utilities.h"
+#include <Attributes.h>
+#include <AttributeStream.h>
+#include <AutoLock.h>
+#include <Commands.h>
+#include <CountView.h>
+#include <DesktopPoseView.h>
+#include <DirMenu.h>
+#include <FavoritesMenu.h>
+#include <FSUtils.h>
+#include <FSClipboard.h>
+#include <IconMenuItem.h>
+#include <MimeTypes.h>
+#include <NavMenu.h>
+#include <Tracker.h>
+#include <Utilities.h>
 
-#include "tracker_private.h"
+#include <tracker_private.h>
 
 
 #undef B_TRANSLATION_CONTEXT

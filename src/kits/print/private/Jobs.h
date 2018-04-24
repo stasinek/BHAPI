@@ -32,9 +32,9 @@
 #ifndef _JOBS_H
 #define _JOBS_H
 
-#include "BeUtils.h"
-#include "ObjectList.h"
-#include "FolderWatcher.h"
+#include <BeUtils.h>
+#include <ObjectList.h>
+#include <FolderWatcher.h>
 
 #include <Directory.h>
 #include <Entry.h>

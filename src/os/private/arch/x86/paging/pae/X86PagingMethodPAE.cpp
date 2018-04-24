@@ -8,7 +8,7 @@
  */
 
 
-#include "paging/pae/X86PagingMethodPAE.h"
+#include <paging/pae/X86PagingMethodPAE.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -22,12 +22,12 @@
 #include <vm/vm_page.h>
 #include <vm/VMAddressSpace.h>
 
-#include "paging/32bit/paging.h"
-#include "paging/32bit/X86PagingMethod32Bit.h"
-#include "paging/pae/X86PagingStructuresPAE.h"
-#include "paging/pae/X86VMTranslationMapPAE.h"
-#include "paging/x86_physical_page_mapper.h"
-#include "paging/x86_physical_page_mapper_large_memory.h"
+#include <paging/32bit/paging.h>
+#include <paging/32bit/X86PagingMethod32Bit.h>
+#include <paging/pae/X86PagingStructuresPAE.h>
+#include <paging/pae/X86VMTranslationMapPAE.h>
+#include <paging/x86_physical_page_mapper.h>
+#include <paging/x86_physical_page_mapper_large_memory.h>
 
 
 //#define TRACE_X86_PAGING_METHOD_PAE

@@ -6,13 +6,13 @@
 #ifndef BHAPI_SERVER_INTERFACE_H
 #define BHAPI_SERVER_INTERFACE_H
 
-#include "Buffer.h"
-#include "Entry.h"
-#include "MediaAddOn.h"
-#include "MediaDefs.h"
-#include "MediaFormats.h"
-#include "MediaNode.h"
-#include "../kits/app/Messenger.h"
+#include <Buffer.h>
+#include <Entry.h>
+#include <MediaAddOn.h>
+#include <MediaDefs.h>
+#include <MediaFormats.h>
+#include <MediaNode.h>
+#include <kits/app/Messenger.h>
 
 #include <string.h>
 

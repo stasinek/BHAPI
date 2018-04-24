@@ -28,7 +28,7 @@ static const char rcsid[] = "Id: ns_parse.c,v 1.10 2009/01/23 19:59:16 each Exp"
 
 /* Import. */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 
@@ -40,7 +40,7 @@ static const char rcsid[] = "Id: ns_parse.c,v 1.10 2009/01/23 19:59:16 each Exp"
 #include <resolv.h>
 #include <string.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 /* Forward. */
 

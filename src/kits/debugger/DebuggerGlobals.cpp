@@ -4,11 +4,11 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DebuggerGlobals.h"
+#include <DebuggerGlobals.h>
 
-#include "ImageDebugLoadingStateHandlerRoster.h"
-#include "TargetHostInterface.h"
-#include "TypeHandlerRoster.h"
+#include <ImageDebugLoadingStateHandlerRoster.h>
+#include <TargetHostInterface.h>
+#include <TypeHandlerRoster.h>
 
 
 status_t debugger_global_init(TargetHostInterfaceRoster::Listener* listener)

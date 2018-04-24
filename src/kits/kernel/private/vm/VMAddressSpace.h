@@ -10,7 +10,7 @@
 #define _KERNEL_VM_VM_ADDRESS_SPACE_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <vm/vm_priv.h>
 #include <vm/VMArea.h>

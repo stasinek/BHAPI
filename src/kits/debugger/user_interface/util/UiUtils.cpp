@@ -5,7 +5,7 @@
  */
 
 
-#include "UiUtils.h"
+#include <UiUtils.h>
 
 #include <ctype.h>
 #include <stdio.h>
@@ -18,17 +18,17 @@
 
 #include <vm_defs.h>
 
-#include "FunctionInstance.h"
-#include "Image.h"
-#include "RangeList.h"
-#include "SignalDispositionTypes.h"
-#include "StackFrame.h"
-#include "Team.h"
-#include "TeamMemoryBlock.h"
-#include "Thread.h"
-#include "Type.h"
-#include "Value.h"
-#include "ValueNode.h"
+#include <FunctionInstance.h>
+#include <Image.h>
+#include <RangeList.h>
+#include <SignalDispositionTypes.h>
+#include <StackFrame.h>
+#include <Team.h>
+#include <TeamMemoryBlock.h>
+#include <Thread.h>
+#include <Type.h>
+#include <Value.h>
+#include <ValueNode.h>
 
 
 /*static*/ const char*  UiUtils::ThreadStateToString(int state, int stoppedReason)

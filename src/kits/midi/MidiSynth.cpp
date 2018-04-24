@@ -13,8 +13,8 @@
 
 #include <MidiSynth.h>
 
-#include "debug.h"
-#include "SoftSynth.h"
+#include <debug.h>
+#include <SoftSynth.h>
 
 using namespace BPrivate;
 

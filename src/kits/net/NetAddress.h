@@ -40,7 +40,7 @@
 #include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../support/Archivable.h"
+#include <kits/support/Archivable.h>
 class BHAPI_IMPEXP BNetAddress : public BArchivable {
 public:
     BNetAddress(const char *hostname = NULL,  uint16 port = 0);

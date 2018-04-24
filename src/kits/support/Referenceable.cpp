@@ -3,13 +3,13 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Referenceable.h"
+#include <Referenceable.h>
 
 #ifdef DEBUG
 
 #endif
 
-#include "../kernel/KERNEL.h"
+#include <os/kernel.h>
 
 //#define TRACE_REFERENCEABLE
 #if defined(TRACE_REFERENCEABLE) && defined(_KERNEL_MODE)

@@ -36,7 +36,7 @@ All rights reserved.
 //	ListView title drawing and mouse manipulation classes
 
 
-#include "TitleView.h"
+#include <TitleView.h>
 
 #include <Alert.h>
 #include <Application.h>
@@ -48,10 +48,10 @@ All rights reserved.
 #include <stdio.h>
 #include <string.h>
 
-#include "Commands.h"
-#include "ContainerWindow.h"
-#include "PoseView.h"
-#include "Utilities.h"
+#include <Commands.h>
+#include <ContainerWindow.h>
+#include <PoseView.h>
+#include <Utilities.h>
 
 
 #define APP_SERVER_CLEARS_BACKGROUND 1

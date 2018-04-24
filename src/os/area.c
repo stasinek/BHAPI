@@ -8,7 +8,7 @@
 
 #include <libroot_private.h>
 
-#include "syscalls.h"
+#include <syscalls.h>
 
 
 area_id

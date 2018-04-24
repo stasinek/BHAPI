@@ -5,14 +5,14 @@
 
 
 #ifdef BUILDING_FS_SHELL
-#	include "compat.h"
+#	include <compat.h>
 #	define B_OK			0
 #	define B_FILE_ERROR	EBADF
 #else
 #	include <BeOSBuildCompatibility.h>
 #endif
 
-#include "fs_descriptors.h"
+#include <fs_descriptors.h>
 
 #include <map>
 
@@ -23,9 +23,9 @@
 
 #include <fs_attr.h>
 
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
-#include "fs_impl.h"
+#include <fs_impl.h>
 
 using std::map;
 

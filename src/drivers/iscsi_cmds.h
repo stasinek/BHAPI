@@ -6,7 +6,7 @@
 #define ISCSI_CMDS_H
 
 
-#include <ByteOrder.h>
+#include <kits/netByteOrder.h>
 
 
 // TODO Add Little Endian support by introducing more macros

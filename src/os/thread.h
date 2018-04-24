@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2014, Paweł Dziepak, pdziepak@quarnos.org.
  * Copyright 2008-2011, Ingo Weinhold, ingo_weinhold@gmx.de.
  * Copyright 2002-2007, Axel Dörfler, axeld@pinc-software.de.
@@ -9,15 +9,14 @@
  */
 #ifndef BHAPI_THREAD_H
 #define BHAPI_THREAD_H
+#include <Haiku.h>
 
 #include <arch/atomic.h>
 #include <arch/thread.h>
 // For the thread blocking inline functions only.
-#include <kscheduler.h>
-#include <ksignal.h>
-#include <thread_types.h>
-#include <Haiku.h>
-
+#include <os/kscheduler.h>
+#include <os/ksignal.h>
+#include <os/thread_types.h>
 
 struct arch_fork_arg;
 struct kernel_args;

@@ -10,25 +10,25 @@
 #define RADEON_HD_H
 
 
-#include "lock.h"
+#include <kits/netlock.h>
 
-#include "radeon_reg.h"
+#include <kits/netradeon_reg.h>
 
-//#include "r500_reg.h"  // Not used atm. DCE 0
-#include "avivo_reg.h"		// DCE 1
-#include "r600_reg.h"		// DCE 2
-#include "r700_reg.h"		// DCE 3
-#include "evergreen_reg.h"	// DCE 4
-#include "ni_reg.h"			// DCE 5
-#include "si_reg.h"			// DCE 6
-#include "sea_reg.h"		// DCE 8
-#include "vol_reg.h"		// DCE 10
-#include "car_reg.h"		// DCE 11
+//#include <kits/netr500_reg.h>  // Not used atm. DCE 0
+#include <kits/netavivo_reg.h>		// DCE 1
+#include <kits/netr600_reg.h>		// DCE 2
+#include <kits/netr700_reg.h>		// DCE 3
+#include <kits/netevergreen_reg.h>	// DCE 4
+#include <kits/netni_reg.h>			// DCE 5
+#include <kits/netsi_reg.h>			// DCE 6
+#include <kits/netsea_reg.h>		// DCE 8
+#include <kits/netvol_reg.h>		// DCE 10
+#include <kits/netcar_reg.h>		// DCE 11
 
-#include <Accelerant.h>
-#include <Drivers.h>
-#include <edid.h>
-#include <PCI.h>
+#include <kits/netAccelerant.h>
+#include <kits/netDrivers.h>
+#include <kits/netedid.h>
+#include <kits/netPCI.h>
 
 
 #define VENDOR_ID_ATI	0x1002

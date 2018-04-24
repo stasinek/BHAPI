@@ -27,8 +27,8 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "GraphicsDefs.h"
-#include "Point.h"
+#include <GraphicsDefs.h>
+#include <Point.h>
 
 extern BHAPI_EXPORT const BPoint B_ORIGIN(0, 0);
 

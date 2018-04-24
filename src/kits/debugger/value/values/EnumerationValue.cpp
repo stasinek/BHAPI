@@ -4,9 +4,9 @@
  */
 
 
-#include "EnumerationValue.h"
+#include <EnumerationValue.h>
 
-#include "Type.h"
+#include <Type.h>
 
 
 EnumerationValue::EnumerationValue(EnumerationType* type, const BVariant& value)

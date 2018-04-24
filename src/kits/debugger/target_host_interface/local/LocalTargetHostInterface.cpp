@@ -4,7 +4,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "LocalTargetHostInterface.h"
+#include <LocalTargetHostInterface.h>
 
 #include <set>
 
@@ -18,12 +18,12 @@
 #include <system_info.h>
 #include <util/KMessage.h>
 
-#include "debug_utils.h"
+#include <debug_utils.h>
 
-#include "CoreFile.h"
-#include "CoreFileDebuggerInterface.h"
-#include "LocalDebuggerInterface.h"
-#include "TargetHost.h"
+#include <CoreFile.h>
+#include <CoreFileDebuggerInterface.h>
+#include <LocalDebuggerInterface.h>
+#include <TargetHost.h>
 
 using std::set;
 

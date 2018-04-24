@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "../../support/ClassInfo.h"
+#include <kits/support/ClassInfo.h>
 
-#include "Layout.h"
+#include <Layout.h>
 using namespace bhapi;
 
 BLayoutItem::BLayoutItem(BRect frame,  __be_uint32 resizingMode)

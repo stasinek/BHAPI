@@ -10,7 +10,7 @@
 #ifndef DEBUGGER_KEYMAPS_H
 #define DEBUGGER_KEYMAPS_H
 
-#include "kernel_debugger_config.h"
+#include <kernel_debugger_config.h>
 
 #if KDL_KEYMAP == 'dv'
 

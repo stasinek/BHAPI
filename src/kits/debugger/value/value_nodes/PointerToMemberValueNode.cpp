@@ -4,16 +4,16 @@
  */
 
 
-#include "PointerToMemberValueNode.h"
+#include <PointerToMemberValueNode.h>
 
 #include <new>
 
-#include "Architecture.h"
-#include "IntegerValue.h"
-#include "Tracing.h"
-#include "Type.h"
-#include "ValueLoader.h"
-#include "ValueLocation.h"
+#include <Architecture.h>
+#include <IntegerValue.h>
+#include <Tracing.h>
+#include <Type.h>
+#include <ValueLoader.h>
+#include <ValueLocation.h>
 
 
 PointerToMemberValueNode::PointerToMemberValueNode(ValueNodeChild* nodeChild,

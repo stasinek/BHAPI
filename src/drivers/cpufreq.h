@@ -6,9 +6,9 @@
 #define _CPUFREQ_H
 
 
-#include <module.h>
+#include <kits/netmodule.h>
 
-#include <Scheduler.h>
+#include <kits/netScheduler.h>
 
 
 #define CPUFREQ_MODULES_PREFIX	"power/cpufreq"

@@ -6,7 +6,7 @@
 #define BHAPI_ZLIB_COMPRESSION_ALGORITHM_H_
 
 
-#include "CompressionAlgorithm.h"
+#include <CompressionAlgorithm.h>
 
 
 // compression level

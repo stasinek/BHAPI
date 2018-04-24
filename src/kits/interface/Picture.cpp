@@ -29,7 +29,7 @@
 #include <PicturePlayer.h>
 #include <ServerProtocol.h>
 
-#include "PicturePrivate.h"
+#include <PicturePrivate.h>
 
 
 static BObjectList<BPicture> sPictureList;

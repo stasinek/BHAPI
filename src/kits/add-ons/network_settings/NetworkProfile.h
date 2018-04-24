@@ -6,8 +6,8 @@
 #define _NETWORK_PROFILE_H
 
 
-#include <Entry.h>
-#include <Path.h>
+#include <kits/storage/Entry.h>
+#include <kits/netPath.h>
 
 
 namespace BNetworkKit {

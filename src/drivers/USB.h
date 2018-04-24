@@ -5,4 +5,4 @@
  *	intend to use.
  */
 
-#include <USB2.h>
+#include <kits/netUSB2.h>

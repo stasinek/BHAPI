@@ -30,7 +30,7 @@
 #ifdef BHAPI_OS_BEOS
 
 #include <be/kernel/OS.h>
-#include "../kernel/Kernel.h"
+#include <os/kernel.h>
 
 // return the number of microseconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
 BHAPI_IMPEXP bigtime_t b_real_time_clock_usecs(void)

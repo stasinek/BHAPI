@@ -14,10 +14,10 @@
 #include <safemode.h>
 
 #ifdef __x86_64__
-#	include "paging/64bit/X86PagingMethod64Bit.h"
+#	include <paging/64bit/X86PagingMethod64Bit.h>
 #else
-#	include "paging/32bit/X86PagingMethod32Bit.h"
-#	include "paging/pae/X86PagingMethodPAE.h"
+#	include <paging/32bit/X86PagingMethod32Bit.h>
+#	include <paging/pae/X86PagingMethodPAE.h>
 #endif
 
 

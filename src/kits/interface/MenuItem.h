@@ -33,9 +33,9 @@
 #ifdef __cplusplus /* Just for C++ */
 class BMenu;
 class BMessage;
-#include "../support/Archivable.h"
-#include "../interface/Rect.h"
-#include "../app/Invoker.h"
+#include <kits/support/Archivable.h>
+#include <kits/interface/Rect.h>
+#include <kits/app/Invoker.h>
 #include <Haiku.h>
 class BHAPI_IMPEXP BMenuItem : public BArchivable, public BInvoker {
 public:

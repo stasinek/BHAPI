@@ -9,8 +9,8 @@
 #define SERVER_MEMORY_ALLOCATOR_H
 
 
-#include <kernel/OS.h>
-#include <List.h>
+#include <kits/kernel/OS.h>
+#include <kits/netList.h>
 
 
 namespace BPrivate {

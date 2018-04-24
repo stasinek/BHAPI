@@ -38,7 +38,7 @@ All rights reserved.
 #include <DateFormat.h>
 #include <StringClass.h>
 
-#include "TrackerSettings.h"
+#include <TrackerSettings.h>
 
 
 namespace BPrivate {

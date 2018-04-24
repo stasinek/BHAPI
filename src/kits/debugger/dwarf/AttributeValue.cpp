@@ -3,11 +3,11 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "AttributeValue.h"
+#include <AttributeValue.h>
 
 #include <stdio.h>
 
-#include "AttributeClasses.h"
+#include <AttributeClasses.h>
 
 
 const char*  AttributeValue::ToString(char* buffer, size_t size)

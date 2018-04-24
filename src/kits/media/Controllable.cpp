@@ -36,7 +36,7 @@
 
 #include <string.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <ParameterWeb.h>
 #include <Roster.h>
 

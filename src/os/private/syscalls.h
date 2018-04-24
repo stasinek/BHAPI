@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2004-2015, Haiku, Inc. All rights reserved.
  * Distributed under the terms of the MIT License.
  */
@@ -8,9 +8,10 @@
 #include <DiskDeviceDefs.h>
 #include <elf_private.h>
 #include <image.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <signal.h>
 //#include <sys/socket.h>
+
 // POSIX
 #define key_t int32
 #define sigset_t uint32

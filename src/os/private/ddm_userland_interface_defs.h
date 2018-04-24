@@ -9,7 +9,7 @@
 #define _SYSTEM_DDM_USERLAND_INTERFACE_DEFS_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <DiskDeviceDefs.h>
 

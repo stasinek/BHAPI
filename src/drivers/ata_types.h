@@ -6,8 +6,8 @@
 #define __ATA_TYPES_H__
 
 
-#include <iovec.h>
-#include <lendian_bitfield.h>
+#include <kits/netiovec.h>
+#include <kits/netlendian_bitfield.h>
 
 
 // ATA task file.

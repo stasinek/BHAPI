@@ -35,9 +35,9 @@
 #define BWINDOW_DEF
 class BWindow;
 #endif
-#include "../interface/Rect.h"
-#include "../interface/GraphicsDefs.h"
-#include <kernel/OS.h>
+#include <kits/interface/Rect.h>
+#include <kits/interface/GraphicsDefs.h>
+#include <kits/kernel/OS.h>
 namespace BPrivate {
     class BPrivateScreen;
 }

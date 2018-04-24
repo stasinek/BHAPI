@@ -7,9 +7,9 @@
 
 #include <Accelerant.h>
 #include <GraphicsCard.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <Window.h>
-#include <kernel/Image.h>
+#include <kits/kernel/Image.h>
 #include <Haiku.h>
 
 void set_mouse_position(int32 x, int32 y);

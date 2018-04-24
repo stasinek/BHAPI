@@ -47,8 +47,8 @@ class BLooper;
 class BHandler;
 #endif
 //-----------------------------------------------------------------------------
-#include "../app/Messenger.h"
-#include "../support/List.h"
+#include <kits/app/Messenger.h>
+#include <kits/support/List.h>
 #include <Haiku.h>
 //-----------------------------------------------------------------------------
 #endif

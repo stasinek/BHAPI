@@ -26,7 +26,7 @@ __RCSID("$NetBSD: inet_ntop.c,v 1.11 2014/02/10 16:30:54 christos Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/param.h>
 #include <sys/types.h>
@@ -42,7 +42,7 @@ __RCSID("$NetBSD: inet_ntop.c,v 1.11 2014/02/10 16:30:54 christos Exp $");
 #include <stdlib.h>
 #include <string.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 /*%
  * WARNING: Don't even consider trying to compile this on a system where

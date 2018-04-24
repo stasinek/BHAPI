@@ -2,8 +2,8 @@
 ** Copyright 2001, Travis Geiselbrecht. All rights reserved.
 ** Distributed under the terms of the NewOS License.
 */
-#include <kernel/kernel.h>
-#include <kernel/thread.h>
+#include <os/kernel.h>
+#include <kits/kernel/thread.h>
 
 int arch_proc_init_proc_struct(struct proc *p, bool kernel)
 {

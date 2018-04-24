@@ -9,12 +9,12 @@
 /*! File System Interface Layer Definition */
 
 
-#include <kernel/OS.h>
-#include <Select.h>
-#include <module.h>
-#include <disk_device_manager.h>
+#include <kits/kernel/OS.h>
+#include <kits/netSelect.h>
+#include <kits/netmodule.h>
+#include <kits/netdisk_device_manager.h>
 
-#include <sys/uio.h>
+#include <kits/netsys/uio.h>
 
 
 struct dirent;

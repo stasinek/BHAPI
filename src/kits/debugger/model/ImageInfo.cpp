@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "ImageInfo.h"
+#include <ImageInfo.h>
 
 
 ImageInfo::ImageInfo()

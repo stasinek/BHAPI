@@ -6,7 +6,7 @@
  *		Ingo Weinhold, ingo_weinhold@gmx.de
  */
 
-#include "KFileSystem.h"
+#include <KFileSystem.h>
 
 #include <fcntl.h>
 #include <stdlib.h>
@@ -14,9 +14,9 @@
 
 #include <fs_interface.h>
 
-#include "ddm_modules.h"
-#include "KDiskDeviceUtils.h"
-#include "KPartition.h"
+#include <ddm_modules.h>
+#include <KDiskDeviceUtils.h>
+#include <KPartition.h>
 
 
 // constructor

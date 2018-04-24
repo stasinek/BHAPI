@@ -6,7 +6,7 @@
 #define _FSSH_FCNTL_H
 
 
-#include "fssh_types.h"
+#include <fssh_types.h>
 
 
 /* commands that can be passed to fcntl() */

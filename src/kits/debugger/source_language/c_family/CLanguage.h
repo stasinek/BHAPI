@@ -6,7 +6,7 @@
 #define C_LANGUAGE_H
 
 
-#include "CLanguageFamily.h"
+#include <CLanguageFamily.h>
 
 
 class CLanguage : public CLanguageFamily {

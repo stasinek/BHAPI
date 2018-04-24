@@ -40,13 +40,13 @@
 #define WINVER 0x0500
 #endif
 
-#include "../../support/SupportDefs.h"
+#include <kits/support/SupportDefs.h>
 
-#include "../../add-ons/graphics/GraphicsEngine.h"
-#include "../../app/MessageFilter.h"
-#include "../../app/Message.h"
-#include "../../app/Messenger.h"
-#include "../../support/Locker.h"
+#include <kits/add-ons/graphics/GraphicsEngine.h>
+#include <kits/app/MessageFilter.h>
+#include <kits/app/Message.h>
+#include <kits/app/Messenger.h>
+#include <kits/support/Locker.h>
 
 #define WMBHAPI_MESSAGE_APP			0xa0
 #define WMBHAPI_MESSAGE_WINDOW			0xa1

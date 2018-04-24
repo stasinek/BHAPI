@@ -5,10 +5,10 @@
 #ifndef AREA_INFO_H
 #define AREA_INFO_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <StringClass.h>
 
-#include "Types.h"
+#include <Types.h>
 
 
 class AreaInfo {

@@ -6,7 +6,7 @@
 #define KERNEL_ARCH_X86_PAGING_PAE_X86_VM_TRANSLATION_MAP_PAE_H
 
 
-#include "paging/X86VMTranslationMap.h"
+#include <paging/X86VMTranslationMap.h>
 
 
 #if B_HAIKU_PHYSICAL_BITS == 64

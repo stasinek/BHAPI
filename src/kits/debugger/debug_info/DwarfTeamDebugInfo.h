@@ -6,7 +6,7 @@
 #ifndef DWARF_TEAM_DEBUG_INFO_H
 #define DWARF_TEAM_DEBUG_INFO_H
 
-#include "SpecificTeamDebugInfo.h"
+#include <SpecificTeamDebugInfo.h>
 
 
 class Architecture;

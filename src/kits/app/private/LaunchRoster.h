@@ -6,9 +6,9 @@
 #define _LAUNCH_ROSTER_H
 
 
-#include <Messenger.h>
+#include <kits/app/Messenger.h>
 class BStringList;
-//#include <StringList.h>
+//#include <kits/netStringList.h>
 
 // Flags for RegisterEvent()
 enum {

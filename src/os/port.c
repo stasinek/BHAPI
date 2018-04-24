@@ -5,7 +5,7 @@
 
 
 #include <OS.h>
-#include "syscalls.h"
+#include <syscalls.h>
 
 
 port_id

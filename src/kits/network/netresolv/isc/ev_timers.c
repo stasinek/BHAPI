@@ -25,16 +25,16 @@ static const char rcsid[] = "$Id: ev_timers.c,v 1.6 2005/04/27 04:56:36 sra Exp 
 
 /* Import. */
 
-#include "port_before.h"
-#include "fd_setsize.h"
+#include <port_before.h>
+#include <fd_setsize.h>
 
 #include <errno.h>
 
 #include <isc/assertions.h>
 #include <isc/eventlib.h>
-#include "eventlib_p.h"
+#include <eventlib_p.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 /* Constants. */
 

@@ -38,17 +38,17 @@ All rights reserved.
 #include <Bitmap.h>
 #include <ControlLook.h>
 #include <Node.h>
-#include <TranslationKit.h>
+#include <kits/TranslationKit.h>
 #include <View.h>
 #include <Window.h>
 
 #include <fs_attr.h>
 
-#include "BackgroundImage.h"
+#include <BackgroundImage.h>
 
-#include "Background.h"
-#include "Commands.h"
-#include "PoseView.h"
+#include <Background.h>
+#include <Commands.h>
+#include <PoseView.h>
 
 
 namespace BPrivate {

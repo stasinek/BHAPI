@@ -30,8 +30,8 @@
 #ifndef __BHAPI_ARCHIVABLE_H__
 #define __BHAPI_ARCHIVABLE_H__
 
-#include "./SupportDefs.h"
-#include "./../app/Message.h"
+#include <./SupportDefs.h>
+#include <./../app/Message.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

@@ -22,8 +22,8 @@
 #include <package/hpkg/v1/PackageReader.h>
 #include <package/PackageInfoContentHandler.h>
 
-#include "PackageInfoParser.h"
-#include "PackageInfoStringBuilder.h"
+#include <PackageInfoParser.h>
+#include <PackageInfoStringBuilder.h>
 
 
 namespace BPackageKit {

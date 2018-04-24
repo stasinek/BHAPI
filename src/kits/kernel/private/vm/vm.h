@@ -8,7 +8,7 @@
 #ifndef _KERNEL_VM_VM_H
 #define _KERNEL_VM_VM_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <arch/vm.h>
 #include <vm_defs.h>

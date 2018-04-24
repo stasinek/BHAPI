@@ -25,7 +25,7 @@
 */
 
 
-#include "paging/m68k_physical_page_mapper_large_memory.h"
+#include <paging/m68k_physical_page_mapper_large_memory.h>
 
 #include <new>
 
@@ -39,9 +39,9 @@
 #include <vm/vm_types.h>
 #include <vm/VMAddressSpace.h>
 
-#include "paging/m68k_physical_page_mapper.h"
-#include "paging/M68KPagingStructures.h"
-#include "paging/M68KVMTranslationMap.h"
+#include <paging/m68k_physical_page_mapper.h>
+#include <paging/M68KPagingStructures.h>
+#include <paging/M68KVMTranslationMap.h>
 
 
 // The number of slots we reserve per translation map from mapping page tables.

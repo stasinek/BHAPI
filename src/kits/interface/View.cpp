@@ -28,23 +28,23 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "View.h"
-#include "ViewPrivate.h"
-#include "ScrollView.h"
-#include "Window.h"
-#include "Box.h"
-#include "Bitmap.h"
-#include "GraphicsDefs.h"
+#include <View.h>
+#include <ViewPrivate.h>
+#include <ScrollView.h>
+#include <Window.h>
+#include <Box.h>
+#include <Bitmap.h>
+#include <GraphicsDefs.h>
 
-#include "../support/ClassInfo.h"
-#include "../support/Errors.h"
-#include "../add-ons/font/FontEngine.h"
-#include "../support/List.h"
-#include "../add-ons/graphics/GraphicsEngine.h"
-#include "../app/Application.h"
-#include "../app/AppDefs.h"
-#include "../app/Message.h"
-#include "../kernel/Debug.h"
+#include <kits/support/ClassInfo.h>
+#include <kits/support/Errors.h>
+#include <kits/add-ons/font/FontEngine.h>
+#include <kits/support/List.h>
+#include <kits/add-ons/graphics/GraphicsEngine.h>
+#include <kits/app/Application.h>
+#include <kits/app/AppDefs.h>
+#include <kits/app/Message.h>
+#include <os/debug.h>
 
 #include <math.h>
 

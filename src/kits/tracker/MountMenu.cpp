@@ -35,7 +35,7 @@ All rights reserved.
 // MountMenu implements a context menu used for mounting/unmounting volumes
 
 
-#include "MountMenu.h"
+#include <MountMenu.h>
 
 #include <Catalog.h>
 #include <Debug.h>
@@ -48,10 +48,10 @@ All rights reserved.
 
 #include <fs_info.h>
 
-#include "Commands.h"
-#include "IconMenuItem.h"
-#include "Tracker.h"
-#include "Bitmaps.h"
+#include <Commands.h>
+#include <IconMenuItem.h>
+#include <Tracker.h>
+#include <Bitmaps.h>
 
 #include <DiskDevice.h>
 #include <DiskDeviceList.h>

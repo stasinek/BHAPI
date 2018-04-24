@@ -4,13 +4,13 @@
  *
  */
 
-#include "AdapterIO.h"
+#include <AdapterIO.h>
 
 #include <MediaIO.h>
 
 #include <string.h>
 
-#include "debug.h"
+#include <debug.h>
 
 
 #define TIMEOUT_QUANTA 100000

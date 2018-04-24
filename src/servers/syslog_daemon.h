@@ -6,7 +6,7 @@
 #define SYSLOG_DAEMON_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 #define B_SYSTEM_LOGGER_SIGNATURE	"application/x-vnd.Haiku-SystemLogger"

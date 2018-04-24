@@ -28,12 +28,12 @@
  * --------------------------------------------------------------------------*/
 #ifdef BHAPI_OS_LINUX
 
-#include <../include/sys/time.h>
+#include <sys/time.h>
 #include <time.h>
 
 #include <Haiku.h>
-#include "../kernel/Kernel.h"
-#include "../support/SimpleLocker.h"
+#include <os/kernel.h>
+#include <kits/support/SimpleLocker.h>
 
 #define SECS_TO_US	    B_INT64_CONSTANT(1000000)
 

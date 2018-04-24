@@ -11,8 +11,8 @@
 #include <ObjectList.h>
 #include <Referenceable.h>
 
-#include "ArrayIndexPath.h"
-#include "Type.h"
+#include <ArrayIndexPath.h>
+#include <Type.h>
 
 
 enum type_component_kind {

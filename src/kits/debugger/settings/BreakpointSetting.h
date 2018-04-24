@@ -11,8 +11,8 @@
 
 #include <ObjectList.h>
 
-#include "SourceLocation.h"
-#include "Types.h"
+#include <SourceLocation.h>
+#include <Types.h>
 
 
 class BMessage;

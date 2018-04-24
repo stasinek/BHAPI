@@ -14,8 +14,8 @@
 #include <util/DoublyLinkedList.h>
 #include <util/OpenHashTable.h>
 
-#include "slab_debug.h"
-#include "slab_private.h"
+#include <slab_debug.h>
+#include <slab_private.h>
 
 
 class AbstractTraceEntryWithStackTrace;

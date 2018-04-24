@@ -7,10 +7,10 @@
  */
 
 
-#include <DesktopLink.h>
+#include <kits/netDesktopLink.h>
 
-#include <AppMisc.h>
-#include <ServerProtocol.h>
+#include <kits/netAppMisc.h>
+#include <kits/netServerProtocol.h>
 
 
 namespace BPrivate {

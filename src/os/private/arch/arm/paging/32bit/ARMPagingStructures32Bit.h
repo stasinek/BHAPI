@@ -6,8 +6,8 @@
 #define KERNEL_ARCH_ARM_PAGING_32_BIT_ARM_PAGING_STRUCTURES_32_BIT_H
 
 
-#include "paging/32bit/paging.h"
-#include "paging/ARMPagingStructures.h"
+#include <paging/32bit/paging.h>
+#include <paging/ARMPagingStructures.h>
 
 
 struct ARMPagingStructures32Bit : ARMPagingStructures {

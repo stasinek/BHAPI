@@ -33,10 +33,10 @@
 #include <be/interface/View.h>
 #include <be/interface/Region.h>
 
-#include "BHAPI_wrapper_beos-graphics.h"
+#include <BHAPI_wrapper_beos-graphics.h>
 
-#include "../../support/ClassInfo.h"
-#include "../../app/Application.h"
+#include <kits/support/ClassInfo.h>
+#include <kits/app/Application.h>
 
 #define CLICK_TIMEOUT 200000
 

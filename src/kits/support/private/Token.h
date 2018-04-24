@@ -29,8 +29,8 @@
 
 #ifndef BHAPI_PRIVATE_TOKEN_H
 #define BHAPI_PRIVATE_TOKEN_H
-#include "../../kits/support/SupportDefs.h"
-#include "../../kits/support/Locker.h"
+#include <kits/support/SupportDefs.h>
+#include <kits/support/Locker.h>
 
 #ifdef __cplusplus /* Just for C++ */
 class BTokensDepot;

@@ -4,7 +4,7 @@
  */
 
 
-#include "TeamFunctionSourceInformation.h"
+#include <TeamFunctionSourceInformation.h>
 
 
 TeamFunctionSourceInformation::~TeamFunctionSourceInformation()

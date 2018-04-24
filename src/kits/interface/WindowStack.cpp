@@ -7,7 +7,7 @@
  */
 
 
-#include "WindowStack.h"
+#include <WindowStack.h>
 
 #include <new>
 
@@ -18,7 +18,7 @@
 #include <PortLink.h>
 #include <ServerProtocol.h>
 
-#include "StackAndTilePrivate.h"
+#include <StackAndTilePrivate.h>
 
 
 using namespace BPrivate;

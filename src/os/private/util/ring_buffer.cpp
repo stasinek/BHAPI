@@ -4,7 +4,7 @@
  */
 
 
-#include "ring_buffer.h"
+#include <ring_buffer.h>
 
 #include <KernelExport.h>
 #if 0

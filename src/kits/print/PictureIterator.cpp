@@ -29,7 +29,7 @@ THE SOFTWARE.
 
 */
 
-#include "PictureIterator.h"
+#include <PictureIterator.h>
 
 // BPicture playback handlers class instance redirectors
 static void	_MovePenBy(void *p, BPoint delta) 														{ return ((PictureIterator *) p)->MovePenBy(delta); }

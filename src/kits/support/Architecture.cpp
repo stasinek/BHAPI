@@ -29,11 +29,11 @@
  * Copyright 2013, Ingo Weinhold, ingo_weinhold@gmx.de.
  * Distributed under the terms of the MIT License.
  */
-#include "Architecture.h"
+#include <Architecture.h>
 
-#include "StringList.h"
-#include "StringClass.h"
-#include "Errors.h"
+#include <StringList.h>
+#include <StringClass.h>
+#include <Errors.h>
 
 namespace bhapi {
 static const size_t k_MaxArchitectureCount = 16;

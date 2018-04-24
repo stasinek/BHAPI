@@ -27,12 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "StreamIO.h"
+#include <StreamIO.h>
 
-#include "../support/StringClass.h"
-#include "../support/StandardIO.h"
-#include "../kernel/Debug.h"
-#include "../support/Errors.h"
+#include <kits/support/StringClass.h>
+#include <kits/support/StandardIO.h>
+#include <os/debug.h>
+#include <kits/support/Errors.h>
 
 static BStreamIO _endl;
 static BStreamIO _ends;

@@ -7,9 +7,9 @@
 
 #include <sys/cdefs.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
-#include "kernel_debug_config.h"
+#include <kernel_debug_config.h>
 
 
 struct system_profiler_parameters;

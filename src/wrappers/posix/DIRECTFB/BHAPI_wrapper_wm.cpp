@@ -30,7 +30,7 @@
 #ifdef LINUX
 #ifdef DIRECTFB
 
-#include "BHAPI_wrapper_dfb.h"
+#include <BHAPI_wrapper_dfb.h>
 
 #define DFB_WINDOW_SMALL_TITLEBAR_HEIGHT	16
 #define DFB_WINDOW_NORMAL_TITLEBAR_HEIGHT	20

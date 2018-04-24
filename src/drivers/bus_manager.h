@@ -6,7 +6,7 @@
 #define _BUS_MANAGER_H
 
 
-#include <module.h>
+#include <kits/netmodule.h>
 
 
 typedef struct bus_manager_info bus_manager_info;

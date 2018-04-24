@@ -36,13 +36,13 @@
  *		Axel Dörfler, axeld@pinc-software.de
  */
 
-#include "Screen.h"
-#include "Window.h"
+#include <Screen.h>
+#include <Window.h>
 #include <PrivateScreen.h>
 
-#include "../add-ons/graphics/GraphicsEngine.h"
-#include "../app/Application.h"
-#include "../support/Errors.h"
+#include <kits/add-ons/graphics/GraphicsEngine.h>
+#include <kits/app/Application.h>
+#include <kits/support/Errors.h>
 
 BScreen::BScreen(__be_uint32 id)
     : fID(id)

@@ -5,7 +5,7 @@
  */
 
 
-#include "TeamDebugInfo.h"
+#include <TeamDebugInfo.h>
 
 #include <stdio.h>
 
@@ -14,24 +14,24 @@
 #include <AutoDeleter.h>
 #include <AutoLocker.h>
 
-#include "Architecture.h"
-#include "DebuggerInterface.h"
-#include "DebuggerTeamDebugInfo.h"
-#include "DisassembledCode.h"
-#include "DwarfTeamDebugInfo.h"
-#include "FileManager.h"
-#include "FileSourceCode.h"
-#include "Function.h"
-#include "FunctionID.h"
-#include "ImageDebugInfo.h"
-#include "ImageDebugInfoLoadingState.h"
-#include "LocatableFile.h"
-#include "SourceFile.h"
-#include "SourceLanguage.h"
-#include "SpecificImageDebugInfo.h"
-#include "StringUtils.h"
-#include "Type.h"
-#include "TypeLookupConstraints.h"
+#include <Architecture.h>
+#include <DebuggerInterface.h>
+#include <DebuggerTeamDebugInfo.h>
+#include <DisassembledCode.h>
+#include <DwarfTeamDebugInfo.h>
+#include <FileManager.h>
+#include <FileSourceCode.h>
+#include <Function.h>
+#include <FunctionID.h>
+#include <ImageDebugInfo.h>
+#include <ImageDebugInfoLoadingState.h>
+#include <LocatableFile.h>
+#include <SourceFile.h>
+#include <SourceLanguage.h>
+#include <SpecificImageDebugInfo.h>
+#include <StringUtils.h>
+#include <Type.h>
+#include <TypeLookupConstraints.h>
 
 
 // #pragma mark - FunctionHashDefinition

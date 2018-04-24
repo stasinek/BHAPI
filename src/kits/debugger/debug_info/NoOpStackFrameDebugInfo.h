@@ -6,7 +6,7 @@
 #define NO_OP_STACK_FRAME_DEBUG_INFO_H
 
 
-#include "StackFrameDebugInfo.h"
+#include <StackFrameDebugInfo.h>
 
 
 class NoOpStackFrameDebugInfo : public StackFrameDebugInfo {

@@ -6,7 +6,7 @@
 #ifndef NOOP_SETTINGS_MANAGER_H
 #define NOOP_SETTINGS_MANAGER_H
 
-#include "SettingsManager.h"
+#include <SettingsManager.h>
 
 
 class NoOpSettingsManager : public SettingsManager {

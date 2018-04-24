@@ -1,25 +1,21 @@
-﻿/*
+/*
  * Copyright 2007-2011, Ingo Weinhold, ingo_weinhold@gmx.de.
  * Distributed under the terms of the MIT License.
  */
 #ifndef BHAPI_KERNEL_CONDITION_VARIABLE_H
 #define BHAPI_KERNEL_CONDITION_VARIABLE_H
 
-
-#include <kernel/OS.h>
-#include <thread.h>
 #include <os/thread_types.h>
+#include <kits/kernel/OS.h>
+#include <thread.h>
 #include <debug.h>
 
 #ifdef __cplusplus
-
 #include <util/DoublyLinkedList.h>
 #include <util/OpenHashTable.h>
-
+using namespace bhapi;
 
 struct ConditionVariable;
-
-
 struct ConditionVariableEntry
     : DoublyLinkedListLinkImpl<ConditionVariableEntry> {
 public:
@@ -42,7 +38,7 @@ private:
 
 private:
             ConditionVariable*	fVariable;
-            Thread*				fThread;
+            BKernel::Thread*				fThread;
             status_t			fWaitStatus;
 
             friend struct ConditionVariable;

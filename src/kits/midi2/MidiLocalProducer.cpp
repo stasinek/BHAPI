@@ -10,11 +10,11 @@
 
 #include <stdlib.h>
 
-#include "debug.h"
+#include <debug.h>
 #include <MidiConsumer.h>
 #include <MidiProducer.h>
 #include <MidiRoster.h>
-#include "protocol.h"
+#include <protocol.h>
 
 
 BMidiLocalProducer::BMidiLocalProducer(const char* name)

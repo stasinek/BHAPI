@@ -6,10 +6,10 @@
 #define _CREATE_DISPLAY_MODES_H
 
 
-#include <edid.h>
+#include <kits/netedid.h>
 
-#include <Accelerant.h>
-#include <GraphicsDefs.h>
+#include <kits/netAccelerant.h>
+#include <kits/netGraphicsDefs.h>
 
 
 typedef bool (*check_display_mode_hook)(display_mode* mode);

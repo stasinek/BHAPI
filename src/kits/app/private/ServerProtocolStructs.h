@@ -9,8 +9,8 @@
 #define APP_SERVER_PROTOCOL_STRUCTS_H
 
 
-#include <AffineTransform.h>
-#include <Rect.h>
+#include <kits/netAffineTransform.h>
+#include <kits/interface/Rect.h>
 
 
 struct ViewSetStateInfo {

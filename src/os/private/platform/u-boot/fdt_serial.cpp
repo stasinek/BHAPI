@@ -7,7 +7,7 @@
  *		Alexander von Gluck IV, kallisti5@unixzen.com
  */
 
-#include "fdt_serial.h"
+#include <fdt_serial.h>
 
 #include <KernelExport.h>
 #include <ByteOrder.h>
@@ -27,7 +27,7 @@ extern "C" {
 #include <libfdt_env.h>
 };
 
-#include "fdt_support.h"
+#include <fdt_support.h>
 
 
 // If we dprintf before the UART is initalized there will be no output

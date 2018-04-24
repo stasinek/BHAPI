@@ -8,7 +8,7 @@
 #include <new>
 #include <unistd.h>
 
-#include <../include/sys/stat.h>
+#include <sys/stat.h>
 
 #include <Directory.h>
 #include <DiskDevice.h>
@@ -27,9 +27,9 @@
 #include <AutoDeleter.h>
 
 #include <ddm_userland_interface_defs.h>
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
-#include "PartitionDelegate.h"
+#include <PartitionDelegate.h>
 
 
 //#define TRACE_PARTITION

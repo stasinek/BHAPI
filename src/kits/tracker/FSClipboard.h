@@ -38,9 +38,9 @@ All rights reserved.
 #include <Looper.h>
 #include <ObjectList.h>
 
-#include "Model.h"
-#include "Pose.h"
-#include "PoseView.h"
+#include <Model.h>
+#include <Pose.h>
+#include <PoseView.h>
 
 
 namespace BPrivate {

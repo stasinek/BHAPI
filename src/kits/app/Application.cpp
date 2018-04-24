@@ -27,26 +27,26 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "../support/List.h"
-#include "../support/Locker.h"
-#include "../support/Autolock.h"
-#include "../kernel/Kernel.h"
-#include "../kernel/Debug.h"
-#include "../interface/Font.h"
-#include "../add-ons/graphics/GraphicsEngine.h"
-#include "../storage/FindDirectory.h"
-#include "../storage/Directory.h"
-#include "../../private/app/PrivateHandler.h"
-#include "../app/AppDefs.h"
-#include "../app/Message.h"
-#include "../app/MessageQueue.h"
-#include "../app/Looper.h"
-#include "../support/Errors.h"
-#include "../support/StringClass.h"
+#include <kits/support/List.h>
+#include <kits/support/Locker.h>
+#include <kits/support/Autolock.h>
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/interface/Font.h>
+#include <kits/add-ons/graphics/GraphicsEngine.h>
+#include <kits/storage/FindDirectory.h>
+#include <kits/storage/Directory.h>
+#include <kits/private/app/PrivateHandler.h>
+#include <kits/app/AppDefs.h>
+#include <kits/app/Message.h>
+#include <kits/app/MessageQueue.h>
+#include <kits/app/Looper.h>
+#include <kits/support/Errors.h>
+#include <kits/support/StringClass.h>
 
 //-----------------------------------------------------------------------------
-#include "Application.h"
-#include "Clipboard.h"
+#include <kits/netApplication.h>
+#include <kits/netClipboard.h>
 //-----------------------------------------------------------------------------
 #define B_APP_CURSOR_REQUESTED (uint32)0
 BHAPI_LOCAL BCursor _B_CURSOR_SYSTEM_DEFAULT(NULL);
@@ -783,46 +783,46 @@ bool BApplication::IsCursorHidden() const
  */
 
 
-#include <Application.h>
+#include <kits/netApplication.h>
 
-#include <new>
-#include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <strings.h>
-#include <unistd.h>
+#include <kits/netnew>
+#include <kits/netpthread.h>
+#include <kits/netstdio.h>
+#include <kits/netstdlib.h>
+#include <kits/netstring.h>
+#include <kits/netstrings.h>
+#include <kits/netunistd.h>
 
-#include <Alert.h>
-#include <AppFileInfo.h>
-#include <Cursor.h>
-#include <Debug.h>
-#include <Entry.h>
-#include <File.h>
-#include <Locker.h>
-#include <MessageRunner.h>
-#include <ObjectList.h>
-#include <Path.h>
-#include <PropertyInfo.h>
-#include <RegistrarDefs.h>
-#include <Resources.h>
-#include <Roster.h>
-#include <Window.h>
+#include <kits/netAlert.h>
+#include <kits/netAppFileInfo.h>
+#include <kits/netCursor.h>
+#include <kits/netDebug.h>
+#include <kits/storage/Entry.h>
+#include <kits/netFile.h>
+#include <kits/netLocker.h>
+#include <kits/netMessageRunner.h>
+#include <kits/netObjectList.h>
+#include <kits/netPath.h>
+#include <kits/netPropertyInfo.h>
+#include <kits/netRegistrarDefs.h>
+#include <kits/netResources.h>
+#include <kits/netRoster.h>
+#include <kits/netWindow.h>
 
-#include <AppMisc.h>
-#include <AppServerLink.h>
-#include <AutoLocker.h>
-#include <BitmapPrivate.h>
-#include <DraggerPrivate.h>
-#include <LaunchDaemonDefs.h>
-#include <LaunchRoster.h>
-#include <LooperList.h>
-#include <MenuWindow.h>
-#include <PicturePrivate.h>
-#include <PortLink.h>
-#include <RosterPrivate.h>
-#include <ServerMemoryAllocator.h>
-#include <ServerProtocol.h>
+#include <kits/netAppMisc.h>
+#include <kits/netAppServerLink.h>
+#include <kits/netAutoLocker.h>
+#include <kits/netBitmapPrivate.h>
+#include <kits/netDraggerPrivate.h>
+#include <kits/netLaunchDaemonDefs.h>
+#include <kits/netLaunchRoster.h>
+#include <kits/netLooperList.h>
+#include <kits/netMenuWindow.h>
+#include <kits/netPicturePrivate.h>
+#include <kits/netPortLink.h>
+#include <kits/netRosterPrivate.h>
+#include <kits/netServerMemoryAllocator.h>
+#include <kits/netServerProtocol.h>
 
 
 using namespace BPrivate;

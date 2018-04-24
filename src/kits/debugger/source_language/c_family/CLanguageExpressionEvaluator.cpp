@@ -9,31 +9,31 @@
  *		Ingo Weinhold <bonefish@cs.tu-berlin.de>
  */
 
-#include "CLanguageExpressionEvaluator.h"
+#include <CLanguageExpressionEvaluator.h>
 
 #include <algorithm>
 
-#include "AutoLocker.h"
+#include <AutoLocker.h>
 
-#include "CLanguageTokenizer.h"
-#include "ExpressionInfo.h"
-#include "FloatValue.h"
-#include "IntegerFormatter.h"
-#include "IntegerValue.h"
-#include "ObjectID.h"
-#include "StackFrame.h"
-#include "SyntheticPrimitiveType.h"
-#include "TeamTypeInformation.h"
-#include "Thread.h"
-#include "Type.h"
-#include "TypeHandlerRoster.h"
-#include "TypeLookupConstraints.h"
-#include "Value.h"
-#include "ValueLocation.h"
-#include "ValueNode.h"
-#include "ValueNodeManager.h"
-#include "Variable.h"
-#include "VariableValueNodeChild.h"
+#include <CLanguageTokenizer.h>
+#include <ExpressionInfo.h>
+#include <FloatValue.h>
+#include <IntegerFormatter.h>
+#include <IntegerValue.h>
+#include <ObjectID.h>
+#include <StackFrame.h>
+#include <SyntheticPrimitiveType.h>
+#include <TeamTypeInformation.h>
+#include <Thread.h>
+#include <Type.h>
+#include <TypeHandlerRoster.h>
+#include <TypeLookupConstraints.h>
+#include <Value.h>
+#include <ValueLocation.h>
+#include <ValueNode.h>
+#include <ValueNodeManager.h>
+#include <Variable.h>
+#include <VariableValueNodeChild.h>
 
 
 using namespace CLanguage;

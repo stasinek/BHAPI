@@ -43,8 +43,8 @@ All rights reserved.
 #include <StorageDefs.h>
 #include <StringClass.h>
 
-#include "IconCache.h"
-#include "ObjectList.h"
+#include <IconCache.h>
+#include <ObjectList.h>
 
 
 class BPath;

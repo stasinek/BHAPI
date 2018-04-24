@@ -31,7 +31,7 @@
 #define BHAPI_POLYGON_H
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../interface/Rect.h"
+#include <kits/interface/Rect.h>
 class BHAPI_IMPEXP BPolygon {
 public:
     BPolygon(const BPoint *pts,  int32 nPts);

@@ -4,18 +4,18 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Jobs.h"
+#include <Jobs.h>
 
 #include <AutoLocker.h>
 
-#include "Architecture.h"
-#include "DebuggerInterface.h"
-#include "DisassembledCode.h"
-#include "Function.h"
-#include "FunctionInstance.h"
-#include "FileSourceCode.h"
-#include "Team.h"
-#include "TeamDebugInfo.h"
+#include <Architecture.h>
+#include <DebuggerInterface.h>
+#include <DisassembledCode.h>
+#include <Function.h>
+#include <FunctionInstance.h>
+#include <FileSourceCode.h>
+#include <Team.h>
+#include <TeamDebugInfo.h>
 
 
 LoadSourceCodeJob::LoadSourceCodeJob(

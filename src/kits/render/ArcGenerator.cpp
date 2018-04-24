@@ -28,9 +28,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "ArcGenerator.h"
+#include <ArcGenerator.h>
 
-#include "../kernel/Debug.h"
+#include <os/debug.h>
 
 #include <math.h>
 

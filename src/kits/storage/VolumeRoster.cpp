@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "VolumeRoster.h"
+#include <VolumeRoster.h>
 
-#include "../support/Errors.h"
+#include <kits/support/Errors.h>
 
 BVolumeRoster::BVolumeRoster()
 	: fPos(0)

@@ -7,8 +7,8 @@
 
 #include <commpage.h>
 
-#include "x86_signals.h"
-#include "x86_syscalls.h"
+#include <x86_signals.h>
+#include <x86_syscalls.h>
 
 
 status_t

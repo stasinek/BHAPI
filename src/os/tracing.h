@@ -13,7 +13,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#include "tracing_config.h"
+#include <tracing_config.h>
 
 
 struct trace_entry {

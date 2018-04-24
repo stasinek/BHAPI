@@ -4,13 +4,13 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "SpecificImageDebugInfo.h"
+#include <SpecificImageDebugInfo.h>
 
-#include "BasicFunctionDebugInfo.h"
-#include "DebuggerInterface.h"
-#include "Demangler.h"
-#include "ImageInfo.h"
-#include "SymbolInfo.h"
+#include <BasicFunctionDebugInfo.h>
+#include <DebuggerInterface.h>
+#include <Demangler.h>
+#include <ImageInfo.h>
+#include <SymbolInfo.h>
 
 
 SpecificImageDebugInfo::~SpecificImageDebugInfo()

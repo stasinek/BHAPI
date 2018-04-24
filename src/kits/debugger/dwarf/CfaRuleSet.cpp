@@ -8,7 +8,7 @@
 
 #include <new>
 
-#include "CfaRuleSet.h"
+#include <CfaRuleSet.h>
 
 
 CfaRuleSet::CfaRuleSet()

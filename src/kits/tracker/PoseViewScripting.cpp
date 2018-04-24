@@ -43,8 +43,8 @@ All rights reserved.
 #include <Message.h>
 #include <PropertyInfo.h>
 
-#include "Tracker.h"
-#include "PoseView.h"
+#include <Tracker.h>
+#include <PoseView.h>
 
 #define kPosesSuites "suite/vnd.Be-TrackerPoses"
 

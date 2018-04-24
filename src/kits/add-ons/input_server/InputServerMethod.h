@@ -6,7 +6,7 @@
 #define _INPUTSERVERMETHOD_H
 
 
-#include <InputServerFilter.h>
+#include <kits/netInputServerFilter.h>
 
 
 class _BMethodAddOn_;

@@ -27,7 +27,7 @@
 
 #include <arch/debug.h>
 
-#include "IOSchedulerRoster.h"
+#include <IOSchedulerRoster.h>
 
 
 // This is the kernel-side implementation of the system profiling support.

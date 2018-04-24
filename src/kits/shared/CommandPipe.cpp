@@ -9,7 +9,7 @@
 
 //! BCommandPipe class to handle reading shell output
 //  (stdout/stderr) of other programs into memory.
-#include "CommandPipe.h"
+#include <CommandPipe.h>
 
 
 #include <unistd.h>

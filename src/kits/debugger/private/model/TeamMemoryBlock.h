@@ -6,13 +6,13 @@
 #define TEAM_MEMORY_BLOCK_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <Locker.h>
 #include <Referenceable.h>
 #include <util/DoublyLinkedList.h>
 
-#include "Types.h"
+#include <Types.h>
 
 
 class TeamMemoryBlockOwner;

@@ -31,7 +31,7 @@
  */
 #ifndef BHAPI_UTF8_H
 #define BHAPI_UTF8_H
-#include "../interface/InterfaceDefs.h"
+#include <kits/interface/InterfaceDefs.h>
 #include <Haiku.h>
 //-------------------------------------------------------------------------------------------------
 /*  Conversion Flavors */

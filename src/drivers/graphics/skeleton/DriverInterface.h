@@ -11,12 +11,12 @@
 #ifndef DRIVERINTERFACE_H
 #define DRIVERINTERFACE_H
 
-#include <Accelerant.h>
-#include "video_overlay.h"
-#include <Drivers.h>
-#include <PCI.h>
-#include <kernel/OS.h>
-#include "AGP.h"
+#include <kits/netAccelerant.h>
+#include <kits/netvideo_overlay.h>
+#include <kits/netDrivers.h>
+#include <kits/netPCI.h>
+#include <kits/kernel/OS.h>
+#include <kits/netAGP.h>
 
 #define DRIVER_PREFIX "skel"
 

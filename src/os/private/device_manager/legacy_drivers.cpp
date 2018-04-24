@@ -4,7 +4,7 @@
  */
 
 
-#include "legacy_drivers.h"
+#include <legacy_drivers.h>
 
 #include <dirent.h>
 #include <errno.h>
@@ -29,8 +29,8 @@
 #include <util/Stack.h>
 #include <vfs.h>
 
-#include "AbstractModuleDevice.h"
-#include "devfs_private.h"
+#include <AbstractModuleDevice.h>
+#include <devfs_private.h>
 
 
 //#define TRACE_LEGACY_DRIVERS

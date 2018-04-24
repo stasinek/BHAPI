@@ -10,7 +10,7 @@
 #include <new>
 #include <set>
 
-#include <../include/string>
+#include <string>
 
 #include <AppFileInfo.h>
 #include <Bitmap.h>

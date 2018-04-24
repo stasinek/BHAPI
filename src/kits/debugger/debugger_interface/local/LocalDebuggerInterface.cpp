@@ -4,7 +4,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "LocalDebuggerInterface.h"
+#include <LocalDebuggerInterface.h>
 
 #include <new>
 
@@ -14,25 +14,25 @@
 
 #include <AutoLocker.h>
 #include <memory_private.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <system_info.h>
 #include <util/DoublyLinkedList.h>
 #include <util/KMessage.h>
 
-#include "debug_utils.h"
+#include <debug_utils.h>
 
-#include "ArchitectureX86.h"
-#include "ArchitectureX8664.h"
-#include "AreaInfo.h"
-#include "AutoDeleter.h"
-#include "CpuState.h"
-#include "DebugEvent.h"
-#include "ImageInfo.h"
-#include "SemaphoreInfo.h"
-#include "SymbolInfo.h"
-#include "SystemInfo.h"
-#include "TeamInfo.h"
-#include "ThreadInfo.h"
+#include <ArchitectureX86.h>
+#include <ArchitectureX8664.h>
+#include <AreaInfo.h>
+#include <AutoDeleter.h>
+#include <CpuState.h>
+#include <DebugEvent.h>
+#include <ImageInfo.h>
+#include <SemaphoreInfo.h>
+#include <SymbolInfo.h>
+#include <SystemInfo.h>
+#include <TeamInfo.h>
+#include <ThreadInfo.h>
 
 
 // number of debug contexts the pool does initially create

@@ -31,13 +31,13 @@
  * Distributed under the terms of the Haiku License.
  */
 
-#include "Beep.h"
-#include "../app/Messenger.h"
-#include "../app/Message.h"
-#include "../support/Errors.h"
+#include <Beep.h>
+#include <kits/app/Messenger.h>
+#include <kits/app/Message.h>
+#include <kits/support/Errors.h>
 
 //#include <DataExchange.h>
-#include "../../private/media/ServerInterface.h"
+#include <kits/private/media/ServerInterface.h>
 
 status_t bhapi::system_beep(const char* eventName)
 {

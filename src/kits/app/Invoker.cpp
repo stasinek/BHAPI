@@ -27,16 +27,16 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Invoker.h"
-#include "Application.h"
-#include "Messenger.h"
-#include "Message.h"
-#include "AppDefs.h"
+#include <kits/netInvoker.h>
+#include <kits/netApplication.h>
+#include <kits/app/Messenger.h>
+#include <kits/netMessage.h>
+#include <kits/netAppDefs.h>
 
-#include "../kernel/KERNEL.h"
-#include "../kernel/Debug.h"
-#include "../support/Errors.h"
-#include "../../private/app/PrivateHandler.h"
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/support/Errors.h>
+#include <kits/private/app/PrivateHandler.h>
 
 BInvoker::BInvoker()
     : fMessage(NULL), fReplyHandlerToken(B_MAXUINT64), fTimeout(B_INFINITE_TIMEOUT), fNotifyKind(B_CONTROL_INVOKED), fNotifyCalled(false)

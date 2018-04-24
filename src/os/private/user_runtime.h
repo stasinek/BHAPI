@@ -10,7 +10,7 @@
 
 
 #include <image.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 #define MAGIC_APP_NAME	"_APP_"

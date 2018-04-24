@@ -5,7 +5,7 @@
 #ifndef _MOVE_JOB_H
 #define _MOVE_JOB_H
 
-#include "DiskDeviceJob.h"
+#include <DiskDeviceJob.h>
 
 
 namespace BPrivate {

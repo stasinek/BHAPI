@@ -39,7 +39,7 @@ static const char rcsid[] = "$Header: /proj/cvs/prod/libbind/dst/dst_api.c,v 1.1
  * void dst_free_key()       	Releases all memory referenced by key structure
  */
 
-#include "port_before.h"
+#include <port_before.h>
 #include <stdio.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -56,8 +56,8 @@ static const char rcsid[] = "$Header: /proj/cvs/prod/libbind/dst/dst_api.c,v 1.1
 #include <arpa/nameser.h>
 #include <resolv.h>
 
-#include "dst_internal.h"
-#include "port_after.h"
+#include <dst_internal.h>
+#include <port_after.h>
 
 /* static variables */
 static int done_init = 0;

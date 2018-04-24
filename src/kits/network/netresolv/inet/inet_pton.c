@@ -26,7 +26,7 @@ __RCSID("$NetBSD: inet_pton.c,v 1.8 2012/03/13 21:13:38 christos Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/param.h>
 #include <sys/types.h>
@@ -40,7 +40,7 @@ __RCSID("$NetBSD: inet_pton.c,v 1.8 2012/03/13 21:13:38 christos Exp $");
 #include <ctype.h>
 #include <errno.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 /*%
  * WARNING: Don't even consider trying to compile this on a system where

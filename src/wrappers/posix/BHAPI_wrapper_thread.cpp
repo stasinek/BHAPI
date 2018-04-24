@@ -30,16 +30,16 @@
 
 
 
-#include <../include/sys/types.h>
+#include <sys/types.h>
 #include <unistd.h>
 #include <pthread.h>
 #include <errno.h>
 #include <signal.h>
 
-#include "../config.h"
-#include "../kernel/Kernel.h"
-#include "../support/List.h"
-#include "../support/StringClass.h"
+#include <kits/config.h>
+#include <os/kernel.h>
+#include <kits/support/List.h>
+#include <kits/support/StringClass.h>
 
 typedef struct threadCallback {
 	b_thread_func	func;

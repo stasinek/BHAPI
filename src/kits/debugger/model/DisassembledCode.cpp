@@ -4,7 +4,7 @@
  */
 
 
-#include "DisassembledCode.h"
+#include <DisassembledCode.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -13,8 +13,8 @@
 
 #include <StringClass.h>
 
-#include "SourceLanguage.h"
-#include "Statement.h"
+#include <SourceLanguage.h>
+#include <Statement.h>
 
 
 struct DisassembledCode::Line {

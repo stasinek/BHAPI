@@ -6,7 +6,7 @@
 #define ENUMERATION_VALUE_FORMATTER_H
 
 
-#include "IntegerValueFormatter.h"
+#include <IntegerValueFormatter.h>
 
 
 class EnumerationValueFormatter : public IntegerValueFormatter {

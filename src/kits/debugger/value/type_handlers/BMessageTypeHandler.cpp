@@ -4,12 +4,12 @@
  */
 
 
-#include "BMessageTypeHandler.h"
+#include <BMessageTypeHandler.h>
 
 #include <new>
 
-#include "BMessageValueNode.h"
-#include "Type.h"
+#include <BMessageValueNode.h>
+#include <Type.h>
 
 
 BMessageTypeHandler::~BMessageTypeHandler()

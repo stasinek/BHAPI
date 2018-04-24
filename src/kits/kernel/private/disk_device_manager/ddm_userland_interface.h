@@ -9,7 +9,7 @@
 #define _DISK_DEVICE_MANAGER_USERLAND_INTERFACE_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <DiskDeviceDefs.h>
 

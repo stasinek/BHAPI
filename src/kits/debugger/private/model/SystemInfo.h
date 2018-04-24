@@ -7,10 +7,10 @@
 
 #include <sys/utsname.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <StringClass.h>
 
-#include "Types.h"
+#include <Types.h>
 
 
 class SystemInfo {

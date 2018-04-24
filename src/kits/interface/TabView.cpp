@@ -27,9 +27,9 @@
  * 
  * --------------------------------------------------------------------------*/
 
-#include "TabView.h"
+#include <TabView.h>
 
-#include "../support/StringClass.h"
+#include <kits/support/StringClass.h>
 
 BTab::BTab(BView *targetView)
 	: fLabel(NULL), fEnabled(true), fFocus(false), fOwner(NULL)

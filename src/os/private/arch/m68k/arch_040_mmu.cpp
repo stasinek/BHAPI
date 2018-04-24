@@ -12,7 +12,7 @@
 
 #define ARCH_M68K_MMU_TYPE 68040
 
-#include "arch_vm_translation_map_impl.cpp"
+#include <arch_vm_translation_map_impl.cpp"
 
 static void
 set_pgdir(void *rt)

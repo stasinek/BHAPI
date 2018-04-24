@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "../../support/SupportDefs.h"
-#include "../../kernel/Kernel.h"
-#include "../../kernel/Debug.h"
-#include "../../support/StringClass.h"
-#include "../../support/Errors.h"
+#include <kits/support/SupportDefs.h>
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/Errors.h>
 
 #include <winsock2.h>
 #include <windows.h>
-//#include <sddl.h"
+//#include <sddl.h>
 
 #define WIN32_AREA_INFO_MAGIC		0xABFC
 

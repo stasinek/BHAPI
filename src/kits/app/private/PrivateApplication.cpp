@@ -27,12 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "PrivateApplication.h"
+#include <kits/netPrivateApplication.h>
 
-#include "../kernel/KERNEL.h"
-#include "../support/StringClass.h"
-#include "../kernel/Debug.h"
-#include "../support/Errors.h"
+#include <os/kernel.h>
+#include <kits/support/StringClass.h>
+#include <os/debug.h>
+#include <kits/support/Errors.h>
 
 BApplicationConnector *bhapi::__be_app_connector = NULL;
 

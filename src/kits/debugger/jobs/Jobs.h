@@ -9,10 +9,10 @@
 #include <Entry.h>
 #include <StringClass.h>
 
-#include "ImageDebugInfoLoadingState.h"
-#include "ImageDebugInfoProvider.h"
-#include "Types.h"
-#include "Worker.h"
+#include <ImageDebugInfoLoadingState.h>
+#include <ImageDebugInfoProvider.h>
+#include <Types.h>
+#include <Worker.h>
 
 
 class Architecture;

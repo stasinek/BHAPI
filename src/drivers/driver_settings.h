@@ -2,7 +2,7 @@
 #define _DRIVER_SETTINGS_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 typedef struct driver_parameter {

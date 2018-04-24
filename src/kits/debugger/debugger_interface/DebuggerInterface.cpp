@@ -5,13 +5,13 @@
  */
 
 
-#include "DebuggerInterface.h"
+#include <DebuggerInterface.h>
 
 #include <algorithm>
 
 #include <AutoDeleter.h>
 
-#include "ElfSymbolLookup.h"
+#include <ElfSymbolLookup.h>
 
 
 // #pragma mark - SymbolTableLookupSource

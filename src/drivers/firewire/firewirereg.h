@@ -37,31 +37,31 @@
 #ifndef _FIREWIREREG_H
 #define _FIREWIREREG_H
 #ifdef __HAIKU__
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #else
 #ifdef __DragonFly__
 typedef	d_thread_t fw_proc;
-#include <sys/select.h>
+#include <kits/netsys/select.h>
 #elif __FreeBSD_version >= 500000
 typedef	struct thread fw_proc;
-#include <sys/selinfo.h>
+#include <kits/netsys/selinfo.h>
 #else
 typedef	struct proc fw_proc;
-#include <sys/select.h>
+#include <kits/netsys/select.h>
 #endif
 #endif/*__HAIKU__*/
 
-#include <sys/uio.h>
+#include <kits/netsys/uio.h>
 
 #ifndef __HAIKU__
-#include <sys/mutex.h>
-#include <sys/taskqueue.h>
+#include <kits/netsys/mutex.h>
+#include <kits/netsys/taskqueue.h>
 #define	splfw splimp
 #else
-#include <lock.h>
-#include <dpc.h>
-#include "fwglue.h"
-#include "timer.h"
+#include <kits/netlock.h>
+#include <kits/netdpc.h>
+#include <kits/netfwglue.h>
+#include <kits/nettimer.h>
 #endif
 
 #define MAX_REQCOUNT	0xffff

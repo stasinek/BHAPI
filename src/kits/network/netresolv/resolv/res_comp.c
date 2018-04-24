@@ -71,7 +71,7 @@ static const char sccsid[] = "@(#)res_comp.c	8.1 (Berkeley) 6/4/93";
 static const char rcsid[] = "$Id: res_comp.c,v 1.5 2005/07/28 06:51:50 marka Exp $";
 #endif /* LIBC_SCCS and not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 #include <sys/types.h>
 #include <sys/param.h>
 #include <netinet/in.h>
@@ -82,7 +82,7 @@ static const char rcsid[] = "$Id: res_comp.c,v 1.5 2005/07/28 06:51:50 marka Exp
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include "port_after.h"
+#include <port_after.h>
 
 #ifdef __weak_alias
 __weak_alias(dn_expand,_dn_expand)

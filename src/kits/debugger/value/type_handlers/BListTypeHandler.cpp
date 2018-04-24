@@ -4,12 +4,12 @@
  */
 
 
-#include "BListTypeHandler.h"
+#include <BListTypeHandler.h>
 
 #include <new>
 
-#include "BListValueNode.h"
-#include "Type.h"
+#include <BListValueNode.h>
+#include <Type.h>
 
 
 BListTypeHandler::~BListTypeHandler()

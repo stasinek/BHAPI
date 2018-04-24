@@ -28,11 +28,11 @@
 #include <vm/vm.h>
 #include <vm/VMAddressSpace.h>
 
-#include "HashedObjectCache.h"
-#include "MemoryManager.h"
-#include "slab_debug.h"
-#include "slab_private.h"
-#include "SmallObjectCache.h"
+#include <HashedObjectCache.h>
+#include <MemoryManager.h>
+#include <slab_debug.h>
+#include <slab_private.h>
+#include <SmallObjectCache.h>
 
 
 #if !USE_GUARDED_HEAP_FOR_OBJECT_CACHE

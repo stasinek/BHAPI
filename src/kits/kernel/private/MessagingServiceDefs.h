@@ -8,7 +8,7 @@
 #ifndef MESSAGING_SERVICE_DEFS_H
 #define MESSAGING_SERVICE_DEFS_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <messaging.h>
 

@@ -8,10 +8,10 @@
 
 #include <Looper.h>
 
-#include "Function.h"
-#include "Team.h"
-#include "TeamMemoryBlock.h"
-#include "ValueNodeContainer.h"
+#include <Function.h>
+#include <Team.h>
+#include <TeamMemoryBlock.h>
+#include <ValueNodeContainer.h>
 
 
 class entry_ref;

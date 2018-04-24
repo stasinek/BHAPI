@@ -3,14 +3,14 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "MediaClient.h"
+#include <MediaClient.h>
 
 #include <MediaConnection.h>
 
 #include <MediaRoster.h>
 #include <TimeSource.h>
 
-#include "debug.h"
+#include <debug.h>
 
 
 BMediaClient::BMediaClient(const char* name,

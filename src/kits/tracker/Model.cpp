@@ -39,7 +39,7 @@ All rights reserved.
 // use a more efficient way of storing file type and preferred app strings
 
 
-#include "Model.h"
+#include <Model.h>
 
 #include <stdlib.h>
 #include <strings.h>
@@ -63,13 +63,13 @@ All rights reserved.
 #include <Volume.h>
 #include <VolumeRoster.h>
 
-#include "Attributes.h"
-#include "Bitmaps.h"
-#include "FindPanel.h"
-#include "FSUtils.h"
-#include "MimeTypes.h"
-#include "Tracker.h"
-#include "Utilities.h"
+#include <Attributes.h>
+#include <Bitmaps.h>
+#include <FindPanel.h>
+#include <FSUtils.h>
+#include <MimeTypes.h>
+#include <Tracker.h>
+#include <Utilities.h>
 
 
 #undef B_TRANSLATION_CONTEXT

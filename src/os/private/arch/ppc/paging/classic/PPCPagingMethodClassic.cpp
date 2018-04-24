@@ -8,7 +8,7 @@
  */
 
 
-#include "paging/classic/PPCPagingMethodClassic.h"
+#include <paging/classic/PPCPagingMethodClassic.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -24,11 +24,11 @@
 #include <vm/vm.h>
 #include <vm/VMAddressSpace.h>
 
-#include "paging/classic/PPCPagingStructuresClassic.h"
-#include "paging/classic/PPCVMTranslationMapClassic.h"
-#include "generic_vm_physical_page_mapper.h"
-#include "generic_vm_physical_page_ops.h"
-#include "GenericVMPhysicalPageMapper.h"
+#include <paging/classic/PPCPagingStructuresClassic.h>
+#include <paging/classic/PPCVMTranslationMapClassic.h>
+#include <generic_vm_physical_page_mapper.h>
+#include <generic_vm_physical_page_ops.h>
+#include <GenericVMPhysicalPageMapper.h>
 
 
 //#define TRACE_PPC_PAGING_METHOD_CLASSIC

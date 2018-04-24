@@ -4,14 +4,14 @@
  */
 
 
-#include "CLanguageFamilySyntaxHighlighter.h"
+#include <CLanguageFamilySyntaxHighlighter.h>
 
 #include <new>
 
 #include <AutoDeleter.h>
 
-#include "CLanguageFamilySyntaxHighlightInfo.h"
-#include "CLanguageTokenizer.h"
+#include <CLanguageFamilySyntaxHighlightInfo.h>
+#include <CLanguageTokenizer.h>
 
 
 using CLanguage::Tokenizer;

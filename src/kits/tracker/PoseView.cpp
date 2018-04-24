@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "PoseView.h"
+#include <PoseView.h>
 
 #include <algorithm>
 #include <functional>
@@ -74,29 +74,29 @@ All rights reserved.
 #include <ObjectListPrivate.h>
 #include <PathMonitor.h>
 
-#include "Attributes.h"
-#include "AutoLock.h"
-#include "BackgroundImage.h"
-#include "Bitmaps.h"
-#include "Commands.h"
-#include "CountView.h"
-#include "Cursors.h"
-#include "DeskWindow.h"
-#include "DesktopPoseView.h"
-#include "FilePanelPriv.h"
-#include "FSClipboard.h"
-#include "FSUtils.h"
-#include "FunctionObject.h"
-#include "MimeTypes.h"
-#include "Navigator.h"
-#include "Pose.h"
-#include "InfoWindow.h"
-#include "Tests.h"
-#include "Thread.h"
-#include "Tracker.h"
-#include "TrackerStringClass.h"
-#include "WidgetAttributeText.h"
-#include "WidthBuffer.h"
+#include <Attributes.h>
+#include <AutoLock.h>
+#include <BackgroundImage.h>
+#include <Bitmaps.h>
+#include <Commands.h>
+#include <CountView.h>
+#include <Cursors.h>
+#include <DeskWindow.h>
+#include <DesktopPoseView.h>
+#include <FilePanelPriv.h>
+#include <FSClipboard.h>
+#include <FSUtils.h>
+#include <FunctionObject.h>
+#include <MimeTypes.h>
+#include <Navigator.h>
+#include <Pose.h>
+#include <InfoWindow.h>
+#include <Tests.h>
+#include <Thread.h>
+#include <Tracker.h>
+#include <TrackerStringClass.h>
+#include <WidgetAttributeText.h>
+#include <WidthBuffer.h>
 
 
 #undef B_TRANSLATION_CONTEXT

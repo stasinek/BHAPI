@@ -20,9 +20,9 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "debug.h"
-#include "Samples.h"
-#include "Synth.h"
+#include <debug.h>
+#include <Samples.h>
+#include <Synth.h>
 
 //------------------------------------------------------------------------------
 

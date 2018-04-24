@@ -34,7 +34,7 @@
 #include <pthread.h>
 #include <semaphore.h>
 
-#include <../include/sys/types.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 #include <time.h>
@@ -42,17 +42,17 @@
 
 extern "C" {
 /* use umtx instead of pshared-semaphore */
-#include <machine/atomic.h"
-#include <ucontext.h"
-#include <../include/sys/thr.h"
-#include <../include/sys/umtx.h"
+#include <machine/atomic.h>
+#include <ucontext.h>
+#include <sys/thr.h>
+#include <sys/umtx.h>
 } // extern "C"
 
-#include <../include/sys/stat.h"
-#include <../include/sys/mman.h"
+#include <sys/stat.h>
+#include <sys/mman.h>
 
-#include "../kernel/Kernel.h"
-#include "../support/StringClass.h"
+#include <os/kernel.h>
+#include <kits/support/StringClass.h>
 
 typedef struct b_posix_sem_info {
 	b_posix_sem_info()

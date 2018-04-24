@@ -39,7 +39,7 @@ All rights reserved.
 #include <errno.h>
 #include <Haiku.h>
 
-#include "NodeWalker.h"
+#include <NodeWalker.h>
 
 
 namespace BTrackerPrivate {

@@ -11,11 +11,11 @@
 #ifndef DRIVERINTERFACE_H
 #define DRIVERINTERFACE_H
 
-#include <Accelerant.h>
-#include "video_overlay.h"
-#include <Drivers.h>
-#include <PCI.h>
-#include <kernel/OS.h>
+#include <kits/netAccelerant.h>
+#include <kits/netvideo_overlay.h>
+#include <kits/netDrivers.h>
+#include <kits/netPCI.h>
+#include <kits/kernel/OS.h>
 
 #define DRIVER_PREFIX "nvidia_gpgpu"
 #define DEVICE_FORMAT "%04x_%04x_%02x%02x%02x"

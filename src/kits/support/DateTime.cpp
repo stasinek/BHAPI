@@ -7,11 +7,11 @@
  *		Julun, host.haiku@gmx.de
  */
 
-#include "DateTime.h"
-#include "../app/Message.h"
+#include <DateTime.h>
+#include <kits/app/Message.h>
 
 #include <time.h>
-// #include <../include/sys/time.h>
+// #include <sys/time.h>
 
 namespace BPrivate {
 

@@ -41,16 +41,16 @@ All rights reserved.
 */
 
 
-#include "VirtualDirectoryWindow.h"
+#include <VirtualDirectoryWindow.h>
 
 #include <Catalog.h>
 #include <LocaleClass.h>
 
 #include <AutoLocker.h>
 
-#include "Commands.h"
-#include "VirtualDirectoryManager.h"
-#include "VirtualDirectoryPoseView.h"
+#include <Commands.h>
+#include <VirtualDirectoryManager.h>
+#include <VirtualDirectoryPoseView.h>
 
 
 #undef B_TRANSLATION_CONTEXT

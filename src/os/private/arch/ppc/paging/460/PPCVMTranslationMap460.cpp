@@ -72,7 +72,7 @@
 	  spinlock.
  */
 
-#include "paging/460/PPCVMTranslationMap460.h"
+#include <paging/460/PPCVMTranslationMap460.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -90,11 +90,11 @@
 #include <vm/VMAddressSpace.h>
 #include <vm/VMCache.h>
 
-#include "paging/460/PPCPagingMethod460.h"
-#include "paging/460/PPCPagingStructures460.h"
-#include "generic_vm_physical_page_mapper.h"
-#include "generic_vm_physical_page_ops.h"
-#include "GenericVMPhysicalPageMapper.h"
+#include <paging/460/PPCPagingMethod460.h>
+#include <paging/460/PPCPagingStructures460.h>
+#include <generic_vm_physical_page_mapper.h>
+#include <generic_vm_physical_page_ops.h>
+#include <GenericVMPhysicalPageMapper.h>
 
 
 //#define TRACE_PPC_VM_TRANSLATION_MAP_460

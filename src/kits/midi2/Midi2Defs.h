@@ -2,7 +2,7 @@
 #ifndef _MIDI2_DEFS_H
 #define _MIDI2_DEFS_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <Errors.h>
 
 #ifndef _MIDI_CONSTANTS_

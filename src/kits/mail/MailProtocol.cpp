@@ -34,7 +34,7 @@
 #include <MailPrivate.h>
 #include <NodeMessage.h>
 
-#include "HaikuMailFormatFilter.h"
+#include <HaikuMailFormatFilter.h>
 
 
 using namespace BPrivate;

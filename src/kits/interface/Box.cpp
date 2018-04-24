@@ -27,12 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Box.h"
+#include <Box.h>
 
-#include "../support/ClassInfo.h"
-#include "../support/Errors.h"
-#include "../interface/StringView.h"
-#include "../add-ons/theme/ThemeEngine.h"
+#include <kits/support/ClassInfo.h>
+#include <kits/support/Errors.h>
+#include <kits/interface/StringView.h>
+#include <kits/add-ons/theme/ThemeEngine.h>
 
 BBox::BBox(BRect frame, const char *name,  __be_uint32 resizingMode,  __be_uint32 flags, bhapi::border_style border)
 	: BView(frame, name, resizingMode, flags), fLabelView(NULL), fBorder(B_NO_BORDER), fAlignment(B_ALIGN_LEFT)

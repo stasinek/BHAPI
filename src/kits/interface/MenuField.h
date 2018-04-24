@@ -37,7 +37,7 @@ class BMenu;
 class BMenuItem;
 class BMenuBar;
 class BMessage;
-#include "../interface/View.h"
+#include <kits/interface/View.h>
 #include <Haiku.h>
 class BHAPI_IMPEXP BMenuField : public BView {
 public:

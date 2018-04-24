@@ -33,11 +33,11 @@
 #ifndef HAVE_DLFCN_H
 	#error "no posix dl found!"
 #else
-	#include <dlfcn.h"
+	#include <dlfcn.h>
 #endif
 
-#include "../kernel/Kernel.h"
-#include "../storage/Path.h"
+#include <os/kernel.h>
+#include <kits/storage/Path.h>
 
 
 BHAPI_IMPEXP void*

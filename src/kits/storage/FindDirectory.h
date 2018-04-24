@@ -30,7 +30,7 @@
 #ifndef BHAPI_FIND_DIRECTORY_H
 #define BHAPI_FIND_DIRECTORY_H
 
-#include "Path.h"
+#include <Path.h>
 
 #ifdef __cplusplus /* Just for C++ */
 namespace bhapi {

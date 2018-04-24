@@ -34,7 +34,7 @@
  */
 #ifndef BHAPI_HAIKU_CONSTANTS_H
 #define BHAPI_HAIKU_CONSTANTS_H
-#include "HaikuConfig.h"
+#include <HaikuConfig.h>
 
 enum {
     B_AFFINE_TRANSFORM_TYPE			= 'AMTX',

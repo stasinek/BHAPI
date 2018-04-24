@@ -6,7 +6,7 @@
 #define KERNEL_ARCH_USER_DEBUGGER_H
 
 
-//#include "kernel_debug_config.h"
+//#include <kernel_debug_config.h>
 
 #ifndef _ASSEMBLER
 

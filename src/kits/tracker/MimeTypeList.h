@@ -38,7 +38,7 @@ All rights reserved.
 #include <ObjectList.h>
 #include <StringClass.h>
 
-#include "Utilities.h"
+#include <Utilities.h>
 
 
 namespace BPrivate {

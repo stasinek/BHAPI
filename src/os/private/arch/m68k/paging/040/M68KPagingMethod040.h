@@ -6,9 +6,9 @@
 #define KERNEL_ARCH_M68K_PAGING_32_BIT_M68K_PAGING_METHOD_32_BIT_H
 
 
-#include "paging/040/paging.h"
-#include "paging/M68KPagingMethod.h"
-#include "paging/M68KPagingStructures.h"
+#include <paging/040/paging.h>
+#include <paging/M68KPagingMethod.h>
+#include <paging/M68KPagingStructures.h>
 
 
 class TranslationMapPhysicalPageMapper;

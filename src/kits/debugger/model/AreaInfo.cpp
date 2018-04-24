@@ -4,7 +4,7 @@
  */
 
 
-#include "AreaInfo.h"
+#include <AreaInfo.h>
 
 
 AreaInfo::AreaInfo()

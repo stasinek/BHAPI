@@ -30,10 +30,10 @@
 #ifndef BHAPI_TOOL_TIP_H
 #define BHAPI_TOOL_TIP_H
 
-#include "../app/Messenger.h"
-#include "../interface/Point.h"
-#include "../interface/Font.h"
-#include "../interface/GraphicsDefs.h"
+#include <kits/app/Messenger.h>
+#include <kits/interface/Point.h>
+#include <kits/interface/Font.h>
+#include <kits/interface/GraphicsDefs.h>
 
 #if 0
 class BHAPI_IMPEXP BToolTipInfo {

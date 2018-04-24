@@ -4,12 +4,12 @@
  */
 
 
-#include "GenericVMPhysicalPageMapper.h"
+#include <GenericVMPhysicalPageMapper.h>
 
 #include <Errors.h>
 
-#include "generic_vm_physical_page_mapper.h"
-#include "generic_vm_physical_page_ops.h"
+#include <generic_vm_physical_page_mapper.h>
+#include <generic_vm_physical_page_ops.h>
 
 
 GenericVMPhysicalPageMapper::GenericVMPhysicalPageMapper()

@@ -14,7 +14,7 @@
 #include <math.h>
 
 
-#include <../include/strings.h>
+#include <strings.h>
 
 #include <m_apm.h>
 

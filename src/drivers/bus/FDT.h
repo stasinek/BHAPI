@@ -6,7 +6,7 @@
 #ifndef _DRIVERS_BUS_FDT_H
 #define _DRIVERS_BUS_FDT_H
 
-#include <bus_manager.h>
+#include <kits/netbus_manager.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -6,7 +6,7 @@
 #ifndef _KERNEL_WAIT_FOR_OBJECTS_H
 #define _KERNEL_WAIT_FOR_OBJECTS_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <lock.h>
 

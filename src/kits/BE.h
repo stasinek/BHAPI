@@ -29,22 +29,22 @@
 #ifndef BHAPI_BE_H
 #define BHAPI_BE_H
 //-----------------------------------------------------------------------------
-#include "AppKit.h"
-//#include "DeviceKit.h"
-//#include "GameKit.h"
-//#include "InterfaceKit.h"
-#include "KernelKit.h"
-//#include "LocaleKit.h"
-//#include "MailKit.h"
-//#include "MediaKit.h"
-//#include "MidiKit.h"
-//#include "NetKit.h"
-//#include "NetworkKit.h"
-//#include "RenderKit.h"
-#include "SupportKit.h"
-//#include "StorageKit.h"
-//#include "TranslationKit.h"
-//#include "XmlKit.h"
+#include <kits/AppKit.h>
+//#include <kits/DeviceKit.h>
+//#include <kits/GameKit.h>
+//#include <kits/InterfaceKit.h>
+#include <kits/KernelKit.h>
+//#include <kits/LocaleKit.h>
+//#include <kits/MailKit.h>
+//#include <kits/MediaKit.h>
+//#include <kits/MidiKit.h>
+//#include <kits/NetKit.h>
+//#include <kits/NetworkKit.h>
+//#include <kits/RenderKit.h>
+#include <kits/SupportKit.h>
+//#include <kits/StorageKit.h>
+//#include <kits/TranslationKit.h>
+//#include <kits/XmlKit.h>
 //-----------------------------------------------------------------------------
 #include <Haiku.h>
 //-----------------------------------------------------------------------------

@@ -10,7 +10,7 @@
 #define _KERNEL_LOCK_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <arch/atomic.h>
 #include <debug.h>

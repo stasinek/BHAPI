@@ -9,7 +9,7 @@
 #include <pwd.h>
 #include <shadow.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 #define MAX_PASSWD_NAME_LEN			(32)

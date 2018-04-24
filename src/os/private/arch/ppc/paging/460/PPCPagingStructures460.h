@@ -6,9 +6,9 @@
 #define KERNEL_ARCH_PPC_PAGING_460_PPC_PAGING_STRUCTURES_460_H
 
 
-//#include "paging/460/paging.h"
+//#include <paging/460/paging.h>
 #include <arch_mmu.h>
-#include "paging/PPCPagingStructures.h"
+#include <paging/PPCPagingStructures.h>
 
 
 struct PPCPagingStructures460 : PPCPagingStructures {

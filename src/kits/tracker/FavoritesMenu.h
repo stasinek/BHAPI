@@ -39,7 +39,7 @@ All rights reserved.
 
 #include <ObjectList.h>
 
-#include "NavMenu.h"
+#include <NavMenu.h>
 
 
 class BRefFilter;

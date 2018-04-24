@@ -31,12 +31,12 @@
 
 
 
-#include "BHAPI_wrapper_x11.h"
+#include <BHAPI_wrapper_x11.h>
 
-#include "../support/Autolock.h"
-#include "../support/StringClass.h"
-#include "../support/ClassInfo.h"
-#include "../app/Application.h"
+#include <kits/support/Autolock.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/ClassInfo.h>
+#include <kits/app/Application.h>
 
 
 EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine,  int32 x,  int32 y,  uint32 w,  uint32 h)

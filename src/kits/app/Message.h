@@ -79,11 +79,11 @@ class BAlignment;
 #define BSIZE_DEF
 class BSize;
 #endif
-#include "../support/List.h"
-#include <Flattenable.h>
-#include <Rect.h>
-#include <DataIO.h>
-#include <kernel/OS.h>
+#include <kits/support/List.h>
+#include <kits/support/Flattenable.h>
+#include <kits/interface/Rect.h>
+#include <kits/support/DataIO.h>
+#include <kits/kernel/OS.h>
 //-----------------------------------------------------------------------------
 namespace bhapi {
 struct entry_ref;

@@ -33,14 +33,14 @@ All rights reserved.
 */
 
 
-#include "DialogPane.h"
+#include <DialogPane.h>
 
 #include <ControlLook.h>
 #include <LayoutUtils.h>
 
-#include "Thread.h"
-#include "Utilities.h"
-#include "Window.h"
+#include <Thread.h>
+#include <Utilities.h>
+#include <Window.h>
 
 
 const uint32 kValueChanged = 'swch';

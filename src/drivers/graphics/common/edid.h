@@ -7,7 +7,7 @@
 
 //!	Extended Display Identification Data (EDID)
 
-#include "edid_raw.h"
+#include <kits/netedid_raw.h>
 
 
 // vendor info

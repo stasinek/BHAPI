@@ -30,8 +30,8 @@
 #ifndef BHAPI_NET_ENDPOINT_H
 #define BHAPI_NET_ENDPOINT_H
 #include <Haiku.h>
-#include "../net/NetAddress.h"
-#include "../net/NetBuffer.h"
+#include <kits/net/NetAddress.h>
+#include <kits/net/NetBuffer.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

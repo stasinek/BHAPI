@@ -5,7 +5,7 @@
 #ifndef _REPAIR_JOB_H
 #define _REPAIR_JOB_H
 
-#include "DiskDeviceJob.h"
+#include <DiskDeviceJob.h>
 
 
 namespace BPrivate {

@@ -29,10 +29,10 @@
 #ifdef LINUX
 #ifdef DIRECTFB
 
-#include "../../render/Render.h"
-#include "../../render/Pixmap.h"
+#include <kits/render/Render.h>
+#include <kits/render/Pixmap.h>
 
-#include "BHAPI_wrapper_dfb.h"
+#include <BHAPI_wrapper_dfb.h>
 
 class BHAPI_LOCAL EDFBRender : public BRender {
 public:

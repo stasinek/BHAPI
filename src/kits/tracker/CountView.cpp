@@ -35,7 +35,7 @@ All rights reserved.
 // defines the status area drawn in the bottom left corner of a Tracker window
 
 
-#include "CountView.h"
+#include <CountView.h>
 
 #include <Application.h>
 #include <Catalog.h>
@@ -43,12 +43,12 @@ All rights reserved.
 #include <LocaleClass.h>
 #include <MessageFormat.h>
 
-#include "AutoLock.h"
-#include "Bitmaps.h"
-#include "ContainerWindow.h"
-#include "DirMenu.h"
-#include "PoseView.h"
-#include "Utilities.h"
+#include <AutoLock.h>
+#include <Bitmaps.h>
+#include <ContainerWindow.h>
+#include <DirMenu.h>
+#include <PoseView.h>
+#include <Utilities.h>
 
 
 #undef B_TRANSLATION_CONTEXT

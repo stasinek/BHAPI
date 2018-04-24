@@ -3,7 +3,7 @@
 //  by the OpenBeOS license.
 //---------------------------------------------------------------------
 
-#include "AddOnImage.h"
+#include <AddOnImage.h>
 
 
 // constructor

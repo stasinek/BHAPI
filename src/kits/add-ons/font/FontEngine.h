@@ -31,12 +31,12 @@
 #ifndef BHAPI_FONT_ENGINE_H
 #define BHAPI_FONT_ENGINE_H
 
-#include "../../interface/Font.h"
-#include "../../interface/Point.h"
-#include "../../app/Handler.h"
-#include "../../support/Locker.h"
-#include "../../support/StringArray.h"
-#include "../../support/SupportDefs.h"
+#include <kits/interface/Font.h>
+#include <kits/interface/Point.h>
+#include <kits/app/Handler.h>
+#include <kits/support/Locker.h>
+#include <kits/support/StringArray.h>
+#include <kits/support/SupportDefs.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

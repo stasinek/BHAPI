@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "vfs_net_boot.h"
+#include <vfs_net_boot.h>
 
 #include <dirent.h>
 #include <errno.h>

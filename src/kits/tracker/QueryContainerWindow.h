@@ -39,7 +39,7 @@ All rights reserved.
 // Adds query window specific menus
 
 
-#include "ContainerWindow.h"
+#include <ContainerWindow.h>
 
 
 namespace BPrivate {

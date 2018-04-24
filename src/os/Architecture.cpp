@@ -8,9 +8,9 @@
 
 
 
-#include <../include/sys/stat.h>
+#include <sys/stat.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <directories.h>
 #include <find_directory_private.h>

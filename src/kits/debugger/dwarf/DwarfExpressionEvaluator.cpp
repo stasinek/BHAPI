@@ -5,7 +5,7 @@
  */
 
 
-#include "DwarfExpressionEvaluator.h"
+#include <DwarfExpressionEvaluator.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,11 +15,11 @@
 
 #include <Variant.h>
 
-#include "DataReader.h"
-#include "Dwarf.h"
-#include "DwarfTargetInterface.h"
-#include "Tracing.h"
-#include "ValueLocation.h"
+#include <DataReader.h>
+#include <Dwarf.h>
+#include <DwarfTargetInterface.h>
+#include <Tracing.h>
+#include <ValueLocation.h>
 
 
 // number of elements to increase the stack capacity when the stack is full

@@ -6,7 +6,7 @@
 #define _MIME_H
 
 
-#include <../include/sys/types.h>
+#include <sys/types.h>
 
 #include <Haiku.h>
 #include <StorageDefs.h>

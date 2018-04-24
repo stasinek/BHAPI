@@ -5,14 +5,14 @@
 #ifndef TARGET_HOST_INTERFACE_H
 #define TARGET_HOST_INTERFACE_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <Looper.h>
 
 #include <ObjectList.h>
 
 #include <util/DoublyLinkedList.h>
 
-#include "controllers/TeamDebugger.h"
+#include <controllers/TeamDebugger.h>
 
 
 class DebuggerInterface;

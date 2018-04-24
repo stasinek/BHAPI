@@ -37,11 +37,11 @@ All rights reserved.
 #include <AppDefs.h>
 #include <InterfaceDefs.h>
 
-#include "Attributes.h"
-#include "Commands.h"
-#include "PoseView.h"
-#include "Utilities.h"
-#include "ViewState.h"
+#include <Attributes.h>
+#include <Commands.h>
+#include <PoseView.h>
+#include <Utilities.h>
+#include <ViewState.h>
 
 #include <new>
 #include <string.h>

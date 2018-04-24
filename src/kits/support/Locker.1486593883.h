@@ -31,7 +31,7 @@
 #ifndef __BHAPI_LOCKER_H__
 #define __BHAPI_LOCKER_H__
 
-#include "./SupportDefs.h"
+#include <./SupportDefs.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

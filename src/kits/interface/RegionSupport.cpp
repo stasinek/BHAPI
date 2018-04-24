@@ -72,7 +72,7 @@ SOFTWARE.
  * the y-x-banding that's so nice to have...
  */
 
-#include "RegionSupport.h"
+#include <RegionSupport.h>
 
 
 #include <new>

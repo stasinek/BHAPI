@@ -26,8 +26,8 @@
 #include <vm/vm_types.h>
 #include <vm/VMAddressSpace.h>
 
-#include "paging/X86PagingStructures.h"
-#include "paging/X86VMTranslationMap.h"
+#include <paging/X86PagingStructures.h>
+#include <paging/X86VMTranslationMap.h>
 
 
 //#define TRACE_ARCH_THREAD

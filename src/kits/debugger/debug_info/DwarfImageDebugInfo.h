@@ -11,10 +11,10 @@
 
 #include <util/OpenHashTable.h>
 
-#include "AddressSectionTypes.h"
-#include "ImageInfo.h"
-#include "SpecificImageDebugInfo.h"
-#include "Type.h"
+#include <AddressSectionTypes.h>
+#include <ImageInfo.h>
+#include <SpecificImageDebugInfo.h>
+#include <Type.h>
 
 
 class Architecture;

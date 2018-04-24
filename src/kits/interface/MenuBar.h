@@ -44,7 +44,7 @@ typedef enum menu_bar_border {
 #endif
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../interface/Menu.h"
+#include <kits/interface/Menu.h>
 class BHAPI_IMPEXP BMenuBar : public BMenu {
 public:
     BMenuBar(BRect frame, const char *title,

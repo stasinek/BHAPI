@@ -37,10 +37,10 @@ All rights reserved.
 
 #include <ctype.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <StringClass.h>
 
-#include "RegExp.h"
+#include <RegExp.h>
 
 
 namespace BPrivate {

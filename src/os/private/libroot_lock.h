@@ -8,7 +8,7 @@
 #ifndef _LIBROOT_LOCK_H
 #define _LIBROOT_LOCK_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 // TODO: Copied from the kernel private lock.h/lock.c. We should somehow make

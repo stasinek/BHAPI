@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <MidiText.h>
 
-#include "debug.h"
+#include <debug.h>
 
 
 BMidiText::BMidiText()

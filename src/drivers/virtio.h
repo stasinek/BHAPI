@@ -6,8 +6,8 @@
 #define _VIRTIO_H_
 
 
-#include <device_manager.h>
-#include <KernelExport.h>
+#include <kits/netdevice_manager.h>
+#include <kits/kernelExport.h>
 
 
 #define VIRTIO_DEVICE_ID_NETWORK	0x01

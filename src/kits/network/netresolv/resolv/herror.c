@@ -51,7 +51,7 @@ static const char sccsid[] = "@(#)herror.c	8.1 (Berkeley) 6/4/93";
 static const char rcsid[] = "$Id: herror.c,v 1.4 2005/04/27 04:56:41 sra Exp $";
 #endif /* LIBC_SCCS and not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <sys/param.h>
@@ -65,7 +65,7 @@ static const char rcsid[] = "$Id: herror.c,v 1.4 2005/04/27 04:56:41 sra Exp $";
 #include <string.h>
 #include <unistd.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 const char *h_errlist[] = {
 	"Resolver Error 0 (no error)",

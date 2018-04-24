@@ -8,10 +8,10 @@
 
 /**	Extra messaging utility functions */
 
-#include <string.h>
-#include <ByteOrder.h>
+#include <kits/netstring.h>
+#include <kits/netByteOrder.h>
 
-#include <MessageUtils.h>
+#include <kits/netMessageUtils.h>
 
 namespace BPrivate {
 

@@ -39,10 +39,10 @@ All rights reserved.
 #include <StringList.h>
 #include <Window.h>
 
-#include "LockingList.h"
-#include "Model.h"
-#include "SlowContextPopup.h"
-#include "TaskLoop.h"
+#include <LockingList.h>
+#include <Model.h>
+#include <SlowContextPopup.h>
+#include <TaskLoop.h>
 
 
 class BGridView;

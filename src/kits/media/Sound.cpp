@@ -10,7 +10,7 @@
 #include <Sound.h>
 #include <File.h>
 
-#include "TrackReader.h"
+#include <TrackReader.h>
 
 #include <debug.h>
 #include <new>

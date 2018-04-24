@@ -31,7 +31,7 @@
 #define BHAPI_RECT_H
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../interface/Point.h"
+#include <kits/interface/Point.h>
 #include <Haiku.h>
 class BHAPI_IMPEXP BRect {
 public:

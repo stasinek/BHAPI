@@ -1,4 +1,4 @@
-#include "soc_omap3.h"
+#include <soc_omap3.h>
 
 enum {
 	INTCPS_REVISION = 0,

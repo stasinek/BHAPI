@@ -6,9 +6,9 @@
 #define _VALIDATE_DISPLAY_MODE_H
 
 
-#include <Accelerant.h>
+#include <kits/netAccelerant.h>
 
-#include "edid.h"
+#include <kits/netedid.h>
 
 struct timing_constraints {
 	uint16	resolution;

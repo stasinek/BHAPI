@@ -10,10 +10,10 @@
 #define _TOKEN_SPACE_H
 
 
-#include <map>
-#include <stack>
+#include <kits/netmap>
+#include <kits/netstack>
 
-#include <Locker.h>
+#include <kits/netLocker.h>
 #include <Haiku.h>
 
 

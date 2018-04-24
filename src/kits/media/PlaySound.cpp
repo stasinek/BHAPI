@@ -5,11 +5,11 @@
  ***********************************************************************/
 
 #include <Haiku.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <Entry.h>
 
 #include <PlaySound.h>
-#include "debug.h"
+#include <debug.h>
 
 sound_handle play_sound(const entry_ref *soundRef,
 						bool mix,

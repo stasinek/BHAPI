@@ -11,8 +11,8 @@
 #include <Message.h>
 #include <HaikuConstants.h>
 
-#include "DynamicBuffer.h"
-#include "NetBuffer.h"
+#include <DynamicBuffer.h>
+#include <NetBuffer.h>
 
 #include <new>
 

@@ -6,8 +6,8 @@
 #define _MAIL_FILTER_H
 
 
-#include "MailProtocol.h"
-#include "MailSettings.h"
+#include <kits/netMailProtocol.h>
+#include <kits/netMailSettings.h>
 
 
 class BMailProtocol;

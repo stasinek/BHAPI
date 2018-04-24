@@ -6,8 +6,8 @@
 #define _ICU_MESSAGES_DATA_H
 
 
-#include "ICUCategoryData.h"
-#include "LocaleBackend.h"
+#include <ICUCategoryData.h>
+#include <LocaleBackend.h>
 
 
 namespace BPrivate {

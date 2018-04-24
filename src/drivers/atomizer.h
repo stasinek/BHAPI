@@ -6,7 +6,7 @@
 #define _ATOMIZER_H
 
 #include <Haiku.h>
-#include <module.h>
+#include <kits/netmodule.h>
 
 
 #ifdef __cplusplus

@@ -5,7 +5,7 @@
  */
 
 
-#include "IOSchedulerSimple.h"
+#include <IOSchedulerSimple.h>
 
 #include <unistd.h>
 #include <stdio.h>
@@ -19,7 +19,7 @@
 #include <thread.h>
 #include <util/AutoLock.h>
 
-#include "IOSchedulerRoster.h"
+#include <IOSchedulerRoster.h>
 
 
 //#define TRACE_IO_SCHEDULER

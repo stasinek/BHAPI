@@ -34,9 +34,9 @@
 #define B_H_SCROLL_BAR_HEIGHT	bhapi::ui_get_scrollbar_horizontal_height()
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../app/MessageRunner.h"
-#include "../interface/View.h"
-#include "../interface/InterfaceDefs.h"
+#include <kits/app/MessageRunner.h>
+#include <kits/interface/View.h>
+#include <kits/interface/InterfaceDefs.h>
 class BHAPI_IMPEXP BScrollBar : public BView {
 public:
     BScrollBar(BRect frame, const char *name,

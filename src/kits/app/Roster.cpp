@@ -7,42 +7,42 @@
  *		Ingo Weinhold, ingo_weinhold@gmx.de
  */
 
-#include <Roster.h>
+#include <kits/netRoster.h>
 
-#include <AppFileInfo.h>
-#include <Application.h>
-#include <Bitmap.h>
-#include <Directory.h>
-#include <File.h>
-#include <FindDirectory.h>
-#include <fs_index.h>
-#include <fs_info.h>
-#include <image.h>
-#include <List.h>
-#include <Mime.h>
-#include <Node.h>
-#include <NodeInfo.h>
-#include <kernel/OS.h>
-#include <Path.h>
-#include <Query.h>
-#include <RegistrarDefs.h>
-#include <StringClass.h>
-#include <Volume.h>
-#include <VolumeRoster.h>
+#include <kits/netAppFileInfo.h>
+#include <kits/netApplication.h>
+#include <kits/netBitmap.h>
+#include <kits/netDirectory.h>
+#include <kits/netFile.h>
+#include <kits/netFindDirectory.h>
+#include <kits/netfs_index.h>
+#include <kits/netfs_info.h>
+#include <kits/netimage.h>
+#include <kits/netList.h>
+#include <kits/netMime.h>
+#include <kits/netNode.h>
+#include <kits/netNodeInfo.h>
+#include <kits/kernel/OS.h>
+#include <kits/netPath.h>
+#include <kits/netQuery.h>
+#include <kits/netRegistrarDefs.h>
+#include <kits/netStringClass.h>
+#include <kits/netVolume.h>
+#include <kits/netVolumeRoster.h>
 
-#include <AppMisc.h>
-#include <DesktopLink.h>
-#include <LaunchRoster.h>
-#include <MessengerPrivate.h>
-#include <PortLink.h>
-#include <RosterPrivate.h>
-#include <ServerProtocol.h>
+#include <kits/netAppMisc.h>
+#include <kits/netDesktopLink.h>
+#include <kits/netLaunchRoster.h>
+#include <kits/netMessengerPrivate.h>
+#include <kits/netPortLink.h>
+#include <kits/netRosterPrivate.h>
+#include <kits/netServerProtocol.h>
 
-#include <ctype.h>
-#include <new>
-#include <../include/strings.h>
-#include <unistd.h>
-#include <locks.h>
+#include <kits/netctype.h>
+#include <kits/netnew>
+#include <strings.h>
+#include <kits/netunistd.h>
+#include <kits/netlocks.h>
 
 using namespace std;
 using namespace BPrivate;

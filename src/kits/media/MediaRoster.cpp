@@ -51,7 +51,7 @@ char __dont_remove_copyright_from_binary[] = "Copyright (c) 2002-2006 Marcus "
 #include <Message.h>
 #include <Messenger.h>
 #include <MimeType.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <ParameterWeb.h>
 #include <Roster.h>
 #include <StopWatch.h>
@@ -70,7 +70,7 @@ char __dont_remove_copyright_from_binary[] = "Copyright (c) 2002-2006 Marcus "
 #include <SharedBufferList.h>
 #include <TList.h>
 
-#include "TimeSourceObjectManager.h"
+#include <TimeSourceObjectManager.h>
 
 
 namespace BPrivate {

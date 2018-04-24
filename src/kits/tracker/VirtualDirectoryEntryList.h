@@ -13,7 +13,7 @@
 
 #include <MergedDirectory.h>
 
-#include "EntryIterator.h"
+#include <EntryIterator.h>
 
 
 namespace BPrivate {

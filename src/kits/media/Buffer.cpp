@@ -37,9 +37,9 @@
 #include <AppMisc.h>
 #include <MediaDefs.h>
 
-#include "debug.h"
-#include "DataExchange.h"
-#include "SharedBufferList.h"
+#include <debug.h>
+#include <DataExchange.h>
+#include <SharedBufferList.h>
 
 
 using namespace BPrivate::media;

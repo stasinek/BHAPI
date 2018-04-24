@@ -36,7 +36,7 @@
 #include <sys/types.h>
 
 #ifdef _KERNEL
-#include "opt_global.h"
+#include <opt_global.h>
 #endif
 
 /*

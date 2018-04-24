@@ -8,7 +8,7 @@
 //#include <endian.h>
 // platform endian.h
 
-#include "fssh_defs.h"
+#include <fssh_defs.h>
 
 
 // swap directions

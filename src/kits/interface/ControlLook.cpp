@@ -22,7 +22,7 @@
 #include <View.h>
 #include <Window.h>
 
-#include "ContainerWindow.h"
+#include <ContainerWindow.h>
 
 
 namespace BPrivate {

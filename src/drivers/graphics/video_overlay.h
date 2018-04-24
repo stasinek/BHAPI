@@ -6,8 +6,8 @@
 	This file will eventually be merged into Accelerant.h once the API is finalized.
 */
 
-#include <Accelerant.h>
-#include <GraphicsDefs.h>
+#include <kits/netAccelerant.h>
+#include <kits/netGraphicsDefs.h>
 
 #if defined(__cplusplus)
 extern "C" {

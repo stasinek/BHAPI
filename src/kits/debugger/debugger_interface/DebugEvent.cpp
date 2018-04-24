@@ -3,9 +3,9 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DebugEvent.h"
+#include <DebugEvent.h>
 
-#include "CpuState.h"
+#include <CpuState.h>
 
 
 // #pragma mark - DebugEvent

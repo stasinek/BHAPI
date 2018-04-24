@@ -6,7 +6,7 @@
 #include <MediaClient.h>
 #include <MediaConnection.h>
 
-#include "debug.h"
+#include <debug.h>
 
 
 media_client_id

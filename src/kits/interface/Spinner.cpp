@@ -9,7 +9,7 @@
 
 #include <Spinner.h>
 
-#include <../include/stdint.h>
+#include <stdint.h>
 
 
 #include <PropertyInfo.h>

@@ -29,9 +29,9 @@
 
 #ifndef BHAPI_PRIVATE_APPLICATION_H
 #define BHAPI_PRIVATE_APPLICATION_H
-#include "../../kits/support/SupportDefs.h"
-#include "../../kits/support/SimpleLocker.h"
-#include "../support/Token.h"
+#include <kits/support/SupportDefs.h>
+#include <kits/support/SimpleLocker.h>
+#include <kits/support/Token.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

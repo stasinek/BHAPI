@@ -26,14 +26,14 @@ static const char rcsid[] = "Id: ns_samedomain.c,v 1.6 2005/04/27 04:56:40 sra E
 #endif
 #endif
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <arpa/nameser.h>
 #include <errno.h>
 #include <string.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 #ifdef _LIBRESOLV
 /*%

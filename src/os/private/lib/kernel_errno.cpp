@@ -4,7 +4,7 @@
  */
 
 
-#include "thread.h"
+#include <thread.h>
 
 #include <errno.h>
 

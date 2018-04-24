@@ -6,7 +6,7 @@
 #define CORE_FILE_H
 
 
-#include "ElfFile.h"
+#include <ElfFile.h>
 
 #include <StringClass.h>
 

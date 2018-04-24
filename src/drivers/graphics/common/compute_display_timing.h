@@ -6,8 +6,8 @@
 #define _COMPUTE_DISPLAY_TIMING_H
 
 
-#include <Accelerant.h>
-#include <GraphicsDefs.h>
+#include <kits/netAccelerant.h>
+#include <kits/netGraphicsDefs.h>
 
 
 #ifdef __cplusplus

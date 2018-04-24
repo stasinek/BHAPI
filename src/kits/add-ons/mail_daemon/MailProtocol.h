@@ -9,16 +9,16 @@
 #define _MAIL_PROTOCOL_H
 
 
-#include <map>
+#include <kits/netmap>
 
-#include <Looper.h>
-#include <kernel/OS.h>
-#include <ObjectList.h>
-#include <Entry.h>
-#include <File.h>
+#include <kits/netLooper.h>
+#include <kits/kernel/OS.h>
+#include <kits/netObjectList.h>
+#include <kits/storage/Entry.h>
+#include <kits/netFile.h>
 
-#include <E-mail.h>
-#include <MailSettings.h>
+#include <kits/netE-mail.h>
+#include <kits/netMailSettings.h>
 
 
 class BMailFilter;

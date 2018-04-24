@@ -5,17 +5,17 @@
  */
 
 
-#include "fs_freebsd.h"
+#include <fs_freebsd.h>
 
 #include <errno.h>
 #include <fcntl.h>
 
 
 
-#include <../include/sys/disk.h>
-#include <../include/sys/ioctl.h>
-#include <../include/sys/stat.h>
-#include <../include/sys/time.h>
+#include <sys/disk.h>
+#include <sys/ioctl.h>
+#include <sys/stat.h>
+#include <sys/time.h>
 #include <unistd.h>
 
 

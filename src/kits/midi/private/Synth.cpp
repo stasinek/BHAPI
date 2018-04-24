@@ -12,10 +12,10 @@
 
 #include <string.h>
 
-#include "debug.h"
+#include <debug.h>
 #include <Path.h>
 #include <Synth.h>
-#include "SoftSynth.h"
+#include <SoftSynth.h>
 
 BSynth*  __be_synth = NULL;
 

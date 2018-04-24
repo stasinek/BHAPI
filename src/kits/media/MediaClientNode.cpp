@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "MediaClientNode.h"
+#include <MediaClientNode.h>
 
 #include <MediaClient.h>
 #include <MediaConnection.h>
@@ -12,7 +12,7 @@
 
 #include <string.h>
 
-#include "debug.h"
+#include <debug.h>
 
 #define B_NEW_BUFFER (BTimedEventQueue::B_USER_EVENT + 1)
 

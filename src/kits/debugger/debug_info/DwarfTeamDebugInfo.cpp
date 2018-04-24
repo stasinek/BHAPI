@@ -4,21 +4,21 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DwarfTeamDebugInfo.h"
+#include <DwarfTeamDebugInfo.h>
 
 #include <new>
 
 #include <string.h>
 
-#include "arch/Architecture.h"
-#include "DebuggerInterface.h"
-#include "DwarfFile.h"
-#include "DwarfImageDebugInfo.h"
-#include "DwarfImageDebugInfoLoadingState.h"
-#include "DwarfManager.h"
-#include "GlobalTypeLookup.h"
-#include "ImageDebugInfoLoadingState.h"
-#include "LocatableFile.h"
+#include <arch/Architecture.h>
+#include <DebuggerInterface.h>
+#include <DwarfFile.h>
+#include <DwarfImageDebugInfo.h>
+#include <DwarfImageDebugInfoLoadingState.h>
+#include <DwarfManager.h>
+#include <GlobalTypeLookup.h>
+#include <ImageDebugInfoLoadingState.h>
+#include <LocatableFile.h>
 
 
 DwarfTeamDebugInfo::DwarfTeamDebugInfo(Architecture* architecture,

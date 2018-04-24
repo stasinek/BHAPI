@@ -23,7 +23,7 @@
 
 #include <sys/uio.h>
 
-#include "kernel_debug_config.h"
+#include <kernel_debug_config.h>
 
 
 #define VM_PAGE_ALLOCATION_TRACKING_AVAILABLE \

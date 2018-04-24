@@ -27,11 +27,11 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Pixmap.h"
-#include "../support/StringArray.h"
-#include "../support/Errors.h"
-#include "../kernel/Debug.h"
-#include "../support/StringClass.h"
+#include <Pixmap.h>
+#include <kits/support/StringArray.h>
+#include <kits/support/Errors.h>
+#include <os/debug.h>
+#include <kits/support/StringClass.h>
 
 
 

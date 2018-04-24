@@ -4,13 +4,13 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Jobs.h"
+#include <Jobs.h>
 
 #include <AutoLocker.h>
 
-#include "Team.h"
-#include "TeamMemory.h"
-#include "TeamMemoryBlock.h"
+#include <Team.h>
+#include <TeamMemory.h>
+#include <TeamMemoryBlock.h>
 
 
 RetrieveMemoryBlockJob::RetrieveMemoryBlockJob(Team* team,

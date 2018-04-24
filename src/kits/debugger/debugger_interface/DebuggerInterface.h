@@ -11,7 +11,7 @@
 #include <debug_support.h>
 #include <ObjectList.h>
 
-#include "TeamMemory.h"
+#include <TeamMemory.h>
 
 
 class Architecture;

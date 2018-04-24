@@ -5,7 +5,7 @@
 #ifndef NODE_REF_H
 #define NODE_REF_H
 
-#include <../include/sys/stat.h>
+#include <sys/stat.h>
 
 namespace BPrivate {
 struct node_ref {

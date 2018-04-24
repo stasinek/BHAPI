@@ -6,7 +6,7 @@
 #define POINTER_TO_MEMBER_VALUE_NODE_H
 
 
-#include "ValueNode.h"
+#include <ValueNode.h>
 
 
 class PointerToMemberType;

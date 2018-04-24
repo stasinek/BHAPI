@@ -27,7 +27,7 @@
 static const char rcsid[] = "$Id: memcluster.c,v 1.11 2006/08/30 23:34:38 marka Exp $";
 #endif /* not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <sys/uio.h>
@@ -47,7 +47,7 @@ static const char rcsid[] = "$Id: memcluster.c,v 1.11 2006/08/30 23:34:38 marka 
 #include <isc/memcluster.h>
 #include <isc/assertions.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 #ifdef MEMCLUSTER_RECORD
 #ifndef DEBUGGING_MEMCLUSTER

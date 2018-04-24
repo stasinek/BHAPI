@@ -42,7 +42,7 @@ All rights reserved.
 #include <TextControl.h>
 #include <Window.h>
 
-#include "TrackerStringClass.h"
+#include <TrackerStringClass.h>
 
 
 namespace BPrivate {

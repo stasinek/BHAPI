@@ -5,12 +5,12 @@
 #ifndef TARGET_HOST_INTERFACE_ROSTER_H
 #define TARGET_HOST_INTERFACE_ROSTER_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <Locker.h>
 #include <ObjectList.h>
 
-#include "TargetHostInterface.h"
+#include <TargetHostInterface.h>
 
 
 class Settings;

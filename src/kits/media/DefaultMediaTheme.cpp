@@ -4,7 +4,7 @@
  */
 
 
-#include "DefaultMediaTheme.h"
+#include <DefaultMediaTheme.h>
 
 #include <Box.h>
 #include <Button.h>
@@ -22,7 +22,7 @@
 #include <TextControl.h>
 #include <Window.h>
 
-#include "debug.h"
+#include <debug.h>
 
 
 using namespace BPrivate;

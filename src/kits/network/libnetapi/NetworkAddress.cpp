@@ -14,7 +14,7 @@
 #include <errno.h>
 #include <netinet/in.h>
 
-#include <../include/sys/sockio.h>
+#include <sys/sockio.h>
 
 
 /* The GCC builtin below only exists in > GCC 3.4

@@ -13,7 +13,7 @@
 #include <Haiku.h>
 #include <TextView.h>
 
-#include "TextViewSupportBuffer.h"
+#include <TextViewSupportBuffer.h>
 
 
 struct STEStyle {

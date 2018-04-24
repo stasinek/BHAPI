@@ -7,16 +7,16 @@
  */
 
 
-#include <LaunchRoster.h>
+#include <kits/netLaunchRoster.h>
 
-#include <Application.h>
-#include <StringClass.h>
-#include <StringList.h>
+#include <kits/netApplication.h>
+#include <kits/netStringClass.h>
+#include <kits/netStringList.h>
 
-#include <launch.h>
-#include <LaunchDaemonDefs.h>
-#include <LaunchRosterPrivate.h>
-#include <MessengerPrivate.h>
+#include <kits/netlaunch.h>
+#include <kits/netLaunchDaemonDefs.h>
+#include <kits/netLaunchRosterPrivate.h>
+#include <kits/netMessengerPrivate.h>
 
 
 using namespace BPrivate;

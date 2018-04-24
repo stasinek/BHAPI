@@ -6,9 +6,9 @@
 #ifndef _TTY_MODULE_H
 #define _TTY_MODULE_H
 
-#include <module.h>
-#include <termios.h>
-#include <Select.h>
+#include <kits/netmodule.h>
+#include <kits/nettermios.h>
+#include <kits/netSelect.h>
 
 struct tty;
 struct tty_cookie;

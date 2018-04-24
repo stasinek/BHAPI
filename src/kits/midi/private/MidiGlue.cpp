@@ -11,7 +11,7 @@
  */
 
 #include <Midi.h>
-#include "MidiGlue.h"
+#include <MidiGlue.h>
 #include <MidiPort.h>
 
 using namespace BPrivate;

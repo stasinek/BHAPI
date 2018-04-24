@@ -5,25 +5,25 @@
  */
 
 
-#include "Team.h"
+#include <Team.h>
 
 #include <new>
 
 #include <AutoLocker.h>
 
-#include "Breakpoint.h"
-#include "DisassembledCode.h"
-#include "FileSourceCode.h"
-#include "Function.h"
-#include "ImageDebugInfo.h"
-#include "SignalDispositionTypes.h"
-#include "SourceCode.h"
-#include "SpecificImageDebugInfo.h"
-#include "Statement.h"
-#include "TeamDebugInfo.h"
-#include "Tracing.h"
-#include "Value.h"
-#include "Watchpoint.h"
+#include <Breakpoint.h>
+#include <DisassembledCode.h>
+#include <FileSourceCode.h>
+#include <Function.h>
+#include <ImageDebugInfo.h>
+#include <SignalDispositionTypes.h>
+#include <SourceCode.h>
+#include <SpecificImageDebugInfo.h>
+#include <Statement.h>
+#include <TeamDebugInfo.h>
+#include <Tracing.h>
+#include <Value.h>
+#include <Watchpoint.h>
 
 
 // #pragma mark - BreakpointByAddressPredicate

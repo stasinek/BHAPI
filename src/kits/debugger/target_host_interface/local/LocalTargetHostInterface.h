@@ -5,7 +5,7 @@
 #ifndef LOCAL_TARGET_HOST_INTERFACE_H
 #define LOCAL_TARGET_HOST_INTERFACE_H
 
-#include "TargetHostInterface.h"
+#include <TargetHostInterface.h>
 
 
 class LocalTargetHostInterface : public TargetHostInterface {

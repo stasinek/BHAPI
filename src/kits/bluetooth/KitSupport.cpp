@@ -10,7 +10,7 @@
 
 #include <bluetoothserver_p.h>
 
-#include "KitSupport.h"
+#include <KitSupport.h>
 
 BMessenger* _RetrieveBluetoothMessenger(void)
 {

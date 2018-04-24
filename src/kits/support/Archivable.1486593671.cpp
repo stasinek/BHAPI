@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Archivable.h"
+#include <Archivable.h>
 
 
 BArchivable::BArchivable()

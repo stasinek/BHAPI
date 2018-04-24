@@ -4,13 +4,13 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DwarfUtils.h"
+#include <DwarfUtils.h>
 
 #include <StringClass.h>
 
-#include "CompilationUnit.h"
-#include "Dwarf.h"
-#include "DwarfFile.h"
+#include <CompilationUnit.h>
+#include <Dwarf.h>
+#include <DwarfFile.h>
 
 
 /*static*/ void DwarfUtils::GetDIEName(const DebugInfoEntry* entry, BString& _name)

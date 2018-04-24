@@ -8,11 +8,11 @@
  */
 
 
-#include <MessageAdapter.h>
-#include <MessagePrivate.h>
-#include <MessageUtils.h>
+#include <kits/netMessageAdapter.h>
+#include <kits/netMessagePrivate.h>
+#include <kits/netMessageUtils.h>
 
-#include <stdlib.h>
+#include <kits/netstdlib.h>
 
 
 namespace BPrivate {

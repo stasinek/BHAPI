@@ -16,8 +16,8 @@
 #include <netinet/in.h>
 
 
-#include <../include/sys/socket.h>
-#include <../include/sys/sockio.h>
+#include <sys/socket.h>
+#include <sys/sockio.h>
 #include <unistd.h>
 
 #include <AutoDeleter.h>

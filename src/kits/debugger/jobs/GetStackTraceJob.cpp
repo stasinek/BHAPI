@@ -4,17 +4,17 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Jobs.h"
+#include <Jobs.h>
 
 #include <AutoLocker.h>
 
-#include "Architecture.h"
-#include "CpuState.h"
-#include "DebuggerInterface.h"
-#include "ImageDebugInfo.h"
-#include "StackTrace.h"
-#include "Thread.h"
-#include "Team.h"
+#include <Architecture.h>
+#include <CpuState.h>
+#include <DebuggerInterface.h>
+#include <ImageDebugInfo.h>
+#include <StackTrace.h>
+#include <Thread.h>
+#include <Team.h>
 
 
 GetStackTraceJob::GetStackTraceJob(DebuggerInterface* debuggerInterface,

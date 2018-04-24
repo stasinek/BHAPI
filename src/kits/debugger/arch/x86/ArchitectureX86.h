@@ -9,8 +9,8 @@
 
 #include <Array.h>
 
-#include "Architecture.h"
-#include "Register.h"
+#include <Architecture.h>
+#include <Register.h>
 
 
 enum {

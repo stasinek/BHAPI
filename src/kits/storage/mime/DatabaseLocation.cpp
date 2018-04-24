@@ -12,7 +12,7 @@
 #include <mime/DatabaseLocation.h>
 
 
-#include <../include/syslog.h>
+#include <syslog.h>
 
 #include <new>
 

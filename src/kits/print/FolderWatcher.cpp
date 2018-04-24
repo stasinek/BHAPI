@@ -30,12 +30,12 @@
 /*****************************************************************************/
 
 
-#include "FolderWatcher.h"
+#include <FolderWatcher.h>
 
 #include <stdio.h>
 
 // BeOS
-#include <kernel/fs_attr.h>
+#include <kits/kernel/fs_attr.h>
 #include <Node.h>
 #include <NodeInfo.h>
 #include <NodeMonitor.h>

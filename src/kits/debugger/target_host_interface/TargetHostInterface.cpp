@@ -3,15 +3,15 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "TargetHostInterface.h"
+#include <TargetHostInterface.h>
 
 #include <stdio.h>
 
 #include <AutoLocker.h>
 
-#include "DebuggerInterface.h"
-#include "MessageCodes.h"
-#include "TeamDebugger.h"
+#include <DebuggerInterface.h>
+#include <MessageCodes.h>
+#include <TeamDebugger.h>
 
 
 // #pragma mark - TeamDebuggerOptions

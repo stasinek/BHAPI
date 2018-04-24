@@ -27,11 +27,11 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "../support/StringClass.h"
-#include "../app/AppDefs.h"
-#include "../app/Message.h"
+#include <kits/support/StringClass.h>
+#include <kits/app/AppDefs.h>
+#include <kits/app/Message.h>
 
-#include "StatusBar.h"
+#include <StatusBar.h>
 
 BStatusBar::BStatusBar(BRect frame, const char *name, const char *label, const char *trailing_label)
 	: BView(frame, name, B_FOLLOW_ALL, B_WILL_DRAW),

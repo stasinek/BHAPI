@@ -44,7 +44,7 @@ All rights reserved.
 #include <Directory.h>
 #include <ObjectList.h>
 
-#include "NodeWalker.h"
+#include <NodeWalker.h>
 
 
 namespace BPrivate {

@@ -5,7 +5,7 @@
  */
 
 
-#include "IORequest.h"
+#include <IORequest.h>
 
 #include <string.h>
 
@@ -19,7 +19,7 @@
 #include <vm/vm.h>
 #include <vm/VMAddressSpace.h>
 
-#include "dma_resources.h"
+#include <dma_resources.h>
 
 
 //#define TRACE_IO_REQUEST

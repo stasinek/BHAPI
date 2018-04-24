@@ -12,14 +12,14 @@
 #ifndef DRIVERINTERFACE_H
 #define DRIVERINTERFACE_H
 
-#include <GraphicsDefs.h>
-#include <Accelerant.h>
-#include <Drivers.h>
-#include <PCI.h>
-#include <kernel/OS.h>
+#include <kits/netGraphicsDefs.h>
+#include <kits/netAccelerant.h>
+#include <kits/netDrivers.h>
+#include <kits/netPCI.h>
+#include <kits/kernel/OS.h>
 
-#include "vm_device_version.h"
-#include "svga_reg.h"
+#include <kits/netvm_device_version.h>
+#include <kits/netsvga_reg.h>
 
 #define MAX_SAMPLE_DEVICE_NAME_LENGTH	32
 #define CURSOR_ID						1

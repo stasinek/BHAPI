@@ -4,13 +4,13 @@
  */
 
 
-#include "scheduler_cpu.h"
+#include <scheduler_cpu.h>
 
 #include <util/AutoLock.h>
 
 #include <algorithm>
 
-#include "scheduler_thread.h"
+#include <scheduler_thread.h>
 
 
 namespace Scheduler {

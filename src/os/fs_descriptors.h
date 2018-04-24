@@ -5,9 +5,9 @@
 #ifndef FS_DESCRIPTORS_H
 #define FS_DESCRIPTORS_H
 
-#include "node_ref.h"
+#include <node_ref.h>
 #include <Haiku.h>
-#include <../include/dirent.h>
+#include <dirent.h>
 
 
 using std::string;

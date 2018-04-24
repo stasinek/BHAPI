@@ -4,14 +4,14 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Jobs.h"
+#include <Jobs.h>
 
 #include <AutoLocker.h>
 
-#include "Image.h"
-#include "ImageDebugInfo.h"
-#include "TeamDebugInfo.h"
-#include "Team.h"
+#include <Image.h>
+#include <ImageDebugInfo.h>
+#include <TeamDebugInfo.h>
+#include <Team.h>
 
 
 // #pragma mark - LoadImageDebugInfoJob

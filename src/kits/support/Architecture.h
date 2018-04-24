@@ -34,7 +34,7 @@
 #ifndef BHAPI_ARCHITECTURE_H
 #define BHAPI_ARCHITECTURE_H
 
-#include "SupportDefs.h"
+#include <SupportDefs.h>
 __BEGIN_DECLS
 #ifdef __cplusplus
 namespace bhapi {

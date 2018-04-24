@@ -17,7 +17,7 @@
 #include <user_debugger.h>
 #include <util/MinMaxHeap.h>
 
-#include "RunQueue.h"
+#include <RunQueue.h>
 
 
 //#define TRACE_SCHEDULER

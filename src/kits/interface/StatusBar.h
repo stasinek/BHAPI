@@ -32,7 +32,7 @@
 #define BHAPI_STATUS_BAR_H
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../interface/View.h"
+#include <kits/interface/View.h>
 class BHAPI_IMPEXP BStatusBar : public BView {
 public:
     BStatusBar(BRect frame,

@@ -27,12 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Entry.h"
-#include "Directory.h"
+#include <Entry.h>
+#include <Directory.h>
 
-#include "../support/StringClass.h"
-#include "../support/Errors.h"
-#include "../kernel/Debug.h"
+#include <kits/support/StringClass.h>
+#include <kits/support/Errors.h>
+#include <os/debug.h>
 
 #ifndef _WIN32
 #define __USE_LARGEFILE64
@@ -44,8 +44,8 @@
 #include <windows.h>
 #endif
 
-#include <../include/sys/types.h>
-#include <../include/sys/stat.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 // implement in "Path.cpp"
 extern status_t b_path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);
@@ -518,7 +518,7 @@ BEntry::operator=(const BEntry &entry)
 
 #include <syscalls.h>
 
-#include "storage_support.h"
+#include <storage_support.h>
 
 
 using namespace std;

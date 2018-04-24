@@ -30,13 +30,13 @@
 #ifndef BHAPI_APPLICATION_H
 #define BHAPI_APPLICATION_H
 //-----------------------------------------------------------------------------
-#include "../app/MessageRunner.h"
-#include "../app/Looper.h"
-#include "../app/Cursor.h"
-#include "../app/Roster.h"
-#include "../add-ons/font/FontEngine.h"
+#include <kits/app/MessageRunner.h>
+#include <kits/app/Looper.h>
+#include <kits/app/Cursor.h>
+#include <kits/app/Roster.h>
+#include <kits/add-ons/font/FontEngine.h>
 //-----------------------------------------------------------------------------
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 using namespace bhapi;

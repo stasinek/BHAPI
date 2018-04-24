@@ -36,9 +36,9 @@ All rights reserved.
 
 #include <strings.h>
 
-#include "AutoLock.h"
-#include "MimeTypeList.h"
-#include "Thread.h"
+#include <AutoLock.h>
+#include <MimeTypeList.h>
+#include <Thread.h>
 
 
 ShortMimeInfo::ShortMimeInfo(const BMimeType& mimeType)

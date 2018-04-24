@@ -1,4 +1,4 @@
-#include "PrintAddOnServerProtocol.h"
+#include <PrintAddOnServerProtocol.h>
 
 const char* kPrintAddOnServerApplicationSignature =
 	"application/x-vnd.haiku-print-addon-server";

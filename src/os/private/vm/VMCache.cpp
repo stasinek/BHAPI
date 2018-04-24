@@ -33,11 +33,11 @@
 #include <vm/VMArea.h>
 
 // needed for the factory only
-#include "VMAnonymousCache.h"
-#include "VMAnonymousNoSwapCache.h"
-#include "VMDeviceCache.h"
-#include "VMNullCache.h"
-#include "../cache/vnode_store.h"
+#include <VMAnonymousCache.h>
+#include <VMAnonymousNoSwapCache.h>
+#include <VMDeviceCache.h>
+#include <VMNullCache.h>
+#include <kits/cache/vnode_store.h>
 
 
 //#define TRACE_VM_CACHE

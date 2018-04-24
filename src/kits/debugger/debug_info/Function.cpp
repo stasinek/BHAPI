@@ -4,10 +4,10 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Function.h"
+#include <Function.h>
 
-#include "FileSourceCode.h"
-#include "FunctionID.h"
+#include <FileSourceCode.h>
+#include <FunctionID.h>
 
 
 Function::Function()

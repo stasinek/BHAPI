@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "InterfaceDefs.h"
+#include <InterfaceDefs.h>
 
 using namespace bhapi;
 

@@ -55,8 +55,8 @@
 //
 //------------------------------------------------------------------------------
 
-#include "../kernel/KERNEL.h"		// for system_time()
-#include "StopWatch.h"
+#include <os/kernel.h>		// for system_time()
+#include <StopWatch.h>
 
 
 BStopWatch::BStopWatch(const char *name, bool silent)

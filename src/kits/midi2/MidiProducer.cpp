@@ -8,12 +8,12 @@
  *		Matthijs Hollemans
  */
 
-#include "debug.h"
+#include <debug.h>
 #include <MidiConsumer.h>
 #include <MidiProducer.h>
 #include <MidiRoster.h>
-#include "MidiRosterLooper.h"
-#include "protocol.h"
+#include <MidiRosterLooper.h>
+#include <protocol.h>
 
 
 status_t BMidiProducer::Connect(BMidiConsumer* cons)

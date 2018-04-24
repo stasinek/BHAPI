@@ -31,9 +31,9 @@
 #define BHAPI_POP_UP_MENU_H
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../interface/Menu.h"
-#include "../interface/Window.h"
-#include "../support/Locker.h"
+#include <kits/interface/Menu.h>
+#include <kits/interface/Window.h>
+#include <kits/support/Locker.h>
 class BHAPI_IMPEXP BPopUpMenu : public BMenu {
 public:
     BPopUpMenu(const char *title,

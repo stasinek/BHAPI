@@ -4,10 +4,10 @@
  */
 
 
-#include "VariableValueNodeChild.h"
+#include <VariableValueNodeChild.h>
 
-#include "Variable.h"
-#include "ValueLocation.h"
+#include <Variable.h>
+#include <ValueLocation.h>
 
 
 VariableValueNodeChild::VariableValueNodeChild(Variable* variable)

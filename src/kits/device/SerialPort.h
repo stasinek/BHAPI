@@ -6,7 +6,7 @@
 #define	_SERIAL_PORT_H
 
 #include <Haiku.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <Haiku.h>
 
 #include <stddef.h>

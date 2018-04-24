@@ -7,7 +7,7 @@
 #include <debugger.h>
 #include <OS.h>
 #include <Debug.h>
-#include "syscalls.h"
+#include <syscalls.h>
 
 #include <stdio.h>
 #include <stdlib.h>

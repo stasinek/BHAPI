@@ -8,8 +8,8 @@
 
 #include <Haiku.h>
 
-#include <../include/sys/types.h>
-#include <../include/sys/stat.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 
 struct node_ref;

@@ -5,7 +5,7 @@
 #ifndef FS_FREEBSD_H
 #define FS_FREEBSD_H
 
-#include <../include/sys/uio.h>
+#include <sys/uio.h>
 
 
 __BEGIN_DECLS

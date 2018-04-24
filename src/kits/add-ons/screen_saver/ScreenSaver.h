@@ -7,9 +7,9 @@
 
 
 #include <Haiku.h>
-#include <DirectWindow.h>
-#include <image.h>
-#include <Message.h>
+#include <kits/netDirectWindow.h>
+#include <kits/netimage.h>
+#include <kits/netMessage.h>
 
 class BView;
 

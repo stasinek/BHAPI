@@ -8,8 +8,8 @@
 
 #include <Referenceable.h>
 
-#include "ElfFile.h"
-#include "SymbolInfo.h"
+#include <ElfFile.h>
+#include <SymbolInfo.h>
 
 
 class ElfSymbolLookupSource : public BReferenceable {

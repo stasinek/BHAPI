@@ -4,7 +4,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "WatchpointManager.h"
+#include <WatchpointManager.h>
 
 #include <stdio.h>
 
@@ -12,9 +12,9 @@
 
 #include <AutoLocker.h>
 
-#include "DebuggerInterface.h"
-#include "Team.h"
-#include "Tracing.h"
+#include <DebuggerInterface.h>
+#include <Team.h>
+#include <Tracing.h>
 
 
 WatchpointManager::WatchpointManager(Team* team,

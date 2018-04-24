@@ -7,17 +7,17 @@
 #include <errno.h>
 
 
-#include <../include/syslog.h>
+#include <syslog.h>
 
 #include <FindDirectory.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <commpage_defs.h>
 #include <errno_private.h>
 #include <libroot_private.h>
 #include <real_time_data.h>
 #include <user_timer_defs.h>
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
 
 static struct real_time_data* sRealTimeData;

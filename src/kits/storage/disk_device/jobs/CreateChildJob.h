@@ -5,7 +5,7 @@
 #ifndef _CREATE_CHILD_JOB_H
 #define _CREATE_CHILD_JOB_H
 
-#include "DiskDeviceJob.h"
+#include <DiskDeviceJob.h>
 
 
 namespace BPrivate {

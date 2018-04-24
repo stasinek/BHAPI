@@ -7,10 +7,10 @@
  */
 
 
-#include <ByteOrder.h>
-#include <DataIO.h>
-#include <Message.h>
-#include <PropertyInfo.h>
+#include <kits/netByteOrder.h>
+#include <kits/support/DataIO.h>
+#include <kits/netMessage.h>
+#include <kits/netPropertyInfo.h>
 
 
 

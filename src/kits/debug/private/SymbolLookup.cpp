@@ -4,7 +4,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "SymbolLookup.h"
+#include <SymbolLookup.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -15,7 +15,7 @@
 #include <runtime_loader.h>
 #include <syscalls.h>
 
-#include "Image.h"
+#include <Image.h>
 
 
 #undef TRACE

@@ -34,14 +34,14 @@
 
 #include <pthread.h>
 #include <semaphore.h>
-#include <../include/sys/types.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 #include <time.h>
 #include <errno.h>
 
-#include "../config.h"
-#include "../BHAPIBuild.h"
+#include <kits/config.h>
+#include <kits/BHAPIBuild.h>
 
 #ifdef BHAPI_OS_CYGWIN
 	#warning "Posix IPC semaphore won't to be support at all."
@@ -57,8 +57,8 @@
 	#define BHAPI_PTHREAD_SHARED
 #endif
 
-#include "../kernel/Kernel.h"
-#include "../support/StringClass.h"
+#include <os/kernel.h>
+#include <kits/support/StringClass.h>
 
 typedef struct b_posix_sem_info {
 	b_posix_sem_info()

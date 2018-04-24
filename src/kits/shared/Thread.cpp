@@ -33,8 +33,8 @@ All rights reserved.
 */
 
 
-#include "Thread.h"
-#include "FunctionObject.h"
+#include <Thread.h>
+#include <FunctionObject.h>
 
 
 SimpleThread::SimpleThread(int32 priority, const char* name)

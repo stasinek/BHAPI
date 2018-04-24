@@ -66,9 +66,9 @@ class BMenuBar;
 class BMenuItem;
 class BSubmenuWindow;
 class BPopUpMenu;
-#include "../support/List.h"
-#include "../interface/View.h"
-#include "../interface/MenuItem.h"
+#include <kits/support/List.h>
+#include <kits/interface/View.h>
+#include <kits/interface/MenuItem.h>
 typedef bool (*menu_tracking_hook)(BMenu* menu, void* state);
 class BHAPI_IMPEXP BMenu : public BView {
 public:

@@ -11,8 +11,8 @@
 
 #include <ObjectList.h>
 
-#include "ValueLocation.h"
-#include "ValueNode.h"
+#include <ValueLocation.h>
+#include <ValueNode.h>
 
 
 class CompoundType;

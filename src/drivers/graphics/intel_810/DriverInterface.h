@@ -9,10 +9,10 @@
 #define DRIVERINTERFACE_H
 
 
-#include <Accelerant.h>
-#include <GraphicsDefs.h>
-#include <Drivers.h>
-#include <edid.h>
+#include <kits/netAccelerant.h>
+#include <kits/netGraphicsDefs.h>
+#include <kits/netDrivers.h>
+#include <kits/netedid.h>
 
 
 // This file contains info that is shared between the kernel driver and the

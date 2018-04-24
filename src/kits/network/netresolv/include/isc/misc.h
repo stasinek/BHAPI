@@ -25,7 +25,7 @@
 /*! \file */
 
 
-#include <../include/sys/types.h>
+#include <sys/types.h>
 
 #define	bitncmp		__bitncmp
 /*#define isc_movefile	__isc_movefile */

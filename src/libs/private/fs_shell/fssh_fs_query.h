@@ -6,8 +6,8 @@
 #define _FSSH_FS_QUERY_H
 
 
-#include "fssh_os.h"
-#include "fssh_dirent.h"
+#include <fssh_os.h>
+#include <fssh_dirent.h>
 
 
 /* Flags for fs_open_[live_]query() */

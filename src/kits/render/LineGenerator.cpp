@@ -57,7 +57,7 @@
 </document>
 -----------------------------------------------------------------------------*/
 
-#include "LineGenerator.h"
+#include <LineGenerator.h>
 
 #include <math.h>
 

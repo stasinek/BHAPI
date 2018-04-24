@@ -29,19 +29,19 @@
 #ifndef B_APP_KIT_H
 #define B_APP_KIT_H
 //-----------------------------------------------------------------------------
-#include "app/Application.h"
-#include "app/Messenger.h"
-#include "app/MessageRunner.h"
-#include "app/MessageFilter.h"
-#include "app/MessageQueue.h"
-#include "app/Message.h"
-#include "app/Looper.h"
-#include "app/Handler.h"
-#include "app/Invoker.h"
-#include "app/Clipboard.h"
-#include "app/Cursor.h"
+#include <kits/app/Application.h>
+#include <kits/app/Messenger.h>
+#include <kits/app/MessageRunner.h>
+#include <kits/app/MessageFilter.h>
+#include <kits/app/MessageQueue.h>
+#include <kits/app/Message.h>
+#include <kits/app/Looper.h>
+#include <kits/app/Handler.h>
+#include <kits/app/Invoker.h>
+#include <kits/app/Clipboard.h>
+#include <kits/app/Cursor.h>
 //-----------------------------------------------------------------------------
-#include "app/AppDefs.h"
+#include <kits/app/AppDefs.h>
 //-----------------------------------------------------------------------------
 #endif
 //-----------------------------------------------------------------------------

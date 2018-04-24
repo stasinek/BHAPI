@@ -36,9 +36,9 @@ All rights reserved.
 #include <Message.h>
 #include <PropertyInfo.h>
 
-#include "ContainerWindow.h"
-#include "FSUtils.h"
-#include "Tracker.h"
+#include <ContainerWindow.h>
+#include <FSUtils.h>
+#include <Tracker.h>
 
 
 #define kPropertyTrash "Trash"

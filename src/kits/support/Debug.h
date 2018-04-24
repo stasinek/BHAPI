@@ -5,14 +5,9 @@
 #ifndef _DEBUG_H
 #define _DEBUG_H
 
-
 #include <Haiku.h>
-#include <kernel/OS.h>
-
-#include <../include/stdarg.h>
-
-
-
+#include <kits/kernel/OS.h>
+#include <stdarg.h>
 
 /* Private */
 #ifdef __cplusplus

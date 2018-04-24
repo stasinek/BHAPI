@@ -8,8 +8,8 @@
 #include <util/DoublyLinkedList.h>
 #include <util/OpenHashTable.h>
 
-#include "DataReader.h"
-#include "Dwarf.h"
+#include <DataReader.h>
+#include <Dwarf.h>
 
 
 struct AbbreviationTableEntry {

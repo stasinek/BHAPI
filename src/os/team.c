@@ -5,7 +5,7 @@
 
 
 #include <OS.h>
-#include "syscalls.h"
+#include <syscalls.h>
 
 
 // this call does not exist in BeOS R5

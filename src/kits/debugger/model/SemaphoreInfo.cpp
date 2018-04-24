@@ -4,7 +4,7 @@
  */
 
 
-#include "SemaphoreInfo.h"
+#include <SemaphoreInfo.h>
 
 
 SemaphoreInfo::SemaphoreInfo()

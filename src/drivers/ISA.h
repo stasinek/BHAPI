@@ -12,7 +12,7 @@
 #define _ISA_H
 
 //#include <Haiku.h>
-#include <bus_manager.h>
+#include <kits/netbus_manager.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -9,8 +9,8 @@
 #define SERVER_READ_ONLY_MEMORY_H
 
 
-#include <GraphicsDefs.h>
-#include <InterfaceDefs.h>
+#include <kits/netGraphicsDefs.h>
+#include <kits/netInterfaceDefs.h>
 
 
 // Update this constant with the largest color constant excluding

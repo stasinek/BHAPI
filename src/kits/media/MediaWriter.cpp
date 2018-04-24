@@ -4,7 +4,7 @@
  */
 
 
-#include "MediaWriter.h"
+#include <MediaWriter.h>
 
 #include <new>
 
@@ -13,9 +13,9 @@
 
 #include <Autolock.h>
 
-#include "debug.h"
+#include <debug.h>
 
-#include "PluginManager.h"
+#include <PluginManager.h>
 
 
 

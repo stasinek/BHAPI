@@ -4,14 +4,14 @@
  */
 
 
-#include "CStringTypeHandler.h"
+#include <CStringTypeHandler.h>
 
 #include <new>
 
 #include <stdio.h>
 
-#include "CStringValueNode.h"
-#include "Type.h"
+#include <CStringValueNode.h>
+#include <Type.h>
 
 
 CStringTypeHandler::~CStringTypeHandler()

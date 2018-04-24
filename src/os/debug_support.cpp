@@ -11,9 +11,9 @@
 #include <AutoDeleter.h>
 #include <debug_support.h>
 
-#include "arch_debug_support.h"
-#include "Image.h"
-#include "SymbolLookup.h"
+#include <arch_debug_support.h>
+#include <Image.h>
+#include <SymbolLookup.h>
 
 
 using std::nothrow;

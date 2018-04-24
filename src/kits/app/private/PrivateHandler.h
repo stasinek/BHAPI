@@ -1,4 +1,4 @@
-﻿/* --------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -34,7 +34,7 @@
 class BHandler;
 class BLocker;
 class BLooper;
-#include "../../kits/support/SupportDefs.h"
+#include <kits/support/SupportDefs.h>
 namespace bhapi {
 BHAPI_LOCAL BLocker* get_handler_operator_locker();
 BHAPI_LOCAL  uint64 get_handler_token(const BHandler *handler);

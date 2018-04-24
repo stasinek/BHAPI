@@ -8,7 +8,7 @@
 
 #include <errno.h>
 
-#include <../include/sys/stat.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 

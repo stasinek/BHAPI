@@ -15,10 +15,10 @@
 #include <File.h>
 #include <MediaTrack.h>
 
-#include "debug.h"
+#include <debug.h>
 
-#include "MediaExtractor.h"
-#include "MediaWriter.h"
+#include <MediaExtractor.h>
+#include <MediaWriter.h>
 
 
 BMediaFile::BMediaFile(const entry_ref* ref)

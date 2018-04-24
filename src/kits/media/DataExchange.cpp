@@ -10,7 +10,7 @@
 #include <unistd.h>
 
 #include <Messenger.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <debug.h>
 #include <MediaMisc.h>

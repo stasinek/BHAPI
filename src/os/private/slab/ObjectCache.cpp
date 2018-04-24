@@ -6,7 +6,7 @@
  */
 
 
-#include "ObjectCache.h"
+#include <ObjectCache.h>
 
 #include <string.h>
 
@@ -14,8 +14,8 @@
 #include <vm/vm.h>
 #include <vm/VMAddressSpace.h>
 
-#include "MemoryManager.h"
-#include "slab_private.h"
+#include <MemoryManager.h>
+#include <slab_private.h>
 
 
 RANGE_MARKER_FUNCTION_BEGIN(SlabObjectCache)

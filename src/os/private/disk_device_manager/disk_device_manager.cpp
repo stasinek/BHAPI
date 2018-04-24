@@ -4,17 +4,17 @@
  */
 
 
-#include "disk_device_manager.h"
+#include <disk_device_manager.h>
 
 #include <stdio.h>
 
 #include <KernelExport.h>
 
-#include "KDiskDevice.h"
-#include "KDiskDeviceManager.h"
-#include "KDiskDeviceUtils.h"
-#include "KDiskSystem.h"
-#include "KPartition.h"
+#include <KDiskDevice.h>
+#include <KDiskDeviceManager.h>
+#include <KDiskDeviceUtils.h>
+#include <KDiskSystem.h>
+#include <KPartition.h>
 
 
 // debugging

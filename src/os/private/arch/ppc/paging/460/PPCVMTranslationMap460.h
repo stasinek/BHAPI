@@ -6,7 +6,7 @@
 #define KERNEL_ARCH_PPC_PAGING_460_PPC_VM_TRANSLATION_MAP_460_H
 
 
-#include "paging/PPCVMTranslationMap.h"
+#include <paging/PPCVMTranslationMap.h>
 #include <arch_mmu.h>
 
 

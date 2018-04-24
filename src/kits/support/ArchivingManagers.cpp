@@ -7,9 +7,9 @@
  */
 
 
-#include "ArchivingManagers.h"
+#include <ArchivingManagers.h>
 
-#include <../include/syslog.h>
+#include <syslog.h>
 #include <typeinfo>
 
 #include <StackOrHeapArray.h>

@@ -4,12 +4,12 @@
  */
 
 
-#include "IOScheduler.h"
+#include <IOScheduler.h>
 
 #include <stdlib.h>
 #include <string.h>
 
-#include "IOSchedulerRoster.h"
+#include <IOSchedulerRoster.h>
 
 
 IOScheduler::IOScheduler(DMAResource* resource)

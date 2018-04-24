@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "FindPanel.h"
+#include <FindPanel.h>
 
 #include <utility>
 
@@ -75,15 +75,15 @@ All rights reserved.
 #include <Volume.h>
 #include <VolumeRoster.h>
 
-#include "Attributes.h"
-#include "AutoLock.h"
-#include "Commands.h"
-#include "ContainerWindow.h"
-#include "FSUtils.h"
-#include "FunctionObject.h"
-#include "IconMenuItem.h"
-#include "MimeTypes.h"
-#include "Tracker.h"
+#include <Attributes.h>
+#include <AutoLock.h>
+#include <Commands.h>
+#include <ContainerWindow.h>
+#include <FSUtils.h>
+#include <FunctionObject.h>
+#include <IconMenuItem.h>
+#include <MimeTypes.h>
+#include <Tracker.h>
 
 
 #undef B_TRANSLATION_CONTEXT

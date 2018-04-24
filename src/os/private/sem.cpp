@@ -38,7 +38,7 @@
 #include <vm/vm_page.h>
 #include <wait_for_objects.h>
 
-#include "kernel_debug_config.h"
+#include <kernel_debug_config.h>
 
 
 //#define TRACE_SEM

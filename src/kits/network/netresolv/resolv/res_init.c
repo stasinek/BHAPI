@@ -70,7 +70,7 @@
  * OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <sys/param.h>
@@ -90,7 +90,7 @@
 #include <netdb.h>
 
 #ifndef HAVE_MD5
-# include "../dst/md5.h"
+# include <kits/dst/md5.h>
 #else
 # ifdef SOLARIS2
 #  include <sys/md5.h>
@@ -100,14 +100,14 @@
 # define _MD5_H_ 1	/*%< make sure we do not include rsaref md5.h file */
 #endif
 
-#include "port_after.h"
+#include <port_after.h>
 
 /* ensure that sockaddr_in6 and IN6ADDR_ANY_INIT are declared / defined */
 #include <resolv.h>
 
 #include <FindDirectory.h>
 
-#include "res_private.h"
+#include <res_private.h>
 
 #define RESOLVSORT
 /*% Options. Should all be left alone. */

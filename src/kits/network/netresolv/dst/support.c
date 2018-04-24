@@ -18,7 +18,7 @@ static const char rcsid[] = "$Header: /proj/cvs/prod/libbind/dst/support.c,v 1.6
  * WITH THE USE OR PERFORMANCE OF THE SOFTWARE.
  */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <stdio.h>
 #include <unistd.h>
@@ -30,9 +30,9 @@ static const char rcsid[] = "$Header: /proj/cvs/prod/libbind/dst/support.c,v 1.6
 #include <arpa/nameser.h>
 #include <resolv.h>
 
-#include "dst_internal.h"
+#include <dst_internal.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 /*%
  * dst_s_verify_str()

@@ -13,26 +13,26 @@
 /*! Class for low-overhead port-based messaging */
 
 
-#include <LinkReceiver.h>
+#include <kits/netLinkReceiver.h>
 
-#include <stdlib.h>
-#include <string.h>
-#include <new>
+#include <kits/netstdlib.h>
+#include <kits/netstring.h>
+#include <kits/netnew>
 
-#include <ServerProtocol.h>
-#include <StringClass.h>
-#include <Region.h>
-#include <GradientLinear.h>
-#include <GradientRadial.h>
-#include <GradientRadialFocus.h>
-#include <GradientDiamond.h>
-#include <GradientConic.h>
+#include <kits/netServerProtocol.h>
+#include <kits/netStringClass.h>
+#include <kits/netRegion.h>
+#include <kits/netGradientLinear.h>
+#include <kits/netGradientRadial.h>
+#include <kits/netGradientRadialFocus.h>
+#include <kits/netGradientDiamond.h>
+#include <kits/netGradientConic.h>
 
-#include "link_message.h"
+#include <kits/netlink_message.h>
 
 //#define DEBUG_BPORTLINK
 #ifdef DEBUG_BPORTLINK
-#	include <stdio.h>
+#	include <kits/netstdio.h>
 #	define STRACE(x) printf x
 #else
 #	define STRACE(x) ;
@@ -40,7 +40,7 @@
 
 //#define TRACE_LINK_RECEIVER_GRADIENTS
 #ifdef TRACE_LINK_RECEIVER_GRADIENTS
-#	include <kernel/OS.h>
+#	include <kits/kernel/OS.h>
 #	define GTRACE(x) debug_printf x
 #else
 #	define GTRACE(x) ;

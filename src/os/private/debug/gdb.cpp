@@ -8,7 +8,7 @@
 
 /** Contains the code to interface with a remote GDB */
 
-#include "gdb.h"
+#include <gdb.h>
 
 #include <string.h>
 #include <stdarg.h>

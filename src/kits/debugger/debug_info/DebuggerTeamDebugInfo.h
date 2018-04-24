@@ -6,7 +6,7 @@
 #ifndef DEBUGGER_TEAM_DEBUG_INFO_H
 #define DEBUGGER_TEAM_DEBUG_INFO_H
 
-#include "SpecificTeamDebugInfo.h"
+#include <SpecificTeamDebugInfo.h>
 
 
 class Architecture;

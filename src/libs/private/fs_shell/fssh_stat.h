@@ -6,8 +6,8 @@
 #define _FSSH_SYS_STAT_H_
 
 
-#include "fssh_defs.h"
-#include "fssh_time.h"
+#include <fssh_defs.h>
+#include <fssh_time.h>
 
 
 struct fssh_stat {

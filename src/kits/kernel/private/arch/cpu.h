@@ -9,7 +9,7 @@
 #define _KERNEL_ARCH_CPU_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 #define PAGE_ALIGN(x) (((x) + (B_PAGE_SIZE - 1)) & ~(B_PAGE_SIZE - 1))

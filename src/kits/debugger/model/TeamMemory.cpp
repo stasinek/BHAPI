@@ -4,11 +4,11 @@
  */
 
 
-#include "TeamMemory.h"
+#include <TeamMemory.h>
 
 #include <algorithm>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <StringClass.h>
 
 

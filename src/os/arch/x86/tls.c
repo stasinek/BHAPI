@@ -12,8 +12,8 @@
 
 #include <runtime_loader/runtime_loader.h>
 
-#include "support/TLS.h"
-#include "tls.h"
+#include <kits/support/TLS.h>
+#include <tls.h>
 
 
 #if !defined(__GNUC__) || (__GNUC__ > 2)

@@ -8,11 +8,11 @@
  *		Matthijs Hollemans
  */
 
-#include "debug.h"
+#include <debug.h>
 #include <MidiConsumer.h>
 #include <MidiRoster.h>
-#include "MidiRosterLooper.h"
-#include "protocol.h"
+#include <MidiRosterLooper.h>
+#include <protocol.h>
 
 #include <pthread.h>
 

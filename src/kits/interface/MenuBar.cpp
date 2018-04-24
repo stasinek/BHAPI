@@ -27,13 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "MenuBar.h"
-#include "MenuField.h"
-#include "Window.h"
+#include <MenuBar.h>
+#include <MenuField.h>
+#include <Window.h>
 
-#include "../support/ClassInfo.h"
-#include "../app/AppDefs.h"
-#include "../app/Message.h"
+#include <kits/support/ClassInfo.h>
+#include <kits/app/AppDefs.h>
+#include <kits/app/Message.h>
 
 
 BMenuBar::BMenuBar(BRect frame, const char *title,  __be_uint32 resizeMode, bhapi::menu_layout layout, bool resizeToFit)

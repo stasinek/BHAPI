@@ -2,8 +2,8 @@
 ** Copyright 2001, Travis Geiselbrecht. All rights reserved.
 ** Distributed under the terms of the NewOS License.
 */
-#include <kernel/debug.h>
-#include <kernel/arch/smp.h>
+#include <os/debug.h>
+#include <kits/kernel/arch/smp.h>
 
 int arch_smp_init(kernel_args *ka)
 {

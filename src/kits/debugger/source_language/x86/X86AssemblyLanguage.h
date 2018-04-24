@@ -6,7 +6,7 @@
 #define X86_ASSEMBLY_LANGUAGE_H
 
 
-#include "SourceLanguage.h"
+#include <SourceLanguage.h>
 
 
 class X86AssemblyLanguage : public SourceLanguage {

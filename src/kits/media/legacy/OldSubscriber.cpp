@@ -10,9 +10,9 @@
 #if __GNUC__ < 3
 
 
-#include "OldSubscriber.h"
+#include <OldSubscriber.h>
 
-#include "debug.h"
+#include <debug.h>
 
 
 /*************************************************************

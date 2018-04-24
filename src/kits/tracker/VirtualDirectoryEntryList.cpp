@@ -7,13 +7,13 @@
  */
 
 
-#include "VirtualDirectoryEntryList.h"
+#include <VirtualDirectoryEntryList.h>
 
 #include <AutoLocker.h>
 #include <storage_support.h>
 
-#include "Model.h"
-#include "VirtualDirectoryManager.h"
+#include <Model.h>
+#include <VirtualDirectoryManager.h>
 
 
 namespace BPrivate {

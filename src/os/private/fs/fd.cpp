@@ -23,7 +23,7 @@
 #include <vfs.h>
 #include <wait_for_objects.h>
 
-#include "vfs_tracing.h"
+#include <vfs_tracing.h>
 
 
 //#define TRACE_FD

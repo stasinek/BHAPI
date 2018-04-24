@@ -9,10 +9,10 @@
 #include <string.h>
 
 
-#include "DecoderPlugin.h"
-#include "EncoderPlugin.h"
-#include "ReaderPlugin.h"
-#include "WriterPlugin.h"
+#include <DecoderPlugin.h>
+#include <EncoderPlugin.h>
+#include <ReaderPlugin.h>
+#include <WriterPlugin.h>
 
 #include <TList.h>
 #include <Locker.h>

@@ -28,7 +28,7 @@ static const char rcsid[] = "Id: ns_print.c,v 1.12 2009/03/03 05:29:58 each Exp"
 
 /* Import. */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -46,7 +46,7 @@ static const char rcsid[] = "Id: ns_print.c,v 1.12 2009/03/03 05:29:58 each Exp"
 #include <string.h>
 #include <ctype.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 #ifdef SPRINTF_CHAR
 # define SPRINTF(x) ((int)strlen(sprintf/**/x))

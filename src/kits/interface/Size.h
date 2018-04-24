@@ -5,7 +5,7 @@
 #ifndef	_SIZE_H
 #define	_SIZE_H
 
-#include <../include/limits.h>
+#include <limits.h>
 
 #include <Haiku.h>
 

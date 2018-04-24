@@ -27,13 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Render.h"
-#include "LineGenerator.h"
-#include "ArcGenerator.h"
+#include <Render.h>
+#include <LineGenerator.h>
+#include <ArcGenerator.h>
 
-#include "../support/List.h"
-#include "../support/Errors.h"
-#include "../kernel/Debug.h"
+#include <kits/support/List.h>
+#include <kits/support/Errors.h>
+#include <os/debug.h>
 
 
 

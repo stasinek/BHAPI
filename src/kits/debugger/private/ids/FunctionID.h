@@ -9,7 +9,7 @@
 #include <Archivable.h>
 #include <StringClass.h>
 
-#include "ObjectID.h"
+#include <ObjectID.h>
 
 
 class FunctionID : public ObjectID, public BArchivable {

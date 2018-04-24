@@ -8,10 +8,10 @@
 
 #include <debugger.h>
 
-#include "ImageInfo.h"
-#include "SignalInfo.h"
-#include "SyscallInfo.h"
-#include "Types.h"
+#include <ImageInfo.h>
+#include <SignalInfo.h>
+#include <SyscallInfo.h>
+#include <Types.h>
 
 
 class CpuState;

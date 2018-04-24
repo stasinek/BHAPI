@@ -4,7 +4,7 @@
  */
 
 
-#include "VMKernelArea.h"
+#include <VMKernelArea.h>
 
 #include <heap.h>
 #include <slab/Slab.h>

@@ -26,7 +26,7 @@ __RCSID("$NetBSD: nsap_addr.c,v 1.6 2009/04/12 17:07:17 christos Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <sys/param.h>
@@ -41,7 +41,7 @@ __RCSID("$NetBSD: nsap_addr.c,v 1.6 2009/04/12 17:07:17 christos Exp $");
 #include <resolv.h>
 #include <resolv_mt.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 static char
 xtob(int c) {

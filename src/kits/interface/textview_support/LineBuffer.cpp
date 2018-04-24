@@ -7,7 +7,7 @@
  */
 
 
-#include "LineBuffer.h"
+#include <LineBuffer.h>
 
 
 BTextView::LineBuffer::LineBuffer()

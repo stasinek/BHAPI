@@ -7,8 +7,8 @@
  */
 
 
-#include "AddOnMonitor.h"
-#include "AddOnMonitorHandler.h"
+#include <AddOnMonitor.h>
+#include <AddOnMonitorHandler.h>
 #include <Message.h>
 #include <MessageRunner.h>
 #include <Messenger.h>

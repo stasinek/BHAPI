@@ -21,7 +21,7 @@
 static const char rcsid[] = "$Id: ns_name.c,v 1.11 2009/01/23 19:59:16 each Exp $";
 #endif
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 
@@ -36,7 +36,7 @@ static const char rcsid[] = "$Id: ns_name.c,v 1.11 2009/01/23 19:59:16 each Exp 
 #include <stdlib.h>
 #include <limits.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 #ifdef SPRINTF_CHAR
 # define SPRINTF(x) ((int)strlen(sprintf/**/x))

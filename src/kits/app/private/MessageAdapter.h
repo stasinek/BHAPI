@@ -9,8 +9,8 @@
 #define _MESSAGE_ADAPTER_H_
 
 
-#include <Message.h>
-#include <util/KMessage.h>
+#include <kits/netMessage.h>
+#include <kits/netutil/KMessage.h>
 
 
 // message formats

@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "TrashWatcher.h"
+#include <TrashWatcher.h>
 
 #include <string.h>
 
@@ -44,10 +44,10 @@ All rights reserved.
 #include <Volume.h>
 #include <VolumeRoster.h>
 
-#include "Attributes.h"
-#include "Bitmaps.h"
-#include "FSUtils.h"
-#include "Tracker.h"
+#include <Attributes.h>
+#include <Bitmaps.h>
+#include <FSUtils.h>
+#include <Tracker.h>
 
 
 //	 #pragma mark - BTrashWatcher

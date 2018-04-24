@@ -7,7 +7,7 @@
  */
 
 
-#include "VirtualDirectoryManager.h"
+#include <VirtualDirectoryManager.h>
 
 #include <errno.h>
 
@@ -23,8 +23,8 @@
 #include <NotOwningEntryRef.h>
 #include <Uuid.h>
 
-#include "MimeTypes.h"
-#include "Model.h"
+#include <MimeTypes.h>
+#include <Model.h>
 
 
 namespace BPrivate {

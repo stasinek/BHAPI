@@ -19,7 +19,7 @@
 #include <vm/vm.h>
 #include <string.h>
 
-#include "board_config.h"
+#include <board_config.h>
 
 
 DebugUART *gArchDebugUART;

@@ -10,8 +10,8 @@
 //! API classes - registrar interface.
 
 
-#include <AppMisc.h>
-#include <RegistrarDefs.h>
+#include <kits/netAppMisc.h>
+#include <kits/netRegistrarDefs.h>
 
 
 namespace BPrivate {

@@ -4,18 +4,18 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "FileManager.h"
+#include <FileManager.h>
 
 #include <new>
 
 #include <AutoDeleter.h>
 #include <AutoLocker.h>
 
-#include "LocatableDirectory.h"
-#include "LocatableFile.h"
-#include "SourceFile.h"
-#include "StringUtils.h"
-#include "TeamFileManagerSettings.h"
+#include <LocatableDirectory.h>
+#include <LocatableFile.h>
+#include <SourceFile.h>
+#include <StringUtils.h>
+#include <TeamFileManagerSettings.h>
 
 
 // #pragma mark - EntryPath

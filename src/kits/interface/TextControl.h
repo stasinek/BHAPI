@@ -33,8 +33,8 @@
 
 #ifdef __cplusplus /* Just for C++ */
 class BMessage;
-#include "../interface/TextEditable.h"
-#include "../interface/Rect.h"
+#include <kits/interface/TextEditable.h>
+#include <kits/interface/Rect.h>
 #include <Haiku.h>
 class BHAPI_IMPEXP BTextControl : public BTextEditable {
 public:

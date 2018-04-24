@@ -5,11 +5,11 @@
  */
 #ifndef _FW_MODULE_H
 #define _FW_MODULE_H
-#include <KernelExport.h>
-#include <module.h>
-#include <bus_manager.h>
+#include <kits/kernelExport.h>
+#include <kits/netmodule.h>
+#include <kits/netbus_manager.h>
 
-#include "firewire.h"
+#include <kits/netfirewire.h>
 
 
 #define	FIREWIRE_MODULE_NAME		"bus_managers/firewire/v1"

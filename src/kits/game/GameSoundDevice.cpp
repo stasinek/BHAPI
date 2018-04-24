@@ -27,7 +27,7 @@
 //------------------------------------------------------------------------------
 
 
-#include "GameSoundDevice.h"
+#include <GameSoundDevice.h>
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -41,9 +41,9 @@
 #include <MediaTheme.h>
 #include <TimeSource.h>
 
-#include "GameSoundBuffer.h"
-#include "GameProducer.h"
-#include "GSUtility.h"
+#include <GameSoundBuffer.h>
+#include <GameProducer.h>
+#include <GSUtility.h>
 
 
 // BGameSoundDevice definitions ------------------------------------

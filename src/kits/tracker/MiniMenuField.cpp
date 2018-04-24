@@ -38,8 +38,8 @@ All rights reserved.
 #include <PopUpMenu.h>
 #include <Window.h>
 
-#include "MiniMenuField.h"
-#include "Utilities.h"
+#include <MiniMenuField.h>
+#include <Utilities.h>
 
 
 MiniMenuField::MiniMenuField(BRect frame, const char* name, BPopUpMenu* menu,

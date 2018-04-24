@@ -13,7 +13,7 @@
 
 #include <Haiku.h>
 
-#include "debug_uart.h"
+#include <debug_uart.h>
 
 
 class DebugUART8250 : public DebugUART {

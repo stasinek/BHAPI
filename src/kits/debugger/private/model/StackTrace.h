@@ -7,7 +7,7 @@
 
 #include <ObjectList.h>
 
-#include "StackFrame.h"
+#include <StackFrame.h>
 
 
 class StackTrace : public BReferenceable {

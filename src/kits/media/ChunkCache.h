@@ -12,7 +12,7 @@
 #include <queue>
 #include <deque>
 
-#include "ReaderPlugin.h"
+#include <ReaderPlugin.h>
 
 
 namespace BPrivate {

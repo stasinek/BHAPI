@@ -33,18 +33,18 @@ All rights reserved.
 */
 
 
-#include "RecentItems.h"
+#include <RecentItems.h>
 
 #include <Roster.h>
 
-#include "Attributes.h"
-#include "IconMenuItem.h"
-#include "Model.h"
-#include "NavMenu.h"
-#include "PoseView.h"
-#include "SlowMenu.h"
-#include "Tracker.h"
-#include "Utilities.h"
+#include <Attributes.h>
+#include <IconMenuItem.h>
+#include <Model.h>
+#include <NavMenu.h>
+#include <PoseView.h>
+#include <SlowMenu.h>
+#include <Tracker.h>
+#include <Utilities.h>
 
 
 class RecentItemsMenu : public BSlowMenu {

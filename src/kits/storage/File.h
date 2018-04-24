@@ -32,10 +32,10 @@
 
 
 #ifdef __cplusplus /* Just for C++ */
-#include "Directory.h"
-#include "Node.h"
-#include "DataIO.h"
-#include "StorageDefs.h"
+#include <Directory.h>
+#include <Node.h>
+#include <DataIO.h>
+#include <StorageDefs.h>
 #include <Haiku.h>
 class BFile : public BNode, public BPositionIO {
     public:

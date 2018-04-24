@@ -42,7 +42,7 @@ All rights reserved.
 /
 *******************************************************************************/
 
-#include "ColorTools.h"
+#include <ColorTools.h>
 
 #if B_BEOS_VERSION <= B_BEOS_VERSION_MAUI
 

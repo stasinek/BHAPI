@@ -6,8 +6,8 @@
 #define _K_PATH_H
 
 
-#include "fssh_defs.h"
-#include "fssh_kernel_export.h"
+#include <fssh_defs.h>
+#include <fssh_kernel_export.h>
 
 
 namespace FSShell {

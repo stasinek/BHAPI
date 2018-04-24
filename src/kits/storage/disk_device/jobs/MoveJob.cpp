@@ -3,16 +3,16 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "MoveJob.h"
+#include <MoveJob.h>
 
 #include <new>
 
 #include <AutoDeleter.h>
 
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
-#include "DiskDeviceUtils.h"
-#include "PartitionReference.h"
+#include <DiskDeviceUtils.h>
+#include <PartitionReference.h>
 
 
 using std::nothrow;

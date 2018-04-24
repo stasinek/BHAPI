@@ -11,7 +11,7 @@
 
 #include <ctype.h>
 
-#include <../include/strings.h>
+#include <strings.h>
 
 #include <StorageDefs.h>
 #include <Haiku.h>

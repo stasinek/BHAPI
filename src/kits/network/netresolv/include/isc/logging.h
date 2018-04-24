@@ -18,9 +18,9 @@
 #ifndef LOGGING_H
 #define LOGGING_H
 
-#include <../include/sys/types.h>
+#include <sys/types.h>
 
-#include <../include/stdarg.h>
+#include <stdarg.h>
 #include <unistd.h>
 
 #define log_critical		(-5)

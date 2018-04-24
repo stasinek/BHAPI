@@ -6,7 +6,7 @@
 #define STRING_VALUE_H
 
 
-#include "Value.h"
+#include <Value.h>
 
 
 class StringValue : public Value {

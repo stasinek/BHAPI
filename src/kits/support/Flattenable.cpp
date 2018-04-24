@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Flattenable.h"
+#include <Flattenable.h>
 
 BFlattenable::~BFlattenable()
 {

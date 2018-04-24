@@ -6,7 +6,7 @@
 #ifndef _FSSH_FS_VOLUME_H
 #define	_FSSH_FS_VOLUME_H
 
-#include "fssh_os.h"
+#include <fssh_os.h>
 
 
 /* mount flags */

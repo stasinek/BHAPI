@@ -4,11 +4,11 @@
  */
 
 
-#include "SyntheticPrimitiveType.h"
+#include <SyntheticPrimitiveType.h>
 
 #include <Variant.h>
 
-#include "UiUtils.h"
+#include <UiUtils.h>
 
 
 SyntheticPrimitiveType::SyntheticPrimitiveType(uint32 typeConstant)

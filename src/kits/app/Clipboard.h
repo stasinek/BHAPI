@@ -31,8 +31,8 @@
 #ifndef BHAPI_CLIPBOARD_H
 #define BHAPI_CLIPBOARD_H
 //-----------------------------------------------------------------------------
-#include "../app/Messenger.h"
-#include "../support/Locker.h"
+#include <kits/app/Messenger.h>
+#include <kits/support/Locker.h>
 //-----------------------------------------------------------------------------
 #include <Haiku.h>
 //-----------------------------------------------------------------------------

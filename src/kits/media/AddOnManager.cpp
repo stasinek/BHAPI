@@ -9,7 +9,7 @@
  */
 
 
-#include "AddOnManager.h"
+#include <AddOnManager.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -23,10 +23,10 @@
 #include <image.h>
 #include <Path.h>
 
-#include "debug.h"
+#include <debug.h>
 
-#include "FormatManager.h"
-#include "MetaFormat.h"
+#include <FormatManager.h>
+#include <MetaFormat.h>
 
 
 namespace BPrivate {

@@ -8,7 +8,7 @@
 #ifndef BHAPI_APPLICATION_PRIVATE_H
 #define BHAPI_APPLICATION_PRIVATE_H
 
-#include <Application.h>
+#include <kits/netApplication.h>
 struct server_read_only_memory;
 
 class BApplication::Private {

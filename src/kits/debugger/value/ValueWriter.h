@@ -7,7 +7,7 @@
 #define VALUE_WRITER_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <StringClass.h>
 
 #include <Variant.h>

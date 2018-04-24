@@ -30,8 +30,8 @@
 
 #ifndef BHAPI_THEME_ENGINE_H
 #define BHAPI_THEME_ENGINE_H
-#include "../../support/SupportDefs.h"
-#include "../../interface/InterfaceDefs.h"
+#include <kits/support/SupportDefs.h>
+#include <kits/interface/InterfaceDefs.h>
 
 #ifdef __cplusplus /* Just for C++ */
 class BView;

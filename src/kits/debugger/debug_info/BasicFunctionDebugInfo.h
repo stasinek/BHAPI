@@ -7,7 +7,7 @@
 
 #include <StringClass.h>
 
-#include "FunctionDebugInfo.h"
+#include <FunctionDebugInfo.h>
 
 
 class BasicFunctionDebugInfo : public FunctionDebugInfo {

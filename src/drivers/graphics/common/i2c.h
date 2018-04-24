@@ -6,7 +6,7 @@
 #define _I2C_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 // timing for i2c bus

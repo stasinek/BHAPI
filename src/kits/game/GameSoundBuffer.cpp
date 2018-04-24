@@ -25,7 +25,7 @@
 //------------------------------------------------------------------------------
 
 
-#include "GameSoundBuffer.h"
+#include <GameSoundBuffer.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,10 +37,10 @@
 #include <TimeSource.h>
 #include <BufferGroup.h>
 
-#include "GameProducer.h"
-#include "GameSoundDevice.h"
-#include "StreamingGameSound.h"
-#include "GSUtility.h"
+#include <GameProducer.h>
+#include <GameSoundDevice.h>
+#include <StreamingGameSound.h>
+#include <GSUtility.h>
 
 
 // Sound Buffer Utility functions ----------------------------------------

@@ -10,8 +10,8 @@
 
 #include <util/OpenHashTable.h>
 
-#include "ObjectCache.h"
-#include "slab_private.h"
+#include <ObjectCache.h>
+#include <slab_private.h>
 
 
 struct HashedSlab : slab {

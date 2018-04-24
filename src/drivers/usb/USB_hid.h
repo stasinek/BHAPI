@@ -7,27 +7,27 @@
 
 
 #include <Haiku.h>
-#include <usb/USB_hid_page_alphanumeric_display.h>
-#include <usb/USB_hid_page_arcade.h>
-#include <usb/USB_hid_page_bar_code_scanner.h>
-#include <usb/USB_hid_page_battery_system.h>
-#include <usb/USB_hid_page_consumer.h>
-#include <usb/USB_hid_page_digitizers.h>
-#include <usb/USB_hid_page_game_controls.h>
-#include <usb/USB_hid_page_generic_desktop.h>
-#include <usb/USB_hid_page_generic_device_controls.h>
-#include <usb/USB_hid_page_keyboard.h>
-#include <usb/USB_hid_page_led.h>
-#include <usb/USB_hid_page_magnetic_stripe_reader.h>
-#include <usb/USB_hid_page_medical_instrument.h>
-#include <usb/USB_hid_page_pid.h>
-#include <usb/USB_hid_page_power_device.h>
-#include <usb/USB_hid_page_simulation.h>
-#include <usb/USB_hid_page_telephony.h>
-#include <usb/USB_hid_page_usb_monitor.h>
-#include <usb/USB_hid_page_vesa_virtual_controls.h>
-#include <usb/USB_hid_page_vr_controls.h>
-#include <usb/USB_hid_page_weighing_device.h>
+#include <kits/netusb/USB_hid_page_alphanumeric_display.h>
+#include <kits/netusb/USB_hid_page_arcade.h>
+#include <kits/netusb/USB_hid_page_bar_code_scanner.h>
+#include <kits/netusb/USB_hid_page_battery_system.h>
+#include <kits/netusb/USB_hid_page_consumer.h>
+#include <kits/netusb/USB_hid_page_digitizers.h>
+#include <kits/netusb/USB_hid_page_game_controls.h>
+#include <kits/netusb/USB_hid_page_generic_desktop.h>
+#include <kits/netusb/USB_hid_page_generic_device_controls.h>
+#include <kits/netusb/USB_hid_page_keyboard.h>
+#include <kits/netusb/USB_hid_page_led.h>
+#include <kits/netusb/USB_hid_page_magnetic_stripe_reader.h>
+#include <kits/netusb/USB_hid_page_medical_instrument.h>
+#include <kits/netusb/USB_hid_page_pid.h>
+#include <kits/netusb/USB_hid_page_power_device.h>
+#include <kits/netusb/USB_hid_page_simulation.h>
+#include <kits/netusb/USB_hid_page_telephony.h>
+#include <kits/netusb/USB_hid_page_usb_monitor.h>
+#include <kits/netusb/USB_hid_page_vesa_virtual_controls.h>
+#include <kits/netusb/USB_hid_page_vr_controls.h>
+#include <kits/netusb/USB_hid_page_weighing_device.h>
 
 
 /* References:

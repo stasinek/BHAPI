@@ -8,7 +8,7 @@
 
 #include <vm/VMAddressSpace.h>
 
-#include "VMKernelArea.h"
+#include <VMKernelArea.h>
 
 
 struct ObjectCache;

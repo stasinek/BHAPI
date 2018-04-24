@@ -23,8 +23,8 @@
 static const char rcsid[] = "$Id: ev_streams.c,v 1.5 2005/04/27 04:56:36 sra Exp $";
 #endif
 
-#include "port_before.h"
-#include "fd_setsize.h"
+#include <port_before.h>
+#include <fd_setsize.h>
 
 #include <sys/types.h>
 #include <sys/uio.h>
@@ -33,9 +33,9 @@ static const char rcsid[] = "$Id: ev_streams.c,v 1.5 2005/04/27 04:56:36 sra Exp
 
 #include <isc/eventlib.h>
 #include <isc/assertions.h>
-#include "eventlib_p.h"
+#include <eventlib_p.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 static int	copyvec(evStream *str, const struct iovec *iov, int iocnt);
 static void	consume(evStream *str, size_t bytes);

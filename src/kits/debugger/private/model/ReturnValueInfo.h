@@ -6,9 +6,9 @@
 #define RETURN_VALUE_INFO_H
 
 
-#include "ObjectList.h"
-#include "Referenceable.h"
-#include "Types.h"
+#include <ObjectList.h>
+#include <Referenceable.h>
+#include <Types.h>
 
 
 class CpuState;

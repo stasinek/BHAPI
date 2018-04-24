@@ -8,7 +8,7 @@
 #ifndef _K_PARTITIONING_DISK_DEVICE_SYSTEM_H
 #define _K_PARTITIONING_DISK_DEVICE_SYSTEM_H
 
-#include "KDiskSystem.h"
+#include <KDiskSystem.h>
 
 
 struct partition_module_info;

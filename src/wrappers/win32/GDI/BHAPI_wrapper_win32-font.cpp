@@ -28,16 +28,16 @@
  * --------------------------------------------------------------------------*/
 #ifdef WIN32
 
-#include "BHAPI_wrapper_win32gdi.h"
+#include <BHAPI_wrapper_win32gdi.h>
 
-#include "../../add-ons/font/FontEngine.h"
-#include "../../support/ClassInfo.h"
-#include "../../support/Autolock.h"
-#include "../../support/StringArray.h"
-#include "../../interface/Window.h"
-#include "../../interface/View.h"
-#include "../../support/Errors.h"
-#include "../../kernel/Debug.h"
+#include <kits/add-ons/font/FontEngine.h>
+#include <kits/support/ClassInfo.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/StringArray.h>
+#include <kits/interface/Window.h>
+#include <kits/interface/View.h>
+#include <kits/support/Errors.h>
+#include <os/debug.h>
 
 
 BOOL CALLBACK _etkEnumHeightCallBack_(ENUMLOGFONTEX *lplfe, NEWTEXTMETRICEX *lpntme, DWORD FontType, LPARAM lParam)

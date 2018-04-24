@@ -26,7 +26,7 @@
 #include <arch/int.h>
 #include <arch/user_debugger.h>
 
-#include "interrupts.h"
+#include <interrupts.h>
 
 
 #define IDT_GATES_COUNT	256

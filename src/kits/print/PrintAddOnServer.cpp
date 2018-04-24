@@ -1,10 +1,10 @@
-#include "PrintAddOnServer.h"
+#include <PrintAddOnServer.h>
 
 #include <Entry.h>
 #include <Roster.h>
 
-#include "PrinterDriverAddOn.h"
-#include "PrintAddOnServerProtocol.h"
+#include <PrinterDriverAddOn.h>
+#include <PrintAddOnServerProtocol.h>
 
 static const bigtime_t kSeconds = 1000000L;
 static const bigtime_t kDeliveryTimeout = 30 * kSeconds;

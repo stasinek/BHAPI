@@ -28,15 +28,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "ListItem.h"
-#include "OutlineListView.h"
-#include "ListView.h"
-#include "InterfaceDefs.h"
+#include <ListItem.h>
+#include <OutlineListView.h>
+#include <ListView.h>
+#include <InterfaceDefs.h>
 
-#include "../app/Message.h"
-#include "../interface/View.h"
-#include "../support/Errors.h"
-#include "../support/List.h"
+#include <kits/app/Message.h>
+#include <kits/interface/View.h>
+#include <kits/support/Errors.h>
+#include <kits/support/List.h>
 
 
 BListItem::BListItem(__be_uint32 outlineLevel, bool expanded,  __be_uint32 flags)

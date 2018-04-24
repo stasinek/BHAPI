@@ -5,7 +5,7 @@
 #ifndef _SYSTEM_SCHEDULER_DEFS_H
 #define _SYSTEM_SCHEDULER_DEFS_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 struct scheduling_analysis_thread_wait_object;

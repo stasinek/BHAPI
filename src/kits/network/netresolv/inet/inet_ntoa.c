@@ -41,7 +41,7 @@ static char sccsid[] = "@(#)inet_ntoa.c	8.1 (Berkeley) 6/4/93";
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -51,7 +51,7 @@ static char sccsid[] = "@(#)inet_ntoa.c	8.1 (Berkeley) 6/4/93";
 #include <stdio.h>
 #include <string.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 /*%
  * Convert network-format internet address

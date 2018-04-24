@@ -8,7 +8,7 @@
  */
 
 
-#include "FormatManager.h"
+#include <FormatManager.h>
 
 #include <new>
 
@@ -17,7 +17,7 @@
 
 #include <Autolock.h>
 
-#include "debug.h"
+#include <debug.h>
 
 
 #define TIMEOUT	5000000LL

@@ -27,45 +27,45 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "FilePanel.h"
-#include "FindDirectory.h"
-#include "VolumeRoster.h"
+#include <FilePanel.h>
+#include <FindDirectory.h>
+#include <VolumeRoster.h>
 
-#include "../app/Application.h"
-#include "../interface/Button.h"
-#include "../interface/MenuField.h"
-#include "../interface/MenuBar.h"
-#include "../interface/Menu.h"
-#include "../interface/MenuItem.h"
-#include "../interface/ListView.h"
-#include "../interface/ListItem.h"
-#include "../interface/ScrollView.h"
-#include "../interface/TextControl.h"
-#include "../interface/StringView.h"
-#include "../interface/Bitmap.h"
-#include "../interface/Window.h"
-#include "../kernel/Kernel.h"
-#include "../render/Pixmap.h"
-#include "../storage/Directory.h"
-#include "../support/Autolock.h"
-#include "../support/ClassInfo.h"
+#include <kits/app/Application.h>
+#include <kits/interface/Button.h>
+#include <kits/interface/MenuField.h>
+#include <kits/interface/MenuBar.h>
+#include <kits/interface/Menu.h>
+#include <kits/interface/MenuItem.h>
+#include <kits/interface/ListView.h>
+#include <kits/interface/ListItem.h>
+#include <kits/interface/ScrollView.h>
+#include <kits/interface/TextControl.h>
+#include <kits/interface/StringView.h>
+#include <kits/interface/Bitmap.h>
+#include <kits/interface/Window.h>
+#include <os/kernel.h>
+#include <kits/render/Pixmap.h>
+#include <kits/storage/Directory.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/ClassInfo.h>
 #include <Haiku.h>
-#include "../app/Messenger.h"
-#include "../app/Message.h"
-#include "../app/MessageFilter.h"
-#include "../support/Errors.h"
-#include "../app/AppDefs.h"
-#include "../kernel/Debug.h"
-#include "../interface/InterfaceDefs.h"
+#include <kits/app/Messenger.h>
+#include <kits/app/Message.h>
+#include <kits/app/MessageFilter.h>
+#include <kits/support/Errors.h>
+#include <kits/app/AppDefs.h>
+#include <os/debug.h>
+#include <kits/interface/InterfaceDefs.h>
 
 #include <time.h>
 
 #define ICON_WIDTH	16
 #define ICON_HEIGHT	16
 
-#include "icons/volume.xpm"
-#include "icons/folder.xpm"
-#include "icons/file.xpm"
+#include <icons/volume.xpm"
+#include <icons/folder.xpm"
+#include <icons/file.xpm"
 
 #define MSG_PANEL_GET_DIR	'getd'
 #define MSG_PANEL_SELECTED	'sele'

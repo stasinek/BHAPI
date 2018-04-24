@@ -5,11 +5,11 @@
 #ifndef REMOTE_DEBUG_REQUEST_H
 #define REMOTE_DEBUG_REQUEST_H
 
-#include "Types.h"
+#include <Types.h>
 
 #include <Referenceable.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 enum remote_request_type {

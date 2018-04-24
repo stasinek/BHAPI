@@ -7,7 +7,7 @@
 
 //!	File System volume functions
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 /* mount flags */

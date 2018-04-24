@@ -10,9 +10,9 @@
 
 
 
-#include <../include/sys/param.h>
-#include <../include/sys/stat.h>
-#include <../include/sys/time.h>
+#include <sys/param.h>
+#include <sys/stat.h>
+#include <sys/time.h>
 #include <unistd.h>
 
 

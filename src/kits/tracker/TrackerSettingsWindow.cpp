@@ -40,8 +40,8 @@ All rights reserved.
 #include <LocaleClass.h>
 #include <ScrollView.h>
 
-#include "TrackerSettings.h"
-#include "TrackerSettingsWindow.h"
+#include <TrackerSettings.h>
+#include <TrackerSettingsWindow.h>
 
 
 namespace BPrivate {

@@ -20,9 +20,9 @@
 
 #include <Roster.h>
 
-#include "MediaExtractor.h"
-#include "MediaWriter.h"
-#include "PluginManager.h"
+#include <MediaExtractor.h>
+#include <MediaWriter.h>
+#include <PluginManager.h>
 
 
 //#define TRACE_MEDIA_TRACK

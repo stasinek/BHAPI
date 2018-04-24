@@ -19,7 +19,7 @@
 static const char rcsid[] = "$Id: assertions.c,v 1.5 2008/11/14 02:36:51 marka Exp $";
 #endif
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <errno.h>
 #include <stdio.h>
@@ -28,7 +28,7 @@ static const char rcsid[] = "$Id: assertions.c,v 1.5 2008/11/14 02:36:51 marka E
 
 #include <isc/assertions.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 /*
  * Forward.

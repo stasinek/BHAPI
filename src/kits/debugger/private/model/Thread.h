@@ -6,14 +6,14 @@
 #ifndef THREAD_H
 #define THREAD_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <StringClass.h>
 
 #include <Referenceable.h>
 #include <util/DoublyLinkedList.h>
 
-#include "ReturnValueInfo.h"
-#include "types/Types.h"
+#include <ReturnValueInfo.h>
+#include <types/Types.h>
 
 
 class CpuState;

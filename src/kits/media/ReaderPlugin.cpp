@@ -6,7 +6,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "ReaderPlugin.h"
+#include <ReaderPlugin.h>
 
 #include <stdio.h>
 

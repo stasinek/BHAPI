@@ -5,7 +5,7 @@
 #ifndef _SET_STRING_JOB_H
 #define _SET_STRING_JOB_H
 
-#include "DiskDeviceJob.h"
+#include <DiskDeviceJob.h>
 
 
 namespace BPrivate {

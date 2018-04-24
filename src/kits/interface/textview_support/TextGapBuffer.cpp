@@ -17,7 +17,7 @@
 #include <File.h>
 #include <InterfaceDefs.h> // for B_UTF8_BULLET
 
-#include "TextGapBuffer.h"
+#include <TextGapBuffer.h>
 
 
 namespace BPrivate {

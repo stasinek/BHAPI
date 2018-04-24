@@ -27,9 +27,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "ByteOrder.h"
+#include <ByteOrder.h>
 
-#include "../support/Errors.h"
+#include <kits/support/Errors.h>
 
 IMPEXP_BHAPI b_status_t b_swap_data(b_type_code type, void *_data, size_t len, b_swap_action action)
 {

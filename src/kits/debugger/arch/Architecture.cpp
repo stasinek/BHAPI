@@ -4,24 +4,24 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Architecture.h"
+#include <Architecture.h>
 
 #include <new>
 
 #include <AutoDeleter.h>
 #include <AutoLocker.h>
 
-#include "CfaContext.h"
-#include "CpuState.h"
-#include "FunctionInstance.h"
-#include "Image.h"
-#include "ImageDebugInfo.h"
-#include "ImageDebugInfoProvider.h"
-#include "Register.h"
-#include "RegisterMap.h"
-#include "SpecificImageDebugInfo.h"
-#include "StackTrace.h"
-#include "Team.h"
+#include <CfaContext.h>
+#include <CpuState.h>
+#include <FunctionInstance.h>
+#include <Image.h>
+#include <ImageDebugInfo.h>
+#include <ImageDebugInfoProvider.h>
+#include <Register.h>
+#include <RegisterMap.h>
+#include <SpecificImageDebugInfo.h>
+#include <StackTrace.h>
+#include <Team.h>
 
 
 Architecture::Architecture(TeamMemory* teamMemory, uint8 addressSize,

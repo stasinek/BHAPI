@@ -39,11 +39,11 @@ All rights reserved.
 #include <Resources.h>
 #include <Entry.h>
 
-#include "LockingList.h"
-#include "SettingsHandler.h"
-#include "Utilities.h"
+#include <LockingList.h>
+#include <SettingsHandler.h>
+#include <Utilities.h>
 
-#include "tracker_private.h"
+#include <tracker_private.h>
 
 
 namespace BPrivate {

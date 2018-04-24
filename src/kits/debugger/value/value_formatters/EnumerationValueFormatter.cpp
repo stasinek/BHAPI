@@ -3,10 +3,10 @@
  * Copyright 2009, Ingo Weinhold, ingo_weinhold@gmx.de.
  * Distributed under the terms of the MIT License.
  */
-#include "EnumerationValueFormatter.h"
+#include <EnumerationValueFormatter.h>
 
-#include "EnumerationValue.h"
-#include "Type.h"
+#include <EnumerationValue.h>
+#include <Type.h>
 
 
 EnumerationValueFormatter::EnumerationValueFormatter(Config* config)

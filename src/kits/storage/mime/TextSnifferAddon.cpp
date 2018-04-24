@@ -123,7 +123,7 @@ TextSnifferAddon::GuessMimeType(BFile* file, const void* buffer, int32 length,
 #include <ctype.h>
 
 #include <unistd.h>
-#include "names.h"
+#include <names.h>
 
 typedef unsigned long my_unichar;
 

@@ -10,7 +10,7 @@
 
 #include <AboutWindow.h>
 
-#include <../include/stdarg.h>
+#include <stdarg.h>
 #include <time.h>
 
 #include <Alert.h>

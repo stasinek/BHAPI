@@ -15,9 +15,9 @@
 #include <lock.h>
 #include <vm/vm_types.h>
 
-#include "paging/64bit/paging.h"
-#include "paging/X86PagingMethod.h"
-#include "paging/X86PagingStructures.h"
+#include <paging/64bit/paging.h>
+#include <paging/X86PagingMethod.h>
+#include <paging/X86PagingStructures.h>
 
 
 class TranslationMapPhysicalPageMapper;

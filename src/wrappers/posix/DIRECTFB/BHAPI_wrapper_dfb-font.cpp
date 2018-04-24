@@ -29,15 +29,15 @@
 #ifdef LINUX
 #ifdef DIRECTFB
 
-#include "BHAPI_wrapper_dfb.h"
+#include <BHAPI_wrapper_dfb.h>
 
-#include "../../add-ons/font/FontEngine.h"
-#include "../../support/ClassInfo.h"
-#include "../../support/Autolock.h"
-#include "../../interface/Window.h"
-#include "../../interface/View.h"
-#include "../../storage/Directory.h"
-#include "../../storage/Path.h"
+#include <kits/add-ons/font/FontEngine.h>
+#include <kits/support/ClassInfo.h>
+#include <kits/support/Autolock.h>
+#include <kits/interface/Window.h>
+#include <kits/interface/View.h>
+#include <kits/storage/Directory.h>
+#include <kits/storage/Path.h>
 
 #define BHAPI_DIRECTFONT_DEFAULT_SIZE	12
 

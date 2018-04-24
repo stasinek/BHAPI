@@ -25,7 +25,7 @@
 #include <FindDirectory.h>
 #include <Messenger.h>
 #include <NodeInfo.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <Path.h>
 #include <Region.h>
 #include <Roster.h>

@@ -6,7 +6,7 @@
 #define C_LANGUAGE_FAMILY_SYNTAX_HIGHLIGHTER_H
 
 
-#include "SyntaxHighlighter.h"
+#include <SyntaxHighlighter.h>
 
 
 class CLanguageFamilySyntaxHighlighter : public SyntaxHighlighter {

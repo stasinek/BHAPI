@@ -14,8 +14,8 @@
 
 #include <dirent_private.h>
 #include <errno_private.h>
-#include <../include/syscalls.h>
-#include <../include/syscall_utils.h>
+#include <syscalls.h>
+#include <syscall_utils.h>
 
 
 static DIR *

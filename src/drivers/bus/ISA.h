@@ -27,8 +27,8 @@
 */
 
 
-#include <device_manager.h>
-#include <ISA.h>
+#include <kits/netdevice_manager.h>
+#include <kits/netISA.h>
 
 
 // maximum size of one dma transfer

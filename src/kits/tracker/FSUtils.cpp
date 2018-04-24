@@ -76,20 +76,20 @@ respective holders. All rights reserved.
 #include <libroot/libroot_private.h>
 #include <system/syscalls.h>
 
-#include "Attributes.h"
-#include "Bitmaps.h"
-#include "Commands.h"
-#include "FSUndoRedo.h"
-#include "FSUtils.h"
-#include "InfoWindow.h"
-#include "MimeTypes.h"
-#include "OverrideAlert.h"
-#include "StatusWindow.h"
-#include "Thread.h"
-#include "Tracker.h"
-#include "TrackerSettings.h"
-#include "Utilities.h"
-#include "VirtualDirectoryManager.h"
+#include <Attributes.h>
+#include <Bitmaps.h>
+#include <Commands.h>
+#include <FSUndoRedo.h>
+#include <FSUtils.h>
+#include <InfoWindow.h>
+#include <MimeTypes.h>
+#include <OverrideAlert.h>
+#include <StatusWindow.h>
+#include <Thread.h>
+#include <Tracker.h>
+#include <TrackerSettings.h>
+#include <Utilities.h>
+#include <VirtualDirectoryManager.h>
 
 
 enum {

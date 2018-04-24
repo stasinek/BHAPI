@@ -30,7 +30,7 @@
 #ifndef _LINUX_BUS_OPS_H
 #define _LINUX_BUS_OPS_H
 
-#include <linux/config.h>
+#include <kits/netlinux/config.h>
 
 #ifdef CONFIG_VIRTUAL_BUS
 

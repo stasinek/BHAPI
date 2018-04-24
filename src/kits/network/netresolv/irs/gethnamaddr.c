@@ -62,7 +62,7 @@ __RCSID("$NetBSD: gethnamaddr.c,v 1.79 2012/09/09 16:42:23 christos Exp $");
 #endif /* LIBC_SCCS and not lint */
 
 #if defined(_LIBC)
-#include "namespace.h"
+#include <namespace.h>
 #endif
 #include <sys/param.h>
 #include <sys/socket.h>

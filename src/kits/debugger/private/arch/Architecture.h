@@ -8,13 +8,13 @@
 
 
 #include <ByteOrder.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <Referenceable.h>
 #include <Variant.h>
 
-#include "ReturnValueInfo.h"
-#include "Types.h"
+#include <ReturnValueInfo.h>
+#include <Types.h>
 
 
 class CfaContext;

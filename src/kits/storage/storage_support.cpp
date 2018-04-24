@@ -14,9 +14,9 @@
 #include <StorageDefs.h>
 #include <Haiku.h>
 
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
-#include "storage_support.h"
+#include <storage_support.h>
 
 using std::nothrow;
 

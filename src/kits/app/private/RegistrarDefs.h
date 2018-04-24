@@ -12,8 +12,8 @@
 //!	API classes - registrar interface.
 
 
-#include <Errors.h>
-#include <Roster.h>
+#include <kits/netErrors.h>
+#include <kits/netRoster.h>
 
 
 namespace BPrivate {

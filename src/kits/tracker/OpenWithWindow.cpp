@@ -32,15 +32,15 @@ names are registered trademarks or trademarks of their respective holders.
 All rights reserved.
 */
 
-#include "Attributes.h"
-#include "AutoLock.h"
-#include "Commands.h"
-#include "FSUtils.h"
-#include "IconMenuItem.h"
-#include "OpenWithWindow.h"
-#include "MimeTypes.h"
-#include "StopWatch.h"
-#include "Tracker.h"
+#include <Attributes.h>
+#include <AutoLock.h>
+#include <Commands.h>
+#include <FSUtils.h>
+#include <IconMenuItem.h>
+#include <OpenWithWindow.h>
+#include <MimeTypes.h>
+#include <StopWatch.h>
+#include <Tracker.h>
 
 #include <Alert.h>
 #include <Button.h>

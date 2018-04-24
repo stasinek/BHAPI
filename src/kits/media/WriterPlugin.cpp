@@ -4,7 +4,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "WriterPlugin.h"
+#include <WriterPlugin.h>
 
 #include <stdio.h>
 

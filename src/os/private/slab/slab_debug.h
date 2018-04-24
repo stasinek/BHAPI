@@ -13,7 +13,7 @@
 #include <slab/Slab.h>
 #include <tracing.h>
 
-#include "kernel_debug_config.h"
+#include <kernel_debug_config.h>
 
 
 //#define TRACE_SLAB

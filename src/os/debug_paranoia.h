@@ -9,7 +9,7 @@
 
 #include <Haiku.h>
 
-#include "paranoia_config.h"
+#include <paranoia_config.h>
 
 
 // How to use: Include the header only from source files. Set

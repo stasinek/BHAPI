@@ -9,7 +9,7 @@
  */
 
 
-#include "paging/64bit/X86VMTranslationMap64Bit.h"
+#include <paging/64bit/X86VMTranslationMap64Bit.h>
 
 #include <int.h>
 #include <slab/Slab.h>
@@ -19,9 +19,9 @@
 #include <vm/VMAddressSpace.h>
 #include <vm/VMCache.h>
 
-#include "paging/64bit/X86PagingMethod64Bit.h"
-#include "paging/64bit/X86PagingStructures64Bit.h"
-#include "paging/x86_physical_page_mapper.h"
+#include <paging/64bit/X86PagingMethod64Bit.h>
+#include <paging/64bit/X86PagingStructures64Bit.h>
+#include <paging/x86_physical_page_mapper.h>
 
 
 //#define TRACE_X86_VM_TRANSLATION_MAP_64BIT

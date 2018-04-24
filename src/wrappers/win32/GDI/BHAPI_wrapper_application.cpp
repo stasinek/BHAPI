@@ -28,19 +28,19 @@
  * --------------------------------------------------------------------------*/
 #ifdef WIN32
 
-//#include "BHAPI_wrapper_win32gdi.h"
+//#include <BHAPI_wrapper_win32gdi.h>
 
-#include "../../kernel/Kernel.h"
-#include "../../kernel/Debug.h"
-#include "../../support/Locker.h"
-#include "../../support/Errors.h"
-#include "../../support/Autolock.h"
-#include "../../support/StringClass.h"
-#include "../../interface/InterfaceDefs.h"
-#include "../../app/Application.h"
-#include "../../app/AppDefs.h"
-#include "../../app/Clipboard.h"
-#include "../../app/Message.h"
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/support/Locker.h>
+#include <kits/support/Errors.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/StringClass.h>
+#include <kits/interface/InterfaceDefs.h>
+#include <kits/app/Application.h>
+#include <kits/app/AppDefs.h>
+#include <kits/app/Clipboard.h>
+#include <kits/app/Message.h>
 
 static void bhapi::win32_clipboard_changed()
 {

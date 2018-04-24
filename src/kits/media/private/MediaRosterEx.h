@@ -9,10 +9,10 @@
 
 
 #ifndef _MEDIA_T_LIST_H
-	#include "TList.h"
+	#include <TList.h>
 #endif
 #ifndef _DATA_EXCHANGE_H
-	#include "DataExchange.h"
+	#include <DataExchange.h>
 #endif
 #ifndef _MEDIA_NODE_H
 	#include <MediaNode.h>

@@ -3,8 +3,8 @@
 ** Distributed under the terms of the NewOS License.
 */
 
-#include <kernel/arch/cpu.h>
-#include <kernel/debug.h>
+#include <kits/kernel/arch/cpu.h>
+#include <os/debug.h>
 #include <boot/stage2.h>
 
 

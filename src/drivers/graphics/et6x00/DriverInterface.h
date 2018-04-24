@@ -6,10 +6,10 @@
 #ifndef _DRIVERINTERFACE_H_
 #define _DRIVERINTERFACE_H_
 
-#include <Accelerant.h>
-#include <Drivers.h>
-#include <PCI.h>
-#include <kernel/OS.h>
+#include <kits/netAccelerant.h>
+#include <kits/netDrivers.h>
+#include <kits/netPCI.h>
+#include <kits/kernel/OS.h>
 
 
 #if defined(__cplusplus)

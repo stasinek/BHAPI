@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DataPositionIOWrapper.h"
+#include <DataPositionIOWrapper.h>
 
 
 BDataPositionIOWrapper::BDataPositionIOWrapper(BDataIO* io)

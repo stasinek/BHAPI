@@ -29,10 +29,10 @@
 #ifdef BHAPI_OS_LINUX
 
 #include <pthread.h>
-#include <errno.h"
+#include <errno.h>
 
-#include "../kernel/Kernel.h"
-#include "../support/StringClass.h"
+#include <os/kernel.h>
+#include <kits/support/StringClass.h>
 
 typedef struct b_posix_locker_t {
 	b_posix_locker_t()

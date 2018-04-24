@@ -10,11 +10,11 @@
 #include <debugger.h>
 #include <Looper.h>
 
-#include "Team.h"
-#include "TeamSettings.h"
-#include "ThreadHandler.h"
-#include "UserInterface.h"
-#include "util/Worker.h"
+#include <Team.h>
+#include <TeamSettings.h>
+#include <ThreadHandler.h>
+#include <UserInterface.h>
+#include <util/Worker.h>
 
 
 class DebugEvent;

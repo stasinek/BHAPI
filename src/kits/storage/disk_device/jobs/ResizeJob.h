@@ -5,7 +5,7 @@
 #ifndef _RESIZE_JOB_H
 #define _RESIZE_JOB_H
 
-#include "DiskDeviceJob.h"
+#include <DiskDeviceJob.h>
 
 
 namespace BPrivate {

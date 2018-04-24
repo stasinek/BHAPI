@@ -5,8 +5,8 @@
 #ifndef _FSSH_FS_INFO_H
 #define	_FSSH_FS_INFO_H
 
-#include "fssh_defs.h"
-#include "fssh_os.h"
+#include <fssh_defs.h>
+#include <fssh_os.h>
 
 
 /* fs_info.flags */

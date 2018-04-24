@@ -37,15 +37,15 @@
 // the notification messages.
 
 
-#include "Notifications.h"
+#include <Notifications.h>
 
 #include <Messenger.h>
 #include <MediaNode.h>
 
 #include <AppMisc.h>
 
-#include "debug.h"
-#include "DataExchange.h"
+#include <debug.h>
+#include <DataExchange.h>
 
 
 namespace BPrivate {

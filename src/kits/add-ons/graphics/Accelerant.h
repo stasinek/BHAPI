@@ -5,8 +5,8 @@
 #ifndef BHAPI_ACCELERANT_H_
 #define BHAPI_ACCELERANT_H_
 
-#include <GraphicsDefs.h>
-#include <kernel/OS.h>
+#include <kits/netGraphicsDefs.h>
+#include <kits/kernel/OS.h>
 
 #if defined(__cplusplus)
     extern "C" {

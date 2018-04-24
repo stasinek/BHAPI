@@ -8,20 +8,20 @@
  */
 
 
-#include <AppMisc.h>
+#include <kits/netAppMisc.h>
 
 
 
-#include <../include/sys/utsname.h>
-#include <unistd.h>
+#include <sys/utsname.h>
+#include <kits/netunistd.h>
 
-#include <Entry.h>
-#include <image.h>
-#include <Messenger.h>
-#include <kernel/OS.h>
+#include <kits/storage/Entry.h>
+#include <kits/netimage.h>
+#include <kits/app/Messenger.h>
+#include <kits/kernel/OS.h>
 
-#include <ServerLink.h>
-#include <ServerProtocol.h>
+#include <kits/netServerLink.h>
+#include <kits/netServerProtocol.h>
 
 
 namespace BPrivate {

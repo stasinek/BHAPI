@@ -4,10 +4,10 @@
  */
 
 
-#include "RemoteDebugRequest.h"
+#include <RemoteDebugRequest.h>
 
-#include "Architecture.h"
-#include "CpuState.h"
+#include <Architecture.h>
+#include <CpuState.h>
 
 #include <AutoDeleter.h>
 

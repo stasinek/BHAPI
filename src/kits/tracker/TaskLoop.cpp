@@ -35,8 +35,8 @@ All rights reserved.
 #include <Debug.h>
 #include <InterfaceDefs.h>
 
-#include "AutoLock.h"
-#include "TaskLoop.h"
+#include <AutoLock.h>
+#include <TaskLoop.h>
 
 
 const float kTaskOverhead = 0.01f;

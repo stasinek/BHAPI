@@ -5,7 +5,7 @@
  */
 
 
-#include "ArchitectureX86.h"
+#include <ArchitectureX86.h>
 
 #include <new>
 
@@ -13,20 +13,20 @@
 
 #include <AutoDeleter.h>
 
-#include "CfaContext.h"
-#include "CpuStateX86.h"
-#include "DisassembledCode.h"
-#include "FunctionDebugInfo.h"
-#include "InstructionInfo.h"
-#include "NoOpStackFrameDebugInfo.h"
-#include "RegisterMap.h"
-#include "StackFrame.h"
-#include "Statement.h"
-#include "TeamMemory.h"
-#include "ValueLocation.h"
-#include "X86AssemblyLanguage.h"
+#include <CfaContext.h>
+#include <CpuStateX86.h>
+#include <DisassembledCode.h>
+#include <FunctionDebugInfo.h>
+#include <InstructionInfo.h>
+#include <NoOpStackFrameDebugInfo.h>
+#include <RegisterMap.h>
+#include <StackFrame.h>
+#include <Statement.h>
+#include <TeamMemory.h>
+#include <ValueLocation.h>
+#include <X86AssemblyLanguage.h>
 
-#include "disasm/DisassemblerX86.h"
+#include <disasm/DisassemblerX86.h>
 
 
 #define IA32_FEATURE_MMX	(1 << 23)

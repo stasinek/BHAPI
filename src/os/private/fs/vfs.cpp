@@ -53,13 +53,13 @@
 #include <vm/vm.h>
 #include <vm/VMCache.h>
 
-#include "EntryCache.h"
-#include "fifo.h"
-#include "IORequest.h"
-#include "unused_vnodes.h"
-#include "vfs_tracing.h"
-#include "Vnode.h"
-#include "../cache/vnode_store.h"
+#include <EntryCache.h>
+#include <fifo.h>
+#include <IORequest.h>
+#include <unused_vnodes.h>
+#include <vfs_tracing.h>
+#include <Vnode.h>
+#include <kits/cache/vnode_store.h>
 
 
 //#define TRACE_VFS
@@ -9830,4 +9830,4 @@ _user_open_query(dev_t device, const char* userQuery, size_t queryLength,
 }
 
 
-#include "vfs_request_io.cpp"
+#include <vfs_request_io.cpp"

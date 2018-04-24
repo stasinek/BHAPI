@@ -10,8 +10,8 @@
 /**	Style storage used by BTextView */
 
 
-#include "InlineInput.h"
-#include "StyleBuffer.h"
+#include <InlineInput.h>
+#include <StyleBuffer.h>
 
 #include <View.h>
 

@@ -36,7 +36,7 @@ __RCSID("$NetBSD: getservbyname.c,v 1.14 2008/04/28 20:23:00 martin Exp $");
 #include <netdb.h>
 #include <pthread.h>
 
-#include "servent.h"
+#include <servent.h>
 
 #ifdef __weak_alias
 __weak_alias(getservbyname,_getservbyname)

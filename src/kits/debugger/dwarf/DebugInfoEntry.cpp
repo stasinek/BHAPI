@@ -4,12 +4,12 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DebugInfoEntries.h"
+#include <DebugInfoEntries.h>
 
 #include <new>
 
-#include "AttributeValue.h"
-#include "Dwarf.h"
+#include <AttributeValue.h>
+#include <Dwarf.h>
 
 
 #define DEFINE_DEBUG_INFO_ENTRY_ATTR_SETTER(name)				\

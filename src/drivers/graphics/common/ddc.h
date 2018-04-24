@@ -6,8 +6,8 @@
 #define _DDC_H
 
 
-#include "i2c.h"
-#include "edid.h"
+#include <kits/neti2c.h>
+#include <kits/netedid.h>
 
 
 #ifdef __cplusplus

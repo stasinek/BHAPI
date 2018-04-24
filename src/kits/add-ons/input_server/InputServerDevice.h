@@ -6,7 +6,7 @@
 #define _INPUTSERVERDEVICE_H
 
 
-#include <Input.h>
+#include <kits/netInput.h>
 #include <Haiku.h>
 
 

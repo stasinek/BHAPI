@@ -33,8 +33,8 @@
 #ifndef BHAPI_SUPPORT_JOB_H
 #define BHAPI_SUPPORT_JOB_H
 
-#include "ObjectList.h"
-#include "StringClass.h"
+#include <ObjectList.h>
+#include <StringClass.h>
 
 namespace BSupportKit {
 class BJob;

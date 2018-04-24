@@ -27,11 +27,11 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "ThemeEngine.h"
-#include "../../interface/Rect.h"
-#include "../../interface/View.h"
-#include "../../interface/Region.h"
-#include "../../interface/Point.h"
+#include <kits/netThemeEngine.h>
+#include <kits/interface/Rect.h>
+#include <kits/interface/View.h>
+#include <kits/interface/Region.h>
+#include <kits/interface/Point.h>
 
 #define MIX_SHADOW_DARKER	80
 #define MIX_SHADOW_SHINER	20

@@ -5,8 +5,8 @@
 #ifndef __ATA_H__
 #define __ATA_H__
 
-#include <device_manager.h>
-#include <KernelExport.h>
+#include <kits/netdevice_manager.h>
+#include <kits/kernelExport.h>
 
 // Controller Driver Node
 

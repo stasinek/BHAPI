@@ -4,7 +4,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Worker.h"
+#include <Worker.h>
 
 #include <AutoDeleter.h>
 #include <AutoLocker.h>

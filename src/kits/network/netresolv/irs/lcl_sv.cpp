@@ -54,13 +54,13 @@
  */
 
 
-#include "port_before.h"
+#include <port_before.h>
 
 extern "C" {
 // libbind's internal headers aren't C++ safe
 
-#include "irs_p.h"
-#include "lcl_p.h"
+#include <irs_p.h>
+#include <lcl_p.h>
 
 #define private private_data
 #include <irs.h>
@@ -70,17 +70,17 @@ extern "C" {
 
 }
 
-#include <../include/sys/types.h>
-#include <../include/sys/socket.h>
+#include <sys/types.h>
+#include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/nameser.h>
 #include <resolv.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 #include <errno.h>
 #include <fcntl.h>
-#include <../include/limits.h>
+#include <limits.h>
 
 
 

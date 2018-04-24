@@ -4,7 +4,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "scheduler_tracing.h"
+#include <scheduler_tracing.h>
 
 #include <debug.h>
 

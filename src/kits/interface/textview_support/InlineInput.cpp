@@ -12,7 +12,7 @@
 // Though it looks like what really matters is the "selection" field in
 // the BMessage sent by the input method addon. Have I missed something ?
 
-#include "InlineInput.h"
+#include <InlineInput.h>
 #include <cstdlib>
 
 struct clause

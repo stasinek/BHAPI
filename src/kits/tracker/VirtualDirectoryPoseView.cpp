@@ -7,7 +7,7 @@
  */
 
 
-#include "VirtualDirectoryPoseView.h"
+#include <VirtualDirectoryPoseView.h>
 
 #include <new>
 
@@ -16,10 +16,10 @@
 #include <PathMonitor.h>
 #include <storage_support.h>
 
-#include "Commands.h"
-#include "Tracker.h"
-#include "VirtualDirectoryEntryList.h"
-#include "VirtualDirectoryManager.h"
+#include <Commands.h>
+#include <Tracker.h>
+#include <VirtualDirectoryEntryList.h>
+#include <VirtualDirectoryManager.h>
 
 
 namespace BPrivate {

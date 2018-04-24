@@ -6,7 +6,7 @@
 #define _KERNEL_LOAD_TRACKING_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 const int32 kMaxLoad = 1000;

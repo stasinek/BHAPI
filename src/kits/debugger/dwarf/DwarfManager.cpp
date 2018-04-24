@@ -4,15 +4,15 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DwarfManager.h"
+#include <DwarfManager.h>
 
 #include <new>
 
 #include <AutoDeleter.h>
 #include <AutoLocker.h>
 
-#include "DwarfFile.h"
-#include "DwarfFileLoadingState.h"
+#include <DwarfFile.h>
+#include <DwarfFileLoadingState.h>
 
 
 DwarfManager::DwarfManager(uint8 addressSize)

@@ -6,9 +6,9 @@
 #define KERNEL_ARCH_X86_PAGING_32_BIT_X86_PAGING_METHOD_32_BIT_H
 
 
-#include "paging/32bit/paging.h"
-#include "paging/X86PagingMethod.h"
-#include "paging/X86PagingStructures.h"
+#include <paging/32bit/paging.h>
+#include <paging/X86PagingMethod.h>
+#include <paging/X86PagingStructures.h>
 
 
 class TranslationMapPhysicalPageMapper;

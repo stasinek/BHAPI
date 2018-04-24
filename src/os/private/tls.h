@@ -6,7 +6,7 @@
 #define _KERNEL_TLS_H
 
 
-#include <support/TLS.h>
+#include <kits/support/TLS.h>
 
 
 #define TLS_SIZE (TLS_MAX_KEYS * sizeof(void *))

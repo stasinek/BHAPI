@@ -6,17 +6,17 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DisassemblerX8664.h"
+#include <DisassemblerX8664.h>
 
 #include <new>
 
-#include "udis86.h"
+#include <udis86.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
-#include "CpuStateX8664.h"
-#include "InstructionInfo.h"
+#include <CpuStateX8664.h>
+#include <InstructionInfo.h>
 
 
 static uint8 RegisterNumberFromUdisIndex(int32 udisIndex)

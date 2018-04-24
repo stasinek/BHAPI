@@ -4,14 +4,14 @@
  */
 
 
-#include "TeamMemoryBlockManager.h"
+#include <TeamMemoryBlockManager.h>
 
 #include <new>
 
 #include <AutoDeleter.h>
 #include <AutoLocker.h>
 
-#include "TeamMemoryBlock.h"
+#include <TeamMemoryBlock.h>
 
 
 struct TeamMemoryBlockManager::Key {

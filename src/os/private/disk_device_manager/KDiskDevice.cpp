@@ -5,7 +5,7 @@
  */
 
 
-#include "KDiskDevice.h"
+#include <KDiskDevice.h>
 
 #include <errno.h>
 #include <fcntl.h>
@@ -15,10 +15,10 @@
 #include <KernelExport.h>
 #include <Drivers.h>
 
-#include "ddm_userland_interface.h"
-#include "KDiskDeviceUtils.h"
-#include "KPath.h"
-#include "UserDataWriter.h"
+#include <ddm_userland_interface.h>
+#include <KDiskDeviceUtils.h>
+#include <KPath.h>
+#include <UserDataWriter.h>
 
 
 // debugging

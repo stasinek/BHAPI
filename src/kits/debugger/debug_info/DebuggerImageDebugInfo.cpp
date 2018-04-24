@@ -4,18 +4,18 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DebuggerImageDebugInfo.h"
+#include <DebuggerImageDebugInfo.h>
 
 #include <algorithm>
 #include <new>
 
 #include <AutoDeleter.h>
 
-#include "Architecture.h"
-#include "BasicFunctionDebugInfo.h"
-#include "DebuggerInterface.h"
-#include "Demangler.h"
-#include "SymbolInfo.h"
+#include <Architecture.h>
+#include <BasicFunctionDebugInfo.h>
+#include <DebuggerInterface.h>
+#include <Demangler.h>
+#include <SymbolInfo.h>
 
 
 DebuggerImageDebugInfo::DebuggerImageDebugInfo(const ImageInfo& imageInfo,

@@ -6,13 +6,13 @@
 #define STACK_FRAME_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <ObjectList.h>
 #include <Referenceable.h>
 #include <util/DoublyLinkedList.h>
 
-#include "Types.h"
+#include <Types.h>
 
 
 enum stack_frame_type {

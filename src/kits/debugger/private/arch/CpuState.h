@@ -6,12 +6,12 @@
 #ifndef CPU_STATE_H
 #define CPU_STATE_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <Referenceable.h>
 #include <Variant.h>
 
-#include "Types.h"
+#include <Types.h>
 
 
 class Register;

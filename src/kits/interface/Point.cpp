@@ -27,11 +27,11 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Point.h"
-#include "GraphicsDefs.h"
-#include "Rect.h"
+#include <Point.h>
+#include <GraphicsDefs.h>
+#include <Rect.h>
 
-#include "../kernel/Debug.h"
+#include <os/debug.h>
 
 #ifndef HAVE_ROUND
 inline double b_round(double value)

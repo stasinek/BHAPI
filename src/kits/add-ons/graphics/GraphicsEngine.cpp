@@ -27,10 +27,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "GraphicsEngine.h"
-#include "../../support/Errors.h"
-#include "../../interface/Window.h"
-#include "../../interface/View.h"
+#include <kits/netGraphicsEngine.h>
+#include <kits/support/Errors.h>
+#include <kits/interface/Window.h>
+#include <kits/interface/View.h>
 
 BGraphicsContext::BGraphicsContext()
 {

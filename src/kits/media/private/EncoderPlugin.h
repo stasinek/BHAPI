@@ -9,7 +9,7 @@
 #include <MediaTrack.h>
 #include <MediaFormats.h>
 #include <View.h>
-#include "MediaPlugin.h"
+#include <MediaPlugin.h>
 
 
 namespace BPrivate { namespace media {

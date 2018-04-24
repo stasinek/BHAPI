@@ -9,8 +9,8 @@
 #include <lock.h>
 #include <vm/vm_page.h>
 
-#include "dma_resources.h"
-#include "IOScheduler.h"
+#include <dma_resources.h>
+#include <IOScheduler.h>
 
 
 struct VMCache;

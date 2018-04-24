@@ -12,7 +12,7 @@
 */
 
 
-#include "GameProducer.h"
+#include <GameProducer.h>
 
 #include <string.h>
 #include <stdio.h>
@@ -24,9 +24,9 @@
 #include <MediaDefs.h>
 #include <TimeSource.h>
 
-#include "GameSoundBuffer.h"
-#include "GameSoundDevice.h"
-#include "GSUtility.h"
+#include <GameSoundBuffer.h>
+#include <GameSoundDevice.h>
+#include <GSUtility.h>
 
 
 struct _gs_play  {
@@ -41,7 +41,7 @@ struct _gs_play  {
 GameProducer::GameProducer(GameSoundBuffer* object,
 	const gs_audio_format* format)
 	:
-	BMediaNode("GameProducer.h"),
+	BMediaNode("GameProducer.h>),
 	BBufferProducer(B_MEDIA_RAW_AUDIO),
 	BMediaEventLooper(),
 	fBufferGroup(NULL),

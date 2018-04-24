@@ -3,8 +3,8 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "CompressionAlgorithm.h"
-#include "Errors.h"
+#include <CompressionAlgorithm.h>
+#include <Errors.h>
 
 
 

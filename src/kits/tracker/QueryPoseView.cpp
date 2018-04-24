@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "QueryPoseView.h"
+#include <QueryPoseView.h>
 
 #include <new>
 
@@ -46,15 +46,15 @@ All rights reserved.
 #include <VolumeRoster.h>
 #include <Window.h>
 
-#include "Attributes.h"
-#include "AttributeStream.h"
-#include "AutoLock.h"
-#include "Commands.h"
-#include "FindPanel.h"
-#include "FSUtils.h"
-#include "MimeTypeList.h"
-#include "MimeTypes.h"
-#include "Tracker.h"
+#include <Attributes.h>
+#include <AttributeStream.h>
+#include <AutoLock.h>
+#include <Commands.h>
+#include <FindPanel.h>
+#include <FSUtils.h>
+#include <MimeTypeList.h>
+#include <MimeTypes.h>
+#include <Tracker.h>
 
 #include <fs_attr.h>
 

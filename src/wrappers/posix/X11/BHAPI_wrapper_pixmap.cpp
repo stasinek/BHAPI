@@ -29,9 +29,9 @@
 
 #ifdef LINUX
 
-#include "BHAPI_wrapper_x11.h"
-#include "../support/Autolock.h"
-#include "../support/ClassInfo.h"
+#include <BHAPI_wrapper_x11.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/ClassInfo.h>
 
 
 EXGraphicsDrawable::EXGraphicsDrawable(EXGraphicsEngine *x11Engine,  uint32 w,  uint32 h)

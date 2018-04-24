@@ -51,17 +51,17 @@ All rights reserved.
 #include <fs_attr.h>
 #include <fs_index.h>
 
-#include "pr_server.h"
+#include <pr_server.h>
 
-#include "Attributes.h"
-#include "AttributeStream.h"
-#include "BackgroundImage.h"
-#include "Bitmaps.h"
-#include "ContainerWindow.h"
-#include "MimeTypes.h"
-#include "FSUtils.h"
-#include "QueryContainerWindow.h"
-#include "Tracker.h"
+#include <Attributes.h>
+#include <AttributeStream.h>
+#include <BackgroundImage.h>
+#include <Bitmaps.h>
+#include <ContainerWindow.h>
+#include <MimeTypes.h>
+#include <FSUtils.h>
+#include <QueryContainerWindow.h>
+#include <Tracker.h>
 
 
 enum {

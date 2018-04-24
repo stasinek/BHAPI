@@ -6,8 +6,8 @@
 #define	_FSSH_FS_INDEX_H
 
 
-#include "fssh_defs.h"
-#include "fssh_dirent.h"
+#include <fssh_defs.h>
+#include <fssh_dirent.h>
 
 
 typedef struct fssh_index_info {

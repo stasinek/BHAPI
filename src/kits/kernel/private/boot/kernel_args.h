@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2002-2009, Axel Dörfler, axeld@pinc-software.de.
  * Distributed under the terms of the MIT License.
  *
@@ -7,8 +7,6 @@
  */
 #ifndef KERNEL_BOOT_KERNEL_ARGS_H
 #define KERNEL_BOOT_KERNEL_ARGS_H
-
-
 #include <Haiku.h>
 
 #include <boot/elf.h>

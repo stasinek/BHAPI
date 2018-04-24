@@ -8,8 +8,8 @@
 #ifndef _TTY_TTYLAYER_H
 #define _TTY_TTYLAYER_H
 
-#include <module.h>
-#include <termios.h>
+#include <kits/netmodule.h>
+#include <kits/nettermios.h>
 
 
 // XXX: should go away or be opacised

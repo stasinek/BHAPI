@@ -7,8 +7,8 @@
 
 #include <StringClass.h>
 
-#include "FunctionDebugInfo.h"
-#include "SourceLocation.h"
+#include <FunctionDebugInfo.h>
+#include <SourceLocation.h>
 
 
 class CompilationUnit;

@@ -42,8 +42,8 @@ class BClipboard;
 #endif
 #endif
 
-#include "../interface/View.h"
-#include "../support/StringClass.h"
+#include <kits/interface/View.h>
+#include <kits/support/StringClass.h>
 #include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */

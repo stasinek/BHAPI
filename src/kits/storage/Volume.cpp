@@ -27,13 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Volume.h"
-#include "Directory.h"
-#include "StorageDefs.h"
+#include <Volume.h>
+#include <Directory.h>
+#include <StorageDefs.h>
 
-#include "../support/UTF8.h"
-#include "../support/Errors.h"
-#include "../support/StringClass.h"
+#include <kits/support/UTF8.h>
+#include <kits/support/Errors.h>
+#include <kits/support/StringClass.h>
 
 #ifdef __BEOS__
 #include <be/storage/Entry.h>

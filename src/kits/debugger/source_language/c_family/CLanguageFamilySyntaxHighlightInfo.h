@@ -6,7 +6,7 @@
 #define C_LANGUAGE_FAMILY_SYNTAX_HIGHLIGHT_INFO_H
 
 
-#include "SyntaxHighlighter.h"
+#include <SyntaxHighlighter.h>
 
 #include <ObjectList.h>
 

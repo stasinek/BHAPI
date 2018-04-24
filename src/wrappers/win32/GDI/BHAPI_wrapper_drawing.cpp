@@ -33,14 +33,14 @@
 	#define M_PI	3.14159265358979323846
 #endif // M_PI
 
-#include "BHAPI_wrapper_win32gdi.h"
+#include <BHAPI_wrapper_win32gdi.h>
 
-#include "../../support/SupportDefs.h"
-#include "../../support/ClassInfo.h"
-#include "../../support/Autolock.h"
-#include "../../support/Errors.h"
-#include "../../render/Pixmap.h"
-#include "../../kernel/Debug.h"
+#include <kits/support/SupportDefs.h>
+#include <kits/support/ClassInfo.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/Errors.h>
+#include <kits/render/Pixmap.h>
+#include <os/debug.h>
 
 
 status_t 

@@ -8,10 +8,10 @@
 
 
 #if FS_SHELL
-#	include "fssh_api_wrapper.h"
+#	include <fssh_api_wrapper.h>
 
-#	include "KOpenHashTable.h"
-#	include "list.h"
+#	include <KOpenHashTable.h>
+#	include <list.h>
 #else
 #	include <stdio.h>
 #	include <stdlib.h>

@@ -40,7 +40,7 @@ class BRect;
 class BFont;
 class BPoint;
 
-#include "../support/Archivable.h"
+#include <kits/support/Archivable.h>
 class BHAPI_IMPEXP BListItem : public BArchivable {
 public:
 	BListItem(uint32 outlineLevel = 0, bool expanded = true,  uint32 flags = 0);

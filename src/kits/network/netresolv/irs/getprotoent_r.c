@@ -47,7 +47,7 @@ __RCSID("$NetBSD: getprotoent_r.c,v 1.6 2011/10/15 23:00:02 christos Exp $");
 #include <FindDirectory.h>
 
 #include <libutil.h>
-#include "protoent.h"
+#include <protoent.h>
 
 #ifdef __weak_alias
 __weak_alias(endprotoent_r,_endprotoent_r)

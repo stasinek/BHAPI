@@ -4,9 +4,9 @@
  */
 
 
-#include <Key.h>
+#include <kits/netKey.h>
 
-#include <stdio.h>
+#include <kits/netstdio.h>
 
 
 #if 0

@@ -24,9 +24,9 @@
  *
  * Modified for use with Haiku by David Powell & Stephan Aßmus.
  */
-#include "ColorQuantizer.h"
+#include <ColorQuantizer.h>
 
-#include <../include/stddef.h>
+#include <stddef.h>
 
 
 

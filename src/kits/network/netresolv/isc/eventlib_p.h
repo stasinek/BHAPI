@@ -25,11 +25,11 @@
 #ifndef _EVENTLIB_P_H
 #define _EVENTLIB_P_H
 
-#include <../include/sys/param.h>
-#include <../include/sys/types.h>
-#include <../include/sys/socket.h>
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/socket.h>
 #include <netinet/in.h>
-#include <../include/sys/un.h>
+#include <sys/un.h>
 
 #define EVENTLIB_DEBUG 1
 
@@ -68,7 +68,7 @@
 
 #ifdef USE_POLL
 #ifdef HAVE_STROPTS_H
-#include <../include/stropts.h>
+#include <stropts.h>
 #endif
 #include <poll.h>
 #endif /* USE_POLL */

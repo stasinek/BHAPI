@@ -7,9 +7,9 @@
 #define DEBUG_INFO_ENTRIES_H
 
 
-#include "DebugInfoEntry.h"
+#include <DebugInfoEntry.h>
 
-#include "AttributeValue.h"
+#include <AttributeValue.h>
 
 
 // common:

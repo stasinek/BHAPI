@@ -42,7 +42,7 @@ __RCSID("$NetBSD: inet_network.c,v 1.4 2008/01/20 04:56:08 christos Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <netinet/in.h>
@@ -54,7 +54,7 @@ __RCSID("$NetBSD: inet_network.c,v 1.4 2008/01/20 04:56:08 christos Exp $");
 #include <stddef.h>	/* for NULL */
 #endif
 
-#include "port_after.h"
+#include <port_after.h>
 
 /*
  * Internet network address interpretation routine.

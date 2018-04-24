@@ -4,7 +4,7 @@
  */
 
 
-#include "TypeLookupConstraints.h"
+#include <TypeLookupConstraints.h>
 
 
 TypeLookupConstraints::TypeLookupConstraints()

@@ -3,9 +3,9 @@
 #ifndef _K_FILE_DISK_DEVICE_H
 #define _K_FILE_DISK_DEVICE_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
-#include "KDiskDevice.h"
+#include <KDiskDevice.h>
 
 namespace BPrivate {
 namespace DiskDevice {

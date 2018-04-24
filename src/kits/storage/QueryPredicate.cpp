@@ -11,7 +11,7 @@
 	BQuery predicate helper classes implementation.
 */
 
-#include "QueryPredicate.h"
+#include <QueryPredicate.h>
 
 #include <ctype.h>
 

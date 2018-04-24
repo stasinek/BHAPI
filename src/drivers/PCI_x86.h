@@ -6,7 +6,7 @@
 #define PCI_X86_H
 
 #include <Haiku.h>
-#include <module.h>
+#include <kits/netmodule.h>
 
 typedef struct pci_x86_module_info {
 	module_info		info;

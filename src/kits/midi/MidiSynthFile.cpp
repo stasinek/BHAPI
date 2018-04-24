@@ -11,10 +11,10 @@
  *		Jérôme Leveque
  */
 
-#include "debug.h"
+#include <debug.h>
 #include <MidiStore.h>
 #include <MidiSynthFile.h>
-#include "SoftSynth.h"
+#include <SoftSynth.h>
 
 using namespace BPrivate;
 

@@ -5,7 +5,7 @@
  */
 
 
-#include "AbstractModuleDevice.h"
+#include <AbstractModuleDevice.h>
 
 
 AbstractModuleDevice::AbstractModuleDevice()

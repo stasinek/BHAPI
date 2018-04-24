@@ -6,7 +6,7 @@
 #define KERNEL_ARCH_ARM_PAGING_32_BIT_ARM_VM_TRANSLATION_MAP_32_BIT_H
 
 
-#include "paging/ARMVMTranslationMap.h"
+#include <paging/ARMVMTranslationMap.h>
 
 
 struct ARMPagingStructures32Bit;

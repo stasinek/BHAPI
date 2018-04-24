@@ -9,11 +9,11 @@
 #define _BUFFER_STREAM_MANAGER_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <Haiku.h>
 #include <Locker.h>
 
-#include "OldBufferStream.h"
+#include <OldBufferStream.h>
 
 
 /* ================

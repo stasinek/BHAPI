@@ -33,7 +33,7 @@
 #ifndef BHAPI_TLS_H
 #define BHAPI_TLS_H
 
-#include "SupportDefs.h"
+#include <SupportDefs.h>
 
 /* A maximum of 64 keys is allowed to store in TLS - the key is reserved
  * process-wide. Note that tls_allocate() will return B_NO_MEMORY if you

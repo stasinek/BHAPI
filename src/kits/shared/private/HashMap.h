@@ -31,8 +31,8 @@
 
 #include <Locker.h>
 
-#include "AutoLocker.h"
-#include "OpenHashTable.h"
+#include <AutoLocker.h>
+#include <OpenHashTable.h>
 
 
 namespace BPrivate {

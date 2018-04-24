@@ -6,7 +6,7 @@
 
 #include <debug_support.h>
 
-#include "arch_debug_support.h"
+#include <arch_debug_support.h>
 
 
 status_t arch_debug_get_instruction_pointer(debug_context *context, thread_id thread,

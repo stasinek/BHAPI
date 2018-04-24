@@ -21,11 +21,11 @@
 #include <Volume.h>
 
 #include <MessengerPrivate.h>
-#include <../include/syscalls.h>
+#include <syscalls.h>
 #include <query_private.h>
 
-#include "QueryPredicate.h"
-#include "storage_support.h"
+#include <QueryPredicate.h>
+#include <storage_support.h>
 
 
 using namespace std;

@@ -6,7 +6,7 @@
 #ifndef DEBUGGER_GLOBALS_H
 #define DEBUGGER_GLOBALS_H
 
-#include "TargetHostInterfaceRoster.h"
+#include <TargetHostInterfaceRoster.h>
 
 
 status_t debugger_global_init(TargetHostInterfaceRoster::Listener* listener);

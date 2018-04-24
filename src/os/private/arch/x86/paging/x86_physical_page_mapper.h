@@ -78,7 +78,7 @@ public:
 };
 
 
-#include "paging/x86_physical_page_mapper_mapped.h"
+#include <paging/x86_physical_page_mapper_mapped.h>
 
 
 #endif	// __x86_64__

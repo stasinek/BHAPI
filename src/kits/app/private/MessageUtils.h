@@ -1,10 +1,10 @@
 #ifndef _MESSAGE_UTILS_H_
 #define _MESSAGE_UTILS_H_
 
-#include <ByteOrder.h>
-#include <DataIO.h>
-#include <Entry.h>
-#include <Message.h>
+#include <kits/netByteOrder.h>
+#include <kits/support/DataIO.h>
+#include <kits/storage/Entry.h>
+#include <kits/netMessage.h>
 #include <Haiku.h>
 
 

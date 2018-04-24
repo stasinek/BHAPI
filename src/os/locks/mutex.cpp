@@ -14,7 +14,7 @@
 
 
 
-#include <../include/syscalls.h>
+#include <syscalls.h>
 #include <user_mutex_defs.h>
 
 

@@ -45,14 +45,14 @@ All rights reserved.
 #include <Volume.h>
 #include <VolumeRoster.h>
 
-#include "Attributes.h"
-#include "ContainerWindow.h"
-#include "DirMenu.h"
-#include "FSUtils.h"
-#include "IconMenuItem.h"
-#include "NavMenu.h"
-#include "TrackerSettings.h"
-#include "Utilities.h"
+#include <Attributes.h>
+#include <ContainerWindow.h>
+#include <DirMenu.h>
+#include <FSUtils.h>
+#include <IconMenuItem.h>
+#include <NavMenu.h>
+#include <TrackerSettings.h>
+#include <Utilities.h>
 
 
 #undef B_TRANSLATION_CONTEXT

@@ -10,9 +10,9 @@
 #include <Referenceable.h>
 #include <util/OpenHashTable.h>
 
-#include "Breakpoint.h"
-#include "ImageDebugInfoProvider.h"
-#include "model/Thread.h"
+#include <Breakpoint.h>
+#include <ImageDebugInfoProvider.h>
+#include <model/Thread.h>
 
 
 class BreakpointHitEvent;

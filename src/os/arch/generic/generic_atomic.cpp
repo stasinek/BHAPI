@@ -5,7 +5,7 @@
  */
 
 #include <atomic>
-#include <../include/sys/types.h>
+#include <sys/types.h>
 
 
 extern "C" [[gnu::optimize("omit-frame-pointer")]] void atomic_set(int32_t* ptr, int32_t value)

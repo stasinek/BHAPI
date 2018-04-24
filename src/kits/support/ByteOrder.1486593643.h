@@ -30,7 +30,7 @@
 #ifndef __BHAPI_BYTE_ORDER_H__
 #define __BHAPI_BYTE_ORDER_H__
 
-#include "./SupportDefs.h"
+#include <./SupportDefs.h>
 
 #ifdef __cplusplus
 extern "C" {

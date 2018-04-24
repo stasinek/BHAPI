@@ -12,7 +12,7 @@
 #include <MediaClient.h>
 #include <MediaClientDefs.h>
 
-#include "MediaClientNode.h"
+#include <MediaClientNode.h>
 
 
 namespace BPrivate { namespace media {

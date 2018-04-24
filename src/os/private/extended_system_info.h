@@ -10,7 +10,7 @@
 #ifdef __cplusplus
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 namespace BPrivate {

@@ -7,7 +7,7 @@
  * Distributed under the terms of the NewOS License.
  */
 
-#include "VMAnonymousNoSwapCache.h"
+#include <VMAnonymousNoSwapCache.h>
 
 #include <stdlib.h>
 

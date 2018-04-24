@@ -7,10 +7,10 @@
 
 
 #include <arch_mmu.h>
-//#include "paging/460/paging.h"
-#include "paging/PPCPagingMethod.h"
-#include "paging/PPCPagingStructures.h"
-#include "GenericVMPhysicalPageMapper.h"
+//#include <paging/460/paging.h>
+#include <paging/PPCPagingMethod.h>
+#include <paging/PPCPagingStructures.h>
+#include <GenericVMPhysicalPageMapper.h>
 
 
 class TranslationMapPhysicalPageMapper;

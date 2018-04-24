@@ -79,9 +79,9 @@ __RCSID("$NetBSD: res_send.c,v 1.29 2013/02/16 13:45:45 para Exp $");
  * Send query to name server and wait for reply.
  */
 
-#include "port_before.h"
+#include <port_before.h>
 #ifndef USE_KQUEUE
-#include "fd_setsize.h"
+#include <fd_setsize.h>
 #endif /* USE_KQUEUE */
 
 #include <sys/types.h>
@@ -110,7 +110,7 @@ __RCSID("$NetBSD: res_send.c,v 1.29 2013/02/16 13:45:45 para Exp $");
 
 #include <isc/eventlib.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 #if 0
 #ifdef __weak_alias
@@ -139,8 +139,8 @@ __weak_alias(res_nsend,__res_nsend)
 #ifndef DEBUG
 //#define DEBUG
 #endif
-#include "res_debug.h"
-#include "res_private.h"
+#include <res_debug.h>
+#include <res_private.h>
 
 #define EXT(res) ((res)->_u._ext)
 

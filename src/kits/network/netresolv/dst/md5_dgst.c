@@ -60,7 +60,7 @@
 #include <port_before.h>
 #ifndef HAVE_MD5
 #include <stdio.h>
-#include "md5_locl.h"
+#include <md5_locl.h>
 #include <port_after.h>
 
 const char *MD5_version="MD5 part of SSLeay 0.8.1 19-Jul-1997";

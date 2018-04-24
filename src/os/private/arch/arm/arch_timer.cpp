@@ -20,10 +20,10 @@
 #include <arch/cpu.h>
 
 #include <drivers/bus/FDT.h>
-#include "soc.h"
+#include <soc.h>
 
-#include "soc_pxa.h"
-#include "soc_omap3.h"
+#include <soc_pxa.h>
+#include <soc_omap3.h>
 
 //#define TRACE_ARCH_TIMER
 #ifdef TRACE_ARCH_TIMER

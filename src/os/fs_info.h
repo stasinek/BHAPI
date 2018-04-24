@@ -5,7 +5,7 @@
 #ifndef _FS_INFO_H
 #define	_FS_INFO_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 /* fs_info.flags */

@@ -9,10 +9,10 @@
 #define _MESSAGE_PRIVATE_H_
 
 
-#include <Message.h>
-#include <Messenger.h>
-#include <MessengerPrivate.h>
-#include <TokenSpace.h>
+#include <kits/netMessage.h>
+#include <kits/app/Messenger.h>
+#include <kits/netMessengerPrivate.h>
+#include <kits/netTokenSpace.h>
 
 
 #define MESSAGE_BODY_HASH_TABLE_SIZE	5

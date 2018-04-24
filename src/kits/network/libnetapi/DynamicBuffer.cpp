@@ -6,7 +6,7 @@
  *              Bruno Albuquerque, bga@bug-br.org.br
  */
 
-#include "DynamicBuffer.h"
+#include <DynamicBuffer.h>
 
 
 

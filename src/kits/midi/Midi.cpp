@@ -18,8 +18,8 @@
 #include <Midi.h>
 #include <MidiProducer.h>
 
-#include "MidiGlue.h"
-#include "debug.h"
+#include <MidiGlue.h>
+#include <debug.h>
 
 using namespace BPrivate;
 

@@ -9,18 +9,18 @@
 */
 
 
-#include "TimeSourceObject.h"
+#include <TimeSourceObject.h>
 
 #include <stdio.h>
 #include <string.h>
 
 #include <MediaRoster.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <MediaMisc.h>
 #include <debug.h>
 
-#include "TimeSourceObjectManager.h"
+#include <TimeSourceObjectManager.h>
 
 
 TimeSourceObject::TimeSourceObject(const media_node& node)

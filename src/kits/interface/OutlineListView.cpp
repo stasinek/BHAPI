@@ -28,11 +28,11 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "OutlineListView.h"
+#include <OutlineListView.h>
 
-#include "ListItem.h"
-#include "ListView.h"
-#include "../kernel/Debug.h"
+#include <ListItem.h>
+#include <ListView.h>
+#include <os/debug.h>
 
 BOutlineListView::BOutlineListView(BRect frame, const char *name, bhapi::list_view_type type,
 				    __be_uint32 resizingMode,  __be_uint32 flags)

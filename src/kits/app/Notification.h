@@ -20,10 +20,10 @@ enum notification_type {
 class BBitmap;
 #endif
 //-----------------------------------------------------------------------------
-#include <Archivable.h>
-#include <Entry.h>
-#include <List.h>
-#include <StringClass.h>
+#include <kits/netArchivable.h>
+#include <kits/storage/Entry.h>
+#include <kits/netList.h>
+#include <kits/netStringClass.h>
 #include <Haiku.h>
 //-----------------------------------------------------------------------------
 class BHAPI_IMPEXP BNotification : public BArchivable {

@@ -36,8 +36,8 @@ All rights reserved.
 #define _TEXT_WIDGET_H
 
 
-#include "Model.h"
-#include "WidgetAttributeText.h"
+#include <Model.h>
+#include <WidgetAttributeText.h>
 
 
 namespace BPrivate {

@@ -4,7 +4,7 @@
  */
 
 
-#include "BMessageValueNode.h"
+#include <BMessageValueNode.h>
 
 #include <new>
 
@@ -12,15 +12,15 @@
 #include <MessageAdapter.h>
 #include <MessagePrivate.h>
 
-#include "Architecture.h"
-#include "StringValue.h"
-#include "TeamTypeInformation.h"
-#include "Tracing.h"
-#include "Type.h"
-#include "TypeLookupConstraints.h"
-#include "ValueLoader.h"
-#include "ValueLocation.h"
-#include "ValueNodeContainer.h"
+#include <Architecture.h>
+#include <StringValue.h>
+#include <TeamTypeInformation.h>
+#include <Tracing.h>
+#include <Type.h>
+#include <TypeLookupConstraints.h>
+#include <ValueLoader.h>
+#include <ValueLocation.h>
+#include <ValueNodeContainer.h>
 
 
 static const int64 kMaxStringSize = 64;

@@ -6,8 +6,8 @@
 #define KERNEL_ARCH_M68K_PAGING_040_M68K_PAGING_STRUCTURES_040_H
 
 
-#include "paging/040/paging.h"
-#include "paging/M68KPagingStructures.h"
+#include <paging/040/paging.h>
+#include <paging/M68KPagingStructures.h>
 
 
 struct M68KPagingStructures040 : M68KPagingStructures {

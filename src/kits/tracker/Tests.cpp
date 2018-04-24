@@ -35,7 +35,7 @@ All rights reserved.
 
 #if DEBUG
 
-#include "Tests.h"
+#include <Tests.h>
 
 #include <Debug.h>
 #include <Locker.h>
@@ -45,12 +45,12 @@ All rights reserved.
 
 #include <directories.h>
 
-#include "EntryIterator.h"
-#include "IconCache.h"
-#include "Model.h"
-#include "NodeWalker.h"
-#include "StopWatch.h"
-#include "Thread.h"
+#include <EntryIterator.h>
+#include <IconCache.h>
+#include <Model.h>
+#include <NodeWalker.h>
+#include <StopWatch.h>
+#include <Thread.h>
 
 
 const char* pathsToSearch[] = {

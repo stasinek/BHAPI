@@ -28,10 +28,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "MessageFilter.h"
-#include "Message.h"
-#include "Handler.h"
-#include "Looper.h"
+#include <kits/netMessageFilter.h>
+#include <kits/netMessage.h>
+#include <kits/app/Handler.h>
+#include <kits/netLooper.h>
 
 BMessageFilter::BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,  uint32 command, bhapi::filter_hook filter)
 	: fFiltersAny(false), fHandler(NULL)

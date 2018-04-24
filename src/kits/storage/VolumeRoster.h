@@ -30,7 +30,7 @@
 #ifndef BHAPI_VOLUME_ROSTER_H
 #define BHAPI_VOLUME_ROSTER_H
 
-#include "Volume.h"
+#include <Volume.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

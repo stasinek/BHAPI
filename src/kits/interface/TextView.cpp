@@ -30,18 +30,18 @@
 
 // TODO: speed up
 
-#include "TextView.h"
-#include "Window.h"
-#include "ScrollView.h"
+#include <TextView.h>
+#include <Window.h>
+#include <ScrollView.h>
 
-#include "../app/Application.h"
-#include "../app/Clipboard.h"
-#include "../app/Message.h"
-#include "../app/AppDefs.h"
-#include "../support/ClassInfo.h"
-#include "../support/Errors.h"
-#include "../support/UTF8.h"
-#include "../storage/File.h"
+#include <kits/app/Application.h>
+#include <kits/app/Clipboard.h>
+#include <kits/app/Message.h>
+#include <kits/app/AppDefs.h>
+#include <kits/support/ClassInfo.h>
+#include <kits/support/Errors.h>
+#include <kits/support/UTF8.h>
+#include <kits/storage/File.h>
 
 
 

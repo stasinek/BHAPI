@@ -14,7 +14,7 @@
 
 #include <Directory.h>
 #include <FindDirectory.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <Path.h>
 
 

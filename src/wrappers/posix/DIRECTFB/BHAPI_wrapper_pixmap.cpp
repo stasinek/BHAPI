@@ -29,10 +29,10 @@
 #ifdef LINUX
 #ifdef DIRECTFB
 
-#include "../../support/Autolock.h"
-#include "../../support/ClassInfo.h"
+#include <kits/support/Autolock.h>
+#include <kits/support/ClassInfo.h>
 
-#include "BHAPI_wrapper_dfb.h"
+#include <BHAPI_wrapper_dfb.h>
 
 
 EDFBGraphicsDrawable::EDFBGraphicsDrawable(EDFBGraphicsEngine *dfbEngine,  uint32 w,  uint32 h)

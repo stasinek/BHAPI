@@ -6,9 +6,9 @@
 #define _MEDIA_WRITER_H
 
 
-#include "EncoderPlugin.h"
-#include "TList.h"
-#include "WriterPlugin.h"
+#include <EncoderPlugin.h>
+#include <TList.h>
+#include <WriterPlugin.h>
 
 
 namespace BPrivate {

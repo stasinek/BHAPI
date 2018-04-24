@@ -4,8 +4,8 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "AttributeClasses.h"
-#include "Dwarf.h"
+#include <AttributeClasses.h>
+#include <Dwarf.h>
 
 
 enum {

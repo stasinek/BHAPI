@@ -8,7 +8,7 @@
 
 #include <boot/net/Ethernet.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 class ARPService : public EthernetSubService {
 	// actually ARP for IP over ethernet

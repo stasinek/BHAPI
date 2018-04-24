@@ -40,13 +40,13 @@ All rights reserved.
 
 #include <StringClass.h>
 
-#include "ContainerWindow.h"
-#include "EntryIterator.h"
-#include "NodeWalker.h"
-#include "PoseView.h"
-#include "Query.h"
-#include "SlowMenu.h"
-#include "Utilities.h"
+#include <ContainerWindow.h>
+#include <EntryIterator.h>
+#include <NodeWalker.h>
+#include <PoseView.h>
+#include <Query.h>
+#include <SlowMenu.h>
+#include <Utilities.h>
 
 class BGroupView;
 

@@ -8,12 +8,12 @@
  */
 
 
-#include "paging/PPCVMTranslationMap.h"
+#include <paging/PPCVMTranslationMap.h>
 
 #include <thread.h>
 #include <smp.h>
 
-#include "paging/PPCPagingStructures.h"
+#include <paging/PPCPagingStructures.h>
 
 
 //#define TRACE_PPC_VM_TRANSLATION_MAP

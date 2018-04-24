@@ -27,23 +27,23 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "../../add-ons/font/FontEngine.h"
-#include "../../storage/Directory.h"
-#include "../../support/Locker.h"
-#include "../../support/Autolock.h"
-#include "../../support/StringArray.h"
-#include "../../support/StringClass.h"
-#include "../../support/UTF8.h"
-#include "../../support/SupportDefs.h"
-#include "../../support/Errors.h"
-#include "../../kernel/Debug.h"
+#include <kits/add-ons/font/FontEngine.h>
+#include <kits/storage/Directory.h>
+#include <kits/support/Locker.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/StringArray.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/UTF8.h>
+#include <kits/support/SupportDefs.h>
+#include <kits/support/Errors.h>
+#include <os/debug.h>
 
-#include <freetype/include/ft2build.h>
+#include <kits/netfreetype/include/ft2build.h>
 #include FT_FREETYPE_H
-#include <freetype/include/freetype/freetype.h>
+#include <kits/netfreetype/include/freetype/freetype.h>
 
 
-#include <math.h>
+#include <kits/netmath.h>
 
 #ifdef BHAPI_OS_BEOS
 #define FT_ENCODING_UNICODE		ft_encoding_unicode

@@ -42,14 +42,14 @@ All rights reserved.
 // trimming
 
 
-#include "AttributeStream.h"
-#include "ContainerWindow.h"
-#include "Model.h"
-#include "PendingNodeMonitorCache.h"
-#include "PoseList.h"
-#include "TitleView.h"
-#include "Utilities.h"
-#include "ViewState.h"
+#include <AttributeStream.h>
+#include <ContainerWindow.h>
+#include <Model.h>
+#include <PendingNodeMonitorCache.h>
+#include <PoseList.h>
+#include <TitleView.h>
+#include <Utilities.h>
+#include <ViewState.h>
 
 #include <Directory.h>
 #include <FilePanel.h>

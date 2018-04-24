@@ -5,7 +5,7 @@
 #ifndef _KERNEL_ARCH_ARM_CONFIG_H
 #define _KERNEL_ARCH_ARM_CONFIG_H
 
-#include "arch_arm_version.h"
+#include <arch_arm_version.h>
 
 #define FUNCTION_CALL_PARAMETER_ALIGNMENT_TYPE	unsigned int
 

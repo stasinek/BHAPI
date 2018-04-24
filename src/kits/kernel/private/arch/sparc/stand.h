@@ -43,8 +43,8 @@
 #else
 #include <machine/varargs.h>
 #endif
-#include "saioctl.h"
-#include "saerrno.h"
+#include <saioctl.h>
+#include <saerrno.h>
 
 #ifndef NULL
 #define	NULL	0

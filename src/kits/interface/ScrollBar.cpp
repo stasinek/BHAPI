@@ -27,13 +27,13 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "ScrollBar.h"
+#include <ScrollBar.h>
 
-#include "../add-ons/theme/ThemeEngine.h"
-#include "../kernel/KERNEL.h"
-#include "../kernel/Debug.h"
-#include "../interface/Window.h"
-#include "../support/Errors.h"
+#include <kits/add-ons/theme/ThemeEngine.h>
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/interface/Window.h>
+#include <kits/support/Errors.h>
 
 BScrollBar::BScrollBar(BRect frame, const char *name, float value, float min, float max, bhapi::orientation direction)
 	: BView(frame, name, B_FOLLOW_NONE, B_WILL_DRAW),

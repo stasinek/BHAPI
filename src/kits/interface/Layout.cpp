@@ -9,7 +9,7 @@
 
 #include <algorithm>
 #include <new>
-#include <../include/syslog.h>
+#include <syslog.h>
 
 #include <AutoDeleter.h>
 #include <LayoutContext.h>
@@ -17,7 +17,7 @@
 #include <View.h>
 #include <ViewPrivate.h>
 
-#include "ViewLayoutItem.h"
+#include <ViewLayoutItem.h>
 
 
 using BPrivate::AutoDeleter;

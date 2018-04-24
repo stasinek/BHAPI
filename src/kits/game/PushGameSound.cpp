@@ -13,7 +13,7 @@
 #include <List.h>
 #include <string.h>
 
-#include "GSUtility.h"
+#include <GSUtility.h>
 
 
 BPushGameSound::BPushGameSound(size_t inBufferFrameCount,

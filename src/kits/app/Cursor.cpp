@@ -28,7 +28,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Cursor.h"
+#include <kits/netCursor.h>
 
 static  uint8 cursor_hand[] = {
 /* size, depth */

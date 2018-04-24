@@ -32,7 +32,7 @@
 #ifndef BHAPI_BUFFERED_DATA_IO_H
 #define BHAPI_BUFFERED_DATA_IO_H
 
-#include "DataIO.h"
+#include <DataIO.h>
 class BBufferedDataIO : public BDataIO {
 public:
 								BBufferedDataIO(BDataIO& stream,

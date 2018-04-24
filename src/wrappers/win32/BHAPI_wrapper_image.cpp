@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "../../kernel/Kernel.h"
-#include "../../storage/Path.h"
-#include "../../support/StringClass.h"
-#include "../../support/Errors.h"
+#include <os/kernel.h>
+#include <kits/storage/Path.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/Errors.h>
 
 #include <winsock2.h>
 #include <windows.h>
 #ifdef __CYGWIN__
-#include <../include/sys/cygwin.h>
+#include <sys/cygwin.h>
 #endif
 
 BHAPI_EXPORT void*

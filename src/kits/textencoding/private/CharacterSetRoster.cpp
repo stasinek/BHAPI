@@ -1,8 +1,8 @@
 
-#include <../include/strings.h>
+#include <strings.h>
 #include <CharacterSet.h>
 #include <CharacterSetRoster.h>
-#include "character_sets.h"
+#include <character_sets.h>
 
 namespace BPrivate {
 

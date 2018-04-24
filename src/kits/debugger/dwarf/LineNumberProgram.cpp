@@ -3,15 +3,15 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "LineNumberProgram.h"
+#include <LineNumberProgram.h>
 
 #include <algorithm>
 
 #include <stdio.h>
 #include <string.h>
 
-#include "Dwarf.h"
-#include "Tracing.h"
+#include <Dwarf.h>
+#include <Tracing.h>
 
 
 static const uint8 kLineNumberStandardOpcodeOperands[]

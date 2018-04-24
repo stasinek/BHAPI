@@ -21,7 +21,7 @@ static const char rcsid[] = "$Id: ctl_clnt.c,v 1.11 2008/11/14 02:36:51 marka Ex
 
 /* Extern. */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/param.h>
 #include <sys/file.h>
@@ -48,9 +48,9 @@ static const char rcsid[] = "$Id: ctl_clnt.c,v 1.11 2008/11/14 02:36:51 marka Ex
 #include <isc/list.h>
 #include <isc/memcluster.h>
 
-#include "ctl_p.h"
+#include <ctl_p.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 /* Constants. */
 

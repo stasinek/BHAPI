@@ -6,8 +6,8 @@
 #define _PCI2_H
 
 
-#include <device_manager.h>
-#include <PCI.h>
+#include <kits/netdevice_manager.h>
+#include <kits/netPCI.h>
 
 
 typedef struct pci_device pci_device;

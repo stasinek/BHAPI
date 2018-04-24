@@ -51,12 +51,12 @@ All rights reserved.
 
 #include <string.h>
 
-#include "AutoLock.h"
-#include "Bitmaps.h"
-#include "Commands.h"
-#include "StatusWindow.h"
-#include "StringForSize.h"
-#include "DeskWindow.h"
+#include <AutoLock.h>
+#include <Bitmaps.h>
+#include <Commands.h>
+#include <StatusWindow.h>
+#include <StringForSize.h>
+#include <DeskWindow.h>
 
 
 #undef B_TRANSLATION_CONTEXT

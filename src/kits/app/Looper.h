@@ -65,9 +65,9 @@ class BLoooper;
 //-----------------------------------------------------------------------------
 #endif // __cplusplus
 //-----------------------------------------------------------------------------
-#include <support/List.h>
-#include "Handler.h"
-#include <kernel/OS.h>
+#include <kits/support/List.h>
+#include <kits/app/Handler.h>
+#include <kits/kernel/OS.h>
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus
 class BMessage;

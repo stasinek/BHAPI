@@ -4,14 +4,14 @@
  */
 
 
-#include "CLanguageFamilySyntaxHighlightInfo.h"
+#include <CLanguageFamilySyntaxHighlightInfo.h>
 
 #include <AutoDeleter.h>
 
-#include "CLanguageTokenizer.h"
-#include "LineDataSource.h"
-#include "TeamTypeInformation.h"
-#include "TypeLookupConstraints.h"
+#include <CLanguageTokenizer.h>
+#include <LineDataSource.h>
+#include <TeamTypeInformation.h>
+#include <TypeLookupConstraints.h>
 
 
 using namespace CLanguage;

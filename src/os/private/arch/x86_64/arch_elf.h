@@ -48,7 +48,7 @@
 
 
 #ifdef _BOOT_MODE
-# include "../x86/arch_elf.h"
+# include <kits/x86/arch_elf.h>
 #endif
 
 

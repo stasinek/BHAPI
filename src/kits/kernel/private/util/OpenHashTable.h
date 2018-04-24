@@ -1,14 +1,17 @@
-﻿/*
+/*
  * Copyright 2007, Hugo Santos. All Rights Reserved.
  * Distributed under the terms of the MIT License.
  */
 #ifndef _KERNEL_UTIL_OPEN_HASH_TABLE_H
 #define _KERNEL_UTIL_OPEN_HASH_TABLE_H
 
-
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <stdlib.h>
 #include <string.h>
+
+#ifdef __cplusplus
+using namespace bhapi;
+#endif
 
 #ifdef _KERNEL_MODE
 #	include <KernelExport.h>
@@ -189,7 +192,7 @@ public:
 #ifdef _KERNEL_MODE
             panic("Hash Table: value already in table.");
 #else
-            bhapi::debugger("Hash Table: value already in table.");
+            debugger("Hash Table: value already in table.");
 #endif
         }
 

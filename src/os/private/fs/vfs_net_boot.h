@@ -6,7 +6,7 @@
 #define _VFS_NET_BOOT_H
 
 
-#include "vfs_boot.h"
+#include <vfs_boot.h>
 
 
 int compare_image_boot(const void *_a, const void *_b);

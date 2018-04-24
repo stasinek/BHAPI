@@ -32,9 +32,9 @@
 
 #include <Buffer.h>
 
-#include "debug.h"
-#include "DataExchange.h"
-#include "SharedBufferList.h"
+#include <debug.h>
+#include <DataExchange.h>
+#include <SharedBufferList.h>
 
 
 BBufferGroup::BBufferGroup(size_t size, int32 count, uint32 placement,

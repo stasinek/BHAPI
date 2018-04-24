@@ -4,22 +4,22 @@
  */
 
 
-#include "BListValueNode.h"
+#include <BListValueNode.h>
 
 #include <new>
 
 #include <AutoDeleter.h>
 
-#include "AddressValueNode.h"
-#include "Architecture.h"
-#include "StringValue.h"
-#include "TeamTypeInformation.h"
-#include "Tracing.h"
-#include "Type.h"
-#include "TypeLookupConstraints.h"
-#include "ValueLoader.h"
-#include "ValueLocation.h"
-#include "ValueNodeContainer.h"
+#include <AddressValueNode.h>
+#include <Architecture.h>
+#include <StringValue.h>
+#include <TeamTypeInformation.h>
+#include <Tracing.h>
+#include <Type.h>
+#include <TypeLookupConstraints.h>
+#include <ValueLoader.h>
+#include <ValueLocation.h>
+#include <ValueNodeContainer.h>
 
 
 // maximum number of array elements to show by default

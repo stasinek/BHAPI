@@ -8,11 +8,11 @@
 #ifndef _USB_V2_H_
 #define _USB_V2_H_
 
-#include <KernelExport.h>
-#include <bus_manager.h>
+#include <kits/kernelExport.h>
+#include <kits/netbus_manager.h>
 
-#include <USB_spec.h>
-#include <USB_rle.h>
+#include <kits/netUSB_spec.h>
+#include <kits/netUSB_rle.h>
 
 #ifdef __cplusplus
 extern "C" {

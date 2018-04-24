@@ -10,7 +10,7 @@
 #if __GNUC__ < 3
 
 
-#include "OldMediaModule.h"
+#include <OldMediaModule.h>
 
 #include <debug.h>
 

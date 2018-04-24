@@ -12,7 +12,7 @@
 
 #include <Haiku.h>
 
-#include "ICUThreadLocalStorageValue.h"
+#include <ICUThreadLocalStorageValue.h>
 
 
 namespace BPrivate {

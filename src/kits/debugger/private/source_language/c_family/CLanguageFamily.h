@@ -7,7 +7,7 @@
 #define C_LANGUAGE_FAMILY_H
 
 
-#include "SourceLanguage.h"
+#include <SourceLanguage.h>
 
 
 class CLanguageFamily : public SourceLanguage {

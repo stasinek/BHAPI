@@ -11,7 +11,7 @@
 #include <AbstractLayout.h>
 #include <ScrollBar.h>
 
-#include "ViewLayoutItem.h"
+#include <ViewLayoutItem.h>
 
 
 namespace BPrivate {

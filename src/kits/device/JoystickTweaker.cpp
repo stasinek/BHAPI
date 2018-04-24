@@ -6,7 +6,7 @@
  *		Fredrik Modeen
  *
  */
-#include "JoystickTweaker.h"
+#include <JoystickTweaker.h>
 
 #include <new>
 #include <stdio.h>

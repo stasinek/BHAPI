@@ -10,7 +10,7 @@
 #ifndef _PLL_ACCESS_H
 #define _PLL_ACCESS_H
 
-#include "mmio.h"
+#include <kits/netmmio.h>
 
 
 // to be called after each CLOCK_CNTL_INDEX access;

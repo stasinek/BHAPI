@@ -6,7 +6,7 @@
 #ifndef _KSOCKET_H
 #define _KSOCKET_H
 
-#include <sys/socket.h>
+#include <kits/netsys/socket.h>
 
 #ifndef _KERNEL_MODE /* userland wrapper */
 
@@ -57,7 +57,7 @@
 #elif defined(BONE_VERSION)
 
 /* BONE socket module */
-#include <sys/socket_module.h>
+#include <kits/netsys/socket_module.h>
 
 extern bone_socket_info_t *gSocket;
 #define ksocket (gSocket->socket)

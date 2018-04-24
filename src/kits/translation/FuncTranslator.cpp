@@ -19,7 +19,7 @@
 */
 
 
-#include "FuncTranslator.h"
+#include <FuncTranslator.h>
 
 #include <string.h>
 

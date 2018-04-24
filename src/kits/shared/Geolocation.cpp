@@ -142,7 +142,7 @@ status_t BGeolocation::LocateSelf(float& latitude, float& longitude)
 
 #ifdef HAVE_DEFAULT_GEOLOCATION_SERVICE_KEY
 
-#include "DefaultGeolocationServiceKey.h"
+#include <DefaultGeolocationServiceKey.h>
 
 const char* BGeolocation::kDefaultService
 	= "https://location.services.mozilla.com/v1/geolocate?key="

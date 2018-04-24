@@ -3,12 +3,12 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "ResizeJob.h"
+#include <ResizeJob.h>
 
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
-#include "DiskDeviceUtils.h"
-#include "PartitionReference.h"
+#include <DiskDeviceUtils.h>
+#include <PartitionReference.h>
 
 
 // constructor

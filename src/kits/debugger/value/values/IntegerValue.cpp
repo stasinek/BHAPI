@@ -4,7 +4,7 @@
  */
 
 
-#include "IntegerValue.h"
+#include <IntegerValue.h>
 
 
 IntegerValue::IntegerValue(const BVariant& value)

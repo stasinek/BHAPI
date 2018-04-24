@@ -7,7 +7,7 @@
  */
 
 
-#include <DirectMessageTarget.h>
+#include <kits/netDirectMessageTarget.h>
 
 
 namespace BPrivate {

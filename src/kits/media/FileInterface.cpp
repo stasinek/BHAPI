@@ -10,8 +10,8 @@
  *
  */
 
-#include "debug.h"
-#include "DataExchange.h"
+#include <debug.h>
+#include <DataExchange.h>
 #include <string.h>
 #include <FileInterface.h>
 #include <MimeType.h>

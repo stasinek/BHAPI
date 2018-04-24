@@ -7,11 +7,11 @@
  */
 
 
-#include "ColorMenuItem.h"
+#include <ColorMenuItem.h>
 
 #include <math.h>
 
-#include <../include/syslog.h>
+#include <syslog.h>
 
 #include <algorithm>
 

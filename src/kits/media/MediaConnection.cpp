@@ -5,7 +5,7 @@
 
 #include <MediaConnection.h>
 
-#include "debug.h"
+#include <debug.h>
 
 
 BMediaConnection::BMediaConnection(BMediaClient* owner,

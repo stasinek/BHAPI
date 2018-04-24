@@ -6,7 +6,7 @@
 #define _AGP_H_
 
 
-#include <bus_manager.h>
+#include <kits/netbus_manager.h>
 
 
 typedef struct agp_info {

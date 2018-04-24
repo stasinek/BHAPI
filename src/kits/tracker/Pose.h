@@ -37,9 +37,9 @@ All rights reserved.
 
 #include <Region.h>
 
-#include "TextWidget.h"
-#include "Model.h"
-#include "Utilities.h"
+#include <TextWidget.h>
+#include <Model.h>
+#include <Utilities.h>
 
 
 namespace BPrivate {

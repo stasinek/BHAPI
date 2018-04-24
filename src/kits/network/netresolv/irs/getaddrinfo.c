@@ -89,8 +89,8 @@ __RCSID("$NetBSD: getaddrinfo.c,v 1.105 2013/05/13 17:54:55 christos Exp $");
 #include <FindDirectory.h>
 
 #include <libutil.h>
-#include "nsswitch.h"
-#include "servent.h"
+#include <nsswitch.h>
+#include <servent.h>
 
 #ifdef __weak_alias
 __weak_alias(getaddrinfo,_getaddrinfo)

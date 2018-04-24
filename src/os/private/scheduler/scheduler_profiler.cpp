@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "scheduler_profiler.h"
+#include <scheduler_profiler.h>
 
 #include <debug.h>
 #include <util/AutoLock.h>

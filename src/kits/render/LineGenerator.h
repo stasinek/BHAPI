@@ -31,7 +31,7 @@
 #ifndef BHAPI_LINE_GENERATOR_H
 #define BHAPI_LINE_GENERATOR_H
 #include <Haiku.h>
-#include "../interface/Rect.h"
+#include <kits/interface/Rect.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

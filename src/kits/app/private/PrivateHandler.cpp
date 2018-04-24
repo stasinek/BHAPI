@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "PrivateHandler.h"
-#include "PrivateApplication.h"
+#include <kits/netPrivateHandler.h>
+#include <kits/netPrivateApplication.h>
 
-#include "../kernel/Kernel.h"
-#include "../support/ClassInfo.h"
-#include "../support/Autolock.h"
-#include "../support/Errors.h"
-#include "../support/Locker.h"
-#include "../app/Looper.h"
+#include <os/kernel.h>
+#include <kits/support/ClassInfo.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/Errors.h>
+#include <kits/support/Locker.h>
+#include <kits/app/Looper.h>
 
 BLocker* bhapi::get_handler_operator_locker()
 {

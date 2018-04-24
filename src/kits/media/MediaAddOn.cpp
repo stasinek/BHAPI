@@ -32,8 +32,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <new>
-#include "debug.h"
-#include "DataExchange.h"
+#include <debug.h>
+#include <DataExchange.h>
 
 
 #define MAX_FLAVOR_IN_FORMAT_COUNT	300

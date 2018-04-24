@@ -6,8 +6,8 @@
 #define _ICU_TIME_DATA_H
 
 
-#include "ICUCategoryData.h"
-#include "LocaleBackend.h"
+#include <ICUCategoryData.h>
+#include <LocaleBackend.h>
 
 #include <unicode/datefmt.h>
 

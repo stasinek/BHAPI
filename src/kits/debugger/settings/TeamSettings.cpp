@@ -5,7 +5,7 @@
  */
 
 
-#include "TeamSettings.h"
+#include <TeamSettings.h>
 
 #include <new>
 
@@ -13,14 +13,14 @@
 
 #include <AutoLocker.h>
 
-#include "ArchivingUtils.h"
-#include "BreakpointSetting.h"
-#include "Team.h"
-#include "TeamFileManagerSettings.h"
-#include "TeamSignalSettings.h"
-#include "TeamUiSettings.h"
-#include "TeamUiSettingsFactory.h"
-#include "UserBreakpoint.h"
+#include <ArchivingUtils.h>
+#include <BreakpointSetting.h>
+#include <Team.h>
+#include <TeamFileManagerSettings.h>
+#include <TeamSignalSettings.h>
+#include <TeamUiSettings.h>
+#include <TeamUiSettingsFactory.h>
+#include <UserBreakpoint.h>
 
 
 TeamSettings::TeamSettings()

@@ -4,7 +4,7 @@
  */
 
 
-#include "TeamUiSettingsFactory.h"
+#include <TeamUiSettingsFactory.h>
 
 
 TeamUiSettingsFactory::~TeamUiSettingsFactory()

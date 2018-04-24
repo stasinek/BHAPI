@@ -6,8 +6,8 @@
 #define KERNEL_ARCH_X86_PAGING_64BIT_X86_PAGING_STRUCTURES_64BIT_H
 
 
-#include "paging/64bit/paging.h"
-#include "paging/X86PagingStructures.h"
+#include <paging/64bit/paging.h>
+#include <paging/X86PagingStructures.h>
 
 
 struct X86PagingStructures64Bit final : X86PagingStructures {

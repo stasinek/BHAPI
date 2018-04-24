@@ -9,9 +9,9 @@
 #include <ObjectList.h>
 #include <StringClass.h>
 
-#include "BaseUnit.h"
-#include "LineNumberProgram.h"
-#include "Types.h"
+#include <BaseUnit.h>
+#include <LineNumberProgram.h>
+#include <Types.h>
 
 
 class DIECompileUnitBase;

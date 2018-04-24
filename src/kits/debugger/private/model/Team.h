@@ -13,13 +13,13 @@
 
 #include <ObjectList.h>
 
-#include "Image.h"
-#include "ImageInfo.h"
-#include "TargetAddressRange.h"
-#include "Thread.h"
-#include "ThreadInfo.h"
-#include "UserBreakpoint.h"
-#include "Watchpoint.h"
+#include <Image.h>
+#include <ImageInfo.h>
+#include <TargetAddressRange.h>
+#include <Thread.h>
+#include <ThreadInfo.h>
+#include <UserBreakpoint.h>
+#include <Watchpoint.h>
 
 
 // team event types

@@ -25,7 +25,7 @@ extern "C" {
 #ifdef OPENSSL_ENABLED
 #include <openssl/md5.h>
 #else
-#include "md5.h"
+#include <md5.h>
 #endif
 };
 

@@ -3,9 +3,9 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "BasicFunctionDebugInfo.h"
+#include <BasicFunctionDebugInfo.h>
 
-#include "SpecificImageDebugInfo.h"
+#include <SpecificImageDebugInfo.h>
 
 
 BasicFunctionDebugInfo::BasicFunctionDebugInfo(

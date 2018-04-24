@@ -35,8 +35,8 @@ All rights reserved.
 //! Menu items with small icons.
 
 
-#include "IconCache.h"
-#include "IconMenuItem.h"
+#include <IconCache.h>
+#include <IconMenuItem.h>
 
 #include <Debug.h>
 #include <Menu.h>

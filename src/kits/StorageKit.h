@@ -30,15 +30,15 @@
 #ifndef B_STORAGE_KIT_H
 #define B_STORAGE_KIT_H
 
-#include "storage/Path.h"
-#include "storage/Entry.h"
-#include "storage/Directory.h"
-#include "storage/File.h"
-#include "storage/FindDirectory.h"
-#include "storage/Volume.h"
-#include "storage/VolumeRoster.h"
-#include "storage/FilePanel.h"
+#include <storage/Path.h>
+#include <storage/Entry.h>
+#include <storage/Directory.h>
+#include <storage/File.h>
+#include <storage/FindDirectory.h>
+#include <storage/Volume.h>
+#include <storage/VolumeRoster.h>
+#include <storage/FilePanel.h>
 
-#include "storage/StorageDefs.h"
+#include <storage/StorageDefs.h>
 
 #endif

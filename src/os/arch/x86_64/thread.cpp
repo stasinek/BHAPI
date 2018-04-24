@@ -4,8 +4,8 @@
  */
 
 
-#include <kernel/OS.h>
-#include "syscalls.h"
+#include <kits/kernel/OS.h>
+#include <syscalls.h>
 
 
 thread_id

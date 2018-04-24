@@ -6,7 +6,7 @@
 #define _ICU_LOCALECONV_DATA_H
 
 
-#include "ICUCategoryData.h"
+#include <ICUCategoryData.h>
 
 #include <unicode/decimfmt.h>
 

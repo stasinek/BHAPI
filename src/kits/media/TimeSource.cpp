@@ -14,11 +14,11 @@
 
 #include <string.h>
 
-#include "debug.h"
-#include "DataExchange.h"
-#include "ServerInterface.h"
-#include "TimeSourceObject.h"
-#include "TMap.h"
+#include <debug.h>
+#include <DataExchange.h>
+#include <ServerInterface.h>
+#include <TimeSourceObject.h>
+#include <TMap.h>
 
 #define DEBUG_TIMESOURCE 0
 

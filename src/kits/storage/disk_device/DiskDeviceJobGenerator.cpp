@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DiskDeviceJobGenerator.h"
+#include <DiskDeviceJobGenerator.h>
 
 #include <new>
 
@@ -15,20 +15,20 @@
 
 #include <ddm_userland_interface_defs.h>
 
-#include "DiskDeviceJob.h"
-#include "DiskDeviceJobQueue.h"
-#include "PartitionDelegate.h"
-#include "PartitionReference.h"
+#include <DiskDeviceJob.h>
+#include <DiskDeviceJobQueue.h>
+#include <PartitionDelegate.h>
+#include <PartitionReference.h>
 
-#include "CreateChildJob.h"
-#include "DeleteChildJob.h"
-#include "DefragmentJob.h"
-#include "InitializeJob.h"
-#include "MoveJob.h"
-#include "RepairJob.h"
-#include "ResizeJob.h"
-#include "SetStringJob.h"
-#include "UninitializeJob.h"
+#include <CreateChildJob.h>
+#include <DeleteChildJob.h>
+#include <DefragmentJob.h>
+#include <InitializeJob.h>
+#include <MoveJob.h>
+#include <RepairJob.h>
+#include <ResizeJob.h>
+#include <SetStringJob.h>
+#include <UninitializeJob.h>
 
 
 #undef TRACE

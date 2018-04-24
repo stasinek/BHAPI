@@ -57,7 +57,7 @@
 #include <vm/VMAddressSpace.h>
 #include <util/AutoLock.h>
 
-#include "TeamThreadTables.h"
+#include <TeamThreadTables.h>
 
 
 //#define TRACE_TEAM

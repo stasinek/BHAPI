@@ -16,7 +16,7 @@
 #include <View.h>
 #include <Window.h>
 
-#include "ScreenSaverSettings.h"
+#include <ScreenSaverSettings.h>
 
 
 class ScreenSaverRunner {

@@ -6,7 +6,7 @@
 #define UNSUPPORTED_LANGUAGE_H
 
 
-#include "SourceLanguage.h"
+#include <SourceLanguage.h>
 
 
 class UnsupportedLanguage : public SourceLanguage {

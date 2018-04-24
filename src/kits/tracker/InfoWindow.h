@@ -39,9 +39,9 @@ All rights reserved.
 #include <Window.h>
 #include <MessageFilter.h>
 
-#include "FilePermissionsView.h"
-#include "LockingList.h"
-#include "Utilities.h"
+#include <FilePermissionsView.h>
+#include <LockingList.h>
+#include <Utilities.h>
 
 
 class BFilePanel;

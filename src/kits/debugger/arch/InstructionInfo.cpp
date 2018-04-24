@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "InstructionInfo.h"
+#include <InstructionInfo.h>
 
 
 InstructionInfo::InstructionInfo()

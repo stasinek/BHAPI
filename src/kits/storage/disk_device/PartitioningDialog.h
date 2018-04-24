@@ -6,7 +6,7 @@
 #ifndef _PARTITIONING_DIALOG_H
 #define _PARTITIONING_DIALOG_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <Window.h>
 
 class BDiskScannerParameterEditor;

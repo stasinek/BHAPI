@@ -49,7 +49,7 @@
 #include <vm/VMAddressSpace.h>
 #include <wait_for_objects.h>
 
-#include "TeamThreadTables.h"
+#include <TeamThreadTables.h>
 
 
 //#define TRACE_THREAD

@@ -5,7 +5,7 @@
 #ifndef COLLAPSING_LAYOUTER_H	
 #define COLLAPSING_LAYOUTER_H
 
-#include "Layouter.h"
+#include <Layouter.h>
 
 
 namespace BPrivate {

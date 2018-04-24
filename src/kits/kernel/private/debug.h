@@ -14,7 +14,7 @@
 #include <KernelExport.h>
 #include <module.h>
 
-#include "kernel_debug_config.h"
+#include <kernel_debug_config.h>
 
 
 // We need the BKernel::Thread type below (opaquely) in the exported C

@@ -8,7 +8,7 @@
  */
 
 
-#include "debug_commands.h"
+#include <debug_commands.h>
 
 #include <setjmp.h>
 #include <stdio.h>
@@ -24,8 +24,8 @@
 #include <thread.h>
 #include <util/AutoLock.h>
 
-#include "debug_output_filter.h"
-#include "debug_variables.h"
+#include <debug_output_filter.h>
+#include <debug_variables.h>
 
 
 #define INVOKE_COMMAND_FAULT	1

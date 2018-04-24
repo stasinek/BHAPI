@@ -12,7 +12,7 @@
 */
 
 
-#include "ScreenSaverSettings.h"
+#include <ScreenSaverSettings.h>
 
 
 

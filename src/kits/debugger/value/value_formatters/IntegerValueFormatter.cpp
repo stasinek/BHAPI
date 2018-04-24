@@ -3,14 +3,14 @@
  * Copyright 2009, Ingo Weinhold, ingo_weinhold@gmx.de.
  * Distributed under the terms of the MIT License.
  */
-#include "IntegerValueFormatter.h"
+#include <IntegerValueFormatter.h>
 
 #include <new>
 
 #include <ctype.h>
 
-#include "IntegerFormatter.h"
-#include "IntegerValue.h"
+#include <IntegerFormatter.h>
+#include <IntegerValue.h>
 
 
 // #pragma mark - IntegerValueFormatter

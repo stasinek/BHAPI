@@ -59,16 +59,16 @@
 </document>
 -----------------------------------------------------------------------------*/
 
-#include "Button.h"
-#include "Window.h"
-#include "Rect.h"
+#include <Button.h>
+#include <Window.h>
+#include <Rect.h>
 
-#include "../add-ons/theme/ThemeEngine.h"
-#include "../support/Errors.h"
-#include "../kernel/KERNEL.h"
-#include "../kernel/kernel.h"
-#include "../app/MessageRunner.h"
-#include "../app/Message.h"
+#include <kits/add-ons/theme/ThemeEngine.h>
+#include <kits/support/Errors.h>
+#include <os/kernel.h>
+#include <os/kernel.h>
+#include <kits/app/MessageRunner.h>
+#include <kits/app/Message.h>
 
 /* --------------------------------------------------------------------------
 <document lang="zh_CN.UTF-8">

@@ -30,7 +30,7 @@
 
 #include <be/kernel/OS.h>
 
-#include "../kernel/Kernel.h"
+#include <os/kernel.h>
 
 typedef struct b_beos_locker_t {
 	b_beos_locker_t()

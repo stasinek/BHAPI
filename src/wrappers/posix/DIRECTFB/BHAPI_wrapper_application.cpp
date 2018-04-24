@@ -31,14 +31,14 @@
 
 
 
-#include "BHAPI_wrapper_dfb.h"
+#include <BHAPI_wrapper_dfb.h>
 
-#include "../../kernel/Kernel.h"
-#include "../../support/Autolock.h"
-#include "../../support/ClassInfo.h"
-#include "../../support/StringList.h"
-#include "../../app/Clipboard.h"
-#include "../../app/Application.h"
+#include <os/kernel.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/ClassInfo.h>
+#include <kits/support/StringList.h>
+#include <kits/app/Clipboard.h>
+#include <kits/app/Application.h>
 
 #ifdef BHAPI_OS_LINUX
 extern bool bhapi::get_prog_argc_argv_linux(BString &progName, BStringArray &progArgv);

@@ -6,8 +6,8 @@
 #define _BIOS_MODULE_H_
 
 
-#include <kernel/OS.h>
-#include <module.h>
+#include <kits/kernel/OS.h>
+#include <kits/netmodule.h>
 
 
 /*!	BIOS call interface.

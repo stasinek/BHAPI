@@ -18,7 +18,7 @@
 
 #include <Referenceable.h>
 
-#include "CollapsingLayouter.h"
+#include <CollapsingLayouter.h>
 
 
 // Some words of explanation:

@@ -6,7 +6,7 @@
 #define _INPUTSERVERFILTER_H
 
 
-#include <MessageFilter.h>
+#include <kits/netMessageFilter.h>
 
 
 class BRegion;

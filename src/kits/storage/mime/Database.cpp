@@ -12,7 +12,7 @@
 #include <mime/Database.h>
 
 
-#include <../include/string>
+#include <string>
 
 #include <iostream>
 #include <new>
@@ -33,7 +33,7 @@
 #include <AutoLocker.h>
 #include <mime/database_support.h>
 #include <mime/DatabaseLocation.h>
-#include <../include/storage_support.h>
+#include <storage_support.h>
 
 
 //#define DBG(x) x

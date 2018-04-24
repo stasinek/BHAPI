@@ -3,15 +3,15 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "FunctionInstance.h"
+#include <FunctionInstance.h>
 
 #include <new>
 
-#include "DisassembledCode.h"
-#include "Function.h"
-#include "FunctionID.h"
-#include "ImageDebugInfo.h"
-#include "LocatableFile.h"
+#include <DisassembledCode.h>
+#include <Function.h>
+#include <FunctionID.h>
+#include <ImageDebugInfo.h>
+#include <LocatableFile.h>
 
 
 FunctionInstance::FunctionInstance(ImageDebugInfo* imageDebugInfo,

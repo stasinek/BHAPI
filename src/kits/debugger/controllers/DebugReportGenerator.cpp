@@ -4,7 +4,7 @@
  */
 
 
-#include "DebugReportGenerator.h"
+#include <DebugReportGenerator.h>
 
 #include <cpu_type.h>
 
@@ -14,32 +14,32 @@
 #include <Path.h>
 #include <StringForSize.h>
 
-#include "Architecture.h"
-#include "AreaInfo.h"
-#include "AutoDeleter.h"
-#include "CpuState.h"
-#include "DebuggerInterface.h"
-#include "DisassembledCode.h"
-#include "FunctionInstance.h"
-#include "Image.h"
-#include "MessageCodes.h"
-#include "Register.h"
-#include "SemaphoreInfo.h"
-#include "StackFrame.h"
-#include "StackTrace.h"
-#include "Statement.h"
-#include "StringUtils.h"
-#include "SystemInfo.h"
-#include "Team.h"
-#include "Thread.h"
-#include "Type.h"
-#include "UiUtils.h"
-#include "UserInterface.h"
-#include "Value.h"
-#include "ValueLoader.h"
-#include "ValueLocation.h"
-#include "ValueNode.h"
-#include "ValueNodeManager.h"
+#include <Architecture.h>
+#include <AreaInfo.h>
+#include <AutoDeleter.h>
+#include <CpuState.h>
+#include <DebuggerInterface.h>
+#include <DisassembledCode.h>
+#include <FunctionInstance.h>
+#include <Image.h>
+#include <MessageCodes.h>
+#include <Register.h>
+#include <SemaphoreInfo.h>
+#include <StackFrame.h>
+#include <StackTrace.h>
+#include <Statement.h>
+#include <StringUtils.h>
+#include <SystemInfo.h>
+#include <Team.h>
+#include <Thread.h>
+#include <Type.h>
+#include <UiUtils.h>
+#include <UserInterface.h>
+#include <Value.h>
+#include <ValueLoader.h>
+#include <ValueLocation.h>
+#include <ValueNode.h>
+#include <ValueNodeManager.h>
 
 
 #define WRITE_AND_CHECK(output, data) \

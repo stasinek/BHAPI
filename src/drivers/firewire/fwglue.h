@@ -9,9 +9,9 @@
 #define _FW_GLUE_H
 
 
-#include <dpc.h>
-#include <stdint.h>
-#include <strings.h>
+#include <kits/netdpc.h>
+#include <kits/netstdint.h>
+#include <kits/netstrings.h>
 
 
 #define device_printf(dev, a...) dprintf("firewire:" a)

@@ -9,7 +9,7 @@
 #include <ObjectList.h>
 #include <Referenceable.h>
 
-#include "types/Types.h"
+#include <types/Types.h>
 
 
 class Watchpoint : public BReferenceable {

@@ -6,8 +6,8 @@
 #define _ACPI_H
 
 
-#include <device_manager.h>
-#include <KernelExport.h>
+#include <kits/netdevice_manager.h>
+#include <kits/kernelExport.h>
 
 
 typedef struct acpi_module_info acpi_module_info;

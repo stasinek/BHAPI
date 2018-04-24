@@ -33,12 +33,12 @@ All rights reserved.
 */
 
 
-#include "TrackerSettings.h"
+#include <TrackerSettings.h>
 
 #include <Debug.h>
 
-#include "Tracker.h"
-#include "WidgetAttributeText.h"
+#include <Tracker.h>
+#include <WidgetAttributeText.h>
 
 
 class TTrackerState : public Settings {

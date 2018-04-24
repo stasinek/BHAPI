@@ -35,8 +35,8 @@ All rights reserved.
 #define _TRACKER_SETTINGS_H
 
 
-#include "Utilities.h"
-#include "Settings.h"
+#include <Utilities.h>
+#include <Settings.h>
 
 
 namespace BPrivate {

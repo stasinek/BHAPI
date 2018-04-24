@@ -25,8 +25,8 @@ static const char rcsid[] = "$Id: ev_connects.c,v 1.8 2006/03/09 23:57:56 marka 
 
 /* Import. */
 
-#include "port_before.h"
-#include "fd_setsize.h"
+#include <port_before.h>
+#include <fd_setsize.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -36,9 +36,9 @@ static const char rcsid[] = "$Id: ev_connects.c,v 1.8 2006/03/09 23:57:56 marka 
 
 #include <isc/eventlib.h>
 #include <isc/assertions.h>
-#include "eventlib_p.h"
+#include <eventlib_p.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 /* Macros. */
 

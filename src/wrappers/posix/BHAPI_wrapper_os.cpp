@@ -36,10 +36,10 @@
 #include <unistd.h>
 #include <signal.h>
 
-#include "../kernel/Kernel.h"
-#include "../support/StringList.h"
-#include "../support/Locker.h"
-#include "../app/Application.h"
+#include <os/kernel.h>
+#include <kits/support/StringList.h>
+#include <kits/support/Locker.h>
+#include <kits/app/Application.h>
 
 
 #if 0

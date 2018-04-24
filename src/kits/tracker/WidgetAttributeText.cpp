@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "WidgetAttributeText.h"
+#include <WidgetAttributeText.h>
 
 #include <ctype.h>
 #include <stdlib.h>
@@ -56,17 +56,17 @@ All rights reserved.
 #include <Volume.h>
 #include <VolumeRoster.h>
 
-#include "Attributes.h"
-#include "FindPanel.h"
-#include "FSUndoRedo.h"
-#include "FSUtils.h"
-#include "Model.h"
-#include "OpenWithWindow.h"
-#include "MimeTypes.h"
-#include "PoseView.h"
-#include "SettingsViews.h"
-#include "Utilities.h"
-#include "ViewState.h"
+#include <Attributes.h>
+#include <FindPanel.h>
+#include <FSUndoRedo.h>
+#include <FSUtils.h>
+#include <Model.h>
+#include <OpenWithWindow.h>
+#include <MimeTypes.h>
+#include <PoseView.h>
+#include <SettingsViews.h>
+#include <Utilities.h>
+#include <ViewState.h>
 
 
 #undef B_TRANSLATION_CONTEXT

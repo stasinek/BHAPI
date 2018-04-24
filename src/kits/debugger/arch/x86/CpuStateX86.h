@@ -10,7 +10,7 @@
 
 #include <debugger.h>
 
-#include "CpuState.h"
+#include <CpuState.h>
 
 
 enum {

@@ -23,7 +23,7 @@
 #include <MimeType.h>
 #include <Path.h>
 #include <StringClass.h>
-#include <../include/storage_support.h>
+#include <storage_support.h>
 
 
 #define DBG(x) x

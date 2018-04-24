@@ -15,10 +15,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "GameSoundBuffer.h"
-#include "GameSoundDefs.h"
-#include "GameSoundDevice.h"
-#include "GSUtility.h"
+#include <GameSoundBuffer.h>
+#include <GameSoundDefs.h>
+#include <GameSoundDevice.h>
+#include <GSUtility.h>
 
 
 BSimpleGameSound::BSimpleGameSound(const entry_ref *inFile,

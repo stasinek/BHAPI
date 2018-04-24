@@ -37,10 +37,10 @@ All rights reserved.
 
 #include <Debug.h>
 #include <Looper.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
-#include "ObjectList.h"
-#include "FunctionObject.h"
+#include <ObjectList.h>
+#include <FunctionObject.h>
 
 
 namespace BPrivate {

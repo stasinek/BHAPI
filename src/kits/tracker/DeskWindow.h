@@ -38,8 +38,8 @@ All rights reserved.
 #include <Shelf.h>
 #include <set>
 
-#include "ContainerWindow.h"
-#include "DesktopPoseView.h"
+#include <ContainerWindow.h>
+#include <DesktopPoseView.h>
 
 
 class BPopUpMenu;

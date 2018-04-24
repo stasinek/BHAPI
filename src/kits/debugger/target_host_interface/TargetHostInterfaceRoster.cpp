@@ -2,15 +2,15 @@
  * Copyright 2016, Rene Gollent, rene@gollent.com.
  * Distributed under the terms of the MIT License.
  */
-#include "TargetHostInterfaceRoster.h"
+#include <TargetHostInterfaceRoster.h>
 
 #include <new>
 
 #include <AutoDeleter.h>
 #include <AutoLocker.h>
 
-#include "LocalTargetHostInterfaceInfo.h"
-#include "TargetHostInterfaceInfo.h"
+#include <LocalTargetHostInterfaceInfo.h>
+#include <TargetHostInterfaceInfo.h>
 
 
 /*static*/ TargetHostInterfaceRoster*

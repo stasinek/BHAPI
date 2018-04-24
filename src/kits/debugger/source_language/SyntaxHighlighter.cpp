@@ -4,7 +4,7 @@
  */
 
 
-#include "SyntaxHighlighter.h"
+#include <SyntaxHighlighter.h>
 
 
 // #pragma mark - SyntaxHighlightInfo

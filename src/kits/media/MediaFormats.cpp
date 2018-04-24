@@ -8,11 +8,11 @@
  */
 
 
-#include "AddOnManager.h"
-#include "DataExchange.h"
-#include "FormatManager.h"
-#include "MetaFormat.h"
-#include "debug.h"
+#include <AddOnManager.h>
+#include <DataExchange.h>
+#include <FormatManager.h>
+#include <MetaFormat.h>
+#include <debug.h>
 
 #include <MediaFormats.h>
 #include <ObjectList.h>

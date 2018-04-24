@@ -8,7 +8,7 @@
 
 #include <vm/VMAddressSpace.h>
 
-#include "VMUserArea.h"
+#include <VMUserArea.h>
 
 
 struct VMUserAddressSpace : VMAddressSpace {

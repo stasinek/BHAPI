@@ -13,10 +13,10 @@
 #include <Referenceable.h>
 #include <util/OpenHashTable.h>
 
-#include "GlobalTypeLookup.h"
-#include "ImageInfo.h"
-#include "TeamFunctionSourceInformation.h"
-#include "TeamTypeInformation.h"
+#include <GlobalTypeLookup.h>
+#include <ImageInfo.h>
+#include <TeamFunctionSourceInformation.h>
+#include <TeamTypeInformation.h>
 
 class Architecture;
 class DebuggerInterface;

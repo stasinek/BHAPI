@@ -11,9 +11,9 @@
 #include <lock.h>
 #include <vm/vm_types.h>
 
-#include "paging/pae/paging.h"
-#include "paging/X86PagingMethod.h"
-#include "paging/X86PagingStructures.h"
+#include <paging/pae/paging.h>
+#include <paging/X86PagingMethod.h>
+#include <paging/X86PagingStructures.h>
 
 
 #if B_HAIKU_PHYSICAL_BITS == 64

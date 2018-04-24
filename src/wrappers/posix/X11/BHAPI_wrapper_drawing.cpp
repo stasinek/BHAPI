@@ -28,17 +28,17 @@
  * --------------------------------------------------------------------------*/
 #ifdef LINUX
 
-#include "../config.h"
+#include <kits/config.h>
 
 #ifdef HAVE_XRENDER
-#include <X11/extensions/Xrender.h"
+#include <X11/extensions/Xrender.h>
 #endif
 
-#include "BHAPI_wrapper_x11.h"
+#include <BHAPI_wrapper_x11.h>
 
-#include "../support/Autolock.h"
-#include "../support/ClassInfo.h"
-#include "../render/Pixmap.h"
+#include <kits/support/Autolock.h>
+#include <kits/support/ClassInfo.h>
+#include <kits/render/Pixmap.h>
 
 
 EXGraphicsContext::EXGraphicsContext(EXGraphicsEngine *x11Engine)

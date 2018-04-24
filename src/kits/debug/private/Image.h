@@ -6,7 +6,7 @@
 #ifndef BEOS_DEBUG_IMAGE_H
 #define BEOS_DEBUG_IMAGE_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <util/DoublyLinkedList.h>
 #include <elf_private.h>
 

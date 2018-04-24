@@ -29,7 +29,7 @@
 #ifndef __BHAPI_ERRORS_H__
 #define __BHAPI_ERRORS_H__
 
-#include "SupportDefs.h"
+#include <SupportDefs.h>
 
 /* Error baselines */
 #define B_GENERAL_ERROR_BASE	INT_MIN

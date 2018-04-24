@@ -17,7 +17,7 @@
 #include <real_time_clock.h>
 #include <timer.h>
 
-#include "debugger_keymaps.h"
+#include <debugger_keymaps.h>
 
 /* which MFP timer to use */
 #define SYS_TDR		MFP_TADR

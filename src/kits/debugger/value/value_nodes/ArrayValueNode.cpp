@@ -5,18 +5,18 @@
  */
 
 
-#include "ArrayValueNode.h"
+#include <ArrayValueNode.h>
 
 #include <new>
 
-#include "Architecture.h"
-#include "ArrayIndexPath.h"
-#include "IntegerValue.h"
-#include "Tracing.h"
-#include "Type.h"
-#include "ValueLoader.h"
-#include "ValueLocation.h"
-#include "ValueNodeContainer.h"
+#include <Architecture.h>
+#include <ArrayIndexPath.h>
+#include <IntegerValue.h>
+#include <Tracing.h>
+#include <Type.h>
+#include <ValueLoader.h>
+#include <ValueLocation.h>
+#include <ValueNodeContainer.h>
 
 
 // maximum number of array elements to show by default

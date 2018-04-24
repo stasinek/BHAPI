@@ -5,7 +5,7 @@
  */
 
 
-#include "controllers/TeamDebugger.h"
+#include <controllers/TeamDebugger.h>
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -20,49 +20,49 @@
 #include <AutoDeleter.h>
 #include <AutoLocker.h>
 
-#include "debug_utils.h"
-#include "syscall_numbers.h"
+#include <debug_utils.h>
+#include <syscall_numbers.h>
 
-#include "Architecture.h"
-#include "BreakpointManager.h"
-#include "BreakpointSetting.h"
-#include "CpuState.h"
-#include "DebugEvent.h"
-#include "DebuggerInterface.h"
-#include "DebugReportGenerator.h"
-#include "ExpressionInfo.h"
-#include "FileManager.h"
-#include "Function.h"
-#include "FunctionID.h"
-#include "ImageDebugInfo.h"
-#include "ImageDebugInfoLoadingState.h"
-#include "ImageDebugLoadingStateHandler.h"
-#include "ImageDebugLoadingStateHandlerRoster.h"
-#include "Jobs.h"
-#include "LocatableFile.h"
-#include "MessageCodes.h"
-#include "NoOpSettingsManager.h"
-#include "SettingsManager.h"
-#include "SourceCode.h"
-#include "SourceLanguage.h"
-#include "SpecificImageDebugInfo.h"
-#include "SpecificImageDebugInfoLoadingState.h"
-#include "StackFrame.h"
-#include "StackFrameValues.h"
-#include "Statement.h"
-#include "SymbolInfo.h"
-#include "TeamDebugInfo.h"
-#include "TeamInfo.h"
-#include "TeamMemoryBlock.h"
-#include "TeamMemoryBlockManager.h"
-#include "TeamSettings.h"
-#include "TeamSignalSettings.h"
-#include "TeamUiSettings.h"
-#include "Tracing.h"
-#include "ValueNode.h"
-#include "ValueNodeContainer.h"
-#include "Variable.h"
-#include "WatchpointManager.h"
+#include <Architecture.h>
+#include <BreakpointManager.h>
+#include <BreakpointSetting.h>
+#include <CpuState.h>
+#include <DebugEvent.h>
+#include <DebuggerInterface.h>
+#include <DebugReportGenerator.h>
+#include <ExpressionInfo.h>
+#include <FileManager.h>
+#include <Function.h>
+#include <FunctionID.h>
+#include <ImageDebugInfo.h>
+#include <ImageDebugInfoLoadingState.h>
+#include <ImageDebugLoadingStateHandler.h>
+#include <ImageDebugLoadingStateHandlerRoster.h>
+#include <Jobs.h>
+#include <LocatableFile.h>
+#include <MessageCodes.h>
+#include <NoOpSettingsManager.h>
+#include <SettingsManager.h>
+#include <SourceCode.h>
+#include <SourceLanguage.h>
+#include <SpecificImageDebugInfo.h>
+#include <SpecificImageDebugInfoLoadingState.h>
+#include <StackFrame.h>
+#include <StackFrameValues.h>
+#include <Statement.h>
+#include <SymbolInfo.h>
+#include <TeamDebugInfo.h>
+#include <TeamInfo.h>
+#include <TeamMemoryBlock.h>
+#include <TeamMemoryBlockManager.h>
+#include <TeamSettings.h>
+#include <TeamSignalSettings.h>
+#include <TeamUiSettings.h>
+#include <Tracing.h>
+#include <ValueNode.h>
+#include <ValueNodeContainer.h>
+#include <Variable.h>
+#include <WatchpointManager.h>
 
 
 // #pragma mark - ImageHandler

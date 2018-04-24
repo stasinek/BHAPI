@@ -27,19 +27,19 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "MessageRunner.h"
-#include "Application.h"
-#include "AppDefs.h"
+#include <kits/netMessageRunner.h>
+#include <kits/netApplication.h>
+#include <kits/netAppDefs.h>
 
-#include "../kernel/Kernel.h"
-#include "../kernel/Debug.h"
-#include "../kernel/KERNEL.h"
-#include "../support/Locker.h"
-#include "../support/Autolock.h"
-#include "../support/Errors.h"
-#include "../../private/app/PrivateHandler.h"
-#include "../app/Messenger.h"
-#include "../app/Message.h"
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <os/kernel.h>
+#include <kits/support/Locker.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/Errors.h>
+#include <kits/private/app/PrivateHandler.h>
+#include <kits/app/Messenger.h>
+#include <kits/app/Message.h>
 
 extern BLocker* bhapi::get_handler_operator_locker();
 

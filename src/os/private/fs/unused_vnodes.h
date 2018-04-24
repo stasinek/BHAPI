@@ -13,7 +13,7 @@
 
 #include <low_resource_manager.h>
 
-#include "Vnode.h"
+#include <Vnode.h>
 
 
 const static uint32 kMaxUnusedVnodes = 8192;

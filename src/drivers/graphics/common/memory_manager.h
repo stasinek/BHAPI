@@ -9,7 +9,7 @@
 
 /**	Memory manager used for graphics mem */
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 typedef struct mem_info mem_info;

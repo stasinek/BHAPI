@@ -27,16 +27,16 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Menu.h"
-#include "PopUpMenu.h"
-#include "Window.h"
+#include <Menu.h>
+#include <PopUpMenu.h>
+#include <Window.h>
 
-#include "../support/ClassInfo.h"
-#include "../support/Errors.h"
-#include "../kernel/Kernel.h"
-#include "../kernel/Debug.h"
-#include "../app/AppDefs.h"
-#include "../app/Message.h"
+#include <kits/support/ClassInfo.h>
+#include <kits/support/Errors.h>
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/app/AppDefs.h>
+#include <kits/app/Message.h>
 
 using namespace bhapi;
 

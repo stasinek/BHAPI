@@ -15,12 +15,12 @@
 #include <pthread.h>
 
 
-#include <../include/sys/ioctl.h>
+#include <sys/ioctl.h>
 #include <unistd.h>
 
-#include <../include/syscall_utils.h>
+#include <syscall_utils.h>
 
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
 
 static void convert_from_r5_sockaddr(struct sockaddr *_to, const struct sockaddr *_from)

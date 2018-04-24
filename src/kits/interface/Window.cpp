@@ -27,28 +27,28 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Window.h"
-#include "Region.h"
-#include "InterfaceDefs.h"
-#include "View.h"
-#include "ScrollBar.h"
-#include "Screen.h"
-#include "layout/Layout.h"
+#include <Window.h>
+#include <Region.h>
+#include <InterfaceDefs.h>
+#include <View.h>
+#include <ScrollBar.h>
+#include <Screen.h>
+#include <layout/Layout.h>
 
-#include "../support/ClassInfo.h"
-#include "../support/StringClass.h"
-#include "../support/Errors.h"
-#include "../kernel/Kernel.h"
-#include "../kernel/Debug.h"
-#include "../app/Application.h"
-#include "../app/AppDefs.h"
-#include "../app/Message.h"
-#include "../app/MessageQueue.h"
-#include "../app/Messenger.h"
-#include "../support/Autolock.h"
-#include "../add-ons/graphics/GraphicsEngine.h"
-#include "../app/Looper.h"
-#include "../app/MessageRunner.h"
+#include <kits/support/ClassInfo.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/Errors.h>
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/app/Application.h>
+#include <kits/app/AppDefs.h>
+#include <kits/app/Message.h>
+#include <kits/app/MessageQueue.h>
+#include <kits/app/Messenger.h>
+#include <kits/support/Autolock.h>
+#include <kits/add-ons/graphics/GraphicsEngine.h>
+#include <kits/app/Looper.h>
+#include <kits/app/MessageRunner.h>
 
 class BHAPI_LOCAL BWindowLayoutItem : public BLayoutItem {
 public:

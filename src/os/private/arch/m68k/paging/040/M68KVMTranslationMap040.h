@@ -6,7 +6,7 @@
 #define KERNEL_ARCH_M68K_PAGING_040_M68K_VM_TRANSLATION_MAP_040_H
 
 
-#include "paging/M68KVMTranslationMap.h"
+#include <paging/M68KVMTranslationMap.h>
 
 struct M68KPagingStructures040;
 

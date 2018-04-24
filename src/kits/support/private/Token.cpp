@@ -27,12 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Token.h"
+#include <Token.h>
 
-#include "../kernel/Kernel.h"
-#include "../kernel/Debug.h"
-#include "../support/Locker.h"
-#include "../support/List.h"
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/support/Locker.h>
+#include <kits/support/List.h>
 
 struct BHAPI_LOCAL _bhapi_token_t {
 	__be_uint64 vitalities;

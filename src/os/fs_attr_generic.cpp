@@ -1,6 +1,6 @@
 
 #include <BeOSBuildCompatibility.h>
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
 #include <dirent.h>
 #include <errno.h>
@@ -8,25 +8,25 @@
 
 
 #include <unistd.h>
-#include <../include/sys/stat.h>
+#include <sys/stat.h>
 
-#include <../include/string>
+#include <string>
 
 #include <fs_attr.h>
 
-#include "fs_impl.h"
-#include "fs_descriptors.h"
+#include <fs_impl.h>
+#include <fs_descriptors.h>
 
 
 // Include the interface to the host platform attributes support, if it shall be
 // used to tag files with unique IDs to identify their attribute directory.
 #if HAIKU_HOST_USE_XATTR_REF
 #	if defined(HAIKU_HOST_PLATFORM_LINUX)
-#		include "fs_attr_xattr.h"
+#		include <fs_attr_xattr.h>
 #	elif defined(HAIKU_HOST_PLATFORM_FREEBSD)
-#		include "fs_attr_extattr.h"
+#		include <fs_attr_extattr.h>
 #	elif defined(HAIKU_HOST_PLATFORM_DARWIN)
-#		include "fs_attr_bsdxattr.h"
+#		include <fs_attr_bsdxattr.h>
 #	else
 #		error No attribute support for this host platform!
 #	endif

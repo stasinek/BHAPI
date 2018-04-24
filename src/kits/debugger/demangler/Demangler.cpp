@@ -3,11 +3,11 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Demangler.h"
+#include <Demangler.h>
 
 #include <HaikuConstants.h>
 
-#include "demangle.h"
+#include <demangle.h>
 
 
 /*static*/ BString

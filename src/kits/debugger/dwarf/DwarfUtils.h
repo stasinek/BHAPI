@@ -6,7 +6,7 @@
 #ifndef DWARF_UTILS_H
 #define DWARF_UTILS_H
 
-#include "DebugInfoEntries.h"
+#include <DebugInfoEntries.h>
 
 
 class BString;

@@ -36,7 +36,7 @@
  */
 
 
-#include <sys/cdefs.h>
+#include <kits/netsys/cdefs.h>
 
 
 #define	STATE_CLEAR	0x0000

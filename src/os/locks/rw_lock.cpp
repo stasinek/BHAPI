@@ -6,9 +6,9 @@
 
 #include <locks.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
-#include <../include/syscalls.h>
+#include <syscalls.h>
 #include <user_thread.h>
 
 

@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "SymbolInfo.h"
+#include <SymbolInfo.h>
 
 
 SymbolInfo::SymbolInfo()

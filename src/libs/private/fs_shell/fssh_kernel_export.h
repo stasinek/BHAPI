@@ -2,8 +2,8 @@
 #define _FSSH_KERNEL_EXPORT_H
 
 
-#include "fssh_defs.h"
-#include "fssh_os.h"
+#include <fssh_defs.h>
+#include <fssh_os.h>
 
 
 #ifdef __cplusplus

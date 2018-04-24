@@ -5,7 +5,7 @@
 #ifndef _LIBROOT_USER_THREAD_H
 #define _LIBROOT_USER_THREAD_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <TLS.h>
 
 #include <tls.h>

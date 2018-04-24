@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "../../kernel/Kernel.h"
+#include <os/kernel.h>
 
 #include <winsock2.h>
 #include <windows.h>

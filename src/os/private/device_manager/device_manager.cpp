@@ -27,12 +27,12 @@
 #include <util/DoublyLinkedList.h>
 #include <util/Stack.h>
 
-#include "AbstractModuleDevice.h"
-#include "devfs_private.h"
-#include "id_generator.h"
-#include "IORequest.h"
-#include "io_resources.h"
-#include "IOSchedulerRoster.h"
+#include <AbstractModuleDevice.h>
+#include <devfs_private.h>
+#include <id_generator.h>
+#include <IORequest.h>
+#include <io_resources.h>
+#include <IOSchedulerRoster.h>
 
 
 //#define TRACE_DEVICE_MANAGER

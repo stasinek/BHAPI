@@ -5,15 +5,15 @@
  */
 
 
-#include "ValueLoader.h"
+#include <ValueLoader.h>
 
-#include "Architecture.h"
-#include "BitBuffer.h"
-#include "CpuState.h"
-#include "Register.h"
-#include "TeamMemory.h"
-#include "Tracing.h"
-#include "ValueLocation.h"
+#include <Architecture.h>
+#include <BitBuffer.h>
+#include <CpuState.h>
+#include <Register.h>
+#include <TeamMemory.h>
+#include <Tracing.h>
+#include <ValueLocation.h>
 
 
 ValueLoader::ValueLoader(Architecture* architecture, TeamMemory* teamMemory,

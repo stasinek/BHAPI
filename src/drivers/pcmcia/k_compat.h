@@ -19,15 +19,15 @@
 #ifndef _BE_K_COMPAT_H
 #define _BE_K_COMPAT_H
 
-#include <KernelExport.h>
-#include <ISA.h>
-#include <PCI.h>
-#include <Drivers.h>
-#include <ByteOrder.h>
+#include <kits/kernelExport.h>
+#include <kits/netISA.h>
+#include <kits/netPCI.h>
+#include <kits/netDrivers.h>
+#include <kits/netByteOrder.h>
 #include <Haiku.h>
-#include <config_manager.h>
-#include <stdio.h>
-#include <string.h>
+#include <kits/netconfig_manager.h>
+#include <kits/netstdio.h>
+#include <kits/netstring.h>
 
 #define u32 uint32 #define u16 uint16
 #define u8 uint8
@@ -210,7 +210,7 @@ typedef long long k_time_t;
 #define ENODATA ENOSPC
 #endif
 
-#include <pcmcia/cs_timer.h>
+#include <kits/netpcmcia/cs_timer.h>
 #define add_timer my_add_timer
 #define del_timer my_del_timer
 

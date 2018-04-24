@@ -93,8 +93,8 @@
 */
 
 
-#include <KernelExport.h>
-#include <device_manager.h>
+#include <kits/kernelExport.h>
+#include <kits/netdevice_manager.h>
 
 
 #define SCSI_MAX_CDB_SIZE 16	// max size of cdb

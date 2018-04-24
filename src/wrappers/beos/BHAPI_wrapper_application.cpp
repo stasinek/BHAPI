@@ -37,13 +37,13 @@
 #include <be/app/Cursor.h>
 #include <be/interface/Screen.h>
 
-#include "BHAPI_wrapper_beos-graphics.h"
+#include <BHAPI_wrapper_beos-graphics.h>
 
-#include "../../support/Autolock.h"
-#include "../../support/StringClass.h"
-#include "../../kernel/Kernel.h"
-#include "../../app/Application.h"
-#include "../../app/Clipboard.h"
+#include <kits/support/Autolock.h>
+#include <kits/support/StringClass.h>
+#include <os/kernel.h>
+#include <kits/app/Application.h>
+#include <kits/app/Clipboard.h>
 
 
 static void b_beos_clipboard_changed()

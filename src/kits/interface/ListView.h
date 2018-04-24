@@ -44,9 +44,9 @@ typedef enum list_view_type {
 
 #ifdef __cplusplus /* Just for C++ */
 class BListItem;
-#include "../support/List.h"
-#include "../interface/View.h"
-#include "../app/Invoker.h"
+#include <kits/support/List.h>
+#include <kits/interface/View.h>
+#include <kits/app/Invoker.h>
 #include <Haiku.h>
 class BHAPI_IMPEXP BListView : public BView, public BInvoker {
 public:

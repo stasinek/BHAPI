@@ -32,7 +32,7 @@
 #ifndef BHAPI_BUFFER_IO_H
 #define BHAPI_BUFFER_IO_H
 
-#include "DataIO.h"
+#include <DataIO.h>
 
 class BBufferIO : public BPositionIO {
 public:

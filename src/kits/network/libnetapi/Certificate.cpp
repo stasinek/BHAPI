@@ -8,7 +8,7 @@
 
 #include <StringClass.h>
 
-#include "CertificatePrivate.h"
+#include <CertificatePrivate.h>
 
 
 #ifdef OPENSSL_ENABLED

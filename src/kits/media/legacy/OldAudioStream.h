@@ -9,7 +9,7 @@
 #define _AUDIO_STREAM_H
 
 
-#include "OldBufferStream.h"
+#include <OldBufferStream.h>
 
 
 /* ================

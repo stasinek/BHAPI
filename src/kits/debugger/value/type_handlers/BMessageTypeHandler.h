@@ -6,7 +6,7 @@
 #define BMESSAGE_TYPE_HANDLER_H
 
 
-#include "TypeHandler.h"
+#include <TypeHandler.h>
 
 
 class BMessageTypeHandler : public TypeHandler {

@@ -38,7 +38,7 @@
 class BMessage;
 #endif
 //-----------------------------------------------------------------------------
-#include "../support/List.h"
+#include <kits/support/List.h>
 #include <Haiku.h>
 //-----------------------------------------------------------------------------
 class BHAPI_IMPEXP BMessageQueue {

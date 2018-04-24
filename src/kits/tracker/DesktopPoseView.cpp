@@ -38,19 +38,19 @@ All rights reserved.
 // Used by the Desktop window and by the root view in file panels
 
 
-#include "DesktopPoseView.h"
+#include <DesktopPoseView.h>
 
 #include <NodeMonitor.h>
 #include <Path.h>
 #include <Volume.h>
 #include <VolumeRoster.h>
 
-#include "Commands.h"
-#include "FSUtils.h"
-#include "PoseList.h"
-#include "Tracker.h"
-#include "TrackerSettings.h"
-#include "TrackerStringClass.h"
+#include <Commands.h>
+#include <FSUtils.h>
+#include <PoseList.h>
+#include <Tracker.h>
+#include <TrackerSettings.h>
+#include <TrackerStringClass.h>
 
 
 //	#pragma mark - DesktopPoseView

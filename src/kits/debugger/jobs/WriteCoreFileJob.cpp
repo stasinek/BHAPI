@@ -3,14 +3,14 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Jobs.h"
+#include <Jobs.h>
 
 #include <Path.h>
 
 #include <AutoLocker.h>
 
-#include "DebuggerInterface.h"
-#include "Team.h"
+#include <DebuggerInterface.h>
+#include <Team.h>
 
 
 

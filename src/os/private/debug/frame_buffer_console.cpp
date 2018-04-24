@@ -25,7 +25,7 @@
 #include <edid.h>
 #endif
 
-#include "font.h"
+#include <font.h>
 
 
 //#define TRACE_FB_CONSOLE

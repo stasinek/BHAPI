@@ -30,18 +30,18 @@
 #ifndef B_SUPPORT_KIT_H
 #define B_SUPPORT_KIT_H
 
-#include "support/ByteOrder.h"
-#include "support/ClassInfo.h"
-#include "support/Errors.h"
-#include "support/Archivable.h"
-#include "support/Autolock.h"
-#include "support/SimpleLocker.h"
-#include "support/Locker.h"
-#include "support/List.h"
-#include "support/StringClass.h"
-#include "support/StringArray.h"
-#include "support/DataIO.h"
-#include "support/StreamIO.h"
-#include "support/Flattenable.h"
+#include <kits/support/ByteOrder.h>
+#include <kits/support/ClassInfo.h>
+#include <kits/support/Errors.h>
+#include <kits/support/Archivable.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/SimpleLocker.h>
+#include <kits/support/Locker.h>
+#include <kits/support/List.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/StringArray.h>
+#include <kits/support/DataIO.h>
+#include <kits/support/StreamIO.h>
+#include <kits/support/Flattenable.h>
 
 #endif

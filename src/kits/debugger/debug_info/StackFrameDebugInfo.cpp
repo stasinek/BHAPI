@@ -4,10 +4,10 @@
  */
 
 
-#include "StackFrameDebugInfo.h"
+#include <StackFrameDebugInfo.h>
 
-#include "Architecture.h"
-#include "ValueLocation.h"
+#include <Architecture.h>
+#include <ValueLocation.h>
 
 
 StackFrameDebugInfo::StackFrameDebugInfo()

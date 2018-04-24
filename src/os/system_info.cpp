@@ -5,14 +5,14 @@
  */
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 
 #include <algorithm>
 
-#include <../include/syscalls.h>
-#include <../include/system_info.h>
+#include <syscalls.h>
+#include <system_info.h>
 
 
 #if _BEOS_R5_COMPATIBLE_

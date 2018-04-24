@@ -49,7 +49,7 @@ All rights reserved.
 #include <Handler.h>
 #include <ObjectList.h>
 
-#include "Model.h"
+#include <Model.h>
 
 
 namespace BPrivate {

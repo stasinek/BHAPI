@@ -50,7 +50,7 @@ All rights reserved.
 
 #include <MountServer.h>
 
-#include "SettingsViews.h"
+#include <SettingsViews.h>
 
 
 #undef B_TRANSLATION_CONTEXT

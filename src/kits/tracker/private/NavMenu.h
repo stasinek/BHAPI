@@ -43,7 +43,7 @@ All rights reserved.
 #include <StorageDefs.h>
 #include <Entry.h>
 
-#include "SlowMenu.h"
+#include <SlowMenu.h>
 
 
 template<class T> class BObjectList;

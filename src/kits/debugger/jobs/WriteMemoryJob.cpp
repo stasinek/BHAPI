@@ -3,10 +3,10 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Jobs.h"
+#include <Jobs.h>
 
-#include "Team.h"
-#include "TeamMemory.h"
+#include <Team.h>
+#include <TeamMemory.h>
 
 
 WriteMemoryJob::WriteMemoryJob(Team* team,

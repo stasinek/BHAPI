@@ -11,9 +11,9 @@
 #include <Referenceable.h>
 #include <util/DoublyLinkedList.h>
 
-#include "SourceLocation.h"
-#include "StringClass.h"
-#include "Types.h"
+#include <SourceLocation.h>
+#include <StringClass.h>
+#include <Types.h>
 
 
 class Breakpoint;

@@ -6,8 +6,8 @@
 #define INTEGER_VALUE_FORMATTER_H
 
 
-#include "util/IntegerFormatter.h"
-#include "ValueFormatter.h"
+#include <util/IntegerFormatter.h>
+#include <ValueFormatter.h>
 
 
 class Settings;

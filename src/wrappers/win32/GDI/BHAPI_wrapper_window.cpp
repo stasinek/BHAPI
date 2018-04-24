@@ -28,15 +28,15 @@
  * --------------------------------------------------------------------------*/
 #ifdef WIN32
 
-#include "BHAPI_wrapper_win32gdi.h"
+#include <BHAPI_wrapper_win32gdi.h>
 
-#include "../../kernel/Kernel.h"
-#include "../../kernel/Debug.h"
-#include "../../support/Autolock.h"
-#include "../../support/Errors.h"
-#include "../../app/Application.h"
-#include "../../support/StringClass.h"
-#include "../../support/ClassInfo.h"
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/Errors.h>
+#include <kits/app/Application.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/ClassInfo.h>
 
 
 bool bhapi::win32_window_convert_to_screen(HWND hWnd, int *x, int *y)

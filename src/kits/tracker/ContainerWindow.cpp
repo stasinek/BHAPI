@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "ContainerWindow.h"
+#include <ContainerWindow.h>
 
 #include <Alert.h>
 #include <Application.h>
@@ -67,32 +67,32 @@ All rights reserved.
 #include <algorithm>
 #include <memory>
 
-#include "Attributes.h"
-#include "AttributeStream.h"
-#include "AutoLock.h"
-#include "BackgroundImage.h"
-#include "Commands.h"
-#include "CountView.h"
-#include "DeskWindow.h"
-#include "FavoritesMenu.h"
-#include "FindPanel.h"
-#include "FSClipboard.h"
-#include "FSUndoRedo.h"
-#include "FSUtils.h"
-#include "IconMenuItem.h"
-#include "OpenWithWindow.h"
-#include "MimeTypes.h"
-#include "MountMenu.h"
-#include "Navigator.h"
-#include "NavMenu.h"
-#include "PoseView.h"
-#include "QueryContainerWindow.h"
-#include "SelectionWindow.h"
-#include "TitleView.h"
-#include "Tracker.h"
-#include "TrackerSettings.h"
-#include "Thread.h"
-#include "TemplatesMenu.h"
+#include <Attributes.h>
+#include <AttributeStream.h>
+#include <AutoLock.h>
+#include <BackgroundImage.h>
+#include <Commands.h>
+#include <CountView.h>
+#include <DeskWindow.h>
+#include <FavoritesMenu.h>
+#include <FindPanel.h>
+#include <FSClipboard.h>
+#include <FSUndoRedo.h>
+#include <FSUtils.h>
+#include <IconMenuItem.h>
+#include <OpenWithWindow.h>
+#include <MimeTypes.h>
+#include <MountMenu.h>
+#include <Navigator.h>
+#include <NavMenu.h>
+#include <PoseView.h>
+#include <QueryContainerWindow.h>
+#include <SelectionWindow.h>
+#include <TitleView.h>
+#include <Tracker.h>
+#include <TrackerSettings.h>
+#include <Thread.h>
+#include <TemplatesMenu.h>
 
 
 #undef B_TRANSLATION_CONTEXT

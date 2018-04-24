@@ -30,8 +30,8 @@
 
 #include <be/kernel/image.h>
 
-#include "../kernel/Kernel.h"
-#include "../storage/Path.h"
+#include <os/kernel.h>
+#include <kits/storage/Path.h>
 
 
 BHAPI_IMPEXP void*

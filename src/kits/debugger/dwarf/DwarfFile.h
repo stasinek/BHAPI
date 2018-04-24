@@ -12,8 +12,8 @@
 #include <util/DoublyLinkedList.h>
 #include <util/OpenHashTable.h>
 
-#include "DebugInfoEntries.h"
-#include "TypeUnit.h"
+#include <DebugInfoEntries.h>
+#include <TypeUnit.h>
 
 
 class AbbreviationEntry;

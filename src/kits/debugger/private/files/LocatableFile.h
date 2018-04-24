@@ -7,7 +7,7 @@
 
 #include <ObjectList.h>
 
-#include "LocatableEntry.h"
+#include <LocatableEntry.h>
 
 
 class LocatableFile : public LocatableEntry {

@@ -8,7 +8,7 @@
 
 #include <EntryList.h>
 #include <Messenger.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 class BVolume;
 struct entry_ref;

@@ -11,13 +11,13 @@
 #ifndef _RADEON_INTERFACE_H
 #define _RADEON_INTERFACE_H
 
-#include <Accelerant.h>
-#include <Drivers.h>
-#include <PCI.h>
-#include <kernel/OS.h>
-#include "video_overlay.h"
-#include "benaphore.h"
-#include "ddc.h"
+#include <kits/netAccelerant.h>
+#include <kits/netDrivers.h>
+#include <kits/netPCI.h>
+#include <kits/kernel/OS.h>
+#include <kits/netvideo_overlay.h>
+#include <kits/netbenaphore.h>
+#include <kits/netddc.h>
 
 // magic code for ioctls
 // changed from TKRA to TKR1 for RADEON_WAITFORFIFO ioctl

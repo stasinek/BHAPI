@@ -5,7 +5,7 @@
  */
 
 
-#include "ThreadHandler.h"
+#include <ThreadHandler.h>
 
 #include <stdio.h>
 
@@ -15,30 +15,30 @@
 #include <AutoLocker.h>
 #include <Variant.h>
 
-#include "Architecture.h"
-#include "BreakpointManager.h"
-#include "CpuState.h"
-#include "DebugEvent.h"
-#include "DebuggerInterface.h"
-#include "ExpressionInfo.h"
-#include "FunctionInstance.h"
-#include "ImageDebugInfo.h"
-#include "InstructionInfo.h"
-#include "Jobs.h"
-#include "MessageCodes.h"
-#include "Register.h"
-#include "SignalDispositionTypes.h"
-#include "SourceCode.h"
-#include "SourceLanguage.h"
-#include "SpecificImageDebugInfo.h"
-#include "StackTrace.h"
-#include "Statement.h"
-#include "SyntheticPrimitiveType.h"
-#include "Team.h"
-#include "Tracing.h"
-#include "Value.h"
-#include "ValueLocation.h"
-#include "Worker.h"
+#include <Architecture.h>
+#include <BreakpointManager.h>
+#include <CpuState.h>
+#include <DebugEvent.h>
+#include <DebuggerInterface.h>
+#include <ExpressionInfo.h>
+#include <FunctionInstance.h>
+#include <ImageDebugInfo.h>
+#include <InstructionInfo.h>
+#include <Jobs.h>
+#include <MessageCodes.h>
+#include <Register.h>
+#include <SignalDispositionTypes.h>
+#include <SourceCode.h>
+#include <SourceLanguage.h>
+#include <SpecificImageDebugInfo.h>
+#include <StackTrace.h>
+#include <Statement.h>
+#include <SyntheticPrimitiveType.h>
+#include <Team.h>
+#include <Tracing.h>
+#include <Value.h>
+#include <ValueLocation.h>
+#include <Worker.h>
 
 
 // step modes

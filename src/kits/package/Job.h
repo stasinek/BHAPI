@@ -6,7 +6,7 @@
 #define _PACKAGE__JOB_H_
 
 
-#include <support/Job.h>
+#include <kits/support/Job.h>
 
 
 namespace BPackageKit {

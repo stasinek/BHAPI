@@ -8,7 +8,7 @@
  */
 
 
-#include "paging/32bit/X86PagingStructures32Bit.h"
+#include <paging/32bit/X86PagingStructures32Bit.h>
 
 #include <stdlib.h>
 

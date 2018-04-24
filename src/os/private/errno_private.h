@@ -11,7 +11,7 @@
 //#define TRACE_ERRNO
 
 #if defined(TRACE_ERRNO) && !defined(_KERNEL_MODE)
-#	include <kernel/OS.h>
+#	include <kits/kernel/OS.h>
 #	define __set_errno(x) 													  \
 		do { 																  \
 			int error = (x);												  \

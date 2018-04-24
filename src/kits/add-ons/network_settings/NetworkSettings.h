@@ -9,13 +9,13 @@
 #define SETTINGS_H
 
 
-#include <vector>
+#include <kits/netvector>
 
-#include <Message.h>
-#include <Messenger.h>
-#include <NetworkAddress.h>
-#include <Path.h>
-#include <StringList.h>
+#include <kits/netMessage.h>
+#include <kits/app/Messenger.h>
+#include <kits/netNetworkAddress.h>
+#include <kits/netPath.h>
+#include <kits/netStringList.h>
 
 
 namespace BNetworkKit {

@@ -40,14 +40,14 @@
 
 #include <string.h>
 
-#include "DataExchange.h"
-#include "debug.h"
-#include "MediaMisc.h"
-#include "MediaRosterEx.h"
-#include "Notifications.h"
-#include "ServerInterface.h"
-#include "TimeSourceObject.h"
-#include "TimeSourceObjectManager.h"
+#include <DataExchange.h>
+#include <debug.h>
+#include <MediaMisc.h>
+#include <MediaRosterEx.h>
+#include <Notifications.h>
+#include <ServerInterface.h>
+#include <TimeSourceObject.h>
+#include <TimeSourceObjectManager.h>
 
 using std::nothrow;
 using std::nothrow_t;

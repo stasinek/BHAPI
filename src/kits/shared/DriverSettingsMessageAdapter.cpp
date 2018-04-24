@@ -8,11 +8,11 @@
  */
 
 
-#include "DriverSettingsMessageAdapter.h"
+#include <DriverSettingsMessageAdapter.h>
 
 
 
-#include <../include/strings.h>
+#include <strings.h>
 
 #include <File.h>
 #include <StringClass.h>

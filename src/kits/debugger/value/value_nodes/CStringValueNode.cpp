@@ -4,17 +4,17 @@
  */
 
 
-#include "CStringValueNode.h"
+#include <CStringValueNode.h>
 
 #include <new>
 
-#include "Architecture.h"
-#include "StringValue.h"
-#include "Tracing.h"
-#include "Type.h"
-#include "ValueLoader.h"
-#include "ValueLocation.h"
-#include "ValueNodeContainer.h"
+#include <Architecture.h>
+#include <StringValue.h>
+#include <Tracing.h>
+#include <Type.h>
+#include <ValueLoader.h>
+#include <ValueLocation.h>
+#include <ValueNodeContainer.h>
 
 
 // #pragma mark - CStringValueNode

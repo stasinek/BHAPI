@@ -5,13 +5,13 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "CpuStateX8664.h"
+#include <CpuStateX8664.h>
 
 #include <new>
 
 #include <string.h>
 
-#include "Register.h"
+#include <Register.h>
 
 
 CpuStateX8664::CpuStateX8664()

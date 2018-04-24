@@ -12,9 +12,9 @@
 #include <ObjectList.h>
 #include <Referenceable.h>
 
-#include "AddressSectionTypes.h"
-#include "ImageInfo.h"
-#include "Types.h"
+#include <AddressSectionTypes.h>
+#include <ImageInfo.h>
+#include <Types.h>
 
 
 class Architecture;

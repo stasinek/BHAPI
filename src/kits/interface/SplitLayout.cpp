@@ -5,7 +5,7 @@
  */
 
 
-#include "SplitLayout.h"
+#include <SplitLayout.h>
 
 #include <new>
 
@@ -16,8 +16,8 @@
 #include <Message.h>
 #include <View.h>
 
-#include "OneElementLayouter.h"
-#include "SimpleLayouter.h"
+#include <OneElementLayouter.h>
+#include <SimpleLayouter.h>
 
 
 using std::nothrow;

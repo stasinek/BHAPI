@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "AbbreviationTable.h"
+#include <AbbreviationTable.h>
 
 #include <stdio.h>
 

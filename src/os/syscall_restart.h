@@ -6,7 +6,7 @@
 #define _KERNEL_SYSCALL_RESTART_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <thread.h>
 

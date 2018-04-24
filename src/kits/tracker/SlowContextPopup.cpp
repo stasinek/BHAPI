@@ -47,19 +47,19 @@ All rights reserved.
 #include <VolumeRoster.h>
 #include <Volume.h>
 
-#include "Attributes.h"
-#include "Commands.h"
-#include "ContainerWindow.h"
-#include "DesktopPoseView.h"
-#include "FSUtils.h"
-#include "FunctionObject.h"
-#include "IconMenuItem.h"
-#include "PoseView.h"
-#include "QueryPoseView.h"
-#include "SlowContextPopup.h"
-#include "Thread.h"
-#include "Tracker.h"
-#include "VirtualDirectoryEntryList.h"
+#include <Attributes.h>
+#include <Commands.h>
+#include <ContainerWindow.h>
+#include <DesktopPoseView.h>
+#include <FSUtils.h>
+#include <FunctionObject.h>
+#include <IconMenuItem.h>
+#include <PoseView.h>
+#include <QueryPoseView.h>
+#include <SlowContextPopup.h>
+#include <Thread.h>
+#include <Tracker.h>
+#include <VirtualDirectoryEntryList.h>
 
 
 #undef B_TRANSLATION_CONTEXT

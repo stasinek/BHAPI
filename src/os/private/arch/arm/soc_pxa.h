@@ -3,7 +3,7 @@
 
 class PXAInterruptController;
 
-#include "soc.h"
+#include <soc.h>
 
 #include <new>
 

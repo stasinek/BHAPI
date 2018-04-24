@@ -32,8 +32,8 @@ names are registered trademarks or trademarks of their respective holders.
 All rights reserved.
 */
 
-#include "Bitmaps.h"
-#include "Utilities.h"
+#include <Bitmaps.h>
+#include <Utilities.h>
 
 #include <Autolock.h>
 #include <Bitmap.h>

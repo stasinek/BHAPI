@@ -22,7 +22,7 @@ static const char rcsid[] = "$Header: /proj/cvs/prod/libbind/dst/hmac_link.c,v 1
 /*%
  * This file contains an implementation of the HMAC-MD5 algorithm.
  */
-#include "port_before.h"
+#include <port_before.h>
 
 #include <stdio.h>
 #include <unistd.h>
@@ -35,11 +35,11 @@ static const char rcsid[] = "$Header: /proj/cvs/prod/libbind/dst/hmac_link.c,v 1
 #include <arpa/nameser.h>
 #include <resolv.h>
 
-#include "dst_internal.h"
+#include <dst_internal.h>
 
 #ifdef USE_MD5
 # ifndef HAVE_MD5
-#  include "md5.h"
+#  include <md5.h>
 # else
 #  ifdef SOLARIS2
 #   include <sys/md5.h>
@@ -50,7 +50,7 @@ static const char rcsid[] = "$Header: /proj/cvs/prod/libbind/dst/hmac_link.c,v 1
 # endif
 #endif
 
-#include "port_after.h"
+#include <port_after.h>
 
 
 #define HMAC_LEN	64

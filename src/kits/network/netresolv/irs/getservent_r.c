@@ -48,7 +48,7 @@ __RCSID("$NetBSD: getservent_r.c,v 1.11 2011/10/15 23:00:02 christos Exp $");
 #include <FindDirectory.h>
 
 #include <libutil.h>
-#include "servent.h"
+#include <servent.h>
 
 #ifdef __weak_alias
 __weak_alias(endservent_r,_endservent_r)

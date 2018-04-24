@@ -5,7 +5,7 @@
 #ifndef THREAD_INFO_H
 #define THREAD_INFO_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <StringClass.h>
 
 

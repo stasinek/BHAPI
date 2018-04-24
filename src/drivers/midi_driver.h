@@ -6,8 +6,8 @@
 #define _MIDI_DRIVER_H
 
 
-#include <Drivers.h>
-#include <module.h>
+#include <kits/netDrivers.h>
+#include <kits/netmodule.h>
 
 
 /* deprecated interface */

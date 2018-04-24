@@ -30,7 +30,7 @@
 #include <package/manager/RepositoryBuilder.h>
 #include <package/ValidateChecksumJob.h>
 
-#include "PackageManagerUtils.h"
+#include <PackageManagerUtils.h>
 
 
 using BPackageKit::BPrivate::FetchFileJob;

@@ -10,11 +10,11 @@
 //! Access class for BRoster members
 
 
-#include <RosterPrivate.h>
+#include <kits/netRosterPrivate.h>
 
-#include <Roster.h>
+#include <kits/netRoster.h>
 
-#include <locks.h>
+#include <kits/netlocks.h>
 
 
 /*!	\class BRoster::Private

@@ -6,7 +6,7 @@
 #define DWARF_LOADING_STATE_HANDLER
 
 
-#include "ImageDebugLoadingStateHandler.h"
+#include <ImageDebugLoadingStateHandler.h>
 
 
 namespace BPackageKit {

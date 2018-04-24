@@ -4,17 +4,17 @@
  */
 
 
-#include "PrimitiveValueNode.h"
+#include <PrimitiveValueNode.h>
 
 #include <new>
 
-#include "BoolValue.h"
-#include "FloatValue.h"
-#include "IntegerValue.h"
-#include "Tracing.h"
-#include "Type.h"
-#include "ValueLoader.h"
-#include "ValueLocation.h"
+#include <BoolValue.h>
+#include <FloatValue.h>
+#include <IntegerValue.h>
+#include <Tracing.h>
+#include <Type.h>
+#include <ValueLoader.h>
+#include <ValueLocation.h>
 
 
 PrimitiveValueNode::PrimitiveValueNode(ValueNodeChild* nodeChild,

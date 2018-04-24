@@ -10,7 +10,7 @@
 #define VIRTUAL_DIRECTORY_WINDOW_H
 
 
-#include "ContainerWindow.h"
+#include <ContainerWindow.h>
 
 
 namespace BPrivate {

@@ -23,8 +23,8 @@
 static const char rcsid[] = "$Id: eventlib.c,v 1.10 2006/03/09 23:57:56 marka Exp $";
 #endif
 
-#include "port_before.h"
-#include "fd_setsize.h"
+#include <port_before.h>
+#include <fd_setsize.h>
 
 #include <sys/types.h>
 #include <sys/time.h>
@@ -41,9 +41,9 @@ static const char rcsid[] = "$Id: eventlib.c,v 1.10 2006/03/09 23:57:56 marka Ex
 
 #include <isc/eventlib.h>
 #include <isc/assertions.h>
-#include "eventlib_p.h"
+#include <eventlib_p.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 int      __evOptMonoTime;
 

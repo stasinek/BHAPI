@@ -35,8 +35,8 @@ All rights reserved.
 
 #include <FilePanel.h>
 
-#include "FilePanelPriv.h"
-#include "RecentItems.h"
+#include <FilePanelPriv.h>
+#include <RecentItems.h>
 
 
 // FBC fluff, stick it here to not pollute real .cpp files

@@ -8,7 +8,7 @@
 #include <sys/sem.h>
 #include <sys/cdefs.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <kernel.h>
 #include <musl/xsi_semaphore_defs.h>

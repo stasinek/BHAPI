@@ -28,13 +28,13 @@
  * --------------------------------------------------------------------------*/
 #ifdef BHAPI_OS_WIN32
 
-#include "../../../kernel/Kernel.h"
-#include "../../../kernel/Debug.h"
-#include "../../../support/List.h"
-#include "../../../support/StringClass.h"
-#include "../../../support/Errors.h"
-#include "../../../support/SimpleLocker.h"
-#include "../../../support/SupportDefs.h"
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/support/List.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/Errors.h>
+#include <kits/support/SimpleLocker.h>
+#include <kits/support/SupportDefs.h>
 
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0500

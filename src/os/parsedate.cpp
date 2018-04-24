@@ -10,9 +10,9 @@
 
 
 
-#include <../include/strings.h>
+#include <strings.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 #define TRACE_PARSEDATE 0

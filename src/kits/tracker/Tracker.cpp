@@ -32,7 +32,7 @@ names are registered trademarks or trademarks of their respective holders.
 All rights reserved.
 */
 
-#include "Tracker.h"
+#include <Tracker.h>
 
 #include <errno.h>
 #include <fs_attr.h>
@@ -59,32 +59,32 @@ All rights reserved.
 #include <Volume.h>
 #include <VolumeRoster.h>
 
-#include "Attributes.h"
-#include "AutoLock.h"
-#include "BackgroundImage.h"
-#include "Bitmaps.h"
-#include "Commands.h"
-#include "ContainerWindow.h"
-#include "DeskWindow.h"
-#include "FindPanel.h"
-#include "FunctionObject.h"
-#include "FSClipboard.h"
-#include "FSUtils.h"
-#include "InfoWindow.h"
-#include "MimeTypes.h"
-#include "MimeTypeList.h"
-#include "NodePreloader.h"
-#include "OpenWithWindow.h"
-#include "PoseView.h"
-#include "QueryContainerWindow.h"
-#include "StatusWindow.h"
-#include "TaskLoop.h"
-#include "Thread.h"
-#include "TrackerSettings.h"
-#include "TrackerSettingsWindow.h"
-#include "TrackerStringClass.h"
-#include "TrashWatcher.h"
-#include "VirtualDirectoryWindow.h"
+#include <Attributes.h>
+#include <AutoLock.h>
+#include <BackgroundImage.h>
+#include <Bitmaps.h>
+#include <Commands.h>
+#include <ContainerWindow.h>
+#include <DeskWindow.h>
+#include <FindPanel.h>
+#include <FunctionObject.h>
+#include <FSClipboard.h>
+#include <FSUtils.h>
+#include <InfoWindow.h>
+#include <MimeTypes.h>
+#include <MimeTypeList.h>
+#include <NodePreloader.h>
+#include <OpenWithWindow.h>
+#include <PoseView.h>
+#include <QueryContainerWindow.h>
+#include <StatusWindow.h>
+#include <TaskLoop.h>
+#include <Thread.h>
+#include <TrackerSettings.h>
+#include <TrackerSettingsWindow.h>
+#include <TrackerStringClass.h>
+#include <TrashWatcher.h>
+#include <VirtualDirectoryWindow.h>
 
 
 #undef B_TRANSLATION_CONTEXT

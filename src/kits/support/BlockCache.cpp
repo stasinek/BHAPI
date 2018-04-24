@@ -47,8 +47,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "BlockCache.h"
-#include "../kernel/Debug.h"
+#include <BlockCache.h>
+#include <os/debug.h>
 
 
 #include <new>

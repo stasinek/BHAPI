@@ -30,7 +30,7 @@
 #ifndef BHAPI_BOX_H
 #define BHAPI_BOX_H
 
-#include "../interface/View.h"
+#include <kits/interface/View.h>
 
 #ifdef __cplusplus /* Just for C++ */
 class BHAPI_IMPEXP BBox : public BView {

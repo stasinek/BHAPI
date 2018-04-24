@@ -6,8 +6,8 @@
 #define __IDE_TYPES_H__
 
 
-#include <iovec.h>
-#include <lendian_bitfield.h>
+#include <kits/netiovec.h>
+#include <kits/netlendian_bitfield.h>
 
 
 // IDE task file.

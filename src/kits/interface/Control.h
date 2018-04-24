@@ -44,8 +44,8 @@ enum {
 #ifdef __cplusplus /* Just for C++ */
 class BRect;
 class BMessage;
-#include "../interface/View.h"
-#include "../app/Invoker.h"
+#include <kits/interface/View.h>
+#include <kits/app/Invoker.h>
 #include <Haiku.h>
 class BHAPI_IMPEXP BControl : public BView, public BInvoker {
 public:

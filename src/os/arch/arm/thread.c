@@ -11,7 +11,7 @@
 #include <OS.h>
 
 #include <arch_atomic.h>
-#include "syscalls.h"
+#include <syscalls.h>
 
 
 thread_id

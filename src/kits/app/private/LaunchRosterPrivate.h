@@ -6,7 +6,7 @@
 #define _LAUNCH_ROSTER_PRIVATE_H
 
 
-#include <LaunchRoster.h>
+#include <kits/netLaunchRoster.h>
 
 
 class BLaunchRoster::Private {

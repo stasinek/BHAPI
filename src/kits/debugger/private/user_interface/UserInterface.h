@@ -7,12 +7,12 @@
 #define USER_INTERFACE_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <Referenceable.h>
 
-#include "TeamMemoryBlock.h"
-#include "Types.h"
+#include <TeamMemoryBlock.h>
+#include <Types.h>
 
 
 class entry_ref;

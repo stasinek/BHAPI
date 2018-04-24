@@ -44,8 +44,8 @@ typedef enum {
 
 #ifdef __cplusplus /* Just for C++ */
 class BTabView;
-#include "../interface/View.h"
-#include "../support/List.h"
+#include <kits/interface/View.h>
+#include <kits/support/List.h>
 class BHAPI_IMPEXP BTab : public BArchivable {
 public:
     BTab(BView *targetView = NULL);

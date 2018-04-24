@@ -28,9 +28,9 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "./../kernel/Kernel.h"
+#include <./../kernel/Kernel.h>
 
-#include "Locker.h"
+#include <Locker.h>
 
 
 BLocker::BLocker()

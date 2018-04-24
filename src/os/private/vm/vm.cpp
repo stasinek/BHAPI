@@ -53,10 +53,10 @@
 #include <vm/VMArea.h>
 #include <vm/VMCache.h>
 
-#include "VMAddressSpaceLocking.h"
-#include "VMAnonymousCache.h"
-#include "VMAnonymousNoSwapCache.h"
-#include "IORequest.h"
+#include <VMAddressSpaceLocking.h>
+#include <VMAnonymousCache.h>
+#include <VMAnonymousNoSwapCache.h>
+#include <IORequest.h>
 
 
 //#define TRACE_VM

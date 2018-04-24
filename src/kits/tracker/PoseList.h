@@ -40,7 +40,7 @@ All rights reserved.
 
 #include <ObjectList.h>
 
-#include "Pose.h"
+#include <Pose.h>
 
 
 struct node_ref;

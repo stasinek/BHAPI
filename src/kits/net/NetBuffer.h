@@ -30,7 +30,7 @@
 #ifndef BHAPI_NET_BUFFER_H
 #define BHAPI_NET_BUFFER_H
 #include <Haiku.h>
-#include "../support/Archivable.h"
+#include <kits/support/Archivable.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

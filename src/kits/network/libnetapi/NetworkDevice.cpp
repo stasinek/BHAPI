@@ -10,7 +10,7 @@
 #include <net/if.h>
 #include <net/if_media.h>
 
-#include <../include/sys/sockio.h>
+#include <sys/sockio.h>
 
 #include <Messenger.h>
 

@@ -9,8 +9,8 @@
 #include <string.h>
 
 #ifdef FS_SHELL
-#	include "vfs.h"
-#	include "fssh_api_wrapper.h"
+#	include <vfs.h>
+#	include <fssh_api_wrapper.h>
 
 using namespace FSShell;
 #else
@@ -29,7 +29,7 @@ using namespace FSShell;
 #	include <vm/vm_page.h>
 #	include <vm/VMCache.h>
 
-#	include "kernel_debug_config.h"
+#	include <kernel_debug_config.h>
 #endif
 
 

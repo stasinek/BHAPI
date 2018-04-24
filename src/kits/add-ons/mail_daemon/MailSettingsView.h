@@ -6,8 +6,8 @@
 #define _MAIL_SETTINGS_VIEW_H
 
 
-#include <MailSettings.h>
-#include <View.h>
+#include <kits/netMailSettings.h>
+#include <kits/netView.h>
 
 
 class BMailSettingsView : public BView {

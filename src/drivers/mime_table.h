@@ -11,7 +11,7 @@
 #ifndef _MIME_TABLE_MODULE_H_
 #define _MIME_TABLE_MODULE_H_
 
-#include <module.h>
+#include <kits/netmodule.h>
 
 struct ext_mime {
 	char *extension;

@@ -18,9 +18,9 @@
 */
 
 
-#include <bus/SCSI.h>
-#include <scsi_cmds.h>
-#include <Drivers.h>
+#include <kits/netbus/SCSI.h>
+#include <kits/netscsi_cmds.h>
+#include <kits/netDrivers.h>
 
 // cookie issued by module per device
 typedef struct scsi_periph_device_info *scsi_periph_device;

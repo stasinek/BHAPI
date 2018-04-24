@@ -17,7 +17,7 @@
 #include <List.h>
 #include <Message.h>
 
-#include "ViewLayoutItem.h"
+#include <ViewLayoutItem.h>
 
 
 using std::nothrow;

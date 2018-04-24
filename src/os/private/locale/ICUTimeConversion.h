@@ -10,8 +10,8 @@
 
 #include <StorageDefs.h>
 
-#include "ICUTimeData.h"
-#include "LocaleBackend.h"
+#include <ICUTimeData.h>
+#include <LocaleBackend.h>
 
 
 namespace BPrivate {

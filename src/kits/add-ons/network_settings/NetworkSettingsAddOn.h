@@ -7,11 +7,11 @@
 #define _NETWORK_SETTINGS_ADD_ON_H
 
 
-#include <image.h>
-#include <ListItem.h>
-#include <Resources.h>
-#include <StringClass.h>
-#include <View.h>
+#include <kits/netimage.h>
+#include <kits/netListItem.h>
+#include <kits/netResources.h>
+#include <kits/netStringClass.h>
+#include <kits/netView.h>
 
 
 class BNetworkAddress;

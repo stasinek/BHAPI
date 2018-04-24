@@ -23,8 +23,8 @@
 static const char rcsid[] = "$Id: ev_files.c,v 1.8 2005/07/28 06:51:48 marka Exp $";
 #endif
 
-#include "port_before.h"
-#include "fd_setsize.h"
+#include <port_before.h>
+#include <fd_setsize.h>
 
 #include <sys/types.h>
 #include <sys/time.h>
@@ -35,9 +35,9 @@ static const char rcsid[] = "$Id: ev_files.c,v 1.8 2005/07/28 06:51:48 marka Exp
 #include <unistd.h>
 
 #include <isc/eventlib.h>
-#include "eventlib_p.h"
+#include <eventlib_p.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 static evFile *FindFD(const evContext_p *ctx, int fd, int eventmask);
 

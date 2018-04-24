@@ -13,7 +13,7 @@
 #include <Haiku.h>
 
 #if DEBUG
-#	include <kernel/OS.h>
+#	include <kits/kernel/OS.h>
 #endif
 
 

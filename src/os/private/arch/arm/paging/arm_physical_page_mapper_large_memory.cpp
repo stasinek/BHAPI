@@ -24,7 +24,7 @@
 */
 
 
-#include "paging/arm_physical_page_mapper_large_memory.h"
+#include <paging/arm_physical_page_mapper_large_memory.h>
 
 #include <new>
 
@@ -38,9 +38,9 @@
 #include <vm/vm_types.h>
 #include <vm/VMAddressSpace.h>
 
-#include "paging/arm_physical_page_mapper.h"
-#include "paging/ARMPagingStructures.h"
-#include "paging/ARMVMTranslationMap.h"
+#include <paging/arm_physical_page_mapper.h>
+#include <paging/ARMPagingStructures.h>
+#include <paging/ARMVMTranslationMap.h>
 
 
 // The number of slots we reserve per translation map from mapping page tables.

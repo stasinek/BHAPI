@@ -5,16 +5,16 @@
  */
 
 
-#include "ValueWriter.h"
+#include <ValueWriter.h>
 
-#include "Architecture.h"
-#include "BitBuffer.h"
-#include "CpuState.h"
-#include "DebuggerInterface.h"
-#include "Register.h"
-#include "TeamMemory.h"
-#include "Tracing.h"
-#include "ValueLocation.h"
+#include <Architecture.h>
+#include <BitBuffer.h>
+#include <CpuState.h>
+#include <DebuggerInterface.h>
+#include <Register.h>
+#include <TeamMemory.h>
+#include <Tracing.h>
+#include <ValueLocation.h>
 
 
 ValueWriter::ValueWriter(Architecture* architecture,

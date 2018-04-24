@@ -9,14 +9,14 @@
 //!	Global library initialization/termination routines.
 
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <kits/netstdio.h>
+#include <kits/netstdlib.h>
 
-#include <AppMisc.h>
-#include <LooperList.h>
-#include <MessagePrivate.h>
-#include <RosterPrivate.h>
-#include <TokenSpace.h>
+#include <kits/netAppMisc.h>
+#include <kits/netLooperList.h>
+#include <kits/netMessagePrivate.h>
+#include <kits/netRosterPrivate.h>
+#include <kits/netTokenSpace.h>
 
 
 extern void __initialize_locale_kit();

@@ -11,7 +11,7 @@
 #include <disk_device_manager.h>
 #include <PartitioningInfo.h>
 
-#include <../include/syscalls.h>
+#include <syscalls.h>
 #include <ddm_userland_interface_defs.h>
 
 

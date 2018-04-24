@@ -30,7 +30,7 @@
  * Copyright 2001-2003 Dr. Zoidberg Enterprises. All rights reserved.
  */
 
-#include "../mail/mail_encoding.h"
+#include <kits/mail/mail_encoding.h>
 #include <Haiku.h>
 
 

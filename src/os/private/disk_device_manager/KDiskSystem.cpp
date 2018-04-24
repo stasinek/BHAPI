@@ -10,10 +10,10 @@
 #include <KernelExport.h>
 #include <util/kernel_cpp.h>
 
-#include "ddm_userland_interface.h"
-#include "KDiskDeviceManager.h"
-#include "KDiskDeviceUtils.h"
-#include "KDiskSystem.h"
+#include <ddm_userland_interface.h>
+#include <KDiskDeviceManager.h>
+#include <KDiskDeviceUtils.h>
+#include <KDiskSystem.h>
 
 
 // debugging

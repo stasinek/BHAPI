@@ -3,9 +3,9 @@
  * Copyright 2009, Ingo Weinhold, ingo_weinhold@gmx.de.
  * Distributed under the terms of the MIT License.
  */
-#include "BoolValueFormatter.h"
+#include <BoolValueFormatter.h>
 
-#include "BoolValue.h"
+#include <BoolValue.h>
 
 
 BoolValueFormatter::BoolValueFormatter()

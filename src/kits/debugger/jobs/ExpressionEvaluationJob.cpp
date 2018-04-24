@@ -3,23 +3,23 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Jobs.h"
+#include <Jobs.h>
 
 #include <StringClass.h>
 
 #include <AutoLocker.h>
 
-#include "DebuggerInterface.h"
-#include "ExpressionInfo.h"
-#include "model/Thread.h"
-#include "SourceLanguage.h"
-#include "StackFrame.h"
-#include "Team.h"
-#include "Type.h"
-#include "Value.h"
-#include "ValueNode.h"
-#include "ValueNodeManager.h"
-#include "Variable.h"
+#include <DebuggerInterface.h>
+#include <ExpressionInfo.h>
+#include <model/Thread.h>
+#include <SourceLanguage.h>
+#include <StackFrame.h>
+#include <Team.h>
+#include <Type.h>
+#include <Value.h>
+#include <ValueNode.h>
+#include <ValueNodeManager.h>
+#include <Variable.h>
 
 
 ExpressionEvaluationJob::ExpressionEvaluationJob(Team* team,

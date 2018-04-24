@@ -16,7 +16,7 @@
 #include <vm/vm.h>
 #include <vm/vm_types.h>
 
-#include "kernel_debug_config.h"
+#include <kernel_debug_config.h>
 
 
 struct kernel_args;

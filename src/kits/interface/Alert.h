@@ -31,8 +31,8 @@
 #ifndef BHAPI_ALERT_H
 #define BHAPI_ALERT_H
 
-#include "../interface/Window.h"
-#include "../interface/InterfaceDefs.h"
+#include <kits/interface/Window.h>
+#include <kits/interface/InterfaceDefs.h>
 #include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */

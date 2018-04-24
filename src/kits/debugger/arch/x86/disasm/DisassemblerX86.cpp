@@ -5,16 +5,16 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DisassemblerX86.h"
+#include <DisassemblerX86.h>
 
 #include <new>
 
-#include "udis86.h"
+#include <udis86.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
-#include "CpuStateX86.h"
-#include "InstructionInfo.h"
+#include <CpuStateX86.h>
+#include <InstructionInfo.h>
 
 
 static uint8 RegisterNumberFromUdisIndex(int32 udisIndex)

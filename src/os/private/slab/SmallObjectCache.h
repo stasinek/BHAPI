@@ -8,7 +8,7 @@
 #define SMALL_OBJECT_CACHE_H
 
 
-#include "ObjectCache.h"
+#include <ObjectCache.h>
 
 
 struct SmallObjectCache : ObjectCache {

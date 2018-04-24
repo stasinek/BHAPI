@@ -3,11 +3,11 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "TargetHost.h"
+#include <TargetHost.h>
 
 #include <AutoLocker.h>
 
-#include "TeamInfo.h"
+#include <TeamInfo.h>
 
 
 TargetHost::TargetHost(const BString& name)

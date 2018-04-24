@@ -1,8 +1,8 @@
 
-#include <../include/stdarg.h>
+#include <stdarg.h>
 
 
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
 
 // #prama mark - iterating, retrieving device/partition data

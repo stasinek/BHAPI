@@ -8,7 +8,7 @@
 
 #include <ObjectList.h>
 
-#include "SourceCode.h"
+#include <SourceCode.h>
 
 
 class BString;

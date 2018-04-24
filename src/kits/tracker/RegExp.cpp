@@ -68,7 +68,7 @@ All rights reserved.
 
 #include <Errors.h>
 
-#include "RegExp.h"
+#include <RegExp.h>
 
 
 // The first byte of the regexp internal "program" is actually this magic

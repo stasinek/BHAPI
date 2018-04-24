@@ -17,8 +17,8 @@
 
 #include <debug_heap.h>
 
-#include "debug_commands.h"
-#include "debug_variables.h"
+#include <debug_commands.h>
+#include <debug_variables.h>
 
 
 /*

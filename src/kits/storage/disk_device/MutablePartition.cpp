@@ -14,8 +14,8 @@
 
 #include <ddm_userland_interface_defs.h>
 
-#include "DiskDeviceUtils.h"
-#include "PartitionDelegate.h"
+#include <DiskDeviceUtils.h>
+#include <PartitionDelegate.h>
 
 
 using std::nothrow;

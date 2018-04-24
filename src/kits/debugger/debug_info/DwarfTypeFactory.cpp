@@ -5,7 +5,7 @@
  */
 
 
-#include "DwarfTypeFactory.h"
+#include <DwarfTypeFactory.h>
 
 #include <algorithm>
 #include <new>
@@ -13,23 +13,23 @@
 #include <AutoLocker.h>
 #include <Variant.h>
 
-#include "ArrayIndexPath.h"
-#include "Architecture.h"
-#include "CompilationUnit.h"
-#include "DebugInfoEntries.h"
-#include "Dwarf.h"
-#include "DwarfFile.h"
-#include "DwarfTargetInterface.h"
-#include "DwarfUtils.h"
-#include "DwarfTypes.h"
-#include "GlobalTypeLookup.h"
-#include "Register.h"
-#include "RegisterMap.h"
-#include "SourceLanguageInfo.h"
-#include "StringUtils.h"
-#include "Tracing.h"
-#include "TypeLookupConstraints.h"
-#include "ValueLocation.h"
+#include <ArrayIndexPath.h>
+#include <Architecture.h>
+#include <CompilationUnit.h>
+#include <DebugInfoEntries.h>
+#include <Dwarf.h>
+#include <DwarfFile.h>
+#include <DwarfTargetInterface.h>
+#include <DwarfUtils.h>
+#include <DwarfTypes.h>
+#include <GlobalTypeLookup.h>
+#include <Register.h>
+#include <RegisterMap.h>
+#include <SourceLanguageInfo.h>
+#include <StringUtils.h>
+#include <Tracing.h>
+#include <TypeLookupConstraints.h>
+#include <ValueLocation.h>
 
 
 namespace {

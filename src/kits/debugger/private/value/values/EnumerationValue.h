@@ -6,7 +6,7 @@
 #define ENUMERATION_VALUE_H
 
 
-#include "IntegerValue.h"
+#include <IntegerValue.h>
 
 
 class EnumerationType;

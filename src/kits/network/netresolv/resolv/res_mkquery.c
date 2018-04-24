@@ -71,7 +71,7 @@ static const char sccsid[] = "@(#)res_mkquery.c	8.1 (Berkeley) 6/4/93";
 static const char rcsid[] = "$Id: res_mkquery.c,v 1.10 2008/12/11 09:59:00 marka Exp $";
 #endif /* LIBC_SCCS and not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 #include <sys/types.h>
 #include <sys/param.h>
 #include <netinet/in.h>
@@ -81,7 +81,7 @@ static const char rcsid[] = "$Id: res_mkquery.c,v 1.10 2008/12/11 09:59:00 marka
 #include <resolv.h>
 #include <stdio.h>
 #include <string.h>
-#include "port_after.h"
+#include <port_after.h>
 
 /* Options.  Leave them on. */
 //#define DEBUG

@@ -3,7 +3,7 @@
 
 class OMAP3InterruptController;
 
-#include "soc.h"
+#include <soc.h>
 
 #include <new>
 

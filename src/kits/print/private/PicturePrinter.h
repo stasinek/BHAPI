@@ -30,7 +30,7 @@ THE SOFTWARE.
 #ifndef _PICTURE_PRINTER_H
 #define _PICTURE_PRINTER_H
 
-#include "PictureIterator.h"
+#include <PictureIterator.h>
 
 #include <Shape.h>
 

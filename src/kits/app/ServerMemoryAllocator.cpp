@@ -15,12 +15,12 @@
 */
 
 
-#include "ServerMemoryAllocator.h"
+#include <ServerMemoryAllocator.h>
 
 #include <new>
 
 #ifndef HAIKU_TARGET_PLATFORM_LIBBE_TEST
-#	include <../include/syscalls.h>
+#	include <syscalls.h>
 #endif
 
 

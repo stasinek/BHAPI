@@ -30,9 +30,9 @@
 #ifndef BHAPI_LAYOUT_H
 #define BHAPI_LAYOUT_H
 
-#include "../../support/List.h"
-#include "../../interface/InterfaceDefs.h"
-#include "../../interface/Region.h"
+#include <kits/support/List.h>
+#include <kits/interface/InterfaceDefs.h>
+#include <kits/interface/Region.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

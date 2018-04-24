@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_INTERFACE_DEFS_H
 #define BHAPI_INTERFACE_DEFS_H
-#include "../interface/GraphicsDefs.h"
+#include <kits/interface/GraphicsDefs.h>
 // some handy UTF-8 characters
 #define B_UTF8_BULLET		"\xE2\x80\xA2"
 #define B_UTF8_ELLIPSIS		"\xE2\x80\xA6"

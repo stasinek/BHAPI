@@ -6,12 +6,12 @@
  *		Ithamar R. Adema
  *		Michael Pfeiffer
  */
-#include "PrinterDriverAddOn.h"
+#include <PrinterDriverAddOn.h>
 
 #include <File.h>
 
-#include "BeUtils.h"
-#include "pr_server.h"
+#include <BeUtils.h>
+#include <pr_server.h>
 
 
 typedef BMessage* (*config_func_t)(BNode*, const BMessage*);

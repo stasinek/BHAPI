@@ -22,7 +22,7 @@
 #define R_386_TLS_DTPOFF32	36
 
 #ifdef _BOOT_MODE
-# include "../x86_64/arch_elf.h"
+# include <kits/x86_64/arch_elf.h>
 #endif
 
 #endif	/* _KERNEL_ARCH_x86_ELF_H */

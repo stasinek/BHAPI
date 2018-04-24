@@ -10,7 +10,7 @@
 
 #include <image.h>
 
-#include "Types.h"
+#include <Types.h>
 
 
 class BString;

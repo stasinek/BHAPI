@@ -27,11 +27,11 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "ThemeEngine.h"
-#include "../../interface/View.h"
-#include "../../interface/Rect.h"
-#include "../../interface/Region.h"
-#include "../../interface/Point.h"
+#include <kits/netThemeEngine.h>
+#include <kits/interface/View.h>
+#include <kits/interface/Rect.h>
+#include <kits/interface/Region.h>
+#include <kits/interface/Point.h>
 namespace bhapi {
 extern b_theme_engine b_default_theme_engine;
 BHAPI_EXPORT b_theme_engine* get_current_theme_engine(void)

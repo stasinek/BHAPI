@@ -9,7 +9,7 @@
 #include <Locker.h>
 #include <TextView.h>
 
-#include "TextViewSupportBuffer.h"
+#include <TextViewSupportBuffer.h>
 
 
 class BFont;

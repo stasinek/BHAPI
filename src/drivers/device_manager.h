@@ -7,8 +7,8 @@
 
 
 #include <HaikuConstants.h>
-#include <Drivers.h>
-#include <module.h>
+#include <kits/netDrivers.h>
+#include <kits/netmodule.h>
 
 
 /* type of I/O resource */

@@ -3,7 +3,7 @@
  * Copyright 2009, Ingo Weinhold, ingo_weinhold@gmx.de.
  * Distributed under the terms of the MIT License.
  */
-#include "FloatValueFormatter.h"
+#include <FloatValueFormatter.h>
 
 #include <new>
 
@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "FloatValue.h"
+#include <FloatValue.h>
 
 
 FloatValueFormatter::FloatValueFormatter()

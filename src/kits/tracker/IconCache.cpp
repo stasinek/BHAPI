@@ -69,11 +69,11 @@ All rights reserved.
 
 #include <fs_info.h>
 
-#include "Bitmaps.h"
-#include "FSUtils.h"
-#include "IconCache.h"
-#include "MimeTypes.h"
-#include "Model.h"
+#include <Bitmaps.h>
+#include <FSUtils.h>
+#include <IconCache.h>
+#include <MimeTypes.h>
+#include <Model.h>
 
 
 //#if DEBUG

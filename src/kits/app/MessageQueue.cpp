@@ -27,15 +27,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "MessageQueue.h"
-#include "Message.h"
+#include <kits/netMessageQueue.h>
+#include <kits/netMessage.h>
 
-#include "../kernel/Kernel.h"
-#include "../kernel/Debug.h"
-#include "../support/Locker.h"
-#include "../support/Errors.h"
-#include "../support/List.h"
-#include "../../private/app/PrivateHandler.h"
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/support/Locker.h>
+#include <kits/support/Errors.h>
+#include <kits/support/List.h>
+#include <kits/private/app/PrivateHandler.h>
 
 BMessageQueue::BMessageQueue()
 {

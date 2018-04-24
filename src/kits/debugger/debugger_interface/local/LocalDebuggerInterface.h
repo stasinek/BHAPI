@@ -6,7 +6,7 @@
 #ifndef LOCAL_DEBUGGER_INTERFACE_H
 #define LOCAL_DEBUGGER_INTERFACE_H
 
-#include "DebuggerInterface.h"
+#include <DebuggerInterface.h>
 
 
 class LocalDebuggerInterface : public DebuggerInterface {

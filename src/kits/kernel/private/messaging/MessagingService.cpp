@@ -15,7 +15,7 @@
 #include <messaging.h>
 #include <MessagingServiceDefs.h>
 
-#include "MessagingService.h"
+#include <MessagingService.h>
 
 //#define TRACE_MESSAGING_SERVICE
 #ifdef TRACE_MESSAGING_SERVICE

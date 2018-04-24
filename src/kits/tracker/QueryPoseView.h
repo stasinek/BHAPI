@@ -35,8 +35,8 @@ All rights reserved.
 #define _QUERY_POSE_VIEW_H
 
 
-#include "EntryIterator.h"
-#include "PoseView.h"
+#include <EntryIterator.h>
+#include <PoseView.h>
 
 
 class BQuery;

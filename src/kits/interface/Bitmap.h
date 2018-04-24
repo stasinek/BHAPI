@@ -32,7 +32,7 @@
 #ifndef BHAPI_BITMAP_H
 #define BHAPI_BITMAP_H
 
-#include "../interface/View.h"
+#include <kits/interface/View.h>
 
 #ifdef __cplusplus /* Just for C++ */
 class BView;

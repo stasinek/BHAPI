@@ -10,8 +10,8 @@
 #include <ObjectList.h>
 #include <Variant.h>
 
-#include "ValueLocation.h"
-#include "ValueNode.h"
+#include <ValueLocation.h>
+#include <ValueNode.h>
 
 
 class CompoundType;

@@ -15,7 +15,7 @@
 #include <mime/SnifferRules.h>
 
 
-#include <../include/sys/stat.h>
+#include <sys/stat.h>
 
 #include <Directory.h>
 #include <Entry.h>
@@ -28,7 +28,7 @@
 #include <sniffer/Parser.h>
 #include <sniffer/Rule.h>
 #include <StorageDefs.h>
-#include <../include/storage_support.h>
+#include <storage_support.h>
 #include <StringClass.h>
 
 

@@ -27,24 +27,24 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Handler.h"
-#include "Looper.h"
-#include "Messenger.h"
-#include "MessageFilter.h"
-#include "Message.h"
-#include "MessageQueue.h"
-#include "AppDefs.h"
+#include <kits/app/Handler.h>
+#include <kits/netLooper.h>
+#include <kits/app/Messenger.h>
+#include <kits/netMessageFilter.h>
+#include <kits/netMessage.h>
+#include <kits/netMessageQueue.h>
+#include <kits/netAppDefs.h>
 
-#include "../kernel/Kernel.h"
-#include "../kernel/Debug.h"
-#include "../support/Errors.h"
-#include "../support/StringClass.h"
-#include "../support/List.h"
-#include "../support/Locker.h"
-#include "../support/Autolock.h"
-#include "../support/List.h"
-#include "../../private/app/PrivateApplication.h"
-#include "../../private/app/PrivateHandler.h"
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/support/Errors.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/List.h>
+#include <kits/support/Locker.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/List.h>
+#include <kits/private/app/PrivateApplication.h>
+#include <kits/private/app/PrivateHandler.h>
 
 
 class BHAPI_LOCAL BObserverList {

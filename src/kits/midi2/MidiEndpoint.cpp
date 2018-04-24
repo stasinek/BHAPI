@@ -8,11 +8,11 @@
  *		Matthijs Hollemans
  */
 
-#include "debug.h"
+#include <debug.h>
 #include <MidiEndpoint.h>
 #include <MidiRoster.h>
-#include "MidiRosterLooper.h"
-#include "protocol.h"
+#include <MidiRosterLooper.h>
+#include <protocol.h>
 
 
 const char*  BMidiEndpoint::Name() const

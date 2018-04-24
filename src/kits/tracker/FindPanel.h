@@ -40,10 +40,10 @@ All rights reserved.
 #include <Window.h>
 #include <View.h>
 
-#include "DialogPane.h"
-#include "MimeTypeList.h"
-#include "Utilities.h"
-#include "NodeWalker.h"
+#include <DialogPane.h>
+#include <MimeTypeList.h>
+#include <Utilities.h>
+#include <NodeWalker.h>
 
 
 class BFilePanel;

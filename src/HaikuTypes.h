@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2009-2010, Haiku, Inc. All Rights Reserved.
  * Distributed under the terms of the MIT License.
  */
@@ -6,7 +6,7 @@
 #define BHAPI_HAIKU_TYPES_H
 
 #include <HaikuConfig.h>
-#include <../include/ctype.h>
+#include <ctype.h>
 
 /* fixed-width types -- the __haiku_std_[u]int* types correspond to the POSIX
    [u]int*_t types, the _haiku_[u]int* types to the BeOS [u]int* types. If
@@ -196,14 +196,18 @@ typedef __haiku_phys_addr_t  uid_t;
 typedef __haiku_phys_addr_t  uint;
 typedef unsigned short ushort;
 
+#ifndef __GNUC__
+#include <wrappers/win32/pthreads/pthread.h>
+#else
 #include <pthread.h>
+#endif
 
 #undef NO_OLDNAMES
 #ifndef _MSC_VER
-//#include <../include/sys/types.h>
+//#include <sys/types.h>
 #endif
 // POSIX
-#include <../include/sys/types.h>
+#include <posix/sys/types.h>
 
 typedef size_t __be_size_t;
 #ifndef __clang__

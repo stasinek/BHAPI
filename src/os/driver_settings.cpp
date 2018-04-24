@@ -31,7 +31,7 @@
 #include <directories.h>
 #include <driver_settings.h>
 #include <FindDirectory.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #ifdef _KERNEL_MODE
 #	include <KernelExport.h>
@@ -51,7 +51,7 @@
 
 
 
-#include <../include/strings.h>
+#include <strings.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <ctype.h>

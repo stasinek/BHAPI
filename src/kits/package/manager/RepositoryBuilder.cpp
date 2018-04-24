@@ -18,7 +18,7 @@
 
 #include <AutoDeleter.h>
 
-#include "PackageManagerUtils.h"
+#include <PackageManagerUtils.h>
 
 
 namespace BPackageKit {

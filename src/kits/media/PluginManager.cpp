@@ -7,10 +7,10 @@
 #include <image.h>
 #include <string.h>
 
-#include "AddOnManager.h"
-#include "PluginManager.h"
-#include "DataExchange.h"
-#include "debug.h"
+#include <AddOnManager.h>
+#include <PluginManager.h>
+#include <DataExchange.h>
+#include <debug.h>
 
 
 PluginManager gPluginManager;

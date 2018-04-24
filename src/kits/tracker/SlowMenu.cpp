@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "SlowMenu.h"
+#include <SlowMenu.h>
 
 
 const int32 kItemsToAddChunk = 20;

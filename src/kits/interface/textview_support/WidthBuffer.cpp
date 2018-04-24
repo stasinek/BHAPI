@@ -9,9 +9,9 @@
 //!	Caches string widths in a hash table, to avoid a trip to the app server.
 
 
-#include "utf8_functions.h"
-#include "TextGapBuffer.h"
-#include "WidthBuffer.h"
+#include <utf8_functions.h>
+#include <TextGapBuffer.h>
+#include <WidthBuffer.h>
 
 #include <Autolock.h>
 #include <Debug.h>

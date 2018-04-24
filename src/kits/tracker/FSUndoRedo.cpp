@@ -33,9 +33,9 @@ All rights reserved.
 */
 
 
-#include "Commands.h"
-#include "FSUndoRedo.h"
-#include "FSUtils.h"
+#include <Commands.h>
+#include <FSUndoRedo.h>
+#include <FSUtils.h>
 
 #include <Autolock.h>
 #include <Volume.h>

@@ -6,7 +6,7 @@
 #define _FSSH_DEFS_H
 
 
-#include "fssh_types.h"
+#include <fssh_types.h>
 
 
 // 32/64 bitness

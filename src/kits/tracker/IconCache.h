@@ -38,8 +38,8 @@ All rights reserved.
 // Icon cache is used for drawing node icons; it caches icons
 // and reuses them for successive draws
 
-#include "Utilities.h"
-#include "AutoLock.h"
+#include <Utilities.h>
+#include <AutoLock.h>
 //751#include <OpenHashTable.h>
 
 #include <Bitmap.h>

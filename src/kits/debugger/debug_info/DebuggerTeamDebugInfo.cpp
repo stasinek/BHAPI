@@ -3,11 +3,11 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DebuggerTeamDebugInfo.h"
+#include <DebuggerTeamDebugInfo.h>
 
 #include <new>
 
-#include "DebuggerImageDebugInfo.h"
+#include <DebuggerImageDebugInfo.h>
 
 
 DebuggerTeamDebugInfo::DebuggerTeamDebugInfo(

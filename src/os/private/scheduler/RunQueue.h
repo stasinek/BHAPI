@@ -11,7 +11,7 @@
 
 #include <util/Heap.h>
 
-#include "scheduler_profiler.h"
+#include <scheduler_profiler.h>
 
 
 template<typename Element>

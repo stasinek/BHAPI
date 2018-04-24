@@ -4,7 +4,7 @@
  */
 
 
-#include "vnode_store.h"
+#include <vnode_store.h>
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -25,7 +25,7 @@
 #include <vm/vm_page.h>
 #include <vm/VMCache.h>
 
-#include "IORequest.h"
+#include <IORequest.h>
 
 
 //#define TRACE_FILE_CACHE

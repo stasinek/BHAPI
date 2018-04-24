@@ -18,8 +18,8 @@
 #include <MediaTrack.h>
 #include <Scheduler.h>
 
-#include "GameSoundDevice.h"
-#include "GSUtility.h"
+#include <GameSoundDevice.h>
+#include <GSUtility.h>
 
 
 const int32 kPages = 20;

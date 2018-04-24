@@ -11,7 +11,7 @@
 
 #include <locks.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 // #pragma mark - recursive lock

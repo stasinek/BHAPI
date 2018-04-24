@@ -54,8 +54,8 @@
 #include <arch_mmu.h>
 #include <stdlib.h>
 
-#include "generic_vm_physical_page_mapper.h"
-#include "generic_vm_physical_page_ops.h"
+#include <generic_vm_physical_page_mapper.h>
+#include <generic_vm_physical_page_ops.h>
 
 
 #define TRACE_VM_TMAP

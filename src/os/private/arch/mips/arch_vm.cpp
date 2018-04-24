@@ -2,8 +2,8 @@
 ** Copyright 2001, Travis Geiselbrecht. All rights reserved.
 ** Distributed under the terms of the NewOS License.
 */
-#include <kernel/kernel.h>
-#include <kernel/debug.h>
+#include <os/kernel.h>
+#include <os/debug.h>
 #include <boot/stage2.h>
 
 int arch_vm_init(kernel_args *ka)

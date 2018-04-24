@@ -4,20 +4,20 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "CLanguageFamily.h"
+#include <CLanguageFamily.h>
 
 #include <new>
 
 #include <stdlib.h>
 
-#include "CLanguageExpressionEvaluator.h"
-#include "CLanguageFamilySyntaxHighlighter.h"
-#include "CLanguageTokenizer.h"
-#include "ExpressionInfo.h"
-#include "TeamTypeInformation.h"
-#include "StringValue.h"
-#include "Type.h"
-#include "TypeLookupConstraints.h"
+#include <CLanguageExpressionEvaluator.h>
+#include <CLanguageFamilySyntaxHighlighter.h>
+#include <CLanguageTokenizer.h>
+#include <ExpressionInfo.h>
+#include <TeamTypeInformation.h>
+#include <StringValue.h>
+#include <Type.h>
+#include <TypeLookupConstraints.h>
 
 
 using CLanguage::ParseException;

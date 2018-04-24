@@ -6,7 +6,7 @@
 #define _FSSH_DISK_DEVICE_DEFS_H
 
 
-#include "fssh_defs.h"
+#include <fssh_defs.h>
 
 
 typedef int32_t fssh_partition_id;

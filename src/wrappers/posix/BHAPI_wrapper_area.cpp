@@ -33,14 +33,14 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
-#include <../include/sys/types.h>
-#include <../include/sys/stat.h>
-#include <../include/sys/mman.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
 
-#include "../config.h"
-#include "../kernel/Kernel.h"
-#include "../support/StringList.h"
-#include "../support/SimpleLocker.h"
+#include <kits/config.h>
+#include <os/kernel.h>
+#include <kits/support/StringList.h>
+#include <kits/support/SimpleLocker.h>
 
 
 #ifdef HAVE_SHM_OPEN

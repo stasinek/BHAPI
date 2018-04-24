@@ -16,7 +16,7 @@
  */
 
 
-#include "VMAnonymousCache.h"
+#include <VMAnonymousCache.h>
 
 #include <errno.h>
 #include <fcntl.h>
@@ -55,7 +55,7 @@
 #include <vm/vm_priv.h>
 #include <vm/VMAddressSpace.h>
 
-#include "IORequest.h"
+#include <IORequest.h>
 
 
 #if	ENABLE_SWAP_SUPPORT

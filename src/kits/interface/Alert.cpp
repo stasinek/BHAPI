@@ -28,29 +28,29 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Alert.h"
-#include "Button.h"
-#include "TextView.h"
-#include "Bitmap.h"
+#include <Alert.h>
+#include <Button.h>
+#include <TextView.h>
+#include <Bitmap.h>
 
-#include "../support/ClassInfo.h"
-#include "../kernel/Kernel.h"
-#include "../kernel/Debug.h"
-#include "../app/Invoker.h"
-#include "../app/Application.h"
-#include "../app/Message.h"
-#include "../app/AppDefs.h"
-#include "../add-ons/graphics/GraphicsEngine.h"
-#include "../render/Pixmap.h"
-#include "../support/Errors.h"
+#include <kits/support/ClassInfo.h>
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/app/Invoker.h>
+#include <kits/app/Application.h>
+#include <kits/app/Message.h>
+#include <kits/app/AppDefs.h>
+#include <kits/add-ons/graphics/GraphicsEngine.h>
+#include <kits/render/Pixmap.h>
+#include <kits/support/Errors.h>
 
 #define ICON_WIDTH	36
 #define ICON_HEIGHT	36
 
-#include "icons/info.xpm"
-#include "icons/idea.xpm"
-#include "icons/warning.xpm"
-#include "icons/stop.xpm"
+#include <icons/info.xpm"
+#include <icons/idea.xpm"
+#include <icons/warning.xpm"
+#include <icons/stop.xpm"
 
 
 class BAlertTypeView : public BView {

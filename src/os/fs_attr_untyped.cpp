@@ -9,7 +9,7 @@
 
 
 #ifdef BUILDING_FS_SHELL
-#	include "compat.h"
+#	include <compat.h>
 #	define B_OK					0
 #	define B_BAD_VALUE			EINVAL
 #	define B_FILE_ERROR			EBADF
@@ -18,10 +18,10 @@
 #	define B_NO_MEMORY			ENOMEM
 #else
 #	include <BeOSBuildCompatibility.h>
-#	include <../include/syscalls.h>
+#	include <syscalls.h>
 
-#	include "fs_impl.h"
-#	include "fs_descriptors.h"
+#	include <fs_impl.h>
+#	include <fs_descriptors.h>
 #endif
 
 #include <dirent.h>
@@ -30,21 +30,21 @@
 
 
 #include <unistd.h>
-#include <../include/sys/stat.h>
+#include <sys/stat.h>
 
 #include <map>
-#include <../include/string>
+#include <string>
 
 #include <fs_attr.h>
 
 
 // Include the interface to the host platform attributes support.
 #if defined(HAIKU_HOST_PLATFORM_LINUX)
-#	include "fs_attr_xattr.h"
+#	include <fs_attr_xattr.h>
 #elif defined(HAIKU_HOST_PLATFORM_FREEBSD)
-#	include "fs_attr_extattr.h"
+#	include <fs_attr_extattr.h>
 #elif defined(HAIKU_HOST_PLATFORM_DARWIN)
-#	include "fs_attr_bsdxattr.h"
+#	include <fs_attr_bsdxattr.h>
 #else
 #	error No attribute support for this host platform!
 #endif

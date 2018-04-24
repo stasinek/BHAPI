@@ -4,12 +4,12 @@
  */
 
 
-#include <KeyStore.h>
+#include <kits/netKeyStore.h>
 
-#include <KeyStoreDefs.h>
+#include <kits/netKeyStoreDefs.h>
 
-#include <Messenger.h>
-#include <Roster.h>
+#include <kits/app/Messenger.h>
+#include <kits/netRoster.h>
 
 
 using namespace BPrivate;

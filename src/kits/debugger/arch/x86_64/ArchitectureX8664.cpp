@@ -6,7 +6,7 @@
  */
 
 
-#include "ArchitectureX8664.h"
+#include <ArchitectureX8664.h>
 
 #include <new>
 
@@ -14,20 +14,20 @@
 
 #include <AutoDeleter.h>
 
-#include "CfaContext.h"
-#include "CpuStateX8664.h"
-#include "DisassembledCode.h"
-#include "FunctionDebugInfo.h"
-#include "InstructionInfo.h"
-#include "NoOpStackFrameDebugInfo.h"
-#include "RegisterMap.h"
-#include "StackFrame.h"
-#include "Statement.h"
-#include "TeamMemory.h"
-#include "ValueLocation.h"
-#include "X86AssemblyLanguage.h"
+#include <CfaContext.h>
+#include <CpuStateX8664.h>
+#include <DisassembledCode.h>
+#include <FunctionDebugInfo.h>
+#include <InstructionInfo.h>
+#include <NoOpStackFrameDebugInfo.h>
+#include <RegisterMap.h>
+#include <StackFrame.h>
+#include <Statement.h>
+#include <TeamMemory.h>
+#include <ValueLocation.h>
+#include <X86AssemblyLanguage.h>
 
-#include "disasm/DisassemblerX8664.h"
+#include <disasm/DisassemblerX8664.h>
 
 
 static const int32 kFromDwarfRegisters[] = {

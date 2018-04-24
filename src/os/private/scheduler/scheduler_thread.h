@@ -9,10 +9,10 @@
 #include <thread.h>
 #include <util/AutoLock.h>
 
-#include "scheduler_common.h"
-#include "scheduler_cpu.h"
-#include "scheduler_locking.h"
-#include "scheduler_profiler.h"
+#include <scheduler_common.h>
+#include <scheduler_cpu.h>
+#include <scheduler_locking.h>
+#include <scheduler_profiler.h>
 
 
 namespace Scheduler {

@@ -8,7 +8,7 @@
 #ifndef	SIMPLE_LAYOUTER_H
 #define	SIMPLE_LAYOUTER_H
 
-#include "Layouter.h"
+#include <Layouter.h>
 
 
 class BList;

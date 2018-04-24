@@ -6,7 +6,7 @@
 #define BOOL_VALUE_H
 
 
-#include "Value.h"
+#include <Value.h>
 
 
 class BoolValue : public Value {

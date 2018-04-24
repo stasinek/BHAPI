@@ -32,9 +32,9 @@
 #define BHAPI_REGION_H
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../interface/Point.h"
-#include "../interface/Rect.h"
-#include "../support/List.h"
+#include <kits/interface/Point.h>
+#include <kits/interface/Rect.h>
+#include <kits/support/List.h>
 #include <Haiku.h>
 
 namespace BPrivate {

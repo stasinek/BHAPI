@@ -29,6 +29,6 @@
 
 #ifdef BHAPI_OS_BEOS
 
-#include "BHAPI_wrapper_beos-graphics.h"
+#include <BHAPI_wrapper_beos-graphics.h>
 #endif /* BEOS */
 

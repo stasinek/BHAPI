@@ -7,8 +7,8 @@
  * Copyright 2001, Travis Geiselbrecht. All rights reserved.
  * Distributed under the terms of the NewOS License.
  */
-#include "debugger_keymaps.h"
-#include "ps2_defs.h"
+#include <debugger_keymaps.h>
+#include <ps2_defs.h>
 
 #include <KernelExport.h>
 #include <driver_settings.h>

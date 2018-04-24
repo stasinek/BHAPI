@@ -32,9 +32,9 @@
 #define BHAPI_STRING_VIEW_H
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../interface/View.h"
-#include "../support/StringArray.h"
-#include "../support/StringClass.h"
+#include <kits/interface/View.h>
+#include <kits/support/StringArray.h>
+#include <kits/support/StringClass.h>
 #include <Haiku.h>
 class BHAPI_IMPEXP BStringView : public BView {
 public:

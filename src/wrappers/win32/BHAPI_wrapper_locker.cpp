@@ -34,9 +34,9 @@
 #include <winsock2.h>
 #include <windows.h>
 
-#include "../../../kernel/Kernel.h"
-#include "../../../support/Errors.h"
-#include "../../../kernel/Debug.h"
+#include <os/kernel.h>
+#include <kits/support/Errors.h>
+#include <os/debug.h>
 
 #define SECS_BETWEEN_EPOCHS    B_INT64_CONSTANT(11644473600)
 #define SECS_TO_100NS	    B_INT64_CONSTANT(10000000)

@@ -9,10 +9,10 @@
 #define AREA_KEEPER_H
 
 
-#include <KernelExport.h>
-#include <kernel/OS.h>
+#include <kits/kernelExport.h>
+#include <kits/kernel/OS.h>
 
-#include <util/kernel_cpp.h>
+#include <kits/netutil/kernel_cpp.h>
 
 
 class AreaKeeper {

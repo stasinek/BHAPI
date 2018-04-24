@@ -7,11 +7,11 @@
 #include <util/atomic.h>
 #include <util/AutoLock.h>
 
-#include "scheduler_common.h"
-#include "scheduler_cpu.h"
-#include "scheduler_modes.h"
-#include "scheduler_profiler.h"
-#include "scheduler_thread.h"
+#include <scheduler_common.h>
+#include <scheduler_cpu.h>
+#include <scheduler_modes.h>
+#include <scheduler_profiler.h>
+#include <scheduler_thread.h>
 
 
 using namespace Scheduler;

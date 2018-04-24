@@ -42,12 +42,12 @@ static const char rcsid[] = "$Id: tree.c,v 1.4 2005/04/27 04:56:39 sra Exp $";
 # define DEBUG_DOMAIN "tree"
 #endif
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 #include <isc/memcluster.h>
 #include <isc/tree.h>

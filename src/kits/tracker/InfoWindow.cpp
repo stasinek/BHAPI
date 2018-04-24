@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "InfoWindow.h"
+#include <InfoWindow.h>
 
 #include <string.h>
 #include <stdio.h>
@@ -62,19 +62,19 @@ All rights reserved.
 #include <Volume.h>
 #include <VolumeRoster.h>
 
-#include "Attributes.h"
-#include "AutoLock.h"
-#include "Commands.h"
-#include "DialogPane.h"
-#include "FSUtils.h"
-#include "IconCache.h"
-#include "IconMenuItem.h"
-#include "Model.h"
-#include "NavMenu.h"
-#include "PoseView.h"
-#include "StringForSize.h"
-#include "Tracker.h"
-#include "WidgetAttributeText.h"
+#include <Attributes.h>
+#include <AutoLock.h>
+#include <Commands.h>
+#include <DialogPane.h>
+#include <FSUtils.h>
+#include <IconCache.h>
+#include <IconMenuItem.h>
+#include <Model.h>
+#include <NavMenu.h>
+#include <PoseView.h>
+#include <StringForSize.h>
+#include <Tracker.h>
+#include <WidgetAttributeText.h>
 
 
 #undef B_TRANSLATION_CONTEXT

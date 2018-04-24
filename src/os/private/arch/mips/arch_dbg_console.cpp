@@ -2,10 +2,10 @@
 ** Copyright 2001, Travis Geiselbrecht. All rights reserved.
 ** Distributed under the terms of the NewOS License.
 */
-#include <kernel/kernel.h>
+#include <os/kernel.h>
 #include <boot/stage2.h>
 
-#include <kernel/arch/dbg_console.h>
+#include <kits/kernel/arch/dbg_console.h>
 
 int arch_dbg_con_init(kernel_args *ka)
 {

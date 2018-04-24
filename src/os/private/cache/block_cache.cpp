@@ -24,7 +24,7 @@
 #include <util/AutoLock.h>
 #include <vm/vm_page.h>
 
-#include "kernel_debug_config.h"
+#include <kernel_debug_config.h>
 
 
 // TODO: this is a naive but growing implementation to test the API:

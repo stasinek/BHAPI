@@ -3,11 +3,11 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DefragmentJob.h"
+#include <DefragmentJob.h>
 
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
-#include "PartitionReference.h"
+#include <PartitionReference.h>
 
 
 // constructor

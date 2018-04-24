@@ -27,25 +27,25 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Looper.h"
-#include "AppDefs.h"
-#include "Application.h"
-#include "Messenger.h"
-#include "Handler.h"
-#include "MessageQueue.h"
-#include "MessageFilter.h"
-#include "Message.h"
-#include "AppDefs.h"
+#include <kits/netLooper.h>
+#include <kits/netAppDefs.h>
+#include <kits/netApplication.h>
+#include <kits/app/Messenger.h>
+#include <kits/app/Handler.h>
+#include <kits/netMessageQueue.h>
+#include <kits/netMessageFilter.h>
+#include <kits/netMessage.h>
+#include <kits/netAppDefs.h>
 
-#include "../kernel/Debug.h"
-#include "../kernel/Kernel.h"
-#include "../kernel/KERNEL.h"
-#include "../support/Locker.h"
-#include "../support/Errors.h"
-#include "../support/Autolock.h"
-#include "../support/ClassInfo.h"
-#include "../../private/support/Token.h"
-#include "../../private/app/PrivateHandler.h"
+#include <os/debug.h>
+#include <os/kernel.h>
+#include <os/kernel.h>
+#include <kits/support/Locker.h>
+#include <kits/support/Errors.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/ClassInfo.h>
+#include <kits/private/support/Token.h>
+#include <kits/private/app/PrivateHandler.h>
 
 
 

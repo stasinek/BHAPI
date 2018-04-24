@@ -9,7 +9,7 @@
 #include <ACPI.h>
 
 
-#include "util/Vector.h"
+#include <util/Vector.h>
 
 
 struct irq_routing_entry {

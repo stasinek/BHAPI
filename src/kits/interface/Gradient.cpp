@@ -7,7 +7,7 @@
  *		Artur Wyszynski <harakash@gmail.com>
  */
 
-#include "Gradient.h"
+#include <Gradient.h>
 
 #include <algorithm>
 #include <math.h>

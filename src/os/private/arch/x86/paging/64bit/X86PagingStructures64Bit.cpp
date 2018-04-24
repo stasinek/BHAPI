@@ -4,7 +4,7 @@
  */
 
 
-#include "paging/64bit/X86PagingStructures64Bit.h"
+#include <paging/64bit/X86PagingStructures64Bit.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +13,7 @@
 
 #include <int.h>
 
-#include "paging/64bit/X86PagingMethod64Bit.h"
+#include <paging/64bit/X86PagingMethod64Bit.h>
 
 
 X86PagingStructures64Bit::X86PagingStructures64Bit()

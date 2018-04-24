@@ -31,8 +31,8 @@
 #include <vm/VMArea.h>
 #include <vm/VMCache.h>
 
-#include "../cache/vnode_store.h"
-#include "../vm/VMAddressSpaceLocking.h"
+#include <kits/cache/vnode_store.h>
+#include <kits/vm/VMAddressSpaceLocking.h>
 
 
 //#define TRACE_CORE_DUMP

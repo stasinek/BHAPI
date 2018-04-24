@@ -34,10 +34,10 @@ All rights reserved.
 
 // Implementation for the public FilePanel object.
 
-#include "FilePanel.h"
-#include "FilePanelPriv.h"
-#include "Commands.h"
-#include "AutoLock.h"
+#include <FilePanel.h>
+#include <FilePanelPriv.h>
+#include <Commands.h>
+#include <AutoLock.h>
 
 #include <Screen.h>
 #include <Window.h>

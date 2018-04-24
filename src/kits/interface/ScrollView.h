@@ -31,7 +31,7 @@
 #define BHAPI_SCROLL_VIEW_H
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../interface/ScrollBar.h"
+#include <kits/interface/ScrollBar.h>
 class BHAPI_IMPEXP BScrollView : public BView {
 public:
     BScrollView(BRect frame, const char *name, BView *target,

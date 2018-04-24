@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "SignalInfo.h"
+#include <SignalInfo.h>
 
 #include <string.h>
 

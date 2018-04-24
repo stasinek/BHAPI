@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "debug.h"
+#include <debug.h>
 
 
 struct BMidiEvent {

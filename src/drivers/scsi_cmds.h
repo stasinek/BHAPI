@@ -11,7 +11,7 @@
 //! SCSI commands and their data structures and constants
 
 
-#include <lendian_bitfield.h>
+#include <kits/netlendian_bitfield.h>
 
 
 // Always keep in mind that SCSI is big-endian!

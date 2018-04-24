@@ -27,10 +27,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "../../../kernel/Kernel.h"
-#include "../../../kernel/Debug.h"
-#include "../../../support/StringClass.h"
-#include "../../../support/Errors.h"
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/Errors.h>
 
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0500

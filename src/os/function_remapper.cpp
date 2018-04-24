@@ -4,9 +4,9 @@
  */
 
 
-#include <../include/stdarg.h>
+#include <stdarg.h>
 
-#include "remapped_functions.h"
+#include <remapped_functions.h>
 
 
 #if __GNUC__ >= 4

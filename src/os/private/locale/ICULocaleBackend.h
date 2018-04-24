@@ -6,19 +6,19 @@
 #define _ICU_LOCALE_BACKEND_H
 
 
-#include "LocaleBackend.h"
+#include <LocaleBackend.h>
 
 #include <locale.h>
 #include <pthread.h>
 #include <timelocal.h>
 
-#include "ICUCollateData.h"
-#include "ICUCtypeData.h"
-#include "ICUMessagesData.h"
-#include "ICUMonetaryData.h"
-#include "ICUNumericData.h"
-#include "ICUTimeConversion.h"
-#include "ICUTimeData.h"
+#include <ICUCollateData.h>
+#include <ICUCtypeData.h>
+#include <ICUMessagesData.h>
+#include <ICUMonetaryData.h>
+#include <ICUNumericData.h>
+#include <ICUTimeConversion.h>
+#include <ICUTimeData.h>
 
 
 namespace BPrivate {

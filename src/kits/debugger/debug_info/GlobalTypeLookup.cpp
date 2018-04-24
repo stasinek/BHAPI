@@ -4,7 +4,7 @@
  */
 
 
-#include "GlobalTypeLookup.h"
+#include <GlobalTypeLookup.h>
 
 #include <new>
 
@@ -12,9 +12,9 @@
 
 #include <AutoLocker.h>
 
-#include "StringUtils.h"
-#include "Type.h"
-#include "TypeLookupConstraints.h"
+#include <StringUtils.h>
+#include <Type.h>
+#include <TypeLookupConstraints.h>
 
 
 struct GlobalTypeCache::TypeEntry {

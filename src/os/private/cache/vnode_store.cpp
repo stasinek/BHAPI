@@ -4,7 +4,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "vnode_store.h"
+#include <vnode_store.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -14,7 +14,7 @@
 #include <vfs.h>
 #include <vm/vm.h>
 
-#include "IORequest.h"
+#include <IORequest.h>
 
 
 status_t

@@ -5,13 +5,13 @@
  */
 
 
-#include "ExpressionValues.h"
+#include <ExpressionValues.h>
 
 #include <new>
 
-#include "FunctionID.h"
-#include "model/Thread.h"
-#include "StringUtils.h"
+#include <FunctionID.h>
+#include <model/Thread.h>
+#include <StringUtils.h>
 
 
 struct ExpressionValues::Key {

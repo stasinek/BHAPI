@@ -6,7 +6,7 @@
 
 #include <BeOSBuildCompatibility.h>
 
-#include "fs_impl.h"
+#include <fs_impl.h>
 
 #include <dirent.h>
 #include <errno.h>
@@ -15,22 +15,22 @@
 
 #include <unistd.h>
 #include <utime.h>
-#include <../include/sys/stat.h>
-#include <../include/sys/time.h>
+#include <sys/stat.h>
+#include <sys/time.h>
 
 #include <map>
-#include <../include/string>
+#include <string>
 
 #include <fs_attr.h>
 #include <NodeMonitor.h>	// for B_STAT_* flags
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
-#include "fs_descriptors.h"
-#include "node_ref.h"
-#include "remapped_functions.h"
+#include <fs_descriptors.h>
+#include <node_ref.h>
+#include <remapped_functions.h>
 
 #if defined(HAIKU_HOST_PLATFORM_FREEBSD)
-#	include "fs_freebsd.h"
+#	include <fs_freebsd.h>
 #endif
 
 

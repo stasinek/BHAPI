@@ -5,7 +5,7 @@
  */
 
 
-#include "dma_resources.h"
+#include <dma_resources.h>
 
 #include <device_manager.h>
 
@@ -13,7 +13,7 @@
 #include <util/AutoLock.h>
 #include <vm/vm.h>
 
-#include "IORequest.h"
+#include <IORequest.h>
 
 
 //#define TRACE_DMA_RESOURCE

@@ -7,7 +7,7 @@
  */
 
 
-#include "MediaExtractor.h"
+#include <MediaExtractor.h>
 
 #include <new>
 #include <stdio.h>
@@ -15,9 +15,9 @@
 
 #include <Autolock.h>
 
-#include "ChunkCache.h"
-#include "debug.h"
-#include "PluginManager.h"
+#include <ChunkCache.h>
+#include <debug.h>
+#include <PluginManager.h>
 
 
 // should be 0, to disable the chunk cache set it to 1

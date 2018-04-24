@@ -10,9 +10,9 @@
 
 
 //----------------------- Global includes  ----------------------
-#include <AppKit.h>
-#include <SupportKit.h>
-#include <InterfaceKit.h>
+#include <kits/AppKit.h>
+#include <kits/SupportKit.h>
+#include <kits/InterfaceKit.h>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>

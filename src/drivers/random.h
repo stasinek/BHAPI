@@ -9,7 +9,7 @@
 #define _RANDOM_H
 
 
-#include <device_manager.h>
+#include <kits/netdevice_manager.h>
 
 
 typedef struct {

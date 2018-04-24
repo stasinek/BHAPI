@@ -15,7 +15,7 @@
 #include <Haiku.h>
 #endif /* _SUPPORT_DEFS_H */
 #if !defined(_DRIVERS_H)
-#include <Drivers.h>
+#include <kits/netDrivers.h>
 #endif /* _DRIVERS_H */
 
 enum {

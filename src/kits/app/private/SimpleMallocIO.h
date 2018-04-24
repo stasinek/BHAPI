@@ -11,7 +11,7 @@
 #ifndef _SIMPLE_MALLOC_IO_H_
 #define _SIMPLE_MALLOC_IO_H_
 
-#include <malloc.h>
+#include <kits/netmalloc.h>
 
 namespace BPrivate {
 

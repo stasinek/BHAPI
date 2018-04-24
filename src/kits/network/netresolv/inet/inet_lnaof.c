@@ -42,13 +42,13 @@ __RCSID("$NetBSD: inet_lnaof.c,v 1.1 2004/05/20 23:13:02 christos Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/param.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 /*
  * Return the local network address portion of an

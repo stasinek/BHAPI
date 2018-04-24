@@ -6,8 +6,8 @@
 #define _ICU_NUMERIC_DATA_H
 
 
-#include "ICULocaleconvData.h"
-#include "LocaleBackend.h"
+#include <ICULocaleconvData.h>
+#include <LocaleBackend.h>
 
 
 namespace BPrivate {

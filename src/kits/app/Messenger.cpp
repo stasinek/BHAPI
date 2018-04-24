@@ -27,19 +27,19 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Messenger.h"
-#include "Message.h"
+#include <kits/app/Messenger.h>
+#include <kits/netMessage.h>
 
-#include "../app/Looper.h"
-#include "../app/AppDefs.h"
-#include "../kernel/Kernel.h"
-#include "../kernel/Debug.h"
-#include "../kernel/KERNEL.h"
-#include "../support/ClassInfo.h"
-#include "../support/Locker.h"
-#include "../support/Errors.h"
-#include "../support/Autolock.h"
-#include "../../private/app/PrivateHandler.h"
+#include <kits/app/Looper.h>
+#include <kits/app/AppDefs.h>
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <os/kernel.h>
+#include <kits/support/ClassInfo.h>
+#include <kits/support/Locker.h>
+#include <kits/support/Errors.h>
+#include <kits/support/Autolock.h>
+#include <kits/private/app/PrivateHandler.h>
 
 
 

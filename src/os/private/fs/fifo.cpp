@@ -5,7 +5,7 @@
  */
 
 
-#include "fifo.h"
+#include <fifo.h>
 
 #include <limits.h>
 #include <stdio.h>

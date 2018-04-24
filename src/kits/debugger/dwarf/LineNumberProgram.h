@@ -5,8 +5,8 @@
 #ifndef LINE_NUMBER_PROGRAM_H
 #define LINE_NUMBER_PROGRAM_H
 
-#include "DataReader.h"
-#include "Types.h"
+#include <DataReader.h>
+#include <Types.h>
 
 
 class LineNumberProgram {

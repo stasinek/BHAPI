@@ -7,7 +7,7 @@
 
 #include <errno.h>
 #include <net/if.h>
-#include <../include/sys/sockio.h>
+#include <sys/sockio.h>
 
 #include <AutoDeleter.h>
 

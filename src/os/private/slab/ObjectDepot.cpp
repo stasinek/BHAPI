@@ -16,8 +16,8 @@
 #include <smp.h>
 #include <util/AutoLock.h>
 
-#include "slab_debug.h"
-#include "slab_private.h"
+#include <slab_debug.h>
+#include <slab_private.h>
 
 
 struct DepotMagazine {

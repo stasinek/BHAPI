@@ -13,7 +13,7 @@
 #include <Screen.h>
 #include <View.h>
 
-#include "PartitioningDialog.h"
+#include <PartitioningDialog.h>
 
 enum {
 	MSG_OK		= 'okay',

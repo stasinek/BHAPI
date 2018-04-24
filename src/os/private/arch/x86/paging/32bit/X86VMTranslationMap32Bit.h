@@ -6,7 +6,7 @@
 #define KERNEL_ARCH_X86_PAGING_32_BIT_X86_VM_TRANSLATION_MAP_32_BIT_H
 
 
-#include "paging/X86VMTranslationMap.h"
+#include <paging/X86VMTranslationMap.h>
 
 
 struct X86PagingStructures32Bit;

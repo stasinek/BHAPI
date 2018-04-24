@@ -2,7 +2,7 @@
 // Copyright (C) Haiku, uses the MIT license
 
 
-#include "IconView.h"
+#include <IconView.h>
 
 #include <new>
 

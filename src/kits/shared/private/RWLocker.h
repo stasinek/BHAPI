@@ -77,7 +77,7 @@
 #include <List.h>
 #include <Locker.h>
 
-#include "AutoLocker.h"
+#include <AutoLocker.h>
 
 class RWLocker {
  public:

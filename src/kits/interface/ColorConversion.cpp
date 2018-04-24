@@ -11,7 +11,7 @@
  *	and a palette <-> true color conversion class.
  */
 
-#include "ColorConversion.h"
+#include <ColorConversion.h>
 
 #include <InterfaceDefs.h>
 #include <Locker.h>

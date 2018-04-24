@@ -9,7 +9,7 @@
 #define LOCK_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 typedef struct lock {

@@ -5,7 +5,7 @@
 #ifndef _INTERRUPT_CONTROLLER_H
 #define _INTERRUPT_CONTROLLER_H
 
-#include <device_manager.h>
+#include <kits/netdevice_manager.h>
 
 enum {
 	IRQ_TYPE_LEVEL	= 0,

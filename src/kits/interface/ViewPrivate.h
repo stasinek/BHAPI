@@ -31,10 +31,10 @@
 #define BHAPI_VIEW_PRIVATE_H
 
 #ifdef __cplusplus /* Just for C++ */
-#include "Rect.h"
-#include "View.h"
-#include "Window.h"
-#include "layout/Layout.h"
+#include <Rect.h>
+#include <View.h>
+#include <Window.h>
+#include <layout/Layout.h>
 #include <Haiku.h>
 class BHAPI_LOCAL BViewLayout : public BLayoutItem {
 public:

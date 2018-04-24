@@ -8,7 +8,7 @@
 #include <image.h>
 #include <StringClass.h>
 
-#include "Types.h"
+#include <Types.h>
 
 
 class ImageInfo {

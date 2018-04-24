@@ -4,13 +4,13 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "model/Thread.h"
+#include <model/Thread.h>
 
 #include <stdio.h>
 
-#include "CpuState.h"
-#include "StackTrace.h"
-#include "Team.h"
+#include <CpuState.h>
+#include <StackTrace.h>
+#include <Team.h>
 
 
 Thread::Thread(Team* team, thread_id threadID)

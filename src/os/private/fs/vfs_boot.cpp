@@ -8,7 +8,7 @@
  */
 
 
-#include "vfs_boot.h"
+#include <vfs_boot.h>
 
 #include <stdio.h>
 #include <strings.h>
@@ -30,7 +30,7 @@
 #include <util/Stack.h>
 #include <vfs.h>
 
-#include "vfs_net_boot.h"
+#include <vfs_net_boot.h>
 
 
 //#define TRACE_VFS

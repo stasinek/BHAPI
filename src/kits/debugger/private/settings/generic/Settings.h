@@ -14,7 +14,7 @@
 #include <Referenceable.h>
 #include <Variant.h>
 
-#include "Setting.h"
+#include <Setting.h>
 
 
 class SettingsDescription;

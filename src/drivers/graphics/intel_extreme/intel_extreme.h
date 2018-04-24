@@ -9,13 +9,13 @@
 #define INTEL_EXTREME_H
 
 
-#include "lock.h"
+#include <kits/netlock.h>
 
-#include <Accelerant.h>
-#include <Drivers.h>
-#include <PCI.h>
+#include <kits/netAccelerant.h>
+#include <kits/netDrivers.h>
+#include <kits/netPCI.h>
 
-#include <edid.h>
+#include <kits/netedid.h>
 
 
 #define VENDOR_ID_INTEL			0x8086

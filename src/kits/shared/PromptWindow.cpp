@@ -2,7 +2,7 @@
  * Copyright 2012-2013, Rene Gollent, rene@gollent.com.
  * Distributed under the terms of the MIT License.
  */
-#include "PromptWindow.h"
+#include <PromptWindow.h>
 
 #include <Button.h>
 #include <Catalog.h>

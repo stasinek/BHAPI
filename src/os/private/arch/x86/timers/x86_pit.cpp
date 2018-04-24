@@ -13,7 +13,7 @@
 #include <arch/int.h>
 #include <arch/cpu.h>
 
-#include "pit.h"
+#include <pit.h>
 
 static bool sPITTimerInitialized = false;
 

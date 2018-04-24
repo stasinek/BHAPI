@@ -10,10 +10,10 @@
 
 #include <stdlib.h>
 
-#include "debug.h"
+#include <debug.h>
 #include <MidiConsumer.h>
 #include <MidiRoster.h>
-#include "protocol.h"
+#include <protocol.h>
 
 
 int32 

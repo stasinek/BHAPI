@@ -11,7 +11,7 @@
 
 #include <MessengerPrivate.h>
 #include <generic_syscall_defs.h>
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
 
 static status_t check_for_notifications_syscall(void)

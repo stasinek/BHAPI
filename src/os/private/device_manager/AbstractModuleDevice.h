@@ -7,7 +7,7 @@
 #define ABSTRACT_MODULE_DEVICE_H
 
 
-#include "BaseDevice.h"
+#include <BaseDevice.h>
 
 
 namespace BPrivate {

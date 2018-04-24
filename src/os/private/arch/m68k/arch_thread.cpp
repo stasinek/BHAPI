@@ -26,9 +26,9 @@
 #include <arch_vm.h>
 //#include <arch/vm_translation_map.h>
 
-#include "paging/M68KPagingMethod.h"
-#include "paging/M68KPagingStructures.h"
-#include "paging/M68KVMTranslationMap.h"
+#include <paging/M68KPagingMethod.h>
+#include <paging/M68KPagingStructures.h>
+#include <paging/M68KVMTranslationMap.h>
 
 
 #warning M68K: writeme!

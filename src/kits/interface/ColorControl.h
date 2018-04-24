@@ -33,7 +33,7 @@
 
 #ifdef __cplusplus /* Just for C++ */
 class BBitmap;
-#include "../interface/Control.h"
+#include <kits/interface/Control.h>
 class BHAPI_IMPEXP BColorControl : public BControl {
 public:
     BColorControl(BPoint leftTop, const char *name, BMessage *message = NULL, bool bufferedDrawing = false);

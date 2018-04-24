@@ -10,7 +10,7 @@
 
 
 
-#include <../include/sys/extattr.h>
+#include <sys/extattr.h>
 
 
 // the namespace all attributes live in

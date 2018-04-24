@@ -51,7 +51,7 @@ __RCSID("$NetBSD: base64.c,v 1.14 2012/06/25 22:32:44 abs Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <sys/param.h>
@@ -68,7 +68,7 @@ __RCSID("$NetBSD: base64.c,v 1.14 2012/06/25 22:32:44 abs Exp $");
 #include <stdlib.h>
 #include <string.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 #define Assert(Cond) if (!(Cond)) abort()
 

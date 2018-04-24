@@ -8,7 +8,7 @@
 //! The standard config view for all protocols.
 
 
-#include "ProtocolConfigView.h"
+#include <ProtocolConfigView.h>
 
 #include <stdio.h>
 #include <stdlib.h>

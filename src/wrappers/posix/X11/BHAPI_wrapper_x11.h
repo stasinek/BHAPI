@@ -48,10 +48,10 @@
 
 #endif
 
-#include "../../support/Locker.h"
-#include "../../support/StringArray.h"
-#include "../../add-ons/graphics/GraphicsEngine.h"
-#include "../../app/MessageFilter.h"
+#include <kits/support/Locker.h>
+#include <kits/support/StringArray.h>
+#include <kits/add-ons/graphics/GraphicsEngine.h>
+#include <kits/app/MessageFilter.h>
 
 #ifdef __cplusplus
 

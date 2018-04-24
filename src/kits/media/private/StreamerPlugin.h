@@ -6,7 +6,7 @@
 #include <MediaTrack.h>
 #include <Url.h>
 
-#include "MediaPlugin.h"
+#include <MediaPlugin.h>
 
 
 namespace BPrivate { namespace media {

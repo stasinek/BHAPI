@@ -22,6 +22,10 @@
 #define MACOS
 #endif
 
+#if !defined(__BSD__) & !defined(__LINUX__) & !defined(WIN32) & !defined(__MACOS__)
+#define __B_NATIVE__
+#endif
+
 #ifdef BHAPI_OS_WIN32
 #	ifdef __GNUC__
 #		ifndef _stdcall
@@ -32,8 +36,8 @@
 
 /*#ifdef BHAPI_OS_WIN32
     #ifdef _WIN32
-        #include <winsock2.h>
-        #include <windows.h>
+        #include <kits/netwinsock2.h>
+        #include <kits/netwindows.h>
     #endif
     #if defined(_MSC_VER) && _MSC_VER <= 0x4b0
         #define for	if (0); else for
@@ -138,15 +142,15 @@
 // Build on Windows for Windows
 #ifdef WIN32
 #ifndef __clang__
-#include <include/sys/cdefs.h>
+#include <sys/cdefs.h>
 #endif
-#include <include/stdlib.h>
-#include <include/stdio.h>
-#include <include/string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #endif
 
-#include <SupportDefs.h>
-#include <StorageDefs.h>
-#include <InterfaceDefs.h>
+#include <kits/support/SupportDefs.h>
+#include <kits/storage/StorageDefs.h>
+#include <kits/interface/InterfaceDefs.h>
 
 #endif

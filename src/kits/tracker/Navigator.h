@@ -37,8 +37,8 @@ All rights reserved.
 
 #include <ToolBar.h>
 
-#include "ContainerWindow.h"
-#include "Model.h"
+#include <ContainerWindow.h>
+#include <Model.h>
 
 
 class BTextControl;

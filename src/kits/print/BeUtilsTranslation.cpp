@@ -44,7 +44,7 @@
 #include <Roster.h>
 #include <StringClass.h>
 
-#include "BeUtils.h"
+#include <BeUtils.h>
 
 BBitmap* LoadBitmap(const char* name, uint32 type_code) {
 	if (type_code == B_TRANSLATOR_BITMAP) {

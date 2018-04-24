@@ -27,19 +27,19 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Directory.h"
-#include "Path.h"
+#include <Directory.h>
+#include <Path.h>
 
-#include "../support/StringClass.h"
-#include "../support/Errors.h"
-#include "../kernel/Debug.h"
+#include <kits/support/StringClass.h>
+#include <kits/support/Errors.h>
+#include <os/debug.h>
 
 #ifdef HAVE_SYS_TYPES_H
-#include <../include/sys/types.h>
+#include <sys/types.h>
 #endif // HAVE_SYS_TYPES_H
 
 #ifdef HAVE_SYS_STAT_H
-#include <../include/sys/stat.h>
+#include <sys/stat.h>
 #endif // HAVE_SYS_STAT_H
 
 #ifdef _WIN32

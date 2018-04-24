@@ -4,7 +4,7 @@
  */
 
 
-#include "x86_syscalls.h"
+#include <x86_syscalls.h>
 
 #include <KernelExport.h>
 

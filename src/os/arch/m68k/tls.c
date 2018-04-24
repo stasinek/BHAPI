@@ -12,8 +12,8 @@
 #	define _NO_INLINE_ASM 1
 #endif
 
-#include "support/TLS.h"
-#include "tls.h"
+#include <kits/support/TLS.h>
+#include <tls.h>
 
 
 static int32 gNextSlot = TLS_FIRST_FREE_SLOT;

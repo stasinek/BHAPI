@@ -7,7 +7,7 @@
 #include <NetworkRoster.h>
 
 #include <errno.h>
-#include <../include/sys/sockio.h>
+#include <sys/sockio.h>
 
 #include <NetworkDevice.h>
 #include <NetworkInterface.h>

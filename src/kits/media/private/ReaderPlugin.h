@@ -2,7 +2,7 @@
 #define _READER_PLUGIN_H
 
 #include <MediaTrack.h>
-#include "MediaPlugin.h"
+#include <MediaPlugin.h>
 
 namespace BPrivate { namespace media {
 

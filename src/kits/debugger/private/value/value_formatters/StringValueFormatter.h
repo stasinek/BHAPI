@@ -6,7 +6,7 @@
 #define STRING_VALUE_FORMATTER_H
 
 
-#include "ValueFormatter.h"
+#include <ValueFormatter.h>
 
 
 class Settings;

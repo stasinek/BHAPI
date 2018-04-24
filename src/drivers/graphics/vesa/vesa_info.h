@@ -6,11 +6,11 @@
 #define VESA_INFO_H
 
 
-#include <Drivers.h>
-#include <Accelerant.h>
-#include <PCI.h>
+#include <kits/netDrivers.h>
+#include <kits/netAccelerant.h>
+#include <kits/netPCI.h>
 
-#include <edid.h>
+#include <kits/netedid.h>
 
 
 #define VESA_EDID_BOOT_INFO "vesa_edid/v1"

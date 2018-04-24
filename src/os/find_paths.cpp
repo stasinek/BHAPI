@@ -10,7 +10,7 @@
 #include <errno.h>
 
 
-#include <../include/sys/stat.h>
+#include <sys/stat.h>
 
 #include <algorithm>
 
@@ -19,9 +19,9 @@
 #include <architecture_private.h>
 #include <AutoDeleter.h>
 #include <directories.h>
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
-#include "fs_path_buffer.h"
+#include <fs_path_buffer.h>
 
 
 static size_t kHomeInstallationLocationIndex = 1;

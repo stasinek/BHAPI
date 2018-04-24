@@ -15,7 +15,7 @@
 
 #include <arch/cpu.h>
 
-#include "apic_timer.h"
+#include <apic_timer.h>
 
 
 /* Method Prototypes */

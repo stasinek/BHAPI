@@ -2,7 +2,7 @@
  * Copyright 2011 Stephan Aßmus <superstippi@gmx.de>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
-#include "ToolBar.h"
+#include <ToolBar.h>
 
 #include <Button.h>
 #include <ControlLook.h>

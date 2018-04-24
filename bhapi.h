@@ -1,4 +1,4 @@
-﻿#ifndef BHAPI_H
+#ifndef BHAPI_H
 #define BHAPI_H
 
 /* --------------------------------------------------------------------------
@@ -35,7 +35,7 @@
 #else
 #  define BHAPISHARED_EXPORT Q_DECL_IMPORT
 #endif
-#include "./src/kits/Be.h"
+#include <kits/Be.h>
 
 class BHAPI
 {

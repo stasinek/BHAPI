@@ -34,8 +34,8 @@
 #ifdef __cplusplus /* Just for C++ */
 class BRect;
 class BMessage;
-#include "../interface/Control.h"
-#include "../interface/InterfaceDefs.h"
+#include <kits/interface/Control.h>
+#include <kits/interface/InterfaceDefs.h>
 #include <Haiku.h>
 class BHAPI_IMPEXP BTextEditable : public BControl {
 public:

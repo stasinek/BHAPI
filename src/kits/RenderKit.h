@@ -30,9 +30,9 @@
 #ifndef B_RENDER_KIT_H
 #define B_RENDER_KIT_H
 
-#include "render/Render.h"
-#include "render/LineGenerator.h"
-#include "render/ArcGenerator.h"
-#include "render/Pixmap.h"
+#include <render/Render.h>
+#include <render/LineGenerator.h>
+#include <render/ArcGenerator.h>
+#include <render/Pixmap.h>
 
 #endif

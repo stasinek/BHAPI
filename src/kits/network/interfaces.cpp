@@ -9,15 +9,15 @@
 
 #include <errno.h>
 #include <net/if.h>
-#include <../include/sys/socket.h>
-#include <../include/sys/sockio.h>
+#include <sys/socket.h>
+#include <sys/sockio.h>
 
 
 #include <unistd.h>
 
 #include <AutoDeleter.h>
 
-#include "compatibility/bsd/ifaddrs.h"
+#include <compatibility/bsd/ifaddrs.h>
 
 
 namespace BPrivate {

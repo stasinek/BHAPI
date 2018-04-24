@@ -77,13 +77,13 @@ class BCursor;
 class BLayoutItem;
 class BMessage;
 class BView;
-#include "../app/Handler.h"
-#include "../interface/Region.h"
-#include "../interface/Polygon.h"
-#include "../interface/Font.h"
-#include "../interface/Point.h"
-#include "../interface/InterfaceDefs.h"
-#include "../support/List.h"
+#include <kits/app/Handler.h>
+#include <kits/interface/Region.h>
+#include <kits/interface/Polygon.h>
+#include <kits/interface/Font.h>
+#include <kits/interface/Point.h>
+#include <kits/interface/InterfaceDefs.h>
+#include <kits/support/List.h>
 #include <Haiku.h>
 using namespace bhapi;
 class BHAPI_IMPEXP BView : public BHandler {

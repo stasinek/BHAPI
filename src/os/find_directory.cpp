@@ -13,7 +13,7 @@
 #ifdef _KERNEL_MODE
 #	include <vfs.h>
 #else
-#	include <../include/syscalls.h>
+#	include <syscalls.h>
 #endif
 
 #include <directories.h>
@@ -23,20 +23,20 @@
 #include <errno.h>
 #include <pwd.h>
 
-#include <../include/sys/stat.h>
+#include <sys/stat.h>
 
 #include <unistd.h>
 
 #include <architecture_private.h>
 #include <errno_private.h>
 #include <find_directory_private.h>
-#include <../include/stdlib_private.h>
+#include <stdlib_private.h>
 #include <symbol_versioning.h>
 #include <user_group.h>
 
 #include <AutoDeleter.h>
 
-#include "fs_path_buffer.h"
+#include <fs_path_buffer.h>
 
 
 /* use pwents to find home */
@@ -691,7 +691,7 @@ status_t __find_directory(directory_which which, dev_t device, bool createIt,
 
 #include <errno.h>
 
-#include <../include/sys/stat.h>
+#include <sys/stat.h>
 
 #include <unistd.h>
 

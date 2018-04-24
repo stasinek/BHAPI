@@ -4,7 +4,7 @@
  */
 
 
-#include "MemoryManager.h"
+#include <MemoryManager.h>
 
 #include <algorithm>
 
@@ -19,9 +19,9 @@
 #include <vm/VMCache.h>
 #include <vm/VMTranslationMap.h>
 
-#include "kernel_debug_config.h"
+#include <kernel_debug_config.h>
 
-#include "ObjectCache.h"
+#include <ObjectCache.h>
 
 
 //#define TRACE_MEMORY_MANAGER

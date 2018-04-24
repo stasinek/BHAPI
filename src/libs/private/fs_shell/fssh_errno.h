@@ -6,7 +6,7 @@ extern "C"
 {
 #endif  
 
-#include "fssh_errors.h"
+#include <fssh_errors.h>
 
 #define FSSH_ENOERR          0
 #define FSSH_EOK 			FSSH_ENOERR  /* some code assumes EOK exists */

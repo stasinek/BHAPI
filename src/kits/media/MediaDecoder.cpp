@@ -6,8 +6,8 @@
 #include <MediaDecoder.h>
 #include <DecoderPlugin.h>
 #include <new>
-#include "PluginManager.h"
-#include "debug.h"
+#include <PluginManager.h>
+#include <debug.h>
 
 /*************************************************************
  * public BMediaDecoder

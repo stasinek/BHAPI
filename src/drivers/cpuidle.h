@@ -6,9 +6,9 @@
 #define _CPUIDLE_MODULE_H
 
 
-#include <module.h>
+#include <kits/netmodule.h>
 
-#include <Scheduler.h>
+#include <kits/netScheduler.h>
 
 
 #define CPUIDLE_MODULES_PREFIX	"power/cpuidle"

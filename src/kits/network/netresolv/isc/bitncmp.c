@@ -19,13 +19,13 @@
 static const char rcsid[] = "$Id: bitncmp.c,v 1.5 2008/11/14 02:36:51 marka Exp $";
 #endif
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 
 #include <string.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 #include <isc/misc.h>
 

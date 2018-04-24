@@ -17,9 +17,9 @@
 */
 
 
-#include <bus/ATA.h>
-#include <bus/PCI.h>
-#include <ata_types.h>
+#include <kits/netbus/ATA.h>
+#include <kits/netbus/PCI.h>
+#include <kits/netata_types.h>
 
 
 // one Physical Region Descriptor (PRD)

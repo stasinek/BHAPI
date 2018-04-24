@@ -9,7 +9,7 @@
 
 #include <pthread.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 // _pthread_thread::flags values

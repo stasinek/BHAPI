@@ -26,7 +26,7 @@ __RCSID("$NetBSD: inet_cidr_ntop.c,v 1.8 2012/03/13 21:13:38 christos Exp $");
 #endif
 #endif
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -40,7 +40,7 @@ __RCSID("$NetBSD: inet_cidr_ntop.c,v 1.8 2012/03/13 21:13:38 christos Exp $");
 #include <string.h>
 #include <stdlib.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 #ifdef __weak_alias
 __weak_alias(inet_cidr_ntop,_inet_cidr_ntop)

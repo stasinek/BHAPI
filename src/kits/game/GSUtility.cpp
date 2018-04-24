@@ -7,7 +7,7 @@
  */
 
 
-#include "GSUtility.h"
+#include <GSUtility.h>
 
 #include <GameSoundDefs.h>
 #include <MediaDefs.h>

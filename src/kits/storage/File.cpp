@@ -27,20 +27,20 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "File.h"
-#include "Path.h"
+#include <File.h>
+#include <Path.h>
 
-#include "../support/StringClass.h"
-#include "../support/Errors.h"
-#include "../kernel/Debug.h"
+#include <kits/support/StringClass.h>
+#include <kits/support/Errors.h>
+#include <os/debug.h>
 
 #ifndef _WIN32
 #define __USE_LARGEFILE64
 #define __USE_FILE_OFFSET64
 #endif
 
-#include <../include/sys/types.h>
-#include <../include/sys/stat.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <fcntl.h>
 
 #ifndef _WIN32

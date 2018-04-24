@@ -4,7 +4,7 @@
  */
 
 
-#include "paging/PPCPagingMethod.h"
+#include <paging/PPCPagingMethod.h>
 
 
 PPCPagingMethod* gPPCPagingMethod;

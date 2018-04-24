@@ -17,7 +17,7 @@
 #include <vm/vm.h>
 #include <util/AutoLock.h>
 
-#include "timers/apic_timer.h"
+#include <timers/apic_timer.h>
 
 
 static void *sLocalAPIC = NULL;

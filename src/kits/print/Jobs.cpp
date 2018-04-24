@@ -30,16 +30,16 @@
 /*****************************************************************************/
 
 
-#include "pr_server.h"
-#include "Jobs.h"
-// #include "PrintServerApp.h"
+#include <pr_server.h>
+#include <Jobs.h>
+// #include <PrintServerApp.h>
 
 // posix
 #include <stdlib.h>
 #include <string.h>
 
 // BeOS
-#include <kernel/fs_attr.h>
+#include <kits/kernel/fs_attr.h>
 #include <Application.h>
 #include <Node.h>
 #include <NodeInfo.h>

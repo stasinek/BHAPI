@@ -6,7 +6,7 @@
 #define _GRAPHICS_CARD_H
 
 
-#include <GraphicsDefs.h>
+#include <kits/netGraphicsDefs.h>
 
 
 /* #pragma mark - command constants */

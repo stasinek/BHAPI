@@ -4,7 +4,7 @@
  */
 
 
-#include <AppDefs.h>
+#include <kits/netAppDefs.h>
 #include <Haiku.h>
 
 

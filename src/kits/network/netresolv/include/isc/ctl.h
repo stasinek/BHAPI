@@ -24,8 +24,8 @@
 
 /*! \file */
 
-#include <../include/sys/types.h>
-#include <../include/sys/socket.h>
+#include <sys/types.h>
+#include <sys/socket.h>
 
 #include <isc/eventlib.h>
 

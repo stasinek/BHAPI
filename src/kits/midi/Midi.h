@@ -4,7 +4,7 @@
 
 #include <Haiku.h>
 #include <MidiDefs.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 class BList;
 class BMidiLocalProducer;

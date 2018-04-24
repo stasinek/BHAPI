@@ -32,7 +32,7 @@
 #define BHAPI_OUTLINE_LIST_VIEW_H
 
 #ifdef __cplusplus /* Just for C++ */
-#include "../interface/ListView.h"
+#include <kits/interface/ListView.h>
 class BHAPI_IMPEXP BOutlineListView : public BListView {
 public:
     BOutlineListView(BRect frame,

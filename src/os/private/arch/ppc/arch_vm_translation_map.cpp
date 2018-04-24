@@ -92,9 +92,9 @@
 
 #include <util/AutoLock.h>
 
-#include "generic_vm_physical_page_mapper.h"
-#include "generic_vm_physical_page_ops.h"
-#include "GenericVMPhysicalPageMapper.h"
+#include <generic_vm_physical_page_mapper.h>
+#include <generic_vm_physical_page_ops.h>
+#include <GenericVMPhysicalPageMapper.h>
 
 
 static struct page_table_entry_group *sPageTable;

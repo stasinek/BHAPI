@@ -38,7 +38,7 @@ All rights reserved.
 #include <CheckBox.h>
 #include <TextControl.h>
 
-#include "Model.h"
+#include <Model.h>
 
 
 namespace BPrivate {

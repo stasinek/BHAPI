@@ -8,7 +8,7 @@
 
 #include <StringClass.h>
 
-#include "Type.h"
+#include <Type.h>
 
 
 class TypeLookupConstraints {

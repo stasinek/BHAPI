@@ -1,7 +1,7 @@
 #ifndef _CONFIG_MANAGER_H
 #define _CONFIG_MANAGER_H
 
-#include <module.h>
+#include <kits/netmodule.h>
 
 #ifdef __cplusplus
 extern "C" {

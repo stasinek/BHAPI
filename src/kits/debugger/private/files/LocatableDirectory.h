@@ -5,7 +5,7 @@
 #ifndef LOCATABLE_DIRECTORY_H
 #define LOCATABLE_DIRECTORY_H
 
-#include "LocatableEntry.h"
+#include <LocatableEntry.h>
 
 
 class LocatableDirectory : public LocatableEntry {

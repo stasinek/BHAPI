@@ -4,15 +4,15 @@
  */
 
 
-#include "EnumerationValueNode.h"
+#include <EnumerationValueNode.h>
 
 #include <new>
 
-#include "EnumerationValue.h"
-#include "Tracing.h"
-#include "Type.h"
-#include "ValueLoader.h"
-#include "ValueLocation.h"
+#include <EnumerationValue.h>
+#include <Tracing.h>
+#include <Type.h>
+#include <ValueLoader.h>
+#include <ValueLocation.h>
 
 
 EnumerationValueNode::EnumerationValueNode(ValueNodeChild* nodeChild,

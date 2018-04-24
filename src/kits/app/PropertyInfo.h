@@ -49,7 +49,7 @@ struct value_info {
 #define BMESSAGE_I
 class BMessage;
 #endif
-#include <Flattenable.h>
+#include <kits/support/Flattenable.h>
 #include <HaikuConstants.h>
 #include <Haiku.h>
 class BHAPI_IMPEXP BPropertyInfo : public BFlattenable {

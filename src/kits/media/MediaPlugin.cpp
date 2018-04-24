@@ -4,7 +4,7 @@
 */
 
 
-#include "MediaPlugin.h"
+#include <MediaPlugin.h>
 
 
 MediaPlugin::MediaPlugin()

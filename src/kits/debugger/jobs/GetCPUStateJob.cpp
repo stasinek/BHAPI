@@ -4,14 +4,14 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Jobs.h"
+#include <Jobs.h>
 
 #include <AutoLocker.h>
 
-#include "CpuState.h"
-#include "DebuggerInterface.h"
-#include "Team.h"
-#include "Thread.h"
+#include <CpuState.h>
+#include <DebuggerInterface.h>
+#include <Team.h>
+#include <Thread.h>
 
 
 GetCpuStateJob::GetCpuStateJob(DebuggerInterface* debuggerInterface,

@@ -5,9 +5,9 @@
 #ifndef _POKE_DRIVER_H_
 #define _POKE_DRIVER_H_
 
-#include <Drivers.h>
-#include <ISA.h>
-#include <PCI.h>
+#include <kits/netDrivers.h>
+#include <kits/netISA.h>
+#include <kits/netPCI.h>
 
 
 #define POKE_DEVICE_NAME		"poke"

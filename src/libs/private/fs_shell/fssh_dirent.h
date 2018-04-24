@@ -5,7 +5,7 @@
 #define _FSSH_DIRENT_H
 
 
-#include "fssh_defs.h"
+#include <fssh_defs.h>
 
 
 typedef struct fssh_dirent {

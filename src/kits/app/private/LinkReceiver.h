@@ -11,7 +11,7 @@
 #define _LINK_RECEIVER_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 class BGradient;

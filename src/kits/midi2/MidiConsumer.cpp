@@ -8,9 +8,9 @@
  *		Matthijs Hollemans
  */
 
-#include "debug.h"
+#include <debug.h>
 #include <MidiConsumer.h>
-#include "protocol.h"
+#include <protocol.h>
 
 
 bigtime_t 

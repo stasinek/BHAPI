@@ -4,7 +4,7 @@
  */
 
 
-#include "TeamUiSettings.h"
+#include <TeamUiSettings.h>
 
 
 TeamUiSettings::TeamUiSettings()

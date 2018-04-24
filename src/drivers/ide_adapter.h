@@ -17,10 +17,10 @@
 */
 
 
-#include <bus/PCI.h>
-#include <bus/IDE.h>
-#include <ide_types.h>
-#include <device_manager.h>
+#include <kits/netbus/PCI.h>
+#include <kits/netbus/IDE.h>
+#include <kits/netide_types.h>
+#include <kits/netdevice_manager.h>
 
 
 // one Physical Region Descriptor (PRD)

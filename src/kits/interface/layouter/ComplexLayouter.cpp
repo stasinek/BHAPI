@@ -3,7 +3,7 @@
  * All rights reserved. Distributed under the terms of the MIT License.
  */
 
-#include "ComplexLayouter.h"
+#include <ComplexLayouter.h>
 
 #include <math.h>
 
@@ -11,13 +11,13 @@
 
 #include <new>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <Size.h>
 
 #include <AutoDeleter.h>
 
-#include "LayoutOptimizer.h"
-#include "SimpleLayouter.h"
+#include <LayoutOptimizer.h>
+#include <SimpleLayouter.h>
 
 
 //#define TRACE_COMPLEX_LAYOUTER	1

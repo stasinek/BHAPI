@@ -30,6 +30,6 @@
 #ifndef B_XML_KIT_H
 #define B_XML_KIT_H
 
-#include "xml/SimpleXmlParser.h"
+#include <kits/xml/SimpleXmlParser.h>
 
 #endif

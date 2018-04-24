@@ -30,8 +30,8 @@
 
 #include <be/kernel/OS.h>
 
-#include "../kernel/Kernel.h"
-#include "../support/StringClass.h"
+#include <os/kernel.h>
+#include <kits/support/StringClass.h>
 
 
 inline team_id __bhapi_get_current_beos_team_id()

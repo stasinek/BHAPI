@@ -31,7 +31,7 @@
 */
 
 
-#include <device_manager.h>
+#include <kits/netdevice_manager.h>
 
 
 typedef struct locked_pool *locked_pool_cookie;

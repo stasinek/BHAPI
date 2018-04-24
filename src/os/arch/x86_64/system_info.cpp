@@ -5,7 +5,7 @@
  */
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <musl/syscalls.h>
 
 

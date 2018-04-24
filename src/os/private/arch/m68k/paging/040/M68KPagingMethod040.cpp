@@ -9,7 +9,7 @@
  */
 
 
-#include "paging/040/M68KPagingMethod040.h"
+#include <paging/040/M68KPagingMethod040.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -23,10 +23,10 @@
 #include <vm/vm.h>
 #include <vm/VMAddressSpace.h>
 
-#include "paging/040/M68KPagingStructures040.h"
-#include "paging/040/M68KVMTranslationMap040.h"
-#include "paging/m68k_physical_page_mapper.h"
-#include "paging/m68k_physical_page_mapper_large_memory.h"
+#include <paging/040/M68KPagingStructures040.h>
+#include <paging/040/M68KVMTranslationMap040.h>
+#include <paging/m68k_physical_page_mapper.h>
+#include <paging/m68k_physical_page_mapper_large_memory.h>
 
 
 #define TRACE_M68K_PAGING_METHOD_32_BIT

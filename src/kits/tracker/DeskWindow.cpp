@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "DeskWindow.h"
+#include <DeskWindow.h>
 
 #include <Catalog.h>
 #include <Debug.h>
@@ -56,17 +56,17 @@ All rights reserved.
 #include <fcntl.h>
 #include <unistd.h>
 
-#include "Attributes.h"
-#include "AutoLock.h"
-#include "BackgroundImage.h"
-#include "Commands.h"
-#include "FSUtils.h"
-#include "IconMenuItem.h"
-#include "KeyInfos.h"
-#include "MountMenu.h"
-#include "PoseView.h"
-#include "Tracker.h"
-#include "TemplatesMenu.h"
+#include <Attributes.h>
+#include <AutoLock.h>
+#include <BackgroundImage.h>
+#include <Commands.h>
+#include <FSUtils.h>
+#include <IconMenuItem.h>
+#include <KeyInfos.h>
+#include <MountMenu.h>
+#include <PoseView.h>
+#include <Tracker.h>
+#include <TemplatesMenu.h>
 
 
 const char* kShelfPath = "tracker_shelf";

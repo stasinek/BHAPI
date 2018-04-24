@@ -31,7 +31,7 @@
 #define BHAPI_STREAM_IO_H
 
 #include <Haiku.h>
-#include "DataIO.h"
+#include <DataIO.h>
 #ifdef __cplusplus /* Just for C++ */
 #ifndef BSTRING_DEF
 #define BSTRING_DEF

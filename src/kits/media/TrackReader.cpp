@@ -36,8 +36,8 @@
 #include <MediaTrack.h>
 #include <MediaFile.h>
 #include <string.h>
-#include "TrackReader.h"
-#include "debug.h"
+#include <TrackReader.h>
+#include <debug.h>
 
 namespace BPrivate
 {

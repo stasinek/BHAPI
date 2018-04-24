@@ -30,8 +30,8 @@
 #ifndef _LINUX_DS_H
 #define _LINUX_DS_H
 
-#include <pcmcia/driver_ops.h>
-#include <pcmcia/bulkmem.h>
+#include <kits/netpcmcia/driver_ops.h>
+#include <kits/netpcmcia/bulkmem.h>
 
 typedef struct tuple_parse_t {
     tuple_t		tuple;

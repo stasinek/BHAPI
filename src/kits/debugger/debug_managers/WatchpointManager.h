@@ -8,7 +8,7 @@
 
 #include <Locker.h>
 
-#include "Watchpoint.h"
+#include <Watchpoint.h>
 
 
 class DebuggerInterface;

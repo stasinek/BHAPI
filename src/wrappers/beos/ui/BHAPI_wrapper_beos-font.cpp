@@ -32,13 +32,13 @@
 #include <be/app/AppDefs.h>
 #include <be/interface/Font.h>
 
-#include "BHAPI_wrapper_beos-graphics.h"
+#include <BHAPI_wrapper_beos-graphics.h>
 
-#include "../../add-ons/font/FontEngine.h"
-#include "../../support/ClassInfo.h"
-#include "../../support/Autolock.h"
-#include "../../interface/Window.h"
-#include "../../interface/View.h"
+#include <kits/add-ons/font/FontEngine.h>
+#include <kits/support/ClassInfo.h>
+#include <kits/support/Autolock.h>
+#include <kits/interface/Window.h>
+#include <kits/interface/View.h>
 
 
 class BFontBe : public BFontEngine {

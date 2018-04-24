@@ -30,9 +30,9 @@
 #ifndef BHAPI_PIXMAP_H
 #define BHAPI_PIXMAP_H
 #include <Haiku.h>
-#include "../interface/GraphicsDefs.h"
-#include "../interface/Region.h"
-#include "../render/Render.h"
+#include <kits/interface/GraphicsDefs.h>
+#include <kits/interface/Region.h>
+#include <kits/render/Render.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

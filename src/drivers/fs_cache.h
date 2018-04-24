@@ -8,7 +8,7 @@
 /*! File System File and Block Caches */
 
 
-#include <fs_interface.h>
+#include <kits/netfs_interface.h>
 
 
 /* transaction events */

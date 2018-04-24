@@ -6,8 +6,8 @@
 #define CORE_FILE_DEBUGGER_INTERFACE_H
 
 
-#include "DebuggerInterface.h"
-#include "TeamMemory.h"
+#include <DebuggerInterface.h>
+#include <TeamMemory.h>
 
 
 class CoreFile;

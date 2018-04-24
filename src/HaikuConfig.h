@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2009-2010, Haiku, Inc. All Rights Reserved.
  * Distributed under the terms of the MIT License.
  */

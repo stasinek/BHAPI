@@ -20,12 +20,12 @@
 #include <Message.h>
 #include <Path.h>
 
-#include <../include/syscalls.h>
+#include <syscalls.h>
 #include <ddm_userland_interface_defs.h>
 
-#include "DiskDeviceJob.h"
-#include "DiskDeviceJobGenerator.h"
-#include "DiskDeviceJobQueue.h"
+#include <DiskDeviceJob.h>
+#include <DiskDeviceJobGenerator.h>
+#include <DiskDeviceJobQueue.h>
 #include <DiskSystemAddOnManager.h>
 
 

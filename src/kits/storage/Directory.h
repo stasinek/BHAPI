@@ -30,7 +30,7 @@
 #ifndef BHAPI_DIRECTORY_H
 #define BHAPI_DIRECTORY_H 
 
-#include "Entry.h"
+#include <Entry.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

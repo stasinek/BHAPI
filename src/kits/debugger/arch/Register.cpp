@@ -5,7 +5,7 @@
  */
 
 
-#include "Register.h"
+#include <Register.h>
 
 #include <HaikuConstants.h>
 

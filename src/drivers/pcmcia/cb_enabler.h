@@ -32,18 +32,18 @@
 
 #define __KERNEL__
 
-#include <pcmcia/config.h>
-#include <pcmcia/k_compat.h>
+#include <kits/netpcmcia/config.h>
+#include <kits/netpcmcia/k_compat.h>
 
-#include <pcmcia/version.h>
-#include <pcmcia/cs_types.h>
-#include <pcmcia/cs.h>
-#include <pcmcia/cistpl.h>
-#include <pcmcia/ds.h>
+#include <kits/netpcmcia/version.h>
+#include <kits/netpcmcia/cs_types.h>
+#include <kits/netpcmcia/cs.h>
+#include <kits/netpcmcia/cistpl.h>
+#include <kits/netpcmcia/ds.h>
 
 #undef __KERNEL__
 
-#include <PCI.h>
+#include <kits/netPCI.h>
 
 #define CB_ENABLER_MODULE_NAME	"bus_managers/cb_enabler/v0"
 

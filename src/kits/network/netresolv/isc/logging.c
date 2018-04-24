@@ -19,7 +19,7 @@
 static const char rcsid[] = "$Id: logging.c,v 1.9 2008/11/14 02:36:51 marka Exp $";
 #endif /* not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <sys/time.h>
@@ -41,9 +41,9 @@ static const char rcsid[] = "$Id: logging.c,v 1.9 2008/11/14 02:36:51 marka Exp 
 #include <isc/memcluster.h>
 #include <isc/misc.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
-#include "logging_p.h"
+#include <logging_p.h>
 
 static const int syslog_priority[] = { LOG_DEBUG, LOG_INFO, LOG_NOTICE,
 				       LOG_WARNING, LOG_ERR, LOG_CRIT };

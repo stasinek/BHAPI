@@ -4,22 +4,22 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Jobs.h"
+#include <Jobs.h>
 
 #include <AutoLocker.h>
 
-#include "Architecture.h"
-#include "CpuState.h"
-#include "DebuggerInterface.h"
-#include "TeamTypeInformation.h"
-#include "Tracing.h"
-#include "Value.h"
-#include "ValueLoader.h"
-#include "ValueLocation.h"
-#include "ValueNode.h"
-#include "ValueNodeContainer.h"
-#include "Variable.h"
-#include "VariableValueNodeChild.h"
+#include <Architecture.h>
+#include <CpuState.h>
+#include <DebuggerInterface.h>
+#include <TeamTypeInformation.h>
+#include <Tracing.h>
+#include <Value.h>
+#include <ValueLoader.h>
+#include <ValueLocation.h>
+#include <ValueNode.h>
+#include <ValueNodeContainer.h>
+#include <Variable.h>
+#include <VariableValueNodeChild.h>
 
 
 ResolveValueNodeValueJob::ResolveValueNodeValueJob(

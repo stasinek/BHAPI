@@ -8,12 +8,12 @@
  */
 
 
-#include "paging/M68KVMTranslationMap.h"
+#include <paging/M68KVMTranslationMap.h>
 
 #include <thread.h>
 #include <smp.h>
 
-#include "paging/M68KPagingStructures.h"
+#include <paging/M68KPagingStructures.h>
 
 
 //#define TRACE_M68K_VM_TRANSLATION_MAP

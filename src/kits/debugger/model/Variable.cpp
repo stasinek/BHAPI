@@ -4,12 +4,12 @@
  */
 
 
-#include "Variable.h"
+#include <Variable.h>
 
-#include "CpuState.h"
-#include "ObjectID.h"
-#include "Type.h"
-#include "ValueLocation.h"
+#include <CpuState.h>
+#include <ObjectID.h>
+#include <Type.h>
+#include <ValueLocation.h>
 
 
 Variable::Variable(ObjectID* id, const BString& name, Type* type,

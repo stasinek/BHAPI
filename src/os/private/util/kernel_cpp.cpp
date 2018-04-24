@@ -10,7 +10,7 @@
 //!	C++ in the kernel
 
 
-#include "util/kernel_cpp.h"
+#include <util/kernel_cpp.h>
 
 #ifdef _BOOT_MODE
 #	include <boot/platform.h>

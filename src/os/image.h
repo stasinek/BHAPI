@@ -5,8 +5,8 @@
 //-------------------------------------------------------------------------------------------------
 #ifndef BHAPI_IMAGE_H
 #define	BHAPI_IMAGE_H
-#include <kernel/OS.h>
-#include <../include/sys/param.h>
+#include <kits/kernel/OS.h>
+#include <sys/param.h>
 //-------------------------------------------------------------------------------------------------
 #ifdef __cplusplus
 namespace bhapi {

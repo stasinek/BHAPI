@@ -25,10 +25,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "AddOnManager.h"
-#include "DataExchange.h"
-#include "debug.h"
-#include "MediaMisc.h"
+#include <AddOnManager.h>
+#include <DataExchange.h>
+#include <debug.h>
+#include <MediaMisc.h>
 
 
 #define META_DATA_MAX_SIZE			(16 << 20)

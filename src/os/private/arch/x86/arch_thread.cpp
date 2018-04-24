@@ -22,9 +22,9 @@
 #include <vm/vm_types.h>
 #include <vm/VMAddressSpace.h>
 
-#include "paging/X86PagingStructures.h"
-#include "paging/X86VMTranslationMap.h"
-#include "x86_syscalls.h"
+#include <paging/X86PagingStructures.h>
+#include <paging/X86VMTranslationMap.h>
+#include <x86_syscalls.h>
 
 
 // from arch_interrupts.S

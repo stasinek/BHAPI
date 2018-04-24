@@ -4,9 +4,9 @@
  */
 
 
-#include "ReturnValueInfo.h"
+#include <ReturnValueInfo.h>
 
-#include "CpuState.h"
+#include <CpuState.h>
 
 
 ReturnValueInfo::ReturnValueInfo()

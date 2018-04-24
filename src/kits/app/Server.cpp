@@ -8,7 +8,7 @@
  */
 
 
-#include <Server.h>
+#include <kits/netServer.h>
 
 
 BServer::BServer(const char* signature, bool initGUI, status_t *error)

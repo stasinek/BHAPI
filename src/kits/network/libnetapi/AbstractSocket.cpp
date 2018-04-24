@@ -9,7 +9,7 @@
 #include <arpa/inet.h>
 #include <fcntl.h>
 #include <netinet/in.h>
-#include <../include/sys/poll.h>
+#include <sys/poll.h>
 
 
 //#define TRACE_SOCKET

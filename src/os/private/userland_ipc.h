@@ -9,10 +9,10 @@
 		and the userland stack.
 */
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <Drivers.h>
 
-#include "net_stack_driver.h"
+#include <net_stack_driver.h>
 
 #ifdef __cplusplus
 extern "C" {

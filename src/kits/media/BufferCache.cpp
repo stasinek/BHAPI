@@ -8,11 +8,11 @@
 //! A cache for BBuffers to be received by BBufferConsumer::BufferReceived().
 
 
-#include "BufferCache.h"
+#include <BufferCache.h>
 
 #include <Buffer.h>
 
-#include "debug.h"
+#include <debug.h>
 
 
 namespace BPrivate {

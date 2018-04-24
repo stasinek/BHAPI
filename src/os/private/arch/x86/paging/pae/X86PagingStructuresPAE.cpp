@@ -4,7 +4,7 @@
  */
 
 
-#include "paging/pae/X86PagingStructuresPAE.h"
+#include <paging/pae/X86PagingStructuresPAE.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +13,7 @@
 
 #include <int.h>
 
-#include "paging/pae/X86PagingMethodPAE.h"
+#include <paging/pae/X86PagingMethodPAE.h>
 
 
 #if B_HAIKU_PHYSICAL_BITS == 64

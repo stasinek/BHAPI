@@ -28,19 +28,19 @@
  * --------------------------------------------------------------------------*/
 
 #ifdef __BEOS__
-#include "../../app/AppDefs.h"
-#include "../../interface/Font.h"
+#include <kits/app/AppDefs.h>
+#include <kits/interface/Font.h>
 #endif
 
-#include "FontEngine.h"
+#include <kits/netFontEngine.h>
 
-#include "../../support/Locker.h"
-#include "../../support/Autolock.h"
-#include "../../support/Errors.h"
-#include "../../support/StringClass.h"
-#include "../../app/Application.h"
-#include "../../add-ons/graphics/GraphicsEngine.h"
-#include "../../kernel/Debug.h"
+#include <kits/support/Locker.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/Errors.h>
+#include <kits/support/StringClass.h>
+#include <kits/app/Application.h>
+#include <kits/add-ons/graphics/GraphicsEngine.h>
+#include <os/debug.h>
 
 #ifdef HAVE_FT2
 namespace bhapi {

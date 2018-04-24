@@ -1,5 +1,5 @@
 #include <OS.h>
-#include "syscalls.h"
+#include <syscalls.h>
 
 
 thread_id

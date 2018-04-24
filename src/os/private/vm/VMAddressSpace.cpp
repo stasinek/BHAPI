@@ -24,8 +24,8 @@
 #include <vm/VMArea.h>
 #include <vm/VMCache.h>
 
-#include "VMKernelAddressSpace.h"
-#include "VMUserAddressSpace.h"
+#include <VMKernelAddressSpace.h>
+#include <VMUserAddressSpace.h>
 
 
 //#define TRACE_VM

@@ -9,20 +9,20 @@
 
 /** Class for low-overhead port-based messaging */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <new>
+#include <kits/netstdio.h>
+#include <kits/netstdlib.h>
+#include <kits/netstring.h>
+#include <kits/netnew>
 
-#include <ServerProtocol.h>
-#include <LinkSender.h>
+#include <kits/netServerProtocol.h>
+#include <kits/netLinkSender.h>
 
-#include "link_message.h"
-#include "syscalls.h"
+#include <kits/netlink_message.h>
+#include <kits/netsyscalls.h>
 
 //#define DEBUG_BPORTLINK
 #ifdef DEBUG_BPORTLINK
-#	include <stdio.h>
+#	include <kits/netstdio.h>
 #	define STRACE(x) printf x
 #else
 #	define STRACE(x) ;

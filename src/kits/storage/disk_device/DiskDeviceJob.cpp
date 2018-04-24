@@ -3,9 +3,9 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "DiskDeviceJob.h"
+#include <DiskDeviceJob.h>
 
-#include "PartitionReference.h"
+#include <PartitionReference.h>
 
 
 // constructor

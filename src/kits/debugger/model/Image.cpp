@@ -3,12 +3,12 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "Image.h"
+#include <Image.h>
 
-#include "ImageDebugInfo.h"
-#include "LocatableFile.h"
-#include "Team.h"
-#include "TeamDebugInfo.h"
+#include <ImageDebugInfo.h>
+#include <LocatableFile.h>
+#include <Team.h>
+#include <TeamDebugInfo.h>
 
 
 Image::Image(Team* team,const ImageInfo& imageInfo, LocatableFile* imageFile)

@@ -6,7 +6,7 @@
 #define CSTRING_VALUE_NODE_H
 
 
-#include "ValueNode.h"
+#include <ValueNode.h>
 
 
 class AddressType;

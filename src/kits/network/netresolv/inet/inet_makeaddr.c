@@ -37,13 +37,13 @@
 static const char sccsid[] = "@(#)inet_makeaddr.c	8.1 (Berkeley) 6/4/93";
 #endif /* LIBC_SCCS and not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/param.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 /*
  * Formulate an Internet address from network + host.  Used in

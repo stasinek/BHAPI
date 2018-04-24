@@ -8,8 +8,8 @@
  */
 
 
-#include "DefaultMediaTheme.h"
-#include "debug.h"
+#include <DefaultMediaTheme.h>
+#include <debug.h>
 
 #include <MediaTheme.h>
 #include <StringView.h>

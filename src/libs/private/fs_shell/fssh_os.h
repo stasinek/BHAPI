@@ -6,7 +6,7 @@
 #ifndef _FSSH_SEM_H
 #define _FSSH_SEM_H
 
-#include "fssh_types.h"
+#include <fssh_types.h>
 
 
 #ifdef __cplusplus

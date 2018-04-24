@@ -28,17 +28,17 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Clipboard.h"
-#include "Application.h"
+#include <kits/netClipboard.h>
+#include <kits/netApplication.h>
 
-#include "../kernel/Kernel.h"
-#include "../kernel/Debug.h"
-#include "../support/StringClass.h"
-#include "../support/List.h"
-#include "../support/SimpleLocker.h"
-#include "../support/Errors.h"
-#include "../app/Message.h"
-#include "../app/AppDefs.h"
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/List.h>
+#include <kits/support/SimpleLocker.h>
+#include <kits/support/Errors.h>
+#include <kits/app/Message.h>
+#include <kits/app/AppDefs.h>
 
 
 

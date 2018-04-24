@@ -20,10 +20,10 @@
 #include <arch_mmu.h>
 #include <stdlib.h>
 
-#include "generic_vm_physical_page_mapper.h"
-//#include "paging/030/M68KPagingMethod030.h"
-#include "paging/040/M68KPagingMethod040.h"
-//#include "paging/060/M68KPagingMethod060.h"
+#include <generic_vm_physical_page_mapper.h>
+//#include <paging/030/M68KPagingMethod030.h>
+#include <paging/040/M68KPagingMethod040.h>
+//#include <paging/060/M68KPagingMethod060.h>
 
 
 #define TRACE_VM_TMAP

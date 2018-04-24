@@ -30,9 +30,9 @@
 #ifndef BHAPI_RENDER_H
 #define BHAPI_RENDER_H
 
-#include "../interface/Polygon.h"
-#include "../interface/Rect.h"
-#include "../interface/GraphicsDefs.h"
+#include <kits/interface/Polygon.h>
+#include <kits/interface/Rect.h>
+#include <kits/interface/GraphicsDefs.h>
 #include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */

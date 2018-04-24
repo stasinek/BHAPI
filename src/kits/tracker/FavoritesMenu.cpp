@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "FavoritesMenu.h"
+#include <FavoritesMenu.h>
 
 #include <compat/sys/stat.h>
 
@@ -50,12 +50,12 @@ All rights reserved.
 #include <functional>
 #include <algorithm>
 
-#include "IconMenuItem.h"
-#include "PoseView.h"
-#include "QueryPoseView.h"
-#include "Tracker.h"
-#include "Utilities.h"
-#include "VirtualDirectoryEntryList.h"
+#include <IconMenuItem.h>
+#include <PoseView.h>
+#include <QueryPoseView.h>
+#include <Tracker.h>
+#include <Utilities.h>
+#include <VirtualDirectoryEntryList.h>
 
 
 #undef B_TRANSLATION_CONTEXT

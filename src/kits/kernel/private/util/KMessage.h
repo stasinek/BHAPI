@@ -8,7 +8,7 @@
 
 #include <string.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <HaikuConstants.h>
 
 

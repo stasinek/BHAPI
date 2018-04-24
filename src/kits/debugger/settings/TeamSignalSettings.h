@@ -7,7 +7,7 @@
 
 #include <Message.h>
 
-#include "SignalDispositionTypes.h"
+#include <SignalDispositionTypes.h>
 
 
 class TeamSignalSettings {

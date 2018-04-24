@@ -6,16 +6,16 @@
  */
 
 
-#include "KDiskDevice.h"
-#include "KDiskDeviceManager.h"
-#include "KDiskDeviceUtils.h"
-#include "KDiskSystem.h"
-#include "KFileDiskDevice.h"
-#include "KFileSystem.h"
-#include "KPartition.h"
-#include "KPartitioningSystem.h"
-#include "KPartitionVisitor.h"
-#include "KPath.h"
+#include <KDiskDevice.h>
+#include <KDiskDeviceManager.h>
+#include <KDiskDeviceUtils.h>
+#include <KDiskSystem.h>
+#include <KFileDiskDevice.h>
+#include <KFileSystem.h>
+#include <KPartition.h>
+#include <KPartitioningSystem.h>
+#include <KPartitionVisitor.h>
+#include <KPath.h>
 
 #include <VectorMap.h>
 #include <VectorSet.h>

@@ -7,8 +7,8 @@
 #define DEBUGGER_IMAGE_DEBUG_INFO_H
 
 
-#include "ImageInfo.h"
-#include "SpecificImageDebugInfo.h"
+#include <ImageInfo.h>
+#include <SpecificImageDebugInfo.h>
 
 
 class Architecture;

@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "FSClipboard.h"
+#include <FSClipboard.h>
 
 #include <Clipboard.h>
 #include <Alert.h>
@@ -41,9 +41,9 @@ All rights reserved.
 #include <LocaleClass.h>
 #include <NodeMonitor.h>
 
-#include "Commands.h"
-#include "FSUtils.h"
-#include "Tracker.h"
+#include <Commands.h>
+#include <FSUtils.h>
+#include <Tracker.h>
 
 
 // prototypes

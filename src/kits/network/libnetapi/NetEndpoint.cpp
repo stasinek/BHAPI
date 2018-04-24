@@ -12,9 +12,9 @@
 #include <netinet/in.h>
 #include <new>
 
-#include <../include/sys/socket.h>
-#include <../include/sys/time.h>
-#include <../include/sys/types.h>
+#include <sys/socket.h>
+#include <sys/time.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 

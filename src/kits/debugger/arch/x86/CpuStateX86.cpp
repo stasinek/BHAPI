@@ -4,13 +4,13 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "CpuStateX86.h"
+#include <CpuStateX86.h>
 
 #include <new>
 
 #include <string.h>
 
-#include "Register.h"
+#include <Register.h>
 
 
 CpuStateX86::CpuStateX86()

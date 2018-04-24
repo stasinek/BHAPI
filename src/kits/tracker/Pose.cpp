@@ -41,12 +41,12 @@ All rights reserved.
 #include <Volume.h>
 #include <fs_info.h>
 
-#include "Attributes.h"
-#include "Commands.h"
-#include "FSClipboard.h"
-#include "IconCache.h"
-#include "Pose.h"
-#include "PoseView.h"
+#include <Attributes.h>
+#include <Commands.h>
+#include <FSClipboard.h>
+#include <IconCache.h>
+#include <Pose.h>
+#include <PoseView.h>
 
 
 int32 CalcFreeSpace(BVolume* volume)

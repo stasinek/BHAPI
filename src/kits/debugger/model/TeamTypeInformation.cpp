@@ -4,7 +4,7 @@
  */
 
 
-#include "TeamTypeInformation.h"
+#include <TeamTypeInformation.h>
 
 
 TeamTypeInformation::~TeamTypeInformation()

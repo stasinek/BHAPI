@@ -11,7 +11,7 @@
 
 #include <StringList.h>
 
-#include "PoseView.h"
+#include <PoseView.h>
 
 
 namespace BPrivate {

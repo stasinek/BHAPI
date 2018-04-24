@@ -7,9 +7,9 @@
  */
 
 
-#include "irq_routing_table.h"
+#include <irq_routing_table.h>
 
-#include "acpi.h"
+#include <acpi.h>
 
 #include <int.h>
 

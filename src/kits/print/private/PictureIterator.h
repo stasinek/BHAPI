@@ -32,8 +32,8 @@ THE SOFTWARE.
 #ifndef _PICTURE_ITERATOR_H
 #define _PICTURE_TIERATOR_H
 
-#include <AppKit.h>
-#include <InterfaceKit.h>
+#include <kits/AppKit.h>
+#include <kits/InterfaceKit.h>
 
 class PictureIterator 
 {

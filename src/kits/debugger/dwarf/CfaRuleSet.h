@@ -6,7 +6,7 @@
 #define CFA_RULE_SET_H
 
 
-#include "CfaRule.h"
+#include <CfaRule.h>
 
 
 class CfaRuleSet {

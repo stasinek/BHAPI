@@ -27,9 +27,9 @@
 
 #include <MidiSettings.h>
 
-#include "debug.h"
-#include "MidiGlue.h"   // for MAKE_BIGTIME
-#include "SoftSynth.h"
+#include <debug.h>
+#include <MidiGlue.h>   // for MAKE_BIGTIME
+#include <SoftSynth.h>
 
 using namespace BPrivate;
 

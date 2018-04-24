@@ -9,10 +9,10 @@
 #define LOOPER_LIST_H
 
 
-#include <vector>
+#include <kits/netvector>
 
-#include <Locker.h>
-#include <kernel/OS.h>
+#include <kits/netLocker.h>
+#include <kits/kernel/OS.h>
 #include <Haiku.h>
 
 

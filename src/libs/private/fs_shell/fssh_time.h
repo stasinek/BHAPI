@@ -6,7 +6,7 @@
 #define _FSSH_TIME_H_
 
 
-#include "fssh_defs.h"
+#include <fssh_defs.h>
 
 
 typedef int32_t fssh_clock_t;

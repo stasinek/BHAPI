@@ -29,13 +29,13 @@
 #include <timer.h>
 #include <util/Random.h>
 
-#include "scheduler_common.h"
-#include "scheduler_cpu.h"
-#include "scheduler_locking.h"
-#include "scheduler_modes.h"
-#include "scheduler_profiler.h"
-#include "scheduler_thread.h"
-#include "scheduler_tracing.h"
+#include <scheduler_common.h>
+#include <scheduler_cpu.h>
+#include <scheduler_locking.h>
+#include <scheduler_modes.h>
+#include <scheduler_profiler.h>
+#include <scheduler_thread.h>
+#include <scheduler_tracing.h>
 
 
 namespace Scheduler {

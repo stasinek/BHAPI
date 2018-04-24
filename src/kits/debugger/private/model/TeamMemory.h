@@ -9,7 +9,7 @@
 
 #include <Referenceable.h>
 
-#include "TargetAddressRange.h"
+#include <TargetAddressRange.h>
 
 
 class BString;

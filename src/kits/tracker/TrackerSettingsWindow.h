@@ -41,7 +41,7 @@ All rights reserved.
 #include <ListItem.h>
 #include <Window.h>
 
-#include "SettingsViews.h"
+#include <SettingsViews.h>
 
 
 namespace BPrivate {

@@ -26,7 +26,7 @@ __RCSID("$NetBSD: res_data.c,v 1.14 2009/10/24 05:35:37 christos Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <sys/param.h>
@@ -46,9 +46,9 @@ __RCSID("$NetBSD: res_data.c,v 1.14 2009/10/24 05:35:37 christos Exp $");
 #include <string.h>
 #include <unistd.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
-#include "res_private.h"
+#include <res_private.h>
 
 #ifdef __weak_alias
 __weak_alias(res_init,_res_init)

@@ -13,8 +13,8 @@
 
 #include <File.h>
 
-#include "OldMediaModule.h"
-#include "OldMediaDefs.h"
+#include <OldMediaModule.h>
+#include <OldMediaDefs.h>
 
 class BADCStream;
 class BDACStream;

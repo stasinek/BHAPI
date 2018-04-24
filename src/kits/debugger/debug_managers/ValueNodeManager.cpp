@@ -4,17 +4,17 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "ValueNodeManager.h"
+#include <ValueNodeManager.h>
 
-#include "AutoLocker.h"
+#include <AutoLocker.h>
 
-#include "model/Thread.h"
-#include "StackFrame.h"
-#include "Team.h"
-#include "TypeHandlerRoster.h"
-#include "ValueNode.h"
-#include "Variable.h"
-#include "VariableValueNodeChild.h"
+#include <model/Thread.h>
+#include <StackFrame.h>
+#include <Team.h>
+#include <TypeHandlerRoster.h>
+#include <ValueNode.h>
+#include <Variable.h>
+#include <VariableValueNodeChild.h>
 
 
 ValueNodeManager::ValueNodeManager(bool addFrameNodes)

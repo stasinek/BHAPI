@@ -42,7 +42,7 @@ __RCSID("$NetBSD: getprotobyname_r.c,v 1.3 2005/04/18 19:39:45 kleink Exp $");
 #include <netdb.h>
 #include <string.h>
 
-#include "protoent.h"
+#include <protoent.h>
 
 #ifdef __weak_alias
 __weak_alias(getprotobyname_r,_getprotobyname_r)

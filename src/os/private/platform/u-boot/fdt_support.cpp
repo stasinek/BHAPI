@@ -8,7 +8,7 @@
  */
 
 
-#include "fdt_support.h"
+#include <fdt_support.h>
 
 #include <KernelExport.h>
 #include <ByteOrder.h>

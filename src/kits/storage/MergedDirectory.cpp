@@ -13,14 +13,14 @@
 
 #include <new>
 #include <set>
-#include <../include/string>
+#include <string>
 
 #include <Directory.h>
 #include <Entry.h>
 
 #include <AutoDeleter.h>
 
-#include "storage_support.h"
+#include <storage_support.h>
 
 
 struct BMergedDirectory::EntryNameSet : std::set<std::string> {

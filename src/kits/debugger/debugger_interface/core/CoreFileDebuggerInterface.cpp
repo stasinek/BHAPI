@@ -4,7 +4,7 @@
  */
 
 
-#include "CoreFileDebuggerInterface.h"
+#include <CoreFileDebuggerInterface.h>
 
 #include <algorithm>
 #include <new>
@@ -13,14 +13,14 @@
 
 #include <AutoDeleter.h>
 
-#include "ArchitectureX86.h"
-#include "ArchitectureX8664.h"
-#include "CoreFile.h"
-#include "ElfSymbolLookup.h"
-#include "ImageInfo.h"
-#include "TeamInfo.h"
-#include "ThreadInfo.h"
-#include "Tracing.h"
+#include <ArchitectureX86.h>
+#include <ArchitectureX8664.h>
+#include <CoreFile.h>
+#include <ElfSymbolLookup.h>
+#include <ImageInfo.h>
+#include <TeamInfo.h>
+#include <ThreadInfo.h>
+#include <Tracing.h>
 
 
 CoreFileDebuggerInterface::CoreFileDebuggerInterface(CoreFile* coreFile)

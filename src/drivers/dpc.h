@@ -6,8 +6,8 @@
 #ifndef _DPC_MODULE_H_
 #define _DPC_MODULE_H_
 
-#include <kernel/OS.h>
-#include <module.h>
+#include <kits/kernel/OS.h>
+#include <kits/netmodule.h>
 
 #ifdef __cplusplus
 extern "C" {

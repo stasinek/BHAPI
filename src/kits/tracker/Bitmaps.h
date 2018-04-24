@@ -40,7 +40,7 @@ All rights reserved.
 #include <Mime.h>
 #include <image.h>
 
-#include "TrackerIcons.h"
+#include <TrackerIcons.h>
 
 
 class BBitmap;

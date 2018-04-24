@@ -6,7 +6,7 @@
  *		IngoWeinhold <bonefish@cs.tu-berlin.de>
  */
 
-#include "RWLocker.h"
+#include <RWLocker.h>
 
 #include <StringClass.h>
 

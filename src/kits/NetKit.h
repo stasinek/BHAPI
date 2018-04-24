@@ -30,9 +30,9 @@
 #ifndef B_NET_KIT_H
 #define B_NET_KIT_H
 
-#include "net/NetAddress.h"
-#include "net/NetBuffer.h"
-#include "net/NetDebug.h"
-#include "net/NetEndpoint.h"
+#include <kits/net/NetAddress.h>
+#include <kits/net/NetBuffer.h>
+#include <kits/net/NetDebug.h>
+#include <kits/net/NetEndpoint.h>
 
 #endif

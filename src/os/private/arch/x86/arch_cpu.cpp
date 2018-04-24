@@ -33,8 +33,8 @@
 #include <arch/x86/apic.h>
 #include <boot/kernel_args.h>
 
-#include "paging/X86PagingStructures.h"
-#include "paging/X86VMTranslationMap.h"
+#include <paging/X86PagingStructures.h>
+#include <paging/X86VMTranslationMap.h>
 
 
 #define DUMP_FEATURE_STRING 1

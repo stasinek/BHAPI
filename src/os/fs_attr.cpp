@@ -4,22 +4,22 @@
  */
 
 #ifdef HAIKU_HOST_USE_XATTR
-#	include "fs_attr_untyped.cpp"
+#	include <fs_attr_untyped.cpp"
 #else
-#	include "fs_attr_generic.cpp"
+#	include <fs_attr_generic.cpp"
 #endif
 
 #include <fs_attr.h>
 
-#include <../include/syscall_utils.h>
+#include <syscall_utils.h>
 #include <errno.h>
 #include <fcntl.h>
 
 
 #include <dirent_private.h>
 #include <errno_private.h>
-#include <../include/syscalls.h>
-#include <../include/syscall_utils.h>
+#include <syscalls.h>
+#include <syscall_utils.h>
 
 
 // TODO: think about adding special syscalls for the read/write/stat functions

@@ -11,7 +11,7 @@
 /*! This file contains the debugger and debug output facilities */
 
 
-#include "blue_screen.h"
+#include <blue_screen.h>
 
 #include <ctype.h>
 #include <errno.h>
@@ -48,10 +48,10 @@
 
 #include <syslog_daemon.h>
 
-#include "debug_builtin_commands.h"
-#include "debug_commands.h"
-#include "debug_output_filter.h"
-#include "debug_variables.h"
+#include <debug_builtin_commands.h>
+#include <debug_commands.h>
+#include <debug_output_filter.h>
+#include <debug_variables.h>
 
 
 #if __GNUC__ == 2

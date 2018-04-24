@@ -9,7 +9,7 @@
  */
 
 
-#include "paging/32bit/ARMVMTranslationMap32Bit.h"
+#include <paging/32bit/ARMVMTranslationMap32Bit.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -25,9 +25,9 @@
 #include <vm/VMAddressSpace.h>
 #include <vm/VMCache.h>
 
-#include "paging/32bit/ARMPagingMethod32Bit.h"
-#include "paging/32bit/ARMPagingStructures32Bit.h"
-#include "paging/arm_physical_page_mapper.h"
+#include <paging/32bit/ARMPagingMethod32Bit.h>
+#include <paging/32bit/ARMPagingStructures32Bit.h>
+#include <paging/arm_physical_page_mapper.h>
 
 
 //#define TRACE_ARM_VM_TRANSLATION_MAP_32_BIT

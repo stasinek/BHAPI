@@ -42,10 +42,10 @@ All rights reserved.
 #include <MenuItem.h>
 #include <Query.h>
 
-#include "Attributes.h"
-#include "Commands.h"
-#include "QueryContainerWindow.h"
-#include "QueryPoseView.h"
+#include <Attributes.h>
+#include <Commands.h>
+#include <QueryContainerWindow.h>
+#include <QueryPoseView.h>
 
 
 //	#pragma mark - BQueryContainerWindow

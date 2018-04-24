@@ -22,7 +22,7 @@
 #include <LocaleClass.h>
 #include <bluetoothserver_p.h>
 
-#include "KitSupport.h"
+#include <KitSupport.h>
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "RemoteDevice"

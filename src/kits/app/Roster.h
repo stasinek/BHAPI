@@ -49,8 +49,8 @@ class BMimeType;
 #define BLIST_I
 class BList;
 #endif
-#include <Entry.h>
-#include <Messenger.h>
+#include <kits/storage/Entry.h>
+#include <kits/app/Messenger.h>
 #include <Haiku.h>
 
 #ifdef __cplusplus

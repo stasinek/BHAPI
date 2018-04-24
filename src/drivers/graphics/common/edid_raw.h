@@ -13,7 +13,7 @@
 #define _EDID_RAW_H
 
 
-#include "bendian_bitfield.h"
+#include <kits/netbendian_bitfield.h>
 
 
 /*!	Raw EDID data block.

@@ -35,7 +35,7 @@
 #include <ServerProtocol.h>
 #include <ViewPrivate.h>
 
-#include "ZombieReplicantView.h"
+#include <ZombieReplicantView.h>
 
 using BPrivate::gSystemCatalog;
 

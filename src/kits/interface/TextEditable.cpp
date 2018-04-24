@@ -28,15 +28,15 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "TextEditable.h"
-#include "Window.h"
+#include <TextEditable.h>
+#include <Window.h>
 
-#include "../app/Application.h"
-#include "../app/AppDefs.h"
-#include "../support/Errors.h"
-#include "../app/Message.h"
-#include "../support/StringClass.h"
-#include "../support/UTF8.h"
+#include <kits/app/Application.h>
+#include <kits/app/AppDefs.h>
+#include <kits/support/Errors.h>
+#include <kits/app/Message.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/UTF8.h>
 
 
 BTextEditable::BTextEditable(BRect frame,

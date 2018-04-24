@@ -8,7 +8,7 @@
  */
 
 
-#include "paging/pae/X86VMTranslationMapPAE.h"
+#include <paging/pae/X86VMTranslationMapPAE.h>
 
 #include <int.h>
 #include <slab/Slab.h>
@@ -19,9 +19,9 @@
 #include <vm/VMAddressSpace.h>
 #include <vm/VMCache.h>
 
-#include "paging/pae/X86PagingMethodPAE.h"
-#include "paging/pae/X86PagingStructuresPAE.h"
-#include "paging/x86_physical_page_mapper.h"
+#include <paging/pae/X86PagingMethodPAE.h>
+#include <paging/pae/X86PagingStructuresPAE.h>
+#include <paging/x86_physical_page_mapper.h>
 
 
 //#define TRACE_X86_VM_TRANSLATION_MAP_PAE

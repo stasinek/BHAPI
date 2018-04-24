@@ -13,8 +13,8 @@
 #ifdef FS_SHELL
 #	include <new>
 
-#	include "fssh_api_wrapper.h"
-#	include "fssh_auto_deleter.h"
+#	include <fssh_api_wrapper.h>
+#	include <fssh_auto_deleter.h>
 #else
 #	include <SupportDefs.h>
 #endif	// !FS_SHELL

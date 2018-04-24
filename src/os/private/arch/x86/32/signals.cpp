@@ -4,7 +4,7 @@
  */
 
 
-#include "x86_signals.h"
+#include <x86_signals.h>
 
 #include <string.h>
 
@@ -15,7 +15,7 @@
 #include <elf.h>
 #include <smp.h>
 
-#include "syscall_numbers.h"
+#include <syscall_numbers.h>
 
 
 // implemented in assembly

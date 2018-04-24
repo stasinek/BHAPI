@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "SpecificTeamDebugInfo.h"
+#include <SpecificTeamDebugInfo.h>
 
 
 SpecificTeamDebugInfo::~SpecificTeamDebugInfo()

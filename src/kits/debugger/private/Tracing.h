@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 
-#include "apps_debugger_config.h"
+#include <apps_debugger_config.h>
 
 
 #define WARNING(x...)	fprintf(stderr, x)

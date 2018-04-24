@@ -24,7 +24,7 @@ __RCSID("$NetBSD: inet_net_ntop.c,v 1.3 2012/03/20 17:08:13 matt Exp $");
 #endif
 #endif
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -36,7 +36,7 @@ __RCSID("$NetBSD: inet_net_ntop.c,v 1.3 2012/03/20 17:08:13 matt Exp $");
 #include <string.h>
 #include <stdlib.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 #ifdef __weak_alias
 __weak_alias(inet_net_ntop,_inet_net_ntop)

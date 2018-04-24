@@ -5,11 +5,11 @@
  */
 
 
-#include "Settings.h"
+#include <Settings.h>
 
 #include <AutoLocker.h>
 
-#include "SettingsDescription.h"
+#include <SettingsDescription.h>
 
 
 // #pragma mark - Settings

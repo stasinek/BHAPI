@@ -14,8 +14,8 @@
 #include <slab/Slab.h>
 #include <util/DoublyLinkedList.h>
 
-#include "kernel_debug_config.h"
-#include "slab_debug.h"
+#include <kernel_debug_config.h>
+#include <slab_debug.h>
 
 
 class AllocationTrackingInfo;

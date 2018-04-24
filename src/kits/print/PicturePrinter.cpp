@@ -29,7 +29,7 @@ THE SOFTWARE.
 
 #include <stdio.h>
 
-#include "PicturePrinter.h"
+#include <PicturePrinter.h>
 
 PicturePrinter::PicturePrinter(int indent)
 	: fIndent(indent)

@@ -9,8 +9,8 @@
 #include <util/DoublyLinkedList.h>
 #include <util/OpenHashTable.h>
 
-#include "FunctionInstance.h"
-#include "LocatableFile.h"
+#include <FunctionInstance.h>
+#include <LocatableFile.h>
 
 
 class FileSourceCode;

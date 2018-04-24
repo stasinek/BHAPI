@@ -10,7 +10,7 @@
 #if __GNUC__ < 3
 
 
-#include "OldAudioStream.h"
+#include <OldAudioStream.h>
 
 #include <debug.h>
 

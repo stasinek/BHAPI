@@ -29,14 +29,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Bitmap.h"
+#include <Bitmap.h>
 
-#include "../add-ons/graphics/GraphicsEngine.h"
-#include "../app/Application.h"
-#include "../kernel/Debug.h"
-#include "../app/AppDefs.h"
-#include "../render/Pixmap.h"
-#include "../support/Errors.h"
+#include <kits/add-ons/graphics/GraphicsEngine.h>
+#include <kits/app/Application.h>
+#include <os/debug.h>
+#include <kits/app/AppDefs.h>
+#include <kits/render/Pixmap.h>
+#include <kits/support/Errors.h>
 
 class BHAPI_LOCAL BBitmapWindow : public BWindow {
 public:

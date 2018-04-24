@@ -18,7 +18,7 @@
 #include <FindDirectory.h>
 #include <Path.h>
 
-#include "CertificatePrivate.h"
+#include <CertificatePrivate.h>
 
 
 //#define TRACE_SOCKET

@@ -26,9 +26,9 @@
 //------------------------------------------------------------------------------
 
 
-#include "StreamingGameSound.h"
+#include <StreamingGameSound.h>
 
-#include "GameSoundDevice.h"
+#include <GameSoundDevice.h>
 
 
 BStreamingGameSound::BStreamingGameSound(size_t inBufferFrameCount,

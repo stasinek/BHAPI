@@ -36,7 +36,7 @@ All rights reserved.
 
 
 #include <StringClass.h>
-#include "SettingsHandler.h"
+#include <SettingsHandler.h>
 
 
 namespace BPrivate {

@@ -10,7 +10,7 @@
 #include <Referenceable.h>
 #include <util/DoublyLinkedList.h>
 
-#include "ImageInfo.h"
+#include <ImageInfo.h>
 
 
 enum image_debug_info_state {

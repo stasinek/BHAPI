@@ -16,7 +16,7 @@
 #include <Message.h>
 #include <NetworkCookieJar.h>
 
-#include "NetworkCookieJarPrivate.h"
+#include <NetworkCookieJarPrivate.h>
 
 
 // #define TRACE_COOKIE

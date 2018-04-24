@@ -30,10 +30,10 @@
 
 #include <be/kernel/OS.h>
 
-#include "../kernel/Kernel.h"
-#include "../support/SimpleLocker.h"
-#include "../support/List.h"
-#include "../support/StringClass.h"
+#include <os/kernel.h>
+#include <kits/support/SimpleLocker.h>
+#include <kits/support/List.h>
+#include <kits/support/StringClass.h>
 
 
 typedef struct threadCallback {

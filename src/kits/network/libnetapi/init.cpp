@@ -9,7 +9,7 @@
 
 
 #include <image.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <r5_compatibility.h>
 

@@ -85,16 +85,16 @@ static char	privatehid[] = "@(#)private.h	8.2";
 ** Nested includes
 */
 
-#include "sys/types.h"	/* for time_t */
-#include "stdio.h"
-#include "errno.h"
-#include "string.h"
-#include "limits.h"	/* for CHAR_BIT et al. */
-#include "time.h"
-#include "stdlib.h"
+#include <sys/types.h>	/* for time_t */
+#include <stdio.h>
+#include <errno.h>
+#include <string.h>
+#include <limits.h>	/* for CHAR_BIT et al. */
+#include <time.h>
+#include <stdlib.h>
 
 #if HAVE_GETTEXT
-#include "libintl.h"
+#include <libintl.h>
 #endif /* HAVE_GETTEXT */
 
 #if HAVE_SYS_WAIT_H
@@ -109,7 +109,7 @@ static char	privatehid[] = "@(#)private.h	8.2";
 #endif /* !defined WEXITSTATUS */
 
 #if HAVE_UNISTD_H
-#include "unistd.h"	/* for F_OK and R_OK */
+#include <unistd.h>	/* for F_OK and R_OK */
 #endif /* HAVE_UNISTD_H */
 
 #if !HAVE_UNISTD_H
@@ -135,7 +135,7 @@ static char	privatehid[] = "@(#)private.h	8.2";
 #endif /* !defined HAVE_STDINT_H */
 
 #if HAVE_STDINT_H
-#include "stdint.h"
+#include <stdint.h>
 #endif /* !HAVE_STDINT_H */
 
 #ifndef INT_FAST64_MAX
@@ -194,7 +194,7 @@ typedef long		int_fast64_t;
 
 #ifndef MAXPATHLEN
 #ifdef unix
-#include "sys/param.h"
+#include <sys/param.h>
 #endif /* defined unix */
 #endif /* !defined MAXPATHLEN */
 

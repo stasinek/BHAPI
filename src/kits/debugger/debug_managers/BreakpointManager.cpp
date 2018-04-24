@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include "BreakpointManager.h"
+#include <BreakpointManager.h>
 
 #include <stdio.h>
 
@@ -11,12 +11,12 @@
 
 #include <AutoLocker.h>
 
-#include "DebuggerInterface.h"
-#include "Function.h"
-#include "SpecificImageDebugInfo.h"
-#include "Statement.h"
-#include "Team.h"
-#include "Tracing.h"
+#include <DebuggerInterface.h>
+#include <Function.h>
+#include <SpecificImageDebugInfo.h>
+#include <Statement.h>
+#include <Team.h>
+#include <Tracing.h>
 
 
 BreakpointManager::BreakpointManager(Team* team,

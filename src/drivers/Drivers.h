@@ -6,10 +6,10 @@
 #define _DRIVERS_DRIVERS_H
 
 
-#include <../include/sys/types.h>
-//#include <../include/sys/uio.h>
+#include <sys/types.h>
+//#include <sys/uio.h>
 
-#include <Select.h>
+#include <kits/netSelect.h>
 #include <Haiku.h>
 
 

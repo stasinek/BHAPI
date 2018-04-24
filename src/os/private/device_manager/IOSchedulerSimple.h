@@ -13,8 +13,8 @@
 #include <lock.h>
 #include <util/OpenHashTable.h>
 
-#include "dma_resources.h"
-#include "IOScheduler.h"
+#include <dma_resources.h>
+#include <IOScheduler.h>
 
 
 class IOSchedulerSimple : public IOScheduler {

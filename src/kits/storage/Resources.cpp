@@ -15,9 +15,9 @@
 
 
 
-#include "ResourceFile.h"
-#include "ResourceItem.h"
-#include "ResourcesContainer.h"
+#include <ResourceFile.h>
+#include <ResourceItem.h>
+#include <ResourcesContainer.h>
 
 
 using namespace BPrivate::Storage;

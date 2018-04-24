@@ -46,13 +46,13 @@ All rights reserved.
 #include <Volume.h>
 #include <Window.h>
 
-#include "Attributes.h"
-#include "ContainerWindow.h"
-#include "Commands.h"
-#include "FSUtils.h"
-#include "PoseView.h"
-#include "TextWidget.h"
-#include "Utilities.h"
+#include <Attributes.h>
+#include <ContainerWindow.h>
+#include <Commands.h>
+#include <FSUtils.h>
+#include <PoseView.h>
+#include <TextWidget.h>
+#include <Utilities.h>
 
 
 #undef B_TRANSLATION_CONTEXT

@@ -27,11 +27,11 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "../kernel/Kernel.h"
-#include "../kernel/Debug.h"
-#include "../support/StringClass.h"
-#include "../support/Errors.h"
-#include "../support/SimpleLocker.h"
+#include <os/kernel.h>
+#include <os/debug.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/Errors.h>
+#include <kits/support/SimpleLocker.h>
 
 namespace bhapi {
 /*typedef struct port_info {

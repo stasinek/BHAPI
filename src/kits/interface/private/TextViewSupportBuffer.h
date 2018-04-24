@@ -9,7 +9,7 @@
 #include <cstdlib>
 #include <cstring>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <Haiku.h>
 
 

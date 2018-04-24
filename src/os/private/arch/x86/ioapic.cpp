@@ -8,7 +8,7 @@
 #include <int.h>
 #include <vm/vm.h>
 
-#include "irq_routing_table.h"
+#include <irq_routing_table.h>
 
 #include <ACPI.h>
 #include <AutoDeleter.h>
@@ -22,7 +22,7 @@
 #include <arch/x86/pic.h>
 
 // to gain access to the ACPICA types
-#include "acpi.h"
+#include <acpi.h>
 
 
 //#define TRACE_IOAPIC

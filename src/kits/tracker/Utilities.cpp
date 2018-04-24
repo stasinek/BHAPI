@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "Utilities.h"
+#include <Utilities.h>
 
 #include <ctype.h>
 #include <fs_attr.h>
@@ -49,7 +49,7 @@ All rights reserved.
 #include <Font.h>
 #include <IconUtils.h>
 #include <MenuItem.h>
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <PopUpMenu.h>
 #include <Region.h>
 #include <StorageDefs.h>
@@ -58,11 +58,11 @@ All rights reserved.
 #include <VolumeRoster.h>
 #include <Window.h>
 
-#include "Attributes.h"
-#include "ContainerWindow.h"
-#include "MimeTypes.h"
-#include "Model.h"
-#include "PoseView.h"
+#include <Attributes.h>
+#include <ContainerWindow.h>
+#include <MimeTypes.h>
+#include <Model.h>
+#include <PoseView.h>
 
 
 #ifndef _IMPEXP_BE

@@ -13,11 +13,11 @@
 #ifndef _JOYSTICK_DRIVER_H
 #define _JOYSTICK_DRIVER_H
 
-#include <stdlib.h>
+#include <kits/netstdlib.h>
 
 #include <Haiku.h>
-#include <Drivers.h>
-#include <module.h>
+#include <kits/netDrivers.h>
+#include <kits/netmodule.h>
 
 typedef struct _joystick {
 	bigtime_t	timestamp;

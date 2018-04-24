@@ -1,6 +1,6 @@
 
 #ifdef BUILDING_FS_SHELL
-#	include "compat.h"
+#	include <compat.h>
 #else
 #	include <BeOSBuildCompatibility.h>
 #endif

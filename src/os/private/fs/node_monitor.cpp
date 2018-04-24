@@ -25,7 +25,7 @@
 #include <util/KMessage.h>
 #include <util/list.h>
 
-#include "node_monitor_private.h"
+#include <node_monitor_private.h>
 
 
 //#define TRACE_MONITOR

@@ -25,8 +25,8 @@
 #ifndef MIDI_DEBUG_H
 #define MIDI_DEBUG_H
 
-#include <kernel/OS.h>
-#include <stdio.h>
+#include <kits/kernel/OS.h>
+#include <kits/netstdio.h>
 
 #define WARN(args) { fprintf(stderr, "[midi] WARNING: %s\n", args); } 
 #define UNIMPLEMENTED { fprintf(stderr, "[midi] UNIMPLEMENTED %s\n",__PRETTY_FUNCTION__); }

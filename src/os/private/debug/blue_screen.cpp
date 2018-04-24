@@ -7,7 +7,7 @@
  */
 
 
-#include "blue_screen.h"
+#include <blue_screen.h>
 
 #include <KernelExport.h>
 #include <frame_buffer_console.h>
@@ -19,7 +19,7 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "debug_commands.h"
+#include <debug_commands.h>
 
 
 #define USE_SCROLLING 0

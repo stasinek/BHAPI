@@ -1,4 +1,4 @@
-﻿/* --------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -30,7 +30,7 @@
 #ifndef BHAPI_HANDLER_H
 #define BHAPI_HANDLER_H
 //-----------------------------------------------------------------------------
-#include "private/PrivateHandler.h"
+#include <kits/app/private/PrivateHandler.h>
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 //-----------------------------------------------------------------------------
@@ -70,8 +70,8 @@ class BList;
 //-----------------------------------------------------------------------------
 #endif // __cplusplus
 //-----------------------------------------------------------------------------
-#include "../support/Archivable.h"
-#include <kernel/OS.h>
+#include <kits/support/Archivable.h>
+#include <kits/kernel/OS.h>
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus /* Just for C++ */
 //-----------------------------------------------------------------------------

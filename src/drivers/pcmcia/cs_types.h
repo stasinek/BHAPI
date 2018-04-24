@@ -32,9 +32,9 @@
 
 #ifdef __linux__
 #ifdef __KERNEL__
-#include <linux/types.h>
+#include <kits/netlinux/types.h>
 #else
-#include <sys/types.h>
+#include <kits/netsys/types.h>
 #endif
 #endif
 

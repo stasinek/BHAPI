@@ -10,11 +10,11 @@
 #define DRIVERINTERFACE_H
 
 
-#include <Accelerant.h>
-#include <GraphicsDefs.h>
-#include <Drivers.h>
-#include <edid.h>
-#include <video_overlay.h>
+#include <kits/netAccelerant.h>
+#include <kits/netGraphicsDefs.h>
+#include <kits/netDrivers.h>
+#include <kits/netedid.h>
+#include <kits/netvideo_overlay.h>
 
 
 // This file contains info that is shared between the kernel driver and the

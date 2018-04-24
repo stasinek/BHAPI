@@ -10,7 +10,7 @@
 #include <image.h>
 #include <StringClass.h>
 
-#include "StackFrameDebugInfo.h"
+#include <StackFrameDebugInfo.h>
 
 
 class CompilationUnit;

@@ -30,7 +30,7 @@
 #ifndef BHAPI_PRIVATE_STANDARD_IO_H
 #define BHAPI_PRIVATE_STANDARD_IO_H
 #include <Haiku.h>
-#include "../support/StreamIO.h"
+#include <kits/support/StreamIO.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

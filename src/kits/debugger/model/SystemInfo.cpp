@@ -4,7 +4,7 @@
  */
 
 
-#include "SystemInfo.h"
+#include <SystemInfo.h>
 
 
 SystemInfo::SystemInfo()

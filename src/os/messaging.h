@@ -8,7 +8,7 @@
 #ifndef MESSAGING_H
 #define MESSAGING_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #ifdef __cplusplus
 extern "C" {

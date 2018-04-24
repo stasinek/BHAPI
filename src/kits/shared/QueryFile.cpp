@@ -10,8 +10,8 @@
 #include <Volume.h>
 #include <VolumeRoster.h>
 
-#include "tracker/MimeTypes.h"
-#include "tracker/Utilities.h"
+#include <tracker/MimeTypes.h>
+#include <tracker/Utilities.h>
 
 
 // TODO: add write support

@@ -6,7 +6,7 @@
 #define RING_BUFFER_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 
 struct iovec;

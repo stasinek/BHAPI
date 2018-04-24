@@ -9,7 +9,7 @@
 #define _FSSH_KERNEL_H
 
 
-#include "fssh_os.h"
+#include <fssh_os.h>
 
 
 /* Passed in buffers from user-space shouldn't point into the kernel */

@@ -7,10 +7,10 @@
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus
 //-----------------------------------------------------------------------------
-#include <Message.h>
-#include <DataIO.h>
-#include <ObjectList.h>
-#include <StringClass.h>
+#include <kits/netMessage.h>
+#include <kits/support/DataIO.h>
+#include <kits/netObjectList.h>
+#include <kits/netStringClass.h>
 //-----------------------------------------------------------------------------
 enum BKeyPurpose {
     B_KEY_PURPOSE_ANY,

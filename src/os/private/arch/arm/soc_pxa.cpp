@@ -1,4 +1,4 @@
-#include "soc_pxa.h"
+#include <soc_pxa.h>
 
 /* PXA Interrupt Controller Registers */
 #define PXA_ICIP	0x00

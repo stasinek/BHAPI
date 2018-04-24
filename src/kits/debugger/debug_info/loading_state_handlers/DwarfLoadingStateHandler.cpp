@@ -4,7 +4,7 @@
  */
 
 
-#include "DwarfLoadingStateHandler.h"
+#include <DwarfLoadingStateHandler.h>
 
 #include <sys/wait.h>
 
@@ -14,12 +14,12 @@
 #include <package/solver/Solver.h>
 #include <package/solver/SolverPackage.h>
 
-#include "AutoDeleter.h"
-#include "DwarfFile.h"
-#include "DwarfImageDebugInfoLoadingState.h"
-#include "package/manager/PackageManager.h"
-#include "Tracing.h"
-#include "UserInterface.h"
+#include <AutoDeleter.h>
+#include <DwarfFile.h>
+#include <DwarfImageDebugInfoLoadingState.h>
+#include <package/manager/PackageManager.h>
+#include <Tracing.h>
+#include <UserInterface.h>
 
 
 using namespace BPackageKit;

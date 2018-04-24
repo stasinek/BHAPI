@@ -6,11 +6,11 @@
 #define _K_DISK_DEVICE_H
 
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <lock.h>
 
-#include "KPartition.h"
+#include <KPartition.h>
 
 
 namespace BPrivate {

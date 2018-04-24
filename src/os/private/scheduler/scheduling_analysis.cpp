@@ -11,7 +11,7 @@
 #include <tracing.h>
 #include <util/AutoLock.h>
 
-#include "scheduler_tracing.h"
+#include <scheduler_tracing.h>
 
 
 #if SCHEDULER_TRACING

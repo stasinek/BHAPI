@@ -39,8 +39,8 @@ All rights reserved.
 
 
 #include <MenuItem.h>
-#include "Model.h"
-#include "Utilities.h"
+#include <Model.h>
+#include <Utilities.h>
 
 
 class BNodeInfo;

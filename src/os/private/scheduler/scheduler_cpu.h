@@ -15,10 +15,10 @@
 
 #include <cpufreq.h>
 
-#include "RunQueue.h"
-#include "scheduler_common.h"
-#include "scheduler_modes.h"
-#include "scheduler_profiler.h"
+#include <RunQueue.h>
+#include <scheduler_common.h>
+#include <scheduler_modes.h>
+#include <scheduler_profiler.h>
 
 
 namespace Scheduler {

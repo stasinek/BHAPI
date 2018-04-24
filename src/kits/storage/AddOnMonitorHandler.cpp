@@ -9,10 +9,10 @@
  */
 
 
-#include "AddOnMonitorHandler.h"
+#include <AddOnMonitorHandler.h>
 
 
-#include <../include/strings.h>
+#include <strings.h>
 
 #include <Autolock.h>
 #include <Directory.h>
@@ -21,7 +21,7 @@
 
 #include <driver_settings.h>
 #include <safemode_defs.h>
-#include <../include/syscalls.h>
+#include <syscalls.h>
 
 
 #ifndef ADD_ON_STABLE_SECONDS

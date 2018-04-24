@@ -9,7 +9,7 @@
 */
 
 
-#include "TimeSourceObjectManager.h"
+#include <TimeSourceObjectManager.h>
 
 #include <stdio.h>
 
@@ -19,7 +19,7 @@
 #include <debug.h>
 #include <MediaMisc.h>
 
-#include "TimeSourceObject.h"
+#include <TimeSourceObject.h>
 
 
 namespace BPrivate {

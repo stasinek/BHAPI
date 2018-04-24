@@ -30,8 +30,8 @@
 #ifndef BHAPI_PRIVATE_MESSAGE_BODY_H
 #define BHAPI_PRIVATE_MESSAGE_BODY_H
 #include <Haiku.h>
-#include "../support/List.h"
-#include "../support/StreamIO.h"
+#include <kits/support/List.h>
+#include <kits/support/StreamIO.h>
 
 #ifdef __cplusplus /* Just for C++ */
 

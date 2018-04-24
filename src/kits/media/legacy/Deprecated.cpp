@@ -8,7 +8,7 @@
 #include <MediaRoster.h>
 #include <Haiku.h>
 
-#include "MediaDebug.h"
+#include <MediaDebug.h>
 
 // This file contains parts of the media_kit that can be removed
 // as considered useless, deprecated and/or not worth to be

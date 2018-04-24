@@ -4,18 +4,18 @@
  */
 
 
-#include "CoreFile.h"
+#include <CoreFile.h>
 
 #include <errno.h>
 
 #include <algorithm>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <AutoDeleter.h>
 
-#include "ElfSymbolLookup.h"
-#include "Tracing.h"
+#include <ElfSymbolLookup.h>
+#include <Tracing.h>
 
 
 static const size_t kMaxNotesSize = 10 * 1024 * 1024;

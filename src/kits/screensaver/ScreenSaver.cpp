@@ -4,7 +4,7 @@
  */
 
 
-#include "ScreenSaver.h"
+#include <ScreenSaver.h>
 
 
 BScreenSaver::BScreenSaver(BMessage *archive, image_id thisImage)

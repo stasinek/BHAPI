@@ -27,14 +27,14 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Font.h"
+#include <Font.h>
 
-#include "../add-ons/font/FontEngine.h"
-#include "../support/UTF8.h"
-#include "../support/Errors.h"
-#include "../support/Autolock.h"
-#include "../support/StringClass.h"
-#include "../kernel/Debug.h"
+#include <kits/add-ons/font/FontEngine.h>
+#include <kits/support/UTF8.h>
+#include <kits/support/Errors.h>
+#include <kits/support/Autolock.h>
+#include <kits/support/StringClass.h>
+#include <os/debug.h>
 #include <Haiku.h>
 
 namespace bhapi {

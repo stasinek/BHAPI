@@ -36,7 +36,7 @@ their respective holders. All rights reserved.
 //	displays icons, uses the SlowMenu API for full interruptability
 
 
-#include "NavMenu.h"
+#include <NavMenu.h>
 
 #include <algorithm>
 
@@ -56,19 +56,19 @@ their respective holders. All rights reserved.
 #include <Volume.h>
 #include <VolumeRoster.h>
 
-#include "Attributes.h"
-#include "Commands.h"
-#include "ContainerWindow.h"
-#include "DesktopPoseView.h"
-#include "FunctionObject.h"
-#include "FSUtils.h"
-#include "IconMenuItem.h"
-#include "MimeTypes.h"
-#include "PoseView.h"
-#include "QueryPoseView.h"
-#include "Thread.h"
-#include "Tracker.h"
-#include "VirtualDirectoryEntryList.h"
+#include <Attributes.h>
+#include <Commands.h>
+#include <ContainerWindow.h>
+#include <DesktopPoseView.h>
+#include <FunctionObject.h>
+#include <FSUtils.h>
+#include <IconMenuItem.h>
+#include <MimeTypes.h>
+#include <PoseView.h>
+#include <QueryPoseView.h>
+#include <Thread.h>
+#include <Tracker.h>
+#include <VirtualDirectoryEntryList.h>
 
 
 namespace BPrivate {

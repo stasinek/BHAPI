@@ -7,7 +7,7 @@
 #include <extended_system_info.h>
 #include <extended_system_info_defs.h>
 
-#include <../include/syscalls.h>
+#include <syscalls.h>
 #include <AutoDeleter.h>
 
 #include <util/KMessage.h>

@@ -28,12 +28,12 @@
  * --------------------------------------------------------------------------*/
 #ifdef WIN32
 
-#include "BHAPI_wrapper_win32gdi.h"
+#include <BHAPI_wrapper_win32gdi.h>
 
-#include "../../support/Autolock.h"
-#include "../../support/Errors.h"
-#include "../../support/ClassInfo.h"
-#include "../../kernel/Debug.h"
+#include <kits/support/Autolock.h>
+#include <kits/support/Errors.h>
+#include <kits/support/ClassInfo.h>
+#include <os/debug.h>
 
 
 EWin32GraphicsDrawable::EWin32GraphicsDrawable(EWin32GraphicsEngine *win32Engine,  uint32 w,  uint32 h)

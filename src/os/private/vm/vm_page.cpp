@@ -38,10 +38,10 @@
 #include <vm/VMArea.h>
 #include <vm/VMCache.h>
 
-#include "IORequest.h"
-#include "PageCacheLocker.h"
-#include "VMAnonymousCache.h"
-#include "VMPageQueue.h"
+#include <IORequest.h>
+#include <PageCacheLocker.h>
+#include <VMAnonymousCache.h>
+#include <VMPageQueue.h>
 
 
 //#define TRACE_VM_PAGE

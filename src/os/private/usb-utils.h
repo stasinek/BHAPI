@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 
-#include "usbhdr.h"
+#include <usbhdr.h>
 
 
 void usb_get_vendor_info(uint16 vendorID, const char **vendorName)

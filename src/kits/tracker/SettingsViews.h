@@ -37,7 +37,7 @@ All rights reserved.
 
 #include <GroupView.h>
 
-#include "TrackerSettings.h"
+#include <TrackerSettings.h>
 
 
 const uint32 kSettingsContentsModified = 'Scmo';

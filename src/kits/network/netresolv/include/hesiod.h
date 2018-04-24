@@ -68,7 +68,7 @@
 
 	/* Declaration of routines */
 
-#include <../include/sys/cdefs.h>
+#include <sys/cdefs.h>
 
 __BEGIN_DECLS
 int	hesiod_init	(void **);

@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include "SettingsViews.h"
+#include <SettingsViews.h>
 
 #include <Box.h>
 #include <Button.h>
@@ -49,11 +49,11 @@ All rights reserved.
 #include <RadioButton.h>
 #include <StringView.h>
 
-#include "Commands.h"
-#include "DeskWindow.h"
-#include "Model.h"
-#include "Tracker.h"
-#include "WidgetAttributeText.h"
+#include <Commands.h>
+#include <DeskWindow.h>
+#include <Model.h>
+#include <Tracker.h>
+#include <WidgetAttributeText.h>
 
 
 static const uint32 kSpaceBarSwitchColor = 'SBsc';

@@ -26,7 +26,7 @@ __RCSID("$NetBSD: inet_neta.c,v 1.3 2012/06/25 22:32:44 abs Exp $");
 #endif
 #endif
 
-#include "port_before.h"
+#include <port_before.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -38,7 +38,7 @@ __RCSID("$NetBSD: inet_neta.c,v 1.3 2012/06/25 22:32:44 abs Exp $");
 #include <stdio.h>
 #include <string.h>
 
-#include "port_after.h"
+#include <port_after.h>
 
 /*
  * char *

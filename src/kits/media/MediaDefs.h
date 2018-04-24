@@ -11,7 +11,7 @@
 //#	include <GraphicsDefs.h>
 //#	include <Looper.h>
 #endif
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 using namespace bhapi;
 
 struct media_node;

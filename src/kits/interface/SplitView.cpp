@@ -11,7 +11,7 @@
 #include <ControlLook.h>
 #include <Cursor.h>
 
-#include "SplitLayout.h"
+#include <SplitLayout.h>
 
 
 BSplitView::BSplitView(orientation orientation, float spacing)

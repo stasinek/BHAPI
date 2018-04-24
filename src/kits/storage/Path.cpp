@@ -27,10 +27,10 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Path.h"
+#include <Path.h>
 
-#include "../support/StringClass.h"
-#include "../support/Errors.h"
+#include <kits/support/StringClass.h>
+#include <kits/support/Errors.h>
 
 #ifdef _WIN32
 #include <io.h>
@@ -39,8 +39,8 @@
 #include <ctype.h>
 #else
 #include <unistd.h>
-#include <../include/sys/types.h>
-#include <../include/sys/stat.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #endif
 
 
@@ -404,7 +404,7 @@ BPath::operator=(const char *path)
 
 #include <syscalls.h>
 
-#include "storage_support.h"
+#include <storage_support.h>
 
 
 using namespace std;

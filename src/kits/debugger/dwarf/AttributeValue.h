@@ -5,8 +5,8 @@
 #ifndef ATTRIBUTE_VALUE_H
 #define ATTRIBUTE_VALUE_H
 
-#include "AttributeClasses.h"
-#include "Types.h"
+#include <AttributeClasses.h>
+#include <Types.h>
 
 
 class DebugInfoEntry;

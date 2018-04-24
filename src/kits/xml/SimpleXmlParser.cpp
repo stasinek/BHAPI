@@ -27,12 +27,12 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "SimpleXmlParser.h"
+#include <SimpleXmlParser.h>
 
-#include "../support/StringClass.h"
-#include "../support/StringArray.h"
-#include "../support/Errors.h"
-#include "../kernel/Debug.h"
+#include <kits/support/StringClass.h>
+#include <kits/support/StringArray.h>
+#include <kits/support/Errors.h>
+#include <os/debug.h>
 
 
 

@@ -27,18 +27,18 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include "Message.h"
-#include "Messenger.h"
-#include "Handler.h"
+#include <kits/netMessage.h>
+#include <kits/app/Messenger.h>
+#include <kits/app/Handler.h>
 
-#include "../interface/Point.h"
-#include "../interface/Rect.h"
-#include "../kernel/Debug.h"
-#include "../kernel/KERNEL.h"
-#include "../support/StreamIO.h"
-#include "../support/StringClass.h"
-#include "../support/Errors.h"
-#include "../../private/support/Token.h"
+#include <kits/interface/Point.h>
+#include <kits/interface/Rect.h>
+#include <os/debug.h>
+#include <os/kernel.h>
+#include <kits/support/StreamIO.h>
+#include <kits/support/StringClass.h>
+#include <kits/support/Errors.h>
+#include <kits/private/support/Token.h>
 
 status_t BMessage::BGetInfo(type_code type,  int32 index,
            char **nameFound, type_code *typeFound,  int32 *countFound) const
@@ -2182,36 +2182,36 @@ BMessage::SendReply(const BMessage *message, BHandler *replyHandler, bigtime_t s
  */
 
 
-#include <Message.h>
-#include <MessageAdapter.h>
-#include <MessagePrivate.h>
-#include <MessageUtils.h>
+#include <kits/netMessage.h>
+#include <kits/netMessageAdapter.h>
+#include <kits/netMessagePrivate.h>
+#include <kits/netMessageUtils.h>
 
-#include <DirectMessageTarget.h>
-#include <MessengerPrivate.h>
-#include <TokenSpace.h>
-#include <util/KMessage.h>
+#include <kits/netDirectMessageTarget.h>
+#include <kits/netMessengerPrivate.h>
+#include <kits/netTokenSpace.h>
+#include <kits/netutil/KMessage.h>
 
-#include <Alignment.h>
-#include <Application.h>
-#include <AppMisc.h>
-#include <BlockCache.h>
-#include <Entry.h>
-#include <MessageQueue.h>
-#include <Messenger.h>
-#include <Path.h>
-#include <Point.h>
-#include <Rect.h>
-#include <String.h>
-#include <StringList.h>
+#include <kits/netAlignment.h>
+#include <kits/netApplication.h>
+#include <kits/netAppMisc.h>
+#include <kits/netBlockCache.h>
+#include <kits/storage/Entry.h>
+#include <kits/netMessageQueue.h>
+#include <kits/app/Messenger.h>
+#include <kits/netPath.h>
+#include <kits/interface/Point.h>
+#include <kits/interface/Rect.h>
+#include <kits/netString.h>
+#include <kits/netStringList.h>
 
-#include <assert.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <kits/netassert.h>
+#include <kits/netctype.h>
+#include <kits/netstdio.h>
+#include <kits/netstdlib.h>
+#include <kits/netstring.h>
 
-//#include "tracing_config.h"
+//#include <kits/nettracing_config.h>
     // kernel tracing configuration
 
 //#define VERBOSE_DEBUG_OUTPUT

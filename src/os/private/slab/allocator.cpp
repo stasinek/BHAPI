@@ -5,7 +5,7 @@
  */
 
 
-#include "slab_private.h"
+#include <slab_private.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -19,8 +19,8 @@
 #include <vm/vm.h>
 #include <vm/VMAddressSpace.h>
 
-#include "ObjectCache.h"
-#include "MemoryManager.h"
+#include <ObjectCache.h>
+#include <MemoryManager.h>
 
 
 #define DEBUG_ALLOCATOR

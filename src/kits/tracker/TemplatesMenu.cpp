@@ -47,11 +47,11 @@ All rights reserved.
 #include <MenuItem.h>
 #include <stdio.h>
 
-#include "Commands.h"
+#include <Commands.h>
 
-#include "TemplatesMenu.h"
-#include "IconMenuItem.h"
-#include "MimeTypes.h"
+#include <TemplatesMenu.h>
+#include <IconMenuItem.h>
+#include <MimeTypes.h>
 
 
 #undef B_TRANSLATION_CONTEXT

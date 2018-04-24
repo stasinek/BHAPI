@@ -6,7 +6,7 @@
 #define _ICU_COLLATE_DATA_H
 
 
-#include "ICUCategoryData.h"
+#include <ICUCategoryData.h>
 
 #include <unicode/coll.h>
 

@@ -10,7 +10,7 @@
 
 #include <libroot_private.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <image.h>
 
 

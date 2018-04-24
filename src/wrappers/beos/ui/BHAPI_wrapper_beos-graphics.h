@@ -37,9 +37,9 @@
 #include <be/interface/Window.h>
 #include <be/interface/Bitmap.h>
 
-#include "../../support/Locker.h"
-#include "../../add-ons/graphics/GraphicsEngine.h"
-#include "../../app/MessageFilter.h"
+#include <kits/support/Locker.h>
+#include <kits/add-ons/graphics/GraphicsEngine.h>
+#include <kits/app/MessageFilter.h>
 
 #ifdef __cplusplus /* just for C++ */
 

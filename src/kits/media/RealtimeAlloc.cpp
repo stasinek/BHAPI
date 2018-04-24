@@ -16,10 +16,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 
 #include <locks.h>
-#include <kernel/util/DoublyLinkedList.h>
+#include <kits/kernel/util/DoublyLinkedList.h>
 
 
 //#define TRACE_RTM

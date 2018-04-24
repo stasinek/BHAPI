@@ -19,9 +19,9 @@
 #include <Sound.h>
 #include <TimeSource.h>
 
-#include "SoundPlayNode.h"
+#include <SoundPlayNode.h>
 
-#include "debug.h"
+#include <debug.h>
 
 
 // Flags used internally in BSoundPlayer

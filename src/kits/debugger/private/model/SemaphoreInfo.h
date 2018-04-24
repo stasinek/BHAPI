@@ -5,10 +5,10 @@
 #ifndef SEMAPHORE_INFO_H
 #define SEMAPHORE_INFO_H
 
-#include <kernel/OS.h>
+#include <kits/kernel/OS.h>
 #include <StringClass.h>
 
-#include "Types.h"
+#include <Types.h>
 
 
 class SemaphoreInfo {

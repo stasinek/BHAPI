@@ -10,7 +10,7 @@
 #ifndef _K_FILE_DISK_DEVICE_SYSTEM_H
 #define _K_FILE_DISK_DEVICE_SYSTEM_H
 
-#include "KDiskSystem.h"
+#include <KDiskSystem.h>
 
 
 struct file_system_module_info;

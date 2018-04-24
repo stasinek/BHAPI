@@ -7,7 +7,7 @@
 #define _FSSH_MODULE_H
 
 
-#include "fssh_os.h"
+#include <fssh_os.h>
 
 
 /* Every module exports a list of module_info structures.
