@@ -49,8 +49,6 @@
 *.log
 *.tlog
 *.stat
-*.Release
-*.Debug
 *.cache
 *.~*
 *.#*

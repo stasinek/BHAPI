@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------------
  *
- * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
+ * BHAPI++ --- The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
  *
  * BHAPI++ library is a freeware; it may be used and distributed according to
@@ -23,37 +23,52 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * File: Memory.cpp
+ * File: BHAPI.h
  *
  * --------------------------------------------------------------------------*/
-#include <kits/support/Memory.h>
-#include <kits/debug/Debug.h>
+#ifndef BHAPI_BE_H
+#define BHAPI_BE_H
 //-----------------------------------------------------------------------------
-
-struct BHAPI_LOCAL b_mem {
-    void (*destroy_func)(void*);
-    void *data;
-};
+//#include <kits/AppKit.h>
+//#include <kits/DeviceKit.h>
+//#include <kits/GameKit.h>
+//#include <kits/InterfaceKit.h>
+//#include <kits/KernelKit.h>
+//#include <kits/LocaleKit.h>
+//#include <kits/MailKit.h>
+//#include <kits/MediaKit.h>
+//#include <kits/MidiKit.h>
+//#include <kits/NetKit.h>
+//#include <kits/NetworkKit.h>
+//#include <kits/RenderKit.h>
+#include <kits/SupportKit.h>
+//#include <kits/StorageKit.h>
+//#include <kits/TranslationKit.h>
+//#include <kits/XmlKit.h>
 //-----------------------------------------------------------------------------
-
-void* BMemory::Malloc(size_t size, void (*destroy_func)(void*))
-{
-    b_mem *mem = NULL;
-    if(~((size_t)0) - sizeof(b_mem) < size ||
-       (mem = (b_mem*)malloc(sizeof(b_mem) + size)) == NULL) return NULL;
-    mem->destroy_func = destroy_func;
-    mem->data = (unsigned char*)mem + sizeof(b_mem);
-    return(mem->data);
+#include <Haiku.h>
+//-----------------------------------------------------------------------------
+#ifndef BHAPI_BUILD_LIBRARY
+#ifdef __cplusplus
+extern "C" {
+namespace bhapi {
+#endif // __cplusplus
+extern BHAPI_IMPEXP const  uint8 be_major_version;
+extern BHAPI_IMPEXP const  uint8 be_minor_version;
+extern BHAPI_IMPEXP const  uint8 be_micro_version;
+extern BHAPI_IMPEXP const  uint8 be_interface_age;
+extern BHAPI_IMPEXP const  uint16 be_binary_age;
+#ifdef __cplusplus
+} /* namespace */
 }
+#endif // __cplusplus
+#else
+extern const  uint8 be_major_version;
+extern const  uint8 be_minor_version;
+extern const  uint8 be_micro_version;
+extern const  uint8 be_interface_age;
+extern const  uint16 be_binary_age;
+#endif
 //-----------------------------------------------------------------------------
-
-void BMemory::Free(void *data)
-{
-    b_mem *mem = NULL;
-    if(data == NULL) return;
-    mem = (b_mem*)((unsigned char*)data - sizeof(b_mem));
-    if(mem->data != data) BHAPI_ERROR("[PRIVATE]: %s --- Invalid pointer.", __PRETTY_FUNCTION__);
-    if(mem->destroy_func != NULL) mem->destroy_func(mem->data);
-    free(mem);
-}
+#endif // BHAPI_BE_H
 //-----------------------------------------------------------------------------
